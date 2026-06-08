@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C2DCCD8CBE
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2026 14:55:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1331701.1594260 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E969CD8C9F
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2026 14:55:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1331717.1594376 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wWbNi-0001QM-7A; Mon, 08 Jun 2026 14:55:14 +0000
+	id 1wWbNt-0004Jt-Kk; Mon, 08 Jun 2026 14:55:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1331701.1594260; Mon, 08 Jun 2026 14:55:14 +0000
+Received: by outflank-mailman (output) from mailman id 1331717.1594376; Mon, 08 Jun 2026 14:55:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wWbNh-0001Pv-UI; Mon, 08 Jun 2026 14:55:13 +0000
-Received: by outflank-mailman (input) for mailman id 1331701;
- Mon, 08 Jun 2026 14:55:13 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wWbNs-0004HY-QN; Mon, 08 Jun 2026 14:55:24 +0000
+Received: by outflank-mailman (input) for mailman id 1331717;
+ Mon, 08 Jun 2026 14:55:18 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+89cebe4ba06156b53a55+8324+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1wWbNh-0001Of-D7
- for xen-devel@lists.xenproject.org; Mon, 08 Jun 2026 14:55:13 +0000
+ <BATV+614c7b1bd25833f05746+8324+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1wWbNl-0002X3-PF
+ for xen-devel@lists.xenproject.org; Mon, 08 Jun 2026 14:55:17 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wWbNg-00EcHE-Q0; Mon, 08 Jun 2026 16:55:12 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wWbNk-008Spg-7s; Mon, 08 Jun 2026 16:55:17 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <BATV+89cebe4ba06156b53a55+8324+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a26d7c5-5cb7-0a2a0a5109dd-0a2a4504aa90-36
- for <multiple-recipients>; Mon, 08 Jun 2026 16:55:12 +0200
-Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ <BATV+614c7b1bd25833f05746+8324+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 6a26d7c3-e002-0a2a0a5209dd-0a2a4508bf20-30
+ for <multiple-recipients>; Mon, 08 Jun 2026 16:55:16 +0200
+Received: from [90.155.92.199] (helo=desiato.infradead.org)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from
- <BATV+89cebe4ba06156b53a55+8324+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a26d7d0-1dec-0a2a45040019-5a9b3222a71a-3
- for <multiple-recipients>; Mon, 08 Jun 2026 16:55:12 +0200
+ <BATV+614c7b1bd25833f05746+8324+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 6a26d7d3-63b5-0a2a45080019-5a9b5cc7a05a-3
+ for <multiple-recipients>; Mon, 08 Jun 2026 16:55:16 +0200
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wWbNS-0000000Dtxo-3N7M; Mon, 08 Jun 2026 14:54:59 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.99.2 #2 (Red Hat Linux))
+ id 1wWbNU-00000001Afu-2NIx; Mon, 08 Jun 2026 14:55:00 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.2 #2 (Red
- Hat Linux)) id 1wWbNS-00000000NGd-3xVq;
- Mon, 08 Jun 2026 15:54:58 +0100
+ Hat Linux)) id 1wWbNR-00000000NEb-1nML;
+ Mon, 08 Jun 2026 15:54:57 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=desiato.20200630 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
 	Cc:Content-Type:Content-ID:Content-Description;
-	bh=s86e1eDk7JwzlpKJ6Et1TYCYwI2LU3hCrdoVI9vRngc=; b=rELP0pPshxo9UwZ5syelAnSKO6
-	4cfW8H6uBn/Zf/P0TiJzkdhGO+CwQJuVJ1hnrK2PiO+YODU7eRwQQ9U0yAKSEfyEvh/5xs4UNG2kn
-	+v9PB4fL/k9dKigWNx3dlMJnggVrVGZf0qAsQb8kfP3eJ8BEJA+ahjTIyHp2dRMjxWRNJSY2ptm2B
-	SEp+3poR4nnttJ92rVtigJ2l024kUzYMQSO61fQrwDR86js32ZvlkN2dNVL/BcDq4LQ51TBunnw8Y
-	ZCtUTxz76ATt+jri2NqK539eYVH1wZMP0lXqVNOlqeX2U5+2ij2e9cZSDy+MJzWgPGsBMFESKwxnq
-	+P/Ylngg==;
+	bh=O2rfIXf7FAMn5RSx8KeKP3wOA/C5b6hiUSG3v0gFZjg=; b=UswvzwdXW4cumr9tVtwAmH9r8z
+	HQ1J2ErUUt4WUozma1R4y/NVmlngB4qUv3jxoBqgdvUcFtML+L59FLtTS+mitvNTGD+UPhG8+J748
+	vDipfUYMSJj1H47ExypIaoMUd+myYQOmfPcfPlFfWm95NwcQ8ctlY5OLIz55RnLlkHqJG6+9iqrdQ
+	theE324CCz9gwFcX6T1z2gIUqtNY7DhuIB50aUMemh/pduJdQUlfyaKqx710p/lSNl9lSnSC8rYTp
+	e+luOkrmVJfPPRgxblutyhgG4158HFr5hT8Nex8+j6cdbryej7hJ2HGeV3wdmEhaL8eAYIFiMMQAp
+	7yC7FnjA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	Jonathan Corbet <corbet@lwn.net>,
@@ -90,131 +90,125 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v5 31/34] KVM: x86: Use ktime_get_snapshot_id() for master clock
-Date: Mon,  8 Jun 2026 15:48:12 +0100
-Message-ID: <20260608145455.89187-32-dwmw2@infradead.org>
+Subject: [PATCH v5 02/34] KVM: x86: Improve accuracy of KVM clock when TSC scaling is in force
+Date: Mon,  8 Jun 2026 15:47:43 +0100
+Message-ID: <20260608145455.89187-3-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260608145455.89187-1-dwmw2@infradead.org>
 References: <20260608145455.89187-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-ebf023/1780930512-433673FF-713DFB6D/0/0
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-c1860d/1780930516-C5784DB1-BC49454C/0/0
 X-purgate-type: clean
-X-purgate-size: 3751
+X-purgate-size: 4034
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Replace the KVM-private vgettsc()/do_kvmclock_base()/do_monotonic()/
-do_realtime() timekeeping reimplementation with calls to the generic
-ktime_get_snapshot_id() interface.
+The kvm_guest_time_update() function scales the host TSC frequency to
+the guest's using kvm_scale_tsc() and the v->arch.l1_tsc_scaling_ratio
+scaling ratio previously calculated for that vCPU. Then calculates the
+scaling factors for the KVM clock itself based on that guest TSC
+frequency.
 
-The snapshot provides both the system time and the raw_cycles (TSC)
-atomically paired. When raw_cycles is zero, the clocksource could not
-provide a raw hardware counter value, which is equivalent to the
-previous vgettsc() returning VDSO_CLOCKMODE_NONE.
+However, it uses kHz as the unit when scaling, and then multiplies by
+1000 only at the end.
 
-For kvm_get_time_and_clockread(), the kvmclock base time is
-CLOCK_MONOTONIC_RAW + offs_boot. The snapshot provides the raw time
-atomically paired with the TSC; offs_boot is added separately as it
-only changes at suspend/resume boundaries.
+With a host TSC frequency of 3000MHz and a guest set to 2500MHz, the
+result of kvm_scale_tsc() will actually come out at 2,499,999kHz. So
+the KVM clock advertised to the guest is based on a frequency of
+2,499,999,000 Hz.
 
-This is a step towards eliminating the pvclock_gtod_data private copy
-of timekeeping state and the associated notifier callback.
+By using Hz as the unit from the beginning, the KVM clock would be based
+on a more accurate frequency of 2,499,999,999 Hz in this example.
 
+Use u64 for the hw_tsc_hz field since an unsigned int would overflow for
+TSC frequencies above 4GHz. Use div_u64() for the Xen CPUID leaf to
+play nice with 32-bit kernels.
+
+Fixes: 78db6a503796 ("KVM: x86: rewrite handling of scaled TSC for kvmclock")
+Reviewed-by: Paul Durrant <paul@xen.org>
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Assisted-by: Kiro:claude-opus-4.6-1m
 ---
- arch/x86/kvm/x86.c | 46 +++++++++++++++++++++++++++++++++++-----------
- 1 file changed, 35 insertions(+), 11 deletions(-)
+ arch/x86/include/asm/kvm_host.h |  2 +-
+ arch/x86/kvm/cpuid.c            |  2 +-
+ arch/x86/kvm/x86.c              | 17 +++++++++--------
+ 3 files changed, 11 insertions(+), 10 deletions(-)
 
+diff --git a/arch/x86/include/asm/kvm_host.h b/arch/x86/include/asm/kvm_host.h
+index c470e40a00aa..37264212c7df 100644
+--- a/arch/x86/include/asm/kvm_host.h
++++ b/arch/x86/include/asm/kvm_host.h
+@@ -950,7 +950,7 @@ struct kvm_vcpu_arch {
+ 	gpa_t time;
+ 	s8  pvclock_tsc_shift;
+ 	u32 pvclock_tsc_mul;
+-	unsigned int hw_tsc_khz;
++	u64 hw_tsc_hz;
+ 	struct gfn_to_pfn_cache pv_time;
+ 	/* set guest stopped flag in pvclock flags field */
+ 	bool pvclock_set_guest_stopped_request;
+diff --git a/arch/x86/kvm/cpuid.c b/arch/x86/kvm/cpuid.c
+index e69156b54cff..621d950ec692 100644
+--- a/arch/x86/kvm/cpuid.c
++++ b/arch/x86/kvm/cpuid.c
+@@ -2131,7 +2131,7 @@ bool kvm_cpuid(struct kvm_vcpu *vcpu, u32 *eax, u32 *ebx,
+ 				*ecx = vcpu->arch.pvclock_tsc_mul;
+ 				*edx = vcpu->arch.pvclock_tsc_shift;
+ 			} else if (index == 2) {
+-				*eax = vcpu->arch.hw_tsc_khz;
++				*eax = div_u64(vcpu->arch.hw_tsc_hz, 1000);
+ 			}
+ 		}
+ 	} else {
 diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 96250264d403..2713aebb96ae 100644
+index 0a1b63c63d1a..d9ef165df6a1 100644
 --- a/arch/x86/kvm/x86.c
 +++ b/arch/x86/kvm/x86.c
-@@ -35,6 +35,7 @@
- #include "smm.h"
- 
- #include <linux/clocksource.h>
-+#include <linux/timekeeping.h>
- #include <linux/interrupt.h>
- #include <linux/kvm.h>
- #include <linux/fs.h>
-@@ -3162,14 +3163,32 @@ static int do_realtime(struct timespec64 *ts, u64 *tsc_timestamp)
-  * reports the TSC value from which it do so. Returns true if host is
-  * using TSC based clocksource.
-  */
-+static bool kvm_snapshot_has_tsc(struct system_time_snapshot *snap,
-+				u64 *tsc_timestamp)
-+{
-+	if (snap->cs_id == CSID_X86_TSC) {
-+		*tsc_timestamp = snap->cycles;
-+		return true;
-+	}
-+
-+	if (snap->hw_csid == CSID_X86_TSC && snap->hw_cycles) {
-+		*tsc_timestamp = snap->hw_cycles;
-+		return true;
-+	}
-+
-+	return false;
-+}
-+
- static bool kvm_get_time_and_clockread(s64 *kernel_ns, u64 *tsc_timestamp)
+@@ -3314,7 +3314,8 @@ static void kvm_setup_guest_pvclock(struct pvclock_vcpu_time_info *ref_hv_clock,
+ int kvm_guest_time_update(struct kvm_vcpu *v)
  {
--	/* checked again under seqlock below */
--	if (!gtod_is_based_on_tsc(pvclock_gtod_data.clock.vclock_mode))
-+	struct system_time_snapshot snap;
-+
-+	ktime_get_snapshot_id(CLOCK_MONOTONIC_RAW, &snap);
-+	if (!kvm_snapshot_has_tsc(&snap, tsc_timestamp))
- 		return false;
+ 	struct pvclock_vcpu_time_info hv_clock = {};
+-	unsigned long flags, tgt_tsc_khz;
++	unsigned long flags;
++	u64 tgt_tsc_hz;
+ 	unsigned seq;
+ 	struct kvm_vcpu_arch *vcpu = &v->arch;
+ 	struct kvm_arch *ka = &v->kvm->arch;
+@@ -3340,8 +3341,8 @@ int kvm_guest_time_update(struct kvm_vcpu *v)
  
--	return gtod_is_based_on_tsc(do_kvmclock_base(kernel_ns,
--						     tsc_timestamp));
-+	*kernel_ns = ktime_to_ns(ktime_mono_to_any(snap.systime, TK_OFFS_BOOT));
-+	return true;
- }
+ 	/* Keep irq disabled to prevent changes to the clock */
+ 	local_irq_save(flags);
+-	tgt_tsc_khz = get_cpu_tsc_khz();
+-	if (unlikely(tgt_tsc_khz == 0)) {
++	tgt_tsc_hz = (u64)get_cpu_tsc_khz() * 1000;
++	if (unlikely(tgt_tsc_hz == 0)) {
+ 		local_irq_restore(flags);
+ 		kvm_make_request(KVM_REQ_CLOCK_UPDATE, v);
+ 		return 1;
+@@ -3376,16 +3377,16 @@ int kvm_guest_time_update(struct kvm_vcpu *v)
+ 	/* With all the info we got, fill in the values */
  
- /*
-@@ -3178,12 +3197,14 @@ static bool kvm_get_time_and_clockread(s64 *kernel_ns, u64 *tsc_timestamp)
-  */
- bool kvm_get_monotonic_and_clockread(s64 *kernel_ns, u64 *tsc_timestamp)
- {
--	/* checked again under seqlock below */
--	if (!gtod_is_based_on_tsc(pvclock_gtod_data.clock.vclock_mode))
-+	struct system_time_snapshot snap;
-+
-+	ktime_get_snapshot_id(CLOCK_MONOTONIC, &snap);
-+	if (!kvm_snapshot_has_tsc(&snap, tsc_timestamp))
- 		return false;
+ 	if (kvm_caps.has_tsc_control) {
+-		tgt_tsc_khz = kvm_scale_tsc(tgt_tsc_khz,
++		tgt_tsc_hz = kvm_scale_tsc(tgt_tsc_hz,
+ 					    v->arch.l1_tsc_scaling_ratio);
+-		tgt_tsc_khz = tgt_tsc_khz ? : 1;
++		tgt_tsc_hz = tgt_tsc_hz ? : 1;
+ 	}
  
--	return gtod_is_based_on_tsc(do_monotonic(kernel_ns,
--						 tsc_timestamp));
-+	*kernel_ns = ktime_to_ns(snap.systime);
-+	return true;
- }
+-	if (unlikely(vcpu->hw_tsc_khz != tgt_tsc_khz)) {
+-		kvm_get_time_scale(NSEC_PER_SEC, tgt_tsc_khz * 1000LL,
++	if (unlikely(vcpu->hw_tsc_hz != tgt_tsc_hz)) {
++		kvm_get_time_scale(NSEC_PER_SEC, tgt_tsc_hz,
+ 				   &vcpu->pvclock_tsc_shift,
+ 				   &vcpu->pvclock_tsc_mul);
+-		vcpu->hw_tsc_khz = tgt_tsc_khz;
++		vcpu->hw_tsc_hz = tgt_tsc_hz;
+ 	}
  
- /*
-@@ -3196,11 +3217,14 @@ bool kvm_get_monotonic_and_clockread(s64 *kernel_ns, u64 *tsc_timestamp)
- static bool kvm_get_walltime_and_clockread(struct timespec64 *ts,
- 					   u64 *tsc_timestamp)
- {
--	/* checked again under seqlock below */
--	if (!gtod_is_based_on_tsc(pvclock_gtod_data.clock.vclock_mode))
-+	struct system_time_snapshot snap;
-+
-+	ktime_get_snapshot_id(CLOCK_REALTIME, &snap);
-+	if (!kvm_snapshot_has_tsc(&snap, tsc_timestamp))
- 		return false;
- 
--	return gtod_is_based_on_tsc(do_realtime(ts, tsc_timestamp));
-+	*ts = ktime_to_timespec64(snap.systime);
-+	return true;
- }
- #endif
- 
+ 	hv_clock.tsc_shift = vcpu->pvclock_tsc_shift;
 -- 
 2.54.0
 
