@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91F16CD8CBF
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2026 14:55:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1331706.1594303 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3631BCD8CB2
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2026 14:55:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1331705.1594289 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wWbNk-0002Hp-SZ; Mon, 08 Jun 2026 14:55:16 +0000
+	id 1wWbNj-00020Z-VK; Mon, 08 Jun 2026 14:55:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1331706.1594303; Mon, 08 Jun 2026 14:55:16 +0000
+Received: by outflank-mailman (output) from mailman id 1331705.1594289; Mon, 08 Jun 2026 14:55:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wWbNk-0002FT-Hn; Mon, 08 Jun 2026 14:55:16 +0000
-Received: by outflank-mailman (input) for mailman id 1331706;
+	id 1wWbNj-0001ws-LD; Mon, 08 Jun 2026 14:55:15 +0000
+Received: by outflank-mailman (input) for mailman id 1331705;
  Mon, 08 Jun 2026 14:55:13 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+89cebe4ba06156b53a55+8324+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1wWbNh-0001Oc-0i
+ id 1wWbNg-0001Oa-7Z
  for xen-devel@lists.xenproject.org; Mon, 08 Jun 2026 14:55:13 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wWbNg-00EcD6-Cr; Mon, 08 Jun 2026 16:55:12 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wWbNf-008Slm-Cr; Mon, 08 Jun 2026 16:55:11 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+89cebe4ba06156b53a55+8324+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a26d7bc-5cb7-0a2a0a5109dd-0a2a4509e8d2-20
- for <multiple-recipients>; Mon, 08 Jun 2026 16:55:12 +0200
+ id 6a26d7b4-e002-0a2a0a5209dd-0a2a45078958-44
+ for <multiple-recipients>; Mon, 08 Jun 2026 16:55:11 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from
  <BATV+89cebe4ba06156b53a55+8324+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a26d7d0-2497-0a2a45090019-5a9b3222d5a4-3
- for <multiple-recipients>; Mon, 08 Jun 2026 16:55:12 +0200
+ id 6a26d7cf-229c-0a2a45070019-5a9b3222bea8-3
+ for <multiple-recipients>; Mon, 08 Jun 2026 16:55:11 +0200
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wWbNR-0000000Dtx6-2v57; Mon, 08 Jun 2026 14:54:58 +0000
+ id 1wWbNR-0000000DtxB-31cT; Mon, 08 Jun 2026 14:54:58 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.2 #2 (Red
- Hat Linux)) id 1wWbNR-00000000NEq-2rr6;
+ Hat Linux)) id 1wWbNR-00000000NF2-3o2K;
  Mon, 08 Jun 2026 15:54:57 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -56,12 +56,12 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
 	Cc:Content-Type:Content-ID:Content-Description;
-	bh=PQH1s5X/ubTmj6TSpsud5d3OFm7dGCk1M0UtxMvyZFE=; b=aZGcqpzLCQbJf47VRT2oCaHI5o
-	SbAvKu7kWlyBGUrmA+/l18vVNr3QdBHfahIrcZfQJkGAVGs3o38KJEBbjYKPlOT3SLqiUCtvrsFsJ
-	+bQDvjqz5fKj7TDGjjosEQDQqsLwzFAVCtk3kq5eQJU1TTq5ZjeuuUKmfbEl1JbB7LBj0yjstTGmr
-	tD875uYDxfNpnbgVQ2IwPqLHLrPWnwCTEwaW/6RAh1iJBiyO5Lvjt+V1kVbQq4RmF4JOOqDu7vCzO
-	0ECh92S0tDag2AlJwALLBG0Hyx5dV5NF5QRVf4QBmHvn8D7AQZAomwzKdDDH4Cv38nEnOl12amZgA
-	4srQhWTQ==;
+	bh=/6X9NkkXJGBiIJZgksWE6pM8oGLkNoBdJss2eJyo+jo=; b=Tp+yi1Wz3jymBuLeW82uMZjkkH
+	mfqyw7ZDqC/8GrxtdY31F4JRU7e64yb4mB12cJAMtCttaRAuGjqefJGL28TwWLMkXP5k0NW0xrRRq
+	s80I4Gz0M1yRY6f45AXMEBasj8k2qWYOYhg8TKDw0ImF6oIV131Xba564m6wHw6Sl8NQvlVSZwcU0
+	nloZja3Puek11Uc2jm7xj3EXGyokyIKzEwLvYm7whYJ0X4fk46wZlxuZ2r4CX5IL+X2BGHTRsjDzm
+	c0zz+zTVRjCTvhiC74DHbmZp7dEt5jz39JMAgwVzsoeuHYOWFvURgNKcrrCBOUhL+g3O1pMTyRuqO
+	mxY/IyLw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	Jonathan Corbet <corbet@lwn.net>,
@@ -90,9 +90,9 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v5 07/34] KVM: x86: Activate master clock immediately on vCPU creation
-Date: Mon,  8 Jun 2026 15:47:48 +0100
-Message-ID: <20260608145455.89187-8-dwmw2@infradead.org>
+Subject: [PATCH v5 11/34] KVM: x86: Restructure get_kvmclock()
+Date: Mon,  8 Jun 2026 15:47:52 +0100
+Message-ID: <20260608145455.89187-12-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260608145455.89187-1-dwmw2@infradead.org>
 References: <20260608145455.89187-1-dwmw2@infradead.org>
@@ -100,42 +100,94 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-bad1c0/1780930512-88D76A53-648BE953/0/0
+X-purgate-ID: tlsNG-ef75cf/1780930511-20D67C48-1E85E82A/0/0
 X-purgate-type: clean
-X-purgate-size: 1254
+X-purgate-size: 2715
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Previously, the master clock was only activated when the first vCPU
-processed KVM_REQ_MASTERCLOCK_UPDATE during KVM_RUN. This meant that
-KVM_GET_CLOCK could not return the host_tsc field until after the
-first KVM_RUN, making it impossible for userspace to follow the
-documented TSC migration procedure without a dummy vCPU run.
+Move get/put_cpu inside the use_master_clock branch since they are only
+needed there (for RDTSC and get_cpu_tsc_khz() to be on the same CPU).
 
-Fix this by calling kvm_update_masterclock() directly from
-kvm_arch_vcpu_postcreate(), after kvm_synchronize_tsc() has already
-set all_vcpus_matched_freq. This ensures the master clock is active
-immediately, and KVM_GET_CLOCK returns a valid {host_tsc, realtime}
-pair as soon as a vCPU exists.
+Simplify the use_master_clock condition: the open-coded CONSTANT_TSC ||
+cpu_tsc_khz check is unnecessary since use_master_clock can only be true
+when the TSC is usable.
+
+Wrap the entire use_master_clock block in #ifdef CONFIG_X86_64, since
+use_master_clock is never true on 32-bit (host_tsc_clocksource is only
+set under CONFIG_X86_64).
+
+When the clock read fails (e.g. clocksource transitioning away from
+TSC), fall back to the non-master-clock path (get_kvmclock_base_ns)
+rather than proceeding with uninitialised data or spinning in the
+seqcount loop.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- arch/x86/kvm/x86.c | 2 ++
- 1 file changed, 2 insertions(+)
+ arch/x86/kvm/x86.c | 34 +++++++++++++++++++++++-----------
+ 1 file changed, 23 insertions(+), 11 deletions(-)
 
 diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index b7e5f6e3dc6c..c1897d939da9 100644
+index fce898811fe7..6983a7494fcd 100644
 --- a/arch/x86/kvm/x86.c
 +++ b/arch/x86/kvm/x86.c
-@@ -13098,6 +13098,8 @@ void kvm_arch_vcpu_postcreate(struct kvm_vcpu *vcpu)
- 		return;
- 	vcpu_load(vcpu);
- 	kvm_synchronize_tsc(vcpu, NULL);
-+	if (!vcpu->kvm->arch.use_master_clock)
-+		kvm_update_masterclock(vcpu->kvm);
- 	vcpu_put(vcpu);
+@@ -3209,21 +3209,30 @@ static void get_kvmclock(struct kvm *kvm, struct kvm_clock_data *data)
+ 	do {
+ 		seq = read_seqcount_begin(&ka->pvclock_sc);
  
- 	/* poll control enabled by default */
+-		/* both __this_cpu_read() and rdtsc() should be on the same cpu */
+-		get_cpu();
+-
+ 		data->flags = 0;
+-		if (ka->use_master_clock &&
+-		    (static_cpu_has(X86_FEATURE_CONSTANT_TSC) || __this_cpu_read(cpu_tsc_khz))) {
+ #ifdef CONFIG_X86_64
++		if (ka->use_master_clock) {
+ 			struct timespec64 ts;
+ 
++			/*
++			 * The RDTSC and get_cpu_tsc_khz() must happen on
++			 * the same CPU.
++			 */
++			get_cpu();
++
+ 			if (kvm_get_walltime_and_clockread(&ts, &data->host_tsc)) {
+ 				data->realtime = ts.tv_nsec + NSEC_PER_SEC * ts.tv_sec;
+ 				data->flags |= KVM_CLOCK_REALTIME | KVM_CLOCK_HOST_TSC;
+-			} else
+-#endif
+-			data->host_tsc = rdtsc();
++			} else {
++				/*
++				 * Clock read failed (e.g. clocksource is
++				 * transitioning away from TSC). Fall back to
++				 * the non-master-clock path rather than
++				 * spinning.
++				 */
++				put_cpu();
++				goto fallback;
++			}
+ 
+ 			data->flags |= KVM_CLOCK_TSC_STABLE;
+ 			hv_clock.tsc_timestamp = ka->master_cycle_now;
+@@ -3232,11 +3241,14 @@ static void get_kvmclock(struct kvm *kvm, struct kvm_clock_data *data)
+ 					   &hv_clock.tsc_shift,
+ 					   &hv_clock.tsc_to_system_mul);
+ 			data->clock = __pvclock_read_cycles(&hv_clock, data->host_tsc);
+-		} else {
++
++			put_cpu();
++		} else
++#endif
++		{
++fallback:
+ 			data->clock = get_kvmclock_base_ns() + ka->kvmclock_offset;
+ 		}
+-
+-		put_cpu();
+ 	} while (read_seqcount_retry(&ka->pvclock_sc, seq));
+ }
+ 
 -- 
 2.54.0
 
