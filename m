@@ -4,43 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43770CD98C7
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2026 17:31:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1333727.1596907 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1C83CD8CB2
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2026 18:51:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1333775.1596929 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wX0IA-00044G-ME; Tue, 09 Jun 2026 17:31:10 +0000
+	id 1wX1Xj-0004aO-I0; Tue, 09 Jun 2026 18:51:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1333727.1596907; Tue, 09 Jun 2026 17:31:10 +0000
+Received: by outflank-mailman (output) from mailman id 1333775.1596929; Tue, 09 Jun 2026 18:51:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wX0IA-00043s-GZ; Tue, 09 Jun 2026 17:31:10 +0000
-Received: by outflank-mailman (input) for mailman id 1333727;
- Tue, 09 Jun 2026 17:31:09 +0000
+	id 1wX1Xj-0004aH-FL; Tue, 09 Jun 2026 18:51:19 +0000
+Received: by outflank-mailman (input) for mailman id 1333775;
+ Tue, 09 Jun 2026 18:51:18 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wX0I9-0003pe-Cg
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2026 17:31:09 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <BATV+8950c42430f9c14a92cc+8325+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1wX1Xg-0004aB-RA
+ for xen-devel@lists.xenproject.org; Tue, 09 Jun 2026 18:51:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wX0I8-005CfS-PD
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2026 19:31:08 +0200
-Received: from [10.42.69.2] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a284dd2-5cb7-0a2a0a5109dd-0a2a45029f1e-20
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 19:31:08 +0200
-Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a284ddc-af86-0a2a45020019-d155802bdd4b-3
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 19:31:08 +0200
-Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-490d1e54b3bso21260295e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 10:31:08 -0700 (PDT)
-Received: from localhost.localdomain (host-78-146-242-105.as13285.net.
- [78.146.242.105]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4601f351ac0sm113509696f8f.27.2026.06.09.10.31.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jun 2026 10:31:07 -0700 (PDT)
+ id 1wX1Xg-00ETO2-0m; Tue, 09 Jun 2026 20:51:16 +0200
+Received: from [10.42.69.9] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <BATV+8950c42430f9c14a92cc+8325+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a28608b-5cb7-0a2a0a5109dd-0a2a4509bae2-10
+ for <multiple-recipients>; Tue, 09 Jun 2026 20:51:15 +0200
+Received: from [90.155.50.34] (helo=casper.infradead.org)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from
+ <BATV+8950c42430f9c14a92cc+8325+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a2860a2-2497-0a2a45090019-5a9b3222d954-3
+ for <multiple-recipients>; Tue, 09 Jun 2026 20:51:15 +0200
+Received: from [2001:8b0:10b:5:6142:9ddd:3a45:5d21]
+ (helo=u09cd745991455d.ant.amazon.com)
+ by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+ id 1wX1XQ-0000000GD8M-48LY; Tue, 09 Jun 2026 18:51:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,135 +50,187 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1781026268; x=1781631068; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=uaVpHtkT0XSlUk2rDGpamTLWDkRogaQpIZrdOR6KAfE=;
-        b=jnl18aJGBa/my6FnXRAM8MUoOjy528yp/PAyLFC/vnJ275tnVIrMpvhJw+0DRbJeHu
-         0lCQp0/osWM0zjKKLY52X9yMhcLoQ8/hDWNUBoL293ht7iwIzdxKutLa1QgxI3g0kO1i
-         1TcLHOvSJuyyeeGvlhO8zCGp61zL8YJwjH98Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781026268; x=1781631068;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=uaVpHtkT0XSlUk2rDGpamTLWDkRogaQpIZrdOR6KAfE=;
-        b=EZStuvT0NNdlANUH2/ex3QSiyY0+HECUZTKyVMLnCDoLQWiBayg7QN1Hr4k+bgMmao
-         Vmx/5ofrXYMYVTD2FFa8E7Rb/0Lbj5s/+JJkJx5JgFEjeVCBS5ODw8+TcsArzhkCeTor
-         sJxwzshFjlHZlPyG1VbmxC5YWosls/o3ojAR4BQuYXObH6ALPhghEKK3ad+iGcM+KOO9
-         Z0SkK+eACJUL34q4uxr6gegZKTs3m/w02je/rO5jt2dhnXSLdZBTMRp6gXrYs6g1EzyI
-         4NYy3pqh5C47lDDEGr3GdUskOcT8+8cw5XpnaOUsqPeHHAffV8stQgnPTmgfnd3Y3xtH
-         saYQ==
-X-Gm-Message-State: AOJu0Yze86t4x5xzgd0gE1F/+m4Ncb+vciHqwk6RqVAYqX9Tcj+dsCCA
-	OUMATx02m603r7cHvZvSH0067U61Y8wxiPQWe5xwYPYqzmGhwxbBCRV0QCB4UItq+PUZkPQ9x77
-	HVJbQ
-X-Gm-Gg: Acq92OFmKx3CJXBpHgruodHwU37j26EpkDPgVkrZe7Kp2SyS9cFbC8/0XTfjUydWRMA
-	W8XbFK0Z9RbyS+uLKnkeo2BzBm0bhrjRc7LQtz8+qx2iPnHkYTfcpXEWWUgXF+Hwg6vQZ8KL8LU
-	dg2ZZXPKcX7votticy3+GT6uwR1fJwxgymnubjAsan5Xti5RFSsb6nWIshIhxKWzLxdtkIKSwGm
-	+rvRcv2o72DknCbn10i/ApdM66/95g/AoAvwrYG7R0iCFBtcAiwfNFstIamwJ9Vj0AY9+Ls9Rgg
-	rMY1G8Qd2FglFvO++xC1+YsBhJomFiKnyqWK8mUfqtm02Xr/o2G/k+FeyxutxM7buYJYVFknplM
-	1W76s3mQNlImIV2V72mxyCo0RoQ7ZN079pxnnsBBznqqq+QMNK9DBubTMTP3Ya7HDzaiqkaTdh4
-	H3eG/co7faCZfks1uq3NQHTfekue4v/0vI4yHAAN2mGT2PMjNGwRXJLragl8kBrGY9K3EGRsgLU
-	MBLbZ401gAPclQ=
-X-Received: by 2002:a05:600c:8183:b0:490:958c:46dc with SMTP id 5b1f17b1804b1-490c25b0a60mr316999875e9.17.1781026268063;
-        Tue, 09 Jun 2026 10:31:08 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH 3/4] CI: Introduce new qubes-hw-runner.dockerfile
-Date: Tue,  9 Jun 2026 18:31:01 +0100
-Message-Id: <20260609173102.2908514-4-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20260609173102.2908514-1-andrew.cooper3@citrix.com>
-References: <20260609173102.2908514-1-andrew.cooper3@citrix.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="MIME-Version:Content-Type:References:In-Reply-To:Date:To:From:Subject:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
+	In-Reply-To:Date:To:From:Subject:Message-ID:Sender:Reply-To:Cc:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=Je/qwhOHN5nIVTRrk7V2WIb1Wqh//9z1/oEb7+DUvyM=; b=tgnPqv6V2/Ji6KB1G4lqLbJP5p
+	oLzPSvMiIWVvulahV35c4IPfJqRpUlPy01KxhqpQHUSXw7HxF4RgQa+Oil7Rh2axEiufq4xt4iTrX
+	hnPfNY/AKdzl6lPyR0gI7pF0ZmYuckBdV8gdFz/kVoS23r4YPuTqw3VgO/htl5webiODI+ybPNus4
+	LpSk2/Ru+GW8de8kfXd2qjIcxf8Qt0KX8hg8WghnX7vuFoT0xlx2EQAhb3KXOyxFKeWvR0fDYfcDs
+	56Sq72c4BMU81maDRlvt5WhDTJ7gy4/H6ZUqOpf0oomkWuXZ0sQTuxE8p4hOFn63ggP6pMdiWhe3I
+	0YEO13Ww==;
+Message-ID: <674521f9c133c397638a13c55a61d15ecc16816d.camel@infradead.org>
+Subject: Re: [PATCH v5 00/34] Cleaning up the KVM clock mess
+From: David Woodhouse <dwmw2@infradead.org>
+To: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>, Sean Christopherson
+ <seanjc@google.com>, Thomas Gleixner	 <tglx@kernel.org>, Ingo Molnar
+ <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,  Dave Hansen
+ <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin"
+ <hpa@zytor.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, Juergen Gross
+ <jgross@suse.com>, Boris Ostrovsky	 <boris.ostrovsky@oracle.com>, Paul
+ Durrant <paul@xen.org>, Jonathan Cameron	 <jic23@kernel.org>, Sascha
+ Bischoff <Sascha.Bischoff@arm.com>, Marc Zyngier	 <maz@kernel.org>, Joey
+ Gouly <joey.gouly@arm.com>, Jack Allister	 <jalliste@amazon.com>, Dongli
+ Zhang <dongli.zhang@oracle.com>, 	joe.jin@oracle.com, kvm@vger.kernel.org,
+ linux-doc@vger.kernel.org, 	linux-kernel@vger.kernel.org,
+ xen-devel@lists.xenproject.org, 	linux-kselftest@vger.kernel.org
+Date: Tue, 09 Jun 2026 19:50:59 +0100
+In-Reply-To: <20260608145455.89187-1-dwmw2@infradead.org>
+References: <20260608145455.89187-1-dwmw2@infradead.org>
+Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
+	boundary="=-SGiV83CvkmPXW69xBczW"
+User-Agent: Evolution 3.60.3 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1781026268-81D77161-E648CE47/10/63158204843
-X-purgate-type: spam
-X-purgate-size: 2429
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-bad1c0/1781031075-4015DA53-F10B2205/0/0
+X-purgate-type: clean
+X-purgate-size: 9129
 
-We want to make the build containers be non-root, but the hardware runner
-needs to continue being root.  Split it out into a dedicated container.
-Intentionally give it a generic name so it need not change in the future.
 
-No practical change.
+--=-SGiV83CvkmPXW69xBczW
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Anthony PERARD <anthony.perard@vates.tech>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Doug Goldstein <cardoe@cardoe.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+On Mon, 2026-06-08 at 15:47 +0100, David Woodhouse wrote:
+> This is v5 of the series to clean up the KVM clock, rebased onto
+> tip/timers/ptp (which now includes Thomas's ktime snapshot series and
+> the read_snapshot patches for hyperv, kvmclock, and vmclock).
+>=20
+> The KVM clock has historically suffered from three problems:
+>=20
+> =C2=A01. Imprecision: get_kvmclock_ns() computed the clock from the *host=
+*
+> =C2=A0=C2=A0=C2=A0 TSC without applying guest TSC scaling, causing system=
+ic drift from
+> =C2=A0=C2=A0=C2=A0 the values the guest computes from its own TSC.
+>=20
+> =C2=A02. Unnecessary discontinuities: gratuitous KVM_REQ_MASTERCLOCK_UPDA=
+TE
+> =C2=A0=C2=A0=C2=A0 requests caused the master clock reference point to be=
+ re-snapshotted,
+> =C2=A0=C2=A0=C2=A0 yanking the guest's clock due to arithmetic precision =
+differences.
+>=20
+> =C2=A03. No precise migration API: the existing KVM_[GS]ET_CLOCK only all=
+ows
+> =C2=A0=C2=A0=C2=A0 setting the clock at a given UTC reference time, which=
+ is necessarily
+> =C2=A0=C2=A0=C2=A0 imprecise. There was no way to preserve the exact arit=
+hmetic
+> =C2=A0=C2=A0=C2=A0 relationship between guest TSC and KVM clock across li=
+ve migration.
+>=20
+> This series addresses all three, and adds new APIs for precise clock=20
+> migration and TSC frequency reporting. As an added bonus, it now rips
+> out the whole pvclock_gtod_data hack which was shadowing the kernel's
+> timekeeping, and uses ktime snapshots as $DEITY (well, Thomas) intended.
 
-I need to backport this patch to all trees (4.18 and later) before
-alpine:3.18-arm64v8 can be converted to be be non-root.
+Updated series with Sashiko's fixes pushed out to
+https://git.infradead.org/?p=3Dusers/dwmw2/linux.git;a=3Dshortlog;h=3Drefs/=
+heads/kvmclock6
 
-In all other cases we've been renaming the containers to bypass this problem,
-but alpine:3.18-arm64v8 is in the correct new form.
+I'll give it a while for meat-based reviewers to opine before sending
+another round. (Is there a way to get Sashiko to take another look
+without sending it all to the list again?)
 
-Alternatively, I could see about combining it with the Alpine update (which is
-long overdue and needs doing).
----
- .../build/alpine/qubes-hw-runner.dockerfile   | 21 +++++++++++++++++++
- automation/gitlab-ci/test.yaml                |  2 +-
- 2 files changed, 22 insertions(+), 1 deletion(-)
- create mode 100644 automation/build/alpine/qubes-hw-runner.dockerfile
+--=-SGiV83CvkmPXW69xBczW
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Transfer-Encoding: base64
 
-diff --git a/automation/build/alpine/qubes-hw-runner.dockerfile b/automation/build/alpine/qubes-hw-runner.dockerfile
-new file mode 100644
-index 000000000000..0af17c6aabc6
---- /dev/null
-+++ b/automation/build/alpine/qubes-hw-runner.dockerfile
-@@ -0,0 +1,21 @@
-+# syntax=docker/dockerfile:1
-+FROM --platform=linux/arm64/v8 alpine:3.18
-+LABEL maintainer.name="The Xen Project"
-+LABEL maintainer.email="xen-devel@lists.xenproject.org"
-+
-+RUN apk --no-cache add bash
-+
-+RUN <<EOF
-+#!/bin/bash
-+    set -eu
-+
-+    DEPS=(
-+          expect
-+          openssh-client
-+    )
-+
-+    apk add --no-cache "${DEPS[@]}"
-+EOF
-+
-+USER root
-+WORKDIR /build
-diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
-index 89760b24e63a..70bb4bbb3b45 100644
---- a/automation/gitlab-ci/test.yaml
-+++ b/automation/gitlab-ci/test.yaml
-@@ -145,7 +145,7 @@
-   extends: .test-jobs-common
-   variables:
-     # the test controller runs on RPi4
--    CONTAINER: alpine:3.18-arm64v8
-+    CONTAINER: alpine:qubes-hw-runner
-     LOGFILE: smoke-test.log
-     PCIDEV: "03:00.0"
-     PCIDEV_INTR: "MSI-X"
--- 
-2.39.5
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCD9Aw
+ggSOMIIDdqADAgECAhAOmiw0ECVD4cWj5DqVrT9PMA0GCSqGSIb3DQEBCwUAMGUxCzAJBgNVBAYT
+AlVTMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xJDAi
+BgNVBAMTG0RpZ2lDZXJ0IEFzc3VyZWQgSUQgUm9vdCBDQTAeFw0yNDAxMzAwMDAwMDBaFw0zMTEx
+MDkyMzU5NTlaMEExCzAJBgNVBAYTAkFVMRAwDgYDVQQKEwdWZXJva2V5MSAwHgYDVQQDExdWZXJv
+a2V5IFNlY3VyZSBFbWFpbCBHMjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMjvgLKj
+jfhCFqxYyRiW8g3cNFAvltDbK5AzcOaR7yVzVGadr4YcCVxjKrEJOgi7WEOH8rUgCNB5cTD8N/Et
+GfZI+LGqSv0YtNa54T9D1AWJy08ZKkWvfGGIXN9UFAPMJ6OLLH/UUEgFa+7KlrEvMUupDFGnnR06
+aDJAwtycb8yXtILj+TvfhLFhafxroXrflspavejQkEiHjNjtHnwbZ+o43g0/yxjwnarGI3kgcak7
+nnI9/8Lqpq79tLHYwLajotwLiGTB71AGN5xK+tzB+D4eN9lXayrjcszgbOv2ZCgzExQUAIt98mre
+8EggKs9mwtEuKAhYBIP/0K6WsoMnQCcCAwEAAaOCAVwwggFYMBIGA1UdEwEB/wQIMAYBAf8CAQAw
+HQYDVR0OBBYEFIlICOogTndrhuWByNfhjWSEf/xwMB8GA1UdIwQYMBaAFEXroq/0ksuCMS1Ri6en
+IZ3zbcgPMA4GA1UdDwEB/wQEAwIBhjAdBgNVHSUEFjAUBggrBgEFBQcDBAYIKwYBBQUHAwIweQYI
+KwYBBQUHAQEEbTBrMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wQwYIKwYB
+BQUHMAKGN2h0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydEFzc3VyZWRJRFJvb3RD
+QS5jcnQwRQYDVR0fBD4wPDA6oDigNoY0aHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0
+QXNzdXJlZElEUm9vdENBLmNybDARBgNVHSAECjAIMAYGBFUdIAAwDQYJKoZIhvcNAQELBQADggEB
+ACiagCqvNVxOfSd0uYfJMiZsOEBXAKIR/kpqRp2YCfrP4Tz7fJogYN4fxNAw7iy/bPZcvpVCfe/H
+/CCcp3alXL0I8M/rnEnRlv8ItY4MEF+2T/MkdXI3u1vHy3ua8SxBM8eT9LBQokHZxGUX51cE0kwa
+uEOZ+PonVIOnMjuLp29kcNOVnzf8DGKiek+cT51FvGRjV6LbaxXOm2P47/aiaXrDD5O0RF5SiPo6
+xD1/ClkCETyyEAE5LRJlXtx288R598koyFcwCSXijeVcRvBB1cNOLEbg7RMSw1AGq14fNe2cH1HG
+W7xyduY/ydQt6gv5r21mDOQ5SaZSWC/ZRfLDuEYwggWbMIIEg6ADAgECAhAH5JEPagNRXYDiRPdl
+c1vgMA0GCSqGSIb3DQEBCwUAMEExCzAJBgNVBAYTAkFVMRAwDgYDVQQKEwdWZXJva2V5MSAwHgYD
+VQQDExdWZXJva2V5IFNlY3VyZSBFbWFpbCBHMjAeFw0yNDEyMzAwMDAwMDBaFw0yODAxMDQyMzU5
+NTlaMB4xHDAaBgNVBAMME2R3bXcyQGluZnJhZGVhZC5vcmcwggIiMA0GCSqGSIb3DQEBAQUAA4IC
+DwAwggIKAoICAQDali7HveR1thexYXx/W7oMk/3Wpyppl62zJ8+RmTQH4yZeYAS/SRV6zmfXlXaZ
+sNOE6emg8WXLRS6BA70liot+u0O0oPnIvnx+CsMH0PD4tCKSCsdp+XphIJ2zkC9S7/yHDYnqegqt
+w4smkqUqf0WX/ggH1Dckh0vHlpoS1OoxqUg+ocU6WCsnuz5q5rzFsHxhD1qGpgFdZEk2/c//ZvUN
+i12vPWipk8TcJwHw9zoZ/ZrVNybpMCC0THsJ/UEVyuyszPtNYeYZAhOJ41vav1RhZJzYan4a1gU0
+kKBPQklcpQEhq48woEu15isvwWh9/+5jjh0L+YNaN0I//nHSp6U9COUG9Z0cvnO8FM6PTqsnSbcc
+0j+GchwOHRC7aP2t5v2stVx3KbptaYEzi4MQHxm/0+HQpMEVLLUiizJqS4PWPU6zfQTOMZ9uLQRR
+ci+c5xhtMEBszlQDOvEQcyEG+hc++fH47K+MmZz21bFNfoBxLP6bjR6xtPXtREF5lLXxp+CJ6KKS
+blPKeVRg/UtyJHeFKAZXO8Zeco7TZUMVHmK0ZZ1EpnZbnAhKE19Z+FJrQPQrlR0gO3lBzuyPPArV
+hvWxjlO7S4DmaEhLzarWi/ze7EGwWSuI2eEa/8zU0INUsGI4ywe7vepQz7IqaAovAX0d+f1YjbmC
+VsAwjhLmveFjNwIDAQABo4IBsDCCAawwHwYDVR0jBBgwFoAUiUgI6iBOd2uG5YHI1+GNZIR//HAw
+HQYDVR0OBBYEFFxiGptwbOfWOtMk5loHw7uqWUOnMDAGA1UdEQQpMCeBE2R3bXcyQGluZnJhZGVh
+ZC5vcmeBEGRhdmlkQHdvb2Rob3Uuc2UwFAYDVR0gBA0wCzAJBgdngQwBBQEBMA4GA1UdDwEB/wQE
+AwIF4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwewYDVR0fBHQwcjA3oDWgM4YxaHR0
+cDovL2NybDMuZGlnaWNlcnQuY29tL1Zlcm9rZXlTZWN1cmVFbWFpbEcyLmNybDA3oDWgM4YxaHR0
+cDovL2NybDQuZGlnaWNlcnQuY29tL1Zlcm9rZXlTZWN1cmVFbWFpbEcyLmNybDB2BggrBgEFBQcB
+AQRqMGgwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTBABggrBgEFBQcwAoY0
+aHR0cDovL2NhY2VydHMuZGlnaWNlcnQuY29tL1Zlcm9rZXlTZWN1cmVFbWFpbEcyLmNydDANBgkq
+hkiG9w0BAQsFAAOCAQEAQXc4FPiPLRnTDvmOABEzkIumojfZAe5SlnuQoeFUfi+LsWCKiB8Uextv
+iBAvboKhLuN6eG/NC6WOzOCppn4mkQxRkOdLNThwMHW0d19jrZFEKtEG/epZ/hw/DdScTuZ2m7im
+8ppItAT6GXD3aPhXkXnJpC/zTs85uNSQR64cEcBFjjoQDuSsTeJ5DAWf8EMyhMuD8pcbqx5kRvyt
+JPsWBQzv1Dsdv2LDPLNd/JUKhHSgr7nbUr4+aAP2PHTXGcEBh8lTeYea9p4d5k969pe0OHYMV5aL
+xERqTagmSetuIwolkAuBCzA9vulg8Y49Nz2zrpUGfKGOD0FMqenYxdJHgDCCBZswggSDoAMCAQIC
+EAfkkQ9qA1FdgOJE92VzW+AwDQYJKoZIhvcNAQELBQAwQTELMAkGA1UEBhMCQVUxEDAOBgNVBAoT
+B1Zlcm9rZXkxIDAeBgNVBAMTF1Zlcm9rZXkgU2VjdXJlIEVtYWlsIEcyMB4XDTI0MTIzMDAwMDAw
+MFoXDTI4MDEwNDIzNTk1OVowHjEcMBoGA1UEAwwTZHdtdzJAaW5mcmFkZWFkLm9yZzCCAiIwDQYJ
+KoZIhvcNAQEBBQADggIPADCCAgoCggIBANqWLse95HW2F7FhfH9bugyT/danKmmXrbMnz5GZNAfj
+Jl5gBL9JFXrOZ9eVdpmw04Tp6aDxZctFLoEDvSWKi367Q7Sg+ci+fH4KwwfQ8Pi0IpIKx2n5emEg
+nbOQL1Lv/IcNiep6Cq3DiyaSpSp/RZf+CAfUNySHS8eWmhLU6jGpSD6hxTpYKye7PmrmvMWwfGEP
+WoamAV1kSTb9z/9m9Q2LXa89aKmTxNwnAfD3Ohn9mtU3JukwILRMewn9QRXK7KzM+01h5hkCE4nj
+W9q/VGFknNhqfhrWBTSQoE9CSVylASGrjzCgS7XmKy/BaH3/7mOOHQv5g1o3Qj/+cdKnpT0I5Qb1
+nRy+c7wUzo9OqydJtxzSP4ZyHA4dELto/a3m/ay1XHcpum1pgTOLgxAfGb/T4dCkwRUstSKLMmpL
+g9Y9TrN9BM4xn24tBFFyL5znGG0wQGzOVAM68RBzIQb6Fz758fjsr4yZnPbVsU1+gHEs/puNHrG0
+9e1EQXmUtfGn4InoopJuU8p5VGD9S3Ikd4UoBlc7xl5yjtNlQxUeYrRlnUSmdlucCEoTX1n4UmtA
+9CuVHSA7eUHO7I88CtWG9bGOU7tLgOZoSEvNqtaL/N7sQbBZK4jZ4Rr/zNTQg1SwYjjLB7u96lDP
+sipoCi8BfR35/ViNuYJWwDCOEua94WM3AgMBAAGjggGwMIIBrDAfBgNVHSMEGDAWgBSJSAjqIE53
+a4blgcjX4Y1khH/8cDAdBgNVHQ4EFgQUXGIam3Bs59Y60yTmWgfDu6pZQ6cwMAYDVR0RBCkwJ4ET
+ZHdtdzJAaW5mcmFkZWFkLm9yZ4EQZGF2aWRAd29vZGhvdS5zZTAUBgNVHSAEDTALMAkGB2eBDAEF
+AQEwDgYDVR0PAQH/BAQDAgXgMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDB7BgNVHR8E
+dDByMDegNaAzhjFodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vVmVyb2tleVNlY3VyZUVtYWlsRzIu
+Y3JsMDegNaAzhjFodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vVmVyb2tleVNlY3VyZUVtYWlsRzIu
+Y3JsMHYGCCsGAQUFBwEBBGowaDAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29t
+MEAGCCsGAQUFBzAChjRodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vVmVyb2tleVNlY3VyZUVt
+YWlsRzIuY3J0MA0GCSqGSIb3DQEBCwUAA4IBAQBBdzgU+I8tGdMO+Y4AETOQi6aiN9kB7lKWe5Ch
+4VR+L4uxYIqIHxR7G2+IEC9ugqEu43p4b80LpY7M4KmmfiaRDFGQ50s1OHAwdbR3X2OtkUQq0Qb9
+6ln+HD8N1JxO5nabuKbymki0BPoZcPdo+FeRecmkL/NOzzm41JBHrhwRwEWOOhAO5KxN4nkMBZ/w
+QzKEy4PylxurHmRG/K0k+xYFDO/UOx2/YsM8s138lQqEdKCvudtSvj5oA/Y8dNcZwQGHyVN5h5r2
+nh3mT3r2l7Q4dgxXlovERGpNqCZJ624jCiWQC4ELMD2+6WDxjj03PbOulQZ8oY4PQUyp6djF0keA
+MYIDuzCCA7cCAQEwVTBBMQswCQYDVQQGEwJBVTEQMA4GA1UEChMHVmVyb2tleTEgMB4GA1UEAxMX
+VmVyb2tleSBTZWN1cmUgRW1haWwgRzICEAfkkQ9qA1FdgOJE92VzW+AwDQYJYIZIAWUDBAIBBQCg
+ggE3MBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI2MDYwOTE4NTA1
+OVowLwYJKoZIhvcNAQkEMSIEIKQ4y9DWuP5RRPhQpel32/EUnEAxygoYI8A9y5f5ewKdMGQGCSsG
+AQQBgjcQBDFXMFUwQTELMAkGA1UEBhMCQVUxEDAOBgNVBAoTB1Zlcm9rZXkxIDAeBgNVBAMTF1Zl
+cm9rZXkgU2VjdXJlIEVtYWlsIEcyAhAH5JEPagNRXYDiRPdlc1vgMGYGCyqGSIb3DQEJEAILMVeg
+VTBBMQswCQYDVQQGEwJBVTEQMA4GA1UEChMHVmVyb2tleTEgMB4GA1UEAxMXVmVyb2tleSBTZWN1
+cmUgRW1haWwgRzICEAfkkQ9qA1FdgOJE92VzW+AwDQYJKoZIhvcNAQEBBQAEggIAOOo007Teb9xs
+KsWdHu76kaFGmdGIPSgSyFwmZlm7TAbCJF2I5N86bbGOHV3m+U+2QRyVMD+fex0m9m7rIXkFS7iT
+drtFS8iqPbouu3NMt+ZGv+z7XLhht/UvDeD73whc5OGUfyGyo9DhOlbzD8HA0U4M9vFdA9iPg7tu
+ZoyeHYsvgAISA8MtwjgUrSHF96SJ+eqdBIcnUv4VhMJqnMLfpILG+Pmdw48MpIfZoJEXTC7MeeTk
+B/nXHsyMfSK6H4AozIYDD8J4YqC96aTFMn75rR51bfwtEY51xtVqNlT1C1sUrYtupoOQ2BJTMzQU
+Tj2vQgWNmRAsdI86dZwOjhzUlA9T7QuGsHK7qv8vHPW6g3Z1HlEW3Lgc0zEBoKutlC/5vEVvJVxt
+lkMxXdZcvPcFFyvjThntO2ycnkw9z+zSoE9ccj2ke4c2+edl8F3AbIz+knaXTo+PTHRf367g3vUR
+F+yGsn1in5mCdhNjPkWtCGbmeMLI/xREJsQSzmzIRrUQsHRzxod14f29ftoG5uy89Zla2+xs4qnm
+RW1cueleAgIG4xjpqnMgNNzsNNDW2iHfs8enrLa7ilnzAkcmbiHqDkyzHgJ1eg2rn5csbIIwHUB3
+zgmpWsUxzX7p2Sw6YFS32/rorf3Jflyf1nB5SOfvFpA/6ON5DQQ52jKTgEFWr68AAAAAAAA=
 
+
+--=-SGiV83CvkmPXW69xBczW--
 
