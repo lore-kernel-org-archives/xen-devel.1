@@ -4,38 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF03FCD8CA8
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2026 11:26:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1332603.1595073 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D3FACD8CA8
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2026 11:49:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1332613.1595082 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wWub3-0005Vj-P7; Tue, 09 Jun 2026 11:26:17 +0000
+	id 1wWuwm-0000EZ-In; Tue, 09 Jun 2026 11:48:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1332603.1595073; Tue, 09 Jun 2026 11:26:17 +0000
+Received: by outflank-mailman (output) from mailman id 1332613.1595082; Tue, 09 Jun 2026 11:48:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wWub3-0005Vc-MA; Tue, 09 Jun 2026 11:26:17 +0000
-Received: by outflank-mailman (input) for mailman id 1332603;
- Tue, 09 Jun 2026 11:26:16 +0000
+	id 1wWuwm-0000ES-FH; Tue, 09 Jun 2026 11:48:44 +0000
+Received: by outflank-mailman (input) for mailman id 1332613;
+ Tue, 09 Jun 2026 11:48:43 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wWub1-0005VG-PC
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2026 11:26:16 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <sumit.saxena@broadcom.com>) id 1wWuwk-0000EC-QQ
+ for xen-devel@lists.xenproject.org; Tue, 09 Jun 2026 11:48:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wWub0-00H6zX-Gi
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2026 13:26:14 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wWuwj-005r0B-N1
+ for xen-devel@lists.xenproject.org; Tue, 09 Jun 2026 13:48:41 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6a27f848-2eae-0a2a0a5409dd-0a2a4508b04c-40
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 13:26:14 +0200
-Received: from [209.85.167.53] (helo=mail-lf1-f53.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6a27f855-63b5-0a2a45080019-d155a735a842-3
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 13:26:14 +0200
-Received: by mail-lf1-f53.google.com with SMTP id
- 2adb3069b0e04-5aa61503fdaso5560832e87.0
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 04:26:14 -0700 (PDT)
+ (envelope-from <sumit.saxena@broadcom.com>)
+ id 6a27fd96-2eae-0a2a0a5409dd-0a2a450389e2-4
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 13:48:41 +0200
+Received: from [209.85.221.226] (helo=mail-vk1-f226.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <sumit.saxena@broadcom.com>)
+ id 6a27fd97-672d-0a2a45030019-d155dde2f0ef-3
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 13:48:40 +0200
+Received: by mail-vk1-f226.google.com with SMTP id
+ 71dfb90a1353d-59e2b96e3d3so3492579e0c.2
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 04:48:40 -0700 (PDT)
+Received: from smtp-us-east1-p01-i01-si01.dlp.protect.broadcom.com
+ (address-144-49-247-117.dlp.protect.broadcom.com. [144.49.247.117])
+ by smtp-relay.gmail.com with ESMTPS id
+ 71dfb90a1353d-5a97525966fsm1219846e0c.5.2026.06.09.04.48.38
+ for <xen-devel@lists.xenproject.org>
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 09 Jun 2026 04:48:39 -0700 (PDT)
+Received: by mail-pj1-f71.google.com with SMTP id
+ 98e67ed59e1d1-36bba9b849dso5217874a91.1
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 04:48:38 -0700 (PDT)
+Received: from sumit_ws.dhcp.broadcom.net ([192.19.234.250])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-36f6bf903fasm18898075a91.2.2026.06.09.04.48.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 09 Jun 2026 04:48:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,453 +63,332 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1781004373; cv=none;
-        d=google.com; s=arc-20240605;
-        b=PDfukmvhytkWAbDmDPn0lwpra6stT/RfH5VzIVXbQH4nk+A9ubC4fr7kdKqg4fYGUR
-         Y9Cm6EuEVzc3kSkq+eAOUNH6oRhqUyamQbig7jwQiPQDjKU898hIgKLL26i8/Vx7GFex
-         njgBhoNIoNN2nimXMOllSfSHAo5nk6hJCVijDWG5tMrQ/PV0pj624rqkkc4e7pz94+0Z
-         HNKPUPOZjHyRHB2Sv+HJwdRqdTDOwr0T3iqUVXc8EJJ4lEUeZYnl9NgoHJPRz4jDA+Zo
-         JJcpQ/dKg+f5VEEbMopxOG7ksWpKXaLpq/+4vvbavO5lr1o1MlYLf/Ws0t5cz/vNqyvV
-         Dmpw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=WLYcPfWt9uMVLfZgYj04XzkulV5XoWd3hFIn8YeqBwk=;
-        fh=zk+JGOYQjpPuYyxRR8v3OZOsXfYFHag6LUjq1VldQ2M=;
-        b=T1LtuURQWrapEpNV4AT+ci7DQnxqQsKhfLjpeXcDCysm+AvmFvvNqjPR4VshwBoZ00
-         4Gk0NdL21II4Ta8ES0RR9lP4InXv4P5h4ItcnldgnYFFePmgRxyXZ+yZGIPgxO0Z2MZo
-         0xWV0ycWhcwy3RIWyDpolJi0tVshQqelyAADnhFyEuwzSYIP0gvF9hws4akzL80/9Cuh
-         J+d8b1I4liLVedPTxsDYmsKvPT5pvuyarKAcPpxCdVkUE5OFMTLDiYv1Ye6tM7C5ziNt
-         +BNQGMcrhUT39nGAkopmUwoklzVfBEY86E6sA0z8+UqW62W00vdj+3WS2caKJ2xIATar
-         4WFQ==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781004373; x=1781609173; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=WLYcPfWt9uMVLfZgYj04XzkulV5XoWd3hFIn8YeqBwk=;
-        b=j9XNjEvO2j5/mz/iOZsJz5AoeekEEO0CWbd7nVXaZbsV4fuWNDQ39JLgNScsrMX8Ot
-         zUzkUAinSGx3lV04QnzHcgYnqJoVXV0GQWPxHvel+DHs05g1VTQsWR8jHZz3p3EEz7/W
-         Qe9EtLG1L/U9J9YBuM1VMjSCe11cvqdnBlKPbfBqYPfLEwOIJscng5S/OY2Nx2ugC9iN
-         R6wYkZxTyAKbOU/lsGjRBOzgI2Hj6D46zSJGF3TN/Af3g8yA0Qu+09IaY3RHcFEJQVPW
-         JTUezuS1eWeXHoavoyROe6TQ0l4J4R1akpfdR0ZJynyJ/b/izGuEj7S3JAZC5y10rJq3
-         lIGw==
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=broadcom.com header.i="@broadcom.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781004373; x=1781609173;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=WLYcPfWt9uMVLfZgYj04XzkulV5XoWd3hFIn8YeqBwk=;
-        b=j5cM7fZziAVKb4SoURZ6Y0W1znRzQs9yFus0Uwe+ZqzJXSW228wS9SwSj6ML3B6nFS
-         FlLs73g9LhQghxoASM+QBrsH/h/Bu7sfW0WMYgR4SY5Odtiq0govF6xS9cIVmw7X3Q+U
-         98UIRR1IQ3i9XoiYEDw5OyDU1mE2OdYWWuStep04POCq1Ms/Myvw4rBtrU7M2PMHpMAq
-         2vjffiGGiICCweM2k8hLK+XcQgdY+XWsa4Dm2l9cr91ybcPQV8ps+CHWi/CCx4y6lkZV
-         F+cqWPaMUwZBCFbDd/5z9+pQXA+HlXRn37a2OFTx9Uv1on0quI+fZrfdwZrVXG8bpM/a
-         pFqg==
-X-Gm-Message-State: AOJu0YzqbA4ZVZURXlGvzDV8KzHhua8ELrsg16LtfB0a6KrrZXx43ZLb
-	ULjSWY5n2za3bi2hiKhR9EOn7OSumHbHJd2rVunREaFASM+VFFR34oSYi7Ya1VbZrWW08MIwAEG
-	UVswgJV/TlEBMOFubHUvsYaraZmaMO4M=
-X-Gm-Gg: Acq92OEwkJVQO5aEPUVvu0FhM0LWL99uimjD2hgnpDIM55ogmJXjCMLQdgcaaJwQrfw
-	tsPfuu2yZcXhKasfeXwGvloeKQy2jz0qo840GBoq0iVkhTSfN7vZNw+6qPpgLe8/uwA7ZsE0waD
-	lr6eHim7w6eHo/0kw8DxWQhvGle7H6zABNee7i5esjMFOKw45mlanMJKsaYo+nRmJXbPbznmCS2
-	SKVCNE9t5aizD7rW7gTY0MnJmAMq4Rt2dqpqMwmT6x4Zgq/X5MJup1hqBQLCF74IR+5S/Q/ZxIB
-	J7iYIQFnItHn3omF
-X-Received: by 2002:a05:6512:31c8:b0:5a8:73c2:c90b with SMTP id
- 2adb3069b0e04-5aa886eac86mr5533347e87.20.1781004373010; Tue, 09 Jun 2026
- 04:26:13 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1781005719; x=1781610519;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:dkim-signature:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=2GtwyftxDgDxHf00TNmN+7bsJSzsnvSjUZVIyovfOvI=;
+        b=scxU0HJTt8InL5fiMbc+vjmtFx0cseH9UQh0tzus3+AidvNs17HM1pHYl/6FpMcW+h
+         1Cr5d9PkbEFtRBx/lnUIXpvIALWstktjmJ9h51JVdY1O6dqt2eUufC5M320KjUeARyJm
+         EiJqYLe1vFhTv1c2gHi2C+kjTvtNwyZQiv4Psutd0uplEKUhW1OzvjYwJIBChlYfpplp
+         xdnwrf0X46JRZUiG+ZrPpajWForyNfQOJI3UQb73h8ZIX7cCWr2TD4Sk214uvope9NvW
+         yw8IabNT9/ccBvih7Z8bBBhVYFrL20SoHwKZXIkJyoFeEIPkjjVkwApWEKKxQAKHmRRB
+         1/9Q==
+X-Forwarded-Encrypted: i=1; AFNElJ+vn0pcZLvmdFUDzwFWgpW8yMbdtP2eDWYFmeFpIAMDPo4fqudAqRxgBa5MAOopuuVao5lgCGMuNnc=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxJH27BR+zhkAS5iV+P51G1Rg9OGgJNIDnWE5AsP/xADZdJu6Yl
+	mSLhUvTMJIj/1mK85AtzV02cer1WvZjuCBMPJhfeaVEHzPmhjyrBxcBERd1+Ql8MnooAqvWZLpq
+	Lo/xVYKmUx7prHgmN/0kEyoi1DxFNe7z/YRB+GCXX517al2dPf4XGzDDHsPTEXIHs1/dNKD5LGS
+	ncLkulfZBnl4z1Su9tJLtC/QjY6Bmb1buRWSLOJragdyLfglEOkmhvibmv6lmTwNv+y1uKTRsEp
+	n/ntA6vJOoNPpby0D8aqw==
+X-Gm-Gg: Acq92OEtH0M4WD/PqE39HmdbsJ/19wCyDKw6YtGCpevX6EuFcaDFNIt+WgXFDWF7yub
+	bvVbpbGIXTB4szDZq+hM9N2AvIiIgKh0ogU1bxKY/7pWrj1WNswI6tyTvocZcwDsGk5eJ7kYkts
+	LWPoDw5qVhabznGxHraT6Am/F1WWHZUJkqGIQ9reN16lZvUcXIbu1Y9QzE5mDGAVmPEptSgHTgR
+	5npWurBD1GViDGti/L3X8WIFa0e+o7eJK33OU1LfikS0Ddyi0MowOV4HenuaQ3wQOvSz5WvX/xa
+	2GfajycteYEfdg6g7Nq+5X2rOHdqNp7vpWzxkvHzNS/2PnHaJ0Qi01aEoyV+seB8I5i+7ZR2t5e
+	P1Ux6ehKSSPghPeVYbXXJVW5c2nuIG1slHWnuUTsfFlGX12nlX3nkcSaxqAzfaSt5A9W+R8xjHe
+	CVc8sHjBhluGGzBb8pFSt1Ee8ndF55h7hgPgfRmUvEuHNqZZF3QTHfVc5gThGN8hRajVh22w==
+X-Received: by 2002:a05:6122:1796:b0:5a0:c38e:6199 with SMTP id 71dfb90a1353d-5ac4ca5ce4amr10023048e0c.1.1781005719166;
+        Tue, 09 Jun 2026 04:48:39 -0700 (PDT)
+X-Relaying-Domain: broadcom.com
+X-CFilter-Loop: Reflected
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=broadcom.com; s=google; t=1781005718; x=1781610518; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=2GtwyftxDgDxHf00TNmN+7bsJSzsnvSjUZVIyovfOvI=;
+        b=bGsmDRvDpIPTB9LMiD0Ca0LwW3bnQa944gTMq2P/IklkcsgQ5/DMUvolmQHlvP5LaW
+         u6H2kGWujZsRUJE1ZHPmtarbBDn6dMTc/1C81VfpnG9R0hrLcNSkZWi7YFNzKm+NBk6e
+         aP72hKgVeAMQWd+p+AirlrZiwC7AQc0fMP2lE=
+X-Forwarded-Encrypted: i=1; AFNElJ+TPMFQ5uMQMPEkegeYp/qOpgytLlpMwsL5ldC7xDynl5plhr+JoA8lXx7sgh3cEptkyrmJYjvfysI=@lists.xenproject.org
+X-Received: by 2002:a17:90b:5783:b0:36a:4074:9aa6 with SMTP id 98e67ed59e1d1-370ee82fcb9mr19842169a91.6.1781005717456;
+        Tue, 09 Jun 2026 04:48:37 -0700 (PDT)
+X-Received: by 2002:a17:90b:5783:b0:36a:4074:9aa6 with SMTP id 98e67ed59e1d1-370ee82fcb9mr19842127a91.6.1781005716916;
+        Tue, 09 Jun 2026 04:48:36 -0700 (PDT)
+From: Sumit Saxena <sumit.saxena@broadcom.com>
+To: "Martin K . Petersen" <martin.petersen@oracle.com>,
+	Jens Axboe <axboe@kernel.dk>
+Cc: "James E . J . Bottomley" <James.Bottomley@HansenPartnership.com>,
+	linux-scsi@vger.kernel.org,
+	linux-block@vger.kernel.org,
+	Adam Radford <aradford@gmail.com>,
+	Khalid Aziz <khalid@gonehiking.org>,
+	Adaptec OEM Raid Solutions <aacraid@microsemi.com>,
+	Matthew Wilcox <willy@infradead.org>,
+	Hannes Reinecke <hare@suse.com>,
+	"Juergen E . Fischer" <fischer@norbit.de>,
+	Russell King <linux@armlinux.org.uk>,
+	linux-arm-kernel@lists.infradead.org,
+	Finn Thain <fthain@linux-m68k.org>,
+	Michael Schmitz <schmitzmic@gmail.com>,
+	Anil Gurumurthy <anil.gurumurthy@qlogic.com>,
+	Sudarsana Kalluru <sudarsana.kalluru@qlogic.com>,
+	Oliver Neukum <oliver@neukum.org>,
+	Ali Akcaagac <aliakc@web.de>,
+	Jamie Lenehan <lenehan@twibble.org>,
+	Ram Vegesna <ram.vegesna@broadcom.com>,
+	target-devel@vger.kernel.org,
+	Bradley Grove <linuxdrivers@attotech.com>,
+	Satish Kharat <satishkh@cisco.com>,
+	Sesidhar Baddela <sebaddel@cisco.com>,
+	Karan Tilak Kumar <kartilak@cisco.com>,
+	Yihang Li <liyihang9@h-partners.com>,
+	Don Brace <don.brace@microchip.com>,
+	storagedev@microchip.com,
+	HighPoint Linux Team <linux@highpoint-tech.com>,
+	Tyrel Datwyler <tyreld@linux.ibm.com>,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	Christophe Leroy <chleroy@kernel.org>,
+	linuxppc-dev@lists.ozlabs.org,
+	Brian King <brking@us.ibm.com>,
+	Lee Duncan <lduncan@suse.com>,
+	Chris Leech <cleech@redhat.com>,
+	Mike Christie <michael.christie@oracle.com>,
+	open-iscsi@googlegroups.com,
+	Justin Tee <justin.tee@broadcom.com>,
+	Paul Ely <paul.ely@broadcom.com>,
+	Kashyap Desai <kashyap.desai@broadcom.com>,
+	Shivasharan S <shivasharan.srikanteshwara@broadcom.com>,
+	Chandrakanth Patil <chandrakanth.patil@broadcom.com>,
+	megaraidlinux.pdl@broadcom.com,
+	Sathya Prakash Veerichetty <sathya.prakash@broadcom.com>,
+	Sreekanth Reddy <sreekanth.reddy@broadcom.com>,
+	mpi3mr-linuxdrv.pdl@broadcom.com,
+	Suganath Prabu Subramani <suganath-prabu.subramani@broadcom.com>,
+	Ranjan Kumar <ranjan.kumar@broadcom.com>,
+	MPT-FusionLinux.pdl@broadcom.com,
+	Daniel Palmer <daniel@thingy.jp>,
+	GOTO Masanori <gotom@debian.or.jp>,
+	YOKOTA Hiroshi <yokota@netlab.is.tsukuba.ac.jp>,
+	Jack Wang <jinpu.wang@cloud.ionos.com>,
+	Geoff Levand <geoff@infradead.org>,
+	Michael Reed <mdr@sgi.com>,
+	Nilesh Javali <njavali@marvell.com>,
+	GR-QLogic-Storage-Upstream@marvell.com,
+	Narsimhulu Musini <nmusini@cisco.com>,
+	"K . Y . Srinivasan" <kys@microsoft.com>,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Wei Liu <wei.liu@kernel.org>,
+	Dexuan Cui <decui@microsoft.com>,
+	Long Li <longli@microsoft.com>,
+	linux-hyperv@vger.kernel.org,
+	"Michael S . Tsirkin" <mst@redhat.com>,
+	Jason Wang <jasowang@redhat.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	Eugenio Perez <eperezma@redhat.com>,
+	virtualization@lists.linux.dev,
+	Vishal Bhakta <vishal.bhakta@broadcom.com>,
+	bcm-kernel-feedback-list@broadcom.com,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	xen-devel@lists.xenproject.org,
+	Sumit Saxena <sumit.saxena@broadcom.com>
+Subject: [PATCH v3 0/4] scsi/block: NUMA-local scan allocations, shared-tag path cleanup, and SCSI I/O counters
+Date: Tue,  9 Jun 2026 17:47:59 +0530
+Message-ID: <20260609121806.2121755-1-sumit.saxena@broadcom.com>
+X-Mailer: git-send-email 2.43.7
 MIME-Version: 1.0
-References: <cover.1780896733.git.mykola_kvach@epam.com> <916609a0c6e66dd24e4435d31a165a1326fe5281.1780896733.git.mykola_kvach@epam.com>
- <03bca529-419a-4c14-b229-7e47e8e36e7a@amd.com>
-In-Reply-To: <03bca529-419a-4c14-b229-7e47e8e36e7a@amd.com>
-From: Mykola Kvach <xakep.amatop@gmail.com>
-Date: Tue, 9 Jun 2026 14:26:01 +0300
-X-Gm-Features: AVVi8CcLwMU7AA8UIEIfji0bxOX8svmDEy8e9BBxKUmR3zGprKaqfC08x_ayY5k
-Message-ID: <CAGeoDV-SOWiHq46wy1Lwc-PNO=Mh+wm03SHwWxFzeNxC8s9Bbg@mail.gmail.com>
-Subject: Re: [PATCH for-4.22 v3 2/2] device-tree: validate hwdom bank 0 boot placement
-To: "Orzel, Michal" <michal.orzel@amd.com>
-Cc: xen-devel@lists.xenproject.org, Mykola Kvach <mykola_kvach@epam.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
-	Bertrand Marquis <bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
-	Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, 
-	Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-c1860d/1781004374-B6F72DB1-4DD709D3/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 14090
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-DetectorID-Processed: b00c1d49-9d2e-4205-b15f-d015386d3d5e
+X-purgate-ID: tlsNG-33051d/1781005720-38D73938-91394734/0/0
+X-purgate-type: clean
+X-purgate-size: 9012
 
-Hi Michal,
+This series contains three performance improvements targeting the SCSI
+and block layers on multi-socket NUMA and heavily loaded SMP systems.
 
-Thanks for the review.
+On multi-socket NUMA systems we observed extreme I/O throughput variance
+of 50-60% between runs.  This series identifies and fixes two root causes:
+cross-node memory accesses due to NUMA-unaware allocations in the scan
+path, and false sharing between hot atomic counters in struct request_queue
+and struct scsi_device.
 
-On Tue, Jun 9, 2026 at 10:32=E2=80=AFAM Orzel, Michal <michal.orzel@amd.com=
-> wrote:
->
->
->
-> On 08-Jun-26 07:39, Mykola Kvach wrote:
-> > From: Mykola Kvach <mykola_kvach@epam.com>
-> >
-> > With LLC coloring enabled, the hardware domain memory is allocated by
-> > allocate_hwdom_memory() rather than by using the fixed direct-map layou=
-t.
-> >
-> > Commit de99f3263555 ("device-tree: Improve hwdom memory allocation for
-> > DMA") made that allocator prefer lower host regions. The first-bank
-> > filter, however, still only checked the old 128MB heuristic. A low regi=
-on
-> > can satisfy that heuristic but still be too small, or otherwise
-> > unsuitable, for the hardware-domain kernel and the DTB/initrd area to f=
-it
-> > in bank 0 according to the Arm placement rules.
-> >
-> > Keep the existing first-bank size policy and add an architecture-specif=
-ic
-> > candidate check. On Arm, compute the kernel load address for the
-> > candidate bank using the same logic as kernel_zimage_place(), verify th=
-at
-> > the kernel range is covered by that bank, and then reuse the same
-> > DTB/initrd placement helper as place_dtb_initrd(). The FDT is generated
-> > later, so use the hardware-domain FDT allocation size as a conservative
-> > upper bound for the final DTB size.
-> >
-> > Check the candidate after capping the host region by the remaining
-> > unassigned hardware-domain memory, so the validation is performed again=
-st
-> > the size that would actually become bank 0.
-> >
-> > This keeps the DMA-oriented allocation policy from de99f3263555 while
-> > preventing a too-small bank 0 from reaching place_dtb_initrd().
-> >
-> > Make kernel_zimage_place_in_bank() return INVALID_PADDR when a
-> > position-independent zImage cannot be placed in the supplied bank; the
-> > real load path turns this into a panic, while the hwdom candidate check
-> > uses it to reject the bank.
-> >
-> > Fixes: de99f3263555 ("device-tree: Improve hwdom memory allocation for =
-DMA")
-> > Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-> > Release-Acked-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> > ---
-> > Changes in v3:
-> > - Rename the architecture hook to
-> >   arch_hwdom_first_bank_can_fit_modules() and document its contract.
-> > - Drop the redundant post-alignment zImage load-address check.
-> > - Drop the dead kernel range overflow check.
-> > - Make the candidate-bank coverage condition explicit.
-> >
-> > Changes in v2:
-> > - Split the behavior-preserving placement refactoring into the previous
-> >   patch.
-> > - Reuse the refactored Arm kernel and DTB/initrd placement helpers for
-> >   the first-bank candidate check.
-> >
-> > Link to v1:
-> >   https://patchew.org/Xen/4f862bb2dc323914b8120b0f16af7516140cf42b.1780=
-065103.git.mykola._5Fkvach@epam.com/
-> >
-> > Changes since RFC:
-> > - Do not keep the RFC scalar minimum-size check.  It can both reject va=
-lid
-> >   layouts and accept layouts which still fail later.  Instead, validate
-> >   the candidate bank using the same kernel and DTB/initrd placement rul=
-es
-> >   as the load path.
-> > - Replace the scalar minimum-size check with arch_hwdom_first_bank_ok()=
-.
-> > - Validate fixed-address and AArch32 start =3D=3D 0 kernel placement ag=
-ainst
-> >   the candidate bank.
-> > - Check the candidate after capping the host region by the remaining
-> >   unassigned hardware-domain memory.
-> > - Treat the hardware-domain FDT allocation size as a conservative upper
-> >   bound because the final FDT is generated later.
-> >
-> > Link to RFC: https://patchew.org/Xen/9ae4f7dd49f5b1f761193adae573c2675c=
-92e883.1779051035.git.mykola._5Fkvach@epam.com/
-> >
-> > Why the RFC scalar approach was not kept:
-> >
-> > A simple minimum-size check is not sufficient here because the validity
-> > of the first bank depends on the actual Arm placement rules, not only o=
-n
-> > the aggregate size of the kernel, DTB and initrd. The DTB/initrd area m=
-ay
-> > fit before a 64-bit Image loaded with a text offset, while an AArch32
-> > position-independent kernel may leave no valid module location even whe=
-n
-> > the aggregate size appears to fit. Fixed-address kernels also need the
-> > candidate bank start to be considered.
-> > ---
-> >  xen/arch/arm/acpi/domain_build.c        |  2 -
-> >  xen/arch/arm/domain_build.c             |  8 ++++
-> >  xen/arch/arm/include/asm/domain_build.h |  4 ++
-> >  xen/arch/arm/include/asm/kernel.h       | 10 +++++
-> >  xen/arch/arm/kernel.c                   | 53 ++++++++++++++++++++++++-
-> >  xen/common/device-tree/domain-build.c   | 25 ++++++++----
-> >  xen/include/xen/fdt-kernel.h            | 14 +++++++
-> >  7 files changed, 105 insertions(+), 11 deletions(-)
-> >
-> > diff --git a/xen/arch/arm/acpi/domain_build.c b/xen/arch/arm/acpi/domai=
-n_build.c
-> > index 249d899c33..db16f7fa94 100644
-> > --- a/xen/arch/arm/acpi/domain_build.c
-> > +++ b/xen/arch/arm/acpi/domain_build.c
-> > @@ -26,8 +26,6 @@
-> >  #undef virt_to_mfn
-> >  #define virt_to_mfn(va) _mfn(__virt_to_mfn(va))
-> >
-> > -#define ACPI_DOM0_FDT_MIN_SIZE 4096
-> > -
-> >  static int __init acpi_iomem_deny_access(struct domain *d)
-> >  {
-> >      acpi_status status;
-> > diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-> > index 1efddc60ef..550617f152 100644
-> > --- a/xen/arch/arm/domain_build.c
-> > +++ b/xen/arch/arm/domain_build.c
-> > @@ -115,6 +115,14 @@ int __init parse_arch_dom0_param(const char *s, co=
-nst char *e)
-> >                               (IS_ENABLED(CONFIG_STATIC_SHM) ?         =
-\
-> >                                (NR_SHMEM_BANKS * (160 + 16)) : 0))
-> >
-> > +paddr_t __init hwdom_get_fdt_alloc_size(void)
-> > +{
-> > +    if ( acpi_disabled )
-> > +        return fdt_totalsize(device_tree_flattened) + DOM0_FDT_EXTRA_S=
-IZE;
-> > +
-> > +    return ACPI_DOM0_FDT_MIN_SIZE;
-> > +}
-> > +
-> >  unsigned int __init dom0_max_vcpus(void)
-> >  {
-> >      if ( opt_dom0_max_vcpus =3D=3D 0 )
-> > diff --git a/xen/arch/arm/include/asm/domain_build.h b/xen/arch/arm/inc=
-lude/asm/domain_build.h
-> > index df8b361b3d..85cf46a958 100644
-> > --- a/xen/arch/arm/include/asm/domain_build.h
-> > +++ b/xen/arch/arm/include/asm/domain_build.h
-> > @@ -19,6 +19,10 @@ int prepare_acpi(struct domain *d, struct kernel_inf=
-o *kinfo);
-> >
-> >  int add_ext_regions(unsigned long s_gfn, unsigned long e_gfn, void *da=
-ta);
-> >
-> > +#define ACPI_DOM0_FDT_MIN_SIZE 4096
-> > +
-> > +paddr_t hwdom_get_fdt_alloc_size(void);
-> > +
-> >  #if defined(CONFIG_MPU) && defined(CONFIG_ARM_64)
-> >  /* Utility function to determine if an Armv8-R processor supports VMSA=
-. */
-> >  bool has_v8r_vmsa_support(void);
-> > diff --git a/xen/arch/arm/include/asm/kernel.h b/xen/arch/arm/include/a=
-sm/kernel.h
-> > index 21f4273fa1..b86c7337fe 100644
-> > --- a/xen/arch/arm/include/asm/kernel.h
-> > +++ b/xen/arch/arm/include/asm/kernel.h
-> > @@ -8,12 +8,22 @@
-> >
-> >  #include <asm/domain.h>
-> >
-> > +#include <xen/types.h>
-> > +
-> > +struct kernel_info;
-> > +
-> >  struct arch_kernel_info
-> >  {
-> >      /* Enable pl011 emulation */
-> >      bool vpl011;
-> >  };
-> >
-> > +#define arch_hwdom_first_bank_can_fit_modules \
-> > +        arch_hwdom_first_bank_can_fit_modules
-> > +bool arch_hwdom_first_bank_can_fit_modules(const struct kernel_info *i=
-nfo,
-> > +                                           paddr_t bank_start,
-> > +                                           paddr_t bank_size);
-> > +
-> >  #endif /* #ifdef __ARCH_ARM_KERNEL_H__ */
-> >
-> >  /*
-> > diff --git a/xen/arch/arm/kernel.c b/xen/arch/arm/kernel.c
-> > index d1be4d8074..47229644b2 100644
-> > --- a/xen/arch/arm/kernel.c
-> > +++ b/xen/arch/arm/kernel.c
-> > @@ -64,6 +64,9 @@ kernel_zimage_place_in_bank(const struct kernel_info =
-*info,
-> >          load_end =3D bank_start + bank_size;
-> >          load_end =3D MIN(bank_start + MB(128), load_end);
-> >
-> > +        if ( load_end - bank_start < info->image.len )
-> > +            return INVALID_PADDR;
-> > +
-> >          load_addr =3D load_end - info->image.len;
-> >          /* Align to 2MB */
-> >          load_addr &=3D ~(MB(2) - 1);
-> > @@ -164,9 +167,55 @@ static void __init place_dtb_initrd(struct kernel_=
-info *info,
-> >  static paddr_t __init kernel_zimage_place(struct kernel_info *info)
-> >  {
-> >      const struct membanks *mem =3D kernel_info_get_mem(info);
-> > +    paddr_t load_addr;
-> > +
-> > +    load_addr =3D kernel_zimage_place_in_bank(info, mem->bank[0].start=
-,
-> > +                                            mem->bank[0].size);
-> > +    if ( load_addr =3D=3D INVALID_PADDR )
-> > +        panic("Unable to find suitable location for the kernel\n");
-> > +
-> > +    return load_addr;
-> > +}
-> > +
-> > +bool __init arch_hwdom_first_bank_can_fit_modules(const struct kernel_=
-info *info,
-> > +                                                  paddr_t bank_start,
-> > +                                                  paddr_t bank_size)
-> > +{
-> > +    const struct boot_module *initrd =3D info->bd.initrd;
-> > +    /*
-> > +     * place_dtb_initrd() rounds the DTB and initrd placement to 2MB b=
-oundaries;
-> > +     * use the same granularity when checking whether the first bank c=
-an hold
-> > +     * them.
-> > +     */
-> > +    const paddr_t initrd_len =3D ROUNDUP(initrd ? initrd->size : 0, MB=
-(2));
-> > +    /*
-> > +     * The hardware domain FDT has not been generated yet. Use the all=
-ocation
-> > +     * size as a conservative upper bound for the final DTB size.
-> > +     */
-> > +    const paddr_t dtb_len =3D ROUNDUP(hwdom_get_fdt_alloc_size(), MB(2=
-));
-> > +    const paddr_t rambase =3D bank_start;
-> > +    const paddr_t ramsize =3D bank_size;
-> > +    const paddr_t dtb_initrd_size =3D initrd_len + dtb_len;
-> > +    const paddr_t ramend =3D rambase + ramsize;
-> > +    paddr_t kernbase;
-> > +    paddr_t kernend;
-> > +    paddr_t dtb_base;
-> > +
-> > +    kernbase =3D kernel_zimage_place_in_bank(info, bank_start, bank_si=
-ze);
-> > +    if ( kernbase =3D=3D INVALID_PADDR )
-> > +        return false;
-> > +
-> > +    kernend =3D kernbase + info->image.len;
-> > +
-> > +    if ( (kernbase < rambase) || (kernend > ramend) )
-> > +        return false;
-> > +
-> > +    if ( !first_bank_can_fit_modules(ramsize, kernbase, kernend,
-> > +                                     dtb_initrd_size) )
-> > +        return false;
-> >
-> > -    return kernel_zimage_place_in_bank(info, mem->bank[0].start,
-> > -                                       mem->bank[0].size);
-> > +    return find_dtb_initrd_placement(rambase, ramend, kernbase, kernen=
-d,
-> > +                                     dtb_initrd_size, &dtb_base);
-> >  }
-> >
-> >  static void __init kernel_zimage_load(struct kernel_info *info)
-> > diff --git a/xen/common/device-tree/domain-build.c b/xen/common/device-=
-tree/domain-build.c
-> > index f3ba496f1e..30a59abfa7 100644
-> > --- a/xen/common/device-tree/domain-build.c
-> > +++ b/xen/common/device-tree/domain-build.c
-> > @@ -299,20 +299,31 @@ static bool __init allocate_hwdom_memory(struct k=
-ernel_info *kinfo)
-> >
-> >      for ( i =3D 0; (kinfo->unassigned_mem > 0) && (i < nr_banks); i++ =
-)
-> >      {
-> > -        paddr_t bank_size;
-> > +        const paddr_t bank_start =3D hwdom_free_mem->bank[i].start;
-> > +        paddr_t bank_size =3D hwdom_free_mem->bank[i].size;
-> > +
-> > +        /*
-> > +         * Check the size that would actually be assigned, not just th=
-e size
-> > +         * of the host region.
-> > +         */
-> > +        bank_size =3D min(bank_size, kinfo->unassigned_mem);
-> >
-> >          /*
-> >           * The first bank must be large enough for place_dtb_initrd() =
-to
-> >           * fit the kernel, DTB and initrd.  Skip small regions to avoi=
-d
-> >           * ending up with a tiny first bank.
-> >           */
-> > -        if ( !mem->nr_banks && (hwdom_free_mem->bank[i].size < min_ban=
-k_size) )
-> > -            continue;
-> > +        if ( !mem->nr_banks )
-> > +        {
-> > +            if ( bank_size < min_bank_size )
-> > +                continue;
-> > +
-> > +            if ( !arch_hwdom_first_bank_can_fit_modules(kinfo, bank_st=
-art,
-> > +                                                        bank_size) )
-> > +                continue;
-> > +        }
-> >
-> > -        bank_size =3D MIN(hwdom_free_mem->bank[i].size, kinfo->unassig=
-ned_mem);
-> > -        if ( !allocate_bank_memory(kinfo,
-> > -                                   gaddr_to_gfn(hwdom_free_mem->bank[i=
-].start),
-> > -                                   bank_size) )
-> > +        if ( !allocate_bank_memory(kinfo, gaddr_to_gfn(bank_start), ba=
-nk_size) )
-> >          {
-> >              xfree(hwdom_free_mem);
-> >              return false;
-> > diff --git a/xen/include/xen/fdt-kernel.h b/xen/include/xen/fdt-kernel.=
-h
-> > index 00c37be101..61721d22a2 100644
-> > --- a/xen/include/xen/fdt-kernel.h
-> > +++ b/xen/include/xen/fdt-kernel.h
-> > @@ -93,6 +93,20 @@ kernel_info_get_mem_const(const struct kernel_info *=
-kinfo)
-> >      return container_of(&kinfo->mem.common, const struct membanks, com=
-mon);
-> >  }
-> >
-> > +/*
-> > + * Return whether the proposed hardware-domain first RAM bank can cont=
-ain the
-> To `contain a placement` reads weird. I think `satisfy` would be a better=
- word
-> that clearly denotes the purpose i.e. check if the bank satsifies the pla=
-cement
-> requirements (we can also add `requirements` word to the end of the comme=
-nt).
+Performance notes:
 
-I agree that "satisfy the placement requirements" reads better here.
+Tested on a dual-socket NUMA system (2x 32-core, 256 GB/socket) with
+an mpi3mr HBA, running fio (random read, 4K, QD 64, 16 jobs, 60 s,
+direct I/O).  IOPS figures are in KIOPS (thousands of IOPS):
 
->
-> Can be done on commit (it looks like there are some ECLAIR issues, so we =
-need to
-> wait a bit to merge the series).
+  Configuration                    Avg KIOPS   Range (KIOPS)   Spread
+  Baseline                         6,255       4,200 - 6,700   ~37%
+  Baseline + all patches           7,350       7,000 - 7,700    ~10%
 
-I have retriggered the ECLAIR tests and the pipeline is green now:
+Key findings:
 
-https://gitlab.com/xen-project/people/mykola_kvach/xen/-/pipelines/25838764=
-33
+These patches combinedly reduces the observed 50-60% run-to-run variance
+to under 10%, significantly improving workload predictability and
+improves IOPs by 16-18%.
 
-I am OK with this comment being adjusted on commit.
+No functional regressions observed.
 
-Best regards,
-Mykola
+Changes in v3
+-------------
+-Handled feedback from Bart Van Assche and John Garry.
+-Added a patch for shost local NUMA allocation.
+-Converted ioerr_cnt and iotmo_cnt atomic counters into per-cpu counters. 
+
+Changes in v2
+--------------
+
+  Patch 1 — Same functional goal as v1 patch 1: NUMA-local scsi_device /
+  scsi_target allocations in the scan path so steady-state I/O does not
+  habitually touch remote memory when the host has a fixed DMA/NUMA
+  affinity.
+
+  Patch 2 — Replaces v1’s ____cacheline_aligned_in_smp on
+  nr_active_requests_shared_tags with removal of the shared-tag fairness
+  throttling machinery (including hctx_may_queue(), blk_mq_hw_ctx.nr_active,
+  and request_queue.nr_active_requests_shared_tags and their updates).
+  This follows the earlier standalone proposal by Bart Van Assche [1],
+  rebased for the current tree; it removes the high-frequency atomic
+  accounting that motivated the v1 false-sharing workaround and, in our
+  testing, improves IOPS on the order of roughly 16–18% for the shared-tag
+  workload exercised.
+
+  Patch 3 — Replaces v1’s cache-line padding of iodone_cnt with
+  percpu_counter for both iorequest_cnt and iodone_cnt, so submission and
+  completion paths mostly update CPU-local state instead of bouncing a
+  single cache line, without inflating struct scsi_device for SMP
+  alignment.
+
+Merge / review hints
+--------------------
+
+Patch 3 touches the block layer and should have block maintainer review;
+rest of patches are SCSI-oriented.  Please route or Ack as your subsystem
+workflow requires.
+
+Bart Van Assche (1):
+  block: drop shared-tag fairness throttling
+
+James Rizzo (1):
+  scsi: scan: allocate sdev and starget on the NUMA node of the host
+    adapter
+
+Sumit Saxena (2):
+  scsi: host: allocate struct Scsi_Host on the NUMA node of the host
+    adapter
+  scsi: use percpu counters for iostat counters in struct scsi_device
+
+ block/blk-core.c                          |   2 -
+ block/blk-mq-debugfs.c                    |  22 ++++-
+ block/blk-mq-tag.c                        |   4 -
+ block/blk-mq.c                            |  17 +---
+ block/blk-mq.h                            | 100 ----------------------
+ drivers/scsi/3w-9xxx.c                    |   2 +-
+ drivers/scsi/3w-sas.c                     |   2 +-
+ drivers/scsi/3w-xxxx.c                    |   2 +-
+ drivers/scsi/53c700.c                     |   2 +-
+ drivers/scsi/BusLogic.c                   |   2 +-
+ drivers/scsi/a100u2w.c                    |   2 +-
+ drivers/scsi/a2091.c                      |   2 +-
+ drivers/scsi/a3000.c                      |   2 +-
+ drivers/scsi/aacraid/linit.c              |   2 +-
+ drivers/scsi/advansys.c                   |   6 +-
+ drivers/scsi/aha152x.c                    |   2 +-
+ drivers/scsi/aha1542.c                    |   2 +-
+ drivers/scsi/aha1740.c                    |   2 +-
+ drivers/scsi/aic7xxx/aic79xx_osm.c        |   2 +-
+ drivers/scsi/aic7xxx/aic7xxx_osm.c        |   2 +-
+ drivers/scsi/aic94xx/aic94xx_init.c       |   2 +-
+ drivers/scsi/am53c974.c                   |   2 +-
+ drivers/scsi/arcmsr/arcmsr_hba.c          |   3 +-
+ drivers/scsi/arm/acornscsi.c              |   2 +-
+ drivers/scsi/arm/arxescsi.c               |   2 +-
+ drivers/scsi/arm/cumana_1.c               |   2 +-
+ drivers/scsi/arm/cumana_2.c               |   2 +-
+ drivers/scsi/arm/eesox.c                  |   2 +-
+ drivers/scsi/arm/oak.c                    |   2 +-
+ drivers/scsi/arm/powertec.c               |   2 +-
+ drivers/scsi/atari_scsi.c                 |   2 +-
+ drivers/scsi/atp870u.c                    |   2 +-
+ drivers/scsi/bfa/bfad_im.c                |   2 +-
+ drivers/scsi/csiostor/csio_init.c         |   4 +-
+ drivers/scsi/dc395x.c                     |   2 +-
+ drivers/scsi/dmx3191d.c                   |   2 +-
+ drivers/scsi/elx/efct/efct_xport.c        |   4 +-
+ drivers/scsi/esas2r/esas2r_main.c         |   2 +-
+ drivers/scsi/fdomain.c                    |   2 +-
+ drivers/scsi/fnic/fnic_main.c             |   2 +-
+ drivers/scsi/g_NCR5380.c                  |   2 +-
+ drivers/scsi/gvp11.c                      |   2 +-
+ drivers/scsi/hisi_sas/hisi_sas_main.c     |   2 +-
+ drivers/scsi/hisi_sas/hisi_sas_v3_hw.c    |   2 +-
+ drivers/scsi/hosts.c                      |   6 +-
+ drivers/scsi/hpsa.c                       |   2 +-
+ drivers/scsi/hptiop.c                     |   2 +-
+ drivers/scsi/ibmvscsi/ibmvfc.c            |   2 +-
+ drivers/scsi/ibmvscsi/ibmvscsi.c          |   2 +-
+ drivers/scsi/imm.c                        |   2 +-
+ drivers/scsi/initio.c                     |   2 +-
+ drivers/scsi/ipr.c                        |   2 +-
+ drivers/scsi/ips.c                        |   2 +-
+ drivers/scsi/isci/init.c                  |   2 +-
+ drivers/scsi/jazz_esp.c                   |   2 +-
+ drivers/scsi/libiscsi.c                   |   2 +-
+ drivers/scsi/lpfc/lpfc_init.c             |   2 +-
+ drivers/scsi/mac53c94.c                   |   2 +-
+ drivers/scsi/mac_esp.c                    |   2 +-
+ drivers/scsi/mac_scsi.c                   |   2 +-
+ drivers/scsi/megaraid.c                   |   2 +-
+ drivers/scsi/megaraid/megaraid_mbox.c     |   2 +-
+ drivers/scsi/megaraid/megaraid_sas_base.c |   2 +-
+ drivers/scsi/mesh.c                       |   2 +-
+ drivers/scsi/mpi3mr/mpi3mr_os.c           |   2 +-
+ drivers/scsi/mpt3sas/mpt3sas_scsih.c      |   4 +-
+ drivers/scsi/mvme147.c                    |   2 +-
+ drivers/scsi/mvsas/mv_init.c              |   2 +-
+ drivers/scsi/mvumi.c                      |   2 +-
+ drivers/scsi/myrb.c                       |   2 +-
+ drivers/scsi/myrs.c                       |   2 +-
+ drivers/scsi/ncr53c8xx.c                  |   2 +-
+ drivers/scsi/nsp32.c                      |   2 +-
+ drivers/scsi/pcmcia/nsp_cs.c              |   2 +-
+ drivers/scsi/pcmcia/qlogic_stub.c         |   2 +-
+ drivers/scsi/pcmcia/sym53c500_cs.c        |   2 +-
+ drivers/scsi/pm8001/pm8001_init.c         |   2 +-
+ drivers/scsi/pmcraid.c                    |   2 +-
+ drivers/scsi/ppa.c                        |   2 +-
+ drivers/scsi/ps3rom.c                     |   2 +-
+ drivers/scsi/qla1280.c                    |   2 +-
+ drivers/scsi/qla2xxx/qla_mid.c            |   2 +-
+ drivers/scsi/qla2xxx/qla_os.c             |   2 +-
+ drivers/scsi/qlogicfas.c                  |   2 +-
+ drivers/scsi/qlogicpti.c                  |   2 +-
+ drivers/scsi/scsi_debug.c                 |   2 +-
+ drivers/scsi/scsi_error.c                 |   4 +-
+ drivers/scsi/scsi_lib.c                   |  10 +--
+ drivers/scsi/scsi_scan.c                  |  15 +++-
+ drivers/scsi/scsi_sysfs.c                 |  23 +++--
+ drivers/scsi/sd.c                         |   2 +-
+ drivers/scsi/sgiwd93.c                    |   2 +-
+ drivers/scsi/smartpqi/smartpqi_init.c     |   2 +-
+ drivers/scsi/snic/snic_main.c             |   2 +-
+ drivers/scsi/stex.c                       |   2 +-
+ drivers/scsi/storvsc_drv.c                |   2 +-
+ drivers/scsi/sun3_scsi.c                  |   2 +-
+ drivers/scsi/sun3x_esp.c                  |   2 +-
+ drivers/scsi/sun_esp.c                    |   2 +-
+ drivers/scsi/sym53c8xx_2/sym_glue.c       |   2 +-
+ drivers/scsi/virtio_scsi.c                |   2 +-
+ drivers/scsi/vmw_pvscsi.c                 |   2 +-
+ drivers/scsi/wd719x.c                     |   2 +-
+ drivers/scsi/xen-scsifront.c              |   2 +-
+ drivers/scsi/zorro_esp.c                  |   2 +-
+ include/linux/blk-mq.h                    |   6 --
+ include/linux/blkdev.h                    |   2 -
+ include/scsi/libfc.h                      |   2 +-
+ include/scsi/scsi_device.h                |   9 +-
+ include/scsi/scsi_host.h                  |   3 +-
+ 110 files changed, 168 insertions(+), 258 deletions(-)
+
+-- 
+2.43.7
+
 
