@@ -4,39 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C32CCD6E79
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2026 09:33:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1332560.1595017 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15452CD6E79
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2026 09:40:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1332568.1595025 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wWspb-0000I0-5w; Tue, 09 Jun 2026 09:33:11 +0000
+	id 1wWsvy-0001Os-R7; Tue, 09 Jun 2026 09:39:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1332560.1595017; Tue, 09 Jun 2026 09:33:11 +0000
+Received: by outflank-mailman (output) from mailman id 1332568.1595025; Tue, 09 Jun 2026 09:39:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wWspb-0000Ht-1o; Tue, 09 Jun 2026 09:33:11 +0000
-Received: by outflank-mailman (input) for mailman id 1332560;
- Tue, 09 Jun 2026 09:33:09 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wWspZ-0000Hm-ES
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2026 09:33:09 +0000
+	id 1wWsvy-0001Ol-Mm; Tue, 09 Jun 2026 09:39:46 +0000
+Received: by outflank-mailman (input) for mailman id 1332568;
+ Tue, 09 Jun 2026 09:39:45 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wWsvx-0001OY-IL
+ for xen-devel@lists.xenproject.org; Tue, 09 Jun 2026 09:39:45 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wWspY-007Aml-Ed
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2026 11:33:08 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wWsvw-00Fku2-KX
+ for xen-devel@lists.xenproject.org; Tue, 09 Jun 2026 11:39:44 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a27ddd0-5cb7-0a2a0a5109dd-0a2a4502a2a0-20
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 11:33:08 +0200
-Received: from [74.125.224.51] (helo=mail-yx1-f51.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a27ddd3-af86-0a2a45020019-4a7de033b16e-3
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 11:33:08 +0200
-Received: by mail-yx1-f51.google.com with SMTP id
- 956f58d0204a3-66077e90382so4985642d50.3
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 02:33:07 -0700 (PDT)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a27df4e-bab6-0a2a0a5309dd-0a2a45038358-48
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 11:39:44 +0200
+Received: from [209.85.208.50] (helo=mail-ed1-f50.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a27df60-672d-0a2a45030019-d155d032d11c-3
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 11:39:44 +0200
+Received: by mail-ed1-f50.google.com with SMTP id
+ 4fb4d7f45d1cf-691c5776f35so2576254a12.3
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 02:39:44 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-148-111.play-internet.pl.
+ [109.243.148.111]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-68e6595c722sm8324423a12.22.2026.06.09.02.39.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 09 Jun 2026 02:39:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,174 +52,86 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1780997587; cv=none;
-        d=google.com; s=arc-20240605;
-        b=N9j7MH/eAkcmHuJyK4Hs/wZ9XtkyaRBrRQA884tGHgHX+RqIrzT2JHkeH+qur2ZbaF
-         LdX1oxBjKghdnZP70txv0QhM64wwPhvK/4IRsJYvaVmGOTtgYd7gG9ecSnLtQZ6bG/wS
-         HDKfSvIppkhpkPddTI8kHwIhU1cGByLabJkY6gOIN4P7qhKNKHdHwm4uneQ26x8wsvbC
-         qIsjEn+OqFcKOUjy5XD3Pm1UEwUC8pOFNgtMYveu9Zklo3scWHd7mTJ891m9nkR1lBfc
-         NkNexzvRA+j3rR6UJ/1Z7O6N6b/mm6rjZtuZVn9jh8KB2i0VxigNNDnLDRnUQJ1ndQkA
-         ARdw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=GjhGXc3wdtzca4RHEQjHYpjSQng78zDhCNN28ncA3l0=;
-        fh=YXyOrzbbuBMjB1laPSTTaglkJ9ItuXSXF5B6orWbM3Y=;
-        b=cmYzHcfyT0a7pT4e8io+WboW33veVSCDH9wBZXXQ1BGk0G9ADBJeyKGR6X5tf3N4Yo
-         XL6BURqXZrynuV/xU2RWdcA/K5cJsboYJazoEdQBdNXWaltZ0fhVgM1+cocfE+KnZ1Lk
-         M/7j1PHYhPMewWXlCxUSjeBVvbmldH7JSvkF2vBYDua74Z08B5cZ+sDALSZ2NzRuF7wX
-         uaTNrbVzHEXCdpChVbLRZHEcx0Tw1snsUtupillHinN9kQaDJ6bPOKvujsfxwGpma0O1
-         wlVmp+Y6h0S6N4U3Jz1Op/YWfqIBjc+ctph+dupPvdgJpLCx6aarkRKzPdFjk2htQFO+
-         VYJQ==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780997587; x=1781602387; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=GjhGXc3wdtzca4RHEQjHYpjSQng78zDhCNN28ncA3l0=;
-        b=PmsLqcHLPv6yS9pGJlo8KRVEzpxfHW7lLaWMK3HDCx0r1/iHPlmpxFjzqZ64AEzBXu
-         G3Ae7zAu980//Rt/8MOtE2wioBmnYRlAwBCKiEsJS9rFE88+IP/IWugS+X3VuvYd/fd4
-         YE9MhY7M8u6ZAGgzJqe/uHN/L6HoPuWnQx1skncpxHUJ5W8Vr/415oI+C3SW0y/7cPxT
-         G5Bha3sd84WoJU9dyx1f3UDmNviAHHiWlWUKoN5wxyPTKCIdAi7grbPMuCyKq4SZLqqM
-         560df0CzCq2cQWctNCvXRE//ha+5m/iLWB33C17RvASLXbMrEaMQVSqNg7be5fhymagm
-         1EyQ==
+        d=gmail.com; s=20251104; t=1780997984; x=1781602784; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=ojAoOIr8suU/Ii90bmf7iq53dfd/rns61I5bJ24u/Ns=;
+        b=OGcYsnQSMFo609NFYaQTXSeA1Tt7R6WKGagtB3LtbqwsURSbGpJXrutWURWQ/dncmE
+         blUIIc966QDW8o6xjEYGhUeupWMHR03uPK8T76ECqvhR+ob+w0+uQzc4jYu6Ac8uQyJ2
+         DNBK4UdjtXrWtQ3KmSGLQ+BQAMRkEX0ec71qe2pzGVVa5V+/G1xErqkgGOo7g8MaWvbk
+         oOohu/XWjz4wJQYsqAHi9hjxKWtXwYocpCZklFumYjTr7M0eORACrUK74lHF88KKa81G
+         lsb6aJk5UMxag096m9nYBqLdIg+RPM2q7rL50HtJvNWqa6QFPr+TUe8OsMLWlg39zEC4
+         iRsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780997587; x=1781602387;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=GjhGXc3wdtzca4RHEQjHYpjSQng78zDhCNN28ncA3l0=;
-        b=RGGNzk935BKjsyFqMjg/P9bpXZdffJ0M554ii4MQ+Sy1yIaWyVdoZZWVnpb5ZOd1t+
-         34MdCBqDPLOUh7AeFNJU153ZIUQzVfdN4svLmlCjR+HLFzvfEPOKlS/K9PExknUCanB/
-         o8t0yudOXu4QCd4HkVnVok2azkngKotA+cfPLpDkkWfrtKDSKuJToU078ZLvN6Jchcv7
-         BF9pR3VpuVIvAJy5/FaaPJCFA7l38tRyoz1cpL2eTKw4Hzd3UbOVmLu/WEvoQ8sjBNTT
-         cmZnknQK3V9N4Gee0CPieCO9M6qm5OgTBoXKCjUEytRpend/R8SQP7sZHc/jylINNcKn
-         ZSnQ==
-X-Gm-Message-State: AOJu0Yx2f9iRnLxBGc1UPWnIWa/7QRrQN7GkdyVp9A75INzFOuczkB0W
-	Ql7xCsX5u9ejxkVvzUzw7usH2xCPYjUitcq5B0hG+uiuW2CqeSlK8EX1oJitH0w0602m1T4MF39
-	1jp6lK6Z+eINvVp9Wqrwml76dGiuLouU=
-X-Gm-Gg: Acq92OFfZ5HCMzd1jgqc+Tl9il9rbUhomZAUsZNsPJ3enjYNBUJq2mEBKlIoAX5igK3
-	JmdW6liRQKXcVqY0HqWxbiBhFj16nJCAL1xiU30JlGphMPLq9KPBwLI3Qza6LBdtGKBvLJRc1rs
-	nHly2dKNicorROKJOw+XosrZWcDCuN1x3zM0fiBWNNsJubWXdw2RI7pUVRgPR4/EKK/NLiDqpdm
-	KxL9Dw/xfU/AobQdSRZIEqSbt+Aovy6fb2wfLqWat5a2r3vwlIPbTlsYOvcTKwPw1rBgiI/DTO1
-	kUVS5jpo20naijkJ5ZRwJ6RGGILenE65Vp0MWuDoy15DuMztRoN6lyZWCNE=
-X-Received: by 2002:a05:690e:130d:b0:651:ba22:fcc3 with SMTP id
- 956f58d0204a3-6614f837d12mr1361907d50.61.1780997586587; Tue, 09 Jun 2026
- 02:33:06 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1780997984; x=1781602784;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ojAoOIr8suU/Ii90bmf7iq53dfd/rns61I5bJ24u/Ns=;
+        b=JYTHzai+3m2RxQ1j1VV6hcobyhwyDdsDjMuMtf1JIH8q21smxdraMHdfwGCzC/EtbL
+         tJ1ZXJNZQUjIHtFMcBNuYytpqYmPlPBHwWPUcTHQ6cFitI4jRtYbOhVMnOAv9eT/2nKq
+         XVjLho2OtkfUFtmffdyDWXGH+bS5r8tps33fyaUj3f3AkUGmpKWhsDZidY7GZ1IVNPsX
+         ddeNUT89glnuKVItivPVHjOxKTuuQCcRA5pnkv2bP74sxos9LrZMvpg0HeEqV3KK9bzl
+         ZOkHuxjQDS01bAQvpGNhQ5CvFaXxBkjKKinMQ/Wz7E49zb3HXk8RxnsnvIGOHVtFJNLj
+         1AqA==
+X-Forwarded-Encrypted: i=1; AFNElJ/uOrHC40NQQAhoVHDAgx/Je+QEhyzWLIRO/kq+Jg8uy/s9SuT6dCw+Ds3ZoR8Se1mgYbTqCTlIuhE=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yynf3IeRPTQvGbl0HbM9D76ALhIM6o7GsB/DSiSqzcb64H0uEYI
+	qXWyeXYDRQwZMk1YAhjcBrh15xCGEtcYDzvr/8mgYVn5XgSjJ9r589Dtu5u+SA==
+X-Gm-Gg: Acq92OEqXinKR5vzr2lkBeTY6g3YC29ABWhdVdJHMqc3cFKScOo6PstFchhN5HmRGW5
+	Y4OQBoa2nxaFIgtHYQSWvqpQK75muRVUJUJ+iOnkIWIxme6Ng5JnYnbV4O0P53b118jk/ZfnXRX
+	t6PPgUlZ5Pq2yeXaEPr7kbfYUkpqc5Caz4TbmJFwc4YEP8HsxbTFt5noaMoS3hp7sg5k2uTk4ye
+	pQbeIugmSvgK7+DGpxMFrPQbu+PxukrUPDRoY2Q73ooFkr8ybyi+7GZ0CGHGDUrJn7S6ZBmgv21
+	gs7pmzVIkYvmQZYkpZHngws6tsZ/TWQL1uWK90gKocDJbUg7pLujqCjLRbPwItN9QDG9znD+U7X
+	wDFInTUZL6jjMtUT1YbMFdWh6RzfqgzrXMZ9ovQkfbC2toBJpfOS+K2NW/sCrOutDp9T8ddDWQf
+	3IWxgahaWYzfO5Z0WCBFF3dvS5xYqgY187ymrZVKXLUS64+Nr2XSaV9TlYudymICQNT5FSNepJM
+	PGcDzJw0WK5WvUc
+X-Received: by 2002:a05:6402:27d4:b0:68c:33e9:bf71 with SMTP id 4fb4d7f45d1cf-68fa4e18fafmr9061861a12.11.1780997983688;
+        Tue, 09 Jun 2026 02:39:43 -0700 (PDT)
+Message-ID: <7f8679f1-7bd9-4c48-a112-edc83d95d196@gmail.com>
+Date: Tue, 9 Jun 2026 11:39:42 +0200
 MIME-Version: 1.0
-References: <20260603130603.776452-1-frediano.ziglio@cloud.com>
- <20260603130603.776452-6-frediano.ziglio@cloud.com> <ea002cf0-c2cc-4612-af61-8dba7887af61@citrix.com>
-In-Reply-To: <ea002cf0-c2cc-4612-af61-8dba7887af61@citrix.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Tue, 9 Jun 2026 10:32:55 +0100
-X-Gm-Features: AVVi8CdYce_dYauxplLOGzNu3qF7eaHexBFIW7AJM6dWFjJkN-W8fi8tQS2vs80
-Message-ID: <CAHt6W4e6=uqGHqo+4bdQhZfKh4uqc7=g3iRiAJV4Z_j2MNvxMA@mail.gmail.com>
-Subject: Re: [PATCH v4 05/16] libs/guest: allocate various migration arrays
- just once
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel@lists.xenproject.org, =?UTF-8?B?RWR3aW4gVMO2csO2aw==?= <edwin.torok@citrix.com>, 
-	Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	Teddy Astie <teddy.astie@vates.tech>, Anthony PERARD <anthony.perard@vates.tech>, 
-	Juergen Gross <jgross@suse.com>, Frediano Ziglio <frediano.ziglio@citrix.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-720697/1780997588-AA76A161-200F8037/0/0
-X-purgate-type: clean
-X-purgate-size: 3111
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH for-4.22] xen/pdx: fix off-by-one index in offset mask
+ calculation
+To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <20260609085322.92856-1-roger.pau@citrix.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <20260609085322.92856-1-roger.pau@citrix.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-33051d/1780997984-3B96D938-39F071F6/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 858
 
-On Mon, 8 Jun 2026 at 16:37, Andrew Cooper <andrew.cooper3@citrix.com> wrot=
-e:
->
-> On 03/06/2026 2:05 pm, Frediano Ziglio wrote:
-> > From: Edwin T=C3=B6r=C3=B6k <edwin.torok@citrix.com>
-> >
-> > Allocate these array just once at the start of migration,
-> > using the maximum batch size, and free them at the end.
-> >
-> > Signed-off-by: Edwin T=C3=B6r=C3=B6k <edwin.torok@citrix.com>
-> > Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
-> > --
-> > Changes since v2:
-> > - change prefix in subject.
-> >
-> > Changes since v3:
-> > - fix comment style
->
-> These are intentionally freed/reallocated so valgrind can find overflows.
->
-> ~Andrew
 
-I understand the value of checking for possible overflow. But this
-should not make the programs less efficient.
 
-What about something like this (not tested, just to get the gist):
+On 6/9/26 10:53 AM, Roger Pau Monne wrote:
+> Adjust the mask calculation in case the last range is merged with the
+> previous one, as then the mask must be calculated from the previous range,
+> which the current one has been merged into.
+> 
+> Instead of fixing the off-by-one in place, move the calculation of the bit
+> change mask to the next loop, after the ranges have been merged.  This
+> simplifies the logic by consolidating mask calculation in a single place,
+> possibly making it less error prone in the future.
+> 
+> Also add a test case that triggers the bug being fixed by this commit.
+> 
+> Fixes: c5c45bcbd6a1 ("pdx: introduce a new compression algorithm based on region offsets")
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 
-#if CONFIG_DEBUG && valgrind && whatever
-#define MEM_NOACCESS_BUFFER(name, size) uint8_t name[size];
-#define MEM_NOACCESS_INIT(field) VALGRIND_MAKE_MEM_NOACCESS(field,
-sizeof(field))
-#define MEM_UNDEFINED_INIT(field) VALGRIND_MAKE_MEM_UNDEFINED(field,
-sizeof(field))
-#else
-#define MEM_NOACCESS_BUFFER(name, size)
-#define MEM_NOACCESS_INIT(field) do {} while(0)
-#define MEM_UNDEFINED_INIT(field) do {} while(0)
-#endif
-...
+Release-Acked-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
-struct xc_sr_context_save_buffers
-{
-    MEM_NOACCESS_BUFFER(na0, 16)
-    xen_pfn_t batch_pfns[MAX_BATCH_SIZE];
-    MEM_NOACCESS_BUFFER(na1, 16)
-    xen_pfn_t mfns[MAX_BATCH_SIZE];
-    MEM_NOACCESS_BUFFER(na2, 16)
-    xen_pfn_t types[MAX_BATCH_SIZE];
-    MEM_NOACCESS_BUFFER(na3, 16)
-    void *local_pages[MAX_BATCH_SIZE];
-    MEM_NOACCESS_BUFFER(na4, 16)
-    struct iovec iov[MAX_BATCH_SIZE + 2]; /* Headers + data. */
-    MEM_NOACCESS_BUFFER(na5, 16)
-    uint64_t rec_pfns[MAX_BATCH_SIZE];
-    MEM_NOACCESS_BUFFER(na6, 16)
-};
-...
+Thanks.
 
-    ctx->save.buffers =3D calloc(1, sizeof(*ctx->save.buffers));
-
-    if ( !dirty_bitmap || !ctx->save.deferred_pages ||
-!ctx->save.buffers || !dest_buf )
-    {
-        ERROR("Unable to allocate memory for dirty bitmaps, deferred pages"
-              " and various batch buffers");
-        rc =3D -1;
-        errno =3D ENOMEM;
-        goto err;
-    }
-    ctx->save.batch_pfns =3D ctx->save.buffers->batch_pfns;
-    MEM_NOACCESS_INIT(ctx->save.buffers->na0);
-    MEM_NOACCESS_INIT(ctx->save.buffers->na1);
-    MEM_NOACCESS_INIT(ctx->save.buffers->na2);
-    MEM_NOACCESS_INIT(ctx->save.buffers->na3);
-    MEM_NOACCESS_INIT(ctx->save.buffers->na4);
-    MEM_NOACCESS_INIT(ctx->save.buffers->na5);
-    MEM_NOACCESS_INIT(ctx->save.buffers->na6);
-...
-
-    /* Mfns of the batch pfns. */
-    MEM_UNDEFINED_INIT(ctx->save.buffers->mfns);
-    mfns =3D ctx->save.buffers->mfns;
-    /* Types of the batch pfns. */
-    MEM_UNDEFINED_INIT(ctx->save.buffers->types);
-    types =3D ctx->save.buffers->types;
-    /* Pointers to locally allocated pages.  Need freeing. */
-    MEM_UNDEFINED_INIT(ctx->save.buffers->local_pages);
-    local_pages =3D ctx->save.buffers->local_pages;
-    memset(local_pages, 0, sizeof(*local_pages) * nr_pfns);
-...
-
-Frediano
+~ Oleksii
 
