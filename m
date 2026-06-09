@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABC34CD8CA4
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2026 09:40:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1332569.1595034 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17386CD8CA4
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2026 09:57:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1332580.1595044 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wWsw0-0001cr-0N; Tue, 09 Jun 2026 09:39:48 +0000
+	id 1wWtDD-00062x-Dm; Tue, 09 Jun 2026 09:57:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1332569.1595034; Tue, 09 Jun 2026 09:39:47 +0000
+Received: by outflank-mailman (output) from mailman id 1332580.1595044; Tue, 09 Jun 2026 09:57:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wWsvz-0001ck-TI; Tue, 09 Jun 2026 09:39:47 +0000
-Received: by outflank-mailman (input) for mailman id 1332569;
- Tue, 09 Jun 2026 09:39:45 +0000
+	id 1wWtDD-00062q-9n; Tue, 09 Jun 2026 09:57:35 +0000
+Received: by outflank-mailman (input) for mailman id 1332580;
+ Tue, 09 Jun 2026 09:57:34 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wWsvx-0001Oa-PI
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2026 09:39:45 +0000
+ (envelope-from <freddy77@gmail.com>) id 1wWtDC-000602-IC
+ for xen-devel@lists.xenproject.org; Tue, 09 Jun 2026 09:57:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wWsvx-00Fksd-5R
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2026 11:39:45 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wWtDB-00Fooj-Ts
+ for xen-devel@lists.xenproject.org; Tue, 09 Jun 2026 11:57:33 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a27df60-2eae-0a2a0a5409dd-0a2a4504d37e-6
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 11:39:45 +0200
-Received: from [209.85.128.172] (helo=mail-yw1-f172.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a27e37c-2eae-0a2a0a5409dd-0a2a450785dc-34
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 11:57:33 +0200
+Received: from [74.125.224.45] (helo=mail-yx1-f45.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a27df5f-1dec-0a2a45040019-d15580acbde9-3
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 11:39:44 +0200
-Received: by mail-yw1-f172.google.com with SMTP id
- 00721157ae682-7dc67a5e102so55083427b3.1
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 02:39:44 -0700 (PDT)
+ id 6a27e38c-229c-0a2a45070019-4a7de02de5c4-3
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 11:57:33 +0200
+Received: by mail-yx1-f45.google.com with SMTP id
+ 956f58d0204a3-66077c46c5cso4713584d50.1
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 02:57:33 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,283 +49,334 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1780997983; cv=none;
+ARC-Seal: i=1; a=rsa-sha256; t=1780999052; cv=none;
         d=google.com; s=arc-20240605;
-        b=RUwvEXhwf0uRe9/LOeinJi23noz1hbuee2tq8T6HM+vVWQnjjRYF1yDcqyPP9lPEOS
-         NFBmgC7Bs1ztrtnQNBpFINfaJFUvUqHMMhDN5ZzFrE3fkHEcCRMsqQQ9sriqCQN4nTi3
-         0otdJscLwpDW4aHIwU1nkDNqP7uITywbGOQ321gvbQHFFY1L0uuu8/5+AeZXCWobp675
-         O7BptzBtQZzE2/NXlcoYJ490Ed8yZItW+qQHm2TiPoBfEROCEoZ+AVjU3KN6T6n8fSpj
-         Y4fGhI9+47jtMLu2pIwDLTIFjOHCxx2Z+2zFrreU4sBGTK335PFI7xfxrlhSJ2veFU+u
-         1YoA==
+        b=hCloAgWDiKCJiQpUevjX1dQV2kyo68mCkKCi99Sqx1M1cLf5l+A0igNQsAn+8WvsP7
+         NIHn3zGFZ2FUJ5E7GTyzKJZjd4HUIaSLQ0H3s1DDi1ONyjQ+gR/oLA8l/JnrDySK7ly/
+         Tj9LUj2MhjgLeh2Nk2/+q5U209TEKGfH+7Qq/CVSHp9bg4vrGRXSzEFye7FelptCob3G
+         6eDRJlJXf6m8l5vgUb2S31qp9LM54atHMlW56B8cifCXYs/EyftISZRAVX6vFiyTJlEV
+         Lm8fQR25KMNsCOgfazwS9tWtWG/9Z+ncB/5S+1mRQytan8faFT70sACuSaI/HL9MHrI/
+         zVeg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=qtpgEoT0seO/HmrH1pfkLOu7AtTLRaIlQWkia+WVbb8=;
-        fh=Maj2tFXzf7hkAbNBLtIEwFqhP6OQ+of5Ct/9bp51RJY=;
-        b=fBrmdra4GQo8cqqdHOAhlcFm0xZZt9Vw61rgHc6VV5/Kf5noj9PxBEXGX/RcfRIVt+
-         1zgoTz4+kKXQkKYAuetvBeTK0qA8FrvBa4pCBy/7z+bV3aYMhyzLKVZfnVqNIUSRwkjQ
-         E4TVCVEIfjRM2YXqaCcnGoWwsP8e4gtZ9VksnD3rn4mWvPCg9uIE5yM6xsaPv4Pc3p7o
-         feL+JfysZetPTsrf/7Vy6lt1O8mW16uOsXJsVE9/9TVi7UUh1oWa+7Qe2hZZsGsy7jsv
-         JAabS56Au4oj4/nJ1CsGhlAVLDW/OCR6dBnayX01SiVr6lDH6u0Jo2QVt1kS9Mb6/nDs
-         NSJw==;
+        bh=iSJ3S61A5YYvehrw2IUj0tAyNXo2un6snsejc7TM+80=;
+        fh=/+lVIvc/fLRLiJZVkidsbGp56ebj8ErFVA+AxgRIuZo=;
+        b=h+3u1vOwEQ+g5un5hqg3hKyEjI1uCA/9T9pEa0V1gT/yQLCfKOQw4jp2s7lk+WXwH2
+         Tfsde029K8v9FvJyLpvAysox+iP+secMTJaDtiSfxWOgtiZUjUHhdDQlVy4u2de3fQ4H
+         JvcLECY6aOxFSeoyFMMnhZ81yA7ry+ZmgpOx0AfO7N+2xKxbdy2yTp/8xB/oLw1g03mx
+         29177sRGxxIoQplA7bzgdJoaEGOYi89bxUA9oWQ0otTRbw/+8CiaiYDb6ddZzWO4M3po
+         Dtn5jxE0MP/WHBZpodRlBRbwUbDDa2ipYccG4r+Cw1MiWnogkauUCOfOn+DJLSUDNOad
+         u65A==;
         darn=lists.xenproject.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780997983; x=1781602783; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1780999052; x=1781603852; darn=lists.xenproject.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=qtpgEoT0seO/HmrH1pfkLOu7AtTLRaIlQWkia+WVbb8=;
-        b=a5tBzURnWeBgGwfyZ7BVr7Qw/pl+qoQzhArDcPGX8WDZYC5MPUqeVzqsP80zAiI2/+
-         ntE1wlnH/NQxyRASBGOt6EN1XNpga7+K7/LUXsBw7QacvuXFgYiY+9hz4s9y3X0cIkFL
-         q/FUvwVXajYkXyYfng6vggVwLAzqrxfJVFPaL85wgXfHNr5jC1lGSSRN2/eue7B+3cjQ
-         WMA7NuXIB8uPoBifJbMd2nKm/36UYIczja+JgPuCdaKxGIHXyoaNwBlXNXzctQA9Dumi
-         /24k4sTqisL97UCpHSACTkcZHsrD08M49tVBSTq1tFqKycvr3Dm0BvIujBLkrEA3MLSr
-         FXNA==
+        bh=iSJ3S61A5YYvehrw2IUj0tAyNXo2un6snsejc7TM+80=;
+        b=YhUzOZo1FQ7xa75HVkGJJ+gj19zHI6yKtN9qQtfOKpX8Yx0/Cmjdl90/L7TBrT+aoJ
+         6oHtpFLYklEhtiWVjXUdAPYJb2pBX9g9UlgRsXXYGwuWRdz26DzGUVVAHDPocuQe7L3h
+         gNCRUKqHee7nfwqFtbH3rvdr9yzvkH44BSGRrwyXbN9ZCF6iGHkD+qkaSrialM4/9PC+
+         at8qJZonwydS7FxxbsNFQiZsat0cNBrxOuS4pMj8DaQiEGdn03m1fU9sFqXi2QPmBClC
+         bQKdFH0jqCsLTmInz3wdlPairQFW/LJ8RPZZQq0nXTWKKrg5Y2Q3AyPPMTsZvQabAmWn
+         3SeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780997983; x=1781602783;
+        d=1e100.net; s=20251104; t=1780999052; x=1781603852;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=qtpgEoT0seO/HmrH1pfkLOu7AtTLRaIlQWkia+WVbb8=;
-        b=WVk+/0vQcefNME20Z42v9HuwIm2M8yfp0cg0dVbutgjyV1Fj7ijbawuQadFOHardFJ
-         50NpqTykOANu5qBOutM9OicFyEhs5cvNa5R/YYRF/GLZDzzOTFz37qS9LHRX2nBt/aD9
-         ZmrqYZQedobx/hCsjkwnhCmflnrpKYtVFolvZ00c2QLdvJ2PgKIYXb+oXsATMYOGe98f
-         b6SjS41QDZ+I7+iqOiB2sH5ei2/w6rehsjaJN58UQP/PToJSfILDkUf6QqR0J9DoQ2kf
-         JT5fkRWfrIazWzjrGZy7aQFr5qPxw31sZHr8yeOYh8a4kAbvsY2zcdsFzNMHLOgSAdYj
-         Dkbw==
-X-Gm-Message-State: AOJu0YyZSEKDhxP0Nx2FjlQYfQomTb8E9ivSZ2OM5Oqvl6Ry2lwShaG/
-	GWBylRlz6imtPGCjrClIaHFidn0B0QSd5ksEUmCyRPMaGeqfXdd60MSqnXWAKEOCi8N+CRGcidh
-	pGwgynVh5zgeI0goZSJq3os7M7bDd8pI=
-X-Gm-Gg: Acq92OGmWp8OvheShaQr133c9HqnQRA8nWux5PVnnNljJ793ciq4ovW5iObsHGKyU0G
-	mSUN0PRsyfCJnnU3PqpHM/vhlPdH0ny1/fGljKBMCn5TKtAMEYfyCydPpAWiHIL2Eq+W78JrGYU
-	V7zmRfgv+sKwnpDLTmlKGv73HU1cVs/howgUjUjuADKN1Rccx/QOAWe0IUZjhWLgqnc9LrhhYuv
-	noclFQU+rS02BFgTsFV0IMDwN9/CiR6rY+ROuJrJL2FeSiKouIVOjlIdyp/1OrpZcBmgy/NoyTC
-	n67Wmh0Gg5LW73PzQXQ+iveussMbg7SVHP4UANF5mEr7xbDJ
-X-Received: by 2002:a53:d845:0:b0:660:56ee:ec03 with SMTP id
- 956f58d0204a3-66106e5b480mr13556421d50.21.1780997983156; Tue, 09 Jun 2026
- 02:39:43 -0700 (PDT)
+        bh=iSJ3S61A5YYvehrw2IUj0tAyNXo2un6snsejc7TM+80=;
+        b=Cek1gphDt6SUKElBX/muKT6g42Imb/e8KkGvYBP/38uComDsuYhUs8B8kU0eoFHxcB
+         AvmDfB/0MRvpJP7cVwXwtZ/dChJVsjVvEt/YN8BUtiKKHz1rXzYpYn3SXd7yoHReZVCs
+         0JdLoAa6KbUPfqLQ8X0qDIRjchnNv3Kx09DeYdWAf39cE5TdAPx6wFwKUwgd8O6iQjEU
+         gtpCWwT0kty4/KcAw2d6CkCWYvDzDNfKjJIB0BmqP1eC2LlCGJjtA0C8rgha+zy0fNXe
+         Hmakq1PTY9hHfp/CQWYuiRacBRisJ22kRXraAZaUeSAP7Q3h3+iZHehX6xTUs4iNPLEI
+         R43w==
+X-Gm-Message-State: AOJu0YwmzpauJjW8vTnK1xniJnlRn74GwQGP0aEehwHiUkKpdd/92+QI
+	0x7qJvR/mzH92h0W4manITrL5oUzawtuKvT6DUTfZxXVmATjKqu2KTZmFdn60ErOlmP+pEvorqs
+	3bHfzE5sBh2v7S4DmfJAhwMQyjgKGVxk=
+X-Gm-Gg: Acq92OGOrAgTcueIBgfJJ1I3cZB5eXHZVPh+AWUnnUbbSFowR6R7CvX3RfqxMo7k4us
+	gMu+xoyEHLoXc7xGTpdMnL6YB50wyiphZQh00b0o73RyE4JDjlAVHbUp255YcHQk0IQib+WfwGo
+	+Kp4CTIS4mmhUOW/G4vBYNDVidaSEqQd9qvOlPBLcT9+wQb2SpyYFiImy04xmQ1VEwdjqbcTBl1
+	AycgzKyjuejrf9sh4A3G629rm0Da9BjtyHhp8LD4wPMtgb8P/RTUJ1RSHToKDd0zjQMU3RzoImy
+	iUJGYtmyH7RX6vMepChdTBQabfqtntjPBA6886oXSWWhW9Lv
+X-Received: by 2002:a05:690e:480b:b0:657:a0f4:ac1d with SMTP id
+ 956f58d0204a3-66106dda5abmr12463754d50.12.1780999051857; Tue, 09 Jun 2026
+ 02:57:31 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260603130603.776452-1-frediano.ziglio@cloud.com>
- <20260603130603.776452-6-frediano.ziglio@cloud.com> <aibkcDCjyeK_0lMK@macbook.local>
-In-Reply-To: <aibkcDCjyeK_0lMK@macbook.local>
+ <20260603130603.776452-13-frediano.ziglio@cloud.com> <1780930777.8631fc262581453bbf619ec5b2062170.19ea7bf10cd000701b@vates.tech>
+In-Reply-To: <1780930777.8631fc262581453bbf619ec5b2062170.19ea7bf10cd000701b@vates.tech>
 From: Frediano Ziglio <freddy77@gmail.com>
-Date: Tue, 9 Jun 2026 10:39:32 +0100
-X-Gm-Features: AVVi8CfP-7f2FMbqGQimolonw83x7Lg9h8l45gU05P7-lt8wz4AsJQSUluXRdWc
-Message-ID: <CAHt6W4dOQAvEKBH1auotU8+f+NBc8sQmJOgU+0N13=6MHrhHLQ@mail.gmail.com>
-Subject: Re: [PATCH v4 05/16] libs/guest: allocate various migration arrays
- just once
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org, =?UTF-8?B?RWR3aW4gVMO2csO2aw==?= <edwin.torok@citrix.com>, 
-	Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	Teddy Astie <teddy.astie@vates.tech>, Anthony PERARD <anthony.perard@vates.tech>, 
-	Juergen Gross <jgross@suse.com>, Frediano Ziglio <frediano.ziglio@citrix.com>
+Date: Tue, 9 Jun 2026 10:57:20 +0100
+X-Gm-Features: AVVi8Cf1oads9qcl3pwOQ2iF8_XqPzFeY9pbJ-IBrXH-Jb3dnOSmMbLLDLrZoyo
+Message-ID: <CAHt6W4c_E3wmV=KNG-_4FNgX9Wq4s7t-RoXzpf6NWPj7s0oH3A@mail.gmail.com>
+Subject: Re: [PATCH v4 12/16] xen: implement new foreign copy hypercall
+To: Teddy Astie <teddy.astie@vates.tech>
+Cc: xen-devel@lists.xenproject.org, 
+	Frediano Ziglio <frediano.ziglio@citrix.com>, Jan Beulich <jbeulich@suse.com>, 
+	Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Anthony PERARD <anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-ebf023/1780997984-2AD643FF-ADDF39B6/0/0
+X-purgate-ID: tlsNG-ef75cf/1780999053-0AF76C48-C48AA6C0/0/0
 X-purgate-type: clean
-X-purgate-size: 7367
+X-purgate-size: 8419
 
-On Mon, 8 Jun 2026 at 16:49, Roger Pau Monn=C3=A9 <roger.pau@citrix.com> wr=
-ote:
+On Mon, 8 Jun 2026 at 15:59, Teddy Astie <teddy.astie@vates.tech> wrote:
 >
-> On Wed, Jun 03, 2026 at 02:05:52PM +0100, Frediano Ziglio wrote:
-> > From: Edwin T=C3=B6r=C3=B6k <edwin.torok@citrix.com>
+> Le 03/06/2026 =C3=A0 15:08, Frediano Ziglio a =C3=A9crit :
+> > From: Frediano Ziglio <frediano.ziglio@citrix.com>
 > >
-> > Allocate these array just once at the start of migration,
-> > using the maximum batch size, and free them at the end.
+> > Add a sub hypercall to __HYPERVISOR_memory_op to allow to
+> > read/write memory from/to a foreign domain.
 > >
-> > Signed-off-by: Edwin T=C3=B6r=C3=B6k <edwin.torok@citrix.com>
 > > Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
->
-> Jan made a comment about this patch (and how it related to a still
-> pending patch of his):
->
-> https://lore.kernel.org/xen-devel/e3f22fa6-c497-4afc-9498-12449548acfd@su=
-se.com/
->
-> That is still unresolved AFAICT.
->
-> > --
-> > Changes since v2:
-> > - change prefix in subject.
-> >
-> > Changes since v3:
-> > - fix comment style
 > > ---
-> >  tools/libs/guest/xg_sr_common.h | 13 +++++++
-> >  tools/libs/guest/xg_sr_save.c   | 66 +++++++++++++--------------------
-> >  2 files changed, 39 insertions(+), 40 deletions(-)
+> >   xen/common/memory.c         | 133 +++++++++++++++++++++++++++++++++++=
++
+> >   xen/include/public/memory.h |  40 ++++++++++-
+> >   2 files changed, 172 insertions(+), 1 deletion(-)
 > >
-> > diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_c=
-ommon.h
-> > index f1573aefcb..82549b5589 100644
-> > --- a/tools/libs/guest/xg_sr_common.h
-> > +++ b/tools/libs/guest/xg_sr_common.h
-> > @@ -209,6 +209,18 @@ static inline int update_blob(struct xc_sr_blob *b=
-lob,
-> >      return 0;
-> >  }
+> > diff --git a/xen/common/memory.c b/xen/common/memory.c
+> > index 3672bda025..6a2d9c3190 100644
+> > --- a/xen/common/memory.c
+> > +++ b/xen/common/memory.c
+> > @@ -1545,6 +1545,132 @@ static int acquire_resource(
+> >       return rc;
+> >   }
 > >
-> > +struct xc_sr_context_save_buffers
+> > +/*
+> > + * The "noinline" qualifier avoid the compiler to create a large funct=
+ion
+> > + * consuming quite a lot of stack.
+> > + */
+> > +static int noinline mem_foreigncopy(
+> > +    XEN_GUEST_HANDLE_PARAM(xen_foreigncopy_t) arg)
 > > +{
-> > +    xen_pfn_t batch_pfns[MAX_BATCH_SIZE];
-> > +    xen_pfn_t mfns[MAX_BATCH_SIZE];
-> > +    xen_pfn_t types[MAX_BATCH_SIZE];
-> > +    int errors[MAX_BATCH_SIZE];
->
-> FWIW: I would possibly place errors at the end of the structure.  It
-> seems more natural and is the only array that has 4 byte alignment
-> instead of 8 (on 64bits at least).
->
-
-Moved. It disappears later in "libs/guest: finalize PoC" but won't hurt.
-
-> > +    void *guest_data[MAX_BATCH_SIZE];
-> > +    void *local_pages[MAX_BATCH_SIZE];
-> > +    struct iovec iov[MAX_BATCH_SIZE + 2]; /* Headers + data. */
-> > +    uint64_t rec_pfns[MAX_BATCH_SIZE];
-> > +};
+> > +    struct domain *d, *const currd =3D current->domain;
+> > +    xen_foreigncopy_t copy;
+> > +    int rc, direction;
 > > +
-> >  struct xc_sr_context
-> >  {
-> >      xc_interface *xch;
-> > @@ -244,6 +256,7 @@ struct xc_sr_context
-> >              unsigned long *deferred_pages;
-> >              unsigned long nr_deferred_pages;
-> >              xc_hypercall_buffer_t dirty_bitmap_hbuf;
-> > +            struct xc_sr_context_save_buffers *buffers;
-> >          } save;
+> > +    if ( !arch_acquire_resource_check(currd) )
+> > +        return -EACCES;
+> > +
+> > +    if ( copy_from_guest(&copy, arg, 1) )
+> > +        return -EFAULT;
+> > +
+> > +    if ( copy.flags & ~1u )
+> > +        return -EINVAL;
+> > +
+> > +    direction =3D copy.flags & XENMEM_foreigncopy_direction;
+> > +
+> > +    if ( copy.nr_frames =3D=3D 0 )
+> > +        return 0;
+> > +
+> > +    rc =3D rcu_lock_remote_domain_by_id(copy.domid, &d);
+> > +    if ( rc )
+> > +        return rc;
+> > +
+> > +    /*
+> > +     * Check we are allowed to map and access these foreign pages.
+> > +     */
+> > +    rc =3D xsm_map_gmfn_foreign(XSM_TARGET, currd, d);
+> > +    if ( rc )
+> > +        goto out;
+> > +
+> > +    do {
+> > +        /*
+> > +         * Arbitrary size.  Not too much stack space, and a reasonable=
+ stride
+> > +         * for continuation checks.
+> > +         */
+> > +        xen_pfn_t gfn_list[32];
+> > +        unsigned int todo =3D MIN(ARRAY_SIZE(gfn_list), copy.nr_frames=
+);
+> > +
+> > +        rc =3D -EFAULT;
+> > +        if ( copy_from_guest(gfn_list, copy.frame_list, todo) )
+> > +            goto out;
+> > +
+> > +        for ( unsigned i =3D 0; i < todo; i++ )
+> > +        {
+> > +            struct page_info *foreign_page;
+> > +            void *foreign;
+> > +            p2m_type_t p2mt;
+> > +
+> > +            foreign_page =3D get_page_from_gfn(d, gfn_list[i], &p2mt, =
+P2M_ALLOC);
+> > +
+> > +            if ( unlikely(p2mt !=3D p2m_ram_rw
+> > +#ifdef CONFIG_X86
+> > +                 && p2mt !=3D p2m_ram_logdirty
+> > +#endif
+> > +                 ) && foreign_page )
+> > +            {
+> > +                put_page(foreign_page);
+> > +                foreign_page =3D NULL;
+> > +            }
+> > +            if ( unlikely(!foreign_page) )
+> > +            {
+> > +                gdprintk(XENLOG_WARNING,
+> > +                         "Error accessing foreign mfn %" PRI_mfn "\n",
+> > +                         gfn_list[i]);
+> > +                rc =3D -EINVAL;
+> > +                copy.nr_frames -=3D i;
+> > +                guest_handle_add_offset(copy.frame_list, i);
+> > +                goto out;
+> > +            }
+> > +
+> > +            /* A page is dirtied when it's being copied to. */
+> > +            if ( direction =3D=3D XENMEM_foreigncopy_to )
+> > +                paging_mark_dirty(d, page_to_mfn(foreign_page));
+> > +
+> > +            foreign =3D map_domain_page(page_to_mfn(foreign_page));
+> > +            if ( direction =3D=3D XENMEM_foreigncopy_from )
+> > +                rc =3D copy_to_guest(copy.buffer, foreign, PAGE_SIZE);
+> > +            else
+> > +                rc =3D copy_from_guest(foreign, copy.buffer, PAGE_SIZE=
+);
+> > +            unmap_domain_page(foreign);
+> > +            put_page(foreign_page);
+> > +
+> > +            if ( unlikely(rc) )
+> > +            {
+> > +                gdprintk(XENLOG_WARNING,
+> > +                         "Error copying to mfn %" PRI_mfn "\n", gfn_li=
+st[i]);
+> > +                copy.nr_frames -=3D i;
+> > +                guest_handle_add_offset(copy.frame_list, i);
+> > +                goto out;
+> > +            }
+> > +
+> > +            guest_handle_add_offset(copy.buffer, PAGE_SIZE);
+> > +        }
+> > +
+> > +        copy.nr_frames -=3D todo;
+> > +        guest_handle_add_offset(copy.frame_list, todo);
+> > +
+> > +        if ( copy.nr_frames && hypercall_preempt_check() )
+> > +        {
+> > +            rc =3D hypercall_create_continuation(
+> > +                __HYPERVISOR_memory_op, "lh", XENMEM_foreigncopy, arg)=
+;
+> > +            goto out;
+> > +        }
+> > +    } while ( copy.nr_frames );
+> > +
+> > +    rc =3D 0;
+> > +
+> > + out:
+> > +    rcu_unlock_domain(d);
+> > +
+> > +    /* Update in all cases, it allows the caller to know how many
+> > +     * frames were successfully copied and the continuation to
+> > +     * continue correctly.
+> > +     */
+> > +    if ( copy_to_guest(arg, &copy, 1) )
+> > +        rc =3D -EFAULT;
+> > +
+> > +    return rc;
+> > +}
+> > +
+> >   long do_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg=
+)
+> >   {
+> >       struct domain *d, *curr_d =3D current->domain;
+> > @@ -2012,6 +2138,13 @@ long do_memory_op(unsigned long cmd, XEN_GUEST_H=
+ANDLE_PARAM(void) arg)
+> >               start_extent);
+> >           break;
 > >
-> >          struct /* Restore data. */
-> > diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_sav=
-e.c
-> > index 8c4e760f8d..7d8055a3f9 100644
-> > --- a/tools/libs/guest/xg_sr_save.c
-> > +++ b/tools/libs/guest/xg_sr_save.c
-> > @@ -86,16 +86,16 @@ static int write_checkpoint_record(struct xc_sr_con=
-text *ctx)
-> >  static int write_batch(struct xc_sr_context *ctx)
-> >  {
-> >      xc_interface *xch =3D ctx->xch;
-> > -    xen_pfn_t *mfns =3D NULL, *types =3D NULL;
-> > +    xen_pfn_t *mfns, *types;
-> >      void *guest_mapping =3D NULL;
-> > -    void **guest_data =3D NULL;
-> > -    void **local_pages =3D NULL;
-> > -    int *errors =3D NULL, rc =3D -1;
-> > +    void **guest_data;
-> > +    void **local_pages;
-> > +    int *errors, rc =3D -1;
-> >      unsigned int i, p, nr_pages =3D 0, nr_pages_mapped =3D 0;
-> >      unsigned int nr_pfns =3D ctx->save.nr_batch_pfns;
-> >      void *page, *orig_page;
-> > -    uint64_t *rec_pfns =3D NULL;
-> > -    struct iovec *iov =3D NULL; int iovcnt =3D 0;
-> > +    uint64_t *rec_pfns;
-> > +    struct iovec *iov; int iovcnt =3D 0;
-> >      struct {
-> >          struct xc_sr_rhdr rec;
-> >          struct xc_sr_rec_page_data_header page_data;
-> > @@ -105,26 +105,24 @@ static int write_batch(struct xc_sr_context *ctx)
-> >      };
+> > +    case XENMEM_foreigncopy:
+> > +        if ( unlikely(start_extent) )
+> > +            return -EINVAL;
+> > +
+> > +        rc =3D mem_foreigncopy(guest_handle_cast(arg, xen_foreigncopy_=
+t));
+> > +        break;
+> > +
+> >       default:
+> >           rc =3D arch_memory_op(cmd, arg);
+> >           break;
+> > diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
+> > index bd9fc37b52..b48d1f378f 100644
+> > --- a/xen/include/public/memory.h
+> > +++ b/xen/include/public/memory.h
+> > @@ -740,7 +740,45 @@ struct xen_vnuma_topology_info {
+> >   typedef struct xen_vnuma_topology_info xen_vnuma_topology_info_t;
+> >   DEFINE_XEN_GUEST_HANDLE(xen_vnuma_topology_info_t);
 > >
-> >      assert(nr_pfns !=3D 0);
-> > +    assert(nr_pfns <=3D MAX_BATCH_SIZE);
-> > +    assert(ctx->save.buffers);
-> >
-> >      /* Mfns of the batch pfns. */
-> > -    mfns =3D malloc(nr_pfns * sizeof(*mfns));
-> > +    mfns =3D ctx->save.buffers->mfns;
-> >      /* Types of the batch pfns. */
-> > -    types =3D malloc(nr_pfns * sizeof(*types));
-> > +    types =3D ctx->save.buffers->types;
-> >      /* Errors from attempting to map the gfns. */
-> > -    errors =3D malloc(nr_pfns * sizeof(*errors));
-> > +    errors =3D ctx->save.buffers->errors;
-> >      /* Pointers to page data to send.  Mapped gfns or local allocation=
-s. */
-> > -    guest_data =3D calloc(nr_pfns, sizeof(*guest_data));
-> > +    guest_data =3D ctx->save.buffers->guest_data;
-> > +    memset(guest_data, 0, sizeof(*guest_data) * nr_pfns);
-> >      /* Pointers to locally allocated pages.  Need freeing. */
-> > -    local_pages =3D calloc(nr_pfns, sizeof(*local_pages));
-> > +    local_pages =3D ctx->save.buffers->local_pages;
-> > +    memset(local_pages, 0, sizeof(*local_pages) * nr_pfns);
+> > -/* Next available subop number is 29 */
+> > +/*
+> > + * Copy memory from/to a given domain.
+> > + */
+> > +#define XENMEM_foreigncopy 29
+> > +struct xen_foreigncopy {
+> > +    /* IN - The domain whose resource is to be copied. */
+> > +    domid_t domid;
+> > +
+> > +    /* IN - Flags. */
+> > +#define XENMEM_foreigncopy_from 0
+> > +#define XENMEM_foreigncopy_to 1
+> > +#define XENMEM_foreigncopy_direction 1
+> > +    uint16_t flags;
+> > +
+> > +    /*
+> > +     * IN
+> > +     *
+> > +     * As an IN parameter number of frames of the domain to be copied.
+> > +     */
+> > +    uint32_t nr_frames;
+> > +
 >
-> See below - I think it's possible to avoid the memset() and keep the
-> same guarantees.
+> The interface only allows copies to be made at page granularity, while
+> that can be ok, that probably wants to be stated.
+>
+> > +    /*
+> > +     * IN
+> > +     *
+> > +     * Frames to be copied.
+> > +     */
+> > +    XEN_GUEST_HANDLE(xen_pfn_t) frame_list;
+> > +
+> > +    /*
+> > +     * IN/OUT
+> > +     *
+> > +     * Userspace buffer to read/write from.
+> > +     */
+> > +    XEN_GUEST_HANDLE(uint8) buffer;
+> > +};
+>
+> The interface looks a bit asymetric, on one hand, it takes pfns and on
+> the other hand, it takes a guest virtual address.
+>
+> Though, using guest pointers is not great for PVH domains, as it
+> requires expensive pagewalks (especially for a lot of pages).
+>
+> Would it be preferable to have a list of gmfn for both sides ?
 >
 
-What's the issue with memset?
-It's more consistent with the old "calloc" in the code and in the
-compilers we use (gcc/clang) memset is a builtin that's optimized
-better than setting as single fields.
-Note that "guest_data" disappears in "libs/guest: fill directly iov
-structure" commit.
+All this was considered and the interface could accept either virtual
+pointer or GFNs.
+However, the code was more complicated and I think to resolve this
+correctly is out of scope here.
+How is the structure passed using the hypercall? With a virtual
+pointer? Why not complain also about that pointer? It would be good
+for PVH not to use virtual addresses at all.
+The PFN/virtual should be solved more generically.
 
-> >      /* iovec[] for writev(). */
-> > -    iov =3D malloc((nr_pfns + 2) * sizeof(*iov));
-> > -
-> > -    if ( !mfns || !types || !errors || !guest_data || !local_pages || =
-!iov )
-> > -    {
-> > -        ERROR("Unable to allocate arrays for a batch of %u pages",
-> > -              nr_pfns);
-> > -        goto err;
-> > -    }
-> > +    iov =3D ctx->save.buffers->iov;
-> > +    rec_pfns =3D ctx->save.buffers->rec_pfns;
+> > +typedef struct xen_foreigncopy xen_foreigncopy_t;
+> > +DEFINE_XEN_GUEST_HANDLE(xen_foreigncopy_t);
+> > +
+> > +/* Next available subop number is 30 */
 > >
-> >      for ( i =3D 0; i < nr_pfns; ++i )
-> >      {
-> > @@ -210,14 +208,6 @@ static int write_batch(struct xc_sr_context *ctx)
-> >          }
-> >      }
+> >   #endif /* __XEN_PUBLIC_MEMORY_H__ */
 > >
-> > -    rec_pfns =3D malloc(nr_pfns * sizeof(*rec_pfns));
-> > -    if ( !rec_pfns )
-> > -    {
-> > -        ERROR("Unable to allocate %zu bytes of memory for page data pf=
-n list",
-> > -              nr_pfns * sizeof(*rec_pfns));
-> > -        goto err;
-> > -    }
-> > -
-> >      hdrs.rec.length =3D sizeof(hdrs.page_data);
-> >      hdrs.rec.length +=3D nr_pfns * sizeof(*rec_pfns);
-> >      hdrs.rec.length +=3D nr_pages * PAGE_SIZE;
-> > @@ -267,17 +257,13 @@ static int write_batch(struct xc_sr_context *ctx)
-> >      rc =3D ctx->save.nr_batch_pfns =3D 0;
-> >
-> >   err:
-> > -    free(rec_pfns);
-> >      if ( guest_mapping )
-> >          xenforeignmemory_unmap(xch->fmem, guest_mapping, nr_pages_mapp=
-ed);
-> >      for ( i =3D 0; local_pages && i < nr_pfns; ++i )
-> > +    {
-> >          free(local_pages[i]);
-> > -    free(iov);
-> > -    free(local_pages);
-> > -    free(guest_data);
-> > -    free(errors);
-> > -    free(types);
-> > -    free(mfns);
-> > +        local_pages[i] =3D NULL;
 >
-> If you are doing this cleanup here, you could also do guest_data[i] =3D
-> NULL and avoid the memset, since at the start of each write_batch()
-> the arrays will already be zeroed (either because they are allocated
-> with calloc() on the first call, and always cleaned up in
-> write_batch() after usage.
->
-
-Given that there's a patch removing "guest_data" entirely, maybe I
-would remove the "memset" for "local_pages" in another commit, maybe
-"libs/guest: finalize PoC".
-
-> Thanks, Roger.
+> Teddy
 
 Frediano
 
