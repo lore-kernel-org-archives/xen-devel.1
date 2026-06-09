@@ -4,53 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 787ADCD8CAD
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2026 11:50:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1332634.1595118 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A8EACD8CA8
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2026 11:58:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1332651.1595126 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wWuyD-0003F4-M3; Tue, 09 Jun 2026 11:50:13 +0000
+	id 1wWv60-0004mC-Ie; Tue, 09 Jun 2026 11:58:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1332634.1595118; Tue, 09 Jun 2026 11:50:13 +0000
+Received: by outflank-mailman (output) from mailman id 1332651.1595126; Tue, 09 Jun 2026 11:58:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wWuyD-0003Ex-JC; Tue, 09 Jun 2026 11:50:13 +0000
-Received: by outflank-mailman (input) for mailman id 1332634;
- Tue, 09 Jun 2026 11:50:11 +0000
+	id 1wWv60-0004m5-Fs; Tue, 09 Jun 2026 11:58:16 +0000
+Received: by outflank-mailman (input) for mailman id 1332651;
+ Tue, 09 Jun 2026 11:58:15 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <sumit.saxena@broadcom.com>) id 1wWuyB-0003D7-JV
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2026 11:50:11 +0000
+ (envelope-from <dpsmith@apertussolutions.com>) id 1wWv5z-0004ly-9Q
+ for xen-devel@lists.xenproject.org; Tue, 09 Jun 2026 11:58:15 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wWuyB-00GBDM-00
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2026 13:50:11 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wWv5y-00DIhx-MU
+ for xen-devel@lists.xenproject.org; Tue, 09 Jun 2026 13:58:14 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <sumit.saxena@broadcom.com>)
- id 6a27fde0-5cb7-0a2a0a5109dd-0a2a450cc5a0-40
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 13:50:10 +0200
-Received: from [74.125.82.226] (helo=mail-dy1-f226.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <sumit.saxena@broadcom.com>)
- id 6a27fdf1-62f1-0a2a450c0019-4a7d52e2d563-3
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 13:50:10 +0200
-Received: by mail-dy1-f226.google.com with SMTP id
- 5a478bee46e88-307d0405e07so865710eec.1
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 04:50:09 -0700 (PDT)
-Received: from smtp-us-east1-p01-i01-si01.dlp.protect.broadcom.com
- ([144.49.247.127]) by smtp-relay.gmail.com with ESMTPS id
- 5a478bee46e88-3074db83e41sm850958eec.7.2026.06.09.04.50.07
- for <xen-devel@lists.xenproject.org>
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 09 Jun 2026 04:50:08 -0700 (PDT)
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-36bc54005a7so7347350a91.0
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 04:50:06 -0700 (PDT)
-Received: from sumit_ws.dhcp.broadcom.net ([192.19.234.250])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-36f6bf903fasm18898075a91.2.2026.06.09.04.49.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jun 2026 04:50:03 -0700 (PDT)
+ (envelope-from <dpsmith@apertussolutions.com>)
+ id 6a27ffc9-e002-0a2a0a5209dd-0a2a45069cde-38
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 13:58:13 +0200
+Received: from [136.143.188.51] (helo=sender4-of-o51.zoho.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <dpsmith@apertussolutions.com>)
+ id 6a27ffd3-7371-0a2a45060019-888fbc33529e-3
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 13:58:12 +0200
+Received: from mail.zoho.com by mx.zohomail.com
+ with SMTP id 1781006274774660.3033654277247;
+ Tue, 9 Jun 2026 04:57:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,342 +48,143 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=broadcom.com header.i="@broadcom.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781005808; x=1781610608;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:dkim-signature:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=fLAZlEa/gpJjIgpIJ2e9Ooy6MTW++uhKEEc/j768mlo=;
-        b=RhKtdSbHQx9uz9Js1KJsErTk/Q95N7tkAg/UH0Xt1xDMyR+OezBYcbsywGMmPaeVsi
-         4ko+we2DbIX3FfIpOXqGx3vqAwKgow3FRm9fT8ngeA5IyG3Y2NAau1PVAaauhMlcFlWo
-         K2lTfGQVVzxFtltpItCoWbHh0/QkfF9uFaLH+cfWNW+CNfWIhaUgrB49pEks4EnyEEyR
-         EtbHIylVS4XyHls5/SVBhAwSnzA5cZlSwRYXqBzJY5dEPkQy9MpvGkvOr2qZF+eftIKY
-         XVyGGVofzbeaYyEOapCC54JZYX0esk+TYy5xbtkRb9kPmIt1lqlCTkfC03Gz0qviGKNp
-         CEnw==
-X-Forwarded-Encrypted: i=1; AFNElJ85aH2Wn7bUcr8LbpubNWKNL9p960z5fbovvw4J8TDFWITrZoghvI231OPjMwlISRPQ54Nfs6y5ri8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyWImezAfIh85boMsspKCD4YaVQxFLzfKGjF4d/tiQij21Km9wx
-	Jk5eIpv5lLthW0c/2Lfu6cCpHx2Nc04ogoBQOXJmVwgbix+ZDnTk2r66hFqY1Z8bm30FGQNNn49
-	jsk2lhcUP30eon8vQKLEzL89nTiaPu42F0kD/b4hb8ylGvOdHNAScvnLNR3Y6NzV79pPLoj8xC4
-	PnZWcMqE8txO9PXy4hjX47wT9pwLioT6zBlAs8ex2D1meIJnxsaIXxK6kpfO8CX0Rg6Ip6rmL2K
-	1fGdiwvgxKl+kqcJcUKkQ==
-X-Gm-Gg: Acq92OG9I+mIJLi3rwctEgzYFsG58jjADYmeihdkrFyOEgLEl0LRBMlpH8xbnkAhRus
-	3lSOyKJRh/0tDsEcocucJkf6UXCwe7Zo13vN8AcFPy/qQ5Q9B7itO2uI7EQ2o5JVboioZMmK7CO
-	HDMliySBSiyeQatKaWMHbvzJVNmPkEg/yTvcmbhYQfSaogeDuhhrggwJVsJLLTyeZkAVBu1aTYB
-	glR5snXDIW1wLpIa2hYoV7odZv1hhrNzBn0Q8p1wBlBcVq5A8nWit/hYGQ5Tpr3IV9gF/EwbBpn
-	E0phu/yFinVvOyx+iDWE61O+1ynQ+nAm0EYjydqtVkxRAJdACDFTOpZL6udm9cst7PkR7vpPeqR
-	CcDV8KlOuobxO8NL2OoupVSY8NGZDasYc0J2cSSeG1DV28AKS2b+VZAuFJWgtl/Plhud/VaQ7Kn
-	m/WBT272kwvZJSIcY=
-X-Received: by 2002:a05:7300:80ce:b0:2dd:6937:79d5 with SMTP id 5a478bee46e88-3077af681eamr11765237eec.8.1781005808158;
-        Tue, 09 Jun 2026 04:50:08 -0700 (PDT)
-X-Relaying-Domain: broadcom.com
-X-CFilter-Loop: Reflected
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=broadcom.com; s=google; t=1781005806; x=1781610606; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=fLAZlEa/gpJjIgpIJ2e9Ooy6MTW++uhKEEc/j768mlo=;
-        b=EbBCNdb+KlhUnARK/m/9qr6Uq3veHMn7NjosF96SB6tEd9TXyAnes/DjkSu/yGBjwZ
-         aFPrmr+0HqrVEgXt6LnTIbdctVYzEhQNcVHsHa3CWpZatvdPDaLXbZXz1OVUdXVBnRrp
-         5mtUTsMtKBTLrpiLWX97Ka6CCUnM3TGToE21U=
-X-Forwarded-Encrypted: i=1; AFNElJ8i+zLQRovTrc4ey/++u4qeYnmNhSRXQ5/Cx5vah7J21inTSyA8fukDqLTPRtfvN71ab0sYX+OayEc=@lists.xenproject.org
-X-Received: by 2002:a17:90b:57c4:b0:36b:75:6387 with SMTP id 98e67ed59e1d1-370eea202f0mr20609582a91.8.1781005805625;
-        Tue, 09 Jun 2026 04:50:05 -0700 (PDT)
-X-Received: by 2002:a17:90b:57c4:b0:36b:75:6387 with SMTP id 98e67ed59e1d1-370eea202f0mr20609495a91.8.1781005805070;
-        Tue, 09 Jun 2026 04:50:05 -0700 (PDT)
-From: Sumit Saxena <sumit.saxena@broadcom.com>
-To: "Martin K . Petersen" <martin.petersen@oracle.com>,
-	Jens Axboe <axboe@kernel.dk>
-Cc: "James E . J . Bottomley" <James.Bottomley@HansenPartnership.com>,
-	linux-scsi@vger.kernel.org,
-	linux-block@vger.kernel.org,
-	Adam Radford <aradford@gmail.com>,
-	Khalid Aziz <khalid@gonehiking.org>,
-	Adaptec OEM Raid Solutions <aacraid@microsemi.com>,
-	Matthew Wilcox <willy@infradead.org>,
-	Hannes Reinecke <hare@suse.com>,
-	"Juergen E . Fischer" <fischer@norbit.de>,
-	Russell King <linux@armlinux.org.uk>,
-	linux-arm-kernel@lists.infradead.org,
-	Finn Thain <fthain@linux-m68k.org>,
-	Michael Schmitz <schmitzmic@gmail.com>,
-	Anil Gurumurthy <anil.gurumurthy@qlogic.com>,
-	Sudarsana Kalluru <sudarsana.kalluru@qlogic.com>,
-	Oliver Neukum <oliver@neukum.org>,
-	Ali Akcaagac <aliakc@web.de>,
-	Jamie Lenehan <lenehan@twibble.org>,
-	Ram Vegesna <ram.vegesna@broadcom.com>,
-	target-devel@vger.kernel.org,
-	Bradley Grove <linuxdrivers@attotech.com>,
-	Satish Kharat <satishkh@cisco.com>,
-	Sesidhar Baddela <sebaddel@cisco.com>,
-	Karan Tilak Kumar <kartilak@cisco.com>,
-	Yihang Li <liyihang9@h-partners.com>,
-	Don Brace <don.brace@microchip.com>,
-	storagedev@microchip.com,
-	HighPoint Linux Team <linux@highpoint-tech.com>,
-	Tyrel Datwyler <tyreld@linux.ibm.com>,
-	Madhavan Srinivasan <maddy@linux.ibm.com>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Nicholas Piggin <npiggin@gmail.com>,
-	Christophe Leroy <chleroy@kernel.org>,
-	linuxppc-dev@lists.ozlabs.org,
-	Brian King <brking@us.ibm.com>,
-	Lee Duncan <lduncan@suse.com>,
-	Chris Leech <cleech@redhat.com>,
-	Mike Christie <michael.christie@oracle.com>,
-	open-iscsi@googlegroups.com,
-	Justin Tee <justin.tee@broadcom.com>,
-	Paul Ely <paul.ely@broadcom.com>,
-	Kashyap Desai <kashyap.desai@broadcom.com>,
-	Shivasharan S <shivasharan.srikanteshwara@broadcom.com>,
-	Chandrakanth Patil <chandrakanth.patil@broadcom.com>,
-	megaraidlinux.pdl@broadcom.com,
-	Sathya Prakash Veerichetty <sathya.prakash@broadcom.com>,
-	Sreekanth Reddy <sreekanth.reddy@broadcom.com>,
-	mpi3mr-linuxdrv.pdl@broadcom.com,
-	Suganath Prabu Subramani <suganath-prabu.subramani@broadcom.com>,
-	Ranjan Kumar <ranjan.kumar@broadcom.com>,
-	MPT-FusionLinux.pdl@broadcom.com,
-	Daniel Palmer <daniel@thingy.jp>,
-	GOTO Masanori <gotom@debian.or.jp>,
-	YOKOTA Hiroshi <yokota@netlab.is.tsukuba.ac.jp>,
-	Jack Wang <jinpu.wang@cloud.ionos.com>,
-	Geoff Levand <geoff@infradead.org>,
-	Michael Reed <mdr@sgi.com>,
-	Nilesh Javali <njavali@marvell.com>,
-	GR-QLogic-Storage-Upstream@marvell.com,
-	Narsimhulu Musini <nmusini@cisco.com>,
-	"K . Y . Srinivasan" <kys@microsoft.com>,
-	Haiyang Zhang <haiyangz@microsoft.com>,
-	Wei Liu <wei.liu@kernel.org>,
-	Dexuan Cui <decui@microsoft.com>,
-	Long Li <longli@microsoft.com>,
-	linux-hyperv@vger.kernel.org,
-	"Michael S . Tsirkin" <mst@redhat.com>,
-	Jason Wang <jasowang@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	Eugenio Perez <eperezma@redhat.com>,
-	virtualization@lists.linux.dev,
-	Vishal Bhakta <vishal.bhakta@broadcom.com>,
-	bcm-kernel-feedback-list@broadcom.com,
-	Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	xen-devel@lists.xenproject.org,
-	Sumit Saxena <sumit.saxena@broadcom.com>,
-	John Garry <john.g.garry@oracle.com>
-Subject: [PATCH v3 4/4] scsi: use percpu counters for iostat counters in struct scsi_device
-Date: Tue,  9 Jun 2026 17:48:03 +0530
-Message-ID: <20260609121806.2121755-5-sumit.saxena@broadcom.com>
-X-Mailer: git-send-email 2.43.7
-In-Reply-To: <20260609121806.2121755-1-sumit.saxena@broadcom.com>
-References: <20260609121806.2121755-1-sumit.saxena@broadcom.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=zoho header.d=apertussolutions.com header.i="dpsmith@apertussolutions.com" header.h="Date:From:To:Cc:Message-ID:In-Reply-To:References:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding"
+ARC-Seal: i=1; a=rsa-sha256; t=1781006281; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=ndVtC50KlT2RPRIMUbpUBIFVWSfxEVzyxv1YmVW5GO3mr3vvenU6pFolToQRKlXUBBXLBqldbW/oKUjqad+3G7HPZ114NqgzVYd/LTuscYrpulWOwXeHP7WySoAFyAi5v/bi9xYCZ847e/6yIQm0BJFmoCLyy3JsZi+n39KY054=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1781006281; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=jtMEEDQKBFgAVM9bj3uL2dJieqsnSNOkuji0r7SWb1g=; 
+	b=cCYgJjFyiZBIo6YoN/CPklG/zb1FpO1GYkB/r8gAsfKUkfKnKBD4VnEOyB+1SPqzitsn9Bf4D3NG5EO7a8yukXThc6NkNPt6cLUTz5sViKnsSCM/k0Cg4fZVCcFMJTi4+EDFa6/mZa24/Cb5zb2dNPoQZff9VyCPqT+TKXe6pPE=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=apertussolutions.com;
+	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
+	dmarc=pass header.from=<dpsmith@apertussolutions.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1781006281;
+	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
+	h=Date:Date:From:From:To:To:Cc:Cc:Message-ID:In-Reply-To:References:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=jtMEEDQKBFgAVM9bj3uL2dJieqsnSNOkuji0r7SWb1g=;
+	b=LT17RIRyoFtaDM0d27lRVYB0catTLHCNCMKLvW7rdoac5uXP9kSCC4ByTNGVpoYY
+	5YejrijdCY9jdejB0Xr7FCw9KQpIHtD58uDWSYfvZAAJMXpahDOCTozMotwq8fpUOyr
+	14h1+XGgGsyDGaiAcfxkosPooF4HBnYHBCGeH6lM=
+Date: Tue, 09 Jun 2026 07:57:54 -0400
+From: Daniel Smith <dpsmith@apertussolutions.com>
+To: "Jason Andryuk" <jason.andryuk@amd.com>
+Cc: "dmukhin" <dmukhin@ford.com>,
+	"xen-devel" <xen-devel@lists.xenproject.org>,
+	"andrew.cooper3" <andrew.cooper3@citrix.com>,
+	"anthony.perard" <anthony.perard@vates.tech>,
+	"jbeulich" <jbeulich@suse.com>, "julien" <julien@xen.org>,
+	"michal.orzel" <michal.orzel@amd.com>,
+	"roger.pau" <roger.pau@citrix.com>,
+	"sstabellini" <sstabellini@kernel.org>,
+	"christopher.w.clark" <christopher.w.clark@gmail.com>,
+	"Mykola Kvach" <mykola_kvach@epam.com>
+Message-ID: <19eac3f10c4.4656d1b3334797.1477306808945740845@apertussolutions.com>
+In-Reply-To: <c51ecc59-7252-4d1f-a192-717ae55dacd5@amd.com>
+References: <20260526215823.1452619-1-dmukhin@ford.com>
+ <20260526215823.1452619-2-dmukhin@ford.com>
+ <ae19de19-aef5-47af-833d-87a46efb9afc@apertussolutions.com> <c51ecc59-7252-4d1f-a192-717ae55dacd5@amd.com>
+Subject: Re: [PATCH v3 1/6] argo: lower level of noisy connection-refused
+ log
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-DetectorID-Processed: b00c1d49-9d2e-4205-b15f-d015386d3d5e
-X-purgate-ID: tlsNG-d25034/1781005810-E2F72CF5-921E1068/0/0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+Importance: Medium
+User-Agent: Zoho Mail
+X-Mailer: Zoho Mail
+X-purgate-ID: tlsNG-16d1c6/1781006293-84B65D75-75F393C4/0/0
 X-purgate-type: clean
-X-purgate-size: 7433
+X-purgate-size: 5550
 
-iorequest_cnt and iodone_cnt are updated on every command dispatch and
-completion, often from different CPUs on high queue depth workloads.
-Using adjacent atomic_t fields causes cache line contention between the
-submission and completion paths.
 
-Extend the same treatment to ioerr_cnt and iotmo_cnt so all four iostat
-counters in struct scsi_device use struct percpu_counter.
 
-Suggested-by: John Garry <john.g.garry@oracle.com>
-Signed-off-by: Sumit Saxena <sumit.saxena@broadcom.com>
----
- drivers/scsi/scsi_error.c  |  4 ++--
- drivers/scsi/scsi_lib.c    | 10 +++++-----
- drivers/scsi/scsi_scan.c   |  8 ++++++++
- drivers/scsi/scsi_sysfs.c  | 23 ++++++++++++++---------
- drivers/scsi/sd.c          |  2 +-
- include/scsi/scsi_device.h |  9 +++++----
- 6 files changed, 35 insertions(+), 21 deletions(-)
+From: Jason Andryuk <jason.andryuk@amd.com>
+To: "Daniel P. Smith"<dpsmith@apertussolutions.com>, <dmukhin@ford.com>, <xen-devel@lists.xenproject.org>
+Cc: <andrew.cooper3@citrix.com>, <anthony.perard@vates.tech>, <jbeulich@suse.com>, <julien@xen.org>, <michal.orzel@amd.com>, <roger.pau@citrix.com>, <sstabellini@kernel.org>, <christopher.w.clark@gmail.com>, "Mykola Kvach"<mykola_kvach@epam.com>
+Date: Mon, 08 Jun 2026 19:16:01 -0400
+Subject: Re: [PATCH v3 1/6] argo: lower level of noisy connection-refused log
 
-diff --git a/drivers/scsi/scsi_error.c b/drivers/scsi/scsi_error.c
-index 147127fb4db9..b1aa7da2ba7c 100644
---- a/drivers/scsi/scsi_error.c
-+++ b/drivers/scsi/scsi_error.c
-@@ -349,7 +349,7 @@ enum blk_eh_timer_return scsi_timeout(struct request *req)
- 	trace_scsi_dispatch_cmd_timeout(scmd);
- 	scsi_log_completion(scmd, TIMEOUT_ERROR);
- 
--	atomic_inc(&scmd->device->iotmo_cnt);
-+	percpu_counter_inc(&scmd->device->iotmo_cnt);
- 	if (host->eh_deadline != -1 && !host->last_reset)
- 		host->last_reset = jiffies;
- 
-@@ -370,7 +370,7 @@ enum blk_eh_timer_return scsi_timeout(struct request *req)
- 	 */
- 	if (test_and_set_bit(SCMD_STATE_COMPLETE, &scmd->state))
- 		return BLK_EH_DONE;
--	atomic_inc(&scmd->device->iodone_cnt);
-+	percpu_counter_inc(&scmd->device->iodone_cnt);
- 	if (scsi_abort_command(scmd) != SUCCESS) {
- 		set_host_byte(scmd, DID_TIME_OUT);
- 		scsi_eh_scmd_add(scmd);
-diff --git a/drivers/scsi/scsi_lib.c b/drivers/scsi/scsi_lib.c
-index 6e8c7a42603e..979fdace33ac 100644
---- a/drivers/scsi/scsi_lib.c
-+++ b/drivers/scsi/scsi_lib.c
-@@ -1554,9 +1554,9 @@ static void scsi_complete(struct request *rq)
- 
- 	INIT_LIST_HEAD(&cmd->eh_entry);
- 
--	atomic_inc(&cmd->device->iodone_cnt);
-+	percpu_counter_inc(&cmd->device->iodone_cnt);
- 	if (cmd->result)
--		atomic_inc(&cmd->device->ioerr_cnt);
-+		percpu_counter_inc(&cmd->device->ioerr_cnt);
- 
- 	disposition = scsi_decide_disposition(cmd);
- 	if (disposition != SUCCESS && scsi_cmd_runtime_exceeced(cmd))
-@@ -1592,7 +1592,7 @@ static enum scsi_qc_status scsi_dispatch_cmd(struct scsi_cmnd *cmd)
- 	struct Scsi_Host *host = cmd->device->host;
- 	int rtn = 0;
- 
--	atomic_inc(&cmd->device->iorequest_cnt);
-+	percpu_counter_inc(&cmd->device->iorequest_cnt);
- 
- 	/* check if the device is still usable */
- 	if (unlikely(cmd->device->sdev_state == SDEV_DEL)) {
-@@ -1614,7 +1614,7 @@ static enum scsi_qc_status scsi_dispatch_cmd(struct scsi_cmnd *cmd)
- 		 */
- 		SCSI_LOG_MLQUEUE(3, scmd_printk(KERN_INFO, cmd,
- 			"queuecommand : device blocked\n"));
--		atomic_dec(&cmd->device->iorequest_cnt);
-+		percpu_counter_dec(&cmd->device->iorequest_cnt);
- 		return SCSI_MLQUEUE_DEVICE_BUSY;
- 	}
- 
-@@ -1647,7 +1647,7 @@ static enum scsi_qc_status scsi_dispatch_cmd(struct scsi_cmnd *cmd)
- 	trace_scsi_dispatch_cmd_start(cmd);
- 	rtn = host->hostt->queuecommand(host, cmd);
- 	if (rtn) {
--		atomic_dec(&cmd->device->iorequest_cnt);
-+		percpu_counter_dec(&cmd->device->iorequest_cnt);
- 		trace_scsi_dispatch_cmd_error(cmd, rtn);
- 		if (rtn != SCSI_MLQUEUE_DEVICE_BUSY &&
- 		    rtn != SCSI_MLQUEUE_TARGET_BUSY)
-diff --git a/drivers/scsi/scsi_scan.c b/drivers/scsi/scsi_scan.c
-index 121a14d5fdb8..bc885c72f01e 100644
---- a/drivers/scsi/scsi_scan.c
-+++ b/drivers/scsi/scsi_scan.c
-@@ -350,6 +350,14 @@ static struct scsi_device *scsi_alloc_sdev(struct scsi_target *starget,
- 
- 	scsi_sysfs_device_initialize(sdev);
- 
-+	if (percpu_counter_init(&sdev->iorequest_cnt, 0, GFP_KERNEL) ||
-+	    percpu_counter_init(&sdev->iodone_cnt, 0, GFP_KERNEL) ||
-+	    percpu_counter_init(&sdev->ioerr_cnt, 0, GFP_KERNEL) ||
-+	    percpu_counter_init(&sdev->iotmo_cnt, 0, GFP_KERNEL)) {
-+		ret = -ENOMEM;
-+		goto out_device_destroy;
-+	}
-+
- 	if (scsi_device_is_pseudo_dev(sdev))
- 		return sdev;
- 
-diff --git a/drivers/scsi/scsi_sysfs.c b/drivers/scsi/scsi_sysfs.c
-index dfc3559e7e04..f652edd16497 100644
---- a/drivers/scsi/scsi_sysfs.c
-+++ b/drivers/scsi/scsi_sysfs.c
-@@ -516,6 +516,10 @@ static void scsi_device_dev_release(struct device *dev)
- 	if (vpd_pgb7)
- 		kfree_rcu(vpd_pgb7, rcu);
- 	kfree(sdev->inquiry);
-+	percpu_counter_destroy(&sdev->iotmo_cnt);
-+	percpu_counter_destroy(&sdev->ioerr_cnt);
-+	percpu_counter_destroy(&sdev->iodone_cnt);
-+	percpu_counter_destroy(&sdev->iorequest_cnt);
- 	kfree(sdev);
- 
- 	if (parent)
-@@ -936,26 +940,27 @@ static ssize_t
- show_iostat_counterbits(struct device *dev, struct device_attribute *attr,
- 			char *buf)
- {
--	return snprintf(buf, 20, "%d\n", (int)sizeof(atomic_t) * 8);
-+	/* iostat counters are per-CPU sums (s64).  Report width for tools. */
-+	return sysfs_emit(buf, "%zu\n", sizeof(s64) * 8);
- }
- 
- static DEVICE_ATTR(iocounterbits, S_IRUGO, show_iostat_counterbits, NULL);
- 
--#define show_sdev_iostat(field)						\
-+#define show_sdev_iostat_percpu(field)					\
- static ssize_t								\
- show_iostat_##field(struct device *dev, struct device_attribute *attr,	\
- 		    char *buf)						\
- {									\
- 	struct scsi_device *sdev = to_scsi_device(dev);			\
--	unsigned long long count = atomic_read(&sdev->field);		\
--	return snprintf(buf, 20, "0x%llx\n", count);			\
-+	unsigned long long count = percpu_counter_sum(&sdev->field);	\
-+	return sysfs_emit(buf, "0x%llx\n", count);			\
- }									\
--static DEVICE_ATTR(field, S_IRUGO, show_iostat_##field, NULL)
-+static DEVICE_ATTR(field, 0444, show_iostat_##field, NULL)
- 
--show_sdev_iostat(iorequest_cnt);
--show_sdev_iostat(iodone_cnt);
--show_sdev_iostat(ioerr_cnt);
--show_sdev_iostat(iotmo_cnt);
-+show_sdev_iostat_percpu(iorequest_cnt);
-+show_sdev_iostat_percpu(iodone_cnt);
-+show_sdev_iostat_percpu(ioerr_cnt);
-+show_sdev_iostat_percpu(iotmo_cnt);
- 
- static ssize_t
- sdev_show_modalias(struct device *dev, struct device_attribute *attr, char *buf)
-diff --git a/drivers/scsi/sd.c b/drivers/scsi/sd.c
-index adc3fa55ca2c..b7ce01de17b3 100644
---- a/drivers/scsi/sd.c
-+++ b/drivers/scsi/sd.c
-@@ -4043,7 +4043,7 @@ static int sd_probe(struct scsi_device *sdp)
- 	sdkp->index = index;
- 	sdkp->max_retries = SD_MAX_RETRIES;
- 	atomic_set(&sdkp->openers, 0);
--	atomic_set(&sdkp->device->ioerr_cnt, 0);
-+	percpu_counter_set(&sdkp->device->ioerr_cnt, 0);
- 
- 	if (!sdp->request_queue->rq_timeout) {
- 		if (sdp->type != TYPE_MOD)
-diff --git a/include/scsi/scsi_device.h b/include/scsi/scsi_device.h
-index 029f5115b2ea..4be36bf2a475 100644
---- a/include/scsi/scsi_device.h
-+++ b/include/scsi/scsi_device.h
-@@ -9,6 +9,7 @@
- #include <scsi/scsi.h>
- #include <scsi/scsi_common.h>
- #include <linux/atomic.h>
-+#include <linux/percpu_counter.h>
- #include <linux/sbitmap.h>
- 
- struct bsg_device;
-@@ -272,10 +273,10 @@ struct scsi_device {
- 	unsigned int max_device_blocked; /* what device_blocked counts down from  */
- #define SCSI_DEFAULT_DEVICE_BLOCKED	3
- 
--	atomic_t iorequest_cnt;
--	atomic_t iodone_cnt;
--	atomic_t ioerr_cnt;
--	atomic_t iotmo_cnt;
-+	struct percpu_counter iorequest_cnt;
-+	struct percpu_counter iodone_cnt;
-+	struct percpu_counter ioerr_cnt;
-+	struct percpu_counter iotmo_cnt;
- 
- 	struct device		sdev_gendev,
- 				sdev_dev;
--- 
-2.43.7
+ > On 2026-06-08 15:54, Daniel P. Smith wrote: 
+ > > 
+ > > 
+ > > On 5/26/26 5:58 PM, dmukhin@ford.com wrote: 
+ > >> From: Denis Mukhin <dmukhin@ford.com> 
+ > >> 
+ > >> Switch the log line to argo_dprintk() so it is enabled only in debug 
+ > >> environments, as it can spam the logs when a dom0 service using the Argo 
+ > >> hypercall tries to communicate with a domain that is still starting up. 
+ > >> 
+ > >> Note that this also lowers the log level to debug when the argo_dprintk() 
+ > >> facility is enabled. 
+ > >> 
+ > >> Signed-off-by: Denis Mukhin <dmukhin@ford.com> 
+ > >> Reviewed-by: Mykola Kvach <mykola_kvach@epam.com> 
+ > >> --- 
+ > >> Changes since v2: 
+ > >> - updated commit message 
+ > >> --- 
+ > >>   xen/common/argo.c | 7 +++---- 
+ > >>   1 file changed, 3 insertions(+), 4 deletions(-) 
+ > >> 
+ > >> diff --git a/xen/common/argo.c b/xen/common/argo.c 
+ > >> index 28626e00a8cb..98a3db7fd070 100644 
+ > >> --- a/xen/common/argo.c 
+ > >> +++ b/xen/common/argo.c 
+ > >> @@ -2034,10 +2034,9 @@ sendv(struct domain *src_d, xen_argo_addr_t 
+ > >> *src_addr, 
+ > >>                                           src_id.domain_id); 
+ > >>       if ( !ring_info ) 
+ > >>       { 
+ > >> -        gprintk(XENLOG_ERR, 
+ > >> -                "argo: vm%u connection refused, src (vm%u:%x) dst 
+ > >> (vm%u:%x)\n", 
+ > >> -                current->domain->domain_id, src_id.domain_id, 
+ > >> src_id.aport, 
+ > >> -                dst_addr->domain_id, dst_addr->aport); 
+ > >> +        argo_dprintk("vm%u connection refused, src (vm%u:%x) dst 
+ > >> (vm%u:%x)\n", 
+ > >> +                     current->domain->domain_id, src_id.domain_id, 
+ > >> src_id.aport, 
+ > >> +                     dst_addr->domain_id, dst_addr->aport); 
+ > >>           ret = -ECONNREFUSED; 
+ > >>       } 
+ > > 
+ > > My apologies but this is not the wisest approach, hitting this is a real 
+ > > error and shouldn't be getting silenced. 
+ >  
+ > -ECONNREFUSED is still returned, and that is the important part, I think? 
+ >  
 
+Absolutely not. Argo at its essence is a security protocol where you want to minimize the amount of implicit trust we have to have with the endpoint. Telling a bad actor he did a bad action tells you nothing. The send operation is the critical security path and you must have an auditable record that an endpoint misbehaved. If yo want to implicitly trust your end point after passing the accees check, then you can just use grants. 
+
+ > While gprintk(), it is trivially guest triggerable, so I think it wants 
+ > to be a debug message like this change made it.  As a comparison, errors 
+ > in event_channel.c are gdprintk(). 
+ >  
+
+Again, this message should never be disabled which could occur with gdprintk() depending on the NDEBUG flag. HMX and the Xen implementation Argo are high assurance mechanisms for high assureance implementations. The maintainers must ensure that foundational principles are not compromised. If an implementer chosing Argo, it is because of the properties that come about because of the design of this mechanism.
+
+A side note, gprintk is rate limited, so an option is to adjust your rate limit.
+
+ > If you are seeing a lot of 
+ > > these messages, I would suggest asking yourself why. Without further 
+ > > context on how you are using it, one suggesting is perhaps your 
+ > > connection model might need to be revisited. 
+ >  
+ > There isn't a way to know if a port is available without polling? 
+
+
+That is absolutely not a true statement. Send a notify message with a request for a chunk of data, ideally the amount you want to send. You will get a response that includes a flag to tell you the ring exists[1] and how much space is available [2]. If the ring doesn't exist, the response will have 0 in both flags and max_message_size. I would even suggest reviewing the flags, as a few of them might also be of interest. For instance, the ring empty flag. If the ring empty flag is set and max_message_size is smaller than the amount of data you are attempting to send, your attempt to send will fail. Whereas, you can use this on your sender size to packetize your data depending on what kind of transmit strategy you want, e.g. willing to allow a single send to max out the buffer.
+
+I would add that you are free to flood the notify op in a poll loop and not see a flood to the message buffer since that path is audited with argo_dprintk's.
+
+[1] https://elixir.bootlin.com/xen/v4.21.1/source/xen/common/argo.c#L1355
+[2] https://elixir.bootlin.com/xen/v4.21.1/source/xen/common/argo.c#L1410
+
+
+Finally, while looking at the series further and the example CI build due to the SNAFU, I would like to revise my review of the other patches. Since we are touching all these log points in this series, perhaps it would be good to update the fmt to new format specifiers such as %pd for domain identification, as well as reconsider whether logging the virutal address is the correct detail to be reported.
+
+v/r,
+dps
 
