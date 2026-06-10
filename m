@@ -4,58 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CAA2CD8CB9
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 15:45:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1334509.1597516 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC61FCD98C6
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 15:46:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1334516.1597524 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXL7U-0004Zz-Ow; Wed, 10 Jun 2026 15:45:32 +0000
+	id 1wXL8V-00056Y-54; Wed, 10 Jun 2026 15:46:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1334509.1597516; Wed, 10 Jun 2026 15:45:32 +0000
+Received: by outflank-mailman (output) from mailman id 1334516.1597524; Wed, 10 Jun 2026 15:46:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXL7U-0004Zs-MI; Wed, 10 Jun 2026 15:45:32 +0000
-Received: by outflank-mailman (input) for mailman id 1334509;
- Wed, 10 Jun 2026 15:45:31 +0000
+	id 1wXL8V-00056R-2L; Wed, 10 Jun 2026 15:46:35 +0000
+Received: by outflank-mailman (input) for mailman id 1334516;
+ Wed, 10 Jun 2026 15:46:34 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Jason.Andryuk@amd.com>) id 1wXL7S-0004Zl-Lw
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 15:45:30 +0000
+ (envelope-from <sumit.saxena@broadcom.com>) id 1wXL8T-00056J-RF
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 15:46:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wXL7R-009xxa-O8
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 17:45:29 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wXL8T-009yCd-5D
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 17:46:33 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Jason.Andryuk@amd.com>)
- id 6a298680-2eae-0a2a0a5409dd-0a2a4503b146-34
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 17:45:29 +0200
-Received: from [40.107.200.61]
- (helo=CH5PR02CU005.outbound.protection.outlook.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <Jason.Andryuk@amd.com>)
- id 6a298697-672d-0a2a45030019-286bc83d3d0a-3
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 17:45:29 +0200
-Received: from CH5PR05CA0017.namprd05.prod.outlook.com (2603:10b6:610:1f0::7)
- by SA3PR12MB9226.namprd12.prod.outlook.com (2603:10b6:806:396::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.11; Wed, 10 Jun
- 2026 15:45:20 +0000
-Received: from CH2PEPF0000009F.namprd02.prod.outlook.com
- (2603:10b6:610:1f0:cafe::8a) by CH5PR05CA0017.outlook.office365.com
- (2603:10b6:610:1f0::7) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.12 via Frontend Transport; Wed,
- 10 Jun 2026 15:45:16 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- CH2PEPF0000009F.mail.protection.outlook.com (10.167.244.21) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.113.7 via Frontend Transport; Wed, 10 Jun 2026 15:45:16 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 10 Jun
- 2026 10:45:16 -0500
-Received: from [172.17.22.200] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.41 via Frontend
- Transport; Wed, 10 Jun 2026 10:45:15 -0500
+ (envelope-from <sumit.saxena@broadcom.com>)
+ id 6a2986cd-bab6-0a2a0a5309dd-0a2a450489aa-12
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 17:46:32 +0200
+Received: from [209.85.161.97] (helo=mail-oo1-f97.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <sumit.saxena@broadcom.com>)
+ id 6a2986d7-1dec-0a2a45040019-d155a161e43b-3
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 17:46:32 +0200
+Received: by mail-oo1-f97.google.com with SMTP id
+ 006d021491bc7-69e46524711so4276777eaf.0
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 08:46:31 -0700 (PDT)
+Received: from smtp-us-east1-p01-i01-si01.dlp.protect.broadcom.com
+ (address-144-49-247-101.dlp.protect.broadcom.com. [144.49.247.101])
+ by smtp-relay.gmail.com with ESMTPS id
+ 006d021491bc7-69e4641277bsm941033eaf.14.2026.06.10.08.46.28
+ for <xen-devel@lists.xenproject.org>
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 10 Jun 2026 08:46:30 -0700 (PDT)
+Received: by mail-lj1-f197.google.com with SMTP id
+ 38308e7fff4ca-3969ddebd36so28060431fa.1
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 08:46:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -67,317 +58,335 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mt8eC5tzQv6OQCZBJKFR9XWMohwxy50/8eOUKOnYOxdTA33h9H+TmCN2Ckg6vr1akHDrzxEa6wOQc31lrT+G+fyC0eIZP0qJgmiBiaUR0IFiZzIpLwDCTqHbxuKK2+pGePSKoVnQ+4B9eO2k3rPnsujiO4SLunDPZmGMRJnp5lkN9SQ1mkb1UNz/6IpNYQQ/WLIK0Lz9QDgXHBkQ733Hx4zsCPM8GApBJGbGOKkkTFlJNpBovXgFZpHcspcT3YSYKijavaqbTJtu9qOvug7gPPHQCACks89M7UoVaXe/fp4tR58vmk/Dl0Q5y2YZ437MOYywitNrB2q5mvp5SfeOPg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VwDpoZYDoqRnwaMk4OgJztsPnMqVvdDuo/by29s8Q+o=;
- b=HuLQMeN9UhO5U0AbjrbbPN4DU0HSL6Cr+0QbutTkJoIdS10hPxn0lYCUWHFqLWDXHe0apF/tIK86EdmuqeQJ023Ofd4J4Xwt+wVU+Mj9f5zImGMlqIj3zRfMcUqWbPhs/1TBdoplVtDE7pj6t7AKk1N3+k0SQiyVo0rrCp36G7bPggpzIU3Y58gvWipkrC7iMPXk3Wz1raopw2PuEAPtvSTbx/M/2RmCH1BPuwEvsCyaedbqpkxXyRrbfBI3f8L33CypvWablLoXLSHiIibLbCA84LgyNMMpnZQuDhZPulDVkp4NVeDkRFcXJCfFodWfBHfZGDzg397o6REYUHRnxA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=citrix.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VwDpoZYDoqRnwaMk4OgJztsPnMqVvdDuo/by29s8Q+o=;
- b=uFEWcaPdmg03C/gZy+H3r8icP73uYPl+GJcnAkF3vJym3lBPj3DcOPgU9LvRJxVQmQyDNsxvJftbWD4y6DoFrDfzESZvxJ1I46gJzKd8aauT8YtrRGeSvt7kaI3K4DKnwYrQ1QUAp1h2asD2jY19Sebe7G2NdyT+aRmkPytbma4=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <085ebfb8-d76c-4a13-8b5b-130959b25b51@amd.com>
-Date: Wed, 10 Jun 2026 11:23:46 -0400
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=broadcom.com header.i="@broadcom.com" header.h="Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1781106390; x=1781711190;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Fo+66ip9LIcRLuvg5bHQhDaDWh6gx3Nvf5HQ6A2hn6w=;
+        b=VHI9NwLwoSCbqzHdszQfINFsVj1qAncs95zX/kYORRtk9tPuV7ZRyhAPx69x4hY+N0
+         JBrOfMlCP3Wyb+8gvABF5ES346TYv8xZxWMxUhxjgpgWUj0cEx4PBZtkjMVAgDdot6HH
+         CWDpIr/tcwf4u3WuNndRk7kOT/ZIAgq7VZLhR4tAd6ydXn9qBcfJ5mlh+3GaA33fZy5a
+         PR+0e7PijTa7+I4ax4cL17+Ac04bPt04BqMCYNGRcZGNf0zlzF29J24oNXB/CHm1zIsG
+         hVqo8FLJmMuDKCCS6qbv/xJBP36JyRHRBkt31Yc093LZ31cCIMHovaWmLGsoTSVgeI10
+         NdNw==
+X-Forwarded-Encrypted: i=1; AFNElJ86+YEwJBnsgr+43qAVEDX5mXmRH2Ynf4dBlA0P5PeXu2AFPplvh1Xo79iNBhjVMZcvGXjljdGFs9E=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxoG2Ht97YIiMHLYUKO/uBYPkaCYgb6tUGnfnY25n/yjaPnH9la
+	YPOcMUtHL4SO4bjyeprg3/r3Ub7UCnQ8JrkyYhrxviKAa/bIS/mXo9tLDPxfsOt2p++zxE8iv9y
+	e12VOeQYYxju3ORwMRb2M0gKFCBwLpoPdkvA/4SJWnigZbjZjAIyO1TimL1UGMAoh0ducsYOVuG
+	aMAnv6/oFOE6+ai077eWZQd70rWzhunSD0GbqH/aWu+iy7HzL8DP0a8DigBZDm4fgFPVlcVKpIu
+	xWg+NcOcFGkXSmMjaZxpQ==
+X-Gm-Gg: Acq92OEu/1jOAYYp/ILEzEHAsb2pvxpJe17zM2++ss4SLulLeHPrlQ5u1F4rRn/t0j6
+	fg8/qyi7rqAjL3ba36ddPqhJ5Ge7qa0aCsQHzlFBNTJGr166ll8Q9dL0IvIfr6/csolAjlC7Qef
+	M0eRm1Mlc5XaUytmnEXsGbagCgDCIJYF1wlvwG2LD0L+7FxhPcf4vynHv3otyd8eGKhnNIpw8KL
+	7OywH1ta1sMXXwtr1UjmnZdbEYESQ/UJURZ/QSnmk5WEARRXPAInCOszh5iyVgQ4SUwb2Xj1GzI
+	nVZrfevTRRjQTu9a8AdvSathEc6UYez1x+q3UgaTITg3+B2WVM95MkCAlGK4wVPjR+CJvJkpC1Y
+	x/o0NoJqNtc6r8gOj4icDLDcKQyNZnjocbZxAd4pcRMrVsoHsvXJzBhhy+bLp6HXNOxJ+zXIrLA
+	6FGfGpkh9fzt5EKk8X29QFF1nDVgD7O0C8z4eUpk2dXWTOiP3KJnGGTj/2ihCRVRoe+zd/DA==
+X-Received: by 2002:a05:6820:c96:b0:69e:32a9:de0f with SMTP id 006d021491bc7-69e68b1b398mr13292091eaf.1.1781106390223;
+        Wed, 10 Jun 2026 08:46:30 -0700 (PDT)
+X-Relaying-Domain: broadcom.com
+X-CFilter-Loop: Reflected
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=broadcom.com; s=google; t=1781106387; x=1781711187; darn=lists.xenproject.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=Fo+66ip9LIcRLuvg5bHQhDaDWh6gx3Nvf5HQ6A2hn6w=;
+        b=R4r1Us6Wq/o7v74yRPGRxzpkPJFhoLSYky24NnB/3Ue/dnI9Ljq5RxOIb74Cf/cqPe
+         rQHmzDwxYYAEwZ41I+/Fds1K0Ocu13GCpxHQf3mLdwAcR1CZ4PRHt0MxrUOwz54cMXS7
+         1r7OH4SD1+Z60Mo6eNdknYy+iwVxlxJsau3Ak=
+X-Forwarded-Encrypted: i=1; AFNElJ9saBveXaGr8g6MFkkbsSMdyFJNzy7czJSpUEntQtDy8dgEhIlCUGRHjszkhYsJMq1TFzKxs+XtVi8=@lists.xenproject.org
+X-Received: by 2002:a2e:2a45:0:b0:396:6842:b604 with SMTP id 38308e7fff4ca-396d08bd989mr56540841fa.6.1781106386493;
+        Wed, 10 Jun 2026 08:46:26 -0700 (PDT)
+X-Received: by 2002:a2e:2a45:0:b0:396:6842:b604 with SMTP id
+ 38308e7fff4ca-396d08bd989mr56540501fa.6.1781106385873; Wed, 10 Jun 2026
+ 08:46:25 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/2] xen/x86: Change stub page allocation/free
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-CC: <xen-devel@lists.xenproject.org>, Jan Beulich <jbeulich@suse.com>, Andrew
- Cooper <andrew.cooper3@citrix.com>, Teddy Astie <teddy.astie@vates.tech>
-References: <20260609000638.121027-1-jason.andryuk@amd.com>
- <20260609000638.121027-3-jason.andryuk@amd.com>
- <ail8YNrQLZ9bumiH@macbook.local>
-Content-Language: en-US
-From: Jason Andryuk <jason.andryuk@amd.com>
-In-Reply-To: <ail8YNrQLZ9bumiH@macbook.local>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF0000009F:EE_|SA3PR12MB9226:EE_
-X-MS-Office365-Filtering-Correlation-Id: 90d3b8f6-5f4b-4795-26b5-08dec70744d4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|1800799024|82310400026|376014|36860700016|22082099003|18002099003|4143699003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info:
-	2DWm5PwWJbQdDW/szJ13uIMcYUzeqlNDe5a+CByqy/iqiDDTj6Of9lijnsKsymO5txzKkssp0zc7TBQTN6oxY6bOthLOjzI10PYAywWC2AlPQibOqF/dPQg2lrUCbluzcPLg/P7k0OJSbTo7kPmduqy8F+ZCkTPQ+gUx9m01wm4QHQfjTDWd+uUs82mgg7m1SHOkFVNaDtstLwgonuy3ZCvtEDskof25vpzrT0zEb/zudl5PbaxIRl5mM1c7nfDDlB9lcdk4bmt5aUDsoiJlENm86Bm/lNv2j/FZKzbcsSjeHmbwwZaEnNW2cw88mbD/Aw7cfZJ68sIAp+e+vNZlOXIljhgvEGORqiAQx4rrLoxy2DeQ2p6XOiB+SMM68ufhenK1slzgXFjDtQn7VJX+SY62IIqDpL9WibtZppVtHDf5ocK5tYDXDkxkfCClUnqDhN290ZC0/Qu7eKxXiHaQ2VPbunPUwMlRdznvKg/Ax5pJ8OTbGAD6uuMU+fRMMg1XRmOQzUg/dkcuKTiPs98OZ7foJJGLTuueajrZ2uEeUs5Nx2WzhOtvoF+GoxKHaYVEbsRpvQbsiuEQIVpo1fQRGQPtKTuLvyOpy8Fg6y4BLn0gdtI7fSzW2EpuIcJ/FD6Nkui6skIUIDgjzma7SA13+mQTJIMvx4z/ZFllZK615E6F1AvIDBNya0Rb+TPTW1ExCaYWh4kzD8EOaznTttkvohgsD3hsnuT3qd7Zv56T7Rg=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(82310400026)(376014)(36860700016)(22082099003)(18002099003)(4143699003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	YBhOwWqWdvAbDRp95HRPbLbk2/HNWVtFm2ZA1LD9ki8NCJrPbxsPUHcrCyTLLlKF9xuF5HNvRQPKjoBtyDTZzMt+bWgeU476NLKaBE35oegTLMXGGJqemVo1T2lHmTDP7XCICjdXJ7Tq1aQEslDRi1bhvJQtdXPH2H1RrhSuM9fP4Yfw41l+RoA3l9MOjRwyeA8PxRnfMzrKUPlVyznh0QZ3KKrZr9o68vx8uImUB4EUQUMNhWLjHH4Ig22SRbm4RfbanTWjXRGwZ8JIpAV7j44o/xi2tkKXLgR3eM2kzBdKPKKLpQCAGgc0fbnbzoxDxIEIuTtWVZZ4So3x4PQXeTpmcnrrWIcyWXUXSXhCv8F1xLjtoX26YDYcq5qv7mNzUnN2MO+F/Lmf341TQxgW53PmlLfn36SJMSjDYJgVp40EaU0EAXTlTENze1mbccbB
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 15:45:16.6344
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 90d3b8f6-5f4b-4795-26b5-08dec70744d4
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CH2PEPF0000009F.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB9226
-X-purgate-ID: tlsNG-33051d/1781106329-38B74938-FE977C3B/0/0
+References: <20260609121806.2121755-1-sumit.saxena@broadcom.com>
+ <20260609121806.2121755-4-sumit.saxena@broadcom.com> <aikAs4X-2NWTuwCc@infradead.org>
+In-Reply-To: <aikAs4X-2NWTuwCc@infradead.org>
+From: Sumit Saxena <sumit.saxena@broadcom.com>
+Date: Wed, 10 Jun 2026 21:16:11 +0530
+X-Gm-Features: AVVi8CczcMQl6yLccvF8BXqLxlWeOM_I7Uvs7Y8aVoY_zDLtG6L1R0wGVRxim8s
+Message-ID: <CAL2rwxr1uGshb1o=jvP2OnBffNz2cKXj8tHuAUCN5HFuy2vB_g@mail.gmail.com>
+Subject: Re: [PATCH v3 3/4] block: drop shared-tag fairness throttling
+To: Christoph Hellwig <hch@infradead.org>
+Cc: "Martin K . Petersen" <martin.petersen@oracle.com>, Jens Axboe <axboe@kernel.dk>, 
+	"James E . J . Bottomley" <James.Bottomley@hansenpartnership.com>, linux-scsi@vger.kernel.org, 
+	linux-block@vger.kernel.org, Adam Radford <aradford@gmail.com>, 
+	Khalid Aziz <khalid@gonehiking.org>, Adaptec OEM Raid Solutions <aacraid@microsemi.com>, 
+	Matthew Wilcox <willy@infradead.org>, Hannes Reinecke <hare@suse.com>, 
+	"Juergen E . Fischer" <fischer@norbit.de>, Russell King <linux@armlinux.org.uk>, 
+	linux-arm-kernel@lists.infradead.org, Finn Thain <fthain@linux-m68k.org>, 
+	Michael Schmitz <schmitzmic@gmail.com>, Anil Gurumurthy <anil.gurumurthy@qlogic.com>, 
+	Sudarsana Kalluru <sudarsana.kalluru@qlogic.com>, Oliver Neukum <oliver@neukum.org>, 
+	Ali Akcaagac <aliakc@web.de>, Jamie Lenehan <lenehan@twibble.org>, 
+	Ram Vegesna <ram.vegesna@broadcom.com>, target-devel@vger.kernel.org, 
+	Bradley Grove <linuxdrivers@attotech.com>, Satish Kharat <satishkh@cisco.com>, 
+	Sesidhar Baddela <sebaddel@cisco.com>, Karan Tilak Kumar <kartilak@cisco.com>, 
+	Yihang Li <liyihang9@h-partners.com>, Don Brace <don.brace@microchip.com>, 
+	storagedev@microchip.com, HighPoint Linux Team <linux@highpoint-tech.com>, 
+	Tyrel Datwyler <tyreld@linux.ibm.com>, Madhavan Srinivasan <maddy@linux.ibm.com>, 
+	Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>, 
+	Christophe Leroy <chleroy@kernel.org>, linuxppc-dev@lists.ozlabs.org, 
+	Brian King <brking@us.ibm.com>, Lee Duncan <lduncan@suse.com>, Chris Leech <cleech@redhat.com>, 
+	Mike Christie <michael.christie@oracle.com>, open-iscsi@googlegroups.com, 
+	Justin Tee <justin.tee@broadcom.com>, Paul Ely <paul.ely@broadcom.com>, 
+	Kashyap Desai <kashyap.desai@broadcom.com>, 
+	Shivasharan S <shivasharan.srikanteshwara@broadcom.com>, 
+	Chandrakanth Patil <chandrakanth.patil@broadcom.com>, megaraidlinux.pdl@broadcom.com, 
+	Sathya Prakash Veerichetty <sathya.prakash@broadcom.com>, 
+	Sreekanth Reddy <sreekanth.reddy@broadcom.com>, mpi3mr-linuxdrv.pdl@broadcom.com, 
+	Suganath Prabu Subramani <suganath-prabu.subramani@broadcom.com>, 
+	Ranjan Kumar <ranjan.kumar@broadcom.com>, MPT-FusionLinux.pdl@broadcom.com, 
+	Daniel Palmer <daniel@thingy.jp>, GOTO Masanori <gotom@debian.or.jp>, 
+	YOKOTA Hiroshi <yokota@netlab.is.tsukuba.ac.jp>, Jack Wang <jinpu.wang@cloud.ionos.com>, 
+	Geoff Levand <geoff@infradead.org>, Michael Reed <mdr@sgi.com>, Nilesh Javali <njavali@marvell.com>, 
+	GR-QLogic-Storage-Upstream@marvell.com, Narsimhulu Musini <nmusini@cisco.com>, 
+	"K . Y . Srinivasan" <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
+	Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>, linux-hyperv@vger.kernel.org, 
+	"Michael S . Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
+	Paolo Bonzini <pbonzini@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>, 
+	Eugenio Perez <eperezma@redhat.com>, virtualization@lists.linux.dev, 
+	Vishal Bhakta <vishal.bhakta@broadcom.com>, bcm-kernel-feedback-list@broadcom.com, 
+	Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, 
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, xen-devel@lists.xenproject.org, 
+	Bart Van Assche <bvanassche@acm.org>
+X-DetectorID-Processed: b00c1d49-9d2e-4205-b15f-d015386d3d5e
+Content-Type: multipart/signed; protocol="application/pkcs7-signature"; micalg=sha-256;
+	boundary="00000000000089551e0653e82531"
+X-purgate-ID: tlsNG-ebf023/1781106392-295783FF-70B6D730/0/0
 X-purgate-type: clean
-X-purgate-size: 9922
+X-purgate-size: 12633
 
-On 2026-06-10 11:01, Roger Pau Monné wrote:
-> On Mon, Jun 08, 2026 at 08:06:38PM -0400, Jason Andryuk wrote:
->> Today the inline tracking of the stub page is problematic.  0xcc is used
->> to indicate unused, but it is also a "clear value."  A !CONFIG_PV build
->> with smt=0 will bring up CPU0, bring up CPU1, bring down CPU1, and free
->> the in-use stub page.  Subsequent CPU onlining can write to the re-used
->> page.
->>
->> The new approach uses a global, CPU-indexed array of stub pages.
->> However, to handle NUMA aware allocations, we cannot allocate all the
->> pages in advance because the NUMA information is not available.  Keep
->> track of 1 current page for each NUMA node, allocated on demand, and
->> allocate the stub buffers out of those pages.
->>
->> The current NUMA allocation approach is opportunistic sharing among the
->> groups of 32 processors.  The new approach will allocate buffers densely
->> in a NUMA node.
->>
->> stub pages are no longer freed.  They remain referenced in the global
->> CPU-indexed array and are re-used if the CPU is re-onlined.
->>
->> stubs and node_stubs don't have an explicit lock.  During boot they are
->> accessed single threaded.  During runtime, &cpu_add_remove_lock
->> serializes access.
->>
->> Fixes: 7a66ac8d1633 ("x86: move syscall trampolines off the stack")
->> Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
->> ---
->> I'm not sure how to test the NUMA part - I don't have an NUMA system.
->> Also, if NUMA is active, is a cpu node of NUMA_NO_NODE still possible?
->> I used the MAX_NUMNODES + 1 array sizing to handle that, but it's not
->> obvious to me if that is necessary.
->>
->> Roger mentioned removing the per-cpu stubs.mfn.  We'd need to replace
->> that with exposing the stubs array for traps and the emulator.  I have
->> no idea if that will be an improvement and am looking for agreement on
->> this patch before attempting.
->> ---
->>   xen/arch/x86/include/asm/stubs.h |   2 +-
->>   xen/arch/x86/setup.c             |   3 +-
->>   xen/arch/x86/smpboot.c           | 110 +++++++++++++++++++++----------
->>   3 files changed, 77 insertions(+), 38 deletions(-)
->>
->> diff --git a/xen/arch/x86/include/asm/stubs.h b/xen/arch/x86/include/asm/stubs.h
->> index a520928e9a..9d776f81dd 100644
->> --- a/xen/arch/x86/include/asm/stubs.h
->> +++ b/xen/arch/x86/include/asm/stubs.h
->> @@ -32,6 +32,6 @@ struct stubs {
->>   };
->>   
->>   DECLARE_PER_CPU(struct stubs, stubs);
->> -unsigned long alloc_stub_page(unsigned int cpu, unsigned long *mfn);
->> +unsigned long assign_stub_page(unsigned int cpu);
->>   
->>   #endif /* X86_ASM_STUBS_H */
->> diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
->> index 19ee857abf..0cac94cbdb 100644
->> --- a/xen/arch/x86/setup.c
->> +++ b/xen/arch/x86/setup.c
->> @@ -2089,8 +2089,7 @@ void asmlinkage __init noreturn __start_xen(void)
->>   
->>       init_idle_domain();
->>   
->> -    this_cpu(stubs.addr) = alloc_stub_page(smp_processor_id(),
->> -                                           &this_cpu(stubs).mfn);
->> +    this_cpu(stubs.addr) = assign_stub_page(0);
-> 
-> Given stub pages is first used quite late in the boot process, the above
-> arrays would better be dynamically allocated using xvmalloc_array().
+--00000000000089551e0653e82531
+Content-Type: multipart/alternative; boundary="000000000000700d920653e8250c"
 
-Ok.  At some point I intended to dynamically allocate.  But x86 doesn't 
-have num_possible_cpus(), and I thought num_present_cpus() wouldn't have 
-the correct value.  nr_cpu_ids seemed close to the value, but then I 
-convinced myself NR_CPUS would be okay.
+--000000000000700d920653e8250c
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
->>       BUG_ON(!this_cpu(stubs.addr));
->>   
->>       bsp_traps_reinit(); /* Needs stubs allocated, must be before presmp_initcalls. */
->> diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
->> index d7619f534b..d9cd90389d 100644
->> --- a/xen/arch/x86/smpboot.c
->> +++ b/xen/arch/x86/smpboot.c
->> @@ -641,41 +641,96 @@ static int do_boot_cpu(int apicid, int cpu)
->>       return rc;
->>   }
->>   
->> -#define STUB_BUF_CPU_OFFS(cpu) (((cpu) & (STUBS_PER_PAGE - 1)) * STUB_BUF_SIZE)
->> +/*
->> + * Indexed by CPU.  `pg` may be shared by up to STUBS_PER_PAGE CPUs.  Offset
->> + * is the byte offset into the stub page for the CPU's stub buffer.
->> + */
->> +struct stub_info {
->> +    struct page_info *pg;
->> +    unsigned int offset;
->> +};
->> +struct stub_info __read_mostly stubs[NR_CPUS];
->>   
->> -unsigned long alloc_stub_page(unsigned int cpu, unsigned long *mfn)
->> +/*
->> + * Index by NUMA node.
->> + *
->> + * `pg` is the current stub page for the node.
->> + * `next` is the next available stub index (STUBS_PER_PAGE available).
->> + *
->> + * if `pg` is NULL, allocate a new one.
->> + * if `pg` is !NULL, use `pg` and stub `next`
->> + * When STUBS_PER_PAGE are all assigned, clear `pg` and `next`.
->> + */
->> +struct stub_node {
->> +    struct page_info *pg;
->> +    unsigned int next;
->> +};
->> +struct stub_node stub_nodes[MAX_NUMNODES + 1];
-> 
-> I think we could get away with a single array, that uses the CPU as
-> the index and stores the physical address of the stub.
+On Wed, Jun 10, 2026 at 11:44=E2=80=AFAM Christoph Hellwig <hch@infradead.o=
+rg>
+wrote:
+>
+> Just dropping the fairness was rejected before and there is no
+> explanation here on why any of that has changed.
 
-Yes, this is a good idea.
+I missed the fact that this patch had been previously rejected.
 
-> We could also simplify the allocation logic, assuming that CPUs
-> belonging to the same NUMA node are packed contiguously in the common
-> case.  I've given a try at this, and adjusted your original commit.  I
-> however only tested this in QEMU so far.  If you think it's OK I can
-> test it on XenRT and see how that goes.
-> 
-> Sorry I took over the patch, I didn't want to force you into another
-> direction without knowing whether it would be OK, as it wasn't clear
-> to me this approach would be fine (seem so, but still needs further
-> testing).
+The motivation for this change stems from performance issue we
+encountered due to false sharing of the 'nr_active_requests_shared_tags'
+counter
+on certain CPU architectures. I initially submitted a patch to move that
+counter to
+its own cache line to avoid conflicts with 'nr_requests' and other hot
+fields
+(see:
+https://patchwork.kernel.org/project/linux-scsi/patch/20260402074637.92417-=
+3-sumit.saxena@broadcom.com/
+).
 
-No worries.  Thank you!
-
-> One thing that would simplify the logic greatly, which Andrew brought
-> up, is foregoing the NUMA memory affinity for the allocated stubs page, and
-> allocate and map them contiguously in both the physical and the linear
-> address spaces, so that you would find the VA using:
-> 
-> XEN_VIRT_END - FIXADDR_X_SIZE - (cpu + 1) * STUB_BUF_SIZE
-> 
-> This would possibly allow to simply populate the whole range up to
-> num_present_cpus() at boot and get done with it.  However that's a
-> bigger change that should likely be done after 4.22 is out.
-
- From your initial feedback, I intended to use a single array, but NUMA 
-quickly complicated that.
-
-> 
-> Thanks, Roger.
-> ---
-> diff --git a/xen/arch/x86/include/asm/stubs.h b/xen/arch/x86/include/asm/stubs.h
-> index a520928e9a50..d575f1eb0631 100644
-> --- a/xen/arch/x86/include/asm/stubs.h
-> +++ b/xen/arch/x86/include/asm/stubs.h
-> @@ -32,6 +32,7 @@ struct stubs {
->   };
->   
->   DECLARE_PER_CPU(struct stubs, stubs);
-> -unsigned long alloc_stub_page(unsigned int cpu, unsigned long *mfn);
-> +unsigned long assign_stub_page(unsigned int cpu);
-> +void init_bsp_stub(void);
-
-With init_bsp_stub(), assign_stub_page can be static and not exported.
-
->   
->   #endif /* X86_ASM_STUBS_H */
-
-> diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
-> index b3045eac5b5e..dd0972a3025e 100644
-> --- a/xen/arch/x86/smpboot.c
-> +++ b/xen/arch/x86/smpboot.c
-> @@ -20,6 +20,7 @@
->   #include <xen/serial.h>
->   #include <xen/softirq.h>
->   #include <xen/tasklet.h>
-> +#include <xen/xvmalloc.h>
->   
->   #include <asm/apic.h>
->   #include <asm/cpuidle.h>
-> @@ -641,41 +642,61 @@ static int do_boot_cpu(int apicid, int cpu)
->       return rc;
->   }
->   
-> -#define STUB_BUF_CPU_OFFS(cpu) (((cpu) & (STUBS_PER_PAGE - 1)) * STUB_BUF_SIZE)
-> +/* Dynamically allocated, indexed by CPU.  Store physical address of stubs. */
-> +static paddr_t *__ro_after_init stubs;
->   
-> -unsigned long alloc_stub_page(unsigned int cpu, unsigned long *mfn)
-> +unsigned long assign_stub_page(unsigned int cpu)
->   {
->       unsigned long stub_va;
-> -    struct page_info *pg;
-> +    paddr_t addr = stubs[cpu];
->   
-> -    BUILD_BUG_ON(STUBS_PER_PAGE & (STUBS_PER_PAGE - 1));
-> -
-> -    if ( *mfn )
-> -        pg = mfn_to_page(_mfn(*mfn));
-> -    else
-> +    if ( addr == INVALID_PADDR )
->       {
-> -        nodeid_t node = cpu_to_node(cpu);
-> -        unsigned int memflags = node != NUMA_NO_NODE ? MEMF_node(node) : 0;
-> +        nodeid_t nid = cpu_to_node(cpu);
->   
-> -        pg = alloc_domheap_page(NULL, memflags);
-> -        if ( !pg )
-> -            return 0;
-> +        /*
-> +         * Attempt to use the same page as the previous CPU if possible,
-> +         * otherwise allocate a new one.
-> +         */
-> +        if ( cpu && nid == cpu_to_node(cpu - 1) &&
-> +             PAGE_OFFSET(stubs[cpu - 1] + STUB_BUF_SIZE) )
-     PAGE_OFFSET(stubs[cpu - 1] + STUB_BUF_SIZE)
-is to ensure we it remains inside the allocated stub page?
-
-> +            addr = stubs[cpu - 1] + STUB_BUF_SIZE;
-> +        else
-> +        {
-> +            struct page_info *pg = alloc_domheap_page(NULL, MEMF_node(nid));
->   
-
-> @@ -1092,15 +1106,7 @@ static int cpu_smpboot_alloc(unsigned int cpu)
->       memcpy(per_cpu(idt, cpu), bsp_idt, sizeof(bsp_idt));
->       disable_each_ist(per_cpu(idt, cpu));
->   
-> -    for ( stub_page = 0, i = cpu & ~(STUBS_PER_PAGE - 1);
-> -          i < nr_cpu_ids && i <= (cpu | (STUBS_PER_PAGE - 1)); ++i )
-> -        if ( cpu_online(i) && cpu_to_node(i) == node )
-> -        {
-> -            per_cpu(stubs.mfn, cpu) = per_cpu(stubs.mfn, i);
-
-This loop tries hard to re-use the same page for a NUMA node.  My posted 
-approach will densely allocate the stubs.  Your approach would re-use 
-less, unless the CPUs are contiguous in a node.
-
-This is just an observation.  I have no idea how NUMA nodes are 
-allocated.  The "round robin" code in numa_init_array() made me worry 
-that CPUs are more likely to be non-contiguous.
-
-If you have NUMA systems in XenRT, I think it would be worthwhile to 
-test.  Some printks to see how many pages are allocated would be useful.
+During the review, Bart shared his work, which eliminates the
+counter entirely by removing the fairness throttling. My testing confirmed
+that
+this approach resolved the performance issues and improved IOPS.
+This patch is part of a larger set, and I have reported the cumulative
+performance
+improvements in the cover letter.
 
 Thanks,
-Jason
+Sumit
+
+>
+> On Tue, Jun 09, 2026 at 05:48:02PM +0530, Sumit Saxena wrote:
+> > From: Bart Van Assche <bvanassche@acm.org>
+> >
+> > Original patch [1] by Bart Van Assche; this version is rebased onto the
+> > current tree.  In testing it improves IOPS by roughly 16-18% by removin=
+g
+> > the fair-sharing throttle on shared tag queues.
+> >
+> > This patch removes the following code and structure members:
+> > - The function hctx_may_queue().
+> > - blk_mq_hw_ctx.nr_active and
+request_queue.nr_active_requests_shared_tags
+> >   and also all the code that modifies these two member variables.
+>
+> .. and besides that, this commit message is still entirely useless
+> as it doesn't explain any of the thoughts of why this change is safe
+> and desirable.  While the mechanics above are totally obvious from
+> the code change itself.
+>
+
+--000000000000700d920653e8250c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br>
+<br>
+On Wed, Jun 10, 2026 at 11:44=E2=80=AFAM Christoph Hellwig &lt;<a href=3D"m=
+ailto:hch@infradead.org" target=3D"_blank">hch@infradead.org</a>&gt; wrote:=
+<br>
+&gt;<br>
+&gt; Just dropping the fairness was rejected before and there is no<br>
+&gt; explanation here on why any of that has changed.<br>
+<br></div><div dir=3D"auto">
+I missed the fact that this patch=C2=A0had been previously rejected.<br>
+<br>
+The motivation for this change stems from performance issue we<br>
+encountered due to false sharing of the &#39;nr_active_requests_shared_tags=
+&#39; counter<br>
+on certain CPU architectures. I initially submitted a patch to move that co=
+unter to<br>
+its own cache line to avoid conflicts with &#39;nr_requests&#39; and other =
+hot fields <br>
+(see: <a href=3D"https://patchwork.kernel.org/project/linux-scsi/patch/2026=
+0402074637.92417-3-sumit.saxena@broadcom.com/" rel=3D"noreferrer" target=3D=
+"_blank">https://patchwork.kernel.org/project/linux-scsi/patch/202604020746=
+37.92417-3-sumit.saxena@broadcom.com/</a>).<br>
+<br>
+During the review, Bart shared his work, which eliminates the<br>
+counter entirely by removing the fairness throttling. My testing confirmed =
+that<br>
+this approach resolved the performance issues and improved IOPS. <br>
+This patch is part of a larger set, and I have reported the cumulative perf=
+ormance<br>
+improvements in the cover letter.<br>
+<br>
+Thanks,<br>
+Sumit</div><div><br>
+&gt;<br>
+&gt; On Tue, Jun 09, 2026 at 05:48:02PM +0530, Sumit Saxena wrote:<br>
+&gt; &gt; From: Bart Van Assche &lt;<a href=3D"mailto:bvanassche@acm.org" t=
+arget=3D"_blank">bvanassche@acm.org</a>&gt;<br>
+&gt; &gt;<br>
+&gt; &gt; Original patch [1] by Bart Van Assche; this version is rebased on=
+to the<br>
+&gt; &gt; current tree.=C2=A0 In testing it improves IOPS by roughly 16-18%=
+ by removing<br>
+&gt; &gt; the fair-sharing throttle on shared tag queues.<br>
+&gt; &gt;<br>
+&gt; &gt; This patch removes the following code and structure members:<br>
+&gt; &gt; - The function hctx_may_queue().<br>
+&gt; &gt; - blk_mq_hw_ctx.nr_active and request_queue.nr_active_requests_sh=
+ared_tags<br>
+&gt; &gt;=C2=A0 =C2=A0and also all the code that modifies these two member =
+variables.<br>
+&gt;<br>
+&gt; .. and besides that, this commit message is still entirely useless<br>
+&gt; as it doesn&#39;t explain any of the thoughts of why this change is sa=
+fe<br>
+&gt; and desirable.=C2=A0 While the mechanics above are totally obvious fro=
+m<br>
+&gt; the code change itself.<br>
+&gt;<br>
+</div>
+
+--000000000000700d920653e8250c--
+
+--00000000000089551e0653e82531
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
+
+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
+ifscJ8gSasrjdgcsGC9lCyPXLwfNEU5C3Mbnua8OK6sTBpf6mvY88HW/6AoKiSpfo5jxCZQOm4Zz
+oJWD5ea7ThJ2XdDk1rRtGUkwFgN9GRNfOoiIwkkA7EdEfV0eQkVqNgkqUyBSABXcduul2sd4/JQO
+SsVmTdSKid7L6yZsqk5b3Xj+GMJwPdRfeKP2SRoys0SVnajc9Di+9Jy7uGKxxtb562egZauDFX/0
+o0UgYfZrbwWfzJDYMLKzlrOD0M8yGkD8BnyIiVECAwEAAaOCAd0wggHZMA4GA1UdDwEB/wQEAwIF
+oDAMBgNVHRMBAf8EAjAAMIGTBggrBgEFBQcBAQSBhjCBgzBGBggrBgEFBQcwAoY6aHR0cDovL3Nl
+Y3VyZS5nbG9iYWxzaWduLmNvbS9jYWNlcnQvZ3NnY2NyNnNtaW1lY2EyMDIzLmNydDA5BggrBgEF
+BQcwAYYtaHR0cDovL29jc3AuZ2xvYmFsc2lnbi5jb20vZ3NnY2NyNnNtaW1lY2EyMDIzMGUGA1Ud
+IAReMFwwCQYHZ4EMAQUDAzALBgkrBgEEAaAyASgwQgYKKwYBBAGgMgoDAjA0MDIGCCsGAQUFBwIB
+FiZodHRwczovL3d3dy5nbG9iYWxzaWduLmNvbS9yZXBvc2l0b3J5LzBBBgNVHR8EOjA4MDagNKAy
+hjBodHRwOi8vY3JsLmdsb2JhbHNpZ24uY29tL2dzZ2NjcjZzbWltZWNhMjAyMy5jcmwwJAYDVR0R
+BB0wG4EZc3VtaXQuc2F4ZW5hQGJyb2FkY29tLmNvbTATBgNVHSUEDDAKBggrBgEFBQcDBDAfBgNV
+HSMEGDAWgBQAKTaeXHq6D68tUC3boCOFGLCgkjAdBgNVHQ4EFgQURSmmYGaiq6dg3CEvXQGHEXJF
+8xwwDQYJKoZIhvcNAQELBQADggIBAAl0pcCjujKdwmgtiGl2naEY5wB4G601Kuu3032tR7wmgZLg
+k+lg9fhAA0boPsi1FE1Pwb93YDBGr/naS/oQ9JglSMeEVzeRvCqjFS4FpouBAFHB77c8w3ZwJ3+t
+FSRJW9SbW0DADBn5t8GAjv2aSm5vDorqFe9MKOYEe50yYDQEUAsEt5QkrLTcEx9ntvVb25MxI8vM
+bdfqna+/TyCmFmnGAz58jiw5DxLn++6wMmAk0SeUEuMrAlRIyhte6BBSBQ5cL1P+DWSqQbm/pwCq
+NhySSLNtTi2dKJvvg6Ax9au913KiJj6uZfPlh6/0kaVKM5GhIABUcm3c6g2qD7ITJxB/p1kjYKLa
+hVrtrjK7000lHKTPFr6MWB4Ggx7yKQ9yIlPMKKF/Lj8FabYCqeM5ovG7kaK8FYXug5vjNjN0nedR
+X3P8o+8aL6WFIAAAKm2DqZh3252Gcken8v5c+f0SXWSJFvemfFNgrJiQFnFVrOE5v7qwvM/KvVCA
+dYm4Ph9QYI0sm+Xitx8MkdOJtq5mcPWowGi8UiCgkOidv4ki1SA0wptfquUhbfS9b2M3XUHCEIUX
+4ECvIjR3f+E0NbBIfPccWfYUaDLvo2qhLYS3KQbhKdXcJ83ha17mbVNZbDDo9upNcLO/oPyDbCNF
+J6UpXZmis1wnCynhK4kQfwFhW7H+MYICVzCCAlMCAQEwYjBSMQswCQYDVQQGEwJCRTEZMBcGA1UE
+ChMQR2xvYmFsU2lnbiBudi1zYTEoMCYGA1UEAxMfR2xvYmFsU2lnbiBHQ0MgUjYgU01JTUUgQ0Eg
+MjAyMwIMdI2Nfq/Vk8dzZMUnMA0GCWCGSAFlAwQCAQUAoIHHMC8GCSqGSIb3DQEJBDEiBCCkloji
+6Psi9zgrhimshQEAXKX+Z3yyQJFQIYG+6+6wADAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwG
+CSqGSIb3DQEJBTEPFw0yNjA2MTAxNTQ2MjdaMFwGCSqGSIb3DQEJDzFPME0wCwYJYIZIAWUDBAEq
+MAsGCWCGSAFlAwQBFjALBglghkgBZQMEAQIwCgYIKoZIhvcNAwcwCwYJKoZIhvcNAQEHMAsGCWCG
+SAFlAwQCATANBgkqhkiG9w0BAQEFAASCAQCYkSOlUjhevx7TwDrrcUikBx++JLOdmjvHvdLqiUSZ
+LP/AHE+UOlhenxZBe0mJddO6A0cm4DvKbYBitK52BHvnPp5sayvbQwnmojWZ2FfXGtbLC3y2AQxg
+y+kKRdIK8nqgue6aiI50ZGCY6BTiO+KYTWolTWPeSocn7DOEjYCU+F9EA+/c0znhteowRkfRGm20
+O4IcrxtdF6hnqGNdMcHCQbDxfE5HGXqedqIrIW6Cc11hNiZRWMu8NmWUS8Jwes1GMNkXBUs97yWD
+XLqB7veCg3bBdlewSxfBRoaM2zwl9AAisQpG7w81yThfEwDpilRp1b7UAWMNt9Tx1JluD3Zt
+--00000000000089551e0653e82531--
 
