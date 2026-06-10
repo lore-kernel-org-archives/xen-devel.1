@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5018FCD98D1
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 924B7CD98D3
 	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 12:47:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1334266.1597374 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1334255.1597343 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXIKo-0001rx-E4; Wed, 10 Jun 2026 12:47:06 +0000
+	id 1wXIKm-0001Le-Lm; Wed, 10 Jun 2026 12:47:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1334266.1597374; Wed, 10 Jun 2026 12:47:06 +0000
+Received: by outflank-mailman (output) from mailman id 1334255.1597343; Wed, 10 Jun 2026 12:47:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXIKo-0001pM-1p; Wed, 10 Jun 2026 12:47:06 +0000
-Received: by outflank-mailman (input) for mailman id 1334266;
- Wed, 10 Jun 2026 12:45:33 +0000
+	id 1wXIKm-0001L2-HC; Wed, 10 Jun 2026 12:47:04 +0000
+Received: by outflank-mailman (input) for mailman id 1334255;
+ Wed, 10 Jun 2026 12:45:15 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Mykola_Kvach@epam.com>) id 1wXIJJ-0001Cs-1Y
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 12:45:33 +0000
+ (envelope-from <Mykola_Kvach@epam.com>) id 1wXIJ0-00018L-Rp
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 12:45:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wXIJI-00H9hG-EE
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 14:45:32 +0200
+ id 1wXIJ0-007rhd-1Y
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 14:45:14 +0200
 Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Mykola_Kvach@epam.com>)
- id 6a295c60-5cb7-0a2a0a5109dd-0a2a4508dcb8-20
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:32 +0200
-Received: from [52.101.65.132]
- (helo=DU2PR03CU002.outbound.protection.outlook.com)
+ id 6a295c4f-2eae-0a2a0a5409dd-0a2a4508b56c-36
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:13 +0200
+Received: from [52.101.66.72]
+ (helo=DUZPR83CU001.outbound.protection.outlook.com)
  by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <Mykola_Kvach@epam.com>)
- id 6a295c6c-63b5-0a2a45080019-3465418425f0-3
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:32 +0200
+ id 6a295c59-63b5-0a2a45080019-3465424806ab-3
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:13 +0200
 Received: from AS8PR03MB9746.eurprd03.prod.outlook.com (2603:10a6:20b:61d::18)
- by AM9PR03MB7558.eurprd03.prod.outlook.com (2603:10a6:20b:415::5)
+ by DB9PR03MB7706.eurprd03.prod.outlook.com (2603:10a6:10:2c8::23)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.11; Wed, 10 Jun
- 2026 12:45:27 +0000
+ 2026 12:45:11 +0000
 Received: from AS8PR03MB9746.eurprd03.prod.outlook.com
  ([fe80::cf11:309:1384:58f7]) by AS8PR03MB9746.eurprd03.prod.outlook.com
  ([fe80::cf11:309:1384:58f7%4]) with mapi id 15.21.0113.011; Wed, 10 Jun 2026
- 12:45:27 +0000
+ 12:45:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,35 +57,35 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LDBR4EgiHWDfctDyQOFveoNwrGy3CE8i7ESuRVWF8++TtRjyAw8ymU8kq74AO8//3ErQpBu1ldjcTc74xz/eQgmYEbbNZFCapJbiptAzOrwBC/c41Ur7O1ZC8c/T/fBTtNQMMCw2+jLPRkxE2gOAUVw9G6iDBgir0pZP2MQJsKznLsR54WB3iU+8UZKdX4caWQEplHSVHwSyjtzkXsELRCCAaGBfmY0FrSlmwrEitD3oMKD774QTjHWShYFTEvFnmMnA/BruLoF0OenJxWF4xd+BPY4lay0HKa3hJc9Vl0g1DUa880ZUyjrk4rEysvoveun8I2jiy0V9d/X0subAMg==
+ b=CAzuTfeSUc4P/MiEmlPkECyD1hNXFpooh5GYiiQnkDUtJbhTbZBLTsW6J7EOyxqSChJkuzt9DUDOWs322E+LcjKM/PE7nnc0bPTsBgtvE5M2EA1Lz/4zjFt+ZREnQ5QghnzUgwjTGNEUQyxOgN4Jlur38oXcyXkVQKXv61AiVUkSccRmrectw7nZg2TeDFRQnmR93joU06N3SVAtl4M5o35JPfhlj9jtrVVWAMvPkv753h8f8tFuQ9Ynidhic76Tzah6vOWGBxGfmPhmYoT7aG539pQOf0J2gIp9wjlg7rDjQtj1ViOcJKbNRv5Dkhh/8PUGdwdvQ5CHutp1mwgM6g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=RRVpxeM0gaRhUjO9d6z4tc/MJuoIRCJQUNdQDfFlEeE=;
- b=F15kTgcSYiPMEC+vHRL41Dq8itkZ9fBRXWuFmMbQtxQf87I7tFsZB43QFxBPNxgCD4CL5NkKKkJPyhK4PBDkJb2zGSz2VWD0MEAjcYvmKDdx5+QK0ulJfaZgoguGpALyCcYIbPvsWVI6LAUes5OVNna4oKUgQRBRuV4FvcTi1NpNG+Waj3fDk0CwMIOcihTkwLfX5NhvCxluZoMzUjkRqKAZQfuTNVqawp+pk5RWIjJPnAJhER2YdyRax5jUtYDshOhCDYLgR4Mgz4PE15torZ+UoUA2+J1pRWyTGAbINpShCaa4RnKJxj17zTtr/giFpzsRbClyQnz+P/64CHt+tw==
+ bh=j/x0rT1oB7OVwr8zqPawvId6h6lac1Z+SScMfAw/LeE=;
+ b=LRud86CaDjRzQQhiS9xFRq+bPjAkkx3mNjskn5gpyHKZVG0rz7upjlayGOG6EAmFOV4SSBlwMe/IuBKh+oYdWonmLpG1mraUCUPv9nkbrGLv02LBybHnGLIMhGDkxvBM+Wocv8+SL79XonnC28/a282nsYZmQWAsn6KSw333cZjSlUkiFghiHkx3KqoWy4d9UMm+yO7CdM1tOzJGuf/qernsCAtw3EcZdRdHiF4T87poHk5Eyr2RK0tT5cloqDDKJ7R5TYuVpMHqxaJOa6e9U+zBMbvvVGag/MEhSg0ms79LKzTdzEUkinFArDEAlKSGE38SewzfbE+amPNK/4xhtw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RRVpxeM0gaRhUjO9d6z4tc/MJuoIRCJQUNdQDfFlEeE=;
- b=H+8w52V6eKOybGENTInrgbg97nlNH2OWQbHacydgKopkvWP2fT0t/tJ8HVKA1N6+/iVNv1FfqTajabgs5SQqEcJbzM6lMuoJj+5zE3qm1OFwBIKWXqOvjscawWtBo0QcvWpVx1dM/x0W+Jb5hIc6xPu21JQ28X9KCWgouZzRqCW0M4DI6GjrykZgACIBcTsuOg3lZUJZmmnBkolKHA5UnduCqEzz+S8wtiR1EvgM7lhgYXRHj+4RpikNVe2SQrIpfTSmBZwzItVTXW9O/UGcUfGa62LN4esPJLTDy5aUY6gSeFSByZFuPqBaix/yQjK5gH4BH9S9n1ulLF5HxOAIVw==
+ bh=j/x0rT1oB7OVwr8zqPawvId6h6lac1Z+SScMfAw/LeE=;
+ b=JRqJ3b57fpOO8zntxFNyuZZNpqPONRlFbV+ycfMAZ++wvMNgwMqEbx6GENFKQ5AZ7N89g/hAxoVTxoEYMPjDjVfHa5BtcQ1KMFph8oCQtjAw5LWj0jGC/sEV5CAcWhzft6gEmzgBJ1JdREQflb5LQVvG/pT6i4M9i6KhEQRFBp+mgRA/daDheruitgEyD4pTlxT18zsLhozMolFHtrNUR8FhUzUQllu60GIXz5LAZ4F7aXLppnGcXBeXmzDMlE2XXUaB3i9C0DBB6GX91n/jQx60jM6FkwjmlyS9sEKpyuOmC6Jx7WSB4F1DAguScJdhr7seIvwpRmvWI0n12OSxUQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 From: Mykola Kvach <mykola_kvach@epam.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Mykola Kvach <xakep.amatop@gmail.com>,
-	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Jens Wiklander <jens.wiklander@linaro.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Julien Grall <jgrall@amazon.com>,
 	Luca Fancellu <luca.fancellu@arm.com>
-Subject: [PATCH v11 06/13] xen/arm: tee: keep init_tee_secondary() for hotplug and resume
-Date: Wed, 10 Jun 2026 15:44:26 +0300
-Message-ID: <839baea8d07b4de595296c274cc0a5a4867f4e5b.1781084290.git.mykola_kvach@epam.com>
+Subject: [PATCH v11 01/13] xen/arm: Add suspend and resume timer helpers
+Date: Wed, 10 Jun 2026 15:44:21 +0300
+Message-ID: <c6c326fd9a7e6fce44d97f332a8b5d815ffad841.1781084290.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1781084290.git.mykola_kvach@epam.com>
 References: <cover.1781084290.git.mykola_kvach@epam.com>
@@ -96,89 +96,191 @@ X-ClientProxiedBy: WA1P291CA0008.POLP291.PROD.OUTLOOK.COM
  (2603:10a6:20b:61d::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR03MB9746:EE_|AM9PR03MB7558:EE_
-X-MS-Office365-Filtering-Correlation-Id: d3c62d1c-a63a-4cf0-a84c-08dec6ee2604
+X-MS-TrafficTypeDiagnostic: AS8PR03MB9746:EE_|DB9PR03MB7706:EE_
+X-MS-Office365-Filtering-Correlation-Id: 77c52398-2fef-4888-487d-08dec6ee1c87
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|366016|1800799024|376014|56012099006|11063799006|6133799003|18002099003|22082099003;
+	BCL:0;ARA:13230040|23010399003|1800799024|376014|366016|3023799007|56012099006|11063799006|18002099003|22082099003|6133799003;
 X-Microsoft-Antispam-Message-Info:
-	E23G6cjbq1oAZKJ0MJQa8O1b2LlIA1uoHyd71vnM4ZqRfy0NXyD79t7668P8mgO/DA2n1TUgk2p9lXw/nYrSAsYnZ7nZZgwP5M3ioJTHSjF7XCOuYg1Z3pjJ+kF8IKPFuPAj2cd2RDRishb+tr8DchMDgOENxeS3SuwJ9fUJyniuBue5T3DThCSfXK83Ge8/ZVrOitfU+8qy9Gfxr6BVolxRX97X6RLKZlDtSibV/DG5qJnISw9gQS5s6WaP92pYLF21N/XPFTu2KVqj2PbpN9pJ0HfeTqWeMy59lum1ZWZecOhPCmUb+8v8W0TDtqji8/mkiZsdnrVXDXrYoe/Uzyknpmv4+xOESTka+hItDIVKeEXl5q0SF651iK0zG4qqBAGKK5OPoaveJ6/5YVwpCM2JdE6OY6nHxb+dZXpY8SZWXduyrmPHaxgVBM+JoklJ9bW3hiFdE+53+XVl3oQWCdBhpAP0MIQByhmnHoRyoGJouzyjPPMUCKY+k5rOdgaCeyKbmPiF5kyepFPvNtbJ4Ax+BIf3JXJgBcMJDHD4YREJ6xXuBxCAi2XCqaSaUNQ65WcrCLXnl+YZ9T15RRJ/KSCU167fJyyqx9gqKwLczv6JBVrOuXye/jvrPooL7pmlKqFsxFVyqk2A0ipmS1rR7FerOwjZeA3HZtlLlnlmINX7ZH2I9PmHyTDJsOJh/99i
+	Ol+8jfu3EV6t1S9G7B7hocjuuZ+LxeWyanHXnFUqrJhjfA0iHbVuZ9iO+03WxNnRZPNvx1BvCL23RJ4H4uTulK+/AE59Z1vdo/dy22cEYw62F79GWPHmJ1n/oVCRNpst2T9+ptlfxGszPeitnKMIbZYeHVJHu90I18KrD07R2k1nxDEFa/PENGTquoW+zzgsHZ8UnUEuAZofqTilJAV0tBa2joKJ+XocbqUkUdkPyXRZnDwN5TPbmn3mF5Gi3YXzkV0RUt6jyOxdkFJ3dtQg+L7d1W5RfXtU4tmCG3T6taoVRKau/r7OalixVkSm+F8XJRU274IKunhrRuGe2R+3c3BAfk7B6MhmQKiKEIWiW2orjhZbOV3gZxiDpMUAeJhq0GJJvdJX5qzWX98OeYWx2yDyUHk70gGLoQkAzpo+ytxzOPcb7aMTolROlq1f6f4ZkrQoaA4ERTLnOuG6JN5YgDVw0GYC+v8jfDGsoZpzeD0fQrOtffVw7Nl1phnBA0Fx5rI33FRtF2l0UiVPCWhT3JY/KhZubrNyurfOsLhvgud8HMD1L0F2QqxKfXd62u303a0zo79eZDwp1PbGaMOnzd0M4oFbcmwfiyHm/iG6yMe3QSD0seSrUmgAzygproHAi4/2X2S7w+qoxKa+Cr2NmdMqpvQODnPR1y6KJreLDepObB+hPSnU1dq+Z6MTavoz
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9746.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(56012099006)(11063799006)(6133799003)(18002099003)(22082099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9746.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(3023799007)(56012099006)(11063799006)(18002099003)(22082099003)(6133799003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?x8D90J2UWMsVuGFgnW/t9ATE1N3GyB/zWFkv/MFLFVki5/Q+CV68AVjgcTlw?=
- =?us-ascii?Q?eP7ayugwJJvLQfm+2XkxOw5+P4QcSaTtVR9Bq4BasDhc/Lr5Yg13PJ3Q2ufn?=
- =?us-ascii?Q?wKY0eGaStOU79FpN3wihaUFjO7PPG2GbbcbsVvmxhhrsUc0HbzxsOTqxDmyN?=
- =?us-ascii?Q?iL0AlgUgaIycz+IVlclct3s7n09+SFSwHsL481WrjI76/ZoIIDFsVJmEwX1D?=
- =?us-ascii?Q?cSdd06nAdeg1FQXcUHAQKgXf5sOEnmYiL9fJ9rHdAzCQPnP5NfBR2tMs6lQN?=
- =?us-ascii?Q?J52kE1qIAUkDP3BN0x9kjW3dvRFJmfhzJSqdl1qBg0KxwfWgQawKYRxn7TRz?=
- =?us-ascii?Q?VSiJuVibffh1+dUUiCO9DI9JOgns5UY8WaawhCXuPZBAdbCCB4aTmaj/Xjvj?=
- =?us-ascii?Q?CoAplESNz+hP1+tI8YRNqCkuuQepUheOB/k8sVc8JUiDDWDSA7PUegDjp2c3?=
- =?us-ascii?Q?rJHdoPGTd0L+oayvb4y7mB5eo6L0JW5bKF8MFkSYd8RstjHubjTrIKDjulOW?=
- =?us-ascii?Q?E0NVJd1bCwCvt2uWfEQO8lmWhkGeqPVhHo5upcwW28nk+bG98mmOf2GuYJQP?=
- =?us-ascii?Q?IAIJ0WxAp8MdITPmPU2v0FJKA7UdZyg097lOjdrPMmVhN1hJECRc8pv0yLYD?=
- =?us-ascii?Q?1LRMhbpxAJAr1Ewy94ml2SMCqYpFvso1DmphPgzKdZMXifEw7A7OHiWnEC58?=
- =?us-ascii?Q?twXxCjNFuLEpUfcdK5uV+TQ91aWmDInuGd39UAAHj8cNer66j4tiJ7rIujAk?=
- =?us-ascii?Q?KM6VNE0TpEIsvU1XDS485qdTCLJ4/JFfcRNdlXZtsg7mOrI7IZItfzK0ZNVA?=
- =?us-ascii?Q?Fb1KD9MkrtmKuhH5+eabSHoCsqxYLCE2Yp+A03JYDTqKjbu46XfxHsJGZqES?=
- =?us-ascii?Q?R2Vd+V4BaI004j88HMARk7jPBvgQLoDrB2qJ7MT1Im8XUabfG1C5arEOGrxa?=
- =?us-ascii?Q?2Mi9ivr3UUOvnX3x1wHjbza4osMo7uZos6KqNj3u/IsvlwAI+3oNoN3ab+MV?=
- =?us-ascii?Q?SqcRYUk6l2aZha36FsCZhUswEZxxAUcUNvke+z4d+SSHP2rueCgDnuBNrW5b?=
- =?us-ascii?Q?fNCeaD3O9Xg4Vz/g+dCMVcOqghsC5mLm5ePFta6yxL8J9yA1QEPqLc+KCkTp?=
- =?us-ascii?Q?mnN8lwQDMilotE8RpZbmOFRMYSEOVplwoncA9Tw6YoE/5RTbmTSOsE8eHucZ?=
- =?us-ascii?Q?kP9U7LGKJw6K0EXrLGmL87X1Nb19eJVviEB0/mWH0bQVMke8w67MRTswTdFL?=
- =?us-ascii?Q?dLQilSGQuODTwrBl40ZcNrYwvzPp8cn8rlZo67SUy/l5TtChIxTg6VCkKTdz?=
- =?us-ascii?Q?wL58A0NmJFrGMnaf1nUxiBW2lYOaVV4e20DTIhcJLENUusrn92o42aXjevgM?=
- =?us-ascii?Q?zInAJOjfHwip7rWTpTMgfunSX9fadjMhR5QS0tIEQO0rtPBmPLMsVJo6LI9L?=
- =?us-ascii?Q?QlnH+X3wvIVi0Jv66nYCftBuxVZZWYf5Aam1S/nysbMtQ97GrFKnGUluXgQX?=
- =?us-ascii?Q?2Jkk/Jdt4GYHXgN+KNrPDEpSFVkxOJNG25UfUMdfE9uPOxug2fltv/MF8nTd?=
- =?us-ascii?Q?uweS7YwhKHcFCV0p6mUIpMPq4O7DgcVDL0MaWi+KMuq6VcYlQYS6BVdrNhQi?=
- =?us-ascii?Q?M5gYJ6bCQUYPibTxTknHdqmgJxj2b62mC3RLaIuTV1KpbYdrUrYkmHVexy98?=
- =?us-ascii?Q?qHeIuyzjo+rg5Rsr6XzW8dMNN+A2tFPURoTEi55WkW96OVZHmJ+kMa7RzasW?=
- =?us-ascii?Q?73JKOqtMUQ=3D=3D?=
+	=?us-ascii?Q?P+SVnulLqut7slHm0nXwtAdhWpljY9N+RSLhuyPRPPkZuBePuh2/Cjb3pHB1?=
+ =?us-ascii?Q?xpI5H+MW7V/ZfolGbyPAPEaruiREe0spP/DKw1XHIp6txhtmhNtZCFd4JOL4?=
+ =?us-ascii?Q?bAJ0OIeJEie/MCEHkV1UzKsWdQ/mAewaUiQkSms5evtzddCczSzNiBXH+12J?=
+ =?us-ascii?Q?npQcO4YrgnXqNOMigcLUL6dBNqMIvGdARkSSXXbpHFLyQFEmxMnbfEoqHZnA?=
+ =?us-ascii?Q?g50hSY/r5AnzKiJif1thMgYKAwjOIK8leEXppKq0am1B50xU4c1YpCHncokQ?=
+ =?us-ascii?Q?6H6jRlGWro6s3g2bUCSyObhCw0IQ0Vq59FtVMjT/RIdm3a3phSi4u7b56sS+?=
+ =?us-ascii?Q?dTsSbcNlAu3imFYj2B0cxr7t8kIbtJ9RQX0S+D4958kNgwSwq+6SyJdNQZ3T?=
+ =?us-ascii?Q?m7A/FvOmrL2Z/QxntCyI2bRAogZYz00b+65DonNEjWVm9geUQu7/szCxl/Ji?=
+ =?us-ascii?Q?x2+Rcled0WNWyH2AiLuaRrZ3IEoWaAhCV4P8DUo6y58vXZ2xNLHH8sQacgc0?=
+ =?us-ascii?Q?RA23TPw5wYDU/EMHFOjKJP4C5ampaOOpk3oUxR3zKBSjElj3sTbVXuTeRRCr?=
+ =?us-ascii?Q?sduaPX3ZmfcCuxajFv+GGQB4E/SKehZwgOXB6y+lTygyLA1KAJY2Q8JHtM0i?=
+ =?us-ascii?Q?7d4aE6aE9hmiiRl/Zu6sU2nSGR7+NhEu5os5AX9x8mZSZeG7/6uowHmByxdx?=
+ =?us-ascii?Q?u9lOIV3Hg/0z1GFOdbYnoxoYnTPQH1d8iKQA96mjL3SDE6DedLG0zrXyo8wl?=
+ =?us-ascii?Q?IM/TEtOgdqUo4lUkBipJkNImv8M5a+wdcs1cIkRHpi7oA5gdHelzE2hLdUma?=
+ =?us-ascii?Q?wdJfradrojLUo4IJarhSM3LW2R/k7WAb8Yb647SdPS7JnI0CZ5VAdmOOCuC0?=
+ =?us-ascii?Q?LovHL+2nC7fQswe5CMC8feEPG5Ej6i5/Zebd1qlPysH7XZa5X71buA7fu0FB?=
+ =?us-ascii?Q?fVUQwtAnl0oVkKbMWfeVt6uGJ3jfwtGPBebo0GNrubtwYCDOOPq0iBYwZk+j?=
+ =?us-ascii?Q?3Gw4qooihYNyD3qfmY9oFFR29udfa2km/HT2Z9TekdLGhcpoATYxWtqMLK7A?=
+ =?us-ascii?Q?4kyXOwwMRVGja3kNf/jnGbYv79QWy9hxz65B9wHRM9FgPoJUxg75/NHw/4FS?=
+ =?us-ascii?Q?l/HiR4PXey6Bz3Ji6We1gdMVYlYl8iCtCYGtbLwToCgp/Vlie6+7Hvftenrf?=
+ =?us-ascii?Q?neg2VZZFkNRBxr4a8VDm+1bBRWUh2tREz9m5fOHX1WQKsMFpUVEGS0mXJzGu?=
+ =?us-ascii?Q?bxsfyED1SmV5wNGxtQozDdb1ZDHvfCaNez7fvRZII+b7CTwh//TnLO+507sL?=
+ =?us-ascii?Q?8NoSf7O7e4TxW+ZBFbDUxmBQS2wfrgrnvSiERndaFaGvEdq8Tvbvpf5bWgm7?=
+ =?us-ascii?Q?WjDFJSkD6OccLXXq6/o7Ky5gtERKs0yyG/FYcaiPmK4KfUkyWkhN2NEijJ2H?=
+ =?us-ascii?Q?CiC+zoRV/lHhZbCYv2NhU/NPaDnpm17cto843O8HRSTUJAQyjjlOCZ0/Q+rS?=
+ =?us-ascii?Q?aB0KsGpSOd32OS0fbEe9qzqglRrTY2mTAWwjySFEPyVrGLnAEWtf+TYa8Fu0?=
+ =?us-ascii?Q?DCzrp5Z6kqIfSVurVPcM23bMC/Bfrpz/7JBfuS6lM8xytVCr9jJqW4uadj2h?=
+ =?us-ascii?Q?fAcnwpOhn9042Xz/5/eO64RIMbZUA9lYg6gBWHPXlV7V2kUzP5jlEkEla8Q5?=
+ =?us-ascii?Q?7VI3PyLODFOdrD14YqgyZXGaAz8wlNVkj8eMQLtCEL/LqRRa9HJRXhaokHLp?=
+ =?us-ascii?Q?3LFbaaKnAw=3D=3D?=
 X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d3c62d1c-a63a-4cf0-a84c-08dec6ee2604
+X-MS-Exchange-CrossTenant-Network-Message-Id: 77c52398-2fef-4888-487d-08dec6ee1c87
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR03MB9746.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 12:45:27.7725
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 12:45:11.7839
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ckLFgBP/SdiGUKkGfCt9UQsdciqEBk4CqGpfLhClOL8W+U/S7MsYwDPm2DHQx8pmFiYzLy2zab7ulStFnORxDA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR03MB7558
-X-purgate-ID: tlsNG-c1860d/1781095532-C5F80DB1-4340F1EB/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: DB721hZWBwKcinEDQskQE576MKSSHCTw/61XlPMljuAPqkBqPcT+e8BqRoZGDEDw01vZaVcoPvZLLyJljSDnXQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR03MB7706
+X-purgate-ID: tlsNG-c1860d/1781095513-BCB64DB1-9DF22876/0/0
 X-purgate-type: clean
-X-purgate-size: 1017
+X-purgate-size: 5064
 
-init_tee_secondary() was marked __init and freed after boot. Calling it
-from the CPU hotplug/resume path then executed discarded code, which
-could crash Xen. Drop __init so the TEE mediator secondary init can run
-safely on hotplugged and resumed CPUs.
+From: Mirela Simonovic <mirela.simonovic@aggios.com>
 
+Timer interrupts must be disabled while the system is suspended to prevent
+spurious wake-ups. Suspending timers in Xen consists of disabling the
+physical timer and the hypervisor timer on the current CPU. The virtual
+timer does not need explicit handling here, as it is already disabled on
+vCPU context switch and its state is restored per-vCPU on the next context
+restore.
+
+Resuming consists of raising TIMER_SOFTIRQ, which prompts the generic
+timer code to reprogram the hypervisor timer with the correct timeout.
+
+Xen does not use or expose the physical timer, so it remains disabled
+across suspend/resume.
+
+Introduce a new helper, disable_phys_hyp_timers(), to encapsulate disabling
+of the physical and hypervisor timers.
+
+Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
+Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
 Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
-Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
-Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 ---
- xen/arch/arm/tee/tee.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes in V7:
+  - Dropped EL1/EL2 wording; use "physical timer" and "hypervisor timer"
+  - Renamed helper to disable_phys_hyp_timers() to reflect its actual scope
+  - Clarified virtual timer handling (disabled on vCPU switch-out, restored
+    on context restore) and added comments in suspend/resume paths
+  - Added resume comment explaining which timers are restored by
+    TIMER_SOFTIRQ
+---
+ xen/arch/arm/include/asm/time.h |  5 ++++
+ xen/arch/arm/time.c             | 44 ++++++++++++++++++++++++++++-----
+ 2 files changed, 43 insertions(+), 6 deletions(-)
 
-diff --git a/xen/arch/arm/tee/tee.c b/xen/arch/arm/tee/tee.c
-index 8501443c8e..00e561fc78 100644
---- a/xen/arch/arm/tee/tee.c
-+++ b/xen/arch/arm/tee/tee.c
-@@ -128,7 +128,7 @@ static int __init tee_init(void)
+diff --git a/xen/arch/arm/include/asm/time.h b/xen/arch/arm/include/asm/time.h
+index c194dbb9f5..9313b157ea 100644
+--- a/xen/arch/arm/include/asm/time.h
++++ b/xen/arch/arm/include/asm/time.h
+@@ -105,6 +105,11 @@ void preinit_xen_time(void);
  
- presmp_initcall(tee_init);
+ void force_update_vcpu_system_time(struct vcpu *v);
  
--void __init init_tee_secondary(void)
-+void init_tee_secondary(void)
++#ifdef CONFIG_SYSTEM_SUSPEND
++void time_suspend(void);
++void time_resume(void);
++#endif /* CONFIG_SYSTEM_SUSPEND */
++
+ #endif /* __ARM_TIME_H__ */
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/time.c b/xen/arch/arm/time.c
+index 6955b2788f..fff8e4aca6 100644
+--- a/xen/arch/arm/time.c
++++ b/xen/arch/arm/time.c
+@@ -296,6 +296,14 @@ static void check_timer_irq_cfg(unsigned int irq, const char *which)
+ static DEFINE_PER_CPU_READ_MOSTLY(struct irqaction, irq_hyp);
+ static DEFINE_PER_CPU_READ_MOSTLY(struct irqaction, irq_virt);
+ 
++/* Disable physical and hypervisor timers on the current CPU */
++static inline void disable_phys_hyp_timers(void)
++{
++    WRITE_SYSREG(0, CNTP_CTL_EL0);    /* Physical timer disabled */
++    WRITE_SYSREG(0, CNTHP_CTL_EL2);   /* Hypervisor's timer disabled */
++    isb();
++}
++
+ /* Set up the timer interrupt on this CPU */
+ void init_timer_interrupt(void)
  {
-     if ( cur_mediator && cur_mediator->ops->init_secondary )
-         cur_mediator->ops->init_secondary();
+@@ -306,9 +314,7 @@ void init_timer_interrupt(void)
+     WRITE_SYSREG64(0, CNTVOFF_EL2);     /* No VM-specific offset */
+     /* Do not let the VMs program the physical timer, only read the physical counter */
+     WRITE_SYSREG(CNTHCTL_EL2_EL1PCTEN, CNTHCTL_EL2);
+-    WRITE_SYSREG(0, CNTP_CTL_EL0);    /* Physical timer disabled */
+-    WRITE_SYSREG(0, CNTHP_CTL_EL2);   /* Hypervisor's timer disabled */
+-    isb();
++    disable_phys_hyp_timers();
+ 
+     hyp_action->name = "hyptimer";
+     hyp_action->handler = htimer_interrupt;
+@@ -333,9 +339,7 @@ void init_timer_interrupt(void)
+  */
+ static void deinit_timer_interrupt(void)
+ {
+-    WRITE_SYSREG(0, CNTP_CTL_EL0);    /* Disable physical timer */
+-    WRITE_SYSREG(0, CNTHP_CTL_EL2);   /* Disable hypervisor's timer */
+-    isb();
++    disable_phys_hyp_timers();
+ 
+     release_irq(timer_irq[TIMER_HYP_PPI], NULL);
+     release_irq(timer_irq[TIMER_VIRT_PPI], NULL);
+@@ -375,6 +379,34 @@ void domain_set_time_offset(struct domain *d, int64_t time_offset_seconds)
+     /* XXX update guest visible wallclock time */
+ }
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
++
++void time_suspend(void)
++{
++    /* CNTV already disabled by virt_timer_save() during vcpu context switch. */
++    disable_phys_hyp_timers();
++}
++
++void time_resume(void)
++{
++    /*
++     * Raising TIMER_SOFTIRQ triggers generic timer code to reprogram the
++     * hypervisor timer with the correct timeout (not known here).
++     *
++     * Xen doesn't use or expose the physical timer, so it remains disabled
++     * across suspend/resume.
++     *
++     * The virtual timer state is restored per-vCPU on the next context switch.
++     *
++     * No further action is needed to restore timekeeping after power down,
++     * since the system counter is unaffected. See ARM DDI 0487 L.a, D12.1.2
++     * "The system counter must be implemented in an always-on power domain."
++     */
++    raise_softirq(TIMER_SOFTIRQ);
++}
++
++#endif /* CONFIG_SYSTEM_SUSPEND */
++
+ static int cpu_time_callback(struct notifier_block *nfb,
+                              unsigned long action,
+                              void *hcpu)
 -- 
 2.43.0
 
