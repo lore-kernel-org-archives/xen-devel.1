@@ -4,44 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EDEBCD8CB9
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 15:41:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1334503.1597506 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CAA2CD8CB9
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 15:45:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1334509.1597516 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXL3M-00042U-9h; Wed, 10 Jun 2026 15:41:16 +0000
+	id 1wXL7U-0004Zz-Ow; Wed, 10 Jun 2026 15:45:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1334503.1597506; Wed, 10 Jun 2026 15:41:16 +0000
+Received: by outflank-mailman (output) from mailman id 1334509.1597516; Wed, 10 Jun 2026 15:45:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXL3M-00042N-6v; Wed, 10 Jun 2026 15:41:16 +0000
-Received: by outflank-mailman (input) for mailman id 1334503;
- Wed, 10 Jun 2026 15:41:14 +0000
+	id 1wXL7U-0004Zs-MI; Wed, 10 Jun 2026 15:45:32 +0000
+Received: by outflank-mailman (input) for mailman id 1334509;
+ Wed, 10 Jun 2026 15:45:31 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper3@citrix.com>) id 1wXL3K-00042H-If
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 15:41:14 +0000
+ (envelope-from <Jason.Andryuk@amd.com>) id 1wXL7S-0004Zl-Lw
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 15:45:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wXL3J-002yQ2-Ux
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 17:41:13 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wXL7R-009xxa-O8
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 17:45:29 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a29858d-e002-0a2a0a5209dd-0a2a4508dca0-10
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 17:41:13 +0200
-Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a298599-63b5-0a2a45080019-d155dd2ac1dc-3
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 17:41:13 +0200
-Received: by mail-wr1-f42.google.com with SMTP id
- ffacd0b85a97d-45ef82204c6so3879528f8f.3
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 08:41:13 -0700 (PDT)
-Received: from localhost.localdomain (host-78-146-242-105.as13285.net.
- [78.146.242.105]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4601f2dcde3sm74605802f8f.1.2026.06.10.08.41.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jun 2026 08:41:12 -0700 (PDT)
+ (envelope-from <Jason.Andryuk@amd.com>)
+ id 6a298680-2eae-0a2a0a5409dd-0a2a4503b146-34
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 17:45:29 +0200
+Received: from [40.107.200.61]
+ (helo=CH5PR02CU005.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <Jason.Andryuk@amd.com>)
+ id 6a298697-672d-0a2a45030019-286bc83d3d0a-3
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 17:45:29 +0200
+Received: from CH5PR05CA0017.namprd05.prod.outlook.com (2603:10b6:610:1f0::7)
+ by SA3PR12MB9226.namprd12.prod.outlook.com (2603:10b6:806:396::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.11; Wed, 10 Jun
+ 2026 15:45:20 +0000
+Received: from CH2PEPF0000009F.namprd02.prod.outlook.com
+ (2603:10b6:610:1f0:cafe::8a) by CH5PR05CA0017.outlook.office365.com
+ (2603:10b6:610:1f0::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.12 via Frontend Transport; Wed,
+ 10 Jun 2026 15:45:16 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ CH2PEPF0000009F.mail.protection.outlook.com (10.167.244.21) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.113.7 via Frontend Transport; Wed, 10 Jun 2026 15:45:16 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 10 Jun
+ 2026 10:45:16 -0500
+Received: from [172.17.22.200] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.41 via Frontend
+ Transport; Wed, 10 Jun 2026 10:45:15 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,449 +67,317 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1781106073; x=1781710873; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=qndYU0vQVsNeLM+JlpEy3a/0w2lL2uNqn7mfGncOCjw=;
-        b=ux5y/heict7tvN/gH25PSDAuPgqnN7ZgUIX0RXPsbAkNvwepApr8J9XVG6Qc+egPJ8
-         hQ7f2vS5OV+g5RircDRnhMppga6LWa7pjyOdefKpfDMniRvW8JVDKC711d9oSJ3RNttT
-         fY8MRd7Xd6TPivSRSbMd6MqsbKGjAWJb3e8KY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781106073; x=1781710873;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=qndYU0vQVsNeLM+JlpEy3a/0w2lL2uNqn7mfGncOCjw=;
-        b=Jqb5pkLfkY6xzryiep/UnnjlbNwx5MvDkWIEH0/POYmCWApzcX/2ZfqlvblTP33kRz
-         DvCfy4wA37JB0bUPBeKwIrZVJ051nSwiWykNie6VbX158QWsBPO9W+mW5uoLLx1/D9Vn
-         qnIhM8ulrynJ8RgviTRudyMvCy2fDEJzvXcT6Zd1JVXiHlOIZeaeDAREYrMiBmyryS0k
-         4Vwx+MfpamHiKrjbYPz/0mWAsNdOteZzsc1fiVT+qS7DezrLr29djHr9pXPgyypLoAa8
-         SDCruhq9tGI93GqrgYQG0t2FKBjZMjkgz9iThHTtLy/OSfYl9RvynWMDvfDk9rtxU2Za
-         RIzg==
-X-Gm-Message-State: AOJu0YwoMiwNrN9uAQgSX+AduWbwEWBfrBEZbpTIfsK/dkxTLAzdKba5
-	Bt3qmuW6WloB5aoehOqk9dFjKe8Ir48/G0heuVxiFab0/7/K+s6w8L4dOMFKHoEgWoyijK9CStG
-	lF8Xj
-X-Gm-Gg: Acq92OE334xPUh3LmT4OsRYex7DJSt5Ao+VQDgfyTuiyUpeoseRFbzGqAvca4LEVPal
-	4XalmVYmhOuQScDB1X8YpfwbIflXz9b/ndPGXhLBMX5j/7IrQdwgcXESws+Y9Hg9kim0Gri+olU
-	qGUuSPnjMUsZlEj5lgt3kyqyhsPK0a5gs25Z1S0vGzmn0K+AiYYYUHk7pH5IDkTxK8FULrLlSx/
-	KM76dWOJNl/NqNB1hzmJSCSEWDjxQxZZtFDt0o5F3IrBSDRNrVlnSw0tLtPegnqybmfOCgf463C
-	g81xqXYSkmEFtnBl4s7w8mZ7oITFtQzNZBMV4bsD8gW+oejT6sTLbfs8wVgxTOcfLC5RKBkFoD3
-	6sxJkhnnFn4xNGcE4SzlhQT9zPHmPGu3GaktzFFNecJMLnRLLDsejgZWJpCmfvAkUZef9d7oZ0S
-	oFoz2PaAEvPQNio07+cKHiKM5ocNqIZNKOIudJtN95Uxnx11TT/VRXh1g8cg0ulCeSItwDtCOOG
-	I63uhzFAp1iuYk=
-X-Received: by 2002:adf:ff89:0:b0:45e:ef2e:25a8 with SMTP id ffacd0b85a97d-46030623f7emr30417911f8f.32.1781106072650;
-        Wed, 10 Jun 2026 08:41:12 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Kevin Lampis <kevin.lampis@citrix.com>
-Subject: [PATCH for-next] xen/kexec: Style fixes
-Date: Wed, 10 Jun 2026 16:41:10 +0100
-Message-Id: <20260610154110.2979888-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mt8eC5tzQv6OQCZBJKFR9XWMohwxy50/8eOUKOnYOxdTA33h9H+TmCN2Ckg6vr1akHDrzxEa6wOQc31lrT+G+fyC0eIZP0qJgmiBiaUR0IFiZzIpLwDCTqHbxuKK2+pGePSKoVnQ+4B9eO2k3rPnsujiO4SLunDPZmGMRJnp5lkN9SQ1mkb1UNz/6IpNYQQ/WLIK0Lz9QDgXHBkQ733Hx4zsCPM8GApBJGbGOKkkTFlJNpBovXgFZpHcspcT3YSYKijavaqbTJtu9qOvug7gPPHQCACks89M7UoVaXe/fp4tR58vmk/Dl0Q5y2YZ437MOYywitNrB2q5mvp5SfeOPg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VwDpoZYDoqRnwaMk4OgJztsPnMqVvdDuo/by29s8Q+o=;
+ b=HuLQMeN9UhO5U0AbjrbbPN4DU0HSL6Cr+0QbutTkJoIdS10hPxn0lYCUWHFqLWDXHe0apF/tIK86EdmuqeQJ023Ofd4J4Xwt+wVU+Mj9f5zImGMlqIj3zRfMcUqWbPhs/1TBdoplVtDE7pj6t7AKk1N3+k0SQiyVo0rrCp36G7bPggpzIU3Y58gvWipkrC7iMPXk3Wz1raopw2PuEAPtvSTbx/M/2RmCH1BPuwEvsCyaedbqpkxXyRrbfBI3f8L33CypvWablLoXLSHiIibLbCA84LgyNMMpnZQuDhZPulDVkp4NVeDkRFcXJCfFodWfBHfZGDzg397o6REYUHRnxA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=citrix.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VwDpoZYDoqRnwaMk4OgJztsPnMqVvdDuo/by29s8Q+o=;
+ b=uFEWcaPdmg03C/gZy+H3r8icP73uYPl+GJcnAkF3vJym3lBPj3DcOPgU9LvRJxVQmQyDNsxvJftbWD4y6DoFrDfzESZvxJ1I46gJzKd8aauT8YtrRGeSvt7kaI3K4DKnwYrQ1QUAp1h2asD2jY19Sebe7G2NdyT+aRmkPytbma4=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Message-ID: <085ebfb8-d76c-4a13-8b5b-130959b25b51@amd.com>
+Date: Wed, 10 Jun 2026 11:23:46 -0400
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/2] xen/x86: Change stub page allocation/free
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+CC: <xen-devel@lists.xenproject.org>, Jan Beulich <jbeulich@suse.com>, Andrew
+ Cooper <andrew.cooper3@citrix.com>, Teddy Astie <teddy.astie@vates.tech>
+References: <20260609000638.121027-1-jason.andryuk@amd.com>
+ <20260609000638.121027-3-jason.andryuk@amd.com>
+ <ail8YNrQLZ9bumiH@macbook.local>
+Content-Language: en-US
+From: Jason Andryuk <jason.andryuk@amd.com>
+In-Reply-To: <ail8YNrQLZ9bumiH@macbook.local>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1781106073-BC567DB1-5811F338/0/0
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PEPF0000009F:EE_|SA3PR12MB9226:EE_
+X-MS-Office365-Filtering-Correlation-Id: 90d3b8f6-5f4b-4795-26b5-08dec70744d4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|1800799024|82310400026|376014|36860700016|22082099003|18002099003|4143699003|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info:
+	2DWm5PwWJbQdDW/szJ13uIMcYUzeqlNDe5a+CByqy/iqiDDTj6Of9lijnsKsymO5txzKkssp0zc7TBQTN6oxY6bOthLOjzI10PYAywWC2AlPQibOqF/dPQg2lrUCbluzcPLg/P7k0OJSbTo7kPmduqy8F+ZCkTPQ+gUx9m01wm4QHQfjTDWd+uUs82mgg7m1SHOkFVNaDtstLwgonuy3ZCvtEDskof25vpzrT0zEb/zudl5PbaxIRl5mM1c7nfDDlB9lcdk4bmt5aUDsoiJlENm86Bm/lNv2j/FZKzbcsSjeHmbwwZaEnNW2cw88mbD/Aw7cfZJ68sIAp+e+vNZlOXIljhgvEGORqiAQx4rrLoxy2DeQ2p6XOiB+SMM68ufhenK1slzgXFjDtQn7VJX+SY62IIqDpL9WibtZppVtHDf5ocK5tYDXDkxkfCClUnqDhN290ZC0/Qu7eKxXiHaQ2VPbunPUwMlRdznvKg/Ax5pJ8OTbGAD6uuMU+fRMMg1XRmOQzUg/dkcuKTiPs98OZ7foJJGLTuueajrZ2uEeUs5Nx2WzhOtvoF+GoxKHaYVEbsRpvQbsiuEQIVpo1fQRGQPtKTuLvyOpy8Fg6y4BLn0gdtI7fSzW2EpuIcJ/FD6Nkui6skIUIDgjzma7SA13+mQTJIMvx4z/ZFllZK615E6F1AvIDBNya0Rb+TPTW1ExCaYWh4kzD8EOaznTttkvohgsD3hsnuT3qd7Zv56T7Rg=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(82310400026)(376014)(36860700016)(22082099003)(18002099003)(4143699003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	YBhOwWqWdvAbDRp95HRPbLbk2/HNWVtFm2ZA1LD9ki8NCJrPbxsPUHcrCyTLLlKF9xuF5HNvRQPKjoBtyDTZzMt+bWgeU476NLKaBE35oegTLMXGGJqemVo1T2lHmTDP7XCICjdXJ7Tq1aQEslDRi1bhvJQtdXPH2H1RrhSuM9fP4Yfw41l+RoA3l9MOjRwyeA8PxRnfMzrKUPlVyznh0QZ3KKrZr9o68vx8uImUB4EUQUMNhWLjHH4Ig22SRbm4RfbanTWjXRGwZ8JIpAV7j44o/xi2tkKXLgR3eM2kzBdKPKKLpQCAGgc0fbnbzoxDxIEIuTtWVZZ4So3x4PQXeTpmcnrrWIcyWXUXSXhCv8F1xLjtoX26YDYcq5qv7mNzUnN2MO+F/Lmf341TQxgW53PmlLfn36SJMSjDYJgVp40EaU0EAXTlTENze1mbccbB
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 15:45:16.6344
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 90d3b8f6-5f4b-4795-26b5-08dec70744d4
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CH2PEPF0000009F.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB9226
+X-purgate-ID: tlsNG-33051d/1781106329-38B74938-FE977C3B/0/0
 X-purgate-type: clean
-X-purgate-size: 12351
+X-purgate-size: 9922
 
-Adjust kexec and kimage to more closely adhere to Xen style.
+On 2026-06-10 11:01, Roger Pau Monné wrote:
+> On Mon, Jun 08, 2026 at 08:06:38PM -0400, Jason Andryuk wrote:
+>> Today the inline tracking of the stub page is problematic.  0xcc is used
+>> to indicate unused, but it is also a "clear value."  A !CONFIG_PV build
+>> with smt=0 will bring up CPU0, bring up CPU1, bring down CPU1, and free
+>> the in-use stub page.  Subsequent CPU onlining can write to the re-used
+>> page.
+>>
+>> The new approach uses a global, CPU-indexed array of stub pages.
+>> However, to handle NUMA aware allocations, we cannot allocate all the
+>> pages in advance because the NUMA information is not available.  Keep
+>> track of 1 current page for each NUMA node, allocated on demand, and
+>> allocate the stub buffers out of those pages.
+>>
+>> The current NUMA allocation approach is opportunistic sharing among the
+>> groups of 32 processors.  The new approach will allocate buffers densely
+>> in a NUMA node.
+>>
+>> stub pages are no longer freed.  They remain referenced in the global
+>> CPU-indexed array and are re-used if the CPU is re-onlined.
+>>
+>> stubs and node_stubs don't have an explicit lock.  During boot they are
+>> accessed single threaded.  During runtime, &cpu_add_remove_lock
+>> serializes access.
+>>
+>> Fixes: 7a66ac8d1633 ("x86: move syscall trampolines off the stack")
+>> Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
+>> ---
+>> I'm not sure how to test the NUMA part - I don't have an NUMA system.
+>> Also, if NUMA is active, is a cpu node of NUMA_NO_NODE still possible?
+>> I used the MAX_NUMNODES + 1 array sizing to handle that, but it's not
+>> obvious to me if that is necessary.
+>>
+>> Roger mentioned removing the per-cpu stubs.mfn.  We'd need to replace
+>> that with exposing the stubs array for traps and the emulator.  I have
+>> no idea if that will be an improvement and am looking for agreement on
+>> this patch before attempting.
+>> ---
+>>   xen/arch/x86/include/asm/stubs.h |   2 +-
+>>   xen/arch/x86/setup.c             |   3 +-
+>>   xen/arch/x86/smpboot.c           | 110 +++++++++++++++++++++----------
+>>   3 files changed, 77 insertions(+), 38 deletions(-)
+>>
+>> diff --git a/xen/arch/x86/include/asm/stubs.h b/xen/arch/x86/include/asm/stubs.h
+>> index a520928e9a..9d776f81dd 100644
+>> --- a/xen/arch/x86/include/asm/stubs.h
+>> +++ b/xen/arch/x86/include/asm/stubs.h
+>> @@ -32,6 +32,6 @@ struct stubs {
+>>   };
+>>   
+>>   DECLARE_PER_CPU(struct stubs, stubs);
+>> -unsigned long alloc_stub_page(unsigned int cpu, unsigned long *mfn);
+>> +unsigned long assign_stub_page(unsigned int cpu);
+>>   
+>>   #endif /* X86_ASM_STUBS_H */
+>> diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+>> index 19ee857abf..0cac94cbdb 100644
+>> --- a/xen/arch/x86/setup.c
+>> +++ b/xen/arch/x86/setup.c
+>> @@ -2089,8 +2089,7 @@ void asmlinkage __init noreturn __start_xen(void)
+>>   
+>>       init_idle_domain();
+>>   
+>> -    this_cpu(stubs.addr) = alloc_stub_page(smp_processor_id(),
+>> -                                           &this_cpu(stubs).mfn);
+>> +    this_cpu(stubs.addr) = assign_stub_page(0);
+> 
+> Given stub pages is first used quite late in the boot process, the above
+> arrays would better be dynamically allocated using xvmalloc_array().
 
-Sort the includes, dropping duplicates (kexec.h) and unused (ctype.h and
-kernel.h).
+Ok.  At some point I intended to dynamically allocate.  But x86 doesn't 
+have num_possible_cpus(), and I thought num_present_cpus() wouldn't have 
+the correct value.  nr_cpu_ids seemed close to the value, but then I 
+convinced myself NR_CPUS would be okay.
 
-No functional change.
+>>       BUG_ON(!this_cpu(stubs.addr));
+>>   
+>>       bsp_traps_reinit(); /* Needs stubs allocated, must be before presmp_initcalls. */
+>> diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+>> index d7619f534b..d9cd90389d 100644
+>> --- a/xen/arch/x86/smpboot.c
+>> +++ b/xen/arch/x86/smpboot.c
+>> @@ -641,41 +641,96 @@ static int do_boot_cpu(int apicid, int cpu)
+>>       return rc;
+>>   }
+>>   
+>> -#define STUB_BUF_CPU_OFFS(cpu) (((cpu) & (STUBS_PER_PAGE - 1)) * STUB_BUF_SIZE)
+>> +/*
+>> + * Indexed by CPU.  `pg` may be shared by up to STUBS_PER_PAGE CPUs.  Offset
+>> + * is the byte offset into the stub page for the CPU's stub buffer.
+>> + */
+>> +struct stub_info {
+>> +    struct page_info *pg;
+>> +    unsigned int offset;
+>> +};
+>> +struct stub_info __read_mostly stubs[NR_CPUS];
+>>   
+>> -unsigned long alloc_stub_page(unsigned int cpu, unsigned long *mfn)
+>> +/*
+>> + * Index by NUMA node.
+>> + *
+>> + * `pg` is the current stub page for the node.
+>> + * `next` is the next available stub index (STUBS_PER_PAGE available).
+>> + *
+>> + * if `pg` is NULL, allocate a new one.
+>> + * if `pg` is !NULL, use `pg` and stub `next`
+>> + * When STUBS_PER_PAGE are all assigned, clear `pg` and `next`.
+>> + */
+>> +struct stub_node {
+>> +    struct page_info *pg;
+>> +    unsigned int next;
+>> +};
+>> +struct stub_node stub_nodes[MAX_NUMNODES + 1];
+> 
+> I think we could get away with a single array, that uses the CPU as
+> the index and stores the physical address of the stub.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Anthony PERARD <anthony.perard@vates.tech>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Julien Grall <julien@xen.org>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Kevin Lampis <kevin.lampis@citrix.com>
+Yes, this is a good idea.
 
-Fix these before they get copied around in the EFI changes.
----
- xen/common/kexec.c  | 94 +++++++++++++++++++++++++--------------------
- xen/common/kimage.c | 23 ++++++-----
- 2 files changed, 64 insertions(+), 53 deletions(-)
+> We could also simplify the allocation logic, assuming that CPUs
+> belonging to the same NUMA node are packed contiguously in the common
+> case.  I've given a try at this, and adjusted your original commit.  I
+> however only tested this in QEMU so far.  If you think it's OK I can
+> test it on XenRT and see how that goes.
+> 
+> Sorry I took over the patch, I didn't want to force you into another
+> direction without knowing whether it would be OK, as it wasn't clear
+> to me this approach would be fine (seem so, but still needs further
+> testing).
 
-diff --git a/xen/common/kexec.c b/xen/common/kexec.c
-index 65776a95fd70..9ff22e43991c 100644
---- a/xen/common/kexec.c
-+++ b/xen/common/kexec.c
-@@ -6,31 +6,33 @@
-  * - Magnus Damm <magnus@valinux.co.jp>
-  */
- 
--#include <xen/init.h>
--#include <xen/lib.h>
- #include <xen/acpi.h>
--#include <xen/ctype.h>
-+#include <xen/console.h>
-+#include <xen/cpu.h>
-+#include <xen/cpumask.h>
- #include <xen/elfcore.h>
- #include <xen/errno.h>
- #include <xen/guest_access.h>
--#include <xen/param.h>
--#include <xen/watchdog.h>
--#include <xen/sched.h>
--#include <xen/types.h>
- #include <xen/hypercall.h>
-+#include <xen/init.h>
- #include <xen/kexec.h>
- #include <xen/keyhandler.h>
--#include <public/kexec.h>
--#include <xen/cpumask.h>
--#include <asm/atomic.h>
-+#include <xen/kimage.h>
-+#include <xen/lib.h>
-+#include <xen/param.h>
-+#include <xen/sched.h>
- #include <xen/spinlock.h>
-+#include <xen/types.h>
- #include <xen/version.h>
--#include <xen/console.h>
--#include <xen/kexec.h>
--#include <xen/kimage.h>
--#include <public/elfnote.h>
-+#include <xen/watchdog.h>
-+
-+#include <asm/atomic.h>
-+
- #include <xsm/xsm.h>
--#include <xen/cpu.h>
-+
-+#include <public/elfnote.h>
-+#include <public/kexec.h>
-+
- #ifdef CONFIG_COMPAT
- #include <compat/kexec.h>
- #endif
-@@ -162,6 +164,7 @@ static int __init cf_check parse_crashkernel(const char *str)
- 
-             ++idx;
-         } while ( *str == ',' );
-+
-         if ( idx < ARRAY_SIZE(ranges) )
-             ranges[idx].size = 0;
-     }
-@@ -317,7 +320,7 @@ void kexec_crash_save_cpu(void)
-     ELF_Prstatus *prstatus;
-     crash_xen_core_t *xencore;
- 
--    BUG_ON ( ! crash_notes );
-+    BUG_ON(!crash_notes);
- 
-     if ( cpumask_test_and_set_cpu(cpu, &crash_saved_cpus) )
-         return;
-@@ -418,6 +421,7 @@ static void cf_check do_crashdump_trigger(unsigned char key)
- static void setup_note(Elf_Note *n, const char *name, int type, int descsz)
- {
-     int l = strlen(name) + 1;
-+
-     strlcpy(ELFNOTE_NAME(n), name, l);
-     n->namesz = l;
-     n->descsz = descsz;
-@@ -427,7 +431,7 @@ static void setup_note(Elf_Note *n, const char *name, int type, int descsz)
- static size_t sizeof_note(const char *name, int descsz)
- {
-     return (sizeof(Elf_Note) +
--            ELFNOTE_ALIGN(strlen(name)+1) +
-+            ELFNOTE_ALIGN(strlen(name) + 1) +
-             ELFNOTE_ALIGN(descsz));
- }
- 
-@@ -439,7 +443,7 @@ static size_t sizeof_cpu_notes(const unsigned long cpu)
-         + sizeof_note("Xen", sizeof(crash_xen_core_t));
- 
-     /* CPU0 also presents the crash_xen_info note. */
--    if ( ! cpu )
-+    if ( !cpu )
-         bytes = bytes +
-             sizeof_note("Xen", sizeof(crash_xen_info_t));
- 
-@@ -450,24 +454,27 @@ static size_t sizeof_cpu_notes(const unsigned long cpu)
-  * crash heap if the user has requested that crash notes be allocated
-  * in lower memory.  There is currently no case where the crash notes
-  * should be free()'d. */
--static void * alloc_from_crash_heap(const size_t bytes)
-+static void *alloc_from_crash_heap(const size_t bytes)
- {
--    void * ret;
-+    void *ret;
-+
-     if ( crash_heap_current + bytes > crash_heap_end )
-         return NULL;
--    ret = (void*)crash_heap_current;
-+
-+    ret = crash_heap_current;
-     crash_heap_current += bytes;
-+
-     return ret;
- }
- 
- /* Allocate a crash note buffer for a newly onlined cpu. */
- static int kexec_init_cpu_notes(const unsigned long cpu)
- {
--    Elf_Note * note = NULL;
-+    Elf_Note *note = NULL;
-     int ret = 0;
-     int nr_bytes = 0;
- 
--    BUG_ON( cpu >= nr_cpu_ids || ! crash_notes );
-+    BUG_ON(cpu >= nr_cpu_ids || !crash_notes);
- 
-     /* If already allocated, nothing to do. */
-     if ( crash_notes[cpu].start )
-@@ -505,7 +512,7 @@ static int kexec_init_cpu_notes(const unsigned long cpu)
- 
-         /* If the allocation failed, and another CPU did not beat us, give
-          * up with ENOMEM. */
--        if ( ! note )
-+        if ( !note )
-             ret = -ENOMEM;
-         /* else all is good so lets set up the notes. */
-         else
-@@ -518,7 +525,7 @@ static int kexec_init_cpu_notes(const unsigned long cpu)
-             setup_note(note, "Xen", XEN_ELFNOTE_CRASH_REGS,
-                        sizeof(crash_xen_core_t));
- 
--            if ( ! cpu )
-+            if ( !cpu )
-             {
-                 /* Set up Xen Crash Info note. */
-                 xen_crash_note = note = ELFNOTE_NEXT(note);
-@@ -548,8 +555,6 @@ static int cf_check cpu_callback(
-          * fail the CPU_UP_PREPARE */
-         kexec_init_cpu_notes(cpu);
-         break;
--    default:
--        break;
-     }
-     return NOTIFY_DONE;
- }
-@@ -592,7 +597,7 @@ static int __init cf_check kexec_init(void)
-             get_order_from_bytes(crash_heap_size),
-             MEMF_bits(crashinfo_maxaddr_bits) );
- 
--        if ( ! crash_heap_current )
-+        if ( !crash_heap_current )
-             return -ENOMEM;
- 
-         memset(crash_heap_current, 0, crash_heap_size);
-@@ -604,7 +609,7 @@ static int __init cf_check kexec_init(void)
-        Only the individual CPU crash notes themselves must be allocated
-        in lower memory if requested. */
-     crash_notes = xzalloc_array(crash_note_range_t, nr_cpu_ids);
--    if ( ! crash_notes )
-+    if ( !crash_notes )
-         return -ENOMEM;
- 
-     register_keyhandler('C', do_crashdump_trigger, "trigger a crashdump", 0);
-@@ -620,7 +625,8 @@ presmp_initcall(kexec_init);
- 
- static int kexec_get_reserve(xen_kexec_range_t *range)
- {
--    if ( kexec_crash_area.size > 0 && kexec_crash_area.start > 0) {
-+    if ( kexec_crash_area.size > 0 && kexec_crash_area.start > 0 )
-+    {
-         range->start = kexec_crash_area.start;
-         range->size = kexec_crash_area.size;
-     }
-@@ -636,7 +642,7 @@ static int kexec_get_cpu(xen_kexec_range_t *range)
-     if ( nr < 0 || nr >= nr_cpu_ids )
-         return -ERANGE;
- 
--    if ( ! crash_notes )
-+    if ( !crash_notes )
-         return -EINVAL;
- 
-     /* Try once again to allocate room for the crash notes.  It is just possible
-@@ -726,7 +732,7 @@ static int kexec_get_range_compat(XEN_GUEST_HANDLE_PARAM(void) uarg)
-     {
-         XLAT_kexec_range(&compat_range, &range);
-         if ( unlikely(__copy_to_guest(uarg, &compat_range, 1)) )
--             ret = -EFAULT;
-+            ret = -EFAULT;
-     }
- 
-     return ret;
-@@ -760,7 +766,7 @@ void vmcoreinfo_append_str(const char *fmt, ...)
-     int r;
-     size_t note_size = sizeof(Elf_Note) + ELFNOTE_ALIGN(strlen(VMCOREINFO_NOTE_NAME) + 1);
- 
--    if (vmcoreinfo_size + note_size + sizeof(buf) > VMCOREINFO_BYTES)
-+    if ( vmcoreinfo_size + note_size + sizeof(buf) > VMCOREINFO_BYTES )
-         return;
- 
-     va_start(args, fmt);
-@@ -776,7 +782,7 @@ static void crash_save_vmcoreinfo(void)
- {
-     size_t data_size;
- 
--    if (vmcoreinfo_size > 0)    /* already saved */
-+    if ( vmcoreinfo_size > 0 )    /* already saved */
-         return;
- 
-     data_size = VMCOREINFO_BYTES - (sizeof(Elf_Note) + ELFNOTE_ALIGN(strlen(VMCOREINFO_NOTE_NAME) + 1));
-@@ -835,7 +841,7 @@ static int kexec_exec(XEN_GUEST_HANDLE_PARAM(void) uarg)
-     if ( !test_bit(base + pos, &kexec_flags) )
-         return -ENOENT;
- 
--    switch (exec.type)
-+    switch ( exec.type )
-     {
-     case KEXEC_TYPE_DEFAULT:
-         image = kexec_image[base + pos];
-@@ -917,8 +923,8 @@ static int kexec_segments_add_segment(unsigned int *nr_segments,
-     unsigned int n = *nr_segments;
- 
-     /* Need a new segment? */
--    if ( n == 0
--         || segments[n-1].dest_maddr + segments[n-1].dest_size != maddr )
-+    if ( n == 0 ||
-+         segments[n-1].dest_maddr + segments[n-1].dest_size != maddr )
-     {
-         n++;
-         if ( n > KEXEC_SEGMENT_MAX )
-@@ -1139,7 +1145,7 @@ static int kexec_load(XEN_GUEST_HANDLE_PARAM(void) uarg)
-     return 0;
- 
- error:
--    if ( ! kimage )
-+    if ( !kimage )
-         xfree(segments);
-     kimage_free(kimage);
-     return ret;
-@@ -1229,32 +1235,38 @@ static int do_kexec_op_internal(unsigned long op,
-     switch ( op )
-     {
-     case KEXEC_CMD_kexec_get_range:
--        if (compat)
--                ret = kexec_get_range_compat(uarg);
-+        if ( compat )
-+            ret = kexec_get_range_compat(uarg);
-         else
--                ret = kexec_get_range(uarg);
-+            ret = kexec_get_range(uarg);
-         break;
-+
-     case KEXEC_CMD_kexec_load_v1:
-         if ( compat )
-             ret = kexec_load_v1_compat(uarg);
-         else
-             ret = kexec_load_v1(uarg);
-         break;
-+
-     case KEXEC_CMD_kexec_unload_v1:
-         if ( compat )
-             ret = kexec_unload_v1_compat(uarg);
-         else
-             ret = kexec_unload_v1(uarg);
-         break;
-+
-     case KEXEC_CMD_kexec:
-         ret = kexec_exec(uarg);
-         break;
-+
-     case KEXEC_CMD_kexec_load:
-         ret = kexec_load(uarg);
-         break;
-+
-     case KEXEC_CMD_kexec_unload:
-         ret = kexec_unload(uarg);
-         break;
-+
-     case KEXEC_CMD_kexec_status:
-         ret = kexec_status(uarg);
-         break;
-diff --git a/xen/common/kimage.c b/xen/common/kimage.c
-index 6202491f7e76..a0e4e67df7ee 100644
---- a/xen/common/kimage.c
-+++ b/xen/common/kimage.c
-@@ -11,15 +11,13 @@
-  * Version 2.  See the file COPYING for more details.
-  */
- 
--#include <xen/types.h>
--#include <xen/init.h>
--#include <xen/kernel.h>
- #include <xen/errno.h>
--#include <xen/spinlock.h>
- #include <xen/guest_access.h>
--#include <xen/mm.h>
-+#include <xen/init.h>
- #include <xen/kexec.h>
- #include <xen/kimage.h>
-+#include <xen/mm.h>
-+#include <xen/spinlock.h>
- 
- #include <asm/page.h>
- 
-@@ -166,7 +164,7 @@ static int do_kimage_alloc(struct kexec_image **rimage, paddr_t entry,
-             goto out;
-     }
- 
--    /* 
-+    /*
-      * Page for the relocation code must still be accessible after the
-      * processor has switched to 32-bit mode.
-      */
-@@ -221,8 +219,8 @@ static int kimage_crash_alloc(struct kexec_image **rimage, paddr_t entry,
-     unsigned long i;
- 
-     /* Verify we have a valid entry point */
--    if ( (entry < kexec_crash_area.start)
--         || (entry > kexec_crash_area.start + kexec_crash_area.size))
-+    if ( entry < kexec_crash_area.start ||
-+         entry > kexec_crash_area.start + kexec_crash_area.size )
-         return -EADDRNOTAVAIL;
- 
-     /*
-@@ -244,8 +242,8 @@ static int kimage_crash_alloc(struct kexec_image **rimage, paddr_t entry,
-         mstart = segments[i].dest_maddr;
-         mend = mstart + segments[i].dest_size;
-         /* Ensure we are within the crash kernel limits. */
--        if ( (mstart < kexec_crash_area.start )
--             || (mend > kexec_crash_area.start + kexec_crash_area.size))
-+        if ( mstart < kexec_crash_area.start ||
-+             mend   > kexec_crash_area.start + kexec_crash_area.size )
-             return -EADDRNOTAVAIL;
-     }
- 
-@@ -606,7 +604,7 @@ static struct page_info *kimage_alloc_page(struct kexec_image *image,
-         }
-     }
-     page = NULL;
--    for (;;)
-+    for ( ;; )
-     {
-         kimage_entry_t *old;
- 
-@@ -825,7 +823,8 @@ int kimage_load_segments(struct kexec_image *image)
-     int s;
-     int result;
- 
--    for ( s = 0; s < image->nr_segments; s++ ) {
-+    for ( s = 0; s < image->nr_segments; s++ )
-+    {
-         result = kimage_load_segment(image, &image->segments[s]);
-         if ( result < 0 )
-             return result;
--- 
-2.39.5
+No worries.  Thank you!
 
+> One thing that would simplify the logic greatly, which Andrew brought
+> up, is foregoing the NUMA memory affinity for the allocated stubs page, and
+> allocate and map them contiguously in both the physical and the linear
+> address spaces, so that you would find the VA using:
+> 
+> XEN_VIRT_END - FIXADDR_X_SIZE - (cpu + 1) * STUB_BUF_SIZE
+> 
+> This would possibly allow to simply populate the whole range up to
+> num_present_cpus() at boot and get done with it.  However that's a
+> bigger change that should likely be done after 4.22 is out.
+
+ From your initial feedback, I intended to use a single array, but NUMA 
+quickly complicated that.
+
+> 
+> Thanks, Roger.
+> ---
+> diff --git a/xen/arch/x86/include/asm/stubs.h b/xen/arch/x86/include/asm/stubs.h
+> index a520928e9a50..d575f1eb0631 100644
+> --- a/xen/arch/x86/include/asm/stubs.h
+> +++ b/xen/arch/x86/include/asm/stubs.h
+> @@ -32,6 +32,7 @@ struct stubs {
+>   };
+>   
+>   DECLARE_PER_CPU(struct stubs, stubs);
+> -unsigned long alloc_stub_page(unsigned int cpu, unsigned long *mfn);
+> +unsigned long assign_stub_page(unsigned int cpu);
+> +void init_bsp_stub(void);
+
+With init_bsp_stub(), assign_stub_page can be static and not exported.
+
+>   
+>   #endif /* X86_ASM_STUBS_H */
+
+> diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+> index b3045eac5b5e..dd0972a3025e 100644
+> --- a/xen/arch/x86/smpboot.c
+> +++ b/xen/arch/x86/smpboot.c
+> @@ -20,6 +20,7 @@
+>   #include <xen/serial.h>
+>   #include <xen/softirq.h>
+>   #include <xen/tasklet.h>
+> +#include <xen/xvmalloc.h>
+>   
+>   #include <asm/apic.h>
+>   #include <asm/cpuidle.h>
+> @@ -641,41 +642,61 @@ static int do_boot_cpu(int apicid, int cpu)
+>       return rc;
+>   }
+>   
+> -#define STUB_BUF_CPU_OFFS(cpu) (((cpu) & (STUBS_PER_PAGE - 1)) * STUB_BUF_SIZE)
+> +/* Dynamically allocated, indexed by CPU.  Store physical address of stubs. */
+> +static paddr_t *__ro_after_init stubs;
+>   
+> -unsigned long alloc_stub_page(unsigned int cpu, unsigned long *mfn)
+> +unsigned long assign_stub_page(unsigned int cpu)
+>   {
+>       unsigned long stub_va;
+> -    struct page_info *pg;
+> +    paddr_t addr = stubs[cpu];
+>   
+> -    BUILD_BUG_ON(STUBS_PER_PAGE & (STUBS_PER_PAGE - 1));
+> -
+> -    if ( *mfn )
+> -        pg = mfn_to_page(_mfn(*mfn));
+> -    else
+> +    if ( addr == INVALID_PADDR )
+>       {
+> -        nodeid_t node = cpu_to_node(cpu);
+> -        unsigned int memflags = node != NUMA_NO_NODE ? MEMF_node(node) : 0;
+> +        nodeid_t nid = cpu_to_node(cpu);
+>   
+> -        pg = alloc_domheap_page(NULL, memflags);
+> -        if ( !pg )
+> -            return 0;
+> +        /*
+> +         * Attempt to use the same page as the previous CPU if possible,
+> +         * otherwise allocate a new one.
+> +         */
+> +        if ( cpu && nid == cpu_to_node(cpu - 1) &&
+> +             PAGE_OFFSET(stubs[cpu - 1] + STUB_BUF_SIZE) )
+     PAGE_OFFSET(stubs[cpu - 1] + STUB_BUF_SIZE)
+is to ensure we it remains inside the allocated stub page?
+
+> +            addr = stubs[cpu - 1] + STUB_BUF_SIZE;
+> +        else
+> +        {
+> +            struct page_info *pg = alloc_domheap_page(NULL, MEMF_node(nid));
+>   
+
+> @@ -1092,15 +1106,7 @@ static int cpu_smpboot_alloc(unsigned int cpu)
+>       memcpy(per_cpu(idt, cpu), bsp_idt, sizeof(bsp_idt));
+>       disable_each_ist(per_cpu(idt, cpu));
+>   
+> -    for ( stub_page = 0, i = cpu & ~(STUBS_PER_PAGE - 1);
+> -          i < nr_cpu_ids && i <= (cpu | (STUBS_PER_PAGE - 1)); ++i )
+> -        if ( cpu_online(i) && cpu_to_node(i) == node )
+> -        {
+> -            per_cpu(stubs.mfn, cpu) = per_cpu(stubs.mfn, i);
+
+This loop tries hard to re-use the same page for a NUMA node.  My posted 
+approach will densely allocate the stubs.  Your approach would re-use 
+less, unless the CPUs are contiguous in a node.
+
+This is just an observation.  I have no idea how NUMA nodes are 
+allocated.  The "round robin" code in numa_init_array() made me worry 
+that CPUs are more likely to be non-contiguous.
+
+If you have NUMA systems in XenRT, I think it would be worthwhile to 
+test.  Some printks to see how many pages are allocated would be useful.
+
+Thanks,
+Jason
 
