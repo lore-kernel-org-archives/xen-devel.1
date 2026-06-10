@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F4D4CD98C5
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61E44CD98CC
 	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 12:47:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1334276.1597411 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1334264.1597368 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXIKr-0002e4-2t; Wed, 10 Jun 2026 12:47:09 +0000
+	id 1wXIKn-0001jp-Tg; Wed, 10 Jun 2026 12:47:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1334276.1597411; Wed, 10 Jun 2026 12:47:08 +0000
+Received: by outflank-mailman (output) from mailman id 1334264.1597368; Wed, 10 Jun 2026 12:47:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXIKq-0002az-Bq; Wed, 10 Jun 2026 12:47:08 +0000
-Received: by outflank-mailman (input) for mailman id 1334276;
- Wed, 10 Jun 2026 12:45:43 +0000
+	id 1wXIKn-0001he-JJ; Wed, 10 Jun 2026 12:47:05 +0000
+Received: by outflank-mailman (input) for mailman id 1334264;
+ Wed, 10 Jun 2026 12:45:28 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Mykola_Kvach@epam.com>) id 1wXIJT-0001G1-8Q
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 12:45:43 +0000
+ (envelope-from <Mykola_Kvach@epam.com>) id 1wXIJE-0001Bl-81
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 12:45:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wXIJS-007roF-LC
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 14:45:42 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wXIJD-007rkt-Kn
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 14:45:27 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Mykola_Kvach@epam.com>)
- id 6a295c75-e002-0a2a0a5209dd-0a2a4509edfa-2
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:42 +0200
-Received: from [52.101.72.83]
- (helo=AM0PR02CU008.outbound.protection.outlook.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a295c60-e002-0a2a0a5209dd-0a2a450ce894-28
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:27 +0200
+Received: from [40.107.162.84]
+ (helo=PA4PR04CU001.outbound.protection.outlook.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <Mykola_Kvach@epam.com>)
- id 6a295c76-2497-0a2a45090019-34654853ba2b-3
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:42 +0200
+ id 6a295c67-62f1-0a2a450c0019-286ba25465a7-3
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:27 +0200
 Received: from AS8PR03MB9746.eurprd03.prod.outlook.com (2603:10a6:20b:61d::18)
  by AM9PR03MB7558.eurprd03.prod.outlook.com (2603:10a6:20b:415::5)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.11; Wed, 10 Jun
- 2026 12:45:40 +0000
+ 2026 12:45:25 +0000
 Received: from AS8PR03MB9746.eurprd03.prod.outlook.com
  ([fe80::cf11:309:1384:58f7]) by AS8PR03MB9746.eurprd03.prod.outlook.com
  ([fe80::cf11:309:1384:58f7%4]) with mapi id 15.21.0113.011; Wed, 10 Jun 2026
- 12:45:40 +0000
+ 12:45:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,19 +57,19 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oYqAFxO9WriTpN6UHnaYCQ1s5lWXCvxhCdsuhpPZLJVtzLnLGRzBPISmyfCqPhecmjLlfL4hT6eixy6QttttPpyPHntFfz/FR3FfqpEVUzeY90QATM32j4n568uaHyerUlVlzYyCZLzMoc5W1wGeQkxg00NuwyacZK0VbGuOhie02LoqGg8OhVe2jfJjCXC6K5RY1w2kHkyhnW/+EEBDvw7yuMj+vWw72UUAkcsKVh0Uk/sc2dbHvUNi92IUT2HsALaonJ1sxf6qP6VA263IQvWJ7i97w/HgD3LBH0GS2IQ5vCxw7B4sYUbBm3NX6N9UlPTNnPIhloL2OJBsbMZcoA==
+ b=XH0n3vjXwU05fwa3RYrpg47RDGakN+O+g/GkMBgEH3GV/EMSMA/BrE2WeQVBtG714k+hM5CcPoEGyltcEFA0vu0PePdK/k012TGL0Lb3bLzqpCqCpz7gihaqNp5/ByPQvkI+Y0bp3n9QJUahnf7b3xgfrUu8rndtIOKKfzkc967IPEKCSRGzADd1a6S33TefQRzoTYNZrFVAOvbBMtnI4AePsfDhav79x7muKzChvH5V0InUZ+m52o2jgaLrmrGitj8lDwGVjFIQRxo7aPJKBCiQVR+gqp3QgRrd8lNmZQzaiiuspoewgWpABHr248+uAYHpb90hkyob77I8xlMu7g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9Q1Fsw7I5VcRKOn6Vwcp1VtMdJtga40n5Ed4Emmc+5c=;
- b=MttiLgnubCorR63FeNIhlqHe/88i1rOWAc5EuqvtZgOQdKecPlpwRuQti2LmEjX5W4XJN/0YEmsDcy5/MXoDaqXEyGYtGM+6jojQkK9lQfN1QBsN/8+/KrWJE8smvXxjtLiXgfhKtIK2T2BWSUXH7oj895EUxezaz3QEDtYU7gLrnETLtPWtYFDGQKXZ+HbRklsTpujTWKqdCVq50c45Lditd9eozfBEPrTEHUkFQbWvTlwJiyUkot3+YamnGtwUvjQ0RhnkNjrPoUXnsO/qMr71XZB+ULb9VovZPffkE3TmmEmLFCPwItqme6X5GegejDiflQLk0/Cw/NQ0F56bog==
+ bh=4t1Xm4aK6uMytKQzSuYsfAastWOi/MneAuLBcif8+7Y=;
+ b=r1q9FwhoFjZU4jcAjbXbvX66gRVlMTh5xAIYZhV//frKYZ0e6ZcBze9r0EjwshZIgOnd2W3CmezNiC2c11nQWFo9y9Z7mgM+8qT+h8txbzu+p6Q4eNK7P1CDcum6az/x0Pak4vErVq+Mijp6Gmo7RAMHGFfAT3OlzINBPW7va0z3xZnUwAuC2GlZk8/E17Zq6hJ0h80SUJs7MdlghMYyuncAKA8F6V+j9L95LF0HtpPRa8zfeIzjNM1BIrQ8oI90U467Tdsrds9nq/xnQj6zu2Q8ri7vcz17XSTs9MLpsiXTwb0tQvOJZPBVs+yO8DUc40NExMZdvv027HuPOVAV3w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9Q1Fsw7I5VcRKOn6Vwcp1VtMdJtga40n5Ed4Emmc+5c=;
- b=hChIU2nE4+B0KQz+25FU/YnMcmk3Uycb9acMFdERJdsWjWi+0k4QIyNrMZton4LH/4aCplO+QqvOvvFAENgEKP8dkQ6X3382ihAkQXb6FveS3zHsmlr6Ryp9UZVZd9fKXV22NYqSVwiXtc2RQ6SmvgR995fsF9eWypG8OS0pdf3MXztvzdCYUEsV8059tCekybruWf8zB/zSgbSPfgR89xidWBgaOJk10TfVU/m56pJAax9htojlkzD5EeDRncWR9JyQvp18I9KZ1vLhltuc2N+CKsSGpBg/yPGbd1dBWCgVAEZXXc5NXylaY63xC7eGKn/HONaCpUzXmD3ji8Io/Q==
+ bh=4t1Xm4aK6uMytKQzSuYsfAastWOi/MneAuLBcif8+7Y=;
+ b=Z2xYLGRYPkGXxQwxDOXF/Bv66E6wFw0LSiqz5kJ+3gCdzmW187R72KZCrMEuRGzylpg6T16TO7+Fn/9I/3CnSgVFx9/9jreYVYU9OiSQZa1M5u7SSjoB7meP45OQD0CXeCcaoxVIUcBD0Ms0BxPHXP/h7kVakuJsdXjleBE67+9mg1Eqb6XVcC/ZPgvXurHzok+1SCg4BjVSKD4C2Qz/ymuONdfY9bEL6YrB29j2y7yZKw6CMigjFsXbbc9/b5lVFmltXLT8ifmcPkmFOyOigeIBrJmwBghE3PqWcM7PkWPukqt2isVUvrta8z/C8Kt6NrHzGaJ9oDbbOHt2Qd05Cw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 From: Mykola Kvach <mykola_kvach@epam.com>
@@ -81,10 +81,14 @@ Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Luca Fancellu <luca.fancellu@arm.com>
-Subject: [PATCH v11 11/13] xen/arm: Implement PSCI SYSTEM_SUSPEND call (host interface)
-Date: Wed, 10 Jun 2026 15:44:31 +0300
-Message-ID: <bf6645f78b982800527b3d8955745fc80f325a3c.1781084290.git.mykola_kvach@epam.com>
+Subject: [PATCH v11 05/13] xen/arm: gic-v3: add ITS suspend/resume support
+Date: Wed, 10 Jun 2026 15:44:25 +0300
+Message-ID: <1e1bc01dad04d8b4e94af1cffc0afef51dc030e2.1781084290.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1781084290.git.mykola_kvach@epam.com>
 References: <cover.1781084290.git.mykola_kvach@epam.com>
@@ -96,180 +100,404 @@ X-ClientProxiedBy: WA1P291CA0008.POLP291.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS8PR03MB9746:EE_|AM9PR03MB7558:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4c8e49bb-9f50-4e71-53b5-08dec6ee2dbb
+X-MS-Office365-Filtering-Correlation-Id: dc3e2d95-a38f-4a51-4f4c-08dec6ee2485
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|366016|1800799024|376014|56012099006|11063799006|5023799004|6133799003|18002099003|22082099003;
+	BCL:0;ARA:13230040|23010399003|366016|1800799024|7416014|376014|3023799007|56012099006|11063799006|6133799003|18002099003|22082099003;
 X-Microsoft-Antispam-Message-Info:
-	PyPGwlfat60c4X9V0EPlTKI5aaa3rq3dm1Zh8FUd3LeJhbLbPoxSzq4QwMDqbAYl9Y69k2WLPU98eShJZtYCaGsDZYQSXIRm7jUPP/bhzVRyN3ZrwlmBwtxSOr4S+ydI+SDxHhNA4z4uNApjipJYrkQSfgabbkgYuIG30fXINpyfLQT+CGLXEgBQU0kXgd+/sI8m8hjqF+CRFjzBUg54dsVkQkRdZqzMIBeSWDITVqSxr81BzQumbSlDEFyQPQNoPR+EibjT+VCphAllfj+9dZpal+r9zvHE+uVIB+kdY3QQmDpTdgaiop1/OzFKBwApJ18WeYv9d5+0FHo498+Ekr6wUGYECh86bIuSnS5CBnkCgrDehPla1AjgMb2ThiOq2KZ3H/UXZi9oOI6AI5Ld3SV5G+nSLnW4K3f4RDDpHipsmriD5wHP4RYQTeq4pplCMouiWz3YCLB+RCRBm/b/nw888DT+9VfbD7pyiHnMAIJaUoBG8p5bwztp8mZSGbUCm/3jdagoEnktiyu81BD48CJZAQpK1HtgDOb9LctrTThVaXUfwZFo+CnlvwWxdVptCMrtpUJHYHjxRZZbNBC40SeME4W/zXpeOrs3EKGCeHB4TNXj/j+N1RXxeFMHZ2L2RF1tBDdjTkZk2oFWtlHRw5pk5Xg/XjR1yl+54ikg7pt2RNRu1DZY5aPCbQ6LoiMS
+	Q7S7CoxM+LJEIRmx90GfBtOwlhR1+EaMSWPqOMZMNGTai4TULCEzY/5NXQrOZOQETZZDTb0gZ512NUaUZz+MovmGy9ePLzHKH3L7CSut52WcTptZ6zHGoUB+6XoyVCDy5Ni2uqtvFvtIYJzaS6WmtMkKFjMMyXqJt0+2rv2sF7BYBupkZrDPYM/yaYa32mh1g8CeNdyx2s1/d3hlkTcWXIA680dtbhMgId4gxQXowTjexBdXJhYp++Sz2PjwY9pqCnvqfjpWdFymOb1Lg3Xj1BpUvZ+gvRfzud3J4oKES+vxqwpB9/AHjiX/5r0nMpO7wuQka4M+FJEYdSGqpFXv1za8tOzBZiuvxNe64EXsap8sE+Balyvknp5jxnpCt2EkbeEVhro4NUF41gdzMg5mAVXuH9L+a6DbcGwEUqNK96CVaV5DiQr2ZMLbbS7CVnowSxS0xTdOXW0KZ30WC3lOZlCbiEI+TT+hNjmjWVr4pG2TPyn4uzXrUEZn/GeRzIQFztItlH/5PlJCflmJevPeAUNVB41IvxlJMo+cbqEeVrZp5Dzzy9SF8lhV+zqCeAy3xMfZkqi53GP33Vy67JCGE8UMumAfUdj6VBcP8pqnWT3ynM60jb+VVOuetUWkfoPlMLSXlfVwS3gg5ng7yofQLZ3izhWrojDw9mpxBdvnFdAjHBtNNbZqBhNYnWVXvm0w
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9746.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(56012099006)(11063799006)(5023799004)(6133799003)(18002099003)(22082099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9746.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(7416014)(376014)(3023799007)(56012099006)(11063799006)(6133799003)(18002099003)(22082099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?8Jk5hx+dR2gBkG7z+XeERo2Vu83vLXXfWCXVQPHpMiTuSyE0FnDexxpN1p6P?=
- =?us-ascii?Q?7JWSSiGUh7U0sTVnIumM10Fi4T9MA6tBJYCDI75DUJCDAOojpe3SeVuf3lOs?=
- =?us-ascii?Q?nFTyNJ5Wr4wzhz4D4dSfU8uUmCvz2ChhgzxBstfxeyOsUiIeMlUkGjcULw7a?=
- =?us-ascii?Q?DqDduat+FD9jWFUoIicicdA+R/835jkjsMlBi2DHec7S+HOA5q4t2FtXFZNi?=
- =?us-ascii?Q?DM3oAKaLfWTLfStF3RYYC8FW1paB1dqDF6u62iNDmtLvN4FOSE/nZDaNQwlo?=
- =?us-ascii?Q?xDd7yEw/OHJEVW3MbgUCYgLfFiGKMpFyL/wNpCvJNI9YKprd+/EqPzYAyVWH?=
- =?us-ascii?Q?6JmEKW6w6+vl+3yykfUSJLUZsWVuA62SSULCpDwwDpT0FtpWXJSmleHgODeu?=
- =?us-ascii?Q?WsrElT21j0AuanYkVsgYz74YGRhZ8kIfbJWn5xQP6H2sdUjqxr3SHft58i+I?=
- =?us-ascii?Q?Py10jSzkO4nYtin9rREouoXD58UsAwLEitI6lJw6txJRyPkESP/YwciuiSAw?=
- =?us-ascii?Q?+6mVlNdipo2Lpz+dnSGVRWT8A1KUK3sS8HgF1qaioe8trNBNVGA9lLpL+oBE?=
- =?us-ascii?Q?L7S0sxQ0EHMM/TnR9eUt/JAmCNs6eQurYy9m79q6pMCkTfq81t8jky2EdoAE?=
- =?us-ascii?Q?oxMlEzIbYSbRpdEKY5ivb6MZ5WGZqMulB7Q9f1cm5+3kgJQQHVYbzKor0Nu/?=
- =?us-ascii?Q?FW2tcPikBTr98APF4y1isk4suy5aXVvYLB5KXH+QUMhpt1Udp0F5lmDY5D7A?=
- =?us-ascii?Q?2SxTY2Vns/rwBQFDQ64FpTb7BYpJNJyDRmCWWv6n+5RTVnX91SPBgGFDnUDe?=
- =?us-ascii?Q?ROsI4i8v05AaQHx2eDrzXinpDP629CSO7TfarZYQZDLmETEhQuj4EoSWOY/6?=
- =?us-ascii?Q?dq2VquW/wWtB6JMk6D4bqGtJ8sOsk+bAdmunF7BZ+SFqmem2c6TGqTlQdVk+?=
- =?us-ascii?Q?BnUifUobQiMCeQ1doRrx3AppEeUcb20Y5WBz8K2Tgj6oJJuMmrZiZ1wcInHN?=
- =?us-ascii?Q?I7OcV8CjEw7T9wg2p/NG76MHV8WdHzyrVQZx85jFTp1Fiu31NGH79jAQM4wS?=
- =?us-ascii?Q?fMf2fEbXy/9Uy+VaJLOLajnk17QBc6XjOpLqH7zKJe1O+nr2cv3BXxkAPFXJ?=
- =?us-ascii?Q?ksZVyR/jaX2YW308sxnLS2Tj/33q4EktSzoyKGVTlmhrVBoOw4aDXbLNNo14?=
- =?us-ascii?Q?aoxT456K+RdqOxe6QZ5un8/Shl7XjUhhAnoQOI8OBpywyjw+Dj9fEeQ/CrKh?=
- =?us-ascii?Q?rg0LIR7zZMss1EPlyIehnGfvrwQWbtuazCTjnDaCGkquyGkvnYDO5O3jAu17?=
- =?us-ascii?Q?daz1+xezOHNjsRwOYKVQUzFM5ECr/1+RDfxZnFvUu4gIUWUV9hqfmQJ7fuuw?=
- =?us-ascii?Q?tDFQQaYdmn7KzKmBRDKIMIcShXW1NXLUvU2t3XjZrka0mKT85KeE05gLwEzj?=
- =?us-ascii?Q?7kK2wek/nWcrHix2LirI68Na0Bu2AROBzzEor8ZUPHTbVDXa4uipDbztXouY?=
- =?us-ascii?Q?SoDBuUI5Ij9T7C+apP2oMX6F6Y5KkuHSPgZmid9dq2OgrAOLzUhi3gjaFsSW?=
- =?us-ascii?Q?8GYhtGt6Z3xIzwmR7KqhxkGJEvfDw05VIFqHV+q3pyTOSJhuqZ1p6f6GGLNL?=
- =?us-ascii?Q?LY/MlJ08F709doO3Qar/MDzfIHYfOqtPVEYJJPysVaEoQb4Aov8HupQTQ8MW?=
- =?us-ascii?Q?R3SP4s+0FUlXxHnZIq7tA5GQQmCHD3i8G5dTzUV/mPOP83xVm/h5o4AfmEVf?=
- =?us-ascii?Q?9r2RiA+3hg=3D=3D?=
+	=?us-ascii?Q?/w0eVdyQGbDQYXUqymz+rM1c/3NQdeDR0ujAgM/vV3Lv7s4klYu8qVffzyDD?=
+ =?us-ascii?Q?Qpq2dINklpFfnix6oV5SZy4Wn+iTdYk+q5iD7jAO3W9gXYmeKh9k3IfZ04aR?=
+ =?us-ascii?Q?lFrpPD7gMtrq1BwC/rcExIF/48+Ek85lO/zjbd5bEodEilnZUnlgrxLH7yk+?=
+ =?us-ascii?Q?MiQwEyUrfgNwpHh7CtfznSF67iidSkRI8bE961vmbKMpEACPwM6+ZmEFt8Jt?=
+ =?us-ascii?Q?A9oevqzAwDivcQqESsVyfEGpph3ERPICM1zoGVTMdcIv0bsq0AYhrUEyG/gV?=
+ =?us-ascii?Q?wzdSUfRbSdi4D17cdBouQdxg6uOx+xqbfaOBijWNOfruAfIrnr7R4YcD8FWo?=
+ =?us-ascii?Q?EraAZ4mKRJfis9aPiEAbfOiFEd49fCLN9WW2/HJOque/U6Tn1AspH9rcXCNN?=
+ =?us-ascii?Q?JrHsLCbsJclwQY3Ngo0Te1W+o3mZknIfEqcWWQAK0MsMuBPM0ZozX7422780?=
+ =?us-ascii?Q?OpaH4+JhVolIDstaTAqI0WaQYSqfSnI8u5OMvyj14B6mDsV9dF59g+0Wv4iS?=
+ =?us-ascii?Q?F3Be8NnOH/t6G2o/gEeM1skmgHNzxe9HXJHpLhkIsT36/JKvSvcfqVWAWy4N?=
+ =?us-ascii?Q?EAJtAr226H/HWrfJozTrMMozVUzkDlrv/VQcLv0rA0QWifKAAMEqKiiR4veF?=
+ =?us-ascii?Q?82LpMSE7MnwOSoaEmhw/OU2EgZQh1TKNLVFNoWwrCW8rukEMPyYmMiqWD5EH?=
+ =?us-ascii?Q?486wz/amP5cM6euk8dF/Ty3ZphS3NVQbgJi1yhY0DxXM2fsTodFNX/19ZTsw?=
+ =?us-ascii?Q?rkGugQ0zPYGgKYxL0OhH5RRB8atR7d923Oqtnuf0IpL10zP/y6eHNbcE2tOk?=
+ =?us-ascii?Q?c9PVM8u7RjH15IRRjNeZ06wkmVQ/LdV+OOAXUVFymfL+ha/w2j/cK/IfBYpV?=
+ =?us-ascii?Q?FQv7QF6gE7ExB7++3Eq6A/P/c7OU8jJ0mQr8cjQEI8x3rf/ScEw7xoRqPb3K?=
+ =?us-ascii?Q?cnekAbYVEBcVKEsytCARfvuM+isGJDzxiqQmFnl4o83P4VT/E4xknYtiRvWx?=
+ =?us-ascii?Q?b0bU4eIO7ailaT7MwF6fjCMk9fQGYP2XbrpVDN8bjoqkOKGmawfc2AmjECod?=
+ =?us-ascii?Q?I2LdtcB2qsvLHUlIU4mrxjvWAohNObXGrt0DU2CwZE7uiPaCmNIlpbVoe4vS?=
+ =?us-ascii?Q?OZc6UHp1m7wDTJN3g29gVZ5Vejs607cZSVLWcgH3Pl5HzcOE0ttO/f9lOyxI?=
+ =?us-ascii?Q?utMAbn4a3MDuwkkEElT6q7MY8fNCc2reEyEIXO7pQ64RR0rz0eRprw4fT01f?=
+ =?us-ascii?Q?pqy0UkmyCphyRtCsYn522zlgqq3NgdMVciypk1Gw0ZOUr4dbj59cgeMq9Zmf?=
+ =?us-ascii?Q?XqiWCzUJ8EwsLQxwfK+OTcXKKf2PELJa5onc/dTfHomiGCPK9agaWhzfJWQN?=
+ =?us-ascii?Q?DXpq4ZfkUgkHqol6tBTntEHYMeVTqO55NLUhkPa64FPKQCNi3tb5fQ5yCRzY?=
+ =?us-ascii?Q?kY3Ilwm5pwCaS/USAGFhY+6SanqV5ULHFHsEzqXjWAlr3FgGTwCQClz//UrU?=
+ =?us-ascii?Q?1thhsr//+qxq7x+2/o9VdrYPJ0Y2FEtCkFXlR6yBLeaK+GKWSWAdiTxIkIi5?=
+ =?us-ascii?Q?WUVG4o8JRzAdPd5tfUe3MAKeOlZjLKcrAqnQLekxzSJenPnoygki3js5iIli?=
+ =?us-ascii?Q?KBRs514EMWcQyJsq+UcNAML79N72Gail85h3RH8d5tDNJXi7/tdeKjFEtKBU?=
+ =?us-ascii?Q?oNGzXEdBwNkH+AnckhzqBFFQ8nbzMb6UxGJ+pCTe4HBKky5fQmtAukiWtl/w?=
+ =?us-ascii?Q?mN1LduZDoQ=3D=3D?=
 X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4c8e49bb-9f50-4e71-53b5-08dec6ee2dbb
+X-MS-Exchange-CrossTenant-Network-Message-Id: dc3e2d95-a38f-4a51-4f4c-08dec6ee2485
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR03MB9746.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 12:45:40.6981
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 12:45:25.1911
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: znTOm2RgPgTWjxTSkdsw12O7JlS7TxtwEQte/g8tqdczjs6qZ7PK9Qcu430PrExrbGAszofyWkbotg8B7JWCeA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: FrxE3U82P20y9Dk+/x/SeyNY6FfyUrpEKLuqh/CaCIAXP+A5mP3jEQp3RUCyM7P6uAwBaun8IwslSoNTfjhUYA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR03MB7558
-X-purgate-ID: tlsNG-bad1c0/1781095542-8B193A53-6591A88C/0/0
+X-purgate-ID: tlsNG-d25034/1781095527-E3370CF5-5006A541/0/0
 X-purgate-type: clean
-X-purgate-size: 4081
+X-purgate-size: 11113
 
-From: Mirela Simonovic <mirela.simonovic@aggios.com>
+Handle system suspend/resume for GICv3 with an ITS present so LPIs keep
+working after firmware powers the GIC down.
 
-Invoke PSCI SYSTEM_SUSPEND to finalize Xen's suspend sequence on ARM64
-platforms. Pass the Xen resume entry point (hyp_resume) to EL3 together
-with a zero context ID, matching Linux.
+Save and restore the ITS CTLR, CBASER and BASER registers. On resume,
+re-establish the collection mapping only when the collection is held in
+the ITS itself. Memory-backed collections are restored through the
+restored GITS_BASER tables and must not be remapped unconditionally.
 
-This patch wires up only the host-side PSCI SYSTEM_SUSPEND invocation.
-The resume trampoline and context restore are provided by earlier patches
-in the series.
+Add list_for_each_entry_continue_reverse() in list.h for the ITS suspend
+error path that needs to roll back partially saved state.
 
-Only enable this path when CONFIG_SYSTEM_SUSPEND is set and PSCI
-advertises SYSTEM_SUSPEND via PSCI_FEATURES.
-
-Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
-Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
-Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
+Based on Linux commit dba0bc7b76dc:
+"irqchip/gic-v3-its: Add ability to save/restore ITS state".
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
-Changes in v9:
-- cache SYSTEM_SUSPEND support using PSCI_FEATURES and gate the host call
-  on the cached capability
-- keep the cached SYSTEM_SUSPEND capability read-only after init
-- log whether firmware reports SYSTEM_SUSPEND support
-- pass an explicit zero context ID in the SYSTEM_SUSPEND call
-- drop the stale note claiming hyp_resume is still a stub
----
- xen/arch/arm/include/asm/psci.h |  1 +
- xen/arch/arm/psci.c             | 31 ++++++++++++++++++++++++++++++-
- 2 files changed, 31 insertions(+), 1 deletion(-)
+Changes in V10:
+- Replay MAPC on resume only for collections held in the ITS itself, as
+  indicated by GITS_TYPER.HCC. Memory-backed collections are restored
+  through GITS_BASER and are no longer remapped unconditionally.
+- Make the current Xen col_id == cpu assumption explicit in the ITS
+  resume path.
+- Use "unpredictable" instead of "undefined" in the CBASER/BASER restore
+  comment.
 
-diff --git a/xen/arch/arm/include/asm/psci.h b/xen/arch/arm/include/asm/psci.h
-index 48a93e6b79..bb3c73496e 100644
---- a/xen/arch/arm/include/asm/psci.h
-+++ b/xen/arch/arm/include/asm/psci.h
-@@ -23,6 +23,7 @@ int call_psci_cpu_on(int cpu);
- void call_psci_cpu_off(void);
- void call_psci_system_off(void);
- void call_psci_system_reset(void);
-+int call_psci_system_suspend(void);
- 
- /* Range of allocated PSCI function numbers */
- #define	PSCI_FNUM_MIN_VALUE                 _AC(0,U)
-diff --git a/xen/arch/arm/psci.c b/xen/arch/arm/psci.c
-index b6860a7760..e05dae1133 100644
---- a/xen/arch/arm/psci.c
-+++ b/xen/arch/arm/psci.c
-@@ -17,23 +17,27 @@
- #include <asm/cpufeature.h>
- #include <asm/psci.h>
- #include <asm/acpi.h>
-+#include <asm/suspend.h>
- 
- /*
-  * While a 64-bit OS can make calls with SMC32 calling conventions, for
-  * some calls it is necessary to use SMC64 to pass or return 64-bit values.
-- * For such calls PSCI_0_2_FN_NATIVE(x) will choose the appropriate
-+ * For such calls PSCI_*_FN_NATIVE(x) will choose the appropriate
-  * (native-width) function ID.
-  */
- #ifdef CONFIG_ARM_64
- #define PSCI_0_2_FN_NATIVE(name)    PSCI_0_2_FN64_##name
-+#define PSCI_1_0_FN_NATIVE(name)    PSCI_1_0_FN64_##name
- #else
- #define PSCI_0_2_FN_NATIVE(name)    PSCI_0_2_FN32_##name
-+#define PSCI_1_0_FN_NATIVE(name)    PSCI_1_0_FN32_##name
- #endif
- 
- uint32_t psci_ver;
- uint32_t smccc_ver;
- 
- static uint32_t psci_cpu_on_nr;
-+static bool __ro_after_init has_psci_system_suspend;
- 
- #define PSCI_RET(res)   ((int32_t)(res).a0)
- 
-@@ -60,6 +64,25 @@ void call_psci_cpu_off(void)
-     }
+Changes in V9:
+- fix the ITS suspend/resume coding-style nits;
+- preserve the saved GITS_CTLR state while masking the read-only
+  QUIESCENT bit.
+
+Changes in V8:
+- Reword the CBASER/CWRITER comment to match Xen and drop the stale Linux
+  cmd_write reference.
+- Clarify the list_for_each_entry_continue_reverse() comment.
+- Factor out per-ITS helpers for collection setup and resume.
+- Restore each ITS and re-establish its collection mapping in the same
+  loop, so a failed ITS resume is not followed by MAPC/SYNC on that
+  un-restored instance.
+- panic in case when resume of an ITS failed
+- cleanup baser cache during suspend
+---
+ xen/arch/arm/gic-v3-its.c             | 146 ++++++++++++++++++++++++--
+ xen/arch/arm/gic-v3.c                 |  11 +-
+ xen/arch/arm/include/asm/gic_v3_its.h |  28 +++++
+ xen/include/xen/list.h                |  14 +++
+ 4 files changed, 189 insertions(+), 10 deletions(-)
+
+diff --git a/xen/arch/arm/gic-v3-its.c b/xen/arch/arm/gic-v3-its.c
+index 7560d46c6d..dd53209865 100644
+--- a/xen/arch/arm/gic-v3-its.c
++++ b/xen/arch/arm/gic-v3-its.c
+@@ -335,6 +335,22 @@ static int its_send_cmd_inv(struct host_its *its,
+     return its_send_command(its, cmd);
  }
  
-+int call_psci_system_suspend(void)
++static int gicv3_its_setup_collection_single(struct host_its *its,
++                                             unsigned int cpu)
 +{
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    struct arm_smccc_res res;
++    int ret;
 +
-+    if ( !has_psci_system_suspend )
-+        return PSCI_NOT_SUPPORTED;
++    ret = its_send_cmd_mapc(its, cpu, cpu);
++    if ( ret )
++        return ret;
 +
-+    /* Context ID is unused for the Xen resume path. */
-+    arm_smccc_smc(PSCI_1_0_FN_NATIVE(SYSTEM_SUSPEND), __pa(hyp_resume), 0,
-+                  &res);
-+    return PSCI_RET(res);
-+#else
-+    dprintk(XENLOG_WARNING,
-+            "SYSTEM_SUSPEND not supported (CONFIG_SYSTEM_SUSPEND disabled)\n");
-+    return PSCI_NOT_SUPPORTED;
-+#endif
++    ret = its_send_cmd_sync(its, cpu);
++    if ( ret )
++        return ret;
++
++    return gicv3_its_wait_commands(its);
 +}
 +
- void call_psci_system_off(void)
+ /* Set up the (1:1) collection mapping for the given host CPU. */
+ int gicv3_its_setup_collection(unsigned int cpu)
  {
-     if ( psci_ver > PSCI_VERSION(0, 1) )
-@@ -223,9 +246,15 @@ int __init psci_init(void)
+@@ -343,15 +359,7 @@ int gicv3_its_setup_collection(unsigned int cpu)
  
-     psci_init_smccc();
- 
-+    has_psci_system_suspend =
-+        psci_features(PSCI_1_0_FN_NATIVE(SYSTEM_SUSPEND)) == 0;
-+
-     printk(XENLOG_INFO "Using PSCI v%u.%u\n",
-            PSCI_VERSION_MAJOR(psci_ver), PSCI_VERSION_MINOR(psci_ver));
- 
-+    printk(XENLOG_DEBUG "PSCI SYSTEM_SUSPEND is %ssupported by firmware\n",
-+           has_psci_system_suspend ? "" : "not ");
-+
+     list_for_each_entry(its, &host_its_list, entry)
+     {
+-        ret = its_send_cmd_mapc(its, cpu, cpu);
+-        if ( ret )
+-            return ret;
+-
+-        ret = its_send_cmd_sync(its, cpu);
+-        if ( ret )
+-            return ret;
+-
+-        ret = gicv3_its_wait_commands(its);
++        ret = gicv3_its_setup_collection_single(its, cpu);
+         if ( ret )
+             return ret;
+     }
+@@ -1211,6 +1219,126 @@ int gicv3_its_init(void)
      return 0;
  }
  
++#ifdef CONFIG_SYSTEM_SUSPEND
++int gicv3_its_suspend(void)
++{
++    struct host_its *its;
++    int ret;
++
++    list_for_each_entry( its, &host_its_list, entry )
++    {
++        unsigned int i;
++        void __iomem *base = its->its_base;
++
++        /*
++         * By the time Xen reaches gic_suspend(), every domain is already in
++         * SHUTDOWN_suspend, so ITS-targeting interrupt sources are expected
++         * to have been quiesced by the owning OS before SYSTEM_SUSPEND.
++         */
++        /* Preserve saved GITS_CTLR state, excluding read-only QUIESCENT. */
++        its->suspend_ctx.ctlr = readl_relaxed(base + GITS_CTLR) &
++                                ~GITS_CTLR_QUIESCENT;
++        ret = gicv3_disable_its(its);
++        if ( ret )
++        {
++            writel_relaxed(its->suspend_ctx.ctlr, base + GITS_CTLR);
++            goto err;
++        }
++
++        its->suspend_ctx.cbaser = readq_relaxed(base + GITS_CBASER);
++
++        for ( i = 0; i < GITS_BASER_NR_REGS; i++ )
++        {
++            uint64_t baser = readq_relaxed(base + GITS_BASER0 + i * 8);
++
++            its->suspend_ctx.baser[i] = 0;
++
++            if ( !(baser & GITS_VALID_BIT) )
++                continue;
++
++            its->suspend_ctx.baser[i] = baser;
++        }
++    }
++
++    return 0;
++
++ err:
++    list_for_each_entry_continue_reverse( its, &host_its_list, entry )
++        writel_relaxed(its->suspend_ctx.ctlr, its->its_base + GITS_CTLR);
++
++    return ret;
++}
++
++static int gicv3_its_resume_single(struct host_its *its, unsigned int cpu)
++{
++    void __iomem *base = its->its_base;
++    unsigned int i;
++    int ret;
++    uint64_t typer;
++    unsigned int col_id = cpu; /* Xen currently uses col_id == cpu. */
++
++    /*
++     * Make sure that the ITS is disabled. If it fails to quiesce,
++     * don't restore it since writing to CBASER or BASER<n>
++     * registers is unpredictable according to the GIC v3 ITS
++     * Specification.
++     */
++    WARN_ON(readl_relaxed(base + GITS_CTLR) & GITS_CTLR_ENABLE);
++    ret = gicv3_disable_its(its);
++    if ( ret )
++        return ret;
++
++    writeq_relaxed(its->suspend_ctx.cbaser, base + GITS_CBASER);
++
++    /*
++     * Writing CBASER resets CREADR to 0, so reset CWRITER to
++     * keep the command queue pointers aligned.
++     */
++    writeq_relaxed(0, base + GITS_CWRITER);
++
++    /* Restore GITS_BASER from the value cache. */
++    for ( i = 0; i < GITS_BASER_NR_REGS; i++ )
++    {
++        uint64_t baser = its->suspend_ctx.baser[i];
++
++        if ( !(baser & GITS_VALID_BIT) )
++            continue;
++
++        writeq_relaxed(baser, base + GITS_BASER0 + i * 8);
++    }
++
++    writel_relaxed(its->suspend_ctx.ctlr, base + GITS_CTLR);
++
++    typer = readq_relaxed(base + GITS_TYPER);
++
++    /*
++     * Only collections with IDs below HCC are held in the ITS itself
++     * and lose their state across an ITS reset/power loss. Memory-backed
++     * collections are restored by restoring GITS_BASER and must not be
++     * remapped here.
++     */
++    if ( col_id < GITS_TYPER_HCC(typer) )
++        return gicv3_its_setup_collection_single(its, cpu);
++
++    return 0;
++}
++
++void gicv3_its_resume(void)
++{
++    struct host_its *its;
++    unsigned int cpu = smp_processor_id();
++    int ret;
++
++    list_for_each_entry( its, &host_its_list, entry )
++    {
++        ret = gicv3_its_resume_single(its, cpu);
++        if ( ret )
++            panic("GICv3: ITS@%"PRIpaddr": failed to restore during resume: %d\n",
++                   its->addr, ret);
++    }
++}
++
++#endif /* CONFIG_SYSTEM_SUSPEND */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
+index be223dd915..05e42cdd55 100644
+--- a/xen/arch/arm/gic-v3.c
++++ b/xen/arch/arm/gic-v3.c
+@@ -2189,10 +2189,14 @@ static int gicv3_suspend(void)
+     if ( ret )
+         goto out_enable_iface;
+ 
+-    ret = gicv3_disable_redist();
++    ret = gicv3_its_suspend();
+     if ( ret )
+         goto out_enable_iface;
+ 
++    ret = gicv3_disable_redist();
++    if ( ret )
++        goto out_its_resume;
++
+     /* Save GICR configuration */
+     gicv3_redist_wait_for_rwp();
+ 
+@@ -2232,6 +2236,9 @@ static int gicv3_suspend(void)
+ 
+     return 0;
+ 
++ out_its_resume:
++    gicv3_its_resume();
++
+  out_enable_iface:
+     if ( gicv3_enable_redist() )
+         panic("GICv3: Failed to re-enable redistributor after suspend abort\n");
+@@ -2358,6 +2365,8 @@ static void gicv3_resume(void)
+ 
+     gicv3_redist_wait_for_rwp();
+ 
++    gicv3_its_resume();
++
+     WRITE_SYSREG(gicv3_ctx.cpu.sre_el2, ICC_SRE_EL2);
+     isb();
+ 
+diff --git a/xen/arch/arm/include/asm/gic_v3_its.h b/xen/arch/arm/include/asm/gic_v3_its.h
+index fc5a84892c..0f8cb16e41 100644
+--- a/xen/arch/arm/include/asm/gic_v3_its.h
++++ b/xen/arch/arm/include/asm/gic_v3_its.h
+@@ -43,6 +43,11 @@
+ #define GITS_CTLR_QUIESCENT             BIT(31, UL)
+ #define GITS_CTLR_ENABLE                BIT(0, UL)
+ 
++#define GITS_TYPER_HCC_SHIFT            24
++#define GITS_TYPER_HCC_MASK             0xffUL
++#define GITS_TYPER_HCC(r)               (((r) >> GITS_TYPER_HCC_SHIFT) & \
++                                                 GITS_TYPER_HCC_MASK)
++
+ #define GITS_TYPER_PTA                  BIT(19, UL)
+ #define GITS_TYPER_DEVIDS_SHIFT         13
+ #define GITS_TYPER_DEVIDS_MASK          (0x1fUL << GITS_TYPER_DEVIDS_SHIFT)
+@@ -129,6 +134,13 @@ struct host_its {
+     spinlock_t cmd_lock;
+     void *cmd_buf;
+     unsigned int flags;
++#ifdef CONFIG_SYSTEM_SUSPEND
++    struct suspend_ctx {
++        uint32_t ctlr;
++        uint64_t cbaser;
++        uint64_t baser[GITS_BASER_NR_REGS];
++    } suspend_ctx;
++#endif
+ };
+ 
+ /* Map a collection for this host CPU to each host ITS. */
+@@ -204,6 +216,11 @@ uint64_t gicv3_its_get_cacheability(void);
+ uint64_t gicv3_its_get_shareability(void);
+ unsigned int gicv3_its_get_memflags(void);
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
++int gicv3_its_suspend(void);
++void gicv3_its_resume(void);
++#endif
++
+ #else
+ 
+ #ifdef CONFIG_ACPI
+@@ -271,6 +288,17 @@ static inline int gicv3_its_make_hwdom_dt_nodes(const struct domain *d,
+     return 0;
+ }
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
++static inline int gicv3_its_suspend(void)
++{
++    return 0;
++}
++
++static inline void gicv3_its_resume(void)
++{
++}
++#endif
++
+ #endif /* CONFIG_HAS_ITS */
+ 
+ #endif
+diff --git a/xen/include/xen/list.h b/xen/include/xen/list.h
+index 98d8482dab..2aab274157 100644
+--- a/xen/include/xen/list.h
++++ b/xen/include/xen/list.h
+@@ -535,6 +535,20 @@ static inline void list_splice_init(struct list_head *list,
+          &(pos)->member != (head);                                        \
+          (pos) = list_entry((pos)->member.next, typeof(*(pos)), member))
+ 
++/**
++ * list_for_each_entry_continue_reverse - iterate backwards from the given point
++ * @pos:    the type * to use as a loop cursor.
++ * @head:   the head for your list.
++ * @member: the name of the list_head within the struct.
++ *
++ * Iterate over list of given type backwards, starting from the element previous
++ * to the current one in list order.
++ */
++#define list_for_each_entry_continue_reverse(pos, head, member)           \
++    for ((pos) = list_entry((pos)->member.prev, typeof(*(pos)), member);  \
++         &(pos)->member != (head);                                        \
++         (pos) = list_entry((pos)->member.prev, typeof(*(pos)), member))
++
+ /**
+  * list_for_each_entry_from - iterate over list of given type from the
+  *                            current point
 -- 
 2.43.0
 
