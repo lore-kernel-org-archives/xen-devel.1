@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 245FDCD8CB9
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 11:48:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1334177.1597280 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33178CD8CB9
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 11:48:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1334168.1597289 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXHQ6-0005v1-2n; Wed, 10 Jun 2026 11:48:30 +0000
+	id 1wXHQP-0006KV-EK; Wed, 10 Jun 2026 11:48:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1334177.1597280; Wed, 10 Jun 2026 11:48:30 +0000
+Received: by outflank-mailman (output) from mailman id 1334168.1597289; Wed, 10 Jun 2026 11:48:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXHQ5-0005to-VV; Wed, 10 Jun 2026 11:48:29 +0000
-Received: by outflank-mailman (input) for mailman id 1334177;
- Wed, 10 Jun 2026 11:48:28 +0000
+	id 1wXHQP-0006KN-BA; Wed, 10 Jun 2026 11:48:49 +0000
+Received: by outflank-mailman (input) for mailman id 1334168;
+ Wed, 10 Jun 2026 11:41:43 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1wXHQ4-0005sc-Gn
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 11:48:28 +0000
+ (envelope-from <michael.bommarito@gmail.com>) id 1wXHJX-00051J-0h
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 11:41:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wXHQ3-0093bl-Sg
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 13:48:27 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wXHJW-0092Ij-6Y
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 13:41:42 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jgross@suse.com>)
- id 6a294f03-e002-0a2a0a5209dd-0a2a450ab1ae-32
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 13:48:27 +0200
-Received: from [209.85.208.54] (helo=mail-ed1-f54.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <jgross@suse.com>)
- id 6a294f0b-56b3-0a2a450a0019-d155d036e08b-3
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 13:48:27 +0200
-Received: by mail-ed1-f54.google.com with SMTP id
- 4fb4d7f45d1cf-68c19f1f3ceso10708860a12.2
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 04:48:27 -0700 (PDT)
-Received: from ?IPV6:2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112?
- (2a00-12d0-af5d-ad01-5d3f-14e6-9bcb-5112.ip.tng.de.
- [2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112])
+ (envelope-from <michael.bommarito@gmail.com>)
+ id 6a294d76-bab6-0a2a0a5309dd-0a2a4506bc24-0
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 13:41:42 +0200
+Received: from [209.85.219.52] (helo=mail-qv1-f52.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <michael.bommarito@gmail.com>)
+ id 6a294d75-7371-0a2a45060019-d155db34b915-3
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 13:41:42 +0200
+Received: by mail-qv1-f52.google.com with SMTP id
+ 6a1803df08f44-8cceaacd07bso69386396d6.3
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 04:41:41 -0700 (PDT)
+Received: from server0 (c-68-48-65-54.hsd1.mi.comcast.net. [68.48.65.54])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-68e65027662sm9977446a12.11.2026.06.10.04.48.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Jun 2026 04:48:26 -0700 (PDT)
+ 6a1803df08f44-8cecd26b9d5sm253263426d6.44.2026.06.10.04.41.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Jun 2026 04:41:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,240 +53,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1781092107; x=1781696907; darn=lists.xenproject.org;
-        h=in-reply-to:autocrypt:from:content-language:references:cc:to
-         :subject:user-agent:mime-version:date:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=GaNEqwUdQ9ePWE4UGxADukb2g8iVupQLLKH37U+8B6o=;
-        b=FMcuV/kYrWDsw4tpPNtJx9q0nq31In0+TPgaiTOLLxD/KVWDD+ZysnEcwI8vfyNena
-         qohgiJxyH970cMzh83wuv8cj0L7GF7XFi+wdfP72sZRPE0AQlLs1vFvxFEdb4SnBcsI4
-         sfRIW2nyDDqRyZ19rAoIRvhwZNU0irogKm7/4qxJe9yWWNU3lZbXkf3U/cHtKdp4Mhgu
-         Yv2PXlZbEcjNo8tRxKGB1yvDpW36CQiIzPrQrlRHSb0p+P8h6UkwFNMQhafShq7vypgS
-         xnbXm68hkKpjCckxoS5+FzI/8Nsv2psygQ+qaeVcjEtGrnGOr1XH607A1n9sVwbCckUW
-         1+5w==
+        d=gmail.com; s=20251104; t=1781091701; x=1781696501; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ZpBQlFHxPmh6RO32iI4WOJ4ByDFhk3PQ/XSlBDQpR+c=;
+        b=AlRDxUKOdIq2ryKXm+6YekSU+vwjjPP1yKzdb2GxlS2llJHG+e9fSLHlurU2XccRqP
+         fS54m2Ifbpemnd/oMFKjm4FPFg3H+Wa+ye135QoCexjeZR/qagyVdW9iemzr09rINRtE
+         rJw8JcqKEzAXzslrWgRBsUb5dohz0aq6xSmzcTO7SEM0MiYmBdvwkSb2nQBpnbIZYxmH
+         4n8rZZ8BMaJAR7C6lufjlBqCFRUFN+oSlxX5jzHgh4OksJzhZEzKYd4tPEwWOHlUWu0n
+         dO0YkOHXVE6aPjWUGjRTkmRujz7Pibq8p88pxA5pLuLdavAZD14kPCtIf5oAughTgTW8
+         mecg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781092107; x=1781696907;
-        h=in-reply-to:autocrypt:from:content-language:references:cc:to
-         :subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=GaNEqwUdQ9ePWE4UGxADukb2g8iVupQLLKH37U+8B6o=;
-        b=UdhxfuVjSftG3sJSmgVRFTkgibMEgCGdHoucmy5DhsH/qbsC+qHszszVgTGW28ztoh
-         cWIXgHiLkydSqZFOExqZIjN9/Qsep1xlRFhlMKukfBCT3P7M9Z/SooffQSJy0Q50H1jZ
-         DATTpf7UFV4D7DXTwyctyA4pQ8rKph7NPxtFpwkqnJoDSzPn5NsScakAwQbItfLcIfuh
-         bbQk9u+qLtzfr0NymiZE2u1WPDkaEuQVeYedTosKoIH9cDYWn6IBw410mW88FGGx65xQ
-         Yv2zkVPosOIDCc/UpUq0bt82mv6GfgZeqdsyVI/6/+qmhLVgTJqXWr+ZeJ8NL0MQiFIc
-         sL9Q==
-X-Gm-Message-State: AOJu0YwkyRYQ57/wWRcNAkjBla4jGy3nbRcBmydBsZLtvWH3zRFyoWC4
-	/qA0FQALS/S8wuLCLwdFCLpFgLpPfiqgQYH5ze5+FVsDbBKhzYBCVMFTaxSwz1MH61U=
-X-Gm-Gg: Acq92OF5IPqsIBzQn+O0h5HUi80X6ytAgwc/0gB6A6tS3+NzTgrawUn1M3MbasvaOGm
-	gCPhSMfq3KO86Ugo2xHuRlWgHUeMClMMkaO6Qc4Gj1r+gB5IAJegtaa/XlztD/ciW5NRuEmPpSG
-	wQ2drk+W6ypxdL6F+ZSyJqmUrH1xD9I5lu7AZbtQZPNoHCP8F7wnzRwJuriPkBtmnzweWz/9jke
-	ATl65Y1qjM0wD4D1fmWhzfptW+N+UWxluvh01jp+G5F5VDZm9ErSBqyv9ZCNPo/3tNf9N03yO4v
-	M34A0MO7C6YMxBpSw6RculHbNACqs0gwf+YCeMmnfWYIAzm57EKc2JZYi1fGE50ZhZOeNzr9D4A
-	crMNWiIe4JLIao2TxH1tZFQbIqtjOV8Mn0TFSUikTqg2eZmRVGVEHHgIforsd18nKD6S7q6m8Fr
-	lFgsUWDYZoFpjRRBpqqCRmOpnITyoyztx3kPPKKYfF2BEcbGF4bBqJjtMWj3G83d3X5sPtjfrzj
-	oIOGlARpC3h8kQABzBZVl7hq+lW/jAdmu42bISpXcJbRg//CxophXVLy9Ag/YwVRoxk4RuIOEA=
-X-Received: by 2002:a05:6402:35cd:b0:68d:651f:ccf6 with SMTP id 4fb4d7f45d1cf-68fa4c06618mr11673993a12.4.1781092107043;
-        Wed, 10 Jun 2026 04:48:27 -0700 (PDT)
-Message-ID: <b19b3b96-db17-4ed7-890c-be174b21f391@suse.com>
-Date: Wed, 10 Jun 2026 13:48:26 +0200
+        d=1e100.net; s=20251104; t=1781091701; x=1781696501;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ZpBQlFHxPmh6RO32iI4WOJ4ByDFhk3PQ/XSlBDQpR+c=;
+        b=G5mkbxbyMFJPcsszyzvFraLqMFpPi7qj45yUABYsAiNPy5LhEKwazSxYrlg4LbrFA9
+         rNKGiHQPmBjFMtO6QR6sctWeNI7zDddFs2/AoO6XS8NKNTyVy0yM6I+WfAGyFXRH/iO7
+         G/5JJq307AOmreE544VWJXRzdzOC+CWlSDD8U93o7QcbDokLM4u/5TzM2RhO5SA9jL7X
+         9WhnJbGRGNAPe0CtnoSENrPJ426EKv5/o28X0BVx+AnEYDtIzuZE2bTvvepleO6uR/fo
+         VNTIgpn8s3D9Dz2jemmENzJhQbhjHIBvAgzJGBh9oQmTGEp/u6aBag50FT8ILyCg0lYT
+         xb9g==
+X-Gm-Message-State: AOJu0YyMn/16tBDeIqFaqM76/6LDgSeM0Vyye+IiQ6ttQeKGH68G79oh
+	etTK/HpMWuqEEYDSOKORjm2Zw7z0farxs2jT+NoWFMg91NVKW24pCSiO
+X-Gm-Gg: Acq92OE+aHEo4RRL3JaypnqHDK5vpiEuhi0cUnPGbozpury80wLf69rJuWKOIdzTOZa
+	79Z3szi4jbQFzdWiQWqM0M9MLrX+M4teiMOZkv2s6ZzCD6nPoMbk3nw8WUFwXYqvmHTPOaOPTaK
+	dE4bC66LD+ND2iZv3fSDlNSWRe6QIL0X9TbJT8NWX7bUMD5rAvZ+DB/SDnu6Bc0XnMs5hvrGNoX
+	ol9/GrpO4Yh78QcTOtO7V174R5a4szFW55Qc9UQT86T41bmwKBWla3wl/dIM8d3qIGGB1mTyNdw
+	LGLH117c17gs1+cSzRsWJ2vq7rI7u89e4p3SQn+hbFgLkpNE59Amqlg5BiDvz5DgSTN/jadeQsH
+	m+rP75UnnYGTSamW1nPt0d+zWmrpIwBZJaHW2mDPFj4l4Pz0PBj3ZH1ml4BL+tWD3BO7pbKW4Mj
+	QY+ozbMxxyoQWQ52KLlq0+a8qaunCUP4liK1/Jz0XWwgp6DJZEJI62zlrP5h069gXieEt79oezy
+	7coywIssgi/MX/HOrgIh967cZd3SWg=
+X-Received: by 2002:ad4:4447:0:b0:8cc:ea2c:f2b5 with SMTP id 6a1803df08f44-8cee61359bemr283431546d6.23.1781091700398;
+        Wed, 10 Jun 2026 04:41:40 -0700 (PDT)
+From: Michael Bommarito <michael.bommarito@gmail.com>
+To: Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] xen/pvcalls: bound backend response req_id before indexing rsp[]
+Date: Wed, 10 Jun 2026 07:41:37 -0400
+Message-ID: <20260610114137.3749027-1-michael.bommarito@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/pvcalls: bound backend response req_id before
- indexing rsp[]
-To: Michael Bommarito <michael.bommarito@gmail.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
-References: <20260610114137.3749027-1-michael.bommarito@gmail.com>
-Content-Language: en-US
-From: Juergen Gross <jgross@suse.com>
-Autocrypt: addr=jgross@suse.com; keydata=
- xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
- ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
- dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
- NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
- XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
- AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
- CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
- mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
- G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
- kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
- Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
- RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
- vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
- sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
- aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
- w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
- auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
- 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
- fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
- HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
- QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
- ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <20260610114137.3749027-1-michael.bommarito@gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------Tx1LOYp8wW1aTJ53SXNaFzfJ"
-X-purgate-ID: tlsNG-4011c0/1781092107-7D9808B7-704C218E/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-16d1c6/1781091702-8D186D75-79C2F078/0/0
 X-purgate-type: clean
-X-purgate-size: 9178
+X-purgate-size: 2266
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------Tx1LOYp8wW1aTJ53SXNaFzfJ
-Content-Type: multipart/mixed; boundary="------------d9yYnYsWYCkJQbR32k9vbJ6W";
- protected-headers="v1"
-From: Juergen Gross <jgross@suse.com>
-To: Michael Bommarito <michael.bommarito@gmail.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
-Message-ID: <b19b3b96-db17-4ed7-890c-be174b21f391@suse.com>
-Subject: Re: [PATCH] xen/pvcalls: bound backend response req_id before
- indexing rsp[]
-References: <20260610114137.3749027-1-michael.bommarito@gmail.com>
-In-Reply-To: <20260610114137.3749027-1-michael.bommarito@gmail.com>
+pvcalls_front_event_handler() takes req_id directly from the
+backend-supplied ring response and uses it to index the fixed-size
+bedata->rsp[] array for a memcpy() and a store, with no range check. A
+malicious or buggy backend can set req_id past PVCALLS_NR_RSP_PER_RING
+and drive an out-of-bounds write past the bedata allocation.
 
---------------d9yYnYsWYCkJQbR32k9vbJ6W
-Content-Type: multipart/mixed; boundary="------------Q20YPybG4hq1agZCvh2N8YwM"
+req_id was also declared int while the wire field rsp->req_id is u32, so
+a range check on the signed value is insufficient on its own: a backend
+req_id of 0xffffffff becomes -1, passes the >= PVCALLS_NR_RSP_PER_RING
+test, and indexes bedata->rsp[-1], an out-of-bounds write to the left of
+the array. Declare req_id as u32 and add the range check so both ends of
+the index are covered.
 
---------------Q20YPybG4hq1agZCvh2N8YwM
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+The pvcalls frontend currently trusts its backend, so this is not a
+classic-Xen security issue, but it matters for hardening PV frontends
+against malicious backends (confidential and disaggregated deployments).
+Reject responses whose req_id is out of range.
 
-T24gMTAuMDYuMjYgMTM6NDEsIE1pY2hhZWwgQm9tbWFyaXRvIHdyb3RlOg0KPiBwdmNhbGxz
-X2Zyb250X2V2ZW50X2hhbmRsZXIoKSB0YWtlcyByZXFfaWQgZGlyZWN0bHkgZnJvbSB0aGUN
-Cj4gYmFja2VuZC1zdXBwbGllZCByaW5nIHJlc3BvbnNlIGFuZCB1c2VzIGl0IHRvIGluZGV4
-IHRoZSBmaXhlZC1zaXplDQo+IGJlZGF0YS0+cnNwW10gYXJyYXkgZm9yIGEgbWVtY3B5KCkg
-YW5kIGEgc3RvcmUsIHdpdGggbm8gcmFuZ2UgY2hlY2suIEENCj4gbWFsaWNpb3VzIG9yIGJ1
-Z2d5IGJhY2tlbmQgY2FuIHNldCByZXFfaWQgcGFzdCBQVkNBTExTX05SX1JTUF9QRVJfUklO
-Rw0KPiBhbmQgZHJpdmUgYW4gb3V0LW9mLWJvdW5kcyB3cml0ZSBwYXN0IHRoZSBiZWRhdGEg
-YWxsb2NhdGlvbi4NCj4gDQo+IHJlcV9pZCB3YXMgYWxzbyBkZWNsYXJlZCBpbnQgd2hpbGUg
-dGhlIHdpcmUgZmllbGQgcnNwLT5yZXFfaWQgaXMgdTMyLCBzbw0KPiBhIHJhbmdlIGNoZWNr
-IG9uIHRoZSBzaWduZWQgdmFsdWUgaXMgaW5zdWZmaWNpZW50IG9uIGl0cyBvd246IGEgYmFj
-a2VuZA0KPiByZXFfaWQgb2YgMHhmZmZmZmZmZiBiZWNvbWVzIC0xLCBwYXNzZXMgdGhlID49
-IFBWQ0FMTFNfTlJfUlNQX1BFUl9SSU5HDQo+IHRlc3QsIGFuZCBpbmRleGVzIGJlZGF0YS0+
-cnNwWy0xXSwgYW4gb3V0LW9mLWJvdW5kcyB3cml0ZSB0byB0aGUgbGVmdCBvZg0KPiB0aGUg
-YXJyYXkuIERlY2xhcmUgcmVxX2lkIGFzIHUzMiBhbmQgYWRkIHRoZSByYW5nZSBjaGVjayBz
-byBib3RoIGVuZHMgb2YNCj4gdGhlIGluZGV4IGFyZSBjb3ZlcmVkLg0KPiANCj4gVGhlIHB2
-Y2FsbHMgZnJvbnRlbmQgY3VycmVudGx5IHRydXN0cyBpdHMgYmFja2VuZCwgc28gdGhpcyBp
-cyBub3QgYQ0KPiBjbGFzc2ljLVhlbiBzZWN1cml0eSBpc3N1ZSwgYnV0IGl0IG1hdHRlcnMg
-Zm9yIGhhcmRlbmluZyBQViBmcm9udGVuZHMNCj4gYWdhaW5zdCBtYWxpY2lvdXMgYmFja2Vu
-ZHMgKGNvbmZpZGVudGlhbCBhbmQgZGlzYWdncmVnYXRlZCBkZXBsb3ltZW50cykuDQo+IFJl
-amVjdCByZXNwb25zZXMgd2hvc2UgcmVxX2lkIGlzIG91dCBvZiByYW5nZS4NCj4gDQo+IEZp
-eGVzOiAyMzVhNzFjNTM5MDMgKCJ4ZW4vcHZjYWxsczogaW1wbGVtZW50IHJlbGVhc2UgY29t
-bWFuZCIpDQo+IEFzc2lzdGVkLWJ5OiBDbGF1ZGU6Y2xhdWRlLW9wdXMtNC04DQo+IFNpZ25l
-ZC1vZmYtYnk6IE1pY2hhZWwgQm9tbWFyaXRvIDxtaWNoYWVsLmJvbW1hcml0b0BnbWFpbC5j
-b20+DQo+IC0tLQ0KPiAgIGRyaXZlcnMveGVuL3B2Y2FsbHMtZnJvbnQuYyB8IDkgKysrKysr
-KystDQo+ICAgMSBmaWxlIGNoYW5nZWQsIDggaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigt
-KQ0KPiANCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMveGVuL3B2Y2FsbHMtZnJvbnQuYyBiL2Ry
-aXZlcnMveGVuL3B2Y2FsbHMtZnJvbnQuYw0KPiBpbmRleCA1MGNlNDgyMGY3ZWViLi43OGJk
-NGU4OTRiMzJlIDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJzL3hlbi9wdmNhbGxzLWZyb250LmMN
-Cj4gKysrIGIvZHJpdmVycy94ZW4vcHZjYWxscy1mcm9udC5jDQo+IEBAIC0xNjgsNyArMTY4
-LDggQEAgc3RhdGljIGlycXJldHVybl90IHB2Y2FsbHNfZnJvbnRfZXZlbnRfaGFuZGxlcihp
-bnQgaXJxLCB2b2lkICpkZXZfaWQpDQo+ICAgCXN0cnVjdCBwdmNhbGxzX2JlZGF0YSAqYmVk
-YXRhOw0KPiAgIAlzdHJ1Y3QgeGVuX3B2Y2FsbHNfcmVzcG9uc2UgKnJzcDsNCj4gICAJdWlu
-dDhfdCAqc3JjLCAqZHN0Ow0KPiAtCWludCByZXFfaWQgPSAwLCBtb3JlID0gMCwgZG9uZSA9
-IDA7DQo+ICsJdTMyIHJlcV9pZCA9IDA7DQo+ICsJaW50IG1vcmUgPSAwLCBkb25lID0gMDsN
-Cj4gICANCj4gICAJaWYgKGRldiA9PSBOVUxMKQ0KPiAgIAkJcmV0dXJuIElSUV9IQU5ETEVE
-Ow0KPiBAQCAtMTg1LDYgKzE4NiwxMiBAQCBzdGF0aWMgaXJxcmV0dXJuX3QgcHZjYWxsc19m
-cm9udF9ldmVudF9oYW5kbGVyKGludCBpcnEsIHZvaWQgKmRldl9pZCkNCj4gICAJCXJzcCA9
-IFJJTkdfR0VUX1JFU1BPTlNFKCZiZWRhdGEtPnJpbmcsIGJlZGF0YS0+cmluZy5yc3BfY29u
-cyk7DQo+ICAgDQo+ICAgCQlyZXFfaWQgPSByc3AtPnJlcV9pZDsNCj4gKwkJaWYgKHJlcV9p
-ZCA+PSBQVkNBTExTX05SX1JTUF9QRVJfUklORykgew0KPiArCQkJLyogTWFsaWNpb3VzIG9y
-IGJ1Z2d5IGJhY2tlbmQ6IHJlcV9pZCBvdXQgb2YgcmFuZ2UuICovDQoNClBsZWFzZSBhZGQg
-YW4gZXJyb3IgbWVzc2FnZSBoZXJlLCB1c2luZyBwcl9lcnJfb25jZSgpLg0KDQpJbnN0ZWFk
-IG9mIGp1c3QgaWdub3Jpbmcgc3VjaCByZXNwb25zZXMsIEknZCBjb25zaWRlciBzdG9wcGlu
-ZyBjb21tdW5pY2F0aW9uDQp3aXRoIHRoZSBiYWNrZW5kIGZvciB0aGlzIGRldmljZS4NCg0K
-DQpKdWVyZ2VuDQo=
---------------Q20YPybG4hq1agZCvh2N8YwM
-Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+Fixes: 235a71c53903 ("xen/pvcalls: implement release command")
+Assisted-by: Claude:claude-opus-4-8
+Signed-off-by: Michael Bommarito <michael.bommarito@gmail.com>
+---
+ drivers/xen/pvcalls-front.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+diff --git a/drivers/xen/pvcalls-front.c b/drivers/xen/pvcalls-front.c
+index 50ce4820f7eeb..78bd4e894b32e 100644
+--- a/drivers/xen/pvcalls-front.c
++++ b/drivers/xen/pvcalls-front.c
+@@ -168,7 +168,8 @@ static irqreturn_t pvcalls_front_event_handler(int irq, void *dev_id)
+ 	struct pvcalls_bedata *bedata;
+ 	struct xen_pvcalls_response *rsp;
+ 	uint8_t *src, *dst;
+-	int req_id = 0, more = 0, done = 0;
++	u32 req_id = 0;
++	int more = 0, done = 0;
+ 
+ 	if (dev == NULL)
+ 		return IRQ_HANDLED;
+@@ -185,6 +186,12 @@ static irqreturn_t pvcalls_front_event_handler(int irq, void *dev_id)
+ 		rsp = RING_GET_RESPONSE(&bedata->ring, bedata->ring.rsp_cons);
+ 
+ 		req_id = rsp->req_id;
++		if (req_id >= PVCALLS_NR_RSP_PER_RING) {
++			/* Malicious or buggy backend: req_id out of range. */
++			bedata->ring.rsp_cons++;
++			done = 1;
++			continue;
++		}
+ 		if (rsp->cmd == PVCALLS_POLL) {
+ 			struct sock_mapping *map = (struct sock_mapping *)(uintptr_t)
+ 						   rsp->u.poll.id;
+-- 
+2.53.0
 
-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
-kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
-=3DeeAB
------END PGP PUBLIC KEY BLOCK-----
-
---------------Q20YPybG4hq1agZCvh2N8YwM--
-
---------------d9yYnYsWYCkJQbR32k9vbJ6W--
-
---------------Tx1LOYp8wW1aTJ53SXNaFzfJ
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmopTwoFAwAAAAAACgkQsN6d1ii/Ey+d
-Ggf/XZKVztHeDyIB+onfzbh23KeZaRucCZKP8MzxYj9KpYAI53ojxWV4t3yGtfMWnf0JA7TWGgUe
-+nYVwi1C2B9eHdkt1kfIhmcKY1AXtMIv8/bwK1+2lpLqhbG+cg/oIOLCNj/J3QWgwVNOBF6D1Zqq
-o5XSsaMHgr+jGx5iR7sY2ng23SsX2/3+6dhEF/g1wiXKCex07yaLB9zqACxACC+kIYdQKz7MjXGf
-wzt+ZQs3DoPga6t9So3JtZZCOv6TZROi/QGW/OtGZ3X9N0M28gDS+MZZC7IR9a9ERmviy/hOIlUR
-4I6UXmoEk4/fqC0opgKIQa2OTsCaunoNngt2PUQb5A==
-=OUlR
------END PGP SIGNATURE-----
-
---------------Tx1LOYp8wW1aTJ53SXNaFzfJ--
 
