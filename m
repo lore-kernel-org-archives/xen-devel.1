@@ -4,44 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58FA1CD98CC
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Jun 2026 12:32:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1335445.1597673 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EC4ECD98CC
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Jun 2026 12:58:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1335477.1597692 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXea4-00077A-Vx; Thu, 11 Jun 2026 12:32:20 +0000
+	id 1wXeyx-0002Ta-6h; Thu, 11 Jun 2026 12:58:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1335445.1597673; Thu, 11 Jun 2026 12:32:20 +0000
+Received: by outflank-mailman (output) from mailman id 1335477.1597692; Thu, 11 Jun 2026 12:58:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXea4-000773-TO; Thu, 11 Jun 2026 12:32:20 +0000
-Received: by outflank-mailman (input) for mailman id 1335445;
- Thu, 11 Jun 2026 12:32:19 +0000
+	id 1wXeyx-0002TT-2p; Thu, 11 Jun 2026 12:58:03 +0000
+Received: by outflank-mailman (input) for mailman id 1335477;
+ Thu, 11 Jun 2026 12:58:01 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <michael.bommarito@gmail.com>) id 1wXea3-0006uI-0P
- for xen-devel@lists.xenproject.org; Thu, 11 Jun 2026 12:32:19 +0000
+ (envelope-from <stefanha@redhat.com>) id 1wXeyv-0002TN-MA
+ for xen-devel@lists.xenproject.org; Thu, 11 Jun 2026 12:58:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wXea2-002Uok-D9
- for xen-devel@lists.xenproject.org; Thu, 11 Jun 2026 14:32:18 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wXeyv-00Csrf-2a
+ for xen-devel@lists.xenproject.org; Thu, 11 Jun 2026 14:58:01 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <michael.bommarito@gmail.com>)
- id 6a2aaad2-bab6-0a2a0a5309dd-0a2a4503808c-0
- for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2026 14:32:18 +0200
-Received: from [209.85.222.170] (helo=mail-qk1-f170.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <michael.bommarito@gmail.com>)
- id 6a2aaad1-672d-0a2a45030019-d155deaaa823-3
- for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2026 14:32:18 +0200
-Received: by mail-qk1-f170.google.com with SMTP id
- af79cd13be357-915d64fead9so104059985a.0
- for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2026 05:32:17 -0700 (PDT)
-Received: from server0 (c-68-48-65-54.hsd1.mi.comcast.net. [68.48.65.54])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-9160b02f758sm171220685a.36.2026.06.11.05.32.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jun 2026 05:32:15 -0700 (PDT)
+ (envelope-from <stefanha@redhat.com>)
+ id 6a2ab0a3-e002-0a2a0a5209dd-0a2a450ba044-48
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2026 14:58:00 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <stefanha@redhat.com>)
+ id 6a2ab0d7-212f-0a2a450b0019-aa0a817c92a1-3
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2026 14:58:00 +0200
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-359-ljIudu3YMUiI3vj_euAS4A-1; Thu,
+ 11 Jun 2026 08:57:57 -0400
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 193FA18D65C3; Thu, 11 Jun 2026 12:57:48 +0000 (UTC)
+Received: from localhost (unknown [10.2.16.137])
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 179B1180057F; Thu, 11 Jun 2026 12:57:43 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,165 +60,147 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781181137; x=1781785937; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=mLymrEZazNmQKknDX1QeqtCgPzdIbUvDepEeTIb67zo=;
-        b=cufL1e0IaEr6ZzGH8Q18AIdilotUMvlN3U5swlRHZHTkXTOuMFjd1ZizV09Re5jKNp
-         ki1LgeHx8SRr+9i+P3Caka7IQqwki4yeR1zwD6/7Dh3jb1CxrJf81jwW/zr737j4BwWL
-         owtRGDJR32oCiucMJXwFQ5i4NuWP/PHtRht3FAIX0PVIQwFj4bo1r5NxMnHITqJ8YPoM
-         mvPuieNPQEEHBW/mHuSGKjJZ8m1/h1hrMN/a6AyNgp1vDCQ6RVdMT27+lH4Kd05GyVvp
-         j3oplICphnJiOv6c2a3sxZ8c/43Xf6J13pi6ly6vAqOTqvz03PAJb4Vn7JKTiHI682he
-         auLQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781181137; x=1781785937;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=mLymrEZazNmQKknDX1QeqtCgPzdIbUvDepEeTIb67zo=;
-        b=NANzepFsJxgaPEZgrPGDY4XAjIE3tlqEcGt48WTa3Z9xF2JHrGYoZTYkbkydSmKkhB
-         lCko/QKfFu3FyquFIkPM6b/RukpDEIqG6kj93OZezrexax3gVY7wc/7DQLZeNgUsDcpf
-         /YUKK5EwUp/zdEUc6YHWZOVOzQZtf2x8LqEV4zxpaDC9xiIeVpTuRq+flUFxFYxKTmYz
-         5KhImEn3gfvoa35Db9zJK1ZdRoSC8BYiVftPw/u4EI19qNBeTZw9JWC63Ms8iTOIaGEm
-         ZKmg7y1ZxZ8rn6/rUpmWEQPs+c79wGU65V+ax71LrtYmSzfNNJ8nLmSlTdAW/JWp2oQv
-         KxMQ==
-X-Gm-Message-State: AOJu0YydcvXs3GleSiBLj3iwoRndLXNK4JBX7bf83zCcj+jEdOaeRCIx
-	PGpY9xlLeOUm+5UvsIgwsYTsrnuWCln5/ankQN01i05LZvrpSQimXGcr
-X-Gm-Gg: Acq92OFEzBNox4jvCyACz9szgr/Q7XXcePs39cljiYBG3XbecaXlVRr2DQs/xDTlEcB
-	9dUbFzsisoETg2zUxWFDQnmFtnEBzZmJ7SOm58JCrJEDEGPM71wDj4NmSZpY+Taswt/ymkb8p9H
-	oUwRlShyW6UhidxRaDDtsY6mOszyiQ685ruBOu+CO19aj/IRtpwQDv6zv6RRJ7EuoAnGqTgAHuQ
-	0Uzabh/dKCfW6Uug2RV10r8WAXBi9mNZJe9hnS+7QeFzK46xPpucDM/lzQjhb7vhHFbioduDQ61
-	U8Wyu65rE54IB9FiHXW0jLtOoyPc975vPJa3F2uLXfT4qKK6AsYPZ5u6K2zWXB0ZAa0Gr8b3YlY
-	SSR8nu9132qWkyI2I9cqpv2b2Ojjg+nbIWhwss7/4xrYeEOICCpjtjNX+p11bxca5lpQyw50XMI
-	0d3OikfF3Tb2leqBH3EHQKJI1ETzwFJVf2QZnRsTiSwoXbm+JE7acSBsWeFVDr/zM47dUhcgksu
-	QtwZhYuM7Y0v01ZjOuBcxzYilnFX5c=
-X-Received: by 2002:a05:620a:440c:b0:910:c1ba:91d3 with SMTP id af79cd13be357-9160a841f7fmr283346285a.45.1781181136610;
-        Thu, 11 Jun 2026 05:32:16 -0700 (PDT)
-From: Michael Bommarito <michael.bommarito@gmail.com>
-To: Juergen Gross <jgross@suse.com>,
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1781182679;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=wutI1NEOrxe0Ga9sQ5pG620uXi0d0C5Aj7NTI3FNepo=;
+	b=WJqB3KdnoX2lUVrwIePkjJ6aswOz/mkycQOWECcgTHtIeYR8BmpylujZICSJmcYW+Hqs+v
+	64qO1Blz97Z283bcRiQuOBsQYPxtbKRi9rv2eF+/JTDrpBiYjQbmVmn7R357F0CeTDQPIH
+	smY+JhvQ7YGnU2FaJPCLNXte730Llwk=
+X-MC-Unique: ljIudu3YMUiI3vj_euAS4A-1
+X-Mimecast-MFC-AGG-ID: ljIudu3YMUiI3vj_euAS4A_1781182671
+Date: Wed, 10 Jun 2026 11:37:47 -0400
+From: Stefan Hajnoczi <stefanha@redhat.com>
+To: Sumit Saxena <sumit.saxena@broadcom.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>
+Cc: "Martin K . Petersen" <martin.petersen@oracle.com>,
+	Jens Axboe <axboe@kernel.dk>,
+	"James E . J . Bottomley" <James.Bottomley@hansenpartnership.com>,
+	linux-scsi@vger.kernel.org, linux-block@vger.kernel.org,
+	Adam Radford <aradford@gmail.com>,
+	Khalid Aziz <khalid@gonehiking.org>,
+	Adaptec OEM Raid Solutions <aacraid@microsemi.com>,
+	Matthew Wilcox <willy@infradead.org>,
+	Hannes Reinecke <hare@suse.com>,
+	"Juergen E . Fischer" <fischer@norbit.de>,
+	Russell King <linux@armlinux.org.uk>,
+	linux-arm-kernel@lists.infradead.org,
+	Finn Thain <fthain@linux-m68k.org>,
+	Michael Schmitz <schmitzmic@gmail.com>,
+	Anil Gurumurthy <anil.gurumurthy@qlogic.com>,
+	Sudarsana Kalluru <sudarsana.kalluru@qlogic.com>,
+	Oliver Neukum <oliver@neukum.org>, Ali Akcaagac <aliakc@web.de>,
+	Jamie Lenehan <lenehan@twibble.org>,
+	Ram Vegesna <ram.vegesna@broadcom.com>,
+	target-devel@vger.kernel.org,
+	Bradley Grove <linuxdrivers@attotech.com>,
+	Satish Kharat <satishkh@cisco.com>,
+	Sesidhar Baddela <sebaddel@cisco.com>,
+	Karan Tilak Kumar <kartilak@cisco.com>,
+	Yihang Li <liyihang9@h-partners.com>,
+	Don Brace <don.brace@microchip.com>, storagedev@microchip.com,
+	HighPoint Linux Team <linux@highpoint-tech.com>,
+	Tyrel Datwyler <tyreld@linux.ibm.com>,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	Christophe Leroy <chleroy@kernel.org>,
+	linuxppc-dev@lists.ozlabs.org, Brian King <brking@us.ibm.com>,
+	Lee Duncan <lduncan@suse.com>, Chris Leech <cleech@redhat.com>,
+	Mike Christie <michael.christie@oracle.com>,
+	open-iscsi@googlegroups.com, Justin Tee <justin.tee@broadcom.com>,
+	Paul Ely <paul.ely@broadcom.com>,
+	Kashyap Desai <kashyap.desai@broadcom.com>,
+	Shivasharan S <shivasharan.srikanteshwara@broadcom.com>,
+	Chandrakanth Patil <chandrakanth.patil@broadcom.com>,
+	megaraidlinux.pdl@broadcom.com,
+	Sathya Prakash Veerichetty <sathya.prakash@broadcom.com>,
+	Sreekanth Reddy <sreekanth.reddy@broadcom.com>,
+	mpi3mr-linuxdrv.pdl@broadcom.com,
+	Suganath Prabu Subramani <suganath-prabu.subramani@broadcom.com>,
+	Ranjan Kumar <ranjan.kumar@broadcom.com>,
+	MPT-FusionLinux.pdl@broadcom.com, Daniel Palmer <daniel@thingy.jp>,
+	GOTO Masanori <gotom@debian.or.jp>,
+	Jack Wang <jinpu.wang@cloud.ionos.com>,
+	Geoff Levand <geoff@infradead.org>, Michael Reed <mdr@sgi.com>,
+	Nilesh Javali <njavali@marvell.com>,
+	GR-QLogic-Storage-Upstream@marvell.com,
+	Narsimhulu Musini <nmusini@cisco.com>,
+	"K . Y . Srinivasan" <kys@microsoft.com>,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Wei Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>,
+	Long Li <longli@microsoft.com>, linux-hyperv@vger.kernel.org,
+	"Michael S . Tsirkin" <mst@redhat.com>,
+	Jason Wang <jasowang@redhat.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Eugenio Perez <eperezma@redhat.com>, virtualization@lists.linux.dev,
+	Vishal Bhakta <vishal.bhakta@broadcom.com>,
+	bcm-kernel-feedback-list@broadcom.com,
+	Juergen Gross <jgross@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Cc: xen-devel@lists.xenproject.org,
-	linux-scsi@vger.kernel.org,
-	stable@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH 1/2] xen/scsiback: free unsubmitted command instead of double-putting it
-Date: Thu, 11 Jun 2026 08:30:45 -0400
-Message-ID: <20260611123046.2323342-2-michael.bommarito@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260611123046.2323342-1-michael.bommarito@gmail.com>
-References: <20260611123046.2323342-1-michael.bommarito@gmail.com>
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	xen-devel@lists.xenproject.org,
+	John Garry <john.g.garry@oracle.com>
+Subject: Re: [PATCH v3 2/4] scsi: host: allocate struct Scsi_Host on the NUMA
+ node of the host adapter
+Message-ID: <20260610153747.GA121666@fedora>
+References: <20260609121806.2121755-1-sumit.saxena@broadcom.com>
+ <20260609121806.2121755-3-sumit.saxena@broadcom.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1781181138-4259D938-C8929943/0/0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="57Se20/pMUpk+P8R"
+Content-Disposition: inline
+In-Reply-To: <20260609121806.2121755-3-sumit.saxena@broadcom.com>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-purgate-ID: tlsNG-42698a/1781182680-1B77AF3B-E51D8BD2/0/0
 X-purgate-type: clean
-X-purgate-size: 4396
+X-purgate-size: 1636
 
-scsiback_get_pend_req() obtains a command tag and returns a
-vscsibk_pend whose embedded se_cmd has only been memset to 0, so
-its cmd_kref is 0; the se_cmd is initialised (kref_init() via
-target_init_cmd()) only later, in scsiback_cmd_exec(), on the
-successful VSCSIIF_ACT_SCSI_CDB path. The two error paths in
-scsiback_do_cmd_fn() taken before the command is submitted -- a
-failed scsiback_gnttab_data_map() and an unknown ring_req.act --
-call transport_generic_free_cmd(&pending_req->se_cmd, 0), which
-kref_put()s a refcount of 0. That underflows it ("refcount_t:
-underflow; use-after-free") and, as the release function is not
-run, leaks the command tag.
 
-Impact: a pvSCSI guest can leak every command tag of a LUN's
-session, stopping the LUN, by submitting requests with a bad
-grant reference or an unknown request type; under panic_on_warn
-the refcount underflow panics the host.
+--57Se20/pMUpk+P8R
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Add a helper that just returns the tag with target_free_tag() and
-sends the error response. It frees the tag while the v2p reference
-still pins the session, and snapshots the response fields
-beforehand because freeing the tag can let another ring reuse the
-pending_req slot.
+On Tue, Jun 09, 2026 at 05:48:01PM +0530, Sumit Saxena wrote:
+> diff --git a/drivers/scsi/virtio_scsi.c b/drivers/scsi/virtio_scsi.c
+> index 5fdaa71f0652..88375574cb18 100644
+> --- a/drivers/scsi/virtio_scsi.c
+> +++ b/drivers/scsi/virtio_scsi.c
+> @@ -929,7 +929,7 @@ static int virtscsi_probe(struct virtio_device *vdev)
+>  	num_targets =3D virtscsi_config_get(vdev, max_target) + 1;
+> =20
+>  	shost =3D scsi_host_alloc(&virtscsi_host_template,
+> -				struct_size(vscsi, req_vqs, num_queues));
+> +				struct_size(vscsi, req_vqs, num_queues), NULL);
 
-Fixes: 2dbcdf33dbf6 ("xen-scsiback: Convert to percpu_ida tag allocation")
-Cc: stable@vger.kernel.org
-Assisted-by: Claude:claude-opus-4-8
-Signed-off-by: Michael Bommarito <michael.bommarito@gmail.com>
----
-Reproduced on a Xen dom0 (Linux 6.1.y) exporting a pvSCSI LUN to a guest.
-A frontend that sends a single ring request with an unknown action type
-drives scsiback_do_cmd_fn() into transport_generic_free_cmd() on the
-never-initialised command and logs
+A virtio_device has a parent (this is the virtio transport, like
+virtio_pci) and that may have NUMA node.
 
-  refcount_t: underflow; use-after-free
-  WARNING: ... refcount_warn_saturate
-   transport_generic_free_cmd+0x... [target_core_mod]
-   scsiback_do_cmd_fn+0x... [xen_scsiback]
-   scsiback_irq_fn+0x... [xen_scsiback]
+drivers/virtio/virtio.c:register_virtio_device() could call
+set_dev_node(dev, dev_to_node(dev->parent)) to propagate the NUMA node
+to the virtio_device if it is not already automatically propagated.
 
-from the vscsiif IRQ thread, and panics the dom0 under panic_on_warn.  The
-failed grant-map path reaches the same free.  With this patch the same
-request is answered with DID_ERROR and the tag is returned, with no
-underflow.  These error paths are unchanged since 2dbcdf33dbf6, so mainline
-is affected identically.
+Stefan
 
- drivers/xen/xen-scsiback.c | 28 ++++++++++++++++++++++------
- 1 file changed, 22 insertions(+), 6 deletions(-)
+--57Se20/pMUpk+P8R
+Content-Type: application/pgp-signature; name=signature.asc
 
-diff --git a/drivers/xen/xen-scsiback.c b/drivers/xen/xen-scsiback.c
-index e33f95c91b096..f324732eba7f8 100644
---- a/drivers/xen/xen-scsiback.c
-+++ b/drivers/xen/xen-scsiback.c
-@@ -611,6 +611,25 @@ static void scsiback_disconnect(struct vscsibk_info *info)
- 	xenbus_unmap_ring_vfree(info->dev, info->ring.sring);
- }
- 
-+/*
-+ * Send the error response for a request that did not reach the target core
-+ * and return its tag.  Free the tag before the response drops the v2p
-+ * reference that keeps the session alive, and snapshot what the response
-+ * needs since returning the tag can let the slot be reused.
-+ */
-+static void scsiback_resp_and_free(struct vscsibk_pend *pending_req,
-+				   int32_t result)
-+{
-+	struct vscsibk_info *info = pending_req->info;
-+	struct v2p_entry *v2p = pending_req->v2p;
-+	struct se_session *se_sess = v2p->tpg->tpg_nexus->tvn_se_sess;
-+	u16 rqid = pending_req->rqid;
-+
-+	target_free_tag(se_sess, &pending_req->se_cmd);
-+	scsiback_send_response(info, NULL, result, 0, rqid);
-+	kref_put(&v2p->kref, scsiback_free_translation_entry);
-+}
-+
- static void scsiback_device_action(struct vscsibk_pend *pending_req,
- 	enum tcm_tmreq_table act, int tag)
- {
-@@ -792,9 +811,8 @@ static int scsiback_do_cmd_fn(struct vscsibk_info *info,
- 		case VSCSIIF_ACT_SCSI_CDB:
- 			if (scsiback_gnttab_data_map(&ring_req, pending_req)) {
- 				scsiback_fast_flush_area(pending_req);
--				scsiback_do_resp_with_sense(NULL,
--						DID_ERROR << 16, 0, pending_req);
--				transport_generic_free_cmd(&pending_req->se_cmd, 0);
-+				scsiback_resp_and_free(pending_req,
-+						       DID_ERROR << 16);
- 			} else {
- 				scsiback_cmd_exec(pending_req);
- 			}
-@@ -808,9 +826,7 @@ static int scsiback_do_cmd_fn(struct vscsibk_info *info,
- 			break;
- 		default:
- 			pr_err_ratelimited("invalid request\n");
--			scsiback_do_resp_with_sense(NULL, DID_ERROR << 16, 0,
--						    pending_req);
--			transport_generic_free_cmd(&pending_req->se_cmd, 0);
-+			scsiback_resp_and_free(pending_req, DID_ERROR << 16);
- 			break;
- 		}
- 
--- 
-2.53.0
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCgAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmophMsACgkQnKSrs4Gr
+c8h+7Af/Yl5xc4DOlpzwRNKEPqqogmtmADQbRI91eNljCoArG1qdxcTTSKksIgWC
+5g0jjNOCwbOatljS+FxPkDgpPYoZbsIv+K4p/D6UyHLP+Dff2FQhwPaAKkOvJi6k
+9BoNOORgp8ZKrf0RrCTr2M5clKgG0GT+5WxgezSZtTh6wSoN0ksL5kwqx+8B4sWw
+irnTFz4hZhKlUsYHWWYvNhiq0ChdmzYMdxw6GFwIWrRpNcElfSmOAMBE12bJeqIi
+u2/3ah3cSSanhmuITCC+dXImHUlYtxtFRBowqsxCEtdiRFs5srPStR/WW8yyZoXe
+mhXbMPjGmQXNdAT61yT9lw+ZVx2y1w==
+=kfg0
+-----END PGP SIGNATURE-----
+
+--57Se20/pMUpk+P8R--
 
 
