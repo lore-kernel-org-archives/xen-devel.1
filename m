@@ -4,46 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C46FCD98C7
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 11:14:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1334125.1597223 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5080DCD8CB9
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 11:30:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1334154.1597254 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXGsI-0006EB-6D; Wed, 10 Jun 2026 11:13:34 +0000
+	id 1wXH8p-0002Zv-6y; Wed, 10 Jun 2026 11:30:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1334125.1597223; Wed, 10 Jun 2026 11:13:34 +0000
+Received: by outflank-mailman (output) from mailman id 1334154.1597254; Wed, 10 Jun 2026 11:30:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXGsI-0006DD-0o; Wed, 10 Jun 2026 11:13:34 +0000
-Received: by outflank-mailman (input) for mailman id 1334125;
- Wed, 10 Jun 2026 11:13:31 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <taka@valinux.co.jp>) id 1wXGsE-00069r-RD
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 11:13:31 +0000
+	id 1wXH8p-0002Zo-3A; Wed, 10 Jun 2026 11:30:39 +0000
+Received: by outflank-mailman (input) for mailman id 1334154;
+ Wed, 10 Jun 2026 11:30:37 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19eb14c4ec6000701b@swg.vates.tech>)
+ id 1wXH8n-0002Zi-Hh
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 11:30:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wXGsE-008xp6-0R
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 13:13:30 +0200
-Received: from [10.42.69.8] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <taka@valinux.co.jp>)
- id 6a2946c3-5cb7-0a2a0a5109dd-0a2a4508a5de-46
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 13:13:29 +0200
-Received: from [52.101.229.134]
- (helo=TY3P286CU002.outbound.protection.outlook.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <taka@valinux.co.jp>)
- id 6a2946d6-63b5-0a2a45080019-3465e5868771-3
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 13:13:28 +0200
-Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:458::18)
- by OS7P286MB6556.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:432::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.11; Wed, 10 Jun
- 2026 11:13:23 +0000
-Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
- ([fe80::c8c9:25cd:8d13:96d6]) by OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
- ([fe80::c8c9:25cd:8d13:96d6%6]) with mapi id 15.21.0113.011; Wed, 10 Jun 2026
- 11:13:23 +0000
+ id 1wXH8m-0025kM-DK
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 13:30:36 +0200
+Received: from [10.42.69.4] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19eb14c4ec6000701b@swg.vates.tech>)
+ id 6a294adb-5cb7-0a2a0a5109dd-0a2a4504b59e-2
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 13:30:36 +0200
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19eb14c4ec6000701b@swg.vates.tech>)
+ id 6a294adc-1dec-0a2a45040019-b9ff1c12a125-3
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 13:30:36 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 19eb14c4ec6000701b.008 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Wed, 10 Jun 2026 11:30:28 +0000
+Received: from l14 (lfbn-lyo-1-414-55.w2-7.abo.wanadoo.fr [2.7.24.55])
+ (Authenticated sender: anthony.perard)
+ by mail2.vates.fr (Postfix) with ESMTPSA id BFBFC86F92;
+ Wed, 10 Jun 2026 13:30:27 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,155 +58,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vmq+4GodjlAkpGOvrd5GTLBYqKbNHcc317EsZw6oMZkPbuxWO9bgTxSW/MfkZcb9pDQiqVnb1OVn47tsDKgRlVdLRLOUPJ0u37oTu/W8GHGldMSw64xOOzR+BtCc6+wpkfq7/D3vWa5Ys6oIxOWi1VL0SbqioTPKnE0alV6fRpr6iz1HYfqs7+LXh0DPRGLUc6AsaS7eYG+/SY/QZTS7h7zg2d7qs+4LeqfvVWr6LOQO2P6gRS2kC5pZw47T88GuwkZVq25MxMdzv6Lbkey5pGkyipi7obKB0NXtaPnDOTSNAo2iWVRtP4VRsocUnjlH0cGoKcOroI0Ge95OV9UIyw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=34rsH+F2NRs2isIyTtDSehq5A47h7DkUrBhtacMnahQ=;
- b=LpwWhRbn7Ln4Le8RZHuGOUmFsOaTpZUFZVbwWfe5DVujcagvcvfgp08yduMzqmdweUGO6Sa7zhc9pI4+vu5rZVjZFGGH7f4+7jqJYkjsEJ0NoXUgO2VPs40XEerV1c/JGEC16e8sa50ZZHH52Mw+91numOwMF0/DkhVzd18TD4gb4okBkAAYqHMmkrhQUZm3RItyRwjmr/gHZQCaQcOLHOii+y152EK5AJhg3qVioGe4khh7UF85d3XTip5Oe0seuSfcJeb6TM/ROsTXDyoFJW59LWrCTBLKRrTH3DbNFt4kjtlEfC36ADG4VuPzhTiOMc1JCyPOls8y0gl0tiswcw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
- header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=34rsH+F2NRs2isIyTtDSehq5A47h7DkUrBhtacMnahQ=;
- b=W8L5pbFH6ZtSTsSQqC27+maNO+78AlODT6aO1hKFH3P2Htci+/1piCIp1R6ql35dg5E2+rLsICIQ5NlXM7SNu91MHeBK9H2hKhQD7R4z4pwaNJWfKuFDmdqHu7QbC1LfNRnQvg+cj7IhZUevz9ArIzGMfjU6MEoWltkCcKNJpoM=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=valinux.co.jp;
-From: Hirokazu Takahashi <taka@valinux.co.jp>
-To: xen-devel@lists.xenproject.org
-Cc: Mykyta_Poturai@epam.com,
-	Hirokazu Takahashi <taka@valinux.co.jp>
-Subject: [PATCH 0/3] xen/arm: Device Tree based CPU topology support
-Date: Wed, 10 Jun 2026 20:13:17 +0900
-Message-ID: <20260610111320.133784-1-taka@valinux.co.jp>
-X-Mailer: git-send-email 2.43.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: TY6PR01CA0030.jpnprd01.prod.outlook.com
- (2603:1096:405:3bd::9) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:604:458::18)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=1TSBHoISKY8Tpy76jHQz80tRDkBKRWUDDsQvzHFCD4Q=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=rHdbFLAhxjkc/1AAPy6b2H2A2/wxWcPbHoE6xKx1l/aVuUNGgMlVT0qf30/bv84O2ZXmbmRNX
+ fv1jpcGru4vfLeRwN4HETkS6aekZAsFZuiRFBxU8Ef6XAg08nyoLbkRk3CYfiz4BPadRU01ztYu
+ jjHZxvj/GiyouIVT4XhAZYzgBDdzUYRyVouOmgwEDs7w1ngepxSIYlJwW69uaLuC20SmF4VE3Zk
+ CZFg/7mlryu1Q/0veGz3IVmjYjs+L18YpxC9ykU7WtE+pKPDKy70WhouY8gk9ez2VAeKnD0kJSl
+ zTGqU6pC0n4vbMlvxGjP+JWmTbnXQiIiuGhut86/pWMQ==
+X-Zone-Loop: 4c879a77de03ff1aeea80a3b46a875d16942cbf163c5
+x-campaign-type: default
+x-transaction-id: 52111614-d25e-4c22-9d85-ff4449fa8efc
+x-swg-uid: 01-075c240c-856c-4fc6-aa0d-a4bfdfab92b7
+X-Mailer: Sweego
+Message-ID:
+ <1781091028.8631fc262581453bbf619ec5b2062170.19eb14c4ec6000701b@vates.tech>
+x-swg-bid: 1781091028.8631fc262581453bbf619ec5b2062170.19eb14c4ec6000701b
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+Date: Wed, 10 Jun 2026 13:30:27 +0200
+From: Anthony PERARD <anthony.perard@vates.tech>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+	Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: Re: [PATCH 4/4] CI: Rework the archlinux container
+References: <20260609173102.2908514-1-andrew.cooper3@citrix.com>
+ <20260609173102.2908514-5-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: OS9P286MB7222:EE_|OS7P286MB6556:EE_
-X-MS-Office365-Filtering-Correlation-Id: a00fc723-d6cb-4835-30de-08dec6e14987
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|10070799003|1800799024|376014|366016|23010399003|18002099003|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	NYH4VN8HlyZMYIUHw9olR/EBw5NjCwUSq8YzOqT9sxuLiFHnCevB8Ktp3yh4j/i++PHhdLaoMZyxTo232/GxN/CWsgg0YjPBdtjlB8Af+EomVV1v0gwzIFC/yL/uTRy5M5AaV/wwl/OuOM8eUObEclYIRoV8G8l6oE3P6gNBiX11wnjt1whq0Zk5Mk0cvpy6TtEvWFMLU7byC1kCrh5zlw60eaKhlELvyHtXtLgYxXggJGIcPFzhXP5T5Wkd2YcU+vrR1NlkUJ5GOAlqp157f0rHLdclS4oChG9y8A/RwsMmp2LrPs3YUmjP65I/AUNyupAz0brdH2hOEbp1E+r7y+sycjlAzqdNn8J5oGPDc9FgeJ36H4Yw3iThzo5mYjvTPO8ggGmKK+M6P+tN2fzb3ijXVlu+hcOUSeACAW4ajX/Hualr85tvIILRylgsD74wURAQ1QF5rmCzwn14+HPNHWXNfG3YvvO4yuq9UQuO9HdYp+OA2tBK9oqlUN6+A9pP7zzCOpLt9+r9OGQdzv7pDGtw5STzXKfqLfy9D3aQDC0rnDTyha/GAB3ns7d66f2Zf8Uv9jckS3Pbr0B5eYphrv4yO37TG9IV9rxoysG3vrUOBrSOVrG0Xe/oAYAJzA7xks1yB3tat59RPvOoMlWV2SDtqI7J7P/VWDLjC6xIcCaxIdGQoDjxMmzzOv87axL5
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(10070799003)(1800799024)(376014)(366016)(23010399003)(18002099003)(56012099006);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?zJKyrOo1mfcUVuuuconNjuiBdgvri31hwUBibCXw+/vDcgNca4YaryOoFPna?=
- =?us-ascii?Q?vVJ8VqNb/Exu9mhHZzJiy3bJ24RzCoEuAfGOGkuTkyi2eOYD2g33Pq7uX0JI?=
- =?us-ascii?Q?4eLhjSbq5RvnxAjdJjZIFiy4cg38Eky2YLuECGJPbE3RjJlRbo7aEaSf4CdP?=
- =?us-ascii?Q?SjWhrt741I0PM7WIAT+1CwFSaTqIUqdyME8lXcvGpJ6ze4OaEeA6U79naNkT?=
- =?us-ascii?Q?1ijcY2a766rv08xPi93Hat8o7s7eXtwp6xY+2kUAeGlwSK1m57jS3/qaPlqE?=
- =?us-ascii?Q?dbTswJXoL072QkbSHSxm9M3W1QquT2yUvIONTMKziqctzgmufqu3mFPygHuF?=
- =?us-ascii?Q?/85XeOeW2G7YwykyPo6KefkBA+1pNHNetixv0GaF0ZQ4pQW9MFcy6Y+oZtgB?=
- =?us-ascii?Q?3qwYN2yakMlK9XeY7jNSrJHVE9qlYdf1neSJanaU5msMXf4UEP0dbEPVbP7e?=
- =?us-ascii?Q?Jtfd2XUH0XTDBXJ3MqHfUKnHfdNVI/y2dDiLM9e72MWxH4s0gT+oejTk6w1C?=
- =?us-ascii?Q?DLDv68pSK4YeYeih92za5LpHgqm+Ra7ay8fQotmP2wgvh98TJBuQ+SOHAgDH?=
- =?us-ascii?Q?0GbTD6ixzUp+44JNv8LdMbKswpY0ak9gNjrAEZqnFPinJd0dGeOknEEL5fdC?=
- =?us-ascii?Q?RRtjq6uL/dSlNMQSRDkboHskkmt+J4OcO9829Zt1D+nfFyaMJ+qOh0ba5Hrx?=
- =?us-ascii?Q?kiIVwRQ80hOAIIuJ+fsLdSn0My+W8NXraKQ/rHVzfPCOtL62CVaqbs+510Un?=
- =?us-ascii?Q?qE5I2Kezp9Ss17jLcwpXN2TdDecZproTleGshJ5DotbgrnggRy67sVz4D0/r?=
- =?us-ascii?Q?wbn0bYdn+SnhAx88EWBOLNZKyOaCG7rQj33gcapeEsSoFM+9StHx1dv6R4hr?=
- =?us-ascii?Q?/WNs96s1TCEFyY2Nub5v61ge1kjLoCf4UUlRKBxy7aUFYt6HSwL5zXqPzzGP?=
- =?us-ascii?Q?cDFQF4niBy1BMCWkPM01r+fiuxMjR4+ryUPiIsnUHr3gcTQrKrkDa8Aqkt1Z?=
- =?us-ascii?Q?7U4qPJ9oCVsOCkVklwrh+GBNmQqF0FI1k6gojlOW5FRC+tAcSvNfpQghqhgT?=
- =?us-ascii?Q?cOoKuAt9UKE6kuUWxOT9lXSFe81lTkMIVo4p3TpjcZD/evfA4M0dMf7bK/8A?=
- =?us-ascii?Q?L9/Pza3RdufeMfi/QCW+l2mESUb0bhtIqplJ8Lz7ll3Mn/2BgfYq+fdwd/fl?=
- =?us-ascii?Q?3xIkBI9A6SWJb94YR94p6iLIUBA+kAyZoHvQqlubvuZNgf/ky3JAz6rIJl18?=
- =?us-ascii?Q?U2wSYj9QNZ72Acz2xqNlQE4d/tLsclUmeyjAh5e+kHz6IV15UFpMq46hlznA?=
- =?us-ascii?Q?R0JV/KFIH7K5Qj/d/t79uLULfy/NT3z+yhAfDenmpbhKO/1/QuKlPz45CDVi?=
- =?us-ascii?Q?xnxfWIWOBRD9POxVRVtarkeMHfDoLhHqa9kRZT4zxdNkdPJrRVr3/ZQQeaWX?=
- =?us-ascii?Q?DDN7hmyU3wQkYXLeUhqNqyu8cKJYC50yhueqL2uAhDo49jjTzfQymk1Qc5Uj?=
- =?us-ascii?Q?adIZrTwIKeU/pCaTurUAsi3ow9aq9njEllo3GiK5vWKq3alp75RJmtZinJxN?=
- =?us-ascii?Q?deRBRCZ601O22LQ+uIyO9S6sYCAOj91rj5+Vs2zIsWiL+5/RoVFhLtoZQkmR?=
- =?us-ascii?Q?sxanUANFYTUmLZleqbGDJD0qGq8+CF03t7CrdC958wui4ALiyWcI3DPjQeIa?=
- =?us-ascii?Q?NFt+9oJxhjhNOzTRU5JvkK4HL5eysf+6UsRauSlY6nKz0BljwZYymfo+U7pW?=
- =?us-ascii?Q?AXD/2ItKgkyuT1TQuJhH1cbIiN82VVqzMowy0ukRnYjW9RMajgHoA+7JYmi0?=
-X-MS-Exchange-AntiSpam-MessageData-1: Z2wwqEJoQhrAvw==
-X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: a00fc723-d6cb-4835-30de-08dec6e14987
-X-MS-Exchange-CrossTenant-AuthSource: OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 11:13:23.7654
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sztB6D9cyyF+aVXpdgtTvQglvTjYknoqD9JxLCv50I0scncHzmo29hyNOhOvI1GqS0zYNRU9iQMINzhGXQei3A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS7P286MB6556
-X-purgate-ID: tlsNG-c1860d/1781090009-BE577DB1-07166749/0/0
+Content-Disposition: inline
+In-Reply-To: <20260609173102.2908514-5-andrew.cooper3@citrix.com>
+X-BM-Disclaimer: Yes
+Content-Type: multipart/alternative; boundary="-=Part.255d.ae5262b65ddd9331.19eb14c4bf2.5d4f0d5b593102f9=-"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1781091027955
+X-purgate-ID: tlsNG-ebf023/1781091036-48E6F3FF-61FB71B7/0/0
 X-purgate-type: clean
-X-purgate-size: 2442
+X-purgate-size: 1764
 
-Hello,
+---=Part.255d.ae5262b65ddd9331.19eb14c4bf2.5d4f0d5b593102f9=-
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-This patch series introduces Device Tree based CPU topology support for
-ARM Xen.
+On Tue, Jun 09, 2026 at 06:31:02PM +0100, Andrew Cooper wrote:
+> --- a/automation/build/archlinux/current=2Edockerfile
+> -    && yes | pacman -S --clean --clean
 
-These patches were previously part of my "Introduce Device Tree based NUMA
-support for ARM Xen" series. Since the CPU topology feature can perfectly
-work on its own, I decided to split it out and submit it as a standalone
-series to make the review process easier.
+> +++ b/automation/build/archlinux/current-x86_64=2Edockerfile
+> +    pacman -S --clean --clean
 
-Compared to the previous version included in the NUMA series, I have made
-a few key improvements based on earlier discussions:
+The "yes |" is needed, otherwise the files aren't removed from the
+caches=2E
 
-1. Optimized Memory Allocation:
-   The series now allocates only the minimum required memory area to manage
-   the essential data for the CPUs.
+I've only got, without:
+    :: Do you want to remove ALL files from cache? [y/N] :: Do you want to=
+ remove unused repositories? [Y/n]
+and no messages about the files been cleaned=2E
 
-2. Flexible Device Tree Parsing:
-   The parsing logic no longer depends on the definition order of the 'cpu'
-   nodes and 'cpu-map' nodes in the Device Tree. They can now be read
-   correctly even if their orders do not match.
+I tried --noconfirm, but seems to just get the default response, so
+nothing is removed=2E
 
-3. CPU Hotplug Readiness:
-   To support future CPU hotplug, the system assumes that inactive CPUs are
-   also described in the Device Tree. Xen will pre-load and generate the
-   topology information for these inactive CPUs during the boot phase so
-   it stays available in memory.
+With "yes|", I drop from 1=2E32 GB to 1=2E26 GB on my machine=2E
 
-Summary of changes:
- - Patch 1: Parses the 'cpu-map' node in the Device Tree to extract topology
-            information.
- - Patch 2: Connects the extracted CPU topology data to the Xen scheduler.
- - Patch 3: Refactors `cpu_nr_siblings()` to be an architecture-specific
-            function, providing an x86 implementation and a common version
-            for Device Tree-based systems.
+> diff --git a/automation/scripts/containerize b/automation/scripts/contai=
+nerize
+> index 70494645e09f=2E=2Ef3c2b48b113f 100755
+> --- a/automation/scripts/containerize
+> +++ b/automation/scripts/containerize
+> @@ -26,7 +26,7 @@ BASE=3D"registry=2Egitlab=2Ecom/xen-project/xen"
+>  case "_${CONTAINER}" in
+>      _alpine) CONTAINER=3D"${BASE}/alpine:3=2E18" ;;
+>      _alpine-arm64v8) CONTAINER=3D"${BASE}/alpine:3=2E18-arm64v8" ;;
+> -    _archlinux|_arch) CONTAINER=3D"${BASE}/archlinux:current" ;;
+> +    _archlinux|_arch) CONTAINER=3D"${BASE}/archlinux-x86_64:current" ;;
 
-Thank you,
-Hirokazu Takahashi
+The "-x86_64" should be added to "current"=2E
 
-Hirokazu Takahashi (3):
-  xen/device-tree: Parse 'cpu-map' node for CPU topology exploration
-  xen/sched: Link CPU topology to scheduler
-  xen/sched: Make cpu_nr_siblings() architecture-specific
+With both fix:
+Reviewed-by: Anthony PERARD <anthony=2Eperard@vates=2Etech>
 
- xen/arch/arm/include/asm/processor.h  |   4 -
- xen/arch/arm/smpboot.c                |  16 +-
- xen/arch/x86/include/asm/processor.h  |   1 +
- xen/common/Kconfig                    |   7 +
- xen/common/device-tree/Makefile       |   1 +
- xen/common/device-tree/cpu-topology.c | 393 ++++++++++++++++++++++++++
- xen/common/sched/credit2.c            |  22 +-
- xen/common/sysctl.c                   |   1 +
- xen/include/xen/cpu-topology.h        |  50 ++++
- 9 files changed, 472 insertions(+), 23 deletions(-)
- create mode 100644 xen/common/device-tree/cpu-topology.c
- create mode 100644 xen/include/xen/cpu-topology.h
+Thanks,
+
 
 -- 
-2.43.0
+Anthony Perard | Vates XCP-ng Developer
 
+XCP-ng & Xen Orchestra - Vate=
+s solutions
+
+web: https://vates=2Etech
+---=Part.255d.ae5262b65ddd9331.19eb14c4bf2.5d4f0d5b593102f9=---
 
