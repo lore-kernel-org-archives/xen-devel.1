@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 776B9CD8CB2
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 12:47:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1334272.1597394 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5018FCD98D1
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 12:47:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1334266.1597374 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXIKp-0002Ht-JI; Wed, 10 Jun 2026 12:47:07 +0000
+	id 1wXIKo-0001rx-E4; Wed, 10 Jun 2026 12:47:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1334272.1597394; Wed, 10 Jun 2026 12:47:07 +0000
+Received: by outflank-mailman (output) from mailman id 1334266.1597374; Wed, 10 Jun 2026 12:47:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXIKp-0002G6-Ai; Wed, 10 Jun 2026 12:47:07 +0000
-Received: by outflank-mailman (input) for mailman id 1334272;
- Wed, 10 Jun 2026 12:45:39 +0000
+	id 1wXIKo-0001pM-1p; Wed, 10 Jun 2026 12:47:06 +0000
+Received: by outflank-mailman (input) for mailman id 1334266;
+ Wed, 10 Jun 2026 12:45:33 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Mykola_Kvach@epam.com>) id 1wXIJO-0001F1-Qs
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 12:45:39 +0000
+ (envelope-from <Mykola_Kvach@epam.com>) id 1wXIJJ-0001Cs-1Y
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 12:45:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wXIJO-00H9hG-74
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 14:45:38 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wXIJI-00H9hG-EE
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 14:45:32 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Mykola_Kvach@epam.com>)
- id 6a295c67-5cb7-0a2a0a5109dd-0a2a4504ad8a-44
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:38 +0200
-Received: from [52.101.65.103]
+ id 6a295c60-5cb7-0a2a0a5109dd-0a2a4508dcb8-20
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:32 +0200
+Received: from [52.101.65.132]
  (helo=DU2PR03CU002.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <Mykola_Kvach@epam.com>)
- id 6a295c71-1dec-0a2a45040019-3465416798a7-3
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:38 +0200
+ id 6a295c6c-63b5-0a2a45080019-3465418425f0-3
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:32 +0200
 Received: from AS8PR03MB9746.eurprd03.prod.outlook.com (2603:10a6:20b:61d::18)
  by AM9PR03MB7558.eurprd03.prod.outlook.com (2603:10a6:20b:415::5)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.11; Wed, 10 Jun
- 2026 12:45:35 +0000
+ 2026 12:45:27 +0000
 Received: from AS8PR03MB9746.eurprd03.prod.outlook.com
  ([fe80::cf11:309:1384:58f7]) by AS8PR03MB9746.eurprd03.prod.outlook.com
  ([fe80::cf11:309:1384:58f7%4]) with mapi id 15.21.0113.011; Wed, 10 Jun 2026
- 12:45:35 +0000
+ 12:45:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,36 +57,35 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ls2akCtxHCrDXkkdEcXzSXzUiy3QotfjYADyI2WbWxiRGwpxrHNirdp65VnAtDgxwNmId3QJHeoldhsGI/tcPqo3Lo5pdEYa29UR5deD/4KLEXV2L0s5wNFf4qfxiDBLmmq3mLxiM7pnsdC5c2tKKZ3IOdoytpEnOq/pj0PIAsM0YQa8gctPlQNoUyEU/9VuSfV38ss5D0Y6MMHUYD8HXScWq2qNwe0CxCdbU6EC1j2gGWvPsDRCVGFOFsackI37Hi22Jld1J38LtplZfcD+6qyuSkyA2pCeuX9Fam4Cy3jB/fquPeJHD6KwwomHmNdfWS0Qz3eVxLBMVQMyndl9qw==
+ b=LDBR4EgiHWDfctDyQOFveoNwrGy3CE8i7ESuRVWF8++TtRjyAw8ymU8kq74AO8//3ErQpBu1ldjcTc74xz/eQgmYEbbNZFCapJbiptAzOrwBC/c41Ur7O1ZC8c/T/fBTtNQMMCw2+jLPRkxE2gOAUVw9G6iDBgir0pZP2MQJsKznLsR54WB3iU+8UZKdX4caWQEplHSVHwSyjtzkXsELRCCAaGBfmY0FrSlmwrEitD3oMKD774QTjHWShYFTEvFnmMnA/BruLoF0OenJxWF4xd+BPY4lay0HKa3hJc9Vl0g1DUa880ZUyjrk4rEysvoveun8I2jiy0V9d/X0subAMg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zuU9qIia0v/KlFmfmQr2PfYUlwI141FZNiLujMqRB9A=;
- b=j2q2dlLPoVvdjM2FkVP4QzSWmC5xI8M83BFLfrsSoKqmFgg7ycts/YQOS26R3wn96dRSb6KWeGefI9tTI+Na3RyXLTaV3yI0n4qFlzxPeEQS3wI77pGVCQJJbjkXOTiDCatwNByAjIbThnzdOAmgWl6P1w0Ln7SPnX3hazJScM7u63YRLRZCmPRP4MZdlYfvX2pkUvb8amYtvncTd19T6qirpwDtKmy0Leqhdnjad0BX+A8P3fLJ9mb5DbxBnw5SRE0a3fNprR3jF0Bn612fJXvW+KlYtGt+EGM/oMNMgrU/f6uuAK6JrLtC6Fqdc1BYuNMdOS9R6l8U0rIiUo7Lxw==
+ bh=RRVpxeM0gaRhUjO9d6z4tc/MJuoIRCJQUNdQDfFlEeE=;
+ b=F15kTgcSYiPMEC+vHRL41Dq8itkZ9fBRXWuFmMbQtxQf87I7tFsZB43QFxBPNxgCD4CL5NkKKkJPyhK4PBDkJb2zGSz2VWD0MEAjcYvmKDdx5+QK0ulJfaZgoguGpALyCcYIbPvsWVI6LAUes5OVNna4oKUgQRBRuV4FvcTi1NpNG+Waj3fDk0CwMIOcihTkwLfX5NhvCxluZoMzUjkRqKAZQfuTNVqawp+pk5RWIjJPnAJhER2YdyRax5jUtYDshOhCDYLgR4Mgz4PE15torZ+UoUA2+J1pRWyTGAbINpShCaa4RnKJxj17zTtr/giFpzsRbClyQnz+P/64CHt+tw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zuU9qIia0v/KlFmfmQr2PfYUlwI141FZNiLujMqRB9A=;
- b=hk6GtzdKDrgsx55KMiSCjFB2jCF2jG6Qp7ubXzpw1xRyNSXYZuBASGcsVrD5leMnqws4Uxhty0U0rFMFkRfEIClvHExi4NsJO9rUCmREqWja2S6eFeoSDx2D0OycK6OD3X3+j86gs6a5qj0KpC2GPXmIpKLBQoICPj1MqHstOFMvY/7z0To+Mds8yqYPAx1DjIlgsQFxiTYmmHP40XZWF006/fQ4yX2OtuXGibLYKgyVFunrjyvGHPHXYHf/yUVxQxQnIhadlgGVQPNvbQ42d7OOznN/UO9KRBynjtnF3Z3cY2OPTjkcFrAGiIXjXsF63JX+40ZqFyLMQmhA/0TffA==
+ bh=RRVpxeM0gaRhUjO9d6z4tc/MJuoIRCJQUNdQDfFlEeE=;
+ b=H+8w52V6eKOybGENTInrgbg97nlNH2OWQbHacydgKopkvWP2fT0t/tJ8HVKA1N6+/iVNv1FfqTajabgs5SQqEcJbzM6lMuoJj+5zE3qm1OFwBIKWXqOvjscawWtBo0QcvWpVx1dM/x0W+Jb5hIc6xPu21JQ28X9KCWgouZzRqCW0M4DI6GjrykZgACIBcTsuOg3lZUJZmmnBkolKHA5UnduCqEzz+S8wtiR1EvgM7lhgYXRHj+4RpikNVe2SQrIpfTSmBZwzItVTXW9O/UGcUfGa62LN4esPJLTDy5aUY6gSeFSByZFuPqBaix/yQjK5gH4BH9S9n1ulLF5HxOAIVw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 From: Mykola Kvach <mykola_kvach@epam.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Mykola Kvach <xakep.amatop@gmail.com>,
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Rahul Singh <rahul.singh@arm.com>,
+	Jens Wiklander <jens.wiklander@linaro.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Pranjal Shrivastava <praan@google.com>,
 	Luca Fancellu <luca.fancellu@arm.com>
-Subject: [PATCH v11 09/13] xen/arm: smmu-v3: add suspend/resume handlers
-Date: Wed, 10 Jun 2026 15:44:29 +0300
-Message-ID: <f802a42d15c0ae3d78fa159431e0cb2bb0f0bf8a.1781084290.git.mykola_kvach@epam.com>
+Subject: [PATCH v11 06/13] xen/arm: tee: keep init_tee_secondary() for hotplug and resume
+Date: Wed, 10 Jun 2026 15:44:26 +0300
+Message-ID: <839baea8d07b4de595296c274cc0a5a4867f4e5b.1781084290.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1781084290.git.mykola_kvach@epam.com>
 References: <cover.1781084290.git.mykola_kvach@epam.com>
@@ -98,412 +97,88 @@ X-ClientProxiedBy: WA1P291CA0008.POLP291.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS8PR03MB9746:EE_|AM9PR03MB7558:EE_
-X-MS-Office365-Filtering-Correlation-Id: 19d77b4b-6690-49e2-b0d0-08dec6ee2ab8
+X-MS-Office365-Filtering-Correlation-Id: d3c62d1c-a63a-4cf0-a84c-08dec6ee2604
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|366016|1800799024|376014|3023799007|56012099006|11063799006|6133799003|18002099003|22082099003;
+	BCL:0;ARA:13230040|23010399003|366016|1800799024|376014|56012099006|11063799006|6133799003|18002099003|22082099003;
 X-Microsoft-Antispam-Message-Info:
-	+4EWl3k3PQKfOBHPNt4O8R6W+YG/djPMZ1AEsd5fRXELZC1s9c7wi7QMl8ML7/KUZrSFE7fN0oOWmq3gI6Tr+BBHCjInuIxkvYmnF6tP0JLuFI2+QmYehaF+6xqWRoDVT6QDSYNX5L+Sw5BslpyHuvrQkWx0rJNTQWy1iipqcYWyEyY2KQzwmJvRugrFdWYDjmOxmAGfgNi+8OzA8LBmkuWmAKk/V1Ih6znUebe5QJ8ntXBZmG8S7U8mxNiQaoVYhxQATrV8Y/2dm7kKdFW+Rtxz1UpmFPLbDcSBHjXCbe/q0m3/0QoGxA1WMrRUv8Wcj75rWW+6Kj0p6JcYQ03WorxeCPJ3VD7gQdhfXKcO0HwoUYN1Tot+m/ivtBnmaB56yQyjJDKSEgbyi5DtlTaJktddeYtU1legYUt96xOv5Our8bVGNA6HqCeG3mLoRHllpGLmSrRXlcpHTgxruIw7VswIhA7A9SlyaWAQOFaJ8eY7kPcm+GTgUSVcpMUMLEajy/ajoNhYl6YPSEmor1i3FYBgmVg5I4DAQ1lB22VuNuqDjcmdmLzukEd5trPMjDRumnn3NMaXvBHjsH34qSYol1TvGwey6QcJLAO1xNnDy6E952Rivl/0dSl1l5sBJmer6bcZQHcJQmzH7N1JJqsoqcectqqwJi/+5WRtGJTfXt/bCwYgSUQ9n+0kJJqAIS1t+dxJHAmkJZHVwe7OpkFyQg==
+	E23G6cjbq1oAZKJ0MJQa8O1b2LlIA1uoHyd71vnM4ZqRfy0NXyD79t7668P8mgO/DA2n1TUgk2p9lXw/nYrSAsYnZ7nZZgwP5M3ioJTHSjF7XCOuYg1Z3pjJ+kF8IKPFuPAj2cd2RDRishb+tr8DchMDgOENxeS3SuwJ9fUJyniuBue5T3DThCSfXK83Ge8/ZVrOitfU+8qy9Gfxr6BVolxRX97X6RLKZlDtSibV/DG5qJnISw9gQS5s6WaP92pYLF21N/XPFTu2KVqj2PbpN9pJ0HfeTqWeMy59lum1ZWZecOhPCmUb+8v8W0TDtqji8/mkiZsdnrVXDXrYoe/Uzyknpmv4+xOESTka+hItDIVKeEXl5q0SF651iK0zG4qqBAGKK5OPoaveJ6/5YVwpCM2JdE6OY6nHxb+dZXpY8SZWXduyrmPHaxgVBM+JoklJ9bW3hiFdE+53+XVl3oQWCdBhpAP0MIQByhmnHoRyoGJouzyjPPMUCKY+k5rOdgaCeyKbmPiF5kyepFPvNtbJ4Ax+BIf3JXJgBcMJDHD4YREJ6xXuBxCAi2XCqaSaUNQ65WcrCLXnl+YZ9T15RRJ/KSCU167fJyyqx9gqKwLczv6JBVrOuXye/jvrPooL7pmlKqFsxFVyqk2A0ipmS1rR7FerOwjZeA3HZtlLlnlmINX7ZH2I9PmHyTDJsOJh/99i
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9746.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(3023799007)(56012099006)(11063799006)(6133799003)(18002099003)(22082099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9746.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(56012099006)(11063799006)(6133799003)(18002099003)(22082099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?yw4m8nky4dwxiApT6yp3pgf67x+QJVmywGl5B5Y1tKDy/Nymf2iyeCZnep9A?=
- =?us-ascii?Q?2MEoJCtcwelfizu29SzUe5VZu9FpCxhLB/rnPG1OEYpPnRUUqRe22vSp60O3?=
- =?us-ascii?Q?6kqksZi4FbkkZZAs3sdRI+KqHruvcsmLhMmd9ig1///ivnAUEg6XbBM3La/r?=
- =?us-ascii?Q?C4L3FKMr4/ny3chZl6nAnTNQ1lyNs1pwZ+4cntFFcf99nJY+Oqjw/Erw/Rd0?=
- =?us-ascii?Q?pmcVjDB37/GTPJ6wzbpYYQhUP2OpL3cTcaTMqlx9TNqI2obd8CGFyIEMHn9O?=
- =?us-ascii?Q?Z8/0xubGK1v7SddO1Od06yTL4lU8hTNgiJP7pVghP/1GjH15IoSae+4Wb2Xb?=
- =?us-ascii?Q?UPqOBBt4SzblX3PUYo/RI/351fWpxz/AIstjsIl/D1jZMlADLVMhzYplWZnE?=
- =?us-ascii?Q?dWS83Z8byez5N0exRlCkJfM/FihZ7Noqd8mQ0skIbnFIRGj7TlfTREJsmmv7?=
- =?us-ascii?Q?NfjJb/vzcuFBpUL8SPsy0Y4N0pzVPw4Qz6uG2f7R/ainihanRdDoa9DVxXdk?=
- =?us-ascii?Q?ivH9TUwVGBFSFejTsIFXpqAwxkV+1bFtfEcIilfVSS5X+6C3bH+vgPA34Bw5?=
- =?us-ascii?Q?rsrxFu3+/HDmWjmnnKi/U/EzLYI9xDPoTxFsX8OCAJOcpaRrPPHnJs4VK3B9?=
- =?us-ascii?Q?UA0a5jLxKhXLg8O/UN71mxPXRMQFZwrVcFB844QnZhY+SKHbRGLSsF56qKk9?=
- =?us-ascii?Q?oEr+ieQ6LF4BiU5QAcWS7VhehTvYdHKi7LxxBe9GM3J0fuIEBksdCwzfwxr9?=
- =?us-ascii?Q?L7KSPIujuSrUXGc50umUU+dG+LDRHq25cvmd3kJMF1ZxBZdP7q0OOQcAke2A?=
- =?us-ascii?Q?pZsylLDbL/saFBaq7WGiN6hJDfS8GsQoBKgh22+eDp5z1orphVIe1Aksi1lG?=
- =?us-ascii?Q?9JgzHUiLDClvOtlgFTIgOh7QiOdooZye87AuueNgzcjE0NvbUWH8lBX5pXvD?=
- =?us-ascii?Q?cZWKVtZ2HjwDWM8qpa9QGZk59iGUsy3tpzN3/51fABDEFnG9BO3AJRWAnucX?=
- =?us-ascii?Q?mEtC1S4S7YnCZ1qalPNJM2EHoUrXBdYIOQIF3yu6R54BMb5X2300EvtKT8Sj?=
- =?us-ascii?Q?G9QaX4oMu0+HEG5qMUYL00FtS2wI5TYmL+Tghx/JUutFBvMVvPX9m+ipnQJd?=
- =?us-ascii?Q?eaG+rKQs2aS0nr/sLHjCyjyu8p81N8aWGzRSyNNWw0RGSjQd5HYriXf4k41Q?=
- =?us-ascii?Q?4XfbjpCuScdA3dRWcJFxVCtFXreMCBfTYkNzr37u/86JJs+/7MGRvFFPw5Qm?=
- =?us-ascii?Q?v6Lgt5N527bE7baGT9kB3S3Gh7E1hFIS9PKVV5DdGFQ6Feh6KaGjZixv1Xsr?=
- =?us-ascii?Q?UD9pDyc0XGy1UT3GBbaahgpsjWLK6nXAxi37EiQDmPsnVMBw91LwE8hOfCmc?=
- =?us-ascii?Q?ODlbcm3oDkVicQ6mwaaNZvQ4TS0WI0pFv40ytCkLTl632AMcJdMp9QQNKpyG?=
- =?us-ascii?Q?atI3SO31rc4Iy/0mXg980VatxXgZ+zWfKpc5aLmt8EkeQdnOzb+80C7ufSua?=
- =?us-ascii?Q?+8lCpoK91DPEb7PNypb7i7vH4Gm9ZViphf3tXyPKpreY7u2WUeAOYaj7Tb1O?=
- =?us-ascii?Q?otHRhPSK0O9BddGbc95l7j8i39+F2g3WuRWrTfnoZ47x6ZikvWCx7ssorX7l?=
- =?us-ascii?Q?7uMTUB4jPQEEABlRhypANWkzGA8u1valLSPbf+mw992GWlclmmXEb1nCHR9n?=
- =?us-ascii?Q?L6baLSKSqSeXkHXOZsJxXfX5IylCxjXaIUKIt9am6Hpvyk3MkHhRdavNNysH?=
- =?us-ascii?Q?+7+bOw7ekA=3D=3D?=
+	=?us-ascii?Q?x8D90J2UWMsVuGFgnW/t9ATE1N3GyB/zWFkv/MFLFVki5/Q+CV68AVjgcTlw?=
+ =?us-ascii?Q?eP7ayugwJJvLQfm+2XkxOw5+P4QcSaTtVR9Bq4BasDhc/Lr5Yg13PJ3Q2ufn?=
+ =?us-ascii?Q?wKY0eGaStOU79FpN3wihaUFjO7PPG2GbbcbsVvmxhhrsUc0HbzxsOTqxDmyN?=
+ =?us-ascii?Q?iL0AlgUgaIycz+IVlclct3s7n09+SFSwHsL481WrjI76/ZoIIDFsVJmEwX1D?=
+ =?us-ascii?Q?cSdd06nAdeg1FQXcUHAQKgXf5sOEnmYiL9fJ9rHdAzCQPnP5NfBR2tMs6lQN?=
+ =?us-ascii?Q?J52kE1qIAUkDP3BN0x9kjW3dvRFJmfhzJSqdl1qBg0KxwfWgQawKYRxn7TRz?=
+ =?us-ascii?Q?VSiJuVibffh1+dUUiCO9DI9JOgns5UY8WaawhCXuPZBAdbCCB4aTmaj/Xjvj?=
+ =?us-ascii?Q?CoAplESNz+hP1+tI8YRNqCkuuQepUheOB/k8sVc8JUiDDWDSA7PUegDjp2c3?=
+ =?us-ascii?Q?rJHdoPGTd0L+oayvb4y7mB5eo6L0JW5bKF8MFkSYd8RstjHubjTrIKDjulOW?=
+ =?us-ascii?Q?E0NVJd1bCwCvt2uWfEQO8lmWhkGeqPVhHo5upcwW28nk+bG98mmOf2GuYJQP?=
+ =?us-ascii?Q?IAIJ0WxAp8MdITPmPU2v0FJKA7UdZyg097lOjdrPMmVhN1hJECRc8pv0yLYD?=
+ =?us-ascii?Q?1LRMhbpxAJAr1Ewy94ml2SMCqYpFvso1DmphPgzKdZMXifEw7A7OHiWnEC58?=
+ =?us-ascii?Q?twXxCjNFuLEpUfcdK5uV+TQ91aWmDInuGd39UAAHj8cNer66j4tiJ7rIujAk?=
+ =?us-ascii?Q?KM6VNE0TpEIsvU1XDS485qdTCLJ4/JFfcRNdlXZtsg7mOrI7IZItfzK0ZNVA?=
+ =?us-ascii?Q?Fb1KD9MkrtmKuhH5+eabSHoCsqxYLCE2Yp+A03JYDTqKjbu46XfxHsJGZqES?=
+ =?us-ascii?Q?R2Vd+V4BaI004j88HMARk7jPBvgQLoDrB2qJ7MT1Im8XUabfG1C5arEOGrxa?=
+ =?us-ascii?Q?2Mi9ivr3UUOvnX3x1wHjbza4osMo7uZos6KqNj3u/IsvlwAI+3oNoN3ab+MV?=
+ =?us-ascii?Q?SqcRYUk6l2aZha36FsCZhUswEZxxAUcUNvke+z4d+SSHP2rueCgDnuBNrW5b?=
+ =?us-ascii?Q?fNCeaD3O9Xg4Vz/g+dCMVcOqghsC5mLm5ePFta6yxL8J9yA1QEPqLc+KCkTp?=
+ =?us-ascii?Q?mnN8lwQDMilotE8RpZbmOFRMYSEOVplwoncA9Tw6YoE/5RTbmTSOsE8eHucZ?=
+ =?us-ascii?Q?kP9U7LGKJw6K0EXrLGmL87X1Nb19eJVviEB0/mWH0bQVMke8w67MRTswTdFL?=
+ =?us-ascii?Q?dLQilSGQuODTwrBl40ZcNrYwvzPp8cn8rlZo67SUy/l5TtChIxTg6VCkKTdz?=
+ =?us-ascii?Q?wL58A0NmJFrGMnaf1nUxiBW2lYOaVV4e20DTIhcJLENUusrn92o42aXjevgM?=
+ =?us-ascii?Q?zInAJOjfHwip7rWTpTMgfunSX9fadjMhR5QS0tIEQO0rtPBmPLMsVJo6LI9L?=
+ =?us-ascii?Q?QlnH+X3wvIVi0Jv66nYCftBuxVZZWYf5Aam1S/nysbMtQ97GrFKnGUluXgQX?=
+ =?us-ascii?Q?2Jkk/Jdt4GYHXgN+KNrPDEpSFVkxOJNG25UfUMdfE9uPOxug2fltv/MF8nTd?=
+ =?us-ascii?Q?uweS7YwhKHcFCV0p6mUIpMPq4O7DgcVDL0MaWi+KMuq6VcYlQYS6BVdrNhQi?=
+ =?us-ascii?Q?M5gYJ6bCQUYPibTxTknHdqmgJxj2b62mC3RLaIuTV1KpbYdrUrYkmHVexy98?=
+ =?us-ascii?Q?qHeIuyzjo+rg5Rsr6XzW8dMNN+A2tFPURoTEi55WkW96OVZHmJ+kMa7RzasW?=
+ =?us-ascii?Q?73JKOqtMUQ=3D=3D?=
 X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 19d77b4b-6690-49e2-b0d0-08dec6ee2ab8
+X-MS-Exchange-CrossTenant-Network-Message-Id: d3c62d1c-a63a-4cf0-a84c-08dec6ee2604
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR03MB9746.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 12:45:35.5440
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 12:45:27.7725
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: PL+WuQP7PI6lnc+yZF731wuC9SBAOOXGidsdiNrZexWIESRPApwxfqdzOUzOGM5Ero7sWCj/Og3RLQJwqgzugg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: ckLFgBP/SdiGUKkGfCt9UQsdciqEBk4CqGpfLhClOL8W+U/S7MsYwDPm2DHQx8pmFiYzLy2zab7ulStFnORxDA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR03MB7558
-X-purgate-ID: tlsNG-ebf023/1781095538-2A5603FF-12F23C5C/0/0
+X-purgate-ID: tlsNG-c1860d/1781095532-C5F80DB1-4340F1EB/0/0
 X-purgate-type: clean
-X-purgate-size: 11069
+X-purgate-size: 1017
 
-Add system suspend/resume callbacks for the Arm SMMUv3 driver.
+init_tee_secondary() was marked __init and freed after boot. Calling it
+from the CPU hotplug/resume path then executed discarded code, which
+could crash Xen. Drop __init so the TEE mediator secondary init can run
+safely on hotplugged and resumed CPUs.
 
-During suspend, configure GBPA to abort incoming transactions, disable the
-translation interface while keeping CMDQ enabled, issue CMD_SYNC to ensure
-all previously issued commands have completed, then disable the SMMU IRQs
-and SMMU.
-
-Resume uses arm_smmu_device_reset() to reprogram the SMMU and re-enable
-translation and interrupt generation.
-
-The IRQ setup split follows the approach from Pranjal Shrivastava's Linux
-arm-smmu-v3 runtime/system sleep series: IRQ handlers are requested once
-during probe, while reset/resume only restores SMMU hardware state and
-re-enables IRQ_CTRL.
-
-Only the pieces relevant to Xen's currently supported SMMUv3 path are
-ported here. Xen documents SMMUv3 MSI and PCI ATS as unsupported and not
-compiled/tested, so this patch does not restore SMMU MSI IRQ_CFGn registers
-nor reinitialize ATS/PRI endpoints. If those paths become usable,
-suspend/resume will need corresponding MSI restore and ATS/PRI
-quiesce/reinit steps.
-
-Link: https://lore.kernel.org/r/20260414194702.1229094-1-praan@google.com/
-Based-on-patch-by: Pranjal Shrivastava <praan@google.com>
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
+Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 ---
-Changes in V11:
-- Keep arm_smmu_update_gbpa() and arm_smmu_device_reset() in init text when
-  CONFIG_SYSTEM_SUSPEND is disabled.
+ xen/arch/arm/tee/tee.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Changes in V10:
-- Disable SMMU interrupt generation during suspend before disabling the
-  SMMU interface, matching the resume/reset path which re-enables IRQ_CTRL.
-
-Changes in V9:
-- Use CMD_SYNC in suspend instead of polling CMDQ_CONS, so the suspend
-  path waits for command completion rather than only command consumption.
-- Document that arm_smmu_setup_irqs() is probe-only and that future Xen
-  SMMUv3 MSI support will need to restore SMMU IRQ_CFGn registers on
-  resume.
-- Restore the reference to Pranjal's Linux runtime/system sleep series and
-  clarify that MSI/ATS/PRI resume handling is outside the supported Xen
-  path.
-- Prefix the subject with xen/arm for consistency with the rest of the
-  Arm suspend/resume series.
-
-Changes in V8:
-- Honor ARM_SMMU_FEAT_SEV when draining the CMDQ during suspend, matching
-  the existing runtime CMD_SYNC path.
-- Fold the suspend rollback reset path into a helper and rename the error
-  reporting to describe suspend rollback rather than resume.
-- Treat SMMU reset failure during resume as fatal instead of logging and
-  continuing with a potentially unusable IOMMU.
-- cosmetic changes
----
- xen/drivers/passthrough/arm/smmu-v3.c | 194 +++++++++++++++++++++-----
- 1 file changed, 158 insertions(+), 36 deletions(-)
-
-diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
-index bf153227db..7f1d00fb81 100644
---- a/xen/drivers/passthrough/arm/smmu-v3.c
-+++ b/xen/drivers/passthrough/arm/smmu-v3.c
-@@ -94,6 +94,12 @@
+diff --git a/xen/arch/arm/tee/tee.c b/xen/arch/arm/tee/tee.c
+index 8501443c8e..00e561fc78 100644
+--- a/xen/arch/arm/tee/tee.c
++++ b/xen/arch/arm/tee/tee.c
+@@ -128,7 +128,7 @@ static int __init tee_init(void)
  
- #include "smmu-v3.h"
+ presmp_initcall(tee_init);
  
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+#define __init_or_smmu_suspend
-+#else
-+#define __init_or_smmu_suspend __init
-+#endif
-+
- #define ARM_SMMU_VTCR_SH_IS		3
- #define ARM_SMMU_VTCR_RGN_WBWA		1
- #define ARM_SMMU_VTCR_TG0_4K		0
-@@ -1814,8 +1820,8 @@ static int arm_smmu_write_reg_sync(struct arm_smmu_device *smmu, u32 val,
- }
- 
- /* GBPA is "special" */
--static int __init arm_smmu_update_gbpa(struct arm_smmu_device *smmu,
--                                       u32 set, u32 clr)
-+static int __init_or_smmu_suspend
-+arm_smmu_update_gbpa(struct arm_smmu_device *smmu, u32 set, u32 clr)
+-void __init init_tee_secondary(void)
++void init_tee_secondary(void)
  {
- 	int ret;
- 	u32 reg, __iomem *gbpa = smmu->base + ARM_SMMU_GBPA;
-@@ -1995,10 +2001,35 @@ err_free_evtq_irq:
- 	return ret;
- }
- 
-+static int arm_smmu_enable_irqs(struct arm_smmu_device *smmu)
-+{
-+	int ret;
-+	u32 irqen_flags = IRQ_CTRL_EVTQ_IRQEN | IRQ_CTRL_GERROR_IRQEN;
-+
-+	if ( smmu->features & ARM_SMMU_FEAT_PRI )
-+		irqen_flags |= IRQ_CTRL_PRIQ_IRQEN;
-+
-+	/* Enable interrupt generation on the SMMU */
-+	ret = arm_smmu_write_reg_sync(smmu, irqen_flags,
-+				      ARM_SMMU_IRQ_CTRL, ARM_SMMU_IRQ_CTRLACK);
-+	if ( ret )
-+	{
-+		dev_warn(smmu->dev, "failed to enable irqs\n");
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+/*
-+ * Probe-time only: request host IRQs and, when available, program the SMMU's
-+ * MSI doorbells. Resume does not restore the SMMU *_IRQ_CFGn MSI registers,
-+ * so any host suspend support must treat the active MSI IRQ path as
-+ * unsupported until that restore path exists.
-+ */
- static int __init arm_smmu_setup_irqs(struct arm_smmu_device *smmu)
- {
- 	int ret, irq;
--	u32 irqen_flags = IRQ_CTRL_EVTQ_IRQEN | IRQ_CTRL_GERROR_IRQEN;
- 
- 	/* Disable IRQs first */
- 	ret = arm_smmu_write_reg_sync(smmu, 0, ARM_SMMU_IRQ_CTRL,
-@@ -2028,22 +2059,7 @@ static int __init arm_smmu_setup_irqs(struct arm_smmu_device *smmu)
- 		}
- 	}
- 
--	if (smmu->features & ARM_SMMU_FEAT_PRI)
--		irqen_flags |= IRQ_CTRL_PRIQ_IRQEN;
--
--	/* Enable interrupt generation on the SMMU */
--	ret = arm_smmu_write_reg_sync(smmu, irqen_flags,
--				      ARM_SMMU_IRQ_CTRL, ARM_SMMU_IRQ_CTRLACK);
--	if (ret) {
--		dev_warn(smmu->dev, "failed to enable irqs\n");
--		goto err_free_irqs;
--	}
--
- 	return 0;
--
--err_free_irqs:
--	arm_smmu_free_irqs(smmu);
--	return ret;
- }
- 
- static int arm_smmu_device_disable(struct arm_smmu_device *smmu)
-@@ -2057,7 +2073,8 @@ static int arm_smmu_device_disable(struct arm_smmu_device *smmu)
- 	return ret;
- }
- 
--static int __init arm_smmu_device_reset(struct arm_smmu_device *smmu)
-+static int __init_or_smmu_suspend
-+arm_smmu_device_reset(struct arm_smmu_device *smmu)
- {
- 	int ret;
- 	u32 reg, enables;
-@@ -2163,17 +2180,9 @@ static int __init arm_smmu_device_reset(struct arm_smmu_device *smmu)
- 		}
- 	}
- 
--	ret = arm_smmu_setup_irqs(smmu);
--	if (ret) {
--		dev_err(smmu->dev, "failed to setup irqs\n");
-+	ret = arm_smmu_enable_irqs(smmu);
-+	if ( ret )
- 		return ret;
--	}
--
--	/* Initialize tasklets for threaded IRQs*/
--	tasklet_init(&smmu->evtq_irq_tasklet, arm_smmu_evtq_tasklet, smmu);
--	tasklet_init(&smmu->priq_irq_tasklet, arm_smmu_priq_tasklet, smmu);
--	tasklet_init(&smmu->combined_irq_tasklet, arm_smmu_combined_irq_tasklet,
--				 smmu);
- 
- 	/* Enable the SMMU interface, or ensure bypass */
- 	if (disable_bypass) {
-@@ -2181,20 +2190,16 @@ static int __init arm_smmu_device_reset(struct arm_smmu_device *smmu)
- 	} else {
- 		ret = arm_smmu_update_gbpa(smmu, 0, GBPA_ABORT);
- 		if (ret)
--			goto err_free_irqs;
-+			return ret;
- 	}
- 	ret = arm_smmu_write_reg_sync(smmu, enables, ARM_SMMU_CR0,
- 				      ARM_SMMU_CR0ACK);
- 	if (ret) {
- 		dev_err(smmu->dev, "failed to enable SMMU interface\n");
--		goto err_free_irqs;
-+		return ret;
- 	}
- 
- 	return 0;
--
--err_free_irqs:
--	arm_smmu_free_irqs(smmu);
--	return ret;
- }
- 
- static int arm_smmu_device_hw_probe(struct arm_smmu_device *smmu)
-@@ -2558,10 +2563,23 @@ static int __init arm_smmu_device_probe(struct platform_device *pdev)
- 	if (ret)
- 		goto out_free;
- 
-+	ret = arm_smmu_setup_irqs(smmu);
-+	if ( ret )
-+	{
-+		dev_err(smmu->dev, "failed to setup irqs\n");
-+		goto out_free;
-+	}
-+
-+	/* Initialize tasklets for threaded IRQs*/
-+	tasklet_init(&smmu->evtq_irq_tasklet, arm_smmu_evtq_tasklet, smmu);
-+	tasklet_init(&smmu->priq_irq_tasklet, arm_smmu_priq_tasklet, smmu);
-+	tasklet_init(&smmu->combined_irq_tasklet, arm_smmu_combined_irq_tasklet,
-+				smmu);
-+
- 	/* Reset the device */
- 	ret = arm_smmu_device_reset(smmu);
- 	if (ret)
--		goto out_free;
-+		goto out_free_irqs;
- 
- 	/*
- 	 * Keep a list of all probed devices. This will be used to query
-@@ -2575,6 +2593,8 @@ static int __init arm_smmu_device_probe(struct platform_device *pdev)
- 
- 	return 0;
- 
-+out_free_irqs:
-+	arm_smmu_free_irqs(smmu);
- 
- out_free:
- 	arm_smmu_free_structures(smmu);
-@@ -2855,6 +2875,104 @@ static void arm_smmu_iommu_xen_domain_teardown(struct domain *d)
- 	xfree(xen_domain);
- }
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+
-+static void arm_smmu_reset_for_suspend_rollback(struct arm_smmu_device *smmu)
-+{
-+	int ret = arm_smmu_device_reset(smmu);
-+
-+	if ( ret )
-+		dev_err(smmu->dev, "Failed to reset during suspend rollback: %d\n",
-+				ret);
-+}
-+
-+static int arm_smmu_suspend(void)
-+{
-+	struct arm_smmu_device *smmu;
-+	int ret = 0;
-+
-+	list_for_each_entry(smmu, &arm_smmu_devices, devices)
-+	{
-+		/* Abort all transactions before disable to avoid spurious bypass */
-+		ret = arm_smmu_update_gbpa(smmu, GBPA_ABORT, 0);
-+		if ( ret )
-+			goto fail;
-+
-+		ret = arm_smmu_write_reg_sync(smmu, 0, ARM_SMMU_IRQ_CTRL,
-+					ARM_SMMU_IRQ_CTRLACK);
-+		if ( ret )
-+		{
-+			dev_err(smmu->dev, "Timed-out while disabling SMMU irqs\n");
-+			goto fail;
-+		}
-+
-+		/* Disable the SMMU via CR0.EN and all queues except CMDQ */
-+		ret = arm_smmu_write_reg_sync(smmu, CR0_CMDQEN, ARM_SMMU_CR0,
-+					ARM_SMMU_CR0ACK);
-+		if ( ret )
-+		{
-+			dev_err(smmu->dev, "Timed-out while disabling smmu\n");
-+			goto fail;
-+		}
-+
-+		/*
-+		 * At this point the translation interface is disabled and the
-+		 * SMMU won't access translation/config structures, even
-+		 * speculatively, as per the IHI0070 spec (section 6.3.9.6).
-+		 * CMDQ is still enabled so that a CMD_SYNC can complete any
-+		 * previously issued commands.
-+		 */
-+
-+		/* Ensure all previously issued commands have completed. */
-+		ret = arm_smmu_cmdq_issue_sync(smmu);
-+		if ( ret )
-+		{
-+			dev_err(smmu->dev, "Timed-out waiting for pending commands\n");
-+			goto fail;
-+		}
-+
-+		/* Disable everything */
-+		ret = arm_smmu_device_disable(smmu);
-+		if ( ret )
-+			goto fail;
-+
-+		dev_dbg(smmu->dev, "Suspended smmu\n");
-+	}
-+
-+	return 0;
-+
-+ fail:
-+	/* Reset the device that failed as well as any already-suspended ones. */
-+	arm_smmu_reset_for_suspend_rollback(smmu);
-+
-+	list_for_each_entry_continue_reverse(smmu, &arm_smmu_devices, devices)
-+		arm_smmu_reset_for_suspend_rollback(smmu);
-+
-+	return ret;
-+}
-+
-+static void arm_smmu_resume(void)
-+{
-+	int ret;
-+	struct arm_smmu_device *smmu;
-+
-+	list_for_each_entry(smmu, &arm_smmu_devices, devices)
-+	{
-+		dev_dbg(smmu->dev, "Resuming device\n");
-+
-+		/*
-+		 * The reset will re-initialize all the base addresses, queues,
-+		 * prod and cons maintained within struct arm_smmu_device as well as
-+		 * re-enable the interrupts.
-+		 */
-+		ret = arm_smmu_device_reset(smmu);
-+		if ( ret )
-+			panic("SMMUv3: %s: Failed to reset during resume: %d\n",
-+			      dev_name(smmu->dev), ret);
-+	}
-+}
-+#endif
-+
- static const struct iommu_ops arm_smmu_iommu_ops = {
- 	.page_sizes		= PAGE_SIZE_4K,
- 	.init			= arm_smmu_iommu_xen_domain_init,
-@@ -2867,6 +2985,10 @@ static const struct iommu_ops arm_smmu_iommu_ops = {
- 	.unmap_page		= arm_iommu_unmap_page,
- 	.dt_xlate		= arm_smmu_dt_xlate,
- 	.add_device		= arm_smmu_add_device,
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+	.suspend		= arm_smmu_suspend,
-+	.resume			= arm_smmu_resume,
-+#endif
- };
- 
- static __init int arm_smmu_dt_init(struct dt_device_node *dev,
+     if ( cur_mediator && cur_mediator->ops->init_secondary )
+         cur_mediator->ops->init_secondary();
 -- 
 2.43.0
 
