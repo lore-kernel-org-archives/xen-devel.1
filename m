@@ -4,39 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85296CD8CB9
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 15:11:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1334470.1597498 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EDEBCD8CB9
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 15:41:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1334503.1597506 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXKah-0007g0-0T; Wed, 10 Jun 2026 15:11:39 +0000
+	id 1wXL3M-00042U-9h; Wed, 10 Jun 2026 15:41:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1334470.1597498; Wed, 10 Jun 2026 15:11:38 +0000
+Received: by outflank-mailman (output) from mailman id 1334503.1597506; Wed, 10 Jun 2026 15:41:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXKag-0007ft-TM; Wed, 10 Jun 2026 15:11:38 +0000
-Received: by outflank-mailman (input) for mailman id 1334470;
- Wed, 10 Jun 2026 15:11:37 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wXL3M-00042N-6v; Wed, 10 Jun 2026 15:41:16 +0000
+Received: by outflank-mailman (input) for mailman id 1334503;
+ Wed, 10 Jun 2026 15:41:14 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Markus.Elfring@web.de>) id 1wXKaf-0007fn-9r
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 15:11:37 +0000
+ (envelope-from <andrew.cooper3@citrix.com>) id 1wXL3K-00042H-If
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 15:41:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wXKae-000Vn6-AV
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 17:11:36 +0200
+ id 1wXL3J-002yQ2-Ux
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 17:41:13 +0200
 Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Markus.Elfring@web.de>)
- id 6a297e99-5cb7-0a2a0a5109dd-0a2a4508d210-12
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 17:11:36 +0200
-Received: from [212.227.15.4] (helo=mout.web.de)
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6a29858d-e002-0a2a0a5209dd-0a2a4508dca0-10
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 17:41:13 +0200
+Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
  by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <Markus.Elfring@web.de>)
- id 6a297ea8-63b5-0a2a45080019-d4e30f04d2ab-3
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 17:11:36 +0200
-Received: from client.hidden.invalid by smtp.web.de (mrweb005
- [213.165.67.108]) with ESMTPSA (Nemesis) id 1N7gXO-1xKIDH3PqE-00wJp6; Wed, 10
- Jun 2026 17:11:25 +0200
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6a298599-63b5-0a2a45080019-d155dd2ac1dc-3
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 17:41:13 +0200
+Received: by mail-wr1-f42.google.com with SMTP id
+ ffacd0b85a97d-45ef82204c6so3879528f8f.3
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 08:41:13 -0700 (PDT)
+Received: from localhost.localdomain (host-78-146-242-105.as13285.net.
+ [78.146.242.105]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4601f2dcde3sm74605802f8f.1.2026.06.10.08.41.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Jun 2026 08:41:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,159 +53,449 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=s29768273 header.d=web.de header.i="markus.elfring@web.de" header.h="X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:Subject:Content-Type:Content-Transfer-Encoding"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
-	s=s29768273; t=1781104285; x=1781709085; i=markus.elfring@web.de;
-	bh=/67hHk+W7NbPsYULrCbnnZFhKtw0QsXXIqIOpv7d2jI=;
-	h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
-	 Subject:Content-Type:Content-Transfer-Encoding:cc:
-	 content-transfer-encoding:content-type:date:from:message-id:
-	 mime-version:reply-to:subject:to;
-	b=ZiZ2eGe/ykaqQ9uWwKmbO8c7WTyUHvApBvZmkqDai0rlaRCofDmIU1sXQR1klcOQ
-	 J6TUd92lWMFNeLpVkr6WoDRi9nPEkFsujtr0ZCtOKlM838OfJ7bNnQI2y9CSPzh/A
-	 UgfOAe7gjQqzXw+yW8+uyuaxZA1JlqjBSWScMeIuX06xH/Q1eWf9YJiA3m8RUYFkR
-	 noJYuzEuJZUpB4t/2d40YbGkvCIiuTVoadFlVlaDrucxG5Qyfyj+u3QyOUDnniUMt
-	 1nx8Ck9db+ljUb6JYbs54faGtuhG/CQDEDQDcGGZ/MFvyroH06M+A/fboxJfjn8DQ
-	 l2XoRAfzJD1KscnTjQ==
-X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
-Message-ID: <f13e34bc-20e2-479f-92e5-167a139bcea7@web.de>
-Date: Wed, 10 Jun 2026 17:11:23 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1781106073; x=1781710873; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=qndYU0vQVsNeLM+JlpEy3a/0w2lL2uNqn7mfGncOCjw=;
+        b=ux5y/heict7tvN/gH25PSDAuPgqnN7ZgUIX0RXPsbAkNvwepApr8J9XVG6Qc+egPJ8
+         hQ7f2vS5OV+g5RircDRnhMppga6LWa7pjyOdefKpfDMniRvW8JVDKC711d9oSJ3RNttT
+         fY8MRd7Xd6TPivSRSbMd6MqsbKGjAWJb3e8KY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1781106073; x=1781710873;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=qndYU0vQVsNeLM+JlpEy3a/0w2lL2uNqn7mfGncOCjw=;
+        b=Jqb5pkLfkY6xzryiep/UnnjlbNwx5MvDkWIEH0/POYmCWApzcX/2ZfqlvblTP33kRz
+         DvCfy4wA37JB0bUPBeKwIrZVJ051nSwiWykNie6VbX158QWsBPO9W+mW5uoLLx1/D9Vn
+         qnIhM8ulrynJ8RgviTRudyMvCy2fDEJzvXcT6Zd1JVXiHlOIZeaeDAREYrMiBmyryS0k
+         4Vwx+MfpamHiKrjbYPz/0mWAsNdOteZzsc1fiVT+qS7DezrLr29djHr9pXPgyypLoAa8
+         SDCruhq9tGI93GqrgYQG0t2FKBjZMjkgz9iThHTtLy/OSfYl9RvynWMDvfDk9rtxU2Za
+         RIzg==
+X-Gm-Message-State: AOJu0YwoMiwNrN9uAQgSX+AduWbwEWBfrBEZbpTIfsK/dkxTLAzdKba5
+	Bt3qmuW6WloB5aoehOqk9dFjKe8Ir48/G0heuVxiFab0/7/K+s6w8L4dOMFKHoEgWoyijK9CStG
+	lF8Xj
+X-Gm-Gg: Acq92OE334xPUh3LmT4OsRYex7DJSt5Ao+VQDgfyTuiyUpeoseRFbzGqAvca4LEVPal
+	4XalmVYmhOuQScDB1X8YpfwbIflXz9b/ndPGXhLBMX5j/7IrQdwgcXESws+Y9Hg9kim0Gri+olU
+	qGUuSPnjMUsZlEj5lgt3kyqyhsPK0a5gs25Z1S0vGzmn0K+AiYYYUHk7pH5IDkTxK8FULrLlSx/
+	KM76dWOJNl/NqNB1hzmJSCSEWDjxQxZZtFDt0o5F3IrBSDRNrVlnSw0tLtPegnqybmfOCgf463C
+	g81xqXYSkmEFtnBl4s7w8mZ7oITFtQzNZBMV4bsD8gW+oejT6sTLbfs8wVgxTOcfLC5RKBkFoD3
+	6sxJkhnnFn4xNGcE4SzlhQT9zPHmPGu3GaktzFFNecJMLnRLLDsejgZWJpCmfvAkUZef9d7oZ0S
+	oFoz2PaAEvPQNio07+cKHiKM5ocNqIZNKOIudJtN95Uxnx11TT/VRXh1g8cg0ulCeSItwDtCOOG
+	I63uhzFAp1iuYk=
+X-Received: by 2002:adf:ff89:0:b0:45e:ef2e:25a8 with SMTP id ffacd0b85a97d-46030623f7emr30417911f8f.32.1781106072650;
+        Wed, 10 Jun 2026 08:41:12 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Kevin Lampis <kevin.lampis@citrix.com>
+Subject: [PATCH for-next] xen/kexec: Style fixes
+Date: Wed, 10 Jun 2026 16:41:10 +0100
+Message-Id: <20260610154110.2979888-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: xen-devel@lists.xenproject.org, =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?=
- <jgross@suse.com>, Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Stefano Stabellini <sstabellini@kernel.org>
-Content-Language: en-GB, de-DE
-Cc: LKML <linux-kernel@vger.kernel.org>, kernel-janitors@vger.kernel.org
-From: Markus Elfring <Markus.Elfring@web.de>
-Subject: [PATCH] xen/mcelog: Use common error handling code in
- bind_virq_for_mce()
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:MAq7XN4d+MqNcQHceBR09FGGS5D+dnyHF50hd5vl3mcYCbkhfBh
- cV5Y4yEAp1Vd+oG145zvrFIqalhWK2TEUCj4NaPAQlmIQCkQstz/CNeCdglRo7V9tU4fZwE
- FqTYu9gVPRCdjglBx+XysoQyPlxDrg3mPTdfCE0MwTA7feJrJlscA0Lu65FqankvaOz4QPP
- GOUPan+I8zAyvjh4RNX/Q==
-UI-OutboundReport: notjunk:1;M01:P0:6mJcs9brbtw=;/YqmtxyExKkVsjjT+y/2uP4HMwB
- 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
-X-purgate-ID: tlsNG-c1860d/1781104296-BD96DDB1-9ADE20B2/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c1860d/1781106073-BC567DB1-5811F338/0/0
 X-purgate-type: clean
-X-purgate-size: 1112
+X-purgate-size: 12351
 
-From: Markus Elfring <elfring@users.sourceforge.net>
-Date: Wed, 10 Jun 2026 17:05:22 +0200
-Subject: [PATCH] xen/mcelog: Use common error handling code in bind_virq_f=
-or_mce()
+Adjust kexec and kimage to more closely adhere to Xen style.
 
-Use an additional label so that a bit of exception handling can be better
-reused at the end of an if branch.
+Sort the includes, dropping duplicates (kexec.h) and unused (ctype.h and
+kernel.h).
 
-This issue was detected by using the Coccinelle software.
+No functional change.
 
-Signed-off-by: Markus Elfring <elfring@users.sourceforge.net>
-=2D--
- drivers/xen/mcelog.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Anthony PERARD <anthony.perard@vates.tech>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Julien Grall <julien@xen.org>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Kevin Lampis <kevin.lampis@citrix.com>
 
-diff --git a/drivers/xen/mcelog.c b/drivers/xen/mcelog.c
-index 53a8720f5cae..df15d5cf6d4c 100644
-=2D-- a/drivers/xen/mcelog.c
-+++ b/drivers/xen/mcelog.c
-@@ -380,14 +380,14 @@ static int bind_virq_for_mce(void)
- 	ret =3D HYPERVISOR_mca(&mc_op);
- 	if (ret) {
- 		pr_err("Failed to get CPU info\n");
--		kfree(g_physinfo);
--		return ret;
-+		goto free_info;
- 	}
-=20
- 	ret  =3D bind_virq_to_irqhandler(VIRQ_MCA, 0,
- 				       xen_mce_interrupt, 0, "mce", NULL);
- 	if (ret < 0) {
- 		pr_err("Failed to bind virq\n");
-+free_info:
- 		kfree(g_physinfo);
- 		return ret;
- 	}
-=2D-=20
-2.54.0
+Fix these before they get copied around in the EFI changes.
+---
+ xen/common/kexec.c  | 94 +++++++++++++++++++++++++--------------------
+ xen/common/kimage.c | 23 ++++++-----
+ 2 files changed, 64 insertions(+), 53 deletions(-)
+
+diff --git a/xen/common/kexec.c b/xen/common/kexec.c
+index 65776a95fd70..9ff22e43991c 100644
+--- a/xen/common/kexec.c
++++ b/xen/common/kexec.c
+@@ -6,31 +6,33 @@
+  * - Magnus Damm <magnus@valinux.co.jp>
+  */
+ 
+-#include <xen/init.h>
+-#include <xen/lib.h>
+ #include <xen/acpi.h>
+-#include <xen/ctype.h>
++#include <xen/console.h>
++#include <xen/cpu.h>
++#include <xen/cpumask.h>
+ #include <xen/elfcore.h>
+ #include <xen/errno.h>
+ #include <xen/guest_access.h>
+-#include <xen/param.h>
+-#include <xen/watchdog.h>
+-#include <xen/sched.h>
+-#include <xen/types.h>
+ #include <xen/hypercall.h>
++#include <xen/init.h>
+ #include <xen/kexec.h>
+ #include <xen/keyhandler.h>
+-#include <public/kexec.h>
+-#include <xen/cpumask.h>
+-#include <asm/atomic.h>
++#include <xen/kimage.h>
++#include <xen/lib.h>
++#include <xen/param.h>
++#include <xen/sched.h>
+ #include <xen/spinlock.h>
++#include <xen/types.h>
+ #include <xen/version.h>
+-#include <xen/console.h>
+-#include <xen/kexec.h>
+-#include <xen/kimage.h>
+-#include <public/elfnote.h>
++#include <xen/watchdog.h>
++
++#include <asm/atomic.h>
++
+ #include <xsm/xsm.h>
+-#include <xen/cpu.h>
++
++#include <public/elfnote.h>
++#include <public/kexec.h>
++
+ #ifdef CONFIG_COMPAT
+ #include <compat/kexec.h>
+ #endif
+@@ -162,6 +164,7 @@ static int __init cf_check parse_crashkernel(const char *str)
+ 
+             ++idx;
+         } while ( *str == ',' );
++
+         if ( idx < ARRAY_SIZE(ranges) )
+             ranges[idx].size = 0;
+     }
+@@ -317,7 +320,7 @@ void kexec_crash_save_cpu(void)
+     ELF_Prstatus *prstatus;
+     crash_xen_core_t *xencore;
+ 
+-    BUG_ON ( ! crash_notes );
++    BUG_ON(!crash_notes);
+ 
+     if ( cpumask_test_and_set_cpu(cpu, &crash_saved_cpus) )
+         return;
+@@ -418,6 +421,7 @@ static void cf_check do_crashdump_trigger(unsigned char key)
+ static void setup_note(Elf_Note *n, const char *name, int type, int descsz)
+ {
+     int l = strlen(name) + 1;
++
+     strlcpy(ELFNOTE_NAME(n), name, l);
+     n->namesz = l;
+     n->descsz = descsz;
+@@ -427,7 +431,7 @@ static void setup_note(Elf_Note *n, const char *name, int type, int descsz)
+ static size_t sizeof_note(const char *name, int descsz)
+ {
+     return (sizeof(Elf_Note) +
+-            ELFNOTE_ALIGN(strlen(name)+1) +
++            ELFNOTE_ALIGN(strlen(name) + 1) +
+             ELFNOTE_ALIGN(descsz));
+ }
+ 
+@@ -439,7 +443,7 @@ static size_t sizeof_cpu_notes(const unsigned long cpu)
+         + sizeof_note("Xen", sizeof(crash_xen_core_t));
+ 
+     /* CPU0 also presents the crash_xen_info note. */
+-    if ( ! cpu )
++    if ( !cpu )
+         bytes = bytes +
+             sizeof_note("Xen", sizeof(crash_xen_info_t));
+ 
+@@ -450,24 +454,27 @@ static size_t sizeof_cpu_notes(const unsigned long cpu)
+  * crash heap if the user has requested that crash notes be allocated
+  * in lower memory.  There is currently no case where the crash notes
+  * should be free()'d. */
+-static void * alloc_from_crash_heap(const size_t bytes)
++static void *alloc_from_crash_heap(const size_t bytes)
+ {
+-    void * ret;
++    void *ret;
++
+     if ( crash_heap_current + bytes > crash_heap_end )
+         return NULL;
+-    ret = (void*)crash_heap_current;
++
++    ret = crash_heap_current;
+     crash_heap_current += bytes;
++
+     return ret;
+ }
+ 
+ /* Allocate a crash note buffer for a newly onlined cpu. */
+ static int kexec_init_cpu_notes(const unsigned long cpu)
+ {
+-    Elf_Note * note = NULL;
++    Elf_Note *note = NULL;
+     int ret = 0;
+     int nr_bytes = 0;
+ 
+-    BUG_ON( cpu >= nr_cpu_ids || ! crash_notes );
++    BUG_ON(cpu >= nr_cpu_ids || !crash_notes);
+ 
+     /* If already allocated, nothing to do. */
+     if ( crash_notes[cpu].start )
+@@ -505,7 +512,7 @@ static int kexec_init_cpu_notes(const unsigned long cpu)
+ 
+         /* If the allocation failed, and another CPU did not beat us, give
+          * up with ENOMEM. */
+-        if ( ! note )
++        if ( !note )
+             ret = -ENOMEM;
+         /* else all is good so lets set up the notes. */
+         else
+@@ -518,7 +525,7 @@ static int kexec_init_cpu_notes(const unsigned long cpu)
+             setup_note(note, "Xen", XEN_ELFNOTE_CRASH_REGS,
+                        sizeof(crash_xen_core_t));
+ 
+-            if ( ! cpu )
++            if ( !cpu )
+             {
+                 /* Set up Xen Crash Info note. */
+                 xen_crash_note = note = ELFNOTE_NEXT(note);
+@@ -548,8 +555,6 @@ static int cf_check cpu_callback(
+          * fail the CPU_UP_PREPARE */
+         kexec_init_cpu_notes(cpu);
+         break;
+-    default:
+-        break;
+     }
+     return NOTIFY_DONE;
+ }
+@@ -592,7 +597,7 @@ static int __init cf_check kexec_init(void)
+             get_order_from_bytes(crash_heap_size),
+             MEMF_bits(crashinfo_maxaddr_bits) );
+ 
+-        if ( ! crash_heap_current )
++        if ( !crash_heap_current )
+             return -ENOMEM;
+ 
+         memset(crash_heap_current, 0, crash_heap_size);
+@@ -604,7 +609,7 @@ static int __init cf_check kexec_init(void)
+        Only the individual CPU crash notes themselves must be allocated
+        in lower memory if requested. */
+     crash_notes = xzalloc_array(crash_note_range_t, nr_cpu_ids);
+-    if ( ! crash_notes )
++    if ( !crash_notes )
+         return -ENOMEM;
+ 
+     register_keyhandler('C', do_crashdump_trigger, "trigger a crashdump", 0);
+@@ -620,7 +625,8 @@ presmp_initcall(kexec_init);
+ 
+ static int kexec_get_reserve(xen_kexec_range_t *range)
+ {
+-    if ( kexec_crash_area.size > 0 && kexec_crash_area.start > 0) {
++    if ( kexec_crash_area.size > 0 && kexec_crash_area.start > 0 )
++    {
+         range->start = kexec_crash_area.start;
+         range->size = kexec_crash_area.size;
+     }
+@@ -636,7 +642,7 @@ static int kexec_get_cpu(xen_kexec_range_t *range)
+     if ( nr < 0 || nr >= nr_cpu_ids )
+         return -ERANGE;
+ 
+-    if ( ! crash_notes )
++    if ( !crash_notes )
+         return -EINVAL;
+ 
+     /* Try once again to allocate room for the crash notes.  It is just possible
+@@ -726,7 +732,7 @@ static int kexec_get_range_compat(XEN_GUEST_HANDLE_PARAM(void) uarg)
+     {
+         XLAT_kexec_range(&compat_range, &range);
+         if ( unlikely(__copy_to_guest(uarg, &compat_range, 1)) )
+-             ret = -EFAULT;
++            ret = -EFAULT;
+     }
+ 
+     return ret;
+@@ -760,7 +766,7 @@ void vmcoreinfo_append_str(const char *fmt, ...)
+     int r;
+     size_t note_size = sizeof(Elf_Note) + ELFNOTE_ALIGN(strlen(VMCOREINFO_NOTE_NAME) + 1);
+ 
+-    if (vmcoreinfo_size + note_size + sizeof(buf) > VMCOREINFO_BYTES)
++    if ( vmcoreinfo_size + note_size + sizeof(buf) > VMCOREINFO_BYTES )
+         return;
+ 
+     va_start(args, fmt);
+@@ -776,7 +782,7 @@ static void crash_save_vmcoreinfo(void)
+ {
+     size_t data_size;
+ 
+-    if (vmcoreinfo_size > 0)    /* already saved */
++    if ( vmcoreinfo_size > 0 )    /* already saved */
+         return;
+ 
+     data_size = VMCOREINFO_BYTES - (sizeof(Elf_Note) + ELFNOTE_ALIGN(strlen(VMCOREINFO_NOTE_NAME) + 1));
+@@ -835,7 +841,7 @@ static int kexec_exec(XEN_GUEST_HANDLE_PARAM(void) uarg)
+     if ( !test_bit(base + pos, &kexec_flags) )
+         return -ENOENT;
+ 
+-    switch (exec.type)
++    switch ( exec.type )
+     {
+     case KEXEC_TYPE_DEFAULT:
+         image = kexec_image[base + pos];
+@@ -917,8 +923,8 @@ static int kexec_segments_add_segment(unsigned int *nr_segments,
+     unsigned int n = *nr_segments;
+ 
+     /* Need a new segment? */
+-    if ( n == 0
+-         || segments[n-1].dest_maddr + segments[n-1].dest_size != maddr )
++    if ( n == 0 ||
++         segments[n-1].dest_maddr + segments[n-1].dest_size != maddr )
+     {
+         n++;
+         if ( n > KEXEC_SEGMENT_MAX )
+@@ -1139,7 +1145,7 @@ static int kexec_load(XEN_GUEST_HANDLE_PARAM(void) uarg)
+     return 0;
+ 
+ error:
+-    if ( ! kimage )
++    if ( !kimage )
+         xfree(segments);
+     kimage_free(kimage);
+     return ret;
+@@ -1229,32 +1235,38 @@ static int do_kexec_op_internal(unsigned long op,
+     switch ( op )
+     {
+     case KEXEC_CMD_kexec_get_range:
+-        if (compat)
+-                ret = kexec_get_range_compat(uarg);
++        if ( compat )
++            ret = kexec_get_range_compat(uarg);
+         else
+-                ret = kexec_get_range(uarg);
++            ret = kexec_get_range(uarg);
+         break;
++
+     case KEXEC_CMD_kexec_load_v1:
+         if ( compat )
+             ret = kexec_load_v1_compat(uarg);
+         else
+             ret = kexec_load_v1(uarg);
+         break;
++
+     case KEXEC_CMD_kexec_unload_v1:
+         if ( compat )
+             ret = kexec_unload_v1_compat(uarg);
+         else
+             ret = kexec_unload_v1(uarg);
+         break;
++
+     case KEXEC_CMD_kexec:
+         ret = kexec_exec(uarg);
+         break;
++
+     case KEXEC_CMD_kexec_load:
+         ret = kexec_load(uarg);
+         break;
++
+     case KEXEC_CMD_kexec_unload:
+         ret = kexec_unload(uarg);
+         break;
++
+     case KEXEC_CMD_kexec_status:
+         ret = kexec_status(uarg);
+         break;
+diff --git a/xen/common/kimage.c b/xen/common/kimage.c
+index 6202491f7e76..a0e4e67df7ee 100644
+--- a/xen/common/kimage.c
++++ b/xen/common/kimage.c
+@@ -11,15 +11,13 @@
+  * Version 2.  See the file COPYING for more details.
+  */
+ 
+-#include <xen/types.h>
+-#include <xen/init.h>
+-#include <xen/kernel.h>
+ #include <xen/errno.h>
+-#include <xen/spinlock.h>
+ #include <xen/guest_access.h>
+-#include <xen/mm.h>
++#include <xen/init.h>
+ #include <xen/kexec.h>
+ #include <xen/kimage.h>
++#include <xen/mm.h>
++#include <xen/spinlock.h>
+ 
+ #include <asm/page.h>
+ 
+@@ -166,7 +164,7 @@ static int do_kimage_alloc(struct kexec_image **rimage, paddr_t entry,
+             goto out;
+     }
+ 
+-    /* 
++    /*
+      * Page for the relocation code must still be accessible after the
+      * processor has switched to 32-bit mode.
+      */
+@@ -221,8 +219,8 @@ static int kimage_crash_alloc(struct kexec_image **rimage, paddr_t entry,
+     unsigned long i;
+ 
+     /* Verify we have a valid entry point */
+-    if ( (entry < kexec_crash_area.start)
+-         || (entry > kexec_crash_area.start + kexec_crash_area.size))
++    if ( entry < kexec_crash_area.start ||
++         entry > kexec_crash_area.start + kexec_crash_area.size )
+         return -EADDRNOTAVAIL;
+ 
+     /*
+@@ -244,8 +242,8 @@ static int kimage_crash_alloc(struct kexec_image **rimage, paddr_t entry,
+         mstart = segments[i].dest_maddr;
+         mend = mstart + segments[i].dest_size;
+         /* Ensure we are within the crash kernel limits. */
+-        if ( (mstart < kexec_crash_area.start )
+-             || (mend > kexec_crash_area.start + kexec_crash_area.size))
++        if ( mstart < kexec_crash_area.start ||
++             mend   > kexec_crash_area.start + kexec_crash_area.size )
+             return -EADDRNOTAVAIL;
+     }
+ 
+@@ -606,7 +604,7 @@ static struct page_info *kimage_alloc_page(struct kexec_image *image,
+         }
+     }
+     page = NULL;
+-    for (;;)
++    for ( ;; )
+     {
+         kimage_entry_t *old;
+ 
+@@ -825,7 +823,8 @@ int kimage_load_segments(struct kexec_image *image)
+     int s;
+     int result;
+ 
+-    for ( s = 0; s < image->nr_segments; s++ ) {
++    for ( s = 0; s < image->nr_segments; s++ )
++    {
+         result = kimage_load_segment(image, &image->segments[s]);
+         if ( result < 0 )
+             return result;
+-- 
+2.39.5
 
 
