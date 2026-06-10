@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86EA8CD98D6
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 12:47:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1334268.1597387 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC2F3CD98C6
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 13:34:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1334386.1597464 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXIKp-0002C4-70; Wed, 10 Jun 2026 12:47:07 +0000
+	id 1wXJ3z-0000fH-M0; Wed, 10 Jun 2026 13:33:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1334268.1597387; Wed, 10 Jun 2026 12:47:07 +0000
+Received: by outflank-mailman (output) from mailman id 1334386.1597464; Wed, 10 Jun 2026 13:33:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXIKo-0002AG-Vx; Wed, 10 Jun 2026 12:47:06 +0000
-Received: by outflank-mailman (input) for mailman id 1334268;
- Wed, 10 Jun 2026 12:45:35 +0000
+	id 1wXJ3z-0000fA-IR; Wed, 10 Jun 2026 13:33:47 +0000
+Received: by outflank-mailman (input) for mailman id 1334386;
+ Wed, 10 Jun 2026 13:33:46 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Mykola_Kvach@epam.com>) id 1wXIJK-0001DU-VN
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 12:45:35 +0000
+ (envelope-from <andrew.cooper@citrix.com>) id 1wXJ3y-0000f4-BU
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 13:33:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wXIJK-00H9hG-BU
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 14:45:34 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wXJ3x-0080RQ-I4
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 15:33:45 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Mykola_Kvach@epam.com>)
- id 6a295c67-5cb7-0a2a0a5109dd-0a2a4504ad8a-34
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:34 +0200
-Received: from [52.101.69.76]
- (helo=AM0PR83CU005.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <Mykola_Kvach@epam.com>)
- id 6a295c6e-1dec-0a2a45040019-3465454cb0ef-3
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:34 +0200
-Received: from AS8PR03MB9746.eurprd03.prod.outlook.com (2603:10a6:20b:61d::18)
- by AM9PR03MB7558.eurprd03.prod.outlook.com (2603:10a6:20b:415::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.11; Wed, 10 Jun
- 2026 12:45:32 +0000
-Received: from AS8PR03MB9746.eurprd03.prod.outlook.com
- ([fe80::cf11:309:1384:58f7]) by AS8PR03MB9746.eurprd03.prod.outlook.com
- ([fe80::cf11:309:1384:58f7%4]) with mapi id 15.21.0113.011; Wed, 10 Jun 2026
- 12:45:32 +0000
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6a2967b8-bab6-0a2a0a5309dd-0a2a4506ec78-6
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 15:33:45 +0200
+Received: from [40.93.196.58]
+ (helo=SA9PR02CU001.outbound.protection.outlook.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6a2967b7-7371-0a2a45060019-285dc43ac4d3-4
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 15:33:45 +0200
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
+ by DS7PR03MB5512.namprd03.prod.outlook.com (2603:10b6:5:2c1::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.13; Wed, 10 Jun
+ 2026 13:33:41 +0000
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37%6]) with mapi id 15.21.0092.011; Wed, 10 Jun 2026
+ 13:33:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,573 +55,183 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WQZEunZqsEASvaFPCdrXsuSBLqTLylVpmghm//4nXqy74ql/VYssIP+v+iXLteTDZAKyeYQoJLejCUMhLuIRX+UdCpcZ+/KLSzTCAHAYzICJ7uqwXa7m0Sy4Zwu2C5czbJNAFwVjbiCVFX1RV4E3SZGNM6hsJUMFE0oom8ACWNyjqXU5nI/t3H0VqJayNeqY13IAL9rlH41X5rtsKqDMWxbvio5DdDWmqDAeckfjbt/xtPnLFCcORzCuS3Eyd5f7ZBaDvAteOJv1dDZl/sbZK+lk/J/kVV00JYNDOwe9TvLGZzxbzfn9GYwpgwXKkffTZbB4OkJxyvfwT+HjlTjonQ==
+ b=WYuyi9D9IDK7kdSaqbyfXLl5ZgLe52XVSBp5GqHNi2XETzhfF5eNdYnhosU3kxo42ZYR8BTQJ51NvYhjegySF8mgQ8xY9em17GSRkF3K4gWYT5SJCbpWsaZ52drAafobj8mOlMpNzy2V6XHeCQMW253O3nRcghr4dpz6G71oJKzSP8cMncmbxPFtuFtlY/F0x4urPmm/+94onP+qU25nySopkXwB8JOzFxXW/jhwn+Pw/w9Tn1zkK0EE1pSNNzlnTg7XzvhEUTN4JjUoA0KqMXPXSIALOQRrHLtAkRnVTlV5d6W6YculilHZ7v6EroZrXJgfXqeDKb4GmWccP+hLxQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nQ4kNGerzyiusut8IWEJPjH9AN7FUvIvVDuMBpOnlU4=;
- b=Xa7ux/i8rNQHIsKHgeLQINmZ8SdDJKmGPkQbv1KRUIjgUdcg7cxYgQymfbe2wlje0JWL12aa2ZyoIHuZ9ELck+F/wwrrhoypjhZc3m8Yu6LufT/vw6cauHQFTGYC4YDN/YmXBfQnLDRGB6h4Lk1emhKYfO7hrPNFOt8IghryY7+wPxVErGLRRrrsNzrj0Dc5O6IdlLvNLM8x8ay5qEGWU9pPz/XIjsHGtTlCRCSJjUi410zpaxNDyaPWKu7ijyG6SwWMmNSTR2v0dsP3T3ZH8eTKTQ4AfC2rPTvIy7dDMBaZVxBCkgi7wekY39+WtE2gtDG57pZxiYsUVZMHfWNIVg==
+ bh=z0wyc0bMJKv2g26ryzfS0+whRcSWZGIub50sR+BDb8A=;
+ b=WndswmutNJ0FzmbELJ9vqkCJwta6CSxTTIXCpFDXza1CZtIgt4WAXukw4+4Cw3pIOCW2xmbPPFGdmyIg+43hXWS210zpcYMPvlUyYmLodZUj1MZYhiVn2I9Oq4LePsyTwExF+82YbEkXBq54mgGOSIflTUdHgjYO/3gMmGUIqQSyDTvahujIytMbVDutjaM0t+vBSjfdR0fn2hNhC9HcyYMsWofS05Yi+p0V9MZrNlMhVlGOktS8Ipx9CEuXWKbeijfYZsxmgugqVvlaym8yU6ubFIaQc20p5IJXAqx8tWqkDBRlQnpuRAh2PVD7FUvJGToCYjTG4TlIjOZB0F4doA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nQ4kNGerzyiusut8IWEJPjH9AN7FUvIvVDuMBpOnlU4=;
- b=quTNwmsuY1UqqmjG2gbzZXqT1DKrxIDl3jVn752Pmf4ucKBhCB3P+9HHLjld/oqfV1azXAjGrDJQIuDtLpv5ALVRmsc/33tWKb/vvouiHxb7OmOcWEr+ohGVifsu7mXFYJoRfpTHMplBCgb3pi8/Mb1dKa38U/KjQpI8yGQm9tIgyoWXojEAvLLxHosOuTBlC3AKsYnilfFbCOq/3i9G36UWOPZIGjYhH9qjfMWORyY7W/Q/Ly1mb2N2WzsmLXl1EYpHVJj+4muarxIbdjkV9ehQZUP7h0KZr/U0CuBSGEq2o6kymb2s8lqlGeqS6yknZEfG2W2vPiGJPqdlDgHRVQ==
+ bh=z0wyc0bMJKv2g26ryzfS0+whRcSWZGIub50sR+BDb8A=;
+ b=PZsKO0/KIzuQwbuZ6y8j2dRcTa0yarKyXRz7t4lr7cW96vN/YUK6I735wMknQ2GAbZWDco2QCzk8LtjKGcoJLB8dij7FZsHRiNsz/o/o0XppyMXl3X7G5VzYGOoR2+Y/zqwOtPA+Zk05vuC1oeVQGSOx6sBNZblgdUaiVwqehq8=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-From: Mykola Kvach <mykola_kvach@epam.com>
-To: xen-devel@lists.xenproject.org
-Cc: Mykola Kvach <mykola_kvach@epam.com>,
-	Mykola Kvach <xakep.amatop@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Luca Fancellu <luca.fancellu@arm.com>
-Subject: [PATCH v11 08/13] iommu/ipmmu-vmsa: Implement suspend/resume callbacks
-Date: Wed, 10 Jun 2026 15:44:28 +0300
-Message-ID: <a1c9e3defdd8fc772b78e93b7758294828246eea.1781084290.git.mykola_kvach@epam.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1781084290.git.mykola_kvach@epam.com>
-References: <cover.1781084290.git.mykola_kvach@epam.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: WA1P291CA0008.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:19::19) To AS8PR03MB9746.eurprd03.prod.outlook.com
- (2603:10a6:20b:61d::18)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <5c397f5b-cd5a-4218-92b5-074e52be5f11@citrix.com>
+Date: Wed, 10 Jun 2026 14:33:37 +0100
+User-Agent: Mozilla Thunderbird
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Michal Orzel <michal.orzel@amd.com>, Doug Goldstein <cardoe@cardoe.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: Re: [PATCH 4/4] CI: Rework the archlinux container
+To: Anthony PERARD <anthony.perard@vates.tech>
+References: <20260609173102.2908514-1-andrew.cooper3@citrix.com>
+ <20260609173102.2908514-5-andrew.cooper3@citrix.com>
+ <1781091028.8631fc262581453bbf619ec5b2062170.19eb14c4ec6000701b@vates.tech>
+ <45a5e1d6-0262-448f-a415-d7b1b3135d87@citrix.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <45a5e1d6-0262-448f-a415-d7b1b3135d87@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: LO4P123CA0690.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:37b::7) To CH8PR03MB8275.namprd03.prod.outlook.com
+ (2603:10b6:610:2b9::7)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR03MB9746:EE_|AM9PR03MB7558:EE_
-X-MS-Office365-Filtering-Correlation-Id: fd442826-6b7c-448a-a4fb-08dec6ee288a
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|DS7PR03MB5512:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2b961fdd-b070-4120-4593-08dec6f4e2ab
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|366016|1800799024|376014|56012099006|11063799006|5023799004|6133799003|18002099003|22082099003;
+	BCL:0;ARA:13230040|23010399003|376014|1800799024|366016|11063799006|4143699003|56012099006|5023799004|18002099003|22082099003;
 X-Microsoft-Antispam-Message-Info:
-	ZYwVDvAgZZfnoUM4g76PTIgTaLoOMguf+SJArSTv84JGxYaaaAURxE+PVO/PUYy4KaSp/JtnOJ0msP1Kam+BpvDUrScj4ipj1DcAIh96wzdg9b8Hdd+aXqwX7z+eQ/t1AVvXISBbjo+7eq6n2UzEQZFAg3hhDcFic+p041siUc+cl0yBlWJREPypytOSeWGWWVgWLeiZrJViibz6cIS9KQt61GIPbQK6aQNMyuDoIn3fX00KxOjuvk7OdynJivjibIzy4INIErr85237GyNo/zj+FFwb4tImiOvw+u44FIb6LesNre91EhjksfQUy1CACA9wuc43DL6/ErBy6pkxZyQCchORuRTy8bgw+HLPhVdy7dWUiy+okvQ7cH/suNHPs4D03xi8hcH/nnmqi9C61n55JXDBRvTvq2+5/yD2e3+I8KawsLiFWF42W+5KQz5LMaLfNvD+dqZeYSwpxOJVcvjh9uVQrUz87cfmJHIHPrxp6TOt5BPBJGIEkzO5VTNFGUSGllH4jiGoLtF4U0M0nv87EOnk/qcIe1+7nE6d/DAiUlFFOmQQGl6E5qny+pEkO/Kxq+KjiuMUqcmnx6hibh6GejRqNzFgIwT9/zkilyI1aAYrufrxXLXCCTqlKC2PvL3LbWQ3tLuB17T8z9GSdT0fSahDBy+p0s5MZZrLVFsfEqBwlSeOM4dOg8JLc25x
+	Tj7lTqathidpFV1CquvUWARZeTNhD/h7rGJaO7E08ZznXrkcE0Z9fGUTv6GYXGDkrZubp5Hm/vvjhuYZXt3abNW17qnO/wLmnXPiWyI8qX0sRxeH4pZ7HbeyczguVBvYX41dRQowGw+vVHJp0khN1YhQThc5J5U5UAHuGC8bYM+Xl7jIiQqTysoTxRZbirdicyopUyZhvUmBu1cJuON7qDWYe1UwSqr21iBO5BIW06ohFRM0+O50XkT4T+Eoz7EEgw+5bK6E+ufAqTeJ9Cuyzj5TnWt9Nvp1GEnoCnpaaIp45Lk26iXpRjSP85/pwr351pLrQjIWmRK3rQG3/LeIu/97fExbQ3AY27f55AR6HFybhDkq3grK/sgdovYTkYAWE2+zKhhZFge7ThsglpCcDncjthAu6Z0iz+Vq+GKT1F52ZmqDjiM/xS4ERH0pSO1iFshjBsr8I0icxQpORp0JsEC0+j6xkkc0BbPNOyjWMXpqs1OGfmQEp6sM1MIQZDYDviLFvNUe9CbXn58dKaR/H7CPQqbNAqUze4R5IiWKupJKGOzd5d0h50oBvbn9hutvl11Fr6c325bQvgS6G0j5Ry4BahfGyaNYjlFSIRTZe9XbByCxRbJkAeXs//ZohpiwkWTKK2E1a/aaqu5oPesFc8Jp85wLU/H90fz03bbup14oA14iOtj4zSHmuCEEltvw
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9746.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(56012099006)(11063799006)(5023799004)(6133799003)(18002099003)(22082099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(1800799024)(366016)(11063799006)(4143699003)(56012099006)(5023799004)(18002099003)(22082099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?Ij+YgkJf4oOGnpUZjvBNEmUsGZ1xkd6wnfAM89MFadwGi32grOVLPIXuVTz/?=
- =?us-ascii?Q?U8Vqo/rce2G31/u6QXIfOqZ7TKJ6xSERvP9VRiFH+MQlzhuNOnHtOke3XebS?=
- =?us-ascii?Q?xKfBOeRsg5bvbQOPnj0QDrtZaNqX4Go6qoD+gu9Ja0k1F2zc/QshLcgqWzz7?=
- =?us-ascii?Q?K29tfYbs5SxH1vgKFxyPWaBJCXugciOpVKp1/AeRiPkaKKeEo9YDuaY1jEuP?=
- =?us-ascii?Q?qtAWzJtN4ykk7gBSZBDcPcBdtlm1LEQOCX1OU9UhzTHwfBsqn14/ULGFOwEm?=
- =?us-ascii?Q?91V9YKU/FOyRxUEawK4hMMsW/ukuz/BAaNB3mtqpihBFnbyYGojAMvcSFPlp?=
- =?us-ascii?Q?v+Qdvx5YgD9KPfgAAK/Pd3ji/c6TgcyXhaeKnfn6Lrir7yQQNQ+LhnjuX1ZQ?=
- =?us-ascii?Q?7/c2BiEyD8PxzlgyvnKIw5hOQjuVOMflLuU3IIztwWYH2SANZmJ1JtTiCoAM?=
- =?us-ascii?Q?ivwHWrUjvL++MbzggN3FS2UUZHm7H2u8Mo5rV7kNNNyfLPYJfm6gSC/tZMVL?=
- =?us-ascii?Q?aRL+tqZeTzmi+Q2nw/x/70xpWcz+wKORBCzk9rAwtQqCTnOrkfU0Gr+nDGFd?=
- =?us-ascii?Q?8DaUdTw1by+wg5V2vjDQZaeP4xJm+0miuvGz46RxRs8fG8C13fUsRpujfu6C?=
- =?us-ascii?Q?RhBtZZPhlcCk8WXlpxyutw9yqdM4GaTopYrxyvBAv6CUoYL/q58vB2BDg+sQ?=
- =?us-ascii?Q?0nnxrYS37tBKSZloApC3MLeY7hjvAXFONijCrYg/VOlWWjNIduLcOSojSxAu?=
- =?us-ascii?Q?N1+Z3UZpq6QFL2tmmwyz/Ra+yA7Dt13Lg7hNsMyIK/XL94P91J703MjraAy6?=
- =?us-ascii?Q?8oz8Qniyo5s4if+KkNQC9zVxDvAnG5GUOyriYNP8ZOIhrFsylvgH/uX2VoPT?=
- =?us-ascii?Q?V6LcfUgyO9wOISecPO2Ji8T1LIWF0tAiQyASCpPszwewLIeO7k+lbSiAOqmw?=
- =?us-ascii?Q?y0rpffusNmau+8SbfM9aAsvswkT9dnE9TfOlpJwuZDOVigOA/qPDV7h6vS/A?=
- =?us-ascii?Q?bjVctkdvq/T4wUULL5GO5PeecZfRSqB39PUVXjSlt6ZtS+x8UIEmlcuXQ499?=
- =?us-ascii?Q?g7Zw3iKMzpjrpfkuk163z3G6Iwyhk+2xPL3gwCFczI9ffjLFUuj6othoCBz/?=
- =?us-ascii?Q?2w+ALdxcYWSumuW1M1WFpCS8wlVJkVlKfxsIcfPY7RvV/gkifuHzbg42v6+p?=
- =?us-ascii?Q?aWlBBO7AjKt+l4FrCp+k479tZZSwRd4ZoyWRXOauyBEbforLRkfsQRDKU0Og?=
- =?us-ascii?Q?KaorFtSMWwPLZzTFbGLPaWab0T8DYAz//NaTwd9MGIK9qBI95ea32+U+xms/?=
- =?us-ascii?Q?wiH77+tOcbK296F7VKJrUaKCq8/K6V2CRRGLS7AxvYhh6J+kINBBjIkf0zjZ?=
- =?us-ascii?Q?MVPHqJcrnAPPbgq/nRzLP9bt8OshluLGDPAgxOSDNgdDuuuOe3nfMoWTuhS9?=
- =?us-ascii?Q?yHhuMNJRQOmMKvmg05CJY9HeoPpEbHyxBn1J0V9J+6Fi/H3fc7ytadAR/YQ/?=
- =?us-ascii?Q?TBXp+eXlc0pNDYmJw9xYu39ZA01lXC1oTwmQB6C7I/ATaKT2sulBPyXiC9ql?=
- =?us-ascii?Q?xf/+v4f/DXGJlv4yjjywnr/w9ioSZup2v1t31jSuMDPCFnDhkqYdD8QzUO7D?=
- =?us-ascii?Q?pYwqxNwm0KyVRC5v6FDwAG+W8PzoSj7EV7XE3Ofsx1DqJ2kCCl7ODhDJvBql?=
- =?us-ascii?Q?SwOfl2aeW+E3IUwVUgtkuE9THhI/P0w9jnMcT16n0WGnVR7nUFZqAncOOHAh?=
- =?us-ascii?Q?TYEJYoA0vA=3D=3D?=
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fd442826-6b7c-448a-a4fb-08dec6ee288a
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR03MB9746.eurprd03.prod.outlook.com
+	=?utf-8?B?L0Z3Z3hkZlU5VG8za1djNmVQQVZId2d2cExYYmxIZkdIbWJHK3B5aWVyU2lo?=
+ =?utf-8?B?K3hGbUI5WVlRUlBNRHNxNHkxSFg2cVl0bHBHcnRMOGdCZFhKaVYzMFdxV1Nu?=
+ =?utf-8?B?R0cvdXc1L3JKeXJqM09oeml3K0daRnNqdnpWVjVSWE5tRE9vYlA5bnBaWEFr?=
+ =?utf-8?B?eHJLVmZDZUowZEh1OFZVMmFsbWVsL0tTNU1rbmlLemlyYWlsVWIvWUdsZWVE?=
+ =?utf-8?B?ODNKRUtDUlVtYmw3NEpDc2RNQm9FZEJ1OCtnNUIydjB2eWN1Z3VvS2Z6WWN3?=
+ =?utf-8?B?OUdmTVNPZjRUSWdPU21XU1V6RTV2Sk9MVURhNEtqK2VtQVQzVmdqdXF2Nyt5?=
+ =?utf-8?B?ZDFZeVZhWUlta2s5VWpTV3VCdFlXUW1ldjVHVDZBWTg0L1lLeHZjN3lJcFFx?=
+ =?utf-8?B?M0hiYWJaMERsdE53K0EveE1ZK2Z4bEg0RkZocHltWTdId0hnbE93dlFNNXpt?=
+ =?utf-8?B?TVBybWM1THJ1ZWVFNWRZb0dheXRuTlNnU3NRRmpUUDhuY2ZGVTBGcVhaaEpZ?=
+ =?utf-8?B?S3prTFlNT0c3MUNBamhKRUNWNWFhWUhTYmFWSm5KR0w0R0tCR3JYeUJwV0Zs?=
+ =?utf-8?B?NXRRME1IYXZWeFFwUitRNmRmazdGbks4cCtnNitVSGlYRkw3RTJVMi9NbFc4?=
+ =?utf-8?B?cmtFUFhFQWgrZ2dYaCtMZ1BzQXZNMGtiWGtBbFRkR2tpaDdZcHQrdW1DbWR2?=
+ =?utf-8?B?MnlGVGdaVndqbjJ1ZHJJaW5CWEh2bTd6RXIveDJPRWsxS3lnQmFWcW9QeXdC?=
+ =?utf-8?B?Y1J5a0ZSN2toNnVPUDByVXMrN1RaQVpWSkN3bTRhS01CMnRJV1doemN0U1pz?=
+ =?utf-8?B?MXpWWlJYYWJmbWtyM09jcFU2VDBoQVNscTZkN2F6TFFDZEszM2FYS3Y2U0RV?=
+ =?utf-8?B?QzVCRWh0aDFrRFpVSmg5UUF0UlBpRmluenRacUYySk93WU1oa3Fpb0RiWnV1?=
+ =?utf-8?B?T1VXRHA5MlpYQWhBQzF1blFnT0I0U01TOWkrZVFmdFNvL2YxeHFnN0M5WGtu?=
+ =?utf-8?B?a0g4R0o4cUs4amlwRUYrc09qOUNnWEluMTU5Y29KQWV0ZTRTVUFjOENET25Y?=
+ =?utf-8?B?MHhBc2lrSDN2S0F3MXZ1cUh6a1RRMWlEcEh2ZFZQT0ZSK0t2ZFhoRm5BZnVz?=
+ =?utf-8?B?ekJxMUlBdGVkWFY3NFVhd09KUEpDVk1vZ0JSUi9xZ1E1L2hnZFhlSWY0bGJR?=
+ =?utf-8?B?N1R3cDRhbG1ScUV3aTF3b1lTdzJXK3dVNGx0V3pGL1F3RlVsZE5uRm4zWGZP?=
+ =?utf-8?B?YWgwUVBYeVZad0xWZ0U2SnJOT05iUnZqTURmQUJiRnp4Ly9kWHE0ek1RR1lM?=
+ =?utf-8?B?WC9GQ3lBSTBWbnozNXVaVDVzY3NvV3hqYmdNYWk3YkFuakZlMnlRMExCdzVi?=
+ =?utf-8?B?Z3FlZWltWnRHUVd6RkxrcW96ajlKd3Fqam5JejFlUjh6dWNRWlEwcDY3Yzdr?=
+ =?utf-8?B?NnhIVkR3amx4REllQXk5RUN2QkIwSXpCVThiQU9FVzVKYXF4eTRURGI1bXJy?=
+ =?utf-8?B?dzFDS3lWOEZaQk5VUzZNZjIvSHlMZ3h2bUVNNXVuNTAwMjRmQ05vbGUrUnVh?=
+ =?utf-8?B?Sm4wd2M3NkEraVk2MmdpeS9SdzFWWktoclpoRXJ0K0ZpMHZHa0VDV29iVnNE?=
+ =?utf-8?B?dW0vdkhmM2JlczFGbmZpSmJqVmFscE0wT3ZQL0VLcnNFcDBqWWw5cGpjR1Zh?=
+ =?utf-8?B?WFJDb0VCdi9vYjdSSmFvYUlsSUhOR2gyemg2OTdEWUw1d2EvWng2Z2NDZ1Y4?=
+ =?utf-8?B?SnhBVTFPWDhYamdCWlhOY1pmSDVqZ2xLeFl1RFhPSjBUS2hUUG9lQXF0RG84?=
+ =?utf-8?B?RU9oVWVuNm1VS1JDeFNUUWkreGduaEwvTUFBUDdXL1o5ZmFIck1OOFp0c1M2?=
+ =?utf-8?B?Rlgwb3E5Ri8vR1lvWjRBTGIzOExoOGI3NnovSTJGVXMveXlGQnpvUGhjVzJZ?=
+ =?utf-8?B?aUxxM1pDRHd4ay9SL1RJTHhQNGpEajhKNncxVHZnMWJxRHRGZ0I5RkdQazha?=
+ =?utf-8?B?bzZiWmwxV0o1Z2ozUm9hR0ZPN2ppYVhsZVY2K1J4SDlOVWN6T25DM01jbnE5?=
+ =?utf-8?B?MUZnQlNEUUkyV1B2dVFaT2Y2aFJtZ3h3WFhDaHpyTHZLS3RUcVhsYXI4NHV0?=
+ =?utf-8?B?TmtKQmt4aDNuUnBaZVVZRURtSFhTc2JoQ3lFekZHL0MzRElqZDhxVERGdUJW?=
+ =?utf-8?B?WU5ISEFITUwxRGtyZDN2aG4za0JkbXJRY3N2TWdvaUhJRkVjRWVmMnE1VDUy?=
+ =?utf-8?B?QlRPaE5Kcnp0SXFxOWpiTXpSSzRTYnpEMzVSTUt1RStBWFFoTlFDUUUyaWM1?=
+ =?utf-8?B?bEVHdUhQRGp3SFJ6RlI4Rm9GM2NMMVc3UFozd2IzYVJjMVk0T0J2SEpka3dn?=
+ =?utf-8?Q?FufprYMcGwW+xvSg=3D?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2b961fdd-b070-4120-4593-08dec6f4e2ab
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 12:45:31.9088
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 13:33:41.1233
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7HI80ajRachY0b2IJ6shS5rbW45IiSinAaxVg1dXxub8GdHMleoYKkDb28RC2LfN8oZqwHsUDiEs5h/9dnWrDg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR03MB7558
-X-purgate-ID: tlsNG-ebf023/1781095534-291763FF-8D6A7073/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: Mfg3Jfc8hNFJi4sY0M7jyyE0Yv0QdOAvZl4Z3EGXxe7V+1+Ei7nSr48pO0c+XOTnMj4jU3k5haWn9Zxc/KsGxNIn2kipQZF6tf+0FddfGiY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR03MB5512
+X-purgate-ID: tlsNG-16d1c6/1781098425-8E38FD75-D0DB1151/0/0
 X-purgate-type: clean
-X-purgate-size: 14456
+X-purgate-size: 948
 
-From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+On 10/06/2026 12:38 pm, Andrew Cooper wrote:
+> On 10/06/2026 12:30 pm, Anthony PERARD wrote:
+>> On Tue, Jun 09, 2026 at 06:31:02PM +0100, Andrew Cooper wrote:
+>>> --- a/automation/build/archlinux/current.dockerfile
+>>> -    && yes | pacman -S --clean --clean
+>>> +++ b/automation/build/archlinux/current-x86_64.dockerfile
+>>> +    pacman -S --clean --clean
+>> The "yes |" is needed, otherwise the files aren't removed from the
+>> caches.
+>>
+>> I've only got, without:
+>>     :: Do you want to remove ALL files from cache? [y/N] :: Do you want to remove unused repositories? [Y/n]
+>> and no messages about the files been cleaned.
+>>
+>> I tried --noconfirm, but seems to just get the default response, so
+>> nothing is removed.
+> Lovely :(
+>
+>> With "yes|", I drop from 1.32 GB to 1.26 GB on my machine.
 
-Store and restore active context and micro-TLB registers.
+Gitlab says that the "yes |" alone shrunk the resulting container from
+427MB to 380MB, so a substantial saving.
 
-On resume, restore Root IPMMU context state before restoring Cache IPMMU
-micro-TLB state. Cache IPMMUs select Root contexts through their micro-TLB
-configuration, so restoring Cache micro-TLBs before the Root context
-registers are restored can expose stale or uninitialized context state.
-
-Tested on R-Car H3 Starter Kit.
-
-Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
----
-Changes in V10:
-- Iterate over registered IPMMUs in reverse order during resume so Root IPMMU
-  context state is restored before Cache IPMMU micro-TLB state.
-
-Changes in V9:
-- set dt_device_set_protected() only after ipmmu_alloc_ctx_suspend()
-  succeeds, so DT devices do not remain protected on allocation failure.
-
-Changes in V7:
-- moved suspend context allocation before pci stuff
----
- xen/drivers/passthrough/arm/ipmmu-vmsa.c | 323 +++++++++++++++++++++--
- 1 file changed, 308 insertions(+), 15 deletions(-)
-
-diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-index fa9ab9cb13..2e54fa63d6 100644
---- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-+++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-@@ -71,6 +71,8 @@
- })
- #endif
- 
-+#define dev_dbg(dev, fmt, ...)    \
-+    dev_print(dev, XENLOG_DEBUG, fmt, ## __VA_ARGS__)
- #define dev_info(dev, fmt, ...)    \
-     dev_print(dev, XENLOG_INFO, fmt, ## __VA_ARGS__)
- #define dev_warn(dev, fmt, ...)    \
-@@ -130,6 +132,24 @@ struct ipmmu_features {
-     unsigned int imuctr_ttsel_mask;
- };
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+
-+struct ipmmu_reg_ctx {
-+    unsigned int imttlbr0;
-+    unsigned int imttubr0;
-+    unsigned int imttbcr;
-+    unsigned int imctr;
-+};
-+
-+struct ipmmu_vmsa_backup {
-+    struct device *dev;
-+    unsigned int *utlbs_val;
-+    unsigned int *asids_val;
-+    struct list_head list;
-+};
-+
-+#endif
-+
- /* Root/Cache IPMMU device's information */
- struct ipmmu_vmsa_device {
-     struct device *dev;
-@@ -142,6 +162,9 @@ struct ipmmu_vmsa_device {
-     struct ipmmu_vmsa_domain *domains[IPMMU_CTX_MAX];
-     unsigned int utlb_refcount[IPMMU_UTLB_MAX];
-     const struct ipmmu_features *features;
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    struct ipmmu_reg_ctx *reg_backup[IPMMU_CTX_MAX];
-+#endif
- };
- 
- /*
-@@ -547,6 +570,249 @@ static void ipmmu_domain_free_context(struct ipmmu_vmsa_device *mmu,
-     spin_unlock_irqrestore(&mmu->lock, flags);
- }
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+
-+static DEFINE_SPINLOCK(ipmmu_devices_backup_lock);
-+static LIST_HEAD(ipmmu_devices_backup);
-+
-+static struct ipmmu_reg_ctx root_pgtable[IPMMU_CTX_MAX];
-+
-+static uint32_t ipmmu_imuasid_read(struct ipmmu_vmsa_device *mmu,
-+                                   unsigned int utlb)
-+{
-+    return ipmmu_read(mmu, ipmmu_utlb_reg(mmu, IMUASID(utlb)));
-+}
-+
-+static void ipmmu_utlbs_backup(struct ipmmu_vmsa_device *mmu)
-+{
-+    struct ipmmu_vmsa_backup *backup_data;
-+
-+    dev_dbg(mmu->dev, "Handle micro-TLBs backup\n");
-+
-+    spin_lock(&ipmmu_devices_backup_lock);
-+
-+    list_for_each_entry( backup_data, &ipmmu_devices_backup, list )
-+    {
-+        struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(backup_data->dev);
-+        unsigned int i;
-+
-+        if ( to_ipmmu(backup_data->dev) != mmu )
-+            continue;
-+
-+        for ( i = 0; i < fwspec->num_ids; i++ )
-+        {
-+            unsigned int utlb = fwspec->ids[i];
-+
-+            backup_data->asids_val[i] = ipmmu_imuasid_read(mmu, utlb);
-+            backup_data->utlbs_val[i] = ipmmu_imuctr_read(mmu, utlb);
-+        }
-+    }
-+
-+    spin_unlock(&ipmmu_devices_backup_lock);
-+}
-+
-+static void ipmmu_utlbs_restore(struct ipmmu_vmsa_device *mmu)
-+{
-+    struct ipmmu_vmsa_backup *backup_data;
-+
-+    dev_dbg(mmu->dev, "Handle micro-TLBs restore\n");
-+
-+    spin_lock(&ipmmu_devices_backup_lock);
-+
-+    list_for_each_entry( backup_data, &ipmmu_devices_backup, list )
-+    {
-+        struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(backup_data->dev);
-+        unsigned int i;
-+
-+        if ( to_ipmmu(backup_data->dev) != mmu )
-+            continue;
-+
-+        for ( i = 0; i < fwspec->num_ids; i++ )
-+        {
-+            unsigned int utlb = fwspec->ids[i];
-+
-+            ipmmu_imuasid_write(mmu, utlb, backup_data->asids_val[i]);
-+            ipmmu_imuctr_write(mmu, utlb, backup_data->utlbs_val[i]);
-+        }
-+    }
-+
-+    spin_unlock(&ipmmu_devices_backup_lock);
-+}
-+
-+static void ipmmu_domain_backup_context(struct ipmmu_vmsa_domain *domain)
-+{
-+    struct ipmmu_vmsa_device *mmu = domain->mmu->root;
-+    struct ipmmu_reg_ctx *regs = mmu->reg_backup[domain->context_id];
-+
-+    dev_dbg(mmu->dev, "Handle domain context %u backup\n", domain->context_id);
-+
-+    regs->imttlbr0 = ipmmu_ctx_read_root(domain, IMTTLBR0);
-+    regs->imttubr0 = ipmmu_ctx_read_root(domain, IMTTUBR0);
-+    regs->imttbcr  = ipmmu_ctx_read_root(domain, IMTTBCR);
-+    regs->imctr    = ipmmu_ctx_read_root(domain, IMCTR);
-+}
-+
-+static void ipmmu_domain_restore_context(struct ipmmu_vmsa_domain *domain)
-+{
-+    struct ipmmu_vmsa_device *mmu = domain->mmu->root;
-+    struct ipmmu_reg_ctx *regs = mmu->reg_backup[domain->context_id];
-+
-+    dev_dbg(mmu->dev, "Handle domain context %u restore\n", domain->context_id);
-+
-+    ipmmu_ctx_write_root(domain, IMTTLBR0, regs->imttlbr0);
-+    ipmmu_ctx_write_root(domain, IMTTUBR0, regs->imttubr0);
-+    ipmmu_ctx_write_root(domain, IMTTBCR,  regs->imttbcr);
-+    ipmmu_ctx_write_all(domain,  IMCTR,    regs->imctr | IMCTR_FLUSH);
-+}
-+
-+/*
-+ * Xen: Unlike Linux implementation, Xen uses a single driver instance
-+ * for handling all IPMMUs. There is no framework for ipmmu_suspend/resume
-+ * callbacks to be invoked for each IPMMU device. So, we need to iterate
-+ * through all registered IPMMUs performing required actions.
-+ *
-+ * Also take care of restoring special settings, such as translation
-+ * table format, etc.
-+ */
-+static int __must_check ipmmu_suspend(void)
-+{
-+    struct ipmmu_vmsa_device *mmu;
-+
-+    if ( !iommu_enabled )
-+        return 0;
-+
-+    printk(XENLOG_DEBUG "ipmmu: Suspending...\n");
-+
-+    spin_lock(&ipmmu_devices_lock);
-+
-+    list_for_each_entry( mmu, &ipmmu_devices, list )
-+    {
-+        if ( ipmmu_is_root(mmu) )
-+        {
-+            unsigned int i;
-+
-+            for ( i = 0; i < mmu->num_ctx; i++ )
-+            {
-+                if ( !mmu->domains[i] )
-+                    continue;
-+                ipmmu_domain_backup_context(mmu->domains[i]);
-+            }
-+        }
-+        else
-+            ipmmu_utlbs_backup(mmu);
-+    }
-+
-+    spin_unlock(&ipmmu_devices_lock);
-+
-+    return 0;
-+}
-+
-+static void ipmmu_resume(void)
-+{
-+    struct ipmmu_vmsa_device *mmu;
-+
-+    if ( !iommu_enabled )
-+        return;
-+
-+    printk(XENLOG_DEBUG "ipmmu: Resuming...\n");
-+
-+    spin_lock(&ipmmu_devices_lock);
-+
-+    /*
-+     * IPMMUs are registered with list_add(), with Root IPMMU probed first.
-+     * Walk backwards to restore Root contexts before Cache micro-TLBs.
-+     */
-+    list_for_each_entry_reverse( mmu, &ipmmu_devices, list )
-+    {
-+        uint32_t reg;
-+
-+        /* Do not use security group function */
-+        reg = IMSCTLR + mmu->features->control_offset_base;
-+        ipmmu_write(mmu, reg, ipmmu_read(mmu, reg) & ~IMSCTLR_USE_SECGRP);
-+
-+        if ( ipmmu_is_root(mmu) )
-+        {
-+            unsigned int i;
-+
-+            /* Use stage 2 translation table format */
-+            reg = IMSAUXCTLR + mmu->features->control_offset_base;
-+            ipmmu_write(mmu, reg, ipmmu_read(mmu, reg) | IMSAUXCTLR_S2PTE);
-+
-+            for ( i = 0; i < mmu->num_ctx; i++ )
-+            {
-+                if ( !mmu->domains[i] )
-+                    continue;
-+                ipmmu_domain_restore_context(mmu->domains[i]);
-+            }
-+        }
-+        else
-+            ipmmu_utlbs_restore(mmu);
-+    }
-+
-+    spin_unlock(&ipmmu_devices_lock);
-+}
-+
-+static int ipmmu_alloc_ctx_suspend(struct device *dev)
-+{
-+    struct ipmmu_vmsa_backup *backup_data;
-+    unsigned int *utlbs_val, *asids_val;
-+    struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(dev);
-+
-+    utlbs_val = xzalloc_array(unsigned int, fwspec->num_ids);
-+    if ( !utlbs_val )
-+        return -ENOMEM;
-+
-+    asids_val = xzalloc_array(unsigned int, fwspec->num_ids);
-+    if ( !asids_val )
-+    {
-+        xfree(utlbs_val);
-+        return -ENOMEM;
-+    }
-+
-+    backup_data = xzalloc(struct ipmmu_vmsa_backup);
-+    if ( !backup_data )
-+    {
-+        xfree(utlbs_val);
-+        xfree(asids_val);
-+        return -ENOMEM;
-+    }
-+
-+    backup_data->dev = dev;
-+    backup_data->utlbs_val = utlbs_val;
-+    backup_data->asids_val = asids_val;
-+
-+    spin_lock(&ipmmu_devices_backup_lock);
-+    list_add(&backup_data->list, &ipmmu_devices_backup);
-+    spin_unlock(&ipmmu_devices_backup_lock);
-+
-+    return 0;
-+}
-+
-+#ifdef CONFIG_HAS_PCI
-+static void ipmmu_free_ctx_suspend(struct device *dev)
-+{
-+    struct ipmmu_vmsa_backup *backup_data, *tmp;
-+
-+    spin_lock(&ipmmu_devices_backup_lock);
-+
-+    list_for_each_entry_safe( backup_data, tmp, &ipmmu_devices_backup, list )
-+    {
-+        if ( backup_data->dev == dev )
-+        {
-+            list_del(&backup_data->list);
-+            xfree(backup_data->utlbs_val);
-+            xfree(backup_data->asids_val);
-+            xfree(backup_data);
-+            break;
-+        }
-+    }
-+
-+    spin_unlock(&ipmmu_devices_backup_lock);
-+}
-+#endif /* CONFIG_HAS_PCI */
-+
-+#endif /* CONFIG_SYSTEM_SUSPEND */
-+
- static int ipmmu_domain_init_context(struct ipmmu_vmsa_domain *domain)
- {
-     uint64_t ttbr;
-@@ -559,6 +825,9 @@ static int ipmmu_domain_init_context(struct ipmmu_vmsa_domain *domain)
-         return ret;
- 
-     domain->context_id = ret;
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    domain->mmu->root->reg_backup[ret] = &root_pgtable[ret];
-+#endif
- 
-     /*
-      * TTBR0
-@@ -615,6 +884,9 @@ static void ipmmu_domain_destroy_context(struct ipmmu_vmsa_domain *domain)
-     ipmmu_ctx_write_root(domain, IMCTR, IMCTR_FLUSH);
-     ipmmu_tlb_sync(domain);
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    domain->mmu->root->reg_backup[domain->context_id] = NULL;
-+#endif
-     ipmmu_domain_free_context(domain->mmu->root, domain->context_id);
- }
- 
-@@ -1338,10 +1610,11 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
-     struct iommu_fwspec *fwspec;
- 
- #ifdef CONFIG_HAS_PCI
-+    int ret;
-+
-     if ( dev_is_pci(dev) )
-     {
-         struct pci_dev *pdev = dev_to_pci(dev);
--        int ret;
- 
-         if ( devfn != pdev->devfn )
-             return 0;
-@@ -1358,17 +1631,24 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
-     if ( !to_ipmmu(dev) )
-         return -ENODEV;
- 
--    if ( !dev_is_pci(dev) )
-+    if ( !dev_is_pci(dev) && dt_device_is_protected(dev_to_dt(dev)) )
-     {
--        if ( dt_device_is_protected(dev_to_dt(dev)) )
--        {
--            dev_err(dev, "Already added to IPMMU\n");
--            return -EEXIST;
--        }
-+        dev_err(dev, "Already added to IPMMU\n");
-+        return -EEXIST;
-+    }
- 
--        /* Let Xen know that the master device is protected by an IOMMU. */
--        dt_device_set_protected(dev_to_dt(dev));
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    if ( ipmmu_alloc_ctx_suspend(dev) )
-+    {
-+        dev_err(dev, "Failed to allocate context for suspend\n");
-+        return -ENOMEM;
-     }
-+#endif
-+
-+    /* Let Xen know that the master device is protected by an IOMMU. */
-+    if ( !dev_is_pci(dev) )
-+        dt_device_set_protected(dev_to_dt(dev));
-+
- #ifdef CONFIG_HAS_PCI
-     if ( dev_is_pci(dev) )
-     {
-@@ -1377,26 +1657,28 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
-         struct pci_host_bridge *bridge;
-         struct iommu_fwspec *fwspec_bridge;
-         unsigned int utlb_osid0 = 0;
--        int ret;
- 
-         bridge = pci_find_host_bridge(pdev->seg, pdev->bus);
-         if ( !bridge )
-         {
-             dev_err(dev, "Failed to find host bridge\n");
--            return -ENODEV;
-+            ret = -ENODEV;
-+            goto free_suspend_ctx;
-         }
- 
-         fwspec_bridge = dev_iommu_fwspec_get(dt_to_dev(bridge->dt_node));
-         if ( fwspec_bridge->num_ids < 1 )
-         {
-             dev_err(dev, "Failed to find host bridge uTLB\n");
--            return -ENXIO;
-+            ret = -ENXIO;
-+            goto free_suspend_ctx;
-         }
- 
-         if ( fwspec->num_ids < 1 )
-         {
-             dev_err(dev, "Failed to find uTLB");
--            return -ENXIO;
-+            ret = -ENXIO;
-+            goto free_suspend_ctx;
-         }
- 
-         rcar4_pcie_osid_regs_init(bridge);
-@@ -1405,7 +1687,7 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
-         if ( ret < 0 )
-         {
-             dev_err(dev, "No unused OSID regs\n");
--            return ret;
-+            goto free_suspend_ctx;
-         }
-         reg_id = ret;
- 
-@@ -1420,7 +1702,7 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
-         {
-             rcar4_pcie_osid_bdf_clear(bridge, reg_id);
-             rcar4_pcie_osid_reg_free(bridge, reg_id);
--            return ret;
-+            goto free_suspend_ctx;
-         }
-     }
- #endif
-@@ -1429,6 +1711,13 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
-              dev_name(fwspec->iommu_dev), fwspec->num_ids);
- 
-     return 0;
-+#ifdef CONFIG_HAS_PCI
-+ free_suspend_ctx:
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    ipmmu_free_ctx_suspend(dev);
-+#endif
-+    return ret;
-+#endif
- }
- 
- static int ipmmu_iommu_domain_init(struct domain *d)
-@@ -1490,6 +1779,10 @@ static const struct iommu_ops ipmmu_iommu_ops =
-     .unmap_page      = arm_iommu_unmap_page,
-     .dt_xlate        = ipmmu_dt_xlate,
-     .add_device      = ipmmu_add_device,
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    .suspend         = ipmmu_suspend,
-+    .resume          = ipmmu_resume,
-+#endif
- };
- 
- static __init int ipmmu_init(struct dt_device_node *node, const void *data)
--- 
-2.43.0
-
+~Andrew
 
