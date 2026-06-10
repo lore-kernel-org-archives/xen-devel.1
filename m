@@ -4,46 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88D63CD8CB2
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 05:45:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1333945.1597045 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FC9ECD8CB2
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 06:09:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1333957.1597061 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXBkY-0001Hp-T2; Wed, 10 Jun 2026 05:45:14 +0000
+	id 1wXC7s-00060e-5A; Wed, 10 Jun 2026 06:09:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1333945.1597045; Wed, 10 Jun 2026 05:45:14 +0000
+Received: by outflank-mailman (output) from mailman id 1333957.1597061; Wed, 10 Jun 2026 06:09:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXBkY-0001Hi-QI; Wed, 10 Jun 2026 05:45:14 +0000
-Received: by outflank-mailman (input) for mailman id 1333945;
- Wed, 10 Jun 2026 05:45:13 +0000
+	id 1wXC7s-0005zf-01; Wed, 10 Jun 2026 06:09:20 +0000
+Received: by outflank-mailman (input) for mailman id 1333957;
+ Wed, 10 Jun 2026 06:00:39 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Zhao.Jiaqing@amd.com>) id 1wXBkX-0001HT-O0
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 05:45:13 +0000
+ (envelope-from <hare@suse.com>) id 1wXBzT-0005Cs-Ia
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 06:00:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wXBkX-00FkEo-4V
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 07:45:13 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wXBzS-000ueM-Sy
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 08:00:38 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Zhao.Jiaqing@amd.com>)
- id 6a28f9c4-bab6-0a2a0a5309dd-0a2a4506de24-44
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 07:45:12 +0200
-Received: from [52.101.52.8]
- (helo=BL2PR02CU003.outbound.protection.outlook.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <Zhao.Jiaqing@amd.com>)
- id 6a28f9e7-7371-0a2a45060019-34653408db19-3
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 07:45:12 +0200
-Received: from DSWPR12MB999151.namprd12.prod.outlook.com (2603:10b6:8:36b::21)
- by SA1PR12MB6872.namprd12.prod.outlook.com (2603:10b6:806:24c::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.11; Wed, 10 Jun
- 2026 05:45:07 +0000
-Received: from DSWPR12MB999151.namprd12.prod.outlook.com
- ([fe80::1d57:8e0c:c16d:15e2]) by DSWPR12MB999151.namprd12.prod.outlook.com
- ([fe80::1d57:8e0c:c16d:15e2%6]) with mapi id 15.21.0092.007; Wed, 10 Jun 2026
- 05:45:07 +0000
+ (envelope-from <hare@suse.com>)
+ id 6a28fd85-5cb7-0a2a0a5109dd-0a2a450aa5f4-12
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 08:00:38 +0200
+Received: from [209.85.208.170] (helo=mail-lj1-f170.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <hare@suse.com>)
+ id 6a28fd86-56b3-0a2a450a0019-d155d0aaa435-3
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 08:00:38 +0200
+Received: by mail-lj1-f170.google.com with SMTP id
+ 38308e7fff4ca-39661f81eacso68364981fa.0
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2026 23:00:38 -0700 (PDT)
+Received: from ?IPV6:2001:a62:1439:d001:a0af:1164:c6fd:8c51?
+ ([2001:a62:1439:d001:a0af:1164:c6fd:8c51])
+ by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-396abd6cbe6sm59530741fa.0.2026.06.09.23.00.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 09 Jun 2026 23:00:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,137 +54,140 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=kUlzQjiyS6BtfycrHD1/XJw2IzDJA0ClUe1b6z00FLNVUWQO77bKOxPSCnxwDIOBZxDhyFal7ollmUvsYjO00BM8Hcv1zHYCTSnORYC4hZHoJltkxwI7nAZF06XbOtth8OQkU1NlqLUQ4xQngZX8yAPwD16wsTgPBtfAEU+XXsx3RGem5MgWvu3u9pnBSOFR2yUwXN0bZWFjjJwiXE+CQv43yHBXDu0Q5KrYTOq0LMH5Tf+9TCNsWbyXdry+DC+CpIHClyOkg2oNYQs9WBYHyQ5NFFiE+lHONFvC9FAzeBDRGVaLxjVqjxJZ1pasbxjnxNH0XstLnZYPJJklZOb+2Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/88MLSk8k51BOoLeV7E3T7rLWEmS6HwaqlDk2upVJEM=;
- b=u62FhFkoLarrUrSfZ82bGsLvTSxStjCsFjjTdUryUTzw4V1y+AzQYN/D+5KTsuMAXVfZaPnk8XNO12ZVek/Jbi74dQZzFmnb+CDJ+Ulv+iGyOrleqBZy/Xq9xxgBn9iuYNS0+TxLMrd+LjOQYvZLfWp6KQZVbIy9jTLavz9hhalxj7T8z8g0jIja0bo2vS2F14JKblDtHFLRj5Pd1R+IvdAoRaI/Sh0FinDcvlho4hjW5bzK1crcLnpx7xCJ3AB1IhiipSJ7R8WpCh//CveFcJGIZb7H+1gO1yQKI8XosB9t6cPYcdlJNNXZIDzujgNgkq+Ra491U9i1cgH9r7Q8ag==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/88MLSk8k51BOoLeV7E3T7rLWEmS6HwaqlDk2upVJEM=;
- b=OoQ/KkcKZCedoPudRaEzw4HpHn0hZv8zDnJJySjkJGk9nhppd9kx9JgpatXM03FhkNMhKV+cAXb2/j63ee3er5Bti9exOwC/ZmTJu5MK1HeNy2wg++ZUHr7jMkbpdo6ntRzNpiJrMEIhJLrHTHAneRZ50o6eLrlF107g4/ISE1I=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Message-ID: <8fb0441d-a75e-4457-812b-7f8c61dc4e97@amd.com>
-Date: Wed, 10 Jun 2026 13:44:59 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 0/2] ns16550: add support for WCH CH382 and ASIX
- AX99100
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>, Julien Grall <julien@xen.org>,
- Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
- xen-devel@lists.xenproject.org
-References: <20260602053421.773149-1-Zhao.Jiaqing@amd.com>
- <ced10c25-2970-4ba3-96fd-3bc5df4c4797@suse.com>
-Content-Language: en-US
-From: Jiaqing Zhao <Zhao.Jiaqing@amd.com>
-In-Reply-To: <ced10c25-2970-4ba3-96fd-3bc5df4c4797@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: TPYP295CA0020.TWNP295.PROD.OUTLOOK.COM
- (2603:1096:7d0:a::10) To DSWPR12MB999151.namprd12.prod.outlook.com
- (2603:10b6:8:36b::21)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1781071238; x=1781676038; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=gj0YYK+8W8BmuuGLUjKiEFrVEApz47d5/8fZSNVUxGs=;
+        b=V64w48G4Four1YxLdefZcBC9ep8pnNcHhB+7DejBF1QBV4hbkYAummz+1qAqD5C5aE
+         kRxABoDcyYCzkafScNyfnI/+wWhc1x54NEqUIEeTcaJCl9BGDMBufZqdOOVO4GifMfYT
+         2CDhspYEkSywZD4RP6I6TzY4b/bcs3JpCqdAK7CRqCC+HV2BRpiOQSECJ9FI/nUD3GBU
+         Xz32oOPrHhYme5eVQR9u+8CR/Gnh9cciEv3REAAv7cbySXBt5FJNSBiHb8qBkykeYg3X
+         gNbCX9Oif/vX8w+sSNzwav/U8IJ1RiRPOrRVU6M2vTsgNuAX9SLU9ELLYO7Kw4r0yTys
+         xCVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1781071238; x=1781676038;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=gj0YYK+8W8BmuuGLUjKiEFrVEApz47d5/8fZSNVUxGs=;
+        b=JEEUvMV3CZ+QrVRwo+726alA9SSi6CQKMrenid+NguFUBpMkW0A25eKIYLnuf/gX4n
+         GVU60oB089uvVc9P0UBf4rzKnaeWRgGj5+hB/SEBXzCFZXZmEhDeawYmFU/stkZUaGp3
+         wKtOuTTnzPIeCaLyazECF/iVoFmzREasSXL3th1WTcLeNrxbvOCbeLV+tHKWnNUfJUpL
+         nXxNIdnUapBez5R8zvOKEhE0KPFsye2IdXNM2v9WQFDP5eF8ljKXmy7d0RmueMhx9B/X
+         7g4gE7MdlYEEuqilKcTMXbPB9ribHutBzvRCI+7GK/Fl8mx7zo1vPgpRcKGNQObzp9KJ
+         suhg==
+X-Forwarded-Encrypted: i=1; AFNElJ/vKn0OtzqOsInlLqbp9Sb45qErDM/J7Hi5ipQ1WzZHx4OYlr3VU6OxmVCDHlwpAmxg3iozBYcN8VI=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzVg4M+BKoiit2ykoq4MxNPdQMI7P79DoUYU9LR9LypdTDJSGPc
+	udnwWuMZdzmQNxEcmjRBCMzsdUFLT6hmUk6PBUBeIsSFUDnyf0vBpW2stRioRj/EaXY=
+X-Gm-Gg: Acq92OHPwzFTKGWSsARKYuDYf015KmVOEF98WAknOTqLPVtL2Ty5dTmhrosnNxyyX2j
+	UGBfSJKoEgM46sHbZJH+y74kO5Jsemdb8SHurKw84peSUudOokjoDZ0p77l58CtQBGF/oF0ZB2R
+	B2wNQbyTSOEuMvCM+MQMj7GIV8SAUw72VMVDoEDK2KY0BEBLNDqJPfu0dk4snT/pQzFj24E9am6
+	mZvuPOq/KpmV/lPWYmB0S2OnA2dY0FD7C3rzPZ2WiQVvLcV50JpS6ZBzqjd/xwQTAEy7wmj0cac
+	9aLifrIJfJTUP91fIXP56BquA4wX1NE/JeaLdyN8HwQpO7QGexkylBmCGXWHwUYEzKoEyArEs+/
+	AFys3miHCjQHueMCoJvelL5b19tdXP0VMKLmHc6l3bdjf6ZSOl6fPahlBJIrvfbK3u0W85EDT/Q
+	/I2yNHPABMxvneLTtgSnj5cjKr3NBItahv+qUef8IrXe0/XQY+lDUZZp+mIE88Y0uWnC/mzro=
+X-Received: by 2002:a2e:b8cd:0:b0:396:a647:76f5 with SMTP id 38308e7fff4ca-396d285f55dmr58137321fa.5.1781071237888;
+        Tue, 09 Jun 2026 23:00:37 -0700 (PDT)
+Message-ID: <21746ee7-cff3-4db8-959d-dd693389492d@suse.com>
+Date: Wed, 10 Jun 2026 08:00:30 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DSWPR12MB999151:EE_|SA1PR12MB6872:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7a9160c4-f0f7-4ea3-8cde-08dec6b36d52
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|23010399003|376014|1800799024|11063799006|4143699003|56012099006|6133799003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	FVnrp7ehmI9rwNyrZ5k/FCzuZJ5sXiA9Hgui5r6m5PSop0162xhZKOdn0XLnpIkyJUR8Xl+Oo+Jl0reus9oVQwiR5Qq4d1at3sG8DcouBkcFTLqH4FmcwqxvVEx8W9sW894dgkSLJcj/LVJQoL5cxezOCBXJ5Q2l9MHvALpAUp3CUjqimi+Lgi9o7c69iP40quHIPH0OIj9DgZgSAFEsFat6HVVirKYQffeJggxcQae8lcfwpoFbkLHYZDO5PsawoChil7zZJbEgSxkDKCPQm9mQYOaQE62T9A5XUKp+FFOQQr3hxvZ0PEr3rnekKSI44CS6qdHLOE1UNUIOj+ueNRumXeDwp9A5dq1rjnCcA99gqRLXXEP2pAif5Kb2mQBTSH+/CUppiCI/VyJPDegU5XAWtzo0eDNGc56trmNdRs4erVMBEEJmxvYPQU/avWVlkXYWaNT7Jitd9YfQzlsV/RSg+aBMPA5S3zfrzoD6kQdde/KizsTDWNEMv0UbQNzSudRUmaI+aAieS3ASvy+bv53kxtv5znh9AYl86M6BKOx9dmBSp84ZR/6wDjws9o65Lns8EmvMabowF4p0/+CL9nr3IklCK89sSDm7QJCdbJlg6cnJRX5d8OHlY5y+xkXfQfPdbAJbuHkWSEuTVqrDPVvE/FDuz6SIVMviAazfuEB9jPYqm61MU6Nu5M2SE2xg
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DSWPR12MB999151.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(11063799006)(4143699003)(56012099006)(6133799003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?YmxudW52U2dhd3l3N1BFV2tQNWVBUzMxNGhPejFwdUFnTGFrTmZEMDdkUWNZ?=
- =?utf-8?B?ZGh6S1FJTmVBQ2JDcTl4dm50a3V3UHUvWjllNVl4WDBMZ0FRYmZVc1k3eXhN?=
- =?utf-8?B?UlFQWnNTM1lieUNtUzNRZStranFGcFp1TnJHUUNCS1l1Qi9HSGxLcDJzUkYy?=
- =?utf-8?B?ajc2MVYrYkhvQ3RuWG9kUWx5dG9RTEo0d2FtYjlOSEJVeTYzM1B3VC8zQzVp?=
- =?utf-8?B?c25PQ1YyNmdUWDEyZk41bTY5UTdwS00zZnNJT0xxbHpvZDkxYTdmeGpqbVRZ?=
- =?utf-8?B?VFQzTDdabWd4L2JuSW9aSDlIazN6ZW1NcEVMdTdkWGwrRnBFQmkwNEVKNjA4?=
- =?utf-8?B?aW02MldYa0l4RmJmTktmWFdPZ0F3UEh4Vng2ZThOWDR5dFE2NDBJOElNQmdz?=
- =?utf-8?B?ZmZQNmJ4OFB4bXMzUEdwUFVEUEVjdUFkdVltOWRxZGFPZFRDdk45M3VqbG80?=
- =?utf-8?B?dmJmRk9PSW9FUGlCWWJ4b1hnRlVNdm5lcDVwZ1pLVHc4emtQYURHYzdlSndD?=
- =?utf-8?B?eW1tVVkxKyt3UG5LcWtJL3pwZUx5V3praklZMWtRK1ZRUXFnMys2ZEJ6ZXAv?=
- =?utf-8?B?RWx6MjZuUW5VZm9lL1lJb2RKSTBZazVGUXBhazNmRTBtWGdOZTFGQnYwcm80?=
- =?utf-8?B?YmZJZkJkOGRMSFFKcDRQZEdtalkvTmxHTmlURXFYNEpOUXp0cHhCa2VmbkRS?=
- =?utf-8?B?WVE5b3huN3hFRFRiZ2sxZXg2WE1Sb01DUittN0ZIVW5aNTJKRTkyZWpjemJi?=
- =?utf-8?B?M3d3MkIvVHd0K1JwV1VRMENmNzZPUTFSSmhYK2IyaEdoSVl5Nm5PV3F2b1hT?=
- =?utf-8?B?a2tkRmdlZmlQSCswK0UvVWpGQ1gzMTNRL0tCakNIMDZ1OEl5aUhscG5tYUZo?=
- =?utf-8?B?R2ZFMkxOYlFKeWNPdWZhd2Z2cTZhOE9hQXhDbW02aVZSdHh3Sk9QVGc0UmRv?=
- =?utf-8?B?YkpyTENxZGdLZWRpelAyWXNZaS9pQ0JGcGVRTExmWVZ6YkhCdVRuU2poZFFZ?=
- =?utf-8?B?c0RBc0QyeXVJZS9JTmxzOE42b0pmU0lLZVI1RlEwOWxyOGR5d2pmVEg3ZXZt?=
- =?utf-8?B?djFMak1iTDRMRW1US1EveWhYRGNBaXc4MWs0T2VlOCtnM2ZCOGgrMUw5WS9n?=
- =?utf-8?B?VDF3MlhOTlZSUlhmbXFQZEJ0NEt6OEgrZWlvOEVaMnd4Vm12ZURIQUltT1ox?=
- =?utf-8?B?SW1MNUNjNVVTcVpoSFRhN1d2RStYT0toMWdZSUxjb3hqWnFrejRoSzk2Z0k5?=
- =?utf-8?B?ZkM5YjV4N0dEUE95c1pNWk9VaUlwTTlyOE1qZllKTmZQNUZwa3VOSUh6Ukth?=
- =?utf-8?B?bU51cWZhU3U2U0dwLzBYOWM0U3g2VnJGYms5N2NPdHRaNHRSaVA1Sk4rQXRi?=
- =?utf-8?B?cnAzUk1MY0ZDOC85bTdVK3ZtQ1RMZUN1ajVBaXlra2dmNmNUeFFBQUhlSTY3?=
- =?utf-8?B?K3Q3MVg3T2xQUFQ4a25xQUJXT1ExdTA3M2pDUk9oTkh6clVFeDhWNTEzelov?=
- =?utf-8?B?N3ZQTU8vTlkzOVdSa1dwS1UycGxVb3ZlSnl6T0d5UjliQXNYWk9yQTdpQTFQ?=
- =?utf-8?B?dlBSUUIvT2hVbkpNQkpCb09nWG1SWmFRYWwvMVgycGZqU0ZVN3UzMktvVlN3?=
- =?utf-8?B?dnRhS0lLNm5BMVBpZDdmMWtKaVNadmxFZXh1UWg4NE14WnVQR1RZR3JxcW50?=
- =?utf-8?B?cjBObE4rNWZXVmpYNXRoRUo5TFVqWXdyOTk4a3owWTZTTVU4a3dhYVVWZkJ2?=
- =?utf-8?B?T0xHaDA1anNrOGJCanhmQmN1UzJaMjc0T0tuOUhwSE12ZTFCa2ZqbUcyNFJM?=
- =?utf-8?B?MHFIeEFZNks5Qzh4dHlsNkU1ZDdDNUZkT3c3VEpJTkliNTJyQ0ZYVXZOVDRR?=
- =?utf-8?B?bllOWlNUeGpSVDJiSm5jd1liTGFBL014aEsvTkExYTJqd1RTS3BqMWpqRE40?=
- =?utf-8?B?QWVHZG9zNEdIVHE2NlNwZ0pST3hmRVlhV1EvT3R4ZG1QTWtrNHNEZCtOQ2lS?=
- =?utf-8?B?ZnQxTUFwdHloQjJWUWJPVERkZnJTb1VPVjVuSHNybnZrcUpJK3c2d2x3Q0Rz?=
- =?utf-8?B?cG11WUtJZVczZ3lxYnBIay9yeWhjbkpiN2dlRjhtdTViQlh1Yi9OcGhsYmxs?=
- =?utf-8?B?bTlmTGpTUEhuQ3pWUFJjNFZhR1F6b1J5RW1UbzlpejNsNVZjTVcvMCtzZHVt?=
- =?utf-8?B?N21WS3BRZWxXTEFQam9ZdVYzRzQ2TmVtWVVWRmdiZExxVjgrN3FoNWVUcEFB?=
- =?utf-8?B?ODJNbEY0bUU5S3hWR1k0NWJ1QjhmZ2FIN1VUZWIwZTIvdDVyY2ttSWlMSkh5?=
- =?utf-8?B?Nm04UGFqNFVsVk1qWlJHbk10anczQ25DK0s4U2o3WGI0Q0lIcEJtdz09?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7a9160c4-f0f7-4ea3-8cde-08dec6b36d52
-X-MS-Exchange-CrossTenant-AuthSource: DSWPR12MB999151.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 05:45:07.1457
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: x/QQaC5D+oRXdnAEEUUu6Q/wBLLet7bzUWhaFcAMsH1cD4t2dKc+EprijcAUpnX6Y3ub0zw/lr3eJT6k2P5cwA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6872
-X-purgate-ID: tlsNG-16d1c6/1781070312-8556ED75-5D2E8F4F/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/4] scsi: scan: allocate sdev and starget on the NUMA
+ node of the host adapter
+To: Sumit Saxena <sumit.saxena@broadcom.com>,
+ "Martin K . Petersen" <martin.petersen@oracle.com>,
+ Jens Axboe <axboe@kernel.dk>
+Cc: "James E . J . Bottomley" <James.Bottomley@HansenPartnership.com>,
+ linux-scsi@vger.kernel.org, linux-block@vger.kernel.org,
+ Adam Radford <aradford@gmail.com>, Khalid Aziz <khalid@gonehiking.org>,
+ Adaptec OEM Raid Solutions <aacraid@microsemi.com>,
+ Matthew Wilcox <willy@infradead.org>, "Juergen E . Fischer"
+ <fischer@norbit.de>, Russell King <linux@armlinux.org.uk>,
+ linux-arm-kernel@lists.infradead.org, Finn Thain <fthain@linux-m68k.org>,
+ Michael Schmitz <schmitzmic@gmail.com>,
+ Anil Gurumurthy <anil.gurumurthy@qlogic.com>,
+ Sudarsana Kalluru <sudarsana.kalluru@qlogic.com>,
+ Oliver Neukum <oliver@neukum.org>, Ali Akcaagac <aliakc@web.de>,
+ Jamie Lenehan <lenehan@twibble.org>, Ram Vegesna <ram.vegesna@broadcom.com>,
+ target-devel@vger.kernel.org, Bradley Grove <linuxdrivers@attotech.com>,
+ Satish Kharat <satishkh@cisco.com>, Sesidhar Baddela <sebaddel@cisco.com>,
+ Karan Tilak Kumar <kartilak@cisco.com>, Yihang Li
+ <liyihang9@h-partners.com>, Don Brace <don.brace@microchip.com>,
+ storagedev@microchip.com, HighPoint Linux Team <linux@highpoint-tech.com>,
+ Tyrel Datwyler <tyreld@linux.ibm.com>,
+ Madhavan Srinivasan <maddy@linux.ibm.com>,
+ Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>,
+ Christophe Leroy <chleroy@kernel.org>, linuxppc-dev@lists.ozlabs.org,
+ Brian King <brking@us.ibm.com>, Lee Duncan <lduncan@suse.com>,
+ Chris Leech <cleech@redhat.com>, Mike Christie
+ <michael.christie@oracle.com>, open-iscsi@googlegroups.com,
+ Justin Tee <justin.tee@broadcom.com>, Paul Ely <paul.ely@broadcom.com>,
+ Kashyap Desai <kashyap.desai@broadcom.com>,
+ Shivasharan S <shivasharan.srikanteshwara@broadcom.com>,
+ Chandrakanth Patil <chandrakanth.patil@broadcom.com>,
+ megaraidlinux.pdl@broadcom.com,
+ Sathya Prakash Veerichetty <sathya.prakash@broadcom.com>,
+ Sreekanth Reddy <sreekanth.reddy@broadcom.com>,
+ mpi3mr-linuxdrv.pdl@broadcom.com,
+ Suganath Prabu Subramani <suganath-prabu.subramani@broadcom.com>,
+ Ranjan Kumar <ranjan.kumar@broadcom.com>, MPT-FusionLinux.pdl@broadcom.com,
+ Daniel Palmer <daniel@thingy.jp>, GOTO Masanori <gotom@debian.or.jp>,
+ YOKOTA Hiroshi <yokota@netlab.is.tsukuba.ac.jp>,
+ Jack Wang <jinpu.wang@cloud.ionos.com>, Geoff Levand <geoff@infradead.org>,
+ Michael Reed <mdr@sgi.com>, Nilesh Javali <njavali@marvell.com>,
+ GR-QLogic-Storage-Upstream@marvell.com, Narsimhulu Musini
+ <nmusini@cisco.com>, "K . Y . Srinivasan" <kys@microsoft.com>,
+ Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
+ Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>,
+ linux-hyperv@vger.kernel.org, "Michael S . Tsirkin" <mst@redhat.com>,
+ Jason Wang <jasowang@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>, Eugenio Perez <eperezma@redhat.com>,
+ virtualization@lists.linux.dev, Vishal Bhakta <vishal.bhakta@broadcom.com>,
+ bcm-kernel-feedback-list@broadcom.com, Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ xen-devel@lists.xenproject.org, James Rizzo <james.rizzo@broadcom.com>
+References: <20260609121806.2121755-1-sumit.saxena@broadcom.com>
+ <20260609121806.2121755-2-sumit.saxena@broadcom.com>
+Content-Language: en-US
+From: Hannes Reinecke <hare@suse.com>
+In-Reply-To: <20260609121806.2121755-2-sumit.saxena@broadcom.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-4011c0/1781071238-7E58E8B7-1921E2A1/0/0
 X-purgate-type: clean
-X-purgate-size: 1056
+X-purgate-size: 1122
 
-Sorry I missed this mail. Please ignore my latest v6...
+On 6/9/26 14:18, Sumit Saxena wrote:
+> From: James Rizzo <james.rizzo@broadcom.com>
+> 
+> When a host adapter is attached to a specific NUMA node, allocating
+> scsi_device and scsi_target via kzalloc() may place them on a remote
+> node.  All hot-path I/O accesses to these structures then cross the NUMA
+> interconnect, adding latency and consuming inter-node bandwidth.
+> 
+> Use kzalloc_node() with dev_to_node(shost->dma_dev) so allocations land
+> on the same node as the HBA, reducing cross-node traffic and improving
+> I/O performance on NUMA systems.
+> 
+> Signed-off-by: James Rizzo <james.rizzo@broadcom.com>
+> Signed-off-by: Sumit Saxena <sumit.saxena@broadcom.com>
+> ---
+>   drivers/scsi/scsi_scan.c | 7 ++++---
+>   1 file changed, 4 insertions(+), 3 deletions(-)
+> 
+Reviewed-by: Hannes Reinecke <hare@kernel.org>
 
-On 2026-06-02 18:15, Jan Beulich wrote:
-> [You don't often get email from jbeulich@suse.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
-> 
-> On 02.06.2026 07:34, Jiaqing Zhao wrote:
->> This series adds ns16550 support for two PCIe serial adapters found on
->> market:
->>
->>  - WCH (Nanjing Qinheng Microelectronics) CH382, available as
->>    CH382 2S [1c00:3253] and CH382 2S1P [1c00:3250].
->>  - ASIX AX99100 PCIe to Multi-I/O Controller [125b:9910].
->>
->> Both chips expose 16550-compatible UARTs through PCI I/O BAR0 and
->> work with the existing ns16550 driver once a matching device table
->> entry and parameter set are added.
->>
->> v4:
->>  - Add Reviewed-by from Stefano.
-> 
-> There's no need to re-submit just for this. Mail volume is already high
-> enough. The fact that this wasn't merged yet doesn't indicate any need
-> to re-submit: This series simply needs to wait until the tree re-opens
-> for the 4.23 dev cycle.
-> 
-> Jan
+Cheers,
 
+Hannes
+-- 
+Dr. Hannes Reinecke                  Kernel Storage Architect
+hare@suse.com                               +49 911 74053 688
+SUSE Software Solutions GmbH, Frankenstr. 146, 90461 Nürnberg
+HRB 36809 (AG Nürnberg), GF: I. Totev, A. McDonald, W. Knoblich
 
