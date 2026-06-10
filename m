@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33178CD8CB9
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 11:48:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1334168.1597289 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61D26CD8CB2
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 11:49:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1334186.1597297 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXHQP-0006KV-EK; Wed, 10 Jun 2026 11:48:49 +0000
+	id 1wXHQv-0006v2-KQ; Wed, 10 Jun 2026 11:49:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1334168.1597289; Wed, 10 Jun 2026 11:48:49 +0000
+Received: by outflank-mailman (output) from mailman id 1334186.1597297; Wed, 10 Jun 2026 11:49:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXHQP-0006KN-BA; Wed, 10 Jun 2026 11:48:49 +0000
-Received: by outflank-mailman (input) for mailman id 1334168;
- Wed, 10 Jun 2026 11:41:43 +0000
+	id 1wXHQv-0006uv-Hr; Wed, 10 Jun 2026 11:49:21 +0000
+Received: by outflank-mailman (input) for mailman id 1334186;
+ Wed, 10 Jun 2026 11:49:19 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <michael.bommarito@gmail.com>) id 1wXHJX-00051J-0h
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 11:41:43 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wXHQt-0006uP-UC
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 11:49:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wXHJW-0092Ij-6Y
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 13:41:42 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wXHQt-0093kH-Au
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 13:49:19 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <michael.bommarito@gmail.com>)
- id 6a294d76-bab6-0a2a0a5309dd-0a2a4506bc24-0
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 13:41:42 +0200
-Received: from [209.85.219.52] (helo=mail-qv1-f52.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <michael.bommarito@gmail.com>)
- id 6a294d75-7371-0a2a45060019-d155db34b915-3
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 13:41:42 +0200
-Received: by mail-qv1-f52.google.com with SMTP id
- 6a1803df08f44-8cceaacd07bso69386396d6.3
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 04:41:41 -0700 (PDT)
-Received: from server0 (c-68-48-65-54.hsd1.mi.comcast.net. [68.48.65.54])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8cecd26b9d5sm253263426d6.44.2026.06.10.04.41.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jun 2026 04:41:39 -0700 (PDT)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a294f30-2eae-0a2a0a5409dd-0a2a4507e082-24
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 13:49:19 +0200
+Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a294f3f-229c-0a2a45070019-d155dd36cd79-3
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 13:49:19 +0200
+Received: by mail-wr1-f54.google.com with SMTP id
+ ffacd0b85a97d-45eee266c6cso5372645f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 04:49:19 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-148-111.play-internet.pl.
+ [109.243.148.111]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4601f351d69sm126391619f8f.29.2026.06.10.04.49.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 10 Jun 2026 04:49:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,111 +52,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781091701; x=1781696501; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ZpBQlFHxPmh6RO32iI4WOJ4ByDFhk3PQ/XSlBDQpR+c=;
-        b=AlRDxUKOdIq2ryKXm+6YekSU+vwjjPP1yKzdb2GxlS2llJHG+e9fSLHlurU2XccRqP
-         fS54m2Ifbpemnd/oMFKjm4FPFg3H+Wa+ye135QoCexjeZR/qagyVdW9iemzr09rINRtE
-         rJw8JcqKEzAXzslrWgRBsUb5dohz0aq6xSmzcTO7SEM0MiYmBdvwkSb2nQBpnbIZYxmH
-         4n8rZZ8BMaJAR7C6lufjlBqCFRUFN+oSlxX5jzHgh4OksJzhZEzKYd4tPEwWOHlUWu0n
-         dO0YkOHXVE6aPjWUGjRTkmRujz7Pibq8p88pxA5pLuLdavAZD14kPCtIf5oAughTgTW8
-         mecg==
+        d=gmail.com; s=20251104; t=1781092159; x=1781696959; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=wwUZ6bchHsQ0LqLygRKM4OkGUP74HWilAolQZmegxiI=;
+        b=eV6dBa8a6Gvw5xHvwe/PWNqEtcGTplTNyUjMEBgMXiHCkC4oa0PmYzclLIXrGktUc+
+         O0wepeIc35I0U6qkCzjeps5bRRAWH64CqiuPwoxh+r90jq9uTI4hPLHv4LsVmUkRgp/b
+         pWInm0oD2GlzRgdpZxfEZaP1oV/smJw14AXzvzTvcQ6ANxNRowt8kADfLsCHL79sAk8P
+         DejDJXorCRlrJCT9w3O7SBmX4kXOS3i/QRVPTp36s7m+j645d43g85aWrbo8fEIh9rsT
+         J4O200yWDGN2s/wA5P92J/kE+y6qBDv4wNMmZpaKli4YKouwCgvUNHfsYXtADx4bLimH
+         yUzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781091701; x=1781696501;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ZpBQlFHxPmh6RO32iI4WOJ4ByDFhk3PQ/XSlBDQpR+c=;
-        b=G5mkbxbyMFJPcsszyzvFraLqMFpPi7qj45yUABYsAiNPy5LhEKwazSxYrlg4LbrFA9
-         rNKGiHQPmBjFMtO6QR6sctWeNI7zDddFs2/AoO6XS8NKNTyVy0yM6I+WfAGyFXRH/iO7
-         G/5JJq307AOmreE544VWJXRzdzOC+CWlSDD8U93o7QcbDokLM4u/5TzM2RhO5SA9jL7X
-         9WhnJbGRGNAPe0CtnoSENrPJ426EKv5/o28X0BVx+AnEYDtIzuZE2bTvvepleO6uR/fo
-         VNTIgpn8s3D9Dz2jemmENzJhQbhjHIBvAgzJGBh9oQmTGEp/u6aBag50FT8ILyCg0lYT
-         xb9g==
-X-Gm-Message-State: AOJu0YyMn/16tBDeIqFaqM76/6LDgSeM0Vyye+IiQ6ttQeKGH68G79oh
-	etTK/HpMWuqEEYDSOKORjm2Zw7z0farxs2jT+NoWFMg91NVKW24pCSiO
-X-Gm-Gg: Acq92OE+aHEo4RRL3JaypnqHDK5vpiEuhi0cUnPGbozpury80wLf69rJuWKOIdzTOZa
-	79Z3szi4jbQFzdWiQWqM0M9MLrX+M4teiMOZkv2s6ZzCD6nPoMbk3nw8WUFwXYqvmHTPOaOPTaK
-	dE4bC66LD+ND2iZv3fSDlNSWRe6QIL0X9TbJT8NWX7bUMD5rAvZ+DB/SDnu6Bc0XnMs5hvrGNoX
-	ol9/GrpO4Yh78QcTOtO7V174R5a4szFW55Qc9UQT86T41bmwKBWla3wl/dIM8d3qIGGB1mTyNdw
-	LGLH117c17gs1+cSzRsWJ2vq7rI7u89e4p3SQn+hbFgLkpNE59Amqlg5BiDvz5DgSTN/jadeQsH
-	m+rP75UnnYGTSamW1nPt0d+zWmrpIwBZJaHW2mDPFj4l4Pz0PBj3ZH1ml4BL+tWD3BO7pbKW4Mj
-	QY+ozbMxxyoQWQ52KLlq0+a8qaunCUP4liK1/Jz0XWwgp6DJZEJI62zlrP5h069gXieEt79oezy
-	7coywIssgi/MX/HOrgIh967cZd3SWg=
-X-Received: by 2002:ad4:4447:0:b0:8cc:ea2c:f2b5 with SMTP id 6a1803df08f44-8cee61359bemr283431546d6.23.1781091700398;
-        Wed, 10 Jun 2026 04:41:40 -0700 (PDT)
-From: Michael Bommarito <michael.bommarito@gmail.com>
-To: Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Cc: xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] xen/pvcalls: bound backend response req_id before indexing rsp[]
-Date: Wed, 10 Jun 2026 07:41:37 -0400
-Message-ID: <20260610114137.3749027-1-michael.bommarito@gmail.com>
-X-Mailer: git-send-email 2.53.0
+        d=1e100.net; s=20251104; t=1781092159; x=1781696959;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=wwUZ6bchHsQ0LqLygRKM4OkGUP74HWilAolQZmegxiI=;
+        b=igJ98T5oXG4eg4wC9qQM5bHPMT5rVPqTM2JqzmX7fI9Kbe6i6ArNXKI2hDbaa6s8wg
+         zqiNrzeKBedc5ZJda9PQ2SJiLCNkMZOZrX1FRHyC6rOtHud3e9orkL7h7OxeoCA2o21t
+         rUhxXJ7ZguajLZ8zr9UyXqyLHxX+b6W+cL3mWmGt+9RJqiPVC7XC9+LH62RrgdyS5VC5
+         zNdiqh4I/wyTJKpZlkwBHE/Ir7ug+XLymbFeuv6yy2Q5khsXZATd3l7fWv2vR3zwiwSV
+         +HNHiFmz6WB+TUbPjDiI9TSF7OtUxppuhNS6bE3SU4BHxvtcGK3HIkMksARXCqXyx99p
+         8s0g==
+X-Forwarded-Encrypted: i=1; AFNElJ96Y1KjiMLdhcJ1/MHNeZzfjLlP2EX6B/ibuib2j7qzgSAwpo4RU+qoRZARUi8Y4DUg6xQEsQ8vmac=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyDgOO0Y0WuLU5EuIp2nHkNY8eDlStrPkTFZ/B4Dywha338lWJO
+	mhntYnri6GDt0gL0tNief98E8C5sGbllyP3NUy5EdbAD89PckU0DmJ6BwIrbyw==
+X-Gm-Gg: Acq92OEhYUb5ZljAudI0X4FsR1q0iMQCoW4MhMqGMWs9MGazPKRkeZ0jIMChFlxJ5rU
+	G4oC2v8OhjRgt2ZYXbjCdvL9TTyCWIqxZzk5Kw/XUU+QGZuF7P/v6+XQliKwIDzfcEXOZy9s4bd
+	PPP0XbQn7fhOgi6m+NMGifwI+SQnmzn8bfSfNMl7IUTR+o5fcQFo1s3/AaromTNW8Y5EJPUwK6h
+	EAb3JcrBdU9k2S8vn/dB1oGI70k1LOlFytRUT95HUsbyOapRgs5Ed7i2yD+sY1zL/BuxrgcQ08a
+	LINGOfrVdemhrNFsjWiH9AE5cQg8mgnRqdbKNk6gR2loIHuGZrEKAHJMC3euyQF6quKtvBXuI1f
+	8oY8EoJ7yTQ1tTK99yYRnuWFKo+9hWph8nObMfD3/Atz2EWCwE6/TZT3oYt+4nRnDIhuPTbZpZV
+	Mvv7KMdtrCmvid4FVgGF6Ob7yTqz+Qj4JM2CdpLVczyWOhiqeOFEi+3KovJP+zGgNdbZRuhAC4s
+	bR8lWKSYveu0r6R
+X-Received: by 2002:a5d:4811:0:b0:45e:7997:8b7a with SMTP id ffacd0b85a97d-460302e8170mr28236136f8f.16.1781092158714;
+        Wed, 10 Jun 2026 04:49:18 -0700 (PDT)
+Message-ID: <25af9d04-897a-40ea-97a2-17466ee4dde6@gmail.com>
+Date: Wed, 10 Jun 2026 13:49:15 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH for-4.22 0/4] CI: Disentangle hardware runner containers
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Michal Orzel <michal.orzel@amd.com>, Doug Goldstein <cardoe@cardoe.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+References: <20260609173102.2908514-1-andrew.cooper3@citrix.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <20260609173102.2908514-1-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1781091702-8D186D75-79C2F078/0/0
-X-purgate-type: clean
-X-purgate-size: 2266
+X-purgate-ID: tlsNG-ef75cf/1781092159-23175C48-6B7C46FE/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 1481
 
-pvcalls_front_event_handler() takes req_id directly from the
-backend-supplied ring response and uses it to index the fixed-size
-bedata->rsp[] array for a memcpy() and a store, with no range check. A
-malicious or buggy backend can set req_id past PVCALLS_NR_RSP_PER_RING
-and drive an out-of-bounds write past the bedata allocation.
 
-req_id was also declared int while the wire field rsp->req_id is u32, so
-a range check on the signed value is insufficient on its own: a backend
-req_id of 0xffffffff becomes -1, passes the >= PVCALLS_NR_RSP_PER_RING
-test, and indexes bedata->rsp[-1], an out-of-bounds write to the left of
-the array. Declare req_id as u32 and add the range check so both ends of
-the index are covered.
 
-The pvcalls frontend currently trusts its backend, so this is not a
-classic-Xen security issue, but it matters for hardening PV frontends
-against malicious backends (confidential and disaggregated deployments).
-Reject responses whose req_id is out of range.
+On 6/9/26 7:30 PM, Andrew Cooper wrote:
+> ... and fix archlinux as I happened to get around to it.
+> 
+> There's a query on patch 3 which affects how we proceed.
+> 
+> Andrew Cooper (4):
+>    CI: Fixes to containerize
+>    CI: Rename xenial-xilinx to xilinx-hw-runner
+>    CI: Introduce new qubes-hw-runner.dockerfile
+>    CI: Rework the archlinux container
+> 
+>   .../build/alpine/qubes-hw-runner.dockerfile   | 21 ++++++++
+>   .../build/archlinux/current-x86_64.dockerfile | 33 ++++++++++++
+>   automation/build/archlinux/current.dockerfile | 53 -------------------
+>   .../build/ubuntu/xenial-xilinx.dockerfile     | 27 ----------
+>   .../build/ubuntu/xilinx-hw-runner.dockerfile  | 32 +++++++++++
+>   automation/gitlab-ci/build.yaml               |  8 +--
+>   automation/gitlab-ci/containers.yaml          |  4 +-
+>   automation/gitlab-ci/test.yaml                |  6 +--
+>   automation/scripts/containerize               |  9 ++--
+>   9 files changed, 99 insertions(+), 94 deletions(-)
+>   create mode 100644 automation/build/alpine/qubes-hw-runner.dockerfile
+>   create mode 100644 automation/build/archlinux/current-x86_64.dockerfile
+>   delete mode 100644 automation/build/archlinux/current.dockerfile
+>   delete mode 100644 automation/build/ubuntu/xenial-xilinx.dockerfile
+>   create mode 100644 automation/build/ubuntu/xilinx-hw-runner.dockerfile
+> 
 
-Fixes: 235a71c53903 ("xen/pvcalls: implement release command")
-Assisted-by: Claude:claude-opus-4-8
-Signed-off-by: Michael Bommarito <michael.bommarito@gmail.com>
----
- drivers/xen/pvcalls-front.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+Release-Acked-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
-diff --git a/drivers/xen/pvcalls-front.c b/drivers/xen/pvcalls-front.c
-index 50ce4820f7eeb..78bd4e894b32e 100644
---- a/drivers/xen/pvcalls-front.c
-+++ b/drivers/xen/pvcalls-front.c
-@@ -168,7 +168,8 @@ static irqreturn_t pvcalls_front_event_handler(int irq, void *dev_id)
- 	struct pvcalls_bedata *bedata;
- 	struct xen_pvcalls_response *rsp;
- 	uint8_t *src, *dst;
--	int req_id = 0, more = 0, done = 0;
-+	u32 req_id = 0;
-+	int more = 0, done = 0;
- 
- 	if (dev == NULL)
- 		return IRQ_HANDLED;
-@@ -185,6 +186,12 @@ static irqreturn_t pvcalls_front_event_handler(int irq, void *dev_id)
- 		rsp = RING_GET_RESPONSE(&bedata->ring, bedata->ring.rsp_cons);
- 
- 		req_id = rsp->req_id;
-+		if (req_id >= PVCALLS_NR_RSP_PER_RING) {
-+			/* Malicious or buggy backend: req_id out of range. */
-+			bedata->ring.rsp_cons++;
-+			done = 1;
-+			continue;
-+		}
- 		if (rsp->cmd == PVCALLS_POLL) {
- 			struct sock_mapping *map = (struct sock_mapping *)(uintptr_t)
- 						   rsp->u.poll.id;
--- 
-2.53.0
+Thanks.
 
+~ Oleksii
 
