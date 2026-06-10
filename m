@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5E3CCD8CB9
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 12:47:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1334253.1597337 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63AB7CD98CE
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 12:47:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1334267.1597382 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXIKm-0001Iz-CV; Wed, 10 Jun 2026 12:47:04 +0000
+	id 1wXIKo-00021h-TR; Wed, 10 Jun 2026 12:47:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1334253.1597337; Wed, 10 Jun 2026 12:47:04 +0000
+Received: by outflank-mailman (output) from mailman id 1334267.1597382; Wed, 10 Jun 2026 12:47:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXIKm-0001Is-9g; Wed, 10 Jun 2026 12:47:04 +0000
-Received: by outflank-mailman (input) for mailman id 1334253;
- Wed, 10 Jun 2026 12:44:58 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wXIKo-0001zh-HZ; Wed, 10 Jun 2026 12:47:06 +0000
+Received: by outflank-mailman (input) for mailman id 1334267;
+ Wed, 10 Jun 2026 12:45:33 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Mykola_Kvach@epam.com>) id 1wXIIk-00017n-4a
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 12:44:58 +0000
+ (envelope-from <Mykola_Kvach@epam.com>) id 1wXIJJ-0001Cy-NN
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 12:45:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wXIIj-009Dx3-9q
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 14:44:57 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wXIJJ-00H9hG-3a
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 14:45:33 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Mykola_Kvach@epam.com>)
- id 6a295c44-bab6-0a2a0a5309dd-0a2a4507bd70-10
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:44:57 +0200
-Received: from [52.101.65.132]
- (helo=DU2PR03CU002.outbound.protection.outlook.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a295c67-5cb7-0a2a0a5109dd-0a2a4504ad8a-28
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:33 +0200
+Received: from [52.101.69.118]
+ (helo=AM0PR83CU005.outbound.protection.outlook.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <Mykola_Kvach@epam.com>)
- id 6a295c48-229c-0a2a45070019-346541848232-3
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:44:57 +0200
+ id 6a295c6c-1dec-0a2a45040019-34654576fec7-3
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:33 +0200
 Received: from AS8PR03MB9746.eurprd03.prod.outlook.com (2603:10a6:20b:61d::18)
- by DB9PR03MB7706.eurprd03.prod.outlook.com (2603:10a6:10:2c8::23)
+ by AM9PR03MB7558.eurprd03.prod.outlook.com (2603:10a6:20b:415::5)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.11; Wed, 10 Jun
- 2026 12:44:54 +0000
+ 2026 12:45:30 +0000
 Received: from AS8PR03MB9746.eurprd03.prod.outlook.com
  ([fe80::cf11:309:1384:58f7]) by AS8PR03MB9746.eurprd03.prod.outlook.com
  ([fe80::cf11:309:1384:58f7%4]) with mapi id 15.21.0113.011; Wed, 10 Jun 2026
- 12:44:54 +0000
+ 12:45:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,40 +57,38 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BK0xhJ8lEVc05sY8oLcuo6DNM0q8J6iONWuYGOcY0bilY2v0BwmyMzGOk2xsEblVIi5nig5b1iFHXHM5Ck+otmQHaDTCSDd2MSx3nb0oXKxbmRMx326ZvyLJXcg6UUVx2BpFx5QdaUw94tEhn8QP+VP1IKfz58rOEKoZU76YGGHRimALuSTRvUPod7vKfld64SoXUdZcOAdgJRFU74i6ExxWS81e3jJl6jMWVOSDroUGpOXSUf0ahlflecr9h0w+D9b3KH2cCvfgipPckbjEBDqvUO2qn198fwnCbcg2MVjAHuoZPUcwrizkPgjlOUb7fg9cuUvuUWwB5QIUVn9bmw==
+ b=NxQer9Uknijvh6HcxISJL7OOQ0b6FuQ67/MBVCJIip00SDa2vEHMGodboWBIQbg/COluM8RkR1QbOBoWtZc7+fjQAeqCwBwwyQCUy6UyuAbfJilToCCOnsYZe2iHvO3/FrQqSPcYMJyihAAnEw5LjcwS/HaswKLWJdzHJCQ+p7/664T2wh5HQQTYJVymz8avcAFXUvgciagLeAH74a5CzxwW4XvP4uirJR3GJMw01QDSzHOKmlSgW6nAJS5KzpCWhGWELSXF/IuxtEctsD8CMj+WlEXFIMo+MiFbPKY33JwJg+u8SynPxv9AtWPKHu6PiPe0NIAiMXUiVNGlxBPPNA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=geZCPGGVe3t5qiSzHFGv7JpUvpI0ztKOEZwmaUd1wnk=;
- b=gCb3ggPvfEvva7MFxm3gVs7fokgRccr/1P3ZV8B5l8jGScKWsHqAB/s0E34Gz1lI4Pj5MzVNLLQ6prex8d4WwOB7EhaNeg2B0K/6hEk4gkCLg6bM4+AnZYwsxnqlWSzvL2O9c0oeNI00jTkTBoCuiF0mh4V2jbBVaJCdaiibRKcw6MQiA/h2AGCiGFa4YEs9hSUxlbOysL8tkD9qfZlcIgfpqq/K3vx1cHa8Qp8OmxLKcyeE50KbvqRZZHEyfJBongJo0FqUWH409LnPwUA8X8SWVxlthpvD5Qw5FZ+Se8lVjhjFWjNqp+N+3BQswiD85dlA7b7hkP4q+OvdvTqECA==
+ bh=QnPckwdgpBUr+17cYI0AaPCAdJVEhHccUrVHQZ13anc=;
+ b=SKEttrGiRjNUFrHX92OMsYAitxJUi/94sZPIJ0XI4QknaKw22C9BTmEiNZadVpL864e0UOo1FmpOOLHvNP5aSDZJ6oWxvMHkXlUShZu+G+P1H4OKnlTtThCqazAKYR5b5pGKmoSOC7eJPBvz2QQD4i0lYuP9NYI41+gPAPwwe57gx3S/jba/9KZhggl06DVe9ZWI+/mD4c4QQEVXhmK3V35vNbR31IKVblBY901zrwZ9GM8QGkX3BJgztHPzqMpYTmwzVOjbFm8GKCdQN7kwwui8vjvFv3gqY1spRFcmwcnMTrxBQ1WVmwxkVkcrEvDK5XGe8p2Kuy2qVy/X0N1aeg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=geZCPGGVe3t5qiSzHFGv7JpUvpI0ztKOEZwmaUd1wnk=;
- b=kmOWDSnoyntImsS+a89308ZBee8fVwd5jeTmzb6G8uGKRXilkcW151P/IH1CDtpGHw6Fi6VlIto9XhcCByxmk1IZda+zlWXi2FQacKhdMhYEyqTiVxn/vg7LyiuBclaTVR2vNT0LWXIlN1z67RXL3eWLNINh2qaxLrmo/lbXzl0gx4z40imBJZGIAQg8AtoGwOAs0ocWfTYLyijCE7UtxkTTEupXr7DyYAzxLl4N/LLYo7z+LNJ0LauIqk1xhTAY1id0IAq5Ia0lY23U2h+NlyvoML9QavPew1Pq8wELCq79PDI+7TPJB6sTGWpfT0tRrO2K7WJIGZlVEJ0agQrD7A==
+ bh=QnPckwdgpBUr+17cYI0AaPCAdJVEhHccUrVHQZ13anc=;
+ b=jSEAsYmMTeaqFQP6JTCcCKsITRurGOEGKpxaHsOzoBWFHqf81oQbeYA/dktRGUKisHHuTB5XSwCipxKKZkinWqbU5YehwYLahtF23AHU3eGErsDmXoqKDgDio7Xgyf+cpzh6TVuKmPQ5+FR08VqlpYyYrF7yLnk6MZtcpvV7CBg/81abFn+oJnocccA4Fnmiecwr7PpOHgcL3+ColnOaqSqF9zwlIbsScOJvJYOwwtZA+TCITvQzvryNfl8gEjU/X8fwLE7M10VSOYLyBdRakFjkHxNPtbvCuH7QhIp9aRSGR+CEbx8E2X880w8bpm7BT+KzLpHW1KRvVLICvkBe+g==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 From: Mykola Kvach <mykola_kvach@epam.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Mykola Kvach <xakep.amatop@gmail.com>,
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Jens Wiklander <jens.wiklander@linaro.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Jens Wiklander <jens.wiklander@linaro.org>,
-	Rahul Singh <rahul.singh@arm.com>
-Subject: [PATCH v11 00/13] Add initial Xen Suspend-to-RAM support on ARM64
-Date: Wed, 10 Jun 2026 15:44:20 +0300
-Message-ID: <cover.1781084290.git.mykola_kvach@epam.com>
+	Luca Fancellu <luca.fancellu@arm.com>
+Subject: [PATCH v11 07/13] xen/arm: ffa: fix notification SRI across CPU hotplug/suspend
+Date: Wed, 10 Jun 2026 15:44:27 +0300
+Message-ID: <cba6e41f56c242085ae468e91a59181ecfd403eb.1781084290.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1781084290.git.mykola_kvach@epam.com>
+References: <cover.1781084290.git.mykola_kvach@epam.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: WA1P291CA0008.POLP291.PROD.OUTLOOK.COM
@@ -98,233 +96,177 @@ X-ClientProxiedBy: WA1P291CA0008.POLP291.PROD.OUTLOOK.COM
  (2603:10a6:20b:61d::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR03MB9746:EE_|DB9PR03MB7706:EE_
-X-MS-Office365-Filtering-Correlation-Id: 48487aa9-903c-4c05-3b6b-08dec6ee11f1
+X-MS-TrafficTypeDiagnostic: AS8PR03MB9746:EE_|AM9PR03MB7558:EE_
+X-MS-Office365-Filtering-Correlation-Id: 19837be2-0888-44be-7fff-08dec6ee2733
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|1800799024|376014|7416014|366016|5023799004|56012099006|11063799006|18002099003|6133799003;
+	BCL:0;ARA:13230040|23010399003|366016|1800799024|376014|56012099006|11063799006|18002099003|22082099003;
 X-Microsoft-Antispam-Message-Info:
-	bndTJzf6PsgdEfKwvJ9ieJBHIGelVZPjDuKPKOT/HSHQUnLvwlWX1zi+pDWkNmuhddy1Y54N+Ef+mm3yhW6/C5aBtN5X2dix9c7pFZIvcm4Mf3rgsihqLupypotMWh9aQFr3fFy/f88vSwn6X1jttu99qOEGlFO++e00fWTH52bfxfRRYxD+xGG0RVlRBcmxD9nF2hj0/OSLTt5tMbPMiZRa+WBdVVFVYTFCvsPGJlUlK3fikwqEicXX5+LceMXgWq+DTVwnHFmrhBiktr+gXI75Gf1xkh+hut5mW5QFBxN0Ts6BfVVhi1NvjhOmOMtDy1PV3CVStTiQrpJrvaiXnOcTHhgA/juUhF6cbRzTZlEA+hRNQxQNxBD2x3NZ3pXPAk4jE4xiEyd1bf7kJL6QFkLXMwGXoiCgeo7fGGTm2MmmiptK71I5gjn6WtHNjWdYVo5KRIemW2jffxmrBd99zTmOpyo4xKmjr9OwL8CNme6e9nNWuCA6JPcgO0fxB/uYhXKkKRY46ICKiB9ZlcsXx4Tvjo2ijhXmupAyVmf+iADx2BCybj3YzWvO2yVU1/Hew53XE6YMEZ/z9tYIMoiC6S+6t1LhGUxTAd+wxKIi0uTbVApMq20uwPVUAJzi7AnAdOFbym0LFOHf6hXs9qzgvAonGrnnSnu5Wa1MTl/T7UFhQReDaKGK2eBcNPdmpoZh
+	F3c2389LQyrlBaOy0bblq/YWqdTtTp/n/Wh8B/hxE7aDRPhg1OQyvnkRyBG69eFDjJ5xvZTrf3lNGNDzxto3qyZh704TVWsPbFnc+/QX071VbL1+vQYkXTPzGp4FoyZkcXtnxlhks305gBuCYvcU5qq24GSi33iIoy7RCoJFJuFdg6va7D7evVFk7kslOjARCgpyuDTMedP7GbIQo91v48QItY2l1fJPbHV2FSna38SLC7EBAYzAz+XPxvnkPRLlXe7UjQe4IHBWzLtExhFFtoz5P+OavUZPDI6FaWcdV6b/hvbYLs5INEaFSsoMdZUWPA8GVh0rgzKBWODbksJoO+S+1WCtrG78bF6lruHdpkAvfiMkLydSzYPqhEVoEvBrM97IdcTasTmiIQLAfaD490d8o5e+AAaF6V/VWVU5t0Z/QuOkJy+wCdanCEByFSMwbqpVejAAGy40y5OA4uyIaO4EsVDywd8VWF2akTAo/haHJWRHw3EuZnVbNhqOyDZ4/q6jqgKRVY+BLSjvS3Ohc5DuYPgZGLCa6piIWBFc+xNpUNgbal1NZRXQEUpLfry4m7iwDQEYRU0I5CzgSymiswjn36zbF35CWZ76knha+R4K3oZd64ebrfgmDzEBzRdK62L0kcFA64oneZLU5IYH60aMH93t0JXElpBtUJMRM9IDj6v0Kv31+WHTdcHJyDvJ
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9746.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(376014)(7416014)(366016)(5023799004)(56012099006)(11063799006)(18002099003)(6133799003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9746.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(56012099006)(11063799006)(18002099003)(22082099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?Iyq45izxAnRDODyx7wnYr/+xa5y2oeYzJ2sUZ32gak9FwUyonKJMEUnH6VBB?=
- =?us-ascii?Q?/C2gvAkfRYQ/SVXna06BXdkN+gFh0CaENuIuK1Iq7ab2G24q4H/q0m9PY6cI?=
- =?us-ascii?Q?MCpeLzMPNXP/ZkAgxOl7gxlLYrUFbecJPxxuTuuV1leSlS7Wpw2FvX3kMWF3?=
- =?us-ascii?Q?t2md/osgGLh0HfsOL42R1M1OeU14CZchSoxSiESYdA/NqvqRs1trlH3cCd9k?=
- =?us-ascii?Q?k62cnP9f3CRcxpIT9sBpXgE3r+ghgJyt5rLVnzz/i1BkqakcQA8OjLsfHFtE?=
- =?us-ascii?Q?He/McApN0nHdjHgfp2KgNJeYnCIf6T1M2QVrG7T9zhsRiffs7G/F2raUpOHe?=
- =?us-ascii?Q?IOXC9jEouONle8Z47TWhzKrlAKB4FtVgAxx/yZ1JMtJpjlO1fXZ7ub5XhpJT?=
- =?us-ascii?Q?bG6iGJG/+SwPfk8g8MoJXqfk+GMnpxKDTHBAuGrvZOF8hltgqu1jRRSEr5CV?=
- =?us-ascii?Q?kSNx4/5cTbL5KuhrL0RM8CYUtHrxFalfUtpkspHx09K4cjozy4Q6UcESXhqy?=
- =?us-ascii?Q?l7/4oOlTRiVOZ9lGyYkIz5jXnAqOveZkoG357/QT0Gi2QldxZLxFTM2OhYgh?=
- =?us-ascii?Q?abq7aFJPPezPaQF59gl7UqB8wyqGaG6+ZoOlZi1aLWXexGGyhpzPkLDbgKo6?=
- =?us-ascii?Q?cSjAPSaPiJZFUgZTrJyFQvCUgjpFGRoVeLhx+97CVSKIvTrp7hagQzsaUdVl?=
- =?us-ascii?Q?Te42QB09tyrJuEOOwvEMyi7qjqO41rXn5pTeqezNW2Jp6pOH7FNrZDcXmG99?=
- =?us-ascii?Q?CIqfUuKCJ+/v0WqI7kPgv2VHh+RATZ+qnapx/atKoViaZp6LtgVDKlZj7lII?=
- =?us-ascii?Q?z20Jxf1jjcrM3pAACOK/SsLDvvYar4KZRJqcnos/e4Np0k3EvcuKlb0vnGHC?=
- =?us-ascii?Q?MlbtKWBxSOnMQjbIa8yX9Mofnj3SyA4GlTv5XIh5KlRqghGqLLJ6WXT1d/jS?=
- =?us-ascii?Q?bhyeDxfszTCtz2CAVBSudbfOTVpqXMjlHzAohuNgi07jybYVlAD86mRHbCaa?=
- =?us-ascii?Q?rpTyPxH4dU6WwY4ekHSww1bC+dm3/eGbu9O8rnOXpmONefmgusYN7WCVe7Kg?=
- =?us-ascii?Q?dlkTcyRYLueV7CqsZPDvMQn3oTbHGs+4hAxlbxbda/5BZX8hFbL1lw3V3DoP?=
- =?us-ascii?Q?pCYYCnYCSBsMf0+vyIWqypNGKCNWb/3Rakb1h60+PYAmhSH3+ccsxT52SE3O?=
- =?us-ascii?Q?bCeybGsNikZA/nsI0ChM97n+R5Fg85j7kvB8MLNXNXr1PzYiU/EXkwb0nDFA?=
- =?us-ascii?Q?DiENdredxsJKKq6pWbR7z97bKflqM2HeT9eCtUZN4KD3lDP+2ZDqR2eWVNax?=
- =?us-ascii?Q?tiMufb4DSWJJ9GSzitsIUjlKoBxKHyzZTJ0AT9yvbKA+1JENc9UFEYcOkpSJ?=
- =?us-ascii?Q?fy3tKd8XNmuufdt/j2zHj4GBKp1cKSOMn/bMUZu4KVajo6iaE3PzZ6vV9eXt?=
- =?us-ascii?Q?gJO2QhOXiKXJq4ZY2JqDq7k5+xTUkktMb/4Uh6Z5gIqrobGPxBvZ9JlrrtCc?=
- =?us-ascii?Q?7M2deBOp+ISqWP8GHL54smMCqAtI5tBKqGSJ7/MohwkDiGFqE897YI26RLcw?=
- =?us-ascii?Q?Y3mo5dCYbIwnFWrRA49GKGDeskttn/ewY3EC2Ghk1xOt9PRZU1SGLueDbFOL?=
- =?us-ascii?Q?OtPQ0pmOJLAHsOfXFDI823ac/2M3m7/2RhnpKnoeQI2gzlo/6dE9jIbu7Veo?=
- =?us-ascii?Q?Q9J7O00f0mgdgLF0d6ib/kqYeUVrFn5PCyHqMvwrRdk1lbVd/MIz3iP5snTm?=
- =?us-ascii?Q?27ShEQRY3Q=3D=3D?=
+	=?us-ascii?Q?qq4SH96ykzfGTIbO3hQQY8QHBLz98ep31Vfdtpd8GKtxHShv3UXYYQnoBAZt?=
+ =?us-ascii?Q?xudISUqK93oxrtDfX9zmgNjsnh1YiUaxWEHWHXrg4LCoRnac1Gus+3os/k1s?=
+ =?us-ascii?Q?kBtvYmgeipTWMrdKtUdsw4EEByU8a1FWmEEoE0Fl7KI8ZSgXUUP9f6UfE2hK?=
+ =?us-ascii?Q?EUvGqeKtc2SijvR5V1R1t6LQuw/BDIXe6M1bwiWKZ7g0AAnAZ/TAI7mb8dt5?=
+ =?us-ascii?Q?Dn6ew2n+PR46FMsE92pm8hbqHGQP5DuyeuQMtsB8aOW+7Y27bsq9S/9D33pd?=
+ =?us-ascii?Q?2OiPyhLhh5Dh3Wzk+N5ii7xxWgM/noOEePn1OVlk8AdFs3sDUNc9cwGOgYeH?=
+ =?us-ascii?Q?7OE9NHqSZrAICuHQASas5i21uWXGTsu8JcuKddGRwsdehoR7e6qz1znRPOOI?=
+ =?us-ascii?Q?u2AB4gHF9noZpnmJJTFMfcasQ+IffvbcsEZR1B1Q6pfLM9ARmMauK+gGvQED?=
+ =?us-ascii?Q?+wBF/Rldr3tD5S/8dk+WKGeRRyWBz0A6+98I3QV4uDaR3BBB+pScvqHXfkZ1?=
+ =?us-ascii?Q?SWESYgJ2Bd1brpB/V+odfJ6clv2+O9LNcD+PqXVXd6pSPzxnBkW7RjHz50TY?=
+ =?us-ascii?Q?NkVsMwJtv5iNmmBhQnxGe3JS9ZYU5RZjEJvRcNdUcFcG+3iN+Ao0HNTj7HeV?=
+ =?us-ascii?Q?2PJbkZ2C/4x2ff2Z9U8VLelFQtXqOqbM3r4QSWdxWw6LoXJzzH+nik+MW32Q?=
+ =?us-ascii?Q?aZQCHZVLBEEwlizKVFWbpEqAZeC3m8kD6+OBjVXmPiCZFXEFrIK7AKSkhwBC?=
+ =?us-ascii?Q?/sfYyZQnOoiOXdeNl/IpomH1rmeqTGhdYRjs0DNTqKegOShehnsah8RpyLoq?=
+ =?us-ascii?Q?2DgCWofhiYlqx7/b4aqAVTCSmtDRpMSRSrwmWe/UdtxnaJjP55CYT3wBicRP?=
+ =?us-ascii?Q?nwGrcjpjejq2XRTCbr/P4ZrufjqlVbz0H8t5eAK5F1hmTq5X9Qj+3AN7UDGP?=
+ =?us-ascii?Q?7rthE7bpeC/6mTz3rLVuxEA+aCbzHfcLA4/l1X1F5Jp/CsoNl2EjLx5v41Or?=
+ =?us-ascii?Q?twmX5eec8QpDXYDoPkmr1H5G4oV4UOgPbQ7naoFSdpEeSaBi4SFNufzqKNkx?=
+ =?us-ascii?Q?5ZxzJRgsnpkv7dAyGyJIar8ki0EVUXF8niuSq7yt/euvURyNO0PA4yY9fso0?=
+ =?us-ascii?Q?KnNnq9e0YVxYH0C8fXnMsoiLBzjQE7JOeoXVJxze+lm+FxcJp6C7XfqqZp+w?=
+ =?us-ascii?Q?sucOJfWSQSOhITSZ8Cla5grSo5bsVW4k2iosdrmaha19M5XdJv4Cd3VNpXET?=
+ =?us-ascii?Q?ja5MmotDhMoNcm124LuKAuB2YHbcx+x+VFgIOZ/U/ZaHtleQH6spU2XgygQ+?=
+ =?us-ascii?Q?LXcvKh2CiofCNlsquGlxb7/G5Qdneis9/lgmGHcn9Oi4h5Po8gHRkBdPVtkP?=
+ =?us-ascii?Q?9e/SnLB+zCPGqRQtHL7nlv/a+KWbAaONlj8woSjnPcP+Qv7PuA7asEJSQwaq?=
+ =?us-ascii?Q?ThivFGrZdtms9HCRPxNCQTwwwzSZ3pK0tbSBX0NOeK9qXttQi2OUJrE0oHEI?=
+ =?us-ascii?Q?7xt0gNB2N/X0i2a4GWQE3Cs1VgaKpR+a+nte1Uksxalz+V+6uaFJW6mVRaC6?=
+ =?us-ascii?Q?FFp0Le7uH5jqmWCoiBMFHxkRLIQHANcSDIydzPHsvtJjY9cDFhu+xjl61P7o?=
+ =?us-ascii?Q?wbtDo6OuzqhkI02W3Mcs5CIiBaph6p4y4vZBFRRgEOwwiKkGof9Gd6pEB5Vo?=
+ =?us-ascii?Q?U+YUeubz7WrtIJTZibPGGhaHlQxQ1omuy52wFvxWXzpu1GbtxK9KX3S/DqdD?=
+ =?us-ascii?Q?kRdSgLX1aA=3D=3D?=
 X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 48487aa9-903c-4c05-3b6b-08dec6ee11f1
+X-MS-Exchange-CrossTenant-Network-Message-Id: 19837be2-0888-44be-7fff-08dec6ee2733
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR03MB9746.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 12:44:54.0992
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 12:45:29.6704
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: i4+uV71QQtV3fQvtS1Ogy7zn1g44K4WCGKuCGJ/6K10GE66Vaoa6QxZa0koWIkPd1Ppp6JhVbUUKWm53MIEKmA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR03MB7706
-X-purgate-ID: tlsNG-ef75cf/1781095497-0B57BC48-78E68EDD/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: cfXX71M3T5cFAkjR5wXf3mIx7TJcxftI0a5lZ4BbO/ilOT9ekQwX5bWPlFNIJr3ksF3UjZ18o9yY+xDnPbWBlQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR03MB7558
+X-purgate-ID: tlsNG-ebf023/1781095533-413773FF-9C015285/0/0
 X-purgate-type: clean
-X-purgate-size: 8546
+X-purgate-size: 3654
 
-This is part 2 of the ARM Xen system suspend/resume patch series, based
-on earlier work by Mirela Simonovic and Mykyta Poturai.
+The FF-A notification SRI interrupt handler was not correctly tied to
+CPU hotplug and suspend/resume. As a result, CPUs going offline and
+back online could end up with stale or missing handlers, breaking
+delivery of FF-A notifications.
 
-Part 1, covering guest suspend functionality, is already in mainline.
-
-NOTE: Host-wide suspend/resume support is guarded by CONFIG_SYSTEM_SUSPEND,
-which can currently only be selected when UNSUPPORTED is set, and thus the
-host suspend backend is neither enabled by default nor built in supported
-configurations. The separate HAS_HWDOM_SYSTEM_SUSPEND policy bit only changes
-how ARM treats SHUTDOWN_suspend from the hardware domain; it does not enable
-the host-wide suspend backend by itself.
-
-This version is ported to Xen master and includes extensive improvements
-based on reviewer feedback. The patch series restructures code to improve
-robustness and maintainability, and implements initial ARM64 host-wide
-Suspend-to-RAM support driven by control-domain PSCI SYSTEM_SUSPEND
-requests. vPSCI also exposes SYSTEM_SUSPEND as a domain suspend operation
-for all domains; attempt-time host-suspend policy failures are reported as
-PSCI_DENIED rather than hidden through PSCI_FEATURES.
-
-Key updates in this series:
- - Introduced architecture-specific suspend/resume infrastructure
- - Integrated GICv2/GICv3 suspend and resume, including memory-backed context
-   save/restore with error handling
- - Added time and IRQ suspend/resume hooks, ensuring correct timer/interrupt
-   state across suspend cycles
- - Implemented proper PSCI SYSTEM_SUSPEND invocation and version checks
- - Added vPSCI SYSTEM_SUSPEND policy for domain suspend and host-wide
-   control-domain sequencing
- - Improved state management and recovery in error cases during suspend/resume
- - Added support for IPMMU-VMSA/SMMUv3 context save/restore
- - Added support for GICv3 eSPI registers context save/restore
- - Added support for ITS registers context save/restore
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
+Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
 ---
+ xen/arch/arm/tee/ffa_notif.c | 63 ++++++++++++++++++++++++++++--------
+ 1 file changed, 50 insertions(+), 13 deletions(-)
 
-TODOs:
- - Enable "xl suspend" support on ARM
- - Add suspend/resume CI test for ARM (QEMU if feasible)
- - PCI suspend ?
----
-
-Detailed changelogs can be found in each patch.
-
-Changes in v11:
-- Keep SMMUv3 reset helpers in init text when CONFIG_SYSTEM_SUSPEND is
-  disabled.
-- Update host suspend policy blockers after review: make the runtime gate
-  __ro_after_init, log the SMMUv3 MSI blocker only once, and wrap the Arm
-  IOMMU blocker in CONFIG_SYSTEM_SUSPEND.
-
-Changes in v10:
-- Clarify the vPSCI SYSTEM_SUSPEND policy summary: keep SYSTEM_SUSPEND
-  advertised once implemented and return PSCI_DENIED, rather than
-  PSCI_NOT_SUPPORTED, for attempt-time host-suspend policy failures.
-- Tighten GICv2/GICv3 suspend/resume based on review feedback: avoid
-  reserved interrupt register ranges, check visible active-priority state,
-  restore configuration before enable state, and re-enable the redistributor
-  before restoring CPU/virtual interface state on abort paths.
-- Refine ITS resume so MAPC is replayed only for ITS-backed collections and
-  clarify the collection-ID assumptions.
-- Rework IPMMU and SMMUv3 resume/suspend handling, including root-before-cache
-  IPMMU restore ordering and disabling SMMU interrupt generation before
-  suspend.
-- Save and restore CNTHCTL_EL2 in the arm64 CPU resume context and simplify
-  the resume trampoline/context hand-off.
-- Re-apply boot CPU errata/workaround handling after SYSTEM_SUSPEND and move
-  set_init_ttbr() declaration to asm/mmu/mm.h.
-- Update patch 12 details: shorten SYSTEM_SUSPEND blocker logs, use %pd for
-  control-domain logging, mark serial_suspend_available as __ro_after_init,
-  and mention the xen/suspend.h struct domain forward declaration.
-
-Changes in v9:
-- Split the control-domain SYSTEM_SUSPEND flow so host availability,
-  runtime blockers and domain-readiness checks are handled separately from
-  the host suspend backend.
-- Gate vPSCI SYSTEM_SUSPEND on cached host PSCI support and Xen runtime
-  suspend blockers, and log firmware support during initialization.
-- Fold the arm64 resume trampoline into the CPU context save/restore patch
-  and use asm-offsets-generated RESUME_CTX_* definitions for the assembly
-  save/restore path.
-- Tighten the GICv2/GICv3/ITS/IPMMU/SMMUv3 suspend/resume paths based on
-  review feedback, including state-save/restore fixes and safer failure
-  handling.
-- Reorder the host suspend/resume phases so timer and GIC state are
-  handled with local IRQs disabled and restored before console/IOMMU
-  resume.
-
-Changes in v8:
-- Rebased to latest master and refreshed the series accordingly.
-- Added a new GICv3 patch to tolerate retained redistributor LPI state
-  across CPU_OFF/CPU_ON.
-- GICv2 suspend now disables the CPU interface and distributor before
-  saving state.
-- GICv3 suspend/resume fixes the redistributor base used for LPI state.
-- ITS and SMMUv3 suspend/resume paths were tightened, with safer
-  restore/rollback handling and stricter fatal-error handling.
-- System suspend now checks that all domains are already in
-  SHUTDOWN_suspend before proceeding, and renames the hardware-domain
-  suspend capability/helper for clearer semantics.
-- Fixed alignment/cleanup issues in the low-level suspend/resume code.
-
-Changes in v7:
-- Timer helper renamed/clarified; virtual/hyper/phys handling documented.
-- GICv2 uses one context block; restore saved CTLR; panic on alloc failure.
-- GICv3/eSPI/ITS always suspend/resume; restore LPI/eSPI; rdist timeout.
-- IPMMU suspend context allocated before PCI setup.
-- System suspend: control domain drives host suspend.
-- Dropped v6 IRQ descriptor restore patches; use setup_irq and re-register
-  local IRQs on resume instead.
-
-For earlier changelogs, please refer to the previous cover letters.
-
-Mirela Simonovic (5):
-  xen/arm: Add suspend and resume timer helpers
-  xen/arm: gic-v2: Implement GIC suspend/resume functions
-  xen/arm64: Save/restore CPU context across SYSTEM_SUSPEND
-  xen/arm: Implement PSCI SYSTEM_SUSPEND call (host interface)
-  xen/arm: Add host system suspend backend
-
-Mykola Kvach (7):
-  xen/arm: gic-v3: tolerate retained redistributor LPI state across
-    CPU_OFF
-  xen/arm: gic-v3: Implement GICv3 suspend/resume functions
-  xen/arm: gic-v3: add ITS suspend/resume support
-  xen/arm: tee: keep init_tee_secondary() for hotplug and resume
-  xen/arm: ffa: fix notification SRI across CPU hotplug/suspend
-  xen/arm: smmu-v3: add suspend/resume handlers
-  xen/arm: Add vPSCI SYSTEM_SUSPEND policy
-
-Oleksandr Tyshchenko (1):
-  iommu/ipmmu-vmsa: Implement suspend/resume callbacks
-
- xen/arch/arm/Kconfig                     |   2 +
- xen/arch/arm/Makefile                    |   1 +
- xen/arch/arm/arm64/asm-offsets.c         |  21 +
- xen/arch/arm/arm64/head.S                | 122 ++++++
- xen/arch/arm/cpuerrata.c                 |   7 +-
- xen/arch/arm/gic-v2.c                    | 226 +++++++++++
- xen/arch/arm/gic-v3-its.c                | 146 ++++++-
- xen/arch/arm/gic-v3-lpi.c                |  80 +++-
- xen/arch/arm/gic-v3.c                    | 482 ++++++++++++++++++++++-
- xen/arch/arm/gic.c                       |  35 ++
- xen/arch/arm/include/asm/arm64/sysregs.h |   5 +
- xen/arch/arm/include/asm/cpuerrata.h     |   1 +
- xen/arch/arm/include/asm/gic.h           |  16 +
- xen/arch/arm/include/asm/gic_v3_defs.h   |   3 +
- xen/arch/arm/include/asm/gic_v3_its.h    |  28 ++
- xen/arch/arm/include/asm/mmu/mm.h        |   2 +
- xen/arch/arm/include/asm/psci.h          |   4 +
- xen/arch/arm/include/asm/suspend.h       |  37 ++
- xen/arch/arm/include/asm/time.h          |   5 +
- xen/arch/arm/mmu/smpboot.c               |   2 +-
- xen/arch/arm/psci.c                      |  38 +-
- xen/arch/arm/suspend.c                   | 210 ++++++++++
- xen/arch/arm/tee/ffa_notif.c             |  63 ++-
- xen/arch/arm/tee/tee.c                   |   2 +-
- xen/arch/arm/time.c                      |  44 ++-
- xen/arch/arm/vpsci.c                     | 120 +++++-
- xen/common/Kconfig                       |   3 +
- xen/common/domain.c                      |   7 +-
- xen/drivers/char/serial.c                |  12 +
- xen/drivers/passthrough/arm/iommu.c      |   6 +
- xen/drivers/passthrough/arm/ipmmu-vmsa.c | 323 ++++++++++++++-
- xen/drivers/passthrough/arm/smmu-v3.c    | 203 ++++++++--
- xen/include/xen/list.h                   |  14 +
- xen/include/xen/serial.h                 |   1 +
- xen/include/xen/suspend.h                |   2 +
- 35 files changed, 2169 insertions(+), 104 deletions(-)
- create mode 100644 xen/arch/arm/suspend.c
-
+diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.c
+index 186e726412..513c399594 100644
+--- a/xen/arch/arm/tee/ffa_notif.c
++++ b/xen/arch/arm/tee/ffa_notif.c
+@@ -360,10 +360,28 @@ static int32_t ffa_notification_bitmap_destroy(uint16_t vm_id)
+     return ffa_simple_call(FFA_NOTIFICATION_BITMAP_DESTROY, vm_id, 0, 0, 0);
+ }
+ 
+-void ffa_notif_init_interrupt(void)
++static DEFINE_PER_CPU_READ_MOSTLY(struct irqaction, sri_irq);
++
++static int request_sri_irq(void)
+ {
+     int ret;
++    struct irqaction *sri_action = &this_cpu(sri_irq);
++
++    sri_action->name = "FF-A notif";
++    sri_action->handler = notif_irq_handler;
++    sri_action->dev_id = NULL;
++    sri_action->free_on_release = 0;
++
++    ret = setup_irq(notif_sri_irq, 0, sri_action);
++    if ( ret )
++        printk(XENLOG_ERR "ffa: setup_irq irq %u failed: error %d\n",
++               notif_sri_irq, ret);
+ 
++    return ret;
++}
++
++void ffa_notif_init_interrupt(void)
++{
+     if ( fw_notif_enabled && notif_sri_irq < NR_GIC_SGI )
+     {
+         /*
+@@ -376,14 +394,36 @@ void ffa_notif_init_interrupt(void)
+          * pending, while the SPMC in the secure world will not notice that
+          * the interrupt was lost.
+          */
+-        ret = request_irq(notif_sri_irq, 0, notif_irq_handler, "FF-A notif",
+-                          NULL);
+-        if ( ret )
+-            printk(XENLOG_ERR "ffa: request_irq irq %u failed: error %d\n",
+-                   notif_sri_irq, ret);
++        request_sri_irq();
+     }
+ }
+ 
++static void deinit_ffa_notif_interrupt(void)
++{
++    if ( fw_notif_enabled && notif_sri_irq < NR_GIC_SGI )
++        release_irq(notif_sri_irq, NULL);
++}
++
++static int cpu_ffa_notif_callback(struct notifier_block *nfb,
++                                  unsigned long action,
++                                  void *hcpu)
++{
++    switch ( action )
++    {
++    case CPU_DYING:
++        deinit_ffa_notif_interrupt();
++        break;
++    default:
++        break;
++    }
++
++    return NOTIFY_DONE;
++}
++
++static struct notifier_block cpu_ffa_notif_nfb = {
++    .notifier_call = cpu_ffa_notif_callback,
++};
++
+ void ffa_notif_init(void)
+ {
+     const struct arm_smccc_1_2_regs arg = {
+@@ -392,7 +432,6 @@ void ffa_notif_init(void)
+     };
+     struct arm_smccc_1_2_regs resp;
+     unsigned int irq;
+-    int ret;
+ 
+     /* Only enable fw notification if all ABIs we need are supported */
+     if ( ffa_fw_supports_fid(FFA_NOTIFICATION_BITMAP_CREATE) &&
+@@ -408,13 +447,11 @@ void ffa_notif_init(void)
+         notif_sri_irq = irq;
+         if ( irq >= NR_GIC_SGI )
+             irq_set_type(irq, IRQ_TYPE_EDGE_RISING);
+-        ret = request_irq(irq, 0, notif_irq_handler, "FF-A notif", NULL);
+-        if ( ret )
+-        {
+-            printk(XENLOG_ERR "ffa: request_irq irq %u failed: error %d\n",
+-                   irq, ret);
++
++        if ( request_sri_irq() )
+             return;
+-        }
++
++        register_cpu_notifier(&cpu_ffa_notif_nfb);
+         fw_notif_enabled = true;
+     }
+ }
 -- 
 2.43.0
 
