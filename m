@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63AB7CD98CE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F4D4CD98C5
 	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2026 12:47:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1334267.1597382 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1334276.1597411 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXIKo-00021h-TR; Wed, 10 Jun 2026 12:47:06 +0000
+	id 1wXIKr-0002e4-2t; Wed, 10 Jun 2026 12:47:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1334267.1597382; Wed, 10 Jun 2026 12:47:06 +0000
+Received: by outflank-mailman (output) from mailman id 1334276.1597411; Wed, 10 Jun 2026 12:47:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXIKo-0001zh-HZ; Wed, 10 Jun 2026 12:47:06 +0000
-Received: by outflank-mailman (input) for mailman id 1334267;
- Wed, 10 Jun 2026 12:45:33 +0000
+	id 1wXIKq-0002az-Bq; Wed, 10 Jun 2026 12:47:08 +0000
+Received: by outflank-mailman (input) for mailman id 1334276;
+ Wed, 10 Jun 2026 12:45:43 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Mykola_Kvach@epam.com>) id 1wXIJJ-0001Cy-NN
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 12:45:33 +0000
+ (envelope-from <Mykola_Kvach@epam.com>) id 1wXIJT-0001G1-8Q
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 12:45:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wXIJJ-00H9hG-3a
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 14:45:33 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wXIJS-007roF-LC
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2026 14:45:42 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Mykola_Kvach@epam.com>)
- id 6a295c67-5cb7-0a2a0a5109dd-0a2a4504ad8a-28
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:33 +0200
-Received: from [52.101.69.118]
- (helo=AM0PR83CU005.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a295c75-e002-0a2a0a5209dd-0a2a4509edfa-2
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:42 +0200
+Received: from [52.101.72.83]
+ (helo=AM0PR02CU008.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <Mykola_Kvach@epam.com>)
- id 6a295c6c-1dec-0a2a45040019-34654576fec7-3
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:33 +0200
+ id 6a295c76-2497-0a2a45090019-34654853ba2b-3
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2026 14:45:42 +0200
 Received: from AS8PR03MB9746.eurprd03.prod.outlook.com (2603:10a6:20b:61d::18)
  by AM9PR03MB7558.eurprd03.prod.outlook.com (2603:10a6:20b:415::5)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.11; Wed, 10 Jun
- 2026 12:45:30 +0000
+ 2026 12:45:40 +0000
 Received: from AS8PR03MB9746.eurprd03.prod.outlook.com
  ([fe80::cf11:309:1384:58f7]) by AS8PR03MB9746.eurprd03.prod.outlook.com
  ([fe80::cf11:309:1384:58f7%4]) with mapi id 15.21.0113.011; Wed, 10 Jun 2026
- 12:45:29 +0000
+ 12:45:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,35 +57,34 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NxQer9Uknijvh6HcxISJL7OOQ0b6FuQ67/MBVCJIip00SDa2vEHMGodboWBIQbg/COluM8RkR1QbOBoWtZc7+fjQAeqCwBwwyQCUy6UyuAbfJilToCCOnsYZe2iHvO3/FrQqSPcYMJyihAAnEw5LjcwS/HaswKLWJdzHJCQ+p7/664T2wh5HQQTYJVymz8avcAFXUvgciagLeAH74a5CzxwW4XvP4uirJR3GJMw01QDSzHOKmlSgW6nAJS5KzpCWhGWELSXF/IuxtEctsD8CMj+WlEXFIMo+MiFbPKY33JwJg+u8SynPxv9AtWPKHu6PiPe0NIAiMXUiVNGlxBPPNA==
+ b=oYqAFxO9WriTpN6UHnaYCQ1s5lWXCvxhCdsuhpPZLJVtzLnLGRzBPISmyfCqPhecmjLlfL4hT6eixy6QttttPpyPHntFfz/FR3FfqpEVUzeY90QATM32j4n568uaHyerUlVlzYyCZLzMoc5W1wGeQkxg00NuwyacZK0VbGuOhie02LoqGg8OhVe2jfJjCXC6K5RY1w2kHkyhnW/+EEBDvw7yuMj+vWw72UUAkcsKVh0Uk/sc2dbHvUNi92IUT2HsALaonJ1sxf6qP6VA263IQvWJ7i97w/HgD3LBH0GS2IQ5vCxw7B4sYUbBm3NX6N9UlPTNnPIhloL2OJBsbMZcoA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QnPckwdgpBUr+17cYI0AaPCAdJVEhHccUrVHQZ13anc=;
- b=SKEttrGiRjNUFrHX92OMsYAitxJUi/94sZPIJ0XI4QknaKw22C9BTmEiNZadVpL864e0UOo1FmpOOLHvNP5aSDZJ6oWxvMHkXlUShZu+G+P1H4OKnlTtThCqazAKYR5b5pGKmoSOC7eJPBvz2QQD4i0lYuP9NYI41+gPAPwwe57gx3S/jba/9KZhggl06DVe9ZWI+/mD4c4QQEVXhmK3V35vNbR31IKVblBY901zrwZ9GM8QGkX3BJgztHPzqMpYTmwzVOjbFm8GKCdQN7kwwui8vjvFv3gqY1spRFcmwcnMTrxBQ1WVmwxkVkcrEvDK5XGe8p2Kuy2qVy/X0N1aeg==
+ bh=9Q1Fsw7I5VcRKOn6Vwcp1VtMdJtga40n5Ed4Emmc+5c=;
+ b=MttiLgnubCorR63FeNIhlqHe/88i1rOWAc5EuqvtZgOQdKecPlpwRuQti2LmEjX5W4XJN/0YEmsDcy5/MXoDaqXEyGYtGM+6jojQkK9lQfN1QBsN/8+/KrWJE8smvXxjtLiXgfhKtIK2T2BWSUXH7oj895EUxezaz3QEDtYU7gLrnETLtPWtYFDGQKXZ+HbRklsTpujTWKqdCVq50c45Lditd9eozfBEPrTEHUkFQbWvTlwJiyUkot3+YamnGtwUvjQ0RhnkNjrPoUXnsO/qMr71XZB+ULb9VovZPffkE3TmmEmLFCPwItqme6X5GegejDiflQLk0/Cw/NQ0F56bog==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QnPckwdgpBUr+17cYI0AaPCAdJVEhHccUrVHQZ13anc=;
- b=jSEAsYmMTeaqFQP6JTCcCKsITRurGOEGKpxaHsOzoBWFHqf81oQbeYA/dktRGUKisHHuTB5XSwCipxKKZkinWqbU5YehwYLahtF23AHU3eGErsDmXoqKDgDio7Xgyf+cpzh6TVuKmPQ5+FR08VqlpYyYrF7yLnk6MZtcpvV7CBg/81abFn+oJnocccA4Fnmiecwr7PpOHgcL3+ColnOaqSqF9zwlIbsScOJvJYOwwtZA+TCITvQzvryNfl8gEjU/X8fwLE7M10VSOYLyBdRakFjkHxNPtbvCuH7QhIp9aRSGR+CEbx8E2X880w8bpm7BT+KzLpHW1KRvVLICvkBe+g==
+ bh=9Q1Fsw7I5VcRKOn6Vwcp1VtMdJtga40n5Ed4Emmc+5c=;
+ b=hChIU2nE4+B0KQz+25FU/YnMcmk3Uycb9acMFdERJdsWjWi+0k4QIyNrMZton4LH/4aCplO+QqvOvvFAENgEKP8dkQ6X3382ihAkQXb6FveS3zHsmlr6Ryp9UZVZd9fKXV22NYqSVwiXtc2RQ6SmvgR995fsF9eWypG8OS0pdf3MXztvzdCYUEsV8059tCekybruWf8zB/zSgbSPfgR89xidWBgaOJk10TfVU/m56pJAax9htojlkzD5EeDRncWR9JyQvp18I9KZ1vLhltuc2N+CKsSGpBg/yPGbd1dBWCgVAEZXXc5NXylaY63xC7eGKn/HONaCpUzXmD3ji8Io/Q==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 From: Mykola Kvach <mykola_kvach@epam.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Mykola Kvach <xakep.amatop@gmail.com>,
-	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Jens Wiklander <jens.wiklander@linaro.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Luca Fancellu <luca.fancellu@arm.com>
-Subject: [PATCH v11 07/13] xen/arm: ffa: fix notification SRI across CPU hotplug/suspend
-Date: Wed, 10 Jun 2026 15:44:27 +0300
-Message-ID: <cba6e41f56c242085ae468e91a59181ecfd403eb.1781084290.git.mykola_kvach@epam.com>
+Subject: [PATCH v11 11/13] xen/arm: Implement PSCI SYSTEM_SUSPEND call (host interface)
+Date: Wed, 10 Jun 2026 15:44:31 +0300
+Message-ID: <bf6645f78b982800527b3d8955745fc80f325a3c.1781084290.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1781084290.git.mykola_kvach@epam.com>
 References: <cover.1781084290.git.mykola_kvach@epam.com>
@@ -97,176 +96,180 @@ X-ClientProxiedBy: WA1P291CA0008.POLP291.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS8PR03MB9746:EE_|AM9PR03MB7558:EE_
-X-MS-Office365-Filtering-Correlation-Id: 19837be2-0888-44be-7fff-08dec6ee2733
+X-MS-Office365-Filtering-Correlation-Id: 4c8e49bb-9f50-4e71-53b5-08dec6ee2dbb
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|366016|1800799024|376014|56012099006|11063799006|18002099003|22082099003;
+	BCL:0;ARA:13230040|23010399003|366016|1800799024|376014|56012099006|11063799006|5023799004|6133799003|18002099003|22082099003;
 X-Microsoft-Antispam-Message-Info:
-	F3c2389LQyrlBaOy0bblq/YWqdTtTp/n/Wh8B/hxE7aDRPhg1OQyvnkRyBG69eFDjJ5xvZTrf3lNGNDzxto3qyZh704TVWsPbFnc+/QX071VbL1+vQYkXTPzGp4FoyZkcXtnxlhks305gBuCYvcU5qq24GSi33iIoy7RCoJFJuFdg6va7D7evVFk7kslOjARCgpyuDTMedP7GbIQo91v48QItY2l1fJPbHV2FSna38SLC7EBAYzAz+XPxvnkPRLlXe7UjQe4IHBWzLtExhFFtoz5P+OavUZPDI6FaWcdV6b/hvbYLs5INEaFSsoMdZUWPA8GVh0rgzKBWODbksJoO+S+1WCtrG78bF6lruHdpkAvfiMkLydSzYPqhEVoEvBrM97IdcTasTmiIQLAfaD490d8o5e+AAaF6V/VWVU5t0Z/QuOkJy+wCdanCEByFSMwbqpVejAAGy40y5OA4uyIaO4EsVDywd8VWF2akTAo/haHJWRHw3EuZnVbNhqOyDZ4/q6jqgKRVY+BLSjvS3Ohc5DuYPgZGLCa6piIWBFc+xNpUNgbal1NZRXQEUpLfry4m7iwDQEYRU0I5CzgSymiswjn36zbF35CWZ76knha+R4K3oZd64ebrfgmDzEBzRdK62L0kcFA64oneZLU5IYH60aMH93t0JXElpBtUJMRM9IDj6v0Kv31+WHTdcHJyDvJ
+	PyPGwlfat60c4X9V0EPlTKI5aaa3rq3dm1Zh8FUd3LeJhbLbPoxSzq4QwMDqbAYl9Y69k2WLPU98eShJZtYCaGsDZYQSXIRm7jUPP/bhzVRyN3ZrwlmBwtxSOr4S+ydI+SDxHhNA4z4uNApjipJYrkQSfgabbkgYuIG30fXINpyfLQT+CGLXEgBQU0kXgd+/sI8m8hjqF+CRFjzBUg54dsVkQkRdZqzMIBeSWDITVqSxr81BzQumbSlDEFyQPQNoPR+EibjT+VCphAllfj+9dZpal+r9zvHE+uVIB+kdY3QQmDpTdgaiop1/OzFKBwApJ18WeYv9d5+0FHo498+Ekr6wUGYECh86bIuSnS5CBnkCgrDehPla1AjgMb2ThiOq2KZ3H/UXZi9oOI6AI5Ld3SV5G+nSLnW4K3f4RDDpHipsmriD5wHP4RYQTeq4pplCMouiWz3YCLB+RCRBm/b/nw888DT+9VfbD7pyiHnMAIJaUoBG8p5bwztp8mZSGbUCm/3jdagoEnktiyu81BD48CJZAQpK1HtgDOb9LctrTThVaXUfwZFo+CnlvwWxdVptCMrtpUJHYHjxRZZbNBC40SeME4W/zXpeOrs3EKGCeHB4TNXj/j+N1RXxeFMHZ2L2RF1tBDdjTkZk2oFWtlHRw5pk5Xg/XjR1yl+54ikg7pt2RNRu1DZY5aPCbQ6LoiMS
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9746.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(56012099006)(11063799006)(18002099003)(22082099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9746.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(56012099006)(11063799006)(5023799004)(6133799003)(18002099003)(22082099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?qq4SH96ykzfGTIbO3hQQY8QHBLz98ep31Vfdtpd8GKtxHShv3UXYYQnoBAZt?=
- =?us-ascii?Q?xudISUqK93oxrtDfX9zmgNjsnh1YiUaxWEHWHXrg4LCoRnac1Gus+3os/k1s?=
- =?us-ascii?Q?kBtvYmgeipTWMrdKtUdsw4EEByU8a1FWmEEoE0Fl7KI8ZSgXUUP9f6UfE2hK?=
- =?us-ascii?Q?EUvGqeKtc2SijvR5V1R1t6LQuw/BDIXe6M1bwiWKZ7g0AAnAZ/TAI7mb8dt5?=
- =?us-ascii?Q?Dn6ew2n+PR46FMsE92pm8hbqHGQP5DuyeuQMtsB8aOW+7Y27bsq9S/9D33pd?=
- =?us-ascii?Q?2OiPyhLhh5Dh3Wzk+N5ii7xxWgM/noOEePn1OVlk8AdFs3sDUNc9cwGOgYeH?=
- =?us-ascii?Q?7OE9NHqSZrAICuHQASas5i21uWXGTsu8JcuKddGRwsdehoR7e6qz1znRPOOI?=
- =?us-ascii?Q?u2AB4gHF9noZpnmJJTFMfcasQ+IffvbcsEZR1B1Q6pfLM9ARmMauK+gGvQED?=
- =?us-ascii?Q?+wBF/Rldr3tD5S/8dk+WKGeRRyWBz0A6+98I3QV4uDaR3BBB+pScvqHXfkZ1?=
- =?us-ascii?Q?SWESYgJ2Bd1brpB/V+odfJ6clv2+O9LNcD+PqXVXd6pSPzxnBkW7RjHz50TY?=
- =?us-ascii?Q?NkVsMwJtv5iNmmBhQnxGe3JS9ZYU5RZjEJvRcNdUcFcG+3iN+Ao0HNTj7HeV?=
- =?us-ascii?Q?2PJbkZ2C/4x2ff2Z9U8VLelFQtXqOqbM3r4QSWdxWw6LoXJzzH+nik+MW32Q?=
- =?us-ascii?Q?aZQCHZVLBEEwlizKVFWbpEqAZeC3m8kD6+OBjVXmPiCZFXEFrIK7AKSkhwBC?=
- =?us-ascii?Q?/sfYyZQnOoiOXdeNl/IpomH1rmeqTGhdYRjs0DNTqKegOShehnsah8RpyLoq?=
- =?us-ascii?Q?2DgCWofhiYlqx7/b4aqAVTCSmtDRpMSRSrwmWe/UdtxnaJjP55CYT3wBicRP?=
- =?us-ascii?Q?nwGrcjpjejq2XRTCbr/P4ZrufjqlVbz0H8t5eAK5F1hmTq5X9Qj+3AN7UDGP?=
- =?us-ascii?Q?7rthE7bpeC/6mTz3rLVuxEA+aCbzHfcLA4/l1X1F5Jp/CsoNl2EjLx5v41Or?=
- =?us-ascii?Q?twmX5eec8QpDXYDoPkmr1H5G4oV4UOgPbQ7naoFSdpEeSaBi4SFNufzqKNkx?=
- =?us-ascii?Q?5ZxzJRgsnpkv7dAyGyJIar8ki0EVUXF8niuSq7yt/euvURyNO0PA4yY9fso0?=
- =?us-ascii?Q?KnNnq9e0YVxYH0C8fXnMsoiLBzjQE7JOeoXVJxze+lm+FxcJp6C7XfqqZp+w?=
- =?us-ascii?Q?sucOJfWSQSOhITSZ8Cla5grSo5bsVW4k2iosdrmaha19M5XdJv4Cd3VNpXET?=
- =?us-ascii?Q?ja5MmotDhMoNcm124LuKAuB2YHbcx+x+VFgIOZ/U/ZaHtleQH6spU2XgygQ+?=
- =?us-ascii?Q?LXcvKh2CiofCNlsquGlxb7/G5Qdneis9/lgmGHcn9Oi4h5Po8gHRkBdPVtkP?=
- =?us-ascii?Q?9e/SnLB+zCPGqRQtHL7nlv/a+KWbAaONlj8woSjnPcP+Qv7PuA7asEJSQwaq?=
- =?us-ascii?Q?ThivFGrZdtms9HCRPxNCQTwwwzSZ3pK0tbSBX0NOeK9qXttQi2OUJrE0oHEI?=
- =?us-ascii?Q?7xt0gNB2N/X0i2a4GWQE3Cs1VgaKpR+a+nte1Uksxalz+V+6uaFJW6mVRaC6?=
- =?us-ascii?Q?FFp0Le7uH5jqmWCoiBMFHxkRLIQHANcSDIydzPHsvtJjY9cDFhu+xjl61P7o?=
- =?us-ascii?Q?wbtDo6OuzqhkI02W3Mcs5CIiBaph6p4y4vZBFRRgEOwwiKkGof9Gd6pEB5Vo?=
- =?us-ascii?Q?U+YUeubz7WrtIJTZibPGGhaHlQxQ1omuy52wFvxWXzpu1GbtxK9KX3S/DqdD?=
- =?us-ascii?Q?kRdSgLX1aA=3D=3D?=
+	=?us-ascii?Q?8Jk5hx+dR2gBkG7z+XeERo2Vu83vLXXfWCXVQPHpMiTuSyE0FnDexxpN1p6P?=
+ =?us-ascii?Q?7JWSSiGUh7U0sTVnIumM10Fi4T9MA6tBJYCDI75DUJCDAOojpe3SeVuf3lOs?=
+ =?us-ascii?Q?nFTyNJ5Wr4wzhz4D4dSfU8uUmCvz2ChhgzxBstfxeyOsUiIeMlUkGjcULw7a?=
+ =?us-ascii?Q?DqDduat+FD9jWFUoIicicdA+R/835jkjsMlBi2DHec7S+HOA5q4t2FtXFZNi?=
+ =?us-ascii?Q?DM3oAKaLfWTLfStF3RYYC8FW1paB1dqDF6u62iNDmtLvN4FOSE/nZDaNQwlo?=
+ =?us-ascii?Q?xDd7yEw/OHJEVW3MbgUCYgLfFiGKMpFyL/wNpCvJNI9YKprd+/EqPzYAyVWH?=
+ =?us-ascii?Q?6JmEKW6w6+vl+3yykfUSJLUZsWVuA62SSULCpDwwDpT0FtpWXJSmleHgODeu?=
+ =?us-ascii?Q?WsrElT21j0AuanYkVsgYz74YGRhZ8kIfbJWn5xQP6H2sdUjqxr3SHft58i+I?=
+ =?us-ascii?Q?Py10jSzkO4nYtin9rREouoXD58UsAwLEitI6lJw6txJRyPkESP/YwciuiSAw?=
+ =?us-ascii?Q?+6mVlNdipo2Lpz+dnSGVRWT8A1KUK3sS8HgF1qaioe8trNBNVGA9lLpL+oBE?=
+ =?us-ascii?Q?L7S0sxQ0EHMM/TnR9eUt/JAmCNs6eQurYy9m79q6pMCkTfq81t8jky2EdoAE?=
+ =?us-ascii?Q?oxMlEzIbYSbRpdEKY5ivb6MZ5WGZqMulB7Q9f1cm5+3kgJQQHVYbzKor0Nu/?=
+ =?us-ascii?Q?FW2tcPikBTr98APF4y1isk4suy5aXVvYLB5KXH+QUMhpt1Udp0F5lmDY5D7A?=
+ =?us-ascii?Q?2SxTY2Vns/rwBQFDQ64FpTb7BYpJNJyDRmCWWv6n+5RTVnX91SPBgGFDnUDe?=
+ =?us-ascii?Q?ROsI4i8v05AaQHx2eDrzXinpDP629CSO7TfarZYQZDLmETEhQuj4EoSWOY/6?=
+ =?us-ascii?Q?dq2VquW/wWtB6JMk6D4bqGtJ8sOsk+bAdmunF7BZ+SFqmem2c6TGqTlQdVk+?=
+ =?us-ascii?Q?BnUifUobQiMCeQ1doRrx3AppEeUcb20Y5WBz8K2Tgj6oJJuMmrZiZ1wcInHN?=
+ =?us-ascii?Q?I7OcV8CjEw7T9wg2p/NG76MHV8WdHzyrVQZx85jFTp1Fiu31NGH79jAQM4wS?=
+ =?us-ascii?Q?fMf2fEbXy/9Uy+VaJLOLajnk17QBc6XjOpLqH7zKJe1O+nr2cv3BXxkAPFXJ?=
+ =?us-ascii?Q?ksZVyR/jaX2YW308sxnLS2Tj/33q4EktSzoyKGVTlmhrVBoOw4aDXbLNNo14?=
+ =?us-ascii?Q?aoxT456K+RdqOxe6QZ5un8/Shl7XjUhhAnoQOI8OBpywyjw+Dj9fEeQ/CrKh?=
+ =?us-ascii?Q?rg0LIR7zZMss1EPlyIehnGfvrwQWbtuazCTjnDaCGkquyGkvnYDO5O3jAu17?=
+ =?us-ascii?Q?daz1+xezOHNjsRwOYKVQUzFM5ECr/1+RDfxZnFvUu4gIUWUV9hqfmQJ7fuuw?=
+ =?us-ascii?Q?tDFQQaYdmn7KzKmBRDKIMIcShXW1NXLUvU2t3XjZrka0mKT85KeE05gLwEzj?=
+ =?us-ascii?Q?7kK2wek/nWcrHix2LirI68Na0Bu2AROBzzEor8ZUPHTbVDXa4uipDbztXouY?=
+ =?us-ascii?Q?SoDBuUI5Ij9T7C+apP2oMX6F6Y5KkuHSPgZmid9dq2OgrAOLzUhi3gjaFsSW?=
+ =?us-ascii?Q?8GYhtGt6Z3xIzwmR7KqhxkGJEvfDw05VIFqHV+q3pyTOSJhuqZ1p6f6GGLNL?=
+ =?us-ascii?Q?LY/MlJ08F709doO3Qar/MDzfIHYfOqtPVEYJJPysVaEoQb4Aov8HupQTQ8MW?=
+ =?us-ascii?Q?R3SP4s+0FUlXxHnZIq7tA5GQQmCHD3i8G5dTzUV/mPOP83xVm/h5o4AfmEVf?=
+ =?us-ascii?Q?9r2RiA+3hg=3D=3D?=
 X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 19837be2-0888-44be-7fff-08dec6ee2733
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4c8e49bb-9f50-4e71-53b5-08dec6ee2dbb
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR03MB9746.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 12:45:29.6704
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 12:45:40.6981
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cfXX71M3T5cFAkjR5wXf3mIx7TJcxftI0a5lZ4BbO/ilOT9ekQwX5bWPlFNIJr3ksF3UjZ18o9yY+xDnPbWBlQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: znTOm2RgPgTWjxTSkdsw12O7JlS7TxtwEQte/g8tqdczjs6qZ7PK9Qcu430PrExrbGAszofyWkbotg8B7JWCeA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR03MB7558
-X-purgate-ID: tlsNG-ebf023/1781095533-413773FF-9C015285/0/0
+X-purgate-ID: tlsNG-bad1c0/1781095542-8B193A53-6591A88C/0/0
 X-purgate-type: clean
-X-purgate-size: 3654
+X-purgate-size: 4081
 
-The FF-A notification SRI interrupt handler was not correctly tied to
-CPU hotplug and suspend/resume. As a result, CPUs going offline and
-back online could end up with stale or missing handlers, breaking
-delivery of FF-A notifications.
+From: Mirela Simonovic <mirela.simonovic@aggios.com>
 
+Invoke PSCI SYSTEM_SUSPEND to finalize Xen's suspend sequence on ARM64
+platforms. Pass the Xen resume entry point (hyp_resume) to EL3 together
+with a zero context ID, matching Linux.
+
+This patch wires up only the host-side PSCI SYSTEM_SUSPEND invocation.
+The resume trampoline and context restore are provided by earlier patches
+in the series.
+
+Only enable this path when CONFIG_SYSTEM_SUSPEND is set and PSCI
+advertises SYSTEM_SUSPEND via PSCI_FEATURES.
+
+Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
+Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
+Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
-Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
 ---
- xen/arch/arm/tee/ffa_notif.c | 63 ++++++++++++++++++++++++++++--------
- 1 file changed, 50 insertions(+), 13 deletions(-)
+Changes in v9:
+- cache SYSTEM_SUSPEND support using PSCI_FEATURES and gate the host call
+  on the cached capability
+- keep the cached SYSTEM_SUSPEND capability read-only after init
+- log whether firmware reports SYSTEM_SUSPEND support
+- pass an explicit zero context ID in the SYSTEM_SUSPEND call
+- drop the stale note claiming hyp_resume is still a stub
+---
+ xen/arch/arm/include/asm/psci.h |  1 +
+ xen/arch/arm/psci.c             | 31 ++++++++++++++++++++++++++++++-
+ 2 files changed, 31 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.c
-index 186e726412..513c399594 100644
---- a/xen/arch/arm/tee/ffa_notif.c
-+++ b/xen/arch/arm/tee/ffa_notif.c
-@@ -360,10 +360,28 @@ static int32_t ffa_notification_bitmap_destroy(uint16_t vm_id)
-     return ffa_simple_call(FFA_NOTIFICATION_BITMAP_DESTROY, vm_id, 0, 0, 0);
- }
+diff --git a/xen/arch/arm/include/asm/psci.h b/xen/arch/arm/include/asm/psci.h
+index 48a93e6b79..bb3c73496e 100644
+--- a/xen/arch/arm/include/asm/psci.h
++++ b/xen/arch/arm/include/asm/psci.h
+@@ -23,6 +23,7 @@ int call_psci_cpu_on(int cpu);
+ void call_psci_cpu_off(void);
+ void call_psci_system_off(void);
+ void call_psci_system_reset(void);
++int call_psci_system_suspend(void);
  
--void ffa_notif_init_interrupt(void)
-+static DEFINE_PER_CPU_READ_MOSTLY(struct irqaction, sri_irq);
-+
-+static int request_sri_irq(void)
- {
-     int ret;
-+    struct irqaction *sri_action = &this_cpu(sri_irq);
-+
-+    sri_action->name = "FF-A notif";
-+    sri_action->handler = notif_irq_handler;
-+    sri_action->dev_id = NULL;
-+    sri_action->free_on_release = 0;
-+
-+    ret = setup_irq(notif_sri_irq, 0, sri_action);
-+    if ( ret )
-+        printk(XENLOG_ERR "ffa: setup_irq irq %u failed: error %d\n",
-+               notif_sri_irq, ret);
+ /* Range of allocated PSCI function numbers */
+ #define	PSCI_FNUM_MIN_VALUE                 _AC(0,U)
+diff --git a/xen/arch/arm/psci.c b/xen/arch/arm/psci.c
+index b6860a7760..e05dae1133 100644
+--- a/xen/arch/arm/psci.c
++++ b/xen/arch/arm/psci.c
+@@ -17,23 +17,27 @@
+ #include <asm/cpufeature.h>
+ #include <asm/psci.h>
+ #include <asm/acpi.h>
++#include <asm/suspend.h>
  
-+    return ret;
-+}
-+
-+void ffa_notif_init_interrupt(void)
-+{
-     if ( fw_notif_enabled && notif_sri_irq < NR_GIC_SGI )
-     {
-         /*
-@@ -376,14 +394,36 @@ void ffa_notif_init_interrupt(void)
-          * pending, while the SPMC in the secure world will not notice that
-          * the interrupt was lost.
-          */
--        ret = request_irq(notif_sri_irq, 0, notif_irq_handler, "FF-A notif",
--                          NULL);
--        if ( ret )
--            printk(XENLOG_ERR "ffa: request_irq irq %u failed: error %d\n",
--                   notif_sri_irq, ret);
-+        request_sri_irq();
+ /*
+  * While a 64-bit OS can make calls with SMC32 calling conventions, for
+  * some calls it is necessary to use SMC64 to pass or return 64-bit values.
+- * For such calls PSCI_0_2_FN_NATIVE(x) will choose the appropriate
++ * For such calls PSCI_*_FN_NATIVE(x) will choose the appropriate
+  * (native-width) function ID.
+  */
+ #ifdef CONFIG_ARM_64
+ #define PSCI_0_2_FN_NATIVE(name)    PSCI_0_2_FN64_##name
++#define PSCI_1_0_FN_NATIVE(name)    PSCI_1_0_FN64_##name
+ #else
+ #define PSCI_0_2_FN_NATIVE(name)    PSCI_0_2_FN32_##name
++#define PSCI_1_0_FN_NATIVE(name)    PSCI_1_0_FN32_##name
+ #endif
+ 
+ uint32_t psci_ver;
+ uint32_t smccc_ver;
+ 
+ static uint32_t psci_cpu_on_nr;
++static bool __ro_after_init has_psci_system_suspend;
+ 
+ #define PSCI_RET(res)   ((int32_t)(res).a0)
+ 
+@@ -60,6 +64,25 @@ void call_psci_cpu_off(void)
      }
  }
  
-+static void deinit_ffa_notif_interrupt(void)
++int call_psci_system_suspend(void)
 +{
-+    if ( fw_notif_enabled && notif_sri_irq < NR_GIC_SGI )
-+        release_irq(notif_sri_irq, NULL);
++#ifdef CONFIG_SYSTEM_SUSPEND
++    struct arm_smccc_res res;
++
++    if ( !has_psci_system_suspend )
++        return PSCI_NOT_SUPPORTED;
++
++    /* Context ID is unused for the Xen resume path. */
++    arm_smccc_smc(PSCI_1_0_FN_NATIVE(SYSTEM_SUSPEND), __pa(hyp_resume), 0,
++                  &res);
++    return PSCI_RET(res);
++#else
++    dprintk(XENLOG_WARNING,
++            "SYSTEM_SUSPEND not supported (CONFIG_SYSTEM_SUSPEND disabled)\n");
++    return PSCI_NOT_SUPPORTED;
++#endif
 +}
 +
-+static int cpu_ffa_notif_callback(struct notifier_block *nfb,
-+                                  unsigned long action,
-+                                  void *hcpu)
-+{
-+    switch ( action )
-+    {
-+    case CPU_DYING:
-+        deinit_ffa_notif_interrupt();
-+        break;
-+    default:
-+        break;
-+    }
-+
-+    return NOTIFY_DONE;
-+}
-+
-+static struct notifier_block cpu_ffa_notif_nfb = {
-+    .notifier_call = cpu_ffa_notif_callback,
-+};
-+
- void ffa_notif_init(void)
+ void call_psci_system_off(void)
  {
-     const struct arm_smccc_1_2_regs arg = {
-@@ -392,7 +432,6 @@ void ffa_notif_init(void)
-     };
-     struct arm_smccc_1_2_regs resp;
-     unsigned int irq;
--    int ret;
+     if ( psci_ver > PSCI_VERSION(0, 1) )
+@@ -223,9 +246,15 @@ int __init psci_init(void)
  
-     /* Only enable fw notification if all ABIs we need are supported */
-     if ( ffa_fw_supports_fid(FFA_NOTIFICATION_BITMAP_CREATE) &&
-@@ -408,13 +447,11 @@ void ffa_notif_init(void)
-         notif_sri_irq = irq;
-         if ( irq >= NR_GIC_SGI )
-             irq_set_type(irq, IRQ_TYPE_EDGE_RISING);
--        ret = request_irq(irq, 0, notif_irq_handler, "FF-A notif", NULL);
--        if ( ret )
--        {
--            printk(XENLOG_ERR "ffa: request_irq irq %u failed: error %d\n",
--                   irq, ret);
+     psci_init_smccc();
+ 
++    has_psci_system_suspend =
++        psci_features(PSCI_1_0_FN_NATIVE(SYSTEM_SUSPEND)) == 0;
 +
-+        if ( request_sri_irq() )
-             return;
--        }
+     printk(XENLOG_INFO "Using PSCI v%u.%u\n",
+            PSCI_VERSION_MAJOR(psci_ver), PSCI_VERSION_MINOR(psci_ver));
+ 
++    printk(XENLOG_DEBUG "PSCI SYSTEM_SUSPEND is %ssupported by firmware\n",
++           has_psci_system_suspend ? "" : "not ");
 +
-+        register_cpu_notifier(&cpu_ffa_notif_nfb);
-         fw_notif_enabled = true;
-     }
+     return 0;
  }
+ 
 -- 
 2.43.0
 
