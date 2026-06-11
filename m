@@ -4,32 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D045CD98CC
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Jun 2026 22:24:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1336194.1598072 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9D39CD98C7
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Jun 2026 22:24:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1336192.1598062 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXnof-0007tQ-FJ; Thu, 11 Jun 2026 22:24:01 +0000
+	id 1wXnoP-0007dO-7i; Thu, 11 Jun 2026 22:23:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1336194.1598072; Thu, 11 Jun 2026 22:24:01 +0000
+Received: by outflank-mailman (output) from mailman id 1336192.1598062; Thu, 11 Jun 2026 22:23:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXnof-0007tJ-CQ; Thu, 11 Jun 2026 22:24:01 +0000
-Received: by outflank-mailman (input) for mailman id 1336194;
- Thu, 11 Jun 2026 22:24:00 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1wXnoP-0007dH-4r; Thu, 11 Jun 2026 22:23:45 +0000
+Received: by outflank-mailman (input) for mailman id 1336192;
+ Thu, 11 Jun 2026 22:23:43 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1wXnoe-0007sz-Qf
- for xen-devel@lists.xenproject.org; Thu, 11 Jun 2026 22:24:00 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1wXnob-004y0q-0T;
- Thu, 11 Jun 2026 22:23:56 +0000
-Received: from [2a02:8012:3a1:0:51e8:2886:7874:ff19]
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1wXnoa-001tuw-0Y;
- Thu, 11 Jun 2026 22:23:56 +0000
+ (envelope-from <freddy77@gmail.com>) id 1wXnoM-0007dA-Vq
+ for xen-devel@lists.xenproject.org; Thu, 11 Jun 2026 22:23:43 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1wXnoM-007wP9-Ck
+ for xen-devel@lists.xenproject.org; Fri, 12 Jun 2026 00:23:42 +0200
+Received: from [10.42.69.8] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <freddy77@gmail.com>)
+ id 6a2b3563-e002-0a2a0a5209dd-0a2a4508ab80-8
+ for <xen-devel@lists.xenproject.org>; Fri, 12 Jun 2026 00:23:42 +0200
+Received: from [74.125.224.42] (helo=mail-yx1-f42.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <freddy77@gmail.com>)
+ id 6a2b356d-63b5-0a2a45080019-4a7de02aac57-3
+ for <xen-devel@lists.xenproject.org>; Fri, 12 Jun 2026 00:23:42 +0200
+Received: by mail-yx1-f42.google.com with SMTP id
+ 956f58d0204a3-6603d8697d2so367762d50.0
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2026 15:23:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,87 +48,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=JAjXi+ZrCjFY2J266ZrUbMCgFoT3yFFiliMAHJYti9g=; b=wcZQfg3idYWhUef05pC/KPEACE
-	d7L+yncA3DIJaLCZpKvve7Vwb877FNEsM1G9YbFv190QJ3gx95kRf6NW6mQp+ABKmFQ3Ri/Ot6Wl1
-	MkH65idCi5fT4cSpOh3KSFt+lBMnfmgiWDSViQTuiEnYkHzvvlPNV3Yv8AhB/yLfdAlc=;
-Message-ID: <1fe76e3d-ad48-4b75-a690-accff86f0fd2@xen.org>
-Date: Thu, 11 Jun 2026 23:23:54 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1781216621; cv=none;
+        d=google.com; s=arc-20240605;
+        b=etDAsW0EzZHf9BpPGWrHwNDgInjl7pcqNXUU53DJWcwlyGpxuH9tWWv7p9P2O5dw+P
+         w+CNWqozK5UWWwH8gC2XavETuxANr8gMrs2yM3/UUAJzlqyFsodJLSJ/3tBNHs2bNZtB
+         a0wXOvcuKk6fHjOJv1Z2H0dAIxdAfm4AZODSOIMwReOV9oVbu1yEP09cmnzTLWZf8voq
+         6e9ZzQi6aEQtrdo5529W+5F99ECq7KFk+sB9m12m5ecpDWgKqPYNijulK3DM1A6xGhXM
+         qWxkrDukaNxlQd9i30L4XCKS74JRwdScJN6Ua5EGAWaoKw7fMItvMeNRuv9UuXkHKRwG
+         R91Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=WfvkcO+uLXTqDgSjP+KHQU7Iz2CNjEWfT63b78r4sN0=;
+        fh=oC/kQkef0Xp7NMn8QOiJRI7rTAf9vhety7/OfeS+l+4=;
+        b=QeLJiWCRCItNanPifkLlngnjy5gNGcdoiAKAaMDwjb33UKpVcVso2a5iNjc4b4u79Z
+         D4dhoTuXpMh+Lw7B9IIGbmNmq8vjF+zN9pdDfAWKwSr5miFBBJXt7jcR3Cx684BPftdU
+         qGVMvM+JRZkMRi/QZuL9DOrioZkq/aGFWwqEVrY+cGDl/cjgHNCw7BwdfnxwhPn6CWgI
+         I3xXJzhIHjV1v4UhCHXSdz2bjGFd8gbwHA9QAmyX9vGag8w0HzKYPUdmpcVRDxYdRZ2N
+         zfhCGDDXgfP+pUEJgL1v4JSWLH6lasqHTzXr5KAy9IXHCjqOjTJXyYKeml9LSuv0UYfT
+         tPsQ==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1781216621; x=1781821421; darn=lists.xenproject.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=WfvkcO+uLXTqDgSjP+KHQU7Iz2CNjEWfT63b78r4sN0=;
+        b=fdPVpPJxT2oLfj2WFen1ocLwhI+5xwORDWDGQ7wXGUCm2/EQwo8O/1P14u5UpmFEqN
+         4jBc1PPO9hjVVnkJ18I5qnvH7pDhImTi3lrDifb5Ih/IfAqNwYawcze9E9ZbaQPbnQOk
+         7YGAM+kgCqrDMNUAWIKZDlqRJ6XsPatt92KOwExN0/YJ7vYLH1daAHaSd6eEJp/rFxts
+         wwDW65LhaYzhKTNFnLIlgPznNlWhmfamBj+wZcysNRPBUcwlbHnCQn+cxsTJ2Gf2AvfE
+         8FP0Hk1CvrBwN1V3mDfkmwkKgfPsndiOpHR9TznhQ70J7jyJl63uzyAW11apa23rw2R8
+         om9A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1781216621; x=1781821421;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=WfvkcO+uLXTqDgSjP+KHQU7Iz2CNjEWfT63b78r4sN0=;
+        b=F9B603IwSmRp/33nnvYEIio9q0mX+z4V4Mepw4GPH+OAwEQpZ0qKZfwGaY5i26zrgP
+         /LwIl8Ji3H2i9HE3YNxp4WY7czZKJ40M/mKUU/3ZmGf7wkA+GMO3PYZGTuiaYa3gvZrB
+         JzoQ4OOG5pjk7uMdhi+MP+nBkreU8Bk+VGc2MHRTOC13sDnHVy/uS4ko0vgT2TxUL/Zt
+         jbMAwlvQRGYABynY9B/z6vwePwMwHvJHRirSqGoUhE8N/Yart3Qt7iTR35jqRW9/Lw8W
+         r89Z2a0Jj4lZADlOADFWpw7ludhqPhV4/ngfsRO8r4OGtKvOFfOJZYz3IhMMwa2LnN2y
+         kOwQ==
+X-Forwarded-Encrypted: i=1; AFNElJ8CfnI2JpgGmsBY9n5vIQ6S2MdD2BYvXm3AXGnG1zDKCt0B5nME8A+u0Viu/YYwa8GrWTIIss1DSrc=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yy5mkibS6ChdStJpTKe1+YSpALV0LxwfvGRjFfAKNgSUZyyFFDi
+	C+Sb39Ff6xy4/F5aZH8mJarEtfs9Q6351y0qIRWkHv3KiHZRwLEvaogQaswFVnZjuEqnXH1m9rh
+	pZPlX/T3UM9JadYBvU5yU1MzL2H1aw/I=
+X-Gm-Gg: Acq92OHgRxi5LcH6do3DiNLDw/OwFDKAtjTo3IPvXafubCMGtYE9rCzbS1WVmtYFcDg
+	Hc0kHW2oAd9AqbDVzpm7yWOca+CztP+IZdcuuwB9d/LPtF2qG+2sgdZropCLQxB5xnNOJLs9fg0
+	VgwXjXFA2Htva7p6Zm9xd+oWDQJd4YgLgqY7ZDzESbsQvR2/p/SfPAMB3qGDENvLkGzt/wkKoO/
+	gtWWXBwk1xrWk7EO6lv+ZpWgqsL8iVITA70JbaEx8ElxtQlcnAAtmPIUchdOw8BgG0E7h3w2gwa
+	H7AsxVN6cKaJGNeygXJtZI/YqTzjRRgvP8A88g==
+X-Received: by 2002:a05:690e:169c:b0:660:a41d:d180 with SMTP id
+ 956f58d0204a3-66277f74193mr138196d50.21.1781216620728; Thu, 11 Jun 2026
+ 15:23:40 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] xen/sched: Link CPU topology to scheduler
-Content-Language: en-GB
-To: Hirokazu Takahashi <taka@valinux.co.jp>, xen-devel@lists.xenproject.org
-Cc: Mykyta_Poturai@epam.com, Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Dario Faggioli <dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>,
- George Dunlap <gwd@xenproject.org>
-References: <20260610111320.133784-1-taka@valinux.co.jp>
- <20260610111320.133784-3-taka@valinux.co.jp>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <20260610111320.133784-3-taka@valinux.co.jp>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20260611153257.650054-1-frediano.ziglio@cloud.com>
+ <20260611153257.650054-2-frediano.ziglio@cloud.com> <9d59cf76-f0e0-4e6e-9413-6c7d70a4594b@suse.com>
+ <57b3b624-297b-4d31-9933-164cb46795eb@suse.com>
+In-Reply-To: <57b3b624-297b-4d31-9933-164cb46795eb@suse.com>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Thu, 11 Jun 2026 23:23:28 +0100
+X-Gm-Features: AVVi8CfW1mlyM-eU4AZftZRHa8j1yS2bB8naSoc895rcOY9pr5g5Zb8xYtTEwlg
+Message-ID: <CAHt6W4d47rCj_ome=SFXrL--5F16-Ly8XcBm=aut-QRAmz6hXg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/4] Align some sections to 4KB
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Frediano Ziglio <frediano.ziglio@cloud.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Teddy Astie <teddy.astie@vates.tech>, 
+	=?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>, 
+	Frediano Ziglio <frediano.ziglio@citrix.com>, xen-devel@lists.xenproject.org
+Content-Type: text/plain; charset="UTF-8"
+X-purgate-ID: tlsNG-c1860d/1781216622-BE368DB1-F5E34224/0/0
+X-purgate-type: clean
+X-purgate-size: 993
 
-Hi,
+On Thu, 11 Jun 2026 at 17:08, Jan Beulich <jbeulich@suse.com> wrote:
+>
+> On 11.06.2026 18:07, Jan Beulich wrote:
+> > On 11.06.2026 17:32, Frediano Ziglio wrote:
+> >> Required by UEFI CA memory mitigation.
+> >>
+> >> It is a requirement for NX_COMPAT so the PE can be loaded with W^X perms
+> >> in the pagetables.
+> >>
+> >> NX_COMPAT is a requirement from shim-review,
+> >> https://github.com/rhboot/shim-review#do-you-have-the-nx-bit-set-in-your-shim-if-so-is-your-entire-boot-stack-nx-compatible-and-what-testing-have-you-done-to-ensure-such-compatibility
+> >>
+> >> Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
+> >> --
+> >> Changes since v2:
+> >> - Change subject.
+> >
+> > Did you? The description also doesn't look to have had any detail added.
+>
+> Or wait - the subject tag also says v2. Did you (re-)post the wrong version?
+>
+> Jan
 
-On 10/06/2026 12:13, Hirokazu Takahashi wrote:
-> Make CPU topology information available to the Xen scheduler.
-> Additionally, ensure that this topology information is displayed
-> when executing the 'xl info -n' command.
-> 
-> Signed-off-by: Hirokazu Takahashi <taka@valinux.co.jp>
-> ---
->   xen/arch/arm/include/asm/processor.h  |  4 ---
->   xen/arch/arm/smpboot.c                | 10 ++++--
->   xen/common/device-tree/cpu-topology.c | 51 +++++++++++++++++++++++++++
->   xen/common/sched/credit2.c            |  3 ++
->   xen/common/sysctl.c                   |  1 +
->   xen/include/xen/cpu-topology.h        | 10 ++++++
->   6 files changed, 72 insertions(+), 7 deletions(-)
-> 
-> diff --git a/xen/arch/arm/include/asm/processor.h b/xen/arch/arm/include/asm/processor.h
-> index a3753c317f..41fa73cfc4 100644
-> --- a/xen/arch/arm/include/asm/processor.h
-> +++ b/xen/arch/arm/include/asm/processor.h
-> @@ -613,10 +613,6 @@ void show_stack(const struct cpu_user_regs *regs);
->   
->   #define cpu_relax() barrier() /* Could yield? */
->   
-> -/* All a bit UP for the moment */
-> -#define cpu_to_core(_cpu)   (0)
-> -#define cpu_to_socket(_cpu) (0)
-> -
->   struct vcpu;
->   void vcpu_regs_hyp_to_user(const struct vcpu *vcpu,
->                              struct vcpu_guest_core_regs *regs);
-> diff --git a/xen/arch/arm/smpboot.c b/xen/arch/arm/smpboot.c
-> index c071f1494f..b25d98c109 100644
-> --- a/xen/arch/arm/smpboot.c
-> +++ b/xen/arch/arm/smpboot.c
-> @@ -91,13 +91,17 @@ static int setup_cpu_sibling_map(int cpu)
->            !zalloc_cpumask_var(&per_cpu(cpu_core_mask, cpu)) )
->           return -ENOMEM;
->   
-> +#ifdef CONFIG_DT_CPU_TOPOLOGY
+No, the series is v2, but in the comments should be "Changes since
+v1:" (as the majority of emails are).
 
-For Arm, we support both ACPI and Device-Tree in a single binary. That's 
-fine if we don't support NUMA with ACPI for now, but we need to make 
-sure this doesn't regress for now.
-
-With that in mind, I was expecting some runtime checks based on whether 
-ACPI or DT is used. Can you explain why this is not the case?
-
-Cheers,
-
--- 
-Julien Grall
-
+Frediano
 
