@@ -4,39 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00A9ECD98CC
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Jun 2026 14:23:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1335645.1597835 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 434BACD98CC
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Jun 2026 14:25:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1335667.1597848 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXgJn-0004VX-NM; Thu, 11 Jun 2026 14:23:39 +0000
+	id 1wXgL2-0005CH-Bk; Thu, 11 Jun 2026 14:24:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1335645.1597835; Thu, 11 Jun 2026 14:23:39 +0000
+Received: by outflank-mailman (output) from mailman id 1335667.1597848; Thu, 11 Jun 2026 14:24:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXgJn-0004VQ-K3; Thu, 11 Jun 2026 14:23:39 +0000
-Received: by outflank-mailman (input) for mailman id 1335645;
- Thu, 11 Jun 2026 14:23:38 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wXgL2-0005Bl-6z; Thu, 11 Jun 2026 14:24:56 +0000
+Received: by outflank-mailman (input) for mailman id 1335667;
+ Thu, 11 Jun 2026 14:24:54 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <vulab@iscas.ac.cn>) id 1wXgJm-0004Tg-EB
- for xen-devel@lists.xenproject.org; Thu, 11 Jun 2026 14:23:38 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wXgL0-00059B-Bn
+ for xen-devel@lists.xenproject.org; Thu, 11 Jun 2026 14:24:54 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wXgJl-004kQW-RP
- for xen-devel@lists.xenproject.org; Thu, 11 Jun 2026 16:23:37 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wXgKz-006oCD-OM
+ for xen-devel@lists.xenproject.org; Thu, 11 Jun 2026 16:24:53 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <vulab@iscas.ac.cn>)
- id 6a2ac4e4-bab6-0a2a0a5309dd-0a2a4502a182-18
- for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2026 16:23:36 +0200
-Received: from [159.226.251.25] (helo=cstnet.cn)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <vulab@iscas.ac.cn>)
- id 6a2ac4e5-af86-0a2a45020019-9fe2fb1997a8-3
- for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2026 16:23:35 +0200
-Received: from localhost.localdomain (unknown [117.182.75.76])
- by APP-05 (Coremail) with SMTP id zQCowACXHgLixCpq43AXEw--.957S2;
- Thu, 11 Jun 2026 22:23:32 +0800 (CST)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a2ac527-5cb7-0a2a0a5109dd-0a2a45048a8e-30
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2026 16:24:53 +0200
+Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a2ac535-1dec-0a2a45040019-d1558036cd3e-3
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2026 16:24:53 +0200
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-490aaeabdb4so53721535e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2026 07:24:53 -0700 (PDT)
+Received: from ?IPV6:2003:ca:b70d:3054:345c:e2ed:ca23:72c4?
+ (p200300cab70d3054345ce2edca2372c4.dip0.t-ipconnect.de.
+ [2003:ca:b70d:3054:345c:e2ed:ca23:72c4])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-490e52a54a1sm50050525e9.3.2026.06.11.07.24.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 11 Jun 2026 07:24:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,82 +55,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-From: WenTao Liang <vulab@iscas.ac.cn>
-To: jgross@suse.com,
-	sstabellini@kernel.org
-Cc: oleksandr_tyshchenko@epam.com,
-	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org,
-	WenTao Liang <vulab@iscas.ac.cn>,
-	stable@vger.kernel.org
-Subject: [PATCH] xen/gntdev: fix refcount leak in gntdev_ioctl_map_grant_ref()
-Date: Thu, 11 Jun 2026 22:23:28 +0800
-Message-ID: <20260611142328.87566-1-vulab@iscas.ac.cn>
-X-Mailer: git-send-email 2.50.1
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1781187893; x=1781792693; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=Uyqx5RU4X8dwws89SGmJH89G6IgazxjsfZpMpm+xJiI=;
+        b=UgWM9dl3qZjvn2R9GTseyXCGa5Or30vbGEr/jro8rUjFAkGdGX/5+wXNWa88/jFYHX
+         q+l5RPM+C0Obq8529kWSP9+ycx3PipvTUDr5piWR5sZvAb3H2UiqNHpCR/idy96k/rCC
+         1+WQJhid9XZBE9bQ5Aq0x3UQnIWKdHUvmGGz2EMLu3CZyZnFyXl30pNXQX+O3KdXL0+w
+         BzZkZsdReVNSw4Aag+4WSQ/fZof6TTeAYJf1/5Mqc3rPkxllPu1SJczmO+weqDrIAPo1
+         XqOFyX9ykbJ/VbkhZjeMhSfkDQckKdxtWeuftdl2n5wUmBl9WR76UKmlXG7+yKE5yZBq
+         Nr0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1781187893; x=1781792693;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Uyqx5RU4X8dwws89SGmJH89G6IgazxjsfZpMpm+xJiI=;
+        b=DkrlQHsF3HbDtMsY+uvcAf/SGfG+FhOt4TklruFopEm5Qq4zlAgQvL3eP3/jhOkQtG
+         eDtpZSxFSh06bBRxYa86vGI0HU6xhULBA4ZG5wmSbjzkEfJCXh2mPCjFcWZabVqOxj9m
+         y34j0+DbBEpeYs7h6Paf6b+7Xic8cgwYAqANgQ9ej/4x30lb8hGxX34aiXlCol/y1FGW
+         8mMwqe1nMh+AxuM2SLTM6CoiI7wD4XDnfj8E2mGMQB8YYKHwt6O1BQsW4trylO9sB6UC
+         jnnIC7xn6bfYbgMOu9IVFZ9VJ72mM6doZWU5T+cw8BNcbvnEj5K9zrHJKRZ5FPoc4p86
+         1OgQ==
+X-Forwarded-Encrypted: i=1; AFNElJ8LG+BgtsB3/wyo0bZcA2XnYIXa8jaNUimqT75lhj4webkSHUMPCcQSaSRrUR1fAGQmj7Ereew9LAM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxpOz0uYHH7RCltGZ2lO1D4syoc8jQtSpSRv3unPSBEjK6TZ/DQ
+	76JS8iMnugKKuhMskl87vkfwt49qRCKRJPQAU4GcqREfPW9c1MDjEdJ4/7kzEZ48AA==
+X-Gm-Gg: Acq92OEcJMcwgpIKDw83bD6zlmrxzFMHDI/lZSuiGrH+nEeThVD4gjGh8PgSL3cRAWb
+	DmVU4agtRJFvIU9Yg9MkNZVXKQB8xR21ymdjaJAR179YZ98DTF/qFRaTBVchi+cT+l8eLCB2Fgs
+	hdmuByf+f0O6UqZTpKsgknAmBgaVVcY5c9jfa0w54HXFMNh2zzKEZyydkQFiweC1FNmUNMDVAjv
+	iyvtYyQwvkjfJMETa8dITWf/vInsJu7QLtSPdw/Arc19Fdo7V8OLcFB+OM3PmAqAUl4NZ6G6NOe
+	hEv7wvuwJIHuXCrNlv8VM/XdNFUcGM6N1ybMJyQxiRs74XZpYT4r8NqVTNHN4vvHOp7xR5FudaB
+	ik82CrlWWtTlBLPiKDrrOyEtS8guDJ3Z2QDVcs/EdGHNE3u1r0BTYkgKLk5Qbi5k4UrJqbqfKO+
+	QlE3QfQjbg54Bq0Iv2tXiei/DgJ5Nr6QeG/iP9e4qfZe42ptMeF4Gmh2W8OOemzeTo/RBT0am2e
+	7WD0nXAiv/rAPU9A8s3/57l27XFk8BKQ84QRvTM8GOgky+gE1hjFHL8rxZ4tvrS4KGSSLQ=
+X-Received: by 2002:a05:600c:535a:b0:490:e18f:d0db with SMTP id 5b1f17b1804b1-490e563e68bmr30999005e9.26.1781187892961;
+        Thu, 11 Jun 2026 07:24:52 -0700 (PDT)
+Message-ID: <aa06a820-3543-4fdb-8824-06a0008b8e0a@suse.com>
+Date: Thu, 11 Jun 2026 16:24:50 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:zQCowACXHgLixCpq43AXEw--.957S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7AF13Zw4kWr1UXFyxtFy8Grg_yoW8GF1fpa
-	9xCa43ArWrXw1Iq3WqqayagFy5X3sxJFy3Cry0k3s8ZFnIy3WIyr15tFy8ur4UJrs7CrW5
-	Ar4kCFyruFW5A3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUkG14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
-	1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
-	6F4UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s
-	0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xII
-	jxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr
-	1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxkF7I0En4kS14v26r12
-	6r1DMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI
-	0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUAVWUtwCIc40Y
-	0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
-	WUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1l
-	IxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUf8nOUUU
-	UU=
-X-Originating-IP: [117.182.75.76]
-X-CM-SenderInfo: pyxotu46lvutnvoduhdfq/1tbiCRAPA2oqh4XCBgAAsT
-X-purgate-ID: tlsNG-720697/1781187816-7BD67161-C9C54D9A/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/7] x86/kexec: Implement new EFI load types
+To: Kevin Lampis <kevin.lampis@citrix.com>
+Cc: andrew.cooper3@citrix.com, roger.pau@citrix.com,
+ Ross Lagerwall <ross.lagerwall@citrix.com>,
+ Gerald Elder-Vass <gerald.elder-vass@cloud.com>,
+ Kevin Lampis <klampis@citrix.com>, xen-devel@lists.xenproject.org
+References: <20260609154518.779757-1-kevin.lampis@citrix.com>
+ <20260609154518.779757-6-kevin.lampis@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260609154518.779757-6-kevin.lampis@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ebf023/1781187893-425603FF-8B722098/0/0
 X-purgate-type: clean
-X-purgate-size: 1382
+X-purgate-size: 478
 
-When gntdev_ioctl_map_grant_ref() fails to copy the operation
-result back to userspace after successfully adding the mapping to
-the list, the error path returns -EFAULT without releasing the
-reference acquired by gntdev_alloc_map(). The mapping remains in
-priv->maps with a refcount of 1, causing a memory leak and a
-dangling list entry.
+On 09.06.2026 17:45, Kevin Lampis wrote:
+> --- a/xen/arch/x86/include/asm/bzimage.h
+> +++ b/xen/arch/x86/include/asm/bzimage.h
+> @@ -47,4 +47,9 @@ struct __packed bzimage_header {
+>          uint32_t        payload_length;
+>      };
+>  
+> +static inline uint64_t kernel_alignment_offset(void)
+> +{
+> +    return offsetof(struct bzimage_header, kernel_alignment);
+> +}
 
-Fix this by moving the copy_to_user() before gntdev_add_map(),
-so that the mapping is only inserted into the list on success.
-This avoids the need to remove the mapping from the list on error.
+Why the uint64_t return type? If at all, size_t. Yet likely unsigned int
+would suffice.
 
-Cc: stable@vger.kernel.org
-Fixes: 68b025c813c2 ("xen-gntdev: Add reference counting to maps")
-Signed-off-by: WenTao Liang <vulab@iscas.ac.cn>
----
- drivers/xen/gntdev.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/xen/gntdev.c b/drivers/xen/gntdev.c
-index 61ea855c4508..a1c230756b3d 100644
---- a/drivers/xen/gntdev.c
-+++ b/drivers/xen/gntdev.c
-@@ -672,8 +672,13 @@ static long gntdev_ioctl_map_grant_ref(struct gntdev_priv *priv,
- 	op.index = map->index << PAGE_SHIFT;
- 	mutex_unlock(&priv->lock);
- 
--	if (copy_to_user(u, &op, sizeof(op)) != 0)
-+	if (copy_to_user(u, &op, sizeof(op)) != 0) {
-+		mutex_lock(&priv->lock);
-+		list_del(&map->next);
-+		mutex_unlock(&priv->lock);
-+		gntdev_put_map(priv, map);
- 		return -EFAULT;
-+	}
- 
- 	return 0;
- }
--- 
-2.50.1 (Apple Git-155)
-
+Jan
 
