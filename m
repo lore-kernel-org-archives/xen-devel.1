@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34108CD98CE
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Jun 2026 13:44:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1335538.1597717 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A161DCD98CE
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Jun 2026 13:47:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1335546.1597727 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXfhU-0001Z5-TI; Thu, 11 Jun 2026 13:44:04 +0000
+	id 1wXfkE-00024B-Ag; Thu, 11 Jun 2026 13:46:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1335538.1597717; Thu, 11 Jun 2026 13:44:04 +0000
+Received: by outflank-mailman (output) from mailman id 1335546.1597727; Thu, 11 Jun 2026 13:46:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXfhU-0001Yy-Qf; Thu, 11 Jun 2026 13:44:04 +0000
-Received: by outflank-mailman (input) for mailman id 1335538;
- Thu, 11 Jun 2026 13:44:03 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wXfkE-000244-7E; Thu, 11 Jun 2026 13:46:54 +0000
+Received: by outflank-mailman (input) for mailman id 1335546;
+ Thu, 11 Jun 2026 13:46:53 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wXfhT-0001Ys-1r
- for xen-devel@lists.xenproject.org; Thu, 11 Jun 2026 13:44:03 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wXfkD-00023y-LE
+ for xen-devel@lists.xenproject.org; Thu, 11 Jun 2026 13:46:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wXfhS-00CyOC-EU
- for xen-devel@lists.xenproject.org; Thu, 11 Jun 2026 15:44:02 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wXfkD-00AwxU-0b
+ for xen-devel@lists.xenproject.org; Thu, 11 Jun 2026 15:46:53 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a2abb97-5cb7-0a2a0a5109dd-0a2a45019632-34
- for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2026 15:44:02 +0200
-Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a2abc44-bab6-0a2a0a5309dd-0a2a4505b6f8-30
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2026 15:46:52 +0200
+Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a2abba2-c1f2-0a2a45010019-d155dd2dcd2b-3
- for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2026 15:44:02 +0200
-Received: by mail-wr1-f45.google.com with SMTP id
- ffacd0b85a97d-45eee266c6cso6564091f8f.1
- for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2026 06:44:02 -0700 (PDT)
+ id 6a2abc4c-aaa8-0a2a45050019-d155dd35bdfd-3
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2026 15:46:52 +0200
+Received: by mail-wr1-f53.google.com with SMTP id
+ ffacd0b85a97d-45fe59255beso4334849f8f.1
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2026 06:46:52 -0700 (PDT)
 Received: from ?IPV6:2003:ca:b70d:3054:345c:e2ed:ca23:72c4?
  (p200300cab70d3054345ce2edca2372c4.dip0.t-ipconnect.de.
  [2003:ca:b70d:3054:345c:e2ed:ca23:72c4])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-490e2d046d5sm65839725e9.13.2026.06.11.06.44.00
+ ffacd0b85a97d-4601f2ec711sm78545635f8f.12.2026.06.11.06.46.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 11 Jun 2026 06:44:00 -0700 (PDT)
+ Thu, 11 Jun 2026 06:46:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,60 +55,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1781185441; x=1781790241; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=2oLsIpt2hMOfn3gNlCBuGP3OxTBlSmMK2Hz+z75rlGc=;
-        b=goiUYblxWzytFW2RfVF965nHWrpI2ZCePZxQYV0vDsKnbL2A7ZzoJlIeTWQLN6ooIE
-         ys+eTrA/bq/+0rh/SJEiqfLRQzskEsnjhuNTcxi+JZLxY529CgR0dMFaejHLESFiD6tJ
-         3zLqWvE4iLkphrj6464vYRYYqX1u2ITA2+vzYqJW12dsWSn97Fli/fPXTG06sOIEyn20
-         Y0ObHs73wekWyEldxe2rz/PCCOrPmFy/2WIx5ajjPd1yI+QDOWPNGBDM432fhifgiNKE
-         OSuRZnersNKCp5kNiTnRTSM9Fz82rmJt1MrnzJpBbRY10tZ/LrQtQTfe7J1iK8do2MiY
-         +jYQ==
+        d=suse.com; s=google; t=1781185612; x=1781790412; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=/HZuT9k6Z48d6OVPdJE9YIhgJiAiSSch+MUzdSYF09k=;
+        b=UiqF4UdEjcYnfXfvPDWh64V6w4aTh0a+jTB5uc7t4PgWHH5jKLUPhgZkwlJcb1XciJ
+         +qyeZMPZ+x3X65lkRbQmLRHMffP4HZH8j2aiJVrMLpEPuFjM+rP6TNH/XaJyPHPXV3Dh
+         f7km3h3a9l4l9lg3keisOxhFE6knLImypeSuRS5k9sT56cXOp2h77xhVSdl0baWU3iEj
+         g3KBlPvItIQ5vcvCg9IKRlMXmktrTr9pqkRLqYFYXnIF4eYZOSsvOxzMjerzSmfeOYwI
+         FKLfu1KokW638ADEcBhfqCqOeZ1Row04uwE0a4YB/1DGDiQ8FLwva6EArjCiEIf+9gLE
+         zytw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781185441; x=1781790241;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1781185612; x=1781790412;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=2oLsIpt2hMOfn3gNlCBuGP3OxTBlSmMK2Hz+z75rlGc=;
-        b=DAP8S4af+sFBoGNgLYhpC5JYonmJd5LfIqKHyM+JdzIOVj6GmEoYsPXtJQ6/ZUqFki
-         3KzXQH6XnOYZPz/jdLvUiSK/IoredUQ79ySzMezIw+MTDR65uoObGALXBfd/WZ9MoEmO
-         KfC1nPyieD3U1o4aRWvjSfYOJfaFaxjwtzn25k6BfhX3iIXgRdx8Blcawc/aGH6ArfWE
-         a3AXNI/O5oh8wY72AzmWlLnoPLdgY5vh3Srmr5NZM0Xo69hQIZLbfLIyAVQ89XH7/7WO
-         jJDzHZVfTPbUdTFcXERd0SXCdffF9EYU6bSWoxUcGdwzIhwDZnsuVEsHh7Fmw/xGFaDv
-         uzPA==
-X-Forwarded-Encrypted: i=1; AFNElJ/2VN8dKoI2o9y+E8b0Bu7DA2YFIXZ2aDWuO1PYoFF4XR5hpsgB1u1vrBkWByPdKIrQoGvg6FFYjNo=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxxGpaif6xHBeLs+6HxTNkyS9eVYu9HVMNIvfwwBLHJAuii/c52
-	/b6fR2ygGbbAwWhh+MlF4y6vTdG0LICo0kfLH4vmk86vL/NZA8tKx/ndpL9hPnTN/Q==
-X-Gm-Gg: Acq92OFdAcktGP82cD90rankVPhQNOsjggWWokCLGhVRFv3YVfvnfMo6ogxu7wGY8mC
-	qEJ739xjrvFI/iMPBshd3+F09ij8zPyVyp5jjUutUwnubslOlvut/59sYRSfQtu5LGB8qEbAGfe
-	Ql8Id/95GWv4BF/G3KORwTGAnEW5cSii+YS0bQGvRBWTHAxGSgChnWn9QS06OCpa/kmgnohFEuP
-	f0oDIfKoWnourXt1wOKvK3bdbww34SvJkOIkAs/2HTkcpjBmmUlL+S5OVmyNaKC39VLr/r9iySz
-	g6oJs6pzNXzbMXf+IHVYzEn7VdkpSNPhnGx42IIJ35hgSKkrD++zTLvXfjuggEroizJd8UnK6Bl
-	wkUusNaCPR13dWLAVluysKfXf18mfb3NCXBJjDY/RoWN4jLmncSmI/Mgz8Q2l6TW6dSAkYhRgoI
-	Cj0kx6AHGMi0Y63nRZgY0v2QsuVIkVRqikxSVrBe1yv9AlJSOLJupjCAkBfFoGN+9Tt1368zPeX
-	2MH3URuUAUEwPO0guYVXV4sbrhwyCWlaF/DRFvWAUSZsp+32H5dQcqibGEaF4I3uz9KbyU=
-X-Received: by 2002:a05:600c:c8c:b0:488:9bf8:7f17 with SMTP id 5b1f17b1804b1-490e560e39fmr43698925e9.14.1781185441387;
-        Thu, 11 Jun 2026 06:44:01 -0700 (PDT)
-Message-ID: <46ec5166-e147-499a-acbe-d3115551db42@suse.com>
-Date: Thu, 11 Jun 2026 15:43:59 +0200
+        bh=/HZuT9k6Z48d6OVPdJE9YIhgJiAiSSch+MUzdSYF09k=;
+        b=Jarmm5HKzZW/huko0sFPDVSjrX2b6Tx1NwneuvcqRNm93aKO7AviIP8zmZnEvORysw
+         3RN8lZOmUq9ySlNbgbF4Zj7oVJGj93CwTYOm+sqJJu4TfLhxmMf0qGTx6Fu8dAPCKZV1
+         sEeD/95kLrE3h4CBLyzONj4n2Z6z+H/QGKQguL329fBlJynEiNCH5K7ULpfLBbsM2XHy
+         SW4o0gEFqXMuoEayal4WNa3H1kWlmQhXOVIlN8/eO6It8X0u5beqy1532JqRekfT6iln
+         NkzSN6iZURiqX5EAWrzqsMohJ3wMhJjRxeLUL34A491xDP/TOKTRTl5EUbJbUuUid/sV
+         h6Lg==
+X-Forwarded-Encrypted: i=1; AFNElJ/ig3G/MYORDZJWvOMCcw+zEnImFbwiF46Qbq5hkeXyFBqBZNkuOY2Tyn1A3/RoBIlgrlF1mkQ/Abw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzLK9n2lG5BI7UgXZ9fPLlKnNg4nX+E3WUX9GZG5cNrLWG7bzS4
+	rd7L4UjT+UBzquOomx1VLUjK2aStp0sILcB2IC6U5N4X7a3gr5CSEy5urKzvAtfc36yMp4HRc8R
+	z62Q=
+X-Gm-Gg: Acq92OFQdT4LrbEBf3pcsrIHTIQkNm/+gXMRWXEU5ajVKllF6aAzxJ6ozpQkcESB5rq
+	6/8+LSRpLfU2lcFypi9IxtdxuErYceofhg/mslc2qRh4ZEqVO0oy2cdmJf+9iBvEn3k+gHwyzwR
+	x9gvkBiQH+9e6W20gv2INzsJgVCjwwBw7Quv0HFJWaa1xGfjZpZPQvrNThoxakaY09OqJpoUOll
+	QOB7g7+nTKSNUqsv0NpSEdrJ9hG+AhXgzhWc6qfzQnu4EyO/VqS+e4X/D7zX60Ndo8olsC/IoCE
+	LezEgYcxJ1jg2I+qAbNa1mU94dw3L9r/pP2MpPd7qiMZ2mHiZkX9gaztIT3YU3otvE7pVueOsI2
+	mNgkYGpdTIfm1jZg7RvVT6wN//X2L4dY9Ou2XULXmMDgaAVwYHpLhnuyir4Jt49ogXh2H/DMBiE
+	ls6qWMjmk04t2v0iEpwn2rc2WWyf9wgeN0fh86pUl+lD7iFiTD7agO02rk4mLokQN/npi/OThre
+	+V6mnOKxwmcj4+itqb7DNwumEdIXYX0PF+RcusKlmLPEEY0AhQrZL1M4iC3cGn7nh0TjXs=
+X-Received: by 2002:a05:6000:1844:b0:45e:a0ab:8bd1 with SMTP id ffacd0b85a97d-4606746a073mr4464970f8f.7.1781185612463;
+        Thu, 11 Jun 2026 06:46:52 -0700 (PDT)
+Message-ID: <906bd0bf-39a8-4c0c-b158-a82c81428984@suse.com>
+Date: Thu, 11 Jun 2026 15:46:50 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] sched/rtds: refill cur_budget when extratime is toggled
  on a depleted vCPU
+From: Jan Beulich <jbeulich@suse.com>
 To: Oleksii Moisieiev <oleksii_moisieiev@epam.com>,
- Dario Faggioli <dfaggioli@suse.com>
+ Dario Faggioli <dfaggioli@suse.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: George Dunlap <gwd@xenproject.org>, Juergen Gross <jgross@suse.com>,
  Meng Xu <mengxu@cis.upenn.edu>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <9f20b6ac8176da6c67e1084e862158a2e47abc40.1779285422.git.oleksii_moisieiev@epam.com>
  <cafef621-024f-4c3f-862a-4c61a1ab4293@epam.com>
+ <46ec5166-e147-499a-acbe-d3115551db42@suse.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -132,144 +135,26 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <cafef621-024f-4c3f-862a-4c61a1ab4293@epam.com>
+In-Reply-To: <46ec5166-e147-499a-acbe-d3115551db42@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1781185442-AEB5EFF4-9E7BB699/0/0
+X-purgate-ID: tlsNG-c201ff/1781185612-DAD6F443-213EE1A8/0/0
 X-purgate-type: clean
-X-purgate-size: 7406
+X-purgate-size: 457
 
-On 10.06.2026 08:50, Oleksii Moisieiev wrote:
-> Gentle Ping.
+On 11.06.2026 15:43, Jan Beulich wrote:
+> On 10.06.2026 08:50, Oleksii Moisieiev wrote:
+>> Gentle Ping.
+>>
+>> I've already got R-b from Juergen. Maybe someone else will have time to review?
 > 
-> I've already got R-b from Juergen. Maybe someone else will have time to review?
+> Dario,
+> 
+> didn't you mean to submit a patch to ./MAINTAINERS, after which Jürgen's
+> R-b would suffice for committing?
 
-Dario,
-
-didn't you mean to submit a patch to ./MAINTAINERS, after which Jürgen's
-R-b would suffice for committing?
+Ah, I now see Jürgen sent such a patch. Oleksii - then a release ack would
+be needed for this fix to (finally) go in.
 
 Jan
-
-> On 20/05/2026 16:57, Oleksii Moisieiev wrote:
->> XEN_DOMCTL_SCHEDOP_putvcpuinfo can flip the RTDS_extratime bit on a vCPU
->> that is currently depleted (cur_budget == 0, possibly sitting on the
->> depleted queue). rt_dom_cntl() touches only svc->flags; cur_budget is
->> left unchanged. As a result the next code path that calls runq_insert()
->> on this vCPU - rt_unit_wake() after a domain_unpause(),
->> rt_context_saved() following a delayed runq add, or repl_timer_handler()
->> after a replenishment - places the vCPU on the run queue, because
->> has_extratime(svc) is now true and runq_insert() admits extratime units
->> regardless of cur_budget:
->>
->>      /* add svc to runq if svc still has budget or its extratime is set */
->>      if ( svc->cur_budget > 0 ||
->>           has_extratime(svc) )
->>          deadline_runq_insert(svc, &svc->q_elem, runq);
->>      else
->>          list_add(&svc->q_elem, &prv->depletedq);
->>
->> The very next rt_schedule() iterates the run queue from runq_pick()
->> and trips the ASSERT(iter_svc->cur_budget > 0) at the bottom of the
->> loop, panicking the host. Observed trace:
->>
->>      Assertion 'iter_svc->cur_budget > 0' failed at common/sched/rt.c:1035
->>      ----[ Xen-4.22-unstable  arm64  debug=y ubsan=y  Not tainted ]----
->>      [<...>] rt.c#rt_schedule+0x1558/0x33e0 (PC)
->>      [<...>] core.c#do_schedule+0x2e4/0x15b4
->>      [<...>] core.c#schedule+0xb14/0xe50
->>      [<...>] softirq.c#__do_softirq+0x20c/0x3d4
->>      [<...>] do_softirq+0x14/0x1c
->>      [<...>] domain.c#idle_loop+0x194/0x558
->>
->> Minimal reproducer: pin a single-vCPU domU to a pCPU, program RTDS with
->> extratime off and a low utilisation (e.g. budget = 10ms / period = 100ms)
->> so the vCPU spends most of its time in the depleted queue, pause the
->> domain, issue a putvcpuinfo that sets XEN_DOMCTL_SCHEDRT_extra, then
->> unpause. As soon as the schedule softirq fires on the pCPU, the BUG
->> hits. The same sequence is reachable without an explicit pause: any
->> window in which rt_dom_cntl() runs between burn_budget()'s budget
->> exhaustion and rt_context_saved()'s runq_insert() also closes onto the
->> same broken state, because the per-scheduler lock is dropped between
->> those two points.
->>
->> The semantics for "extratime gets exhausted budget refilled" already
->> live in burn_budget():
->>
->>      if ( has_extratime(svc) )
->>      {
->>          svc->priority_level++;
->>          svc->cur_budget = svc->budget;
->>      }
->>
->> Apply the same priority-demotion-and-refill in rt_dom_cntl() when the
->> flag transitions from off to on while the vCPU is depleted, clear
->> RTDS_depleted to match, and - if the vCPU is currently on the depleted
->> queue - move it to the run queue using the same q_remove() +
->> runq_insert() pattern already used by repl_timer_handler(). The vCPU
->> remains on the replenishment queue throughout, so its normal
->> replenishment cadence is preserved.
->>
->> The complementary transition (on -> off) is already safe: clearing the
->> flag only narrows the runq_insert() admission condition, so subsequent
->> depleted insertions correctly route to the depleted queue.
->>
->> No other call sites need changes: with cur_budget restored before the
->> flag is observable to runq_insert(), runq_pick()'s long-standing
->> invariant (every run-queue entry has cur_budget > 0) is preserved.
->>
->> Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
->> ---
->>
->>   xen/common/sched/rt.c | 34 ++++++++++++++++++++++++++++++++++
->>   1 file changed, 34 insertions(+)
->>
->> diff --git a/xen/common/sched/rt.c b/xen/common/sched/rt.c
->> index b156f61afa..18e39977be 100644
->> --- a/xen/common/sched/rt.c
->> +++ b/xen/common/sched/rt.c
->> @@ -1465,7 +1465,41 @@ rt_dom_cntl(
->>                   svc->period = period;
->>                   svc->budget = budget;
->>                   if ( local_sched.u.rtds.flags & XEN_DOMCTL_SCHEDRT_extra )
->> +                {
->> +                    /*
->> +                     * Turning extratime on while the vCPU is depleted
->> +                     * (cur_budget <= 0) leaves cur_budget unchanged. The
->> +                     * next runq_insert() on this vCPU - from
->> +                     * rt_unit_wake() after a domain unpause,
->> +                     * rt_context_saved() following a delayed runq add, or
->> +                     * repl_timer_handler() - then places it on the run
->> +                     * queue because has_extratime() is now true, even
->> +                     * though cur_budget is 0. The very next rt_schedule()
->> +                     * iterates the run queue from runq_pick() and trips
->> +                     * the ASSERT(iter_svc->cur_budget > 0).
->> +                     *
->> +                     * Apply the same priority-demotion-and-refill that
->> +                     * burn_budget() would have performed if the flag had
->> +                     * been set when the budget ran out, clear the
->> +                     * depleted state, and - if the vCPU is currently on
->> +                     * the depleted queue - move it to the run queue so
->> +                     * the new extratime allocation is picked up
->> +                     * immediately instead of waiting for the next
->> +                     * replenishment.
->> +                     */
->> +                    if ( !has_extratime(svc) && svc->cur_budget <= 0 )
->> +                    {
->> +                        svc->priority_level++;
->> +                        svc->cur_budget = svc->budget;
->> +                        __clear_bit(__RTDS_depleted, &svc->flags);
->> +                        if ( unit_on_q(svc) )
->> +                        {
->> +                            q_remove(svc);
->> +                            runq_insert(ops, svc);
->> +                        }
->> +                    }
->>                       __set_bit(__RTDS_extratime, &svc->flags);
->> +                }
->>                   else
->>                       __clear_bit(__RTDS_extratime, &svc->flags);
->>                   spin_unlock_irqrestore(&prv->lock, flags);
-> 
-
 
