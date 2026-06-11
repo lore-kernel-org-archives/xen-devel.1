@@ -4,38 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC4D4CD8C9D
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Jun 2026 17:43:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1335981.1598050 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D045CD98CC
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Jun 2026 22:24:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1336194.1598072 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXjRJ-0003FR-N0; Thu, 11 Jun 2026 17:43:37 +0000
+	id 1wXnof-0007tQ-FJ; Thu, 11 Jun 2026 22:24:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1335981.1598050; Thu, 11 Jun 2026 17:43:37 +0000
+Received: by outflank-mailman (output) from mailman id 1336194.1598072; Thu, 11 Jun 2026 22:24:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXjRJ-0003FK-KH; Thu, 11 Jun 2026 17:43:37 +0000
-Received: by outflank-mailman (input) for mailman id 1335981;
- Thu, 11 Jun 2026 17:43:36 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wXnof-0007tJ-CQ; Thu, 11 Jun 2026 22:24:01 +0000
+Received: by outflank-mailman (input) for mailman id 1336194;
+ Thu, 11 Jun 2026 22:24:00 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dpsmith@apertussolutions.com>) id 1wXjRI-0003FE-09
- for xen-devel@lists.xenproject.org; Thu, 11 Jun 2026 17:43:36 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wXjRH-007KOt-8R
- for xen-devel@lists.xenproject.org; Thu, 11 Jun 2026 19:43:35 +0200
-Received: from [10.42.69.6] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <dpsmith@apertussolutions.com>)
- id 6a2af3ab-bab6-0a2a0a5309dd-0a2a4506db06-28
- for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2026 19:43:34 +0200
-Received: from [136.143.188.51] (helo=sender4-of-o51.zoho.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <dpsmith@apertussolutions.com>)
- id 6a2af3c4-7371-0a2a45060019-888fbc335298-3
- for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2026 19:43:34 +0200
-Received: by mx.zohomail.com with SMTPS id 1781199800923362.86722773555596;
- Thu, 11 Jun 2026 10:43:20 -0700 (PDT)
+ (envelope-from <julien@xen.org>) id 1wXnoe-0007sz-Qf
+ for xen-devel@lists.xenproject.org; Thu, 11 Jun 2026 22:24:00 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <julien@xen.org>) id 1wXnob-004y0q-0T;
+ Thu, 11 Jun 2026 22:23:56 +0000
+Received: from [2a02:8012:3a1:0:51e8:2886:7874:ff19]
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
+ (envelope-from <julien@xen.org>) id 1wXnoa-001tuw-0Y;
+ Thu, 11 Jun 2026 22:23:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,130 +41,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=zoho header.d=apertussolutions.com header.i="dpsmith@apertussolutions.com" header.h="Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:In-Reply-To:Content-Type:Content-Transfer-Encoding"
-ARC-Seal: i=1; a=rsa-sha256; t=1781199802; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=WRBvkp/DPqWN0FSSYBL9JVTErMUrsAgxMxalE//wzexb6axo0Zl3ISZABWzDbyPWcyL/bP5m1fzTl1Vfiwj7U73KI8xZp2xvWAgDJwM+P2YPfxqpBYrzMJJyrs/JPi81JYntB1jUpgJAM/uKnmPRUYJwjc2PxA+QMYXJq+tKWrY=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1781199802; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=NTufMvdvnTyc8lYUTSyjtj8b9aJg0FrAAmDWS26I/u8=; 
-	b=IrUKuNIyKA12tj6E/ZKdMMNZydFzaptHt4Mx0m0MJmzrxtkJPMfDhEV0NDOGHhGyfp3/QkqW+oNyBgSafkF1Qv6fr9w0Sjbusyd5AvqjAmSD8gF1kPHwD4aKGxoQSm6ZjJbuFuSFR33RD0+tl03biSNgN9q3MzCEzcoAqEDsk8o=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=apertussolutions.com;
-	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
-	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1781199802;
-	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
-	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=NTufMvdvnTyc8lYUTSyjtj8b9aJg0FrAAmDWS26I/u8=;
-	b=AVAdDa6q6ZGobiQ/v2cK6VbRvacShELIJUJrII972z/gZCSUK7yUzry4yPzVTCBA
-	V0Lccp1mLvMEjarU0yfOBepkHK3kaTv+0N2p/nrhi9NhJ5MrBKZVlFKCXT576WLBQY0
-	gMgnKCVn5XLHk8Ko0bFGOtw0picKk0eBfSKaWOBk=
-Message-ID: <f7b16f43-f3c2-449e-8c09-b65e2cadca85@apertussolutions.com>
-Date: Thu, 11 Jun 2026 13:43:19 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=JAjXi+ZrCjFY2J266ZrUbMCgFoT3yFFiliMAHJYti9g=; b=wcZQfg3idYWhUef05pC/KPEACE
+	d7L+yncA3DIJaLCZpKvve7Vwb877FNEsM1G9YbFv190QJ3gx95kRf6NW6mQp+ABKmFQ3Ri/Ot6Wl1
+	MkH65idCi5fT4cSpOh3KSFt+lBMnfmgiWDSViQTuiEnYkHzvvlPNV3Yv8AhB/yLfdAlc=;
+Message-ID: <1fe76e3d-ad48-4b75-a690-accff86f0fd2@xen.org>
+Date: Thu, 11 Jun 2026 23:23:54 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/6] argo: lower level of noisy connection-refused log
-To: Jan Beulich <jbeulich@suse.com>
-Cc: dmukhin <dmukhin@ford.com>, xen-devel <xen-devel@lists.xenproject.org>,
- "andrew.cooper3" <andrew.cooper3@citrix.com>,
- "anthony.perard" <anthony.perard@vates.tech>, julien <julien@xen.org>,
- "michal.orzel" <michal.orzel@amd.com>, "roger.pau" <roger.pau@citrix.com>,
- sstabellini <sstabellini@kernel.org>,
- "christopher.w.clark" <christopher.w.clark@gmail.com>,
- Mykola Kvach <mykola_kvach@epam.com>, Jason Andryuk <jason.andryuk@amd.com>
-References: <20260526215823.1452619-1-dmukhin@ford.com>
- <20260526215823.1452619-2-dmukhin@ford.com>
- <ae19de19-aef5-47af-833d-87a46efb9afc@apertussolutions.com>
- <c51ecc59-7252-4d1f-a192-717ae55dacd5@amd.com>
- <19eac3f10c4.4656d1b3334797.1477306808945740845@apertussolutions.com>
- <d5e26c5f-31cb-42e3-9a91-ee42674cf184@suse.com>
-Content-Language: en-US
-From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-In-Reply-To: <d5e26c5f-31cb-42e3-9a91-ee42674cf184@suse.com>
+Subject: Re: [PATCH 2/3] xen/sched: Link CPU topology to scheduler
+Content-Language: en-GB
+To: Hirokazu Takahashi <taka@valinux.co.jp>, xen-devel@lists.xenproject.org
+Cc: Mykyta_Poturai@epam.com, Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Dario Faggioli <dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>,
+ George Dunlap <gwd@xenproject.org>
+References: <20260610111320.133784-1-taka@valinux.co.jp>
+ <20260610111320.133784-3-taka@valinux.co.jp>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <20260610111320.133784-3-taka@valinux.co.jp>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ZohoMailClient: External
-X-purgate-ID: tlsNG-16d1c6/1781199814-8596CD75-BC2A68AB/0/0
-X-purgate-type: clean
-X-purgate-size: 4263
 
-On 6/11/26 11:26 AM, Jan Beulich wrote:
-> On 09.06.2026 13:57, Daniel Smith wrote:
->> From: Jason Andryuk <jason.andryuk@amd.com>
->> Date: Mon, 08 Jun 2026 19:16:01 -0400
->>   > On 2026-06-08 15:54, Daniel P. Smith wrote:
->>   > > On 5/26/26 5:58 PM, dmukhin@ford.com wrote:
->>   > >> --- a/xen/common/argo.c
->>   > >> +++ b/xen/common/argo.c
->>   > >> @@ -2034,10 +2034,9 @@ sendv(struct domain *src_d, xen_argo_addr_t
->>   > >> *src_addr,
->>   > >>                                           src_id.domain_id);
->>   > >>       if ( !ring_info )
->>   > >>       {
->>   > >> -        gprintk(XENLOG_ERR,
->>   > >> -                "argo: vm%u connection refused, src (vm%u:%x) dst
->>   > >> (vm%u:%x)\n",
->>   > >> -                current->domain->domain_id, src_id.domain_id,
->>   > >> src_id.aport,
->>   > >> -                dst_addr->domain_id, dst_addr->aport);
->>   > >> +        argo_dprintk("vm%u connection refused, src (vm%u:%x) dst
->>   > >> (vm%u:%x)\n",
->>   > >> +                     current->domain->domain_id, src_id.domain_id,
->>   > >> src_id.aport,
->>   > >> +                     dst_addr->domain_id, dst_addr->aport);
->>   > >>           ret = -ECONNREFUSED;
->>   > >>       }
->>   > >
->>   > > My apologies but this is not the wisest approach, hitting this is a real
->>   > > error and shouldn't be getting silenced.
->>   >
->>   > -ECONNREFUSED is still returned, and that is the important part, I think?
->>   >
->>
->> Absolutely not. Argo at its essence is a security protocol where you want to minimize the amount of implicit trust we have to have with the endpoint. Telling a bad actor he did a bad action tells you nothing. The send operation is the critical security path and you must have an auditable record that an endpoint misbehaved. If yo want to implicitly trust your end point after passing the accees check, then you can just use grants.
+Hi,
+
+On 10/06/2026 12:13, Hirokazu Takahashi wrote:
+> Make CPU topology information available to the Xen scheduler.
+> Additionally, ensure that this topology information is displayed
+> when executing the 'xl info -n' command.
 > 
-> Yet then - is potentially spamming the log an appropriate model? Furthermore
-> gprintk()-s are, by default, rate-limited in release builds, and hence there
-> isn't going to reliably be an "auditable record" anyway. If you want logging
-> for auditing purposes, I think you'll need to add separate logging (not to
-> the system console).
+> Signed-off-by: Hirokazu Takahashi <taka@valinux.co.jp>
+> ---
+>   xen/arch/arm/include/asm/processor.h  |  4 ---
+>   xen/arch/arm/smpboot.c                | 10 ++++--
+>   xen/common/device-tree/cpu-topology.c | 51 +++++++++++++++++++++++++++
+>   xen/common/sched/credit2.c            |  3 ++
+>   xen/common/sysctl.c                   |  1 +
+>   xen/include/xen/cpu-topology.h        | 10 ++++++
+>   6 files changed, 72 insertions(+), 7 deletions(-)
+> 
+> diff --git a/xen/arch/arm/include/asm/processor.h b/xen/arch/arm/include/asm/processor.h
+> index a3753c317f..41fa73cfc4 100644
+> --- a/xen/arch/arm/include/asm/processor.h
+> +++ b/xen/arch/arm/include/asm/processor.h
+> @@ -613,10 +613,6 @@ void show_stack(const struct cpu_user_regs *regs);
+>   
+>   #define cpu_relax() barrier() /* Could yield? */
+>   
+> -/* All a bit UP for the moment */
+> -#define cpu_to_core(_cpu)   (0)
+> -#define cpu_to_socket(_cpu) (0)
+> -
+>   struct vcpu;
+>   void vcpu_regs_hyp_to_user(const struct vcpu *vcpu,
+>                              struct vcpu_guest_core_regs *regs);
+> diff --git a/xen/arch/arm/smpboot.c b/xen/arch/arm/smpboot.c
+> index c071f1494f..b25d98c109 100644
+> --- a/xen/arch/arm/smpboot.c
+> +++ b/xen/arch/arm/smpboot.c
+> @@ -91,13 +91,17 @@ static int setup_cpu_sibling_map(int cpu)
+>            !zalloc_cpumask_var(&per_cpu(cpu_core_mask, cpu)) )
+>           return -ENOMEM;
+>   
+> +#ifdef CONFIG_DT_CPU_TOPOLOGY
 
-I must strongly object to the characterization of this logging as 
-"spamming the log." The mechanism is functioning exactly as designed.
+For Arm, we support both ACPI and Device-Tree in a single binary. That's 
+fine if we don't support NUMA with ACPI for now, but we need to make 
+sure this doesn't regress for now.
 
-Argo uses rate-limited logging to report attempts to write to a ring 
-that does not exist. Argo also exposes explicit interfaces for a domain 
-to determine whether a ring is available and whether access has been 
-granted. When software attempts an operation without first verifying 
-these preconditions through the provided mechanisms, the resulting log 
-message is both expected and necessary. It is not the role of the 
-logging interface to remain silent in the face of incorrect usage.
+With that in mind, I was expecting some runtime checks based on whether 
+ACPI or DT is used. Can you explain why this is not the case?
 
-Blaming the interface for correctly surfacing misuse, rather than 
-addressing the software that fails to use the capability properly, 
-inverts the proper assignment of responsibility. Logging exists to make 
-such problems visible; suppressing it does not solve the underlying 
-issue.This is especially true in this case, where failed attempts to 
-send to a ring is of security relevance.
+Cheers,
 
-Consider the direct parallel: a domain is started with the expectation 
-that a peer domain will establish a grant mapping for predetermined 
-grant reference, instead of coordinating through xenstore. If the first 
-domain attempts the mapping without performing or waiting for the proper 
-xenstore coordination, the system will correctly log the invalid grant 
-reference[1]. The appropriate response in that case is to correct the 
-lack of coordination in the domain's startup sequence, not to disable 
-the log message that reveals the misuse. The same principle applies here.
+-- 
+Julien Grall
 
-Proposals to remove or disable this logging in response to observed 
-misuse should be rejected on principle. The correct course of action is 
-to ensure that calling code uses the established discovery and 
-access-control interfaces before attempting operations on rings.
-
-[1] 
-https://elixir.bootlin.com/xen/v4.21.1/source/xen/common/grant_table.c#L1071
-
-V/r,
-Daniel P. Smith
 
