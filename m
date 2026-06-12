@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D3BFCD98DA
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2026 10:01:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1336484.1598296 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CEF0CD98CE
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2026 10:01:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1336490.1598314 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXyhe-0003LZ-OB; Fri, 12 Jun 2026 10:01:30 +0000
+	id 1wXyhl-00045M-Ft; Fri, 12 Jun 2026 10:01:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1336484.1598296; Fri, 12 Jun 2026 10:01:30 +0000
+Received: by outflank-mailman (output) from mailman id 1336490.1598314; Fri, 12 Jun 2026 10:01:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wXyhe-0003LP-Kd; Fri, 12 Jun 2026 10:01:30 +0000
-Received: by outflank-mailman (input) for mailman id 1336484;
- Fri, 12 Jun 2026 10:01:29 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wXyhl-00045A-CA; Fri, 12 Jun 2026 10:01:37 +0000
+Received: by outflank-mailman (input) for mailman id 1336490;
+ Fri, 12 Jun 2026 10:01:35 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19ebb477688000701b@swg.vates.tech>)
- id 1wXyhd-0003EE-30
- for xen-devel@lists.xenproject.org; Fri, 12 Jun 2026 10:01:29 +0000
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19ebb479016000701b@swg.vates.tech>)
+ id 1wXyhj-0003vN-9g
+ for xen-devel@lists.xenproject.org; Fri, 12 Jun 2026 10:01:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wXyhc-00FkJb-Fp
- for xen-devel@lists.xenproject.org; Fri, 12 Jun 2026 12:01:28 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wXyhi-0056he-MX
+ for xen-devel@lists.xenproject.org; Fri, 12 Jun 2026 12:01:34 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19ebb477688000701b@swg.vates.tech>)
- id 6a2bd8f8-5cb7-0a2a0a5109dd-0a2a4501caa6-0
- for <xen-devel@lists.xenproject.org>; Fri, 12 Jun 2026 12:01:28 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19ebb479016000701b@swg.vates.tech>)
+ id 6a2bd8fa-bab6-0a2a0a5309dd-0a2a450cba10-20
+ for <xen-devel@lists.xenproject.org>; Fri, 12 Jun 2026 12:01:34 +0200
 Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19ebb477688000701b@swg.vates.tech>)
- id 6a2bd8f7-c1f2-0a2a45010019-b9ff1c129d19-3
- for <xen-devel@lists.xenproject.org>; Fri, 12 Jun 2026 12:01:28 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19ebb479016000701b@swg.vates.tech>)
+ id 6a2bd8fe-62f1-0a2a450c0019-b9ff1c12b3f9-3
+ for <xen-devel@lists.xenproject.org>; Fri, 12 Jun 2026 12:01:34 +0200
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
  by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19ebb477688000701b.004 for <xen-devel@lists.xenproject.org>
+ 19ebb479016000701b.003 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Fri, 12 Jun 2026 10:01:23 +0000
+ Fri, 12 Jun 2026 10:01:29 +0000
 Received: from [192.168.1.200] (lfbn-mon-1-1130-120.w90-48.abo.wanadoo.fr
  [90.48.233.120]) (Authenticated sender: thierry.escande)
- by mail2.vates.fr (Postfix) with ESMTPSA id BFF6B86445;
- Fri, 12 Jun 2026 12:01:22 +0200 (CEST)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 5A20F863FC;
+ Fri, 12 Jun 2026 12:01:29 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,151 +60,70 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=xh2R9waaTNMlfuIpEZ+fmHJLfYoYS0YH6zSSnkU3BXg=;
+ q=dns/txt; s=selector1; bh=lRTVt6TLYyvZxQ4clMT8KEoLagGnL0YlVYAtPQPiWaU=;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=IEOOb7W8uDwv9SWRXxK6GTMFjF1YEnPkPeCX9+O9GSfDktzjqVNOIfu2eJI65H84DGYrUuNWd
- UNVI/m2+hCW54UMgg0i4+0FgD/yoN6eqnbtslzxRizdQYwPIwLvX8BV+ZDbi1X4imYUxQh+P3Nw
- H/+hgS0DKiVwC/+gPVwB98Cn+WzO7NUBw8oC/4hzWLTX74Qk1GJfBhqdlvSxgd4Mg46vYOu4ti3
- ISbdgK8L8nvZYbe9FZ3jID5X9aPYSYCLVdqfXk/fkK9MMkA2nzuEbn3vTTfrJ+kwPwFafYrvvJa
- IacRp8kRfZ0sfTLWbhfhfQ3zbIL3s4qaGOVkDlNMTtIA==
-X-Zone-Loop: cd387740805893fc041fcdc0bfb1211f7ed0b1514b48
+ b=ZTNhwTKLdX8aCDQrjnppJb++CFj6JOtRHSOzlVwDBSh6pSrVi4K3C04rMnzTbpMCqBLnmVOKP
+ iDkmMGUKr2c//oK3GU8ynuAgiqodH8cv+vrVvyZz/SGz4fXqYP/4a1gsZrbLYl373El5qoKxVNC
+ bIyBzDH/VtJFmrl92BrdUARn6XygAURsyUU89Pf4SKXzwQsgWQMm1GzAst3GkjArf00oPfv+v53
+ oaOVyvubBFL59nFd+ECCTLu7YXUnCyGCZL2Upyuqr2yrVEG27DW9Xs+UfFnF8R0yOhuLxsaAcox
+ jObdi1K8JaO80lrFL+ttEMFwwX2UNF8OepotQy1jQprg==
+X-Zone-Loop: 09d72c41ab7896d961535710c121ac73039d7d8975cf
 x-campaign-type: default
-x-transaction-id: 8c2abd98-fde3-4191-8203-2d01627deb66
-x-swg-uid: 01-50646aa8-31a4-4cc4-8376-51b9307fa75c
+x-transaction-id: c24f5d4d-d599-4eab-8cb0-06783b17206a
+x-swg-uid: 01-d0abcb43-ca14-420c-9c15-fddd7c219c57
 X-Mailer: Sweego
 Message-ID:
- <1781258483.8631fc262581453bbf619ec5b2062170.19ebb477688000701b@vates.tech>
-x-swg-bid: 1781258483.8631fc262581453bbf619ec5b2062170.19ebb477688000701b
+ <1781258489.8631fc262581453bbf619ec5b2062170.19ebb479016000701b@vates.tech>
+x-swg-bid: 1781258489.8631fc262581453bbf619ec5b2062170.19ebb479016000701b
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
 X-Originating-IP: [37.26.189.201]
-Date: Fri, 12 Jun 2026 12:01:22 +0200
+Date: Fri, 12 Jun 2026 12:01:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Thierry Escande <thierry.escande@vates.tech>
-Subject: Re: [PATCH 05/17] hvmloader: add Q35 DSDT table loading
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Alexey Gerasimenko <x1917x@gmail.com>
+Subject: Re: [PATCH 06/17] hvmloader: Move pci devices setup to a separate
+ function
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>, xen-devel@lists.xenproject.org
 References: <20260313163455.790692-1-thierry.escande@vates.tech>
- <20260313163455.790692-6-thierry.escande@vates.tech>
- <afCVKAelR1ZyGB2U@macbook.local>
+ <20260313163455.790692-7-thierry.escande@vates.tech>
+ <99783d58-00b5-4f3e-9393-c713eb6f2606@suse.com>
 Content-Language: en-US
-In-Reply-To: <afCVKAelR1ZyGB2U@macbook.local>
+In-Reply-To: <99783d58-00b5-4f3e-9393-c713eb6f2606@suse.com>
 X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.9d.e6c60d5e013701e0.19ebb4774ff.df584024bd427cbf=-"
+Content-Type: multipart/alternative; boundary="-=Part.9f.16c956ee77c612d4.19ebb478e92.982053e04d65383b=-"
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1781258482943
-X-purgate-ID: tlsNG-d62444/1781258488-AE55DFF4-CF16CEF1/0/0
+X-Bm-Transport-Timestamp: 1781258489490
+X-purgate-ID: tlsNG-d25034/1781258494-E2B74CF5-37DCDDBB/0/0
 X-purgate-type: clean
-X-purgate-size: 4426
+X-purgate-size: 890
 
----=Part.9d.e6c60d5e013701e0.19ebb4774ff.df584024bd427cbf=-
+---=Part.9f.16c956ee77c612d4.19ebb478e92.982053e04d65383b=-
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
 
-On 4/28/26 13:08, Roger Pau Monn=C3=A9 wrote:
-> On Fri, Mar 13, 2026 at 04:35:02PM +0000, Thierry Escande wrote:
->> This patch allows to select Q35 DSDT table in the function
->> hvmloader_acpi_build_tables()=2E The machine_type global variable is us=
-ed
->> to select a proper table (i440/q35)=2E
->>
->> As we are bound to the qemu-xen device model for Q35, there is no need
->> to initialize config->dsdt_15cpu/config->dsdt_15cpu_len fields=2E
->>
->> Signed-off-by: Alexey Gerasimenko <x1917x@gmail=2Ecom>
->> Signed-off-by: Thierry Escande <thierry=2Eescande@vates=2Etech>
->> ---
->>  tools/firmware/hvmloader/util=2Ec | 17 +++++++++++++++--
->>  tools/firmware/hvmloader/util=2Eh |  2 ++
->>  2 files changed, 17 insertions(+), 2 deletions(-)
->>
->> diff --git a/tools/firmware/hvmloader/util=2Ec b/tools/firmware/hvmload=
-er/util=2Ec
->> index f9116bea4d=2E=2E45519ea583 100644
->> --- a/tools/firmware/hvmloader/util=2Ec
->> +++ b/tools/firmware/hvmloader/util=2Ec
->> @@ -885,8 +885,21 @@ void hvmloader_acpi_build_tables(struct acpi_confi=
-g *config,
->>      s =3D xenstore_read("platform/device-model", "");
->>      if ( !strncmp(s, "qemu_xen", 9) )
+On 5/4/26 16:52, Jan Beulich wrote:
+> On 13=2E03=2E2026 17:35, Thierry Escande wrote:
+>>  void pci_setup(void)
+>>  {
+>>      uint8_t is_64bar, using_64bar, bar64_relocate =3D 0;
+>>      uint32_t devfn, bar_reg, cmd, bar_data, bar_data_upper;
+>>      uint64_t base, bar_sz, bar_sz_upper, mmio_total =3D 0;
+>> -    uint32_t vga_devfn =3D 256;
+>> +    uint8_t vga_devfn =3D 0xff;
 >=20
-> Tying Q35 to xenstore seems a bit sub-optimal, as Q35 detection is
-> done purely from the PCI config space=2E  It would be better if we could
-> avoid relying on the xenstore node, and hence also fixup at least
-> ovmf_acpi_build_tables() and seabios_acpi_build_tables() to use the
-> Q35 ACPI tables when Q35 is detected, regardless of the device-model
-> xenstore node=2E
+> This change (and the related ones elsewhere) looks bogus to me: 0xff is
+> a valid devfn value, whereas 256 isn't=2E
 
-Looking at the acpi_build_tables() for ovmf, seabios, and rombios, I
-suppose the idea here was to set the correct ACPI tables for guest using
-Rombios with qemu-xen=2E
-
-So I can move the qemu-xen check in rombios_acpi_build_tables() and do
-the machine_type check in all acpi_build_tables callbacks=2E I'm a bit
-puzzled by the duplication, though=2E=2E=2E
-
->=20
->>      {
->> -        config->dsdt_anycpu =3D dsdt_i440_anycpu_qemu_xen;
->> -        config->dsdt_anycpu_len =3D dsdt_i440_anycpu_qemu_xen_len;
->> +        switch ( machine_type )
->> +        {
->> +        case MACHINE_TYPE_Q35:
->> +            config->dsdt_anycpu =3D dsdt_q35_anycpu_qemu_xen;
->> +            config->dsdt_anycpu_len =3D dsdt_q35_anycpu_qemu_xen_len;
->> +            break;
->> +        case MACHINE_TYPE_I440:
->> +            config->dsdt_anycpu =3D dsdt_i440_anycpu_qemu_xen;
->> +            config->dsdt_anycpu_len =3D dsdt_i440_anycpu_qemu_xen_len;
->> +            break;
->> +        default:
->> +            /* Not likely to happen */
->> +            BUG();
->> +        }
->> +
->>          config->dsdt_15cpu =3D NULL;
->>          config->dsdt_15cpu_len =3D 0;
->>      }
->> diff --git a/tools/firmware/hvmloader/util=2Eh b/tools/firmware/hvmload=
-er/util=2Eh
->> index 2f37504aca=2E=2E4641ca0c46 100644
->> --- a/tools/firmware/hvmloader/util=2Eh
->> +++ b/tools/firmware/hvmloader/util=2Eh
->> @@ -393,7 +393,9 @@ bool check_overlap(uint64_t start, uint64_t size,
->>                     uint64_t reserved_start, uint64_t reserved_size);
->> =20
->>  extern const unsigned char dsdt_i440_anycpu_qemu_xen[], dsdt_anycpu[],=
- dsdt_15cpu[];
->> +extern const unsigned char dsdt_q35_anycpu_qemu_xen[];
->=20
-> If I'm not mistaken, patch 2 introduces the dsdt_q35_anycpu_qemu_xen
-> symbol to the hvmloader build, so that you can reference it here?
->=20
-> At first I was going to comment that you are referencing a symbol not
-> included in the patch, but I think such symbol was previously added to
-> the build in patch 2 (and was unused there)=2E
-
-Right, dsdt_q35_anycpu_qemu_xen=2Ec that declares
-dsdt_q35_anycpu_qemu_xen[] is generated by patch 2 and used in this patch=
-=2E
-
->=20
->>  extern const int dsdt_i440_anycpu_qemu_xen_len, dsdt_anycpu_len, dsdt_=
-15cpu_len;
->> +extern const int dsdt_q35_anycpu_qemu_xen_len;
->=20
-> unsigned int would be better here=2E
-
-Yes, that will be done in a previous patch when dsdt_anycpu_qemu_xen_len
-is renamed to dsdt_i440_anycpu_qemu_xen_len=2E
+I'll revert this=2E
 
 Regards,
+
 
 
 -- 
@@ -214,5 +133,5 @@ XCP-ng & Xen Orchestra - Vat=
 es solutions
 
 web: https://vates=2Etech
----=Part.9d.e6c60d5e013701e0.19ebb4774ff.df584024bd427cbf=---
+---=Part.9f.16c956ee77c612d4.19ebb478e92.982053e04d65383b=---
 
