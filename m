@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 428FECD98CE
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2026 23:10:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1337049.1598698 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E15DCD98DA
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2026 23:10:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1337053.1598738 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wYB0E-0001pw-Qu; Fri, 12 Jun 2026 23:09:30 +0000
+	id 1wYB0I-0002qz-8c; Fri, 12 Jun 2026 23:09:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1337049.1598698; Fri, 12 Jun 2026 23:09:30 +0000
+Received: by outflank-mailman (output) from mailman id 1337053.1598738; Fri, 12 Jun 2026 23:09:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wYB0E-0001pp-LE; Fri, 12 Jun 2026 23:09:30 +0000
-Received: by outflank-mailman (input) for mailman id 1337049;
- Fri, 12 Jun 2026 23:09:29 +0000
+	id 1wYB0I-0002qb-4l; Fri, 12 Jun 2026 23:09:34 +0000
+Received: by outflank-mailman (input) for mailman id 1337053;
+ Fri, 12 Jun 2026 23:09:32 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wYB0D-0001me-OR
- for xen-devel@lists.xenproject.org; Fri, 12 Jun 2026 23:09:29 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wYB0G-0002Rh-Dp
+ for xen-devel@lists.xenproject.org; Fri, 12 Jun 2026 23:09:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wYB0C-00HIs8-AQ
- for xen-devel@lists.xenproject.org; Sat, 13 Jun 2026 01:09:28 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wYB0F-00HQFu-R8
+ for xen-devel@lists.xenproject.org; Sat, 13 Jun 2026 01:09:31 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6a2c915b-5cb7-0a2a0a5109dd-0a2a4502ddb2-20
- for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 01:09:28 +0200
-Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a2c91aa-bab6-0a2a0a5309dd-0a2a450cdf7e-2
+ for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 01:09:31 +0200
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6a2c91a8-af86-0a2a45020019-d155dd2fc5bd-3
- for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 01:09:28 +0200
-Received: by mail-wr1-f47.google.com with SMTP id
- ffacd0b85a97d-45e9f4a3510so892972f8f.1
- for <xen-devel@lists.xenproject.org>; Fri, 12 Jun 2026 16:09:28 -0700 (PDT)
+ id 6a2c91ab-62f1-0a2a450c0019-d1558029c58b-3
+ for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 01:09:31 +0200
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-490ae94a89eso12816255e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 12 Jun 2026 16:09:31 -0700 (PDT)
 Received: from localhost.localdomain (host-78-146-242-105.as13285.net.
  [78.146.242.105]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4606f2b0d28sm10035907f8f.20.2026.06.12.16.09.27
+ ffacd0b85a97d-4606f2b0d28sm10035907f8f.20.2026.06.12.16.09.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jun 2026 16:09:27 -0700 (PDT)
+ Fri, 12 Jun 2026 16:09:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,39 +54,39 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1781305768; x=1781910568; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1781305771; x=1781910571; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=6698Uxcu0dfTevWQ4ApQH8lfT2iy2BjmmIOaPm7I/XA=;
-        b=FHmhUe9iJhgoXiULmSgrnvCKDrn4Z6yGd8KSl+CvE4v3MyeSgB4eXL+Y8vy85LkJzq
-         SwR1yKwkp1eUI+tBndIBN5TH3o4R8TH8pogLbP844SPvb5rZ06eTOImpb6sGXTcCIUxz
-         3L6wmA3OOs+cCUOZOGmi/uSlVvZ8gGIzKlUEg=
+        bh=Kcf/WI93RAFHfmUF0my5rnSxM7s1K4C7gOFPv+zFjeM=;
+        b=t5PFUODQ9910psNrkjzf0LLsLSa/X3p+v1S2Uw4bx9i2zSafY7R9LYgoJE/4eNYVz1
+         pYSVAqVs6nr/r0r2/7YVRlQGs+Md9pE/VIKPhEwViF2JWDYkAA7VdvZIdN5wSpreZpnk
+         L0Xe0g7nO5yKdZPyfTuhF0o0jrUDofTjIOytM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781305768; x=1781910568;
+        d=1e100.net; s=20251104; t=1781305771; x=1781910571;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=6698Uxcu0dfTevWQ4ApQH8lfT2iy2BjmmIOaPm7I/XA=;
-        b=ddOsXDa8wJ0aA9Lm2qTBeYawWbF2QK5ReVrdcs4DcK/EfdIlkWCCXGX4ktFaDTVu7b
-         GivaJqMtYwZpyVtXFa6iU6A68K8NS3oo4IFRbDGOhnSARUOR0ahfrhNuUE5anVRoo/MS
-         xi2pfNrSiPYc9g3kfzxTSJiH/5upHEtaXmyDzo5fYrzv37pPlRZgMCELd1CM0DyAqITQ
-         sEG2D2i7xzCKGx05TPNh2DjU0b7gGvcjDolmiA8zvDifjrHSx+gHiBCFNzfgOwDdp1WC
-         LAw0nPpC0t2ptJ+YRO908/EzDg5YoSdqgBi8o5LETRHfzsKvdaAB65ZUfASurQVOlsVb
-         8KiA==
-X-Gm-Message-State: AOJu0Yw3ozQbBv10/VFUOYzVmkeJvCaAZ8an9Q8XEYT8oTC07fooqeZR
-	VN4YfpE+wyPLyNW4F+HfHFUwFN9ZpEFg4dgBcguL2o5jImSFEceAlFlMwvxB8oomPHJeOm3Pmpa
-	N3loZ
-X-Gm-Gg: Acq92OH57ioApa+BL8zcXsQ6DiiGEl+QZ8a5retikHrwDo7VZL5c7I8AijauGJnQzdL
-	Hi6iMGDjUlwI//K7AvqCRPSOujWV1aZApJIxGU0a25shmuL3UDBEJbgJR7hcRfiVbFD87dHSHCc
-	1uBnwv/7bFxfwTBrI58OGx6U9qSY/HjLNtPUxYVetLExLwgD6OCvGOt1B1Qjxf//5m36gRTK6dB
-	+p0JRASkp0bwZaADzFLmu7lBJnpXyu2jSklsQ3qM85VfSOFTY/XiujrmQK5WipVOovntV/FTLXb
-	Ekvn4HpqxR1dpJPg261dfM0BbcJZ0wcVc+BsIg7Tj3SvWObqUleoUqehunr6ny6mI44Ua+f35PL
-	9bsPoEDVLWUxZVTgEprXBHMykM9IEcoGDTYuWCt1jWL2gDafKWv63BWqLU9LMV0yzWyx2YdG8nH
-	G/Ky47Lu2lIwGcjQ0qiNCwRFnxkkkkn3mLBk4rDS6f6kvUV81ecZ+KwMQV8bn93mJd0valQir2H
-	O5c
-X-Received: by 2002:a05:6000:290e:b0:45d:3cb0:5ab1 with SMTP id ffacd0b85a97d-46074b8a30bmr1549717f8f.38.1781305767643;
-        Fri, 12 Jun 2026 16:09:27 -0700 (PDT)
+        bh=Kcf/WI93RAFHfmUF0my5rnSxM7s1K4C7gOFPv+zFjeM=;
+        b=aXlCoOljVLgTUm8Z43kVD7gqj9X1yCF7ky6CplFafRLROl646ho6fLHJFe0LlaXlNi
+         xzH7P4V9ZNgJuulDFdfwqccOFQShrTOhOAFPyb50pv5tTjLYUU30a0PcaxkZKVNXdX+Q
+         fzn78sf5iOD3DjuNxb6xPK0z6enFzTQAqQKEm11i96TO8Cs4PeJKVz8f6k0SvpQld0fM
+         VyDgeYkGT6oFucIjYjf5iWCVCdwcDVW4XIOYyi9AqNOzWNRJmy4+LyInUc7D6eRQ86U2
+         ZfHu1IGtCmYf3SiRaaJfZxWElsdXfAcZHmLCWQtj3nBmtNFugahHrsGrmpl84ImSfEdX
+         AY+Q==
+X-Gm-Message-State: AOJu0YxO1Nk4vRLvvQfgnA6HM8/uQ5Mm2R5utfrttk/QP2uDHZ+OOxxm
+	RjSPT3inAUexrIuI6lhNKmrKMap1DAPD1RVks9LRa+ct8Ot/rTXueOSU9I5OcNpx0Zk82lrvsKV
+	KjCAW
+X-Gm-Gg: Acq92OG22lo1hXSDbj/NZVPT1oDPVmQL6oe3H+AOwsUQS3vEEclAM7EJRK3RNOFtFE0
+	X/jg2uggDPxbJ2Lb7b8n9Eg7imGfLcRt3k8uchSFnwwo7o6WIQjHxbQwUzi3CiGCIIj583EK872
+	QjWupJo0VRzBadx4MXg2q6zyQWyyV0ADhBmbJgOKk0j2EM/qv++47hzxErGL5Jen0e9sfIaLtGV
+	fposQ5ki3NcT8NIFc1rBLojhy/mjN5lntIMZExrmLEKJ0cBJLLfkirrSWufQ3mn/suOrTq7HGNG
+	/KjnFXbXJwHJlvbPFOb6VpdnsQTYypDzbx7qV4ox/X3tap1ogySztOxxIyCp3uYnmO3cNzNp02s
+	9WmHOuy/XqK1qPsfiNFFEngzPKH793Efii/JgEAat8p8Nm6cgQ4Lob0HZ5q5a2NYM4HcdptPavq
+	goLaMhA9lQ1s/kZG5PabSoXJLClpd6dDCBAj6RySM4s3Pu2Sy3JHuQLJuwrq0trkAfsXgHpLWip
+	crK
+X-Received: by 2002:a05:600c:47d3:b0:490:d354:bcf4 with SMTP id 5b1f17b1804b1-492200e2409mr9061075e9.27.1781305771094;
+        Fri, 12 Jun 2026 16:09:31 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -97,18 +97,26 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH 1/7] tools/xenalyze: Work around GCC-15 -Werror=nonnull false positive
-Date: Sat, 13 Jun 2026 00:09:18 +0100
-Message-Id: <20260612230924.3181154-2-andrew.cooper3@citrix.com>
+Subject: [PATCH 5/7] CI: Update the Alpine arm64 container to 3.24
+Date: Sat, 13 Jun 2026 00:09:22 +0100
+Message-Id: <20260612230924.3181154-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20260612230924.3181154-1-andrew.cooper3@citrix.com>
 References: <20260612230924.3181154-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1781305768-A9B70161-0D63E41E/10/73395122804
+X-purgate-ID: tlsNG-d25034/1781305771-E0F62CF5-3A5A4768/10/63158204843
 X-purgate-type: spam
-X-purgate-size: 1641
+X-purgate-size: 11574
+
+Perform standard syntax cleanup and make it a non-root container.  Switch yajl
+for json-c given the deprecation of the former.  Drop dev86 which is an
+x86-only dependency, and QEMU dependencies as we don't build QEMU in this
+environment any more.
+
+When updating the job names, also rename some for consistency so the arm64
+fragment comes before the compiler.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -120,36 +128,360 @@ CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
-I don't particularly like this, but I see no better option.  It's clearly some
-kind of VRA failure, yet we don't see it with GCC 15 in other distros.  I
-suspect that Musl (as opposed to glibc) might be relevant, and perhaps even as
-simple as not realising that error() is terminal for a non-zero input.
+Requires the test-artefacts change to add alpine-3.24-arm64-rootfs
 ---
- tools/xentrace/xenalyze.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ .../build/alpine/3.18-arm64v8.dockerfile      | 51 ------------------
+ .../build/alpine/3.24-arm64v8.dockerfile      | 53 +++++++++++++++++++
+ automation/gitlab-ci/build.yaml               | 32 +++++------
+ automation/gitlab-ci/test.yaml                | 30 +++++------
+ 4 files changed, 84 insertions(+), 82 deletions(-)
+ delete mode 100644 automation/build/alpine/3.18-arm64v8.dockerfile
+ create mode 100644 automation/build/alpine/3.24-arm64v8.dockerfile
 
-diff --git a/tools/xentrace/xenalyze.c b/tools/xentrace/xenalyze.c
-index 876d59d42ca5..cec1354cf779 100644
---- a/tools/xentrace/xenalyze.c
-+++ b/tools/xentrace/xenalyze.c
-@@ -3789,6 +3789,17 @@ void update_io_address(struct io_address ** list, unsigned int pa, int dir,
-             error(ERR_SYSTEM, NULL);
-         }
- 
-+        /*
-+         * GCC 15.2 in Alpine Linux 3.24 fails with -Werror=nonnull,
-+         * complaining that we're calling bzero(NULL, 128).
-+         *
-+         * This looks to be a false positive as p being NULL will never reach
-+         * here as the error() above will have called exit().
-+         *
-+         * Work around this by hiding the NULL-ness of p from the compiler.
-+         */
-+        asm ("" : "+r" (p));
+diff --git a/automation/build/alpine/3.18-arm64v8.dockerfile b/automation/build/alpine/3.18-arm64v8.dockerfile
+deleted file mode 100644
+index b8482d5bf43f..000000000000
+--- a/automation/build/alpine/3.18-arm64v8.dockerfile
++++ /dev/null
+@@ -1,51 +0,0 @@
+-# syntax=docker/dockerfile:1
+-FROM --platform=linux/arm64/v8 alpine:3.18
+-LABEL maintainer.name="The Xen Project" \
+-      maintainer.email="xen-devel@lists.xenproject.org"
+-
+-ENV USER root
+-
+-RUN mkdir /build
+-WORKDIR /build
+-
+-# build depends
+-RUN apk --no-cache add \
+-  \
+-  # xen build deps
+-  argp-standalone \
+-  autoconf \
+-  bash \
+-  bison \
+-  curl \
+-  dev86 \
+-  dtc-dev \
+-  flex \
+-  gcc \
+-  git \
+-  iasl \
+-  libaio-dev \
+-  libfdt \
+-  linux-headers \
+-  make \
+-  musl-dev  \
+-  ncurses-dev \
+-  ocaml \
+-  ocaml-findlib \
+-  patch  \
+-  python3-dev \
+-  py3-setuptools \
+-  texinfo \
+-  util-linux-dev \
+-  xz-dev \
+-  yajl-dev \
+-  zlib-dev \
+-  \
+-  # qemu build deps
+-  glib-dev \
+-  libattr \
+-  libcap-ng-dev \
+-  pixman-dev \
+-  # qubes test deps
+-  openssh-client \
+-  fakeroot \
+-  expect \
+diff --git a/automation/build/alpine/3.24-arm64v8.dockerfile b/automation/build/alpine/3.24-arm64v8.dockerfile
+new file mode 100644
+index 000000000000..5b28d874efae
+--- /dev/null
++++ b/automation/build/alpine/3.24-arm64v8.dockerfile
+@@ -0,0 +1,53 @@
++# syntax=docker/dockerfile:1
++FROM --platform=linux/arm64/v8 alpine:3.24
++LABEL maintainer.name="The Xen Project"
++LABEL maintainer.email="xen-devel@lists.xenproject.org"
 +
-         bzero(p, sizeof(*p));
++RUN apk --no-cache add bash
++
++RUN <<EOF
++#!/bin/bash
++    set -eu
++
++    adduser -D user
++
++    DEPS=(
++        # Xen
++        bison
++        flex
++        g++
++        gcc
++        make
++
++        # Tools (general)
++        argp-standalone
++        autoconf
++        git
++        linux-headers
++        patch
++        # libxenguest dombuilder
++        bzip2-dev
++        xz-dev
++        zlib-dev
++        zstd-dev
++        # libacpi
++        iasl
++        # libxl
++        dtc-dev
++        json-c-dev
++        util-linux-dev
++        # xentop
++        ncurses-dev
++        # Python bindings
++        python3-dev
++        py3-setuptools
++        # Ocaml bindings/oxenstored
++        ocaml
++        ocaml-findlib
++    )
++
++    apk add --no-cache "${DEPS[@]}"
++EOF
++
++USER user
++WORKDIR /build
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index e295f4d4f25f..fa054a82800b 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -401,68 +401,68 @@ debian-13-arm64-gcc-debug:
+   variables:
+     CONTAINER: debian:13-arm64v8
  
-         p->pa=pa;
+-alpine-3.18-gcc-arm64:
++alpine-3.24-arm64-gcc:
+   extends: .gcc-arm64-build
+   <<: *build-test
+   variables:
+-    CONTAINER: alpine:3.18-arm64v8
++    CONTAINER: alpine:3.24-arm64v8
+ 
+-alpine-3.18-gcc-debug-arm64:
++alpine-3.24-arm64-gcc-debug:
+   extends: .gcc-arm64-build-debug
+   <<: *build-test
+   variables:
+-    CONTAINER: alpine:3.18-arm64v8
++    CONTAINER: alpine:3.24-arm64v8
+     EXTRA_XEN_CONFIG: |
+       CONFIG_UBSAN=y
+       CONFIG_UBSAN_FATAL=y
+ 
+-alpine-3.18-gcc-arm64-randconfig:
++alpine-3.24-arm64-gcc-randconfig:
+   extends: .gcc-arm64-build
+   variables:
+-    CONTAINER: alpine:3.18-arm64v8
++    CONTAINER: alpine:3.24-arm64v8
+     RANDCONFIG: y
+ 
+-alpine-3.18-gcc-debug-arm64-staticmem:
++alpine-3.24-arm64-gcc-debug-staticmem:
+   extends: .gcc-arm64-build-debug
+   <<: *build-test
+   variables:
+-    CONTAINER: alpine:3.18-arm64v8
++    CONTAINER: alpine:3.24-arm64v8
+     EXTRA_XEN_CONFIG: |
+       CONFIG_EXPERT=y
+       CONFIG_UNSUPPORTED=y
+       CONFIG_STATIC_MEMORY=y
+ 
+-alpine-3.18-gcc-debug-arm64-static-shared-mem:
++alpine-3.24-arm64-gcc-debug-static-shared-mem:
+   extends: .gcc-arm64-build-debug
+   <<: *build-test
+   variables:
+-    CONTAINER: alpine:3.18-arm64v8
++    CONTAINER: alpine:3.24-arm64v8
+     EXTRA_XEN_CONFIG: |
+       CONFIG_UNSUPPORTED=y
+       CONFIG_STATIC_MEMORY=y
+       CONFIG_STATIC_SHM=y
+ 
+-alpine-3.18-gcc-debug-arm64-boot-cpupools:
++alpine-3.24-arm64-gcc-debug-boot-cpupools:
+   extends: .gcc-arm64-build-debug
+   <<: *build-test
+   variables:
+-    CONTAINER: alpine:3.18-arm64v8
++    CONTAINER: alpine:3.24-arm64v8
+     EXTRA_XEN_CONFIG: |
+       CONFIG_BOOT_TIME_CPUPOOLS=y
+ 
+-alpine-3.18-gcc-debug-arm64-earlyprintk:
++alpine-3.24-arm64-gcc-debug-earlyprintk:
+   extends: .gcc-arm64-build-debug
+   <<: *build-test
+   variables:
+-    CONTAINER: alpine:3.18-arm64v8
++    CONTAINER: alpine:3.24-arm64v8
+     EXTRA_XEN_CONFIG: |
+       CONFIG_EARLY_UART_CHOICE_PL011=y
+       CONFIG_EARLY_UART_BASE_ADDRESS=0x9000000
+ 
+-alpine-3.18-gcc-debug-arm64-mpu:
++alpine-3.24-arm64-gcc-debug-mpu:
+   extends: .gcc-arm64-build-debug
+   variables:
+-    CONTAINER: alpine:3.18-arm64v8
++    CONTAINER: alpine:3.24-arm64v8
+     HYPERVISOR_ONLY: y
+     EXTRA_XEN_CONFIG: |
+       CONFIG_XEN_START_ADDRESS=0x0
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+index b651efef1593..2a7a0e513e72 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -10,7 +10,7 @@
+     job: $LINUX_JOB_ARM64
+     ref: $ARTIFACTS_BRANCH
+   - project: $ARTIFACTS_REPO
+-    job: alpine-3.18-arm64-rootfs
++    job: alpine-3.24-arm64-rootfs
+     ref: $ARTIFACTS_BRANCH
+ 
+ .arm32-test-needs: &arm32-test-needs
+@@ -220,7 +220,7 @@ xilinx-smoke-dom0less-arm64-gcc-debug:
+     - ./automation/scripts/xilinx-smoke-dom0less-arm64.sh 2>&1 | tee ${LOGFILE}
+   needs:
+     - *arm64-test-needs
+-    - alpine-3.18-gcc-debug-arm64
++    - alpine-3.24-arm64-gcc-debug
+ 
+ xilinx-smoke-dom0less-arm64-gcc-debug-gem-passthrough:
+   extends: .xilinx-arm64
+@@ -228,7 +228,7 @@ xilinx-smoke-dom0less-arm64-gcc-debug-gem-passthrough:
+     - ./automation/scripts/xilinx-smoke-dom0less-arm64.sh gem-passthrough 2>&1 | tee ${LOGFILE}
+   needs:
+     - *arm64-test-needs
+-    - alpine-3.18-gcc-debug-arm64
++    - alpine-3.24-arm64-gcc-debug
+ 
+ xilinx-smoke-dom0-x86_64-gcc-debug:
+   extends: .xilinx-x86_64
+@@ -494,7 +494,7 @@ qemu-smoke-dom0-arm64-gcc:
+     - ./automation/scripts/qemu-smoke-dom0-arm64.sh 2>&1 | tee ${LOGFILE}
+   needs:
+     - *arm64-test-needs
+-    - alpine-3.18-gcc-arm64
++    - alpine-3.24-arm64-gcc
+ 
+ qemu-smoke-dom0-arm64-gcc-debug:
+   extends: .qemu-arm64
+@@ -502,7 +502,7 @@ qemu-smoke-dom0-arm64-gcc-debug:
+     - ./automation/scripts/qemu-smoke-dom0-arm64.sh 2>&1 | tee ${LOGFILE}
+   needs:
+     - *arm64-test-needs
+-    - alpine-3.18-gcc-debug-arm64
++    - alpine-3.24-arm64-gcc-debug
+ 
+ qemu-smoke-dom0less-arm64-gcc:
+   extends: .qemu-arm64
+@@ -510,7 +510,7 @@ qemu-smoke-dom0less-arm64-gcc:
+     - ./automation/scripts/qemu-smoke-dom0less-arm64.sh 2>&1 | tee ${LOGFILE}
+   needs:
+     - *arm64-test-needs
+-    - alpine-3.18-gcc-arm64
++    - alpine-3.24-arm64-gcc
+ 
+ qemu-smoke-dom0less-arm64-gcc-debug:
+   extends: .qemu-arm64
+@@ -518,7 +518,7 @@ qemu-smoke-dom0less-arm64-gcc-debug:
+     - ./automation/scripts/qemu-smoke-dom0less-arm64.sh 2>&1 | tee ${LOGFILE}
+   needs:
+     - *arm64-test-needs
+-    - alpine-3.18-gcc-debug-arm64
++    - alpine-3.24-arm64-gcc-debug
+ 
+ qemu-smoke-dom0less-arm64-gcc-debug-gicv3:
+   extends: .qemu-arm64
+@@ -526,7 +526,7 @@ qemu-smoke-dom0less-arm64-gcc-debug-gicv3:
+     - ./automation/scripts/qemu-smoke-dom0less-arm64.sh gicv3 2>&1 | tee ${LOGFILE}
+   needs:
+     - *arm64-test-needs
+-    - alpine-3.18-gcc-debug-arm64
++    - alpine-3.24-arm64-gcc-debug
+ 
+ qemu-smoke-dom0less-arm64-gcc-debug-staticmem:
+   extends: .qemu-arm64
+@@ -534,7 +534,7 @@ qemu-smoke-dom0less-arm64-gcc-debug-staticmem:
+     - ./automation/scripts/qemu-smoke-dom0less-arm64.sh static-mem 2>&1 | tee ${LOGFILE}
+   needs:
+     - *arm64-test-needs
+-    - alpine-3.18-gcc-debug-arm64-staticmem
++    - alpine-3.24-arm64-gcc-debug-staticmem
+ 
+ qemu-smoke-dom0less-arm64-gcc-debug-staticheap:
+  extends: .qemu-arm64
+@@ -542,7 +542,7 @@ qemu-smoke-dom0less-arm64-gcc-debug-staticheap:
+    - ./automation/scripts/qemu-smoke-dom0less-arm64.sh static-heap 2>&1 | tee ${LOGFILE}
+  needs:
+    - *arm64-test-needs
+-   - alpine-3.18-gcc-debug-arm64
++   - alpine-3.24-arm64-gcc-debug
+ 
+ qemu-smoke-dom0less-arm64-gcc-debug-static-shared-mem:
+   extends: .qemu-arm64
+@@ -550,7 +550,7 @@ qemu-smoke-dom0less-arm64-gcc-debug-static-shared-mem:
+     - ./automation/scripts/qemu-smoke-dom0less-arm64.sh static-shared-mem 2>&1 | tee ${LOGFILE}
+   needs:
+     - *arm64-test-needs
+-    - alpine-3.18-gcc-debug-arm64-static-shared-mem
++    - alpine-3.24-arm64-gcc-debug-static-shared-mem
+ 
+ qemu-smoke-dom0less-arm64-gcc-debug-boot-cpupools:
+   extends: .qemu-arm64
+@@ -558,7 +558,7 @@ qemu-smoke-dom0less-arm64-gcc-debug-boot-cpupools:
+     - ./automation/scripts/qemu-smoke-dom0less-arm64.sh boot-cpupools 2>&1 | tee ${LOGFILE}
+   needs:
+     - *arm64-test-needs
+-    - alpine-3.18-gcc-debug-arm64-boot-cpupools
++    - alpine-3.24-arm64-gcc-debug-boot-cpupools
+ 
+ qemu-smoke-dom0less-arm64-gcc-debug-earlyprintk:
+   extends: .qemu-arm64
+@@ -566,7 +566,7 @@ qemu-smoke-dom0less-arm64-gcc-debug-earlyprintk:
+     - ./automation/scripts/qemu-smoke-dom0less-arm64.sh earlyprintk 2>&1 | tee ${LOGFILE}
+   needs:
+     - *arm64-test-needs
+-    - alpine-3.18-gcc-debug-arm64-earlyprintk
++    - alpine-3.24-arm64-gcc-debug-earlyprintk
+ 
+ qemu-xtf-dom0less-arm64-gcc-hyp-xen-version:
+   extends: .qemu-arm64
+@@ -574,7 +574,7 @@ qemu-xtf-dom0less-arm64-gcc-hyp-xen-version:
+     - ./automation/scripts/qemu-xtf.sh arm64 mmu64le hyp-xen-version 2>&1 | tee ${LOGFILE}
+   needs:
+     - *arm64-test-needs
+-    - alpine-3.18-gcc-arm64
++    - alpine-3.24-arm64-gcc
+ 
+ qemu-xtf-dom0less-arm64-gcc-debug-hyp-xen-version:
+   extends: .qemu-arm64
+@@ -582,7 +582,7 @@ qemu-xtf-dom0less-arm64-gcc-debug-hyp-xen-version:
+     - ./automation/scripts/qemu-xtf.sh arm64 mmu64le hyp-xen-version 2>&1 | tee ${LOGFILE}
+   needs:
+     - *arm64-test-needs
+-    - alpine-3.18-gcc-debug-arm64
++    - alpine-3.24-arm64-gcc-debug
+ 
+ qemu-smoke-dom0-arm32-gcc:
+   extends: .qemu-arm32
 -- 
 2.39.5
 
