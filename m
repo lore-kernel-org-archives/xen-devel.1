@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A93BECD98DF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0AB7CD98CF
 	for <xen-devel@archiver.kernel.org>; Sat, 13 Jun 2026 21:48:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1337565.1598938 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1337554.1598838 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wYWDK-0004Kg-1W; Sat, 13 Jun 2026 21:48:26 +0000
+	id 1wYWD8-0001Sn-8g; Sat, 13 Jun 2026 21:48:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1337565.1598938; Sat, 13 Jun 2026 21:48:25 +0000
+Received: by outflank-mailman (output) from mailman id 1337554.1598838; Sat, 13 Jun 2026 21:48:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wYWDJ-0004Il-Cw; Sat, 13 Jun 2026 21:48:25 +0000
-Received: by outflank-mailman (input) for mailman id 1337565;
- Sat, 13 Jun 2026 21:48:24 +0000
+	id 1wYWD7-0001Rl-VU; Sat, 13 Jun 2026 21:48:13 +0000
+Received: by outflank-mailman (input) for mailman id 1337554;
+ Sat, 13 Jun 2026 21:48:12 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wYWDH-00042b-Rr
- for xen-devel@lists.xenproject.org; Sat, 13 Jun 2026 21:48:23 +0000
+ (envelope-from <freddy77@gmail.com>) id 1wYWD6-0001Bd-1p
+ for xen-devel@lists.xenproject.org; Sat, 13 Jun 2026 21:48:12 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wYWDH-00DVVl-7z
- for xen-devel@lists.xenproject.org; Sat, 13 Jun 2026 23:48:23 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wYWD5-00DVVl-F2
+ for xen-devel@lists.xenproject.org; Sat, 13 Jun 2026 23:48:11 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a2dcf9c-2eae-0a2a0a5409dd-0a2a4507e990-40
- for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 23:48:23 +0200
+ id 6a2dcf4e-2eae-0a2a0a5409dd-0a2a4506b662-28
+ for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 23:48:11 +0200
 Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a2dd027-229c-0a2a45070019-d1558035e569-3
- for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 23:48:23 +0200
+ id 6a2dd01b-7371-0a2a45060019-d1558035e9ae-3
+ for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 23:48:11 +0200
 Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-490b4a8e28bso15449405e9.1
- for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 14:48:23 -0700 (PDT)
+ 5b1f17b1804b1-490aebf33e9so9222165e9.3
+ for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 14:48:11 -0700 (PDT)
 Received: from localhost.localdomain (5.116.208.46.dyn.plus.net.
  [46.208.116.5]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-492202edf89sm113877065e9.1.2026.06.13.14.48.21
+ 5b1f17b1804b1-492202edf89sm113877065e9.1.2026.06.13.14.48.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 13 Jun 2026 14:48:22 -0700 (PDT)
+ Sat, 13 Jun 2026 14:48:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,41 +55,41 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781387303; x=1781992103; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1781387291; x=1781992091; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=yUOm7tCutCPMEp2EsZgFN8Gvb7lSqyzyFNxwcVNzws0=;
-        b=sLKnqmgmVih/QFsnNKfwgBRTw+wi/29W5drCCGUD5khgg2QeuDQ/v/C8FS7UdojJAq
-         /FNdC22i6Owd5R1qjgJLj4zv0vwTDmz1pdJd6JJCwUJF3NR/KtSIg58jvpPVoa7ILcgJ
-         IyHZWJzR6/weQIpuW5rPvnEq+um/RViurkvCT1pAcPpUPfbvkbYyt8dfvg15fjwUPVck
-         GGWOmUmKbfhogLOkbCrNv8bKGFUjI82srhGtt4kVwSLquakH2Xl9XUH1p5W8JpbX4vAF
-         KvbrPGfY2ElZvLxYBuTHPbnrUk0vWZ2Z7S7bRL9rPKUI8zj7yoEsK7vMyyrc0x+RzQjD
-         T8jA==
+        bh=U0X1FdY41+Cjrz6QWLlOKKWLZuKlvYQpTdBJUqPk0yo=;
+        b=sgezM7xDgbMt2nAmE2xrL89o/8xjVPvAxSj14nymZf9HEZ1ejks7AjEED95SNKY2EM
+         Em/Gql+fMLz0at3Atj5TFDyfAkB9liYt0RzKWYjtC6fwZyGIIMJzi+N0xcI+F6OFr3Yl
+         xEoSotwFDr4TzS6IC6yn/jkzsG1pa7am+brMIjgNv77lzESm/Nx9F+9ufXw6HGr8sH6/
+         fMDFUwRnCXh0OmQeim92V0nz3VC28P7G/ECj2ayrPnraZ8CAGUvL56rxxmBGUYYmWcnw
+         7JxFvuQGyx/qsxS/cWb4y2lFhYu9eSj8onueNAqzQprKeF2mc7wdvWPLdiRg2JoJqM9s
+         DxEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781387303; x=1781992103;
+        d=1e100.net; s=20251104; t=1781387291; x=1781992091;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=yUOm7tCutCPMEp2EsZgFN8Gvb7lSqyzyFNxwcVNzws0=;
-        b=Wxr9Si21gSOu1Hvfm+pvVQgVwFexDh2F4MA4FUhb0j2NSv7vjl+KLGla0qPVmsAGcX
-         YCWOxOCsD+Zv306097eezlNliEGSOvWkrOxalq8Cq7xM+SimGdnnSfge+H2LPa97i5HZ
-         4ITA2z/hFU/07TO2mDwYMtbc1OmRDpUK4Kym5ADKqr/OtyVAm3rLHQ8cQWsRSfAehGUN
-         99TuraYwDbsuphlG8WVCLtFonAcUnDmgG2aX7bhYSIZ0SyhwIcuVGuXFzjftcNLdXaFi
-         MbsqfgyhCSSHuJf8lr2ZuEwFiHcm3lpnnz4//4hwaSPXMgH9fOxETqW1eVcTIrn1m4oZ
-         xHpg==
-X-Gm-Message-State: AOJu0YwIpgp9KZ6QrOZrE/XwmDk4g7xVwTVVNU+JQwkCe1pAt7SrSkNZ
-	GjjMy8iTTYFGteupo9HYzBSfa6QCUDqGOjZw7zf0Nh45wHfCxqTRiJRjKHZnUluXJl8=
-X-Gm-Gg: Acq92OHrIQoA9frNcoLs0PDYVdEzAMnySVsOgVRg5EupYh9HnaLlbwd7yAIbgi7sVyp
-	w5uqlT3L5cq9WTXaWaaepPi9pUvoLBTIqaLaSsfkywzYVPhsRhN214HKC/GvIEF85y5b1MOmssW
-	JySzMXB5tkc4jMam2R7nC8PIMbPjgZrw6DR/Jo3fTm47FlVq99g6c6+LOuNboSbcjg/gr6u9b5W
-	0N664vy99cG7wiRwkOA2NdpJdh6cgfinS3tDVHEb4+0ikYVs9rmZ9wsuvPDnNP2UHErpjWUefWq
-	uKq0eFwJG8gyPIhtSlsujyCZua8fh+PkuUEXbOHOdzI7U190OcvpaW4uZFBVQ9vMv2YNp5dl1WO
-	d8vwnBX0FsHSpq/AdnOmLIm2r2Ry1UOBNdKRzN1NPSBdEddDOdWqCZuNhdyp7ppRsjzEia7QAo5
-	/uZFzPYT1aD1vo+wmJE98LHzdkas6Dv+r9Z4jH3DwNmfbDtjXQB+PrB0fSCxfnJnIpcPYRRM2re
-	BRHIVzG1q7N1jErtaC9XVXLrPo5QNRGkqqx
-X-Received: by 2002:a05:600c:314a:b0:490:bcc1:4edb with SMTP id 5b1f17b1804b1-490ec504eb5mr92109205e9.27.1781387302615;
-        Sat, 13 Jun 2026 14:48:22 -0700 (PDT)
+        bh=U0X1FdY41+Cjrz6QWLlOKKWLZuKlvYQpTdBJUqPk0yo=;
+        b=rBAlYUPmh1g4fUeXaworPqSmsuK+TxcLKK9iQaufQPl3WGuGX9DHkSHKxb/Zl99hly
+         8P+Dmub7yyVtK+1Jji0ji5e0z7dxAFxiiGxR9iipNE9O0ax3kmHyuCSsTBHjbhQAF3PP
+         QbnjJtGDyPI4IMQ7JmNtySz97tNW4H9IJv0NRjuJTtWrK8yq8Z7XRPzj5yLK15hec8HO
+         XXNCwyrXRCNHTxGHloWxDOYFlwg6H0YM9YSeJ5AcBXOmRratHUIW3ZyVSiJz6tDTl4xQ
+         iJ8Gri7xf6LGu0jb4LXGbrFRbj8ZeFM3SJzAe5a9gAFVjJT4RHTGMCF99mbx4Ezz3/+e
+         QqSA==
+X-Gm-Message-State: AOJu0YxnJonZs5HbZcR8qBPsjubK6+xXNh4EJ2paxA4QdiQ0kzaEXqKC
+	DZ47Tq8hJrmrWdPMDdMoWWudfvDt0WRIRRugYUn8H9EOCH0uyJLYRVYqc6zva5IW9Sg=
+X-Gm-Gg: Acq92OH8OmOUTIyOhsftNFYTrs4nCfAdADkQj+2Whh8acs+IvIWF+AXAbfjxj2EhisO
+	/Iz2sKxYU6QNQIjtz96wbH166mhYGdvjvL2Ps6FVppxs38p1DBbVoyM8g8xeAgNjiMO+gtJxbFn
+	NZdpsy8cPHFMdOjGUwP5evMprNz51ZyIu2Ng/19+GWpe4JjznB3MOn3oGiiavKezmq5B9GRigBf
+	Wp4we/dwV5KJ3Dtz4P3/eBkO6+AWRqLpCyCen+NzHq4GNgASLHeauaxf5uotOG9as52XWUF3kFl
+	1bdVpnzoi85whcfz98I3/aJWNW6f8KB9WWf+moHrj/O4r1/O2ltXZMcIYxKC5Q8Qam2h9VCfwCB
+	Ny9NOAK+VMo0XDXWLxT+gFvMvlHgM8TazjRbkeMeImmC9F5HMvDvAy2cORiuwCG9DYFHAwg4hBi
+	00gumbmg/sIRPwW8gomNbLThTF99TVJKy1133QL0sN1kQZSpIZdNSYUDB5gZDfIu0kmJgZpMjt9
+	9ufslWPStwtuS7qVjMIqroeqQ==
+X-Received: by 2002:a05:600c:4595:b0:48f:d5b8:5b07 with SMTP id 5b1f17b1804b1-490ec4fb683mr105962455e9.20.1781387290817;
+        Sat, 13 Jun 2026 14:48:10 -0700 (PDT)
 From: Frediano Ziglio <freddy77@gmail.com>
 X-Google-Original-From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
@@ -100,117 +100,68 @@ Cc: Frediano Ziglio <frediano.ziglio@citrix.com>,
 	Teddy Astie <teddy.astie@vates.tech>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v5 14/16] libs/guest: use new hypercall if available
-Date: Sat, 13 Jun 2026 22:47:47 +0100
-Message-ID: <20260613214749.20620-15-frediano.ziglio@cloud.com>
+Subject: [PATCH v5 03/16] libs/guest: Reduce number of I/O vectors in write_batch
+Date: Sat, 13 Jun 2026 22:47:36 +0100
+Message-ID: <20260613214749.20620-4-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260613214749.20620-1-frediano.ziglio@cloud.com>
 References: <20260613214749.20620-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1781387303-2236CC48-96F20C25/0/0
+X-purgate-ID: tlsNG-16d1c6/1781387291-8EB8BD75-75A58380/0/0
 X-purgate-type: clean
-X-purgate-size: 3659
+X-purgate-size: 1609
 
 From: Frediano Ziglio <frediano.ziglio@citrix.com>
 
-Use new hypercall if available, otherwise fall back to map+copy+unmap
-sequence.
+Each page was sent using a different iovec item. This potentially exceed
+Linux maximum (1024).
+Coalesce adjacent IO vector elements to attempt to reduce the number of
+overall IO vectors for each operation.
+Also some implementation (MiniOS) emulate writev with multiple write calls.
 
 Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
 --
-Changes since v4:
-- use int8_t instead of char for signed type.
----
- tools/libs/guest/xg_sr_common.c | 47 ++++++++++++++++++++++++++-------
- 1 file changed, 38 insertions(+), 9 deletions(-)
+Changes since v2:
+- change prefix in subject.
 
-diff --git a/tools/libs/guest/xg_sr_common.c b/tools/libs/guest/xg_sr_common.c
-index f760b63548..b26633d95f 100644
---- a/tools/libs/guest/xg_sr_common.c
-+++ b/tools/libs/guest/xg_sr_common.c
-@@ -156,11 +156,6 @@ static void __attribute__((unused)) build_assertions(void)
-     BUILD_BUG_ON(sizeof(struct xc_sr_rec_hvm_params)        != 8);
- }
- 
--enum {
--    foreigncopy_from,
--    foreigncopy_to
--};
--
- static int xg_foreignmemory_copy(xc_interface *xch, domid_t domid,
-                                  int dir, size_t nr_pages, void *buffer,
-                                  const xen_pfn_t foreign_pfns[nr_pages])
-@@ -174,8 +169,42 @@ static int xg_foreignmemory_copy(xc_interface *xch, domid_t domid,
-         return -1;
-     }
- 
-+    /*
-+     * If foreign copy is supported, -1 not initialized, 0 not supported,
-+     * 1 supported.
-+     */
-+    static int8_t foreign_copy_supported = -1;
+Changes since v4:
+- added Reviewed-by;
+- improved commit message;
+- minor style fix.
+---
+ tools/libs/guest/xg_sr_save.c | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
+index 68ce1aeb98..eba33f861a 100644
+--- a/tools/libs/guest/xg_sr_save.c
++++ b/tools/libs/guest/xg_sr_save.c
+@@ -239,13 +239,21 @@ static int write_batch(struct xc_sr_context *ctx)
+     {
+         for ( i = 0; i < nr_pfns; ++i )
+         {
+-            if ( guest_data[i] )
++            if ( !guest_data[i] )
++                continue;
 +
-+    if ( foreign_copy_supported )
-+    {
-+        int rc;
-+        privcmd_foreigncopy_t copy = {
-+            .dom = domid,
-+            .dir = dir,
-+            .num = nr_pages,
-+            .buffer = buffer,
-+        };
-+        DECLARE_HYPERCALL_BOUNCE_IN(foreign_pfns, nr_pages * sizeof(xen_pfn_t));
-+
-+        if ( xc_hypercall_bounce_pre(xch, foreign_pfns) )
-+            return -1;
-+
-+        copy.pfns = foreign_pfns;
-+
-+        rc = ioctl(xencall_fd(xch->xcall), IOCTL_PRIVCMD_FOREIGNCOPY, &copy);
-+        if ( foreign_copy_supported < 0 )
-+            foreign_copy_supported =
-+                (!rc || (errno != ENOTTY && errno != ENOSYS));
-+
-+        xc_hypercall_bounce_post(xch, foreign_pfns);
-+
-+        if ( foreign_copy_supported )
-+            return rc;
-+    }
-+
-+    /* Fallback, emulate. */
-     int err[nr_pages];
--    const int prot = (dir == foreigncopy_from) ? PROT_READ : PROT_READ|PROT_WRITE;
-+    const int prot = (dir == XENMEM_foreigncopy_from) ? PROT_READ : PROT_READ|PROT_WRITE;
- 
-     void *p = xenforeignmemory_map(xch->fmem, domid, prot, nr_pages, foreign_pfns, err);
-     if ( !p )
-@@ -192,7 +221,7 @@ static int xg_foreignmemory_copy(xc_interface *xch, domid_t domid,
-             return -1;
++            if ( iov[iovcnt - 1].iov_base + iov[iovcnt - 1].iov_len !=
++                 guest_data[i] )
+             {
+                 iov[iovcnt].iov_base = guest_data[i];
+                 iov[iovcnt].iov_len = PAGE_SIZE;
+                 iovcnt++;
+-                --nr_pages;
+             }
++            else
++            {
++                iov[iovcnt - 1].iov_len += PAGE_SIZE;
++            }
++            --nr_pages;
          }
- 
--    if ( dir == foreigncopy_from )
-+    if ( dir == XENMEM_foreigncopy_from )
-         memcpy(buffer, p, nr_pages * XC_PAGE_SIZE);
-     else
-         memcpy(p, buffer, nr_pages * XC_PAGE_SIZE);
-@@ -204,7 +233,7 @@ int xg_foreignmemory_copy_from(xc_interface *xch, domid_t dom,
-                                size_t nr_pages, void *dest,
-                                const xen_pfn_t source[nr_pages])
- {
--    return xg_foreignmemory_copy(xch, dom, foreigncopy_from,
-+    return xg_foreignmemory_copy(xch, dom, XENMEM_foreigncopy_from,
-                                  nr_pages, dest, source);
- }
- 
-@@ -212,7 +241,7 @@ int xg_foreignmemory_copy_to(xc_interface *xch, domid_t dom,
-                              size_t nr_pages, const xen_pfn_t dest[nr_pages],
-                              const void *source)
- {
--    return xg_foreignmemory_copy(xch, dom, foreigncopy_to,
-+    return xg_foreignmemory_copy(xch, dom, XENMEM_foreigncopy_to,
-                                  nr_pages, (void *) source, dest);
- }
+     }
  
 -- 
 2.43.0
