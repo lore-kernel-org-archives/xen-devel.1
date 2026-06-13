@@ -4,53 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6862ECD98D8
-	for <xen-devel@archiver.kernel.org>; Sat, 13 Jun 2026 18:07:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1337475.1598795 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A59BCD98C5
+	for <xen-devel@archiver.kernel.org>; Sat, 13 Jun 2026 21:48:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1337558.1598879 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wYSlQ-0008LO-CC; Sat, 13 Jun 2026 18:07:24 +0000
+	id 1wYWDB-0002VN-B1; Sat, 13 Jun 2026 21:48:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1337475.1598795; Sat, 13 Jun 2026 18:07:24 +0000
+Received: by outflank-mailman (output) from mailman id 1337558.1598879; Sat, 13 Jun 2026 21:48:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wYSlQ-0008Ko-8m; Sat, 13 Jun 2026 18:07:24 +0000
-Received: by outflank-mailman (input) for mailman id 1337475;
- Sat, 13 Jun 2026 17:52:04 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wYWDB-0002V3-2r; Sat, 13 Jun 2026 21:48:17 +0000
+Received: by outflank-mailman (input) for mailman id 1337558;
+ Sat, 13 Jun 2026 21:48:16 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <philmd@oss.qualcomm.com>) id 1wYSWa-0006zS-Q4
- for xen-devel@lists.xenproject.org; Sat, 13 Jun 2026 17:52:04 +0000
+ (envelope-from <freddy77@gmail.com>) id 1wYWDA-0002Fc-06
+ for xen-devel@lists.xenproject.org; Sat, 13 Jun 2026 21:48:16 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wYSWa-00D7c7-63
- for xen-devel@lists.xenproject.org; Sat, 13 Jun 2026 19:52:04 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wYWD9-008PGn-DM
+ for xen-devel@lists.xenproject.org; Sat, 13 Jun 2026 23:48:15 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <philmd@oss.qualcomm.com>)
- id 6a2d9865-bab6-0a2a0a5309dd-0a2a45089978-44
- for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 19:52:04 +0200
-Received: from [205.220.180.131] (helo=mx0b-0031df01.pphosted.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <philmd@oss.qualcomm.com>)
- id 6a2d98c2-63b5-0a2a45080019-cddcb4839fd6-3
- for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 19:52:03 +0200
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65DFBGOd3258734
- for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 17:52:02 GMT
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ery7gsq5m-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 17:52:01 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id
- af79cd13be357-9158e75cbc0so312379585a.2
- for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 10:52:01 -0700 (PDT)
-Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4606f2ce361sm16615053f8f.31.2026.06.13.10.51.59
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sat, 13 Jun 2026 10:52:00 -0700 (PDT)
+ (envelope-from <freddy77@gmail.com>)
+ id 6a2dd008-5cb7-0a2a0a5109dd-0a2a4503cafc-10
+ for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 23:48:15 +0200
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <freddy77@gmail.com>)
+ id 6a2dd01f-672d-0a2a45030019-d155802fcd23-3
+ for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 23:48:15 +0200
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-490aaeabdb4so13454655e9.1
+ for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 14:48:15 -0700 (PDT)
+Received: from localhost.localdomain (5.116.208.46.dyn.plus.net.
+ [46.208.116.5]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-492202edf89sm113877065e9.1.2026.06.13.14.48.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 13 Jun 2026 14:48:14 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,193 +53,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=qcppdkim1 header.d=qualcomm.com header.i="@qualcomm.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=google header.d=oss.qualcomm.com header.i="@oss.qualcomm.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	gZNeOce+dK0KUkcgQ5PeixCUOSWnH6ycUAlOAzLUVQ4=; b=YhSNFuuIe4WGHWUa
-	6NcMP8PeVgTiTdrcWlk2frHViUn59WsDvcbFBLFbCP0BoiqcsXTibD6QoJd/rybr
-	lmybUl2eceYoXK1doSe1UvVKZU0xPyf++UKSRuTrvPZ8kslcretujWkDgiIH7Gn+
-	PnGfHmFzdK79brT/p+7vMtK0RQI9fm4eegJyTJDiKrMuVYWrw7LTA98oaIbxxGVX
-	cp/zmNbVWv3t7G+e5oM6cvIjtFzvBzXjwRW8ekwY9CLryCa7PEeTsGAyPuQSYb9I
-	Ptt8szG08p/M0sXzLjFlwwZfTgEJ6y+MvhW8dLW7aLc4f+GyllYVCdGOuMG4EdW+
-	b8mmVA==
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1781373121; x=1781977921; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1781387295; x=1781992095; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=gZNeOce+dK0KUkcgQ5PeixCUOSWnH6ycUAlOAzLUVQ4=;
-        b=GdieRbw7f4q78a9rKZH8pfaEUIlGyrhnCBJD22zswxi/LkJ0BaYRH57Bg9/shIslOr
-         C9KUiFYFMGIf6B6+Ik5aKyVDO3YrlCkzllCG0JcNr/j28NqrF7BF8MSHlph7PzXGWYl6
-         bMOryEUZK22fHqe3opA1RgZQ+cBCbm1jvD7O+pL17+et+31nPQZAIk0GcOVuAoaktx0D
-         LAZhEStLk7TrZmLWfu8tFyxDyvOQH1OTPmqtN/WVaPxvjoJkRyF813Q0yxQxtm7dO84A
-         FvPO8cCrzI7Ylh8b3CS9keiYRUz+5kohVHr9khbeK86kOna+jN4YsuJ20g0RhC+80qqC
-         NYzw==
+        bh=9UNO2xI/wOnyoP+fG/GB8NiqXOoc6f8puz6dKt7oyRY=;
+        b=FB7z/d0Rl5zZzspY/NwsGBFMNJU3eyRQUQl05HoEb3F4KvfPb/iOGJE2U0a9wMtqAK
+         HcUbL+Injiggz2zSkkVrivx7dxhmvA1GnZJc+HIYgpQkVLjSTSQ7lj4xXEF8fOrK1rIE
+         BwkUK97TSF/1OnJri+GWuQ/3VYYFxgPaFIsQqllx9FaTDTN9xqI6FAXSsOMspyC9vfZ9
+         dhrAwXpghxjPlfT1iuEOIBWwOUXId99vyiY7hlZjzyHAix5z/R3xVqTl/kVkS2AWqkpD
+         38IEMN55HkFZeVt0pzNJKHpVCAX9B0H5ws9od7F6p6+PgMaACZNJ7c6c+0+RKL2+8n0F
+         n5Xw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781373121; x=1781977921;
+        d=1e100.net; s=20251104; t=1781387295; x=1781992095;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=gZNeOce+dK0KUkcgQ5PeixCUOSWnH6ycUAlOAzLUVQ4=;
-        b=dNh6QSTf8ZwoaQHiotmJRD34XJzivlboGBgj0P+U7SAZX6/QFcWzE5N+XXmX8M1LDt
-         9jjyx/DFTjoBAM94j12aWisngmizgaC1RSatB3tquEJB6YGQaJF34LG/sHrcQbUTZuwC
-         pVyCAGg8e3/+isd38TbqMA8+jlvvPoUCn+T9wwzQMtr53kdwa0WTJQMdfHYAcAmo4u/m
-         84O8gLWiMr6yEAW8AGBjEm+ODxScqLPSmjC3wQg+uE5v6d0OVICHnmLX+CixKtlJrHII
-         yxxLiUp2pWnOAEaZoybfx1jDu8DLtw9vX/u+d+NMMZ4bUruvUzJ0MuA/dgiECs0AgaSt
-         k+rA==
-X-Forwarded-Encrypted: i=1; AFNElJ/LnEWRwpcnl44gk8tqHtZyLgyZSIAG6o8ON/7s2ucgcJ0oziEGWbkinv7+Ejj9+Skxrj0DlTw9ArM=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YySfU1UtBjDHcpQXA8ctZjsMEiV/3IhfguteR5QHW83otYcmFEO
-	QvN26xk5yJL7qo5wfFyNEYpGncvMrmXZ1EW36zP5OJD6jUkQMYhTPUJcwOtfLe/V7rVWt0+Oel8
-	abRfEIbNojWgXxoVYAJUorgaSx1TyMKsqB0004EPRaiPB0F2iRbtf07tMO2GWQI42xrqtQA==
-X-Gm-Gg: Acq92OFmWWMXwbF0A73GQHaqFkJt6wBdYgPVIHp+1BnUycHgdvwniHblFnWiD38tCow
-	OliZVA2wBPFu7UmBy6jmRC+eTAees3hHKCKDKsCsowE+Y4CAz8b18TStI8uCY3vnXAdpRdl/PJ3
-	l8FCoIK+Mt38Vcili64OHtzWffH4jBw4adHAvHposKQBKBfVIZwyyK+YS4SznKJNYbf3kjV+bM1
-	o8MincrH520KTK6pKn3PLZRrBEzDYLwnidef3vYI7axSTl4nYq4aVyzoHUhG/kgesYwszRS7YIY
-	kBGd5r+92dmcQOlSYjzFMkVwa8Jqe7xcqHHwxYWtOmreyQ/2XcphMQ+ZuvTxM5EowSlcwrrm6aE
-	Y2NNT3BKc6j4sp1mbw/RfmopHWDAS4/0a0kZVhizcx+9gL/vduxFY7rJiHvbtWWhwysnk7LP/aO
-	J0AwePtWhO
-X-Received: by 2002:a05:620a:46a4:b0:915:5ce5:d3ce with SMTP id af79cd13be357-9161b94df24mr1173534885a.0.1781373121190;
-        Sat, 13 Jun 2026 10:52:01 -0700 (PDT)
-X-Received: by 2002:a05:620a:46a4:b0:915:5ce5:d3ce with SMTP id af79cd13be357-9161b94df24mr1173532085a.0.1781373120808;
-        Sat, 13 Jun 2026 10:52:00 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-To: qemu-devel@nongnu.org
-Cc: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
-        xen-devel@lists.xenproject.org,
-        =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
-        Anthony PERARD <anthony@xenproject.org>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Stefano Stabellini <sstabellini@kernel.org>,
-        =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-Subject: [PATCH 1/2] hw/xen/interface: Remove pre-C99 checks
-Date: Sat, 13 Jun 2026 19:51:50 +0200
-Message-ID: <20260613175151.1357-2-philmd@oss.qualcomm.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260613175151.1357-1-philmd@oss.qualcomm.com>
-References: <20260613175151.1357-1-philmd@oss.qualcomm.com>
+        bh=9UNO2xI/wOnyoP+fG/GB8NiqXOoc6f8puz6dKt7oyRY=;
+        b=nPlsWg8eA/mS8qy8y+PFxN+AutJrge+GwuVDQSCO7acyrNM0I+/foyM4zq380oV2dF
+         FSDYT8SlpNBmg3keCwDoL7V1MPGb1VmqjaYOlOAw3vZsi1MS3DkqDpxjZ6TBm+L/eNRV
+         plXAvJMbpfADAWrXy8bJKqWEHC4DggO8Z6uuXDi+U3B7k3PNv9sbi0+vPI9AuoXCMxgl
+         PHzQc8Xs+Oa0izVqV0yy4ZjFuiFkHGANcwYZjHahN7EyJY1X6KXeG0w8XEKfmWm8jbbj
+         8qQSEcZdugUrKO5Z6XxdMDfYs3+PQNVBb/UCYSwCtM2HX8q9ELUovFxjnnaQjiuUE+qm
+         2bHQ==
+X-Gm-Message-State: AOJu0Yxf09d9UCkuzq8nPuD7vpHQ3yzkMiimJtz63rxYm0xQF32kFWl3
+	hMzgD5dGDGqoamUFLpRtNo6abONb5N/D0HHk287if0qNLOMjYW6/F7OE4Kc6a34Mcu8=
+X-Gm-Gg: Acq92OEf2b0FZUEllk10sKMVv3zf56ORnh0CFVVm5VhEsRcDRjBv3yh4n1uby5xTFNe
+	ioqx8yzE5Jqc27Z38SdFE67+BkJEKQTvbMrLs1vLzrRdeGgi/KEijTSdg0vL7glecXEaaghKx50
+	fo7DsyRzFSPZKlb7SWe0EmVU7TPcszkIJ1U3Snwsh3ehY6GnBkLqkIgB2ZYbKKQMGmpvoiywgbf
+	9/Ek1D9/Vu0xfwYr0fiZuVGrE7n/zVRYQhTxei4RWzw4vAnKyE4fh41RI4LJpEVy2u+gtpjGdsE
+	2goN/PtFLVsCnh7id9d0ceWt48ollh6ZA3ng2gUW4faLo9djlpTn3voVsqOan1g+Xec2ZybKwSd
+	Ffqd/TBlRMhl0SGULx1Qqr3PzGdP/jQbgW96Z4jlkQNWCAkp4V/fjGcLqsbyMxRkALCNMDG4ode
+	5pyPwNwYWEVachoU9uIpximrd989UYQRIcJhD26h0XA46bp/JDRYAZCrG8fEj+0J+9pKHM2wO9y
+	LysgI5FCXJs1r/2h+HwBLQKFQ==
+X-Received: by 2002:a05:600c:17d5:b0:490:b4e5:ce7e with SMTP id 5b1f17b1804b1-49220104e46mr35997485e9.25.1781387294695;
+        Sat, 13 Jun 2026 14:48:14 -0700 (PDT)
+From: Frediano Ziglio <freddy77@gmail.com>
+X-Google-Original-From: Frediano Ziglio <frediano.ziglio@cloud.com>
+To: xen-devel@lists.xenproject.org
+Cc: Frediano Ziglio <frediano.ziglio@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v5 07/16] libs/guest: avoids using 2 indexes
+Date: Sat, 13 Jun 2026 22:47:40 +0100
+Message-ID: <20260613214749.20620-8-frediano.ziglio@cloud.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260613214749.20620-1-frediano.ziglio@cloud.com>
+References: <20260613214749.20620-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjEzMDE4NiBTYWx0ZWRfXx8ItPjJZnabI
- mKQ3+ymhQDKtGvtNgg++3l6wzR2Ykyy/gRNlI0h4YbbTtC7eoSdEf6Vscdlmq99GhpypDKgMoxE
- 6C6FgDxzciEUUiQiEa5sp1IfCfvb0Jw=
-X-Authority-Analysis: v=2.4 cv=fLYJG5ae c=1 sm=1 tr=0 ts=6a2d98c1 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
- a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=vkG9KRslzty0At4LJNIA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjEzMDE4NiBTYWx0ZWRfXypt5mFJmjhlO
- spOfFP3LO9W3Whq40ed//TAjR73R6qbv3OdEYojTfUzVuAZTOlGQz5spC7wMc6Pwlq0p0UV7wfT
- QAC43STWSVJQ/lL8d/nDcDdR1p5Oix3FpUW/QhihKeyvpNVDmsRclzjOTx3fWwP8bdKqz0Dt5AK
- TIMv2WdViyfCmPQx7bV0uDcRJHzmFW3/GLAm+JFRb3lIO+O5i4lGmejGRiH3cdTM7m1lYblVZ+C
- ceNiIKGJr+C1/RlhN3JAcdUie+scAZMhkGZhmW1DY6rHYOE175Dc8+I80v5cB5wG14M+YUbCEDl
- PCkB7Cy/sfnNdN9ahzgIPkIjFUlSo7BsUUquXsUX/wUeDpyiez4fG98sw6/XLhnHUWLmqeALOCE
- xunnsfcx3OCijRCuovH8bBicUtGN8stoPmKixFSv2jc/yDJJhlwowYlt0ti9uQeP9Nrt2XCRpQ9
- 82NqluvsZ5m1CuunShA==
-X-Proofpoint-GUID: cgtWdZ8x-NFDEffJmQR6G6waAgqmeORK
-X-Proofpoint-ORIG-GUID: cgtWdZ8x-NFDEffJmQR6G6waAgqmeORK
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-13_03,2026-06-12_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 bulkscore=0 suspectscore=0 priorityscore=1501 clxscore=1015
- malwarescore=0 impostorscore=0 phishscore=0 lowpriorityscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606040000 definitions=main-2606130186
-X-purgate-ID: tlsNG-c1860d/1781373124-C5784DB1-EB530CE6/0/0
+X-purgate-ID: tlsNG-33051d/1781387295-3957F938-350FC35E/0/0
 X-purgate-type: clean
-X-purgate-size: 3619
+X-purgate-size: 2785
 
-We mandate a compiler supporting C99 since 2019-01-17 in
-commit 7be41675f7c ("configure: Force the C standard to gnu99"),
-thus supporting flexible array members. Remove what is now dead
-code.
+From: Frediano Ziglio <frediano.ziglio@citrix.com>
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+Simplify code, after the first scan of the various arrays we don't need to
+keep original types and PFNs but only the ones having data.
+
+Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
+Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+--
+Changes since v4:
+- added Reviewed-by.
 ---
- include/hw/xen/interface/physdev.h    |  2 +-
- include/hw/xen/interface/version.h    |  5 ++---
- include/hw/xen/interface/xen-compat.h |  2 --
- include/hw/xen/interface/xen.h        | 14 --------------
- 4 files changed, 3 insertions(+), 20 deletions(-)
+ tools/libs/guest/xg_sr_restore.c | 26 +++++++++++++-------------
+ 1 file changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/include/hw/xen/interface/physdev.h b/include/hw/xen/interface/physdev.h
-index f0c0d4727c0..8da03b685ad 100644
---- a/include/hw/xen/interface/physdev.h
-+++ b/include/hw/xen/interface/physdev.h
-@@ -283,7 +283,7 @@ struct physdev_pci_device_add {
-      * First element ([0]) is PXM domain associated with the device (if
-      * XEN_PCI_DEV_PXM is set)
-      */
--    uint32_t optarr[XEN_FLEX_ARRAY_DIM];
-+    uint32_t optarr[0];
- };
- typedef struct physdev_pci_device_add physdev_pci_device_add_t;
- DEFINE_XEN_GUEST_HANDLE(physdev_pci_device_add_t);
-diff --git a/include/hw/xen/interface/version.h b/include/hw/xen/interface/version.h
-index 9c78b4f3b6a..41ff28c7ee5 100644
---- a/include/hw/xen/interface/version.h
-+++ b/include/hw/xen/interface/version.h
-@@ -77,9 +77,8 @@ typedef char xen_commandline_t[1024];
-  */
- #define XENVER_build_id 10
- struct xen_build_id {
--        uint32_t        len; /* IN: size of buf[]. */
--        unsigned char   buf[XEN_FLEX_ARRAY_DIM];
--                             /* OUT: Variable length buffer with build_id. */
-+        uint32_t        len;    /* IN: size of buf[]. */
-+        unsigned char   buf[0]; /* OUT: Variable length buffer with build_id. */
- };
- typedef struct xen_build_id xen_build_id_t;
+diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
+index e148fc594a..fb46142d87 100644
+--- a/tools/libs/guest/xg_sr_restore.c
++++ b/tools/libs/guest/xg_sr_restore.c
+@@ -260,9 +260,7 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
+     int *map_errs = malloc(count * sizeof(*map_errs));
+     int rc;
+     void *mapping = NULL, *guest_page = NULL;
+-    unsigned int i, /* i indexes the pfns from the record. */
+-        j,          /* j indexes the subset of pfns we decide to map. */
+-        nr_pages = 0;
++    unsigned nr_pages;
  
-diff --git a/include/hw/xen/interface/xen-compat.h b/include/hw/xen/interface/xen-compat.h
-index 97fe6984989..582c0182367 100644
---- a/include/hw/xen/interface/xen-compat.h
-+++ b/include/hw/xen/interface/xen-compat.h
-@@ -24,6 +24,4 @@
- #error "These header files do not support the requested interface version."
- #endif
+     if ( !mfns || !map_errs )
+     {
+@@ -279,12 +277,18 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
+         goto err;
+     }
  
--#define COMPAT_FLEX_ARRAY_DIM XEN_FLEX_ARRAY_DIM
+-    for ( i = 0; i < count; ++i )
++    nr_pages = 0;
++    for ( unsigned i = 0; i < count; ++i )
+     {
+         ctx->restore.ops.set_page_type(ctx, pfns[i], types[i]);
+ 
+-        if ( page_type_has_stream_data(types[i]) )
+-            mfns[nr_pages++] = ctx->restore.ops.pfn_to_gfn(ctx, pfns[i]);
++        if ( !page_type_has_stream_data(types[i]) )
++            continue;
++
++        mfns[nr_pages] = ctx->restore.ops.pfn_to_gfn(ctx, pfns[i]);
++        pfns[nr_pages] = pfns[i];
++        types[nr_pages] = types[i];
++        nr_pages++;
+     }
+ 
+     /* Nothing to do? */
+@@ -302,16 +306,13 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
+         goto err;
+     }
+ 
+-    for ( i = 0, j = 0; i < count; ++i )
++    for ( unsigned i = 0; i < nr_pages; ++i )
+     {
+-        if ( !page_type_has_stream_data(types[i]) )
+-            continue;
 -
- #endif /* __XEN_PUBLIC_XEN_COMPAT_H__ */
-diff --git a/include/hw/xen/interface/xen.h b/include/hw/xen/interface/xen.h
-index 920567e0062..a6f4aa61993 100644
---- a/include/hw/xen/interface/xen.h
-+++ b/include/hw/xen/interface/xen.h
-@@ -36,15 +36,6 @@ DEFINE_XEN_GUEST_HANDLE(uint64_t);
- DEFINE_XEN_GUEST_HANDLE(xen_pfn_t);
- DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
+-        if ( map_errs[j] )
++        if ( map_errs[i] )
+         {
+             rc = -1;
+             ERROR("Mapping pfn %#"PRIpfn" (mfn %#"PRIpfn", type %#"PRIx32") failed with %d",
+-                  pfns[i], mfns[j], types[i], map_errs[j]);
++                  pfns[i], mfns[i], types[i], map_errs[i]);
+             goto err;
+         }
  
--/* Define a variable length array (depends on compiler). */
--#if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
--#define XEN_FLEX_ARRAY_DIM
--#elif defined(__GNUC__)
--#define XEN_FLEX_ARRAY_DIM  0
--#else
--#define XEN_FLEX_ARRAY_DIM  1 /* variable size */
--#endif
--
- /* Turn a plain number into a C unsigned (long (long)) constant. */
- #define __xen_mk_uint(x)  x ## U
- #define __xen_mk_ulong(x) x ## UL
-@@ -986,13 +977,8 @@ typedef struct {
-       ((d) >>  8) & 0xFF, ((d) >>  0) & 0xFF,                           \
-                 e1, e2, e3, e4, e5, e6}}
+@@ -337,7 +338,6 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
+             memcpy(guest_page, page_data, PAGE_SIZE);
+         }
  
--#if defined(__STDC_VERSION__) ? __STDC_VERSION__ >= 199901L : defined(__GNUC__)
- #define XEN_DEFINE_UUID(a, b, c, d, e1, e2, e3, e4, e5, e6)             \
-     ((xen_uuid_t)XEN_DEFINE_UUID_(a, b, c, d, e1, e2, e3, e4, e5, e6))
--#else
--#define XEN_DEFINE_UUID(a, b, c, d, e1, e2, e3, e4, e5, e6)             \
--    XEN_DEFINE_UUID_(a, b, c, d, e1, e2, e3, e4, e5, e6)
--#endif /* __STDC_VERSION__ / __GNUC__ */
- 
- #endif /* !__ASSEMBLY__ */
- 
+-        ++j;
+         guest_page += PAGE_SIZE;
+         page_data += PAGE_SIZE;
+     }
 -- 
-2.53.0
+2.43.0
 
 
