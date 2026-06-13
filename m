@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91AC9CD98D6
-	for <xen-devel@archiver.kernel.org>; Sat, 13 Jun 2026 21:48:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1337574.1598958 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 400B5CD98DE
+	for <xen-devel@archiver.kernel.org>; Sat, 13 Jun 2026 21:48:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1337560.1598900 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wYWDN-00055M-AQ; Sat, 13 Jun 2026 21:48:29 +0000
+	id 1wYWDE-0003Bu-8e; Sat, 13 Jun 2026 21:48:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1337574.1598958; Sat, 13 Jun 2026 21:48:29 +0000
+Received: by outflank-mailman (output) from mailman id 1337560.1598900; Sat, 13 Jun 2026 21:48:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wYWDM-00052N-O7; Sat, 13 Jun 2026 21:48:28 +0000
-Received: by outflank-mailman (input) for mailman id 1337574;
- Sat, 13 Jun 2026 21:48:25 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wYWDE-0003Aw-0q; Sat, 13 Jun 2026 21:48:20 +0000
+Received: by outflank-mailman (input) for mailman id 1337560;
+ Sat, 13 Jun 2026 21:48:18 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wYWDJ-0004IA-Bw
- for xen-devel@lists.xenproject.org; Sat, 13 Jun 2026 21:48:25 +0000
+ (envelope-from <freddy77@gmail.com>) id 1wYWDC-0002jU-4a
+ for xen-devel@lists.xenproject.org; Sat, 13 Jun 2026 21:48:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wYWDI-008PGn-Ox
- for xen-devel@lists.xenproject.org; Sat, 13 Jun 2026 23:48:24 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wYWDB-00DVVl-Hj
+ for xen-devel@lists.xenproject.org; Sat, 13 Jun 2026 23:48:17 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a2dd008-5cb7-0a2a0a5109dd-0a2a4503cafc-20
- for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 23:48:24 +0200
-Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a2dcf18-2eae-0a2a0a5409dd-0a2a450bc4b2-32
+ for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 23:48:17 +0200
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a2dd028-672d-0a2a45030019-d155802fe467-3
- for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 23:48:24 +0200
-Received: by mail-wm1-f47.google.com with SMTP id
- 5b1f17b1804b1-490be03d47bso21011915e9.0
- for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 14:48:24 -0700 (PDT)
+ id 6a2dd021-212f-0a2a450b0019-d1558030c84f-3
+ for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 23:48:17 +0200
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-490a76757e5so14953915e9.2
+ for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 14:48:17 -0700 (PDT)
 Received: from localhost.localdomain (5.116.208.46.dyn.plus.net.
  [46.208.116.5]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-492202edf89sm113877065e9.1.2026.06.13.14.48.23
+ 5b1f17b1804b1-492202edf89sm113877065e9.1.2026.06.13.14.48.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 13 Jun 2026 14:48:23 -0700 (PDT)
+ Sat, 13 Jun 2026 14:48:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,41 +55,41 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781387304; x=1781992104; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1781387297; x=1781992097; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=GO+OrmTMVGaC0OpwuAjvGTXKlxzTulJK0lDq0/wgpGg=;
-        b=VPEbClme/eaWceGZUChmMmSgnNFkgAdbwnIrsDOqW9iWjZJARzL397oL83TlSlEcS/
-         WF/erNkJvk567/4Ka/mYZYPLVXNhRNBDpVcM8SFyAsxFmZr56t0m1jm4c4dv5d4uIWjH
-         Mr76L7wx4pEfvaAh1GcAikFS5PEHIvBtyAw/fVwzJISQPRYOLQHSx9deJ6n3MJyTfcle
-         hLUgB2QgXyuoyd7pXWGf6DKQA6j1/87s/tT6RlNj4NnBHR+i3Z8TA/D2isGv8LZMVVgT
-         ok61ukHWkJgbPwLsejIi6huX62TAIQ66oNWDJGz9gDKmBocP93MM71jrOJ7xu8YjdDMH
-         zIHg==
+        bh=9MhL+IoB2npTTdx+dYewd7GvfekT0Xac13RwRFw6zgo=;
+        b=NTvVG6dNhC3mEpRfBD2njqws/hYIb+dx6lb09jaYgR9Xog+3Gb+aiXxRjnqz1NcI9I
+         5sub9RwrS36/DeXf3MIAVBQzOhx/ltjqsHMuqvOKNKRe9WuTN4/iRMY6djAhtL4hvCr/
+         tfoQlKDYbsZCYOD2VTW5h0j6YL/HCXINYQmYuDbX1f0I5CBmq+3/78f6/GRnvgHiT0Sn
+         2pZaG1yk2VU6ns7S2DDYo2Qru7fUL5cXwD3xs4Gv++YgU2vUejR0Xa74zmIHDKeeTfBO
+         g+kujPjSY2wsObeL3mGAvy4sUjWOucwXHr4C652njY7kEVvONCtMxg+DhQDCVeTl+95I
+         fZrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781387304; x=1781992104;
+        d=1e100.net; s=20251104; t=1781387297; x=1781992097;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=GO+OrmTMVGaC0OpwuAjvGTXKlxzTulJK0lDq0/wgpGg=;
-        b=Kpv9KqZ7RCK5sDh0K+ooWiv6qAsVU+JLlH+LXfFJ07hLhnKzInZTiS31d+fxZ+k+YR
-         gUVKR03v/u730x+OBLeLQ8mAAx/xbA/zFfHuiw/S5Qm50BxZOIM+L5ABjjJWG5AWQw8w
-         1TMtGbRwgKXDJCFlT1PO4lrZvnsPjKGAUioL1xGm/sg6d/E/tgDSbMm14WQWtUdXmc8Y
-         XZKv6yCmiMvqkOI4fIRO5d1GRObk95qz2gDwqALPo7PkG6bIJj9uDLrayNQIRkR551y6
-         L4SkY+2uJGBzNjE0yXE4uCQMu5OYdZfV3y7Tym3Vv7OsJ441u9Yrhv4/8p8gnRoMME9S
-         Gckw==
-X-Gm-Message-State: AOJu0YwEVh9u69rjveOWdZyhUmtpTycYuMUSyupjtnZpE3hnb/olFcQQ
-	0ORfV6et6IvMbNPJwHxbar1R1cB5JUKeWhvJI795fYB60DabXH/yAEYLm6vxq+uaKgs=
-X-Gm-Gg: Acq92OHf6nLR4sQmP0FOvcPaMjAuLWrnY1mzxiDS+2eIEaCf1ntm3Vl3LroebUlcTu4
-	1JthL/v0Fs49D/G5G6xvC5Fcgw0ixvBzCsQcTqzqLhl8AuhW7/tFeTyROkyzHL3RxWod5BYhBuh
-	/Q/KFVkUurfEHM4xU2s7jpvroDl0GgkKsNgtNwbosvSJ8Upp/RRh0aXlMf3fln0EUf8s2oZUDIK
-	CLhQ6lN/jt3A4ONWz3zcgSksuN/dAByA+fu0mWx1b7DoKhUSydRUc880l17uYHNHNNiAH4lgoqo
-	8u/WGAOTUele1zjfOGr4eZo8KyVRnXCsLD8dVgVBWy7jqKGUNuWKvpRT6amcePzSe4aDwkptNcE
-	ijBfDFm8Ugm0u0s7mmen272x0K9ZWkWQ0+UQS4QPUzwJnRVKy11RgjJf/jKGziMLBXU4jEtUwBK
-	VE3cXQanTktf1ybF6/yLuh+P5mkKe1s7K+9uRhoWFS9Lxb8rRgaeDrJDxlbOax/zi+XX0iq87HT
-	AqhxoJLzbO36qpIZgJZHYzsrA==
-X-Received: by 2002:a05:600c:c177:b0:490:c2a3:3303 with SMTP id 5b1f17b1804b1-490ec51f18dmr104287785e9.34.1781387304042;
-        Sat, 13 Jun 2026 14:48:24 -0700 (PDT)
+        bh=9MhL+IoB2npTTdx+dYewd7GvfekT0Xac13RwRFw6zgo=;
+        b=NrWlriWDq7P8X7RyhayyksPXYhvMPsBxmrRpFmuT9PhghsNjkqBOjXWXOmjxjzmd2r
+         4LIyKHtEIgQ3y8VmfGYcSM597v8+Npzv8gvAJXEbieiCLaVf7H+XF8Iq1i2fBzaihaHn
+         oB+syRMVusRG4KpyjnJX24L6Ub0x8q2I/4qMnPqAfgdFwm9UYaqJdCAT090qjZwsqJKN
+         vyBksQmo6+sms8n1GAcbs1ENYtvNEGlY3HRm8eeaOhvGpeV8PDSmUVtvLtvk5AhPVo/j
+         K9jON2994n428CKVJ3ykIT/hJ1OwdcUlQIgi+H5IJdpBsFCityUGqoyKBfBI+TIuGRwN
+         cruA==
+X-Gm-Message-State: AOJu0Yyl9ugs5D5L4rwCw+OqRAfZocNFOtiCnXPk4Ilcg84DpfrBAuo8
+	H2QCuXfC7eUr4C8jS8au3tIWlGEOgD3gq+WhO8JqwKoQBB7/fWZnTiNjZjmTa1n4xP4=
+X-Gm-Gg: Acq92OF+YuwiyllxGNHF1ULVEiTS2VNQ+LBpTQrIOhiiccULuvmRC+Pi7FBs1Jzwbzd
+	BHc64kfasStyD8ME0G3GxexhKTa6sky1I14VA3CBTORXO5JI4D5Lh2ucbEMw/5U6h3XR1E4HlFH
+	FZvLg2Kohq6dA1cm9g1650smWU1zMja5o1wbk2a4a3yOjwawknc9KMi9OKRKonjUTszI5WS59s6
+	j05D34ISAF5ihXrbgMiTjgYzo5AQ9Eaz+S9zwR3ZC5eTnArjFaOOsRJRCkiqSiqGEpfmIMtRSKr
+	sYlszc79MHDp4DjuZElsa98xVnX3EU4T6JKb027s8H9R8t1eZ9jzKCPCUtHKG1Y1ohYIHPCUxw7
+	stiDlPBNNouB2UxJPig8o/IGE2rx9+865wXa4tn7O5kViO41+J9YZN/8BG0dZ1jDksrWIDmU6wY
+	Za4NLfODq11Tnc1h6wBEndy6r1gO+iLvdzGbzBpP8pfFpwp64PyBNhWvJ28MQOVO1muEHREexBE
+	0T71jMW0Q2e0YEOW0KFatYRUQ==
+X-Received: by 2002:a05:600c:4e4e:b0:490:e196:e8df with SMTP id 5b1f17b1804b1-492200bb228mr56160055e9.23.1781387296918;
+        Sat, 13 Jun 2026 14:48:16 -0700 (PDT)
 From: Frediano Ziglio <freddy77@gmail.com>
 X-Google-Original-From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
@@ -100,194 +100,107 @@ Cc: Frediano Ziglio <frediano.ziglio@citrix.com>,
 	Teddy Astie <teddy.astie@vates.tech>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH Linux v5 16/16] xen/privcmd: Add new ABI to allow copying foreign memory
-Date: Sat, 13 Jun 2026 22:47:49 +0100
-Message-ID: <20260613214749.20620-17-frediano.ziglio@cloud.com>
+Subject: [PATCH v5 09/16] libs/ctrl: Allows writev_exact to change iov array
+Date: Sat, 13 Jun 2026 22:47:42 +0100
+Message-ID: <20260613214749.20620-10-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260613214749.20620-1-frediano.ziglio@cloud.com>
 References: <20260613214749.20620-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1781387304-38975938-0D1DB09A/0/0
+X-purgate-ID: tlsNG-42698a/1781387297-13F7EF3B-2B28A7F9/0/0
 X-purgate-type: clean
-X-purgate-size: 5391
+X-purgate-size: 3226
 
 From: Frediano Ziglio <frediano.ziglio@citrix.com>
 
-This new ABI allows to copy foreign domain memory to/from a buffer.
-This avoids having to map/copy/unmap foreign memory which is
-expensive.
-This operation is done particularly when migrating VMs.
+Avoid having to allocate and copy the array if a partial write
+happens.
+The implementation in tools/libs/store/xs.c already use this
+signature and method.
 
 Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
 --
-Changes since v4:
-- fix wrong assign;
-- use set_xen_guest_handle to set handle;
-- wrap slow hypercall with xen_preemptible_hcall_{begin,end};
-- use _IOWR for ioctl code to be more specific;
-- use __copy_to_user if buffer already checked.
-
+Changes since v2:
+- change prefix in subject.
 ---
- arch/x86/include/asm/xen/interface.h |  1 +
- drivers/xen/privcmd.c                | 49 ++++++++++++++++++++++++++++
- include/uapi/xen/privcmd.h           | 10 ++++++
- include/xen/interface/memory.h       | 37 ++++++++++++++++++++
- 4 files changed, 97 insertions(+)
+ tools/libs/ctrl/xc_private.c | 26 +++++---------------------
+ tools/libs/ctrl/xc_private.h |  2 +-
+ 2 files changed, 6 insertions(+), 22 deletions(-)
 
-diff --git a/arch/x86/include/asm/xen/interface.h b/arch/x86/include/asm/xen/interface.h
-index a078a2b0f032..bac3c3bc60fd 100644
---- a/arch/x86/include/asm/xen/interface.h
-+++ b/arch/x86/include/asm/xen/interface.h
-@@ -91,6 +91,7 @@ DEFINE_GUEST_HANDLE(int);
- DEFINE_GUEST_HANDLE(void);
- DEFINE_GUEST_HANDLE(uint64_t);
- DEFINE_GUEST_HANDLE(uint32_t);
-+DEFINE_GUEST_HANDLE(uint8_t);
- DEFINE_GUEST_HANDLE(xen_pfn_t);
- DEFINE_GUEST_HANDLE(xen_ulong_t);
- #endif
-diff --git a/drivers/xen/privcmd.c b/drivers/xen/privcmd.c
-index 725a49a0eee7..4ae9138dd314 100644
---- a/drivers/xen/privcmd.c
-+++ b/drivers/xen/privcmd.c
-@@ -1522,6 +1522,51 @@ static inline void privcmd_ioeventfd_exit(void)
- }
- #endif /* CONFIG_XEN_PRIVCMD_EVENTFD */
- 
-+static long privcmd_ioctl_foreigncopy(
-+	struct file *file, void __user *udata)
-+{
-+	const struct privcmd_data *const data = file->private_data;
-+	long ret;
-+	struct privcmd_foreigncopy copy;
-+	struct xen_foreigncopy xcopy;
-+
-+	if (copy_from_user(&copy, udata, sizeof(copy)))
-+		return -EFAULT;
-+	if (copy.dir & ~1u)
-+		return -EINVAL;
-+	if (copy.num >= U32_MAX >> PAGE_SHIFT)
-+		return -EINVAL;
-+	if (!access_ok(copy.pfns, copy.num * sizeof(*copy.pfns)))
-+		return -EFAULT;
-+	if (!access_ok(copy.buffer, copy.num << PAGE_SHIFT))
-+		return -EFAULT;
-+
-+	/* If restriction is in place, check the domid matches */
-+	if (data->domid != DOMID_INVALID && data->domid != copy.dom)
-+		return -EPERM;
-+
-+	xcopy.domid = copy.dom;
-+	xcopy.flags = copy.dir;
-+	xcopy.nr_frames = copy.num;
-+	set_xen_guest_handle(xcopy.frame_list,  (__force xen_pfn_t *)copy.pfns);
-+	set_xen_guest_handle(xcopy.buffer, (__force uint8_t *)copy.buffer);
-+
-+	xen_preemptible_hcall_begin();
-+	ret = HYPERVISOR_memory_op(XENMEM_foreigncopy, &xcopy);
-+	xen_preemptible_hcall_end();
-+
-+	/* copy values back in case of error */
-+	if (ret) {
-+		copy.num = xcopy.nr_frames;
-+		copy.pfns = xcopy.frame_list;
-+		copy.buffer = xcopy.buffer;
-+		if (__copy_to_user(udata, &copy, sizeof(copy)))
-+			ret = -EFAULT;
-+	}
-+
-+	return ret;
-+}
-+
- static long privcmd_ioctl(struct file *file,
- 			  unsigned int cmd, unsigned long data)
- {
-@@ -1569,6 +1614,10 @@ static long privcmd_ioctl(struct file *file,
- 		ret = privcmd_ioctl_pcidev_get_gsi(file, udata);
- 		break;
- 
-+	case IOCTL_PRIVCMD_FOREIGNCOPY:
-+		ret = privcmd_ioctl_foreigncopy(file, udata);
-+		break;
-+
- 	default:
- 		break;
- 	}
-diff --git a/include/uapi/xen/privcmd.h b/include/uapi/xen/privcmd.h
-index 8e2c8fd44764..786d769ad4f8 100644
---- a/include/uapi/xen/privcmd.h
-+++ b/include/uapi/xen/privcmd.h
-@@ -131,6 +131,14 @@ struct privcmd_pcidev_get_gsi {
- 	__u32 gsi;
- };
- 
-+struct privcmd_foreigncopy {
-+	domid_t dom;		/* foreign domain */
-+	__u16 dir;		/* direction,  0 from, 1 to */
-+	__u32 num;		/* number of pages to copy */
-+	const xen_pfn_t __user *pfns;	/* array of pfns */
-+	void __user *buffer;	/* buffer to copy to/from */
-+};
-+
+diff --git a/tools/libs/ctrl/xc_private.c b/tools/libs/ctrl/xc_private.c
+index bb0f81d6f3..946fc307aa 100644
+--- a/tools/libs/ctrl/xc_private.c
++++ b/tools/libs/ctrl/xc_private.c
+@@ -635,7 +635,7 @@ int write_exact(int fd, const void *data, size_t size)
  /*
-  * @cmd: IOCTL_PRIVCMD_HYPERCALL
-  * @arg: &privcmd_hypercall_t
-@@ -164,5 +172,7 @@ struct privcmd_pcidev_get_gsi {
- 	_IOW('P', 9, struct privcmd_ioeventfd)
- #define IOCTL_PRIVCMD_PCIDEV_GET_GSI				\
- 	_IOC(_IOC_NONE, 'P', 10, sizeof(struct privcmd_pcidev_get_gsi))
-+#define IOCTL_PRIVCMD_FOREIGNCOPY				\
-+	_IOWR('P', 11, struct privcmd_foreigncopy)
+  * MiniOS's libc doesn't know about writev(). Implement it as multiple write()s.
+  */
+-int writev_exact(int fd, const struct iovec *iov, int iovcnt)
++int writev_exact(int fd, struct iovec *iov, int iovcnt)
+ {
+     int rc, i;
  
- #endif /* __LINUX_PUBLIC_PRIVCMD_H__ */
-diff --git a/include/xen/interface/memory.h b/include/xen/interface/memory.h
-index 1a371a825c55..5981402fccde 100644
---- a/include/xen/interface/memory.h
-+++ b/include/xen/interface/memory.h
-@@ -325,4 +325,41 @@ struct xen_mem_acquire_resource {
- };
- DEFINE_GUEST_HANDLE_STRUCT(xen_mem_acquire_resource);
+@@ -649,9 +649,8 @@ int writev_exact(int fd, const struct iovec *iov, int iovcnt)
+     return 0;
+ }
+ #else
+-int writev_exact(int fd, const struct iovec *iov, int iovcnt)
++int writev_exact(int fd, struct iovec *iov, int iovcnt)
+ {
+-    struct iovec *local_iov = NULL;
+     int rc = 0, iov_idx = 0, saved_errno = 0;
+     ssize_t len;
  
-+/*
-+ * Copy memory from/to a given domain.
-+ */
-+#define XENMEM_foreigncopy 29
-+struct xen_foreigncopy {
-+    /* IN - The domain whose resource is to be copied */
-+    domid_t domid;
-+
-+    /* IN - Flags */
-+#define XENMEM_foreigncopy_from 0
-+#define XENMEM_foreigncopy_to 1
-+#define XENMEM_foreigncopy_direction 1
-+    uint16_t flags;
-+
-+    /*
-+     * IN
-+     *
-+     * As an IN parameter number of frames of the domain to be copied.
-+     */
-+    uint32_t nr_frames;
-+
-+    /*
-+     * IN
-+     *
-+     * Frames to be copied.
-+     */
-+    GUEST_HANDLE(xen_pfn_t) frame_list;
-+
-+    /*
-+     * IN/OUT
-+     *
-+     * Userspace buffer to read/write from.
-+     */
-+    GUEST_HANDLE(uint8_t) buffer;
-+};
-+DEFINE_GUEST_HANDLE_STRUCT(xen_foreigncopy);
-+
- #endif /* __XEN_PUBLIC_MEMORY_H__ */
+@@ -686,23 +685,9 @@ int writev_exact(int fd, const struct iovec *iov, int iovcnt)
+                 len -= iov[iov_idx++].iov_len;
+             else
+             {
+-                /* Partial write of iov[iov_idx]. Copy iov so we can adjust
+-                 * element iov_idx and resubmit the rest. */
+-                if ( !local_iov )
+-                {
+-                    local_iov = malloc(iovcnt * sizeof(*iov));
+-                    if ( !local_iov )
+-                    {
+-                        saved_errno = ENOMEM;
+-                        rc = -1;
+-                        goto out;
+-                    }
+-
+-                    iov = memcpy(local_iov, iov, iovcnt * sizeof(*iov));
+-                }
+-
+-                local_iov[iov_idx].iov_base += len;
+-                local_iov[iov_idx].iov_len  -= len;
++                /* Partial write of iov[iov_idx]. */
++                iov[iov_idx].iov_base += len;
++                iov[iov_idx].iov_len  -= len;
+                 break;
+             }
+         }
+@@ -711,7 +696,6 @@ int writev_exact(int fd, const struct iovec *iov, int iovcnt)
+     saved_errno = 0;
+ 
+  out:
+-    free(local_iov);
+     errno = saved_errno;
+     return rc;
+ }
+diff --git a/tools/libs/ctrl/xc_private.h b/tools/libs/ctrl/xc_private.h
+index b5892ae8dc..3af996e900 100644
+--- a/tools/libs/ctrl/xc_private.h
++++ b/tools/libs/ctrl/xc_private.h
+@@ -383,7 +383,7 @@ int xc_flush_mmu_updates(xc_interface *xch, struct xc_mmu *mmu);
+ /* Return 0 on success; -1 on error setting errno. */
+ int read_exact(int fd, void *data, size_t size); /* EOF => -1, errno=0 */
+ int write_exact(int fd, const void *data, size_t size);
+-int writev_exact(int fd, const struct iovec *iov, int iovcnt);
++int writev_exact(int fd, struct iovec *iov, int iovcnt);
+ 
+ int xc_ffs8(uint8_t x);
+ int xc_ffs16(uint16_t x);
 -- 
-2.54.0
+2.43.0
 
 
