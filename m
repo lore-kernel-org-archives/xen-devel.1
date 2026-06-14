@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E40DCD98C5
-	for <xen-devel@archiver.kernel.org>; Sat, 13 Jun 2026 21:48:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1337569.1598953 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEECDCD8CA8
+	for <xen-devel@archiver.kernel.org>; Sun, 14 Jun 2026 00:01:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1337663.1598972 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wYWDM-0004wT-IT; Sat, 13 Jun 2026 21:48:28 +0000
+	id 1wYYHZ-0001q4-4A; Sun, 14 Jun 2026 00:00:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1337569.1598953; Sat, 13 Jun 2026 21:48:28 +0000
+Received: by outflank-mailman (output) from mailman id 1337663.1598972; Sun, 14 Jun 2026 00:00:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wYWDM-0004vI-5D; Sat, 13 Jun 2026 21:48:28 +0000
-Received: by outflank-mailman (input) for mailman id 1337569;
- Sat, 13 Jun 2026 21:48:24 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wYYHZ-0001px-0e; Sun, 14 Jun 2026 00:00:57 +0000
+Received: by outflank-mailman (input) for mailman id 1337663;
+ Sun, 14 Jun 2026 00:00:55 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wYWDI-0004Ay-JM
- for xen-devel@lists.xenproject.org; Sat, 13 Jun 2026 21:48:24 +0000
+ (envelope-from <taka@valinux.co.jp>) id 1wYYHW-0001pn-2m
+ for xen-devel@lists.xenproject.org; Sun, 14 Jun 2026 00:00:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wYWDH-006VOz-Vv
- for xen-devel@lists.xenproject.org; Sat, 13 Jun 2026 23:48:23 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wYYHV-0028z8-30
+ for xen-devel@lists.xenproject.org; Sun, 14 Jun 2026 02:00:53 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a2dcfc8-e002-0a2a0a5209dd-0a2a4502cc2a-20
- for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 23:48:23 +0200
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a2dd027-af86-0a2a45020019-d1558036a867-3
- for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 23:48:23 +0200
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-490b8ac62baso23531785e9.0
- for <xen-devel@lists.xenproject.org>; Sat, 13 Jun 2026 14:48:23 -0700 (PDT)
-Received: from localhost.localdomain (5.116.208.46.dyn.plus.net.
- [46.208.116.5]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-492202edf89sm113877065e9.1.2026.06.13.14.48.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 13 Jun 2026 14:48:22 -0700 (PDT)
+ (envelope-from <taka@valinux.co.jp>)
+ id 6a2def29-e002-0a2a0a5209dd-0a2a45049b98-6
+ for <xen-devel@lists.xenproject.org>; Sun, 14 Jun 2026 02:00:52 +0200
+Received: from [52.101.229.97]
+ (helo=TY3P286CU002.outbound.protection.outlook.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <taka@valinux.co.jp>)
+ id 6a2def31-1dec-0a2a45040019-3465e561be13-3
+ for <xen-devel@lists.xenproject.org>; Sun, 14 Jun 2026 02:00:51 +0200
+Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:458::18)
+ by TYRP286MB4184.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:134::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.16; Sun, 14 Jun
+ 2026 00:00:46 +0000
+Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::c8c9:25cd:8d13:96d6]) by OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::c8c9:25cd:8d13:96d6%6]) with mapi id 15.21.0113.015; Sun, 14 Jun 2026
+ 00:00:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,359 +55,163 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781387303; x=1781992103; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ZdUdxNw3V024HIpq9dPJr4uS0iPxLBhpEEH+UqHTafI=;
-        b=DOq1NtEo/ze3rMQy/YfqTj5K5+YXbgAXsQfnfee7DnFXe9HbIbgwo/xJr8Yd6Bf1HI
-         CagomYznlmHL6m/jkjQ5MEV2lWNGOIExLtyI0xLzf6YR1RsuoxEzFE3POFGfCu+20wiy
-         6056/4fAYq1TlgQOdo75zChIB7Mz+NaOjB0hbVzAA96v9doxP6DLx3tXwesNFQ1B4Z1b
-         q16vK5PIXlF8b5nfTI/o4R1mGaxrCJ7MkusabQqOOgEQw8q+2Sb74A+NDftsGSv+IG1O
-         YI9Zu3HAyrTRDyGd9vfFHmj+AjznN0TV91c7DOuJ7dWOqXuc3cKWWYB86T8Cd4U73rBX
-         pduw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781387303; x=1781992103;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=ZdUdxNw3V024HIpq9dPJr4uS0iPxLBhpEEH+UqHTafI=;
-        b=QoHJHC0ueAxaf3TD33YIwoHSqOAid8J0ybmc4BjfSFA7B3xJSqZ9XKSKUQMzNAyDC+
-         /nqb2AkpDWL1GVwqsjTFjFXfqMOmgTJXvCsHHeTo3NmButG+eizWlCORf7dY7b4h9HDu
-         z68qkDByWoXwGGdDQOMBH78T3TaXE5Du98rv8I5+c7CWe8OjmAlOYKdcotutXj0z9iW0
-         VcTNRnBVtszTnwaF5gAAxyCWDFUA/YIM1TCWiJYM8fy4N4GEHHBCi50JOuYBRLIvf5zU
-         C7jU3sgpKRZ6OCq4nCOUmWxqPh5vt5IIdIRA6NpSewhcy4MFXrpB21dwu79qOyor91ja
-         gq/A==
-X-Gm-Message-State: AOJu0YyY5jxbqWqMpOtYUzOBc7Pi5XK13G6fvqNTWunWkSGRFMCUzpCU
-	hphEna4JXHmrOYW4qH5J67Om2z9cYC8feADM7UeWm/fAP4rWALDkYEcCx7uv5FaWF+4=
-X-Gm-Gg: Acq92OHkiUZTNA00LWjBlU9av9H8sM7vbSQ9QoMp1PGt2CMNQJvNYETDCQ8hUqelbPM
-	GtkiAkqIUnvBYC0bIEGRf5YbdOsM5SY85fzdRd59gKQl04svW7HpBsqLDhDc7vTfdsn5WwkZ1sN
-	0Qu6jyznWFeiCAqXINlTpTb9hfyHRfz/x16/J7FXUNfhdcqQ5zDnH9vY5SoaPOK5tgFhdWJWPqb
-	wRUp6qPJmcpjcFRABF3Oe3pemIWjYp8QamGnB0FE1Y16EQUF7iDLYgUt9eTWkw/OiYgQXQzb0Jv
-	FZ98mD+fb3g9wf2lGUGL7JoZnRBmb0++x9rZfb/DK3jX2NaiOB9rAWfGH2i9UA6GHnHX4g6T88g
-	8hI3iqpVDbe7q2MRHfrp39IUrFuVqtmWI9khXfAXEQ5z80uNXsRmPlAuxTJFB0chKbyjhwwRrRX
-	OkeIekkXCduDUETAykI6LY2gr6GT7elQ21Pph7q9ZGcnVhkJOnkI+EWSP7Pwm1KX0G9EtJzo/JZ
-	H6q537oS44JAx2qDnuyUdR0gw==
-X-Received: by 2002:a05:600c:5290:b0:490:3cf0:8d81 with SMTP id 5b1f17b1804b1-490ec4dfa14mr80878945e9.13.1781387303319;
-        Sat, 13 Jun 2026 14:48:23 -0700 (PDT)
-From: Frediano Ziglio <freddy77@gmail.com>
-X-Google-Original-From: Frediano Ziglio <frediano.ziglio@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Frediano Ziglio <frediano.ziglio@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v5 15/16] libs/guest: finalize PoC
-Date: Sat, 13 Jun 2026 22:47:48 +0100
-Message-ID: <20260613214749.20620-16-frediano.ziglio@cloud.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260613214749.20620-1-frediano.ziglio@cloud.com>
-References: <20260613214749.20620-1-frediano.ziglio@cloud.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=G3J1D0b0rwb+S4xV9Y8xqnI44yDVK/+U53piPLHsxEPM7Mp9aOYbQF8+DE17cvPI9n7MiEm2Bm70sku10ovAiVMqLxv1ydeQRN1JIYA50qktJotWtendHbzUiGyCd1TlyKYEIhtk3n3TPLcJ29U0fKvBZdccxjWEI9kcz+Qf9cZyDg2r4vtse5Kpn34r1r2Bs5y1eZ8dtGQCtJ6Mhk1hDl2CbRmeBjnHog7N2Tt0EzNcYh3rdse362tX2rcMSOsyNiGCFo+/QakiYmY26KJ5jvFeVGjERCH1KiGNixn1ixwUq0RAAFjmERzfDHqQMg78jCSmGzKJxJsG3ozfduF6Dg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Gju0G6BUGfrAIq1ITyKQaK2KGIOreDoLWj0WRHoJLtc=;
+ b=D2qjYxdDKLEAY2DIza1jI2SEVsUkKNhS42RYLZGzrb50sXPr6MXFCMrPNX9ZOerNAJWKmqv0LZwZe0oSbhwfLQiaQkol1J9CTqgZ99yl8WtYEIExINUsUwm2loys6IM7ZF+wcsbms/6saYjZU+pv1Auo0bPKcl2nKSB60djvvNBYwKtsfXGH9BR22krWpYtk9/l2MS4JxMLmba3sAXmFgdAmPXkqt2BeCyTJ7vKhnFpZceeU60yrICAO4RTVgZJwhLQ4SrFelmXuebVjNhFm0tfDWehSs/TgfpyQnm+EOhY6HPAZMzDvFj1Det3k2vPdn8N9rSDRleR55epatLrMXQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
+ header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Gju0G6BUGfrAIq1ITyKQaK2KGIOreDoLWj0WRHoJLtc=;
+ b=tVEfMazvxcIf0fc5N1DwtY91np6/VEYljb8l4YR8eN99H+RFAP7Cyme5eoyuh9KRLVcmOUJu9u09hdh8xL3V9ALeN1GM4MgMyisXztu6bCmuEnuoVC8aeY8elOklOrJLXw5ctO+RB77vzYVukNwSNM4Ia22O4rTxyX0VzSajC2M=
+From: Hirokazu Takahashi <taka@valinux.co.jp>
+To: Julien Grall <julien@xen.org>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+CC: "Mykyta_Poturai@epam.com" <Mykyta_Poturai@epam.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Michal
+ Orzel <michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>,
+	=?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger.pau@citrix.com>
+Subject: RE: [PATCH 1/3] xen/device-tree: Parse 'cpu-map' node for CPU
+ topology exploration
+Thread-Topic: [PATCH 1/3] xen/device-tree: Parse 'cpu-map' node for CPU
+ topology exploration
+Thread-Index: AQHc+MoozrCC9Pa1YkC7YJKVJ6P2UbY5878AgAGxwTA=
+Date: Sun, 14 Jun 2026 00:00:45 +0000
+Message-ID:
+ <OS9P286MB7222B82D2DCF599215D9700B82E72@OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM>
+References: <20260610111320.133784-1-taka@valinux.co.jp>
+ <20260610111320.133784-2-taka@valinux.co.jp>
+ <8d8b8bcc-7c59-4ea7-bafd-6469643f8aaa@xen.org>
+In-Reply-To: <8d8b8bcc-7c59-4ea7-bafd-6469643f8aaa@xen.org>
+Accept-Language: ja-JP, en-US
+Content-Language: ja-JP
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=valinux.co.jp;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: OS9P286MB7222:EE_|TYRP286MB4184:EE_
+x-ms-office365-filtering-correlation-id: 8fed48c9-e856-4255-9f51-08dec9a7fbd7
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|1800799024|366016|23010399003|7416014|376014|38070700021|18002099003|22082099003|4143699003|56012099006;
+x-microsoft-antispam-message-info:
+ 1RVCpzsYZXr7Cn6FL/auAJlICrsm40iDN7QImPAxu6sHFln4ZjsgZ0001ax6zTJZ+7lThQWXSqw9sg/hyaCErSQ7IpptU8Ir7ASQ4bBjyA/K1Wy/N9afKFh3FqHSaJzzo9eWSPcQRYGAxjqxt0zzB02ZFzick+M9JJabR+YrAS+ziKDCYIMT55VwGR/HOilFJ/ZP7NFc4+vbOcVUjjAQkSgcLnNY+3XwW6DnN8H9jnxyv+zF3UncJpGU6Xqn+q4+NleRKct+BvksfJ9yhdXNQK6glin+nQij74peBZVcw3kS89nGGvQl53F1E1BZ0PP6r3Tes6QbeUDJj2bx0ucLN5K75GXKyhGJVzzbFQM3PBrAMOXas72IwNWyJJirrG56jDapj5srGMMpabEhIqCkgL0qwpSje0qjfVd94Bhu5wMseB9sJERnVITfllkgb19dUEc+LEKhpW1e2MjQI4LLUac5jjekrnZSVl/eZmz099SI6eEgTNE7lsTVloRPT727c/cV+p59ehAiWQLuuDPpCiCXcEei+5U+kaDcPZygzwweXnMoVAAnaM41uOoG5WInYK5ArhyU/WMNwtNcENbg9/XxxwmwACkdHeZ0Wl6ksbMJcTZ4gp1DFLflzWGX27xtLHhHS09QevvAFEEaVhSpcFtF0E2xa4JSeOq5IHITz/7PboQ+sugMw+wn4KKm8BmErjc6ig0nY/icBoNWfhP792+5tZXOunTILAdQSFBUHiSdx2Vyq77LGmbOIwAWqyjD
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:ja;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(23010399003)(7416014)(376014)(38070700021)(18002099003)(22082099003)(4143699003)(56012099006);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?utf-8?B?N1h6bWZsajlXN2FtbnZFdkcwZ1N6Mjc3alBiUmRMTHBMdU1HL3MwZjBpNjlL?=
+ =?utf-8?B?YkYxSHEzSGZIbGw4cklkU3liWTI2cFRlOFZIWllPSmp6TkJhZEdKcmN2VHJh?=
+ =?utf-8?B?T202b0d3TDlnUncxeGxuSmwwc01ZNkwremVzcHQ0WUphaGdLUUVQNEJySFBy?=
+ =?utf-8?B?STdJUGpZYW0weHVNVEdZa0V3aklKZVN4T2N0elRqSU4zMnlSeE84ZktGNGdt?=
+ =?utf-8?B?R2JtRVduVWNFT0ptanQ0enVvN3BFSy9IQnB0bGNDbE1xUG0xeUxmc28wRTk0?=
+ =?utf-8?B?ODFJaXpTaktnQXp5bkQydjBKSjROYmxVUXVqMXVLcGxibkw3bVpQYWl4b2tX?=
+ =?utf-8?B?Ullja05ubllEMk9BK2I3YUlNTS83WWtvU3ErZzY2Sm1uQ0J2cER3TTF3N0t2?=
+ =?utf-8?B?S2tnVjNvTTM1UnU1ZVJKcUttVTJmNnhEN1UyNGZ0RDRwS0QvSSs3UlhxU2pN?=
+ =?utf-8?B?Ymc2WFN3NkRNRS9GQjh0TlpkOStSRnlVV3grMStpb2NvNG12YnZMcEplTmR4?=
+ =?utf-8?B?V0x3NHZ3WENoWlRZUzUyUVhCR3FlQ0RzRVlHMWd5M3k3YVVUWDVMTElZYzlj?=
+ =?utf-8?B?aFI2eUtRa3EyLzE3TG4valRROGdwWEtFa1ZnenNmekpHVnNzcEFsNTBDVVgv?=
+ =?utf-8?B?RVVkVWlyOFArcWJOWmxEcllhWnVEK3lJVVJmYU1WeFlkUk5vYk1BR3BzaVk0?=
+ =?utf-8?B?U2lCcHRoemZtUktmZkg0clFUOWNCL3RwbGp3QW44QU1PQnAwQ2dlMzZPL0tV?=
+ =?utf-8?B?UEg2SE93a2o3U2s1Umd3emFrVUxpVm9lejEzSG9lTlBxZGZXeURsemdtL3Nk?=
+ =?utf-8?B?eThOWW5WOFpOVllscUdFVFBTV3VpdUlSTWhPSU5sbG4xZlZCbGQ0b1ZEaWNa?=
+ =?utf-8?B?dXlPdEs3YW1QUFBRYmNLdFRJRGZYOTVlMjdpdENsWkFseTF1eFJ6VnZEQjFu?=
+ =?utf-8?B?WmZYbTN2bE82a2ZZMUpYR3g4NUowUU45L0hmOFJ3bVltWTU1anFFZ0wwT0ZE?=
+ =?utf-8?B?NWo1QUR4QndlNlRHSnBOUklsTG5LdW12eEtXN3RGRmVwdTczdkE1cnFnaFU1?=
+ =?utf-8?B?Vjh2dVBZWjEwTWlHWDBFNzlCaFo5KzNzTU1aYjJsMmFIMVBMWmY0djh0TVcw?=
+ =?utf-8?B?V3ZyVi9FYmFaeGJiSkJ1V2t0dXI3VEIzQ0lmVkJSZDRQdjBzbytYSWlqWjVn?=
+ =?utf-8?B?MDdSNUcyNFE4ZWl1OEhtNUVvQjN4aWgvVWtTSFg0WENyM1ZsblBJNU1DQUdG?=
+ =?utf-8?B?Z0UvdWJFVjd4Z1Z6cUd5TXdJSG9jNWtiYXY1b2F1K1JyWC9tOS9oVVpTb1lZ?=
+ =?utf-8?B?M2orYkJUMm1zMUhjREFvTnRyWHdlWnhzb2RlSEI3bU51Q01mbGJMeGRaVzhV?=
+ =?utf-8?B?UWxtLzRzdGp3VmprNkxzTThlWkxyNlhOR2loMnorN1Q5bHFTNXBWYVNabkJP?=
+ =?utf-8?B?clJ2N2hlRXorMkNpWmxRZnd3NDVDZFNiZm1YUnFqNjRzZU5zdzNPN1pmVUd5?=
+ =?utf-8?B?WHVFNW9LOGNxdTFxc2RERzhSOW9QR2tKam1TUXNUTS93aDIxblNFMUFiSWpZ?=
+ =?utf-8?B?bS9ScUZwQnFYWUw5TGt4dUpnNE9EK1RZZHJaZVNOYXFPS0tFdk11NXBMNmNI?=
+ =?utf-8?B?VnpINE80ZnhuQ1I3VTRJWXRkZUNkN29VVjZBRmtIMUtpLzlmcDF2NFh4QStl?=
+ =?utf-8?B?K3pTek45bmZkY1RUVkd1OEV4VDJpdGluTXlidnJ4RW1oNTQxQXAyZ0IySFhL?=
+ =?utf-8?B?OC9VV28yOEttZU9DODc2WjJ6SGdBR2hmenhZcGx2emxzNituelQ4K2dsYmdC?=
+ =?utf-8?B?czBXT2hFS1NEbm1PdHZpVVJtR0ZnNjNMQnFJdUJ2NjZEd2xpOEpQdEhqM0FI?=
+ =?utf-8?B?T2hJS1p1ZDloK1pyc1Qrc0I3ZmoycmZGblRRbW1QVUpIUXhBVitGWTVGZm1W?=
+ =?utf-8?B?UGVWaDVjdzFWUk9HYjZMblJKODRrblpacVZPQStEb1VXUU9xNm9vblNwWDEx?=
+ =?utf-8?B?Y0ZwdFc0Q0xaKzE5UWtqbm1td3N0cHpIM2d1aFhKaXY0dHZMSFpKL0QvVWFL?=
+ =?utf-8?B?akdYSjJzUzdtTmRkZUR5SVp5aUxrRUZleWphaWtrUG5SV042Y1FheGRjdzZx?=
+ =?utf-8?B?NC9hZHM0cmlWYlRtTHRuc2FVRDVVTDJlb1V0cTNxZUl5Y0IvS1Byb0swcWhx?=
+ =?utf-8?B?TDJBRzBPUHozenY4RjdHUG5OVjYxdFdPL2NIZ0VNaVVvTG9tdEdzZmJNbWRy?=
+ =?utf-8?B?elJFRGlhRVRCc0Rid3VNWUQ2LytBUlNWWTNlekszc2ZzaWg4aC9tOVplNVFz?=
+ =?utf-8?Q?IUIdSU1+gMNcIvs3A4?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1781387303-AA56B161-99C0D3E9/0/0
+X-OriginatorOrg: valinux.co.jp
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8fed48c9-e856-4255-9f51-08dec9a7fbd7
+X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Jun 2026 00:00:45.4878
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: +8eaYuIB0/A2XyHNFb2mb760BpWHV6xUCS4qlpl6o7vkovzg3Xl3IL54tkG4XHelyL5z5iyhJu++DWTvUto3fA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYRP286MB4184
+X-purgate-ID: tlsNG-ebf023/1781395252-4014E3FF-FDCD2867/0/0
 X-purgate-type: clean
-X-purgate-size: 10593
+X-purgate-size: 3524
 
-From: Frediano Ziglio <frediano.ziglio@citrix.com>
-
-Remove now unused map_errs array.
-Test and restore verification code.
-Report correctly errors from writev_exact.
-Allocate verification buffer using hypercall buffer to avoid errors
-using hypercall.
-
-Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
----
- tools/libs/guest/xg_sr_common.h  |  4 +-
- tools/libs/guest/xg_sr_restore.c | 45 +++++++++++++++--
- tools/libs/guest/xg_sr_save.c    | 83 +++++++++++++++++++++-----------
- 3 files changed, 98 insertions(+), 34 deletions(-)
-
-diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index d8d8a0f9f7..cd562f028a 100644
---- a/tools/libs/guest/xg_sr_common.h
-+++ b/tools/libs/guest/xg_sr_common.h
-@@ -217,7 +217,6 @@ struct xc_sr_context_save_buffers
-     void *local_pages[MAX_BATCH_SIZE];
-     struct iovec iov[MAX_BATCH_SIZE + 2]; /* Headers + data. */
-     uint64_t rec_pfns[MAX_BATCH_SIZE];
--    int errors[MAX_BATCH_SIZE];
- };
- 
- struct xc_sr_context
-@@ -255,8 +254,8 @@ struct xc_sr_context
-             unsigned long *deferred_pages;
-             unsigned long nr_deferred_pages;
-             xc_hypercall_buffer_t dirty_bitmap_hbuf;
-+            xc_hypercall_buffer_t dest_buf;
-             struct xc_sr_context_save_buffers *buffers;
--            void *dest_buf;
-         } save;
- 
-         struct /* Restore data. */
-@@ -267,6 +266,7 @@ struct xc_sr_context
-             int send_back_fd;
-             unsigned long p2m_size;
-             xc_hypercall_buffer_t dirty_bitmap_hbuf;
-+            xc_hypercall_buffer_t verify_buf;
- 
-             /* From Image Header. */
-             uint32_t format_version;
-diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
-index ff27560ff7..b2df36c6f6 100644
---- a/tools/libs/guest/xg_sr_restore.c
-+++ b/tools/libs/guest/xg_sr_restore.c
-@@ -257,16 +257,15 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
- {
-     xc_interface *xch = ctx->xch;
-     xen_pfn_t *mfns = malloc(count * sizeof(*mfns));
--    int *map_errs = malloc(count * sizeof(*map_errs));
-     int rc;
-     unsigned nr_pages;
-     void *const source = page_data;
- 
--    if ( !mfns || !map_errs )
-+    if ( !mfns )
-     {
-         rc = -1;
-         ERROR("Failed to allocate %zu bytes to process page data",
--              count * (sizeof(*mfns) + sizeof(*map_errs)));
-+              count * sizeof(*mfns));
-         goto err;
-     }
- 
-@@ -314,13 +313,33 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
-         if ( rc < 0 )
-             goto err;
-     }
-+    else
-+    {
-+        DECLARE_HYPERCALL_BUFFER_SHADOW(uint8_t, verify_buf,
-+                                        &ctx->restore.verify_buf);
-+
-+        rc = xg_foreignmemory_copy_from(xch, ctx->domid, nr_pages, verify_buf, mfns);
-+        if ( rc < 0 )
-+            goto err;
-+
-+        void *guest_page = verify_buf;
-+        page_data = source;
-+        for ( unsigned i = 0; i < nr_pages; ++i )
-+        {
-+            /* Verify mode - compare incoming data to what we already have. */
-+            if ( memcmp(guest_page, page_data, PAGE_SIZE) )
-+                ERROR("verify pfn %#"PRIpfn" failed (type %#"PRIx32")",
-+                      pfns[i], types[i] >> XEN_DOMCTL_PFINFO_LTAB_SHIFT);
-+
-+            guest_page += PAGE_SIZE;
-+            page_data += PAGE_SIZE;
-+        }
-+    }
- 
-  done:
-     rc = 0;
- 
-  err:
--
--    free(map_errs);
-     free(mfns);
- 
-     return rc;
-@@ -710,6 +729,18 @@ static int setup(struct xc_sr_context *ctx)
-     int rc;
-     DECLARE_HYPERCALL_BUFFER_SHADOW(unsigned long, dirty_bitmap,
-                                     &ctx->restore.dirty_bitmap_hbuf);
-+    DECLARE_HYPERCALL_BUFFER_SHADOW(uint8_t, verify_buf,
-+                                    &ctx->restore.verify_buf);
-+
-+    verify_buf = xc_hypercall_buffer_alloc_pages(
-+        xch, verify_buf, MAX_BATCH_SIZE);
-+
-+    if ( !verify_buf )
-+    {
-+        ERROR("Unable to allocate memory for test buffer");
-+        rc = -1;
-+        goto err;
-+    }
- 
-     if ( ctx->stream_type == XC_STREAM_COLO )
-     {
-@@ -758,6 +789,8 @@ static void cleanup(struct xc_sr_context *ctx)
-     unsigned int i;
-     DECLARE_HYPERCALL_BUFFER_SHADOW(unsigned long, dirty_bitmap,
-                                     &ctx->restore.dirty_bitmap_hbuf);
-+    DECLARE_HYPERCALL_BUFFER_SHADOW(uint8_t, verify_buf,
-+                                    &ctx->restore.verify_buf);
- 
-     for ( i = 0; i < ctx->restore.buffered_rec_num; i++ )
-         free(ctx->restore.buffered_records[i].data);
-@@ -766,6 +799,8 @@ static void cleanup(struct xc_sr_context *ctx)
-         xc_hypercall_buffer_free_pages(
-             xch, dirty_bitmap, NRPAGES(bitmap_size(ctx->restore.p2m_size)));
- 
-+    xc_hypercall_buffer_free_pages(xch, verify_buf, MAX_BATCH_SIZE);
-+
-     free(ctx->restore.buffered_records);
-     free(ctx->restore.populated_pfns);
- 
-diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
-index 7a48f6b0a3..f6ada3152d 100644
---- a/tools/libs/guest/xg_sr_save.c
-+++ b/tools/libs/guest/xg_sr_save.c
-@@ -88,7 +88,7 @@ static int write_batch(struct xc_sr_context *ctx)
-     xc_interface *xch = ctx->xch;
-     xen_pfn_t *mfns, *types;
-     void **local_pages;
--    int *errors, rc = -1;
-+    int rc = -1;
-     unsigned int i, nr_pages = 0;
-     unsigned int nr_pfns = ctx->save.nr_batch_pfns;
-     uint64_t *rec_pfns;
-@@ -108,8 +108,6 @@ static int write_batch(struct xc_sr_context *ctx)
-     mfns = ctx->save.buffers->mfns;
-     /* Types of the batch pfns. */
-     types = ctx->save.buffers->types;
--    /* Errors from attempting to map the gfns. */
--    errors = ctx->save.buffers->errors;
-     /* Pointers to locally allocated pages.  Need freeing. */
-     local_pages = ctx->save.buffers->local_pages;
-     memset(local_pages, 0, sizeof(*local_pages) * nr_pfns);
-@@ -165,18 +163,54 @@ static int write_batch(struct xc_sr_context *ctx)
- 
-     iovcnt = 2;
- 
--    rc = xg_foreignmemory_copy_from(xch, ctx->domid, nr_pages, ctx->save.dest_buf, mfns);
--    if ( rc < 0 )
--    {
--        ERROR("xg_foreignmemory_copy_from failed");
--        goto err;
--    }
--
-     if ( nr_pages )
-     {
--        iov[iovcnt].iov_base = ctx->save.dest_buf;
--        iov[iovcnt].iov_len = nr_pages << XC_PAGE_SHIFT;
--        iovcnt++;
-+        int p;
-+        void *page, *orig_page;
-+
-+        DECLARE_HYPERCALL_BUFFER_SHADOW(uint8_t, dest_buf,
-+                                        &ctx->save.dest_buf);
-+
-+        rc = xg_foreignmemory_copy_from(xch, ctx->domid, nr_pages, dest_buf, mfns);
-+        if ( rc < 0 )
-+        {
-+            ERROR("xg_foreignmemory_copy_from failed");
-+            goto err;
-+        }
-+
-+        for ( i = 0, p = 0; i < nr_pfns; ++i )
-+        {
-+            if ( !page_type_has_stream_data(types[i]) )
-+                continue;
-+
-+            orig_page = page = dest_buf + (p * PAGE_SIZE);
-+            rc = ctx->save.ops.normalise_page(ctx, types[i], &page);
-+
-+            if ( orig_page != page )
-+                local_pages[i] = page;
-+
-+            if ( rc )
-+            {
-+                if ( rc != -1 || errno != EAGAIN )
-+                    goto err;
-+
-+                set_bit(ctx->save.batch_pfns[i], ctx->save.deferred_pages);
-+                ++ctx->save.nr_deferred_pages;
-+                types[i] = XEN_DOMCTL_PFINFO_XTAB;
-+                --nr_pages;
-+            }
-+            else if ( iov[iovcnt-1].iov_base + iov[iovcnt-1].iov_len == page )
-+            {
-+                iov[iovcnt-1].iov_len += PAGE_SIZE;
-+            }
-+            else
-+            {
-+                iov[iovcnt].iov_base = page;
-+                iov[iovcnt].iov_len = PAGE_SIZE;
-+                iovcnt++;
-+            }
-+            ++p;
-+        }
-     }
- 
-     hdrs.rec.length += nr_pages * PAGE_SIZE;
-@@ -187,6 +221,7 @@ static int write_batch(struct xc_sr_context *ctx)
-     if ( writev_exact(ctx->fd, iov, iovcnt) )
-     {
-         PERROR("Failed to write page data to stream");
-+        rc = -1;
-         goto err;
-     }
- 
-@@ -717,30 +752,23 @@ static int setup(struct xc_sr_context *ctx)
- {
-     xc_interface *xch = ctx->xch;
-     int rc;
--    const unsigned dest_buf_len = MAX_BATCH_SIZE * XC_PAGE_SIZE;
-     DECLARE_HYPERCALL_BUFFER_SHADOW(unsigned long, dirty_bitmap,
-                                     &ctx->save.dirty_bitmap_hbuf);
-+    DECLARE_HYPERCALL_BUFFER_SHADOW(uint8_t, dest_buf,
-+                                    &ctx->save.dest_buf);
- 
-     rc = ctx->save.ops.setup(ctx);
-     if ( rc )
-         goto err;
- 
-+    dest_buf = xc_hypercall_buffer_alloc_pages(
-+        xch, dest_buf, MAX_BATCH_SIZE);
-     dirty_bitmap = xc_hypercall_buffer_alloc_pages(
-         xch, dirty_bitmap, NRPAGES(bitmap_size(ctx->save.p2m_size)));
-     ctx->save.deferred_pages = bitmap_alloc(ctx->save.p2m_size);
-     ctx->save.buffers = calloc(1, sizeof(*ctx->save.buffers));
--    ctx->save.dest_buf = NULL;
--
--    rc = posix_memalign(&ctx->save.dest_buf, XC_PAGE_SIZE, dest_buf_len);
--    if ( rc )
--    {
--        ERROR("Unable to allocate %u bytes of buffer", dest_buf_len);
--        errno = rc;
--        rc = -1;
--        goto err;
--    }
- 
--    if ( !dirty_bitmap || !ctx->save.deferred_pages || !ctx->save.buffers)
-+    if ( !dirty_bitmap || !ctx->save.deferred_pages || !ctx->save.buffers || !dest_buf )
-     {
-         ERROR("Unable to allocate memory for dirty bitmaps, deferred pages"
-               " and various batch buffers");
-@@ -761,7 +789,8 @@ static void cleanup(struct xc_sr_context *ctx)
-     xc_interface *xch = ctx->xch;
-     DECLARE_HYPERCALL_BUFFER_SHADOW(unsigned long, dirty_bitmap,
-                                     &ctx->save.dirty_bitmap_hbuf);
--
-+    DECLARE_HYPERCALL_BUFFER_SHADOW(uint8_t, dest_buf,
-+                                    &ctx->save.dest_buf);
- 
-     xc_shadow_control(xch, ctx->domid, XEN_DOMCTL_SHADOW_OP_OFF,
-                       NULL, 0);
-@@ -771,9 +800,9 @@ static void cleanup(struct xc_sr_context *ctx)
- 
-     xc_hypercall_buffer_free_pages(xch, dirty_bitmap,
-                                    NRPAGES(bitmap_size(ctx->save.p2m_size)));
-+    xc_hypercall_buffer_free_pages(xch, dest_buf, MAX_BATCH_SIZE);
-     free(ctx->save.deferred_pages);
-     free(ctx->save.buffers);
--    free(ctx->save.dest_buf);
- }
- 
- /*
--- 
-2.43.0
-
+SGVsbG8sDQoNClRoYW5rIHlvdSBmb3IgeW91ciBhZHZpY2UuDQoNCj4gPiBkaWZmIC0tZ2l0IGEv
+eGVuL2NvbW1vbi9kZXZpY2UtdHJlZS9jcHUtdG9wb2xvZ3kuYw0KPiBiL3hlbi9jb21tb24vZGV2
+aWNlLXRyZWUvY3B1LXRvcG9sb2d5LmMNCj4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGlu
+ZGV4IDAwMDAwMDAwMDAuLmJiZGYwZDFmZTgNCj4gPiAtLS0gL2Rldi9udWxsDQo+ID4gKysrIGIv
+eGVuL2NvbW1vbi9kZXZpY2UtdHJlZS9jcHUtdG9wb2xvZ3kuYw0KPiA+IEBAIC0wLDAgKzEsMzQy
+IEBADQo+ID4gKy8qIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4wLW9yLWxhdGVyICov
+DQo+ID4gKy8qDQo+ID4gKyAqIERlcml2ZWQgZnJvbSBMaW51eCBrZXJuZWwgNy4wJ3MgJGRyaXZl
+cnMvYmFzZS9hcmNoX3RvcG9sb2d5LmMNCj4gPiArICogUGFyc2UgY3B1IHRvcG9sb2d5IGluZm9y
+bWF0aW9uLg0KPiA+ICsgKg0KPiA+ICsgKiBDb3B5cmlnaHQgKGMpIDIwMjYgVkEgTGludXggU3lz
+dGVtcyBKYXBhbiBLLksuDQo+ID4gKyAqIEF1dGhvcjogSGlyb2thenUgVGFrYWhhc2hpIDx0YWth
+QHZhbGludXguY28uanA+DQo+IA0KPiBXZSBkb24ndCBjb21tb25seSBoYXZlIGNvcHlyaWdodCBo
+ZWFkZXIgaW4gdGhlIHRyZWUgYW5kIGluc3RlYWQgdXNlIHRoZQ0KPiBjb21taXQgbWVzc2FnZSB0
+byBrZWVwIHRyYWNrIG9mIENvcHlyaWdodC4gVGhhdCBzYWlkLCBpZiB5b3Ugd2FudCB0bw0KPiBr
+ZWVwIGl0LCBJIHRoaW5rIHlvdSBvdWdodCB0byBrZWVwIHRoZSBjb3B5cmlnaHQgZnJvbSBMaW51
+eCBiZWNhdXNlIHlvdXINCj4gY29kZSBpcyBiYXNlZCBvbiBpdC4NCg0KT2ssIEkgd2lsbCByZW1v
+dmUgdGhlIGNvcHlyaWdodCBsaW5lcyBmcm9tIHRoZSBoZWFkZXIuDQoNCj4gPiArI2luY2x1ZGUg
+PHhlbi9jcHUuaD4NCj4gPiArI2luY2x1ZGUgPHhlbi9jcHVtYXNrLmg+DQo+ID4gKyNpbmNsdWRl
+IDx4ZW4vZGVsYXkuaD4NCj4gPiArI2luY2x1ZGUgPHhlbi9kZXZpY2VfdHJlZS5oPg0KPiA+ICsj
+aW5jbHVkZSA8eGVuL2NwdS10b3BvbG9neS5oPg0KPiA+ICsjaW5jbHVkZSA8eGVuL251bWEuaD4N
+Cj4gPiArI2luY2x1ZGUgPHhlbi9kb21haW5fcGFnZS5oPg0KPiA+ICsjaW5jbHVkZSA8eGVuL2Vy
+cm5vLmg+DQo+ID4gKyNpbmNsdWRlIDx4ZW4vaW5pdC5oPg0KPiA+ICsNCj4gPiArc3RydWN0IGNw
+dV9tYXAgew0KPiA+ICsgICAgdW5zaWduZWQgaW50IHRocmVhZF9pZDsNCj4gPiArICAgIHVuc2ln
+bmVkIGludCBjb3JlX2lkOw0KPiA+ICsgICAgdW5zaWduZWQgaW50IGNsdXN0ZXJfaWQ7DQo+ID4g
+KyAgICB1bnNpZ25lZCBpbnQgcGFja2FnZV9pZDsNCj4gPiArfTsNCj4gPiArDQo+ID4gK3N0cnVj
+dCBjcHVfdG9wb2xvZ3kgKmNwdV90b3BvbG9neTsNCj4gDQo+IExvb2tpbmcgYXQgdGhlIHVzZSBp
+biB0aGUgb3RoZXIgcGF0Y2gsIHlvdSBzZWVtIHRvIHVuY29uZGl0aW9uYWxseSB1c2UNCj4gY3B1
+X3RvcG9sb2d5IHdoZW4gQ09ORklHX0RUX0NQVV9UT1BPTE9HWS4gSG93ZXZlciwgeW91IGRvbid0
+IHNlZW0gdG8NCj4gZmlsbCBpdCB3aGVuIHRoZSBzeXN0ZW0gaXMgdXNpbmcgQUNQSS4NCj4gDQo+
+IFNvIEkgdGhpbmsgdGhpcyBlaXRoZXIgbmVlZHMgdG8gYmUgbW92ZWQgdG8gY29tbW9uIGNvZGUg
+YW5kIGZpbGxlZCBieQ0KPiBBQ1BJIG9yIHdlIG5lZWQgdG8gbWFrZSBjbGVhciBpbiB0aGUgbmFt
+ZSB0aGF0IHRoaXMgaXMgRFQgc3BlY2lmaWMuDQo+IA0KPiBbLi4uXQ0KDQpZb3UgYXJlIGNvbXBs
+ZXRlbHkgcmlnaHQsIGFuZCB0aGFuayB5b3UgZm9yIHBvaW50aW5nIG91dCB0aGlzIGdhcC4gDQpJ
+IGFncmVlIHRoYXQgdGhlIEFDUEkgcGF0aCBuZWVkcyB0byBiZSBwcm9wZXJseSBoYW5kbGVkLg0K
+SSB3aWxsIGZpbGwgdGhlIGNwdSBpbmZvcm1hdGlvbiB3aXRoIHRlbXBvcmFyeSB2YWx1ZXMgZm9y
+IG5vdyB0aG91Z2ggdGhlIGdvYWwgaXMgdG8NCnBvcHVsYXRlIGl0IGJ5IHNjYW5uaW5nIHRoZSBB
+Q1BJIFBQVFQgKFByb2Nlc3NvciBQcm9wZXJ0aWVzIFRvcG9sb2d5IFRhYmxlKS4NCg0KPiA+ICt2
+b2lkIF9faW5pdCBkdF9pbml0X2NwdV90b3BvbG9neSh2b2lkKQ0KPiA+ICt7DQo+ID4gKyAgICB1
+bnNpZ25lZCBpbnQgY3B1Ow0KPiA+ICsgICAgY29uc3QgdW5zaWduZWQgaW50IG5yX2NwdXMgPSBj
+cHVtYXNrX2xhc3QoJmNwdV9wb3NzaWJsZV9tYXApICsgMVU7DQo+ID4gKw0KPiA+ICsgICAgY3B1
+X3RvcG9sb2d5ID0geHphbGxvY19hcnJheShzdHJ1Y3QgY3B1X3RvcG9sb2d5LCBucl9jcHVzKTsN
+Cj4gPiArICAgIGlmICggIWNwdV90b3BvbG9neSApDQo+ID4gKyAgICAgICAgcGFuaWMoIkZhaWxl
+ZCB0byBhbGxvY2F0ZSBtZW1vcnkgZm9yIGNwdV90b3BvbG9neSBhcnJheVxuIik7DQo+ID4gKw0K
+PiA+ICsgICAgaWYgKHBhcnNlX2R0X3RvcG9sb2d5KCkpDQo+IA0KPiBTdHlsZTogQUZBSUNULCB0
+aGlzIGlzIGZvbGxvd2luZyBYZW4gc3R5bGUuIFNvIGl0IHdhbnRzIHRvIGJlOg0KPiANCj4gaWYg
+KCAuLi4gKQ0KDQpPaywgSSB3aWxsIGZpeCBpdC4NCg0KVGhhbmsgeW91LA0KSGlyb2thenUgVGFr
+YWhhc2hpLg0K
 
