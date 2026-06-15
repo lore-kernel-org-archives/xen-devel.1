@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4E56CD98C5
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Jun 2026 14:24:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1338325.1599343 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 716B4CD98C5
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Jun 2026 14:39:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1338333.1599353 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wZ8EJ-00072n-0o; Mon, 15 Jun 2026 14:23:59 +0000
+	id 1wZ8TK-0000y0-8t; Mon, 15 Jun 2026 14:39:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1338325.1599343; Mon, 15 Jun 2026 14:23:58 +0000
+Received: by outflank-mailman (output) from mailman id 1338333.1599353; Mon, 15 Jun 2026 14:39:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wZ8EI-00072g-UW; Mon, 15 Jun 2026 14:23:58 +0000
-Received: by outflank-mailman (input) for mailman id 1338325;
- Mon, 15 Jun 2026 14:23:57 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wZ8TK-0000xt-5W; Mon, 15 Jun 2026 14:39:30 +0000
+Received: by outflank-mailman (input) for mailman id 1338333;
+ Mon, 15 Jun 2026 14:39:29 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wZ8EH-00072Z-Ct
- for xen-devel@lists.xenproject.org; Mon, 15 Jun 2026 14:23:57 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wZ8TI-0000xn-UO
+ for xen-devel@lists.xenproject.org; Mon, 15 Jun 2026 14:39:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wZ8EG-000yeF-MF
- for xen-devel@lists.xenproject.org; Mon, 15 Jun 2026 16:23:56 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wZ8TH-006Yni-Ol
+ for xen-devel@lists.xenproject.org; Mon, 15 Jun 2026 16:39:27 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a300afb-5cb7-0a2a0a5109dd-0a2a4501da4e-4
- for <xen-devel@lists.xenproject.org>; Mon, 15 Jun 2026 16:23:56 +0200
-Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a300e9a-5cb7-0a2a0a5109dd-0a2a450bd286-2
+ for <xen-devel@lists.xenproject.org>; Mon, 15 Jun 2026 16:39:24 +0200
+Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a300afc-c1f2-0a2a45010019-d1558033ecf3-3
- for <xen-devel@lists.xenproject.org>; Mon, 15 Jun 2026 16:23:56 +0200
-Received: by mail-wm1-f51.google.com with SMTP id
- 5b1f17b1804b1-491b390f9e9so27517835e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 15 Jun 2026 07:23:56 -0700 (PDT)
+ id 6a300e9c-212f-0a2a450b0019-d155dd2fbdeb-3
+ for <xen-devel@lists.xenproject.org>; Mon, 15 Jun 2026 16:39:24 +0200
+Received: by mail-wr1-f47.google.com with SMTP id
+ ffacd0b85a97d-45fe59255beso1823620f8f.1
+ for <xen-devel@lists.xenproject.org>; Mon, 15 Jun 2026 07:39:24 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4606f2cd6c2sm35052906f8f.30.2026.06.15.07.23.53
+ ffacd0b85a97d-4606f2cd6c2sm35151354f8f.30.2026.06.15.07.39.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 15 Jun 2026 07:23:54 -0700 (PDT)
+ Mon, 15 Jun 2026 07:39:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,60 +55,59 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1781533436; x=1782138236; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1781534364; x=1782139164; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=uJPQfOvk22dPaWInezJnDq0or5byYBtpnuTdO7kjQkI=;
-        b=KU8TMxknBRoWRacl7MP0I5eCaQbHlnkVlLXw+/++H0BJms2JSTJRJOQST9J3D+pVck
-         Sp2TKrUNNlljrjfLr0ut0PcXXxW08PSRzb3nX88XZIzgBvhbncZn5T3uqPaZ1uw+l6BX
-         3x1RlYclaC3CmCCZfBpntAnaPcMc9UGuYkYnMyHDLVVgSijTWCjc208cnftMn0qItOic
-         UCakd1w7KUJ1rqF25RpPPKxiXyjV9mzXUIkPmo+N7Ea3j1FvSdzmg2l8Vuo0NboQ8jzn
-         +Ggc7jQCzYinddxEiudxiNZzXExm+zD021uv/wDRiP2eSIvu2v6Z1Q1MpP2vsh4UVq4b
-         N3Yw==
+        bh=jAFoDPIzdLSenYNKrvBMxLxR7ZJSo+vbh/DtyZLMQMk=;
+        b=B6J6wjfLhXtVJpTOULNvQ2s6PQpEPtdDHGoUg4cHQc2/SeRCiahKHnfYoih1PtmWGF
+         K/Q1hH805nsR4raLsSBCfemX9qNLOcNF2wrnWkx9KoC7xNF9Mje4jS3C94DvIdkMfFeo
+         Ls8T55Nal75sfDheIiYDR8TWjROi+FQE9kB7e8y7CFza7fcnpstQpiIxqdxIMTFaVe18
+         9/q+c42zQXTP3tekVQWaA+u1Jts7EKmgIBXodKdMfgW9XrHH9EMQve9DAZ7ze3ssrvV1
+         mys7y4S2pMu5LYx4tb8qN3QI/u99u3a3f68uQrInk5utXW8gLiyxrJV11hyUR6IekcQl
+         1iPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781533436; x=1782138236;
+        d=1e100.net; s=20251104; t=1781534364; x=1782139164;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=uJPQfOvk22dPaWInezJnDq0or5byYBtpnuTdO7kjQkI=;
-        b=iR1IdA/Zxn4qVyp6K0JM6Nwh3tKCAM+JEusbtLHmkGono3G2CwnsJzmM6Xcb41xnD9
-         S+xn6AytXh9JSViCGE5YkZtWLA05g/76QaVzA9nObN/2CHJN+oFaSYxs1HWxqaJpaV4c
-         BTFamgIhnbqXkG7KBLWRFAB5MgRN3fbhP5n9YkNI8AppRwiz0VWbQaAWNd7srsJo541K
-         7k16GwjcPUw0UbebUXokF27H4XKDqoseo49puEkWoDfjlpKZEhZG77qaJzM/01ycDCIE
-         PgAcqxlbcouBuRn4YPXFjsNXa5kP400iqJH23yoGEZHciWo/JG/DkVPn+YufVB1+cq0P
-         cPaQ==
-X-Forwarded-Encrypted: i=1; AFNElJ9clT6Qw9KHd8qBtnyWtIOOQv6051T4PNW7/ddPhIlKUsUWA0+s5CXHufpMdPt4+F3LODVVRNgCRaA=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzLBYbCuaJ7kMXt0WcWioC4ryUnrNixKDTbi/2G3tpLxTYo4RvX
-	L89T4kbOSL8TS9pySmzV+CGkw5qAtxNPAnaKbQ9O9r5AQYnnE5HjyruYF+zWcRxlHA==
-X-Gm-Gg: Acq92OHLwRS2ePtYZtvtEAJDnwizq9eEp3gqG3r7tzmDSkiP8F7BIjC4HSbapdzCXQk
-	+kcblmEk+BxEwbRnd1hEyKkTYmqwqJVQeI6R0A7GEB1kKX/8yQq4vglPVmtIL+yMSrmrer92bSr
-	aW5UNorMLb4EA7terrE5gPFEPgmtlfxRZfB421QOg8Lc7hrMgiciOZdUROkT4w9BAqlVWCJFSaG
-	6N7ALwmrrffu3EFpu11vJDz2TfhCFKrtLIJWcD3/f7SWXh4+IhuNyMEQo8yPbc/CAif/0TSlxoQ
-	srtti6xTY21z/YfzLIsIIFxqvQrANELYNd58XWgkMWZqzQD+cgf/083MiK+K2jqypH+Phsndtix
-	eLN1haA14tMmAxH8i3zcCmjh/pJR7ystvOG1KDxKibZADBX1PbBIVDXPG9VPk7oYxCrai9/DeSt
-	qO3vtac7NJa01SLFZKsuLJGILCojTjFII3PLIkjwBCzJcyae179CfnyczOA5u9ZT14SRxKqVgfZ
-	W867uFs52XVAgo=
-X-Received: by 2002:a05:600d:8486:20b0:490:9782:3eb8 with SMTP id 5b1f17b1804b1-490ec4fc0c4mr137771235e9.25.1781533435686;
-        Mon, 15 Jun 2026 07:23:55 -0700 (PDT)
-Message-ID: <9804e601-1b11-47d4-9583-02f1001489a8@suse.com>
-Date: Mon, 15 Jun 2026 16:23:54 +0200
+        bh=jAFoDPIzdLSenYNKrvBMxLxR7ZJSo+vbh/DtyZLMQMk=;
+        b=rnrE2fQd6BfsOh65ObhXSOCZU4koB1VlE7WSHmLqYQd6KotoWZc6LyaXh9Epo4NDMa
+         cAfCGuORFmKpAAlN89uYJkFtZWTrx3cBK3oQr/BIRAmhq8oLStjQPneeUjKhwfIstnnu
+         bNBXJ9hoLS4OrDbIDcBwAjFhkq+XBwhsnI8uO0HuEkptPo3nKkMWT7LA8RGTsk4CfbDZ
+         1NLOdMUNoOjpsx85SMYtiEtgG2wZa9eTXPHpg1kMUVzTC+gfh+PGNPCTIHOiYQHoW64g
+         503lnT5UsGJqEI/mPNt0UR5amTjT0p8tGOKPz0z8ODGxB+gNfFk+LeTek1Fl7zeadvhl
+         wT8w==
+X-Forwarded-Encrypted: i=1; AFNElJ+mWo9iVniylgKx+YZnuE23pO6MqVQYf19SEsWqC9bluupAuAp6mxVlxWBfRNj7/J/2b/1fLBH57ns=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzYR7HTYZhpO+VUhpCdZV/WYvRl8yF6iTl9ffh9N+rpq6gWHDwA
+	pvG/eJLysWcGheRQq+FUZpFQRb9UJT0fjrxbptJaZbAXlEtKemJ/NS+7OKQNeVcCzA==
+X-Gm-Gg: Acq92OHoOQpHcifMekoy/F895ZZClQEMc3VxaEYJWToPnmwvxzNw7q6WzCF0NgSK9rG
+	kEWXq31DnK65eQwKJ/cuc3WB+9JNQ0l7eTarA3xfdEppq3gWjRTmbUjd5KOiviKpP1SqztOiTOq
+	5hb9yCC9CVj3KFK+Aa3TwxH9089D5nVQ1ELdy34vLjoDh9ZcnbPa1nmN10BgfMp2cEP8wSdqoca
+	4FVoB4tw5r6beiLSa/1M6nCg7d/C1LYFigrwSOHZOJr4tUAA4JWTGnj6bLguA8T3mJQzzX8JVv0
+	Pa1z7yDSoNYTxzNQJWZRAf+dArqPrTIU3136lwYpjgBLJC3EuxRO2yyM6KqvLjxklAvsS84ESFz
+	3vLIR1jnlG7NlAEHVG8D7E12HAaId7Cq6d20LDADBDKpDE/nYcHFaMOXw905WHsgdyh4e/YiTac
+	FtvAuOk/RPWY1E9NAD2YV8G5CefCc3UA0Ii3NBl2j00u1Jx90e67i92tIaSdbG3a8FUaO0cHnc9
+	SZRJs85EWNYuPg=
+X-Received: by 2002:a05:6000:2683:b0:43d:1c4a:37c with SMTP id ffacd0b85a97d-4606da5a4bamr21007148f8f.4.1781534364323;
+        Mon, 15 Jun 2026 07:39:24 -0700 (PDT)
+Message-ID: <75133630-97f1-41b2-889c-9d43bbe767c7@suse.com>
+Date: Mon, 15 Jun 2026 16:39:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/2] domctl: Handle some of XEN_DOMCTL_shadow_op
- without the domctl lock
-To: Ross Lagerwall <ross.lagerwall@citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+Subject: Re: [PATCH v4] xen/domain: make shutdown state explicit
+To: Mykola Kvach <xakep.amatop@gmail.com>
+Cc: Mykola Kvach <mykola_kvach@epam.com>, Paul Durrant <paul@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
  Teddy Astie <teddy.astie@vates.tech>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- xen-devel@lists.xenproject.org
-References: <20260609151528.2426788-1-ross.lagerwall@citrix.com>
- <20260609151528.2426788-3-ross.lagerwall@citrix.com>
+ Stefano Stabellini <sstabellini@kernel.org>, Tim Deegan <tim@xen.org>,
+ Dario Faggioli <dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>,
+ George Dunlap <gwd@xenproject.org>, xen-devel@lists.xenproject.org
+References: <accc9b61dc46281289a303155653d48d5fde2084.1780643643.git.mykola_kvach@epam.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -134,44 +133,36 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260609151528.2426788-3-ross.lagerwall@citrix.com>
+In-Reply-To: <accc9b61dc46281289a303155653d48d5fde2084.1780643643.git.mykola_kvach@epam.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1781533436-B5545FF4-5B1E520E/0/0
+X-purgate-ID: tlsNG-42698a/1781534364-21183F3B-DCFDA23D/0/0
 X-purgate-type: clean
-X-purgate-size: 1353
+X-purgate-size: 1105
 
-On 09.06.2026 17:15, Ross Lagerwall wrote:
-> --- a/xen/common/domctl.c
-> +++ b/xen/common/domctl.c
-> @@ -559,6 +559,18 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
->          ret = arch_do_domctl(op, d, u_domctl);
->          goto domctl_out_unlock_domonly;
->  
-> +    case XEN_DOMCTL_shadow_op:
-> +        if ( op->u.shadow_op.op == XEN_DOMCTL_SHADOW_OP_CLEAN ||
-> +             op->u.shadow_op.op == XEN_DOMCTL_SHADOW_OP_PEEK )
-> +        {
-> +            ret = xsm_domctl(XSM_OTHER, d, op);
-> +            if ( ret )
-> +                goto domctl_out_unlock_domonly;
-> +
-> +            ret = arch_do_domctl(op, d, u_domctl);
-> +            goto domctl_out_unlock_domonly;
-> +        }
-> +        fallthrough;
->      default:
->          /* Everything else handled further down. */
->          break;
+On 05.06.2026 09:39, Mykola Kvach wrote:
+> From: Mykola Kvach <mykola_kvach@epam.com>
+> 
+> The shutdown flow currently uses is_shutting_down and is_shut_down to
+> represent the domain shutdown lifecycle. The two flags are not mutually
+> exclusive: after shutdown completion is_shutting_down remains set until
+> domain_resume() clears both flags.
+> 
+> Replace the two booleans with an enum domain_shutdown_state. Keep
+> domain_shutting_down() as the direct replacement for the old
+> is_shutting_down flag: it is true once shutdown has been initiated and
+> remains true after completion, until domain_resume(). Add
+> domain_shutdown_completed() for users that need the final completed
+> state.
+> 
+> This makes the state transition explicit while avoiding a semantic split
+> between "in progress" and "completed" at call sites where the old code
+> only cared that shutdown had started and had not yet been reset by
+> domain_resume().
+> 
+> Suggested-by: Jan Beulich <jbeulich@suse.com>
+> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 
-I understand this did already go in as is, yet I have to admit I'm surprised
-that it was ack-ed in this shape. For "domctl: handle XEN_DOMCTL_getvcpuinfo
-without acquiring domctl lock" [1] it was specifically requested that I
-introduce yet another switch(), to limit the number of xsm_domctl() call
-sites. IOW I think subsequently this case block wants moving into the new
-switch() that the referenced patch introduces.
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
-Jan
-
-[1] https://lists.xen.org/archives/html/xen-devel/2026-06/msg00857.html
 
