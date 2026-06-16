@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE718CD98E4
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2026 17:12:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1339491.1600678 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64347CD98E1
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2026 17:28:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1339507.1600729 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wZXKl-0000yU-3r; Tue, 16 Jun 2026 17:12:19 +0000
+	id 1wZXaa-00057V-1e; Tue, 16 Jun 2026 17:28:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1339491.1600678; Tue, 16 Jun 2026 17:12:19 +0000
+Received: by outflank-mailman (output) from mailman id 1339507.1600729; Tue, 16 Jun 2026 17:28:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wZXKl-0000yN-0y; Tue, 16 Jun 2026 17:12:19 +0000
-Received: by outflank-mailman (input) for mailman id 1339491;
- Tue, 16 Jun 2026 17:12:18 +0000
+	id 1wZXaZ-00057O-UQ; Tue, 16 Jun 2026 17:28:39 +0000
+Received: by outflank-mailman (input) for mailman id 1339507;
+ Tue, 16 Jun 2026 17:28:37 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <roger.pau@citrix.com>) id 1wZXKk-0000yC-1T
- for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 17:12:18 +0000
+ (envelope-from <freddy77@gmail.com>) id 1wZXaX-0004hP-UY
+ for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 17:28:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wZXKi-00AsBT-Rd
- for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 19:12:16 +0200
+ id 1wZXaX-00FwMQ-BU
+ for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 19:28:37 +0200
 Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <roger.pau@citrix.com>)
- id 6a3183a2-5cb7-0a2a0a5109dd-0a2a450a85e4-38
- for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 19:12:16 +0200
-Received: from [52.101.201.7]
- (helo=PH7PR06CU001.outbound.protection.outlook.com)
+ (envelope-from <freddy77@gmail.com>)
+ id 6a318794-2eae-0a2a0a5409dd-0a2a450ae170-40
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 19:28:37 +0200
+Received: from [209.85.221.44] (helo=mail-wr1-f44.google.com)
  by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <roger.pau@citrix.com>)
- id 6a3183ed-56b3-0a2a450a0019-3465c907960a-4
- for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 19:12:16 +0200
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com (2603:10b6:610:24e::14)
- by DM6PR03MB5001.namprd03.prod.outlook.com (2603:10b6:5:1e5::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.15; Tue, 16 Jun
- 2026 17:12:11 +0000
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343]) by CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343%4]) with mapi id 15.21.0113.015; Tue, 16 Jun 2026
- 17:12:11 +0000
+ (envelope-from <freddy77@gmail.com>)
+ id 6a3187c5-56b3-0a2a450a0019-d155dd2ca9a6-3
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 19:28:37 +0200
+Received: by mail-wr1-f44.google.com with SMTP id
+ ffacd0b85a97d-45ee5cdbd28so57857f8f.1
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 10:28:37 -0700 (PDT)
+Received: from localhost.localdomain (5.116.208.46.dyn.plus.net.
+ [46.208.116.5]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-461abb44c3dsm5012754f8f.9.2026.06.16.10.28.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 16 Jun 2026 10:28:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,175 +53,161 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nHBI6/9Xr9MRIiTBF2qHQ/4Hzp8VSnrcgbGLTkUEzNftMgBJhlcS7UlmEeCju6rDAKUsbwAg0hmJF/hW0bD8TrO7bJW7Ui3/9ZA8ZdEkhtclsQXc10YsFE0RZcHLGlwGi+4eQWKDaTJEIIDJqdvURqRGpnNXvil0tRCElck1JqB8eI7mrf2OChkmeqb/VRiHrdz33hFF31OqJWb40whtJGEUed4Yj2vkcerWEBq7A1+CD769Qmch1HEIkQXQIfBrCK5z3hijP1TGkkGr+GZC+FPDU1dm2ptywW/cHbyi+0h3MgvRxF3yYfQPyNUpJHtBvMEj5cHjsfpdDRYX05BSHw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SqboQVx8R1d3+2wOicZCmfr9fGWBqILClvWS6jNMVxc=;
- b=T+jxy38yzY5VeRwLYc0Bf24pkdOFZ79/oyzrMApW3imQrk6yglw37iXDxbjMm52usd8yUPS/RegUqswdRB+ofAinJV7lhpibBfXANWX6D8AZ1K/Mo9IMRKKXRq46ihhU52D+48Ce/qkI6shOMbn5+7N/cirR5VyVgsRnc7PxEh0Jz2dkkFUu5QK8LaNXb48lMFbzgepbC1GlA0NfOCo6t97cYyLPuSQbwk8SWLhB02vMsdiGe6vZ7yurUgR6trdPsXYloA6FnPjQZF7mIOHco6NjQ+45Cu5h0Ed9IaB9z18eWTD9E9gTITSMwMcEl6s2xUmNn2KspB5Hf9XmBLavgw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SqboQVx8R1d3+2wOicZCmfr9fGWBqILClvWS6jNMVxc=;
- b=kB0zlOHqiLIPJmwcWTPb96ArGde0IlIJgx3HzII7c1ivL3ebyFin46m+FOfB1tJ3tHhX1TmPGGTezPGJtVT6e7Wg92hr9Tw8yi78XVhf9JpvJXQt57jXJKcRUuw83cI1OgaPKgOke387CGo/kPZfn1cDhT9yg82b1Wnj5SjHy90=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Date: Tue, 16 Jun 2026 19:12:08 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Dario Faggioli <dfaggioli@suse.com>,
-	Juergen Gross <jgross@suse.com>, George Dunlap <gwd@xenproject.org>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: Re: [PATCH for-4.22?] domctl: correct return value of
- XEN_DOMCTL_[gs]etvcpuaffinity
-Message-ID: <ajGD6B4kHhCC9wql@macbook.local>
-References: <8b7daaa3-418e-4ec7-90a6-775e0a964b76@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <8b7daaa3-418e-4ec7-90a6-775e0a964b76@suse.com>
-X-ClientProxiedBy: BN9PR03CA0412.namprd03.prod.outlook.com
- (2603:10b6:408:111::27) To CH7PR03MB7860.namprd03.prod.outlook.com
- (2603:10b6:610:24e::14)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1781630917; x=1782235717; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=59pkg3zSgN49JGtId9KEQHL8kPDSpSqdyB2+a04J4NI=;
+        b=OAqTQU+HxiuNVB9Oo2EoEDXCndEyokgxjdsmHp9QfJbEzn7T/XDG9SngmeMvE+EdbU
+         w5JcdaB0FwwThuO/gzZRSDmKoEIIOEnCkbLzcs8Mod7HonMaQldMAbQKyo1VfYApUtjh
+         +jYSJJjakrmPE1JWG5vdISu06GgDA9qwMFwnvdll+2rnSph6uf5aobwrBpVHTM5u0lpb
+         1dtp8i/tOzoSrwWek0LODVPnkihYqEsgQQEE3JoPp6ZH896IDZKkxFyfa5+jJ81tXjy0
+         BCq8esypq0xwniUj1sAIh/Sr/qs0xDMR9Mz6TvPhllNJfbLea+OPyDXlUY+MB9kjjrj7
+         aE1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1781630917; x=1782235717;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=59pkg3zSgN49JGtId9KEQHL8kPDSpSqdyB2+a04J4NI=;
+        b=Dg87dMh5sOC0dL3kpWD2Oa4crUJfpRZcBEzT2C3/nIyEh/c9VgsbODtc2LgGCFSrSn
+         P0VwtnsCoAAN4/BopyE7AlRdQUunsbyGNCUl8bG/8JBphhbvgeu7BzaDw1VxaM7OkvdH
+         SoooYsAyd5f5/zaJijmKxJJ6W1a/HrwnqPa7AdaBieDTipg1igBpm+CcTUwPZfp/enSw
+         ecr27TZpbPyZKmTjGWeILUJDTMss9RDnwdNXFWOA12+73tjOqFyFL9ImMcJPmXuvqGuD
+         C9UoY3J+2rZQv9ROPT/UAS5/G/wsyxhKzCFFVDGt0AY7ySLaqQ8Wjk0qWrqP9hsD2ccD
+         otcw==
+X-Gm-Message-State: AOJu0YzRL0wwKjkkgWi5Yg03+MMCdZko9yDlt/uO7x9A7T/J9KmLDm69
+	D5xNzJhdvZAWdjbJY9VVciM3DpgphPdBBSUwUJQBSCBzrAH2nH+DixIXhCsjGHbKlUs=
+X-Gm-Gg: Acq92OGtBvukgfyEXO9HnNwKm0P8VzJVf0mTvxttXEou+0sa3obOyLbVSMHa7YmnPVj
+	S0IJVNyf6UoZUZFAoeutj9iJSnNvLJw3vKjnbyPjeXGrYD/pd7TzK/GsH9ctdxon8/1s9sLmhOj
+	80aWxCt5qvB8U0+VPadoB53v1+5evuyyFf0aF0CBNHxUxEOVr30o/1MHdJe+Lv8OYouTK/ObaZP
+	7nrlxS5SyHeCMwEYNkQle4xp2j4wTiKKhd6vP/iTcS3JeGW1YMnWL8RfTQ1RMgdSzxbEO0Dmsqc
+	wQx27GJAsdExfZY3+gwSGB+RKVEU6sxulJKLE4wiM2wAJnjYYcuQkIoOsPHb7R+Vm+vzwKkFv7s
+	H9WR833IHtej/CHaUuwH1vES1rKnSaagdxg+GsEp9TpE/cvwIz8lcbl7OVgDgJleZPzQwzjC6Ju
+	70bZ0cinlfY7WVCDRHOofNIOZx3J1KTloBMMZA7v7xdQTp9UincLJTvYaB0B0ziy6JUZAe0Tjr3
+	LC2xoDm5dG2eXK42Omb10F9h4E=
+X-Received: by 2002:a05:6000:4313:b0:452:bc74:b129 with SMTP id ffacd0b85a97d-4622d0504d5mr1149300f8f.16.1781630916713;
+        Tue, 16 Jun 2026 10:28:36 -0700 (PDT)
+From: Frediano Ziglio <freddy77@gmail.com>
+X-Google-Original-From: Frediano Ziglio <frediano.ziglio@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Frediano Ziglio <frediano.ziglio@citrix.com>
+Subject: [PATCH v4 2/4] x86/efi: discard multiboot support for PE binary
+Date: Tue, 16 Jun 2026 18:28:28 +0100
+Message-ID: <20260616172830.111393-3-frediano.ziglio@citrix.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260616172830.111393-1-frediano.ziglio@citrix.com>
+References: <20260616172830.111393-1-frediano.ziglio@citrix.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH7PR03MB7860:EE_|DM6PR03MB5001:EE_
-X-MS-Office365-Filtering-Correlation-Id: 80910d34-5ca4-4ef0-c58e-08decbca6733
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|23010399003|366016|376014|3023799007|56012099006|11063799006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	Uxvdao0jWJMYBJQvUkyYsDVbnxcCgQkOm9BKMnMFcm7JVkuHaGGTgjCAJ0pDbJVkxhRHjqUvKxhlb2X8YqfoXctO28dGg5gUov+9snRM7O5dJnzeUX1nOX8WrrFc/jfY3QCGcYxRZbS8N9USrhafMuJcoOkphspY4f3CvOoITpTwtz7/mx/QJ+1go1UBNR2RWUK2nbABXFldYf0/6iUeXX6EfPsg+KjMMvt5vqxXFj7ST9pSOqqdbDHZpKfAbC+AS8XPMeuC+IJjHYhDQd7IpY0tgJtldTD8ZA5CKRKr9NQ/bfDlyAFluuVaW+DJuhUGeZxZmidq/zYSHlnDt+O/HmW6BthrVFpdUaYr1p0Hajr9lHI4J4//dzGqzVgaoSzxQmsG2x1TP54PEAEX++avx8KZs2YZfMNGCCnB7Gjmdpjc3fjRHArg0glSz39iESnM9QWlEgbKDAS9ZYLSmYxFq0unRER6rikQcD0HRZGwgtw3PKBweZ2grnoKUJZYDqv+oHuGLx5RtrE1oObQtCjx6DJeLDEZN5XGZ6ehojuAjfskGDyLFegGOQn5RdtIOq04cABoRshS9MYop6ynMZUxq74Hhk7eWCW+5tJhMA5eJEK8Iy9dqWLXMA9y0pwZiEj6uyYWCp6CQN1AZF38Mn0eiHFYd4R5iypeU5S9O3EFFy0Jq/VKhqXh5F4EypcGykTa
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH7PR03MB7860.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(366016)(376014)(3023799007)(56012099006)(11063799006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?eENpZTRqUDlzcGhJZEhtYWxvTEFBSjdPeGxWZG5rWFhQbmV0M01rWlJYcHBN?=
- =?utf-8?B?djZISW4yU0duR051MU5qQ1B4SHZZa1lXRUx3aHVPRnEvY284V0tiK0RWSXdn?=
- =?utf-8?B?MGFmT1NDaXdWZjE1dGpyOFR4N1pXendBY0xaa3FRUldmcXRGYm9uMzJnNHBU?=
- =?utf-8?B?VFpYbXVtYVpYVzZGWGV1SmM3OWQvbHBDeG1XOUM1dmQ0elhuSWpUaWNRSVha?=
- =?utf-8?B?T05Na2hWbzJlNjFrMk5hTEJKVVVVSnNyOWNzRkw4bXNlYnRoNHkyVVJuOU9T?=
- =?utf-8?B?b1crbEpvRTBkeExEdkhOemR3SUk4aVVYeTI4M1FPNTNETG5rUEJFL1poSU92?=
- =?utf-8?B?Qzl1RGMzYWxmOUJCQzhHbk5USXkrWFpXUnNnSDZHbytFMS8rVytiSk5pOUQv?=
- =?utf-8?B?TTBGYWU4SjJ3dVpCYTJqaW4vRjdzWkQzbTdsOVZkbUlyM0RlSXY3MEw2dmdt?=
- =?utf-8?B?ZG5HdnNvdEhjWFhwR29VcXY0SHR2YjhWVWl2K0ROUmVBUUttUmNCZUVBQksw?=
- =?utf-8?B?ei9WM0lnRFJzWkJsNEFCWGZEYW9MYXhOUXcrMXFTVVcybzFPUVBMZTZPTEZ3?=
- =?utf-8?B?V2Fka1pWMkVTR3EvNnRxZVMvc1NaUSsxRUJXWXYwRzZ1aW84Nit5dk9TQXlI?=
- =?utf-8?B?VVc5QlAwb0VwQXduN1VaNW13WjB4SERKNXM5WTdURlFKMDZHeVk2aFl5MUUv?=
- =?utf-8?B?Z3JXejFJYmxUdGk5NnFqUzBlQlB5THI1bmUzcUllMFV1S3pVYkoyeVBvMjNq?=
- =?utf-8?B?R3lPMWdLSHdmMkZFck5SSjdKNVJzS2hkLzROZi9PaGpIOFNqWjNab3ZoUTUr?=
- =?utf-8?B?eklKN2puaHZpT2tXN2l5WThVRnlQT25JVFBXK0tvcllsVWozTlBpSUxvUE5H?=
- =?utf-8?B?UFI2VDdXNmJLNTdYamNOVndlcmtYNEFqcUYySWRvNERqWEpjUXg0NDBMTlAr?=
- =?utf-8?B?YkpoSHRBQmM4MklheS85M2FGckxNaUNSdE5KM2UyekNCSjlLQndmQkVnMHFh?=
- =?utf-8?B?K1dsVHY4dUJmU0Q1QmR0MkNvTVkrT1JPSnlkQkMwOWpwcUxndWIyeUw5UGxi?=
- =?utf-8?B?bnNtTzNQUVN4aW9aNHNLaWZ5WnIrM3c4cDFWUVMvWDd4UmV2Z09UZm0xRHVj?=
- =?utf-8?B?L01rUWJybm8wQ0FRUnR0OHZQeGs4QnFNVkszcWJFaVhlaGFjdmQxQ2VpREVO?=
- =?utf-8?B?R0JaQVlRVEtJV1NBY1ZUQkF6UUZ5YWh2eW9JVWF1ZXRkbElQNkJvTlFDRmV1?=
- =?utf-8?B?QjNxSFBBbXBGOExMcmVpT1FtZGtKV1dEc2c2QnZ0QWJjeVdFT2UwQ3UrRlg0?=
- =?utf-8?B?N0U3dDg5UmZVeXRYaGdYNHNlRkNSWTlUdGorckFON005b0ZKWEJ0WG9kb2w3?=
- =?utf-8?B?VDJ0OVljUm9MNm5FRkExNndtSkFIR2I2NXNrYVd2d3pFRUhXdGlMYno3T0Ix?=
- =?utf-8?B?dndXc2pDcWZDVDNUNkFXNEZWZGdwcm9VcTBobFFKdTkzTmY4Z0tTbHFYVHcy?=
- =?utf-8?B?K2dId0RUajcvZVpVbzY4QkFKUHcvc3pYYUhVNVQ4WkJqd3ZlSExodFVDb0RB?=
- =?utf-8?B?dlN5RWpZa0ZwYVMzRUZMTWl2MXhDUEE3Y3h3T0tDSDFDRUJVcnlxRDArK2Ir?=
- =?utf-8?B?amhJaUNSSWdlWVFCN1B3M3pxeERNVHFHYm00eEdmWTIwV0FhMlBPY3dzVGNj?=
- =?utf-8?B?U1FvZ1hudHJFNDUzSVIyZWhyZFVuVW5tZk5SM25uSXdjNmEzOFZFb0U4R1By?=
- =?utf-8?B?VERvbkxobEJCY3ZpUU1XR0dSTjkzbmwzM3ZDU2t6Y2lmL2JTSTVrbmJGRFlJ?=
- =?utf-8?B?UHZRTGVEQmtuN2FyMWcxVkx3aDNRNWJBcDdPZXZqK2tmTU4yYUJMWUxXdXF5?=
- =?utf-8?B?TFAzYVBJeFdLc0NoSFNvelJ0dkZRTW15WUpqbzYvT25sMHl6ZGRZMW5PbUJx?=
- =?utf-8?B?cHVka2FTSXRCZkxENzcwYXFyeTJzaW9oZ3hSWk5FOHN0OFZ0OXU2b0xvQjg1?=
- =?utf-8?B?YVdxTFhHUUlNa016eDhmSC9YOGtnUVR1RUxKY3pkaDBLb2g4TmloOFJlZUNr?=
- =?utf-8?B?UVhXT0lRQ1RONCtQZGs5NlRsSVF5eEJQbVdEdEY3ODNJNGlJT25aRTB6VDhJ?=
- =?utf-8?B?Vi94T1NZOUZXajVmMlBKNzh0THpGU0UxWEsvYVoxVW9FdzBQajJBN3pWS3ZI?=
- =?utf-8?B?WG5FcURuYzk5Nk5TcTFXRUg2bnBURzNwRE00aC9IUEhYbHY3Ly9oSmtMMzda?=
- =?utf-8?B?U2ZpS2RXOG9WeTZseHorVGNUajYyOEZXK1RKT05iUHp2N1dyY2FKSjBvcjg5?=
- =?utf-8?B?MldZYTBzaVVlWjVCY0hkV2NHbW04cnJaYXFLMTFFcFh3UGgrc1RkZz09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 80910d34-5ca4-4ef0-c58e-08decbca6733
-X-MS-Exchange-CrossTenant-AuthSource: CH7PR03MB7860.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2026 17:12:11.0532
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: m0UmwKNluBedCKK4/dbgcI1UlmHFEAVQQlK7UDH0U0iUjLs1/xCFmf29xqx7GEovi5xKAvVAUB6tnTNURTU5bQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB5001
-X-purgate-ID: tlsNG-4011c0/1781629936-7E9888B7-C29311AB/0/0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-4011c0/1781630917-7196E8B7-40CB9574/0/0
 X-purgate-type: clean
-X-purgate-size: 3097
+X-purgate-size: 3030
 
-On Mon, Jun 15, 2026 at 02:00:39PM +0200, Jan Beulich wrote:
-> cpumask_to_xenctl_bitmap() may return errors. Clearing the error indicator
-> of an earlier such call by a (successful) later call is misleading the
-> caller. For "set", keep setting soft affinity if the hard affinity copy-
-> back fails; only accumulate respective errors.
-> 
-> While fiddling with return values, also drop a redundant clearing of
-> "ret". This eliminates a Misra C:2012 rule 2.2 ("There shall be no dead
-> code") violation.
-> 
-> Fixes: 6e4ecc6d5884 ("sched: DOMCTL_*vcpuaffinity works with hard and soft affinity")
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> 
-> --- a/xen/common/sched/core.c
-> +++ b/xen/common/sched/core.c
-> @@ -1705,6 +1705,7 @@ int vcpu_affinity_domctl(struct domain *
->      {
->          cpumask_var_t new_affinity, old_affinity;
->          cpumask_t *online = cpupool_domain_master_cpumask(v->domain);
-> +        int hret = 0;
->  
->          /*
->           * We want to be able to restore hard affinity if we are trying
-> @@ -1726,8 +1727,6 @@ int vcpu_affinity_domctl(struct domain *
->          if ( vcpuaff->flags & XEN_VCPUAFFINITY_FORCE )
->              vcpu_temporary_affinity(v, NR_CPUS, VCPU_AFFINITY_OVERRIDE);
->  
-> -        ret = 0;
-> -
->          /*
->           * We both set a new affinity and report back to the caller what
->           * the scheduler will be effectively using.
-> @@ -1746,7 +1745,7 @@ int vcpu_affinity_domctl(struct domain *
->               * cpupool's online mask and the new hard affinity.
->               */
->              cpumask_and(new_affinity, online, unit->cpu_hard_affinity);
-> -            ret = cpumask_to_xenctl_bitmap(&vcpuaff->cpumap_hard, new_affinity);
-> +            hret = cpumask_to_xenctl_bitmap(&vcpuaff->cpumap_hard, new_affinity);
->          }
->          if ( vcpuaff->flags & XEN_VCPUAFFINITY_SOFT )
->          {
-> @@ -1777,6 +1776,8 @@ int vcpu_affinity_domctl(struct domain *
->              ret = cpumask_to_xenctl_bitmap(&vcpuaff->cpumap_soft, new_affinity);
->          }
->  
-> +        ret = hret ?: ret;
+From: Roger Pau Monné <roger.pau@citrix.com>
 
-Here you seem to have a preference to keep the error from the first
-caller (possibly XEN_VCPUAFFINITY_HARD if set), but below...
+Multiboot and PVH booting are not supported for PE, hence discards them
+in the linker script when doing a PE build.
 
-> +
->   setvcpuaffinity_out:
->          free_cpumask_var(new_affinity);
->          free_cpumask_var(old_affinity);
-> @@ -1788,7 +1789,7 @@ int vcpu_affinity_domctl(struct domain *
->                                             unit->cpu_hard_affinity);
->          if ( vcpuaff->flags & XEN_VCPUAFFINITY_SOFT )
->              ret = cpumask_to_xenctl_bitmap(&vcpuaff->cpumap_soft,
-> -                                           unit->cpu_soft_affinity);
-> +                                           unit->cpu_soft_affinity) ?: ret;
+That removes some relocations that otherwise appear due to the usage of the
+start and __efi64_mb2_start symbols in the multiboot2 header.
 
-...you overwrite it with a possible error returned from the last
-cpumask_to_xenctl_bitmap() call.  Don't you want to do the same, and
-return the first error if possible?  IOW: store the error from the
-first call into hret and use the elvis operator to set ret after both
-calls.
+Section discarding is not done updating DISCARD_SECTIONS definition as the
+change is specific for x86.
 
-Thanks, Roger.
+No functional change intended.
+
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
+Acked-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+--
+Changes since v1:
+- improve commit message;
+- change section orders to avoid changing code order in final executable;
+- merge 2 commits;
+- removed deprecated documentation section.
+
+Changes since v2:
+- Update commit message, join 2 sentences together.
+
+Changes since v3:
+- Added Acked-by.
+---
+ docs/hypervisor-guide/x86/how-xen-boots.rst | 6 ------
+ xen/arch/x86/boot/head.S                    | 3 ++-
+ xen/arch/x86/xen.lds.S                      | 5 +++++
+ 3 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/docs/hypervisor-guide/x86/how-xen-boots.rst b/docs/hypervisor-guide/x86/how-xen-boots.rst
+index 8b3229005c..b6d852050a 100644
+--- a/docs/hypervisor-guide/x86/how-xen-boots.rst
++++ b/docs/hypervisor-guide/x86/how-xen-boots.rst
+@@ -82,12 +82,6 @@ When a PEI-capable toolchain is found, the objects are linked together and a
+ PE32+ binary is created.  It can be run directly from the EFI shell, and has
+ ``efi_start`` as its entry symbol.
+ 
+-.. note::
+-
+-   xen.efi does contain all MB1/MB2/PVH tags included in the rest of the
+-   build.  However, entry via anything other than the EFI64 protocol is
+-   unsupported, and won't work.
+-
+ 
+ Boot
+ ----
+diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
+index 77bb7a9e21..90faf411b9 100644
+--- a/xen/arch/x86/boot/head.S
++++ b/xen/arch/x86/boot/head.S
+@@ -152,7 +152,7 @@ vga_text_buffer:
+ efi_platform:
+         .byte   0
+ 
+-        .section .init.text, "ax", @progbits
++        .section .init.multiboot, "ax", @progbits
+ 
+ early_error: /* Here to improve the disassembly. */
+ 
+@@ -710,6 +710,7 @@ trampoline_setup:
+         /* Jump into the relocated trampoline. */
+         lret
+ 
++        .section .init.text, "ax", @progbits
+ ENTRY(trampoline_start)
+ #include "trampoline.S"
+ ENTRY(trampoline_end)
+diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
+index f758940674..749d9719cc 100644
+--- a/xen/arch/x86/xen.lds.S
++++ b/xen/arch/x86/xen.lds.S
+@@ -57,6 +57,10 @@ SECTIONS
+   __image_base__ = .;
+ #else
+   . = __image_base__;
++  /DISCARD/ : {
++    *(.text.header)
++    *(.init.multiboot)
++  }
+ #endif
+ 
+ #if 0
+@@ -195,6 +199,7 @@ SECTIONS
+   DECL_SECTION(.init.text) {
+ #endif
+        _sinittext = .;
++       *(.init.multiboot)
+        *(.init.text)
+        *(.text.startup)
+        _einittext = .;
+-- 
+2.43.0
+
 
