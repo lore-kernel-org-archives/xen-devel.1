@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1726DCD98E1
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2026 13:49:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1339250.1600406 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E105BCD98E4
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2026 13:50:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1339256.1600413 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wZUA0-0005Ea-Hd; Tue, 16 Jun 2026 13:49:00 +0000
+	id 1wZUBQ-0006oq-RY; Tue, 16 Jun 2026 13:50:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1339250.1600406; Tue, 16 Jun 2026 13:49:00 +0000
+Received: by outflank-mailman (output) from mailman id 1339256.1600413; Tue, 16 Jun 2026 13:50:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wZUA0-0005ET-DY; Tue, 16 Jun 2026 13:49:00 +0000
-Received: by outflank-mailman (input) for mailman id 1339250;
- Tue, 16 Jun 2026 13:48:58 +0000
+	id 1wZUBQ-0006oj-OR; Tue, 16 Jun 2026 13:50:28 +0000
+Received: by outflank-mailman (input) for mailman id 1339256;
+ Tue, 16 Jun 2026 13:50:27 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wZU9y-0005DG-MJ
- for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 13:48:58 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wZUBP-0006od-II
+ for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 13:50:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wZU9x-0064dA-Ur
- for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 15:48:57 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wZUBO-00620L-VG
+ for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 15:50:26 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a315425-e002-0a2a0a5209dd-0a2a4502a80e-28
- for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 15:48:57 +0200
-Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a31549c-5cb7-0a2a0a5109dd-0a2a4506d43a-20
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 15:50:26 +0200
+Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a315449-af86-0a2a45020019-d1558029e5ae-3
- for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 15:48:57 +0200
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-490b4a8e28bso34454005e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 06:48:57 -0700 (PDT)
+ id 6a3154a2-7371-0a2a45060019-d155802ec948-3
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 15:50:26 +0200
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-490ac10e337so31040545e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 06:50:26 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4922fa47ce3sm91122625e9.6.2026.06.16.06.48.56
+ 5b1f17b1804b1-4922fa9f2c0sm96566355e9.15.2026.06.16.06.50.25
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 16 Jun 2026 06:48:56 -0700 (PDT)
+ Tue, 16 Jun 2026 06:50:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,57 +55,62 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1781617737; x=1782222537; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1781617826; x=1782222626; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=uJWI+YqyLtmeJtzFo5vFS4zLaKD0KZ7p4ywC5qWN6as=;
-        b=J+DdYwjrfQXMJN69a1/JAffnsD6H2Tr7kZSX9awlmgjIxiK+9L7XMWxDfCCGoJs9p9
-         X3rR5yhMaaUG+3KKesYJpvArqmFGgd0W52HoL2HXgeBz9OCyd2b88Djll4S3sbddA6dj
-         sJp+bw0xvWo5trhMS1bLYvLMYJcV6NqfqZLD0IXpddvYjqJJN9cIso71wEZt2Zg1rELT
-         HGcaJf/93A5KOflnDBIps5SLAdaBxyzttB0NzpNWt7ye5Ru3P8RdQMYmbbROJldmzSZT
-         J03dIIzvdTjfsy7VeocxZfVOLx9Rf+6JgMZrwsXNdIGX7pk2MwiQlbQFDOMX87ckWaxD
-         XHSQ==
+        bh=/CuczEgNN5H5r1dN3DlhOxPe/xgXHUw3Emk/6LojGyA=;
+        b=XAE/+UzQW50b5CPr7fJcaoQuiUwMO9Uc7AjBwXhywuGdjAgux7cKHcc8UqY8AVMhsN
+         kFYSD6YKDvgMd5KyGexzH4dT0cajdApRnrAU5fZYV5UpJNOIVjD/5U7lpsE9su9v1RQF
+         D63S8kh9n6VetmMOin9uGFt06RDr8m/gIsCSYGecrEE5HvGaapd71mLWDtB8kO4r5ZDW
+         o5ZN+X0XgfqYwpma2zL9YhbhIacUPmQT8Ll4uwt9cnImPb9a4nkjJqad3wU+LsnuTDRV
+         8wT0UKOL4Oes36feNlc+ioyUvyww6zWNsaOeUFhiYkE81wf5uFo5p71/uC6gJ4OUm/Qe
+         PsdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781617737; x=1782222537;
+        d=1e100.net; s=20251104; t=1781617826; x=1782222626;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=uJWI+YqyLtmeJtzFo5vFS4zLaKD0KZ7p4ywC5qWN6as=;
-        b=f09lhZhGFM2GRoTaEGDSxBmtm4HWeSR2FixVaLBx/uTKAtRHTdOXwBxlBpAypY9yrw
-         5jkzMNpYmDb6IABDYEdrbEZT8ou5d5PuPMxm3H5KlU0tSCT+qSmAw6MOrQnKEMCc8X6P
-         Qp3LzFyGgtHzspVhP2vsI9nr1K8VPtCNAarhgUoMbsB0D4s3/W/wvOW8t+ZLeb0J0K5y
-         Fsl7qTbuNLN9/EuA+7itxESvoc7mTXerNQgJlhDhbPtnLrQKdbngrkVmmmvI7tuIB6Ec
-         Qa91S9NUNnIdgZnJXMZ+klmjtmo3k7j3eJsrJcF1SpCGPBhZ6nfY1QOXTXaN3q/UTQ2B
-         YyMw==
-X-Forwarded-Encrypted: i=1; AFNElJ8PtapO1U7r4sMyW1UC3tQSJGUfhwsIzEvyw50HHXsNuDz5Lz6SSTHo/+Ed1R6xwiBWicmDBAB6Lzw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyrHlgm9pQ0VTiO88qOW6GbP1ScOMWiAhw5Wy4Qg8MzcP9800nX
-	37pE3vRHa75QrUG+GBx+yI1Ci1EBbou3KrqRtf+2b7xO1SkjTXeweWl/usEENtAZPA==
-X-Gm-Gg: Acq92OFM823+tXY7KNgxrwuOV6cMq463skoOIhZRa8ccynn1CbzLhEnIC2tG+OWanNq
-	BvnnxrhQ0G1lP7hWMerJ0W7DvyxzOXWuciW1Wv203dDkW3/+y7E84oIIrZ54+LPPacptZ+uKz0y
-	A+zcBght6eq/KwbrZNIGBSTrN2qek+lDrnVB1Z7ODMPKSCHB0ku8qzimvGwJLykOUirwxGSrZKv
-	cPi5l9cjwU4oZIdOuJGGw76Q8A4yCugBWiYMU7fREnY0lhL+7zAbM2UbFDwzz9Ub9YGH7G2sX5L
-	zWmR9qZjfyxEKW+9x3QWGmeMgHNrfsjwBTzGdQ4o7a0NSwnvdCaerCT5woliA8zl17QTJ6THfgL
-	H730IThVGCP3QBKJvcxircigHexWH/QPx0JkcXWN98BklJe+fdpSXrOsvxy36ji8cR58A8NU4lg
-	yOYddy5Xd3QMZruLlOVeaGFIHPzNRnr4U6s5e5CfkS6aoX3MQ07J08hKhnLT3MOJjPP/a1MklX6
-	zR1dM1KNcrMuFXsJoy1QdgoFw==
-X-Received: by 2002:a05:600c:c490:b0:490:bd66:db49 with SMTP id 5b1f17b1804b1-4922ff9898amr53739015e9.12.1781617737240;
-        Tue, 16 Jun 2026 06:48:57 -0700 (PDT)
-Message-ID: <a12b80ea-7361-479f-8fbc-ec5f5aa4ceaf@suse.com>
-Date: Tue, 16 Jun 2026 15:48:55 +0200
+        bh=/CuczEgNN5H5r1dN3DlhOxPe/xgXHUw3Emk/6LojGyA=;
+        b=j3HEYn4J4/YYI88NWAvT+AmEAgrrkd7bAMijw/0wY2vlZi/9Yzkqlc4TYsxGIbuGuZ
+         GiIYMYf4MbSY3VdSlhCzI1JRoKJyBuTYKkiaoHyvpBPV3pkZ5v8BypG+PEuyAhdnZxpx
+         GZzac5ZxRbpcCvvNIFdprNwycsh2e4LceNgmCr5EpqMDsR7X7Kftt8wy7EgudAYMlXYZ
+         monp7QcvN6V0r1pTpcD6QFxqGSYvw7ZlChUIHm+ExGvbaC45ZAVu1peHeyAkjaHeNotw
+         vKWDaQfX1oJlrrY60xZfZH6C2vrnIN5MMFzxfShTCGIyKVnLhvz+/YO7xSBhq1yfUQpT
+         +uWg==
+X-Gm-Message-State: AOJu0Yx55B4te9QVjFH4hVC3GvhVDuRvhUU6eXz1U2GqlE/JDcPUSVjS
+	bjoVlNHqr+Mkn0im9R1Rb99AM4g2y39UnmUPZJxzfouW4iiFbfleDhipNjRdtT7auLcW54g8OWE
+	/CLU=
+X-Gm-Gg: Acq92OFbjF4S+9bImAM2hw2u9J8ka9FCJnDXteGCp2FoPba8tOVnBiS1YxOnhf5M0v+
+	OOghsPzFCIPJww5od+01Jlb+4+YD7ar8fBpkOMXr0j+CN7F3qL1U5BnBFTSDDP1RXtVzcMNMzAy
+	AQls1BSJyte7bPSCSwScu/SOYTftbA//C1Rm491Dw4gn1wEYBkuIpLCcrnj9GplaJh+5l4qq6MF
+	N/N6hpunT7siYu7zLVIJkn6L8tzIr54xC02EWdoYJS37UcPTtkocR7Df36wM4oOwxBzCaKNxrbM
+	dlKpEX3TEOEjqZhG5EiJzshPEO+FqAVqeEswLV6MiIR4n3RNoDZ2F4COCK0mEBxuYO1LPeuo3yO
+	nxTQeJ1mY1PNqHdzd2VI6vYcePTyIoDomtzIrlbLrMxYm7NGWwOw75+RiRsePZwTOACvwjrWnag
+	qMnKbfhti6rZzEt4YNWSHxsGsOlWocCWJfA5mfpqE3EWnuYK35W124xoBAE++MS3/CZjnvrQLRH
+	qE6i1ZI+ZPhavAU0CBNMBsgJw==
+X-Received: by 2002:a05:600c:6298:b0:492:348:ba08 with SMTP id 5b1f17b1804b1-4922007d38amr219914105e9.16.1781617826225;
+        Tue, 16 Jun 2026 06:50:26 -0700 (PDT)
+Message-ID: <53afba1b-a791-4ebe-9d00-3ca66065c524@suse.com>
+Date: Tue, 16 Jun 2026 15:50:25 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH for-4.22] x86/ucode: Exclude Zen6 from entrysign digest
- checking
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+Subject: Re: [PATCH v3 4/4] x86: Split .init section to satisfy UEFI CA memory
+ mitigation
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>, Frediano Ziglio <freddy77@gmail.com>
+Cc: xen-devel@lists.xenproject.org,
+ Frediano Ziglio <frediano.ziglio@cloud.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
  Teddy Astie <teddy.astie@vates.tech>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20260616104534.22995-1-andrew.cooper3@citrix.com>
- <ef1f84c3-68c4-4619-9e32-b008e91725f5@suse.com>
- <dd974236-b6d6-4eba-a78a-5acd1ee17589@citrix.com>
+ Frediano Ziglio <frediano.ziglio@citrix.com>
+References: <20260616101336.44009-1-frediano.ziglio@citrix.com>
+ <20260616101336.44009-5-frediano.ziglio@citrix.com>
+ <ajExivEwb88pcOxT@mail-itl> <f80e5c37-96db-4af5-9b9f-28f4ff457a72@citrix.com>
+ <8b27a14e-865a-462e-a6dd-1f8323de5f43@suse.com>
+ <a7d9c983-c264-4a90-ba17-b2a49bd85c18@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,44 +136,45 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <dd974236-b6d6-4eba-a78a-5acd1ee17589@citrix.com>
+In-Reply-To: <a7d9c983-c264-4a90-ba17-b2a49bd85c18@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1781617737-A8979161-714F783D/0/0
+X-purgate-ID: tlsNG-16d1c6/1781617826-8777FD75-8A21131F/0/0
 X-purgate-type: clean
-X-purgate-size: 1561
+X-purgate-size: 1594
 
-On 16.06.2026 15:26, Andrew Cooper wrote:
-> On 16/06/2026 1:36 pm, Jan Beulich wrote:
->> On 16.06.2026 12:45, Andrew Cooper wrote:
->>> --- a/xen/arch/x86/cpu/microcode/amd.c
->>> +++ b/xen/arch/x86/cpu/microcode/amd.c
->>> @@ -128,7 +128,8 @@ static bool check_digest(const struct container_microcode *mc)
->>>       * the digest of the patch against a list of known provenance.
->>>       */
->>>      if ( boot_cpu_data.family < 0x17 || boot_cpu_data.family > 0x1a ||
->>> -         entrysign_mitigated_in_firmware || !opt_digest_check )
->>> +         is_zen6_uarch() || entrysign_mitigated_in_firmware ||
->>> +         !opt_digest_check )
->>>          return true;
->> Besides being somewhat fragile towards future changes (to the family range
->> covered), this also sets a bad precedent towards the comment ahead is
->> is_zen<N>_uarch() saying "The caller is required to perform the appropriate
->> vendor/family checks first." My understanding was that a single family
->> should be checked for in all such cases, not - as is the case here - a
->> range of families. Using the (seemingly) opposite is_zen5_uarch() wouldn't
->> be correct here, after all.
+On 16.06.2026 14:40, Andrew Cooper wrote:
+> On 16/06/2026 1:30 pm, Jan Beulich wrote:
+>> On 16.06.2026 13:29, Andrew Cooper wrote:
+>>> On 16/06/2026 12:20 pm, Marek Marczykowski-Górecki wrote:
+>>>> On Tue, Jun 16, 2026 at 11:13:36AM +0100, Frediano Ziglio wrote:
+>>>>> From: Frediano Ziglio <frediano.ziglio@cloud.com>
+>>>>>
+>>>>> Currently .init section is both writeable and executable, split data and code
+>>>>> to have 2 sections satisfying W^X rule.
+>>>>>
+>>>>> It is a requirement for NX_COMPAT so the PE can be loaded with W^X perms
+>>>>> in the pagetables.
+>>>>>
+>>>>> NX_COMPAT is a requirement from shim-review,
+>>>>> https://github.com/rhboot/shim-review#do-you-have-the-nx-bit-set-in-your-shim-if-so-is-your-entire-boot-stack-nx-compatible-and-what-testing-have-you-done-to-ensure-such-compatibility
+>>>>>
+>>>>> Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
+>>>> Acked-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+>>>>
+>>>> Is that the last piece necessary to satisfy the NX_COMPAT requirement? If
+>>>> so, I suppose a subsequent patch should actually set the
+>>>> IMAGE_DLLCHARACTERISTICS_NX_COMPAT bit (IIUC ld --nxcompat option), right?
+>>> We need to satisfy everything in
+>>> https://github.com/xenserver/xen.pg/blob/XS-9/patches/correct-sections-permissions.patch
+>>>
+>>> .reloc needs to be non-discardable and writeable.
+>> Writable? Why?
 > 
-> It is true that they're not symmetric when used with ranges.
-> 
-> But "appropriate checks" doesn't mean single family.  I suppose it
-> really means "know what you're doing".
-> 
-> Entrysign is weird.  All other uses of is_zen?_uarch() come with single
-> family checks.
+> Because we take fatal pagefaults against it when it's really read-only.
 
-If you're not afraid of building ourselves a trap here:
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Wasn't this for relocations _against_ r/o sections, not the .reloc section
+itself?
 
 Jan
 
