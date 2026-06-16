@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7D5FCD98DA
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2026 09:00:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1338821.1599874 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E78BCD98CF
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2026 09:01:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1338828.1599883 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wZPeB-0006vg-J1; Tue, 16 Jun 2026 08:59:51 +0000
+	id 1wZPfG-000081-WB; Tue, 16 Jun 2026 09:00:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1338821.1599874; Tue, 16 Jun 2026 08:59:51 +0000
+Received: by outflank-mailman (output) from mailman id 1338828.1599883; Tue, 16 Jun 2026 09:00:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wZPeB-0006vZ-GL; Tue, 16 Jun 2026 08:59:51 +0000
-Received: by outflank-mailman (input) for mailman id 1338821;
- Tue, 16 Jun 2026 08:59:50 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wZPfG-00007u-Sz; Tue, 16 Jun 2026 09:00:58 +0000
+Received: by outflank-mailman (input) for mailman id 1338828;
+ Tue, 16 Jun 2026 09:00:57 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wZPeA-0006uL-BK
- for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 08:59:50 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wZPfF-00007m-Qf
+ for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 09:00:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wZPe9-003rZZ-7E
- for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 10:59:49 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wZPfF-008tyZ-7I
+ for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 11:00:57 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a311062-5cb7-0a2a0a5109dd-0a2a450bbad4-46
- for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 10:59:49 +0200
-Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a3110c8-5cb7-0a2a0a5109dd-0a2a4506c738-4
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 11:00:57 +0200
+Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a311084-212f-0a2a450b0019-d1558032e0ca-3
- for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 10:59:49 +0200
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-490be29c1c5so47118685e9.2
- for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 01:59:49 -0700 (PDT)
+ id 6a3110c8-7371-0a2a45060019-d155dd34d44f-3
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 11:00:57 +0200
+Received: by mail-wr1-f52.google.com with SMTP id
+ ffacd0b85a97d-45ef29c5561so2305033f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 02:00:56 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49230a4fd31sm43245565e9.4.2026.06.16.01.59.47
+ ffacd0b85a97d-4606f26393asm45176510f8f.5.2026.06.16.02.00.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 16 Jun 2026 01:59:48 -0700 (PDT)
+ Tue, 16 Jun 2026 02:00:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,58 +53,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1781600388; x=1782205188; darn=lists.xenproject.org;
-        h=content-transfer-encoding:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=nurJDa/+cduzPTcAaGzvFsiIXKoctAlrlCQFUVpz8R0=;
-        b=QYaFRl/gBG8cd8bkdLEVXMjE1sorUI/G3pBfdPw8uz0e4T1Q1ZNZ1+GomPEvw0lEzZ
-         SxTiJcJYWwEqbsSETPZhizCO5XV2dQq1kx+WmpEBZPc/RQbQ3kt1hx9QccM+ccH8gGE4
-         OfF9CNuhY9NVbU+8t/1t8YomgzUOUNk3QDRu+/wzlFOqZcRLtTOiTi5wZP/t7MohBsL/
-         Xwg7FbN5diIueW1TYONzQf6wqQsdKmwTEOIITv0cw1PdwqgGD6a+wNlEgtMJEB9am7+1
-         sICCb/OzA0d35bpF0xfDJ94HiScyxifDdK+kUQmJgYma89/jpoD7iEt3moGXHex8JjrR
-         OWMA==
+        d=suse.com; s=google; t=1781600456; x=1782205256; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=3KIC7FhXKRQjgufOU+xqDX7cseUxDHhdniiRrgNNmds=;
+        b=TvA6OQCnA1iAaf6MB/1LqUfTG7XFlSQliEWj1LZwlS6txF9hiHzVUe2w9FOCTnAbTW
+         PWXiQ1jtiE8w/pmHu+taZp3Pu7SZOZHmmhcCxgOKvjt33hHoWbbFWe58/v2rDwZAlCU/
+         buyu7YINHBhLHxOFvC4TYS8Xk8J8rZRRZZIv79rvnZX0F69tb9PYXEIu973TSIFmFop/
+         gWv8soeUUx+Ef/cjCmHQnapK7wr1P2QBEUIM9Sd9E3fjhpQDZUFrtdZtz/AfQVg/ZUd0
+         eqp4FlBgUwePwtL+dIdzUkZSs/0v9vKVv17s/vmq1s49Sd0WoeIf0Fr26w4/FHmxY1xO
+         ZgHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781600388; x=1782205188;
-        h=content-transfer-encoding:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=nurJDa/+cduzPTcAaGzvFsiIXKoctAlrlCQFUVpz8R0=;
-        b=eT1Jk4dHwWKRR20sR7PX1164FV93jGOqwvliZX71/6g3SynU72jakI2zoQGnX72oG+
-         D+Er6muE6mmCzRc7WWC+yaBKxy1EJNLkYT3mLn3z68rCoPqiStXSWInhRXs7XaXYtNJv
-         N6mx1t3LspYIodsaSR+Ql6dO0anYzn6p/cmv8311JBlj+VQLHnn0QZ0D1eMx0Y+LOKfl
-         BTy2jGAU1gSHM9POXoUfhgymO/W0TsabCEbN0XCLmSiz3R5bD5KwC0eKeuquxLrAEsm6
-         ZIcu0AhBZfZszhkvNnSiamoJxEkFoL9+8putPRZaNe6Bo7AuoppVLpdMRSFjiQ3AYU5u
-         +cEg==
-X-Gm-Message-State: AOJu0YwYMzptoKD9zuVqlUtkbgTNv7BR0dED4Uofjo6d6H7EhtECCGn6
-	oLb6huhCx4GCFNhPIKTqGuMmw6HMtS9jK0NIoEiPhft/vV6Wyuo7ejEDphxFO4k5ncoq1WzNhqk
-	uuoc=
-X-Gm-Gg: Acq92OHeqfgrynHOXUK02EX+SsGEb5fSHQzF96i+DZBOw5dCWvPXkAGXN6Yd44h6b4g
-	vk+578TNwn/vzlfzdoWCR64xqF53UcUrnibr2xa3AxxVfxYCHHo6U2/B+3KOW2aNlpkWYkbf3Ci
-	HZY3wmZCr2WTPKCEStKsMxuWcZejFc6xUwRZzWZ1NHW4eOKtoPgarChwnnLqiZPVGi23R1C/XHM
-	sEuvzsYIckaqsHrubxFhHe8FHkb7VwdhIEifo4HYJl/Cwmo66/CTQUqcPnyh3OEDtjZa1E20etm
-	+7ea9WTGHejp5/dqPekcBbvaaNGkZz09OZrQDEN19yszukTsVcH/XNDm6ioxDbZT7H4nv6VZ4/y
-	3SHQ958hFDFjazrPLKA9G5FkVYkPkg06OhnkEKE+b9cWPjbn2pQ9Tg4F4HScTuNzBGO0UQ1cWTG
-	0aCBkL3nrtv5Ueq6Hoj6vLQcPwEePFJ+Kp/NUqMuq5W4Msnn6ysQG6AF/dB/TRwr535XN0lu/gV
-	g+Vp7rvm7hQfqPHhA8cs3znVw==
-X-Received: by 2002:a05:600c:1f89:b0:490:da12:f1fa with SMTP id 5b1f17b1804b1-4922ffa09a0mr44192025e9.31.1781600388518;
-        Tue, 16 Jun 2026 01:59:48 -0700 (PDT)
-Message-ID: <5d242cad-d907-4321-8ac1-363c0f9b623d@suse.com>
-Date: Tue, 16 Jun 2026 10:59:47 +0200
+        d=1e100.net; s=20251104; t=1781600456; x=1782205256;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=3KIC7FhXKRQjgufOU+xqDX7cseUxDHhdniiRrgNNmds=;
+        b=FcCfYPCw7bipLXL1Wn67oy8Ml8Xeef97fQDh6ik2OEXfeBHs5xtPWz0GLEZnv5f9pX
+         cXTadjbhbjZe7oGFyolnX+PaU7Iv2Aefvzu1xjA9PF3GA9OESmoLoRt07VKEIDcflTQ4
+         C1sbAPvg3h0P4hTJp/soxWhOpfTOpBihZm+G47/0UunP0IDUGMrOT+DfLJXhLxPcMI5o
+         2Lj0jOLJxtU8YHDsqV/2On5GCaUaavELtYnt4MrPkAUutjrYog0w+H7eWvx49ZT/PY9B
+         Bw2KRq3kQv2/23RAjxjc0VM9I0b3r4/3fKGZLrCku9l6b2f3z4RMnC3PhqML/ZRmiUZJ
+         jPig==
+X-Gm-Message-State: AOJu0YxiQ0Ozq3fZjVipSsL1srpt2Bbs9elRy2s1AgfTbJHpkqC8pjAw
+	EVfivEOpmZaDow9HqQ8A0Dp5GrgwyqD35Rrhy7DXKczHB1dxqTVzFM3KzysI0c4FA/e0OTXqtOY
+	TwyM=
+X-Gm-Gg: Acq92OGT1gSYCOA6TzGoLPkznp3B/oRi73Yy/uy0A+WUQuf8pVirTw63BCoidNWsC0v
+	ZlFBCpUjE1vmJ8CqVsJc9gjFBCF5JAuo3Wb9Zcdfanw8Obz3moyuLcblSHpLm0a9Hl92YRV4Pwx
+	NjGGxU7oQa5TxVpjE3L/OSleJgqFNJIGy62KVynxs6yUH/Z0QnUXUO1pOahXPHRMCoaZsRJScF1
+	aRqtYXV9cq5dpvpB0YUd4PO6QMJLtOlJ92eIAo+bZ1OPLWVxVG4MClB4MS5888tpNBaoOB3SYoG
+	o4tMuL+tK8V+FG+TqW/ST1cgQ2w8+uoyQiCBn6e6cGTGDxSTEOFa9F86tJW8ShZ+8bbvWpd48vZ
+	chXZW1t12rX+J/4UeTZX6HnSZCwMT3o/z2N+DLUEbBd9fuBvba+0VNF/7skL77suL69PXEzNWX3
+	ttQS7Ff9KKf5957LBHoqSP/Ahlsd8Hs5X8pULrgdvM14ErvrsnWSYQDIxu1T+Nvi7nZ4i78e3Tt
+	r9ruAF+NUgtPF0=
+X-Received: by 2002:a05:6000:987:b0:460:3233:f994 with SMTP id ffacd0b85a97d-4607ebf6969mr19546916f8f.43.1781600456261;
+        Tue, 16 Jun 2026 02:00:56 -0700 (PDT)
+Message-ID: <8adede4b-f25d-4a77-9fec-bd099119b005@suse.com>
+Date: Tue, 16 Jun 2026 11:00:54 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, Juergen Gross <jgross@suse.com>,
- Daniel Smith <dpsmith@apertussolutions.com>
+Subject: [PATCH 1/4] libxc: adjust string size calculations in
+ xc_{,de,test_}assign_dt_device()
 From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH 0/4] hypercall string inputs
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+ Juergen Gross <jgross@suse.com>
+References: <5d242cad-d907-4321-8ac1-363c0f9b623d@suse.com>
+Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -128,24 +127,46 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <5d242cad-d907-4321-8ac1-363c0f9b623d@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1781600389-12D77F3B-369C01B0/0/0
+X-purgate-ID: tlsNG-16d1c6/1781600457-8596CD75-D3A002AA/0/0
 X-purgate-type: clean
-X-purgate-size: 734
+X-purgate-size: 1043
 
-While doing the XSA-492 work I further noticed an inefficiency with
-safe_copy_string_from_guest(). All callers pass PAGE_SIZE as the maximum
-buffer size, and with the function adding 1 to append a nul terminator
-the resulting allocations are all order-1 ones. Which we'd better avoid.
-Require respective callers of hypercalls to nul-terminate the strings
-within the buffer supplied. While an ABI change, I think it's an
-acceptable one.
+In preparation for a hypervisor change also include the nul terminator in
+the size calculations.
 
-1: libxc: adjust string size calculations in xc_{,de,test_}assign_dt_device()
-2: libxc: drop size parameter from xc_flask_context_to_sid()
-3: libxc: adjust string size calculations in xc_flask_{getbool_byname,setbool}()
-4: lib: make safe_copy_string_from_guest() validate input
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Jan
+--- a/tools/libs/ctrl/xc_domain.c
++++ b/tools/libs/ctrl/xc_domain.c
+@@ -1592,7 +1592,7 @@ int xc_assign_dt_device(
+     char *path)
+ {
+     int rc;
+-    size_t size = strlen(path);
++    size_t size = strlen(path) + 1;
+     struct xen_domctl domctl = {};
+     DECLARE_HYPERCALL_BOUNCE(path, size, XC_HYPERCALL_BUFFER_BOUNCE_IN);
+ 
+@@ -1624,7 +1624,7 @@ int xc_test_assign_dt_device(
+     char *path)
+ {
+     int rc;
+-    size_t size = strlen(path);
++    size_t size = strlen(path) + 1;
+     struct xen_domctl domctl = {};
+     DECLARE_HYPERCALL_BOUNCE(path, size, XC_HYPERCALL_BUFFER_BOUNCE_IN);
+ 
+@@ -1652,7 +1652,7 @@ int xc_deassign_dt_device(
+     char *path)
+ {
+     int rc;
+-    size_t size = strlen(path);
++    size_t size = strlen(path) + 1;
+     struct xen_domctl domctl = {};
+     DECLARE_HYPERCALL_BOUNCE(path, size, XC_HYPERCALL_BUFFER_BOUNCE_IN);
+ 
+
 
