@@ -4,44 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1067CD98F0
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2026 17:28:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1339505.1600711 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 924B1CD98E1
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2026 17:31:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1339539.1600756 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wZXaY-0004hj-JY; Tue, 16 Jun 2026 17:28:38 +0000
+	id 1wZXdM-0008St-4F; Tue, 16 Jun 2026 17:31:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1339505.1600711; Tue, 16 Jun 2026 17:28:38 +0000
+Received: by outflank-mailman (output) from mailman id 1339539.1600756; Tue, 16 Jun 2026 17:31:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wZXaY-0004hc-Gk; Tue, 16 Jun 2026 17:28:38 +0000
-Received: by outflank-mailman (input) for mailman id 1339505;
- Tue, 16 Jun 2026 17:28:37 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wZXdM-0008Sm-18; Tue, 16 Jun 2026 17:31:32 +0000
+Received: by outflank-mailman (input) for mailman id 1339539;
+ Tue, 16 Jun 2026 17:31:30 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wZXaX-0004h9-9u
- for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 17:28:37 +0000
+ (envelope-from <mst@redhat.com>) id 1wZXdK-0008Sa-Cn
+ for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 17:31:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wZXaW-004dHr-2G
- for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 19:28:36 +0200
+ id 1wZXdJ-006bOT-Ph
+ for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 19:31:29 +0200
 Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a3187ab-5cb7-0a2a0a5109dd-0a2a4501a71c-20
- for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 19:28:36 +0200
-Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ (envelope-from <mst@redhat.com>)
+ id 6a318857-5cb7-0a2a0a5109dd-0a2a4501b2b0-38
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 19:31:29 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
  by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a3187c3-c1f2-0a2a45010019-d1558032c860-3
- for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 19:28:36 +0200
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-490a76757e5so35239475e9.2
- for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 10:28:35 -0700 (PDT)
-Received: from localhost.localdomain (5.116.208.46.dyn.plus.net.
- [46.208.116.5]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-461abb44c3dsm5012754f8f.9.2026.06.16.10.28.34
+ (envelope-from <mst@redhat.com>)
+ id 6a318870-c1f2-0a2a45010019-aa0a817c9759-3
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 19:31:29 +0200
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-93-w7l57zGDNGGApvl0l7CbGg-1; Tue, 16 Jun 2026 13:31:26 -0400
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-490b8adf8b8so45282405e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 10:31:26 -0700 (PDT)
+Received: from redhat.com (IGLD-80-230-85-71.inter.net.il. [80.230.85.71])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4923343cb75sm3583875e9.0.2026.06.16.10.31.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jun 2026 10:28:34 -0700 (PDT)
+ Tue, 16 Jun 2026 10:31:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,101 +57,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781630915; x=1782235715; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=NKJVvAIYFxvZ8mt8ChDl47t49tqxoMamrJnbHmzTz0w=;
-        b=qLEIiciAMJ5nhOImtgnGB2e7sn4uBA9FHXFp5gkRGtdGGmlDFdCAFpP6IUgNtXwdnw
-         znEBbXtdQvlV+/RkhF6UTe1x2uwCfP//opRh4QsSApv4CLDvrWCrWQLis2zel1PfMwpk
-         o6Sz4bctXoEri0u08oC9q3M/BL+p1rc7Lj75dxNsSV5N+WB901PBeK/Pja/r0LqpKdh5
-         w3QtM9NwRW6EsLMjFAOEWifjpnFFKwu9BJabM6VeYB469kXmvfv8xsvb3VEa8wNyQGwF
-         ZX3jYbFPKeKkddMmFf98Aj4pSry+Twl3zKsp+h36ASBUpBeMaH0nSjbeNwb59Xdd+S/n
-         2JJQ==
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1781631088;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=ZWc8XpFSVDFqkdh9JRMAyyd+HTlraBz0TXBtpxzGEaY=;
+	b=RjCtsuHAMqzKrlzaO4Amt3BhMQRDJH4P2dFt+nB1nNgSwhQuUkjDjhsccTFZ0KTRE/5ac6
+	RmW1Z3TwNj/nLdyTolrQjbDARZns+CZ2QmDmSos8MXvR0zIqioepUjG6VZMSiwwWNpaP5G
+	Bu2ZE3ZFn88Zd9Iqsz0ze6DEvhUwIf8=
+X-MC-Unique: w7l57zGDNGGApvl0l7CbGg-1
+X-Mimecast-MFC-AGG-ID: w7l57zGDNGGApvl0l7CbGg_1781631086
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781630915; x=1782235715;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=NKJVvAIYFxvZ8mt8ChDl47t49tqxoMamrJnbHmzTz0w=;
-        b=Es8Z2qaLD5WLcfM4kDp5/ikRFsmco1NACp7Gd4ZYhi/A/IrFs6uKrN4uNk17Yv+Jfr
-         G/laxU9ZX83uQZoLeFLLWzDkN5fZJhVpojvxmJ2555AGyhU1mfPqp6z9ypBtGdA+jkJc
-         LmBprqPPN6JHYS5rvz2ntgA2soq/99H1cFCLnadxlmkoZurS/WMr6Dt1csH5sJYc8yCY
-         PCBNkfHR10R+PZjce8AlhWkKM6+H5R8rTvhJ08LjUFa1mWfDGIdAAviIIXz/f3cKgZ9X
-         x831io4d2LvpaEfLXahyK9ivolMEbDV95nr0VU0eWs8nWWVBCNKCyA6LGnmRm3awiekA
-         3/iA==
-X-Gm-Message-State: AOJu0YydZr42J2rv9lQKALkxbzmJnCJP6wig6qDXjyGBjAAMxHT89ysK
-	Hr1kIG6KmdAodMek21wXFLQxndaiHFaSbfw+nKj/cACwy50iNtCi+9JMAnaT2jfIZ6s=
-X-Gm-Gg: Acq92OFJdcGKPgv3Y1+tRGVgbE/Rc8dIh3GpYu4VDiprDn+/NkrItLQYhK7Ue2QYn4o
-	gFzUtHe3HI+YHgYM47x0H/NYWujvbIrwr/T9EcHss2gvx+0aL4KxQVbX3wyrDm4globMkPgVpdw
-	lpr9kd/YpgaOoKO1JWvAaYsZ2xehiOak0J/J0uVOsYmyDxMFn36eFLQkJpRW+k3tqxgwzfTKOwW
-	gFXH5X2wrvSPK3gHlFGUD9NTsNTqNSG0/KGvSIslld4R+adjqqd5UAkqUqSBAn3GEmHaK4Bht/x
-	Kby3YJgEC8UcEtYRrFowjtnK/rkhldz/aNTbIkWhvu1xx00oC2psmq71xo1uK4QYOIcHsmoJOCA
-	jViVLQRZZ9pI7EFqbL8h/cgIyAGwSULW78Yet0h4IFWVTAfL6Dt4/bMi/1r5MyFLePNYw/F2V5u
-	jaS9J8C4ourcYTOcNiOKAgrKMjvclCidh0xchgCtH67Sq//gJ2B+/qdiCLuXoxo1ofFhjd3S/d0
-	6XlNRQQ+nTvHERYuaa0wMGJQiE=
-X-Received: by 2002:a05:600c:80c1:b0:490:6e12:542d with SMTP id 5b1f17b1804b1-492333e2f1bmr6454565e9.19.1781630915197;
-        Tue, 16 Jun 2026 10:28:35 -0700 (PDT)
-From: Frediano Ziglio <freddy77@gmail.com>
-X-Google-Original-From: Frediano Ziglio <frediano.ziglio@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Frediano Ziglio <frediano.ziglio@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH v4 0/4] Various patches to improve Secure Boot support
-Date: Tue, 16 Jun 2026 18:28:26 +0100
-Message-ID: <20260616172830.111393-1-frediano.ziglio@citrix.com>
-X-Mailer: git-send-email 2.43.0
+        d=1e100.net; s=20251104; t=1781631085; x=1782235885;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ZWc8XpFSVDFqkdh9JRMAyyd+HTlraBz0TXBtpxzGEaY=;
+        b=SFmtZsnC5UW5Bi2M15KcdxCNlPsn3AUKvzEr9NWc2YNNnrFtlHcYN1BycwvpVpX/ai
+         XU/HdYYCU2nuh1RWg9Yc/VvfuWZ63d8u10Hs9CY4CzauYdpnRNnqLiEFUo01Ha9I1BZ+
+         7Fp1F4cNW43dvQonkADaOjTiak0HSbb3AUQHS7rIenlRuCtHjAOVmp5M99NsAGknxJKy
+         go6xaE6NkUSbqfos7WvkR+JsgcemVqaW3sIXxgiO5ZtMqqjlbI+FITphxzD/oBFe4Xwe
+         BkKIXj5y4jLXuLxOHRwM4v2/5NWrA3YOkndMoBDk8V23DHaNGRGlxMKNKG4GUPnQPErw
+         NTKA==
+X-Forwarded-Encrypted: i=1; AFNElJ/c0jNOllju0+Z9KaRoVrtO/EaFjOWdcmSuJMh15cjtC5/BzyhDu4Kmbns5g90G5l3/JFl/FTPTIEw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwK22uXMIm/Doji0/owZ5pBgROIt6QskGP9ykVPqTGKKBkWLGId
+	4Q516TZAMVU/Z25AW4ftIS7B0yWGjNEespUr9aAmQqe7EH4qsgSEn0uu02Is6JrJCcD6IKLixHc
+	wJg6wMsMfrYJMQv/jPrZjX1fIpALVYE12688AnbZd4z4bRBWbfOY49FdYhSpgpD13/bgi
+X-Gm-Gg: Acq92OHjz5X7K3zuGXR1ucNyYt3vfvo5assbV7Bd/eF0AqRqAxJeKoFbCXrwaQA/p6H
+	GaWc/JsOecbTuJTgIE//NSv1zjgoM0D1sxkgTsb5jeC49w6VcozesUPtR7ri5GqU+GEIEQOeHIB
+	NqYJSgCGW/EF1gkwybGV2bPmYO7SrPrBgmqCEdxes8mViubOQ7zawOzYINdUAxLZaobl2swDSsg
+	3EBgfe7V741vBMoKnJeHlKwsOft/vG8iZSkp+PV61PaWgCT9SN2jng4AxB+7j1rXQS3D4XFM8Az
+	zVpxm47PAPOigVKgbstIytBMmMYKdP+Jb5n4yspaBykRJG/6OMInKDNQAU1oT9o3uS3YzCtO0kK
+	tYSMdk2ZS4aS/Vjpc2uGxQYXHhiNa0Xa6i9J3BZ5Ubrk=
+X-Received: by 2002:a05:600d:8496:20b0:490:e913:656a with SMTP id 5b1f17b1804b1-492333d8ae7mr6321255e9.27.1781631085390;
+        Tue, 16 Jun 2026 10:31:25 -0700 (PDT)
+X-Received: by 2002:a05:600d:8496:20b0:490:e913:656a with SMTP id 5b1f17b1804b1-492333d8ae7mr6320565e9.27.1781631084806;
+        Tue, 16 Jun 2026 10:31:24 -0700 (PDT)
+Date: Tue, 16 Jun 2026 13:31:21 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Michael Tokarev <mjt@tls.msk.ru>
+Cc: Thierry Escande <thierry.escande@vates.tech>, qemu-devel@nongnu.org,
+	Alexey Gerasimenko <x1917x@gmail.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Eduardo Habkost <eduardo@habkost.net>,
+	Anthony PERARD <anthony@xenproject.org>,
+	xen-devel@lists.xenproject.org,
+	qemu-stable <qemu-stable@nongnu.org>
+Subject: Re: [PATCH 3/4] q35: Fix incorrect values for PCIEXBAR masks
+Message-ID: <20260616133032-mutt-send-email-mst@kernel.org>
+References: <20260313164649.794591-1-thierry.escande@vates.tech>
+ <20260313164649.794591-4-thierry.escande@vates.tech>
+ <46238511-ed5d-4f2d-881d-87120e4a408d@tls.msk.ru>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1781630916-B6143FF4-4CF786A9/0/0
+In-Reply-To: <46238511-ed5d-4f2d-881d-87120e4a408d@tls.msk.ru>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: pmlMyhYbFd-A7gZHn-mSpbfV4VSK05n6t9-aHMb3j5k_1781631086
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-purgate-ID: tlsNG-d62444/1781631089-ACE52FF4-22EAFE7F/0/0
 X-purgate-type: clean
-X-purgate-size: 1142
+X-purgate-size: 876
 
-These patches improve support for Secure boot.
-UEFI CA memory mitigation requires memory pages to be not executable and
-writable at the same time. So changing permissions and splitting some section
-is required.
-Remove multiboot pieces from EFI executable.
+On Tue, Jun 16, 2026 at 07:25:52PM +0300, Michael Tokarev wrote:
+> On 13.03.2026 19:47, Thierry Escande wrote:
+> > From: Alexey Gerasimenko <x1917x@gmail.com>
+> > 
+> > There are two small issues in PCIEXBAR address mask handling:
+> > - wrong bit positions for address mask bits (see PCIEXBAR description
+> >    in Q35 datasheet)
+> > - incorrect usage of 64ADR_MASK
+> > 
+> > Due to this, attempting to write a valid PCIEXBAR address may cause it
+> > to shift to another address, causing memory layout corruption where
+> > emulated MMIO regions may overlap real (passed through) MMIO ranges. Fix
+> > this by providing correct values.
+> 
+> I'm not sure about the implication of this issue, - is it qemu-stable
+> material?
+> 
+> Thanks,
+> 
+> /mjt
 
-Changes since v1:
-- improved some comments;
-- merged 2 pacthes removing multiboot support in x86 PE;
-- removed a patch dealing with SBAT;
-- other minor changes (see single patches).
-
-Changes since v2:
-- improved some comments.
-
-Changes since v3:
-- Added Acked-by;
-- Improve commit message.
-
-Frediano Ziglio (2):
-  Align relevant sections to 4KB
-  x86: Split .init section to satisfy UEFI CA memory mitigation
-
-Roger Pau Monné (2):
-  x86/efi: discard multiboot support for PE binary
-  x86/efi: avoid a relocation in efi_arch_post_exit_boot()
-
- docs/hypervisor-guide/x86/how-xen-boots.rst |  6 ------
- xen/arch/x86/boot/head.S                    |  3 ++-
- xen/arch/x86/efi/efi-boot.h                 |  7 +++++--
- xen/arch/x86/xen.lds.S                      | 22 +++++++++++----------
- 4 files changed, 19 insertions(+), 19 deletions(-)
-
--- 
-2.43.0
+I think yes generally, but it worries me this has a high risk for
+breaking migration if I missed something.
 
 
