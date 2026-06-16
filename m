@@ -4,48 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 924B1CD98E1
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2026 17:31:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1339539.1600756 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CAF1CD98E4
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2026 17:41:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1339550.1600765 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wZXdM-0008St-4F; Tue, 16 Jun 2026 17:31:32 +0000
+	id 1wZXnF-0002mT-0L; Tue, 16 Jun 2026 17:41:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1339539.1600756; Tue, 16 Jun 2026 17:31:32 +0000
+Received: by outflank-mailman (output) from mailman id 1339550.1600765; Tue, 16 Jun 2026 17:41:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wZXdM-0008Sm-18; Tue, 16 Jun 2026 17:31:32 +0000
-Received: by outflank-mailman (input) for mailman id 1339539;
- Tue, 16 Jun 2026 17:31:30 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wZXnE-0002mL-TE; Tue, 16 Jun 2026 17:41:44 +0000
+Received: by outflank-mailman (input) for mailman id 1339550;
+ Tue, 16 Jun 2026 17:41:43 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mst@redhat.com>) id 1wZXdK-0008Sa-Cn
- for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 17:31:30 +0000
+ (envelope-from <Jason.Andryuk@amd.com>) id 1wZXnC-0002m3-Rl
+ for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 17:41:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wZXdJ-006bOT-Ph
- for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 19:31:29 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wZXnB-00CJiw-NN
+ for xen-devel@lists.xenproject.org; Tue, 16 Jun 2026 19:41:41 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <mst@redhat.com>)
- id 6a318857-5cb7-0a2a0a5109dd-0a2a4501b2b0-38
- for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 19:31:29 +0200
-Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <mst@redhat.com>)
- id 6a318870-c1f2-0a2a45010019-aa0a817c9759-3
- for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 19:31:29 +0200
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-93-w7l57zGDNGGApvl0l7CbGg-1; Tue, 16 Jun 2026 13:31:26 -0400
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-490b8adf8b8so45282405e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 10:31:26 -0700 (PDT)
-Received: from redhat.com (IGLD-80-230-85-71.inter.net.il. [80.230.85.71])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4923343cb75sm3583875e9.0.2026.06.16.10.31.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jun 2026 10:31:24 -0700 (PDT)
+ (envelope-from <Jason.Andryuk@amd.com>)
+ id 6a318aaa-bab6-0a2a0a5309dd-0a2a4504a63e-46
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 19:41:41 +0200
+Received: from [52.101.61.53]
+ (helo=DM1PR04CU001.outbound.protection.outlook.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <Jason.Andryuk@amd.com>)
+ id 6a318ad3-1dec-0a2a45040019-34653d3572b5-3
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2026 19:41:41 +0200
+Received: from BL0PR05CA0015.namprd05.prod.outlook.com (2603:10b6:208:91::25)
+ by DM6PR12MB4073.namprd12.prod.outlook.com (2603:10b6:5:217::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.16; Tue, 16 Jun
+ 2026 17:41:36 +0000
+Received: from MN1PEPF0000F0E5.namprd04.prod.outlook.com
+ (2603:10b6:208:91:cafe::56) by BL0PR05CA0015.outlook.office365.com
+ (2603:10b6:208:91::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.139.11 via Frontend Transport; Tue,
+ 16 Jun 2026 17:41:36 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ MN1PEPF0000F0E5.mail.protection.outlook.com (10.167.242.43) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.139.8 via Frontend Transport; Tue, 16 Jun 2026 17:41:36 +0000
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Tue, 16 Jun
+ 2026 12:41:36 -0500
+Received: from [172.21.53.33] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.41 via Frontend
+ Transport; Tue, 16 Jun 2026 12:41:35 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,93 +67,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1781631088;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ZWc8XpFSVDFqkdh9JRMAyyd+HTlraBz0TXBtpxzGEaY=;
-	b=RjCtsuHAMqzKrlzaO4Amt3BhMQRDJH4P2dFt+nB1nNgSwhQuUkjDjhsccTFZ0KTRE/5ac6
-	RmW1Z3TwNj/nLdyTolrQjbDARZns+CZ2QmDmSos8MXvR0zIqioepUjG6VZMSiwwWNpaP5G
-	Bu2ZE3ZFn88Zd9Iqsz0ze6DEvhUwIf8=
-X-MC-Unique: w7l57zGDNGGApvl0l7CbGg-1
-X-Mimecast-MFC-AGG-ID: w7l57zGDNGGApvl0l7CbGg_1781631086
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781631085; x=1782235885;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ZWc8XpFSVDFqkdh9JRMAyyd+HTlraBz0TXBtpxzGEaY=;
-        b=SFmtZsnC5UW5Bi2M15KcdxCNlPsn3AUKvzEr9NWc2YNNnrFtlHcYN1BycwvpVpX/ai
-         XU/HdYYCU2nuh1RWg9Yc/VvfuWZ63d8u10Hs9CY4CzauYdpnRNnqLiEFUo01Ha9I1BZ+
-         7Fp1F4cNW43dvQonkADaOjTiak0HSbb3AUQHS7rIenlRuCtHjAOVmp5M99NsAGknxJKy
-         go6xaE6NkUSbqfos7WvkR+JsgcemVqaW3sIXxgiO5ZtMqqjlbI+FITphxzD/oBFe4Xwe
-         BkKIXj5y4jLXuLxOHRwM4v2/5NWrA3YOkndMoBDk8V23DHaNGRGlxMKNKG4GUPnQPErw
-         NTKA==
-X-Forwarded-Encrypted: i=1; AFNElJ/c0jNOllju0+Z9KaRoVrtO/EaFjOWdcmSuJMh15cjtC5/BzyhDu4Kmbns5g90G5l3/JFl/FTPTIEw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwK22uXMIm/Doji0/owZ5pBgROIt6QskGP9ykVPqTGKKBkWLGId
-	4Q516TZAMVU/Z25AW4ftIS7B0yWGjNEespUr9aAmQqe7EH4qsgSEn0uu02Is6JrJCcD6IKLixHc
-	wJg6wMsMfrYJMQv/jPrZjX1fIpALVYE12688AnbZd4z4bRBWbfOY49FdYhSpgpD13/bgi
-X-Gm-Gg: Acq92OHjz5X7K3zuGXR1ucNyYt3vfvo5assbV7Bd/eF0AqRqAxJeKoFbCXrwaQA/p6H
-	GaWc/JsOecbTuJTgIE//NSv1zjgoM0D1sxkgTsb5jeC49w6VcozesUPtR7ri5GqU+GEIEQOeHIB
-	NqYJSgCGW/EF1gkwybGV2bPmYO7SrPrBgmqCEdxes8mViubOQ7zawOzYINdUAxLZaobl2swDSsg
-	3EBgfe7V741vBMoKnJeHlKwsOft/vG8iZSkp+PV61PaWgCT9SN2jng4AxB+7j1rXQS3D4XFM8Az
-	zVpxm47PAPOigVKgbstIytBMmMYKdP+Jb5n4yspaBykRJG/6OMInKDNQAU1oT9o3uS3YzCtO0kK
-	tYSMdk2ZS4aS/Vjpc2uGxQYXHhiNa0Xa6i9J3BZ5Ubrk=
-X-Received: by 2002:a05:600d:8496:20b0:490:e913:656a with SMTP id 5b1f17b1804b1-492333d8ae7mr6321255e9.27.1781631085390;
-        Tue, 16 Jun 2026 10:31:25 -0700 (PDT)
-X-Received: by 2002:a05:600d:8496:20b0:490:e913:656a with SMTP id 5b1f17b1804b1-492333d8ae7mr6320565e9.27.1781631084806;
-        Tue, 16 Jun 2026 10:31:24 -0700 (PDT)
-Date: Tue, 16 Jun 2026 13:31:21 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Michael Tokarev <mjt@tls.msk.ru>
-Cc: Thierry Escande <thierry.escande@vates.tech>, qemu-devel@nongnu.org,
-	Alexey Gerasimenko <x1917x@gmail.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Richard Henderson <richard.henderson@linaro.org>,
-	Eduardo Habkost <eduardo@habkost.net>,
-	Anthony PERARD <anthony@xenproject.org>,
-	xen-devel@lists.xenproject.org,
-	qemu-stable <qemu-stable@nongnu.org>
-Subject: Re: [PATCH 3/4] q35: Fix incorrect values for PCIEXBAR masks
-Message-ID: <20260616133032-mutt-send-email-mst@kernel.org>
-References: <20260313164649.794591-1-thierry.escande@vates.tech>
- <20260313164649.794591-4-thierry.escande@vates.tech>
- <46238511-ed5d-4f2d-881d-87120e4a408d@tls.msk.ru>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=sdKLOQdnASeuLXi6mSjQodGGQ/A7+A6E2GatJZzw5GwFsPCd75YYkRkYXrWqm2xZcjmSzGDs4KE2rnuyn1Uucx+JcAozD5biv9c6FUjXZlb++CDrNYR32YUGHYCxE4IlYSTy9I6fPwy0itrGiuNGjoJRI5PzQ78CFHJL84ufMCrb82m4yV+irXN0Ww3MKqg3Off8k/t5H3Wj+Ak/JfneKBR0U/0wtbx7wzdnaAExMxQREGy7CkKDkqOVkvRSXSBirAKBdO1a9wKCoLmrg2a5dmTMLT6vuQWLp4aK0QpVBEKyva1ClZWplDPaE+d7HIVrOQqboErX6EhUwz/7vVjGFw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wLY9g1BeIP97DS86fNlbhLTvbM4ybUvN0RDJ0n0tO9A=;
+ b=EpLrsY/ZItZ1sXO7Z6DlK1HpX2k/y6mIiAd4oJZbxnxJbbMB+BdG4kReM79XcIkGvgjTtU1YI1yRwbOaTO98bVwPwQaeSFnbeVw99IN4ZLGMTQIMN88OpZBByCFBVNLKN//wWxokkbDfmFomjWy61TsMnhRfi+Hfnl59U9kI0Y7YwfyexdiWSGoBwD2yhrkvgmKfWNV+2jZhJaFTcuBPS+0fcIAoDZz8IIpaALMguspPQcqmGXoPrHZTV0/myAt1fP9i17Ua7wP3FtKXjcZk0Mnw1ScVUhXZ2yupZsFn7MDGOVJg/rZl/Vg0U9TrKmiJ4NWEMBZCXwHuR7gy1DUc7A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wLY9g1BeIP97DS86fNlbhLTvbM4ybUvN0RDJ0n0tO9A=;
+ b=2MU/ghvyc/SZNDWzEUyFoXkuhHox6Fb11vYPzZ0V9aiRoYiiCAKbNF6hp2oNcQPjw5XzN1IsZ7OBwAe6ANZQRmlMxtoGxLlVmFNgpnhhbZ8+5wgbrxkVJoYUF28toMrFPfYtVUIxwe4jDOfDaWLp3GKK6FU0uNjwR7Z1QKce5vE=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <a62aa5a3-c416-48d1-bfb1-78e6b16d9689@amd.com>
+Date: Tue, 16 Jun 2026 13:41:35 -0400
 MIME-Version: 1.0
-In-Reply-To: <46238511-ed5d-4f2d-881d-87120e4a408d@tls.msk.ru>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: pmlMyhYbFd-A7gZHn-mSpbfV4VSK05n6t9-aHMb3j5k_1781631086
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-purgate-ID: tlsNG-d62444/1781631089-ACE52FF4-22EAFE7F/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] non-x86: sync tidying logic at end of linking
+To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+CC: Julien Grall <julien@xen.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>, Michal Orzel
+	<michal.orzel@amd.com>, Alistair Francis <alistair.francis@wdc.com>, "Connor
+ Davis" <connojdavis@gmail.com>, Oleksii Kurochko
+	<oleksii.kurochko@gmail.com>, Timothy Pearson
+	<tpearson@raptorengineering.com>
+References: <c9109e8c-e471-4f4c-b58b-fdfe3cb044d2@suse.com>
+Content-Language: en-US
+From: Jason Andryuk <jason.andryuk@amd.com>
+In-Reply-To: <c9109e8c-e471-4f4c-b58b-fdfe3cb044d2@suse.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0E5:EE_|DM6PR12MB4073:EE_
+X-MS-Office365-Filtering-Correlation-Id: 81b6d592-2cfc-49e6-1c33-08decbce83ac
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|23010399003|376014|7416014|82310400026|36860700016|18002099003|22082099003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info:
+	Qx/VlEK+f8bfzSFTt+fJNTqdZT/ZzuHH9o0uSRBcT/OerZt9AdWjeeIM5IXOq0o3HsdcQCUJaB4PZ2J5ONylmnvudDRYQji3fzWraFU/t2kL3wnzBTqwavwLQu9abivKxED5sJrqtQVsuzUhU9KtriVm5RiF7Ktfiwa2YBClrl0LVOaNyT7wTk3ofyXH6gABsAwyYN4q+W5mUgtWH2EkHJc7sU7k6BfG35BTq3JmthxptG9o8+KkcWE2rNfZ27Ecnn/VAMXlTbK3oyllr90fntE8drprxMTo2yRs34DhGKaTcy+V5KvCq6sRFeO6GKX7XrtnTZJjC9eWiLzyVFdnq0Oo7BlBHrLagvpTM7tQmEaE5WBI4OgpxZAoHGN8axhfbTOIodP2rKX4lRJuJnBk3sqZtAwFRtqebgy3+VGNFFIEDQ4+qOkN0kQ3fzzHT2RkNaQh5jvuNggaU0sGXzqGv1PbR5CoBbk32ylg1vB368H8wUagnJ/U6nhGqFUhIFcRne3GTHE5If415+j9u+PCe7D1L0zsRQW+9SRg4JgUiXi0SnAQHyTmZc3f52IxYNC6Dbu3HbAeMpysvT7jIKnGmMcAK9oSNQCI1xe8D+44gjyhUKsTbfeQfRA47TfH1S38QAt+VHKfSt1P7jPAqgdTKrqoXPkLYhoIPgHWVQ3HEXJ8cIpXITX6BSLJzPMVbZ+DagE1+qcvUkTuRGhvpTosPnXHIf20R9YN2bzmf+OdEj4=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(376014)(7416014)(82310400026)(36860700016)(18002099003)(22082099003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	5k15Kkmm6MsU4ALh+0DtATb8sZ6fKse88TgUN5xtoFBqV0SzrLOlxo4ikpL2g9c9PvHuYqhqIlOlaeAt6v/qyFxgXyE+4eG2GOkH7b+zlrYKwsFrwtT7jisJ5yfjOc3khlBOeCCW/J3mVw9Pj5bmdy7VE0UwzoLjZWMzLQONVBlQcsLGWh+4FrAh/nYauXip1XaNExh0cwYxJUCF6J08NeZEMgz0z3Ba4B+5UMo4UB3jnuT9THWuG+lFtrLijki/w9+JUAQBRiy9UyuQPKc3WAioKR+dh6BnYwSHra/Gan4D0G0sSuANmgHYx0JZXBnNX5CySkWuXFKTNkgRCDNRbV1gbr401JJqzO5jrlxG7f5Y4mG715AD2I+Wl3R7VP2ITSihqDKUg7TWWC7J2y4Ww1Yj7bEF+Wz+2WMSWwU+HTu1VyoO281S47agFNbOgwed
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2026 17:41:36.5636
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 81b6d592-2cfc-49e6-1c33-08decbce83ac
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	MN1PEPF0000F0E5.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4073
+X-purgate-ID: tlsNG-ebf023/1781631701-2997A3FF-A51B6EE9/0/0
 X-purgate-type: clean
-X-purgate-size: 876
+X-purgate-size: 320
 
-On Tue, Jun 16, 2026 at 07:25:52PM +0300, Michael Tokarev wrote:
-> On 13.03.2026 19:47, Thierry Escande wrote:
-> > From: Alexey Gerasimenko <x1917x@gmail.com>
-> > 
-> > There are two small issues in PCIEXBAR address mask handling:
-> > - wrong bit positions for address mask bits (see PCIEXBAR description
-> >    in Q35 datasheet)
-> > - incorrect usage of 64ADR_MASK
-> > 
-> > Due to this, attempting to write a valid PCIEXBAR address may cause it
-> > to shift to another address, causing memory layout corruption where
-> > emulated MMIO regions may overlap real (passed through) MMIO ranges. Fix
-> > this by providing correct values.
+On 2026-06-16 03:52, Jan Beulich wrote:
+> Mirror what 761bb575ce97 ("x86: fix build race when generating temporary
+> object files") did there to other ports: These ..*.cmd files aren't useful
+> to have/keep.
 > 
-> I'm not sure about the implication of this issue, - is it qemu-stable
-> material?
-> 
-> Thanks,
-> 
-> /mjt
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-I think yes generally, but it worries me this has a high risk for
-breaking migration if I missed something.
-
+Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 
