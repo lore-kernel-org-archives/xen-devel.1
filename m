@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70C52CD98E4
-	for <xen-devel@archiver.kernel.org>; Wed, 17 Jun 2026 11:19:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1340111.1601231 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 148F4CD98E4
+	for <xen-devel@archiver.kernel.org>; Wed, 17 Jun 2026 11:19:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1340116.1601251 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wZoI9-0006sk-3p; Wed, 17 Jun 2026 11:18:45 +0000
+	id 1wZoIF-0007lb-HK; Wed, 17 Jun 2026 11:18:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1340111.1601231; Wed, 17 Jun 2026 11:18:44 +0000
+Received: by outflank-mailman (output) from mailman id 1340116.1601251; Wed, 17 Jun 2026 11:18:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wZoI7-0006ng-OK; Wed, 17 Jun 2026 11:18:43 +0000
-Received: by outflank-mailman (input) for mailman id 1340111;
- Wed, 17 Jun 2026 11:18:24 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wZoHn-0003r8-NC
- for xen-devel@lists.xenproject.org; Wed, 17 Jun 2026 11:18:23 +0000
+	id 1wZoIE-0007hM-1l; Wed, 17 Jun 2026 11:18:50 +0000
+Received: by outflank-mailman (input) for mailman id 1340116;
+ Wed, 17 Jun 2026 11:18:28 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wZoHr-00049U-89
+ for xen-devel@lists.xenproject.org; Wed, 17 Jun 2026 11:18:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wZoHn-008naJ-2v
- for xen-devel@lists.xenproject.org; Wed, 17 Jun 2026 13:18:23 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wZoHq-003J0D-FR
+ for xen-devel@lists.xenproject.org; Wed, 17 Jun 2026 13:18:26 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a32827c-5cb7-0a2a0a5109dd-0a2a4509b80c-12
- for <xen-devel@lists.xenproject.org>; Wed, 17 Jun 2026 13:18:23 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a328279-bab6-0a2a0a5309dd-0a2a4504a088-26
+ for <xen-devel@lists.xenproject.org>; Wed, 17 Jun 2026 13:18:26 +0200
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a32827e-2497-0a2a45090019-d155802ce5bf-3
- for <xen-devel@lists.xenproject.org>; Wed, 17 Jun 2026 13:18:23 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-490b4a8e28bso42351645e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 17 Jun 2026 04:18:23 -0700 (PDT)
+ id 6a328282-1dec-0a2a45040019-d1558031bc18-3
+ for <xen-devel@lists.xenproject.org>; Wed, 17 Jun 2026 13:18:26 +0200
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-4921eed3fa2so38395805e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 17 Jun 2026 04:18:26 -0700 (PDT)
 Received: from fedora (user-109-243-148-111.play-internet.pl.
  [109.243.148.111]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4922fa3a8efsm151319985e9.2.2026.06.17.04.18.21
+ 5b1f17b1804b1-4922fa3a8efsm151319985e9.2.2026.06.17.04.18.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jun 2026 04:18:21 -0700 (PDT)
+ Wed, 17 Jun 2026 04:18:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,106 +54,117 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781695102; x=1782299902; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1781695106; x=1782299906; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=2I+oddooa9AtYM/3fWA2kwT7rhEB1jpQvIHH/BXdEDw=;
-        b=Z8jAQSfqx+rDwBrBxxfj1AyWctodXM6vqIGdZRNRUhaQC0Go8bSZerxDTDHlG9ZCG0
-         yRrW9ctqRvhmpBAg7NnurJftHoakboSGYtwVNF1Ms4TpcEzpktJ/Y956Kbmgne0hpgur
-         bFiICGu8p5WlQje6/w8SAJU5OsvxYzuTwxNV03IDApsPXqiT+7F1TnKTa71vBRKpDg4l
-         uTz/xsRiBPZcFK42l9mc2c/bylb8Bb455rH2xqNe1ECCHZalrPYElUmJ2XSXmHWcrkRo
-         XGPPzeEheSqn8kCgxCU311xKpaUDvxHBdP4ocYPFJvuTCIM90JAWUAp0v3g74CqGpaaQ
-         d0Ew==
+        bh=LAKichfwvXiqlJdvvQBNjiMjpG5MCqx/29voflyMUog=;
+        b=hA9PlVgck2nFu7OaJPeTnpRkkPvmKjxL2s1G1npZYM9/mmXozPu/31CLB2+rJalhIU
+         paQIVaehNqEBWoNT3cp04iIznPQShXWHN4uR3cpym5YnQQunudBnQgnoxt6YmcYeh3MR
+         cLFmfHXxhi+8/M/ysE67Yn8puByNjcGaxTPKyu50mu3VN1N2h4ep++OEmwIS40YReEc4
+         CH7L2O85IhKplFnS8S5o2sSLrjUX7EBWHqX41Q64oCcItHtRNpb6qu8QhZpUUMoa2Iz5
+         fWEqew1/mJhLwQ4bNICrBFyN4xDQnNk7wZFGRSc/YdU7bjCXVgI5MQoUFKq3zXO9DBk4
+         sTvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781695102; x=1782299902;
+        d=1e100.net; s=20251104; t=1781695106; x=1782299906;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=2I+oddooa9AtYM/3fWA2kwT7rhEB1jpQvIHH/BXdEDw=;
-        b=NQIeL6REhCY830fbRWPD2vr8th9XJZplXNKytJFNFjZ3RxsQVaY63DvPx/ErCkkWu3
-         W5Jiqr4skdNrLkwBkLxavv5Y0S1QpIoXydk0B1fBBh5y6cMDydpKeyzaXqrYyywCYDvG
-         Of7zF8FtDYjBAJhUmw9V10BTjANQpa+Ofo2MCXLEcCO/lX15whK7o4yhwAlwd9SPH4M1
-         pZIHihCMU//R9Cgd2v+i/lDp2ozPFcyMrn4gsErGdEr9xQukY3en9s/So59njXXgHTo5
-         A7CMgMkYVr5AvCJxYdOudbfs3z0HzMi3+W2Tprb3Dzdy9PCwMDaoupRY6NS4Syb6LeB1
-         8lVA==
-X-Gm-Message-State: AOJu0YzNQLz807TW6dxTxz7XYDrNqltPOkaU8vL5bCbmtu9x6YB/WLUG
-	w4BDRolJkcU6z50Mu2GXXPzwXRZxrCpgMxjZWwr09O0oB/rQf2CNVJlgPx2z4w==
-X-Gm-Gg: Acq92OFeSApRc1ZgBOIHJG32zutgdM7O0el5GlCOXvAnV9j02pBV5oPGIZ4TD5Qj6cv
-	fkGjUkFzhP67wLsKoIUAhSJCiwXD7M03WPviryK7r4sehSK5TU3rhWNJqeV4N6kq/ms32h0vk1y
-	NQYaD1CXrZHi8G9yMlfgqWaQ7DuFA6fVBncfzYDWx/AYMJn8yMJ8UR3xn6KSMBJgKI/3tgPUStC
-	YbHeHUCLGFlvomOCAA76GGMJBaxtaBG5bS6G1SJe5h4VtP2J133RwKN/dI2oLcgBMbMF61o4WP6
-	EXv1hHEiG+uLKtVvQH2X+cDjA1b7ShS3XCqyjT1suZmCmJ0OtoLK/yTzKnYufeEWcbOv8H7O7pJ
-	VqcFcQDgkOlv1GTy/9LXOuztyq7lKofh1cTJYcT2WoqpATilZ4bE0ZSgqVUirdgQ1SjwjXY4Ln6
-	iqZRcTaF6wR88Dbc71lap1MfUhsEDHg9kK2Gd/57jahHi7xxVjoTNY0HJxb/QjaT/x6ygt
-X-Received: by 2002:a05:600c:1554:b0:492:3237:ddf with SMTP id 5b1f17b1804b1-492334282c2mr56391445e9.28.1781695102287;
-        Wed, 17 Jun 2026 04:18:22 -0700 (PDT)
+        bh=LAKichfwvXiqlJdvvQBNjiMjpG5MCqx/29voflyMUog=;
+        b=n8hf5vWYIjMD4dm8VABQ/sHbynLRA1XzaEro/+KZST0eq2jmOH4gHX1BNsav6ZK90V
+         95LIPaU0qPnq7InLUZxwhoxNvWzTnny+5RPaHBFTuwLcGjljTFAY7IsrI1ClBrCPU9rc
+         Za9YMhacNRwO/1yjJVcXsH4SosIZXpuPy2y0nvxVVRxMmjR9abR4YJMKr2nTRFHDeEW+
+         wXde3BHU3epkboUD6UE+PCHvxB3IqXdQFObBHGNCVZ/fV2qTcDKvv+5U11ta+SJm6+4H
+         fGJ3IH0jGHTYEMbK5X2GmydHeVT6+MwLNnPd0hz/KiIwo8Ia+vY4S3I5p3GkZw5CwR/V
+         Vl7Q==
+X-Gm-Message-State: AOJu0YzgMGWnzlrV6SHp1NgaHUwWdJhHJ1sow0einnRxDMWypFc4DP6Z
+	AK7QQfS9PRbEDJG5Czx6woSehzMy/k+wQqdIqwYMORKsyyx+J4CJv+GjMnHq9Q==
+X-Gm-Gg: Acq92OFhNjptczDFGOxrtem7NZ89Q1s8t9GCI+BYA6LMHpIvtiYFSyxhM3z9/ZZBQ8k
+	jXWHyyczRP7R6aHG5N2LWDS6p99GcZW2QyHeadrD7UeD+HyOHaTodAJErdhAzw86LxoBUcJ2VnL
+	kvCI8h0ti0YxlsQpVDb11IX0sKD/5mptOXfmzfu2Nr/1HSwwWMAuhgMRoSZQ+ly2m5A+7rLO95d
+	iCVRPAyZIHtYprsk5y/Eb1T+/urdppFV83IbLoxBRfCFtKZoNiiviYYYLwBqSHNgTXoJaIxuE8j
+	M3fF/zdQ8JDgphht9BlIl0tqwHj3Pje3/juZwLy6uCs8MVv5N6iS0JvP56ZfuB3qGNK1Jjy6HoC
+	BC7ROA1Pe06RPbJWc9iyW6QgBWHKgtRt51D25NvVRqTIxHk+vXwJrqru85oYTghU23gy09nagWR
+	hCqRnp6OOjkc4BlYggS3c9rAN8Y3Lkf+pwWW47xpU1rWD2bWs4OKpW77oa7w==
+X-Received: by 2002:a05:600c:590c:b0:490:b58a:dcc1 with SMTP id 5b1f17b1804b1-49234139cdamr30781995e9.29.1781695105673;
+        Wed, 17 Jun 2026 04:18:25 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 19/23] xen/riscv: implement init_intc_phandle()
-Date: Wed, 17 Jun 2026 13:17:47 +0200
-Message-ID: <c1da6e20bca395b179b43d53d32b3bf3fdc95fbf.1781693963.git.oleksii.kurochko@gmail.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v3 22/23] xen/Kconfig: introduce HAS_STATIC_MEMORY
+Date: Wed, 17 Jun 2026 13:17:50 +0200
+Message-ID: <22c02e188a0b38806f08b7a87f00f03c14aad742.1781693963.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <cover.1781693963.git.oleksii.kurochko@gmail.com>
 References: <cover.1781693963.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1781695103-8B392A53-2CEE405E/10/73395122804
+X-purgate-ID: tlsNG-ebf023/1781695106-411763FF-9ED0E3E4/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 1316
+X-purgate-size: 1677
 
-Implement init_intc_phandle() to read phandle of interrupt controller
-node and save it in kernel->phandle_intc for the future usage during
-creation of guest interrupt controller node.
+Architectures that implement guest_physmap_add_pages() select
+HAS_STATIC_MEMORY; STATIC_MEMORY then depends on it.  ARM selects the
+new flag; RISC-V does not, so CONFIG_STATIC_MEMORY is unavailable there
+and randconfig builds no longer require an explicit STATIC_MEMORY=n
+override to avoid a compilation error.
 
+Suggested-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/riscv/dom0less-build.c | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+Changes in v3:
+ - New patch.
+---
+---
+ xen/arch/arm/Kconfig | 1 +
+ xen/common/Kconfig   | 5 ++++-
+ 2 files changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/riscv/dom0less-build.c b/xen/arch/riscv/dom0less-build.c
-index 4cc00012aa8d..a1fa51b996a7 100644
---- a/xen/arch/riscv/dom0less-build.c
-+++ b/xen/arch/riscv/dom0less-build.c
-@@ -4,9 +4,26 @@
- #include <xen/device_tree.h>
- #include <xen/fdt-kernel.h>
- #include <xen/init.h>
-+#include <xen/libfdt/libfdt.h>
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 683ab7d25a1e..d748404e82da 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -22,6 +22,7 @@ config ARM
+ 	select HAS_GRANT_CACHE_FLUSH if GRANT_TABLE
+ 	select HAS_SHARED_INFO
+ 	select HAS_STACK_PROTECTOR
++	select HAS_STATIC_MEMORY
+ 	select HAS_UBSAN
  
- #include <asm/p2m.h>
+ config ARCH_DEFCONFIG
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index 8b48d84c79e8..6e24f7f4e43b 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -161,6 +161,9 @@ config HAS_SCHED_GRANULARITY
+ config HAS_SHARED_INFO
+ 	bool
  
-+int __init init_intc_phandle(struct kernel_info *kinfo, const char *name,
-+                             const int node_next, const void *pfdt)
-+{
-+    if ( dt_node_cmp(name, "intc") == 0 )
-+    {
-+        uint32_t phandle_intc = fdt_get_phandle(pfdt, node_next);
++config HAS_STATIC_MEMORY
++	bool
 +
-+        if ( phandle_intc != 0 )
-+            kinfo->phandle_intc = phandle_intc;
-+
-+        return 0;
-+    }
-+
-+    return 1;
-+}
-+
- int __init make_arch_nodes(struct kernel_info *kinfo)
- {
-     /* No RISC-V specific nodes need to be made, at the moment. */
+ config HAS_SOFT_RESET
+ 	bool
+ 
+@@ -196,7 +199,7 @@ config NUMA
+ 
+ config STATIC_MEMORY
+ 	bool "Static Allocation Support (UNSUPPORTED)" if UNSUPPORTED
+-	depends on DOM0LESS_BOOT && HAS_DEVICE_TREE_DISCOVERY
++	depends on HAS_STATIC_MEMORY && DOM0LESS_BOOT && HAS_DEVICE_TREE_DISCOVERY
+ 	help
+ 	  Static Allocation refers to system or sub-system(domains) for
+ 	  which memory areas are pre-defined by configuration using physical
 -- 
 2.54.0
 
