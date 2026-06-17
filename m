@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B060FCD98E2
-	for <xen-devel@archiver.kernel.org>; Wed, 17 Jun 2026 09:30:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1339963.1601006 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E593FCD98E4
+	for <xen-devel@archiver.kernel.org>; Wed, 17 Jun 2026 09:58:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1339987.1601016 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wZmbX-0000YQ-4I; Wed, 17 Jun 2026 09:30:39 +0000
+	id 1wZn26-0003yY-7O; Wed, 17 Jun 2026 09:58:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1339963.1601006; Wed, 17 Jun 2026 09:30:39 +0000
+Received: by outflank-mailman (output) from mailman id 1339987.1601016; Wed, 17 Jun 2026 09:58:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wZmbX-0000YJ-1W; Wed, 17 Jun 2026 09:30:39 +0000
-Received: by outflank-mailman (input) for mailman id 1339963;
- Wed, 17 Jun 2026 09:30:38 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wZmbW-0000Y5-27
- for xen-devel@lists.xenproject.org; Wed, 17 Jun 2026 09:30:38 +0000
+	id 1wZn26-0003yR-3Q; Wed, 17 Jun 2026 09:58:06 +0000
+Received: by outflank-mailman (input) for mailman id 1339987;
+ Wed, 17 Jun 2026 09:58:05 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wZn24-0003yJ-Sq
+ for xen-devel@lists.xenproject.org; Wed, 17 Jun 2026 09:58:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wZmbV-002rom-F8
- for xen-devel@lists.xenproject.org; Wed, 17 Jun 2026 11:30:37 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wZn24-00D1SD-9n
+ for xen-devel@lists.xenproject.org; Wed, 17 Jun 2026 11:58:04 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a326939-2eae-0a2a0a5409dd-0a2a4509dc18-28
- for <xen-devel@lists.xenproject.org>; Wed, 17 Jun 2026 11:30:37 +0200
-Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a32693d-2497-0a2a45090019-d155dd35d452-3
- for <xen-devel@lists.xenproject.org>; Wed, 17 Jun 2026 11:30:37 +0200
-Received: by mail-wr1-f53.google.com with SMTP id
- ffacd0b85a97d-45ef29c5561so2984754f8f.0
- for <xen-devel@lists.xenproject.org>; Wed, 17 Jun 2026 02:30:37 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-46289c3b3a3sm4317389f8f.30.2026.06.17.02.30.36
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a326f9d-e002-0a2a0a5209dd-0a2a450bc496-24
+ for <xen-devel@lists.xenproject.org>; Wed, 17 Jun 2026 11:58:04 +0200
+Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a326fab-212f-0a2a450b0019-d1558036c036-3
+ for <xen-devel@lists.xenproject.org>; Wed, 17 Jun 2026 11:58:04 +0200
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-490c1915793so45876525e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 17 Jun 2026 02:58:04 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-148-111.play-internet.pl.
+ [109.243.148.111]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4923685fe90sm1222755e9.1.2026.06.17.02.58.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 17 Jun 2026 02:30:36 -0700 (PDT)
+ Wed, 17 Jun 2026 02:58:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,143 +52,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1781688637; x=1782293437; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=QMsQR2U5brjtKAtTpmkPnvwCIP0z0Kfacg+eux8Vc3U=;
-        b=OgMyCOTMz4/ere7pEoLh5ooQHPaAlodxq05G4u8fDsFqKj7z9CZkY90X+iqMTXu5gx
-         exvqTaTYCiGQTlpR/dMxRMdzO0zWMRkZR6IBPT4LQAW4bZVnrqq1k1BwgYREE2eWu+TA
-         9lEyC0krFYO/XFIveM4ZdyJVuv2QfFkWE6y7cyPOiMbs9Cg3TJ+YuKFA13YavXbvO25b
-         wqoEg1+v5W/4T4jDjxk8/AmDQIrdzEEmKHzLWCp53GkQTeP1yyHaOx3LHXJ9DEcTOl8a
-         6DG72VHxfu9t6310Yb6aMoFIfXeOmC8HSytNmCXPwgJ9tDyLGj0K0aZ5nI5CX/whZfvK
-         8jzQ==
+        d=gmail.com; s=20251104; t=1781690283; x=1782295083; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=JvUHTF6DiDGjhs7DNDSIPta5tRFzJp586rl4ty8f5OM=;
+        b=dMV+Pl5oY3+8y9GE8VLdDwCjYrlqd7Ta+B1I3xCibmfoDsI8gDacVLQxee0qB9drxD
+         ce1XaUuQGuB6zWwO6nmyccLDPk2lWgN3j+ZzUZunFpv5cPpqm7dATo1JrfgQWAixKT8A
+         YFQn31vpWF/rA5NFnrczXTNERtTFQ7nlAZXThCvcerh7M+UROKX/GIPjQ23usbE2iL9y
+         7ONY133ppLhAkknTeew2kgdEObPgoyhPVPprz0xl3TatOywI9wId9LPm8JDLYkBRlEsW
+         76vkdde2HwXEwvmfSbloKHOLQfrJMx0Hzk+RdKMdaXoIfdIKInXuLJwk5pfAb9LKmUw2
+         yITA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781688637; x=1782293437;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QMsQR2U5brjtKAtTpmkPnvwCIP0z0Kfacg+eux8Vc3U=;
-        b=ffgAYsrDTOGOA7C57cUqk7HSidxC1xdVqxZkMfai+ROCdBiIYzH7oqa4U32ZmJm1UV
-         VWWcyprPv2eE5to3OPV3XRIjKLu6fWbXlYopuqDfqBO/jg2AqH/2MM2CbkVorKNvJAlz
-         rfcBGhGLaFtqkjkifmS7qZL5pUnuldENuBiaEVAuhDQROyWoLmZJVW/MjKn+a8HJxr7c
-         LPSjCicAjUQJZWqmCDUqWE6e8apkIHvkWJ1sBju67euDjUn5ndqgNE4Ayk6DZcNJDa7a
-         YkIWhdWevV5NkH5soUeUWWWjaCKI2Jf7LBk6lXwSsXiG6w+owvEVeiO8lHj1hm4W5E3A
-         sUcw==
-X-Gm-Message-State: AOJu0YzBS0BRYajj8FB4Gx1Vt18MxjLXvp0V8m30UdfezofU4xIVR4Rx
-	Aft8S45V9uL15dDzL03s2sogxdkf3Yg6UwwfShpL6d5ffliWEpsP6OgNQbBC4RjO65g2aI54Lhi
-	OpL4=
-X-Gm-Gg: AfdE7ck0ZKrPORDVPmveZ8b8DkZGQPs47+t6pTWf+HAx03RmHmZir8LQz2IcvaSvaol
-	0bR+/kChAPkN3adTaPgcEcxv2izNhPVIMg6+8PiIPo+LYoa5Ho9NY5DTFPun9WzXa8xGGp2ouW0
-	UhMbQclBPdywmCcJnQMhWNIGP7Mn1MK041DTVa7XxppqIbzWA6H0PZ32IiCvcr5hgZOwZfEBIjN
-	Z4p8kd0eIhg+I3h1I4xG6cQiMq9n0xASbcJlA4gFPlEhnm6QTB8Zxa9eIVDXpeadFdWR0aA4nRW
-	DoHmaFsjRoMkTTdSgf5+NPtbjaxspyn/cyd1r1e/DznvYZ/uJI3XCpWw8YZS17fUtKqb+LfAA9c
-	0RT2Q+1FcEhty5SMvDcBvY1kUdswpZIs/fbMdouraMGPxGENkoANXySjTrCQVVntKARBvWkNeHx
-	YA2hzcesMfcy4U+0i4qHz+Z1co5ZNdsi0bTYmWqsSqNIV/257zheZvoiEDthRgCjjK5MmasBRY9
-	W00
-X-Received: by 2002:a05:6000:1889:b0:45e:f31a:7ae6 with SMTP id ffacd0b85a97d-46238f97e32mr5361656f8f.30.1781688636626;
-        Wed, 17 Jun 2026 02:30:36 -0700 (PDT)
-Message-ID: <0446485d-353c-44c6-bf23-7fd373282476@suse.com>
-Date: Wed, 17 Jun 2026 11:30:35 +0200
+        d=1e100.net; s=20251104; t=1781690283; x=1782295083;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=JvUHTF6DiDGjhs7DNDSIPta5tRFzJp586rl4ty8f5OM=;
+        b=ZPEPW2mUknEu6kll9hqDROPd4TL+M4vU0/pleGZluw6TGbtlLMX7T0+kHbWc07OVKI
+         zulv904/FgyN6SKmT0KdOyLCwOtP5u1zm/u0U7jRnT89z3qeBxf2vPa6F0KQXOsNXqgY
+         n80fVn3NnOLfF8zEE6DCYRjh+SdWczSoKGx4yohYXT0U+dNsrqx4wXXqD4seaOITBlqf
+         Lf1hiMBvsPLFKOqv7nnTX6Wz0JoID0fj9ZOxse1UJ2Q/JBWwZTVNxnmU5lSNYiHgA0W+
+         3Q+TFZ0Jb7hdo4VlcAoApxxEp0jH48PhLq769xm8RZP20YZYGfr59iyHCEpZOcSi35mH
+         6fWA==
+X-Forwarded-Encrypted: i=1; AFNElJ8yq6cGkUhcze7qg+ocJDWvnsEDlXZTvNeylODDP1kvLTtdmGgT4IZ5OyuuF0EwJKWUN+PJnsxLOzY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw8uXIRBEnce0cwUUA8PC2gRZ5CMrWQgKCP9OTJ3kHUvjAVCLqi
+	354ZmchuPbk8ZbEzl/5ZcmliKe9Hb0oxv52GrunuTrjnC84LeCvxj9Wl
+X-Gm-Gg: Acq92OFpwpAAH23xZaif8Ns6wzTOb9OQYAuoxzslgfo/FmZO4fuBhIzvzE68zqqDRqF
+	wHPfOc1xX2cXIvTU1/Dt1tkJgw/sbKAzM1troNi7f9K43K9uzuodzCJzUJ4h0BFN+I0Ga9nAVOm
+	VsWj6fu7nCOz05Nc9o1N6dtJ9tKv0nwX6gwZDQk0aM4l/0+SihNh0ewhvJq80W0HaPFr8II3OM0
+	LQfgsdpA7XpMm3mITnPq2KjdddwM3Nh+5prF6xWlhoura73ZYU+VUdKpvNzvm/8WjDq1xeulPii
+	ELTffyJhaa4/ZIKUaj+757bb3n+sG0VFJ48IUbbk4Kn2rqGjAmIhGcsPIhEo4GvXETyrYEE0k+7
+	xVT+cknF6xnTrSXbiMQ2uqYKBAN7oHS4X6k3O+u6BZ0sLYyBRGqb5tzX98IlK5Fjcz5VgRjv1tu
+	DVWV/9gHid0TFf8QPV70YIfW1kNvdW5/k3MMwgfEPEPPHivoc2LdwCJaE6aALcS5ocDaA=
+X-Received: by 2002:a05:600d:4453:10b0:48f:e3e7:3d39 with SMTP id 5b1f17b1804b1-492341086a1mr29527175e9.11.1781690283380;
+        Wed, 17 Jun 2026 02:58:03 -0700 (PDT)
+Message-ID: <1514083e-6fec-4b13-9541-90fe412c40eb@gmail.com>
+Date: Wed, 17 Jun 2026 11:58:00 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2 for-4.22? 7/7] x86/HVM: more checking for
- XEN_DOMCTL_ioport_mapping
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: Re: [PATCH v2 for-4.22? 1/7] sched: introduce specialization of
+ "running only" vcpu_runstate_get()
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Dario Faggioli <dfaggioli@suse.com>,
+ Juergen Gross <jgross@suse.com>, George Dunlap <gwd@xenproject.org>
 References: <ad1eb834-b2f2-4db2-b2fd-9d7f5bb857a9@suse.com>
+ <a35b4b37-edc4-4173-b30c-6ff0fcb44df0@suse.com>
 Content-Language: en-US
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <ad1eb834-b2f2-4db2-b2fd-9d7f5bb857a9@suse.com>
-Content-Type: text/plain; charset=UTF-8
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <a35b4b37-edc4-4173-b30c-6ff0fcb44df0@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1781688637-40762A53-7867D809/10/73395122804
+X-purgate-ID: tlsNG-42698a/1781690284-1815DF3B-3E1953C9/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 2183
+X-purgate-size: 506
 
-When adding ranges, only alter existing ones when there is an exact match.
-Don't accept ranges overlapping existing ones.
 
-When removing ranges, only remove a range if there's an exact match.
-Return an error when the range isn't found.
 
-Fixes: 192c4dabc344 ("domctl and p2m changes for PCI passthru")
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
-Acked-by: Roger Pau Monné <roger.pau@citrix.com>
+On 6/17/26 11:26 AM, Jan Beulich wrote:
+> About half the callers of vcpu_runstate_get() are solely after the
+> "running" time of a vCPU. Introduce a specialization with a smaller
+> read critical section and thus reduced risk of a need for retries.
+> 
+> Signed-off-by: Jan Beulich<jbeulich@suse.com>
+> Acked-by: Roger Pau Monné<roger.pau@citrix.com>
+> Reviewed-by: Juergen Gross<jgross@suse.com>
+> ---
+
 Release-Acked-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-v2: Re-base over change to earlier patch.
 
---- a/xen/arch/x86/domctl.c
-+++ b/xen/arch/x86/domctl.c
-@@ -728,12 +728,14 @@ long arch_do_domctl(
-                    "ioport_map:remove: %pd gport=%x mport=%x nr=%x\n",
-                    d, fgp, fmp, np);
- 
-+            ret = -ENOENT;
-             write_lock(&hvm->g2m_ioport_lock);
-             list_for_each_entry(g2m_ioport, &hvm->g2m_ioport_list, list)
--                if ( g2m_ioport->mport == fmp )
-+                if ( g2m_ioport->mport == fmp && g2m_ioport->np == np )
-                 {
-                     list_del(&g2m_ioport->list);
-                     xfree(g2m_ioport);
-+                    ret = 0;
-                     break;
-                 }
-             write_unlock(&hvm->g2m_ioport_lock);
-@@ -746,14 +748,21 @@ long arch_do_domctl(
- 
-             write_lock(&hvm->g2m_ioport_lock);
-             list_for_each_entry(g2m_ioport, &hvm->g2m_ioport_list, list)
--                if (g2m_ioport->mport == fmp )
-+            {
-+                if ( g2m_ioport->mport == fmp && g2m_ioport->np == np )
-                 {
-                     g2m_ioport->gport = fgp;
--                    g2m_ioport->np = np;
-                     found = 1;
-                     break;
-                 }
--            if ( !found )
-+                if ( fmp + np >= g2m_ioport->mport &&
-+                     g2m_ioport->mport + g2m_ioport->np >= fmp )
-+                {
-+                    ret = -EBUSY;
-+                    break;
-+                }
-+            }
-+            if ( !found && !ret )
-             {
-                 g2m_ioport = xmalloc(struct g2m_ioport);
-                 if ( !g2m_ioport )
+Thanks.
 
+~ Oleksii
 
