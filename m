@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE4FCCD98EE
-	for <xen-devel@archiver.kernel.org>; Wed, 17 Jun 2026 07:12:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1339815.1600890 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B35F5CD98E2
+	for <xen-devel@archiver.kernel.org>; Wed, 17 Jun 2026 07:12:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1339818.1600916 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wZkRh-0001vA-HT; Wed, 17 Jun 2026 07:12:21 +0000
+	id 1wZkRk-0002Y1-HA; Wed, 17 Jun 2026 07:12:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1339815.1600890; Wed, 17 Jun 2026 07:12:21 +0000
+Received: by outflank-mailman (output) from mailman id 1339818.1600916; Wed, 17 Jun 2026 07:12:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wZkRh-0001v3-EW; Wed, 17 Jun 2026 07:12:21 +0000
-Received: by outflank-mailman (input) for mailman id 1339815;
- Wed, 17 Jun 2026 07:12:20 +0000
+	id 1wZkRk-0002Xu-E8; Wed, 17 Jun 2026 07:12:24 +0000
+Received: by outflank-mailman (input) for mailman id 1339818;
+ Wed, 17 Jun 2026 07:12:22 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <taka@valinux.co.jp>) id 1wZkRe-0001uV-UE
- for xen-devel@lists.xenproject.org; Wed, 17 Jun 2026 07:12:20 +0000
+ (envelope-from <taka@valinux.co.jp>) id 1wZkRi-0002FZ-Ku
+ for xen-devel@lists.xenproject.org; Wed, 17 Jun 2026 07:12:22 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wZkRd-00CRyc-Hd
- for xen-devel@lists.xenproject.org; Wed, 17 Jun 2026 09:12:17 +0200
+ id 1wZkRi-00CS1m-1d
+ for xen-devel@lists.xenproject.org; Wed, 17 Jun 2026 09:12:22 +0200
 Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <taka@valinux.co.jp>)
- id 6a3248ce-5cb7-0a2a0a5109dd-0a2a4507bf88-4
- for <xen-devel@lists.xenproject.org>; Wed, 17 Jun 2026 09:12:16 +0200
+ id 6a3248ce-5cb7-0a2a0a5109dd-0a2a4507bf88-26
+ for <xen-devel@lists.xenproject.org>; Wed, 17 Jun 2026 09:12:21 +0200
 Received: from [52.101.125.100]
  (helo=TYVP286CU001.outbound.protection.outlook.com)
  by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <taka@valinux.co.jp>)
- id 6a3248cd-229c-0a2a45070019-34657d648175-3
- for <xen-devel@lists.xenproject.org>; Wed, 17 Jun 2026 09:12:15 +0200
+ id 6a3248cd-229c-0a2a45070019-34657d648175-6
+ for <xen-devel@lists.xenproject.org>; Wed, 17 Jun 2026 09:12:20 +0200
 Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:458::18)
  by OSCP286MB5166.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:34e::5) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.11; Wed, 17 Jun
- 2026 07:12:10 +0000
+ 2026 07:12:16 +0000
 Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  ([fe80::c8c9:25cd:8d13:96d6]) by OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  ([fe80::c8c9:25cd:8d13:96d6%6]) with mapi id 15.21.0139.009; Wed, 17 Jun 2026
- 07:12:10 +0000
+ 07:12:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,156 +57,191 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NxHXBsgOoXjoyDk6O1l0eGLyZOZn8MQRE6jAeJ3Q+Jhk7ydNmuO82xzjSFDb94zZvkAEtTAZxlZGPgPaXeJkxXcZKOU7OmHsiaRA7aVQh+yWOxv8bhYiOsycvhdV+9qV8gt6m9/pNJOV3Hp/TSBsxnTHCIrdCmEtDuDWBSAwlDCQaootohdA/Lq2r5Zww+Sgufe/tbsqXWzwnz8hsWqLkkbjGyvZqavQHnca9Qq9OLiuLggzGv/tbNz9er5pyy85ECNAg7loLQ1v7Pf57eC7a+aqIrrPh1IMSR903dwid20KittTLyfgWr/2d9Tnx09U+B0GkuNrRsWf/vb5X6R9mg==
+ b=c/h2+bgeqLbEgFpdnSBC/dP41RVd3zHUjGAc54s3npr69oYHhdEmsFc28yTZg48nKe9Y7bAD/AiYPk08GwtLbOxPN8O0rpZ0cwXenDUepRlRu45XQ6NBmxBIE3mG/t9bgTDfXFlWMPddKcMd3fKFgtzf3P/LAtCaB1NyZO+dPQQDoW3ArsmBgXDRtZUj3rjijCgVzRK/vkXNIBqbrO28Q0QK57Mgph18PY1mkSwDWUh4msiM4V1yXyzRCK03ho8qR/tQxh/J7w8UNXvzuMGku2tzJdhBoFrh7DnAxAFDmVY9yBB+gnXw+BeyZ/jQOltqGwjuJHhK3/wxQgGASoss5g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wrvMnlsbLcf6hVm7dzLutZZx8hyZIVvC1XpWfdLPeg0=;
- b=bHN/tZXejHRJTTiBBHTxDeaJQkB4RgJLVlwz+th7Vhtx0jU9brUMGb4vT+qYeQzV1A9lPMFG1zcW/kTIRjCPZ7SUkTy3ilBPMWxCHzKYQoghNAkKb/yYX94awynTVuF0iOiLgWMpSlyZ+xYK5SmJC1PdmFaH0vvYjkf5n+u8fAduR/yzMOwa9NhWkAn9tivtYyt3zo0wh5CqiYvYteuzvJnRxooAJ+qgPrancImbHgPzRF4mvfKUEyPgD1doe+jAeaYUZqJUImELnGWCOeZ8jh/+V0zk2iMk9iRQskxVyFqjM59p4XXKgI28c/5wE/XBwIBgtyFl7f8NjLCHqntCLA==
+ bh=k2KTn+T1/dWiIJ4PgQ6w6uI7w9H8uIIvL/CHANCwHAM=;
+ b=HUpbhzcwAgFizpBVSHxA9f/pdoIvaF4BCdI3xy5pzbsqoKQMPNbGH4sIXRJFcsGci133Zk6OVHtUiqD5MYRNmDPBcgCuBOCD7nPnIK2ERSim0HvYbzLQp4q2bfJAhocJmsVc2LkE6Dg9DZF4HY1MteyhnkzfiUBQS5nqY7xgugoyEtTJOvo4dMi7a57mn1klVfvI+v4roa+WC4f6Y8mOSYCu8MXlCLQw8JQywlnrPoag/2L7wvMkLIENkNMCi0T81w5rEYaOyTWRU5rin3H1NsCRWKnH0Zf1fzGYapbyTNmoyqyuDU9m8ykaPiB4AcMPVYbLT5n0qSKcEw7hiyWcTA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
  header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wrvMnlsbLcf6hVm7dzLutZZx8hyZIVvC1XpWfdLPeg0=;
- b=UvE3c/4DOk/5X1AYKsFdvnJOMo2IcKr/MIvcTNvFG9upufrrRCxZXDkzX46LHBEyjnGO+xWodKAe5rzD2BpwsFeWDN4Irwsa6Thy+hCzKhAikGFy+mM+QNm9Cp3BdIndlCOYbGUEBCD4e2HOipJbZSZphkWfpUbIExKzmTKPhCs=
+ bh=k2KTn+T1/dWiIJ4PgQ6w6uI7w9H8uIIvL/CHANCwHAM=;
+ b=JBS1GEuOTsluwOO9fLpvbFO+8rAKJh7HilzGoEEaneoY33u0HYHzxFrkOrGcVfUPR+t6EeWeRqCivEiU49wNhvp64veBaSz6YyL/xDULT8E/P97ztV2lNRukXpm3Tx1VbpGAWMTY691QvJE8kLAOC7GqlyMdedQRTpYA8U3q5/k=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=valinux.co.jp;
 From: Hirokazu Takahashi <taka@valinux.co.jp>
 To: xen-devel@lists.xenproject.org
 Cc: Mykyta_Poturai@epam.com,
-	Hirokazu Takahashi <taka@valinux.co.jp>
-Subject: [PATCH v2 0/3] xen/arm: Device Tree based CPU topology support
-Date: Wed, 17 Jun 2026 16:12:03 +0900
-Message-ID: <20260617071206.265599-1-taka@valinux.co.jp>
+	Hirokazu Takahashi <taka@valinux.co.jp>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Dario Faggioli <dfaggioli@suse.com>,
+	Juergen Gross <jgross@suse.com>,
+	George Dunlap <gwd@xenproject.org>
+Subject: [PATCH v2 3/3] xen/sched: Make cpu_nr_siblings() architecture-specific
+Date: Wed, 17 Jun 2026 16:12:06 +0900
+Message-ID: <20260617071206.265599-4-taka@valinux.co.jp>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260617071206.265599-1-taka@valinux.co.jp>
+References: <20260617071206.265599-1-taka@valinux.co.jp>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: TY6P286CA0036.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:405:3b7::10) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+X-ClientProxiedBy: TY4P286CA0008.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:405:26d::15) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:604:458::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: OS9P286MB7222:EE_|OSCP286MB5166:EE_
-X-MS-Office365-Filtering-Correlation-Id: 108cefe0-dd33-4aaa-d24d-08decc3fbfd0
+X-MS-Office365-Filtering-Correlation-Id: 9bf16b32-487b-4d7d-fdd9-08decc3fc2ed
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|1800799024|23010399003|10070799003|376014|18002099003|56012099006;
+	BCL:0;ARA:13230040|366016|1800799024|23010399003|10070799003|7416014|376014|22082099003|18002099003|56012099006;
 X-Microsoft-Antispam-Message-Info:
-	JYwVZQE3iYQ/J00G2viDSYw+7fVRmUVGI1hcKH4ZYnzntl+IrLGO1KoKjUJB9eIn1l30sr8HILq3PdP4USBF+cn2BFr1jZKk6VKVnNJ3MXyxrcjPvmZ2wRg/K48b9b5FH1Ox4vFvEUyGWCyTjvDOVN28QN4l+Hs2RL70Bfv6zNBlnV27HSrohaH1w/X7ZVc1XdydwVBW82C28+NfciJxx2j1jiweOLbWbL6+qZATqG4AyKGEFQnBkhjL/Mx90jBxchMNdzVCaXTnDhRARqBjcnvJ/lIBJP5vTMgmxOrMA4A1aWuVSpf0E+i8sQN8IaDVVZXbvQ3MxRDgwiZj89YABd4ef4aSOdC8mNN/zV5YmJlgkI2vyMuL5fhSMGUlJ7MYp6ZEDbc2a98Z0qwtMaWuah2F1vdlov+8LDbd+8gIOBKolWuaTpENCI1wUsiIRIZ82+APrhWTrED3hRyZvws0fhp1f6jOvrMjC86CjobcjvnkXmI4loYxDsFjmS8g0jAZcXMMAfV6tGjrenaA98Pg5QRJ6H8k8AntVvZht0QMLvcPnBJPpxX8VbNX2cZOpPltvHRT/wzX2y/4R7jT6lVP6sxIAa/gA/Zee579xsqjKprQphkl9HvCRmFWLrJZgbUJ4NbSUg7sq+kBJUMvcxTft+rXxOA3SldfXzgnivLKUAzrbB2jgpGcIwvmAK0bFMpM
+	GBxlGdtgOAFVEHmhjWaflITYFupOwLbwOnQdJf9uQLFSRuKWUjNHA1BS7RZ5CMPP9Y6PxIggG6yw690vhoTWC6/LQne8IF/sNHUOM7P2sF2RzICChMsBWMBJlEp+xfFS00Kg8iUmZwM2TEmXe5FjOdZKeu52ccPNXdcXE6tGac3Z+WDuLTMxjxatXMkuTjBdOtg0oKmEiCRuE9Pk/UUxznKPmrv5Vb/5woacqVCY2/wz2d/hOzCM/92bkgYNR+57UybBTSJL0GWLCJsUqxkxC3k3EDJRbJSRPmQl/d9jQcjbMryLgpbUTjMdpw5O0DRMmWuSXY1r3ZqF39m9w+gXzFrM3Vhb9g3pHr1yJ6sqIsVc+O6wGjF+myMiCuqjid86591+KEi6Moruj4O2Cj3S1nMjRBlCbBG/PM4xyZ+QQRJMsPZKTR0bemanngqGDlHeMkzXTByJbgWxWNESLckbOTScn9pmw3Bwqr0wlVlnFVGmrYrUpiA5ROJ5GcQFFCz1XCrPQ9/bHeAO/z9p5q7c8d/dnrXwUChoiJ3sOEesat9wTzGPqS0IMJRnwGd7RBEWNs5yQCe4Zt/MBrgMcy6uwGFY0yZDFI8gp+h+1sMBCpjSwDgYqVxj3WDULxPtzNVlb7UP1yyFJn6LyHTeHEjDrIE1ZRG1T7/qXU1dxV6cgoQ1HQ6QrdrRuM3Lj5xAeKyP
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(23010399003)(10070799003)(376014)(18002099003)(56012099006);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(23010399003)(10070799003)(7416014)(376014)(22082099003)(18002099003)(56012099006);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?fGoWXYChP3evONTqt3zLCYORfchlCtwTIYB4UpX0vmlmAAy69Bo2/EGCfVbh?=
- =?us-ascii?Q?1dgWo5jM4o7s7WEWG8+kW6GuPJR3NTMYftmQr/9MQMLNV1E0eOCp2W3GfyDM?=
- =?us-ascii?Q?duRjSC36vFMisYA31CDMQWdyk/se21nu2In9cPW/MekP90+9FUwepeGKZd+1?=
- =?us-ascii?Q?h95676BY1qRVctLNmEiCEnfEm0MRV3gufUWUD15+/JshsHVbRV1HzQWIwp4x?=
- =?us-ascii?Q?FTAHXdSQjNKrHI/lS7OSzVheuMCDvZB2Ks/HuDsp7wS788hjOZX22CeclEov?=
- =?us-ascii?Q?10fyeY9CHTiCZmxAJC+wFBIot5sPtA2B+h+43PaHJWRwqNUOT+WSE/iVycxw?=
- =?us-ascii?Q?vvYDLLptBaKgjNQYZtz0i37i9oJ4Uc3VPn4t/UxzFgouxWmAjTeFnc5PnzG/?=
- =?us-ascii?Q?9m3AV9x5hRRb9Qypz6RQDAdS6F/5L940v9bhXlJc4Lu7H5T8BUzTjiTNEzM8?=
- =?us-ascii?Q?rYpqjmKKi1zFnai1jjt4DHpIeRN+VIryPDzRfc+ceBwNfAZ0fKYgMllVbxk4?=
- =?us-ascii?Q?7qBe9K1UlOjV5e0/VInjuCYgGT1Eu2GGUCcL2H+iJB71SuWz9xfSaEBm0QyW?=
- =?us-ascii?Q?3DaYEHiEhXs+gg7EAbjCLTmmsld361p+PuiY+ITLh3WF+4KztFzt/VP8kuSh?=
- =?us-ascii?Q?ZLHH2Isyu1jJ8NR3u0KeXF5RGAi9jJTeri6anOojRnbnYkTWrHim2QZAGP6R?=
- =?us-ascii?Q?+/z2deUOP2yS5QABwnGfPTX0l3Wj/B4V7mUPzvo8+LF+ffUPOjbcD8g2Wc47?=
- =?us-ascii?Q?K4O9fQY/wI/57Q2RfukEKNzSJtSAwW6X3sewM5XfUBgjRSVkkahg1YuJqoFw?=
- =?us-ascii?Q?yJu7NtjEKEJ3Hnr8WV9cANwz5r4nT30J2Hs4CxWR+zHrRFcemY+q6ayHe6tg?=
- =?us-ascii?Q?dws4DCxA6z1glmQMvVSi1MOO6wM+3JFBLVxaMsDl3bnLK4RdTLEMN/tfx9Ud?=
- =?us-ascii?Q?r8nms1qHn3e+QNoaNuw4qzpAjGTKKvsepaumr9/dxtlZ2c89dVJ+yIcHk7ld?=
- =?us-ascii?Q?9cKqB3dLdeRv2tCIxQGuBsuj8Gv7dOmx4MUDJPVRcUpv4W8PeIjTSPqGyCIa?=
- =?us-ascii?Q?AcvtWs+zIMy0jrQJ3Y+vo5Kf3Te1/1w5qgT++nDvJkLBUBkGsKUUSmi2jBuJ?=
- =?us-ascii?Q?yCA6/MQ313eoj8eKuR1jdE3jR2pRaSx4YpoQmo4CuGkdSAQsPijmsW+c+mEx?=
- =?us-ascii?Q?2FifBkRx51DwuR4xBPsZ1Hc/W9jq44TgL6cH3vjXRG5JcPjHULx+Y7eMCHr5?=
- =?us-ascii?Q?/iF58jr5CO6W/JKUC1X9zcENmjV1ofLbGV9i3A5KxoO8ozPFdSsgkfbnbobi?=
- =?us-ascii?Q?0WAQUJQAVD6KZJgFA5kv4xcgBUSgnSGhR31+p20DXYRd2V3nUVP5p7nNSW0C?=
- =?us-ascii?Q?k0kOLb713x7IPxr+zUTd1Ez4NjE0iZQ+Rwgm83OcA4A1XYvny5NpgQ5feWDx?=
- =?us-ascii?Q?X1WPymvqiQoRcP8rRW+v6yOkXYRMhf3eXHwbzarIpXB15ctpeXATs0nrwHN1?=
- =?us-ascii?Q?nieKjSCO0nqCljrkkGYxzgsPnqjTVeXRaXPGhsNoiMNV2gWa8F4+PIZxPaQT?=
- =?us-ascii?Q?35pCJLNH5TjbTF/q6gAIGJ1Mp/KE4QXbkGj65jGZJhJycx5x5SNuQj6bbNDS?=
- =?us-ascii?Q?zeNd9/uvh7A42BUISVE6anBCImoQyhmnju6hY8/y8FMBAVZbyBkEqQ3RYTBm?=
- =?us-ascii?Q?EfAGsLoTroMWCocKqOURpJJhYFenhci322XVQh85klXyBtuiX0YAiBjVCAVR?=
- =?us-ascii?Q?d57o+Ue66lrTlD9AqpAHJtVNpm9g+KbuV8L7SWKTIvnrEyhiuIlgpsA5eNTI?=
-X-MS-Exchange-AntiSpam-MessageData-1: xpJoJ+qwORoPRQ==
+	=?us-ascii?Q?mwH1gbLRUjDdj6EkY8DRgd2GI9RJ6onISq20dtGffA3A6u2dbkR7Xr69rxno?=
+ =?us-ascii?Q?mMX4T5gekYDEtB1JZI7Atp0q3CYH74pfJvBP+d9V5fOvuEcKwbCqjlTsnimK?=
+ =?us-ascii?Q?RvicmFimEoJ5tuXY1kLQowzbl6kMeNw1fkVX0UPqSRpXIy2G/8aj6t37wCId?=
+ =?us-ascii?Q?s+QIJxguDSKQg0ZPSzXeQQ1ITnv9hrBtXypHHbEzRDpAnHkcUBc7EQ8eonpU?=
+ =?us-ascii?Q?e2udK9qiER3bHqmVgIRkAR5XZ/YbGwbxM3YnRWS32Skne3UkgqtlfkWct2eJ?=
+ =?us-ascii?Q?reb8M2BvgcULOJv7/h9vgnNhj28Wlc6RICLyTnmrG339x5LoIt3lHncRGnqo?=
+ =?us-ascii?Q?AkQPE3kWJwizUT9z0uyvC9TYtEiZUQDNnpSjhO5kMlmpjXxJKa0pp9j/fFcH?=
+ =?us-ascii?Q?J7L/3t5OiNYCqc3n9GYKNRkkcFOtT4ZXXhn27JzpjsS9DHkkB00Diqcf1Uva?=
+ =?us-ascii?Q?Xowq/AdWTOFBVoo7WWKdNAaMqaIQ4PEzYzQDtWzHpKIrBDZslYRvmfVdkGKp?=
+ =?us-ascii?Q?uCjHM1UxiCIeVPUJHggYuM/uIh+cZQ/q9TB6szg7f0ZIRiN/WanXFkXxrmZc?=
+ =?us-ascii?Q?AMWkuY0YCHEjuaiSwO60mh8pZnX+Bk7ufsRJakedjUgYOSQbXzusMUs4s7HF?=
+ =?us-ascii?Q?dSO0vBL/3xv8TCUYbJaCMPjE6i3pv2rKQLacd5KQ75vX5MRgYn+87Ln/GHik?=
+ =?us-ascii?Q?yiBLOpSUjGUW1Jcwnqiobw+uSvEh41l7//XQiIZ7zdgbutUPntWg7q1SMJK7?=
+ =?us-ascii?Q?7ivGS7CSjkFIQzd4/2WAh90ivm8AJShfP32UKbfMEXilj/HMk3S/iP6T3FLt?=
+ =?us-ascii?Q?G7u/jhV8Eo2KS9Cz99t21ABE/Gty5gy8mCBQhQOaX+w+M5GaDJtn3gJSIlfT?=
+ =?us-ascii?Q?O3q8TG2CxT6RS8IpRL7wMM+loCD53wzI8nSG8h/QEoDYrIiAEFFO8OBtSZec?=
+ =?us-ascii?Q?mwl27jUbHZIcGHo3SGw3sz7RUE2jb56vyz5qpiVFimk1ld+VhnTXh7YtrT+B?=
+ =?us-ascii?Q?YuwfDEQidyWLVjThX/+A4KwO8m6Bf2bJjJBAFDaff2xJEoS00gJEJV66H9NU?=
+ =?us-ascii?Q?4IP0jnBKCHL6UlDbVheOSTXGfIWBsv3aZNgIpXq2ZOxgTYPBIaqoS0HbtNEC?=
+ =?us-ascii?Q?cOwDPF0z/3SUyOq5Y4RM6AUKP4vtl1zyqlJpbceLIFURGPrcTenKInEKYrNQ?=
+ =?us-ascii?Q?v2Oys1PTkmYD4FJCTi80b2rQ9ohbm6sOXrd2g7VXrozw+LgJbbvzLOyOXrGx?=
+ =?us-ascii?Q?zR02ueluItkJ4U6nU5qFFuudDFbpaRFNouvK+bWe7ilfDDY5Q1OEr0kXf04p?=
+ =?us-ascii?Q?6MQE0nwEIhSJgUiidiCgJiNNEAiIOVwJ8m7BReT4IjobO1BklIs20CuZYKNc?=
+ =?us-ascii?Q?omsrqWYyFXQ36Goc+9XG6/9FAIkHf/2xUwM2fuh+zxG4ZQeS1I9Rx1b/sTNs?=
+ =?us-ascii?Q?QT12QPmuzqWNBpkdUWRiNTNIKyecXBkDS/jIO8NHOiKQOLhxKvFBQUDJMDp2?=
+ =?us-ascii?Q?QemQ1OSKnlY/64s0Fb48Sy8fIXfvp5EIXqpv1NoiQddZUS6ZnUzGFolJxzWz?=
+ =?us-ascii?Q?JU+o60XLf4wkWSocun/JK+TOKSF8r8cxrqdP1X2zsIbr4r1vsSfgWCEtyqvD?=
+ =?us-ascii?Q?OUwLnDr6bSklZBBLJYJyB32GCJuiGr9iay9kcR9xcWIr3Svu2qPDWGvdCRTH?=
+ =?us-ascii?Q?oYOKcyY++UbxhK0ZM3AYoSNwW6yiUkcb9Boutyt7SDgEqaCbdYnp6wQUf2Cj?=
+ =?us-ascii?Q?xlfFoLrO8VX8PUgzl0STNjv15bbLszLTDz6KrIZazIl5U2xncFzMtBeKDyQE?=
+X-MS-Exchange-AntiSpam-MessageData-1: hQ3eQB43x2EPIA==
 X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: 108cefe0-dd33-4aaa-d24d-08decc3fbfd0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9bf16b32-487b-4d7d-fdd9-08decc3fc2ed
 X-MS-Exchange-CrossTenant-AuthSource: OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2026 07:12:10.7549
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2026 07:12:15.9389
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: E/JTjcDOiQuCtXGJkunn1w7EX71qIJpVzfo97c/UWfyVeUju45Ka7jz7Qjoh4wLFekTdbX3uTTIDDpbcUFLMBw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: E8HoE2elwqm7fwW+Zl8Lp9UioY6ANjBC0M2LqkicMajv5lkOD434BtBkVaQMQwoDaVeLS2yudG8TjKeH/8PezA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSCP286MB5166
-X-purgate-ID: tlsNG-ef75cf/1781680336-20F66C48-0E548BD9/0/0
+X-purgate-ID: tlsNG-ef75cf/1781680341-0A971C48-C0205E46/0/0
 X-purgate-type: clean
-X-purgate-size: 2582
+X-purgate-size: 3169
 
-Hello,
+Make cpu_nr_siblings() an architecture-specific function.
+This patch provides the implementation for x86 and a common
+version for Device Tree-based architectures.
 
-This patch series introduces basic CPU topology support for ARM Xen.
+Signed-off-by: Hirokazu Takahashi <taka@valinux.co.jp>
+---
+ xen/arch/x86/include/asm/processor.h |  1 +
+ xen/common/sched/credit2.c           | 22 +++-------------------
+ xen/include/xen/cpu-topology.h       |  2 ++
+ 3 files changed, 6 insertions(+), 19 deletions(-)
 
-Changes in v2:
- - Generate topology information even when ACPI is enabled. Note that
-   this is a temporary implementation and doesn't yet parse the PPTT
-   (Processor Properties Topology Table).
- - Added support for cpu-map node in Device Tree that doesn't contain
-   explicit cluster node definitions.
-
-Changes in v1 from the previous series "Introduce Device Tree based NUMA
-support for ARM Xen":
-
-1. Optimized Memory Allocation:
-   The series now allocates only the minimum required memory area to manage
-   the essential data for the CPUs.
-
-2. Flexible Device Tree Parsing:
-   The parsing logic no longer depends on the definition order of the 'cpu'
-   nodes and 'cpu-map' nodes in the Device Tree. They can now be read
-   correctly even if their orders do not match.
-
-3. CPU Hotplug Readiness:
-   To support future CPU hotplug, the system assumes that inactive CPUs are
-   also described in the Device Tree. Xen will pre-load and generate the
-   topology information for these inactive CPUs during the boot phase so
-   it stays available in memory.
-
-Thank you,
-Hirokazu Takahashi
-
-Hirokazu Takahashi (3):
-  xen/device-tree: Parse 'cpu-map' node for CPU topology exploration
-  xen/sched: Link CPU topology to scheduler
-  xen/sched: Make cpu_nr_siblings() architecture-specific
-
- xen/arch/arm/Kconfig                  |  11 +
- xen/arch/arm/include/asm/processor.h  |   4 -
- xen/arch/arm/smpboot.c                |  15 +-
- xen/arch/x86/include/asm/processor.h  |   1 +
- xen/common/Kconfig                    |   8 +
- xen/common/Makefile                   |   1 +
- xen/common/cpu-topology.c             |  30 ++
- xen/common/device-tree/Makefile       |   1 +
- xen/common/device-tree/cpu-topology.c | 394 ++++++++++++++++++++++++++
- xen/common/sched/credit2.c            |  21 +-
- xen/common/sysctl.c                   |   1 +
- xen/drivers/acpi/Kconfig              |   3 +
- xen/drivers/acpi/Makefile             |   2 +
- xen/drivers/acpi/topology.c           |  41 +++
- xen/include/xen/acpi.h                |   4 +
- xen/include/xen/cpu-topology.h        |  48 ++++
- xen/include/xen/dt-cpu-topology.h     |  30 ++
- 17 files changed, 591 insertions(+), 24 deletions(-)
- create mode 100644 xen/common/cpu-topology.c
- create mode 100644 xen/common/device-tree/cpu-topology.c
- create mode 100644 xen/drivers/acpi/topology.c
- create mode 100644 xen/include/xen/cpu-topology.h
- create mode 100644 xen/include/xen/dt-cpu-topology.h
-
+diff --git a/xen/arch/x86/include/asm/processor.h b/xen/arch/x86/include/asm/processor.h
+index 8ca6799a81..9758060129 100644
+--- a/xen/arch/x86/include/asm/processor.h
++++ b/xen/arch/x86/include/asm/processor.h
+@@ -106,6 +106,7 @@ extern void intel_init_arat(void);
+ 
+ #define cpu_to_core(_cpu)   (cpu_data[_cpu].cpu_core_id)
+ #define cpu_to_socket(_cpu) (cpu_data[_cpu].phys_proc_id)
++#define cpu_nr_siblings(_cpu) (cpu_data[_cpu].x86_num_siblings)
+ 
+ unsigned int apicid_to_socket(unsigned int apicid);
+ 
+diff --git a/xen/common/sched/credit2.c b/xen/common/sched/credit2.c
+index cd8b7212bc..7623e57549 100644
+--- a/xen/common/sched/credit2.c
++++ b/xen/common/sched/credit2.c
+@@ -29,22 +29,6 @@
+ /* #define d2printk printk */
+ #define d2printk(x...)
+ 
+-/*
+- * TODO: Abstract this properly, and figure out what Credit2 wants to do with
+- *       the fact that x86_num_siblings doesn't even have the same meaning
+- *       between x86 vendors.
+- */
+-static unsigned int cpu_nr_siblings(unsigned int cpu)
+-{
+-#ifdef CONFIG_X86
+-    return cpu_data[cpu].x86_num_siblings;
+-#elif defined(CONFIG_CPU_TOPOLOGY)
+-    return cpu_topology[cpu].num_siblings;
+-#else
+-    return 1;
+-#endif
+-}
+-
+ /*
+  * Credit2 tracing events ("only" 512 available!). Check
+  * include/public/trace.h for more details.
+@@ -882,9 +866,9 @@ cpu_runqueue_match(const struct csched2_runqueue_data *rqd, unsigned int cpu)
+ 
+ /*
+  * Additional checks, to avoid separating siblings in different runqueues.
+- * This deals with both Intel's HTs and AMD's CUs. An arch that does not have
+- * any similar concept will just have cpu_nr_siblings() always return 1, and
+- * setup the cpu_sibling_mask-s acordingly (as currently does ARM), and things
++ * This deals with Intel's HTs, AMD's CUs and ARM's SMT. An arch that
++ * does not have similar concept will just have cpu_nr_siblings() always
++ * return 1, and setup the cpu_sibling_mask-s accordingly, and things
+  * will just work as well.
+  */
+ static bool
+diff --git a/xen/include/xen/cpu-topology.h b/xen/include/xen/cpu-topology.h
+index 3fdbc25e8e..3f748f0384 100644
+--- a/xen/include/xen/cpu-topology.h
++++ b/xen/include/xen/cpu-topology.h
+@@ -24,6 +24,7 @@ void init_cpu_topology(void);
+ 
+ #define cpu_to_core(cpu)   (cpu_topology[cpu].phys_core_id)
+ #define cpu_to_socket(cpu)   (cpu_topology[cpu].phys_socket_id)
++#define cpu_nr_siblings(cpu) (cpu_topology[cpu].num_siblings)
+ 
+ #else /* CONFIG_CPU_TOPOLOGY */
+ 
+@@ -31,6 +32,7 @@ static inline void init_cpu_topology(void) {}
+ 
+ #define cpu_to_core(cpu)   (0U)
+ #define cpu_to_socket(cpu) (0U)
++#define cpu_nr_siblings(cpu) (1U)
+ 
+ #endif /* CONFIG_CPU_TOPOLOGY */
+ 
 -- 
 2.43.0
 
