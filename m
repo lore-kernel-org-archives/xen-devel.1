@@ -4,49 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2BD9CD98F2
-	for <xen-devel@archiver.kernel.org>; Thu, 18 Jun 2026 14:56:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1341288.1601840 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 093ABCD98F2
+	for <xen-devel@archiver.kernel.org>; Thu, 18 Jun 2026 15:04:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1341376.1601856 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waEAN-000317-WB; Thu, 18 Jun 2026 14:56:28 +0000
+	id 1waEHf-0008N4-U7; Thu, 18 Jun 2026 15:03:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1341288.1601840; Thu, 18 Jun 2026 14:56:27 +0000
+Received: by outflank-mailman (output) from mailman id 1341376.1601856; Thu, 18 Jun 2026 15:03:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waEAN-0002zp-O1; Thu, 18 Jun 2026 14:56:27 +0000
-Received: by outflank-mailman (input) for mailman id 1341288;
- Thu, 18 Jun 2026 14:56:27 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19edb3b5d89000701b@swg.vates.tech>)
- id 1waEAM-0002fb-Un
- for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 14:56:26 +0000
+	id 1waEHf-0008Mx-Os; Thu, 18 Jun 2026 15:03:59 +0000
+Received: by outflank-mailman (input) for mailman id 1341376;
+ Thu, 18 Jun 2026 15:03:58 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1waEHe-0008Mr-CX
+ for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 15:03:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1waEAM-002Mnm-Ah
- for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 16:56:26 +0200
-Received: from [10.42.69.2] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19edb3b5d89000701b@swg.vates.tech>)
- id 6a34071a-2eae-0a2a0a5409dd-0a2a4502dd68-2
- for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 16:56:26 +0200
-Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.0)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19edb3b5d89000701b@swg.vates.tech>)
- id 6a3406fe-fdf1-0a2a45020019-b9ff1c12adcb-18
- for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 16:56:26 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19edb3b5d89000701b.005 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 18 Jun 2026 14:56:01 +0000
-Received: from bazzite.gpn.vates.fr (88-188-240-210.subs.proxad.net
- [88.188.240.210]) (Authenticated sender: teddy.astie@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id C5D1C869EE;
- Thu, 18 Jun 2026 16:56:00 +0200 (CEST)
+ id 1waEHd-004UTZ-PQ
+ for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 17:03:57 +0200
+Received: from [10.42.69.3] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a3408c8-bab6-0a2a0a5309dd-0a2a4503c672-46
+ for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 17:03:57 +0200
+Received: from [209.85.218.41] (helo=mail-ej1-f41.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.0)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a3408dd-a3da-0a2a45030019-d155da29e49b-3
+ for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 17:03:57 +0200
+Received: by mail-ej1-f41.google.com with SMTP id
+ a640c23a62f3a-befee9e5ef7so134474466b.0
+ for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 08:03:57 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4619a041986sm39201158f8f.23.2026.06.18.08.03.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 18 Jun 2026 08:03:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,130 +53,104 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=fRXMaPeHOTuWlIP0v2b1JaYKKB7FB37YvQSUSsGNDqE=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=JgIHWLoCu+O46wvh7+cHPSUv2hqzD4HiYSiDR4tJSe+TubtFoS54rcNjKdCKjxMMwwekrB4vd
- n8DyhBLK1NXqp7dAkgPIVZv6/SpKN+VDBhZAuxw6Df9NWPDK/JRGS1grHbiYlW+DSxdaA6u5MP3
- 9BbqbTn+iTQrXgT8F4r/BjXlThztij0FC++iyIbUKWJyUntaW5Rt8r3x98jWbDb+PI9F3jg/z9c
- YJk608KRERkdgHdjablZevDeiPI+cm3K5FuxDQugzajFfkjuopUHT/72K2RJ1IaBkjTZhjOUy5p
- wtuKxMMWdGdnSIt5wSym7Lqezwjuel0lks7V2hIbhCtQ==
-X-Zone-Loop: d2e82ef63d5983737220f029feb7452e993ba78d11bc
-x-campaign-type: default
-x-transaction-id: deb5d271-f86f-4b7c-82fb-2287fdbb1a19
-x-swg-uid: 01-3293f81d-489e-47ef-83df-4fdd94796a0a
-X-Mailer: Sweego
-Message-ID:
- <1781794561.8631fc262581453bbf619ec5b2062170.19edb3b5d89000701b@vates.tech>
-x-swg-bid: 1781794561.8631fc262581453bbf619ec5b2062170.19edb3b5d89000701b
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-From: Teddy Astie <teddy.astie@vates.tech>
-To: xen-devel@lists.xenproject.org
-Cc: Teddy Astie <teddy.astie@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [RFC PATCH v2 15/15] docs: Document support for PCI segment in dbgp and comN parameter
-Date: Thu, 18 Jun 2026 16:50:39 +0200
-In-Reply-To: <cover.1781790171.git.teddy.astie@vates.tech>
-References: <cover.1781790171.git.teddy.astie@vates.tech>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1781795037; x=1782399837; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=MBJiCiqt9fmIlUGG5epJm6L5+xzYynZ9zDpox4hJBRE=;
+        b=Ob8B4y9BWvkLOa4tqS4PnOHYeq5dc+sPibdhm2UytGP/kIclazV2SHgRGI2EGuWnGI
+         rMoAW/XbETEYOTRQNKJ/rh1aq22Db5wabbJKC5d32KjpJh4NXB1Kt5mAL7qN87RpCdIS
+         XimwnlMpn2Y67HSah3iPOq2B/J98aXNAv0M/q0lKSz0G/JK2jR/DaQ9P4OjoN3saGEay
+         PixXt4+Irx0hMF29BAjh6wgzc/nolifQsiJhmKlrQMwsghEy1wTu6ZanEjReTffnrxKC
+         0/Mh1pfyetzuk7b11ZBuefqIjNUap/0UjL41bPaiw2r+g69SvsFu2x8WXISkcQhFLVgV
+         hK5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1781795037; x=1782399837;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=MBJiCiqt9fmIlUGG5epJm6L5+xzYynZ9zDpox4hJBRE=;
+        b=JDwFOf5cnSePq8+WqCuv3Nz8lnAo+Qbbq5CusA98tobzVMj6lqNln3fYI1NWDLKR/Q
+         auu2nSkGi9dljRy+yp9oNxac+RV5imXrZKvphw8I+NkZ0XzDQhasDrD68fDIkuoipmEX
+         kNsDVPWdQeXEVa5DgWdN3osPR4o24LyZAI8OoeepyZCvJ+EWevCQW612G38NjtY+NJdk
+         5DOLhbdeYX8IQhlX2ve3QvDGtLsktrWrnfi4pJR+KpW+Wt6e5wXAlvrOKd7ATZzLNNqk
+         yqkQyC6HJPVgz27PyFkd2fIGzQA6BWiDeYPTRvJcPk50HgSvXQwnfA4wow7XHjid2nNP
+         mlnw==
+X-Forwarded-Encrypted: i=1; AFNElJ9J3e9LEJUVcb3HP+UZ32mS6eJychOutN+49RlF8g/S4yukYkdQnQL2ZHLkTx9cFJSTdfWpYwvTDnQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxMDhzWwBUplUAdDwm6HHeOVP3J0nLf2GCavAeF2xHtqt/Nyrkp
+	q3KfRBvpoW7EO6lrIBlIJr5RTUR3AUdj6OoyAH3QHujKSdq09A/JjKRHXoOVuHdsIQ==
+X-Gm-Gg: AfdE7ck2Cc3N3fLGeA4d+W+2MUf7/OzWiV/4X3t8MYaqz7d3DNTWlhC2av6OPcQ0g2n
+	um32GPJaI8qhfurnhVwFKcQkCjiADJepHQ03YqLRICQZNfgwF76dKRnAbggYs1d9kci2B3NQGBR
+	72lWeEKw3a5B5Z5xYIBw8q3UYZYu+atYnMEkQ/BikO/NIWuVwDr7Z3vXdT8PFC5EJLdtK9PNNcR
+	bqJZw+NCsR7GGeiGRdaEMKqmTSg/xkO9FbRptN/oh3geRklwL5Z93PGLo+1KKt1+hMH8F6ednZj
+	ZUFBgN7xhWqMdUBML50Arva6WcveCMOx/xWpm9fYTf1NR1cXutgvNUiyvgNkJVZ1+Os6Rs+DR++
+	8F+ETllo2DG00SKTu/WLBAfFAP9XRgmdDdUecn1zSHuMd3I9AcZgqpHC+U3KlcHA/8wcfrj3M66
+	8MBOaSb94j//qEbsgQSdYkHz35yO3rhR27rum/HPfCWiqOf3yGE7LB+Z5M7cshyM4Q87ha4wkBn
+	x3g
+X-Received: by 2002:a17:907:3d11:b0:bec:436f:1857 with SMTP id a640c23a62f3a-c05a1f462c9mr594419266b.7.1781795037067;
+        Thu, 18 Jun 2026 08:03:57 -0700 (PDT)
+Message-ID: <3d32d75b-acf2-4ece-bc9f-56cf13eb7a16@suse.com>
+Date: Thu, 18 Jun 2026 17:03:55 +0200
 MIME-Version: 1.0
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.696.eddf84f40497af9f.19edb3b5bf3.6f892e792d2421b9=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1781794561011
-X-purgate-ID: tlsNG-720697/1781794586-460643F3-C6F86228/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH v2 15/15] docs: Document support for PCI segment in
+ dbgp and comN parameter
+To: Teddy Astie <teddy.astie@vates.tech>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1781790171.git.teddy.astie@vates.tech>
+ <1781794561.8631fc262581453bbf619ec5b2062170.19edb3b5d89000701b@vates.tech>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <1781794561.8631fc262581453bbf619ec5b2062170.19edb3b5d89000701b@vates.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-33051d/1781795037-673DCD84-FE32871D/0/0
 X-purgate-type: clean
-X-purgate-size: 3120
+X-purgate-size: 563
 
----=Part.696.eddf84f40497af9f.19edb3b5bf3.6f892e792d2421b9=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+On 18.06.2026 16:50, Teddy Astie wrote:
+> Now that we accept full PCI SBDF (with segments), update the documentation
+> accordingly.
+> 
+> Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
+> ---
+> In principle, it's correct, but I don't think ECAM is usable
+> at the moment EHCI dbgp is initialized, which would prevent
+> the device from being probed correctly if it's not on segment 0.
 
-Now that we accept full PCI SBDF (with segments), update the documentation
-accordingly=2E
+Right, that depends on what the ACPI MCFG table exposes. If you really want
+to allow segment numbers here, the caveat needs mentioning in the updated
+doc.
 
-Signed-off-by: Teddy Astie <teddy=2Eastie@vates=2Etech>
----
-In principle, it's correct, but I don't think ECAM is usable
-at the moment EHCI dbgp is initialized, which would prevent
-the device from being probed correctly if it's not on segment 0=2E
-
-Same remark for comN=2E
----
- docs/misc/xen-command-line=2Epandoc | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
-
-diff --git a/docs/misc/xen-command-line=2Epandoc b/docs/misc/xen-command-l=
-ine=2Epandoc
-index 1c711fa980=2E=2E3b35a1962c 100644
---- a/docs/misc/xen-command-line=2Epandoc
-+++ b/docs/misc/xen-command-line=2Epandoc
-@@ -349,7 +349,7 @@ ACPI indicating none to be there=2E
-=20
- ### com1 (x86)
- ### com2 (x86)
--> `=3D <baud>[/<base-baud>][,[DPS][,[<io-base>|pci|amt][,[<irq>|msi][,[<p=
-ort-bdf>][,[<bridge-bdf>]]]]]]`
-+> `=3D <baud>[/<base-baud>][,[DPS][,[<io-base>|pci|amt][,[<irq>|msi][,[<p=
-ort-sbdf>][,[<bridge-sbdf>]]]]]]`
-=20
- Both option `com1` and `com2` follow the same format=2E
-=20
-@@ -371,10 +371,10 @@ Both option `com1` and `com2` follow the same format=
-=2E
-   registers=2E
- * `<irq>` is the IRQ number to use, or `0` to use the UART in poll
-   mode only, or `msi` to set up a Message Signaled Interrupt=2E
--* `<port-bdf>` is the PCI location of the UART, in
--  `<bus>:<device>=2E<function>` notation=2E
--* `<bridge-bdf>` is the PCI bridge behind which is the UART, in
--  `<bus>:<device>=2E<function>` notation=2E
-+* `<port-sbdf>` is the PCI location of the UART, in
-+  `[<seg>:]<bus>:<device>=2E<function>` notation=2E
-+* `<bridge-sbdf>` is the PCI bridge behind which is the UART, in
-+  `[<seg>:]<bus>:<device>=2E<function>` notation=2E
- * `pci` indicates that Xen should scan the PCI bus for the UART,
-   avoiding Intel AMT devices=2E
- * `amt` indicated that Xen should scan the PCI bus for the UART,
-@@ -731,11 +731,11 @@ for the `all` value=2E If that isn't intended, raise
- the `sched_credit2_max_cpus_runqueue` value=2E
-=20
- ### dbgp
--> `=3D ehci[ <integer> | @pci<bus>:<slot>=2E<func> ]`
--> `=3D xhci[ <integer> | @pci<bus>:<slot>=2E<func> ][,share=3D<bool>|hwdo=
-m]`
-+> `=3D ehci[ <integer> | @pci[<seg>:]<bus>:<slot>=2E<func> ]`
-+> `=3D xhci[ <integer> | @pci[<seg>:]<bus>:<slot>=2E<func> ][,share=3D<bo=
-ol>|hwdom]`
-=20
- Specify the USB controller to use, either by instance number (when going
--over the PCI busses sequentially) or by PCI device (must be on segment 0)=
-=2E
-+over the PCI busses sequentially in segment 0) or by PCI device=2E
-=20
- Use `ehci` for EHCI debug port, use `xhci` for XHCI debug capability=2E
- XHCI driver will wait indefinitely for the debug host to connect - make s=
-ure
---=20
-2=2E54=2E0
-
-
-
--- 
-Teddy Astie | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates s=
-olutions
-
-web: https://vates=2Etech
----=Part.696.eddf84f40497af9f.19edb3b5bf3.6f892e792d2421b9=---
+Jan
 
