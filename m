@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4815ACD98F2
-	for <xen-devel@archiver.kernel.org>; Thu, 18 Jun 2026 12:48:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1341122.1601665 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC94CCD98F2
+	for <xen-devel@archiver.kernel.org>; Thu, 18 Jun 2026 12:49:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1341127.1601676 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waCAU-0000Db-TQ; Thu, 18 Jun 2026 12:48:26 +0000
+	id 1waCBB-0000ge-53; Thu, 18 Jun 2026 12:49:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1341122.1601665; Thu, 18 Jun 2026 12:48:26 +0000
+Received: by outflank-mailman (output) from mailman id 1341127.1601676; Thu, 18 Jun 2026 12:49:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waCAU-0000DU-QO; Thu, 18 Jun 2026 12:48:26 +0000
-Received: by outflank-mailman (input) for mailman id 1341122;
- Thu, 18 Jun 2026 12:48:24 +0000
+	id 1waCBB-0000gX-1E; Thu, 18 Jun 2026 12:49:09 +0000
+Received: by outflank-mailman (input) for mailman id 1341127;
+ Thu, 18 Jun 2026 12:49:07 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dpsmith@apertussolutions.com>) id 1waCAS-0000DL-TY
- for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 12:48:24 +0000
+ (envelope-from <dpsmith@apertussolutions.com>) id 1waCB9-0000gN-Pw
+ for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 12:49:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1waCAS-008J3r-AL
- for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 14:48:24 +0200
+ id 1waCB9-008JRa-6o
+ for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 14:49:07 +0200
 Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <dpsmith@apertussolutions.com>)
- id 6a33e90d-bab6-0a2a0a5309dd-0a2a4506dd22-24
- for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 14:48:24 +0200
+ id 6a33e934-bab6-0a2a0a5309dd-0a2a4506d528-34
+ for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 14:49:06 +0200
 Received: from [136.143.188.51] (helo=sender4-of-o51.zoho.com)
  by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.0)
  (envelope-from <dpsmith@apertussolutions.com>)
- id 6a33e916-b690-0a2a45060019-888fbc3352ad-3
- for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 14:48:23 +0200
-Received: by mx.zohomail.com with SMTPS id 1781786898798317.6092245737033;
- Thu, 18 Jun 2026 05:48:18 -0700 (PDT)
+ id 6a33e940-b690-0a2a45060019-888fbc3352b5-3
+ for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 14:49:05 +0200
+Received: by mx.zohomail.com with SMTPS id 1781786941670217.4886731259653;
+ Thu, 18 Jun 2026 05:49:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,26 +48,26 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=zoho header.d=apertussolutions.com header.i="dpsmith@apertussolutions.com" header.h="Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:In-Reply-To:Content-Type:Content-Transfer-Encoding"
-ARC-Seal: i=1; a=rsa-sha256; t=1781786900; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1781786943; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=eVQQplNMw1wEFWlchmCiEtJmU1WQsb43m39nR8FaTpANhSBQoHNiy91iV9dWq48McZbqW7SoPZGrEbSg2pXXq7Qf6xWbvtF8ZzoCVo5WJ1MOEWb7MHh6J3/TU/5j7lfQkAF4OIXqliVEogP3+JQIb8ROr35F4/gp8likHEUS1+Y=
+	b=V35hGhBAXmI4Sb14UhtVaYgWPyiOlSLqndTPTAB069PMWkIJpKxS64hK03c5NwiHS49zgi/ru0QiRdpY65kMhN9b5wSAxoY8l8PY1AzX8PoKupSRBoUGy3wC0ZpXZ+y3Mi5UROKBFkldex+3lVrv0keZEHceji00v32PYlLrp8I=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1781786900; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=/y6YzxrdyCbDx873EYvdFU92r3+zskvqx7KquP6fQi0=; 
-	b=lxJzsVF6dWDHS7Vr6Wqu8H0v6bAs+9WxoGR73rPPyxHlrgCSjwI4Olx0Y3ok11/hU9qSHDj/tibdV2U5WWyMMLOvkdrrLHZyZXGALnE/J/KPfpgNe2wW+OVWXSYzK9uvSl67lC7SUuuPGbEiYRfl+effyRYkzSRa4aaGNCsIUCs=
+	t=1781786943; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=pILEMyw5gCxqIrCUuBXTTwRSJypX7InxQ7qQLI/bSBI=; 
+	b=n7+iJvVogihZrYC0szI1+oSzoD4oFyZMo1576KsLilXxICRA0pLerG5vrnIlizXRVLce0pCFvT92NnOIcSxmXdyi6utANEHxjd8DK0CJZZCaOmaYlywJeoSn/lPr+7xHJWrWtvxdYvbq6MsKTONCIJXzB/FxzoUL7t3om0aDsug=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1781786900;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1781786942;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=/y6YzxrdyCbDx873EYvdFU92r3+zskvqx7KquP6fQi0=;
-	b=OFg0TKqYsJTytVmdgCEhabLSjEOzgD/RYRWJ0j2Z51kv3R3WE0gE07XUGTbtphJp
-	eDNY6KUok+ahVtwHYJnEt5YxaoAnJ1Llt/Ouka27/cV0AQYDLHw/WFopnYxYZxvMU7c
-	r0zlhhdHw7BUlbd+YWmde3gyOaqJYj25azMBs/ro=
-Message-ID: <d6071252-a8fa-44b5-923e-b08175ab0fa7@apertussolutions.com>
-Date: Thu, 18 Jun 2026 08:48:17 -0400
+	bh=pILEMyw5gCxqIrCUuBXTTwRSJypX7InxQ7qQLI/bSBI=;
+	b=qwY7wTuTCFiQwV+ZoMU3Fada2lh8YnTirHFX+L16aPmU6DMU8x270hvboxrphqGF
+	Dsxq09H9D78ShFH+7cK+RUy55ATXz7W4IgVKHOSrCknDczrvVxVSKtdwSCHk38VHPCn
+	nKuXaJEnMWawPF9StmrLm4e+lVHPe4+NkncUdqb4=
+Message-ID: <23a1961c-29ea-42fe-ab1d-f185af449d37@apertussolutions.com>
+Date: Thu, 18 Jun 2026 08:49:00 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH for-4.22] XSM: guard .sysctl() and .readconsole() hooks
@@ -78,20 +78,22 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 References: <bf642902-7235-45a8-a470-f164a930c0c1@suse.com>
  <8536e453-423d-45a0-bb82-38283eca4786@citrix.com>
  <0604a985-96fc-454f-b9a1-242bc6cce9b6@suse.com>
- <a3e51817-4464-4672-a975-ba76349bab31@apertussolutions.com>
- <243c5119-a016-49f4-919e-efa492b02e5e@suse.com>
+ <e5443d3c-a3ec-4698-b20e-b867f150aa5e@apertussolutions.com>
+ <31bcc003-d876-4298-8edf-3fd3a07eda96@suse.com>
 Content-Language: en-US
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-In-Reply-To: <243c5119-a016-49f4-919e-efa492b02e5e@suse.com>
+In-Reply-To: <31bcc003-d876-4298-8edf-3fd3a07eda96@suse.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
-X-purgate-ID: tlsNG-16d1c6/1781786904-38DFE853-8DA62F5C/0/0
+X-purgate-ID: tlsNG-16d1c6/1781786945-B07FB853-37D78803/0/0
 X-purgate-type: clean
-X-purgate-size: 2766
+X-purgate-size: 2300
 
-On 6/18/26 8:42 AM, Jan Beulich wrote:
-> On 18.06.2026 14:34, Daniel P. Smith wrote:
+
+
+On 6/18/26 8:43 AM, Jan Beulich wrote:
+> On 18.06.2026 14:40, Daniel P. Smith wrote:
 >> On 6/18/26 8:23 AM, Jan Beulich wrote:
 >>> On 18.06.2026 14:13, Andrew Cooper wrote:
 >>>> On 18/06/2026 12:32 pm, Jan Beulich wrote:
@@ -138,25 +140,16 @@ On 6/18/26 8:42 AM, Jan Beulich wrote:
 >>> I have a far more consolidating patch in the works, which is how I actually
 >>> noticed the issue. I'd prefer to keep things as simple as possible here.
 >>
->> By the way, I was going back through this and notices that they are not
->> ifdef out in xsm/dummy.h. Are we relying on them being inlines to ensure
->> that they do not result in dead code?
+>> Would also be good to clean up flask_ops similarly.
 > 
-> I think so. Maybe it's unhelpful that we have
-> 
-
-To be clear, you want to leave as is for now (or at least pick up in 
-another patch)?
-
-> #define XSM_INLINE __maybe_unused
-> 
-> and we may instead better want explicit #ifdef wherever necessary.
+> Hence the "far more consolidating" - that'll happen (implicitly) all in one
+> go.
 > 
 
-It's been a while since I tore that apart, but I believe there is some 
-trickery hidden in XSM_INLINE depending on whether XSM is "on or off". I 
-could be wrong as it's been a while since I tried to unwrap all of it.
+Perfect. Just wanted to be sure it was on your radar.
 
 v/r,
 dps
+
+
 
