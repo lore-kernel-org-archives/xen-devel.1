@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 093ABCD98F2
-	for <xen-devel@archiver.kernel.org>; Thu, 18 Jun 2026 15:04:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1341376.1601856 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE68ACD98F2
+	for <xen-devel@archiver.kernel.org>; Thu, 18 Jun 2026 15:43:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1341410.1601868 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waEHf-0008N4-U7; Thu, 18 Jun 2026 15:03:59 +0000
+	id 1waEtN-0008Qq-Rq; Thu, 18 Jun 2026 15:42:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1341376.1601856; Thu, 18 Jun 2026 15:03:59 +0000
+Received: by outflank-mailman (output) from mailman id 1341410.1601868; Thu, 18 Jun 2026 15:42:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waEHf-0008Mx-Os; Thu, 18 Jun 2026 15:03:59 +0000
-Received: by outflank-mailman (input) for mailman id 1341376;
- Thu, 18 Jun 2026 15:03:58 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1waEtN-0008QP-NR; Thu, 18 Jun 2026 15:42:57 +0000
+Received: by outflank-mailman (input) for mailman id 1341410;
+ Thu, 18 Jun 2026 15:42:10 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1waEHe-0008Mr-CX
- for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 15:03:58 +0000
+ (envelope-from <stojkovicdusan555@gmail.com>) id 1waEsb-0008GB-T0
+ for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 15:42:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1waEHd-004UTZ-PQ
- for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 17:03:57 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1waEsb-002UN8-9l
+ for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 17:42:09 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a3408c8-bab6-0a2a0a5309dd-0a2a4503c672-46
- for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 17:03:57 +0200
-Received: from [209.85.218.41] (helo=mail-ej1-f41.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.0)
- (envelope-from <jbeulich@suse.com>)
- id 6a3408dd-a3da-0a2a45030019-d155da29e49b-3
- for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 17:03:57 +0200
-Received: by mail-ej1-f41.google.com with SMTP id
- a640c23a62f3a-befee9e5ef7so134474466b.0
- for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 08:03:57 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4619a041986sm39201158f8f.23.2026.06.18.08.03.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 18 Jun 2026 08:03:56 -0700 (PDT)
+ (envelope-from <stojkovicdusan555@gmail.com>)
+ id 6a34119d-bab6-0a2a0a5309dd-0a2a450c9a6a-46
+ for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 17:42:09 +0200
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.0)
+ (envelope-from <stojkovicdusan555@gmail.com>)
+ id 6a3411d1-94a4-0a2a450c0019-d155dd31b5b2-3
+ for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 17:42:09 +0200
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-46019edc13dso643109f8f.1
+ for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 08:42:09 -0700 (PDT)
+Received: from RTRKN1313-LIN.domain.local ([89.216.37.146])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4606f2c473bsm69038581f8f.28.2026.06.18.08.42.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Jun 2026 08:42:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,104 +53,154 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:MIME-Version:Subject:Date:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1781795037; x=1782399837; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=MBJiCiqt9fmIlUGG5epJm6L5+xzYynZ9zDpox4hJBRE=;
-        b=Ob8B4y9BWvkLOa4tqS4PnOHYeq5dc+sPibdhm2UytGP/kIclazV2SHgRGI2EGuWnGI
-         rMoAW/XbETEYOTRQNKJ/rh1aq22Db5wabbJKC5d32KjpJh4NXB1Kt5mAL7qN87RpCdIS
-         XimwnlMpn2Y67HSah3iPOq2B/J98aXNAv0M/q0lKSz0G/JK2jR/DaQ9P4OjoN3saGEay
-         PixXt4+Irx0hMF29BAjh6wgzc/nolifQsiJhmKlrQMwsghEy1wTu6ZanEjReTffnrxKC
-         0/Mh1pfyetzuk7b11ZBuefqIjNUap/0UjL41bPaiw2r+g69SvsFu2x8WXISkcQhFLVgV
-         hK5g==
+        d=gmail.com; s=20251104; t=1781797329; x=1782402129; darn=lists.xenproject.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=bwvkO6znXhIa5qM7wiZu9yQsBOrMOtM8ilQjUKeprio=;
+        b=UK5r4pp1pOEtegL19gUPBVrXTWqCAaxPQ3Ek5nQBJJ5FTVf0SgaoTKCpnVz1RikpM7
+         /xqmeczEFoN3z5/0TIe1edIy9CuLRT7YMlejZj5dRgIe68jIxYOFvpt2fF7gx4M0wCgM
+         ah1NFAWXoVD7wQFea4/ROu6H0Z1PlZP9MXMUCIRI135ymbDw/GhnvXfhZU6D1YeJI4mP
+         lQHjuD1F+AHKLcmORCgVXZMDE65TwlVLOSp8JIKevoBc/aQWsxAYUgu9MrX3k/Ln27cU
+         ccaZOziQsmELKgIs+h/f429b4I+smorQd5pDGeO46OKXtxlw8oLzxK1zjOMrCqrzFjav
+         4zqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781795037; x=1782399837;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=MBJiCiqt9fmIlUGG5epJm6L5+xzYynZ9zDpox4hJBRE=;
-        b=JDwFOf5cnSePq8+WqCuv3Nz8lnAo+Qbbq5CusA98tobzVMj6lqNln3fYI1NWDLKR/Q
-         auu2nSkGi9dljRy+yp9oNxac+RV5imXrZKvphw8I+NkZ0XzDQhasDrD68fDIkuoipmEX
-         kNsDVPWdQeXEVa5DgWdN3osPR4o24LyZAI8OoeepyZCvJ+EWevCQW612G38NjtY+NJdk
-         5DOLhbdeYX8IQhlX2ve3QvDGtLsktrWrnfi4pJR+KpW+Wt6e5wXAlvrOKd7ATZzLNNqk
-         yqkQyC6HJPVgz27PyFkd2fIGzQA6BWiDeYPTRvJcPk50HgSvXQwnfA4wow7XHjid2nNP
-         mlnw==
-X-Forwarded-Encrypted: i=1; AFNElJ9J3e9LEJUVcb3HP+UZ32mS6eJychOutN+49RlF8g/S4yukYkdQnQL2ZHLkTx9cFJSTdfWpYwvTDnQ=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxMDhzWwBUplUAdDwm6HHeOVP3J0nLf2GCavAeF2xHtqt/Nyrkp
-	q3KfRBvpoW7EO6lrIBlIJr5RTUR3AUdj6OoyAH3QHujKSdq09A/JjKRHXoOVuHdsIQ==
-X-Gm-Gg: AfdE7ck2Cc3N3fLGeA4d+W+2MUf7/OzWiV/4X3t8MYaqz7d3DNTWlhC2av6OPcQ0g2n
-	um32GPJaI8qhfurnhVwFKcQkCjiADJepHQ03YqLRICQZNfgwF76dKRnAbggYs1d9kci2B3NQGBR
-	72lWeEKw3a5B5Z5xYIBw8q3UYZYu+atYnMEkQ/BikO/NIWuVwDr7Z3vXdT8PFC5EJLdtK9PNNcR
-	bqJZw+NCsR7GGeiGRdaEMKqmTSg/xkO9FbRptN/oh3geRklwL5Z93PGLo+1KKt1+hMH8F6ednZj
-	ZUFBgN7xhWqMdUBML50Arva6WcveCMOx/xWpm9fYTf1NR1cXutgvNUiyvgNkJVZ1+Os6Rs+DR++
-	8F+ETllo2DG00SKTu/WLBAfFAP9XRgmdDdUecn1zSHuMd3I9AcZgqpHC+U3KlcHA/8wcfrj3M66
-	8MBOaSb94j//qEbsgQSdYkHz35yO3rhR27rum/HPfCWiqOf3yGE7LB+Z5M7cshyM4Q87ha4wkBn
-	x3g
-X-Received: by 2002:a17:907:3d11:b0:bec:436f:1857 with SMTP id a640c23a62f3a-c05a1f462c9mr594419266b.7.1781795037067;
-        Thu, 18 Jun 2026 08:03:57 -0700 (PDT)
-Message-ID: <3d32d75b-acf2-4ece-bc9f-56cf13eb7a16@suse.com>
-Date: Thu, 18 Jun 2026 17:03:55 +0200
+        d=1e100.net; s=20251104; t=1781797329; x=1782402129;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=bwvkO6znXhIa5qM7wiZu9yQsBOrMOtM8ilQjUKeprio=;
+        b=LTFAerhgg3B5ijSwxthgZDuddL5Msop/NNzLcNyhkGMqpGI2pmh4Hfl3XGJwqGfux7
+         xfxga87n3NUk2ssN/QlZa5QWTBRju6qd4Xqi8QhaLUbzD2tAUcpUGcNqte4oYHmQDE2w
+         Fc5Xy3mjy7MIF2vu9uWcaz3LMJ3fiJ1iHbAYWspy5sVi4WDYJy6S5jdKqdq1jceWk1i5
+         vKfkWW4B+F2MJr/p+V+Z9rZyL9tHHy6smOAQ+PyiC05k5cKD9dve8HQLKqdp/ENZIQAE
+         LCsYUbERSpmFJ0VlZLb9UuwREXrkUFzj/qx8YdZ5tVHpwr+zOsbCFEe+F7jNthqXLn+S
+         CK4w==
+X-Forwarded-Encrypted: i=1; AFNElJ8wQMrR4VbhRZPM0saUcZPHJ2AtfaZnL7b62qm4EeFXxrCoQL6LQ6xQ19DFOgBD3qZTlPp8EWmNdpo=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yy9y54xrrQaF3swQmo6T2MTF9Ba3PD3GX8pZAUCs+Gnjv7drc6l
+	TkBJlVDvHLFaGL9z+VBzTDsZf8TWJJnwlLixgw6Jn063ah14D0RW3hlP
+X-Gm-Gg: AfdE7cmIflTlRIOZ2fZL+IDxX5JgHKSalXDJTzfvN922PiWfG+WOhMBbk7hh+wHdDeq
+	d+ccjhsB/0YITiDDl3CyfS0ObBhAp6Txbxt/JI99eVDpPdJdCf6AUzA/enS4aTlT3P3/duni8nf
+	jakfGDZ7Ioi/sjTzd7CBLrdLH7RZ3FafJNILPUpe/0bChbglQMZ5oYdLZ7B0G/MGpC8VV1DKteb
+	eOOVYLu46KtEfb93PgwBIrMmta1Yrbgfa2jNGQGRJFoHZ1iOW92IsTjvQ+Y0mrKM4qLmI1hEjYb
+	c0e9XhuSeK0gqIO83n7gKU7/XuFlDzPJXHTzsU8mFYWH2vZOgTMe4XetIHxCHeCzlAtRCofCMOk
+	gAG85KYAKVL8AZub90oZCMVH/dQKiF9JzDeAoLi1sANVCVj9FjEnTfTnR1wgb8NE3fpWd2RvEAh
+	Lm4IE7+6XUPIvQMNS9qvjwKSxboJ31GsgaJHp6PrmkOvYbvSEsU19y
+X-Received: by 2002:a05:6000:2382:b0:45e:df08:b02 with SMTP id ffacd0b85a97d-46240cf9461mr15122509f8f.28.1781797328378;
+        Thu, 18 Jun 2026 08:42:08 -0700 (PDT)
+From: Dusan Stojkovic <stojkovicdusan555@gmail.com>
+Date: Thu, 18 Jun 2026 17:39:36 +0200
+Subject: [PATCH RFC 1/2] vhost: accept Xen guest RAM sections for
+ vhost-user
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2 15/15] docs: Document support for PCI segment in
- dbgp and comN parameter
-To: Teddy Astie <teddy.astie@vates.tech>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1781790171.git.teddy.astie@vates.tech>
- <1781794561.8631fc262581453bbf619ec5b2062170.19edb3b5d89000701b@vates.tech>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1781794561.8631fc262581453bbf619ec5b2062170.19edb3b5d89000701b@vates.tech>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1781795037-673DCD84-FE32871D/0/0
+Message-Id: <20260618-vhost-xen-foreign-mapping-v1-1-7f60a6241971@rt-rk.com>
+References: <20260618-vhost-xen-foreign-mapping-v1-0-7f60a6241971@rt-rk.com>
+In-Reply-To: <20260618-vhost-xen-foreign-mapping-v1-0-7f60a6241971@rt-rk.com>
+To: qemu-devel@nongnu.org
+Cc: "Michael S. Tsirkin" <mst@redhat.com>, 
+ Stefano Garzarella <sgarzare@redhat.com>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Anthony PERARD <anthony@xenproject.org>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ xen-devel@lists.xenproject.org, Viresh Kumar <viresh.kumar@linaro.org>, 
+ Dusan Stojkovic <Dusan.Stojkovic@rt-rk.com>, 
+ Nikola Jelic <Nikola.Jelic@rt-rk.com>
+X-Mailer: b4 0.13.0
+X-purgate-ID: tlsNG-d25034/1781797329-51DF4ABF-D137DFF2/0/0
 X-purgate-type: clean
-X-purgate-size: 563
+X-purgate-size: 3356
 
-On 18.06.2026 16:50, Teddy Astie wrote:
-> Now that we accept full PCI SBDF (with segments), update the documentation
-> accordingly.
-> 
-> Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
-> ---
-> In principle, it's correct, but I don't think ECAM is usable
-> at the moment EHCI dbgp is initialized, which would prevent
-> the device from being probed correctly if it's not on segment 0.
+From: Dusan Stojkovic <Dusan.Stojkovic@rt-rk.com>
 
-Right, that depends on what the ACPI MCFG table exposes. If you really want
-to allow segment numbers here, the caveat needs mentioning in the updated
-doc.
+When QEMU runs as a Xen device model, the guest's RAM is not allocated
+by QEMU and is not backed by a file descriptor that could be shared
+with a vhost-user backend: accesses from QEMU go through the Xen
+mapcache and memory_region_get_fd() returns -1. vhost_section()
+therefore filters out every RAM section, the vhost memory listener
+registers no regions, and starting any vhost-user device fails with
+"Failed initializing vhost-user memory map".
 
-Jan
+With VHOST_USER_PROTOCOL_F_XEN_MMAP the backend does not need an fd or
+a process-local mapping it maps guest memory itself through the Xen
+foreign mapping interface, using the guest physical address and domain
+id. Accept the Xen RAM region in vhost_section() so that it reaches
+the backend's memory table.
+
+The Xen grant region (xen.grants) must never be accepted: grant
+references can only be mapped individually on demand via
+address_space_map(), and deriving a host pointer for the whole region,
+as vhost_region_add_section() does, aborts in the Xen mapcache. Note
+that xen_mr_is_memory() returns true for both the RAM and the grants
+region, so the grants region is excluded explicitly.
+
+Because of the necessity to exlude xen.grants, the missing stub for
+xen_mr_is_grants is added so that it can be called from common code.
+
+Signed-off-by: Dusan Stojkovic <Dusan.Stojkovic@rt-rk.com>
+Signed-off-by: Nikola Jelic <Nikola.Jelic@rt-rk.com>
+---
+ hw/virtio/vhost.c  | 18 ++++++++++++++++++
+ hw/xen/xen_stubs.c |  5 +++++
+ 2 files changed, 23 insertions(+)
+
+diff --git a/hw/virtio/vhost.c b/hw/virtio/vhost.c
+index af41841b52..26770d06d5 100644
+--- a/hw/virtio/vhost.c
++++ b/hw/virtio/vhost.c
+@@ -29,6 +29,7 @@
+ #include "system/dma.h"
+ #include "system/memory.h"
+ #include "system/ramblock.h"
++#include "system/xen.h"
+ #include "trace.h"
+ 
+ /* enabled until disconnected backend stabilizes */
+@@ -657,6 +658,23 @@ static bool vhost_section(struct vhost_dev *dev, MemoryRegionSection *section)
+             return false;
+         }
+ 
++        /*
++         * Under Xen, the guest's RAM is not backed by an fd that
++         * be passed to a vhost-user backend.  The backend instead
++         * guest memory through the Xen foreign mapping interface,
++         * by guest physical address and domain id (see
++         * VHOST_USER_PROTOCOL_F_XEN_MMAP), so accept the Xen RAM
++         * region even though it has no fd.
++         */
++        if (xen_enabled()) {
++            if (xen_mr_is_memory(mr) && !xen_mr_is_grants(mr)) {
++                trace_vhost_section(mr->name);
++                return true;
++            }
++            trace_vhost_reject_section(mr->name, 4);
++            return false;
++        }
++
+         /*
+          * Some backends (like vhost-user) can only handle memory regions
+          * that have an fd (can be mapped into a different process). Filter
+diff --git a/hw/xen/xen_stubs.c b/hw/xen/xen_stubs.c
+index f830768d99..7af39bceb0 100644
+--- a/hw/xen/xen_stubs.c
++++ b/hw/xen/xen_stubs.c
+@@ -29,6 +29,11 @@ bool xen_mr_is_memory(const MemoryRegion *mr)
+     g_assert_not_reached();
+ }
+ 
++bool xen_mr_is_grants(const MemoryRegion *mr)
++{
++    g_assert_not_reached();
++}
++
+ bool xen_map_cache_enabled(void)
+ {
+     return false;
+
+-- 
+2.43.0
+
 
