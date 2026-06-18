@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 552E5CD98F8
-	for <xen-devel@archiver.kernel.org>; Thu, 18 Jun 2026 14:56:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1341260.1601710 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07614CD98FA
+	for <xen-devel@archiver.kernel.org>; Thu, 18 Jun 2026 14:56:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1341262.1601729 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waE9x-00079t-Er; Thu, 18 Jun 2026 14:56:01 +0000
+	id 1waE9z-0007aP-SB; Thu, 18 Jun 2026 14:56:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1341260.1601710; Thu, 18 Jun 2026 14:56:01 +0000
+Received: by outflank-mailman (output) from mailman id 1341262.1601729; Thu, 18 Jun 2026 14:56:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waE9x-00079m-CG; Thu, 18 Jun 2026 14:56:01 +0000
-Received: by outflank-mailman (input) for mailman id 1341260;
- Thu, 18 Jun 2026 14:56:00 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1waE9z-0007aI-Ow; Thu, 18 Jun 2026 14:56:03 +0000
+Received: by outflank-mailman (input) for mailman id 1341262;
+ Thu, 18 Jun 2026 14:56:02 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19edb3b3061000701b@swg.vates.tech>)
- id 1waE9v-00079Y-Mi
- for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 14:56:00 +0000
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19edb3b36a1000701b@swg.vates.tech>)
+ id 1waE9y-0007MU-OO
+ for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 14:56:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1waE9u-00Cuxo-MH
- for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 16:55:58 +0200
+ id 1waE9y-002MfF-56
+ for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 16:56:02 +0200
 Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19edb3b3061000701b@swg.vates.tech>)
- id 6a3406e3-bab6-0a2a0a5309dd-0a2a4502cae6-48
- for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 16:55:58 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19edb3b36a1000701b@swg.vates.tech>)
+ id 6a3406fe-2eae-0a2a0a5409dd-0a2a4502e5c8-10
+ for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 16:56:02 +0200
 Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
  by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.0)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19edb3b3061000701b@swg.vates.tech>)
- id 6a3406fe-fdf1-0a2a45020019-b9ff1c12adcb-3
- for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 16:55:58 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19edb3b36a1000701b@swg.vates.tech>)
+ id 6a3406fe-fdf1-0a2a45020019-b9ff1c12adcb-5
+ for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 16:56:01 +0200
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
  by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19edb3b3061000701b.007 for <xen-devel@lists.xenproject.org>
+ 19edb3b36a1000701b.003 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 18 Jun 2026 14:55:49 +0000
+ Thu, 18 Jun 2026 14:55:51 +0000
 Received: from bazzite.gpn.vates.fr (88-188-240-210.subs.proxad.net
  [88.188.240.210]) (Authenticated sender: teddy.astie@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id 0C19C86962;
- Thu, 18 Jun 2026 16:55:49 +0200 (CEST)
+ by mail2.vates.fr (Postfix) with ESMTPSA id E226686962;
+ Thu, 18 Jun 2026 16:55:50 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,23 +58,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Feedback-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=3HpuD8CbQNQzkNwb00qC62DDh6JfMa667VCsKxtkQno=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:feedback-id;
- b=Q2YDHqqA8ilRpPols3SJBq5lHJWqDie7peiyjfjn5o/Ima0m09LN3cuiS8H3URjYzF/ggs/an
- WMtdkVCp4uBYkAmlJheZjP0Iv4+uQ1XQrgBA2YOMqhX0ihfqaMGoZuUdxG6ouWDiWQ231f8u68V
- Bqxkv+6b3Bhk88pe4gjLlRefm+tuwFi8TW63aQpunDZlAniHKESy+SprcATVMsTM1pKP4CqV00p
- p0M5GvRR23gPgWjTVCchkrpEmVaP4y6RcXWycLBa2XJs0+ZaXIl6I7dSxOLtNl0cHcICRKOb6MO
- lk5qIEAx9U67fNlisUEvu74724p3re60Qr1ttyeM/q2A==
-X-Zone-Loop: 99f1e1665a08adf6df75a9ba7cf0e0458f3665ad176c
+ q=dns/txt; s=selector1; bh=Fly1gc7Vqv+BO0EYHJiZ8E3p8YnSNPkkXYEzHm0nrEA=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=nr9GOOZvgA3vzeU5qIkvQnTydxFJNsSDxHP0+IFYuf8+UvBCRA4eeV3fHHUVe89Xf7f6ZBTd+
+ UPdcFL3e4AjXTP/C1dHVGqlErY8c3c6auhSV0slxGrFEbQ3mNILbIyggzYLG1odOgQJEOkqcQmr
+ o7QNIUy+Iv2OYvCXmiUdKFfjitK0SHCMaFmtrA3ruVyuM+1QMVhO1Zo99RYXXwuUBc/qz4O9T2i
+ 8ZNKzK+qY3qUL83Hbxk4TCK9S68ZbAd0XEsADTOJpyQEUpUVnXL9Q9xevCAzQ6qlw2cpOEtFLMu
+ e4Gl9Sl3/NVHFPzoEAVvOGmi2EVdiv+C4IeJ0Civmb4g==
+X-Zone-Loop: 1c59d048eff1e2211a17efb08f5e69e462764e491163
 x-campaign-type: default
-x-transaction-id: 2e5c8b1f-4d16-48b2-af6b-a83644719617
-x-swg-uid: 01-45ff51fc-074f-441a-aa28-9fe15bb26d8c
+x-transaction-id: 812e8221-129e-4c82-ab95-a72b3430ad4a
+x-swg-uid: 01-aa097cc6-9803-4001-ad2b-2e2919e7b80c
 X-Mailer: Sweego
 Message-ID:
- <1781794549.8631fc262581453bbf619ec5b2062170.19edb3b3061000701b@vates.tech>
-x-swg-bid: 1781794549.8631fc262581453bbf619ec5b2062170.19edb3b3061000701b
+ <1781794551.8631fc262581453bbf619ec5b2062170.19edb3b36a1000701b@vates.tech>
+x-swg-bid: 1781794551.8631fc262581453bbf619ec5b2062170.19edb3b36a1000701b
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
@@ -82,98 +82,170 @@ X-Originating-IP: [37.26.189.201]
 From: Teddy Astie <teddy.astie@vates.tech>
 To: xen-devel@lists.xenproject.org
 Cc: Teddy Astie <teddy.astie@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Jason Andryuk <jason.andryuk@amd.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH v2 00/15] PCI SBDF Refactoring
-Date: Thu, 18 Jun 2026 16:50:24 +0200
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v2 02/15] vtd: Use pci_sbdf_t in acpi_parse_dev_scope()
+Date: Thu, 18 Jun 2026 16:50:26 +0200
+In-Reply-To: <cover.1781790171.git.teddy.astie@vates.tech>
+References: <cover.1781790171.git.teddy.astie@vates.tech>
 MIME-Version: 1.0
 X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.687.8fd8f7efaf5149fc.19edb3b2e2c.7974dafa3a696682=-"
+Content-Type: multipart/alternative; boundary="-=Part.689.de44f08d477252d.19edb3b350e.28553791433b515b=-"
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1781794549292
-X-purgate-ID: tlsNG-720697/1781794558-47E773F3-338C37C6/0/0
+X-Bm-Transport-Timestamp: 1781794551054
+X-purgate-ID: tlsNG-720697/1781794561-4E4623F3-A8DD486C/0/0
 X-purgate-type: clean
-X-purgate-size: 3592
+X-purgate-size: 6353
 
----=Part.687.8fd8f7efaf5149fc.19edb3b2e2c.7974dafa3a696682=-
+---=Part.689.de44f08d477252d.19edb3b350e.28553791433b515b=-
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-The goal of this series is to make some refactoring of some
-pci primitives to improve codegen and make code less verbose=2E
+Use a dedicated pci_sbdf_t struct that we update instead of recreating
+one each time we need it=2E
 
-A big chunk of it is converting many places where (seg, bus, dev, fn)
-is split into multiples variables and into being just pci_sbdf_t,
-in particular in some PCI function parameters to reduce parameter count
-which usually translate into less registers to pass to the function=2E
-Moreover, we also avoid translating back and forth between pci_sbdf_t
-and individual (seg, bus, dev, fn)=2E
+No functional change intended=2E
 
-No major functional change, aside some parts of the codebase that will
-now correctly handle PCI segment when parsed while it was previously
-ignored (e=2Eg dbgp)=2E
-
+Signed-off-by: Teddy Astie <teddy=2Eastie@vates=2Etech>
 ---
-CI: https://gitlab=2Ecom/xen-project/people/tsnake41/xen/-/pipelines/26118=
-29865
+ xen/drivers/passthrough/vtd/dmar=2Ec | 43 ++++++++++++------------------
+ 1 file changed, 17 insertions(+), 26 deletions(-)
 
-v2:
- * Dropped "Migrate pci_mmcfg_{read,write}() to pci=2Ec", to be moved in
-   a separate series
- * fixed dev_sbdf calculation in acpi_parse_dev_scope()=20
- * Updated documentation on ehci_dbgp now accepting segment parameter
-   (but I'm not sure it suffice to allow this interface to use non-0 segme=
-nts)
- * Introduced similar changes for pci_prepare_msix(), pci_ro_device(),
-   pci_hide_device(), pci_remove_device(), pci_add_device()
-   and pci_check_disable_device()
- * Use pci_sbdf_t in struct ehci_dbgp
- * Introduced "vtd: Rewrite igd device check in acpi_parse_dev_scope()"
- * Introduced docs change (RFC)
-
-Teddy Astie (15):
-  pci: Introduce parse_pci_sbdf{_seg}()
-  vtd: Use pci_sbdf_t in acpi_parse_dev_scope()
-  pci: Use pci_sbdf_t in pci_device_detect()
-  pci: Parse into pci_sbdf_t directly
-  pci: Allow ommiting func when parsing with parse_pci_sbdf()
-  pci: Use pci_sbdf_t in pci_prepare_msix()
-  pci: Use pci_sbdf_t in pci_ro_device()
-  pci: Use pci_sbdf_t in pci_hide_device()
-  pci: Use pci_sbdf_t in pci_remove_device()
-  pci: Use pci_sbdf_t in pci_add_device()
-  vtd: Rewrite igd device check in acpi_parse_dev_scope()
-  pci: Use pci_sbdf_t pci_check_disable_device()
-  pci: Drop parse_pci{_seg}()
-  ehci-dbgp: Use pci_sbdf_t instead of (bus, slot, func)
-  RFC: docs: Document support for PCI segment in dbgp and comN parameter
-
- docs/misc/xen-command-line=2Epandoc          | 16 ++--
- xen/arch/x86/include/asm/msi=2Eh             |  2 +-
- xen/arch/x86/msi=2Ec                         |  4 +-
- xen/arch/x86/physdev=2Ec                     | 20 +++--
- xen/drivers/char/ehci-dbgp=2Ec               | 98 ++++++++--------------
- xen/drivers/char/ns16550=2Ec                 | 27 +++---
- xen/drivers/char/xhci-dbc=2Ec                | 12 +--
- xen/drivers/passthrough/amd/iommu_acpi=2Ec   | 26 +++---
- xen/drivers/passthrough/amd/iommu_detect=2Ec |  7 +-
- xen/drivers/passthrough/amd/iommu_init=2Ec   |  3 +-
- xen/drivers/passthrough/pci=2Ec              | 88 ++++++++++---------
- xen/drivers/passthrough/vtd/dmar=2Ec         | 81 +++++++-----------
- xen/drivers/passthrough/vtd/iommu=2Ec        |  3 +-
- xen/drivers/pci/pci=2Ec                      | 40 +++------
- xen/drivers/pci/physdev=2Ec                  |  4 +-
- xen/drivers/video/vga=2Ec                    |  2 +-
- xen/include/xen/pci=2Eh                      | 20 ++---
- 17 files changed, 190 insertions(+), 263 deletions(-)
-
+diff --git a/xen/drivers/passthrough/vtd/dmar=2Ec b/xen/drivers/passthroug=
+h/vtd/dmar=2Ec
+index 2a756831a6=2E=2E71e5a51a58 100644
+--- a/xen/drivers/passthrough/vtd/dmar=2Ec
++++ b/xen/drivers/passthrough/vtd/dmar=2Ec
+@@ -310,7 +310,7 @@ static int __init acpi_parse_dev_scope(
+ {
+     struct acpi_ioapic_unit *acpi_ioapic_unit;
+     const struct acpi_dmar_device_scope *acpi_scope;
+-    u16 bus, sub_bus, sec_bus;
++    u16 sub_bus, sec_bus;
+     const struct acpi_dmar_pci_path *path;
+     struct acpi_drhd_unit *drhd =3D type =3D=3D DMAR_TYPE ?
+         container_of(scope, struct acpi_drhd_unit, scope) : NULL;
+@@ -332,29 +332,27 @@ static int __init acpi_parse_dev_scope(
+=20
+     while ( start < end )
+     {
++        pci_sbdf_t dev_sbdf;
+         acpi_scope =3D start;
+         path =3D (const void *)(acpi_scope + 1);
+         depth =3D (acpi_scope->length - sizeof(*acpi_scope)) / sizeof(*pa=
+th);
+-        bus =3D acpi_scope->bus;
++        dev_sbdf =3D PCI_SBDF(seg, acpi_scope->bus, path->dev, path->fn);
+=20
+         while ( --depth > 0 )
+         {
+-            bus =3D pci_conf_read8(PCI_SBDF(seg, bus, path->dev, path->fn=
+),
+-                                 PCI_SECONDARY_BUS);
++            dev_sbdf=2Ebus =3D pci_conf_read8(dev_sbdf, PCI_SECONDARY_BUS=
+);
+             path++;
++            dev_sbdf=2Edevfn =3D PCI_DEVFN(path->dev, path->fn);
+         }
+=20
+         switch ( acpi_scope->entry_type )
+         {
+         case ACPI_DMAR_SCOPE_TYPE_BRIDGE:
+-            sec_bus =3D pci_conf_read8(PCI_SBDF(seg, bus, path->dev, path=
+->fn),
+-                                     PCI_SECONDARY_BUS);
+-            sub_bus =3D pci_conf_read8(PCI_SBDF(seg, bus, path->dev, path=
+->fn),
+-                                     PCI_SUBORDINATE_BUS);
++            sec_bus =3D pci_conf_read8(dev_sbdf, PCI_SECONDARY_BUS);
++            sub_bus =3D pci_conf_read8(dev_sbdf, PCI_SUBORDINATE_BUS);
+             if ( iommu_verbose )
+                 printk(VTDPREFIX " bridge: %pp start=3D%x sec=3D%x sub=3D=
+%x\n",
+-                       &PCI_SBDF(seg, bus, path->dev, path->fn),
+-                       acpi_scope->bus, sec_bus, sub_bus);
++                       &dev_sbdf, acpi_scope->bus, sec_bus, sub_bus);
+=20
+             dmar_scope_add_buses(scope, sec_bus, sub_bus);
+             gfx_only =3D false;
+@@ -362,8 +360,7 @@ static int __init acpi_parse_dev_scope(
+=20
+         case ACPI_DMAR_SCOPE_TYPE_HPET:
+             if ( iommu_verbose )
+-                printk(VTDPREFIX " MSI HPET: %pp\n",
+-                       &PCI_SBDF(seg, bus, path->dev, path->fn));
++                printk(VTDPREFIX " MSI HPET: %pp\n", &dev_sbdf);
+=20
+             if ( drhd )
+             {
+@@ -374,9 +371,7 @@ static int __init acpi_parse_dev_scope(
+                 if ( !acpi_hpet_unit )
+                     goto out;
+                 acpi_hpet_unit->id =3D acpi_scope->enumeration_id;
+-                acpi_hpet_unit->bus =3D bus;
+-                acpi_hpet_unit->dev =3D path->dev;
+-                acpi_hpet_unit->func =3D path->fn;
++                acpi_hpet_unit->bdf =3D dev_sbdf=2Ebdf;
+                 list_add(&acpi_hpet_unit->list, &drhd->hpet_list);
+=20
+                 gfx_only =3D false;
+@@ -386,16 +381,15 @@ static int __init acpi_parse_dev_scope(
+=20
+         case ACPI_DMAR_SCOPE_TYPE_ENDPOINT:
+             if ( iommu_verbose )
+-                printk(VTDPREFIX " endpoint: %pp\n",
+-                       &PCI_SBDF(seg, bus, path->dev, path->fn));
++                printk(VTDPREFIX " endpoint: %pp\n", &dev_sbdf);
+=20
+-            if ( drhd && pci_device_detect(seg, bus, path->dev, path->fn)=
+ )
++            if ( drhd && pci_device_detect(seg, dev_sbdf=2Ebus, dev_sbdf=
+=2Edev, dev_sbdf=2Efn) )
+             {
+-                if ( pci_conf_read8(PCI_SBDF(seg, bus, path->dev, path->f=
+n),
++                if ( pci_conf_read8(dev_sbdf,
+                                     PCI_CLASS_DEVICE + 1) !=3D 0x03
+                                     /* PCI_BASE_CLASS_DISPLAY */ )
+                     gfx_only =3D false;
+-                else if ( !seg && !bus && path->dev =3D=3D 2 && !path->fn=
+ )
++                else if ( !seg && !dev_sbdf=2Ebus && path->dev =3D=3D 2 &=
+& !path->fn )
+                     igd_drhd_address =3D drhd->address;
+             }
+=20
+@@ -403,8 +397,7 @@ static int __init acpi_parse_dev_scope(
+=20
+         case ACPI_DMAR_SCOPE_TYPE_IOAPIC:
+             if ( iommu_verbose )
+-                printk(VTDPREFIX " IOAPIC: %pp\n",
+-                       &PCI_SBDF(seg, bus, path->dev, path->fn));
++                printk(VTDPREFIX " IOAPIC: %pp\n", &dev_sbdf);
+=20
+             if ( drhd )
+             {
+@@ -413,9 +406,7 @@ static int __init acpi_parse_dev_scope(
+                 if ( !acpi_ioapic_unit )
+                     goto out;
+                 acpi_ioapic_unit->apic_id =3D acpi_scope->enumeration_id;
+-                acpi_ioapic_unit->ioapic=2Ebdf=2Ebus =3D bus;
+-                acpi_ioapic_unit->ioapic=2Ebdf=2Edev =3D path->dev;
+-                acpi_ioapic_unit->ioapic=2Ebdf=2Efunc =3D path->fn;
++                acpi_ioapic_unit->ioapic=2Einfo =3D dev_sbdf=2Ebdf;
+                 list_add(&acpi_ioapic_unit->list, &drhd->ioapic_list);
+=20
+                 gfx_only =3D false;
+@@ -431,7 +422,7 @@ static int __init acpi_parse_dev_scope(
+             gfx_only =3D false;
+             continue;
+         }
+-        scope->devices[didx++] =3D PCI_BDF(bus, path->dev, path->fn);
++        scope->devices[didx++] =3D dev_sbdf=2Ebdf;
+         start +=3D acpi_scope->length;
+     }
+=20
 --=20
 2=2E54=2E0
 
@@ -186,5 +258,5 @@ XCP-ng & Xen Orchestra - Vates s=
 olutions
 
 web: https://vates=2Etech
----=Part.687.8fd8f7efaf5149fc.19edb3b2e2c.7974dafa3a696682=---
+---=Part.689.de44f08d477252d.19edb3b350e.28553791433b515b=---
 
