@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F70BCD98FD
-	for <xen-devel@archiver.kernel.org>; Thu, 18 Jun 2026 14:56:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1341279.1601815 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 169B2CD98F6
+	for <xen-devel@archiver.kernel.org>; Thu, 18 Jun 2026 14:56:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1341284.1601833 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waEAI-0001lm-Rf; Thu, 18 Jun 2026 14:56:22 +0000
+	id 1waEAM-0002cF-Hl; Thu, 18 Jun 2026 14:56:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1341279.1601815; Thu, 18 Jun 2026 14:56:22 +0000
+Received: by outflank-mailman (output) from mailman id 1341284.1601833; Thu, 18 Jun 2026 14:56:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waEAI-0001kT-E7; Thu, 18 Jun 2026 14:56:22 +0000
-Received: by outflank-mailman (input) for mailman id 1341279;
- Thu, 18 Jun 2026 14:56:21 +0000
+	id 1waEAM-0002YP-1r; Thu, 18 Jun 2026 14:56:26 +0000
+Received: by outflank-mailman (input) for mailman id 1341284;
+ Thu, 18 Jun 2026 14:56:24 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19edb3b555d000701b@swg.vates.tech>)
- id 1waEAH-0001WV-H4
- for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 14:56:21 +0000
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19edb3b5af5000701b@swg.vates.tech>)
+ id 1waEAK-0002IC-K3
+ for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 14:56:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1waEAG-008siE-TS
- for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 16:56:20 +0200
+ id 1waEAK-008slh-0K
+ for xen-devel@lists.xenproject.org; Thu, 18 Jun 2026 16:56:24 +0200
 Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19edb3b555d000701b@swg.vates.tech>)
- id 6a34070c-bab6-0a2a0a5309dd-0a2a45028f70-30
- for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 16:56:20 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19edb3b5af5000701b@swg.vates.tech>)
+ id 6a34070c-bab6-0a2a0a5309dd-0a2a45028f70-38
+ for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 16:56:23 +0200
 Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
  by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.0)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19edb3b555d000701b@swg.vates.tech>)
- id 6a3406fe-fdf1-0a2a45020019-b9ff1c12adcb-15
- for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 16:56:20 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19edb3b5af5000701b@swg.vates.tech>)
+ id 6a3406fe-fdf1-0a2a45020019-b9ff1c12adcb-17
+ for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 16:56:23 +0200
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
  by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19edb3b555d000701b.006 for <xen-devel@lists.xenproject.org>
+ 19edb3b5af5000701b.005 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 18 Jun 2026 14:55:59 +0000
+ Thu, 18 Jun 2026 14:56:00 +0000
 Received: from bazzite.gpn.vates.fr (88-188-240-210.subs.proxad.net
  [88.188.240.210]) (Authenticated sender: teddy.astie@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id AB9B4869DB;
- Thu, 18 Jun 2026 16:55:58 +0200 (CEST)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 24815869DB;
+ Thu, 18 Jun 2026 16:56:00 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,21 +60,21 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=uytFSNcEEVv/QYzksGHmSaUjvGJggN3QbN0/FKnR93Q=;
+ q=dns/txt; s=selector1; bh=M+CaKQ7RsEEYxGgoUAduV+bzJkX5OGxE41ecoj48FH0=;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=Mrs0kavr0SjpVSM3swCWe2IzSn9uD7yu5o2zjL3vtYbybzTy74bAc7yD463JbvvkOdIdFhA0/
- DxdpbWqoJlxyQOZO145wkjJ3Gp0FJsOjWofoW9H3Jfb1W2qWoLjOARnK8PSLO4ONWJFSwlkKZiI
- Z6EDTx2dGA0oDQIfBpFsF3HxdhjDmbPfnQmgMbQEtJYnbFNOuOr+RDypP400phIQiTx8P28Fj8I
- ViyMY/RSQlVKG6G1x0xipoVqhZc1AQOHwtv4Kq4VBhIn+gGsiwugxxG8wIoLtVbyvTpHauvHEbe
- 71IhkEHZWQpvbQY4M7OfR3b42TWFSzU/ay7Yf7N+bKAw==
-X-Zone-Loop: 3ed76e2d851a1ce5cccca0528079876d22185c03eacb
+ b=fpo3uJEpwQ2SiYIZ7E9B+rBXP1YxLjAbkaPpEIwI2pMqrmiKJDPjYqfqMtVO2UKpv+vOjsFNh
+ MSiAKt///+zpakMG6Vfc2C7ioYot04n7dnviN5tK7Fu1WcdJNaoK6c/vn/OPfCfjIqlKg3UYPFW
+ Qozy6uH14BrvNrnZMWqKBG2QrBLkNVtq/YB0uBqXAPMO3pp7mrxVk9aZuJsr5KaKC5j+q85ljSh
+ nt9i9jGQDNaXbYqbOTkyMYX8b/TbhPHLPDGAXAfmzxBShz0+C2PqOMKvR7OpWFZ4Eidw+7R7YES
+ /SsHVyh+rOWDaCuJrL1mCgHYRL6ry0wNxzTiocAlGNXA==
+X-Zone-Loop: 97b26e0a2c30f1032c76525fd978103dac85149a1a5a
 x-campaign-type: default
-x-transaction-id: 2d2e438e-e5a1-45c7-b2c4-3a547e6a9f0f
-x-swg-uid: 01-7fdb5cdf-e4d1-430b-8f25-2f3a951e3c42
+x-transaction-id: c427d9a5-2e68-432c-94fd-ed63cc68e37a
+x-swg-uid: 01-043d2f9b-c87d-46a2-b970-0b7983f3c94d
 X-Mailer: Sweego
 Message-ID:
- <1781794559.8631fc262581453bbf619ec5b2062170.19edb3b555d000701b@vates.tech>
-x-swg-bid: 1781794559.8631fc262581453bbf619ec5b2062170.19edb3b555d000701b
+ <1781794560.8631fc262581453bbf619ec5b2062170.19edb3b5af5000701b@vates.tech>
+x-swg-bid: 1781794560.8631fc262581453bbf619ec5b2062170.19edb3b5af5000701b
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
@@ -82,113 +82,272 @@ X-Originating-IP: [37.26.189.201]
 From: Teddy Astie <teddy.astie@vates.tech>
 To: xen-devel@lists.xenproject.org
 Cc: Teddy Astie <teddy.astie@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Jason Andryuk <jason.andryuk@amd.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 12/15] pci: Use pci_sbdf_t pci_check_disable_device()
-Date: Thu, 18 Jun 2026 16:50:36 +0200
+Subject: [PATCH v2 14/15] ehci-dbgp: Use pci_sbdf_t instead of (bus, slot, func)
+Date: Thu, 18 Jun 2026 16:50:38 +0200
 In-Reply-To: <cover.1781790171.git.teddy.astie@vates.tech>
 References: <cover.1781790171.git.teddy.astie@vates.tech>
 MIME-Version: 1.0
 X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.693.7d953f90ff09944a.19edb3b53c8.eaea940e34972e1f=-"
+Content-Type: multipart/alternative; boundary="-=Part.695.623cb6c98c5b1ce1.19edb3b595d.5f4c9347451f755a=-"
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1781794558920
-X-purgate-ID: tlsNG-720697/1781794580-444123F3-98891D09/0/0
+X-Bm-Transport-Timestamp: 1781794560349
+X-purgate-ID: tlsNG-720697/1781794583-45A693F3-1009A4F2/0/0
 X-purgate-type: clean
-X-purgate-size: 3538
+X-purgate-size: 9549
 
----=Part.693.7d953f90ff09944a.19edb3b53c8.eaea940e34972e1f=-
+---=Part.695.623cb6c98c5b1ce1.19edb3b595d.5f4c9347451f755a=-
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-No functional change intended=2E
+We also take the opportunity to allow the device to exist outside
+of segment 0 (only when specified with pci@ syntax), since it's
+not hardcoded anymore=2E
 
 Signed-off-by: Teddy Astie <teddy=2Eastie@vates=2Etech>
 ---
- xen/drivers/passthrough/amd/iommu_init=2Ec | 3 +--
- xen/drivers/passthrough/pci=2Ec            | 4 ++--
- xen/drivers/passthrough/vtd/iommu=2Ec      | 3 +--
- xen/include/xen/pci=2Eh                    | 2 +-
- 4 files changed, 5 insertions(+), 7 deletions(-)
+ xen/drivers/char/ehci-dbgp=2Ec | 71 ++++++++++++------------------------
+ 1 file changed, 24 insertions(+), 47 deletions(-)
 
-diff --git a/xen/drivers/passthrough/amd/iommu_init=2Ec b/xen/drivers/pass=
-through/amd/iommu_init=2Ec
-index e0c8925c33=2E=2Ec2d7201747 100644
---- a/xen/drivers/passthrough/amd/iommu_init=2Ec
-+++ b/xen/drivers/passthrough/amd/iommu_init=2Ec
-@@ -575,8 +575,7 @@ static void cf_check parse_event_log_entry(struct amd_=
-iommu *iommu, u32 entry[])
-=20
-         for ( bdf =3D 0; bdf < ivrs_bdf_entries; bdf++ )
-             if ( get_dma_requestor_id(iommu->sbdf=2Eseg, bdf) =3D=3D devi=
-ce_id )
--                pci_check_disable_device(iommu->sbdf=2Eseg, PCI_BUS(bdf),
--                                         PCI_DEVFN(bdf));
-+                pci_check_disable_device(PCI_SBDF(iommu->sbdf=2Eseg, bdf)=
-);
-     }
-     else
-         printk(XENLOG_ERR "%s %08x %08x %08x %08x\n",
-diff --git a/xen/drivers/passthrough/pci=2Ec b/xen/drivers/passthrough/pci=
+diff --git a/xen/drivers/char/ehci-dbgp=2Ec b/xen/drivers/char/ehci-dbgp=
 =2Ec
-index 17a4931229=2E=2E41ba47ab1d 100644
---- a/xen/drivers/passthrough/pci=2Ec
-+++ b/xen/drivers/passthrough/pci=2Ec
-@@ -1174,14 +1174,14 @@ bool __init pci_device_detect(pci_sbdf_t sbdf)
-     return 1;
+index a9bf7dbadb=2E=2E6d0a6c2ef0 100644
+--- a/xen/drivers/char/ehci-dbgp=2Ec
++++ b/xen/drivers/char/ehci-dbgp=2Ec
+@@ -335,7 +335,8 @@ struct ehci_dbgp {
+     struct timer timer;
+     spinlock_t *lock;
+     bool reset_run;
+-    u8 bus, slot, func, bar;
++    u8 bar;
++    pci_sbdf_t sbdf;
+     u16 pci_cr;
+     u32 bar_val;
+     unsigned int cap;
+@@ -720,9 +721,7 @@ static unsigned int __init find_dbgp(struct ehci_dbgp =
+*dbgp,
+                     continue;
+                 }
+=20
+-                dbgp->bus =3D bus;
+-                dbgp->slot =3D slot;
+-                dbgp->func =3D func;
++                dbgp->sbdf =3D sbdf;
+                 return cap;
+             }
+         }
+@@ -1009,20 +1008,18 @@ static set_debug_port_t __read_mostly set_debug_po=
+rt =3D default_set_debug_port;
+ static void cf_check nvidia_set_debug_port(
+     struct ehci_dbgp *dbgp, unsigned int port)
+ {
+-    uint32_t dword =3D pci_conf_read32(PCI_SBDF(0, dbgp->bus, dbgp->slot,
+-                                              dbgp->func), 0x74);
++    uint32_t dword =3D pci_conf_read32(dbgp->sbdf, 0x74);
+=20
+     dword &=3D ~(0x0f << 12);
+     dword |=3D (port & 0x0f) << 12;
+-    pci_conf_write32(PCI_SBDF(0, dbgp->bus, dbgp->slot, dbgp->func), 0x74=
+,
++    pci_conf_write32(dbgp->sbdf, 0x74,
+                      dword);
+     dbgp_printk("set debug port to %u\n", port);
  }
 =20
--void pci_check_disable_device(u16 seg, u8 bus, u8 devfn)
-+void pci_check_disable_device(pci_sbdf_t sbdf)
+ static void __init detect_set_debug_port(struct ehci_dbgp *dbgp)
  {
-     struct pci_dev *pdev;
-     s_time_t now =3D NOW();
-     u16 cword;
-=20
-     pcidevs_lock();
--    pdev =3D pci_get_real_pdev(PCI_SBDF(seg, bus, devfn));
-+    pdev =3D pci_get_real_pdev(sbdf);
-     if ( pdev )
+-    if ( pci_conf_read16(PCI_SBDF(0, dbgp->bus, dbgp->slot, dbgp->func),
+-                         PCI_VENDOR_ID) =3D=3D 0x10de )
++    if ( pci_conf_read16(dbgp->sbdf, PCI_VENDOR_ID) =3D=3D 0x10de )
      {
-         if ( now < pdev->fault=2Etime ||
-diff --git a/xen/drivers/passthrough/vtd/iommu=2Ec b/xen/drivers/passthrou=
-gh/vtd/iommu=2Ec
-index 3d6f787b3c=2E=2Eee848a6d7e 100644
---- a/xen/drivers/passthrough/vtd/iommu=2Ec
-+++ b/xen/drivers/passthrough/vtd/iommu=2Ec
-@@ -1072,8 +1072,7 @@ static void __do_iommu_page_fault(struct vtd_iommu *=
-iommu)
-         iommu_page_fault_do_one(iommu, type, fault_reason,
-                                 source_id, guest_addr);
+         dbgp_printk("using nvidia set_debug_port\n");
+         set_debug_port =3D nvidia_set_debug_port;
+@@ -1044,15 +1041,13 @@ static void ehci_dbgp_bios_handoff(struct ehci_dbg=
+p *dbgp, u32 hcc_params)
+     if ( !offset )
+         return;
 =20
--        pci_check_disable_device(iommu->drhd->segment,
--                                 PCI_BUS(source_id), PCI_DEVFN(source_id)=
-);
-+        pci_check_disable_device(PCI_SBDF(iommu->drhd->segment, source_id=
-));
+-    cap =3D pci_conf_read32(PCI_SBDF(0, dbgp->bus, dbgp->slot, dbgp->func=
+),
+-                          offset);
++    cap =3D pci_conf_read32(dbgp->sbdf, offset);
+     dbgp_printk("dbgp: EHCI BIOS state %08x\n", cap);
 =20
-         fault_index++;
-         if ( fault_index > cap_num_fault_regs(iommu->cap) )
-diff --git a/xen/include/xen/pci=2Eh b/xen/include/xen/pci=2Eh
-index c065b2cd5c=2E=2E6b8fcd88dd 100644
---- a/xen/include/xen/pci=2Eh
-+++ b/xen/include/xen/pci=2Eh
-@@ -235,7 +235,7 @@ int pci_ro_device(pci_sbdf_t sbdf);
- int pci_hide_device(pci_sbdf_t sbdf);
- struct pci_dev *pci_get_pdev(const struct domain *d, pci_sbdf_t sbdf);
- struct pci_dev *pci_get_real_pdev(pci_sbdf_t sbdf);
--void pci_check_disable_device(u16 seg, u8 bus, u8 devfn);
-+void pci_check_disable_device(pci_sbdf_t sbdf);
+     if ( (cap & 0xff) =3D=3D 1 && (cap & EHCI_USBLEGSUP_BIOS) )
+     {
+         dbgp_printk("dbgp: BIOS handoff\n");
+-        pci_conf_write8(PCI_SBDF(0, dbgp->bus, dbgp->slot, dbgp->func),
+-                        offset + 3, 1);
++        pci_conf_write8(dbgp->sbdf, offset + 3, 1);
+     }
 =20
- /*
-  * Iterate without locking or preemption over all PCI devices known by Xe=
-n=2E
+     /* if boot firmware now owns EHCI, spin till it hands it over=2E */
+@@ -1061,8 +1056,7 @@ static void ehci_dbgp_bios_handoff(struct ehci_dbgp =
+*dbgp, u32 hcc_params)
+     {
+         mdelay(10);
+         msec -=3D 10;
+-        cap =3D pci_conf_read32(PCI_SBDF(0, dbgp->bus, dbgp->slot, dbgp->=
+func),
+-                              offset);
++        cap =3D pci_conf_read32(dbgp->sbdf, offset);
+     }
+=20
+     if ( cap & EHCI_USBLEGSUP_BIOS )
+@@ -1070,13 +1064,11 @@ static void ehci_dbgp_bios_handoff(struct ehci_dbg=
+p *dbgp, u32 hcc_params)
+         /* well, possibly buggy BIOS=2E=2E=2E try to shut it down,
+          * and hope nothing goes too wrong */
+         dbgp_printk("dbgp: BIOS handoff failed: %08x\n", cap);
+-        pci_conf_write8(PCI_SBDF(0, dbgp->bus, dbgp->slot, dbgp->func),
+-                        offset + 2, 0);
++        pci_conf_write8(dbgp->sbdf, offset + 2, 0);
+     }
+=20
+     /* just in case, always disable EHCI SMIs */
+-    pci_conf_write8(PCI_SBDF(0, dbgp->bus, dbgp->slot, dbgp->func),
+-                    offset + EHCI_USBLEGCTLSTS, 0);
++    pci_conf_write8(dbgp->sbdf, offset + EHCI_USBLEGCTLSTS, 0);
+ }
+=20
+ static int ehci_dbgp_setup(struct ehci_dbgp *dbgp)
+@@ -1318,19 +1310,15 @@ static void __init cf_check ehci_dbgp_init_preirq(=
+struct serial_port *port)
+     u32 debug_port, offset;
+     void __iomem *ehci_bar;
+=20
+-    debug_port =3D pci_conf_read32(PCI_SBDF(0, dbgp->bus, dbgp->slot, dbg=
+p->func),
+-                                 dbgp->cap);
++    debug_port =3D pci_conf_read32(dbgp->sbdf, dbgp->cap);
+     offset =3D (debug_port >> 16) & 0xfff;
+=20
+     /* double check if the mem space is enabled */
+-    dbgp->pci_cr =3D pci_conf_read8(PCI_SBDF(0, dbgp->bus, dbgp->slot,
+-                                           dbgp->func),
+-                                  PCI_COMMAND);
++    dbgp->pci_cr =3D pci_conf_read8(dbgp->sbdf, PCI_COMMAND);
+     if ( !(dbgp->pci_cr & PCI_COMMAND_MEMORY) )
+     {
+         dbgp->pci_cr |=3D PCI_COMMAND_MEMORY;
+-        pci_conf_write16(PCI_SBDF(0, dbgp->bus, dbgp->slot, dbgp->func),
+-                         PCI_COMMAND, dbgp->pci_cr);
++        pci_conf_write16(dbgp->sbdf, PCI_COMMAND, dbgp->pci_cr);
+         dbgp_printk("MMIO for EHCI enabled\n");
+     }
+=20
+@@ -1374,7 +1362,7 @@ static void __init cf_check ehci_dbgp_init_postirq(s=
+truct serial_port *port)
+=20
+     ehci_dbgp_setup_postirq(dbgp);
+=20
+-    pci_hide_device(PCI_SBDF(0, dbgp->bus, dbgp->slot, dbgp->func));
++    pci_hide_device(dbgp->sbdf);
+ }
+=20
+ static int ehci_dbgp_check_release(struct ehci_dbgp *dbgp)
+@@ -1395,8 +1383,7 @@ static int ehci_dbgp_check_release(struct ehci_dbgp =
+*dbgp)
+      * so as to allow for reuse of the USB device, which means it is time
+      * to shutdown the USB debug port=2E
+      */
+-    printk(XENLOG_INFO "Releasing EHCI debug port at %02x:%02x=2E%u\n",
+-           dbgp->bus, dbgp->slot, dbgp->func);
++    printk(XENLOG_INFO "Releasing EHCI debug port at %pp\n", &dbgp->sbdf)=
+;
+=20
+     if ( dbgp->timer=2Efunction )
+         kill_timer(&dbgp->timer);
+@@ -1429,9 +1416,7 @@ static void cf_check ehci_dbgp_suspend(struct serial=
+_port *port)
+     stop_timer(&dbgp->timer);
+     dbgp->timer=2Eexpires =3D 0;
+=20
+-    dbgp->pci_cr =3D pci_conf_read16(PCI_SBDF(0, dbgp->bus, dbgp->slot,
+-                                            dbgp->func),
+-                                   PCI_COMMAND);
++    dbgp->pci_cr =3D pci_conf_read16(dbgp->sbdf, PCI_COMMAND);
+=20
+     dbgp->state =3D dbgp_unsafe;
+ }
+@@ -1443,10 +1428,8 @@ static void cf_check ehci_dbgp_resume(struct serial=
+_port *port)
+     if ( !dbgp->ehci_debug )
+         return;
+=20
+-    pci_conf_write32(PCI_SBDF(0, dbgp->bus, dbgp->slot, dbgp->func), dbgp=
+->bar,
+-                     dbgp->bar_val);
+-    pci_conf_write16(PCI_SBDF(0, dbgp->bus, dbgp->slot, dbgp->func),
+-                     PCI_COMMAND, dbgp->pci_cr);
++    pci_conf_write32(dbgp->sbdf, dbgp->bar, dbgp->bar_val);
++    pci_conf_write16(dbgp->sbdf, PCI_COMMAND, dbgp->pci_cr);
+=20
+     ehci_dbgp_setup_preirq(dbgp);
+     ehci_dbgp_setup_postirq(dbgp);
+@@ -1503,8 +1486,7 @@ void __init ehci_dbgp_init(void)
+         if ( !dbgp->cap )
+             return;
+=20
+-        dbgp_printk("Found EHCI debug port on %02x:%02x=2E%u\n",
+-                    dbgp->bus, dbgp->slot, dbgp->func);
++        dbgp_printk("Found EHCI debug port on %pp\n", &dbgp->sbdf);
+     }
+     else if ( strncmp(opt_dbgp + 4, "@pci", 4) =3D=3D 0 )
+     {
+@@ -1514,9 +1496,7 @@ void __init ehci_dbgp_init(void)
+         if ( !e || *e )
+             return;
+=20
+-        dbgp->bus =3D sbdf=2Ebus;
+-        dbgp->slot =3D sbdf=2Edev;
+-        dbgp->func =3D sbdf=2Efn;
++        dbgp->sbdf =3D sbdf;
+=20
+         if ( !pci_device_detect(sbdf) )
+             return;
+@@ -1530,8 +1510,7 @@ void __init ehci_dbgp_init(void)
+     else
+         return;
+=20
+-    debug_port =3D pci_conf_read32(PCI_SBDF(0, dbgp->bus, dbgp->slot, dbg=
+p->func),
+-                                 dbgp->cap);
++    debug_port =3D pci_conf_read32(dbgp->sbdf, dbgp->cap);
+     dbgp->bar =3D (debug_port >> 29) & 0x7;
+     dbgp->bar =3D ((dbgp->bar - 1) * 4) + PCI_BASE_ADDRESS_0;
+     offset =3D (debug_port >> 16) & 0xfff;
+@@ -1542,8 +1521,7 @@ void __init ehci_dbgp_init(void)
+         return;
+     }
+=20
+-    dbgp->bar_val =3D bar_val =3D pci_conf_read32(PCI_SBDF(0, dbgp->bus, =
+dbgp->slot,
+-                                                       dbgp->func), dbgp-=
+>bar);
++    dbgp->bar_val =3D bar_val =3D pci_conf_read32(dbgp->sbdf, dbgp->bar);
+     dbgp_printk("bar_val: %08x\n", bar_val);
+     if ( bar_val & ~PCI_BASE_ADDRESS_MEM_MASK )
+     {
+@@ -1570,8 +1548,7 @@ int dbgp_op(const struct physdev_dbgp_op *op)
+     case PHYSDEVOP_DBGP_BUS_UNKNOWN:
+         break;
+     case PHYSDEVOP_DBGP_BUS_PCI:
+-        if ( op->u=2Epci=2Eseg || ehci_dbgp=2Ebus !=3D op->u=2Epci=2Ebus =
+||
+-            PCI_DEVFN(ehci_dbgp=2Eslot, ehci_dbgp=2Efunc) !=3D op->u=2Epc=
+i=2Edevfn )
++        if ( PCI_SBDF(op->u=2Epci=2Eseg, op->u=2Epci=2Ebus, op->u=2Epci=
+=2Edevfn)=2Esbdf !=3D ehci_dbgp=2Esbdf=2Esbdf )
+     default:
+             return 0;
+         break;
 --=20
 2=2E54=2E0
 
@@ -201,5 +360,5 @@ XCP-ng & Xen Orchestra - Vates s=
 olutions
 
 web: https://vates=2Etech
----=Part.693.7d953f90ff09944a.19edb3b53c8.eaea940e34972e1f=---
+---=Part.695.623cb6c98c5b1ce1.19edb3b595d.5f4c9347451f755a=---
 
