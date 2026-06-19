@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31890CD98F6
-	for <xen-devel@archiver.kernel.org>; Fri, 19 Jun 2026 13:05:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1342201.1602440 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F552CD4F26
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Jun 2026 13:05:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1342210.1602507 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waYuM-0001Ib-FF; Fri, 19 Jun 2026 13:05:18 +0000
+	id 1waYuV-0003DC-UY; Fri, 19 Jun 2026 13:05:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1342201.1602440; Fri, 19 Jun 2026 13:05:18 +0000
+Received: by outflank-mailman (output) from mailman id 1342210.1602507; Fri, 19 Jun 2026 13:05:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waYuM-0001IP-Bj; Fri, 19 Jun 2026 13:05:18 +0000
-Received: by outflank-mailman (input) for mailman id 1342201;
- Fri, 19 Jun 2026 13:05:16 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1waYuV-0003AG-MW; Fri, 19 Jun 2026 13:05:27 +0000
+Received: by outflank-mailman (input) for mailman id 1342210;
+ Fri, 19 Jun 2026 13:05:26 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1waYuK-00010L-QY
- for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 13:05:16 +0000
+ (envelope-from <freddy77@gmail.com>) id 1waYuT-0002g9-Sb
+ for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 13:05:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1waYuK-002SWY-7E
- for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 15:05:16 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1waYuT-00D4eo-8R
+ for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 15:05:25 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a353e81-e002-0a2a0a5209dd-0a2a450cb548-30
- for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 15:05:16 +0200
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.0)
+ id 6a353e89-2eae-0a2a0a5409dd-0a2a450ba98e-42
+ for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 15:05:25 +0200
+Received: from [209.85.208.49] (helo=mail-ed1-f49.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.0)
  (envelope-from <freddy77@gmail.com>)
- id 6a353e8c-94a4-0a2a450c0019-d1558036a8d0-3
- for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 15:05:16 +0200
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-490b8ac62baso30805015e9.0
- for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 06:05:16 -0700 (PDT)
+ id 6a353e95-5e53-0a2a450b0019-d155d031d165-3
+ for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 15:05:25 +0200
+Received: by mail-ed1-f49.google.com with SMTP id
+ 4fb4d7f45d1cf-691c5776f35so3063436a12.3
+ for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 06:05:25 -0700 (PDT)
 Received: from localhost.localdomain (8.17.6.51.dyn.plus.net. [51.6.17.8])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4650bc428d9sm7960088f8f.27.2026.06.19.06.05.14
+ ffacd0b85a97d-4650bc428d9sm7960088f8f.27.2026.06.19.06.05.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jun 2026 06:05:14 -0700 (PDT)
+ Fri, 19 Jun 2026 06:05:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,41 +55,41 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781874316; x=1782479116; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1781874325; x=1782479125; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=qiBtoR80avPCt1Z1nhixmjeXxAuRwAb8Srdl+oua2xY=;
-        b=RRVipjTU7RYi/Ez12IBJ7rRmLwtoz8Z8zGgAv0jVbxt1y0obdx7037lkq28051VvI4
-         pvGWJp4rW6Gix9noY6qBhwyVgK+JBJwYAcju1zg3Y+T9cmEMd8fJEaMu1O8TqyI+ULQ7
-         UWeaAFTT+pz+9zbbRi3bgu6/iz+rYgmKfmvCM4bnFpPuyiajeQMkKPRZSp+hfAGrmiOE
-         N7N4IOPM4u/n0abi+8NsxjCj4ebLy80LzPXY85AvN6wGXkH3KDrBtNaT4yYNpmCZvtZY
-         fRAP0GZU9TJGi03kIjI/obSOa+AvDU/1IPI54wcv2KptrfPsxlrSZRqsFN7DfrYIl4gM
-         HZAA==
+        bh=i4GbNTJWWlsCX/SdHZdLeLVQ6qJfL6Y1RCmWUuA0EmY=;
+        b=EJ8dzguCRr6U8zSKQmMMdzyLHRyT2qiVRwecqJV3Zd6o4phmjfmw18EDCwfkpwmS95
+         9X4C723tFtgvnohIFXUkBWuqx0Kh29842nBLhtPTP9zTB+qppxU9+4km/hDcJ1z9KBey
+         bUXLLS4EThkhpBfyJGpISxitIQJTWn4HpsT6ZwBjAVeL6XvxJOFbESTfYnCwC4Bwsi4d
+         HXg/BoGNOfQ4rHqK40RUy5Km2vS5UhnLcgv8DsmWyrKvdxwO33v2Gpv551aaKGMFeRlO
+         Hj0QWurEG0PONphN1k4jUMCMIEMO+IUdP3x/9c1GK5EDbL4qYS7DvXOYfRm0y00riIrj
+         cvXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781874316; x=1782479116;
+        d=1e100.net; s=20251104; t=1781874325; x=1782479125;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=qiBtoR80avPCt1Z1nhixmjeXxAuRwAb8Srdl+oua2xY=;
-        b=PRxWGHJS6izsb+7yfcGYisx3UA5w1a5HciMmXJEk9Nl7EzqV7y6N+IKYLI96/LU1CD
-         /zmtlj42V2NUx0MFJykqeTrx57ncz/wJA5bXjsZ1N4/YDKEmfXYYMa/3sOG2grjR5h6u
-         zn+fUUvtIqF14gW7t/bWGkw9HWLXHoijVJgnQMDJRmv/ixw2IUbOCLSQFMJkjKrYa8rH
-         62hnkSiFVHeUMbE0xE0hJuijH0BKf8LVDGklz5dB9tyvIX3iQd3DpoesXrv0bpnELNiv
-         eyQi6i0AinFnbbhJQrgY826/vlSI/1/+WO+E39pA0vbtAnRvzGtoW5+63WBPgP3bGQaL
-         l2uA==
-X-Gm-Message-State: AOJu0YwIPTyqFdFL3lydK7eu6EEDDiwMLlSxGGAzM7pVhKMul/j7N1+z
-	xYxv1lrOPrdJGVl9Np5o6J8Q8zE444R463JGFpQ+EtRq5W7YFfxEUcwq2e/FyNe1vLg=
-X-Gm-Gg: AfdE7ck4hAwddxVgXwcMACLGTGzTqTnNlhd58G+NYLSuOYKw8oeO2aJYUYFEFSJxvVd
-	gtYs5PLxpEQ8VUFVMPgmqaRFWzsTcFce5N0YPRHyj0BBd4IHgnNW3rFCzNjc2vUCFnzqHhCsERj
-	D6oviK7sqgvDKAewSgShTOOZgabFtIeXypbgrH+QjIi4w202zswn6jfrE565nUKVoAHKlhULVsm
-	5STQZVXm1jD3FG7EWzPmFNND8WyeyCyUG5V+dK15X+VZKnCq2JdwSyw69z1hlS015m/Bsz7q4uu
-	O3hu2oYv/kDZDVeNoAqzA4FK9iU/rc4vXJa0n7BXWV0JLZR322NhrGMMgsKagoLwwvnXThYdFMC
-	he8HYWJ55IsYn1/l+6grZ4s36/4bEOzPVS2i1OPJYgdgxWopxvX5RPDFlX6CAR9kJQh474UK37q
-	hADwlgbFFy2nF0Hgqs0G1TJPkE+DJrLA8PSN7wTZNSEYXTbjCtppfdaRhlUZgb8Cg9T8FgqoxjL
-	UXXHyC0
-X-Received: by 2002:a05:600c:c04b:10b0:492:2ffd:8a74 with SMTP id 5b1f17b1804b1-49240a38ba5mr37619195e9.12.1781874315336;
-        Fri, 19 Jun 2026 06:05:15 -0700 (PDT)
+        bh=i4GbNTJWWlsCX/SdHZdLeLVQ6qJfL6Y1RCmWUuA0EmY=;
+        b=Ohb7a4O3SPd5iv1dxs1+ZMt/YmfRMr2BE5CUNk6VeIM0eDkINoNSefvVnwK2BqPfVO
+         VZExhF0R4C/L4u8SaPjTYRZG89SYidc4IBFPzt8pk+yJqWb4hJRvsAcwUFUurZwlhEj2
+         ARlZ88hB43q0+W8KsCT2vkZX5hig/Xlg9xlpEFWBGnNAT7/7oiGSrIr/XsTgEHruVEH2
+         NbZOXJPtT52g0xxT5DGn5m+z7NW+vWpKeVA2HxMMYz+xBU5RqQUUtPMvblqAj4jfdQZ6
+         T+r4cODWP2Yd+HPKzdrlE15lunlyldCcgerR6hF6NyVUr4yXlrieOjIQbQGqnAfVaEjo
+         KvcQ==
+X-Gm-Message-State: AOJu0YwIeerq7fAxRWAWC8UtfwSu8ebwFG2TxZCp8xYOcX9TWXy4zKib
+	EE2yaUZsrjjppUAxYkzJ211ldwhA9weWqhUb8bc0xxFXRu8lOONTz1crGWNAg678nJM=
+X-Gm-Gg: AfdE7cnjmDDqxCC2pjBmbNCGL+O8arH2a9joeyqC3O28Ax/S8gkEgie+SAfeG0DvwA7
+	xLYKr991M9jra1Uj6JstuJVxQI9EuydT4Vcj2/eE5hsk0CCevLEE5CHRKikb5brI8TT5ioEP0cU
+	FtR8iDhJ2CTGoSRj3dC+emARBwk+uBvIMortbh4vYMgBxbTEPwPhxkVpUaIIxwcsIL/l/U3XmMg
+	g5buaw032wVZYNqjHNfBoclyjzcrfP2ectzD3NJICs5ti7VTGmbd/NcVEJCeCrJhoqbUP4WkJFo
+	UfT9ty16b5xNGzjsPByeqITnRfH0KTdEW3tbCPjRRLDH8cmbBwvXfAxrnLgzb1fgeD8pq9ObZE3
+	Rmc1PL3wEoCpsJp1TVMF3zvpuIhO2skPGNuUe93VLZffr1WxayHPMoUunkt5Ou+hzvv+PCJ+TLC
+	Jt8xDTtWvaXif0DbE3OW4lmpzl9vPuyxfS/445O2NCQNXfoEe4NtSimpotYpcQFXpOeNimeUCzY
+	lMfJWU6
+X-Received: by 2002:a17:907:d01:b0:bfe:ed06:5a14 with SMTP id a640c23a62f3a-c0986e2ad05mr195244766b.50.1781874324572;
+        Fri, 19 Jun 2026 06:05:24 -0700 (PDT)
 From: Frediano Ziglio <freddy77@gmail.com>
 X-Google-Original-From: Frediano Ziglio <frediano.ziglio@citrix.com>
 To: xen-devel@lists.xenproject.org
@@ -99,91 +99,262 @@ Cc: Frediano Ziglio <frediano.ziglio@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Teddy Astie <teddy.astie@vates.tech>,
 	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v6 04/16] libs/guest: Use a single write_exact in write_headers
-Date: Fri, 19 Jun 2026 14:04:49 +0100
-Message-ID: <20260619130501.272832-5-frediano.ziglio@citrix.com>
+	Juergen Gross <jgross@suse.com>,
+	"Daniel P . Smith" <dpsmith@apertussolutions.com>
+Subject: [PATCH v6 12/16] xen: implement new foreign copy hypercall
+Date: Fri, 19 Jun 2026 14:04:57 +0100
+Message-ID: <20260619130501.272832-13-frediano.ziglio@citrix.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260619130501.272832-1-frediano.ziglio@citrix.com>
 References: <20260619130501.272832-1-frediano.ziglio@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1781874316-D85F8ABF-855B8CF3/0/0
+X-purgate-ID: tlsNG-42698a/1781874325-4FBEF00E-1715F220/0/0
 X-purgate-type: clean
-X-purgate-size: 2400
+X-purgate-size: 7582
 
-Reduce number of syscalls by coalescing the image and the domain headers
-into a single I/O vector array.
+Add a sub hypercall to __HYPERVISOR_memory_op to allow to read/write
+memory from/to a foreign domain.
+
+Extending MMUEXT_COPY_PAGE seems better on first sight but considering
+that MMUEXT is meant for PV only and trying to change that sub-op this
+solution is better.
 
 Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
-Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
 --
-Changes since v2:
-- change prefix in subject.
-
 Changes since v4:
-- added Reviewed-by;
+- Fix typo in comment.
+
+Changes since v5:
+- update xen_foreigncopy structure comments;
+- move check for no frames after checking the domain;
+- use mnemonic instead of 1U;
+- fix page type checks;
+- do not overwrite error copying back structure;
+- latch MFN value;
 - improved commit message.
 ---
- tools/libs/guest/xg_sr_save.c | 37 +++++++++++++++++------------------
- 1 file changed, 18 insertions(+), 19 deletions(-)
+ xen/common/memory.c         | 145 ++++++++++++++++++++++++++++++++++++
+ xen/include/public/memory.h |  44 ++++++++++-
+ 2 files changed, 188 insertions(+), 1 deletion(-)
 
-diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
-index eba33f861a..8c31f9f86c 100644
---- a/tools/libs/guest/xg_sr_save.c
-+++ b/tools/libs/guest/xg_sr_save.c
-@@ -10,17 +10,22 @@ static int write_headers(struct xc_sr_context *ctx, uint16_t guest_type)
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index 3672bda025..98726766bf 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -1545,6 +1545,139 @@ static int acquire_resource(
+     return rc;
+ }
+ 
++/*
++ * The "noinline" qualifier avoids the compiler to create a large function
++ * consuming quite a lot of stack.
++ */
++static int noinline mem_foreigncopy(
++    XEN_GUEST_HANDLE_PARAM(xen_foreigncopy_t) arg)
++{
++    struct domain *d, *const currd = current->domain;
++    xen_foreigncopy_t copy;
++    int rc, direction;
++
++    if ( copy_from_guest(&copy, arg, 1) )
++        return -EFAULT;
++
++    if ( copy.flags & ~XENMEM_foreigncopy_direction )
++        return -EINVAL;
++
++    direction = copy.flags & XENMEM_foreigncopy_direction;
++
++    rc = rcu_lock_remote_domain_by_id(copy.domid, &d);
++    if ( rc )
++        return rc;
++
++    if ( copy.nr_frames == 0 )
++    {
++        rcu_unlock_domain(d);
++        return 0;
++    }
++
++    /*
++     * Check we are allowed to map and access these foreign pages.
++     */
++    rc = xsm_map_gmfn_foreign(XSM_TARGET, currd, d);
++    if ( rc )
++        goto out;
++
++    do {
++        /*
++         * Arbitrary size.  Not too much stack space, and a reasonable stride
++         * for continuation checks.
++         */
++        xen_pfn_t gfn_list[32];
++        unsigned int todo = MIN(ARRAY_SIZE(gfn_list), copy.nr_frames);
++
++        rc = -EFAULT;
++        if ( copy_from_guest(gfn_list, copy.frame_list, todo) )
++            goto out;
++
++        for ( unsigned int i = 0; i < todo; i++ )
++        {
++            struct page_info *foreign_page;
++            mfn_t foreign_mfn;
++            void *foreign;
++            p2m_type_t p2mt;
++            const unsigned long valid_mask =
++#ifdef CONFIG_X86
++                p2m_to_mask(p2m_ram_rw) | p2m_to_mask(p2m_ram_logdirty);
++#else
++                p2m_to_mask(p2m_ram_rw);
++#endif
++
++            foreign_page = get_page_from_gfn(d, gfn_list[i], &p2mt, P2M_ALLOC);
++
++            if ( unlikely(!(p2m_to_mask(p2mt) & valid_mask)) && foreign_page )
++            {
++                put_page(foreign_page);
++                foreign_page = NULL;
++            }
++            if ( unlikely(!foreign_page) )
++            {
++                gdprintk(XENLOG_WARNING,
++                         "Error accessing foreign gfn %" PRI_gfn "\n",
++                         gfn_list[i]);
++                rc = -EINVAL;
++                copy.nr_frames -= i;
++                guest_handle_add_offset(copy.frame_list, i);
++                goto out;
++            }
++
++            foreign_mfn = page_to_mfn(foreign_page);
++
++            /* A page is dirtied when it's being copied to. */
++            if ( direction == XENMEM_foreigncopy_to )
++                paging_mark_dirty(d, foreign_mfn);
++
++            foreign = map_domain_page(foreign_mfn);
++            if ( direction == XENMEM_foreigncopy_from )
++                rc = copy_to_guest(copy.buffer, foreign, PAGE_SIZE);
++            else
++                rc = copy_from_guest(foreign, copy.buffer, PAGE_SIZE);
++            unmap_domain_page(foreign);
++            put_page(foreign_page);
++
++            if ( unlikely(rc) )
++            {
++                gdprintk(XENLOG_WARNING,
++                         "Error %d copying gfn %" PRI_gfn "\n",
++                         -rc, gfn_list[i]);
++                copy.nr_frames -= i;
++                guest_handle_add_offset(copy.frame_list, i);
++                goto out;
++            }
++
++            guest_handle_add_offset(copy.buffer, PAGE_SIZE);
++        }
++
++        copy.nr_frames -= todo;
++        guest_handle_add_offset(copy.frame_list, todo);
++
++        if ( copy.nr_frames && hypercall_preempt_check() )
++        {
++            rc = hypercall_create_continuation(
++                __HYPERVISOR_memory_op, "lh", XENMEM_foreigncopy, arg);
++            goto out;
++        }
++    } while ( copy.nr_frames );
++
++    rc = 0;
++
++ out:
++    rcu_unlock_domain(d);
++
++    /*
++     * Update in all cases, it allows the caller to know how many
++     * frames were successfully copied and the continuation to
++     * continue correctly.
++     */
++    if ( __copy_to_guest(arg, &copy, 1) && rc >= 0 )
++        rc = -EFAULT;
++
++    return rc;
++}
++
+ long do_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
  {
-     xc_interface *xch = ctx->xch;
-     int32_t xen_version = xc_version(xch, XENVER_version, NULL);
--    struct xc_sr_ihdr ihdr = {
--        .marker  = IHDR_MARKER,
--        .id      = htonl(IHDR_ID),
--        .version = htonl(3),
--        .options = htons(IHDR_OPT_LITTLE_ENDIAN),
--    };
--    struct xc_sr_dhdr dhdr = {
--        .type       = guest_type,
--        .page_shift = XC_PAGE_SHIFT,
--        .xen_major  = (xen_version >> 16) & 0xffff,
--        .xen_minor  = (xen_version)       & 0xffff,
-+    struct {
-+        struct xc_sr_ihdr ihdr;
-+        struct xc_sr_dhdr dhdr;
-+    } hdrs = {
-+        {
-+            .marker  = IHDR_MARKER,
-+            .id      = htonl(IHDR_ID),
-+            .version = htonl(3),
-+            .options = htons(IHDR_OPT_LITTLE_ENDIAN),
-+        },
-+        {
-+            .type       = guest_type,
-+            .page_shift = XC_PAGE_SHIFT,
-+            .xen_major  = (xen_version >> 16) & 0xffff,
-+            .xen_minor  = (xen_version)       & 0xffff,
-+        },
-     };
+     struct domain *d, *curr_d = current->domain;
+@@ -2012,6 +2145,18 @@ long do_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+             start_extent);
+         break;
  
-     if ( xen_version < 0 )
-@@ -29,15 +34,9 @@ static int write_headers(struct xc_sr_context *ctx, uint16_t guest_type)
-         return -1;
-     }
++    case XENMEM_foreigncopy:
++        /*
++         * Instead of using "start_extent" we update the structure back,
++         * we update it back in anyway to tell caller were the copy
++         * stopped.
++         */
++        if ( unlikely(start_extent) )
++            return -EINVAL;
++
++        rc = mem_foreigncopy(guest_handle_cast(arg, xen_foreigncopy_t));
++        break;
++
+     default:
+         rc = arch_memory_op(cmd, arg);
+         break;
+diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
+index bd9fc37b52..dbf86fd595 100644
+--- a/xen/include/public/memory.h
++++ b/xen/include/public/memory.h
+@@ -740,7 +740,49 @@ struct xen_vnuma_topology_info {
+ typedef struct xen_vnuma_topology_info xen_vnuma_topology_info_t;
+ DEFINE_XEN_GUEST_HANDLE(xen_vnuma_topology_info_t);
  
--    if ( write_exact(ctx->fd, &ihdr, sizeof(ihdr)) )
--    {
--        PERROR("Unable to write Image Header to stream");
--        return -1;
--    }
--
--    if ( write_exact(ctx->fd, &dhdr, sizeof(dhdr)) )
-+    if ( write_exact(ctx->fd, &hdrs, sizeof(hdrs)) )
-     {
--        PERROR("Unable to write Domain Header to stream");
-+        PERROR("Unable to write Headers to stream");
-         return -1;
-     }
+-/* Next available subop number is 29 */
++/*
++ * Copy memory from/to a given domain.
++ * As this call requires target access and guest with target access won't be
++ * compat guests supported for compat guests this is not implemented.
++ */
++#define XENMEM_foreigncopy 29
++struct xen_foreigncopy {
++    /* IN - The domain whose memory is to be copied. */
++    domid_t domid;
++
++    /* IN - Flags. */
++#define XENMEM_foreigncopy_from 0
++#define XENMEM_foreigncopy_to 1
++#define XENMEM_foreigncopy_direction 1
++    uint16_t flags;
++
++    /*
++     * IN/OUT
++     *
++     * As an IN parameter number of frames of the domain to be copied.
++     * On output on error updated number of frames left.
++     */
++    uint32_t nr_frames;
++
++    /*
++     * IN/OUT
++     *
++     * Frames to be copied.
++     * On output on error updated to point to first frame unhandled.
++     */
++    XEN_GUEST_HANDLE(xen_pfn_t) frame_list;
++
++    /*
++     * IN/OUT
++     *
++     * Userspace buffer to read/write from.
++     */
++    XEN_GUEST_HANDLE(uint8) buffer;
++};
++typedef struct xen_foreigncopy xen_foreigncopy_t;
++DEFINE_XEN_GUEST_HANDLE(xen_foreigncopy_t);
++
++/* Next available subop number is 30 */
+ 
+ #endif /* __XEN_PUBLIC_MEMORY_H__ */
  
 -- 
 2.43.0
