@@ -4,32 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F514CD4F26
-	for <xen-devel@archiver.kernel.org>; Fri, 19 Jun 2026 11:52:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1342140.1602395 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E36DCD98F2
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Jun 2026 13:05:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1342199.1602421 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waXli-0007YX-Ir; Fri, 19 Jun 2026 11:52:18 +0000
+	id 1waYuK-0000s3-21; Fri, 19 Jun 2026 13:05:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1342140.1602395; Fri, 19 Jun 2026 11:52:18 +0000
+Received: by outflank-mailman (output) from mailman id 1342199.1602421; Fri, 19 Jun 2026 13:05:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waXli-0007YQ-G5; Fri, 19 Jun 2026 11:52:18 +0000
-Received: by outflank-mailman (input) for mailman id 1342140;
- Fri, 19 Jun 2026 11:52:17 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1waYuJ-0000rw-Vo; Fri, 19 Jun 2026 13:05:15 +0000
+Received: by outflank-mailman (input) for mailman id 1342199;
+ Fri, 19 Jun 2026 13:05:15 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1waXlh-0007YK-9S
- for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 11:52:17 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1waXlh-00HKcZ-0B;
- Fri, 19 Jun 2026 11:52:16 +0000
-Received: from [2a02:8012:3a1:0:64fb:259f:710c:56e]
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1waXlg-00Em03-0i;
- Fri, 19 Jun 2026 11:52:16 +0000
+ (envelope-from <freddy77@gmail.com>) id 1waYuI-0000Uh-Ud
+ for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 13:05:14 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1waYuI-00D4ah-BQ
+ for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 15:05:14 +0200
+Received: from [10.42.69.11] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <freddy77@gmail.com>)
+ id 6a353e89-2eae-0a2a0a5409dd-0a2a450ba98e-2
+ for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 15:05:14 +0200
+Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.0)
+ (envelope-from <freddy77@gmail.com>)
+ id 6a353e8a-5e53-0a2a450b0019-d155dd2bc807-3
+ for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 15:05:14 +0200
+Received: by mail-wr1-f43.google.com with SMTP id
+ ffacd0b85a97d-45f3cf907ceso1063197f8f.2
+ for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 06:05:14 -0700 (PDT)
+Received: from localhost.localdomain (8.17.6.51.dyn.plus.net. [51.6.17.8])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4650bc428d9sm7960088f8f.27.2026.06.19.06.05.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 19 Jun 2026 06:05:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,74 +53,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=j0p6tyyJgc6wIZgKcXu50e8Na08BCCbP/s03z8r2tfY=; b=eK7zK35Kjn+1VBFSO3g1ZrD6Rk
-	UdYD8yyHppzYmGZWk7sXTJWp1I4Qc5Rx25Yc2wLKVS+ETEZeuL4+X8W9YOiWa4RneE4F+GC3EBxBY
-	0HY4pHE349m6378f1P+K0aAcDvLx8N5pzSc5hRh7SvARi987ORXtIm2UngoUYgYjDcmg=;
-Message-ID: <5d3dff74-f51d-4bfc-b917-3c84f2094f34@xen.org>
-Date: Fri, 19 Jun 2026 12:52:14 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1781874314; x=1782479114; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=KRsqYy5FIagth3/bGJe2ZNcz/9luhK+GkHhdLVALu50=;
+        b=T3QGMsHtEAeaBPGJ5cPRb3HtTnEY8GXodqE4MMKEiLV9ETuolHi2aMQWk7I+4aiGsR
+         tPWVNr/4ImgYypc6LVeze3gMKH0uvJ2AGKPAITt0NTLC1sVAa9DCtEfNiG+vp4AuB98Q
+         nHqI4xeLFO5jzoW4cGiTs7KF3h5ka7gUYDVBdwu3rgprdRbuaCLxwk95DLUW0g4uPn9R
+         MdnPTO+FOUK96wYeFh5EBfpEY5enH+oRKrOaNt2v9pN+SXSND9YpU+VcSA5kojARGhy3
+         E9xIJKOMMvs5bcZNLNY9QXFMj5K83kNrrSMv8LRSlmE+DR1c8zcrQovT871GECLQrZCs
+         R4JA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1781874314; x=1782479114;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=KRsqYy5FIagth3/bGJe2ZNcz/9luhK+GkHhdLVALu50=;
+        b=ZwDDoHaNyaHmBwJk43UJMBNtjDQ8As9L+t3Bp1CobUk/d6pWF3poDXD2COGr1wOXNs
+         ygPEzbLd1kvKIA1dqzs2nQtjScYS7NqyPSdScFJJ3z5aBFpq5w7hg3AlYjC/X55N6fNT
+         EF15CDh0wL+YwUnnHSqQqKJhijERQh1LbogJoO0iqpTUq9KYvxQ4S+VZjEZEkD7T4Hgc
+         1vQAQTsdnqaX7McV0FiAuM2o2NCSdBo1/Qadw+6YqaQmAXh3qFhgmDKqLGDwu9M5xMG9
+         1H4loOcludX0G4wgODw29VCjU+2Ipkr6FOkuazS5UJKOJKeP29+ysu8eOl4lDTEJPoGH
+         tgrw==
+X-Gm-Message-State: AOJu0Yw7s2MeeSq58KFnVn0BzMsJC4XgsF4qtQwCZVE6hHM3gUNHgHq8
+	UUrZe7wiuFm/bwp84wF7wPTtLQXoRe5qIqSLNADNOE1rmweu+quTQhCuIDfXpittclk=
+X-Gm-Gg: AfdE7cmmaTbpLSE/Hx6/qBM/8VxmvLXy9e3GMTYJPg5s71ghk0/yncfEX9O4KkKpDEM
+	+uO+JmTbwfnNNqWrHcReGSEy+dGcE36Mmig3ClVwJzT9Sz0c8qdKahoaTmruk++HkxurCr1pzvd
+	9jyg1EpGyNPxM5ajOjN5r/BQYXlm/Kvb27PlO3edyqwiX0rtqCcC7TMUYs1vpw9Ony4FfqzWHwY
+	yyvae/zaOTFTrtvdEUAvq3cUz5iZXeCVo57T4ZUwkdORHh7W09FU67tk37OqVmMG85DQwTWE8TW
+	f3oHFb/t+QDS8Q7x4zLyN7dhRplVBS2XJ+cGT/iWHLhh/EkD57sXrfT5jxQteMONr/02mS1LGBN
+	UCoW43Fe5IC4AX+WdNEPQuyiN/2eyN4xtwlSD775uBGTIIKTi5YiT+gUZgBGpW514kQruLi6HJ/
+	Klc17Z6iUsW5uMNT5Kb8PVUJBTDht/5DbBD3ptR1bRiMt2zOgYoBrzB2J2THrWH3cyXTcmFSvKP
+	Av1geBl
+X-Received: by 2002:a05:6000:2284:b0:441:1fa5:457c with SMTP id ffacd0b85a97d-464fff65dcdmr7069984f8f.5.1781874313503;
+        Fri, 19 Jun 2026 06:05:13 -0700 (PDT)
+From: Frediano Ziglio <freddy77@gmail.com>
+X-Google-Original-From: Frediano Ziglio <frediano.ziglio@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Frediano Ziglio <frediano.ziglio@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v6 02/16] libs/guest: Reduce number of I/O vectors in write_batch
+Date: Fri, 19 Jun 2026 14:04:47 +0100
+Message-ID: <20260619130501.272832-3-frediano.ziglio@citrix.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260619130501.272832-1-frediano.ziglio@citrix.com>
+References: <20260619130501.272832-1-frediano.ziglio@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH for-4.22 v2.5] xen/arm: gic: defer host LPI allocation
- until after ITS init
-Content-Language: en-GB
-To: "Orzel, Michal" <michal.orzel@amd.com>,
- Mykola Kvach <mykola_kvach@epam.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Luca Fancellu <luca.fancellu@arm.com>, Mykola Kvach
- <xakep.amatop@gmail.com>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-References: <112419d3ea48ca328849c8f6647909d3eb667b40.1779922874.git.mykola_kvach@epam.com>
- <341edd8de63dcd84ccc6e7b6c03e9e8fc7105184.1781847061.git.mykola_kvach@epam.com>
- <7a0a1867-8316-4e20-971e-fab99c9f4a32@amd.com>
- <e43afc29-cfbb-4978-9324-e8d540040bfa@amd.com>
- <1877ea55-0c8d-4593-a310-259b4c5aef3c@xen.org>
- <b47b9bf3-1aa6-41b6-8c7c-48d64cca1c36@amd.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <b47b9bf3-1aa6-41b6-8c7c-48d64cca1c36@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-42698a/1781874314-4C1CA00E-B0ABB76E/0/0
+X-purgate-type: clean
+X-purgate-size: 2646
 
+Small optimization.
+Reduce number of pieces passed to writev.
 
+Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+--
+Changes since v2:
+- change prefix in subject.
 
-On 19/06/2026 12:34, Orzel, Michal wrote:
-> 
-> 
-> On 19-Jun-26 13:23, Julien Grall wrote:
->> Hi Michal,
->>
->> On 19/06/2026 10:48, Orzel, Michal wrote:
->>> @Oleksii, can we ask for a release ack here?
->>
->> Can you explain the pros/cons of introducing this patch quite late?
-> The advantage is that it fixes the broken LPIs on affected hardware.
+Changes since v4:
+- added Reviewed-by.
+---
+ tools/libs/guest/xg_sr_save.c | 34 +++++++++++++++-------------------
+ 1 file changed, 15 insertions(+), 19 deletions(-)
 
- > The disadvantage is the reordering risk but I don't think there is 
-any issue.
-
-See more below.
->>
->> One of the risk here is that we are now initializing the LPIs *after*
->> the ITSes. I understand this is because we want to know the workaround.
->> However, I vaguely recall that there was a dependency in the
->> configuration. So are we confident the new ordering will not bring other
->> issues? Ideally this should have been explained in the commit message.
-> gic-v3-its.c never references host LPI state, so ITS init has no dependency on LPIs.
-
-My concern is at the HW level. The ITS is using LPIs. But we will 
-configure the ITS first and then the LPIs.
-
-What probaly saves us is the fact gicv3_lpi_init_host_lpis() only seem 
-to allocate memory. This is a bit fragile though.
-
-Cheers,
-
+diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
+index fdbceab52e..68ce1aeb98 100644
+--- a/tools/libs/guest/xg_sr_save.c
++++ b/tools/libs/guest/xg_sr_save.c
+@@ -97,9 +97,11 @@ static int write_batch(struct xc_sr_context *ctx)
+     void *page, *orig_page;
+     uint64_t *rec_pfns = NULL;
+     struct iovec *iov = NULL; int iovcnt = 0;
+-    struct xc_sr_rec_page_data_header hdr = { 0 };
+-    struct xc_sr_record rec = {
+-        .type = REC_TYPE_PAGE_DATA,
++    struct {
++        struct xc_sr_rhdr rec;
++        struct xc_sr_rec_page_data_header page_data;
++    } hdrs = {
++        { .type = REC_TYPE_PAGE_DATA },
+     };
+ 
+     assert(nr_pfns != 0);
+@@ -115,7 +117,7 @@ static int write_batch(struct xc_sr_context *ctx)
+     /* Pointers to locally allocated pages.  Need freeing. */
+     local_pages = calloc(nr_pfns, sizeof(*local_pages));
+     /* iovec[] for writev(). */
+-    iov = malloc((nr_pfns + 4) * sizeof(*iov));
++    iov = malloc((nr_pfns + 2) * sizeof(*iov));
+ 
+     if ( !mfns || !types || !errors || !guest_data || !local_pages || !iov )
+     {
+@@ -216,28 +218,22 @@ static int write_batch(struct xc_sr_context *ctx)
+         goto err;
+     }
+ 
+-    hdr.count = nr_pfns;
++    hdrs.rec.length = sizeof(hdrs.page_data);
++    hdrs.rec.length += nr_pfns * sizeof(*rec_pfns);
++    hdrs.rec.length += nr_pages * PAGE_SIZE;
+ 
+-    rec.length = sizeof(hdr);
+-    rec.length += nr_pfns * sizeof(*rec_pfns);
+-    rec.length += nr_pages * PAGE_SIZE;
++    hdrs.page_data.count = nr_pfns;
+ 
+     for ( i = 0; i < nr_pfns; ++i )
+         rec_pfns[i] = ((uint64_t)(types[i]) << 32) | ctx->save.batch_pfns[i];
+ 
+-    iov[0].iov_base = &rec.type;
+-    iov[0].iov_len = sizeof(rec.type);
++    iov[0].iov_base = &hdrs;
++    iov[0].iov_len = sizeof(hdrs);
+ 
+-    iov[1].iov_base = &rec.length;
+-    iov[1].iov_len = sizeof(rec.length);
++    iov[1].iov_base = rec_pfns;
++    iov[1].iov_len = nr_pfns * sizeof(*rec_pfns);
+ 
+-    iov[2].iov_base = &hdr;
+-    iov[2].iov_len = sizeof(hdr);
+-
+-    iov[3].iov_base = rec_pfns;
+-    iov[3].iov_len = nr_pfns * sizeof(*rec_pfns);
+-
+-    iovcnt = 4;
++    iovcnt = 2;
+ 
+     if ( nr_pages )
+     {
 -- 
-Julien Grall
+2.43.0
 
 
