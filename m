@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86CF4CD4F26
-	for <xen-devel@archiver.kernel.org>; Fri, 19 Jun 2026 08:24:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1341906.1602198 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D7CECD4F26
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Jun 2026 08:27:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1341912.1602206 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waUWI-0006sJ-VD; Fri, 19 Jun 2026 08:24:10 +0000
+	id 1waUYp-0007NC-9g; Fri, 19 Jun 2026 08:26:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1341906.1602198; Fri, 19 Jun 2026 08:24:10 +0000
+Received: by outflank-mailman (output) from mailman id 1341912.1602206; Fri, 19 Jun 2026 08:26:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waUWI-0006sC-RO; Fri, 19 Jun 2026 08:24:10 +0000
-Received: by outflank-mailman (input) for mailman id 1341906;
- Fri, 19 Jun 2026 08:24:09 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1waUYp-0007N5-6g; Fri, 19 Jun 2026 08:26:47 +0000
+Received: by outflank-mailman (input) for mailman id 1341912;
+ Fri, 19 Jun 2026 08:26:46 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1waUWH-0006s2-S2
- for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 08:24:09 +0000
+ (envelope-from <jbeulich@suse.com>) id 1waUYo-0007Mx-6Q
+ for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 08:26:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1waUWE-00E6aD-SR
- for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 10:24:06 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1waUYn-00EsBb-3x
+ for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 10:26:45 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a34fca2-bab6-0a2a0a5309dd-0a2a4509963a-0
- for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 10:24:02 +0200
-Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.0)
+ id 6a34fd43-e002-0a2a0a5209dd-0a2a4502a33a-6
+ for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 10:26:45 +0200
+Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.0)
  (envelope-from <jbeulich@suse.com>)
- id 6a34fca2-4999-0a2a45090019-d155dd2acccb-3
- for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 10:24:02 +0200
-Received: by mail-wr1-f42.google.com with SMTP id
- ffacd0b85a97d-45ef41adbc1so1517403f8f.0
- for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 01:24:02 -0700 (PDT)
+ id 6a34fd44-fdf1-0a2a45020019-d155dd35addd-3
+ for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 10:26:44 +0200
+Received: by mail-wr1-f53.google.com with SMTP id
+ ffacd0b85a97d-462bb734793so1334382f8f.1
+ for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 01:26:44 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-465090c5176sm5866807f8f.12.2026.06.19.01.24.01
+ ffacd0b85a97d-46508a053cesm5893094f8f.4.2026.06.19.01.26.43
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 19 Jun 2026 01:24:01 -0700 (PDT)
+ Fri, 19 Jun 2026 01:26:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,57 +55,60 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1781857442; x=1782462242; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1781857604; x=1782462404; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=HgltI3hYdYJxkkjW63dEk3mjZl7bGQ1QfCqfK1Uzux8=;
-        b=I7AKAFN5zgRaNwuEVrFtTP2gzCpXXvfVOUzBhsAIWPBJRagnLQ+NaL+KR9hvBfwFZA
-         rC9/l6Z1vy2IB0cLiy7wOazr48CLmaFgiM8X7H1iP+HCdNnLCtehpry6yBV9CP5Ebfve
-         +dMQjxg8PhlDeggYb2uK2Dj0Ls00epkuOyq2vp3irYQyxSgVZEpOGSjc0wusoQohGbqm
-         u48++6rQdv9UPy9f0v4ldV0iJcGSfluxrtmJHIirD6U0hPQft0aJ6diqxRZNmY5scOEU
-         B5tTTHrnjcU5JFbnbsoHXAYZnW10bBUz6Q6XFYjNaq4LADazBRC0+/VLnvd9CxplUple
-         csJg==
+        bh=er04P76T9URwsmi5xWgF3wVt5oxaOpsSBwCHopNK+QQ=;
+        b=dwSsdseLRjjvZYfL/IKWovNN8++n8Vor6RnGn9mpKRHHr5a5bzhSHgeaG5swhctRWt
+         9GvhEBl8IQfAEc5LXEM1GUyuUGcnbbtcIlXC9ZFvxdZKudyMbjUvMZ08E7B+upu7xhEs
+         c36/hh2/FsNwllHO8ygYmLtsu1KZP56IRlQZ0GCxftxVttaIbgrIdgMJmQ2XMsZeLlC3
+         V35LtHMa7PgXkTTzrIEGjyg8RE63pP2KMQGjAu3amZY8PCPEldLikifyG3Brb/4N4U54
+         OC5we8bvXcgOEoq2A2p4p7+EfhQtXyC1ALMgbtATSZqW0EAZWSDCe4+1LfRx7zMv09n5
+         7i6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781857442; x=1782462242;
+        d=1e100.net; s=20251104; t=1781857604; x=1782462404;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=HgltI3hYdYJxkkjW63dEk3mjZl7bGQ1QfCqfK1Uzux8=;
-        b=nM3Tsllhn/lukPqt1UJlBF+Omw3Cx4aMS1aiT7QwzESt0MptccPuutkVlghl0dYCaa
-         B7s1ZyjEVXgsFEdC8Pz4NPYgUrBBmLU2rFkfDAdmnTJTJ29Mho/NVXt/MKjcNg784ZnW
-         Q42CqV4zTS1dsVgP3KKkMTamnWoJincHE9nvpo5ERegJx8oIXlyN0DKBvIcO50+dRzU9
-         vrs+lLo2EN1mTXUGog5SkHsG0hVgQyeYuvSGpmSVWOadkzwXc/9TjLXo35LcVUTcqobA
-         uXtCQEEOshgRd7yyAkjUw0AY0n5uiIfIL3+BfMe1O9GoKlq+VSD9biixw47ZKAwvJTqf
-         ytYQ==
-X-Forwarded-Encrypted: i=1; AFNElJ9yJAcAHM/O1efmMS9obxKDhQvr1ff93lomDWnkrrkC1zKnHz/NZODC03Q7pw75ON3pwQHTzb9hvvk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yyb/sntP9loVjF+4vO+KzMAVh+3WNTkUkCK1B+6okaqbcVzFfRl
-	RtN33oBIzaAx557IRXaBS7eTXkTx+tWmoW3OtnYT6UEyyY9JALbkVSME+spDQXhiBg==
-X-Gm-Gg: AfdE7cmFA96m+DWRK8qardpTtMit9s0VEgt3VgxkCZdd5uprJ3sIFQzDogBrf+7M4vV
-	jHkYsYeeqbm4FVjTiqPyBh2RVp5sAuINVaS1IBW5uXzX4Bh7Qc5bW9niPKdm2uUInHb4ti+QQTL
-	5ku4Yam9BVkuKMB9E4UPfDLHlIGXikbM3oDM3B3N6lWpa1ZQ08KdWFAucwTuj7ILSNw1ghTXk7i
-	43V7SHCqPUI0GCdM8p10yytfMxuo/b4BkZ3O2FGqwpIeuAzoNkGsBafu1hMKbu375IsO86B4XV1
-	ye4YCuvoShNjxjRekVLUywAUIaU0/Y/+AE8DxOlHtOLDoQKjuPtYqZdB9LYZFWDsJrQ7KPTS+/d
-	7IUJwJzLS1hV85aTk4tULBe3LtCdX+CDFeGL+iOGUxkpXUPTuJm3bBuUi8t99x0gZu0dla8XGOi
-	e4G5YVZM34vvx2giPwPT7S3l06IDJdyKDtio3H+FYLgY+COLZnnLokzSqw6oP9BDgJn9bDN0LqY
-	7qv
-X-Received: by 2002:a05:6000:1248:b0:45e:7997:8b7a with SMTP id ffacd0b85a97d-4650043985cmr2987416f8f.16.1781857441826;
-        Fri, 19 Jun 2026 01:24:01 -0700 (PDT)
-Message-ID: <3aefcd7c-d911-42b7-b731-5fc657b26622@suse.com>
-Date: Fri, 19 Jun 2026 10:24:00 +0200
+        bh=er04P76T9URwsmi5xWgF3wVt5oxaOpsSBwCHopNK+QQ=;
+        b=i/t1UXMs1ki/d6g6Zy3I6B3Zvw4VGP0r8Ws0IgvltuSjjrIscZuKQk3/k1xTAbk99p
+         VqM5RaeLmCIpOUGoPrUgVaoaGXeprbUXRXbUn6mEzTBBD6knS5mP6cee/5KL3CJ0QGGH
+         C3bfTOVFgcBYcfMfG62MMf/mWCGUb0JoOtsaPS+9MTNONcgngRSowqgVWpCKbK94SdYT
+         d6tPs98UwH9fmLXHb7vMLufJ0CtG4m0MgksrBMZn8DzLVysU+pHDN0N0UdO1yNHUzkzn
+         40q2EI3tZetLjhKAM9nvSZlsDKjHcnLVCyIRsAMEDNLT29UKn/evr4zfwfxvM7fplSRc
+         O6eg==
+X-Forwarded-Encrypted: i=1; AFNElJ+5KOR6Va+Yxg8Ji1ewFfUpi4+jNPbGHaltawwLztl2yrIYhgDME5V7R+O0+4E5QDYCb59UYNeSgAk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yx1NIsaTuOp5h1hwAtNQ67dS+A+htNmBGMocNZleGEukqY8+uGQ
+	l8++5aDx7iJ+1n64XrvYTjHCB1KkxptixoRhwfga/y43RXw+A0YNISktnVlCvvIFcA==
+X-Gm-Gg: AfdE7cnU2++f2QofJTQ4AylDHChw5MA/ruhswfB9uirktr4eJ1cvTpG8O+BiaHC55M2
+	NMSWy/ljyaBGtetGak1ehSw7vwR3+pZfghGI79BON34fOpbMFBqKPWppWf5R2BwbraOX1UoeEOV
+	iv6kbAdlzQIlaamyAo24tBSw6tIAO+4JXpY0W6JIsit45q5TH80phqxygUyEkknx5vgtITDYauV
+	Y+ZQRwBVlS2hK+nTjjnlB5hqaib4JRRXHkL1bv4ypEY5QYG0eUiSQb1Y3skA8ogKY4vWhXbVzuK
+	GJRI+Wd042ORjsADq8h1q7V3G7KUc+tAIbDg187ui1JmKqJQu1R4IGpPaNQBgA7E8+fQjFSxDST
+	WF56QtuMuTjbFV820ZNR5cgE4cwbmkEYUfI4Wd0R1+J73wmAe7syMj/MC7F66kIm44AIaXvUCPR
+	4JK/Zle1piogTpBZdFjIaPMwOpXHtkUNGPxM61WzXDj+FfCPhINek6OGv+gz0vxwOeneOjxpbuH
+	IP8
+X-Received: by 2002:a05:6000:609:b0:465:ba53:a006 with SMTP id ffacd0b85a97d-465ba53b0f1mr1319185f8f.23.1781857603882;
+        Fri, 19 Jun 2026 01:26:43 -0700 (PDT)
+Message-ID: <e5cd5952-d01d-4233-b771-cfbdd40615ac@suse.com>
+Date: Fri, 19 Jun 2026 10:26:42 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 02/22] xen/common: Default function to get the distance
- between nodes
+Subject: Re: [PATCH v3 04/22] xen/arm: Introduce CONFIG_DEVICE_TREE_NUMA
+ config option
 To: Hirokazu Takahashi <taka@valinux.co.jp>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+ <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+ xen-devel@lists.xenproject.org
 References: <20260619075011.377116-1-taka@valinux.co.jp>
- <20260619075011.377116-3-taka@valinux.co.jp>
+ <20260619075011.377116-5-taka@valinux.co.jp>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,52 +134,35 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260619075011.377116-3-taka@valinux.co.jp>
+In-Reply-To: <20260619075011.377116-5-taka@valinux.co.jp>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1781857442-F51F3744-8AAFCC6E/0/0
+X-purgate-ID: tlsNG-720697/1781857604-4DC663F3-0C04B8A5/0/0
 X-purgate-type: clean
-X-purgate-size: 1108
+X-purgate-size: 542
 
 On 19.06.2026 09:49, Hirokazu Takahashi wrote:
-> --- /dev/null
-> +++ b/xen/common/numa-distance-map.c
-> @@ -0,0 +1,19 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> --- a/xen/common/Kconfig
+> +++ b/xen/common/Kconfig
+> @@ -188,6 +188,14 @@ config VM_EVENT
+>  config NEEDS_LIBELF
+>  	bool
+>  
+> +config NUMA_DISTANCE_MAP
+> +	bool
 > +
-> +#include <xen/errno.h>
-> +#include <xen/init.h>
-> +#include <xen/nodemask.h>
-
-Why would any of these be needed here?
-
-> +#include <xen/numa.h>
+> +config DEVICE_TREE_NUMA
+> +	bool
+> +	select NUMA
+> +	select NUMA_DISTANCE_MAP
 > +
-> +#define LOCAL_DISTANCE      10
-> +#define REMOTE_DISTANCE     20
-> +
-> +/*
-> + * Get the distance between node 'from' and node 'to'.
-> + */
+>  config NUMA
+>  	bool
+>  
 
-In the description you say this is a fallback, but that doesn't become
-clear from this comment at all.
-
-> +uint8_t numa_node_distance(unsigned int from, unsigned int to)
-
-If both parameters are node IDs, then why aren't they of type nodeid_t?
-
-And then why is the return value a fixed width type? See ./CODING_STYLE.
-
-> +{
-> +    if ( from != to )
-> +        return REMOTE_DISTANCE;
-> +    return LOCAL_DISTANCE;
-> +}
-
-Nit (style): If you don't want to use the conditional operator (so the
-body would be a single line), please have a blank line ahead of the
-function's main return statement.
+You want to insert below NUMA, not above. It may also make sense to move
+"select NUMA" to NUMA_DISTANCE_MAP. I don't think the latter should be
+selected when NUMA isn't also wanted.
 
 Jan
 
