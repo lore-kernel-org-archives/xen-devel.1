@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E36DCD98F2
-	for <xen-devel@archiver.kernel.org>; Fri, 19 Jun 2026 13:05:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1342199.1602421 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 267E6CDB466
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Jun 2026 13:05:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1342204.1602466 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waYuK-0000s3-21; Fri, 19 Jun 2026 13:05:16 +0000
+	id 1waYuP-0001w1-As; Fri, 19 Jun 2026 13:05:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1342199.1602421; Fri, 19 Jun 2026 13:05:16 +0000
+Received: by outflank-mailman (output) from mailman id 1342204.1602466; Fri, 19 Jun 2026 13:05:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waYuJ-0000rw-Vo; Fri, 19 Jun 2026 13:05:15 +0000
-Received: by outflank-mailman (input) for mailman id 1342199;
- Fri, 19 Jun 2026 13:05:15 +0000
+	id 1waYuP-0001ud-5q; Fri, 19 Jun 2026 13:05:21 +0000
+Received: by outflank-mailman (input) for mailman id 1342204;
+ Fri, 19 Jun 2026 13:05:20 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1waYuI-0000Uh-Ud
- for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 13:05:14 +0000
+ (envelope-from <freddy77@gmail.com>) id 1waYuN-0001Wt-U6
+ for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 13:05:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1waYuI-00D4ah-BQ
- for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 15:05:14 +0200
+ id 1waYuN-00D4ah-Ac
+ for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 15:05:19 +0200
 Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a353e89-2eae-0a2a0a5409dd-0a2a450ba98e-2
- for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 15:05:14 +0200
-Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
+ id 6a353e89-2eae-0a2a0a5409dd-0a2a450ba98e-22
+ for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 15:05:19 +0200
+Received: from [209.85.208.50] (helo=mail-ed1-f50.google.com)
  by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.0)
  (envelope-from <freddy77@gmail.com>)
- id 6a353e8a-5e53-0a2a450b0019-d155dd2bc807-3
- for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 15:05:14 +0200
-Received: by mail-wr1-f43.google.com with SMTP id
- ffacd0b85a97d-45f3cf907ceso1063197f8f.2
- for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 06:05:14 -0700 (PDT)
+ id 6a353e8f-5e53-0a2a450b0019-d155d032bc5e-3
+ for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 15:05:19 +0200
+Received: by mail-ed1-f50.google.com with SMTP id
+ 4fb4d7f45d1cf-69532288224so3950688a12.0
+ for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 06:05:19 -0700 (PDT)
 Received: from localhost.localdomain (8.17.6.51.dyn.plus.net. [51.6.17.8])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4650bc428d9sm7960088f8f.27.2026.06.19.06.05.12
+ ffacd0b85a97d-4650bc428d9sm7960088f8f.27.2026.06.19.06.05.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jun 2026 06:05:12 -0700 (PDT)
+ Fri, 19 Jun 2026 06:05:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,41 +55,41 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781874314; x=1782479114; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1781874319; x=1782479119; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=KRsqYy5FIagth3/bGJe2ZNcz/9luhK+GkHhdLVALu50=;
-        b=T3QGMsHtEAeaBPGJ5cPRb3HtTnEY8GXodqE4MMKEiLV9ETuolHi2aMQWk7I+4aiGsR
-         tPWVNr/4ImgYypc6LVeze3gMKH0uvJ2AGKPAITt0NTLC1sVAa9DCtEfNiG+vp4AuB98Q
-         nHqI4xeLFO5jzoW4cGiTs7KF3h5ka7gUYDVBdwu3rgprdRbuaCLxwk95DLUW0g4uPn9R
-         MdnPTO+FOUK96wYeFh5EBfpEY5enH+oRKrOaNt2v9pN+SXSND9YpU+VcSA5kojARGhy3
-         E9xIJKOMMvs5bcZNLNY9QXFMj5K83kNrrSMv8LRSlmE+DR1c8zcrQovT871GECLQrZCs
-         R4JA==
+        bh=ZidMZWTCYLyL5ufIMI3PcR9yOlOw9e9GMi8xqFKVOr8=;
+        b=RH5ZaNnXnutl+59wVjGfXnwseXaNH71z440zvKQe11I1Lh6XZQdY+3K2Nvd94978YG
+         SXJa/a6Z86ruc2KHdI9Uaivgf8YWIvPi+u/8CM14RJk80l+XnSPSPonntrqi8pxjCja7
+         Co4WqUPxztOfngUlFWLOIX0xaDPOy+Zf7JzImoM7N1LSFybwTUMj8/fnbaFwLYyqD1gP
+         K82oqUl2vaz2VjhFTZEa3PxVf4zafFB3bszCLG3WmGwfVmcmQ4OHUi4p0lkRtCwjvSSC
+         vVaepIkR8CUNXEm+BC9D7nq/sJfHa25c63BXK8cqxvD2PaMsJ7oCp8Fb9t0UIGSEClMs
+         xCRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781874314; x=1782479114;
+        d=1e100.net; s=20251104; t=1781874319; x=1782479119;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=KRsqYy5FIagth3/bGJe2ZNcz/9luhK+GkHhdLVALu50=;
-        b=ZwDDoHaNyaHmBwJk43UJMBNtjDQ8As9L+t3Bp1CobUk/d6pWF3poDXD2COGr1wOXNs
-         ygPEzbLd1kvKIA1dqzs2nQtjScYS7NqyPSdScFJJ3z5aBFpq5w7hg3AlYjC/X55N6fNT
-         EF15CDh0wL+YwUnnHSqQqKJhijERQh1LbogJoO0iqpTUq9KYvxQ4S+VZjEZEkD7T4Hgc
-         1vQAQTsdnqaX7McV0FiAuM2o2NCSdBo1/Qadw+6YqaQmAXh3qFhgmDKqLGDwu9M5xMG9
-         1H4loOcludX0G4wgODw29VCjU+2Ipkr6FOkuazS5UJKOJKeP29+ysu8eOl4lDTEJPoGH
-         tgrw==
-X-Gm-Message-State: AOJu0Yw7s2MeeSq58KFnVn0BzMsJC4XgsF4qtQwCZVE6hHM3gUNHgHq8
-	UUrZe7wiuFm/bwp84wF7wPTtLQXoRe5qIqSLNADNOE1rmweu+quTQhCuIDfXpittclk=
-X-Gm-Gg: AfdE7cmmaTbpLSE/Hx6/qBM/8VxmvLXy9e3GMTYJPg5s71ghk0/yncfEX9O4KkKpDEM
-	+uO+JmTbwfnNNqWrHcReGSEy+dGcE36Mmig3ClVwJzT9Sz0c8qdKahoaTmruk++HkxurCr1pzvd
-	9jyg1EpGyNPxM5ajOjN5r/BQYXlm/Kvb27PlO3edyqwiX0rtqCcC7TMUYs1vpw9Ony4FfqzWHwY
-	yyvae/zaOTFTrtvdEUAvq3cUz5iZXeCVo57T4ZUwkdORHh7W09FU67tk37OqVmMG85DQwTWE8TW
-	f3oHFb/t+QDS8Q7x4zLyN7dhRplVBS2XJ+cGT/iWHLhh/EkD57sXrfT5jxQteMONr/02mS1LGBN
-	UCoW43Fe5IC4AX+WdNEPQuyiN/2eyN4xtwlSD775uBGTIIKTi5YiT+gUZgBGpW514kQruLi6HJ/
-	Klc17Z6iUsW5uMNT5Kb8PVUJBTDht/5DbBD3ptR1bRiMt2zOgYoBrzB2J2THrWH3cyXTcmFSvKP
-	Av1geBl
-X-Received: by 2002:a05:6000:2284:b0:441:1fa5:457c with SMTP id ffacd0b85a97d-464fff65dcdmr7069984f8f.5.1781874313503;
-        Fri, 19 Jun 2026 06:05:13 -0700 (PDT)
+        bh=ZidMZWTCYLyL5ufIMI3PcR9yOlOw9e9GMi8xqFKVOr8=;
+        b=gflDynSKdOYtRT8mDCn9MIENdrTeZerJ+U21n40haK/VNuWS4wsAyOCozEVuPZthXY
+         LUK8rqO6PVUDxVwaVni4mapLBbfDqaoR+bOIr4gTTRBcdm1EzEUgt1zUX+u+R3dnxsH4
+         /Dam9QhtOz4QJvIi9bUW/rOeYsTQm1dFbiG0KdD+3Aa0rKEIh7HFdKqdUgIe4H3piZAr
+         wfhpcu0jxYdE/z4RPrZ0mZhAnH59Qg5l9DEw87X8EBNsYyPEhAbgYCMXg9hJ5cZ6XBBq
+         kLv3QFigNJm57X+AnCdiCpcp3xPUMGzdkGqjB4TKlSNqR3oZ7S1ooKOBblVSqRDiSj9v
+         i4lA==
+X-Gm-Message-State: AOJu0Yx4lJt5vJI9t5LNj0KaJlJzIZkzLRDAk7FAFxSvxHgjfjiRrfCG
+	hqJKjhyZkNhm/tiOIRY3RBqS7vN5ne7MafoW0Pqd2/l5ExP7mv32O4KMX634FT6jMgI=
+X-Gm-Gg: AfdE7cnrUQPhU4NE1ORbLVjYO0+a4DriMFIVwM7oBPPtJgSPE7/bJJxNMI+s7FmIN0i
+	sVyS+g9ffMaJSC6bwOl5lA8RvLbgBB2DXcG6Szdppk8p2trTZ5qv6NxQC5ocDuhqK1BSqcFac20
+	l/6JPCliauEbPp7SfROvS5MADLKVj3bmNehplC0O6YNCrlgi0Jgu4GvBCwZqhLK7PC7YO3aQCYO
+	0cRNdQRAc1CkYrYugKLwutimrAeKmh1yBup2+JxEogMDJ+aKIcu8mG/4UguXIoNLkwepZ8f8Vx7
+	c41daUJ7HGZlx3gJ3ORjtT40mxMopWdYfjpFL12S+5lx9cqSiM/IKsTXQElpzQfYM6irOL/375T
+	SFzmqzwEs8GcuaMfnmM4qfPFzxW1uvo7BvIkMIqdlc3OZfTm/qGM+A/B3enflEel691oW+/fTIW
+	5hRtJ8PHM6cXwTG23Eyzr7Mwa2sbE3t4idOJH/nIEnzmmdADWGHIeJVaL9quvDCzuRJxKblMZaQ
+	2ppBHVf
+X-Received: by 2002:a17:907:724e:b0:c08:3409:b747 with SMTP id a640c23a62f3a-c0b62137c57mr133369766b.33.1781874318503;
+        Fri, 19 Jun 2026 06:05:18 -0700 (PDT)
 From: Frediano Ziglio <freddy77@gmail.com>
 X-Google-Original-From: Frediano Ziglio <frediano.ziglio@citrix.com>
 To: xen-devel@lists.xenproject.org
@@ -100,100 +100,95 @@ Cc: Frediano Ziglio <frediano.ziglio@citrix.com>,
 	Teddy Astie <teddy.astie@vates.tech>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v6 02/16] libs/guest: Reduce number of I/O vectors in write_batch
-Date: Fri, 19 Jun 2026 14:04:47 +0100
-Message-ID: <20260619130501.272832-3-frediano.ziglio@citrix.com>
+Subject: [PATCH v6 07/16] libs/guest: avoids using 2 indexes
+Date: Fri, 19 Jun 2026 14:04:52 +0100
+Message-ID: <20260619130501.272832-8-frediano.ziglio@citrix.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260619130501.272832-1-frediano.ziglio@citrix.com>
 References: <20260619130501.272832-1-frediano.ziglio@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1781874314-4C1CA00E-B0ABB76E/0/0
+X-purgate-ID: tlsNG-42698a/1781874319-45DF800E-D2DF68FF/0/0
 X-purgate-type: clean
-X-purgate-size: 2646
+X-purgate-size: 2731
 
-Small optimization.
-Reduce number of pieces passed to writev.
+Simplify code, after the first scan of the various arrays we don't need to
+keep original types and PFNs but only the ones having data.
 
 Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
-Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 --
-Changes since v2:
-- change prefix in subject.
-
 Changes since v4:
 - added Reviewed-by.
 ---
- tools/libs/guest/xg_sr_save.c | 34 +++++++++++++++-------------------
- 1 file changed, 15 insertions(+), 19 deletions(-)
+ tools/libs/guest/xg_sr_restore.c | 26 +++++++++++++-------------
+ 1 file changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
-index fdbceab52e..68ce1aeb98 100644
---- a/tools/libs/guest/xg_sr_save.c
-+++ b/tools/libs/guest/xg_sr_save.c
-@@ -97,9 +97,11 @@ static int write_batch(struct xc_sr_context *ctx)
-     void *page, *orig_page;
-     uint64_t *rec_pfns = NULL;
-     struct iovec *iov = NULL; int iovcnt = 0;
--    struct xc_sr_rec_page_data_header hdr = { 0 };
--    struct xc_sr_record rec = {
--        .type = REC_TYPE_PAGE_DATA,
-+    struct {
-+        struct xc_sr_rhdr rec;
-+        struct xc_sr_rec_page_data_header page_data;
-+    } hdrs = {
-+        { .type = REC_TYPE_PAGE_DATA },
-     };
+diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
+index e148fc594a..fb46142d87 100644
+--- a/tools/libs/guest/xg_sr_restore.c
++++ b/tools/libs/guest/xg_sr_restore.c
+@@ -260,9 +260,7 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
+     int *map_errs = malloc(count * sizeof(*map_errs));
+     int rc;
+     void *mapping = NULL, *guest_page = NULL;
+-    unsigned int i, /* i indexes the pfns from the record. */
+-        j,          /* j indexes the subset of pfns we decide to map. */
+-        nr_pages = 0;
++    unsigned nr_pages;
  
-     assert(nr_pfns != 0);
-@@ -115,7 +117,7 @@ static int write_batch(struct xc_sr_context *ctx)
-     /* Pointers to locally allocated pages.  Need freeing. */
-     local_pages = calloc(nr_pfns, sizeof(*local_pages));
-     /* iovec[] for writev(). */
--    iov = malloc((nr_pfns + 4) * sizeof(*iov));
-+    iov = malloc((nr_pfns + 2) * sizeof(*iov));
- 
-     if ( !mfns || !types || !errors || !guest_data || !local_pages || !iov )
+     if ( !mfns || !map_errs )
      {
-@@ -216,28 +218,22 @@ static int write_batch(struct xc_sr_context *ctx)
+@@ -279,12 +277,18 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
          goto err;
      }
  
--    hdr.count = nr_pfns;
-+    hdrs.rec.length = sizeof(hdrs.page_data);
-+    hdrs.rec.length += nr_pfns * sizeof(*rec_pfns);
-+    hdrs.rec.length += nr_pages * PAGE_SIZE;
- 
--    rec.length = sizeof(hdr);
--    rec.length += nr_pfns * sizeof(*rec_pfns);
--    rec.length += nr_pages * PAGE_SIZE;
-+    hdrs.page_data.count = nr_pfns;
- 
-     for ( i = 0; i < nr_pfns; ++i )
-         rec_pfns[i] = ((uint64_t)(types[i]) << 32) | ctx->save.batch_pfns[i];
- 
--    iov[0].iov_base = &rec.type;
--    iov[0].iov_len = sizeof(rec.type);
-+    iov[0].iov_base = &hdrs;
-+    iov[0].iov_len = sizeof(hdrs);
- 
--    iov[1].iov_base = &rec.length;
--    iov[1].iov_len = sizeof(rec.length);
-+    iov[1].iov_base = rec_pfns;
-+    iov[1].iov_len = nr_pfns * sizeof(*rec_pfns);
- 
--    iov[2].iov_base = &hdr;
--    iov[2].iov_len = sizeof(hdr);
--
--    iov[3].iov_base = rec_pfns;
--    iov[3].iov_len = nr_pfns * sizeof(*rec_pfns);
--
--    iovcnt = 4;
-+    iovcnt = 2;
- 
-     if ( nr_pages )
+-    for ( i = 0; i < count; ++i )
++    nr_pages = 0;
++    for ( unsigned i = 0; i < count; ++i )
      {
+         ctx->restore.ops.set_page_type(ctx, pfns[i], types[i]);
+ 
+-        if ( page_type_has_stream_data(types[i]) )
+-            mfns[nr_pages++] = ctx->restore.ops.pfn_to_gfn(ctx, pfns[i]);
++        if ( !page_type_has_stream_data(types[i]) )
++            continue;
++
++        mfns[nr_pages] = ctx->restore.ops.pfn_to_gfn(ctx, pfns[i]);
++        pfns[nr_pages] = pfns[i];
++        types[nr_pages] = types[i];
++        nr_pages++;
+     }
+ 
+     /* Nothing to do? */
+@@ -302,16 +306,13 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
+         goto err;
+     }
+ 
+-    for ( i = 0, j = 0; i < count; ++i )
++    for ( unsigned i = 0; i < nr_pages; ++i )
+     {
+-        if ( !page_type_has_stream_data(types[i]) )
+-            continue;
+-
+-        if ( map_errs[j] )
++        if ( map_errs[i] )
+         {
+             rc = -1;
+             ERROR("Mapping pfn %#"PRIpfn" (mfn %#"PRIpfn", type %#"PRIx32") failed with %d",
+-                  pfns[i], mfns[j], types[i], map_errs[j]);
++                  pfns[i], mfns[i], types[i], map_errs[i]);
+             goto err;
+         }
+ 
+@@ -337,7 +338,6 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
+             memcpy(guest_page, page_data, PAGE_SIZE);
+         }
+ 
+-        ++j;
+         guest_page += PAGE_SIZE;
+         page_data += PAGE_SIZE;
+     }
 -- 
 2.43.0
 
