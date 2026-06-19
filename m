@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B523ECD98F8
-	for <xen-devel@archiver.kernel.org>; Fri, 19 Jun 2026 07:50:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1341733.1602014 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5DB5CDB46C
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Jun 2026 07:50:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1341736.1602044 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waTzg-0004Or-2E; Fri, 19 Jun 2026 07:50:28 +0000
+	id 1waTzi-0005Dm-Td; Fri, 19 Jun 2026 07:50:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1341733.1602014; Fri, 19 Jun 2026 07:50:28 +0000
+Received: by outflank-mailman (output) from mailman id 1341736.1602044; Fri, 19 Jun 2026 07:50:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waTzf-0004O7-Pf; Fri, 19 Jun 2026 07:50:27 +0000
-Received: by outflank-mailman (input) for mailman id 1341733;
- Fri, 19 Jun 2026 07:50:27 +0000
+	id 1waTzi-0005Df-QX; Fri, 19 Jun 2026 07:50:30 +0000
+Received: by outflank-mailman (input) for mailman id 1341736;
+ Fri, 19 Jun 2026 07:50:29 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <taka@valinux.co.jp>) id 1waTze-00046t-RG
- for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 07:50:26 +0000
+ (envelope-from <taka@valinux.co.jp>) id 1waTzh-0004pH-QI
+ for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 07:50:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1waTze-001qMv-7n
- for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 09:50:26 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1waTzh-001qMv-71
+ for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 09:50:29 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <taka@valinux.co.jp>)
- id 6a34f4ab-2eae-0a2a0a5409dd-0a2a4504a682-32
- for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 09:50:20 +0200
-Received: from [40.107.74.93]
+ id 6a34f4b5-2eae-0a2a0a5409dd-0a2a450bb90e-44
+ for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 09:50:29 +0200
+Received: from [40.107.74.114]
  (helo=OS0P286CU010.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.0)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.0)
  (envelope-from <taka@valinux.co.jp>)
- id 6a34f4b9-5f9f-0a2a45040019-286b4a5d4991-3
- for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 09:50:19 +0200
+ id 6a34f4b9-5e53-0a2a450b0019-286b4a724d13-8
+ for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 09:50:28 +0200
 Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:458::18)
- by TYTP286MB4024.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:185::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.12; Fri, 19 Jun
- 2026 07:50:14 +0000
+ by TY4P286MB7477.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:356::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.11; Fri, 19 Jun
+ 2026 07:50:24 +0000
 Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  ([fe80::c8c9:25cd:8d13:96d6]) by OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  ([fe80::c8c9:25cd:8d13:96d6%6]) with mapi id 15.21.0139.011; Fri, 19 Jun 2026
- 07:50:13 +0000
+ 07:50:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,189 +57,152 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Hy2C9xnszRL+Qa89EGIFb2k7vsQLTEz/SXhacF/6GEAoMPHL8GxeTPUDl21lYgP7d68vy4Ivcg9cCsLm+kRK96X7DWmaIHOvawTfBpR5WswfPBuegxX16rpXqFaH4pqriFT08mNfRNNoMLnNh4Dn35zAYTEhaHiQ1EYM2Wv7RbIf/ieYjQlQYYJKXpkmLWMzkittt0lLwSV9pEr+WWYk8QW17eMo4kcYqko3b0LgQ2djS8rg4VVboGzbbC17nTkU8WnoEC4t+ldgsVIHWEUYqtFELNpLS2FytUlkErKxJ4w1Bw1dQwW1iReYOoJTFLQxHRFNwNo37lhexMjEAX7lrg==
+ b=hoddoynRJb9jSI2y7eY2X8YgPtVNPm2jClijp8XlLbY+wW9Y8urVPKZ88IcI257koIbx3gKBwbUI7Do4LLoFtnWAFJsKwZgUfeEhawNyTB2ois2lDS+HBAUB1tNCPb1XTqq0jk7ZrPTGNDSLB35CNWzakjEWwGyItDryueyZRNSHiICJEFGm6Nedb3RDea6GsphgqOD/5z80j4XKZZmsHjohPXWpHCW30/JBDJj0wifYzZ+LUxddb42ThDJfSjtpUKUPZ9WF61huXOeoRhOOA2BIN7D5kucJbL/NGVOZFwo8EUogxwWOYfrsULOGwEuhv0scZR58GbtnTdbSOhRluw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=A5DRyVcGqc4trjAUUFIspT0qRbRZA+1C1Qy6wanYWX0=;
- b=esF6qEghcxqV8KTxizuC6j4nqFCh0XSdkmaH1RAE3xD9mCk8Tg7td3OOx90Zf+PUNApKX/oe2Eg+uygzqp1TIhuxk+Fn1z2R6vsvxj5f9z7S00mJuRuwPDhte50b3M0tscqcKCwKkRs8mxnpPANTmD4Aqqj0+TTZjVAyBrRSbCj3Rkit5AznzMDeGsD1dEug0+xKGyVq7oTPlXYPahP1PLc/kyUHXuHTEherEk3ZX41VYj27u3dh48XJZWqfRt48OEBoW0aCWo612RvnKaHOOT9q/+gbDsfzsolVtFGE5ACAA6/rTx0xssfZ361yXfvjKQkW00Cd4V7DuRWZSwB2Lw==
+ bh=lHp6m7ACt989g4mUr+Mdtue0BtyxlOvoHV2Q/YLtGtc=;
+ b=QeINBDEpD4ld4EgQHRnWRRaowWZedfG1wIHj2py4YJNd1cxvr0ysf3qZTgt4VefMhgKzAU5V37hjKx/t7iO6yohVOyN8h6fmR1IJ0ZnqJX5k5VllXDilmtDUbqj0XaR8nt6F/07nDYzuEY42xuANtlCJd3ZINCbXR4Ucvirpy3On08X4zWBrIYekQdWnir4CD6J3eydp2ZA1C35sWg4kXi2CTGk819MSn/9erW8exaNMvkih6NIkrjPvIYt/bb4q0j7ryc16ZfMQcX5C0KTHBAb6avEQMrkBwcx6MR27z8775rCu8jNZg2fc+sNd0pkPiX8ymYD86JGlWK3k/QExTw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
  header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=A5DRyVcGqc4trjAUUFIspT0qRbRZA+1C1Qy6wanYWX0=;
- b=HuCw0CD/MWb9KZC1V+FKhFKsG16fS6CGj9JtOm81WXKTJY4/zM2Fh3fXWvMLu7+vY3ukAY+/pTdiXNgaOUwgh+L/YZYBNbRLHE7Px33mqL+V+GUBmxe5LCn+uf/Q9WHuNrbQ3y/7HcrjnzPsTZ+Eb4xr23JC7sEgCsjJuFGIcd0=
+ bh=lHp6m7ACt989g4mUr+Mdtue0BtyxlOvoHV2Q/YLtGtc=;
+ b=SdOy6zJu1KN2vDh69sKCTd58flUSHvoVKnoMQ9EqCXhZGQxxvTol35vqTyHuNtzhhu73VK3C4dU2/n9oTLjzIXvjKFVWsFNMNoNPZHOFT4/BczOZz27QsY0KoSg4QS5TjUD3PHtY0+BWKEFdduxeSXH7moImX3oC3dCByRc2tn4=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=valinux.co.jp;
 From: Hirokazu Takahashi <taka@valinux.co.jp>
 To: xen-devel@lists.xenproject.org
 Cc: Hirokazu Takahashi <taka@valinux.co.jp>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH v3 00/22] Introduce Device Tree based NUMA support for ARM Xen
-Date: Fri, 19 Jun 2026 16:49:48 +0900
-Message-ID: <20260619075011.377116-1-taka@valinux.co.jp>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v3 06/22] xen/arm: Map populated CPUs to their respective NUMA nodes
+Date: Fri, 19 Jun 2026 16:49:54 +0900
+Message-ID: <20260619075011.377116-7-taka@valinux.co.jp>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260619075011.377116-1-taka@valinux.co.jp>
+References: <20260619075011.377116-1-taka@valinux.co.jp>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: TY4P301CA0005.JPNP301.PROD.OUTLOOK.COM
- (2603:1096:405:26f::9) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+X-ClientProxiedBy: TY4PR01CA0125.jpnprd01.prod.outlook.com
+ (2603:1096:405:379::7) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:604:458::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: OS9P286MB7222:EE_|TYTP286MB4024:EE_
-X-MS-Office365-Filtering-Correlation-Id: df1aedbc-a2ea-40ed-776c-08decdd76563
+X-MS-TrafficTypeDiagnostic: OS9P286MB7222:EE_|TY4P286MB7477:EE_
+X-MS-Office365-Filtering-Correlation-Id: d58d05ba-8b91-4d97-2fc5-08decdd76bd0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|10070799003|366016|23010399003|1800799024|18002099003|5023799004|6133799003|56012099006;
+	BCL:0;ARA:13230040|366016|23010399003|376014|1800799024|10070799003|56012099006|18002099003|22082099003;
 X-Microsoft-Antispam-Message-Info:
-	Bu52PLS++K7A3Rbb5HY54ncQjGbM62LDFF2sAmIS0tc3nmH8zhUzRcumPLo98oNCK8zg0YEv3i8olREiOCyYwt5a9Gtcbl/HnanXNFE5Iic5Zn5UcZr8v8euPgWO72jab35gPyV8Caf86m5zQsauSfNiXWfs/RXLdZr4LiFq4e5XAK3XN9iLYNHLG9MJ7e0PUKmKFTDIXzn4QtRDq7AQTT8L9m10znzL/bjKi+6J2t3nbNN4FbSXz009mWwR5cIhYZkkRfh/jZkdBHpHH5weeaE3kK6LTVrToPqF4KEqlF7hfovIiosNvRI4PvvhSlNa/vClHp0ysKOHmNF2scGH/CxnjztvAO01xHaDMZnyPS2hhdY3EAQ3JH+JssPRIJoaCXVPzcJge1x/OZ0YD9dnon6QIivbDwkdQjwc63PJl7aMEY7bJx2yqxRhS6A9zIwTe1qwHEYuQ6HRmacOQT3DSH4H+QYtiK2HAbV5mffWXyDO/qps8HhRUO/n63MxqH6uD6U3OH6rj4cG3tptm/a92PZAtrGfJvqDst52RJgFiPhPpNlIEcwGpWEiOCEi9UXo8FiZB9zAbWSPEKw4dIA9GEQEImjkzbeENXIMJ5IGOGQhPROoR1RfaSMKF1nkkkL8iouwjjUOeN35aEWOLYUvdV6eL1iLG5vVDOOL0QLWWRw=
+	2XME3FsXRqbpMutWzR+Ouj3IngTQo+8ZQWVruWqre9KCfWi0CY8nfdxf5MLNbvYobbRf3k1vJV/zU1xGOX1sKDjoNWQg2c0QwFqQBdLkj16Az/VYsSJeIiv1JTxAGIiCw3kp/fgRR/bq0TLgewxaTaDPNdXlPcRVET9HLQPDrJxqSPDkidV6aZBX5ZRXX7bVka0BNmC48WpMSocHpuuNGBCAEFuRkZQWJm4Q+1d+mgFgSvg7vgxfK8N2Yv+TIebyaJ/KqEybP/3iX5V3ZW7Plfqu7sm2A+tYRf4KcX8pEPnHXhrRB67XD9TpdWSYVIs/IrAyAe1ObYrBV+4Qbs9Htf4QKLI9JDEdn78PyJHbu0Reu1hOxnVJZ7rpIWdNphwB/Zw6UTzYXtHFC9jP+CvEDJe1WoTcmQmzYTY6uWoBmszOdDHPY7HxdJQpwicvMmAh89PYpYMgAgBG4NyppbWRNpnrkHL/ODLshjob5pi6ipo3206WT3t0wyUgNAi4Np8nqhQTdftLZUocaAu1BlxFEsCgKfr9WmmtjAdqvO5O/xpA9CbdfUmzFSl7aZTtKpTY9126pGG+MSd7JGSvdDu7LxKZUUumQKeloWe3BAFSbFIA2YFLRRaBOpmYMo51ZkLLkl1B/bY5rAuso4TOGOtIk1fzpxURv6SwyyI194aCV6M=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(10070799003)(366016)(23010399003)(1800799024)(18002099003)(5023799004)(6133799003)(56012099006);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(10070799003)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?Aei1SFZ3NGFsOcaiOxI4Vw4N/NDhWcNtynKgnq+3KLRJNE3rfFg0rfUTUtOV?=
- =?us-ascii?Q?uOj1wb/yLt19B3hTpuHki+O7z1gBifGzS7oLWjE5smRhMIvT2Saxro3qp5Fm?=
- =?us-ascii?Q?IZbWmpduVhwHkCuo9ebQMGrVeDTzXTZV7aoY/YyrgJ1Keo+X//P72lgmqL4z?=
- =?us-ascii?Q?9E59c3cefrOcFPGhuNlL+Ehx5jATkDTW28nfoMcVRbC5rfbWwRFm+AbSIBMO?=
- =?us-ascii?Q?GAmdWCtZAYczpcD6vgx/VK25d2SNbrTykm09V8Fqc+XGvs/hG+lUlzka/Nge?=
- =?us-ascii?Q?RZaIoJrD0DB5BrMv6OKSO98THbbqw9MGdaFQ50srEyIyBUizdqzvl4uBBQEm?=
- =?us-ascii?Q?KL1IlqyLnVt+OfA+QiA4+O5OQ7b0CJfCaGz80w6qg/QLCMYmTrcD55EllF5T?=
- =?us-ascii?Q?VS0fA88wSKmAr1TYDOqktCwzfVZqJna/c4OrLfUsYGrhuVVy4e70661UrCkN?=
- =?us-ascii?Q?W+fA2a1TTQl9/EpqRyXUEl4go1AQAq/V+gczEIY1bH1DKno55Co5U7v/9XIg?=
- =?us-ascii?Q?J0K6fIZ/3zpg767qyQal7nb/38GJTq/eKMBm9inRNETT8RgwjeYFXMwk+kI5?=
- =?us-ascii?Q?fIJYoWqL1iuRJeVf3Lip4n7mjvd5HUNJyRRrfYDY1+a9Xpy+cCREadkPTgGp?=
- =?us-ascii?Q?dukHBbjh/176eudHa0uSvPjNvuARZ93z/M1n9sRKtNMb66k+tlpK+KVRqusS?=
- =?us-ascii?Q?l+9Ras+D9GqQDj92K+f9P+zr0PvgcpWr0qEe+VV3OZVz3yvYGcK4L9DzyQx9?=
- =?us-ascii?Q?Ll42kjKNsCyp9sFG9b7BU7rfSZD/2SmTRL9UCB5S6GPLX5+RKLTmWh7iI5u2?=
- =?us-ascii?Q?fNHtuCrkafUl1k0HhldsvQE/y+zbEE8YrVHJwmKWPn3vs+X0FLvJ+kxdLAll?=
- =?us-ascii?Q?aULW+6tX73zly/yH2uEqB/pA/4sBbA5SEsbo4yIn4jAAhBeJlLyf4JrZwr0C?=
- =?us-ascii?Q?EYsy28l5vQ1cWWV/ucalvn1msAiUtCNQwlSwmexRuGQlZSNs6GBJYgPwJUJ2?=
- =?us-ascii?Q?SytIq3Ba5/PaIKUF5n0+5JNil1TwhwxkqnsGVKc8IfMu4ABS5y3Pk4rYizv0?=
- =?us-ascii?Q?/7yrP73FUJ9y3YWWk6M2Bp7QfFhhVv96sHLxmxSqC310SsjRsTpVfMLxC3FX?=
- =?us-ascii?Q?e3kAlSrS8nj+x2LlFLukRqXd2W8t2vuf1aSgQaVbm8JaCCrWKaL40OZfX/Ee?=
- =?us-ascii?Q?iJGTez1y2BPNF+6EK6XFRWreEkuFw35bVs+RJ/7vRSVJhuqfnwLX8nxzaOLV?=
- =?us-ascii?Q?LdQhftjQe0URq/ncHLDocZYULlvup58u5IunaFFeWQZ0ZZzWGvvHVMS7iQRE?=
- =?us-ascii?Q?SVebGBwSQIf5TVwZWtrGfq82AMhEw1dXb2SJjtpyaNQsvLV4JG1btfZLpOuc?=
- =?us-ascii?Q?u40hmB/OeNKrB03S4T4Asx8mjZDkSQKiSfDd3/ZrYulqXOHtjMMPiyhJ6Czy?=
- =?us-ascii?Q?OanI7e+cqRL35IkLH+qBWtop/sZjf9B1bSTfFD0/LK17bfIhQzYew1LjBlCV?=
- =?us-ascii?Q?UTgqEZ9He87d3QIpBy/vmefTvxTcq6sgAkyjSK4O8FwN3MA7TwDW0Oc6Zeut?=
- =?us-ascii?Q?2YipVgkssY/OolHZRdltkcS7WfRhhqg6xB33XzgguQNGaQrp3uVjuNU1r5uS?=
- =?us-ascii?Q?7U9PCrgYhqb9LuDz6CQO7xX55cswjBNQF2PBGZhXvz5CfVmuZsTIYiNUKL9B?=
- =?us-ascii?Q?V6TnOAA7CZJarmIU05A/6RON7j89y11LVUvQOJqTVT6zD32a5hsQbQmqFTIl?=
- =?us-ascii?Q?kwsHp+/F/SJlN1IFl9U2PuZlOLDNex9i19LAv4t/WbRs3cWNzf8HkFFHIYy3?=
-X-MS-Exchange-AntiSpam-MessageData-1: m5Qzg7O09x8rhw==
+	=?us-ascii?Q?QHqTcAm7mA+zA1tS6cXmfTwNKriSNuQQOsQDrB+Hps52ZNyv+4Zu92nkh0Sz?=
+ =?us-ascii?Q?Lzoj5tu+HzunM6Iq495H0DoF5Rns5w27Ljv0up5YCeqBYeAhug3W9Tqf2VKQ?=
+ =?us-ascii?Q?VUZYZavqeYJdY1C8wvMeTUxPg961zwchRK6S4ugu/dpZ5Chj/GUH/P3+GhY/?=
+ =?us-ascii?Q?OG/34L5FyGhOnJgNK9SDZ9X3659UNcDW64O0uj3du2diP77qlnQUxmD2s53I?=
+ =?us-ascii?Q?6MzMZD3FQIU298mI7Txq8wvSfepizC/PU8geTMW8tu2k3XQjKkkzdZ5aVuOA?=
+ =?us-ascii?Q?09gBmgJoH8/OdNS2mPZGJmIAknYzZ3ZptpzEUu1lfzirdfttEmPocXV6UERM?=
+ =?us-ascii?Q?p8tG6PtOJ/NIgnxRWJogUwaaWWO55pSeamLw0Ap25pS5HvtblSR23CSmgRh4?=
+ =?us-ascii?Q?2z+UI/pqSRsidO2bDVmkHWZefeWX2IZjANSmH2fm8nmpvDaQHqW3aWHm8aHc?=
+ =?us-ascii?Q?6nqXTlGMYdfChB9YSPQ9Tka5LfXbYUfEZbIyDfNleQmzdOBdlABbhiVw1bp5?=
+ =?us-ascii?Q?edXUocSJLa/oeNQgbRbf595SJXQOmJ7VpYpKmdZDT7jYRiiaODy6No1MHkeR?=
+ =?us-ascii?Q?xa9jWPvUz1MRB5/8Gk4mY5yCHyk5aFKs2h6fTfl5AeHc7oDm3/3JihfP8ZSm?=
+ =?us-ascii?Q?/2QwQZIkuOFi3WXpU/5pxTpn4VGzXugKyowC2DMiMGBCG9uVaivySQCaLOXv?=
+ =?us-ascii?Q?4xUJQUYVGVT6SF71dmLjSoXLOe6WZZWKiR+FserPINQLzVJjb7SW3HHXGl62?=
+ =?us-ascii?Q?rj+D9femyreN6fJuZOOzPvu4Yn1UupNrYj9C0nY+hoDusV6xmE4z5kBuRBkf?=
+ =?us-ascii?Q?mrcXmZuK6uUtlLPsTpZu/mlWAZzYMTUpoDCDdT7gZt9LSaEKo0/civtDXywK?=
+ =?us-ascii?Q?7NraLRzgChbYuk4f2LOvx3Quy3unf7OMmQZA1GDYkur/yBVjG/7KUzO0WFns?=
+ =?us-ascii?Q?pJgIDVvyMkv7zArUdynizlxy3KA2kmPE6Fc2ltAaeZ2PfPrvQRiJHuh+2qiu?=
+ =?us-ascii?Q?jb29nHOQJYFlolv2CPuVptaFye8t7clKRyivbw4fM8BtzsEcjyPLiLxJ3WKk?=
+ =?us-ascii?Q?qvipIJ9ztSHE99DAfImdMf+wRDoSFa6Ekm0yDCpdrDAOgFgqXA8/GcvV8NFs?=
+ =?us-ascii?Q?lhOpRAR7Jn3uvrWabBefv+k/LkBbztdkWJgm2atVSntVnZ+pDDujGWlj7dDG?=
+ =?us-ascii?Q?F8HUeVFpMF0oE9ixe1GU08WyiyF8bHQ6PYP48yZUprYHTO7UzDx51pKT0zQ4?=
+ =?us-ascii?Q?DNpQjcuaRDUwgVJH/PXabbl6bAXWdWGeWVTTD7jpBSLMZ8Fa/ZMQ8a+FCKVv?=
+ =?us-ascii?Q?cgU0yZu/wJo7s1zfEWs2bmEXT12iHYVlVsLPjggEkQXTe/6FakPd+KlA18sV?=
+ =?us-ascii?Q?CyujBWOpe0QYym0slqthz/MbTSV91hluCjVVafofjPmEerfjr8gS5rw43McS?=
+ =?us-ascii?Q?n7IpSDPv2GbNeivVg9uEWAjw7nMrjF3VWH6ULBW/blsjQybY6mc1qKHGh5Zm?=
+ =?us-ascii?Q?1O0JYTgG8IyB/CBjn9Cz2L6ZzEFQ2q1oM+KoHFIHZn08R6giw+n62A0LAcHm?=
+ =?us-ascii?Q?RYXmz7z4ZvCGVpsRaUGUigwVQ3/bqDIAhi/R6iMG59MhIbwwfGJZ9UGyOQ5x?=
+ =?us-ascii?Q?NqFFwLCCqpIkjvE99LT9G4GTyBHltXtjSfMQAZoZJJ0tCOmZmfdIzrrmKnCY?=
+ =?us-ascii?Q?nAt9LykLF8IlVdQ5JXVBGMkKlzmjtFnlXqHpQOLX3hCYP9oLkN+5UYvE3o6/?=
+ =?us-ascii?Q?iZglWz1/doByrYr/+VQwkG8oO1umWuxmElnJGycL9mrzd5LSxTdomx4gDR80?=
+X-MS-Exchange-AntiSpam-MessageData-1: STRszDs9M+88Kg==
 X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: df1aedbc-a2ea-40ed-776c-08decdd76563
+X-MS-Exchange-CrossTenant-Network-Message-Id: d58d05ba-8b91-4d97-2fc5-08decdd76bd0
 X-MS-Exchange-CrossTenant-AuthSource: OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jun 2026 07:50:13.7554
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jun 2026 07:50:24.4595
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: yaGtsQuZfzmiZpofkqWaWLWsuDdZadREHTJ+w+4LZ26czFC8Y76ncFZnEEf+ZSyIBn46AVRUNJCO7sWGlrZKPg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYTP286MB4024
-X-purgate-ID: tlsNG-ebf023/1781855420-9EBD7141-8EFDA251/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: ztf83p+HP2+yu1FrRgKHDRZAAixgPmE/2S6VwcJ3Q7I+WmHICfyPPlg54DcLKoCerc24ql8oDFFKzCvv697QHQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY4P286MB7477
+X-purgate-ID: tlsNG-42698a/1781855429-4DFF900E-FAC01265/0/0
 X-purgate-type: clean
-X-purgate-size: 4412
+X-purgate-size: 1651
 
-Hello,
+Map the populated CPUs to their respective NUMA nodes. The NUMA
+node ID for each CPU is retrieved from the Device Tree.
 
-Here is the v3 of the patch series to introduce NUMA support for
-ARM Xen.
+Signed-off-by: Hirokazu Takahashi <taka@valinux.co.jp>
+---
+ xen/arch/arm/smpboot.c | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-For this stage, I am focusing on getting it up and running based
-on Device Tree. I think porting this patch series over RISC-V Xen
-or PPC Xen will be pretty easy.
-
-Please note that this series is meant to be used alongside the CPU
-topology patch series.
-Please note that this series is best used alongside the CPU
-topology patch series. It can actually run without them, but it
-won't be as efficient.
-
-Changes in v3:
-- Split off the CPU topology patches into a separate series:
-  "Device Tree based CPU topology support".
-- For the distance map table, now we only allocate enough memory
-  to match the actual number of NUMA nodes.
-- Separated the distance map table functions into generic and
-  Device Tree-dependent parts, keeping future ACPI support in mind.
-
-Changes in v2:
-- Fix vNUMA memory allocation algorithm to support ARM
-- Allocate vNUMA memory from the associated pNUMA memory
-- Include the XSM Policy module size in the required memory
-  calculation for Dom0 Bank 0.
-- Enforce a minimum chunk size of 4MB during Dom0 memory
-  allocation.
-- Define the cpu_to_core() and cpu_to_socket() macros in
-  cpu-topology.h instead of processor.h, as processor.h should
-  strictly focus on processor hardware information.
-- Make cpu_nr_siblings() an architecture-specific function.
-- Refine the code to conform with the Xen coding style guidelines.
-
-Thanks,
-Hirokazu Takahashi
-
-Hirokazu Takahashi (22):
-  xen/device-tree: Initial framework for Device Tree NUMA support
-  xen/common: Default function to get the distance between nodes
-  xen/arm: NUMA helper functions via Device Tree helpers
-  xen/arm: Introduce CONFIG_DEVICE_TREE_NUMA config option
-  xen/arm: Configure NUMA affinity for populated memory banks
-  xen/arm: Map populated CPUs to their respective NUMA nodes
-  xen/device-tree: Read NUMA node distance from Device Tree
-    'distance-map'
-  xen/common: Allow building ARM32 Xen with CONFIG_NUMA
-  xen/arm: Introduce dom0_nodes boot command option
-  xen/arm: Set Domain-0 node affinity from dom0_nodes option
-  xen/arm: Reflect physical NUMA node IDs in Dom0 memory DT nodes
-  xen/arm: Balance Dom0 vCPU assignment across NUMA nodes
-  xen/arm: Export Dom0 vCPU-to-NUMA node mapping to Device Tree
-  xen/arm: Generate distance-map node for Dom0 Device Tree
-  xen/arm: Balance Dom0 memory allocation across allowed NUMA nodes
-  xen/arm: Use dedicated function for Static SHM Device Tree creation
-  tools/libxl: Fix vNUMA memory allocation algorithm to support ARM
-  tools/libs/guest: Allocate vNUMA memory from associated pNUMA nodes
-  tools/libxl: Add 'numa-node-id' property to DomU memory nodes
-  tools/libxl: Add 'numa-node-id' property to DomU CPU nodes
-  tools/libxl: Create 'distance-map' node in DomU Device Tree
-  xen/arm: Support numa and dom0_nodes boot options
-
- docs/misc/xen-command-line.pandoc     |   9 +-
- tools/libs/guest/xg_dom_arm.c         |  57 +++-
- tools/libs/light/libxl_arm.c          | 103 ++++++-
- tools/libs/light/libxl_vnuma.c        |  13 +-
- xen/arch/arm/Kconfig                  |   8 +
- xen/arch/arm/Makefile                 |   1 +
- xen/arch/arm/domain_build.c           | 426 +++++++++++++++++++-------
- xen/arch/arm/include/asm/numa.h       |  20 ++
- xen/arch/arm/numa.c                   |  57 ++++
- xen/arch/arm/setup.c                  |   8 +
- xen/arch/arm/smpboot.c                |  20 ++
- xen/common/Kconfig                    |   8 +
- xen/common/Makefile                   |   1 +
- xen/common/device-tree/Makefile       |   1 +
- xen/common/device-tree/bootinfo-fdt.c |   8 +
- xen/common/device-tree/domain-build.c |  99 +++---
- xen/common/device-tree/numa.c         | 105 +++++++
- xen/common/numa-distance-map.c        |  62 ++++
- xen/common/numa.c                     |   2 +-
- xen/include/xen/bootinfo.h            |  39 +++
- xen/include/xen/dt-numa.h             |  30 ++
- xen/include/xen/fdt-domain-build.h    |   2 +
- xen/include/xen/numa.h                |   7 +
- 23 files changed, 904 insertions(+), 182 deletions(-)
- create mode 100644 xen/arch/arm/include/asm/numa.h
- create mode 100644 xen/arch/arm/numa.c
- create mode 100644 xen/common/device-tree/numa.c
- create mode 100644 xen/common/numa-distance-map.c
- create mode 100644 xen/include/xen/dt-numa.h
-
+diff --git a/xen/arch/arm/smpboot.c b/xen/arch/arm/smpboot.c
+index d1651fe7dd..23c5a46757 100644
+--- a/xen/arch/arm/smpboot.c
++++ b/xen/arch/arm/smpboot.c
+@@ -133,6 +133,9 @@ static void __init dt_smp_init_cpus(void)
+     };
+     bool bootcpu_valid = false;
+     int rc;
++#ifdef CONFIG_DEVICE_TREE_NUMA
++    static nodeid_t __initdata cpu_to_numa[NR_CPUS];
++#endif /* CONFIG_DEVICE_TREE_NUMA */
+ 
+     mpidr = system_cpuinfo.mpidr.bits & MPIDR_HWID_MASK;
+ 
+@@ -244,6 +247,17 @@ static void __init dt_smp_init_cpus(void)
+         }
+         else
+             tmp_map[i] = hwid;
++
++#ifdef CONFIG_DEVICE_TREE_NUMA
++        if ( tmp_map[i] != MPIDR_INVALID )
++        {
++            uint32_t nid;
++            if ( numa_disabled()
++                    || !dt_property_read_u32(cpu, "numa-node-id", &nid) )
++                nid = 0U; /* default node */
++            cpu_to_numa[i] = nid >= MAX_NUMNODES ? 0U : nid;
++        }
++#endif /* CONFIG_DEVICE_TREE_NUMA */
+     }
+ 
+     if ( !bootcpu_valid )
+@@ -259,6 +273,10 @@ static void __init dt_smp_init_cpus(void)
+             continue;
+         cpumask_set_cpu(i, &cpu_possible_map);
+         cpu_logical_map(i) = tmp_map[i];
++#ifdef CONFIG_DEVICE_TREE_NUMA
++        numa_set_node(i, cpu_to_numa[i]);
++        numa_add_cpu(i);
++#endif /* CONFIG_DEVICE_TREE_NUMA */
+     }
+ }
+ 
 -- 
 2.43.0
 
