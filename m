@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2046CD98F6
-	for <xen-devel@archiver.kernel.org>; Fri, 19 Jun 2026 06:31:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1341713.1601980 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DAB3CD98F8
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Jun 2026 07:50:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1341731.1601995 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waSkW-0000nH-Jm; Fri, 19 Jun 2026 06:30:44 +0000
+	id 1waTze-00041f-EM; Fri, 19 Jun 2026 07:50:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1341713.1601980; Fri, 19 Jun 2026 06:30:44 +0000
+Received: by outflank-mailman (output) from mailman id 1341731.1601995; Fri, 19 Jun 2026 07:50:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1waSkW-0000nA-GZ; Fri, 19 Jun 2026 06:30:44 +0000
-Received: by outflank-mailman (input) for mailman id 1341713;
- Fri, 19 Jun 2026 06:30:42 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1waTze-000401-Ax; Fri, 19 Jun 2026 07:50:26 +0000
+Received: by outflank-mailman (input) for mailman id 1341731;
+ Fri, 19 Jun 2026 07:50:25 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1waSkU-0000mz-Qb
- for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 06:30:42 +0000
+ (envelope-from <taka@valinux.co.jp>) id 1waTzd-0003vw-CS
+ for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 07:50:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1waSkU-00ESX4-0m
- for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 08:30:42 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1waTzc-001qMv-PZ
+ for xen-devel@lists.xenproject.org; Fri, 19 Jun 2026 09:50:24 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a34e207-5cb7-0a2a0a5109dd-0a2a450188c6-30
- for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 08:30:41 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.0)
- (envelope-from <jbeulich@suse.com>)
- id 6a34e211-e031-0a2a45010019-d155802cb4bb-3
- for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 08:30:41 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-4908b92904fso21930885e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 18 Jun 2026 23:30:41 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4923ff821aasm44804995e9.12.2026.06.18.23.30.40
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 18 Jun 2026 23:30:40 -0700 (PDT)
+ (envelope-from <taka@valinux.co.jp>)
+ id 6a34f4b5-2eae-0a2a0a5409dd-0a2a450bb90e-36
+ for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 09:50:24 +0200
+Received: from [40.107.74.114]
+ (helo=OS0P286CU010.outbound.protection.outlook.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.0)
+ (envelope-from <taka@valinux.co.jp>)
+ id 6a34f4b9-5e53-0a2a450b0019-286b4a724d13-4
+ for <xen-devel@lists.xenproject.org>; Fri, 19 Jun 2026 09:50:22 +0200
+Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:458::18)
+ by TY4P286MB7477.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:356::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.11; Fri, 19 Jun
+ 2026 07:50:17 +0000
+Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::c8c9:25cd:8d13:96d6]) by OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::c8c9:25cd:8d13:96d6%6]) with mapi id 15.21.0139.011; Fri, 19 Jun 2026
+ 07:50:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,100 +55,166 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1781850641; x=1782455441; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=Xb9HBU+iwe98KKhLGO8M5bAsJ4BmR1MklTOVn9NABS4=;
-        b=Ck6pA6ql5wAKUVciH+UebIZJayAd3mHVGL93ZkRpV7zO1R9WT5wG1ts0nwdsEDChJU
-         WTmULKmuMQTLAYC307WIuj5wE7b1/SO0Dh3uIA9KyS5tqh6vqg/YkXDy5r+JwBMfvqdd
-         Rh0P94mujhj+Ll3qcm9IM+mKHs1JiEh5NWLqIylSQ0F0W7YJ5Vkv+Y/A0uGp0oJd+l0l
-         WvTE2Rp9rq5NPwmYaCtwChf6cb8U76yWhpgSkma5TbL5SxU3pErAZLLI8gp1kc0Xggx2
-         WdVY7o9AhPD3BD+uenlG9d836wK9f2jCN9F3x8oBV8L47y6RgpRo58cTKjEdV0A+k8oL
-         eNxg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781850641; x=1782455441;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Xb9HBU+iwe98KKhLGO8M5bAsJ4BmR1MklTOVn9NABS4=;
-        b=hu/xIe0nsecTTvdHPmQ5LKtFVPcX11BJPVNVGLhdezojW24uMHmjffOYR9UtIjChPt
-         RQTAOTZBJ2y2DPMD0bGz7XPhEnbcQuz+/WAX1TDsYKxlmCsLW3VlLyF31O/bo2TEe/Dq
-         DabxzsDeow37Rx1lIGaf+M+h7gYLNLIypN3PmKxeJ7/xQxMyBuQBloGyaUX2YJekN4m9
-         4MyB3SvtUSmGwR8HS0P8HXsa5vhRgv/NYkCPy2STUNvCugXkKYRE3+awWKbWZe1op1Vt
-         eH3eWutzp5wyxT8Tz7IOjrLCczSNW/LOE0my2fkp/eiCqAFYpskOHPabpI/OuuUc2LUR
-         c1Mg==
-X-Forwarded-Encrypted: i=1; AFNElJ+hbb0AvQWZECHwb1HuK7KpCGTZhdRAVHSA+VsEHeBFOQx2oT/8SLlVTzmm4DaxI1+PuGSGkSREC2I=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwnjauEGhwrFz2wkGZdhy3lGUGFx7Gvx0NYBhpbI1qwKy56OF3P
-	XTQOFoZgFG30uvpRLhpiQJxk4QINxnBN7FxwnWnsAbxmprK+dYY3SyT2GC90h8ZHuA==
-X-Gm-Gg: AfdE7cna8E1R4nO//CotzuxR8jdRPk+oWywqGHDhRyHdE24u6VjVfU3ptlYw23wQN88
-	NYVcp7qgMAL5m3V/cfLkVCNVw+ees2BLxwripQhVkSBmAekzm5YZwIfZrc4EzqUeZ3OrD+hEhyl
-	6UGoI9egkp/kHr43R7j60cZf7zLqla/6rTSoplAlORN4lqBj8XLV35bkSt4fyUwLmryXUKkmt7l
-	CcPnZNDUj1d72S3FxXd2z6c+Fq28kpJr1YVxw78ER6GGq6zZsCNMUn3nxYlnPCDXs74iCiz+fb5
-	h2PsqrOftIukZR9qklfw0ymZwQ0wp66MtLGqcepCdT4aj1iY2BBY2Ix29ZMkErNwE0OjpKaMex0
-	Dzo3DsOkETGgcMtYd94Vjeek8dWqdNuLAQlq0G6rCOlMdbmPbHgxyA5uvtPkln9SStKKOxBc1G8
-	DAtlTjwZpU2pkwmb5oxQVlcJDKPSEW+lFOQIIPKIijHxMbFCyGfSf05TiX8NjENVfqh1veGqih7
-	oJ5
-X-Received: by 2002:a05:600c:4755:b0:492:25a1:e2f9 with SMTP id 5b1f17b1804b1-4924257c2bcmr15421535e9.26.1781850641443;
-        Thu, 18 Jun 2026 23:30:41 -0700 (PDT)
-Message-ID: <146adb19-5424-4daa-8680-a638d6f327c1@suse.com>
-Date: Fri, 19 Jun 2026 08:30:39 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=an0SHIvXGtr7PgBhjOpCm8i5z5NMtz2r8h+yUEcwpCu9XhuhbjUTIxvwF26OpN1aUFZ0Z738dMLmxaOotOTRgO1X3P7m3ZVoZ/eCwpeljX8eio17bL3yIrXxoP6s4dznQUNCBJAn+Y33s0gl7CIt6HVE39RV3EHZ38739J0dftorNJcK6fH6yF/Y629GLnoujiorfUWwEVE5hnwgO0ig/HqWDjTJNuyy0jDb8Qrye/zg1zoZfMa3GZv/amNwLuBx7jccAkrYrE7KLN2M4N0V+S9lLG+WiAsHpy53DEiOkTGCe6FsJEPH2lPfNi0INZAwOUNG84Kdhe/ToX/iT9SHwA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0gX9ub+anZt6eauwPAi4d+qchhQS98QP4fnLa+KEekc=;
+ b=cmQjcyKWRQRFWjoZvkN4S0XeHX8iohSPOISRqaNPPySG0tCrZlzqLlhdqhyK9B5GUzWrmQBUcVC5EgOqfbOorh32KwST6/1gtgYbYebxtRyfnDszbjV8Vml+qG8gETXBjz9Gha3alx5Hpv5vjATtoBlEZkktfpQPyxZTBTVcWtt+Kcv1YAX3gwXeBljRYZ9mF/IxrBlEetAC6EB1CJ7dWbHb/qvz7xBwmmRlpBSk2rnF3zPUagrc+pGkwWOgB7dGpaEDJbzfgIX2BhA3FzVBJ9IzyeDqzuBnP2gtF/x+Nz3bHL6Rv6Q6Lt19R0JBntPT/8KrR8sQQgI76zEh3/Oy9g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
+ header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0gX9ub+anZt6eauwPAi4d+qchhQS98QP4fnLa+KEekc=;
+ b=buz+riui2yTrK0w0MFYoIcvWbk2r6ld6fQBm5wDeOY6EaNgI7j9scnJZ5kwWfva1Hi1aB8RF2tdljSam1eomhWlQ+K9cy8hfz7zByus4Wha/jr9Irp3GmMxvUbSgru6Xy3RKslyWkqpp91bfLrkt0srMpGe6ewToGjMljywrAGw=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=valinux.co.jp;
+From: Hirokazu Takahashi <taka@valinux.co.jp>
+To: xen-devel@lists.xenproject.org
+Cc: Hirokazu Takahashi <taka@valinux.co.jp>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v3 02/22] xen/common: Default function to get the distance between nodes
+Date: Fri, 19 Jun 2026 16:49:50 +0900
+Message-ID: <20260619075011.377116-3-taka@valinux.co.jp>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260619075011.377116-1-taka@valinux.co.jp>
+References: <20260619075011.377116-1-taka@valinux.co.jp>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TY4P301CA0005.JPNP301.PROD.OUTLOOK.COM
+ (2603:1096:405:26f::9) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:604:458::18)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 05/15] pci: Allow ommiting func when parsing with
- parse_pci_sbdf()
-To: Teddy Astie <teddy.astie@vates.tech>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1781790171.git.teddy.astie@vates.tech>
- <1781794553.8631fc262581453bbf619ec5b2062170.19edb3b3fcc000701b@vates.tech>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1781794553.8631fc262581453bbf619ec5b2062170.19edb3b3fcc000701b@vates.tech>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1781850641-CE9ADE30-ACF2DB0F/0/0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: OS9P286MB7222:EE_|TY4P286MB7477:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8e98c1d1-6b01-416a-a2fd-08decdd767ac
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|23010399003|376014|1800799024|10070799003|56012099006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	4p3170YBl8ipIJz+pMUieMBee1JlkZ51b1H3/ibWhAnKdfD4YWoZqx+s1bCGIhPJ9Gd4s7Gc6Ul+sHhKpxpVw7NSrr2f87hJOYuX8IBm01TNE0CU7uAdc2Mlxl2EF6zDA2jAPM3kqWo4raWKdLDWa2tXWs7kfFlXRSXZDJ9fqSYyG4WkkWvk0z8atimhS6IE0+OMZYR57vmUkcvL0Ad0TU0GBlvWwuIRzicNzMDZvA4epD5ViluoTNAa5sNYKDu0DQNhJZdK3Udrr1JrvuiN0GMSOusRWeevkAW/pu0MIpLlGfgqJjDyNG/aoVjsZ+KdS5gsZnNDIMhqXK+ploTteGgWdk/YFVB5ihsENjGH65Q8d7skSPZ9+fEOhHYEn5oV7DFcAwfOkWxMnzSPjRlzezKcyNeZv3NMZiZup3xT9ASCZC6kPn7Z6y7gkuL//hKB6GCmaftZYLBQOURqkfGECVbsrqiOdP62TqiGsxO2jB77hAANLxxhPM3DwjSje2rEdbPohLd0U+dxt+VYKJ8BB8IT+tAtH4MfACPiD1lR58pXH/E9y07199PdZm/En24EUZJwkDspXQJgu563sluhd5R34yW8BP1G+52Dmr/9+p3y9urjuPSl9Wgber790RywU4EjwNkayKMU38TZKdTS+OEKymolfox5n/6mUR1tR50=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(10070799003)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?0BNyIUfj2EHDy5KwVIwLOEfbCuCQJRFkxyC6AvKV+BARwYnxkp4enSVvg9E8?=
+ =?us-ascii?Q?ikxCK9jX6CChzPfOfe4g5VWfwOsRUpJ66UcsgVMW68lECHTosvksGp1Fn0SP?=
+ =?us-ascii?Q?9HGJrPRYhAQmMDZdhUdGR7iZchn/WT56+Qod5v2u5OibWoOSWeqT2MCvzALA?=
+ =?us-ascii?Q?RYPjINdmKX5hW6P0gEyFAcRB/lM6UowRRYjFz8deXHYvxaiyhnAw3N7iW5mF?=
+ =?us-ascii?Q?8ERGNNbq9q7zNGAp5x71gQIUi1ekcWnPLC6S3xf5eFnLiaSpzb1yaqgF0KbV?=
+ =?us-ascii?Q?BnQ1BPpWxYsxrcNll47Dgu+f8LRwKJ/UcAW9uT4nKPF1jM/0OsYsNh/VHCgd?=
+ =?us-ascii?Q?y3IeHHpwqTzHxiG5Cd9O0HqiY51m3+te9b3LtldOlOmSedpzYzF3CEy+XpXf?=
+ =?us-ascii?Q?p5TVjosVeaANr40b61i0AGAVkQSLLNTf1w2TyvIJJ+fvXEXTGEXHveOhH49I?=
+ =?us-ascii?Q?0QKRde2/Exbe2tUwjU1zsdQRH4htM3YNTLHWaoG03y1lYsV6HlXOLgTHcL3p?=
+ =?us-ascii?Q?fA9PjGFtfaUe0fJbXjUjRF6y4oklmXKInvlyRmbI2D8hqD1+rU03fhDLNNKX?=
+ =?us-ascii?Q?/kqzrMh+xUJMQR5yRCvtAwjFKQiJoT/nXX7Xj2R9mGWhJU7s03pT5w/NXBgv?=
+ =?us-ascii?Q?BxJgPN8dDFglvfclEZ6q9qK/Hht4BbiQCvUm43FuDy/sKWDf3jkHO2UlB2v2?=
+ =?us-ascii?Q?T6Uxi/01T3HSuJsFfHyKkMQeLOu4J/y/oYlzpDP3nXL8KIixtPMDpcbJQmNU?=
+ =?us-ascii?Q?Sl0YFTgdgh31kii3UajwH9RAXICfZPBhwNzBUj5oDbG6DdOJ5Nj3dwmII0BQ?=
+ =?us-ascii?Q?i4JEUmoKSkIxSA3/uOcTHAJ1pbI3ThfD/lpUUCPIQnBrBdkceWOMv+SyZYp+?=
+ =?us-ascii?Q?+kU61XZEQbMcBV7yHNeH0yDAhy6BCjd5GeBJer4b1jIbe5kthJDylQsGvPwt?=
+ =?us-ascii?Q?QciuoIcbqPlYr1bW2GciH2EGWMEpIRsOLpH+/u///KFPsrM5EIUuJ8f2yCnQ?=
+ =?us-ascii?Q?G3zR3aDJ7d4Zto1k+x4ZC+SjD3IzfbviwkOXjVSX0kTEQAFkAkMS0ZYK5T4e?=
+ =?us-ascii?Q?BPiC2s7mMZoQ2ZcchjSSeNOmkGnpZarcGUNiZI5rj9FrMPhA4jDr4fO+aAn/?=
+ =?us-ascii?Q?zhs+1NC44+AhCBF8QLWDTOyQPnPOuo36TsuRy45BtwxqedpwjDNnfgZBvBXJ?=
+ =?us-ascii?Q?ZT/5bmJ8cLGyev2ZfALkxhIHbeOX8c3d0+9hFXVn1j5t2HqaVAfGpYTVOd32?=
+ =?us-ascii?Q?M+dHEdmHC0RNM9roIkE8DgWcg0ziR+w2V/XmEcFODrUtKK8dyvNEFvS4a3jX?=
+ =?us-ascii?Q?k6lLlt7Z+CgLwiorFfdI6BTI9624igObH338U/8+zTcBRjCMRlBSMYwUSmfq?=
+ =?us-ascii?Q?4q1SknE/ucl9912iUXdoZiNdDwVOv/tCEbmJu1GaXJ122Bysz8NN8cG6+B2/?=
+ =?us-ascii?Q?Vt2oxDCT3eQYzbBgvEDhkIZ2YBAYwantzy+GV6A8UzI2WUdbL0I+P4IMH9ME?=
+ =?us-ascii?Q?kyxeZ4nkBUsLIRo1DotRurI/ieRd5T1t9koqohNzD1R4TwSSFOR4QPWsFQtP?=
+ =?us-ascii?Q?fBCJJKJyTfhPZhMNpsUl0eZsLwTG4aKgUqIo19sX7yeLTnwHiOBnr3Fy4BoE?=
+ =?us-ascii?Q?Bdo9sQ5ZeMMnRSpUnckHnuU1V24xp3C61YB2PqL0hzr3yWT2i0RXt5Skkc9E?=
+ =?us-ascii?Q?+H/u8POHXDthOnfbLYKoN0O+baWz78lq58QHPChXPucxJ2edO1oe181HhMXf?=
+ =?us-ascii?Q?eKe5/BBLE9OtiychkNUKno0hLhWTBBtiZsCGANAhZ+2eeeNpvggmvFdCPDYo?=
+X-MS-Exchange-AntiSpam-MessageData-1: HoDwtzvc7adK6Q==
+X-OriginatorOrg: valinux.co.jp
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8e98c1d1-6b01-416a-a2fd-08decdd767ac
+X-MS-Exchange-CrossTenant-AuthSource: OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jun 2026 07:50:17.5042
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: kQH+XJUIruYCupwb7EkjkPU7lp2RlGlCrO1/20+uRIXqK80NUsMQmUiFhj+qvgzdPFBJpKbV8Mco5v5hZbVkmw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY4P286MB7477
+X-purgate-ID: tlsNG-42698a/1781855424-4D9FE00E-1F3B76C1/0/0
 X-purgate-type: clean
-X-purgate-size: 419
+X-purgate-size: 1974
 
-On 18.06.2026 16:50, Teddy Astie wrote:
-> Allow parsing PCI SBDF with the function part omitted (i.e XXXX:YY:ZZ),
-> in such case, the parsed PCI function is zero.
-> 
-> That allows us to now use parse_pci_sbdf() in parse_phantom_dev().
+Provide a fallback function to get the distance between NUMA nodes.
 
-Well, yes, but everywhere else the func-less will now also be accepted.
-Like omitting (defaulting) the segment this behavior really needs to be
-caller controlled imo.
+Signed-off-by: Hirokazu Takahashi <taka@valinux.co.jp>
+---
+ xen/common/Makefile            |  1 +
+ xen/common/numa-distance-map.c | 19 +++++++++++++++++++
+ xen/include/xen/numa.h         |  2 ++
+ 3 files changed, 22 insertions(+)
+ create mode 100644 xen/common/numa-distance-map.c
 
-Jan
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index 6018e25614..062f9ab72b 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -32,6 +32,7 @@ obj-$(CONFIG_VM_EVENT) += monitor.o
+ obj-y += multicall.o
+ obj-y += notifier.o
+ obj-$(CONFIG_NUMA) += numa.o
++obj-$(CONFIG_NUMA_DISTANCE_MAP) += numa-distance-map.o
+ obj-y += page_alloc.o
+ obj-y += pdx.o
+ obj-y += percpu.o
+diff --git a/xen/common/numa-distance-map.c b/xen/common/numa-distance-map.c
+new file mode 100644
+index 0000000000..73344f7f33
+--- /dev/null
++++ b/xen/common/numa-distance-map.c
+@@ -0,0 +1,19 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++
++#include <xen/errno.h>
++#include <xen/init.h>
++#include <xen/nodemask.h>
++#include <xen/numa.h>
++
++#define LOCAL_DISTANCE      10
++#define REMOTE_DISTANCE     20
++
++/*
++ * Get the distance between node 'from' and node 'to'.
++ */
++uint8_t numa_node_distance(unsigned int from, unsigned int to)
++{
++    if ( from != to )
++        return REMOTE_DISTANCE;
++    return LOCAL_DISTANCE;
++}
+diff --git a/xen/include/xen/numa.h b/xen/include/xen/numa.h
+index f6c1f27ca1..18c22d3d30 100644
+--- a/xen/include/xen/numa.h
++++ b/xen/include/xen/numa.h
+@@ -128,6 +128,8 @@ extern bool numa_update_node_memblks(nodeid_t node, unsigned int arch_nid,
+                                      paddr_t start, paddr_t size, bool hotplug);
+ extern void numa_set_processor_nodes_parsed(nodeid_t node);
+ 
++extern uint8_t numa_node_distance(unsigned int from, unsigned int to);
++
+ #else
+ 
+ /* Fake one node for now. See also node_online_map. */
+-- 
+2.43.0
+
 
