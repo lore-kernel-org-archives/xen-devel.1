@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38057CDB471
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Jun 2026 11:20:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1344819.1603846 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D37CCDB471
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Jun 2026 11:34:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1344831.1603856 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wcLe5-00028l-RV; Wed, 24 Jun 2026 11:19:53 +0000
+	id 1wcLrt-0004p9-S2; Wed, 24 Jun 2026 11:34:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1344819.1603846; Wed, 24 Jun 2026 11:19:53 +0000
+Received: by outflank-mailman (output) from mailman id 1344831.1603856; Wed, 24 Jun 2026 11:34:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wcLe5-00028e-Od; Wed, 24 Jun 2026 11:19:53 +0000
-Received: by outflank-mailman (input) for mailman id 1344819;
- Wed, 24 Jun 2026 11:19:52 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marmarek@invisiblethingslab.com>) id 1wcLe3-00028W-Tj
- for xen-devel@lists.xenproject.org; Wed, 24 Jun 2026 11:19:52 +0000
+	id 1wcLrt-0004p2-P5; Wed, 24 Jun 2026 11:34:09 +0000
+Received: by outflank-mailman (input) for mailman id 1344831;
+ Wed, 24 Jun 2026 11:34:07 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wcLrr-0004ow-Tp
+ for xen-devel@lists.xenproject.org; Wed, 24 Jun 2026 11:34:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wcLe1-00DkUI-LU
- for xen-devel@lists.xenproject.org; Wed, 24 Jun 2026 13:19:49 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wcLrq-00037U-TH
+ for xen-devel@lists.xenproject.org; Wed, 24 Jun 2026 13:34:06 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 6a3bbd50-5cb7-0a2a0a5109dd-0a2a450886ac-18
- for <xen-devel@lists.xenproject.org>; Wed, 24 Jun 2026 13:19:49 +0200
-Received: from [202.12.124.145] (helo=fout-b2-smtp.messagingengine.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.0)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 6a3bbd53-9ee7-0a2a45080019-ca0c7c91b3e1-3
- for <xen-devel@lists.xenproject.org>; Wed, 24 Jun 2026 13:19:48 +0200
-Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
- by mailfout.stl.internal (Postfix) with ESMTP id 51C371D000D7;
- Wed, 24 Jun 2026 07:19:47 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-05.internal (MEProxy); Wed, 24 Jun 2026 07:19:47 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 24 Jun 2026 07:19:45 -0400 (EDT)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a3bc0a1-5cb7-0a2a0a5109dd-0a2a4502c186-44
+ for <xen-devel@lists.xenproject.org>; Wed, 24 Jun 2026 13:34:06 +0200
+Received: from [209.85.167.48] (helo=mail-lf1-f48.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a3bc0ae-5a27-0a2a45020019-d155a730d03b-3
+ for <xen-devel@lists.xenproject.org>; Wed, 24 Jun 2026 13:34:06 +0200
+Received: by mail-lf1-f48.google.com with SMTP id
+ 2adb3069b0e04-5ad4c229861so669496e87.2
+ for <xen-devel@lists.xenproject.org>; Wed, 24 Jun 2026 04:34:06 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-148-111.play-internet.pl.
+ [109.243.148.111]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5ad6954a4bfsm1680733e87.8.2026.06.24.04.34.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 24 Jun 2026 04:34:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,192 +52,114 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm1 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm1 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm1; t=1782299987;
-	 x=1782386387; bh=dK4ZwYkCGG6MjPwHudZXVGS0VA3mhzgXXHkKgD7TyKc=; b=
-	n+nAzkQgPXDY7UGqAcn24f7I455jgKCckvBs5keItBcgyqFCQRC+INbQW+/CY1AQ
-	4/LFz3PrPS1oRuizFA3VOxzFOgL1chiIjl29sgV/215Pj6xjZPpwWSGrHtyFsJh9
-	+9DhYjheftlMVpt76wxpeFpHJIBK3GU4mvb4TaA4VOOZku0BT1hfLPNEgDV34TjO
-	NHuJG1V4VKNJX6+zjych6cEXuwLfLGITJC89KiG/y9a13x/oyvJwVW1CB03qJwkP
-	Df+o6jvTfHTCYEbYafcJrScS9U4CcKHvrgYNngK3dSriwH2DDomxA9BoQvgaVM/g
-	SLmVtl/gq8Cm3aJWXV5wpw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
-	1782299987; x=1782386387; bh=dK4ZwYkCGG6MjPwHudZXVGS0VA3mhzgXXHk
-	KgD7TyKc=; b=Yg1G1G4H4zWLiFJcMXcxajNUWWfM1NMkI+xmfDrX5gwoM062II+
-	xPCq3iC1JATzzmSS9u+xrylaVeGy65IpLziPSJu6edZ5GbEeh+o2U4DPaTRnGoMh
-	dgNzLBnKwD5xViYJVutMcn/rxk2OgzxDVovuFFMQQuM68nvycH/kBnCEqZP779zk
-	wGS0+56X3H7PerAyMPtJc2Fz+3b6XyRux7Vj5Zsd1flcz2BfzUIYBDwSk2WIyf1K
-	hK1W9cDm0BNVkk8ezRhYKBMO7RHNZV9U7XgiWb37CPzEAwdeV6rRuo6O6ndtOPcO
-	27dzrtPS/pA46uA+mGkuc26OqUe9TOAwVCQ==
-X-ME-Sender: <xms:Ur07ajI4MwJNLa6gtc7GCjTLJHQkXmjdQNbbkN0GKjjeW1yfVilhaw>
-    <xme:Ur07apbdMR1MSyoMdyHuX-ZONa6OcD2OkSylltWW87EwBi2i61B9Jvg-P_NSu-i5j
-    EpSy11lih3RU8YttQxomjly5t8Wuqbmk2hTFof5Jc6_pNpkaw>
-X-ME-Received: <xmr:Ur07at_424BOOecrBLr8t-gc6unTEAMfUya6oyYPncnRjqL_J8dcjo5ytP-uUajo_v6GvyXUNjURdne5JJvpvBYuLY-vUw5uIfY>
-X-ME-Proxy-Cause: dmFkZTF9hcJvyW3wCqtIzo6/LGE7crx0Svc5X1MCw2Xe/FoCKyDCi10PSG9yCwyl/wrfFJ
-    ANcS0vSoh2tBLeWPyNJ+EIl8PHezXXbAbw68T4baHKrgG9PZlxZE8z5KwzGPw3IKx9DIE3
-    yMa5yamAHKqNGMVWWoiX3RiOVAel7QoAtnWx3x49EbQBCPxlCzhoa1nEj1l3iQ2hZxjL4N
-    7aHRiZjL59cwqyjeXirux3OsCf83bt1+fMiot6oJFzXeK1N048BROHbIaI0oHxq+w4IOCD
-    72qC1fXrgGijHdGv4DLQBP2l5NLvzPUmHaTXQvs2g636XEh1dJ6m+Icdcsw3a1I2JLbxeM
-    bciYiEk3sOvenyNRgsJmg9NhVrJFAJV5G87F0iAHDvI/q1USCfleKNpOSfTWoa+tNPkvYz
-    aH7UqmGjQNWc7+g+1FzzGnpvd+sAcyXIdFJW5BRzkV9MpxlDgm3eDJj13v9svHqsrb8pwG
-    xxJ0/C8NsnW4QpjVXqdNw6e7kiaFRDXZpAlkma16w74sbPii3Z4Ji2CI68cYf4rMlGdynt
-    5Qir5qB1GEywlIG4vXGHwH8lX4LlSCvl3bcQ5NuZfIaVpwTJl8KK3Di+3KLl1kdmLvBpFC
-    XddJVGiV4+hXnLm5SUbg0EBrONpneLkfYSpS9aJhLppGBYmI1usOZE6IB2xg
-X-ME-Proxy: <xmx:Ur07aia_hN33i2n14b0kbF4_vQ8hzb0ycChcATmTe5Fcv4pvA44N4A>
-    <xmx:Ur07apNb_gelXpXRyWr7pp-EsKGvCc4MYmHn_dWz_rWpiBeObfgspQ>
-    <xmx:Ur07amBvZCUwS7wQvX9D9Qo9arw0gG1WYGbDaRSn_6iGRtHNdFnB5g>
-    <xmx:Ur07aoIHLogbS1gy0vNUtm-FhynTR5aAVUPlOOIVwQQYw_lqxvTl8g>
-    <xmx:U707auO_2fb1FkMr7TOo-A5n1qhznhte4es1muZJ4K2996dTRBfZtK2C>
-Feedback-ID: i1568416f:Fastmail
-Date: Wed, 24 Jun 2026 13:19:43 +0200
-From: Marek Marczykowski <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Daniel Smith <dpsmith@apertussolutions.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: Re: [PATCH for-4.22?] x86/EFI: arrange for non-discardable .reloc in
- xen.efi
-Message-ID: <aju9T5oCV7FK8agI@mail-itl>
-References: <652b57e0-42f8-47c8-b94d-df862874aba3@suse.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1782300846; x=1782905646; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=g45lG256BOEf+Fec+r2sXcrak1LrUUumSAl313u2QZ4=;
+        b=G4r2NjE4haYpXRCRScnCjXt2YAj2u96zqB9vLp4KhAhsyE7/lOL+rMZE8JbY9/kFB2
+         jNQCjEnVrLWYH9RtTpHa7pv7UwC+1WOxL+IKOSdbW5bERxbYia8ZsAf//W1k2fRs47w1
+         WDggC2+cbxV+p818qGQuLwL2UmfACmXSTcv6OPhlHV9qD7jpSCgaimKnjpmtUozqfYnf
+         3lDeVCVASVTdGQm/V3bLh2D9SPkkA6w3I7CEZ9gbom2/aS3FFr7BHkZj+NVLBoaS2pNj
+         Ez/GX5XIVgKlpJxtVxSfPU+19kgWqGJlPdRTYag6Hi4+0qwAZpIIqFC6roQfbiUP659M
+         SmRw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782300846; x=1782905646;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=g45lG256BOEf+Fec+r2sXcrak1LrUUumSAl313u2QZ4=;
+        b=C1CndYBuWAYYanIeFaMs6av7a/43MfP7yN32CUhqEJFsO6Z8NZkOjoST1EUAbOk+tB
+         KSR+zIbLngT9huXQ+lLGgxFxVGkjRBHloV1KsFRu24SZsv2C2u9lVk7NCoxMNCE1E8vb
+         PVElBPp1I14xaklBU59VqXWZfKxSoP3QfXL//cl3qriPiw24ryVqmsw7+NpnBUUQ9W5a
+         uJd3CYTDa5q7K6IUU7fFYKWSgLXF716cT6YUcfagWDeVxuHabaECnzqA4Zsh/OBhH2WN
+         DAZxkzH3Sr61d9TF5UAl2UOcM5GITumF7KPZE0ep2YNVFasj2nV0QJkBhQDQxw4+R3N3
+         q1qQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rr+JZO6jDdo4L6XxFGt2npeLuEQmCW6H+XxQ5o3zuh8zx1jJLewmFygxoGJAo/Dp3khyyOSv+rRWPs=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yz1XXg+/Wx3zjt0KabuaC1PYE97CXls3zJHkdaCulJlTFW1+gSG
+	YursC+knU/zCBNrbFOlCgO2ZA87mDcqi0BmapxSheRMwjfIfRlHCyR8U
+X-Gm-Gg: AfdE7cl38H3hIWEQxPIs7avq/YoBRM1LJqMIjAoAh810lCHKgjTd21/9g3FEXoJpbn1
+	v7HZ/p/qLbEfiZwEybma/1haTyOgzLD44T+eMyFHnkCDIFkcg6Mkq7OCE4WHPDJfF8nTmv79gxO
+	uI4YWN71a+m+bbVYQTJ5jEQQa/L7pg0qrr5gTYYkhPl5hBu7cWswDSVa8CSH+Y3mNzj7J1hAYUu
+	/KxH2Zo0WbJ38cip2NBAZejZUVi2b4ovOGzSAYz6OuBcEavvzlynNIAJDFukSwDFYU4zEN7DCVL
+	e6ErBMclx+xNoHocfhiPRN7Ce520nTvJ5FEjlH7FZDGajG9Lwp+tjArlSXdGRAs7c9DFqmpJfEq
+	Aw/OyVUwZia/IG6GK9aYoHDsk9Q5tOAZeG9gKo4iuRWC7tCNnWDS+b8EO4QDcjuuy4bqDqexD8V
+	RZVTFIkMhBd17wXor/Hs/jzBTQlzIGt7KhG1Xhw/EUv5krmV/pbGXPZIT8BbhlXK3vfQ8=
+X-Received: by 2002:ac2:4147:0:b0:5aa:75c9:d304 with SMTP id 2adb3069b0e04-5ae9d57c9c2mr639377e87.31.1782300846020;
+        Wed, 24 Jun 2026 04:34:06 -0700 (PDT)
+Message-ID: <81b60619-28f7-42e9-a6c6-be9016fe5918@gmail.com>
+Date: Wed, 24 Jun 2026 13:34:04 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="eIu06BDLJtj5LfkC"
-Content-Disposition: inline
-In-Reply-To: <652b57e0-42f8-47c8-b94d-df862874aba3@suse.com>
-X-purgate-ID: tlsNG-c1860d/1782299989-65E250FA-9A621D18/0/0
-X-purgate-type: clean
-X-purgate-size: 4932
-
-
---eIu06BDLJtj5LfkC
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 24 Jun 2026 13:19:43 +0200
-From: Marek Marczykowski <marmarek@invisiblethingslab.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 10/23] xen/riscv: introduce init interrupt controller
+ operations
 To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Daniel Smith <dpsmith@apertussolutions.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: Re: [PATCH for-4.22?] x86/EFI: arrange for non-discardable .reloc in
- xen.efi
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1781693963.git.oleksii.kurochko@gmail.com>
+ <da217bc51799d46666a740f38e00efc6de554ffc.1781693963.git.oleksii.kurochko@gmail.com>
+ <1bb1a400-ed4f-470e-8f20-779d2c09c03d@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <1bb1a400-ed4f-470e-8f20-779d2c09c03d@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-720697/1782300846-4CB077C5-2BB7302F/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 1348
 
-On Tue, Jun 16, 2026 at 06:17:54PM +0200, Jan Beulich wrote:
-> Loaders respecting IMAGE_SCN_MEM_DISCARDABLE would not load such sections,
-> yet we need to access it ourselves when switching out of "physical mode".
-> Leverage behavior new to GNU ld 2.46: Any contribution to .reloc which
-> doesn't have the discardable flag set (which cannot even be expressed in
-> ELF) will yield the output section also non-discardable.
->=20
-> Since for intermediate binaries we don't care about section attributes,
-> link in the new object only on the final linking pass.
->=20
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-This seems to be enough to indeed make xen.efi .reloc non-discardable
-with binutils 2.46.
 
-Acked-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab.com>
+On 6/22/26 4:30 PM, Jan Beulich wrote:
+> On 17.06.2026 13:17, Oleksii Kurochko wrote:
+>> Introduce intc_hw_init_ops structure to avoid risky mix of init
+>> function and non-init function.
+>>
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> 
+> Acked-by: Jan Beulich <jbeulich@suse.com>
 
-> ---
-> With a new enough linker, $(dot-target).2r.o could be leveraged instead:
-> $(dot-target).2r.S is going to be empty (or if it's not, the .reloc
-> section there would already have the wanted property), so instead of
-> adding the new relocs-empty.S we could also insert the section directive
-> there. Overall that seemed more convoluted to me, though.
->=20
-> --- a/xen/arch/x86/Makefile
-> +++ b/xen/arch/x86/Makefile
-> @@ -196,7 +196,8 @@ note_file_option ?=3D $(note_file)
-> =20
->  extra-$(XEN_BUILD_PE) +=3D efi.lds
->  ifeq ($(XEN_BUILD_PE),y)
-> -$(TARGET).efi: $(objtree)/prelink.o $(note_file) $(obj)/efi.lds $(obj)/e=
-fi/relocs-dummy.o $(obj)/efi/mkreloc
-> +$(TARGET).efi: $(obj)/efi/relocs-dummy.o $(obj)/efi/relocs-empty.o $(obj=
-)/efi/mkreloc
-> +$(TARGET).efi: $(objtree)/prelink.o $(note_file) $(obj)/efi.lds
->  ifeq ($(CONFIG_DEBUG_INFO),y)
->  	$(if $(filter --strip-debug,$(EFI_LDFLAGS)),echo,:) "Will strip debug i=
-nfo from $(@F)"
->  endif
-> @@ -227,7 +228,7 @@ endif
->  	$(MAKE) $(build)=3D$(@D) .$(@F).2r.o .$(@F).2s.o
->  	$(call compare-symbol-tables, $(dot-target).1r.o, $(dot-target).2r.o)
->  	$(call compare-symbol-tables, $(dot-target).1s.o, $(dot-target).2s.o)
-> -	$(LD) $(call EFI_LDFLAGS,$(VIRT_BASE)) -T $(obj)/efi.lds $< \
-> +	$(LD) $(call EFI_LDFLAGS,$(VIRT_BASE)) -T $(obj)/efi.lds $< $(obj)/efi/=
-relocs-empty.o \
->  	      $(dot-target).2r.o $(dot-target).2s.o $(orphan-handling-y) \
->  	      $(note_file_option) -o $@
->  	$(NM) -pa --format=3Dsysv $@ \
-> @@ -247,7 +248,7 @@ $(TARGET).efi: FORCE
->  endif
-> =20
->  # These should already have been rebuilt when building the prerequisite =
-of "prelink.o"
-> -$(obj)/efi/buildid.o $(obj)/efi/relocs-dummy.o: ;
-> +$(obj)/efi/buildid.o $(obj)/efi/relocs-dummy.o $(obj)/efi/relocs-empty.o=
-: ;
-> =20
->  .PHONY: include
->  include: $(objtree)/arch/x86/include/asm/asm-macros.h
-> --- a/xen/arch/x86/efi/Makefile
-> +++ b/xen/arch/x86/efi/Makefile
-> @@ -17,5 +17,5 @@ obj-y :=3D common-stub.o stub.o
->  obj-$(XEN_BUILD_EFI) :=3D $(filter-out %.init.o,$(EFIOBJ-y))
->  obj-bin-$(XEN_BUILD_EFI) :=3D $(filter %.init.o,$(EFIOBJ-y))
->  obj-bin-y +=3D mbi2.init.o
-> -extra-$(XEN_BUILD_EFI) +=3D buildid.o relocs-dummy.o
-> +extra-$(XEN_BUILD_EFI) +=3D buildid.o relocs-dummy.o relocs-empty.o
->  nocov-$(XEN_BUILD_EFI) +=3D stub.o
-> --- /dev/null
-> +++ b/xen/arch/x86/efi/relocs-empty.S
-> @@ -0,0 +1,8 @@
-> +/*
-> + * Empty .reloc section, simply to indicate to GNU ld that the output .r=
-eloc
-> + * section in xen.efi should not be marked IMAGE_SCN_MEM_DISCARDABLE.  T=
-his
-> + * requires GNU ld 2.46 or newer to actually be understood in the intend=
-ed way.
-> + */
-> +
-> +	.section .reloc, "a", @progbits
-> +	.balign 4
+Thanks.
 
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
+> 
+> Strictly speaking ...
+> 
+>> --- a/xen/arch/riscv/aplic.c
+>> +++ b/xen/arch/riscv/aplic.c
+>> @@ -306,12 +306,16 @@ static const hw_irq_controller aplic_xen_irq_type = {
+>>   
+>>   static const struct intc_hw_operations aplic_ops = {
+>>       .info                = &aplic_info,
+>> -    .init                = aplic_init,
+>>       .host_irq_type       = &aplic_xen_irq_type,
+>>       .handle_interrupt    = aplic_handle_interrupt,
+>>       .set_irq_type        = aplic_set_irq_type,
+>>   };
+>>   
+>> +static const struct intc_hw_init_ops __initconst aplic_init_ops = {
+> 
+> ... I think this needs to use __initconstrel, as ...
+> 
+>> +    .ops                 = &aplic_ops,
+>> +    .init                = aplic_init,
+>> +};
+> 
+> ... both initialized fields incur a relocation.
 
---eIu06BDLJtj5LfkC
-Content-Type: application/pgp-signature; name=signature.asc
+Isn’t it needed only when `aplic_init_ops.{ops,init}` is saved in a 
+variable that doesn’t belong to the `.init` section, so that a potential 
+dereference of already freed memory could occur?
 
------BEGIN PGP SIGNATURE-----
+~ Oleksii
 
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmo7vU8ACgkQ24/THMrX
-1ywHBQf+PqK0BHrML8eD+TBmbAvLQp3veSnR7YHCdqzWEWqT4NpFKMMwqlsHPehS
-92QvtyaSMxEJa0y54dzlV8VTCEh3aBRBlKcTzdv5JVkndGwz2TtmmiGdO2S1nBt/
-YwoJq2ymbznvnjbsUBvNOL5Ao3/Vinh6PFMUENfkEMG9Xs5oPVbxYX2rg53ee8PM
-jVK9M1b2kbt/JeutYcNdiJwhjSpHj9ycuU/eqkEpypgGxO4BpLOOsHSyKxvwMRd6
-1mzVKMtrxxxOHZM05A2+JAeOtIr3XqxqRlG7NGC7njHpQYGYRdmF20Q82SPA9RcX
-OIA+PVIoewU0PC4t5EhHxf5NAsbV9w==
-=JSb9
------END PGP SIGNATURE-----
 
---eIu06BDLJtj5LfkC--
 
