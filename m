@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1E15CDB47F
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Jun 2026 12:40:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1344885.1603901 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A44CBCDB471
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Jun 2026 12:47:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1344896.1603911 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wcMtw-00071X-TY; Wed, 24 Jun 2026 12:40:20 +0000
+	id 1wcN0l-0007ae-LO; Wed, 24 Jun 2026 12:47:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1344885.1603901; Wed, 24 Jun 2026 12:40:20 +0000
+Received: by outflank-mailman (output) from mailman id 1344896.1603911; Wed, 24 Jun 2026 12:47:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wcMtw-00071Q-QI; Wed, 24 Jun 2026 12:40:20 +0000
-Received: by outflank-mailman (input) for mailman id 1344885;
- Wed, 24 Jun 2026 12:40:19 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wcN0l-0007aX-HV; Wed, 24 Jun 2026 12:47:23 +0000
+Received: by outflank-mailman (input) for mailman id 1344896;
+ Wed, 24 Jun 2026 12:47:22 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wcMtv-00071K-QH
- for xen-devel@lists.xenproject.org; Wed, 24 Jun 2026 12:40:19 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wcN0k-0007aR-A9
+ for xen-devel@lists.xenproject.org; Wed, 24 Jun 2026 12:47:22 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wcMtv-00FeOJ-3U
- for xen-devel@lists.xenproject.org; Wed, 24 Jun 2026 14:40:19 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wcN0j-0051Us-FZ
+ for xen-devel@lists.xenproject.org; Wed, 24 Jun 2026 14:47:21 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a3bd032-5cb7-0a2a0a5109dd-0a2a45078cb0-20
- for <xen-devel@lists.xenproject.org>; Wed, 24 Jun 2026 14:40:18 +0200
-Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a3bd1cd-bab6-0a2a0a5309dd-0a2a4506e878-34
+ for <xen-devel@lists.xenproject.org>; Wed, 24 Jun 2026 14:47:21 +0200
+Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a3bd032-9c8e-0a2a45070019-d155dd2be8aa-3
- for <xen-devel@lists.xenproject.org>; Wed, 24 Jun 2026 14:40:18 +0200
-Received: by mail-wr1-f43.google.com with SMTP id
- ffacd0b85a97d-4629051c9d1so657472f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 24 Jun 2026 05:40:18 -0700 (PDT)
+ id 6a3bd1d9-08de-0a2a45060019-d155dd2ae5e7-3
+ for <xen-devel@lists.xenproject.org>; Wed, 24 Jun 2026 14:47:21 +0200
+Received: by mail-wr1-f42.google.com with SMTP id
+ ffacd0b85a97d-46066e640easo673338f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 24 Jun 2026 05:47:21 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-46c221d9371sm6690024f8f.21.2026.06.24.05.40.17
+ ffacd0b85a97d-46c221d9405sm7454956f8f.22.2026.06.24.05.47.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 24 Jun 2026 05:40:18 -0700 (PDT)
+ Wed, 24 Jun 2026 05:47:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,48 +55,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1782304818; x=1782909618; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1782305241; x=1782910041; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=DP8GIjgr3aGRZN5nVUccQ6GUWDqVASxyCQqjsgLsDuU=;
-        b=BntbvVnitqls/62yXw6WmUBy6PDGs9VPHtUiaUMTLCQ+J+ACeTi2Hpp84naXWj3BGD
-         7fCF1E2JKQQpB/vCi2BKaHHZbfyh9U0OA1LDdwHiNHgcwSoeJ7oaMwxhjPCHm8JeBWnY
-         QflWzQGMw6QtiOkldHsvJS5bmISQWm4mP1Wp1InPFBqE6HVlXoBPRfNRAJk2Gz8O6qCj
-         f2ZFjFLXr2uNN/AGb4giIvpJ/nFTTWLBXY1HKa++c9FsnJm1s7EdcLv/PA9qG5ChlqYE
-         pBUfUC9AuTubknVKJDAW47PyURypYLFj74nqGnPB9tLX1yG8sy5mYyUWNzvSQ9B0BmFq
-         s0qw==
+        bh=n7Hx7LfGNdYKCuhuZ8Gd8mOVrC3DxHk5SbmvZbiO5Ls=;
+        b=UdMcjrZOAx9HbjWdZAYhVNi755kMatH6zPSDxdOr7KUV9ZtM1nq0f+8Sx6bi3QleLC
+         3lLvPriaUYhsT3SYJQ6thuoGGzxrNFSxmiaU0CVrMe4BHNuSpBtsnRv41c1+W/MazfPL
+         lpSMuCaMjxRV+pd5qxJZFbm0OunopVehjpZELm+SaxhYglnxy4CUQt9EspESdgEk8iXL
+         Ia9TCA4FtanuAfYGJRaUtYDklyE/n2qHQe3aS1f48F1RnSOz0zR7tGPOu7/QhvGW+gjD
+         2wnPG43lL0EcpbATp7IleC6S9ZxWC2Gto1n5bfUklWgSTXqDAMkujK8VePgv6ef84ENd
+         Wr9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782304818; x=1782909618;
+        d=1e100.net; s=20251104; t=1782305241; x=1782910041;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=DP8GIjgr3aGRZN5nVUccQ6GUWDqVASxyCQqjsgLsDuU=;
-        b=QBljSTQyN6sKVt14zoXpq3rMz6wLg6lV5oAa9RdPh0PA9bgYnqrA1j7dCrtw84GSk7
-         +Oz18ycFcwN4H8qeD6GJUEyGeo6n0lbNu4bDdW32d1lj9R2zQvzf0/0LSQi/8ar6Zvyp
-         txY5Mzakv3pzDySY9gp0mNliZJtw0mV0b+nmt9QbCLdKBS8iZxNsylSmvGTLLuuRbtg3
-         uAFybePaRbLst6u2lnJV8LqZSCzRX9YmLMGvb8tX30MmCc27JJDe6DPLBt28MjRD63XG
-         +roscs2aABi1xJ95HPDqdIJoKsdTeh42Sbqls2O0ewJbMpucZEurLcYI4uySxjWV1joO
-         QU6A==
-X-Forwarded-Encrypted: i=1; AHgh+RoHQig8Mj1OVjLpGMMjK+JUXwZ3zYZWl7IY2Ny7qUgEq8uH1onC1w+IndPW/M4gvp3ewOeeYTE1O1M=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwSehVorm1XuzL3VjVuwF1xIE5yycngdvfBGNVnDDBWZXaHXTeo
-	CUXYOW0RyVCMHsohCFpZ6EnUHj1pRrALDAo4vjImynTGdss86rU09LhsI26GdQwaPQ==
-X-Gm-Gg: AfdE7cmwMBBaZiW4qhqOqFMJo4JKlih+hhGYJVrNnMBcI5Xls69BWdgH/oXkYvkHiFH
-	bAa3i7AzDkrytBdFlp3GZL0P8z6SrqLMV7jDfRm8ZoL+GHOC+/xm+aebKIzIZdMiFFXunDWuKnh
-	ecK68ymdl1/xH27mthNDQXHNeX7HwD5kS2e7RL7QkjW9f2P38L+gNvf+7M4+U92QKIEqMViWpU5
-	uFfBYiXzcawaTpAnD9TGfmPHdwP1AE+f4oQSPHDXUA3Gcs6TpVHF/v54TRryw35ofypADkD6a/o
-	uKhzQgmqqz0I8nFdRQthCBT3s+KlVSWPqLD7YUKrj2mxdr+1JTc5f8CI28GdFZIgljm9otlnSr4
-	Am5ErNriN7Xh/+WqjRHZxZ9kf9V+7cUG1i0NDnpXQ76f4Y/IujJLBv3p62J1oteAWLZVaMRtL9d
-	eVWytkCCgqcgRl3eWqoMlwTmtNHQCZN2rTH/RjgdVDdW9isLeV9/xF9FQE6cxi1cH//bW06ObSs
-	gX/
-X-Received: by 2002:a05:6000:4007:b0:452:8286:86bf with SMTP id ffacd0b85a97d-46c09ec8318mr5133923f8f.1.1782304818363;
-        Wed, 24 Jun 2026 05:40:18 -0700 (PDT)
-Message-ID: <f649bec4-c603-4ad0-8269-33a9c9d2d8fa@suse.com>
-Date: Wed, 24 Jun 2026 14:40:17 +0200
+        bh=n7Hx7LfGNdYKCuhuZ8Gd8mOVrC3DxHk5SbmvZbiO5Ls=;
+        b=WCJvVYUwezsnWBAjAsu4RkA3TNCkfa9Ldl5VmwyMvQPTFc5T+OjAeOh6lNLvKyVYq9
+         ZTrcIHoJOi5WdGhHUy96kF4HbvXSW3ibsIKquNfdhnYO7BtKr+ZYjnsixRtRailsz3X0
+         ECdlKC0LQeVOo5/kJ7WwQsIB/P8xCONLfIyOJTZ5EBk1cTiIVBf6jmb97WIVIaf+Cifk
+         bGmsVWKSsmvaZ3WSyD9fHkA0LC4W6UEE/qabM84DDUdNiVTFrBX9H3p9cejtQ+fXUYMv
+         MJuWwHul8WiAZCFrpYQ2+f3KScTi64VkBsrf5RbOdDeA7usyS6zU9HOyY9A4vn3avE0A
+         fGVw==
+X-Forwarded-Encrypted: i=1; AHgh+RqGbKs35FSvuzIODuAYJ95IpemdC8thNP5mCg1CLqxwCHKIUZJVapdnekKkHwTtbJ3YwqdsVS3mpIo=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yzw21LE7ooW+LbzxjGD+ftjLdaDQgFGDgF3oVQBfeHQzEqDVDaf
+	GkrQArHQ8BDSM0U6bqIZKjzV0E4S0RqYic/iv/sl7gcT6LrVTC7Ofb2MywDbWwKONw==
+X-Gm-Gg: AfdE7cmq20pLRUGRIw6LT3ive6pMpoTtaFpQ6z5OLIv+WYjTSlhFwVklm9So8rtAOCY
+	eCKRwI0VkhSzOTPV1Z0GoYxsLR64zmBIhd8INSY4m758RtsDA8rfZppgxzElUBQEgrOKrcCGwgW
+	MnU3P/fqt8tY1B5VL3Q1Nemz53BIBN99JRJicHNHtX2FR3CKapdsuA9xzimYdDwV8iB/pm0gwdr
+	r9XUBui03Fjho3PCJ3Up5L6vECZ3PXdB52zJtEJZqExXZmKgb6vWBUKG0ayVjlZPZ5NPYu8sXiI
+	9JqhPtXwGXP4duuJqCt8LahtKTljhG3Ljkn2mDEkVxcjMmK5j9byN9VmrsaXCVVkELAygX3W1EZ
+	Rr6KDV2TIVDtL3gS51nrXrBCG1gX3t12yokTnecC6qrsnN8GdjI3NdRqbGgzUB2xtfKomJfoccZ
+	Pl5hbw63kck5cR4bzBPPGquHmS01tmB1dS+x0hlOqVkh3gq0Dd20hR0XrkRZthqfZz2jU4kSO5D
+	sGU
+X-Received: by 2002:a5d:64cd:0:b0:46a:bda2:9255 with SMTP id ffacd0b85a97d-46c0ab3cac5mr5114333f8f.19.1782305240890;
+        Wed, 24 Jun 2026 05:47:20 -0700 (PDT)
+Message-ID: <ddf8c897-1a13-4d25-98ca-331c54913af3@suse.com>
+Date: Wed, 24 Jun 2026 14:47:18 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 06/23] xen/riscv: introduce guest riscv,isa string
+Subject: Re: [PATCH v3 10/23] xen/riscv: introduce init interrupt controller
+ operations
 To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -107,9 +108,9 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 References: <cover.1781693963.git.oleksii.kurochko@gmail.com>
- <3fb06376e057fa99b0df78e97761b8cff56ca9eb.1781693963.git.oleksii.kurochko@gmail.com>
- <aa19d6b0-9407-423b-a786-a43a72b50df5@suse.com>
- <29fbbfe2-579c-4506-96d8-930c03a65c61@gmail.com>
+ <da217bc51799d46666a740f38e00efc6de554ffc.1781693963.git.oleksii.kurochko@gmail.com>
+ <1bb1a400-ed4f-470e-8f20-779d2c09c03d@suse.com>
+ <81b60619-28f7-42e9-a6c6-be9016fe5918@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -135,58 +136,55 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <29fbbfe2-579c-4506-96d8-930c03a65c61@gmail.com>
+In-Reply-To: <81b60619-28f7-42e9-a6c6-be9016fe5918@gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ef75cf/1782304818-FFD3425E-9F1128D1/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-16d1c6/1782305241-4372868D-BF01E9E5/0/0
 X-purgate-type: clean
-X-purgate-size: 1914
+X-purgate-size: 1801
 
-On 24.06.2026 12:43, Oleksii Kurochko wrote:
-> 
-> 
-> On 6/22/26 4:09 PM, Jan Beulich wrote:
+On 24.06.2026 13:34, Oleksii Kurochko wrote:
+> On 6/22/26 4:30 PM, Jan Beulich wrote:
 >> On 17.06.2026 13:17, Oleksii Kurochko wrote:
->>> Introduce generation of the riscv,isa string passed to the guest via the
->>> Device Tree riscv,isa property.
->>>
->>> Introduce the per-domain isa string and guest isa bitmap, populated
->>> during domain creation by calling init_guest_isa().
->>>
->>> Introduce guest_unsupp to filter out ISA extensions that should not be
->>> exposed to guests:
->>>
->>> - f/d/q/v: FPU and vector context save/restore are not yet implemented
->>>    for guests.
+>> Strictly speaking ...
 >>
->> I may have asked before - what about Zfinx, Zdinx (and the supposed Zqinx)?
->> They aren't in riscv_isa_ext[], yes, but perhaps wrongly so? And hence they
->> may want at least mentioning?
+>>> --- a/xen/arch/riscv/aplic.c
+>>> +++ b/xen/arch/riscv/aplic.c
+>>> @@ -306,12 +306,16 @@ static const hw_irq_controller aplic_xen_irq_type = {
+>>>   
+>>>   static const struct intc_hw_operations aplic_ops = {
+>>>       .info                = &aplic_info,
+>>> -    .init                = aplic_init,
+>>>       .host_irq_type       = &aplic_xen_irq_type,
+>>>       .handle_interrupt    = aplic_handle_interrupt,
+>>>       .set_irq_type        = aplic_set_irq_type,
+>>>   };
+>>>   
+>>> +static const struct intc_hw_init_ops __initconst aplic_init_ops = {
+>>
+>> ... I think this needs to use __initconstrel, as ...
+>>
+>>> +    .ops                 = &aplic_ops,
+>>> +    .init                = aplic_init,
+>>> +};
+>>
+>> ... both initialized fields incur a relocation.
 > 
-> They are not supported by Xen so they aren't in riscv_isa_ext so it 
-> looks fine for me.
-> 
-> They are not in guest_unsupp as they aren't present in riscv_isa_ext and 
-> so it won't be propagated to guest anyway because of:
->    +    bitmap_andnot(d->arch.isa, riscv_isa, guest_unsupp,
->    +                  RISCV_ISA_EXT_MAX);
-> 
-> While it isn't in riscv_isa_ext[] I think it is fine not to add them to 
-> guest_unsupp, so I will add to the commit message that:
-> ```
-> - Zfinx, Zdinx and Zqinx are not implemented for guests either; as they 
-> are not present in the riscv_isa_ext[] array, they can never be set in 
-> riscv_isa and thus are never exposed to a guest, so there is no need to 
-> list them explicitly in guest_unsupp.
-> ```
-> 
-> I think it is fine for now but probably it will need to be reworked in 
-> future.
+> Isn’t it needed only when `aplic_init_ops.{ops,init}` is saved in a 
+> variable that doesn’t belong to the `.init` section, so that a potential 
+> dereference of already freed memory could occur?
 
-Especially as long as F/D/Q aren't supported by Xen, I would consider it
-pretty desirable to allow the (cheaper to implement on the Xen side) Z*inx.
-Provided of course there's actual hardware offering any of Z*inx in place
-of F/D (not so much Q).
+No, that's no different between __init{data,const,constrel}. The issue here
+is that at least in PIC mode const global variables with initializers will
+go into .data.rel.ro (or alike), not .rodata. That's because this section
+should be writable, yet there shouldn't be writable contributions to
+.rodata.
+
+Since __initconst{,rel} include section placement, the former of the two
+(.init.rodata) should end up r/o, while the latter of the two
+(.init.rodata.rel) should again be r/w. Mismatched contributions would
+screw up the attributes, and assemblers in the past did (and legitimately
+may) warn about such mismatches.
 
 Jan
 
