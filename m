@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A44CBCDB471
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Jun 2026 12:47:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1344896.1603911 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3836CDB479
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Jun 2026 13:04:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1344910.1603919 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wcN0l-0007ae-LO; Wed, 24 Jun 2026 12:47:23 +0000
+	id 1wcNHX-0002A4-5J; Wed, 24 Jun 2026 13:04:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1344896.1603911; Wed, 24 Jun 2026 12:47:23 +0000
+Received: by outflank-mailman (output) from mailman id 1344910.1603919; Wed, 24 Jun 2026 13:04:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wcN0l-0007aX-HV; Wed, 24 Jun 2026 12:47:23 +0000
-Received: by outflank-mailman (input) for mailman id 1344896;
- Wed, 24 Jun 2026 12:47:22 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wcNHX-00029x-2B; Wed, 24 Jun 2026 13:04:43 +0000
+Received: by outflank-mailman (input) for mailman id 1344910;
+ Wed, 24 Jun 2026 13:04:41 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wcN0k-0007aR-A9
- for xen-devel@lists.xenproject.org; Wed, 24 Jun 2026 12:47:22 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wcNHV-00029r-Cq
+ for xen-devel@lists.xenproject.org; Wed, 24 Jun 2026 13:04:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wcN0j-0051Us-FZ
- for xen-devel@lists.xenproject.org; Wed, 24 Jun 2026 14:47:21 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wcNHU-00HEmg-8v
+ for xen-devel@lists.xenproject.org; Wed, 24 Jun 2026 15:04:40 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a3bd1cd-bab6-0a2a0a5309dd-0a2a4506e878-34
- for <xen-devel@lists.xenproject.org>; Wed, 24 Jun 2026 14:47:21 +0200
-Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a3bd5d0-e002-0a2a0a5209dd-0a2a45098cda-40
+ for <xen-devel@lists.xenproject.org>; Wed, 24 Jun 2026 15:04:40 +0200
+Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a3bd1d9-08de-0a2a45060019-d155dd2ae5e7-3
- for <xen-devel@lists.xenproject.org>; Wed, 24 Jun 2026 14:47:21 +0200
-Received: by mail-wr1-f42.google.com with SMTP id
- ffacd0b85a97d-46066e640easo673338f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 24 Jun 2026 05:47:21 -0700 (PDT)
+ id 6a3bd5e7-97e6-0a2a45090019-d155dd34a8b0-3
+ for <xen-devel@lists.xenproject.org>; Wed, 24 Jun 2026 15:04:39 +0200
+Received: by mail-wr1-f52.google.com with SMTP id
+ ffacd0b85a97d-4631679f204so1095403f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 24 Jun 2026 06:04:39 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-46c221d9405sm7454956f8f.22.2026.06.24.05.47.19
+ ffacd0b85a97d-46c1b754471sm6587146f8f.0.2026.06.24.06.04.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 24 Jun 2026 05:47:20 -0700 (PDT)
+ Wed, 24 Jun 2026 06:04:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,65 +53,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Cc:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1782305241; x=1782910041; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=n7Hx7LfGNdYKCuhuZ8Gd8mOVrC3DxHk5SbmvZbiO5Ls=;
-        b=UdMcjrZOAx9HbjWdZAYhVNi755kMatH6zPSDxdOr7KUV9ZtM1nq0f+8Sx6bi3QleLC
-         3lLvPriaUYhsT3SYJQ6thuoGGzxrNFSxmiaU0CVrMe4BHNuSpBtsnRv41c1+W/MazfPL
-         lpSMuCaMjxRV+pd5qxJZFbm0OunopVehjpZELm+SaxhYglnxy4CUQt9EspESdgEk8iXL
-         Ia9TCA4FtanuAfYGJRaUtYDklyE/n2qHQe3aS1f48F1RnSOz0zR7tGPOu7/QhvGW+gjD
-         2wnPG43lL0EcpbATp7IleC6S9ZxWC2Gto1n5bfUklWgSTXqDAMkujK8VePgv6ef84ENd
-         Wr9w==
+        d=suse.com; s=google; t=1782306279; x=1782911079; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:cc
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=LgtZI3zesLmUcubosSfuQCw+aD87igB0phXmrcauwDI=;
+        b=fHZX+P5URuCViV23UQirnXZkbatwhN9L68o/ALeFmhtfXiK9ZPx0zoo4LFowK4XUeZ
+         +3My7xOd70DGxYY4iIKx+mWuKCVehS76zQpdVWZHWsQL4W1M/mt2cacV9wyqVjgQm3yI
+         Sm+2vgll9xwoP3PNhlB4Mdd2d3vzYgBW+f1sfPvGFBO7mtxhh3ITjn+A6hF9+jEQSg1j
+         29Fvk9E8vM0Twcb0dcXfb3xVaZN770420t84pT4gMKiCjEBGBMZNYsBNDiRhKsduFA/Z
+         SDRXqqMS+wkIah+y8GIQ2/lsE3MKnk0s9IyF0pDGp9iqXjrnMwgp9RZPj/a2emdR3zbW
+         HWmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782305241; x=1782910041;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1782306279; x=1782911079;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:cc
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=n7Hx7LfGNdYKCuhuZ8Gd8mOVrC3DxHk5SbmvZbiO5Ls=;
-        b=WCJvVYUwezsnWBAjAsu4RkA3TNCkfa9Ldl5VmwyMvQPTFc5T+OjAeOh6lNLvKyVYq9
-         ZTrcIHoJOi5WdGhHUy96kF4HbvXSW3ibsIKquNfdhnYO7BtKr+ZYjnsixRtRailsz3X0
-         ECdlKC0LQeVOo5/kJ7WwQsIB/P8xCONLfIyOJTZ5EBk1cTiIVBf6jmb97WIVIaf+Cifk
-         bGmsVWKSsmvaZ3WSyD9fHkA0LC4W6UEE/qabM84DDUdNiVTFrBX9H3p9cejtQ+fXUYMv
-         MJuWwHul8WiAZCFrpYQ2+f3KScTi64VkBsrf5RbOdDeA7usyS6zU9HOyY9A4vn3avE0A
-         fGVw==
-X-Forwarded-Encrypted: i=1; AHgh+RqGbKs35FSvuzIODuAYJ95IpemdC8thNP5mCg1CLqxwCHKIUZJVapdnekKkHwTtbJ3YwqdsVS3mpIo=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yzw21LE7ooW+LbzxjGD+ftjLdaDQgFGDgF3oVQBfeHQzEqDVDaf
-	GkrQArHQ8BDSM0U6bqIZKjzV0E4S0RqYic/iv/sl7gcT6LrVTC7Ofb2MywDbWwKONw==
-X-Gm-Gg: AfdE7cmq20pLRUGRIw6LT3ive6pMpoTtaFpQ6z5OLIv+WYjTSlhFwVklm9So8rtAOCY
-	eCKRwI0VkhSzOTPV1Z0GoYxsLR64zmBIhd8INSY4m758RtsDA8rfZppgxzElUBQEgrOKrcCGwgW
-	MnU3P/fqt8tY1B5VL3Q1Nemz53BIBN99JRJicHNHtX2FR3CKapdsuA9xzimYdDwV8iB/pm0gwdr
-	r9XUBui03Fjho3PCJ3Up5L6vECZ3PXdB52zJtEJZqExXZmKgb6vWBUKG0ayVjlZPZ5NPYu8sXiI
-	9JqhPtXwGXP4duuJqCt8LahtKTljhG3Ljkn2mDEkVxcjMmK5j9byN9VmrsaXCVVkELAygX3W1EZ
-	Rr6KDV2TIVDtL3gS51nrXrBCG1gX3t12yokTnecC6qrsnN8GdjI3NdRqbGgzUB2xtfKomJfoccZ
-	Pl5hbw63kck5cR4bzBPPGquHmS01tmB1dS+x0hlOqVkh3gq0Dd20hR0XrkRZthqfZz2jU4kSO5D
-	sGU
-X-Received: by 2002:a5d:64cd:0:b0:46a:bda2:9255 with SMTP id ffacd0b85a97d-46c0ab3cac5mr5114333f8f.19.1782305240890;
-        Wed, 24 Jun 2026 05:47:20 -0700 (PDT)
-Message-ID: <ddf8c897-1a13-4d25-98ca-331c54913af3@suse.com>
-Date: Wed, 24 Jun 2026 14:47:18 +0200
+        bh=LgtZI3zesLmUcubosSfuQCw+aD87igB0phXmrcauwDI=;
+        b=bipUoHWO+CaiQh3Je5SZajd7LEwvqXF1oqdfIuUIaZ20jOA2/rStXiQXgG4111V4wN
+         NCO8LnO803tlEi5n3k1CXSjByey0JKHnk4T67TW0KjzJf4iMbxvjMOCkVJZIL/AhT1Rx
+         RMri0AXi/mcU/Bg5gkoFmThwVeY8iajgMfgv23kazLWU62f1P1cgkas6Xcae/rtjKHdT
+         93p6m33wSBWJuyFE2myaRnBKFO2S2iY8DY5EejfCwZmYPSvr+e/Du2/CeB6WeB6D4kg/
+         eaZxjWBKsbKpOq0ChNkLqpIgoS2/iF6ijaPdCUw6paee+u78o+WA24FV38NTRURyjfPv
+         dK4w==
+X-Gm-Message-State: AOJu0YwFRgQn+pcVWd9BqJY0ViBKRcAeRwX54mLfRBHPMSnGoda+kl3B
+	3XuCbe3bMQpPod/+3+FHLY4FesGGDw+ssQdBjSu/PcGaXmha/sscp6ESr5fYDr5Npreau28nwqX
+	gKHnK9Q==
+X-Gm-Gg: AfdE7cnOmEaGfWF/ree0iN8A+ofLUZ4UsioZYNUOpZMqe2gjedf4cX6YndEG/ZIsktC
+	B9TIkS1l24eOMSCT8kM6vv2HRRCrFp/G6nWa4Zr3MailTvI8x+ZBlwrKPJ696pgVrGHO7wS1sMT
+	RE1xjqSW6+NhhE33MuX7DixsXxU4SjvDqN7Q5hkSDQF6JCPRgJsiV/vFyqCF9y6a4pIK5FLFCoF
+	ZIsKfZPnZgeR6MBhIMu6pd7kjXYg8TOLWZ7vLMnDLgmmsMBzi2tbovmts7qP1oEGXUc0PXZZtT8
+	ijA48G6Jj6NtgUQvvam8wtNeg7dupXUSYEZ483k/uqmFduXkFKCg3May/tphO0Uyp0ai/Vbgjik
+	r23feIDjQokNgZNz8ctNaYyQOxv3o+xl/wEEs07eH9IKCHLZmpkrenILmbDrNMUJj3031sump2+
+	aZRLdy+fI1VJ02WwKFbCfzKpfjCRbQ8lS2OFYCDWnYbhP2eWWCJNiRIYl4EdoxdRGDaEr867lfT
+	Ccl
+X-Received: by 2002:a05:6000:2488:b0:464:c5be:37fe with SMTP id ffacd0b85a97d-46d04d45829mr498719f8f.15.1782306279388;
+        Wed, 24 Jun 2026 06:04:39 -0700 (PDT)
+Message-ID: <ee48e27a-049f-43b9-87dd-c9188db26f30@suse.com>
+Date: Wed, 24 Jun 2026 15:04:37 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 10/23] xen/riscv: introduce init interrupt controller
- operations
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1781693963.git.oleksii.kurochko@gmail.com>
- <da217bc51799d46666a740f38e00efc6de554ffc.1781693963.git.oleksii.kurochko@gmail.com>
- <1bb1a400-ed4f-470e-8f20-779d2c09c03d@suse.com>
- <81b60619-28f7-42e9-a6c6-be9016fe5918@gmail.com>
+Subject: Re: New Defects reported by Coverity Scan for XenProject
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <6a3bce99e5494_767442bc3001679a440720@prd-scan-dashboard-0.mail>
 Content-Language: en-US
+Cc: Juergen Gross <jgross@suse.com>, Julien Grall <julien@xen.org>
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -136,55 +125,39 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <81b60619-28f7-42e9-a6c6-be9016fe5918@gmail.com>
+In-Reply-To: <6a3bce99e5494_767442bc3001679a440720@prd-scan-dashboard-0.mail>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1782305241-4372868D-BF01E9E5/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-bad1c0/1782306279-56FA9986-EBAE9BB1/0/0
 X-purgate-type: clean
-X-purgate-size: 1801
+X-purgate-size: 1375
 
-On 24.06.2026 13:34, Oleksii Kurochko wrote:
-> On 6/22/26 4:30 PM, Jan Beulich wrote:
->> On 17.06.2026 13:17, Oleksii Kurochko wrote:
->> Strictly speaking ...
->>
->>> --- a/xen/arch/riscv/aplic.c
->>> +++ b/xen/arch/riscv/aplic.c
->>> @@ -306,12 +306,16 @@ static const hw_irq_controller aplic_xen_irq_type = {
->>>   
->>>   static const struct intc_hw_operations aplic_ops = {
->>>       .info                = &aplic_info,
->>> -    .init                = aplic_init,
->>>       .host_irq_type       = &aplic_xen_irq_type,
->>>       .handle_interrupt    = aplic_handle_interrupt,
->>>       .set_irq_type        = aplic_set_irq_type,
->>>   };
->>>   
->>> +static const struct intc_hw_init_ops __initconst aplic_init_ops = {
->>
->> ... I think this needs to use __initconstrel, as ...
->>
->>> +    .ops                 = &aplic_ops,
->>> +    .init                = aplic_init,
->>> +};
->>
->> ... both initialized fields incur a relocation.
+On 24.06.2026 14:33, scan-admin@coverity.com wrote:
+> ** CID 1695359:       Insecure data handling  (INTEGER_OVERFLOW)
+> /tools/xenstored/domain.c: 601           in domain_tree_remove_sub()
 > 
-> Isn’t it needed only when `aplic_init_ops.{ops,init}` is saved in a 
-> variable that doesn’t belong to the `.init` section, so that a potential 
-> dereference of already freed memory could occur?
+> 
+> _____________________________________________________________________________________________
+> *** CID 1695359:         Insecure data handling  (INTEGER_OVERFLOW)
+> /tools/xenstored/domain.c: 601             in domain_tree_remove_sub()
+> 595     		node_changed = true;
+> 596     	}
+> 597     
+> 598     	for (i = 1; i < node->hdr.num_perms; i++) {
+> 599     		if (node->perms[i].id != domain->domid)
+> 600     			continue;
+>>>>     CID 1695359:         Insecure data handling  (INTEGER_OVERFLOW)
+>>>>     "8UL * (node->hdr.num_perms - i - 1U)", which might have underflowed, is passed to "memmove(node->perms + i, node->perms + i + 1, 8UL * (node->hdr.num_perms - i - 1U))". [Note: The source code implementation of the function has been overridden by a builtin model.]
+> 601     		memmove(node->perms + i, node->perms + i + 1,
+> 602     			sizeof(*node->perms) * (node->hdr.num_perms - i - 1));
 
-No, that's no different between __init{data,const,constrel}. The issue here
-is that at least in PIC mode const global variables with initializers will
-go into .data.rel.ro (or alike), not .rodata. That's because this section
-should be writable, yet there shouldn't be writable contributions to
-.rodata.
-
-Since __initconst{,rel} include section placement, the former of the two
-(.init.rodata) should end up r/o, while the latter of the two
-(.init.rodata.rel) should again be r/w. Mismatched contributions would
-screw up the attributes, and assemblers in the past did (and legitimately
-may) warn about such mismatches.
+I'm struggling with this one: As i < node->hdr.num_perms, the last argument
+passed to memmove() can be 0, but I can't see potential for underflow.
 
 Jan
+
+> 603     		node->hdr.num_perms--;
+> 604     		i--;
+> 605     		node_changed = true;
+> 606     	}
 
