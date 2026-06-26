@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F22CC43638
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Jun 2026 15:47:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1346285.1604825 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56DC0C43211
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Jun 2026 15:47:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1346270.1604722 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wd8li-00031z-RA; Fri, 26 Jun 2026 15:47:02 +0000
+	id 1wd8lU-0000HV-S7; Fri, 26 Jun 2026 15:46:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1346285.1604825; Fri, 26 Jun 2026 15:47:02 +0000
+Received: by outflank-mailman (output) from mailman id 1346270.1604722; Fri, 26 Jun 2026 15:46:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wd8li-00030L-A8; Fri, 26 Jun 2026 15:47:02 +0000
-Received: by outflank-mailman (input) for mailman id 1346285;
- Fri, 26 Jun 2026 15:47:00 +0000
+	id 1wd8lU-0000Gl-OT; Fri, 26 Jun 2026 15:46:48 +0000
+Received: by outflank-mailman (input) for mailman id 1346270;
+ Fri, 26 Jun 2026 15:46:48 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wd8lg-0002aG-5E
- for xen-devel@lists.xenproject.org; Fri, 26 Jun 2026 15:47:00 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wd8lU-0000EB-2N
+ for xen-devel@lists.xenproject.org; Fri, 26 Jun 2026 15:46:48 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wd8lf-004aSr-IV
- for xen-devel@lists.xenproject.org; Fri, 26 Jun 2026 17:46:59 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wd8lT-004aNQ-FP
+ for xen-devel@lists.xenproject.org; Fri, 26 Jun 2026 17:46:47 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a3e9ef2-bab6-0a2a0a5309dd-0a2a450adae0-16
- for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 17:46:59 +0200
-Received: from [209.85.208.180] (helo=mail-lj1-f180.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a3e9edc-bab6-0a2a0a5309dd-0a2a4501e980-18
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 17:46:47 +0200
+Received: from [209.85.167.48] (helo=mail-lf1-f48.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a3e9ef3-e40e-0a2a450a0019-d155d0b4edad-3
- for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 17:46:59 +0200
-Received: by mail-lj1-f180.google.com with SMTP id
- 38308e7fff4ca-3996c9eeebeso9996361fa.1
- for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 08:46:59 -0700 (PDT)
+ id 6a3e9ee7-400f-0a2a45010019-d155a730a4e8-3
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 17:46:47 +0200
+Received: by mail-lf1-f48.google.com with SMTP id
+ 2adb3069b0e04-5aea1f4dc7fso1077104e87.0
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 08:46:47 -0700 (PDT)
 Received: from fedora (user-109-243-148-111.play-internet.pl.
  [109.243.148.111]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5ae9cd5b232sm2612888e87.29.2026.06.26.08.46.57
+ 2adb3069b0e04-5ae9cd5b232sm2612888e87.29.2026.06.26.08.46.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jun 2026 08:46:58 -0700 (PDT)
+ Fri, 26 Jun 2026 08:46:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,172 +54,291 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782488819; x=1783093619; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1782488807; x=1783093607; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=gmaOim7BZjYCiN1zoPRNC/AZ0NqzABJMaudwwqKrFuA=;
-        b=ALaYxdSd6SwoGzdXZr3j6TCxhDRwLnoqTpScFeE6I08CRDNS4mLWfySBMuukmd4qEq
-         JuNIFBVDmHpDk1IQ4Rpuc4WlO1QptfPpIe7jb2e0xBr9jYCchWASp+iD16bPjMuxIf99
-         zG2QzilsEoMM1uFVt7wBu+b05HKkDKM67blCm71UEI2oRVlwA0TL6gb5XN7W4lpA9nUd
-         85aBGedR2unY5llaKxamb/L36IGu5Uc+3/a40Gt0yK3mxMfGivFCwOmxrm6Ny2jyZbTT
-         2zct+wEIrtySjKwSRxWZtoEkYDNzXyExyJIySFpDudanjgIftGrXH4Ur5hJ20Lzi4qVw
-         I2Cg==
+        bh=4TtdpsKQe2Ojlx7r4TwViI4rHIRjvzW7vDmBaVjvSro=;
+        b=XRP+jsKKJG4haAX2XYx/jWM6JWcKGpAyNq3R6TiQZneGqTuXvpwHrFb/Tunz7XsK0s
+         feDjWJQSxHQT3ZPZI2l/y63+qZ4NA+Vp2xDQe5OY+5LMelUCLn6gAXLYa5k+Mu8ChBUe
+         HTJJdRPcfvA2VEVi+y7HKWjHMpo6KLm/lBao8Ni/aXNU4dO/NWI10U9BZQbsMzQRcXHf
+         UBGDU2T7Zr1dB93ZhUlO+uNDEnm6OqBNzzC6zSI2/m+Ei45Uh8YrkkyUVm/ZyDbJy/PE
+         ngSp0qxoygjgF+/nsuy5S6ZAbR+GYrQ9cfdbp8pR5DCoUR9VfGjQ45eQpuf46hQmlxSm
+         r9nQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782488819; x=1783093619;
+        d=1e100.net; s=20251104; t=1782488807; x=1783093607;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=gmaOim7BZjYCiN1zoPRNC/AZ0NqzABJMaudwwqKrFuA=;
-        b=SGoV1xkm/yi3LEm/W3o1C9q8paigdtc8+X8TafdsdGU6SfJY1FOe37QEVSMM1uzJRP
-         XhcqhhZz4OB8Sb5xEtEK7ujDuamw2RVA0btpN0hg7TY7Fv+kcuwPtIwPOKMEtLfwp9S3
-         LTTEGRiAeiZ9ONBS2DisUv0hav6AAP3SkKw4BUzG48RYZJZsuvtzX2hIM9OPYv85kV/v
-         1bihsoRX14aFyAzvOUScUKiSuBUT7jaeiviElE0D8/b65QLkngGYGN8QqlMiOLcqcOwI
-         NEsYyxhonM+CYVNKCrwq3x4vuhwjWPSUg4LywvfG96peFJr0No2nz3yJTkJZHshy+hAx
-         IVqA==
-X-Gm-Message-State: AOJu0YyUDnsCZPydr94NOfK1HwNjZTX6OULJymiDZ+mjj84K8FR89QDh
-	ypS6n41BI4P9YD5L2hKpSEgZodFn7AmtMyfwP8+4q+oVkjz+PgmIaqiH9/O2Ow==
-X-Gm-Gg: AfdE7ck3nkkYUdibqnGM9Kf91qegNtaRUVExbLK2M3Jpt0vH94VYgH4dHjHxxy8zuQC
-	k5ynjcXE3qPMAiNkf9sbOmvO19Y22qGqnD3jviRkBX1+QcT0YmVyzmb/CWxAzYfN0u+JE2pcpF4
-	MGZX5jVbjgFNDwmPfXeP2S8Rnv2o8hhM0sBzCdndHc43RJPpq5ru59zzuGXmg/RMxWgz9NkDrJF
-	kN/7oqgXhHOTVfQcTiv0tsf3rvA3cRjUEn2c/oK7Snj2c82LhX4ZNd1C0PZngRuXpEGdQwSDYyb
-	+9TJx6tUaMjUcF0p9kNXSHJw5NXr4v1BdvlpF3KPCI/DE+U5+nFjLHVFrw0djc+3oDhWtbug88r
-	/GTsltUkk7BeNuiMXxybgcBfPQzC41zfc1LYtK/ckXOBrpU6F1gu1UoE0Hf0bdPbhImmm/QFwgP
-	J/rQJ7mMLSJ91j6AhwprpfpYNzJhCqGdBhF91wbL1xW3/4dFVvppsAsciJbA==
-X-Received: by 2002:a05:6512:64ed:b0:5ad:5b38:2690 with SMTP id 2adb3069b0e04-5aea1f60e9cmr2054615e87.42.1782488818729;
-        Fri, 26 Jun 2026 08:46:58 -0700 (PDT)
+        bh=4TtdpsKQe2Ojlx7r4TwViI4rHIRjvzW7vDmBaVjvSro=;
+        b=hQ2N7PT3kIOlo5sDRdXfptz4SMU+k8wCN72V7Hpiwz8/G7RHs6598lr6zNRdKpJLHS
+         x1KDLXRFPlhN6VOPL+lrctoGyVxI5RYvYBsB1iZeuSLpUV3gxjZ2OiTWv1sbkt9piTOA
+         zZ/utLcaNaXbPw3ZHEpgz+wAxok0CXm1sS8P0clPmmIKKKd+6acqZSYH8OkM4c/V5EtP
+         YM51lLH9fCzHuR2ipeDwLWvpELCLB+ICrpdSZxoJSOrkfZDeyft2j9kQdTXv0G/2ZNeK
+         EK5D5dB8obDiG25nnsD+EsjyRfVNGvote3/Hrt2IgSYBuhpDHznJFHNqRsL54Gh5aXZu
+         NWjA==
+X-Gm-Message-State: AOJu0Yxsj48WakdC4n0NEd8TdF2cOIewSayYlslDUaxxoPFH3foF5xhk
+	CjKGXOq47Mfwxee9ltRmXsTetLc8OqGbadbwkfDLAxVxD5XuAZ6iKfMlmI3PuQ==
+X-Gm-Gg: AfdE7cnh6myxl5UYnPS6zH97Ex9zh/Bi9NwTmFHYXOSyIQ6NXS+8Z8w7VlmISsRuPhp
+	pVJ10bBNS5nBdt8xQnFZAWD6H0kGLCutMPQ1SGDyhuSlYgoA8qa5P5AdoV6SgbupxqcohvlIcy7
+	WzZOkNyf6NS6QAS5PTWRBXkngN22RTeSOmLbKrFVRvILlO5CCxouVkBV8zaw381/YDCBPbgUi2w
+	xNiHDkxlCmu3x17E/uVC8PvqfovZgiIGf+CzSOrBzeeC7C3tUgbFUPFn7lNmmceaywVKWDY99F9
+	sFKONHchTlh5XVc3RR2KRRM5+5qhCYjpBWKdBEpFo+lNznfGw6FAQxTzoh8Yx+nJ5LrzJGKPFM2
+	eU8N8XsyGYZLXFFSQw0V/DyC7iw4SG2KRHCafSag/qJ1zXD7LAfW9cndImhiSyOyrcU4+ZlqTPX
+	5oowWf+7nLpRxkDwhzrrpYbx4BJpLU+Fb8eh4XyEfYfYM/lUar9YMN/m+5Vw==
+X-Received: by 2002:a05:6512:2c96:b0:5ae:a9ed:35a6 with SMTP id 2adb3069b0e04-5aea9ed3758mr104764e87.31.1782488806557;
+        Fri, 26 Jun 2026 08:46:46 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Baptiste Le Duc <baptiste.le-duc@vates.tech>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v4 14/25] xen/riscv: introduce aia_init() and aia_usable()
-Date: Fri, 26 Jun 2026 17:46:23 +0200
-Message-ID: <709f4f1d9d593501819fa3d579b2cef0a108b48e.1782487661.git.oleksii.kurochko@gmail.com>
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>
+Subject: [PATCH v4 03/25] xen: arm: update p2m_set_allocation() prototype
+Date: Fri, 26 Jun 2026 17:46:12 +0200
+Message-ID: <d476330d88137db084b11b754b4121d116b5bada.1782487661.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <cover.1782487661.git.oleksii.kurochko@gmail.com>
 References: <cover.1782487661.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1782488819-D5B24DDE-689BC773/10/73395122804
+X-purgate-ID: tlsNG-d62444/1782488807-81AD91E0-1DC5DD87/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 3082
+X-purgate-size: 8763
 
-aia_init() is going to contain all the logic related to AIA initialization.
+p2m_set_allocation() uses a bool *preempted out-argument that overloads two
+meanings. When non-NULL, the value written back (true) duplicates information
+already carried by the -ERESTART return code — pure redundancy, which the
+caller-side ASSERT(preempted == (rc == -ERESTART)) only documents. Separately,
+a NULL pointer is an implicit calling convention meaning "preemption is not
+permitted in this context".
 
-At the moment, it only checks whether the SSAIA extension is available,
-and if so, sets is_aia_usable (which  indicates more than just the
-availability of the extension) to true; it also signifies that the necessary
-components (to be introduced in follow-up patches) have been initialized.
+Replace the pointer with a plain bool can_preempt that explicitly controls
+whether the preemption check runs, making the NULL-to-suppress convention
+type-safe and self-documenting, and rely on the -ERESTART return code alone to
+report that preemption occurred.
 
+Since p2m_set_allocation() is called by the common dom0less build code,
+move its declaration from the ARM-specific asm/p2m.h to xen/p2m-common.h.
+
+Reported-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in v4:
- - Add Acked-by: Jan Beulich <jbeulich@suse.com>
+ - Reword commit message: a NULL pointer was a calling convention meaning
+   "preemption not permitted", not pure redundancy.
+ - Annotate the explicit can_preempt arguments at the call sites with
+   /* can_preempt */ comments for readability.
+ - Move the function's doc comment to the prototype in xen/p2m-common.h
+   (dropping the duplicate above the Arm and RISC-V definitions) and clarify
+   that -ERESTART is only returned when can_preempt is true.
+ - Add __must_check to the prototype, since the return code is now the only
+   preemption-status indicator.
 ---
 Changes in v3:
- - s/is_aia_usable/_aia_usable to drop the is_ prefix while avoiding
-   conflict with the aia_usable() function name.
+ - Nothing changed. Only rebase.
 ---
 Changes in v2:
- - s/is_aia_available/is_aia_usable.
- - Drop return value for aia_init().
- - s/aia_available()/aia_usable().
+ - new patch
 ---
 ---
- xen/arch/riscv/Makefile          |  1 +
- xen/arch/riscv/aia.c             | 23 +++++++++++++++++++++++
- xen/arch/riscv/include/asm/aia.h | 10 ++++++++++
- xen/arch/riscv/intc.c            |  3 +++
- 4 files changed, 37 insertions(+)
- create mode 100644 xen/arch/riscv/aia.c
- create mode 100644 xen/arch/riscv/include/asm/aia.h
+ xen/arch/arm/include/asm/p2m.h          |  1 -
+ xen/arch/arm/mmu/p2m.c                  | 24 ++++++------------------
+ xen/arch/riscv/include/asm/paging.h     |  2 +-
+ xen/arch/riscv/p2m.c                    |  9 ++-------
+ xen/arch/riscv/paging.c                 |  7 ++-----
+ xen/common/device-tree/dom0less-build.c |  2 +-
+ xen/include/xen/p2m-common.h            |  8 ++++++++
+ 7 files changed, 20 insertions(+), 33 deletions(-)
 
-diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
-index fd5e499eb4b9..9df8b72b5494 100644
---- a/xen/arch/riscv/Makefile
-+++ b/xen/arch/riscv/Makefile
-@@ -1,3 +1,4 @@
-+obj-y += aia.o
- obj-y += aplic.o
- obj-y += cpufeature.o
- obj-y += domain.o
-diff --git a/xen/arch/riscv/aia.c b/xen/arch/riscv/aia.c
-new file mode 100644
-index 000000000000..e31c9c2d24b6
---- /dev/null
-+++ b/xen/arch/riscv/aia.c
-@@ -0,0 +1,23 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#include <xen/errno.h>
-+#include <xen/init.h>
-+#include <xen/sections.h>
-+#include <xen/types.h>
-+
-+#include <asm/cpufeature.h>
-+
-+static bool __ro_after_init _aia_usable;
-+
-+bool aia_usable(void)
-+{
-+    return _aia_usable;
-+}
-+
-+void __init aia_init(void)
-+{
-+    if ( !riscv_isa_extension_available(NULL, RISCV_ISA_EXT_ssaia) )
-+        return;
-+
-+    _aia_usable = true;
-+}
-diff --git a/xen/arch/riscv/include/asm/aia.h b/xen/arch/riscv/include/asm/aia.h
-new file mode 100644
-index 000000000000..ca42c3086126
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/aia.h
-@@ -0,0 +1,10 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#ifndef ASM__RISCV__AIA_H
-+#define ASM__RISCV__AIA_H
-+
-+bool aia_usable(void);
-+
-+void aia_init(void);
-+
-+#endif /* ASM__RISCV__ACPI_H */
-diff --git a/xen/arch/riscv/intc.c b/xen/arch/riscv/intc.c
-index e63da5e22efc..2864a896b677 100644
---- a/xen/arch/riscv/intc.c
-+++ b/xen/arch/riscv/intc.c
-@@ -9,6 +9,7 @@
- #include <xen/lib.h>
- #include <xen/spinlock.h>
+diff --git a/xen/arch/arm/include/asm/p2m.h b/xen/arch/arm/include/asm/p2m.h
+index 4a4913716bdd..737da60dcf58 100644
+--- a/xen/arch/arm/include/asm/p2m.h
++++ b/xen/arch/arm/include/asm/p2m.h
+@@ -238,7 +238,6 @@ void p2m_restore_state(struct vcpu *n);
+ /* Print debugging/statistial info about a domain's p2m */
+ void p2m_dump_info(struct domain *d);
  
-+#include <asm/aia.h>
- #include <asm/intc.h>
+-int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted);
+ int p2m_teardown_allocation(struct domain *d);
  
- static const struct intc_hw_operations *__ro_after_init intc_hw_ops;
-@@ -33,6 +34,8 @@ void __init intc_init(void)
- {
-     ASSERT(intc_hw_init_ops && intc_hw_init_ops->init);
- 
-+    aia_init();
-+
-     if ( intc_hw_init_ops->init() )
-         panic("Failed to initialize the interrupt controller drivers\n");
+ static inline void p2m_write_lock(struct p2m_domain *p2m)
+diff --git a/xen/arch/arm/mmu/p2m.c b/xen/arch/arm/mmu/p2m.c
+index 51abf3504fcf..2cf35d8a3709 100644
+--- a/xen/arch/arm/mmu/p2m.c
++++ b/xen/arch/arm/mmu/p2m.c
+@@ -65,12 +65,7 @@ int arch_get_paging_mempool_size(struct domain *d, uint64_t *size)
+     return 0;
  }
+ 
+-/*
+- * Set the pool of pages to the required number of pages.
+- * Returns 0 for success, non-zero for failure.
+- * Call with d->arch.paging.lock held.
+- */
+-int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
++int p2m_set_allocation(struct domain *d, unsigned long pages, bool can_preempt)
+ {
+     struct page_info *pg;
+ 
+@@ -112,11 +107,8 @@ int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
+             break;
+ 
+         /* Check to see if we need to yield and try again */
+-        if ( preempted && general_preempt_check() )
+-        {
+-            *preempted = true;
++        if ( can_preempt && general_preempt_check() )
+             return -ERESTART;
+-        }
+     }
+ 
+     return 0;
+@@ -125,7 +117,6 @@ int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
+ int arch_set_paging_mempool_size(struct domain *d, uint64_t size)
+ {
+     unsigned long pages = size >> PAGE_SHIFT;
+-    bool preempted = false;
+     int rc;
+ 
+     if ( (size & ~PAGE_MASK) ||          /* Non page-sized request? */
+@@ -133,27 +124,24 @@ int arch_set_paging_mempool_size(struct domain *d, uint64_t size)
+         return -EINVAL;
+ 
+     spin_lock(&d->arch.paging.lock);
+-    rc = p2m_set_allocation(d, pages, &preempted);
++    rc = p2m_set_allocation(d, pages, /* can_preempt */ true);
+     spin_unlock(&d->arch.paging.lock);
+ 
+-    ASSERT(preempted == (rc == -ERESTART));
+-
+     return rc;
+ }
+ 
+ int p2m_teardown_allocation(struct domain *d)
+ {
+     int ret = 0;
+-    bool preempted = false;
+ 
+     spin_lock(&d->arch.paging.lock);
+     if ( d->arch.paging.p2m_total_pages != 0 )
+     {
+-        ret = p2m_set_allocation(d, 0, &preempted);
+-        if ( preempted )
++        ret = p2m_set_allocation(d, 0, /* can_preempt */ true);
++        if ( ret == -ERESTART )
+         {
+             spin_unlock(&d->arch.paging.lock);
+-            return -ERESTART;
++            return ret;
+         }
+         ASSERT(d->arch.paging.p2m_total_pages == 0);
+     }
+diff --git a/xen/arch/riscv/include/asm/paging.h b/xen/arch/riscv/include/asm/paging.h
+index e487c89a4ccd..103384723dc5 100644
+--- a/xen/arch/riscv/include/asm/paging.h
++++ b/xen/arch/riscv/include/asm/paging.h
+@@ -9,7 +9,7 @@ struct page_info;
+ int paging_domain_init(struct domain *d);
+ 
+ int paging_freelist_adjust(struct domain *d, unsigned long pages,
+-                           bool *preempted);
++                           bool can_preempt);
+ 
+ int paging_ret_to_domheap(struct domain *d, unsigned int nr_pages);
+ int paging_refill_from_domheap(struct domain *d, unsigned int nr_pages);
+diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
+index 703b9f4d2540..566266e3e78f 100644
+--- a/xen/arch/riscv/p2m.c
++++ b/xen/arch/riscv/p2m.c
+@@ -428,17 +428,12 @@ int p2m_init(struct domain *d, const struct xen_domctl_createdomain *config)
+     return 0;
+ }
+ 
+-/*
+- * Set the pool of pages to the required number of pages.
+- * Returns 0 for success, non-zero for failure.
+- * Call with d->arch.paging.lock held.
+- */
+-int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
++int p2m_set_allocation(struct domain *d, unsigned long pages, bool can_preempt)
+ {
+     struct p2m_domain *p2m = p2m_get_hostp2m(d);
+     int rc;
+ 
+-    if ( (rc = paging_freelist_adjust(d, pages, preempted)) )
++    if ( (rc = paging_freelist_adjust(d, pages, can_preempt)) )
+         return rc;
+ 
+     /*
+diff --git a/xen/arch/riscv/paging.c b/xen/arch/riscv/paging.c
+index 76a203edbb0c..35f572689a7c 100644
+--- a/xen/arch/riscv/paging.c
++++ b/xen/arch/riscv/paging.c
+@@ -47,7 +47,7 @@ static int _paging_add_to_freelist(struct domain *d)
+ }
+ 
+ int paging_freelist_adjust(struct domain *d, unsigned long pages,
+-                           bool *preempted)
++                           bool can_preempt)
+ {
+     ASSERT(spin_is_locked(&d->arch.paging.lock));
+ 
+@@ -66,11 +66,8 @@ int paging_freelist_adjust(struct domain *d, unsigned long pages,
+             return rc;
+ 
+         /* Check to see if we need to yield and try again */
+-        if ( preempted && general_preempt_check() )
+-        {
+-            *preempted = true;
++        if ( can_preempt && general_preempt_check() )
+             return -ERESTART;
+-        }
+     }
+ 
+     return 0;
+diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tree/dom0less-build.c
+index eacfd93087ae..6f0b574755c5 100644
+--- a/xen/common/device-tree/dom0less-build.c
++++ b/xen/common/device-tree/dom0less-build.c
+@@ -747,7 +747,7 @@ static int __init domain_p2m_set_allocation(struct domain *d, uint64_t mem,
+                 domain_p2m_pages(mem, d->max_vcpus);
+ 
+     spin_lock(&d->arch.paging.lock);
+-    rc = p2m_set_allocation(d, p2m_pages, NULL);
++    rc = p2m_set_allocation(d, p2m_pages, /* can_preempt */ false);
+     spin_unlock(&d->arch.paging.lock);
+ 
+     return rc;
+diff --git a/xen/include/xen/p2m-common.h b/xen/include/xen/p2m-common.h
+index f0bd9a6b9896..0eb061991283 100644
+--- a/xen/include/xen/p2m-common.h
++++ b/xen/include/xen/p2m-common.h
+@@ -43,5 +43,13 @@ int __must_check check_get_page_from_gfn(struct domain *d, gfn_t gfn,
+                                          bool readonly, p2m_type_t *p2mt_p,
+                                          struct page_info **page_p);
+ 
++/*
++ * Set the pool of pages to the required number of pages.
++ * Returns 0 for success, -ERESTART if preempted (only when can_preempt is
++ * true), or a negative error code on failure.
++ * Call with d->arch.paging.lock held.
++ */
++int __must_check p2m_set_allocation(struct domain *d, unsigned long pages,
++                                    bool can_preempt);
+ 
+ #endif /* _XEN_P2M_COMMON_H */
 -- 
 2.54.0
 
