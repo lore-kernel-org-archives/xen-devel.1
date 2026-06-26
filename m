@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94FF3C44511
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Jun 2026 15:47:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1346272.1604745 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0543FC4450C
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Jun 2026 15:47:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1346276.1604769 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wd8lY-0000u4-Cd; Fri, 26 Jun 2026 15:46:52 +0000
+	id 1wd8lb-0001U3-Do; Fri, 26 Jun 2026 15:46:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1346272.1604745; Fri, 26 Jun 2026 15:46:52 +0000
+Received: by outflank-mailman (output) from mailman id 1346276.1604769; Fri, 26 Jun 2026 15:46:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wd8lY-0000to-8Z; Fri, 26 Jun 2026 15:46:52 +0000
-Received: by outflank-mailman (input) for mailman id 1346272;
- Fri, 26 Jun 2026 15:46:50 +0000
+	id 1wd8lb-0001RD-6g; Fri, 26 Jun 2026 15:46:55 +0000
+Received: by outflank-mailman (input) for mailman id 1346276;
+ Fri, 26 Jun 2026 15:46:54 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wd8lW-0000f0-I9
- for xen-devel@lists.xenproject.org; Fri, 26 Jun 2026 15:46:50 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wd8la-0001Eq-5t
+ for xen-devel@lists.xenproject.org; Fri, 26 Jun 2026 15:46:54 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wd8lV-008hQp-VB
- for xen-devel@lists.xenproject.org; Fri, 26 Jun 2026 17:46:49 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wd8lZ-008hQp-Iu
+ for xen-devel@lists.xenproject.org; Fri, 26 Jun 2026 17:46:53 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a3e9ebb-2eae-0a2a0a5409dd-0a2a450a98aa-36
- for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 17:46:45 +0200
-Received: from [209.85.167.50] (helo=mail-lf1-f50.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a3e9ed7-2eae-0a2a0a5409dd-0a2a4509c3ce-18
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 17:46:53 +0200
+Received: from [209.85.167.42] (helo=mail-lf1-f42.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a3e9ee4-e40e-0a2a450a0019-d155a732cd05-3
- for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 17:46:45 +0200
-Received: by mail-lf1-f50.google.com with SMTP id
- 2adb3069b0e04-5ad583dc41eso936682e87.1
- for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 08:46:44 -0700 (PDT)
+ id 6a3e9eed-97e6-0a2a45090019-d155a72ab4fb-3
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 17:46:53 +0200
+Received: by mail-lf1-f42.google.com with SMTP id
+ 2adb3069b0e04-5aea96d09ddso196152e87.0
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 08:46:53 -0700 (PDT)
 Received: from fedora (user-109-243-148-111.play-internet.pl.
  [109.243.148.111]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5ae9cd5b232sm2612888e87.29.2026.06.26.08.46.43
+ 2adb3069b0e04-5ae9cd5b232sm2612888e87.29.2026.06.26.08.46.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jun 2026 08:46:43 -0700 (PDT)
+ Fri, 26 Jun 2026 08:46:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,235 +54,325 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782488804; x=1783093604; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1782488813; x=1783093613; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=E1ntZTjXuPMc3S9pVqmhNEY95hHRXNFcsq1srHmQDd0=;
-        b=S0MPT4Jk6uuwFXfsQc2fvbhV9+gfNJS0GFv0cb1VyNtiVBIZSw6gs2sTg9EUrBgh4O
-         N9LIaFkz30GJe1NqSM7kbpcu7sN8PoYzlskYTSIrdQbUeaCvniTAoROZba1ujk7FBG8j
-         04bzi2+WweoZHQco7dAZ+l/DArcETmcpUjRyXv4F9xgHWsukgOzFNxUbm6M9+2MxIsvM
-         6ivt5U/QAP44vExlRYi0HbzvZ7sI29J9GC2sCxwAV//lIX0L3hsmD3ivUvV12g8UkS79
-         oiSAQjnXy2FtZGsneuN6LkOHDgeTGiubd+fAkJRipucVSvVQAN96HdgbSAdBFwlED6tk
-         +5TQ==
+        bh=lAgm/yYwskXxJGXI22S3gUIllEquJX3wAHQbVFNRFl0=;
+        b=iJlMpiPFcGmq6JyDYPsln8dabcQ0fnKmxN7nJJXTpo69voqr8THS8eoar5X2Uj/MPX
+         OOJqloTSImmu+TOabuXPoH17NSwMDT0R+43OjqKdG7/wzNEFBLSTwf3fHAa4GR/cKeSb
+         RF5LV+xfCopNBuRr9Z/iqdCbYjM55G/HrfkuIe6ehqrpYudvYtcCNmghVtVt+c18DxE2
+         UwlRva19KNAcgT0v+F9XVC1DgLJl9y0VEs68OPVmkAsHYXZkQkr9qTzwB/5Vt7wXlt22
+         3gtZACt90PSX4CoPvyN1tp8rO1tndxQvyiw4frc4GgiHoVq9wmpSUFFQB1go62UMqQnj
+         obEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782488804; x=1783093604;
+        d=1e100.net; s=20251104; t=1782488813; x=1783093613;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=E1ntZTjXuPMc3S9pVqmhNEY95hHRXNFcsq1srHmQDd0=;
-        b=IBjdb/cgPIreqfFF7KFYDYgYTOk5Aqcmed2zRvfULLtf/UR92hP98yf71ebDaJJ1jY
-         FSivloE/y9qDXZqNg8wLlC+chy8SMafdr1/RXOq6ZkUNBCKwzhH28uYvN66ka4RjoZOY
-         aksfQ7ovcq6G4XwuPgzNbSSIYcHUHUBU2DJUXz7G0HtO7GtAuBe0Arcr64qPlDna6M6a
-         fySlTFIqSrV8fHxxA/Vrnje3Zpzn2F5TPgphXVLOf+laPX6GXaocrTl18bb8bevJrDER
-         IR3w51GcAeJ4aTfG12Ql0Jmsa5R+Tvs1q8oSXpSjbB6jedbIk9ZWakaOTxi01H+D59EO
-         g6jg==
-X-Gm-Message-State: AOJu0Yzcqpb3+7WGm1sUDkF3rc+sGwkizTD7GZLHkfOEVIhtOVotOqYH
-	ZPGC0i3Q9mRcUk3WdBp5659OQi88yC+w6JH2uUAonUp3Giwb9ht13hRLffMeGA==
-X-Gm-Gg: AfdE7ckaXM7iR9U8GEdH7OR17jm/tN7WziUn86b+BI4GirSG63ly5DevvjRG/En608e
-	AoM4NhTpn/d1aKfmuxjTWtfvj2eSoXPzG36MhiqbZ8lGkMcOt2TAVVkijGeFCUE43S/vxTKfLVP
-	pOuy6IJETYn4C4GPr9bH26stMo5/jdZ/GWgA38xmcZxKthdd0eT4J4cf2oqLkklyGu5F37Z00Kj
-	UvNP2LBVnRZgOjHNUj9l710fvgtMO/+ufKacTLrUUXHT6PhIz3POQrqQNxFVF1qEcH2APCNw5up
-	q3H4C5nkLOzHaWaCPUdf/j00OpG93LrjaW/4kqC+RTT6djvT4pMRJ1/9lAugfRF2bVMnH0Q1QFY
-	Df5eC2rxwGCUHviHXkf7BlsMKwv080HoY8snXzeLUU3pg1MnhcCOLwwc0iiaQ7I0gh/f/Hpj/23
-	wxrzRwr2Jy0lkaGUybMm8xact3Rw/2aWTKvvkCwjl8frPpaKNFyS0C8vxxBQ==
-X-Received: by 2002:a05:6512:1515:20b0:5aa:8824:156a with SMTP id 2adb3069b0e04-5aea1f57886mr1584108e87.46.1782488804127;
-        Fri, 26 Jun 2026 08:46:44 -0700 (PDT)
+        bh=lAgm/yYwskXxJGXI22S3gUIllEquJX3wAHQbVFNRFl0=;
+        b=qntZmobKGh7HH+4/tbWvhimmSyKkVlBD8pnt/lxTZjbxwvBfqA1T7beHLqLzV+dPay
+         Vpub42Bt5xGOy0sKuSkE0fcEDtQtFPJrqoi8d14YTm4vnjCS6WcD39//kRTMStlM9ARf
+         k/ZjQ1vKv8+jpjC84ni77w8TCWX+AP1DnpyqSM9ETxn2Aqp9Sodlc74uE3BosY6jCeBA
+         t2XyYLtcNz8FbqZNv6CxE8F7JKl0qCZ8ZRXVl7BQjzVRq0Ymm1R7Qq9Y6GuJhvpoWrAq
+         XONpnFrs6vUUTvQnNnAtsCKuC4QLlLAszlENpUKtVKZzez+ZSNCcNfHy2uoYAZ0AVyrj
+         Xjeg==
+X-Gm-Message-State: AOJu0Yw+fNO1gRAmYSuC7b96o3KwcKbCpTsmATLm1edesmqdkp/SIMZw
+	fS48CfGbrxpGhZK1nihL2WdhnbYZZfhggpQePWlzEG3GgLJdh9CWqy7u/gXUxQ==
+X-Gm-Gg: AfdE7cn1H2C2Oh5rvOK7KO9hsw4RMYHYPZjDkWNfftz6ZPr1LzxWn+ENkIfPrhamP0t
+	x1nYMa0k1nBflAF3sX2yzNhU6+21l6j2EpNGbzyKWTZxAHzZWKmXXyupJUCHHAEpaxLJFEl9asD
+	HMhlMcV5yeIBGSnC/y8g8KTAxhDcUomhn1iEdhFugnV3yTqu5J+VykNrdDr8i3O2w+Nc8bvpNIX
+	QgiYJ6d96hknUZneZJABmvXy6U3GYpqZV/RNRIwYxrsmFn6P5Wk7dZVmLETZJafCIqk+b5pA0Xe
+	lzPmC2ops++Dxiq2mCh41nG5KX376Xf6GB8eA89hl/0rgAb9SwmFpWbQhlGEuajQpUFUbouvPx9
+	DFBPrYkpEg0asD4NJ3fSamoKAHU+d1IUfhI3/nQYB9k7hnWDDyV1qlA0JB9han5yeequNOo2dFd
+	tl72f/uz7+BD2kOOJeJtTj19thPfC8TLC+KpLvI5BYSYAyZsRISZKRTtcrxZX1t6nq2lni
+X-Received: by 2002:a05:6512:130e:b0:5ae:9d13:e610 with SMTP id 2adb3069b0e04-5aea1f6958dmr1970457e87.37.1782488812647;
+        Fri, 26 Jun 2026 08:46:52 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Baptiste Le Duc <baptiste.le-duc@vates.tech>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Timothy Pearson <tpearson@raptorengineering.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v4 01/25] xen/dom0less: turn max_init_domid into a common variable
-Date: Fri, 26 Jun 2026 17:46:10 +0200
-Message-ID: <2c60cbed167fda0f90ce3aa4324ea4c4b076c43d.1782487661.git.oleksii.kurochko@gmail.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v4 08/25] xen/riscv: introduce guest riscv,isa string
+Date: Fri, 26 Jun 2026 17:46:17 +0200
+Message-ID: <b2678a5697112d3ac16a98b86433da22374324b2.1782487661.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <cover.1782487661.git.oleksii.kurochko@gmail.com>
 References: <cover.1782487661.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1782488805-D7139DDE-CB210E16/10/73395122804
+X-purgate-ID: tlsNG-bad1c0/1782488813-54785986-483B4FAF/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 5746
+X-purgate-size: 8878
 
-Until now every architecture carried its own notion of max_init_domid:
-Arm defined a real variable (declared in asm/setup.h, defined in
-setup.c), while ppc, riscv and x86 each provided a "#define
-max_init_domid (0)" stub in their asm/setup.h. This duplicated the same
-declaration across all arches and placed a purely dom0less concept in
-arch setup headers.
+Introduce generation of the riscv,isa string passed to the guest via the
+Device Tree riscv,isa property.
 
-Now that the dom0less build code lives in common (xen/common/
-device-tree/dom0less-build.c sets max_init_domid, and the console
-serial-input switcher reads it), there is no reason for the symbol to be
-per-arch. Provide a single declaration in <xen/dom0less-build.h>, with
-the !CONFIG_DOM0LESS_BOOT stub kept there as well, so there is one source
-of truth and the arch headers no longer need to mention it. Update
-console.c to include <xen/dom0less-build.h> for the declaration instead
-of relying on asm/setup.h.
+Introduce the per-domain isa string and guest isa bitmap, populated
+during domain creation by calling init_guest_isa().
 
-Place the definition in xen/common/domid.c rather than in dom0less-
-build.c. The latter is built as dom0less-build.init.o, i.e. the whole
-object is relocated into the .init.* sections and freed after boot,
-whereas max_init_domid must outlive boot because it is read at runtime
-by the console serial-input switcher. domid.c is always linked (obj-y)
-and resides in regular (non-init) sections, so it is a correct home for
-the variable. It is marked __ro_after_init since it is only updated
-while creating boot-time domains and read-only afterwards, and guarded
-by CONFIG_DOM0LESS_BOOT as domid.c itself is unconditional.
+Introduce guest_unsupp to filter out ISA extensions that should not be
+exposed to guests:
+
+- f/d/q/v: FPU and vector context save/restore are not yet implemented
+  for guests.
+- Z*inx are not exposed either: they aren't in riscv_isa_ext[], so they can
+  never be set in riscv_isa and thus never reach a guest, and no current
+  hardware/guest-OS advertises or expects them. Supporting them would be
+  cheaper than F/D/Q (FP values stay in integer registers Xen already
+  context-switches), but is left as future work.
+- h: Nested virtualisation is not supported.
+- sstc: Xen owns the supervisor timer; guests must use SBI.
+- svade: Xen manages hardware A/D bit updates in stage-2 page tables.
+- svpbmt: Page-based memory types are not yet wired up in stage-2 code.
+
+Drop __initconst for riscv_isa_ext() as it can be used after init stage
+by init_guest_isa().
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-Regarding last paragraph it is also alternative option just make
-dom0less-build.init.o no-init.
----
 Changes in v4:
- - New patch.
+ - Add an explicit overflow guard in build_guest_isa_str(): return
+   -ENOSPC when buf is non-NULL and total >= size, to avoid the
+   size - total underflow being passed to snprintf().
+ - Expand the commit message to explain why Zfinx/Zdinx/Zqinx are not
+   added to guest_unsupp (not in riscv_isa_ext[], so never set in
+   riscv_isa nor exposed to a guest; left as future work)
 ---
- xen/arch/arm/include/asm/setup.h   | 2 --
- xen/arch/arm/setup.c               | 2 --
- xen/arch/ppc/include/asm/setup.h   | 2 --
- xen/arch/riscv/include/asm/setup.h | 2 --
- xen/arch/x86/include/asm/setup.h   | 2 --
- xen/common/domid.c                 | 5 +++++
- xen/drivers/char/console.c         | 1 +
- xen/include/xen/dom0less-build.h   | 7 +++++++
- 8 files changed, 13 insertions(+), 10 deletions(-)
+Changes in v3:
+ - s/set_bit/__set_bit in init_guest_unsupp() as atomicity isn't needed at
+   init time.
+ - Drop RISCV_GUEST_ISA_STR_MAX; allocate isa_str dynamically with
+   xvmalloc_array().
+ - Drop "guest" prefix from d->arch.guest_isa and d->arch.guest_isa_str.
+ - Introduce build_guest_isa_str() using snprintf(NULL, 0, ...) to determine
+   the needed buffer size; init_guest_isa() calls it once for sizing and once
+   to fill, keeping both in a single function so they can't go out of sync.
+ - Scope ret inside the loop; initialize total directly from the prefix
+   snprintf().
+ - Merge "_" separator and extension name into a single snprintf() with
+   "%s%s".
+ - Replace ASSERT with an explicit error check: if the fill call returns a
+   different length, free isa_str and return -EINVAL.
+---
+Changes in v2:
+ - s/guest_unsupp_bmp/guest_unsupp.
+ - Drop guest_isa_str.
+ - Provide init_guest_isa() instead of polluting match_isa_ext().
+ - Drop xlen.
+ - Add the comment about guest_unsupp.
+ - Update the way how guest_unsupp is init-ed.
+ - Drop __initconst for riscv_isa_ext[] as it is used in init_guest_isa()
+   which isn't marked as __init as it could be used after init stage.
+---
+---
+ xen/arch/riscv/cpufeature.c             | 88 ++++++++++++++++++++++++-
+ xen/arch/riscv/domain.c                 |  3 +
+ xen/arch/riscv/include/asm/cpufeature.h |  4 ++
+ xen/arch/riscv/include/asm/domain.h     |  4 ++
+ 4 files changed, 98 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index 0d29b46ea52b..14fa92d5c1db 100644
---- a/xen/arch/arm/include/asm/setup.h
-+++ b/xen/arch/arm/include/asm/setup.h
-@@ -25,8 +25,6 @@ struct map_range_data
-     struct rangeset *irq_ranges;
+diff --git a/xen/arch/riscv/cpufeature.c b/xen/arch/riscv/cpufeature.c
+index 92235fdfd5ab..b85af09d65c9 100644
+--- a/xen/arch/riscv/cpufeature.c
++++ b/xen/arch/riscv/cpufeature.c
+@@ -14,7 +14,9 @@
+ #include <xen/errno.h>
+ #include <xen/init.h>
+ #include <xen/lib.h>
++#include <xen/sched.h>
+ #include <xen/sections.h>
++#include <xen/xvmalloc.h>
+ 
+ #include <asm/cpufeature.h>
+ #include <asm/csr.h>
+@@ -120,7 +122,7 @@ static int __init dt_get_cpuid_from_node(const struct dt_device_node *cpu,
+  * and strncmp() is used in match_isa_ext() to compare extension names instead
+  * of strncasecmp().
+  */
+-const struct riscv_isa_ext_data __initconst riscv_isa_ext[] = {
++const struct riscv_isa_ext_data riscv_isa_ext[] = {
+     RISCV_ISA_EXT_DATA(i),
+     RISCV_ISA_EXT_DATA(m),
+     RISCV_ISA_EXT_DATA(a),
+@@ -128,6 +130,7 @@ const struct riscv_isa_ext_data __initconst riscv_isa_ext[] = {
+     RISCV_ISA_EXT_DATA(d),
+     RISCV_ISA_EXT_DATA(q),
+     RISCV_ISA_EXT_DATA(c),
++    RISCV_ISA_EXT_DATA(v),
+     RISCV_ISA_EXT_DATA(h),
+     RISCV_ISA_EXT_DATA(zicntr),
+     RISCV_ISA_EXT_DATA(zicsr),
+@@ -160,6 +163,12 @@ static const struct riscv_isa_ext_data __initconst required_extensions[] = {
+     RISCV_ISA_EXT_DATA(svpbmt),
  };
  
--extern domid_t max_init_domid;
--
- void copy_from_paddr(void *dst, paddr_t paddr, unsigned long len);
- 
- size_t estimate_efi_size(unsigned int mem_nr_banks);
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 6310a47d68b6..86532d0a35b6 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -62,8 +62,6 @@ struct cpuinfo_arm __read_mostly system_cpuinfo;
- bool __read_mostly acpi_disabled;
- #endif
- 
--domid_t __read_mostly max_init_domid;
--
- static __used void noreturn init_done(void)
++/*
++ * Everything in riscv_isa_ext[] which shouldn't be exposed to guests should
++ * appear here.
++ */
++static __ro_after_init DECLARE_BITMAP(guest_unsupp, RISCV_ISA_EXT_MAX);
++
+ static bool __init is_lowercase_extension_name(const char *str)
  {
-     /* Must be done past setting system_state. */
-diff --git a/xen/arch/ppc/include/asm/setup.h b/xen/arch/ppc/include/asm/setup.h
-index e4f64879b68c..956fa6985adb 100644
---- a/xen/arch/ppc/include/asm/setup.h
-+++ b/xen/arch/ppc/include/asm/setup.h
-@@ -1,6 +1,4 @@
- #ifndef __ASM_PPC_SETUP_H__
- #define __ASM_PPC_SETUP_H__
- 
--#define max_init_domid (0)
--
- #endif /* __ASM_PPC_SETUP_H__ */
-diff --git a/xen/arch/riscv/include/asm/setup.h b/xen/arch/riscv/include/asm/setup.h
-index 2215894cfbb1..73ce2f293348 100644
---- a/xen/arch/riscv/include/asm/setup.h
-+++ b/xen/arch/riscv/include/asm/setup.h
-@@ -5,8 +5,6 @@
- 
- #include <xen/types.h>
- 
--#define max_init_domid (0)
--
- void setup_mm(void);
- 
- void copy_from_paddr(void *dst, paddr_t paddr, unsigned long len);
-diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
-index b01e83a8ed9f..5925c5f39cff 100644
---- a/xen/arch/x86/include/asm/setup.h
-+++ b/xen/arch/x86/include/asm/setup.h
-@@ -68,6 +68,4 @@ extern bool opt_dom0_verbose;
- extern bool opt_dom0_cpuid_faulting;
- extern bool opt_dom0_msr_relaxed;
- 
--#define max_init_domid (0)
--
- #endif
-diff --git a/xen/common/domid.c b/xen/common/domid.c
-index b0258e477c1a..cd46cf952be6 100644
---- a/xen/common/domid.c
-+++ b/xen/common/domid.c
-@@ -9,6 +9,11 @@
-  */
- 
- #include <xen/domain.h>
-+#include <xen/dom0less-build.h>
-+
-+#ifdef CONFIG_DOM0LESS_BOOT
-+domid_t __ro_after_init max_init_domid;
-+#endif
- 
- static DEFINE_SPINLOCK(domid_lock);
- static DECLARE_BITMAP(domid_bitmap, DOMID_FIRST_RESERVED);
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index bcd6d261491b..4c09f4c7a984 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -31,6 +31,7 @@
- #include <xen/warning.h>
- #include <xen/pv_console.h>
- #include <asm/setup.h>
-+#include <xen/dom0less-build.h>
- #include <xen/sections.h>
- #include <xen/consoled.h>
- 
-diff --git a/xen/include/xen/dom0less-build.h b/xen/include/xen/dom0less-build.h
-index 4118dec76c0a..8d4da16d1f0a 100644
---- a/xen/include/xen/dom0less-build.h
-+++ b/xen/include/xen/dom0less-build.h
-@@ -5,6 +5,8 @@
- 
- #include <xen/stdbool.h>
- 
-+#include <public/xen.h>
-+
- struct domain;
- 
- #ifdef CONFIG_DOM0LESS_BOOT
-@@ -13,6 +15,9 @@ struct boot_domain;
- struct dt_device_node;
- struct kernel_info;
- 
-+/* Highest domain ID assigned to a boot-time (dom0less) domain. */
-+extern domid_t max_init_domid;
-+
- /*
-  * List of possible features for dom0less domUs
-  *
-@@ -72,6 +77,8 @@ static inline bool is_dom0less_mode(void)
+     /*
+@@ -480,6 +489,81 @@ bool riscv_isa_extension_available(const unsigned long *isa_bitmap,
+     return test_bit(id, isa_bitmap);
  }
- static inline void set_xs_domain(struct domain *d) {}
  
-+#define max_init_domid 0
++static int build_guest_isa_str(char *buf, size_t size,
++                               const unsigned long *isa_bitmap)
++{
++    int total;
 +
- #endif /* CONFIG_DOM0LESS_BOOT */
++#if defined(CONFIG_RISCV_32)
++    total = snprintf(buf, size, "rv32");
++#elif defined(CONFIG_RISCV_64)
++    total = snprintf(buf, size, "rv64");
++#else
++#   error "Unsupported RISC-V bitness"
++#endif
++
++    if ( total < 0 )
++        return total;
++
++    if ( buf && ((size_t)total >= size) )
++        return -ENOSPC;
++
++    for ( unsigned int i = 0; i < ARRAY_SIZE(riscv_isa_ext); i++ )
++    {
++        const struct riscv_isa_ext_data *ext = &riscv_isa_ext[i];
++        int ret;
++
++        if ( !riscv_isa_extension_available(isa_bitmap, ext->id) )
++            continue;
++
++        ret = snprintf(buf ? buf + total : NULL,
++                       buf ? size - total : 0, "%s%s",
++                       ext->id >= RISCV_ISA_EXT_BASE ? "_" : "",
++                       ext->name);
++        if ( ret < 0 )
++            return ret;
++        total += ret;
++    }
++
++    return total;
++}
++
++int init_guest_isa(struct domain *d)
++{
++    int len;
++
++    bitmap_andnot(d->arch.isa, riscv_isa, guest_unsupp,
++                  RISCV_ISA_EXT_MAX);
++
++    len = build_guest_isa_str(NULL, 0, d->arch.isa);
++    if ( len < 0 )
++        return len;
++
++    d->arch.isa_str = xvmalloc_array(char, len + 1);
++    if ( !d->arch.isa_str )
++        return -ENOMEM;
++
++    if ( build_guest_isa_str(d->arch.isa_str, len + 1, d->arch.isa) != len )
++    {
++        XVFREE(d->arch.isa_str);
++        return -EINVAL;
++    }
++
++    return 0;
++}
++
++static void __init init_guest_unsupp(void)
++{
++    __set_bit(RISCV_ISA_EXT_f, guest_unsupp);
++    __set_bit(RISCV_ISA_EXT_d, guest_unsupp);
++    __set_bit(RISCV_ISA_EXT_q, guest_unsupp);
++    __set_bit(RISCV_ISA_EXT_v, guest_unsupp);
++    __set_bit(RISCV_ISA_EXT_h, guest_unsupp);
++    __set_bit(RISCV_ISA_EXT_sstc, guest_unsupp);
++    __set_bit(RISCV_ISA_EXT_svade, guest_unsupp);
++    __set_bit(RISCV_ISA_EXT_svpbmt, guest_unsupp);
++}
++
+ void __init riscv_fill_hwcap(void)
+ {
+     unsigned int i;
+@@ -527,4 +611,6 @@ void __init riscv_fill_hwcap(void)
+     if ( !all_extns_available )
+         panic("Look why the extensions above are needed in "
+               "https://xenbits.xenproject.org/docs/unstable/misc/riscv/booting.txt\n");
++
++    init_guest_unsupp();
+ }
+diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
+index 2819ff4e7c92..e4a8c27ea9cb 100644
+--- a/xen/arch/riscv/domain.c
++++ b/xen/arch/riscv/domain.c
+@@ -308,6 +308,9 @@ int arch_domain_create(struct domain *d,
+     if ( is_idle_domain(d) )
+         return 0;
  
- #endif /* __ASM_GENERIC_DOM0LESS_BUILD_H__ */
++    if ( (rc = init_guest_isa(d)) != 0 )
++        goto fail;
++
+     if ( (rc = p2m_init(d, config)) != 0)
+         goto fail;
+ 
+diff --git a/xen/arch/riscv/include/asm/cpufeature.h b/xen/arch/riscv/include/asm/cpufeature.h
+index 0c48d57a03bb..866e0f6e7bb7 100644
+--- a/xen/arch/riscv/include/asm/cpufeature.h
++++ b/xen/arch/riscv/include/asm/cpufeature.h
+@@ -17,6 +17,7 @@
+  */
+ #define RISCV_ISA_EXT_BASE  26
+ 
++
+ enum riscv_isa_ext_id {
+     RISCV_ISA_EXT_a,
+     RISCV_ISA_EXT_c,
+@@ -44,7 +45,10 @@ enum riscv_isa_ext_id {
+     RISCV_ISA_EXT_MAX
+ };
+ 
++struct domain;
++
+ void riscv_fill_hwcap(void);
++int init_guest_isa(struct domain *d);
+ 
+ bool riscv_isa_extension_available(const unsigned long *isa_bitmap,
+                                    enum riscv_isa_ext_id id);
+diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
+index 6044ce0feee0..459896c04b41 100644
+--- a/xen/arch/riscv/include/asm/domain.h
++++ b/xen/arch/riscv/include/asm/domain.h
+@@ -7,6 +7,7 @@
+ #include <xen/xmalloc.h>
+ #include <public/hvm/params.h>
+ 
++#include <asm/cpufeature.h>
+ #include <asm/guest-layout.h>
+ #include <asm/p2m.h>
+ #include <asm/vtimer.h>
+@@ -94,6 +95,9 @@ struct arch_domain {
+     struct p2m_domain p2m;
+ 
+     struct paging_domain paging;
++
++    DECLARE_BITMAP(isa, RISCV_ISA_EXT_MAX);
++    char *isa_str;
+ };
+ 
+ #include <xen/sched.h>
 -- 
 2.54.0
 
