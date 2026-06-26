@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69ABAC4450F
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Jun 2026 15:47:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1346277.1604782 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE22AC43602
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Jun 2026 15:47:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1346314.1604910 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wd8lc-0001pf-Pq; Fri, 26 Jun 2026 15:46:56 +0000
+	id 1wd8m4-0007Jz-1c; Fri, 26 Jun 2026 15:47:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1346277.1604782; Fri, 26 Jun 2026 15:46:56 +0000
+Received: by outflank-mailman (output) from mailman id 1346314.1604910; Fri, 26 Jun 2026 15:47:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wd8lc-0001oH-Gt; Fri, 26 Jun 2026 15:46:56 +0000
-Received: by outflank-mailman (input) for mailman id 1346277;
- Fri, 26 Jun 2026 15:46:55 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wd8lb-0001V4-Ih
- for xen-devel@lists.xenproject.org; Fri, 26 Jun 2026 15:46:55 +0000
+	id 1wd8m2-0007Df-Gx; Fri, 26 Jun 2026 15:47:22 +0000
+Received: by outflank-mailman (input) for mailman id 1346314;
+ Fri, 26 Jun 2026 15:47:13 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wd8ls-0004vD-11
+ for xen-devel@lists.xenproject.org; Fri, 26 Jun 2026 15:47:12 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wd8la-00D1eP-VG
- for xen-devel@lists.xenproject.org; Fri, 26 Jun 2026 17:46:54 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wd8lr-007b8F-5W
+ for xen-devel@lists.xenproject.org; Fri, 26 Jun 2026 17:47:11 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a3e9ee5-5cb7-0a2a0a5109dd-0a2a45028256-18
- for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 17:46:54 +0200
-Received: from [209.85.167.43] (helo=mail-lf1-f43.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a3e9eeb-5cb7-0a2a0a5109dd-0a2a4508b62c-32
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 17:47:11 +0200
+Received: from [209.85.208.175] (helo=mail-lj1-f175.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a3e9eee-5a27-0a2a45020019-d155a72bc5fd-3
- for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 17:46:54 +0200
-Received: by mail-lf1-f43.google.com with SMTP id
- 2adb3069b0e04-5aea367c965so1125147e87.1
- for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 08:46:54 -0700 (PDT)
+ id 6a3e9efe-edec-0a2a45080019-d155d0afe02f-3
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 17:47:10 +0200
+Received: by mail-lj1-f175.google.com with SMTP id
+ 38308e7fff4ca-39ad9c80fa8so7349521fa.2
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 08:47:10 -0700 (PDT)
 Received: from fedora (user-109-243-148-111.play-internet.pl.
  [109.243.148.111]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5ae9cd5b232sm2612888e87.29.2026.06.26.08.46.52
+ 2adb3069b0e04-5ae9cd5b232sm2612888e87.29.2026.06.26.08.47.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jun 2026 08:46:53 -0700 (PDT)
+ Fri, 26 Jun 2026 08:47:09 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,40 +54,40 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782488814; x=1783093614; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1782488830; x=1783093630; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=0+TCKMUSTuyvYICiXP6HL6dmH/uLiRs4XxAzoc6J/CE=;
-        b=aFmNTRkeF13lSg79F+24Vw/T0BoRFYokJtbfv017PPU/0/NoFqwMvOE/cwyQqe6v2d
-         MC2RYjB5H9Dh3YJC46rGv5WXiVfrSYYl6hu7m3qPf4A9DwDsoYlQWnok2wKJ38Ghp73v
-         0I0Zw0M2S6b+VEia1wHeSPLjzQUzFlMC7d/R7Hu9t6ZEjFpx/W9kY5jREfamNGra1DNO
-         WrIcQWvFK4uPF1iMJgrdMeaemJj9LD54TZzyAFbKW0GAdlThmwsOuLPahemwskjmfkVU
-         63yFj7d1VekI4ZpN8a1NJ7ZufnL/MT5xjdFROVIZ/sWK3Z+4xMNjD1IPAcjcttnjdBK+
-         ZXOw==
+        bh=+DdSrh6NSU2s4GU9Tmsol8kJnh0oRP/iPMlkqVlxmWs=;
+        b=j8Tjne1L93srtK5EsZnblNH1KAz1t2e0qDjfe5z4QGrEh5HotFOHFtOvuC1wOO3GOi
+         aJBWQ3sVG47gPYG1r/E6ivQjdJHRtUYcJF1PwFH4B4V6ZYBU+AjpqN+zBedU7U19x87s
+         +GEVHc4f+JlB6o3rKURJ3eNaiz8odo19Aq7+DPHBHp155O3bhaNHRObygWtbE+aVAa/6
+         M9JU1e6LkK4Sen3ksKl2le/jbFlbug2e+2CElocXZWmFC0Di2QqXxolbYB/kNiqmPv2K
+         HmVQQOzOZo89o1Yo3xdpdT/vLRkjW4V5VkWyMgAp+JAL9oXAgrwaCMV8WQStoBY494Ap
+         pKsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782488814; x=1783093614;
+        d=1e100.net; s=20251104; t=1782488830; x=1783093630;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=0+TCKMUSTuyvYICiXP6HL6dmH/uLiRs4XxAzoc6J/CE=;
-        b=l67ECE/NWASE2Jqhs2yEF62r0PoHJy/N3rM98wL+287WdxDc5pmIrtzpn/kWkC16/1
-         Y0nFbRHTKUJfo+RHokRIPLS3zdzlr2w+Rq2glRkJZHpFldGl3jlbBW3abeb1E3IlAb5D
-         /GhxQxxBkZyGLP69FRtPB+VHdgbHo5JPkIxsvrFhRBIb77t4yM9VgMJV3Om7H3m63OCa
-         FIWTkaLaqWBlHGCfVCMrdH5MVOuHrpR3Sd+0qnhyOoRn4/q9aZyydw9O2YSXsgcP2qxT
-         Fo+klLaHRDaMiF9ZAHzjFbCOq4x+aoIwlto8c77nav2D0u2oxXfIQu/cTDzW80xkuE0l
-         qrsQ==
-X-Gm-Message-State: AOJu0YzN5wbv0Z7PTwpL/6jxsp/c3E32Hdcbe2HWAt2xmeeyYS/PjIWk
-	PF1TxpWLF96ApMfVlQQRwyGqIGRlJLkLVcFhDgtyoK8TEWZDuV6C+Zh5PlqKaQ==
-X-Gm-Gg: AfdE7ckcL0Idn4P3Q4H/I1P5GUlsTJUI7cSxw1FugfLna5C8vezha0W2b6B4CBX4ocO
-	8WlJOFOnG7OXWC523fyu3O/M6OUOpw5jQF9ctCQU4KNJZ7sa6mWNzvRpjmE2qpaJvRiw9/adV9B
-	nZCnqA/scXRnTfxG0MoH8xWVsg/jeYTJKbFmXh/+O5+XdrrpmWzWE9i7gn4xvBK3IvVWBhQhNeh
-	xa2nhKMLdw1Q4bKvSckfEgngb/dEA9eWozEOI/TFaZ/Pats0pZpF7zuzXgV4gUT5Ljb5PRXBHP6
-	x+Ml0M3B3krfbnDttfps0raic4dFXe7s9pkhp/ByGHnCQnmH/VVL56wYmaK6oRY9tyBI8yb9ayk
-	MlNRU//uqoiIRnFXSSnC3vHnVxemI2nMOm1xILbKMUDqTAUK560j0er5NoIBqy6ZZ3T5spJ2Co9
-	r66t5ZsVT2RqB9itXKpWcDn+BU0mzgJMfmCtgchN5b8HrSn78TcT2iKYDErA==
-X-Received: by 2002:a05:6512:651c:b0:5ad:317f:a9a6 with SMTP id 2adb3069b0e04-5aea1f3f8demr1909934e87.8.1782488814088;
-        Fri, 26 Jun 2026 08:46:54 -0700 (PDT)
+        bh=+DdSrh6NSU2s4GU9Tmsol8kJnh0oRP/iPMlkqVlxmWs=;
+        b=cwHfoV9SsW4t361qqFVplEHfKy6aByct+AtQiiSrI8kPEvA9rw8OGQgffsO/v5nJko
+         Tn44lW0aEMEoFSH6qZ7/nMiGuQSNFuNBo46QfcGZn1JleICQUnpz/FZdlhD9UeGtGAB4
+         FT0YYOlWKNzvs84zSOW3/WHo7kDre85hl+KSrUrXsDoHEfjStpjuwr4v9tlNjcMZnjBP
+         p/SM73ZOe8pPDzCX9KGNXp2WzifzGED+yx8puC5pz7p6u8lpFWAygq29w5B3zcBQbQPl
+         JaH/E4yycuYUw6oSc7ZE1vdp+9eRgwFHZ9gDHCVe+0UTLgNFqpXZsZyw8d1n+7f57sHb
+         NpxA==
+X-Gm-Message-State: AOJu0Yy/WCxvQRJB8yMrg7wuURFqeYJ8SjxZQ1STKUCWyhQn2haigjEA
+	gePYxTUJ/rXphN6uYnSzxHLcLe0aBeWG5pH4Tpc9WazfWhOikGb3fkDmg1nnsA==
+X-Gm-Gg: AfdE7clQ+939/y0wbMDh4J6d0Mj4Twqa00QjPsaZgLRYJ5AQAn44Ry+SNb56ZoC2UoC
+	TLjbJGNO+BVoVmlSJNE/HesivByzdh+fGfog8xcVIFYe8sYI5ht42nv4oFYDOO+tGb8E3dcqDqr
+	anPGDe/Sx5IvboT+tv9Eglpr180DmV9pE7bD5C6pz4n/XOpeciCKieiD7Z/yiDl62RmsSfdRaM6
+	T+KJNsvUixO1jhp4BzptTBsXXei02ymDdlshAwSolZW36LANtioMeqW8BCMrABl33RxhjcLucDm
+	D4wT5KERKXJQ2sWre9n4RNMHxIXN3kVrGDiGUFLdDCFUp74ETUWxOy0pUw+fhJqIUvrQPqXF4kw
+	D4nmIl6jKjEkSrqYy04PSyC+fsgq0Fc/uP3kcIeurtm0x8plaqyWgKbqdhq1TnO6Mvgu54Ks/Dl
+	Rf8JYmBcguFRmk5Hp84iT+ThRtcj9pjJsZO5g3CpCdNUINMHv3r93CZfrKgg==
+X-Received: by 2002:a05:6512:6285:b0:5ad:68c8:191b with SMTP id 2adb3069b0e04-5aea1f3d4c1mr2281084e87.2.1782488830038;
+        Fri, 26 Jun 2026 08:47:10 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -102,172 +102,170 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v4 09/25] xen/riscv: implement make_cpus_node()
-Date: Fri, 26 Jun 2026 17:46:18 +0200
-Message-ID: <56211b75a05c8738d23caac9273ce40e39e8663f.1782487661.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v4 25/25] xen/riscv: add initial dom0less infrastructure support
+Date: Fri, 26 Jun 2026 17:46:34 +0200
+Message-ID: <a6950e8dc2706c351fe6b0622602d34ecef133b7.1782487661.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <cover.1782487661.git.oleksii.kurochko@gmail.com>
 References: <cover.1782487661.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1782488814-4F1127C5-113466B4/10/73395122804
+X-purgate-ID: tlsNG-c1860d/1782488830-4092D3FC-F713A814/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 4834
+X-purgate-size: 6637
 
-Implement make_cpus_node() to create cpus node for a guest domain.
+Enable dom0less support for RISC-V by selecting HAS_DOM0LESS and
+providing the minimal architecture hooks required by the common
+dom0less infrastructure.
 
-This function is going to be use by common dom0less code during
-construction domain.
+Add stub implementations for architecture-specific helpers used when
+building domains from the device tree. These allow the generic
+dom0less code to build and let a basic DomU be constructed on RISC-V.
+construct_hwdom() and make_hypervisor_node() are still stubs returning
+an error: Dom0/hwdom construction isn't supported yet, and the
+hypervisor node generation (needed by domains with
+DOM0LESS_ENHANCED_NO_XS set) is not implemented. Both are marked with
+a TODO and are not reached by the currently supported configurations.
+
+Provide missing helpers and definitions required by the domain
+construction code, including domain bitness helpers and the
+p2m_set_allocation() prototype.
+
+Additionally define the guest magic memory region (GUEST_MAGIC_BASE /
+GUEST_MAGIC_SIZE) in asm/guest-layout.h. The base is arbitrary; the
+only constraint is that the region must not overlap guest RAM or the
+emulated device regions. It is placed in the unused gap below
+GUEST_RAM0_BASE (0x80000000); the constraints are documented next to
+the #define-s.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in v4:
- - Update the comment in make_cpus_node() to match code style.
- - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
----
+  - Reword the description: the stubs do not let dom0less fully "run"
+    since construct_hwdom() and make_hypervisor_node() return an error;
+    spell out these limitations instead.
+  - Add a TODO comment to construct_hwdom() explaining that Dom0/hwdom
+    construction isn't supported yet.
+  - Add a TODO comment to make_hypervisor_node() explaining that
+    returning an error breaks building of domains with
+    DOM0LESS_ENHANCED_NO_XS set, and why that is harmless for now.
+  - Document the constraints on GUEST_MAGIC_BASE/GUEST_MAGIC_SIZE next
+    to the #define-s and drop the QEMU-based justification (QEMU is not
+    involved); the base is simply an arbitrary non-overlapping address.
 Changes in v3:
- - Add blank line above make_cpus_node() function definition.
- - Move 'unsigned int cpu' from function-level declarations into the for loop.
- - Drop 'uint32_t reg = cpu_to_fdt32(cpu)'; use fdt_property_cell(fdt, "reg", cpu)
-   instead of fdt_property(fdt, "reg", &reg, sizeof(reg)) so byte-order adjustment
-   is handled internally.
- - Add matching /* interrupt-controller */ start comment; fix end comment to
-   /* end interrupt-controller */.
- - Update d->arch.guest_isa_str to ->isa_str in make_cpus_node() function.
----
+  - Add /* Nothing specific to do for now */ comment to
+    arch_handle_passthrough_prop().
+  - Use _ULL() instead of xen_mk_ullong() for GUEST_MAGIC_BASE and
+    GUEST_MAGIC_SIZE (xen_mk_ullong() is intended for public headers only).
+  - Fix GUEST_MAGIC_BASE from 0x39000000 to 0x79000000 to avoid the
+    QEMU RISC-V virt machine PCIE_ECAM range.
+  - Drop CONFIG_STATIC_MEMORY=n from the CI randconfig; now redundant
+    since STATIC_MEMORY depends on HAS_STATIC_MEMORY which RISC-V does
+    not select.
 Changes in v2:
- - s/u32/uint32_t for timebase_frequency local variable.
- - Drop +1 from BUILD_BUG_ON().
- - return fdt_end_node(fdt); instead of res at the end of the function.
+  - Move declaration of p2m_set_allocation() to p2m-common.h.
+  - Add __initdata for max_init_domid and drop initalizer for it.
+  - Add CONFIG_STATIC_MEMORY=n to CI's randconfig to avoid
+    compilation error because of guest_physmap_add_pages()
+    isn't provided.
 ---
----
- xen/arch/riscv/domain-build.c | 106 ++++++++++++++++++++++++++++++++++
- 1 file changed, 106 insertions(+)
+ xen/arch/riscv/Kconfig                    |  2 ++
+ xen/arch/riscv/dom0less-build.c           |  7 ++++++
+ xen/arch/riscv/domain-build.c             | 28 +++++++++++++++++++++++
+ xen/arch/riscv/include/asm/guest-layout.h | 12 ++++++++++
+ 4 files changed, 49 insertions(+)
 
-diff --git a/xen/arch/riscv/domain-build.c b/xen/arch/riscv/domain-build.c
-index 5f6f4b6248a5..198a420f55a7 100644
---- a/xen/arch/riscv/domain-build.c
-+++ b/xen/arch/riscv/domain-build.c
-@@ -3,8 +3,10 @@
- #include <xen/fdt-domain-build.h>
- #include <xen/fdt-kernel.h>
- #include <xen/init.h>
-+#include <xen/libfdt/libfdt.h>
- #include <xen/sched.h>
- 
-+#include <asm/cpufeature.h>
- #include <asm/current.h>
- #include <asm/guest_access.h>
- 
-@@ -48,3 +50,107 @@ int __init construct_domain(struct domain *d, struct kernel_info *kinfo)
+diff --git a/xen/arch/riscv/Kconfig b/xen/arch/riscv/Kconfig
+index 48520588fe40..d8a348c0cf07 100644
+--- a/xen/arch/riscv/Kconfig
++++ b/xen/arch/riscv/Kconfig
+@@ -6,6 +6,8 @@ config RISCV
+ 	select GENERIC_BUG_FRAME
+ 	select GENERIC_UART_INIT
+ 	select HAS_DEVICE_TREE_DISCOVERY
++	select HAS_DOM0LESS
++	select HAS_DOMAIN_TYPE
+ 	select HAS_EX_TABLE
+ 	select HAS_PMAP
+ 	select HAS_UBSAN
+diff --git a/xen/arch/riscv/dom0less-build.c b/xen/arch/riscv/dom0less-build.c
+index d1a51b92936a..0801d7e25059 100644
+--- a/xen/arch/riscv/dom0less-build.c
++++ b/xen/arch/riscv/dom0less-build.c
+@@ -102,3 +102,10 @@ int __init arch_parse_dom0less_node(struct dt_device_node *node,
  
      return 0;
  }
 +
-+int __init make_cpus_node(const struct domain *d, struct kernel_info *kinfo)
++int __init arch_handle_passthrough_prop(struct kernel_info *kinfo,
++                                        struct dt_device_node *node)
 +{
-+    int res;
-+    const struct dt_device_node *cpus = dt_find_node_by_path("/cpus");
-+    uint32_t timebase_frequency;
-+    bool frequency_valid;
-+    void *fdt = kinfo->fdt;
-+
-+    dt_dprintk("Create cpus node\n");
-+
-+    if ( !cpus )
-+    {
-+        dprintk(XENLOG_ERR, "Missing /cpus node in the device tree?\n");
-+        return -ENOENT;
-+    }
-+
-+    frequency_valid = dt_property_read_u32(cpus, "timebase-frequency",
-+                                           &timebase_frequency);
-+
-+    res = fdt_begin_node(fdt, "cpus");
-+    if ( res )
-+        return res;
-+
-+    res = fdt_property_cell(fdt, "#address-cells", 1);
-+    if ( res )
-+        return res;
-+
-+    res = fdt_property_cell(fdt, "#size-cells", 0);
-+    if ( res )
-+        return res;
-+
-+    if ( frequency_valid )
-+        res = fdt_property_cell(fdt, "timebase-frequency", timebase_frequency);
-+
-+    for ( unsigned int cpu = 0; cpu < d->max_vcpus; cpu++ )
-+    {
-+        char buf[64];
-+
-+        snprintf(buf, sizeof(buf), "cpu@%u", cpu);
-+        res = fdt_begin_node(fdt, buf);
-+        if ( res )
-+            return res;
-+
-+        res = fdt_property_cell(fdt, "reg", cpu);
-+        if ( res )
-+            return res;
-+
-+        res = fdt_property_string(fdt, "status", "okay");
-+        if ( res )
-+            return res;
-+
-+        res = fdt_property_string(fdt, "compatible", "riscv");
-+        if ( res )
-+            return res;
-+
-+        BUILD_BUG_ON((sizeof("riscv,") +
-+                      sizeof_field(struct gstage_mode_desc, name)) >= sizeof(buf));
-+        snprintf(buf, sizeof(buf), "riscv,%s", max_gstage_mode->name);
-+        res = fdt_property_string(fdt, "mmu-type", buf);
-+        if ( res )
-+            return res;
-+
-+        res = fdt_property_string(fdt, "riscv,isa", d->arch.isa_str);
-+        if ( res )
-+            return res;
-+
-+        res = fdt_property_string(fdt, "device_type", "cpu");
-+        if ( res )
-+            return res;
-+
-+        /* Start of interrupt-controller */
-+        res = fdt_begin_node(fdt, "interrupt-controller");
-+        if ( res )
-+            return res;
-+
-+        res = fdt_property_string(fdt, "compatible", "riscv,cpu-intc");
-+        if ( res )
-+            return res;
-+
-+        res = fdt_property_cell(fdt, "#interrupt-cells", 1);
-+        if ( res )
-+            return res;
-+
-+        res = fdt_property(fdt, "interrupt-controller", NULL, 0);
-+        if ( res )
-+            return res;
-+
-+        res = fdt_property_u32(fdt, "phandle", alloc_phandle(kinfo));
-+        if ( res )
-+            return res;
-+
-+        /* End of interrupt-controller */
-+        res = fdt_end_node(fdt);
-+        if ( res )
-+            return res;
-+
-+        res = fdt_end_node(fdt);
-+        if ( res )
-+            return res;
-+    }
-+
-+    return fdt_end_node(fdt);
++    /* Nothing specific to do for now */
++    return 0;
 +}
+diff --git a/xen/arch/riscv/domain-build.c b/xen/arch/riscv/domain-build.c
+index 54ecd301c49c..84923b8f7b10 100644
+--- a/xen/arch/riscv/domain-build.c
++++ b/xen/arch/riscv/domain-build.c
+@@ -156,9 +156,37 @@ int __init make_cpus_node(const struct domain *d, struct kernel_info *kinfo)
+     return fdt_end_node(fdt);
+ }
+ 
++int __init construct_hwdom(struct kernel_info *kinfo,
++                           const struct dt_device_node *node)
++{
++    /*
++     * TODO: Dom0/hwdom construction isn't supported on RISC-V yet, so this
++     * is a stub returning an error. It must be implemented before a hardware
++     * domain can be built from the device tree.
++     */
++
++    return -EOPNOTSUPP;
++}
++
+ int __init make_timer_node(const struct kernel_info *kinfo)
+ {
+     /* There is no need for timer node for RISC-V. */
+ 
+     return 0;
+ }
++
++int __init make_hypervisor_node(struct domain *d,
++                                const struct kernel_info *kinfo,
++                                int addrcells, int sizecells)
++{
++    /*
++     * TODO: Generating the hypervisor node isn't implemented yet. Returning
++     * an error here breaks building of any domain (DomU included) whose
++     * dom0less_feature has DOM0LESS_ENHANCED_NO_XS set. This is harmless for
++     * now because Dom0/hwdom construction isn't supported on RISC-V yet
++     * either, and no RISC-V DomU sets that flag, so this path is never taken.
++     * It must be implemented before DOM0LESS_ENHANCED_NO_XS is used.
++     */
++
++    return -EOPNOTSUPP;
++}
+diff --git a/xen/arch/riscv/include/asm/guest-layout.h b/xen/arch/riscv/include/asm/guest-layout.h
+index 90603f06bb91..add42d566597 100644
+--- a/xen/arch/riscv/include/asm/guest-layout.h
++++ b/xen/arch/riscv/include/asm/guest-layout.h
+@@ -32,4 +32,16 @@
+ #define GUEST_RAM_BANK_BASES   { GUEST_RAM0_BASE, GUEST_RAM1_BASE }
+ #define GUEST_RAM_BANK_SIZES   { GUEST_RAM0_SIZE, GUEST_RAM1_SIZE }
+ 
++/*
++ * The guest magic region holds Xen-reserved pages mapped into the guest's
++ * physical address space (shared info, grant table, etc.). The only real
++ * constraint is that the GUEST_MAGIC_SIZE-byte region must not overlap
++ * guest RAM (the GUEST_RAMx banks) or the emulated device regions defined
++ * above; the exact base is otherwise arbitrary. Here it is placed in the
++ * unused gap below GUEST_RAM0_BASE (0x80000000), but a hole after a RAM
++ * bank would work equally well.
++ */
++#define GUEST_MAGIC_BASE  _UL(0x79000000)
++#define GUEST_MAGIC_SIZE  _UL(0x01000000)
++
+ #endif /* ASM_RISCV_GUEST_LAYOUT_H */
 -- 
 2.54.0
 
