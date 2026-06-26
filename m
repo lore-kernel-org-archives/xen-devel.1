@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB610CDE00E
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Jun 2026 12:37:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1346122.1604655 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CA2BCDE002
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Jun 2026 12:37:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1346121.1604647 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wd5nw-0004WP-Am; Fri, 26 Jun 2026 12:37:08 +0000
+	id 1wd5nv-0004JO-5L; Fri, 26 Jun 2026 12:37:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1346122.1604655; Fri, 26 Jun 2026 12:37:08 +0000
+Received: by outflank-mailman (output) from mailman id 1346121.1604647; Fri, 26 Jun 2026 12:37:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wd5nw-0004WI-7q; Fri, 26 Jun 2026 12:37:08 +0000
-Received: by outflank-mailman (input) for mailman id 1346122;
+	id 1wd5nv-0004JH-1i; Fri, 26 Jun 2026 12:37:07 +0000
+Received: by outflank-mailman (input) for mailman id 1346121;
  Fri, 26 Jun 2026 12:37:06 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wd5nu-0004E8-LG
+ (envelope-from <freddy77@gmail.com>) id 1wd5nu-0004CQ-Eu
  for xen-devel@lists.xenproject.org; Fri, 26 Jun 2026 12:37:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wd5nu-008IO7-1x
- for xen-devel@lists.xenproject.org; Fri, 26 Jun 2026 14:37:06 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wd5nt-006RzF-Rd
+ for xen-devel@lists.xenproject.org; Fri, 26 Jun 2026 14:37:05 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a3e7269-5cb7-0a2a0a5109dd-0a2a450ccebe-28
- for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 14:37:06 +0200
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a3e7271-f399-0a2a450c0019-d1558035a4cf-3
+ id 6a3e7261-bab6-0a2a0a5309dd-0a2a4507bcbe-36
  for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 14:37:05 +0200
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-4926046fbc5so10113955e9.0
- for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 05:37:05 -0700 (PDT)
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <freddy77@gmail.com>)
+ id 6a3e726f-9c8e-0a2a45070019-d1558029b085-3
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 14:37:03 +0200
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-49249707788so7950505e9.2
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Jun 2026 05:37:03 -0700 (PDT)
 Received: from localhost.localdomain (8.17.6.51.dyn.plus.net. [51.6.17.8])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49268ff1be9sm76578835e9.8.2026.06.26.05.37.04
+ 5b1f17b1804b1-49268ff1be9sm76578835e9.8.2026.06.26.05.37.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jun 2026 05:37:04 -0700 (PDT)
+ Fri, 26 Jun 2026 05:37:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,201 +53,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782477425; x=1783082225; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=sAKNT6XO/y4NOFGKf9ZV2Q/su24+5X1SoV17cy5xU9U=;
-        b=rfE+i4Xee6iNgtnYSJNHj8wLuRy8rhUiO0jkiOzkZlZibRLTsOIx4Jlq9Fp8jAcMWp
-         Q1GyT7sNElz/P3LD3kAEL9u7ewg7XTswwj1u9yj8u4p91CzeTAarDlobIJltpJmAvddn
-         2vd5yPMvyIy81mX8LBYbx9lkndZiErQRzR768Z0C7dzqzhrk4m1H54e0XV78TyP8T5w7
-         uGMCUYbZ4a4dgokjykoVNzDUOzxn1iNKUebDmcTZzYNwm1TiGsbbW8SreHB+Z6TQCbjD
-         pOQ79SESEDGD+J1avSjBb9NpO+rcPq1qCnLgbVICK7LqBp7czTPFlIaUpP0/J6nO7YZz
-         QptA==
+        d=gmail.com; s=20251104; t=1782477423; x=1783082223; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=FsO7EIZrQo3Km2uz/iSDN6t79zuLOfUZ/lQwqUgLgYY=;
+        b=i3WU97KF425sZHNQlFgz6lgazsvhFeSVfLHeyqfeb236sWxoVZcbE7BEs9veioEAG1
+         vzOyuOUm8luPk7BqiesbeWZmiJNlc2EFb5rm/1s2YQfibYEQ/Xf+gC51y1PGHd82rFSp
+         enHpJALwtkaeJVlnR3g8KQ5gvwZ4T5d4H2qIfSDG6AjfKtcC/NtyQ3LqKOjsweEChkTu
+         uUPj9P0HjpnqAuvhiHzq62fwLe3gDK7Btn2/bYPnqUz6a6WzjDr5UYulHHzqrAihKxZd
+         RaFiEyIW6UiRwKDKmVHhU+YHu/aMgj0QXefZsuAUn1/TVnAkxcFbhf6fYpKgOVK9/+Ck
+         r36A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782477425; x=1783082225;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=sAKNT6XO/y4NOFGKf9ZV2Q/su24+5X1SoV17cy5xU9U=;
-        b=RS3pKXTFJFH7sY4p2uiltfkY5SL01rFheyd0yWtYL165iMmKAlIc/UOP1IpLktrmoG
-         TF8hoIrbZotfiTeNdKsirTaQn3tD8LNkmS8BxA7hw/XclRoPjuxPO2FT0Li49z9tqpdm
-         SiloX+28ycrAp2f1v1F71BkrzJT3rMwBnS4RTfFOG1MnPWVplLQ7i3O9DAFWUtUiz6lR
-         HYow9Jiw9J1zAT5gaAHYBykQAioZ81tyDOPPiDsnQivlH6t5MiJLc//hw50Aqu5Qfxav
-         O3XJ6pbJ3fcCBxmZp46gyHdLUffZjaSVCeGxAAyR+ru1KHUxmP2ftVMuwpTwmaZkSwdz
-         JPCA==
-X-Gm-Message-State: AOJu0YxB8IxaFjLLVS0xDnu7+vIyXKuucmLffDNMwgEut42g31K+cWyQ
-	+SqKRMNUCpRt/0gfU7MMNfc2BTUnNdRHngWkRC4JHBeJ3aDO6gxj92YoyTi5a4/+04w=
-X-Gm-Gg: AfdE7ckYiDNelulpje4Oz5flheB6HcE/NOvR5WGIpmwugwVkrqQq0+kj34YLz4gzGRg
-	80mx97X5KousKp+5PQgPWHbnHZRfDVeNrNIRzso2CIbpi32fXfWrKV+s1fMLpuUIMMgTcDDA0xj
-	DBhUCROlSrGstEfOtL1aVWNzbqYs0PT7Ck6dqX9J2kqVxLlRRzdIduFK09PN0OYsmvre3CTgAg+
-	/h0N2hHj4hxFxlhjPQh0VlzZGGQFk88mjhZprO8ppa4Y0VLi2eaz9+oZxFk4mutkb7xf38K+CCY
-	5HLq/+Lc4yZZpYpqoOn5ZTF0phJ1Vc+wOOAxb/UDKTQjQf4TPsafJPVxMDs//WNo2B3FbA4fjW4
-	4MSr48M4rfMAjfqFa2dSvoDeGwhqit8vQViiNZDUXEv4Lau/WH0f0Mu7hdcJGeQ8G6VtQ5Qr+Jg
-	d2WJc7Eu8o67dWGqDTKWoY4aEezbIQfTesqofblX7h2gCK+jDirvQ5sWQyqCutWWmHo86TeNMP5
-	HwmiwTg
-X-Received: by 2002:a05:600d:8497:20b0:490:af63:2cb1 with SMTP id 5b1f17b1804b1-492663e5d71mr67315365e9.7.1782477424840;
-        Fri, 26 Jun 2026 05:37:04 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1782477423; x=1783082223;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=FsO7EIZrQo3Km2uz/iSDN6t79zuLOfUZ/lQwqUgLgYY=;
+        b=AP403yfjQi+B+1y01iiY4MW+jN+odwHOHqWWkjG65HwVwOwknJ9MBc8ohu+9MqWlFg
+         hT5/oKVsb4CWw8rDPZTPmt2jJNwZSUMqxytnJOW3zeqOW8wtnLE9CimfWjyMX9rupFp7
+         74t+6DsoJqvl16ycRjh0Bbccl7iixmfKwWJ5q5wwj/LaAQWt132eSaRPtyn765854gMe
+         Fk4Sd4VQVDk4LwIC5tJixCKKNs548WZG88RIy5qfH/6LNYMoF4bdHiERgZAOEygSwV9U
+         rQ+lEXNrJQnVUMddhpNKL/M2JCDBo0nJUtj8rLQs95YzHzCxHpnrgWiRJFomrL6BIVcm
+         3BDg==
+X-Gm-Message-State: AOJu0YxUGZAlDU6n9VHd5tOWTPHSSiW/iT81wNNDsIFpZFHegCag9TDv
+	XtWs3zYbNMDs3sbwgcIt++splCAi9fgIZSy+UKMYVMcXXwdzCCFJkPi9gG0y59Kcvlw=
+X-Gm-Gg: AfdE7cnQYbLE0CdiR6tr8FE+YpWuT0mYkr/7f5eo87yzbtp6GrVsPpB3qfFwMi+8ekq
+	c7m4x7jWEerQhwkUW5pVIM6fgdsL5Wjr0NilphyLtNCIv53nDVfWUNgj413hxfiuucJhGXv5tyw
+	9CvNSHGmdMR66K7GeY+2PJ0DJZKWjdsvdxhbf+SI0yoq/BBeOaEbH6JcyXK6uKsiBhSQRj/jicx
+	06EmxmXyw2LEwuEQSA4jOZcS0qz4MWbeZGPnYQO3H5aZVGcnUvOtAdVjK737GVg3uGhsgigPtHq
+	A6zICl3nzVeiKe9XwLqSy96l932MiGUTrnLAPqvzFzD5Y5dpmIZaQVQOZ05RwXVDcQN83Xf2/g4
+	DkVe39sSLR+Tt/8ZgG4U5ik/wpWykWGLkdQnmzFYBW/dXNVK9NV8jDZatGg1EpqRJC8lhdHX9D+
+	i2KI3X/L6saOP4UnZ1HtUdgBKzUICnQVa3YeX1k3gEvqZkuhtQGtfEvWk2UNnrKPNCdwAnGpMRo
+	Z4MAATe
+X-Received: by 2002:a05:600c:3b29:b0:490:e5c1:b8b9 with SMTP id 5b1f17b1804b1-4926fac56a2mr10029125e9.0.1782477422813;
+        Fri, 26 Jun 2026 05:37:02 -0700 (PDT)
 From: Frediano Ziglio <freddy77@gmail.com>
 X-Google-Original-From: Frediano Ziglio <frediano.ziglio@citrix.com>
 To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+Cc: Frediano Ziglio <frediano.ziglio@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Teddy Astie <teddy.astie@vates.tech>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Frediano Ziglio <frediano.ziglio@citrix.com>
-Subject: [PATCH v5 2/5] x86/efi: discard multiboot and PVH support for PE binary
-Date: Fri, 26 Jun 2026 13:36:42 +0100
-Message-ID: <20260626123645.229375-3-frediano.ziglio@citrix.com>
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: [PATCH v5 0/5] Various patches to improve Secure Boot support
+Date: Fri, 26 Jun 2026 13:36:40 +0100
+Message-ID: <20260626123645.229375-1-frediano.ziglio@citrix.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260626123645.229375-1-frediano.ziglio@citrix.com>
-References: <20260626123645.229375-1-frediano.ziglio@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1782477425-91329D51-71170222/0/0
+X-purgate-ID: tlsNG-ef75cf/1782477423-FFF3525E-E21290EC/0/0
 X-purgate-type: clean
-X-purgate-size: 4292
+X-purgate-size: 1338
 
-From: Roger Pau Monné <roger.pau@citrix.com>
+These patches improve support for Secure boot.
+UEFI CA memory mitigation requires memory pages to be not executable and
+writable at the same time. So changing permissions and splitting some section
+is required.
+Remove multiboot pieces from EFI executable.
 
-Multiboot and PVH booting are not supported for PE, hence discards them
-in the linker script when doing a PE build.
-
-That removes some relocations that otherwise appear due to the usage of the
-start and __efi64_mb2_start symbols in the multiboot2 header.
-
-Section discarding is not done updating DISCARD_SECTIONS definition as the
-change is specific for x86.
-
-No functional change intended.
-
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
---
 Changes since v1:
-- improve commit message;
-- change section orders to avoid changing code order in final executable;
-- merge 2 commits;
-- removed deprecated documentation section.
+- improved some comments;
+- merged 2 pacthes removing multiboot support in x86 PE;
+- removed a patch dealing with SBAT;
+- other minor changes (see single patches).
 
 Changes since v2:
-- Update commit message, join 2 sentences together.
+- improved some comments.
 
 Changes since v3:
-- Added Acked-by.
+- Added Acked-by;
+- Improve commit message.
 
 Changes since v4:
-- more clear subject;
-- removed more code/data from EFI output;
-- removed Acked-by.
----
- docs/hypervisor-guide/x86/how-xen-boots.rst | 6 ------
- xen/arch/x86/boot/head.S                    | 8 ++++----
- xen/arch/x86/xen.lds.S                      | 9 +++++++++
- 3 files changed, 13 insertions(+), 10 deletions(-)
+- Messages updates;
+- Clean some dependencies cause by code removal;
+- Add small commit to remove a possibly unused string.
 
-diff --git a/docs/hypervisor-guide/x86/how-xen-boots.rst b/docs/hypervisor-guide/x86/how-xen-boots.rst
-index 8b3229005c..b6d852050a 100644
---- a/docs/hypervisor-guide/x86/how-xen-boots.rst
-+++ b/docs/hypervisor-guide/x86/how-xen-boots.rst
-@@ -82,12 +82,6 @@ When a PEI-capable toolchain is found, the objects are linked together and a
- PE32+ binary is created.  It can be run directly from the EFI shell, and has
- ``efi_start`` as its entry symbol.
- 
--.. note::
--
--   xen.efi does contain all MB1/MB2/PVH tags included in the rest of the
--   build.  However, entry via anything other than the EFI64 protocol is
--   unsupported, and won't work.
--
- 
- Boot
- ----
-diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
-index 77bb7a9e21..ebdc562207 100644
---- a/xen/arch/x86/boot/head.S
-+++ b/xen/arch/x86/boot/head.S
-@@ -126,7 +126,7 @@ multiboot2_header:
-         .size multiboot2_header, . - multiboot2_header
-         .type multiboot2_header, @object
- 
--        .section .init.rodata, "a", @progbits
-+        .section .init.rodata.multiboot, "a", @progbits
- 
- .Lbad_cpu_msg: .asciz "ERR: Not a 64-bit CPU!"
- .Lbad_ldr_msg: .asciz "ERR: Not a Multiboot bootloader!"
-@@ -135,8 +135,7 @@ multiboot2_header:
- .Lbag_alg_msg: .asciz "ERR: Xen must be loaded at a 2Mb boundary!"
- .Lno_nx_msg:   .asciz "ERR: Not an NX-capable CPU!"
- 
--        .section .init.data, "aw", @progbits
--        .subsection 1 /* Put data here after the page tables (in x86_64.S). */
-+        .section .init.data.multiboot, "aw", @progbits
-         .align 4
- 
-         .word   0
-@@ -152,7 +151,7 @@ vga_text_buffer:
- efi_platform:
-         .byte   0
- 
--        .section .init.text, "ax", @progbits
-+        .section .init.multiboot, "ax", @progbits
- 
- early_error: /* Here to improve the disassembly. */
- 
-@@ -710,6 +709,7 @@ trampoline_setup:
-         /* Jump into the relocated trampoline. */
-         lret
- 
-+        .section .init.text, "ax", @progbits
- ENTRY(trampoline_start)
- #include "trampoline.S"
- ENTRY(trampoline_end)
-diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
-index 8e63cf5bc2..88553513a9 100644
---- a/xen/arch/x86/xen.lds.S
-+++ b/xen/arch/x86/xen.lds.S
-@@ -57,6 +57,12 @@ SECTIONS
-   __image_base__ = .;
- #else
-   . = __image_base__;
-+  /DISCARD/ : {
-+    *(.text.header)
-+    *(.init.multiboot)
-+    *(.init.data.multiboot)
-+    *(.init.rodata.multiboot)
-+  }
- #endif
- 
- #if 0
-@@ -195,6 +201,7 @@ SECTIONS
-   DECL_SECTION(.init.text) {
- #endif
-        _sinittext = .;
-+       *(.init.multiboot)
-        *(.init.text)
-        *(.text.startup)
-        _einittext = .;
-@@ -220,6 +227,7 @@ SECTIONS
-        *(.init.rodata.cf_clobber)
-        __initdata_cf_clobber_end = .;
- 
-+       *(.init.rodata.multiboot)
-        *(.init.rodata)
-        *(.init.rodata.*)
- 
-@@ -234,6 +242,7 @@ SECTIONS
-        *(.initcall1.init)
-        __initcall_end = .;
- 
-+       *(.init.data.multiboot)
-        *(.init.data)
-        *(.init.data.rel)
-        *(.init.data.rel.*)
+Frediano Ziglio (3):
+  Align relevant sections to 4KB
+  x86: Split .init section to satisfy UEFI CA memory mitigation
+  x86/boot: Exclude not used string
+
+Roger Pau Monné (2):
+  x86/efi: discard multiboot and PVH support for PE binary
+  x86/efi: avoid a relocation in efi_arch_post_exit_boot()
+
+ docs/hypervisor-guide/x86/how-xen-boots.rst |  6 -----
+ xen/arch/x86/boot/head.S                    | 10 +++++---
+ xen/arch/x86/efi/efi-boot.h                 |  7 ++++--
+ xen/arch/x86/xen.lds.S                      | 27 +++++++++++++--------
+ 4 files changed, 28 insertions(+), 22 deletions(-)
+
 -- 
 2.43.0
 
