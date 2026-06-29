@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CD81C43327
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2026 19:33:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1348108.1605997 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55384C44507
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2026 19:34:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1348104.1605980 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1weHjf-0003yh-Vl; Mon, 29 Jun 2026 19:33:39 +0000
+	id 1weHjf-0003eg-1w; Mon, 29 Jun 2026 19:33:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1348108.1605997; Mon, 29 Jun 2026 19:33:39 +0000
+Received: by outflank-mailman (output) from mailman id 1348104.1605980; Mon, 29 Jun 2026 19:33:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1weHjf-0003vZ-Es; Mon, 29 Jun 2026 19:33:39 +0000
-Received: by outflank-mailman (input) for mailman id 1348108;
- Mon, 29 Jun 2026 19:26:24 +0000
+	id 1weHje-0003bk-Ki; Mon, 29 Jun 2026 19:33:38 +0000
+Received: by outflank-mailman (input) for mailman id 1348104;
+ Mon, 29 Jun 2026 19:26:19 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ljs@kernel.org>) id 1weHce-0001Vt-Pb
- for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 19:26:24 +0000
+ (envelope-from <ljs@kernel.org>) id 1weHcY-0001Up-U8
+ for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 19:26:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1weHce-00FK8K-6D
- for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 21:26:24 +0200
+ id 1weHcY-00FK8K-BI
+ for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 21:26:18 +0200
 Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <ljs@kernel.org>)
- id 6a42c6cc-2eae-0a2a0a5409dd-0a2a4507d962-22
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 21:26:24 +0200
+ id 6a42c6cc-2eae-0a2a0a5409dd-0a2a4507d962-20
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 21:26:18 +0200
 Received: from [172.105.4.254] (helo=tor.source.kernel.org)
  by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <ljs@kernel.org>)
- id 6a42c6de-9c8e-0a2a45070019-ac6904fe8220-3
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 21:26:23 +0200
+ id 6a42c6d9-9c8e-0a2a45070019-ac6904fec216-3
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 21:26:18 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 8623360129;
- Mon, 29 Jun 2026 19:26:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E1DD1F00A3A;
- Mon, 29 Jun 2026 19:26:21 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id D2D50601BE;
+ Mon, 29 Jun 2026 19:26:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BC1611F00A3A;
+ Mon, 29 Jun 2026 19:26:15 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,15 +52,15 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782761182;
-	bh=Wnm2Xg8fzgzgq2t9tP+R94oZiE2QRSqcJqSUSdbb+xI=;
+	s=k20260515; t=1782761176;
+	bh=kVNcj1n0t63iEIMvCjdqZpMGs73q5Ko9ggshfmmLkXE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=nOPttWfeqx2WAAk+O86bRHV1xe9XjSiO7vWMcbguW/QG8cwhr9Ho+WujRZfoXIkNB
-	 GAafXcLTt0A7107oO1/wfsRqbvh2NXnLmJEY5U2oNVlhqSlYA3t7vnfmg9ypcMiIQu
-	 8h9CwqzwF/QmgcsSy6FddnicElSxEL4LUhf+meGHiuuHtZIY/zI5z4sASrd3sx6zbv
-	 h+vKpCS3OgfNT1Vzh95SLJ33rPs0Xs2s5lFkRLuYrK0Dv+UhZIFDZTErNLJ48+783p
-	 GrekfoEk+r6DJVzhZY0W/8o+WObqmyaivps6ZsvmcWguDnXNLCk/ULQ2n7338Yb/Eb
-	 NW0mBvRR/aD3g==
+	b=klEBAvxAFllrYroNuPJLJ6gpkhIWH2gTVoT+/xDpJL5trOYXohBGpPUklmeyy3M8s
+	 V8yPCwMkEt0hiRNtDQFKpdz3l1uU7duIasGbSIztboWDM2ZAqiJD0rorDwfoqGlBAa
+	 LG7rxtse+7tEtmE7jUNFo/a5he8kyou91LnB1mOd3C/3gEPhWsxleGxfu6UNzRLKT4
+	 q/kle54fQbZ80BilK1fYXEKilUW+HJlbq+uSEtkk9SKLXzWuUuYgjrQUH6aBSmWp7O
+	 s8EEU2+Bt7ipQc2WUzag4pdln2sWzLqlewf7/vmu4r9kXvNYawRuP/0vdC2aunN5Wg
+	 EWS79jrl2lb4w==
 From: Lorenzo Stoakes <ljs@kernel.org>
 To: Andrew Morton <akpm@linux-foundation.org>
 Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
@@ -144,107 +144,95 @@ Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
 	linux-fsdevel@vger.kernel.org,
 	linux-mm@kvack.org,
 	linux-sound@vger.kernel.org
-Subject: [PATCH 09/13] mm/vma: update create_init_stack_vma() to use vma_flags_t
-Date: Mon, 29 Jun 2026 20:25:32 +0100
-Message-ID: <34689784ee6856f100c02ad4eabeaa4db643713a.1782760670.git.ljs@kernel.org>
+Subject: [PATCH 07/13] mm/vma: rename vma_get_page_prot to vma_flags_to_page_prot
+Date: Mon, 29 Jun 2026 20:25:30 +0100
+Message-ID: <fc8ac30d03d29d236e76542b36432bba315aca60.1782760670.git.ljs@kernel.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <cover.1782760670.git.ljs@kernel.org>
 References: <cover.1782760670.git.ljs@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1782761184-7E93A25E-7180CCBC/0/0
+X-purgate-ID: tlsNG-ef75cf/1782761178-FCF2D25E-16AF3B1D/0/0
 X-purgate-type: clean
-X-purgate-size: 3157
+X-purgate-size: 2759
 
-Replace use of the legacy vm_flags_t flags with vma_flags_t values in
-create_init_stack_vma().
+Having vma_get_page_prot() refer to VMA flags and vma_set_page_prot() refer
+to a VMA is confusing.
 
-As part of this change we add VMA_STACK_EARLY and VMA_STACK_INCOMPLETE
-vma_flags_t defines, and slightly rework create_init_stack_vma() for
-clarity.
+Rename vma_get_page_prot() to vma_flags_to_page_prot() to resolve this
+confusion.
 
 No functional change intended.
 
 Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
 ---
- include/linux/mm.h |  4 ++++
- mm/vma_exec.c      | 18 +++++++++++-------
- 2 files changed, 15 insertions(+), 7 deletions(-)
+ include/linux/mm.h              | 4 ++--
+ mm/vma.c                        | 2 +-
+ mm/vma.h                        | 2 +-
+ tools/testing/vma/include/dup.h | 2 +-
+ 4 files changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/include/linux/mm.h b/include/linux/mm.h
-index b55790c75038..6e57d41677de 100644
+index 474b3698f565..c8336f68d7bb 100644
 --- a/include/linux/mm.h
 +++ b/include/linux/mm.h
-@@ -440,8 +440,10 @@ enum {
- #define VM_STACK	INIT_VM_FLAG(STACK)
- #ifdef CONFIG_STACK_GROWSUP
- #define VM_STACK_EARLY	INIT_VM_FLAG(STACK_EARLY)
-+#define VMA_STACK_EARLY mk_vma_flags(VMA_STACK_EARLY_BIT)
- #else
- #define VM_STACK_EARLY	VM_NONE
-+#define VMA_STACK_EARLY EMPTY_VMA_FLAGS
- #endif
- #ifdef CONFIG_ARCH_HAS_PKEYS
- #define VM_PKEY_SHIFT ((__force int)VMA_HIGH_ARCH_0_BIT)
-@@ -532,6 +534,8 @@ enum {
+@@ -4568,7 +4568,7 @@ static inline bool range_in_vma_desc(const struct vm_area_desc *desc,
+ #ifdef CONFIG_MMU
+ pgprot_t vm_get_page_prot(vm_flags_t vm_flags);
  
- /* Bits set in the VMA until the stack is in its final location */
- #define VM_STACK_INCOMPLETE_SETUP (VM_RAND_READ | VM_SEQ_READ | VM_STACK_EARLY)
-+#define VMA_STACK_INCOMPLETE_SETUP append_vma_flags(		\
-+	VMA_STACK_EARLY, VMA_RAND_READ_BIT, VMA_SEQ_READ_BIT)
- 
- #define TASK_EXEC_BIT ((current->personality & READ_IMPLIES_EXEC) ? \
- 		       VMA_EXEC_BIT : VMA_READ_BIT)
-diff --git a/mm/vma_exec.c b/mm/vma_exec.c
-index b01c4964f2c9..48c783e73cf3 100644
---- a/mm/vma_exec.c
-+++ b/mm/vma_exec.c
-@@ -112,15 +112,17 @@ int relocate_vma_down(struct vm_area_struct *vma, unsigned long shift)
- int create_init_stack_vma(struct mm_struct *mm, struct vm_area_struct **vmap,
- 			  unsigned long *top_mem_p)
+-static inline pgprot_t vma_get_page_prot(vma_flags_t vma_flags)
++static inline pgprot_t vma_flags_to_page_prot(vma_flags_t vma_flags)
  {
--	unsigned long flags = VM_STACK_FLAGS | VM_STACK_INCOMPLETE_SETUP;
-+	vma_flags_t flags = VMA_STACK_INCOMPLETE_SETUP;
-+	struct vm_area_struct *vma;
- 	int err;
--	struct vm_area_struct *vma = vm_area_alloc(mm);
+ 	const vm_flags_t vm_flags = vma_flags_to_legacy(vma_flags);
  
-+	/* VMA_STACK_FLAGS and VMA_STACK_INCOMPLETE_SETUP must not overlap. */
-+	VM_WARN_ON_ONCE(vma_flags_test_any_mask(&flags, VMA_STACK_FLAGS));
-+
-+	vma = vm_area_alloc(mm);
- 	if (!vma)
- 		return -ENOMEM;
+@@ -4581,7 +4581,7 @@ static inline pgprot_t vm_get_page_prot(vm_flags_t vm_flags)
+ {
+ 	return __pgprot(0);
+ }
+-static inline pgprot_t vma_get_page_prot(vma_flags_t vma_flags)
++static inline pgprot_t vma_flags_to_page_prot(vma_flags_t vma_flags)
+ {
+ 	return __pgprot(0);
+ }
+diff --git a/mm/vma.c b/mm/vma.c
+index 395b6619ecc1..fcdd2ac3ac68 100644
+--- a/mm/vma.c
++++ b/mm/vma.c
+@@ -56,7 +56,7 @@ struct mmap_state {
+ 		.pglen = PHYS_PFN(len_),				\
+ 		.vma_flags = vma_flags_,				\
+ 		.file = file_,						\
+-		.page_prot = vma_get_page_prot(vma_flags_),		\
++		.page_prot = vma_flags_to_page_prot(vma_flags_),	\
+ 	}
  
--	vma_set_anonymous(vma);
--
- 	if (mmap_write_lock_killable(mm)) {
- 		err = -EINTR;
- 		goto err_free;
-@@ -134,18 +136,20 @@ int create_init_stack_vma(struct mm_struct *mm, struct vm_area_struct **vmap,
- 	if (err)
- 		goto err_ksm;
+ #define VMG_MMAP_STATE(name, map_, vma_)				\
+diff --git a/mm/vma.h b/mm/vma.h
+index 6a8abb8ae937..d6b48d596f44 100644
+--- a/mm/vma.h
++++ b/mm/vma.h
+@@ -524,7 +524,7 @@ static inline bool vma_wants_manual_pte_write_upgrade(struct vm_area_struct *vma
+ #ifdef CONFIG_MMU
+ static inline pgprot_t vma_pgprot_modify(pgprot_t oldprot, vma_flags_t vma_flags)
+ {
+-	const pgprot_t prot = vma_get_page_prot(vma_flags);
++	const pgprot_t prot = vma_flags_to_page_prot(vma_flags);
  
-+	vma_flags_set_mask(&flags, VMA_STACK_FLAGS);
-+	vma_set_anonymous(vma);
-+
- 	/*
- 	 * Place the stack at the largest stack address the architecture
- 	 * supports. Later, we'll move this to an appropriate place. We don't
- 	 * use STACK_TOP because that can depend on attributes which aren't
- 	 * configured yet.
- 	 */
--	VM_WARN_ON_ONCE(VM_STACK_FLAGS & VM_STACK_INCOMPLETE_SETUP);
- 	vma->vm_end = STACK_TOP_MAX;
- 	vma->vm_start = vma->vm_end - PAGE_SIZE;
- 	if (pgtable_supports_soft_dirty())
--		flags |= VM_SOFTDIRTY;
--	vm_flags_init(vma, flags);
-+		vma_flags_set(&flags, VMA_SOFTDIRTY_BIT);
-+	vma->flags = flags;
- 	vma->vm_page_prot = vma_get_page_prot(vma);
+ 	return pgprot_modify(oldprot, prot);
+ }
+diff --git a/tools/testing/vma/include/dup.h b/tools/testing/vma/include/dup.h
+index 813044781719..1ffac38a5377 100644
+--- a/tools/testing/vma/include/dup.h
++++ b/tools/testing/vma/include/dup.h
+@@ -1555,7 +1555,7 @@ static inline int get_sysctl_max_map_count(void)
+ #define pgtable_supports_soft_dirty()	IS_ENABLED(CONFIG_MEM_SOFT_DIRTY)
+ #endif
  
- 	err = insert_vm_struct(mm, vma);
+-static inline pgprot_t vma_get_page_prot(vma_flags_t vma_flags)
++static inline pgprot_t vma_flags_to_page_prot(vma_flags_t vma_flags)
+ {
+ 	const vm_flags_t vm_flags = vma_flags_to_legacy(vma_flags);
+ 
 -- 
 2.54.0
 
