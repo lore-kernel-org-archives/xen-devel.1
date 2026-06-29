@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BECFC43327
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2026 17:24:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1347815.1605709 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB99AC43458
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2026 17:24:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1347821.1605726 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1weFi2-0001Mh-5O; Mon, 29 Jun 2026 17:23:50 +0000
+	id 1weFi5-0001wM-N8; Mon, 29 Jun 2026 17:23:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1347815.1605709; Mon, 29 Jun 2026 17:23:50 +0000
+Received: by outflank-mailman (output) from mailman id 1347821.1605726; Mon, 29 Jun 2026 17:23:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1weFi2-0001MU-0J; Mon, 29 Jun 2026 17:23:50 +0000
-Received: by outflank-mailman (input) for mailman id 1347815;
- Mon, 29 Jun 2026 17:23:48 +0000
+	id 1weFi5-0001vB-J4; Mon, 29 Jun 2026 17:23:53 +0000
+Received: by outflank-mailman (input) for mailman id 1347821;
+ Mon, 29 Jun 2026 17:23:52 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f14686677000701b@swg.vates.tech>)
- id 1weFi0-00015v-Io
- for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 17:23:48 +0000
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f14686c7b000701b@swg.vates.tech>)
+ id 1weFi4-0001gG-DR
+ for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 17:23:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1weFhz-00FsUc-Vk
- for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 19:23:47 +0200
+ id 1weFi3-00FsUc-Qd
+ for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 19:23:51 +0200
 Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f14686677000701b@swg.vates.tech>)
- id 6a42aa23-bab6-0a2a0a5309dd-0a2a450be43e-2
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 19:23:47 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f14686c7b000701b@swg.vates.tech>)
+ id 6a42aa23-bab6-0a2a0a5309dd-0a2a450be43e-14
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 19:23:51 +0200
 Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
  by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f14686677000701b@swg.vates.tech>)
- id 6a42aa19-ac48-0a2a450b0019-b9ff1c128383-8
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 19:23:47 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f14686c7b000701b@swg.vates.tech>)
+ id 6a42aa19-ac48-0a2a450b0019-b9ff1c128383-10
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 19:23:51 +0200
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
  by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19f14686677000701b.005 for <xen-devel@lists.xenproject.org>
+ 19f14686c7b000701b.005 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 29 Jun 2026 17:23:34 +0000
+ Mon, 29 Jun 2026 17:23:35 +0000
 Received: from bazzite.gpn.vates.fr (88-188-240-210.subs.proxad.net
  [88.188.240.210]) (Authenticated sender: teddy.astie@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id 7D84B86BB9;
- Mon, 29 Jun 2026 19:23:33 +0200 (CEST)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 0D7EF86BB9;
+ Mon, 29 Jun 2026 19:23:35 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,21 +60,21 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=QoErcVxzANF0JtfExbCLAwt3gh3GsZ7o2RGnxqphLiM=;
+ q=dns/txt; s=selector1; bh=GyVaZ5gTaOaxj2pICVIxfIa2Mrtet828kWAY1OJfQgM=;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=BvB7ep9xfWOwxaLnOzS6BmB0KoLV/GkhsSfyW+l0qS2uV+3NCjStkhVv1FQCPQpOFvqCwNODO
- rPRv3RJToVPkHox6vU+IJa2NjRyIuTIOFPnJJsJVJLdZD+louDlMNTDt/6uFh5Ii7vNfPo9CBzV
- 2WZKveErRDUYYyKttJjE7Nq5Po4Facn/d8i3+spaH8I5UbHqCrWllu+JbfU/J+1V8frS57Ul0HS
- fcRcr+1dY8drBOwtLkVTh9yN5bI0+zyIW3IdoUltUtm9CAkg9XlGrZfWgWc4sbTqPdbS/iV93/5
- IfQPAnYoutNurC9L3cu4f2jXBQwRdZ0qp0NisUrc3+Tg==
-X-Zone-Loop: b33fc1ef30cb8c86b12850b946169f6be8a76ac5314b
+ b=BhNbUkkzM2Yy2CUKW+bc84+wxL+wJ0v5LrbZXLicWbn9WhQ+rx/DtWcORBI4rbHyvVZiHc77I
+ NVe0tnod2pxnQudvLAK2G8trxHplWfjXpkNjI5JePGPKgUFXPhvg+rbtilqCC96SO8PGOkjzvoS
+ T8IygTdjBkY8oPxVAW9ZdFMWLaU716b0DcaD4jFkbJsQ6/nh4KrOOZZ2dA1J6rr7B+Z4IIyBFFa
+ NCmXAhDUhppotTowG785sGin7tNk6+KLsieCESBKjt7ii3y+iaNf4e8JGpfLiuJDOxb/teNhmds
+ nSSo1QenRCeIhQS5bxWZMtSjK1noOKTfpp/uEmhTwNkA==
+X-Zone-Loop: d18eb8ceb5cb8a60c482bb2f4b4282275c6217a7d691
 x-campaign-type: default
-x-transaction-id: 5cb7299b-c494-42de-a564-6a1f001138de
-x-swg-uid: 01-8ec05f05-9d74-40ef-9012-5906685b720b
+x-transaction-id: 2c0ee253-859d-4365-8810-3c8ef7507a9a
+x-swg-uid: 01-f288c9ad-425b-4250-a91f-7f319077e3dd
 X-Mailer: Sweego
 Message-ID:
- <1782753814.8631fc262581453bbf619ec5b2062170.19f14686677000701b@vates.tech>
-x-swg-bid: 1782753814.8631fc262581453bbf619ec5b2062170.19f14686677000701b
+ <1782753815.8631fc262581453bbf619ec5b2062170.19f14686c7b000701b@vates.tech>
+x-swg-bid: 1782753815.8631fc262581453bbf619ec5b2062170.19f14686c7b000701b
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
@@ -89,122 +89,133 @@ Cc: Teddy Astie <teddy.astie@vates.tech>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 06/18] pci: Use pci_sbdf_t in pci_hide_device()
-Date: Mon, 29 Jun 2026 19:21:24 +0200
+Subject: [PATCH v3 08/18] pci: Introduce parse_pci_sbdf{_seg}()
+Date: Mon, 29 Jun 2026 19:21:26 +0200
 In-Reply-To: <cover.1782747421.git.teddy.astie@vates.tech>
 References: <cover.1782747421.git.teddy.astie@vates.tech>
 MIME-Version: 1.0
 X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.811.e9b873507167dbea.19f146864d4.2eb6d4ec73f1346=-"
+Content-Type: multipart/alternative; boundary="-=Part.813.d56c9bc396f7820d.19f14686ada.39e2b5bbcc682e3e=-"
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1782753813717
-X-purgate-ID: tlsNG-42698a/1782753827-A6939220-CA24DC91/0/0
+X-Bm-Transport-Timestamp: 1782753815258
+X-purgate-ID: tlsNG-42698a/1782753831-A713D220-105B814A/0/0
 X-purgate-type: clean
-X-purgate-size: 4138
+X-purgate-size: 4722
 
----=Part.811.e9b873507167dbea.19f146864d4.2eb6d4ec73f1346=-
+---=Part.813.d56c9bc396f7820d.19f14686ada.39e2b5bbcc682e3e=-
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-No functional change intended=2E
+In many places, we're parsing a PCI string into individual
+parts (seg, bus, dev, fn) and then transform it into a pci_sbdf_t
+using PCI_SBDF macro=2E Rather than converting from parts to pci_sbdf_t
+and vice versa, introduce a new function that parses a PCI string
+into a pci_sbdf_t structure directly=2E
 
 Signed-off-by: Teddy Astie <teddy=2Eastie@vates=2Etech>
-Reviewed-by: Andrew Cooper <andrew=2Ecooper3@citrix=2Ecom>
 ---
- xen/drivers/char/ehci-dbgp=2Ec  | 2 +-
- xen/drivers/char/xhci-dbc=2Ec   | 2 +-
- xen/drivers/passthrough/pci=2Ec | 7 +++----
- xen/drivers/video/vga=2Ec       | 2 +-
- xen/include/xen/pci=2Eh         | 2 +-
- 5 files changed, 7 insertions(+), 8 deletions(-)
+v3:
+ * Address Andrew's changes (add __init)
+ * Use intermediate parse_pci_split_*()=2E
+---
+ xen/drivers/pci/pci=2Ec | 22 ++++++++++++++++++++--
+ xen/include/xen/pci=2Eh | 20 ++++++++++++++++++--
+ 2 files changed, 38 insertions(+), 4 deletions(-)
 
-diff --git a/xen/drivers/char/ehci-dbgp=2Ec b/xen/drivers/char/ehci-dbgp=
-=2Ec
-index 2a58213cab=2E=2Eab1e3c6de4 100644
---- a/xen/drivers/char/ehci-dbgp=2Ec
-+++ b/xen/drivers/char/ehci-dbgp=2Ec
-@@ -1376,7 +1376,7 @@ static void __init cf_check ehci_dbgp_init_postirq(s=
-truct serial_port *port)
-=20
-     ehci_dbgp_setup_postirq(dbgp);
-=20
--    pci_hide_device(0, dbgp->bus, PCI_DEVFN(dbgp->slot, dbgp->func));
-+    pci_hide_device(PCI_SBDF(0, dbgp->bus, dbgp->slot, dbgp->func));
+diff --git a/xen/drivers/pci/pci=2Ec b/xen/drivers/pci/pci=2Ec
+index 084be3880c=2E=2E743e2fd263 100644
+--- a/xen/drivers/pci/pci=2Ec
++++ b/xen/drivers/pci/pci=2Ec
+@@ -151,7 +151,7 @@ void pci_intx(const struct pci_dev *pdev, bool enable)
+     pci_conf_write16(pdev->sbdf, PCI_COMMAND, cmd);
  }
 =20
- static int ehci_dbgp_check_release(struct ehci_dbgp *dbgp)
-diff --git a/xen/drivers/char/xhci-dbc=2Ec b/xen/drivers/char/xhci-dbc=2Ec
-index 7a56dca6dd=2E=2E3f41aa7022 100644
---- a/xen/drivers/char/xhci-dbc=2Ec
-+++ b/xen/drivers/char/xhci-dbc=2Ec
-@@ -1202,7 +1202,7 @@ static void __init cf_check dbc_uart_init_postirq(st=
-ruct serial_port *port)
-                    &uart->dbc=2Esbdf);
-         break;
-     case XHCI_SHARE_HWDOM:
--        if ( pci_hide_device(0, uart->dbc=2Esbdf=2Ebus, uart->dbc=2Esbdf=
-=2Edevfn) )
-+        if ( pci_hide_device(uart->dbc=2Esbdf) )
-             printk(XENLOG_WARNING
-                    "Failed to hide %pp used for XHCI console\n",
-                    &uart->dbc=2Esbdf);
-diff --git a/xen/drivers/passthrough/pci=2Ec b/xen/drivers/passthrough/pci=
-=2Ec
-index e4357b84a4=2E=2E8c574926cd 100644
---- a/xen/drivers/passthrough/pci=2Ec
-+++ b/xen/drivers/passthrough/pci=2Ec
-@@ -476,18 +476,17 @@ static void __init _pci_hide_device(struct pci_dev *=
-pdev)
-     write_unlock(&dom_xen->pci_lock);
- }
-=20
--int __init pci_hide_device(unsigned int seg, unsigned int bus,
--                           unsigned int devfn)
-+int __init pci_hide_device(pci_sbdf_t sbdf)
+-const char *__init parse_pci(const char *s, unsigned int *seg_p,
++const char *__init parse_pci_split(const char *s, unsigned int *seg_p,
+                              unsigned int *bus_p, unsigned int *dev_p,
+                              unsigned int *func_p)
  {
-     struct pci_dev *pdev;
-     struct pci_seg *pseg;
-     int rc =3D -ENOMEM;
+@@ -160,7 +160,7 @@ const char *__init parse_pci(const char *s, unsigned i=
+nt *seg_p,
+     return parse_pci_seg(s, seg_p, bus_p, dev_p, func_p, &def_seg);
+ }
 =20
-     pcidevs_lock();
--    pseg =3D alloc_pseg(seg);
-+    pseg =3D alloc_pseg(sbdf=2Eseg);
-     if ( pseg )
-     {
--        pdev =3D alloc_pdev(pseg, bus, devfn);
-+        pdev =3D alloc_pdev(pseg, sbdf=2Ebus, sbdf=2Edevfn);
-         if ( pdev )
-         {
-             _pci_hide_device(pdev);
-diff --git a/xen/drivers/video/vga=2Ec b/xen/drivers/video/vga=2Ec
-index b577b24619=2E=2Eb2b9c3680a 100644
---- a/xen/drivers/video/vga=2Ec
-+++ b/xen/drivers/video/vga=2Ec
-@@ -147,7 +147,7 @@ void __init video_endboot(void)
-                 {
-                     printk(XENLOG_INFO "Boot video device %02x:%02x=2E%u\=
-n",
-                            bus, PCI_SLOT(devfn), PCI_FUNC(devfn));
--                    pci_hide_device(0, bus, devfn);
-+                    pci_hide_device(PCI_SBDF(0, bus, devfn));
-                 }
-             }
-     }
+-const char *__init parse_pci_seg(const char *s, unsigned int *seg_p,
++const char *__init parse_pci_split_seg(const char *s, unsigned int *seg_p=
+,
+                                  unsigned int *bus_p, unsigned int *dev_p=
+,
+                                  unsigned int *func_p, bool *def_seg)
+ {
+@@ -202,3 +202,21 @@ const char *__init parse_pci_seg(const char *s, unsig=
+ned int *seg_p,
+=20
+     return s;
+ }
++
++const char *__init parse_pci_sbdf(const char *s, pci_sbdf_t *sbdf)
++{
++    unsigned int seg, bus, dev, func;
++    const char *out =3D parse_pci(s, &seg, &bus, &dev, &func);
++
++    *sbdf =3D PCI_SBDF(seg, bus, dev, func);
++    return out;
++}
++
++const char *__init parse_pci_sbdf_seg(const char *s, pci_sbdf_t *sbdf, bo=
+ol *def_seg)
++{
++    unsigned int seg, bus, dev, func;
++    const char *out =3D parse_pci_seg(s, &seg, &bus, &dev, &func, def_seg=
+);
++
++    *sbdf =3D PCI_SBDF(seg, bus, dev, func);
++    return out;
++}
 diff --git a/xen/include/xen/pci=2Eh b/xen/include/xen/pci=2Eh
-index d038217607=2E=2E03ae389cb7 100644
+index ed6c95452f=2E=2E8e2f8a1ab7 100644
 --- a/xen/include/xen/pci=2Eh
 +++ b/xen/include/xen/pci=2Eh
-@@ -233,7 +233,7 @@ int pci_add_device(pci_sbdf_t sbdf, const struct pci_d=
-ev_info *info,
-                    nodeid_t node);
- int pci_remove_device(pci_sbdf_t sbdf);
- int pci_ro_device(pci_sbdf_t sbdf);
--int pci_hide_device(unsigned int seg, unsigned int bus, unsigned int devf=
-n);
-+int pci_hide_device(pci_sbdf_t sbdf);
- struct pci_dev *pci_get_pdev(const struct domain *d, pci_sbdf_t sbdf);
- struct pci_dev *pci_get_real_pdev(pci_sbdf_t sbdf);
- void pci_check_disable_device(u16 seg, u8 bus, u8 devfn);
+@@ -274,12 +274,28 @@ unsigned int pci_find_ext_capability(const struct pc=
+i_dev *pdev,
+ unsigned int pci_find_next_ext_capability(const struct pci_dev *pdev,
+                                           unsigned int start,
+                                           unsigned int cap);
+-const char *parse_pci(const char *s, unsigned int *seg_p, unsigned int *b=
+us_p,
++const char *parse_pci_split(const char *s, unsigned int *seg_p, unsigned =
+int *bus_p,
+                       unsigned int *dev_p, unsigned int *func_p);
+-const char *parse_pci_seg(const char *s, unsigned int *seg_p,
++const char *parse_pci_split_seg(const char *s, unsigned int *seg_p,
+                           unsigned int *bus_p, unsigned int *dev_p,
+                           unsigned int *func_p, bool *def_seg);
+=20
++const char *parse_pci_sbdf(const char *s, pci_sbdf_t *sbdf);
++const char *parse_pci_sbdf_seg(const char *s, pci_sbdf_t *sbdf, bool *def=
+_seg);
++
++#define _parse_pci_split(a, b, c, d, e, =2E=2E=2E) parse_pci_split(a, b, =
+c, d, e)
++#define _parse_pci_split_seg(a, b, c, d, e, f, =2E=2E=2E) parse_pci_split=
+_seg(a, b, c, d, e, f)
++
++#define parse_pci(a, b, =2E=2E=2E)                                       =
+     \
++    (count_args(__VA_ARGS__) > 0                                        \
++     ? _parse_pci_split(a, (void *)b, ##__VA_ARGS__, NULL, NULL, NULL)  \
++     :  parse_pci_sbdf(a, (void *)b))
++
++#define parse_pci_seg(a, b, c, =2E=2E=2E)                                =
+     \
++    (count_args(__VA_ARGS__) > 0                                        \
++     ? _parse_pci_split_seg(a, (void *)b, (void *)c, ##__VA_ARGS__, NULL,=
+ NULL, NULL, NULL) \
++     :  parse_pci_sbdf_seg(a, (void *)b, (void *)c))
++
+ #define PCI_BAR_VF      (1u << 0)
+ #define PCI_BAR_LAST    (1u << 1)
+ #define PCI_BAR_ROM     (1u << 2)
 --=20
 2=2E54=2E0
 
@@ -217,5 +228,5 @@ XCP-ng & Xen Orchestra - Vates s=
 olutions
 
 web: https://vates=2Etech
----=Part.811.e9b873507167dbea.19f146864d4.2eb6d4ec73f1346=---
+---=Part.813.d56c9bc396f7820d.19f14686ada.39e2b5bbcc682e3e=---
 
