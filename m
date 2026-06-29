@@ -4,45 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E57E3C43458
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2026 18:59:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1348010.1605898 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A46AC43458
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2026 19:33:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1348102.1605975 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1weHCK-0002i8-1n; Mon, 29 Jun 2026 18:59:12 +0000
+	id 1weHje-0003ZO-ND; Mon, 29 Jun 2026 19:33:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1348010.1605898; Mon, 29 Jun 2026 18:59:12 +0000
+Received: by outflank-mailman (output) from mailman id 1348102.1605975; Mon, 29 Jun 2026 19:33:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1weHCJ-0002hI-Rs; Mon, 29 Jun 2026 18:59:11 +0000
-Received: by outflank-mailman (input) for mailman id 1348010;
- Mon, 29 Jun 2026 18:59:10 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1weHje-0003YC-Cm; Mon, 29 Jun 2026 19:33:38 +0000
+Received: by outflank-mailman (input) for mailman id 1348102;
+ Mon, 29 Jun 2026 19:26:16 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <vishal.moola@gmail.com>) id 1weHCI-0002Q6-AI
- for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 18:59:10 +0000
+ (envelope-from <ljs@kernel.org>) id 1weHcW-0001UJ-67
+ for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 19:26:16 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1weHCH-00DrOt-NO
- for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 20:59:09 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1weHcV-0035uk-J1
+ for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 21:26:15 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <vishal.moola@gmail.com>)
- id 6a42c064-2eae-0a2a0a5409dd-0a2a4504d80a-46
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 20:59:09 +0200
-Received: from [209.85.210.176] (helo=mail-pf1-f176.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <vishal.moola@gmail.com>)
- id 6a42c07c-a01d-0a2a45040019-d155d2b0f074-3
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 20:59:09 +0200
-Received: by mail-pf1-f176.google.com with SMTP id
- d2e1a72fcca58-845c92bc464so2199622b3a.2
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 11:59:09 -0700 (PDT)
-Received: from fedora.hsd1.ca.comcast.net
- ([2601:644:937c:6c90:6d4e:7b2d:4a39:fb0c])
- by smtp.googlemail.com with ESMTPSA id
- d2e1a72fcca58-8479ff8f959sm223955b3a.3.2026.06.29.11.59.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jun 2026 11:59:06 -0700 (PDT)
+ (envelope-from <ljs@kernel.org>)
+ id 6a42c6b9-bab6-0a2a0a5309dd-0a2a45069d12-44
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 21:26:15 +0200
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <ljs@kernel.org>)
+ id 6a42c6d6-08de-0a2a45060019-ac6904fed48e-3
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 21:26:15 +0200
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 081F7600C8;
+ Mon, 29 Jun 2026 19:26:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E2FCC1F00A3D;
+ Mon, 29 Jun 2026 19:26:12 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,111 +50,217 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782759547; x=1783364347; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=CqbRLQXqHRkpiVjsMMKe6YOb40PaFb2scBTkKxGJIlw=;
-        b=NkC5mqebi2wIMBJOyMnHcnmJX9UciS9x6NkQwm5tvo4iUJI7fD/5JGRjbuTfkyQUah
-         6IlrG2xkA08GynL9PWvmyzRc/6j9n5OI5+BT4BlhKgly0GT9o7/aWNkTp070HmE36jcH
-         HlDRFieCzUa8ZgUap+FyVexRi+IPwpAQ64s2gmZRDibmnfve6j1BFJlP+kY3T+Ll9gLx
-         RDiR+xpOfctg8zN5NZsKP6I6amuDqSMQNx0BqGdlTScu7tbI0pmK6ooW4WiAfPkDokhs
-         0qHYnhuH3q7+nZAiVDRrN7v1u6GwopDudA0PnS5toznTRJu9UPCvqQsW7i/O2R/WH9xE
-         5mQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782759547; x=1783364347;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=CqbRLQXqHRkpiVjsMMKe6YOb40PaFb2scBTkKxGJIlw=;
-        b=WDoLAhqKoK5Nbyj1ZlRX/keCPrq2KRRR3O3xtXnqAEH4hDJY3PkHb55HwT1JakE7dF
-         KwTlsusmYvOp5X9E/OSuVL7z/M0z3HJFiMejzP4u4p3NwNMMonBkwB4QODi5KQSlLqpi
-         LEl6RdTkCugPLNYI2vRFRjV+YFWyykTZviv6mwf28Q8rTdjWOI+nTU3WHUBmSmA3AUD4
-         QAD4/WLGI1m49y9RNUMYjFEGR7FQ+xNlRjQRp4WfLc2AwKJ52o4vPNRQqEO4iaHsggR+
-         Bd+EnHsBUsxIVnMXDHXpbYc8C8SRwqxK0WHOAjuAjHxQRo/ZvZSgHj4krPja9bMe49Ld
-         XLww==
-X-Forwarded-Encrypted: i=1; AHgh+RpsXt5tBHRpfbXOVWyEa3JydmwI0VpX62rqxvP0mv2Qlt4GxU/joH6voIw9JEV/i4LafsrgeGkF+6A=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzapgyEgJkUaVApxgCqDDGjSXEX4ICHuiDXEuPpW5cshu6jHEFK
-	k1iarVCY6NjKjL1kd2ykTXj+z1ThbcQI2LTDzUMMIDqC1+ZIw4nMwxHF
-X-Gm-Gg: AfdE7cmQrh0b+sSm3XGTp0ALWx0HVcMSzsYMzaWpMnH/7IzS5yWoeWIya5BZozj62Bw
-	ZKOP3uD6hmjfYdVqfQya5Bu2FAEwh5TaGKjsp26cHcdvqyCbDeRXmrMGseaxu5eH+9z+NcCFZOU
-	dERk3Pm7oJysTV7BUgRKO69jL9HemN3pBrpdIBSzWe5yfn2sjyNwTHccioYpplgzHBNbCtkRMuX
-	lqauytPG/svFtz8uvD1phiAwBPeBnpGku9ZBTUmRTTyXSrNAIY4t0WEEf4bRIX/Cnq2yangEHGh
-	Gq+stGHDFEZX9cEj1OWNSlcYZybYY1pMkXMOXcBrHSLk2hFKarsU0/8lZGWkBt52eXWPAO2iMGz
-	kQpSTWamoslX4ABS6aLr94ZsdZe9oXO6ImEjtaxmOvoCaT7BpmGwteBW5Fgh3hy43KVBstl836k
-	1H3B7G/UubrC4FXOyBE54HQwUa9kFeVUbarsy40NT5DJznxkwWkxZdusuQ4aJfKl0k4yYQQno=
-X-Received: by 2002:a05:6a00:2913:b0:845:d729:4477 with SMTP id d2e1a72fcca58-8479f146866mr478498b3a.27.1782759547578;
-        Mon, 29 Jun 2026 11:59:07 -0700 (PDT)
-From: Vishal Moola <vishal.moola@gmail.com>
-To: Dave Hansen <dave.hansen@intel.com>,
-	linux-mm@kvack.org,
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1782761173;
+	bh=gKmo4U1gXLGtJnRP+WhnxnFRqzwXuOB5h6v9uTSdV1s=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=F+1lY+lCh4/ljg4cAF+WiIYMH69AbV51hkuC1jZywIIRJtnSTTT9Cl417kLqBvIL2
+	 8OgnOg+47T8fRg2he/k0Czan1lawmcrV1QOn8ALLq/c2Ln2nuZw+lUVlp9IBNBM7O9
+	 ULuAgYhvU87+ozqV7cC/Uv3vF3QGLRPm547HTvpe+ig3eiPKismCLxZqLocHJJSRPE
+	 ub2TJPIrtzztEsLj+o6x6PxyaZ56GCtceA3IiAP5fOpSWc8Uo+I5/jmojutM8causc
+	 cQ+/HDIGoeC5yU7JzcyMSeGb6xZ0mYXeADHJM+UmSIQ/cxJ8RXeP+AGDV1OS3TxIGG
+	 sMbSC7d+ndHmA==
+From: Lorenzo Stoakes <ljs@kernel.org>
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Lucas Stach <l.stach@pengutronix.de>,
+	Inki Dae <inki.dae@samsung.com>,
+	Seung-Woo Kim <sw0312.kim@samsung.com>,
+	Kyungmin Park <kyungmin.park@samsung.com>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Peter Griffin <peter.griffin@linaro.org>,
+	Jani Nikula <jani.nikula@linux.intel.com>,
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Tvrtko Ursulin <tursulin@ursulin.net>,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Lyude Paul <lyude@redhat.com>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+	Sandy Huang <hjc@rock-chips.com>,
+	=?UTF-8?q?Heiko=20St=C3=BCbner?= <heiko@sntech.de>,
+	Andy Yan <andy.yan@rock-chips.com>,
+	Thierry Reding <thierry.reding@kernel.org>,
+	Mikko Perttunen <mperttunen@nvidia.com>,
+	Jonathan Hunter <jonathanh@nvidia.com>,
+	Gerd Hoffmann <kraxel@redhat.com>,
+	Dmitry Osipenko <dmitry.osipenko@collabora.com>,
+	Zack Rusin <zack.rusin@broadcom.com>,
+	Matthew Brost <matthew.brost@intel.com>,
+	Thomas Hellstrom <thomas.hellstrom@linux.intel.com>,
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+	Helge Deller <deller@gmx.de>,
+	Benjamin LaHaise <bcrl@kvack.org>,
+	Alexander Viro <viro@zeniv.linux.org.uk>,
+	Christian Brauner <brauner@kernel.org>,
+	Muchun Song <muchun.song@linux.dev>,
+	Oscar Salvador <osalvador@suse.de>,
+	David Hildenbrand <david@kernel.org>,
+	Zi Yan <ziy@nvidia.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
+	"Liam R . Howlett" <liam@infradead.org>,
+	Nico Pache <npache@redhat.com>,
+	Ryan Roberts <ryan.roberts@arm.com>,
+	Dev Jain <dev.jain@arm.com>,
+	Barry Song <baohua@kernel.org>,
+	Lance Yang <lance.yang@linux.dev>,
+	Hugh Dickins <hughd@google.com>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	Mike Rapoport <rppt@kernel.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Michal Hocko <mhocko@suse.com>,
+	Jann Horn <jannh@google.com>,
+	Pedro Falcato <pfalcato@suse.de>,
+	Kees Cook <kees@kernel.org>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>,
+	linux-mips@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	x86@kernel.org
-Cc: Mike Rapoport <rppt@kernel.org>,
-	Lu Baolu <baolu.lu@linux.intel.com>,
+	linuxppc-dev@lists.ozlabs.org,
+	dri-devel@lists.freedesktop.org,
+	etnaviv@lists.freedesktop.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-samsung-soc@vger.kernel.org,
+	intel-gfx@lists.freedesktop.org,
+	linux-arm-msm@vger.kernel.org,
+	freedreno@lists.freedesktop.org,
+	nouveau@lists.freedesktop.org,
+	linux-rockchip@lists.infradead.org,
+	linux-tegra@vger.kernel.org,
+	virtualization@lists.linux.dev,
+	intel-xe@lists.freedesktop.org,
 	xen-devel@lists.xenproject.org,
-	Thomas Gleixner <tglx@kernel.org>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Andy Lutomirski <luto@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Vishal Moola <vishal.moola@gmail.com>,
-	William Kucharski <william.kucharski@linux.dev>
-Subject: [PATCH v2 8/9] x86/xen: Convert xen_mm_pin_all() to ptdescs
-Date: Mon, 29 Jun 2026 11:57:41 -0700
-Message-ID: <20260629185742.126987-9-vishal.moola@gmail.com>
+	linux-fbdev@vger.kernel.org,
+	linux-aio@kvack.org,
+	linux-fsdevel@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-sound@vger.kernel.org
+Subject: [PATCH 06/13] mm/vma: convert vm_pgprot_modify() to use vma_flags_t and rename
+Date: Mon, 29 Jun 2026 20:25:29 +0100
+Message-ID: <548ba81b2971734d4d2143237ad1465bd1b2f525.1782760670.git.ljs@kernel.org>
 X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260629185742.126987-1-vishal.moola@gmail.com>
-References: <20260629185742.126987-1-vishal.moola@gmail.com>
+In-Reply-To: <cover.1782760670.git.ljs@kernel.org>
+References: <cover.1782760670.git.ljs@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1782759549-ACD3C1CC-D709F6D2/0/0
+X-purgate-ID: tlsNG-16d1c6/1782761175-C6B2268D-F71D8D45/0/0
 X-purgate-type: clean
-X-purgate-size: 1324
+X-purgate-size: 4293
 
-Convert xen_mm_pin_all() to ptdescs in preparation for the eventual
-splitting of ptdescs from struct page. Continue checking PagePinned
-through the underlying page as we do not have a per-memdesc api for
-page flags yet.
+Update vm_pgprot_modify() to use the new VMA flags type vma_flags_t, and
+rename to vma_pgprot_modify() accordingly.
 
-Acked-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
-Reviewed-by: William Kucharski <william.kucharski@linux.dev>
-Reviewed-by: Juergen Gross <jgross@suse.com>
-Signed-off-by: Vishal Moola <vishal.moola@gmail.com>
+This is part of the ongoing work to convert vm_flags_t to vma_flags_t, in
+order to eliminate the arbitrary limit of the number of bits in a system
+word on available VMA flags.
+
+Update VMA userland tests accordingly, updating vma_set_page_prot() to no
+longer inline vma_pgprot_modify(), rather we can simply define
+vma_pgprot_modify() as a static inline function and the tests will pick it
+up from vma.h.
+
+No functional change intended.
+
+Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
 ---
- arch/x86/xen/mmu_pv.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ mm/mmap.c                       |  8 ++++----
+ mm/vma.c                        |  2 +-
+ mm/vma.h                        |  6 ++++--
+ tools/testing/vma/include/dup.h | 12 +++++-------
+ 4 files changed, 14 insertions(+), 14 deletions(-)
 
-diff --git a/arch/x86/xen/mmu_pv.c b/arch/x86/xen/mmu_pv.c
-index aab5f70d407c..7b23a34db8ff 100644
---- a/arch/x86/xen/mmu_pv.c
-+++ b/arch/x86/xen/mmu_pv.c
-@@ -836,15 +836,15 @@ static void xen_pgd_pin(struct mm_struct *mm)
-  */
- void xen_mm_pin_all(void)
+diff --git a/mm/mmap.c b/mm/mmap.c
+index 477f4a77361a..e834ec9273e3 100644
+--- a/mm/mmap.c
++++ b/mm/mmap.c
+@@ -80,13 +80,13 @@ core_param(ignore_rlimit_data, ignore_rlimit_data, bool, 0644);
+ /* Update vma->vm_page_prot to reflect vma->vm_flags. */
+ void vma_set_page_prot(struct vm_area_struct *vma)
  {
--	struct page *page;
-+	struct ptdesc *ptdesc;
+-	vm_flags_t vm_flags = vma->vm_flags;
++	vma_flags_t vma_flags = vma->flags;
+ 	pgprot_t vm_page_prot;
  
- 	spin_lock(&init_mm.page_table_lock);
- 	spin_lock(&pgd_lock);
- 
--	list_for_each_entry(page, &pgd_list, lru) {
--		if (!PagePinned(page)) {
--			__xen_pgd_pin(&init_mm, (pgd_t *)page_address(page));
--			SetPageSavePinned(page);
-+	list_for_each_entry(ptdesc, &pgd_list, pt_list) {
-+		if (!PagePinned(ptdesc_page(ptdesc))) {
-+			__xen_pgd_pin(&init_mm, (pgd_t *)ptdesc_address(ptdesc));
-+			SetPageSavePinned(ptdesc_page(ptdesc));
- 		}
+-	vm_page_prot = vm_pgprot_modify(vma->vm_page_prot, vm_flags);
++	vm_page_prot = vma_pgprot_modify(vma->vm_page_prot, vma_flags);
+ 	if (vma_wants_writenotify(vma, vm_page_prot)) {
+-		vm_flags &= ~VM_SHARED;
+-		vm_page_prot = vm_pgprot_modify(vm_page_prot, vm_flags);
++		vma_flags_clear(&vma_flags, VMA_SHARED_BIT);
++		vm_page_prot = vma_pgprot_modify(vm_page_prot, vma_flags);
  	}
+ 	/* remove_protection_ptes reads vma->vm_page_prot without mmap_lock */
+ 	WRITE_ONCE(vma->vm_page_prot, vm_page_prot);
+diff --git a/mm/vma.c b/mm/vma.c
+index fb4341943576..395b6619ecc1 100644
+--- a/mm/vma.c
++++ b/mm/vma.c
+@@ -2179,7 +2179,7 @@ bool vma_wants_writenotify(struct vm_area_struct *vma, pgprot_t vm_page_prot)
+ 	/* The open routine did something to the protections that pgprot_modify
+ 	 * won't preserve? */
+ 	if (pgprot_val(vm_page_prot) !=
+-	    pgprot_val(vm_pgprot_modify(vm_page_prot, vma->vm_flags)))
++	    pgprot_val(vma_pgprot_modify(vm_page_prot, vma->flags)))
+ 		return false;
  
+ 	/*
+diff --git a/mm/vma.h b/mm/vma.h
+index bcf0c2773449..6a8abb8ae937 100644
+--- a/mm/vma.h
++++ b/mm/vma.h
+@@ -522,9 +522,11 @@ static inline bool vma_wants_manual_pte_write_upgrade(struct vm_area_struct *vma
+ }
+ 
+ #ifdef CONFIG_MMU
+-static inline pgprot_t vm_pgprot_modify(pgprot_t oldprot, vm_flags_t vm_flags)
++static inline pgprot_t vma_pgprot_modify(pgprot_t oldprot, vma_flags_t vma_flags)
+ {
+-	return pgprot_modify(oldprot, vm_get_page_prot(vm_flags));
++	const pgprot_t prot = vma_get_page_prot(vma_flags);
++
++	return pgprot_modify(oldprot, prot);
+ }
+ #endif
+ 
+diff --git a/tools/testing/vma/include/dup.h b/tools/testing/vma/include/dup.h
+index 6f5bcd7fbcd8..813044781719 100644
+--- a/tools/testing/vma/include/dup.h
++++ b/tools/testing/vma/include/dup.h
+@@ -1434,20 +1434,18 @@ struct vm_area_struct *vma_iter_next_range(struct vma_iterator *vmi)
+ }
+ 
+ bool vma_wants_writenotify(struct vm_area_struct *vma, pgprot_t vm_page_prot);
++static inline pgprot_t vma_pgprot_modify(pgprot_t oldprot, vma_flags_t vma_flags);
+ 
+ /* Update vma->vm_page_prot to reflect vma->vm_flags. */
+ static inline void vma_set_page_prot(struct vm_area_struct *vma)
+ {
+-	vm_flags_t vm_flags = vma->vm_flags;
++	vma_flags_t vma_flags = vma->flags;
+ 	pgprot_t vm_page_prot;
+ 
+-	/* testing: we inline vm_pgprot_modify() to avoid clash with vma.h. */
+-	vm_page_prot = pgprot_modify(vma->vm_page_prot, vm_get_page_prot(vm_flags));
+-
++	vm_page_prot = vma_pgprot_modify(vma->vm_page_prot, vma_flags);
+ 	if (vma_wants_writenotify(vma, vm_page_prot)) {
+-		vm_flags &= ~VM_SHARED;
+-		/* testing: we inline vm_pgprot_modify() to avoid clash with vma.h. */
+-		vm_page_prot = pgprot_modify(vm_page_prot, vm_get_page_prot(vm_flags));
++		vma_flags_clear(&vma_flags, VMA_SHARED_BIT);
++		vm_page_prot = vma_pgprot_modify(vm_page_prot, vma_flags);
+ 	}
+ 	/* remove_protection_ptes reads vma->vm_page_prot without mmap_lock */
+ 	WRITE_ONCE(vma->vm_page_prot, vm_page_prot);
 -- 
 2.54.0
 
