@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D61FC43458
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2026 10:32:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1347446.1605293 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3229C43458
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2026 10:40:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1347454.1605303 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1we9HU-0000hz-Nr; Mon, 29 Jun 2026 10:32:00 +0000
+	id 1we9P4-0002QI-GP; Mon, 29 Jun 2026 10:39:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1347446.1605293; Mon, 29 Jun 2026 10:32:00 +0000
+Received: by outflank-mailman (output) from mailman id 1347454.1605303; Mon, 29 Jun 2026 10:39:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1we9HU-0000hs-L4; Mon, 29 Jun 2026 10:32:00 +0000
-Received: by outflank-mailman (input) for mailman id 1347446;
- Mon, 29 Jun 2026 10:31:59 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1we9P4-0002QB-Cm; Mon, 29 Jun 2026 10:39:50 +0000
+Received: by outflank-mailman (input) for mailman id 1347454;
+ Mon, 29 Jun 2026 10:39:48 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1we9HT-0000hj-MA
- for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 10:31:59 +0000
+ (envelope-from <jbeulich@suse.com>) id 1we9P2-0002Q5-Gd
+ for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 10:39:48 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1we9HS-001OZH-GF
- for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 12:31:58 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1we9P1-00CN6o-84
+ for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 12:39:47 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a42498d-5cb7-0a2a0a5109dd-0a2a4504e32a-34
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 12:31:58 +0200
-Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a424b64-bab6-0a2a0a5309dd-0a2a450388a2-44
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 12:39:47 +0200
+Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a42499e-a01d-0a2a45040019-d155dd2bd032-3
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 12:31:58 +0200
-Received: by mail-wr1-f43.google.com with SMTP id
- ffacd0b85a97d-47248615e4dso1406495f8f.2
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 03:31:58 -0700 (PDT)
+ id 6a424b72-ec1a-0a2a45030019-d155dd36c0f5-3
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 12:39:47 +0200
+Received: by mail-wr1-f54.google.com with SMTP id
+ ffacd0b85a97d-46cbe01d4b6so1819500f8f.2
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 03:39:47 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-46fe25429d5sm28539384f8f.7.2026.06.29.03.31.57
+ ffacd0b85a97d-474e31a7d82sm507363f8f.1.2026.06.29.03.39.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 29 Jun 2026 03:31:57 -0700 (PDT)
+ Mon, 29 Jun 2026 03:39:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,55 +55,57 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1782729118; x=1783333918; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1782729586; x=1783334386; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=hpSRzTKTDIjEaGwtVFd9ANaMT/aKCinIkS/ujotWWH4=;
-        b=fKa89Bkkc5cNhC86xqXoqE4PVey2Zf9DAUbKe51a9ujWX0DA1Lkxk0P1iWm9JJl2qJ
-         5p3Eq1d7vqblE7MrZQ0iqHi1skSwUEKgWnd4RS2D7M3USRtkeRBLdyvrXMfAcw2bkSY4
-         e5M/5/qbhxUDmkwxWpJX+EKpA4b6nfGLcsF+3gyt/o74FDqCc1iu78Jxj65TdIfloDw7
-         QN7N+UvjlDFu7W+vm49D2K3XyiSWHuQ3upWrF9gwuiHizq30hGHlUhy0LTDP6vDbv1Bb
-         iOir5mhGuiJikVdC4RnFnfHCvK2wMA7oy0Yu8zWiAExw5DOjSbxeHtT32ZBQo5Gs9+o7
-         HSEw==
+        bh=qCG+J/5y/jWvV2pZcb/t8YCvrsqe/XiX8UyOgsf2u9Q=;
+        b=QYJlcBbSf4+TCmwTgI7YKhkt1JKLoyzT4puSIDbVt13fIWmzcybkbrfujvdxiQmkes
+         h18v7zRkNLLnHR6TrN9qs6y3S34aLpxBGt8Mzj0xXKnZPoidqjmK5cQq1EuGo9J6mLl8
+         BAewNthbL11QfN8SIZNQGJZCOScRJlRpXXJ4Ffv3Gtr3EJ7T+etXxbmO4/pkHUPy4/9F
+         NUDF0x2w59uWAzV9FeR+yI1UtdxGbOzkeEkK9rxjcyTcuQCafu2qmnSX7IaruEkYh8tU
+         0l4WHFUTOu+IblAIg8BATDJS/cItW9DhsxN7S+5noF90829FkORD2Xz/YlNfpjrWpe41
+         fjjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782729118; x=1783333918;
+        d=1e100.net; s=20251104; t=1782729586; x=1783334386;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=hpSRzTKTDIjEaGwtVFd9ANaMT/aKCinIkS/ujotWWH4=;
-        b=Rg6Ab63+lhVxjY4NTdTKqZHYNpE5+rclxMF92myOKcsUNu6stjc3XdEtkpcMKtauTD
-         GlYnm8EUfdvN1Q1sUOSMoAu1OasITCXUyBmPpL0k5drzdUCP6LXdtaI7sFCofHn91rVN
-         Zlw/mLyHbcxaOnGHtW0uLaU7S6tn5SjiatuqRQqbtlQtbYxwXfZmR0NDaRpwHx35YgyY
-         SU18McGdQO2UiIglQKdzBen6d+eQiHU+S9mCQKIR7SpP/iwwyooHrSm9xS0pkUrmGgtQ
-         1yn6lXtZQ9Rpsb3ockncmfODOrnCAfr4hf0pwJVAA4Zu7nbu44LN84Fk2TH4McLPauDX
-         otfg==
-X-Forwarded-Encrypted: i=1; AHgh+RrTZcGa2gjk6bKQwS2zoDhE84ZKRx7bm8tLmTjn+mGs02HnzHlWJzLvOmQn0wnewA2igwpeBuHVul4=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yz1Pq7P0eCX66QPuz1UVgFUGAjEj6hw04HMfysuxxwntgXeHMeh
-	7cG86ytT+BAuc1hoZEr+Ew9tTJBydtGuhdtvMS9JnyKeJnj1N1IFMrAVP9Hy0CaFdQ==
-X-Gm-Gg: AfdE7clIkjwlJOkp6FmJ2EIqMDh15c9yjdKBvdK1R8YB/oefcsv5Fw/IJy/x3J6YsTH
-	CF2fxa451l6MM18CowXAuQX/If4ue2tj1wLV2simvf7WAQD639WTfLTKVG80owaxZTkDu3VVsMk
-	6iFJ2QEkjfg9QlS2nIjtNnLTVzP2FOlUUbNXsDA9jPH8jlLSbJWx2px9UQFg9K6YfwPQxMI15R0
-	3Wuw6lLe8Nn9eJFPFSEAjcToWYGmHXVY5IvBjzrjqDOFnKVkdYdhnX/LgXhl26cN9mCQKfzjZbe
-	VqpviuHO5O2CVUBKABRruCcmcF3G/pHaGdwLIEoZGaraESipGs6B3TdIjChPuCc0j9uavGwDCdl
-	F7tL3pcEn3+z6P73fpIpNnB5JpGjbz9vd26a8N6Ihi5UNhy5vxlIdBWrxFIeaJFJ7pWaq0/WG5t
-	LuckA53yGUhIJpn+shey6V/IEOz9gC2XI3xr95AmsHTC2IdAT2Loh2HYXbjY6YwU+rwtS1pjCdM
-	nppEzMqlf6grBI=
-X-Received: by 2002:a05:6000:2903:b0:472:55a:ef89 with SMTP id ffacd0b85a97d-472055af37amr10093848f8f.27.1782729117701;
-        Mon, 29 Jun 2026 03:31:57 -0700 (PDT)
-Message-ID: <d965a04d-c66b-4c7c-8ce7-c1da029a6b7e@suse.com>
-Date: Mon, 29 Jun 2026 12:31:56 +0200
+        bh=qCG+J/5y/jWvV2pZcb/t8YCvrsqe/XiX8UyOgsf2u9Q=;
+        b=UNHK3Nkj1yJaGbieneBpHKSf6E1vQp2bPgHkQBg6z6+iZhWUEsNzbdxAzP6vajXxai
+         twPVG8BIzBHsQ0wvGNkOH9apoHm7/AQtGfsR0PeYO0/AvM7koMuqGH9CrI3X3vCS3S/o
+         ksmTzKfe33zSK0Dt24xqbGsGu650HxLk3vXqxKN8F9gnKGO7ZEZ2gkDJziv6eCgiKD8p
+         +2LjxhmP5JaqC95grSCSx5QvDswcTZAAiVeBJ3kKYR8UEdr951DQ2J4ANtfpojBBHt2I
+         YwPXOWP6xwoyjiukCCjuIiNKIFDLx6Qes7MZIvk5mkNwQ5PyZh+PamwnhplvyVtpFdNh
+         3reA==
+X-Forwarded-Encrypted: i=1; AHgh+RrmzWueM15suIUXOdJYhlQVgkn7OLf5f5UXqDDrhyAsOhuOKvos9ay11o3VapaKmM2lIqvBByz1W+c=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyHZYqHW5SXbfWjjQ7RK7zp2q1cJYcKiGRTYmmjZh8sit9SxgaK
+	lK8eWTlJNnhDqAJVO5hNdWTxAngl3e9ov1QeIqlnEBBOOos/wgqWLPesDsswg3ncLQ==
+X-Gm-Gg: AfdE7cll9/nCzKBiwAwtyJiGeGO7wcrnTe8dPtio5aaoDBTcg5diZNttSd9mNqtcni5
+	QKt+noqHkSmWMsxzQNSnjmbGPGYcpJ3/guehGNEHngVz7o24m8jzbHIvD8rK3ajJY1ZaLPufoxJ
+	I0dSBgb296SUormdcD4aKKSEryBI4ghz5JDjOoDIDXrAxB3Xl9PheyxeY+WLYtv1m7toZrtHbEV
+	dAZxtVU4y8Pt5dkTaMamae1t7/RoVIm/FVzIPpB2r/CP5YQz6rriaYibgRbau5Ub9gbEVCPuD3v
+	EMhaGUmA/HVg8WBTPYX4UF/FmRR5UF5+alXHWigP4MYp9csZqRkuW/zzq7cy+lxIyjGh7WJW/Db
+	4UGHVPDGxoCbwaKruGOTBgxv/8x/Pn6LCzjBptfz2l25ANVojVqGCcDMruos32JDfE01CqwfyP2
+	woqpW/R3Bxn2ib0V0rX/73/L//EndhVXq4+VjadArGQvB59vMRYOAvB7CfNyC/wgEoXxF8yNzR7
+	F91GB2vA3/ovPU=
+X-Received: by 2002:a05:6000:2f83:b0:472:76ad:b329 with SMTP id ffacd0b85a97d-47276adb46amr8097242f8f.6.1782729586492;
+        Mon, 29 Jun 2026 03:39:46 -0700 (PDT)
+Message-ID: <f8251836-4b7a-4fab-9f1c-e95d4444b989@suse.com>
+Date: Mon, 29 Jun 2026 12:39:45 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH for-4.22 v2 3/4] xen/irq: handle IRQ being disabled while
- executing its handler
+Subject: Re: [PATCH for-4.22 v2 4/4] char/ns16550: bound execution time of
+ ns16550_interrupt()
 To: Roger Pau Monne <roger.pau@citrix.com>
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 References: <20260629094531.55555-1-roger.pau@citrix.com>
- <20260629094531.55555-4-roger.pau@citrix.com>
+ <20260629094531.55555-5-roger.pau@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,39 +131,52 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260629094531.55555-4-roger.pau@citrix.com>
+In-Reply-To: <20260629094531.55555-5-roger.pau@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1782729118-ADF351CC-D443BB7A/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-33051d/1782729587-073285D1-AD6BC93D/0/0
 X-purgate-type: clean
-X-purgate-size: 897
+X-purgate-size: 1510
 
 On 29.06.2026 11:45, Roger Pau Monne wrote:
-> It's possible for IRQ_DISABLED to be set while running the handler
-> execution loop in do_IRQ().  Such disabling can be done by the handler
-> itself, or from a remote CPU.
+> --- a/xen/common/irq.c
+> +++ b/xen/common/irq.c
+> @@ -54,3 +54,15 @@ unsigned int cf_check irq_startup_none(struct irq_desc *desc)
+>  {
+>      return 0;
+>  }
+> +
+> +void disable_irq(unsigned int irq)
+> +{
+> +    struct irq_desc *desc = irq_to_desc(irq);
+> +    unsigned long flags;
+> +
+> +    spin_lock_irqsave(&desc->lock, flags);
+> +    desc->status |= IRQ_DISABLED;
+> +    if ( desc->handler->disable )
+> +        desc->handler->disable(desc);
 
-I don't think the handler itself can legitimately call any of the functions
-setting IRQ_DISABLED.
+I'd like to point out that __pirq_guest_unbind() has this the other way around:
+Call ->disable(), then set flag. Similarly move_native_irq() only calls the
+hook with the flag clear. Whereas fixup_irqs() doesn't care about the flag at
+all. Also considering the wording "disable" vs "disabled", I think setting the
+flag afterwards is better.
 
-> Check for IRQ_DISABLED not being set in the loop condition, as to not
-> execute the handler if the IRQ has been disabled.
-> 
-> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> @@ -190,12 +191,38 @@ static void cf_check ns16550_interrupt(int irq, void *dev_id)
+>  {
+>      struct serial_port *port = dev_id;
+>      struct ns16550 *uart = port->uart;
+> +    /*
+> +     * Set quite arbitrarily as 4x the time to drain the TX or fill RX FIFOs,
+> +     * set the upper bound as 5ms or the timeout_ms value, whatever is higher.
+> +     */
+> +    const unsigned int delta = min(uart->timeout_ms * 4,
+> +                                   max(5u, uart->timeout_ms));
 
-Preferably with the description adjusted (or it being pointed out what I may
-be overlooking):
+You may want to also update the description accordingly.
+
+Preferably with respective adjustments:
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
-
-> ---
-> I wanted to add a fixes tag, but this has been broken since forever, and
-> hence I should add:
-> 
-> Fixes: 4676bbf96dc8 ("bitkeeper revision 1.2 (3ddb79c9KusG02eh7i-uXkgY0IksKA)")
-> 
-> Which is pointless IMO.
-
-+1
 
 Jan
 
