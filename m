@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D855C43458
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2026 20:27:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1348245.1606061 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FCC0C43458
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2026 21:58:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1348268.1606083 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1weIYx-0004K5-5j; Mon, 29 Jun 2026 20:26:39 +0000
+	id 1weJzm-0002s6-Ap; Mon, 29 Jun 2026 21:58:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1348245.1606061; Mon, 29 Jun 2026 20:26:39 +0000
+Received: by outflank-mailman (output) from mailman id 1348268.1606083; Mon, 29 Jun 2026 21:58:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1weIYx-0004Jy-2w; Mon, 29 Jun 2026 20:26:39 +0000
-Received: by outflank-mailman (input) for mailman id 1348245;
- Mon, 29 Jun 2026 20:26:38 +0000
+	id 1weJzm-0002rb-2r; Mon, 29 Jun 2026 21:58:26 +0000
+Received: by outflank-mailman (input) for mailman id 1348268;
+ Mon, 29 Jun 2026 21:58:24 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ziy@nvidia.com>) id 1weIYv-0004Js-QS
- for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 20:26:37 +0000
+ (envelope-from <taka@valinux.co.jp>) id 1weJzk-0002iT-8y
+ for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 21:58:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1weIYu-001R42-Aj
- for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 22:26:36 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1weJzj-001eUD-MM
+ for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 23:58:23 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ziy@nvidia.com>)
- id 6a42d4d3-5cb7-0a2a0a5109dd-0a2a4505e628-32
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 22:26:35 +0200
-Received: from [52.101.48.42]
- (helo=MW6PR02CU001.outbound.protection.outlook.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ziy@nvidia.com>)
- id 6a42d4f9-3cb2-0a2a45050019-3465302ac3d8-3
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 22:26:35 +0200
-Received: from IA0PR12MB8374.namprd12.prod.outlook.com (2603:10b6:208:40e::7)
- by DM4PR12MB7551.namprd12.prod.outlook.com (2603:10b6:8:10d::12) with
- Microsoft SMTP Server (version=TLS1_2,
+ (envelope-from <taka@valinux.co.jp>)
+ id 6a42ea72-e002-0a2a0a5209dd-0a2a4509a9aa-10
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 23:58:23 +0200
+Received: from [52.101.229.81]
+ (helo=TY3P286CU002.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <taka@valinux.co.jp>)
+ id 6a42ea74-97e6-0a2a45090019-3465e55169fb-5
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 23:58:23 +0200
+Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:458::18)
+ by OS7P286MB7274.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:439::11)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.19; Mon, 29 Jun
- 2026 20:26:20 +0000
-Received: from IA0PR12MB8374.namprd12.prod.outlook.com
- ([fe80::d85f:4c87:ae84:3f16]) by IA0PR12MB8374.namprd12.prod.outlook.com
- ([fe80::d85f:4c87:ae84:3f16%5]) with mapi id 15.21.0159.018; Mon, 29 Jun 2026
- 20:26:20 +0000
+ 2026 21:58:13 +0000
+Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::c8c9:25cd:8d13:96d6]) by OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::c8c9:25cd:8d13:96d6%6]) with mapi id 15.21.0159.018; Mon, 29 Jun 2026
+ 21:58:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,270 +55,365 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=temperror header.s=selector2 header.d=Nvidia.com header.i="@Nvidia.com"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=T/v44OCgZVv8TnwMyFEqZ59yu11oCB/L8D/YmJ45y3NQvoZQNhrxzCH34Xr4RtJnlmGEbegSVMRmMjurJ9k44Z0/gng+ZdY6mFprMUoGrSiOIiBPpTCnIzNz7C4PAKic1QMjjhB3wrZhwhZWvYn8GEMWsnjwJCqvDm0xSVemHrfuoO+LWQ3P6OJXsI6Q7WguJ8UxcHY5cf3FpmmnpBsQWjSzqxFD3CQYu4gMk9u6t6uC1DIwIwB1teUbMbQf4Q8hZmMYkUC7uOHG7VX2amk9Ekjy/AEO+CuR8vv6qVeoSSMBMi4p0J6sHcCEnLZckLWf+ZiWQ2cdDcfH3MKASIkBKg==
+ b=csryaDGfkdKwSJiQf9//K5KBRAlDKdCx/Us10E7QG1x96i2oAvNxpOLumYh+Fybdh0oD3neGBYcufk+tiytMD/F3Bbs/OZnLddugaR6ZDeCjRUFHwQ3VXN2zXYB58J3NeSr03KjNqTLAjSNqBk/qVqubK4732bIpiZf1LpR7aeBUBwNy4xhGTt+SLs73/OoiJNPQz/cPfrb+bljIwDxO6xFZC7w24b2P9ojcEU6Fqi/ezHUT7BWStlqry3Ws8ml4gdvNCuCA0ZWeL8rYulDD5AaUePaX0/92RGSlUk+WO9/AoiJRac/U8cupbW80CLli26jEmpPJ2VB4rjhPt+brag==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UjOcawimHyWmxgix9NetNoPKlptEq1gcNWDAjaT9jQw=;
- b=ETjNpAbP7ey+4SFFarO0HFFa58CsUMqTPhTZ6MoEu77yNuv4XlJ7z3qHfH3wTBDxqWfKmR1eryM06/wAPJhYsEGSkpOH1e+zrVfLpV7gTfVNHMv2XWr4LoMAzE6xqFlTDtjubMihZQ4daGCdHxAcmjZ6U3ZkRMFN9whuNWqz+kx2MURGE9CXq2XBL08JCwvBzMyfIav1tWO3vSUJdC/R8nHwqSB9Q7xd7DobDUmWZsd+2fGSr41wxtOt00KtskVCttuCm/WLc+ss4CRZqD1t6b/yJQkHchvV77pB42Thcv1Czd3D2i/HEOuOd39PjMIdMgZqFPxRPF0ADL7YZuJEQw==
+ bh=KocPHXm+RQfXzllv77nczBCcPoeJP8pnY/53SvFqybc=;
+ b=hXKL6QvfQQ2CD3n/NEIy2byR6n0t9/33c/HVm5/mqVoAzsT/dZsmjhJiv8BfxIqzpruehOHv9x6xHL89BQH3+TbyCmIxinrbFANFSH1LRp+/aTHB8HG/jZuRiCcZMhhcnF3UrQ3PC14TorkpTuZ8QKRMp9+H/xcBiBNsGJvz+3aRsPzXmE/SntjDZ8z2L/2x8rGGRX7rbVbWTxxvddNr4iQhVPMUzVNGFrUkkyOe5vcONwL82CuAQYvdNuPRy0d24XyqkmBfHGMzvGKoDiyliMcpWrWMoZLDONG6TGObmWsn5HBls5fef1/PMU1x2mzz5HDZALVq/LBC8eqaXJANDg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
+ smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
+ header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UjOcawimHyWmxgix9NetNoPKlptEq1gcNWDAjaT9jQw=;
- b=aYnFAIn2X9xFXp3Fs19l/6YLTYATk0NbcZ68EnMprL3spbrD7OTb6WKPkVm3IDu+1b67fgyFwo2ywI5nr0JLH8dFvemEbfWOqMDPcJ0SRokU7U960JH25I7aq/aXIytsuh+SAvoaScfzHXZqJ1KLvbE0frQpLu7XQ81i5xO9wMFQM+XhAWzbrAMV6Wgm7KvK+uQlpFVY3NFDs9c80F4Ndy5zMVpf2DBZmYM1asChhVA/SAK6YBw6g61oj8S5j4CMJkUGMor7NCUA3QJbWJy7Ea5FbzGl0z6UuXdhOeT8AVUeKTgEC6Cu0UBvlnTLPjJkJ3PePzU5itCa1iBHsubWeQ==
+ bh=KocPHXm+RQfXzllv77nczBCcPoeJP8pnY/53SvFqybc=;
+ b=GOo6io93zxDgR5HerdnHS/cYHmZAPcsh9xs1esEo9l8TA7Y8qZ3a+Yf3RexpWga81luM+Rk7WKeRpC51J2rtJsiPMb7q0dE3USarJ0KHYWDWy+o859iZQn9+HFlY030yCy8Kv3JE0pmGJdXalMk7OffwueMApAjdWWCgUnl4Pl0=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 29 Jun 2026 16:26:18 -0400
-Message-Id: <DJLTDCPWMXDL.4ICZ77A1LPZZ@nvidia.com>
-From: "Zi Yan" <ziy@nvidia.com>
-Subject: Re: [PATCH 01/13] mm: introduce vma_flags_can_grow() and
- vma_can_grow()
-Cc: "Thomas Bogendoerfer" <tsbogend@alpha.franken.de>, "Madhavan Srinivasan"
- <maddy@linux.ibm.com>, "Michael Ellerman" <mpe@ellerman.id.au>, "Maarten
- Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
- <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "David
- Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Lucas
- Stach" <l.stach@pengutronix.de>, "Inki Dae" <inki.dae@samsung.com>,
- "Seung-Woo Kim" <sw0312.kim@samsung.com>, "Kyungmin Park"
- <kyungmin.park@samsung.com>, "Krzysztof Kozlowski" <krzk@kernel.org>,
- "Peter Griffin" <peter.griffin@linaro.org>, "Jani Nikula"
- <jani.nikula@linux.intel.com>, "Joonas Lahtinen"
- <joonas.lahtinen@linux.intel.com>, "Rodrigo Vivi" <rodrigo.vivi@intel.com>,
- "Tvrtko Ursulin" <tursulin@ursulin.net>, "Rob Clark"
- <robin.clark@oss.qualcomm.com>, "Dmitry Baryshkov" <lumag@kernel.org>,
- "Lyude Paul" <lyude@redhat.com>, "Danilo Krummrich" <dakr@kernel.org>,
- "Tomi Valkeinen" <tomi.valkeinen@ideasonboard.com>, "Sandy Huang"
- <hjc@rock-chips.com>, =?utf-8?q?Heiko_St=C3=BCbner?= <heiko@sntech.de>,
- "Andy Yan" <andy.yan@rock-chips.com>, "Thierry Reding"
- <thierry.reding@kernel.org>, "Mikko Perttunen" <mperttunen@nvidia.com>,
- "Jonathan Hunter" <jonathanh@nvidia.com>, "Gerd Hoffmann"
- <kraxel@redhat.com>, "Dmitry Osipenko" <dmitry.osipenko@collabora.com>,
- "Zack Rusin" <zack.rusin@broadcom.com>, "Matthew Brost"
- <matthew.brost@intel.com>, "Thomas Hellstrom"
- <thomas.hellstrom@linux.intel.com>, "Oleksandr Andrushchenko"
- <oleksandr_andrushchenko@epam.com>, "Helge Deller" <deller@gmx.de>,
- "Benjamin LaHaise" <bcrl@kvack.org>, "Alexander Viro"
- <viro@zeniv.linux.org.uk>, "Christian Brauner" <brauner@kernel.org>,
- "Muchun Song" <muchun.song@linux.dev>, "Oscar Salvador"
- <osalvador@suse.de>, "David Hildenbrand" <david@kernel.org>, "Baolin Wang"
- <baolin.wang@linux.alibaba.com>, "Liam R . Howlett" <liam@infradead.org>,
- "Nico Pache" <npache@redhat.com>, "Ryan Roberts" <ryan.roberts@arm.com>,
- "Dev Jain" <dev.jain@arm.com>, "Barry Song" <baohua@kernel.org>, "Lance
- Yang" <lance.yang@linux.dev>, "Hugh Dickins" <hughd@google.com>, "Vlastimil
- Babka" <vbabka@kernel.org>, "Mike Rapoport" <rppt@kernel.org>, "Suren
- Baghdasaryan" <surenb@google.com>, "Michal Hocko" <mhocko@suse.com>, "Jann
- Horn" <jannh@google.com>, "Pedro Falcato" <pfalcato@suse.de>, "Kees Cook"
- <kees@kernel.org>, "Jaroslav Kysela" <perex@perex.cz>, "Takashi Iwai"
- <tiwai@suse.com>, <linux-mips@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>, <linuxppc-dev@lists.ozlabs.org>,
- <dri-devel@lists.freedesktop.org>, <etnaviv@lists.freedesktop.org>,
- <linux-arm-kernel@lists.infradead.org>,
- <linux-samsung-soc@vger.kernel.org>, <intel-gfx@lists.freedesktop.org>,
- <linux-arm-msm@vger.kernel.org>, <freedreno@lists.freedesktop.org>,
- <nouveau@lists.freedesktop.org>, <linux-rockchip@lists.infradead.org>,
- <linux-tegra@vger.kernel.org>, <virtualization@lists.linux.dev>,
- <intel-xe@lists.freedesktop.org>, <xen-devel@lists.xenproject.org>,
- <linux-fbdev@vger.kernel.org>, <linux-aio@kvack.org>,
- <linux-fsdevel@vger.kernel.org>, <linux-mm@kvack.org>,
- <linux-sound@vger.kernel.org>
-To: "Lorenzo Stoakes" <ljs@kernel.org>, "Andrew Morton"
- <akpm@linux-foundation.org>
-X-Mailer: aerc 0.21.0
-References: <cover.1782760670.git.ljs@kernel.org>
- <f2e8c32515d328db62279cc8bab8398ea278d74f.1782760670.git.ljs@kernel.org>
-In-Reply-To: <f2e8c32515d328db62279cc8bab8398ea278d74f.1782760670.git.ljs@kernel.org>
-X-ClientProxiedBy: BLAP220CA0026.NAMP220.PROD.OUTLOOK.COM
- (2603:10b6:208:32c::31) To IA0PR12MB8374.namprd12.prod.outlook.com
- (2603:10b6:208:40e::7)
+ header.d=none;dmarc=none action=none header.from=valinux.co.jp;
+From: Hirokazu Takahashi <taka@valinux.co.jp>
+To: xen-devel@lists.xenproject.org
+Cc: Hirokazu Takahashi <taka@valinux.co.jp>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Timothy Pearson <tpearson@raptorengineering.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Dario Faggioli <dfaggioli@suse.com>,
+	Juergen Gross <jgross@suse.com>,
+	George Dunlap <gwd@xenproject.org>
+Subject: [PATCH v3 2/3] xen/sched: Link CPU topology to scheduler
+Date: Tue, 30 Jun 2026 06:58:05 +0900
+Message-ID: <20260629215806.11610-3-taka@valinux.co.jp>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260629215806.11610-1-taka@valinux.co.jp>
+References: <20260629215806.11610-1-taka@valinux.co.jp>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TY6P301CA0003.JPNP301.PROD.OUTLOOK.COM
+ (2603:1096:405:3be::9) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:604:458::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: IA0PR12MB8374:EE_|DM4PR12MB7551:EE_
-X-MS-Office365-Filtering-Correlation-Id: bcdbfcab-ac89-4e05-59d2-08ded61cadfd
+X-MS-TrafficTypeDiagnostic: OS9P286MB7222:EE_|OS7P286MB7274:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1874d940-64db-47d3-90ae-08ded6298449
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|366016|7416014|376014|23010399003|56012099006|22082099003|18002099003|4143699003|11063799006|6133799003;
+	BCL:0;ARA:13230040|7416014|1800799024|23010399003|10070799003|376014|366016|22082099003|6133799003|56012099006|18002099003;
 X-Microsoft-Antispam-Message-Info:
-	xUj0Wbi7enOgdR8SfgVuT5C73lXoevgkzScl9VL1vsj0miycsDySQxzOAN6+yVwlaeVhGLKqkIayPxmq1HCPnZhRw9vOk0gDDPPvKfEOz0ZESjcbEs2cEZs+hdnh1i6oSi+6AXAZTLt3IC4T0HDKPuXI4C5I7J7/sY1eAn9xAt7rXgSTZZtq7IPZUawDx5rf/pGGcPoP0WbHVGYEQxe/34QBIUrEPJTadYzWQ6LUdRd7P4lrz0HdM37EY6/SdwgCz4BT+XqhdE8Xk9yIbGKKoq9a1mR4/qDOHqdpxghkHsLKvAh4kMHvncz1akgnhR38twHjIjyWGz5BLMeX/aVmnb5qxlyvFDm78GZ7ImdEZeL53JW1o8KwzX4mNIZF/c3zaupiC5x4htPFwOTc43ztfGKot0S5JrSyb+dQR2v9OK2EHhkGUjCPmyGfWXm1r/2C6x6zAcOukC0FS4O0eeOKmRwDGrRxFVgXiQh+QbqyhEvF7FpPwf8Bysr1zlerwRkHyc/66RHdmHSD7dIUzmBBKD6QiONcCzV3YPuK0oklR2Fm4kKr5Sg5ELEzaT6wKluIZ5441stoCvpJiPxZec3UMiuJ9lNzczUR+PvqcWFEAE1eEnXBbjPwCJpX38bIlBAIjfH6Py1HcGoT1a14UjGCntdei7oGEa5zchpvlGderDM=
+	sClA3/thNtpqFJ95R04gieT/0g5QVeB1vlfj0R5TM9VLvT45C9LExkmuBouApXH9dDKtJhOVXV0/aDckYpdCpsOPNnSejZGevNuAehdEnv+PsnAsik7AhSAa9lWT3phaEGoLyF+OzGTzDAwT4ZpDQp90L/sCIni/BesqmfaLsKHl+8v1Knu7lwvnOdaQPheH8hp1H5GNCO2k7TiIpOQERE8nIrAyF1NOOoTHbtyUgOcOx5vTXI3tBf3hAJhzSXKfKXYmsfaA1hSR/0eUcTKjprUpmDYkeDxdaSqwuPChjbms2K9aanT2O/4RsN+1W47C+MTbA4F0M96qORqpF0v2USrVzEDsjiObCEdwAZgjLclIPO+XMppTqvkR+6S4xWHXtj43waGc9RJzuWkyebnVCJFSuZi4c5BJu+TZgHvGh6UgM9XZnnZWXiDyRKq1h1uoQym2FnhVMnHLd6rGMFP1blEOJHBA4tikeeKVfU4KylzCOTELGvJf3rcxs5oyt+KIYFUYafr95CousdpOgO3alqtcHrJGF5uhn2/f3wni3bfxc+uDcLZkKnMfGB2juoZEdQsa237MxbNAPTDwbsTgr8camO4ckXhLDGFBQJWCGQ5V6sl4v9j9hY5zAMQSqoyvdzqbKjVskk3U83vPFm3tMNzUOqKJ9MNxFXCjj0jmorI=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PR12MB8374.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(7416014)(376014)(23010399003)(56012099006)(22082099003)(18002099003)(4143699003)(11063799006)(6133799003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(7416014)(1800799024)(23010399003)(10070799003)(376014)(366016)(22082099003)(6133799003)(56012099006)(18002099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?Q2FSYUZmZVN3Q25LK0llMFRzY2EwNkZRQ1lMWjdiT3U1Q1RoU2c5NUZuNjJC?=
- =?utf-8?B?VWllTW01dWZFZ1NVVFhDQXVXT0ZZdXBNLytTc3RySWlibWREOGJsYkNNKzMx?=
- =?utf-8?B?MC9DekxkRnAybzNZVVhlZldFYWlhRW1JYnpSWFRHR1NsOGh5T2tqNmY1MStZ?=
- =?utf-8?B?ZHptdS81RGorTFB0dldWZkNvSlRYTEtPay94UkZTVnF6eFNOZjJRUVB1WHVX?=
- =?utf-8?B?clNneWFrVlNiTU1zRXBBOEVHSGpGVkdUM2hoNElUcElOVUdlQ0wvbHZjNXRH?=
- =?utf-8?B?TlRGenUxUHAvUENnMUIxc3pucGVpMHJWODBwVjcxRmRER3BYVnBSdGljSjlu?=
- =?utf-8?B?MXN5SUJrVjNvVGxzYkMxRlFlbU00QTRURnJNUmJCK1pWVmxla2d3RHpWaFpz?=
- =?utf-8?B?SHgvcnFtZUdTK2hMMFRDR0lJRFEvYnRFSnBReTF4SXBFZ1lwMUJyOU1xVzd2?=
- =?utf-8?B?ZWJBMmwwUC9KRFZQRkJwaFV1RHJlTG1iOC83TWRZRlcrRUxjSVk1RHdTZ2h1?=
- =?utf-8?B?bGUvS1RFcUdLaC95YW5PenVLOXFPUVM2MThSMUkvQWx2MEprZHNHTS9tNmRF?=
- =?utf-8?B?RElqcFZlUGpudlJNVUZPZHBXNWdzNGEremdlWkJzZG5YbjVrTWJ4Tld4bHlK?=
- =?utf-8?B?eVF5aEswK2poLzFUVmtmQ0JtNG5vbzBNZTNtYjRaVWIxcmxrMjVHTEorUzZY?=
- =?utf-8?B?Q3Y2aThOTzIxdTVrbGVwZ044L1Z1NkNaNXgrSXUvbFBDak4yYXhOT3RTTXFN?=
- =?utf-8?B?SnpkS3EyTkk1TC8yOFBTNVlBMkVsZ21YZzlObDcrS1ZPSG1KYVNnZDVCYWV6?=
- =?utf-8?B?cnByMVVwWVU5MExBTEpFcGxmRGlWOHowYS81QU1IaElqL0hZZU9zclZxR0VV?=
- =?utf-8?B?UWNyWTFnLzFRbCswSWVnNzNDL08yQS8rZU4yVnZMQm9pVDQrdzEvZEttQUp0?=
- =?utf-8?B?b0VvQm5vUHUwTzJTVDU4dHFaY1Jkc1RBakNxK3VZdVZzd2hVTnZ5Um9XWDIv?=
- =?utf-8?B?cFc0d0F4dzM2c3NaMEZRajBRTkF4MW9wQ1gzbTVnNm1aSlNaVE5YS295dUxH?=
- =?utf-8?B?NzRnMjA5MXRCcVBIVURVd0VqWHkvaVg3dUtwR0Evc0Y5RUUvWjEzS3hzTWNj?=
- =?utf-8?B?Qm9DSXRqTzh1QzdkQ2s3OW1wNlRTZUx0cUFpUkhoc1FpOEpCZS9RdkRvaTk3?=
- =?utf-8?B?aTd4THNCZUlpY2VBU2c1SGVzYzBvd2R0dForRWZzUnMyMzdYUkljTHU1aktK?=
- =?utf-8?B?OXBKTmV2NUNpeGZjaTc5ODhLM2JMaEJaM054UUF6RTdHTndTbDY2RHZxRy9i?=
- =?utf-8?B?M1NiNGRZQUZOWnVJYXRtcW96STVNbHhScndhZmtLVWlud0FCdnRBMjhENTRN?=
- =?utf-8?B?cmpsb25CS2JaNU9WY2pPNDdPNXJmaTVOVlIrWGJxcmgzMERuRDZzdmhRZGRU?=
- =?utf-8?B?UVN2RlRqSzhVN1BLMTM3R3JDWGpOWWVBUFRFNGV6dDRuZCtoSjM0K0s5UG9W?=
- =?utf-8?B?Z2FybXh3enRDcUxPUGNHWjYvMVdiaHpVQlFyenRReFprVXhhQWNsZU81OFd0?=
- =?utf-8?B?OW5XRXlEZ20wYlBLWlZsYmFobDBJVXNSeExVMmM5eTgwTGcyQ20zZ0lWcWJ4?=
- =?utf-8?B?V0d1OG1STXJ6T2U5eThmS1AxTElCK2lZK2lCcWZ3OFJpZmtldndsTDFPRVMz?=
- =?utf-8?B?TVk4STNTU0V5MDFMV0xhOFRTbkxhQWJXdFpEYWxtZTdyWVUyK0FpQkpXYnhN?=
- =?utf-8?B?SXgvMi8zUEtYRTFNWmdTMU90cUVTNGhrZjBZcGNlYVBHSytsOVlJcndSdjU0?=
- =?utf-8?B?YXFrU1ZZakRMeGJUVGdvekhQeFl0ZVNINGFkTjZRbSt1bUorTzI3cDgvaFNP?=
- =?utf-8?B?QmJuakREYjN5bllIMVIzeWd0ZCtza2NwS0lESzNNZkdhamJYRXhMNzRaVGNh?=
- =?utf-8?B?c25kMko0VlRqTXdJT1JCOHBOK1N5ejV4bm54MkQvRW5YcHRnMVpPOWtSaHpL?=
- =?utf-8?B?QldRbGZxZHUwRGlNaUF5MnNvaXFNeWlhV29aRUcyQWRKZG8wVXRjbHR6anZu?=
- =?utf-8?B?c04wV3Y4RHBTU3M5QkFVVXRYVlllZG40eEZlVWJ4UmtSdEs4eDhsMEx0d2ky?=
- =?utf-8?B?NmdKTzVUWlduS0VDODcvakRvaURQMllyQys3OFl6Q04wVmR0VWxMdzNJSnEw?=
- =?utf-8?B?K2xXQ0k1SnV3Z2NaaUFIbk1PUGI2ZTkrOFV6NVBaNURNMnJRNUIyTDZoaXF3?=
- =?utf-8?B?aytMQ0tLdENFU1Y2ZUZ4OUw4TTlGcFJFR25MaFhTWkNsME03SFIrYzFKcVph?=
- =?utf-8?Q?+t2YN/oXnRlwZEOT5Y?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bcdbfcab-ac89-4e05-59d2-08ded61cadfd
-X-MS-Exchange-CrossTenant-AuthSource: IA0PR12MB8374.namprd12.prod.outlook.com
+	=?us-ascii?Q?pM7+pUXgM9sOgSCd5ZgIYER1dT7io2ndlCEwE053Q0MDs1UlUvyMlYR6K626?=
+ =?us-ascii?Q?aoqJC0uCcj9wzIr6u8i9RwmHzsZFxKjWik0yjZmiLxtw+bNzmK8+eZAjDhpE?=
+ =?us-ascii?Q?Q7953/IsoZVNII2PN8mtsQluF3z1P4A7IJEGZIfDOKuGGYV9qcu0Fiu3I23L?=
+ =?us-ascii?Q?rNJ7fpuqN2Z418VuxlCO8XUNGaSJA+nMesyBe+dth7vZ2NBxfSQH6p3YNi7M?=
+ =?us-ascii?Q?JUBQgBjI7/RcSB7XXY0R/d0VEfv1OStJyvpb1M9m9f3P8fKeCZ1/Ko//04U+?=
+ =?us-ascii?Q?OAQqok6UOl8SRS5qIOew/7HJI7Ut1mwhQPmfcaIaJvzxYmuCek+UyJXXMvIB?=
+ =?us-ascii?Q?T0pdxE+lCz1Wnr772SYZV3Z27zbZHTvBzpUJ3kJ48cCg8je7h2y5zWpW0qsd?=
+ =?us-ascii?Q?o15TWnGZRyyqGYR0/TVgrh2gnOOvTVQVnSkW+FkjDe2GgSABdFbfOIC8YzDn?=
+ =?us-ascii?Q?QPonV2iqNpUp8cTWfzaeh6+SqZOuRJLXtXpPu9uuYJBGzPO8cwyAEDroO1Yx?=
+ =?us-ascii?Q?/VpKsrQ4AFa27a6/9w5q/2QJTD7Es0uJKi2DbZAphpWzY+P8SvJbe8kFgERq?=
+ =?us-ascii?Q?Dx3Mo1am+Cx+kz0Z38oOQTHhviuxJqWSv8v2kybSDsNiMrIjy3AlG2h7gCzv?=
+ =?us-ascii?Q?QuIh28kWMDRXPLyxmRTyNH4HDbNvENKLAAJKjjyl/3C+YaWmjENNcHzsW/V7?=
+ =?us-ascii?Q?ut+5ohUZ/guQSStJnEsyUC9779vFGF53NakpgfZaVDWCyubksJN01t6kGvCs?=
+ =?us-ascii?Q?jo8T4VSxyD9W+/jMin6PrsDwTegd7LdSoJk6j43ib97+6B+sBSmlCcYtS2QD?=
+ =?us-ascii?Q?gIwdy6ivdFr6qA0vMhx/eYkfCbTDqCfJm57m1QTqL5WBFYhoHLCd5YO6o3Pk?=
+ =?us-ascii?Q?OeVuab/y98cID1DnTpEQCUHAC6BWfTrvkt7tfd7eMq45t0bFPKQEwk+2qjVQ?=
+ =?us-ascii?Q?kqe9T58ut+QOsow1FE5trbi+Ca7pQ+OulH0v92HSojupes/ts9EhSiWNgDpu?=
+ =?us-ascii?Q?554HbXzau/4q805MGb0hznRfwl5jm2DaRAkvOkEpj7MKy1tCH45rhuKmBuLN?=
+ =?us-ascii?Q?TW4T0oXQ1cQ3HvL4U5xYO+uuQhsHlzWJUpKMkb8T+goTszcuacXTtSyZ/a/A?=
+ =?us-ascii?Q?Q712/FE3I/rvy8pVkk3dIN/zBxj8QJsvJ4kgZxvRBt6j6l2g7U2BcdUy0zeY?=
+ =?us-ascii?Q?4wtaCHptJ0g7Ib9+6ufdSJ7pn4yRINKsZt4NFAwMfXJHxwgcHuyMQHg7G3DF?=
+ =?us-ascii?Q?d8q958Syb/OgjtYnkIjboFdOaRtWVcNq3nIYM4K/kjLQvzvn30lveArGVubE?=
+ =?us-ascii?Q?tdk13a8VXSzG8nvwr6QmpzsL+ZCpGzYOLhbinKBgnj3Ikk/zqgA3I6C3wVqi?=
+ =?us-ascii?Q?Xe5GIkInKL3Wcp4mHG2xVuFWTZxX5yoyIFKpXzdDgHTZYh3ZeDRsypJerVmR?=
+ =?us-ascii?Q?5RcE5gFgJ3tGaRl4VL3Fc6dDdkTAnZyrj62ST0y2E4vazb6tm20oJfIQw0ig?=
+ =?us-ascii?Q?69r+rFmhsznxKeLIYfU+UGV2Hn67J682mWL282CD5cSBWkjxREuwrKEc8V2n?=
+ =?us-ascii?Q?UJS6Ygt5ED9IBMf/2dln1TBkdz0ICOe15bcJAiDdtlULsJq5X5mceFFYvsH+?=
+ =?us-ascii?Q?pG9XIyxLqd7ztJ2RYclqwbBhix1jrnu/W7K6oV6LhKdeywGF8P/DdoNw5gKn?=
+ =?us-ascii?Q?Nc9DuzxSfilYw16XdhNGi72mTELfZ0pDHDKV8p9S6HSvW6+/jRG/gPAdjmRm?=
+ =?us-ascii?Q?s1/2aW9BN/XxxG6B/4g8HKMKAzaGwD/uaBMnIoO0FgWpDVtJ0csTDxjw1gry?=
+X-MS-Exchange-AntiSpam-MessageData-1: v3aJ1IZsn/Kxyw==
+X-OriginatorOrg: valinux.co.jp
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1874d940-64db-47d3-90ae-08ded6298449
+X-MS-Exchange-CrossTenant-AuthSource: OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jun 2026 20:26:20.1258
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jun 2026 21:58:13.5274
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ZeOF9AEynETVEVXKwzskEDGmMEHuAC1VcI7guFM1cBS66AuhSMQ4skmiFHWDXKMV
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7551
-X-purgate-ID: tlsNG-c201ff/1782764795-0E9102B8-6DA169BB/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: MKWsFgH8X+XTD180MEgB2nFGjUwLtfJfaNzt1ajpwynaPRycje8H7KkyhpAXayYytLeSjsRee7gxWzvh1He1Vw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS7P286MB7274
+X-purgate-ID: tlsNG-bad1c0/1782770303-45922986-245F55E0/0/0
 X-purgate-type: clean
-X-purgate-size: 3790
+X-purgate-size: 8467
 
-On Mon Jun 29, 2026 at 3:25 PM EDT, Lorenzo Stoakes wrote:
-> These test whether the VMA has stack sematics, i.e. is able to grow upwar=
-ds
-> or downwards depending on the architecture.
->
-> In order to account for arches which do not support upward-growing stacks=
-,
-> introduce VMA_GROWSUP whose definition depends on the architecture
-> supporting it, and use vma_flags_test_single_mask() in vma_flags_can_grow=
-()
-> to account for this.
->
-> Update the VMA userland tests to reflect the changes
->
-> No functional change intended.
->
-> Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
-> ---
->  include/linux/mm.h              | 21 ++++++++++++++++++---
->  tools/testing/vma/include/dup.h |  4 ++++
->  2 files changed, 22 insertions(+), 3 deletions(-)
->
-> diff --git a/include/linux/mm.h b/include/linux/mm.h
-> index 868b2334bff3..cf7df1569052 100644
-> --- a/include/linux/mm.h
-> +++ b/include/linux/mm.h
-> @@ -472,6 +472,7 @@ enum {
->  #define VM_SAO		INIT_VM_FLAG(SAO)
->  #elif defined(CONFIG_PARISC)
->  #define VM_GROWSUP	INIT_VM_FLAG(GROWSUP)
-> +#define VMA_GROWSUP	mk_vma_flags(VMA_GROWSUP_BIT)
->  #elif defined(CONFIG_SPARC64)
->  #define VM_SPARC_ADI	INIT_VM_FLAG(SPARC_ADI)
->  #define VM_ARCH_CLEAR	INIT_VM_FLAG(ARCH_CLEAR)
-> @@ -483,6 +484,7 @@ enum {
->  #endif
->  #ifndef VM_GROWSUP
->  #define VM_GROWSUP	VM_NONE
-> +#define VMA_GROWSUP	EMPTY_VMA_FLAGS
->  #endif
->  #ifdef CONFIG_ARM64_MTE
->  #define VM_MTE		INIT_VM_FLAG(MTE)
-> @@ -1563,11 +1565,24 @@ static inline bool vma_is_initial_stack(const str=
-uct vm_area_struct *vma)
->  		vma->vm_end >=3D vma->vm_mm->start_stack;
->  }
-> =20
-> -static inline bool vma_is_temporary_stack(const struct vm_area_struct *v=
-ma)
-> +static inline bool vma_flags_can_grow(const vma_flags_t *flags)
->  {
-> -	int maybe_stack =3D vma->vm_flags & (VM_GROWSDOWN | VM_GROWSUP);
-> +	if (vma_flags_test_single_mask(flags, VMA_GROWSUP))
-> +		return true;
-> +	if (vma_flags_test(flags, VMA_GROWSDOWN_BIT))
-> +		return true;
-> +
-> +	return false;
-> +}
-> =20
-> -	if (!maybe_stack)
-> +static inline bool vma_can_grow(const struct vm_area_struct *vma)
-> +{
-> +	return vma_flags_can_grow(&vma->flags);
+Make CPU topology information available to the Xen scheduler.
+Additionally, ensure that this topology information is displayed
+when executing the 'xl info -n' command.
 
-Would it save vma_flags_can_grow() if we do below?
+Signed-off-by: Hirokazu Takahashi <taka@valinux.co.jp>
+---
+ xen/arch/arm/include/asm/processor.h   |  4 --
+ xen/arch/arm/smpboot.c                 | 23 ++++++++----
+ xen/arch/ppc/include/asm/processor.h   |  4 --
+ xen/arch/riscv/include/asm/processor.h |  4 --
+ xen/common/device-tree/cpu-topology.c  | 51 ++++++++++++++++++++++++++
+ xen/common/sched/credit2.c             |  3 ++
+ xen/common/sysctl.c                    |  1 +
+ xen/drivers/acpi/topology.c            |  3 ++
+ xen/include/xen/cpu-topology.h         | 15 ++++++++
+ 9 files changed, 89 insertions(+), 19 deletions(-)
 
-return vma_test(vma, VMA_GROWSDOWN_BIT) || vma_test_single_mask(vma, VMA_GR=
-OWSUP);
-
-I find these two functions when I am reading mm.h.
-
-> +}
-> +
-> +static inline bool vma_is_temporary_stack(const struct vm_area_struct *v=
-ma)
-> +{
-> +	if (!vma_can_grow(vma))
->  		return false;
-> =20
->  	if ((vma->vm_flags & VM_STACK_INCOMPLETE_SETUP) =3D=3D
-> diff --git a/tools/testing/vma/include/dup.h b/tools/testing/vma/include/=
-dup.h
-> index 5d7d0afd7765..6f5bcd7fbcd8 100644
-> --- a/tools/testing/vma/include/dup.h
-> +++ b/tools/testing/vma/include/dup.h
-> @@ -245,8 +245,10 @@ enum {
->  #define VM_STACK	INIT_VM_FLAG(STACK)
->  #ifdef CONFIG_STACK_GROWS_UP
->  #define VM_STACK_EARLY	INIT_VM_FLAG(STACK_EARLY)
-> +#define VMA_STACK_EARLY mk_vma_flags(VMA_STACK_EARLY_BIT)
->  #else
->  #define VM_STACK_EARLY	VM_NONE
-> +#define VMA_STACK_EARLY EMPTY_VMA_FLAGS
->  #endif
->  #ifdef CONFIG_ARCH_HAS_PKEYS
->  #define VM_PKEY_SHIFT ((__force int)VMA_HIGH_ARCH_0_BIT)
-> @@ -315,6 +317,8 @@ enum {
-> =20
->  /* Bits set in the VMA until the stack is in its final location */
->  #define VM_STACK_INCOMPLETE_SETUP (VM_RAND_READ | VM_SEQ_READ | VM_STACK=
-_EARLY)
-> +#define VMA_STACK_INCOMPLETE_SETUP append_vma_flags(		\
-> +	VMA_STACK_EARLY, VMA_RAND_READ_BIT, VMA_SEQ_READ_BIT)
-> =20
->  #define TASK_EXEC_BIT ((current->personality & READ_IMPLIES_EXEC) ? \
->  		       VM_EXEC_BIT : VM_READ_BIT)
-
-Why are VMA_STACK_EARLY and VMA_STACK_INCOMPLETE_SETUP added here but
-not in mm.h?
-
-
---=20
-Best Regards,
-Yan, Zi
+diff --git a/xen/arch/arm/include/asm/processor.h b/xen/arch/arm/include/asm/processor.h
+index a3753c317f..41fa73cfc4 100644
+--- a/xen/arch/arm/include/asm/processor.h
++++ b/xen/arch/arm/include/asm/processor.h
+@@ -613,10 +613,6 @@ void show_stack(const struct cpu_user_regs *regs);
+ 
+ #define cpu_relax() barrier() /* Could yield? */
+ 
+-/* All a bit UP for the moment */
+-#define cpu_to_core(_cpu)   (0)
+-#define cpu_to_socket(_cpu) (0)
+-
+ struct vcpu;
+ void vcpu_regs_hyp_to_user(const struct vcpu *vcpu,
+                            struct vcpu_guest_core_regs *regs);
+diff --git a/xen/arch/arm/smpboot.c b/xen/arch/arm/smpboot.c
+index 3a77f1d33e..41cef34194 100644
+--- a/xen/arch/arm/smpboot.c
++++ b/xen/arch/arm/smpboot.c
+@@ -91,13 +91,22 @@ static int setup_cpu_sibling_map(int cpu)
+          !zalloc_cpumask_var(&per_cpu(cpu_core_mask, cpu)) )
+         return -ENOMEM;
+ 
+-    /*
+-     * Currently we assume there is no multithread and NUMA, so
+-     * a CPU is a sibling with itself, and the all possible CPUs
+-     * are supposed to belong to the same socket (NUMA node).
+-     */
+-    cpumask_set_cpu(cpu, per_cpu(cpu_sibling_mask, cpu));
+-    cpumask_copy(per_cpu(cpu_core_mask, cpu), &cpu_possible_map);
++    if ( cpu_topology )
++    {
++        cpumask_copy(per_cpu(cpu_sibling_mask, cpu),
++                     cpu_topology[cpu].thread_sibling);
++        cpumask_copy(per_cpu(cpu_core_mask, cpu),
++                     cpu_topology[cpu].core_sibling);
++    }
++    else
++    {
++        /*
++         * If CONFIG_CPU_TOPOLOGY is disabled, it is assumed that
++         * all CPUs reside in the same socket and that SMT is not used.
++         */
++        cpumask_set_cpu(cpu, per_cpu(cpu_sibling_mask, cpu));
++        cpumask_copy(per_cpu(cpu_core_mask, cpu), &cpu_possible_map);
++    }
+ 
+     return 0;
+ }
+diff --git a/xen/arch/ppc/include/asm/processor.h b/xen/arch/ppc/include/asm/processor.h
+index 242346cab9..1bf6f6c66c 100644
+--- a/xen/arch/ppc/include/asm/processor.h
++++ b/xen/arch/ppc/include/asm/processor.h
+@@ -141,10 +141,6 @@
+ /* Macro to adjust thread priority for hardware multithreading */
+ #define HMT_very_low()  asm volatile ( "or %r31, %r31, %r31" )
+ 
+-/* TODO: This isn't correct */
+-#define cpu_to_core(cpu)   (0)
+-#define cpu_to_socket(cpu) (0)
+-
+ /*
+  * User-accessible registers: most of these need to be saved/restored
+  * for every nested Xen invocation.
+diff --git a/xen/arch/riscv/include/asm/processor.h b/xen/arch/riscv/include/asm/processor.h
+index 6b89df4a2d..d478ffb76b 100644
+--- a/xen/arch/riscv/include/asm/processor.h
++++ b/xen/arch/riscv/include/asm/processor.h
+@@ -54,10 +54,6 @@ struct cpu_user_regs
+     unsigned long pregs;
+ };
+ 
+-/* TODO: need to implement */
+-#define cpu_to_core(cpu)   0
+-#define cpu_to_socket(cpu) 0
+-
+ static inline void cpu_relax(void)
+ {
+ #ifdef __riscv_zihintpause
+diff --git a/xen/common/device-tree/cpu-topology.c b/xen/common/device-tree/cpu-topology.c
+index 0409e7b87d..8d502087dd 100644
+--- a/xen/common/device-tree/cpu-topology.c
++++ b/xen/common/device-tree/cpu-topology.c
+@@ -327,6 +327,55 @@ int __init parse_dt_topology(void)
+     return parse_socket(map);
+ }
+ 
++static void __init setup_cpu_topology_ids(void)
++{
++    unsigned int cpu;
++    unsigned int next_core_id = 0;
++    unsigned int next_cluster_id = 0;
++    unsigned int next_socket_id = 0;
++
++    for_each_possible_cpu(cpu)
++    {
++        unsigned int first_cpu;
++        struct cpu_topology *topo = &cpu_topology[cpu];
++
++        first_cpu = cpumask_first(topo->thread_sibling);
++        if ( first_cpu == cpu )
++        {
++            topo->phys_core_id = next_core_id;
++            next_core_id++;
++        }
++        else
++            topo->phys_core_id = cpu_topology[first_cpu].phys_core_id;
++
++        /* Reuse the calculated core id if clustering is not supported */
++        if ( cpumask_empty(topo->cluster_sibling) )
++            topo->phys_cluster_id = topo->phys_core_id;
++        else
++        {
++            first_cpu = cpumask_first(topo->cluster_sibling);
++            if ( first_cpu == cpu )
++            {
++                topo->phys_cluster_id = next_cluster_id;
++                next_cluster_id++;
++            }
++            else
++                topo->phys_cluster_id = cpu_topology[first_cpu].phys_cluster_id;
++        }
++
++        first_cpu = cpumask_first(topo->core_sibling);
++        if ( first_cpu == cpu )
++        {
++            topo->phys_socket_id = next_socket_id;
++            next_socket_id++;
++        }
++        else
++            topo->phys_socket_id = cpu_topology[first_cpu].phys_socket_id;
++
++        topo->num_siblings = cpumask_weight(topo->thread_sibling);
++    }
++}
++
+ void __init dt_init_cpu_topology(void)
+ {
+     unsigned int cpu;
+@@ -339,6 +388,8 @@ void __init dt_init_cpu_topology(void)
+ 
+     for_each_possible_cpu(cpu)
+         setup_siblings_masks(cpu);
++
++    setup_cpu_topology_ids();
+ }
+ 
+ /*
+diff --git a/xen/common/sched/credit2.c b/xen/common/sched/credit2.c
+index 77475ee363..6ecc19cc4d 100644
+--- a/xen/common/sched/credit2.c
++++ b/xen/common/sched/credit2.c
+@@ -9,6 +9,7 @@
+  * Based on an earlier verson by Emmanuel Ackaouy.
+  */
+ 
++#include <xen/cpu-topology.h>
+ #include <xen/errno.h>
+ #include <xen/init.h>
+ #include <xen/lib.h>
+@@ -37,6 +38,8 @@ static unsigned int cpu_nr_siblings(unsigned int cpu)
+ {
+ #ifdef CONFIG_X86
+     return cpu_data[cpu].x86_num_siblings;
++#elif defined(CONFIG_CPU_TOPOLOGY)
++    return cpu_topology ? cpu_topology[cpu].num_siblings : 1;
+ #else
+     return 1;
+ #endif
+diff --git a/xen/common/sysctl.c b/xen/common/sysctl.c
+index 5207664252..81a68fe24c 100644
+--- a/xen/common/sysctl.c
++++ b/xen/common/sysctl.c
+@@ -28,6 +28,7 @@
+ #include <xen/pmstat.h>
+ #include <xen/livepatch.h>
+ #include <xen/coverage.h>
++#include <xen/cpu-topology.h>
+ 
+ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
+ {
+diff --git a/xen/drivers/acpi/topology.c b/xen/drivers/acpi/topology.c
+index 6bd2d96ebb..9155edc0be 100644
+--- a/xen/drivers/acpi/topology.c
++++ b/xen/drivers/acpi/topology.c
+@@ -22,6 +22,9 @@ void __init acpi_init_cpu_topology(void)
+     {
+         struct cpu_topology *topo = &cpu_topology[cpu];
+ 
++        topo->phys_core_id = cpu;
++        topo->num_siblings = 1;
++
+         cpumask_set_cpu(cpu, topo->thread_sibling);
+         cpumask_copy(topo->core_sibling, &cpu_possible_map);
+     }
+diff --git a/xen/include/xen/cpu-topology.h b/xen/include/xen/cpu-topology.h
+index 698d148def..1cd73b7ee9 100644
+--- a/xen/include/xen/cpu-topology.h
++++ b/xen/include/xen/cpu-topology.h
+@@ -9,6 +9,10 @@ struct cpu_topology {
+     cpumask_var_t thread_sibling;
+     cpumask_var_t core_sibling;
+     cpumask_var_t cluster_sibling;
++    unsigned int phys_core_id;
++    unsigned int phys_cluster_id;
++    unsigned int phys_socket_id;
++    unsigned int num_siblings;
+ };
+ 
+ #ifdef CONFIG_CPU_TOPOLOGY
+@@ -16,11 +20,22 @@ struct cpu_topology {
+ extern struct cpu_topology *cpu_topology;
+ void init_cpu_topology(void);
+ 
++#define cpu_to_core(cpu) (cpu_topology ? cpu_topology[cpu].phys_core_id : 0)
++#define cpu_to_socket(cpu) (cpu_topology ? cpu_topology[cpu].phys_socket_id : 0)
++
+ #else /* CONFIG_CPU_TOPOLOGY */
+ 
+ #define cpu_topology ((struct cpu_topology *)NULL)
+ static inline void init_cpu_topology(void) {}
+ 
++#ifndef cpu_to_core
++#define cpu_to_core(cpu)   (0)
++#endif
++
++#ifndef cpu_to_socket
++#define cpu_to_socket(cpu) (0)
++#endif
++
+ #endif /* CONFIG_CPU_TOPOLOGY */
+ 
+ #endif /* XEN_CPU_TOPOLOGY_H */
+-- 
+2.43.0
 
 
