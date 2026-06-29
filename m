@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FA90C43458
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2026 18:59:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1348008.1605885 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 994ECC43602
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2026 18:59:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1348012.1605908 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1weHCH-0002Fn-Il; Mon, 29 Jun 2026 18:59:09 +0000
+	id 1weHCL-0002xw-DA; Mon, 29 Jun 2026 18:59:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1348008.1605885; Mon, 29 Jun 2026 18:59:09 +0000
+Received: by outflank-mailman (output) from mailman id 1348012.1605908; Mon, 29 Jun 2026 18:59:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1weHCH-0002DR-Da; Mon, 29 Jun 2026 18:59:09 +0000
-Received: by outflank-mailman (input) for mailman id 1348008;
- Mon, 29 Jun 2026 18:59:08 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1weHCL-0002xY-5J; Mon, 29 Jun 2026 18:59:13 +0000
+Received: by outflank-mailman (input) for mailman id 1348012;
+ Mon, 29 Jun 2026 18:59:11 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <vishal.moola@gmail.com>) id 1weHCG-00027G-GH
- for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 18:59:08 +0000
+ (envelope-from <vishal.moola@gmail.com>) id 1weHCJ-0002gX-Ox
+ for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 18:59:11 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1weHCF-00DrOt-Te
- for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 20:59:07 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1weHCJ-005gAN-5s
+ for xen-devel@lists.xenproject.org; Mon, 29 Jun 2026 20:59:11 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <vishal.moola@gmail.com>)
- id 6a42c064-2eae-0a2a0a5409dd-0a2a4504d80a-42
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 20:59:07 +0200
-Received: from [209.85.215.182] (helo=mail-pg1-f182.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a42c068-e002-0a2a0a5209dd-0a2a450cac46-28
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 20:59:11 +0200
+Received: from [209.85.210.172] (helo=mail-pf1-f172.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <vishal.moola@gmail.com>)
- id 6a42c07a-a01d-0a2a45040019-d155d7b6a576-3
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 20:59:07 +0200
-Received: by mail-pg1-f182.google.com with SMTP id
- 41be03b00d2f7-c9a20f70263so484803a12.1
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 11:59:07 -0700 (PDT)
+ id 6a42c07d-f399-0a2a450c0019-d155d2acb837-3
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 20:59:10 +0200
+Received: by mail-pf1-f172.google.com with SMTP id
+ d2e1a72fcca58-845b733e82cso2323170b3a.2
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 11:59:10 -0700 (PDT)
 Received: from fedora.hsd1.ca.comcast.net
  ([2601:644:937c:6c90:6d4e:7b2d:4a39:fb0c])
  by smtp.googlemail.com with ESMTPSA id
- d2e1a72fcca58-8479ff8f959sm223955b3a.3.2026.06.29.11.59.04
+ d2e1a72fcca58-8479ff8f959sm223955b3a.3.2026.06.29.11.59.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jun 2026 11:59:05 -0700 (PDT)
+ Mon, 29 Jun 2026 11:59:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,41 +56,41 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782759546; x=1783364346; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1782759549; x=1783364349; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=7ipb9zy/CMdSBlv5dLzabanXHjYoiCYD2Nb/oCjfyVU=;
-        b=B2sTvS1bbxb6bDtZTa2BZ3RNJOt2XT+OniwT3oRYMf+Yt+5EcNH/paJjReI7GtfHn7
-         kkUllaTe0z7rwrLk4Kxj3FgGMxdBwzUC2JX02nr/zXFpUZWTskZKlN5PUypFHtzDLfcc
-         xLqIiVhQN6B9hd/h/AGB3hEBq/tCWOUszQbZoscrmlU2/l/CW4psy9fH2gE6mKYn91c7
-         SSqedC41/p6upxJIPTnW3dhk6rA3aOPbRbjBRZzfcJlrj/kPiOHe+g1qsYc6iG+6qOus
-         62/8jO5gCbSQ1RzPcFHK4J/3moaOSa64c7OJEjYKMX1pEqZJvNEVEAhtBsvLZC/BtvLZ
-         ZTFw==
+        bh=lzFzFTeSRsUwmgBU8TSW+xSkFmk/uW2c+RWIXDiDEHM=;
+        b=Hqs6jjtjoifccjkwMslbGWG5RhYBbwXX1cwkm7i1Vp97gRUuS1Q/GL63VM3CoJe7BR
+         V6JYyVZ+GoZVKcJFGEWrnnRiIe35xutBQ8426cBDNrV8l/yJA6+YX9ih0hw8cYZI9b90
+         uaehQlElOwwFZyZr5F73sKbOVFWdRnutdLEnPbKAeQcQfX/YuEzbFF4on9HeA5JIh7UP
+         Kxaje+AzwBUr3KOdUj5nKESuv5KZcbS8si9dOeads7s8D0GFcelfy7S45afHzjtGxGk3
+         7Tt/9srjOa6GoWvpozcqT+n4PyAqJUhPs7X3orhjfdYAYXSTE8n3DFbo4yxRfqRy76el
+         S4UQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782759546; x=1783364346;
+        d=1e100.net; s=20251104; t=1782759549; x=1783364349;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=7ipb9zy/CMdSBlv5dLzabanXHjYoiCYD2Nb/oCjfyVU=;
-        b=L3a3Hb8sSPdGoOD1BUUwbg2BbBzWQow8mVafRoKi4Yme0Q3pl8SIJ49dQQAtjR8Xso
-         U1HcDIRHX2lpWB0qEVIa6ulrQhdO50FD1NBFzUPsVhJqVguzolPXrPybu+r+7VJFmWhm
-         qMhDB/BAER6QJ57Tigq/cekqPlllsgmeDOvOHoakkYGSj39zoQkfzaQihe6aUCcrpD5h
-         jFOAlvBH4nbtrIupM1MAEGUA070hv/r5mja0H/tcRPfL0E9UGhD7xYgHWOMqaKJGBWvg
-         SlTfw0v4xdy2dSBTLrtCEQnAeThbiHJmjRTjiJf87K601dgp8BgkNBB9mPKEhKDsLl9D
-         CdRw==
-X-Forwarded-Encrypted: i=1; AHgh+RpFVpGJJ1Yxw9NKOBeLCTqjk85vwT5SL6d5NqvyjevzShdknzHQnftbH1++Rx+Q0BqZy+u6G5T/dvU=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyMnq32nMNrxtSRinrCCIn05WvifsluTaYUjmha6WgVBSpaoy7w
-	9AvfqlTl0i2u3bv4Gkl4+BBnAtqmxIfecL6cDOnslZwHrkj6I/lxWrdA
-X-Gm-Gg: AfdE7cnAZrUAsXXDEbdzOjm6L3rNWKeF5dDqqEptA/v5yPKad5rBXocAW/dIhPwCXVb
-	ps21tJAa4iS/NCmZ2ls1YLjSHi51a3snr1v0Y01Bz6yN89k5g+aJicW40k0cI1a5lUMe01/ErS4
-	2sSMAH3T9SmhGgRuknDJUfZSnHqOhzXfTn7eeIu4xfjwAUQV/HQu8xUf2mkJQ6aaSSh7grsjQU6
-	694swE/+FKSj7kVWh1DTavrMT2xbbeRZXfm9AtDJjXBbee3NMDJmCtpA/ssF3tkYwVX3Z7E82py
-	0/extGgRTmdlRuj0EL7VvCCwcRuFz7ZiiNgOnawgvlqIjqLXIOHQVxjQ70GTIktScI5SQ0M/Edd
-	Kvwfm0BvmnAeKm5ZbGDnTPTI/zVknFJvs4+IrPPts6BO+9NIA+ytQRY0qzoi0af8CyPBqbYxH4k
-	E9aByj+xAOXfcK6bqcymml4byZOAnU+qNMy4GYVhrKCQGNo8nu0FH8zFz9rOnp59Nu2Si8+Rg=
-X-Received: by 2002:a05:6a00:9081:b0:847:9223:9726 with SMTP id d2e1a72fcca58-8479fe56b4emr318904b3a.18.1782759545854;
-        Mon, 29 Jun 2026 11:59:05 -0700 (PDT)
+        bh=lzFzFTeSRsUwmgBU8TSW+xSkFmk/uW2c+RWIXDiDEHM=;
+        b=Eq4aDtXxDdYTC0UFH4290zcniCtDGoNx5rtXXJy+J/vs8eSWePMl/EmrA2zjxJtI/W
+         W56NWxs9/bZ1w0mT6QQGzT3ZZP/PlFboIqkR1iNPCGyG7JyDu08IrFE5b+BMbhB1Ja9N
+         viJQ8NxDi46P104o6Y/yIm2E506SIJh6BzRmcnf+cVk4F9hp1ygkuqAGfBLq6efTaMsx
+         UXo36EbredzCmaDLu0HpbOEEX9mdDiThKhgyrKvGcdc9ZnJkr2EyNwl3mWfNyyE4+Cgq
+         FMketPKqCs/hS/YafoapxYUsLq3ngM1JKvWDVxDjYJFT2Uug/GF1D5ElQ9sz+GWWbj/X
+         Qg7A==
+X-Forwarded-Encrypted: i=1; AFNElJ+P4kEemlotZg5Ciuo4Fu/u8KRXXB6jNkjJHPSS48OwkUQZDS9M83BwCI/brbp0+b5ir0Xk6Mp2oYs=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yzu+jRdzbaHtsj7DBFSF7yycTKnMhm/rVlqyZbJF6SKXAOmB/Bm
+	z0wCPFm0N6kzuu7AAORqW5nbHFk0kzAnxtxG+/4MVJx4oXSm1C+JtHlR
+X-Gm-Gg: AfdE7ckT8M05V+kxSCm+0VYmr1fwyV4WnhTpA5BBdhTU9hX52njw/+jdRaXERLolqYJ
+	9Fgl8OCKjwd6utZpidBr1jv+OJYFdGGigS3XQFyXEdlmhpVjYAQJLg/cpp1Vg82cNdqboJOB3uu
+	ifVV71Lc6cL7XD4aiuehJFQNtq/eVoc6w7gmJPoutRYhU0SntKDcnvBZK+9YBa01n7kUhAK7V6g
+	YacBPrGbr8eCO/SE/PqhWZKyJ4ROffNkedepF5mp1GD/m+i7H1Y1jMAB7Lk5jD2n0rgQa1ozCfg
+	NcNclTq+seoalV/CmKMxvPRb0IP9wntRkaeWiji2yvcIT6v9O0SFsVwMXzpbMhunTHnwLaD51dP
+	nm66g/U40kkRNbyFqgyyudbrUpWBZuHeXxpzxvLkNgqat62cU+7ssifghu7a6cNoUsjJHy9tPP9
+	4oKi5frkJBaVKphWQ1ovBnuT46P7TrFKUZKrof+ehef/kBWxNNjUO3MFE94wsUVBU6vfLxC8c=
+X-Received: by 2002:a05:6a00:c8a:b0:842:688f:3089 with SMTP id d2e1a72fcca58-8479f1c5ec7mr506886b3a.30.1782759549114;
+        Mon, 29 Jun 2026 11:59:09 -0700 (PDT)
 From: Vishal Moola <vishal.moola@gmail.com>
 To: Dave Hansen <dave.hansen@intel.com>,
 	linux-mm@kvack.org,
@@ -109,113 +109,57 @@ Cc: Mike Rapoport <rppt@kernel.org>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Vishal Moola <vishal.moola@gmail.com>,
 	William Kucharski <william.kucharski@linux.dev>
-Subject: [PATCH v2 7/9] x86/mm: Convert pgd_page_get_mm() to ptdescs
-Date: Mon, 29 Jun 2026 11:57:40 -0700
-Message-ID: <20260629185742.126987-8-vishal.moola@gmail.com>
+Subject: [PATCH v2 9/9] x86/xen: Convert xen_mm_unpin_all() to ptdescs
+Date: Mon, 29 Jun 2026 11:57:42 -0700
+Message-ID: <20260629185742.126987-10-vishal.moola@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260629185742.126987-1-vishal.moola@gmail.com>
 References: <20260629185742.126987-1-vishal.moola@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1782759547-AE7291CC-2FCEADF0/0/0
+X-purgate-ID: tlsNG-d25034/1782759551-0D128D51-CF4105BB/0/0
 X-purgate-type: clean
-X-purgate-size: 3730
+X-purgate-size: 1409
 
-Convert pgd_page_get_mm() to ptdescs. Define struct ptdesc in our
-pgtable_types so that our declarations recognize ptdesc as an
-appropriate page table type.
-
-Now that all callers are using ptdescs, we can pass in that
-ptdesc to get the underlying mm_struct.
+Convert xen_mm_unpin_all() to ptdescs in preparation for the eventual
+splitting of ptdescs from struct page. Continue checking PagePinned
+through the underlying page as we do not have a per-memdesc api yet.
 
 Acked-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
 Reviewed-by: William Kucharski <william.kucharski@linux.dev>
+Reviewed-by: Juergen Gross <jgross@suse.com>
 Signed-off-by: Vishal Moola <vishal.moola@gmail.com>
 ---
- arch/x86/include/asm/pgtable.h       | 2 +-
- arch/x86/include/asm/pgtable_types.h | 2 +-
- arch/x86/mm/fault.c                  | 2 +-
- arch/x86/mm/init_64.c                | 4 ++--
- arch/x86/mm/pgtable.c                | 4 ++--
- 5 files changed, 7 insertions(+), 7 deletions(-)
+ arch/x86/xen/mmu_pv.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/arch/x86/include/asm/pgtable.h b/arch/x86/include/asm/pgtable.h
-index ac295ca6c92f..dd046f29ec31 100644
---- a/arch/x86/include/asm/pgtable.h
-+++ b/arch/x86/include/asm/pgtable.h
-@@ -50,7 +50,7 @@ void ptdump_walk_user_pgd_level_checkwx(void);
- extern spinlock_t pgd_lock;
- extern struct list_head pgd_list;
- 
--extern struct mm_struct *pgd_page_get_mm(struct page *page);
-+struct mm_struct *pgd_page_get_mm(struct ptdesc *pt);
- 
- extern pmdval_t early_pmd_flags;
- 
-diff --git a/arch/x86/include/asm/pgtable_types.h b/arch/x86/include/asm/pgtable_types.h
-index 2ec250ba467e..95c7f453db17 100644
---- a/arch/x86/include/asm/pgtable_types.h
-+++ b/arch/x86/include/asm/pgtable_types.h
-@@ -512,7 +512,7 @@ static inline pgprot_t pgprot_large_2_4k(pgprot_t pgprot)
- 	return __pgprot(protval_large_2_4k(pgprot_val(pgprot)));
- }
- 
--
-+struct ptdesc;
- typedef struct page *pgtable_t;
- 
- extern pteval_t __supported_pte_mask;
-diff --git a/arch/x86/mm/fault.c b/arch/x86/mm/fault.c
-index c31ffeac0714..aa88370ce739 100644
---- a/arch/x86/mm/fault.c
-+++ b/arch/x86/mm/fault.c
-@@ -282,7 +282,7 @@ void arch_sync_kernel_mappings(unsigned long start, unsigned long end)
- 			spinlock_t *pgt_lock;
- 
- 			/* the pgt_lock only for Xen */
--			pgt_lock = &pgd_page_get_mm(ptdesc_page(ptdesc))->page_table_lock;
-+			pgt_lock = &pgd_page_get_mm(ptdesc)->page_table_lock;
- 
- 			spin_lock(pgt_lock);
- 			vmalloc_sync_one(ptdesc_address(ptdesc), addr);
-diff --git a/arch/x86/mm/init_64.c b/arch/x86/mm/init_64.c
-index a6ccb83f2d26..a49be75dd713 100644
---- a/arch/x86/mm/init_64.c
-+++ b/arch/x86/mm/init_64.c
-@@ -152,7 +152,7 @@ static void sync_global_pgds_l5(unsigned long start, unsigned long end)
- 
- 			pgd = (pgd_t *)ptdesc_address(ptdesc) + pgd_index(addr);
- 			/* the pgt_lock only for Xen */
--			pgt_lock = &pgd_page_get_mm(ptdesc_page(ptdesc))->page_table_lock;
-+			pgt_lock = &pgd_page_get_mm(ptdesc)->page_table_lock;
- 			spin_lock(pgt_lock);
- 
- 			if (!pgd_none(*pgd_ref) && !pgd_none(*pgd))
-@@ -195,7 +195,7 @@ static void sync_global_pgds_l4(unsigned long start, unsigned long end)
- 			pgd = (pgd_t *)ptdesc_address(ptdesc) + pgd_index(addr);
- 			p4d = p4d_offset(pgd, addr);
- 			/* the pgt_lock only for Xen */
--			pgt_lock = &pgd_page_get_mm(ptdesc_page(ptdesc))->page_table_lock;
-+			pgt_lock = &pgd_page_get_mm(ptdesc)->page_table_lock;
- 			spin_lock(pgt_lock);
- 
- 			if (!p4d_none(*p4d_ref) && !p4d_none(*p4d))
-diff --git a/arch/x86/mm/pgtable.c b/arch/x86/mm/pgtable.c
-index f32facdb3035..cb03f5a2b243 100644
---- a/arch/x86/mm/pgtable.c
-+++ b/arch/x86/mm/pgtable.c
-@@ -74,9 +74,9 @@ static void pgd_set_mm(pgd_t *pgd, struct mm_struct *mm)
- 	virt_to_ptdesc(pgd)->pt_mm = mm;
- }
- 
--struct mm_struct *pgd_page_get_mm(struct page *page)
-+struct mm_struct *pgd_page_get_mm(struct ptdesc *pt)
+diff --git a/arch/x86/xen/mmu_pv.c b/arch/x86/xen/mmu_pv.c
+index 7b23a34db8ff..6ff5a7130e53 100644
+--- a/arch/x86/xen/mmu_pv.c
++++ b/arch/x86/xen/mmu_pv.c
+@@ -947,16 +947,16 @@ static void xen_pgd_unpin(struct mm_struct *mm)
+  */
+ void xen_mm_unpin_all(void)
  {
--	return page_ptdesc(page)->pt_mm;
-+	return pt->pt_mm;
- }
+-	struct page *page;
++	struct ptdesc *ptdesc;
  
- static void pgd_ctor(struct mm_struct *mm, pgd_t *pgd)
+ 	spin_lock(&init_mm.page_table_lock);
+ 	spin_lock(&pgd_lock);
+ 
+-	list_for_each_entry(page, &pgd_list, lru) {
+-		if (PageSavePinned(page)) {
+-			BUG_ON(!PagePinned(page));
+-			__xen_pgd_unpin(&init_mm, (pgd_t *)page_address(page));
+-			ClearPageSavePinned(page);
++	list_for_each_entry(ptdesc, &pgd_list, pt_list) {
++		if (PageSavePinned(ptdesc_page(ptdesc))) {
++			BUG_ON(!PagePinned(ptdesc_page(ptdesc)));
++			__xen_pgd_unpin(&init_mm, (pgd_t *)ptdesc_address(ptdesc));
++			ClearPageSavePinned(ptdesc_page(ptdesc));
+ 		}
+ 	}
+ 
 -- 
 2.54.0
 
