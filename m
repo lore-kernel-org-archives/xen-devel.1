@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94575C43458
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Jun 2026 14:49:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1349070.1606890 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A65FC43458
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Jun 2026 15:02:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1349082.1606900 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1weZm8-0008DW-6w; Tue, 30 Jun 2026 14:49:24 +0000
+	id 1weZyl-0002ka-9o; Tue, 30 Jun 2026 15:02:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1349070.1606890; Tue, 30 Jun 2026 14:49:24 +0000
+Received: by outflank-mailman (output) from mailman id 1349082.1606900; Tue, 30 Jun 2026 15:02:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1weZm8-0008DP-4T; Tue, 30 Jun 2026 14:49:24 +0000
-Received: by outflank-mailman (input) for mailman id 1349070;
- Tue, 30 Jun 2026 14:49:23 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1weZm7-0008DJ-H7
- for xen-devel@lists.xenproject.org; Tue, 30 Jun 2026 14:49:23 +0000
+	id 1weZyl-0002kT-6g; Tue, 30 Jun 2026 15:02:27 +0000
+Received: by outflank-mailman (input) for mailman id 1349082;
+ Tue, 30 Jun 2026 15:02:26 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1weZyk-0002kN-1k
+ for xen-devel@lists.xenproject.org; Tue, 30 Jun 2026 15:02:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1weZm6-000KPm-70
- for xen-devel@lists.xenproject.org; Tue, 30 Jun 2026 16:49:22 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1weZyi-0008PV-OT
+ for xen-devel@lists.xenproject.org; Tue, 30 Jun 2026 17:02:24 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a43d75d-bab6-0a2a0a5309dd-0a2a4501b97e-44
- for <xen-devel@lists.xenproject.org>; Tue, 30 Jun 2026 16:49:22 +0200
-Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a43d771-400f-0a2a45010019-d155dd2fb057-3
- for <xen-devel@lists.xenproject.org>; Tue, 30 Jun 2026 16:49:21 +0200
-Received: by mail-wr1-f47.google.com with SMTP id
- ffacd0b85a97d-472326ca506so1571028f8f.2
- for <xen-devel@lists.xenproject.org>; Tue, 30 Jun 2026 07:49:21 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-476792758aasm607901f8f.11.2026.06.30.07.49.20
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a43da79-bab6-0a2a0a5309dd-0a2a450b9788-20
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Jun 2026 17:02:24 +0200
+Received: from [209.85.208.53] (helo=mail-ed1-f53.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a43da80-ac48-0a2a450b0019-d155d035dd50-3
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Jun 2026 17:02:24 +0200
+Received: by mail-ed1-f53.google.com with SMTP id
+ 4fb4d7f45d1cf-697de23bd7dso6662642a12.1
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Jun 2026 08:02:24 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-148-111.play-internet.pl.
+ [109.243.148.111]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6987c93cbf8sm1409445a12.17.2026.06.30.08.02.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Jun 2026 07:49:20 -0700 (PDT)
+ Tue, 30 Jun 2026 08:02:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,177 +52,227 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1782830961; x=1783435761; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=Ey2j6UqKa8bGiQo4bse+7U35xJTwoCVEV8Tt7RglG68=;
-        b=CrZcTdhCgnrtByBydy1twJ/W38LlyxPUGeMSynWS3Jr9N3QZUVxoqRrH2XaJYPcIrj
-         lt8RviEJBtCfkuUc0vyYKZu80ILxQUICZDyTV7OvPQi60lsTYO2wniFABcDbFT987LNU
-         a2+okcAL2mWAkYdqPc0rwGpz6i70zoCnzrARJ+P3MSSRZYX99EO6QJBU7BKMGd+DnTm2
-         by6PmuG6PhYR6t4ggv/TAMyqbd0fqWxZZNoj0mvIkd8YYrF4XkKrOlYQ4jpW21hqtu71
-         6lgHmUzxz5XwI12Y0D07dLTp3vObxUMXzXyPnEpJakW5Ekpuy86eZMC1lwDr7GyvWJ9x
-         zPVA==
+        d=gmail.com; s=20251104; t=1782831744; x=1783436544; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=VNOl9B9oWCKTnZ8/Bn3weNo3vlLLQEPDaOkyOhiaC3k=;
+        b=qpeSIKLwNmynkPDf1WWOBsxFqukOvXy41hIe0rHp10Vd/xe6bTqhMKz510/cIJTK8m
+         mC0Px5oVbYka3qaKyCGW2zmeOzwVD9dbK3lQ9GsGf21U1nWn1f86I3wq0AVwZBvBGKLg
+         kyyMNEQNBLAk5/1lgX2tlaSk5xZ3+/4xyN2fegAH3g2T8OVxSnUgL5e2QfwislchChFt
+         VAZhWhXMHXkETfgsASP/WGmJZQR7Xsl5tl1BellLyelSXIIhEXVHt1acIgD+RJCeiFnm
+         VotKZ+fE8FtUyNhXow85z8MIfdbA7K0l8o3IhRVqmxPzmNOsp+TXEHlsoNV/1MQoFjJN
+         jlOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782830961; x=1783435761;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Ey2j6UqKa8bGiQo4bse+7U35xJTwoCVEV8Tt7RglG68=;
-        b=KHvyEreBQKr/nhoOhUKeQsR+mFRdAqp/8KpqUSjQHZ4o3F6dwln0yrYpVZ62jjrHZu
-         l4PvuMcVSEWp0JW2G1F2q2bGp1EHXnNjfz0OwPk+4LORfjPYhaK3GdNZsN739dTxXmi+
-         9PeYiKDBdYaPNuCN8LqGHykN1jo8QNJpUIzzK60ObUJAize5DKPxMdbD/3uhZIDlskXY
-         Vp66+QgXFYw4iENqrLvlbPnlFJuAkFnhY7P9cYGSa33TlO6mHI15/25TOCrlCUc/MgOh
-         riBk/P+1N/jFSskSPryu3ILgxIVBZsZryzzztJ0ASKygUDxMdNgk9m7V5JKwBQ/y48LW
-         5w5Q==
-X-Forwarded-Encrypted: i=1; AHgh+RqJmbyCbrobL+mc0wXpUAap+cKTKog0ravtkXKEqsG7vgfYQpOmh7Z94uiOf70A2nJGg++XmmA0c94=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yyxe0D9oc7FS1M6ucO73zaUcsVBvSi2XVmPHYI4+iZoUcHrRMun
-	MXz0PLkRByTqSwtuA5LEvonFXMCTEuWjz1xzxXgfdKpnS0UuIypd41Y4vmTT2QXFSw==
-X-Gm-Gg: AfdE7cm+Zyh4BeCEaHgZ7p8pblJFWtlnclkuRD+IEvEkc6/SYUpos4FDWlGWn3d1Cfr
-	gAZgN4ycnW3zSU7MgZYRzMxgOdGAOObJH0PfpKqLZ+F/c+KBXT57NgIlPjLHOdUXb+LCGQpKQFV
-	bQJxDzkvG+ETkdKj7z8Cn8IqJYR/rZBEuVkDV+X9GXotPydtKUFtIamrWCtksO0BrD9UjKRr0UL
-	ORbKf1jq3ccWxwRUbHzFyCjc8dXVYCN3ZDbfArXrBaNcC/76s4X3SR/+8LdESZplm05J7Bdwnl6
-	8gPq8jjYeMkHm7BF4mS2AwWpQ1ZX8Syxfk/N+F2zLJOD1+T4b5z6/sXcdsnfi52OfhcbF/bF2Re
-	RPzM1cSKkG2P9TtPA0b0Dp720JYxtFQNK99Dc9fzYXqoPN7KjQ1kNIXggLtfLwDJGEFdjrXlMad
-	5Mf9bwuUHXaMPknduVt1yQHFLALIAS4H8Ab14oFh/uSHglKgoY6QgrqmNcirFNCH6RYGP/6hxiY
-	ksb
-X-Received: by 2002:adf:fb11:0:b0:460:3233:beef with SMTP id ffacd0b85a97d-47553ca1fd1mr4370403f8f.43.1782830961190;
-        Tue, 30 Jun 2026 07:49:21 -0700 (PDT)
-Message-ID: <e8fe20b3-4c12-45a3-b5b4-c20d485339cd@suse.com>
-Date: Tue, 30 Jun 2026 16:49:19 +0200
+        d=1e100.net; s=20251104; t=1782831744; x=1783436544;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=VNOl9B9oWCKTnZ8/Bn3weNo3vlLLQEPDaOkyOhiaC3k=;
+        b=AChu8l0Gx4GiALBpbSy2HN54zYvAh0dxFn3Az3cKQ1n+njx9f7iCcVjCpzNOQd8oJ1
+         NiODdMcYEb4KNmMGSUW0jqd+V8dvQ8DJLzWLrbuwoveO+uppULvbaP01tBK7h00vOAY2
+         WIDQqn8NFpEpdA7JPpCWheI/xmRGv+dPnD97phMdcL9lr0ZwGPhUup5POGwlDVUxgr5c
+         xEUl8luzVh5JvUVPcI4R7XvOluevGJ+wQNdIwfGP5iFf4LuQd8Ojt5rjGvR9LROaRZpD
+         IM6hiUMWZLxFpiYOgwpJ2EcqZQzF4o4nx3Ph4y4PHGChwYoYzVR97Hf15WpbviPT1qbK
+         4WAw==
+X-Forwarded-Encrypted: i=1; AHgh+RqfrucN6m77TIkUeW/6TUWFRVmZ7BhV+yjRIn8vtgadlvjxAwE3ZSeerIguDr5QKyX8uhTzlbJKRXY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yxj0Ids7haz1wL7HFjM8EEGWo2MiUCbrY9F6gsJzHbmtRfvnOO8
+	Os8km3ouEyV67p3SP9v6Q2zuQeg2KDB+rY+ONhWFZXtT/DonjjoQQFEP
+X-Gm-Gg: AfdE7cmAZbFFVWnDEU8KO5aUUFh3UXBVqQT00BS+N3wenNTMNTAdX+0xodOx1GYxZRU
+	oMdq3FPN8umrpNURiUKS4LRa8E0REsI7HN9judC8pMCcqhOwDPkpUiqo6/3iljhOns0WOnKwRXK
+	NaD2iUbfM6M42GLMeIJrzvYR7wYmobTMTyHig1ZuPkb/KV6Jjy8H1qkqq6rRxtOcxK46pO1ADa5
+	m0acuFMFa9tw3Mo0gXq149TdDxrSQCH+5clTsfM+fvEYr68J5IaKEUP3vhj+I7pteHQhWFGeNs5
+	AdrubLe9T29u6o2/Z/Slc22qGwh6uLec5WGC2goMPwYfTENAib92/F0QbPnbq5znsDn3JxiB+pX
+	G5bpPsTA9aJcnIW2YG2rztQI4CPM8fDEIZDVBlnoLimGoAp0nIWNhUqSeWVkZMRvfA7dVg8KbHx
+	jnAVALtQqG1LxH3EkE1junzgosQPOrc+UtH8Jmvf/RcmUop/yQF6Yv4KrdqFDTCUGGqpU=
+X-Received: by 2002:a05:6402:348a:b0:695:572a:7abb with SMTP id 4fb4d7f45d1cf-69879e267e5mr1878855a12.22.1782831742186;
+        Tue, 30 Jun 2026 08:02:22 -0700 (PDT)
+Message-ID: <0e2a8eab-366f-4384-a467-43f051d047ec@gmail.com>
+Date: Tue, 30 Jun 2026 17:02:21 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 17/18] pci: Drop parse_pci_split{_seg}()
-To: Teddy Astie <teddy.astie@vates.tech>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1782747421.git.teddy.astie@vates.tech>
- <1782753823.8631fc262581453bbf619ec5b2062170.19f14688af5000701b@vates.tech>
+Subject: Re: [PATCH v4] xen: introduce CONFIG_HAS_SHARED_INFO for archs
+ without a shared page
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>, xen-devel@lists.xenproject.org
+References: <775c88457e5ec7fc7889002c6f9829669f9bce97.1782388193.git.oleksii.kurochko@gmail.com>
+ <5d344cec-bb97-4d3b-87ff-e7175772fd45@suse.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1782753823.8631fc262581453bbf619ec5b2062170.19f14688af5000701b@vates.tech>
-Content-Type: text/plain; charset=UTF-8
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <5d344cec-bb97-4d3b-87ff-e7175772fd45@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1782830961-834CA1E0-6448C4E4/0/0
-X-purgate-type: clean
-X-purgate-size: 3009
+X-purgate-ID: tlsNG-42698a/1782831744-4074F220-86A99756/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 6383
 
-On 29.06.2026 19:21, Teddy Astie wrote:
-> No user of these functions remain, collapse all the logic into the
-> recently introduced pci_sbdf_t variants.
+
+
+On 6/29/26 4:26 PM, Jan Beulich wrote:
+> On 25.06.2026 18:02, Oleksii Kurochko wrote:
+>> On architectures that run guests in dom0less mode without the PV ABI
+>> (currently RISC-V), no shared_info page is allocated and d->shared_info
+>> remains NULL throughout the domain lifetime.  Several places in common
+>> code access d->shared_info through the shared_info() macro or directly,
+>> causing UBSAN null-pointer errors on such architectures.
+>>
+>> Rather than adding runtime NULL guards that are logically unreachable
+>> on x86 and Arm (where shared_info is always allocated), introduce a new
+>> Kconfig symbol CONFIG_HAS_SHARED_INFO selected by x86 and Arm.
+>>
+>> On !HAS_SHARED_INFO the shared_info() macro expands to a dereference
+>> of a pointer returned by shared_info_absent(), which is declared but
+>> intentionally never defined.
 > 
-> Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
+> This looks to need updating.
 
-In order to see whether the style issues introduced in patch 08 actually help
-here keeping the diff small, I looked at this patch first. Hence a question
-and a few nits here right away:
+I will update it to:
 
-> --- a/xen/drivers/pci/pci.c
-> +++ b/xen/drivers/pci/pci.c
-> @@ -151,18 +151,7 @@ void pci_intx(const struct pci_dev *pdev, bool enable)
->      pci_conf_write16(pdev->sbdf, PCI_COMMAND, cmd);
->  }
->  
-> -const char *__init parse_pci_split(const char *s, unsigned int *seg_p,
-> -                             unsigned int *bus_p, unsigned int *dev_p,
-> -                             unsigned int *func_p)
-> -{
-> -    bool def_seg;
-> -
-> -    return parse_pci_seg(s, seg_p, bus_p, dev_p, func_p, &def_seg);
-> -}
-> -
-> -const char *__init parse_pci_split_seg(const char *s, unsigned int *seg_p,
-> -                                 unsigned int *bus_p, unsigned int *dev_p,
-> -                                 unsigned int *func_p, bool *def_seg)
-> +const char *__init parse_pci_seg(const char *s, pci_sbdf_t *sbdf, bool *def_seg)
->  {
->      unsigned long seg = simple_strtoul(s, &s, 16), bus, dev, func = 0;
->  
-> @@ -180,39 +169,21 @@ const char *__init parse_pci_split_seg(const char *s, unsigned int *seg_p,
->          *def_seg = true;
->      }
->  
-> -    if ( func_p && *s == '.' )
-> +    if ( *s == '.' )
->          func = simple_strtoul(s + 1, &s, 0);
+On !HAS_SHARED_INFO the shared_info() macro expands to a dereference of 
+shared_info_absent, an extern pointer that is declared but intentionally 
+never defined.
 
-And the function part being optional goes away entirely silently?
+> 
+>>   Any use of shared_info() that is not
+>> dead-code-eliminated will therefore cause a link-time failure, making
+>> missed guards impossible to overlook.
+>>
+>> The 2L event-channel ops call shared_info() and must not be compiled on
+>> architectures without a shared_info page, so event_2l.o is gated on
+>> CONFIG_HAS_SHARED_INFO.  On such architectures evtchn_init() installs
+>> the FIFO ops as a placeholder instead; evtchn_fifo_word_from_port() is
+>> guarded against uninitialised d->evtchn_fifo so the FIFO ops are safe
+>> before evtchn_fifo_init_control() is called by the guest.
+>>
+>> With CONFIG_HAS_SHARED_INFO=n all vCPUs fall back to the global
+>> dummy_vcpu_info, so writes through vcpu_info() could leak data between
+>> vCPUs. Reviewing the write paths in common code: the write in
+>> map_guest_area() stores the constant ~0 so nothing serious would happen
+>> if it were leaked; the event_2l.c paths are unreachable because the
+>> preceding shared_info() call would trap first;
+> 
+> Why "trap"? You can't build an image that way, can you?
 
-> -    if ( seg != (seg_p ? (u16)seg : 0) ||
-> +    if ( seg != (u16)seg ||
+"trap" was shorthand for the link-time failure.
 
-Nit: uint16_t please when you touch this line anyway.
+I will changed that part to:
+... leaked; the event_2l.c paths are not compiled on !HAS_SHARED_INFO, 
+as event_2l.o is gated on CONFIG_HAS_SHARED_INFO; ...
 
->           bus != PCI_BUS(PCI_BDF(bus, 0)) ||
->           dev != PCI_SLOT(PCI_DEVFN(dev, 0)) ||
->           func != PCI_FUNC(PCI_DEVFN(0, func)) )
->          return NULL;
->  
-> -    if ( seg_p )
-> -        *seg_p = seg;
-> -    *bus_p = bus;
-> -    *dev_p = dev;
-> -    if ( func_p )
-> -        *func_p = func;
-> -
-> -    return s;
-> -}
-> -
-> -const char *__init parse_pci_sbdf(const char *s, pci_sbdf_t *sbdf)
-> -{
-> -    unsigned int seg, bus, dev, func;
-> -    const char *out = parse_pci(s, &seg, &bus, &dev, &func);
-> -
->      *sbdf = PCI_SBDF(seg, bus, dev, func);
-> -    return out;
-> +    return s;
->  }
+> 
+>> @@ -1624,7 +1626,11 @@ void evtchn_check_pollers(struct domain *d, unsigned int port)
+>>   
+>>   int evtchn_init(struct domain *d, unsigned int max_port)
+>>   {
+>> -    evtchn_2l_init(d);
+>> +    if ( IS_ENABLED(CONFIG_HAS_SHARED_INFO) )
+>> +        evtchn_2l_init(d);
+> 
+> For this to build when !HAS_SHARED_INFO, all you need is a declaration of
+> the function. The compiler will DCE the call. Hence ...
+> 
+>> --- a/xen/common/event_channel.h
+>> +++ b/xen/common/event_channel.h
+>> @@ -44,7 +44,11 @@ static inline void evtchn_port_print_state(struct domain *d,
+>>   
+>>   /* 2-level */
+>>   
+>> +#ifdef CONFIG_HAS_SHARED_INFO
+>>   void evtchn_2l_init(struct domain *d);
+>> +#else
+>> +static inline void evtchn_2l_init(struct domain *d) {}
+>> +#endif
+>>   
+>>   /* FIFO */
+>>   
+> 
+> ... this hunk should be unnecessary?
 
-Nit: Blank line please ahead of a function's main "return", and ...
+Looks like you are right, I will double-check that.
 
-> -const char *__init parse_pci_sbdf_seg(const char *s, pci_sbdf_t *sbdf, bool *def_seg)
-> +const char *__init parse_pci(const char *s, pci_sbdf_t *sbdf)
->  {
-> -    unsigned int seg, bus, dev, func;
-> -    const char *out = parse_pci_seg(s, &seg, &bus, &dev, &func, def_seg);
-> -
-> -    *sbdf = PCI_SBDF(seg, bus, dev, func);
-> -    return out;
-> +    bool def_seg;
-> +    return parse_pci_seg(s, sbdf, &def_seg);
->  }
+> 
+>> @@ -55,6 +59,7 @@ struct evtchn_expand_array;
+>>   int evtchn_fifo_init_control(struct evtchn_init_control *init_control);
+>>   int evtchn_fifo_expand_array(const struct evtchn_expand_array *expand_array);
+>>   void evtchn_fifo_destroy(struct domain *d);
+>> +void evtchn_fifo_init_ops(struct domain *d);
+>>   #else
+>>   static inline int evtchn_fifo_init_control(struct evtchn_init_control *init_control)
+>>   {
+>> @@ -68,6 +73,7 @@ static inline void evtchn_fifo_destroy(struct domain *d)
+>>   {
+>>       return;
+>>   }
+>> +static inline void evtchn_fifo_init_ops(struct domain *d) {}
+>>   #endif /* CONFIG_EVTCHN_FIFO */
+> 
+> Unlike these two. Which raise a different question though: What will be the
+> behavior when EVTCHN_FIFO=n and HAS_SHARED_INFO=n? Taking
+> evtchn_alloc_unbound() as example, afaict evtchn_port_init() will stumble
+> over a NULL pointer. Looks like for that (and only that) case we still need
+> your earlier dummy fallback.
 
-... more generally between declartion(s) and statement(s).
+I will introduce dummy fallback (I will shrunk some stubs in final version):
 
-Jan
++#ifndef CONFIG_HAS_SHARED_INFO
++static void cf_check evtchn_none_set_pending(
++    struct vcpu *v, struct evtchn *evtchn) {}
++static void cf_check evtchn_none_clear_pending(
++    struct domain *d, struct evtchn *evtchn) {}
++static void cf_check evtchn_none_unmask(
++    struct domain *d, struct evtchn *evtchn) {}
++static bool cf_check evtchn_none_is_pending(
++    const struct domain *d, const struct evtchn *evtchn) { return false; }
++static bool cf_check evtchn_none_is_masked(
++    const struct domain *d, const struct evtchn *evtchn) { return true; }
++static void cf_check evtchn_none_print_state(
++    struct domain *d, const struct evtchn *evtchn) {}
++
++static const struct evtchn_port_ops evtchn_port_ops_none = {
++    .set_pending   = evtchn_none_set_pending,
++    .clear_pending = evtchn_none_clear_pending,
++    .unmask        = evtchn_none_unmask,
++    .is_pending    = evtchn_none_is_pending,
++    .is_masked     = evtchn_none_is_masked,
++    .print_state   = evtchn_none_print_state,
++};
++
++static void evtchn_none_init(struct domain *d)
++{
++    d->evtchn_port_ops = &evtchn_port_ops_none;
++}
++#endif
+
+> 
+>> @@ -420,6 +423,11 @@ static const struct evtchn_port_ops evtchn_port_ops_fifo =
+>>       .print_state   = evtchn_fifo_print_state,
+>>   };
+>>   
+>> +void evtchn_fifo_init_ops(struct domain *d)
+>> +{
+>> +    d->evtchn_port_ops = &evtchn_port_ops_fifo;
+>> +}
+> 
+> Isn't this unreachable code when HAS_SHARED_INFO=y, violating Misra rule 2.1?
+I think if we are going to return back to dummy fallback I think that we 
+could drop evtchn_fifo_init_ops() as  d->evtchn_port_ops will be 
+initialized later for FIFO. And then in evtchn_init:
+
+int evtchn_init(struct domain *d, unsigned int max_port)
+{
+     if ( IS_ENABLED(CONFIG_HAS_SHARED_INFO) )
+         evtchn_2l_init(d);
+     else
+         evtchn_none_init(d);
+
+(and I expect evtchn_none_init() will be just dropped by compiler if 
+CONFIG_HAS_SHARED_INFO=y so nothing extra should be done)
+
+Thanks.
+
+~ Oleksii
 
