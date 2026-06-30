@@ -4,40 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84E5EC43458
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Jun 2026 17:22:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1349279.1607149 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23902C43458
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Jun 2026 18:04:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1349340.1607180 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wec9y-0001UG-M9; Tue, 30 Jun 2026 17:22:10 +0000
+	id 1wecoE-0001tH-6K; Tue, 30 Jun 2026 18:03:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1349279.1607149; Tue, 30 Jun 2026 17:22:10 +0000
+Received: by outflank-mailman (output) from mailman id 1349340.1607180; Tue, 30 Jun 2026 18:03:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wec9y-0001Tf-GV; Tue, 30 Jun 2026 17:22:10 +0000
-Received: by outflank-mailman (input) for mailman id 1349279;
- Tue, 30 Jun 2026 17:22:09 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wecoE-0001tA-2j; Tue, 30 Jun 2026 18:03:46 +0000
+Received: by outflank-mailman (input) for mailman id 1349340;
+ Tue, 30 Jun 2026 18:03:45 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mfo@igalia.com>) id 1wec9w-0001R6-Pa
- for xen-devel@lists.xenproject.org; Tue, 30 Jun 2026 17:22:09 +0000
+ (envelope-from <sergii.dmytruk@3mdeb.com>) id 1wecoC-0001t4-62
+ for xen-devel@lists.xenproject.org; Tue, 30 Jun 2026 18:03:45 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wec9v-005HYA-1V
- for xen-devel@lists.xenproject.org; Tue, 30 Jun 2026 19:22:07 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wecoB-008c80-Fl
+ for xen-devel@lists.xenproject.org; Tue, 30 Jun 2026 20:03:43 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <mfo@igalia.com>)
- id 6a43fafe-e002-0a2a0a5209dd-0a2a4504b2be-46
- for <xen-devel@lists.xenproject.org>; Tue, 30 Jun 2026 19:22:06 +0200
-Received: from [213.97.179.56] (helo=fanzine2.igalia.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <mfo@igalia.com>)
- id 6a43fb3d-a01d-0a2a45040019-d561b338dcb4-3
- for <xen-devel@lists.xenproject.org>; Tue, 30 Jun 2026 19:22:06 +0200
-Received: from 186-249-148-121.shared.desktop.com.br ([186.249.148.121]
- helo=[127.0.1.1]) by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1wec9d-007CH3-5x; Tue, 30 Jun 2026 19:21:49 +0200
+ (envelope-from <sergii.dmytruk@3mdeb.com>)
+ id 6a4404f9-e002-0a2a0a5209dd-0a2a450bc79e-4
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Jun 2026 20:03:43 +0200
+Received: from [87.98.172.75] (helo=4.mo560.mail-out.ovh.net)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <sergii.dmytruk@3mdeb.com>)
+ id 6a4404fe-ac48-0a2a450b0019-5762ac4ba4a1-3
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Jun 2026 20:03:43 +0200
+Received: from director3.ghost.mail-out.ovh.net (unknown [10.110.37.17])
+ by mo560.mail-out.ovh.net (Postfix) with ESMTP id 4gqWH236t2z9wDB
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Jun 2026 18:03:42 +0000 (UTC)
+Received: from ghost-submission-7d8d68f679-r7h7k (unknown [10.110.168.247])
+ by director3.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 24BB2C003A;
+ Tue, 30 Jun 2026 18:03:41 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.102])
+ by ghost-submission-7d8d68f679-r7h7k with ESMTPSA
+ id E7TpOPwERGochhsAyNhEQA
+ (envelope-from <sergii.dmytruk@3mdeb.com>); Tue, 30 Jun 2026 18:03:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,117 +55,126 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20170329 header.d=igalia.com header.i="@igalia.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; h=Cc:To:In-Reply-To:References:Message-Id:
-	Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=cbo7APVGgkBxZ4BLzRh6ix97JTDWhDJxr3+WL6IL7Rs=; b=BTkz3qCey4JPMY//jgxOnO/7ot
-	00QsFQ5llkizDf4B9od45FXxTfERTo7ucs2n6EAOLNf4qxJ01XoToOESTo62ghZ7ISObCZ0DiwLa6
-	hlmpblEMqCpofaPwu1Ln2TUD160reIeEx3taO4ndLAaNoQL0tg2M1PEwGgz9LS//F47DCpiBm5SEb
-	dktLMdqMWfuRuSimBgP6dTsdGwnC1M2CQm5Jq7cJzALB6JGwnBNjfrdZ+WEZL5uVingkzrV3tB5ol
-	TqW/5mgh7EEjhGjhGp7ld+cFrBKZpL75CvuxWyr6DcE7DByK8yBeH9XNjO6p6Sg7iXwWnFxfJqQSd
-	6Mf3TBDw==;
-From: Mauricio Faria de Oliveira <mfo@igalia.com>
-Date: Tue, 30 Jun 2026 14:21:46 -0300
-Subject: [PATCH RESEND v5 1/3] x86/asm, x86/boot: expose inline memcmp
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=ovhmo3617313-selector1 header.d=3mdeb.com header.i="@3mdeb.com" header.h=From
+Authentication-Results:garm.ovh; auth=pass (GARM-102R00420e8a2ea-2af1-4ddc-b7e4-401b7d940696,
+                    8153FC81E90989DE28CEFA46AD98A6783E51CAAD) smtp.auth=sergii.dmytruk@3mdeb.com
+X-OVh-ClientIp:176.111.183.249
+Date: Tue, 30 Jun 2026 21:03:33 +0300
+From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	trenchboot-devel@googlegroups.com, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v3 15/22] x86/smpboot.c: TXT AP bringup
+Message-ID: <akQE9VcTsIhqo-Ni@MjU3Nj>
+References: <cover.1748611041.git.sergii.dmytruk@3mdeb.com>
+ <bca9943d4ffb37531ec8facac09e85996bc2acb7.1748611041.git.sergii.dmytruk@3mdeb.com>
+ <e88825f2-2055-4dae-a15f-d0b94cec51c4@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260630-pvh-kasan-inline-v5-1-52afc979be81@igalia.com>
-References: <20260630-pvh-kasan-inline-v5-0-52afc979be81@igalia.com>
-In-Reply-To: <20260630-pvh-kasan-inline-v5-0-52afc979be81@igalia.com>
-To: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, 
- x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
- Juergen Gross <jgross@suse.com>, Alexey Dobriyan <adobriyan@gmail.com>, 
- Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: kernel-dev@igalia.com, linux-kernel@vger.kernel.org, 
- xen-devel@lists.xenproject.org, Mauricio Faria de Oliveira <mfo@igalia.com>
-X-Mailer: b4 0.14.2
-X-purgate-ID: tlsNG-ebf023/1782840126-2D7AE1CC-60FD723E/0/0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <e88825f2-2055-4dae-a15f-d0b94cec51c4@suse.com>
+x-ovh-tracer-id: 359725020621120988
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: dmFkZTEq/3EnavgXUveOny/3E93XBtnu1T9+8pscZ6HCk01XzjIS/Sti7Nvydd9cTp42i/Gltu94j9ZlQClclY9RZvae8R4tuIUv36omhdf/vkk5iXqkFTTyQZKueQ58OxWmXNfi4lG+Z0O+xb6Xpx95jV066OeGCTQwYddqk/a66391NV8Nk9marXSj2WK/453jiFX9HVkMFT8469tFmZGWRYOgaEWt8NVpNfZpzSWJPrc0XPGn3Q8popNoTSWwEtY1rE8cYE725YNqiZm/FUqcMmdkMJRgFvko8zAYVtKyZYEuO+l3Q7N/+o1EQkwM1uKIPQvMyWHrqEtPAmY8OvKiYVGKYnRDr/ha7wE4UajXl2ygoFAOnJfs0IkP0csd/iJiUP/nI/3wJYYvCuc0KvoUd9lVsP9givJnW+QlTpBdaYjuVBk+GepLroqycUvJBY1jdxDl2BfmhQ0DlaRs7heLRr6IYmk8ZcHQ+CAXcnPbYK7X9/jxHYX63T1WVO0lsbmDxHBtqAFYGOYn8wKy+K9lhwAwfifATgauYWOQZ48fwiIWN8mZ3WbmadtRq+r8KNpinUruyvLV7izTLMC3AbnUuO7T0YbbhoJjYrH5JN6ecQNv7JUviIdYGe90L2QRWj3VG/ZzqxfclxX2GRf9Bqgk0GEUlrHW+072Irq0a4sK7viarQ
+DKIM-Signature: a=rsa-sha256; bh=+dxSktRP/4x10ho7TzsjQysJPVrjl8rK8rljbYc7x8o=;
+ c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
+ t=1782842622; v=1;
+ b=XUa1KSj+B/hpbca/8UCbayYIBK5soG7kODtsFpoT8OJWO2h5r+MwNJQc+ZUxZt1ZiwRvdCDm
+ 3Vdqep3QE/IjgSFP+LNCd4K+Tk+YiK4Fu/ET0Ik6ESpbXRa3w+zZiTl0EQrqz9cBJ2j24kfIK11
+ 0/r3tfjuMVY6/SiZA+UpyF41xv/xrA0BBOJkeBmCMmGiS28M8tc1EnQudghejilz12nOgq08Wzc
+ sfW1BI30yZgjGKU94gLPBgAcyz9fVvURKEr5xZZoeAkfjjtsbuXfbaQokQdjq7gEmE4pSpZB+6p
+ tMTDakMBrBsf1o/cztfwP9P2xluNPRs9GGJcFns4fP5ug==
+X-purgate-ID: tlsNG-42698a/1782842623-40B4D220-97E6F476/0/0
 X-purgate-type: clean
-X-purgate-size: 2572
+X-purgate-size: 3547
 
-Move the inline memcmp function currently only available in 'boot/string.c'
-into the shared string function header <asm/shared/string.h> to be reused.
+On Thu, Jan 22, 2026 at 05:41:10PM +0100, Jan Beulich wrote:
+> On 30.05.2025 15:17, Sergii Dmytruk wrote:
+> > @@ -154,6 +164,13 @@ gdt_48:
+> >          .quad   0x00cf93000000ffff /* 0x0018: ring 0 data */
+> >          .quad   0x00009b000000ffff /* 0x0020: real-mode code @ BOOT_TRAMPOLINE */
+> >          .quad   0x000093000000ffff /* 0x0028: real-mode data @ BOOT_TRAMPOLINE */
+> > +        /*
+> > +         * Intel TXT requires these two in exact order. This isn't compatible
+> > +         * with order required by syscall, so we have duplicated entries...
+> > +         * If order ever changes, update selector numbers in asm/intel-txt.h.
+> > +         */
+> > +        .quad   0x00cf9b000000ffff /* 0x0030: ring 0 code, 32-bit mode */
+> > +        .quad   0x00cf93000000ffff /* 0x0038: ring 0 data */
+>
+> Especially since the corresponding #define-s sit ...
+>
+> > --- a/xen/arch/x86/include/asm/intel-txt.h
+> > +++ b/xen/arch/x86/include/asm/intel-txt.h
+> > @@ -91,6 +91,9 @@
+> >
+> >  #define SLAUNCH_BOOTLOADER_MAGIC             0x4c534254
+> >
+> > +#define TXT_AP_BOOT_CS                  0x0030
+> > +#define TXT_AP_BOOT_DS                  0x0038
+>
+> ... entirely elsewhere, I think at least the comments above want to mention
+> these names. (Even better would be to not hard-code these numbers, or to
+> use the numbers to establish the offsets in trampoline_gdt.)
 
-This is not done through <asm/string.h> to avoid pulling unnecessary code
-in 'boot/string.c' that causes build errors in 'boot/compressed/string.c'
-and 'purgatory/purgatory.ro'.
+Will export position of those entries from assembly and compute CS
+selector in C.
 
-Note that the inline memcmp() returns 0/1, not -1/0/1 as regular memcmp()
-(reported by David Laight <david.laight.linux@gmail.com>).
+> > @@ -321,6 +323,29 @@ void asmlinkage start_secondary(void)
+> >      struct cpu_info *info = get_cpu_info();
+> >      unsigned int cpu = smp_processor_id();
+> >
+> > +    if ( ap_boot_method == AP_BOOT_TXT ) {
+>
+> Style nit (also again later): Brace on its own line please.
 
-Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
----
- arch/x86/boot/string.c               |  6 ++----
- arch/x86/include/asm/shared/string.h | 16 ++++++++++++++++
- arch/x86/include/asm/string.h        |  1 +
- 3 files changed, 19 insertions(+), 4 deletions(-)
+Right.
 
-diff --git a/arch/x86/boot/string.c b/arch/x86/boot/string.c
-index ac0f900ebc47efa81c92e1bb2010ea41677899c4..be454a6864225f3a972c3e81826b77ed4e8a57fe 100644
---- a/arch/x86/boot/string.c
-+++ b/arch/x86/boot/string.c
-@@ -15,6 +15,7 @@
- #include <linux/errno.h>
- #include <linux/limits.h>
- #include <asm/asm.h>
-+#include <asm/shared/string.h>
- #include "ctype.h"
- #include "string.h"
- 
-@@ -31,10 +32,7 @@
- 
- int memcmp(const void *s1, const void *s2, size_t len)
- {
--	bool diff;
--	asm("repe cmpsb"
--	    : "=@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len));
--	return diff;
-+	return __inline_memcmp(s1, s2, len);
- }
- 
- /*
-diff --git a/arch/x86/include/asm/shared/string.h b/arch/x86/include/asm/shared/string.h
-new file mode 100644
-index 0000000000000000000000000000000000000000..422952152f533ad75b98f3873297b39c4f5e2477
---- /dev/null
-+++ b/arch/x86/include/asm/shared/string.h
-@@ -0,0 +1,16 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+#ifndef _ASM_X86_SHARED_STRING_H
-+#define _ASM_X86_SHARED_STRING_H
-+
-+/* Note: this memcmp() returns 0/1, not -1/0/1 as regular memcmp(). */
-+static __always_inline int __inline_memcmp(const void *s1, const void *s2, size_t len)
-+{
-+	bool diff;
-+
-+	asm("repe cmpsb"
-+	    : "=@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len));
-+
-+	return diff;
-+}
-+
-+#endif /* _ASM_X86_SHARED_STRING_H */
-diff --git a/arch/x86/include/asm/string.h b/arch/x86/include/asm/string.h
-index 9cb5aae7fba9ffcf0f5af8f939d30467750ccaa9..f0f4fd8227bf992e78c69209efb31f0a9a0cc3b1 100644
---- a/arch/x86/include/asm/string.h
-+++ b/arch/x86/include/asm/string.h
-@@ -7,6 +7,7 @@
- #else
- # include <asm/string_64.h>
- #endif
-+#include <asm/shared/string.h>
- 
- static __always_inline void *__inline_memcpy(void *to, const void *from, size_t len)
- {
+> > +        uint64_t misc_enable;
+> > +        uint32_t my_apicid;
+> > +        struct txt_sinit_mle_data *sinit_mle =
+> > +              txt_sinit_mle_data_start(__va(txt_read(TXTCR_HEAP_BASE)));
+> > +
+> > +        /* TXT released us with MONITOR disabled in IA32_MISC_ENABLE. */
+> > +        rdmsrl(MSR_IA32_MISC_ENABLE, misc_enable);
+> > +        wrmsrl(MSR_IA32_MISC_ENABLE,
+> > +               misc_enable | MSR_IA32_MISC_ENABLE_MONITOR_ENABLE);
+> > +
+> > +        /* get_apic_id() reads from x2APIC if it thinks it is enabled. */
+> > +        x2apic_ap_setup();
+> > +        my_apicid = get_apic_id();
+>
+> Despite the comment putting the call to x2apic_ap_setup() here looks rather
+> arbitrary. Also you do nothing about the other call from smp_callin(). Surely
+> the function better wouldn't be called twice?
 
--- 
-2.47.3
+This code is now called from assembly before start_secondary() and it
+receives APIC ID as an argument, so there is no get_apic_id() or
+x2apic_ap_setup().
 
+> > +        while ( my_apicid != x86_cpu_to_apicid[cpu] ) {
+> > +            asm volatile ("monitor; xor %0,%0; mwait"
+> > +                          :: "a"(__va(sinit_mle->rlp_wakeup_addr)), "c"(0),
+>
+> You alter %0, so it can't be just an input.
+
+`monitor` and `mwait` are now done separately to be able to check
+whether condition is satisfied between them.
+
+> > +                          "d"(0) : "memory");
+> > +            cpu = smp_processor_id();
+>
+> What purpose does this serve?
+>
+> Jan
+
+I think `cpu` wasn't necessarily correct at this point because AP could
+get here before BSP set up its structure.  As above, this is also gone
+in the new version (the old one stopped working after some upstream
+changes related to CPU init).
+
+Regards
 
