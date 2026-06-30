@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B83BC43458
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Jun 2026 06:06:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1348326.1606116 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2776AC43458
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Jun 2026 06:19:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1348334.1606124 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1weRbJ-0004nP-Ko; Tue, 30 Jun 2026 06:05:41 +0000
+	id 1weRoW-0006gV-M9; Tue, 30 Jun 2026 06:19:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1348326.1606116; Tue, 30 Jun 2026 06:05:41 +0000
+Received: by outflank-mailman (output) from mailman id 1348334.1606124; Tue, 30 Jun 2026 06:19:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1weRbJ-0004nG-Fx; Tue, 30 Jun 2026 06:05:41 +0000
-Received: by outflank-mailman (input) for mailman id 1348326;
- Tue, 30 Jun 2026 06:05:40 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1weRoW-0006gO-JX; Tue, 30 Jun 2026 06:19:20 +0000
+Received: by outflank-mailman (input) for mailman id 1348334;
+ Tue, 30 Jun 2026 06:19:19 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1weRbI-0004nA-Rn
- for xen-devel@lists.xenproject.org; Tue, 30 Jun 2026 06:05:40 +0000
+ (envelope-from <jbeulich@suse.com>) id 1weRoV-0006gH-0d
+ for xen-devel@lists.xenproject.org; Tue, 30 Jun 2026 06:19:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1weRbG-00HCAO-7W
- for xen-devel@lists.xenproject.org; Tue, 30 Jun 2026 08:05:38 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1weRoT-00F9TE-BU
+ for xen-devel@lists.xenproject.org; Tue, 30 Jun 2026 08:19:17 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a435c9f-5cb7-0a2a0a5109dd-0a2a4507c434-30
- for <xen-devel@lists.xenproject.org>; Tue, 30 Jun 2026 08:05:34 +0200
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a435fe3-bab6-0a2a0a5309dd-0a2a4509dfd6-2
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Jun 2026 08:19:17 +0200
+Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a435cae-9c8e-0a2a45070019-d1558036bd9b-3
- for <xen-devel@lists.xenproject.org>; Tue, 30 Jun 2026 08:05:34 +0200
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-493bb510ce4so1249135e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 23:05:34 -0700 (PDT)
+ id 6a435fe4-97e6-0a2a45090019-d155dd2dc49e-3
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Jun 2026 08:19:17 +0200
+Received: by mail-wr1-f45.google.com with SMTP id
+ ffacd0b85a97d-4728c12ba97so1602396f8f.0
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2026 23:19:17 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493b8c79baasm43714205e9.7.2026.06.29.23.05.33
+ ffacd0b85a97d-475643cd64bsm5575010f8f.14.2026.06.29.23.19.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 29 Jun 2026 23:05:33 -0700 (PDT)
+ Mon, 29 Jun 2026 23:19:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,57 +55,57 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1782799534; x=1783404334; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1782800356; x=1783405156; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=bxaQgD0vAwt64Up0sv8ZwsySz9w07nkz+lAwYuCowM4=;
-        b=S8pNxbsZjybvxVmMPpCdPVnT/zhGY9ljOBA6Lf4v1ocojfIQHDATFkxBkjrYg1BL2w
-         mv6eQb86/l0eq+B/wYGyfXkMy1kWTy/RjwcOR5XBNB1q3LIqkLXiK/v0NE+hh7T3dkYn
-         cYeSqPCoqA84Dmr/Q8ypGW3jv0VgffBq/8TqPELGa2Rqor5D3QI2XAB5v5DYufDOC7//
-         ZjFP7C/oBKwWidC2GuPXZmdbc2xlNemAT+WToG7ersb5axPsTDM9BVrCCz8xGOIXdQAf
-         vJZ5LTHWpEE0BktksvOiTzE7GBRSMgt7KQjHn4QdEfFWaj1kNvOSjSFcB17RB1HlHUy0
-         97aw==
+        bh=r6KI4HvngP2zRMm0XQShRygyxq6ugGXCmkWg//rK56k=;
+        b=XMid6dXNqBt1v+lSToJ3dflOJY1vgnmwPAPqknc3gq/zqTtMSW+gTL+dQ3lMj1jRen
+         xDf2osrEgdkM4JmmJdPNSTp/W+jXQt+Z9Ql6oFOIU8f96kKI5J3Ims5ZEN8ctMTqmbj0
+         3v5itInwCOtdU32YZysrw7PhcypsufdPjXkzWHce9ukv3NHn3hAvckmcYMKHyNzl/0lV
+         d9umb2u8HVapDgmQ/j0VI7gkcYhOjGuN+plNKe53xglX98xSxsG12AvmF35UwPLWbUlM
+         sy4pfOEzuu4lkzZQUg3HZjDAfhwP6ABA8bQIZ/fzK+yjOPMHCaXqPCNVxrNhtdQPEY5t
+         ymUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782799534; x=1783404334;
+        d=1e100.net; s=20251104; t=1782800356; x=1783405156;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=bxaQgD0vAwt64Up0sv8ZwsySz9w07nkz+lAwYuCowM4=;
-        b=UB0iKDADcQgHYAXCTTehnvqCpcwJANaAaW/Lc7vdCe6drUS4GtXSDI8L+K7sdlK52b
-         fr4iwDX9REr2AtMaNaT+a0S5oCXQtYDl++cAMNPG9U9u1kZ33W0dnfaIzmk6AOfu5fgL
-         J2olqK/AFWPkmlt4QZMoCXhJZ7j1dw3xJnvSMLCSZTuzmZ4M0MxqLijLYeG5T126XLM5
-         0XZstm6AU/KmwFQj1k0whAdFU5PPFS6pjfOFEXk3bRVNB3YI1FBPKtm6kF4Gjlt+TllY
-         FLOPJH/J5Y4LrGx7HguWGuE6beGBQzxu7WA5hzsziTCMN6U0FJDopqbmeMxm493vsDww
-         Dt3g==
-X-Forwarded-Encrypted: i=1; AFNElJ+eORnhhW1ejofh0WfjkviP1XGCaI4slUn8eV8wuecDs+/zlsFCUPfTpdTxKf9KokJ6MNQSSHHQbhk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx0VaicecTAxLgC9XFC7EV3UP9MZGEE4pCLKhoBsKfpRmz4HpFY
-	5UBYLwxlsSC6qRYKyvukvnBmnOftJ8ACaO4snaZslCrRh4EXvB0Bg7+6iNNYgAhq9A==
-X-Gm-Gg: AfdE7clW+jFfSzlbDIGpniNto5LWyrql4x4jSSGZ+Nz3cK/j12IO2yh1E6yiBs1JsHW
-	YyyJaRQyjCthCVCFlzi6XIntim+NBJt57k1QO7xst7wVDHpBsFkapiyok7otQjqfwSofmANAEo+
-	vc/kmrV2f8h6JGFpo0SMQEvgRRzdwFB6ySSW/udhqb4dPyB7B8lIc2Kc3gMdw/o3X3oNroVCOd6
-	UhZgBWho7TO46vj2/cUoqxQp5w9JdUIAS3fc0BxxkkcVPKJC/uhOKoh6JYQZykynbXOCX8nYbPq
-	DqxpzSYOhNkJesZzh5x6UZRJbGEGFJ/DPFRKcGY6ll5FJ99vxKLIM+7IRGnT/z8WvPKBF7Namcu
-	jcA4EM5zzqI0QfyXi6KJKk6L1Vt4oEqBua/Bb2ckIvXadQNrayScw+AXj9dLTZOptUGgta/U5s+
-	9+i4NFROuReaN2ungffzjYYa+41pz9Uoe0Ztl3LLOaGd6/ksABzglVg6zIyXh0CB2WNdT9c8c1B
-	yOEKUDD3YNispE=
-X-Received: by 2002:a05:600d:4441:20b0:493:b915:4a6f with SMTP id 5b1f17b1804b1-493b9154ca1mr17043455e9.8.1782799534035;
-        Mon, 29 Jun 2026 23:05:34 -0700 (PDT)
-Message-ID: <3cb85058-ad02-4233-930a-a397fb67daa9@suse.com>
-Date: Tue, 30 Jun 2026 08:05:32 +0200
+        bh=r6KI4HvngP2zRMm0XQShRygyxq6ugGXCmkWg//rK56k=;
+        b=JKmHBG6Ze3EFMS4Yjp8XXdtrQTmjba4Odvmbz+/9ndH6Wl8ojBU6PWK5GspuDRPBkb
+         Wh0tGDKefX5V2pNN2ZKVZsmfkwjDaxFB2zj6oD/sIeEjimtCImUIH4Il0SzqWhbrONzS
+         15ZvbiefSNoTwGWnVFrsMuhIFYiLp0qKUDuP/9+fisxF1ZUOylhs5jFNapu5kWHYYNeN
+         Sd4gdjWLVoUBwBiY/VZY5Im0pS6uZwSMBO0fgFRekwu3YbPBxCaJXrJNNy+04tsHSP/q
+         2yVJ7pBTNXaDM0J4e4R6S9nFL0iL7nR6sybPqa4j5cXltJUjOHHuC2BDn9/z0swiYxeg
+         H2cA==
+X-Forwarded-Encrypted: i=1; AHgh+RpX5+VKt00TAqB/MArjScPz4v/9v/bqm//UzlXcVh4tzG8WEofFKp5a/4GnTdF2fVvhM+aHbM5e2eE=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YweyRLKBL0qWZbaDzQ4quUEOdLo2OKX9hybctihEEcoJlZjqTHm
+	IoWRBWHCYCj67AF2exZ3oq5L7RZCUyE0XIqmBp7usJIgFH2kzUu9FrbnFmChPIl87w==
+X-Gm-Gg: AfdE7ckPejREg6XwbhlZtMY7UnxqICfQnWLEjwLA/uccRkkT4p2wmfkhkHRtXalvNQu
+	l+1DSzP6N1eLXDxVH0Oeh/IEPLbwPINNtsAScB3aaMdwAGOw9NIoYAP/JuXOqyVUfxXulBrU3zq
+	cumPxnq42ZNfFNwWBAYwkU/DzZyCCzAVM0VDVcxo2K7h6fGXvtOHwcFn1GTz3oGZN25esVT5PB4
+	GWv0qUynZ2QJ6aMZDtcvIXSmfZ5M0uRCHyz9EC7gL2znx+Rrjvtmyq+xgp5zT/gXcFW4QsJTqQk
+	RcMsHj6IXeIS6dLiFwfXjFtCEUbhBIun6uiDa4Cd+co+NfLng9/9d3fAMXJW4qhQGQT/T6UoNbt
+	fUj3s4vk4lpQ2zK79dbiXZDwMZ+Fl4P1qYRbtTQe1zzx5V9lrq/mDvuoTYDXtwLzmhpw10jmtVm
+	arlCXxm0Q0KGEM41K5TG9CjS1tnAt+j2gu4jZGfPxIywykA3+1ESkkdkOsoLX6sv71AXN5Sf9a6
+	Bjy
+X-Received: by 2002:a05:6000:2997:10b0:475:3a97:8e3c with SMTP id ffacd0b85a97d-47550da070emr2181061f8f.18.1782800356613;
+        Mon, 29 Jun 2026 23:19:16 -0700 (PDT)
+Message-ID: <852a3242-27b1-407b-95c3-d070f541da74@suse.com>
+Date: Tue, 30 Jun 2026 08:19:15 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 00/18] PCI SBDF Refactoring
+Subject: Re: [RFC PATCH v3 18/18]: docs: Document support for PCI segment in
+ dbgp and comN parameter
 To: Teddy Astie <teddy.astie@vates.tech>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- Jason Andryuk <jason.andryuk@amd.com>, xen-devel@lists.xenproject.org
-References: <1782753803.8631fc262581453bbf619ec5b2062170.19f14683b82000701b@vates.tech>
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1782747421.git.teddy.astie@vates.tech>
+ <1782753824.8631fc262581453bbf619ec5b2062170.19f14688d8c000701b@vates.tech>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,38 +131,73 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1782753803.8631fc262581453bbf619ec5b2062170.19f14683b82000701b@vates.tech>
+In-Reply-To: <1782753824.8631fc262581453bbf619ec5b2062170.19f14688d8c000701b@vates.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ef75cf/1782799534-FF93225E-B12F6E94/0/0
+X-purgate-ID: tlsNG-bad1c0/1782800357-45B23986-1DF4D7E7/0/0
 X-purgate-type: clean
-X-purgate-size: 1288
+X-purgate-size: 2576
 
 On 29.06.2026 19:21, Teddy Astie wrote:
-> Teddy Astie (18):
->   pci: Use pci_sbdf_t in pci_device_detect()
->   pci: Use pci_sbdf_t in pci_add_device()
->   pci: Use pci_sbdf_t in pci_prepare_msix()
->   pci: Use pci_sbdf_t in pci_remove_device()
->   pci: Use pci_sbdf_t in pci_ro_device()
->   pci: Use pci_sbdf_t in pci_hide_device()
->   pci: Use pci_sbdf_t pci_check_disable_device()
->   pci: Introduce parse_pci_sbdf{_seg}()
->   amd/iommu: Parse into pci_sbdf_t directly
->   vtd: Use pci_sbdf_t in acpi_parse_dev_scope()
->   drivers/char/xhci: Parse into pci_sbdf_t directly
->   ns16550: Parse into pci_sbdf_t directly
->   vtd: Rename acpi_ioapic_unit.ioapic.info to acpi_ioapic_unit.bdf
->   pci: Use pci_sbdf_t in _scan_pci_devices
->   pci: Allow ommiting func when parsing with parse_pci_sbdf()
->   ehci-dbgp: Use pci_sbdf_t instead of (bus, slot, func)
->   pci: Drop parse_pci_split{_seg}()
->   RFC: docs: Document support for PCI segment in dbgp and comN parameter
+> Now that we accept full PCI SBDF (with segments), update the documentation
+> accordingly.
+> 
+> Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
+> ---
+> In principle, it's correct, but I don't think ECAM is usable
+> at the moment EHCI dbgp is initialized, which would prevent
+> the device from being probed correctly if it's not on segment 0.
 
-Just to mention that your patches still arrive in an odd way (same as v2). In
-my inbox, the cover letter is isolated while the patches themselves show as a
-thread. On https://lists.xen.org/archives/html/xen-devel/2026-06/threads.html
-it's even worse - all patches show up individually.
+And if there's no other way to access extended config space (like AMD offers,
+for example). In any event, imo this restriction wants calling out in all
+affected cases.
+
+The doc updates imo also want merging into respective patches.
+
+> Same remark for comN.
+
+And for XHCI.
+
+> --- a/docs/misc/xen-command-line.pandoc
+> +++ b/docs/misc/xen-command-line.pandoc
+> @@ -349,7 +349,7 @@ ACPI indicating none to be there.
+>  
+>  ### com1 (x86)
+>  ### com2 (x86)
+> -> `= <baud>[/<base-baud>][,[DPS][,[<io-base>|pci|amt][,[<irq>|msi][,[<port-bdf>][,[<bridge-bdf>]]]]]]`
+> +> `= <baud>[/<base-baud>][,[DPS][,[<io-base>|pci|amt][,[<irq>|msi][,[<port-sbdf>][,[<bridge-sbdf>]]]]]]`
+>  
+>  Both option `com1` and `com2` follow the same format.
+>  
+> @@ -371,10 +371,10 @@ Both option `com1` and `com2` follow the same format.
+>    registers.
+>  * `<irq>` is the IRQ number to use, or `0` to use the UART in poll
+>    mode only, or `msi` to set up a Message Signaled Interrupt.
+> -* `<port-bdf>` is the PCI location of the UART, in
+> -  `<bus>:<device>.<function>` notation.
+> -* `<bridge-bdf>` is the PCI bridge behind which is the UART, in
+> -  `<bus>:<device>.<function>` notation.
+> +* `<port-sbdf>` is the PCI location of the UART, in
+> +  `[<seg>:]<bus>:<device>.<function>` notation.
+> +* `<bridge-sbdf>` is the PCI bridge behind which is the UART, in
+> +  `[<seg>:]<bus>:<device>.<function>` notation.
+>  * `pci` indicates that Xen should scan the PCI bus for the UART,
+>    avoiding Intel AMT devices.
+>  * `amt` indicated that Xen should scan the PCI bus for the UART,
+
+Instead of explaining how <sbdf> is spelled both here and ...
+
+> @@ -731,11 +731,11 @@ for the `all` value. If that isn't intended, raise
+>  the `sched_credit2_max_cpus_runqueue` value.
+>  
+>  ### dbgp
+> -> `= ehci[ <integer> | @pci<bus>:<slot>.<func> ]`
+> -> `= xhci[ <integer> | @pci<bus>:<slot>.<func> ][,share=<bool>|hwdom]`
+> +> `= ehci[ <integer> | @pci[<seg>:]<bus>:<slot>.<func> ]`
+> +> `= xhci[ <integer> | @pci[<seg>:]<bus>:<slot>.<func> ][,share=<bool>|hwdom]`
+
+... here, maybe simply say <sbdf> in all places and add text to the top
+of the file?
 
 Jan
 
