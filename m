@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBC02C44501
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2026 19:32:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1350363.1607808 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4285C43458
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2026 19:32:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1350368.1607853 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wf0fc-0007Zr-MV; Wed, 01 Jul 2026 19:32:28 +0000
+	id 1wf0fm-0000Kp-0C; Wed, 01 Jul 2026 19:32:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1350363.1607808; Wed, 01 Jul 2026 19:32:28 +0000
+Received: by outflank-mailman (output) from mailman id 1350368.1607853; Wed, 01 Jul 2026 19:32:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wf0fc-0007Zk-Jr; Wed, 01 Jul 2026 19:32:28 +0000
-Received: by outflank-mailman (input) for mailman id 1350363;
- Wed, 01 Jul 2026 19:32:28 +0000
+	id 1wf0fl-0000KQ-P8; Wed, 01 Jul 2026 19:32:37 +0000
+Received: by outflank-mailman (input) for mailman id 1350368;
+ Wed, 01 Jul 2026 19:32:35 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3SGtFagYKCY09vr40tx55x2v.t53Ev4-uvCv22z9A9.Ev46850vtA.58x@flex--seanjc.bounces.google.com>)
- id 1wf0fc-0007Ze-26
- for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 19:32:28 +0000
+ <3UGtFagYKCZUH3zC815DD5A3.1DBM3C-23K3AA7HIH.M3CEGD831I.DG5@flex--seanjc.bounces.google.com>)
+ id 1wf0fj-0008Ts-It
+ for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 19:32:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wf0fb-004o0g-BE
- for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 21:32:27 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wf0fi-00Bw10-Vq
+ for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 21:32:34 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3SGtFagYKCY09vr40tx55x2v.t53Ev4-uvCv22z9A9.Ev46850vtA.58x@flex--seanjc.bounces.google.com>)
- id 6a456b44-2eae-0a2a0a5409dd-0a2a4509ddee-18
- for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 21:32:27 +0200
-Received: from [209.85.215.201] (helo=mail-pg1-f201.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <3UGtFagYKCZUH3zC815DD5A3.1DBM3C-23K3AA7HIH.M3CEGD831I.DG5@flex--seanjc.bounces.google.com>)
+ id 6a456b21-bab6-0a2a0a5309dd-0a2a45079628-28
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 21:32:34 +0200
+Received: from [209.85.216.74] (helo=mail-pj1-f74.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <3SGtFagYKCY09vr40tx55x2v.t53Ev4-uvCv22z9A9.Ev46850vtA.58x@flex--seanjc.bounces.google.com>)
- id 6a456b49-97e6-0a2a45090019-d155d7c9f06b-3
- for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 21:32:26 +0200
-Received: by mail-pg1-f201.google.com with SMTP id
- 41be03b00d2f7-c88da04b719so795266a12.2
- for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 12:32:26 -0700 (PDT)
+ <3UGtFagYKCZUH3zC815DD5A3.1DBM3C-23K3AA7HIH.M3CEGD831I.DG5@flex--seanjc.bounces.google.com>)
+ id 6a456b51-9c8e-0a2a45070019-d155d84ac9d3-3
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 21:32:34 +0200
+Received: by mail-pj1-f74.google.com with SMTP id
+ 98e67ed59e1d1-37e1f96b248so1287066a91.3
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 12:32:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,44 +50,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Type:Cc:To:From:Subject:Message-ID:Mime-Version:Date:Reply-To"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date:Reply-To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1782934345; x=1783539145; darn=lists.xenproject.org;
-        h=content-type:cc:to:from:subject:message-id:mime-version:date
-         :reply-to:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Q5DLB1BjKje3f1c5FruZIw3+wsrQVQC55+bIjsMSwHk=;
-        b=JpFMN4mPtJD46ArcdgAMsPMZlVGQOXA/fBCFWCnpab2xVVaxbSRGfH698Hzdy9fYY7
-         tv7IhdyQEPk971zAuAnJU0bEFM5X13FjqXwNDT1ucHNOym2K4ceo/V6Manl5LaH3UBUv
-         DXljgQnXZ954da359zQWS0/oo6J1JPPjb45HBiPrfYNfuvZFrCttGDGvS4CknwKmBWkb
-         ZQP9CX4zTid60oPIoSRTvHvBxFENVcnwFhS4P6C8s0dR5pRy7IcQDAWp2g2AlyyadiuJ
-         yytp0UHh/81RZshdHrbX0g3bLXTBba1xbyvEE7pQAsUQjMZOIngmKczqCjJYgIXg4KVE
-         xO8g==
+        d=google.com; s=20251104; t=1782934353; x=1783539153; darn=lists.xenproject.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
+        bh=a+o8BZyrs+hCKgt2M2jOo1gfN0drsi4lQngccMqCRwE=;
+        b=h/Rm6+y+Pp6Q/agCeGZC28rgA/WNNn+KFwWOBczsonXYZxxbOglKeUDl8rVU6mp9dq
+         bpcZvMl6TcU3iyWNBysRkfFMMYhVdzpmzKhXAtjdfBhFCb5guvHVl6tI/Rd1umioqdVx
+         rT9d1I671tujKR6Rn+MKWTJLAmwQntPo87sc2BjrhWdNxnFs+Doo3cBQZ2gNDiLIgwJr
+         aNWgwYqDLGARM14sEwXYkjrinje3PDdppFMh5bXU79RWKUt6KQLz9gVugGN/1SYwny2b
+         7JvrPp93YdIk3j1qewZoDzYtw77pak/3q+RKC9i9VgDoY2K2943kQAokTMQkV1pXoAeP
+         7VFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782934345; x=1783539145;
-        h=content-type:cc:to:from:subject:message-id:mime-version:date
-         :reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=Q5DLB1BjKje3f1c5FruZIw3+wsrQVQC55+bIjsMSwHk=;
-        b=hWvW1Ie0z9yqMFYUV8LNxK54w/y9Mi4JV9AkL52CDVeJGgi/XnETGMOlG4/8hBgtKJ
-         EUR9rNCM5gykoSuro9twlNbBXukrqjS/hW7rB5a/Hyf8QrUqg8Qkik1qqX7opj6SW/hx
-         qVjMBQR8BtXzG84mj1xMC4yZMmBfPD5GtpMD7/0REd9dxHJIPAQ6Y4ZbHskPNEh+rTt0
-         YXoFq9wXCcWkrIElXlAt4B0V4mXyCzeqMwhkJbmnD78QaWn2JiEsGuaII47hX1M1USjm
-         YncIYzGGYv3rcBDfDUb9U/tTme0PJqZ/mrnNdWUe36+OwOIocbsv937jvvelmQSaYMz+
-         uSfQ==
-X-Forwarded-Encrypted: i=1; AHgh+RoCmppyAUWlHpTmiymMlVOS1CxYP1DQLTMZUbp8rdMx94yiiUUSj0jVQOwmiy9EE1FfA7Ad7hNYZnE=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YytNaNWf8YtTac8Ctw6AWnE8dHb6oOvs31dgbgZh/8Egy7Fm72b
-	feiQZF9dI6I6zsRFBw43hc9ZNm0JwocAquN5ZsjVVOqRGsFQa54u7/0NFu+6SU5N5CWEQaZmOVt
-	MsydxTw==
-X-Received: from pjtl15.prod.google.com ([2002:a17:90a:c58f:b0:380:5553:77a7])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:52:b0:37f:9ce1:735e
- with SMTP id 98e67ed59e1d1-380ba94a46bmr2041513a91.31.1782934344390; Wed, 01
- Jul 2026 12:32:24 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1782934353; x=1783539153;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=a+o8BZyrs+hCKgt2M2jOo1gfN0drsi4lQngccMqCRwE=;
+        b=tB5nSITjOEpCepPJ/T5vfguIjdGSL1L4z+7LjAFCDrQK9D8yn6OKdHrg/hHrl+Hjbn
+         6jyYSprIgnsjwEowDwGnn0Eajtr2S/PIMQi/DoG6NMuOikaxMQySmZ9NvlMLESXArXs3
+         rhCam/j9LMsKP+Wi2xcCVR8nQ5T007i/VKcKMGR7TTzxO9DZ3RMDPDiUu/cTux8ywTN2
+         9g8LKz7w5xOrET7v0h6SugpkIRf1dgLnNP5m+UAXdfSQ/ZQpBPWisuiuGkYPX3dG/7oA
+         OK5JsJIa50NDMBzVxXgbQqvJhTFWqRLeOZF/tLgOKMx6FfZV+QgREuxNpIHprjqv5VgC
+         c+Qg==
+X-Forwarded-Encrypted: i=1; AHgh+RpOgmX5Stjop8s46m/IcD84h4QN3N/AC/ssOc17knfsum2bj/Aaq1dAPi8K50J38PB8z10FuTp0Fo0=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Ywn0kTAkcrf7T2E/ykUKg/spNHwXOqO0Rnej8/idcR9d8lm86uU
+	YnUIRmzcr8NKlYBEdsxb7n5roM4jE+GUV8PcLGrLxKlycIirXApWnx7EhjKfalXHndKBaBWt2+Z
+	OXgGkQQ==
+X-Received: from pja11.prod.google.com ([2002:a17:90b:548b:b0:37e:1dd6:f70c])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:28c4:b0:37f:9ce0:af32
+ with SMTP id 98e67ed59e1d1-380aa204608mr2862792a91.29.1782934352462; Wed, 01
+ Jul 2026 12:32:32 -0700 (PDT)
 Reply-To: Sean Christopherson <seanjc@google.com>
-Date: Wed,  1 Jul 2026 12:31:21 -0700
+Date: Wed,  1 Jul 2026 12:31:26 -0700
+In-Reply-To: <20260701193212.749551-1-seanjc@google.com>
 Mime-Version: 1.0
+References: <20260701193212.749551-1-seanjc@google.com>
 X-Mailer: git-send-email 2.55.0.rc0.799.gd6f94ed593-goog
-Message-ID: <20260701193212.749551-1-seanjc@google.com>
-Subject: [PATCH v5 00/51] x86: Try to wrangle PV clocks vs. TSC
+Message-ID: <20260701193212.749551-6-seanjc@google.com>
+Subject: [PATCH v5 05/51] x86/sev: Mark TSC as reliable when configuring
+ Secure TSC
 From: Sean Christopherson <seanjc@google.com>
 To: Jonathan Corbet <corbet@lwn.net>, Paolo Bonzini <pbonzini@redhat.com>, 
 	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
@@ -111,215 +114,54 @@ Cc: Shuah Khan <skhan@linuxfoundation.org>, "H. Peter Anvin" <hpa@zytor.com>,
 	David Woodhouse <dwmw2@infradead.org>, Michael Kelley <mhklinux@outlook.com>, 
 	Thomas Gleixner <tglx@linutronix.de>
 Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-bad1c0/1782934347-44528986-E2D4D8F7/0/0
+X-purgate-ID: tlsNG-ef75cf/1782934354-FF93225E-91BC0049/0/0
 X-purgate-type: clean
-X-purgate-size: 11040
+X-purgate-size: 1727
 
-The primary goal of this series to fix flaws with SNP and TDX guests where a
-PV clock provided by the untrusted hypervisor is used instead of the secure
-TSC that is controlled by trusted firmware.
+Move the code to mark the TSC as reliable from sme_early_init() to
+snp_secure_tsc_init().  The only reader of TSC_RELIABLE is the aptly
+named check_system_tsc_reliable(), which runs in tsc_init(), i.e.
+after snp_secure_tsc_init().
 
-The secondary goal is modernize running under KVM.  Currently, KVM guests will
-use TSC for clocksource, but not sched_clock.  And Linux-as-a-KVM-guest doesn't
-support paravirt enumeration of the TSC/APIC frequencies, even though QEMU
-provides that information by default.
+This will allow consolidating the handling of TSC_KNOWN_FREQ and
+TSC_RELIABLE when overriding the TSC calibration routine.
 
-The tertiary goal is to clean up the PV clock code to deduplicate logic across
-hypervisors, and to hopefully make it all easier to maintain going forward.
+Cc: Tom Lendacky <thomas.lendacky@amd.com>
+Reviewed-by: Nikunj A Dadhania <nikunj@amd.com>
+Reviewed-by: David Woodhouse <dwmw@amazon.co.uk>
+Signed-off-by: Sean Christopherson <seanjc@google.com>
+---
+ arch/x86/coco/sev/core.c      | 2 ++
+ arch/x86/mm/mem_encrypt_amd.c | 3 ---
+ 2 files changed, 2 insertions(+), 3 deletions(-)
 
-The quaternary goal is to clean up the TSC calibration code, which was made
-stupidly hard to follow by hypervisor code mixing in with the native
-calibration routines, instead of being implemented as a pure alternative.
-
-Note, the VMware and Xen changes still probably should get acks from those
-maintainers, as my understanding of what they're trying to do may be flawed.
-
-Lots more background on the SNP/TDX motiviation:
-https://lore.kernel.org/all/20250106124633.1418972-13-nikunj@amd.com
-
-As before, I deliberately omitted jailhouse-dev@googlegroups.com from the To/Cc,
-as those emails bounced on v1, AFAICT nothing has changed.
-
-v5:
- - Use cpu_feature_enabled() instead of boot_cpu_has(). [Boris]
- - WARN if recalibrate_cpu_khz() runs on a system with TSC_KNOWN_FREQ. [Thomas]
- - Opportunistically drop a line break in native_calibrate_tsc(). [Thomas]
- - Rely on callers of cpuid_get_tsc_info() to check the result instead of
-   unnecessarily zeroing the structure. [Boris]
- - Ignore tsc_early_khz if the TSC frequency is provided by trusted firmware
-   or by the hypervisor. [Thomas, Sashiko]
- - Cache CPUID output in acrn_init_platform() to avoid introducing a transient
-   bug where TSC_KNOWN_FREQ could be set even if the ACRN hypervisor didn't
-   actually provide the frequency. [Sashiko]
- - Drop kvmclock's useless/dead check_tsc_unstable() call (it occurs before the
-   command line parameter is parsed). [Sashiko]
- - Add helpers to set lapic_timer_period, to fix not-so-theoretical overflow
-   in the various "khz * 1000 / HZ" patterns. [Sashiko]
- - Drop the "x86/xen: Obtain TSC frequency from CPUID if present" patch as it
-   doesn't have any dependencies/conflicts on/with this series, and Sashiko had
-   concerns about the assumptions it was making. [Sashiko]
- - Collect reviews. [David] (Kirill's got dropped because the patch he reviewed
-   got completely rewritten).
-
-
-v4:
- - Use x86_init_noop() to skip save/restore on VMware and Xen instead of
-   nullifying x86_platform.{save,restore}_sched_clock_state. [Sashiko]
- - Use '0' to indicate "failure" when getting the CPU frequency from CPUID, to
-   avoid using an out-param and thus make it all but impossible to
-   unintentionally clobber the global cpu_khz (which v3 did). [Sashiko]
- - Rename cpuid_get_cpu_freq() => __cpu_khz_from_cpuid() to capture its
-   relationship with cpu_khz_from_cpuid().
- - Compute lapic_timer_period in units of ticks, not Khz. [Sashiko]
- - Kill off x86_platform_ops.calibrate_{cpu,tsc}(), and instead use dedicated
-   hooks for hypervisor code, and direct calls for TDX and SNP. [David, loosely]
- - Drop SNP's secure TSC override of _CPU_ calibration, as there's zero
-   evidence it's justified or a net positive.
- - Collect reviews/acks. [David, Wei]
- - Decouple getting TSC/APIC frequencies from KVM PV CPUID from kvmclock. [David]
- - Fix an amusing number of Opportunistically misspellings. [David]
- - Set kvm_sched_clock_offset _before_ registering kvmclock as sched_clock,
-   and add a comment to guard against future goofs. [Sashiko]
- - Keep "setup_force_cpu_cap(X86_FEATURE_TSC_RELIABLE)" in Hyper-V's handling
-   of HV_ACCESS_TSC_INVARIANT, as it's technically possible to have a VM
-   with HV_ACCESS_TSC_INVARIANT but not HV_ACCESS_FREQUENCY_MSRS.  Though as
-   a _very_ nice side effect of using dedicated sequencing for selecting the
-   TSC frequency source, this would have naturally happened anyways. [Sashiko]
-
-v3:
- - https://lore.kernel.org/all/20260515191942.1892718-1-seanjc@google.com
- - Collect reviews. [Michael, Thomas]
- - Use Hyper-V reference counter / refcounter instead of Hyper-V timer. [Michael]
- - Use the paravirt CPUID interface first proposed by VMware for KVM's
-   "official" mechanism for communicating frequency to KVM-aware guests,
-   instead of abusing Intel's CPUID leafs. [David]
- - Deal with paravirt code being moved into asm/timers.h and
-   arch/x86/kernel/tsc.c.
-
-v2:
- - https://lore.kernel.org/all/Z8YWttWDtvkyCtdJ@google.com
- - Add struct to hold the TSC CPUID output. [Boris]
- - Don't pointlessly inline the TSC CPUID helpers. [Boris]
- - Fix a variable goof in a helper, hopefully for real this time. [Dan]
- - Collect reviews. [Nikunj]
- - Override the sched_clock save/restore hooks if and only if a PV clock
-   is successfully registered.
- - During resome, restore clocksources before reading persistent time.
- - Clean up more warts created by kvmclock.
- - Fix more bugs in kvmclock's suspend/resume handling.
- - Try to harden kvmclock against future bugs.
-
-v1: https://lore.kernel.org/all/20250201021718.699411-1-seanjc@google.com
-
-David Woodhouse (2):
-  KVM: x86: Officially define CPUID 0x40000010 as PV Timing Info (TSC
-    and Bus)
-  x86/kvm: Obtain TSC frequency from PV CPUID if present
-
-Sean Christopherson (49):
-  x86/apic: Provide helpers to set local APIC timer period in hz and khz
-  x86/apic: Add CONFIG_X86_LOCAL_APIC=n stubs for
-    apic_set_timer_period_{,k}hz()
-  x86/tsc: Ensure that TSC recalibration doesn't run if TSC frequency is
-    known
-  x86/tsc: Restrict recalibrate_cpu_khz() export to p4-clockmod and
-    powernow-k7
-  x86/sev: Mark TSC as reliable when configuring Secure TSC
-  x86/sev: Don't override CPU frequency calibration for SNP's Secure TSC
-  x86/sev: Move check for SNP Secure TSC support to tsc_early_init()
-  x86/sev: Shove SNP's secure/trusted TSC frequency directly into
-    "calibration"
-  x86/tsc: Add a standalone helper for getting TSC info from CPUID.0x15
-  x86/tdx: Force TSC frequency with CPUID-based info provided by the
-    TDX-Module
-  x86/tsc: Add dedicated hypervisor hooks for getting known TSC/CPU
-    frequencies
-  x86/acrn: Register TSC/CPU frequency callbacks iff frequency is
-    actually in CPUID
-  x86/acrn: Mark TSC frequency as known when using ACRN for calibration
-  x86/tsc: Consolidate forcing of X86_FEATURE_TSC_KNOWN_FREQ for PV code
-  x86/tsc: Kill off x86_platform_ops.calibrate_{cpu,tsc}() hooks
-  x86/tsc: Rename pit_hpet_ptimer_calibrate_cpu() =>
-    native_calibrate_cpu_late()
-  x86/tsc: Fold native_calibrate_cpu() into recalibrate_cpu_khz()
-  x86/kvmclock: Rename kvm_get_tsc_khz() to kvmclock_get_tsc_khz()
-  x86/kvmclock: Drop dead check on TSC being unstable during
-    kvmclock_init()
-  x86/kvm: Mark TSC as reliable when it's constant and nonstop
-  x86/tsc: Add standalone helper for getting CPU frequency from CPUID
-  x86/kvm: Get CPU base frequency from CPUID when it's available
-  clocksource: hyper-v: Register sched_clock save/restore iff it's
-    necessary
-  clocksource: hyper-v: Drop wrappers to sched_clock save/restore
-    helpers
-  clocksource: hyper-v: Don't save/restore TSC offset when using HV
-    sched_clock
-  x86/kvmclock: Setup kvmclock for secondary CPUs iff CONFIG_SMP=y
-  x86/kvm: Don't disable kvmclock on BSP in syscore_suspend()
-  x86/paravirt: Remove unnecessary PARAVIRT=n stub for
-    paravirt_set_sched_clock()
-  x86/paravirt: Move handling of unstable PV clocks into
-    paravirt_set_sched_clock()
-  x86/kvmclock: Move sched_clock save/restore helpers up in kvmclock.c
-  x86/xen/time: NOP-ify x86_platform's sched_clock save/restore hooks
-  x86/vmware: NOP-ify save/restore hooks when using VMware's sched_clock
-  x86/tsc: WARN if TSC sched_clock save/restore used with PV sched_clock
-  x86/paravirt: Pass sched_clock save/restore helpers during
-    registration
-  x86/kvmclock: Move kvm_sched_clock_init() down in kvmclock.c
-  x86/xen/time: Mark xen_setup_vsyscall_time_info() as __init
-  x86/pvclock: Mark setup helpers and related various as
-    __init/__ro_after_init
-  x86/pvclock: WARN if pvclock's valid_flags are overwritten
-  x86/kvmclock: Refactor handling of PVCLOCK_TSC_STABLE_BIT during
-    kvmclock_init()
-  timekeeping: Resume clocksources before reading persistent clock
-  x86/kvmclock: Hook clocksource.suspend/resume when kvmclock isn't
-    sched_clock
-  x86/kvmclock: WARN if wall clock is read while kvmclock is suspended
-  x86/paravirt: Mark __paravirt_set_sched_clock() as __init
-  x86/paravirt: Plumb a return code into __paravirt_set_sched_clock()
-  x86/paravirt: Don't use a PV sched_clock in CoCo guests with trusted
-    TSC
-  x86/kvmclock: Use TSC for sched_clock if it's constant and non-stop
-  x86/kvmclock: Plumb in AP-online and BSP-resume to kvmlock, for
-    documentation
-  x86/paravirt: Move using_native_sched_clock() stub into timer.h
-  x86/kvm: Get local APIC bus frequency from PV CPUID Timing Info
-
- .../admin-guide/kernel-parameters.txt         |   5 +
- Documentation/virt/kvm/x86/cpuid.rst          |  12 +
- arch/x86/coco/sev/core.c                      |  21 +-
- arch/x86/coco/tdx/tdx.c                       |  19 +-
- arch/x86/include/asm/acrn.h                   |   5 -
- arch/x86/include/asm/apic.h                   |   5 +-
- arch/x86/include/asm/kvm_para.h               |  12 +-
- arch/x86/include/asm/sev.h                    |   4 +-
- arch/x86/include/asm/tdx.h                    |   2 +
- arch/x86/include/asm/timer.h                  |  15 +-
- arch/x86/include/asm/tsc.h                    |  10 +-
- arch/x86/include/asm/x86_init.h               |   8 +-
- arch/x86/include/uapi/asm/kvm_para.h          |  11 +
- arch/x86/kernel/apic/apic.c                   |  12 +-
- arch/x86/kernel/cpu/acrn.c                    |  14 +-
- arch/x86/kernel/cpu/mshyperv.c                |  70 +-----
- arch/x86/kernel/cpu/vmware.c                  |  19 +-
- arch/x86/kernel/jailhouse.c                   |   9 +-
- arch/x86/kernel/kvm.c                         | 101 ++++++--
- arch/x86/kernel/kvmclock.c                    | 208 +++++++++++------
- arch/x86/kernel/pvclock.c                     |   9 +-
- arch/x86/kernel/tsc.c                         | 218 +++++++++++-------
- arch/x86/kernel/tsc_msr.c                     |   4 +-
- arch/x86/kernel/x86_init.c                    |   2 -
- arch/x86/mm/mem_encrypt_amd.c                 |   3 -
- arch/x86/xen/time.c                           |  14 +-
- drivers/clocksource/hyperv_timer.c            |  38 ++-
- include/clocksource/hyperv_timer.h            |   2 -
- kernel/time/timekeeping.c                     |   9 +-
- 29 files changed, 540 insertions(+), 321 deletions(-)
-
-
-base-commit: dc59e4fea9d83f03bad6bddf3fa2e52491777482
+diff --git a/arch/x86/coco/sev/core.c b/arch/x86/coco/sev/core.c
+index ecd77d3217f3..ed0ac52a765e 100644
+--- a/arch/x86/coco/sev/core.c
++++ b/arch/x86/coco/sev/core.c
+@@ -2037,6 +2037,8 @@ void __init snp_secure_tsc_init(void)
+ 	secrets = (__force struct snp_secrets_page *)mem;
+ 
+ 	setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
++	setup_force_cpu_cap(X86_FEATURE_TSC_RELIABLE);
++
+ 	rdmsrq(MSR_AMD64_GUEST_TSC_FREQ, tsc_freq_mhz);
+ 
+ 	/* Extract the GUEST TSC MHZ from BIT[17:0], rest is reserved space */
+diff --git a/arch/x86/mm/mem_encrypt_amd.c b/arch/x86/mm/mem_encrypt_amd.c
+index 2f8c32173972..6c3af974c7c2 100644
+--- a/arch/x86/mm/mem_encrypt_amd.c
++++ b/arch/x86/mm/mem_encrypt_amd.c
+@@ -535,9 +535,6 @@ void __init sme_early_init(void)
+ 		 */
+ 		x86_init.resources.dmi_setup = snp_dmi_setup;
+ 	}
+-
+-	if (sev_status & MSR_AMD64_SNP_SECURE_TSC)
+-		setup_force_cpu_cap(X86_FEATURE_TSC_RELIABLE);
+ }
+ 
+ void __init mem_encrypt_free_decrypted_mem(void)
 -- 
 2.55.0.rc0.799.gd6f94ed593-goog
 
