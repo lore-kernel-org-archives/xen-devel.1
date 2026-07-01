@@ -4,46 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 422ABC43458
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2026 15:21:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1350116.1607681 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50D6BC43458
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2026 15:24:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1350141.1607700 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wewkV-0001cI-AS; Wed, 01 Jul 2026 15:21:15 +0000
+	id 1wewnS-0002lA-2q; Wed, 01 Jul 2026 15:24:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1350116.1607681; Wed, 01 Jul 2026 15:21:15 +0000
+Received: by outflank-mailman (output) from mailman id 1350141.1607700; Wed, 01 Jul 2026 15:24:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wewkV-0001cB-7c; Wed, 01 Jul 2026 15:21:15 +0000
-Received: by outflank-mailman (input) for mailman id 1350116;
- Wed, 01 Jul 2026 15:21:13 +0000
+	id 1wewnR-0002l3-VH; Wed, 01 Jul 2026 15:24:17 +0000
+Received: by outflank-mailman (input) for mailman id 1350141;
+ Wed, 01 Jul 2026 15:24:16 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>) id 1wewkT-0001az-KC
- for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 15:21:13 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wewnQ-0002kx-Pp
+ for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 15:24:16 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wewkS-004tRH-T0
- for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 17:21:12 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wewnP-00ASPr-Qr
+ for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 17:24:15 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6a453058-bab6-0a2a0a5309dd-0a2a450988c8-46
- for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 17:21:12 +0200
-Received: from [40.107.209.18]
- (helo=PH8PR06CU001.outbound.protection.outlook.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6a453067-97e6-0a2a45090019-286bd1127110-3
- for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 17:21:12 +0200
-Received: from IA1PR03MB8288.namprd03.prod.outlook.com (2603:10b6:208:59e::6)
- by PH9PR03MB767167.namprd03.prod.outlook.com (2603:10b6:510:3e8::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.19; Wed, 1 Jul
- 2026 15:21:09 +0000
-Received: from IA1PR03MB8288.namprd03.prod.outlook.com
- ([fe80::b5ee:28c6:e04b:5599]) by IA1PR03MB8288.namprd03.prod.outlook.com
- ([fe80::b5ee:28c6:e04b:5599%3]) with mapi id 15.21.0159.018; Wed, 1 Jul 2026
- 15:21:09 +0000
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a45310e-e002-0a2a0a5209dd-0a2a4508d0c6-30
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 17:24:15 +0200
+Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a45311f-edec-0a2a45080019-d155802bf0bd-3
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 17:24:15 +0200
+Received: by mail-wm1-f43.google.com with SMTP id
+ 5b1f17b1804b1-493b77b150aso7061995e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 08:24:15 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-148-111.play-internet.pl.
+ [109.243.148.111]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-493be4d9daasm87438345e9.9.2026.07.01.08.24.13
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 01 Jul 2026 08:24:14 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,221 +52,156 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VQKCFizZRfdDmZcfUKJXOAg6ApNqkrpTVNn1FRMZFKFSXX4SDXN5EV08heIOa+O3dGIEhTg50VWYXMgg2sm/EF8hmEqiE7yABv0F1juQUrgiEkLwFMPE9IF+CTJEljcFT4O8hKdrNjDHBlEL2eHeAhs/3FbpmZv73mx8Ilsvt1S0o7OExpIpPWTxyU6UoQlrQpmqHJi1VcWJ9jWj0XhQsPF4BxW+Y24YLqEt9shIVMJdaP45w4yTfRNNFVj+LWgyobDpoqS+PiIm6kDPqBw3iMqbQjwba4xJzP9cxKq8AL6pWqEoc+9szYEjwTqAhXViHryDTHh7qPwI+S4WdJMpSA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FAzW1JgJSGu5uCsBpSgF0sIhfKeZU1U9S6FwoWB2HCE=;
- b=xs2FgaDIVGba/3rngiI1BZk/HAWUXCwtQZ8xTdOHKEUr9l28fUYssLYSa/EOlEQJYubKS/1Ad5S3pWJDW9LUPXQ1IF6mTPP4WjeaE1mor60afkALHs3UrxRn96HdFufbngmGSWfc9Ficiwu7m2YUEAma+3f+oUUPnNm3cjzqJ+Mli6ky6bfBHiCnQk9N+atVHmaf57s0GlBlPgDwVUB5Qszxdt4yo/7Ay6wXhg26xNBXJI9buhekCjpUaubnhlaCP9RV+zUOy6KSM0dvEXEOQyPMXLP7+EEtfUFPgg0hBdZmePvhjJNiUEtGrKUl50+XfML5TG82dkr7+nGGlFYbag==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FAzW1JgJSGu5uCsBpSgF0sIhfKeZU1U9S6FwoWB2HCE=;
- b=oiI7wOumGxq404/1nQRFf9wlYPtW/omRoa8/4VZzuVlS1MVZ+0XS/EPqZIcKssB/UYnzVbjeHjGyWFQe9VqNmycwGtzBPvvIYJYOaAGA+nKUtxZLoPoGOJdK94JymT0di9kK2m8WiPpVWXeQIT872K3q7kFXH9pYbKFI37AHjos=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <53018bb5-0ad4-449e-adda-6b2d94a0935e@citrix.com>
-Date: Wed, 1 Jul 2026 16:21:06 +0100
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Marek Marczykowski <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH] x86/cpu-policy: set up host policy earlier
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <6dccae5f-fe09-4f35-9e4a-7a38fb21e8d1@suse.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <6dccae5f-fe09-4f35-9e4a-7a38fb21e8d1@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO4P123CA0576.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:276::23) To IA1PR03MB8288.namprd03.prod.outlook.com
- (2603:10b6:208:59e::6)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1782919455; x=1783524255; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=EzAlXR1UrnSnynnOL2U7ASX4RUa5MGuJNSO2hUFkhrY=;
+        b=N/ptbj7jwA5HCcah8ZmrrQ7PCrieYRzw44ujr50Z4Iho0JTzhjh2PmVsf/Mv+jecK8
+         TrCTVvwZePLcU1P5aOzZW09CcqHCeUXhWsTQQBGbBjOo8qZnhOaAfE+QnUSmEeWqPav6
+         6FsW76o6qBJtYsnFfE7G7+vPiF66VqScyYlkNjQJYMTTCsKapy4/y/aUXsEgcEdTG8cO
+         BlOejJxTezq7uZWZ1IUJCtxp8qElH/PibBJih4JJedqmUFZE/UTrBQlkh7xZ9egdnsbR
+         jY5izydwN64AHb4oYE6K/YCEZbRMyqDg6/HgK4hkbaP6KlsVeogQjXv313IIwqXDTQ38
+         /dTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782919455; x=1783524255;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=EzAlXR1UrnSnynnOL2U7ASX4RUa5MGuJNSO2hUFkhrY=;
+        b=pEVKJQzqAscHAKZwvr0q1wQTorLw6nYxyZFKMauf+4BAKfpwQt8CraCW/SV7yE41Ea
+         ta7LF7TCen0w6J0jiZ+AtoejUh7NSZA1WVJiRJClLESLlgA+yJqQA1oTinMYGcS/P5kp
+         rhZmFtAAHtwZQE6RLBHnXZ4SWddgX644LJJnCYsDKyBIkwJiyHp8R6/QdZ7yHrd7Qov3
+         IJEvwmfq304NGRNak8uDXXWp4oqYqhvRPbmdtdx1eSeDqcf5ceSsjbG/XhZf2+jqrdaR
+         1yxq0ztcYMfBReLij3KHcCE4VsBK+GZpXqJ2nFosMtKT32GYHXzSoQAHhsq5HMEUkxwq
+         mszg==
+X-Forwarded-Encrypted: i=1; AFNElJ/mT/5OpAsp4N04p3s97mkiXEfM0nGYTi6Ne79yJKjgu+QEwVYqNcoFLcoo7qmXoUzlxsvTj5rSgLg=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yy1ENGHcMmw+bAgF4GsIVkoeZmLA0fapSo5BHw6s6grQscYlF43
+	BueLT4cFY8+UtC+Z3hZbP5e3uh2wYDV9Q9m6pDCMKQqaKtZjIdo7ua7t
+X-Gm-Gg: AfdE7cmJrqZjBHA4bIqAedJbxkGIsb+6lTro3sqkrAhCZubTxjAHTiFkGYnh2Xyz3bW
+	JXkdQDxgyxdNpgO/DV1GkDHwq8R94qqAXxJx1ITH8+0O+n9FXvds19kDTPcOGOF5YOYJ6h/OZA+
+	Oyze3XLfP82msQfXj0s3Gs/29+ZGlNYNzZOaKT1WLVomvJbi5oN8esfucL0fDCKurM71Fn2ZhRB
+	0vWrZ4i4/7dNxEK4db13unTQw8yZO+WUD0ej2GMhTA2pljhOcao7r7J/GEhtcH/LbtJqRsUfen1
+	6nT7zpKApPTjrCCpyGH2sjjIEWJsia9BJopeyQIwoKA8mwGltrhJ5F/BElbsaZYvNzyJ2SWObFt
+	s4aUX0p/L8G1UfEig4BgpNYibduaVMyBsg3ybV4p90WYJDhv464hIU9A4kgn38Ub2LlRbW0jm+L
+	HuNTiVnJMU5lQIhHwLhlPxcp/yXGC/L0d7d8+0YT60CaBpv2TDLSmpSYcsjddWi27wVWA=
+X-Received: by 2002:a05:600c:35d2:b0:493:c3f9:65a2 with SMTP id 5b1f17b1804b1-493c3f9664bmr16518835e9.5.1782919454882;
+        Wed, 01 Jul 2026 08:24:14 -0700 (PDT)
+Message-ID: <c7aff2d8-14a7-4921-93d4-67228d871074@gmail.com>
+Date: Wed, 1 Jul 2026 17:24:13 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: IA1PR03MB8288:EE_|PH9PR03MB767167:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4bcfc8b2-4edc-4ab5-f82f-08ded7846099
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|23010399003|1800799024|366016|18002099003|22082099003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	gydi3p13ADVaFomIlvVoLfgtM3t8qrf9VkQGJrhIRk+YC+cI9loRkjZEisujRwXETct5ra6+Xkq6FndTyt+eL5wAw1oM6bj5InOCTuMt1spyO2PF4FlUDPXwzQfRMvCIgTy0rrw9C7hj3/gRu2ttZmDRwPnsVyhm5WTv0MuIwFQanGtvVBNHFGcKrD0KLRdqZapiNniWXoyEAxlsmfOFWCNC1GQOM8OphzI3FD2SZNJSV2HCiFfEOg8HeweU+Xymw3d009qnEtQI0Gc9BYeXhTBH3CCVGlJwBOZlEDG37AQMAnuYfR/GxJm1PO7jw85uuC+dJ/W0BammZd1J6FpdE+sN8PmQiN6EkWF+9zFirrRraIkptqEDadjSOfp1zhW8oxouyL7pwrYe51D0ELu1RLp8J2wwbZTDTQr5RUAOFt4+11C6sAc9rjuNZDKW7V+SK72vi0phBLzGl7A4dH688185XxOQhk67kdw1c4EtmtyjkdvoquhMxgZzVDHDZ9wXrSaQWziqmmCpPdISAOrpjnUJ7199M1SBnIIw7X4mXJFuGvyRZDMNz227oH5ZQ5uvWYgJ9NPbwJ98WWUHREM9JC+Aq//iLrZL/VT6yr3K7YRUB+f4Ghg1RDakt+72T7Bve1QarSU31HaZwQeootmsX6rbiDEF1Pagb0c+pYeB+do=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA1PR03MB8288.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(1800799024)(366016)(18002099003)(22082099003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?anhWVlpzbzQ4Wmhjcm02MStCUUgrVDRtbFd2NEhsNkgyVVlZRWNNNWE2Q2xy?=
- =?utf-8?B?eTQ3WGVDb1VicThVODgwaU9OTnVUbU1lNlgzd29SNlJPc0lVaWxFMGM0Vnp1?=
- =?utf-8?B?ZndGTE8zNEsxM3NVdmMrWU1kZWV2cWlMUStBcVJ3djNKKzZ3eTZxZ3RCRzlx?=
- =?utf-8?B?VTJBYnRrYm1CR2ViSFVDMUhicXdDdmxJR01ZTEl5bkUxbzZhZTFzdk5kU2Zj?=
- =?utf-8?B?ajZ4bTZybDR5TFg5b3M4VGwweHQ2NXdNZjRhZzN3bmprYUpXVlJjSEdWSEZ2?=
- =?utf-8?B?VncxMjlrU3NmT3VVSXVIOUQ4QUw4dEgycStKODgrMTAxeTJ2MXhQQmFrSzdI?=
- =?utf-8?B?eWVVOTdKN3M3ZEZQdko4RXNnYnNNMXl5TVE0VXVuOEJudEVBNkxlNSsvdHJP?=
- =?utf-8?B?bmNmRHpORFFHa2xBYWVvMzgreUliQlhtMlJodlZ5QTNzVzBBbUhMcnR5eERW?=
- =?utf-8?B?OFdDSUhubk1YdWh0U1l0Tm5kVktPSU0ydEtmOWdoZHhxbVdVRmp1ajhaMmxR?=
- =?utf-8?B?TEVveTZMMVhlbU42b3ZGL0x5M082WmsrUC9FWUVMNEhRak0wYWJwemFiYVNn?=
- =?utf-8?B?Vm03TjltS3BoNWZ5ak1rd285S1RRaVZWcDkwamxncittUVF4Wkw3N3RaWlBh?=
- =?utf-8?B?OWhTRkpKeGFzdGdVZGZPelNPRmxyTUZCSllXelVSVFc2QThQTWxkTlhOR00w?=
- =?utf-8?B?UGI1cmtEdlRxNUJkNitzWi9kSjhBbEJ6OWw1MW1ZSEZIVEVVRzNoQlNTL3Vr?=
- =?utf-8?B?TXlCL05Ua2E1TUZMK1pRS24xOXJMRk9YTVNkVjdpQkRGZjFpQW1OZUdFWHZN?=
- =?utf-8?B?NnZ4WkJDZ1RDY0VvQlhtN1Y3b1JMcThIRWsxR1dseGRTYmpqVE11NnFGR29D?=
- =?utf-8?B?S2lNYlg3YnhIYTNKdW5oNzlNYmxPRTZlY3N2YzFXRkd6alk5SzRuN1ZycEdT?=
- =?utf-8?B?ZWl2RU1nVVlaS1NJK25sRkMyeS9oSktLZmZraFFXZUhNMmJnQTZ2ZVB2eVNT?=
- =?utf-8?B?d2ZreVdHSjgzRFhSMzhFZjhIa0pzWTF0T1lTNUl3NlNzWXY0ZFdlWndGR2dQ?=
- =?utf-8?B?OEplT2pKK0R3c0JnaTlZUFUwSmUrRFROSGJTRDRYOTU1VW9SQWZmSlhlSFVl?=
- =?utf-8?B?RWU1aEdTcy9vRnNYSTBSQ1kzdnU4MFZYVENWUXc3cktGektzaFA1V1JDKzFs?=
- =?utf-8?B?NWtsRjJSWDcwbFQ1WDlHNUhOYTJOSVJValBMWGNyU3d1SlZXVUlscGJvSG91?=
- =?utf-8?B?ZXpsQlNFMjB5c3gvMlc2Uy9ETWJ0eG1XVCtxYUcwaDl2VSttZllkUXQ5Vi9Q?=
- =?utf-8?B?VG9ka2RuYXNwMnVUR0h2SEhUdzhBcUVxR09uYzBSWXBUK21Cbi9PR25CaFlG?=
- =?utf-8?B?T1hsZVdFeU1ST3hqSEVySXlmampyekw2QVJRdTZVc2JXLzl1QW1CaXBIQWxR?=
- =?utf-8?B?U1ZnaThCb2tYazJDY0QwMTBoMnVwQmdVODgzbmNQR1QvSWlkTHlpK2VHYnlx?=
- =?utf-8?B?dTBVUlpGYUVEcmlpNUMwSmhnTXBHMGRyZ3JLaG80M3N3YVBiT29ET005NEd3?=
- =?utf-8?B?R0NOYm5QeklTTThkVzY5bkhibWpGTkxMOXdCZUxhZ2RFbmdxNGVITzA2QzV5?=
- =?utf-8?B?WFowRStJSWFBUWViNFZzRm1Sb1VBM3pGSVMwVE5RNlJUS2M3VXlQb1JEU2V4?=
- =?utf-8?B?eU1uQkdtdVdEYUFZOFdocmdUZ0x3dGFsSmY2alJ0cE1sQnBRYUVmZS9JWGZ1?=
- =?utf-8?B?anp6QjB6WDNaUk1oelY2MmsyTlNMamVDK2wwTGljbTN5d1BnSi9uNUR2UXZZ?=
- =?utf-8?B?T0RaWWIzM2d3V0lxTXB6QlprN0hCT0YyYjdKWk5tZitaUk1RaXNxK2NjTFFi?=
- =?utf-8?B?ZnlubFhUaXNnNndEVXo2Mk1uSkY1RUlwY052Q1ZpRElURjBnN2JHUUlVSHhS?=
- =?utf-8?B?Ui91YTJzdmlIYVc2Uk01T0dRSVZYRmxwdksxR2QzdkJPZFJ5Wkh6LzFvUVVi?=
- =?utf-8?B?VENmaWZSejZzeGRlQzFaMDdsU2U2TE84YXNsYmhqeENKVE42c1BEd0dFb0sx?=
- =?utf-8?B?RmlCMHg2eHM3cDZrazBjZ0FoZFVJNEpVbkJOdUtDREd3SW1PcDE3UEduNi9n?=
- =?utf-8?B?M2ZJb3VCRzZtQW9vMVdRM3hDbGRndWdNRG9tN3pGTWxCMVNpcXZiQ0JtRUd1?=
- =?utf-8?B?OFVxN3Ztd093ZXd5a01tejhJcXcxZkI1Ymw0ekNWNXFNU2VPSFAxUEdjL01X?=
- =?utf-8?B?cm9QUUorbUdzd3cvN3FLV0Q5TmY5ckJ3cHlFRUdIK3NLQ0dzMEtaMWtPa0FW?=
- =?utf-8?B?dU1SZ1Jqa3lKUnBGdko5aS9qZ2JWeWNPVEMxdEdZZlcwNXE4aDNkTzNmYndQ?=
- =?utf-8?Q?upw22urUBHGtPvXU=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4bcfc8b2-4edc-4ab5-f82f-08ded7846099
-X-MS-Exchange-CrossTenant-AuthSource: IA1PR03MB8288.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2026 15:21:09.0184
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Vd6Q1GVGAHf1ORCKVSetd87NwrCLE67HS/vO1nvif+5SUJWEyroMAnCy3mVlgByx3h7urjN8v5I3KuEWvZXt3sumTCyQIOVYuO9072S0FU8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH9PR03MB767167
-X-purgate-ID: tlsNG-bad1c0/1782919272-4693A986-4B85F7DD/0/0
-X-purgate-type: clean
-X-purgate-size: 2755
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 25/25] xen/riscv: add initial dom0less infrastructure
+ support
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1782487661.git.oleksii.kurochko@gmail.com>
+ <a6950e8dc2706c351fe6b0622602d34ecef133b7.1782487661.git.oleksii.kurochko@gmail.com>
+ <131fc20c-1353-49fc-8f77-1ca13628ff17@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <131fc20c-1353-49fc-8f77-1ca13628ff17@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c1860d/1782919455-A11293FC-C6D416F6/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 3629
 
-On 07/04/2026 7:46 am, Jan Beulich wrote:
-> In order to use cpu_has_* expanding to host_cpu_policy.*, the host policy
-> needs setting up alongside boot_cpu_data.x86_capability[]. Arrange for
-> that towards the end of identify_cpu().
->
-> Fixes: 894bd7617924 ("x86/Intel: use host CPU policy for ARAT checking")
-> Reported-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> ---
-> In the longer run we may need to (also) update the host policy from
-> setup_{force,clear}_cpu_cap().
->
-> This really was part of one of the XSTATE cleanup patches at the head of
-> the AMX series. This explains the specific placement ahead of the call to
-> xstate_init()). Likely anything from there downwards shouldn't really
-> live in identify_cpu() anyway.
->
-> --- a/xen/arch/x86/cpu/common.c
-> +++ b/xen/arch/x86/cpu/common.c
-> @@ -586,6 +586,8 @@ void identify_cpu(struct cpuinfo_x86 *c)
->  	}
->  
->  	/* Now the feature flags better reflect actual CPU features! */
-> +	if (c == &boot_cpu_data)
-> +		calculate_host_policy();
 
-calculate_host_cpu_policy() now it's not local to cpu-policy.c
 
->  
->  	xstate_init(c);
->  
-> --- a/xen/arch/x86/cpu-policy.c
-> +++ b/xen/arch/x86/cpu-policy.c
-> @@ -359,7 +359,7 @@ void calculate_raw_cpu_policy(void)
->      /* Was already added by probe_cpuid_faulting() */
->  }
->  
-> -static void __init calculate_host_policy(void)
-> +void __init calculate_host_policy(void)
->  {
->      struct cpu_policy *p = &host_cpu_policy;
->      unsigned int max_extd_leaf;
-> @@ -904,6 +904,7 @@ static void __init calculate_hvm_def_pol
->  
->  void __init init_guest_cpu_policies(void)
->  {
-> +    /* Do this a 2nd time to account for setup_{clear,force}_cpu_cap() uses. */
->      calculate_host_policy();
+On 6/30/26 9:28 AM, Jan Beulich wrote:
+> On 26.06.2026 17:46, Oleksii Kurochko wrote:
+>> Enable dom0less support for RISC-V by selecting HAS_DOM0LESS and
+>> providing the minimal architecture hooks required by the common
+>> dom0less infrastructure.
+>>
+>> Add stub implementations for architecture-specific helpers used when
+>> building domains from the device tree. These allow the generic
+>> dom0less code to build and let a basic DomU be constructed on RISC-V.
+>> construct_hwdom() and make_hypervisor_node() are still stubs returning
+>> an error: Dom0/hwdom construction isn't supported yet, and the
+>> hypervisor node generation (needed by domains with
+>> DOM0LESS_ENHANCED_NO_XS set) is not implemented. Both are marked with
+>> a TODO and are not reached by the currently supported configurations.
+>>
+>> Provide missing helpers and definitions required by the domain
+>> construction code, including domain bitness helpers and the
+>> p2m_set_allocation() prototype.
+>>
+>> Additionally define the guest magic memory region (GUEST_MAGIC_BASE /
+>> GUEST_MAGIC_SIZE) in asm/guest-layout.h. The base is arbitrary; the
+>> only constraint is that the region must not overlap guest RAM or the
+>> emulated device regions. It is placed in the unused gap below
+>> GUEST_RAM0_BASE (0x80000000); the constraints are documented next to
+>> the #define-s.
+>>
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> 
+> Acked-by: Jan Beulich <jbeulich@suse.com>
 
-I'm sorry, but no.  The cleanup work to CPUID handling is in an attempt
-to purge this antipattern.
+Thanks.
 
-Double-initialising data structures *is* the entire reason we have
-order-of-boot problems in the first place.  Having a structure which is
-initialised but wrong is itself wrong.
+> 
+> Nevertheless, ...
+> 
+>> --- a/xen/arch/riscv/include/asm/guest-layout.h
+>> +++ b/xen/arch/riscv/include/asm/guest-layout.h
+>> @@ -32,4 +32,16 @@
+>>   #define GUEST_RAM_BANK_BASES   { GUEST_RAM0_BASE, GUEST_RAM1_BASE }
+>>   #define GUEST_RAM_BANK_SIZES   { GUEST_RAM0_SIZE, GUEST_RAM1_SIZE }
+>>   
+>> +/*
+>> + * The guest magic region holds Xen-reserved pages mapped into the guest's
+>> + * physical address space (shared info, grant table, etc.). The only real
+>> + * constraint is that the GUEST_MAGIC_SIZE-byte region must not overlap
+>> + * guest RAM (the GUEST_RAMx banks) or the emulated device regions defined
+>> + * above; the exact base is otherwise arbitrary. Here it is placed in the
+>> + * unused gap below GUEST_RAM0_BASE (0x80000000), but a hole after a RAM
+>> + * bank would work equally well.
+>> + */
+>> +#define GUEST_MAGIC_BASE  _UL(0x79000000)
+>> +#define GUEST_MAGIC_SIZE  _UL(0x01000000)
+> 
+> ... while 16Mb may seem a lot, it feels pretty little for 64-bit guests.
+> Even in just Sv39 mode they have ample VA space to map a bigger region.
+> (As iirc indicated before, a static upper bound looks questionable to me
+> anyway.)
 
-Really, I should insist on a revert of switching cpu_has_* to use
-host_policy.  It was not adequately tested and is not compatible with
-how Xen starts up.
+I think the comment should be updated as for grants will be separate region.
 
-But as I expect you're going to object to that feedback, I'll tolerate
-setup_*_cpu_cap() keeping the host policy correct as they're called. 
-The easy option is to call x86_cpu_featureset_to_policy() each time. 
-The lower overhead option would be to have a table similar to
-cpu_user_regs_gpr_offsets[] and use that to locate the feature word in a
-policy object as it's being edited, although it's yet another thing to
-remember to keep in sync when adding new words.
+For all others, it looks like 16MB is more then enough. For example, Arm 
+has only 4 used pages (CONSOLE=0, XENSTORE=1, MEMACCESS=2, VUART=3).
 
-~Andrew
+So will you be okay with reworking of the comment to:
+/*
+  * The guest magic region holds the Xen-reserved pages mapped into the
+  * guest's physical address space. The only real constraint on
+  * GUEST_MAGIC_BASE/SIZE is that the region must not overlap guest RAM
+  * (the GUEST_RAMx banks) or the emulated device regions defined above;
+  * the exact base is otherwise arbitrary. Here it is placed in the 
+unused gap
+  * below GUEST_RAM0_BASE (0x80000000), but a hole after a RAM bank 
+would work
+  * equally well.
+  */
+
+And add to the commit message that:
+```
+A separate region for grant tables will be introduced at the same time 
+as the introduction of the grant table for RISC-V.
+```
+
+~ Oleksii
 
