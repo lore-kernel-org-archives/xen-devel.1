@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EEDAC43458
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2026 11:56:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1349875.1607510 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72091C43458
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2026 11:59:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1349887.1607517 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wetY5-0003SZ-Qz; Wed, 01 Jul 2026 11:56:13 +0000
+	id 1wetad-0004Ru-65; Wed, 01 Jul 2026 11:58:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1349875.1607510; Wed, 01 Jul 2026 11:56:13 +0000
+Received: by outflank-mailman (output) from mailman id 1349887.1607517; Wed, 01 Jul 2026 11:58:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wetY5-0003SS-NO; Wed, 01 Jul 2026 11:56:13 +0000
-Received: by outflank-mailman (input) for mailman id 1349875;
- Wed, 01 Jul 2026 11:56:12 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wetad-0004Rn-3F; Wed, 01 Jul 2026 11:58:51 +0000
+Received: by outflank-mailman (input) for mailman id 1349887;
+ Wed, 01 Jul 2026 11:58:49 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wetY4-0003S8-3h
- for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 11:56:12 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wetab-0004Rh-BH
+ for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 11:58:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wetY3-008Rnf-GU
- for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 13:56:11 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wetaa-00AiHv-GG
+ for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 13:58:48 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a450051-5cb7-0a2a0a5109dd-0a2a4502beac-16
- for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 13:56:06 +0200
-Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a4500f1-2eae-0a2a0a5409dd-0a2a4508b5d6-32
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 13:58:48 +0200
+Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a450056-5a27-0a2a45020019-d155dd2dd8aa-3
- for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 13:56:06 +0200
-Received: by mail-wr1-f45.google.com with SMTP id
- ffacd0b85a97d-472055b0efaso353776f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 04:56:06 -0700 (PDT)
+ id 6a4500f8-edec-0a2a45080019-d155dd33c89e-3
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 13:58:48 +0200
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-475417f010dso358136f8f.2
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 04:58:48 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-475674af239sm15057499f8f.30.2026.07.01.04.55.34
+ ffacd0b85a97d-4756636d2cfsm18350828f8f.17.2026.07.01.04.58.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 01 Jul 2026 04:55:47 -0700 (PDT)
+ Wed, 01 Jul 2026 04:58:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,48 +55,48 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1782906966; x=1783511766; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1782907128; x=1783511928; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=2ILDaRNTeZo5u0FIEIEa4IBQ8JWXbZOhNQFsEyvANNQ=;
-        b=Z8geJSq+uFFrC1vzYc/xJjOK1rWggXmvVmDg0m643YeCSrx+Y66y4hkjaXpWzXZbgm
-         +khJMF59aSNk37z17XgbFWz7Vr2jDAgIbC/6rS7tuijd8DuGsr9cTOJaEL5/16A6zAAo
-         2a7xszjbb/E60QVVJ2kZ5u6iYU7LF3qIBRNfsLRcks1/SJ+Syednl7HafRMC1LH5LDKy
-         3JMAADuGiPcWwVu2ahS/XO5B1PlMbaLeDaR9ERsjWKUFenTJJpBz8M2c3EDUPuE8E/Cp
-         tnutyQbZ3qutH1ifHdTiKPpq8VtppPo9MY/Fd/nyKa13F8W82IfllMpAwq8kFVqxlyr7
-         qzkQ==
+        bh=VCBBlBIZ2fRRtURovQCiNJjBxSs2iUUYs/xeLtP2pSs=;
+        b=Ji54BCgi9FyjrWIeSbS78GcgMXzS9dq43gTruqg8EZBxVQ0pW/6QOXkNUYZrWzOC2C
+         lAiBIF40cWzOwbhNBLskr/yW8nggf4/UJPz6qTF9xU+pMyaIeiaEzl8FhPeNOKRZ/Suu
+         B4hJc4uS1/0mCn0uOjoTXrkKpwWz2Kz5co/cqRr1FnsEsTPHyw9/eUB58GbwGpsVkgkW
+         yRAD802iDvKP9rVY5fbJMYG/Y6K8loTaGRGEznP0BmBFhbs48+tAkSVRl3WjrbkW75pF
+         TUk+GWNdrfUnBRjOlEON0yzGh+1F8pmi/D4r92V5tLP0XmJ465vWHUYkCAr7GIhOerBk
+         fqQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782906966; x=1783511766;
+        d=1e100.net; s=20251104; t=1782907128; x=1783511928;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=2ILDaRNTeZo5u0FIEIEa4IBQ8JWXbZOhNQFsEyvANNQ=;
-        b=PBeC/eCzzR94+iwJ9DRXgBkdBrq+7N+3Ud4NKlfN11Jn1ewLzBT9xvGWkLP1R2l0HW
-         UVeUS6o7jPzog5gN651PEB9/GADE94cDkk0EpQBjOiPDlLKl2mPp9cO0YYakl2/wzFVB
-         Sv06rdaXLTxDOlUdE/simeNDaNr15SZKuORofyISO79tMhIEE7InaOfFdWfb09LcMDMD
-         SCPGLdoFAVeZAGoQXIkqFOs8dgSBfPDnQYINX3bsQb8eCwk9K1tRjTjYBRt2sNrfH5eh
-         pBzRQpRpED74wDoyZ7Ok+91KTkd8f/uFhyAuzCrem3A1M3du+CgSTjDDowtPh7Rcuvjn
-         bxdg==
-X-Forwarded-Encrypted: i=1; AHgh+Rqxg7V3bcN/RQ1gTerUJ7YG4WHCkfbSRpGclI4Go3yu1ql3SnJozCL/d8y6IJgcucuSX/IUh/Eqn2E=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwJff7wgI9rlKK8Lt9iGSjkClEScsFUNuP7aYWMuWItvBgw6r4j
-	5fSwLt0wFWg0k8oE3Wb10akrfvEkwCT2067YJbRQSPblQZIVFdt4t+xfiHk3T/nlig==
-X-Gm-Gg: AfdE7clZiDrjXDbvZMPD1RNXZQtYK70yU9cLKXomuZhl7vbfuL+xW+Vv0kRRr9TNofz
-	lbkbfT4xCg7A6Ve4/mL8joBjENets8yS+uS58PIcfSuDWvwyQz5npNvUMIQiC3PaScAA7i9WIBj
-	XPB/dbCSQITG0gpUjpSmQ0x2YeIRogM92h9aaJfGKEb72IA4lWfp+jIol+VTjNCkfqQ2QmvN2df
-	TaNvGxDtIwyg+0mqqQcP4JOLLff42Pi4ygtTj+KAfP7E0EoNLSiog9OfEntOri/9u6Mc1IGfode
-	2xGoLhscJaOQjys9MQy0nYD1aBC4dN8v7EjweO7U5VeaXL5cPzHL6S/sLA1NP0YzUCn04IeqHNR
-	JkP5mE4U1MCakPfGBXN3Cj4xJ0oR+I3yeTw3W/Dft/cYFc+rR8EJbj4HJXsmG6cQV8n7UcFW9v6
-	WKW9j1+/VDr0yFIHsPsj97GHlrdGBkEr/I/XF8scIk4BSeRAcH2tNioCVT/o7soqJzoattVO1C+
-	VYX
-X-Received: by 2002:a05:6000:2203:b0:473:1089:154f with SMTP id ffacd0b85a97d-4775466f2a2mr2405684f8f.0.1782906965667;
-        Wed, 01 Jul 2026 04:56:05 -0700 (PDT)
-Message-ID: <3c672ea8-3dc9-468d-9ca4-d6ceaf6c8cb3@suse.com>
-Date: Wed, 1 Jul 2026 13:55:33 +0200
+        bh=VCBBlBIZ2fRRtURovQCiNJjBxSs2iUUYs/xeLtP2pSs=;
+        b=BWPcrytAgkt3uTVxofQb8U521+TPERwB3vkubFDoH5+7anLS5I0copAZR5fX/ugNJp
+         K0ezPw7/ADhmVnxFQPpCXrQe9BuaQE5K5DLVC2T8c1gt2Cero8p3F5qXmChroBKKywQM
+         Cx4BNMB00KLk9dfLaIj1Di/Fe/plvkt+DyBjlit39B3auueSAeY3UklZAfp04fMHYopo
+         PAOlGrCp5gQfT0GcESALpuFROZwg7HpqV1mIav89StvT3pf1Q5bUfsZjw5nTNIfRyzWc
+         oQuiQ9KvKJyPvunlpZdI7X4+vFO9O4bXsMwEpT6zB7/BDgu++2apVP+9TpYHtY+THlYX
+         fMMA==
+X-Forwarded-Encrypted: i=1; AHgh+RogWqQUwvIOdvJK14ErAIrjn4yZ9tYxOOFbUAsfi9QuWYxHrvgw1WlSX+Hhi93zooMyyxBMYP3OjTI=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwktVK0OEEGlojT71TxaXez+Dud0gI7++Ro2ZZd4Uav7JtjIQ3Z
+	+guV/JjaeaTNBDrsxDTEFyUCXrgjv8YWt3MEKfyjcu5WIc8JZKoJpHen4zRHI4/BlA==
+X-Gm-Gg: AfdE7clmlxEguagdXZhG+cGERqz5NFjOfmrFlQ0EA0GX0iYkx8zjeatZjvPhWEnT259
+	LLHKODSGHt6hyt4vz+IbcmFte70oqu34HFOx8algOnR1CclqXK2CoQ2FhJ74MMDhAcr4HM+KwWZ
+	5bIR6p4ikfiVBpr8HpKPZL2CVgpZxCPRpJe3hi6NQwgdWfgxL/80VpqXK7tFI3qw5YxCQSWmyJD
+	jzUq11VLIsk/ZrUVrd6VmlQ8Ucg732aLQnrnmNkOJQQcjuIBN5F+LLK2UixovDHwhH+UyiZjkwY
+	zk/zhGPCHGKrLYu6tK3j+sAVyxaMs4z94H1m9yXKxjrcdIx7MdYi8PVZf77FSRURqTPVSejJpe2
+	bdfQMNHiB/oPiIWtFIAL4LE0aALenr8LdaJnNxlDjWMmGiOKcCTJVC5eUiSS4MLQi+LGtXbPk/o
+	RsHt70VdPPYiTRs1wEsbp8kZJwpavV/dnwKVvG4knwO+fSoWwgctFRrziQryQaGkvi8leQNdAk+
+	CjmPuzOySqLb6w=
+X-Received: by 2002:a5d:64c3:0:b0:473:da43:44ba with SMTP id ffacd0b85a97d-47757798020mr2295215f8f.22.1782907127866;
+        Wed, 01 Jul 2026 04:58:47 -0700 (PDT)
+Message-ID: <be262862-2267-4b96-af5e-0379db5208ff@suse.com>
+Date: Wed, 1 Jul 2026 13:58:41 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 19/25] xen/riscv: generate IMSIC DT node for guest
+Subject: Re: [PATCH v4 20/25] xen/riscv: create APLIC DT node for guest
  domains
 To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -109,9 +109,9 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 References: <cover.1782487661.git.oleksii.kurochko@gmail.com>
- <424c223b97e9d27aa4ef4e05e2d5c8d0c426324c.1782487661.git.oleksii.kurochko@gmail.com>
- <77d3cf2c-3ed7-45f8-8e76-72520e71306b@suse.com>
- <018771c4-043d-4b29-ac40-284ee8692334@gmail.com>
+ <2bab716741ae436c7b92989d7613dac620166b89.1782487661.git.oleksii.kurochko@gmail.com>
+ <76b16195-43a8-40cc-9d22-7b9c21e4c8f1@suse.com>
+ <7d007b0d-d246-45aa-8ce2-579f36f6d8bf@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -137,100 +137,75 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <018771c4-043d-4b29-ac40-284ee8692334@gmail.com>
+In-Reply-To: <7d007b0d-d246-45aa-8ce2-579f36f6d8bf@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1782906966-4EB177C5-C78C79F4/0/0
+X-purgate-ID: tlsNG-c1860d/1782907128-4293D3FC-65BDD623/0/0
 X-purgate-type: clean
-X-purgate-size: 3212
+X-purgate-size: 2244
 
-On 01.07.2026 13:21, Oleksii Kurochko wrote:
-> On 6/29/26 5:19 PM, Jan Beulich wrote:
+On 01.07.2026 13:55, Oleksii Kurochko wrote:
+> On 6/29/26 5:26 PM, Jan Beulich wrote:
 >> On 26.06.2026 17:46, Oleksii Kurochko wrote:
->>> --- a/xen/arch/riscv/imsic.c
->>> +++ b/xen/arch/riscv/imsic.c
->>> @@ -13,8 +13,12 @@
->>>   #include <xen/const.h>
->>>   #include <xen/cpumask.h>
->>>   #include <xen/device_tree.h>
->>> +#include <xen/domain.h>
+>>> --- a/xen/arch/riscv/vaplic.c
+>>> +++ b/xen/arch/riscv/vaplic.c
+>>> @@ -9,6 +9,8 @@
+>>>    */
+>>>   
 >>>   #include <xen/errno.h>
->>> +#include <xen/fdt-domain-build.h>
 >>> +#include <xen/fdt-kernel.h>
->>>   #include <xen/init.h>
 >>> +#include <xen/libfdt/libfdt.h>
->>>   #include <xen/macros.h>
 >>>   #include <xen/sched.h>
->>>   #include <xen/smp.h>
->>> @@ -34,6 +38,16 @@ static struct imsic_config imsic_cfg = {
->>>       .lock = SPIN_LOCK_UNLOCKED,
->>>   };
+>>>   #include <xen/xvmalloc.h>
 >>>   
->>> +/*
->>> + * Number of MSIs available to a guest. Determined by the host interrupt
->>> + * controller, so it is identical for every domain -- hence a single global
->>> + * rather than a per-domain value.
->>> + */
->>> +static unsigned int __read_mostly guest_num_msis;
->>> +
->>> +#define GUEST_IMSIC_COMPATIBLE "riscv,imsics"
->>> +#define GUEST_IMSIC_NUM_MSIS 255
->>
->> Considering its use this isn't named correctly - it's not the number of MSIs
->> guests get to use.
-> 
-> I will rename to GUEST_IMSIC_NUM_IDS then it will be fully aligned with 
-> dts property name.
-> 
-> Then it makes sense to rename guest_num_msis to guest_num_ids.
-
-That's not going to help address my remark. I specifically referred to ...
-
->>> +int __init vimsic_make_domu_dt_node(struct kernel_info *kinfo,
->>> +                                    unsigned int *phandle)
->>> +{
->>> +    int res;
->>> +    void *fdt = kinfo->fdt;
->>> +    char vimsic_name[32];
->>> +    unsigned int vimsic_phandle;
->>> +    unsigned int num_msis = min(GUEST_IMSIC_NUM_MSIS + 0U, guest_num_msis);
->>
->> As guest_num_msis (supposedly) doesn't change anymore after it was set, why
->> would this need calculating again for each call here? Can't you apply the
->> upper bound right in imsic_parse_node()?
-> 
-> Agree, I will add the following to imsic_parse_node() after 
-> guest_num_msis is init-ed:
-> 
-> guest_num_msis = min(GUEST_IMSIC_NUM_MSIS + 0U, guest_num_msis);
-
-... the sole use of the constant (here). The number of MSIs (or IDs or
-whatever else) isn't GUEST_IMSIC_NUM_MSIS; that's merely an upper bound
-(which in turn is there for an unknown to me reason).
-
->>> --- a/xen/arch/riscv/include/asm/guest-layout.h
->>> +++ b/xen/arch/riscv/include/asm/guest-layout.h
->>> @@ -3,6 +3,12 @@
+>>> @@ -19,6 +21,11 @@
 >>>   
->>>   #include <public/xen.h>
+>>>   #include "aplic-priv.h"
 >>>   
->>> +/*
->>> + * Base address of the guest's supervisor-mode IMSIC. The value is the address
->>> + * typically used for IMSIC by QEMU.
->>> + */
->>> +#define GUEST_IMSIC_S_BASE _UL(0x28000000)
+>>> +#define VAPLIC_COMPATIBLE "riscv,aplic"
+>>> +#define VAPLIC_NUM_SOURCES 96
 >>
->> As you mention it explicitly: Is there also a user-mode IMSIC?
+>> So for the IMSIC the host value is relevant, but for the APLIC the count is
+>> an arbitrary(?) compile time constant? Why?
+> If you are referring to the number of IMSIC interrupt identities, the 
+> IMSIC node has separate properties for the host and guest:
 > 
-> I am not aware of such.
+> ```yaml
+> riscv,num-ids:
+>    $ref: /schemas/types.yaml#/definitions/uint32
+>    minimum: 63
+>    maximum: 2047
+>    description:
+>      Number of interrupt identities supported by the IMSIC interrupt file.
 > 
-> I mention it explicitly as machine mode IMSIC exists and it is a 
-> separate DT node for that.
+> riscv,num-guest-ids:
+>    $ref: /schemas/types.yaml#/definitions/uint32
+>    minimum: 63
+>    maximum: 2047
+>    description:
+>      Number of interrupt identities supported by the IMSIC guest 
+> interrupt file. If not specified, it is assumed to be the same as the 
+> value of the `riscv,num-ids` property.
+> ```
+> 
+> Therefore, if `riscv,num-guest-ids` is not explicitly specified, the 
+> predefined value `GUEST_IMSIC_NUM_IDS` is used.
+> 
+> No equivalent property exists for APLIC, which is why the value is 
+> explicitly hardcoded here. To some extent, the chosen number is 
+> arbitrary, but I used the same value that QEMU uses when creating the 
+> APLIC node.
+> 
+> It probably makes sense to limit this value in a similar way to IMSIC, 
+> at least for now, since the case where the number of VAPLIC sources 
+> exceeds the number of host APLIC sources is not supported (assuming that 
+> configuration is even valid). In other words, we could use:
+>    min(VAPLIC_NUM_SOURCES, host_num_sources)
+> 
+> Would that make sense?
 
-Ah, okay. Then maybe keep the comment as is. It's not quite clear to me
-whether, from an abstract perspective, "machine mode" could make sense
-for guests. If it can't, "supervisor-mode" would be redundant with
-"guest's".
+Perhaps, yes. Just with the constant again named appropriately for its
+purpose (see comments on an earlier patch).
 
 Jan
 
