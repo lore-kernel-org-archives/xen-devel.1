@@ -4,46 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C318C43458
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2026 11:47:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1349855.1607490 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 753DAC43458
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2026 11:56:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1349870.1607500 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wetPW-00012g-MR; Wed, 01 Jul 2026 11:47:22 +0000
+	id 1wetXd-000341-HX; Wed, 01 Jul 2026 11:55:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1349855.1607490; Wed, 01 Jul 2026 11:47:22 +0000
+Received: by outflank-mailman (output) from mailman id 1349870.1607500; Wed, 01 Jul 2026 11:55:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wetPW-00012Z-Jb; Wed, 01 Jul 2026 11:47:22 +0000
-Received: by outflank-mailman (input) for mailman id 1349855;
- Wed, 01 Jul 2026 11:47:21 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>) id 1wetPV-00012P-47
- for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 11:47:21 +0000
+	id 1wetXd-00033u-Eh; Wed, 01 Jul 2026 11:55:45 +0000
+Received: by outflank-mailman (input) for mailman id 1349870;
+ Wed, 01 Jul 2026 11:55:44 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wetXc-00033m-3N
+ for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 11:55:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wetPU-00Amoy-HG
- for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 13:47:20 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wetXb-00Ahh0-CO
+ for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 13:55:43 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6a44fe42-5cb7-0a2a0a5109dd-0a2a4508de3a-34
- for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 13:47:20 +0200
-Received: from [40.93.201.38]
- (helo=CY3PR05CU001.outbound.protection.outlook.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6a44fe46-edec-0a2a45080019-285dc926ec90-4
- for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 13:47:20 +0200
-Received: from IA1PR03MB8288.namprd03.prod.outlook.com (2603:10b6:208:59e::6)
- by PH7PR03MB7046.namprd03.prod.outlook.com (2603:10b6:510:2b9::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.14; Wed, 1 Jul
- 2026 11:47:16 +0000
-Received: from IA1PR03MB8288.namprd03.prod.outlook.com
- ([fe80::b5ee:28c6:e04b:5599]) by IA1PR03MB8288.namprd03.prod.outlook.com
- ([fe80::b5ee:28c6:e04b:5599%3]) with mapi id 15.21.0159.018; Wed, 1 Jul 2026
- 11:47:16 +0000
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a450027-5cb7-0a2a0a5109dd-0a2a4507a2a6-48
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 13:55:43 +0200
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a45003d-9c8e-0a2a45070019-d1558029c1fb-3
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 13:55:42 +0200
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-493b779003fso2744145e9.3
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 04:55:42 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-148-111.play-internet.pl.
+ [109.243.148.111]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-493be810be8sm66929875e9.9.2026.07.01.04.55.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 01 Jul 2026 04:55:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,302 +52,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZnZuBgRKmk9wnAttSHvXEUNc/Zw+81XGTOoIuFiW+rnV9nx7cpb/wtvL26u/P+thGr/Rr9zyPr4f5ZMHHe/k04Bf4cz2sn4+IUcXwNV0VitcRg8GbO0G/rITzmjWlkQCwK8MYVnVRbJzYrzIoRAsqMU20tMH5qkPxSH+1ZbZcJd/afIJFxUEeO62iaOnMc9bA1NvYOJBlIRB7SMdFbWxW+BX7YhenPMzSdu0bZygE8ZUR6rd32k3bDU774u1aH+Mm08OVNNZ8b9AZnzDByBg0dvqeVohTz2D8kw6WoTEqrvivCukhwD+3ykWE1mcTA7wKu5r6UgI/YxWJfIQf5ESeg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rXjQ95t2lfcDtpe47bRxVISFPg4U+DnFnDalVW391eQ=;
- b=bQ6AESssJ0o61uZdXia/cNatm88u4pk8CtRx9o5V9F6Otlll9iym4RTBRKrtR4SxaDeE8IQyLow/8dWBvgwPXBLruhpTfApXXVfC6Qi+v20WDIQGfRZi9i3U967fMsVparXNhvA8nZmTti2T8GI0gmps/FlsuoUPGy484rt8CP2NED/e8ZiAHe5xdsN19/DFV8kjPMUG/rvbubQVGl1GIOTdjYorn6q9FOKOq3IdPFEv3l4kLFjk8nLVZ64fgL01DVyVvR0SVl7p+VEbbzBbY4Jc+ZTaxSETrTfIjpl7HYwVXbkdJgf3IAOLN03k042C12g9LaXyFC8W3+cK6JPRzg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rXjQ95t2lfcDtpe47bRxVISFPg4U+DnFnDalVW391eQ=;
- b=XsFlseGop5aJpFTpu9uxHrjoDPFJpDmgWsfMD0katQwSKn0SicBBL86WfAUKypWqvkCTZk41ra8DlBj9/iSBpZzp5/mIqtnej3qEnIBcbrDQg/Ikuvly2U68az5iUAyC9r3vPavKTZOdDjzkziyZRUg82Y4U1i9U8oZLOknnZ1M=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <7ae3b2d9-3455-49e3-ac37-cb85d1e043da@citrix.com>
-Date: Wed, 1 Jul 2026 12:47:13 +0100
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Frediano Ziglio <frediano.ziglio@citrix.com>, Jan Beulich
- <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, Teddy Astie <teddy.astie@vates.tech>,
- Anthony PERARD <anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v6 08/16] libs/guest: fill directly iov structure
-To: Frediano Ziglio <freddy77@gmail.com>, xen-devel@lists.xenproject.org
-References: <20260619130501.272832-1-frediano.ziglio@citrix.com>
- <20260619130501.272832-9-frediano.ziglio@citrix.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <20260619130501.272832-9-frediano.ziglio@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P123CA0611.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:314::10) To IA1PR03MB8288.namprd03.prod.outlook.com
- (2603:10b6:208:59e::6)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1782906941; x=1783511741; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=MoQ03rLQTdgsOEta0q/3tkgEBYC0ycfrpVzP3Ye92u4=;
+        b=cuk5KihaeGk4FnoZCufOPUXjf+BwbZt/ppv6ikSxFtRlAvr7W64c9SU96xU3XrlI9N
+         PVgCtMKbTAy/vUOJN/DjGMOng1iYzDxo6p6rmFGkXiaak9WNczxcu9rBs5sOAmHsfBkZ
+         dY0RZNCDm8w2wV6YqFy9MKYS6rvwjt4zSYz4u79Al1szkMEK0CdZTP0ed5aKsHom0Mss
+         +PvHWzH4Xyx3RgQY/PesLQEO2tPJ6NbHslA0FST1QfFs1ZFmPMKtyoEDNd0R8dLruOU3
+         W3S1v9uD+0p+QsC2XIPJXMF3ZOL8P4DKTUWWa80FV5d0r1llGXuRhOmIkBOsae4UaNuq
+         BBcw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782906941; x=1783511741;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=MoQ03rLQTdgsOEta0q/3tkgEBYC0ycfrpVzP3Ye92u4=;
+        b=YLe7XTZkHPQOT9giXCi/1usSxaeDuG05L+Y0hspslJaTKnxJjD9NGGh2FcknMAWn6b
+         6vSnJLrmuUQpLLT6ph5FgmEHq83rqObQv12hqN8kAHnTA2twkAx3Y0bxUsRnrPkt48WJ
+         xzJQGuwmFIYnD90cALftximd9h5zjuHjy9KooHrYVW3Ek9b/OddZO1wcxtP/uozUo46n
+         //mxwSL8WGy5MAvrTCW4o4A0OzPlq2wc32QTgQqPjQb9SvhR0qR+B8iIsXZTjfiVTQez
+         7pzpFT7AdYuYgV+RBWLZK81xnYaLT+oGFdcATHXlqMR/58HLHDc1TQnh98z7LLfwKAVO
+         ir3g==
+X-Forwarded-Encrypted: i=1; AFNElJ/ciguDN8bSPv9lih1k+ybCPlfRRPgNQ+FyJNvk45ZhqNTCoJ+fuIQ5zZw7POPDkoodG+KkGOZ+ayc=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyAFuqLURPpM2cLm2z3uzF/QeM9/a82p2MYLzVgYNGP3UAbnVhT
+	Tb5t/6qUVK8ugAlXMdrflKUcjaOXq+WreksCBqBIZbOmBc4CDbak1nUs
+X-Gm-Gg: AfdE7cksPtXsUQFJ+r44n/ob0iegShqiBc4738LR6usn9xvNlXrThOI0t9IicNLz+H+
+	MgxFtXtdDNSo2J/Q8khH08cp8UxqSfXJgqJ8uTa2rUKQD+RbOSdqFMam7dvMat/d1qlTiodA4se
+	gVUPo8L2nXeOhCaGLa1H7xkp4jxfVfzpstlKYgqlE2jnjyZzS2aIGVCKbFTo4qXz6/6IFc+tJN1
+	RKUX+fBrtQoUGjpZP2uuuARh/nFCPqNDoPOGis1YwkL4fc4/CfR5aC5oMqj5rCwg7TawpKM9t0+
+	S7duATrmX+IgtKFspOUt6RH23e2aAHhmKp79+5imsjCPgGgmpnc5E/gXqzlPXHDe/ddCfgUa9T8
+	uozwCnoh5U4/OXJJyU0FvBTBmnwUGzMCTUdgjbsraGADqh6QEvrjkQAokD5KkKVj+phR255pYFu
+	OLtV7m1XjhJVYfd06UnxW6Rl2Wxor5baYOsEBGWZX+VC5OFR4RbHHjDpC8HMrqnkUJAMI=
+X-Received: by 2002:a05:600c:620a:b0:492:58d6:2565 with SMTP id 5b1f17b1804b1-493c2b90815mr17550175e9.25.1782906941508;
+        Wed, 01 Jul 2026 04:55:41 -0700 (PDT)
+Message-ID: <7d007b0d-d246-45aa-8ce2-579f36f6d8bf@gmail.com>
+Date: Wed, 1 Jul 2026 13:55:40 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: IA1PR03MB8288:EE_|PH7PR03MB7046:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6cd3e53d-c311-4d72-eaa9-08ded7667fad
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|366016|1800799024|376014|4143699003|6133799003|56012099006|11063799006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	eUz/Syqc54wr7COrUFVDM2qadCLMAGzQbJl4GGlGwb88p2Gfr28V0ebBBCZOwkDdZAWcQj38uJ++lzxSwDg5LBFCuSZ/1yxIhR5n62BorGQ0YcPFmtWkLqzzqQaxhAasMgDcN6tnv0kg8bsqjRL0RMNshcYxqLoGvSinQJ27ce4PDGmZgCXGhT17EO8TzkuictLkLFb42l1I5QL18WBArjq0UgFa6GUSZYc9qALac2Cq1k2XV2Z8TzGVOx3y9SFoXOBGmxW3WIM3FEei3371Z9op7jTPLq0KgGHxii8eMJzI8t0qEFdyn5QgjGiBK2RlutTEWvPzIfIdoQYh9kPrvsAi1weCeVWijF6fSN/FOD33H4BKKJhietk1x1We7wbVWhiG2qJZuMDDkmP0c8oSJUXGxtH0SRJtaxARUvPGffobEOj3AVdMtqVBaaA4flC2y2SUIOBP+LiWBmJBqNRaW2MViqSpjoooCTyzYxUWbIC0TUn9xlZZ171X8U5g9F8tEGtIw+lK+NpEc5ZIDn1pg4sRWZakQjTjOWGQaUqx8ocdYdjWvtWUvfZfWuZTxvjvrpc1C+rtRYsvgTvEkHYQmjW+ZjYt3cmWKoMxfXigdxh2G2SWYTNBmwd9XSUZkLNv0T+6/ha6jHKDR59u3GZ9Fm9pl2f40mAsUXmgT3vNY5Y=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA1PR03MB8288.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(4143699003)(6133799003)(56012099006)(11063799006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?QWh1aGNRMVh4Z1Y5YmNqNlBvdlpRVTY4NTVTS3l3RldzVm9iWFNIMDFCNTF4?=
- =?utf-8?B?b1FETERqcm54TWhTTmh1bVVaZFlESGRMdnpjamhxdm5SQlE1d01ZWVZVbXNP?=
- =?utf-8?B?b0dqWnM5VWM2aDdaUmRFNERzU000SjdSa0tsbUpiWHREdWI4VGlNaXEvTUts?=
- =?utf-8?B?T3NEOWlwNkJSazNTZ2JmWkVMMWhoaUFkdWh6cUVJZjQ0cFhIaVpReTl6bDJm?=
- =?utf-8?B?Qi8vUllzQUd4VjhyRVUrdFlHaXFFWWVoemJ5RTV5emRvQlk2K2FkcDdXN1FI?=
- =?utf-8?B?VU1tN2M5aGNRV3doRitMa2xTRDB1ZDh1UHBHR1FFVnFBcXBBQS9lZCsxTTAy?=
- =?utf-8?B?cHdQRmlFajN3TTFlZWRyeGE4bnU0amQ0bjZscEViVEtsRTR6QW1Jc1VTL1BW?=
- =?utf-8?B?WmRSdXlDVDFKTk8zNUZ5VlVaNFk4REg0alRCNktqMFBqdTQ3L2w0RFlUT2RZ?=
- =?utf-8?B?d05EbWdObFExUk50WUpuNlJnanBLODc2ZXB5UmZtN3VPNHE2akVkNU83WS9x?=
- =?utf-8?B?L3Z0VHRnOHp4Z082N1ExS3NCUzFHMTRxMnc4Z0lCcmROY2N5OUNybjE2dGo1?=
- =?utf-8?B?U2NrenJMQndidi9sempLQVNjQnE0OXgyc1o3NHgzZGRKRjZSdXN2eHo2eTlp?=
- =?utf-8?B?bC8xalcvazlyR0Rsbm1GQnFxQzgyRkpLK0t0dzBPSmVlVk5xU1VDSkRncVp0?=
- =?utf-8?B?eEhkaFhNbzF5VThGNENFWW14cXMvcWFVM0RWa0hEaUljRTJXSExTRGdjT0Zi?=
- =?utf-8?B?V3BPQmx3aW1sNnFJVW9qT3NBUDQ1ODdYL21rYVFZWmhGVEZOdHJTY0lpYWZx?=
- =?utf-8?B?czM4TFBkOG1uMG1wdkNJVGszRlZrWEtqUlpXU0hLa21jTDlPcmR6ZDRPMmJ6?=
- =?utf-8?B?ZEF2WlBtRXI2RjJzNWFyckNpVS9yWE5veEU2STQvcE9yVXZDSHNYekVxRTlt?=
- =?utf-8?B?K2lLMndDRW82cTNVUlNvSW1FcmRMT0ZNUDd5V3N3MGRQSjNoTmhSS1k0TWkz?=
- =?utf-8?B?K1E0SmpLNFRhQXhVaFZiK2hrVXhRVFRMdHBLOTc0ejBXMEFGcjJsdGlKVmVk?=
- =?utf-8?B?UDRncm82Y1JOKzRpYTY0SDVicnBnZi9SL1VkS2NocTNtWGVBckRVSDJEQ0xp?=
- =?utf-8?B?QXE0aklEUUJqdlF6QWFVYlRaVmdPcGtMWTZnRlF4Zm1UcThOWFY5WVNKclUr?=
- =?utf-8?B?b0l4elhOZ2N4UHBFV2JDdmp2eldKWXRRNWsyTm0wKzgreFgvbHN0c242eFRz?=
- =?utf-8?B?QTRPQnZ4RjZKMnBvTHpjczBvOEdpbEdOeFZnQXZ5Z3lEK1ZIWDU1bkZvU0xr?=
- =?utf-8?B?QmRrWm1rYUtLTE5jTVJOTXh6UWVMTklXN0NTS2JCcDV1alFqUFoxNllJZzh4?=
- =?utf-8?B?TXlFcm5NOXRLVGFhcXBIUW1CcEdYdGNvYXgrYm1YUkNiam1HQVhaZk1WbGM2?=
- =?utf-8?B?N2R5UUhHS3ltdGxmQ053NXV4ZGVqd2JOWWN3OHZkemQ3UHk3U1kvUGcra3hR?=
- =?utf-8?B?eXoycE9Nc21mM2liOFFMMGlrOFIvN1liMS9vWS9XelJOMjUySFpZekowSnVi?=
- =?utf-8?B?U2Rad2NaQXNPYVpidHZqMURWNCtDZGJRMmhiQ21GK2VTMkNqaWFRTENIYTFo?=
- =?utf-8?B?OXo3V3R5cmV3dnpCZkxXZlI0TGhGMXBSSFplZGFkRDRGbDZ6UUs1OTJwbjRZ?=
- =?utf-8?B?L04vOUo0OWlxaWF0WHFiekx0Vm9KQ1BWOEltRUEyOTNPOGhCNXpUajN2R2RL?=
- =?utf-8?B?c2ZXNldSVXkzdFpGZ3lwWlBMZCtBdy92OEp6eVBXR29aWE94YUt6REd3MXRy?=
- =?utf-8?B?ditnWnpGV1FMS1ZXZUwyMk5sdlZTR0ZWOUZBRnBIVnNYZDlUWUJNa2l3OVRz?=
- =?utf-8?B?UjYyV2lrTmVRNkY0WDZYZkk3ZEJBekpUTEFWYjZQVjNycUNrc2huSGltVUNj?=
- =?utf-8?B?T3J6enVPSm1FMmlHaVJGbmg1aWY5Q0pwd1o5ZTdzbktzNVV4azNidldNWEFl?=
- =?utf-8?B?bWVXelZjQmc5clpKUSswcnJQVWVyRlV0SkJnTURMbWFLc2hKMllNR1Rkc0d3?=
- =?utf-8?B?U2d0ZG1xRE9LT2xKVzRWYWhac0tqeWpvWXBBbGQzaVY4WDNJN3hzWHRDT0Ja?=
- =?utf-8?B?VWUvSVlqbStQM2hiQVI0V3lBTnZia1BWUzJVSjB1L1lYaGs0blo0V2R0MVJ2?=
- =?utf-8?B?NE1LZVZ5NWhxRmxZRW0zQXNScFh0c0hXYTBHVHRZUEFRdlQvTWdrbEhwWWVk?=
- =?utf-8?B?N3g3b0JVMUlsNGY3YzU5bXBJS3QxRktDNGMwa2hBWUJ2SDlpTFgvL2I3WFR5?=
- =?utf-8?B?TWJwcG9WU1pnT0dxUDlmS3BYMFFyOTJoWWkzTWw2WDNLSjdFQnZKZ1ZUZ3h5?=
- =?utf-8?Q?VdpiU3zpRgGRQ24A=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6cd3e53d-c311-4d72-eaa9-08ded7667fad
-X-MS-Exchange-CrossTenant-AuthSource: IA1PR03MB8288.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2026 11:47:16.2531
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cpewHvgBiRSXcsbKUqSdW8PyrTVVr26rEpj4Qh/gFI0Wsv+6y7zFJPLgAdFIdu3GBKaxE64oJDk2j7OjrOg8L4CY3M13TO9a8M5X+oSiNAI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR03MB7046
-X-purgate-ID: tlsNG-c1860d/1782906440-A3F323FC-4720F598/0/0
-X-purgate-type: clean
-X-purgate-size: 5189
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 20/25] xen/riscv: create APLIC DT node for guest
+ domains
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1782487661.git.oleksii.kurochko@gmail.com>
+ <2bab716741ae436c7b92989d7613dac620166b89.1782487661.git.oleksii.kurochko@gmail.com>
+ <76b16195-43a8-40cc-9d22-7b9c21e4c8f1@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <76b16195-43a8-40cc-9d22-7b9c21e4c8f1@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ef75cf/1782906942-FD12E25E-A0EA1295/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 3106
 
-On 19/06/2026 2:04 pm, Frediano Ziglio wrote:
-> Instead of storing page pointers into an array and lately adding to
-> iov vector add the pages directly to iov to avoid "guest_data"
-> array.
->
-> Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
-> ---
->  tools/libs/guest/xg_sr_common.h |  1 -
->  tools/libs/guest/xg_sr_save.c   | 64 ++++++++++++---------------------
->  2 files changed, 23 insertions(+), 42 deletions(-)
->
-> diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-> index 95b0564e5c..b2c441b644 100644
-> --- a/tools/libs/guest/xg_sr_common.h
-> +++ b/tools/libs/guest/xg_sr_common.h
-> @@ -214,7 +214,6 @@ struct xc_sr_context_save_buffers
->      xen_pfn_t batch_pfns[MAX_BATCH_SIZE];
->      xen_pfn_t mfns[MAX_BATCH_SIZE];
->      xen_pfn_t types[MAX_BATCH_SIZE];
-> -    void *guest_data[MAX_BATCH_SIZE];
->      void *local_pages[MAX_BATCH_SIZE];
->      struct iovec iov[MAX_BATCH_SIZE + 2]; /* Headers + data. */
->      uint64_t rec_pfns[MAX_BATCH_SIZE];
-> diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
-> index 4988d8040b..8a22267fdf 100644
-> --- a/tools/libs/guest/xg_sr_save.c
-> +++ b/tools/libs/guest/xg_sr_save.c
-> @@ -88,7 +88,6 @@ static int write_batch(struct xc_sr_context *ctx)
->      xc_interface *xch = ctx->xch;
->      xen_pfn_t *mfns, *types;
->      void *guest_mapping = NULL;
-> -    void **guest_data;
->      void **local_pages;
->      int *errors, rc = -1;
->      unsigned int i, p, nr_pages = 0, nr_pages_mapped = 0;
-> @@ -113,9 +112,6 @@ static int write_batch(struct xc_sr_context *ctx)
->      types = ctx->save.buffers->types;
->      /* Errors from attempting to map the gfns. */
->      errors = ctx->save.buffers->errors;
-> -    /* Pointers to page data to send.  Mapped gfns or local allocations. */
-> -    guest_data = ctx->save.buffers->guest_data;
-> -    memset(guest_data, 0, sizeof(*guest_data) * nr_pfns);
->      /* Pointers to locally allocated pages.  Need freeing. */
->      local_pages = ctx->save.buffers->local_pages;
->      memset(local_pages, 0, sizeof(*local_pages) * nr_pfns);
-> @@ -158,6 +154,19 @@ static int write_batch(struct xc_sr_context *ctx)
->          mfns[nr_pages++] = mfns[i];
->      }
->  
-> +    hdrs.rec.length = sizeof(hdrs.page_data);
-> +    hdrs.rec.length += nr_pfns * sizeof(*rec_pfns);
-> +
-> +    hdrs.page_data.count = nr_pfns;
-> +
-> +    iov[0].iov_base = &hdrs;
-> +    iov[0].iov_len = sizeof(hdrs);
-> +
-> +    iov[1].iov_base = rec_pfns;
-> +    iov[1].iov_len = nr_pfns * sizeof(*rec_pfns);
-> +
-> +    iovcnt = 2;
-> +
->      if ( nr_pages > 0 )
->      {
->          guest_mapping = xenforeignmemory_map(
-> @@ -199,61 +208,34 @@ static int write_batch(struct xc_sr_context *ctx)
->                  else
->                      goto err;
->              }
-> +            else if ( iov[iovcnt - 1].iov_base + iov[iovcnt - 1].iov_len !=
-> +                      page )
-> +            {
-> +                iov[iovcnt].iov_base = page;
-> +                iov[iovcnt].iov_len = PAGE_SIZE;
-> +                iovcnt++;
-> +            }
->              else
-> -                guest_data[i] = page;
-> +            {
-> +                iov[iovcnt - 1].iov_len += PAGE_SIZE;
-> +            }
->  
->              rc = -1;
->              ++p;
->          }
->      }
->  
-> -    hdrs.rec.length = sizeof(hdrs.page_data);
-> -    hdrs.rec.length += nr_pfns * sizeof(*rec_pfns);
->      hdrs.rec.length += nr_pages * PAGE_SIZE;
->  
-> -    hdrs.page_data.count = nr_pfns;
-> -
->      for ( i = 0; i < nr_pfns; ++i )
->          rec_pfns[i] = ((uint64_t)(types[i]) << 32) | ctx->save.batch_pfns[i];
->  
-> -    iov[0].iov_base = &hdrs;
-> -    iov[0].iov_len = sizeof(hdrs);
-> -
-> -    iov[1].iov_base = rec_pfns;
-> -    iov[1].iov_len = nr_pfns * sizeof(*rec_pfns);
-> -
-> -    iovcnt = 2;
-> -
-> -    if ( nr_pages )
-> -    {
-> -        for ( i = 0; i < nr_pfns; ++i )
-> -        {
-> -            if ( !guest_data[i] )
-> -                continue;
-> -
-> -            if ( iov[iovcnt - 1].iov_base + iov[iovcnt - 1].iov_len !=
-> -                 guest_data[i] )
-> -            {
-> -                iov[iovcnt].iov_base = guest_data[i];
-> -                iov[iovcnt].iov_len = PAGE_SIZE;
-> -                iovcnt++;
-> -            }
-> -            else
-> -            {
-> -                iov[iovcnt - 1].iov_len += PAGE_SIZE;
-> -            }
-> -            --nr_pages;
-> -        }
-> -    }
-> -
->      if ( writev_exact(ctx->fd, iov, iovcnt) )
->      {
->          PERROR("Failed to write page data to stream");
->          goto err;
->      }
->  
-> -    /* Sanity check we have sent all the pages we expected to. */
-> -    assert(nr_pages == 0);
->      rc = ctx->save.nr_batch_pfns = 0;
->  
->   err:
 
-Looking at this patch, I think it wants merging with patch 3 and
-bringing ahead of patch 5.
 
-You're undoing/redoing work in both of those patches, where I think it
-would be simpler to drop guest_data rather than convert it then drop.
+On 6/29/26 5:26 PM, Jan Beulich wrote:
+> On 26.06.2026 17:46, Oleksii Kurochko wrote:
+>> --- a/xen/arch/riscv/include/asm/imsic.h
+>> +++ b/xen/arch/riscv/include/asm/imsic.h
+>> @@ -78,6 +78,7 @@ struct vimsic_state {
+>>   };
+>>   
+>>   struct dt_device_node;
+>> +struct kernel_info;
+>>   struct vcpu;
+>>   
+>>   int imsic_init(const struct dt_device_node *node);
+>> @@ -93,4 +94,6 @@ int vcpu_imsic_init(struct vcpu *v);
+>>   void vcpu_imsic_deinit(struct vcpu *v);
+>>   unsigned int vcpu_guest_file_id(const struct vcpu *v);
+>>   
+>> +int vimsic_make_domu_dt_node(struct kernel_info *kinfo, unsigned int *phandle);
+> 
+> Doesn't this belong in the earlier patch?
 
-Moving hdrs.rec.* can be done in patch 1 (which will probably simplify
-it's diff too).
+Yes, it should be in the earlier patch. I will move this decl. to prev 
+patch.
 
-~Andrew
+> 
+>> --- a/xen/arch/riscv/vaplic.c
+>> +++ b/xen/arch/riscv/vaplic.c
+>> @@ -9,6 +9,8 @@
+>>    */
+>>   
+>>   #include <xen/errno.h>
+>> +#include <xen/fdt-kernel.h>
+>> +#include <xen/libfdt/libfdt.h>
+>>   #include <xen/sched.h>
+>>   #include <xen/xvmalloc.h>
+>>   
+>> @@ -19,6 +21,11 @@
+>>   
+>>   #include "aplic-priv.h"
+>>   
+>> +#define VAPLIC_COMPATIBLE "riscv,aplic"
+>> +#define VAPLIC_NUM_SOURCES 96
+> 
+> So for the IMSIC the host value is relevant, but for the APLIC the count is
+> an arbitrary(?) compile time constant? Why?
+If you are referring to the number of IMSIC interrupt identities, the 
+IMSIC node has separate properties for the host and guest:
+
+```yaml
+riscv,num-ids:
+   $ref: /schemas/types.yaml#/definitions/uint32
+   minimum: 63
+   maximum: 2047
+   description:
+     Number of interrupt identities supported by the IMSIC interrupt file.
+
+riscv,num-guest-ids:
+   $ref: /schemas/types.yaml#/definitions/uint32
+   minimum: 63
+   maximum: 2047
+   description:
+     Number of interrupt identities supported by the IMSIC guest 
+interrupt file. If not specified, it is assumed to be the same as the 
+value of the `riscv,num-ids` property.
+```
+
+Therefore, if `riscv,num-guest-ids` is not explicitly specified, the 
+predefined value `GUEST_IMSIC_NUM_IDS` is used.
+
+No equivalent property exists for APLIC, which is why the value is 
+explicitly hardcoded here. To some extent, the chosen number is 
+arbitrary, but I used the same value that QEMU uses when creating the 
+APLIC node.
+
+It probably makes sense to limit this value in a similar way to IMSIC, 
+at least for now, since the case where the number of VAPLIC sources 
+exceeds the number of host APLIC sources is not supported (assuming that 
+configuration is even valid). In other words, we could use:
+   min(VAPLIC_NUM_SOURCES, host_num_sources)
+
+Would that make sense?
+
+> 
+>> @@ -29,6 +36,74 @@ static void cf_check vaplic_deinit(struct vcpu *v)
+>>       return vcpu_imsic_deinit(v);
+>>   }
+>>   
+>> +static int __init cf_check vaplic_make_domu_dt_node(struct kernel_info *kinfo)
+>> +{
+>> +    struct domain *d = kinfo->bd.d;
+>> +    int res = 0;
+> 
+> I'm pretty sure I did point out this (or a very similar) pointless initializer
+> before.
+> 
+
+I will drop initializer.
+
+Thanks.
+
+~ Oleksii
 
