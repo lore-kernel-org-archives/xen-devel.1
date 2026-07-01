@@ -4,42 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84AD7C43458
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2026 07:06:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1349527.1607258 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 078E4C43458
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2026 07:45:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1349545.1607267 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wep0y-000326-Dz; Wed, 01 Jul 2026 07:05:44 +0000
+	id 1wepcu-0001li-6v; Wed, 01 Jul 2026 07:44:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1349527.1607258; Wed, 01 Jul 2026 07:05:44 +0000
+Received: by outflank-mailman (output) from mailman id 1349545.1607267; Wed, 01 Jul 2026 07:44:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wep0y-00031y-A1; Wed, 01 Jul 2026 07:05:44 +0000
-Received: by outflank-mailman (input) for mailman id 1349527;
- Wed, 01 Jul 2026 07:05:43 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <peterz@infradead.org>) id 1wep0w-00031q-27
- for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 07:05:43 +0000
+	id 1wepcu-0001lb-2n; Wed, 01 Jul 2026 07:44:56 +0000
+Received: by outflank-mailman (input) for mailman id 1349545;
+ Wed, 01 Jul 2026 07:44:55 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wepct-0001lV-42
+ for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 07:44:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wep0v-008YJK-BR
- for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 09:05:41 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wepcr-009ztH-DF
+ for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 09:44:53 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <peterz@infradead.org>)
- id 6a44bc3f-2eae-0a2a0a5409dd-0a2a4502da62-26
- for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 09:05:40 +0200
-Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <peterz@infradead.org>)
- id 6a44bc43-5a27-0a2a45020019-5a9b3222db76-3
- for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 09:05:39 +0200
-Received: from 77-249-17-252.cable.dynamic.v4.ziggo.nl ([77.249.17.252]
- helo=noisy.programming.kicks-ass.net)
- by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wep0n-00000006Avt-1h6e; Wed, 01 Jul 2026 07:05:33 +0000
-Received: by noisy.programming.kicks-ass.net (Postfix, from userid 1000)
- id ECCFA30035C; Wed, 01 Jul 2026 09:05:31 +0200 (CEST)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a44c56b-bab6-0a2a0a5309dd-0a2a450cdf7c-32
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 09:44:53 +0200
+Received: from [209.85.167.53] (helo=mail-lf1-f53.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a44c575-f399-0a2a450c0019-d155a735c968-3
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 09:44:53 +0200
+Received: by mail-lf1-f53.google.com with SMTP id
+ 2adb3069b0e04-5aeae771c49so306206e87.3
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 00:44:53 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-148-111.play-internet.pl.
+ [109.243.148.111]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5aec5eaed8esm160558e87.6.2026.07.01.00.44.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 01 Jul 2026 00:44:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,120 +52,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=+AaYpDAuxo7H4NIsCnNAZDJ/up1aHckwKckTsZUvyYo=; b=obljbhuiEFfUuQG2puQ/PkbnJB
-	ObvbkN3jtXxrgtWidSkKLpIFrJAhoSkE0ln3nU9mr8U/s6eVLGJ3wgVZE8OqsfGTjooaeg/G1q0Bx
-	4ykvNq3SVgHh1vZGY7LQyVu+cJwysZH/AAayjUiEuDzqqlHKusFT0kOfmcjqEYfAVSrhjYoo/ALlN
-	eDOtGEALQpKWr8R+L6fOm2nhZ/X04WVjwDX15RQsFxk+5sT62z2LjJ/ohPAf6WnBh3i2BJ4e5YSFk
-	ZvmTMJW/gH/cz4XaFf28ftNCy6xI6xFAw48J2trogdaLMXogw0JaXN+VhndNhW4UY1f5oe60hJl86
-	9HZxYVNg==;
-Date: Wed, 1 Jul 2026 09:05:31 +0200
-From: Peter Zijlstra <peterz@infradead.org>
-To: Mauricio Faria de Oliveira <mfo@igalia.com>
-Cc: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>, Juergen Gross <jgross@suse.com>,
-	Alexey Dobriyan <adobriyan@gmail.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>, kernel-dev@igalia.com,
-	linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH RESEND v5 1/3] x86/asm, x86/boot: expose inline memcmp
-Message-ID: <20260701070531.GK48970@noisy.programming.kicks-ass.net>
-References: <20260630-pvh-kasan-inline-v5-0-52afc979be81@igalia.com>
- <20260630-pvh-kasan-inline-v5-1-52afc979be81@igalia.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1782891893; x=1783496693; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=vlHQ/fvs5m+gF3nR5deR9QkQTOr+VSn7/u3q6MKLMBY=;
+        b=NLIlUc1NcEkVsGbbgjspSrmmoVKQiqBBgLywJxa5Z//9XW2K2lHseOxoGesy0dqElT
+         4+06GbGeh/hAYv3n0BJu4vZr2oyJsEIQmYkhPVWQSXsYvxWwlABArczIv1ww5hEc2E0i
+         vPpIFDiR/uDXTdvUsK7LPxWL/NojdQoA0+kpKcgI32nGcihj74bf3Tp05ez5yz1x1pF+
+         Liy1e051OPvH59mjrLcinFQbIe8n9zw6g6K12jyR27uakWvauXyGRNuV8OWe/myvqUcS
+         ZYYXcpSp0CV+wznXHNxwqdDOfWs75pJTkKw8IS0q2MLi/KQ5hhTss90foRQQ7bGJi6Ia
+         fykw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782891893; x=1783496693;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=vlHQ/fvs5m+gF3nR5deR9QkQTOr+VSn7/u3q6MKLMBY=;
+        b=ifj7CHkB2yeUlm7NRWj+4s6hsDzStwr7TO2qZGRVx+lah3jYIGzpkvi9EApU5V1eni
+         n82vPSipccUWdacaC95lLpKkiGYWgHozd9HzN/GZNxeHD/Bc7aajiG+NSwObCO1DtuOr
+         J852wVpfEvrjPIcF20TI+A5kNaHY3a0e0GGq18joVmbrcsIAVMn9tjqTeB0eMeWGGNGA
+         DgJTZ/DjM2K0/w30sPFzL/mTCy/c6TtuttnetgL4y7EE1xGlG8HgIFYmUi/sLYymAwnd
+         BYErUhitOc9vKcH53TvES4szEhKZLU6nSsogco9xcvAGpLcgqOVde1736SwLHijrmn8N
+         +PRw==
+X-Forwarded-Encrypted: i=1; AHgh+Rpfj89hlWAXpNWlCqyqSJriFE2XV1+1KqxMhzlUsCQYdDLDenwge5XotxlKZMsbYnatJBcBYI8s/vQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxeD0QbeLiq0GPpReVvxFFK43DRsNPntGkl76//F++CCcEtbzA3
+	p6dI6z8CEoifjaHnTqgmGmjHkGl8hYTk1KVEM0g+pRhff3VrztM5J834
+X-Gm-Gg: AfdE7cnd+pYAMe0TCEftiSiu9JkeZfpjKcC398shVEnCmgxA66Asn5yf3r6jxwB9vde
+	p4wcYpLHmvFKG+sjd+GTxXV93/9xw2o1MOcVV5jvRCUwDoDGP/nOdT2C5BOR9cE/9R255aEebLX
+	/uFceGCCxbTj2hnoFKWuw9ZWMDWhKCQhKZogjR5MMRD81DEIkJlB5r4IyFCGeF4RAVQppN+uvUd
+	nUkL5815Wl0mn9TP+Dk8KFMKw/8vu8ZGQ69M9XfIA/MV2+bCzSsMcjyYhcDamQwqQuXG8j6ymka
+	PtVc1SYr31y6ryAyd8MmoZjg2lHgDHT3+21FrSw9bfvcox/sodFOCsZ/HRyIOvjpz3Ha9h6gxwH
+	AHRpYJNPb5dyUXCjKNjcNgRtmWUU3WSvBaM9Ro+NRwDjQz+YwAoc9Qs8NMf5n+tGGkMMmj8O3dn
+	OiypDEnN6e4+V81tKleGGoYu4WskTc0ELc5m75S4rmQxWwJkoXKTJDiBVknjvl34Oa35Q=
+X-Received: by 2002:a05:6512:230e:b0:5ae:b88f:3126 with SMTP id 2adb3069b0e04-5aec67a5c18mr110488e87.26.1782891892365;
+        Wed, 01 Jul 2026 00:44:52 -0700 (PDT)
+Message-ID: <f9801008-7315-417e-97ac-dfddef6c6926@gmail.com>
+Date: Wed, 1 Jul 2026 09:44:51 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260630-pvh-kasan-inline-v5-1-52afc979be81@igalia.com>
-X-purgate-ID: tlsNG-720697/1782889540-4D3037C5-3C8A4052/0/0
-X-purgate-type: clean
-X-purgate-size: 3069
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 08/25] xen/riscv: introduce guest riscv,isa string
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1782487661.git.oleksii.kurochko@gmail.com>
+ <b2678a5697112d3ac16a98b86433da22374324b2.1782487661.git.oleksii.kurochko@gmail.com>
+ <9d082182-394d-40cd-9afe-35369d7bc4bc@suse.com>
+ <20740b98-bdc0-4098-afda-45b09dc07ca3@gmail.com>
+ <bef567d3-974b-4654-8cf3-d5a97d9dba10@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <bef567d3-974b-4654-8cf3-d5a97d9dba10@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d25034/1782891893-0F737D51-71E7065B/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 1061
 
-On Tue, Jun 30, 2026 at 02:21:46PM -0300, Mauricio Faria de Oliveira wrote:
-> Move the inline memcmp function currently only available in 'boot/string.c'
-> into the shared string function header <asm/shared/string.h> to be reused.
-> 
-> This is not done through <asm/string.h> to avoid pulling unnecessary code
-> in 'boot/string.c' that causes build errors in 'boot/compressed/string.c'
-> and 'purgatory/purgatory.ro'.
-> 
-> Note that the inline memcmp() returns 0/1, not -1/0/1 as regular memcmp()
-> (reported by David Laight <david.laight.linux@gmail.com>).
-> 
-> Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
-> ---
->  arch/x86/boot/string.c               |  6 ++----
->  arch/x86/include/asm/shared/string.h | 16 ++++++++++++++++
->  arch/x86/include/asm/string.h        |  1 +
->  3 files changed, 19 insertions(+), 4 deletions(-)
-> 
-> diff --git a/arch/x86/boot/string.c b/arch/x86/boot/string.c
-> index ac0f900ebc47efa81c92e1bb2010ea41677899c4..be454a6864225f3a972c3e81826b77ed4e8a57fe 100644
-> --- a/arch/x86/boot/string.c
-> +++ b/arch/x86/boot/string.c
-> @@ -15,6 +15,7 @@
->  #include <linux/errno.h>
->  #include <linux/limits.h>
->  #include <asm/asm.h>
-> +#include <asm/shared/string.h>
->  #include "ctype.h"
->  #include "string.h"
->  
-> @@ -31,10 +32,7 @@
->  
->  int memcmp(const void *s1, const void *s2, size_t len)
->  {
-> -	bool diff;
-> -	asm("repe cmpsb"
-> -	    : "=@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len));
-> -	return diff;
-> +	return __inline_memcmp(s1, s2, len);
->  }
->  
->  /*
-> diff --git a/arch/x86/include/asm/shared/string.h b/arch/x86/include/asm/shared/string.h
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..422952152f533ad75b98f3873297b39c4f5e2477
-> --- /dev/null
-> +++ b/arch/x86/include/asm/shared/string.h
-> @@ -0,0 +1,16 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +#ifndef _ASM_X86_SHARED_STRING_H
-> +#define _ASM_X86_SHARED_STRING_H
-> +
-> +/* Note: this memcmp() returns 0/1, not -1/0/1 as regular memcmp(). */
-> +static __always_inline int __inline_memcmp(const void *s1, const void *s2, size_t len)
-> +{
-> +	bool diff;
-> +
-> +	asm("repe cmpsb"
-> +	    : "=@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len));
-> +
-> +	return diff;
-> +}
-> +
-> +#endif /* _ASM_X86_SHARED_STRING_H */
-> diff --git a/arch/x86/include/asm/string.h b/arch/x86/include/asm/string.h
-> index 9cb5aae7fba9ffcf0f5af8f939d30467750ccaa9..f0f4fd8227bf992e78c69209efb31f0a9a0cc3b1 100644
-> --- a/arch/x86/include/asm/string.h
-> +++ b/arch/x86/include/asm/string.h
-> @@ -7,6 +7,7 @@
->  #else
->  # include <asm/string_64.h>
->  #endif
-> +#include <asm/shared/string.h>
->  
->  static __always_inline void *__inline_memcpy(void *to, const void *from, size_t len)
->  {
 
-It seems weird to have __inline_mem{cpy,set}() in a different header than
-__inline_memcmp(). I'm assuming this is because boot cannot include the
-normal string thing?
 
-Perhaps make inline_string.h or somesuch to carry all three of them and
-include that from the relevant places?
+On 7/1/26 8:22 AM, Jan Beulich wrote:
+>>>> @@ -94,6 +95,9 @@ struct arch_domain {
+>>>>        struct p2m_domain p2m;
+>>>>    
+>>>>        struct paging_domain paging;
+>>>> +
+>>>> +    DECLARE_BITMAP(isa, RISCV_ISA_EXT_MAX);
+>>>> +    char *isa_str;
+>>>>    };
+>>> Why is it again that both the bitmap and its string representation need
+>>> storing? In the end they provide two different sources of truth, as there's
+>>> no guarantee that they'll remain in sync.
+>> isa_str is needed to guest device tree to tell which extensions are
+>> supported.
+> Sure, but does that need storing over the lifetime of the domain? 
+
+Considering my answer to you last question here ... then there is no 
+such need.
+
+Can't
+> that string be allocated, built, used, and then freed while DT is being
+> built? 
+
+Agree, it could be done in this way.
+
+Would that string be used at all for toolstack-created domains?
+
+... No, it won't. This string will be created by toolstack. So it could 
+really be dropped from arch_domain.
+
+Thasnk.
+
+~ Oleksii
+
 
