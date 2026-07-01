@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60E8EC43327
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8531EC44500
 	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2026 19:33:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1350378.1607908 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1350389.1607938 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wf0ft-0001yQ-J0; Wed, 01 Jul 2026 19:32:45 +0000
+	id 1wf0fz-0003Cg-C8; Wed, 01 Jul 2026 19:32:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1350378.1607908; Wed, 01 Jul 2026 19:32:45 +0000
+Received: by outflank-mailman (output) from mailman id 1350389.1607938; Wed, 01 Jul 2026 19:32:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wf0ft-0001xO-90; Wed, 01 Jul 2026 19:32:45 +0000
-Received: by outflank-mailman (input) for mailman id 1350378;
- Wed, 01 Jul 2026 19:32:43 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wf0fy-00039B-QU; Wed, 01 Jul 2026 19:32:50 +0000
+Received: by outflank-mailman (input) for mailman id 1350389;
+ Wed, 01 Jul 2026 19:32:48 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3WGtFagYKCZ0PB7KG9DLLDIB.9LJUBK-ABSBIIFPQP.UBKMOLGB9Q.LOD@flex--seanjc.bounces.google.com>)
- id 1wf0fr-0001aG-GD
- for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 19:32:43 +0000
+ <3XGtFagYKCaETFBOKDHPPHMF.DPNYFO-EFWFMMJTUT.YFOQSPKFDU.PSH@flex--seanjc.bounces.google.com>)
+ id 1wf0fv-0002Qu-J6
+ for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 19:32:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wf0fq-009wqs-TH
- for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 21:32:42 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wf0fu-004o0g-VO
+ for xen-devel@lists.xenproject.org; Wed, 01 Jul 2026 21:32:46 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3WGtFagYKCZ0PB7KG9DLLDIB.9LJUBK-ABSBIIFPQP.UBKMOLGB9Q.LOD@flex--seanjc.bounces.google.com>)
- id 6a456b38-e002-0a2a0a5209dd-0a2a450cae0a-46
- for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 21:32:42 +0200
+ <3XGtFagYKCaETFBOKDHPPHMF.DPNYFO-EFWFMMJTUT.YFOQSPKFDU.PSH@flex--seanjc.bounces.google.com>)
+ id 6a456b1f-2eae-0a2a0a5409dd-0a2a4502c3a4-28
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 21:32:46 +0200
 Received: from [209.85.210.201] (helo=mail-pf1-f201.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <3WGtFagYKCZ0PB7KG9DLLDIB.9LJUBK-ABSBIIFPQP.UBKMOLGB9Q.LOD@flex--seanjc.bounces.google.com>)
- id 6a456b59-f399-0a2a450c0019-d155d2c9dd31-3
- for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 21:32:42 +0200
+ <3XGtFagYKCaETFBOKDHPPHMF.DPNYFO-EFWFMMJTUT.YFOQSPKFDU.PSH@flex--seanjc.bounces.google.com>)
+ id 6a456b5d-5a27-0a2a45020019-d155d2c9ac9c-3
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 21:32:46 +0200
 Received: by mail-pf1-f201.google.com with SMTP id
- d2e1a72fcca58-84622d6102dso1270894b3a.1
- for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 12:32:42 -0700 (PDT)
+ d2e1a72fcca58-847a5f03ff9so1061148b3a.0
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2026 12:32:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,45 +52,45 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date:Reply-To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1782934361; x=1783539161; darn=lists.xenproject.org;
+        d=google.com; s=20251104; t=1782934365; x=1783539165; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
-        bh=ReYT3wow7KWZM4WGFuJpCOGL6Ebh0IHq2felz3Yetls=;
-        b=l9Lhx9UESF570Gz6ewNRjf8oOGu5ypXjoNYsvbTHNvSxUGSQXCJCjHnpBiIPNCGNNJ
-         +7HCGa9bvp9YY8xxYH/UXHEgyN6mvCtBq5kqvcNcvvOWKnkpJvtRyjn4M200bM12rCie
-         XBXAzBP82IosoWBuq62LXvUCjt3XMQgKT34OR4oDAoVJ5HhVBno5gGXGN5wrFGSt+23E
-         N154zg3ixOX+PUSAkJcf4R2zc7qb516dG1oO+1Qtw1T275+V7tahqaBbN6eTxAyJzoIx
-         uRuJs2zrhsf9YQYhXMV16F7zN7XWcbRRG8HHPcGS7ihFQIuIcueH1ITuvh0B+0CjquY2
-         hGuw==
+        bh=zvn0qgJXD+EEALhwTLcptmf75deD5j2rYJRr5T7GtTU=;
+        b=NEPU0FvZM0tBUagTvaTXCYGo/6JaJV8OZTChxt4X67j30gOQkx+9mKzlsneZAbn9RR
+         1Jb4uh1+pZxuVzQw15L63HvjbLfMBkyxDFFWC21uy0W2R3MLX+YZ3cYSDBZwO6/GbkxU
+         2QES/GjxBOoUak/kEuLDYA8+cDKVGwsSmKOGm7iKNfc4KqlAxfxV/SR/pNqnw3x+8U96
+         r5nFizTbaDuUhA1Z4dH91SQRvMzd6aPAhyvQEzzG2BXbODs8l3b9kWPu9kjHzSVrXS4+
+         nuvbRMLQbAweoT80UHkkt6yJpp+e7T69BW+I9CgrVm8dpjpsd0ZkLghP5MQf1lmzcVu/
+         NESg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782934361; x=1783539161;
+        d=1e100.net; s=20251104; t=1782934365; x=1783539165;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ReYT3wow7KWZM4WGFuJpCOGL6Ebh0IHq2felz3Yetls=;
-        b=fZ2NW0hKGfQChF7anEk8dibRbQ7jgVSQSx0wC32E+mQmiegrs1gzD3Xpmtao67LfP6
-         Jq4vIk/QoOKpXHmTZ9KvGVPZRyzvpkdpViLkNpsCt2Rksd27jjxXpvUR3jdrppv4LpZf
-         PtGPtxO/ahBSv6eVtRg+wC4t4dUVPFkP9KKCssCvppmQsyIrzd3wCx4oq9/y1vm9pjxe
-         H4zHDmlG1FdVHBD5ExLZ2Bx4DUrjC434j1FCsDUrRv2spL64jb8CeWE3QRRGClg7s0V8
-         wFq51563Oa8uVCNP2kUlDl/XMa0IO6iZ/zcJf8lwmf8aznkT7ILhzU7bI/oxetwMoyyi
-         VgsA==
-X-Forwarded-Encrypted: i=1; AFNElJ+3wMICgmC7CG6fIRA0LgC3r/cnLo18/A7EdpwRuu2J9nfIfJW6qmaAbt/tWB/x3uWPPbSHRggdQtw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxiWnhOOW2TeRL197MMAKwQQoFcx1kZNOTo+Pbmi+g4XBabT6Q7
-	aFjGPGbeXEhL9kGuIqxiQnl7feOPX1UNftTy8AzgmZIaF3sWutoXrtNBrUrCux1LdCupKYyCvfj
-	cFVyqSA==
-X-Received: from pfwy27.prod.google.com ([2002:a05:6a00:1c9b:b0:842:8af7:db0d])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a00:9a6:b0:845:ccf1:49b6
- with SMTP id d2e1a72fcca58-847c51b72d4mr2049167b3a.45.1782934360386; Wed, 01
- Jul 2026 12:32:40 -0700 (PDT)
+        bh=zvn0qgJXD+EEALhwTLcptmf75deD5j2rYJRr5T7GtTU=;
+        b=LZrOq8aec6gqVQBF5NQgElS0siD5reaVV9P2hrMqNq22/sVver1Y4486xXNJBsrLTr
+         tBnvD8w/hcwwnUmLDCETs9PExoApv9Lbsz3EG8lkWX3yaD0MAHrkup5P3E0ChpAvaoiT
+         Gz4yd7WGvPQSMNS3a4DFP2UlS9b99zzWp6XCu8cc2aO1Istt/KedN5v0G7+Wio9XCWMn
+         N0YMvQwXuL+tUl5hf+wunL/TcoViW5tZtR7KQlZuKRwfJ5HbsNrBiRqgXdlav4Mx0SmK
+         dz36uibB8pCnS+oW0gUxTARfpyghI0ksoUSB9Aopi7x/23ANMM+bqBc/67FPcbiYB+a3
+         Exfg==
+X-Forwarded-Encrypted: i=1; AHgh+RqywFmNwPL74Zw7lGYLOtpj7jVCaNzCboPO1qV5VEi5osDdMJtLNCwnaSqJ+ppJcf+YGhQG7OW8L84=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzqAa6FsrkQprcY48Px19ka+Picg1k4R0fuPNyq97H+BWVH1u/U
+	Na9GK3cplCnK6zFCvo0ycWwKS2T0T7aeUsjUdth3e2Q0ovvXBGGRJl1oPOymYXOXPa6Yr3feaeR
+	4WoVALQ==
+X-Received: from pgkz20.prod.google.com ([2002:a63:a54:0:b0:c9a:8872:2a15])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a00:181b:b0:847:9226:e7be
+ with SMTP id d2e1a72fcca58-847c03a60f4mr2814234b3a.0.1782934364356; Wed, 01
+ Jul 2026 12:32:44 -0700 (PDT)
 Reply-To: Sean Christopherson <seanjc@google.com>
-Date: Wed,  1 Jul 2026 12:31:33 -0700
+Date: Wed,  1 Jul 2026 12:31:36 -0700
 In-Reply-To: <20260701193212.749551-1-seanjc@google.com>
 Mime-Version: 1.0
 References: <20260701193212.749551-1-seanjc@google.com>
 X-Mailer: git-send-email 2.55.0.rc0.799.gd6f94ed593-goog
-Message-ID: <20260701193212.749551-13-seanjc@google.com>
-Subject: [PATCH v5 12/51] x86/acrn: Register TSC/CPU frequency callbacks iff
- frequency is actually in CPUID
+Message-ID: <20260701193212.749551-16-seanjc@google.com>
+Subject: [PATCH v5 15/51] x86/tsc: Kill off x86_platform_ops.calibrate_{cpu,tsc}()
+ hooks
 From: Sean Christopherson <seanjc@google.com>
 To: Jonathan Corbet <corbet@lwn.net>, Paolo Bonzini <pbonzini@redhat.com>, 
 	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
@@ -114,63 +114,163 @@ Cc: Shuah Khan <skhan@linuxfoundation.org>, "H. Peter Anvin" <hpa@zytor.com>,
 	David Woodhouse <dwmw2@infradead.org>, Michael Kelley <mhklinux@outlook.com>, 
 	Thomas Gleixner <tglx@linutronix.de>
 Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-d25034/1782934362-A84A9D51-78A097DD/0/0
+X-purgate-ID: tlsNG-720697/1782934366-554E17C5-8AE5A455/0/0
 X-purgate-type: clean
-X-purgate-size: 1816
+X-purgate-size: 5643
 
-Register ACRN's TSC/CPU frequency overrides if and only if the exact TSC
-frequency is actually provided in CPUID.  This will allow marking the TSC
-as reliable as appropriate, and avoids relying on the caller to handle
-"failure".
+Now that getting the CPU and/or TSC frequencies from the hypervisor uses
+dedicated hooks, drop x86_platform_ops.calibrate_{cpu,tsc}() and instead
+directly invoke the correct helper at each phase of (re)calibration.  In
+addition to eliminating unnecessary code, this makes it a bit more obvious
+when the "late" path invokes pit_hpet_ptimer_calibrate_cpu() instead of
+x86_platform_ops.calibrate_cpu().
 
-For all intents and purposes, no functional change intended.
+No functional change intended.
 
 Signed-off-by: Sean Christopherson <seanjc@google.com>
 ---
- arch/x86/kernel/cpu/acrn.c | 12 +++++++++---
- 1 file changed, 9 insertions(+), 3 deletions(-)
+ arch/x86/include/asm/tsc.h      |  2 --
+ arch/x86/include/asm/x86_init.h |  4 ----
+ arch/x86/kernel/tsc.c           | 28 ++++++++++++----------------
+ arch/x86/kernel/x86_init.c      |  2 --
+ 4 files changed, 12 insertions(+), 24 deletions(-)
 
-diff --git a/arch/x86/kernel/cpu/acrn.c b/arch/x86/kernel/cpu/acrn.c
-index ad8f2da8003b..dc71a6fdd461 100644
---- a/arch/x86/kernel/cpu/acrn.c
-+++ b/arch/x86/kernel/cpu/acrn.c
-@@ -19,6 +19,8 @@
- #include <asm/idtentry.h>
- #include <asm/irq_regs.h>
+diff --git a/arch/x86/include/asm/tsc.h b/arch/x86/include/asm/tsc.h
+index b6b86e24e1bf..c09ec485abcd 100644
+--- a/arch/x86/include/asm/tsc.h
++++ b/arch/x86/include/asm/tsc.h
+@@ -95,8 +95,6 @@ extern void mark_tsc_unstable(char *reason);
+ extern int unsynchronized_tsc(void);
+ extern int check_tsc_unstable(void);
+ extern void mark_tsc_async_resets(char *reason);
+-extern unsigned long native_calibrate_cpu_early(void);
+-extern unsigned long native_calibrate_tsc(void);
+ extern unsigned long long native_sched_clock_from_tsc(u64 tsc);
  
-+static unsigned int acrn_tsc_khz_cpuid __initdata;
-+
- static u32 __init acrn_detect(void)
- {
- 	return acrn_cpuid_base();
-@@ -26,13 +28,19 @@ static u32 __init acrn_detect(void)
+ extern int tsc_clocksource_reliable;
+diff --git a/arch/x86/include/asm/x86_init.h b/arch/x86/include/asm/x86_init.h
+index 0c89bf40f507..e879e6e83428 100644
+--- a/arch/x86/include/asm/x86_init.h
++++ b/arch/x86/include/asm/x86_init.h
+@@ -295,8 +295,6 @@ struct x86_hyper_runtime {
  
- static unsigned int __init acrn_get_tsc_khz(void)
+ /**
+  * struct x86_platform_ops - platform specific runtime functions
+- * @calibrate_cpu:		calibrate CPU
+- * @calibrate_tsc:		calibrate TSC, if different from CPU
+  * @get_wallclock:		get time from HW clock like RTC etc.
+  * @set_wallclock:		set time back to HW clock
+  * @iommu_shutdown:		set by an IOMMU driver for shutdown if necessary
+@@ -320,8 +318,6 @@ struct x86_hyper_runtime {
+  * @guest:			guest incarnations callbacks
+  */
+ struct x86_platform_ops {
+-	unsigned long (*calibrate_cpu)(void);
+-	unsigned long (*calibrate_tsc)(void);
+ 	void (*get_wallclock)(struct timespec64 *ts);
+ 	int (*set_wallclock)(const struct timespec64 *ts);
+ 	void (*iommu_shutdown)(void);
+diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
+index 676910292af7..a877b82d0991 100644
+--- a/arch/x86/kernel/tsc.c
++++ b/arch/x86/kernel/tsc.c
+@@ -672,7 +672,7 @@ int cpuid_get_tsc_info(struct cpuid_tsc_info *info)
+  * native_calibrate_tsc - determine TSC frequency
+  * Determine TSC frequency via CPUID, else return 0.
+  */
+-unsigned long native_calibrate_tsc(void)
++static unsigned long native_calibrate_tsc(void)
  {
--	return cpuid_eax(ACRN_CPUID_TIMING_INFO);
-+	return acrn_tsc_khz_cpuid;
+ 	struct cpuid_tsc_info info;
+ 
+@@ -904,7 +904,7 @@ static unsigned long pit_hpet_ptimer_calibrate_cpu(void)
+ /**
+  * native_calibrate_cpu_early - can calibrate the cpu early in boot
+  */
+-unsigned long native_calibrate_cpu_early(void)
++static unsigned long native_calibrate_cpu_early(void)
+ {
+ 	unsigned long flags, fast_calibrate = cpu_khz_from_cpuid();
+ 
+@@ -918,7 +918,7 @@ unsigned long native_calibrate_cpu_early(void)
+ 	return fast_calibrate;
  }
  
- static void __init acrn_init_platform(void)
- {
- 	/* Install system interrupt handler for ACRN hypervisor callback */
- 	sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_acrn_hv_callback);
-+
-+	acrn_tsc_khz_cpuid = cpuid_eax(ACRN_CPUID_TIMING_INFO);
-+	if (acrn_tsc_khz_cpuid) {
-+		x86_init.hyper.get_tsc_khz = acrn_get_tsc_khz;
-+		x86_init.hyper.get_cpu_khz = acrn_get_tsc_khz;
-+	}
- }
+-
++#ifndef CONFIG_SMP
+ /**
+  * native_calibrate_cpu - calibrate the cpu
+  */
+@@ -931,6 +931,7 @@ static unsigned long native_calibrate_cpu(void)
  
- static bool acrn_x2apic_available(void)
-@@ -80,6 +88,4 @@ const __initconst struct hypervisor_x86 x86_hyper_acrn = {
- 	.type			= X86_HYPER_ACRN,
- 	.init.init_platform     = acrn_init_platform,
- 	.init.x2apic_available  = acrn_x2apic_available,
--	.init.get_tsc_khz	= acrn_get_tsc_khz,
--	.init.get_cpu_khz	= acrn_get_tsc_khz,
- };
+ 	return tsc_freq;
+ }
++#endif
+ 
+ void recalibrate_cpu_khz(void)
+ {
+@@ -943,8 +944,8 @@ void recalibrate_cpu_khz(void)
+ 	if (WARN_ON_ONCE(cpu_feature_enabled(X86_FEATURE_TSC_KNOWN_FREQ)))
+ 		return;
+ 
+-	cpu_khz = x86_platform.calibrate_cpu();
+-	tsc_khz = x86_platform.calibrate_tsc();
++	cpu_khz = native_calibrate_cpu();
++	tsc_khz = native_calibrate_tsc();
+ 	if (tsc_khz == 0)
+ 		tsc_khz = cpu_khz;
+ 	else if (abs(cpu_khz - tsc_khz) * 10 > tsc_khz)
+@@ -1458,17 +1459,19 @@ static bool __init determine_cpu_tsc_frequencies(bool early,
+ 	WARN_ON(cpu_khz || tsc_khz);
+ 
+ 	if (early) {
++		/*
++		 * Early CPU calibration can only use methods that are available
++		 * early in boot (obviously).
++		 */
+ 		if (known_cpu_khz)
+ 			cpu_khz = known_cpu_khz;
+ 		else
+-			cpu_khz = x86_platform.calibrate_cpu();
++			cpu_khz = native_calibrate_cpu_early();
+ 		if (known_tsc_khz)
+ 			tsc_khz = known_tsc_khz;
+ 		else
+-			tsc_khz = x86_platform.calibrate_tsc();
++			tsc_khz = native_calibrate_tsc();
+ 	} else {
+-		/* We should not be here with non-native cpu calibration */
+-		WARN_ON(x86_platform.calibrate_cpu != native_calibrate_cpu);
+ 		cpu_khz = pit_hpet_ptimer_calibrate_cpu();
+ 	}
+ 
+@@ -1571,13 +1574,6 @@ void __init tsc_init(void)
+ 		return;
+ 	}
+ 
+-	/*
+-	 * native_calibrate_cpu_early can only calibrate using methods that are
+-	 * available early in boot.
+-	 */
+-	if (x86_platform.calibrate_cpu == native_calibrate_cpu_early)
+-		x86_platform.calibrate_cpu = native_calibrate_cpu;
+-
+ 	if (!tsc_khz) {
+ 		/* We failed to determine frequencies earlier, try again */
+ 		if (!determine_cpu_tsc_frequencies(false, 0, 0)) {
+diff --git a/arch/x86/kernel/x86_init.c b/arch/x86/kernel/x86_init.c
+index 252c5827d063..b7a48e622f48 100644
+--- a/arch/x86/kernel/x86_init.c
++++ b/arch/x86/kernel/x86_init.c
+@@ -147,8 +147,6 @@ static void enc_kexec_finish_noop(void) {}
+ static bool is_private_mmio_noop(u64 addr) {return false; }
+ 
+ struct x86_platform_ops x86_platform __ro_after_init = {
+-	.calibrate_cpu			= native_calibrate_cpu_early,
+-	.calibrate_tsc			= native_calibrate_tsc,
+ 	.get_wallclock			= mach_get_cmos_time,
+ 	.set_wallclock			= mach_set_cmos_time,
+ 	.iommu_shutdown			= iommu_shutdown_noop,
 -- 
 2.55.0.rc0.799.gd6f94ed593-goog
 
