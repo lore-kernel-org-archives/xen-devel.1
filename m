@@ -4,41 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD0E5C43458
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Jul 2026 15:53:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1352127.1609040 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B702C43458
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Jul 2026 16:04:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1352143.1609050 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wfJjF-0000x7-TT; Thu, 02 Jul 2026 15:53:29 +0000
+	id 1wfJtn-00044A-U0; Thu, 02 Jul 2026 16:04:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1352127.1609040; Thu, 02 Jul 2026 15:53:29 +0000
+Received: by outflank-mailman (output) from mailman id 1352143.1609050; Thu, 02 Jul 2026 16:04:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wfJjF-0000x0-Qm; Thu, 02 Jul 2026 15:53:29 +0000
-Received: by outflank-mailman (input) for mailman id 1352127;
- Thu, 02 Jul 2026 15:53:28 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ljs@kernel.org>) id 1wfJjE-0000wu-1r
- for xen-devel@lists.xenproject.org; Thu, 02 Jul 2026 15:53:28 +0000
+	id 1wfJtn-000443-QD; Thu, 02 Jul 2026 16:04:23 +0000
+Received: by outflank-mailman (input) for mailman id 1352143;
+ Thu, 02 Jul 2026 16:04:22 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wfJtm-00043x-KN
+ for xen-devel@lists.xenproject.org; Thu, 02 Jul 2026 16:04:22 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wfJjD-007IZG-Dt
- for xen-devel@lists.xenproject.org; Thu, 02 Jul 2026 17:53:27 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wfJtm-00FHEq-1D
+ for xen-devel@lists.xenproject.org; Thu, 02 Jul 2026 18:04:22 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ljs@kernel.org>)
- id 6a468963-5cb7-0a2a0a5109dd-0a2a450599ec-42
- for <xen-devel@lists.xenproject.org>; Thu, 02 Jul 2026 17:53:27 +0200
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ljs@kernel.org>)
- id 6a468976-3cb2-0a2a45050019-ac6904fed1cc-3
- for <xen-devel@lists.xenproject.org>; Thu, 02 Jul 2026 17:53:27 +0200
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 8A81B601CA;
- Thu,  2 Jul 2026 15:53:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 87BC51F000E9;
- Thu,  2 Jul 2026 15:53:08 +0000 (UTC)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a468bfe-2eae-0a2a0a5409dd-0a2a4507d9de-22
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Jul 2026 18:04:21 +0200
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a468c05-9c8e-0a2a45070019-d155dd31d51c-3
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Jul 2026 18:04:21 +0200
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-4745492ed3aso1319110f8f.1
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Jul 2026 09:04:21 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-148-111.play-internet.pl.
+ [109.243.148.111]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-493c6354771sm63382545e9.3.2026.07.02.09.04.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 02 Jul 2026 09:04:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,184 +52,139 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783007605;
-	bh=rQoQgNL4RLwOJnesXJ906iiowNQYEhnsDiycftRDMfA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=RQbSkv+EjZljB5g46djvoiDLFxojsXRU7Kht7L4jS+hQfEbvLoddE5ik5cDm8RdCY
-	 BqtXzK5uRv9pKYN6O4Tsu8EtqfPc36l/PyBm4MnF4L/Lj7XhDm03p3BdIE6c5nK+EW
-	 WgpMr9xlTDqRIB0VqPTmKhcFe7wtPBcgkLNUiWKV6EXjD7eDfr1juT0c0xwZM3oIhX
-	 yoTEQ0aDxj88mE4YuknOHetVU7Tkkxdet4F5l/46xPMCuTjg7uKR5BnT4gNu2YfNUW
-	 X6p/cRUZ6h1qZ1EK6Q4sO2TBLVEUPUv3Po11nDMVUJoDiNp2oyKVRliXzikuEZxJQO
-	 doneV51wWqdgg==
-Date: Thu, 2 Jul 2026 16:53:01 +0100
-From: Lorenzo Stoakes <ljs@kernel.org>
-To: Lance Yang <lance.yang@linux.dev>
-Cc: akpm@linux-foundation.org, tsbogend@alpha.franken.de, 
-	maddy@linux.ibm.com, mpe@ellerman.id.au, maarten.lankhorst@linux.intel.com, 
-	mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com, simona@ffwll.ch, 
-	l.stach@pengutronix.de, inki.dae@samsung.com, sw0312.kim@samsung.com, 
-	kyungmin.park@samsung.com, krzk@kernel.org, peter.griffin@linaro.org, 
-	jani.nikula@linux.intel.com, joonas.lahtinen@linux.intel.com, rodrigo.vivi@intel.com, 
-	tursulin@ursulin.net, robin.clark@oss.qualcomm.com, lumag@kernel.org, lyude@redhat.com, 
-	dakr@kernel.org, tomi.valkeinen@ideasonboard.com, hjc@rock-chips.com, 
-	heiko@sntech.de, andy.yan@rock-chips.com, thierry.reding@kernel.org, 
-	mperttunen@nvidia.com, jonathanh@nvidia.com, kraxel@redhat.com, 
-	dmitry.osipenko@collabora.com, zack.rusin@broadcom.com, matthew.brost@intel.com, 
-	thomas.hellstrom@linux.intel.com, oleksandr_andrushchenko@epam.com, deller@gmx.de, bcrl@kvack.org, 
-	viro@zeniv.linux.org.uk, brauner@kernel.org, muchun.song@linux.dev, osalvador@suse.de, 
-	david@kernel.org, ziy@nvidia.com, baolin.wang@linux.alibaba.com, 
-	liam@infradead.org, npache@redhat.com, ryan.roberts@arm.com, dev.jain@arm.com, 
-	baohua@kernel.org, hughd@google.com, vbabka@kernel.org, rppt@kernel.org, 
-	surenb@google.com, mhocko@suse.com, jannh@google.com, pfalcato@suse.de, 
-	kees@kernel.org, perex@perex.cz, tiwai@suse.com, linux-mips@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, dri-devel@lists.freedesktop.org, 
-	etnaviv@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org, 
-	linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, 
-	freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
-	linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org, virtualization@lists.linux.dev, 
-	intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org, linux-fbdev@vger.kernel.org, 
-	linux-aio@kvack.org, linux-fsdevel@vger.kernel.org, linux-mm@kvack.org, 
-	linux-sound@vger.kernel.org
-Subject: Re: [PATCH 12/13] mm/mprotect: convert mprotect code to use
- vma_flags_t
-Message-ID: <akaIfhfbTCAdJm3H@lucifer>
-References: <7ef626d8a12dc742cfc09d080be5dc09850e873a.1782760670.git.ljs@kernel.org>
- <20260701160917.91435-1-lance.yang@linux.dev>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1783008261; x=1783613061; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=hg7xCQml2wVUlKW51sJppmbaydhq4zZPmDS+V54apPw=;
+        b=Px+9NHfdN3pCgb4XTGzb+uGgfSHfemFdFwft23qscLvnbPpQ2W+gi6OyVLk+oHoLBa
+         prlaf/DVC9t57NIxPLLNdG+Cg8zVIPG49j24Iz2qjgs2WpdKU2dLHSIXf+XG2RgnrOWr
+         r3FLE5AUmGFG2/aYmcmhD3g0/yB2gBmYHiFsBlXddY8wznZbXV/5XC2M9cgjbRXWaeS0
+         wAoVpmvCKqLK8Hf8HZy49f3IKifwaXSrJXJBrNihrkBI3ds+IQdpYqcJ2p1nZpo1occU
+         qRdpnnbYRAOsmbmEsEosVYaPlLIVSP+vRQDu3cD4KOfWo3XpCpC0UiDy+Gvnr51UwXwt
+         eBQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783008261; x=1783613061;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=hg7xCQml2wVUlKW51sJppmbaydhq4zZPmDS+V54apPw=;
+        b=JX/8yu9IdQRpes3sdWtNwJQPYe02CC41VL+rNJKcAiEQQ5sdKPiWJTjTXsvWae8TFO
+         kju044x2t4wI8U32R7iil12vfx0qwEoAOSe6pCNsqJpcVuI3Ioetn9TNi5uQUAnvPykj
+         U2yqTZI/R+5ewAjZyb64ucqj7UAXXrXgf8SyqH1Y01CIlrIcZpdS+m5MFsWUJgBqffkV
+         wmA5rq9FvuKp8C1nu9H9HEV9/WMko1nfo3wAg98YFfm87aKhJJZ2sQ6hlU0ecgSo08bn
+         NY8vRVdSVvLKvApPZyt0GLMSTRGfwcWLlcpWEF5PWPQiTHHK3TS+wul8sW4Lxkpjo2ja
+         B3xQ==
+X-Forwarded-Encrypted: i=1; AFNElJ+ly3qLhoSfNYwcv+kSCKuQywRl6yknqOR+4Tjg+A75uGxA9cIYg+8h5Iq+ggI2wiDek8ibB2F0Vgs=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yz2cbI1jz9jzUchr5bi4UkPXOirs5+Cz0FZtnFaxHT3a2jiCXqU
+	pKogQOak61ivjATnWLGXQ1TzGd0P0ArgK80fKOSe29ERvSDTkvgllTFp
+X-Gm-Gg: AfdE7ck7BoK4PcYqeHzFDMPSd6oIQ7pKvmkPdWy55cNcFa0h/tPo9NfhfH3t3NeUQ+R
+	Fz8IXZJAuCjzsl4yA/4IQE0uTzGEzW+Ehdqo3Ks1mTVldUpBEKrcTyKGS+gusZuBjOQ8pPYGauK
+	oX9beKEjbDZwU5lLkyesAAxbY8x48q7Ru0ofR2fKQBOWDjp139EKii2eD1p12Hp/sT+Hk/2D4J1
+	vJxKj5i/LVw8Oq2iCTfXyXXxF3V/Px7EkpF7FQe59jIOvH5WYUBFybEe0MQH5LBooWHm9Ci9Wgn
+	86QIb2SHOy/15PLFRQCV1qd0xFR8AOzmP1tCqFU4A6tj032RNTLbGryItaAx5zs+/AWm7lLsJas
+	+zp7uazOI7w+qKDnrSRmBtFSVype0S5f6tBEdkcXdRWh9lAakuYxvmTx7mnRrffox9s5ZAS4nIY
+	sGETdNn7hIUXtExBit3smeQtco50qZ0SUgfE6f3KtqMIkm+Cb9H6aK4gbP+XVUPpm0gnI=
+X-Received: by 2002:a05:600c:34d4:b0:493:a966:d5b5 with SMTP id 5b1f17b1804b1-493c2b3a709mr98864035e9.2.1783008261100;
+        Thu, 02 Jul 2026 09:04:21 -0700 (PDT)
+Message-ID: <d25c4b45-c3db-4a48-bc18-da9037a858d0@gmail.com>
+Date: Thu, 2 Jul 2026 18:04:19 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260701160917.91435-1-lance.yang@linux.dev>
-X-purgate-ID: tlsNG-c201ff/1783007607-151042B8-799A1D2D/0/0
-X-purgate-type: clean
-X-purgate-size: 4441
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 21/25] xen/riscv: implement IRQ routing for device
+ passthrough
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ xen-devel@lists.xenproject.org
+References: <cover.1782487661.git.oleksii.kurochko@gmail.com>
+ <472a77604d35a0bc2a75b71f250fd67b63afde4c.1782487661.git.oleksii.kurochko@gmail.com>
+ <ac1a3a08-dc39-4794-ba96-dab4b88c27a3@suse.com>
+ <6aafbeb5-2f33-49f4-9d14-937b0bc4d15d@gmail.com>
+ <40bcf6b7-306a-419a-bf12-1855f9e589fe@suse.com>
+ <91ffc1b2-7648-4185-a2f1-12b30181c8a9@gmail.com>
+ <e7d430c1-fe57-4b28-a5a2-1c8bfcd54ac4@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <e7d430c1-fe57-4b28-a5a2-1c8bfcd54ac4@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ef75cf/1783008261-7DD2425E-221535F7/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 2926
 
-On Thu, Jul 02, 2026 at 12:09:17AM +0800, Lance Yang wrote:
->
-> On Mon, Jun 29, 2026 at 08:25:35PM +0100, Lorenzo Stoakes wrote:
-> >Replace use of the legacy vm_flags_t flags with vma_flags_t values
-> >throughout the mprotect logic.
-> >
-> >Note that we retain the legacy vm_flags_t bit shifting code in
-> >do_mprotect_key(), deferring a vma_flags_t approach to this for the time
-> >being.
-> >
-> >Additionally update comments to reflect the changes to be consistent.
-> >
-> >No functional change intended.
-> >
-> >Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
-> >---
-> > mm/mprotect.c | 16 ++++++++--------
-> > 1 file changed, 8 insertions(+), 8 deletions(-)
-> >
-> >diff --git a/mm/mprotect.c b/mm/mprotect.c
-> >index 9cbf932b028c..c9504b2a2525 100644
-> >--- a/mm/mprotect.c
-> >+++ b/mm/mprotect.c
-> >@@ -40,7 +40,7 @@
-> >
-> > static bool maybe_change_pte_writable(struct vm_area_struct *vma, pte_t pte)
-> > {
-> >-	if (WARN_ON_ONCE(!(vma->vm_flags & VM_WRITE)))
-> >+	if (WARN_ON_ONCE(!vma_test(vma, VMA_WRITE_BIT)))
-> > 		return false;
-> >
-> > 	/* Don't touch entries that are not even readable. */
-> >@@ -97,7 +97,7 @@ static bool can_change_shared_pte_writable(struct vm_area_struct *vma,
-> > bool can_change_pte_writable(struct vm_area_struct *vma, unsigned long addr,
-> > 			     pte_t pte)
-> > {
-> >-	if (!(vma->vm_flags & VM_SHARED))
-> >+	if (!vma_test(vma, VMA_SHARED_BIT))
-> > 		return can_change_private_pte_writable(vma, addr, pte);
-> >
-> > 	return can_change_shared_pte_writable(vma, pte);
-> >@@ -194,7 +194,7 @@ static __always_inline void set_write_prot_commit_flush_ptes(struct vm_area_stru
-> > {
-> > 	bool set_write;
-> >
-> >-	if (vma->vm_flags & VM_SHARED) {
-> >+	if (vma_test(vma, VMA_SHARED_BIT)) {
-> > 		set_write = can_change_shared_pte_writable(vma, ptent);
-> > 		prot_commit_flush_ptes(vma, addr, ptep, oldpte, ptent, nr_ptes,
-> > 				       /* idx = */ 0, set_write, tlb);
-> >@@ -811,8 +811,8 @@ mprotect_fixup(struct vma_iterator *vmi, struct mmu_gather *tlb,
-> > 		vm_unacct_memory(nrpages);
-> >
-> > 	/*
-> >-	 * Private VM_LOCKED VMA becoming writable: trigger COW to avoid major
-> >-	 * fault on access.
-> >+	 * Private VMA_LOCKED_BIT VMA becoming writable: trigger COW to avoid
-> >+	 * major fault on access.
-> > 	 */
-> > 	if (vma_flags_test(&new_vma_flags, VMA_WRITE_BIT) &&
-> > 	    vma_flags_test(&old_vma_flags, VMA_LOCKED_BIT) &&
-> >@@ -886,7 +886,7 @@ static int do_mprotect_pkey(unsigned long start, size_t len,
-> > 			goto out;
-> > 		start = vma->vm_start;
-> > 		error = -EINVAL;
-> >-		if (!(vma->vm_flags & VM_GROWSDOWN))
-> >+		if (!vma_test(vma, VMA_GROWSDOWN_BIT))
-> > 			goto out;
-> > 	} else {
-> > 		if (vma->vm_start > start)
-> >@@ -894,7 +894,7 @@ static int do_mprotect_pkey(unsigned long start, size_t len,
-> > 		if (unlikely(grows & PROT_GROWSUP)) {
-> > 			end = vma->vm_end;
-> > 			error = -EINVAL;
-> >-			if (!(vma->vm_flags & VM_GROWSUP))
-> >+			if (!vma_test(vma, VMA_GROWSUP_BIT))
->
-> IIUC, should this be
->
-> if (!vma_test_single_mask(vma, VMA_GROWSUP))
->
-> instead?
->
-> #elif defined(CONFIG_PARISC)
-> #define VM_GROWSUP	INIT_VM_FLAG(GROWSUP)
-> ...
-> #ifndef VM_GROWSUP
-> #define VM_GROWSUP	VM_NONE
-> ...
->
-> VM_GROWSUP is only defined as GROWSUP on parisc and becomes VM_NONE
-> elsewhere. But VMA_GROWSUP_BIT is the raw ARCH_1 bit, which is also used
-> for other arch-specific VMA flags:
->
-> 	DECLARE_VMA_BIT_ALIAS(SAO, ARCH_1),		/* Strong Access Ordering (powerpc) */
-> 	DECLARE_VMA_BIT_ALIAS(GROWSUP, ARCH_1),		/* parisc */
-> 	DECLARE_VMA_BIT_ALIAS(SPARC_ADI, ARCH_1),	/* sparc64 */
-> 	DECLARE_VMA_BIT_ALIAS(ARM64_BTI, ARCH_1),	/* arm64 */
-> 	DECLARE_VMA_BIT_ALIAS(ARCH_CLEAR, ARCH_1),	/* sparc64, arm64 */
-> 	DECLARE_VMA_BIT_ALIAS(MAPPED_COPY, ARCH_1),	/* !CONFIG_MMU */
->
-> Other vma_test() changes look fine to me: just fixed INIT_VM_FLAG()
-> masks matching their VMA_*_BIT :)
 
-Thanks you're right, will fix!
 
-Again I swear I ran claude on all of this so it's failing me here :)
+On 7/2/26 4:32 PM, Jan Beulich wrote:
+> On 02.07.2026 11:33, Oleksii Kurochko wrote:
+>>
+>>
+>> On 7/2/26 8:38 AM, Jan Beulich wrote:
+>>
+>>>>>> +    spin_unlock_irqrestore(&desc->lock, flags);
+>>>>>> +
+>>>>>> +    release_irq(desc->irq, info);
+>>>>>> +    xvfree(info);
+>>>>>
+>>>>> If, in release_irq(), action isn't freed, it's ->dev_id field will now have
+>>>>> a dangling pointer. (I think I did point this out before.)
+>>>>
+>>>> It should freed in release_irq() as route_irq_to_guest() always set
+>>>> action->free_on_release = true;
+>>>
+>>> Well, "free_on_release" must exits for a purpose. I.e. there must be, now
+>>> or soon, cases where it's set to false. Else simply drop the field.
+>>
+>> I can't simply remove this field because it is part of the common
+>> `struct irqaction` and is used by other arc-s. (I assume that it is not
+>> what you fully meant...)
+>>
+>> IIUC, this field is used to determine whether an irqaction is
+>> heap-allocated (and therefore should be freed) or statically allocated
+>> (and therefore should not be freed).
+> 
+> Yes. However, all uses of the field are in arch-specific code. So in
+> principle it could be #ifdef-ed out for RISC-V. There may be a better
+> option, though:
+> 
+>> At the moment, all IRQ actions are heap-allocated (on RISC-V), so
+>> free_on_release should always be set to true. In particular, the code
+>> snippet you asked about releases a guest interrupt, and guest interrupt
+>> actions are always heap-allocated. As a result, when release_guest_irq()
+>> calls release_irq(), the associated irqaction will be freed.
+>>
+>> So, from what I can see, the current behavior is correct and I think it
+>> should be left as it is. Do you have any concerns about this?
+> 
+> If you only ever have the field set to true, use ASSERT() in place of
+> if().
+> 
 
->
-> Cheers, Lance
->
-> > 				goto out;
-> > 		}
-> > 	}
-> >@@ -918,7 +918,7 @@ static int do_mprotect_pkey(unsigned long start, size_t len,
-> > 		}
-> >
-> > 		/* Does the application expect PROT_READ to imply PROT_EXEC */
-> >-		if (rier && (vma->vm_flags & VM_MAYEXEC))
-> >+		if (rier && vma_test(vma, VMA_MAYEXEC_BIT))
-> > 			prot |= PROT_EXEC;
-> >
-> > 		/*
-> >--
-> >2.54.0
-> >
-> >
+It looks like that if we want an `ASSERT()`, it should be in 
+`release_guest_irq()`. However, that would require duplicating part of 
+`release_irq()` to locate the corresponding `irqaction` and verify 
+`free_on_release`. Since guest IRQs are created through 
+`route_irq_to_guest()`, which always sets `action->free_on_release = 
+true`, we are already safe.
+
+I don't see much benefit in replacing the `if` statement with an 
+`ASSERT()` in `release_irq()`. The current implementation is generic and 
+would also work for Xen-owned, statically allocated interrupts (even 
+though there are none today). If we replace the `if` with an `ASSERT()` 
+now, anyone introducing a Xen-owned, statically allocated interrupt in 
+the future would simply have to revert the change and restore the `if` 
+statement, bringing us back to the current implementation.
+
+Since the existing code doesn't break any logic and already handles both 
+the current use case and potential future extensions (statically 
+allocated irqs), it seems reasonable to keep it as it is.
+
+~ Oleksii
+
 
