@@ -4,43 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE7CDC43458
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Jul 2026 15:03:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1352012.1608968 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8A82C43327
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Jul 2026 15:09:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1352026.1608979 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wfIwa-0005Yl-Vx; Thu, 02 Jul 2026 15:03:12 +0000
+	id 1wfJ2J-0006TJ-IR; Thu, 02 Jul 2026 15:09:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1352012.1608968; Thu, 02 Jul 2026 15:03:12 +0000
+Received: by outflank-mailman (output) from mailman id 1352026.1608979; Thu, 02 Jul 2026 15:09:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wfIwa-0005Ye-T9; Thu, 02 Jul 2026 15:03:12 +0000
-Received: by outflank-mailman (input) for mailman id 1352012;
- Thu, 02 Jul 2026 15:03:11 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wfIwZ-0005YR-3D
- for xen-devel@lists.xenproject.org; Thu, 02 Jul 2026 15:03:11 +0000
+	id 1wfJ2J-0006TC-EO; Thu, 02 Jul 2026 15:09:07 +0000
+Received: by outflank-mailman (input) for mailman id 1352026;
+ Thu, 02 Jul 2026 15:09:06 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <lance.yang@linux.dev>) id 1wfJ2H-0006T6-6i
+ for xen-devel@lists.xenproject.org; Thu, 02 Jul 2026 15:09:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wfIwX-007ziY-RR
- for xen-devel@lists.xenproject.org; Thu, 02 Jul 2026 17:03:09 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wfJ2G-008SiF-Js
+ for xen-devel@lists.xenproject.org; Thu, 02 Jul 2026 17:09:04 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a467d9b-bab6-0a2a0a5309dd-0a2a4503e5ce-46
- for <xen-devel@lists.xenproject.org>; Thu, 02 Jul 2026 17:03:09 +0200
-Received: from [209.85.208.47] (helo=mail-ed1-f47.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a467da8-ec1a-0a2a45030019-d155d02fa899-3
- for <xen-devel@lists.xenproject.org>; Thu, 02 Jul 2026 17:03:04 +0200
-Received: by mail-ed1-f47.google.com with SMTP id
- 4fb4d7f45d1cf-6983d3dae7aso1171353a12.0
- for <xen-devel@lists.xenproject.org>; Thu, 02 Jul 2026 08:03:04 -0700 (PDT)
-Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
- [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-477db8a4b83sm11052511f8f.12.2026.07.02.08.03.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jul 2026 08:03:03 -0700 (PDT)
+ (envelope-from <lance.yang@linux.dev>)
+ id 6a467f01-e002-0a2a0a5209dd-0a2a4505b22c-28
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Jul 2026 17:09:04 +0200
+Received: from [95.215.58.179] (helo=out-179.mta1.migadu.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <lance.yang@linux.dev>)
+ id 6a467f0f-3cb2-0a2a45050019-5fd73ab3f860-3
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Jul 2026 17:09:03 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,123 +45,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1783004584; x=1783609384; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=DjmOe84IrhGJfQjiy2t/gDqUrLCLWBZLNspBTB4loJM=;
-        b=JP5i7hTN5B82dxM7VAn+1fc0tYAt2zceSPUA9OL1YZy+G6v8zjGD5wYPvbGVUAVmIc
-         7wr1vBNf+MkN92xxVILVb5hDvJrZo3EM+gnp5LlOVuBiGnqdzPMA7Ekq+Yu9W+2vJeni
-         d2nlGh/JmQQbhMiaQxnO9yaH0bOtK586Rh5/s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783004584; x=1783609384;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=DjmOe84IrhGJfQjiy2t/gDqUrLCLWBZLNspBTB4loJM=;
-        b=p/ZEzCOHKU0wFPoXQAEMuUudOnPc6ie4tluiu7AMHUlx8Kq4iCFJ36O0V14d5pSo6d
-         Qh8Ytnw6+ZPckrhcDQmDFI5XatCs8dv7dE/4zTqkNj8X0oaLRbZVnC1dgtyZVBSjK3y3
-         DnVSeFdTFWaOsdBvXjDdBhNVvStSIq9ffwCcgEhryvSCpkeGGmgePRfu0AN2Pp/m7riI
-         Zd92ZcgFWUPaUrxh3HSGr0snbWQpERuNP9K1jgGDuJqZR6gfX7ahqTksCECMa1sPGv/q
-         BRCvIPBvqdhMUXk6BXS4t/nffvgubDfSMGgvyscQlMb2D/7f2Xp7eWoKLwqiq/tusSEm
-         mJsg==
-X-Gm-Message-State: AOJu0YyakJ3Zno1jDu52uMatiAeE581v00fAV1xo9X4/3xm5popGbsjR
-	zWAf7FlUXhrb9JUidMwyjIH+oIreKgxnm3qpa2B9J1Wm7EFn6eZeAWZJCt32auEsnuIsmMXix/6
-	i4fpFDiM=
-X-Gm-Gg: AfdE7cliNE1ICdaAVXM1vx2/75Wrufg6+0aMzqbzz14tnOqi0lSf/qUNKTAHoANnzda
-	rqdT5p5NdC9+DBvFo3F2mjewOG9MEMr/iq5FGDGVDRN/uJ05Kaypv1VayoHzPC0Ktl2+Stho2fD
-	vypCuauuStZtk6cg04SQKrlyIYtSi8LAcq/QElp3wBCV4bPcs8QZjXCq26DZ+Ftoe1GAL2pgeGJ
-	SnHMiRVsvHhbGWNY/ApAYrHMKnc4Jol8YvDxWnIZGDgD6einpRG1243fG9P7WtIvO7CkVuf91Jg
-	K1IK4TKCoYiMSPLblPjgUNm6zhwkl+Z+O8eFZOGvgCpALPtU2xpsaGJ9nGCiyPOaofs8ZiLUWcb
-	X8JFsEgzMgH4C7a1q1B9LV+3Zg8DrFfwIxWlPtewOACwBYt0I6wRvgxbs6w84Ft+jXBXoShoypk
-	p9mWCfVEGFR1aF8LSsVIdzSC/KfhDKjq0BNkOw/FXTf1XyWPluK9XF7WxaGYhkhGQ=
-X-Received: by 2002:a17:907:d303:b0:c12:a7c5:e638 with SMTP id a640c23a62f3a-c12c9d3c84cmr14402666b.7.1783004583966;
-        Thu, 02 Jul 2026 08:03:03 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH for-4.22] tools/libfsimage: Remove the XEN_FSIMAGE_FSDIR environment variable
-Date: Thu,  2 Jul 2026 16:03:01 +0100
-Message-Id: <20260702150301.825883-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=key1 header.d=linux.dev header.i="@linux.dev" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
+Message-ID: <cf5a92d3-2c7e-41e6-afed-f2a4c9d1a774@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1783004941;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=GVgi/IDW6MB0ICHH5yTujujreeH5t5fHN661xjkq/74=;
+	b=Dkh9RWL9rMIQE6Ur1L+lFP9fWBIPUF1EBlETBXiV1FwoU/+0F4n7u3+DtwQotZKTkFazHu
+	oHVZr/Vs+FAfYKVbUxY57cWOfPctKhbPm5r74IEfkBs57Xoqgu/OIspBSvCnXq9uEYouaN
+	h+ygMrTbcJpYGV90L9aTDp+5SWenOgM=
+Date: Thu, 2 Jul 2026 23:08:32 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1783004589-B57BF5D1-AA55E787/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 2307
+Subject: Re: [PATCH 02/13] mm/vma: update do_mmap() to use vma_flags_t
+To: Lorenzo Stoakes <ljs@kernel.org>
+Cc: akpm@linux-foundation.org, tsbogend@alpha.franken.de,
+ maddy@linux.ibm.com, mpe@ellerman.id.au, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com, simona@ffwll.ch,
+ l.stach@pengutronix.de, inki.dae@samsung.com, sw0312.kim@samsung.com,
+ kyungmin.park@samsung.com, krzk@kernel.org, peter.griffin@linaro.org,
+ jani.nikula@linux.intel.com, joonas.lahtinen@linux.intel.com,
+ rodrigo.vivi@intel.com, tursulin@ursulin.net, robin.clark@oss.qualcomm.com,
+ lumag@kernel.org, lyude@redhat.com, dakr@kernel.org,
+ tomi.valkeinen@ideasonboard.com, hjc@rock-chips.com, heiko@sntech.de,
+ andy.yan@rock-chips.com, thierry.reding@kernel.org, mperttunen@nvidia.com,
+ jonathanh@nvidia.com, kraxel@redhat.com, dmitry.osipenko@collabora.com,
+ zack.rusin@broadcom.com, matthew.brost@intel.com,
+ thomas.hellstrom@linux.intel.com, oleksandr_andrushchenko@epam.com,
+ deller@gmx.de, bcrl@kvack.org, viro@zeniv.linux.org.uk, brauner@kernel.org,
+ muchun.song@linux.dev, osalvador@suse.de, david@kernel.org, ziy@nvidia.com,
+ baolin.wang@linux.alibaba.com, liam@infradead.org, npache@redhat.com,
+ ryan.roberts@arm.com, dev.jain@arm.com, baohua@kernel.org, hughd@google.com,
+ vbabka@kernel.org, rppt@kernel.org, surenb@google.com, mhocko@suse.com,
+ jannh@google.com, pfalcato@suse.de, kees@kernel.org, perex@perex.cz,
+ tiwai@suse.com, linux-mips@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, dri-devel@lists.freedesktop.org,
+ etnaviv@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org,
+ linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
+ linux-tegra@vger.kernel.org, virtualization@lists.linux.dev,
+ intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
+ linux-fbdev@vger.kernel.org, linux-aio@kvack.org,
+ linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
+ linux-sound@vger.kernel.org
+References: <e0ac58ad2b88ff7e2f0024e3286b2e786f79ca32.1782760670.git.ljs@kernel.org>
+ <20260702111531.64883-1-lance.yang@linux.dev> <akZwsS-_cywsXSjL@lucifer>
+Content-Language: en-US
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Lance Yang <lance.yang@linux.dev>
+In-Reply-To: <akZwsS-_cywsXSjL@lucifer>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Migadu-Flow: FLOW_OUT
+X-purgate-ID: tlsNG-c201ff/1783004944-0ED162B8-6F8D3693/0/0
+X-purgate-type: clean
+X-purgate-size: 2292
 
-This was reported to the security team, demonstrating that code execution
-could be achieved, but without a demonstration of a priviliege boundary being
-bypassed.
 
-Still, it's a high risk path with no obvious evidence of having been used even
-for debugging, so remove the environment variable and use the build time
-$(libdir)/xenfsimage path only.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Anthony PERARD <anthony.perard@vates.tech>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Julien Grall <julien@xen.org>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+On 2026/7/2 22:16, Lorenzo Stoakes wrote:
+> On Thu, Jul 02, 2026 at 07:15:31PM +0800, Lance Yang wrote:
+[...]
+>>
+>> [...]
+>>> diff --git a/mm/mmap.c b/mm/mmap.c
+>>> index 46174e706bbe..547352183214 100644
+>>> --- a/mm/mmap.c
+>>> +++ b/mm/mmap.c
+>> [...]
+>>> @@ -488,23 +496,27 @@ unsigned long do_mmap(struct file *file, unsigned long addr,
+>>> 		 * Check to see if we are violating any seals and update VMA
+>>> 		 * flags if necessary to avoid future seal violations.
+>>> 		 */
+>>> -		err = memfd_check_seals_mmap(file, &vm_flags);
+>>> +		err = memfd_check_seals_mmap(file, &vma_flags);
+>>> 		if (err)
+>>> 			return (unsigned long)err;
+>>> 	} else {
+>>> 		switch (flags & MAP_TYPE) {
+>>> 		case MAP_SHARED:
+>>> -			if (vm_flags & (VM_GROWSDOWN|VM_GROWSUP))
+>>> +			if (vma_flags_can_grow(&vma_flags))
+>>> 				return -EINVAL;
+>>> 			/*
+>>> 			 * Ignore pgoff.
+>>> 			 */
+>>> 			pgoff = 0;
+>>> -			vm_flags |= VM_SHARED | VM_MAYSHARE;
+>>> +			vma_flags_set(&vma_flags, VMA_SHARED_BIT, VMA_MAYSHARE_BIT);
+>>> 			break;
+>>> -		case MAP_DROPPABLE:
+>>> -			if (VM_DROPPABLE == VM_NONE)
+>>> +		case MAP_DROPPABLE: {
+>>> +			vma_flags_t droppable = VMA_DROPPABLE;
+>>> +
+>>> +			if (vma_flags_empty(&droppable))
+>>> 				return -EOPNOTSUPP;
+>>> +			vma_flags_set_mask(&vma_flags, droppable);
+>>> +
+>>> 			/*
+>>> 			 * A locked or stack area makes no sense to be droppable.
+>>> 			 *
+>>> @@ -515,23 +527,24 @@ unsigned long do_mmap(struct file *file, unsigned long addr,
+>>> 			 */
+>>> 			if (flags & (MAP_LOCKED | MAP_HUGETLB))
+>>> 			        return -EINVAL;
+>>> -			if (vm_flags & (VM_GROWSDOWN | VM_GROWSUP))
+>>> +			if (vma_flags_can_grow(&vma_flags))
+>>> 			        return -EINVAL;
+>>>
+>>> -			vm_flags |= VM_DROPPABLE;
+>>
+>> Old code checked VM_GROWSDOWN|VM_GROWSUP before seting VM_DROPPABLE. New
+>> code flips that around. Hmm, shouldn't master, just made me look twice ;)
+>>
+>> Maybe keep old order?
+> 
+> I guess I feared that defining droppable above then referencing it below would
+> be less clear?
+> 
+> Can move if you feel strongly about it, and sorry for making the move at the
+> same time as the general vm_flags_t -> vma_flags_t refactor as it does make that
+> less clear...
 
-For 4.22.  This was supposed to be posted earlier but fell through the cracks.
-Given it's borderline-security aspect, we don't want to delay it any further.
----
- CHANGELOG.md                             | 1 +
- tools/libfsimage/common/fsimage_plugin.c | 5 +----
- 2 files changed, 2 insertions(+), 4 deletions(-)
-
-diff --git a/CHANGELOG.md b/CHANGELOG.md
-index ef4e6ae9c459..0a4e5f013cb1 100644
---- a/CHANGELOG.md
-+++ b/CHANGELOG.md
-@@ -63,6 +63,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
- 
-  - Removed xenpm tool on non-x86 platforms as it doesn't actually provide
-    anything useful outside of x86.
-+ - Removed the XEN_FSIMAGE_FSDIR environment variable.
- 
- ## [4.21.0](https://xenbits.xenproject.org/gitweb/?p=xen.git;a=shortlog;h=RELEASE-4.21.0) - 2025-11-19
- 
-diff --git a/tools/libfsimage/common/fsimage_plugin.c b/tools/libfsimage/common/fsimage_plugin.c
-index d0cb9e96a654..539dc247356a 100644
---- a/tools/libfsimage/common/fsimage_plugin.c
-+++ b/tools/libfsimage/common/fsimage_plugin.c
-@@ -121,7 +121,7 @@ static int init_plugin(const char *lib)
- 
- int fsi_init(void)
- {
--	const char *fsdir = getenv("XEN_FSIMAGE_FSDIR");
-+	const char *fsdir = FSIMAGE_FSDIR;
- 	struct dirent *dp = NULL;
- 	DIR *dir = NULL;
- 	char *tmp = NULL;
-@@ -129,9 +129,6 @@ int fsi_init(void)
- 	int err;
- 	int ret = -1;
- 
--	if (fsdir == NULL)
--		fsdir = FSIMAGE_FSDIR;
--
- 	if ((name_max = pathconf(fsdir, _PC_NAME_MAX)) == -1)
- 		goto fail;
- 
-
-base-commit: ad9f564a5d840389cbf1b230086e1dd8257d8820
--- 
-2.39.5
-
+No need to churn just for me. Thanks :)
 
