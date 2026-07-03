@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCD27C43458
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Jul 2026 21:23:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1353884.1609645 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 666E9C44500
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Jul 2026 21:23:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1353883.1609632 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wflMP-0006D2-8H; Fri, 03 Jul 2026 21:23:45 +0000
+	id 1wflMM-0005kO-Un; Fri, 03 Jul 2026 21:23:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1353884.1609645; Fri, 03 Jul 2026 21:23:45 +0000
+Received: by outflank-mailman (output) from mailman id 1353883.1609632; Fri, 03 Jul 2026 21:23:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wflMP-0006Cs-2Y; Fri, 03 Jul 2026 21:23:45 +0000
-Received: by outflank-mailman (input) for mailman id 1353884;
- Fri, 03 Jul 2026 21:23:43 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wflMM-0005jN-PI; Fri, 03 Jul 2026 21:23:42 +0000
+Received: by outflank-mailman (input) for mailman id 1353883;
+ Fri, 03 Jul 2026 21:23:42 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+ac8634115322beed580f+8349+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1wflMN-0005qG-BT
- for xen-devel@lists.xenproject.org; Fri, 03 Jul 2026 21:23:43 +0000
+ id 1wflMM-0005fl-0s
+ for xen-devel@lists.xenproject.org; Fri, 03 Jul 2026 21:23:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wflMM-000kw0-O4; Fri, 03 Jul 2026 23:23:42 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wflML-00A83n-Dv; Fri, 03 Jul 2026 23:23:41 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+ac8634115322beed580f+8349+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 6a48281c-2eae-0a2a0a5409dd-0a2a4504979a-10
- for <multiple-recipients>; Fri, 03 Jul 2026 23:23:42 +0200
+ id 6a482855-e002-0a2a0a5209dd-0a2a450295e8-8
+ for <multiple-recipients>; Fri, 03 Jul 2026 23:23:41 +0200
 Received: from [90.155.92.199] (helo=desiato.infradead.org)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+ac8634115322beed580f+8349+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 6a48285d-a01d-0a2a45040019-5a9b5cc78d46-3
- for <multiple-recipients>; Fri, 03 Jul 2026 23:23:42 +0200
+ id 6a48285c-5a27-0a2a45020019-5a9b5cc7c936-3
+ for <multiple-recipients>; Fri, 03 Jul 2026 23:23:41 +0200
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.99.2 #2 (Red Hat Linux))
- id 1wflKe-000000059OF-0vI4; Fri, 03 Jul 2026 21:23:11 +0000
+ id 1wflKc-000000059O2-31Bq; Fri, 03 Jul 2026 21:23:04 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.2 #2 (Red
- Hat Linux)) id 1wflKX-00000001RQD-3BKG;
- Fri, 03 Jul 2026 22:21:49 +0100
+ Hat Linux)) id 1wflKW-00000001ROh-26Xn;
+ Fri, 03 Jul 2026 22:21:48 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,12 +56,12 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
 	Cc:Content-Type:Content-ID:Content-Description;
-	bh=Ort/pZQb4ierCrxm1j8Wvj2iLn37EL9Xs8ile8CK+5w=; b=iGUqq6bke/f9INoPyifWfn6tMr
-	Dxx9c7T5UqI5UMg8YjyLmZpMVseB7N8tyabz9obX/dC+ngIU3yv1JHY3JTAWY6WngiA570Ryh4IOF
-	b01mRW0I0bfTI3wDMXY7Yqmz4AqjFrVwhNTMruP7kS6z7gO1y/WKqWK9lLjnLOsgL2ks7g7OnG9iK
-	1C80or7kq0ERNDnGtFaUh3xmfdkYHkkAWlJ+T0ZNUpaqHxFoQDCFHBGH5vce0dCBsk83GzuL97PPe
-	r2wTSTLoYRY1lpzZtdTadwaq2mg2QrWDju/Gu1EeSlgsy4TO/ncXhKlwClbwNm7lOreXmIVUpUc0Y
-	cP23OeUg==;
+	bh=B9z9WHPmvLHevYFOtmsj0qG2r63h9YkhzzxvRZTeAmQ=; b=onaWDNN2jSP0Q3PZPJs7nogpsV
+	djN5zQDEAAEwp07PHEgjWunIEq3y03q0c8S7zV2OcMlYhl/J34JEKZ7hDMXXyEtTrI/81rwJ8Q8gM
+	QFTPzOTXCK8UXssjTS9zoGTX9rQa4JMpnl9rJ36ID3INFYr2lBLrrofRd04iiPjaseA5YUq4XVSN+
+	P9NXmp10mCYVX7lINntbmHveElZKC1lFoVpWLbMkv65zJAIwkRzxBWGO+p0yyYJDfQF/6Kweqcw6j
+	YMLtCZsL3NEMhJ26U9Dc5d2d7RIA/mGXd6lQ4sqAxNmH6Bvcz9akyjmHc63sIuT7ieyCDZ6azwkhU
+	pCaM9FxA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	Jonathan Corbet <corbet@lwn.net>,
@@ -90,9 +90,9 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v6 35/36] KVM: x86: Remove pvclock_gtod_data and private timekeeping code
-Date: Fri,  3 Jul 2026 22:18:14 +0100
-Message-ID: <20260703212145.343527-36-dwmw2@infradead.org>
+Subject: [PATCH v6 14/36] KVM: x86: Use get_kvmclock() in kvm_get_wall_clock_epoch()
+Date: Fri,  3 Jul 2026 22:17:53 +0100
+Message-ID: <20260703212145.343527-15-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260703212145.343527-1-dwmw2@infradead.org>
 References: <20260703212145.343527-1-dwmw2@infradead.org>
@@ -100,231 +100,103 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-ebf023/1783113822-AFD241CC-A09A4783/0/0
+X-purgate-ID: tlsNG-720697/1783113821-7751C7C5-1868F5BF/0/0
 X-purgate-type: clean
-X-purgate-size: 6507
+X-purgate-size: 3112
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Remove the now-unused KVM-private timekeeping infrastructure:
+Now that get_kvmclock() correctly handles TSC scaling and captures both
+wallclock and kvmclock from the same TSC reading,
+kvm_get_wall_clock_epoch() can simply call it instead of duplicating
+the pvclock computation.
 
- - struct pvclock_clock and struct pvclock_gtod_data
- - update_pvclock_gtod() and its seqcount-protected state copy
- - read_tsc() (KVM's private TSC reader with cycle_last clamping)
- - vgettsc() (KVM's private clocksource interpolation)
- - do_kvmclock_base(), do_monotonic(), do_realtime()
+This eliminates the last instance of the "definition C" kvmclock
+calculation that computed nanoseconds directly from the host TSC
+without accounting for guest TSC scaling.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Assisted-by: Kiro:claude-opus-4.6-1m
 ---
- arch/x86/kvm/x86.c | 178 +--------------------------------------------
- 1 file changed, 1 insertion(+), 177 deletions(-)
+ arch/x86/kvm/x86.c | 59 +++++++---------------------------------------
+ 1 file changed, 9 insertions(+), 50 deletions(-)
 
 diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index c67655f8e078..58016af64932 100644
+index 65aa0fb0b5e1..376b8dc2ade9 100644
 --- a/arch/x86/kvm/x86.c
 +++ b/arch/x86/kvm/x86.c
-@@ -2347,58 +2347,6 @@ static int do_set_msr(struct kvm_vcpu *vcpu, unsigned index, u64 *data)
- 	return kvm_set_msr_ignored_check(vcpu, index, *data, true);
+@@ -3480,63 +3480,22 @@ int kvm_guest_time_update(struct kvm_vcpu *v)
+  * wallclock and kvmclock times, and subtracting one from the other.
+  *
+  * Fall back to using their values at slightly different moments by
+- * calling ktime_get_real_ns() and get_kvmclock_ns() separately.
++ * calling ktime_get_real_ns() and get_kvmclock() separately.
+  */
+ uint64_t kvm_get_wall_clock_epoch(struct kvm *kvm)
+ {
+-#ifdef CONFIG_X86_64
+-	struct pvclock_vcpu_time_info hv_clock;
+-	struct kvm_arch *ka = &kvm->arch;
+-	unsigned long seq, local_tsc_khz;
+-	struct timespec64 ts;
+-	uint64_t host_tsc;
+-
+-	do {
+-		seq = read_seqcount_begin(&ka->pvclock_sc);
+-
+-		local_tsc_khz = 0;
+-		if (!ka->use_master_clock)
+-			break;
+-
+-		/*
+-		 * The TSC read and the call to get_cpu_tsc_khz() must happen
+-		 * on the same CPU.
+-		 */
+-		get_cpu();
+-
+-		local_tsc_khz = get_cpu_tsc_khz();
+-
+-		if (local_tsc_khz &&
+-		    !kvm_get_walltime_and_clockread(&ts, &host_tsc))
+-			local_tsc_khz = 0; /* Fall back to old method */
+-
+-		put_cpu();
+-
+-		/*
+-		 * These values must be snapshotted within the seqcount loop.
+-		 * After that, it's just mathematics which can happen on any
+-		 * CPU at any time.
+-		 */
+-		hv_clock.tsc_timestamp = ka->master_cycle_now;
+-		hv_clock.system_time = ka->master_kernel_ns + ka->kvmclock_offset;
++	struct kvm_clock_data data;
+ 
+-	} while (read_seqcount_retry(&ka->pvclock_sc, seq));
++	get_kvmclock(kvm, &data);
+ 
+ 	/*
+-	 * If the conditions were right, and obtaining the wallclock+TSC was
+-	 * successful, calculate the KVM clock at the corresponding time and
+-	 * subtract one from the other to get the guest's epoch in nanoseconds
+-	 * since 1970-01-01.
++	 * If get_kvmclock() captured both wallclock and kvmclock from the
++	 * same TSC reading, use them for a precise epoch calculation.
+ 	 */
+-	if (local_tsc_khz) {
+-		kvm_get_time_scale(NSEC_PER_SEC, local_tsc_khz * NSEC_PER_USEC,
+-				   &hv_clock.tsc_shift,
+-				   &hv_clock.tsc_to_system_mul);
+-		return ts.tv_nsec + NSEC_PER_SEC * ts.tv_sec -
+-			__pvclock_read_cycles(&hv_clock, host_tsc);
+-	}
+-#endif
+-	return ktime_get_real_ns() - get_kvmclock_ns(kvm);
++	if (data.flags & KVM_CLOCK_REALTIME)
++		return data.realtime - data.clock;
++
++	return ktime_get_real_ns() - data.clock;
  }
  
--struct pvclock_clock {
--	int vclock_mode;
--	u64 cycle_last;
--	u64 mask;
--	u32 mult;
--	u32 shift;
--	u64 base_cycles;
--	u64 offset;
--};
--
--struct pvclock_gtod_data {
--	seqcount_t	seq;
--
--	struct pvclock_clock clock; /* extract of a clocksource struct */
--	struct pvclock_clock raw_clock; /* extract of a clocksource struct */
--
--	ktime_t		offs_boot;
--	u64		wall_time_sec;
--};
--
--static struct pvclock_gtod_data pvclock_gtod_data;
--
--static void update_pvclock_gtod(struct timekeeper *tk)
--{
--	struct pvclock_gtod_data *vdata = &pvclock_gtod_data;
--
--	write_seqcount_begin(&vdata->seq);
--
--	/* copy pvclock gtod data */
--	vdata->clock.vclock_mode	= tk->tkr_mono.clock->vdso_clock_mode;
--	vdata->clock.cycle_last		= tk->tkr_mono.cycle_last;
--	vdata->clock.mask		= tk->tkr_mono.mask;
--	vdata->clock.mult		= tk->tkr_mono.mult;
--	vdata->clock.shift		= tk->tkr_mono.shift;
--	vdata->clock.base_cycles	= tk->tkr_mono.xtime_nsec;
--	vdata->clock.offset		= tk->tkr_mono.base;
--
--	vdata->raw_clock.vclock_mode	= tk->tkr_raw.clock->vdso_clock_mode;
--	vdata->raw_clock.cycle_last	= tk->tkr_raw.cycle_last;
--	vdata->raw_clock.mask		= tk->tkr_raw.mask;
--	vdata->raw_clock.mult		= tk->tkr_raw.mult;
--	vdata->raw_clock.shift		= tk->tkr_raw.shift;
--	vdata->raw_clock.base_cycles	= tk->tkr_raw.xtime_nsec;
--	vdata->raw_clock.offset		= tk->tkr_raw.base;
--
--	vdata->wall_time_sec            = tk->xtime_sec;
--
--	vdata->offs_boot		= tk->offs_boot;
--
--	write_seqcount_end(&vdata->seq);
--}
--
- static s64 get_kvmclock_base_ns(void)
- {
- 	/* Count up from boot time, but with the frequency of the raw clock.  */
-@@ -3029,128 +2977,6 @@ static inline void adjust_tsc_offset_host(struct kvm_vcpu *vcpu, s64 adjustment)
- 
- #ifdef CONFIG_X86_64
- 
--static u64 read_tsc(void)
--{
--	u64 ret = (u64)rdtsc_ordered();
--	u64 last = pvclock_gtod_data.clock.cycle_last;
--
--	if (likely(ret >= last))
--		return ret;
--
--	/*
--	 * GCC likes to generate cmov here, but this branch is extremely
--	 * predictable (it's just a function of time and the likely is
--	 * very likely) and there's a data dependence, so force GCC
--	 * to generate a branch instead.  I don't barrier() because
--	 * we don't actually need a barrier, and if this function
--	 * ever gets inlined it will generate worse code.
--	 */
--	asm volatile ("");
--	return last;
--}
--
--static inline u64 vgettsc(struct pvclock_clock *clock, u64 *tsc_timestamp,
--			  int *mode)
--{
--	u64 tsc_pg_val;
--	long v;
--
--	switch (clock->vclock_mode) {
--	case VDSO_CLOCKMODE_HVCLOCK:
--		if (hv_read_tsc_page_tsc(hv_get_tsc_page(),
--					 tsc_timestamp, &tsc_pg_val)) {
--			/* TSC page valid */
--			*mode = VDSO_CLOCKMODE_HVCLOCK;
--			v = (tsc_pg_val - clock->cycle_last) &
--				clock->mask;
--		} else {
--			/* TSC page invalid */
--			*mode = VDSO_CLOCKMODE_NONE;
--		}
--		break;
--	case VDSO_CLOCKMODE_TSC:
--		*mode = VDSO_CLOCKMODE_TSC;
--		*tsc_timestamp = read_tsc();
--		v = (*tsc_timestamp - clock->cycle_last) &
--			clock->mask;
--		break;
--	default:
--		*mode = VDSO_CLOCKMODE_NONE;
--	}
--
--	if (*mode == VDSO_CLOCKMODE_NONE)
--		*tsc_timestamp = v = 0;
--
--	return v * clock->mult;
--}
--
--/*
-- * As with get_kvmclock_base_ns(), this counts from boot time, at the
-- * frequency of CLOCK_MONOTONIC_RAW (hence adding gtos->offs_boot).
-- */
--static int do_kvmclock_base(s64 *t, u64 *tsc_timestamp)
--{
--	struct pvclock_gtod_data *gtod = &pvclock_gtod_data;
--	unsigned long seq;
--	int mode;
--	u64 ns;
--
--	do {
--		seq = read_seqcount_begin(&gtod->seq);
--		ns = gtod->raw_clock.base_cycles;
--		ns += vgettsc(&gtod->raw_clock, tsc_timestamp, &mode);
--		ns >>= gtod->raw_clock.shift;
--		ns += ktime_to_ns(ktime_add(gtod->raw_clock.offset, gtod->offs_boot));
--	} while (unlikely(read_seqcount_retry(&gtod->seq, seq)));
--	*t = ns;
--
--	return mode;
--}
--
--/*
-- * This calculates CLOCK_MONOTONIC at the time of the TSC snapshot, with
-- * no boot time offset.
-- */
--static int do_monotonic(s64 *t, u64 *tsc_timestamp)
--{
--	struct pvclock_gtod_data *gtod = &pvclock_gtod_data;
--	unsigned long seq;
--	int mode;
--	u64 ns;
--
--	do {
--		seq = read_seqcount_begin(&gtod->seq);
--		ns = gtod->clock.base_cycles;
--		ns += vgettsc(&gtod->clock, tsc_timestamp, &mode);
--		ns >>= gtod->clock.shift;
--		ns += ktime_to_ns(gtod->clock.offset);
--	} while (unlikely(read_seqcount_retry(&gtod->seq, seq)));
--	*t = ns;
--
--	return mode;
--}
--
--static int do_realtime(struct timespec64 *ts, u64 *tsc_timestamp)
--{
--	struct pvclock_gtod_data *gtod = &pvclock_gtod_data;
--	unsigned long seq;
--	int mode;
--	u64 ns;
--
--	do {
--		seq = read_seqcount_begin(&gtod->seq);
--		ts->tv_sec = gtod->wall_time_sec;
--		ns = gtod->clock.base_cycles;
--		ns += vgettsc(&gtod->clock, tsc_timestamp, &mode);
--		ns >>= gtod->clock.shift;
--	} while (unlikely(read_seqcount_retry(&gtod->seq, seq)));
--
--	ts->tv_sec += __iter_div_u64_rem(ns, NSEC_PER_SEC, &ns);
--	ts->tv_nsec = ns;
--
--	return mode;
--}
--
  /*
-  * Calculates the kvmclock_base_ns (CLOCK_MONOTONIC_RAW + boot time) and
-  * reports the TSC value from which it do so. Returns true if host is
-@@ -10394,11 +10220,9 @@ static DEFINE_IRQ_WORK(pvclock_irq_work, pvclock_irq_work_fn);
- static int pvclock_gtod_notify(struct notifier_block *nb, unsigned long unused,
- 			       void *priv)
- {
-+#ifdef CONFIG_X86_64
- 	struct timekeeper *tk = priv;
- 
--	update_pvclock_gtod(tk);
--
--#ifdef CONFIG_X86_64
- 	kvm_host_vclock_mode =
- 		tk->tkr_mono.clock->vdso_clock_mode;
- 
 -- 
 2.54.0
 
