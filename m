@@ -4,49 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81403C43458
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Jul 2026 16:30:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1353525.1609369 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FE3AC43458
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Jul 2026 21:22:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1353748.1609438 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wfgmL-00060G-6L; Fri, 03 Jul 2026 16:30:13 +0000
+	id 1wflKm-000522-Fe; Fri, 03 Jul 2026 21:22:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1353525.1609369; Fri, 03 Jul 2026 16:30:13 +0000
+Received: by outflank-mailman (output) from mailman id 1353748.1609438; Fri, 03 Jul 2026 21:22:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wfgmL-000608-34; Fri, 03 Jul 2026 16:30:13 +0000
-Received: by outflank-mailman (input) for mailman id 1353525;
- Fri, 03 Jul 2026 16:30:12 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wflKm-00051r-CB; Fri, 03 Jul 2026 21:22:04 +0000
+Received: by outflank-mailman (input) for mailman id 1353748;
+ Fri, 03 Jul 2026 21:22:03 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f28d0d9fc00080a8@swg.vates.tech>)
- id 1wfgmJ-000602-M3
- for xen-devel@lists.xenproject.org; Fri, 03 Jul 2026 16:30:11 +0000
+ <BATV+ba378bf2ab63d22ff04d+8349+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1wflKk-00051O-DP
+ for xen-devel@lists.xenproject.org; Fri, 03 Jul 2026 21:22:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wfgmI-00Ahc5-LF
- for xen-devel@lists.xenproject.org; Fri, 03 Jul 2026 18:30:10 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wflKj-001t36-Bn; Fri, 03 Jul 2026 23:22:01 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f28d0d9fc00080a8@swg.vates.tech>)
- id 6a47e388-2eae-0a2a0a5409dd-0a2a4501817a-22
- for <xen-devel@lists.xenproject.org>; Fri, 03 Jul 2026 18:30:10 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <BATV+ba378bf2ab63d22ff04d+8349+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a4827ca-bab6-0a2a0a5309dd-0a2a4503bf3c-14
+ for <multiple-recipients>; Fri, 03 Jul 2026 23:22:01 +0200
+Received: from [90.155.50.34] (helo=casper.infradead.org)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f28d0d9fc00080a8@swg.vates.tech>)
- id 6a47e392-400f-0a2a45010019-b9ff1c22976d-3
- for <xen-devel@lists.xenproject.org>; Fri, 03 Jul 2026 18:30:10 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19f28d0d9fc00080a8.006 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Fri, 03 Jul 2026 16:30:03 +0000
-Received: from localhost.localdomain (88-188-240-210.subs.proxad.net
- [88.188.240.210]) (Authenticated sender: teddy.astie@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id D6F3680A50;
- Fri,  3 Jul 2026 18:30:02 +0200 (CEST)
+ <BATV+ba378bf2ab63d22ff04d+8349+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a4827f8-ec1a-0a2a45030019-5a9b322284a8-3
+ for <multiple-recipients>; Fri, 03 Jul 2026 23:22:01 +0200
+Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
+ by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+ id 1wflKX-0000000AsYQ-3NCh; Fri, 03 Jul 2026 21:21:50 +0000
+Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.2 #2 (Red
+ Hat Linux)) id 1wflKX-00000001RQ7-2xkg;
+ Fri, 03 Jul 2026 22:21:49 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,276 +51,170 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=RQjEcU4YXGqI5p2avl7VVKfWwfVX8xlmY4b9mgjYYxQ=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=KBFtbqOX3yP+ftlSrP90Ur7znTycsqg4wcYWQDUyx3D1j8iUaI2So3d5hq6Wpd2UBiRBwtYuS
- 8sKvVDpKQRNQkd4PuNlBVX77aN+F2MdKJn5+Upmau3Z2AQ4EKWW+yhndyzTsWWwVn7bhelLAOay
- 0TmV6sOT/HUET3rBK/FbXD3XN7r68PVK0FphoAepag/yrOt8hpxDIY2wddnnioXBEyfNluY2B4R
- d6o114Zh6bGm62yctZZ+gK1B3jt28um2+j7qdznUQDcpHD4EDVxNM95iI0Yd6C4x3JG+PAeZym7
- GiR1/nQ5C0KwAZ/5o+pXWRQE+T+nyS9fzY0npVkG+6Mw==
-X-Zone-Loop: df28dea631562b212faec0e426749e529d3a5150216c
-x-campaign-type: default
-x-transaction-id: 7633c826-ec20-4c9e-a44b-1d67d7966408
-x-swg-uid: 01-5c2e9b72-ea6d-43d9-8898-0e6cde5ab358
-X-Mailer: Sweego
-Message-ID:
- <1783096203.8631fc262581453bbf619ec5b2062170.19f28d0d9fc00080a8@vates.tech>
-x-swg-bid: 1783096203.8631fc262581453bbf619ec5b2062170.19f28d0d9fc00080a8
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-From: Teddy Astie <teddy.astie@vates.tech>
-To: xen-devel@lists.xenproject.org
-Cc: Teddy Astie <teddy.astie@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH v3.1 02/18] pci: Use pci_sbdf_t in pci_add_device()
-Date: Fri,  3 Jul 2026 18:29:06 +0200
-In-Reply-To: <1782753810.8631fc262581453bbf619ec5b2062170.19f1468572a000701b@vates.tech>
-References: <1782753810.8631fc262581453bbf619ec5b2062170.19f1468572a000701b@vates.tech>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:
+	From:Reply-To:Cc:Content-ID:Content-Description;
+	bh=EpzXffKcCC8OCVBj38i2t8eVI2Er97bsxo1QNBYCK8E=; b=jIerjpGT+yTwXfADnzFS9Ehvw1
+	qj5/hvk/X0LarGRgEVv+dsiKFbGxRWGknJH57gqRXscS5FUYAhSqnvtRBTN2Z6vn9teqs3fY7T27K
+	jW8kTa1Wn2iOLEOqSbhIdiHt8Zmudzhq+tZg56Q8n6poP0Su9bZXGRUplcGieKFs0iNapavWjR6fc
+	hzkoY/l9qx1zH8w8EdFXPjFM5inA9cmW6nJSdRy1/qSf00oSXhQLvq8P2NHcd9wzCsCydXn58F6FC
+	AElEi2x7GlGagDUvtuQfZMQtQYs0miIjMnEqFVh2YzqPw/nArOHgfhgvtrehoSUcccIphTfkzHx4t
+	XG8AdZ9w==;
+From: David Woodhouse <dwmw2@infradead.org>
+To: Paolo Bonzini <pbonzini@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Sean Christopherson <seanjc@google.com>,
+	Thomas Gleixner <tglx@kernel.org>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Vitaly Kuznetsov <vkuznets@redhat.com>,
+	Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	David Woodhouse <dwmw2@infradead.org>,
+	Paul Durrant <paul@xen.org>,
+	Jonathan Cameron <jic23@kernel.org>,
+	Sascha Bischoff <Sascha.Bischoff@arm.com>,
+	Marc Zyngier <maz@kernel.org>,
+	Joey Gouly <joey.gouly@arm.com>,
+	Jack Allister <jalliste@amazon.com>,
+	Dongli Zhang <dongli.zhang@oracle.com>,
+	joe.jin@oracle.com,
+	kvm@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-kselftest@vger.kernel.org
+Subject: [PATCH v6 34/36] KVM: x86: Cache host vclock_mode for masterclock eligibility checks
+Date: Fri,  3 Jul 2026 22:18:13 +0100
+Message-ID: <20260703212145.343527-35-dwmw2@infradead.org>
+X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260703212145.343527-1-dwmw2@infradead.org>
+References: <20260703212145.343527-1-dwmw2@infradead.org>
 MIME-Version: 1.0
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.ef.f30dce182e3a6b24.19f28d0d76b.198041397edd7b15=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1783096203116
-X-purgate-ID: tlsNG-d62444/1783096210-80CD61E0-BAD80866/0/0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Sender: David Woodhouse <dwmw2@infradead.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-33051d/1783113721-B4F835D1-4427BB93/0/0
 X-purgate-type: clean
-X-purgate-size: 8407
+X-purgate-size: 4113
 
----=Part.ef.f30dce182e3a6b24.19f28d0d76b.198041397edd7b15=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+From: David Woodhouse <dwmw@amazon.co.uk>
 
-Signed-off-by: Teddy Astie <teddy=2Eastie@vates=2Etech>
+The remaining users of pvclock_gtod_data only need to know whether
+the host clocksource is TSC-based. Cache the vclock_mode value in a
+simple kvm_host_vclock_mode variable, updated by the pvclock_gtod_notify
+callback, and use gtod_is_based_on_tsc() for eligibility checks.
+
+This is inherently racy (as it always was — kvm_track_tsc_matching
+never held the gtod seqcount), relying on eventual consistency: the
+notifier fires on every timekeeping update and will correct any
+transient inconsistency within one tick.
+
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Assisted-by: Kiro (claude-opus-4.6-1m)
 ---
-v3: Don't adjust adjacent code=2E
-v3=2E1: Remove slot variable and move func down to its user=2E
----
- xen/arch/x86/physdev=2Ec        |  6 +++---
- xen/drivers/passthrough/pci=2Ec | 37 +++++++++++++++++------------------
- xen/drivers/pci/physdev=2Ec     |  3 ++-
- xen/include/xen/pci=2Eh         |  4 ++--
- 4 files changed, 25 insertions(+), 25 deletions(-)
+ arch/x86/kvm/x86.c | 23 +++++++++++++----------
+ 1 file changed, 13 insertions(+), 10 deletions(-)
 
-diff --git a/xen/arch/x86/physdev=2Ec b/xen/arch/x86/physdev=2Ec
-index 5bbcf3b530=2E=2E60c02076d6 100644
---- a/xen/arch/x86/physdev=2Ec
-+++ b/xen/arch/x86/physdev=2Ec
-@@ -472,7 +472,7 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(vo=
-id) arg)
-         if ( copy_from_guest(&manage_pci, arg, 1) !=3D 0 )
-             break;
-=20
--        ret =3D pci_add_device(0, manage_pci=2Ebus, manage_pci=2Edevfn,
-+        ret =3D pci_add_device(PCI_SBDF(0, manage_pci=2Ebus, manage_pci=
-=2Edevfn),
-                              NULL, NUMA_NO_NODE);
-         break;
-     }
-@@ -503,8 +503,8 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(vo=
-id) arg)
-         pdev_info=2Eis_virtfn =3D manage_pci_ext=2Eis_virtfn;
-         pdev_info=2Ephysfn=2Ebus =3D manage_pci_ext=2Ephysfn=2Ebus;
-         pdev_info=2Ephysfn=2Edevfn =3D manage_pci_ext=2Ephysfn=2Edevfn;
--        ret =3D pci_add_device(0, manage_pci_ext=2Ebus,
--                             manage_pci_ext=2Edevfn,
-+        ret =3D pci_add_device(PCI_SBDF(0, manage_pci_ext=2Ebus,
-+                                      manage_pci_ext=2Edevfn),
-                              &pdev_info, NUMA_NO_NODE);
-         break;
-     }
-diff --git a/xen/drivers/passthrough/pci=2Ec b/xen/drivers/passthrough/pci=
-=2Ec
-index 0adf573150=2E=2Ed7e60e6fbb 100644
---- a/xen/drivers/passthrough/pci=2Ec
-+++ b/xen/drivers/passthrough/pci=2Ec
-@@ -662,12 +662,10 @@ unsigned int pci_size_mem_bar(pci_sbdf_t sbdf, unsig=
-ned int pos,
-     return is64bits ? 2 : 1;
+diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+index 8d520bfae089..c67655f8e078 100644
+--- a/arch/x86/kvm/x86.c
++++ b/arch/x86/kvm/x86.c
+@@ -2647,6 +2647,8 @@ static u64 compute_guest_tsc(struct kvm_vcpu *vcpu, s64 kernel_ns)
  }
-=20
--int pci_add_device(u16 seg, u8 bus, u8 devfn,
--                   const struct pci_dev_info *info, nodeid_t node)
-+int pci_add_device(pci_sbdf_t sbdf, const struct pci_dev_info *info, node=
-id_t node)
- {
-     struct pci_seg *pseg;
-     struct pci_dev *pdev;
--    unsigned int slot =3D PCI_SLOT(devfn), func =3D PCI_FUNC(devfn);
-     const char *type;
-     int ret;
-=20
-@@ -680,17 +678,17 @@ int pci_add_device(u16 seg, u8 bus, u8 devfn,
-     else
-         type =3D "device";
-=20
--    ret =3D xsm_resource_plug_pci(XSM_PRIV, (seg << 16) | (bus << 8) | de=
-vfn);
-+    ret =3D xsm_resource_plug_pci(XSM_PRIV, sbdf=2Esbdf);
-     if ( ret )
-         return ret;
-=20
-     ret =3D -ENOMEM;
-=20
-     pcidevs_lock();
--    pseg =3D alloc_pseg(seg);
-+    pseg =3D alloc_pseg(sbdf=2Eseg);
-     if ( !pseg )
-         goto out;
--    pdev =3D alloc_pdev(pseg, bus, devfn);
-+    pdev =3D alloc_pdev(pseg, sbdf=2Ebus, sbdf=2Edevfn);
-     if ( !pdev )
-         goto out;
-=20
-@@ -701,16 +699,15 @@ int pci_add_device(u16 seg, u8 bus, u8 devfn,
-         pdev->info =3D *info;
-         if ( pdev->info=2Eis_virtfn )
-         {
--            struct pci_dev *pf_pdev =3D
--                pci_get_pdev(NULL, PCI_SBDF(seg, info->physfn=2Ebus,
--                                            info->physfn=2Edevfn));
-+            pci_sbdf_t pf_sbdf =3D PCI_SBDF(sbdf=2Eseg, info->physfn=2Ebu=
-s,
-+                                          info->physfn=2Edevfn);
-+            struct pci_dev *pf_pdev =3D pci_get_pdev(NULL, pf_sbdf);
-=20
-             if ( !pf_pdev )
-             {
-                 printk(XENLOG_WARNING
-                        "Attempted to add SR-IOV VF %pp without PF %pp\n",
--                       &pdev->sbdf,
--                       &PCI_SBDF(seg, info->physfn=2Ebus, info->physfn=2E=
-devfn));
-+                       &sbdf, &pf_sbdf);
-                 free_pdev(pseg, pdev);
-                 ret =3D -ENODEV;
-                 goto out;
-@@ -729,14 +726,14 @@ int pci_add_device(u16 seg, u8 bus, u8 devfn,
-             if ( !pdev->ext_cfg )
-                 printk(XENLOG_WARNING
-                        "%pp: VF without extended config space?\n",
--                       &pdev->sbdf);
-+                       &sbdf);
-         }
-     }
-=20
-     if ( !pdev->info=2Eis_virtfn && !pdev->physfn=2Evf_rlen[0] )
-     {
-         unsigned int pos =3D pci_find_ext_capability(pdev, PCI_EXT_CAP_ID=
-_SRIOV);
--        uint16_t ctrl =3D pci_conf_read16(pdev->sbdf, pos + PCI_SRIOV_CTR=
-L);
-+        uint16_t ctrl =3D pci_conf_read16(sbdf, pos + PCI_SRIOV_CTRL);
-=20
-         if ( !pos )
-             /* Nothing */;
-@@ -750,18 +747,18 @@ int pci_add_device(u16 seg, u8 bus, u8 devfn,
-             for ( i =3D 0; i < PCI_SRIOV_NUM_BARS; )
-             {
-                 unsigned int idx =3D pos + PCI_SRIOV_BAR + i * 4;
--                uint32_t bar =3D pci_conf_read32(pdev->sbdf, idx);
-+                uint32_t bar =3D pci_conf_read32(sbdf, idx);
-=20
-                 if ( (bar & PCI_BASE_ADDRESS_SPACE) =3D=3D
-                      PCI_BASE_ADDRESS_SPACE_IO )
-                 {
-                     printk(XENLOG_WARNING
-                            "SR-IOV device %pp with vf BAR%u in IO space\n=
-",
--                           &pdev->sbdf, i);
-+                           &sbdf, i);
-                     ++i;
-                     continue;
-                 }
--                ret =3D pci_size_mem_bar(pdev->sbdf, idx, NULL,
-+                ret =3D pci_size_mem_bar(sbdf, idx, NULL,
-                                        &pdev->physfn=2Evf_rlen[i],
-                                        PCI_BAR_VF |
-                                        ((i =3D=3D PCI_SRIOV_NUM_BARS - 1)=
- ?
-@@ -772,7 +769,7 @@ int pci_add_device(u16 seg, u8 bus, u8 devfn,
-         }
-         else
-             printk(XENLOG_WARNING "SR-IOV device %pp has its virtual"
--                   " functions already enabled (%04x)\n", &pdev->sbdf, ct=
-rl);
-+                   " functions already enabled (%04x)\n", &sbdf, ctrl);
-     }
-=20
-     check_pdev(pdev);
-@@ -818,14 +815,16 @@ out:
-     pcidevs_unlock();
-     if ( !ret )
-     {
--        printk(XENLOG_DEBUG "PCI add %s %pp\n", type, &pdev->sbdf);
-+        unsigned int func =3D sbdf=2Efn;
+ 
+ #ifdef CONFIG_X86_64
++static int kvm_host_vclock_mode;
 +
-+        printk(XENLOG_DEBUG "PCI add %s %pp\n", type, &sbdf);
-         while ( pdev->phantom_stride )
-         {
-             func +=3D pdev->phantom_stride;
-             if ( PCI_SLOT(func) )
-                 break;
-             printk(XENLOG_DEBUG "PCI phantom %pp\n",
--                   &PCI_SBDF(seg, bus, slot, func));
-+                   &PCI_SBDF(sbdf=2Eseg, sbdf=2Ebus, sbdf=2Edev, func));
-         }
-     }
-     return ret;
-diff --git a/xen/drivers/pci/physdev=2Ec b/xen/drivers/pci/physdev=2Ec
-index d46501b884=2E=2E46735a5fc9 100644
---- a/xen/drivers/pci/physdev=2Ec
-+++ b/xen/drivers/pci/physdev=2Ec
-@@ -50,7 +50,8 @@ ret_t pci_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(voi=
-d) arg)
-         }
+ static inline bool gtod_is_based_on_tsc(int mode)
+ {
+ 	return mode == VDSO_CLOCKMODE_TSC || mode == VDSO_CLOCKMODE_HVCLOCK;
+@@ -2676,7 +2678,6 @@ static bool kvm_use_master_clock(struct kvm *kvm)
+ static void kvm_track_tsc_matching(struct kvm_vcpu *vcpu, bool update_mclock)
+ {
+ 	struct kvm_arch *ka = &vcpu->kvm->arch;
+-	struct pvclock_gtod_data *gtod = &pvclock_gtod_data;
+ 	bool prev_matched_tsc = ka->all_vcpus_matched_tsc;
+ 
+ 	/*
+@@ -2713,7 +2714,7 @@ static void kvm_track_tsc_matching(struct kvm_vcpu *vcpu, bool update_mclock)
+ 	 * accounts for its offset.
+ 	 */
+ 	bool use_master_clock = kvm_use_master_clock(vcpu->kvm) &&
+-				gtod_is_based_on_tsc(gtod->clock.vclock_mode);
++				gtod_is_based_on_tsc(kvm_host_vclock_mode);
+ 
+ 	/*
+ 	 * Request a masterclock update if needed: toggling master clock,
+@@ -2726,11 +2727,11 @@ static void kvm_track_tsc_matching(struct kvm_vcpu *vcpu, bool update_mclock)
+ 
+ 	trace_kvm_track_tsc(vcpu->vcpu_id, ka->nr_vcpus_matched_tsc,
+ 			    atomic_read(&vcpu->kvm->online_vcpus),
+-		            ka->use_master_clock, gtod->clock.vclock_mode);
++		            ka->use_master_clock, kvm_host_vclock_mode);
+ }
+ #else
+ static inline void kvm_track_tsc_matching(struct kvm_vcpu *vcpu,
+-					  bool new_generation) {}
++					  bool update_mclock) {}
  #endif
-=20
--        ret =3D pci_add_device(add=2Eseg, add=2Ebus, add=2Edevfn, &pdev_i=
-nfo, node);
-+        ret =3D pci_add_device(PCI_SBDF(add=2Eseg, add=2Ebus, add=2Edevfn=
-),
-+                             &pdev_info, node);
-         break;
-     }
-=20
-diff --git a/xen/include/xen/pci=2Eh b/xen/include/xen/pci=2Eh
-index ade882caee=2E=2E26c0c6e449 100644
---- a/xen/include/xen/pci=2Eh
-+++ b/xen/include/xen/pci=2Eh
-@@ -229,8 +229,8 @@ void setup_hwdom_pci_devices(struct domain *d,
- int pci_release_devices(struct domain *d);
- int pci_add_segment(u16 seg);
- const unsigned long *pci_get_ro_map(u16 seg);
--int pci_add_device(u16 seg, u8 bus, u8 devfn,
--                   const struct pci_dev_info *info, nodeid_t node);
-+int pci_add_device(pci_sbdf_t sbdf, const struct pci_dev_info *info,
-+                   nodeid_t node);
- int pci_remove_device(u16 seg, u8 bus, u8 devfn);
- int pci_ro_device(int seg, int bus, int devfn);
- int pci_hide_device(unsigned int seg, unsigned int bus, unsigned int devf=
-n);
---=20
-2=2E54=2E0
-
-
-
+ 
+ /*
+@@ -2850,7 +2851,7 @@ static inline bool kvm_check_tsc_unstable(void)
+ 	 * TSC is marked unstable when we're running on Hyper-V,
+ 	 * 'TSC page' clocksource is good.
+ 	 */
+-	if (pvclock_gtod_data.clock.vclock_mode == VDSO_CLOCKMODE_HVCLOCK)
++	if (kvm_host_vclock_mode == VDSO_CLOCKMODE_HVCLOCK)
+ 		return false;
+ #endif
+ 	return check_tsc_unstable();
+@@ -3274,7 +3275,6 @@ static void pvclock_update_vm_gtod_copy(struct kvm *kvm)
+ {
+ #ifdef CONFIG_X86_64
+ 	struct kvm_arch *ka = &kvm->arch;
+-	int vclock_mode;
+ 	bool host_tsc_clocksource;
+ 
+ 	lockdep_assert_held(&kvm->arch.tsc_write_lock);
+@@ -3314,9 +3314,9 @@ static void pvclock_update_vm_gtod_copy(struct kvm *kvm)
+ 			ka->use_master_clock = false;
+ 	}
+ 
+-	vclock_mode = pvclock_gtod_data.clock.vclock_mode;
+-	trace_kvm_update_master_clock(ka->use_master_clock, vclock_mode,
+-					ka->all_vcpus_matched_freq);
++	trace_kvm_update_master_clock(ka->use_master_clock,
++				     kvm_host_vclock_mode,
++				     ka->all_vcpus_matched_freq);
+ #endif
+ }
+ 
+@@ -10399,12 +10399,15 @@ static int pvclock_gtod_notify(struct notifier_block *nb, unsigned long unused,
+ 	update_pvclock_gtod(tk);
+ 
+ #ifdef CONFIG_X86_64
++	kvm_host_vclock_mode =
++		tk->tkr_mono.clock->vdso_clock_mode;
++
+ 	/*
+ 	 * Disable master clock if host does not trust, or does not use,
+ 	 * TSC based clocksource. Delegate queue_work() to irq_work as
+ 	 * this is invoked with tk_core.seq write held.
+ 	 */
+-	if (!gtod_is_based_on_tsc(pvclock_gtod_data.clock.vclock_mode) &&
++	if (!gtod_is_based_on_tsc(kvm_host_vclock_mode) &&
+ 	    atomic_read(&kvm_guest_has_master_clock) != 0)
+ 		irq_work_queue(&pvclock_irq_work);
+ #endif
 -- 
-Teddy Astie | Vates XCP-ng Developer
+2.54.0
 
-XCP-ng & Xen Orchestra - Vates s=
-olutions
-
-web: https://vates=2Etech
----=Part.ef.f30dce182e3a6b24.19f28d0d76b.198041397edd7b15=---
 
