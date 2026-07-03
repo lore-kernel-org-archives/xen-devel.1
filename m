@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2681C44503
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Jul 2026 21:22:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1353764.1609559 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1701CC44506
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Jul 2026 21:22:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1353750.1609444 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wflKz-0008GA-1Y; Fri, 03 Jul 2026 21:22:17 +0000
+	id 1wflKm-00053h-Qm; Fri, 03 Jul 2026 21:22:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1353764.1609559; Fri, 03 Jul 2026 21:22:16 +0000
+Received: by outflank-mailman (output) from mailman id 1353750.1609444; Fri, 03 Jul 2026 21:22:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wflKy-0008EG-Mg; Fri, 03 Jul 2026 21:22:16 +0000
-Received: by outflank-mailman (input) for mailman id 1353764;
- Fri, 03 Jul 2026 21:22:14 +0000
+	id 1wflKm-00053F-Js; Fri, 03 Jul 2026 21:22:04 +0000
+Received: by outflank-mailman (input) for mailman id 1353750;
+ Fri, 03 Jul 2026 21:22:03 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+ba378bf2ab63d22ff04d+8349+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1wflKw-00082A-Ce
- for xen-devel@lists.xenproject.org; Fri, 03 Jul 2026 21:22:14 +0000
+ id 1wflKl-00051Q-Fi
+ for xen-devel@lists.xenproject.org; Fri, 03 Jul 2026 21:22:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wflKv-00CeeP-PD; Fri, 03 Jul 2026 23:22:13 +0200
+ id 1wflKk-001t36-Sc; Fri, 03 Jul 2026 23:22:02 +0200
 Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+ba378bf2ab63d22ff04d+8349+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a4827ca-bab6-0a2a0a5309dd-0a2a4503bf3c-26
- for <multiple-recipients>; Fri, 03 Jul 2026 23:22:13 +0200
+ id 6a4827ca-bab6-0a2a0a5309dd-0a2a4503bf3c-18
+ for <multiple-recipients>; Fri, 03 Jul 2026 23:22:02 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
  by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+ba378bf2ab63d22ff04d+8349+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a482805-ec1a-0a2a45030019-5a9b3222d6fa-3
- for <multiple-recipients>; Fri, 03 Jul 2026 23:22:13 +0200
+ id 6a4827fa-ec1a-0a2a45030019-5a9b3222b952-3
+ for <multiple-recipients>; Fri, 03 Jul 2026 23:22:02 +0200
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wflKW-0000000AsY5-1o7d; Fri, 03 Jul 2026 21:21:48 +0000
+ id 1wflKX-0000000AsYF-1TB1; Fri, 03 Jul 2026 21:21:49 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.2 #2 (Red
- Hat Linux)) id 1wflKW-00000001ROT-1D1r;
- Fri, 03 Jul 2026 22:21:48 +0100
+ Hat Linux)) id 1wflKX-00000001RPX-0w0H;
+ Fri, 03 Jul 2026 22:21:49 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,12 +56,12 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
 	Cc:Content-Type:Content-ID:Content-Description;
-	bh=5esTOgHqgTZQG0bhg0+NN2EeUiyx8in1MUEgOdbTb68=; b=i2Ub5UzQieNGYKh00g6PXh3mlj
-	M6QMKQ7kfa6KmzGRvyGWn+y6cTd5d12wteB+OfmlUg/ChloyUDVPBsk+4pnifDfVTcFbQg8XPC6Wx
-	9w7ufgolgi/BG63pmuYQdHTWGhN65P30JJe53ZSKtWpbYn92SfYCQPWnJpgO1TxJrQffhrc+nwhfT
-	Hf+GYVvn5FM5FeI/rUSwlUKt+kTEK/s1DWnwBVHw4/d0ffwmTdNa7342xixebxJ+gyh5rnT0fAaFH
-	X9l96ijMza3ZqOhdx51JKTtN5H+fAKNBFRSq11Ker17Mu5sqoVCHIho+ILVaPiuiyXPfDunwp82m5
-	B97pDgTg==;
+	bh=V5hQ2fJb27QK5yOdBL7f7A818+T1JNBNilH2QwnYDyE=; b=UEnwhLQsS2wkPtr1Pd+i9zzOxH
+	sP8ejEvNPTu+HXmRA1IRK2tldo2/gJzqZvVFkblE3k6NJg2illNeTq4r1tIkNMYNlkdWFonJNHdMK
+	mhSmA+bD14VOI9+r+ngRb7JB7fqCDAalnTCht1e3MXaFddIt8qbgkhuau0zS6oAateAvgrEcabeSd
+	8ssD8QbBlyyz0HmKWi8dhUlItveVTjZXTUCDUvvZgduEIsDDko+7didrcRF7/U9ZjOHxshnYVg5m8
+	dzZupkJUGPLn1s+4YQMYQSdzXtYuOWrxtKD6MQ0XG4ZFW1ckoKyrimh4GbzgzAMJIyiUdwJSkSu0l
+	7JBF15DA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	Jonathan Corbet <corbet@lwn.net>,
@@ -90,9 +90,9 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v6 11/36] KVM: x86: Fold __get_kvmclock() into get_kvmclock()
-Date: Fri,  3 Jul 2026 22:17:50 +0100
-Message-ID: <20260703212145.343527-12-dwmw2@infradead.org>
+Subject: [PATCH v6 26/36] KVM: x86/xen: Prevent runstate times from becoming negative
+Date: Fri,  3 Jul 2026 22:18:05 +0100
+Message-ID: <20260703212145.343527-27-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260703212145.343527-1-dwmw2@infradead.org>
 References: <20260703212145.343527-1-dwmw2@infradead.org>
@@ -100,105 +100,97 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-33051d/1783113733-061315D1-03F432AA/0/0
+X-purgate-ID: tlsNG-33051d/1783113722-B59BA5D1-E40BB414/0/0
 X-purgate-type: clean
-X-purgate-size: 3279
+X-purgate-size: 3262
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-There is no need for the separate __get_kvmclock() helper; just inline
-its body into get_kvmclock() within the seqcount retry loop.
+When kvm_xen_update_runstate() is invoked to set a vCPU's runstate, the
+time spent in the previous runstate is accounted. This is based on the
+delta between the current KVM clock time, and the previous value stored
+in vcpu->arch.xen.runstate_entry_time.
 
-No functional change.
+If the KVM clock goes backwards, that delta will be negative. Or, since
+it's an unsigned 64-bit integer, very *large*. Linux guests deal with
+that particularly badly, reporting 100% steal time for ever more (well,
+for *centuries* at least, until the delta has been consumed).
+
+So when a negative delta is detected, just refrain from updating the
+runstate times until the KVM clock catches up with runstate_entry_time
+again.
+
+Also clamp steal_ns to delta_ns to prevent steal time from exceeding
+the total elapsed time, and handle negative steal_ns (which can happen
+if run_delay goes backwards across a scheduler update).
+
+The userspace APIs for setting the runstate times do not allow them to
+be set past the current KVM clock, but userspace can still adjust the
+KVM clock *after* setting the runstate times, which would cause this
+situation to occur.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- arch/x86/kvm/x86.c | 63 +++++++++++++++++++++-------------------------
- 1 file changed, 28 insertions(+), 35 deletions(-)
+ arch/x86/kvm/xen.c | 28 ++++++++++++++++++++++------
+ 1 file changed, 22 insertions(+), 6 deletions(-)
 
-diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 21603feb44c5..50f088570dab 100644
---- a/arch/x86/kvm/x86.c
-+++ b/arch/x86/kvm/x86.c
-@@ -3200,50 +3200,43 @@ static unsigned long get_cpu_tsc_khz(void)
- 		return __this_cpu_read(cpu_tsc_khz);
- }
- 
--/* Called within read_seqcount_begin/retry for kvm->pvclock_sc.  */
--static void __get_kvmclock(struct kvm *kvm, struct kvm_clock_data *data)
-+static void get_kvmclock(struct kvm *kvm, struct kvm_clock_data *data)
+diff --git a/arch/x86/kvm/xen.c b/arch/x86/kvm/xen.c
+index 82e34edbfdbd..b1d67ece5db3 100644
+--- a/arch/x86/kvm/xen.c
++++ b/arch/x86/kvm/xen.c
+@@ -586,29 +586,45 @@ void kvm_xen_update_runstate(struct kvm_vcpu *v, int state)
  {
- 	struct kvm_arch *ka = &kvm->arch;
- 	struct pvclock_vcpu_time_info hv_clock;
-+	unsigned int seq;
+ 	struct kvm_vcpu_xen *vx = &v->arch.xen;
+ 	u64 now = get_kvmclock_ns(v->kvm);
+-	u64 delta_ns = now - vx->runstate_entry_time;
+ 	u64 run_delay = current->sched_info.run_delay;
++	s64 delta_ns = now - vx->runstate_entry_time;
++	s64 steal_ns = run_delay - vx->last_steal;
  
--	/* both __this_cpu_read() and rdtsc() should be on the same cpu */
--	get_cpu();
-+	do {
-+		seq = read_seqcount_begin(&ka->pvclock_sc);
++	/*
++	 * If the vCPU was never run before, its prior state should
++	 * be considered RUNSTATE_offline.
++	 */
+ 	if (unlikely(!vx->runstate_entry_time))
+ 		vx->current_runstate = RUNSTATE_offline;
  
--	data->flags = 0;
--	if (ka->use_master_clock &&
--	    (static_cpu_has(X86_FEATURE_CONSTANT_TSC) || __this_cpu_read(cpu_tsc_khz))) {
-+		/* both __this_cpu_read() and rdtsc() should be on the same cpu */
-+		get_cpu();
++	/*
++	 * If KVM clock went backwards, just update the current runstate
++	 * but don't account any time. Leave entry_time unchanged so the
++	 * next positive delta covers the full period once the clock
++	 * catches up. Update last_steal every time so stolen time only
++	 * reflects the interval since the most recent call.
++	 */
++	if (delta_ns < 0)
++		goto update_guest;
 +
-+		data->flags = 0;
-+		if (ka->use_master_clock &&
-+		    (static_cpu_has(X86_FEATURE_CONSTANT_TSC) || __this_cpu_read(cpu_tsc_khz))) {
- #ifdef CONFIG_X86_64
--		struct timespec64 ts;
-+			struct timespec64 ts;
+ 	/*
+ 	 * Time waiting for the scheduler isn't "stolen" if the
+ 	 * vCPU wasn't running anyway.
+ 	 */
+-	if (vx->current_runstate == RUNSTATE_running) {
+-		u64 steal_ns = run_delay - vx->last_steal;
++	if (vx->current_runstate == RUNSTATE_running && steal_ns > 0) {
++		if (steal_ns > delta_ns)
++			steal_ns = delta_ns;
  
--		if (kvm_get_walltime_and_clockread(&ts, &data->host_tsc)) {
--			data->realtime = ts.tv_nsec + NSEC_PER_SEC * ts.tv_sec;
--			data->flags |= KVM_CLOCK_REALTIME | KVM_CLOCK_HOST_TSC;
--		} else
-+			if (kvm_get_walltime_and_clockread(&ts, &data->host_tsc)) {
-+				data->realtime = ts.tv_nsec + NSEC_PER_SEC * ts.tv_sec;
-+				data->flags |= KVM_CLOCK_REALTIME | KVM_CLOCK_HOST_TSC;
-+			} else
- #endif
--		data->host_tsc = rdtsc();
+ 		delta_ns -= steal_ns;
 -
--		data->flags |= KVM_CLOCK_TSC_STABLE;
--		hv_clock.tsc_timestamp = ka->master_cycle_now;
--		hv_clock.system_time = ka->master_kernel_ns + ka->kvmclock_offset;
--		kvm_get_time_scale(NSEC_PER_SEC, get_cpu_tsc_khz() * 1000LL,
--				   &hv_clock.tsc_shift,
--				   &hv_clock.tsc_to_system_mul);
--		data->clock = __pvclock_read_cycles(&hv_clock, data->host_tsc);
--	} else {
--		data->clock = get_kvmclock_base_ns() + ka->kvmclock_offset;
--	}
--
--	put_cpu();
--}
--
--static void get_kvmclock(struct kvm *kvm, struct kvm_clock_data *data)
--{
--	struct kvm_arch *ka = &kvm->arch;
--	unsigned seq;
-+			data->host_tsc = rdtsc();
-+
-+			data->flags |= KVM_CLOCK_TSC_STABLE;
-+			hv_clock.tsc_timestamp = ka->master_cycle_now;
-+			hv_clock.system_time = ka->master_kernel_ns + ka->kvmclock_offset;
-+			kvm_get_time_scale(NSEC_PER_SEC, get_cpu_tsc_khz() * 1000LL,
-+					   &hv_clock.tsc_shift,
-+					   &hv_clock.tsc_to_system_mul);
-+			data->clock = __pvclock_read_cycles(&hv_clock, data->host_tsc);
-+		} else {
-+			data->clock = get_kvmclock_base_ns() + ka->kvmclock_offset;
-+		}
+ 		vx->runstate_times[RUNSTATE_runnable] += steal_ns;
+ 	}
+-	vx->last_steal = run_delay;
  
--	do {
--		seq = read_seqcount_begin(&ka->pvclock_sc);
--		__get_kvmclock(kvm, data);
-+		put_cpu();
- 	} while (read_seqcount_retry(&ka->pvclock_sc, seq));
+ 	vx->runstate_times[vx->current_runstate] += delta_ns;
+-	vx->current_runstate = state;
+ 	vx->runstate_entry_time = now;
+ 
++ update_guest:
++	vx->current_runstate = state;
++	vx->last_steal = run_delay;
+ 	if (vx->runstate_cache.active)
+ 		kvm_xen_update_runstate_guest(v, state == RUNSTATE_runnable);
  }
- 
 -- 
 2.54.0
 
