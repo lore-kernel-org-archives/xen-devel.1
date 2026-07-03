@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0220C43602
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Jul 2026 21:24:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1353895.1609655 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 854F9C44500
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Jul 2026 21:24:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1353904.1609680 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wflMX-00073z-K0; Fri, 03 Jul 2026 21:23:53 +0000
+	id 1wflMa-0007iL-Am; Fri, 03 Jul 2026 21:23:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1353895.1609655; Fri, 03 Jul 2026 21:23:53 +0000
+Received: by outflank-mailman (output) from mailman id 1353904.1609680; Fri, 03 Jul 2026 21:23:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wflMX-00073O-C9; Fri, 03 Jul 2026 21:23:53 +0000
-Received: by outflank-mailman (input) for mailman id 1353895;
- Fri, 03 Jul 2026 21:23:52 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wflMa-0007h5-4w; Fri, 03 Jul 2026 21:23:56 +0000
+Received: by outflank-mailman (input) for mailman id 1353904;
+ Fri, 03 Jul 2026 21:23:53 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+ac8634115322beed580f+8349+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1wflMW-0006u2-4y
- for xen-devel@lists.xenproject.org; Fri, 03 Jul 2026 21:23:52 +0000
+ id 1wflMX-00071A-7M
+ for xen-devel@lists.xenproject.org; Fri, 03 Jul 2026 21:23:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wflMV-001XO6-Gs; Fri, 03 Jul 2026 23:23:51 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wflMW-00CejO-KM; Fri, 03 Jul 2026 23:23:52 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+ac8634115322beed580f+8349+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 6a482856-5cb7-0a2a0a5109dd-0a2a4501b470-6
- for <multiple-recipients>; Fri, 03 Jul 2026 23:23:51 +0200
+ id 6a482835-bab6-0a2a0a5309dd-0a2a45038b46-26
+ for <multiple-recipients>; Fri, 03 Jul 2026 23:23:52 +0200
 Received: from [90.155.92.199] (helo=desiato.infradead.org)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+ac8634115322beed580f+8349+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 6a482866-400f-0a2a45010019-5a9b5cc79db4-3
- for <multiple-recipients>; Fri, 03 Jul 2026 23:23:51 +0200
+ id 6a482868-ec1a-0a2a45030019-5a9b5cc7ba66-3
+ for <multiple-recipients>; Fri, 03 Jul 2026 23:23:52 +0200
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.99.2 #2 (Red Hat Linux))
- id 1wflKc-000000059Nw-41Pc; Fri, 03 Jul 2026 21:23:11 +0000
+ id 1wflKd-000000059OB-3OKN; Fri, 03 Jul 2026 21:23:31 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.2 #2 (Red
- Hat Linux)) id 1wflKV-00000001RO1-49DP;
- Fri, 03 Jul 2026 22:21:47 +0100
+ Hat Linux)) id 1wflKX-00000001RPf-1VR4;
+ Fri, 03 Jul 2026 22:21:49 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,12 +56,12 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
 	Cc:Content-Type:Content-ID:Content-Description;
-	bh=hH+knYn8nTd+TnpfZC0k8V0fYdXUF8AZtKckehaVSow=; b=ag/RZYPYcN4fVre9EsOS+cOhgG
-	SwK+HBXd1dgEt76oRFLUyPps4X6KBXzSXwZeG8u4bPBlS1lY6kQQvAcw3N7JBu/jgw5Oe4TmfsCbY
-	cGsWk+shyieTGRcnmmdvQW3sYKZmi87gbtyJxTa9TzZQfKD6AJliCrRLqmacRh4oYvoPEd9VQZYHP
-	+EBg6NrRc7a+h2xbCvCY2ik3TtHc7gqWcC1e6ZFSOkCHviU9BxUopFV+Av+rB7l/zJUI5VuUCrOlH
-	sKBpN9uwsn5Q2ooxq1gQ5H+fO3FvAsMOJ+0Fskg5ceKnccVTWZJB6lTZZtjdD9iLxY8ozyYLaNuNg
-	BCA7oq3A==;
+	bh=mAoCrW41i2oubtWoRcSbcZKOTJ7hLP/U/r8vkThOrIU=; b=SCbksCL3C6lCq63v2liwrhb2lA
+	xAbzjM0Ap/EFmihcazXJMLsPc0Gy/LZbYMpy3KNL9NaNPZ08PMTpDHyMT9z4L9DQzWXqndhnhJVT/
+	KaO3tzV57y2ygHn+F/s78qY2H4870En1P/JMMQzNiMI3AcHjVzKmP29ZJ27qVm3fVpi0kgOi3ocQC
+	Ldb5j68wLws0DZDKidaCijCDu71rnX34BxkzVhC35mPOUB55mdo0urZogZbzzyX9H1Btken59i/zq
+	quARfNTDShyil/B7FPKU929VA3Q43dAMg5lcGHrX+ePGE7kLAD/aHCLdFkn9CykhB+0xJ6rmrTdEl
+	TdTctQvw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	Jonathan Corbet <corbet@lwn.net>,
@@ -90,9 +90,9 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v6 04/36] KVM: selftests: Use UAPI pvclock-abi.h in xen_shinfo_test
-Date: Fri,  3 Jul 2026 22:17:43 +0100
-Message-ID: <20260703212145.343527-5-dwmw2@infradead.org>
+Subject: [PATCH v6 28/36] KVM: x86: Remove runtime Xen TSC frequency CPUID update
+Date: Fri,  3 Jul 2026 22:18:07 +0100
+Message-ID: <20260703212145.343527-29-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260703212145.343527-1-dwmw2@infradead.org>
 References: <20260703212145.343527-1-dwmw2@infradead.org>
@@ -100,48 +100,94 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-d62444/1783113831-83AC91E0-5144876C/0/0
+X-purgate-ID: tlsNG-33051d/1783113832-07B245D1-AD583B97/0/0
 X-purgate-type: clean
-X-purgate-size: 1138
+X-purgate-size: 3099
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Now that pvclock-abi.h is a UAPI header, use it in xen_shinfo_test.c
-instead of locally duplicating the struct definitions.
+Remove the code in kvm_cpuid() that dynamically updates the Xen TSC
+info CPUID leaf at runtime. This code was updating the wrong sub-leaf
+anyway (0x40000x03/2 EAX is the *host* TSC frequency per the Xen ABI,
+not the guest frequency which belongs in 0x40000x03/0 ECX).
+
+Userspace now has all the information it needs to populate the Xen TSC
+info leaves (and the generic 0x40000010 timing leaf) at vCPU setup time:
+
+  - KVM_GET_CLOCK_GUEST returns the pvclock_vcpu_time_info structure
+    containing tsc_to_system_mul and tsc_shift (Xen leaf index 1)
+  - KVM_VCPU_TSC_SCALE returns the effective TSC and bus
+    frequencies in kHz (Xen leaf index 2, and 0x40000010)
+  - KVM_VCPU_TSC_SCALE returns the raw hardware scaling ratio for
+    precise arithmetic (VMClock)
+
+This eliminates the last instance of KVM modifying guest CPUID entries
+at runtime for timing information.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- .../testing/selftests/kvm/x86/xen_shinfo_test.c | 17 +----------------
- 1 file changed, 1 insertion(+), 16 deletions(-)
+ arch/x86/kvm/cpuid.c | 16 ----------------
+ arch/x86/kvm/xen.h   | 13 -------------
+ 2 files changed, 29 deletions(-)
 
-diff --git a/tools/testing/selftests/kvm/x86/xen_shinfo_test.c b/tools/testing/selftests/kvm/x86/xen_shinfo_test.c
-index 5076f6a75455..2f241ca4f096 100644
---- a/tools/testing/selftests/kvm/x86/xen_shinfo_test.c
-+++ b/tools/testing/selftests/kvm/x86/xen_shinfo_test.c
-@@ -98,22 +98,7 @@ struct sched_poll {
- 	u64 timeout;
- };
- 
--struct pvclock_vcpu_time_info {
--	u32   version;
--	u32   pad0;
--	u64   tsc_timestamp;
--	u64   system_time;
--	u32   tsc_to_system_mul;
--	s8    tsc_shift;
--	u8    flags;
--	u8    pad[2];
--} __attribute__((__packed__)); /* 32 bytes */
+diff --git a/arch/x86/kvm/cpuid.c b/arch/x86/kvm/cpuid.c
+index 621d950ec692..826637a0b72d 100644
+--- a/arch/x86/kvm/cpuid.c
++++ b/arch/x86/kvm/cpuid.c
+@@ -2117,22 +2117,6 @@ bool kvm_cpuid(struct kvm_vcpu *vcpu, u32 *eax, u32 *ebx,
+ 		} else if (function == 0x80000007) {
+ 			if (kvm_hv_invtsc_suppressed(vcpu))
+ 				*edx &= ~feature_bit(CONSTANT_TSC);
+-		} else if (IS_ENABLED(CONFIG_KVM_XEN) &&
+-			   kvm_xen_is_tsc_leaf(vcpu, function)) {
+-			/*
+-			 * Update guest TSC frequency information if necessary.
+-			 * Ignore failures, there is no sane value that can be
+-			 * provided if KVM can't get the TSC frequency.
+-			 */
+-			if (kvm_check_request(KVM_REQ_CLOCK_UPDATE, vcpu))
+-				kvm_guest_time_update(vcpu);
 -
--struct pvclock_wall_clock {
--	u32   version;
--	u32   sec;
--	u32   nsec;
--} __attribute__((__packed__));
-+#include <asm/pvclock-abi.h>
+-			if (index == 1) {
+-				*ecx = vcpu->arch.pvclock_tsc_mul;
+-				*edx = vcpu->arch.pvclock_tsc_shift;
+-			} else if (index == 2) {
+-				*eax = div_u64(vcpu->arch.hw_tsc_hz, 1000);
+-			}
+ 		}
+ 	} else {
+ 		*eax = *ebx = *ecx = *edx = 0;
+diff --git a/arch/x86/kvm/xen.h b/arch/x86/kvm/xen.h
+index 59e6128a7bd3..f372855857a8 100644
+--- a/arch/x86/kvm/xen.h
++++ b/arch/x86/kvm/xen.h
+@@ -50,14 +50,6 @@ static inline void kvm_xen_sw_enable_lapic(struct kvm_vcpu *vcpu)
+ 		kvm_xen_inject_vcpu_vector(vcpu);
+ }
  
- struct vcpu_runstate_info {
- 	u32 state;
+-static inline bool kvm_xen_is_tsc_leaf(struct kvm_vcpu *vcpu, u32 function)
+-{
+-	return static_branch_unlikely(&kvm_xen_enabled.key) &&
+-	       vcpu->arch.xen.cpuid.base &&
+-	       function <= vcpu->arch.xen.cpuid.limit &&
+-	       function == (vcpu->arch.xen.cpuid.base | XEN_CPUID_LEAF(3));
+-}
+-
+ static inline bool kvm_xen_msr_enabled(struct kvm *kvm)
+ {
+ 	return static_branch_unlikely(&kvm_xen_enabled.key) &&
+@@ -177,11 +169,6 @@ static inline bool kvm_xen_timer_enabled(struct kvm_vcpu *vcpu)
+ {
+ 	return false;
+ }
+-
+-static inline bool kvm_xen_is_tsc_leaf(struct kvm_vcpu *vcpu, u32 function)
+-{
+-	return false;
+-}
+ #endif
+ 
+ int kvm_xen_hypercall(struct kvm_vcpu *vcpu);
 -- 
 2.54.0
 
