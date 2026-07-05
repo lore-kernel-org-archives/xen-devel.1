@@ -4,53 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E719C44501
-	for <xen-devel@archiver.kernel.org>; Sun,  5 Jul 2026 05:46:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1354497.1609791 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CFCEC43458
+	for <xen-devel@archiver.kernel.org>; Sun,  5 Jul 2026 15:30:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1354806.1609842 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wgFfm-00038j-Fm; Sun, 05 Jul 2026 05:45:46 +0000
+	id 1wgOmS-00073r-7m; Sun, 05 Jul 2026 15:29:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1354497.1609791; Sun, 05 Jul 2026 05:45:46 +0000
+Received: by outflank-mailman (output) from mailman id 1354806.1609842; Sun, 05 Jul 2026 15:29:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wgFfm-00036b-7f; Sun, 05 Jul 2026 05:45:46 +0000
-Received: by outflank-mailman (input) for mailman id 1354497;
- Sat, 04 Jul 2026 18:32:53 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wgOmS-00073k-57; Sun, 05 Jul 2026 15:29:16 +0000
+Received: by outflank-mailman (input) for mailman id 1354806;
+ Sun, 05 Jul 2026 11:56:44 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ze.huang@oss.qualcomm.com>) id 1wg5Ab-0000Qi-3l
- for xen-devel@lists.xenproject.org; Sat, 04 Jul 2026 18:32:53 +0000
+ (envelope-from <doruk@0sec.ai>) id 1wgLSm-0008E4-PN
+ for xen-devel@lists.xenproject.org; Sun, 05 Jul 2026 11:56:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wg5Aa-00CL1O-Gs
- for xen-devel@lists.xenproject.org; Sat, 04 Jul 2026 20:32:52 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wgLSl-00G2oW-Tq
+ for xen-devel@lists.xenproject.org; Sun, 05 Jul 2026 13:56:44 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ze.huang@oss.qualcomm.com>)
- id 6a495131-e002-0a2a0a5209dd-0a2a4508dc3c-42
- for <xen-devel@lists.xenproject.org>; Sat, 04 Jul 2026 20:32:52 +0200
-Received: from [205.220.180.131] (helo=mx0b-0031df01.pphosted.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ze.huang@oss.qualcomm.com>)
- id 6a4951d3-edec-0a2a45080019-cddcb483f9dc-3
- for <xen-devel@lists.xenproject.org>; Sat, 04 Jul 2026 20:32:52 +0200
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 664G8T3a3415014
- for <xen-devel@lists.xenproject.org>; Sat, 4 Jul 2026 18:32:50 GMT
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
- [209.85.210.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f6t8uhbp7-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Sat, 04 Jul 2026 18:32:50 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id
- d2e1a72fcca58-847e32ef4caso2621148b3a.2
- for <xen-devel@lists.xenproject.org>; Sat, 04 Jul 2026 11:32:50 -0700 (PDT)
-Received: from [192.168.1.100] ([151.243.38.149])
+ (envelope-from <doruk@0sec.ai>)
+ id 6a4a4618-bab6-0a2a0a5309dd-0a2a45029554-36
+ for <xen-devel@lists.xenproject.org>; Sun, 05 Jul 2026 13:56:43 +0200
+Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <doruk@0sec.ai>)
+ id 6a4a467a-5a27-0a2a45020019-d155dd2bc179-3
+ for <xen-devel@lists.xenproject.org>; Sun, 05 Jul 2026 13:56:42 +0200
+Received: by mail-wr1-f43.google.com with SMTP id
+ ffacd0b85a97d-47d6c634f45so256336f8f.3
+ for <xen-devel@lists.xenproject.org>; Sun, 05 Jul 2026 04:56:42 -0700 (PDT)
+Received: from PeakBook-Mini.tail8e484.ts.net ([178.197.219.178])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-847f6b6057dsm1508437b3a.7.2026.07.04.11.32.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Jul 2026 11:32:47 -0700 (PDT)
+ ffacd0b85a97d-47a9e4d83bdsm15695537f8f.13.2026.07.05.04.56.40
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Sun, 05 Jul 2026 04:56:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,418 +53,122 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=qcppdkim1 header.d=qualcomm.com header.i="@qualcomm.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-Id:MIME-Version:References:Subject:To"; dkim=pass header.s=google header.d=oss.qualcomm.com header.i="@oss.qualcomm.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:MIME-Version:Subject:Date:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	rk9PzaJeJ1EubyHB5y8nJAfHMdVNPP8w0v4lujL2p6c=; b=Qrwax7K6YbrhBQ+0
-	pw5YoGjmckdXdtTMrOJifM6TUsW9/L+f3162b/N7ycpx8Q6K05ntOpb20DTDXR35
-	y24nTN2BxtwosIAeooPcsvkonEW+KBecNEd9EQYag7gtQ+5oAcJ5brHcHpzyycEP
-	Du7bAu+Nm0Xq9MHCBdrk2v/5ROHjYYd/hD/W33tUwjtZ8ttZ73urgo2S9lEOX4Lv
-	JzEs62tCpLl8TUZi/j3noo29PbSvnuu4LuxHyuD5vc4oxbsnYaZUo43jiaR7FWB2
-	Evjgh7EzPNUfD//h5eFX9KkBxFZbusLStDX4U6M6fIz1gBY/7o9K1/qVkZ+crZRm
-	TgA2LQ==
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=temperror header.s=google header.d=0sec.ai header.i="@0sec.ai"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1783189969; x=1783794769; darn=lists.xenproject.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=rk9PzaJeJ1EubyHB5y8nJAfHMdVNPP8w0v4lujL2p6c=;
-        b=Y0Zk5WNhtg6+xGjBYo0x/H7Zjcjc05G2JJvwrFDVUTYeVzVDdcr2jG9PJc3aBCUIpb
-         MZjb0NOGYBQENjOxjJx9xnWZO7fJ0uP5QASKHIhZodaicTjQ9kcxMgyuOmpVKBoC2lSp
-         k83kkrHJEbV7AroPZpBZPXFRLCwE7Av8l8Xj+1BoOMI8zntXiaClhSUgSxMnCeGwTNmK
-         BrbPJ4m/Z9JXSzRNMEmNeXpWESWyvqpeUu6XmJIs3YM46foe1z1Y6GXK6lxtl7W8CZDc
-         xOoTI0BqkxIAtH0E8vsrBq03Fiyulbp7ewijX/8qJwfyCE375gnIDcPyHaa22yZ4R0zf
-         MYgQ==
+        d=0sec.ai; s=google; t=1783252602; x=1783857402; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=pwRuSlbR797Mkzk8fZcr08AJmiX5cll2qBttTfovZeo=;
+        b=KBAhfMRz85ezx70BOLacSIb0iSY3F1afq8ZMvF2StkinaXKtbFNmU8n9QN1X8VDLwS
+         SjbQz62sOPDBGbHY6SueGULuLoo8aIMZJrkeRq6UG9AD00biu2RCgD/Cz0ft1+SJW4jo
+         PXWHew/B4C1PvrzXxG/5Xjvjk9i1lo+IxLZDRs+gKSWjPVn58gwjAt4qm6LNqrBUiIpE
+         CYaQfvUVzrNDAvuGinr5mjHjHSpzwbe1vf+JQ7EPFwTTPUTRk9zHb4cEmbRuiJre513S
+         JWFpOaH33ubTr12J3p4SIvCYUsGgclNOy/1CVV95G0MbcmcrrL07UU+9JDBI5iBYT4iI
+         fteg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783189969; x=1783794769;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=rk9PzaJeJ1EubyHB5y8nJAfHMdVNPP8w0v4lujL2p6c=;
-        b=FKgSHeDzCvfw3hj31eqV/eg3hEBGuPcSgx7tMrn550uBmWi88AUv8YywkAab8kj9dL
-         JBQ/tafUZicDcFZvQFNPbdWL7ZHpFrZsoD/09KiL9UXE98SMfls/hrpSC9XQHkT2vu84
-         9ebMR115waBpAdgja4X/T5bC/YV2Mb/iPIEemW7igSJj0yHUDXBtwjsKdxrDBUs4DcHD
-         H082SUu23aoOHqoOzXgjzGyIC4LfZ9FZFEK1nNFOIWMFx3HHztNtR0ypqkzt1LgvqI1E
-         lPvL+0bz71AgFX9XeutBAedbNSiVdnHibR7V0XyE2Um7MiKIAbDNODkZ0kUadkgIRSlz
-         1FgA==
-X-Forwarded-Encrypted: i=1; AHgh+RoTtZepxh5PTdcRfFzLA2LNTkpME4wKLyQSuAy18HkZFoO09dR7luSPLFGIq3QJfJyLKWgs/yVEPVc=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxNYQNfVOQtzPSvmMQF5A4Wd6HOVkeri4U1NAG4Ai8Gs4+MCpls
-	msuuf0XKMD2iUWQEbClhCtFdkQuYEsVMgrAEU+zVYbClBxqkv1V3tzkBMwb3BO4EiORXZcr/IkD
-	zq+ifRQ2+4Xc0h3UYamizIe3vQie9htvwUfktP0HIhydyGUd8nzrVhbtV/W4q61Nzmk7H4w==
-X-Gm-Gg: AfdE7cn1KGMroEZM8k65AlWBZ8vPgB8He6pjVlidYvCGSEpvWRFzSY+/zblZzalV9f7
-	HWmib/LYxyPAMyocVCsdVrWgNHui6YfRhc17Nx89S50T/fPZ8sYLd7k4wt+vPn3hrOP3qkcbV3t
-	yvooO75YrMM8V+wunOu4066scBYqM9GLkycJaONZ7T/FW7aBZEzPpkIfFU1rX1F4Y0bmRgKDPru
-	BJeU3U4JDSu+PL9GFSLHs7uUIXPrACOe4dNGemcNz/MWQ57Q0fWGb/xmTch8SXrRf2LNhCd3I/u
-	OZZ4A5ykkuoUKF/061NSrDD8uskiQ+314W3KaZbDsGf6AoUKitWY68nyNpAtGcU3y0n1qzBxn3n
-	XJPRc8pPjyiwrMOdRF4GrMkE=
-X-Received: by 2002:a05:6a00:22c7:b0:845:48be:b046 with SMTP id d2e1a72fcca58-847f6f1025fmr3763190b3a.36.1783189969413;
-        Sat, 04 Jul 2026 11:32:49 -0700 (PDT)
-X-Received: by 2002:a05:6a00:22c7:b0:845:48be:b046 with SMTP id d2e1a72fcca58-847f6f1025fmr3763155b3a.36.1783189968830;
-        Sat, 04 Jul 2026 11:32:48 -0700 (PDT)
-From: Ze Huang <ze.huang@oss.qualcomm.com>
-Date: Sun, 05 Jul 2026 02:31:11 +0800
-Subject: [PATCH 2/9] drm/aspeed: replace struct drm_simple_display_pipe
- with regular atomic helpers
+        d=1e100.net; s=20251104; t=1783252602; x=1783857402;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=pwRuSlbR797Mkzk8fZcr08AJmiX5cll2qBttTfovZeo=;
+        b=Y9W2rt3wdwOq7o/LipK3meraKL2M2pIYHb9v2uSFdqxrv42F5w+W5MJUmQHUEqChj3
+         DC4LKZJ3ZiaT/Fe6M5Cg85Jw9LD8XEEgneA8tJcmdkPlL/Hccj4th1Rr5U3DBJvBVFCy
+         A+iqxcMHCEfrXQBqbm828w/7JKqSPweLuQTN8DmiQJtilD95dwIyMMQJecUSY2nArzeb
+         9LRh1LCMkY6M0Jexsx2mJ04tNsL/MFUiBYRzbAJnDiCQgOwGhyktfqSIjCOxzGejA9ZU
+         l18dnx5owsC94Ggg35Mtr5xBSEOa5usYhpoAsibv408xjtfPKPSVJeeHr0BBOsnsatLC
+         Xzvw==
+X-Forwarded-Encrypted: i=1; AHgh+RoKTo+X3uPrWvGfR3cCRIbIxhy9wsSw1/VtVoVKNauqPaRlljEwEBb1p5d18GeSIytBKvu/9IN+RJU=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwP21lGwquS0/AsBoh3ovmeF60vWX1BJs/t/oywDjDz53MEJjQu
+	4AwDCbjxFnNSHf0pYHwxuknynvIecLllyMx+Fv6QOfEe+hYU6PR+LCXy1NABuT/QKX3a
+X-Gm-Gg: AfdE7cmfJiqRu+UyBtXrtxHDUR+0IMXxcI3ntWzUdf5qDb+QZnGK33hTBiybOi4htCD
+	KEAvYa5rHJ3ync8cb5X7LFE1pIGXNj7yyCU+mNW/Bpksho1WJRNU+NnTgU2il9ruMBeDMmGuE4X
+	iXPj/mp1dA5+oWlonDBj6ck73f9uWMoqL5S22s81vaUX/HPk5ZMs4Eko/fT42BQA+9m95Wva2OC
+	E5N9iK/H57HCBqH4LmGHCQ/qU4KGbcGI+8eAboiCmUUtCjrmHfRpF6kX4/gNJSx4/zRbMVxrwJw
+	bp6eIAcnqKKrYFx8LOtwnhiMEOB75Y/7AG85wmeXu76PNJRizuxs1U1Tu0SGfmOPyHdkVAi25Kq
+	JFeMNaPgsEL8LdSUvTFQZTDWEc7bXFospme0H+wsVYF+01/OWoDdpU7Nnf61/HECTXS5FlB6oyH
+	BKkqKB5K/slSHrxAbqwgwKM7QqdNdUUz8AWih00xBeod/8Fu0UOlnnyk5/HL1MYKXzHOTqhi/6V
+	Q3gZPcr6z5aCpGklN/omi4Pc2Rz3Gg9lh0=
+X-Received: by 2002:a05:6000:1818:b0:475:f0c2:5afb with SMTP id ffacd0b85a97d-47aad07e091mr5521587f8f.49.1783252601779;
+        Sun, 05 Jul 2026 04:56:41 -0700 (PDT)
+From: Doruk Tan Ozturk <doruk@0sec.ai>
+To: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Juergen Gross <jgross@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Jens Axboe <axboe@kernel.dk>,
+	xen-devel@lists.xenproject.org,
+	linux-block@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Doruk Tan Ozturk <doruk@0sec.ai>
+Subject: [PATCH] xen-blkfront: fix double completion of split requests on resume
+Date: Sun,  5 Jul 2026 13:56:39 +0200
+Message-ID: <20260705115639.72805-1-doruk@0sec.ai>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260705-drm-simple-kms-removal-v1-2-b4e1ca053623@oss.qualcomm.com>
-References: <20260705-drm-simple-kms-removal-v1-0-b4e1ca053623@oss.qualcomm.com>
-In-Reply-To: <20260705-drm-simple-kms-removal-v1-0-b4e1ca053623@oss.qualcomm.com>
-To: Alexey Brodkin <abrodkin@synopsys.com>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Joel Stanley <joel@jms.id.au>,
-        Andrew Jeffery <andrew@codeconstruct.com.au>,
-        Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
-        Pengutronix Kernel Team <kernel@pengutronix.de>,
-        Fabio Estevam <festevam@gmail.com>, Linus Walleij <linusw@kernel.org>,
-        Hans de Goede <hansg@kernel.org>,
-        Alex Lanzano <lanzano.alex@gmail.com>,
-        Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org,
-        imx@lists.linux.dev, xen-devel@lists.xenproject.org,
-        Ze Huang <ze.huang@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1783189912; l=10745;
- i=ze.huang@oss.qualcomm.com; s=20260704; h=from:subject:message-id;
- bh=suiX1hb7hxWElnQ47l4ZCuVeZgtDba91LFdURswfwJM=;
- b=5HcbGp99V2Yint2Jmx7p8cBU7PhrqcJUqaDUpsMgk9Dpg7lpIs6PwliMmRMT1Cqd+Ytp1FY6y
- 1+s74fAS33WArqXbTG0K/2A23KDYGxAhQXpnwL68qGMAyrr2jzcMy3Z
-X-Developer-Key: i=ze.huang@oss.qualcomm.com; a=ed25519;
- pk=pSsISLZF2ubEjJRmslsa6Ps4W3yAuPY7yaircQTlQQU=
-X-Proofpoint-ORIG-GUID: Tai04_QBhKYNGcrSSoZcx0PJcQ8ol08K
-X-Proofpoint-GUID: Tai04_QBhKYNGcrSSoZcx0PJcQ8ol08K
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA0MDE5MiBTYWx0ZWRfX6xo6mtRbjWXl
- 7wfZURBE1iRaUERD5gVeE3H3f/dZ7k377GWY53D55Ns3Vxhsc2B8UuvYrwmBTM0vc3xLQfVBkjx
- wkmuMaDJDej4OhpMrtEjL4WRTMC+oYo=
-X-Authority-Analysis: v=2.4 cv=MZxcfZ/f c=1 sm=1 tr=0 ts=6a4951d2 cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=cNux22OjBTKCC6TmznXXXA==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=QAKNwy68QAf-n9tFDZYA:9 a=QEXdDO2ut3YA:10
- a=2VI0MkxyNR6bbpdq8BZq:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA0MDE5MiBTYWx0ZWRfX3wIokbP3saw4
- 7Txnt2fPYlybk0H2rZ8JeUTl43g4XWAOd7iBUI4l+hkQo2kRymS+BXz8S9pjp6FND2R1uFJHBp8
- /ZOGLjoHpntwHGKpzRQ3udjFQTLGdW7EPcAKPhmGfk+GwnZmpCfgeis2oV1+mvWQ/UzllniUGBS
- guE/e4l5+T4nLeX5Myca8l603JvWWiuYQk8cKUhzNKwFJnG2ZZIFV1brDPrjUYxfVN4tFcRya+N
- 28uLrXv9MH8YpuSc8QWL4HK5A3Ki9YXoo2mEOaZJOKy8fr/PrpdpsoOV2g5MXOlwcBuZ1O+ZQG0
- TLpHeJdflTK2j/XOlBnETr/uh9tI2n1WLLcKHnm/LZiIB5OrKKSATYvmjJGuZtzKhdm6rzSIFP4
- GnuRssq8jTAqkwaW1SxexdfsjN3HmJtVxqPL3SNvdL82+Y+CF6NjxLIFihOV8gW89AMj7UNk6IP
- kZjZdZKLxjNJLFaERpw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-07-04_02,2026-07-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1011 priorityscore=1501 impostorscore=0 malwarescore=0 bulkscore=0
- lowpriorityscore=0 suspectscore=0 phishscore=0 spamscore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607040192
-X-purgate-ID: tlsNG-c1860d/1783189972-A1F223FC-FE8BE879/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-720697/1783252603-4D1027C5-1EABFEDE/0/0
 X-purgate-type: clean
-X-purgate-size: 10747
+X-purgate-size: 2670
 
-Replace simple display pipe with explicit plane, CRTC and encoder
-objects. Move callbacks to plane and CRTC helpers, with vblank handling
-through drm_crtc_funcs.
+When a block request is too large for a single ring entry and the
+backend does not support indirect descriptors, blkfront splits it
+across two ring requests.  blkif_ring_get_request() is called twice
+and both shadow slots (shadow[id] and shadow[extra_id]) are made to
+point at the *same* struct request, linked together through
+associated_id.
 
-This removes intermediate simple-pipe layer and uses standard atomic
-helper wiring.
+On the normal completion path blkif_completion() collapses the pair:
+it recycles the second slot via add_id_to_freelist() and only completes
+the request once.  The suspend/resume path in blkfront_resume() does
+not.  It walks every physical shadow slot and, for each slot whose
+->request is set, calls blk_mq_end_request() or re-queues
+->request.  For an in-flight split request this visits the shared
+struct request twice, so on resume/migration the same request is
+ended (or re-queued) two times.  The second visit is a double
+blk_mq_end_request() (refcount underflow / double free) and a
+use-after-free read of req->bio, which was cleared on the first visit.
 
-Signed-off-by: Ze Huang <ze.huang@oss.qualcomm.com>
+Skip the secondary slot of a split request in the resume walk, so each
+logical request is completed or re-queued exactly once, matching how
+blkif_completion() already treats the pair.  The secondary slot is the
+one that is linked (associated_id != NO_ASSOCIATED_ID) and carries no
+scatter-gather list (num_sg == 0); the first slot always keeps the
+scatter-gather list.
+
+This was found by 0sec automated security-research tooling
+(https://0sec.ai).  The bug is only reachable on suspend/resume or live
+migration of a guest whose backend lacks indirect-descriptor support, so
+it has no local reproducer; the fix is by source inspection against the
+existing blkif_completion() collapse logic.
+
+Fixes: 6cc568339047 ("xen/blkfront: Handle non-indirect grant with 64KB pages")
+Assisted-by: 0sec:claude-opus-4-8
+Signed-off-by: Doruk Tan Ozturk <doruk@0sec.ai>
 ---
- drivers/gpu/drm/aspeed/aspeed_gfx.h      |   5 +-
- drivers/gpu/drm/aspeed/aspeed_gfx_crtc.c | 156 +++++++++++++++++++++++--------
- drivers/gpu/drm/aspeed/aspeed_gfx_drv.c  |   3 +-
- 3 files changed, 123 insertions(+), 41 deletions(-)
+ drivers/block/xen-blkfront.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/drivers/gpu/drm/aspeed/aspeed_gfx.h b/drivers/gpu/drm/aspeed/aspeed_gfx.h
-index 4e6a442c3886..a34811564c0d 100644
---- a/drivers/gpu/drm/aspeed/aspeed_gfx.h
-+++ b/drivers/gpu/drm/aspeed/aspeed_gfx.h
-@@ -2,7 +2,6 @@
- /* Copyright 2018 IBM Corporation */
+diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
+index f765970578f9..b2e83fd0c77b 100644
+--- a/drivers/block/xen-blkfront.c
++++ b/drivers/block/xen-blkfront.c
+@@ -2079,6 +2079,15 @@ static int blkfront_resume(struct xenbus_device *dev)
+ 			if (!shadow[j].request)
+ 				continue;
  
- #include <drm/drm_device.h>
--#include <drm/drm_simple_kms_helper.h>
- 
- struct aspeed_gfx {
- 	struct drm_device		drm;
-@@ -17,7 +16,9 @@ struct aspeed_gfx {
- 	u32				throd_val;
- 	u32				scan_line_max;
- 
--	struct drm_simple_display_pipe	pipe;
-+	struct drm_plane		plane;
-+	struct drm_crtc			crtc;
-+	struct drm_encoder		encoder;
- 	struct drm_connector		connector;
- };
- #define to_aspeed_gfx(x) container_of(x, struct aspeed_gfx, drm)
-diff --git a/drivers/gpu/drm/aspeed/aspeed_gfx_crtc.c b/drivers/gpu/drm/aspeed/aspeed_gfx_crtc.c
-index 7877a57b8e26..3294795c31c4 100644
---- a/drivers/gpu/drm/aspeed/aspeed_gfx_crtc.c
-+++ b/drivers/gpu/drm/aspeed/aspeed_gfx_crtc.c
-@@ -5,6 +5,8 @@
- #include <linux/reset.h>
- #include <linux/regmap.h>
- 
-+#include <drm/drm_atomic.h>
-+#include <drm/drm_atomic_helper.h>
- #include <drm/drm_device.h>
- #include <drm/drm_fb_dma_helper.h>
- #include <drm/drm_fourcc.h>
-@@ -12,20 +14,13 @@
- #include <drm/drm_gem_atomic_helper.h>
- #include <drm/drm_gem_dma_helper.h>
- #include <drm/drm_panel.h>
--#include <drm/drm_simple_kms_helper.h>
- #include <drm/drm_vblank.h>
- 
- #include "aspeed_gfx.h"
- 
--static struct aspeed_gfx *
--drm_pipe_to_aspeed_gfx(struct drm_simple_display_pipe *pipe)
--{
--	return container_of(pipe, struct aspeed_gfx, pipe);
--}
--
- static int aspeed_gfx_set_pixel_fmt(struct aspeed_gfx *priv, u32 *bpp)
- {
--	struct drm_crtc *crtc = &priv->pipe.crtc;
-+	struct drm_crtc *crtc = &priv->crtc;
- 	struct drm_device *drm = crtc->dev;
- 	const u32 format = crtc->primary->state->fb->format->format;
- 	u32 ctrl1;
-@@ -79,7 +74,7 @@ static void aspeed_gfx_disable_controller(struct aspeed_gfx *priv)
- 
- static void aspeed_gfx_crtc_mode_set_nofb(struct aspeed_gfx *priv)
- {
--	struct drm_display_mode *m = &priv->pipe.crtc.state->adjusted_mode;
-+	struct drm_display_mode *m = &priv->crtc.state->adjusted_mode;
- 	u32 ctrl1, d_offset, t_count, bpp;
- 	int err;
- 
-@@ -139,33 +134,31 @@ static void aspeed_gfx_crtc_mode_set_nofb(struct aspeed_gfx *priv)
- 	writel(priv->throd_val, priv->base + CRT_THROD);
- }
- 
--static void aspeed_gfx_pipe_enable(struct drm_simple_display_pipe *pipe,
--			      struct drm_crtc_state *crtc_state,
--			      struct drm_plane_state *plane_state)
-+static void aspeed_gfx_crtc_helper_atomic_enable(struct drm_crtc *crtc,
-+						 struct drm_atomic_commit *state)
- {
--	struct aspeed_gfx *priv = drm_pipe_to_aspeed_gfx(pipe);
--	struct drm_crtc *crtc = &pipe->crtc;
-+	struct aspeed_gfx *priv = container_of(crtc, struct aspeed_gfx, crtc);
- 
- 	aspeed_gfx_crtc_mode_set_nofb(priv);
- 	aspeed_gfx_enable_controller(priv);
- 	drm_crtc_vblank_on(crtc);
- }
- 
--static void aspeed_gfx_pipe_disable(struct drm_simple_display_pipe *pipe)
-+static void aspeed_gfx_crtc_helper_atomic_disable(struct drm_crtc *crtc,
-+						  struct drm_atomic_commit *state)
- {
--	struct aspeed_gfx *priv = drm_pipe_to_aspeed_gfx(pipe);
--	struct drm_crtc *crtc = &pipe->crtc;
-+	struct aspeed_gfx *priv = container_of(crtc, struct aspeed_gfx, crtc);
- 
- 	drm_crtc_vblank_off(crtc);
- 	aspeed_gfx_disable_controller(priv);
- }
- 
--static void aspeed_gfx_pipe_update(struct drm_simple_display_pipe *pipe,
--				   struct drm_plane_state *plane_state)
-+static void aspeed_gfx_plane_helper_atomic_update(struct drm_plane *plane,
-+						  struct drm_atomic_commit *state)
- {
--	struct aspeed_gfx *priv = drm_pipe_to_aspeed_gfx(pipe);
--	struct drm_crtc *crtc = &pipe->crtc;
--	struct drm_framebuffer *fb = pipe->plane.state->fb;
-+	struct aspeed_gfx *priv = container_of(plane, struct aspeed_gfx, plane);
-+	struct drm_crtc *crtc = &priv->crtc;
-+	struct drm_framebuffer *fb = plane->state->fb;
- 	struct drm_pending_vblank_event *event;
- 	struct drm_gem_dma_object *gem;
- 
-@@ -190,9 +183,9 @@ static void aspeed_gfx_pipe_update(struct drm_simple_display_pipe *pipe,
- 	writel(gem->dma_addr, priv->base + CRT_ADDR);
- }
- 
--static int aspeed_gfx_enable_vblank(struct drm_simple_display_pipe *pipe)
-+static int aspeed_gfx_crtc_enable_vblank(struct drm_crtc *crtc)
- {
--	struct aspeed_gfx *priv = drm_pipe_to_aspeed_gfx(pipe);
-+	struct aspeed_gfx *priv = container_of(crtc, struct aspeed_gfx, crtc);
- 	u32 reg = readl(priv->base + CRT_CTRL1);
- 
- 	/* Clear pending VBLANK IRQ */
-@@ -204,9 +197,9 @@ static int aspeed_gfx_enable_vblank(struct drm_simple_display_pipe *pipe)
- 	return 0;
- }
- 
--static void aspeed_gfx_disable_vblank(struct drm_simple_display_pipe *pipe)
-+static void aspeed_gfx_crtc_disable_vblank(struct drm_crtc *crtc)
- {
--	struct aspeed_gfx *priv = drm_pipe_to_aspeed_gfx(pipe);
-+	struct aspeed_gfx *priv = container_of(crtc, struct aspeed_gfx, crtc);
- 	u32 reg = readl(priv->base + CRT_CTRL1);
- 
- 	reg &= ~CRT_CTRL_VERTICAL_INTR_EN;
-@@ -216,12 +209,75 @@ static void aspeed_gfx_disable_vblank(struct drm_simple_display_pipe *pipe)
- 	writel(reg | CRT_CTRL_VERTICAL_INTR_STS, priv->base + CRT_CTRL1);
- }
- 
--static const struct drm_simple_display_pipe_funcs aspeed_gfx_funcs = {
--	.enable		= aspeed_gfx_pipe_enable,
--	.disable	= aspeed_gfx_pipe_disable,
--	.update		= aspeed_gfx_pipe_update,
--	.enable_vblank	= aspeed_gfx_enable_vblank,
--	.disable_vblank	= aspeed_gfx_disable_vblank,
-+static int aspeed_gfx_plane_helper_atomic_check(struct drm_plane *plane,
-+						struct drm_atomic_commit *state)
-+{
-+	struct drm_plane_state *plane_state = drm_atomic_get_new_plane_state(state, plane);
-+	struct drm_crtc *crtc = plane_state->crtc;
-+	struct drm_crtc_state *crtc_state = NULL;
-+	int ret;
++			/*
++			 * Split requests alias one request across two shadow
++			 * slots; skip the sg-less secondary so it completes
++			 * once, like blkif_completion() does.
++			 */
++			if (shadow[j].associated_id != NO_ASSOCIATED_ID &&
++			    shadow[j].num_sg == 0)
++				continue;
 +
-+	if (crtc)
-+		crtc_state = drm_atomic_get_new_crtc_state(state, crtc);
-+
-+	ret = drm_atomic_helper_check_plane_state(plane_state, crtc_state,
-+						  DRM_PLANE_NO_SCALING,
-+						  DRM_PLANE_NO_SCALING,
-+						  false, false);
-+	return ret;
-+}
-+
-+static const struct drm_plane_helper_funcs aspeed_gfx_plane_helper_funcs = {
-+	.prepare_fb	= drm_gem_plane_helper_prepare_fb,
-+	.atomic_check	= aspeed_gfx_plane_helper_atomic_check,
-+	.atomic_update	= aspeed_gfx_plane_helper_atomic_update,
-+};
-+
-+static const struct drm_plane_funcs aspeed_gfx_plane_funcs = {
-+	.update_plane		= drm_atomic_helper_update_plane,
-+	.disable_plane		= drm_atomic_helper_disable_plane,
-+	.destroy		= drm_plane_cleanup,
-+	.reset			= drm_atomic_helper_plane_reset,
-+	.atomic_duplicate_state	= drm_atomic_helper_plane_duplicate_state,
-+	.atomic_destroy_state	= drm_atomic_helper_plane_destroy_state,
-+};
-+
-+static int aspeed_gfx_crtc_helper_atomic_check(struct drm_crtc *crtc,
-+					       struct drm_atomic_commit *state)
-+{
-+	struct drm_crtc_state *crtc_state = drm_atomic_get_new_crtc_state(state, crtc);
-+	int ret;
-+
-+	if (!crtc_state->enable)
-+		goto out;
-+
-+	ret = drm_atomic_helper_check_crtc_primary_plane(crtc_state);
-+	if (ret)
-+		return ret;
-+
-+out:
-+	return drm_atomic_add_affected_planes(state, crtc);
-+}
-+
-+static const struct drm_crtc_helper_funcs aspeed_gfx_crtc_helper_funcs = {
-+	.atomic_check	= aspeed_gfx_crtc_helper_atomic_check,
-+	.atomic_enable	= aspeed_gfx_crtc_helper_atomic_enable,
-+	.atomic_disable	= aspeed_gfx_crtc_helper_atomic_disable,
-+};
-+
-+static const struct drm_crtc_funcs aspeed_gfx_crtc_funcs = {
-+	.reset			= drm_atomic_helper_crtc_reset,
-+	.destroy		= drm_crtc_cleanup,
-+	.set_config		= drm_atomic_helper_set_config,
-+	.page_flip		= drm_atomic_helper_page_flip,
-+	.atomic_duplicate_state	= drm_atomic_helper_crtc_duplicate_state,
-+	.atomic_destroy_state	= drm_atomic_helper_crtc_destroy_state,
-+	.enable_vblank		= aspeed_gfx_crtc_enable_vblank,
-+	.disable_vblank		= aspeed_gfx_crtc_disable_vblank,
-+};
-+
-+static const struct drm_encoder_funcs aspeed_gfx_encoder_funcs = {
-+	.destroy = drm_encoder_cleanup,
- };
- 
- static const uint32_t aspeed_gfx_formats[] = {
-@@ -232,10 +288,36 @@ static const uint32_t aspeed_gfx_formats[] = {
- int aspeed_gfx_create_pipe(struct drm_device *drm)
- {
- 	struct aspeed_gfx *priv = to_aspeed_gfx(drm);
-+	struct drm_plane *plane = &priv->plane;
-+	struct drm_crtc *crtc = &priv->crtc;
-+	struct drm_encoder *encoder = &priv->encoder;
-+	int ret;
-+
-+	ret = drm_universal_plane_init(drm, plane, 0,
-+				       &aspeed_gfx_plane_funcs,
-+				       aspeed_gfx_formats,
-+				       ARRAY_SIZE(aspeed_gfx_formats),
-+				       NULL,
-+				       DRM_PLANE_TYPE_PRIMARY, NULL);
-+	if (ret)
-+		return ret;
-+	drm_plane_helper_add(plane, &aspeed_gfx_plane_helper_funcs);
-+
-+	ret = drm_crtc_init_with_planes(drm, crtc, plane, NULL,
-+					&aspeed_gfx_crtc_funcs, NULL);
-+	if (ret)
-+		return ret;
-+	drm_crtc_helper_add(crtc, &aspeed_gfx_crtc_helper_funcs);
-+
-+	ret = drm_encoder_init(drm, encoder, &aspeed_gfx_encoder_funcs,
-+			       DRM_MODE_ENCODER_NONE, NULL);
-+	if (ret)
-+		return ret;
-+	encoder->possible_crtcs = drm_crtc_mask(crtc);
-+
-+	ret = drm_connector_attach_encoder(&priv->connector, encoder);
-+	if (ret)
-+		return ret;
- 
--	return drm_simple_display_pipe_init(drm, &priv->pipe, &aspeed_gfx_funcs,
--					    aspeed_gfx_formats,
--					    ARRAY_SIZE(aspeed_gfx_formats),
--					    NULL,
--					    &priv->connector);
-+	return 0;
- }
-diff --git a/drivers/gpu/drm/aspeed/aspeed_gfx_drv.c b/drivers/gpu/drm/aspeed/aspeed_gfx_drv.c
-index 46094cca2974..b2d805f0c16d 100644
---- a/drivers/gpu/drm/aspeed/aspeed_gfx_drv.c
-+++ b/drivers/gpu/drm/aspeed/aspeed_gfx_drv.c
-@@ -21,7 +21,6 @@
- #include <drm/drm_gem_framebuffer_helper.h>
- #include <drm/drm_module.h>
- #include <drm/drm_probe_helper.h>
--#include <drm/drm_simple_kms_helper.h>
- #include <drm/drm_vblank.h>
- #include <drm/drm_drv.h>
- 
-@@ -130,7 +129,7 @@ static irqreturn_t aspeed_gfx_irq_handler(int irq, void *data)
- 	reg = readl(priv->base + CRT_CTRL1);
- 
- 	if (reg & CRT_CTRL_VERTICAL_INTR_STS) {
--		drm_crtc_handle_vblank(&priv->pipe.crtc);
-+		drm_crtc_handle_vblank(&priv->crtc);
- 		writel(reg, priv->base + priv->int_clr_reg);
- 		return IRQ_HANDLED;
- 	}
-
+ 			/*
+ 			 * Get the bios in the request so we can re-queue them.
+ 			 */
 -- 
-2.55.0
+2.43.0
 
 
