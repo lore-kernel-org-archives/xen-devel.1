@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B846C44500
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Jul 2026 10:46:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1355305.1610099 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78C2AC43458
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Jul 2026 10:46:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1355302.1610067 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wggq3-0003Hx-DL; Mon, 06 Jul 2026 10:46:11 +0000
+	id 1wggq1-0002XE-LJ; Mon, 06 Jul 2026 10:46:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1355305.1610099; Mon, 06 Jul 2026 10:46:11 +0000
+Received: by outflank-mailman (output) from mailman id 1355302.1610067; Mon, 06 Jul 2026 10:46:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wggq3-0003HZ-A8; Mon, 06 Jul 2026 10:46:11 +0000
-Received: by outflank-mailman (input) for mailman id 1355305;
- Mon, 06 Jul 2026 10:46:10 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wggq1-0002X2-IE; Mon, 06 Jul 2026 10:46:09 +0000
+Received: by outflank-mailman (input) for mailman id 1355302;
+ Mon, 06 Jul 2026 10:46:08 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wggq2-0002ch-0b
- for xen-devel@lists.xenproject.org; Mon, 06 Jul 2026 10:46:10 +0000
+ (envelope-from <freddy77@gmail.com>) id 1wggq0-0002Tt-21
+ for xen-devel@lists.xenproject.org; Mon, 06 Jul 2026 10:46:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wggq1-00HA6J-DT
- for xen-devel@lists.xenproject.org; Mon, 06 Jul 2026 12:46:09 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wggpy-000ZXT-9R
+ for xen-devel@lists.xenproject.org; Mon, 06 Jul 2026 12:46:06 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a4b876b-e002-0a2a0a5209dd-0a2a4501c908-14
- for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2026 12:46:09 +0200
-Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a4b8767-bab6-0a2a0a5309dd-0a2a4503a7dc-8
+ for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2026 12:46:06 +0200
+Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a4b8771-400f-0a2a45010019-d1558032e1f4-3
- for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2026 12:46:09 +0200
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-493c83474ddso26424155e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2026 03:46:09 -0700 (PDT)
+ id 6a4b876d-ec1a-0a2a45030019-d1558033e462-3
+ for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2026 12:46:05 +0200
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-493bc8fda98so31521005e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2026 03:46:05 -0700 (PDT)
 Received: from localhost.localdomain (2.115.147.147.dyn.plus.net.
  [147.147.115.2]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493c63ba97csm349823985e9.12.2026.07.06.03.46.07
+ 5b1f17b1804b1-493c63ba97csm349823985e9.12.2026.07.06.03.46.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Jul 2026 03:46:08 -0700 (PDT)
+ Mon, 06 Jul 2026 03:46:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,127 +53,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783334769; x=1783939569; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=ia93IaiRGnVFsVP6/iZrBYXvaYw/rZ06cLV16cU84oM=;
-        b=bL2qnVfwcZJ+nmzugoVfEsDe0ytVgSdT0xg9GvcGl02/kuvCWbGAczdqU0p1XTfrI8
-         ApwuedtLgDV9Toyx6imse19CxjRwwp/4nmz54BxvK/pEH58i0v+p0vihyXUQqBTF9v20
-         KvBy7QaojIsyY3TABb3qsftPpkbQ9TKTY0sueEqxa3wJAMGQ79XA5q6WR0EhTY3kQtT9
-         wP/K2bI78VDV0+QvJZdoZ862wZ4VymTBe4LFYI98qeX5/o7d6cmuMzV/76QwFKeipiPg
-         PsBlW1MelgsWLgmvwg6+H4IYfgc1MSgZzVTCLeHDAiXH+qR51ZYxLi1RKJH7kGZVEnYf
-         KrKw==
+        d=gmail.com; s=20251104; t=1783334765; x=1783939565; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=v7aCS+tom3MSY5t1l2i/KOcaOh0j2oRAZ+UcV1Ly1oE=;
+        b=nD906+yx2QPGN77Jj7dbo+qE22c2r1EOelHiaW6iRJcYiWftUhItdCwpD3vt5qigSf
+         hXcXRSefgH0o3uYL6WHY4KjjN0olVFW/2zjiRTEArzn6p2srRmQHJ6dqOd2pPlhHlpZT
+         vQuj2NGB/lnivpjJV5CTUGR882FEPxr7NGST+46nj5LG02b+sKp0B+syGg7iWNfBrU42
+         +1vO4ZhFip7cKtKeKWaUESRgi6arn0OeMmmkUqhQMaFeB2pfcvdV6XQuwPiuzBYkXbec
+         NDw7kc3WA3/MvfQFQvrLtlazLLpAB5M38VX0v52t38DBUkzF7qKGJJa84pcXCoWz7JOZ
+         EBcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783334769; x=1783939569;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ia93IaiRGnVFsVP6/iZrBYXvaYw/rZ06cLV16cU84oM=;
-        b=b/Id4pi2U/je3R8Id6vZ2PkyLoizxVkQOHaQJHVpGrySfOcpTV5UpT7mbtKsP6fp0C
-         3QXBWzU3+ipkteAP3HDKCkng4zuqWTuBJy+TMpnn8WQoPYM2XNs09MTqdfZFuuzUFjNh
-         E211riUHHm6NCjAUGpl4usDxqmXSUM/XTRoeVLIGLt6NCc6S7gheh9XMHfwA0PP5hroi
-         soYwRYmF3nlYdmC5IZX53F5QvWggXztNr2yGyf92PcX6mJnhBS5JNhDqk+fNu9EGtfVz
-         y8D1zIMId8xFB82Zh9vGN5W20I1sQkEFTOH0vD8Ob1GAUeBt6XVwXRyh62XM3YSTmO1S
-         L1fQ==
-X-Gm-Message-State: AOJu0YyHN8w0BLRSVhVIDB5dp7vBt7AYTrvffniIc6grvNSwTId1YUuz
-	sCXRNaL3KUO3dalcARQ8mOiqpC1GE2n9Jn+wuPwumylHW7J4wzY81UB7Ly0BO94dBDY=
-X-Gm-Gg: AfdE7clpLDTlgz2zlMKGYSxQHseczWymL7Ei/jVqxUTuwsWfHtXXaDVUtoos7Qd0+9c
-	kYGEw3PyfLPtm+rqh2VhvRsE5pcVriqL69q560umetucflF11IAPV+rz+64kkAdUpUjXE3MnQ2E
-	G91AyTVRA2Z1nOF+82DZqhK5E5wuwYlEtk7exdNXR+I64qzlRHTGnQ/ts9eNmq+dDVZgJALjvC9
-	P9f0spSlPCWk8DVxznaHT/cew4o9NHnIZDzAbyeoghV2e1/JY13sdRWJeB6CK8QsAV/DNJ9T4Bx
-	SSPSvmd0f1pfrWk3KpMY2DnBnFFin20Qt7+ujfCLVcx48ZgrJe+7RruslbvMNQYzRTAWBDaQlqC
-	yiM+U30/tWwV2XMDgAY8tTmaTN13F1MZWwoFc+K/q7GCL/HOBsZq+1Ga2rVCp2/uf804YfhDLg9
-	pVjSr01qFwAd0cQFvHT2puZB23v6+y/xHE7zyk63gOxmY3npAjVY1PQLsgN7DV2ijEWGnlj8gHO
-	Z/YVFCBsWne3zEsCs0=
-X-Received: by 2002:a05:600c:2282:b0:492:5bb6:6d4b with SMTP id 5b1f17b1804b1-493d11fb775mr86459585e9.34.1783334768506;
-        Mon, 06 Jul 2026 03:46:08 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1783334765; x=1783939565;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=v7aCS+tom3MSY5t1l2i/KOcaOh0j2oRAZ+UcV1Ly1oE=;
+        b=jkmbkl/9GKoNvVx/plRCOJYvMDBibyhWYffl0uU7egwY7cy9QjqGQ+7zn+6RbNg1Q1
+         OYcYoFvhckSMdfrv8a+QBFv1lAGCAIhtQ3DYr8HxK8m5nY/ZWedCDh8jNkkjceMKa0fD
+         KOTvDiBdWSOyW2LrDjqwZKDc/jWv7IxupMkyboCsDuQ78mxYBnnF5MYdvBJt1qa29faH
+         /7Ba80qHkPZsp8t2MRu5Tmr3HlOfuN6sY3VbZHwqNCfloreGcyeM9w6DNF6u1zoHgniO
+         GhlxTiR3sT001a27gr3cXeqn6pIDxRW54oYOnIw51/gmxEiklMxFbp40kNfgMkUKFUws
+         qgKQ==
+X-Gm-Message-State: AOJu0YxnQmiAv/woqVeCrobFEoRkO0eOvajEFZYq2HzsENv/Pe+yVyA/
+	+IlYioj3z4yYxXCSUhasX5widMdq3s8x15MG6Joh3PyRM9VrUZgz57NaHs3eWZdzrNA=
+X-Gm-Gg: AfdE7cnHtwyvZAV9/5x0eQ+6jbCcf65cPhLiMsOsJx6Aj1yq4OwynVprseGbQvMYSqe
+	lPn/RT8Fjwrxrv/nimPqlo1XpEHanfG0I+yxYOUr8Sc0vhjHZYZwVfQhI439a+h4f4lzqnh5qXa
+	4DJkxK0Pha6mxvPu91rn3eGOM9x88FMe0Q0xo/tR2Bb8ghf9FA3pzK9SoweYpQKVv+WU/2uMJ1Y
+	Ue2VbBxdrXUy+YXUN6QmO7bB3lA6F/v122hLs2kHyLpruYdvY1lXwGWNR9TAvmL3tO5G1ua9QNA
+	5F8ULS9CBN1E6j5PoVm/eJOXvpIo+ZAcMRbFX4jl0jmq4FsrQTpJMvDvBbr/e8R00OnL2kxpwlb
+	gMunT2LEJSq1RIp9UKlbRqULm9y/Wa/18KiP5yNjcvHsZg8nIQ5y8c+wLflKdENMyJOm6Aa1eYt
+	S4r9PPfmb55clkeaK29zKX6yoWbM7vVEgU79+7yDek66cpUMdKBMrnL+MkhK6cPTD0WIJPUAuS8
+	WaC4SU19bo60CvnmX8=
+X-Received: by 2002:a05:600c:c1c8:10b0:492:1e36:1fe9 with SMTP id 5b1f17b1804b1-493d11fafa3mr78861435e9.37.1783334764770;
+        Mon, 06 Jul 2026 03:46:04 -0700 (PDT)
 From: Frediano Ziglio <freddy77@gmail.com>
 X-Google-Original-From: Frediano Ziglio <frediano.ziglio@citrix.com>
 To: xen-devel@lists.xenproject.org
-Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
+Cc: Frediano Ziglio <frediano.ziglio@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Teddy Astie <teddy.astie@vates.tech>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Frediano Ziglio <frediano.ziglio@citrix.com>
-Subject: [PATCH v7 4/4] x86: Split .init section to satisfy UEFI CA memory mitigation
-Date: Mon,  6 Jul 2026 11:45:57 +0100
-Message-ID: <20260706104557.430097-5-frediano.ziglio@citrix.com>
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: [PATCH v7 0/4] Various patches to improve Secure Boot support
+Date: Mon,  6 Jul 2026 11:45:53 +0100
+Message-ID: <20260706104557.430097-1-frediano.ziglio@citrix.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260706104557.430097-1-frediano.ziglio@citrix.com>
-References: <20260706104557.430097-1-frediano.ziglio@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1783334769-82CC61E0-829AF86F/0/0
+X-purgate-ID: tlsNG-33051d/1783334765-077265D1-E6D30084/0/0
 X-purgate-type: clean
-X-purgate-size: 1957
+X-purgate-size: 1491
 
-From: Frediano Ziglio <frediano.ziglio@cloud.com>
+These patches improve support for Secure boot.
+UEFI CA memory mitigation requires memory pages to be not executable and
+writable at the same time. So changing permissions and splitting some section
+is required.
+Remove multiboot pieces from EFI executable.
 
-Currently .init section is both writeable and executable, split data and code
-to have 2 sections satisfying W^X rule.
+Changes since v1:
+- improved some comments;
+- merged 2 pacthes removing multiboot support in x86 PE;
+- removed a patch dealing with SBAT;
+- other minor changes (see single patches).
 
-It is a requirement for NX_COMPAT so the PE can be loaded with W^X perms
-in the pagetables.
-
-NX_COMPAT is a requirement from shim-review,
-https://github.com/rhboot/shim-review#do-you-have-the-nx-bit-set-in-your-shim-if-so-is-your-entire-boot-stack-nx-compatible-and-what-testing-have-you-done-to-ensure-such-compatibility
-
-Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
-Acked-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
----
-Change since v1:
-- update comment style.
+Changes since v2:
+- improved some comments.
 
 Changes since v3:
-- Added Acked-by.
+- Added Acked-by;
+- Improve commit message.
 
 Changes since v4:
-- Added Acked-by.
----
- xen/arch/x86/xen.lds.S | 12 ++++--------
- 1 file changed, 4 insertions(+), 8 deletions(-)
+- Messages updates;
+- Clean some dependencies cause by code removal;
+- Add small commit to remove a possibly unused string.
 
-diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
-index 4ed1d2bec1..e26e37db13 100644
---- a/xen/arch/x86/xen.lds.S
-+++ b/xen/arch/x86/xen.lds.S
-@@ -193,11 +193,7 @@ SECTIONS
-   __2M_init_start = .;         /* Start of 2M superpages, mapped RWX (boot only). */
-   . = ALIGN(PAGE_SIZE);             /* Init code and data */
-   __init_begin = .;
--#ifdef EFI /* EFI wants to merge all of .init.*  ELF doesn't. */
--  DECL_SECTION(.init) {
--#else
-   DECL_SECTION(.init.text) {
--#endif
-        _sinittext = .;
-        *(.init.multiboot)
-        *(.init.text)
-@@ -210,12 +206,12 @@ SECTIONS
-         */
-        *(.altinstr_replacement)
- 
--#ifdef EFI /* EFI wants to merge all of .init.*  ELF doesn't. */
--       . = ALIGN(SMP_CACHE_BYTES);
--#else
-   } PHDR(text)
--  DECL_SECTION(.init.data) {
-+#ifdef EFI
-+  /* Align to satisfy UEFI CA memory mitigation. */
-+  . = ALIGN(SECTION_ALIGN);
- #endif
-+  DECL_SECTION(.init.data) {
-        *(.init.bss.stack_aligned)
-        *(.init.data.page_aligned)
- 
+Changes since v5:
+- removed merged commit;
+- remove more code/data from xen.efi output.
+
+Changes since v6:
+- fix commit message.
+
+Frediano Ziglio (2):
+  Align relevant sections to 4KB
+  x86: Split .init section to satisfy UEFI CA memory mitigation
+
+Roger Pau Monné (2):
+  x86/efi: discard multiboot and PVH support for PE binary
+  x86/efi: avoid a relocation in efi_arch_post_exit_boot()
+
+ docs/hypervisor-guide/x86/how-xen-boots.rst |  6 -----
+ xen/arch/x86/boot/head.S                    |  8 +++----
+ xen/arch/x86/efi/efi-boot.h                 |  7 ++++--
+ xen/arch/x86/xen.lds.S                      | 25 ++++++++++++---------
+ xen/tools/combine_two_binaries.py           |  2 +-
+ 5 files changed, 25 insertions(+), 23 deletions(-)
+
 -- 
 2.43.0
 
