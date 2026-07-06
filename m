@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36B6BC43458
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Jul 2026 15:58:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1355480.1610265 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE4ABC43458
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Jul 2026 15:58:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1355485.1610279 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wgli9-0006Mz-2N; Mon, 06 Jul 2026 15:58:21 +0000
+	id 1wgliB-0006gV-IJ; Mon, 06 Jul 2026 15:58:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1355480.1610265; Mon, 06 Jul 2026 15:58:21 +0000
+Received: by outflank-mailman (output) from mailman id 1355485.1610279; Mon, 06 Jul 2026 15:58:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wgli8-0006Mo-Tg; Mon, 06 Jul 2026 15:58:20 +0000
-Received: by outflank-mailman (input) for mailman id 1355480;
- Mon, 06 Jul 2026 15:58:19 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wgli7-0006K8-I8
- for xen-devel@lists.xenproject.org; Mon, 06 Jul 2026 15:58:19 +0000
+	id 1wgliB-0006fo-CV; Mon, 06 Jul 2026 15:58:23 +0000
+Received: by outflank-mailman (input) for mailman id 1355485;
+ Mon, 06 Jul 2026 15:58:22 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wgliA-0006be-8s
+ for xen-devel@lists.xenproject.org; Mon, 06 Jul 2026 15:58:22 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wgli6-00AcTL-VD
- for xen-devel@lists.xenproject.org; Mon, 06 Jul 2026 17:58:18 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wgli9-009ym5-Lu
+ for xen-devel@lists.xenproject.org; Mon, 06 Jul 2026 17:58:21 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a4bd070-5cb7-0a2a0a5109dd-0a2a4508e958-38
- for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2026 17:58:18 +0200
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a4bd091-e002-0a2a0a5209dd-0a2a4504c49a-12
+ for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2026 17:58:21 +0200
+Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a4bd09a-edec-0a2a45080019-d1558036a431-3
- for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2026 17:58:18 +0200
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-493bab44440so17346925e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2026 08:58:18 -0700 (PDT)
+ id 6a4bd09d-a01d-0a2a45040019-d155802cd40f-3
+ for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2026 17:58:21 +0200
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-493b691cb44so22993425e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2026 08:58:21 -0700 (PDT)
 Received: from fedora (user-109-243-144-234.play-internet.pl.
  [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493cce03fa1sm284910325e9.11.2026.07.06.08.58.17
+ 5b1f17b1804b1-493cce03fa1sm284910325e9.11.2026.07.06.08.58.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Jul 2026 08:58:17 -0700 (PDT)
+ Mon, 06 Jul 2026 08:58:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,41 +52,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783353498; x=1783958298; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=6/PDQZ3VxDQuT8ca8krMapwVAoPTeiAchpcu67sNlkA=;
-        b=rxhLi/9Qx94ifGMJKlu4SYkl0TkeEM2F631W8y0P/Rco/pOVEqMNqx35f0c30wB6zV
-         Sa/mAuWtGXA1YmQjYcwm6fKIPbngwQuYONWViB6iWFbdL9wk1mub7DPVdgtFDxbyk89l
-         taNmUaVhU+6K9lA/Mw5wKkDiYEIEiADoTVxuwAQeaNFMV7GNWg6/R8rU+H6xyAOviuMI
-         MMCOp600XhJA3chaMLF22MZWfWLGkNHn35v/AGaFlxCr4Kc0I87P6+t/rDh0ZLHTo5p4
-         JoXH3ovk59jIZMN4UjTvOGFPA9cIQznzMEcbKZKftiLff3tn+SDGj7wYvH0xbdkKQBZw
-         PVkA==
+        d=gmail.com; s=20251104; t=1783353501; x=1783958301; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=TyI+cJHXlQ/CsV0qqhbFZd2j4tvOANbiay87gjrrueY=;
+        b=qDnciBfZtJRbTNFwbjMTYiwA/WrvW2KfssSKc+9+A9/3wXG0U4LpQuLfeCKnOBJB/n
+         XIOzWS/ACanUqcdP9f9XFznoiraAyFWdJB/C8d8H0VNEt/oPD9b6WdEJ2tq6JDOfRIgr
+         V6nUsFeKYB9KfZ7NRG8ZQtLwa5afX/IqNU+y7gXIsj3iWOJDCKqRiSyi26+AIRALceZx
+         BXwzk1JLzbc93vp3Xz6Ee4640HqzyevpK4i2pnvfnWJGy+EfUA5f6EvYVcQKaQ9rFGqL
+         rXEAEEw9+6Vgyi0Op1x9DxMJyLFZvwfE4KgWq00ZtkIOCyyJv+0QF/PLThe7SS7N5RKQ
+         PQPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783353498; x=1783958298;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=6/PDQZ3VxDQuT8ca8krMapwVAoPTeiAchpcu67sNlkA=;
-        b=jOFQ84VuwcOeN+NZJsp7TvuCTwSrFEacsJPdO3TBFvjM5ChbJyavXcI7+jsKXpeWbw
-         WecedUq+hhricUiEo086mf1x/TkD80pnxnytX1UyzU36dSEIzMRAFBVQ2XJGlMKepaKb
-         263HIVViHiHQR7NS/ey+3IGk9JACyaZ3D8RmOIGRs+rVfBsr9m3y8H1w1lUwEXS06e7E
-         v6rmw78/doWdbIljGpXeYs5mdE3edt4sHokTYj9DD4SQeezFjxX5qr1JVvfV+ZHAcndE
-         LKhFF998qwsvFvH48DrN1OKgm/vRer+5xa5Gn9UcRL+6t3iOTg/0do/8lgeNE+wa7dLJ
-         ySsw==
-X-Gm-Message-State: AOJu0YwndaqSWhG562nQM9JwE+0jNLZPjPjaalUdE7u5LYjEOYItwu+/
-	zatjeWHuOqS549WCwjxAsoK/dzRJglBYrlH0IaWtT52cAXJLbOYKZFPDTdJMkQ==
-X-Gm-Gg: AfdE7cmFso5aejaKLI3rO3MJP2HWSVEyaDbORCn1Q5613YwRClNzS33IfkEr7tsEcdo
-	ALBdICM7HxUz38CbMeFkee15OeNEaYA602jbR8KBkDDjK/X3MShrsC++4KZuqAyX+jvNRL3v7h/
-	GtWxWWsCwfkA+fE/87sqokB4tAx5/QBGQQ7A7RZO5pkDlokelNiAEzSZ2KYz9t2QsADEeEx2q5O
-	d5XsmeyJkbQkIhEEeWF9NEvguuso5+oiHt1TZH/jlDSTskYIab7QkCvKill1i6cstGFXhq+rXUf
-	CShAyGVVvZJaUdEbedn17nltw65gk4LflR0ptVm+ML+prVfBb4hMMe+pBqKDJydPAvrFaf4tlql
-	Lx7bs2PoTfc5j7MqAd5kq2Fl51Nly2ehp/reCC9aXChqOdvFwDUKg9IukDI6I1tRgoDRmsnNhlk
-	wQ4qV8cVLr/pSvGZszfnKQq30nIR39WR/4u52zFDOt0Z3DBTnMG6d3IEpRaA==
-X-Received: by 2002:a05:600c:4e56:b0:492:7025:13fd with SMTP id 5b1f17b1804b1-493deb5de6amr16144795e9.0.1783353498198;
-        Mon, 06 Jul 2026 08:58:18 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1783353501; x=1783958301;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=TyI+cJHXlQ/CsV0qqhbFZd2j4tvOANbiay87gjrrueY=;
+        b=MWyhNOYCiCjmIES/NqcvMxj5c4BKFqXROGsIxbe9GGY4C5zmskkdEIGma4Ggfja/FO
+         NhHFmyg7QWuNsfIBwC7qFcLMixSACZHYzE7GwRxjTNOgkKofB+aXhuKt8PiM+GSVMASF
+         vjc66TrVUQsaHYrM6EQx7BWtlJkAQPpYWRdFlI9amuE/8eweSlqej24HyV08uRTEm73x
+         4t8Ed0+d+/Wz/hrFygKYdYV1ZRpP0LgJE/FfBTp4KYKUseIbBHaV6tTEoTcsN/wZCK7W
+         tKmB9qnr6LON+jAUslW1TEGJI3pcsL+915khuupxt9udKdyKx72crpCF58fAWbnpqkk8
+         1xYg==
+X-Gm-Message-State: AOJu0Yz2SW9hePh/Rz2SAwYf+bjifSJWWx+BGGtktfiCH8+3XSqeR5tZ
+	pOAL7T/dS0FQKV6F6lil1euU9chJT9OzBP3fjc83nXf9fIsq2G45N/iT44qqwA==
+X-Gm-Gg: AfdE7cnMl7cs9iuMF08ec+u/4llN67hTgo9pJjRFKxmAP1Ga4CJiuRywN6rRjT3mV9M
+	wZUU93Lt+/haMQYxv44ojc7mnL6vDzfAz22WQU4pCt0gcZAhtcJbbLzZBZQSbXHzywEZMm1NBGX
+	/8o8q4SZ8MjlV3pAtZ1BZOn7YovpYLlZYNAHPqVwW5brfhZldI/RIt0usKQnvy//10qSTiZ+fWv
+	2CiIyu88NfBAmEoUTTktmqRQNApetBzvroS84EMAdnsw5BbyTa89/Z/uFEW7QDaoEIt94GOS4Dr
+	OwzhpCiZCSkezELHRffZj8mHdaG2sZCB7albf5d5Tt8/wH2uhnA8CYHZ2uYpK3Hi1PPKNyUjYie
+	BaQAUAtWo21XTBxJCnUg/8+AgjnA/Zsk3K3vDbJMNUb+uQWlzPN4novdHSog/pUW/Rwtw8NA6IT
+	hJhl2miJTrTVuG/6nqIQh3Ej4BrZM8/DtFN8TFmir0frJEwz/fBeapHIL1bw==
+X-Received: by 2002:a05:600c:3acd:b0:493:a5f9:d33d with SMTP id 5b1f17b1804b1-493df08feb3mr11711955e9.18.1783353501067;
+        Mon, 06 Jul 2026 08:58:21 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -100,147 +101,123 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Timothy Pearson <tpearson@raptorengineering.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH v5 00/26] Introduce enablemenant of dom0less
-Date: Mon,  6 Jul 2026 17:57:41 +0200
-Message-ID: <cover.1783331040.git.oleksii.kurochko@gmail.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v5 02/26] xen: arm: move declaration of map_device_irqs_to_domain() to common header
+Date: Mon,  6 Jul 2026 17:57:43 +0200
+Message-ID: <0854d614acf81c6d237a280349bd75832889ab91.1783331040.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.54.0
+In-Reply-To: <cover.1783331040.git.oleksii.kurochko@gmail.com>
+References: <cover.1783331040.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1783353498-48E6E3FC-31129E3E/10/73395122804
+X-purgate-ID: tlsNG-ebf023/1783353501-2F15F1CC-2C95EE76/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 5803
+X-purgate-size: 3776
 
-This patch series reprensent a bunch of patches necessary to enable common part
-of Dom0less.
-The stuff necessary to start/launch domains will be introduced separately.
+As map_device_irqs_to_domain() is used unconditionally by common part of
+dom0less code, move the prototype to a common header.
 
-CI tests: https://gitlab.com/xen-project/people/olkur/xen/-/pipelines/2654761158
+fdt-domain-build.h is chosen as map_device_irqs_to_domain() could be
+also called indirectly in Arm's DOM0-related code and DT overlay feature.
 
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 ---
 Changes in v5:
- - Add new patch (xen/riscv: do a 4th linking pass if necessary) which fixes
-   randconfig job issue.
- - Address comments from ML.
+ - Add Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 ---
 Changes in v4:
- - Address comments from ML.
+ - Reword commit message: use imperative mood ("move the prototype") and
+   mention the DT overlay feature alongside Arm's DOM0-related code.
+ - Add #include <xen/fdt-domain-build.h> to Arm's device.c so the definition
+   site sees the prototype.
+ - Drop the duplicated function description above the definition in device.c
+   (it now lives only on the prototype in fdt-domain-build.h).
 ---
 Changes in v3:
- - Drop dependency from other patch series
-   ([1] https://lore.kernel.org/xen-devel/cover.1778140240.git.oleksii.kurochko@gmail.com/T/#t)
-   as it was merged.
- - Reorder patches:
-   - move common patches to the start.
-   - Move some patches to separate patch series (will be introduced later)
- - Address comments from ML.
+ - Add tag arm and move this patch earlier before RISC-V-related patches.
 ---
 Changes in v2:
- - Move patch "[PATCH v1 04/27] xen/riscv: rework G-stage mode handling" to
-   patch series [1]
- - Address the comments from ML.
- - The following patches were folded into one:
-   # xen/riscv: implement init_intc_phandle()
-   # xen/riscv: call do_initcalls() in start_xen()
-   # xen/riscv: setup system domains
- - The following patch were folded into one:
-   # xen/riscv: add vaplic access check
-   # xen/riscv: emulate guest writes to virtual APLIC MMIO
-   # xen/riscv: emulate guest reads from virtual APLIC MMIO
- - Add new bug fix, not really necessary to this patch series:
-   xen/riscv: manage IRQ_DISABLED flag in APLIC irq enable/disable callbacks
+ - New patch.
 ---
+---
+ xen/arch/arm/device.c              |  9 +--------
+ xen/arch/arm/include/asm/setup.h   |  3 ---
+ xen/include/xen/fdt-domain-build.h | 13 +++++++++++++
+ 3 files changed, 14 insertions(+), 11 deletions(-)
 
-Oleksii Kurochko (26):
-  xen/dom0less: turn max_init_domid into a common variable
-  xen: arm: move declaration of map_device_irqs_to_domain() to common
-    header
-  xen: arm: update p2m_set_allocation() prototype
-  xen/Kconfig: introduce HAS_STATIC_MEMORY
-  xen/riscv: rename enum intc_version to intc_variant
-  xen/riscv: Implement ARCH_PAGING_MEMPOOL
-  xen/riscv: Implement construct_domain()
-  xen/riscv: implement prerequisites for domain_create()
-  xen/riscv: introduce guest riscv,isa string
-  xen/riscv: implement make_cpus_node()
-  xen/riscv: implement make_timer_node()
-  xen/riscv: implement make_arch_nodes()
-  xen/riscv: introduce init interrupt controller operations
-  xen/riscv: implement make_intc_domU_node()
-  xen/riscv: introduce aia_init() and aia_usable()
-  xen/riscv: introduce per-vCPU IMSIC state
-  xen/riscv: introduce minimal virtual APLIC (vAPLIC) infrastructure
-  xen/riscv: introduce (de)initialization helpers for vINTC
-  xen/riscv: generate IMSIC DT node for guest domains
-  xen/riscv: create APLIC DT node for guest domains
-  xen/riscv: implement IRQ routing for device passthrough
-  xen/riscv: implement init_intc_phandle()
-  xen/riscv: initialize RCU, scheduler, and system domains in
-    start_xen()
-  xen/riscv: provide init_vuart()
-  xen/riscv: add initial dom0less infrastructure support
-  xen/riscv: do a 4th linking pass if necessary
-
- build/tools/fixdep                        | Bin 0 -> 13632 bytes
- xen/arch/arm/Kconfig                      |   1 +
- xen/arch/arm/device.c                     |   9 +-
- xen/arch/arm/include/asm/p2m.h            |   1 -
- xen/arch/arm/include/asm/setup.h          |   5 -
- xen/arch/arm/mmu/p2m.c                    |  24 +--
- xen/arch/arm/setup.c                      |   2 -
- xen/arch/ppc/include/asm/setup.h          |   2 -
- xen/arch/riscv/Kconfig                    |   3 +
- xen/arch/riscv/Makefile                   |  20 +-
- xen/arch/riscv/aia.c                      |  23 +++
- xen/arch/riscv/aplic-priv.h               |  14 ++
- xen/arch/riscv/aplic.c                    |  16 +-
- xen/arch/riscv/cpufeature.c               | 132 +++++++++---
- xen/arch/riscv/device.c                   |  94 +++++++++
- xen/arch/riscv/dom0less-build.c           |  40 ++++
- xen/arch/riscv/domain-build.c             | 211 +++++++++++++++++++
- xen/arch/riscv/domain.c                   |  45 +++-
- xen/arch/riscv/imsic.c                    | 179 +++++++++++++++-
- xen/arch/riscv/include/asm/aia.h          |  10 +
- xen/arch/riscv/include/asm/aplic.h        |  10 +
- xen/arch/riscv/include/asm/cpufeature.h   |   6 +
- xen/arch/riscv/include/asm/domain.h       |   7 +
- xen/arch/riscv/include/asm/guest-layout.h |  24 +++
- xen/arch/riscv/include/asm/imsic.h        |  25 +++
- xen/arch/riscv/include/asm/intc.h         |  48 ++++-
- xen/arch/riscv/include/asm/irq.h          |   5 +
- xen/arch/riscv/include/asm/paging.h       |   2 +-
- xen/arch/riscv/include/asm/setup.h        |   2 -
- xen/arch/riscv/include/asm/vaplic.h       |  34 ++++
- xen/arch/riscv/intc.c                     | 102 +++++++++-
- xen/arch/riscv/irq.c                      | 238 ++++++++++++++++++++++
- xen/arch/riscv/p2m.c                      |  33 ++-
- xen/arch/riscv/paging.c                   |   7 +-
- xen/arch/riscv/setup.c                    |  12 ++
- xen/arch/riscv/stubs.c                    |  17 --
- xen/arch/riscv/vaplic.c                   | 142 +++++++++++++
- xen/arch/x86/include/asm/setup.h          |   2 -
- xen/common/Kconfig                        |   4 +
- xen/common/device-tree/dom0less-build.c   |   2 +-
- xen/common/domid.c                        |   5 +
- xen/drivers/char/console.c                |   1 +
- xen/include/xen/dom0less-build.h          |   7 +
- xen/include/xen/fdt-domain-build.h        |  13 ++
- xen/include/xen/p2m-common.h              |   8 +
- 45 files changed, 1470 insertions(+), 117 deletions(-)
- create mode 100755 build/tools/fixdep
- create mode 100644 xen/arch/riscv/aia.c
- create mode 100644 xen/arch/riscv/device.c
- create mode 100644 xen/arch/riscv/domain-build.c
- create mode 100644 xen/arch/riscv/include/asm/aia.h
- create mode 100644 xen/arch/riscv/include/asm/vaplic.h
- create mode 100644 xen/arch/riscv/vaplic.c
-
+diff --git a/xen/arch/arm/device.c b/xen/arch/arm/device.c
+index 7d9644fd8b6d..b11366d722ef 100644
+--- a/xen/arch/arm/device.c
++++ b/xen/arch/arm/device.c
+@@ -11,6 +11,7 @@
+ #include <xen/device_tree.h>
+ #include <xen/dt-overlay.h>
+ #include <xen/errno.h>
++#include <xen/fdt-domain-build.h>
+ #include <xen/iocap.h>
+ #include <xen/lib.h>
+ 
+@@ -117,14 +118,6 @@ int __overlay_init map_range_to_domain(const struct dt_device_node *dev,
+     return 0;
+ }
+ 
+-/*
+- * map_device_irqs_to_domain retrieves the interrupts configuration from
+- * a device tree node and maps those interrupts to the target domain.
+- *
+- * Returns:
+- *   < 0 error
+- *   0   success
+- */
+ int __overlay_init map_device_irqs_to_domain(struct domain *d,
+                                              struct dt_device_node *dev,
+                                              bool need_mapping,
+diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+index 14fa92d5c1db..2af780512540 100644
+--- a/xen/arch/arm/include/asm/setup.h
++++ b/xen/arch/arm/include/asm/setup.h
+@@ -51,9 +51,6 @@ void init_traps(void);
+ int handle_device(struct domain *d, struct dt_device_node *dev, p2m_type_t p2mt,
+                   struct rangeset *iomem_ranges, struct rangeset *irq_ranges);
+ 
+-int map_device_irqs_to_domain(struct domain *d, struct dt_device_node *dev,
+-                              bool need_mapping, struct rangeset *irq_ranges);
+-
+ int map_irq_to_domain(struct domain *d, unsigned int irq,
+                       bool need_mapping, const char *devname);
+ 
+diff --git a/xen/include/xen/fdt-domain-build.h b/xen/include/xen/fdt-domain-build.h
+index 671486c1c837..8612e98dfda5 100644
+--- a/xen/include/xen/fdt-domain-build.h
++++ b/xen/include/xen/fdt-domain-build.h
+@@ -12,6 +12,7 @@
+ 
+ struct domain;
+ struct page_info;
++struct rangeset;
+ struct membanks;
+ 
+ typedef bool (*alloc_domheap_mem_cb)(struct domain *d, struct page_info *pg,
+@@ -79,6 +80,18 @@ static inline void set_domain_type(struct domain *d, const struct kernel_info *k
+ #endif
+ }
+ 
++/*
++ * Retrieves the interrupts configuration from a device tree node and maps
++ * those interrupts to the target domain.
++ *
++ * Returns:
++ *   < 0 error
++ *   0   success
++ */
++int map_device_irqs_to_domain(struct domain *d, struct dt_device_node *dev,
++                              bool need_mapping,
++                              struct rangeset *irq_ranges);
++
+ #endif /* __XEN_FDT_DOMAIN_BUILD_H__ */
+ 
+ /*
 -- 
 2.54.0
 
