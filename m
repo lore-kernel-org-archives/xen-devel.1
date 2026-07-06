@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B311C43458
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Jul 2026 15:58:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1355500.1610351 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 918E0C44500
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Jul 2026 15:58:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1355508.1610375 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wgliM-0000UF-RI; Mon, 06 Jul 2026 15:58:34 +0000
+	id 1wgliR-0001Se-Rn; Mon, 06 Jul 2026 15:58:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1355500.1610351; Mon, 06 Jul 2026 15:58:34 +0000
+Received: by outflank-mailman (output) from mailman id 1355508.1610375; Mon, 06 Jul 2026 15:58:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wgliM-0000Ry-M2; Mon, 06 Jul 2026 15:58:34 +0000
-Received: by outflank-mailman (input) for mailman id 1355500;
- Mon, 06 Jul 2026 15:58:33 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wgliL-0000JL-JR
- for xen-devel@lists.xenproject.org; Mon, 06 Jul 2026 15:58:33 +0000
+	id 1wgliR-0001Ri-Dw; Mon, 06 Jul 2026 15:58:39 +0000
+Received: by outflank-mailman (input) for mailman id 1355508;
+ Mon, 06 Jul 2026 15:58:38 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wgliP-000153-Qv
+ for xen-devel@lists.xenproject.org; Mon, 06 Jul 2026 15:58:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wgliL-00AcTL-0K
- for xen-devel@lists.xenproject.org; Mon, 06 Jul 2026 17:58:33 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wgliP-009ym5-7d
+ for xen-devel@lists.xenproject.org; Mon, 06 Jul 2026 17:58:37 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a4bd09e-5cb7-0a2a0a5109dd-0a2a4509a9ae-10
- for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2026 17:58:32 +0200
-Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a4bd091-e002-0a2a0a5209dd-0a2a4504c49a-32
+ for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2026 17:58:37 +0200
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a4bd0a8-97e6-0a2a45090019-d155802ed9ea-3
- for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2026 17:58:32 +0200
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-493c486f012so13701865e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2026 08:58:32 -0700 (PDT)
+ id 6a4bd0ad-a01d-0a2a45040019-d155802ac59b-3
+ for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2026 17:58:37 +0200
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-493c7902f47so19401775e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2026 08:58:37 -0700 (PDT)
 Received: from fedora (user-109-243-144-234.play-internet.pl.
  [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493cce03fa1sm284910325e9.11.2026.07.06.08.58.30
+ 5b1f17b1804b1-493cce03fa1sm284910325e9.11.2026.07.06.08.58.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Jul 2026 08:58:31 -0700 (PDT)
+ Mon, 06 Jul 2026 08:58:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,358 +54,185 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783353512; x=1783958312; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1783353517; x=1783958317; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=KUaoD57i3eG5vrKrWLrvtGucvmcW9ojWQ9m6U5XgH3E=;
-        b=BfGfYPuGjF9KV41z8atdAB3O+2og8t0CuOcNymD/zHoq1BHKJDcSmUNb/eAh97ZR6C
-         BkwUxL+tisCmEql568JMe3wTbfpUgsNwy8DqVEUKr0ys6LMbg2vH0/nDMVZupWQ5Qe4L
-         wzgtsgl1M1TqO84qrJGg4c7ciKXU75Ra0I/S1dT98WW7TGFucAviOFkPRVr8DnqBbXfe
-         sk0EO3K9KOkt0JEFt6vlSGQ4Fjqh4fu5xOCZLyvjs8Fr8erFDc7vZuiz88muhF+kIGsr
-         6XYX4zVxjJJmVC3Tu7JAwbS+WxaioiIyByLpSVGHBdhzjU4gtj6mwz85jxr1w1xkMVA/
-         +6tg==
+         :message-id:reply-to;
+        bh=kj+Ys9sE4vz8rN4cl1XewN5jOlLycBUmGkH75Llh0pg=;
+        b=HHO5pSUDR8XRC3uNaXFFgnpkOp5unJL2/AUlFMiJkNs7QHQjZIk+dXMF74XvufTNQJ
+         vMTgABIE13epbo/xgsyPypJidOYGY2fqk+3WFPdclHDdMxZGyWd885+KmC85j91x3Ljy
+         hqVcIDkWFF0TVuz7PoMmxO+RIw38Q5t587DakIU5rcPkXoRIwFEF3WIUgHmcoOK9Y4K5
+         g0xggvau4v7X0eeQSxj9O8Xy6F1yfgOzr7NTJWWpnF1s8tyjOYsSA602vVEG/LY1mrJf
+         6UTOjV1iTyRstoEDfvqbo/Xjm1LqSX00SnSXfkKa7NeCqc0oRYIM0xWG3BzeoSG25yW1
+         HsUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783353512; x=1783958312;
+        d=1e100.net; s=20251104; t=1783353517; x=1783958317;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=KUaoD57i3eG5vrKrWLrvtGucvmcW9ojWQ9m6U5XgH3E=;
-        b=BMXtFheM3fpiy/BWoUnE/iYdVMwm7Amna8tq6DM47YPiFIuFW3f/KbeWaoPiCC/iAu
-         yjkEMR/MZWXlAtNs+4nZtQdSuoNFtOeDBWWF/ie6OXUFd5KcsSHwUuA8TedNKiAI0DT2
-         Dgp5Kk/f0Tx0UK1wRm9jxBukeX748RNflMq0C6VUANPDsxC9uR5eyzvRUQxJmExdbvJF
-         Ho1yi+5mji3i6ISZtyxXi/ZIegcmLAsPuH5zgQACRa+CmfgKTBiRiY8b55vWnCpKHMSZ
-         jGMi++8c7F73hdKQLimHtb2TSxd0ZHYhwIUyBtWDjnTCYvALXs+ylV3R9zTqVC54QS83
-         x9fA==
-X-Gm-Message-State: AOJu0YzXMdxoHM3yZjFpO8ACQKIGd7VCD1i0+aamKZmptFY2dcYrC2cw
-	UkRdcDXsXYJ8b1LZ3JKMpGIq9QacSkVilsHsiDi9S7JX/vLxcxF/0ONAe2m7DQ==
-X-Gm-Gg: AfdE7ckyp3fKQU16R9nDC8DIMPBYff6OxdnfjQSHrv1Umww/SV9txQdX+AhGwtYh+Sj
-	Cx6aN1YaLbNg9jfOdy9Ye49hAjPVcLKjt/VYgjhyFltUntIpUzfD981ELxiK1xflN6X9r8TFS0S
-	wdsIGVHqqkjKdytU2ffFc14FTA5b21pZw0EHKSe7NTrO/TlIJ/AAe3jch6W6yRq/m+4y88Hzyt9
-	8RsAhofFBC4aY2DaXGRd6SKNGwPAJdw98tUvOekq8mmifEa3xtHgkJPMcOszaCJ/m6IBxGT+MP9
-	xnZAh1ApyE8pk8YewBH7k+Qiq60BeRseONpeDK2WfN5WTUmlI6LpL7nphxdcPypa/AjifPrVbY8
-	l9c6B5PeWl9kqC7/KwdcdFPDj0BpEPey2k2a9axFqTiHSbYxTScVXsYdM94vPplbnN+lfOvEsWF
-	F1Ii92w3tbEl+KDDs9x2zYI/Smd+ZxfDvlEKWK+6/jxMwmy21YsUcE6s+d+w==
-X-Received: by 2002:a05:600c:6995:b0:493:bcef:5646 with SMTP id 5b1f17b1804b1-493df06ec87mr13987345e9.12.1783353512181;
-        Mon, 06 Jul 2026 08:58:32 -0700 (PDT)
+         :to:cc:subject:date:message-id:reply-to;
+        bh=kj+Ys9sE4vz8rN4cl1XewN5jOlLycBUmGkH75Llh0pg=;
+        b=kAxchOgmM0C88qKRaNnttzGPMOQrtfXrVISZarMujvtBEBvMLv0Y18btXNUvY08Chs
+         CFE/9xYheMUuJiWdPOfaZobmA07Ne0DkrBAlUKgzENn84Mt+Uat5138FUY6mul2Xyu5a
+         TnrBGIlllPuz3in7F2fKyJk7esZv7Lwhl9fpbR9AgmQDJXKRWqY4eHzLPGEQLwLYuv9Z
+         jgGgTBO7Xg18AlAMOvm050JeNgAmnMRD7Hg4rtQf4PTsD+8ZgBWlfLQW7fiBRlJHgFfi
+         GeWDvv7GvHQLUUBxprBMqasixn17OD6OPmz8DONoWOkPM4m2zLBw6Er70D0tPFpdnqlL
+         xb+g==
+X-Gm-Message-State: AOJu0YzNwTZeNHrvV6rEb8LC+tUr8nXg8GPJZf8R4/hbxUgHwsD0JAP2
+	N6UmG689kqn/QFIzMESjQW1zRP6rkl5G2VPNP2Zu/RSzC+ZSv8rZdy9z+rrmUw==
+X-Gm-Gg: AfdE7ckad8bajmWOWbJuWrFm4yuxucsiAM1FVZ9LDk5trsHErHoEvKgl4IbuUklXYeo
+	NWpGHrj0e7czBhbOtzQV+TAzJ527RFoEKPG09ixqdSEPK+rkVEQENCbtyRZugS0G01MnxSq+L+U
+	zITPGpxoviQnmmzRNfjKm8c4BMrXz5ra5oQ136g+Fa/MpV64yQBakyHamiglGC01WadKb0WQcRx
+	R/UbJLhiDnBe+k5ddIAyAtCqT6xWAxM1luhBBMIrhtYi2I9QEomK4wo+udIgcbdvmMkzMN6mOIe
+	3aFTU0fK0ejVf90CnWPZEPAY3X4r0jdTY8/B2NSznXea3wZA0qW1v6C+cKMBnOeFPt0FcyOCijL
+	nXIqwgg59HyF3nRStKDtuiguLX8cLM6N040c2YL/OMpH3dj+5ii6tIdgtK7LJiBWllMtNLn4BAU
+	y/81WItINHuiOFeUWiMmrBSsg5atbkzYqJ+gf0u7if7YxMgg1JLXgQlTwW4Q==
+X-Received: by 2002:a05:600c:19d1:b0:493:cc25:85c4 with SMTP id 5b1f17b1804b1-493df1c98fbmr9609605e9.8.1783353516591;
+        Mon, 06 Jul 2026 08:58:36 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Baptiste Le Duc <baptiste.le-duc@vates.tech>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v5 10/26] xen/riscv: implement make_cpus_node()
-Date: Mon,  6 Jul 2026 17:57:51 +0200
-Message-ID: <d8e17abcf195ca97056c8ed078ad968f68fa4ca9.1783331040.git.oleksii.kurochko@gmail.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v5 13/26] xen/riscv: introduce init interrupt controller operations
+Date: Mon,  6 Jul 2026 17:57:54 +0200
+Message-ID: <bd47e6cec1c4fa4f3419f5258ecd03d18386c45e.1783331040.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <cover.1783331040.git.oleksii.kurochko@gmail.com>
 References: <cover.1783331040.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1783353512-46F3D986-F00E2489/10/73395122804
+X-purgate-ID: tlsNG-ebf023/1783353517-AEF2D1CC-0B056E72/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 12770
+X-purgate-size: 4030
 
-Implement make_cpus_node() to create cpus node for a guest domain.
-
-This function is going to be use by common dom0less code during
-construction domain.
+Introduce intc_hw_init_ops structure to avoid risky mix of init
+function and non-init function.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in v5:
-- Drop Acked-by: Jan Beulich <jbeulich@suse.com> as extra changes were done
-  because of the changed in prev. patch.
-- Move isa_str allocation and construction out of arch_domain_create() and
-  into make_cpus_node() as a local variable, since the string is only
-  needed during FDT generation. Use a two-call build_guest_isa_str()
-  pattern (size probe, then fill) with xvmalloc_array, and convert all
-  post-allocation error returns to goto out so xvfree() runs on every path.
+ - Nothin changed. Only rebase.
 ---
 Changes in v4:
- - Update the comment in make_cpus_node() to match code style.
- - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
+ - Use __initconstrel instead of __initconst for aplic_init_ops as both
+   initialized fields incur a relocation.
+ - Add Acked-by: ... .
 ---
 Changes in v3:
- - Add blank line above make_cpus_node() function definition.
- - Move 'unsigned int cpu' from function-level declarations into the for loop.
- - Drop 'uint32_t reg = cpu_to_fdt32(cpu)'; use fdt_property_cell(fdt, "reg", cpu)
-   instead of fdt_property(fdt, "reg", &reg, sizeof(reg)) so byte-order adjustment
-   is handled internally.
- - Add matching /* interrupt-controller */ start comment; fix end comment to
-   /* end interrupt-controller */.
- - Update d->arch.guest_isa_str to ->isa_str in make_cpus_node() function.
+ - Use __initconst instead of __initdata for const intc_hw_init_ops.
+ - Embed const struct intc_hw_operations *ops into intc_hw_init_ops so
+   register_intc_ops() takes a single pointer argument.
 ---
 Changes in v2:
- - s/u32/uint32_t for timebase_frequency local variable.
- - Drop +1 from BUILD_BUG_ON().
- - return fdt_end_node(fdt); instead of res at the end of the function.
+ - New patch.
 ---
 ---
- build/tools/fixdep            | Bin 0 -> 13632 bytes
- xen/arch/riscv/domain-build.c | 125 ++++++++++++++++++++++++++++++++++
- 2 files changed, 125 insertions(+)
- create mode 100755 build/tools/fixdep
+ xen/arch/riscv/aplic.c            |  8 ++++++--
+ xen/arch/riscv/include/asm/intc.h | 10 +++++++---
+ xen/arch/riscv/intc.c             | 11 ++++++++---
+ 3 files changed, 21 insertions(+), 8 deletions(-)
 
-diff --git a/build/tools/fixdep b/build/tools/fixdep
-new file mode 100755
-index 0000000000000000000000000000000000000000..42233e2669e9cdaf1c31723ad22c00f6c9291f7c
-GIT binary patch
-literal 13632
-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
-X!V-7*S$v5Ihst>tURt71Lc;$7AAVAt
-
-literal 0
-HcmV?d00001
-
-diff --git a/xen/arch/riscv/domain-build.c b/xen/arch/riscv/domain-build.c
-index 5f6f4b6248a5..33cd1ea80f39 100644
---- a/xen/arch/riscv/domain-build.c
-+++ b/xen/arch/riscv/domain-build.c
-@@ -3,8 +3,11 @@
- #include <xen/fdt-domain-build.h>
- #include <xen/fdt-kernel.h>
- #include <xen/init.h>
-+#include <xen/libfdt/libfdt.h>
- #include <xen/sched.h>
-+#include <xen/xvmalloc.h>
+diff --git a/xen/arch/riscv/aplic.c b/xen/arch/riscv/aplic.c
+index 6a1255c5f403..126d56fb7ea8 100644
+--- a/xen/arch/riscv/aplic.c
++++ b/xen/arch/riscv/aplic.c
+@@ -306,12 +306,16 @@ static const hw_irq_controller aplic_xen_irq_type = {
  
-+#include <asm/cpufeature.h>
- #include <asm/current.h>
- #include <asm/guest_access.h>
+ static const struct intc_hw_operations aplic_ops = {
+     .info                = &aplic_info,
+-    .init                = aplic_init,
+     .host_irq_type       = &aplic_xen_irq_type,
+     .handle_interrupt    = aplic_handle_interrupt,
+     .set_irq_type        = aplic_set_irq_type,
+ };
  
-@@ -48,3 +51,125 @@ int __init construct_domain(struct domain *d, struct kernel_info *kinfo)
++static const struct intc_hw_init_ops __initconstrel aplic_init_ops = {
++    .ops                 = &aplic_ops,
++    .init                = aplic_init,
++};
++
+ static int cf_check aplic_irq_xlate(const uint32_t *intspec,
+                                     unsigned int intsize,
+                                     unsigned int *out_hwirq,
+@@ -347,7 +351,7 @@ static int __init aplic_preinit(struct dt_device_node *node, const void *dat)
  
-     return 0;
+     dt_irq_xlate = aplic_irq_xlate;
+ 
+-    register_intc_ops(&aplic_ops);
++    register_intc_ops(&aplic_init_ops);
+ 
+     /* Enable supervisor external interrupt */
+     csr_set(CSR_SIE, BIT(IRQ_S_EXT, UL));
+diff --git a/xen/arch/riscv/include/asm/intc.h b/xen/arch/riscv/include/asm/intc.h
+index 675f703ec97f..d7b34fc15ad1 100644
+--- a/xen/arch/riscv/include/asm/intc.h
++++ b/xen/arch/riscv/include/asm/intc.h
+@@ -28,8 +28,6 @@ struct intc_info {
+ struct intc_hw_operations {
+     /* Hold intc hw information */
+     const struct intc_info *info;
+-    /* Initialize the intc and the boot CPU */
+-    int (*init)(void);
+ 
+     /* hw_irq_controller to enable/disable/eoi host irq */
+     const struct hw_interrupt_type *host_irq_type;
+@@ -43,9 +41,15 @@ struct intc_hw_operations {
+     void (*handle_interrupt)(struct cpu_user_regs *regs);
+ };
+ 
++struct intc_hw_init_ops {
++    const struct intc_hw_operations *ops;
++    /* Initialize the intc and the boot CPU */
++    int (*init)(void);
++};
++
+ void intc_preinit(void);
+ 
+-void register_intc_ops(const struct intc_hw_operations *ops);
++void register_intc_ops(const struct intc_hw_init_ops *init_ops);
+ 
+ void intc_init(void);
+ 
+diff --git a/xen/arch/riscv/intc.c b/xen/arch/riscv/intc.c
+index ea317aea5ad8..3600d23bdb5b 100644
+--- a/xen/arch/riscv/intc.c
++++ b/xen/arch/riscv/intc.c
+@@ -12,9 +12,12 @@
+ 
+ static const struct intc_hw_operations *__ro_after_init intc_hw_ops;
+ 
+-void __init register_intc_ops(const struct intc_hw_operations *ops)
++static const struct intc_hw_init_ops *__initdata intc_hw_init_ops;
++
++void __init register_intc_ops(const struct intc_hw_init_ops *init_ops)
+ {
+-    intc_hw_ops = ops;
++    intc_hw_ops = init_ops->ops;
++    intc_hw_init_ops = init_ops;
  }
+ 
+ void __init intc_preinit(void)
+@@ -27,7 +30,9 @@ void __init intc_preinit(void)
+ 
+ void __init intc_init(void)
+ {
+-    if ( intc_hw_ops->init() )
++    ASSERT(intc_hw_init_ops && intc_hw_init_ops->init);
 +
-+int __init make_cpus_node(const struct domain *d, struct kernel_info *kinfo)
-+{
-+    int res;
-+    const struct dt_device_node *cpus = dt_find_node_by_path("/cpus");
-+    uint32_t timebase_frequency;
-+    bool frequency_valid;
-+    void *fdt = kinfo->fdt;
-+    char *isa_str;
-+    int len;
-+
-+    dt_dprintk("Create cpus node\n");
-+
-+    if ( !cpus )
-+    {
-+        dprintk(XENLOG_ERR, "Missing /cpus node in the device tree?\n");
-+        return -ENOENT;
-+    }
-+
-+    frequency_valid = dt_property_read_u32(cpus, "timebase-frequency",
-+                                           &timebase_frequency);
-+
-+    if ( (len = build_guest_isa_str(NULL, 0, d->arch.isa)) < 0 )
-+        return len;
-+
-+    if ( !(isa_str = xvmalloc_array(char, len + 1)) )
-+        return -ENOMEM;
-+
-+    if ( build_guest_isa_str(isa_str, len + 1, d->arch.isa) != len )
-+    {
-+        res = -EINVAL;
-+        goto out;
-+    }
-+
-+    res = fdt_begin_node(fdt, "cpus");
-+    if ( res )
-+        goto out;
-+
-+    res = fdt_property_cell(fdt, "#address-cells", 1);
-+    if ( res )
-+        goto out;
-+
-+    res = fdt_property_cell(fdt, "#size-cells", 0);
-+    if ( res )
-+        goto out;
-+
-+    if ( frequency_valid )
-+        res = fdt_property_cell(fdt, "timebase-frequency", timebase_frequency);
-+
-+    for ( unsigned int cpu = 0; cpu < d->max_vcpus; cpu++ )
-+    {
-+        char buf[64];
-+
-+        snprintf(buf, sizeof(buf), "cpu@%u", cpu);
-+        res = fdt_begin_node(fdt, buf);
-+        if ( res )
-+            goto out;
-+
-+        res = fdt_property_cell(fdt, "reg", cpu);
-+        if ( res )
-+            goto out;
-+
-+        res = fdt_property_string(fdt, "status", "okay");
-+        if ( res )
-+            goto out;
-+
-+        res = fdt_property_string(fdt, "compatible", "riscv");
-+        if ( res )
-+            goto out;
-+
-+        BUILD_BUG_ON((sizeof("riscv,") +
-+                      sizeof_field(struct gstage_mode_desc, name)) >= sizeof(buf));
-+        snprintf(buf, sizeof(buf), "riscv,%s", max_gstage_mode->name);
-+        res = fdt_property_string(fdt, "mmu-type", buf);
-+        if ( res )
-+            goto out;
-+
-+        res = fdt_property_string(fdt, "riscv,isa", isa_str);
-+        if ( res )
-+            goto out;
-+
-+        res = fdt_property_string(fdt, "device_type", "cpu");
-+        if ( res )
-+            goto out;
-+
-+        /* Start of interrupt-controller */
-+        res = fdt_begin_node(fdt, "interrupt-controller");
-+        if ( res )
-+            goto out;
-+
-+        res = fdt_property_string(fdt, "compatible", "riscv,cpu-intc");
-+        if ( res )
-+            goto out;
-+
-+        res = fdt_property_cell(fdt, "#interrupt-cells", 1);
-+        if ( res )
-+            goto out;
-+
-+        res = fdt_property(fdt, "interrupt-controller", NULL, 0);
-+        if ( res )
-+            goto out;
-+
-+        res = fdt_property_u32(fdt, "phandle", alloc_phandle(kinfo));
-+        if ( res )
-+            goto out;
-+
-+        /* End of interrupt-controller */
-+        res = fdt_end_node(fdt);
-+        if ( res )
-+            goto out;
-+
-+        res = fdt_end_node(fdt);
-+        if ( res )
-+            goto out;
-+    }
-+
-+    res = fdt_end_node(fdt);
-+
-+ out:
-+    xvfree(isa_str);
-+    return res;
-+}
++    if ( intc_hw_init_ops->init() )
+         panic("Failed to initialize the interrupt controller drivers\n");
+ }
+ 
 -- 
 2.54.0
 
