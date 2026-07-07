@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D9BEC43458
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2026 08:39:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1356089.1610742 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D8C5C43458
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2026 08:42:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1356098.1610751 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wh1L5-00042j-3G; Tue, 07 Jul 2026 08:39:35 +0000
+	id 1wh1O6-0005XZ-FP; Tue, 07 Jul 2026 08:42:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1356089.1610742; Tue, 07 Jul 2026 08:39:35 +0000
+Received: by outflank-mailman (output) from mailman id 1356098.1610751; Tue, 07 Jul 2026 08:42:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wh1L5-00042c-04; Tue, 07 Jul 2026 08:39:35 +0000
-Received: by outflank-mailman (input) for mailman id 1356089;
- Tue, 07 Jul 2026 08:39:33 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wh1O6-0005XS-Bw; Tue, 07 Jul 2026 08:42:42 +0000
+Received: by outflank-mailman (input) for mailman id 1356098;
+ Tue, 07 Jul 2026 08:42:41 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wh1L3-00042U-Jj
- for xen-devel@lists.xenproject.org; Tue, 07 Jul 2026 08:39:33 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wh1O5-0005XM-KJ
+ for xen-devel@lists.xenproject.org; Tue, 07 Jul 2026 08:42:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wh1L3-003r2V-0J
- for xen-devel@lists.xenproject.org; Tue, 07 Jul 2026 10:39:33 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wh1O5-00CWdJ-0o
+ for xen-devel@lists.xenproject.org; Tue, 07 Jul 2026 10:42:41 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a4cbb3a-5cb7-0a2a0a5109dd-0a2a4509e5ae-32
- for <xen-devel@lists.xenproject.org>; Tue, 07 Jul 2026 10:39:32 +0200
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a4cbbf3-2eae-0a2a0a5409dd-0a2a4501d21a-38
+ for <xen-devel@lists.xenproject.org>; Tue, 07 Jul 2026 10:42:40 +0200
+Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a4cbb44-97e6-0a2a45090019-d1558035cd42-3
- for <xen-devel@lists.xenproject.org>; Tue, 07 Jul 2026 10:39:32 +0200
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-493c55d5c7aso37218985e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 07 Jul 2026 01:39:32 -0700 (PDT)
+ id 6a4cbc00-400f-0a2a45010019-d155dd33c969-3
+ for <xen-devel@lists.xenproject.org>; Tue, 07 Jul 2026 10:42:40 +0200
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-4703bc0a99aso2140433f8f.3
+ for <xen-devel@lists.xenproject.org>; Tue, 07 Jul 2026 01:42:40 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493e0f294b3sm33370175e9.3.2026.07.07.01.39.31
+ ffacd0b85a97d-47aa039b0cesm32351928f8f.22.2026.07.07.01.42.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 07 Jul 2026 01:39:32 -0700 (PDT)
+ Tue, 07 Jul 2026 01:42:40 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,48 +55,48 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1783413572; x=1784018372; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1783413760; x=1784018560; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=ebJEHPpWkUq2HKLR8WguIFlefqpa9MHDn8M8BiymsU0=;
-        b=bPwM/QNy6PEWJYZh3NKD0sWwTTk3pjcjxTAwwykWzDhXvqwGAa+D3fCUkbeJ0+BhwL
-         7pFwuYwUfon5AyTQkNUdUI8j0Bkqtz4MDnRiTIO7GwjrnEhd4vMGmEQ8RqkTEOQlwuJI
-         6900r5eeqxY0d1a+YD+H/LLNLGCR/9e8kwledUbt5Kocntec4aNj0xjSAQxLLWVPx/G9
-         btxNCwYEnRIMSZ8fdueiRN1uCLenzIJu0rXl1Mosyez0EmUu3p5FlN4pJ5K+2Sr+0tX8
-         FD+8R2EpYCOUol2UyrNsHPpN2NSyoNvDrp1eVpk/Uw5VpikKn0q5SyR4R5+y9xQnCFL9
-         iXBw==
+        bh=33srYHAgtAZ5OP9oP4Ikaa1rXcLuMVWWuKsdD9qT87g=;
+        b=ShKOYCrrECO36jAOtiuJVg6MqTpJmf75WW6e4oXJuzWIsCfdRFRiCKuXYabO9oiZfR
+         mIz5wSDIUF/EbWYbUt6S1CORjzLKglY+hQqGyCd6dmzdP8s1l6Wq6fjTFxzi8LWElNkw
+         wNWMsdy2CWWGG87eYV6Kqm+RQ3PpdPUYquHC8RTeW9I5Zp7LW35moDZ/cAzdXQXa+xlm
+         Vk2aWmvib+gUmmyUFJlW5MqFm/kRt216vtCLpvu2T3B0/Gy8TlEMgVJlFyKu2bjPFC3m
+         i7+XWkdqCYajStl6glBC5fUmP2/zchKANJ0ycDAg8VSItXX3Yfp8++jY1mRO68GnXabL
+         aCng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783413572; x=1784018372;
+        d=1e100.net; s=20251104; t=1783413760; x=1784018560;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ebJEHPpWkUq2HKLR8WguIFlefqpa9MHDn8M8BiymsU0=;
-        b=efSkwuwxU8lhe1iG5L2cTFwaHf5UipTb4anYY7fjcctgE8Qczb9JOs5VgOUooL5lS5
-         gy56IsNAaxb5JraV7BdDj8oA5F7Y5QD4GyUzl96YDbiTa9OTkWhPVSMhY7SUOZF6b5oP
-         C6SsdzKWZadOqZ1pygjgt0UfhcNPgxRr4ggJG+9BvWziaIEjDhX7E9xKi9fh9xQhyYFr
-         BIA22r1HFP2p6/+R1MA/nCfjMSvnTMFIphWpBQOik56FdKp7dnfCxBnq0i+O38jwhz1Z
-         B/TvpOm00VQQIQLU6by+tNIK5olP6jVIx8ATYbMz/175al3jSQPc6fkkVNaE5nafR3d7
-         EsSw==
-X-Forwarded-Encrypted: i=1; AHgh+Ro2thY4rb4+Rr57LZZBmqtQbTCht2eb1Ncjs6Bu7dQ0ryg+qqHqHlAimbzISJdHyFW578YiikNUC9U=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyqG25PF2XU01aYjAXDREp/+RLUQ1ubuQWWI9vOhWyLiAsDLgvA
-	100zxgZecpEapRSKOJ2UBPSEpytQYo+ykrcoB00MnN/XlaDb4o4DENDRkIKNE8Y7tQ==
-X-Gm-Gg: AfdE7cl5tAIL6c9QGxyyvkRFJ/bPvRF633ZgBVL4UKk1IemfI+H0r/4sQQBZrUJBcMX
-	PrneSFSTze+AMcP4d+DMvi+C8h5mR+4sEkUmSApGiZ2ap6+CG9IYhDUlvtgKVHXmN9/QS21iAwp
-	9T8SB/A19U3AqC2r4Kt2v/P7caXRMQJ2kdeWWMI16ys2fRBdmcGUXDPxyoXLajTkSmcRHY46BQR
-	QcQuzAETzQp1eeNxYNPVwvssojm9lzzMXZRMX3ZS1Ov01r9TCTNSpd5JC6CpVjcgZq7W9YQcRfA
-	Dtr3UdkU9N4y7nI1XFYa8vPjfExAlUvpqCFI80RzisXd4sbPmssY/5Fn6mRDpF7JUud5rMfaanJ
-	UWACCYzAN4l2L1m/w9Mc+En5B7znrnNNFxsWI0OjP9A9O5JBHSlgRfKJdhaZX8YXAvYcw80HoM5
-	2AjSLraf2rQ6JH4QOMegBV6tzWz4snpkcjvYTgfMKhbYrhi0sKeiZo/2F8QqU3+JWbdgS8y9TiB
-	nTqKxT70GycLXI=
-X-Received: by 2002:a05:600c:3f0b:b0:492:437a:a653 with SMTP id 5b1f17b1804b1-493e1ff0070mr17324415e9.26.1783413572371;
-        Tue, 07 Jul 2026 01:39:32 -0700 (PDT)
-Message-ID: <eac4528a-f9b3-476e-adea-63d317ef30fe@suse.com>
-Date: Tue, 7 Jul 2026 10:39:31 +0200
+        bh=33srYHAgtAZ5OP9oP4Ikaa1rXcLuMVWWuKsdD9qT87g=;
+        b=ce651kGlV1h07u4HAiq6+5fbSia2I1wnraQyDYiPQ2JZHPKSdrqCnD2rq3DkDvWpW2
+         W2Va+yJL6SrPhmRZeJpGjv7Fsz5946TCGftLb7YOZt3HR9PGgR3D7vILAx+szNvgexeu
+         1yMbnvRgitqyBYnJPgP/gQ3sXz8kvsHOpBDNJ0hhJ74zyvoKqO8vaX355JY7CSeZjSBi
+         mLGJw0+zxN/OFxL3bVPjr2uAdcvMkOjSOoD8WqIX6PEcq7tkQfKHaG/9DMdqE6ARFgWQ
+         9o1CyWZTBJe3rQptJOcQr/2D7eipI6r1tNwL5d8kJ/rtutD3CUEx9VcezTYlYFwlWQF2
+         NWfQ==
+X-Forwarded-Encrypted: i=1; AHgh+RpT97OX/jSHCG/kNTcuwEaHjROdRC+UW0KJOprJKFYxBrrvU8X93oNGDMoCv4ejzX4MVFguO9ppnZY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxYlbo4NQv4Fy5MfecimzfNla9tabmghffhLbnhHSJ331TqbNDq
+	kSDOVuQ/7PZJHRxo8hAfZUZGRfFFQxrqYOhTg2YXPRSQNBskdqaWe42BYR/rYBTAxg==
+X-Gm-Gg: AfdE7cmlTSh24pOovoLUPdDAzLRdRVw7SYXMs4ptLhDRp6ePvb6VkDQGuMzrMKapTIj
+	Vb/lccwl3hw8Tq+tDIJQoD6V6ZTjCgsDOXsf81qmRtn0/HiozYohVq7IZq0ZIDgXe0nEN6fXqg3
+	g/J67XdWOAO9Iinjw5d7rzqTEqdBHEV8kpr3fD8PkI8CtdA5zppMwhgHqztovhh3M5w2gMa9e7X
+	7DaNnkOxEkwcV0I8Furhwt0wby/2GL6mSby/vyY4IRt4tThM55gD8m6eODUm0L7ezj0zTrPI2t+
+	2J+1SXyyP3r2gGa0d1QiR/ng9oTiZEW1xm5S1tEJyNWc20KKDcgtrVVZqVTZi2NfOi8bFBXsvrL
+	IiZydEARcbiJYWsASGMvILImLZ0hxbewC0ZQxejVjwZvttAshAUoPKOLViUMYGPsJ3NvVsgP3Lf
+	QdHwEuf8RhJ7RX4RiPJnqfqFMVMeiV7MWukywiACRgZihsgqwVEK70QqKvNkKSenixYZpSZ3D/0
+	kj7
+X-Received: by 2002:adf:e5cb:0:b0:475:f0f0:9efb with SMTP id ffacd0b85a97d-47de66cb332mr3518798f8f.50.1783413760271;
+        Tue, 07 Jul 2026 01:42:40 -0700 (PDT)
+Message-ID: <d3acd616-6ef8-4cb3-a1c0-b8955e0dc958@suse.com>
+Date: Tue, 7 Jul 2026 10:42:39 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/5] stubdom: remove grub-pv
+Subject: Re: [PATCH 2/5] stubdom: remove support for building in 32-bit mode
 To: Juergen Gross <jgross@suse.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
@@ -106,6 +106,7 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Samuel Thibault <samuel.thibault@ens-lyon.org>,
  xen-devel@lists.xenproject.org
 References: <20260707083459.226297-1-jgross@suse.com>
+ <20260707083459.226297-3-jgross@suse.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,31 +132,26 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260707083459.226297-1-jgross@suse.com>
+In-Reply-To: <20260707083459.226297-3-jgross@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1783413572-46D3C986-170597CF/0/0
+X-purgate-ID: tlsNG-d62444/1783413760-FF0C41E0-3FE71942/0/0
 X-purgate-type: clean
-X-purgate-size: 763
+X-purgate-size: 516
 
 On 07.07.2026 10:34, Juergen Gross wrote:
-> The grub-pv stubdoms (32- and 64-bit) are disabled by default since
-> several years now.
-> 
-> Remove them in order to enable removing quite some more code from Xen.
-> In case someone is really depending on grub-pv, they can easily take it
-> from an older Xen build, as there is no Xen version dependency in
-> grub-pv (a version built 3 years ago has been tested to still work
-> with current 4.23 staging Xen).
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -146,9 +146,6 @@ install-tools: install-tools-public-headers
+>  .PHONY: install-stubdom
+>  install-stubdom: mini-os-dir install-tools-public-headers
+>  	$(MAKE) -C stubdom install
+> -ifeq (x86_64,$(XEN_TARGET_ARCH))
+> -	XEN_TARGET_ARCH=x86_32 $(MAKE) -C stubdom install-grub-if-enabled
+> -endif
 
-What guarantees this to remain this way, when ...
-
-> Juergen Gross (5):
->   stubdom: remove support for grub-pv
->   stubdom: remove support for building in 32-bit mode
->   stubdom: remove building of libxenguest and libxenctrl
-
-... there was this dependency on (unstable) libraries?
+Doesn't this belong in patch 1, together with the build-stubdom: rule
+adjustment? Or does that other hunk belong here?
 
 Jan
 
