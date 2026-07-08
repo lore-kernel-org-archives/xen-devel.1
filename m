@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E124FC44503
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jul 2026 21:04:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1357351.1611797 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D01CAC44508
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jul 2026 21:04:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1357350.1611782 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1whZQv-0004QQ-8T; Wed, 08 Jul 2026 21:03:53 +0000
+	id 1whZQo-0003sX-Nx; Wed, 08 Jul 2026 21:03:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1357351.1611797; Wed, 08 Jul 2026 21:03:53 +0000
+Received: by outflank-mailman (output) from mailman id 1357350.1611782; Wed, 08 Jul 2026 21:03:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1whZQv-0004Q6-5B; Wed, 08 Jul 2026 21:03:53 +0000
-Received: by outflank-mailman (input) for mailman id 1357351;
- Wed, 08 Jul 2026 21:03:52 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1whZQo-0003s5-K9; Wed, 08 Jul 2026 21:03:46 +0000
+Received: by outflank-mailman (input) for mailman id 1357350;
+ Wed, 08 Jul 2026 21:03:44 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Stewart.Hildebrand@amd.com>) id 1whZQu-0004NW-Hz
- for xen-devel@lists.xenproject.org; Wed, 08 Jul 2026 21:03:52 +0000
+ (envelope-from <Stewart.Hildebrand@amd.com>) id 1whZQm-0003oJ-QG
+ for xen-devel@lists.xenproject.org; Wed, 08 Jul 2026 21:03:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1whZQt-00CYbB-HL
- for xen-devel@lists.xenproject.org; Wed, 08 Jul 2026 23:03:51 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1whZQl-00BD5T-Vf
+ for xen-devel@lists.xenproject.org; Wed, 08 Jul 2026 23:03:43 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Stewart.Hildebrand@amd.com>)
- id 6a4ebafd-bab6-0a2a0a5309dd-0a2a4502c1f2-36
- for <xen-devel@lists.xenproject.org>; Wed, 08 Jul 2026 23:03:51 +0200
-Received: from [52.101.61.60]
- (helo=DM1PR04CU001.outbound.protection.outlook.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a4ebafe-e002-0a2a0a5209dd-0a2a4509dc22-34
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Jul 2026 23:03:43 +0200
+Received: from [52.101.57.41]
+ (helo=BN8PR05CU002.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Stewart.Hildebrand@amd.com>)
- id 6a4ebb35-5a27-0a2a45020019-34653d3c37fb-3
- for <xen-devel@lists.xenproject.org>; Wed, 08 Jul 2026 23:03:50 +0200
-Received: from CH0PR03CA0362.namprd03.prod.outlook.com (2603:10b6:610:119::9)
- by DM4PR12MB6664.namprd12.prod.outlook.com (2603:10b6:8:bb::18) with
+ id 6a4ebb2e-97e6-0a2a45090019-34653929b111-4
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Jul 2026 23:03:43 +0200
+Received: from DS1PR07CA0020.namprd07.prod.outlook.com (2603:10b6:8:44d::18)
+ by CH3PR12MB8185.namprd12.prod.outlook.com (2603:10b6:610:123::17) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.9; Wed, 8 Jul 2026
- 21:03:42 +0000
-Received: from CH3PEPF0000000B.namprd04.prod.outlook.com
- (2603:10b6:610:119:cafe::55) by CH0PR03CA0362.outlook.office365.com
- (2603:10b6:610:119::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.11; Wed, 8 Jul
+ 2026 21:03:34 +0000
+Received: from CY4PEPF0000E9D9.namprd05.prod.outlook.com
+ (2603:10b6:8:44d:cafe::46) by DS1PR07CA0020.outlook.office365.com
+ (2603:10b6:8:44d::18) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.202.10 via Frontend Transport; Wed, 8
- Jul 2026 21:03:42 +0000
+ Jul 2026 21:03:34 +0000
 Received: from satlexmb08.amd.com (165.204.84.17) by
- CH3PEPF0000000B.mail.protection.outlook.com (10.167.244.38) with Microsoft
+ CY4PEPF0000E9D9.mail.protection.outlook.com (10.167.241.72) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Wed, 8 Jul 2026 21:03:41 +0000
+ 15.21.181.6 via Frontend Transport; Wed, 8 Jul 2026 21:03:34 +0000
 Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 8 Jul
- 2026 16:03:41 -0500
+ 2026 16:03:24 -0500
 Received: from ubuntu (10.180.168.240) by satlexmb09.amd.com (10.181.42.218)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 8 Jul
- 2026 14:03:41 -0700
+ 2026 14:03:23 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -70,20 +70,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=KN60nnxFFwJSSDrfCC10oE3/sBu/YBouEwTCQY95C6DDJx3wUXx5c1qq1LKc1Zy08sTRARQENz6O5HWzU7+AMVna4Z/e8HsF3Y4eOiI/LhC2Nn9cJlFYONIz6BoC9dfUEhqoDxpYq5s5J5hGD4ULYdk6Q/oZ/wqK1acSWLYuAgR57nO1IwTfhOo576ECCzO9YzuqtpQv4m0xEmEHXrVkYBy2G0wMh39h0Avwt79pkAcE1KTfV4AFuRhwhEy5yB/0m+X4BZCftZsyJcpjijcX/Z4gAMHtqIu769O4SMuJlAIVVNk3pfRKncTu68X7nmMP1/UVcfk9YIq9DYg/hFVuoQ==
+ b=SV53JJaYr5hfkslGHN8rbgoHokAOxB7L8gWZGW+cABWcfzi3vg3IeJzReIKzViltEThcf2QNfXVmOuZ1LHS1uzogmjwPjgF2ccEiXJ6YRGDRkBltBRBbra/LViCeY9gMEcDWgCGjKfdoPWu4FXr8MQBE86XGR9oA/Mm7fFwzcRovpspKI36OMuihQu95YcHJxLvJGT9qCm4dz4dEPFF8qyJ9LEXOE52uEyvHDv6X0xh8I0Qe5/tG11/27HwBxicGM5O7CvfKfZQDlLg7vsKdOWr78QeOVF8yO+ouUwuXMdHAQ7pliKM5tZLsKI3xzcRpKh3NHCIx9QQM8FAMLSv2iw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VVUodHck0vEaTTblxDg5RDc7BDsFcyAxQrfUdezpsHI=;
- b=Y3OtsuuQlIOooIaC0Eo+vexfSM5FFyzx0QGooESIQcECCDssq6SsnfdDn82FhNLdMaE+Y6hQdpMAWa6iNS/F3Y16eZ3Isw9ex2bNnD+/rvw9jXzignRLv+57Uy3Cln0HCL3+VPJVhXKTnU7LqUbtl6QQcFOoX9zUPsyMnY3X2vPAzM0HUEt3gwbW8LRB0d1YXRjk5N9VnzJ6vQFi/+E6zzedgavyEYuTNFmo50O1TIvYDL6JpNbPnALmf0b+KQ18P6GbANd7X3MH8HHoEPqF9s9PsfFyhmbbQsELvLeuvx1kOgOwwlUvOVjZzYDuqqchDTkG43ut1oWmadtl7w+b2Q==
+ bh=LX3mDmX0UiOUsankD8ZHIzdyC6Ou3P5sTJu+c9AM/Nc=;
+ b=CVL4eW0nbMaSgpU40l3Krg3RcFtlyUCxNabRBY5HSjv1PjRMyeEs0VhUvzzZB6K3rjauCgy464a6Z3p9ECYG2X/BhKdvg9tCqYeynd17fulozNkylqj3fSsHPTct9F3WwxHmPj1N5Gw+MC/fJGFL+Wmddfkeb/kd0EuibmsMGgbgVmaNehSdjAk7HbG2uJYFcHKqd730xAcb9Yguqwa/zfN7qveeJibORUMrHet6h1f9YWQ6gAPcZ5InEbp46HPqHQbpaSd91Cs5CewcHdH88rWbKdMQJy9M/k0FKTmGqK3AOQoz6Rh5klUOmDCszfRaYdyVSdDxSy5OeeTPoR8CKg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VVUodHck0vEaTTblxDg5RDc7BDsFcyAxQrfUdezpsHI=;
- b=3LhAIgOWB8fP2T9tqWVx9jqWMhf294LShZHBbaKGU5i3/4CsK+TMHggBkbKdLoasqv4fIZ+zLg1rUMyNxIrJPOKoLXzDkhCHxzw83Ip+cM3M+pweDI8gxsmTufUGwLeOtrifszAPjePHOh1GhIdRyhP1assZek2wM7oY8LFn6pk=
+ bh=LX3mDmX0UiOUsankD8ZHIzdyC6Ou3P5sTJu+c9AM/Nc=;
+ b=s2XqaLTZCd3M/drBHKcJeux+TAFh4rXRWxEZCvjWIHEKJSyNDBojgsz5hZz91dlBMmMgTC+iS2derNJ/B5kUE6MBBBVxtA4FvY2BJoP6laROrDcoXKwHyyYmGJOF2/6YTB1h1C52w9k3BDM9G4r9SMDdkMj1HmLtYydur/UUYWM=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -94,9 +94,9 @@ From: Stewart Hildebrand <stewart.hildebrand@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Roger Pau Monne <roger.pau@citrix.com>, Stewart Hildebrand
 	<stewart.hildebrand@amd.com>
-Subject: [PATCH v5 5/9] vpci: simplify handling of memory decoding and ROM enable writes
-Date: Wed, 8 Jul 2026 17:02:20 -0400
-Message-ID: <20260708210233.922275-6-stewart.hildebrand@amd.com>
+Subject: [PATCH v5 2/9] vpci: make BAR mapping more resilient for the hardware domain
+Date: Wed, 8 Jul 2026 17:02:17 -0400
+Message-ID: <20260708210233.922275-3-stewart.hildebrand@amd.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260708210233.922275-1-stewart.hildebrand@amd.com>
 References: <20260708210233.922275-1-stewart.hildebrand@amd.com>
@@ -108,232 +108,143 @@ X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb09.amd.com
  (10.181.42.218)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PEPF0000000B:EE_|DM4PR12MB6664:EE_
-X-MS-Office365-Filtering-Correlation-Id: 05df2474-5f02-41a2-c0ad-08dedd346408
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D9:EE_|CH3PR12MB8185:EE_
+X-MS-Office365-Filtering-Correlation-Id: 59804325-2291-4500-4745-08dedd345fac
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|376014|36860700016|1800799024|82310400026|11063799006|56012099006|18002099003|22082099003;
+	BCL:0;ARA:13230040|36860700016|376014|23010399003|1800799024|82310400026|6133799003|18002099003|11063799006|22082099003|56012099006;
 X-Microsoft-Antispam-Message-Info:
-	6z0ELKaOZ9oqmhr9HvY8dox93fJIWG8HluOXzKVseqFiJMZqCTxqLB2Nv8RuVpR9DZaFgoq8V0KtGUOcruUqyo7+EN2a/FTf1di7xhjk9dHuJ4gltIwkZCN32Hsqhiw611W37BOiwcn7N0X465rIlGRYOY5Q6N9SUHXYyMasXonSBg04+6+aTCL8SqvPS9a42lvgbEoIzVxeCixs5bALum3MUnN6Gzt+a7g9EmRJp8g98L9yekw/cEp5oCJME1Rn4I6CVpwvuNnfqBpMuJqTuyJ7gnfCX6DSEl4WyEkoe22yWnRuSGyL0gClwEKcs0z3qBLQTy+s8K0afBdgZifmdPYRognMjmY+bWvuwNBek2Paoif9t6NOjab2GZKTWCx+bGGFrsMTylANjRMGEL76A5/f+kQNGBIL7kcQahqx+ryLMBHoOUQakl6FvNcCePMjR8uLbA6zpYNzxl0ih0BrWvm99y+tyCDv1Iipyg87rA74WZKMvvm4LcHCHPO8BwS0AJqSidjLKAZXJeJ8Z87i46MDzE4nGZlpsOLkfgl35dlNBgjlwgPUlx1YsGVR6j2aNO39R5GzoQZuFYm/+lSCTp9B7XIteTZDTjIakJwpS3O+htGSGh7dfxz2EXEB+4mndTmixUw4J9va0dAw/mHNBdcDPZfdUx+spCEqnpuG9/oc+tbmdP7f2J3XZ7ax0aCq3bCNfSOgj2ARJFCwGbrvUw==
+	SKMMzIIBP7sahrwyYwLKPIiuKD1xhxQsu+SlJbRY3+DBx3uhNTqsUFIexAd+gDGHfalp+DbP3KMGet5171LfcPOE+O383qPr1uh78Xhxmir6A6r5BrNnptvZwiQ3fb9ZdG86P9pla60nyPlgCjSmKS20NtpGyrNnWXOZ8FMKNiL4Jt+WZIqycuT3G5zYKZnZRd7eA1Vs4yZr/wKic8mmOXKUX5WdTHU3X5ZgEDYaExfidGPJMX3tpkJ2iw33FpN0RYd7Xr7dLADm+fe8uO69CqtXt8y+h0m7hGk/hR4tueRANWurzwmBll6k9dK53PszjXwh+xGL1xw5vPmvxuqo5mVQxfm/uHsQ24A6Q8PZZRMmNEdYRTlpR07MAENR5NuePEn/z7U1T6l6qdUbdgZI9Hu+z2a2JIuZISyiMeS3sEBELV3nqEDS5f0VIgZ/n7Zs13vfG7+huUTqggcAjvN8SQA5csAXrOL6BO2fIMychAGuITaBmH6clIpzu2q+3na2O5UBNE5/MhogvOMnuKUcr7kY1ne5S0D889GB9Hdh/ihiGDxP/iz4qDcmpc+fboRxmgZPsYcpMF5STCMONj34OTZGvH5qOMZX+n3PzD+SLFe6YM4h7mioKmYqiid/Gd6/+YfOX4BtaClyZ0YYDSNXj3NtZXBU8yDk0edFiHYH/6/hnu5z7H34mDUMqBeZCV6aKagNt6cQ/UPHxMUoR16Bzg==
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(376014)(36860700016)(1800799024)(82310400026)(11063799006)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(376014)(23010399003)(1800799024)(82310400026)(6133799003)(18002099003)(11063799006)(22082099003)(56012099006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	X/SjnTYyp95Fy6Iq9DMjGbQLlUs5uU+Gf11Sd0fSdhmJ9BeJpXoHFWTX6eoL1RtpqUXjkpENRKKe6xpGut2R5e7TSFis45k+/GQB8qYgGScAB2g4Ep8RihUE6zSCTrOxYJC7El0GhEbmL3opwcO4wIqUKRxu5PikJL+kZx2gmi0XUj5TjJAmMrodqmFLPfdyMdtdWkuwig1ZXiWKuOMegjYbC4dv2RPIuWUOsZVdD2uBTJ8yNyVX4zph+B83LLDrei95IsQMF4S6/tKjSOGuq3lfwb30C/wEmallKJlMJFhmmG4q1ae7m7umZOsowmbG+sAaDh/S+fRJ//npeJrFofTBRwuwn0n99orKQshR2G1SSkgY2JWaLqq1IrfWm9W1Jg1fws3/o6loiVXr4aQrB89wDRD94IuPIqQJ6FFY5JEXEcWKD+vKgt8fk5/hvg11
+	2XgnPlEh/dhI5I0Jp21i+22/UX2XL8dkNLayHApJbcOyIawh/Cm7y9wtTC6W+K/H3UiFRfvtwG9SWYmmoDfDDY0uaXllA20HFYx7icRkWhfAb/bXqyGSjNQm9aRbr+kNLGoqmHPK2apxj0SHOe7fgENjjL0INSoXKmz+LnooN5+sq6mnf0x6riWAvOQicLrqMybGK0vtO7z3yqUKydcKgfOfDIM6y7WXWFsvkEdvoLPEsUWS40YXEut15FAl8xgoKC47Eu3FryodW1tWuh4y15JPZFS0q8tYd7U4SRjKhS4bs00BlE1ycf8x8mafzj5ZJbnov8V4IjzHDz9/gRz/cDJbEKJLnq7Z8XII+66fN3FVxh4ZNgChqrEke14/MkVwkIlIUvEORomLtxX6bHrYUN9zLiOxs2blkmwDsicK3NWTpfxHAyqqAooiuriL/wPU
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2026 21:03:41.8972
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2026 21:03:34.5517
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 05df2474-5f02-41a2-c0ad-08dedd346408
+X-MS-Exchange-CrossTenant-Network-Message-Id: 59804325-2291-4500-4745-08dedd345fac
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CH3PEPF0000000B.namprd04.prod.outlook.com
+	CY4PEPF0000E9D9.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6664
-X-purgate-ID: tlsNG-720697/1783544631-4D70D7C5-F7AD733C/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8185
+X-purgate-ID: tlsNG-bad1c0/1783544623-4733F986-4E1CE8C4/0/0
 X-purgate-type: clean
-X-purgate-size: 7442
+X-purgate-size: 4148
 
 From: Roger Pau Monne <roger.pau@citrix.com>
 
-Deferring the actual write of the PCI register bit, either the memory
-decoding or the ROM enable is not helpful, and adds an unnecessary amount of
-complexity to the preemptible handling of BAR related p2m modifications.
+The logic in map_range() will bubble up failures to the upper layer, which
+will result in any remaining regions being skip, and for the non-hardware
+domain case the owner domain of the device would be destroyed.  However for
+the hardware domain the intent is to continue execution, hoping the
+failure to modify the p2m could be worked around by the hardware domain.
 
-In the hardware domain case, whether the PCI register write is done ahead
-or after the p2m changes doesn't matter, a hardware domain has plenty of
-ways to mess with the PCI register state if it wants to.  Any poking at the
-BAR p2m regions ahead of the guest write having completed will be
-undefined.
+To accomplish that in a better way, ignore failures and skip the range in
+that case, possibly continuing to map further ranges.
 
-On the other hand, for domUs the memory decoding bit shouldn't really
-change as a result of guest actions, and should always be enabled.  Guest
-toggling the memory decoding command register should only result in p2m
-modifications, but no propagation to the device PCI registers.  Having
-memory decoding unconditionally enabled ensures the domU attempting to
-perform p2m accesses while the p2m changes are taking place will always
-access the BAR contents. This is not the current behavior for domUs, so add
-a note that it would preferably done that way.
+Since the error path in vpci_process_pending() should only be used by domUs
+now, and it will unconditionally end up calling domain_crash(), simplify
+it: there's no need to cleanup if the domain will be destroyed.
 
-This allows to get rid of modify_decoding(), as writing the command
-register can easily be done without the need for an external helper.
+Memory decoding may be left enabled in case of mapping error for devices
+assigned to domUs.
 
-Resolves: https://gitlab.com/xen-project/xen/-/issues/98
+No functional change for domUs intended.
+
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
 ---
-Since the full command register value is no longer needed after p2m
-operations, we could reasonably replace the cmd parameter to
-modify_bars() with 'bool map' immediately after this patch. However, I
-chose to wait until the end of the series to reduce the diffstat and
-make review easier.
-
-Note that in rom_write(), when rom->enabled and new_enabled are both
-false, rom->addr/guest_addr will be written twice. This quirk is
-preexisting, so I didn't think it was in the scope for this patch to
-address it. Do you think it's worth addressing separately?
+Although not strictly a pre-requisite for queued p2m mapping, I've
+included this patch from Roger's vPCI fixes series since it simplifies
+the error path in vpci_process_pending().
 
 v1->v5:
-* rebase
-* reorder within series
-* in rom_write(), retain bars_mapped / enable toggle gate for invoking
-  modify_bars()
-* add Resolves: tag
+* move "*c += size;" outside is_hardware_domain condition
+* add note to commit message about not disabling memory decoding on failure
 ---
- xen/drivers/vpci/header.c | 80 +++++++++++----------------------------
- 1 file changed, 22 insertions(+), 58 deletions(-)
+ xen/drivers/vpci/header.c | 45 +++++++++++++++++++++------------------
+ 1 file changed, 24 insertions(+), 21 deletions(-)
 
 diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index cf9d0bac8876..908adf0b3f4c 100644
+index 5ac525036672..9f2d0c8a5452 100644
 --- a/xen/drivers/vpci/header.c
 +++ b/xen/drivers/vpci/header.c
-@@ -102,47 +102,6 @@ static int cf_check map_range(
-     return rc;
- }
+@@ -70,17 +70,26 @@ static int cf_check map_range(
  
--/*
-- * The rom_only parameter is used to signal the map/unmap helpers that the ROM
-- * BAR's enable bit has changed with the memory decoding bit already enabled.
-- * If rom_only is not set then it's the memory decoding bit that changed.
-- */
--static void modify_decoding(const struct pci_dev *pdev, uint16_t cmd,
--                            bool rom_only)
--{
--    struct vpci_header *header = &pdev->vpci->header;
--    bool map = cmd & PCI_COMMAND_MEMORY;
--    unsigned int i;
--
--    for ( i = 0; i < ARRAY_SIZE(header->bars); i++ )
--    {
--        struct vpci_bar *bar = &header->bars[i];
--
--        if ( !MAPPABLE_BAR(bar) )
--            continue;
--
--        if ( rom_only && bar->type == VPCI_BAR_ROM )
+         rc = map->map ? map_mmio_regions(map->d, _gfn(s), size, _mfn(map_mfn))
+                       : unmap_mmio_regions(map->d, _gfn(s), size, _mfn(map_mfn));
+-        if ( rc == 0 )
 -        {
--            unsigned int rom_pos = (i == PCI_HEADER_NORMAL_NR_BARS)
--                                   ? PCI_ROM_ADDRESS : PCI_ROM_ADDRESS1;
--            uint32_t val = bar->addr |
--                           (map ? PCI_ROM_ADDRESS_ENABLE : 0);
--
--            header->rom_enabled = map;
--            pci_conf_write32(pdev->sbdf, rom_pos, val);
--            return;
+-            *c += size;
+-            break;
 -        }
--    }
+         if ( rc < 0 )
+         {
+             printk(XENLOG_G_WARNING
+                    "Failed to %smap [%lx %lx] -> [%lx %lx] for %pd: %d\n",
+                    map->map ? "" : "un", s, e, map_mfn,
+                    map_mfn + size, map->d, rc);
++            goto done;
++        }
++        if ( rc == 0 )
++        {
++ done:
++            if ( is_hardware_domain(map->d) )
++                /*
++                 * Ignore failures for the hardware domain and skip the range.
++                 * Do it as a best effort workaround to attempt to get the
++                 * hardware domain to boot.
++                 */
++                rc = 0;
++
++            *c += size;
+             break;
+         }
+         ASSERT(rc < size);
+@@ -196,28 +205,22 @@ bool vpci_process_pending(struct vcpu *v)
+             return true;
+         }
+ 
+-        if ( rc )
++        if ( rc && !is_hardware_domain(v->domain) )
+         {
+-            spin_lock(&pdev->vpci->lock);
+-            /* Disable memory decoding unconditionally on failure. */
+-            modify_decoding(pdev, v->vpci.cmd & ~PCI_COMMAND_MEMORY,
+-                            false);
+-            spin_unlock(&pdev->vpci->lock);
 -
--    if ( !rom_only )
--    {
--        pci_conf_write16(pdev->sbdf, PCI_COMMAND, cmd);
--        header->bars_mapped = map;
--    }
--    else
--        ASSERT_UNREACHABLE();
--}
+-            /* Clean all the rangesets */
+-            for ( i = 0; i < ARRAY_SIZE(header->bars); i++ )
+-                if ( !rangeset_is_empty(header->bars[i].mem) )
+-                     rangeset_purge(header->bars[i].mem);
 -
- bool vpci_process_pending(struct vcpu *v)
- {
-     const struct pci_dev *pdev = v->vpci.pdev;
-@@ -202,10 +161,6 @@ bool vpci_process_pending(struct vcpu *v)
+-            v->vpci.pdev = NULL;
+-
+             read_unlock(&v->domain->pci_lock);
+ 
+-            if ( !is_hardware_domain(v->domain) )
+-                domain_crash(v->domain);
++            domain_crash(v->domain);
+ 
+             return false;
+         }
++        ASSERT(!rc);
++        /*
++         * Purge rangeset to deal with the hardware domain having triggered an
++         * error.  It shouldn't be possible, as map_range() will always swallow
++         * errors for hardware domain owned devices, and
++         * rangeset_consume_ranges() itself doesn't generate any errors.
++         */
++        rangeset_purge(bar->mem);
      }
      v->vpci.pdev = NULL;
  
--    spin_lock(&pdev->vpci->lock);
--    modify_decoding(pdev, v->vpci.cmd, v->vpci.rom_only);
--    spin_unlock(&pdev->vpci->lock);
--
-     read_unlock(&v->domain->pci_lock);
- 
-     return false;
-@@ -241,8 +196,6 @@ static int __init apply_map(struct domain *d, const struct pci_dev *pdev,
-             write_lock(&d->pci_lock);
-         }
-     }
--    if ( !rc )
--        modify_decoding(pdev, cmd, false);
- 
-     return rc;
- }
-@@ -534,22 +487,29 @@ static void cf_check cmd_write(
-      * decoding one. Bits that are not allowed for DomU are already
-      * handled above and by the rsvdp_mask.
-      */
--    if ( header->bars_mapped != new_enabled )
-+    if ( header->bars_mapped != new_enabled &&
-+         modify_bars(pdev, cmd, false) )
-         /*
-          * Ignore the error. No memory has been added or removed from the p2m
-          * (because the actual p2m changes are deferred in defer_map) and the
-          * memory decoding bit has not been changed, so leave everything as-is,
-          * hoping the guest will realize and try again.
-          */
--        modify_bars(pdev, cmd, false);
--    else
--        pci_conf_write16(pdev->sbdf, reg, cmd);
-+        return;
- 
- #ifdef CONFIG_HAS_PCI_MSI
-     /* Unpopulate MSI-X table region, so accesses trap into Xen. */
-     if ( !header->bars_mapped && new_enabled && vpci_make_msix_hole(pdev) )
-         return;
- #endif
-+
-+    /*
-+     * FIXME: for domUs we don't want the guest toggling the memory decoding
-+     * bit.  It should be set in vpci_init_header() and guest attempts to
-+     * modify it should only lead to guest p2m changes.
-+     */
-+    header->bars_mapped = new_enabled;
-+    pci_conf_write16(pdev->sbdf, reg, cmd);
- }
- 
- static uint32_t cf_check guest_cmd_read(
-@@ -705,17 +665,12 @@ static void cf_check rom_write(
-         rom->guest_addr = rom->addr;
-     }
- 
--    if ( !header->bars_mapped || rom->enabled == new_enabled )
--    {
--        /* Just update the ROM BAR field. */
--        header->rom_enabled = new_enabled;
--        pci_conf_write32(pdev->sbdf, reg, val);
--    }
-     /*
-      * Pass PCI_COMMAND_MEMORY or 0 to signal a map/unmap request, note that
-      * this fabricated command is never going to be written to the register.
-      */
--    else if ( modify_bars(pdev, new_enabled ? PCI_COMMAND_MEMORY : 0, true) )
-+    if ( header->bars_mapped && rom->enabled != new_enabled &&
-+         modify_bars(pdev, new_enabled ? PCI_COMMAND_MEMORY : 0, true) )
-         /*
-          * No memory has been added or removed from the p2m (because the actual
-          * p2m changes are deferred in defer_map) and the ROM enable bit has
-@@ -726,6 +681,8 @@ static void cf_check rom_write(
-          */
-         return;
- 
-+    header->rom_enabled = new_enabled;
-+    pci_conf_write32(pdev->sbdf, reg, val);
-     if ( !new_enabled )
-     {
-         rom->addr = val & PCI_ROM_ADDRESS_MASK;
-@@ -927,6 +884,13 @@ int vpci_init_header(struct pci_dev *pdev)
-             goto fail;
-     }
- 
-+    if ( cmd & PCI_COMMAND_MEMORY )
-+    {
-+        /* Restore command register value. */
-+        header->bars_mapped = true;
-+        pci_conf_write16(pdev->sbdf, PCI_COMMAND, cmd);
-+    }
-+
-     return (cmd & PCI_COMMAND_MEMORY) ? modify_bars(pdev, cmd, false) : 0;
- 
-  fail:
 -- 
 2.54.0
 
