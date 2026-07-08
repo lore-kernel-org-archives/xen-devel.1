@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08B4CC44501
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C126C44507
 	for <xen-devel@archiver.kernel.org>; Wed,  8 Jul 2026 21:04:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1357347.1611758 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1357346.1611752 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1whZQk-0003Hv-2b; Wed, 08 Jul 2026 21:03:42 +0000
+	id 1whZQj-0003Bn-N0; Wed, 08 Jul 2026 21:03:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1357347.1611758; Wed, 08 Jul 2026 21:03:42 +0000
+Received: by outflank-mailman (output) from mailman id 1357346.1611752; Wed, 08 Jul 2026 21:03:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1whZQj-0003HE-Ug; Wed, 08 Jul 2026 21:03:41 +0000
-Received: by outflank-mailman (input) for mailman id 1357347;
- Wed, 08 Jul 2026 21:03:41 +0000
+	id 1whZQj-0003Bd-J3; Wed, 08 Jul 2026 21:03:41 +0000
+Received: by outflank-mailman (input) for mailman id 1357346;
+ Wed, 08 Jul 2026 21:03:40 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Stewart.Hildebrand@amd.com>) id 1whZQi-0003BV-Tz
- for xen-devel@lists.xenproject.org; Wed, 08 Jul 2026 21:03:41 +0000
+ (envelope-from <Stewart.Hildebrand@amd.com>) id 1whZQi-0003BP-21
+ for xen-devel@lists.xenproject.org; Wed, 08 Jul 2026 21:03:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1whZQi-001FOW-1P
- for xen-devel@lists.xenproject.org; Wed, 08 Jul 2026 23:03:40 +0200
+ id 1whZQh-001FOW-87
+ for xen-devel@lists.xenproject.org; Wed, 08 Jul 2026 23:03:39 +0200
 Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Stewart.Hildebrand@amd.com>)
- id 6a4ebb18-5cb7-0a2a0a5109dd-0a2a4506bcd2-20
- for <xen-devel@lists.xenproject.org>; Wed, 08 Jul 2026 23:03:39 +0200
-Received: from [40.93.196.65]
- (helo=SA9PR02CU001.outbound.protection.outlook.com)
+ id 6a4ebb18-5cb7-0a2a0a5109dd-0a2a4506bcd2-16
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Jul 2026 23:03:38 +0200
+Received: from [40.107.200.0]
+ (helo=CH5PR02CU005.outbound.protection.outlook.com)
  by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Stewart.Hildebrand@amd.com>)
- id 6a4ebb2a-08de-0a2a45060019-285dc44164ea-3
- for <xen-devel@lists.xenproject.org>; Wed, 08 Jul 2026 23:03:39 +0200
-Received: from CH0P221CA0044.NAMP221.PROD.OUTLOOK.COM (2603:10b6:610:11d::27)
- by CH3PR12MB7667.namprd12.prod.outlook.com (2603:10b6:610:14f::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.10; Wed, 8 Jul
- 2026 21:03:35 +0000
-Received: from CH3PEPF0000000C.namprd04.prod.outlook.com
- (2603:10b6:610:11d:cafe::72) by CH0P221CA0044.outlook.office365.com
- (2603:10b6:610:11d::27) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.10 via Frontend Transport; Wed, 8
- Jul 2026 21:03:35 +0000
+ id 6a4ebb29-08de-0a2a45060019-286bc8004b52-3
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Jul 2026 23:03:38 +0200
+Received: from DS1PR07CA0020.namprd07.prod.outlook.com (2603:10b6:8:44d::18)
+ by MW6PR12MB8707.namprd12.prod.outlook.com (2603:10b6:303:241::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.8; Wed, 8 Jul 2026
+ 21:03:33 +0000
+Received: from CY4PEPF0000E9D9.namprd05.prod.outlook.com
+ (2603:10b6:8:44d:cafe::8b) by DS1PR07CA0020.outlook.office365.com
+ (2603:10b6:8:44d::18) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.202.10 via Frontend Transport; Wed, 8
+ Jul 2026 21:03:33 +0000
 Received: from satlexmb08.amd.com (165.204.84.17) by
- CH3PEPF0000000C.mail.protection.outlook.com (10.167.244.39) with Microsoft
+ CY4PEPF0000E9D9.mail.protection.outlook.com (10.167.241.72) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Wed, 8 Jul 2026 21:03:34 +0000
+ 15.21.181.6 via Frontend Transport; Wed, 8 Jul 2026 21:03:32 +0000
 Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 8 Jul
- 2026 16:03:29 -0500
+ 2026 16:03:10 -0500
 Received: from ubuntu (10.180.168.240) by satlexmb09.amd.com (10.181.42.218)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 8 Jul
- 2026 14:03:29 -0700
+ 2026 14:02:46 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -70,20 +70,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UK3Gmy8oby9ofsA7T0E/gPoVclyD6ZOLaydoexBeXCIz1fFlNjpieWKjzCTzUsd8RgM7REz+H15HGSjd/uS0uBI3eYA/MWGx0YRNfyUvO6Z01RQRI3ObXiMq6ZooQ05/hVBPlP6Uq4ze78X5p12L6JPjtfN4eosKGH3ojPjL5hXha8umHA1UPpIt5f8Qf99E4jVgkQ2CijeHmY+FP5ShWOKP3By6AlxPIYeqHUbMMgt2Q25WsgQYDj5fOXsOE5ml9mR/3zEzZfyVHiXKRYalo5YI6TeMveurPF5UO2wdDguaQv1KE5/7Z4Wb1WPo64C4p2wfEYMuGmYsuVxAxsPpzQ==
+ b=Ds+Jnw6+Y13cP7or4zEp/SX7EBS0nFidmJBUFtYLuYJSuHClAbFlWGtVBofhERrjKgtBPQFQkohFVTNeUbTluBG9MRkj4q7HRCN4OzDJQu+7hJWqUFb4by+VYNVqjuPlEbJINND4QEyWK1vXsZZrsShOyBqZ557PlvYFgdKKeg3vKj3qnb+T14jKe4nn923LRpF+yixi9/mxni4B6m1FHFGOu1aBI5YP2x5F96vIov83Q8WA0nFkfr8s2EOfNRTPE6xkxbcYq8N/SNLBTBTJ721tXCwHfNpxY8yvAfTQz0Dsbmu6hsoEa4qCDRFAWY9k5nBPnY/TsT+0gJlFcriVtw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DSKtr1QODaGQ+yBMbiw0PTCEl6qNRjC3impW+6VKld0=;
- b=X5jNpdrDA6pjoEfMB6AFNa9ptHGbWzQmHzH/xTBUE8ZgqfFQXcrPNFXx1eszEZFhya4BDivLVFxjAtnfESslrRRQUmUE1/EHl1btXaVVhI18Km+IG5PFa2KeHNhcx9bdIPpLGofpomFII7jVtcZTIfuTQJ8ZfIkPRQ5a2D+Zifm1BVCvfg2ZSNanXgTDIHOJDB3dOtVmASNNEGPgATeBCbHshjRTtNJHviPBMU5kJ7EhD9zXG5x25qmNj5u80OCA/oCEdAWxYtiasDsSviFXaYMehEyfvONLZZtK5CBdMP4/uSDO7il7fFefLYFIjHn1po/nVpFkH9r6dTO79hHDGw==
+ bh=Re+/NsS2fHCdtWKJR3e8eS6UfUmnYG0QhSgvKlhrUAw=;
+ b=kOlUj9EZae2C+xc/H2eKbUT+oYXGm2iA/f9sNoMJavMR1LxGEF2GWhdd6EXL+k62GCWUIlqr6zpfeJvs4eEE4wXkYTJBVqrpEfCAGpaT1yG9Jwxur+LE4kNc74lpyQCKxTox2CaxhYdRK3VZjR4pNPzLka9r2n596pD+xIk662v1SIAayleBkATflxE0LYXkuVqvJ+dwR3yTv/cKAbH4iheMyCtux2qJQGw/HOy/zjewmP5yztnZYTw0jvTbG4TJRf264EPoBsTsFeMGYPZ+REaeXFt5j+cqzeRwfe9jMIM0xksVpOrAJsqEp/+Yz9y5P+GaPtHF8oW2mC6P7b4+vQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DSKtr1QODaGQ+yBMbiw0PTCEl6qNRjC3impW+6VKld0=;
- b=XFpvO2KXwvZarZn8GTxeguY5V7C8gXmAN1h/5Ann5Jh662tAr+q8yS1sUpjXl4DDQBYLnH4EAocq9qNFRchteyuvPnFtDtPDd4+A0jTZYgunNf5fCdC3bk9KNjvYj/5OvO79EVVYO24MBKYGGng9kXt3+s5BRBBqAaXYRb/WEzk=
+ bh=Re+/NsS2fHCdtWKJR3e8eS6UfUmnYG0QhSgvKlhrUAw=;
+ b=a6N+z8XSfbr5oPkHAZ7eTa7FF/k3TdJLQhfsNYClTQQWy38cmyJ37Sxl02pyDyUQ21sWCz0YmYB36Nv3ZdTK+lNhMLzKITUDzFTxRl8ESlWvQbHlCvkPFan5l/ADC+dmRq7sQv06d6jE60SRhu7CNGWOdbiqL8wAkOl8xdXwq7c=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -92,14 +92,16 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
 From: Stewart Hildebrand <stewart.hildebrand@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Roger Pau Monne <roger.pau@citrix.com>, Stewart Hildebrand
-	<stewart.hildebrand@amd.com>, Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v5 3/9] vpci: only check BAR validity once
-Date: Wed, 8 Jul 2026 17:02:18 -0400
-Message-ID: <20260708210233.922275-4-stewart.hildebrand@amd.com>
+CC: Stewart Hildebrand <stewart.hildebrand@amd.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, "Daniel P.
+ Smith" <dpsmith@apertussolutions.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, "Julien
+ Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v5 0/9] vpci: allow queueing of mapping operations
+Date: Wed, 8 Jul 2026 17:02:15 -0400
+Message-ID: <20260708210233.922275-1-stewart.hildebrand@amd.com>
 X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260708210233.922275-1-stewart.hildebrand@amd.com>
-References: <20260708210233.922275-1-stewart.hildebrand@amd.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
@@ -108,134 +110,123 @@ X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb09.amd.com
  (10.181.42.218)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PEPF0000000C:EE_|CH3PR12MB7667:EE_
-X-MS-Office365-Filtering-Correlation-Id: 317a639d-aaf4-41de-07e7-08dedd345fdd
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D9:EE_|MW6PR12MB8707:EE_
+X-MS-Office365-Filtering-Correlation-Id: 545fb8b2-e277-48aa-2309-08dedd345e7b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|82310400026|23010399003|376014|36860700016|13003099007|18002099003|22082099003|11063799006|56012099006;
+	BCL:0;ARA:13230040|23010399003|82310400026|36860700016|1800799024|376014|18002099003|13003099007|56012099006|11063799006;
 X-Microsoft-Antispam-Message-Info:
-	PJ/S7en6FHNjzOhtO5YbTP5LbdWA53G215p1RQGfHHiJVU2tFagmKAu/fhPl0TduAAu//wD3nf30PEeKjCddavYgaY8q1fAd70EldIP5ROzUQFzhWCV6TQJIa5sW1uQkYn8BS3V2Tn+wI+rA94r/P6UtPVfL8SbNdSORpUf4lDnY04fqpptjUEZdfqWWZb+9/MFImj+V2gC5SZphekNl5hLe65zTlwriYl2EckluxWw22TPvuJpuoDaFr980+JtNLusm0Jep6MQHHSnB0Wy9dWo/GWjQfgCgbx87DE1iWeCeRibDcuUTVMNKlZOXffjdL/YUx5LgCEQ0yStYbxLZkIv/fJXJ1upAENLJA4bgy7f0XtWwhasf2BVWTg3NGLJ1XAZhyyhLAw06HCWty4wPthPzFC7k5WBWAmMS2X3tDZPrp3ifkiqhPXJk/2/o8M7+lqBI7WA27pkt2DJZPQQndGocOvyy6sWB9TW/LitUzy3SWnG1XHnRXs+G8sWSsxoWznB7Y25/pNE6mAuei4McbIkvtauZ5raJqhOX5pxIAshCIdHUqh1VlXYn5v170JtPrM66Yqr9NEGTf07Q4yCgk4nQI/EOm9D3iyjB10jQB3QAsMT/nDmSGXiyy1sC21fTgCqMPwHvFCvklTMZqKmctRxJk2YPkUUSQieAYk63Vgz/PdEb3mJp/59ds/3XCDIh/8Zmx4RuXKG6o1zhiMzyDw==
+	zg5+ildCoGEyLggKOX8af2i0031h6E0NDmTN60AV0gOd1UvqIEMit99sk3QMEG3f4gftrhTp93htU77hOLVzOVbK1HRX/O5O53T/mSOBpzVBE+Nhop3JR7lnBJFwg6AucUznlBoNwXFUwLsVBb+DGp4t+HJPjhHhK3WvVpR0ViNBRDHfZGTE8rtkFThjWA9/AaUaT3R8xM6a0kwH2+gRH7qGKS61JtHmOsUOt9RbeoJGnYJagyFf6/vyMX/A0Ryg7iloWJJ0/Cr35zQYyQbgyAKPvo7J3+OdVGp/Hhn88EKNk4CR/CS00NuEwn9g0OfXPxkfWpkLzel/tiR4ZyPBZ+x77fy4n4CQdgXw2aCnK1O2BXz2LVTp9O97OpO+vYZoimPGF7/OOnO/3PmtBRYhAAaYb5QEtXRy/LlGGkzSxi17SRiknqCrxM1zzx5BHNOXFubGXJxAMoLmXr+kJzEwhilSxmlD5q7P/MLojDzTHzUh5HZEBvPwvzu3/DPRqJg3VANEegZnct+PFAg8f+dwxkz+neewuraCrL7w6+1LgvX3l6lZRkKEJXlk44r93e2h0fuwuFZJN1Lr6qThGR8X9xqfDCNKiaJIKMg4REpvfxO4iRTc0LHT1nJMsZVsysC95KUZHuQwgYyqdGVONcSDn5URoM3i5iqdaIFHca//mKk=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(23010399003)(376014)(36860700016)(13003099007)(18002099003)(22082099003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(82310400026)(36860700016)(1800799024)(376014)(18002099003)(13003099007)(56012099006)(11063799006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	p7EdcUcq/vmYTVI6FIFb21IpNJntPfhHMDC5ItGe6q19vs7sYeIvYSujPpPGizYXECH9XlavDVRJExMaIXvSFUG/jH3tGJ2+A/TpG1/gx2mYWHRyYMjk5EBDtBQyKHbfgLHJDk/oJlveNwpm2/KbL9l4gOPjQjeVmBRRaQuzDdWCPqgdC7ofzNOwnYDEtay+dEsvNpVE/WATsEVh/NRs6tfwA596Fqxq0LRxpQG4lj2WUngzqIUDamCMwiAhnv1NFe+V2y0VVz8wE3A/EmRtFpuloUxAANWhzyL21bLk1bAz6UUuNLyd9SEpARDiSBpq0SZQMF0Wv6974/8NQFfr1i21Z/LXcxPD4VHZYnDLENXIKah/46FeRFStYyZ/NEAeCdtC5RD8KxpAXJxgiDeRCdS/L2HU41+K9j89cZxGul4J0/qjnL61m5uIrSw8su1j
+	7A0U8J8/ZGIb06OO9NBzy0gPDsFDnABPpWkXVw3Xw4f6Q2a3Jr7izxUcu0jtqls/2BrTiA0936Rxtcqlr12CKEJO9eq0qozrj3nQPqdU6khcqMZJVKlvof4ybbqw4LoCPS0TvqCQWrOyBHbhdwvWSTqXt5QI9t6VSynE29Tlun2CBKS1srIe64W94+2ow8ZuT1dH0AeuuXn6IFLc85yooOxO8slg/Y5c0TB8VbeklYvctZLxwRFGSB2pL1/g4t4fVxVKWaQ3JGFMXvHaEJLpN84GBqV4st89C4zYde0+4KiSCyxrRgkJfr3JRGAiyPjeVtNHMEBYP0+89fpcwS3n2PsEiH++CRdNm+B5gxxyG2o15J/JSigpMfRbRtcL3lkmno+VvC0LQaxGW2gpX5yeoy3UAG2MV9VvX6X7SI2KDSoIljmchmczSJkJdztsNtTS
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2026 21:03:34.9008
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2026 21:03:32.5510
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 317a639d-aaf4-41de-07e7-08dedd345fdd
+X-MS-Exchange-CrossTenant-Network-Message-Id: 545fb8b2-e277-48aa-2309-08dedd345e7b
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CH3PEPF0000000C.namprd04.prod.outlook.com
+	CY4PEPF0000E9D9.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB7667
-X-purgate-ID: tlsNG-16d1c6/1783544619-C513768D-AB82D982/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR12MB8707
+X-purgate-ID: tlsNG-16d1c6/1783544618-F93EC68D-F9F71883/0/0
 X-purgate-type: clean
-X-purgate-size: 3969
+X-purgate-size: 4448
 
-From: Roger Pau Monne <roger.pau@citrix.com>
+Introduce the ability to queue p2m mapping operations in vPCI. This is
+pre-requisite for both vPCI SR-IOV [2] and the ability to handle BAR writes
+with memory decoding enabled [1]. I thought I might wait to submit the BAR-
+write-with-memory-decoding-enabled patch until the prerequisite is reviewed
+acked/merged, but if you'd find it more helpful for me to submit it right away
+I'd be happy to do so (I've already pushed it to the gitlab pipeline [0]).
 
-The BAR validity checks in modify_decoding() are redundant since they
-are already done in modify_bars().
+When multiple operations are queued, there are some non-trivial complexities
+with the deferred setting of bar->enabled, header->rom_enabled, and
+header->bars_mapped flags. If deferred, these flags wouldn't be updated until
+the p2m op queue is processing, but we need to consult them in modify_bars()
+at queue time, so they wouldn't be accurate when adding multiple tasks to the
+queue. In order to simplify the deferred mapping state, and in particular
+avoid complexities with the bar->enabled, header->rom_enabled, and
+header->bars_mapped flags, I have picked up Roger's vPCI fixes series [3]. The
+overall result is now that _only_ p2m operations are deferred. PCI config
+space writes, flag-setting, and everything else is handled at queuing time.
 
-Avoid multiple calls to pci_check_bar() for the same memory decoding
-related operation, as each call can possibly print a warning message
-about a BAR being in an invalid position.
+1. vpci: move BAR mapping permissions checks
+2. vpci: make BAR mapping more resilient for the hardware domain
+3. vpci: only check BAR validity once
+4. vpci/msix: move MSI-X hole punching as a result of memory decoding enable
+5. vpci: simplify handling of memory decoding and ROM enable writes
+6. vpci: create mem local variables
+7. vpci: split vpci_process_pending()
+8. vpci: allow queueing of mapping operations
+9. vpci: don't pass command value to modify_bars()
 
-Further, there's no need to defer setting bar->enabled until p2m
-operations are finished. It can safely be set in modify_bars() itself.
-This slightly changes the meaning of the bar->enabled flag: when true,
-it means a BAR is either mapped or queued to be mapped. Store whether
-the BAR is validly positioned in modify_bars(), and use the cached value
-for setting bar->enabled.
+Patch 1 is code movement, and patch 2 is hardening map_range(). While these
+ first 2 are not strictly pre-requisites for queued mapping, they simplify the
+ subsequent prepwork.
+Patches 3-5 progressively remove modify_decoding().
+Patches 6-7 are non-functional changes pulled out from patch 8.
+Patch 8 is the core feature: pre-requisite for SR-IOV and BAR-write-with-
+ memory-decoding-enabled.
+Patch 9 is cleanup I chose to put at the end for lower diffstat.
 
-Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Fixes: 4acab25a9300 ('x86/vpci: fix handling of BAR overlaps with non-hole regions')
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
----
-v1->v5:
-* rebase
-* don't defer setting bar->enabled
-* use local variable for bar_valid flag
+Patches 2-5 are borrowed from Roger's vPCI fixes series [3]. These patches
+have gone directly from v1 to v5, but otherwise revlogs are written assuming
+this is a continuation of the BAR-write-with-memory-decoding-enabled series.
 
-Original report [1]:
-[1] https://lore.kernel.org/xen-devel/dbc003a2-9202-46ec-bf87-2829d8a63d53@citrix.com/
----
- xen/drivers/vpci/header.c | 18 +++++++++---------
- xen/include/xen/vpci.h    |  2 +-
- 2 files changed, 10 insertions(+), 10 deletions(-)
+v4->v5:
+* don't defer anything that's not p2m related
+* drop ("vpci: allow 32-bit BAR writes with memory decoding enabled") for now
+  to focus on the pre-requisite patches first
+* split non-functional changes
 
-diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index 9f2d0c8a5452..1fd4832033e9 100644
---- a/xen/drivers/vpci/header.c
-+++ b/xen/drivers/vpci/header.c
-@@ -128,19 +128,10 @@ static void modify_decoding(const struct pci_dev *pdev, uint16_t cmd,
-             uint32_t val = bar->addr |
-                            (map ? PCI_ROM_ADDRESS_ENABLE : 0);
- 
--            if ( pci_check_bar(pdev, _mfn(PFN_DOWN(bar->addr)),
--                               _mfn(PFN_DOWN(bar->addr + bar->size - 1))) )
--                bar->enabled = map;
-             header->rom_enabled = map;
-             pci_conf_write32(pdev->sbdf, rom_pos, val);
-             return;
-         }
--
--        if ( !rom_only &&
--             (bar->type != VPCI_BAR_ROM || header->rom_enabled) &&
--             pci_check_bar(pdev, _mfn(PFN_DOWN(bar->addr)),
--                           _mfn(PFN_DOWN(bar->addr + bar->size - 1))) )
--            bar->enabled = map;
-     }
- 
-     /*
-@@ -296,6 +287,7 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
-     struct pci_dev *tmp;
-     const struct domain *d;
-     const struct vpci_msix *msix = pdev->vpci->msix;
-+    bool bar_valid[ARRAY_SIZE(header->bars)] = { false };
-     unsigned int i, j;
-     int rc;
- 
-@@ -341,6 +333,8 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
- 
-         ASSERT(rangeset_is_empty(bar->mem));
- 
-+        bar_valid[i] = true;
-+
-         /*
-          * Make sure that the guest set address has the same page offset
-          * as the physical address on the host or otherwise things won't work as
-@@ -506,6 +500,12 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
-         d = dom_xen;
-     }
- 
-+    for ( i = 0; i < ARRAY_SIZE(header->bars); i++ )
-+    {
-+        if ( bar_valid[i] )
-+            header->bars[i].enabled = cmd & PCI_COMMAND_MEMORY;
-+    }
-+
-     if ( system_state < SYS_STATE_active )
-     {
-         /*
-diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
-index 877aa391d178..ab94eb60d65f 100644
---- a/xen/include/xen/vpci.h
-+++ b/xen/include/xen/vpci.h
-@@ -64,7 +64,7 @@ struct vpci {
-                 VPCI_BAR_ROM,
-             } type;
-             bool prefetchable : 1;
--            /* Store whether the BAR is mapped into guest p2m. */
-+            /* Whether the BAR is mapped or queued for mapping in guest p2m. */
-             bool enabled      : 1;
-         } bars[PCI_HEADER_NORMAL_NR_BARS + 1];
-         /* At most 6 BARS + 1 expansion ROM BAR. */
+v3->v4:
+* switch back to dynamically allocated queue elements
+
+v2->v3:
+* add ("vpci: Use pervcpu ranges for BAR mapping")
+* rework with fixed array of map/unmap slots
+
+v1->v2:
+* new approach with queued p2m operations
+
+RFC->v1:
+* rework BAR mapping machinery to support unmap-then-map operation
+
+[0] Pipeline: https://gitlab.com/xen-project/people/stewarthildebrand/xen/-/pipelines/2662651745
+
+[1] BAR write with memory decoding enabled
+v4: https://lore.kernel.org/xen-devel/20260406191203.97662-1-stewart.hildebrand@amd.com/T/#t
+v3: https://lore.kernel.org/xen-devel/20260324030513.700217-1-stewart.hildebrand@amd.com/T/#t
+v2: https://lore.kernel.org/xen-devel/20250723163744.13095-1-stewart.hildebrand@amd.com/T/#t
+v1: https://lore.kernel.org/xen-devel/20250531125405.268984-1-stewart.hildebrand@amd.com/T/#t
+RFC: https://lore.kernel.org/xen-devel/20250312195019.382926-1-stewart.hildebrand@amd.com/T/#t
+Gitlab: https://gitlab.com/xen-project/xen/-/issues/197
+
+[2] vPCI SR-IOV
+v3: https://lore.kernel.org/xen-devel/cover.1775742115.git.mykyta_poturai@epam.com/T/#t
+v2: https://lore.kernel.org/xen-devel/cover.1772806036.git.mykyta_poturai@epam.com/T/#t
+v1: https://lore.kernel.org/xen-devel/cover.1753450965.git.mykyta_poturai@epam.com/T/#t
+2018 v2 https://lore.kernel.org/xen-devel/20180717094830.54806-1-roger.pau@citrix.com/T/#t
+
+[3] vPCI miscellaneous fixes
+https://lore.kernel.org/xen-devel/20250814160358.95543-1-roger.pau@citrix.com/T/#t
+
+
+ xen/common/domain.c        |   5 +
+ xen/drivers/vpci/header.c  | 443 +++++++++++++++++++++----------------
+ xen/drivers/vpci/private.h |   1 +
+ xen/drivers/vpci/vpci.c    |  17 +-
+ xen/include/xen/vpci.h     |  15 +-
+ 5 files changed, 279 insertions(+), 202 deletions(-)
+
+
+base-commit: 03851197a7b2cd58851b9ec2293bdf4a68c47b66
 -- 
 2.54.0
 
