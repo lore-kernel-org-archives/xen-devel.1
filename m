@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 237B4C43458
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jul 2026 21:04:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1357348.1611770 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D42DC43458
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jul 2026 21:04:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1357349.1611779 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1whZQl-0003bH-9J; Wed, 08 Jul 2026 21:03:43 +0000
+	id 1whZQo-0003pj-G5; Wed, 08 Jul 2026 21:03:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1357348.1611770; Wed, 08 Jul 2026 21:03:43 +0000
+Received: by outflank-mailman (output) from mailman id 1357349.1611779; Wed, 08 Jul 2026 21:03:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1whZQl-0003bA-5m; Wed, 08 Jul 2026 21:03:43 +0000
-Received: by outflank-mailman (input) for mailman id 1357348;
- Wed, 08 Jul 2026 21:03:41 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1whZQo-0003pc-Co; Wed, 08 Jul 2026 21:03:46 +0000
+Received: by outflank-mailman (input) for mailman id 1357349;
+ Wed, 08 Jul 2026 21:03:44 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Stewart.Hildebrand@amd.com>) id 1whZQj-0003Bb-El
- for xen-devel@lists.xenproject.org; Wed, 08 Jul 2026 21:03:41 +0000
+ (envelope-from <Stewart.Hildebrand@amd.com>) id 1whZQm-0003j1-IY
+ for xen-devel@lists.xenproject.org; Wed, 08 Jul 2026 21:03:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1whZQi-001FOW-Rv
- for xen-devel@lists.xenproject.org; Wed, 08 Jul 2026 23:03:40 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1whZQl-00BD5T-D8
+ for xen-devel@lists.xenproject.org; Wed, 08 Jul 2026 23:03:43 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Stewart.Hildebrand@amd.com>)
- id 6a4ebb18-5cb7-0a2a0a5109dd-0a2a4506bcd2-26
- for <xen-devel@lists.xenproject.org>; Wed, 08 Jul 2026 23:03:40 +0200
-Received: from [52.101.61.59]
- (helo=DM1PR04CU001.outbound.protection.outlook.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a4ebaf3-e002-0a2a0a5209dd-0a2a45079420-46
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Jul 2026 23:03:43 +0200
+Received: from [52.101.57.60]
+ (helo=BN8PR05CU002.outbound.protection.outlook.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Stewart.Hildebrand@amd.com>)
- id 6a4ebb2b-08de-0a2a45060019-34653d3b3f23-3
- for <xen-devel@lists.xenproject.org>; Wed, 08 Jul 2026 23:03:40 +0200
-Received: from CH0P221CA0026.NAMP221.PROD.OUTLOOK.COM (2603:10b6:610:11d::6)
- by DM6PR12MB4435.namprd12.prod.outlook.com (2603:10b6:5:2a6::23) with
+ id 6a4ebb2d-9c8e-0a2a45070019-3465393c8e62-3
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Jul 2026 23:03:42 +0200
+Received: from DS1PR07CA0018.namprd07.prod.outlook.com (2603:10b6:8:44d::13)
+ by CH3PR12MB8234.namprd12.prod.outlook.com (2603:10b6:610:125::16) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.14; Wed, 8 Jul
- 2026 21:03:36 +0000
-Received: from CH3PEPF0000000C.namprd04.prod.outlook.com
- (2603:10b6:610:11d:cafe::16) by CH0P221CA0026.outlook.office365.com
- (2603:10b6:610:11d::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.8; Wed, 8 Jul 2026
+ 21:03:34 +0000
+Received: from CY4PEPF0000E9D9.namprd05.prod.outlook.com
+ (2603:10b6:8:44d:cafe::6) by DS1PR07CA0018.outlook.office365.com
+ (2603:10b6:8:44d::13) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.202.10 via Frontend Transport; Wed, 8
- Jul 2026 21:03:36 +0000
+ Jul 2026 21:03:34 +0000
 Received: from satlexmb08.amd.com (165.204.84.17) by
- CH3PEPF0000000C.mail.protection.outlook.com (10.167.244.39) with Microsoft
+ CY4PEPF0000E9D9.mail.protection.outlook.com (10.167.241.72) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Wed, 8 Jul 2026 21:03:36 +0000
+ 15.21.181.6 via Frontend Transport; Wed, 8 Jul 2026 21:03:33 +0000
 Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 8 Jul
- 2026 16:03:35 -0500
+ 2026 16:03:18 -0500
 Received: from ubuntu (10.180.168.240) by satlexmb09.amd.com (10.181.42.218)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 8 Jul
- 2026 14:03:35 -0700
+ 2026 14:03:15 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -70,20 +70,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=m8Qei/p0jHBxVkppaYSnNj2hwlvYj61LHN9PG9QzAb5uDaFegy+CirUSa+kOC58H4qTT25EYOcp3VRfTk4cd8UKlCAqT3NnLK13m4BmqWOUlVDBLXfsxyadHQDKGlxE6fKHjjYtQHjjXB1BLCwSE27iHKMb6FDVQSBzfP7SDZ9guBLO0umV7GAjAdGa5MwydI8x4ZvKYXZEDquFxFc269Dz6ple9z2OZc2YPKLExVf3e9yGfrC9joaZYYcXwVKDvEVunkv/u8m4BOU6RgYSzYZT8Ur6djQjXDekv+U8yUOqIyTDo/fsdJvU0FKDmE3W9CDeUfy0EZJUkSD93K2GOgA==
+ b=cBd69AFckwXcGfxN159ZrR3dqKHiqHQaMPcROPcKBoLbmMjKPOW+uYfiuKGqSOrRgzn62n86tHDjo+FUfCCM1+BZ5vd8r60Dm0bLMsReh+WpTo1M3c8jl+dqO6FpSI54Qa1BysBeZgO6P6IdaznKXmT3uUl1MX2NB8jNupIvJLTXz2USYQySSTyIHckfkgpzCjYODP43pC+uR3lNK8UhI4gBZR9vf3Ar66u+rHEKW88gjHczK3nz45tfTiSXTsMSxYE8mdll6ppnShb5betSl+1+fH2+9Z7aFZixQGxricrzLnWVjwOQudhx2V/o6Mhwx7ekse/b2QFg/CxGUzbiXQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gcreZ/yNtHeipp+IQwqa98GHDSr0hRONrQURcLHiG7E=;
- b=HOgt5qZEI5C5QHPu07RmSKBb192DvLpmVVWFHsqz7O01ljRTeJLqAiIKvk8he+r8Fku0aeo4IQ8IVz5D2Y/AF1yuXjUa55IqsaiUUJ2FwThnK99M5zLoCiS6pmtYROgoLB2PyJFtEowrCXaYJ0MZXvRjQ+hrTMFSxFR9WD0fTRicl13mdqI8mV3/XUArSbCxWEsNCXFWYjvLOmXDxftTIi3sNYHWY2CsfoYVCTewWk+vg4WUuMqVMbmRJbKXG90f04fe480QKMmdZpIMkZwpNdP5hK8fFLrYd3F21qbRkOBgXyipuNVYZnuR775SWDCYQkyPSsYKShfILlv4L03/dw==
+ bh=VMH2OpeOLM8+juWpQGgzXCROZP9A2bpoLNjB3cnaChc=;
+ b=Xei8wWjrcjqCuMM2RaR9bGum22z+MGnsrqWNx++heMakBTNyWxXBkOd649Sk8LAfqvO8CnB3gO0a/VVAjPx7l7Z/AyJ0TDLLXwxa4QzLX+Lh5OOKneOcA2WfUWa8/RlRlzc2varvSknriu0EAOj54sqinDWwjwAzgFdlvx8fEFiDA6IIahKv5wmTHNxi+9hY6JRsee8Ibd+bLY2WCPTfBfdrdKH1a9Hil+Hi6Tjv9qPw2F7FFiXvqmKtOMO1x4Yx8w4qrGaxNPhk71gv4QsdueEDiP7Tocv2gV8dKjL+xQzawC9ixfJDuBplPfrTy34ZSb4yvmQTSLBCAqHBw2WbmQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gcreZ/yNtHeipp+IQwqa98GHDSr0hRONrQURcLHiG7E=;
- b=jNU0tXHPcDcstPRTzyN2/hTZbCdbHANW/jLfnX1ojOEFVBr/PJROuCq1GIlsbziRJPcF7oWXWkYiBhGMoE9yUrniakDvb/mX7DJokLoIytvLHz5mKotFTuQDq1FDC1tgdDgTTtP4fs+VIEb8GBMMcxnyTffVJGCh3/UKC4Ikfmc=
+ bh=VMH2OpeOLM8+juWpQGgzXCROZP9A2bpoLNjB3cnaChc=;
+ b=WGG9z+vF7ek6jI9gxqcvqwwfW6tt9dXp+X3oKaeEjpgYe7kcfV/ncI5XgP8/98kv2/dgyMbACGswcLLVIxN7EtazDAgjmUZ9U0qMZp4tDT01esXd+A3XXoAyu1dgNBfmwpqjHOd6UxO0AOUO0llsm1fvL8FqABFeLeZYyVxy5Js=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -92,150 +92,124 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
 From: Stewart Hildebrand <stewart.hildebrand@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Roger Pau Monne <roger.pau@citrix.com>, Stewart Hildebrand
-	<stewart.hildebrand@amd.com>
-Subject: [PATCH v5 4/9] vpci/msix: move MSI-X hole punching as a result of memory decoding enable
-Date: Wed, 8 Jul 2026 17:02:19 -0400
-Message-ID: <20260708210233.922275-5-stewart.hildebrand@amd.com>
+CC: Stewart Hildebrand <stewart.hildebrand@amd.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, "Daniel P.
+ Smith" <dpsmith@apertussolutions.com>
+Subject: [PATCH v5 1/9] vpci: move BAR mapping permissions checks
+Date: Wed, 8 Jul 2026 17:02:16 -0400
+Message-ID: <20260708210233.922275-2-stewart.hildebrand@amd.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260708210233.922275-1-stewart.hildebrand@amd.com>
 References: <20260708210233.922275-1-stewart.hildebrand@amd.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-Originating-IP: [10.180.168.240]
 X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb09.amd.com
  (10.181.42.218)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PEPF0000000C:EE_|DM6PR12MB4435:EE_
-X-MS-Office365-Filtering-Correlation-Id: 84d4b59f-4dd8-4687-66ac-08dedd34608c
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D9:EE_|CH3PR12MB8234:EE_
+X-MS-Office365-Filtering-Correlation-Id: 12c03e06-8427-4e0e-ef31-08dedd345f49
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|36860700016|376014|82310400026|23010399003|13003099007|18002099003|22082099003|6133799003|5023799004|56012099006|11063799006;
+	BCL:0;ARA:13230040|36860700016|1800799024|376014|82310400026|23010399003|18002099003|22082099003|56012099006|11063799006;
 X-Microsoft-Antispam-Message-Info:
-	nTJloavw2r/OWjTKnO87BfrHsBsF3i3Qy1iciNJ+EuKy0DRU6+rrnrg/Gs5iF05hCGa0Px2oEjfiOlxxiHc16tpod1mXUtkbzeBQT8xOHQG01jn8TX8Ysqo4RvayBQu6BlSmsBR0LEk7Ym8bq4qVcKIQ7wRnSQVhmgOX57HN5ZkqHzJPxfFkO0dDqx9eBt7OHzV+MvMyljiwDZ9W5C/Gdsb3zQPdfHugVahj4KiqrS6upqLyy88t5dSmDvu4D27nNYRNR6gq/YRoKrmWp8qgtQ22s+0f3vElXO52w57XuG6kvbYmO4s5I9WpI4aO1tHmMTZplsgmjOI/B/dM0xAmweKD1fw7Gu/miBbimb0TsoM0Pl8Nz4sa2lVaoGzVBccX9v8VAnrxsj0AT1Bs0iGtpPbSuWRCWNbktcbF+fcATL6512q7CJMbVKQ5B70/He8c6SzfdSnH3A9OnaHG0kb27fLfQB7X09UQvJXCtFYTUmvt2gGGqaItt1l+T8hUvx8EczN9JaeRBIpqlJRKpt6Djq5HkNCnQdFsJWz8SS4qZ8k9I+bszs+oAcG8p6MlRiVrhCPNpzeNfEydRqve/m1BJIfG2BvTgKaFe+x3/S0emcXy9braB+2NeNWnXhFf+0ShYcuyKH5jpyhtIrI1MPL18Ui4YLlxxe4RhwyhPuyz1zOAmqmqheCxmxWvAB8g+Rpyhk0+ddTQYiSq0oqLoKKYyA==
+	YK/CRFC7v5jXTdS3MAIU5GVlvNro234PO7Rq3+hwOP0jdqSbitQ8DnLyrvMFlrE2eBE4YA4jDUc6y2QLxeBoqtFEOFxYEW2QnEjYdEJ0uOLhUt7HPDhCTKwE3kBATyhGfJzZEPcIkSU2Y0w2JllvyOR7zTHab+X/FbyC/62+0iYPTdrCB7Vu96/vFVKe3f+/bOYdkLsT5T4WmNMd6LL4/m9x9J1jSMz57S9aWW5Dl/gMb6UChs0esb+/orhpYisFmZoTvzJ3X8sM0aUR599OGfsx7jNKPuGqtSTDrwUkarqNhNANcJlgYkQz74LmNI9WgOmDq2bC1COHrNzz3UjVTau6e9ocFzQUgByMYfDSjWmJPr1acFMLco/Rkb7LYB2yJIAA8HGeLrVTNOJg2E9wouQt1AgXGWXd8sIZWexpkNih803o73E/h1bHzh1lyjOEerriEIOKbdRko7zJfda83JwzUVxU7VPXELcrmbNfD6JRBHEkiLj/I/IAf5GX4uX2L2uJaSvYwdBpy7BpHKkq7XIZV8qra/FS6PScV0biPo6rYZwxK41ojZX2O7iEOhVguU/HN2VEVonF/qwr77ygCjco9S+g2thfeqk5lguIqMiKfDpjqVm4/K+LNYHEwQnF5QyZWlH6aHIn+pVMqDa2V3TaFjgLp5QjOLVKCWrdmm95aRXD9V3hM6y0qIo0nqGd91HOx04NJWfavX08+j4iDw==
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700016)(376014)(82310400026)(23010399003)(13003099007)(18002099003)(22082099003)(6133799003)(5023799004)(56012099006)(11063799006);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(1800799024)(376014)(82310400026)(23010399003)(18002099003)(22082099003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	GloOGldQnjkyzuD6i1217oRt2UlaGYTJaXvKxYAyXK4jgbanu+LquN2e0iLMYjC/sm5i+LyBzSUfV/qQkIAnj3CSOWrQGU5VyQJbDuM/yRZohUmrLuGZeZe4uGKad+Io/PA9LP/Rnc+H+rwL63N8AUSVrkxvTPBo4zWy06b3l9zRI9buxiYkRkYgTTbI7f+L+ri1LKc24VSUFO9Tc0RSdhR4c06QrbAmumE9pdB/4SdNPqFC22oohzQTyfcZGYSgCy9tICp0kp6/D2c71gyvAmy3FewY/puTXaOs9gtsz8zcEYsfrVGd+pqs24CWEGb4bUGF7aPRrV/rdxvJwjHvlW8ijNaubwA7x6kpisLaSDnPnMu0dFmsAzTJekMf17XL09PfQzg/nAoMwXCjib33HuI7XEGsigwf/7qDFWTmTW1U5kGScTyGHGR0roE8p7Fx
+	pRnIGqFpTfdkn2mEgt1ONrWuYR9tzZ9a63sbQLchIaYtfUsTFdlZF/Jh6LjM0sY0/8cfwiuUlkTK9e/6mXkTLGp+lFDYdHA4Y5GvUxK46JJ3N9jdvzWAiKtR8JJNI20IzZZx5/ejqAweZ1PUWjRQe4GLZBR7h72x+66GIs6FI6PGwcPwEP9joXYD9m9qbUpbvMAPzRhTiOeXpQM2alx8p8+m/B0hxLTWsibRux9F5AyvkeURFaxlD+1/h5rzOX0Oll0QpsfQyGro0sH1IvYomlZP163zQ1Ntf50xdsXp9WLiLpHeewGuAM8l83HzQ3eNgq0ezfd+0Ka4II4NaMtuzgAeVtzJ7+t4EGTERAJJzQ/yB05S2AOtbYn5I7BEdiRpyeuSe4tMYW70wYDeXjq06X0nh5JGMs6J9M/mfz2YoU73D6TG/PTMIjMSjee9/DCI
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2026 21:03:36.0791
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2026 21:03:33.9071
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 84d4b59f-4dd8-4687-66ac-08dedd34608c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 12c03e06-8427-4e0e-ef31-08dedd345f49
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CH3PEPF0000000C.namprd04.prod.outlook.com
+	CY4PEPF0000E9D9.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4435
-X-purgate-ID: tlsNG-16d1c6/1783544620-F81E568D-655A63EA/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8234
+X-purgate-ID: tlsNG-ef75cf/1783544623-145FC25E-C2C5DDF4/0/0
 X-purgate-type: clean
-X-purgate-size: 4042
+X-purgate-size: 2667
 
-From: Roger Pau Monne <roger.pau@citrix.com>
+There's no need to defer the permissions checks. Perform them right away
+in modify_bars().
 
-Deferring the p2m unpopulate of the MSI-X table region to after the BARs are
-mapped in the p2m is not needed.  The aim of vpci_make_msix_hole() is to
-cope with the BAR containing the MSI-X table being positioned over a
-reserved e820 region, by making sure the MSI-X table region is
-unpopulated on the p2m. Note that reserved e820 regions are identity mapped
-in the hardware domain p2m by default.
+As a result of the move, the permissions checks will now cover the whole
+BAR before any holes are removed.
 
-Doing it before or after the BAR p2m changes are done is irrelevant, hence
-do it ahead of the p2m changes, as that's simpler.
+Carry over the domain_crash() in the error path for domUs.
 
-Note that vpci_make_msix_hole() should be invoked strictly after setting
-bar->enabled. The movement of vpci_make_msix_hole() is OK since
-bar->enabled is set in modify_bars().
-
-Take the opportunity to store the memory decoding enabled bit in a local
-variable.
-
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
 ---
-Note that this should not be committed until after the bar->enabled
-setting movement in ("xen/vpci: only check BAR validity once")
-
-I tested this with hot-plug as described in 7c24d58a6e64 ("vpci/msix:
-check for BARs enabled in vpci_make_msix_hole").
-
-The return at the end of the function will gain a purpose again after a
-later code movement patch in the series.
-
-The new_enabled variable will gain 2 additional uses later in the series.
-
-v1->v5:
-* order after ("xen/vpci: only check BAR validity once")
-* preserve behavior of only invoking vpci_make_msix_hole() when memory
-  decoding toggles from 0 to 1
-* add note about vpci_make_msix_hole() invocation after setting bar->enabled
-* use local variable
-* Jan offered an R-b tag in [1], though I hesitated to pick it up due to
-  changes, and it was offered prior to 7c24d58a6e64 going upstream
-[1] https://lore.kernel.org/xen-devel/e2c4944d-d089-490c-879d-b6baec5e4cae@suse.com/
+v5: new patch
 ---
- xen/drivers/vpci/header.c | 22 ++++++++--------------
- 1 file changed, 8 insertions(+), 14 deletions(-)
+ xen/drivers/vpci/header.c | 40 +++++++++++++++++++++------------------
+ 1 file changed, 22 insertions(+), 18 deletions(-)
 
 diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index 1fd4832033e9..cf9d0bac8876 100644
+index d1c92cf77f8a..5ac525036672 100644
 --- a/xen/drivers/vpci/header.c
 +++ b/xen/drivers/vpci/header.c
-@@ -134,19 +134,6 @@ static void modify_decoding(const struct pci_dev *pdev, uint16_t cmd,
-         }
-     }
- 
--    /*
--     * Make sure there are no mappings in the MSIX MMIO areas, so that accesses
--     * can be trapped (and emulated) by Xen when the memory decoding bit is
--     * enabled.
--     *
--     * FIXME: punching holes after the p2m has been set up might be racy for
--     * DomU usage, needs to be revisited.
--     */
--#ifdef CONFIG_HAS_PCI_MSI
--    if ( map && !rom_only && vpci_make_msix_hole(pdev) )
--        return;
--#endif
+@@ -58,24 +58,6 @@ static int cf_check map_range(
+          * offset of the current address from the BAR start.
+          */
+         unsigned long map_mfn = start_mfn + s - start_gfn;
+-        unsigned long m_end = map_mfn + size - 1;
 -
-     if ( !rom_only )
-     {
-         pci_conf_write16(pdev->sbdf, PCI_COMMAND, cmd);
-@@ -529,6 +516,7 @@ static void cf_check cmd_write(
-     const struct pci_dev *pdev, unsigned int reg, uint32_t cmd, void *data)
- {
-     struct vpci_header *header = data;
-+    bool new_enabled = cmd & PCI_COMMAND_MEMORY;
+-        if ( !iomem_access_permitted(map->d, map_mfn, m_end) )
+-        {
+-            printk(XENLOG_G_WARNING
+-                   "%pd denied access to MMIO range [%#lx, %#lx]\n",
+-                   map->d, map_mfn, m_end);
+-            return -EPERM;
+-        }
+-
+-        rc = xsm_iomem_mapping_vpci(XSM_HOOK, map->d, map_mfn, m_end, map->map);
+-        if ( rc )
+-        {
+-            printk(XENLOG_G_WARNING
+-                   "%pd XSM denied access to MMIO range [%#lx, %#lx]: %d\n",
+-                   map->d, map_mfn, m_end, rc);
+-            return rc;
+-        }
  
-     if ( !is_hardware_domain(pdev->domain) )
-     {
-@@ -546,7 +534,7 @@ static void cf_check cmd_write(
-      * decoding one. Bits that are not allowed for DomU are already
-      * handled above and by the rsvdp_mask.
-      */
--    if ( header->bars_mapped != !!(cmd & PCI_COMMAND_MEMORY) )
-+    if ( header->bars_mapped != new_enabled )
          /*
-          * Ignore the error. No memory has been added or removed from the p2m
-          * (because the actual p2m changes are deferred in defer_map) and the
-@@ -556,6 +544,12 @@ static void cf_check cmd_write(
-         modify_bars(pdev, cmd, false);
-     else
-         pci_conf_write16(pdev->sbdf, reg, cmd);
-+
-+#ifdef CONFIG_HAS_PCI_MSI
-+    /* Unpopulate MSI-X table region, so accesses trap into Xen. */
-+    if ( !header->bars_mapped && new_enabled && vpci_make_msix_hole(pdev) )
-+        return;
-+#endif
- }
+          * ARM TODOs:
+@@ -369,6 +351,28 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
+             return -EINVAL;
+         }
  
- static uint32_t cf_check guest_cmd_read(
++        if ( !iomem_access_permitted(pdev->domain, start, end) )
++        {
++            printk(XENLOG_G_WARNING
++                   "%pd denied access to MMIO range [%#lx, %#lx]\n",
++                   pdev->domain, start, end);
++            if ( !is_hardware_domain(pdev->domain) )
++                domain_crash(pdev->domain);
++            return -EPERM;
++        }
++
++        rc = xsm_iomem_mapping_vpci(XSM_HOOK, pdev->domain, start, end,
++                                    !!(cmd & PCI_COMMAND_MEMORY));
++        if ( rc )
++        {
++            printk(XENLOG_G_WARNING
++                   "%pd XSM denied access to MMIO range [%#lx, %#lx]: %d\n",
++                   pdev->domain, start, end, rc);
++            if ( !is_hardware_domain(pdev->domain) )
++                domain_crash(pdev->domain);
++            return rc;
++        }
++
+         rc = rangeset_add_range(bar->mem, start_guest, end_guest);
+         if ( rc )
+         {
 -- 
 2.54.0
 
