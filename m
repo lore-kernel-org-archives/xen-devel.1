@@ -4,41 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D167C43458
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jul 2026 05:09:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1357501.1611886 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B82F6C44501
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Jul 2026 06:37:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1357546.1611923 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1whh0f-0007ZE-Uy; Thu, 09 Jul 2026 05:09:17 +0000
+	id 1whiNW-0004FT-Nt; Thu, 09 Jul 2026 06:36:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1357501.1611886; Thu, 09 Jul 2026 05:09:17 +0000
+Received: by outflank-mailman (output) from mailman id 1357546.1611923; Thu, 09 Jul 2026 06:36:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1whh0f-0007Z7-SC; Thu, 09 Jul 2026 05:09:17 +0000
-Received: by outflank-mailman (input) for mailman id 1357501;
- Thu, 09 Jul 2026 05:09:17 +0000
+	id 1whiNW-0004FM-Kt; Thu, 09 Jul 2026 06:36:58 +0000
+Received: by outflank-mailman (input) for mailman id 1357546;
+ Thu, 09 Jul 2026 06:36:57 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brchuckz@aol.com>) id 1whh0f-0007Z1-6U
- for xen-devel@lists.xenproject.org; Thu, 09 Jul 2026 05:09:17 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1whiNU-0004FG-Jc
+ for xen-devel@lists.xenproject.org; Thu, 09 Jul 2026 06:36:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1whh0e-001k4z-CT
- for xen-devel@lists.xenproject.org; Thu, 09 Jul 2026 07:09:16 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1whiNT-001z7i-DP
+ for xen-devel@lists.xenproject.org; Thu, 09 Jul 2026 08:36:55 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <brchuckz@aol.com>)
- id 6a4f2ce7-2eae-0a2a0a5409dd-0a2a450781b8-40
- for <xen-devel@lists.xenproject.org>; Thu, 09 Jul 2026 07:09:15 +0200
-Received: from [98.137.69.32] (helo=sonic316-8.consmr.mail.gq1.yahoo.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <brchuckz@aol.com>)
- id 6a4f2cfa-9c8e-0a2a45070019-628945208102-3
- for <xen-devel@lists.xenproject.org>; Thu, 09 Jul 2026 07:09:15 +0200
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic316.consmr.mail.gq1.yahoo.com with HTTP; Thu, 9 Jul 2026 05:09:13 +0000
-Received: by hermes--production-ne1-7568ccb994-mqdhs (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID da73cafa7d25cff72b3b6899257e7b9a; 
- Thu, 09 Jul 2026 05:09:12 +0000 (UTC)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a4f4175-5cb7-0a2a0a5109dd-0a2a45098b32-38
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Jul 2026 08:36:54 +0200
+Received: from [40.93.198.44]
+ (helo=CY7PR03CU001.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a4f4185-97e6-0a2a45090019-285dc62c2322-4
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Jul 2026 08:36:54 +0200
+Received: from MW4PR03CA0122.namprd03.prod.outlook.com (2603:10b6:303:8c::7)
+ by SJ0PR12MB8165.namprd12.prod.outlook.com (2603:10b6:a03:4e4::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.10; Thu, 9 Jul
+ 2026 06:36:48 +0000
+Received: from MWH0EPF000C6187.namprd02.prod.outlook.com
+ (2603:10b6:303:8c:cafe::37) by MW4PR03CA0122.outlook.office365.com
+ (2603:10b6:303:8c::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.202.11 via Frontend Transport; Thu, 9
+ Jul 2026 06:36:48 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ MWH0EPF000C6187.mail.protection.outlook.com (10.167.249.119) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.181.6 via Frontend Transport; Thu, 9 Jul 2026 06:36:48 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Thu, 9 Jul
+ 2026 01:36:48 -0500
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Thu, 9 Jul
+ 2026 01:36:47 -0500
+Received: from APPOL-18KY0J4.xilinx.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.41 via
+ Frontend Transport; Thu, 9 Jul 2026 01:36:46 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,87 +71,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="From:To:Cc:Subject:Date:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1783573753; bh=6kwiiz6vzXFsU52pONZLCow3uL6CNjnBbJwtIEwpgSY=; h=From:To:Cc:Subject:Date:References:From:Subject:Reply-To; b=Y7XXAh1pgxOLbetVg1cQAo2tZIkS8Wpy5RW7fz2FytRq5H1jFuI1o5uTU4rr08zWR6G88rXFj55UK20RC7/qMuBcmscehyK0nTXoTwKaqI8m7BX/Qh227TY2K79LLwDasa151k3ZqLCJAWc81Vfc/nha6bB5TyoZh3uc1CO6+TAo8LAMxmk4+pj8VRinJbb0LsBCUimR/DXtZYZ5upNkYOaOAmnNpGerbmjKQSUmD1fjWnYvIkqaUZkQoDgovZZ/XRuLX9bGUVtKsuEUCY0hzlOWXgNrGLM/TrtMtpIX7I0mRlX84WGWy/GTbqh9Yv8qr0t5oAloegKYjceGsYlsyA==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1783573753; bh=Ek45+OKSiXAcv9KamB7PZ78+mUV+bMCwUDE2T1wXqe9=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=YAAG6OWHIzrG7ailh8b+SKpRWY9Knnt97EHKef61a2Sl0XAFrT8d9QtHFjSvfWLVQPMsoc3nj300Koiujj8SQ91q5XYIjdvzmQ68LnSiK3hJGHeCJ4PQ4sYrfXdajuSFxYYras6cQ0BiuNm7ST49JBD16xnso9B6DVbafcNcgJazqACYV/sOjr2+u3CXCUrZGrlbKbdCqpRfKmZNOAOMsLd+jcDanFXQPVhsnCrPN5ne2cma4Ej8c05hfYJlulmg5RyzVHDvWc1WW0Fr8BrC23+9r6r/CDFZtPj9E2A2z9CxoAOHq210bs3MS2l6ndpNq8vVj95fxWs5e2Q2y8jOHQ==
-X-YMail-OSG: LxuUNu4VM1nbkAESYw17s7ue58ruNL2157YCsZ9.hRe3OyY4SrQOjJHQPkUgmJ7
- HT.xlgKkrTd.Wev5uGNaT5kCxO4_pQj2p5Q34tIwouv03MOnL_psQC9.xxVJnfkwa96vcZvjcabS
- BddlNPjOEiN9Owjw65QdwCLzbSUWOqTc0r_lOmgvOyOB6R17cW4YzeiW.YWLMHOW9tK3HtX5E.Wj
- ePzkcNefNdRjDyp5QEBXcpp8LnArRQ4cWAwKgGo9dzQg3eU5cx7.l7TgclFV3C69l73RC5WBZBNm
- oUOSHrXQilsMVEUU1SgF.5ACgOgy4tcxCrIslceMJSWPkIY4Rg4A4k7Z8YuK5XQuhvdAd4v_9vFs
- tPBYgmusek4wLwc2Oy78QmEmUj4Lb.wLLjj3y6WSPqaH_9qi7k4JxrCJWOAX9z1MR86ajXFFCsvP
- TUDW4hAg5oK8enMJP4VaZe_kFBWai6UxSoNSL_4UsQO6z3xnlX7JoM89X8etEj.MOjp9Vm5qdssZ
- 048Ittba2zbBTAr2pwz8zQ38_3PZwLKTdL71Gg9eR_Yq2UVg7gtv6HNeDgOErCrxyXYqmdn.vUch
- 6GCeqish24L6a6AJre3jgJe2oKaKdl9Zt_pW2WUa7UVyW91aAFtmYqzxZDz3jlQJjBWHAQulaQTY
- 4g5FJXSU4l52S5f0DDj_aURb58CxsWsrL07i9ffjG9vFQePK.XCasPlIlcnwAXLnIm2qh.bZ_nFi
- BojN4GnfY2oz.wj9H2.R8KuXuvt3rmqPiT5vWzdom.LC4Mu6uTcIuoCTfhK.sz0pzp8jZC.IGuKp
- db2c4bfu3QGxLS7Nxlv_QeVfWvkQEFBT5FPR0FZFbuUHEbWaSs1Mt6WmgfMfbxU7eqI9lKaXEGPg
- ob095DghtCeDPwfvPIAJxAqDbHV7FBCx9uZ0QphZVPtE12eUqhXCHsR3kBDe1jv2zWf3YByWWmR6
- OAMFJyofU1GPVTtUjjFJj0ck4nfKPSNFUOQqM57hvF5qEiO1lFJJSN97Z4IFZkUlm0Tq9C9pqBR5
- cr.QHFXXFHxisMx5uiOzn7cNc2AiaGlCxuN63DHUcxjiflN96iPh15KhsCUb8.uM1XhA8XpuKF6R
- mH39Fji.RUfGGxRYXyx_LRAA14Q1a6Ikr5Ay55.MM_WuecwbizGW1qxwkBjRf60wdPwtNHK4zMT.
- nru85l_P2XUAjq0hs8xWssq6PjAjZaBTgZKbrrFVrH9yLR_qNsNo1GLMSKZbiVquylK2MYMZF1HL
- d0NWHiyf7S4B.RfqxElTnANhQf4kVF5aD0mQLxxObJXdAqM4eSAX7fSQVFW7X94jqxECKyRzJ6vy
- kNf470kzEz73s5Qhj_brHwG3.SQ1MY7jnBzUOogDl9V1cfzQxC9dmQdPPm_d1d.3H9SXUxQLjtkl
- N4FWNmHjGJMsp7qglL_iSc99KEIJ35VRDefjCyTFIYvihHmoOEuBbjfpTDFKkLOS6IKBobDoQyzM
- 1DqnTg4PMoKi_IEocRSmbKLa0LaCWOEthVPiDqHSfAbaLQTO3BoA4vnhB78mtga_BAWkvdX_2Amf
- XBsptAwt6bjGNC_0sTLM2IppcCs0QJ_7ll_REj69L00zzfw0du9A9wcjuJrtH_2gEBIkwIwgE59y
- abShkIkuMR8mhwu3jKJ.obzQVOW_M57yDqgnunbPCImjwUdzTeXVoxHFNtGoUHNQF4OccE8ZMVfe
- Ub8QBCMYBjgt7duZrvfvc6gO9VYsH6TWriZVisRnGdBEWEgZJ7JrkJ0X_B0viUJBPaLvF.0fNurb
- MMXeStp7q8sIHiz2_qZvWW_mtj_8YCmnuU8CCdsUPFsbZjuAA.Zw5SOr6Zftx.PcTZS8NhIdLoAH
- pyBtQto.mqqI2XxwW0jdXYrfGl64y9EF.mn6w5sEOtjcqTYdqM_eInGP4U69y3QpCif.H6UaOR6C
- FOUnZMEVRBaB1Y3TOVTzM_aGWILpZtNcoL9eEUHsZ_vCIIZz4vJdJ3yDIYLwvbOzY6wtZqkhemRg
- DqPNpQn7RDrmQiOlnN4wsvOu3J1aRnsUI.DjNMRhmaS3exCJqOmQVwpI7uLfiCi2.wn_NOHAHBx0
- E502eniGqctY4ohr_A8iYZN61USvBs1KE9pTHlBOww5hGrNzPNxNTCThx_KWc9S4PY4wGcEj4_um
- HyIA3L_3ZNqG4iE6OPLuBiqsAReKFwKAVuSHnwNgKwsj6FOU_mCRFLs2EbH6mmd1ymOyAPy5k2wN
- oTrCpQnLIuRn8o4IIxeQi7WXgzCph
-X-Sonic-MF: <brchuckz@aol.com>
-X-Sonic-ID: 5bcfd46a-86cc-45df-a695-4da8c90a8007
-From: Chuck Zmudzinski <brchuckz@aol.com>
-To: qemu-devel@nongnu.org
-Cc: xen-devel@lists.xenproject.org,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony PERARD <anthony@xenproject.org>,
-	"Edgar E . Iglesias" <edgar.iglesias@gmail.com>
-Subject: [PATCH 0/3] xen/igd: fixes for Intel IGD passthrough
-Date: Thu,  9 Jul 2026 01:09:07 -0400
-Message-ID: <20260709050910.8217-1-brchuckz@aol.com>
-X-Mailer: git-send-email 2.47.3
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Z7opmmPBM6q3apAlse3NxuqMuCHd82Z+qNIWB/nMO3a/43mCpBUdUAFC3k8x3GNATV7nBG9E8rtsBo2KcZriwqCHl4lotZmSdMLtA8Z4Ld5YbeNfM3H7qMZXN23aVOIev0TU3y6ZLtoykzKEsDE3XmVKENlPrEJ0thpm1Tx5eLFFc9bKfea1vfUQzOaD8za8z/MAFWqcawoa+giXQBnbsno0HYKZLY8DT0wpiGew7HezJwfNavS4Cyb1k5xLDx4mCXoGA5gfbXQvxVAOAly/eqO/v8ot6o9Ql3DwGSkwsiJCzivUF9IVsouFgL2nkN/whw+MEVlOhJQjakAPyluPSg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Zhdxdf5zL6a+U1/hrk4aLT3C9PkcV0JvLE8J6lvzQu4=;
+ b=GWfhkpVl0/G1lfJxS1Vr7ENsKxYDa2ke6tOl97R3yeO6wd1n20zdITnZljJshO3hjVOADTw78r/LmksqkUAnQszrjJryH8IF9hUvTQAAdJmTIiJvkSMBnzJyNO77n/RcvnzA1CpEPtovv1o3n5nhPQ9qeQD+ixkp9YyYUT1pFU8uR2xp+lwikoihREG9ln6Zf6X6PPdtiPIZCxbMvWFFQ1VB0l39ckyKCpnsXpaIraYpyWV+36AYwcQCJWCn+0Ddj3ZiuSS7nJwQWnEfRzdquXKjlMGIdhloBiVhoS/26NY4pdpNIOeX1nHbDzVnJ+J1a+d2O5r9NWlmj6l9QHiJxw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Zhdxdf5zL6a+U1/hrk4aLT3C9PkcV0JvLE8J6lvzQu4=;
+ b=EyV0Px6li/SL6TTXVRg1cAeQ6p/FCXOeRzTyK2GmhF31fjq8HHxk1Z4hrUBaHfJ0KLVMrUNIbIShLxiBG5Dv2/XKxn/R2IqeXxn174GhfEZQRpThZdPdDOnB1iXXXy4/dDIUTHT/eJwRJu25gBOftHCPpE/KcZN02gJKvuypejU=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+From: Michal Orzel <michal.orzel@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Michal Orzel <michal.orzel@amd.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	<ayan.kumar.halder@amd.com>, Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: [for-4.22][PATCH v2] xen/arm: Fail domain construction if a secondary vCPU cannot be created
+Date: Thu, 9 Jul 2026 08:36:43 +0200
+Message-ID: <20260709063643.11800-1-michal.orzel@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-References: <20260709050910.8217-1-brchuckz.ref@aol.com>
-X-purgate-ID: tlsNG-ef75cf/1783573755-FCD2C25E-62A4DFB6/0/0
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000C6187:EE_|SJ0PR12MB8165:EE_
+X-MS-Office365-Filtering-Correlation-Id: eebeb375-50d5-4286-abc7-08dedd847401
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|376014|1800799024|36860700016|82310400026|11063799006|18002099003|56012099006|6133799003;
+X-Microsoft-Antispam-Message-Info:
+	Lejpg5EQeEKzwUTs10xfYy9+aRaZnmXzJ0L00rYroZYzPhK2yWPoaO879GE/S1fmkrgzducL/79WIMZgRfaVH0vM8hm7dYzMy6ph4frwGo5clJ2SA+v9ssr4m0p6A+MFeAAxV3XvVwLwPJ9NEnX2G53/ICbxVGyRoTfmUfEa4FOBgjgZX0ZO/rdT2xD1OpNVweHYHI3AY1nn19W9U+IiYe1U5RygYJCnfqOOo/78mscuzNoCuevXYHpVDtSn9IvF4fu+6BgRjocmtjn2jrUh5j6zFxag+Qr2Dy+pmOKmCgLZF7DMtMNqCFafw/PFCPXRZ53PljwCoY4LzDCQc8INyFxYYRRNYMa4JzPHx77QFRVGwL23ZB2rIOfCqu2SyuqSEcOu61xs/NNyG2UwjYCcTEOPycQkj6T+Q9WMFuyylby8faYOdBuN3XE//urWoTcfKDiu6VF8aXrRk81c1OPlQ2XQyTkgsLLxcDEMLL039EiQF/0u+MuxP5nWm6nqmQ4PjQrUIAc5RAROtvTcu2bargO/LXUEIeTInfxDeaFB4EvBgSxt0ZwpXRPaOi6mVA5/Tjl+eICBLaAyN+yCcXO84gtj414G/nilmVFrCo1mIjR1d5/dEdJEmQSl6ySSJUMA4ZH3uj23eNd0sjvin8Xze/jvNqBSCUUg0cRm68mN8H8+JTsOzwAqrbeGO0jGHo8eJSl/Ez3pxd73QRI57099Hw==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(376014)(1800799024)(36860700016)(82310400026)(11063799006)(18002099003)(56012099006)(6133799003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	6QOxPq44SFPm2mf57tbxuu66EFV0Qtxjhq4yx3U2Kw6i1BhBbpifEH+i034ai1WeKKzIu0EPiZKxg3tps58BMZpUtmYw62DTy9p2J6OrKWF11rEV+jD/dvCi3M/+K5pDuQzHHNyqdNkttaYvuAhq1c1eVHhFSdv6VRE7tKNVrZyGYCIojjUdmetJv+NsOosLzRg2Wgj7qvQ6AZ0d+hF+t3ZufptBHwgABzwlxtyI5zusc/AVTfPEI8g/6US2SaTJB9OVdgqTnroIJ1JBqKL+F/vZwdnr20IOkOPkHf2oZqHzqBKWlQDgam/OhM/mr/vuOb00MvtwyHKWBMbqOETYV1nIE3UFqYJFDwbttvXHyB9QrhnIH8eUMrpcwwJPDlaT7dAXn5bOInFwvXKP+NsLUub+SPJIAcRLXG/OhsCE0cokrJI5MjCaRstLs7Of1mYX
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jul 2026 06:36:48.4075
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: eebeb375-50d5-4286-abc7-08dedd847401
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	MWH0EPF000C6187.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB8165
+X-purgate-ID: tlsNG-bad1c0/1783579014-577AD986-EFA176D1/0/0
 X-purgate-type: clean
-X-purgate-size: 1070
+X-purgate-size: 1728
 
-This patch series aims to fix long-standing bugs that need
-to be backported to all currently supported stable versions.
+construct_domain() creates the secondary vCPUs in a loop, but on a
+vcpu_create() failure it only prints a message and breaks out of the
+loop returning success. As a result the domain can be partially
+constructed with fewer vCPUs than d->max_vcpus. This causes two contract
+violations:
+ - Xen-Guest: domain's FDT is generated before vCPU creation - Xen exposes
+   incorrect information (e.g. two vCPUs listed in a device tree while only
+   one is actually created),
+ - User-Xen: unlike x86, on Arm port we try to bail out as soon as
+   possible on unsatisfied user requests (e.g. user requested two vCPUs
+   for a domain but it was created with only one).
 
-This series fixes three bugs that cause problems ranging from
-a dark screen in the guest until the guest OS graphics drivers
-are loaded to an assert failure that prevents the guest from
-starting.
+Return an error instead of breaking out of the loop. Both callers
+(construct_domU() and construct_hwdom()) already propagate a negative
+return value and fail domain construction.
 
-To test these patches, it is necessary to test with older Intel
-IGD devices that have support for legacy VGA bios.
+Fixes: 6b0e8e43348a ("xen/arm: allocate secondaries dom0 vcpus")
+Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+---
+Changes in v2:
+ - return ENOMEM as allocation failure is most frequent cause of failure
+ - update commit msg to focus on unmet contracts
+---
+ xen/arch/arm/domain_build.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-The patches have been tested using Xen 4.21 and Seabios 1.17
-on Fedora 44 using an Intel NUC7i5BNK with an i5-7260U processor
-and have been verified to fix the bugs as described in the
-individual patches.
-
-Chuck Zmudzinski (3):
-  xen/igd: get PCH info from host sysfs
-  xen/igd: don't register rom bar twice
-  xen/igd: fixup device id before registering rom
-
- hw/xen/xen_pt.c          |  5 ++-
- hw/xen/xen_pt_graphics.c | 85 ++++++++++++++++++++++++++++++++++++++--
- hw/xen/xen_pt_load_rom.c | 18 ++++++---
- include/hw/xen/xen_igd.h |  3 +-
- 4 files changed, 99 insertions(+), 12 deletions(-)
-
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 550617f152bb..72d531618045 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -1847,7 +1847,7 @@ int __init construct_domain(struct domain *d, struct kernel_info *kinfo)
+         if ( vcpu_create(d, i) == NULL )
+         {
+             printk("Failed to allocate d%dv%d\n", d->domain_id, i);
+-            break;
++            return -ENOMEM;
+         }
+ 
+         if ( is_64bit_domain(d) )
 -- 
-2.52.0
+2.43.0
 
 
