@@ -4,58 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FA7CC43458
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jul 2026 09:43:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1357757.1612093 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EC46C43458
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Jul 2026 09:44:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1357763.1612103 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1whlHn-0004Gc-Ii; Thu, 09 Jul 2026 09:43:15 +0000
+	id 1whlIg-0004mD-SH; Thu, 09 Jul 2026 09:44:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1357757.1612093; Thu, 09 Jul 2026 09:43:15 +0000
+Received: by outflank-mailman (output) from mailman id 1357763.1612103; Thu, 09 Jul 2026 09:44:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1whlHn-0004GV-Fe; Thu, 09 Jul 2026 09:43:15 +0000
-Received: by outflank-mailman (input) for mailman id 1357757;
- Thu, 09 Jul 2026 09:43:14 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1whlIg-0004m6-Oy; Thu, 09 Jul 2026 09:44:10 +0000
+Received: by outflank-mailman (input) for mailman id 1357763;
+ Thu, 09 Jul 2026 09:44:09 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1whlHm-0004GP-2o
- for xen-devel@lists.xenproject.org; Thu, 09 Jul 2026 09:43:14 +0000
+ (envelope-from <dmytro_prokopchuk1@epam.com>) id 1whlIf-0004ll-82
+ for xen-devel@lists.xenproject.org; Thu, 09 Jul 2026 09:44:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1whlHk-00EMys-87
- for xen-devel@lists.xenproject.org; Thu, 09 Jul 2026 11:43:12 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1whlIe-002Gah-77
+ for xen-devel@lists.xenproject.org; Thu, 09 Jul 2026 11:44:08 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a4f6d2e-e002-0a2a0a5209dd-0a2a450aa90a-8
- for <xen-devel@lists.xenproject.org>; Thu, 09 Jul 2026 11:43:11 +0200
-Received: from [52.101.43.36]
- (helo=SJ2PR03CU001.outbound.protection.outlook.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a4f6d2e-e40e-0a2a450a0019-34652b24282c-3
- for <xen-devel@lists.xenproject.org>; Thu, 09 Jul 2026 11:43:11 +0200
-Received: from BN9PR03CA0774.namprd03.prod.outlook.com (2603:10b6:408:13a::29)
- by DM6PR12MB4092.namprd12.prod.outlook.com (2603:10b6:5:214::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.15; Thu, 9 Jul
- 2026 09:43:05 +0000
-Received: from BN3PEPF0000B071.namprd04.prod.outlook.com
- (2603:10b6:408:13a:cafe::58) by BN9PR03CA0774.outlook.office365.com
- (2603:10b6:408:13a::29) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.202.11 via Frontend Transport; Thu, 9
- Jul 2026 09:43:05 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BN3PEPF0000B071.mail.protection.outlook.com (10.167.243.116) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Thu, 9 Jul 2026 09:43:04 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Thu, 9 Jul
- 2026 04:43:04 -0500
-Received: from [10.252.145.116] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.41 via Frontend
- Transport; Thu, 9 Jul 2026 04:43:03 -0500
+ (envelope-from <dmytro_prokopchuk1@epam.com>)
+ id 6a4f6d61-5cb7-0a2a0a5109dd-0a2a4507cdd4-18
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Jul 2026 11:44:08 +0200
+Received: from [40.107.162.85]
+ (helo=PA4PR04CU001.outbound.protection.outlook.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <dmytro_prokopchuk1@epam.com>)
+ id 6a4f6d67-9c8e-0a2a45070019-286ba255240f-3
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Jul 2026 11:44:08 +0200
+Received: from AM9PR03MB7526.eurprd03.prod.outlook.com (2603:10a6:20b:3de::17)
+ by DB5PR03MB10050.eurprd03.prod.outlook.com (2603:10a6:10:48b::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.8; Thu, 9 Jul 2026
+ 09:44:05 +0000
+Received: from AM9PR03MB7526.eurprd03.prod.outlook.com
+ ([fe80::904d:5820:80e1:41ba]) by AM9PR03MB7526.eurprd03.prod.outlook.com
+ ([fe80::904d:5820:80e1:41ba%5]) with mapi id 15.21.0181.014; Thu, 9 Jul 2026
+ 09:44:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -67,120 +55,150 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DASt9umPyCR+ZIyDu5VkzuUhB06mqfSwbOE0XqlbTtYWSLm2N8n1vXxhZWQM9apa6MUSByJixfhYCzlLyAeP0Fddhb279uaLPbvlrzZoh3Y1vBebvnxvC0YEuR7YdNEPhvN+kZssfw4CVy36ZdTR9HfOS1LhHOGIqv7lkB8/B+noBgi3pLeuYnjaSDJf5kb3cWrRmTBYe57w+/A+n3FEpkCNbGVWfOcNl3JnzCdSErM1HydIVSEh6e2g/iOYXZcDfqRYGZ3qPA/T213RMX4p2MlLS2bdk3b/Bk4db5ftCuxF3HXGxPYs5WkaFjFnZJ9FNsWV2QAY7C7srBOHL4Hzgg==
+ b=q8iJy2DJ8fnE3XhYZAPPm7TCEQiQhkbv66m39nURi60tWchybQu8GcHhODvmdmal5mt+VYYItLjll4ZxY0opt6Xx2eWezqbmql+/mWAP/7vOjVgsGzdq+bKktIGitwhRLU5JtGL4fjWpJ3LVe3rERacCL0+b92II1myTp/3BnTAlP1VrNhgnMxEJdTJKzw/v1BiNrHuNapAJSNsyBxEBlUME/MOi303QDexQrjtdkEkP9JLT1FS0yZicp/9XPMwrxT/7vxfpNyq+P9c/3tm6MUNrbdpeDlLM8gLfVFsv3IyS5N5Thac7R2/mkM4EgGnyPSZkscnRegbU56Gfwvk55A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=faKzvThL6z6bi0qFeVSyIZcETPcOOHYiXWhXty9vtzQ=;
- b=KOylzzK07y8dGCd5aYD9RzghfN7PKYWaNS14FBwbv8ov/Wq5JkEVhRdFC9Ktw9ZE5sEVWP7WgJGhhMYMPCq2+unYiDlcKy56uxLnRUwIwrmz7GXGQLMKbsrpiR4P55vNBWC6MMBSsnU5ASRzOy/qMyp6d6WeVCvg2k6thHj0gp50ztcj6jW2xBoMMe594x+XFah3ZoA+GxeM7WLHp9oyO9lgg4+jvaVc7ru7bsY+xXOdLTHwmrx8xJ88Wsp+OjOzbUPjmkFLTYzrRwaJj4NEfI2pHBOOVa+IYv6YMhCHB12r8Zv5ZLUpD8/cCwOP605XVlNF6/H0/kJfugObeX5NgA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ bh=CrDKhGbtoiB7h2F4T4KrnW2M6c8Fox/+Ij5itpX9U/0=;
+ b=C4pMh1vNlynn0Dhltpq/lm9Ptew4OpsfMpqh7KiLeDm16U4YMzqy0EU+HRajhRMA5f2p99XRTWloS4tCyRsL/DbJ21g1l5KFAANOcYwJw49gKPO4pYVFml6kXAAuyoUpTqCZFdZDOQ8/tg07f8KUm0g9Ejlu733T6z2S3QoR5SlLgRPaZr17FJZFVXYWczi0aVt+F4vqnU2xqB5DcGetvpe8ay94b8M71uE99TXTnq+OQOsCXLqNx+fUkdxtgF8kwG97nSKJNEJ/rmvImICilml+E6irkAJ9pStWfGIsjwlEj/GUn4HwyEehw1RCF2vEGTHzCaWtOWBfPVSrGbXurA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=faKzvThL6z6bi0qFeVSyIZcETPcOOHYiXWhXty9vtzQ=;
- b=nnzdRyHhPHLoeDv+L6wrQkLt8KsHcZd/GikyfKAPuf0i2FTvY7A4jI/zV9JjxhMTFYbxQu1dreEuAMW+zqDU81dsjC4lMnA/R94EKUzNVNBXBial5D29SpOvqLRHI4bvuFfLFKr/jvdtTYraFIWUYlxHt6I8Sh67PDg9oH7R3Ac=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <47957c72-31e0-4401-a9ee-e3679db54011@amd.com>
-Date: Thu, 9 Jul 2026 11:43:03 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [for-4.22][PATCH v2] xen/arm: Fail domain construction if a
- secondary vCPU cannot be created
-To: "Halder, Ayan Kumar" <ayankuma@amd.com>, <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>, <ayan.kumar.halder@amd.com>, "Oleksii
- Kurochko" <oleksii.kurochko@gmail.com>
-References: <20260709063643.11800-1-michal.orzel@amd.com>
- <aab9fd35-6230-474c-8848-480c8cccc43c@amd.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
+ bh=CrDKhGbtoiB7h2F4T4KrnW2M6c8Fox/+Ij5itpX9U/0=;
+ b=EhMjxiSHhaS92EmvOh8XqptfatzDZJGdpz91fS4YQt87hmzNuA88MgR2z8W3mT8uXV850cfvMrz8cmEnsM4p/7jejuBXj1AkGeF/N41V+KL1IVFkknngkzQlFj2wBcvmR3SEdyWeEnZBWtXVTba5bIDFuYOxKecLXjDZ69dd4eTt6kyIZ/OwvSuw3LWQNT/ZXoD5ukT0Lm2MOy27Qx1iTjqP8iEFaZujM/NWplxZnp/m4oyo1S8PQKkyn0aw6C2V2IRjNFNrVzyG13HghTqnuopODggTS2MOEj2IhL3gq2N7XeYgl8cKVvBX137+cRs0JnUHPenPHTkqd7a8NFU7IA==
+From: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>
+Subject: [PATCH for-4.22 v3] dom0less: Prevent division by zero in
+ handle_passthrough_prop()
+Thread-Topic: [PATCH for-4.22 v3] dom0less: Prevent division by zero in
+ handle_passthrough_prop()
+Thread-Index: AQHdD4d7qU530mHLc0yhuTdjB7BCxQ==
+Date: Thu, 9 Jul 2026 09:44:05 +0000
+Message-ID:
+ <500cc80a172570f7fdde3287185398dc49460b2b.1783590032.git.dmytro_prokopchuk1@epam.com>
+Accept-Language: en-US, uk-UA, ru-RU
 Content-Language: en-US
-In-Reply-To: <aab9fd35-6230-474c-8848-480c8cccc43c@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B071:EE_|DM6PR12MB4092:EE_
-X-MS-Office365-Filtering-Correlation-Id: e0e07017-5208-4df9-5efb-08dedd9e79b5
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|36860700016|1800799024|376014|23010399003|4143699003|6133799003|22082099003|18002099003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info:
-	/E+5g63Sr6dgbtndun/UlYa1Fy9V8JoAceWRGfOPXi0HDm1uWs+bJJ2yZrWHZdAUDcLMUsu4w6BBE2BbwzxRFCH4y0zSkDvblevvUOOnulNZM+zTuvofTX8Wh1hTcW+3COpb6qBTJmv1Vu3lIiP1RpO5myvzdC1RkbyVVwiRxQmIFliHp96UZZO5ZNseFbrCOQFBof3n/WSModEFq4EjxHbNlWngm5Gg7h0h+Fa5FlVQcuz8IGrCimgPswJVqd8sfRQ9GfVLQJX1lH9xXS/gpqn4iMK5w8sBhcQduZOhONngDSVGTTib6WR6ugK7kVdPsXjrEPLmFMKdZelmjsgq07HFbBvM+RRp+psWM0136FVO4GK9LWeTHf9/LyTfJCUgcQGnRAOFDy8PkT60aedI8SYullXKwGnCYY2+JXB9z8/wmuKrWE2H2j2p/9ZdTUmx0K1YD3o41vuNtA49L6OM0CnMpNbwJGwBcNgGHfqbgIcg4R8G7l8RYtcFojJQPsWItCIw0ZWuddCXNOSRAFDZtzfdxGwbhGmR4qXMZo0nCny+HmDCKMt5h5aa8boPfb5FDbrrk0FJB8iM22VacDt5xr9pImY0ntsf4vLIXkM68gojTxRb4PG2sVZ30xccQr03yauR8qwE0uCd3cuCp5GRi/4TLBHukjhMl3l5Zt3liZg+yJc3NWa2lZkNDPpH1hugCB3ufWbQEQcnSLJYpt5bGA==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(1800799024)(376014)(23010399003)(4143699003)(6133799003)(22082099003)(18002099003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	8pXemOjDXAGUTSgGpGpnjgebnw2N79Jth808h5FOIULld25SNBzfKkDpZeOUozWr1klTZK5Bt/p3soPDrYh9d91fBeaey3Bi1Mv17JOKpfkmHDxmEQM4UeHBRIihKDyyrHwuLoL96uEwG583ucLhTgcQ1fn0QoIEFfgSJhnMmmlsD94HVDxuXP5vqr9vAwmT3N8eP9zHUnIf4SEEGFXNqfKtEHgIbsAZckBvWK5nq0Dfi2fJOlctCO4RHQblwkY1y3PSPkWUbaS6tglFuzjD/8FtZUL43R88nvtM1LGUjd15PhZ4+DujY3aZqiDPjerdaGBp+SpQ4P2lO6Pe49MKx30eyOaqbXpjA6IAsxXalaxnSrJ9YAEC6kFdsqx1Lh5aOpGikeRrtF808FeUwTPoHYu8ErKKq+Xm6+OYSkZwPHxd0hQ/UuP7mfuD2KXgDzMf
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jul 2026 09:43:04.9290
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AM9PR03MB7526:EE_|DB5PR03MB10050:EE_
+x-ms-office365-filtering-correlation-id: 75b665a2-c835-4c91-4379-08dedd9e9d99
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|23010399003|1800799024|376014|42112799006|366016|3023799007|56012099006|11063799006|38070700021|18002099003;
+x-microsoft-antispam-message-info:
+ 5dJXDJ1oyYtStfzPXTsaVenF3nWR29pdJ6QmD6X5MkdsssuvirEJXD7qozdZUnqAodNnwSYeVhU20Ue1T/gExgk+SomNLhULNu2tkAjDaDnDgUcwKxOlEmA8QPugVtQVRRNJGBwW1SBXNQPYjfsv9bpk24lNhHCPdDDyGr4e2lfGbqiRd/MgeeAZicxxD1RjB6E5/I7n3eLgnmPsT4BUzFvXxpF6oMsd9cX5dEzAV/zGI48vqOakjtqqx1n98hZ5R3ajtzqrT2FSzVbE0Uk/wqLxmMcCvk1RKeXTkTspEi6by0/IytKQgfroD04ZCLOYc1KWztDP7pGONpWZGosC3hEnzGh695rMLXIJo/rvY0uvJFyMTne4GWIwyuMyDQOmIo60F8+Tt4pg/56fMGvhrnCLZQsKDTGMh5Fl2oMZTBAnI/w7MpMg09rfsjqlZjclFwKsIYiWjSII04eFGu9hdig0wt/ndfPmH8lbTO4O+7vb4TtOxpVK82QOQ9vJeQNCzuW8/OZKjpPCxTpl0cDZQeWZ+qXirQq+7b8PpBjL8U3MJFwI3N9qRm+F0Za5eIdGCV0/gOghV5qy5PxLRk9sVho9YBDwuwDPazQ8/ohNSeQWfcnZl/LAKcXcrPjbCYo3TksgmDDqTykdxTULiJntNM0Hed2dPMz8TQJFrzG9o/TT7XhCxt4spIdL2X56ZWbMSH5uaH9VxB6hIkcL3uZ+/+E1gwq200olz5JYwGU6whI=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR03MB7526.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(376014)(42112799006)(366016)(3023799007)(56012099006)(11063799006)(38070700021)(18002099003);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?oWyZijchk7J94AgX8KjZkZViy8IcDTVJ1OZSAHXb9ndBqO0GmrHSvUNafc?=
+ =?iso-8859-1?Q?RaFmz9Rs/CPa2YBJbwQEV1ttXhrQCaRTtQZNB6UG9mDHR2FHrOQX62/ijV?=
+ =?iso-8859-1?Q?XaYffgpecE5oAZKFtJIHvlvrZRICYrsl1vS+8twlbfSPUViPTxFrlNBnOG?=
+ =?iso-8859-1?Q?m9TfvURXUlXxDupeN6Z7Ja9DV0xkhn3i9nT5+SkhLJpB/AdLPZjHy5lnKX?=
+ =?iso-8859-1?Q?fV4G96qDn1UchRW2m5GuuPDXMeECcGQSL8Vjx80HW54BQwOj/coa3Wae9z?=
+ =?iso-8859-1?Q?8rXylnuWF1snWopV+vk3Fmc+RmTSqYIKjfMISkgIruHwxZZlprBfOxLOsr?=
+ =?iso-8859-1?Q?t7KW3a2DnUtCjl5QjeLP91gnd+4z6PLOD7gOwPjcEWGxq6fziDtVJh/Z4a?=
+ =?iso-8859-1?Q?FvINt0hZaEk5Ka83kPb61JpLc1fODZ4RpCQcUpYjXiPSQZ2rZpqM3sx3A0?=
+ =?iso-8859-1?Q?HY9K6Pda+w6SulSzLbyqtMKlZ5eiTPi4d3SR0TnHLgb4DT8+lxhf6YEeHx?=
+ =?iso-8859-1?Q?nUgaqP8Vr230uGOjQ5ZMtOdmlDXqx2N/g6Kag9MqLlktVX7zRMdlDuMSoW?=
+ =?iso-8859-1?Q?ZE18HliFrPV9+eXwCBSmsXQ0p0N1mkPVS0W9CyVKmL5IFkAxdUKD7LHQcy?=
+ =?iso-8859-1?Q?vy794yYnwRgPwTTf5Ly9qE+tERZM+beAYGpB4ywG5jAQ6idl8bwa5xv6wH?=
+ =?iso-8859-1?Q?35b4OJEsOc4sTRdZe/JJOp4ukj0wxsOPpjM+t2rSodEtixbLEfJ9JwfScS?=
+ =?iso-8859-1?Q?cW110nI8oUbgZI03ywJAHRQYmZwYD8TP5Ati7ZHyN8KVsPOAwnuV/F0pqD?=
+ =?iso-8859-1?Q?gtyeng1zzhjCXp2zH5QXmiNEKDsW9smE7EKycBM4ktrvtu5MNbiotN3vOJ?=
+ =?iso-8859-1?Q?rcw251y4Rukn8t4RlyR6Jc3FJf7vnRU0892AqCiSApZekKwAQHKKq5qCog?=
+ =?iso-8859-1?Q?MEj371DZpCvpikmqioLGRrZSWZAT7WjvwXwAbI9d4Vg4t6qfP75Nk5FMI4?=
+ =?iso-8859-1?Q?GyvEMUKMPfDOl7QgUSe8cPMEvzkX9bW6cChRYACabwZIt/f8vtXbLk0R3f?=
+ =?iso-8859-1?Q?8u006wi0u8QCz5svdzZVcgM17fjf6QuyjiiSBDkocvqMmOlAu2/+7ss5Yj?=
+ =?iso-8859-1?Q?acGq6iuOSLhHna+MGdjBlMNkJyrQkB2S6wvjsBZJUei6cuZa2vWZuw0RSN?=
+ =?iso-8859-1?Q?a0ovdpOl8viZlZf4gA2Tlz39QJVH7hhumkFMsbTZOW8GyCoGEXh9P8SiMa?=
+ =?iso-8859-1?Q?bDBIP1xZTPNBTv9V2z0XnXF+wOyMfodPIkqZHJxuX9xiIPlp5PPR1Te4N/?=
+ =?iso-8859-1?Q?XWKg3oMIhExAZYiDADCng4idbQd4cNlE2K7nMJCWJPVxnZZeAqK7K5ZXuy?=
+ =?iso-8859-1?Q?fF+k2IkNM7C0mY4ThaIe/hV+3O1b1JGvrlXNoErce8XjEl5NDGyQVLVWTJ?=
+ =?iso-8859-1?Q?Lz1+wRWoizsCKrMoIikG1seW3jCNaTAv6luDTMe6zrB1CUqxxEPm/JaESS?=
+ =?iso-8859-1?Q?i6PzxUycprZFf6rD26OS6SPddo8yrD8KzPKROn2QMFRVvUXKTPYDuUe2fJ?=
+ =?iso-8859-1?Q?0PtEq1E6wWCmin/m2B/Ty8a+hsbdTMfTomsO9Kie4RaaOMZFaeDlnV8uqn?=
+ =?iso-8859-1?Q?7/urap6oAUtnF/2D+7C0jKebC8WPfqdWz1EusXSBZT07KnWrNHh9eppSsn?=
+ =?iso-8859-1?Q?PahehqdxUCjwGHqBR02NrSzxL4QZXIh6GtelxYzBSl6zsojA6o9MW7BmfE?=
+ =?iso-8859-1?Q?npmacl1f0m0yRWgNsx56N0+5sSFzkkQK7h95/mJevTvlheRHzroieZesvM?=
+ =?iso-8859-1?Q?IuQGazXMR7/2/E/B53cx5mcMLGfDtDg=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AM9PR03MB7526.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 75b665a2-c835-4c91-4379-08dedd9e9d99
+X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Jul 2026 09:44:05.1513
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e0e07017-5208-4df9-5efb-08dedd9e79b5
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BN3PEPF0000B071.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4092
-X-purgate-ID: tlsNG-4011c0/1783590191-3CE77DDE-B45E977A/0/0
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: tMJibz6eFyvzod4hDox5RGm6Cs2U45jygsM4uxW8ul9lO5qyaWr64SfuKEK+4BzWsiJkwMpxfHFgRXqPo3s13Xsdc7uIfFCjdv1Z9t4rBu0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5PR03MB10050
+X-purgate-ID: tlsNG-ef75cf/1783590248-FC11625E-7C13CCE9/0/0
 X-purgate-type: clean
-X-purgate-size: 2110
+X-purgate-size: 1981
 
+A malformed partial DTB specifying both '#address-cells =3D <0>' and
+'#size-cells =3D <0>' causes '(address_cells * 2 + size_cells)' to
+evaluate to 0. This sum is subsequently used as a divisor when
+calculating the number of regions in the 'xen,reg' property inside
+handle_passthrough_prop():
 
+    len =3D fdt32_to_cpu(xen_reg->len) / ((address_cells * 2 + size_cells) =
+*
+                                        sizeof(uint32_t));
 
-On 09-Jul-26 11:32, Halder, Ayan Kumar wrote:
-> 
-> On 09/07/2026 07:36, Michal Orzel wrote:
->> construct_domain() creates the secondary vCPUs in a loop, but on a
->> vcpu_create() failure it only prints a message and breaks out of the
->> loop returning success. As a result the domain can be partially
->> constructed with fewer vCPUs than d->max_vcpus. This causes two contract
->> violations:
->>   - Xen-Guest: domain's FDT is generated before vCPU creation - Xen exposes
->>     incorrect information (e.g. two vCPUs listed in a device tree while only
->>     one is actually created),
->>   - User-Xen: unlike x86, on Arm port we try to bail out as soon as
->>     possible on unsatisfied user requests (e.g. user requested two vCPUs
->>     for a domain but it was created with only one).
-> 
-> Unrelated, but just to add my 2 cents wearing a safety hat.
-> 
-> The user-xen contract comes from a system integrator. Xen should try to 
-> follow the contract and if not panic or bail out.
-> 
-> The Xen-guest contract can be used to enforce the rule that guest should 
-> read the contract before doing any safety critical task.
-> 
-> The most important thing is anything errors that are internal to Xen, 
-> should be propagated to the external world (either as panic or return an 
-> error to the guest or abort the guest). If there is a degradation is 
-> functionality (eg Xen creating a guest with lesser number of vCPUS that 
-> what the system integrator provided), then this is safety issue unless 
-> we put an assumption on guest to read its device tree and know the final 
-> configuration (which may not be always ok).
-I agree and this is the reason behind this patch.
-> 
->>
->> Return an error instead of breaking out of the loop. Both callers
->> (construct_domU() and construct_hwdom()) already propagate a negative
->> return value and fail domain construction.
->>
->> Fixes: 6b0e8e43348a ("xen/arm: allocate secondaries dom0 vcpus")
->> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
-> Reviewed-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-Thanks.
+This leads to a division by zero exception in the Xen hypervisor during
+boot, causing a hypervisor panic/crash.
 
-~Michal
+Fix this by validating that both 'address_cells' and 'size_cells'
+are within the valid range of [1, 2] at the read side in scan_pfdt_node()
+immediately after they are parsed. Any invalid cell size combination is
+safely rejected early with an error message and return -EINVAL.
 
+Fixes: 9ce974c47588 ("xen/arm: assign devices to boot domains")
+Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
+---
+Changes in v3:
+ - use Michal's idea for placing that check into other place
+ - reword commit message
+---
+ xen/common/device-tree/dom0less-build.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tr=
+ee/dom0less-build.c
+index eacfd93087..179a2b88aa 100644
+--- a/xen/common/device-tree/dom0less-build.c
++++ b/xen/common/device-tree/dom0less-build.c
+@@ -341,6 +341,13 @@ static int __init scan_pfdt_node(struct kernel_info *k=
+info, const void *pfdt,
+     size_cells =3D device_tree_get_u32(pfdt, nodeoff, "#size-cells",
+                                      DT_ROOT_NODE_SIZE_CELLS_DEFAULT);
+=20
++    if ( address_cells < 1 || address_cells > 2 ||
++         size_cells < 1 || size_cells > 2 )
++    {
++        dprintk(XENLOG_ERR "Invalid address/size cells combination\n");
++        return -EINVAL;
++    }
++
+     node_next =3D fdt_first_subnode(pfdt, nodeoff);
+     while ( node_next > 0 )
+     {
+--=20
+2.43.0
 
