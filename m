@@ -4,46 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8F07C43458
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jul 2026 02:28:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1357479.1611877 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02EF0C44501
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Jul 2026 05:09:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1357502.1611896 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wheUz-0000t0-0I; Thu, 09 Jul 2026 02:28:25 +0000
+	id 1whh0n-0007mz-5X; Thu, 09 Jul 2026 05:09:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1357479.1611877; Thu, 09 Jul 2026 02:28:24 +0000
+Received: by outflank-mailman (output) from mailman id 1357502.1611896; Thu, 09 Jul 2026 05:09:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wheUy-0000st-Tn; Thu, 09 Jul 2026 02:28:24 +0000
-Received: by outflank-mailman (input) for mailman id 1357479;
- Thu, 09 Jul 2026 02:28:23 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1whh0n-0007ms-2j; Thu, 09 Jul 2026 05:09:25 +0000
+Received: by outflank-mailman (input) for mailman id 1357502;
+ Thu, 09 Jul 2026 05:09:23 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ziy@nvidia.com>) id 1wheUx-0000sn-CR
- for xen-devel@lists.xenproject.org; Thu, 09 Jul 2026 02:28:23 +0000
+ (envelope-from <brchuckz@aol.com>) id 1whh0l-0007mK-Kc
+ for xen-devel@lists.xenproject.org; Thu, 09 Jul 2026 05:09:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wheUw-00A0PJ-5V
- for xen-devel@lists.xenproject.org; Thu, 09 Jul 2026 04:28:22 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1whh0l-00C5RT-1K
+ for xen-devel@lists.xenproject.org; Thu, 09 Jul 2026 07:09:23 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ziy@nvidia.com>)
- id 6a4f06fb-2eae-0a2a0a5409dd-0a2a450889a6-18
- for <xen-devel@lists.xenproject.org>; Thu, 09 Jul 2026 04:28:21 +0200
-Received: from [40.107.200.1]
- (helo=CH5PR02CU005.outbound.protection.outlook.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ziy@nvidia.com>)
- id 6a4f0744-edec-0a2a45080019-286bc8018ca9-3
- for <xen-devel@lists.xenproject.org>; Thu, 09 Jul 2026 04:28:21 +0200
-Received: from IA0PR12MB8374.namprd12.prod.outlook.com (2603:10b6:208:40e::7)
- by CH3PR12MB8185.namprd12.prod.outlook.com (2603:10b6:610:123::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.11; Thu, 9 Jul
- 2026 02:28:07 +0000
-Received: from IA0PR12MB8374.namprd12.prod.outlook.com
- ([fe80::d85f:4c87:ae84:3f16]) by IA0PR12MB8374.namprd12.prod.outlook.com
- ([fe80::d85f:4c87:ae84:3f16%5]) with mapi id 15.21.0181.014; Thu, 9 Jul 2026
- 02:28:07 +0000
+ (envelope-from <brchuckz@aol.com>)
+ id 6a4f2ce5-5cb7-0a2a0a5109dd-0a2a45039e8e-16
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Jul 2026 07:09:22 +0200
+Received: from [98.137.69.206] (helo=sonic312-25.consmr.mail.gq1.yahoo.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <brchuckz@aol.com>)
+ id 6a4f2d01-ec1a-0a2a45030019-628945ceae8e-3
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Jul 2026 07:09:22 +0200
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic312.consmr.mail.gq1.yahoo.com with HTTP; Thu, 9 Jul 2026 05:09:20 +0000
+Received: by hermes--production-ne1-7568ccb994-mqdhs (Yahoo Inc. Hermes SMTP
+ Server) with ESMTPA ID da73cafa7d25cff72b3b6899257e7b9a; 
+ Thu, 09 Jul 2026 05:09:15 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,175 +50,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=temperror header.s=selector2 header.d=Nvidia.com header.i="@Nvidia.com"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bOJJj7rmx60PJSWTNzmJhpej3sKFS5Wz0lJyPQb5rMSve7PCKTFTIEQRyzvrxznC2DbuldrKOnvAKU9jqmPxJWQntoKhXg07xNTS5g9vCvdt+IgIYPJqK3AiSmLbbOyBkkn6b8zt53Ft5+JJpdycLFNpgJiPe/UOPFKv3kMMAXjhP9r+o7zcJFDtQoYFwKpKr6ZDaeScx/TEUs2nnAUUWEgoVp672imEF+mPjXx5I/8tYGeAr1IMtPhWiUn2x89iY6ggjMo1B351Xkxs1t9FJuUH5Hpjg21G0jIWKkIAyn48n9kCDMCGHalzg3ZWOtRMzb4YCaooM7vGRNBq1UcszQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=628hE3qKJtKmhgz1J5dqnmQSJXhpojgwSEt0XJFiwHk=;
- b=sZ826dWvoJR0CQ61f3y+brnuYXkfl04ZcglwMw+BPJmSZTUXxsjb5KcakHxBlOed2S0bYLpG6GoZv19gn0CUFc8vdaWxjyynM229HQOu4ejImMFB69UXvhsxuPH8ZPA8lI8EA5C/udW+KtxkWVQdL/iyZCA2TqyJumPa+fF5rKqsovCiF+rVvN3HBm2R2Eh3mzVThdA+EGJs9mzQRXPukCuyOZIb6R9Yu9+MExQUbhncldCXh0F35bVZTtNq3jXR1sD/+4bAPzE3m1agCEBGkpuuZz4rk640FTvxEXLpGBISN73kYHU157Us2EiDYZGz4q/Q3w2PFPgbL914OQDcJw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=628hE3qKJtKmhgz1J5dqnmQSJXhpojgwSEt0XJFiwHk=;
- b=bz5IKidz0aU0mhB4xRGwF2vFDP73iMiXQqknrJ5piQ94nra9oZVGFVmgDe6LIAxnbohuh5HRTYE7Nb+sgJjBiU11MeikVvzjdlL7gLMg9FB0voeTqK2vX0EWDvU4yK8XINW2Jcme270SiUwpeTTBjJeVR5I8HQOI6beO+PCgz7QLFyngV63D6DqDjxNBNCsLbSVkoDkvXpDOA9khZOgGBmvxDCZH4TCPrJ2qRBHGlV/SfOiIftDwBLNpnTBNvEWKH3osMg8sqSjD59eUOJ546U6ZafLqbMDSUgdR8iT7u5ANT8ENEFWf78eWB65Tg1Cf+6Ou3uIZQjOx4iYueE2Mvg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 08 Jul 2026 22:28:00 -0400
-Message-Id: <DJTOP760MDDG.2KUSKD8WVVKJ5@nvidia.com>
-Subject: Re: [PATCH 13/13] mm/mremap: convert mremap code to use vma_flags_t
-Cc: <akpm@linux-foundation.org>, <tsbogend@alpha.franken.de>,
- <maddy@linux.ibm.com>, <mpe@ellerman.id.au>,
- <maarten.lankhorst@linux.intel.com>, <mripard@kernel.org>,
- <tzimmermann@suse.de>, <airlied@gmail.com>, <simona@ffwll.ch>,
- <l.stach@pengutronix.de>, <inki.dae@samsung.com>, <sw0312.kim@samsung.com>,
- <kyungmin.park@samsung.com>, <krzk@kernel.org>, <peter.griffin@linaro.org>,
- <jani.nikula@linux.intel.com>, <joonas.lahtinen@linux.intel.com>,
- <rodrigo.vivi@intel.com>, <tursulin@ursulin.net>,
- <robin.clark@oss.qualcomm.com>, <lumag@kernel.org>, <lyude@redhat.com>,
- <dakr@kernel.org>, <tomi.valkeinen@ideasonboard.com>, <hjc@rock-chips.com>,
- <heiko@sntech.de>, <andy.yan@rock-chips.com>, <thierry.reding@kernel.org>,
- <mperttunen@nvidia.com>, <jonathanh@nvidia.com>, <kraxel@redhat.com>,
- <dmitry.osipenko@collabora.com>, <zack.rusin@broadcom.com>,
- <matthew.brost@intel.com>, <thomas.hellstrom@linux.intel.com>,
- <oleksandr_andrushchenko@epam.com>, <deller@gmx.de>, <bcrl@kvack.org>,
- <viro@zeniv.linux.org.uk>, <brauner@kernel.org>, <muchun.song@linux.dev>,
- <osalvador@suse.de>, <david@kernel.org>, <baolin.wang@linux.alibaba.com>,
- <liam@infradead.org>, <npache@redhat.com>, <ryan.roberts@arm.com>,
- <dev.jain@arm.com>, <baohua@kernel.org>, <hughd@google.com>,
- <vbabka@kernel.org>, <rppt@kernel.org>, <surenb@google.com>,
- <mhocko@suse.com>, <jannh@google.com>, <pfalcato@suse.de>,
- <kees@kernel.org>, <perex@perex.cz>, <tiwai@suse.com>,
- <linux-mips@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
- <linuxppc-dev@lists.ozlabs.org>, <dri-devel@lists.freedesktop.org>,
- <etnaviv@lists.freedesktop.org>, <linux-arm-kernel@lists.infradead.org>,
- <linux-samsung-soc@vger.kernel.org>, <intel-gfx@lists.freedesktop.org>,
- <linux-arm-msm@vger.kernel.org>, <freedreno@lists.freedesktop.org>,
- <nouveau@lists.freedesktop.org>, <linux-rockchip@lists.infradead.org>,
- <linux-tegra@vger.kernel.org>, <virtualization@lists.linux.dev>,
- <intel-xe@lists.freedesktop.org>, <xen-devel@lists.xenproject.org>,
- <linux-fbdev@vger.kernel.org>, <linux-aio@kvack.org>,
- <linux-fsdevel@vger.kernel.org>, <linux-mm@kvack.org>,
- <linux-sound@vger.kernel.org>
-To: "Lorenzo Stoakes" <ljs@kernel.org>, "Lance Yang" <lance.yang@linux.dev>
-From: "Zi Yan" <ziy@nvidia.com>
-X-Mailer: aerc 0.21.0
-References: <380f761d35a3faa4370f8b3f92e3d4af3d4c7110.1782760670.git.ljs@kernel.org> <20260702134947.25189-1-lance.yang@linux.dev> <akaJx8Zt8kazlrjq@lucifer>
-In-Reply-To: <akaJx8Zt8kazlrjq@lucifer>
-X-ClientProxiedBy: DS7P220CA0110.NAMP220.PROD.OUTLOOK.COM
- (2603:10b6:8:25d::12) To IA0PR12MB8374.namprd12.prod.outlook.com
- (2603:10b6:208:40e::7)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1783573760; bh=m2Glp8wi3kwkb5QhxQq01xhDsLdInXw/WE9Th4YGj7w=; h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To; b=FbvF4Bxmi4Ci6Hv5xb+vV9U71ad2my3dCMUodg1CzrUK0YkET7hCIqlBDdPU3pkDG/Iv5g/VussMG/VmAbVqCIcGPZC+JMvayAiXf5WDNJb2h4zgoM/ntZkK5O/AWYppIJPchITFOucd54cmEi/Cj1G//islK+0s/X4Yx3tlWLc41VdrCA4KBPDRm861hn4PzNOjPHkVxMrmTctlVAc0BDGtrdtbn42TrfQjiB6lsdiPT1cphgWH2kNQkhR3FKNMJPddS7h4ZxF+QRVVwaQJbiVk6vNpjf279ikqwrI7c5rKjVi7exCMIdurlvauzbBKDgjbs+xYMeBj7xf4IOEAUw==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1783573760; bh=OHOrD+3w7dGTNtdsk72dzU4E9ANMJiTyFgbcK/ru5tX=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=OHuxLpznchqCXBF6RtQMf2NIwJ19nUIsa3CGjThqzYm7nPRJcYXYFpA2Z6KWU3kQpwuakhUlxS/ah/CzYWT4Tyg4SwFjQACG2RDnlk3Qw2DcqZbJtDSdE30RTGxP6Buymn/tP+LKDIb7g01Ky7moCG2WMtYeJWOljhtuykzlMqdg1navdJF1ewiHNGxRPfCc/ir7PKJJmKPUEYwVpg+MxR+wjcQZy+xgJCVv+QaRbZbdMliJfebMskt+c3ZYmi+wMkh1RHZuvWm/WH9e/4fNE5O+6hc99gbNErHv6okok+kl12ZVtr7C1+HmdzRvl1cRcb8dErMBmGrXesL19oXPSg==
+X-YMail-OSG: L5_GXkAVM1nr5wX1RW1uU2hcTkTL5jxrxlRzDHwzSHFq5_HwNoSPzHMb8STgzcV
+ Yyd_gnqlenOiF1AY_3yYVjoQWQoZ_uNHJaR.nKgmQj.C19VGRrFcPDa5o1N3i3B_.KqzUYh2mHtX
+ sAzhM03LHWV4aJ4vAnyR6ujvYXhSzrrFAFUuxt2cx_WFC05Okt49awJxOPfN_wazg.AdP94d8seO
+ 8RSMVM7YJTLmfsr40dbLkpHx_D.tKNat5.SyWKckIuWn_umVtnfBrYERURZtzD.N0XdzH8sYwYzf
+ sWhbMUIs7bWczklFk_UmC7.kpxhnlpabdrFkZHuHK5jMz8y5cgILVPzy9vtuK9lisoBCBlTjKGfn
+ Gvi2WTQcVALyD_ptbvc3BMAOPgqmCqHadwN.Lbr7LMnkqja4jTAaWO5xNh9g7el.MjVBdWepBYo8
+ gZRrWcBo_vIPjqUNtiJZ_EbmSi0qQwCsw6m62TOwAETg12oJN9ZSXr9pqzg6TKmjR_Z6y92ihN6V
+ Ss9C.8XDLdv3p44a4gJLlWi7TCgV1vsbhaK2RGIh9HR1UNIN1TF94zWyMtgmeCKHjiRA6AEWkS8n
+ QGaVwWN9uMd.kI29ZRFjxK216DRYLX_Qw.zj0a3shDbTjF.gxsTnOQ8H0Xe8BJGdmuCad6N_t9pG
+ DF6l7ypmnCE3emzN9AVnLbbX.zv9dtEsGxiIFwcSlV8TduaFKooso8MG.qvKhX4J2JEO2JKsnfwa
+ jLJfobfyjHgs7fXmlvYV5RDSXZJojuhaOU7iGejpk7ClVExPE8dXuBMnjuDwq.ysmSlV7qEWsOeH
+ ok7YRUeItqjtjoCEeIo5nK8W4Nw1TvNpYil8.dyGCF0v14BeRQRdZkwguTWtmdIZLZp7jAgHgF9f
+ pQCfEqeCxKBzfduyoJi8cnwdKX_LXspB_FpGmqaHfTKWFqy1K9MwedNzzQXY5Gd0ZQa_5AZsUrCt
+ e7TcXGUEXSZORJiDctmy5mu3iLb33mY0N2t5e7t3Yo2yiYkbcTtJPXY7pHkMBnCFwRUW3JYdHvfQ
+ SGz_JMwYSqXv_I5RbYcTU6XPP4IPLwfjkPVcKrQSnmWmR47JlUhgdLKaTgyfBc_IgIIWRbgHAW6J
+ 8qFSy.w.HS5n.7QGSxFaVtj9aoVxQUEkG42H36aeetCAnuXi1Nk8YaOxDze6PJvQJSL38pNgXxJu
+ nkKdjrxwU5ylYAY5fw6HghbfBdEIESP1KcwuDarYYDasevuC_FJHJDZHHEDblaBc1m9BQN1wpLuT
+ UjgJ61wLo9IjPodH7i2rREGENSSwTLDECAaV9HAdzSlk3pf1doOKxvuzvybj5_16zKGHc1wGg.03
+ 2qezvglC5gqQvS7HYl0AVSfeHOUptynWmRiZNO0R5GmpQEMxEd3LhCWDNR1PCnu64yYbUcfrkXD8
+ 1rorrNdnIAGCj19eXyv01Pn0AqvoIkC7nTGc5zHlTx08LLs.rdeaqmWjmkq7QyJ5Y2PMVPbioXcb
+ uE8BP7d.j3CJTCy6OVl1_oVjUfxSTNw9ByU_lRyOw_e_xVczdvCo48fv6Z4sbDxO2MDPafp_bOxP
+ PiPvA5vcBxwt4IkBzs6E_IS.8nE8ng5qnegOTvGcUMFxKCDelcZCMWsrVWe2qyYVCgfA8OShayj4
+ Lo_ms74hnzfofMLExuISnkcgTNpx7zArfeW8OumP16QT3325IXZ_UNXn0uU00ZVeJAfcei3LfTnP
+ FaoV01zWVo_gdalXvsaJSVqoBVYGLAkuMmt6oNNlYzL31LGIM.o8Zliipn1_iWa8HD3zKS16EV6i
+ Dk8ZMiJ.xSSdmVfY_j4YiURA3dO6u1enbkCdLlEAcwmK3bikBCdPTR97g0slJZfUevKLKTbUgY5e
+ UWfaib2qa7p527R55cJ38hyjumN0KmViOGCek.s.8zNEIuZLvydXERedbQYYvA7u.abodpj.suYJ
+ i22rgC0UQuO5W3sRaG__zjNtXkn1_vYvLI.9y5ENh12ySOqChsm1ApNRtokTUkGllqCJN0d3t0vw
+ _XBF5Nz13Tfpby4u9UzO._q.Sp2ZH2HZCenixsqk0J_9N4sBhKSiZZdOUHMdWsrdmoRu28PpbUT.
+ RxeXlXLOzTwn0hZGd7oCNO7bEVquusAPQ.CG_Yt5lhOA9Ms5w2.FNaccbpyTo5DP48J1rKSc_XSz
+ pugRh8c2xQVdH6JSkAo6HpLvL2hnk2J9HXNT9bMcVD7HssN7KF4FxsIE_bLQeHV9D6HLoj8fwbxb
+ icQFb6VHbn_uTiy74g3kcy5Hmb7L0QydR
+X-Sonic-MF: <brchuckz@aol.com>
+X-Sonic-ID: ed7a79c6-6a0d-46f1-b36a-b1ea89bd3ebf
+From: Chuck Zmudzinski <brchuckz@aol.com>
+To: qemu-devel@nongnu.org
+Cc: xen-devel@lists.xenproject.org,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Anthony PERARD <anthony@xenproject.org>,
+	"Edgar E . Iglesias" <edgar.iglesias@gmail.com>
+Subject: [PATCH 2/3] xen/igd: don't register rom bar twice
+Date: Thu,  9 Jul 2026 01:09:09 -0400
+Message-ID: <20260709050910.8217-3-brchuckz@aol.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260709050910.8217-1-brchuckz@aol.com>
+References: <20260709050910.8217-1-brchuckz@aol.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: IA0PR12MB8374:EE_|CH3PR12MB8185:EE_
-X-MS-Office365-Filtering-Correlation-Id: d08dc437-8440-482d-c719-08dedd61b611
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|1800799024|376014|366016|7416014|11063799006|18002099003|22082099003|4143699003|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	Z/tjc06LNUj/ulqvzkhbzEoBDPqp8rufyAQcTElPkkRlF0B8T5Lbv7NMmcJr2fLtFbSsJgLgtFQE7voqnqaki+sE2P+d6Zq2TFmjE3fxJChyNDeTmhCtDvTiZO/XKngfNniy6jwmycUEa9vLkF/v2tAPyDLh4KOe8cIEtY8vtgAgmXR1KyNJPJW6VdDsUdKzYzL3I9N8Bgwyf2BDWdf+/jn3SJxXVHol2dODQXVmawEDDxxYe96QGbU8mg1IlAcDPVqgvY1CTNKIwHqWXo3HmmWXSRLC0lN2jN6ij11QBSyuVAY95RX+XdDCdiLHzjRN2nUcFafDKEwUJXECHDVv1pFmO+mPI2ZeDGU4uOG2KYqabOpq0AZ9U02WcOV+U5RXGj/0o58kNOZjIZXq8fjCkZno1LUGZ6pSljvH5R5tf+KUa5bZzEfGxC8fqYD4G4sHmVG2ZTvIDgG8RQNuqN5pIDhbPgMDHHgQn8uVdJYhWdGmCTbKhWOOB+jIlOYBfDORJ3fvm3BXCRyJ+MUAz7yvTyXwBlTV+Czo/rvFJC5g+vcpCcbEUWiElMspJ2ZW1nBbO8EFIAa9cdCLclSyU2JwoTl9+jG54SN7IHjyF3ozn47MSbc135KTOEkZcoJ+kUIaiOnk6eDkiLfNe8mpH1guZ6PqDK6XGo3FvG6Io0XdOcc=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PR12MB8374.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(7416014)(11063799006)(18002099003)(22082099003)(4143699003)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?b0drdVdBNTVMRW1PY2NGdUlvZm5yTDUvUlNxNm5CRXJhcG5NTHBVQVgvZDZi?=
- =?utf-8?B?S2hVcjdVcWJxZ2swZUZjSC9ITUkrczBKTjlWVlJ5aWVWRStvcWVvNU92b3dJ?=
- =?utf-8?B?YmlQNm1CQ28rNitYUzB1TUMrZFJCanluTVhwTGJEa1F4SldlMlQvL0hVNXNN?=
- =?utf-8?B?RnROemo0ZmdrL25FcUtHbWRsaGNLUzBvYjI4WThVRUVqVkIxeEtjVGZjVU9L?=
- =?utf-8?B?UzNRTUh5a3BUZjFFcnM0WU5Eaklzb3RwT3E0Y1JSZFEvdDRtWi9XOGJ5L2ph?=
- =?utf-8?B?RUJLc0hLREpIMCtZS0Y4eUN5VmJZUk5OZVZWOW93anpkbTBwUzVCek5icDNr?=
- =?utf-8?B?bE1GZEhhcEdtYlk4OFlwWFlobU9ZMFVBNW5hWWtkemRBb201UXN6ekQreW5o?=
- =?utf-8?B?b01oSGphdWJIOU91OGNFZFM3aTVxOWRPOXl5OGxDVUFBdmV4Zkpqak1KV1c0?=
- =?utf-8?B?T3JDWGtZV0p4aSt2Z0pxT2ZYQ2V2eGtTVlJwOW5YNGJ4dUpudGhxM1hhRkFr?=
- =?utf-8?B?ZXd2cTRpNnJmVWZTSGk2Ylg0QTlJS2pwbEx5YTJIcjBxVjNHbThZWVFMTENK?=
- =?utf-8?B?elh2Nk40WFBucHgzd01vNWl1MlRvTHpueEFQZEdVVjdGYnBqNG5lZWRQNTdT?=
- =?utf-8?B?YjVzMWgvNmw4bGpIVUUySjE0NHVzUzd0NVloT3loRDYzVWdsNEJ2ZTJBV242?=
- =?utf-8?B?K3pJZ2d2cHVHZ296RDBXMHdycFgxZEpFV3ZveW93YXlQZ08vNUlnRm05Sjd3?=
- =?utf-8?B?dm5EOUx2NTZQVEJ1WHAzZnF5cUhCTEkzUk9XNk0yek9VUGhlR0ZzWFNOYzNJ?=
- =?utf-8?B?NnpKckl1WTF5emJNT29rZDRXU1pJemFuVGRRWUJBRXZEYXNESUIrbVRRalhq?=
- =?utf-8?B?TVV5MUJzR1ArUWJoQ05FUm5CeHhGRHJLVEU0Z2lOMkxrQmNiQnQzNGZxN1hw?=
- =?utf-8?B?Y1BmcHU1MWdZMkcvY1ErMGtFWVMvWnBnTThGd2I3emdLOFZYSm1oSHhUS2R2?=
- =?utf-8?B?eVpNOFp3NC9EQ1hDRStsMnZLSmdObktmQjVFNGo4NzNZYysvYTYvcHlUenFG?=
- =?utf-8?B?WFJlaVFnbDMrNnN1OEdYYjE1YzczTzVXdUJ1K3BESk90K1FURFlVU0xZMU1Z?=
- =?utf-8?B?RGJWRUlVTFZMZy9vbExnRW5DcVREZytCTDZoMVNFaTNvYSs5Mm5DeUdNSzdL?=
- =?utf-8?B?N0NyWVZpaHNLdGlLYysvWk41MDZ3YXdUOHE1SUczODVNeXIrMis1Vjh0QzA0?=
- =?utf-8?B?Y1lBakpkZ0ZHR3pJRjlTQWJKWFhTcHJwdUJKS3JhZnZiMU5oUVpnZERjM2VR?=
- =?utf-8?B?bmgxSFlnMTVaSzVyYnIyYWVKUzR1Y01hSUtyTTFNUmxZTUJwcmV0ZmhxYXFV?=
- =?utf-8?B?Vjl4aXI3L0FDOTFkZUVQL25oUUFyZ3RmRlBPdkR3MUpPditUenZhS1hxSWlr?=
- =?utf-8?B?SGVFSlhrb0xCU3NsZ0JVVmlPekxKbFdzaXd0MWx1SDM2VHhYcDBQdlNBWjRE?=
- =?utf-8?B?QjcrYnY4R0dlQklVMFllNEVPVjFoOFh0WEdnT09yajZiOTcrQkYvSGhWcXdz?=
- =?utf-8?B?bDBXVlpXU1R6dlBEbm1JNnRXUWdLWEQwQ0lRUDB3L0QxZWtxOXFxNHVmb2ZK?=
- =?utf-8?B?VHV6dUh1d0hpbFVVY1lyT1gvVHBmZ1h0NUJreWJjTjZjWHlqbFNQTW96M2Zm?=
- =?utf-8?B?YjI1TVZrYmhFRkRuSU9oY1lKK0lmcU8xQ3E2UDJrZmMwbTlWVFhCVE9WUkdN?=
- =?utf-8?B?a3VKaW0zUWc0eXdoWDh0Q3dhekxVMUt2Vkl4MUNRUGlmNDNsTVJDVytwRktW?=
- =?utf-8?B?c3VpRlQ1b0hyTitNRmpsSTBYWS9WVzN3ZkFBQ1RvRWE1SXh6dWhPdGxWNjFN?=
- =?utf-8?B?bVdvQnFVSVhxbTRSVy8yckJ3aW9SWlFtRGUzaHAvR3dYd1ZTUjdQTGJRUzFN?=
- =?utf-8?B?TmtYeFRRSWNhTytJNGhpclVLcitvcnJOd0VwLzQ5dlBOYURLYm1wVEFVTDJh?=
- =?utf-8?B?WWhETDBzRzJXcEwydmVaWWF4VDVTMGtDbGY3RlpnUGRabHdRMmNmTDVrbFFC?=
- =?utf-8?B?L3VibzBteDdUNmNkZXdWUlQ5ZHFXMm9XWTl0NHVCY0VBaGRkdEpLcmdlaVl6?=
- =?utf-8?B?d21mKzM1M3FMM3VPcHdMbnBYUFFsbGhXWGVuRDA4MHlqV3BHZStzWkJjUjdI?=
- =?utf-8?B?Q3dwbCtuNHcvaWpmWVV4eE1IQmFGeHpQUytIWkxyMFRNK3VLVkJSZTNOam9J?=
- =?utf-8?B?c3BEWXpUQnNyb1dTVFVWR200RUNLL2hXTXd6Y0VVY05VNlFxclpqVG8wa21J?=
- =?utf-8?Q?o/F5FtLy/Vhx3E1ynX?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d08dc437-8440-482d-c719-08dedd61b611
-X-MS-Exchange-CrossTenant-AuthSource: IA0PR12MB8374.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jul 2026 02:28:07.1996
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: HwvHZWQC9MdnD6g3v08vrOQ4XTKGoKoqxeyCnkhEi4z4/RE9HfeCt5vBm/x1LNgj
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8185
-X-purgate-ID: tlsNG-c1860d/1783564101-48A503FC-1A14A6B0/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-33051d/1783573762-BD1BE5D1-2BDC9F9C/0/0
 X-purgate-type: clean
-X-purgate-size: 1186
+X-purgate-size: 990
 
-On Thu Jul 2, 2026 at 12:07 PM EDT, Lorenzo Stoakes wrote:
-> On Thu, Jul 02, 2026 at 09:49:47PM +0800, Lance Yang wrote:
->>
->> On Mon, Jun 29, 2026 at 08:25:36PM +0100, Lorenzo Stoakes wrote:
->> >Replace use of the legacy vm_flags_t flags with vma_flags_t values
->> >throughout the mremap logic.
->> >
->> >Additionally update comments to reflect the changes to be consistent.
->> >
->> >No functional change intended.
->> >
->> >Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
->> >---
->>
->> The vm_flags_set() cases below spell out vma_start_write(), but the
->> vm_flags_clear() cases don't?
->
-> Yep as I said elsewhere, implicitly taking the lock is terrible and me do=
-ing
-> this is completely on purpose to get rid of that :)
->
-> But I haven't been clear enough clearly, so I should put the argument as =
-to why
-> that's ok in the commit message.
->
-> Will do so on respin.
+This also fixes a failed assertion in pci [1] for Qemu
+version 10 and higher when passing through an Intel
+IGD with an option ROM to the guest.
 
-How about also add a comment to vma_clear*() telling us a lock is not
-needed and why like you explained a lock is needed for vma_set*()?
-This asymmetry could confuse people.=20
+[1] f6fc01c ("hw/pci: Assert a bar is not registered multiple times")
 
-This patch looks good to me.
+Fixes: 881213f ("xen, gfx passthrough: retrieve VGA BIOS to work")
+Signed-off-by: Chuck Zmudzinski <brchuckz@aol.com>
+---
+ hw/xen/xen_pt.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Reviewed-by: Zi Yan <ziy@nvidia.com>
-
---=20
-Best Regards,
-Yan, Zi
+diff --git a/hw/xen/xen_pt.c b/hw/xen/xen_pt.c
+index 474606e..c3b6c1e 100644
+--- a/hw/xen/xen_pt.c
++++ b/hw/xen/xen_pt.c
+@@ -495,7 +495,8 @@ static int xen_pt_register_regions(XenPCIPassthroughState *s, uint16_t *cmd)
+     }
+ 
+     /* Register expansion ROM address */
+-    if (d->rom.base_addr && d->rom.size) {
++    PCIIORegion region = s->dev.io_regions[PCI_ROM_SLOT];
++    if (!region.size && d->rom.base_addr && d->rom.size) {
+         uint32_t bar_data = 0;
+ 
+         /* Re-set BAR reported by OS, otherwise ROM can't be read. */
+-- 
+2.52.0
 
 
