@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3804EC43458
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jul 2026 18:35:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1358455.1612558 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D67BC44501
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Jul 2026 18:57:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1358504.1612590 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1whtar-0003eH-Sw; Thu, 09 Jul 2026 18:35:29 +0000
+	id 1whtw9-00089f-61; Thu, 09 Jul 2026 18:57:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1358455.1612558; Thu, 09 Jul 2026 18:35:29 +0000
+Received: by outflank-mailman (output) from mailman id 1358504.1612590; Thu, 09 Jul 2026 18:57:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1whtar-0003dv-PI; Thu, 09 Jul 2026 18:35:29 +0000
-Received: by outflank-mailman (input) for mailman id 1358455;
- Thu, 09 Jul 2026 18:35:28 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1whtw9-00089Y-1u; Thu, 09 Jul 2026 18:57:29 +0000
+Received: by outflank-mailman (input) for mailman id 1358504;
+ Thu, 09 Jul 2026 18:57:27 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brchuckz@aol.com>) id 1whtaq-0003cA-03
- for xen-devel@lists.xenproject.org; Thu, 09 Jul 2026 18:35:28 +0000
+ (envelope-from <sstabellini@kernel.org>) id 1whtw7-00089S-Oh
+ for xen-devel@lists.xenproject.org; Thu, 09 Jul 2026 18:57:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1whtap-00CZrX-CN
- for xen-devel@lists.xenproject.org; Thu, 09 Jul 2026 20:35:27 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1whtw6-0047LG-KH
+ for xen-devel@lists.xenproject.org; Thu, 09 Jul 2026 20:57:26 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <brchuckz@aol.com>)
- id 6a4fe99b-2eae-0a2a0a5409dd-0a2a4508b8aa-40
- for <xen-devel@lists.xenproject.org>; Thu, 09 Jul 2026 20:35:26 +0200
-Received: from [98.137.68.31] (helo=sonic308-55.consmr.mail.gq1.yahoo.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
- (envelope-from <brchuckz@aol.com>)
- id 6a4fe9ed-ee29-0a2a45080019-6289441fb079-3
- for <xen-devel@lists.xenproject.org>; Thu, 09 Jul 2026 20:35:26 +0200
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic308.consmr.mail.gq1.yahoo.com with HTTP; Thu, 9 Jul 2026 18:35:24 +0000
-Received: by hermes--production-ne1-7568ccb994-fjmzg (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID 910e3b4d72a347495c18993f77062a0e; 
- Thu, 09 Jul 2026 18:35:18 +0000 (UTC)
+ (envelope-from <sstabellini@kernel.org>)
+ id 6a4fef09-5cb7-0a2a0a5109dd-0a2a4509ea7c-12
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Jul 2026 20:57:26 +0200
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
+ (envelope-from <sstabellini@kernel.org>)
+ id 6a4fef15-b440-0a2a45090019-ac6904fee87a-3
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Jul 2026 20:57:26 +0200
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id C7E1F6137D;
+ Thu,  9 Jul 2026 18:57:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EADEB1F000E9;
+ Thu,  9 Jul 2026 18:57:23 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,98 +50,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="From:To:Cc:Subject:Date:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1783622124; bh=6pmAJjcUB5q8haQTvbnM0zogdQ5zH/eTiLvwW+j9fm8=; h=From:To:Cc:Subject:Date:References:From:Subject:Reply-To; b=suhQKlawReJfhHuDdVMiNiIWTqvx5x2xbaHPLkGg6xExVCKMGgH1K26YqsDcIbi5w+2w7RSqQFagUGActkNL+cE3nVpyp/FSw8brXuo3wyXnEp+sSiiXL/bWFpNN2upwudI+k8QDtrVrUecy7lILVObvU7QHTSA8HM0Ta6dz8E7GjvLLwQSI6ut4HRbTva45MmAgLgK2uYFpeu4iNPSZJaekvpbBQgiFQhNonC4jMvfHhpY87p2urFHIPNP3Vg3JZ0lY+7pueUKxOHBVfVQQn6bqhCpFmZuFyww+c1DjYnQmopjnuYzGRcItUBftyrO0jdYyyBrZLR94XQoTvVYPsA==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1783622124; bh=YbAc9UOu0BeKowFlBqJ4iCwzGIb50Lalyd1ZEG25njI=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=fUnxTC6hGi26haE9mXa/MuDpp3fy8jN/LoNjlCjG9Ii6GXE9QAP/iTswUZ7Y6oOD8B845pojt4CEnhXQpLRe1RkX31i4n1J4St5ZCRvm2uqE0JqYCLV6MDB89QYMG2ujuAW2j0jBMJovAlhklk5waqB/CqlJ/LekLFTvVCU0uzCHRWAGmteDTngCsIfGZFQo/i4nQHgukufzfgzySOer8xvbm0uzeMOduZSTFpn9kymr70iN/mcC3ZQ8qF+EqmvBXq6wByl6uxPmEP15t4MoBhQCapQd5ti/gMeNT4C03NSWvkZ6k2IVLylTKjXMnQSPPUs72VtZA1zzRWayHJ0E+w==
-X-YMail-OSG: GRRgYWYVM1lHNfMJWOAqwv6mlEfZzZhs37EeWkgCVNkndp.OWT_55kR6H2tdoXq
- .ETG4t.HZwjO_zpFAJ7_3jlBTPFH5Czvxo20eD9rIIBThM7zxDugIu4Toc93DsCojhuTzg4dPnbH
- dlPw4GlgoFGSK5zvQKiqwXu.M5Ixdhtuhx_0jFW2Jqhvn6w3yeXD3DYHP9jtNk32KZzwaUN63J5Z
- VJ3ATZI2sYvwyDBIjaGymjYPR8y1qire.EfHglRcxDNU1Kl5JhAm.mmZO6PKA.FrMlD3OWa42rQQ
- O89TSzERQPxbAh5b5ngCfG0QS45U249A5X1EEuYKAXMtgGG74CS.4JWEM20S6ocQLA0tDi.vOlxu
- FY9msu.axaHpPOqibZKVDCaFJwfX0Wc8GZ8sVaWpGnU7D9EA1wZm4GJqQqyeW.g0OM1WM4nhujha
- oaNArOEqo.77T7T9kNtRvR_LiFyIEAEQ1x6EAQsobpBw5iRDNNanPOJFqEZawCx7jRPsFLUTfJ1N
- L5Lyfo3sf6Y99O_.MZYmMfst1zGpnZK1TFMYwlgnPqZKtUr5cY4xVDIW5FBO9uq9YZxM6pA5GCR_
- G7VB2iMmrYmmgsBMw7H9HYCD8nyLUU4h3AP0G2Im98iUbBtB3_oRe_cW36wszrQBZaNH1krqDM.y
- zQuZhekO8goTh38iFBgqJ4lrKya1gsTH.HNMGVyXErjpoO3xT_jMlOBCbn8hHO3ONBfQYYTROoLz
- GxRVbwxRoLsj3IsrAcKQ8nMmfZai5hX7cvhj_yo6kasfEpjKWU4pYgJoMs0emTpfYiFOBd9iSHoq
- TjjLjA8hQDJvo80OT87IIxh3rXDSa5uX_rb2SYo_6TOTy7d5ba78KJOBWVYfwqg9ubcGQevfCIgu
- Z3ZXe_5Uu6A54FNR9.mWl.xY3xJCTf.X16B.bpOd2nR6x0oKL6Zp..n.kYvq55cbCs5sykRBE2j3
- 8Vvj92_NFXHATmwCCdX0KfJ8B2LRosC0o4K8nDelipWxt._yOXPgb5Lf9MaOaDvD.OUmn6l1fYU.
- WXvWjXi7b_3IHONmK8XE7tgMBpCpdG8iBYbGUgCiY5hcwLb1DaI1iMBUeiTJOqx.BqKk9WNxXzp5
- 13hLX6_OMWDgNbQ.u4fsyliqrvO51ZW44snYBhOpKGs_3sKgJ8g42J1.cZVLfyRzodYFYCLQsrbK
- 1HXzjTZkqXYKqHShUW1gILmuDmwFfFs2yqDlvDVzcrKZgIS4Ax1UOBZ6Uz3WQ9I9g6RJFoiACytY
- 2kq2Q6QHmY7pocqnS4r9Ql3WZ.r.T9wLY3ynksaQkBOfyhucg5whcsGOxwLVMBuAP1WOT2aku_..
- QDBmJ_VnxZhZRHyxa.ovx0sVUsESuPj82grjW.JxCrK2sLkTL0_i7_Y2DhabkjC5R_Mh4yI8BsyT
- fF5wVjr_PCeNiy.JGAndz9nYjSwokwSqAKTDhTPmhxG.cnqrmjvlaoPB1wZJ5qvjdl_AH.33UpL6
- G5hdv.VukPsH5s72Pn_FRdkjTVruVtt4vngswTeaPziJxkR.JVXC7RbxNVT7XMdgAeDrh6I4Hjjm
- yMmZtQZB76jFCUPJ_MyVpw.r213wT3i3oT515hXEFj.ZZDKzV9bYOcfZdE4Cu9lfRjKb6lSbmML_
- o8WMozzRPnR4CFmTr4iuCgkGrXRPTr061UNwEVBJeHvrmjuloYCQjXaUxKLDZdk7qjLUOQdfnZ93
- Wuc4zZmImORw4xQC64R4rs4exmhvlNJmQCmja2g1qUOdkSJ7crONCZFn39ZJ1Y6ap4FPCUQ0UaqL
- QBelb.AJKlas6UhLfLu7D9k8kvGwFPS8j8aS5Lm9eUFbKzr0IGrw2xEwwxCPkzg6KHyi5oggzSTv
- lcwrh.C_KV4pnz3S.5PGUxUqtFoka4p0NuCgJEUqps3rLsLrdl1QD6Zp8sl.vudykpiPFs7eat5K
- PaU4dt8jASVK.3rpN_E.NfoStyMtA87pjTtizpPY9VgD6BCKIr8FUMVco_6CTqyBL6PNvTAKBpU8
- Q3uAKTypnumQBzXDjS79fld05MtAP3DLfbje2h8LVmcL.D9XwOdEde3VLZ9XI5Im2q5Q45p3IBtz
- IjEpQA8rEBntk6f7gTJeLVviJtrlWRWPBwz09yc69u0a6BmXXrDYI8HOEyYpWdLbsRnZI1Hs_v0.
- qqD_zjSBsFe9PF6DtMvFHfy2kZw5RsK5G9x_Doby4q2pbsE6Kf4S4DYx1qb1S9XmA7ZFqPQuP2e9
- JWoAQCWRgzmyj6YMrH1yY.xI7j9Dw2yPnw9qWt2U-
-X-Sonic-MF: <brchuckz@aol.com>
-X-Sonic-ID: 7cd21549-264e-427b-ac56-e248d8c18734
-From: Chuck Zmudzinski <brchuckz@aol.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-stable@nongnu.org,
-	xen-devel@lists.xenproject.org,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony PERARD <anthony@xenproject.org>,
-	"Edgar E . Iglesias" <edgar.iglesias@gmail.com>
-Subject: [PATCH v3 0/3] xen/igd: fixes for Intel IGD passthrough
-Date: Thu,  9 Jul 2026 14:35:13 -0400
-Message-ID: <20260709183517.25866-1-brchuckz@aol.com>
-X-Mailer: git-send-email 2.47.3
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:cc:Subject:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783623444;
+	bh=8Qwe9Eb1EWMzqFxlc434ecVMDaK8l7iRxYDzMndfC5E=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References;
+	b=flVtDyBtbhd5T6+87FCiik0HiOoDbs1JfbuB+NANhQ2vTEeesN4upqVDIOpWiOMVH
+	 T4obYiKUosRb9bml5sFMsRmVKi+qFCInAUD8OHhLkvNgDZZMbGmYnHAJfZ30P8Kn/0
+	 PFMIaZJdL1Bmhwm7rRGoFZo01X1+1lyNZ9/1ujByiXZrCPlx3ZmoBQ+FEKI8HTtLYS
+	 WUuLNCL+djM9kz3/yMD0FKL1/3md/pRu/1wrBPlNA5ego75WppSBD9M3zg1Nrcqs5B
+	 GPdgYh12syFRidEApoOgiiFX+v9oTEY2AKv+op01jAwn+XB1xQkFea3JFtV/59FOmB
+	 GMSoi+1uTVmdw==
+Date: Thu, 9 Jul 2026 11:57:20 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: "Halder, Ayan Kumar" <ayankuma@amd.com>
+cc: Michal Orzel <michal.orzel@amd.com>, xen-devel@lists.xenproject.org, 
+    Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+    Bertrand Marquis <bertrand.marquis@arm.com>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, ayan.kumar.halder@amd.com, 
+    Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: Re: [for-4.22][PATCH v2] xen/arm: Fail domain construction if a
+ secondary vCPU cannot be created
+In-Reply-To: <aab9fd35-6230-474c-8848-480c8cccc43c@amd.com>
+Message-ID: <alpine.DEB.2.22.394.2607091157100.565858@ubuntu-linux-20-04-desktop>
+References: <20260709063643.11800-1-michal.orzel@amd.com> <aab9fd35-6230-474c-8848-480c8cccc43c@amd.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-References: <20260709183517.25866-1-brchuckz.ref@aol.com>
-X-purgate-ID: tlsNG-c1860d/1783622126-78A3901C-565D52F6/0/0
+Content-Type: text/plain; charset=US-ASCII
+X-purgate-ID: tlsNG-bad1c0/1783623446-64369A0B-CF7C005C/0/0
 X-purgate-type: clean
-X-purgate-size: 1335
+X-purgate-size: 2098
 
-This patch series aims to fix long-standing bugs that need
-to be backported to all currently supported stable versions.
+On Thu, 9 Jul 2026, Halder, Ayan Kumar wrote:
+> On 09/07/2026 07:36, Michal Orzel wrote:
+> > construct_domain() creates the secondary vCPUs in a loop, but on a
+> > vcpu_create() failure it only prints a message and breaks out of the
+> > loop returning success. As a result the domain can be partially
+> > constructed with fewer vCPUs than d->max_vcpus. This causes two contract
+> > violations:
+> >   - Xen-Guest: domain's FDT is generated before vCPU creation - Xen exposes
+> >     incorrect information (e.g. two vCPUs listed in a device tree while only
+> >     one is actually created),
+> >   - User-Xen: unlike x86, on Arm port we try to bail out as soon as
+> >     possible on unsatisfied user requests (e.g. user requested two vCPUs
+> >     for a domain but it was created with only one).
+> 
+> Unrelated, but just to add my 2 cents wearing a safety hat.
+> 
+> The user-xen contract comes from a system integrator. Xen should try to follow
+> the contract and if not panic or bail out.
+> 
+> The Xen-guest contract can be used to enforce the rule that guest should read
+> the contract before doing any safety critical task.
+> 
+> The most important thing is anything errors that are internal to Xen, should
+> be propagated to the external world (either as panic or return an error to the
+> guest or abort the guest). If there is a degradation is functionality (eg Xen
+> creating a guest with lesser number of vCPUS that what the system integrator
+> provided), then this is safety issue unless we put an assumption on guest to
+> read its device tree and know the final configuration (which may not be always
+> ok).
+> 
+> > 
+> > Return an error instead of breaking out of the loop. Both callers
+> > (construct_domU() and construct_hwdom()) already propagate a negative
+> > return value and fail domain construction.
+> > 
+> > Fixes: 6b0e8e43348a ("xen/arm: allocate secondaries dom0 vcpus")
+> > Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+> Reviewed-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
 
-This series fixes three bugs that cause problems ranging from
-a dark screen in the guest until the guest OS graphics drivers
-are loaded to an assert failure that prevents the guest from
-starting.
-
-To test these patches, it is necessary to test with older Intel
-IGD devices that have support for legacy VGA bios.
-
-The patches have been tested using Xen 4.21 and Seabios 1.17
-on Fedora 44 using an Intel NUC7i5BNK with an i5-7260U processor
-and have been verified to fix the bugs as described in the
-individual patches.
-
-Changes in v2:
-  - close open files before setting errp
-  - improvements to readability and style
-  - small corrections to the commit messages
-  - add stable to Cc list
-
-Changes in v3:
-  - whitespace fix in first patch
-  - fix Cc address for qemu-stable
-
-Chuck Zmudzinski (3):
-  xen/igd: get PCH info from host sysfs
-  xen/igd: don't register rom bar twice
-  xen/igd: fixup device id before registering rom
-
- hw/xen/xen_pt.c          |  5 ++-
- hw/xen/xen_pt_graphics.c | 85 ++++++++++++++++++++++++++++++++++++++--
- hw/xen/xen_pt_load_rom.c | 18 ++++++---
- include/hw/xen/xen_igd.h |  3 +-
- 4 files changed, 99 insertions(+), 12 deletions(-)
-
--- 
-2.52.0
-
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 
