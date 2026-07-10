@@ -4,44 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D339BC43458
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Jul 2026 13:50:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1359384.1612967 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AC64C43458
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Jul 2026 13:56:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1359398.1612975 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wiBcE-0003H4-Mu; Fri, 10 Jul 2026 13:50:06 +0000
+	id 1wiBhx-0003yj-Dh; Fri, 10 Jul 2026 13:56:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1359384.1612967; Fri, 10 Jul 2026 13:50:06 +0000
+Received: by outflank-mailman (output) from mailman id 1359398.1612975; Fri, 10 Jul 2026 13:56:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wiBcE-0003Gx-JQ; Fri, 10 Jul 2026 13:50:06 +0000
-Received: by outflank-mailman (input) for mailman id 1359384;
- Fri, 10 Jul 2026 13:50:05 +0000
+	id 1wiBhx-0003yc-AU; Fri, 10 Jul 2026 13:56:01 +0000
+Received: by outflank-mailman (input) for mailman id 1359398;
+ Fri, 10 Jul 2026 13:55:59 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wiBcD-00034y-D7
- for xen-devel@lists.xenproject.org; Fri, 10 Jul 2026 13:50:05 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f4c5034ae000edb5@swg.vates.tech>)
+ id 1wiBhv-0003yV-AK
+ for xen-devel@lists.xenproject.org; Fri, 10 Jul 2026 13:55:59 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wiBcC-0076fj-Q7
- for xen-devel@lists.xenproject.org; Fri, 10 Jul 2026 15:50:04 +0200
-Received: from [10.42.69.9] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a50f880-5cb7-0a2a0a5109dd-0a2a4509c9a0-30
- for <xen-devel@lists.xenproject.org>; Fri, 10 Jul 2026 15:50:04 +0200
-Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
- (envelope-from <jbeulich@suse.com>)
- id 6a50f88c-b440-0a2a45090019-d155dd34c0da-3
- for <xen-devel@lists.xenproject.org>; Fri, 10 Jul 2026 15:50:04 +0200
-Received: by mail-wr1-f52.google.com with SMTP id
- ffacd0b85a97d-4758b2a9e2aso611696f8f.2
- for <xen-devel@lists.xenproject.org>; Fri, 10 Jul 2026 06:50:04 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47ad69519c2sm64612322f8f.37.2026.07.10.06.50.03
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 Jul 2026 06:50:03 -0700 (PDT)
+ id 1wiBhu-00F36p-NI
+ for xen-devel@lists.xenproject.org; Fri, 10 Jul 2026 15:55:58 +0200
+Received: from [10.42.69.7] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f4c5034ae000edb5@swg.vates.tech>)
+ id 6a50f9d4-bab6-0a2a0a5309dd-0a2a4507a808-36
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Jul 2026 15:55:58 +0200
+Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f4c5034ae000edb5@swg.vates.tech>)
+ id 6a50f9ee-ac46-0a2a45070019-b9ff1c238b6b-3
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Jul 2026 15:55:58 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 19f4c5034ae000edb5.00b for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Fri, 10 Jul 2026 13:55:52 +0000
+Received: from julian.home (lfbn-gre-1-197-6.w90-112.abo.wanadoo.fr
+ [90.112.16.6]) (Authenticated sender: julian.vetter@vates.tech)
+ by mail2.vates.fr (Postfix) with ESMTPSA id AD8D1820AB;
+ Fri, 10 Jul 2026 15:55:51 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,142 +58,137 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1783691404; x=1784296204; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=r26+NBOBwU7YOyCJCnIp2HtD+ClZUs25nbebhmcB+xQ=;
-        b=NlVlgy9D8pFJv1GsxijFOzLK2rDN3D0DBViNWeBpdNW0zhzlRunDKlM1Oe0ZbrdIwI
-         MutDlR9cUvgtQhtAh6DHQnjqs9OgqGLm5ECGH3UEER7crNk4e63E4DEqVGCt7o0xKA/B
-         TkLEGlZWqVPcQVmEF7s2EGDTHTm6NQ3+eYWXq47st3vsBdGLsjolTQvS4cNKtkPZtUwJ
-         91fd61ka/Ww5yncsCY8mwq0D7k/MSDYRxxWpi1IIhgPvjxNJ/xasWB+uD10zClSK6WP3
-         uPnMCyKInyPgPsSmhUJ6+HL/82fSoUdsfUQStzt8TupzS01CKheBlI2ZrHN3oxMh+lPl
-         2ESw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783691404; x=1784296204;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=r26+NBOBwU7YOyCJCnIp2HtD+ClZUs25nbebhmcB+xQ=;
-        b=NIQ+G31I9VdLJP+EAdGtuS0JbgA1FFrNFko8UHEtNwODcMp0gmCozE8Lbk5ETbhSqU
-         eRFQ3vvR85f5Av6IgwsJRAL3gmAYlUznELciGDTcAduSRP3LVJDbA9Ngvt/2yDG59okX
-         6yAiruvt0IPpc9W73YAMSMMBwDATCm0J4ll2ghrRNo22zQKpb9QOGlk3YBq5uA9sC9SM
-         4CNX8QTRtMh7q+STNUoj14uYbx8uS306+Ie6g/zAlvvmj3M8gb4N0azdRWuwmFAGyq2x
-         jKStF4jdD9VZs5yg0C8sR+F3Bd1fHKOer2xicXCac4dmy4IpLmZe+12z0ESHCHgf8hbl
-         IHwg==
-X-Forwarded-Encrypted: i=1; AHgh+RolzkqkPKLzQml9rAr7zvXyiNP3aD5j0rEjwie1hzAcRqFSyXHVH14dZBKGn7e03OMBKvwgNpVw7mA=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx/8lErHjhneIqa04nHRI8vqTc61F1Hl9sKdxhqvpK082givMYX
-	z6fKcBrxNsuItz4TGwtpNPE2xaKYMC5tTffDLGYhmx2+pdlcjwxRhNVso8GZs7c7eg==
-X-Gm-Gg: AfdE7cm4zB+MLvdOp3lUpPR3VBmoG1O6lj25+HQxzZu6WaoxXLhBF6X0m9m3SSbXaGU
-	XbcQrQ0Rlyoz3ye1t9NMUY5hpDvvm+9UUMgJmyS++cV2EA13RcmDA1Fg0P+5qSVW694rNRAaSLw
-	i2nvNqHgAAvUQoFDHTdMXFvfq4Sqv/Ypoan361V3NT7L/kQFyEm194sDgGed/paDvZHvavyQnEy
-	z3Nj/p2sUF52SpYIYwUYEGiS64EMGu6tW9xNr3whfEY2bNgUd+QAQIMxpbXeaQKmpCIOhlCMqPe
-	jIVWXRS7HecBxQlPtSfXAnQwtBA4lK4cmizAjV6YmE9+TVpjfcpWcGJmAg7kuFha/aL9WybGyWL
-	QFSFA/mvkUhA59AQjOJ6kmkb3Fiy9Sce3D9eEvzd9ysgaW0m2wivpK6SgrxGUfirAtbmw2Z7U1o
-	A4bGXTHovmx/zzAMyJFm1Fp31GSiBvIfx5oFF9xIdQ1XabWviUT9bpvd5YtSfWHI4XlTlqNbPMC
-	Esu
-X-Received: by 2002:a05:6000:220f:b0:475:cb71:a344 with SMTP id ffacd0b85a97d-47df075e31amr12998000f8f.37.1783691404136;
-        Fri, 10 Jul 2026 06:50:04 -0700 (PDT)
-Message-ID: <05743e4a-f71c-4883-9e5f-e91e749061e0@suse.com>
-Date: Fri, 10 Jul 2026 15:50:02 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=YGzIC8DFv3AcfD2nvL4tjjOdDOqJRfgBCsf3p5fTo9c=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:feedback-id;
+ b=euy1hHuzBRLuIYuholcj1Gp7W+As2VDipVmh0hUNRb85F3JdcAE/ES5CqNvPeymcIWe3dbwdK
+ ovQ4s/QUcGXGKL7eqfSkdwh0FTIrzOOjJuKf0Jui6u0MMSFCm6DXd+diW+qnmtKOIJbzORrrxgq
+ D7L2rV3LVlvSyWuubgSlvW2GJSyDFwWcVbDmgjK71wKB2sDFiSym6NPGt+grgLWL6EsIssyDUal
+ n9GHb0gc/7NCGTsrFBFaKQ44jA20wgkJej7gqF7MeyB0bYRGU0rSNzLDRSULtDAjEH/mjQ+g9ag
+ DAY6JAG7tGmXnjgut6YhlQmo1oYN9WoVhvZO/OxSmUQA==
+X-Zone-Loop: 48d887abb84af2a0aadde9ee0e8ea12dbe0cab011000
+x-campaign-type: default
+x-transaction-id: 501df9d0-3cba-44af-9a20-377aec980aca
+x-swg-uid: 01-d067762b-07b5-47e7-b21a-9798e1dcca34
+X-Mailer: Sweego
+Message-ID:
+ <1783691752.8631fc262581453bbf619ec5b2062170.19f4c5034ae000edb5@vates.tech>
+x-swg-bid: 1783691752.8631fc262581453bbf619ec5b2062170.19f4c5034ae000edb5
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+From: Julian Vetter <julian.vetter@vates.tech>
+To: xen-devel@lists.xenproject.org
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Juergen Gross <jgross@suse.com>,
+	Andrii Sultanov <andriy.sultanov@vates.tech>,
+	Guillaume Thouvenin <guillaume.thouvenin@vates.tech>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Oleksii Moisieiev <oleksii_moisieiev@epam.com>,
+	Timothy Pearson <tpearson@raptorengineering.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Julian Vetter <julian.vetter@vates.tech>
+Subject: [PATCH v2 0/6] Fix ARM domcreate
+Date: Fri, 10 Jul 2026 15:55:03 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5] xen: introduce CONFIG_HAS_SHARED_INFO for archs
- without a shared page
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <6948fb2823ffa41cf2eabbd87952b236e4f379bf.1783085655.git.oleksii.kurochko@gmail.com>
- <2853c8c1-ea7f-46ba-ac65-a7473e9d3689@suse.com>
- <b1c039e3-d955-4708-a805-e136bc73b6f5@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <b1c039e3-d955-4708-a805-e136bc73b6f5@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1783691404-5ED6FA0B-BBF0E1B1/0/0
+X-BM-Disclaimer: Yes
+Content-Type: multipart/alternative; boundary="-=Part.632.960184aa63f693ee.19f4c503258.e86d886d4e64a6d9=-"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1783691752025
+X-purgate-ID: tlsNG-ef75cf/1783691758-1FB61201-1E2762C7/0/0
 X-purgate-type: clean
-X-purgate-size: 2065
+X-purgate-size: 3659
 
-On 10.07.2026 15:31, Oleksii Kurochko wrote:
-> On 7/8/26 12:52 PM, Jan Beulich wrote:
->>> +#ifndef CONFIG_HAS_SHARED_INFO
->>> +/*
->>> + * Placeholder ops for domains with neither a shared_info page nor (yet)
->>> + * a FIFO control block.  None of these are ever reachable in practice;
->>> + * they only exist to keep d->evtchn_port_ops non-NULL.
->>> + */
->>> +static void cf_check evtchn_none_set_pending(
->>> +    struct vcpu *v, struct evtchn *evtchn) {}
->>> +static void cf_check evtchn_none_noop(
->>> +    struct domain *d, struct evtchn *evtchn) {}
->>> +static bool cf_check evtchn_none_false(
->>> +    const struct domain *d, const struct evtchn *evtchn) { return false; }
->>> +static void cf_check evtchn_none_print_state(
->>> +    struct domain *d, const struct evtchn *evtchn) {}
->>> +
->>> +static const struct evtchn_port_ops evtchn_port_ops_none = {
->>> +    .set_pending   = evtchn_none_set_pending,
->>> +    .clear_pending = evtchn_none_noop,
->>> +    .unmask        = evtchn_none_noop,
->>> +    .is_pending    = evtchn_none_false,
->>> +    .is_masked     = evtchn_none_false,
->>> +    .print_state   = evtchn_none_print_state,
->>> +};
->>> +
->>> +void evtchn_none_init(struct domain *d)
->>> +{
->>> +    d->evtchn_port_ops = &evtchn_port_ops_none;
->>> +}
->>> +#endif /* !CONFIG_HAS_SHARED_INFO */
->> ... we wondering whether any of this is needed when FIFO is available. In
->> v4 all that was noticed was that SHARED_INFO=n together with EVTCHN_FIFO=n
->> is a problem. And having fewer cf_check functions in the build is always a
->> win (I think).
-> 
-> I thought an opposite that it is good to have cf_check when pointer to 
-> function is used. So why we have to make an exception in this case?
+---=Part.632.960184aa63f693ee.19f4c503258.e86d886d4e64a6d9=-
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-I didn't ask to drop the cf_check (and you can't really as long as these
-functions may be used by x86). I asked to limit the number of them we have
-(in a particular configuration) as much as possible. I.e. I was merely
-trying to explain why it is relevant to have the #if around this as tight
-as possible.
+Hello Andrew and Teddy,
+thank you for your feedback=2E I have looked into your branch and the
+feedback you gave me=2E I have added 5 patches on top of my original one=
+=2E
+One of your patches I kept as is, and the other 2 I filled in the gaps=2E
+Then I added 2 patches on top, which ensure that the GIC version is now
+properly reported via XEN_DOMCTL_getdomaininfo and the frequency
+reported via sysctl physinfo as you suggested=2E And a final one which
+makes the config argument to arch_sanitise_domain_config const=2E
 
-Jan
+I'm only wondering about two things=2E The uint32_t pad in
+xen_sysctl_physinfo can I simply use this for the clock_frequency? And
+second, in your patch "arm remove native", you removed the
+XEN_DOMCTL_CONFIG_GIC_NATIVE but didn't bump the
+XEN_DOMCTL_INTERFACE_VERSION=2E Do we actually need to bump the version?
+
+Signed-off-by: Julian Vetter <julian=2Evetter@vates=2Etech>
+---
+Changes in v2:
+- Added 5 new patches to address the remaining problem that
+  DOMCTL_createdomain on ARM is sneaking out some parameters back to the
+  toolstack (i=2Ee=2E, GIC version and timer frequency), where the config
+  parameter is supposed to be just an IN parameter
+---
+Andrew Cooper (3):
+  ARM/sysctl: Expose the supported guest GIC modes in physinfo
+  xen/arm: choose GIC version explicitly instead of GIC_NATIVE
+  xen/arm: remove XEN_DOMCTL_CONFIG_GIC_NATIVE from the ABI
+
+Julian Vetter (3):
+  xen/arm: report proper GIC version via XEN_DOMCTL_getdomaininfo
+  xen/arm: report clock_frequency via sysctl physinfo, not createdomain
+  xen: make config argument const
+
+ =2E=2E=2E/include/xen-tools/arm-arch-capabilities=2Eh | 21 ++++++++++++++
+ tools/libs/light/libxl=2Ec                      |  1 +
+ tools/libs/light/libxl_arm=2Ec                  | 28 +++++++++++++++---
+ tools/libs/light/libxl_types=2Eidl              |  1 +
+ tools/ocaml/libs/xc/xenctrl=2Eml                |  1 -
+ tools/ocaml/libs/xc/xenctrl=2Emli               |  1 -
+ tools/python/xen/lowlevel/xc/xc=2Ec             | 18 +++++++++++-
+ xen/arch/arm/dom0less-build=2Ec                 |  3 +-
+ xen/arch/arm/domain=2Ec                         | 29 +++++++------------
+ xen/arch/arm/domain_build=2Ec                   |  3 +-
+ xen/arch/arm/domctl=2Ec                         |  2 ++
+ xen/arch/arm/firmware/sci=2Ec                   |  2 +-
+ xen/arch/arm/firmware/scmi-smc=2Ec              |  2 +-
+ xen/arch/arm/gic=2Ec                            | 16 ++++++++++
+ xen/arch/arm/include/asm/firmware/sci=2Eh       |  6 ++--
+ xen/arch/arm/include/asm/gic=2Eh                |  6 ++++
+ xen/arch/arm/include/asm/vtimer=2Eh             |  3 +-
+ xen/arch/arm/sysctl=2Ec                         | 29 +++++++++++++++++++
+ xen/arch/arm/vtimer=2Ec                         |  4 +--
+ xen/arch/ppc/stubs=2Ec                          |  2 +-
+ xen/arch/riscv/domain=2Ec                       |  2 +-
+ xen/arch/x86/domain=2Ec                         | 16 +++++-----
+ xen/include/public/arch-arm=2Eh                 | 17 +----------
+ xen/include/public/domctl=2Eh                   |  4 +--
+ xen/include/public/sysctl=2Eh                   | 15 +++++++++-
+ xen/include/xen/sched=2Eh                       |  6 ++--
+ 26 files changed, 170 insertions(+), 68 deletions(-)
+
+--=20
+2=2E53=2E0
+
+
+
+-- 
+Julian Vetter | Vates Hypervisor & Kernel Developer
+
+XCP-ng & Xen Orch=
+estra - Vates solutions
+
+web: https://vates=2Etech
+---=Part.632.960184aa63f693ee.19f4c503258.e86d886d4e64a6d9=---
 
