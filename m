@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61AFAC43458
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Jul 2026 07:21:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1358795.1612688 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E2BBC43458
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Jul 2026 07:26:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1358804.1612697 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wi5YN-0007Re-7z; Fri, 10 Jul 2026 07:21:43 +0000
+	id 1wi5cE-0007yi-Mh; Fri, 10 Jul 2026 07:25:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1358795.1612688; Fri, 10 Jul 2026 07:21:43 +0000
+Received: by outflank-mailman (output) from mailman id 1358804.1612697; Fri, 10 Jul 2026 07:25:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wi5YN-0007RX-4j; Fri, 10 Jul 2026 07:21:43 +0000
-Received: by outflank-mailman (input) for mailman id 1358795;
- Fri, 10 Jul 2026 07:21:42 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wi5YM-0007RR-0B
- for xen-devel@lists.xenproject.org; Fri, 10 Jul 2026 07:21:42 +0000
+	id 1wi5cE-0007yb-Jg; Fri, 10 Jul 2026 07:25:42 +0000
+Received: by outflank-mailman (input) for mailman id 1358804;
+ Fri, 10 Jul 2026 07:25:41 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1wi5cD-0007yV-1t
+ for xen-devel@lists.xenproject.org; Fri, 10 Jul 2026 07:25:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wi5YL-00FuXI-6I
- for xen-devel@lists.xenproject.org; Fri, 10 Jul 2026 09:21:41 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wi5cC-005SDy-01
+ for xen-devel@lists.xenproject.org; Fri, 10 Jul 2026 09:25:40 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a509d81-5cb7-0a2a0a5109dd-0a2a45078e8c-4
- for <xen-devel@lists.xenproject.org>; Fri, 10 Jul 2026 09:21:41 +0200
-Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a509d84-ac46-0a2a45070019-d155802bb4bf-3
- for <xen-devel@lists.xenproject.org>; Fri, 10 Jul 2026 09:21:41 +0200
-Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-493c733f15aso5148035e9.0
- for <xen-devel@lists.xenproject.org>; Fri, 10 Jul 2026 00:21:40 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
- [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493eb6d5055sm115543975e9.5.2026.07.10.00.21.39
+ (envelope-from <jbeulich@suse.com>)
+ id 6a509e70-e002-0a2a0a5209dd-0a2a4503cfec-18
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Jul 2026 09:25:39 +0200
+Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a509e73-f2d2-0a2a45030019-d155802db18c-3
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Jul 2026 09:25:39 +0200
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-493b7612475so4309625e9.3
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Jul 2026 00:25:39 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-493f567eadfsm14361485e9.6.2026.07.10.00.25.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 Jul 2026 00:21:40 -0700 (PDT)
+ Fri, 10 Jul 2026 00:25:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,123 +53,134 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783668100; x=1784272900; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
+        d=suse.com; s=google; t=1783668339; x=1784273139; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=zx5hIUiN+aXUgw9YVOPJ2f4cALPKKalFaaf8nf0+O3E=;
-        b=K2+zkbSk20IG2hnxJN4eYe/qDPw7RpNOTkjsoD5As7+enrZ/alsdSGxzCS0bpW9Uka
-         9+nRlFenmkvx02VvvI8wZpfdvIuF96jOiv63bhwbCg3a5q00eDYN2tF1MSt3Wsoe4+FK
-         zosFZ8H2mq9cRH/KBhkNTm30LP1F7c93muTLLQr52EvSRdEfFGQVIy/HHrymd2EDjEOX
-         +DiqnK3vvVEMvvRXvaAo/DlxPWq18wvkabOofAzWKmKKyMo03/Nyp2zS3BBfHh1MdDpD
-         v4lQk7wivQVtKl4pUwEHuWqVb1xWw1l6h2XXLe+8xITnQ5WvNrW/vqHjDoLyMkpVEn9S
-         eTqg==
+        bh=q7W9gnPqQfoBJ2u+7VsDnH2TLrHRttdcWyybsSm+J8g=;
+        b=gS7QJP78WVNuCrOz/fwmUYwK0p8mcHs+JCd9Bv7MtkCftTRfyywKX8PmxWtF9O76BG
+         fiEeW9nd/DVPInPsVzxd8gLysw7LbY07FUmLJ+tgnPj8DCM/rQQrAi7S+hGjNBkH0KiT
+         wgNFogw7DcpGpFXSeyVXxM1OmYMAVV0D0b2UVvsUCCFn1T6OrzWVWs7M4pkMVQ9Rp2xp
+         VGuvaGtU8wPYwPkf2lj65S8hzVQ1BAE7s9EXSQMEsFZTi+87iUEAheAAxA5Pf7kYfw3x
+         xY++SLlLDGTMKcq3Drt5/7qaQr5d5ednLOM5V4H3dt3eoiKMKOY5ypcVJB2A7sPR/SRk
+         VL6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783668100; x=1784272900;
-        h=content-transfer-encoding:content-type:in-reply-to:from
+        d=1e100.net; s=20251104; t=1783668339; x=1784273139;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=zx5hIUiN+aXUgw9YVOPJ2f4cALPKKalFaaf8nf0+O3E=;
-        b=h2COJ32zXpJknoXuuGHvWdiCVJwmYy86fAu7E35doqFKgUTSRJjQCBY2HFLKfatdg+
-         FDhWs6RYvVywnsIVni1CTdGAftL3WSzCPDhaq6ZIetyvBGzVw1DFLTY4KMVHFnp7Oqli
-         c7z72KGhRgSWlqEDWoQ5aWrYOsw4/JPS139j9aCvltoQ9NCuUlbgwQfFgRXKifW/7Q14
-         LLvWtTqpuh4HaaZ6RiezJ+EY9wqLo94jnUIYDdxS+B0V5UpOJ/VC0GU5oqwdXKIIWbRg
-         noIHOG+SP5E7+yfTsysh4qB4Yq3NSNPunC7sqdHNnyHBFzFKRkLCghyxh3hys60K6LzD
-         QK1w==
-X-Forwarded-Encrypted: i=1; AHgh+Rp2j9816sLVUyd0x4k4qSYNblA9DF7WhwoJgkwcoQPvCBJbgx23/DSBT81UmLDj5+YwNE9kEAFGhAg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yzh0SVlL10/XoVVJAhUz9zJOxX5jHtg1himJOESspIz9kVVLN/n
-	n74104qH6TQWmxb6+mQdu3GvTOE4T1AEhtFEbp6gaPY3NlbiqcIQ+ckp
-X-Gm-Gg: AfdE7clcu8HnyYb6oKnjjB82i98SOydaNXplJTN0Tzk/oaKY/UqWfEA1AKM8FDVCT2V
-	jl7bamY881yN6KshvOdue+jeGhOVVbLyhiP+h+VBvkdJ0jEQ1iK7e27cuTOn721yOcQdST0Qhim
-	z3VCM1nWo+Pn3nK4Ls136rNt8uHeEiK0HMiHVqBeVXBIZmVNRjdRDmz+mmP9JYA1iFVsjpHghBK
-	7Q/Gm0lEHOMPl+QNlRM2Z7eKWan1SxtKVsYbKpjLrLvdbf+67tvTVSeVPulI/ZEM4XuZre7ZRqf
-	7UvLi/RC4NYqceSi1JGarIw2XpZVRw7aHhv5VrQqgV5VNR7K4wOKutXx3TAOkSWcG0mAWK51sJo
-	sLCH3gsSj5257b9FLxNreCwUrtp16qtLU/pn+aM6viehn3Iml6LZP6I8BmUd/W15HscQ5xz5ppI
-	X4ZunFBhNQQBcjRveOkQ6Qg8GGzt5dDVMSq6bQ2gHGuZT+c9AlbucsfJCaPZzYj2jY3wk=
-X-Received: by 2002:a05:600c:8b6a:b0:493:b55f:bca2 with SMTP id 5b1f17b1804b1-493e88760f3mr88290035e9.34.1783668100394;
-        Fri, 10 Jul 2026 00:21:40 -0700 (PDT)
-Message-ID: <a3fdd217-ede1-42e1-a382-480a4ea4ff80@gmail.com>
-Date: Fri, 10 Jul 2026 09:21:39 +0200
+        bh=q7W9gnPqQfoBJ2u+7VsDnH2TLrHRttdcWyybsSm+J8g=;
+        b=nU8JzOCH/iqg5KpNTRMJTbg7qmMyfSRAG0TvWkW+WRL5fIKh1/DmYGGTKTRgygrPH7
+         HQPuYv5MIsOpM5A1lQiO0RAdjJOK0WvTWHAx8wHPX42psNEetngdC96WvYPNXItukx7l
+         TQjK7obf+wQKyVHq6V/1wVBrCIK1DMxNXEGB2cSXWaC6NdMqZs7UnPqt80/lSfQbHfa0
+         fXOXQvwEN0vP3EHvs17aCBUfakxuyQ3Uo3FHaAlKbLNmHEPRmaZhgjiDRkAjhQmMxbF+
+         OKz+TDB9ZAg9uLU2WRlAwJV/3Duo0gNpmdIkeYRNWlN3q1Bf13dRS/wM15CTQ/eYm4n8
+         TR6Q==
+X-Forwarded-Encrypted: i=1; AHgh+RpTJFUL2OwM4ZFhG09R9P/XBGuHm9jnmmjgPIoMkQnKMfU165qOnkYRHPm1gd4GTyaUx/h7oca1VbE=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzY6mfenUScyDnr1oFtTswgH4JFq/BXw1kyQrl5vhTSPgaBtWJ9
+	48tuWH2C7LPWEh6qguYWXyG5L/uGUfjOOWik01f9mc3JuJEX1pL0dVrrLOXgVq2ndw==
+X-Gm-Gg: AfdE7cmUdkXS/cjhZ6xhIyFyY0A8HFR4NkMkVC8j5RmW6ax5xlAJwIxDGhP/cDqJS/Y
+	e9J6eiXAWil3KrvHckLqtz39ai9XWnSaRX0DmxRwflWI2lEViAOFIJX6XSo+hDFVbbms03D8Flk
+	TdDT64woi2g1q3NPfGyImGtGRzkQWlAYX47U4eQ++dzYm+yNQiyCLsqgnIspU+kUHJLwTYhMjXq
+	TX0NJkERUSpAWTJ54/IPOTcMtEuYAcdRN/ptkwu2nFkkCyfhPGxo764cRTisvsXoyuURe312NjH
+	7gP1jr+WD3UuSmvK2gl98BRpT8fN6mbWE7/VSSh6K07rloMPlKGTFdwq8RVlJyrORajZMwOMRvj
+	Ka4MrUsy+MBPmf5A/G6f36KLeYO5EaE/qMkVoCJyxnf4HGxHzIm9bFrB+cU+G9GcaRJOZjg7Xzd
+	qK7ilNp7OhrtDFwuSZm2PEVrhgXceXe6Q7BCFCvaTSArTWu0y67hqCOw1s1vkqaO7Rjr8blJwyG
+	dLKLjxaT+ZfFbk=
+X-Received: by 2002:a05:600c:c3cf:10b0:493:f0f5:f2db with SMTP id 5b1f17b1804b1-493f0f5f3aemr26816315e9.22.1783668339195;
+        Fri, 10 Jul 2026 00:25:39 -0700 (PDT)
+Message-ID: <0fe60f59-ce48-4d0f-96f7-16bbae05a81f@suse.com>
+Date: Fri, 10 Jul 2026 09:25:37 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH for-4.22 v5] dom0less: Prevent division by zero in
- handle_passthrough_prop()
-To: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH v5 1/4] xen/device-tree: Parse 'cpu-map' node for CPU
+ topology exploration
+To: Hirokazu Takahashi <taka@valinux.co.jp>
 Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
  <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>
-References: <7a146536c13431933899ffffc93c85724dfbaf87.1783599357.git.dmytro_prokopchuk1@epam.com>
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ xen-devel@lists.xenproject.org
+References: <20260709220552.646462-1-taka@valinux.co.jp>
+ <20260709220552.646462-2-taka@valinux.co.jp>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <7a146536c13431933899ffffc93c85724dfbaf87.1783599357.git.dmytro_prokopchuk1@epam.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260709220552.646462-2-taka@valinux.co.jp>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ef75cf/1783668101-1F562201-FCA00531/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 2362
+X-purgate-ID: tlsNG-33051d/1783668339-F2B5CCF4-3D9CA095/0/0
+X-purgate-type: clean
+X-purgate-size: 1168
 
+On 10.07.2026 00:05, Hirokazu Takahashi wrote:
+> --- a/xen/arch/arm/Kconfig
+> +++ b/xen/arch/arm/Kconfig
+> @@ -23,6 +23,7 @@ config ARM
+>  	select HAS_STACK_PROTECTOR
+>  	select HAS_STATIC_MEMORY
+>  	select HAS_UBSAN
+> +	select HAS_GENERIC_CPU_TOPOLOGY
 
+Please insert at the appropriate spot of this list, not at the bottom. We
+try to keep such lists sorted (both for easier lookup and for reduced risk
+of two patches colliding).
 
-On 7/9/26 2:31 PM, Dmytro Prokopchuk1 wrote:
-> A malformed partial DTB specifying both '#address-cells = <0>' and
-> '#size-cells = <0>' causes '(address_cells * 2 + size_cells)' to
-> evaluate to 0. This sum is subsequently used as a divisor when
-> calculating the number of regions in the 'xen,reg' property inside
-> handle_passthrough_prop():
-> 
->      len = fdt32_to_cpu(xen_reg->len) / ((address_cells * 2 + size_cells) *
->                                          sizeof(uint32_t));
-> 
-> This leads to a division by zero exception in the Xen hypervisor during
-> boot, causing a hypervisor panic/crash.
-> 
-> Fix this by validating that both 'address_cells' and 'size_cells'
-> are within the valid range of [1, 2] at the read side in scan_pfdt_node()
-> immediately after they are parsed. Any invalid cell size combination is
-> safely rejected early with an error message and return -EINVAL.
-> 
-> Fixes: 9ce974c47588 ("xen/arm: assign devices to boot domains")
-> Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
-> ---
-> Changes in v5:
-> - fixed mistakes around dprintk()
-> Test CI pipeline:
-> https://gitlab.com/xen-project/people/dimaprkp4k/xen/-/pipelines/2664600678
-> ---
->   xen/common/device-tree/dom0less-build.c | 8 ++++++++
->   1 file changed, 8 insertions(+)
-> 
-> diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tree/dom0less-build.c
-> index eacfd93087..c054ea4e2f 100644
-> --- a/xen/common/device-tree/dom0less-build.c
-> +++ b/xen/common/device-tree/dom0less-build.c
-> @@ -341,6 +341,14 @@ static int __init scan_pfdt_node(struct kernel_info *kinfo, const void *pfdt,
->       size_cells = device_tree_get_u32(pfdt, nodeoff, "#size-cells",
->                                        DT_ROOT_NODE_SIZE_CELLS_DEFAULT);
->   
-> +    if ( (address_cells < 1) || (address_cells > 2) ||
-> +         (size_cells < 1) || (size_cells > 2) )
-> +    {
-> +        dprintk(XENLOG_ERR, "Invalid address_cells %u or size_cells %u\n",
-> +                address_cells, size_cells);
-> +        return -EINVAL;
-> +    }
+> --- a/xen/common/Kconfig
+> +++ b/xen/common/Kconfig
+> @@ -191,6 +191,21 @@ config VM_EVENT
+>  config NEEDS_LIBELF
+>  	bool
+>  
+> +config HAS_GENERIC_CPU_TOPOLOGY
+> +	bool
 > +
->       node_next = fdt_first_subnode(pfdt, nodeoff);
->       while ( node_next > 0 )
->       {
+> +config DT_CPU_TOPOLOGY
+> +	bool
+> +
+> +config GENERIC_CPU_TOPOLOGY
+> +	bool "CPU topology support (UNSUPPORTED)" if UNSUPPORTED
+> +	depends on HAS_GENERIC_CPU_TOPOLOGY
+> +	select DT_CPU_TOPOLOGY if DEVICE_TREE_PARSE
+> +	select ACPI_CPU_TOPOLOGY if ACPI
+> +	help
+> +	  Retrieve CPU topology information from the device tree or the
+> +	  ACPI PPTT to optimize virtual CPU scheduling.
+> +
+>  config NUMA
+>  	bool
 
-LGTM:
-  Reviewed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+I can't help the impression that none of my v4 comments were taken into
+account. And not just here.
 
-Release-Acked-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-
-Thanks.
-
-~ Oleksii
+Jan
 
