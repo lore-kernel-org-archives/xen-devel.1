@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D543BC43458
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jul 2026 22:06:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1358611.1612661 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7BB1C43458
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Jul 2026 04:18:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1358719.1612670 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1whwt5-0007kP-9F; Thu, 09 Jul 2026 22:06:31 +0000
+	id 1wi2gG-00016J-RM; Fri, 10 Jul 2026 04:17:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1358611.1612661; Thu, 09 Jul 2026 22:06:31 +0000
+Received: by outflank-mailman (output) from mailman id 1358719.1612670; Fri, 10 Jul 2026 04:17:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1whwt5-0007kF-5u; Thu, 09 Jul 2026 22:06:31 +0000
-Received: by outflank-mailman (input) for mailman id 1358611;
- Thu, 09 Jul 2026 22:06:30 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wi2gG-00016B-Mj; Fri, 10 Jul 2026 04:17:40 +0000
+Received: by outflank-mailman (input) for mailman id 1358719;
+ Fri, 10 Jul 2026 04:17:39 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <taka@valinux.co.jp>) id 1whwt4-0007Z7-8x
- for xen-devel@lists.xenproject.org; Thu, 09 Jul 2026 22:06:30 +0000
+ (envelope-from <okamoto@valinux.co.jp>) id 1wi2gE-00015H-Pw
+ for xen-devel@lists.xenproject.org; Fri, 10 Jul 2026 04:17:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1whwt3-004Qfb-M3
- for xen-devel@lists.xenproject.org; Fri, 10 Jul 2026 00:06:29 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wi2gD-005cGu-0j
+ for xen-devel@lists.xenproject.org; Fri, 10 Jul 2026 06:17:37 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <taka@valinux.co.jp>)
- id 6a501b2a-2eae-0a2a0a5409dd-0a2a4501accc-40
- for <xen-devel@lists.xenproject.org>; Fri, 10 Jul 2026 00:06:29 +0200
-Received: from [52.101.125.136]
- (helo=TYVP286CU001.outbound.protection.outlook.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
- (envelope-from <taka@valinux.co.jp>)
- id 6a501b62-3ea4-0a2a45010019-34657d888760-4
- for <xen-devel@lists.xenproject.org>; Fri, 10 Jul 2026 00:06:29 +0200
-Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:458::18)
- by TYCP286MB2431.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:18f::7) with
+ (envelope-from <okamoto@valinux.co.jp>)
+ id 6a50721c-bab6-0a2a0a5309dd-0a2a4504ea42-30
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Jul 2026 06:17:35 +0200
+Received: from [52.101.229.135]
+ (helo=TY3P286CU002.outbound.protection.outlook.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
+ (envelope-from <okamoto@valinux.co.jp>)
+ id 6a50725c-b1e5-0a2a45040019-3465e587d751-3
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Jul 2026 06:17:34 +0200
+Received: from TYCP286MB1053.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:af::12)
+ by OS9P286MB5189.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:30a::10) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.17; Thu, 9 Jul
- 2026 22:06:22 +0000
-Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
- ([fe80::c8c9:25cd:8d13:96d6]) by OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
- ([fe80::c8c9:25cd:8d13:96d6%6]) with mapi id 15.21.0181.016; Thu, 9 Jul 2026
- 22:06:22 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.16; Fri, 10 Jul
+ 2026 04:17:30 +0000
+Received: from TYCP286MB1053.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::2067:ff0e:4c3:ad0b]) by TYCP286MB1053.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::2067:ff0e:4c3:ad0b%4]) with mapi id 15.21.0181.016; Fri, 10 Jul 2026
+ 04:17:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,194 +57,131 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lmwVFexMkF1ciFuAwuPkHXgHTVYkRDromlaxuHd0Go9kb12UQfedZ7opJBeWouWSwxKDsJ69ZA8uBIcWeXBnojD2xj92NhdiNO0LCmJT+2fjrvB+qHr9U7g10f5K4vQ3AM8dLdkUGceyDsQJjkF+obD6Mh2Q+VCQASwAsB9GrHN+4WMSpaVg8iKMX6cVSieYUTbBxbg+x1YcE+ljF8xWnxAHu8Vyet5zhVqDVpk07gJ/C0VmKu9OfUKdU0L4VjjsYzIcBmjOn2WdEOFXq+c7IBnw5uJdbapRd7OO+64DmjHo8xgsIQ39vNYT6T0ORjxd3TPlaUM5PTkO5Lx+Ag/0SA==
+ b=nNMicJZStZnRvkaGwDLoYaEcajf8SW2tCb5W2JI/a2+/ukEWMQYFtv+sxQpF0ovU3JQtLxEb7VTVO2Oj46ezbRWc2QmS2cndFcvb3QSCH0n+mvXz+coSOC9xaCFsxzZR6WTDNt+DyPv9EOh6DNSrpA90Z7xRkWbLVRTl/BOZqb66fG2AMBDTxUz8aBOmhtoEudDIMsT3Dr2RuLh0A0Y/UKpwBTkAnvQOxxBjuTkyPTe3sPCyqGrLYZlIxvtk1iA+yi1lxaz4D0kjdv4SsYxtD5MlREV92gSgqJ2jVGgUZstQvsGYfaCSeH0YdquoXlUho+Lk6zCzJxCttrlv2JA03A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=a9DehGZNw3SYAPXXjiD6TUCW6zXpPgUeGTv4Iws9mis=;
- b=dZwjJXgIeUbastWsy+h0x3rzpC2wKoS/AfMIu7KN/5HNU/p/fgyHJ35es615ADL2cYXIjtEHlGitmJX/pvbXKD4GgaCCQspWEuvmeDjUPJ+RF38kg6V45YomrslyQOw976W6p9r661kwU7w/sdglWNYyenn8fhADwXHsx/Cdnhcbe6ODXTOWTqZNhJ/UvfzLgfVEvRgzUhId5JltfgRIM7WL/bDL2yGOQa8S88MOh8qriEYvTJr6n8Ut57RWBeaTOZyeRhzxcHQywCaRLiIjZLnSpohRi1wnY5Of/E4VlbNEcv2amcTQtMPymOdOnO1s4Tx0U5OztjmeHx878Rw0LQ==
+ bh=j446YXyiZOrK7fknZZSi/XJ96d4r0srzO+3ZbD/Tt78=;
+ b=oozkRMRx59IN2ffft2vKC0gs2RyMXMwtR6CKPgBFoodmdFf3kcNOYIHcTLGu9/eMMUKviAUIX2Anmi32LCGZtsvCv9V5Ilq8XAhtwBZNmCZbHKjHGMM9M794zxLSZpUoRYbBM+qs3ZA0ZUB4OCymeOH01FLLFxsK+glEkDvqPiS+O/E0IRuBTZH+ZvmXlkPo9ez4ujpvGc4uf7UNJTPpzYzV3Z+JTaVX3j22Ci9WUgvEwTXtkfeJDDeGW8AfUeooar6l7mSAdjnpbTNKCSTheWQIj3baNQ/f+71Hgv3QH7PLznNfOhjJxDp6RvxWyjnfwoGtsLdqeYsR7pQ+GBVO9Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
  header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=a9DehGZNw3SYAPXXjiD6TUCW6zXpPgUeGTv4Iws9mis=;
- b=vBFsrqhvesyQCATRFK2n1gETQZzVJ+5O71lY3DSFwbOR8j4DADLk030GEnOUc4KH3V8CRX7T/TGLqr2753KQe3I6JHe3ePDNazzejVoUt+aloiUUelhHXlyBtgrWuNDd4UaAj/mTPA2FHPexHYmaGwc48dX03KtVtVbDGZuNncA=
+ bh=j446YXyiZOrK7fknZZSi/XJ96d4r0srzO+3ZbD/Tt78=;
+ b=NzNfbYcKoUh4yF0VKFALA5j47m+K8OCEhB3oNJEHAgIbXINHAwWn9+dGz/eMp5d7zVhpbn4/M1b2vrrcep83zRYa8wke72R+elBsobFFpKKuMD/HX4qcSqVPl9PFeqxTepK/xGpqK/GxdzT8K9IUKe0oXKR7IwUl3TrJRditdJ8=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=valinux.co.jp;
-From: Hirokazu Takahashi <taka@valinux.co.jp>
+From: Ryoji Okamoto <okamoto@valinux.co.jp>
 To: xen-devel@lists.xenproject.org
-Cc: Hirokazu Takahashi <taka@valinux.co.jp>,
+Cc: Ryo Takakura <takakura@valinux.co.jp>,
+	Hirokazu Takahashi <taka@valinux.co.jp>,
 	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Dario Faggioli <dfaggioli@suse.com>,
-	Juergen Gross <jgross@suse.com>,
-	George Dunlap <gwd@xenproject.org>
-Subject: [PATCH v5 3/4] xen/sched: Make cpu_nr_siblings() architecture-specific
-Date: Fri, 10 Jul 2026 07:05:51 +0900
-Message-ID: <20260709220552.646462-4-taka@valinux.co.jp>
+	Ryoji Okamoto <okamoto@valinux.co.jp>,
+	Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH] tools/xentrace: decode RTDS priority in repl_budget records
+Date: Fri, 10 Jul 2026 13:17:28 +0900
+Message-ID: <20260710041728.336181-1-okamoto@valinux.co.jp>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260709220552.646462-1-taka@valinux.co.jp>
-References: <20260709220552.646462-1-taka@valinux.co.jp>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: TYCP301CA0007.JPNP301.PROD.OUTLOOK.COM
- (2603:1096:400:386::18) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:604:458::18)
+X-ClientProxiedBy: TY4PR01CA0091.jpnprd01.prod.outlook.com
+ (2603:1096:405:37d::11) To TYCP286MB1053.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:af::12)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: OS9P286MB7222:EE_|TYCP286MB2431:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3649df4f-6322-4fc6-b87d-08dede064f8d
+X-MS-TrafficTypeDiagnostic: TYCP286MB1053:EE_|OS9P286MB5189:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3b49f1d3-03b5-44f9-0693-08dede3a2857
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|7416014|23010399003|10070799003|366016|1800799024|56012099006|18002099003|22082099003;
+	BCL:0;ARA:13230040|366016|1800799024|376014|10070799003|23010399003|18002099003|56012099006|6133799003;
 X-Microsoft-Antispam-Message-Info:
-	hOBtqNtNix+QxqdOedHr29AxepdLORC21VoUFPCeqkoOxKlhV6i5IvXzJNGAPoMB7Jc+UUa0ZCCwjspFU8K4QBRXxV5hjoCgCMP8O8ZzL6E0I4xA2e4G4xmdDKcsVAvUcwfPCuxjyTj+yZfFF+eUd8HD+GV8pTIt3HqbMBtqP8EaG7jKzk29EYJh/EmLal3uZHo/RGrRNFv9nE5bRwXoMct4aFhjHTHvTU+Etbc1lRejTKCY618fmfwNojeTfXpJVOjugFI/eI4oVx4oUA0gIhlbaNDnBRJs6/9DZUGbz/sfU11btT61qpn5pm/nbcFrOLPonHCFu3RVrA3lhjQCe/EF3qJEIepiBQqUtswPkN0x//0Q2N7xqc81FMAuKKCFsk73P2YAW+W8NkjEPTxlyz0/ihFEwXBAVM8Mtpc58NXGi5xY/OTn4OrnJqHG7Dm+4SX3fzJv8h3mHZre4WTN+IR06uvxrJQFL161mlr6axWm78vX9yuv3YA5/hyHBtli1SM2RCJPMai7VrGTszHcXfmZxvl1xdGlC7RcCV6seCZuOVHvjwGOFZH5oIeFMTaEFhWdO/9t51AMoSFAJFjMPMeeZ8zsOt4ZBAOeFOjWmreWb0iP9RYPlyND9SynTGZ2pYFDDairFEuCz+iMIa8DOPv6TRWficHuqLWO9XdJ7uY=
+	fsizMsSgJejtnRkivpj/5cQ9gWmktxORGe+SJ8cR/HDOTjAnLjfAwybBuK6u/tqCBXhQnz/qWf0OLaZsJ+QonTuUPo8EReAZUy9rUqoov1wk3bc6jda0CRkiVWTcCme14vWLJ7bXAbPW/h0uFjZCvKU4E8fwUJdU+Xc9I247ebwt8wZG5JXc4A4cHNmwKJIG3abLr889Z5YTUy4Sj3QB5V1GAfQEFavO22g4f+v48xDviJ/M7w4797Arp0HyMj6LqM87Iv7f86NYsxkQfmn7juJU/+Q9IvoqMoeE9Zk8GFJfrwAnrRJ4ScRqFhZmTF8iYWB6dXcBXfgufIe71u0OC2UzJXwAdGrM4k9q3Svf4EDuSVxEkkW9DKzyfG8N623FvXn3hu23XSp/WRRQyi/5VpDxdelAgPXqvx4pETmXo8c97dSc3lQW53ls+AmqnRjh64cqrZPpo/z1zLMDXGIdQ8yqRu9Sfb/cq+p7tntEGLn3v55jb7u5qNDV7U70MpVUwpoWcN83dzCN1fXDKbwMomWmen7MsvJhXrE3b9NDpmen0ktMrtUw+YcUAV3XrzaocgME66+y5NZMNGZfrPWvd4U6P4VCnNR/AdhNWxJK5d0istu9iFhzi+UUbASKNs2YygyeDjtgsKj3MFPS2Ge6KIqY/S8rhjpu6Z7I94TZ434=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(23010399003)(10070799003)(366016)(1800799024)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TYCP286MB1053.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(10070799003)(23010399003)(18002099003)(56012099006)(6133799003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?xE9m0GpYNHIosSW3IBDoHFeWq/Pt9+CAQ6qqXc4ELJD2oRPygK8vUuK7hEoR?=
- =?us-ascii?Q?CN7qDV4kc5G+gOfBPBXAV7kI6IhO5KtyEfo8AwRLWuxKpDrGqqFsqbTnPtTD?=
- =?us-ascii?Q?vK5CkzO/rI0DaOnto3HGvrXpEXAZub5iUytyuC1D8sZKmUkHM+sT0m4c86KQ?=
- =?us-ascii?Q?oNE+8zhOFrfgxcHAbrKZ1HtzZ9SXcoOigioIjZVkXMPa8kzp3XVLQWURhr8g?=
- =?us-ascii?Q?kzojX2d8VoKqqLalOX8uZI1NQeUj+1bPxj4LoTESZO0hY3MacTeE/WGA7O2E?=
- =?us-ascii?Q?ZTr20xcW5A79WuSNN7+WDCUJth3pP7VIzhgwgXr6psrYf3rHablKxyN+6NTY?=
- =?us-ascii?Q?pNuXmBCn/z7ovwwEwu3o4U9JHy6cGAi60TnNMIQwIVKcnAydu225N09u7hBg?=
- =?us-ascii?Q?+4ztPdFyKpy0g+Aph65qjH8uMFV0pssqGF8s9qYD8tCTi99BHUa6z5n4x4HV?=
- =?us-ascii?Q?8l6lgS+uXAetTLSLHIqz3Ypm1o/g7dY5v2Mt/uVxHTAVdeNvtelOa00P7qnL?=
- =?us-ascii?Q?2eOvpR0mF087dP5lrlMyxIR0zTWS4z5tr2TBQsn80crHFTxBCzBgP1Ds+L8h?=
- =?us-ascii?Q?rOH4ptutpBUFje/n3ULQ4cg/RRpYQZLO9sKLYvipwU6itP3DNNFZssRwvZom?=
- =?us-ascii?Q?gS+uwkDJ4OgM6XhpXNSguzbP18SGABDB02oXwl9N5iw3HqI1KSt1vJw10noQ?=
- =?us-ascii?Q?i2UBnhYhF1cMLUy4gr+NkRem2maTDPwla3SwRPtifCGET08RGok3XHwizN91?=
- =?us-ascii?Q?+hr0sREPoilKG+Zd62rdBOMYuDKIyxNi54mz/asIiLz4RiV16laaMIIv8MBb?=
- =?us-ascii?Q?PCzMPduN+TvnEjaGhp0FK7aJKC5Yar5Lm30O3GtPV/CkBoaznDlZKTP+H9cJ?=
- =?us-ascii?Q?HwhKm979R7gvX74eLf5862UUlwsYAOmhSYGJ9PehsWdg1TAV4I88m6vPDTVQ?=
- =?us-ascii?Q?2RWZmzgGKoiES47GGuXR2V7YUtcqeud3hMarlG19kmm1ZBaeKL1+na1APdZE?=
- =?us-ascii?Q?xPw6bsb556LPsck4kU+5vMp488BmeeB/mmcjYC+CEAUTPlLdHkG5iozVGZ6X?=
- =?us-ascii?Q?iQ5Gpgs44hT3kubdDUAxMLKNZSH9QSfoo7oK5wJr20YKc7Bsi/6SD6g369Lq?=
- =?us-ascii?Q?LOScL1YNTuT41/jXGJT0tFKuBxFvaGs4H83f+yy3hKsOG9ZWh0e+kgWF20q/?=
- =?us-ascii?Q?QgfZoNFlkClhEOtqlidmsK5yIOb1mSj1LABEdV66Jl9O3pwK5ImQR8cee/vB?=
- =?us-ascii?Q?0NzzL1zTzhKs/SJmpfP1Nw8RqACTFbHRS80yEDFEsGsH3AWTNtoClRZ/l+/A?=
- =?us-ascii?Q?FEd3xLrQkvitUrS0HzP5dF1GWm97Erp72LWJiulNukUkzxeY28T3YtqGFyQc?=
- =?us-ascii?Q?xquWVh1cOAbVZA2UyNvvJAAf7sLAFP1hfkJQz2dAsvU3wKEhEV/qjdHWc9YY?=
- =?us-ascii?Q?f5m2YZQmPPEuz3PerCiU+9091asbnd6x0PE2qbAo8PwO1xBHA0/qzeegcB2f?=
- =?us-ascii?Q?QP0M33ozurkh5No5fieR1oMU6l0fi7baRc8zeRhk5sq1PGl25vVccAzeth1O?=
- =?us-ascii?Q?/impa8+ZkVo4+OG3/tCyKuuNfSaFl0WsTZ6LzAnbetantFExnP5Bf3+h1Nh6?=
- =?us-ascii?Q?CEOJCyVVli4Pq8uS+pXIF/liA440JiXbS9fNZeYE+d7ciqE8ES1yINB+rOK8?=
- =?us-ascii?Q?nZbX8EGj8yEsz0MUP3j0FXaWze6iG0x0rczmw1CgLT9FQ2qR5FsqKyt6R4rN?=
- =?us-ascii?Q?nVg9SLhFeE7nsl4LEOn7X28yZk86DjE4FJvf9Vj2Q76yT9VFneIXZ1lZRU4r?=
-X-MS-Exchange-AntiSpam-MessageData-1: AHNkbTAiXp3d/w==
+	=?us-ascii?Q?plYebQeHWPotIfQ6/uizAZFuCnDQOy/aTC4nM6HHv0AwtgjJO/l4i3ukIyfh?=
+ =?us-ascii?Q?iq4Rn6pin/GZXoZwHX1oRie00vNFGyLIEpEBsMat1YUqPce5iD8D5mGAKkjC?=
+ =?us-ascii?Q?b820MLMZMNQ+rBhR2uWVQAfjj1D8KW5YTtPjlTSDHED3/lSn2snnFW3KNbQi?=
+ =?us-ascii?Q?fTzrgzNdu/lTrRPi63iKpKiK+c6+Tpc51gHB0AH7PDWJ1UrGzYeb43KmNIan?=
+ =?us-ascii?Q?JhmGtOJ22tYCLGmc4oMvwCmavEEadwkW8WJZ65W1UQa7o6DaKqQyNpA4jjte?=
+ =?us-ascii?Q?H568ifoNV/Ljpas4+5BchTRMAR23a5S/3JwO+cT38kllqaaz5OmYX/2EkKF4?=
+ =?us-ascii?Q?2YAk5ZttPHAHjn0vVwE9dtvGOkCyOgcsdxM68ZuM7LlntZCmixSkOS8Q/SO/?=
+ =?us-ascii?Q?EmNH/ZQ4G6hhfrufMXZJY/9wBJP70hsuy6+/2Ull8JfYrXi9i5gpErwXwG8E?=
+ =?us-ascii?Q?37BqmALlJO+58NhJD1bmi6wWEXaJeh8ODI6Jp2/0s7ON7bjnp40ENw5Z1JvO?=
+ =?us-ascii?Q?3ZkxStzGjMMsm6XQD00EuIH7Cd1fbpRCCDIj8wwU8YR5aGPcIYiSVSttSdTJ?=
+ =?us-ascii?Q?t/KCY6IpONcFJfYJvBA6o5nHDl/Zk+j8y2ENKjz8FSQZmuxkgfquvNTPcF8R?=
+ =?us-ascii?Q?RklUSsEXbuhRiq33bSXjR9ErARDyHEnFHEKWVMxXHI4532ZsGSIl2DFgXPtz?=
+ =?us-ascii?Q?ypjGVQES6uqdymq88ZFEPPblRtGvU3V9UEInnu1ulLUugfe+q5FtKHBAtDNT?=
+ =?us-ascii?Q?Ol+Gynp6obOaqMBoKdn2LAzejQ71DpkKNTaKba+jyinzt2akvch7EmWFchdb?=
+ =?us-ascii?Q?8Erzt7kvLBuLyf4tBj69tPIE7/Af333FvdyEC4Xnf/IZyfUO4mpqvaLka34G?=
+ =?us-ascii?Q?6Wd4OOkznOc/eM79Zj4zcpmiS1eUE1AK7ytLWO0q0eUPuogTJjJhcUpp/ru3?=
+ =?us-ascii?Q?lmJOfoSeq8apTn2JwDTo5D4Eftjqu9LYjknAUYltua7EgwoWDHntNSwBKVvi?=
+ =?us-ascii?Q?fsbHZ0p/w88ViMqGz+gU8GkeT09SqRT6OpWOWc8lTuD9ujnd/QhXNJdA3FYm?=
+ =?us-ascii?Q?ohpvbRnU24rHY63HyE07ewAbTvL6UitQ5AvfPBM2oZodc/pE5/N4ynq1TTfG?=
+ =?us-ascii?Q?35uqdT9arQI70OKecVUcdqnkOZdTnKSXAsRA9E4hlSTDT60+SyBAGJ07B7k/?=
+ =?us-ascii?Q?5w71JEpAHvqHoIiW8ZRHe8gyUpYBGPn85HMCRWoWFQJvoA0lfyFVrkXFM0YE?=
+ =?us-ascii?Q?QUmRo/QNEcqr+MO1qiV2phbmIatu9+kWHBbdr1skTmaveXfqOzsHwjJoqbM7?=
+ =?us-ascii?Q?YSAku1XNLgHCyZqPCApNh+1LetSuKhHEJBMGCy97GKvfB6PBswNsdsl6xJg4?=
+ =?us-ascii?Q?9yMYnQdWEYhrOWj/is71wQGZmbMAGD3eR5r1v/KE7LuRhW01VCHuYoy53jMV?=
+ =?us-ascii?Q?XubBATxfArLVNxZb7ILdNsX9fFz2enMPdvk3gKLJZfyhOgiLjZ5tvQcLo6d6?=
+ =?us-ascii?Q?X0sOzDLutypROz4VJISeRKx2P6JYXQmC45Kk7qO2WiyepFIc6xfq4zHEmzj6?=
+ =?us-ascii?Q?7Yj1M4N0l8OJojuEBCqyHGiFXCFA+fX/OXvJ7rXtSV/fIwOgzfYjYwId4f4h?=
+ =?us-ascii?Q?qd/OCaENv0SeeGUrx/VmZPP+c7rLfa9geRLomHms7n+WUefVtSOJIgB3RWcs?=
+ =?us-ascii?Q?nbExMIH4m+p2zEOzx9KKas0b2icnZZo8Nmqw9Jov/wVsjMEdmlQqgJwqypLg?=
+ =?us-ascii?Q?bekug1o/RCEYEotUWW/WC7y6vwhgEvfEgJBFNmzgthBYCfc5LttIAvpL50VW?=
+X-MS-Exchange-AntiSpam-MessageData-1: 2jS29UhR0ccspg==
 X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3649df4f-6322-4fc6-b87d-08dede064f8d
-X-MS-Exchange-CrossTenant-AuthSource: OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3b49f1d3-03b5-44f9-0693-08dede3a2857
+X-MS-Exchange-CrossTenant-AuthSource: TYCP286MB1053.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jul 2026 22:06:21.9714
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jul 2026 04:17:30.1637
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: BEizRsjyc4zFh/g/F6mvfJHiGugXpQiJ8HZ5sThWJRXhtG5BEvKEYETqygb1qCH80DI1jNUBmVf17y8E8NHixg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYCP286MB2431
-X-purgate-ID: tlsNG-d62444/1783634789-3EAF00A8-FEFEF841/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: oQVVB1qzzyHP/baYaXl2/IetkWOcJtkDHdvgrv1SuBZFmV3TG4YTK/Y14+vxnlg5IYL+xozOwVqdLrP0l0byEA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS9P286MB5189
+X-purgate-ID: tlsNG-ebf023/1783657055-7DA5DFE7-B509B2B5/0/0
 X-purgate-type: clean
-X-purgate-size: 3394
+X-purgate-size: 1496
 
-Make cpu_nr_siblings() an architecture-specific function.
-This patch provides the implementation for x86 and a common
-version for Device Tree-based architectures.
+The RTDS repl_budget trace record now contains the vCPU priority
+level. Update xenalyze to account for the additional field and print
+it when dumping the trace event.
 
-Signed-off-by: Hirokazu Takahashi <taka@valinux.co.jp>
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Without this change, xenalyze interprets the record using the old
+layout, causing the deadline and budget fields to be decoded from the
+wrong offsets.
+
+Signed-off-by: Ryoji Okamoto <okamoto@valinux.co.jp>
 ---
- xen/arch/x86/include/asm/processor.h |  1 +
- xen/common/sched/credit2.c           | 22 +++-------------------
- xen/include/xen/cpu-topology.h       |  5 +++++
- 3 files changed, 9 insertions(+), 19 deletions(-)
+ tools/xentrace/xenalyze.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/processor.h b/xen/arch/x86/include/asm/processor.h
-index 8ca6799a81..9758060129 100644
---- a/xen/arch/x86/include/asm/processor.h
-+++ b/xen/arch/x86/include/asm/processor.h
-@@ -106,6 +106,7 @@ extern void intel_init_arat(void);
+diff --git a/tools/xentrace/xenalyze.c b/tools/xentrace/xenalyze.c
+index 42feeb282e..439066e352 100644
+--- a/tools/xentrace/xenalyze.c
++++ b/tools/xentrace/xenalyze.c
+@@ -8039,12 +8039,13 @@ void sched_process(struct pcpu_info *p)
+             if(opt.dump_all) {
+                 struct {
+                     unsigned int vcpuid:16, domid:16;
++                    uint32_t priority_level;
+                     uint64_t cur_dl, cur_bg;
+                 } __attribute__((packed)) *r = (typeof(r))ri->d;
  
- #define cpu_to_core(_cpu)   (cpu_data[_cpu].cpu_core_id)
- #define cpu_to_socket(_cpu) (cpu_data[_cpu].phys_proc_id)
-+#define cpu_nr_siblings(_cpu) (cpu_data[_cpu].x86_num_siblings)
- 
- unsigned int apicid_to_socket(unsigned int apicid);
- 
-diff --git a/xen/common/sched/credit2.c b/xen/common/sched/credit2.c
-index 3d4cecd5ba..6c645f0e21 100644
---- a/xen/common/sched/credit2.c
-+++ b/xen/common/sched/credit2.c
-@@ -29,22 +29,6 @@
- /* #define d2printk printk */
- #define d2printk(x...)
- 
--/*
-- * TODO: Abstract this properly, and figure out what Credit2 wants to do with
-- *       the fact that x86_num_siblings doesn't even have the same meaning
-- *       between x86 vendors.
-- */
--static unsigned int cpu_nr_siblings(unsigned int cpu)
--{
--#ifdef CONFIG_X86
--    return cpu_data[cpu].x86_num_siblings;
--#elif defined(CONFIG_GENERIC_CPU_TOPOLOGY)
--    return cpu_topology ? cpu_topology[cpu].num_siblings : 1;
--#else
--    return 1;
--#endif
--}
--
- /*
-  * Credit2 tracing events ("only" 512 available!). Check
-  * include/public/trace.h for more details.
-@@ -882,9 +866,9 @@ cpu_runqueue_match(const struct csched2_runqueue_data *rqd, unsigned int cpu)
- 
- /*
-  * Additional checks, to avoid separating siblings in different runqueues.
-- * This deals with both Intel's HTs and AMD's CUs. An arch that does not have
-- * any similar concept will just have cpu_nr_siblings() always return 1, and
-- * setup the cpu_sibling_mask-s acordingly (as currently does ARM), and things
-+ * This deals with Intel's HTs, AMD's CUs and ARM's SMT. An arch that
-+ * does not have similar concept will just have cpu_nr_siblings() always
-+ * return 1, and setup the cpu_sibling_mask-s accordingly, and things
-  * will just work as well.
-  */
- static bool
-diff --git a/xen/include/xen/cpu-topology.h b/xen/include/xen/cpu-topology.h
-index ee34425680..646cd0ff04 100644
---- a/xen/include/xen/cpu-topology.h
-+++ b/xen/include/xen/cpu-topology.h
-@@ -41,6 +41,7 @@ static inline void init_cpu_sibling_map(unsigned int cpu)
- 
- #define cpu_to_core(cpu) (cpu_topology ? cpu_topology[cpu].phys_core_id : 0)
- #define cpu_to_socket(cpu) (cpu_topology ? cpu_topology[cpu].phys_socket_id : 0)
-+#define cpu_nr_siblings(cpu) (cpu_topology ? cpu_topology[cpu].num_siblings : 1)
- 
- #else /* CONFIG_GENERIC_CPU_TOPOLOGY */
- 
-@@ -64,6 +65,10 @@ static inline void init_cpu_sibling_map(unsigned int cpu)
- #define cpu_to_socket(cpu) (0)
- #endif
- 
-+#ifndef cpu_nr_siblings
-+#define cpu_nr_siblings(cpu) (1)
-+#endif
-+
- #endif /* CONFIG_GENERIC_CPU_TOPOLOGY */
- 
- #endif /* XEN_CPU_TOPOLOGY_H */
+                 printf(" %s rtds:repl_budget d%uv%u, deadline = %"PRIu64", "
+-                       "budget = %"PRIu64"\n", ri->dump_header,
+-                       r->domid, r->vcpuid, r->cur_dl, r->cur_bg);
++                       "budget = %"PRIu64", priority = %u\n", ri->dump_header,
++                       r->domid, r->vcpuid, r->cur_dl, r->cur_bg, r->priority_level);
+             }
+             break;
+         case TRC_SCHED_CLASS_EVT(RTDS, 5): /* SCHED_TASKLET    */
 -- 
 2.43.0
 
