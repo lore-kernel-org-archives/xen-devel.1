@@ -4,44 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8818FC43458
-	for <xen-devel@archiver.kernel.org>; Sat, 11 Jul 2026 21:22:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1360645.1613411 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4CF5C43458
+	for <xen-devel@archiver.kernel.org>; Sun, 12 Jul 2026 05:29:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1360586.1613512 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wif8o-0008Ao-Ix; Sat, 11 Jul 2026 21:21:42 +0000
+	id 1wimkL-0000nj-EW; Sun, 12 Jul 2026 05:28:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1360645.1613411; Sat, 11 Jul 2026 21:21:42 +0000
+Received: by outflank-mailman (output) from mailman id 1360586.1613512; Sun, 12 Jul 2026 05:28:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wif8o-00089s-EX; Sat, 11 Jul 2026 21:21:42 +0000
-Received: by outflank-mailman (input) for mailman id 1360645;
- Sat, 11 Jul 2026 21:21:41 +0000
+	id 1wimkK-0000kZ-SP; Sun, 12 Jul 2026 05:28:56 +0000
+Received: by outflank-mailman (input) for mailman id 1360586;
+ Sat, 11 Jul 2026 18:49:56 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wif8n-00083H-OR
- for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 21:21:41 +0000
+ (envelope-from <ljs@kernel.org>) id 1wiclw-0005c8-7h
+ for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 18:49:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wif8n-00Ac2k-5L
- for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 23:21:41 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wiclv-00ANfV-Km
+ for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 20:49:55 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a52b3bd-5cb7-0a2a0a5109dd-0a2a4508bcba-4
- for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 23:21:41 +0200
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
- (envelope-from <freddy77@gmail.com>)
- id 6a52b3e4-ee29-0a2a45080019-d155802da550-3
- for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 23:21:41 +0200
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-4938d5f86f3so14815375e9.1
- for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 14:21:41 -0700 (PDT)
-Received: from localhost.localdomain (2.115.147.147.dyn.plus.net.
- [147.147.115.2]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47a9de1d8cdsm74809460f8f.1.2026.07.11.14.21.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 11 Jul 2026 14:21:39 -0700 (PDT)
+ (envelope-from <ljs@kernel.org>)
+ id 6a52902c-bab6-0a2a0a5309dd-0a2a4502b338-16
+ for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 20:49:55 +0200
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
+ (envelope-from <ljs@kernel.org>)
+ id 6a529052-64c6-0a2a45020019-ac6904fe909e-3
+ for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 20:49:55 +0200
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id EB33F601D9;
+ Sat, 11 Jul 2026 18:49:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3EE8B1F000E9;
+ Sat, 11 Jul 2026 18:49:33 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,163 +50,195 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783804900; x=1784409700; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=jLiExMbqfLeimgkvhGVcWHLdFUDKqJKlc0Jm68oRzVw=;
-        b=qKOmbQSnonOZqgUT0DSCYCeFR4DGS3A+5LtGSPToBckEZQQ4PdEft7c7loD27vgJR2
-         Nk5PIqcU7gVH3IEmnSRxnaPBMYXyWOAgsc+5Sny2rufiywI6YIRlAbNTdG1E71eMKK/0
-         wViJW7jqArTW72lRorwOFJSgXiR7dhEJZomBqml2d3kpRZJg8GbRsH3c0ceNGVbMi01g
-         kzlQxXbwAhHTkLOmAGO4cDdSi8ZomLyVZ+TsxgmkFgHibZFlTX5+/ap3MUOyLGQqdmi0
-         M6wQbd7WtF5jH3gc5sInILU+67DkYc8cxn/mQHtWYzcQtDZtxOgnYmUZ6LDiQ+5huPnS
-         GXPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783804900; x=1784409700;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=jLiExMbqfLeimgkvhGVcWHLdFUDKqJKlc0Jm68oRzVw=;
-        b=dBUFBjlFN9CtECmrobEQrVLtA2d4p1H2qYhZit2NtutYmzlcfnEDqJuZ8SBSjXKPqh
-         8/IZo5kbt5cNKp633gAlqRBOYK2Vd3L/9Fga7eVL9nWDjm3Rlq1pOLOH8Esa4jearnFk
-         YdGX73JnMu3ChvR0FE4MAp4zLveNjR9dLEwCEuydaAPB9MVBGKVn6cx7je17X/16S+l1
-         Fc5L278YOWSl01kp/h65BMz9+nKHm4ivbQInXKSPohk59riOFuT/aYxLN67Xy0CxJitl
-         TrgMjz6B++2e6pnHtwkXdmkfPPdH8PaOSPVYgZ/eKfaYiQgcVvJJ/N5QCJ/MP+dq3Z9G
-         PjnA==
-X-Gm-Message-State: AOJu0Yz3hJ8CJopmHsvXG9WziSX6ZWQyOb2xAgdpw0zUC6yG+YW/Do2S
-	nclyNXl+IWeBW7eM8bYhJ35KT9qRLk6hskWGeemZbgKUak+G8K3HL2MPVOjYAl4k54Q=
-X-Gm-Gg: AfdE7ckrRYtjB813tepjrLlzguNCl5mjrbXdygCeprWHWN4uMzGaZ0xwcIxr3aTktyn
-	y04oHvMFKg4yENqXuliKwrUOb9XTDK/axW8qJA6jucn1UsRJ+BvoQpY0JZINk0NKseyAJbcykXa
-	nLCvUe/zUxM+oS8p7Q3hKPJcIDRca3RGtHvnlH+BtNoxhHusFw7M27hZJ8Flk3A0af2X8+OLuMb
-	toxiyC9vpdORNMZajV8i0QyPBKmUgRvhOurFfD5Vj5xE+4XQZJpYK6Y9xOS1K+2GWGVQpkS7gqR
-	hLdJIZThrSNC2Ycd4wRO1cGi2zA/xnb2AnzHVVX+/+2W+d23y+/nuyXakMDV92OfDYqQ7+XhJTK
-	9hOLod99asy8zgPWLyXJKiA1cuuOsUPnF9XfNAnbR9UwL3zIXn6gH48JdP+BFGZpdiOLNyZIwPP
-	8LAm8cgCuBfXYPW7XtjasH/xtWgprtlLCzM/ZPV3iSzbiQ4SHc/OF/s4U7aj78dQUiv4GgRm6uQ
-	NGhMijx6e2T00IniFw=
-X-Received: by 2002:a05:600c:6749:b0:493:edde:54c8 with SMTP id 5b1f17b1804b1-493f8885b92mr39245425e9.8.1783804900465;
-        Sat, 11 Jul 2026 14:21:40 -0700 (PDT)
-From: Frediano Ziglio <freddy77@gmail.com>
-X-Google-Original-From: Frediano Ziglio <frediano.ziglio@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Frediano Ziglio <frediano.ziglio@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v8 4/4] libs/guest: use Valgrind to detect various buffer overflows
-Date: Sat, 11 Jul 2026 22:21:28 +0100
-Message-ID: <20260711212128.505727-5-frediano.ziglio@citrix.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260711212128.505727-1-frediano.ziglio@citrix.com>
-References: <20260711212128.505727-1-frediano.ziglio@citrix.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:Date:Subject:References:In-Reply-To:To:Cc"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783795793;
+	bh=Fr9+W5ioGfovNH8dryM/kzP+up/ElY+Oy2uwfNl+UZQ=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc;
+	b=KCh2Wp49fergCiFPuJT2qu+NLRDa7tcNsKE68tr0X57/gxQeoxFEQALVKzPPGCBCs
+	 1S2aNlk++tT/2vIRKjYUsq8gWVO5hc3Pv8Wj7ehGz3ecvbnsQJtpGf+Z3pEmCQ5Zpb
+	 0G4kl6AsVgK7NukwvKxLJBKVBgW4cGFGkyDpvnIWMOL+cqs+XQ3maPfs9w3a7IE778
+	 VHeldKO9fd0SwC8Wj8f7RSPZ4Jk+y+nxR+cKOZdHbk7BShTL6YF9RcqJ6dbx/Ra7Fm
+	 TE7Z2bwnikCj/QtjUnOZ8uMRw3s/GTnG9x5fnIpGmsCUudhHKyJXYAWkomP4MG/RhR
+	 DQejuUUlKg3zw==
+From: Lorenzo Stoakes <ljs@kernel.org>
+Date: Sat, 11 Jul 2026 19:45:09 +0100
+Subject: [PATCH v2 12/13] mm/mprotect: convert mprotect code to use
+ vma_flags_t
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1783804901-11D7201C-55CF5499/0/0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260711-b4-vma-flags-mm-v2-12-0fa2357d5431@kernel.org>
+References: <20260711-b4-vma-flags-mm-v2-0-0fa2357d5431@kernel.org>
+In-Reply-To: <20260711-b4-vma-flags-mm-v2-0-0fa2357d5431@kernel.org>
+To: Andrew Morton <akpm@linux-foundation.org>, 
+ David Hildenbrand <david@kernel.org>, 
+ "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>, 
+ Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
+ Michal Hocko <mhocko@suse.com>, 
+ Thomas Bogendoerfer <tsbogend@alpha.franken.de>, 
+ Benjamin LaHaise <bcrl@kvack.org>, Alexander Viro <viro@zeniv.linux.org.uk>, 
+ Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, 
+ Hugh Dickins <hughd@google.com>, 
+ Baolin Wang <baolin.wang@linux.alibaba.com>, Jann Horn <jannh@google.com>, 
+ Pedro Falcato <pfalcato@suse.de>, Muchun Song <muchun.song@linux.dev>, 
+ Oscar Salvador <osalvador@suse.de>, Zi Yan <ziy@nvidia.com>, 
+ Nico Pache <npache@redhat.com>, Ryan Roberts <ryan.roberts@arm.com>, 
+ Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>, 
+ Lance Yang <lance.yang@linux.dev>, Usama Arif <usama.arif@linux.dev>, 
+ Madhavan Srinivasan <maddy@linux.ibm.com>, 
+ Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>, 
+ "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Lucas Stach <l.stach@pengutronix.de>, 
+ Russell King <linux+etnaviv@armlinux.org.uk>, 
+ Christian Gmeiner <christian.gmeiner@gmail.com>, 
+ Inki Dae <inki.dae@samsung.com>, Seung-Woo Kim <sw0312.kim@samsung.com>, 
+ Kyungmin Park <kyungmin.park@samsung.com>, 
+ Krzysztof Kozlowski <krzk@kernel.org>, 
+ Peter Griffin <peter.griffin@linaro.org>, 
+ Alim Akhtar <alim.akhtar@samsung.com>, 
+ Jani Nikula <jani.nikula@linux.intel.com>, 
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, 
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, 
+ Tvrtko Ursulin <tursulin@ursulin.net>, 
+ Rob Clark <robin.clark@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, 
+ Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>, 
+ Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, 
+ Sandy Huang <hjc@rock-chips.com>, 
+ =?utf-8?q?Heiko_St=C3=BCbner?= <heiko@sntech.de>, 
+ Andy Yan <andy.yan@rock-chips.com>, 
+ Thierry Reding <thierry.reding@kernel.org>, 
+ Mikko Perttunen <mperttunen@nvidia.com>, 
+ Jonathan Hunter <jonathanh@nvidia.com>, Gerd Hoffmann <kraxel@redhat.com>, 
+ Dmitry Osipenko <dmitry.osipenko@collabora.com>, 
+ Gurchetan Singh <gurchetansingh@chromium.org>, 
+ Chia-I Wu <olvaffe@gmail.com>, Zack Rusin <zack.rusin@broadcom.com>, 
+ Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
+ Matthew Brost <matthew.brost@intel.com>, 
+ =?utf-8?q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, 
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, 
+ Helge Deller <deller@gmx.de>, Kees Cook <kees@kernel.org>, 
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
+ Boris Brezillon <boris.brezillon@collabora.com>, 
+ Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>
+Cc: Lorenzo Stoakes <ljs@kernel.org>, linux-mm@kvack.org, 
+ linux-kernel@vger.kernel.org, linux-mips@vger.kernel.org, 
+ linux-aio@kvack.org, linux-fsdevel@vger.kernel.org, 
+ linuxppc-dev@lists.ozlabs.org, dri-devel@lists.freedesktop.org, 
+ etnaviv@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org, 
+ linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org, 
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org, linux-rockchip@lists.infradead.org, 
+ linux-tegra@vger.kernel.org, virtualization@lists.linux.dev, 
+ intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org, 
+ linux-fbdev@vger.kernel.org, linux-sound@vger.kernel.org
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2996; i=ljs@kernel.org;
+ h=from:subject:message-id; bh=srWqnQOI/gzNhpzulQ661PMe2/Xdt3Viy9gVjyuNxVs=;
+ b=owGbwMvMwCV2fu7ZrsZH9SKMp9WSGLKC+q08lh17/Pn9DO6GppTAjP7Fs7Y758nqdTXNm/9By
+ 2P20jvmHaUsDGJcDLJiiizPv4jvDxIJm9d5wd8NZg4rE8gQBi5OAZjIo6cM/6OUTKz3VR0/Kd/z
+ 9N+FX84lasa5MY7rRCqXPVqaO+Hv4qeMDLfOLP6RuO0wS2eR6YK62aGFcS/ctwjs0Qu2mW4r7s7
+ Dww8A
+X-Developer-Key: i=ljs@kernel.org; a=openpgp;
+ fpr=E7F417BF5214569E89D04F46CF9DCD8A81E27F14
+X-purgate-ID: tlsNG-720697/1783795795-3E944A87-F23A9418/0/0
 X-purgate-type: clean
-X-purgate-size: 4031
+X-purgate-size: 2998
 
-Previously this was done as buffers were allocated separately.
+Replace use of the legacy vm_flags_t flags with vma_flags_t values
+throughout the mprotect logic.
 
-Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
+Note that we retain the legacy vm_flags_t bit shifting code in
+do_mprotect_pkey(), deferring a vma_flags_t approach to this for the time
+being.
+
+Additionally update comments to reflect the changes to be consistent.
+
+No functional change intended.
+
+Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
 ---
- tools/libs/ctrl/xc_private.h    |  8 ++++++++
- tools/libs/guest/xg_sr_common.h |  8 ++++++++
- tools/libs/guest/xg_sr_save.c   | 12 ++++++++++++
- 3 files changed, 28 insertions(+)
+ mm/mprotect.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/tools/libs/ctrl/xc_private.h b/tools/libs/ctrl/xc_private.h
-index 8a325c17b0..bef96521c3 100644
---- a/tools/libs/ctrl/xc_private.h
-+++ b/tools/libs/ctrl/xc_private.h
-@@ -45,8 +45,16 @@
- #if defined(HAVE_VALGRIND_MEMCHECK_H) && !defined(NDEBUG) && !defined(__MINIOS__)
- /* Compile in Valgrind client requests? */
- #include <valgrind/memcheck.h>
-+#define MEM_NOACCESS_BUFFER(name, size) uint8_t name[size];
-+#define MEM_NOACCESS_INIT(field) \
-+    VALGRIND_MAKE_MEM_NOACCESS(field, sizeof(field))
-+#define MEM_UNDEFINED_INIT(field) \
-+    VALGRIND_MAKE_MEM_UNDEFINED(field, sizeof(field))
- #else
- #define VALGRIND_MAKE_MEM_UNDEFINED(addr, len) /* addr, len */
-+#define MEM_NOACCESS_BUFFER(name, size)
-+#define MEM_NOACCESS_INIT(field) do {} while(0)
-+#define MEM_UNDEFINED_INIT(field) do {} while(0)
- #endif
+diff --git a/mm/mprotect.c b/mm/mprotect.c
+index dc27bbc1712f..2888ee638d87 100644
+--- a/mm/mprotect.c
++++ b/mm/mprotect.c
+@@ -40,7 +40,7 @@
  
- #if defined(__MINIOS__)
-diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index c07c6db59e..d3fc7f363e 100644
---- a/tools/libs/guest/xg_sr_common.h
-+++ b/tools/libs/guest/xg_sr_common.h
-@@ -245,13 +245,21 @@ struct xc_sr_context
-             xc_hypercall_buffer_t dirty_bitmap_hbuf;
-             struct xc_sr_context_save_buffers
-             {
-+                MEM_NOACCESS_BUFFER(na0, 16);
-                 xen_pfn_t batch_pfns[MAX_BATCH_SIZE];
-+                MEM_NOACCESS_BUFFER(na1, 16);
-                 xen_pfn_t mfns[MAX_BATCH_SIZE];
-+                MEM_NOACCESS_BUFFER(na2, 16);
-                 xen_pfn_t types[MAX_BATCH_SIZE];
-+                MEM_NOACCESS_BUFFER(na3, 16);
-                 void *local_pages[MAX_BATCH_SIZE];
-+                MEM_NOACCESS_BUFFER(na4, 16);
-                 struct iovec iov[MAX_BATCH_SIZE + 2]; /* Headers + data. */
-+                MEM_NOACCESS_BUFFER(na5, 16);
-                 uint64_t rec_pfns[MAX_BATCH_SIZE];
-+                MEM_NOACCESS_BUFFER(na6, 16);
-                 int errors[MAX_BATCH_SIZE];
-+                MEM_NOACCESS_BUFFER(na7, 16);
-             } *buffers;
-         } save;
+ static bool maybe_change_pte_writable(struct vm_area_struct *vma, pte_t pte)
+ {
+-	if (WARN_ON_ONCE(!(vma->vm_flags & VM_WRITE)))
++	if (WARN_ON_ONCE(!vma_test(vma, VMA_WRITE_BIT)))
+ 		return false;
  
-diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
-index 34e41cf410..c5022b2a1d 100644
---- a/tools/libs/guest/xg_sr_save.c
-+++ b/tools/libs/guest/xg_sr_save.c
-@@ -115,8 +115,10 @@ static int write_batch(struct xc_sr_context *ctx)
-     assert(ctx->save.buffers);
+ 	/* Don't touch entries that are not even readable. */
+@@ -97,7 +97,7 @@ static bool can_change_shared_pte_writable(struct vm_area_struct *vma,
+ bool can_change_pte_writable(struct vm_area_struct *vma, unsigned long addr,
+ 			     pte_t pte)
+ {
+-	if (!(vma->vm_flags & VM_SHARED))
++	if (!vma_test(vma, VMA_SHARED_BIT))
+ 		return can_change_private_pte_writable(vma, addr, pte);
  
-     /* Mfns of the batch pfns. */
-+    MEM_UNDEFINED_INIT(ctx->save.buffers->mfns);
-     mfns = ctx->save.buffers->mfns;
-     /* Types of the batch pfns. */
-+    MEM_UNDEFINED_INIT(ctx->save.buffers->types);
-     types = ctx->save.buffers->types;
-     /* Errors from attempting to map the gfns. */
-     errors = ctx->save.buffers->errors;
-@@ -124,8 +126,10 @@ static int write_batch(struct xc_sr_context *ctx)
-     local_pages = ctx->save.buffers->local_pages;
-     memset(local_pages, 0, sizeof(*local_pages) * nr_pfns);
-     /* iovec[] for writev(). */
-+    MEM_UNDEFINED_INIT(ctx->save.buffers->iov);
-     iov = ctx->save.buffers->iov;
-     /* page_data record PFNs list */
-+    MEM_UNDEFINED_INIT(ctx->save.buffers->rec_pfns);
-     rec_pfns = ctx->save.buffers->rec_pfns;
+ 	return can_change_shared_pte_writable(vma, pte);
+@@ -194,7 +194,7 @@ static __always_inline void set_write_prot_commit_flush_ptes(struct vm_area_stru
+ {
+ 	bool set_write;
  
-     iov[0].iov_base = &hdrs;
-@@ -788,6 +792,14 @@ static int setup(struct xc_sr_context *ctx)
-         errno = ENOMEM;
-         goto err;
-     }
-+    MEM_NOACCESS_INIT(ctx->save.buffers->na0);
-+    MEM_NOACCESS_INIT(ctx->save.buffers->na1);
-+    MEM_NOACCESS_INIT(ctx->save.buffers->na2);
-+    MEM_NOACCESS_INIT(ctx->save.buffers->na3);
-+    MEM_NOACCESS_INIT(ctx->save.buffers->na4);
-+    MEM_NOACCESS_INIT(ctx->save.buffers->na5);
-+    MEM_NOACCESS_INIT(ctx->save.buffers->na6);
-+    MEM_NOACCESS_INIT(ctx->save.buffers->na7);
+-	if (vma->vm_flags & VM_SHARED) {
++	if (vma_test(vma, VMA_SHARED_BIT)) {
+ 		set_write = can_change_shared_pte_writable(vma, ptent);
+ 		prot_commit_flush_ptes(vma, addr, ptep, oldpte, ptent, nr_ptes,
+ 				       /* idx = */ 0, set_write, tlb);
+@@ -846,8 +846,8 @@ mprotect_fixup(struct vma_iterator *vmi, struct mmu_gather *tlb,
+ 		vm_unacct_memory(nrpages);
  
-     rc = 0;
+ 	/*
+-	 * Private VM_LOCKED VMA becoming writable: trigger COW to avoid major
+-	 * fault on access.
++	 * Private VMA_LOCKED_BIT VMA becoming writable: trigger COW to avoid
++	 * major fault on access.
+ 	 */
+ 	if (vma_flags_test(&new_vma_flags, VMA_WRITE_BIT) &&
+ 	    vma_flags_test(&old_vma_flags, VMA_LOCKED_BIT) &&
+@@ -921,7 +921,7 @@ static int do_mprotect_pkey(unsigned long start, size_t len,
+ 			goto out;
+ 		start = vma->vm_start;
+ 		error = -EINVAL;
+-		if (!(vma->vm_flags & VM_GROWSDOWN))
++		if (!vma_test(vma, VMA_GROWSDOWN_BIT))
+ 			goto out;
+ 	} else {
+ 		if (vma->vm_start > start)
+@@ -929,7 +929,7 @@ static int do_mprotect_pkey(unsigned long start, size_t len,
+ 		if (unlikely(grows & PROT_GROWSUP)) {
+ 			end = vma->vm_end;
+ 			error = -EINVAL;
+-			if (!(vma->vm_flags & VM_GROWSUP))
++			if (!vma_test_single_mask(vma, VMA_GROWSUP))
+ 				goto out;
+ 		}
+ 	}
+@@ -953,7 +953,7 @@ static int do_mprotect_pkey(unsigned long start, size_t len,
+ 		}
  
+ 		/* Does the application expect PROT_READ to imply PROT_EXEC */
+-		if (rier && (vma->vm_flags & VM_MAYEXEC))
++		if (rier && vma_test(vma, VMA_MAYEXEC_BIT))
+ 			prot |= PROT_EXEC;
+ 
+ 		/*
+
 -- 
-2.43.0
+2.55.0
 
 
