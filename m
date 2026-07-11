@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E3C4C43458
-	for <xen-devel@archiver.kernel.org>; Sat, 11 Jul 2026 16:24:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1360423.1613300 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B9EEC44501
+	for <xen-devel@archiver.kernel.org>; Sat, 11 Jul 2026 16:45:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1360453.1613312 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wiaUY-0000CX-Qj; Sat, 11 Jul 2026 16:23:50 +0000
+	id 1wiapR-00032c-G5; Sat, 11 Jul 2026 16:45:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1360423.1613300; Sat, 11 Jul 2026 16:23:50 +0000
+Received: by outflank-mailman (output) from mailman id 1360453.1613312; Sat, 11 Jul 2026 16:45:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wiaUY-0000CP-MC; Sat, 11 Jul 2026 16:23:50 +0000
-Received: by outflank-mailman (input) for mailman id 1360423;
- Sat, 11 Jul 2026 16:23:49 +0000
+	id 1wiapR-00032V-DN; Sat, 11 Jul 2026 16:45:25 +0000
+Received: by outflank-mailman (input) for mailman id 1360453;
+ Sat, 11 Jul 2026 16:45:24 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ljs@kernel.org>) id 1wiaUX-0000CI-OD
- for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 16:23:49 +0000
+ (envelope-from <ljs@kernel.org>) id 1wiapQ-00032P-Hl
+ for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 16:45:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wiaUX-0005IG-58
- for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 18:23:49 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wiapP-002MZ4-Gg
+ for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 18:45:23 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <ljs@kernel.org>)
- id 6a526d9c-5cb7-0a2a0a5109dd-0a2a450a977a-34
- for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 18:23:48 +0200
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
+ id 6a527284-e002-0a2a0a5209dd-0a2a450be0fa-32
+ for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 18:45:23 +0200
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
  (envelope-from <ljs@kernel.org>)
- id 6a526e13-ec7d-0a2a450a0019-aceafc1f84be-3
- for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 18:23:48 +0200
+ id 6a527321-b7da-0a2a450b0019-ac6904fe916a-3
+ for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 18:45:22 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 2307741729;
- Sat, 11 Jul 2026 16:23:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CA7C21F000E9;
- Sat, 11 Jul 2026 16:23:29 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id C698560052;
+ Sat, 11 Jul 2026 16:45:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 368D01F000E9;
+ Sat, 11 Jul 2026 16:45:03 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,16 +52,16 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783787026;
-	bh=eyGPCpKJAg7fhbXBnd8C7Wrqfsg9VL7dUFWJAu8QPbU=;
+	s=k20260515; t=1783788320;
+	bh=wyycO0T/E4ygtisRzkqVLShoTPRgxuh1j7TtfC7wXl0=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=oHKCbOs50OGhdryTHZVIrJJAH5cNWadJ96vBPL21JseHby43owQLI4TQNXRn8X6gJ
-	 TAnHb0VclvTH/ELo5PXr26ZhLJbSwD3gVlLvJn7Z0/7xX0d8g4qtgVFjgxpWwxbv1a
-	 7r5CcrXGWEbeyhCP39VRFFsSay0aVbIrR1SurkK/zcKs46h1LZbloHKdjmJ9QcIWOB
-	 93pv7I3n5DE5yAji0/HPOsX0hhylbUPeh4N5mBIdjWYLPd6EljlcjYkvh2JpbnVfqK
-	 2Dhr9fLfrHgsT5U9G1HrOgWT69oD72z/B+kQJ6Kj2KlR/byBhBoVckK6V+QXJUFKRE
-	 5uoKO6B92zc7w==
-Date: Sat, 11 Jul 2026 17:23:19 +0100
+	b=UQeTQQM7/zogPNVpPumivekv/Dm65tJwKSGkKyUaN15OK2ePQoOxgmoczQXNeufyu
+	 mPB2SeO/+jaR+zlJiyLVdyWAwHg7D0CKx8xMhyA5MDEdHDSR6TPUNUJn+Nzb/es+VO
+	 1AGLLXVLTi7PuZQkYtNin4NBM5SzIQlt5sWd9Tt0MOCtyaJ26niLtZLm/iWL4WgjoE
+	 nytqWs/CMB6G26FmrITyykLrDBQPn0ehby972yRXsbQJ2wOYF8M/bvBoXBfucUYQHe
+	 8/x2mtOwd5qD3Tv70Taj9RQTidlVV5lxGicVGK4dGGf0RiLlLhHP5bQmNpx1vNrQvn
+	 rYrD/ste49T1Q==
+Date: Sat, 11 Jul 2026 17:44:53 +0100
 From: Lorenzo Stoakes <ljs@kernel.org>
 To: Zi Yan <ziy@nvidia.com>
 Cc: Lance Yang <lance.yang@linux.dev>, akpm@linux-foundation.org, 
@@ -92,118 +92,100 @@ Cc: Lance Yang <lance.yang@linux.dev>, akpm@linux-foundation.org,
 	linux-sound@vger.kernel.org
 Subject: Re: [PATCH 10/13] mm/vma: convert miscellaneous uses of VMA flags in
  core mm
-Message-ID: <alJqjo_MZCFWj3Wt@lucifer>
+Message-ID: <alJydQjYgboxmizG@lucifer>
 References: <1e7d834c887b6a65627d730addcff13d458c6268.1782760670.git.ljs@kernel.org>
  <20260702131233.59026-1-lance.yang@linux.dev>
  <akaGxiTaJreEQn8T@lucifer>
  <DJTNXVOWGWJ4.3MDNLPMY0Y3RF@nvidia.com>
+ <alJqjo_MZCFWj3Wt@lucifer>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <DJTNXVOWGWJ4.3MDNLPMY0Y3RF@nvidia.com>
-X-purgate-ID: tlsNG-4011c0/1783787028-BFF63248-63E97EEA/0/0
+In-Reply-To: <alJqjo_MZCFWj3Wt@lucifer>
+X-purgate-ID: tlsNG-42698a/1783788323-A29C29ED-7889E819/0/0
 X-purgate-type: clean
-X-purgate-size: 3604
+X-purgate-size: 3397
 
-On Wed, Jul 08, 2026 at 09:52:19PM -0400, Zi Yan wrote:
-> On Thu Jul 2, 2026 at 11:46 AM EDT, Lorenzo Stoakes wrote:
-> > On Thu, Jul 02, 2026 at 09:12:33PM +0800, Lance Yang wrote:
-> >>
-> >> On Mon, Jun 29, 2026 at 08:25:33PM +0100, Lorenzo Stoakes wrote:
-> >> >Update various uses of legacy flags in vma.c and mmap.c to the new
-> >> >vma_flags_t type, updating comments alongside them to be consistent.
-> >> >
-> >> >Also update __install_special_mapping() to rearrange things slightly to
-> >> >accommodate the changes.
-> >> >
-> >> >Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
-> >> >---
-> >> [...]
-> >> >diff --git a/mm/vma.c b/mm/vma.c
-> >> >index b81c05e67a61..ab2ef0f04420 100644
-> >> >--- a/mm/vma.c
-> >> >+++ b/mm/vma.c
-> >> >@@ -3417,23 +3417,27 @@ struct vm_area_struct *__install_special_mapping(
-> >> > 	vm_flags_t vm_flags, void *priv,
-> >> > 	const struct vm_operations_struct *ops)
-> >> > {
-> >> >-	int ret;
-> >> >+	vma_flags_t vma_flags = legacy_to_vma_flags(vm_flags);
-> >> > 	struct vm_area_struct *vma;
-> >> >+	int ret;
-> >> >
-> >> > 	vma = vm_area_alloc(mm);
-> >> >-	if (unlikely(vma == NULL))
-> >> >+	if (unlikely(!vma))
-> >> > 		return ERR_PTR(-ENOMEM);
-> >> >
-> >> >-	vma_set_range(vma, addr, addr + len, 0);
-> >> >-	vm_flags |= vma_flags_to_legacy(mm->def_vma_flags) | VM_DONTEXPAND;
-> >> >+	vma_flags_set_mask(&vma_flags, mm->def_vma_flags);
-> >> >+	vma_flags_set(&vma_flags, VMA_DONTEXPAND_BIT);
-> >> > 	if (pgtable_supports_soft_dirty())
-> >> >-		vm_flags |= VM_SOFTDIRTY;
-> >> >-	vm_flags_init(vma, vm_flags & ~VM_LOCKED_MASK);
-> >> >+		vma_flags_set(&vma_flags, VMA_SOFTDIRTY_BIT);
-> >> >+	vma_flags_clear_mask(&vma_flags, VMA_LOCKED_MASK);
-> >> >+	vma->flags = vma_flags;
-> >>
-> >> Maybe worth a vma_flags_init() helper here to mirror vm_flags_init()?
-> >> With this open-coded, we lose the soft-dirty WARN_ON_ONCE sanity check.
-> >>
-> >> Might be nicer to keep that check in one place ;)
+On Sat, Jul 11, 2026 at 05:23:39PM +0100, Lorenzo Stoakes wrote:
+> On Wed, Jul 08, 2026 at 09:52:19PM -0400, Zi Yan wrote:
+> > On Thu Jul 2, 2026 at 11:46 AM EDT, Lorenzo Stoakes wrote:
+> > > On Thu, Jul 02, 2026 at 09:12:33PM +0800, Lance Yang wrote:
+> > >>
+> > >> On Mon, Jun 29, 2026 at 08:25:33PM +0100, Lorenzo Stoakes wrote:
+> > >> >Update various uses of legacy flags in vma.c and mmap.c to the new
+> > >> >vma_flags_t type, updating comments alongside them to be consistent.
+> > >> >
+> > >> >Also update __install_special_mapping() to rearrange things slightly to
+> > >> >accommodate the changes.
+> > >> >
+> > >> >Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
+> > >> >---
+> > >> [...]
+> > >> >diff --git a/mm/vma.c b/mm/vma.c
+> > >> >index b81c05e67a61..ab2ef0f04420 100644
+> > >> >--- a/mm/vma.c
+> > >> >+++ b/mm/vma.c
+> > >> >@@ -3417,23 +3417,27 @@ struct vm_area_struct *__install_special_mapping(
+> > >> > 	vm_flags_t vm_flags, void *priv,
+> > >> > 	const struct vm_operations_struct *ops)
+> > >> > {
+> > >> >-	int ret;
+> > >> >+	vma_flags_t vma_flags = legacy_to_vma_flags(vm_flags);
+> > >> > 	struct vm_area_struct *vma;
+> > >> >+	int ret;
+> > >> >
+> > >> > 	vma = vm_area_alloc(mm);
+> > >> >-	if (unlikely(vma == NULL))
+> > >> >+	if (unlikely(!vma))
+> > >> > 		return ERR_PTR(-ENOMEM);
+> > >> >
+> > >> >-	vma_set_range(vma, addr, addr + len, 0);
+> > >> >-	vm_flags |= vma_flags_to_legacy(mm->def_vma_flags) | VM_DONTEXPAND;
+> > >> >+	vma_flags_set_mask(&vma_flags, mm->def_vma_flags);
+> > >> >+	vma_flags_set(&vma_flags, VMA_DONTEXPAND_BIT);
+> > >> > 	if (pgtable_supports_soft_dirty())
+> > >> >-		vm_flags |= VM_SOFTDIRTY;
+> > >> >-	vm_flags_init(vma, vm_flags & ~VM_LOCKED_MASK);
+> > >> >+		vma_flags_set(&vma_flags, VMA_SOFTDIRTY_BIT);
+> > >> >+	vma_flags_clear_mask(&vma_flags, VMA_LOCKED_MASK);
+> > >> >+	vma->flags = vma_flags;
+> > >>
+> > >> Maybe worth a vma_flags_init() helper here to mirror vm_flags_init()?
+> > >> With this open-coded, we lose the soft-dirty WARN_ON_ONCE sanity check.
+> > >>
+> > >> Might be nicer to keep that check in one place ;)
+> > >
+> > > I really hate all the VMA flag accessors, they conflate things horribly - we
+> > > should be explicitly taking VMA write locks when we need to (and often killable
+> > > ones actually) not assuming that a VMA flags accessor does (they should at most
+> > > assert).
+> > >
+> > > This case is even more terribly egregious - you are setting flags at an
+> > > arbitrary time, why are we asserting something about softdirty?
+> > >
+> > > You may update them as part of initialisation, maybe not. It's far from a
+> > > guarantee and feels like a lazy place to put it.
+> > >
+> > > BUT obviously it's an oversight not to open code that here, so I'll update the
+> > > patch to do that!
 > >
-> > I really hate all the VMA flag accessors, they conflate things horribly - we
-> > should be explicitly taking VMA write locks when we need to (and often killable
-> > ones actually) not assuming that a VMA flags accessor does (they should at most
-> > assert).
-> >
-> > This case is even more terribly egregious - you are setting flags at an
-> > arbitrary time, why are we asserting something about softdirty?
-> >
-> > You may update them as part of initialisation, maybe not. It's far from a
-> > guarantee and feels like a lazy place to put it.
-> >
-> > BUT obviously it's an oversight not to open code that here, so I'll update the
-> > patch to do that!
+> > What do you want to open code here? softdirty WARN_ON_ONCE()?
 >
-> What do you want to open code here? softdirty WARN_ON_ONCE()?
-
-As you can tell I said this reflexively without checking the code :)
-
->
-> vma_flags gets VMA_SOFTDIRTY_BIT just above vma->flags, why do we need a
-> check after that?
-
-And yeah it's completely unnecessary, indeed.
-
->
-> BTW, if you think the check is needed, patch 9 will need to be updated,
-> since the same pattern appears in create_init_stack_vma().
-
-I'll check to see if it's valid there.
-
-For me it just feels like the most silly place to put that check, a VMA flags
-update should update VMA flags not start randomly asserting silly things :)
-
+> As you can tell I said this reflexively without checking the code :)
 >
 > >
-> > I want VMA flags to be a clean stateless thing, other than the flags
-> > themselves. Implicit, unrelated, asserts or lock acquisitions in general should
-> > be done separately IMO.
+> > vma_flags gets VMA_SOFTDIRTY_BIT just above vma->flags, why do we need a
+> > check after that?
+>
+> And yeah it's completely unnecessary, indeed.
+>
 > >
+> > BTW, if you think the check is needed, patch 9 will need to be updated,
+> > since the same pattern appears in create_init_stack_vma().
 >
-> Anyway,
->
-> Reviewed-by: Zi Yan <ziy@nvidia.com>
+> I'll check to see if it's valid there.
 
-Thanks!
+Exactly the same case as here, unnecessary :)
 
->
-> --
-> Best Regards,
-> Yan, Zi
->
-
-Cheers, Lorenzo
+Cheers, LOrenzo
 
