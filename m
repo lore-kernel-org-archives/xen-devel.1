@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63E7EC4450A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43527C44506
 	for <xen-devel@archiver.kernel.org>; Sun, 12 Jul 2026 05:29:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1360580.1613483 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1360568.1613437 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wimkJ-00005V-Mi; Sun, 12 Jul 2026 05:28:55 +0000
+	id 1wimkH-0007o7-AZ; Sun, 12 Jul 2026 05:28:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1360580.1613483; Sun, 12 Jul 2026 05:28:55 +0000
+Received: by outflank-mailman (output) from mailman id 1360568.1613437; Sun, 12 Jul 2026 05:28:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wimkJ-0008V9-8Q; Sun, 12 Jul 2026 05:28:55 +0000
-Received: by outflank-mailman (input) for mailman id 1360580;
- Sat, 11 Jul 2026 18:48:53 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wimkH-0007kX-6S; Sun, 12 Jul 2026 05:28:53 +0000
+Received: by outflank-mailman (input) for mailman id 1360568;
+ Sat, 11 Jul 2026 18:46:49 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ljs@kernel.org>) id 1wickv-0005a0-Lt
- for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 18:48:53 +0000
+ (envelope-from <ljs@kernel.org>) id 1wiciu-0005ID-UV
+ for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 18:46:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wickv-00ANfV-2v
- for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 20:48:53 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wicit-009Nlj-MH
+ for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 20:46:47 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <ljs@kernel.org>)
- id 6a528f7c-bab6-0a2a0a5309dd-0a2a4508cbca-40
- for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 20:48:53 +0200
+ id 6a528f20-5cb7-0a2a0a5109dd-0a2a450cc516-28
+ for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 20:46:47 +0200
 Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
  (envelope-from <ljs@kernel.org>)
- id 6a529013-ee29-0a2a45080019-ac6904feb75e-3
- for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 20:48:52 +0200
+ id 6a528f96-e897-0a2a450c0019-ac6904febc5a-3
+ for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 20:46:47 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 4537960052;
- Sat, 11 Jul 2026 18:48:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9008E1F00A3A;
- Sat, 11 Jul 2026 18:48:30 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id B34E460052;
+ Sat, 11 Jul 2026 18:46:45 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0B0801F00A3A;
+ Sat, 11 Jul 2026 18:46:24 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,23 +52,23 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:Date:Subject:References:In-Reply-To:To:Cc"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783795731;
-	bh=xUC24CQFaY5LbYrAu8Wt8s4S5Jfizo903DYj6Alr2hU=;
+	s=k20260515; t=1783795605;
+	bh=+oyZ6VXOyf4ckjeNtdyGIBWr/UznafJo3nCv5RCwhdU=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=T2G/K9FQZYBazUrgB2p6/rvfCKhk9yVPWpSxduMlumEpHCAb8GIbHDFOcJ29GZ34U
-	 FXoVtM0TahqpG2/h+I35MFGUy4UrraSO9nANAAN+M49Y3tgJA4m0CYLj+ru8taIP0e
-	 7EwnqOpFEKL4iXCg5QZZwK5koK5H5QEVreRGd5cREPAjXQl/m6ADMh2C7JiS0ReU18
-	 sLcJRzfxdd1qFQvsCzgzdlU8pnCRI6OHlZ/0t0TJhZtZlO6HOaThVpZM8GMKxdOOxO
-	 D08lfnlYbZAwAhOcCcewMb1kpDKqfnnPKEY1kl5rBn0b7BUgoqExRSpaXAvWTzltve
-	 YRk/0mVL7ztfw==
+	b=Cml+CY1MKh9iVCaXSwyy6lG3+svNJMWg+WudrFkeSHkVlr1sQGGiZzdcqL8HJbI+A
+	 rXuXtkh5gKQ1rSQYZPuWrdWlAUMPoPlZVEDx0atFOjr2KtSAJjf3rDgIu3xThiSiQM
+	 HX1/tqt8hWTLPU/KAccJSQ5EH/bfLUB7EEfE0AKJp85chpipCgPl9xVnNZagJbwTfR
+	 I/eUKWUU5C/SeilvNVERd66MVxAvV2vsfeTyz76Ualz74to9fWZfJVf52ooiF2vi+v
+	 7G6CnYstSi7Q/Nn0dfxn9rxYwzz4gdrTPUd0waE92egL1j6qcgR2A2M2kyUPm8UN72
+	 XTgF2KlMJvQSA==
 From: Lorenzo Stoakes <ljs@kernel.org>
-Date: Sat, 11 Jul 2026 19:45:06 +0100
-Subject: [PATCH v2 09/13] mm/vma: update create_init_stack_vma() to use
+Date: Sat, 11 Jul 2026 19:45:00 +0100
+Subject: [PATCH v2 03/13] mm: convert __get_unmapped_area() to use
  vma_flags_t
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260711-b4-vma-flags-mm-v2-9-0fa2357d5431@kernel.org>
+Message-Id: <20260711-b4-vma-flags-mm-v2-3-0fa2357d5431@kernel.org>
 References: <20260711-b4-vma-flags-mm-v2-0-0fa2357d5431@kernel.org>
 In-Reply-To: <20260711-b4-vma-flags-mm-v2-0-0fa2357d5431@kernel.org>
 To: Andrew Morton <akpm@linux-foundation.org>, 
@@ -140,134 +140,251 @@ Cc: Lorenzo Stoakes <ljs@kernel.org>, linux-mm@kvack.org,
  intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org, 
  linux-fbdev@vger.kernel.org, linux-sound@vger.kernel.org
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4313; i=ljs@kernel.org;
- h=from:subject:message-id; bh=9FQuWO1YsUxULowpltE39pKMqBbYRFh58BoyoKhWb3A=;
- b=kA0DAAoWz53NioHifxQByyZiAGpSjzqg8y14Kh5MvFuw4iTsl7kJvl53Dij+JdajKdpzjYsNp
- oh1BAAWCgAdFiEE5/QXv1IUVp6J0E9Gz53NioHifxQFAmpSjzoACgkQz53NioHifxQcIwD/VYCq
- 8XVlwzBqdiLqx84JrVaGvSVASgylLrKcnFTCHu8BANPzzRn5WflkqRuMXJ46TwzQqPTztlhZtDp
- EX8lo8YsM
+X-Developer-Signature: v=1; a=openpgp-sha256; l=9398; i=ljs@kernel.org;
+ h=from:subject:message-id; bh=P0Efpepv9aum3/hXSHnF6jwUomGPaWFDJdFnLdhoXJo=;
+ b=owGbwMvMwCV2fu7ZrsZH9SKMp9WSGLKC+i1XfIv0CD/o0frojeduF9dp+Rfm/9jrr3ds68Nz3
+ 57n/OKU6yhlYRDjYpAVU2R5/kV8f5BI2LzOC/5uMHNYmUCGMHBxCsBEnDoZGd5HcnpZ869dcttu
+ 2bF2Swk/5rTaDe8c/3RGds0Md33/o5Dhf5b45Mv7GttXXJ6oxSr/d85Sl/UV2UdDRPJXMmd5+xk
+ 8YwAA
 X-Developer-Key: i=ljs@kernel.org; a=openpgp;
  fpr=E7F417BF5214569E89D04F46CF9DCD8A81E27F14
-X-purgate-ID: tlsNG-c1860d/1783795733-7AC2601C-ABF52587/0/0
+X-purgate-ID: tlsNG-d25034/1783795607-46AEE6B2-F7D372C6/0/0
 X-purgate-type: clean
-X-purgate-size: 4315
+X-purgate-size: 9400
 
-Replace use of the legacy vm_flags_t flags with vma_flags_t values in
-create_init_stack_vma().
+Update __get_unmapped_area() to be parameterised by vma_flags_t rather than
+vm_flags_t as part of the effort to move VMA flags from a system word to a
+bitmap.
 
-As part of this change we add VMA_STACK_EARLY and VMA_STACK_INCOMPLETE
-vma_flags_t defines, and slightly rework create_init_stack_vma() for
-clarity.
+We cascade the changes up to arch_get_unmapped_area_topdown() and
+arch_get_unmapped_area(), where, for now, we use vma_flags_to_legacy() in
+order to propagate the VMA flags.
 
 No functional change intended.
 
-Reviewed-by: Zi Yan <ziy@nvidia.com>
 Reviewed-by: Lance Yang <lance.yang@linux.dev>
+Reviewed-by: Zi Yan <ziy@nvidia.com>
 Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
 ---
- include/linux/mm.h              |  4 ++++
- mm/vma_exec.c                   | 18 +++++++++++-------
- tools/testing/vma/include/dup.h |  4 ++++
- 3 files changed, 19 insertions(+), 7 deletions(-)
+ fs/hugetlbfs/inode.c     |  3 ++-
+ include/linux/huge_mm.h  | 10 +++++-----
+ include/linux/mm.h       |  6 ++++--
+ include/linux/sched/mm.h |  9 +++------
+ mm/huge_memory.c         | 21 ++++++++++++---------
+ mm/mmap.c                | 27 ++++++++++++++-------------
+ 6 files changed, 40 insertions(+), 36 deletions(-)
 
+diff --git a/fs/hugetlbfs/inode.c b/fs/hugetlbfs/inode.c
+index 9fddd1e0b813..43066f9ddf52 100644
+--- a/fs/hugetlbfs/inode.c
++++ b/fs/hugetlbfs/inode.c
+@@ -184,7 +184,8 @@ hugetlb_get_unmapped_area(struct file *file, unsigned long addr,
+ 	if (addr)
+ 		addr0 = ALIGN(addr, huge_page_size(h));
+ 
+-	return mm_get_unmapped_area_vmflags(file, addr0, len, pgoff, flags, 0);
++	return mm_get_unmapped_area_vmaflags(file, addr0, len, pgoff, flags,
++					     EMPTY_VMA_FLAGS);
+ }
+ 
+ /*
+diff --git a/include/linux/huge_mm.h b/include/linux/huge_mm.h
+index cae97c307280..9e43e138c0b7 100644
+--- a/include/linux/huge_mm.h
++++ b/include/linux/huge_mm.h
+@@ -391,9 +391,9 @@ static inline bool thp_disabled_by_hw(void)
+ 
+ unsigned long thp_get_unmapped_area(struct file *filp, unsigned long addr,
+ 		unsigned long len, unsigned long pgoff, unsigned long flags);
+-unsigned long thp_get_unmapped_area_vmflags(struct file *filp, unsigned long addr,
++unsigned long thp_get_unmapped_area_vmaflags(struct file *filp, unsigned long addr,
+ 		unsigned long len, unsigned long pgoff, unsigned long flags,
+-		vm_flags_t vm_flags);
++		vma_flags_t vma_flags);
+ 
+ enum split_type {
+ 	SPLIT_TYPE_UNIFORM,
+@@ -617,9 +617,9 @@ static inline unsigned long thp_vma_allowable_orders(struct vm_area_struct *vma,
+ #define thp_get_unmapped_area	NULL
+ 
+ static inline unsigned long
+-thp_get_unmapped_area_vmflags(struct file *filp, unsigned long addr,
+-			      unsigned long len, unsigned long pgoff,
+-			      unsigned long flags, vm_flags_t vm_flags)
++thp_get_unmapped_area_vmaflags(struct file *filp, unsigned long addr,
++			       unsigned long len, unsigned long pgoff,
++			       unsigned long flags, vma_flags_t vma_flags)
+ {
+ 	return 0;
+ }
 diff --git a/include/linux/mm.h b/include/linux/mm.h
-index 1209db1a4b92..550fb92957d1 100644
+index d20aa2f80472..5b3825fddf58 100644
 --- a/include/linux/mm.h
 +++ b/include/linux/mm.h
-@@ -442,8 +442,10 @@ enum {
- #define VM_STACK	INIT_VM_FLAG(STACK)
- #ifdef CONFIG_STACK_GROWSUP
- #define VM_STACK_EARLY	INIT_VM_FLAG(STACK_EARLY)
-+#define VMA_STACK_EARLY mk_vma_flags(VMA_STACK_EARLY_BIT)
- #else
- #define VM_STACK_EARLY	VM_NONE
-+#define VMA_STACK_EARLY EMPTY_VMA_FLAGS
- #endif
- #ifdef CONFIG_ARCH_HAS_PKEYS
- #define VM_PKEY_SHIFT ((__force int)VMA_HIGH_ARCH_0_BIT)
-@@ -544,6 +546,8 @@ enum {
+@@ -4191,13 +4191,15 @@ unsigned long randomize_page(unsigned long start, unsigned long range);
  
- /* Bits set in the VMA until the stack is in its final location */
- #define VM_STACK_INCOMPLETE_SETUP (VM_RAND_READ | VM_SEQ_READ | VM_STACK_EARLY)
-+#define VMA_STACK_INCOMPLETE_SETUP append_vma_flags(		\
-+	VMA_STACK_EARLY, VMA_RAND_READ_BIT, VMA_SEQ_READ_BIT)
+ unsigned long
+ __get_unmapped_area(struct file *file, unsigned long addr, unsigned long len,
+-		    unsigned long pgoff, unsigned long flags, vm_flags_t vm_flags);
++		    unsigned long pgoff, unsigned long flags,
++		    vma_flags_t vma_flags);
  
- #define TASK_EXEC_BIT ((current->personality & READ_IMPLIES_EXEC) ? \
- 		       VMA_EXEC_BIT : VMA_READ_BIT)
-diff --git a/mm/vma_exec.c b/mm/vma_exec.c
-index a3c6b05c65fe..7af1260689b9 100644
---- a/mm/vma_exec.c
-+++ b/mm/vma_exec.c
-@@ -112,15 +112,17 @@ int relocate_vma_down(struct vm_area_struct *vma, unsigned long shift)
- int create_init_stack_vma(struct mm_struct *mm, struct vm_area_struct **vmap,
- 			  unsigned long *top_mem_p)
+ static inline unsigned long
+ get_unmapped_area(struct file *file, unsigned long addr, unsigned long len,
+ 		  unsigned long pgoff, unsigned long flags)
  {
--	unsigned long flags = VM_STACK_FLAGS | VM_STACK_INCOMPLETE_SETUP;
-+	vma_flags_t flags = VMA_STACK_INCOMPLETE_SETUP;
-+	struct vm_area_struct *vma;
- 	int err;
--	struct vm_area_struct *vma = vm_area_alloc(mm);
+-	return __get_unmapped_area(file, addr, len, pgoff, flags, 0);
++	return __get_unmapped_area(file, addr, len, pgoff, flags,
++				   EMPTY_VMA_FLAGS);
+ }
  
-+	/* VMA_STACK_FLAGS and VMA_STACK_INCOMPLETE_SETUP must not overlap. */
-+	VM_WARN_ON_ONCE(vma_flags_test_any_mask(&flags, VMA_STACK_FLAGS));
-+
-+	vma = vm_area_alloc(mm);
- 	if (!vma)
- 		return -ENOMEM;
+ unsigned long do_mmap(struct file *file, unsigned long addr,
+diff --git a/include/linux/sched/mm.h b/include/linux/sched/mm.h
+index 95d0040df584..10d723bee95c 100644
+--- a/include/linux/sched/mm.h
++++ b/include/linux/sched/mm.h
+@@ -193,12 +193,9 @@ unsigned long mm_get_unmapped_area(struct file *filp, unsigned long addr,
+ 				   unsigned long len, unsigned long pgoff,
+ 				   unsigned long flags);
  
--	vma_set_anonymous(vma);
--
- 	if (mmap_write_lock_killable(mm)) {
- 		err = -EINTR;
- 		goto err_free;
-@@ -134,18 +136,20 @@ int create_init_stack_vma(struct mm_struct *mm, struct vm_area_struct **vmap,
- 	if (err)
- 		goto err_ksm;
+-unsigned long mm_get_unmapped_area_vmflags(struct file *filp,
+-					   unsigned long addr,
+-					   unsigned long len,
+-					   unsigned long pgoff,
+-					   unsigned long flags,
+-					   vm_flags_t vm_flags);
++unsigned long mm_get_unmapped_area_vmaflags(struct file *filp,
++		unsigned long addr, unsigned long len, unsigned long pgoff,
++		unsigned long flags, vma_flags_t vma_flags);
  
-+	vma_flags_set_mask(&flags, VMA_STACK_FLAGS);
-+	vma_set_anonymous(vma);
-+
+ unsigned long
+ generic_get_unmapped_area(struct file *filp, unsigned long addr,
+diff --git a/mm/huge_memory.c b/mm/huge_memory.c
+index 0dc6d630570f..40d6b4078e3d 100644
+--- a/mm/huge_memory.c
++++ b/mm/huge_memory.c
+@@ -1196,7 +1196,7 @@ static inline bool is_transparent_hugepage(const struct folio *folio)
+ static unsigned long __thp_get_unmapped_area(struct file *filp,
+ 		unsigned long addr, unsigned long len,
+ 		loff_t off, unsigned long flags, unsigned long size,
+-		vm_flags_t vm_flags)
++		vma_flags_t vma_flags)
+ {
+ 	loff_t off_end = off + len;
+ 	loff_t off_align = round_up(off, size);
+@@ -1212,8 +1212,9 @@ static unsigned long __thp_get_unmapped_area(struct file *filp,
+ 	if (len_pad < len || (off + len_pad) < off)
+ 		return 0;
+ 
+-	ret = mm_get_unmapped_area_vmflags(filp, addr, len_pad,
+-					   off >> PAGE_SHIFT, flags, vm_flags);
++	ret = mm_get_unmapped_area_vmaflags(filp, addr, len_pad,
++					    off >> PAGE_SHIFT, flags,
++					    vma_flags);
+ 
  	/*
- 	 * Place the stack at the largest stack address the architecture
- 	 * supports. Later, we'll move this to an appropriate place. We don't
- 	 * use STACK_TOP because that can depend on attributes which aren't
- 	 * configured yet.
+ 	 * The failure might be due to length padding. The caller will retry
+@@ -1238,25 +1239,27 @@ static unsigned long __thp_get_unmapped_area(struct file *filp,
+ 	return ret;
+ }
+ 
+-unsigned long thp_get_unmapped_area_vmflags(struct file *filp, unsigned long addr,
++unsigned long thp_get_unmapped_area_vmaflags(struct file *filp, unsigned long addr,
+ 		unsigned long len, unsigned long pgoff, unsigned long flags,
+-		vm_flags_t vm_flags)
++		vma_flags_t vma_flags)
+ {
+ 	unsigned long ret;
+ 	loff_t off = (loff_t)pgoff << PAGE_SHIFT;
+ 
+-	ret = __thp_get_unmapped_area(filp, addr, len, off, flags, PMD_SIZE, vm_flags);
++	ret = __thp_get_unmapped_area(filp, addr, len, off, flags, PMD_SIZE,
++				      vma_flags);
+ 	if (ret)
+ 		return ret;
+ 
+-	return mm_get_unmapped_area_vmflags(filp, addr, len, pgoff, flags,
+-					    vm_flags);
++	return mm_get_unmapped_area_vmaflags(filp, addr, len, pgoff, flags,
++					     vma_flags);
+ }
+ 
+ unsigned long thp_get_unmapped_area(struct file *filp, unsigned long addr,
+ 		unsigned long len, unsigned long pgoff, unsigned long flags)
+ {
+-	return thp_get_unmapped_area_vmflags(filp, addr, len, pgoff, flags, 0);
++	return thp_get_unmapped_area_vmaflags(filp, addr, len, pgoff, flags,
++					      EMPTY_VMA_FLAGS);
+ }
+ EXPORT_SYMBOL_GPL(thp_get_unmapped_area);
+ 
+diff --git a/mm/mmap.c b/mm/mmap.c
+index bcc3793e532d..4a88b2a233f7 100644
+--- a/mm/mmap.c
++++ b/mm/mmap.c
+@@ -411,8 +411,7 @@ unsigned long do_mmap(struct file *file, unsigned long addr,
+ 	/* Obtain the address to map to. we verify (or select) it and ensure
+ 	 * that it represents a valid section of the address space.
  	 */
--	VM_WARN_ON_ONCE(VM_STACK_FLAGS & VM_STACK_INCOMPLETE_SETUP);
- 	vma->vm_end = STACK_TOP_MAX;
- 	vma->vm_start = vma->vm_end - PAGE_SIZE;
- 	if (pgtable_supports_soft_dirty())
--		flags |= VM_SOFTDIRTY;
--	vm_flags_init(vma, flags);
-+		vma_flags_set(&flags, VMA_SOFTDIRTY_BIT);
-+	vma->flags = flags;
- 	vma->vm_page_prot = vma_get_page_prot(vma);
+-	addr = __get_unmapped_area(file, addr, len, pgoff, flags,
+-				   vma_flags_to_legacy(vma_flags));
++	addr = __get_unmapped_area(file, addr, len, pgoff, flags, vma_flags);
+ 	if (IS_ERR_VALUE(addr))
+ 		return addr;
  
- 	err = insert_vm_struct(mm, vma);
-diff --git a/tools/testing/vma/include/dup.h b/tools/testing/vma/include/dup.h
-index 57c80924813d..64f38a83613e 100644
---- a/tools/testing/vma/include/dup.h
-+++ b/tools/testing/vma/include/dup.h
-@@ -245,8 +245,10 @@ enum {
- #define VM_STACK	INIT_VM_FLAG(STACK)
- #ifdef CONFIG_STACK_GROWSUP
- #define VM_STACK_EARLY	INIT_VM_FLAG(STACK_EARLY)
-+#define VMA_STACK_EARLY mk_vma_flags(VMA_STACK_EARLY_BIT)
- #else
- #define VM_STACK_EARLY	VM_NONE
-+#define VMA_STACK_EARLY EMPTY_VMA_FLAGS
+@@ -812,19 +811,20 @@ arch_get_unmapped_area_topdown(struct file *filp, unsigned long addr,
+ }
  #endif
- #ifdef CONFIG_ARCH_HAS_PKEYS
- #define VM_PKEY_SHIFT ((__force int)VMA_HIGH_ARCH_0_BIT)
-@@ -315,6 +317,8 @@ enum {
  
- /* Bits set in the VMA until the stack is in its final location */
- #define VM_STACK_INCOMPLETE_SETUP (VM_RAND_READ | VM_SEQ_READ | VM_STACK_EARLY)
-+#define VMA_STACK_INCOMPLETE_SETUP append_vma_flags(		\
-+	VMA_STACK_EARLY, VMA_RAND_READ_BIT, VMA_SEQ_READ_BIT)
+-unsigned long mm_get_unmapped_area_vmflags(struct file *filp, unsigned long addr,
+-					   unsigned long len, unsigned long pgoff,
+-					   unsigned long flags, vm_flags_t vm_flags)
++unsigned long mm_get_unmapped_area_vmaflags(struct file *filp, unsigned long addr,
++		unsigned long len, unsigned long pgoff, unsigned long flags,
++		vma_flags_t vma_flags)
+ {
+ 	if (mm_flags_test(MMF_TOPDOWN, current->mm))
+ 		return arch_get_unmapped_area_topdown(filp, addr, len, pgoff,
+-						      flags, vm_flags);
+-	return arch_get_unmapped_area(filp, addr, len, pgoff, flags, vm_flags);
++				flags, vma_flags_to_legacy(vma_flags));
++	return arch_get_unmapped_area(filp, addr, len, pgoff, flags,
++			vma_flags_to_legacy(vma_flags));
+ }
  
- #define TASK_EXEC_BIT ((current->personality & READ_IMPLIES_EXEC) ? \
- 		       VM_EXEC_BIT : VM_READ_BIT)
+ unsigned long
+ __get_unmapped_area(struct file *file, unsigned long addr, unsigned long len,
+-		unsigned long pgoff, unsigned long flags, vm_flags_t vm_flags)
++		unsigned long pgoff, unsigned long flags, vma_flags_t vma_flags)
+ {
+ 	unsigned long (*get_area)(struct file *, unsigned long,
+ 				  unsigned long, unsigned long, unsigned long)
+@@ -859,11 +859,11 @@ __get_unmapped_area(struct file *file, unsigned long addr, unsigned long len,
+ 		   && !addr /* no hint */
+ 		   && IS_ALIGNED(len, PMD_SIZE)) {
+ 		/* Ensures that larger anonymous mappings are THP aligned. */
+-		addr = thp_get_unmapped_area_vmflags(file, addr, len,
+-						     pgoff, flags, vm_flags);
++		addr = thp_get_unmapped_area_vmaflags(file, addr, len,
++						      pgoff, flags, vma_flags);
+ 	} else {
+-		addr = mm_get_unmapped_area_vmflags(file, addr, len,
+-						    pgoff, flags, vm_flags);
++		addr = mm_get_unmapped_area_vmaflags(file, addr, len,
++						     pgoff, flags, vma_flags);
+ 	}
+ 	if (IS_ERR_VALUE(addr))
+ 		return addr;
+@@ -881,7 +881,8 @@ unsigned long
+ mm_get_unmapped_area(struct file *file, unsigned long addr, unsigned long len,
+ 		     unsigned long pgoff, unsigned long flags)
+ {
+-	return mm_get_unmapped_area_vmflags(file, addr, len, pgoff, flags, 0);
++	return mm_get_unmapped_area_vmaflags(file, addr, len, pgoff, flags,
++					     EMPTY_VMA_FLAGS);
+ }
+ EXPORT_SYMBOL(mm_get_unmapped_area);
+ 
 
 -- 
 2.55.0
