@@ -4,43 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E094C44506
-	for <xen-devel@archiver.kernel.org>; Sat, 11 Jul 2026 18:35:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1360377.1613354 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5635DC43458
+	for <xen-devel@archiver.kernel.org>; Sat, 11 Jul 2026 18:35:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1360381.1613364 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wicXO-0002R1-Oj; Sat, 11 Jul 2026 18:34:54 +0000
+	id 1wicXP-0002ZS-8e; Sat, 11 Jul 2026 18:34:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1360377.1613354; Sat, 11 Jul 2026 18:34:54 +0000
+Received: by outflank-mailman (output) from mailman id 1360381.1613364; Sat, 11 Jul 2026 18:34:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wicXO-0002Qu-KL; Sat, 11 Jul 2026 18:34:54 +0000
-Received: by outflank-mailman (input) for mailman id 1360377;
- Sat, 11 Jul 2026 15:21:28 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wicXP-0002Yu-3B; Sat, 11 Jul 2026 18:34:55 +0000
+Received: by outflank-mailman (input) for mailman id 1360381;
+ Sat, 11 Jul 2026 15:21:43 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mhi@mailbox.org>) id 1wiZWB-0001Ga-V4
- for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 15:21:28 +0000
+ (envelope-from <mhi@mailbox.org>) id 1wiZWR-0001Hc-Hv
+ for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 15:21:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wiZWB-009l1H-AH
- for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 17:21:27 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wiZWQ-0094fa-V6
+ for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 17:21:42 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <mhi@mailbox.org>)
- id 6a525f14-2eae-0a2a0a5409dd-0a2a4509e256-48
- for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 17:21:26 +0200
-Received: from [80.241.56.152] (helo=mout-p-102.mailbox.org)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
+ id 6a525f4c-5cb7-0a2a0a5109dd-0a2a4504d3c0-10
+ for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 17:21:42 +0200
+Received: from [80.241.56.172] (helo=mout-p-202.mailbox.org)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
  (envelope-from <mhi@mailbox.org>)
- id 6a525f76-b440-0a2a45090019-50f13898ed0e-3
- for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 17:21:26 +0200
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+ id 6a525f86-b1e5-0a2a45040019-50f138acc4a2-3
+ for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 17:21:42 +0200
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gyC8j6jmRzKvvr;
- Sat, 11 Jul 2026 17:21:25 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gyC9208hBzMlFY;
+ Sat, 11 Jul 2026 17:21:42 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,43 +51,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mail20150812 header.d=mailbox.org header.i="@mailbox.org" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding"; dkim=pass header.s=mail20150812 header.d=mailbox.org header.i="@mailbox.org" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mail20150812 header.d=mailbox.org header.i="@mailbox.org" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"; dkim=pass header.s=mail20150812 header.d=mailbox.org header.i="@mailbox.org" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1783783285;
+	t=1783783302;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=kH44882xOwsD4SfCnl+qgk2oMqAUi2EehaDoPIzn3X4=;
-	b=eMVI1NjNntkXUIL2KOm2VZts3RhfTzWVqESVgkEg1PEU0iNNOTLEy4oPU1sGltwuvADktu
-	29XhMgFGgB99GHjLXkAn5ozkGwVXTnUWBBmNLahKBuKQI8RFu1nsjv2tvFKSfvmDAtyj1O
-	lXeTa0MTvdh9lMX7wH0Z4HrZUVewtjTxlWk4QbVwtZ4evIKBzLeSF4SmncAmhlmzTH6lfO
-	ksEtFi2KZ9Zd1uON+d5igIc2yOUDcSKi98kj00W2rAeb7w1IRkWpYlhnb4PTXyjwtXe5ay
-	DtFsbogadRXZ3ZyFWqIHkaejjrBvgV4yEaPRdkLhep6OOvyMJ6Ju9mGHWYSjgw==
-Authentication-Results: outgoing_mbo_mout;
-	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=c8kmqXI9;
-	spf=pass (outgoing_mbo_mout: domain of mhi@mailbox.org designates 2001:67c:2050:b231:465::102 as permitted sender) smtp.mailfrom=mhi@mailbox.org
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=5zGD2166erzzmBrOUSjlgc7V6NcBK4nb2itQnBTjxms=;
+	b=ksoqK/zj+BidOqeAJJ7EKT02ziVUZdAZpUvhJMwQtSmRWjSq9Enio2FtjUZVXyDQeKcPS9
+	tz3EEt5kqcm2UE7WJdYDM3b+KpBAVSFgo0g3D5mBCTAgfgfn5uP25Y5c2Om8YP0zHfM12z
+	cTtb5RUpNqORLbagExvL5rRh5ClAY9dGm+PNTYbSKo32vko5Z12zm2a9Smho1qpekhzHJP
+	uzV29wf7UQtMAkvXzHuC0UQ1Fhw09TFGSpBly6QMQVskI/ENe8Tf4ouU54ZEFFTBXOU5Wb
+	dU/uMxvi3O5dII+fFRTJDMNJ6tw022Ppk5aZ0NZNabs/Rxu2ksDW/Y48+ev3Ew==
 From: Maurice Hieronymus <mhi@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1783783283;
+	t=1783783300;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=kH44882xOwsD4SfCnl+qgk2oMqAUi2EehaDoPIzn3X4=;
-	b=c8kmqXI9fAQXUpbVt8GLOdc11hNZaJUQQYsS5cxln0FyNygQRxXRLlPlY4A/0KF/KVlnyq
-	89csec1W7y0LP0NuHF8OvgxGL8QwqVDg/yqjlR/tZT0U7N22e4zfIfz1jks9M3hooLWyED
-	CDY1JGEot2RA0xGQ/m+LTSdmCoWb3snkaAPehAWthZ4c9C+ImtG2A76FPCgJ1/TbH/2vmO
-	HwgjxsoeMhnxjxIUpu6BvcCkHiqsrmwmJoz/XnGg32ShT1AplRvrYoSH27jRz6L7EeMPnf
-	xNMJZmtF3EhCBlrp2XnEluRXkziEHFi6I+wVebbtpQX2hdjgVnKSjqP8z4pXDQ==
-Subject: [PATCH 0/2] PCI: Convert bitfield flags to atomic accessors
-Date: Sat, 11 Jul 2026 17:21:05 +0200
-Message-Id: <20260711-pci-dev-flags-v1-0-2fcf2811138c@mailbox.org>
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=5zGD2166erzzmBrOUSjlgc7V6NcBK4nb2itQnBTjxms=;
+	b=Y9yDTbzUH5iQ+rWrMO26z0OIS3g+EqRjCkPCiekugHNCtM7hSviYHk68Cm/Xegt23h7q78
+	WyQla1TBoqMmPXMPzpLAKJF1spAjJXMQ7ucmmcjPMC+tglQFyfu8TAEBTLKANlbEyyZNse
+	xVN5Xf0BaS7yqkcpaFBbqTghqEybETOdS+VFYqsaZNrGvG06kQVhEK0pyytE3pStJkBp3r
+	yYH8zCv/wVf3PmL5YByhmUTOpaKMZGZYEBodK+ddHvtw+rHGcLgXRyfBX/cMV4ZB3CE9Nl
+	oVA1frLCK+jSksHMfitUChWECby6KcNDEFsVc/6uJaCeoPpBH16kWBQ82HjtTA==
+Date: Sat, 11 Jul 2026 17:21:07 +0200
+Subject: [PATCH 2/2] PCI: Replace pci_dev->broken_parity_status with
+ accessors
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDMBBA0auEWTuQ2KK0VykuTDKjIyWVjEpBc
- vem7fIt/j9BKQsp3M0JmQ5ReaUK1xgI85gmQonV0Nq2s71zuAbBSAfyc5wU2fvAV+abvTiozZq
- J5f37PYa/dfcLhe07gVI+47rh/HEAAAA=
-X-Change-ID: 20260711-pci-dev-flags-fbbcf4ff9031
+Message-Id: <20260711-pci-dev-flags-v1-2-2fcf2811138c@mailbox.org>
+References: <20260711-pci-dev-flags-v1-0-2fcf2811138c@mailbox.org>
+In-Reply-To: <20260711-pci-dev-flags-v1-0-2fcf2811138c@mailbox.org>
 To: Edward Cree <ecree.xilinx@gmail.com>, 
  Andrew Lunn <andrew+netdev@lunn.ch>, 
  "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
@@ -115,67 +112,116 @@ Cc: Danilo Krummrich <dakr@kernel.org>, rust-for-linux@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org, 
  linux-scsi@vger.kernel.org, xen-devel@lists.xenproject.org, 
  linux-edac@vger.kernel.org, Maurice Hieronymus <mhi@mailbox.org>
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1783783272; l=2313;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1783783272; l=3918;
  i=mhi@mailbox.org; s=20260525; h=from:subject:message-id;
- bh=o9XAWD66ai+0Z3WcwldrjMlSlthY+1Kqo3Oox8uMmS0=;
- b=4RJCYIsxz6UvLYOQ6xqvhVEQoQSh4rZQVVIc7mWtjntBUq4ccNJ2KYKolDjFHU49aAutOyaus
- A5Eqo668VqlDuoF/ENWHgCu8gHFoRAMIBVG+FaowFqe6tBmqjHocs5w
+ bh=dA+p/e0yU5GmI2+843t83Ws3vAPk7ZHcyx+dI89Sz1U=;
+ b=2KUtaRPN52gN+DrVoSi0Gx1KvBexgp3rJLmXihe43P4Nxd7ql/LG0mNOPKmJYGQTEluKIkZ/a
+ e0xF1urLLB7BZdfXCqB9rBoVHA+cFHOIyMacXK65ieb1QbtT7PbaILy
 X-Developer-Key: i=mhi@mailbox.org; a=ed25519;
  pk=AHlEkGG3hpXZHntlEzF42Ip/LFyXWOgsNUvaHqAnV80=
-X-MBO-RS-ID: 7fb4275b43160de9afd
-X-MBO-RS-META: o4fyj9cuc9w1urffc3xfrywcrt7anabk
-X-Rspamd-Queue-Id: 4gyC8j6jmRzKvvr
-X-purgate-ID: tlsNG-bad1c0/1783783286-5537CA0B-C34F660C/0/0
+X-MBO-RS-ID: c995304cfe7236ecf3e
+X-MBO-RS-META: kw8gscg45gpin8zawfowe9q3as1dmn7e
+X-purgate-ID: tlsNG-ebf023/1783783302-7E251FE7-D1A7398A/0/0
 X-purgate-type: clean
-X-purgate-size: 2315
+X-purgate-size: 3920
 
-`struct pci_dev` keeps ~60 flags in one C bitfield. Bits sharing a
-word must not be modified concurrently, but several writers take no
-common lock: `pci_set_master()` writes `is_busmaster` and can run
-without the device lock (e.g. runtime PM resume paths),
-`pci_disable_device()` clears it, and `broken_parity_status_store()`
-writes the same word from sysfs at any time without any lock.
+`broken_parity_status` shares a C bitfield word in `struct pci_dev`
+with many other bits. `broken_parity_status_store()` writes it from
+sysfs at any time without taking any lock, so userspace can make it
+race with every other writer of the same word, e.g. `pci_set_master()`
+from a runtime PM resume path, and updates of neighboring bits can be
+lost.
 
-Convert these two bits to a new public `flags` bitmap accessed with
-atomic bitops, mirroring how the driver core replaced its
-`offline`/`offline_disabled` bitfield in commit a7cc262a1135 ("driver
-core: Replace dev->offline + ->offline_disabled with accessors").
-More bits can follow the same pattern later.
+Move the bit into the `flags` bitmap modified with atomic bitops,
+using the accessor pattern introduced by the previous commit.
 
-An alternative would be to reuse `priv_flags`, but its bit definitions
-and accessors are deliberately private to drivers/pci, while
-`is_busmaster` is accessed by xen-pciback, lpfc and sfc. Happy to
-respin that way if preferred.
-
-This is also a prerequisite for the Rust device enabling API rework
-[1]: the guard object planned there calls `pci_disable_device()` from
-contexts that may run concurrently with `pci_set_master()`, which
-requires `is_busmaster` to not be part of a shared bitfield word.
-
-Link: https://lore.kernel.org/rust-for-linux/DJOEYVBS17MJ.1YD3TNGQBWHNK@kernel.org/ [1]
 Signed-off-by: Maurice Hieronymus <mhi@mailbox.org>
 ---
-Maurice Hieronymus (2):
-      PCI: Replace pci_dev->is_busmaster with accessors
-      PCI: Replace pci_dev->broken_parity_status with accessors
+ drivers/edac/edac_pci_sysfs.c | 4 ++--
+ drivers/pci/pci-sysfs.c       | 4 ++--
+ include/linux/pci.h           | 5 ++++-
+ 3 files changed, 8 insertions(+), 5 deletions(-)
 
- drivers/edac/edac_pci_sysfs.c               |  4 +--
- drivers/net/ethernet/sfc/falcon/farch.c     |  2 +-
- drivers/net/ethernet/sfc/siena/farch.c      |  2 +-
- drivers/pci/pci-driver.c                    |  2 +-
- drivers/pci/pci-sysfs.c                     |  4 +--
- drivers/pci/pci.c                           |  6 ++---
- drivers/scsi/lpfc/lpfc_init.c               |  4 +--
- drivers/xen/xen-pciback/conf_space_header.c |  4 +--
- drivers/xen/xen-pciback/pciback_ops.c       |  4 +--
- include/linux/pci.h                         | 42 +++++++++++++++++++++++++++--
- 10 files changed, 56 insertions(+), 18 deletions(-)
----
-base-commit: dc59e4fea9d83f03bad6bddf3fa2e52491777482
-change-id: 20260711-pci-dev-flags-fbbcf4ff9031
+diff --git a/drivers/edac/edac_pci_sysfs.c b/drivers/edac/edac_pci_sysfs.c
+index 9f437f648e4e..fadc61235f1f 100644
+--- a/drivers/edac/edac_pci_sysfs.c
++++ b/drivers/edac/edac_pci_sysfs.c
+@@ -554,7 +554,7 @@ static void edac_pci_dev_parity_test(struct pci_dev *dev)
+ 	/* check the status reg for errors on boards NOT marked as broken
+ 	 * if broken, we cannot trust any of the status bits
+ 	 */
+-	if (status && !dev->broken_parity_status) {
++	if (status && !pci_dev_broken_parity_status(dev)) {
+ 		if (status & (PCI_STATUS_SIG_SYSTEM_ERROR)) {
+ 			edac_printk(KERN_CRIT, EDAC_PCI,
+ 				"Signaled System Error on %s\n",
+@@ -593,7 +593,7 @@ static void edac_pci_dev_parity_test(struct pci_dev *dev)
+ 		/* check the secondary status reg for errors,
+ 		 * on NOT broken boards
+ 		 */
+-		if (status && !dev->broken_parity_status) {
++		if (status && !pci_dev_broken_parity_status(dev)) {
+ 			if (status & (PCI_STATUS_SIG_SYSTEM_ERROR)) {
+ 				edac_printk(KERN_CRIT, EDAC_PCI, "Bridge "
+ 					"Signaled System Error on %s\n",
+diff --git a/drivers/pci/pci-sysfs.c b/drivers/pci/pci-sysfs.c
+index 5ec0b245a69b..5e094d1e23e3 100644
+--- a/drivers/pci/pci-sysfs.c
++++ b/drivers/pci/pci-sysfs.c
+@@ -80,7 +80,7 @@ static ssize_t broken_parity_status_show(struct device *dev,
+ 					 char *buf)
+ {
+ 	struct pci_dev *pdev = to_pci_dev(dev);
+-	return sysfs_emit(buf, "%u\n", pdev->broken_parity_status);
++	return sysfs_emit(buf, "%u\n", pci_dev_broken_parity_status(pdev));
+ }
+ 
+ static ssize_t broken_parity_status_store(struct device *dev,
+@@ -93,7 +93,7 @@ static ssize_t broken_parity_status_store(struct device *dev,
+ 	if (kstrtoul(buf, 0, &val) < 0)
+ 		return -EINVAL;
+ 
+-	pdev->broken_parity_status = !!val;
++	pci_dev_assign_broken_parity_status(pdev, val);
+ 
+ 	return count;
+ }
+diff --git a/include/linux/pci.h b/include/linux/pci.h
+index 9964646bdd46..fdcd9b1b7371 100644
+--- a/include/linux/pci.h
++++ b/include/linux/pci.h
+@@ -347,10 +347,13 @@ struct rcec_ea;
+  *		bookkeeping state, maintained by pci_set_master(),
+  *		pci_clear_master() and pci_disable_device(); modifying it
+  *		does not itself change the hardware state.
++ * @PCI_DEV_FLAG_BROKEN_PARITY_STATUS: Device generates false positive
++ *		parity errors; set via sysfs.
+  * @PCI_DEV_FLAG_COUNT: Number of defined struct_pci_dev_flags.
+  */
+ enum struct_pci_dev_flags {
+ 	PCI_DEV_FLAG_BUSMASTER = 0,
++	PCI_DEV_FLAG_BROKEN_PARITY_STATUS = 1,
+ 
+ 	PCI_DEV_FLAG_COUNT
+ };
+@@ -482,7 +485,6 @@ struct pci_dev {
+ 
+ 	unsigned int	no_msi:1;		/* May not use MSI */
+ 	unsigned int	block_cfg_access:1;	/* Config space access blocked */
+-	unsigned int	broken_parity_status:1;	/* Generates false positive parity */
+ 	unsigned int	irq_reroute_variant:2;	/* Needs IRQ rerouting variant */
+ 	unsigned int	msi_enabled:1;
+ 	unsigned int	msix_enabled:1;
+@@ -626,6 +628,7 @@ static inline void pci_dev_assign_##accessor_name(struct pci_dev *pdev, bool val
+ }
+ 
+ __create_pci_dev_flag_accessors(busmaster, PCI_DEV_FLAG_BUSMASTER);
++__create_pci_dev_flag_accessors(broken_parity_status, PCI_DEV_FLAG_BROKEN_PARITY_STATUS);
+ 
+ #undef __create_pci_dev_flag_accessors
+ 
 
-Best regards,
 -- 
-Maurice Hieronymus <mhi@mailbox.org>
+2.51.2
 
 
