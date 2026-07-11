@@ -4,44 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BFDBC44501
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Jul 2026 19:18:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1359816.1613195 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E3C4C43458
+	for <xen-devel@archiver.kernel.org>; Sat, 11 Jul 2026 16:24:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1360423.1613300 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wiGk1-0004UA-Rh; Fri, 10 Jul 2026 19:18:29 +0000
+	id 1wiaUY-0000CX-Qj; Sat, 11 Jul 2026 16:23:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1359816.1613195; Fri, 10 Jul 2026 19:18:29 +0000
+Received: by outflank-mailman (output) from mailman id 1360423.1613300; Sat, 11 Jul 2026 16:23:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wiGk1-0004U3-OV; Fri, 10 Jul 2026 19:18:29 +0000
-Received: by outflank-mailman (input) for mailman id 1359816;
- Fri, 10 Jul 2026 19:18:28 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wiaUY-0000CP-MC; Sat, 11 Jul 2026 16:23:50 +0000
+Received: by outflank-mailman (input) for mailman id 1360423;
+ Sat, 11 Jul 2026 16:23:49 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <vsementsov@yandex-team.ru>) id 1wiGk0-0004Tw-61
- for xen-devel@lists.xenproject.org; Fri, 10 Jul 2026 19:18:28 +0000
+ (envelope-from <ljs@kernel.org>) id 1wiaUX-0000CI-OD
+ for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 16:23:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wiGjy-007y69-CJ
- for xen-devel@lists.xenproject.org; Fri, 10 Jul 2026 21:18:26 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wiaUX-0005IG-58
+ for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 18:23:49 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <vsementsov@yandex-team.ru>)
- id 6a514579-e002-0a2a0a5209dd-0a2a450be1b2-6
- for <xen-devel@lists.xenproject.org>; Fri, 10 Jul 2026 21:18:25 +0200
-Received: from [178.154.239.200] (helo=forwardcorp1d.mail.yandex.net)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
- (envelope-from <vsementsov@yandex-team.ru>)
- id 6a514580-b7da-0a2a450b0019-b29aefc8cd14-3
- for <xen-devel@lists.xenproject.org>; Fri, 10 Jul 2026 21:18:25 +0200
-Received: from mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net
- (mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net
- [IPv6:2a02:6b8:c42:94a9:0:640:a3fa:0])
- by forwardcorp1d.mail.yandex.net (postfix) with ESMTPS id 84770808B9;
- Fri, 10 Jul 2026 22:18:24 +0300 (MSK)
-Received: from i115954770.yandex-team.ru (unknown [2a02:6bf:8080:c7d::1:20])
- by mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net (smtpcorp) with ESMTPSA
- id AIRXsO0a8eA0-gmOl9KC0; Fri, 10 Jul 2026 22:18:23 +0300
+ (envelope-from <ljs@kernel.org>)
+ id 6a526d9c-5cb7-0a2a0a5109dd-0a2a450a977a-34
+ for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 18:23:48 +0200
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
+ (envelope-from <ljs@kernel.org>)
+ id 6a526e13-ec7d-0a2a450a0019-aceafc1f84be-3
+ for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 18:23:48 +0200
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 2307741729;
+ Sat, 11 Jul 2026 16:23:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CA7C21F000E9;
+ Sat, 11 Jul 2026 16:23:29 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,269 +48,162 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
+Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=default header.d=yandex-team.ru header.i="@yandex-team.ru" header.h="Cc:Message-ID:References:Date:In-Reply-To:Subject:To:From"
-Precedence: bulk
-X-Yandex-Fwd: 1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
-	s=default; t=1783711103;
-	bh=XU6rFdMa6qjuR/yF7DSa18zwJcjKZIiGNqq4ynL/1x8=;
-	h=Cc:Message-ID:References:Date:In-Reply-To:Subject:To:From;
-	b=Huru2vOhEY5FtAh3de7SS4ROuzpqxri8ELZL2ZgVKslOnDU0DfKT5P+IwqV4USFGL
-	 CvZLpUZro8P/Zgi3ps9C+mqz0Pc30RJOFPDxFJt15QMj4aX1tSTvuE4ybn2GgV/p6X
-	 SisTpLxIrfspR/+wKaBJUCssDt0CSapYm9zxq/u4=
-Authentication-Results: mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net; dkim=pass header.i=@yandex-team.ru
-From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-To: jasowang@redhat.com,
-	mst@redhat.com
-Cc: armbru@redhat.com,
-	peterx@redhat.com,
-	farosas@suse.de,
-	raphael.s.norwitz@gmail.com,
-	bchaney@akamai.com,
-	vsementsov@yandex-team.ru,
-	qemu-devel@nongnu.org,
-	berrange@redhat.com,
-	pbonzini@redhat.com,
-	yc-core@yandex-team.ru,
-	mark.caveayland@nutanix.com,
-	Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
-	Sergio Lopez <slp@redhat.com>,
-	Zhao Liu <zhao1.liu@intel.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony PERARD <anthony@xenproject.org>,
-	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
-	Bernhard Beschow <shentey@gmail.com>,
-	Alistair Francis <Alistair.Francis@wdc.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Jason Wang <jasowangio@gmail.com>,
-	Eric Blake <eblake@redhat.com>,
-	devel@lists.libvirt.org (open list:Incompatible changes),
-	xen-devel@lists.xenproject.org (open list:X86 Xen CPUs),
-	qemu-ppc@nongnu.org (open list:e500),
-	qemu-riscv@nongnu.org (open list:Microchip PolarFi...)
-Subject: [PATCH v18 03/14] net/tap: deprecate "no" as special value for script/downscript
-Date: Fri, 10 Jul 2026 22:17:52 +0300
-Message-ID: <20260710191809.721154-4-vsementsov@yandex-team.ru>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260710191809.721154-1-vsementsov@yandex-team.ru>
-References: <20260710191809.721154-1-vsementsov@yandex-team.ru>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783787026;
+	bh=eyGPCpKJAg7fhbXBnd8C7Wrqfsg9VL7dUFWJAu8QPbU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=oHKCbOs50OGhdryTHZVIrJJAH5cNWadJ96vBPL21JseHby43owQLI4TQNXRn8X6gJ
+	 TAnHb0VclvTH/ELo5PXr26ZhLJbSwD3gVlLvJn7Z0/7xX0d8g4qtgVFjgxpWwxbv1a
+	 7r5CcrXGWEbeyhCP39VRFFsSay0aVbIrR1SurkK/zcKs46h1LZbloHKdjmJ9QcIWOB
+	 93pv7I3n5DE5yAji0/HPOsX0hhylbUPeh4N5mBIdjWYLPd6EljlcjYkvh2JpbnVfqK
+	 2Dhr9fLfrHgsT5U9G1HrOgWT69oD72z/B+kQJ6Kj2KlR/byBhBoVckK6V+QXJUFKRE
+	 5uoKO6B92zc7w==
+Date: Sat, 11 Jul 2026 17:23:19 +0100
+From: Lorenzo Stoakes <ljs@kernel.org>
+To: Zi Yan <ziy@nvidia.com>
+Cc: Lance Yang <lance.yang@linux.dev>, akpm@linux-foundation.org, 
+	tsbogend@alpha.franken.de, maddy@linux.ibm.com, mpe@ellerman.id.au, 
+	maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com, 
+	simona@ffwll.ch, l.stach@pengutronix.de, inki.dae@samsung.com, 
+	sw0312.kim@samsung.com, kyungmin.park@samsung.com, krzk@kernel.org, 
+	peter.griffin@linaro.org, jani.nikula@linux.intel.com, joonas.lahtinen@linux.intel.com, 
+	rodrigo.vivi@intel.com, tursulin@ursulin.net, robin.clark@oss.qualcomm.com, 
+	lumag@kernel.org, lyude@redhat.com, dakr@kernel.org, 
+	tomi.valkeinen@ideasonboard.com, hjc@rock-chips.com, heiko@sntech.de, andy.yan@rock-chips.com, 
+	thierry.reding@kernel.org, mperttunen@nvidia.com, jonathanh@nvidia.com, kraxel@redhat.com, 
+	dmitry.osipenko@collabora.com, zack.rusin@broadcom.com, matthew.brost@intel.com, 
+	thomas.hellstrom@linux.intel.com, oleksandr_andrushchenko@epam.com, deller@gmx.de, bcrl@kvack.org, 
+	viro@zeniv.linux.org.uk, brauner@kernel.org, muchun.song@linux.dev, osalvador@suse.de, 
+	david@kernel.org, baolin.wang@linux.alibaba.com, liam@infradead.org, 
+	npache@redhat.com, ryan.roberts@arm.com, dev.jain@arm.com, baohua@kernel.org, 
+	hughd@google.com, vbabka@kernel.org, rppt@kernel.org, surenb@google.com, 
+	mhocko@suse.com, jannh@google.com, pfalcato@suse.de, kees@kernel.org, 
+	perex@perex.cz, tiwai@suse.com, linux-mips@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, dri-devel@lists.freedesktop.org, 
+	etnaviv@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org, 
+	linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, 
+	freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+	linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org, virtualization@lists.linux.dev, 
+	intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org, linux-fbdev@vger.kernel.org, 
+	linux-aio@kvack.org, linux-fsdevel@vger.kernel.org, linux-mm@kvack.org, 
+	linux-sound@vger.kernel.org
+Subject: Re: [PATCH 10/13] mm/vma: convert miscellaneous uses of VMA flags in
+ core mm
+Message-ID: <alJqjo_MZCFWj3Wt@lucifer>
+References: <1e7d834c887b6a65627d730addcff13d458c6268.1782760670.git.ljs@kernel.org>
+ <20260702131233.59026-1-lance.yang@linux.dev>
+ <akaGxiTaJreEQn8T@lucifer>
+ <DJTNXVOWGWJ4.3MDNLPMY0Y3RF@nvidia.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1783711105-4857B9ED-10B65025/0/0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <DJTNXVOWGWJ4.3MDNLPMY0Y3RF@nvidia.com>
+X-purgate-ID: tlsNG-4011c0/1783787028-BFF63248-63E97EEA/0/0
 X-purgate-type: clean
-X-purgate-size: 10175
+X-purgate-size: 3604
 
-The interface is ambiguous, as "no" is valid file name. So,
-using "no" as a special value to disable script is deprecated.
-Use an empty string ("script=" / "downscript=") instead.
+On Wed, Jul 08, 2026 at 09:52:19PM -0400, Zi Yan wrote:
+> On Thu Jul 2, 2026 at 11:46 AM EDT, Lorenzo Stoakes wrote:
+> > On Thu, Jul 02, 2026 at 09:12:33PM +0800, Lance Yang wrote:
+> >>
+> >> On Mon, Jun 29, 2026 at 08:25:33PM +0100, Lorenzo Stoakes wrote:
+> >> >Update various uses of legacy flags in vma.c and mmap.c to the new
+> >> >vma_flags_t type, updating comments alongside them to be consistent.
+> >> >
+> >> >Also update __install_special_mapping() to rearrange things slightly to
+> >> >accommodate the changes.
+> >> >
+> >> >Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
+> >> >---
+> >> [...]
+> >> >diff --git a/mm/vma.c b/mm/vma.c
+> >> >index b81c05e67a61..ab2ef0f04420 100644
+> >> >--- a/mm/vma.c
+> >> >+++ b/mm/vma.c
+> >> >@@ -3417,23 +3417,27 @@ struct vm_area_struct *__install_special_mapping(
+> >> > 	vm_flags_t vm_flags, void *priv,
+> >> > 	const struct vm_operations_struct *ops)
+> >> > {
+> >> >-	int ret;
+> >> >+	vma_flags_t vma_flags = legacy_to_vma_flags(vm_flags);
+> >> > 	struct vm_area_struct *vma;
+> >> >+	int ret;
+> >> >
+> >> > 	vma = vm_area_alloc(mm);
+> >> >-	if (unlikely(vma == NULL))
+> >> >+	if (unlikely(!vma))
+> >> > 		return ERR_PTR(-ENOMEM);
+> >> >
+> >> >-	vma_set_range(vma, addr, addr + len, 0);
+> >> >-	vm_flags |= vma_flags_to_legacy(mm->def_vma_flags) | VM_DONTEXPAND;
+> >> >+	vma_flags_set_mask(&vma_flags, mm->def_vma_flags);
+> >> >+	vma_flags_set(&vma_flags, VMA_DONTEXPAND_BIT);
+> >> > 	if (pgtable_supports_soft_dirty())
+> >> >-		vm_flags |= VM_SOFTDIRTY;
+> >> >-	vm_flags_init(vma, vm_flags & ~VM_LOCKED_MASK);
+> >> >+		vma_flags_set(&vma_flags, VMA_SOFTDIRTY_BIT);
+> >> >+	vma_flags_clear_mask(&vma_flags, VMA_LOCKED_MASK);
+> >> >+	vma->flags = vma_flags;
+> >>
+> >> Maybe worth a vma_flags_init() helper here to mirror vm_flags_init()?
+> >> With this open-coded, we lose the soft-dirty WARN_ON_ONCE sanity check.
+> >>
+> >> Might be nicer to keep that check in one place ;)
+> >
+> > I really hate all the VMA flag accessors, they conflate things horribly - we
+> > should be explicitly taking VMA write locks when we need to (and often killable
+> > ones actually) not assuming that a VMA flags accessor does (they should at most
+> > assert).
+> >
+> > This case is even more terribly egregious - you are setting flags at an
+> > arbitrary time, why are we asserting something about softdirty?
+> >
+> > You may update them as part of initialisation, maybe not. It's far from a
+> > guarantee and feels like a lazy place to put it.
+> >
+> > BUT obviously it's an oversight not to open code that here, so I'll update the
+> > patch to do that!
+>
+> What do you want to open code here? softdirty WARN_ON_ONCE()?
 
-In a future version, "no" will be treated as a plain file name, just
-like any other non-empty value.
+As you can tell I said this reflexively without checking the code :)
 
-Document the deprecation in docs/about/deprecated.rst, qapi/net.json,
-and qemu-options.hx. Update other docs to use empty string instead of
-"no". Add a warning.
+>
+> vma_flags gets VMA_SOFTDIRTY_BIT just above vma->flags, why do we need a
+> check after that?
 
-Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
----
- docs/about/deprecated.rst                  | 18 ++++++++++++++++++
- docs/system/i386/microvm.rst               |  4 ++--
- docs/system/i386/xenpvh.rst                |  2 +-
- docs/system/ppc/ppce500.rst                |  4 ++--
- docs/system/riscv/microchip-icicle-kit.rst |  2 +-
- docs/system/riscv/sifive_u.rst             |  2 +-
- net/tap.c                                  |  2 ++
- qapi/net.json                              | 12 ++++++++----
- qemu-options.hx                            |  7 +++++--
- 9 files changed, 40 insertions(+), 13 deletions(-)
+And yeah it's completely unnecessary, indeed.
 
-diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
-index 0c656a968fc..c4929317e3a 100644
---- a/docs/about/deprecated.rst
-+++ b/docs/about/deprecated.rst
-@@ -71,6 +71,15 @@ flexible enough. The monitor objects have been converted to QOM, so
- ``-mon mode=control`` is replaced by ``-object monitor-qmp``. The
- short convenience options are not deprecated, only ``-mon``.
- 
-+``script=no`` and ``downscript=no`` for ``-netdev tap`` (since 11.2)
-+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-+
-+The special value ``"no"`` for the ``script`` and ``downscript``
-+parameters of ``-netdev tap`` disables script execution.  This special
-+treatment of ``"no"`` is deprecated.  Use an empty string (``script=``
-+or ``downscript=``) to disable script execution instead.  In a future
-+version, ``"no"`` will be treated as a plain file name.
-+
- QEMU Machine Protocol (QMP) commands
- ------------------------------------
- 
-@@ -164,6 +173,15 @@ Use ``job-finalize`` instead.
- 
- Use ``query-accelerators`` instead.
- 
-+``"no"`` as value of ``script``/``downscript`` for tap in ``netdev_add`` (since 11.2)
-+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-+
-+The special value ``"no"`` for the ``script`` and ``downscript``
-+parameters of ``netdev_add`` with ``type=tap`` disables script
-+execution.  This special treatment of ``"no"`` is deprecated.  Use an
-+empty string instead.  In a future version, ``"no"`` will be treated as
-+a plain file name.
-+
- Human Machine Protocol (HMP) commands
- -------------------------------------
- 
-diff --git a/docs/system/i386/microvm.rst b/docs/system/i386/microvm.rst
-index 1675e37d3e7..077ea15751e 100644
---- a/docs/system/i386/microvm.rst
-+++ b/docs/system/i386/microvm.rst
-@@ -79,7 +79,7 @@ legacy ``ISA serial`` device as console::
-      -serial stdio \
-      -drive id=test,file=test.img,format=raw,if=none \
-      -device virtio-blk-device,drive=test \
--     -netdev tap,id=tap0,script=no,downscript=no \
-+     -netdev tap,id=tap0,script=,downscript= \
-      -device virtio-net-device,netdev=tap0
- 
- While the example above works, you might be interested in reducing the
-@@ -103,7 +103,7 @@ disabled::
-      -device virtconsole,chardev=virtiocon0 \
-      -drive id=test,file=test.img,format=raw,if=none \
-      -device virtio-blk-device,drive=test \
--     -netdev tap,id=tap0,script=no,downscript=no \
-+     -netdev tap,id=tap0,script=,downscript= \
-      -device virtio-net-device,netdev=tap0
- 
- 
-diff --git a/docs/system/i386/xenpvh.rst b/docs/system/i386/xenpvh.rst
-index 904778e3f5c..862f38830b1 100644
---- a/docs/system/i386/xenpvh.rst
-+++ b/docs/system/i386/xenpvh.rst
-@@ -42,7 +42,7 @@ case you need to construct one manually:
-       -vnc none                                       \
-       -display none                                   \
-       -device virtio-net-pci,id=nic0,netdev=net0,mac=00:16:3e:5c:81:78 \
--      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=no,downscript=no \
-+      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=,downscript= \
-       -smp 4,maxcpus=4                                \
-       -nographic                                      \
-       -machine xenpvh,ram-low-base=0,ram-low-size=2147483648,ram-high-base=4294967296,ram-high-size=2147483648,pci-ecam-base=824633720832,pci-ecam-size=268435456,pci-mmio-base=4026531840,pci-mmio-size=33554432,pci-mmio-high-base=824902156288,pci-mmio-high-size=68719476736 \
-diff --git a/docs/system/ppc/ppce500.rst b/docs/system/ppc/ppce500.rst
-index c9fe0915dc5..ec5aaf14fd9 100644
---- a/docs/system/ppc/ppce500.rst
-+++ b/docs/system/ppc/ppce500.rst
-@@ -158,14 +158,14 @@ interface at PCI address 0.1.0, but we can switch that to an e1000 NIC by:
-   $ qemu-system-ppc64 -M ppce500 -smp 4 -m 2G \
-                       -display none -serial stdio \
-                       -bios u-boot \
--                      -nic tap,ifname=tap0,script=no,downscript=no,model=e1000
-+                      -nic tap,ifname=tap0,script=,downscript=,model=e1000
- 
- The QEMU ``ppce500`` machine can also dynamically instantiate an eTSEC device
- if “-device eTSEC” is given to QEMU:
- 
- .. code-block:: bash
- 
--  -netdev tap,ifname=tap0,script=no,downscript=no,id=net0 -device eTSEC,netdev=net0
-+  -netdev tap,ifname=tap0,script=,downscript=,id=net0 -device eTSEC,netdev=net0
- 
- Root file system on flash drive
- -------------------------------
-diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/riscv/microchip-icicle-kit.rst
-index 9809e94b84b..7fdb96601ad 100644
---- a/docs/system/riscv/microchip-icicle-kit.rst
-+++ b/docs/system/riscv/microchip-icicle-kit.rst
-@@ -84,7 +84,7 @@ Then we can boot the machine by:
-   $ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 -m 2G \
-       -sd path/to/sdcard.img \
-       -nic user,model=cadence_gem \
--      -nic tap,ifname=tap,model=cadence_gem,script=no \
-+      -nic tap,ifname=tap,model=cadence_gem,script= \
-       -display none -serial stdio \
-       -kernel path/to/u-boot/build/dir/u-boot.bin \
-       -dtb path/to/u-boot/build/dir/u-boot.dtb
-diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.rst
-index 8f55ae8e313..0e4dcf3e70c 100644
---- a/docs/system/riscv/sifive_u.rst
-+++ b/docs/system/riscv/sifive_u.rst
-@@ -199,7 +199,7 @@ To boot the VxWorks kernel in QEMU with the ``sifive_u`` machine, use:
- 
-   $ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \
-       -display none -serial stdio \
--      -nic tap,ifname=tap0,script=no,downscript=no \
-+      -nic tap,ifname=tap0,script=,downscript= \
-       -kernel /path/to/vxWorks \
-       -append "gem(0,0)host:vxWorks h=192.168.200.1 e=192.168.200.2:ffffff00 u=target pw=vxTarget f=0x01"
- 
-diff --git a/net/tap.c b/net/tap.c
-index fedd48c48d2..1ec9e5ebe6f 100644
---- a/net/tap.c
-+++ b/net/tap.c
-@@ -103,6 +103,8 @@ static bool tap_is_explicit_no_script(const char *script_arg)
-     }
- 
-     if (strcmp(script_arg, "no") == 0) {
-+        warn_report("script=no/downscript=no is deprecated; "
-+                    "use script=/downscript= instead");
-         return true;
-     }
- 
-diff --git a/qapi/net.json b/qapi/net.json
-index 8f0915c4d86..ada0329ef9d 100644
---- a/qapi/net.json
-+++ b/qapi/net.json
-@@ -399,15 +399,19 @@
- # @fds: multiple file descriptors of already opened multiqueue capable
- #     tap
- #
--# @script: script to initialize the interface.  An empty string or
--#     "no" disables script execution.  Defaults to
-+# @script: script to initialize the interface.  An empty string
-+#     disables script execution.  Defaults to
- #     ``<sysconfdir>/qemu-ifup``, where ``<sysconfdir>`` is the
- #     system configuration directory at build time (typically /etc).
-+#     Using "no" to disable script execution is deprecated (since
-+#     11.2); use an empty string instead.
- #
--# @downscript: script to shut down the interface.  An empty string or
--#     "no" disables script execution.  Defaults to
-+# @downscript: script to shut down the interface.  An empty string
-+#     disables script execution.  Defaults to
- #     ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the
- #     system configuration directory at build time (typically /etc).
-+#     Using "no" to disable script execution is deprecated (since
-+#     11.2); use an empty string instead.
- #
- # @br: bridge name (since 2.8)
- #
-diff --git a/qemu-options.hx b/qemu-options.hx
-index 200949655ea..7b9a14f5b38 100644
---- a/qemu-options.hx
-+++ b/qemu-options.hx
-@@ -3014,7 +3014,8 @@ DEF("netdev", HAS_ARG, QEMU_OPTION_netdev,
-     "                use network scripts 'file' (default=" DEFAULT_NETWORK_SCRIPT ")\n"
-     "                to configure it and 'dfile' (default=" DEFAULT_NETWORK_DOWN_SCRIPT ")\n"
-     "                to deconfigure it\n"
--    "                use '[down]script=no' or '[down]script=' to disable script execution\n"
-+    "                use '[down]script=' to disable script execution\n"
-+    "                ('[down]script=no' is deprecated and will be treated as a file name in future)\n"
-     "                use network helper 'helper' (default=" DEFAULT_BRIDGE_HELPER ") to\n"
-     "                configure it\n"
-     "                use 'fd=h' to connect to an already opened TAP interface\n"
-@@ -3553,7 +3554,9 @@ SRST
-     ``<sysconfdir>/qemu-ifup`` and the default network deconfigure script is
-     ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the system
-     configuration directory at build time (typically ``/etc``).
--    Use ``[down]script=no`` or ``[down]script=`` to disable script execution.
-+    Use ``[down]script=`` to disable script execution.
-+    Using ``[down]script=no`` is deprecated; in a future version it will
-+    be treated as a plain file name.
- 
-     If running QEMU as an unprivileged user, use the network helper
-     to configure the TAP interface and attach it to the bridge.
--- 
-2.43.0
+>
+> BTW, if you think the check is needed, patch 9 will need to be updated,
+> since the same pattern appears in create_init_stack_vma().
 
+I'll check to see if it's valid there.
+
+For me it just feels like the most silly place to put that check, a VMA flags
+update should update VMA flags not start randomly asserting silly things :)
+
+>
+> >
+> > I want VMA flags to be a clean stateless thing, other than the flags
+> > themselves. Implicit, unrelated, asserts or lock acquisitions in general should
+> > be done separately IMO.
+> >
+>
+> Anyway,
+>
+> Reviewed-by: Zi Yan <ziy@nvidia.com>
+
+Thanks!
+
+>
+> --
+> Best Regards,
+> Yan, Zi
+>
+
+Cheers, Lorenzo
 
