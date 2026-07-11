@@ -4,41 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5572AC44506
-	for <xen-devel@archiver.kernel.org>; Sat, 11 Jul 2026 17:10:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1360487.1613339 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B41DC43458
+	for <xen-devel@archiver.kernel.org>; Sat, 11 Jul 2026 18:35:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1360379.1613358 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wibDK-0008N2-To; Sat, 11 Jul 2026 17:10:06 +0000
+	id 1wicXO-0002Tn-Vl; Sat, 11 Jul 2026 18:34:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1360487.1613339; Sat, 11 Jul 2026 17:10:06 +0000
+Received: by outflank-mailman (output) from mailman id 1360379.1613358; Sat, 11 Jul 2026 18:34:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wibDK-0008MM-Ps; Sat, 11 Jul 2026 17:10:06 +0000
-Received: by outflank-mailman (input) for mailman id 1360487;
- Sat, 11 Jul 2026 17:10:05 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wicXO-0002Su-Qt; Sat, 11 Jul 2026 18:34:54 +0000
+Received: by outflank-mailman (input) for mailman id 1360379;
+ Sat, 11 Jul 2026 15:21:35 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ljs@kernel.org>) id 1wibDJ-0008BO-LV
- for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 17:10:05 +0000
+ (envelope-from <mhi@mailbox.org>) id 1wiZWJ-0001H6-Cs
+ for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 15:21:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wibDI-009LgX-L6
- for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 19:10:04 +0200
+ id 1wiZWI-0094fa-IL
+ for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 17:21:34 +0200
 Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ljs@kernel.org>)
- id 6a5278c2-e002-0a2a0a5209dd-0a2a450590ba-24
- for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 19:10:04 +0200
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ (envelope-from <mhi@mailbox.org>)
+ id 6a525f33-5cb7-0a2a0a5109dd-0a2a4505dcdc-32
+ for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 17:21:34 +0200
+Received: from [80.241.56.171] (helo=mout-p-201.mailbox.org)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
- (envelope-from <ljs@kernel.org>)
- id 6a5278eb-4f1d-0a2a45050019-ac6904feb00a-3
- for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 19:10:04 +0200
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 3878D6111A;
- Sat, 11 Jul 2026 17:10:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CA6F71F000E9;
- Sat, 11 Jul 2026 17:09:44 +0000 (UTC)
+ (envelope-from <mhi@mailbox.org>)
+ id 6a525f7e-4f1d-0a2a45050019-50f138ab8648-3
+ for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 17:21:34 +0200
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gyC8s58czzMlFw;
+ Sat, 11 Jul 2026 17:21:33 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,109 +51,309 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783789801;
-	bh=AvtNjMXUVGcPIUxCxCfqbdEtpU8jR9HOTGYaAlW6IJ8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=k3fNhKS66r/p/o8Bc1xI7ewhTioGM5eE5UxTbAfHwiEEG5NZOQoHjazK2cWX+6/SE
-	 v+U9r2rkD4VP0CNSplf/nSgPr33pdrLmGKOrJy6x0c8Xsnfudte+l8CuZRkvsJHzhL
-	 2xzdkO2v+Q+2PPXWrMuMSvbGqEw9CmT9+ZHMiG1WT8jUC5NdwLiZsm50xu5zeD+/aW
-	 zvImcxhwsTnEPAUhEbcG4TpZeBj1kqZVb6dm8VWTrMRJu36W2lybHuDy0lpFg0MMPF
-	 ANsT8GKLEgijBVcxkcvqBp+1nPOUHmAwPtV+5/DPz8eLqjTPOJ42AuY6RZqVPq55n+
-	 bc2Qco/fVIOQQ==
-Date: Sat, 11 Jul 2026 18:09:35 +0100
-From: Lorenzo Stoakes <ljs@kernel.org>
-To: Zi Yan <ziy@nvidia.com>
-Cc: Lance Yang <lance.yang@linux.dev>, akpm@linux-foundation.org, 
-	tsbogend@alpha.franken.de, maddy@linux.ibm.com, mpe@ellerman.id.au, 
-	maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com, 
-	simona@ffwll.ch, l.stach@pengutronix.de, inki.dae@samsung.com, 
-	sw0312.kim@samsung.com, kyungmin.park@samsung.com, krzk@kernel.org, 
-	peter.griffin@linaro.org, jani.nikula@linux.intel.com, joonas.lahtinen@linux.intel.com, 
-	rodrigo.vivi@intel.com, tursulin@ursulin.net, robin.clark@oss.qualcomm.com, 
-	lumag@kernel.org, lyude@redhat.com, dakr@kernel.org, 
-	tomi.valkeinen@ideasonboard.com, hjc@rock-chips.com, heiko@sntech.de, andy.yan@rock-chips.com, 
-	thierry.reding@kernel.org, mperttunen@nvidia.com, jonathanh@nvidia.com, kraxel@redhat.com, 
-	dmitry.osipenko@collabora.com, zack.rusin@broadcom.com, matthew.brost@intel.com, 
-	thomas.hellstrom@linux.intel.com, oleksandr_andrushchenko@epam.com, deller@gmx.de, bcrl@kvack.org, 
-	viro@zeniv.linux.org.uk, brauner@kernel.org, muchun.song@linux.dev, osalvador@suse.de, 
-	david@kernel.org, baolin.wang@linux.alibaba.com, liam@infradead.org, 
-	npache@redhat.com, ryan.roberts@arm.com, dev.jain@arm.com, baohua@kernel.org, 
-	hughd@google.com, vbabka@kernel.org, rppt@kernel.org, surenb@google.com, 
-	mhocko@suse.com, jannh@google.com, pfalcato@suse.de, kees@kernel.org, 
-	perex@perex.cz, tiwai@suse.com, linux-mips@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, dri-devel@lists.freedesktop.org, 
-	etnaviv@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org, 
-	linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, 
-	freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
-	linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org, virtualization@lists.linux.dev, 
-	intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org, linux-fbdev@vger.kernel.org, 
-	linux-aio@kvack.org, linux-fsdevel@vger.kernel.org, linux-mm@kvack.org, 
-	linux-sound@vger.kernel.org
-Subject: Re: [PATCH 13/13] mm/mremap: convert mremap code to use vma_flags_t
-Message-ID: <alJ4VPr7Igk3SJYt@lucifer>
-References: <380f761d35a3faa4370f8b3f92e3d4af3d4c7110.1782760670.git.ljs@kernel.org>
- <20260702134947.25189-1-lance.yang@linux.dev>
- <akaJx8Zt8kazlrjq@lucifer>
- <DJTOP760MDDG.2KUSKD8WVVKJ5@nvidia.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mail20150812 header.d=mailbox.org header.i="@mailbox.org" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"; dkim=pass header.s=mail20150812 header.d=mailbox.org header.i="@mailbox.org" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1783783293;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=+/l7Xlwgc32SRo4MSsc6Qw/JiVZgPEEXCYL8AXhdB7g=;
+	b=vNC6Nr8Qu+GAEZlEV//+bczXk5JjcPJWznDQiXnBFy48QVgQnoKKU6G0BwyiTsYd/cPzSl
+	N2fsc9kmUUDjl/F7JMWNChYNPd4h5ors5BL8n/kDs55QGNLeWi60GgMVxZ/6+DxBfn1KHH
+	Nx+FJq10I7wAfD/bMZtaoOh3BRX4DQLdw04vhMvksj+2ZAsK08ACiXzlu0H0FXVrPufl9o
+	MeAuDi6b2W2KdZsjNaeYhaIsJ/jq+thJaE5aUXQXpl1JhtAI1MeKVnSYZH390u27CdSlot
+	J+on4CbeW+nJOgukoXg8+k8/kAJu1gluMBR7muSIAkpAmsPpyiuEpaeqTs0cgw==
+From: Maurice Hieronymus <mhi@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1783783291;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=+/l7Xlwgc32SRo4MSsc6Qw/JiVZgPEEXCYL8AXhdB7g=;
+	b=adq2ry/uVyggAKv2tF+LozCCQKi72ZDJ5hkkep0oXTPNmMLzUhP2jR2qG1EoapxFVvxXAo
+	Pn4WlzKfzjyGrEzeCbit25hbfaoOumavShFYHsb7YpfugGHtxo6IaohAuw5EuEPvoI/fWk
+	+El95ldUl99KQu8xxoOMq2VGA/oNSgfncQ5f8/1LGzdO+oGTr9Eh/jgBukgFifgxOmK63v
+	nzXEOCH2MmsrNekjdoef+T9BwPg1lQe4fyVzSCHLwIjQaKvhTYNvEYMZhK01GxfKVKiy3E
+	9R1HoWfC+Mj3jMe7irk53eANjShhgTjnn/VRyReCnFnEQdYUhYEKkBDp9oLZUg==
+Date: Sat, 11 Jul 2026 17:21:06 +0200
+Subject: [PATCH 1/2] PCI: Replace pci_dev->is_busmaster with accessors
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <DJTOP760MDDG.2KUSKD8WVVKJ5@nvidia.com>
-X-purgate-ID: tlsNG-c201ff/1783789804-D8D5012E-9AF9A4ED/0/0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260711-pci-dev-flags-v1-1-2fcf2811138c@mailbox.org>
+References: <20260711-pci-dev-flags-v1-0-2fcf2811138c@mailbox.org>
+In-Reply-To: <20260711-pci-dev-flags-v1-0-2fcf2811138c@mailbox.org>
+To: Edward Cree <ecree.xilinx@gmail.com>, 
+ Andrew Lunn <andrew+netdev@lunn.ch>, 
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+ Bjorn Helgaas <bhelgaas@google.com>, Justin Tee <justin.tee@broadcom.com>, 
+ Paul Ely <paul.ely@broadcom.com>, 
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, 
+ "Martin K. Petersen" <martin.petersen@oracle.com>, 
+ Juergen Gross <jgross@suse.com>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
+ Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>, 
+ Gary Guo <gary@garyguo.net>, 
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
+ Daniel Almeida <daniel.almeida@collabora.com>, 
+ Tamir Duberstein <tamird@kernel.org>, 
+ Alexandre Courbot <acourbot@nvidia.com>, 
+ =?utf-8?q?Onur_=C3=96zkan?= <work@onurozkan.dev>, 
+ Borislav Petkov <bp@alien8.de>, Tony Luck <tony.luck@intel.com>
+Cc: Danilo Krummrich <dakr@kernel.org>, rust-for-linux@vger.kernel.org, 
+ netdev@vger.kernel.org, linux-net-drivers@amd.com, 
+ linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org, 
+ linux-scsi@vger.kernel.org, xen-devel@lists.xenproject.org, 
+ linux-edac@vger.kernel.org, Maurice Hieronymus <mhi@mailbox.org>
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1783783272; l=8697;
+ i=mhi@mailbox.org; s=20260525; h=from:subject:message-id;
+ bh=UvTBMgm38RY8zEXs2NATRQuun95jyORW9mMSNxmV5FA=;
+ b=pQSZj8wz+D4fY0P5+pOyu6Es4y8tnTZt88mjrg56g8MYWNwlgOVIFy3c+5QCEWgww49IBV8hS
+ 52acPwOKzvHB3t4voqsaavWiw/3UmrRwsmlYpGKuMcaEd6RHjAKdJJ5
+X-Developer-Key: i=mhi@mailbox.org; a=ed25519;
+ pk=AHlEkGG3hpXZHntlEzF42Ip/LFyXWOgsNUvaHqAnV80=
+X-MBO-RS-META: er15gbymiuy8xweyxi8sy8tna1xynnrb
+X-MBO-RS-ID: 4dfa2ffa0a7b52f860d
+X-purgate-ID: tlsNG-c201ff/1783783294-DB34312E-A865C18A/0/0
 X-purgate-type: clean
-X-purgate-size: 1592
+X-purgate-size: 8699
 
-On Wed, Jul 08, 2026 at 10:28:00PM -0400, Zi Yan wrote:
-> On Thu Jul 2, 2026 at 12:07 PM EDT, Lorenzo Stoakes wrote:
-> > On Thu, Jul 02, 2026 at 09:49:47PM +0800, Lance Yang wrote:
-> >>
-> >> On Mon, Jun 29, 2026 at 08:25:36PM +0100, Lorenzo Stoakes wrote:
-> >> >Replace use of the legacy vm_flags_t flags with vma_flags_t values
-> >> >throughout the mremap logic.
-> >> >
-> >> >Additionally update comments to reflect the changes to be consistent.
-> >> >
-> >> >No functional change intended.
-> >> >
-> >> >Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
-> >> >---
-> >>
-> >> The vm_flags_set() cases below spell out vma_start_write(), but the
-> >> vm_flags_clear() cases don't?
-> >
-> > Yep as I said elsewhere, implicitly taking the lock is terrible and me doing
-> > this is completely on purpose to get rid of that :)
-> >
-> > But I haven't been clear enough clearly, so I should put the argument as to why
-> > that's ok in the commit message.
-> >
-> > Will do so on respin.
->
-> How about also add a comment to vma_clear*() telling us a lock is not
-> needed and why like you explained a lock is needed for vma_set*()?
-> This asymmetry could confuse people.
+`is_busmaster` is one bit of a ~60-bit C bitfield in `struct pci_dev`.
+Bits sharing a bitfield word must not be modified concurrently, but its
+writers take no common lock: `pci_set_master()` can run without the
+device lock (e.g. from runtime PM resume paths), `pci_disable_device()`
+clears the bit, and other bits in the same word are written from
+entirely different contexts, e.g. `broken_parity_status` from sysfs.
+Concurrent read-modify-write cycles of the shared word can then lose
+updates.
 
-Well you do absolutely have to hold the lock once the VMA is initialised when
-using any VMA flags API that manipulates flags (apart from the explicitly atomic
-case).
+Move `is_busmaster` into a new `flags` bitmap modified with atomic
+bitops and accessed through generated accessor functions, following the
+example of commit a7cc262a1135 ("driver core: Replace dev->offline +
+->offline_disabled with accessors"). More bitfield flags can follow the
+same pattern later.
 
-The argument here is that the VMA was _already locked_ at the point of clearing
-:)
+This also unblocks the Rust device enabling API rework [1], where a
+guard object calls `pci_disable_device()` from contexts that may run
+concurrently with `pci_set_master()`.
 
->
-> This patch looks good to me.
->
-> Reviewed-by: Zi Yan <ziy@nvidia.com>
+Link: https://lore.kernel.org/rust-for-linux/DJOEYVBS17MJ.1YD3TNGQBWHNK@kernel.org/ [1]
+Suggested-by: Danilo Krummrich <dakr@kernel.org>
+Cc: rust-for-linux@vger.kernel.org
+Signed-off-by: Maurice Hieronymus <mhi@mailbox.org>
+---
+ drivers/net/ethernet/sfc/falcon/farch.c     |  2 +-
+ drivers/net/ethernet/sfc/siena/farch.c      |  2 +-
+ drivers/pci/pci-driver.c                    |  2 +-
+ drivers/pci/pci.c                           |  6 ++---
+ drivers/scsi/lpfc/lpfc_init.c               |  4 ++--
+ drivers/xen/xen-pciback/conf_space_header.c |  4 ++--
+ drivers/xen/xen-pciback/pciback_ops.c       |  4 ++--
+ include/linux/pci.h                         | 37 ++++++++++++++++++++++++++++-
+ 8 files changed, 48 insertions(+), 13 deletions(-)
 
-Thanks!
+diff --git a/drivers/net/ethernet/sfc/falcon/farch.c b/drivers/net/ethernet/sfc/falcon/farch.c
+index 23d507a3820d..42594bd7e818 100644
+--- a/drivers/net/ethernet/sfc/falcon/farch.c
++++ b/drivers/net/ethernet/sfc/falcon/farch.c
+@@ -724,7 +724,7 @@ int ef4_farch_fini_dmaq(struct ef4_nic *efx)
+ 	/* Do not attempt to write to the NIC during EEH recovery */
+ 	if (efx->state != STATE_RECOVERY) {
+ 		/* Only perform flush if DMA is enabled */
+-		if (efx->pci_dev->is_busmaster) {
++		if (pci_dev_busmaster(efx->pci_dev)) {
+ 			efx->type->prepare_flush(efx);
+ 			rc = ef4_farch_do_flush(efx);
+ 			efx->type->finish_flush(efx);
+diff --git a/drivers/net/ethernet/sfc/siena/farch.c b/drivers/net/ethernet/sfc/siena/farch.c
+index 7613d7988894..f673af4c77b6 100644
+--- a/drivers/net/ethernet/sfc/siena/farch.c
++++ b/drivers/net/ethernet/sfc/siena/farch.c
+@@ -723,7 +723,7 @@ int efx_farch_fini_dmaq(struct efx_nic *efx)
+ 	/* Do not attempt to write to the NIC during EEH recovery */
+ 	if (efx->state != STATE_RECOVERY) {
+ 		/* Only perform flush if DMA is enabled */
+-		if (efx->pci_dev->is_busmaster) {
++		if (pci_dev_busmaster(efx->pci_dev)) {
+ 			efx->type->prepare_flush(efx);
+ 			rc = efx_farch_do_flush(efx);
+ 			efx->type->finish_flush(efx);
+diff --git a/drivers/pci/pci-driver.c b/drivers/pci/pci-driver.c
+index f36778e62ac1..412afa12a285 100644
+--- a/drivers/pci/pci-driver.c
++++ b/drivers/pci/pci-driver.c
+@@ -649,7 +649,7 @@ static int pci_pm_reenable_device(struct pci_dev *pci_dev)
+ 	 * if the device was busmaster before the suspend, make it busmaster
+ 	 * again
+ 	 */
+-	if (pci_dev->is_busmaster)
++	if (pci_dev_busmaster(pci_dev))
+ 		pci_set_master(pci_dev);
+ 
+ 	return retval;
+diff --git a/drivers/pci/pci.c b/drivers/pci/pci.c
+index 77b17b13ee61..c4fd6fe6098d 100644
+--- a/drivers/pci/pci.c
++++ b/drivers/pci/pci.c
+@@ -2045,7 +2045,7 @@ static void pci_enable_bridge(struct pci_dev *dev)
+ 		pci_enable_bridge(bridge);
+ 
+ 	if (pci_is_enabled(dev)) {
+-		if (!dev->is_busmaster)
++		if (!pci_dev_busmaster(dev))
+ 			pci_set_master(dev);
+ 		return;
+ 	}
+@@ -2205,7 +2205,7 @@ void pci_disable_device(struct pci_dev *dev)
+ 
+ 	do_pci_disable_device(dev);
+ 
+-	dev->is_busmaster = 0;
++	pci_dev_assign_busmaster(dev, false);
+ }
+ EXPORT_SYMBOL(pci_disable_device);
+ 
+@@ -4120,7 +4120,7 @@ static void __pci_set_master(struct pci_dev *dev, bool enable)
+ 			enable ? "enabling" : "disabling");
+ 		pci_write_config_word(dev, PCI_COMMAND, cmd);
+ 	}
+-	dev->is_busmaster = enable;
++	pci_dev_assign_busmaster(dev, enable);
+ }
+ 
+ /**
+diff --git a/drivers/scsi/lpfc/lpfc_init.c b/drivers/scsi/lpfc/lpfc_init.c
+index 82af59c913e9..08dc06e7dfc2 100644
+--- a/drivers/scsi/lpfc/lpfc_init.c
++++ b/drivers/scsi/lpfc/lpfc_init.c
+@@ -14398,7 +14398,7 @@ lpfc_io_slot_reset_s3(struct pci_dev *pdev)
+ 
+ 	pci_restore_state(pdev);
+ 
+-	if (pdev->is_busmaster)
++	if (pci_dev_busmaster(pdev))
+ 		pci_set_master(pdev);
+ 
+ 	spin_lock_irq(&phba->hbalock);
+@@ -15251,7 +15251,7 @@ lpfc_io_slot_reset_s4(struct pci_dev *pdev)
+ 	 */
+ 	pci_save_state(pdev);
+ 
+-	if (pdev->is_busmaster)
++	if (pci_dev_busmaster(pdev))
+ 		pci_set_master(pdev);
+ 
+ 	spin_lock_irq(&phba->hbalock);
+diff --git a/drivers/xen/xen-pciback/conf_space_header.c b/drivers/xen/xen-pciback/conf_space_header.c
+index 8b50cbcbdfe1..59a89f915916 100644
+--- a/drivers/xen/xen-pciback/conf_space_header.c
++++ b/drivers/xen/xen-pciback/conf_space_header.c
+@@ -81,10 +81,10 @@ static int command_write(struct pci_dev *dev, int offset, u16 value, void *data)
+ 			dev_data->enable_intx = 0;
+ 	}
+ 
+-	if (!dev->is_busmaster && is_master_cmd(value)) {
++	if (!pci_dev_busmaster(dev) && is_master_cmd(value)) {
+ 		dev_dbg(&dev->dev, "set bus master\n");
+ 		pci_set_master(dev);
+-	} else if (dev->is_busmaster && !is_master_cmd(value)) {
++	} else if (pci_dev_busmaster(dev) && !is_master_cmd(value)) {
+ 		dev_dbg(&dev->dev, "clear bus master\n");
+ 		pci_clear_master(dev);
+ 	}
+diff --git a/drivers/xen/xen-pciback/pciback_ops.c b/drivers/xen/xen-pciback/pciback_ops.c
+index bfc186bf05bc..01f4705421c9 100644
+--- a/drivers/xen/xen-pciback/pciback_ops.c
++++ b/drivers/xen/xen-pciback/pciback_ops.c
+@@ -125,14 +125,14 @@ void xen_pcibk_reset_device(struct pci_dev *dev)
+ 		if (pci_is_enabled(dev))
+ 			pci_disable_device(dev);
+ 
+-		dev->is_busmaster = 0;
++		pci_dev_assign_busmaster(dev, false);
+ 	} else {
+ 		pci_read_config_word(dev, PCI_COMMAND, &cmd);
+ 		if (cmd & (PCI_COMMAND_INVALIDATE)) {
+ 			cmd &= ~(PCI_COMMAND_INVALIDATE);
+ 			pci_write_config_word(dev, PCI_COMMAND, cmd);
+ 
+-			dev->is_busmaster = 0;
++			pci_dev_assign_busmaster(dev, false);
+ 		}
+ 	}
+ }
+diff --git a/include/linux/pci.h b/include/linux/pci.h
+index ebb5b9d76360..9964646bdd46 100644
+--- a/include/linux/pci.h
++++ b/include/linux/pci.h
+@@ -336,6 +336,25 @@ struct pci_sriov;
+ struct pci_p2pdma;
+ struct rcec_ea;
+ 
++/**
++ * enum struct_pci_dev_flags - Flags in struct pci_dev
++ *
++ * Each flag has a set of accessor functions created via
++ * __create_pci_dev_flag_accessors() and must only be accessed through
++ * them.
++ *
++ * @PCI_DEV_FLAG_BUSMASTER: Bus mastering is enabled on the device. Pure
++ *		bookkeeping state, maintained by pci_set_master(),
++ *		pci_clear_master() and pci_disable_device(); modifying it
++ *		does not itself change the hardware state.
++ * @PCI_DEV_FLAG_COUNT: Number of defined struct_pci_dev_flags.
++ */
++enum struct_pci_dev_flags {
++	PCI_DEV_FLAG_BUSMASTER = 0,
++
++	PCI_DEV_FLAG_COUNT
++};
++
+ /* struct pci_dev - describes a PCI device
+  *
+  * @supported_speeds:	PCIe Supported Link Speeds Vector (+ reserved 0 at
+@@ -461,7 +480,6 @@ struct pci_dev {
+ 	unsigned int	pref_64_window:1;	/* Pref mem window is 64-bit */
+ 	unsigned int	multifunction:1;	/* Multi-function device */
+ 
+-	unsigned int	is_busmaster:1;		/* Is busmaster */
+ 	unsigned int	no_msi:1;		/* May not use MSI */
+ 	unsigned int	block_cfg_access:1;	/* Config space access blocked */
+ 	unsigned int	broken_parity_status:1;	/* Generates false positive parity */
+@@ -592,8 +610,25 @@ struct pci_dev {
+ 	u8		tph_mode;	/* TPH mode */
+ 	u8		tph_req_type;	/* TPH requester type */
+ #endif
++
++	/* PCI_DEV_FLAG_XXX flags. Use atomic bitfield operations to modify. */
++	DECLARE_BITMAP(flags, PCI_DEV_FLAG_COUNT);
+ };
+ 
++#define __create_pci_dev_flag_accessors(accessor_name, flag_name) \
++static inline bool pci_dev_##accessor_name(const struct pci_dev *pdev) \
++{ \
++	return test_bit(flag_name, pdev->flags); \
++} \
++static inline void pci_dev_assign_##accessor_name(struct pci_dev *pdev, bool value) \
++{ \
++	assign_bit(flag_name, pdev->flags, value); \
++}
++
++__create_pci_dev_flag_accessors(busmaster, PCI_DEV_FLAG_BUSMASTER);
++
++#undef __create_pci_dev_flag_accessors
++
+ static inline struct pci_dev *pci_physfn(struct pci_dev *dev)
+ {
+ #ifdef CONFIG_PCI_IOV
 
->
-> --
-> Best Regards,
-> Yan, Zi
->
+-- 
+2.51.2
 
-Cheers, Lorenzo
 
