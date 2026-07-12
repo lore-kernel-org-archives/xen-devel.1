@@ -4,41 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0F4DC43458
-	for <xen-devel@archiver.kernel.org>; Sun, 12 Jul 2026 05:29:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1360578.1613476 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7901BC43458
+	for <xen-devel@archiver.kernel.org>; Sun, 12 Jul 2026 11:57:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1360999.1613551 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wimkJ-0008RZ-9s; Sun, 12 Jul 2026 05:28:55 +0000
+	id 1wisns-0002U6-Mm; Sun, 12 Jul 2026 11:57:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1360578.1613476; Sun, 12 Jul 2026 05:28:55 +0000
+Received: by outflank-mailman (output) from mailman id 1360999.1613551; Sun, 12 Jul 2026 11:57:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wimkI-0008PI-SX; Sun, 12 Jul 2026 05:28:54 +0000
-Received: by outflank-mailman (input) for mailman id 1360578;
- Sat, 11 Jul 2026 18:48:33 +0000
+	id 1wisns-0002Ty-Ib; Sun, 12 Jul 2026 11:57:00 +0000
+Received: by outflank-mailman (input) for mailman id 1360999;
+ Sun, 12 Jul 2026 11:56:59 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ljs@kernel.org>) id 1wicka-0005Z3-TW
- for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 18:48:33 +0000
+ (envelope-from <dmytro_prokopchuk1@epam.com>) id 1wisnr-0002Tc-DX
+ for xen-devel@lists.xenproject.org; Sun, 12 Jul 2026 11:56:59 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wicka-009NtX-AY
- for xen-devel@lists.xenproject.org; Sat, 11 Jul 2026 20:48:32 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wisnq-00AqkR-QV
+ for xen-devel@lists.xenproject.org; Sun, 12 Jul 2026 13:56:58 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ljs@kernel.org>)
- id 6a528ffb-e002-0a2a0a5209dd-0a2a450ce6cc-2
- for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 20:48:32 +0200
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
- (envelope-from <ljs@kernel.org>)
- id 6a528ffe-e897-0a2a450c0019-aceafc1f91b2-3
- for <xen-devel@lists.xenproject.org>; Sat, 11 Jul 2026 20:48:32 +0200
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 373CB40C0F;
- Sat, 11 Jul 2026 18:48:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 79B621F000E9;
- Sat, 11 Jul 2026 18:48:09 +0000 (UTC)
+ (envelope-from <dmytro_prokopchuk1@epam.com>)
+ id 6a538018-bab6-0a2a0a5309dd-0a2a4506c906-44
+ for <xen-devel@lists.xenproject.org>; Sun, 12 Jul 2026 13:56:58 +0200
+Received: from [40.107.159.76]
+ (helo=OSPPR02CU001.outbound.protection.outlook.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
+ (envelope-from <dmytro_prokopchuk1@epam.com>)
+ id 6a53810a-0835-0a2a45060019-286b9f4ccdfa-3
+ for <xen-devel@lists.xenproject.org>; Sun, 12 Jul 2026 13:56:58 +0200
+Received: from AM9PR03MB7526.eurprd03.prod.outlook.com (2603:10a6:20b:3de::17)
+ by AS8PR03MB6869.eurprd03.prod.outlook.com (2603:10a6:20b:23f::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.23; Sun, 12 Jul
+ 2026 11:56:55 +0000
+Received: from AM9PR03MB7526.eurprd03.prod.outlook.com
+ ([fe80::904d:5820:80e1:41ba]) by AM9PR03MB7526.eurprd03.prod.outlook.com
+ ([fe80::904d:5820:80e1:41ba%5]) with mapi id 15.21.0181.019; Sun, 12 Jul 2026
+ 11:56:55 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,541 +55,169 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:Date:Subject:References:In-Reply-To:To:Cc"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783795710;
-	bh=UEx0tri9WMXr89Y9RByToAehzQgA+sg4lm/OABcyvPE=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=dnYjakH2WVgloYsi+jUVcGCbG7rxAi1pU7tW8mJIdE6oGfNmgRxm2lkIJstr9dGEo
-	 6yD5lskj/PN2+ryoD6/tOuGL1WoVvqTEa+DQVmAAvZqEHLCXGsLyJtTJxnjYp6B0jW
-	 IikPIZ8C2ZhZCERTy9H5QIwhvGWNfcZweBb/3HZFkj7VpVTdh9ZXyXl3h0NJCB2UP6
-	 VTOCtSLAT14FoCzGfIDvGLs0HNrc8xonL8yng0qw3GHGb3q0KQANrkQ97QPAj9qDm0
-	 aeZGjHzcaeB9LVkTFMgUFwXpKrKBCZP9HwBxFCWMkNkn+771AZux5Cs12n8q83blNL
-	 rDY+8EcDEdTQA==
-From: Lorenzo Stoakes <ljs@kernel.org>
-Date: Sat, 11 Jul 2026 19:45:05 +0100
-Subject: [PATCH v2 08/13] mm: introduce vma_get_page_prot() and use it
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=gi+hAIbS8/gIrHkHS7T0zAItTcc/4BWfGtpOv/q7dXbnGiA/3tRJWJM8GZmxfUXaPUExjtmmXxtMxzCeHbXx6xlUTcBHCH5A6MsSSM8pEPUWM3Wf9f2/N0TLJTGbG3nn4iQ8Qn5ExvtwGDhsG6ktqEg5qA+q/NrtKvvD2aKLp+YdI0TmOz/NZfhSl+HstYOApaAx1p/n+pCyiHOoGTtqJD72B1lhhFZgZXlh4vWna89yICGalbCjYUo/SASVCjlU130+V7dF3y1cCHYF5USFy6SuYdZRQUk0nK9zy2HAHJFCL6zJjWiLCHh1xcezPbruTfbd4mBkQX0pUONhdwsM1A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VYSPPdVvAI5lUuozSM16Or77N8DGe8MHqHcPvmSevBs=;
+ b=ag094WXexVTITY3aR1l+2wf5j5+5gXrX6E5mReRjhV8hloiw6RGIk69O3wNcXyweaFvKktw8oO7kH2EjSpTBzQOx2fedgAVxenoyUm3RsG9TVLTYxr4N0c03lhMMqZ+uWNCoWOQQaIGSYVw/aT+5bMT88N3GekAyPYfAwe63FLhzMJvJY3rFkRghwbtvU1ZxhRCh0NJwA5JsH84NljEtVwzz0+Ak+/ssKDW90o8l7O2ENWS3/bbmObb0WjdvfnuPz2LIyWKaRY33o2TeNRuiIPpK7jrmH17E0aV4u/3qdz1U0gxmgVJwHuy4Uz9DQDlACd7nYRtmmeY6kGTdP3j9MQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VYSPPdVvAI5lUuozSM16Or77N8DGe8MHqHcPvmSevBs=;
+ b=ucqb0FQQbw4lPLGWy2Iuzi+GXA0P1V/4jGM15BjqlsF2Nn8wBVgAzHw4bb8tWFVBl360It27NjCJ3cD9dJdAmxU+wjcmYjgejrsB1DZ1cqEeCuqU70BzynFSy/c1tm2sF1pZl/lHJmiPmhy2ytB2+wdptlS3bPXmedzcD8C+K9Ikec2GL3NSxZK0TkeyhKmtAIKL8WxmJ3j7haIiBL6gcgbsdircsf6Dto+tnp/tHYu7+WtE6ALRB+PJODBoRnJKsstyD3FMgqENoo7UVXDzGfjhawanlQI+Vdoe/kWYU/QJ+0zI89HJoiskLR2PhnLCNEWybQKQipJliBmAtgp6JA==
+From: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>
+Subject: [PATCH v6] dom0less: Prevent division by zero in
+ handle_passthrough_prop()
+Thread-Topic: [PATCH v6] dom0less: Prevent division by zero in
+ handle_passthrough_prop()
+Thread-Index: AQHdEfWIck0nSDsiiEuWy8nQa16TYw==
+Date: Sun, 12 Jul 2026 11:56:55 +0000
+Message-ID:
+ <351b89ba726d5524fd920cc28b7204d683fa8c43.1783856794.git.dmytro_prokopchuk1@epam.com>
+Accept-Language: en-US, uk-UA, ru-RU
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AM9PR03MB7526:EE_|AS8PR03MB6869:EE_
+x-ms-office365-filtering-correlation-id: 81e743cd-b3fe-4e76-9582-08dee00cab54
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|42112799006|376014|23010399003|366016|1800799024|3023799007|11063799006|18002099003|38070700021|56012099006;
+x-microsoft-antispam-message-info:
+ sSuKo+8ZjttKa1bCNsJ2bx853bKUXpDDDkkNlTE4wwPxgJvn5Nc49AcMzGcedDdoH0WWABCjhqxkbZhiVuuPvoLumQ17HityrA9PaXZxz9OwAPBX/JC6L94i/tndlNDPGTDi2aelhZgFvudQNLgVnq8RwGeFfeGzO3N7Qj5NRNtRxxp4Xvz8xwFNwRriCCQ6201b6r4vmALINQqftWMnzaCsvVIHec9pXVTb0A589GzpH/adiGeEd5Ob0GlNbBrVtjRxuIfZn2s7p/04YAJadl0lPk+vpcEAykpzEVeoG/w3oIH23DbVpOPZLL2CD/r4cDaVuyyH8xj9gM4U3Dc2ASZemERHvmaBnPvHjjkFtgzplvR+zm0USEg07zg4HNVrUr1gacjuTxRUZXQ8tt0+06TsYZ4NkJilw7Hte5wCPIN93nyYw1kQCDNipHEpiC/O9x85BD9NRDVtP/apN9J818Mo77SwXfBTh8s+hr9B/FOrt+JXT0AuqDPZGfmRjO2X9tWLpCW1tCOYiTiEANo/8NE5DBXK/eSLWsjDk6fW/kkwC+HwklmnoK+OJu4Kb0b71vxl7nvQx/XnSoGcGFRvTGTWc/sy7oTvxEEn/J8UVFQ/5cepY13AiZgnplkcQPnSWcyQseQW2JsUP0v7yuiuHHL1uJRSmefqbRW1Z1Gby1fr1DPu+UlPExMXH70R2zLRsONCRiY7nupeVpDo26EdbFpOoUcPYAjpFrBZrK6reWU=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR03MB7526.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(42112799006)(376014)(23010399003)(366016)(1800799024)(3023799007)(11063799006)(18002099003)(38070700021)(56012099006);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?B+ASsgAtGDTNf9LPXHMcRFyjgpZvh4894aBrJ1lvlZzqGzy8XxAuPabANr?=
+ =?iso-8859-1?Q?rckSw5TD7JgIrcBEjdReAntKK7sCT5UMds9a8X8PqJGAFOxS5Ho0htbZVG?=
+ =?iso-8859-1?Q?dJ0X6HUQRjFWBUpw/Om3pYvSUBUixIU06cJBHlxZwelneon6+5S3CnmtfG?=
+ =?iso-8859-1?Q?ViKOPEC1cf/7K0B+CDsbU/incqqx7lG741UavewcAy7lkNLXTluOKaZof5?=
+ =?iso-8859-1?Q?g5UhOHlWHBND4GFeNX4b9qzXgLx6YWIkixQeX81pK1iRkvSku/gDxnw41v?=
+ =?iso-8859-1?Q?SaYV127LLpFn0Q9045A+OKCZa1vpUSzA2CwEKoamR3abZ+zwU5zFaGOBto?=
+ =?iso-8859-1?Q?Kb6Brhe4G6oJKdLK6jQD0pkdjvAO3soieTIv7tRUXW0XZTNS0d7UysRikz?=
+ =?iso-8859-1?Q?KPsxRQGGMOQyTiekQl/lDMNszqX28uq7TvIoDFMbUWROpcp6bnq/MfHZN4?=
+ =?iso-8859-1?Q?3elHc118b8PIvbGwizM2ZvN+xLAAsd5RBpSFkTtnUc3PQywvckTEOxPMu7?=
+ =?iso-8859-1?Q?VAx+m+bGnxvEOk8u1CnyEWl96xPUMtoarKAkTw4YvwOpzpDPjuVaHRMhF1?=
+ =?iso-8859-1?Q?SSx9witt4AxiK/KyCGioTCOTvKRsY2hhdV7IJvrI0Aiq73IZzs3bEoOj8q?=
+ =?iso-8859-1?Q?u12MTP9+31LlFihWI8gNaioeUYJ0FDdp0ylfjZTwly9L6FcEtEeBG7udrz?=
+ =?iso-8859-1?Q?K3756YA0FLIWjnpYoi42Vw+8vcQ5rX2Fiyq66n7KInX6EVQJevpdvxAD5e?=
+ =?iso-8859-1?Q?sPkJq85VEgn2A8Khf3+DiKELyuR22MzOxXiqkeViIo4q0OsX+cZ+xvFWnp?=
+ =?iso-8859-1?Q?FQD/usvxa+fY+We32bPejgz8Zjqi1bmjl2ePt/9IN4JbRHytw8YOLT4UsR?=
+ =?iso-8859-1?Q?UWGYiER/7xXy602PsVclaLRext7RgT9eXCeKuSVONcUBIrDbCm4RRnxtxC?=
+ =?iso-8859-1?Q?274hRldn5p9idFTD6ohrhUoqnkdlCypCX8APiSeDWQETP4JU12c8kXJdYP?=
+ =?iso-8859-1?Q?YbVCDynM0DlWWdIkLBxqk1kTnqfHTx90f9Zzukz25NCe31PV2ZyPfSy8kB?=
+ =?iso-8859-1?Q?gzjlEYuQmNQTjfqqZPAvYvbqW1Ea1bE2X5wGqnrcPp6o6ywruXMBgfIzV/?=
+ =?iso-8859-1?Q?cHiGK8QXmU63lYm3cetJ/qdyxC1dqyoVwwHIb/TQUu1lmQ1XsRo1rxGg5g?=
+ =?iso-8859-1?Q?byK4K90iOxmqdiGX43Oc9hbad9J0MA1BHJUkOvQSyJBRADyGHHQDdNYagW?=
+ =?iso-8859-1?Q?ZQZPnstEGxZLI/cgcpIK8zkI/19B7k4yxSKeWl30ixLN3Y2NjlqqvToCrY?=
+ =?iso-8859-1?Q?vBnTBu9XICjXNlgHle/PdEOgMU1k9Spadm//K/F3LEHYwbh//OVh1bplew?=
+ =?iso-8859-1?Q?81hCHHOp3FIB+XG5q9uSMpyMFPmJXx32E4tQ4XCOV7lg546apz7DTWIJCW?=
+ =?iso-8859-1?Q?bREr7xbrZjIibGSt6mGN1BguTDaINEMOS3tS97D5L3UaC/XlIUHKCCysXm?=
+ =?iso-8859-1?Q?XF1rrYwuoGL7F5qAcAjQRrJQmhlZj2w+aJfmUOuDynM2puy8EYlyz/lMte?=
+ =?iso-8859-1?Q?t6RH99rdbJqozstfVtdSNjB/y/kGPK4g4Dnff8tqiXDphiE0DmrxfrwYul?=
+ =?iso-8859-1?Q?rB40yHDUezi9BhBa0nwts7xZYuhPUl9q2cJOTT0Y2tZuT2nJ820F+3QGsG?=
+ =?iso-8859-1?Q?0VQJjt9uOi/clntWbEmdUVZR3XtoXNPrCROFR7bPaTGK+fhICf3fJhTMpd?=
+ =?iso-8859-1?Q?OsO+4AZTy+AwEThM0oD7BnKDDkPsAjogQFsFBmMkgYIMCDH/vQKHe2DH2S?=
+ =?iso-8859-1?Q?9DNccy8DEnXxIqVWitUHXBuixgVmDtM=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260711-b4-vma-flags-mm-v2-8-0fa2357d5431@kernel.org>
-References: <20260711-b4-vma-flags-mm-v2-0-0fa2357d5431@kernel.org>
-In-Reply-To: <20260711-b4-vma-flags-mm-v2-0-0fa2357d5431@kernel.org>
-To: Andrew Morton <akpm@linux-foundation.org>, 
- David Hildenbrand <david@kernel.org>, 
- "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>, 
- Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
- Michal Hocko <mhocko@suse.com>, 
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>, 
- Benjamin LaHaise <bcrl@kvack.org>, Alexander Viro <viro@zeniv.linux.org.uk>, 
- Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, 
- Hugh Dickins <hughd@google.com>, 
- Baolin Wang <baolin.wang@linux.alibaba.com>, Jann Horn <jannh@google.com>, 
- Pedro Falcato <pfalcato@suse.de>, Muchun Song <muchun.song@linux.dev>, 
- Oscar Salvador <osalvador@suse.de>, Zi Yan <ziy@nvidia.com>, 
- Nico Pache <npache@redhat.com>, Ryan Roberts <ryan.roberts@arm.com>, 
- Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>, 
- Lance Yang <lance.yang@linux.dev>, Usama Arif <usama.arif@linux.dev>, 
- Madhavan Srinivasan <maddy@linux.ibm.com>, 
- Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>, 
- "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Lucas Stach <l.stach@pengutronix.de>, 
- Russell King <linux+etnaviv@armlinux.org.uk>, 
- Christian Gmeiner <christian.gmeiner@gmail.com>, 
- Inki Dae <inki.dae@samsung.com>, Seung-Woo Kim <sw0312.kim@samsung.com>, 
- Kyungmin Park <kyungmin.park@samsung.com>, 
- Krzysztof Kozlowski <krzk@kernel.org>, 
- Peter Griffin <peter.griffin@linaro.org>, 
- Alim Akhtar <alim.akhtar@samsung.com>, 
- Jani Nikula <jani.nikula@linux.intel.com>, 
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, 
- Rodrigo Vivi <rodrigo.vivi@intel.com>, 
- Tvrtko Ursulin <tursulin@ursulin.net>, 
- Rob Clark <robin.clark@oss.qualcomm.com>, 
- Dmitry Baryshkov <lumag@kernel.org>, 
- Abhinav Kumar <abhinav.kumar@linux.dev>, 
- Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
- Marijn Suijten <marijn.suijten@somainline.org>, 
- Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>, 
- Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, 
- Sandy Huang <hjc@rock-chips.com>, 
- =?utf-8?q?Heiko_St=C3=BCbner?= <heiko@sntech.de>, 
- Andy Yan <andy.yan@rock-chips.com>, 
- Thierry Reding <thierry.reding@kernel.org>, 
- Mikko Perttunen <mperttunen@nvidia.com>, 
- Jonathan Hunter <jonathanh@nvidia.com>, Gerd Hoffmann <kraxel@redhat.com>, 
- Dmitry Osipenko <dmitry.osipenko@collabora.com>, 
- Gurchetan Singh <gurchetansingh@chromium.org>, 
- Chia-I Wu <olvaffe@gmail.com>, Zack Rusin <zack.rusin@broadcom.com>, 
- Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
- Matthew Brost <matthew.brost@intel.com>, 
- =?utf-8?q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, 
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, 
- Helge Deller <deller@gmx.de>, Kees Cook <kees@kernel.org>, 
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
- Boris Brezillon <boris.brezillon@collabora.com>, 
- Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>
-Cc: Lorenzo Stoakes <ljs@kernel.org>, linux-mm@kvack.org, 
- linux-kernel@vger.kernel.org, linux-mips@vger.kernel.org, 
- linux-aio@kvack.org, linux-fsdevel@vger.kernel.org, 
- linuxppc-dev@lists.ozlabs.org, dri-devel@lists.freedesktop.org, 
- etnaviv@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org, 
- linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org, 
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
- nouveau@lists.freedesktop.org, linux-rockchip@lists.infradead.org, 
- linux-tegra@vger.kernel.org, virtualization@lists.linux.dev, 
- intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org, 
- linux-fbdev@vger.kernel.org, linux-sound@vger.kernel.org, 
- Jani Nikula <jani.nikula@intel.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=18476; i=ljs@kernel.org;
- h=from:subject:message-id; bh=lULewHs+VHoBISysZgqCk8k0yrnFoPvsXucHfYLh71o=;
- b=owGbwMvMwCV2fu7ZrsZH9SKMp9WSGLKC+i05Zk3QOniRM/ZQ1U4x663nNk+b4BUnELFb7k3Lq
- eRdbCLfOkpZGMS4GGTFFFmefxHfHyQSNq/zgr8bzBxWJpAhDFycAjCRTmZGhjen+ya1iteoHZRV
- U99Tyb+6X/P57WDnNXZakZWdij3CUgz/6+fsOFPx37vK80cX38rkc48X77AuLJotGHc7dFv3rwQ
- HRgA=
-X-Developer-Key: i=ljs@kernel.org; a=openpgp;
- fpr=E7F417BF5214569E89D04F46CF9DCD8A81E27F14
-X-purgate-ID: tlsNG-d25034/1783795712-456F86B2-1FD7D53A/0/0
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AM9PR03MB7526.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 81e743cd-b3fe-4e76-9582-08dee00cab54
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Jul 2026 11:56:55.1605
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: gXyc4sNxzMCImLfFsu5IvCNvmbDWRiWja26L9K+eRwyy9Tlc30KeftY6S9461VP1lFFdqTJskGjnIf2XAkrlAi/pCBSkdhnRbSpeYMNrkp0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB6869
+X-purgate-ID: tlsNG-16d1c6/1783857418-F9548617-173A00F6/0/0
 X-purgate-type: clean
-X-purgate-size: 18478
+X-purgate-size: 2713
 
-There's a large number of vm_get_page_prot(vma->vm_flags) invocations. Make
-life easier by introducing vma_get_page_prot() parameterised by the VMA.
+A malformed partial DTB specifying both '#address-cells =3D <0>' and
+'#size-cells =3D <0>' causes '(address_cells * 2 + size_cells)' to
+evaluate to 0. This sum is subsequently used as a divisor when
+calculating the number of regions in the 'xen,reg' property inside
+handle_passthrough_prop():
 
-This also makes converting vm_get_page_prot() to vma_flags_t easier.
+    len =3D fdt32_to_cpu(xen_reg->len) / ((address_cells * 2 + size_cells) =
+*
+                                        sizeof(uint32_t));
 
-Also update the userland VMA tests to reflect the change.
+This leads to a division by zero exception in the Xen hypervisor during
+boot, causing a hypervisor panic/crash.
 
-No functional change intended.
+Fix this by validating that both 'address_cells' and 'size_cells'
+are within the range of [1, 2] at the top of handle_passthrough_prop().
+Any invalid cell size combination is safely rejected early with an error
+message and return -EINVAL.
 
-Acked-by: Zi Yan <ziy@nvidia.com>
-Acked-by: Jani Nikula <jani.nikula@intel.com> # for i915
-Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de> # for DRM
-Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
+Furthermore, update handle_passthrough_prop() to use the sizeof(*cell)
+instead of sizeof(uint32_t).
+
+Fixes: 9ce974c47588 ("xen/arm: assign devices to boot domains")
+Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
 ---
- drivers/gpu/drm/drm_gem.c                   |  2 +-
- drivers/gpu/drm/drm_gem_dma_helper.c        |  2 +-
- drivers/gpu/drm/drm_gem_shmem_helper.c      |  2 +-
- drivers/gpu/drm/etnaviv/etnaviv_gem.c       |  2 +-
- drivers/gpu/drm/exynos/exynos_drm_gem.c     |  6 +++---
- drivers/gpu/drm/i915/gem/i915_gem_mman.c    | 12 ++++++------
- drivers/gpu/drm/msm/msm_gem.c               |  2 +-
- drivers/gpu/drm/nouveau/nouveau_gem.c       |  2 +-
- drivers/gpu/drm/omapdrm/omap_fbdev.c        |  2 +-
- drivers/gpu/drm/omapdrm/omap_gem.c          |  6 +++---
- drivers/gpu/drm/panthor/panthor_gem.c       |  2 +-
- drivers/gpu/drm/rockchip/rockchip_drm_gem.c |  2 +-
- drivers/gpu/drm/tegra/gem.c                 |  2 +-
- drivers/gpu/drm/virtio/virtgpu_vram.c       |  2 +-
- drivers/gpu/drm/vmwgfx/vmwgfx_page_dirty.c  |  2 +-
- drivers/gpu/drm/xe/xe_device.c              |  2 +-
- drivers/gpu/drm/xe/xe_mmio_gem.c            |  2 +-
- drivers/gpu/drm/xen/xen_drm_front_gem.c     |  2 +-
- drivers/video/fbdev/core/fb_io_fops.c       |  2 +-
- include/linux/mm.h                          | 11 ++++++++++-
- mm/vma.c                                    |  2 +-
- mm/vma_exec.c                               |  2 +-
- sound/core/memalloc.c                       |  2 +-
- tools/testing/vma/include/dup.h             |  5 +++++
- 24 files changed, 46 insertions(+), 32 deletions(-)
+Changes in v6:
+- move cells check at the top of handle_passthrough_prop() with a comment
+- reword commit message
+- replace sizeof(uint32_t) with sizeof(*cell) (use expression instead of ty=
+pe)
+Test CI pipeline:
+https://gitlab.com/xen-project/people/dimaprkp4k/xen/-/pipelines/2667596761
+---
+ xen/common/device-tree/dom0less-build.c | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
-index e3ed684ddcf2..32a05d889b9a 100644
---- a/drivers/gpu/drm/drm_gem.c
-+++ b/drivers/gpu/drm/drm_gem.c
-@@ -1252,7 +1252,7 @@ int drm_gem_mmap_obj(struct drm_gem_object *obj, unsigned long obj_size,
- 		}
- 
- 		vm_flags_set(vma, VM_IO | VM_PFNMAP | VM_DONTEXPAND | VM_DONTDUMP);
--		vma->vm_page_prot = pgprot_writecombine(vm_get_page_prot(vma->vm_flags));
-+		vma->vm_page_prot = pgprot_writecombine(vma_get_page_prot(vma));
- 		vma->vm_page_prot = pgprot_decrypted(vma->vm_page_prot);
- 	}
- 
-diff --git a/drivers/gpu/drm/drm_gem_dma_helper.c b/drivers/gpu/drm/drm_gem_dma_helper.c
-index 1c00a71ab3c9..7d9612075d31 100644
---- a/drivers/gpu/drm/drm_gem_dma_helper.c
-+++ b/drivers/gpu/drm/drm_gem_dma_helper.c
-@@ -540,7 +540,7 @@ int drm_gem_dma_mmap(struct drm_gem_dma_object *dma_obj, struct vm_area_struct *
- 	vm_flags_mod(vma, VM_DONTDUMP | VM_DONTEXPAND, VM_PFNMAP);
- 
- 	if (dma_obj->map_noncoherent) {
--		vma->vm_page_prot = vm_get_page_prot(vma->vm_flags);
-+		vma->vm_page_prot = vma_get_page_prot(vma);
- 
- 		ret = dma_mmap_pages(drm_dev_dma_dev(dma_obj->base.dev),
- 				     vma, vma->vm_end - vma->vm_start,
-diff --git a/drivers/gpu/drm/drm_gem_shmem_helper.c b/drivers/gpu/drm/drm_gem_shmem_helper.c
-index c989459eb215..06d019d51d3e 100644
---- a/drivers/gpu/drm/drm_gem_shmem_helper.c
-+++ b/drivers/gpu/drm/drm_gem_shmem_helper.c
-@@ -764,7 +764,7 @@ int drm_gem_shmem_mmap(struct drm_gem_shmem_object *shmem, struct vm_area_struct
- 		return ret;
- 
- 	vm_flags_set(vma, VM_PFNMAP | VM_DONTEXPAND | VM_DONTDUMP);
--	vma->vm_page_prot = vm_get_page_prot(vma->vm_flags);
-+	vma->vm_page_prot = vma_get_page_prot(vma);
- 	if (shmem->map_wc)
- 		vma->vm_page_prot = pgprot_writecombine(vma->vm_page_prot);
- 
-diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem.c b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-index 2e4d6d117ee2..f9c8b7b2bfc7 100644
---- a/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-+++ b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-@@ -133,7 +133,7 @@ static int etnaviv_gem_mmap_obj(struct etnaviv_gem_object *etnaviv_obj,
- 
- 	vm_flags_set(vma, VM_PFNMAP | VM_DONTEXPAND | VM_DONTDUMP);
- 
--	vm_page_prot = vm_get_page_prot(vma->vm_flags);
-+	vm_page_prot = vma_get_page_prot(vma);
- 
- 	if (etnaviv_obj->flags & ETNA_BO_WC) {
- 		vma->vm_page_prot = pgprot_writecombine(vm_page_prot);
-diff --git a/drivers/gpu/drm/exynos/exynos_drm_gem.c b/drivers/gpu/drm/exynos/exynos_drm_gem.c
-index 9a6270f3dca6..0208c9259572 100644
---- a/drivers/gpu/drm/exynos/exynos_drm_gem.c
-+++ b/drivers/gpu/drm/exynos/exynos_drm_gem.c
-@@ -377,13 +377,13 @@ static int exynos_drm_gem_mmap(struct drm_gem_object *obj, struct vm_area_struct
- 
- 	/* non-cachable as default. */
- 	if (exynos_gem->flags & EXYNOS_BO_CACHABLE)
--		vma->vm_page_prot = vm_get_page_prot(vma->vm_flags);
-+		vma->vm_page_prot = vma_get_page_prot(vma);
- 	else if (exynos_gem->flags & EXYNOS_BO_WC)
- 		vma->vm_page_prot =
--			pgprot_writecombine(vm_get_page_prot(vma->vm_flags));
-+			pgprot_writecombine(vma_get_page_prot(vma));
- 	else
- 		vma->vm_page_prot =
--			pgprot_noncached(vm_get_page_prot(vma->vm_flags));
-+			pgprot_noncached(vma_get_page_prot(vma));
- 
- 	ret = exynos_drm_gem_mmap_buffer(exynos_gem, vma);
- 	if (ret)
-diff --git a/drivers/gpu/drm/i915/gem/i915_gem_mman.c b/drivers/gpu/drm/i915/gem/i915_gem_mman.c
-index 0644f85c6c8e..9ca90c1bb5b4 100644
---- a/drivers/gpu/drm/i915/gem/i915_gem_mman.c
-+++ b/drivers/gpu/drm/i915/gem/i915_gem_mman.c
-@@ -112,7 +112,7 @@ i915_gem_mmap_ioctl(struct drm_device *dev, void *data,
- 		vma = find_vma(mm, addr);
- 		if (vma && __vma_matches(vma, obj->base.filp, addr, args->size))
- 			vma->vm_page_prot =
--				pgprot_writecombine(vm_get_page_prot(vma->vm_flags));
-+				pgprot_writecombine(vma_get_page_prot(vma));
- 		else
- 			addr = -ENOMEM;
- 		mmap_write_unlock(mm);
-@@ -1024,7 +1024,7 @@ i915_gem_object_mmap(struct drm_i915_gem_object *obj,
- 	fput(anon);
- 
- 	if (obj->ops->mmap_ops) {
--		vma->vm_page_prot = pgprot_decrypted(vm_get_page_prot(vma->vm_flags));
-+		vma->vm_page_prot = pgprot_decrypted(vma_get_page_prot(vma));
- 		vma->vm_ops = obj->ops->mmap_ops;
- 		vma->vm_private_data = obj->base.vma_node.driver_private;
- 		return 0;
-@@ -1035,7 +1035,7 @@ i915_gem_object_mmap(struct drm_i915_gem_object *obj,
- 	switch (mmo->mmap_type) {
- 	case I915_MMAP_TYPE_WC:
- 		vma->vm_page_prot =
--			pgprot_writecombine(vm_get_page_prot(vma->vm_flags));
-+			pgprot_writecombine(vma_get_page_prot(vma));
- 		vma->vm_ops = &vm_ops_cpu;
- 		break;
- 
-@@ -1043,19 +1043,19 @@ i915_gem_object_mmap(struct drm_i915_gem_object *obj,
- 		GEM_WARN_ON(1);
- 		fallthrough;
- 	case I915_MMAP_TYPE_WB:
--		vma->vm_page_prot = vm_get_page_prot(vma->vm_flags);
-+		vma->vm_page_prot = vma_get_page_prot(vma);
- 		vma->vm_ops = &vm_ops_cpu;
- 		break;
- 
- 	case I915_MMAP_TYPE_UC:
- 		vma->vm_page_prot =
--			pgprot_noncached(vm_get_page_prot(vma->vm_flags));
-+			pgprot_noncached(vma_get_page_prot(vma));
- 		vma->vm_ops = &vm_ops_cpu;
- 		break;
- 
- 	case I915_MMAP_TYPE_GTT:
- 		vma->vm_page_prot =
--			pgprot_writecombine(vm_get_page_prot(vma->vm_flags));
-+			pgprot_writecombine(vma_get_page_prot(vma));
- 		vma->vm_ops = &vm_ops_gtt;
- 		break;
- 	}
-diff --git a/drivers/gpu/drm/msm/msm_gem.c b/drivers/gpu/drm/msm/msm_gem.c
-index cbf723a5d86f..6a78e242de7c 100644
---- a/drivers/gpu/drm/msm/msm_gem.c
-+++ b/drivers/gpu/drm/msm/msm_gem.c
-@@ -1125,7 +1125,7 @@ static int msm_gem_object_mmap(struct drm_gem_object *obj, struct vm_area_struct
- 	struct msm_gem_object *msm_obj = to_msm_bo(obj);
- 
- 	vm_flags_set(vma, VM_PFNMAP | VM_DONTEXPAND | VM_DONTDUMP);
--	vma->vm_page_prot = msm_gem_pgprot(msm_obj, vm_get_page_prot(vma->vm_flags));
-+	vma->vm_page_prot = msm_gem_pgprot(msm_obj, vma_get_page_prot(vma));
- 
- 	return 0;
- }
-diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
-index 20dba02d6175..9a6ee2e880c0 100644
---- a/drivers/gpu/drm/nouveau/nouveau_gem.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
-@@ -55,7 +55,7 @@ static vm_fault_t nouveau_ttm_fault(struct vm_fault *vmf)
- 		goto error_unlock;
- 
- 	nouveau_bo_del_io_reserve_lru(bo);
--	prot = vm_get_page_prot(vma->vm_flags);
-+	prot = vma_get_page_prot(vma);
- 	ret = ttm_bo_vm_fault_reserved(vmf, prot, TTM_BO_VM_NUM_PREFAULT);
- 	nouveau_bo_add_io_reserve_lru(bo);
- 	if (ret == VM_FAULT_RETRY && !(vmf->flags & FAULT_FLAG_RETRY_NOWAIT))
-diff --git a/drivers/gpu/drm/omapdrm/omap_fbdev.c b/drivers/gpu/drm/omapdrm/omap_fbdev.c
-index ca3fb186bf19..4881777642d2 100644
---- a/drivers/gpu/drm/omapdrm/omap_fbdev.c
-+++ b/drivers/gpu/drm/omapdrm/omap_fbdev.c
-@@ -84,7 +84,7 @@ static int omap_fbdev_pan_display(struct fb_var_screeninfo *var, struct fb_info
- 
- static int omap_fbdev_fb_mmap(struct fb_info *info, struct vm_area_struct *vma)
- {
--	vma->vm_page_prot = pgprot_writecombine(vm_get_page_prot(vma->vm_flags));
-+	vma->vm_page_prot = pgprot_writecombine(vma_get_page_prot(vma));
- 
- 	return fb_deferred_io_mmap(info, vma);
- }
-diff --git a/drivers/gpu/drm/omapdrm/omap_gem.c b/drivers/gpu/drm/omapdrm/omap_gem.c
-index 00404fb6c29a..fb0e6f556b31 100644
---- a/drivers/gpu/drm/omapdrm/omap_gem.c
-+++ b/drivers/gpu/drm/omapdrm/omap_gem.c
-@@ -538,9 +538,9 @@ static int omap_gem_object_mmap(struct drm_gem_object *obj, struct vm_area_struc
- 	vm_flags_set(vma, VM_DONTEXPAND | VM_DONTDUMP | VM_IO | VM_MIXEDMAP);
- 
- 	if (omap_obj->flags & OMAP_BO_WC) {
--		vma->vm_page_prot = pgprot_writecombine(vm_get_page_prot(vma->vm_flags));
-+		vma->vm_page_prot = pgprot_writecombine(vma_get_page_prot(vma));
- 	} else if (omap_obj->flags & OMAP_BO_UNCACHED) {
--		vma->vm_page_prot = pgprot_noncached(vm_get_page_prot(vma->vm_flags));
-+		vma->vm_page_prot = pgprot_noncached(vma_get_page_prot(vma));
- 	} else {
- 		/*
- 		 * We do have some private objects, at least for scanout buffers
-@@ -558,7 +558,7 @@ static int omap_gem_object_mmap(struct drm_gem_object *obj, struct vm_area_struc
- 		vma->vm_pgoff -= drm_vma_node_start(&obj->vma_node);
- 		vma_set_file(vma, obj->filp);
- 
--		vma->vm_page_prot = vm_get_page_prot(vma->vm_flags);
-+		vma->vm_page_prot = vma_get_page_prot(vma);
- 	}
- 
- 	vma->vm_page_prot = pgprot_decrypted(vma->vm_page_prot);
-diff --git a/drivers/gpu/drm/panthor/panthor_gem.c b/drivers/gpu/drm/panthor/panthor_gem.c
-index a1e2eb1ca7bb..770556353968 100644
---- a/drivers/gpu/drm/panthor/panthor_gem.c
-+++ b/drivers/gpu/drm/panthor/panthor_gem.c
-@@ -776,7 +776,7 @@ static int panthor_gem_mmap(struct drm_gem_object *obj, struct vm_area_struct *v
- 	}
- 
- 	vm_flags_set(vma, VM_PFNMAP | VM_DONTEXPAND | VM_DONTDUMP);
--	vma->vm_page_prot = vm_get_page_prot(vma->vm_flags);
-+	vma->vm_page_prot = vma_get_page_prot(vma);
- 	if (should_map_wc(bo))
- 		vma->vm_page_prot = pgprot_writecombine(vma->vm_page_prot);
- 
-diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-index b188539dca0b..9a1dc9f12072 100644
---- a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-+++ b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-@@ -255,7 +255,7 @@ static int rockchip_drm_gem_object_mmap(struct drm_gem_object *obj,
- 	 */
- 	vm_flags_mod(vma, VM_IO | VM_DONTEXPAND | VM_DONTDUMP, VM_PFNMAP);
- 
--	vma->vm_page_prot = pgprot_writecombine(vm_get_page_prot(vma->vm_flags));
-+	vma->vm_page_prot = pgprot_writecombine(vma_get_page_prot(vma));
- 	vma->vm_page_prot = pgprot_decrypted(vma->vm_page_prot);
- 
- 	if (rk_obj->pages)
-diff --git a/drivers/gpu/drm/tegra/gem.c b/drivers/gpu/drm/tegra/gem.c
-index 1d8d27a5ea89..f76af733ea79 100644
---- a/drivers/gpu/drm/tegra/gem.c
-+++ b/drivers/gpu/drm/tegra/gem.c
-@@ -602,7 +602,7 @@ int __tegra_gem_mmap(struct drm_gem_object *gem, struct vm_area_struct *vma)
- 
- 		vma->vm_pgoff = vm_pgoff;
- 	} else {
--		pgprot_t prot = vm_get_page_prot(vma->vm_flags);
-+		pgprot_t prot = vma_get_page_prot(vma);
- 
- 		vm_flags_mod(vma, VM_MIXEDMAP, VM_PFNMAP);
- 
-diff --git a/drivers/gpu/drm/virtio/virtgpu_vram.c b/drivers/gpu/drm/virtio/virtgpu_vram.c
-index 4ae3cbc35dd3..544a6abddbc8 100644
---- a/drivers/gpu/drm/virtio/virtgpu_vram.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_vram.c
-@@ -55,7 +55,7 @@ static int virtio_gpu_vram_mmap(struct drm_gem_object *obj,
- 
- 	vma->vm_pgoff -= drm_vma_node_start(&obj->vma_node);
- 	vm_flags_set(vma, VM_MIXEDMAP | VM_DONTEXPAND);
--	vma->vm_page_prot = vm_get_page_prot(vma->vm_flags);
-+	vma->vm_page_prot = vma_get_page_prot(vma);
- 	vma->vm_page_prot = pgprot_decrypted(vma->vm_page_prot);
- 	vma->vm_ops = &virtio_gpu_vram_vm_ops;
- 
-diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_page_dirty.c b/drivers/gpu/drm/vmwgfx/vmwgfx_page_dirty.c
-index 45561bc1c9ef..a9fd4015a0ca 100644
---- a/drivers/gpu/drm/vmwgfx/vmwgfx_page_dirty.c
-+++ b/drivers/gpu/drm/vmwgfx/vmwgfx_page_dirty.c
-@@ -481,7 +481,7 @@ vm_fault_t vmw_bo_vm_fault(struct vm_fault *vmf)
- 	if (vbo->dirty && vbo->dirty->method == VMW_BO_DIRTY_MKWRITE)
- 		prot = vm_get_page_prot(vma->vm_flags & ~VM_SHARED);
- 	else
--		prot = vm_get_page_prot(vma->vm_flags);
-+		prot = vma_get_page_prot(vma);
- 
- 	ret = ttm_bo_vm_fault_reserved(vmf, prot, num_prefault);
- 	if (ret == VM_FAULT_RETRY && !(vmf->flags & FAULT_FLAG_RETRY_NOWAIT))
-diff --git a/drivers/gpu/drm/xe/xe_device.c b/drivers/gpu/drm/xe/xe_device.c
-index abe25aedeead..838797cc65d7 100644
---- a/drivers/gpu/drm/xe/xe_device.c
-+++ b/drivers/gpu/drm/xe/xe_device.c
-@@ -281,7 +281,7 @@ static vm_fault_t barrier_fault(struct vm_fault *vmf)
- 	pgprot_t prot;
- 	int idx;
- 
--	prot = vm_get_page_prot(vma->vm_flags);
-+	prot = vma_get_page_prot(vma);
- 
- 	if (drm_dev_enter(dev, &idx)) {
- 		unsigned long pfn;
-diff --git a/drivers/gpu/drm/xe/xe_mmio_gem.c b/drivers/gpu/drm/xe/xe_mmio_gem.c
-index 8c803ef233cc..3741ae60f532 100644
---- a/drivers/gpu/drm/xe/xe_mmio_gem.c
-+++ b/drivers/gpu/drm/xe/xe_mmio_gem.c
-@@ -149,7 +149,7 @@ static int xe_mmio_gem_mmap(struct drm_gem_object *base, struct vm_area_struct *
- 
- 	/* Set vm_pgoff (used as a fake buffer offset by DRM) to 0 */
- 	vma->vm_pgoff = 0;
--	vma->vm_page_prot = pgprot_noncached(vm_get_page_prot(vma->vm_flags));
-+	vma->vm_page_prot = pgprot_noncached(vma_get_page_prot(vma));
- 	vm_flags_set(vma, VM_IO | VM_PFNMAP | VM_DONTEXPAND | VM_DONTDUMP |
- 		     VM_DONTCOPY | VM_NORESERVE);
- 
-diff --git a/drivers/gpu/drm/xen/xen_drm_front_gem.c b/drivers/gpu/drm/xen/xen_drm_front_gem.c
-index eec4c1da3f9e..dd158443f55f 100644
---- a/drivers/gpu/drm/xen/xen_drm_front_gem.c
-+++ b/drivers/gpu/drm/xen/xen_drm_front_gem.c
-@@ -80,7 +80,7 @@ static int xen_drm_front_gem_object_mmap(struct drm_gem_object *gem_obj,
- 	 * which is mapped as Normal Inner Write-Back Outer Write-Back
- 	 * Inner-Shareable.
- 	 */
--	vma->vm_page_prot = vm_get_page_prot(vma->vm_flags);
-+	vma->vm_page_prot = vma_get_page_prot(vma);
- 
- 	/*
- 	 * vm_operations_struct.fault handler will be called if CPU access
-diff --git a/drivers/video/fbdev/core/fb_io_fops.c b/drivers/video/fbdev/core/fb_io_fops.c
-index 6ab60fcd0050..6d0a8c8e141a 100644
---- a/drivers/video/fbdev/core/fb_io_fops.c
-+++ b/drivers/video/fbdev/core/fb_io_fops.c
-@@ -161,7 +161,7 @@ int fb_io_mmap(struct fb_info *info, struct vm_area_struct *vma)
- 		len = info->fix.mmio_len;
- 	}
- 
--	vma->vm_page_prot = vm_get_page_prot(vma->vm_flags);
-+	vma->vm_page_prot = vma_get_page_prot(vma);
- 	vma->vm_page_prot = pgprot_framebuffer(vma->vm_page_prot, vma->vm_start,
- 					       vma->vm_end, start);
- 
-diff --git a/include/linux/mm.h b/include/linux/mm.h
-index b8fe40f89d87..1209db1a4b92 100644
---- a/include/linux/mm.h
-+++ b/include/linux/mm.h
-@@ -4610,6 +4610,11 @@ static inline pgprot_t vma_flags_to_page_prot(vma_flags_t vma_flags)
- 	return vm_get_page_prot(vm_flags);
- }
- 
-+static inline pgprot_t vma_get_page_prot(const struct vm_area_struct *vma)
-+{
-+	return vma_flags_to_page_prot(vma->flags);
-+}
+diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tr=
+ee/dom0less-build.c
+index eacfd93087..9513c1c837 100644
+--- a/xen/common/device-tree/dom0less-build.c
++++ b/xen/common/device-tree/dom0less-build.c
+@@ -152,10 +152,23 @@ static int __init handle_passthrough_prop(struct kern=
+el_info *kinfo,
+             return -ENOMEM;
+     }
+=20
++    /*
++     * xen,reg holds flat host/guest physical addresses and sizes, so the
++     * inherited #address-cells/#size-cells must each be 1 or 2. This also
++     * guards the len division below against a zero or wrapped divisor.
++     */
++    if ( (address_cells < 1) || (address_cells > 2) ||
++         (size_cells < 1) || (size_cells > 2) )
++    {
++        printk(XENLOG_ERR "Invalid address_cells %u or size_cells %u\n",
++               address_cells, size_cells);
++        return -EINVAL;
++    }
 +
- void vma_set_page_prot(struct vm_area_struct *vma);
- #else
- static inline pgprot_t vm_get_page_prot(vm_flags_t vm_flags)
-@@ -4620,9 +4625,13 @@ static inline pgprot_t vma_flags_to_page_prot(vma_flags_t vma_flags)
- {
- 	return __pgprot(0);
- }
-+static inline pgprot_t vma_get_page_prot(const struct vm_area_struct *vma)
-+{
-+	return __pgprot(0);
-+}
- static inline void vma_set_page_prot(struct vm_area_struct *vma)
- {
--	vma->vm_page_prot = vm_get_page_prot(vma->vm_flags);
-+	vma->vm_page_prot = vma_get_page_prot(vma);
- }
- #endif
- 
-diff --git a/mm/vma.c b/mm/vma.c
-index 38481aca7321..e0ad895098a9 100644
---- a/mm/vma.c
-+++ b/mm/vma.c
-@@ -3430,7 +3430,7 @@ struct vm_area_struct *__install_special_mapping(
- 	if (pgtable_supports_soft_dirty())
- 		vm_flags |= VM_SOFTDIRTY;
- 	vm_flags_init(vma, vm_flags & ~VM_LOCKED_MASK);
--	vma->vm_page_prot = vm_get_page_prot(vma->vm_flags);
-+	vma->vm_page_prot = vma_get_page_prot(vma);
- 
- 	vma->vm_ops = ops;
- 	vma->vm_private_data = priv;
-diff --git a/mm/vma_exec.c b/mm/vma_exec.c
-index ef1fa2b161f3..a3c6b05c65fe 100644
---- a/mm/vma_exec.c
-+++ b/mm/vma_exec.c
-@@ -146,7 +146,7 @@ int create_init_stack_vma(struct mm_struct *mm, struct vm_area_struct **vmap,
- 	if (pgtable_supports_soft_dirty())
- 		flags |= VM_SOFTDIRTY;
- 	vm_flags_init(vma, flags);
--	vma->vm_page_prot = vm_get_page_prot(vma->vm_flags);
-+	vma->vm_page_prot = vma_get_page_prot(vma);
- 
- 	err = insert_vm_struct(mm, vma);
- 	if (err)
-diff --git a/sound/core/memalloc.c b/sound/core/memalloc.c
-index 9320671dfcc8..5bc7e586b430 100644
---- a/sound/core/memalloc.c
-+++ b/sound/core/memalloc.c
-@@ -851,7 +851,7 @@ static void snd_dma_noncoherent_free(struct snd_dma_buffer *dmab)
- static int snd_dma_noncoherent_mmap(struct snd_dma_buffer *dmab,
- 				    struct vm_area_struct *area)
- {
--	area->vm_page_prot = vm_get_page_prot(area->vm_flags);
-+	area->vm_page_prot = vma_get_page_prot(area);
- 	return dma_mmap_pages(dmab->dev.dev, area,
- 			      area->vm_end - area->vm_start,
- 			      virt_to_page(dmab->area));
-diff --git a/tools/testing/vma/include/dup.h b/tools/testing/vma/include/dup.h
-index 8621a7ae8980..57c80924813d 100644
---- a/tools/testing/vma/include/dup.h
-+++ b/tools/testing/vma/include/dup.h
-@@ -1573,3 +1573,8 @@ static inline void vma_assert_can_modify(struct vm_area_struct *vma)
- 	if (vma_is_attached(vma))
- 		vma_assert_write_locked(vma);
- }
-+
-+static inline pgprot_t vma_get_page_prot(const struct vm_area_struct *vma)
-+{
-+	return vma_flags_to_page_prot(vma->flags);
-+}
-
--- 
-2.55.0
-
+     /* xen,reg specifies where to map the MMIO region */
+     cell =3D (const __be32 *)xen_reg->data;
+     len =3D fdt32_to_cpu(xen_reg->len) / ((address_cells * 2 + size_cells)=
+ *
+-                                        sizeof(uint32_t));
++                                        sizeof(*cell));
+=20
+     for ( i =3D 0; i < len; i++ )
+     {
+--=20
+2.43.0
 
