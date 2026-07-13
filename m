@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FEC3C43458
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Jul 2026 07:00:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1361417.1613649 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3953C43458
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Jul 2026 07:10:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1361430.1613659 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wjAe9-0005RE-7m; Mon, 13 Jul 2026 07:00:09 +0000
+	id 1wjAnh-0006M4-7D; Mon, 13 Jul 2026 07:10:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1361417.1613649; Mon, 13 Jul 2026 07:00:09 +0000
+Received: by outflank-mailman (output) from mailman id 1361430.1613659; Mon, 13 Jul 2026 07:10:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wjAe9-0005R7-4s; Mon, 13 Jul 2026 07:00:09 +0000
-Received: by outflank-mailman (input) for mailman id 1361417;
- Mon, 13 Jul 2026 07:00:08 +0000
+	id 1wjAnh-0006Lx-4f; Mon, 13 Jul 2026 07:10:01 +0000
+Received: by outflank-mailman (input) for mailman id 1361430;
+ Mon, 13 Jul 2026 07:10:00 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wjAe7-0005O4-Sl
- for xen-devel@lists.xenproject.org; Mon, 13 Jul 2026 07:00:07 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wjAng-0006Lr-PI
+ for xen-devel@lists.xenproject.org; Mon, 13 Jul 2026 07:10:00 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wjAe6-00E1Vh-JW
- for xen-devel@lists.xenproject.org; Mon, 13 Jul 2026 09:00:06 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wjAng-00E4eB-5i
+ for xen-devel@lists.xenproject.org; Mon, 13 Jul 2026 09:10:00 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a548cf4-bab6-0a2a0a5309dd-0a2a4506c8da-22
- for <xen-devel@lists.xenproject.org>; Mon, 13 Jul 2026 09:00:06 +0200
-Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
+ id 6a548f45-2eae-0a2a0a5409dd-0a2a450ccdce-12
+ for <xen-devel@lists.xenproject.org>; Mon, 13 Jul 2026 09:10:00 +0200
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
  (envelope-from <jbeulich@suse.com>)
- id 6a548cf6-0835-0a2a45060019-d155802ef05d-3
- for <xen-devel@lists.xenproject.org>; Mon, 13 Jul 2026 09:00:06 +0200
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-493b77b150aso23378935e9.2
- for <xen-devel@lists.xenproject.org>; Mon, 13 Jul 2026 00:00:06 -0700 (PDT)
+ id 6a548f47-e897-0a2a450c0019-d1558031a9fb-3
+ for <xen-devel@lists.xenproject.org>; Mon, 13 Jul 2026 09:10:00 +0200
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-493f45e206dso12856345e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 13 Jul 2026 00:10:00 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493eb6d53absm337552655e9.6.2026.07.13.00.00.04
+ ffacd0b85a97d-47a9e4d6e4csm78272145f8f.10.2026.07.13.00.09.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 13 Jul 2026 00:00:04 -0700 (PDT)
+ Mon, 13 Jul 2026 00:09:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,70 +55,61 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1783926006; x=1784530806; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1783926599; x=1784531399; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=7ykb3U8Qe8uE8oPMdyrkRVkKPcIMWbzFuSoRegICdfM=;
-        b=dW3SnYasgv57T3ZULQFMfeLkgMi0LnamCJoq0rRVsHxiz2iH+YsgvUOO1VfBoSkaGR
-         zD4wnXcNYIrEC09gPxIfkyBMPWxegi2goRekuMdBKvPiDg3E5DH2geIW3pWK7GOAFp2o
-         lfjAPQCqlOhtS/tQagPsW0Ev+A5XUvWpKZqPUES1Df2TGeMCa/aKBmGRT4YnK2gmwjFt
-         vjn13uoSqEoF5mqCe2K/QJgyJ6U5N08B1GQZUMdh61Dx9dM/YFevCwuWgMyN4XejVoMg
-         aunmqlsc+Zo7gkezNdE4j6SuJpVn+5dwGImFxILaGomf5XZLAhIGnw8pt9sKTf9WNSAE
-         nTsQ==
+        bh=FAHepH4FRM377gQ4xVF+3y1T3jLg4xP7zxZIY6dX+AE=;
+        b=J8AFcAKW5Dq4o/RoGAA3J/JEu3S21DZJd7qGRO+qR6MEA1ygC5SIns8hxMagi2wuM0
+         ol1K1mynre4VGUYcb69vMBzK72CFQ0wwImGEuvu38QkJrOPcMOI/KnBbYg3KiuwW+y3z
+         cdfX8b+X8q6xW3Skxp/OIxIWde2vDggu3NVUxsTcE20QX9N5Q58e/Gcybud9t9dAU1sl
+         Kv6NN33y8umDZHzapODCOCn8Ej3mu0xqwsRjQRxwkP8XWgLmRgA5KCcnBPdscsYEayZ3
+         ejTi6CqVw+izSMSzW8c2xS7OzJypwXetbyNS/7qoNb3H2J15mNX1HEQdObWoMAJld4Fm
+         wIPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783926006; x=1784530806;
+        d=1e100.net; s=20251104; t=1783926599; x=1784531399;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=7ykb3U8Qe8uE8oPMdyrkRVkKPcIMWbzFuSoRegICdfM=;
-        b=Fit65saqpw7xqAAJ3/QBogg3mfluehrEcacWkZT4hJy2QUaxNnjeDjH3aVwUjx+0Xm
-         DOMDpBsYghqqx5h5NsK3u23FlHugbIscUzasqtCtVOXpxTeLpXnjPckZhrjj98t1u/6e
-         ceADGDNdlum7FMEC5ZAkpD5+VXpoimXKXnOLAMc1mKf28MNbo0lC6cwbSj2UADkT00r3
-         XCTD9uPq03J91snwDqwrpvze4Spl1OZmpQjpgZAqbRXT/WazW5hJ3OXn4k/2rjOwfLwf
-         nrjXu9eGwoFz3Hqx/6rjZXiDS/63STxJbopSthfnPoS527oGOsR4Zz3stjinI28IWwJX
-         wMpA==
-X-Forwarded-Encrypted: i=1; AHgh+RokZlc7ihzpVKZaw2fKxGANdcREPkNZeuc0hVSe1PQfMVsWuReKJVWxtjdC+IvjlGl305sjPLFDumo=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yw9IBnYKliRHvnITlrDIuGAvoGN3+OPi6Sg86VmughHL/YnW5ko
-	URvqjy4YIkg5AHtrLRhQ6Y9fVRPuLjBOQ4FRHA3JoCfrw7TeExbKR6AHX/Wrds7t6w==
-X-Gm-Gg: AfdE7cn2psYbTBrmi7M7+2ojWoz7kiwMtjN9lclv2fvyQIRJvTkG3ETeG7iT7MpdSaW
-	Qp09zrLv/ejQn2VQdfX8+gmep8wVIeIcC6CYfQsov/z19BqTRXicb4EXFQreW4EqEzgOms6KH5X
-	BiDTGVznjWHIyj3WQf+OrOJm78S55B9pJk7kTp3liTUl5IbM9mJTlkFXQsfxS0obR8KrnRH3oRK
-	eDfWRRD0NgQWqimdu13itfVZt8XGbOVPijoUhzQttUcd0IfsfbB/lKfRMSsZYRo4W3UfVphazuK
-	v9X9YCzAd0zFU1mcfhxxNwJBX0guRx1tAa75ZJCs5T4QMgDIWgG3+jD/L0ebtrPNx9ggY5UCBKd
-	QF6Be48fHCPb4kf04KO150pRow+O+VttYx83l41BPqkoA8ELcG9FEt3um7q1ZoI8LQ+dJFv+8u9
-	JYzXqtIKLDbQYnIxBhLV31t3EHbpSQ/W431ReJQ6rvOLFrd2UhjO13vHQEVZM73ONc8DDugQS57
-	c97
-X-Received: by 2002:a05:600c:8b63:b0:493:ee2b:c876 with SMTP id 5b1f17b1804b1-493fd59b878mr58790025e9.35.1783926005596;
-        Mon, 13 Jul 2026 00:00:05 -0700 (PDT)
-Message-ID: <3fbd0a74-62fb-4c98-9d48-84703719aa19@suse.com>
-Date: Mon, 13 Jul 2026 09:00:03 +0200
+        bh=FAHepH4FRM377gQ4xVF+3y1T3jLg4xP7zxZIY6dX+AE=;
+        b=IGCElcWhkQLLs39/GpIV7w1eo7hRRyq/lPCYwp9Otcc4OQ7p7UZSt7ujrpQEUMlsb+
+         R2xpYcLtUBl+H9QrK0ZmyZ33NAr+ocISh8T3TOTq5fKsnNTpRpMJIzh4IOcF4Ezu/yCV
+         zH9QEYiFlZvTam998t/e2ICvo4H7Qgx3I++PL1Q3hec8em2r2zOft8W/zY1qeI5Ec3V1
+         EbUgauXaneFy4oDo2jUMSEJUb5/k5/o/kKKzoUH76Pk2EjE+VL2yX/1rTYnPXDhB8NVI
+         MKP9voVUxVMgwHi1+iN66uHyccttVPC25W708jMVl0d/M1Cy2zzlBmYDQQ+a2c5FjFgL
+         CpvA==
+X-Forwarded-Encrypted: i=1; AHgh+Rq13v5oQPgZUSRiT/bdFGsm9E/DcvU3P5qUubJMuRdQQWl0C7I/pct8TBZEgiQ1LaISiil02bNlBf8=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YygqwbxaAPYS65mp1HSrF7U9NzRtKPbxrdMHVdvpFaI/9W2FWxd
+	KUPrzS/aZBGgjxXxiv/BqHMaA/o4DzLJOz9aM7h30Xbd5rRHYRrw6ZHKsnpl9PtKsw==
+X-Gm-Gg: AfdE7cmEh2FVDOKbGUj8ctxXAx6IovYA6QYd2AC2ZQW/l7Hll6g33ElwEfgU3KoqPJS
+	mPqEATlhGjxh5HnzjP+G910yxcdvj7ka9rRXXroZbIRZvJ9HpGAfXX+EGOy5gZDQT1X/gZFHisa
+	Xc9/SH7+2/z/OBUmh6elgzrdHhKTokmJF9TOFJnqnOhtJc5l66hIT6JdHO8jOmVE55+aHvDtiPl
+	lkiosUMnGHqbpwEcCSXy2yd+kgYt2pEQfKk/fXUGjnq5qw8WFzGXH5r76VQm27MSh1AlHcs2Gm/
+	irSNt63o0pe92EzdEyDvcPRV18ce101mNYpESlaVrvW3rwwfgOA0CTsyBZQOQqdXIQY7dY6hK+G
+	pGXGCbDz12Iq+p5P49lm3ccAkPrGlcR4Wzm/wiXdv+KZPy4WdHK0z+u5nXxTh0QVQnICacdnYDW
+	KAfuJciKNZRMvPRIcVu+699kBRs3YDdpvLlPn5urTM5EJaocISaYxmOmovxKHAectwYKctfRhXF
+	Un5
+X-Received: by 2002:a05:600c:3222:b0:493:b36b:4933 with SMTP id 5b1f17b1804b1-493f2a85bdfmr88999965e9.3.1783926599577;
+        Mon, 13 Jul 2026 00:09:59 -0700 (PDT)
+Message-ID: <3fe4008c-3338-4830-b200-fe7d0f582303@suse.com>
+Date: Mon, 13 Jul 2026 09:09:58 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 6/6] xen: make config argument const
-To: Julian Vetter <julian.vetter@vates.tech>
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
+Subject: Re: [PATCH v2 2/3] misra: deviate MISRA C Rule 5.5 for
+ 'request_irq()'
+To: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
+Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ Doug Goldstein <cardoe@cardoe.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Juergen Gross
- <jgross@suse.com>, Andrii Sultanov <andriy.sultanov@vates.tech>,
- Guillaume Thouvenin <guillaume.thouvenin@vates.tech>,
- =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Oleksii Moisieiev <oleksii_moisieiev@epam.com>,
- Timothy Pearson <tpearson@raptorengineering.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <20260710135503.301746-1-julian.vetter@vates.tech>
- <20260710135711.301993-1-julian.vetter@vates.tech>
- <1783691847.8631fc262581453bbf619ec5b2062170.19f4c51a755000edb5@vates.tech>
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <cover.1783864426.git.dmytro_prokopchuk1@epam.com>
+ <db38c988b728a52bd7a921201e44558e43c7ed2c.1783864426.git.dmytro_prokopchuk1@epam.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -144,35 +135,56 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1783691847.8631fc262581453bbf619ec5b2062170.19f4c51a755000edb5@vates.tech>
+In-Reply-To: <db38c988b728a52bd7a921201e44558e43c7ed2c.1783864426.git.dmytro_prokopchuk1@epam.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1783926006-512BF617-D0388BCF/0/0
+X-purgate-ID: tlsNG-d25034/1783926600-46AEE6B2-6B51F500/0/0
 X-purgate-type: clean
-X-purgate-size: 1239
+X-purgate-size: 1991
 
-On 10.07.2026 15:57, Julian Vetter wrote:
-> arch_sanitise_domain_config() validates the configuration requested by
-> the toolstack, and should not fill anything in. The config struct passed
-> to createdomain is supposed to be pure input. ARM used to abuse this
-> (GIC_NATIVE resolution, now removed) to smuggle output back to the
-> toolstack. Making the parameter const stops that type of abuse from
-> happening on any architecture.
-> 
-> The x86 implementation turned out to have its own instance of the same
-> issue. It set XEN_DOMCTL_CDF_oos_off into config->flags for non-HVM
-> guests. Since The sanitisation runs before the function domain_create()
-> copies config->flags into d->options, this relied on mutating the
-> toolstack's config to take effect. Move the default onto d->options
-> directly in arch_domain_create() (which runs after d->options is
-> populated), where all the remaining domain options are resolved. This
-> has the same effect and no mutation of the input config is required.
-> 
-> ARM, PPC and RISC-V need no equivalent change, Their implementations
-> were already read-only.
-> 
-> Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
+On 12.07.2026 16:04, Dmytro Prokopchuk1 wrote:
+> --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
+> +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+> @@ -136,6 +136,10 @@ These macros address differences in argument count during compile-time, effectiv
+>  -config=MC3A2.R5.5,ignored_macros+="name(hypfs_alloc_dyndata)&&loc(file(^xen/include/xen/hypfs\\.h$))"
+>  -doc_end
+>  
+> +-doc_begin="Clash between 'request_irq()' function and macro name in 'xen/drivers/passthrough/arm/smmu.c' is deliberate."
+> +-config=MC3A2.R5.5,ignored_macros+="name(request_irq)&&loc(file(^xen/drivers/passthrough/arm/smmu\\.c$))"
+> +-doc_end
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com> # x86
+This suitably constrains things to a single file.
 
+> --- a/docs/misra/deviations.rst
+> +++ b/docs/misra/deviations.rst
+> @@ -185,6 +185,13 @@ Deviations related to MISRA C:2012 Rules:
+>         function, so the name clash is controlled.
+>       - ECLAIR has been configured to ignore this macro.
+>  
+> +   * - R5.5
+> +     - Clash between the 'request_irq()' function and macro name is deliberate.
+
+This doesn't, and ...
+
+> +       The function uses the Xen 'request_irq()' argument order, while the macro
+> +       is a compatibility wrapper for the ARM SMMU driver that adapts calls by
+> +       reordering the handler and flags arguments.
+> +     - ECLAIR has been configured to ignore this macro.
+
+... there's then not even a mention of the file name later (ftaod: even if
+there was, to me at least this would come too late).
+
+> --- a/docs/misra/rules.rst
+> +++ b/docs/misra/rules.rst
+> @@ -226,6 +226,10 @@ maintainers if you want to suggest a change.
+>         because the macro is a typed convenience wrapper around the size-based
+>         allocation function.
+>  
+> +       Clash between request_irq() function and macro names is allowed because
+> +       the macro is a local compatibility wrapper that adapts ARM SMMU driver
+> +       call to Xen's request_irq() argument order.
+
+Similarly here.
+
+Jan
 
