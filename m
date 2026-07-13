@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED2A6C43458
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Jul 2026 13:43:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1361677.1613820 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E20DBC43458
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Jul 2026 13:51:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1361687.1613830 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wjGwI-0003Z6-Dy; Mon, 13 Jul 2026 13:43:18 +0000
+	id 1wjH49-00057J-5Y; Mon, 13 Jul 2026 13:51:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1361677.1613820; Mon, 13 Jul 2026 13:43:18 +0000
+Received: by outflank-mailman (output) from mailman id 1361687.1613830; Mon, 13 Jul 2026 13:51:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wjGwI-0003Yz-B9; Mon, 13 Jul 2026 13:43:18 +0000
-Received: by outflank-mailman (input) for mailman id 1361677;
- Mon, 13 Jul 2026 13:43:17 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wjGwH-0003Yd-3J
- for xen-devel@lists.xenproject.org; Mon, 13 Jul 2026 13:43:17 +0000
+	id 1wjH49-00057C-2f; Mon, 13 Jul 2026 13:51:25 +0000
+Received: by outflank-mailman (input) for mailman id 1361687;
+ Mon, 13 Jul 2026 13:51:24 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wjH48-000576-9F
+ for xen-devel@lists.xenproject.org; Mon, 13 Jul 2026 13:51:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wjGwG-0058LF-4S
- for xen-devel@lists.xenproject.org; Mon, 13 Jul 2026 15:43:16 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wjH47-008Qfy-7g
+ for xen-devel@lists.xenproject.org; Mon, 13 Jul 2026 15:51:23 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a54eb6d-e002-0a2a0a5209dd-0a2a4508d08a-22
- for <xen-devel@lists.xenproject.org>; Mon, 13 Jul 2026 15:43:16 +0200
-Received: from [209.85.208.177] (helo=mail-lj1-f177.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
+ id 6a54ed58-2eae-0a2a0a5409dd-0a2a450689f0-8
+ for <xen-devel@lists.xenproject.org>; Mon, 13 Jul 2026 15:51:23 +0200
+Received: from [209.85.167.51] (helo=mail-lf1-f51.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a54eb73-ee29-0a2a45080019-d155d0b1c0d1-3
- for <xen-devel@lists.xenproject.org>; Mon, 13 Jul 2026 15:43:15 +0200
-Received: by mail-lj1-f177.google.com with SMTP id
- 38308e7fff4ca-39c923b8c2aso28078041fa.2
- for <xen-devel@lists.xenproject.org>; Mon, 13 Jul 2026 06:43:15 -0700 (PDT)
-Received: from fedora (user-109-243-144-234.play-internet.pl.
+ id 6a54ed5a-0835-0a2a45060019-d155a733ccdc-3
+ for <xen-devel@lists.xenproject.org>; Mon, 13 Jul 2026 15:51:23 +0200
+Received: by mail-lf1-f51.google.com with SMTP id
+ 2adb3069b0e04-5aeb11c7347so2653944e87.0
+ for <xen-devel@lists.xenproject.org>; Mon, 13 Jul 2026 06:51:23 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
  [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-39c84b854cesm26688741fa.27.2026.07.13.06.43.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Jul 2026 06:43:14 -0700 (PDT)
+ 38308e7fff4ca-39c84b13407sm27820531fa.12.2026.07.13.06.51.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 13 Jul 2026 06:51:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,87 +52,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783950195; x=1784554995; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=AHAFX5d6Kn9+qaaTgP5OT5PfigaR15/Uc88+6WBjX00=;
-        b=hkqDSl8Y3MIsZ7HHRI2+g8hh4LG15YtXhDT73xAh/dNlfHI2Mn0JEwuhThXG+1P7sQ
-         LgBzKH/m8OWxikWQO9kX1rqYZH4tChHGmEAlh0f2UoyZ50RxS4+HZR/nT7OFTMojVBUp
-         kpDWbvHxkhNMB9ypgQnyCGrOPjK0EwcDl7UFJpmLPPtxvPC4X9R9Sa862cX17d5OHi55
-         mvIha0zTfo3N4TkwqKvvOgiiQYSkgeoVmEvjPoowSLojSdP4Bj5IaGfk0NgJMJwHI5sy
-         G/14JkVEuksc1bw5zvLic3GeKkgtyO6+3dRQI3xMewBAY15gXlDKkz486EGkFnUmxyoF
-         uXfg==
+        d=gmail.com; s=20251104; t=1783950682; x=1784555482; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=4ff0EkN2TJXIY1rQ2tgdc647EOhcHItZ1JKqzkBdIWQ=;
+        b=mFHmXu2fqin/MDPKslCBdP6Zi8h/mliYue3yHq3HUroWqtWl0IDIm4xTWsLILVyL12
+         8AR7UzfHWi5gJ0Y2Lbvlgxq/CNdKqVz6EuV1u0NSBwwlVWrfPhdabbgyv+QK7XOwmvPF
+         Sy+3vX9kY8QBdvOm4xwTlqQ1SrYdYY8UqMKcBXTepe4FFHDl5WK2H/GL0eK+wyGQCRVq
+         Eh9VwqFvHECTALX74CtVIoU3tTUBpW9cyhjiBpyjrUbGeE2csBXLBOapHZWg4vGSRJ/0
+         AeAFAmEm5M6RZn9bwteDogxH+SxQssL8wjW7JmjMa55H7JyjCrt4Lk2qRcTX8FvF/eix
+         a6xg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783950195; x=1784554995;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1783950682; x=1784555482;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=AHAFX5d6Kn9+qaaTgP5OT5PfigaR15/Uc88+6WBjX00=;
-        b=LvfnhI1ccv6ykeaTVt/FBdekzgOBci0ZpFz09Hv7WSBnpLfWcILaYcYDeN1X6NawjE
-         ZZftoDocTd83w5gzVmfYA66/3C3BKnb+E0BrNfNX5KQYAgNLzSFkcepI3y+mzYYKSusn
-         f5tYipdSNFPVcRgZlF6YFz4WD7eA0pXyMK3vAH2iJJXFMnueb1+hkEIRWr89xqA29eEu
-         EA5K8IdhVRRDSO49kuMhjxTCqkp0ruVnUclfSysJ2+DQX6JKeylUNkVhdmAK+5B6ws1d
-         JBGgh7EvWo5+CtNJex1ORvqhazgMv1Hy/oZP72AqyPayd+Gqix+OT2e/RGOcs14HXZb7
-         NuKg==
-X-Gm-Message-State: AOJu0YxD4/PaI1Tad3qwx+RMikljB2PUXMWI8zh+sUJ5skv3nouAItj2
-	/MpC0ducr58652a/CEXSdsuNGEfTuLpIkz+i7gDccS17B+k+gYJTVLGroae6lQ==
-X-Gm-Gg: AfdE7ck/ZWIl6ViOUDjqC9zWT2X8mMtS9Y38WBtP1hll0tF80S51gOvJTwJB7mjZYgl
-	rMGWxeL0CHm/a3q0QPO1/U2PKnAe/gSUT5HKdypTCOYS9P+fNursFACbm8DouRz0rqWUcc2m/Yk
-	Vlt4XOK6CXHrpZZBukg0vzpBnvn/x3r8N+PE0FoqRYicnGbCVg+KM3z3aksyoHrmQpVg84qvVDU
-	k5fY/mSL4Z6hnQKUoDjYo//GLRgaA02ffXoS5G+TE24nWbGLePMWUFX5EQaXH4UMW2xEGLqB2/x
-	ctB/BuR+eOxGhWSsYf0QBDrdcg3Aw7n9MYHOyJyWLy2EiT+3/w5XrfjiFclFuqPh9JJ1QXvrici
-	ZmfZ+hywd9cPKj15943XsjtsaUi0uUpvgQdTe3r+wRPDkAW71SsERo9LqNN3KaVNJXwvd1C4nNL
-	K+NcSIsLIJPmSML7X2zidivvIr/tGuIvRvpzK9cyOkjLYcBOFMUqp12YQYfQ==
-X-Received: by 2002:a05:651c:4397:20b0:39c:74ef:1a96 with SMTP id 38308e7fff4ca-39caa89a171mr14793191fa.36.1783950195062;
-        Mon, 13 Jul 2026 06:43:15 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Community Manager <community.manager@xenproject.org>,
-	"committers @ xenproject . org" <committers@xenproject.org>
-Subject: [PATCH] CHANGELOG: add Arm and RISC-V entries for 4.22
-Date: Mon, 13 Jul 2026 15:43:07 +0200
-Message-ID: <8087862a1149a8875b578c2b3d044919d8563a39.1783950107.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.54.0
+        bh=4ff0EkN2TJXIY1rQ2tgdc647EOhcHItZ1JKqzkBdIWQ=;
+        b=jdImW2OV2+Cb+EaQ6Zw7C03IUdD4wRzND63a1hLJvIu6SBTIrLxYk2IZQ+IbNTpP1L
+         ktP8RLbnPm2A6FDx38EuPignYVIxayp6Pyc4l2gAYGSpxSNBmWpCbiJSmtrgpqq7X7im
+         9QHzgJvUOtGTlHhodSEsYgVH3w5Ha6gJSJ24aTQpn9NJ78y6+0Hdu6AsmG5EgmLHgKyH
+         5Mq4F4FuO/gyysMhgWKhxH11jBtw+u9L5/rVFI76mLEg9cvBGRntEZbq5G0GPzzjqU7l
+         zDyZx9McetqrNUdfhGQw4hctpmhd5SbbQ7bQ0GPxlOU67x9Y9QqrhkeatIDBPss0Q60a
+         ae/g==
+X-Forwarded-Encrypted: i=1; AHgh+RpfY3jlDFJZlkiQzLluMxcVnkx6tqShp1qsOEAylMmhIS2XnarlumVAb0anrVQ6HNaRChrREXyXeTk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yx4n/wimVsMmi8p1cpQRjU6uZBc+ygEekOlPzhOkHt26QjUiGgA
+	Mj7nNB4DXEBZDfPrDbGQ6H0Jdv7y4v1TrxsjUN4TVUfTqikNe6fJMp/MO2VwGw==
+X-Gm-Gg: AfdE7cnt8C8X8IRfXqyOu62Uxy9Sa1x3BHF0tTTNhe3yTBynkVv994AD4ghnw4eNpnp
+	bFpI8gwGL99VVzXwh6SaeSJRE1qgq5Hd/lC57lDmpmCru77z73fVsJJRYHrbLlp4icLBzT91Yng
+	qIUmj2oQ5aKWqOZExt/rUx0GIAYPfJozk0A3OIAeFdhHi2+ygVcZfnGTbJXUJO8A957P5PKWJKD
+	fa/Nspmz/kyhGK1xUvtS4bWKilliQT/JGeBIZpkqucY/6OJBEFGxv9SR+NTnw7b8Q17sb+TKMNB
+	QVyLhA1VqBY2FVJ20CqJtUVseAycrkRzf8tN06Ca/PGjoARYe8/WW3b0daymklvrUENLD2UFROA
+	oOh5eVZY8RLm9xACfyZkwwtSAA98I7+c8yXfe0MfSeYlF9n5OOTxSrTD7X/MrHtZ/D9Rem/fayk
+	I1lLLmT63rAZgJ8dq5lbiQM8slfvMx9LlK4cN5eECCRK/ACURRUgTTyYODwC4nrtvsgyw=
+X-Received: by 2002:a05:6512:158b:b0:5ae:be30:ecb1 with SMTP id 2adb3069b0e04-5b0236c9444mr1813032e87.65.1783950682277;
+        Mon, 13 Jul 2026 06:51:22 -0700 (PDT)
+Message-ID: <00c9a30c-fa0f-4dd9-bea2-15de27973f16@gmail.com>
+Date: Mon, 13 Jul 2026 15:51:21 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH for-4.22 1/2] xen/arm: validate IRQs before descriptor
+ lookup
+To: Mykola Kvach <xakep.amatop@gmail.com>
+Cc: "Orzel, Michal" <michal.orzel@amd.com>, xen-devel@lists.xenproject.org,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <cover.1783671887.git.mykola_kvach@epam.com>
+ <1843da2e028635773638ef73ed10907c7ae7bb53.1783671887.git.mykola_kvach@epam.com>
+ <e6468083-f901-4a1e-94d5-d347068fabf0@amd.com>
+ <2ba97094-c9c8-461b-adc4-64cca978dd6a@amd.com>
+ <u46k277cxsw53rb2d4pnxksbbwr35rjp54vwxqm2phbrp2ywll@etlvezzojxvi>
+ <9a75baf4-b889-4f2d-8cfa-d8a229411b68@gmail.com>
+ <CAGeoDV-wPnhUuC2XRndZNEJOSAC2-tkkTpUi-jKCRn5eiQG6Cw@mail.gmail.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <CAGeoDV-wPnhUuC2XRndZNEJOSAC2-tkkTpUi-jKCRn5eiQG6Cw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1783950196-7AE2701C-9202D5F4/10/73395122804
+X-purgate-ID: tlsNG-16d1c6/1783950683-502B7617-229AF516/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 1031
+X-purgate-size: 2948
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Changes in v2:
- - Address the comment from ML.
- - Reword second RISC-V's item.
----
----
- CHANGELOG.md | 9 +++++++++
- 1 file changed, 9 insertions(+)
+Hello Mykola,
 
-diff --git a/CHANGELOG.md b/CHANGELOG.md
-index 356be88351a9..4dca8359cd4a 100644
---- a/CHANGELOG.md
-+++ b/CHANGELOG.md
-@@ -46,6 +46,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
-  - On Arm:
-    - Support for guest suspend and resume to/from RAM via vPSCI.
-      Applies only to non-hardware domain guests.
-+   - Continued Armv8-R MPU enablement.
-+   - Drop ThumbEE support.
-+   - FF-A v1.2 support.
-+
-+ - On RISC-V:
-+   - SSTC extension support for Xen (not for guest yet).
-+   - Introduce domain build helpers (CONFIG_DOMAIN_BUILD_HELPERS) which allows
-+     to load Linux kernel, initrd and allocation related things forfor device
-+     tree-based domains, laying the groundwork for guest boot support.
- 
- ### Removed
-  - On x86:
--- 
-2.54.0
+On 7/13/26 12:46 PM, Mykola Kvach wrote:
+> Hi Oleksii,
+> 
+> Thank you for the review.
+> 
+> On Mon, Jul 13, 2026 at 10:39 AM Oleksii Kurochko
+> <oleksii.kurochko@gmail.com> wrote:
+>>
+>>
+>>
+>> On 7/10/26 1:48 PM, Mykola Kvach wrote:
+>>> On Fri, Jul 10, 2026 at 12:44:44PM +0200, Orzel, Michal wrote:
+>>>> On a tangent note:
+>>>> I can see that you pushed quite a few "for-4.22" patches. We are approaching the
+>>>> release, so afaict at this point we should only be taking crucial bug fixes.
+>>>> Moreover, when sending "for-X" patches, please include a description with your
+>>>> analyzed pros/cons of taking a patch in.
+>>>
+>>> Ack. I understand. For this patch specifically, I consider it a crucial
+>>> fix for 4.22 for the following reasons:
+>>>
+>>> Pros:
+>>> - It prevents an out-of-bounds irq_desc[] access which may corrupt Xen
+>>>     memory or crash the hypervisor.
+>>> - The issue was introduced by eSPI support already present in 4.22.
+>>> - The change is small, and valid IRQ handling remains unchanged.
+>>> - I tested CONFIG_GICV3_ESPI=y and CONFIG_GICV3_ESPI=n builds and
+>>>     reproduced the issue on FVP using a fake DT interrupt with reserved
+>>>     INTID 3000.
+>>>
+>>> Cons:
+>>> - The trigger requires either a malformed DT interrupt specifier, such
+>>>     as reserved INTID 3000, or an eSPI unsupported by the Xen build.
+>>> - The demonstrated failure used deliberate fault injection rather than
+>>>     a reported production failure.
+>>> - The patch adds validation to common Arm IRQ setup paths, although
+>>>     valid IRQs continue through the same path as before.
+>>>
+>>> Assessment:
+>>> The hypervisor memory-safety impact and the presence of the affected
+>>> eSPI code in 4.22 outweigh the limited regression risk.
+>>>
+>>> I will include this kind of pros/cons analysis with future for-X
+>>> submissions.
+>>
+>> It doesn't seem as critical. IIUC, exploiting this issue requires
+>> providing a malformed DT interrupt specifier. If the DT interrupt
+>> specifier is valid, the system should behave correctly.
+>>
+>> Given that we are very close to the release, I think it would be better
+>> to proceed without these changes. If the issue proves to be critical, we
+>> can backport the fixes afterward.
+> 
+> Okay, thanks.
+> 
+> What do you think about the second patch in this series? I believe it
+> is more critical. Unlike the first issue, it can be triggered with a
+> valid eSPI configuration: freeing a valid eSPI uses the raw INTID as
+> the bitmap index, causing an out-of-bounds access that may corrupt
+> memory.
+> 
+> Could it still be considered for 4.22?
+
+I agree that the second patch is more critical, but I don't think it 
+should block the release. It would be good to include if possible, but I 
+don't see it as a release blocker.
+
+Maintainers, what do you think about taking the second patch for this 
+release?
+
+~ Oleksii
+
 
 
