@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93BA5C43458
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECF4AC44501
 	for <xen-devel@archiver.kernel.org>; Mon, 13 Jul 2026 20:48:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1361929.1613956 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1361930.1613968 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wjNZV-0005My-CA; Mon, 13 Jul 2026 20:48:13 +0000
+	id 1wjNZW-0005Z8-2a; Mon, 13 Jul 2026 20:48:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1361929.1613956; Mon, 13 Jul 2026 20:48:13 +0000
+Received: by outflank-mailman (output) from mailman id 1361930.1613968; Mon, 13 Jul 2026 20:48:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wjNZV-0005Mr-7o; Mon, 13 Jul 2026 20:48:13 +0000
-Received: by outflank-mailman (input) for mailman id 1361929;
+	id 1wjNZV-0005X5-Rt; Mon, 13 Jul 2026 20:48:13 +0000
+Received: by outflank-mailman (input) for mailman id 1361930;
  Mon, 13 Jul 2026 20:48:12 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wjNZT-00059x-Rr
- for xen-devel@lists.xenproject.org; Mon, 13 Jul 2026 20:48:11 +0000
+ (envelope-from <freddy77@gmail.com>) id 1wjNZU-0005Mj-JH
+ for xen-devel@lists.xenproject.org; Mon, 13 Jul 2026 20:48:12 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wjNZS-00FW6X-IN
- for xen-devel@lists.xenproject.org; Mon, 13 Jul 2026 22:48:10 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wjNZU-00FW63-04
+ for xen-devel@lists.xenproject.org; Mon, 13 Jul 2026 22:48:12 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a554ed4-5cb7-0a2a0a5109dd-0a2a450cb27e-30
- for <xen-devel@lists.xenproject.org>; Mon, 13 Jul 2026 22:48:10 +0200
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
+ id 6a554f02-bab6-0a2a0a5309dd-0a2a4503e5b2-10
+ for <xen-devel@lists.xenproject.org>; Mon, 13 Jul 2026 22:48:11 +0200
+Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
  (envelope-from <freddy77@gmail.com>)
- id 6a554f08-e897-0a2a450c0019-d1558035b036-3
- for <xen-devel@lists.xenproject.org>; Mon, 13 Jul 2026 22:48:09 +0200
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-493b1710405so19353945e9.2
- for <xen-devel@lists.xenproject.org>; Mon, 13 Jul 2026 13:48:09 -0700 (PDT)
+ id 6a554f0b-f2d2-0a2a45030019-d155802cd177-3
+ for <xen-devel@lists.xenproject.org>; Mon, 13 Jul 2026 22:48:11 +0200
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-493f60208a5so31038145e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 13 Jul 2026 13:48:11 -0700 (PDT)
 Received: from localhost.localdomain (2.115.147.147.dyn.plus.net.
  [147.147.115.2]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49508724786sm23924255e9.3.2026.07.13.13.48.06
+ 5b1f17b1804b1-49508724786sm23924255e9.3.2026.07.13.13.48.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Jul 2026 13:48:07 -0700 (PDT)
+ Mon, 13 Jul 2026 13:48:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,42 +55,42 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783975688; x=1784580488; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1783975691; x=1784580491; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=wimWBVOYQqwPaXI8zWtV5Ue4b9r9c1tb/eSNhf7mAu8=;
-        b=p5bS73IUQcRSU3oHBOSWwISXFxYSHtz5P+sL1XWoivaFnyl0oOUmkqdQwhlMMfUohH
-         uUr7bO+u4Uqme/Se4P/DmSctrAjhaJ801F3wE7GAUM6dXjCKWdroMGwLvfUQz8fl6ni2
-         AGoQskVCyvpRSE+3arVoIGVIAymGCHAKNbe5Q0mY6BRr1JqU1cOsunITyqBNAo65lfU/
-         rk+BeTeSTajYob2KCQ2t4tEtket0hK1KHKRkWl8GC7jMwMGhWUgOCjq7EwQKOUm51WaN
-         nspvihu1QobN2nMbM0ohaT6EYZAnE/oBRijjH+fsDRq8qH7inL6t7wsufZU/eLOb15gd
-         038g==
+        bh=qGsmWUifmdUWchWcdJY2/HqBgvlxTOt3fS0Wzpm+gj8=;
+        b=I/9ZbTyCXO8ypfQgF8+ZADatNTI80pexwrz9iWsUXvLO2JPWOLzzj0Iw93eDhDdkmn
+         iEs336MTe2dbkNUZBGluEK7oZCcsHcujh/ATf7EVRtFnLxbC8uvulKD2rzBn5Nl2Nbal
+         CvxiewbhrkH1phcHNPrkZV1oE3SmUav7uZgEXwXfXBod1ockzeOghFQqfx+JWsojbTv9
+         qr/P/bwdWlHs6+Sfr+FvtTQLNFs2pjmx5ZUItCRBKvjLsVnppQLr9g/aNvuCBEgKj8Qo
+         BQpUk0Jtu+wiWbapVU+zPR1O1TwyWisGXqCjVVXJ9VyWGkoWri9aeOwiAdVegOBtkynE
+         gCGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783975688; x=1784580488;
+        d=1e100.net; s=20251104; t=1783975691; x=1784580491;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=wimWBVOYQqwPaXI8zWtV5Ue4b9r9c1tb/eSNhf7mAu8=;
-        b=RaP8xZqkHEBH46HZ/moFISpuIpGHIyMO4tdVZFURHLHZPRttW/AhoXyFUauwDC2J+5
-         6bfqe+2+0GdpJREzqfbapjH520aiTVdmPZYm2y7FPBc/6eeo6HY2OAVp9HoSvkED8h+8
-         oofPpLWSW+wFob/V6EPHtZxip93dicCx5kYxqTNw4c48a1E3iyfMqU8Ys30uZwmAgeQ5
-         FrrAIW6lHPH+cJF0KBL2aoP2UZvBckv/gmAokJZpUpfPXXTkSekigBIysfzqnZ9RxFrw
-         KcMKAJ5USm0jmDRv5MasHRsm579BSL8ebmFGx5EFn/VEqCTaarJ8NjYDJVWddxjf1/zw
-         DUdw==
-X-Gm-Message-State: AOJu0YxPJksb2iDYdLIc3ivwL7rCBUz4FBkREa+OKlDy25EOALKFqNoe
-	hwRadVmUixrSm8x6hsDN5ObAiGrGfWCLnteFyrjhaHHEJcNV7/3LH81HwFxttX1bNCY=
-X-Gm-Gg: AfdE7clccAQILj60TqSiu+pz9SidJmvdb2ZeGNx3EwHGDVb9lySNXOPhLNGYO9s5IKl
-	JnX/deaPIKAokn4JOgj2Qwu6F3f89rZ280/p4QhiFNoMmCo2ZPe5Ws7fap4Nf1RQOHZqvu5UtNU
-	W7GcRFb/EWgLjFkJnhpOttd3CMygHsnWbIucMdCdtXww1cptCSGF+3/rJblflfMHJzoGipvw1v6
-	8/yZkSI+I0Bw1JfjJ2swdtzj67z7Qn/jbu7qZY5W7A4VGJFwxUGYgjo7tGFulMZDt3NDVe1IYoS
-	TJWUzvvZhI8BPHJ3EnjQLws7Tym7GaDXHiSwP0yXGtiKapHx6lDfy6HkqIxKkHTrcStOaaLRclI
-	W/iOBkfZ0So+SkUjCwjnt+ObpOHaR0cv9Q0q6Bsc19kH18OpPCxG17ePkrmTU1gP1XuKldRx6yt
-	sgqwGuldbb5YkN7HaWj/pmPjUF2TmL5B1J3V7ysFeQdapc60vsSabbUyjpGc5onzv0+ybl0Um3Q
-	owe31zTDcFsuUoZDck=
-X-Received: by 2002:a05:600c:8119:b0:493:f744:e7d5 with SMTP id 5b1f17b1804b1-49518324f47mr8276255e9.38.1783975688441;
-        Mon, 13 Jul 2026 13:48:08 -0700 (PDT)
+        bh=qGsmWUifmdUWchWcdJY2/HqBgvlxTOt3fS0Wzpm+gj8=;
+        b=oLB4Eg/XbHZEmrEWCD5NOe3qqXpemZeWi8N7JFvhmv19mRTMFVxYnJal2aA2brCt0a
+         hTxu2fxXMmGzU3kTCtYdQNn5bSJowCs+wP9oa6imrGgGh/8/xH5IZ+3aLXJlTPUv5794
+         v0ttopHPdQ7SSiDeTZcLhe6xOKLuQPEFK7aoXcrCfq5i2Jm/bMx0RaEe7+lzESoNk3Ar
+         oxReOR6fXklFmaMasrPNvOHP9xuO+rxspnvFUS44bnB321/LnmTySslN7KoL5aOcu7Zt
+         Fsbtvvd0NGPUJm3d4DXYlfOMiF9qqEYNIr6Q/6eSjLseNoSwEa0qsmNOlK+nyaoz9avN
+         qWgQ==
+X-Gm-Message-State: AOJu0YxvHwALQ71Pi0f9xTNBBqry07Wm1IuA40pGemVQ3nEX+Yjz+vA7
+	EB5v57A9JRuheUa7dTy7684X6eHGhcBAhTc8Y02qVJz5UXuK8F9vCfbgOWTHsm5vOX84Wg==
+X-Gm-Gg: AfdE7cm4vWMU7obTIxkxbNazKtWJAOP7HDD1xqbMLU8E/0stMUODJVBO5KK2hTZFybh
+	Tedrn/xxuOU/t2kqqVYe/4J7tq6QfzQ3zac81TOUtJfcE4pquxCsE1hmtX5flTJfU91UCEWlaWc
+	IgbmzVqDFahnLNEA3WEAWxxpBDS8mM2qalTmQ2Kn4pUHQpY1aDLPwxeoKETNMqEKGU6yjQ805y1
+	wMVNKwrL0kn7wwvPJTpVJmqJEBfkvHwkZmJvFXhSYZXHVy7MYCdH5wYHekGQjrECDvkyTPEqX+X
+	/j70QNvX/yhF7uawQQ3REj+v2rZ8iuTV78AJU8ygf1e53conckIuEKLHYBsjbSf71+pYzPYVGIv
+	bjtr6wzs1KdcaUbctsr0/Z7Be2uNfWpOZoF/Uf6M8f0Njh8LeiwMNV1zBDVHb/wr0lRhALRiLTI
+	K0ozPGrjlfZoxLL6lO+88BZRm2iERoZXCFRdFhg/O3y3SbWnZD3xFtoeJbF9l7FZEpO5Q0kT55B
+	sBqt9XQmTKxt0OyI7k=
+X-Received: by 2002:a05:600c:468f:b0:493:df1d:7488 with SMTP id 5b1f17b1804b1-493f87e5b4cmr116516855e9.16.1783975691233;
+        Mon, 13 Jul 2026 13:48:11 -0700 (PDT)
 From: Frediano Ziglio <freddy77@gmail.com>
 X-Google-Original-From: Frediano Ziglio <frediano.ziglio@citrix.com>
 To: xen-devel@lists.xenproject.org
@@ -102,185 +102,153 @@ Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Juergen Gross <jgross@suse.com>,
 	Frediano Ziglio <frediano.ziglio@citrix.com>
-Subject: [PATCH v9 1/4] libs/call: cache up to 4 pages in hypercall bounce buffers
-Date: Mon, 13 Jul 2026 21:47:59 +0100
-Message-ID: <20260713204802.105115-2-frediano.ziglio@citrix.com>
+Subject: [PATCH v9 3/4] libs/guest: allocate various migration arrays just once
+Date: Mon, 13 Jul 2026 21:48:01 +0100
+Message-ID: <20260713204802.105115-4-frediano.ziglio@citrix.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260713204802.105115-1-frediano.ziglio@citrix.com>
 References: <20260713204802.105115-1-frediano.ziglio@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1783975689-452FA6B2-A076A490/0/0
+X-purgate-ID: tlsNG-33051d/1783975691-C0B5DCF4-400B2EB9/0/0
 X-purgate-type: clean
-X-purgate-size: 5706
+X-purgate-size: 4798
 
 From: Edwin Török <edwin.torok@citrix.com>
 
-During migration there are a lot of mmap/munmap calls,
-because xc_get_pfn_type_batch() exceeds the default hypercall bounce
-buffer cache size, and needs to allocate every time it is called.
-
-munmap() is slow, especially in a PV Dom0 (takes an emulation fault),
-so is best avoided.
-
-Eventually it'd be good if the memory pool from  xmalloc_tlsf.c
-was reused here, but for now make it handle the commonly encountered
-sizes (so far up to 4 pages).
+Allocate these array just once at the start of migration,
+using the maximum batch size, and free them at the end.
 
 Signed-off-by: Edwin Török <edwin.torok@citrix.com>
 Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
-Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
 ---
 Changes since v2:
 - change prefix in subject.
 
-Changes since v4:
-- fix off-by-one bug.
+Changes since v3:
+- fix comment style
 
-Changes since v5:
-- avoids potential buffer underflow if nr_pages is 0 calling cache_alloc.
+Changes since v4:
+- change order of fields in structure.
 
 Changes since v6:
-- align changes made to cache_alloc to cache_free.
-
-Changes since v7:
-- use "unsigned int" instead of "unsigned".
+- split preparation commit.
 
 Changes since v8:
-- added Reviewed-by.
+- remove useless memset;
+- initialize variables while declaring them.
 ---
- tools/libs/call/buffer.c  | 34 +++++++++++++++++++++++-----------
- tools/libs/call/core.c    |  3 ++-
- tools/libs/call/private.h |  8 +++++---
- 3 files changed, 30 insertions(+), 15 deletions(-)
+ tools/libs/guest/xg_sr_common.h |  6 +++++
+ tools/libs/guest/xg_sr_save.c   | 45 ++++++++++++---------------------
+ 2 files changed, 22 insertions(+), 29 deletions(-)
 
-diff --git a/tools/libs/call/buffer.c b/tools/libs/call/buffer.c
-index 155e4f9d43..b7d00185c4 100644
---- a/tools/libs/call/buffer.c
-+++ b/tools/libs/call/buffer.c
-@@ -49,6 +49,9 @@ static void *cache_alloc(xencall_handle *xcall, size_t nr_pages)
+diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
+index 7574c9f5b6..c07c6db59e 100644
+--- a/tools/libs/guest/xg_sr_common.h
++++ b/tools/libs/guest/xg_sr_common.h
+@@ -246,6 +246,12 @@ struct xc_sr_context
+             struct xc_sr_context_save_buffers
+             {
+                 xen_pfn_t batch_pfns[MAX_BATCH_SIZE];
++                xen_pfn_t mfns[MAX_BATCH_SIZE];
++                xen_pfn_t types[MAX_BATCH_SIZE];
++                void *local_pages[MAX_BATCH_SIZE];
++                struct iovec iov[MAX_BATCH_SIZE + 2]; /* Headers + data. */
++                uint64_t rec_pfns[MAX_BATCH_SIZE];
++                int errors[MAX_BATCH_SIZE];
+             } *buffers;
+         } save;
+ 
+diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
+index 22348db445..6a77e33a47 100644
+--- a/tools/libs/guest/xg_sr_save.c
++++ b/tools/libs/guest/xg_sr_save.c
+@@ -86,15 +86,12 @@ static int write_checkpoint_record(struct xc_sr_context *ctx)
+ static int write_batch(struct xc_sr_context *ctx)
  {
-     void *p = NULL;
+     xc_interface *xch = ctx->xch;
+-    xen_pfn_t *mfns = NULL, *types = NULL;
+     void *guest_mapping = NULL;
+-    void **local_pages = NULL;
+-    int *errors = NULL, rc = -1;
++    int rc = -1;
+     unsigned int i, p, nr_pages = 0, nr_pages_mapped = 0;
+     unsigned int nr_pfns = ctx->save.nr_batch_pfns;
+     void *page, *orig_page;
+-    uint64_t *rec_pfns = NULL;
+-    struct iovec *iov = NULL; int iovcnt = 0;
++    int iovcnt = 0;
+     xen_pfn_t *const batch_pfns = ctx->save.buffers->batch_pfns;
+     struct {
+         struct xc_sr_rhdr rec;
+@@ -110,28 +107,21 @@ static int write_batch(struct xc_sr_context *ctx)
+         },
+     };
  
-+    if ( nr_pages == 0 )
-+        return NULL;
-+
-     cache_lock(xcall);
+-    assert(nr_pfns != 0);
+-    assert(nr_pfns <= MAX_BATCH_SIZE);
+-
+     /* Mfns of the batch pfns. */
+-    mfns = malloc(nr_pfns * sizeof(*mfns));
++    xen_pfn_t *const mfns = ctx->save.buffers->mfns;
+     /* Types of the batch pfns. */
+-    types = malloc(nr_pfns * sizeof(*types));
++    xen_pfn_t *const types = ctx->save.buffers->types;
+     /* Errors from attempting to map the gfns. */
+-    errors = malloc(nr_pfns * sizeof(*errors));
++    int *const errors = ctx->save.buffers->errors;
+     /* Pointers to locally allocated pages.  Need freeing. */
+-    local_pages = calloc(nr_pfns, sizeof(*local_pages));
++    void **const local_pages = ctx->save.buffers->local_pages;
+     /* iovec[] for writev(). */
+-    iov = malloc((nr_pfns + 2) * sizeof(*iov));
++    struct iovec *const iov = ctx->save.buffers->iov;
+     /* page_data record PFNs list */
+-    rec_pfns = malloc(nr_pfns * sizeof(*rec_pfns));
++    uint64_t *const rec_pfns = ctx->save.buffers->rec_pfns;
  
-     xcall->buffer_total_allocations++;
-@@ -56,13 +59,13 @@ static void *cache_alloc(xencall_handle *xcall, size_t nr_pages)
-     if ( xcall->buffer_current_allocations > xcall->buffer_maximum_allocations )
-         xcall->buffer_maximum_allocations = xcall->buffer_current_allocations;
+-    if ( !mfns || !types || !errors || !local_pages || !iov || !rec_pfns )
+-    {
+-        ERROR("Unable to allocate arrays for a batch of %u pages",
+-              nr_pfns);
+-        goto err;
+-    }
++    assert(nr_pfns != 0);
++    assert(nr_pfns <= MAX_BATCH_SIZE);
  
--    if ( nr_pages > 1 )
-+    if ( nr_pages > ARRAY_SIZE(xcall->buffer_cache) )
-     {
-         xcall->buffer_cache_toobig++;
-     }
--    else if ( xcall->buffer_cache_nr > 0 )
-+    else if ( xcall->buffer_cache_nr[nr_pages-1] > 0 )
-     {
--        p = xcall->buffer_cache[--xcall->buffer_cache_nr];
-+        p = xcall->buffer_cache[nr_pages-1][--xcall->buffer_cache_nr[nr_pages-1]];
-         xcall->buffer_cache_hits++;
-     }
-     else
-@@ -79,15 +82,18 @@ static int cache_free(xencall_handle *xcall, void *p, size_t nr_pages)
- {
-     int rc = 0;
- 
-+    if ( nr_pages == 0 )
-+        return 0;
-+
-     cache_lock(xcall);
- 
-     xcall->buffer_total_releases++;
-     xcall->buffer_current_allocations--;
- 
--    if ( nr_pages == 1 &&
--         xcall->buffer_cache_nr < BUFFER_CACHE_SIZE )
-+    if ( nr_pages && nr_pages <= ARRAY_SIZE(xcall->buffer_cache) &&
-+         xcall->buffer_cache_nr[nr_pages-1] < BUFFER_CACHE_SIZE )
-     {
--        xcall->buffer_cache[xcall->buffer_cache_nr++] = p;
-+        xcall->buffer_cache[nr_pages-1][xcall->buffer_cache_nr[nr_pages-1]++] = p;
-         rc = 1;
-     }
- 
-@@ -108,17 +114,23 @@ void buffer_release_cache(xencall_handle *xcall)
-     DBGPRINTF("current allocations:%d maximum allocations:%d",
-               xcall->buffer_current_allocations,
-               xcall->buffer_maximum_allocations);
--    DBGPRINTF("cache current size:%d",
--              xcall->buffer_cache_nr);
-+    for ( unsigned int i = 0; i < ARRAY_SIZE(xcall->buffer_cache_nr); ++i )
+     iov[0].iov_base = &hdrs;
+     iov[0].iov_len = sizeof(hdrs);
+@@ -249,14 +239,11 @@ static int write_batch(struct xc_sr_context *ctx)
+  err:
+     if ( guest_mapping )
+         xenforeignmemory_unmap(xch->fmem, guest_mapping, nr_pages_mapped);
+-    for ( i = 0; local_pages && i < nr_pfns; ++i )
++    for ( i = 0; i < nr_pfns; ++i )
 +    {
-+        DBGPRINTF("cache current size[%u pages]:%d", i+1,
-+                xcall->buffer_cache_nr[i]);
+         free(local_pages[i]);
+-    free(rec_pfns);
+-    free(iov);
+-    free(local_pages);
+-    free(errors);
+-    free(types);
+-    free(mfns);
++        local_pages[i] = NULL;
 +    }
-     DBGPRINTF("cache hits:%d misses:%d toobig:%d",
-               xcall->buffer_cache_hits,
-               xcall->buffer_cache_misses,
-               xcall->buffer_cache_toobig);
  
--    while ( xcall->buffer_cache_nr > 0 )
-+    for ( unsigned int i = 0; i < ARRAY_SIZE(xcall->buffer_cache_nr); ++i )
+     return rc;
+ }
+@@ -790,8 +777,8 @@ static int setup(struct xc_sr_context *ctx)
+ 
+     if ( !ctx->save.buffers || !dirty_bitmap || !ctx->save.deferred_pages )
      {
--        p = xcall->buffer_cache[--xcall->buffer_cache_nr];
--        osdep_free_pages(xcall, p, 1);
-+        while ( xcall->buffer_cache_nr[i] > 0 )
-+        {
-+            p = xcall->buffer_cache[i][--xcall->buffer_cache_nr[i]];
-+            osdep_free_pages(xcall, p, i + 1);
-+        }
-     }
- 
-     cache_unlock(xcall);
-diff --git a/tools/libs/call/core.c b/tools/libs/call/core.c
-index 02c4f8e1ae..dd8877c1a0 100644
---- a/tools/libs/call/core.c
-+++ b/tools/libs/call/core.c
-@@ -14,6 +14,7 @@
-  */
- 
- #include <stdlib.h>
-+#include <string.h>
- 
- #include "private.h"
- 
-@@ -44,7 +45,7 @@ xencall_handle *xencall_open(xentoollog_logger *logger, unsigned open_flags)
-     xentoolcore__register_active_handle(&xcall->tc_ah);
- 
-     xcall->flags = open_flags;
--    xcall->buffer_cache_nr = 0;
-+    memset(xcall->buffer_cache_nr, 0, sizeof(xcall->buffer_cache_nr));
- 
-     xcall->buffer_total_allocations = 0;
-     xcall->buffer_total_releases = 0;
-diff --git a/tools/libs/call/private.h b/tools/libs/call/private.h
-index 9c3aa432ef..8e6a208975 100644
---- a/tools/libs/call/private.h
-+++ b/tools/libs/call/private.h
-@@ -31,13 +31,15 @@ struct xencall_handle {
-     Xentoolcore__Active_Handle tc_ah;
- 
-     /*
--     * A simple cache of unused, single page, hypercall buffers
-+     * A simple cache of unused, small, hypercall buffers
-+     * buffer_cache[i]'s size is (i+1) pages
-      *
-      * Protected by a global lock.
-      */
- #define BUFFER_CACHE_SIZE 4
--    int buffer_cache_nr;
--    void *buffer_cache[BUFFER_CACHE_SIZE];
-+#define BUFFER_CACHE_NRPAGES 4
-+    int buffer_cache_nr[BUFFER_CACHE_NRPAGES];
-+    void *buffer_cache[BUFFER_CACHE_NRPAGES][BUFFER_CACHE_SIZE];
- 
-     /*
-      * Hypercall buffer statistics. All protected by the global
+-        ERROR("Unable to allocate memory for dirty bitmaps, batch pfns and"
+-              " deferred pages");
++        ERROR("Unable to allocate memory for dirty bitmaps, deferred pages"
++              " and various batch buffers");
+         rc = -1;
+         errno = ENOMEM;
+         goto err;
 -- 
 2.43.0
 
