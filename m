@@ -4,41 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 482D9C43458
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Jul 2026 07:32:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1362011.1614014 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E180FC44501
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Jul 2026 10:27:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1362112.1614024 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wjXcm-0007SY-GU; Tue, 14 Jul 2026 07:32:16 +0000
+	id 1wjaM1-0002fP-Mq; Tue, 14 Jul 2026 10:27:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1362011.1614014; Tue, 14 Jul 2026 07:32:16 +0000
+Received: by outflank-mailman (output) from mailman id 1362112.1614024; Tue, 14 Jul 2026 10:27:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wjXcm-0007SR-DQ; Tue, 14 Jul 2026 07:32:16 +0000
-Received: by outflank-mailman (input) for mailman id 1362011;
- Tue, 14 Jul 2026 02:25:27 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wjaM1-0002fH-IO; Tue, 14 Jul 2026 10:27:09 +0000
+Received: by outflank-mailman (input) for mailman id 1362112;
+ Tue, 14 Jul 2026 10:27:07 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <akpm@linux-foundation.org>) id 1wjSpq-0004WD-RK
- for xen-devel@lists.xenproject.org; Tue, 14 Jul 2026 02:25:27 +0000
+ (envelope-from <andrew.cooper@citrix.com>) id 1wjaLz-0002f9-Na
+ for xen-devel@lists.xenproject.org; Tue, 14 Jul 2026 10:27:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wjSpq-008ZYB-4d
- for xen-devel@lists.xenproject.org; Tue, 14 Jul 2026 04:25:26 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wjaLz-00GoIc-4W
+ for xen-devel@lists.xenproject.org; Tue, 14 Jul 2026 12:27:07 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <akpm@linux-foundation.org>)
- id 6a559dab-bab6-0a2a0a5309dd-0a2a4502ae2e-34
- for <xen-devel@lists.xenproject.org>; Tue, 14 Jul 2026 04:25:25 +0200
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.2)
- (envelope-from <akpm@linux-foundation.org>)
- id 6a559e13-64c6-0a2a45020019-aceafc1fadea-3
- for <xen-devel@lists.xenproject.org>; Tue, 14 Jul 2026 04:25:24 +0200
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 821A641877;
- Tue, 14 Jul 2026 02:25:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 93DE31F000E9;
- Tue, 14 Jul 2026 02:25:19 +0000 (UTC)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6a560ee5-2eae-0a2a0a5409dd-0a2a450ab26a-44
+ for <xen-devel@lists.xenproject.org>; Tue, 14 Jul 2026 12:27:07 +0200
+Received: from [52.101.56.15]
+ (helo=BN1PR04CU002.outbound.protection.outlook.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6a560ef9-f2d2-0a2a450a0019-3465380f1ea3-3
+ for <xen-devel@lists.xenproject.org>; Tue, 14 Jul 2026 12:27:06 +0200
+Received: from IA1PR03MB8288.namprd03.prod.outlook.com (2603:10b6:208:59e::6)
+ by LV3PR03MB7456.namprd03.prod.outlook.com (2603:10b6:408:1a0::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.202.19; Tue, 14 Jul
+ 2026 10:27:00 +0000
+Received: from IA1PR03MB8288.namprd03.prod.outlook.com
+ ([fe80::b5ee:28c6:e04b:5599]) by IA1PR03MB8288.namprd03.prod.outlook.com
+ ([fe80::b5ee:28c6:e04b:5599%3]) with mapi id 15.21.0181.012; Tue, 14 Jul 2026
+ 10:26:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,107 +55,187 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=korg header.d=linux-foundation.org header.i="@linux-foundation.org" header.h="Date:From:To:Cc:Subject:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linux-foundation.org; s=korg; t=1783995922;
-	bh=dxhqIlF4Nmwz7Dc6V0zHplATkq8zPUSt2q/Zds9EZa8=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=b48cJk93FtKmn41eVdolAVE/uzQX6EHo01Pnkn0OgnY1vIvJtpHyTyl3C+S0onbuL
-	 GGMGjmfE2JKefejiLP1J3PzT6MIi/Ch6j4XkBShkTRk15H8PEW9ZSYVvQQ/3WhTIGU
-	 P9nMjGwkFSOLhnsQCjHUwc7HZ389d5X722tVvR6w=
-Date: Mon, 13 Jul 2026 19:25:19 -0700
-From: Andrew Morton <akpm@linux-foundation.org>
-To: Lorenzo Stoakes <ljs@kernel.org>
-Cc: David Hildenbrand <david@kernel.org>, "Liam R. Howlett"
- <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport
- <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, Michal Hocko
- <mhocko@suse.com>, Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- Benjamin LaHaise <bcrl@kvack.org>, Alexander Viro
- <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Jan Kara
- <jack@suse.cz>, Hugh Dickins <hughd@google.com>, Baolin Wang
- <baolin.wang@linux.alibaba.com>, Jann Horn <jannh@google.com>, Pedro
- Falcato <pfalcato@suse.de>, Muchun Song <muchun.song@linux.dev>, Oscar
- Salvador <osalvador@suse.de>, Zi Yan <ziy@nvidia.com>, Nico Pache
- <npache@redhat.com>, Ryan Roberts <ryan.roberts@arm.com>, Dev Jain
- <dev.jain@arm.com>, Barry Song <baohua@kernel.org>, Lance Yang
- <lance.yang@linux.dev>, Usama Arif <usama.arif@linux.dev>, Madhavan
- Srinivasan <maddy@linux.ibm.com>, Michael Ellerman <mpe@ellerman.id.au>,
- Nicholas Piggin <npiggin@gmail.com>, "Christophe Leroy (CS GROUP)"
- <chleroy@kernel.org>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Lucas Stach <l.stach@pengutronix.de>,
- Russell King <linux+etnaviv@armlinux.org.uk>, Christian Gmeiner
- <christian.gmeiner@gmail.com>, Inki Dae <inki.dae@samsung.com>, Seung-Woo
- Kim <sw0312.kim@samsung.com>, Kyungmin Park <kyungmin.park@samsung.com>,
- Krzysztof Kozlowski <krzk@kernel.org>, Peter Griffin
- <peter.griffin@linaro.org>, Alim Akhtar <alim.akhtar@samsung.com>, Jani
- Nikula <jani.nikula@linux.intel.com>, Joonas Lahtinen
- <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Tvrtko Ursulin <tursulin@ursulin.net>, Rob Clark
- <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>,
- Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang
- <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, Marijn Suijten
- <marijn.suijten@somainline.org>, Lyude Paul <lyude@redhat.com>, Danilo
- Krummrich <dakr@kernel.org>, Tomi Valkeinen
- <tomi.valkeinen@ideasonboard.com>, Sandy Huang <hjc@rock-chips.com>, Heiko
- =?ISO-8859-1?Q?St=FCbner?= <heiko@sntech.de>, Andy Yan
- <andy.yan@rock-chips.com>, Thierry Reding <thierry.reding@kernel.org>,
- Mikko Perttunen <mperttunen@nvidia.com>, Jonathan Hunter
- <jonathanh@nvidia.com>, Gerd Hoffmann <kraxel@redhat.com>, Dmitry Osipenko
- <dmitry.osipenko@collabora.com>, Gurchetan Singh
- <gurchetansingh@chromium.org>, Chia-I Wu <olvaffe@gmail.com>, Zack Rusin
- <zack.rusin@broadcom.com>, Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>, Matthew Brost
- <matthew.brost@intel.com>, Thomas =?ISO-8859-1?Q?Hellstr=F6m?=
- <thomas.hellstrom@linux.intel.com>, Oleksandr Andrushchenko
- <oleksandr_andrushchenko@epam.com>, Helge Deller <deller@gmx.de>, Kees Cook
- <kees@kernel.org>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai
- <tiwai@suse.com>, Boris Brezillon <boris.brezillon@collabora.com>, Steven
- Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>,
- linux-mm@kvack.org, linux-kernel@vger.kernel.org,
- linux-mips@vger.kernel.org, linux-aio@kvack.org,
- linux-fsdevel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- dri-devel@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
- linux-arm-kernel@lists.infradead.org, linux-samsung-soc@vger.kernel.org,
- intel-gfx@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
- virtualization@lists.linux.dev, intel-xe@lists.freedesktop.org,
- xen-devel@lists.xenproject.org, linux-fbdev@vger.kernel.org,
- linux-sound@vger.kernel.org, Jani Nikula <jani.nikula@intel.com>
-Subject: Re: [PATCH v2 00/13] mm: convert more vm_flags_t users to
- vma_flags_t
-Message-Id: <20260713192519.58113fa69c169d3f5f82e453@linux-foundation.org>
-In-Reply-To: <20260711-b4-vma-flags-mm-v2-0-0fa2357d5431@kernel.org>
-References: <20260711-b4-vma-flags-mm-v2-0-0fa2357d5431@kernel.org>
-X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1783995925-3CF53A87-16AC031A/0/0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=dNAF/Hjw9S0WoVwh2i7oZ9lXwnSYX4rQE4VlcNsNOb+z0BaEz6rNsDP4UaDxA9mZh6IQhvXmjpnSfhHJlp7MXJOMwYru+1UwzpJ4ltZevys7dS437uxN0zLpM6tZbG62BMIwRVaCjmnr2YDojf28Ajl1aWSmUhs78j4vt+wiuKWMugl77JdP7qwf2nJKmdmCGB/h/ZPmei0T9L/ehmX8Tr4yr3SH+EChAe4lN1ALXrdSYS5uoH48C1GcTUNeOUOBOVma53M00TlXX2aUcE4A2KSmP0CBph6ZxwG23K97WMUkl2V8fz+BH5A2VbLS8MsoL5I5GwbGDAI+330+ARMugw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=8tvKb6Qd0yeNV6HluNTdlmoFDN0fHnF3V7UZ17frJmQ=;
+ b=a0p4RbBgToIcGhbbJTqcCG6OrfP4DYJmcPcnWPdbEg+bABL+Y+OegGfii+6dVirJHq/YwAICYkJl1YmeUGhCwrf23wjM3lm8XuLMQtWS8K+ZVKi2C4/F2eNK5ijYxSv8UvPDEY8cTVpDBL1w/d41/qbHe7knl7/93vmQ0yDjGln4DZRdvt2IcRqOlNhEwft0r3aHn2PU6lCy4eO5th3rDJ+vwCMYkZ3rO+KQ4GOouWp1Ga8PR5hPMntU8gI7g8jxNhJ1hJFMP/PiEmZ0S55jSd0tW5kxsbLtyFFtSLdrFRmP9IwItbuPgYuZ63NNsGn0UqqEo0e8YTxebAlJUHc90Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8tvKb6Qd0yeNV6HluNTdlmoFDN0fHnF3V7UZ17frJmQ=;
+ b=ZifZlHGR0t7F9LBYyBuRrDOjCTMxhVICoz3iXI614CJqAXd1Jm1qwzE2u6K3yuwxKmTqO5Z/g6o8/mh1iCX1JCK/mxZZGp3ATcHT/Bi561jcpmK4Y9GuG+qw7JhzWCt+nN/L1YVtXJBhXkJzasWQKwJY4s54pErCxqW1mF1cfMg=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <8c265153-6774-4904-9791-9386c7018e11@citrix.com>
+Date: Tue, 14 Jul 2026 11:26:55 +0100
+User-Agent: Mozilla Thunderbird
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Guillaume Thouvenin <guillaume.thouvenin@vates.tech>,
+ Anthony PERARD <anthony.perard@vates.tech>, George Dunlap <dunlapg@umich.edu>
+Subject: Re: [PATCH for-4.22 v1] tools/ocaml: xenbus - Fix handling of
+ requests with len = 0 for socket connections
+To: Andrii Sultanov <andriy.sultanov@vates.tech>,
+ xen-devel@lists.xenproject.org, Oleksii Kurochko <oleksii.kurochko@gmail.com>
+References: <1783598431.8631fc262581453bbf619ec5b2062170.19f46c03b15000edb5@vates.tech>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <1783598431.8631fc262581453bbf619ec5b2062170.19f46c03b15000edb5@vates.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: LO3P265CA0027.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:387::17) To IA1PR03MB8288.namprd03.prod.outlook.com
+ (2603:10b6:208:59e::6)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: IA1PR03MB8288:EE_|LV3PR03MB7456:EE_
+X-MS-Office365-Filtering-Correlation-Id: 36e4f7c8-d7ec-45f4-25d6-08dee1926f57
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|23010399003|376014|366016|4133799003|22082099003|56012099006|11063799006|5023799004|6133799003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	Rg1Sz55qHsCU6AiF3LxOlS5JQ54PfP9YTJEUD8jUjTzl1Sl+/erowvnVxqOYuJh5yMqDLOw5N1s851vLFe4G+dBMBiDRNbHLmIiXHuTzqzNxSis3zadh7nTpHGEOrLEZXyrRhdPeG9AchbNT03jGPTayFc7lW94/RbLWxR9TavceeBMU74MrjOY1N90DFePFTmQ0Y7miZsXWpyRsXBVqijyiPw954XpJQJQxTv5/tVc9OhMtbyoVpVcZwTHHAEO3CQQWbeCitbvszbjJfTfEMwPOt0YEOKyZg5Hj4Ppnjw8ODjz6qd3aODugWgit+PvNnbs/PHfRnrEP5rSWvmhDsdY0iFbp9tP8CwIBTL+t3w0JeAIyWesuelTvd/mocb0So8t8mzZ8DXGXPU+MTC437KdoHafDUv/Tx0sH/drl7lJWIononlXv2O8ZtbFJloQFmRFAvdS9IvMnG77+ACu4mq1fTm9xDFRUVjQJi25fEbXvazRGjWevAY9OquS3KOYfh9D8eoC/3RueTy4pnbiiqEjwwJGXePRxGMHa0Me8I2IIjLAZbVGjepKgSN7/+0yyIfqu3fH+EQd7FyWjO2S3a1IyhkLikMZCJZ3C2vM7LcEqGqeyBmJGrgY+J3mt/6Uy8Hv1iy2lF3MGxDzJO7Oqz9l2nVtGos1R/NqHbyxUia4=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA1PR03MB8288.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(376014)(366016)(4133799003)(22082099003)(56012099006)(11063799006)(5023799004)(6133799003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?T2RSamdsUUFSK3Bxblp6cHp6c2ljWFZnbnluWklSeW9uSWo3cldkZ1pIcDdO?=
+ =?utf-8?B?UkdIYlBxRHBZMmVxNEJ5NTR2dlB2SFYwdmFHQ3V1NDdiMm1qeGdJR1hDeDV0?=
+ =?utf-8?B?UVdSTGJON2dYNHVOMCtzSnd0V1I5UEVxQkJseTE2b0syeHlNa3dEODV5WnUv?=
+ =?utf-8?B?Qyt0Nm5oc0h6ZlhlZVFjWC9BUWozSUZscTVIaFpLbG1hZzhLa0Q3aDZzZU0y?=
+ =?utf-8?B?TFg0NWIxN0l6aWpsUDVxbWI2Qk5WM1I3MXBXNkc5SzM5SzNNZThDRnFUTy9O?=
+ =?utf-8?B?Y2ZDY3VGd0c1Mis3N3JtY1R4OVBxY0kzZ0FOM2xwdzBFcWRPZ2tIcTRDUDVH?=
+ =?utf-8?B?YmZCSkY0U1MzUy9lakJ2Y1NkejFpc1BDQVlqWGpvZFdmNENLV2R0Vk9HMTRz?=
+ =?utf-8?B?eFEwcnowaGh6akZmL1VVcHo3Q2FsL1hDSmdSeEEzajV6NEphZFNHSkNzS1Vt?=
+ =?utf-8?B?dk9jUW1uZ0Rsdzg4QzJhQVpYNW93MmZ5SVlYVmZzWFZhVEtvSVJWMjZmaThV?=
+ =?utf-8?B?UmEyaC9qZXVralpCVEZBb2VmSTFkaHoxVXpuSDg3bDEweFJISTFnanNQc3lP?=
+ =?utf-8?B?OUtzeUdHSVZZajE4RDBHV2JxcWJTTjkvek1nME9Zd3gxbXVxRTJxV21DK1FS?=
+ =?utf-8?B?MWFLMlY0MFJMNHB0RmR2dktGMHZEd0hCS2NXSWFaaWVad1Q1RjJhZExxckZH?=
+ =?utf-8?B?SUhZVzZUeGFYSldCZjBjQVgrOGtwcUN0T2h2ZldwUFdKQ1RjWWt5cXV2RXE3?=
+ =?utf-8?B?V3AxV3BNalZKQ2lPeHlCTDRsdm15ZnRMVFpkcitJN05pZXpxbWppYU9pS2Z5?=
+ =?utf-8?B?ZWsyT1JBVUNpbkFiU0xlRHRNUkNjMGJJNVlxRjRhbytYUnRVVktBbzcwWUNB?=
+ =?utf-8?B?aXpsN2RMVjhrdWpDVU1XL1Z0RkVXN0U3VUpidS9YdmlrdGx1VnRlS05wYXhx?=
+ =?utf-8?B?QmllVlVSTzNob09hcTVFVE8waW9IK1ZINWhzdDhGOFVDQ2Q5RWtVTW04S2lM?=
+ =?utf-8?B?WW1YbVNFUVE5YVp2bFd1OFVQU0FLdWxONXRrMzRzdGJFTlFzaDU5Y0hONG1V?=
+ =?utf-8?B?Z05JV2IwTkRtTi9PcUJmOGgwaVBwMVpHbmhlTkJ2YmE4QS9kekhNOEdUckVv?=
+ =?utf-8?B?K1V5bVdNdGtqUTJtSzZXZHU0WExlSVcwSHdVRDA0bkhickpYVDdsZnlIbSt1?=
+ =?utf-8?B?aDlTU0d1elNNb0haOUF3SUx4amJaWmxkUFZManJlTXpJNGYyeVNqOUMxRGFH?=
+ =?utf-8?B?QjY4dnhDTGpleWZvYVYzVDBaNjF5eDJ6WXlJakwwVnljODU2Ymh6ZFFVNTlM?=
+ =?utf-8?B?aGs2U1psVDFhUFQ2YXF6VnloODdyZkhnK3ZrS3dQWmpjZTdxVmlHaFRDS3Nj?=
+ =?utf-8?B?bFhCVk9VS254QjMrL2N2OXdmWm00dkwwaTRxb0trT2hURmFLaDhrL3JWcHV5?=
+ =?utf-8?B?ejdWK1JzZlVWMkEwRjFvMVZhdDdIQmZ5azJubytxZ1JaWTd1VmdlNWQvaXVL?=
+ =?utf-8?B?RGFsZEptYmVRejJYMy95T3c5VDJTYWMwR0Y3Z0N5K29oWXM1UjFRZ28ydmlV?=
+ =?utf-8?B?T3F6Y3dhY0FyVkU1c0RDd0ZCU0xMdnlUc1lhczdVK3BZZUpvUHI2c2NPVVh1?=
+ =?utf-8?B?V2krSEJQZnd4S3U2eXZnY3c3YS9MVmNtUC9QMG1SaUJDeFRuTS9HZ29HNHAv?=
+ =?utf-8?B?U1VpUzRPYytDb1A1MjRBbzVmN2pDb0NMWEl6WFVJbGJ5WmlTd3dKc29LVTRU?=
+ =?utf-8?B?K1JqRnpnVGtYWkhrVnpVS2hOVGZUNm9qVkpFN2RycEoyWmVqdDZCWFdMdGxG?=
+ =?utf-8?B?VCtmSWVSVTM2R3FQV1hqdUM1TVlocXJjL2xvYXRkdHRQczEwM3Q3YlZvRmph?=
+ =?utf-8?B?T1Z6SDdpa0ZRYXRHUFNlVml6Y3Zab3g4ejQzZlpoZE0xWE9rNEo3TElhcFpa?=
+ =?utf-8?B?clRDWHY3bXlPdW50aDU1dUdHRS9NSGRQdzZBRnRKM2RoUGZkN1k4c1VpMm52?=
+ =?utf-8?B?dzAzaEpmTUNiSDY1ZStjR2pTNXIvalM0c2tpWFdTcnY2QVk1ME5jTE8weTFI?=
+ =?utf-8?B?Rm5FeGV2dmx6ZDZSeENNN3c5bG9wdHViMEpsTlFjRStFZStieVpXdzhOd21N?=
+ =?utf-8?B?MDlwa1pFeVdlWi9LbXMzUi8rYkJnUDRMWDFRbWNkMFY3Mk9HekFxblliNWVX?=
+ =?utf-8?B?akhrWFl6ejZRQStmM080cWt6TnY1L1VoaEFjbWtiZEprV2Fad1B6d1lxTlM0?=
+ =?utf-8?B?c2JwT0Fac2FNQkdwS3JwRkdibUZOemZxZXU4THo4dDU3NS8vN0hYYW5FdFBu?=
+ =?utf-8?B?ZkxjREVOd3Y1eklUZnNPOWFjYmlKZnV0Y3NLT2REV2JORjdsSEpQUT09?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 36e4f7c8-d7ec-45f4-25d6-08dee1926f57
+X-MS-Exchange-CrossTenant-AuthSource: IA1PR03MB8288.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jul 2026 10:26:58.3417
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: jCDRPIU9MJ1CyMHKmKa+iTpl4ZEy7mOby44x4xbObVMNVIzn/sxdxTlsUDVSsbiFD5twDYW/tS9RDlOxB4mewhBCyL5ZuOVzB9JWpQZ5EUg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR03MB7456
+X-purgate-ID: tlsNG-4011c0/1784024826-4A9D9CFC-7E40983A/0/0
 X-purgate-type: clean
-X-purgate-size: 689
+X-purgate-size: 1443
 
-On Sat, 11 Jul 2026 19:44:57 +0100 Lorenzo Stoakes <ljs@kernel.org> wrote:
+On 09/07/2026 1:00 pm, Andrii Sultanov wrote:
+> Following the report at https://lore.kernel.org/xen-devel/CAFLBxZaeTMcF4tcV45MJdCVx4A6qbzQdjKei_Quh_iLrtARVFA@mail.gmail.com/
+>
+> Without this fix, the backend would be stuck waiting on the zero-sized
+> body until the next request comes in.
+>
+> Instead return the request immediately after reading the header, there's
+> no need to wait for another call to .has_more_input and .input
+>
+> Reported-by: George Dunlap <dunlapg@umich.edu>
+> Signed-off-by: Andrii Sultanov <andriy.sultanov@vates.tech>
 
-> This series makes further progress in converting usage of the deprecated
-> vm_flags_t type to its replacement, vma_flags_t.
-> 
-> It focuses on mm, though updates some users of mm APIs also.
-> 
-> It updates:
-> 
-> * The core do_mmap() code path for VMA mapping.
-> * Unmapped area logic.
-> * The usage of mm->def_vma_flags.
-> * VMA page protection bit logic.
-> * General usage of VMA flags in core mm code, mlock, mprotect, mremap.
+Oleksii: I'm requesting a release ack on this patch.  It has been
+reviewed
+(1783604323.8631fc262581453bbf619ec5b2062170.19f471a22b0000edb5@vates.tech
+but on a disconnected thread).
 
-Added to mm-new, thanks.
+There have been two bug reports so far; George (on list), and Benny (on
+Matrix).
 
-And oh my, what a lot of pre-existing issues:
-	https://sashiko.dev/#/patchset/20260711-b4-vma-flags-mm-v2-0-0fa2357d5431@kernel.org
+It is logically a regression vs 4.21.  A new feature in 4.22 causes `xl
+list -l`, `xl migrate`, etc to hang when using the oxenstored rather
+than (C)xenstored.
 
+There was no reply at first because the security team were investigating
+a potential security angle, but we've concluded that there isn't one.
 
+Technically a form of this bug exists in 4.21 also, but it's not used
+automatically on any path.  It's triggerable by `xl list -x` and nothing
+else we're aware of.
+
+Anyway, oxenstored is the default xenstored if you have Ocaml tools in
+the build, so this is a critical bug in 4.22.
+
+~Andrew
 
