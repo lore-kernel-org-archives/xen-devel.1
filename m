@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9853DC4450A
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Jul 2026 06:16:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1362677.1614441 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AACD0C4450A
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Jul 2026 06:22:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1362689.1614452 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wjsuf-00080l-2S; Wed, 15 Jul 2026 06:16:09 +0000
+	id 1wjt0Y-0001Jj-Rl; Wed, 15 Jul 2026 06:22:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1362677.1614441; Wed, 15 Jul 2026 06:16:09 +0000
+Received: by outflank-mailman (output) from mailman id 1362689.1614452; Wed, 15 Jul 2026 06:22:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wjsue-00080e-Te; Wed, 15 Jul 2026 06:16:08 +0000
-Received: by outflank-mailman (input) for mailman id 1362677;
- Wed, 15 Jul 2026 06:16:06 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wjt0Y-0001Il-NH; Wed, 15 Jul 2026 06:22:14 +0000
+Received: by outflank-mailman (input) for mailman id 1362689;
+ Wed, 15 Jul 2026 06:22:14 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wjsuc-00080W-QU
- for xen-devel@lists.xenproject.org; Wed, 15 Jul 2026 06:16:06 +0000
+ (envelope-from <freddy77@gmail.com>) id 1wjt0Y-0001Gm-4E
+ for xen-devel@lists.xenproject.org; Wed, 15 Jul 2026 06:22:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wjsuc-0022nh-6u
- for xen-devel@lists.xenproject.org; Wed, 15 Jul 2026 08:16:06 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wjt0X-00DZpn-HD
+ for xen-devel@lists.xenproject.org; Wed, 15 Jul 2026 08:22:13 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a5725a3-5cb7-0a2a0a5109dd-0a2a450bdf0a-10
- for <xen-devel@lists.xenproject.org>; Wed, 15 Jul 2026 08:16:06 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a5725a5-b7e8-0a2a450b0019-d155802cb1d7-3
- for <xen-devel@lists.xenproject.org>; Wed, 15 Jul 2026 08:16:05 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-493b7612475so38560715e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 14 Jul 2026 23:16:05 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f4634e0d9sm13417656f8f.2.2026.07.14.23.16.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 14 Jul 2026 23:16:04 -0700 (PDT)
+ (envelope-from <freddy77@gmail.com>)
+ id 6a5726fa-e002-0a2a0a5209dd-0a2a450288c0-46
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Jul 2026 08:22:13 +0200
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <freddy77@gmail.com>)
+ id 6a572715-6ca4-0a2a45020019-d155dd31e1b3-3
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Jul 2026 08:22:13 +0200
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-47de0093c42so1429382f8f.3
+ for <xen-devel@lists.xenproject.org>; Tue, 14 Jul 2026 23:22:13 -0700 (PDT)
+Received: from localhost.localdomain (2.115.147.147.dyn.plus.net.
+ [147.147.115.2]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47f4635a63esm14336663f8f.9.2026.07.14.23.22.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Jul 2026 23:22:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,158 +53,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Cc:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784096165; x=1784700965; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=TD6xLO5TNytDgtHGbboyC47Q2Y/dMwbsodJ9rP5RlFA=;
-        b=a4q8TGVpw0KjnckKEM3wjhXeAARLMKisMmxWLPBzrokRNj53QSb1vKxShERu5PyaOf
-         wyzEFxpX6rWnlRwWhZ3f64SwKfndn9n6mKzgncez+vOo8Tz/5PjIIH5YadD2RULYvf5n
-         bHBFQA0XMZKGrLeCiYxbrRvLqi5484TULYqJ2O1VmLfKWNWVoDeacTC5GQinPiD1j4X8
-         hnVqLY5jGUUmiwGmyvy4QBodxp6HOOYRNLbJTZ5/GTggSgsYcPx8CWNoPpvoP8ShwPRd
-         4dowAVpUz8hpilHspb2mXbni9XJi734PbvEH01uCVVw/1Ve5JDgqLkj5EXUbJgOlxBXL
-         JhlA==
+        d=gmail.com; s=20251104; t=1784096533; x=1784701333; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=pqCnw296qrnwdmXLYDWU2GesaXoLsxGgUNGqF+FPq+0=;
+        b=X83jrNlkieOwg4NaW4oBRr71PTdcVvcRdSeaGDbXhhLRD1Oombf2wATCiFEtb5tP22
+         N09Nh7+ISnFS2OFFoCQSqG+3ACuRmQYtRB1MOBquZaQj1Tb+Z5wlsZFNAT5riGv/H8v/
+         ZlRbTkyzidYI6m4ntLTHzgFOHdO8XiSyR3tE8gIeGqsjl7Ag9TlZfjpxQHAV32PjyHsP
+         Mp0Zk70x7wk4u7eOQw7B5OHTPvbJl+EIbh+5UfxeVmW7O1TRfml0ZBrZvJ+1yjbR1m+g
+         eaKOgM9TCAxG+T185JNn2vBvY17cCOFpn2w4+130MKIbmQ0XtEOFej9t74dgFooudkZ0
+         +M2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784096165; x=1784700965;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=TD6xLO5TNytDgtHGbboyC47Q2Y/dMwbsodJ9rP5RlFA=;
-        b=VB5m0KNqPPNIc8pqL8sDa5KWP2DsSpfw/5r+TAc1+kvcJ/c4IbudaL6pwU2jxjMGpO
-         ti1lbosoxa6JtkCGDu2HOOSBdGCEATvDTe5FD4NiGixsnw34ERe5sovhD+HYFWJCRf4h
-         iZm+iGig5Ij6AD5UyDEHF4sAlzYFhqsDiUDtZUZxa7q/L3yAjHdrgXZ3ycDpCHFcuFWI
-         xN9/+mx+ynJWI1//C4FQ+sOm+Jv55qCQUX6Li5fR12xrTz5zlz+CX65QpRY/FLvVPbm0
-         TZu4owh5OV9CQb9tubAYiik+fuidp37/ZXc70ZAzVl+S/jtO7QqZ49+VRQHD9G5z32B7
-         6HMg==
-X-Gm-Message-State: AOJu0YzxrkHmNfW/pe7dsilMT3kwdT39fUICXXqPReSaZMoZ4VAA6ufg
-	vVbZ94dMwutqZZR8d/VZJX/alQasqkwqs6KaQHr1Now960wN4Ql4m3CNAph+wZTMwA==
-X-Gm-Gg: AfdE7ckLND2EvacisNDzwzdjS9ZsKgzDVtPeBVfxF+krBQCqnnOrsjQp9r80U5OgLk4
-	MaBpIjaZZn1Pogt5Y5NqyLDODOfHdvs5RR8wMrn+bYaWUTPnkHhqWzUUEuyqEW6djE3IH7UjGOp
-	GHvOAWCowHdFiDGLMNNdHHp1iOu154JBEs504hXZuj60mHRyMTfL8hrtntO3QmFOaG7DpNY4iha
-	VEA6uEH/GV7dc8ai4eUKHX7diFt/VaLtHIbxlDXwT9Vr/49fBXw2pHaHSsKF10F+ggbuDYBOqgr
-	K/UykyawnfS3/VhA3wWCOWPWN53puMGdqByOgZNwy6pt6o7y3yS+oYTsUL7GooHWIh4U8TcMDwR
-	7GFZcp3Hr787nxDPjgggDeH1jtnyk9qAvl98aN6SqoZ9QI2wyHHqtKOelXGagxl3EMcVr/WY/Fq
-	NAwpzVzic1PH89vyBXFm0vsmr8FEgLuaPlhuCfb2L2qOBgtjyNPl1D+hnKgAYGt6L/bchge8YrD
-	W5SUCtA/1zGBnY=
-X-Received: by 2002:a05:600c:46ce:b0:493:b811:e549 with SMTP id 5b1f17b1804b1-4951830a532mr72559705e9.29.1784096164990;
-        Tue, 14 Jul 2026 23:16:04 -0700 (PDT)
-Message-ID: <6a474432-fd4d-4b69-948e-9d32c0b31790@suse.com>
-Date: Wed, 15 Jul 2026 08:16:04 +0200
+        d=1e100.net; s=20251104; t=1784096533; x=1784701333;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=pqCnw296qrnwdmXLYDWU2GesaXoLsxGgUNGqF+FPq+0=;
+        b=aZdI2XrFRUp7C6AGsW5OXCGs9PFNuY4tWO60vckn4gO5olDlMgHO7b8noKa2AphGt4
+         HxeZwmdsvkbH4nHZyxtnryLGu6K8Lg40n6DENKfdeY1cqIcIG+F8cHL+1wQ0VNn6UTel
+         0AEOg2KmjZ9u5y6fm1PEBDwAoWUuzP3aIjWxC6i6DSXSaP6A7grMffxNC8f8BZy4+Kof
+         /EZZ0XTR0SW4QtYnsLTMhrMst8wym+bJu0Kq78mTIWUxS5Pp0k7E1khj6+JbUzTVlG+r
+         gwLEzbpgsq0iX9BANkfimXqgsx8W/jx7AaCURIlispAAWkdMX+aRGApb/BrAlm3hwfbd
+         TtRQ==
+X-Gm-Message-State: AOJu0Yyh1hDO/RXdv3qFUEeKvkTj0g+QwEQDqEDmTX6c1zvLhs4x4JqO
+	ijc7AdnJBs5/7LzCBKG2z9JJC0X+48vsu6uTa9q3qnwXHB5whFN+lmjiMzn4FNofHSMGcw==
+X-Gm-Gg: AfdE7ckFxCoavS8FZNFFnCmk2696FasclIQd8uaU1c/ODC3KmtBg40puYGbso+YPHAV
+	JIMO/anKrqgKdRWKg+u1ctYiwIbXHzLYp0dTot1EedLV1Sz+XiDeoJeMeLWvmWaQFvjX1DNQZ49
+	qZFxkUz/0sJCU234sr+XdgTdegB6uNv7J8N3p10G1ERqqRbiCCNT2oobKVHfIfD48CydCLMEzMH
+	0dYBNtxYUfUuxtiOl/P/e+oIzABdZbY9kO+K5V0n+tk8IiIjNDt76PiajOhS5Rv8Ajx2TGy87YA
+	TK2Oxd64d8Q4qIr+QqXHS8IsuqEabiGzRo8gAoBZhZ8BjfQv+bnE6m03ct5tRSU0d5CWO+mRA/v
+	BuI1dl9+eVPwj+qn13uI4r9h6nRgoc+P6AJHllnZsoC9AesgouJWWNPqcuXF39psq4d2XvJLV54
+	TboL0oY/d8TkGlc9LdYZiGCJXzI7Z+Y3lf4Fltw37qkXCxtC4QvToHzy4rF0DG0S4wD2gp0W44u
+	WxalAQxAM5onOcv17A=
+X-Received: by 2002:a5d:5f83:0:b0:44a:be4:d0e4 with SMTP id ffacd0b85a97d-47f2dccb3bemr17034965f8f.25.1784096532832;
+        Tue, 14 Jul 2026 23:22:12 -0700 (PDT)
+From: Frediano Ziglio <freddy77@gmail.com>
+X-Google-Original-From: Frediano Ziglio <frediano.ziglio@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Frediano Ziglio <frediano.ziglio@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: [PATCH v8 1/4] Align relevant sections to 4KB
+Date: Wed, 15 Jul 2026 07:22:03 +0100
+Message-ID: <20260715062206.328049-2-frediano.ziglio@citrix.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260715062206.328049-1-frediano.ziglio@citrix.com>
+References: <20260715062206.328049-1-frediano.ziglio@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: domU crash when resuming from suspend - Xen 4.22
-To: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-References: <ajUm2SQtMD6Y-K9S@mail-itl> <alZt_boT-hJuVlD6@mail-itl>
-Content-Language: en-US
-Cc: xen-devel <xen-devel@lists.xenproject.org>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <alZt_boT-hJuVlD6@mail-itl>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1784096165-A82F49EA-DB4903E3/0/0
+X-purgate-ID: tlsNG-720697/1784096533-F14AE2AC-30B94D61/0/0
 X-purgate-type: clean
-X-purgate-size: 5001
+X-purgate-size: 2023
 
-On 14.07.2026 19:12, Marek Marczykowski-Górecki wrote:
-> On Fri, Jun 19, 2026 at 01:24:09PM +0200, Marek Marczykowski-Górecki wrote:
->> Hi,
->>
->> I'm continuing testing 4.22 and found this:
->>
->> When a domU is suspended (even without host suspend) it crashes on
->> resume with:
->>
->>     [   24.374629] BUG: kernel NULL pointer dereference, address: 0000000000000020
->>     [   24.374647] #PF: supervisor read access in kernel mode
->>     [   24.374657] #PF: error_code(0x0000) - not-present page
->>     [   24.374668] PGD 0 P4D 0 
->>     [   24.374675] Oops: Oops: 0000 [#1] SMP NOPTI
->>     [   24.374685] CPU: 0 UID: 0 PID: 19 Comm: migration/0 Not tainted 6.18.31-1.qubes.13.fc41.x86_64 #1 PREEMPT(full) 
->>     [   24.374705] Stopper: multi_cpu_stop+0x0/0x140 <- __stop_cpus.constprop.0+0x6f/0xb0
->>     [   24.374723] RIP: 0010:multi_cpu_stop+0x63/0x140
->>     [   24.374734] Code: 49 0f a3 1c 24 41 0f 92 c6 c7 44 24 04 00 00 00 00 31 ed 49 8d 5f 24 eb 2d 41 83 fd 02 74 6e 41 83 fd 03 74 49 f0 ff 0b 75 13 <41> 8b 47 20 41 8b 77 10 83 c0 01 41 89 77 24 41 89 47 20 41 83 fd
->>     [   24.374764] RSP: 0018:ffffc900000abe30 EFLAGS: 00010046
->>     [   24.374775] RAX: 0000000000000000 RBX: ffffc90000a13de4 RCX: 0000000000000404
->>     [   24.374790] RDX: 0000000000000040 RSI: ffffffffffffffff RDI: 0000000000770ef0
->>     [   24.374801] RBP: 0000000000000002 R08: ffffc900000abc80 R09: ffffc900000abc8c
->>     [   24.374813] R10: 0000000000000000 R11: ffff88801e81cdc0 R12: ffffffff81835ac0
->>     [   24.374825] R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
->>     [   24.374837] FS:  0000000000000000(0000) GS:ffff88809b369000(0000) knlGS:0000000000000000
->>     [   24.374850] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
->>     [   24.374860] CR2: 0000000000000020 CR3: 000000000d6a2002 CR4: 0000000000770ef0
->>     [   24.374873] PKRU: 00000000
->>     [   24.374877] Call Trace:
->>     [   24.374884]  <TASK>
->>     [   24.374891]  ? __pfx_multi_cpu_stop+0x10/0x10
->>     [   24.374900]  cpu_stopper_thread+0xa3/0x170
->>     [   24.374908]  ? __pfx_smpboot_thread_fn+0x10/0x10
->>     [   24.374917]  smpboot_thread_fn+0xf3/0x220
->>     [   24.374925]  kthread+0xfc/0x240
->>     [   24.374933]  ? __pfx_kthread+0x10/0x10
->>     [   24.374940]  ? __pfx_kthread+0x10/0x10
->>     [   24.374949]  ret_from_fork+0x158/0x170
->>     [   24.374957]  ? __pfx_kthread+0x10/0x10
->>     [   24.374965]  ret_from_fork_asm+0x1a/0x30
->>     [   24.374973]  </TASK>
->>     [   24.374978] Modules linked in: snd_seq_dummy snd_hrtimer snd_seq snd_seq_device snd_timer snd soundcore cfg80211 rfkill vfat fat xenfs binfmt_misc nft_reject_inet nf_reject_ipv4 nf_reject_ipv6 nft_reject nft_ct nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 nf_tables intel_rapl_msr intel_rapl_common intel_uncore_frequency_common intel_pmc_ssram_telemetry intel_vsec polyval_clmulni ghash_clmulni_intel xen_netfront xen_privcmd xen_gntdev xen_gntalloc xen_blkback xen_evtchn fuse loop nfnetlink ip_tables overlay xen_blkfront
->>     [   24.375064] CR2: 0000000000000020
->>     [   24.375071] ---[ end trace 0000000000000000 ]---
->>     [   24.375080] RIP: 0010:multi_cpu_stop+0x63/0x140
->>     [   24.375089] Code: 49 0f a3 1c 24 41 0f 92 c6 c7 44 24 04 00 00 00 00 31 ed 49 8d 5f 24 eb 2d 41 83 fd 02 74 6e 41 83 fd 03 74 49 f0 ff 0b 75 13 <41> 8b 47 20 41 8b 77 10 83 c0 01 41 89 77 24 41 89 47 20 41 83 fd
->>     [   24.375115] RSP: 0018:ffffc900000abe30 EFLAGS: 00010046
->>     [   24.375124] RAX: 0000000000000000 RBX: ffffc90000a13de4 RCX: 0000000000000404
->>     [   24.375142] RDX: 0000000000000040 RSI: ffffffffffffffff RDI: 0000000000770ef0
->>     [   24.375155] RBP: 0000000000000002 R08: ffffc900000abc80 R09: ffffc900000abc8c
->>     [   24.375170] R10: 0000000000000000 R11: ffff88801e81cdc0 R12: ffffffff81835ac0
->>     [   24.375184] R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
->>     [   24.375200] FS:  0000000000000000(0000) GS:ffff88809b369000(0000) knlGS:0000000000000000
->>     [   24.375214] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
->>     [   24.375226] CR2: 0000000000000020 CR3: 000000000d6a2002 CR4: 0000000000770ef0
->>     [   24.375241] PKRU: 00000000
->>     [   24.375247] Kernel panic - not syncing: Fatal exception
->>     [   25.417403] Shutting down cpus with NMI
->>     [   25.417447] Kernel Offset: disabled
->>
->> There is no change on the Linux kernel side (neither dom0 nor domU), the
->> only change is updating Xen 4.19.4 -> 4.22-rc2 (seems to be already
->> broken on -rc1 too). This happens for both HVM and PVH domains. Haven't
->> tried PV domU (but dom0 survives host suspend).
-> 
-> Any ideas?
+Required by UEFI CA memory mitigation.
 
-Didn't you indicate on Matrix that there's also a kernel version dependency?
-Iirc 6.12 doesn't exhibit the issue.
+It is a requirement for NX_COMPAT so the PE can be loaded with W^X perms
+in the pagetables.
 
-Short of anyone having a good idea from just the data available, perhaps the
-next step would be to further limit version ranges on both sides?
+NX_COMPAT is a requirement from shim-review,
+https://github.com/rhboot/shim-review#do-you-have-the-nx-bit-set-in-your-shim-if-so-is-your-entire-boot-stack-nx-compatible-and-what-testing-have-you-done-to-ensure-such-compatibility
 
-Jan
+Sections with different permissions must be in separate pages.
+In the case of debug sections they are contiguous and have the same
+permissions, including the immediately preceding .reloc section, so it's
+not an issue if they are not aligned to the page.
+Before the .debug sections you could have the .reloc or the SBAT section,
+either are permission-compatible.
+
+Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
+Acked-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+---
+Changes since v1:
+- Change subject.
+
+Changes since v2:
+- Improved commit message and subject.
+
+Changes since v3:
+- Added Acked-by;
+- Improved commit message.
+
+Changes since v4:
+- Added missing comment;
+- Added Acked-by.
+---
+ xen/arch/x86/xen.lds.S | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
+index b9e888e596..8e63cf5bc2 100644
+--- a/xen/arch/x86/xen.lds.S
++++ b/xen/arch/x86/xen.lds.S
+@@ -162,8 +162,8 @@ SECTIONS
+        __note_gnu_build_id_end = .;
+   } PHDR(note) PHDR(text)
+ #elif defined(BUILD_ID_EFI)
+-  /* Workaround bug in binutils < 2.36 */
+-  . = ALIGN(32);
++  /* Align to satisfy UEFI CA memory mitigation. */
++  . = ALIGN(PAGE_SIZE);
+   DECL_SECTION(.buildid) {
+        __note_gnu_build_id_start = .;
+        *(.buildid)
+@@ -330,6 +330,8 @@ SECTIONS
+   __2M_rwdata_end = ALIGN(SECTION_ALIGN);
+ 
+ #ifdef EFI
++  /* Align to satisfy UEFI CA memory mitigation. */
++  . = ALIGN(PAGE_SIZE);
+   .reloc ALIGN(4) : {
+     __base_relocs_start = .;
+     *(.reloc)
+-- 
+2.43.0
+
 
