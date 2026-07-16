@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F8B2C44501
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 09:23:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1363675.1615227 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99C2AC4450A
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 09:51:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1363702.1615252 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkIJS-0001cP-Cj; Thu, 16 Jul 2026 09:23:26 +0000
+	id 1wkIk8-0007Jo-K5; Thu, 16 Jul 2026 09:51:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1363675.1615227; Thu, 16 Jul 2026 09:23:26 +0000
+Received: by outflank-mailman (output) from mailman id 1363702.1615252; Thu, 16 Jul 2026 09:51:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkIJS-0001cI-9v; Thu, 16 Jul 2026 09:23:26 +0000
-Received: by outflank-mailman (input) for mailman id 1363675;
- Thu, 16 Jul 2026 09:23:25 +0000
+	id 1wkIk8-0007Jh-Gl; Thu, 16 Jul 2026 09:51:00 +0000
+Received: by outflank-mailman (input) for mailman id 1363702;
+ Thu, 16 Jul 2026 09:50:59 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f6a3cd8ee000edb5@swg.vates.tech>)
- id 1wkIJQ-0001cA-TJ
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 09:23:25 +0000
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f6a5603fd000edb5@swg.vates.tech>)
+ id 1wkIk6-0007Jb-Vo
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 09:50:59 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkIJQ-00DYyt-9g
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 11:23:24 +0200
+ id 1wkIk5-005zBn-TK
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 11:50:57 +0200
 Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f6a3cd8ee000edb5@swg.vates.tech>)
- id 6a58a305-bab6-0a2a0a5309dd-0a2a450c8736-20
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 11:23:24 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f6a5603fd000edb5@swg.vates.tech>)
+ id 6a58a97b-e002-0a2a0a5209dd-0a2a450caa3e-18
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 11:50:57 +0200
+Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
  by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f6a3cd8ee000edb5@swg.vates.tech>)
- id 6a58a30b-f479-0a2a450c0019-b9ff1c22a735-3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 11:23:24 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f6a5603fd000edb5@swg.vates.tech>)
+ id 6a58a981-f479-0a2a450c0019-b9ff1c23a365-3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 11:50:57 +0200
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19f6a3cd8ee000edb5.006 for <xen-devel@lists.xenproject.org>
+ by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 19f6a5603fd000edb5.006 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 16 Jul 2026 09:23:20 +0000
+ Thu, 16 Jul 2026 09:50:49 +0000
 Received: from [192.168.1.18] (88-188-240-210.subs.proxad.net [88.188.240.210])
  (Authenticated sender: teddy.astie)
- by mail2.vates.fr (Postfix) with ESMTPSA id A4BAB80400;
- Thu, 16 Jul 2026 11:23:19 +0200 (CEST)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 17E3380400;
+ Thu, 16 Jul 2026 11:50:49 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,36 +60,35 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=WJUJepoYbMUT5NX2URHoA5PGDZCR86MpN0/VVwzXTlE=;
+ q=dns/txt; s=selector1; bh=KKnjUxDShBINea+gSpdmtApV9OnigBYq7Xvw8V4Vs04=;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=lu0VShF3QtQzzqtn1yxjpd1+7QyPVYxtw8KjLqkbv9+NYF6MBPlStica0SgbzGqKti3CACrhl
- dNBDdHVdYlbHNiX6uuRtsqVMeZxmzL/XC+TIo6NHkel7I53ZnkrqQegQsF6tO10VVaQRjQMH/o+
- FBMODm4SctkPWqJkaSQd6uLOFbs+q+7Sk4bTfShlFrBG2yxXlzkT7RpvJb+iKFBou5kYMU+PFKr
- omJTvEAPbnXeEaSmXweW5jRTQbDOLcotrY27cd7nuePkwkwKzuHBmZH99EBIe3D0unM0vfjV374
- sPkBHi3Z6es5x6GruQj4CvVbrYdTypsrc5rfV1FsZnrw==
-X-Zone-Loop: a58b14e11b13d561f30b868cb072109d78e80d988883
+ b=KJs+r9aMgC8whR/fEc4Vckj2iMc+gjPjNkRHSjcPvRaAqMGzBhVIIUazenLGfbSLB1y/oTs+4
+ 6ACzpiuaGkRbC/3D73buj/d1miOSmmxtJraB13ov0/+hkSCUSLXfapSDseNgnwofLrFX3wooduJ
+ vzlEFRjDCoY9tjTlpL+im/cyCqaz8NUjA98dayNhfPYoaUPoEE1Pegs5/YEPWuM/IiogzR50Ap4
+ C739WbRkndXWZibZpTKf/yreVpMSbshSFwsVhEmNXlAfOnbo0lfRm84P0727Y7g60IpQrPsdvT7
+ 3RyKWWTg08mDo7aA0kVE9UNOrg0uqCHN/d0Ayd90CMyA==
+X-Zone-Loop: 69e909a7e8686654c799a0ef48dd3c9de519b992607c
 x-campaign-type: default
-x-transaction-id: 9f6700cc-4a11-47c2-b660-c448e5f4d96f
-x-swg-uid: 01-860a0f5f-d950-40a1-a5a7-e4c62d0e386e
+x-transaction-id: 4c73a522-11a1-4a8b-84a4-cdd2f6fcd33a
+x-swg-uid: 01-d0096ee1-5740-4e42-a281-5f6e8ea1c458
 X-Mailer: Sweego
 Message-ID:
- <1784193800.8631fc262581453bbf619ec5b2062170.19f6a3cd8ee000edb5@vates.tech>
-x-swg-bid: 1784193800.8631fc262581453bbf619ec5b2062170.19f6a3cd8ee000edb5
+ <1784195449.8631fc262581453bbf619ec5b2062170.19f6a5603fd000edb5@vates.tech>
+x-swg-bid: 1784195449.8631fc262581453bbf619ec5b2062170.19f6a5603fd000edb5
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
 X-Originating-IP: [37.26.189.201]
-Date: Thu, 16 Jul 2026 11:23:18 +0200
+Date: Thu, 16 Jul 2026 11:50:48 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/4] xen/console: use bool as return value from
- printk_ratelimit()
+Subject: Re: [PATCH v3 2/4] xen/console: correct leaky-bucket rate limiter
 To: dmukhin@ford.com, xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com,
  julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com,
  sstabellini@kernel.org
 References: <20260715201902.2984407-1-dmukhin@ford.com>
- <20260715201902.2984407-2-dmukhin@ford.com>
+ <20260715201902.2984407-3-dmukhin@ford.com>
 Content-Language: en-US
 From: Teddy Astie <teddy.astie@vates.tech>
 Autocrypt: addr=teddy.astie@vates.tech; keydata=
@@ -126,48 +125,92 @@ Autocrypt: addr=teddy.astie@vates.tech; keydata=
  O485NOTKwGOxyWb006cTMh53xPkAJFQu4Tvdj+odsHz88jqw5wfPG0BYWx0I/FspYj7N9kZR
  8ULR9nX0LvpzJ/kB4NgHIUt8YtIL6ZSfM2dbF7fKzvx1UqFfvozJZwFzfEieJLXa4nlGgR6D
  x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <20260715201902.2984407-2-dmukhin@ford.com>
+In-Reply-To: <20260715201902.2984407-3-dmukhin@ford.com>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------DpM3Pzucz8cW7nRnUf8QBy4e"
+ boundary="------------hrZXQ0Xn5AqFAMTU8LIvDMaN"
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1784193799886
-X-purgate-ID: tlsNG-d25034/1784193804-026DEA5B-AE2552F4/0/0
+X-Bm-Transport-Timestamp: 1784195449319
+X-purgate-ID: tlsNG-d25034/1784195457-018C5A5B-295EEA62/0/0
 X-purgate-type: clean
-X-purgate-size: 5392
+X-purgate-size: 8753
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------DpM3Pzucz8cW7nRnUf8QBy4e
-Content-Type: multipart/mixed; boundary="------------a0yX22pbC0zf6aMfqF79JBuW";
+--------------hrZXQ0Xn5AqFAMTU8LIvDMaN
+Content-Type: multipart/mixed; boundary="------------jGb0yb4EF79A0wwPmf2V941L";
  protected-headers="v1"
 From: Teddy Astie <teddy.astie@vates.tech>
 To: dmukhin@ford.com, xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com,
  julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com,
  sstabellini@kernel.org
-Message-ID: <c4bffcbe-e949-455f-9cd5-4e9e2c79367d@vates.tech>
-Subject: Re: [PATCH v3 1/4] xen/console: use bool as return value from
- printk_ratelimit()
+Message-ID: <bbd3bdff-d509-42d4-98aa-cf60a2aa8e07@vates.tech>
+Subject: Re: [PATCH v3 2/4] xen/console: correct leaky-bucket rate limiter
 References: <20260715201902.2984407-1-dmukhin@ford.com>
- <20260715201902.2984407-2-dmukhin@ford.com>
-In-Reply-To: <20260715201902.2984407-2-dmukhin@ford.com>
+ <20260715201902.2984407-3-dmukhin@ford.com>
+In-Reply-To: <20260715201902.2984407-3-dmukhin@ford.com>
 
---------------a0yX22pbC0zf6aMfqF79JBuW
-Content-Type: multipart/mixed; boundary="------------nu35DXeRavTnRPgJ0aiE8fPr"
+--------------jGb0yb4EF79A0wwPmf2V941L
+Content-Type: multipart/mixed; boundary="------------piSvKiHin4DS0DlTG9kPz2Ff"
 
---------------nu35DXeRavTnRPgJ0aiE8fPr
+--------------piSvKiHin4DS0DlTG9kPz2Ff
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: base64
 
 TGUgMTUvMDcvMjAyNiDDoCAyMjoyNCwgZG11a2hpbkBmb3JkLmNvbSBhIMOpY3JpdMKgOg0K
-PiBGcm9tOiBEZW5pcyBNdWtoaW4gPGRtdWtoaW5AZm9yZC5jb20+DQo+IA0KPiB7X18sfXBy
-aW50a19yYXRlbGltaXQoKSBhcmUgcHJlZGljYXRlcy4gTWFrZSB0aGF0IHByb25vdW5jZWQg
-YnkgdXBkYXRpbmcgdGhlDQo+IHJldHVybiB2YWx1ZSB0byBib29sZWFuLg0KPiANCj4gTm90
-IGEgZnVuY3Rpb25hbCBjaGFuZ2UuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBEZW5pcyBNdWto
-aW4gPGRtdWtoaW5AZm9yZC5jb20+DQo+IEFja2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxp
-Y2hAc3VzZS5jb20+DQoNClJldmlld2VkLWJ5OiBUZWRkeSBBc3RpZSA8dGVkZHkuYXN0aWVA
-dmF0ZXMudGVjaD4NCg==
---------------nu35DXeRavTnRPgJ0aiE8fPr
+PiBGcm9tOiBEZW5pcyBNdWtoaW4gPGRtdWtoaW5AZm9yZC5jb20+DQo+IA0KPiBVc2UgZXhp
+c3RpbmcgcHJpbnRrX3JhdGVsaW1pdF9tcyBhbmQgcHJpbnRrX3JhdGVsaW1pdF9idXJzdCB2
+YXJpYWJsZXMgaW4NCj4gZG9fcHJpbnRrX3JhdGVsaW1pdCgpIGluc3RlYWQgb2YgaGFyZGNv
+ZGVkIHZhbHVlcyA1MDAwIGFuZCAxMCByZXNwZWN0aXZlbHkuDQo+IA0KPiBFbnN1cmUgcmF0
+ZSBsaW1pdGVyIGlzIGRpc2FibGVkIGlmIGVpdGhlciBwcmludGtfcmF0ZWxpbWl0X21zIG9y
+DQo+IHByaW50a19yYXRlbGltaXRfYnVyc3QgaXMgMC4gTWFrZSBzdXJlIG5vIHVubmVjZXNz
+YXJ5IGluaXRpYWxpemF0aW9uIGlzIGRvbmUNCj4gaW4gdGhlIGNvcm5lciBjYXNlLg0KPiAN
+Cj4gQWxzbywgc2ltcGxpZnkgdGhlIGxpbWl0ZXIgY29kZSBieSB1c2luZyBtaW4oKS4NCj4g
+DQo+IFNpZ25lZC1vZmYtYnk6IERlbmlzIE11a2hpbiA8ZG11a2hpbkBmb3JkLmNvbT4NCj4g
+LS0tDQo+IENoYW5nZXMgc2luY2UgdjI6DQo+IC0gZml4ZWQgdHlwaW5nIGFuZCAzMi1iaXQg
+aW50ZWdlciBvdmVyZmxvdyBwcm9ibGVtDQo+IC0tLQ0KPiAgIHhlbi9kcml2ZXJzL2NoYXIv
+Y29uc29sZS5jIHwgMjEgKysrKysrKysrKysrKy0tLS0tLS0tDQo+ICAgMSBmaWxlIGNoYW5n
+ZWQsIDEzIGluc2VydGlvbnMoKyksIDggZGVsZXRpb25zKC0pDQo+IA0KPiBkaWZmIC0tZ2l0
+IGEveGVuL2RyaXZlcnMvY2hhci9jb25zb2xlLmMgYi94ZW4vZHJpdmVycy9jaGFyL2NvbnNv
+bGUuYw0KPiBpbmRleCA1ZDM5NWY4ODJlMDguLmRlOWYyNDMyNDQ1ZCAxMDA2NDQNCj4gLS0t
+IGEveGVuL2RyaXZlcnMvY2hhci9jb25zb2xlLmMNCj4gKysrIGIveGVuL2RyaXZlcnMvY2hh
+ci9jb25zb2xlLmMNCj4gQEAgLTEyNzQsMjEgKzEyNzQsMjYgQEAgYm9vbCBfX3ByaW50a19y
+YXRlbGltaXQodW5zaWduZWQgaW50IHJhdGVsaW1pdF9tcywNCj4gICAgICAgICAgICAgICAg
+ICAgICAgICAgICB1bnNpZ25lZCBpbnQgcmF0ZWxpbWl0X2J1cnN0KQ0KPiAgIHsNCj4gICAg
+ICAgc3RhdGljIERFRklORV9TUElOTE9DSyhyYXRlbGltaXRfbG9jayk7DQo+IC0gICAgc3Rh
+dGljIHVuc2lnbmVkIGxvbmcgdG9rcyA9IDEwICogNSAqIDEwMDA7DQo+IC0gICAgc3RhdGlj
+IHVuc2lnbmVkIGxvbmcgbGFzdF9tc2c7DQo+ICsgICAgc3RhdGljIHVuc2lnbmVkIGxvbmcg
+bG9uZyB0b2tzLCBsYXN0X21zZzsNCj4gICAgICAgc3RhdGljIHVuc2lnbmVkIGludCBtaXNz
+ZWQ7DQo+ICsgICAgdW5zaWduZWQgbG9uZyBsb25nIG5vdywgbGltaXQ7DQo+ICAgICAgIHVu
+c2lnbmVkIGxvbmcgZmxhZ3M7DQo+IC0gICAgdW5zaWduZWQgbG9uZyBsb25nIG5vdyA9IE5P
+VygpOyAvKiBucyAqLw0KPiAtICAgIHVuc2lnbmVkIGxvbmcgbXM7DQo+ICsgICAgc190aW1l
+X3QgbXM7DQo+ICAgDQo+IC0gICAgZG9fZGl2KG5vdywgMTAwMDAwMCk7DQo+IC0gICAgbXMg
+PSAodW5zaWduZWQgbG9uZylub3c7DQo+ICsgICAgaWYgKCAhcmF0ZWxpbWl0X2J1cnN0IHx8
+ICFyYXRlbGltaXRfYnVyc3QgKQ0KDQpEbyB5b3UgaW50ZW5kIGhlcmUgKCAhcmF0ZWxpbWl0
+X21zIHx8ICFyYXRlbGltaXRfYnVyc3QgKSA/DQoNCj4gKyAgICAgICAgcmV0dXJuIHRydWU7
+DQo+ICsNCj4gKyAgICBsaW1pdCA9IG1pbihyYXRlbGltaXRfYnVyc3QgKiByYXRlbGltaXRf
+bXMsIFVJTlRfTUFYKTsNCg0KVGhhdCBsb29rcyBuby1vcCAoYXQgbGVhc3QgYXQgZmlyc3Qg
+c3RhbmNlKSwgYXMgVUlOVF9NQVggaXMgdGhlIGxhcmdlc3QgDQp1bnNpZ25lZCBpbnQgdmFs
+dWU7IGhlbmNlIGByYXRlbGltaXRfYnVyc3QgKiByYXRlbGltaXRfbXNgIChib3RoIA0KdW5z
+aWduZWQgaW50KSBjYW4ndCBiZSBsYXJnZXIgdGhhbiBpdDsgZXZlbiBpZiBpdCBvdmVyZmxv
+d3MuDQoNCkkgdGhpbmsgd2UgbmVlZCB0byBjYXN0IGJvdGggcmF0ZWxpbWl0X21zIGFuZCBy
+YXRlbGltaXRfYnVyc3QgdG8gDQp1bnNpZ25lZCBsb25nIGxvbmcgYmVmb3JlIGRvaW5nIHRo
+ZSBtdWx0aXBseSwgc28gdGhhdCB0aGUgbXVsdGlwbHkgY2FuJ3QgDQpvdmVyZmxvdyAobm90
+IHN1cmUgZXhhY3RseSBob3cgdG8gd3JpdGUgaXQgd2l0aG91dCBiZWluZyB0b28gdmVyYm9z
+ZSANCnRob3VnaCkuDQoNCmh0dHBzOi8vZ29kYm9sdC5vcmcvei9zeFdhUE0zY3INCg0KPiAr
+ICAgIGlmICggIXRva3MgKQ0KPiArICAgICAgICB0b2tzID0gbGltaXQ7DQo+ICsNCj4gKyAg
+ICBub3cgPSBOT1coKTsgLyogbnMgKi8NCj4gKyAgICBtcyA9IGRvX2Rpdihub3csIE1JTExJ
+U0VDUygxKSk7DQo+ICAgDQo+ICAgICAgIHNwaW5fbG9ja19pcnFzYXZlKCZyYXRlbGltaXRf
+bG9jaywgZmxhZ3MpOw0KPiAgICAgICB0b2tzICs9IG1zIC0gbGFzdF9tc2c7DQo+ICAgICAg
+IGxhc3RfbXNnID0gbXM7DQo+IC0gICAgaWYgKCB0b2tzID4gKHJhdGVsaW1pdF9idXJzdCAq
+IHJhdGVsaW1pdF9tcykpDQo+IC0gICAgICAgIHRva3MgPSByYXRlbGltaXRfYnVyc3QgKiBy
+YXRlbGltaXRfbXM7DQo+ICsgICAgdG9rcyA9IG1pbih0b2tzLCBsaW1pdCk7DQo+ICAgICAg
+IGlmICggdG9rcyA+PSByYXRlbGltaXRfbXMgKQ0KPiAgICAgICB7DQo+ICAgICAgICAgICB1
+bnNpZ25lZCBpbnQgbG9zdCA9IG1pc3NlZDsNCg0KV2l0aCB0aGUgaWYgcGFydCBmaXhlZCBh
+bmQgdGhlIGFkanVzdG1lbnRzIGluIHRoZSBsaW1pdCBjb21wdXRhdGlvbiANCihjYXN0IHRv
+IHVuc2lnbmVkIGxvbmcgbG9uZyBiZWZvcmUgdGhlIG11bHRpcGx5KSA6DQpSZXZpZXdlZC1i
+eTogVGVkZHkgQXN0aWUgPHRlZGR5LmFzdGllQHZhdGVzLnRlY2g+DQoNClRlZGR5DQo=
+--------------piSvKiHin4DS0DlTG9kPz2Ff
 Content-Type: application/pgp-keys; name="OpenPGP_0x660FA9D102CBCFD0.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x660FA9D102CBCFD0.asc"
 Content-Description: OpenPGP public key
@@ -215,27 +258,27 @@ x9fhaZEsniw8/bYgC3igkk5YJiOa
 =3DlUIA
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------nu35DXeRavTnRPgJ0aiE8fPr--
+--------------piSvKiHin4DS0DlTG9kPz2Ff--
 
---------------a0yX22pbC0zf6aMfqF79JBuW--
+--------------jGb0yb4EF79A0wwPmf2V941L--
 
---------------DpM3Pzucz8cW7nRnUf8QBy4e
+--------------hrZXQ0Xn5AqFAMTU8LIvDMaN
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmpYowcFAwAAAAAACgkQZg+p0QLLz9BS
-jgv9GmPE0sSk/vSbVuFUfZdPuh3DL3FK3krwfUu6RxgerkUw781CItsH/HpOeSJkbvPKqWXSYLaf
-cfMdOzK+5avtKD1rK4WvLTEwEMO5ecnDOl03USJGx4gqY6kKaf4LiYbs4grPFovZQHQJH8XQ/ioU
-qVIrsKKUF7U7Q2sOJGPSqBjZbuM/OMw0KXSZwRZCp6eY3OAFW4w1gV+fnaXfmXv7OOCcHDFX/wJ2
-/3bgpCcreFuUHJZcWQmte8bd5FiDcVuI0NXn4ezBGuZNVytuLEbyZv4D10osJNZ8iaBlI2qBulDe
-SQpYyEa6+H5oxjN262x2Pk0OzzQDkltngaqrvk8O9QBZHX9DRLjMNQptAv0OKZ++FGHl8e3gYeB7
-/frF5XQP4uL7UeQUAqMUgoK2UeqGgYyovSFHy5wtmY59AbvW/Oo3iKEOUICGGoQiCBQKAJNDd8v4
-8w3ORglYwISCCRCs1rx/LyfB+qNm/dXaAcEythxyU9RCz85p9K00B674emva
-=fpRV
+wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmpYqXgFAwAAAAAACgkQZg+p0QLLz9A/
+Ygv9EC0rt4Xy39x9KhR5UuW6l/GfZdhaT+HT6/ENXIRQVEKgxOjDMfoOW1VI9U7ffi5bkSszwVW0
+GvZJ7dqZDmhelCx6aHIXmLZD0s9kb7GV2eMRB3alo0475CVKtb4jOsfBJa85kZMPjayK0RgvPM8e
+E2av8nX9exv3D+qRss4xLWc/I9jWgE35NtnPgyiqWbrMBsZvjiGxHIcMH37Rofl1BsREjfig0g9L
+Ry65mlFIZjN+QiMy4LrqNSS0BP+OpYs4w3nS6m3P2BmqaX5htukroLoTzpdt8AMRrhfRSO/D0npr
+CiLV5IBHMtGlFpwOAO3wco+VzZQYLgaFwU23UTV6NeL8SPjSt4P5wKjTI4wDzC0/0bUVR4vMMP8U
+oEACP1/rvqrA7XIJK+IuZ/C1A7MpFLsM1eXcI8RjXdT3llyIb6/cxE4XevUEgRxvbtenCEzC0409
+PKxlNtN7hmNnOikLvG8mhnfUSeP7gxEgA+Tvak78QKgiCGNW3rgGGbwN6Lvm
+=e1gF
 -----END PGP SIGNATURE-----
 
---------------DpM3Pzucz8cW7nRnUf8QBy4e--
+--------------hrZXQ0Xn5AqFAMTU8LIvDMaN--
 
