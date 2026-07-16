@@ -4,53 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 195F5C4450A
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 09:04:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1363610.1615209 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51681C44501
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 09:20:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1363664.1615219 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkI0W-0004aW-Bn; Thu, 16 Jul 2026 09:03:52 +0000
+	id 1wkIGW-00012D-U6; Thu, 16 Jul 2026 09:20:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1363610.1615209; Thu, 16 Jul 2026 09:03:52 +0000
+Received: by outflank-mailman (output) from mailman id 1363664.1615219; Thu, 16 Jul 2026 09:20:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkI0W-0004aN-71; Thu, 16 Jul 2026 09:03:52 +0000
-Received: by outflank-mailman (input) for mailman id 1363610;
- Thu, 16 Jul 2026 09:03:50 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wkIGW-000126-QY; Thu, 16 Jul 2026 09:20:24 +0000
+Received: by outflank-mailman (input) for mailman id 1363664;
+ Thu, 16 Jul 2026 09:20:24 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ze.huang@oss.qualcomm.com>) id 1wkI0U-0004Xc-8W
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 09:03:50 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1wkIGV-000120-UY
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 09:20:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkI0T-005AvS-LM
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 11:03:49 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wkIGV-00G5aG-0f
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 11:20:23 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ze.huang@oss.qualcomm.com>)
- id 6a589e72-2eae-0a2a0a5409dd-0a2a45089da2-16
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 11:03:48 +0200
-Received: from [205.220.168.131] (helo=mx0a-0031df01.pphosted.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ze.huang@oss.qualcomm.com>)
- id 6a589e72-f659-0a2a45080019-cddca883a098-3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 11:03:48 +0200
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66G7DWTu3122398
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 09:03:46 GMT
-Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com
- [209.85.215.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4feq3ph75s-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 09:03:46 +0000 (GMT)
-Received: by mail-pg1-f199.google.com with SMTP id
- 41be03b00d2f7-cb11535e6a1so2924732a12.0
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 02:03:46 -0700 (PDT)
-Received: from le-cd01-lnx.qualcomm.com ([114.94.8.21])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2cf106b271asm16592555ad.64.2026.07.16.02.03.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jul 2026 02:03:44 -0700 (PDT)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a58a24b-5cb7-0a2a0a5109dd-0a2a4507825e-16
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 11:20:22 +0200
+Received: from [52.101.43.55]
+ (helo=SJ2PR03CU001.outbound.protection.outlook.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a58a254-b4ea-0a2a45070019-34652b377641-4
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 11:20:22 +0200
+Received: from BY5PR03CA0015.namprd03.prod.outlook.com (2603:10b6:a03:1e0::25)
+ by DSWPR12MB999178.namprd12.prod.outlook.com (2603:10b6:8:36f::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.202.18; Thu, 16 Jul
+ 2026 09:20:14 +0000
+Received: from BY1PEPF0001AE1D.namprd04.prod.outlook.com
+ (2603:10b6:a03:1e0:cafe::53) by BY5PR03CA0015.outlook.office365.com
+ (2603:10b6:a03:1e0::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.223.12 via Frontend Transport; Thu,
+ 16 Jul 2026 09:20:14 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BY1PEPF0001AE1D.mail.protection.outlook.com (10.167.242.106) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.245.5 via Frontend Transport; Thu, 16 Jul 2026 09:20:13 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Thu, 16 Jul
+ 2026 04:20:10 -0500
+Received: from [10.252.145.116] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.41 via Frontend
+ Transport; Thu, 16 Jul 2026 04:20:09 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,450 +67,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=qcppdkim1 header.d=qualcomm.com header.i="@qualcomm.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-Id:MIME-Version:References:Subject:To"; dkim=pass header.s=google header.d=oss.qualcomm.com header.i="@oss.qualcomm.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	v2+SC8wnTcWyUocd5OZE0bKBPwgO9xMWYvTc4EEJHLo=; b=NTWCIvEikV6s+evA
-	+JwWW2EBvb6KUmHZ8opJCCxEKSHFFkaBv635L+zgOFvV52cN2uFzSA7FA8Vn9yzj
-	R8gzlEv3HglAidC/bQA7O7iDm0CP2xsSdhq+FK4815sH0XX/5PuvRqaL2yrqiKPb
-	zk6dSpeFX2ENutYTxHrGtg5kj2FewvD7TZq5/1WNZ4/bU1SXbPCchz6U8S5Tewc8
-	CUaHVpxismyN3yf7ha8vbpaAi0JODc7hFLYAcmhamonOLzfAFWOHsZ+sbUCvxOiU
-	3hm1FkQxR2BRm6t4Ki9Kn3U3CQNaeh8mqILAdNfYpfaOAm1/YYoTp6PIdLGsIvPi
-	PHd54Q==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784192626; x=1784797426; darn=lists.xenproject.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=v2+SC8wnTcWyUocd5OZE0bKBPwgO9xMWYvTc4EEJHLo=;
-        b=PUPqKOI0QbhzvCjFpJGLOlUKnKJZ1490aDp88Vbklc8oNriAWXhWe+1Vh/4jZ8gYli
-         zG3txlgFDWEbR+F8R3qRgPWIVw+GMeB8wkE9ktwL9UmCNtClcNdLQ1MveSfUF1ytKJ5Z
-         jupxKmp1kNrIp5S5GEBR4cwJQ+vK224KKJCuMjCafRrpguYQtaWaFIWtL1Bovh/vRwz4
-         YZIq6oEkkrQVyyywGExQ3PsqZ9Is2H/3LiUE/H+de3OHRZ3n7fPBZvRLBOyrtbh2mOhb
-         ixFO2+0MzYe1L8DKyfFJc8x+9KjW+ziFhafHAFSWOwp3rruonfAdgQyA8/G+I3t9mcep
-         0XMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784192626; x=1784797426;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=v2+SC8wnTcWyUocd5OZE0bKBPwgO9xMWYvTc4EEJHLo=;
-        b=FL7N1BrV+OvTltqxXyApigPv6L5iUsmhu6aeAj7kNbRvsngNiqWTy+iwNPnZPUdng0
-         lkt71sGScWCRoJaohs5W1Ikb0Nrd4N1exn9ugdTUP5U9MGL3T1hL5Oi560xG8V0YX/9U
-         xOQWU1V4wvN6ZH+0AUbOKebYyIZzp+P4IIsklN+YoGMrTCrYPCkthNiMYSjMPqMGuE1y
-         J9SteVy7zCWrc8BXKCcpJofSY0ihsvZPbvqAhWbqml4n6elIK+xkTCIf8NC/BFCopAZu
-         p3vBtS0qD1SSTmsV1+9yNt8Nzl5ZPXeiVXtVVQDALwpIevrmXzlSrKko/S18aU1rlA4A
-         EMfg==
-X-Forwarded-Encrypted: i=1; AHgh+Rprvtv+SCBbRCVnVGt7JKwUK9QQpkOr7wjNSJ85BDzOwtFsPpPCAZsVCM4G6hdMh9QLFvmPLVvgnHw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwO+ufHgNbEx7RydxfDZY9AtUD6DdMLQdiLbf3WeIx0lMhkZ1q3
-	YvwgGUnEwf1LhjBfpQL/jLO2ZvN0JSxlInlUBWI5xOrFvXKv0smOvGWkB9tfIsu2t/pUHEdLyBX
-	4/YbiKcFTVk6IiiqJ+jiIrOBUzvYuxAhy98opB+wLYBS/bCJuTCG8vGrS09MwbZDbLTqegWSXun
-	mK6Irx
-X-Gm-Gg: AfdE7cldE4dL/0xuxGktw4A6UEdnOiq3RJuSCkKdpWcHZzSOFgS3YHl9mvHlmlq3AtY
-	N/g5C6LL4gY5ZAi+ovUNYtdi+/W5djdkT4hpehi/eUCvuXtfRN8OLzVSZygKfK5etJtCcm5H3K1
-	3FPFwXW/G9REK+QqrDKjQnsSRpX9oh3MmuD7zp1zfCKXaptCGoU+S+UFODHOJI/EdlcxIB8qI48
-	xOUrxmSohkC/e04xrDcnhrzSA7Opiz8ekjXduftEklkuBptjh22zH7acB27Rv8gfdeRT1U1/bqE
-	NIVtNPDXrTHozfMWfVBlrznWyW13F2UimI8Detk9PWKOtIm40KwLg9y0fOq+AJ3vzAu1AnyawFb
-	KxTkoRaegp3AAps2fHacv
-X-Received: by 2002:a17:90b:5906:b0:381:26f:8f05 with SMTP id 98e67ed59e1d1-38e29ff97bdmr6389548a91.3.1784192625548;
-        Thu, 16 Jul 2026 02:03:45 -0700 (PDT)
-X-Received: by 2002:a17:90b:5906:b0:381:26f:8f05 with SMTP id 98e67ed59e1d1-38e29ff97bdmr6389504a91.3.1784192624999;
-        Thu, 16 Jul 2026 02:03:44 -0700 (PDT)
-From: Ze Huang <ze.huang@oss.qualcomm.com>
-Date: Thu, 16 Jul 2026 17:02:00 +0800
-Subject: [PATCH v2 8/8] drm/xen: replace struct drm_simple_display_pipe
- with regular atomic helpers
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=QxrRZ02YHJAMnxIBFaEcN8CN2ohsC/VFfAPx6pKPanlKdGfYIpqRWv89AdFT+P9lzUZ58fnUdgRis+5uXsNnqtrT1Xw2OKVLr3LpQiAiwVY8qcn1MjUsGoCpbXnA6G79zBW09b1JI8ZMM5O45PEWmwcR/2+UX42+fO8DN9Wzouumxgy9NgbpJaScsFBC/D6/+LkNXv9tCVjadhH6+i4QQO//6u3nhML85T4Rza07YmvTylWdUkE3xH+TV8n2ZjMHnjIpR33FraKKAUyL845mBbjd80W6r93yvw+JSCYZWZgJHENSEALoNU8iqUzm/qOf6vmzVYMGvhZUTbBWZYrtLA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=08/5St+qZY9PNHyHaWFHkwKnfSizJCt+ykJ+E4bi8z0=;
+ b=QqKIML5aAN5cZAROpWF76iMb+jFyE3R+TjUIYFdAgObUd9zgYW//9fHaIj9xmB4nNPBJ6yOtFG2O+qBIrgUKcUW3AbJpy54rDSRRytxiJ8ZJ1TF8laY4dIRsiRPjK4OUkJRMB5N1ya/aHnEWGpIt2D4rJRPHOAWB7YDXXs/uMCEtu5d2Tk1JyqaBQuhsxm2uigOhcZXj7sQ0SnUDyweICospHzNJGTn5sDA3aIptC3Ze9iBS0O32iTtA8Pfi+J3ZzVa2l9Z/QrHOUMd6BIBlnCrde8u+NiiqRq1Dy9V1fhbmFYuHdRwwjhseLzgnFZ8VjUerGdufnGnKdXNSku/1Hg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=08/5St+qZY9PNHyHaWFHkwKnfSizJCt+ykJ+E4bi8z0=;
+ b=VQbQyqbBH9bV9VLcTVnq9vZHhPOePHLeArLB7uByBA8MqLAu8H2/ND8Zgoa1TlQEnd5zfaVV2TuBwf31CwEQfNg2h9MIrSlHm+dY9DNFYmbjVt6fUn2GfYv71XYERSW8L9XsRhz3xqVaI6/T87kQ6sFMHwWoqLMicF8xZhMgZL4=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <6b345ba2-d31d-4317-ab79-aa64267ab283@amd.com>
+Date: Thu, 16 Jul 2026 11:20:08 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH for-4.22 1/2] xen/arm: validate IRQs before descriptor
+ lookup
+To: <xen-devel@lists.xenproject.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <cover.1783671887.git.mykola_kvach@epam.com>
+ <1843da2e028635773638ef73ed10907c7ae7bb53.1783671887.git.mykola_kvach@epam.com>
+ <e6468083-f901-4a1e-94d5-d347068fabf0@amd.com>
+ <5gpmoe7cng53rxtxmldvjwe3dnbenoji6anyqy4uxado354hfp@tkdo7pmufaor>
+From: "Orzel, Michal" <michal.orzel@amd.com>
+Content-Language: en-US
+In-Reply-To: <5gpmoe7cng53rxtxmldvjwe3dnbenoji6anyqy4uxado354hfp@tkdo7pmufaor>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260716-drm-simple-kms-removal-v2-8-1133a8fc3785@oss.qualcomm.com>
-References: <20260716-drm-simple-kms-removal-v2-0-1133a8fc3785@oss.qualcomm.com>
-In-Reply-To: <20260716-drm-simple-kms-removal-v2-0-1133a8fc3785@oss.qualcomm.com>
-To: Alexey Brodkin <abrodkin@synopsys.com>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Joel Stanley <joel@jms.id.au>,
-        Andrew Jeffery <andrew@codeconstruct.com.au>,
-        Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
-        Pengutronix Kernel Team <kernel@pengutronix.de>,
-        Fabio Estevam <festevam@gmail.com>, Linus Walleij <linusw@kernel.org>,
-        Hans de Goede <hansg@kernel.org>,
-        Alex Lanzano <lanzano.alex@gmail.com>,
-        Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org,
-        imx@lists.linux.dev, xen-devel@lists.xenproject.org,
-        Ze Huang <ze.huang@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784192560; l=11771;
- i=ze.huang@oss.qualcomm.com; s=20260716; h=from:subject:message-id;
- bh=7XOFYlYAlSV+ozAl18A522abXND+69x4cTAvNkGYHmc=;
- b=GX2ZCGixdNsbm2dBAUjK6OkStWwzedAdHGWUe6gP5dpu2NfD1Po9grA6MgTJQZLa9fCVl6Nx9
- 7qvMt1rcjWIADy/IhoJ5BQYdNhix/jd8KvBJH9LhdvnhvaUeaGWR/3m
-X-Developer-Key: i=ze.huang@oss.qualcomm.com; a=ed25519;
- pk=8uGhlZHInA8NXq7G6u/g59qEcwXwuMRI7nBSnT/ijtY=
-X-Proofpoint-ORIG-GUID: NmXBTGK-Np9rG1ri53VWAZESQS-zSSh9
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDA5MSBTYWx0ZWRfX7nn9s9Twzfen
- WmiD8zTX3+qY8skjhVgyXvWaxKmPjYIPs4Wc0wThrqCQ/AFSQKjZLYi21WWKwPOaztsHDDkElal
- r8Vx4UuPZXwmJljxvZvzHXP8We3TbaI=
-X-Proofpoint-GUID: NmXBTGK-Np9rG1ri53VWAZESQS-zSSh9
-X-Authority-Analysis: v=2.4 cv=PN8/P/qC c=1 sm=1 tr=0 ts=6a589e72 cx=c_pps
- a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=Uz3yg00KUFJ2y2WijEJ4bw==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=yt2wVW2Sl_HzNKkdQ3QA:9 a=QEXdDO2ut3YA:10
- a=_Vgx9l1VpLgwpw_dHYaR:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDA5MSBTYWx0ZWRfX/XgyrNMS41kU
- ydKvhOLC+pVYIHXaNK0zw5j+9V+jE0zbMu7Bq/QscBjoIYZNPqiJomrYzAFvzF3FwLCT2Ni2AGl
- 3EM2gWxWU1Gyi60WRiP+bAQy5TVfrHN7Q+Y+4eH8drNsBu79pC5GUETHESFKz07w3+3w7byFLek
- eNe2+50l+YZ1ufaZUoxYikPnVorF4rdG02ts1RpNeWSxzIwss4jXHLIfkCa0AX3EAQJd2w7U7bw
- vuv2wK95DsP8eQ+ntyxHfFjxqTtgQOzzKol3sHNQZznDvXQRX+UQjCOt62dWEMCK8go2KsdwK3G
- yviS3crP6gi34g9CHP0kWZ05lzYADUQxwHq+SYTKKpIuUFJ7/KGpuV0VeA9JsjD0YJWuvx0RQcm
- QwXfKqfYzzMeRWXZHxCmhDcKC5Go9WejtFnn92y6OwKtvy4OT0Lurm/aLevf/K6BnpDklcgiq4l
- KY80UOR7Ig1uQ7w4egQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-16_03,2026-07-15_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 malwarescore=0 lowpriorityscore=0 phishscore=0 adultscore=0
- priorityscore=1501 impostorscore=0 clxscore=1015 suspectscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607160091
-X-purgate-ID: tlsNG-c1860d/1784192628-CE54487B-283DF9BB/0/0
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BY1PEPF0001AE1D:EE_|DSWPR12MB999178:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7bc13e8a-e49b-417e-b3db-08dee31b7156
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|376014|36860700016|23010399003|82310400026|4143699003|10067099003|56012099006|11063799006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	lMOIqH550rBe9I6YpVJhFvBtvWCdywHPA/0kTHsR4BvrDxvfNlK0GlTCa+Cynyn15sFXHE8v2Qr8SgtZnf9Q2A9d3RmoWFgjSqJW1drVpJ65vnbccapICbqfy8KSnBTBKRP9WChaiiraAunq2Ketv5zBu+9NY4EnkFv5J/wbkWqNIbtYIs/y01g4Rx+JWd9Di9e6IeLoHr6rkJkb77qpubjHlNDUyFUenWPh7Vzx9OtoAbC7QYLUWPDmE4QfDADcNsb6mKDo5GdwaOu0On6kjfFGv3EN2ag2NlbIP7D4BkHdRvl4eqvxXR/1YNb2SetGfUZwweTL5e/h/n2VBrHMeVzhjYx0WoEoGJ6VSRwrZQ4koATVzcwEqQQQTBYCfpRr5O6KHtxYZia9+r7mdDE6LG/iYhVtAgAaxhMclD8uGXIGjQIe9bDWW7rGCwWTDfxZmcI7d8NUKROExCGmBunG+R1A1NIGvdOtYJts+YHL/YB5DYeYfutbc8NC5PrtXJGecaAhB7S6VdqmNYgmblctQlk6rddtpg0Ba+tXlB59kX1E2fM8iDjFpCQS+tgL2irp+QMTiHjV0xjU5QoGVD6NTiCMiMO55SP0q1cP3ljYWa5wPNLGv16/ndjgKUIh1pvG2hGEsxV6KZKHpU/lh87vcGTunH/6m49Y5xmSu36VQa69ADdLZGZ7mDkAlzGCPzYRHjHBouIyIv/wG+puTM5m/w==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(36860700016)(23010399003)(82310400026)(4143699003)(10067099003)(56012099006)(11063799006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	ruXCt1L0RlDmV/4ihpTw66ZH/Ri3DYGAXIqQ3mZrJl8iwV8unYEIUNpbmFgRZSGCy7fiwhEgjrttwbREPswp4UulXN4c7ouyfD2+P3SUXaiqpERa4BdnsAbfV0fZ+IeKwsVfEnBYcatZZl8nJDDESofYsC2wtqNnVrEXqHqnPbyPJX4arrOUv3FDL2lJz3RUpuQwTy4/G4kQWyrIgL3kuafXhYyYkHB0sxCfSfDpreC4/pASCQ+M1NQaz/Y7UazI7H2jQC0g4p3ORE1TwMInwEGBwyNIGcDtdH/34p2kVOwRQ0mjqnWVfDDiNb5Xcp8YcUuW+5oblSsTGDPNBb06kBHm2LQSkX6zxrLrrPBtL1gkSW3ng9b6Zb5BSHGUGo3GTbDAKZeJyybwk91Ejf7RjQyxRII5SJu1G5hT6ppXUuLw6ckJsfBvB7oZSi7+dhM6
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jul 2026 09:20:13.7043
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7bc13e8a-e49b-417e-b3db-08dee31b7156
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BY1PEPF0001AE1D.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSWPR12MB999178
+X-purgate-ID: tlsNG-ef75cf/1784193622-A4ECEAE4-5F08A689/0/0
 X-purgate-type: clean
-X-purgate-size: 11773
+X-purgate-size: 2651
 
-Replace Xen frontend simple display pipe with explicit plane, CRTC and
-encoder objects for each pipeline.
 
-Keep generic plane-state validation before Xen-specific checks, and
-install GEM framebuffer prepare helper explicitly.
 
-Signed-off-by: Ze Huang <ze.huang@oss.qualcomm.com>
----
- drivers/gpu/drm/xen/xen_drm_front.h     |   6 +-
- drivers/gpu/drm/xen/xen_drm_front_kms.c | 175 ++++++++++++++++++++++++--------
- 2 files changed, 134 insertions(+), 47 deletions(-)
+On 10-Jul-26 13:14, Mykola Kvach wrote:
+> Hi Michal,
+> 
+> Thank you for the review.
+> 
+> On Fri, Jul 10, 2026 at 12:10:50PM +0200, Orzel, Michal wrote:
+>>
+>>
+>> On 10-Jul-26 10:31, Mykola Kvach wrote:
+>>> With GICv3 eSPI support, nr_irqs covers the architectural INTID
+>>> namespace up to ESPI_MAX_INTID. That namespace is not backed by a
+>>> single dense irq_desc[] array: regular SPIs use irq_desc[], eSPIs use
+>>> espi_desc[], and the INTIDs in between must not be treated as
+>>> descriptor indices.
+>>>
+>>> A firmware-provided interrupt in the sparse range can therefore pass
+>>> checks based only on nr_irqs and reach irq_to_desc().
+>> What are the possible consequences? You should explain it in the commit msg.
+>> Also, what is your criteria behind protecting irq_to_desc()? There are other
+>> places, where we have unprotected irq_to_desc(). Last but not least I think we
+>> should have an ASSERT in __irq_to_desc() to prevent the indexing failure if we
+>> end up there with a sparse IRQ accidentally.
+> 
+> I reproduced this on FVP by adding a fake DT interrupt with reserved
+> INTID 3000. This was deliberately malformed fault injection. The only
+> architecturally allocated interrupt class in the 1024-4095 gap is ePPI,
+> which Xen does not currently support. The resulting out-of-bounds access
+> to irq_desc[] may corrupt Xen memory or crash the hypervisor.
+> 
+> There is also a non-synthetic case with CONFIG_GICV3_ESPI=n. An
+> architecturally valid eSPI described in DT reaches:
+> 
+>     platform_get_irq() -> irq_set_type() -> irq_set_spi_type()
+> 
+> Previously, irq_to_desc() was called before validation, while no
+> espi_desc[] was compiled in. Moving the lookup after gic_is_spi() makes
+> Xen reject the interrupt with -EINVAL instead.
+It does not make much sense to me that is_espi() is protected in
+__irq_to_desc(). I know this is because there is no espi_to_desc() if eSPI is
+compiled out but providing a stub is easy. This causes the useful ASSERT inside
+it to be unreachable. If is_espi() was meant to be called only under #ifdef, it
+would not have the ASSERT and would not include #ifdef inside it. If we allowed
+for that ASSERT, then ...
 
-diff --git a/drivers/gpu/drm/xen/xen_drm_front.h b/drivers/gpu/drm/xen/xen_drm_front.h
-index a987c78abe41..02138b5abef5 100644
---- a/drivers/gpu/drm/xen/xen_drm_front.h
-+++ b/drivers/gpu/drm/xen/xen_drm_front.h
-@@ -14,7 +14,7 @@
- #include <linux/scatterlist.h>
- 
- #include <drm/drm_connector.h>
--#include <drm/drm_simple_kms_helper.h>
-+#include <drm/drm_encoder.h>
- 
- #include "xen_drm_front_cfg.h"
- 
-@@ -100,7 +100,9 @@ struct xen_drm_front_drm_pipeline {
- 
- 	int index;
- 
--	struct drm_simple_display_pipe pipe;
-+	struct drm_plane plane;
-+	struct drm_crtc crtc;
-+	struct drm_encoder encoder;
- 
- 	struct drm_connector conn;
- 	/* These are only for connector mode checking */
-diff --git a/drivers/gpu/drm/xen/xen_drm_front_kms.c b/drivers/gpu/drm/xen/xen_drm_front_kms.c
-index 48772b5fe71c..f869da3f3058 100644
---- a/drivers/gpu/drm/xen/xen_drm_front_kms.c
-+++ b/drivers/gpu/drm/xen/xen_drm_front_kms.c
-@@ -31,9 +31,15 @@
- #define FRAME_DONE_TO_MS	(XEN_DRM_FRONT_WAIT_BACK_MS + 100)
- 
- static struct xen_drm_front_drm_pipeline *
--to_xen_drm_pipeline(struct drm_simple_display_pipe *pipe)
-+xen_drm_pipeline_from_crtc(struct drm_crtc *crtc)
- {
--	return container_of(pipe, struct xen_drm_front_drm_pipeline, pipe);
-+	return container_of(crtc, struct xen_drm_front_drm_pipeline, crtc);
-+}
-+
-+static struct xen_drm_front_drm_pipeline *
-+xen_drm_pipeline_from_plane(struct drm_plane *plane)
-+{
-+	return container_of(plane, struct xen_drm_front_drm_pipeline, plane);
- }
- 
- static void fb_destroy(struct drm_framebuffer *fb)
-@@ -94,7 +100,7 @@ static const struct drm_mode_config_funcs mode_config_funcs = {
- 
- static void send_pending_event(struct xen_drm_front_drm_pipeline *pipeline)
- {
--	struct drm_crtc *crtc = &pipeline->pipe.crtc;
-+	struct drm_crtc *crtc = &pipeline->crtc;
- 	struct drm_device *dev = crtc->dev;
- 	unsigned long flags;
- 
-@@ -105,24 +111,21 @@ static void send_pending_event(struct xen_drm_front_drm_pipeline *pipeline)
- 	spin_unlock_irqrestore(&dev->event_lock, flags);
- }
- 
--static void display_enable(struct drm_simple_display_pipe *pipe,
--			   struct drm_crtc_state *crtc_state,
--			   struct drm_plane_state *plane_state)
-+static void xen_drm_crtc_helper_atomic_enable(struct drm_crtc *crtc,
-+					      struct drm_atomic_commit *commit)
- {
--	struct xen_drm_front_drm_pipeline *pipeline =
--			to_xen_drm_pipeline(pipe);
--	struct drm_crtc *crtc = &pipe->crtc;
-+	struct xen_drm_front_drm_pipeline *pipeline = xen_drm_pipeline_from_crtc(crtc);
-+	struct drm_plane_state *plane_state = pipeline->plane.state;
- 	struct drm_framebuffer *fb = plane_state->fb;
- 	int ret, idx;
- 
--	if (!drm_dev_enter(pipe->crtc.dev, &idx))
-+	if (!drm_dev_enter(crtc->dev, &idx))
- 		return;
- 
- 	ret = xen_drm_front_mode_set(pipeline, crtc->x, crtc->y,
- 				     fb->width, fb->height,
- 				     fb->format->cpp[0] * 8,
- 				     xen_drm_front_fb_to_cookie(fb));
--
- 	if (ret) {
- 		DRM_ERROR("Failed to enable display: %d\n", ret);
- 		pipeline->conn_connected = false;
-@@ -131,13 +134,13 @@ static void display_enable(struct drm_simple_display_pipe *pipe,
- 	drm_dev_exit(idx);
- }
- 
--static void display_disable(struct drm_simple_display_pipe *pipe)
-+static void xen_drm_crtc_helper_atomic_disable(struct drm_crtc *crtc,
-+					       struct drm_atomic_commit *commit)
- {
--	struct xen_drm_front_drm_pipeline *pipeline =
--			to_xen_drm_pipeline(pipe);
-+	struct xen_drm_front_drm_pipeline *pipeline = xen_drm_pipeline_from_crtc(crtc);
- 	int ret = 0, idx;
- 
--	if (drm_dev_enter(pipe->crtc.dev, &idx)) {
-+	if (drm_dev_enter(crtc->dev, &idx)) {
- 		ret = xen_drm_front_mode_set(pipeline, 0, 0, 0, 0, 0,
- 					     xen_drm_front_fb_to_cookie(NULL));
- 		drm_dev_exit(idx);
-@@ -177,12 +180,13 @@ static void pflip_to_worker(struct work_struct *work)
- 	send_pending_event(pipeline);
- }
- 
--static bool display_send_page_flip(struct drm_simple_display_pipe *pipe,
-+static bool display_send_page_flip(struct xen_drm_front_drm_pipeline *pipeline,
-+				   struct drm_atomic_commit *commit,
- 				   struct drm_plane_state *old_plane_state)
- {
- 	struct drm_plane_state *plane_state =
--			drm_atomic_get_new_plane_state(old_plane_state->state,
--						       &pipe->plane);
-+			drm_atomic_get_new_plane_state(commit,
-+						       &pipeline->plane);
- 
- 	/*
- 	 * If old_plane_state->fb is NULL and plane_state->fb is not,
-@@ -193,8 +197,6 @@ static bool display_send_page_flip(struct drm_simple_display_pipe *pipe,
- 	 * sent to the backend as a part of display_set_config call.
- 	 */
- 	if (old_plane_state->fb && plane_state->fb) {
--		struct xen_drm_front_drm_pipeline *pipeline =
--				to_xen_drm_pipeline(pipe);
- 		struct xen_drm_front_drm_info *drm_info = pipeline->drm_info;
- 		int ret;
- 
-@@ -224,10 +226,27 @@ static bool display_send_page_flip(struct drm_simple_display_pipe *pipe,
- 	return false;
- }
- 
--static int display_check(struct drm_simple_display_pipe *pipe,
--			 struct drm_plane_state *plane_state,
--			 struct drm_crtc_state *crtc_state)
-+static int xen_drm_plane_helper_atomic_check(struct drm_plane *plane,
-+					     struct drm_atomic_commit *commit)
- {
-+	struct drm_plane_state *plane_state = drm_atomic_get_new_plane_state(commit, plane);
-+	struct drm_crtc *crtc = plane_state->crtc;
-+	struct drm_crtc_state *crtc_state = NULL;
-+	int ret;
-+
-+	if (crtc)
-+		crtc_state = drm_atomic_get_new_crtc_state(commit, crtc);
-+
-+	ret = drm_atomic_helper_check_plane_state(plane_state, crtc_state,
-+						  DRM_PLANE_NO_SCALING,
-+						  DRM_PLANE_NO_SCALING,
-+						  false, false);
-+	if (ret)
-+		return ret;
-+
-+	if (!plane_state->visible || !crtc_state)
-+		return 0;
-+
- 	/*
- 	 * Xen doesn't initialize vblanking via drm_vblank_init(), so
- 	 * DRM helpers assume that it doesn't handle vblanking and start
-@@ -242,12 +261,12 @@ static int display_check(struct drm_simple_display_pipe *pipe,
- 	return 0;
- }
- 
--static void display_update(struct drm_simple_display_pipe *pipe,
--			   struct drm_plane_state *old_plane_state)
-+static void xen_drm_plane_helper_atomic_update(struct drm_plane *plane,
-+					       struct drm_atomic_commit *commit)
- {
--	struct xen_drm_front_drm_pipeline *pipeline =
--			to_xen_drm_pipeline(pipe);
--	struct drm_crtc *crtc = &pipe->crtc;
-+	struct drm_plane_state *old_plane_state = drm_atomic_get_old_plane_state(commit, plane);
-+	struct xen_drm_front_drm_pipeline *pipeline = xen_drm_pipeline_from_plane(plane);
-+	struct drm_crtc *crtc = &pipeline->crtc;
- 	struct drm_pending_vblank_event *event;
- 	int idx;
- 
-@@ -265,7 +284,7 @@ static void display_update(struct drm_simple_display_pipe *pipe,
- 		spin_unlock_irqrestore(&dev->event_lock, flags);
- 	}
- 
--	if (!drm_dev_enter(pipe->crtc.dev, &idx)) {
-+	if (!drm_dev_enter(crtc->dev, &idx)) {
- 		send_pending_event(pipeline);
- 		return;
- 	}
-@@ -278,19 +297,17 @@ static void display_update(struct drm_simple_display_pipe *pipe,
- 	 * If this is not a page flip, e.g. no flip done event from the backend
- 	 * is expected, then send now.
- 	 */
--	if (!display_send_page_flip(pipe, old_plane_state))
-+	if (!display_send_page_flip(pipeline, commit, old_plane_state))
- 		send_pending_event(pipeline);
- 
- 	drm_dev_exit(idx);
- }
- 
- static enum drm_mode_status
--display_mode_valid(struct drm_simple_display_pipe *pipe,
--		   const struct drm_display_mode *mode)
-+xen_drm_crtc_helper_mode_valid(struct drm_crtc *crtc,
-+			       const struct drm_display_mode *mode)
- {
--	struct xen_drm_front_drm_pipeline *pipeline =
--			container_of(pipe, struct xen_drm_front_drm_pipeline,
--				     pipe);
-+	struct xen_drm_front_drm_pipeline *pipeline = xen_drm_pipeline_from_crtc(crtc);
- 
- 	if (mode->hdisplay != pipeline->width)
- 		return MODE_ERROR;
-@@ -301,12 +318,53 @@ display_mode_valid(struct drm_simple_display_pipe *pipe,
- 	return MODE_OK;
- }
- 
--static const struct drm_simple_display_pipe_funcs display_funcs = {
--	.mode_valid = display_mode_valid,
--	.enable = display_enable,
--	.disable = display_disable,
--	.check = display_check,
--	.update = display_update,
-+static int xen_drm_crtc_helper_atomic_check(struct drm_crtc *crtc, struct drm_atomic_commit *commit)
-+{
-+	struct drm_crtc_state *crtc_state = drm_atomic_get_new_crtc_state(commit, crtc);
-+	int ret;
-+
-+	if (crtc_state->enable) {
-+		ret = drm_atomic_helper_check_crtc_primary_plane(crtc_state);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return drm_atomic_add_affected_planes(commit, crtc);
-+}
-+
-+static const struct drm_plane_helper_funcs display_plane_helper_funcs = {
-+	.prepare_fb	= drm_gem_plane_helper_prepare_fb,
-+	.atomic_check	= xen_drm_plane_helper_atomic_check,
-+	.atomic_update	= xen_drm_plane_helper_atomic_update,
-+};
-+
-+static const struct drm_plane_funcs display_plane_funcs = {
-+	.update_plane		= drm_atomic_helper_update_plane,
-+	.disable_plane		= drm_atomic_helper_disable_plane,
-+	.destroy		= drm_plane_cleanup,
-+	.reset			= drm_atomic_helper_plane_reset,
-+	.atomic_duplicate_state	= drm_atomic_helper_plane_duplicate_state,
-+	.atomic_destroy_state	= drm_atomic_helper_plane_destroy_state,
-+};
-+
-+static const struct drm_crtc_helper_funcs display_crtc_helper_funcs = {
-+	.mode_valid	= xen_drm_crtc_helper_mode_valid,
-+	.atomic_check	= xen_drm_crtc_helper_atomic_check,
-+	.atomic_enable	= xen_drm_crtc_helper_atomic_enable,
-+	.atomic_disable	= xen_drm_crtc_helper_atomic_disable,
-+};
-+
-+static const struct drm_crtc_funcs display_crtc_funcs = {
-+	.reset			= drm_atomic_helper_crtc_reset,
-+	.destroy		= drm_crtc_cleanup,
-+	.set_config		= drm_atomic_helper_set_config,
-+	.page_flip		= drm_atomic_helper_page_flip,
-+	.atomic_duplicate_state	= drm_atomic_helper_crtc_duplicate_state,
-+	.atomic_destroy_state	= drm_atomic_helper_crtc_destroy_state,
-+};
-+
-+static const struct drm_encoder_funcs display_encoder_funcs = {
-+	.destroy = drm_encoder_cleanup,
- };
- 
- static int display_pipe_init(struct xen_drm_front_drm_info *drm_info,
-@@ -331,10 +389,37 @@ static int display_pipe_init(struct xen_drm_front_drm_info *drm_info,
- 
- 	formats = xen_drm_front_conn_get_formats(&format_count);
- 
--	return drm_simple_display_pipe_init(dev, &pipeline->pipe,
--					    &display_funcs, formats,
--					    format_count, NULL,
--					    &pipeline->conn);
-+	ret = drm_universal_plane_init(dev, &pipeline->plane, 0,
-+				       &display_plane_funcs,
-+				       formats, format_count,
-+				       NULL,
-+				       DRM_PLANE_TYPE_PRIMARY, NULL);
-+	if (ret)
-+		return ret;
-+
-+	drm_plane_helper_add(&pipeline->plane, &display_plane_helper_funcs);
-+
-+	ret = drm_crtc_init_with_planes(dev, &pipeline->crtc,
-+					&pipeline->plane, NULL,
-+					&display_crtc_funcs, NULL);
-+	if (ret)
-+		return ret;
-+
-+	drm_crtc_helper_add(&pipeline->crtc, &display_crtc_helper_funcs);
-+
-+	ret = drm_encoder_init(dev, &pipeline->encoder,
-+			       &display_encoder_funcs,
-+			       DRM_MODE_ENCODER_NONE, NULL);
-+	if (ret)
-+		return ret;
-+
-+	pipeline->encoder.possible_crtcs = drm_crtc_mask(&pipeline->crtc);
-+
-+	ret = drm_connector_attach_encoder(&pipeline->conn, &pipeline->encoder);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
- }
- 
- int xen_drm_front_kms_init(struct xen_drm_front_drm_info *drm_info)
+> 
+> My criterion is to validate externally supplied IRQs at entry points
+> which can return an error. The remaining callers use fixed,
+> GIC-reported, or previously validated IRQs.
+> 
+> I will also add:
+> 
+>     ASSERT(irq < NR_IRQS);
+... we would not need this one (the eSPI would also be more meaningful).
 
--- 
-2.43.0
+Given that we postponed the release, I'd be ok to take this series in,
+provided it's in a correct shape.
+
+~Michal
 
 
