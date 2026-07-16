@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30582C44501
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 06:50:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1363480.1615080 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5176BC4450A
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 07:14:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1363500.1615094 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkFua-0007fs-0U; Thu, 16 Jul 2026 06:49:36 +0000
+	id 1wkGId-0003BU-Mt; Thu, 16 Jul 2026 07:14:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1363480.1615080; Thu, 16 Jul 2026 06:49:35 +0000
+Received: by outflank-mailman (output) from mailman id 1363500.1615094; Thu, 16 Jul 2026 07:14:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkFuZ-0007fk-TY; Thu, 16 Jul 2026 06:49:35 +0000
-Received: by outflank-mailman (input) for mailman id 1363480;
- Thu, 16 Jul 2026 06:49:35 +0000
+	id 1wkGId-0003BN-JA; Thu, 16 Jul 2026 07:14:27 +0000
+Received: by outflank-mailman (input) for mailman id 1363500;
+ Thu, 16 Jul 2026 07:14:26 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wkFuY-0007fe-Tn
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 06:49:35 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wkGIc-0003BH-4p
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 07:14:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkFuY-00D4vj-A9
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 08:49:34 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wkGIb-00FdtV-Hw
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 09:14:25 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a587efd-bab6-0a2a0a5309dd-0a2a450c98ac-6
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 08:49:34 +0200
-Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a5884cb-e002-0a2a0a5209dd-0a2a4506b9f4-20
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 09:14:25 +0200
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a587efd-f479-0a2a450c0019-d155dd33d9c3-3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 08:49:34 +0200
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-47df440fcd5so3460155f8f.3
- for <xen-devel@lists.xenproject.org>; Wed, 15 Jul 2026 23:49:34 -0700 (PDT)
+ id 6a5884d1-195a-0a2a45060019-d155802fa42d-3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 09:14:25 +0200
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-493f6de72faso1799105e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 00:14:25 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f464c9cc3sm22933496f8f.35.2026.07.15.23.49.33
+ 5b1f17b1804b1-49541e94e7asm38650395e9.12.2026.07.16.00.14.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 15 Jul 2026 23:49:33 -0700 (PDT)
+ Thu, 16 Jul 2026 00:14:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,54 +53,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Cc:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784184573; x=1784789373; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1784186065; x=1784790865; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=wNoHKWc5FbE/KNMPdiw7+XnjDpS+jyeiE4XrEclO62w=;
-        b=bvGugXP1FcHwdM5bSupDfulG2/By2LERJZgEDS6H6CcEByZylO2L7BbuHNH4vJ5Rb3
-         fc0FswDKqk7egoFTtR/sHe4mrdfC5fzaKYxy0wiy2uYWJTd4fdq7tG91uSabo6KorLT3
-         EAhvZ/1Fi2vkqGpuEWOYg1gA40o9dblcImmHjIIg7qiJp6MN6GwfsJVAV7FQPM7Ax3+1
-         WlAnztKya3iWWm9cdM5XQXu9E9SJwLvCgti1n7acQgVI8kssIvZFt1mqoYUCdfJD8Cm9
-         swKLUg0SppOyvluY/ont9yxUnsyh6GlIfZRzYxpN+SpTzckbIKlRxZNyoG21E8S56fTv
-         /1fA==
+        bh=ejvHhvCzxGyKF0db2MGBGqhIB1rnZViYfFavT4nZDUY=;
+        b=PeoF9Ae8z/EFVkNx+Zi1uxCBPOR4KfV9SMqaxPNlevXPN+ZgJPEwwLUg9aHXwBVKt2
+         Nb88AFZ0gttfa9niToqZWR3LP5D3fbX8Y4bT6g/yxN3uH4Klx9is+vJPVdIQhL8WNo5G
+         usznIOZ3a2yaOur3Zy0twFyuqIfrIEG2O5QOuEcoc0yboAHI8COw+maOsLrA902yCqmy
+         Npf9Cd4np8YeOoXv/MlmQivrS89964QSxUKuimEwKUZQBuMwGvbS9VWbFnhXf0PeBb4z
+         9dX/WUaoJa8z/YrpH0L5HU6wAFEM/ntyiZGod1uvPzLbo+fLf93b4RNN4cuUwNqa2ta6
+         PZJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784184573; x=1784789373;
+        d=1e100.net; s=20251104; t=1784186065; x=1784790865;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=wNoHKWc5FbE/KNMPdiw7+XnjDpS+jyeiE4XrEclO62w=;
-        b=LnVXGDpCicH87OJhwf8yaYHyp8f4BfAY6CMD9+JgSxS0RfSNJEBItBISfFrimbhTyI
-         qi+SF4UqdYUCA5VoS6lPtVXj2pgpIJNKq8ceZ7VY/LyTjYSbY/K2FpKSs40WnkVo+hsd
-         EOcXbvRQcr2Y6st6YCG9fvFZtN2VpvKzyKS8M0d87WrIociv3U+Z2tFnpPMuD/90yUgp
-         mkhkJzJdFRzRKSAk0sBNpWJV8ENNqyvkVpG83DfeviBEjZQPO5vb3xQX91HXojbhqay2
-         RJ1JzqbWYS44fIKkmrkXj9Qs5BgEqY3NNHzzLb/lUQ4TqNnRmV4XGDRrbTXHMaxRbsmm
-         NwaQ==
-X-Gm-Message-State: AOJu0YyzppKamGi4kHygFbEZQQMnv4feoau5zwmAwsucIkmTrW0mUBTU
-	gyrC8UCwWnCIYZtAESgvlCo8abJHJ0hAW+aKuHuHw+b5W2w+TGW67v0bqkiItZm1NeKwMX0g0FQ
-	Q5ygpxQ==
-X-Gm-Gg: AfdE7cnCpnsOt+yft2jOVFx3R2qGdM3R0Q3f9jQBxH3tmpDcdncn9g8cx0yx2V0JzhB
-	MtPZeHU0uEiyy1XKPgZyfULmLrHUz1uXjj99uVMNs/uQgDDn9aWniPLqkCJEezZ2jnyyQnVkl+3
-	+HOdEV9Qob3UQ1XbH+JRRadxdB5o2xzWWvfIRiNA+7w0fHP0RQnTMtxkscGOBTVIdDttRkpUNmJ
-	Bze0bCY2MVp3Qk7Wxu/20/rWcvggXFwm0hVjrMh+en54ZW14k0sa8rsmy5d/SftLNNOpIbCMvEJ
-	V+SuURkPWOhYKwhqT55lQR+O9owYCGkaJ1oYm6v3rlNvXdXqsZMqJnHaYBPA+FJ4U03Fkb2pr6K
-	yOZ/5MkAzRrxd2XsX1gpnJnXcF0FYoooVYu8jQpQcpCqcrsZhM3dGvLR7HDbOoG0n5IAG8+ebEv
-	J1UPgkKMNlIbTO/KJXqA8gylcy4vj9nKA5pu00LPXAWphhqzAXdnjlS0+AqbZw0T2auA==
-X-Received: by 2002:a5d:5f47:0:b0:474:57f0:49f8 with SMTP id ffacd0b85a97d-47f4fca67b2mr6094203f8f.4.1784184573557;
-        Wed, 15 Jul 2026 23:49:33 -0700 (PDT)
-Message-ID: <af5dfcaa-8da8-4bd2-ac30-24bc65e65a6e@suse.com>
-Date: Thu, 16 Jul 2026 08:49:32 +0200
+        bh=ejvHhvCzxGyKF0db2MGBGqhIB1rnZViYfFavT4nZDUY=;
+        b=qSxPe5WV9I6DgXi8e96BMLhXivaQibp2ow4qsSbgHe63f7NyFmk8p57R2enrL3syDM
+         EduyhAFpb/r/SY8liIWHqR8ALrb3Wxanol5+hWLmhZD9po4x7OMF19B637WPWzfoyzo4
+         LGFntkwEMyHmU4ql6SxQtvqQ6SmWLkljOQ8JLGlOY08kCH1RD+Xr2rrtIt+aj+lNZOAl
+         lCDsdcqTL0i/0QvLWw70mYFHqAC4TjF9RebBUyeTX0lIxE8mceV1JL1DXf2RUt4s2F7Z
+         12+fYxdHEiYlCHJRzi4D6j3+B9kRQTbE0lmRVDxgBlw0qj3+r+bbOytvc2Tzv9eghyrh
+         vuvw==
+X-Forwarded-Encrypted: i=1; AHgh+RrJjglky32UemtG3QJFvrGFLlJ0oxg/I84KOzZno6cTeiv4iXMMDLjkPz1S85OssSdb1x7oHh32Iig=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw/NvxCqB0/pWnBhgS3WwOJRl2mYzN4BLGCjbI0r899Vxd4zTKz
+	vGzbYAkrNrJFPEnP1tnq/eTWodYhSnxxhk+I8ZImi9kiOs+mB5fW15qwdmig+qv0XA==
+X-Gm-Gg: AfdE7clpmiXc0KAyAkJp2cf9ZKpuGyS+KbnlaA/MkUkiKTM5TVBmCzaCWUaxGCASPqa
+	W3R7uF6yV72ySktsDIoPkMowzy3twCP1gqbT78/KfP9cTJVyPPR5vxknPzMtEj+oEmvn8Lkz6ng
+	OPG9kYOdkpBiQOV2Yt3NConStTKMSLjYzQSFo6dtW100IPbgkgCp7HVrYvmXSJdT6DP2YmvoOSF
+	XENOOnRlukpCxgtSq9rTFb5g1FxqbIYbfKQPIOzx9vs4xhFkLp1BE4aDfHde4oATL47Q4C1u3j1
+	k/hIoW+dM5rfnIJaF4BnkvGKp9+5gVhweG0kmuxR01gC5dtVu0gU8be3bLZMvqXHlsgsNrq0sSd
+	AqyoG45ZaJS9AtDlsDTO+jIsHFrcmfSagDMWd5zNXGzubu+f41li8vu0nLSpTmAjZd6lC3fNRA0
+	rdRaOToBVKPD1vI7VQlgqIKAINSRJMoiXMo0rqDyeGFZivUoO9SlacSwckud2ha0PfjQ==
+X-Received: by 2002:a05:600c:8b78:b0:493:d117:18a8 with SMTP id 5b1f17b1804b1-4954288030fmr12526525e9.9.1784186064690;
+        Thu, 16 Jul 2026 00:14:24 -0700 (PDT)
+Message-ID: <dcd70818-9e03-43e8-b6a2-eefacfc0b894@suse.com>
+Date: Thu, 16 Jul 2026 09:14:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [BUG] uninitialised stack memory copied to vmcs12
-To: =?UTF-8?Q?Johann_H=C3=B6pfner?= <hoepf@cit.tum.de>
-References: <alfcosYs35pOCslN@cit.tum.de>
+Subject: Re: [PATCH v1.1 1/2] x86emul: drop wrapper C file
+To: Teddy Astie <teddy.astie@vates.tech>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <8a3ee9c3-489a-4dbf-b61b-cd078322b786@suse.com>
+ <e482f2b5-382c-4fbb-b030-5cdaba362599@suse.com>
+ <1784119334.8631fc262581453bbf619ec5b2062170.19f65cc9781000edb5@vates.tech>
 Content-Language: en-US
-Cc: xen-devel@lists.xenproject.org
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -125,86 +129,223 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <alfcosYs35pOCslN@cit.tum.de>
+In-Reply-To: <1784119334.8631fc262581453bbf619ec5b2062170.19f65cc9781000edb5@vates.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1784184574-004CFA5B-83BD1976/0/0
+X-purgate-ID: tlsNG-16d1c6/1784186065-F76C877B-E9160BBA/0/0
 X-purgate-type: clean
-X-purgate-size: 3545
+X-purgate-size: 7262
 
-On 16.07.2026 00:06, Johann Höpfner wrote:
-> Hello xen-devel@
+On 15.07.2026 14:42, Teddy Astie wrote:
+> Le 14/07/2026 à 16:00, Jan Beulich a écrit :
+>> Move the little bit that's still left in x86/x86_emulate.c into a __XEN__
+>> conditional in x86/x86_emulate/x86_emulate.c. Move what are roughly the
+>> test/fuzzing harness counterparts from there into the corresponding #else.
+>>
+>> Interestingly more recent gcc takes issue with three static const arrays
+>> which are unused when HVM=n (noticeable in particule in the shim build).
+>> Apparently such are diagnosed only when present in the top-level file, but
+>> not when living in an #include-d one.
+>>
+>> Requested-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>> Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>> ---
+>> v1.1: Address HVM=n build issues. See
+>>        https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/2674985992.
+>>
+>> --- a/tools/tests/x86_emulator/x86-emulate.c
+>> +++ b/tools/tests/x86_emulator/x86-emulate.c
+>> @@ -3,27 +3,6 @@
+>>   #include <errno.h>
+>>   #include <sys/mman.h>
+>>   
+>> -/* See gcc bug 100680, but here don't bother making this version dependent. */
+>> -#define gcc11_wrap(x) ({                  \
+>> -    unsigned long x_;                     \
+>> -    __asm__ ( "" : "=g" (x_) : "0" (x) ); \
+>> -    (typeof(x))x_;                        \
+>> -})
+>> -
+>> -#define cpu_has_amd_erratum(nr) 0
+>> -#define cpu_has_mpx false
+>> -#define read_bndcfgu() 0
+>> -#define xstate_set_init(what)
+>> -
+>> -/* For generic assembly code: use macros to define operation/operand sizes. */
+>> -#ifdef __i386__
+>> -# define __OS          "l"  /* Operation Suffix */
+>> -# define __OP          "e"  /* Operand Prefix */
+>> -#else
+>> -# define __OS          "q"  /* Operation Suffix */
+>> -# define __OP          "r"  /* Operand Prefix */
+>> -#endif
+>> -
+>>   uint32_t mxcsr_mask = 0x0000ffbf;
+>>   struct cpu_policy cpu_policy;
+>>   
+>> --- a/xen/arch/x86/Makefile
+>> +++ b/xen/arch/x86/Makefile
+>> @@ -69,7 +69,6 @@ obj-y += traps-setup.o
+>>   obj-y += traps.o
+>>   obj-$(CONFIG_INTEL) += tsx.o
+>>   obj-$(CONFIG_VM_EVENT) += vm_event.o
+>> -obj-y += x86_emulate.o
+>>   obj-y += xstate.o
+>>   
+>>   ifneq ($(CONFIG_PV_SHIM_EXCLUSIVE),y)
+>> @@ -86,13 +85,6 @@ hostprogs-y += efi/mkreloc
+>>   
+>>   $(obj)/efi/mkreloc: HOSTCFLAGS += -I$(srctree)/include
+>>   
+>> -ifneq ($(CONFIG_HVM),y)
+>> -$(obj)/x86_emulate.o: CFLAGS-y += -Wno-unused-label
+>> -endif
+>> -ifeq ($(CONFIG_CONDITION_COVERAGE)$(CONFIG_CC_IS_GCC),yy)
+>> -$(obj)/x86_emulate.o: CFLAGS-y += -Wno-error=coverage-too-many-conditions
+>> -endif
+>> -
+>>   efi-y := $(shell if [ ! -r $(objtree)/include/xen/compile.h -o \
+>>                         -O $(objtree)/include/xen/compile.h ]; then \
+>>                            echo '$(TARGET).efi'; fi) \
+>> --- a/xen/arch/x86/x86_emulate.c
+>> +++ /dev/null
+>> @@ -1,37 +0,0 @@
+>> -/******************************************************************************
+>> - * x86_emulate.c
+>> - *
+>> - * Wrapper for generic x86 instruction decoder and emulator.
+>> - *
+>> - * Copyright (c) 2008, Citrix Systems, Inc.
+>> - *
+>> - * Authors:
+>> - *    Keir Fraser <keir@xen.org>
+>> - */
+>> -
+>> -#include <xen/event.h>
+>> -
+>> -#include <asm/x86_emulate.h>
+>> -#include <asm/processor.h> /* current_cpu_info */
+>> -#include <asm/xstate.h>
+>> -#include <asm/amd.h> /* cpu_has_amd_erratum() */
+>> -
+>> -/* Avoid namespace pollution. */
+>> -#undef cmpxchg
+>> -#undef cpuid
+>> -#undef wbinvd
+>> -
+>> -#define cpu_has_amd_erratum(nr) \
+>> -        cpu_has_amd_erratum(&current_cpu_data, AMD_ERRATUM_##nr)
+>> -
+>> -#include "x86_emulate/x86_emulate.c"
+>> -
+>> -/*
+>> - * Local variables:
+>> - * mode: C
+>> - * c-file-style: "BSD"
+>> - * c-basic-offset: 4
+>> - * tab-width: 4
+>> - * indent-tabs-mode: nil
+>> - * End:
+>> - */
+>> --- a/xen/arch/x86/x86_emulate/Makefile
+>> +++ b/xen/arch/x86/x86_emulate/Makefile
+>> @@ -1,3 +1,14 @@
+>> +# Put this ahead of the sorted list below, as it takes long to build and hence
+>> +# we'd like parallel make to schedule its building early.
+>> +obj-y += x86_emulate.o
+>> +
+>> +ifneq ($(CONFIG_HVM),y)
+>> +$(obj)/x86_emulate.o: CFLAGS-y += -Wno-unused-label
+>> +endif
+>> +ifeq ($(CONFIG_CONDITION_COVERAGE)$(CONFIG_CC_IS_GCC),yy)
+>> +$(obj)/x86_emulate.o: CFLAGS-y += -Wno-error=coverage-too-many-conditions
+>> +endif
+>> +
+>>   obj-y += 0f01.o
+>>   obj-y += 0fae.o
+>>   obj-y += 0fc7.o
+>> --- a/xen/arch/x86/x86_emulate/x86_emulate.c
+>> +++ b/xen/arch/x86/x86_emulate/x86_emulate.c
+>> @@ -8,8 +8,52 @@
+>>    * Copyright (c) 2005-2007 XenSource Inc.
+>>    */
+>>   
+>> +#ifdef __XEN__
+>> +
+>> +# include <xen/event.h>
+>> +
+>> +# include <asm/amd.h> /* cpu_has_amd_erratum() */
+>> +# include <asm/processor.h> /* current_cpu_info */
+>> +# include <asm/x86_emulate.h>
+>> +# include <asm/xstate.h>
+>> +
+>> +/* Avoid namespace pollution. */
+>> +# undef cmpxchg
+>> +# undef cpuid
+>> +# undef wbinvd
+>> +
+>> +# define cpu_has_amd_erratum(nr) \
+>> +         cpu_has_amd_erratum(&current_cpu_data, AMD_ERRATUM_##nr)
+>> +
+>> +#else /* !__XEN__ */
+>> +
+>> +/* See gcc bug 100680, but here don't bother making this version dependent. */
+>> +# define gcc11_wrap(x) ({                  \
+>> +     unsigned long x_;                     \
+>> +     __asm__ ( "" : "=g" (x_) : "0" (x) ); \
+>> +     (typeof(x))x_;                        \
+>> +})
+>> +
+>> +# define cpu_has_amd_erratum(nr) 0
+>> +# define cpu_has_mpx false
+>> +# define read_bndcfgu() 0
+>> +# define xstate_set_init(what)
+>> +
+>> +/* For generic assembly code: use macros to define operation/operand sizes. */
+>> +# ifdef __i386__
+>> +#  define __OS          "l"  /* Operation Suffix */
+>> +#  define __OP          "e"  /* Operand Prefix */
+>> +# else
+>> +#  define __OS          "q"  /* Operation Suffix */
+>> +#  define __OP          "r"  /* Operand Prefix */
+>> +# endif
+>> +
+>> +#endif /* __XEN__ */
+>> +
+>>   #include "private.h"
+>>   
+>> +#ifndef X86EMUL_NO_MMX
+>> +
+>>   /*
+>>    * The next two tables are indexed by high opcode extension byte (the one
+>>    * that's encoded like an immediate) nibble, with each table element then
+>> @@ -45,9 +89,15 @@ static const uint16_t _3dnow_ext_table[1
+>>       [0xb] = (1 << 0xb) /* pswapd */,
+>>   };
+>>   
+>> +#endif /* !X86EMUL_NO_MMX */
+>> +
+>> +#ifndef X86EMUL_NO_SIMD
+>> +
+>>   /* Shift values between src and dst sizes of pmov{s,z}x{b,w,d}{w,d,q}. */
+>>   static const uint8_t pmov_convert_delta[] = { 1, 2, 3, 1, 2, 1 };
+>>   
+>> +#endif /* !X86EMUL_NO_SIMD */
+>> +
+>>   static const uint8_t sse_prefix[] = { 0x66, 0xf3, 0xf2 };
+>>   
+>>   #ifdef __x86_64__
+>>
 > 
-> While fuzzing Xen instrumented by an experimental memory sanitizer, we
-> discovered the following bug in nested VMX, where a malicious L1 guest
-> with nestedhvm=1 can read four uninitialised bytes from the hypervisor
-> vmexit handler stack. 
-> 
-> Specifically nvmx_handle_vmwrite leaves local eight byte variable
-> 'operand' uninitialised. It is then written to by decode_vmx_inst. In
-> cases where the operand to vmwrite is a r32, r64 or m64, this fully
-> initializes *poperandS; if however a vmwrite with a 32 bit memory
-> operand is emulated, hvm_copy_from_guest_linear leaves the upper half of
-> *poperandS uninitialised. In the case where cpu_has_vmx_shadow_vmcs
-> returns true, the resulting eight byte value is consequently written to
-> the vmcs12 unchecked and leaks the four uninitialised bytes into guest
-> physical memory via the vmcs12.
-> 
-> Attached is a reproducer for XTF which triggers the behavior described
-> above at least on 4.20 and master versions of Xen running on intel
-> x86_64 hosts. We would expect there to be the constant 0x99999999, which
-> we have just vmwritten, somewhere in the unloaded vmcs12, likely zero
-> extended to eight bytes. However it is stored instead alongside four
-> bytes read from the hypervisor stack. Currently I am not aware of
-> security implications for this bug, as I have not been able to leak more
-> than what appear to be the rather uninteresting upper four bytes of a
-> pointer.
+> Reviewed-by: Teddy Astie <teddy.astie@vates.tech>
 
-As to security implications: nested-virt is still experimental, so there's
-no formal concern there. In more general terms though, unless you're
-certain there's no security aspect to an issue, please instead report more
-privately to security@xenproject.org.
+Thanks. May I ask, though, that you reduce reply context in such cases? Every
+reader needs to scroll through the entire original mail just to find the single
+line at the bottom. See how others do this, e.g.
+https://lists.xen.org/archives/html/xen-devel/2026-07/msg00139.html
+https://lists.xen.org/archives/html/xen-devel/2026-06/msg01595.html
+https://lists.xen.org/archives/html/xen-devel/2026-06/msg01493.html
 
-> The same issue exists in nvmx_handle_invept, though no malicious use is
-> known to me. I suggest fixing both by simply initialising operand / eptp
-> to 0 in nvmx_handle_vmwrite / nvmx_handle_invept. Patch is given
-> immediately below, preceding the reproducer.
-
-You may have noticed that you were able to repro (normally) only with a
-hvm32 xtf test. That's because of a bug fixed by [1], which sadly still
-didn't make it in. That same bug affects INVEPT and INVVPID. Imo ...
-
-> --- a/xen/arch/x86/hvm/vmx/vvmx.c
-> +++ b/xen/arch/x86/hvm/vmx/vvmx.c
-> @@ -1968,7 +1968,7 @@ static int nvmx_handle_vmwrite(struct cpu_user_regs *regs)
->  {
->      struct vcpu *v = current;
->      struct vmx_inst_decoded decode;
-> -    unsigned long operand; 
-> +    unsigned long operand = 0;
->      u64 vmcs_encoding;
->      enum vmx_insn_errno err;
->      int rc;
-> @@ -2012,7 +2012,7 @@ static int nvmx_handle_vmwrite(struct cpu_user_regs *regs)
->  static int nvmx_handle_invept(struct cpu_user_regs *regs)
->  {
->      struct vmx_inst_decoded decode;
-> -    unsigned long eptp;
-> +    unsigned long eptp = 0;
->      int ret;
->  
->      if ( (ret = decode_vmx_inst(regs, &decode, &eptp)) != X86EMUL_OKAY )
-
-... the INVVPID case wants the same change to be made, even if the local
-variable isn't used right now. Otoh the need for the INVEPT and INVVPID
-changes goes away with [1] applied, as the size of their memory operand
-really doesn't depend on operand or address size.
-
-In any event - why don't you make your proposed change into a proper patch
-(primary piece missing is your S-o-b, and perhaps we also would want a
-suitable Fixes: tag)?
-
-Jan
-
-[1] https://lists.xen.org/archives/html/xen-devel/2025-06/msg01212.html
+Thanks, Jan
 
