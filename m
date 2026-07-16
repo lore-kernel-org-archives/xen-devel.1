@@ -4,39 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F5F1C4450A
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 14:32:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1364183.1615512 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A66FBC4450A
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 14:38:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1364199.1615522 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkN8X-0001nK-AV; Thu, 16 Jul 2026 14:32:29 +0000
+	id 1wkNEY-0002Oo-VA; Thu, 16 Jul 2026 14:38:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1364183.1615512; Thu, 16 Jul 2026 14:32:29 +0000
+Received: by outflank-mailman (output) from mailman id 1364199.1615522; Thu, 16 Jul 2026 14:38:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkN8X-0001nD-7f; Thu, 16 Jul 2026 14:32:29 +0000
-Received: by outflank-mailman (input) for mailman id 1364183;
- Thu, 16 Jul 2026 14:32:27 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wkNEY-0002Oh-SO; Thu, 16 Jul 2026 14:38:42 +0000
+Received: by outflank-mailman (input) for mailman id 1364199;
+ Thu, 16 Jul 2026 14:38:41 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1wkN8V-0001mw-ND
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 14:32:27 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wkNEX-0002OZ-16
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 14:38:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkN8V-006cVc-3W
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 16:32:27 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wkNEW-00131G-E4
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 16:38:40 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6a58eb6e-bab6-0a2a0a5309dd-0a2a4504bf1a-34
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 16:32:27 +0200
-Received: from [209.85.208.181] (helo=mail-lj1-f181.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6a58eb7a-b57f-0a2a45040019-d155d0b5dc37-3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 16:32:26 +0200
-Received: by mail-lj1-f181.google.com with SMTP id
- 38308e7fff4ca-3997a448ecbso34034761fa.0
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 07:32:26 -0700 (PDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a58eceb-5cb7-0a2a0a5109dd-0a2a4501bac8-6
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 16:38:36 +0200
+Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a58ecec-5984-0a2a45010019-d155dd2fd4b9-3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 16:38:36 +0200
+Received: by mail-wr1-f47.google.com with SMTP id
+ ffacd0b85a97d-47df6a5202bso4426459f8f.0
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 07:38:36 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49541e8c47esm64959635e9.8.2026.07.16.07.38.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 16 Jul 2026 07:38:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,130 +53,137 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1784212346; cv=none;
-        d=google.com; s=arc-20260327;
-        b=GCjp4kvx6Hsw03fL5mR6yw+BrAwxl3oivOJji1u5t5gc34rOpGebk0dx3hF37H+y+Z
-         wIZ6Z6Z4b1PFfcrBTVGbPEW5bNbr6dsOgPZfPdslUE73M2xnMjbCb3SKj0itbcZIGS3X
-         ID1bPEXnid/JmYetIVdo4DD7faY0B7Wk8A66ZI2EkcM/6YfMCM1DrNA1wGUMQ855y55r
-         nYcrFxpUAwBk9eXy16zeV5wuk8uqLx7lfNq/YMdBHsl/bn4aeBNrBFub6uAzX16WN1cW
-         oyO+MYBqJ9QI2dusRuoUt5AigAp3dMBwHdWaKqMpueiF+/h+VT/O/ySq+aDo/rsI3ukI
-         8EiA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=qGDa6+1+DnJbq2R2aFaIL9WLM4kgzQ9gt/HFwnLQRb0=;
-        fh=CbXQhWZTwQlH/OH1p55PYIW1twR7jST5umoJ4C4PE6c=;
-        b=hPPr0WrD2i2NXnjXL2VT00bBDJslqIz7kL0pz1hEpTdXkN/ZsCkx1CNsgvQbnwnD6H
-         v5LaVkn+4mEH9Ol4RlOZaM/qx/+nPmqADZHZkPS8fYPWdYiQFIR442uUo1YfT1vlxGKZ
-         g1IKx/gbJLQjvpaKbCfxB07kcq2hxf72wLx2J58xg5o2rPbwfjJHZmAl707usiacL7ZU
-         0nEtVv1RC4EcAfvBu0oYonC4cOXRW7pevz7rKvJLqDU45MzPVUtV26UkPw0UUWrZ8lp+
-         7VVzD39YOQqOrba0rPcXFiijFOL8DWrHJGJaJdjySaGV2GoYGuKPkfwvt56VSLm9pCcp
-         XAaA==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784212346; x=1784817146; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=qGDa6+1+DnJbq2R2aFaIL9WLM4kgzQ9gt/HFwnLQRb0=;
-        b=d0JlO4yObyD2krgeMwrLkZcnafNNF8ikPs8E/t6iCal5bjZnQpf6Ynf4zBrPvcXJ5q
-         PZgODuB2yFUWXlG2x61MNrjRq4fUssB3BKKJqZMgy1BB3u3TPXy64gJusyVWR8UK38m6
-         qOHSBVcfw+pn1a3K60nTEfEEzVHZCeuuZNHuBcMDAF6Vt0AM4qrEQE/udhX3EmeNpAVf
-         K4QRgpkXzko2PDXrzHNFcZKeSzUn+RHteHD9mJoQbtHKGvPWVL7/UXsJ1WT7LQv6R0CZ
-         VgUMj0zhZuHkg/FTZ5Mq4w7uZAyN2JdeZucA2Y1fF8m2z8mol1MWcISn3ln9Tw0jUbZ3
-         WR8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784212346; x=1784817146;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=suse.com; s=google; t=1784212716; x=1784817516; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=qGDa6+1+DnJbq2R2aFaIL9WLM4kgzQ9gt/HFwnLQRb0=;
-        b=YHwCEK6b+YFAnodhczZKceDa4wJufz+3c1e1vQLMx6GuZ3Uky2zFLhHwXPgZ+G9Rqu
-         Oq4MxIXuOqZ5fCxhpPTnYwPt0KY6kyZ8ENAjKTb0dtQ/Hpc94FcpL1F5P26NVpfanO9K
-         m3fgG0S0u2bXxNxycrXS5cjMbUTvBafyQve6iP8RUd3pUImvmKFeTOPYerkvYkoDfUDn
-         otpMZpvUd/Y+spIunW1XDOKU9hI/Y702XfTtUEIv5xFfvwUwpFvZE47B6VPjtBPcKaWo
-         AHr1G5uxvmnzHINHwsN63XAtGrTUS/q4nX7GJS5wdw3X8/5fUeqid25zHUcXYSuxf4Hy
-         pzSw==
-X-Forwarded-Encrypted: i=1; AHgh+RoAHDlps33yfxmd2GeGWDIKkYgYj4qnAeKF40PVc2AiFrceMSgNKSCMJlHtJB4GFEIx5csT9p8KOEA=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyAzHaDUfGb80Po2e69Cu2udGCDxR11wyE53sBS7W3m53XYzuvh
-	mkbcPGIwjg3tImbey82z9Jm7kqtj2Fji+jfqlCa7Gnr1pEHZcHuEZEEi4kcCLGKrxjbE+NeKPWY
-	VW/236ISPKCyMm3nFEwhCpNmhnEimkd8=
-X-Gm-Gg: AfdE7cmmQaZDSLs8TuCnpsXOn2Q2T4hJVUj7ZAamiMyiuQt926wjwNx+LNyRq1cQGZ+
-	XrpzQIS8n/vF4sTrH/m4OWyzJStpUYblxuiiW3nAeo8AA72jsOxmwajcM2sl9fdas++SMYnyA6+
-	rNgyUUSrMjZB2PEkKxdX9nvJVqqHWsbkjBqGQewMrt59HFMiQgbzuSJJrA9E7BDhgoqMfchyv93
-	KZezDGyrYJ/h/3q88Qk47GyTkx2QLOxssGuPZsp+TvmcC35eihNrF0IvaM=
-X-Received: by 2002:a05:651c:1687:b0:39b:53f:bf61 with SMTP id
- 38308e7fff4ca-39caa872522mr31951941fa.20.1784212345939; Thu, 16 Jul 2026
- 07:32:25 -0700 (PDT)
+        bh=kd7+LHXVzQXnc9SCTfH1LT1tm+zjjYDdLtXcQYermpM=;
+        b=RTKPUHoebu6fMZ8yLLzi0azEN5AYxJea4kuz0gbtorAY1EK03LT9XazdqOIk3LkMhm
+         7jsqTMQG7EB5v2xffBdwUPu8MtDnBq/I280TBs+wIozDirJBFtWUPcFun4hlawDI5BEg
+         I3lq3xO2MwWL1Lm/md+tnrTogqr5XOaIQ3aXFx4eLxSzXzqk4Ldm78nsn1CYzdJ635z+
+         2KKbg9wXbjCpEj0J6nkWhwcEcIhJdTxLfRZehIao0ytN+2yH12LgsfpFE+kuBHCkKefp
+         cI7c7xWvmkACYFdE13BFYG6DSKliAvdTQ/P5kpzGmR0o74soiBXAl5p8uOc4Xz5WwdMA
+         M5mg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784212716; x=1784817516;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=kd7+LHXVzQXnc9SCTfH1LT1tm+zjjYDdLtXcQYermpM=;
+        b=G3Fqd2LesIFYom0HDSCwWv4ZmYBKy/qQhqQHvSoz5c3XIYUEPpe3qdU++uMWz/19eB
+         GZiLDIrxMB9RuMcFmmoR0xe5e1QfgFW7peWUh9rutiezZEoyISvnetUAT3ahdO6/YAXQ
+         V/DNCvctLi38ffMyDTx4NQy6lu/cyrjIWQNRYMRh6GhNaG7AAG9VQaPLbMRBs+VL4lGA
+         EP3zPXqD6OdsesLzQu78jz/ouUvr70TwtQbOVsCPSHeOF491yW3UDFZAZmbXQIL1RD7k
+         6f3H9wrMh3v2V4XrGzX/2WANfajvILcP8VPfaLIHe0HmOb9mYvPA0My65dCxXO9xMya7
+         UGzA==
+X-Forwarded-Encrypted: i=1; AHgh+Rp/CMuDt9m4iVwQBqihRiFK0ov3ugw2d2S6xqkJMANP2eMFpN1EF4SNSvCbLAGQRFtLPFD8/g8ViGw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzZrQTp76jc7pEsqxBl4Oe0f/5oOv8ebciblpdHT5W3QSkKAK73
+	PE9IBnpZagjbuCOoQJF22vDyVcJHmbB+xS31oCFfTXlfSboZBAMAmb8LfpEv3vua6g==
+X-Gm-Gg: AfdE7cmw66p/b1xwIwBH2giStGvyKTJVbVdTEgmsEbfw1DC/9vIG8CWn29tr+P6RbA0
+	ppUX1ESHJn0MAxh5ES5lzoPB8E7OMa4vJdc2+xngD7MMdYL5K1+KBD+/YPibspYLDEuspwCHI5U
+	ieOfPL0YZEmgzcumUpsPMBCkHFnv4iDtsynldbbaV8SuS2ktoBL38abuYFRowbV2Ap/xDgIBzk6
+	4IotzR65FUbrDNQlylK6z+ngqAvFYArGPtd8b2c7RFK5eLCtroLRvGqEYOb5X0boCE55M8mH/9c
+	HikvC/RAOZ5pEjnuC7dhisZPoXPEUkHvofZsIUsD8Tr9jvhk18INk/wrGR0FbpR6h6Qa+hSuInY
+	wXkO0LsxSrpjIANjw0DWR0J6inT8Niij3YZXyIZPgc8nMKsxWHh7q7LOr8PW+jMijMvJs2TSoRo
+	sdUoizkdkjb/4oXUHYqiwGkjF4CwxgFImLbNCV2RLcopheqZVkLhxPnY/1dYTkYOtcaJ4jOq1K1
+	efM
+X-Received: by 2002:a05:600c:5489:b0:493:a966:d5b5 with SMTP id 5b1f17b1804b1-4953c1451camr83073955e9.2.1784212715932;
+        Thu, 16 Jul 2026 07:38:35 -0700 (PDT)
+Message-ID: <bc54ea1d-1ac6-4350-844f-8c2523149724@suse.com>
+Date: Thu, 16 Jul 2026 16:38:34 +0200
 MIME-Version: 1.0
-References: <cover.1783671887.git.mykola_kvach@epam.com> <6d279de6db90c7e8b76fb4da93b8e451a9cf9874.1783671887.git.mykola_kvach@epam.com>
- <134609d4-507d-4485-87b2-c59e2c498f45@amd.com>
-In-Reply-To: <134609d4-507d-4485-87b2-c59e2c498f45@amd.com>
-From: Mykola Kvach <xakep.amatop@gmail.com>
-Date: Thu, 16 Jul 2026 17:32:14 +0300
-X-Gm-Features: AUfX_mwKwFQ9znUugh-KowBIgSJr7Ub6Y8OH8e2FeWYLoQh3qyholTcrHHdL3Ts
-Message-ID: <CAGeoDV8V4D7NGYv9cHK=4mqefYiqQtB75B7QP1DUc7k78-tpQA@mail.gmail.com>
-Subject: Re: [PATCH for-4.22 2/2] xen/arm: vgic: free eSPIs using the bitmap index
-To: "Orzel, Michal" <michal.orzel@amd.com>
-Cc: Mykola Kvach <mykola_kvach@epam.com>, xen-devel@lists.xenproject.org, 
-	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
-	Bertrand Marquis <bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-ebf023/1784212347-526CAB50-A106B3CC/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 5/6] xen/arm: report clock_frequency via sysctl
+ physinfo, not createdomain
+To: Julian Vetter <julian.vetter@vates.tech>
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Juergen Gross
+ <jgross@suse.com>, Andrii Sultanov <andriy.sultanov@vates.tech>,
+ Guillaume Thouvenin <guillaume.thouvenin@vates.tech>,
+ =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Oleksii Moisieiev <oleksii_moisieiev@epam.com>,
+ Timothy Pearson <tpearson@raptorengineering.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <1784210820.8631fc262581453bbf619ec5b2062170.19f6b408bba000edb5@vates.tech>
+ <20260716141138.88265-1-julian.vetter@vates.tech>
+ <1784211106.8631fc262581453bbf619ec5b2062170.19f6b44e953000edb5@vates.tech>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <1784211106.8631fc262581453bbf619ec5b2062170.19f6b44e953000edb5@vates.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d62444/1784212716-1DA7E757-65DB7075/0/0
 X-purgate-type: clean
-X-purgate-size: 1733
+X-purgate-size: 1625
 
-On Thu, Jul 16, 2026 at 3:03=E2=80=AFPM Orzel, Michal <michal.orzel@amd.com=
-> wrote:
->
->
->
-> On 10-Jul-26 10:31, Mykola Kvach wrote:
-> > Classic vGIC stores eSPIs in allocated_irqs after the regular virtual
-> > interrupts. vgic_reserve_virq() therefore translates an eSPI INTID to a
-> > compressed bitmap index before test_and_set_bit().
-> >
-> > vgic_free_virq() still used the raw virtual INTID. Freeing INTID 4096
-> > would clear bit 4096 instead of the first eSPI allocation bit, which is
-> > outside allocated_irqs for a domain with eSPI support. That can leave
-> > the eSPI reserved and may corrupt memory.
-> >
-> > Add the inverse of idx_to_virq() and use it in both reserve and free, s=
-o
-> > the allocation bitmap is indexed consistently. Also reject invalid
-> > virtual INTIDs before clearing the bitmap.
-> I think we can have it in 4.22 given that the release is postponed a bit.
->
-> >
-> > Fixes: bdde400c6e1b ("xen/arm: vgic: add resource management for extend=
-ed SPIs")
-> > Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-> > ---
-> >  xen/arch/arm/vgic.c | 27 ++++++++++++++++-----------
-> >  1 file changed, 16 insertions(+), 11 deletions(-)
-> >
-> > diff --git a/xen/arch/arm/vgic.c b/xen/arch/arm/vgic.c
-> > index e5aca17dcb..b85710c6a7 100644
-> > --- a/xen/arch/arm/vgic.c
-> > +++ b/xen/arch/arm/vgic.c
-> > @@ -33,6 +33,16 @@ static inline unsigned int idx_to_virq(struct domain=
- *d, unsigned int idx)
-> >      return idx;
-> >  }
-> >
-> > +static inline unsigned int virq_to_idx(struct domain *d, unsigned int =
-virq)
-> > +{
-> > +#ifdef CONFIG_GICV3_ESPI
-> Same as for patch 1: is_espi() shouldn't be protected as it protects itse=
-lf.
+On 16.07.2026 16:11, Julian Vetter wrote:> --- a/xen/include/public/sysctl.h
+> +++ b/xen/include/public/sysctl.h
+> @@ -120,7 +120,26 @@ struct xen_sysctl_physinfo {
+>      uint32_t cpu_khz;
+>      uint32_t capabilities;/* XEN_SYSCTL_PHYSCAP_??? */
+>      uint32_t arch_capabilities;/* XEN_SYSCTL_PHYSCAP_{X86,ARM,...}_??? */
+> -    uint32_t pad;
+> +    /*
+> +     * ARM only, and only set when booting via Device Tree. Value, in Hz, of
+> +     * the "clock-frequency" property in the DT timer node. The property may
+> +     * be present when the bootloader/firmware doesn't correctly set CNTFRQ
+> +     * to hold the timer frequency.
 
-Ack.
+Is this latter aspect relevant for this sysctl field?
 
-Best regards,
-Mykola
+> +     * As it's not possible to trap this register, we have to replicate the
+> +     * value in the guest DT.
+
+What is "this register" in this context?
+
+> +     * This field mirrors the DT property (a single <u32> cell), independent of
+> +     * CNTFRQ_EL0's own width or any given implementation's actual frequency.
+> +     * Should the DT binding ever grow a wider encoding, this field would need
+> +     * to grow (or gain a companion) to match, same as any other ABI change.
+> +     *
+> +     * = 0 => property not present, non-ARM, or booting via ACPI (ACPI
+> +     *        guests get the frequency from firmware/CNTFRQ instead, so
+> +     *        there is nothing to replicate).
+
+As per the initial part of the comment, CNTFREQ may be set correctly, and the
+property be absent in that case. Why can't the register value then be made
+available here, to reduce the number of constraints?
+
+Jan
 
