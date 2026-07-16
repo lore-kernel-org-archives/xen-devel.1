@@ -4,49 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F55BC4450A
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 10:02:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1363729.1615270 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41EA1C4450A
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 10:27:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1363745.1615279 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkIv0-0001a1-SI; Thu, 16 Jul 2026 10:02:14 +0000
+	id 1wkJIr-00057S-LE; Thu, 16 Jul 2026 10:26:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1363729.1615270; Thu, 16 Jul 2026 10:02:14 +0000
+Received: by outflank-mailman (output) from mailman id 1363745.1615279; Thu, 16 Jul 2026 10:26:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkIv0-0001Zu-P9; Thu, 16 Jul 2026 10:02:14 +0000
-Received: by outflank-mailman (input) for mailman id 1363729;
- Thu, 16 Jul 2026 10:02:13 +0000
+	id 1wkJIr-00057J-IG; Thu, 16 Jul 2026 10:26:53 +0000
+Received: by outflank-mailman (input) for mailman id 1363745;
+ Thu, 16 Jul 2026 10:26:52 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f6a60518a000edb5@swg.vates.tech>)
- id 1wkIuz-0001Zm-HQ
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 10:02:13 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1wkJIq-000573-9D
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 10:26:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkIuy-0009iJ-Qz
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 12:02:12 +0200
+ id 1wkJIp-000F2N-ED
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 12:26:51 +0200
 Received: from [10.42.69.7] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f6a60518a000edb5@swg.vates.tech>)
- id 6a58ac21-e002-0a2a0a5209dd-0a2a45078f10-14
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 12:02:12 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a58b1e9-2eae-0a2a0a5409dd-0a2a45079c60-6
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 12:26:51 +0200
+Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
  by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f6a60518a000edb5@swg.vates.tech>)
- id 6a58ac24-b4ea-0a2a45070019-b9ff1c22a61b-3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 12:02:12 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19f6a60518a000edb5.006 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 16 Jul 2026 10:02:05 +0000
-Received: from [192.168.1.18] (88-188-240-210.subs.proxad.net [88.188.240.210])
- (Authenticated sender: teddy.astie)
- by mail2.vates.fr (Postfix) with ESMTPSA id 51902823CB;
- Thu, 16 Jul 2026 12:02:04 +0200 (CEST)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a58b1eb-b4ea-0a2a45070019-d155dd34b910-3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 12:26:51 +0200
+Received: by mail-wr1-f52.google.com with SMTP id
+ ffacd0b85a97d-47f3e6cc44aso3753840f8f.3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 03:26:51 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47f4634e5c3sm22887358f8f.1.2026.07.16.03.26.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 16 Jul 2026 03:26:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,183 +53,149 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=Y00WvbxkXwcOC1hAdBc59G3fOspHqMEwIzOTBEhNT94=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=cqB2Sbx+x6Q2SEZv+mo2g+X4IlUj0ySmB06JdH48Ar1noYZKmOS20rv4hx6JKXOrVzqaYdAtg
- wGugdboWAPhw4B2HeFu30XVvfR01UnePFfwIaVugqo6wXEX9aMho8ZZ+tuVpdciYoo+51ki/ovJ
- A7KHtMAxloQvAn+wbwzeY6XwnX+VC6x7CG2vHndLDuBkyd1elEPbCJMT+odk0uMPEFpn08aqHRP
- q7CicrRVzk4Im8vp3vVoU2OHyuFbCi3s9fqdVndxHLM8z4yUGRgjwEWIoY3f2BJ1kdSE4/dAUt3
- Vl+hCmu1rdlSfBpRbnrZ9CD82/6hk3npKxNSjPNXCb6g==
-X-Zone-Loop: ec3c924e59161904f1e95179275869c5a2bf314e408d
-x-campaign-type: default
-x-transaction-id: fc2168ed-1236-4e7b-8ba1-9020ccb34c6c
-x-swg-uid: 01-9589636c-8e99-40a9-bbf2-c68880a11908
-X-Mailer: Sweego
-Message-ID:
- <1784196125.8631fc262581453bbf619ec5b2062170.19f6a60518a000edb5@vates.tech>
-x-swg-bid: 1784196125.8631fc262581453bbf619ec5b2062170.19f6a60518a000edb5
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-Date: Thu, 16 Jul 2026 12:02:03 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1784197611; x=1784802411; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=MpO4sIbuNKtAMFn/koUavB7k3+D+/ztIwPaEXdYtvps=;
+        b=EqbmHrC2tdgDAmqOk1dXRbJdMPd2pttjFGv9tEXg7Kz98oW9s6VcGkBzrWFNbuIhWN
+         1xeSR3veCPj+4Flbqkf6kdKO2VyNjJnKFj7whKBhJdmrGqb2wfG4qleoa1mcLGmnUgc9
+         opql0Fzsv7j4PzYuf/158Nzi0xmri1v0tBKawZIiyXzuY0uf55oqAFw85qADatqOxkLL
+         qMuL7GR44Wz7waOA3HkuwghrFIMBl1dhCpuBRNzTpDS5jjQHb0AuuOTmEaX8thXCBGK4
+         065K809I+1u51YFxOuSGY5uv7bkpzORwMPY1H+r2mEuwgkMKUQIbeBagxIOPVEOJZRuF
+         YJ8A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784197611; x=1784802411;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=MpO4sIbuNKtAMFn/koUavB7k3+D+/ztIwPaEXdYtvps=;
+        b=K+kU/MICnu0/6w0TmEaECNdJkOVczxA01DMEek4fqJeDhGCAmv067HqP+shebpBXLj
+         Q3EdzN6Wibt0XuRbU2pxnh6hQ2jlvROn3sd+xgEcnwmejDKcEHeHx1CRt8vsYYmDUSWY
+         xKNSVqpNSaq9ouNqZeO26ZT2hgyRgC/4267JyN01xgW/caCSxSbfloo8T9oD1YhQtmMV
+         ZvMzlt8IypLvL0hWylLK0ng32NsX7gk50YimQ3aJZr6JraWjjs+OcbfBy5rWUmZfhiUS
+         PrIKupsA3MC299UTfAv7wvknqOVlnBbCk2Q+Ej2pVY23NvZWrkLynNo3M85jIbrtDQTP
+         vxsA==
+X-Forwarded-Encrypted: i=1; AHgh+RphkVsARht+5YlI5fRgJktvuHN56OAQTf8TFOu0rEkxxgtgtjQzr3awJUS6TyGsjgaXnAnM1IxLvLA=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yyc9xuudDro3Lib8WyZ0Vjznzvv5+WaYl8H5J+gGBO5qX8DlYOy
+	q1Ov1eC2SjYIn1xcz6lq0i1Wkh4OZSUGYTAAh5Gs6B/I23jK5jeglmiJDLtCHYGA/w==
+X-Gm-Gg: AfdE7cn4yBNopZiHOkrad4XFverCAhr0AdreLX7FLB6AQfZgtxuiqyYm6f8V1Msio/e
+	JGEQvnvIzzJ5fY7/ovAUiwkvZ5LoXpWnxTZdR2Y07pSEiQ0Hwa+2fRPKXbq+vJ5Ws2OsekUow8Z
+	aK0Jh/wDgoes1O6tKOxzYK/qDXgeZ5eAKKVg9BVcrIzpBxdIrCoeX8XhPSYOsr/n5gWo8Cmfvv5
+	VRHhMVaNkow4+T7U/X211w3W8c9klv6YNf0v8LhmLkbZae0zNBTFL0eofP3+CnQwn1b8XDxDi2M
+	Mi3oZ7twTTk2lC+9lc5aTXM85TWSd9yCvFMMq68PAXp7i7I1BhlLkk4rOMRt/zWm7AMlY9e2ZIJ
+	kHlNTyKkNoMPv17/ANFuu5hQC9JZ0+dT2sI8P0qIcpq+UnRU4RezFm3GKaj4bRcZfS2XHFz6GEv
+	hY4xqoAtOZmA85incYuo/VU1Xh7L+gW6+6uen0kGWxbwvacZL9vykSVyhPy6+h2tAMiQ==
+X-Received: by 2002:a05:6000:248a:b0:47d:ec60:6581 with SMTP id ffacd0b85a97d-47f487e3259mr12510373f8f.0.1784197610876;
+        Thu, 16 Jul 2026 03:26:50 -0700 (PDT)
+Message-ID: <beb2cccb-727c-4626-bf17-97d0801cb153@suse.com>
+Date: Thu, 16 Jul 2026 12:26:49 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/4] xen/console: reduce number of printouts in
- __printk_ratelimit()
-To: dmukhin@ford.com, xen-devel@lists.xenproject.org
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com,
- julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com,
- sstabellini@kernel.org
+Subject: Re: [PATCH v3 2/4] xen/console: correct leaky-bucket rate limiter
+To: Teddy Astie <teddy.astie@vates.tech>, dmukhin@ford.com
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, julien@xen.org,
+ michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org,
+ xen-devel@lists.xenproject.org
 References: <20260715201902.2984407-1-dmukhin@ford.com>
- <20260715201902.2984407-5-dmukhin@ford.com>
+ <20260715201902.2984407-3-dmukhin@ford.com>
+ <1784195449.8631fc262581453bbf619ec5b2062170.19f6a5603fd000edb5@vates.tech>
 Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- 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
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <20260715201902.2984407-5-dmukhin@ford.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------zNex8WRIylXGsRM09o4Xlkyj"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1784196124537
-X-purgate-ID: tlsNG-ef75cf/1784196132-A56C2AE4-ABB5A970/0/0
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <1784195449.8631fc262581453bbf619ec5b2062170.19f6a5603fd000edb5@vates.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ef75cf/1784197611-A44CBAE4-1C85FA24/0/0
 X-purgate-type: clean
-X-purgate-size: 5332
+X-purgate-size: 2379
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------zNex8WRIylXGsRM09o4Xlkyj
-Content-Type: multipart/mixed; boundary="------------0tAlzNknhj27VKV0PfRBV3uo";
- protected-headers="v1"
-From: Teddy Astie <teddy.astie@vates.tech>
-To: dmukhin@ford.com, xen-devel@lists.xenproject.org
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com,
- julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com,
- sstabellini@kernel.org
-Message-ID: <93322931-d0df-4333-ab8c-9e16430882f6@vates.tech>
-Subject: Re: [PATCH v3 4/4] xen/console: reduce number of printouts in
- __printk_ratelimit()
-References: <20260715201902.2984407-1-dmukhin@ford.com>
- <20260715201902.2984407-5-dmukhin@ford.com>
-In-Reply-To: <20260715201902.2984407-5-dmukhin@ford.com>
+On 16.07.2026 11:50, Teddy Astie wrote:
+> Le 15/07/2026 à 22:24, dmukhin@ford.com a écrit :
+>> From: Denis Mukhin <dmukhin@ford.com>
+>>
+>> Use existing printk_ratelimit_ms and printk_ratelimit_burst variables in
+>> do_printk_ratelimit() instead of hardcoded values 5000 and 10 respectively.
+>>
+>> Ensure rate limiter is disabled if either printk_ratelimit_ms or
+>> printk_ratelimit_burst is 0. Make sure no unnecessary initialization is done
+>> in the corner case.
+>>
+>> Also, simplify the limiter code by using min().
+>>
+>> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+>> ---
+>> Changes since v2:
+>> - fixed typing and 32-bit integer overflow problem
+>> ---
+>>   xen/drivers/char/console.c | 21 +++++++++++++--------
+>>   1 file changed, 13 insertions(+), 8 deletions(-)
+>>
+>> diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+>> index 5d395f882e08..de9f2432445d 100644
+>> --- a/xen/drivers/char/console.c
+>> +++ b/xen/drivers/char/console.c
+>> @@ -1274,21 +1274,26 @@ bool __printk_ratelimit(unsigned int ratelimit_ms,
+>>                           unsigned int ratelimit_burst)
+>>   {
+>>       static DEFINE_SPINLOCK(ratelimit_lock);
+>> -    static unsigned long toks = 10 * 5 * 1000;
+>> -    static unsigned long last_msg;
+>> +    static unsigned long long toks, last_msg;
+>>       static unsigned int missed;
+>> +    unsigned long long now, limit;
+>>       unsigned long flags;
+>> -    unsigned long long now = NOW(); /* ns */
+>> -    unsigned long ms;
+>> +    s_time_t ms;
+>>   
+>> -    do_div(now, 1000000);
+>> -    ms = (unsigned long)now;
+>> +    if ( !ratelimit_burst || !ratelimit_burst )
+> 
+> Do you intend here ( !ratelimit_ms || !ratelimit_burst ) ?
+> 
+>> +        return true;
+>> +
+>> +    limit = min(ratelimit_burst * ratelimit_ms, UINT_MAX);
+> 
+> That looks no-op (at least at first stance), as UINT_MAX is the largest 
+> unsigned int value; hence `ratelimit_burst * ratelimit_ms` (both 
+> unsigned int) can't be larger than it; even if it overflows.
+> 
+> I think we need to cast both ratelimit_ms and ratelimit_burst to 
+> unsigned long long before doing the multiply, so that the multiply can't 
+> overflow (not sure exactly how to write it without being too verbose 
+> though).
 
---------------0tAlzNknhj27VKV0PfRBV3uo
-Content-Type: multipart/mixed; boundary="------------jj9YFZNyrYKd9ysqdlJrIAjS"
+No such casting please. __builtin_umul_overflow() is what wants using
+for such purposes.
 
---------------jj9YFZNyrYKd9ysqdlJrIAjS
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-
-TGUgMTUvMDcvMjAyNiDDoCAyMjoyNCwgZG11a2hpbkBmb3JkLmNvbSBhIMOpY3JpdMKgOg0K
-PiBGcm9tOiBEZW5pcyBNdWtoaW4gPGRtdWtoaW5AZm9yZC5jb20+DQo+IA0KPiBGb2xkIHNl
-dmVyYWwgX19wdXRzdHIoKSBjYWxscyBpbnRvIG9uZSBhcm91bmQgbm90aWZpY2F0aW9uIG9m
-IGhvdyBtYW55DQo+IG1lc3NhZ2VzIGhhdmUgYmVlbiByYXRlLWxpbWl0ZWQuDQo+IA0KPiBO
-b3QgYSBmdW5jdGlvbmFsIGNoYW5nZS4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IERlbmlzIE11
-a2hpbiA8ZG11a2hpbkBmb3JkLmNvbT4NCg0KUmV2aWV3ZWQtYnk6IFRlZGR5IEFzdGllIDx0
-ZWRkeS5hc3RpZUB2YXRlcy50ZWNoPg0K
---------------jj9YFZNyrYKd9ysqdlJrIAjS
-Content-Type: application/pgp-keys; name="OpenPGP_0x660FA9D102CBCFD0.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x660FA9D102CBCFD0.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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
-x9fhaZEsniw8/bYgC3igkk5YJiOa
-=3DlUIA
------END PGP PUBLIC KEY BLOCK-----
-
---------------jj9YFZNyrYKd9ysqdlJrIAjS--
-
---------------0tAlzNknhj27VKV0PfRBV3uo--
-
---------------zNex8WRIylXGsRM09o4Xlkyj
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmpYrBsFAwAAAAAACgkQZg+p0QLLz9Bu
-wgwAjtGMlOyxZeKCxuyy6xPMu881TvhAk+p2A4Ndx5LUHB/Y5mqRhRSFNKVh8y6D4RvefdQWa8pT
-VBYsJ7cRMH3HPkY6gtTuwHsd5QxTobSfCN89hULtcPhbF9SSmCxWxFcIP//mX/1Q8I2+Lk5z9QsE
-EcxQeIt8kBmkeCWSB8Uk+4eaojtcccNje0Lcs4GNchdlNYKdTVOQphc0vVxwIuWUIlTYsSK9Z2pz
-5Llv0NCx4AW4hKp0/aCV5z6mKWj86L0w5QTHVqUG3ZVJpxCoUPVlMwN4tN4/UntUBtGPKgn5vAA/
-jsSgQ1BQclzN4p5nG6dHWdxQrvqoKkKCTXL5Oq3KUlYXh8AU6z6aLiZZliw1ELHww613o7T1MfVO
-mNl6XW4KE2MEYZTR5mDSIjLQ4QSPsSDu7UlO9C3jIVua/XXdAsHSq67MXl6KnXaWpRG7P8PAnXXH
-bylbVtH0EitPUCy8s/P77YOJc1o1Lat1KfClHu3sNiOzzeCS9o2zcKwkIHWy
-=X5A0
------END PGP SIGNATURE-----
-
---------------zNex8WRIylXGsRM09o4Xlkyj--
+Jan
 
