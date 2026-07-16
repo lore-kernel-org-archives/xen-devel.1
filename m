@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 894C6C4450A
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 13:27:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1364034.1615404 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD5D9C44501
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 13:30:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1364043.1615414 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkM71-0003pO-2g; Thu, 16 Jul 2026 13:26:51 +0000
+	id 1wkMA3-0004Pw-Fu; Thu, 16 Jul 2026 13:29:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1364034.1615404; Thu, 16 Jul 2026 13:26:51 +0000
+Received: by outflank-mailman (output) from mailman id 1364043.1615414; Thu, 16 Jul 2026 13:29:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkM70-0003pH-WA; Thu, 16 Jul 2026 13:26:50 +0000
-Received: by outflank-mailman (input) for mailman id 1364034;
- Thu, 16 Jul 2026 13:26:49 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wkMA3-0004Pp-Cp; Thu, 16 Jul 2026 13:29:59 +0000
+Received: by outflank-mailman (input) for mailman id 1364043;
+ Thu, 16 Jul 2026 13:29:57 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wkM6z-0003pB-EA
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 13:26:49 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wkMA1-0004Pj-O1
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 13:29:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkM6y-000mze-N1
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 15:26:48 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wkMA0-006RpK-QC
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 15:29:56 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a58dc10-e002-0a2a0a5209dd-0a2a4509d73e-26
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 15:26:48 +0200
-Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a58dcc9-e002-0a2a0a5209dd-0a2a4507db32-30
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 15:29:56 +0200
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a58dc18-be1a-0a2a45090019-d155802ee5fa-3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 15:26:48 +0200
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-493ae59eca6so17566705e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 06:26:48 -0700 (PDT)
+ id 6a58dcd4-b4ea-0a2a45070019-d155802ad9b0-3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 15:29:56 +0200
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-493f0ae9572so27436385e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 06:29:56 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49541eb7372sm79477175e9.13.2026.07.16.06.26.46
+ 5b1f17b1804b1-4953c70f99dsm97716655e9.2.2026.07.16.06.29.54
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Jul 2026 06:26:47 -0700 (PDT)
+ Thu, 16 Jul 2026 06:29:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,48 +55,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784208408; x=1784813208; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1784208596; x=1784813396; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=HTvK4TPKg2ozyQ9fdUuBYzC4rP8XNTi2PY1dx0Crvpk=;
-        b=JUeCYmcp5JYbxUquneh6ihM2rS9onetw3gS+G0gzOqdqd5GGx6Pv+neIthY522y9BA
-         FHAx2RfJmXKBU+scO9Ke31FIWEvNnmbP5V24H5URX8MjDlnoX1o3RVewe73bdJXObkK+
-         +Ex2pq2821/pwsKrwklptLmr1vTHCHt7ieNAyXtHoWuR28xhfJFaEdfKfX/FTp3tcLVF
-         MQlc0t54bCqE4JmwQbH3GUX8cL70PIs8bO/0wURoiPCMktHEVENJhjuWdqqU7Dm1QEQ4
-         saisN1fzYvwEgCSHZINqqNWd3l3rgNb+Ok0a4uyk+i993CsZ4swdsx6JvzYgOyVz2qYs
-         kT2w==
+        bh=DyxvjAL/zArsqc3TUV5N43d16kVk+2Z1kZSLtgy9iF0=;
+        b=Y/BZ6EN3xmSk3MazOAKXWlW30h3iVibEwntk5TZW8EeM5gBHTEhOqt4gZqMrN8pINc
+         S+nmAcQmf3qEWq52oVCqBznfGoT5SyX4dY3siO1QRstwwOjyg3EOyXxx4DO2t8URljvs
+         E4ETIGAEL43yxwU2XCrlt9/JcgZPc1ZQK3hjfu9Zwvp4ODCoSlDPkVAlk2qr5iAhcXBW
+         c77rM+p2iuCoZJsI7cvncYl/M9zWNcNGRSEEFBY0wXoVpemDKt8/xnUMJUmZuGMuJG3V
+         ANig0xOwXoWxavtvvNzRdc65PYDjf3l7KTWOvh6Yb8el/t/Nuxgr8zXYXJ8vYWrn0Ciy
+         uYYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784208408; x=1784813208;
+        d=1e100.net; s=20251104; t=1784208596; x=1784813396;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=HTvK4TPKg2ozyQ9fdUuBYzC4rP8XNTi2PY1dx0Crvpk=;
-        b=pfblWN2DyVsSFS+O6q97TmnNWu9ztvLb3XrBpDDobM3nk/nvpVgtqKJWImps6zXyi+
-         Zr7DncBLzqoUHu2WxXxG4VYTJEOFvhxNf5G/pM4WyPaZGoyk6AsTkf+u/akNMy6Hy1ii
-         4LxeduN3i5cIJ1CMuOnFEOuwARnkiRv6qSRjZV2DM3Ik1t83w2MNNIAr+p6HdtPZkGKh
-         Jc5cjx09MrZ16faw/NvTwgqrD+tViwHXSvIo50aYJHCkY8ctPGYEYan0VVk+On8B0oj/
-         2MdNCv2oFJLfXu4whyaXcQHl4jbVXwVC1VNuLwgzwREkuzramPhoz9FkF74TZbFwz1BI
-         sdPQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrMMyJnWPQG5WOh9eTFeRmF2z6r8ugesHs1yIn3PhwsclM3tW5NY0ypDxYw9DGZsUL3u2iXC6Jj9Es=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzEuw/izD01SzUSSsgNhTGM//MX/kOlEikbB+3KsN7Hf8mqfZ6P
-	cEcVYLVNTXXdqeTsA+iK1Q86baqAkiyOf8e0b/UwupddvUl78JvXcXYIaDpha72xLw==
-X-Gm-Gg: AfdE7cmCdKBPj/fJG2KzQbr6GNvVnwtJLqQ4SFNgsdaZUOO8yW7QedToelX4ejxhbIz
-	ugaaENXISy7BrqWXB+ZGyzopyYjMg1An2Yj1CX52O80q9kg6wRQm1fnfP0wyGu2a+4e/VkzL2/+
-	P+D/uWZ0Cfi51GNuKDVqJHfQEcnY82Fw8syjxhixnQ43CiJJMnsq3jq0hCYjKMiiyN50u4LHDQK
-	HWO4eT2mQq2dcEJ81VNtWevThtSZTZug0f0IhB8ooDifV7kDdwDb4b9yu0zueWC7CAdEbi7OmhG
-	Pu78GhxsKH/LB5vJX0hxVpN7MrM7XGxwmEE0DoY1+8RZtmGWZOxO+ijrOJD5VMmiCG87Bxgtq9b
-	snSgKz3sFJD57B4oyrsQCsS15Z5eIlLVZWh1Y4GZzad7lVGsM/LOxEb7ENtvo0fKswaETF/1Xl+
-	tnVlJ8TMNJIlyNdgGdrBSJ5/stZ1T972gbcgsT6K7Lh01AXoN45GzxUv70ZtgFu621uA==
-X-Received: by 2002:a05:600c:5292:b0:493:e6f7:ad75 with SMTP id 5b1f17b1804b1-493f87e6d4cmr239514855e9.11.1784208407797;
-        Thu, 16 Jul 2026 06:26:47 -0700 (PDT)
-Message-ID: <f4c13b73-719f-4d3f-be60-803fff8d0893@suse.com>
-Date: Thu, 16 Jul 2026 15:26:46 +0200
+        bh=DyxvjAL/zArsqc3TUV5N43d16kVk+2Z1kZSLtgy9iF0=;
+        b=AKT8cCd1WFD/2Gm/MJUYzGHJDUARs/2zIor+4e4/XUe8pCdN28YEQrUJazcstpL7Va
+         f2AiKrLudfF7PDNTd5TEvOpWJSmrr+hgWzUMx66arREsecm5aUvYbcJvgryBzgyOQ/xD
+         Iufh0ihYoWStFmfjOyOg6E/IOZgj93kV8kjQpAoU9KheQhh2tTTyxsK3f8K3vxOBxnz1
+         g9jy3cdiwltoxrqnTDaNaJ28mGP28FrJNzY5cmX7aYvzsF65KWVO1zLnDE/zEp9F38xH
+         33RAt6ytlOpab0tqlAXtviQULcbzOMCBsvnuItWNdKrPoXLANOF5mjcqhPUXfD0Vpvdq
+         q8nQ==
+X-Forwarded-Encrypted: i=1; AHgh+Ro/IKhdCOmdhPLCbOLnxgSI9NqzghrFZO9YLdjv5YK4UE4Tbieo24aQpxB/UxOzCwYyI7XI/Hl8t/w=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxvKB1CvqUpYD5Bk5UHmjzIYvg1tvxDKR/9IOItqYIamHYbF0ku
+	2c0dm4cF+Hjq+Y9u5Sxt+8i+sEUea02yVsYiZNipqAJQbH1lTn+nj5h5LVou+9gj0g==
+X-Gm-Gg: AfdE7cmWdl1Tbq+kxsQ6NnefghS08tKL0i1aAWZUh2gf/bXusvBRta+Y0LK0yrIItgr
+	Xij/g/ViaJ/OgbhBSEJTotCsPax1NWhjjDTsQw0PczYwcNcz6nBysry3Wk+r2NmX8ysD1a6JJoL
+	vB+WG7b0oHlSWgV3gKYJMh6Ysjiue998RCtaGLeyUK3sgVPVgXSP96/mKJCOZsQQU8zJsh0j7ia
+	YBehYDKXULTO2LIL1b7IgsiJ5Y3lcgYAG2tAjUFTiObiLPzWhL83/JfI7N76jEO9B2oNfz+F5W6
+	loPi/x9A9PX348LsI+/7jJzFb5VE0V309X99CHrgXuQxDekEGHW1zOsYOmv8izJThBrE84gYrv6
+	SAaLliEGr9kCNgACYvAVG6DHlJP1wE0IqdBZ7sFbC520mU65NoGiI/0FcKnON5LtnyxOe9OnD0A
+	jyCbFDiKoI/Cy0+Lyy7LjzP4y1aLhsD3BFKqkY+C16bFLaEbX29C71sdWlFkpyKjEdeg==
+X-Received: by 2002:a05:600c:3487:b0:493:bacb:1341 with SMTP id 5b1f17b1804b1-4953c144adamr78575885e9.4.1784208596097;
+        Thu, 16 Jul 2026 06:29:56 -0700 (PDT)
+Message-ID: <f2f3572c-6a77-4f65-bf8e-82298d145a6e@suse.com>
+Date: Thu, 16 Jul 2026 15:29:54 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 2/5] xen/sched: Link CPU topology to scheduler
+Subject: Re: [PATCH v6 1/5] xen/device-tree: Parse 'cpu-map' node for CPU
+ topology exploration
 To: Hirokazu Takahashi <taka@valinux.co.jp>
 Cc: Mykyta_Poturai@epam.com, Stefano Stabellini <sstabellini@kernel.org>,
  Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
@@ -105,14 +106,9 @@ Cc: Mykyta_Poturai@epam.com, Stefano Stabellini <sstabellini@kernel.org>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Timothy Pearson <tpearson@raptorengineering.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Dario Faggioli <dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>,
- George Dunlap <gwd@xenproject.org>, xen-devel@lists.xenproject.org
+ xen-devel@lists.xenproject.org
 References: <20260714104445.919830-1-taka@valinux.co.jp>
- <20260714104445.919830-3-taka@valinux.co.jp>
+ <20260714104445.919830-2-taka@valinux.co.jp>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -138,88 +134,37 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260714104445.919830-3-taka@valinux.co.jp>
+In-Reply-To: <20260714104445.919830-2-taka@valinux.co.jp>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1784208408-FD668034-6FA1C4E0/0/0
+X-purgate-ID: tlsNG-ef75cf/1784208596-A52CCAE4-B2EEDA8C/0/0
 X-purgate-type: clean
-X-purgate-size: 2493
+X-purgate-size: 784
 
 On 14.07.2026 12:44, Hirokazu Takahashi wrote:
-> @@ -35,7 +36,9 @@
->   */
->  static unsigned int cpu_nr_siblings(unsigned int cpu)
->  {
-> -#ifdef CONFIG_X86
-> +#if defined(CONFIG_GENERIC_CPU_TOPOLOGY)
-> +    return cpu_topology ? cpu_topology[cpu].num_siblings : 1;
-> +#elif defined(CONFIG_X86)
->      return cpu_data[cpu].x86_num_siblings;
->  #else
->      return 1;
-
-Now that this is ordered more sensibly, an issue is becoming apparent: If and
-when x86 also supports GENERIC_CPU_TOPOLOGY, the present x86 logic should also
-be engaged when !cpu_topology. By re-arranging accordingly, you also avoid the
-need to duplicate the literal 1.
-
-> @@ -11,15 +22,48 @@ struct cpu_topology {
->      cpumask_var_t thread_sibling;
->      cpumask_var_t core_sibling;
->      cpumask_var_t cluster_sibling;
-> +    unsigned int phys_core_id;
-> +    unsigned int phys_cluster_id;
-> +    unsigned int phys_socket_id;
-> +    unsigned int num_siblings;
->  };
->  
->  extern struct cpu_topology *cpu_topology;
->  void init_cpu_topology(void);
->  
-> +static inline void init_cpu_sibling_map(unsigned int cpu)
-> +{
-> +    if ( cpu_topology )
-> +    {
-> +        cpumask_copy(per_cpu(cpu_sibling_mask, cpu),
-> +                     cpu_topology[cpu].thread_sibling);
-> +        cpumask_copy(per_cpu(cpu_core_mask, cpu),
-> +                     cpu_topology[cpu].core_sibling);
-> +    }
-> +    else
-> +        init_cpu_sibling_map_default(cpu);
-> +}
-
-Personally I consider this already being too redundant with ...
-
-> +#define cpu_to_core(cpu) (cpu_topology ? cpu_topology[cpu].phys_core_id : 0)
-> +#define cpu_to_socket(cpu) (cpu_topology ? cpu_topology[cpu].phys_socket_id : 0)
+> --- /dev/null
+> +++ b/xen/include/xen/cpu-topology.h
+> @@ -0,0 +1,34 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
 > +
->  #else /* CONFIG_GENERIC_CPU_TOPOLOGY */
->  
->  static inline void init_cpu_topology(void) {}
->  
-> +static inline void init_cpu_sibling_map(unsigned int cpu)
-> +{
-> +    init_cpu_sibling_map_default(cpu);
-> +}
+> +#ifndef XEN_CPU_TOPOLOGY_H
+> +#define XEN_CPU_TOPOLOGY_H
+> +
+> +#include <xen/cpumask.h>
+> +
+> +#ifdef CONFIG_GENERIC_CPU_TOPOLOGY
+> +
+> +struct cpu_topology {
+> +    cpumask_var_t thread_sibling;
 
-... this. Imo it would better be
+Btw, as this aspect becomes more apparent when looking at patch 2: What is the
+relationship of this (i.e. cpu_topology[cpu].thread_sibling) to
+per_cpu(cpu_sibling_mask, cpu)? The two ought to be identical, but I can't see
+this being guaranteed. And if they were identical, why would both be needed?
 
-static inline void init_cpu_sibling_map(unsigned int cpu)
-{
-    if ( IS_ENABLED(CONFIG_GENERIC_CPU_TOPOLOGY) && cpu_topology )
-    {
-        cpumask_copy(per_cpu(cpu_sibling_mask, cpu),
-                     cpu_topology[cpu].thread_sibling);
-        cpumask_copy(per_cpu(cpu_core_mask, cpu),
-                     cpu_topology[cpu].core_sibling);
-    }
-    else
-        init_cpu_sibling_map_default(cpu);
-}
+> +    cpumask_var_t core_sibling;
 
-Which then of course requires the decl of cpu_topology (not its definition) to
-always be visible.
+Same for this vs the per-CPU cpu_core_mask.
 
 Jan
 
