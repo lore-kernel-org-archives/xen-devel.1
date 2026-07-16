@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FC3EC44501
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 12:35:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1363971.1615368 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B9E4C4450A
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 12:37:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1363981.1615377 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkLJN-0004Ho-I9; Thu, 16 Jul 2026 12:35:33 +0000
+	id 1wkLLE-0004qV-20; Thu, 16 Jul 2026 12:37:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1363971.1615368; Thu, 16 Jul 2026 12:35:33 +0000
+Received: by outflank-mailman (output) from mailman id 1363981.1615377; Thu, 16 Jul 2026 12:37:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkLJN-0004Hh-FH; Thu, 16 Jul 2026 12:35:33 +0000
-Received: by outflank-mailman (input) for mailman id 1363971;
- Thu, 16 Jul 2026 12:35:32 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wkLJM-0004Hb-3E
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 12:35:32 +0000
+	id 1wkLLD-0004qO-VW; Thu, 16 Jul 2026 12:37:27 +0000
+Received: by outflank-mailman (input) for mailman id 1363981;
+ Thu, 16 Jul 2026 12:37:27 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wkLLC-0004qI-VR
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 12:37:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkLJJ-00EhIW-3l
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 14:35:29 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wkLLC-00HIyl-CH
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 14:37:26 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a58d009-bab6-0a2a0a5309dd-0a2a4508dc80-32
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 14:35:28 +0200
-Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a58d078-bab6-0a2a0a5309dd-0a2a45058a82-42
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 14:37:26 +0200
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a58d010-f659-0a2a45080019-d155dd2ee4e5-3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 14:35:28 +0200
-Received: by mail-wr1-f46.google.com with SMTP id
- ffacd0b85a97d-470174001a0so1700344f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 05:35:28 -0700 (PDT)
+ id 6a58d086-4cb1-0a2a45050019-d1558030d0de-3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 14:37:26 +0200
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-49546c690ffso684015e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 05:37:26 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f464caeffsm22746633f8f.36.2026.07.16.05.35.27
+ 5b1f17b1804b1-49541ebe485sm52231875e9.14.2026.07.16.05.37.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Jul 2026 05:35:27 -0700 (PDT)
+ Thu, 16 Jul 2026 05:37:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,58 +54,62 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784205328; x=1784810128; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1784205446; x=1784810246; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=6GsA1hnt7dB4Nount0NQW3/ntJN4n8sOG/E6DgsVMf4=;
-        b=DnWusp+VseJRB9eJ4O015Gu/wcAU8yGiPzf60kpWAKNw22tWJk2XdEmTz2nD/bwCci
-         hqAU30SDPq1gpT8bA5m7pEEgfOzNaZbGed8/1ZQVbM0tPyyIpf9isUvxFKU+XFfYCJN2
-         7DNSXTIKzaRqINuTFRKuYlreIjxM57ge9jdVTdkUOJzuCDVy5p/louQzOCre+axD/30B
-         C9JDqCai32rSdNmF6bMxArnT/0tCrwfji512eCfWJXcgCyXqJF3yoQGoa3zBvBLdhmA7
-         TEPlsvPhwrn+MmohJrnbakOR0jpH3uBmRkZz7IOvaSHNq14nlwm9Ff9RSBvvr8qUxMoL
-         3HZg==
+        bh=IrdG6Ig7zuqlgnxdtA/QevxhSFr0NlbEin9CqGi0gl4=;
+        b=JTxemcaKChq49PJ621lMpCFGVp2pAtO7kTQb2jXSsHZA3l6hbqK8Z/nqga0J0BjyRG
+         uzGGW4L7WsK2DCdBjj020rzGLMd3ZUkRtBt8335D567etACZhzHzMhYd8BhGDDMZ3WxS
+         yRw8mCf4+DpVXJZLBWcH2TE7ijPTXTGYX2m8xfa+6gyheEDPF6aAIR8oBWPre+CdCfNX
+         Nv4r2nq11LxjsPpmueu2UFDvA8vVNkwv0602Wyi5o+++lFsLaaqwDYnjSVI1+ofSYkBD
+         uNRlhepnviNJUPjiTFya/VmxRvCyxuTLDjyjcIdRcetL+HkKG1TfMIk/AH3OW/yFa33c
+         O09A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784205328; x=1784810128;
+        d=1e100.net; s=20251104; t=1784205446; x=1784810246;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=6GsA1hnt7dB4Nount0NQW3/ntJN4n8sOG/E6DgsVMf4=;
-        b=CVCeqyrwQWkPDfjjnCoonMdb76REfM6RYNKayHPEtYJoIaiPO3omOf1P73nYrIL3SY
-         YFzcdShyJzFp9FnB1XCcqz4atlnYDrRIZEx7amDAMujOgCGofAifsvlh2nvRrncFWYEL
-         QfVfLQLpl8JP8qkJGKyFIN+bTkUqDSvdZ8ZqVUKFr6cbeOk8vDxvAwnr0hHWrG0BcxPE
-         j900noEYytLN+IPegJhizsdwOXuHExH9QEZwkWKNvXDRq3O1bzlEseMCJy60yLdSTK5P
-         uvj0EPwJckEz/P026zQpJvtRQd/rM6+ehVPyd7cCAK0cMmte7aQfmFvFlGJfChHawF6O
-         T/1A==
-X-Forwarded-Encrypted: i=1; AHgh+RrBINMQPL/bWvgzStlMuairSyGOQBySRtj5T3jJy5wRgp5K/X9x88Kh8AyC85z8lU3vmZdFWC9qr50=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwEfLM0eBugoZAedBJDp93hoLVvGsQ+Ziy7P7DYKPXR1luRT7Bn
-	Xku4F9DFuHs7gM5bWV4IibO+hParu/sZjrvjtjFYYaLU/4yXj4uq/OxrS9B683yfYQ==
-X-Gm-Gg: AfdE7clZ8CTlN+vuCoj0WPzRpt7wTlyrZf6Plz9DygGlyWFr7hM8kHKUshz7CJF1Z7t
-	8UaJv5JKo+Np3CzxDfe1Yk87wTnMbjKFG4iRmbH8sVA3se6P32Y4YBnPDxNzHX5V1S6vgDavxkF
-	oOGZJU/k6y4Mkfx9oUL7mIOiAAZxyXbW8G9LnRBzdXoMEUW3o0mMzo5JKa9LtFhVbaETKhihNki
-	ynB0nbQ9CJw/K0iQiz29XGf6HWW/2mGGyKX1tlnZpWEmO3wZoaL43IZS/AsqNrM2hFqbnymgc+J
-	FzFYLHP1YP3jNFnbQjO1Q79kYI/PyMSq72f61HM+hGixZkSqAfGlGx/J50UQCi5iyRtPUy3aRbI
-	4F/VihHAs0nYVMXi0iBMvz2la3CUg9Anz08lpsYSkVf2QyPjQ2x63p4GXdCQVDym6TRhVUjmDFw
-	f/21DwJrPSrl5VnTM4A0DWH0twAqHJOckzRQM0ZM/DAoduvyH6LMfBHW39Yfv/5kH7WQ==
-X-Received: by 2002:a5d:588e:0:b0:47d:f43d:8947 with SMTP id ffacd0b85a97d-47f2dce306dmr24886863f8f.47.1784205328269;
-        Thu, 16 Jul 2026 05:35:28 -0700 (PDT)
-Message-ID: <fb34a560-9f54-4b16-86b0-2cedd63b7af6@suse.com>
-Date: Thu, 16 Jul 2026 14:35:26 +0200
+        bh=IrdG6Ig7zuqlgnxdtA/QevxhSFr0NlbEin9CqGi0gl4=;
+        b=VanhOXkKGcyobWsECnljFaPN/XPUzrIWrAgHo0/yQcefzwqmIW1p4Oa3j9G11X4bYZ
+         nyWa5bxEuKRnHQWd7U1j3CA1GAMwVO/izb2JjDqXHUcG/0PM3ryZ4JSQ7eKOAQZeMeRp
+         tMXm95eHsKCb7QjnaCx7S02yMrufMUu6AFWXZ5MYzVD2SgGRgthHUfBnBxHHDxiQBpIw
+         6vP4nW2URxYx+U5ySHMrCAV2GS/Qj1V7+hGpAALPcvj5uMBECPp7eRC7iMyyWVE+qJO+
+         oRr8bjzIiMp6Z32u4FZd6O5WTbAtA7dQL+fR5yXcJtPTaqJoz0kTNRO/uMF5kXJbj+3i
+         sXFA==
+X-Forwarded-Encrypted: i=1; AHgh+RrawlOFRTQ+rJmOKwkWDhBRdDfGgq0/bhFY+fntrDapzopLA+7+4FmWBeJ2JqkeV9+mT5OPW8VE3mU=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxaPhheGXxmSCxstk/5lKlfSMt8jm0DXk6dUwJIn4gFaaq3Hi9q
+	KNJMxoKQW5TUANloEC52DEdaNf9i2PhBgdVwKUzVRJo2yNkGz52skJiu0zXM37TyoQ==
+X-Gm-Gg: AfdE7cn/m+wWh8bV8km+zSM/yQMXdPUh7VSWg/M+1+G4ko8R6P0YZVZMO+ZB9UhJdjV
+	sbKWi6pCP1Rs84GwJLZ033eDjiKx7peocUAjE4JPq9IQ51JZFyge0hG43QSrzTEsU3PuHgLIOgW
+	aVXtnfbL74I8V4eiBrdix2iwzWk6VS1+/Q6Ncf4czi+Es+zuwuYRt9H54ClPdoYJDhkxBdkQzPP
+	ixAlKUbAZ5Oz/dhBIfCKFB4rMJiEHb5dn1sQZVKo4Z2SwtzfCt7d7+1ceDA9rLdfBwrTG2XyUia
+	x04jZVikMlXyceUq/+j9JrgXNBjluD4AydvjMGGiUB54VUR6ncnE0ScirgvO4E1qhROTeoq1GFc
+	Eba1Njsr4HOWZK1XpAsEuI22cXbXqmcLx1uVVHC3MYK3GqfRMLxyvp4o2QsZSRu8hRW/mhIsfTx
+	qF1CgVI6k6tKq8NfVISAQlcJroZsHLPRhqMiDMO11eXXdZrfnl2kPF2ClIpvxDA7ourC7oEkNJm
+	Gmr
+X-Received: by 2002:a05:600c:628b:b0:495:3da0:3f52 with SMTP id 5b1f17b1804b1-4953da04055mr75878215e9.19.1784205445728;
+        Thu, 16 Jul 2026 05:37:25 -0700 (PDT)
+Message-ID: <15038e5f-588e-4c60-986d-0141bb9d4dce@suse.com>
+Date: Thu, 16 Jul 2026 14:37:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 21/26] xen/riscv: implement IRQ routing for device
- passthrough
+Subject: Re: [PATCH v5 25/26] xen/riscv: add initial dom0less infrastructure
+ support
 To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  Baptiste Le Duc <baptiste.le-duc@vates.tech>,
  Alistair Francis <alistair.francis@wdc.com>,
  Connor Davis <connojdavis@gmail.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- xen-devel@lists.xenproject.org
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 References: <cover.1783331040.git.oleksii.kurochko@gmail.com>
- <c8611ea230ffaf44bec4b4232dfbb9832bb24619.1783331040.git.oleksii.kurochko@gmail.com>
+ <8fdb9cb4579e20dec10a9919fa966bc00394c6e7.1783331040.git.oleksii.kurochko@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,94 +135,43 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <c8611ea230ffaf44bec4b4232dfbb9832bb24619.1783331040.git.oleksii.kurochko@gmail.com>
+In-Reply-To: <8fdb9cb4579e20dec10a9919fa966bc00394c6e7.1783331040.git.oleksii.kurochko@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1784205328-CE74387B-3DAF04C9/10/73395122804
+X-purgate-ID: tlsNG-c201ff/1784205446-72EB12A1-E3D7C089/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 3706
+X-purgate-size: 1554
 
 On 06.07.2026 17:58, Oleksii Kurochko wrote:
-> dom0less device passthrough requires granting guest domains access to
-> device interrupts.  Introduce map_device_irqs_to_domain() to enumerate
-> a DT node's interrupt properties, skipping those not owned by
-> the primary interrupt controller (as at the moment I haven't seen usages
-> of it), and map_irq_to_domain() to grant domain access and configure
-> Xen's interrupt descriptor accordingly. Sharing IRQ between domains is
-> rejected.
+> Enable dom0less support for RISC-V by selecting HAS_DOM0LESS and
+> providing the minimal architecture hooks required by the common
+> dom0less infrastructure.
 > 
-> Both map_irq_to_domain() and map_device_irqs_to_domain() are marked
-> __overlay_init, mirroring Arm: without CONFIG_OVERLAY_DTB this expands to
-> __init, so the functions are init-only and need no XSM check; with
-> CONFIG_OVERLAY_DTB they become runtime-callable, but the only runtime
-> entry point is dt_overlay_domctl(), which performs the XSM checks at the
-> domctl layer.  RISC-V does not wire up DT overlay yet, so today these are
-> strictly __init; if/when overlay support is added, the domctl-level XSM
-> gating must be added together with it, as on Arm.
+> Add stub implementations for architecture-specific helpers used when
+> building domains from the device tree. These allow the generic
+> dom0less code to build and let a basic DomU be constructed on RISC-V.
+> construct_hwdom() and make_hypervisor_node() are still stubs returning
+> an error: Dom0/hwdom construction isn't supported yet, and the
+> hypervisor node generation (needed by domains with
+> DOM0LESS_ENHANCED_NO_XS set) is not implemented. Both are marked with
+> a TODO and are not reached by the currently supported configurations.
 > 
-> route_irq_to_guest() and release_irq() manage irq_desc ownership for
-> guest-assigned interrupts.  Each assignment carries a small irq_guest
-> structure as irqaction::dev_id, recording the owning domain and virtual
-> IRQ number which is 1:1 mapped to physical IRQ number.  A per-domain
-> vIRQ allocation bitmap (used_irqs in struct vintc), managed by
-> vintc_reserve_virq(), prevents the same vIRQ being claimed twice.
+> Provide missing helpers and definitions required by the domain
+> construction code, including domain bitness helpers and the
+> p2m_set_allocation() prototype.
 > 
-> Host and guest interrupts may differ in some operations (EOI timing in
-> particular, possibly others): a host IRQ is completed once Xen's handler
-> runs, whereas a passthrough IRQ must defer the physical completion until
-> the guest issues its own EOI, otherwise a still-asserted level line would
-> immediately retrigger and storm.  This affects only the .end callback;
-> the rest of hw_interrupt_type is shared, hence the separate host and
-> guest hw_interrupt_type instances.
+> Additionally define the guest magic memory region (GUEST_MAGIC_BASE /
+> GUEST_MAGIC_SIZE) in asm/guest-layout.h. The base is arbitrary; the
+> only constraint is that the region must not overlap guest RAM or the
+> emulated device regions. It is placed in the unused gap below
+> GUEST_RAM0_BASE (0x80000000); the constraints are documented next to
+> the #define-s.
 > 
-> With APLIC+IMSIC, guest interrupts are delivered directly by hardware
-> through the IMSIC, bypassing do_IRQ(). The _IRQ_GUEST branch in
-> do_IRQ() is therefore left as BUG() until a platform without direct
-> IMSIC delivery is encountered.
+> A separate region for grant tables will be introduced at the same time as
+> the introduction of the grant table for RISC-V.
 > 
 > Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
 Acked-by: Jan Beulich <jbeulich@suse.com>
 
-Irrespective I'm pretty curious how ...
-
-> --- a/xen/arch/riscv/aplic.c
-> +++ b/xen/arch/riscv/aplic.c
-> @@ -306,9 +306,13 @@ static const hw_irq_controller aplic_xen_irq_type = {
->      .set_affinity = aplic_set_irq_affinity,
->  };
->  
-> +/* At the moment there is no difference between guest and Xen ops */
-> +#define aplic_guest_irq_type aplic_xen_irq_type
-> +
->  static const struct intc_hw_operations aplic_ops = {
->      .info                = &aplic_info,
->      .host_irq_type       = &aplic_xen_irq_type,
-> +    .guest_irq_type      = &aplic_guest_irq_type,
->      .handle_interrupt    = aplic_handle_interrupt,
->      .set_irq_type        = aplic_set_irq_type,
->  };
-
-... this duplication of the same struct into ...
-
-> --- a/xen/arch/riscv/include/asm/intc.h
-> +++ b/xen/arch/riscv/include/asm/intc.h
-> @@ -15,6 +15,7 @@ enum intc_variant {
->  };
->  
->  struct cpu_user_regs;
-> +struct domain;
->  struct irq_desc;
->  struct kernel_info;
->  struct vcpu;
-> @@ -34,6 +35,9 @@ struct intc_hw_operations {
->      /* hw_irq_controller to enable/disable/eoi host irq */
->      const struct hw_interrupt_type *host_irq_type;
->  
-> +    /* hw_irq_controller to enable/disable/eoi guest irq */
-> +    const struct hw_interrupt_type *guest_irq_type;
-
-... two distinct fields is going to work / be useful.
-
-Jan
 
