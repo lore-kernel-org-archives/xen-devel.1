@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 385AFC4450E
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 12:06:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1363878.1615352 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B04C5C4450A
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 12:25:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1363933.1615359 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkKqd-00080n-5E; Thu, 16 Jul 2026 12:05:51 +0000
+	id 1wkL9g-0002Zu-Lt; Thu, 16 Jul 2026 12:25:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1363878.1615352; Thu, 16 Jul 2026 12:05:51 +0000
+Received: by outflank-mailman (output) from mailman id 1363933.1615359; Thu, 16 Jul 2026 12:25:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkKqd-00080g-0a; Thu, 16 Jul 2026 12:05:51 +0000
-Received: by outflank-mailman (input) for mailman id 1363878;
- Thu, 16 Jul 2026 12:05:49 +0000
+	id 1wkL9g-0002Zn-J6; Thu, 16 Jul 2026 12:25:32 +0000
+Received: by outflank-mailman (input) for mailman id 1363933;
+ Thu, 16 Jul 2026 12:25:32 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 1wkKqb-00080W-E9
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 12:05:49 +0000
+ id 1wkL9g-0002Zh-15
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 12:25:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkKqa-000WpR-RF
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 14:05:48 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wkL9f-000aKY-EF
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 14:25:31 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 6a58c918-5cb7-0a2a0a5109dd-0a2a4504c202-18
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 14:05:48 +0200
+ id 6a58cdb5-2eae-0a2a0a5409dd-0a2a4509a5cc-26
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 14:25:31 +0200
 Received: from [160.101.131.9] (helo=na1pdmzitismtp02.tibco.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 6a58c91b-b57f-0a2a45040019-a0658309b0f0-3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 14:05:48 +0200
+ id 6a58c945-be1a-0a2a45090019-a0658309c2aa-3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 14:06:29 +0200
 Received: from fedora.eng.citrite.net (unknown [10.113.40.46])
- by na1pdmzitismtp02.tibco.com (Postfix) with ESMTP id F21EA82DEFFC;
- Thu, 16 Jul 2026 08:04:08 -0400 (EDT)
+ by na1pdmzitismtp02.tibco.com (Postfix) with ESMTP id 6FF3C82EC53D;
+ Thu, 16 Jul 2026 08:04:50 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,14 +58,14 @@ Cc: jbeulich@suse.com,
 	roger.pau@citrix.com,
 	jason.andryuk@amd.com
 Subject: Re: Re: [PATCH v1] nSVM: Check injected event consistency
-Date: Thu, 16 Jul 2026 13:03:40 +0100
-Message-ID: <20260716120340.1319581-1-abdelkareem.abdelsaamad@citrix.com>
+Date: Thu, 16 Jul 2026 13:04:22 +0100
+Message-ID: <20260716120422.1319593-1-abdelkareem.abdelsaamad@citrix.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <1784124787.8631fc262581453bbf619ec5b2062170.19f661fca07000edb5@vates.tech>
 References: <1784124787.8631fc262581453bbf619ec5b2062170.19f661fca07000edb5@vates.tech>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1784203548-C1AD0B50-BDF7CE88/0/0
+X-purgate-ID: tlsNG-bad1c0/1784203590-FD469034-1F76C414/13/0
 X-purgate-type: clean
 X-purgate-size: 2040
 
