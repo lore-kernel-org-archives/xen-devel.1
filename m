@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9B14C44512
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 15:49:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1364322.1615593 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A301DC44511
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 16:08:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1364334.1615603 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkOLG-0006kw-Io; Thu, 16 Jul 2026 15:49:42 +0000
+	id 1wkOd4-0001rS-03; Thu, 16 Jul 2026 16:08:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1364322.1615593; Thu, 16 Jul 2026 15:49:42 +0000
+Received: by outflank-mailman (output) from mailman id 1364334.1615603; Thu, 16 Jul 2026 16:08:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkOLG-0006kp-Fa; Thu, 16 Jul 2026 15:49:42 +0000
-Received: by outflank-mailman (input) for mailman id 1364322;
- Thu, 16 Jul 2026 15:49:41 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wkOd3-0001rL-Te; Thu, 16 Jul 2026 16:08:05 +0000
+Received: by outflank-mailman (input) for mailman id 1364334;
+ Thu, 16 Jul 2026 16:08:04 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wkOLF-0006kf-9b
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 15:49:41 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wkOd2-0001qz-5U
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 16:08:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkOLE-008L02-FI
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 17:49:40 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wkOd1-00FI30-Aw
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 18:08:03 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a58fd72-bab6-0a2a0a5309dd-0a2a45058618-34
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 17:49:37 +0200
-Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a5901de-2eae-0a2a0a5409dd-0a2a4507c952-34
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 18:08:03 +0200
+Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a58fd91-4cb1-0a2a45050019-d155dd34c8d4-3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 17:49:37 +0200
-Received: by mail-wr1-f52.google.com with SMTP id
- ffacd0b85a97d-475417f010dso3519376f8f.2
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 08:49:37 -0700 (PDT)
+ id 6a5901e2-b4ea-0a2a45070019-d155dd2fbc1c-3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 18:08:03 +0200
+Received: by mail-wr1-f47.google.com with SMTP id
+ ffacd0b85a97d-47f365afc5aso2896684f8f.0
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 09:08:03 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f4634e0e4sm26669397f8f.4.2026.07.16.08.49.36
+ ffacd0b85a97d-47f464c89e5sm25402666f8f.34.2026.07.16.09.08.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Jul 2026 08:49:36 -0700 (PDT)
+ Thu, 16 Jul 2026 09:08:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,55 +55,54 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784216977; x=1784821777; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1784218082; x=1784822882; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=RlfVTDPJJLJrXyj4G1qVW2wDKeCcBC8qeWz9AgrYJ6E=;
-        b=M4UlgtDCBwBxudx+GtXkf3L6ZCiHO8X7UbtrB5zdR9dOE0wSDoj/SRbwvLWrmBBNZx
-         gATc9WadhR7WSQink7qr9K4r/cnmwG3pSZR8t4BwPmqScnVJPcAD6tTXfrh6ZunlyGSu
-         FfNECsEt7Ibraalo74K/Y28KfRsSW11TQPqRfsVh4CcS5DPkpksG1N1MzlorkrEvRvEr
-         OPDRI40r1w0UuzyRbkGVoZgEDorzS1cxMRLQNIBDYjcFsBF7MI0n5+aYprpkHmzNPoSb
-         aZSkxoWAMCwaHQC3Y87VTzrUKNBFC5xFTE+rNPtrlmIWIvgO8iZbtKjDkStosGuS7G65
-         f16g==
+        bh=HcR3h/iUqU6ikCT/C/gkqXmqEWJCvHNwK7jVzd8zkTs=;
+        b=dekCc3STxQJ0u+vI1mEivChig3d78TxnwZymJloOXAP4xOT7zyBRlvZDFgmD9rhmrB
+         0KVzUmY8/EigM2rrMdROfYrKTNCBjczl4UgnzUvreINUIzbawSiSFvvMRGNzFBCNAUDM
+         ayBEikPm24ARHn13s08zrUHFnDIIQzm5vpAVNTGLyU2yDFc6ShnGeUi7z8w0J2+CLGE3
+         rFhbvEZrbnTSqdx00EdWABzWCckBAOvbb5EZEVWPGxMOB7FpSDmO4GLW3pzqy3GszZYa
+         O91ZQmBwEI5pZxB1rgFts4DA94lBV5ERLSdYsxk7kk8kaPcePBwFqGA3OpM/3yummW9x
+         CNEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784216977; x=1784821777;
+        d=1e100.net; s=20251104; t=1784218082; x=1784822882;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=RlfVTDPJJLJrXyj4G1qVW2wDKeCcBC8qeWz9AgrYJ6E=;
-        b=F/9zl73H6HrswKj6vJCWlF3wBjiSovahJMMIK3U5T+gCp7dQRYxwDOLuAts4xKYAFx
-         gQF15nbZ5OboYcjTYhIUU2FShp6smmIOUKpsxJgazpDzum53vYzLg9PX02rMrnNISFBB
-         QD6BiVm7CrFLPxMVA6haQUlMrLQzv61ZTP46LaDX4HeYWJCNpFzFXVmm0FtqbS9UAUm9
-         idw3+VQfvufXtAWh/poqB9BxPXSlxYouU2pzT8diwj7QA9GVs/IDx06x8ElbT2pK5QDq
-         LX+MCHDWsT0OKu40Rr79sPfb5TyXTMnwxfv9TH0WFhSfb+3MkZfRQHAh0NZQTj8xv/sU
-         5xXw==
-X-Forwarded-Encrypted: i=1; AHgh+RrV/rnJs+cg82ijBDouFmscG+f2CJPK8DJ+MifYQgDxOn9zP6hr59ACRGRpfn+bjjQjemKpNGX1+Q0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yy5lzM2OfhO8daUmW7rwa2Wlk/NEyGZyxsEHuNcCEfj03LVpewY
-	qXL2mxmY9E6GDf5lqQwpg1p+G1Ba3iWjtiV43GDsf2HWxnpb8v/f/y0MdQwYYygl3g==
-X-Gm-Gg: AfdE7cly4mF58OWg54gao5VEzicIMNwl8e/R1oOU2QfK2NGHolWV2P217fxNB/rKTYk
-	gjNyQD7BoZUyxv/c3+aX4gae+qRGfJ4PjACSZyFV4/BIyguzop5aTD2vwyCFaZn6GT3PlfZ0CLM
-	5vXlJyVGYtowSz8HxyDjaEMHtO6pFfznjWTnLSi0FVQSoFyFVGQYLyhapMSRuduOfcQ6RRLkEQO
-	XMUb590Qf4djW4wELxB/B2/g0wFye4Zri43JeGnkIUSxN9k2hDPTdiuTWr7W4ApS0sEzezk/v3i
-	9U1bPKKdLKdcooKWwt4cv/f/UpSV38HX5L+SA9V+bpHePKDUWYctAVJjb26hg3XmA1A2igQdHRK
-	NAV4diHHOeYH8jgugqE5yu2B3+TY6q9+nIowpBsKXRQ/QippprTlq5uf1lAer+exCc4NRKZEwdS
-	rQeu3HNfUXi9TrmU8OS7/zp1JsNQDkTjxxZqbORDMEwSEGNNpnLZSLYUQDW7F3R4L31A==
-X-Received: by 2002:a05:600c:8115:b0:493:aa0a:45ad with SMTP id 5b1f17b1804b1-4953c14f78dmr84277505e9.2.1784216977017;
-        Thu, 16 Jul 2026 08:49:37 -0700 (PDT)
-Message-ID: <020cfca3-5558-422f-b267-e498bfdf36bf@suse.com>
-Date: Thu, 16 Jul 2026 17:49:35 +0200
+        bh=HcR3h/iUqU6ikCT/C/gkqXmqEWJCvHNwK7jVzd8zkTs=;
+        b=rGsp17Be267WqIqOyIragmyenrOTbNWztYtedioWsYJUCxAkSkgBXsupvLmV/N3hGT
+         EZoTfCUZ1TYaA9CVzYDHVJL+IBP/q7iRue/GX6lel2T787Ct2YhjituBgleLW4YPkZDv
+         7ryndAwnOaxmZGNDU3nqIQRD/YRnSlApryuq9DcDnAhvEoAns8uOr46IZEWdDH5MxW67
+         mC7ahjN1uvmm6RCvzZjBaOyXqZtVo36oU3lz7pJF/lQevf6qZCwPdBcpVU81E7XTGHBU
+         qm5zX+e/H88zDzz2yW2syg1BueY0KH7WFHviUT99fVC7CIA2jJ92IPKLbHIBPSPfBxj4
+         X4XA==
+X-Forwarded-Encrypted: i=1; AHgh+RosAb4R585FxeLyOb5ZV/5sAYI463HTu2+wyAyNFlyjTWLfQrxDA9cOyVJ5IgTf3csjS6ed7EY/9xY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwyIWOomCWZV8ByeW4DWT/bZzt+fW1mZV5RguJQOcReeg87mgem
+	n8P3MzOipt/B1E8a/QM5eATawQ4bzdPkkIeFw3Uj2zuWDoyOzFENDl5vPC/Q7LaKPA==
+X-Gm-Gg: AfdE7cnJ7jh3NlcNzvs4DiQ8FfOvjYukq4jOiyhojRpTK+I4n4Xvs2TyyfzgiGrsCqe
+	Mf8z71b0pfdCruF7l94WiN2zK7bX1tmLFxrmyhY9wgaPA54DZ39wyWnInCNYrK5DWxUTS806wZf
+	7YeexBMsqSRwXUnQmDGF5qRSZspk/FNhH6/luIyRnUzMBwnUfFd8QYJH3iANx/TrQGeMnoTrlgQ
+	QlIhHu0YAZNpb9Fgb2id5f9+AOFKNES1/ULvCc6eHc1pXNo2JcCgEbBwDG/YPjYTcma5wxjS+Es
+	6qGmRtftYRbdZdoDWsluiK47yl0Ro6/2vDy+X9a+GYM827e5HuTfxzPms7H+F8l3gcZ8nong6vT
+	PxWfCdo6Gd60dy2V8ahzxxW/zi71JSLsl2Xc+l/0GjVsZKZS7Z1zqJKW+VwEt5zl8qviurSbkg1
+	5NT4JTrfBOWHVQ8eDrxHxSppG3yRDog53VIPVl+LVNCYb4zbVveTCvP7+2ZdO0wtoh2g==
+X-Received: by 2002:a05:6000:2086:b0:472:9bf7:2f58 with SMTP id ffacd0b85a97d-47f488b2106mr14130334f8f.36.1784218082557;
+        Thu, 16 Jul 2026 09:08:02 -0700 (PDT)
+Message-ID: <40223b4b-4cf4-4cd2-8085-5323784b2d33@suse.com>
+Date: Thu, 16 Jul 2026 18:08:01 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/4] xen/console: reduce number of printouts in
- __printk_ratelimit()
+Subject: Re: [PATCH v7 3/7] xen/console: use memcpy() in conring_puts()
 To: dmukhin@ford.com
 Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, julien@xen.org,
  michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org,
  xen-devel@lists.xenproject.org
-References: <20260715201902.2984407-1-dmukhin@ford.com>
- <20260715201902.2984407-5-dmukhin@ford.com>
+References: <20260713181619.672176-1-dmukhin@ford.com>
+ <20260713181619.672176-4-dmukhin@ford.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,52 +128,28 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260715201902.2984407-5-dmukhin@ford.com>
+In-Reply-To: <20260713181619.672176-4-dmukhin@ford.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1784216977-F6CB02A1-1085730F/0/0
+X-purgate-ID: tlsNG-ef75cf/1784218083-36AD8AE4-AFD264F1/0/0
 X-purgate-type: clean
-X-purgate-size: 1444
+X-purgate-size: 756
 
-On 15.07.2026 22:19, dmukhin@ford.com wrote:
-> From: Denis Mukhin <dmukhin@ford.com> 
-> 
-> Fold several __putstr() calls into one around notification of how many
-> messages have been rate-limited.
-> 
-> Not a functional change.
-> 
-> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
-
-Hmm, the upsides and downsides aren't being discussed at all. You're ...
-
+On 13.07.2026 20:16, dmukhin@ford.com wrote:
 > --- a/xen/drivers/char/console.c
 > +++ b/xen/drivers/char/console.c
-> @@ -1303,15 +1303,15 @@ bool __printk_ratelimit(unsigned int ratelimit_ms,
->          spin_unlock(&ratelimit_lock);
->          if ( lost )
->          {
-> -            char lost_str[10];
-> +            char msg[64];
-> +
-> +            snprintf(msg, sizeof(msg),
-> +                     "printk: %u messages suppressed\n", lost);
+> @@ -360,12 +360,22 @@ static DECLARE_SOFTIRQ_TASKLET(conring_tasklet, conring_notify, NULL);
+>  /* NB: Do not send conring VIRQs during panic. */
+>  static bool conring_no_notify;
 >  
-> -            snprintf(lost_str, sizeof(lost_str), "%u", lost);
->              /* console_lock may already be acquired by printk(). */
->              rspin_lock(&console_lock);
->              printk_start_of_line(CONSOLE_PREFIX);
-> -            __putstr("printk: ");
-> -            __putstr(lost_str);
-> -            __putstr(" messages suppressed.\n");
-> +            __putstr(msg);
->              rspin_unlock(&console_lock);
->          }
->          local_irq_restore(flags);
+> -static void conring_puts(const char *str, size_t len)
+> +static void conring_puts(const char *str, unsigned int len)
+>  {
+> +    unsigned int src = likely(len < conring_size) ? 0 : len - conring_size;
 
-... trading slightly smaller code size + slightly better performance for
-slightly bigger stack utilization. It's not entirely obvious that this is
-a good deal.
+Isn't the attempt to handle strings longer than conring_size pretty much in
+vain? Things look correct as far as the rest of the logic in the function
+goes, but is this useful? It certainly warrants at least a brief comment imo.
 
 Jan
 
