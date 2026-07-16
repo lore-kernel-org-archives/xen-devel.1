@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A74EC4450A
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 14:07:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1364085.1615432 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EDD0C44512
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 14:12:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1364094.1615442 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkMk3-00022l-D4; Thu, 16 Jul 2026 14:07:11 +0000
+	id 1wkMoc-0003dd-Uh; Thu, 16 Jul 2026 14:11:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1364085.1615432; Thu, 16 Jul 2026 14:07:11 +0000
+Received: by outflank-mailman (output) from mailman id 1364094.1615442; Thu, 16 Jul 2026 14:11:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkMk3-00022e-9t; Thu, 16 Jul 2026 14:07:11 +0000
-Received: by outflank-mailman (input) for mailman id 1364085;
- Thu, 16 Jul 2026 14:07:10 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wkMoc-0003dW-Qe; Thu, 16 Jul 2026 14:11:54 +0000
+Received: by outflank-mailman (input) for mailman id 1364094;
+ Thu, 16 Jul 2026 14:11:53 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f6b408bba000edb5@swg.vates.tech>)
- id 1wkMk1-00022Y-W7
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 14:07:09 +0000
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f6b44e2b5000edb5@swg.vates.tech>)
+ id 1wkMob-0003dQ-Na
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 14:11:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkMk1-00HaGC-Cn
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 16:07:09 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wkMoa-006m7b-W4
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 16:11:53 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f6b408bba000edb5@swg.vates.tech>)
- id 6a58e58b-e002-0a2a0a5209dd-0a2a450b9bc2-8
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 16:07:09 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f6b44e2b5000edb5@swg.vates.tech>)
+ id 6a58e6a0-5cb7-0a2a0a5109dd-0a2a4506d8c4-34
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 16:11:52 +0200
 Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f6b408bba000edb5@swg.vates.tech>)
- id 6a58e58c-b7e8-0a2a450b0019-b9ff1c2396c3-3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 16:07:09 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f6b44e2b5000edb5@swg.vates.tech>)
+ id 6a58e6a8-195a-0a2a45060019-b9ff1c238695-3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 16:11:52 +0200
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
  by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19f6b408bba000edb5.00b for <xen-devel@lists.xenproject.org>
+ 19f6b44e2b5000edb5.00b for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 16 Jul 2026 14:07:00 +0000
+ Thu, 16 Jul 2026 14:11:44 +0000
 Received: from julian.home (areims-651-1-80-194.w90-18.abo.wanadoo.fr
  [90.18.187.194]) (Authenticated sender: julian.vetter@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id 27111815FF;
- Thu, 16 Jul 2026 16:06:59 +0200 (CEST)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 929EB8299A;
+ Thu, 16 Jul 2026 16:11:43 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,23 +58,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Feedback-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=Vre36dgL4UE0Uzr9gPi/lZEbu7xbNbhHZidry/6L+M0=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:feedback-id;
- b=V0BTjqRuNZt96MmexYXGmNveNgBIpMw27xcTjIa9BCkGrM+U63W5yduujbYMhN7ISuk0lAF5P
- WWdw6oT+KyVUnxMlRDs9x9HpVAbSIehQfakovEamqUX60J//28Emhe3D9FcPS835674GoEg5Akd
- zOS1NWRyDABjFILQ8et9qBTHOg4aW59SHhj2/GvSy/XQkK7SvAf64LrdGIQ+bzzyDIm4mEx/yS8
- 1HebqZZvRfH5zmjeqDeyhCEMMB6yaztz2gkU+xCAOJ61jcVSxxApY8GhmuWdthMWHJNYaBsd+Ti
- jEWOHa611NpJgG7QGPvoK7YXIqTXARQ3gQVVUJgcvXWQ==
-X-Zone-Loop: 0d2fefb24e799f2e41498e5b6b3fb3d748ebc889a79b
+ q=dns/txt; s=selector1; bh=+OCCws+kMFTzhNurIniKZ6IR2VxwCtBF0F5VlRyNrxg=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=PWpJfJfqmtdqxmufuJb9YMwSbyVJ7F5+Nslra4r2zZ33pLb+B7JF0+1VSUoRLAoYoQr1LtxvW
+ uoskg7qYaYg6brwCKMaPVejoa/+v7CWL0EuDuiY1J82B0S6zgiSRi8GxhFggQ05WEcgmijtah39
+ i8HIFw+NZSlQd68yI2UVnUquY+gq/gQS/tU6fAaBxyLCDd4CJi1OJ0E0dnTuSawuLsYoBDe5vCe
+ FDZ2JET68glkkT4xdBtkPcqD55moN3eiC/JMb/Ms1sehCc0CWwbjwWpMQyEoxrjvJR7sU1upbJT
+ luVaGmycx1YWAMwFgKAI0LTlvf/+a6CEIKyyfV2nAlYg==
+X-Zone-Loop: 9082a525d9105746b6aaafaf5e18dad0f37adeec7466
 x-campaign-type: default
-x-transaction-id: d01d579d-b162-4db2-9a93-09d76c3738e4
-x-swg-uid: 01-6ccdf912-8940-48bf-a117-b1471084d4a8
+x-transaction-id: e88e294c-0577-4339-985b-4a1f32701b0c
+x-swg-uid: 01-24326d5c-786e-4799-ae06-e89bdbb98cd5
 X-Mailer: Sweego
 Message-ID:
- <1784210820.8631fc262581453bbf619ec5b2062170.19f6b408bba000edb5@vates.tech>
-x-swg-bid: 1784210820.8631fc262581453bbf619ec5b2062170.19f6b408bba000edb5
+ <1784211104.8631fc262581453bbf619ec5b2062170.19f6b44e2b5000edb5@vates.tech>
+x-swg-bid: 1784211104.8631fc262581453bbf619ec5b2062170.19f6b44e2b5000edb5
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
@@ -101,83 +101,62 @@ Cc: Anthony PERARD <anthony.perard@vates.tech>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Teddy Astie <teddy.astie@vates.tech>,
 	Julian Vetter <julian.vetter@vates.tech>
-Subject: [PATCH v3 0/6] Fix ARM domcreate
-Date: Thu, 16 Jul 2026 16:06:53 +0200
+Subject: [PATCH v3 1/6] xen/arm: report proper GIC version via XEN_DOMCTL_getdomaininfo
+Date: Thu, 16 Jul 2026 16:11:33 +0200
+In-Reply-To: <1784210820.8631fc262581453bbf619ec5b2062170.19f6b408bba000edb5@vates.tech>
+References: <1784210820.8631fc262581453bbf619ec5b2062170.19f6b408bba000edb5@vates.tech>
 MIME-Version: 1.0
 X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.a03.1a725c01134c3243.19f6b408989.d6c2c6858942c0a5=-"
+Content-Type: multipart/alternative; boundary="-=Part.a07.dcf94ff9e3ea626.19f6b44e09a.f7b0c5c18850d58e=-"
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1784210819466
-X-purgate-ID: tlsNG-42698a/1784210829-190CD9EA-C3CB8D1B/0/0
+X-Bm-Transport-Timestamp: 1784211103898
+X-purgate-ID: tlsNG-16d1c6/1784211112-FD60A77B-6360C805/0/0
 X-purgate-type: clean
-X-purgate-size: 3568
+X-purgate-size: 1988
 
----=Part.a03.1a725c01134c3243.19f6b408989.d6c2c6858942c0a5=-
+---=Part.a07.dcf94ff9e3ea626.19f6b44e09a.f7b0c5c18850d58e=-
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-Hello Jan and Andrew,
-thank you for your feedback! And sorry for the mess with the patches
-somee being send twice=2E I'm still fighting against our mailserver=2E
-As you suggested Andrew, I have taken ownership of the 2 patches, and I
-have split the changes to the tools part and the changes to Xen into 2
-separate patches=2E
-Jan, I have added a _hz to the frequency to make it clear that this is
-in Hz=2E Also, I have updated the comment, that the actual field in the DT
-is also only a single cell of 32 bit=2E So, for now there is no need to
-widen this in the ABI=2E I have also added how/if this value is used when
-the system boots via ACPI=2E
+When creating a domain on ARM, and passing XEN_DOMCTL_CONFIG_GIC_NATIVE
+for the gic_version field in the struct xen_arch_domainconfig,
+arch_sanitise_domain_config() resolves this to the approrpiate GIC_V2 or
+GIC_V3 version the domain actually has, based on the host's
+gic_hw_version()=2E That value is stored in the domain as
+d->arch=2Evgic=2Eversion, but can't be queried through any other domctl
+later=2E Toolstacks that create and build a domain in the same call
+already have this info from the createdomain reply and never need to ask
+again=2E
+
+Toolstacks that create a domain and build it later from a separate
+process do need to ask again=2E But, the ARM implementation only fills in
+info->flags and info->gpaddr_bits=2E info->arch_config is left zeroed, so
+XEN_DOMCTL_getdomaininfo always reports gic_version as
+XEN_DOMCTL_CONFIG_GIC_NATIVE (0) regardless of what was actually
+configured earlier=2E
 
 Signed-off-by: Julian Vetter <julian=2Evetter@vates=2Etech>
+Reviewed-by: Andrew Cooper <andrew=2Ecooper3@citrix=2Ecom>
 ---
 Changes in v3:
-- Added Reviewed-by to patch 1 and 6
-- Changed ownership of patches 3 and 4
-- Split patch 3 into two patches as suggested by Andrew
-- Updated CHANGELOG=2Emd to report the changes to the ABI
-- Addressed Jan's comments in regards to the clock_frequency property
-  and ACPI booting
+- Added 'Reviewed-by'
 ---
-Andrew Cooper (1):
-  ARM/sysctl: Expose the supported guest GIC modes in physinfo
+ xen/arch/arm/domctl=2Ec | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Julian Vetter (5):
-  xen/arm: report proper GIC version via XEN_DOMCTL_getdomaininfo
-  tools/arm: choose GIC version explicitly instead of relying on
-    GIC_NATIVE
-  xen/arm: remove XEN_DOMCTL_CONFIG_GIC_NATIVE from the ABI
-  xen/arm: report clock_frequency via sysctl physinfo, not createdomain
-  xen: make config argument const
-
- CHANGELOG=2Emd                                  |  3 ++
- =2E=2E=2E/include/xen-tools/arm-arch-capabilities=2Eh | 16 ++++++++++
- tools/libs/light/libxl=2Ec                      |  1 +
- tools/libs/light/libxl_arm=2Ec                  | 30 ++++++++++++++++---
- tools/libs/light/libxl_types=2Eidl              |  1 +
- tools/ocaml/libs/xc/xenctrl=2Eml                |  1 -
- tools/ocaml/libs/xc/xenctrl=2Emli               |  1 -
- tools/python/xen/lowlevel/xc/xc=2Ec             | 20 ++++++++++++-
- xen/arch/arm/dom0less-build=2Ec                 |  3 +-
- xen/arch/arm/domain=2Ec                         | 29 +++++++-----------
- xen/arch/arm/domain_build=2Ec                   |  3 +-
- xen/arch/arm/domctl=2Ec                         |  2 ++
- xen/arch/arm/firmware/sci=2Ec                   |  2 +-
- xen/arch/arm/firmware/scmi-smc=2Ec              |  2 +-
- xen/arch/arm/gic=2Ec                            | 16 ++++++++++
- xen/arch/arm/include/asm/firmware/sci=2Eh       |  6 ++--
- xen/arch/arm/include/asm/gic=2Eh                |  6 ++++
- xen/arch/arm/include/asm/vtimer=2Eh             |  3 +-
- xen/arch/arm/sysctl=2Ec                         | 29 ++++++++++++++++++
- xen/arch/arm/vtimer=2Ec                         |  4 +--
- xen/arch/ppc/stubs=2Ec                          |  2 +-
- xen/arch/riscv/domain=2Ec                       |  2 +-
- xen/arch/x86/domain=2Ec                         | 16 +++++-----
- xen/include/public/arch-arm=2Eh                 | 17 +----------
- xen/include/public/domctl=2Eh                   |  4 +--
- xen/include/public/sysctl=2Eh                   | 23 +++++++++++++-
- xen/include/xen/sched=2Eh                       |  6 ++--
- 27 files changed, 180 insertions(+), 68 deletions(-)
-
+diff --git a/xen/arch/arm/domctl=2Ec b/xen/arch/arm/domctl=2Ec
+index 6c9a3f9920=2E=2Eb76af56fad 100644
+--- a/xen/arch/arm/domctl=2Ec
++++ b/xen/arch/arm/domctl=2Ec
+@@ -24,6 +24,8 @@ void arch_get_domain_info(const struct domain *d,
+     info->flags |=3D XEN_DOMINF_hap;
+=20
+     info->gpaddr_bits =3D p2m_ipa_bits;
++
++    info->arch_config=2Egic_version =3D d->arch=2Evgic=2Eversion;
+ }
+=20
+ static int handle_vuart_init(struct domain *d,=20
 --=20
 2=2E53=2E0
 
@@ -190,5 +169,5 @@ XCP-ng & Xen Orch=
 estra - Vates solutions
 
 web: https://vates=2Etech
----=Part.a03.1a725c01134c3243.19f6b408989.d6c2c6858942c0a5=---
+---=Part.a07.dcf94ff9e3ea626.19f6b44e09a.f7b0c5c18850d58e=---
 
