@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12D3CC44501
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 09:03:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1363601.1615200 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 195F5C4450A
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 09:04:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1363610.1615209 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkI0N-00044A-Sb; Thu, 16 Jul 2026 09:03:43 +0000
+	id 1wkI0W-0004aW-Bn; Thu, 16 Jul 2026 09:03:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1363601.1615200; Thu, 16 Jul 2026 09:03:43 +0000
+Received: by outflank-mailman (output) from mailman id 1363610.1615209; Thu, 16 Jul 2026 09:03:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkI0N-000441-Fh; Thu, 16 Jul 2026 09:03:43 +0000
-Received: by outflank-mailman (input) for mailman id 1363601;
- Thu, 16 Jul 2026 09:03:42 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wkI0W-0004aN-71; Thu, 16 Jul 2026 09:03:52 +0000
+Received: by outflank-mailman (input) for mailman id 1363610;
+ Thu, 16 Jul 2026 09:03:50 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ze.huang@oss.qualcomm.com>) id 1wkI0M-00042U-Id
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 09:03:42 +0000
+ (envelope-from <ze.huang@oss.qualcomm.com>) id 1wkI0U-0004Xc-8W
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 09:03:50 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkI0L-0078He-VR
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 11:03:41 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wkI0T-005AvS-LM
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 11:03:49 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <ze.huang@oss.qualcomm.com>)
- id 6a589e5f-e002-0a2a0a5209dd-0a2a450bc4fc-42
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 11:03:41 +0200
-Received: from [205.220.180.131] (helo=mx0b-0031df01.pphosted.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a589e72-2eae-0a2a0a5409dd-0a2a45089da2-16
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 11:03:48 +0200
+Received: from [205.220.168.131] (helo=mx0a-0031df01.pphosted.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <ze.huang@oss.qualcomm.com>)
- id 6a589e6c-b7e8-0a2a450b0019-cddcb4834d4e-3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 11:03:41 +0200
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ id 6a589e72-f659-0a2a45080019-cddca883a098-3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 11:03:48 +0200
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66G7DsSM2048859
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 09:03:40 GMT
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4feayfm47b-1
+ 66G7DWTu3122398
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 09:03:46 GMT
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com
+ [209.85.215.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4feq3ph75s-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 09:03:39 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-2cc8bde6318so117357965ad.3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 02:03:39 -0700 (PDT)
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 09:03:46 +0000 (GMT)
+Received: by mail-pg1-f199.google.com with SMTP id
+ 41be03b00d2f7-cb11535e6a1so2924732a12.0
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 02:03:46 -0700 (PDT)
 Received: from le-cd01-lnx.qualcomm.com ([114.94.8.21])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2cf106b271asm16592555ad.64.2026.07.16.02.03.30
+ d9443c01a7336-2cf106b271asm16592555ad.64.2026.07.16.02.03.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jul 2026 02:03:37 -0700 (PDT)
+ Thu, 16 Jul 2026 02:03:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -66,61 +66,61 @@ Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=qcppdkim1 he
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	cXDzlp0Mz8ahuhkKRd5AdRfYSWy40uSfi+gwEDZHB1w=; b=HO+D16pl5NnizWLT
-	EiMKDbufmks1qDlaQmm1bJz9KtHJwjUUnFtC4Me8/8F36stmqHRtBitdEEowis42
-	Czjd1k9g6jTFrBIkPRKARjHghPuGlbRrFzUjSyKg4sIRVah6bmHxFnhNggLNKtDN
-	6LwFrZ/16Im1HNnxucmuQINDVjXIzrL8otMAYymHT4IbqXFio6vLxD7ML6EUARO7
-	h/oK7i6SVbP6XjgA770I5CoABfF8si0W7ccqtMQmYbU2TUT/b2dMzt9sNMKs6+/f
-	b7U6y2Np8ogkNabFyqwfqFxd9FMgcDNaN9pWrCBypJwJFv7mZVeE4zlXT88wTA6E
-	EEqdlw==
+	v2+SC8wnTcWyUocd5OZE0bKBPwgO9xMWYvTc4EEJHLo=; b=NTWCIvEikV6s+evA
+	+JwWW2EBvb6KUmHZ8opJCCxEKSHFFkaBv635L+zgOFvV52cN2uFzSA7FA8Vn9yzj
+	R8gzlEv3HglAidC/bQA7O7iDm0CP2xsSdhq+FK4815sH0XX/5PuvRqaL2yrqiKPb
+	zk6dSpeFX2ENutYTxHrGtg5kj2FewvD7TZq5/1WNZ4/bU1SXbPCchz6U8S5Tewc8
+	CUaHVpxismyN3yf7ha8vbpaAi0JODc7hFLYAcmhamonOLzfAFWOHsZ+sbUCvxOiU
+	3hm1FkQxR2BRm6t4Ki9Kn3U3CQNaeh8mqILAdNfYpfaOAm1/YYoTp6PIdLGsIvPi
+	PHd54Q==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784192619; x=1784797419; darn=lists.xenproject.org;
+        d=oss.qualcomm.com; s=google; t=1784192626; x=1784797426; darn=lists.xenproject.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=cXDzlp0Mz8ahuhkKRd5AdRfYSWy40uSfi+gwEDZHB1w=;
-        b=E69AGuKfVzmpqslMVqDqpEqitRyihaCyF0avdkLOWibQ9lXQODJ8vfwg0QcqNgCgFF
-         h3Vo4PtdsRNODVaB1ZmQSXGTYnXVIw0zKodHeldiR9dRzuENi9qmTCGDoTjKFvo9NNC6
-         Ub8WNaALe1wH1ln7+K9tUGoxm9Lq90+FA37BgKz2lyojeUnskYIHEkk5A77f6OJbsIdZ
-         P089yLcA4LNFq6z5JEdCOhuVZhEvbx83utPRfbuEaCnff+OtAlR4I35oadsjUguNYkmy
-         uFAUoFoVJHITZOk9wOis3u21rK9ia3ZnIGEavpfudyeXryK0uBqVi+0SGqnOuWGvmg0G
-         7LMw==
+        bh=v2+SC8wnTcWyUocd5OZE0bKBPwgO9xMWYvTc4EEJHLo=;
+        b=PUPqKOI0QbhzvCjFpJGLOlUKnKJZ1490aDp88Vbklc8oNriAWXhWe+1Vh/4jZ8gYli
+         zG3txlgFDWEbR+F8R3qRgPWIVw+GMeB8wkE9ktwL9UmCNtClcNdLQ1MveSfUF1ytKJ5Z
+         jupxKmp1kNrIp5S5GEBR4cwJQ+vK224KKJCuMjCafRrpguYQtaWaFIWtL1Bovh/vRwz4
+         YZIq6oEkkrQVyyywGExQ3PsqZ9Is2H/3LiUE/H+de3OHRZ3n7fPBZvRLBOyrtbh2mOhb
+         ixFO2+0MzYe1L8DKyfFJc8x+9KjW+ziFhafHAFSWOwp3rruonfAdgQyA8/G+I3t9mcep
+         0XMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784192619; x=1784797419;
+        d=1e100.net; s=20251104; t=1784192626; x=1784797426;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=cXDzlp0Mz8ahuhkKRd5AdRfYSWy40uSfi+gwEDZHB1w=;
-        b=MUKJKpJ+V7Hy/nwDa8Fa1FJKjxUWKEayg0mHgoTUyS0TZLjqQP+OZ98y5p7DpaTmtp
-         g84RAWjE0exx4Wxh6XXeW3yxstsUNJ+I9DiRK+MdgrEcgrw2eB3GX/64xjGETPnwQPCO
-         HTHgk/szqJARGdmu9j1QAd/rsm8f3WCG2GUOaJloEWW9Mau1LTkqquW1/DyVl1c+zxIS
-         CSox2W9oB0/WgVgrEV3396O2E7hQ2dF7TYnNaB9VoTNm6rfXrQGylhThCWwYo5Q9H35q
-         ImOAKkWMiFjOGGYFb55bYDCskBIO8bp+/xMMgK43nP5XJH1x6JQBOIVSeddfF4PQahuk
-         Ryrw==
-X-Forwarded-Encrypted: i=1; AHgh+RpJExlUgs1zvem5kajVcEzYzDmZlQsZRT/RgzkUCMrUaymrZiqvWUF5xkoBcyLZKKVGZUiZclm7cUc=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxsIoCsw2PdEUhENy58GLUADjxHm4dwPg628SzX8XW+Tx2Sw9i4
-	fhTemhLa3ha/9/ohdy3U5/Yt7sgdMsEQ8g6Qx0LmOIc1lEDPsjLZQfdLcl+gmS1LIrDiWnMXrmF
-	UmZ+7IRUJkVYYHTIDWzZD/U1VdNF87gDs19RTXRNyozyMCJ4LlSBLv7FvKw+LRhmWIYegKFrABN
-	pqfJga
-X-Gm-Gg: AfdE7clAvm96nMcvStaQRhbtxidPezivRbfeSE8VC/m3rvCDSf43A63u7keR2/cP9yE
-	mpK+7Mw+oRR/YTAqe9RdiTds7r50FWGJeLTnzKBzEVl32dknRSP6KHmTbdLKpdg+5O3jws0bLKk
-	iFPy8I13MyQjVsS1T6NvpCJgnOPtj9iZc3Zms+NZjRRf4K3L1Qic4TxR90fEcYt2q14Nj29NvZz
-	JTtyv757/OOkLa4pJi8pY9z+q8mRmEH7BvW9hGNcoHqnm+rlrdrMx8b1AWGBpzyjggccGKoPrY4
-	n3SoI45oV19dwgduoJ8NkJZnsuRxMa/vXP+YXj14dTSDMWtcI0gbUtgLdIjSjBOvvm17GctKvMJ
-	J6wpFkDBlzrJEX061jimz
-X-Received: by 2002:a17:902:fda8:b0:2ca:4b7a:4a02 with SMTP id d9443c01a7336-2cef1370d34mr95423205ad.43.1784192618466;
-        Thu, 16 Jul 2026 02:03:38 -0700 (PDT)
-X-Received: by 2002:a17:902:fda8:b0:2ca:4b7a:4a02 with SMTP id d9443c01a7336-2cef1370d34mr95422605ad.43.1784192617798;
-        Thu, 16 Jul 2026 02:03:37 -0700 (PDT)
+        bh=v2+SC8wnTcWyUocd5OZE0bKBPwgO9xMWYvTc4EEJHLo=;
+        b=FL7N1BrV+OvTltqxXyApigPv6L5iUsmhu6aeAj7kNbRvsngNiqWTy+iwNPnZPUdng0
+         lkt71sGScWCRoJaohs5W1Ikb0Nrd4N1exn9ugdTUP5U9MGL3T1hL5Oi560xG8V0YX/9U
+         xOQWU1V4wvN6ZH+0AUbOKebYyIZzp+P4IIsklN+YoGMrTCrYPCkthNiMYSjMPqMGuE1y
+         J9SteVy7zCWrc8BXKCcpJofSY0ihsvZPbvqAhWbqml4n6elIK+xkTCIf8NC/BFCopAZu
+         p3vBtS0qD1SSTmsV1+9yNt8Nzl5ZPXeiVXtVVQDALwpIevrmXzlSrKko/S18aU1rlA4A
+         EMfg==
+X-Forwarded-Encrypted: i=1; AHgh+Rprvtv+SCBbRCVnVGt7JKwUK9QQpkOr7wjNSJ85BDzOwtFsPpPCAZsVCM4G6hdMh9QLFvmPLVvgnHw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwO+ufHgNbEx7RydxfDZY9AtUD6DdMLQdiLbf3WeIx0lMhkZ1q3
+	YvwgGUnEwf1LhjBfpQL/jLO2ZvN0JSxlInlUBWI5xOrFvXKv0smOvGWkB9tfIsu2t/pUHEdLyBX
+	4/YbiKcFTVk6IiiqJ+jiIrOBUzvYuxAhy98opB+wLYBS/bCJuTCG8vGrS09MwbZDbLTqegWSXun
+	mK6Irx
+X-Gm-Gg: AfdE7cldE4dL/0xuxGktw4A6UEdnOiq3RJuSCkKdpWcHZzSOFgS3YHl9mvHlmlq3AtY
+	N/g5C6LL4gY5ZAi+ovUNYtdi+/W5djdkT4hpehi/eUCvuXtfRN8OLzVSZygKfK5etJtCcm5H3K1
+	3FPFwXW/G9REK+QqrDKjQnsSRpX9oh3MmuD7zp1zfCKXaptCGoU+S+UFODHOJI/EdlcxIB8qI48
+	xOUrxmSohkC/e04xrDcnhrzSA7Opiz8ekjXduftEklkuBptjh22zH7acB27Rv8gfdeRT1U1/bqE
+	NIVtNPDXrTHozfMWfVBlrznWyW13F2UimI8Detk9PWKOtIm40KwLg9y0fOq+AJ3vzAu1AnyawFb
+	KxTkoRaegp3AAps2fHacv
+X-Received: by 2002:a17:90b:5906:b0:381:26f:8f05 with SMTP id 98e67ed59e1d1-38e29ff97bdmr6389548a91.3.1784192625548;
+        Thu, 16 Jul 2026 02:03:45 -0700 (PDT)
+X-Received: by 2002:a17:90b:5906:b0:381:26f:8f05 with SMTP id 98e67ed59e1d1-38e29ff97bdmr6389504a91.3.1784192624999;
+        Thu, 16 Jul 2026 02:03:44 -0700 (PDT)
 From: Ze Huang <ze.huang@oss.qualcomm.com>
-Date: Thu, 16 Jul 2026 17:01:59 +0800
-Subject: [PATCH v2 7/8] drm/tve200: replace struct drm_simple_display_pipe
+Date: Thu, 16 Jul 2026 17:02:00 +0800
+Subject: [PATCH v2 8/8] drm/xen: replace struct drm_simple_display_pipe
  with regular atomic helpers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260716-drm-simple-kms-removal-v2-7-1133a8fc3785@oss.qualcomm.com>
+Message-Id: <20260716-drm-simple-kms-removal-v2-8-1133a8fc3785@oss.qualcomm.com>
 References: <20260716-drm-simple-kms-removal-v2-0-1133a8fc3785@oss.qualcomm.com>
 In-Reply-To: <20260716-drm-simple-kms-removal-v2-0-1133a8fc3785@oss.qualcomm.com>
 To: Alexey Brodkin <abrodkin@synopsys.com>,
@@ -141,281 +141,278 @@ Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
         imx@lists.linux.dev, xen-devel@lists.xenproject.org,
         Ze Huang <ze.huang@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784192560; l=12710;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784192560; l=11771;
  i=ze.huang@oss.qualcomm.com; s=20260716; h=from:subject:message-id;
- bh=1viaAX+744S54GCG+tWfVVj2xmjTbnyOumJ6LSWV5BM=;
- b=O8lpuoMTn2tkvb1RSrnDKTTQNtcFREO2jObb3WocoCvGUqjOl9Y9c3xswWhyXseEslHU7pcEk
- GcfaTN4aIRaAKXobRA8r0gDPuaWc00NDSyh2r/gWBxcdWV2JfOEcbIS
+ bh=7XOFYlYAlSV+ozAl18A522abXND+69x4cTAvNkGYHmc=;
+ b=GX2ZCGixdNsbm2dBAUjK6OkStWwzedAdHGWUe6gP5dpu2NfD1Po9grA6MgTJQZLa9fCVl6Nx9
+ 7qvMt1rcjWIADy/IhoJ5BQYdNhix/jd8KvBJH9LhdvnhvaUeaGWR/3m
 X-Developer-Key: i=ze.huang@oss.qualcomm.com; a=ed25519;
  pk=8uGhlZHInA8NXq7G6u/g59qEcwXwuMRI7nBSnT/ijtY=
-X-Proofpoint-GUID: XLwyGnj7Ee8vilOiIJG_NAKf_yEgDrZL
-X-Authority-Analysis: v=2.4 cv=WoMb99fv c=1 sm=1 tr=0 ts=6a589e6b cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Uz3yg00KUFJ2y2WijEJ4bw==:17
+X-Proofpoint-ORIG-GUID: NmXBTGK-Np9rG1ri53VWAZESQS-zSSh9
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDA5MSBTYWx0ZWRfX7nn9s9Twzfen
+ WmiD8zTX3+qY8skjhVgyXvWaxKmPjYIPs4Wc0wThrqCQ/AFSQKjZLYi21WWKwPOaztsHDDkElal
+ r8Vx4UuPZXwmJljxvZvzHXP8We3TbaI=
+X-Proofpoint-GUID: NmXBTGK-Np9rG1ri53VWAZESQS-zSSh9
+X-Authority-Analysis: v=2.4 cv=PN8/P/qC c=1 sm=1 tr=0 ts=6a589e72 cx=c_pps
+ a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=Uz3yg00KUFJ2y2WijEJ4bw==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=dgwnEUiFKTnKxPjcC9oA:9 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDA5MSBTYWx0ZWRfXxjHGjSQIJHrM
- fV3CyRx0wSkEfYYTTTSyV+T2G0euf9VK0jP41zL6JTQyoVr/LTSz63pjuTGbaLYuKh5nYBS/zv6
- GIWBgm4mm/NDZaTOzFpMgBbKnb7IO4kM5UBopoE4zvJcsNm5dD/HkgcW7ccRSXZGyBIJ+JkNbRy
- k6ONR5N8ioBJw8sKW8tz72HYl/6RocNiMoBwhbjCknkTOnQ3cF1YXlIMmWGKIb5t+As33rWd39n
- SdA+QxqVQoD6NsgdhGK+X5fD9HsEO57fg83Lb7t4BRE+VLTzYeHi1zCd4am6DDMoAWQriKmx7ln
- Wu7x5Ir20+ZE9+/BOfZ4FEqCdStN7XuJNAKp4lsGmDoMFj2BW9EfVMqENVwhHaD0qaM6s3zlMrJ
- m3NJgMXnHrL5KpZhf8Z51hiHaC2XE03R2ic8bL5Ol3HODarOrHdX1U6hb+JEGq+OYovrPGO8FvH
- GzqkJ7wt0VzVhyNIKFw==
-X-Proofpoint-ORIG-GUID: XLwyGnj7Ee8vilOiIJG_NAKf_yEgDrZL
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDA5MSBTYWx0ZWRfXwFZeGI7UNzzh
- /VZGsBkwbby2+ENAfmdAQ9PIKECG0QWBbVkwXZvV/ArYbCfnC19KD0m/LtAUIsqrMFJRqgZRP/T
- Da9oCnACDxSVdJIGMoKQ+Ge+SSYsJuE=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=yt2wVW2Sl_HzNKkdQ3QA:9 a=QEXdDO2ut3YA:10
+ a=_Vgx9l1VpLgwpw_dHYaR:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDA5MSBTYWx0ZWRfX/XgyrNMS41kU
+ ydKvhOLC+pVYIHXaNK0zw5j+9V+jE0zbMu7Bq/QscBjoIYZNPqiJomrYzAFvzF3FwLCT2Ni2AGl
+ 3EM2gWxWU1Gyi60WRiP+bAQy5TVfrHN7Q+Y+4eH8drNsBu79pC5GUETHESFKz07w3+3w7byFLek
+ eNe2+50l+YZ1ufaZUoxYikPnVorF4rdG02ts1RpNeWSxzIwss4jXHLIfkCa0AX3EAQJd2w7U7bw
+ vuv2wK95DsP8eQ+ntyxHfFjxqTtgQOzzKol3sHNQZznDvXQRX+UQjCOt62dWEMCK8go2KsdwK3G
+ yviS3crP6gi34g9CHP0kWZ05lzYADUQxwHq+SYTKKpIuUFJ7/KGpuV0VeA9JsjD0YJWuvx0RQcm
+ QwXfKqfYzzMeRWXZHxCmhDcKC5Go9WejtFnn92y6OwKtvy4OT0Lurm/aLevf/K6BnpDklcgiq4l
+ KY80UOR7Ig1uQ7w4egQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-16_03,2026-07-15_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 bulkscore=0 clxscore=1015 spamscore=0 lowpriorityscore=0
- suspectscore=0 priorityscore=1501 malwarescore=0 phishscore=0 adultscore=0
+ bulkscore=0 malwarescore=0 lowpriorityscore=0 phishscore=0 adultscore=0
+ priorityscore=1501 impostorscore=0 clxscore=1015 suspectscore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607160091
-X-purgate-ID: tlsNG-42698a/1784192621-1B6D29EA-DA33CB78/0/0
+X-purgate-ID: tlsNG-c1860d/1784192628-CE54487B-283DF9BB/0/0
 X-purgate-type: clean
-X-purgate-size: 12712
+X-purgate-size: 11773
 
-Convert TVE200 to explicit plane, CRTC and encoder objects.
-Keep generic plane-state validation before TVE200-specific mode,
-alignment, pitch and format-change checks, and install GEM framebuffer
-prepare helper explicitly.
+Replace Xen frontend simple display pipe with explicit plane, CRTC and
+encoder objects for each pipeline.
 
-Move page-flip event handling to the CRTC commit path and wire the CRTC
-vblank callbacks explicitly so events are not consumed from the plane
-update path.
+Keep generic plane-state validation before Xen-specific checks, and
+install GEM framebuffer prepare helper explicitly.
 
 Signed-off-by: Ze Huang <ze.huang@oss.qualcomm.com>
 ---
- drivers/gpu/drm/tve200/tve200_display.c | 217 ++++++++++++++++++++++----------
- drivers/gpu/drm/tve200/tve200_drm.h     |   6 +-
- drivers/gpu/drm/tve200/tve200_drv.c     |  12 +-
- 3 files changed, 161 insertions(+), 74 deletions(-)
+ drivers/gpu/drm/xen/xen_drm_front.h     |   6 +-
+ drivers/gpu/drm/xen/xen_drm_front_kms.c | 175 ++++++++++++++++++++++++--------
+ 2 files changed, 134 insertions(+), 47 deletions(-)
 
-diff --git a/drivers/gpu/drm/tve200/tve200_display.c b/drivers/gpu/drm/tve200/tve200_display.c
-index 26b6c65ef6fd..6021f90d8531 100644
---- a/drivers/gpu/drm/tve200/tve200_display.c
-+++ b/drivers/gpu/drm/tve200/tve200_display.c
-@@ -15,6 +15,8 @@
- #include <linux/of_graph.h>
- #include <linux/delay.h>
+diff --git a/drivers/gpu/drm/xen/xen_drm_front.h b/drivers/gpu/drm/xen/xen_drm_front.h
+index a987c78abe41..02138b5abef5 100644
+--- a/drivers/gpu/drm/xen/xen_drm_front.h
++++ b/drivers/gpu/drm/xen/xen_drm_front.h
+@@ -14,7 +14,7 @@
+ #include <linux/scatterlist.h>
  
-+#include <drm/drm_atomic.h>
-+#include <drm/drm_atomic_helper.h>
- #include <drm/drm_fb_dma_helper.h>
- #include <drm/drm_fourcc.h>
- #include <drm/drm_framebuffer.h>
-@@ -52,7 +54,7 @@ irqreturn_t tve200_irq(int irq, void *data)
- 		val = readl(priv->regs + TVE200_CTRL);
- 		/* We have an actual start of vsync */
- 		if (!(val & TVE200_VSTSTYPE_BITS)) {
--			drm_crtc_handle_vblank(&priv->pipe.crtc);
-+			drm_crtc_handle_vblank(&priv->crtc);
- 			/* Toggle trigger to start of active image */
- 			val |= TVE200_VSTSTYPE_VAI;
- 		} else {
-@@ -69,13 +71,32 @@ irqreturn_t tve200_irq(int irq, void *data)
- 	return IRQ_HANDLED;
+ #include <drm/drm_connector.h>
+-#include <drm/drm_simple_kms_helper.h>
++#include <drm/drm_encoder.h>
+ 
+ #include "xen_drm_front_cfg.h"
+ 
+@@ -100,7 +100,9 @@ struct xen_drm_front_drm_pipeline {
+ 
+ 	int index;
+ 
+-	struct drm_simple_display_pipe pipe;
++	struct drm_plane plane;
++	struct drm_crtc crtc;
++	struct drm_encoder encoder;
+ 
+ 	struct drm_connector conn;
+ 	/* These are only for connector mode checking */
+diff --git a/drivers/gpu/drm/xen/xen_drm_front_kms.c b/drivers/gpu/drm/xen/xen_drm_front_kms.c
+index 48772b5fe71c..f869da3f3058 100644
+--- a/drivers/gpu/drm/xen/xen_drm_front_kms.c
++++ b/drivers/gpu/drm/xen/xen_drm_front_kms.c
+@@ -31,9 +31,15 @@
+ #define FRAME_DONE_TO_MS	(XEN_DRM_FRONT_WAIT_BACK_MS + 100)
+ 
+ static struct xen_drm_front_drm_pipeline *
+-to_xen_drm_pipeline(struct drm_simple_display_pipe *pipe)
++xen_drm_pipeline_from_crtc(struct drm_crtc *crtc)
+ {
+-	return container_of(pipe, struct xen_drm_front_drm_pipeline, pipe);
++	return container_of(crtc, struct xen_drm_front_drm_pipeline, crtc);
++}
++
++static struct xen_drm_front_drm_pipeline *
++xen_drm_pipeline_from_plane(struct drm_plane *plane)
++{
++	return container_of(plane, struct xen_drm_front_drm_pipeline, plane);
  }
  
--static int tve200_display_check(struct drm_simple_display_pipe *pipe,
--			       struct drm_plane_state *pstate,
--			       struct drm_crtc_state *cstate)
-+static int tve200_plane_helper_atomic_check(struct drm_plane *plane,
-+					    struct drm_atomic_commit *commit)
+ static void fb_destroy(struct drm_framebuffer *fb)
+@@ -94,7 +100,7 @@ static const struct drm_mode_config_funcs mode_config_funcs = {
+ 
+ static void send_pending_event(struct xen_drm_front_drm_pipeline *pipeline)
  {
--	const struct drm_display_mode *mode = &cstate->mode;
--	struct drm_framebuffer *old_fb = pipe->plane.state->fb;
-+	struct drm_plane_state *pstate = drm_atomic_get_new_plane_state(commit, plane);
-+	struct drm_plane_state *old_pstate = drm_atomic_get_old_plane_state(commit, plane);
-+	struct drm_crtc *crtc = pstate->crtc;
-+	struct drm_crtc_state *cstate = NULL;
-+	const struct drm_display_mode *mode;
-+	struct drm_framebuffer *old_fb = old_pstate->fb;
- 	struct drm_framebuffer *fb = pstate->fb;
+-	struct drm_crtc *crtc = &pipeline->pipe.crtc;
++	struct drm_crtc *crtc = &pipeline->crtc;
+ 	struct drm_device *dev = crtc->dev;
+ 	unsigned long flags;
+ 
+@@ -105,24 +111,21 @@ static void send_pending_event(struct xen_drm_front_drm_pipeline *pipeline)
+ 	spin_unlock_irqrestore(&dev->event_lock, flags);
+ }
+ 
+-static void display_enable(struct drm_simple_display_pipe *pipe,
+-			   struct drm_crtc_state *crtc_state,
+-			   struct drm_plane_state *plane_state)
++static void xen_drm_crtc_helper_atomic_enable(struct drm_crtc *crtc,
++					      struct drm_atomic_commit *commit)
+ {
+-	struct xen_drm_front_drm_pipeline *pipeline =
+-			to_xen_drm_pipeline(pipe);
+-	struct drm_crtc *crtc = &pipe->crtc;
++	struct xen_drm_front_drm_pipeline *pipeline = xen_drm_pipeline_from_crtc(crtc);
++	struct drm_plane_state *plane_state = pipeline->plane.state;
+ 	struct drm_framebuffer *fb = plane_state->fb;
+ 	int ret, idx;
+ 
+-	if (!drm_dev_enter(pipe->crtc.dev, &idx))
++	if (!drm_dev_enter(crtc->dev, &idx))
+ 		return;
+ 
+ 	ret = xen_drm_front_mode_set(pipeline, crtc->x, crtc->y,
+ 				     fb->width, fb->height,
+ 				     fb->format->cpp[0] * 8,
+ 				     xen_drm_front_fb_to_cookie(fb));
+-
+ 	if (ret) {
+ 		DRM_ERROR("Failed to enable display: %d\n", ret);
+ 		pipeline->conn_connected = false;
+@@ -131,13 +134,13 @@ static void display_enable(struct drm_simple_display_pipe *pipe,
+ 	drm_dev_exit(idx);
+ }
+ 
+-static void display_disable(struct drm_simple_display_pipe *pipe)
++static void xen_drm_crtc_helper_atomic_disable(struct drm_crtc *crtc,
++					       struct drm_atomic_commit *commit)
+ {
+-	struct xen_drm_front_drm_pipeline *pipeline =
+-			to_xen_drm_pipeline(pipe);
++	struct xen_drm_front_drm_pipeline *pipeline = xen_drm_pipeline_from_crtc(crtc);
+ 	int ret = 0, idx;
+ 
+-	if (drm_dev_enter(pipe->crtc.dev, &idx)) {
++	if (drm_dev_enter(crtc->dev, &idx)) {
+ 		ret = xen_drm_front_mode_set(pipeline, 0, 0, 0, 0, 0,
+ 					     xen_drm_front_fb_to_cookie(NULL));
+ 		drm_dev_exit(idx);
+@@ -177,12 +180,13 @@ static void pflip_to_worker(struct work_struct *work)
+ 	send_pending_event(pipeline);
+ }
+ 
+-static bool display_send_page_flip(struct drm_simple_display_pipe *pipe,
++static bool display_send_page_flip(struct xen_drm_front_drm_pipeline *pipeline,
++				   struct drm_atomic_commit *commit,
+ 				   struct drm_plane_state *old_plane_state)
+ {
+ 	struct drm_plane_state *plane_state =
+-			drm_atomic_get_new_plane_state(old_plane_state->state,
+-						       &pipe->plane);
++			drm_atomic_get_new_plane_state(commit,
++						       &pipeline->plane);
+ 
+ 	/*
+ 	 * If old_plane_state->fb is NULL and plane_state->fb is not,
+@@ -193,8 +197,6 @@ static bool display_send_page_flip(struct drm_simple_display_pipe *pipe,
+ 	 * sent to the backend as a part of display_set_config call.
+ 	 */
+ 	if (old_plane_state->fb && plane_state->fb) {
+-		struct xen_drm_front_drm_pipeline *pipeline =
+-				to_xen_drm_pipeline(pipe);
+ 		struct xen_drm_front_drm_info *drm_info = pipeline->drm_info;
+ 		int ret;
+ 
+@@ -224,10 +226,27 @@ static bool display_send_page_flip(struct drm_simple_display_pipe *pipe,
+ 	return false;
+ }
+ 
+-static int display_check(struct drm_simple_display_pipe *pipe,
+-			 struct drm_plane_state *plane_state,
+-			 struct drm_crtc_state *crtc_state)
++static int xen_drm_plane_helper_atomic_check(struct drm_plane *plane,
++					     struct drm_atomic_commit *commit)
+ {
++	struct drm_plane_state *plane_state = drm_atomic_get_new_plane_state(commit, plane);
++	struct drm_crtc *crtc = plane_state->crtc;
++	struct drm_crtc_state *crtc_state = NULL;
 +	int ret;
 +
 +	if (crtc)
-+		cstate = drm_atomic_get_new_crtc_state(commit, crtc);
++		crtc_state = drm_atomic_get_new_crtc_state(commit, crtc);
 +
-+	ret = drm_atomic_helper_check_plane_state(pstate, cstate,
++	ret = drm_atomic_helper_check_plane_state(plane_state, crtc_state,
 +						  DRM_PLANE_NO_SCALING,
 +						  DRM_PLANE_NO_SCALING,
 +						  false, false);
 +	if (ret)
 +		return ret;
 +
-+	if (!pstate->visible || !cstate)
++	if (!plane_state->visible || !crtc_state)
 +		return 0;
 +
-+	mode = &cstate->mode;
- 
  	/*
- 	 * We support these specific resolutions and nothing else.
-@@ -119,16 +140,72 @@ static int tve200_display_check(struct drm_simple_display_pipe *pipe,
+ 	 * Xen doesn't initialize vblanking via drm_vblank_init(), so
+ 	 * DRM helpers assume that it doesn't handle vblanking and start
+@@ -242,12 +261,12 @@ static int display_check(struct drm_simple_display_pipe *pipe,
  	return 0;
  }
  
--static void tve200_display_enable(struct drm_simple_display_pipe *pipe,
--				 struct drm_crtc_state *cstate,
--				 struct drm_plane_state *plane_state)
-+static void tve200_plane_helper_atomic_update(struct drm_plane *plane,
-+					      struct drm_atomic_commit *commit)
-+{
-+	struct tve200_drm_dev_private *priv = plane->dev->dev_private;
-+	struct drm_plane_state *pstate = drm_atomic_get_new_plane_state(commit, plane);
-+	struct drm_framebuffer *fb = pstate->fb;
-+
-+	if (!fb)
-+		return;
-+
-+	/* For RGB, the Y component is used as base address */
-+	writel(drm_fb_dma_get_gem_addr(fb, pstate, 0),
-+	       priv->regs + TVE200_Y_FRAME_BASE_ADDR);
-+
-+	/* For three plane YUV we need two more addresses */
-+	if (fb->format->format == DRM_FORMAT_YUV420) {
-+		writel(drm_fb_dma_get_gem_addr(fb, pstate, 1),
-+		       priv->regs + TVE200_U_FRAME_BASE_ADDR);
-+		writel(drm_fb_dma_get_gem_addr(fb, pstate, 2),
-+		       priv->regs + TVE200_V_FRAME_BASE_ADDR);
-+	}
-+}
-+
-+static void tve200_crtc_helper_atomic_flush(struct drm_crtc *crtc,
-+					    struct drm_atomic_commit *commit)
-+{
-+	struct drm_crtc_state *cstate = drm_atomic_get_new_crtc_state(commit, crtc);
-+	struct drm_pending_vblank_event *event = cstate->event;
-+
-+	if (!event)
-+		return;
-+
-+	cstate->event = NULL;
-+
-+	spin_lock_irq(&crtc->dev->event_lock);
-+	if (cstate->active && drm_crtc_vblank_get(crtc) == 0)
-+		drm_crtc_arm_vblank_event(crtc, event);
-+	else
-+		drm_crtc_send_vblank_event(crtc, event);
-+	spin_unlock_irq(&crtc->dev->event_lock);
-+}
-+
-+static const struct drm_plane_helper_funcs tve200_plane_helper_funcs = {
-+	.prepare_fb	= drm_gem_plane_helper_prepare_fb,
-+	.atomic_check	= tve200_plane_helper_atomic_check,
-+	.atomic_update	= tve200_plane_helper_atomic_update,
-+};
-+
-+static const struct drm_plane_funcs tve200_plane_funcs = {
-+	.update_plane		= drm_atomic_helper_update_plane,
-+	.disable_plane		= drm_atomic_helper_disable_plane,
-+	.destroy		= drm_plane_cleanup,
-+	.reset			= drm_atomic_helper_plane_reset,
-+	.atomic_duplicate_state	= drm_atomic_helper_plane_duplicate_state,
-+	.atomic_destroy_state	= drm_atomic_helper_plane_destroy_state,
-+};
-+
-+static void tve200_crtc_helper_atomic_enable(struct drm_crtc *crtc,
-+					     struct drm_atomic_commit *commit)
+-static void display_update(struct drm_simple_display_pipe *pipe,
+-			   struct drm_plane_state *old_plane_state)
++static void xen_drm_plane_helper_atomic_update(struct drm_plane *plane,
++					       struct drm_atomic_commit *commit)
  {
+-	struct xen_drm_front_drm_pipeline *pipeline =
+-			to_xen_drm_pipeline(pipe);
 -	struct drm_crtc *crtc = &pipe->crtc;
--	struct drm_plane *plane = &pipe->plane;
- 	struct drm_device *drm = crtc->dev;
- 	struct tve200_drm_dev_private *priv = drm->dev_private;
-+	struct drm_crtc_state *cstate = drm_atomic_get_new_crtc_state(commit, crtc);
- 	const struct drm_display_mode *mode = &cstate->mode;
--	struct drm_framebuffer *fb = plane->state->fb;
-+	struct drm_plane_state *plane_state = priv->plane.state;
-+	struct drm_framebuffer *fb = plane_state->fb;
- 	struct drm_connector *connector = priv->connector;
- 	u32 format = fb->format->format;
- 	u32 ctrl1 = 0;
-@@ -240,9 +317,9 @@ static void tve200_display_enable(struct drm_simple_display_pipe *pipe,
- 	drm_crtc_vblank_on(crtc);
++	struct drm_plane_state *old_plane_state = drm_atomic_get_old_plane_state(commit, plane);
++	struct xen_drm_front_drm_pipeline *pipeline = xen_drm_pipeline_from_plane(plane);
++	struct drm_crtc *crtc = &pipeline->crtc;
+ 	struct drm_pending_vblank_event *event;
+ 	int idx;
+ 
+@@ -265,7 +284,7 @@ static void display_update(struct drm_simple_display_pipe *pipe,
+ 		spin_unlock_irqrestore(&dev->event_lock, flags);
+ 	}
+ 
+-	if (!drm_dev_enter(pipe->crtc.dev, &idx)) {
++	if (!drm_dev_enter(crtc->dev, &idx)) {
+ 		send_pending_event(pipeline);
+ 		return;
+ 	}
+@@ -278,19 +297,17 @@ static void display_update(struct drm_simple_display_pipe *pipe,
+ 	 * If this is not a page flip, e.g. no flip done event from the backend
+ 	 * is expected, then send now.
+ 	 */
+-	if (!display_send_page_flip(pipe, old_plane_state))
++	if (!display_send_page_flip(pipeline, commit, old_plane_state))
+ 		send_pending_event(pipeline);
+ 
+ 	drm_dev_exit(idx);
  }
  
--static void tve200_display_disable(struct drm_simple_display_pipe *pipe)
-+static void tve200_crtc_helper_atomic_disable(struct drm_crtc *crtc,
-+					      struct drm_atomic_commit *commit)
+ static enum drm_mode_status
+-display_mode_valid(struct drm_simple_display_pipe *pipe,
+-		   const struct drm_display_mode *mode)
++xen_drm_crtc_helper_mode_valid(struct drm_crtc *crtc,
++			       const struct drm_display_mode *mode)
  {
--	struct drm_crtc *crtc = &pipe->crtc;
- 	struct drm_device *drm = crtc->dev;
- 	struct tve200_drm_dev_private *priv = drm->dev_private;
+-	struct xen_drm_front_drm_pipeline *pipeline =
+-			container_of(pipe, struct xen_drm_front_drm_pipeline,
+-				     pipe);
++	struct xen_drm_front_drm_pipeline *pipeline = xen_drm_pipeline_from_crtc(crtc);
  
-@@ -255,46 +332,8 @@ static void tve200_display_disable(struct drm_simple_display_pipe *pipe)
- 	clk_disable_unprepare(priv->clk);
+ 	if (mode->hdisplay != pipeline->width)
+ 		return MODE_ERROR;
+@@ -301,12 +318,53 @@ display_mode_valid(struct drm_simple_display_pipe *pipe,
+ 	return MODE_OK;
  }
  
--static void tve200_display_update(struct drm_simple_display_pipe *pipe,
--				 struct drm_plane_state *old_pstate)
--{
--	struct drm_crtc *crtc = &pipe->crtc;
--	struct drm_device *drm = crtc->dev;
--	struct tve200_drm_dev_private *priv = drm->dev_private;
--	struct drm_pending_vblank_event *event = crtc->state->event;
--	struct drm_plane *plane = &pipe->plane;
--	struct drm_plane_state *pstate = plane->state;
--	struct drm_framebuffer *fb = pstate->fb;
--
--	if (fb) {
--		/* For RGB, the Y component is used as base address */
--		writel(drm_fb_dma_get_gem_addr(fb, pstate, 0),
--		       priv->regs + TVE200_Y_FRAME_BASE_ADDR);
--
--		/* For three plane YUV we need two more addresses */
--		if (fb->format->format == DRM_FORMAT_YUV420) {
--			writel(drm_fb_dma_get_gem_addr(fb, pstate, 1),
--			       priv->regs + TVE200_U_FRAME_BASE_ADDR);
--			writel(drm_fb_dma_get_gem_addr(fb, pstate, 2),
--			       priv->regs + TVE200_V_FRAME_BASE_ADDR);
--		}
--	}
--
--	if (event) {
--		crtc->state->event = NULL;
--
--		spin_lock_irq(&crtc->dev->event_lock);
--		if (crtc->state->active && drm_crtc_vblank_get(crtc) == 0)
--			drm_crtc_arm_vblank_event(crtc, event);
--		else
--			drm_crtc_send_vblank_event(crtc, event);
--		spin_unlock_irq(&crtc->dev->event_lock);
--	}
--}
--
--static int tve200_display_enable_vblank(struct drm_simple_display_pipe *pipe)
-+static int tve200_crtc_enable_vblank(struct drm_crtc *crtc)
- {
--	struct drm_crtc *crtc = &pipe->crtc;
- 	struct drm_device *drm = crtc->dev;
- 	struct tve200_drm_dev_private *priv = drm->dev_private;
- 
-@@ -304,22 +343,48 @@ static int tve200_display_enable_vblank(struct drm_simple_display_pipe *pipe)
- 	return 0;
- }
- 
--static void tve200_display_disable_vblank(struct drm_simple_display_pipe *pipe)
-+static void tve200_crtc_disable_vblank(struct drm_crtc *crtc)
- {
--	struct drm_crtc *crtc = &pipe->crtc;
- 	struct drm_device *drm = crtc->dev;
- 	struct tve200_drm_dev_private *priv = drm->dev_private;
- 
- 	writel(0, priv->regs + TVE200_INT_EN);
- }
- 
--static const struct drm_simple_display_pipe_funcs tve200_display_funcs = {
--	.check = tve200_display_check,
--	.enable = tve200_display_enable,
--	.disable = tve200_display_disable,
--	.update = tve200_display_update,
--	.enable_vblank = tve200_display_enable_vblank,
--	.disable_vblank = tve200_display_disable_vblank,
-+static int tve200_crtc_helper_atomic_check(struct drm_crtc *crtc, struct drm_atomic_commit *commit)
+-static const struct drm_simple_display_pipe_funcs display_funcs = {
+-	.mode_valid = display_mode_valid,
+-	.enable = display_enable,
+-	.disable = display_disable,
+-	.check = display_check,
+-	.update = display_update,
++static int xen_drm_crtc_helper_atomic_check(struct drm_crtc *crtc, struct drm_atomic_commit *commit)
 +{
 +	struct drm_crtc_state *crtc_state = drm_atomic_get_new_crtc_state(commit, crtc);
 +	int ret;
@@ -429,119 +426,84 @@ index 26b6c65ef6fd..6021f90d8531 100644
 +	return drm_atomic_add_affected_planes(commit, crtc);
 +}
 +
-+static const struct drm_crtc_helper_funcs tve200_crtc_helper_funcs = {
-+	.atomic_check	= tve200_crtc_helper_atomic_check,
-+	.atomic_enable	= tve200_crtc_helper_atomic_enable,
-+	.atomic_disable	= tve200_crtc_helper_atomic_disable,
-+	.atomic_flush	= tve200_crtc_helper_atomic_flush,
++static const struct drm_plane_helper_funcs display_plane_helper_funcs = {
++	.prepare_fb	= drm_gem_plane_helper_prepare_fb,
++	.atomic_check	= xen_drm_plane_helper_atomic_check,
++	.atomic_update	= xen_drm_plane_helper_atomic_update,
 +};
 +
-+static const struct drm_crtc_funcs tve200_crtc_funcs = {
++static const struct drm_plane_funcs display_plane_funcs = {
++	.update_plane		= drm_atomic_helper_update_plane,
++	.disable_plane		= drm_atomic_helper_disable_plane,
++	.destroy		= drm_plane_cleanup,
++	.reset			= drm_atomic_helper_plane_reset,
++	.atomic_duplicate_state	= drm_atomic_helper_plane_duplicate_state,
++	.atomic_destroy_state	= drm_atomic_helper_plane_destroy_state,
++};
++
++static const struct drm_crtc_helper_funcs display_crtc_helper_funcs = {
++	.mode_valid	= xen_drm_crtc_helper_mode_valid,
++	.atomic_check	= xen_drm_crtc_helper_atomic_check,
++	.atomic_enable	= xen_drm_crtc_helper_atomic_enable,
++	.atomic_disable	= xen_drm_crtc_helper_atomic_disable,
++};
++
++static const struct drm_crtc_funcs display_crtc_funcs = {
 +	.reset			= drm_atomic_helper_crtc_reset,
 +	.destroy		= drm_crtc_cleanup,
 +	.set_config		= drm_atomic_helper_set_config,
 +	.page_flip		= drm_atomic_helper_page_flip,
 +	.atomic_duplicate_state	= drm_atomic_helper_crtc_duplicate_state,
 +	.atomic_destroy_state	= drm_atomic_helper_crtc_destroy_state,
-+	.enable_vblank		= tve200_crtc_enable_vblank,
-+	.disable_vblank		= tve200_crtc_disable_vblank,
 +};
 +
-+static const struct drm_encoder_funcs tve200_encoder_funcs = {
++static const struct drm_encoder_funcs display_encoder_funcs = {
 +	.destroy = drm_encoder_cleanup,
  };
  
- int tve200_display_init(struct drm_device *drm)
-@@ -346,13 +411,31 @@ int tve200_display_init(struct drm_device *drm)
- 		DRM_FORMAT_YUV420,
- 	};
+ static int display_pipe_init(struct xen_drm_front_drm_info *drm_info,
+@@ -331,10 +389,37 @@ static int display_pipe_init(struct xen_drm_front_drm_info *drm_info,
  
--	ret = drm_simple_display_pipe_init(drm, &priv->pipe,
--					   &tve200_display_funcs,
--					   formats, ARRAY_SIZE(formats),
--					   NULL,
--					   priv->connector);
-+	ret = drm_universal_plane_init(drm, &priv->plane, 0,
-+				       &tve200_plane_funcs,
-+				       formats, ARRAY_SIZE(formats),
+ 	formats = xen_drm_front_conn_get_formats(&format_count);
+ 
+-	return drm_simple_display_pipe_init(dev, &pipeline->pipe,
+-					    &display_funcs, formats,
+-					    format_count, NULL,
+-					    &pipeline->conn);
++	ret = drm_universal_plane_init(dev, &pipeline->plane, 0,
++				       &display_plane_funcs,
++				       formats, format_count,
 +				       NULL,
 +				       DRM_PLANE_TYPE_PRIMARY, NULL);
- 	if (ret)
- 		return ret;
- 
-+	drm_plane_helper_add(&priv->plane, &tve200_plane_helper_funcs);
-+
-+	ret = drm_crtc_init_with_planes(drm, &priv->crtc,
-+					&priv->plane, NULL,
-+					&tve200_crtc_funcs, NULL);
 +	if (ret)
 +		return ret;
 +
-+	drm_crtc_helper_add(&priv->crtc, &tve200_crtc_helper_funcs);
++	drm_plane_helper_add(&pipeline->plane, &display_plane_helper_funcs);
 +
-+	ret = drm_encoder_init(drm, &priv->encoder,
-+			       &tve200_encoder_funcs,
++	ret = drm_crtc_init_with_planes(dev, &pipeline->crtc,
++					&pipeline->plane, NULL,
++					&display_crtc_funcs, NULL);
++	if (ret)
++		return ret;
++
++	drm_crtc_helper_add(&pipeline->crtc, &display_crtc_helper_funcs);
++
++	ret = drm_encoder_init(dev, &pipeline->encoder,
++			       &display_encoder_funcs,
 +			       DRM_MODE_ENCODER_NONE, NULL);
 +	if (ret)
 +		return ret;
 +
-+	priv->encoder.possible_crtcs = drm_crtc_mask(&priv->crtc);
++	pipeline->encoder.possible_crtcs = drm_crtc_mask(&pipeline->crtc);
 +
- 	return 0;
++	ret = drm_connector_attach_encoder(&pipeline->conn, &pipeline->encoder);
++	if (ret)
++		return ret;
++
++	return 0;
  }
-diff --git a/drivers/gpu/drm/tve200/tve200_drm.h b/drivers/gpu/drm/tve200/tve200_drm.h
-index 5420b52ea16b..631a9f5d9aa6 100644
---- a/drivers/gpu/drm/tve200/tve200_drm.h
-+++ b/drivers/gpu/drm/tve200/tve200_drm.h
-@@ -15,8 +15,6 @@
  
- #include <linux/irqreturn.h>
- 
--#include <drm/drm_simple_kms_helper.h>
--
- struct clk;
- struct drm_bridge;
- struct drm_connector;
-@@ -107,7 +105,9 @@ struct tve200_drm_dev_private {
- 	struct drm_connector *connector;
- 	struct drm_panel *panel;
- 	struct drm_bridge *bridge;
--	struct drm_simple_display_pipe pipe;
-+	struct drm_plane plane;
-+	struct drm_crtc crtc;
-+	struct drm_encoder encoder;
- 
- 	void *regs;
- 	struct clk *pclk;
-diff --git a/drivers/gpu/drm/tve200/tve200_drv.c b/drivers/gpu/drm/tve200/tve200_drv.c
-index 562f3f11812a..0b8096b1e600 100644
---- a/drivers/gpu/drm/tve200/tve200_drv.c
-+++ b/drivers/gpu/drm/tve200/tve200_drv.c
-@@ -105,16 +105,20 @@ static int tve200_modeset_init(struct drm_device *dev)
- 		goto out_bridge;
- 	}
- 
--	ret = drm_simple_display_pipe_attach_bridge(&priv->pipe,
--						    bridge);
-+	priv->panel = panel;
-+	priv->bridge = bridge;
-+
-+	ret = drm_bridge_attach(&priv->encoder, bridge, NULL, 0);
- 	if (ret) {
- 		dev_err(dev->dev, "failed to attach bridge\n");
- 		goto out_bridge;
- 	}
- 
--	priv->panel = panel;
- 	priv->connector = drm_panel_bridge_connector(bridge);
--	priv->bridge = bridge;
-+	if (!priv->connector) {
-+		ret = -ENODEV;
-+		goto out_bridge;
-+	}
- 
- 	dev_info(dev->dev, "attached to panel %s\n",
- 		 dev_name(panel->dev));
+ int xen_drm_front_kms_init(struct xen_drm_front_drm_info *drm_info)
 
 -- 
 2.43.0
