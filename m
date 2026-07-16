@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71951C44515
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 18:23:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1364361.1615615 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 644FEC44512
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 18:23:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1364360.1615612 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkQk2-0001zm-Ig; Thu, 16 Jul 2026 18:23:26 +0000
+	id 1wkQk2-0001xo-CE; Thu, 16 Jul 2026 18:23:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1364361.1615615; Thu, 16 Jul 2026 18:23:26 +0000
+Received: by outflank-mailman (output) from mailman id 1364360.1615612; Thu, 16 Jul 2026 18:23:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkQk2-0001y9-DH; Thu, 16 Jul 2026 18:23:26 +0000
-Received: by outflank-mailman (input) for mailman id 1364361;
+	id 1wkQk2-0001xe-6k; Thu, 16 Jul 2026 18:23:26 +0000
+Received: by outflank-mailman (input) for mailman id 1364360;
  Thu, 16 Jul 2026 17:09:29 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <kariyam@oss.nttdata.com>) id 1wkPaT-00017v-Fx
+ (envelope-from <kariyam@oss.nttdata.com>) id 1wkPaT-00017u-Fx
  for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 17:09:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkPaS-000QF3-Jn
+ id 1wkPaS-00HRef-Ej
  for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 19:09:28 +0200
-Received: from [10.42.69.9] (helo=localhost)
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <kariyam@oss.nttdata.com>)
- id 6a591023-e002-0a2a0a5209dd-0a2a450988a6-32
+ id 6a59100d-5cb7-0a2a0a5109dd-0a2a450cdbb6-34
  for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 19:09:27 +0200
 Received: from [49.212.34.109] (helo=oss.nttdata.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <kariyam@oss.nttdata.com>)
- id 6a591045-be1a-0a2a45090019-31d4226db678-3
+ id 6a591045-f479-0a2a450c0019-31d4226dac80-3
  for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 19:09:27 +0200
 Received: by oss.nttdata.com (Postfix, from userid 1024)
- id 3B36E2020241; Fri, 17 Jul 2026 02:09:24 +0900 (JST)
+ id 5766E2020242; Fri, 17 Jul 2026 02:09:24 +0900 (JST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,9 +58,9 @@ Cc: Mitsuru Kariya <Mitsuru.Kariya@oss.nttdata.com>,
 	Hanna Reitz <hreitz@redhat.com>,
 	xen-devel@lists.xenproject.org (open list:X86 Xen CPUs),
 	qemu-block@nongnu.org (open list:Block layer core)
-Subject: [PATCH 2/4] xen-block: Fix inverted error check in xen_cdrom_realize()
-Date: Fri, 17 Jul 2026 02:09:21 +0900
-Message-ID: <20260716170923.2125858-3-Mitsuru.Kariya@oss.nttdata.com>
+Subject: [PATCH 3/4] xen-block: Fix BlockBackend leak on unplug of empty CD-ROM
+Date: Fri, 17 Jul 2026 02:09:22 +0900
+Message-ID: <20260716170923.2125858-4-Mitsuru.Kariya@oss.nttdata.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260716170923.2125858-1-Mitsuru.Kariya@oss.nttdata.com>
 References: <20260716170923.2125858-1-Mitsuru.Kariya@oss.nttdata.com>
@@ -68,45 +68,40 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Virus-Scanned: clamav-milter 1.4.3 at oss.nttdata.com
 X-Virus-Status: Clean
-X-purgate-ID: tlsNG-bad1c0/1784221767-39AC0034-E687D95C/0/0
+X-purgate-ID: tlsNG-d25034/1784221767-50321A5B-84A236A2/0/0
 X-purgate-type: clean
-X-purgate-size: 1445
+X-purgate-size: 1341
 
-xen_cdrom_realize() checks the return value of blk_attach_dev() with
+When a Xen CD-ROM is created without a backing drive (an empty CD-ROM),
+xen_cdrom_realize() allocates an anonymous BlockBackend for the empty
+drive with blk_new() and attaches it to the device using
+blk_attach_dev().
 
-    if (!rc) {
-        error_setg_errno(errp, -rc, "failed to create drive");
-        return;
-    }
+blk_new() returns the backend with refcnt == 1 (the creation reference
+owned by the caller) and blk_attach_dev() takes an additional reference
+for the device.  The creation reference was never released, so on
+unplug blk_detach_dev() only drops the device's reference and the
+BlockBackend is leaked.
 
-but blk_attach_dev() returns 0 on success and a negative errno on
-failure.  The condition is inverted: a successful attach (rc == 0) is
-reported as an error and fails realize, while a real failure (rc < 0)
-is silently ignored.
-
-Here blk_attach_dev() is called on a BlockBackend just created by
-blk_new(), so blk->dev is NULL and its only failure path (-EBUSY)
-cannot be taken.  Replace the bogus check with an assertion, matching
-the other empty-drive realize paths (scsi-disk, ide, fdc, swim).
+Release the creation reference with blk_unref() right after
+blk_attach_dev(), matching the idiom already used in set_drive_helper()
+in hw/core/qdev-properties-system.c ("If we need to keep a reference,
+blk_attach_dev() took it").
 
 Signed-off-by: Mitsuru Kariya <Mitsuru.Kariya@oss.nttdata.com>
 ---
- hw/block/xen-block.c | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+ hw/block/xen-block.c | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
-index 474c12fe4a..abf9df2eee 100644
+index abf9df2eee..e5e14e47ee 100644
 --- a/hw/block/xen-block.c
 +++ b/hw/block/xen-block.c
-@@ -762,10 +762,7 @@ static void xen_cdrom_realize(XenBlockDevice *blockdev, Error **errp)
-         conf->blk = blk_new(qemu_get_aio_context(), 0, BLK_PERM_ALL);
+@@ -763,6 +763,7 @@ static void xen_cdrom_realize(XenBlockDevice *blockdev, Error **errp)
  
          rc = blk_attach_dev(conf->blk, DEVICE(blockdev));
--        if (!rc) {
--            error_setg_errno(errp, -rc, "failed to create drive");
--            return;
--        }
-+        assert(rc == 0);
+         assert(rc == 0);
++        blk_unref(conf->blk);
      }
  
      blockdev->info = VDISK_READONLY | VDISK_CDROM;
