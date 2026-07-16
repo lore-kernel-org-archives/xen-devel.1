@@ -4,49 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAB64C4450A
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 14:12:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1364105.1615487 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A2A7C4450A
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2026 14:21:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1364156.1615494 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkMoy-000575-9R; Thu, 16 Jul 2026 14:12:16 +0000
+	id 1wkMxA-0007jZ-5C; Thu, 16 Jul 2026 14:20:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1364105.1615487; Thu, 16 Jul 2026 14:12:16 +0000
+Received: by outflank-mailman (output) from mailman id 1364156.1615494; Thu, 16 Jul 2026 14:20:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkMoy-00056r-3d; Thu, 16 Jul 2026 14:12:16 +0000
-Received: by outflank-mailman (input) for mailman id 1364105;
- Thu, 16 Jul 2026 14:12:15 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f6b44eb46000edb5@swg.vates.tech>)
- id 1wkMox-00051V-5E
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 14:12:15 +0000
+	id 1wkMxA-0007jS-2b; Thu, 16 Jul 2026 14:20:44 +0000
+Received: by outflank-mailman (input) for mailman id 1364156;
+ Thu, 16 Jul 2026 14:20:42 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Oleksii_Moisieiev@epam.com>) id 1wkMx8-0007jK-Fz
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 14:20:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkMow-000yGf-Hw
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 16:12:14 +0200
-Received: from [10.42.69.2] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f6b44eb46000edb5@swg.vates.tech>)
- id 6a58e6ba-e002-0a2a0a5209dd-0a2a4502cc8e-12
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 16:12:14 +0200
-Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f6b44eb46000edb5@swg.vates.tech>)
- id 6a58e6be-6ca4-0a2a45020019-b9ff1c12b507-3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 16:12:14 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19f6b44eb46000edb5.00b for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 16 Jul 2026 14:11:46 +0000
-Received: from julian.home (areims-651-1-80-194.w90-18.abo.wanadoo.fr
- [90.18.187.194]) (Authenticated sender: julian.vetter@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id C8A25829A9;
- Thu, 16 Jul 2026 16:11:45 +0200 (CEST)
+ id 1wkMx7-006niv-Lb
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2026 16:20:41 +0200
+Received: from [10.42.69.11] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <Oleksii_Moisieiev@epam.com>)
+ id 6a58e8b5-2eae-0a2a0a5409dd-0a2a450bb9be-18
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 16:20:41 +0200
+Received: from [40.107.159.137]
+ (helo=OSPPR02CU001.outbound.protection.outlook.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Oleksii_Moisieiev@epam.com>)
+ id 6a58e8b8-b7e8-0a2a450b0019-286b9f8991ce-3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 16:20:41 +0200
+Received: from DU5PR03MB10263.eurprd03.prod.outlook.com (2603:10a6:10:519::5)
+ by DU0PR03MB8575.eurprd03.prod.outlook.com (2603:10a6:10:3e6::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.11; Thu, 16 Jul
+ 2026 14:20:39 +0000
+Received: from DU5PR03MB10263.eurprd03.prod.outlook.com
+ ([fe80::8c9e:b301:61c0:3908]) by DU5PR03MB10263.eurprd03.prod.outlook.com
+ ([fe80::8c9e:b301:61c0:3908%6]) with mapi id 15.21.0202.018; Thu, 16 Jul 2026
+ 14:20:39 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,292 +55,168 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=5d51ptFBUqeFrMnM9UmyIOdG7rqL89xbG3rIsQCHejU=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=YP00jzJGCZdBrOyP00PAZ5abAKd5C4avtdY5VU8oHqfcdigkwI//hyJezf3fLf2jX8t/Kk/c1
- kuQEfr+KpXr0wQPYx1q+KO4YOsWP80Hf9MEQMbv+RKpyBs77jRVqxira9WESbuEMUtFPfR/znYy
- dktqTF8izLzEVdJHI3OPddF0s9WG4db8Nll2jP3lHGOobFvrmJAWRxzMTiHEUicWGiUPtEyzWdy
- f4JKMDTrulH1QcSBqZwAUMg3LzKpS+fpxyCyeiPH6B+J8XpAgJiTCPSDBsrPJ1wA15H5obwFRQs
- D9bzNsEJxKes18eaPCkd02hR6cyNJq0hn/hs7SjKEzcg==
-X-Zone-Loop: fa95749e1238e6c258c1bfe789784d46d65f8b9f8a0d
-x-campaign-type: default
-x-transaction-id: 71e7a3c8-086d-4b4f-972e-36cccb2ec239
-x-swg-uid: 01-7c8fa99a-e3de-4e75-bae5-e26b39b569e7
-X-Mailer: Sweego
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=L5Y3xmiwg/82BVfOdSZBunK2tQ8tACJrVqDHCpMqTi29Sbr6T7Ix3IesiV1B0X9jCrGdd4b0+kUV1axMlrcLQ2/8dgsLesjLEK4zYmi/ChQHie0aajMot+Ru6Hq624Hk5h3KHzC47lVrqR4wCG5n/G5g9799+98aGbuyCq+FEuTs3AuVC9HdbLBl5bDPBgZ686C7JDPxO1AmW36g2FfFsmzZcOcWJD/VMHsUPdPD9uAWsHCRmnI1gllT3xkjuvix5OmXTENo24I7pa02/KWYEpcpqDqTGSsvZqk4rhvQzKr6HCEAPiGP4Ic7rSikDH1t2+v4mPu14dWGen/TP8z/rg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=N+mCsMiInq8NEJ/T0ETRjd5+WVO02lw0DT/cOeD67x4=;
+ b=fp8i2ksFZcTMRi0rbBtYACh7gL++JjVObi8zaHQTbUK8DmpVgndiaTfdcO1FCTld1QlMl7x3/ZFvo3bus1W3+0/LI/16k83UOkPeCDdJ9D+5RYc9tBYed90uktv3CveupmxjQosJGdVZBpdDUzH4rP5jvp2SZsQBLPXmeTHTZoF9vmBniBo4G1Sasc5qqOPPAKGmzF1mqhrRBhrJUIi6qikDnRdf6zAMS2ZLZ0u9vOWJaK1CepEXck/dbGQvHDIA493Jgyy0HNHEAfN9AVrVMKKzCJrLdasgkUo8Dkfl8bWh8rZDEzvnPiEdpo9F6a4YglnU1p22LRBrooFmu4zutA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=N+mCsMiInq8NEJ/T0ETRjd5+WVO02lw0DT/cOeD67x4=;
+ b=Jhezi53oi1JnxSQTu9gCEaM8SO1oFILun8wsHKgmpfWivFqBp0LRlSlUuxkXZqGRZXXMHZ/NVCtvOL87+ZCxs9dByUoHgEMm/Pq2r5TnWYJpULI0AxvpXIJqRClFV5jhi/4dSTxS7CUI2jPrbhN3J2JfFLea0Od3edQxxw1AesDxPZUQ8OM8Dxj8M+Wr6PeXZwUqnXi9eWHRI+blrFSr4GYjY0Wi0WGPLJW3vzTOeDDMA8xxqYb88l75oVK/NaY2XwPwEMeM9XYDq7dvQy5hvdXE1eHlObvQ3qrcEN4wn1P9Pgf6V5u/L6gQJw66kY7wX4y2oaO1dhx5dkKpZcZv7g==
+From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Dario Faggioli <dfaggioli@suse.com>, George Dunlap <gwd@xenproject.org>,
+	Juergen Gross <jgross@suse.com>, Meng Xu <mengxu@cis.upenn.edu>, Oleksii
+ Moisieiev <Oleksii_Moisieiev@epam.com>
+Subject: [PATCH] xen/sched: rt: fix NULL cpupool dereference in
+ move_repl_timer()
+Thread-Topic: [PATCH] xen/sched: rt: fix NULL cpupool dereference in
+ move_repl_timer()
+Thread-Index: AQHdFS5GI2vrNSoeg0mZ8r0I1QFdPg==
+Date: Thu, 16 Jul 2026 14:20:39 +0000
 Message-ID:
- <1784211106.8631fc262581453bbf619ec5b2062170.19f6b44eb46000edb5@vates.tech>
-x-swg-bid: 1784211106.8631fc262581453bbf619ec5b2062170.19f6b44eb46000edb5
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-From: Julian Vetter <julian.vetter@vates.tech>
-To: xen-devel@lists.xenproject.org
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Juergen Gross <jgross@suse.com>,
-	Andrii Sultanov <andriy.sultanov@vates.tech>,
-	Guillaume Thouvenin <guillaume.thouvenin@vates.tech>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Oleksii Moisieiev <oleksii_moisieiev@epam.com>,
-	Timothy Pearson <tpearson@raptorengineering.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Julian Vetter <julian.vetter@vates.tech>
-Subject: [PATCH v3 6/6] xen: make config argument const
-Date: Thu, 16 Jul 2026 16:11:38 +0200
-In-Reply-To: <20260716141138.88265-1-julian.vetter@vates.tech>
-References: <1784210820.8631fc262581453bbf619ec5b2062170.19f6b408bba000edb5@vates.tech>
- <20260716141138.88265-1-julian.vetter@vates.tech>
-MIME-Version: 1.0
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.a0c.507d24c602eb9ec1.19f6b44e93e.e9386eede43bbb4=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1784211106110
-X-purgate-ID: tlsNG-720697/1784211134-F28B42AC-B5ED4DD3/0/0
-X-purgate-type: clean
-X-purgate-size: 8397
-
----=Part.a0c.507d24c602eb9ec1.19f6b44e93e.e9386eede43bbb4=-
-Content-Type: text/plain; charset=utf-8
+ <38cc09ca49bb020d4b13ead36e4c9f04da2d00e5.1784211528.git.oleksii_moisieiev@epam.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DU5PR03MB10263:EE_|DU0PR03MB8575:EE_
+x-ms-office365-filtering-correlation-id: cbb7bb1e-7953-466b-5cfa-08dee3456940
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|376014|23010399003|1800799024|366016|56012099006|11063799006|18002099003|10067099003|38070700021;
+x-microsoft-antispam-message-info:
+ PemxIjbiWRYhbx2ObeR/RjPpZCmtYf3ZE9MeKwLIRHtcWYKTjuAsmG4WPttltc1CUU0H8eVUMD2WZnl4jv4g028BQ83nobqCPYeFBah66jENyQqq1oZdMnKXlNe2ze9eH9ly9ebJZt1kYiu+vpU+5ScchOaU/s8mOBuwhAPgLMVMiReCJ5kNgCuXz/CV1zg1I/SN8eRUwUtFyhsutBlA5IwQ7OjAE5f8vpqOYaWu6s7ujK8doMnQyK5fI9zkGsDkHODtawjbN4wbD+RxGI3wrLCBfsYEY1u9kiNLk27pA1dmIuLTqIDC+YKYisLbYKjufUCLOBsuMNHL5TfMWGDpqp/dKgD4pTr9C3Cf4oDH+lsvBocB17wl+puzhA/70iyga2l9+Xflz5KdhUmMAUAKDbFf1yGsPXNbG6CUKAZMdbAzAo6+WyHjy3uI+k58WaZi370crWDJl+j2XLngT7GUX/5hc97LNE8A49miy26vKzAxDKl8f5WU8yhb8hfx+AmI0Y4ou5CffmekB7c6Y3U5gO9lUiX/oAnQE9x1V1htIzfYRXn2GbDtGZXS9c6flynM7JcUGOB9clKH4ciTHeSKDFCnJNIG+flWCqPjSNp8Y8RnCmtjopYSMI0o1RbEHshofxjXkoXWhjbCe9aXG3S1sWedckyiMhq0Gy1JIRClmkSiqtQDoCiQ2YVdbBgYBBqDSrRzpijcMFAfm0wt6B0ugKUxXkBREh3sPRNVDmM9Up8=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU5PR03MB10263.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(1800799024)(366016)(56012099006)(11063799006)(18002099003)(10067099003)(38070700021);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?GCUW13SomtdUxt9PY5tW7D6xQnVL4kIRx+78SFbo+fyesNwyj1zUv2HyY2?=
+ =?iso-8859-1?Q?ty0+WdnqZHmSabcC0KGso9bqg7OT1S9dz+cS38NQRsMhJPO4E39MKS6bEq?=
+ =?iso-8859-1?Q?C0o71i0qTUhZ+48FzEgBAUuBKKqZwVZEmZ/JJE0v2l2n9hxipw7HFhFh2Q?=
+ =?iso-8859-1?Q?V7zQS5fr49cxlnlcbrBPE3SZmADoOTPmOEKKmjj1qkgZt3XHTn/qrAxrCl?=
+ =?iso-8859-1?Q?T4XoB/xuqPBKvcc9k0tMtOJTBE3gm64ImbD6uctbPCo4YlSb+14p3Hawnf?=
+ =?iso-8859-1?Q?gPpt2T2qc0qlGlRpWm6cPj82VZzUo+r0o2rxEbd84/TadHRznFsQnjPtcF?=
+ =?iso-8859-1?Q?nzZ3wSpat/yH2YJCEQzeouFJOP5WucifsawGaUMqIdy3IE6L8fI9d8FV1f?=
+ =?iso-8859-1?Q?+ZqFwhdaurpqEZma5b4nQIwvIqYnhEwqM7WFNJkfMaUnx33ZG5iRVNROv3?=
+ =?iso-8859-1?Q?sUK7eeBtGPxRkzZAZjDgMZGt+f9t2YF3q5haTNlFeau7N+IUt+mcjeKJaG?=
+ =?iso-8859-1?Q?bWqxWggJUOsCngpzfktPADo6f1I5WpSy+ybfGO5AVi2pY+csy8H47M9EAU?=
+ =?iso-8859-1?Q?tVLVJl8+ZzBmJ4VDdtZWu88facwmrkzM9u/h2tW3m55e7VlgrvLpvb8Mcq?=
+ =?iso-8859-1?Q?FOBDYmYpHxnesoshoOYvgMnGIgwj+hJ6gK5fc6Ihio9uLBqDX8JDg8oF0B?=
+ =?iso-8859-1?Q?MarKUNc/Gn2cUObu3BTwfYb/K/sNfFRFIsGSq9DX/akI+L/cFeKvdG24Mz?=
+ =?iso-8859-1?Q?wsUUO+T2dM8QOKt35CSEf/YUZMpKvhAretST8UFIt4qiCk2hA7CGZEaw79?=
+ =?iso-8859-1?Q?9HSDgSveOPL0OCb5X7crC4VM3ZVPEoZ25rPkPE8WMlRPw4twSSYxp1OG24?=
+ =?iso-8859-1?Q?5rUqFIz5OKuWqArTQomf/tW+dJRvdAX6p2Ateg+pUX1QCVnotAHMxfkp1E?=
+ =?iso-8859-1?Q?rp84mroeahnMk+Y+MLDEakscG62mjyxMmItv63E9JIr3OEQdvJIwgZqtXz?=
+ =?iso-8859-1?Q?u/ijRqY999Dej4GkDGotJo1AL1Yx9JH8/reMKhGTSAcMYYQzHCHVCGA1TL?=
+ =?iso-8859-1?Q?NJa9l9Xlb2MmzVHyOE/nb7TYVzao2nvYjt3DLsBKpjv8D+U0Bda0MepAYj?=
+ =?iso-8859-1?Q?XzhxCYCQAnz9uoEudLP26gruQqUeMO0cH53zUfelVGFHTtbQ568Rk3d4WV?=
+ =?iso-8859-1?Q?+s+VLMpDsuhd4jUwyQyBWlQjocmz3M2fQpXcQQLJHEGiJaJsTgFB3OVykQ?=
+ =?iso-8859-1?Q?S3LMWFFlSeoQVpnvfqj9u/xgFPBe+xs151/gthT91AtNZT3CP4Nw49mnxi?=
+ =?iso-8859-1?Q?J4EwO2NuT1PaLyF97L0eZmYNWqoZuBqQfCSPKCbYRhQxz5yMrjuUb2uDvE?=
+ =?iso-8859-1?Q?ofBCJ2BaaR3jaUiGk7Gjofw3qXK3W72pxZJxSaqQZZVe2RVNlQ5qEuNN1L?=
+ =?iso-8859-1?Q?S185/vbqJk8KlHGCvn2I79DtWxpScNxr+6SxCFtI2qBAEIsBrow6EmR4Sg?=
+ =?iso-8859-1?Q?63TXFlDp/2by2H1ESM3k1ixgcW+jVTQACgiQPlTxmNaHc7S5pRz107IkUl?=
+ =?iso-8859-1?Q?vBg2MLjYhObhiOEdHxbHKd/hTvtTTX06k7JMqnYho5enU9Aa/svSgwA7mu?=
+ =?iso-8859-1?Q?QW2MlqHfgndcBiI8w2EC8wvOMysyXGpyFgH0FG+MVURFXv7U6gBUiLQ+cn?=
+ =?iso-8859-1?Q?LviYbH7Ox7+HWTUPX9JzZ07KlHldVfUGfEPEpwCODrOTs65iCJbfFtDdHu?=
+ =?iso-8859-1?Q?dWqAhw6GZnAhtSTkrTR4b3V/WMzwkW9MPsbR1pWn+LBcCi9CMJJvyh4VcC?=
+ =?iso-8859-1?Q?TKsDt6PQHb9hjSPwHYcmtHRt8tszsp0=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DU5PR03MB10263.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: cbb7bb1e-7953-466b-5cfa-08dee3456940
+X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Jul 2026 14:20:39.1011
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 1Ex4F6QWwsXdiOwbekf7hrMoGTJKA+qKHmU/5jyCuECS2hogkzAN8uCHE40OqKrYU5XIrNDLjxeHmN2hs/FZg+FFsuddd0Dh4xN28xZhQfA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR03MB8575
+X-purgate-ID: tlsNG-42698a/1784211641-2C39B9EA-5E251781/0/0
+X-purgate-type: clean
+X-purgate-size: 2561
 
-arch_sanitise_domain_config() validates the configuration requested by
-the toolstack, and should not fill anything in=2E The config struct passed
-to createdomain is supposed to be pure input=2E ARM used to abuse this
-(GIC_NATIVE resolution, now removed) to smuggle output back to the
-toolstack=2E Making the parameter const stops that type of abuse from
-happening on any architecture=2E
+schedule_cpu_rm() clears the cpupool pointer of the scheduling
+resource before calling sched_deinit_pdata():
 
-The x86 implementation turned out to have its own instance of the same
-issue=2E It set XEN_DOMCTL_CDF_oos_off into config->flags for non-HVM
-guests=2E Since The sanitisation runs before the function domain_create()
-copies config->flags into d->options, this relied on mutating the
-toolstack's config to take effect=2E Move the default onto d->options
-directly in arch_domain_create() (which runs after d->options is
-populated), where all the remaining domain options are resolved=2E This
-has the same effect and no mutation of the input config is required=2E
+    sr->cpupool =3D NULL;
+    ...
+    sched_deinit_pdata(data->old_ops, data->ppriv_old, cpu);
 
-ARM, PPC and RISC-V need no equivalent change, Their implementations
-were already read-only=2E
+For RTDS, rt_deinit_pdata() calls move_repl_timer() when the
+replenishment timer lives on the cpu being removed, and
+move_repl_timer() dereferences get_sched_res(old_cpu)->cpupool
+without checking it for NULL. Removing the last pCPU from an RTDS
+cpupool therefore dereferences NULL + 0x10 (the res_valid member)
+and panics:
 
-Signed-off-by: Julian Vetter <julian=2Evetter@vates=2Etech>
-Reviewed-by: Jan Beulich <jbeulich@suse=2Ecom> # x86
+    (XEN) Data Abort Trap. Syndrome=3D0x1c28005
+    (XEN) Walking Hypervisor VA 0x10 on CPU0 via TTBR ...
+    (XEN) Xen call trace:
+    (XEN)    [<...>] find_next_bit+0x74/0xa8 (PC)
+    (XEN)    [<...>] rt.c#move_repl_timer+0xb8/0xec (LR)
+    (XEN)
+    (XEN) Panic on CPU 0:
+    (XEN) CPU0: Unexpected Trap: Data Abort
+
+Reproducer, on any host with at least 2 pCPUs and RTDS compiled in
+(observed on arm64, but the path is common code):
+
+    xl cpupool-create name=3D"test" sched=3D"rtds"
+    xl cpupool-cpu-remove Pool-0 1
+    xl cpupool-cpu-add test 1
+    xl cpupool-cpu-remove test 1
+
+The last command moves the RTDS replenishment timer to cpu1 (first
+and only cpu of the pool) and then removes cpu1, hitting the NULL
+dereference in the sched_deinit_pdata() callback.
+
+Treat a NULL cpupool like a cpupool with no remaining scheduling
+resources and kill the timer, which is the intent of the existing
+comment in move_repl_timer().
+
+Fixes: b6f5334aeaca ("sched: fix cpu offlining with core scheduling")
+Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
 ---
-Changes in v3:
-- Added 'Reviewed-by'
----
- xen/arch/arm/domain=2Ec                   |  2 +-
- xen/arch/arm/firmware/sci=2Ec             |  2 +-
- xen/arch/arm/firmware/scmi-smc=2Ec        |  2 +-
- xen/arch/arm/include/asm/firmware/sci=2Eh |  6 +++---
- xen/arch/ppc/stubs=2Ec                    |  2 +-
- xen/arch/riscv/domain=2Ec                 |  2 +-
- xen/arch/x86/domain=2Ec                   | 16 ++++++++--------
- xen/include/xen/sched=2Eh                 |  6 ++++--
- 8 files changed, 20 insertions(+), 18 deletions(-)
 
-diff --git a/xen/arch/arm/domain=2Ec b/xen/arch/arm/domain=2Ec
-index d6d80ac55d=2E=2Ef605446cc5 100644
---- a/xen/arch/arm/domain=2Ec
-+++ b/xen/arch/arm/domain=2Ec
-@@ -557,7 +557,7 @@ static bool v8r_el1_msa_domain_sanitise_config(
-     }
- }
+ xen/common/sched/rt.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/xen/common/sched/rt.c b/xen/common/sched/rt.c
+index f1feb4384e..49a9b76b89 100644
+--- a/xen/common/sched/rt.c
++++ b/xen/common/sched/rt.c
+@@ -766,8 +766,9 @@ rt_switch_sched(struct scheduler *new_ops, unsigned int=
+ cpu,
 =20
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig)
+ static void move_repl_timer(struct rt_private *prv, unsigned int old_cpu)
  {
-     unsigned int max_vcpus;
-     unsigned int flags_required =3D (XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_=
-hap);
-diff --git a/xen/arch/arm/firmware/sci=2Ec b/xen/arch/arm/firmware/sci=2Ec
-index aa93cda7f0=2E=2Ef73ed06092 100644
---- a/xen/arch/arm/firmware/sci=2Ec
-+++ b/xen/arch/arm/firmware/sci=2Ec
-@@ -45,7 +45,7 @@ int sci_domain_init(struct domain *d, struct xen_domctl_=
-createdomain *config)
-     return cur_mediator->domain_init(d, config);
- }
-=20
--int sci_domain_sanitise_config(struct xen_domctl_createdomain *config)
-+int sci_domain_sanitise_config(const struct xen_domctl_createdomain *conf=
-ig)
- {
-     if ( !cur_mediator )
-         return 0;
-diff --git a/xen/arch/arm/firmware/scmi-smc=2Ec b/xen/arch/arm/firmware/sc=
-mi-smc=2Ec
-index 0835ddeeec=2E=2Ea973679eaf 100644
---- a/xen/arch/arm/firmware/scmi-smc=2Ec
-+++ b/xen/arch/arm/firmware/scmi-smc=2Ec
-@@ -82,7 +82,7 @@ static bool scmi_handle_smc(struct cpu_user_regs *regs)
- }
-=20
- static int
--scmi_smc_domain_sanitise_config(struct xen_domctl_createdomain *config)
-+scmi_smc_domain_sanitise_config(const struct xen_domctl_createdomain *con=
-fig)
- {
-     if ( config->arch=2Earm_sci_type !=3D XEN_DOMCTL_CONFIG_ARM_SCI_NONE =
-&&
-          config->arch=2Earm_sci_type !=3D XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_=
-SMC )
-diff --git a/xen/arch/arm/include/asm/firmware/sci=2Eh b/xen/arch/arm/incl=
-ude/asm/firmware/sci=2Eh
-index 485ce211c9=2E=2E1d566be8e2 100644
---- a/xen/arch/arm/include/asm/firmware/sci=2Eh
-+++ b/xen/arch/arm/include/asm/firmware/sci=2Eh
-@@ -32,7 +32,7 @@ struct sci_mediator_ops {
-      * it to sanitize domain SCI configuration parameters=2E
-      * Optional=2E
-      */
--    int (*domain_sanitise_config)(struct xen_domctl_createdomain *config)=
-;
-+    int (*domain_sanitise_config)(const struct xen_domctl_createdomain *c=
-onfig);
+-    cpumask_t *online =3D get_sched_res(old_cpu)->cpupool->res_valid;
+-    unsigned int new_cpu =3D cpumask_cycle(old_cpu, online);
++    const struct cpupool *c =3D get_sched_res(old_cpu)->cpupool;
++    unsigned int new_cpu =3D c ? cpumask_cycle(old_cpu, c->res_valid)
++                             : nr_cpu_ids;
 =20
      /*
-      * Called during domain destruction, releases all resources, that
-@@ -101,7 +101,7 @@ int sci_domain_init(struct domain *d, struct xen_domct=
-l_createdomain *config);
-  * Sanitise domain configuration parameters=2E
-  *
-  */
--int sci_domain_sanitise_config(struct xen_domctl_createdomain *config);
-+int sci_domain_sanitise_config(const struct xen_domctl_createdomain *conf=
-ig);
-=20
- /*
-  * Destroy SCI domain instance=2E
-@@ -162,7 +162,7 @@ static inline int sci_domain_init(struct domain *d,
- }
-=20
- static inline int
--sci_domain_sanitise_config(struct xen_domctl_createdomain *config)
-+sci_domain_sanitise_config(const struct xen_domctl_createdomain *config)
- {
-     if ( config->arch=2Earm_sci_type !=3D XEN_DOMCTL_CONFIG_ARM_SCI_NONE =
-)
-         return -EINVAL;
-diff --git a/xen/arch/ppc/stubs=2Ec b/xen/arch/ppc/stubs=2Ec
-index a333f06119=2E=2E82a289af85 100644
---- a/xen/arch/ppc/stubs=2Ec
-+++ b/xen/arch/ppc/stubs=2Ec
-@@ -162,7 +162,7 @@ void arch_vcpu_destroy(struct vcpu *v)
-     BUG_ON("unimplemented");
- }
-=20
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig)
- {
-     BUG_ON("unimplemented");
- }
-diff --git a/xen/arch/riscv/domain=2Ec b/xen/arch/riscv/domain=2Ec
-index 2819ff4e7c=2E=2Ee096a53cb5 100644
---- a/xen/arch/riscv/domain=2Ec
-+++ b/xen/arch/riscv/domain=2Ec
-@@ -289,7 +289,7 @@ void sync_vcpu_execstate(struct vcpu *v)
-     /* Nothing to do -- no lazy switching */
- }
-=20
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig)
- {
-     return 0;
- }
-diff --git a/xen/arch/x86/domain=2Ec b/xen/arch/x86/domain=2Ec
-index 4252339978=2E=2E35f591ab5d 100644
---- a/xen/arch/x86/domain=2Ec
-+++ b/xen/arch/x86/domain=2Ec
-@@ -590,7 +590,7 @@ void arch_vcpu_destroy(struct vcpu *v)
-         ASSERT_UNREACHABLE();
- }
-=20
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig)
- {
-     bool hvm =3D config->flags & XEN_DOMCTL_CDF_hvm;
-     bool hap =3D config->flags & XEN_DOMCTL_CDF_hap;
-@@ -633,13 +633,6 @@ int arch_sanitise_domain_config(struct xen_domctl_cre=
-atedomain *config)
-         return -EINVAL;
-     }
-=20
--    if ( !hvm )
--        /*
--         * It is only meaningful for XEN_DOMCTL_CDF_oos_off to be clear
--         * for HVM guests=2E
--         */
--        config->flags |=3D XEN_DOMCTL_CDF_oos_off;
--
-     if ( nested_virt && !hvm_nested_virt_supported() )
-     {
-         dprintk(XENLOG_INFO, "Nested virt requested but not available\n")=
-;
-@@ -833,6 +826,13 @@ int arch_domain_create(struct domain *d,
-=20
-     spin_lock_init(&d->arch=2Ee820_lock);
-=20
-+    /*
-+     * It is only meaningful for XEN_DOMCTL_CDF_oos_off to be clear for H=
-VM
-+     * guests=2E
-+     */
-+    if ( !is_hvm_domain(d) )
-+        d->options |=3D XEN_DOMCTL_CDF_oos_off;
-+
-     if ( d->domain_id && cpu_has_amd_erratum(&boot_cpu_data, AMD_ERRATUM_=
-121) )
-     {
-         if ( !opt_allow_unsafe )
-diff --git a/xen/include/xen/sched=2Eh b/xen/include/xen/sched=2Eh
-index 011292e9f7=2E=2E66ed7454ba 100644
---- a/xen/include/xen/sched=2Eh
-+++ b/xen/include/xen/sched=2Eh
-@@ -756,9 +756,11 @@ static inline void domain_update_node_affinity(struct=
- domain *d)
-=20
- /*
-  * To be implemented by each architecture, sanity checking the configurat=
-ion
-- * and filling in any appropriate defaults=2E
-+ * requested by the toolstack=2E config is not modified: createdomain is
-+ * input-only, and the toolstack is expected to have already resolved any
-+ * defaults=2E
-  */
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config);
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig);
-=20
- /*
-  * Create a domain: the configuration is only necessary for real domain
+      * Make sure the timer run on one of the cpus that are still available
 --=20
-2=2E53=2E0
+2.43.0
 
-
-
--- 
-Julian Vetter | Vates Hypervisor & Kernel Developer
-
-XCP-ng & Xen Orch=
-estra - Vates solutions
-
-web: https://vates=2Etech
----=Part.a0c.507d24c602eb9ec1.19f6b44e93e.e9386eede43bbb4=---
+base-commit: 959fa8800470e3d757b5a0bcd9394954ed7b923a
+branch: amoi_sched_6=
 
