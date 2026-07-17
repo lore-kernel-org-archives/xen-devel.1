@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8C31C44520
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Jul 2026 11:45:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1364930.1615793 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2E89C4451C
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Jul 2026 14:07:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1365004.1615800 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkh0D-0003qE-DN; Fri, 17 Jul 2026 11:45:13 +0000
+	id 1wkjCt-0007QG-M7; Fri, 17 Jul 2026 14:06:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1364930.1615793; Fri, 17 Jul 2026 11:45:13 +0000
+Received: by outflank-mailman (output) from mailman id 1365004.1615800; Fri, 17 Jul 2026 14:06:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkh0D-0003q6-7i; Fri, 17 Jul 2026 11:45:13 +0000
-Received: by outflank-mailman (input) for mailman id 1364930;
- Fri, 17 Jul 2026 11:45:12 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wkjCt-0007Q9-JP; Fri, 17 Jul 2026 14:06:27 +0000
+Received: by outflank-mailman (input) for mailman id 1365004;
+ Fri, 17 Jul 2026 14:06:26 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Oleksii_Moisieiev@epam.com>) id 1wkh0C-0003q0-3G
- for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 11:45:12 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wkjCs-0007Q3-4P
+ for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 14:06:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkh0B-003tJt-2h
- for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 13:45:11 +0200
+ id 1wkjCr-002XD9-6Z
+ for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 16:06:25 +0200
 Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Oleksii_Moisieiev@epam.com>)
- id 6a5a15b5-e002-0a2a0a5209dd-0a2a4505bb1e-40
- for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 13:45:11 +0200
-Received: from [52.101.65.133]
- (helo=DU2PR03CU002.outbound.protection.outlook.com)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a5a36df-bab6-0a2a0a5309dd-0a2a4505a258-2
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 16:06:25 +0200
+Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Oleksii_Moisieiev@epam.com>)
- id 6a5a15c4-4cb1-0a2a45050019-34654185b8b4-3
- for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 13:45:08 +0200
-Received: from PA6PR03MB10266.eurprd03.prod.outlook.com
- (2603:10a6:102:3cd::18) by AS8PR03MB6949.eurprd03.prod.outlook.com
- (2603:10a6:20b:293::9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.12; Fri, 17 Jul
- 2026 11:45:03 +0000
-Received: from PA6PR03MB10266.eurprd03.prod.outlook.com
- ([fe80::2cc9:8d65:65de:c005]) by PA6PR03MB10266.eurprd03.prod.outlook.com
- ([fe80::2cc9:8d65:65de:c005%4]) with mapi id 15.21.0223.011; Fri, 17 Jul 2026
- 11:45:03 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6a5a36e0-4cb1-0a2a45050019-d155dd34c809-3
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 16:06:25 +0200
+Received: by mail-wr1-f52.google.com with SMTP id
+ ffacd0b85a97d-475417f010dso4235610f8f.2
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 07:06:24 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47f63eeb360sm4210830f8f.34.2026.07.17.07.06.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 17 Jul 2026 07:06:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,208 +53,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rTWAy/NFDaR4OQoklfPomJn0AazYhRTjPrJS0EWXV8Rgi2b+oDnR6hwRvccVsAsXCkEUdq+uuZiJGZEr6KB63myFQyvINNgxz8BxoQb2X25+51FXhcLB1KHY2tD27obq/j3UxalwfHuHQqC95fECXkxJdSh0X8GyqfMW/XrsoF1C6wMbr/gGu+aPhCn992Pje88cGr+YAPl0onRcyef4P6A5HnIaCRGHgbfCkjrEfiZ9qyudRu/WWVzjNQG5r5dIET072cqh7DpkF/HH84fjxGirduGIm9V3jl9OABEmwjM7zKBcuDo61GlQZWJMw871n2y0eVp2LYzOn/2BFKsVwA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OrTbwqj4aI37Sajy1Vfhv29q4RHLcdz3hbwUtcIMxyE=;
- b=NnK6WQpSjkSz8N6p/G3MXUIIF6uG3mohASvUR69Au/0oWhhpZ3BaH6EeFEpUVySYXCqQCYCv631PLn7UVa10lE7jQbxiFqc/wWc7zZyrOu6CI1/+g8j1FPX+skbHXbAIy/y0t5y2NdVbH0JydKmD8jOra5RhuBWGpyL4930l+Zww58FyLMiqPcjpNcJiIEx8Q0gf7g3y6+D6yRFfyWMjT97FicunzC61N2hr1qOKMOCZllQZZTrEjVuMQ2uxj5eybauoAh9/VjR3hPzo1OrPVqymaKcErlsq0LhXXmH3wvvZ0sQOYtvpJuYCdVuT5GzT3FzO5Xj+LWE4YeQhjwuYHg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OrTbwqj4aI37Sajy1Vfhv29q4RHLcdz3hbwUtcIMxyE=;
- b=sO/JWylD8UE2LFTTbe9Yj0SwcDf6cskNCN6lkWx1n87Mh66r5JP+Zrq8jFL2pm6ESKudw4TsxusSetSxEnv2SGR2+QsHnnjXf3qcpXAOPXRfUJI7I2k0+xCPECxkPzFQU+eGE6lIb/V2zyBKON0TJZbHT+yNKXz2WzjZjw6+4H3FpJ9ROGWzrMzxa4kM4dUkm3ogwGe2zr9BZoSZqVIrD7EnwRCikg0iEYnE25GUFXu8DLLifygyI0xLQdG54/LcsYmUluT7ptP+zTMCI86eIEdvqEngHyyxcfc4Zo2kvRNIJZJk5KR66DHS7gHr7iVFIuz7bYSJfiBOkDoNNiQMRA==
-From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Dario Faggioli <dfaggioli@suse.com>, George Dunlap <gwd@xenproject.org>,
-	Juergen Gross <jgross@suse.com>, Meng Xu <mengxu@cis.upenn.edu>, Oleksii
- Moisieiev <Oleksii_Moisieiev@epam.com>
-Subject: [PATCH v2] xen/sched: rt: fix NULL cpupool dereference in
- move_repl_timer()
-Thread-Topic: [PATCH v2] xen/sched: rt: fix NULL cpupool dereference in
- move_repl_timer()
-Thread-Index: AQHdFeG00FErvj0nOEaMWTVLFzCjeQ==
-Date: Fri, 17 Jul 2026 11:45:03 +0000
-Message-ID:
- <f4b75c23400b1a9db44596a28ca9683dbf05d419.1784288688.git.oleksii_moisieiev@epam.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PA6PR03MB10266:EE_|AS8PR03MB6949:EE_
-x-ms-office365-filtering-correlation-id: 4e6edfd0-305c-4aa4-0ecf-08dee3f8d70a
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|366016|1800799024|23010399003|376014|38070700021|10067099003|56012099006|18002099003|11063799006;
-x-microsoft-antispam-message-info:
- VUogzEupJaadcyg6u5WwmQWshOrUmn/Rp2gMf9wPjA8UfDv4idTKKguGAYFmmR6D2IAQOyq9j5nOOP5kb4xR23akFYgx5YTiFu0rrXf1/FIDO2onoPur/Tv+RKyawFH7mBgDkUaIdg7V6wraTKpi0+X63cjcx5JstaAqglzeeEwcCpaToFZwi5CdsAfGj/X10ppH821JXbKES6jGu1LWK0JatJIt4tsiz4MlEQsoULuc0A379E1okaliBbSA1HTPPNNTd47ve21MzCythXtyorSOnuvXhjYyujIojr/agMLM4aOUwy8kANilqfMGSi2LJgCAy1jbZop640uB7t1iajjMX6VNgLzJGKO/loFoElijn26a2xzzIWFEBwCSrxzhySKzYY7xnKULa+GchEMT8MZjCGEf/G/Fs+8o6ph/immsDP968mA4RNacO4Z6OhpCnGadVwYwTj5zPKF55T1p6x7mv4L/Saz+jGI2/uO/c7bE6Dwv1IcId2Rea8cEVa7/XtxcK3n2wiaq+sJrA968eQSJWnxdsu3rmuqKNZoICfY2MPiHawRXaT602pJz7bhS2+oIWnnRsjP5zUDEPudH63wesA4cyPrDATz3a+DZkwexIRtConyQsKpVvMjBHN2EnXPUgWZfIg/3snx2z2OnV4/CWQ8kDwmArvJ2bed482odCCCVHoDDYGNcrSXHhDLmUcu/xu0TbgpPjEu66zxwOYlyM0nE2jOAA6YJGllk+EE=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA6PR03MB10266.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(38070700021)(10067099003)(56012099006)(18002099003)(11063799006);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?TYecYWQ3FZAgLPyRst8ULGDcRC1ZA9LLG9lBxo9y5rvXi4G4fyw2ROVFb+?=
- =?iso-8859-1?Q?aH2w181F7I/mS+whj2CGuVH66nbez4h2OOvdO7RDLOWZgATBZnaIkUVL7H?=
- =?iso-8859-1?Q?UgjoPPaD1zFeyEAnwfdIHrAmUnqpK6/9QWnE8ygL96uZqCg8OqZ4S6Z1Wz?=
- =?iso-8859-1?Q?d/RGxuX0u/AXV4XqJILrYk+1RcajRWi3zKaDNfTFkJHgaReh7W54N9tYb2?=
- =?iso-8859-1?Q?mtcbKn8XhtnQmCDH8JB3rZrTbSbyV0dtoY60FC23ItU1hB5VZKuEU3w9i1?=
- =?iso-8859-1?Q?2Tz5pMIBZenvvXVObuXGgKMuGkX8h/5rdrfAh4TUFRE7mxs63aluxqq+AV?=
- =?iso-8859-1?Q?Qp9SQ7m8QF57KX8X/Vlv0lSyoaaVtDUWQfa6TbH8jJSard025PZX3wzX6p?=
- =?iso-8859-1?Q?OldwNZFKZirmxGD5sVkodO1z0yHVAZynPKLEH0eFQRBUlKQ0AXYOVdb1tV?=
- =?iso-8859-1?Q?z/FFuUKEjOjt07CWnwBDmTW2LuJWHKnZgai3EP+hPjfESv/sa0SaIc7mRN?=
- =?iso-8859-1?Q?8e6U4Rv+FsVK4af01mVL9kLjfB0fnXg6UYYyp07MbtPOnWdwp/oH+PEPZc?=
- =?iso-8859-1?Q?Xq0E5pVCaHB6DJCsOOZnmf32CYFV0UM9M6WLuDWEiZS2wfAzeNmf9wgVOs?=
- =?iso-8859-1?Q?2Zx755r9iA3yYh/uqbQBOTJMhlXcwqZv9Ujgkta/y+M0Qg0epQLd7My/IT?=
- =?iso-8859-1?Q?Cf/Wrj5c+YHwrRxXAnck2b/F6O5CxWqnKeYTfKIRGythTgLIgydEolvxNH?=
- =?iso-8859-1?Q?FLnbz+ZmGQI1U/ZEJ21lluOdBbKHB23Dbu59fV/5CtHSWI5h3OQ0ItC2nw?=
- =?iso-8859-1?Q?VZz9OVcbj5xooELRhdkF6eJACDBpGZ2+kSrH2eygb4z7hJEbHL6lZJWLTy?=
- =?iso-8859-1?Q?L8ixVyZrY4RMQMHLh/CFFTNBM8XulMbqM21QNLG9BSNU7igDWJAC235XV6?=
- =?iso-8859-1?Q?yhBoYMgSBGI9zuyv2WHVvaTh47KBFAWzv6pKSKEHh2tn0SkeqaCwv5gLup?=
- =?iso-8859-1?Q?ExoJSkH6oV/FNYsrdd/h5uu0m0hkDIYsoUswpqXYFyr74s6f/C7wzkCp/n?=
- =?iso-8859-1?Q?jEYota66JOL6U9NQprUoA4MkTqSvgrj7LNLFu/5FTtrBOt5jrfqUOKNf9q?=
- =?iso-8859-1?Q?pBWXdTBXX53zsFOu69xsBQLmhD9E/O6NY8XASur8sXqAQy9sMrYbrynvQ0?=
- =?iso-8859-1?Q?M/jL86w6Ibikdrx6ToTxriKGIUBYiIRnxC9/9xhKQOTwV0CkZ0mPz37UYj?=
- =?iso-8859-1?Q?BPHL+aFq4oWJxCTBDNnV4VzXHlpqD9CtFDrgyQRZia0dCW/Xdud3aK87nb?=
- =?iso-8859-1?Q?4ai1cYH7TjheXudAZg3r2PKfRjdmSYI/ex55M60sEOr9Iee+YWRw1Dk0S9?=
- =?iso-8859-1?Q?p/tBCS5vexOFzZU7q0TKIoP9Aa0jMCV6/mYfBhbrH/j5Vkt4Pj1ZIQctIF?=
- =?iso-8859-1?Q?XXKUGpmAS2gjx4hkU0FHks3d2YkKeU+eYAyJFQPPtRlO+9mVkNQ/6a7foK?=
- =?iso-8859-1?Q?CpIQBqHFQOVOkoeUUwye2tiFlVEl8WEJLasz/cTcVMVXwtdClF4PtT/Exe?=
- =?iso-8859-1?Q?RhqSlbt7FvT+up22kSRDwAL0u1IzWNJ56lzUqUPfPXiibolwEoKxPlzrJ7?=
- =?iso-8859-1?Q?ulyz++90mn5JrEn4nmA7GNcg/xgtuuSz25s+X/ta6ZMu8UH0RO1UW4ReDu?=
- =?iso-8859-1?Q?Gf1lQunX9GkQW7KZS0rZaJjkPmlwEb63d3hiz1JCnjX8PcmDlwVXpPAWPQ?=
- =?iso-8859-1?Q?9ap2nVCC3tDlYLqdrEJ9GbcxLd7BoYCKF72F+jxoFe9pH7hs9lu/U4VE3g?=
- =?iso-8859-1?Q?6lLDQCrcMd3pDIAj1lkKpbqaFIWDInk=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1784297184; x=1784901984; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=cyz/pOWmvDaPM3OJ65I6Hf+HbW3t+LcOA3wb/2W+hKU=;
+        b=F3hnZj/2E1VNySOahApDYiPTxC/v3UtDNc5JLKDYzBSWDI8DqQxxA5QqaqI/EgfH+l
+         GL+U1RBXbI7eegGeyCecPJqkC6eQryT12B1uy4DM1ITiAYFxOv5hbMbM+Fthkom1Bw6j
+         58GMcYTSndS/By/8Cu0OSXY3NFUn+cEeDtZQrFQMqFt76lCtnD/8BtX+ieep/iXYhUHC
+         AnB9mZAjkiDvyRI1gqib/Toep6z35T3w0kBF9KepFNod8lEBhpoOedKefyfaQL2qHhHT
+         bHca4g6aKlru/HcJJTCajgVd27o7bnmCJnB4LBDVKy01MZ3r2wvYux17cw/U4FbnSf7m
+         55QA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784297184; x=1784901984;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=cyz/pOWmvDaPM3OJ65I6Hf+HbW3t+LcOA3wb/2W+hKU=;
+        b=NeTFWnefy+0kplL4lcvLHtXp3M1/YYN1KnBMr5SIV5WJhjinOSKMkqqFdHh7rqbH2O
+         ZjtfVURzl1yvkt3XTXRjYxgqJ/+16cZtrw13KXxAZI+Jfmsx57NfVQUZb1XhEz32ppVm
+         5kNsGT+Q/TSbFXFBb9HxblpWHaWWo7cRZ9usGk3h/zoG9oNVmiM5TosAC9sqz63YC0kF
+         HgI0kpvuGoTI8nMEASOYyFpE90suWg+LuQGNYiKLOlLZSqiRW4rSCx2SnT46z3Kzz51v
+         PQr7pDYNsh7xF7h8MamH4BRQA304fKJZ9DiNiKPnZA4zLqR+BaYdj4GeoaXSJXy0nJPq
+         hWaQ==
+X-Gm-Message-State: AOJu0YwUnT306gjnpsUgutqWsQUJeA3Nx8cYc9sgqiOBAGbMtHI2lIn6
+	eLU7vZeZm8rlHiwfjBYFoJXaLXakjY5wPLVawsKkmLRAvZB4U15ZpD4HbZU57Ei8+1vshcOURTq
+	zb76qkg==
+X-Gm-Gg: AfdE7cl5I86rG8Yl7hLcZ6CJdE1eCewpgsJg71IlphXIzXSt9q7ySIp58eBpabL/Du6
+	gXXrfTq8S7+uhUx3Eo37T8mkCYFvTnJOO4NhKXcIRPLgbe6a7cXh+zcSIDFpW8oIz662b4HYivD
+	3r3CpfCl0qbtTnJA0OsO3kSQxI1NSTB50ht6kTtHYQM/Oobgzd7fIgUskCjVXHJuXc6LWz+Ndi7
+	miiLGCCdt7V3DDzV30RYCxMvCV0WoEs0jvb42EVU7Yb7klogpaiom2jDgP0dPlf9n3kMXkfxUx6
+	BunpXOSxW45Jsve5+ZzUWMqxWZkPU1PHGAcwlAW2jHG3Gx83fmGURUOZXe0ZqGQWGuc5DARsh3v
+	eam844ha18EkdSIdDPwqN7/eV59m4Qz5QzTXKgiX33zabHK+G09veMqzYprIWqqQdtBax0bjZcG
+	u0CnTCF1zPEAmv5Xc+HNxXkbPgz2/ioSHbITYoYP+mylVZdaw8GGcslGnDPrqIezMZ1U3nH0AzU
+	VdC
+X-Received: by 2002:a5d:5f94:0:b0:47f:5289:d5e1 with SMTP id ffacd0b85a97d-47f62337871mr3489042f8f.37.1784297184419;
+        Fri, 17 Jul 2026 07:06:24 -0700 (PDT)
+Message-ID: <0c34b3d1-2567-4d08-811b-12f9d49f95d7@suse.com>
+Date: Fri, 17 Jul 2026 16:06:22 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PA6PR03MB10266.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4e6edfd0-305c-4aa4-0ecf-08dee3f8d70a
-X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Jul 2026 11:45:03.1675
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: C9/VBiPjEcUwC2dUO/uopyNtgEzykaPNHBqEFBkT+0uMqOloqbm6Nt4uwt3+wylLTpm01Ju/vuTszDYU8CTuOeHwRx5fss96dSktEgVK2Zg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB6949
-X-purgate-ID: tlsNG-c201ff/1784288708-F7ABF2A1-69EC98EC/0/0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH] x86emul: prune an excess EVEX.Z check
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c201ff/1784297185-F78BE2A1-5923A729/0/0
 X-purgate-type: clean
-X-purgate-size: 4094
+X-purgate-size: 870
 
-schedule_cpu_rm() clears the cpupool pointer of the scheduling
-resource before calling sched_deinit_pdata():
+DstMem processing early in x86_emulate() raises #UD when EVEX.Z is set
+with a memory destination. Open-coded checks like this one are therefore
+dead / unreachable code, violating Misra rules.
 
-    sr->cpupool =3D NULL;
-    ...
-    sched_deinit_pdata(data->old_ops, data->ppriv_old, cpu);
+Fixes: 4037a62ef93e ("x86emul: support AVX512F floating-point conversion insns")
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-For RTDS, rt_deinit_pdata() calls move_repl_timer() when the
-replenishment timer lives on the cpu being removed, and
-move_repl_timer() dereferences get_sched_res(old_cpu)->cpupool
-without checking it for NULL. Removing a pCPU owning the timer from
-an RTDS cpupool therefore dereferences NULL + 0x10 (the res_valid
-member) and panics:
-
-    (XEN) Data Abort Trap. Syndrome=3D0x1c28005
-    (XEN) Walking Hypervisor VA 0x10 on CPU0 via TTBR ...
-    (XEN) Xen call trace:
-    (XEN)    [<...>] find_next_bit+0x74/0xa8 (PC)
-    (XEN)    [<...>] rt.c#move_repl_timer+0xb8/0xec (LR)
-    (XEN)
-    (XEN) Panic on CPU 0:
-    (XEN) CPU0: Unexpected Trap: Data Abort
-
-Reproducer, on any host with at least 2 pCPUs and RTDS compiled in
-(observed on arm64, but the path is common code):
-
-    xl cpupool-create name=3D"test" sched=3D"rtds"
-    xl cpupool-cpu-remove Pool-0 1
-    xl cpupool-cpu-add test 1
-    xl cpupool-cpu-remove test 1
-
-The last command moves the RTDS replenishment timer to cpu1 (first
-and only cpu of the pool) and then removes cpu1, hitting the NULL
-dereference in the sched_deinit_pdata() callback.
-
-Use the cpupool back-pointer of the scheduler instead of the one of
-the scheduling resource. It is set by cpupool_create() before any
-pCPU can be assigned to the pool and stays valid for the whole
-lifetime of the scheduler, so it is still available when
-rt_deinit_pdata() runs. Other schedulers already rely on it the same
-way, e.g. credit2 in cpu_add_to_runqueue().
-
-Fixes: b6f5334aeaca ("sched: fix cpu offlining with core scheduling")
-Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
----
-
-Changes in v2:
-- Do not kill the replenishment timer when the cpupool still owns other
-pCPUs.
-- struct scheduler already back-pointer that could be used
-(see 524cc89c288b "xen: cpupool: add a back-pointer from a scheduler to its=
- pool").
-
- xen/common/sched/rt.c | 16 +++++++++++-----
- 1 file changed, 11 insertions(+), 5 deletions(-)
-
-diff --git a/xen/common/sched/rt.c b/xen/common/sched/rt.c
-index f1feb4384e..3896814dfd 100644
---- a/xen/common/sched/rt.c
-+++ b/xen/common/sched/rt.c
-@@ -764,10 +764,16 @@ rt_switch_sched(struct scheduler *new_ops, unsigned i=
-nt cpu,
-     return &prv->lock;
- }
-=20
--static void move_repl_timer(struct rt_private *prv, unsigned int old_cpu)
-+static void move_repl_timer(const struct scheduler *ops, unsigned int old_=
-cpu)
- {
--    cpumask_t *online =3D get_sched_res(old_cpu)->cpupool->res_valid;
--    unsigned int new_cpu =3D cpumask_cycle(old_cpu, online);
-+    struct rt_private *prv =3D rt_priv(ops);
-+    /*
-+     * Use the cpupool of the scheduler: the one of the scheduling resourc=
-e
-+     * is already cleared when this is called from rt_deinit_pdata().
-+     */
-+    const struct cpupool *c =3D ops->cpupool;
-+    unsigned int new_cpu =3D c ? cpumask_cycle(old_cpu, c->res_valid)
-+                             : nr_cpu_ids;
-=20
-     /*
-      * Make sure the timer run on one of the cpus that are still available
-@@ -794,7 +800,7 @@ rt_deinit_pdata(const struct scheduler *ops, void *pcpu=
-, int cpu)
-     spin_lock_irqsave(&prv->lock, flags);
-=20
-     if ( prv->repl_timer.cpu =3D=3D cpu )
--        move_repl_timer(prv, cpu);
-+        move_repl_timer(ops, cpu);
-=20
-     spin_unlock_irqrestore(&prv->lock, flags);
- }
-@@ -812,7 +818,7 @@ rt_move_timers(const struct scheduler *ops, struct sche=
-d_resource *sr)
-     if ( prv->repl_timer.status !=3D TIMER_STATUS_invalid &&
-          prv->repl_timer.status !=3D TIMER_STATUS_killed &&
-          !cpumask_test_cpu(old_cpu, sr->cpupool->res_valid) )
--        move_repl_timer(prv, old_cpu);
-+        move_repl_timer(ops, old_cpu);
-=20
-     spin_unlock_irqrestore(&prv->lock, flags);
- }
---=20
-2.43.0
-
-base-commit: dc4342ccd35a8f3fcc8832885453a08179cd0ccf
-branch: amoi_sched_7=
+--- a/xen/arch/x86/x86_emulate/x86_emulate.c
++++ b/xen/arch/x86/x86_emulate/x86_emulate.c
+@@ -7348,7 +7348,7 @@ x86_emulate(
+         if ( evex_encoded() )
+         {
+             generate_exception_if((evex.w || evex.reg != 0xf || !evex.RX ||
+-                                   (ea.type != OP_REG && (evex.z || evex.brs))),
++                                   (ea.type != OP_REG && evex.brs)),
+                                   X86_EXC_UD);
+             host_and_vcpu_must_have(avx512f);
+             avx512_vlen_check(false);
 
