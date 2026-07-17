@@ -4,39 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39D84C4451B
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Jul 2026 20:23:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1365180.1615823 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4042FC4451B
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Jul 2026 22:02:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1365226.1615831 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkp5M-0006x4-Im; Fri, 17 Jul 2026 20:23:04 +0000
+	id 1wkqcm-0003mZ-9r; Fri, 17 Jul 2026 22:01:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1365180.1615823; Fri, 17 Jul 2026 20:23:04 +0000
+Received: by outflank-mailman (output) from mailman id 1365226.1615831; Fri, 17 Jul 2026 22:01:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkp5M-0006ww-CY; Fri, 17 Jul 2026 20:23:04 +0000
-Received: by outflank-mailman (input) for mailman id 1365180;
- Fri, 17 Jul 2026 20:23:02 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wkqcm-0003mS-7C; Fri, 17 Jul 2026 22:01:40 +0000
+Received: by outflank-mailman (input) for mailman id 1365226;
+ Fri, 17 Jul 2026 22:01:39 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wkp5K-0006wq-8S
- for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 20:23:02 +0000
+ (envelope-from <andrew.cooper@citrix.com>) id 1wkqck-0003mM-Ov
+ for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 22:01:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkp5J-00AUhC-LE
- for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 22:23:01 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wkqcj-001TDg-NG
+ for xen-devel@lists.xenproject.org; Sat, 18 Jul 2026 00:01:37 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a5a8f25-bab6-0a2a0a5309dd-0a2a45039276-2
- for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 22:23:01 +0200
-Received: from [209.85.128.175] (helo=mail-yw1-f175.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a5a8f24-fae8-0a2a45030019-d15580afe0ae-3
- for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 22:23:01 +0200
-Received: by mail-yw1-f175.google.com with SMTP id
- 00721157ae682-80814edb536so51633967b3.2
- for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 13:23:01 -0700 (PDT)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6a5aa627-2eae-0a2a0a5409dd-0a2a4504979c-36
+ for <xen-devel@lists.xenproject.org>; Sat, 18 Jul 2026 00:01:37 +0200
+Received: from [40.93.195.64]
+ (helo=SN4PR2101CU001.outbound.protection.outlook.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6a5aa63f-b57f-0a2a45040019-285dc3407cc6-4
+ for <xen-devel@lists.xenproject.org>; Sat, 18 Jul 2026 00:01:37 +0200
+Received: from IA1PR03MB8288.namprd03.prod.outlook.com (2603:10b6:208:59e::6)
+ by SA3PR03MB7467.namprd03.prod.outlook.com (2603:10b6:806:3a1::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.13; Fri, 17 Jul
+ 2026 22:01:31 +0000
+Received: from IA1PR03MB8288.namprd03.prod.outlook.com
+ ([fe80::b5ee:28c6:e04b:5599]) by IA1PR03MB8288.namprd03.prod.outlook.com
+ ([fe80::b5ee:28c6:e04b:5599%3]) with mapi id 15.21.0223.011; Fri, 17 Jul 2026
+ 22:01:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,185 +55,208 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1784319780; cv=none;
-        d=google.com; s=arc-20260327;
-        b=M+bDxLB3GaTX/panvxPWSaa3wTcJt3EB76unN6H+lZF6EzAOkyIltmqQYMRzyoY/G4
-         w3WhQZ0FWtNDabuNuIZwOmmN+cZpFuQtt1Cz7byGoxX0Asc579pCgSM6Aou5Rur3g9LB
-         t1e8ZpukoTSp29dzyLdWWSnQaM0nsMrnZHmE9eLmdHaq6hLD2VJC/EcHDDGq4GK1HcI+
-         MdBbenxkQuUioE4/SC+MSZABF60Z4wce2/L1OiEUz0mxC+iAZe2DTIIMSXof9qk9Jo0x
-         N6Q+9sB4viHl7FxcvMhq8VbwcmMmNmGxFc9poPKyQ4DosLtFuJqi3AaKMang/2dThV0t
-         um6Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=+MM+mHW7dNH075ZwhWIZVYA9nHOq7CloauT16szj+6s=;
-        fh=mIDWfUsqppc0bUwSrD1+fljqRLCHlr9feJ1oOM8RcV8=;
-        b=lE1FthDwNS8RYnH48qo1+Uv/Jfuk5uT6TZfW5BlBuxZsakPZN8/DcEdBaDbA33wDFR
-         6Ss0g6Xb/I/l+a5Mj9PG3P9F98vvPkfIMRvhHQjTCCJxgw0wuIi3l3our6VYP23nqSuD
-         qu8AxlWO8k2gXNFOM2qNo4tOc91VknalKUHW7tZ1MlPxfkBPpd7uShbZxpZQ2XgOHSg8
-         1ENqgaWYnLmijmpER/LzaUpTTLzBCLMDiDZt9k2c9KfjwCxYRyzqIpoI47pgFIzxEBY5
-         BCpDVWoxMg7eot/jTeQfsN5JAU22CwGCIjzhfH/97xHXBheO5eW1si/+nGwJOSCTlXqu
-         lUsg==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784319780; x=1784924580; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=+MM+mHW7dNH075ZwhWIZVYA9nHOq7CloauT16szj+6s=;
-        b=mWli3qwsYoINZ3ZFIYE3m9RkW9of7KOrJY2JkQr9A8dy1kqcYzJ53uwBsKNSgEGy7y
-         aRJ6eJoL/P6fjGONv/Xu5bFKyz560JfBXmVPe4CNAXEEAdALxTwf2DDA4ogYz6Wt/Crj
-         K1TkltIonAe/GH/EOwFAwllfksshBx4BvLr431PFZ/Jft5iJGqtKoWFRv2Td1qkynNTr
-         EynGxbXAHntbP/a10Oyx+WGScYgumljcTa7aMNrqV3LjrQE21+/yF7aMxLwTWGBAQr0C
-         /K2GtMfl0t34x61iPxEQWndpSWGjtUWtqyQpr5lCDLtH4THXgfPrHEJfCDidxiaN2Bpu
-         WmUQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784319780; x=1784924580;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=+MM+mHW7dNH075ZwhWIZVYA9nHOq7CloauT16szj+6s=;
-        b=G9uh+DWKUIc8W64BhERq6EiIgyZ71Zc2ZpLXN8gqNLLIQtZr+T0J+XkFLNayLPEnrt
-         NgfD6V6Pbd9ii3AbhnHnhMbYNyxC1xa7LkMyg1LPgGx+wGF0M9okqHu9HDlObFWl5mpQ
-         0zSxRi5jLBrWg76v+nrDfjMhzVGG6b2BimYpQw6jiNGIczz+61c7m/ySHzpOSmirAVIu
-         OEPp1WM1d31u4y9ENqCqn8C8fh0pTjHU+peWPz6JJ1kVr5hc9Th14l4y/Jd1cECeML6S
-         q66A9u9Ew/xF9LW+MsJcE5vO86SiXwdeTyUUaRMOc7iWVtx2orlWzECXeznhs9Vj/tYS
-         MbGw==
-X-Gm-Message-State: AOJu0Yxk8wzS20utShnZpeebnMXYQWaPl+vtw4XoVlXmMr691XUUy0J0
-	asEV6XWGkz4wTIiIzFfeolusses5Ktsqp++ppKOnLVJzA/cZbzwaWqmGCuH+V5+dD1hPmysvLFk
-	tDfeewFypcc4rwDxatPNG+YBWAot2FeQ=
-X-Gm-Gg: AfdE7ck7xO+2SmoKELaA8g3zYkEAR23eE3Wu8kmtj8j/kM87Icf1znqk9eGIr+ZZ1hf
-	9tp790lVDRXjWU0JfCLngqIH+mXqsb37QNv1VE7gr8tCkuEcBXuzOOK4UkK3GeffhR+k4N4Bb1G
-	TNMwMNkV1DYbOlgHd1vQcwV3d013bmFqBccXvFiIB61MEYWp67VKEv149dqwymmV00sjxSxAjTY
-	CVtTAnli/mqplwXimR5xZ3KfC3q9QD9vEn7BqBWeHB0LregJkAoFszwD3XcVfD9iM9ffJosgFgM
-	SYL1tvTPbW9pOPNIhA==
-X-Received: by 2002:a05:690c:6c01:b0:81e:ba6b:a099 with SMTP id
- 00721157ae682-81ef262b90amr14612937b3.60.1784319779988; Fri, 17 Jul 2026
- 13:22:59 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=I4SLedBLp1H5idXtS9vEE5GJcMP0cWdIjmwzCdjvemSJLy1F3mIEw77VOR7th8ksdj8iL2W+kb87QBChfvY0QBTOD8dNRaQ6wPnww1q4ZLwwIdh9Tann1IGICCkPdNFhQckyeYoWTUza7szx0lr7yk/Xurbu/Vlsuf9MU62FBQk4pixAt99i8d3MZFxevE3r0n9yAiV/iUUxoMRrhlROOW+TKG3Ngfsfrzp1toh2T2ixgODKDMZclRi15aNv/GlyqlEnP6m5jBFe2kd+aMD4hOuRYxptZu9S3lsmWF7/OaV61iJWPBgbjombUqeYMXCIZaPa7zDP0mHgarZ9AhHi+g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=DcAGbssBhjL3QlF73376wQmBR55BgCaDBNbvcAIYbQA=;
+ b=AvD49E8h0uh/E99rhdZGGlGlxOhvVnTG0gwGTQsGWmY47dCO9+HmQE38JEpVal9uLSOLyAz/gKhd0oMHkFqL7DEVQ+oKpZTN5HcqfdkiPSp7xlherD8qz8vAlQFZJ7JrFNqWVJWYexsKXdkJOJaWQJ1MkZvOkoMmHKSU97rkbNauWsz/m5ZJHZHbde8xOiLwHez3C9knGk5pRoDsyDv0aOxn0fRJ/2A6glHxontiepx+5b0Q1y0wTNRDf6R1pfR3lcqDr1uD/3FePONqXaguiXQq4dVdNB27I1PRJxF2DbpE0duqvUtwqR6tqOJ6ViwxZdhpjsu0YheQUdMS8xRQgQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DcAGbssBhjL3QlF73376wQmBR55BgCaDBNbvcAIYbQA=;
+ b=ZDxBJgPRaxLZJn5eGwfWEylkRXdieoteChRnHB4sXErWg3ApVllABRtqjd/lmhNcZSqPYr4uB/Vy6Ov+MuXnm3DVNWW6tp+8Y36nprJh9AeFpXVvJzq59MrFxQtYoH4drP9cY+ckabbsslFDLTlDfoNIWD3zcvZs3L7ceA2u8vo=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <d8870af9-6fc1-4c5f-9858-16dad1401d2f@citrix.com>
+Date: Fri, 17 Jul 2026 23:01:27 +0100
+User-Agent: Mozilla Thunderbird
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, anthony.perard@vates.tech,
+ jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com,
+ roger.pau@citrix.com, sstabellini@kernel.org
+Subject: Re: [PATCH v7 2/7] xen/console: use memcpy() in console_init_ring()
+To: dmukhin@ford.com, xen-devel@lists.xenproject.org
+References: <20260713181619.672176-1-dmukhin@ford.com>
+ <20260713181619.672176-3-dmukhin@ford.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <20260713181619.672176-3-dmukhin@ford.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: LO4P123CA0258.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:194::11) To IA1PR03MB8288.namprd03.prod.outlook.com
+ (2603:10b6:208:59e::6)
 MIME-Version: 1.0
-References: <ajUm2SQtMD6Y-K9S@mail-itl> <alZt_boT-hJuVlD6@mail-itl>
-In-Reply-To: <alZt_boT-hJuVlD6@mail-itl>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Fri, 17 Jul 2026 21:22:47 +0100
-X-Gm-Features: AUfX_myLV60zgTm9GGSEQi9CVxhoqCTqIB63RgwvFxBuwpvHTHzPJIYTQLwAXac
-Message-ID: <CAHt6W4eBibmZ3fXd=sW4=nbuYV1QQMCQzEX=L7FaqL5aXeOvGQ@mail.gmail.com>
-Subject: Re: domU crash when resuming from suspend - Xen 4.22
-To: =?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-33051d/1784319781-766FB4E9-97D1FF36/0/0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: IA1PR03MB8288:EE_|SA3PR03MB7467:EE_
+X-MS-Office365-Filtering-Correlation-Id: f923356c-0931-4d61-9f30-08dee44ef559
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|376014|1800799024|366016|18002099003|4143699003|11063799006|56012099006|6133799003|10067099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	ccFbLD/wyY9shVMwprUZTv00jfod3VUoTKfg0aUt0yGpnOz/NG9QuuqzvoX7p8ZmbX5enOxCgA2eLCcpZ7Yh5+/Tx3MjD0CY2jwRAJXXKr3uctn1zYkZgk6+Yd5pEYGXLbkuW4vHqzUP9VGY5IAFlzk0IMb+Ub/8vLWw/TWhbTDsTJG1X/dvmoBdGjvE38zfquTDHpLeTOS7W7x1we/KY8as657XGWoKn2hzoV0AbRjzpUWUOqRS8YejeuN+KDieRx5Os3HRzE8aMzAeOfk0In/8s0Lq9d7dWEUK8mk8Ddq6FBlEOITHs0y3ARGiabP4+Zp3yM3+z9uYL9yTBVS6g8iWm0UcDffGylFGJPg2e8KZpwNdxwoAJp3fxm1HG0XnQrqXjsDNLEMhOyYSqd9mchytCPXSGQhWVnauTlacjDB3ki5OAHQhTSkAtel2jw9o5kPUgVxNhjxuSYc637UlgyLh86yJNNWY3A2koyTfVaqZa2d/+ofKHG0EPAv+p2xMAQiN9FnpzlpuOMHcdjMHC2KD/8aqYCcWTm5WUPHD3rUT+4IKP+vv/oGAN8ntnQcm6rhxXS4wifjypaKgTwdSRrbESrK3DE+bIEGqQ+iDfOZY/UcoETRWxRZd5JqrA0j0f9R/gAphVoIARK75ZGs0WcrrNCJ7VU/q8hXK2nGGUIg=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA1PR03MB8288.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(1800799024)(366016)(18002099003)(4143699003)(11063799006)(56012099006)(6133799003)(10067099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?MnJ0dGJtVTIyaFFHRTVLRXJtcWtSQ1ZJYUlad3I3aGQ1STFNSDFtcnoyTkM4?=
+ =?utf-8?B?bVNxRzFZeFlNWUFuOXlieU1UUkxGSElUSjZHSXoxL0JNVEVjV1pPM0tvY0ZQ?=
+ =?utf-8?B?YlcrZUFEYTFhUXo5NFhCVlQyRURGK2RFZVBiU1VWV050a2VKUGoxQkxDYkhS?=
+ =?utf-8?B?Zm1qOVUzNCtvSk1ZY0hQeGVDYlYyMmI5WHpaYTc3NnNTdjczaEFadlJzeWYw?=
+ =?utf-8?B?T3VFaHRSYWhEeGEwWmxxcVNMUVdyZWVhL1ZUUXB5Szc5MTkwZ1hyeGRDc2xW?=
+ =?utf-8?B?TVJQdzQ4cStsU3RXdExWL09aU3c4YytxdnBqYm1KajFLMGJpZVNGdTJSTjY0?=
+ =?utf-8?B?VDFGdDhXV1FHb0hSSzRIOE43YUw4WTF6OUtHOTYweDlnWm1xajNqYWlENXpW?=
+ =?utf-8?B?UTFrYWlSOFVFcDAvS2s4VkZFQnMrNUsxcjJUMHl3cXJkNjdYMTVwUkx4UkJ1?=
+ =?utf-8?B?MlAwYnEwZ3U1UUJsQ1htbU5jcjBOUWp1b25SeTNYbUJuNk5NQnQ0OXd0Q1hm?=
+ =?utf-8?B?L28zb1hEWDk3S29ZYU9KZ0REbWlEcWlkMktGcVZmcUxXOEZsNGFqNEJHSWtx?=
+ =?utf-8?B?S21GOXNtYUY3ZVZUa1pVbUxBQ0w3am1TNWdYUmZIbjMvWjhFNDUwazhPUm13?=
+ =?utf-8?B?UWgzMHdxNUlXelovK0JYaGs0YTJZTFViNUtjTFVjUk91YXJIeHZTY2E1ckxI?=
+ =?utf-8?B?LzgvOGgwSFM1dzc5NDlnNUxXd0R4ODlydnJxb0ExTlBjYjN6Q0JFMUEvdmx0?=
+ =?utf-8?B?ZGNSYUZWQmVmb3M4S013NjN5RG84MkZCazN1REwvVGNXNzhIWXVJdXJTQWlQ?=
+ =?utf-8?B?NlhyaW84U3QwZ1VSeFdzN3NZZ21Kbyt5SEZNMkd4RHVCajBGeEVkS0l3Y2VD?=
+ =?utf-8?B?QXZEUGlnL0xDUXI2Ym1mbFJtL2d1WDVHcGwrM3RObXcweHRHbU1SS25mSUdu?=
+ =?utf-8?B?enhBb3ZtWU9QbWFiY0FPTFB5VHdySTg2ZXlyNTBPZ1gwLzA3WmRkdEg0QmRr?=
+ =?utf-8?B?S3QvSDhEK0t5NnRDZ0JNaXR3UithdW8xcVhDUjA3V0JXcUVJWDBYaHQ4cFZB?=
+ =?utf-8?B?VXVYYlpGSXJSQzBNRE1INEl1dUxXOEVtSTRaZDQwOGlxZEM3MGJZdmFkaDMw?=
+ =?utf-8?B?QWpkajFmU3dDdHcyQkR1c1J2cTJHdTg5d3F2RzNGT05BaXd3RjloWGpCa0tp?=
+ =?utf-8?B?Y09ic1NLUEdLRHdsMGRWeXZxVm9MajFNNWxoaWRkMVVZc3JISjZuRVdEMGNq?=
+ =?utf-8?B?bEQ3Zk94R09qQXJ1L0gyY1JkcDFraUc0TVQ4bU1BSU5hc1hlWk1Wc01pR1p1?=
+ =?utf-8?B?YUJDaDc3NElaQnpxWE9EZHBrTkxabENhNU9qbWdZMGZJUnllRldDZDVVQlRo?=
+ =?utf-8?B?Q2tMM1VMdUZCYlNHQkMxNVNGc09WTlZMcm5nd3IvUU93YmxlK0UyNVdSdUYx?=
+ =?utf-8?B?dDhUb0o1bFJ4cnNOd2N5VUFGTXpHZUlmUm00ZUtZZVpaQWZUVjkyR3JvZWk1?=
+ =?utf-8?B?UXBnVk10ZEFuSTcrZ0RvcUo4b2N1R1ozZ1Q5VG9FbFpPRlpkWVRGZjRVaCtY?=
+ =?utf-8?B?ajF6V0krMnJkNEhOQXI3VFBsRHkrU2FUWHFiWmRDdFl1NkZoa2NwVDBtaVB6?=
+ =?utf-8?B?dWc4dnZNcWprRkNyS21aM1RBc1Q3MVVDeEZmT0dTM2c3WmRZNzJVSXlXY3Iw?=
+ =?utf-8?B?VVBQbno4Tno5emd2MndQTHZWWlZkZXl6ZEhPSEw1WjcxblpGaTZVblRJMldZ?=
+ =?utf-8?B?ZWoxNExEVGEyRUN0RDlEY1NXQkJoamJkSUZKSFFzaWtmYkZEYzNZc2VsZEY3?=
+ =?utf-8?B?VEgvSXkxME8vOGU0NGdRamJRVWo5RjI2N1A4R1FmVDRTeW9PZFlMbzQ2Q3Fm?=
+ =?utf-8?B?UUg2NmJOYUVpTXVJdE54eC9TRGQxckFKWmV4N2hCWFV1V0hlMGtieHQzeWdD?=
+ =?utf-8?B?ak8xN0NRaHlpN21ZbDVJbTlGQWtuN3pFUE5nK3ZFNEliQzBkanJOalB4NGx4?=
+ =?utf-8?B?Z2ZzUzlITXF2VmgySGxvT1lqQnRSTndSQy94ZnRBZUlHOWZsODJxVWt2Y3c2?=
+ =?utf-8?B?OCt5N1NJQlhXNGJRdEN1KzhrdDdleFNHYmkxNzNJME93d0JnMTU5bGJsSG56?=
+ =?utf-8?B?RkZPNmR2R0RqYmlERE9BdVJxUFAvcUlpS3pmNFl2YlRPTEZEL1NnZnBBSjZK?=
+ =?utf-8?B?eGROMkQ3N24zaFBtY3JJdk9KV1FLcG9wQU80L0VrZ21yL0VBcGlZV0xKU2F1?=
+ =?utf-8?B?cTBvZmhOdXpLSU9WQVdXNWIyWmdTZ3dLMXFEdG1WK3UrRnl5MUNsc3lOYUsy?=
+ =?utf-8?B?WDRXeDhaZGF6NGZGVjhHYThpbWZPdUdYWnVJRkkvNDViZkZWcHhDQT09?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f923356c-0931-4d61-9f30-08dee44ef559
+X-MS-Exchange-CrossTenant-AuthSource: IA1PR03MB8288.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2026 22:01:30.9462
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 87Ep6TBt2PhheSvUlkSdcYr7B9Gbg0+cYEZLWy/Ax9p4+z159AKjw4RfgW0EzUlsUU/CbaXxMarRMk8qwOOs1BQ6h2WdcoyaY5pnJgv75vQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR03MB7467
+X-purgate-ID: tlsNG-ebf023/1784325697-C06DAB50-571C2F35/0/0
 X-purgate-type: clean
-X-purgate-size: 5124
+X-purgate-size: 2111
 
-On Tue, 14 Jul 2026 at 18:12, Marek Marczykowski-G=C3=B3recki
-<marmarek@invisiblethingslab.com> wrote:
+On 13/07/2026 7:16 pm, dmukhin@ford.com wrote:
+> From: Denis Mukhin <dmukhin@ford.com> 
 >
-> On Fri, Jun 19, 2026 at 01:24:09PM +0200, Marek Marczykowski-G=C3=B3recki=
- wrote:
-> > Hi,
-> >
-> > I'm continuing testing 4.22 and found this:
-> >
-> > When a domU is suspended (even without host suspend) it crashes on
-> > resume with:
-> >
-> >     [   24.374629] BUG: kernel NULL pointer dereference, address: 00000=
-00000000020
-> >     [   24.374647] #PF: supervisor read access in kernel mode
-> >     [   24.374657] #PF: error_code(0x0000) - not-present page
-> >     [   24.374668] PGD 0 P4D 0
-> >     [   24.374675] Oops: Oops: 0000 [#1] SMP NOPTI
-> >     [   24.374685] CPU: 0 UID: 0 PID: 19 Comm: migration/0 Not tainted =
-6.18.31-1.qubes.13.fc41.x86_64 #1 PREEMPT(full)
-> >     [   24.374705] Stopper: multi_cpu_stop+0x0/0x140 <- __stop_cpus.con=
-stprop.0+0x6f/0xb0
-> >     [   24.374723] RIP: 0010:multi_cpu_stop+0x63/0x140
-> >     [   24.374734] Code: 49 0f a3 1c 24 41 0f 92 c6 c7 44 24 04 00 00 0=
-0 00 31 ed 49 8d 5f 24 eb 2d 41 83 fd 02 74 6e 41 83 fd 03 74 49 f0 ff 0b 7=
-5 13 <41> 8b 47 20 41 8b 77 10 83 c0 01 41 89 77 24 41 89 47 20 41 83 fd
-> >     [   24.374764] RSP: 0018:ffffc900000abe30 EFLAGS: 00010046
-> >     [   24.374775] RAX: 0000000000000000 RBX: ffffc90000a13de4 RCX: 000=
-0000000000404
-> >     [   24.374790] RDX: 0000000000000040 RSI: ffffffffffffffff RDI: 000=
-0000000770ef0
-> >     [   24.374801] RBP: 0000000000000002 R08: ffffc900000abc80 R09: fff=
-fc900000abc8c
-> >     [   24.374813] R10: 0000000000000000 R11: ffff88801e81cdc0 R12: fff=
-fffff81835ac0
-> >     [   24.374825] R13: 0000000000000000 R14: 0000000000000000 R15: 000=
-0000000000000
-> >     [   24.374837] FS:  0000000000000000(0000) GS:ffff88809b369000(0000=
-) knlGS:0000000000000000
-> >     [   24.374850] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> >     [   24.374860] CR2: 0000000000000020 CR3: 000000000d6a2002 CR4: 000=
-0000000770ef0
-> >     [   24.374873] PKRU: 00000000
-> >     [   24.374877] Call Trace:
-> >     [   24.374884]  <TASK>
-> >     [   24.374891]  ? __pfx_multi_cpu_stop+0x10/0x10
-> >     [   24.374900]  cpu_stopper_thread+0xa3/0x170
-> >     [   24.374908]  ? __pfx_smpboot_thread_fn+0x10/0x10
-> >     [   24.374917]  smpboot_thread_fn+0xf3/0x220
-> >     [   24.374925]  kthread+0xfc/0x240
-> >     [   24.374933]  ? __pfx_kthread+0x10/0x10
-> >     [   24.374940]  ? __pfx_kthread+0x10/0x10
-> >     [   24.374949]  ret_from_fork+0x158/0x170
-> >     [   24.374957]  ? __pfx_kthread+0x10/0x10
-> >     [   24.374965]  ret_from_fork_asm+0x1a/0x30
-> >     [   24.374973]  </TASK>
-> >     [   24.374978] Modules linked in: snd_seq_dummy snd_hrtimer snd_seq=
- snd_seq_device snd_timer snd soundcore cfg80211 rfkill vfat fat xenfs binf=
-mt_misc nft_reject_inet nf_reject_ipv4 nf_reject_ipv6 nft_reject nft_ct nf_=
-conntrack nf_defrag_ipv6 nf_defrag_ipv4 nf_tables intel_rapl_msr intel_rapl=
-_common intel_uncore_frequency_common intel_pmc_ssram_telemetry intel_vsec =
-polyval_clmulni ghash_clmulni_intel xen_netfront xen_privcmd xen_gntdev xen=
-_gntalloc xen_blkback xen_evtchn fuse loop nfnetlink ip_tables overlay xen_=
-blkfront
-> >     [   24.375064] CR2: 0000000000000020
-> >     [   24.375071] ---[ end trace 0000000000000000 ]---
-> >     [   24.375080] RIP: 0010:multi_cpu_stop+0x63/0x140
-> >     [   24.375089] Code: 49 0f a3 1c 24 41 0f 92 c6 c7 44 24 04 00 00 0=
-0 00 31 ed 49 8d 5f 24 eb 2d 41 83 fd 02 74 6e 41 83 fd 03 74 49 f0 ff 0b 7=
-5 13 <41> 8b 47 20 41 8b 77 10 83 c0 01 41 89 77 24 41 89 47 20 41 83 fd
-> >     [   24.375115] RSP: 0018:ffffc900000abe30 EFLAGS: 00010046
-> >     [   24.375124] RAX: 0000000000000000 RBX: ffffc90000a13de4 RCX: 000=
-0000000000404
-> >     [   24.375142] RDX: 0000000000000040 RSI: ffffffffffffffff RDI: 000=
-0000000770ef0
-> >     [   24.375155] RBP: 0000000000000002 R08: ffffc900000abc80 R09: fff=
-fc900000abc8c
-> >     [   24.375170] R10: 0000000000000000 R11: ffff88801e81cdc0 R12: fff=
-fffff81835ac0
-> >     [   24.375184] R13: 0000000000000000 R14: 0000000000000000 R15: 000=
-0000000000000
-> >     [   24.375200] FS:  0000000000000000(0000) GS:ffff88809b369000(0000=
-) knlGS:0000000000000000
-> >     [   24.375214] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> >     [   24.375226] CR2: 0000000000000020 CR3: 000000000d6a2002 CR4: 000=
-0000000770ef0
-> >     [   24.375241] PKRU: 00000000
-> >     [   24.375247] Kernel panic - not syncing: Fatal exception
-> >     [   25.417403] Shutting down cpus with NMI
-> >     [   25.417447] Kernel Offset: disabled
-> >
-> > There is no change on the Linux kernel side (neither dom0 nor domU), th=
-e
-> > only change is updating Xen 4.19.4 -> 4.22-rc2 (seems to be already
-> > broken on -rc1 too). This happens for both HVM and PVH domains. Haven't
-> > tried PV domU (but dom0 survives host suspend).
+> Make console_init_ring() more efficient by using memcpy()'s, rather than
+> copying the ring a byte at a time.
 >
-> Any ideas?
+> No functional change intended.
 >
+> Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+> Acked-by: Roger Pau Monne <roger.pau@citrix.com>
+> ---
+> Changes since v6:
+> - addressed Roger's feedback
+> - added Roger's A-b
+> ---
+>  xen/drivers/char/console.c | 18 +++++++++++++++---
+>  1 file changed, 15 insertions(+), 3 deletions(-)
+>
+> diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+> index 5ebbbf63c092..37ea84403180 100644
+> --- a/xen/drivers/char/console.c
+> +++ b/xen/drivers/char/console.c
+> @@ -463,7 +463,8 @@ static void cf_check conring_dump_keyhandler(unsigned char key)
+>  void __init console_init_ring(void)
+>  {
+>      char *ring;
+> -    unsigned int i, order, memflags;
+> +    XENCONS_RING_IDX done, size, n;
+> +    unsigned int order, memflags;
+>      unsigned long flags;
+>  
+>      if ( !opt_conring_size )
+> @@ -479,8 +480,19 @@ void __init console_init_ring(void)
+>      opt_conring_size = PAGE_SIZE << order;
+>  
+>      nrspin_lock_irqsave(&console_lock, flags);
+> -    for ( i = conringc ; i != conringp; i++ )
+> -        ring[i & (opt_conring_size - 1)] = conring[i & (conring_size - 1)];
+> +
+> +    size = conringp - conringc;
+> +    for ( done = 0; done < size; done += n )
+> +    {
+> +        XENCONS_RING_IDX src = (conringc + done) & (conring_size - 1);
+> +        XENCONS_RING_IDX dst = (conringc + done) & (opt_conring_size - 1);
 
-Hi,
-   not many ideas but while testing my libxenguest changes I found
-similar failures using xl create/save/restore. But I was testing more
-PV guests.
-Does 4.21 work ?
+I see this has been committed, but the use of XENCONS_RING_* is wrong
+here.  This ring is not a XENCONS ring, and that header is almost
+straight obfuscation.
 
-Frediano
+The types obscure what's going on, including the fact that this logic is
+unsafe with a 4G ring.  And while that might be a legitimate
+implementation restriction, it needs to be obvious in the code.
+
+These want to move back to being unsigned int.
+
+~Andrew
 
