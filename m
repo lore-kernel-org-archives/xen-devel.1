@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25FDBC4450F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35971C44517
 	for <xen-devel@archiver.kernel.org>; Fri, 17 Jul 2026 07:12:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1364689.1615716 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1364686.1615693 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkcju-0005rG-Es; Fri, 17 Jul 2026 07:12:06 +0000
+	id 1wkcji-0005L1-Ht; Fri, 17 Jul 2026 07:11:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1364689.1615716; Fri, 17 Jul 2026 07:12:06 +0000
+Received: by outflank-mailman (output) from mailman id 1364686.1615693; Fri, 17 Jul 2026 07:11:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkcju-0005qH-8X; Fri, 17 Jul 2026 07:12:06 +0000
-Received: by outflank-mailman (input) for mailman id 1364689;
- Fri, 17 Jul 2026 07:12:05 +0000
+	id 1wkcji-0005Ku-EB; Fri, 17 Jul 2026 07:11:54 +0000
+Received: by outflank-mailman (input) for mailman id 1364686;
+ Fri, 17 Jul 2026 07:11:52 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Mykola_Kvach@epam.com>) id 1wkcjt-0005n8-8m
- for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 07:12:05 +0000
+ (envelope-from <Mykola_Kvach@epam.com>) id 1wkcjg-0005Ko-GY
+ for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 07:11:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkcjs-0083h9-LZ
- for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 09:12:04 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wkcjf-0083ci-MI
+ for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 09:11:51 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Mykola_Kvach@epam.com>)
- id 6a59d5b9-2eae-0a2a0a5409dd-0a2a450ccd0e-42
- for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 09:12:04 +0200
-Received: from [52.101.70.123]
+ id 6a59d5b2-2eae-0a2a0a5409dd-0a2a450ab5f8-18
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 09:11:51 +0200
+Received: from [52.101.70.136]
  (helo=AS8PR04CU009.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Mykola_Kvach@epam.com>)
- id 6a59d5c4-f479-0a2a450c0019-3465467ba3d5-3
- for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 09:12:04 +0200
+ id 6a59d5b7-f2d2-0a2a450a0019-346546882cc0-3
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 09:11:51 +0200
 Received: from AS8PR03MB9746.eurprd03.prod.outlook.com (2603:10a6:20b:61d::18)
  by AS8PR03MB7985.eurprd03.prod.outlook.com (2603:10a6:20b:428::6)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.13; Fri, 17 Jul
- 2026 07:12:03 +0000
+ 2026 07:11:50 +0000
 Received: from AS8PR03MB9746.eurprd03.prod.outlook.com
  ([fe80::cf11:309:1384:58f7]) by AS8PR03MB9746.eurprd03.prod.outlook.com
  ([fe80::cf11:309:1384:58f7%6]) with mapi id 15.21.0223.011; Fri, 17 Jul 2026
- 07:12:03 +0000
+ 07:11:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,29 +57,27 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GeX8eAquuO6af4SypcfKt5melDVadpaEcg2+6aEx0r0JMUfAtGiJn1NBGbzV3wMvCF6y2K9F0zbHRdUqAtq6IclPEaNtfmyy0p4DddgU5hSdXDQ/kjdETuL6WvP/MoGvFr9rtbOwSYmLFcOx29EzutZrn4RVr1cFNc0t6PCwws015BGjRajm9EcDn0YfkhY9uwsCmbDTxyzJAVYSxY2fHzuW8LjB8ZkhL4DQER8T2AZ4Hy47xnzVYwX8lHthrNT25PXOcquo0MS0bzI2ZwG788PPxnlwH8MtjAW9VcoxCEXtudyWcSu6R9BwnQ/FXP8f3teLhoaK3uraB9I+5divng==
+ b=LPkGhq7ccghLZUB68pVz67BS0Ml7LT5DzDFw9njTGqq/mH7e4s8k0rzCG9u/sGGvhAeq2ndz9V9f4sgzJXoMi2zKVBbJiB+MZZwFAejOoF8ZUDPgbDl84UJUYDyUAwE1MHNluB8KK+F/DJ0vFuHGeYyUmVeeI++fN/ASslrq16RNwNhxrP8pjprSmrXIWvehGU2uUpHXmyYZhxhaAO8ljXtu4NcxK4a7jRbNBuFZZRBCWqvgdRcyP/qhLYorR61sbtkoHxWmEdclv6FIJzlOlnehwVIz3vTPUM2KWI3kifLciPj0Ewk47Y5DimSJQ9jdEi2EQkBAREBiDAz6tOEU1g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kIVFKNcVZQjluf7v8uIph/veqYCABO1SJTrjKkjRvQI=;
- b=BB7M9daJwYG0iuordhKGQch1PG37Ol3UOTVCnQlfLCZXMfWysO5IqATsAS9ly4Up8GpVUfz9R4vvpgI+5kDPv5Kb4qreV9/2tzv40NukR+6NTUStpqwkr+lYc5WBsN9VOWXG6qdPvFjaxxaTrhq9ZbdqmnQRYdKPy5x/gSupuVt9acizG3GJ8ZvZg1dBWA4HEWLvJvfc+IoA/PJape+ln2KNAjWiuu91fxpUZ+hGA6ScPYIKOvYX1dEnTDNhVegGJemknUyDB6k+CMr/bpodGHmnbYWf5dM+Arz+KYFXLXvNUQT5/ZkHpPquzmAyglI4YVhBCYOOcDFcHE46u6TbSA==
+ bh=HLbehy9U2/IQ+lIXOREgc8JLuPhOZg9FYNjAJwc9rGU=;
+ b=DtYX0FddwHN5uR/1OlnxQe6BM/2yeqI1fGEE7ZuYbdrUrSk+CDveF3GqbM37urq6iboxviVlTNUZErXnHYsKhnCApqtmTQXFzqWufM/jZzRkQ+LZznZxchQxDXCM3TjCsoZFOMoS8qzTIJ9dI00pOhYC4J0hvQ6UePnASow9Xgnr73r+fBABFbvfBdlYNxbqfwgVZt0KCjwjSQYAYtuIUm7IOiNnavXeVD2xGkdeNYVoxjBFrvO4WpC4xhkTuSOmFKttNEEfHCjB9s5L/GEjydp4LVPtX8nE5+gfGWXvWZ1ZKidpELRfSzT4cTvK443U3sjOsDFQ9HV8QTEbbGATsQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kIVFKNcVZQjluf7v8uIph/veqYCABO1SJTrjKkjRvQI=;
- b=eDbsxh5jWuORdSpdTY9rR8bGkcbsJYR9wSzzMMlNUNfO/xiMDVxUAQgIkUceUAktrvbsDx408pWb2nWnhzm5xb8rd1YNKPe3FF463848MoUzJVlL8+jJwYR5mG4d5JU1wkKmph8nwv8K+yO9wEEItppQvSfxAmrI6NpM2vN6wPBVEtMMQeUD8RPc7zp+36EAHJJ5hSHThxJZh+t+jJDAhuniRJH+dSask1BbQrdE1l/xj6s5MZEkP62I4SVB+Ycw7G/02dZdUCbw+7VTTXJjGVOK2/3Mb7WXtWbE4YnCa54QFy7H+K0P+/5xqLkA8epXqqw+mWumuEnrI+n97xxkKg==
+ bh=HLbehy9U2/IQ+lIXOREgc8JLuPhOZg9FYNjAJwc9rGU=;
+ b=LpGOPi7lAFygfUqeJ2xaq7277eDugquEw9sleeaQBvl7BJmYRibNmKBVHpIwvHVXmdU1frymk6pn9Kmc6CtJe2IA1TVIxyvcN5y0hM+qTrKEM3PiwbGT85sD5UMEQrfqzuO70dT8iCUoFqbLzGRYOdj3INA73KNq/PyalvnDA1PyJZstC2sRbAlGHyKE9Dmhi9yeUBSSUhCzi68/pI0RNAdX/zpfnjat1iquGC24bxhPALPPc5fDH5bD5h+ezRUfpRcfXcxvqiWbWlZP+UNjeGhTXOr67qGCH1TaFQ41XAPEqr0kK9WG0qSiGBg3Q6ekTRZcy5HNxwNWc/cTd04YGw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 From: Mykola Kvach <mykola_kvach@epam.com>
 To: xen-devel@lists.xenproject.org
-Subject: [REQUIREMENTS][PATCH v2 3/6] reqs: drop duplicate GIC version AoU
-Date: Fri, 17 Jul 2026 10:11:24 +0300
-Message-ID: <338323dfeeba74f130f1c5ee336327ff07dd5cba.1784272211.git.mykola_kvach@epam.com>
+Subject: [REQUIREMENTS][PATCH v2 0/6] reqs: add Arm GIC requirements
+Date: Fri, 17 Jul 2026 10:11:21 +0300
+Message-ID: <cover.1784272211.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1784272211.git.mykola_kvach@epam.com>
-References: <cover.1784272211.git.mykola_kvach@epam.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: WA0P291CA0022.POLP291.PROD.OUTLOOK.COM
@@ -88,101 +86,108 @@ X-ClientProxiedBy: WA0P291CA0022.POLP291.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS8PR03MB9746:EE_|AS8PR03MB7985:EE_
-X-MS-Office365-Filtering-Correlation-Id: cead1757-b6e5-4a05-dbfe-08dee3d2b39b
+X-MS-Office365-Filtering-Correlation-Id: ca1fa0b0-d82f-4216-9b65-08dee3d2aacc
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|366016|23010399003|376014|18002099003|22082099003|10067099003|56012099006|11063799006|6133799003;
+	BCL:0;ARA:13230040|1800799024|366016|23010399003|376014|18002099003|10067099003|56012099006|11063799006|6133799003;
 X-Microsoft-Antispam-Message-Info:
-	ljLrVl+Y3cZISnv8vlKu0sNjht/CRA9vMJDDTfS9B+crYpCtbT2WHmsztUD7H/vplt7WcDFuDC6a6hub2+uNuE0KPQ7BsIUXDe2V73qyvD0DVXJrzvBBpTW944mruexFI2OZap6QOP4jWcqWr/5QB7AyvKebnzIZ+hnn9Fr4Cxpn1e566TThjL0AI5zkCpH14ps7d0ojQ7N76ygoLtR/uIdXsfBHubpbP0sra6WnVpe67LR8Fu1fjF/eOACNt8EZXek8sQNSy/gMcdZ2jzgbFfq9k6pdKcuowrSMXv51G6KJr9ZKmoee9fw+SmcwhlD72DS3kbVkGnkugXvjgaDGX+0SrE54qWf/bHnMZKF7qAL/yL4Fved8k0jgr9+aGUiTjWn73GsM55Vrw+iY+tLXePvZRAnZ6Bx/tE+++5jC0CYZo5VR5E+kJcAUJ+fqKskzsWwz7QuXLrrVfjpXY8N+WWeACLICYXmcxUjsTiSoTIOWDrvYk5n6zUiTJ+jJUdwDaVPzDqTAJVTa9zknBI4vRL4jWI0wTudm3CshO/8ecLd9ghYo2MRG6sc24tXsq9JoU5rJ7BpiWOkHuCOFS4Crruy73DuIKAHhJTVKqXPet3GzZM9NqlExMjhE2PxD7fFz+JVzDc2T/aGNZ7itCPpd1fnLdWClxEpEVZvTlHL8S4w=
+	NGmPmKOxfPdJvg9N8h+7KPQiO6jJ1FPSj4+IxNSCo9FCv9XyGvXG7ndFsJMAanYM+uWXwH/ttxXKsV0zsG/shnnkcnT01nuJ2Ds+ymA/Vtww0emizD9H4PfHT+kItsCRXO0BI/Q5UK4D3MxR26La5fW89u2nUklzvlDQ6gjUL0bHR5FrUDLs6v6tCoiEWBsdDhlzrYCWYmAz2l/yebfiYPW9rMwMjWnZ3BV1kUUT5NnI8f7aZwF/IsPF4DYLALmZo9P9Xeh+xI5GkwJFkC60HACty++QcdnJ/mNsa38QFPigxEEAZbLPgfOxmYsORdPoHOaManoo4xGhLriAA3zWo1w3NaYr++JLqN6cOZV45vkA7N3kb12PJ3uY2Q+0qD9rO1X2ns7jfGFPfNq8wx1hpDq1cLZcJJsPFDxOEeEtByXPLVSltUfLdLfQuR+usrbtWlWOIGX4SdY3UbzcqqsYBQ9idgmzB39yAB6VMtrRh9CDRrlyau6JNhzBwazqCkf7UmJtTJ/iJSVr7EHLwcvPMmg+dqu0x/nLDUB6IqdEntsfumpeY0DgDVtZXosTbz1KcREUAp0MRhw4dS+nyzs/jy296jauQgTD5KN8nFPJhxyTc6Kr13jtK3ua/o1NKf7e4oJ99U6eWr2lJME21XDe5rDAaT/jsD9RUKn/T8yVnhw=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9746.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(18002099003)(22082099003)(10067099003)(56012099006)(11063799006)(6133799003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9746.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(18002099003)(10067099003)(56012099006)(11063799006)(6133799003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?oKFXBw4RvmL93JhhVbpaK7TWotOBb6FeAtGWKah8xbyYItFTGBx3/mM6BurO?=
- =?us-ascii?Q?m5EpOVuF1IhaEA+7Nlp+52C9p1CQsPsd3jZaExLgDlGb1cRHw3qlMjKW2tL6?=
- =?us-ascii?Q?Ht1C3YVUlzfh5KsPA99vQ3Q0DfytGwObdqiACOBtOE7qYHNp/h0ll8RGDNc4?=
- =?us-ascii?Q?MlRZsFl2eUh/HY/YA0Bf0Dg/WBhuFtjfuIg3O8q8fCNTwW9bJDx9wE5sRv0j?=
- =?us-ascii?Q?jT4sH4b2DQEoJGdqaynCwYNKH+SLX8n1aKBaGdaP4r5zI5tUU6D4GbFWDW/n?=
- =?us-ascii?Q?HOB1U+wfLs0d+vapzPs/YXG28aX24cU5WFi5/2MuWZ+oEMhKrEnXs3FYtZHf?=
- =?us-ascii?Q?NjvOKZO1EO+6iwXxgvrSvTM1g2/IHDy1iAlpjZzUUYQ6XI9SMJdSqab5wbb5?=
- =?us-ascii?Q?JJFalxse39OAuqyOLLU6Tb7yrl8g/AfjK25BgdUtRMXFkH4YVJL7xuEhm6GD?=
- =?us-ascii?Q?QCIZ7AOKzVf+KNDiu3Nlx6p7k+pR+vxkDwwfgMZKEaxVe5Wp2lzj5+6hiefD?=
- =?us-ascii?Q?c2563JF9O/bXETJfcGX6sRMjvIXN/t/XWKvZWRtx9bmHIrNlw0tMIcRoDG3O?=
- =?us-ascii?Q?uZMAPqtQ42SM0QDf4jpl434RTs4I8tuvpoEER0m+5Vm3PuXDr4u2X5eJG65J?=
- =?us-ascii?Q?y89HmoaRhZroTMUVtXpQfIJM2gbJ3R/4Od0NLT5aKAJPGhWrPhR4nI0Om81u?=
- =?us-ascii?Q?6/cehhAKD5zjPkIetwLqzpeX6yNmHQ9NjgK8Anta24Nn+v6gF5Z4QlsVwbyX?=
- =?us-ascii?Q?n0N92FqLWaZIK5x+fOsJYGadHql67RQltLXYJ24t/yfOVoWNbdoxcp2F0EI5?=
- =?us-ascii?Q?Vv/zWMjEqaXCikrKgZZBLcMpuQJGXnvIALXDtK25EQK/ze4nBSwsuBSF855b?=
- =?us-ascii?Q?n6WQ3QII6b8c9w68RM68FqXEoAXeKbp4pPaQ21WSyMT1Q88NmXOoN+f8PkFD?=
- =?us-ascii?Q?e+qb0YPH0NSCBPOX1LfgYBg766OLJUM2TJe1A8ebzQ/3ukDKQ6M9qZA+mO98?=
- =?us-ascii?Q?bW+NC6+0AU8bi7NsgU+Hl3/w44yi4v/hQWN6zzKsEDqDsiI9Y5beNOMdGJLg?=
- =?us-ascii?Q?dY7/Ml5AE3E373KtxZf4ploS16iTKZ4+C2tf7MNy7S8JmpJ50HBWZulSZimk?=
- =?us-ascii?Q?7Kexm1BPj0gKFN7AwyD+hYDk40dPLEIY9B4nAeFF9S3ZmmmMrhx1o7hIAbfE?=
- =?us-ascii?Q?Tahwr/2k2JZ7Eiq49dU1668r1iKzQIr5TFCAWmnv4dahUOnk7Ik34nL/xfZW?=
- =?us-ascii?Q?xUIkxY+JpUG6a/Xn1hpYruCApaDE08o3rDdXQgcuGKbVSalS4glCOFTuz5Mf?=
- =?us-ascii?Q?OyESM0fnU8Y8WMXxGuJLNZBHmvBllxxrnTTGMaDTgOz29NpLMFbiNpqKlcGf?=
- =?us-ascii?Q?RaHiR9Cn8c+e62emiGm2w7k+gsGwbhBQZYFGtt83017zbnAiiTFgA4HjoFTm?=
- =?us-ascii?Q?qAiTir4MRXS+gGewvi3cTIVV4XGdh9CxYJIN08qIyrDDPZoh0pjkfNPQel62?=
- =?us-ascii?Q?+8fISf2hJJ1f3je6GtYpaTHqUMioaK3t1pCcup8xJzQbCt795RMIdfHjKJTk?=
- =?us-ascii?Q?5ckO0GUG2hzx/++7pXfQltiglRoUwF0bOHpT74gE69Pu4vnz5dsdv1s8bHGn?=
- =?us-ascii?Q?c2/GVWVF9GulyLSSrBptwDJbXhh2xgQVTaY0wgSHnR13koIHB3WkVULcygPR?=
- =?us-ascii?Q?1Lb9j/veLq7WAj4g5M+ATjivvGy7/iWlnLpNclSCV7MicvxwQAZ7PF/bG/Ap?=
- =?us-ascii?Q?eDLtZfRdAQ=3D=3D?=
+	=?us-ascii?Q?axglwFHCQ3B3UYYEc1FXJgjoY/3VG8NI5N+7G2TrU4tGVJsgoF6pxOSJ1KDl?=
+ =?us-ascii?Q?0P7HHHpJHvyC8w027J4Jah7rm15SGym/3h+5MFIX7FFcS1jrpE3uRvjC6PfJ?=
+ =?us-ascii?Q?ejF2fKlcFznPXS875E3dCyASLPQtuw5k4IY43MJ786R8hnamKiYAFt63o0Bx?=
+ =?us-ascii?Q?PoTAZj735eR6ehP8WwybTsEc+D5Vk8KJypcA4f8dhFeO9LLw95y25iIBsAZD?=
+ =?us-ascii?Q?1ZLmmPMuK6TyGvhybgbbeK4qsXZsOXgOkSABfg3BtUHF2KfeBxaq4ze0J7F1?=
+ =?us-ascii?Q?C0COxjn1PQjzLcNjcpvCQZJfTf76r5W0PTw5XdNLRDTz9f54bhvzydp/j5Pf?=
+ =?us-ascii?Q?rZvbQUteT4KSz0lBFzSwklVN/aBSRM31WS7hhTy7TCeSqHzxlULHl7ywdG3v?=
+ =?us-ascii?Q?8OxV7CFc8pHXzEcQR1XbImwZNiSVJJ1nmdWdhPnkgoxWJ+HrWe//SVshaxw0?=
+ =?us-ascii?Q?xRH+LEgJXGAly3aT87EppaE89EylQXDHmAEXEhTWhnqkWnxO5XdN2uuS9uBV?=
+ =?us-ascii?Q?pN2rWgxsh7PYx6HqZzqsdIYke+v8pCk7G9N4MiWUxW6ofka19+abpl8RTWGy?=
+ =?us-ascii?Q?KOK3eWFqpLEC1q4NHvOWBDXu7G36YsyiCMvERNrowBwVc4bWvKb3T77P5hgt?=
+ =?us-ascii?Q?GIQOf9fX+oS0Eyirn4rZQrOrO82ch6Hi7gPaMtvE5d/WUXdeGEcDvwXgcpMM?=
+ =?us-ascii?Q?3PrIVD0nBPMIbJ2h7w97BCh+AIHOhGNMkceBRuBEa+I9BgtCKsS0qdoSDF3K?=
+ =?us-ascii?Q?Zsqa3C5g6G2gbH3cINqraP43ousiXr1IROXQq7eFJljP0JhxITQUqbZTfEHh?=
+ =?us-ascii?Q?m2tFiSewhqcYNPY1wsISPLZ9KBB1P2IeEHGi3mMUDqJHtDrd/ihlc/5JdtGI?=
+ =?us-ascii?Q?W3SVzS8WxB24UzvOhuD0Ae5EVKIdnzOsCh6yaX+c2Jibcm8KmFXD1kzedila?=
+ =?us-ascii?Q?bNS5xOLC02OpzmqSnoOq1GKvaBgzIBgNAaP2U3FEuH+X47nkPV34N9ScnhNR?=
+ =?us-ascii?Q?wbQOvzd6gt+mS634p6XsdBcEHq6zt9kb7Qw1HLPlHUvqqHAgN1Orj8lIldoc?=
+ =?us-ascii?Q?7kYZBPLrDjzb8mqi+L25+ZSGako6WTtWY4Yn10nhkj4crrPthZTl2Rfl7F6i?=
+ =?us-ascii?Q?HhnvxJ+e11CNs6zfymILr4PyzAuyP0igTdQKBj8OZPeeBJqfKDn76Ym+R1UX?=
+ =?us-ascii?Q?eoNPd1bQHMevWJH37FSvO33UFcER0Bzl8FCxLKz0lOANqvWotVn+XHdU+DY8?=
+ =?us-ascii?Q?wvEaELHrcfUe2BBnCP4iQw9uOqkIVWsPEDmR6/9Z+NogyYiUKqAQ24haPjTs?=
+ =?us-ascii?Q?hqY9FC4m+FhusVakc7Wbda3XO8uEin0NVmele2Aa+dseBe+iIQQXgRHgWr6j?=
+ =?us-ascii?Q?0uS5rpm2eR4On/ylUK//b0rwD0q3Udph0gbyx39P3bBZHwXcOAwu0vzVt+Gf?=
+ =?us-ascii?Q?RrMVOwCgUKL9HeKl5n7cvwi2ZJud6typL5NJpFE19/myQfXMiedHmBYel9y3?=
+ =?us-ascii?Q?LxpT8UXqvIw3HG9Yokt1uQ897STLHB0mc3LzyzyTSNTwD3yfY1Zy2nm5WaFp?=
+ =?us-ascii?Q?wGT8yNG3FSvDASPB+DMsc/3hhXSq9Ov3wpTSQt2USP3r+skf4IjhjwnJRKbV?=
+ =?us-ascii?Q?njAliACl/H25Vme1pgasO82RODF2ImXPvk0IJ1VqkzjiAygXDVa0WHM2LXd9?=
+ =?us-ascii?Q?noti6J7vMQtptTfNxr9Kx3b0PaYv8MK34hr8443a0JlCgQlvtCaQdke15wh/?=
+ =?us-ascii?Q?dQY4GoOQgw=3D=3D?=
 X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cead1757-b6e5-4a05-dbfe-08dee3d2b39b
+X-MS-Exchange-CrossTenant-Network-Message-Id: ca1fa0b0-d82f-4216-9b65-08dee3d2aacc
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR03MB9746.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2026 07:12:03.0269
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2026 07:11:48.4737
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +50zw0AcgzzdTUXo6LymYa1xBqnpqDw3uJVY5D3Jt8OeFBqNBRJnntRRWaVVwCvzi/NERU4o1R01YEyAkvWqMw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: NOyQhtIjL0v3NQI39WbY3ooEh6lnrZ6jezhYCdtEqwv79+embMIjNKRrrNyFcHG8diHFNyre7rHmduERw4Qs0w==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB7985
-X-purgate-ID: tlsNG-d25034/1784272324-030D9A5B-1B3E1569/0/0
+X-purgate-ID: tlsNG-4011c0/1784272311-587CACFC-20A92C6D/0/0
 X-purgate-type: clean
-X-purgate-size: 1502
+X-purgate-size: 2641
 
-reqs: drop duplicate GIC version AoU
+This series updates the existing interrupt-management and guest GICv3
+requirement groups and adds missing requirement documents for host GICv3,
+host ITS/LPI, guest vITS, host GICv4 direct delivery and vGIC direct
+delivery.
 
-Drop the AoU requiring GICv3 hardware.
+The interrupt-management change keeps Device Tree primary interrupt-controller
+discovery in the common interrupt-management layer.
 
-The certification scope also includes GICv4.1, while the supported
-physical GIC version is already specified by the corresponding PRQ.
+The guest GICv3 changes keep the document focused on the guest-visible vGICv3,
+move register-list scope into SSR descriptions, and document Xen's limited
+virtual GICv3 pending-state and active-state MMIO observation model.
 
-Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
----
-Changes in v2:
-- drop AoU instead of moving.
----
- .../arm64/gicv3.rst                                 | 13 -------------
- 1 file changed, 13 deletions(-)
+The new host GICv3 requirements cover Device Tree based physical GICv3
+initialization and interrupt handling. The new host ITS/LPI requirements cover
+physical ITS discovery, command handling and LPI state. The new vITS
+requirements cover the guest-visible virtual ITS command model.
 
-diff --git a/software_safety_reqs/domain_creation_and_runtime/domain_partially_emulated_resources/arm64/gicv3.rst b/software_safety_reqs/domain_creation_and_runtime/domain_partially_emulated_resources/arm64/gicv3.rst
-index e16576f..2c146f0 100644
---- a/software_safety_reqs/domain_creation_and_runtime/domain_partially_emulated_resources/arm64/gicv3.rst
-+++ b/software_safety_reqs/domain_creation_and_runtime/domain_partially_emulated_resources/arm64/gicv3.rst
-@@ -7,19 +7,6 @@ The following are the requirements related to ARM Generic Interrupt
- Controller, version 3 [1] interface (hereafter, GICv3) exposed by Xen
- to Arm64 domains.
- 
--Assumption of Use on the Physical Platform
--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
--
--GICv3 shall be present in the hardware
----------------------------------------
--
--`XenAoU~arm64_platform_gicv3_presence~1`
--
--Description:
--The physical platform shall have the ARM Generic Interrupt Controller, version 3.
--
--Rationale:
--
- Assumption of Use on a VM
- ^^^^^^^^^^^^^^^^^^^^^^^^^
- 
+The GICv4 requirements treat direct delivery as a backend-specific mechanism
+used by Xen's virtual interrupt delivery model. Host GICv4 requirements cover
+vPE, doorbell and direct-vLPI backend state. vGIC direct-delivery requirements
+cover guest-visible direct SGI capability, request control and direct-vSGI
+state handling.
+
+Mykola Kvach (6):
+  reqs: clarify guest GICv3 virtual register model
+  reqs: add host GICv3 requirements
+  reqs: drop duplicate GIC version AoU
+  reqs: add host ITS/LPI requirements
+  reqs: add guest vITS requirements
+  reqs: add GICv4 direct-delivery requirements
+
+ .../arm64/gicv3.rst                           |  46 +-
+ .../arm64/index.rst                           |   2 +
+ .../arm64/its.rst                             | 382 ++++++++++++
+ .../arm64/vgic_direct_delivery.rst            | 166 ++++++
+ .../physical_resources/arm64/gicv3.rst        | 564 ++++++++++++++++++
+ .../physical_resources/arm64/gicv4.rst        | 515 ++++++++++++++++
+ .../physical_resources/arm64/index.rst        |   3 +
+ .../physical_resources/arm64/its.rst          | 519 ++++++++++++++++
+ 8 files changed, 2175 insertions(+), 22 deletions(-)
+ create mode 100644 software_safety_reqs/domain_creation_and_runtime/domain_partially_emulated_resources/arm64/its.rst
+ create mode 100644 software_safety_reqs/domain_creation_and_runtime/domain_partially_emulated_resources/arm64/vgic_direct_delivery.rst
+ create mode 100644 software_safety_reqs/domain_creation_and_runtime/physical_resources/arm64/gicv3.rst
+ create mode 100644 software_safety_reqs/domain_creation_and_runtime/physical_resources/arm64/gicv4.rst
+ create mode 100644 software_safety_reqs/domain_creation_and_runtime/physical_resources/arm64/its.rst
+
 -- 
 2.43.0
 
