@@ -4,51 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0B27C44515
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Jul 2026 07:19:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1364766.1615764 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD931C44517
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Jul 2026 07:23:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1364776.1615775 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkcqW-0001OQ-Qm; Fri, 17 Jul 2026 07:18:56 +0000
+	id 1wkcun-0002uF-Bq; Fri, 17 Jul 2026 07:23:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1364766.1615764; Fri, 17 Jul 2026 07:18:56 +0000
+Received: by outflank-mailman (output) from mailman id 1364776.1615775; Fri, 17 Jul 2026 07:23:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkcqW-0001OJ-Nv; Fri, 17 Jul 2026 07:18:56 +0000
-Received: by outflank-mailman (input) for mailman id 1364766;
- Fri, 17 Jul 2026 07:18:55 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wkcun-0002u7-7Z; Fri, 17 Jul 2026 07:23:21 +0000
+Received: by outflank-mailman (input) for mailman id 1364776;
+ Fri, 17 Jul 2026 07:23:20 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <tzimmermann@suse.de>) id 1wkcqV-0001OD-5O
- for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 07:18:55 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1wkcul-0002u1-UC
+ for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 07:23:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkcqU-0020rO-Gx
- for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 09:18:54 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wkcul-0086At-3z
+ for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 09:23:19 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <tzimmermann@suse.de>)
- id 6a59d75a-e002-0a2a0a5209dd-0a2a450b886c-6
- for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 09:18:54 +0200
-Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <tzimmermann@suse.de>)
- id 6a59d75e-b7e8-0a2a450b0019-c387df8386b6-3
- for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 09:18:54 +0200
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id BB83B3E46;
- Fri, 17 Jul 2026 07:18:53 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 346A2779AA;
- Fri, 17 Jul 2026 07:18:53 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id fEKZC13XWWpeegAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Fri, 17 Jul 2026 07:18:53 +0000
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a59d85c-e002-0a2a0a5209dd-0a2a4509ac4a-22
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 09:23:18 +0200
+Received: from [52.101.56.64]
+ (helo=BN1PR04CU002.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a59d865-be1a-0a2a45090019-346538403f13-3
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 09:23:18 +0200
+Received: from CY5PR19CA0100.namprd19.prod.outlook.com (2603:10b6:930:83::12)
+ by LVUPR12MB999162.namprd12.prod.outlook.com (2603:10b6:408:3a2::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.12; Fri, 17 Jul
+ 2026 07:23:14 +0000
+Received: from CY4PEPF0000EE3D.namprd03.prod.outlook.com
+ (2603:10b6:930:83:cafe::17) by CY5PR19CA0100.outlook.office365.com
+ (2603:10b6:930:83::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.223.13 via Frontend Transport; Fri,
+ 17 Jul 2026 07:23:14 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ CY4PEPF0000EE3D.mail.protection.outlook.com (10.167.242.15) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.245.5 via Frontend Transport; Fri, 17 Jul 2026 07:23:14 +0000
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Fri, 17 Jul
+ 2026 02:23:13 -0500
+Received: from [10.71.196.80] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.41 via Frontend
+ Transport; Fri, 17 Jul 2026 02:23:12 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,309 +67,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Autocrypt"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Autocrypt"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1784272733; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=xwa6Xhq/oyDKCOLYR5Qzr8wRbj2P/ruHJXx2OEL8gTk=;
-	b=MY+oa9hJ4wx/+A5jFwJ1c3lZaptJDjM7oHSPtK3rlvop+gnkzi0U799M9dh4G53ECxvEVd
-	hVOLCLpU+4Gw13jyJ5dTdOVde1/Fvd+LbC5HWfrGgSrT5kUmO0GyJEsf1GMP/TDiNp2nx4
-	OTbUpZf+NSQuQfnDuEi1aFkpmaN1USo=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1784272733;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=xwa6Xhq/oyDKCOLYR5Qzr8wRbj2P/ruHJXx2OEL8gTk=;
-	b=r4wVOO8OYDaYD3XXEnffeP9LU9RMPllvCt9kRhhq9TM+vrhdg/xLHgR2Cf5Io1aSnYNrF7
-	hi/8IfWTNoW45gCg==
-Authentication-Results: smtp-out2.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1784272733; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=xwa6Xhq/oyDKCOLYR5Qzr8wRbj2P/ruHJXx2OEL8gTk=;
-	b=MY+oa9hJ4wx/+A5jFwJ1c3lZaptJDjM7oHSPtK3rlvop+gnkzi0U799M9dh4G53ECxvEVd
-	hVOLCLpU+4Gw13jyJ5dTdOVde1/Fvd+LbC5HWfrGgSrT5kUmO0GyJEsf1GMP/TDiNp2nx4
-	OTbUpZf+NSQuQfnDuEi1aFkpmaN1USo=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1784272733;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=xwa6Xhq/oyDKCOLYR5Qzr8wRbj2P/ruHJXx2OEL8gTk=;
-	b=r4wVOO8OYDaYD3XXEnffeP9LU9RMPllvCt9kRhhq9TM+vrhdg/xLHgR2Cf5Io1aSnYNrF7
-	hi/8IfWTNoW45gCg==
-Message-ID: <26981ae1-4aef-4965-8600-f5e30a1b564a@suse.de>
-Date: Fri, 17 Jul 2026 09:18:52 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ittTBPQQeiZzGb4Wa0alj1gzJs+MWiU90hFp3ijpwA5RS1YtkSkeSSmh2VHEEP5fUYd/2ouI+SmALj24VSExBuJu1a2pvhuGqtclyyGHUPn4Bly/HXy/z06nUZitXnq0jP8rEeQ/BF/imd8gs6Ml5NEiQPoZ3Xa7JvCjAVR3U1jZZPGIe5PpGSR1qFy4Jlyz4qGV5qfWpFc6dWATEToLl5E5Q6fE4JiMPHhBRbS+0gaBnK+sZu3WjioZSvXwV3jB2Gp219jLK9zNQCHdrw3XB99ObL2UPbRHeu7iEdBioCjxsIYFAlMwiAvJJ6iQdT0FXKxQAcHEnUE1TYJeoIk5ww==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=UG2sZasIwCGKu2i/dou0Rx3A1ZXNa/zg9x2+F//njLE=;
+ b=aaOTM6ez9KmfpTWyzuyFNU36gOzA9ip+aJGb/iFsTpiC9vhs0+w+7ywsdsWyR6B8lcHO6r4p+LB1HOhMgKL82yugB2IXtMdSWFsLDRQz6pk3Xh3X4L/bVK7EwaMLoRa2MzWtDtrRsriV1zZsBugeU9JPq8oyahDvpF0fgJyw7GpeHEQTcsoPb4ZzRvo+eUAo4TmUD6SkK2Gs2DF1QSUTxh2I5rErk9DzOEVKBD8oWKsPP2qPyZo/Y7fBvbqjY0v6FZGr5yeEz9VjQSeSqX8q5K/ECa6PpkDq1NZtX8BnhNE4mk8qqKyUGbEvcsVa/6CN5yJhxDwERXUdQz+EmcAnQQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=epam.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=UG2sZasIwCGKu2i/dou0Rx3A1ZXNa/zg9x2+F//njLE=;
+ b=MAzXUeLBMm6YWHbP3wykmJNndrz85/vhx0pvebyHB7s9okfhNaRNlP5oSj6F/jRn9/e1MVX1PEPJFPS/wTon8RvA9gYmqeQVBCmkv4CHLThPY/DJzt539Viuavk/1vDVDz3ln9nZpViWyKfNUIHka42vCyHCGqayKT38bG3MhXk=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Message-ID: <26721f9d-23a3-440b-a1ae-3348f2eef77a@amd.com>
+Date: Fri, 17 Jul 2026 09:23:11 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/8] drm/gm12u320: replace struct
- drm_simple_display_pipe with regular atomic helpers
-To: Ze Huang <ze.huang@oss.qualcomm.com>,
- Alexey Brodkin <abrodkin@synopsys.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Joel Stanley <joel@jms.id.au>,
- Andrew Jeffery <andrew@codeconstruct.com.au>, Frank Li <Frank.Li@nxp.com>,
- Sascha Hauer <s.hauer@pengutronix.de>,
- Pengutronix Kernel Team <kernel@pengutronix.de>,
- Fabio Estevam <festevam@gmail.com>, Linus Walleij <linusw@kernel.org>,
- Hans de Goede <hansg@kernel.org>, Alex Lanzano <lanzano.alex@gmail.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org,
- imx@lists.linux.dev, xen-devel@lists.xenproject.org
-References: <20260716-drm-simple-kms-removal-v2-0-1133a8fc3785@oss.qualcomm.com>
- <20260716-drm-simple-kms-removal-v2-5-1133a8fc3785@oss.qualcomm.com>
+Subject: Re: [PATCH] xen/arm: Reject pseudo-domain foreign mappings in
+ xenmem_add_to_physmap_one()
+To: Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>, Ayan Kumar Halder <ayankuma@amd.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>
+References: <20260714191655.155717-1-oleksandr_tyshchenko@epam.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
 Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <20260716-drm-simple-kms-removal-v2-5-1133a8fc3785@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-2.80 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	TAGGED_RCPT(0.00)[];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FREEMAIL_TO(0.00)[oss.qualcomm.com,synopsys.com,linux.intel.com,kernel.org,gmail.com,ffwll.ch,jms.id.au,codeconstruct.com.au,nxp.com,pengutronix.de,epam.com];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com];
-	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email,suse.de:mid,qualcomm.com:email,imap1.dmz-prg2.suse.org:helo,suse.com:url]
-X-purgate-ID: tlsNG-42698a/1784272734-19CC79EA-CC366D92/0/0
+In-Reply-To: <20260714191655.155717-1-oleksandr_tyshchenko@epam.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3D:EE_|LVUPR12MB999162:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7bb5a412-f5f1-48fb-c195-08dee3d443c7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700016|23010399003|376014|82310400026|1800799024|6133799003|56012099006|11063799006|10067099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	2okBDhN8A9NeKw+0I9oVAqJLIK1svo+OaYu2iT60q9WV9LuwMohfG9k6FainZNnIFlkq0C/umNQUBQJ3jEJ+anYmUzb5KQdkc3AKvEbNvmuu9eIArw03MGPi4PvGK8UeVlQOoQsuOd6ZsS1RrVptXz12IgUrKbVoHaBSCFHzO0cvIlrNxZTDZ7wv7xQRoWYFn1wbZv9n07mqdkJKc3+ZyfKgoc/RYjE1n8GIG02cwO2FgyTd2Yoj6moKDBxp0UQt3F2qFWglGIDPF8coBAm2Bz7MX2BnqpbrmSj0u7avsVURclFMNULlokLZtzPk6elS63ALyWb50lQCIOv+pgxKuhTDgUDSb5K/OkM47u3AAWW5zCw1cnbRDXC/4vxjrpkdeZH+9aTy0B3zTzFKFYeaofk4Yk9LxbaFqC+Wct0d5cq3vKagBeVnLvchtv2xJWNWtxtJ+8INbiWQObWoX+PIJ9o4rhJ6wjG8wNIIj2uLLhncnLsoM099CYY4RjVl/4Yzdi/5kxR0y+/NVLQ9MnuGepEbjtXYzwQFePLXHWXwrSBdKwNnXaOOsZCJXkq26l5L/qJcOl8Px9is/3bvwjGTG4qsjuR90PUFRhqdf1Sv+lgZFGSi2mqXxzKD1STzz5a4q7qhR+cpzA1MVHONP5iJAcnnwG4zrMuf40RIcR45LBTmT9/657nClQl1YxnS8x4TaP8E1MJFLNSFlj3uyYilLg==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(23010399003)(376014)(82310400026)(1800799024)(6133799003)(56012099006)(11063799006)(10067099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	2JZGtmVX/Bt58+aMOZI4gbZz2tzAVUzUFo687SEElJc1zJD482Lklli42AIxPFHQhAtSWx67ndOP0bgaJxFatK/bjaYqqNLbk0IUDicsX0sDyxKLA/MxCNApl1cZ8Ze6tutBfBVKydjHFnIn+TgXtS7prSa9pIhTEw6isn/BZD+a15Gb8rjbRRkzMbvC9xl28ANoI1vXEzLcI+RE21e9J4HUBv9DHNDiqc6MLPgVAh4+oTd5qluFG76HujfeZsQojslOba7XblLz44jfj+7+4L8qaIbAgoS+aTyE8Ew+fOMRMbBn5BitIXHdAGhpHa+mLeBGhLIlDGrVozJQB3C9K0M6Oc3dZTzAN3l80Vu5dX6hPIbgb+5vwJtBP4Sd7wOGgX6Fk4sAZ9ion3h/Hixzws86rWSSUQ2x2cz7x3RFwR+NCevEeqAGsTh582fQV9zO
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2026 07:23:14.2057
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7bb5a412-f5f1-48fb-c195-08dee3d443c7
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CY4PEPF0000EE3D.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LVUPR12MB999162
+X-purgate-ID: tlsNG-bad1c0/1784272998-FCC15034-E5BE7D3B/0/0
 X-purgate-type: clean
-X-purgate-size: 7339
+X-purgate-size: 1290
 
-Hi
 
-Am 16.07.26 um 11:01 schrieb Ze Huang:
-> Convert gm12u320 to direct primary plane, CRTC and encoder setup.
->
-> Keep shadow-plane helper state, framebuffer access helpers and
-> no-scaling plane-state check from simple-KMS path.
->
-> Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Tested-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Signed-off-by: Ze Huang <ze.huang@oss.qualcomm.com>
-> ---
->   drivers/gpu/drm/tiny/gm12u320.c | 132 ++++++++++++++++++++++++++++++++--------
->   1 file changed, 107 insertions(+), 25 deletions(-)
->
-[...]
->   
-> -static void gm12u320_pipe_enable(struct drm_simple_display_pipe *pipe,
-> -				 struct drm_crtc_state *crtc_state,
-> -				 struct drm_plane_state *plane_state)
-> +static void gm12u320_crtc_helper_atomic_enable(struct drm_crtc *crtc,
-> +					       struct drm_atomic_commit *commit)
->   {
->   	struct drm_rect rect = { 0, 0, GM12U320_USER_WIDTH, GM12U320_HEIGHT };
-> -	struct gm12u320_device *gm12u320 = to_gm12u320(pipe->crtc.dev);
-> +	struct gm12u320_device *gm12u320 = to_gm12u320(crtc->dev);
-> +	struct drm_plane_state *plane_state = gm12u320->plane.state;
 
-Did you see the reply from the Sashiko bot?
+On 14-Jul-26 21:16, Oleksandr Tyshchenko wrote:
+> A privileged domain on Arm64 can trigger a data abort in the hypervisor
+> by issuing memory_op's XENMEM_add_to_physmap_batch sub-op with
+> space=XENMAPSPACE_gmfn_foreign, idx=0 and foreign_domid=DOMID_IO.
+> 
+> get_pg_owner(DOMID_IO) succeeds, returning a pointer to the dom_io
+> pseudo-domain. The subsequent get_page_from_gfn(dom_io, ...) then
+> attempts to walk dom_io's P2M table, which is not initialized for
+> pseudo-domains, resulting in a data abort in p2m_get_entry() when
+> it dereferences the invalid pointer returned by p2m_get_root_pointer().
+> 
+> Replace get_pg_owner() with explicit domain lookup logic matching
+> the x86 implementation: handle DOMID_XEN via rcu_lock_domain(dom_xen),
+> and resolve all other domain IDs via rcu_lock_remote_domain_by_id(),
+> which rejects pseudo-domains (DOMID_IO, etc.) that are not present in
+> the domain hash, returning -ESRCH before any P2M access occurs.
+> 
+> Fixes: 615897bc6c01 ("xen/arm: Allow a privileged domain to map foreign page from DOMID_XEN")
+> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 
-What happens is that user space can apply multiple atomic commits in a 
-row, but they are applied to hardware asynchronously. So if you take the 
-plane state here directly from the plane, it could have been replaced by 
-a later atomic commit already.  Rather get the correct plane state with 
-the helper drm_atomic_get_new_plane_state(). I did not look at all of 
-the series' patches for this problem, but the rule applies to all of the 
-mode-setting code. Best regards Thomas
->   	struct drm_shadow_plane_state *shadow_plane_state = to_drm_shadow_plane_state(plane_state);
->   
->   	gm12u320->fb_update.draw_status_timeout = FIRST_FRAME_TIMEOUT;
->   	gm12u320_fb_mark_dirty(plane_state->fb, &shadow_plane_state->data[0], &rect);
->   }
->   
-> -static void gm12u320_pipe_disable(struct drm_simple_display_pipe *pipe)
-> +static void gm12u320_crtc_helper_atomic_disable(struct drm_crtc *crtc,
-> +						struct drm_atomic_commit *commit)
->   {
-> -	struct gm12u320_device *gm12u320 = to_gm12u320(pipe->crtc.dev);
-> +	struct gm12u320_device *gm12u320 = to_gm12u320(crtc->dev);
->   
->   	gm12u320_stop_fb_update(gm12u320);
->   }
->   
-> -static void gm12u320_pipe_update(struct drm_simple_display_pipe *pipe,
-> -				 struct drm_plane_state *old_state)
-> +static void gm12u320_plane_helper_atomic_update(struct drm_plane *plane,
-> +						struct drm_atomic_commit *commit)
->   {
-> -	struct drm_plane_state *state = pipe->plane.state;
-> +	struct drm_plane_state *old_state = drm_atomic_get_old_plane_state(commit, plane);
-> +	struct drm_plane_state *state = drm_atomic_get_new_plane_state(commit, plane);
->   	struct drm_shadow_plane_state *shadow_plane_state = to_drm_shadow_plane_state(state);
->   	struct drm_rect rect;
->   
-> +	if (!state->fb)
-> +		return;
-> +
->   	if (drm_atomic_helper_damage_merged(old_state, state, &rect))
->   		gm12u320_fb_mark_dirty(state->fb, &shadow_plane_state->data[0], &rect);
->   }
->   
-> -static const struct drm_simple_display_pipe_funcs gm12u320_pipe_funcs = {
-> -	.enable	    = gm12u320_pipe_enable,
-> -	.disable    = gm12u320_pipe_disable,
-> -	.update	    = gm12u320_pipe_update,
-> -	DRM_GEM_SIMPLE_DISPLAY_PIPE_SHADOW_PLANE_FUNCS,
-> +static const struct drm_plane_funcs gm12u320_plane_funcs = {
-> +	.update_plane	= drm_atomic_helper_update_plane,
-> +	.disable_plane	= drm_atomic_helper_disable_plane,
-> +	.destroy	= drm_plane_cleanup,
-> +	DRM_GEM_SHADOW_PLANE_FUNCS,
-> +};
-> +
-> +static int gm12u320_plane_helper_atomic_check(struct drm_plane *plane,
-> +					      struct drm_atomic_commit *commit)
-> +{
-> +	struct drm_plane_state *plane_state = drm_atomic_get_new_plane_state(commit, plane);
-> +	struct drm_crtc *crtc = plane_state->crtc;
-> +	struct drm_crtc_state *crtc_state = NULL;
-> +
-> +	if (crtc)
-> +		crtc_state = drm_atomic_get_new_crtc_state(commit, crtc);
-> +
-> +	return drm_atomic_helper_check_plane_state(plane_state, crtc_state,
-> +						   DRM_PLANE_NO_SCALING,
-> +						   DRM_PLANE_NO_SCALING,
-> +						   false, false);
-> +}
-> +
-> +static const struct drm_plane_helper_funcs gm12u320_plane_helper_funcs = {
-> +	DRM_GEM_SHADOW_PLANE_HELPER_FUNCS,
-> +	.atomic_check	= gm12u320_plane_helper_atomic_check,
-> +	.atomic_update	= gm12u320_plane_helper_atomic_update,
-> +};
-> +
-> +static int gm12u320_crtc_helper_atomic_check(struct drm_crtc *crtc,
-> +					     struct drm_atomic_commit *commit)
-> +{
-> +	struct drm_crtc_state *crtc_state = drm_atomic_get_new_crtc_state(commit, crtc);
-> +	int ret;
-> +
-> +	if (crtc_state->enable) {
-> +		ret = drm_atomic_helper_check_crtc_primary_plane(crtc_state);
-> +		if (ret)
-> +			return ret;
-> +	}
-> +
-> +	return drm_atomic_add_affected_planes(commit, crtc);
-> +}
-> +
-> +static const struct drm_crtc_helper_funcs gm12u320_crtc_helper_funcs = {
-> +	.atomic_check	= gm12u320_crtc_helper_atomic_check,
-> +	.atomic_enable	= gm12u320_crtc_helper_atomic_enable,
-> +	.atomic_disable	= gm12u320_crtc_helper_atomic_disable,
-> +};
-> +
-> +static const struct drm_crtc_funcs gm12u320_crtc_funcs = {
-> +	.set_config		= drm_atomic_helper_set_config,
-> +	.page_flip		= drm_atomic_helper_page_flip,
-> +	.reset			= drm_atomic_helper_crtc_reset,
-> +	.destroy		= drm_crtc_cleanup,
-> +	.atomic_duplicate_state	= drm_atomic_helper_crtc_duplicate_state,
-> +	.atomic_destroy_state	= drm_atomic_helper_crtc_destroy_state,
-> +};
-> +
-> +static const struct drm_encoder_funcs gm12u320_encoder_funcs = {
-> +	.destroy = drm_encoder_cleanup,
->   };
->   
->   static const uint32_t gm12u320_pipe_formats[] = {
-> @@ -677,13 +743,29 @@ static int gm12u320_usb_probe(struct usb_interface *interface,
->   	if (ret)
->   		return ret;
->   
-> -	ret = drm_simple_display_pipe_init(&gm12u320->dev,
-> -					   &gm12u320->pipe,
-> -					   &gm12u320_pipe_funcs,
-> -					   gm12u320_pipe_formats,
-> -					   ARRAY_SIZE(gm12u320_pipe_formats),
-> -					   gm12u320_pipe_modifiers,
-> -					   &gm12u320->conn);
-> +	ret = drm_universal_plane_init(dev, &gm12u320->plane, 0,
-> +				       &gm12u320_plane_funcs,
-> +				       gm12u320_pipe_formats,
-> +				       ARRAY_SIZE(gm12u320_pipe_formats),
-> +				       gm12u320_pipe_modifiers,
-> +				       DRM_PLANE_TYPE_PRIMARY, NULL);
-> +	if (ret)
-> +		return ret;
-> +	drm_plane_helper_add(&gm12u320->plane, &gm12u320_plane_helper_funcs);
-> +
-> +	ret = drm_crtc_init_with_planes(dev, &gm12u320->crtc, &gm12u320->plane, NULL,
-> +					&gm12u320_crtc_funcs, NULL);
-> +	if (ret)
-> +		return ret;
-> +	drm_crtc_helper_add(&gm12u320->crtc, &gm12u320_crtc_helper_funcs);
-> +
-> +	ret = drm_encoder_init(dev, &gm12u320->encoder, &gm12u320_encoder_funcs,
-> +			       DRM_MODE_ENCODER_NONE, NULL);
-> +	if (ret)
-> +		return ret;
-> +	gm12u320->encoder.possible_crtcs = drm_crtc_mask(&gm12u320->crtc);
-> +
-> +	ret = drm_connector_attach_encoder(&gm12u320->conn, &gm12u320->encoder);
->   	if (ret)
->   		return ret;
->   
->
+I would be ok to take this patch in for 4.22. Oleksii, other maintainers?
 
--- 
---
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Frankenstr. 146, 90461 Nürnberg, Germany, www.suse.com
-GF: Jochen Jaser, Andrew McDonald, (HRB 36809, AG Nürnberg)
-
+~Michal
 
 
