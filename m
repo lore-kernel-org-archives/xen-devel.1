@@ -4,58 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD931C44517
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Jul 2026 07:23:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1364776.1615775 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8756C44507
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Jul 2026 09:39:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1364868.1615783 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkcun-0002uF-Bq; Fri, 17 Jul 2026 07:23:21 +0000
+	id 1wkf2F-00041L-OG; Fri, 17 Jul 2026 09:39:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1364776.1615775; Fri, 17 Jul 2026 07:23:21 +0000
+Received: by outflank-mailman (output) from mailman id 1364868.1615783; Fri, 17 Jul 2026 09:39:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkcun-0002u7-7Z; Fri, 17 Jul 2026 07:23:21 +0000
-Received: by outflank-mailman (input) for mailman id 1364776;
- Fri, 17 Jul 2026 07:23:20 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wkf2F-00041E-Kc; Fri, 17 Jul 2026 09:39:11 +0000
+Received: by outflank-mailman (input) for mailman id 1364868;
+ Fri, 17 Jul 2026 09:39:10 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1wkcul-0002u1-UC
- for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 07:23:20 +0000
+ (envelope-from <mingo@kernel.org>) id 1wkf2E-000415-HJ
+ for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 09:39:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkcul-0086At-3z
- for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 09:23:19 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wkf2D-0093NQ-BL
+ for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 11:39:09 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a59d85c-e002-0a2a0a5209dd-0a2a4509ac4a-22
- for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 09:23:18 +0200
-Received: from [52.101.56.64]
- (helo=BN1PR04CU002.outbound.protection.outlook.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a59d865-be1a-0a2a45090019-346538403f13-3
- for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 09:23:18 +0200
-Received: from CY5PR19CA0100.namprd19.prod.outlook.com (2603:10b6:930:83::12)
- by LVUPR12MB999162.namprd12.prod.outlook.com (2603:10b6:408:3a2::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.12; Fri, 17 Jul
- 2026 07:23:14 +0000
-Received: from CY4PEPF0000EE3D.namprd03.prod.outlook.com
- (2603:10b6:930:83:cafe::17) by CY5PR19CA0100.outlook.office365.com
- (2603:10b6:930:83::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.223.13 via Frontend Transport; Fri,
- 17 Jul 2026 07:23:14 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- CY4PEPF0000EE3D.mail.protection.outlook.com (10.167.242.15) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.245.5 via Frontend Transport; Fri, 17 Jul 2026 07:23:14 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Fri, 17 Jul
- 2026 02:23:13 -0500
-Received: from [10.71.196.80] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.41 via Frontend
- Transport; Fri, 17 Jul 2026 02:23:12 -0500
+ (envelope-from <mingo@kernel.org>)
+ id 6a59f82c-e002-0a2a0a5209dd-0a2a450b93cc-42
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 11:39:09 +0200
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <mingo@kernel.org>)
+ id 6a59f83b-b7e8-0a2a450b0019-ac6904febcd8-3
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 11:39:08 +0200
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id B88A660A5E;
+ Fri, 17 Jul 2026 09:39:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 583FD1F00A3A;
+ Fri, 17 Jul 2026 09:38:47 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -67,101 +50,146 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ittTBPQQeiZzGb4Wa0alj1gzJs+MWiU90hFp3ijpwA5RS1YtkSkeSSmh2VHEEP5fUYd/2ouI+SmALj24VSExBuJu1a2pvhuGqtclyyGHUPn4Bly/HXy/z06nUZitXnq0jP8rEeQ/BF/imd8gs6Ml5NEiQPoZ3Xa7JvCjAVR3U1jZZPGIe5PpGSR1qFy4Jlyz4qGV5qfWpFc6dWATEToLl5E5Q6fE4JiMPHhBRbS+0gaBnK+sZu3WjioZSvXwV3jB2Gp219jLK9zNQCHdrw3XB99ObL2UPbRHeu7iEdBioCjxsIYFAlMwiAvJJ6iQdT0FXKxQAcHEnUE1TYJeoIk5ww==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UG2sZasIwCGKu2i/dou0Rx3A1ZXNa/zg9x2+F//njLE=;
- b=aaOTM6ez9KmfpTWyzuyFNU36gOzA9ip+aJGb/iFsTpiC9vhs0+w+7ywsdsWyR6B8lcHO6r4p+LB1HOhMgKL82yugB2IXtMdSWFsLDRQz6pk3Xh3X4L/bVK7EwaMLoRa2MzWtDtrRsriV1zZsBugeU9JPq8oyahDvpF0fgJyw7GpeHEQTcsoPb4ZzRvo+eUAo4TmUD6SkK2Gs2DF1QSUTxh2I5rErk9DzOEVKBD8oWKsPP2qPyZo/Y7fBvbqjY0v6FZGr5yeEz9VjQSeSqX8q5K/ECa6PpkDq1NZtX8BnhNE4mk8qqKyUGbEvcsVa/6CN5yJhxDwERXUdQz+EmcAnQQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=epam.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UG2sZasIwCGKu2i/dou0Rx3A1ZXNa/zg9x2+F//njLE=;
- b=MAzXUeLBMm6YWHbP3wykmJNndrz85/vhx0pvebyHB7s9okfhNaRNlP5oSj6F/jRn9/e1MVX1PEPJFPS/wTon8RvA9gYmqeQVBCmkv4CHLThPY/DJzt539Viuavk/1vDVDz3ln9nZpViWyKfNUIHka42vCyHCGqayKT38bG3MhXk=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <26721f9d-23a3-440b-a1ae-3348f2eef77a@amd.com>
-Date: Fri, 17 Jul 2026 09:23:11 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784281146;
+	bh=+qglHjGyDrUKXlad/2R3jZv9/pC2LefY+KO7XkEkSko=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=SjJUoV11rwuT+5AizqR6Ts6eoKb6FIGre1Dux163GhMlqZlyOXajtWZ4fayfgVpH9
+	 m9cgU5vVhldyF6Xw1Kb8rVhViKflUSonqgQ1XE4NCnm2BVJY+TnbSkh9Z3rIVPhd6s
+	 zU7mHk1ONLaADnjIxp+I5dcB3ZX2ynHffnRRVYklEoaeIIz/ZSYdwAkj3wzibEUx9o
+	 HnS12bG6z8ihRuFocqmHyHuXUYtM9fOcbFkvkQ/W/8UHnOkWe7OeZRKXrCxZZCA9nQ
+	 s6WCpg4YrH/mKvwpz01fi9YDCJ3Uu05lBNYlNAvTtCCufAR6IHv/1e4r2yoFLfOqhY
+	 leqJTK6WbuRqA==
+Date: Fri, 17 Jul 2026 11:38:45 +0200
+From: Ingo Molnar <mingo@kernel.org>
+To: Juergen Gross <jgross@suse.com>
+Cc: Sean Christopherson <seanjc@google.com>, Arnd Bergmann <arnd@arndb.de>,
+	linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org,
+	"linux-edac@vger.kernel.org" <linux-edac@vger.kernel.org>,
+	x86@kernel.org, linux-acpi@vger.kernel.org, kvm@vger.kernel.org,
+	linux-coco@lists.linux.dev, linux-pci@vger.kernel.org,
+	virtualization@lists.linux.dev, linux-ide@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, linux-fbdev@vger.kernel.org,
+	linux-crypto@vger.kernel.org,
+	"open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
+	linux-hyperv@vger.kernel.org, linux-hwmon@vger.kernel.org,
+	linux-perf-users@vger.kernel.org, linux-mtd@lists.infradead.org,
+	platform-driver-x86@vger.kernel.org,
+	"Rafael J . Wysocki" <rafael@kernel.org>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	Zhang Rui <rui.zhang@intel.com>,
+	"lukasz.luba@arm.com" <lukasz.luba@arm.com>,
+	Jason Baron <jbaron@akamai.com>, Borislav Petkov <bp@alien8.de>,
+	Tony Luck <tony.luck@intel.com>,
+	Yazen Ghannam <yazen.ghannam@amd.com>, Len Brown <lenb@kernel.org>,
+	Pavel Machek <pavel@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
+	Ingo Molnar <mingo@redhat.com>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	"Kirill A. Shutemov" <kas@kernel.org>,
+	Rick Edgecombe <rick.p.edgecombe@intel.com>,
+	Pu Wen <puwen@hygon.cn>, Bjorn Helgaas <bhelgaas@google.com>,
+	Ajay Kaher <ajay.kaher@broadcom.com>,
+	Alexey Makhalov <alexey.makhalov@broadcom.com>,
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+	Viresh Kumar <viresh.kumar@linaro.org>,
+	Reinette Chatre <reinette.chatre@intel.com>,
+	Dave Martin <Dave.Martin@arm.com>,
+	James Morse <james.morse@arm.com>, Babu Moger <babu.moger@amd.com>,
+	Tony W Wang-oc <TonyWWang-oc@zhaoxin.com>,
+	Damien Le Moal <dlemoal@kernel.org>,
+	Niklas Cassel <cassel@kernel.org>, Dave Airlie <airlied@redhat.com>,
+	Helge Deller <deller@gmx.de>, linux-geode@lists.infradead.org,
+	Olivia Mackall <olivia@selenic.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"K. Y. Srinivasan" <kys@microsoft.com>,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Wei Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>,
+	Long Li <longli@microsoft.com>, Guenter Roeck <linux@roeck-us.net>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Arnaldo Carvalho de Melo <acme@kernel.org>,
+	Namhyung Kim <namhyung@kernel.org>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
+	Adrian Hunter <adrian.hunter@intel.com>,
+	James Clark <james.clark@linaro.org>,
+	Josh Poimboeuf <jpoimboe@kernel.org>,
+	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
+	Vitaly Kuznetsov <vkuznets@redhat.com>,
+	Andy Lutomirski <luto@kernel.org>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Huang Rui <ray.huang@amd.com>,
+	Mario Limonciello <mario.limonciello@amd.com>,
+	Perry Yuan <perry.yuan@amd.com>,
+	K Prateek Nayak <kprateek.nayak@amd.com>,
+	"srinivas.pandruvada@linux.intel.com" <srinivas.pandruvada@linux.intel.com>,
+	Artem Bityutskiy <artem.bityutskiy@linux.intel.com>,
+	Artem Bityutskiy <dedekind1@gmail.com>,
+	Miquel Raynal <miquel.raynal@bootlin.com>,
+	Richard Weinberger <richard@nod.at>,
+	Vignesh Raghavendra <vigneshr@ti.com>,
+	Ashok Raj <ashok.raj.linux@gmail.com>,
+	Hans de Goede <hansg@kernel.org>,
+	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	Rajneesh Bhardwaj <irenic.rajneesh@gmail.com>,
+	David E Box <david.e.box@intel.com>, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH 00/32] x86/msr: Drop 32-bit MSR interfaces
+Message-ID: <aln4JYxRgdpC3Wse@gmail.com>
+References: <20260629060526.3638272-1-jgross@suse.com>
+ <d7c1db52-529a-43cc-ac7d-38b52627e8bc@app.fastmail.com>
+ <c1608c48-13c2-4290-826b-28b5ca51eaf7@suse.com>
+ <7332feff-2649-496c-8e49-b0a19eb54a32@app.fastmail.com>
+ <akJUz0kYkEBdLSZ3@gmail.com>
+ <akQR9YMtMHReJTfB@google.com>
+ <akY4U0jUZm4HOGZ_@gmail.com>
+ <99228803-b8b7-47a3-b77c-6fdf3b785730@suse.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/arm: Reject pseudo-domain foreign mappings in
- xenmem_add_to_physmap_one()
-To: Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>, Ayan Kumar Halder <ayankuma@amd.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-References: <20260714191655.155717-1-oleksandr_tyshchenko@epam.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
-Content-Language: en-US
-In-Reply-To: <20260714191655.155717-1-oleksandr_tyshchenko@epam.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3D:EE_|LVUPR12MB999162:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7bb5a412-f5f1-48fb-c195-08dee3d443c7
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|23010399003|376014|82310400026|1800799024|6133799003|56012099006|11063799006|10067099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	2okBDhN8A9NeKw+0I9oVAqJLIK1svo+OaYu2iT60q9WV9LuwMohfG9k6FainZNnIFlkq0C/umNQUBQJ3jEJ+anYmUzb5KQdkc3AKvEbNvmuu9eIArw03MGPi4PvGK8UeVlQOoQsuOd6ZsS1RrVptXz12IgUrKbVoHaBSCFHzO0cvIlrNxZTDZ7wv7xQRoWYFn1wbZv9n07mqdkJKc3+ZyfKgoc/RYjE1n8GIG02cwO2FgyTd2Yoj6moKDBxp0UQt3F2qFWglGIDPF8coBAm2Bz7MX2BnqpbrmSj0u7avsVURclFMNULlokLZtzPk6elS63ALyWb50lQCIOv+pgxKuhTDgUDSb5K/OkM47u3AAWW5zCw1cnbRDXC/4vxjrpkdeZH+9aTy0B3zTzFKFYeaofk4Yk9LxbaFqC+Wct0d5cq3vKagBeVnLvchtv2xJWNWtxtJ+8INbiWQObWoX+PIJ9o4rhJ6wjG8wNIIj2uLLhncnLsoM099CYY4RjVl/4Yzdi/5kxR0y+/NVLQ9MnuGepEbjtXYzwQFePLXHWXwrSBdKwNnXaOOsZCJXkq26l5L/qJcOl8Px9is/3bvwjGTG4qsjuR90PUFRhqdf1Sv+lgZFGSi2mqXxzKD1STzz5a4q7qhR+cpzA1MVHONP5iJAcnnwG4zrMuf40RIcR45LBTmT9/657nClQl1YxnS8x4TaP8E1MJFLNSFlj3uyYilLg==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(23010399003)(376014)(82310400026)(1800799024)(6133799003)(56012099006)(11063799006)(10067099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	2JZGtmVX/Bt58+aMOZI4gbZz2tzAVUzUFo687SEElJc1zJD482Lklli42AIxPFHQhAtSWx67ndOP0bgaJxFatK/bjaYqqNLbk0IUDicsX0sDyxKLA/MxCNApl1cZ8Ze6tutBfBVKydjHFnIn+TgXtS7prSa9pIhTEw6isn/BZD+a15Gb8rjbRRkzMbvC9xl28ANoI1vXEzLcI+RE21e9J4HUBv9DHNDiqc6MLPgVAh4+oTd5qluFG76HujfeZsQojslOba7XblLz44jfj+7+4L8qaIbAgoS+aTyE8Ew+fOMRMbBn5BitIXHdAGhpHa+mLeBGhLIlDGrVozJQB3C9K0M6Oc3dZTzAN3l80Vu5dX6hPIbgb+5vwJtBP4Sd7wOGgX6Fk4sAZ9ion3h/Hixzws86rWSSUQ2x2cz7x3RFwR+NCevEeqAGsTh582fQV9zO
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2026 07:23:14.2057
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7bb5a412-f5f1-48fb-c195-08dee3d443c7
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CY4PEPF0000EE3D.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LVUPR12MB999162
-X-purgate-ID: tlsNG-bad1c0/1784272998-FCC15034-E5BE7D3B/0/0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <99228803-b8b7-47a3-b77c-6fdf3b785730@suse.com>
+X-purgate-ID: tlsNG-42698a/1784281148-1B0DD9EA-11A2E36E/0/0
 X-purgate-type: clean
-X-purgate-size: 1290
+X-purgate-size: 1373
 
 
+* Juergen Gross <jgross@suse.com> wrote:
 
-On 14-Jul-26 21:16, Oleksandr Tyshchenko wrote:
-> A privileged domain on Arm64 can trigger a data abort in the hypervisor
-> by issuing memory_op's XENMEM_add_to_physmap_batch sub-op with
-> space=XENMAPSPACE_gmfn_foreign, idx=0 and foreign_domid=DOMID_IO.
+> On 02.07.26 12:07, Ingo Molnar wrote:
+> > 
+> > * Sean Christopherson <seanjc@google.com> wrote:
+> > 
+> > > > Note that the individual patches are IMO significantly easier to review
+> > > > through the actual 32-bit => 64-bit variable assignment changes done
+> > > > in isolation (which sometimes include minor cleanups), while
+> > > > the Coccinelle semantic patch:
+> > > > 
+> > > >     { a(b,c) => c = a(b) }
+> > > > 
+> > > > which changes both the function signature and the order of terms as
+> > > > well, is just a single add-on treewide patch.
+> > > 
+> > > Is the plan for subsystem maintainers to pick up the relevant patches,
+> > > and then do the treewide change one release cycle later?
+> > 
+> > I'll try to keep the patches in a single tree (tip:x86/msr)
+> > in the hope of not prolonging the pain two cycles - but it's
+> > of course fine for maintainers to pick up the patches too
+> > (most of them are standalone), we'll sort it all out in the end.
 > 
-> get_pg_owner(DOMID_IO) succeeds, returning a pointer to the dom_io
-> pseudo-domain. The subsequent get_page_from_gfn(dom_io, ...) then
-> attempts to walk dom_io's P2M table, which is not initialized for
-> pseudo-domains, resulting in a data abort in p2m_get_entry() when
-> it dereferences the invalid pointer returned by p2m_get_root_pointer().
-> 
-> Replace get_pg_owner() with explicit domain lookup logic matching
-> the x86 implementation: handle DOMID_XEN via rcu_lock_domain(dom_xen),
-> and resolve all other domain IDs via rcu_lock_remote_domain_by_id(),
-> which rejects pseudo-domains (DOMID_IO, etc.) that are not present in
-> the domain hash, returning -ESRCH before any P2M access occurs.
-> 
-> Fixes: 615897bc6c01 ("xen/arm: Allow a privileged domain to map foreign page from DOMID_XEN")
-> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+> Ingo, would you be fine with me posting patch updates just as replies to the
+> original patch emails? This would speed things up, as I wouldn't need to wait
+> for more review input of all the patches before sending out new versions.
 
-I would be ok to take this patch in for 4.22. Oleksii, other maintainers?
+Sure, that works for me too. I've picked up a couple of -v2 patches
+already.
 
-~Michal
+Thanks,
 
+	Ingo
 
