@@ -4,41 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8756C44507
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Jul 2026 09:39:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1364868.1615783 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8C31C44520
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Jul 2026 11:45:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1364930.1615793 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkf2F-00041L-OG; Fri, 17 Jul 2026 09:39:11 +0000
+	id 1wkh0D-0003qE-DN; Fri, 17 Jul 2026 11:45:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1364868.1615783; Fri, 17 Jul 2026 09:39:11 +0000
+Received: by outflank-mailman (output) from mailman id 1364930.1615793; Fri, 17 Jul 2026 11:45:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkf2F-00041E-Kc; Fri, 17 Jul 2026 09:39:11 +0000
-Received: by outflank-mailman (input) for mailman id 1364868;
- Fri, 17 Jul 2026 09:39:10 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wkh0D-0003q6-7i; Fri, 17 Jul 2026 11:45:13 +0000
+Received: by outflank-mailman (input) for mailman id 1364930;
+ Fri, 17 Jul 2026 11:45:12 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mingo@kernel.org>) id 1wkf2E-000415-HJ
- for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 09:39:10 +0000
+ (envelope-from <Oleksii_Moisieiev@epam.com>) id 1wkh0C-0003q0-3G
+ for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 11:45:12 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkf2D-0093NQ-BL
- for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 11:39:09 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wkh0B-003tJt-2h
+ for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 13:45:11 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <mingo@kernel.org>)
- id 6a59f82c-e002-0a2a0a5209dd-0a2a450b93cc-42
- for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 11:39:09 +0200
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <mingo@kernel.org>)
- id 6a59f83b-b7e8-0a2a450b0019-ac6904febcd8-3
- for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 11:39:08 +0200
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id B88A660A5E;
- Fri, 17 Jul 2026 09:39:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 583FD1F00A3A;
- Fri, 17 Jul 2026 09:38:47 +0000 (UTC)
+ (envelope-from <Oleksii_Moisieiev@epam.com>)
+ id 6a5a15b5-e002-0a2a0a5209dd-0a2a4505bb1e-40
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 13:45:11 +0200
+Received: from [52.101.65.133]
+ (helo=DU2PR03CU002.outbound.protection.outlook.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Oleksii_Moisieiev@epam.com>)
+ id 6a5a15c4-4cb1-0a2a45050019-34654185b8b4-3
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 13:45:08 +0200
+Received: from PA6PR03MB10266.eurprd03.prod.outlook.com
+ (2603:10a6:102:3cd::18) by AS8PR03MB6949.eurprd03.prod.outlook.com
+ (2603:10a6:20b:293::9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.12; Fri, 17 Jul
+ 2026 11:45:03 +0000
+Received: from PA6PR03MB10266.eurprd03.prod.outlook.com
+ ([fe80::2cc9:8d65:65de:c005]) by PA6PR03MB10266.eurprd03.prod.outlook.com
+ ([fe80::2cc9:8d65:65de:c005%4]) with mapi id 15.21.0223.011; Fri, 17 Jul 2026
+ 11:45:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,146 +55,208 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784281146;
-	bh=+qglHjGyDrUKXlad/2R3jZv9/pC2LefY+KO7XkEkSko=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=SjJUoV11rwuT+5AizqR6Ts6eoKb6FIGre1Dux163GhMlqZlyOXajtWZ4fayfgVpH9
-	 m9cgU5vVhldyF6Xw1Kb8rVhViKflUSonqgQ1XE4NCnm2BVJY+TnbSkh9Z3rIVPhd6s
-	 zU7mHk1ONLaADnjIxp+I5dcB3ZX2ynHffnRRVYklEoaeIIz/ZSYdwAkj3wzibEUx9o
-	 HnS12bG6z8ihRuFocqmHyHuXUYtM9fOcbFkvkQ/W/8UHnOkWe7OeZRKXrCxZZCA9nQ
-	 s6WCpg4YrH/mKvwpz01fi9YDCJ3Uu05lBNYlNAvTtCCufAR6IHv/1e4r2yoFLfOqhY
-	 leqJTK6WbuRqA==
-Date: Fri, 17 Jul 2026 11:38:45 +0200
-From: Ingo Molnar <mingo@kernel.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: Sean Christopherson <seanjc@google.com>, Arnd Bergmann <arnd@arndb.de>,
-	linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org,
-	"linux-edac@vger.kernel.org" <linux-edac@vger.kernel.org>,
-	x86@kernel.org, linux-acpi@vger.kernel.org, kvm@vger.kernel.org,
-	linux-coco@lists.linux.dev, linux-pci@vger.kernel.org,
-	virtualization@lists.linux.dev, linux-ide@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, linux-fbdev@vger.kernel.org,
-	linux-crypto@vger.kernel.org,
-	"open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
-	linux-hyperv@vger.kernel.org, linux-hwmon@vger.kernel.org,
-	linux-perf-users@vger.kernel.org, linux-mtd@lists.infradead.org,
-	platform-driver-x86@vger.kernel.org,
-	"Rafael J . Wysocki" <rafael@kernel.org>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	Zhang Rui <rui.zhang@intel.com>,
-	"lukasz.luba@arm.com" <lukasz.luba@arm.com>,
-	Jason Baron <jbaron@akamai.com>, Borislav Petkov <bp@alien8.de>,
-	Tony Luck <tony.luck@intel.com>,
-	Yazen Ghannam <yazen.ghannam@amd.com>, Len Brown <lenb@kernel.org>,
-	Pavel Machek <pavel@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
-	Ingo Molnar <mingo@redhat.com>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	"Kirill A. Shutemov" <kas@kernel.org>,
-	Rick Edgecombe <rick.p.edgecombe@intel.com>,
-	Pu Wen <puwen@hygon.cn>, Bjorn Helgaas <bhelgaas@google.com>,
-	Ajay Kaher <ajay.kaher@broadcom.com>,
-	Alexey Makhalov <alexey.makhalov@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Viresh Kumar <viresh.kumar@linaro.org>,
-	Reinette Chatre <reinette.chatre@intel.com>,
-	Dave Martin <Dave.Martin@arm.com>,
-	James Morse <james.morse@arm.com>, Babu Moger <babu.moger@amd.com>,
-	Tony W Wang-oc <TonyWWang-oc@zhaoxin.com>,
-	Damien Le Moal <dlemoal@kernel.org>,
-	Niklas Cassel <cassel@kernel.org>, Dave Airlie <airlied@redhat.com>,
-	Helge Deller <deller@gmx.de>, linux-geode@lists.infradead.org,
-	Olivia Mackall <olivia@selenic.com>,
-	Herbert Xu <herbert@gondor.apana.org.au>,
-	Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	"K. Y. Srinivasan" <kys@microsoft.com>,
-	Haiyang Zhang <haiyangz@microsoft.com>,
-	Wei Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>,
-	Long Li <longli@microsoft.com>, Guenter Roeck <linux@roeck-us.net>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Arnaldo Carvalho de Melo <acme@kernel.org>,
-	Namhyung Kim <namhyung@kernel.org>,
-	Mark Rutland <mark.rutland@arm.com>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-	Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
-	Adrian Hunter <adrian.hunter@intel.com>,
-	James Clark <james.clark@linaro.org>,
-	Josh Poimboeuf <jpoimboe@kernel.org>,
-	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
-	Vitaly Kuznetsov <vkuznets@redhat.com>,
-	Andy Lutomirski <luto@kernel.org>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Huang Rui <ray.huang@amd.com>,
-	Mario Limonciello <mario.limonciello@amd.com>,
-	Perry Yuan <perry.yuan@amd.com>,
-	K Prateek Nayak <kprateek.nayak@amd.com>,
-	"srinivas.pandruvada@linux.intel.com" <srinivas.pandruvada@linux.intel.com>,
-	Artem Bityutskiy <artem.bityutskiy@linux.intel.com>,
-	Artem Bityutskiy <dedekind1@gmail.com>,
-	Miquel Raynal <miquel.raynal@bootlin.com>,
-	Richard Weinberger <richard@nod.at>,
-	Vignesh Raghavendra <vigneshr@ti.com>,
-	Ashok Raj <ashok.raj.linux@gmail.com>,
-	Hans de Goede <hansg@kernel.org>,
-	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Rajneesh Bhardwaj <irenic.rajneesh@gmail.com>,
-	David E Box <david.e.box@intel.com>, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH 00/32] x86/msr: Drop 32-bit MSR interfaces
-Message-ID: <aln4JYxRgdpC3Wse@gmail.com>
-References: <20260629060526.3638272-1-jgross@suse.com>
- <d7c1db52-529a-43cc-ac7d-38b52627e8bc@app.fastmail.com>
- <c1608c48-13c2-4290-826b-28b5ca51eaf7@suse.com>
- <7332feff-2649-496c-8e49-b0a19eb54a32@app.fastmail.com>
- <akJUz0kYkEBdLSZ3@gmail.com>
- <akQR9YMtMHReJTfB@google.com>
- <akY4U0jUZm4HOGZ_@gmail.com>
- <99228803-b8b7-47a3-b77c-6fdf3b785730@suse.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=rTWAy/NFDaR4OQoklfPomJn0AazYhRTjPrJS0EWXV8Rgi2b+oDnR6hwRvccVsAsXCkEUdq+uuZiJGZEr6KB63myFQyvINNgxz8BxoQb2X25+51FXhcLB1KHY2tD27obq/j3UxalwfHuHQqC95fECXkxJdSh0X8GyqfMW/XrsoF1C6wMbr/gGu+aPhCn992Pje88cGr+YAPl0onRcyef4P6A5HnIaCRGHgbfCkjrEfiZ9qyudRu/WWVzjNQG5r5dIET072cqh7DpkF/HH84fjxGirduGIm9V3jl9OABEmwjM7zKBcuDo61GlQZWJMw871n2y0eVp2LYzOn/2BFKsVwA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OrTbwqj4aI37Sajy1Vfhv29q4RHLcdz3hbwUtcIMxyE=;
+ b=NnK6WQpSjkSz8N6p/G3MXUIIF6uG3mohASvUR69Au/0oWhhpZ3BaH6EeFEpUVySYXCqQCYCv631PLn7UVa10lE7jQbxiFqc/wWc7zZyrOu6CI1/+g8j1FPX+skbHXbAIy/y0t5y2NdVbH0JydKmD8jOra5RhuBWGpyL4930l+Zww58FyLMiqPcjpNcJiIEx8Q0gf7g3y6+D6yRFfyWMjT97FicunzC61N2hr1qOKMOCZllQZZTrEjVuMQ2uxj5eybauoAh9/VjR3hPzo1OrPVqymaKcErlsq0LhXXmH3wvvZ0sQOYtvpJuYCdVuT5GzT3FzO5Xj+LWE4YeQhjwuYHg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OrTbwqj4aI37Sajy1Vfhv29q4RHLcdz3hbwUtcIMxyE=;
+ b=sO/JWylD8UE2LFTTbe9Yj0SwcDf6cskNCN6lkWx1n87Mh66r5JP+Zrq8jFL2pm6ESKudw4TsxusSetSxEnv2SGR2+QsHnnjXf3qcpXAOPXRfUJI7I2k0+xCPECxkPzFQU+eGE6lIb/V2zyBKON0TJZbHT+yNKXz2WzjZjw6+4H3FpJ9ROGWzrMzxa4kM4dUkm3ogwGe2zr9BZoSZqVIrD7EnwRCikg0iEYnE25GUFXu8DLLifygyI0xLQdG54/LcsYmUluT7ptP+zTMCI86eIEdvqEngHyyxcfc4Zo2kvRNIJZJk5KR66DHS7gHr7iVFIuz7bYSJfiBOkDoNNiQMRA==
+From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Dario Faggioli <dfaggioli@suse.com>, George Dunlap <gwd@xenproject.org>,
+	Juergen Gross <jgross@suse.com>, Meng Xu <mengxu@cis.upenn.edu>, Oleksii
+ Moisieiev <Oleksii_Moisieiev@epam.com>
+Subject: [PATCH v2] xen/sched: rt: fix NULL cpupool dereference in
+ move_repl_timer()
+Thread-Topic: [PATCH v2] xen/sched: rt: fix NULL cpupool dereference in
+ move_repl_timer()
+Thread-Index: AQHdFeG00FErvj0nOEaMWTVLFzCjeQ==
+Date: Fri, 17 Jul 2026 11:45:03 +0000
+Message-ID:
+ <f4b75c23400b1a9db44596a28ca9683dbf05d419.1784288688.git.oleksii_moisieiev@epam.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PA6PR03MB10266:EE_|AS8PR03MB6949:EE_
+x-ms-office365-filtering-correlation-id: 4e6edfd0-305c-4aa4-0ecf-08dee3f8d70a
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|366016|1800799024|23010399003|376014|38070700021|10067099003|56012099006|18002099003|11063799006;
+x-microsoft-antispam-message-info:
+ VUogzEupJaadcyg6u5WwmQWshOrUmn/Rp2gMf9wPjA8UfDv4idTKKguGAYFmmR6D2IAQOyq9j5nOOP5kb4xR23akFYgx5YTiFu0rrXf1/FIDO2onoPur/Tv+RKyawFH7mBgDkUaIdg7V6wraTKpi0+X63cjcx5JstaAqglzeeEwcCpaToFZwi5CdsAfGj/X10ppH821JXbKES6jGu1LWK0JatJIt4tsiz4MlEQsoULuc0A379E1okaliBbSA1HTPPNNTd47ve21MzCythXtyorSOnuvXhjYyujIojr/agMLM4aOUwy8kANilqfMGSi2LJgCAy1jbZop640uB7t1iajjMX6VNgLzJGKO/loFoElijn26a2xzzIWFEBwCSrxzhySKzYY7xnKULa+GchEMT8MZjCGEf/G/Fs+8o6ph/immsDP968mA4RNacO4Z6OhpCnGadVwYwTj5zPKF55T1p6x7mv4L/Saz+jGI2/uO/c7bE6Dwv1IcId2Rea8cEVa7/XtxcK3n2wiaq+sJrA968eQSJWnxdsu3rmuqKNZoICfY2MPiHawRXaT602pJz7bhS2+oIWnnRsjP5zUDEPudH63wesA4cyPrDATz3a+DZkwexIRtConyQsKpVvMjBHN2EnXPUgWZfIg/3snx2z2OnV4/CWQ8kDwmArvJ2bed482odCCCVHoDDYGNcrSXHhDLmUcu/xu0TbgpPjEu66zxwOYlyM0nE2jOAA6YJGllk+EE=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA6PR03MB10266.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(38070700021)(10067099003)(56012099006)(18002099003)(11063799006);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?TYecYWQ3FZAgLPyRst8ULGDcRC1ZA9LLG9lBxo9y5rvXi4G4fyw2ROVFb+?=
+ =?iso-8859-1?Q?aH2w181F7I/mS+whj2CGuVH66nbez4h2OOvdO7RDLOWZgATBZnaIkUVL7H?=
+ =?iso-8859-1?Q?UgjoPPaD1zFeyEAnwfdIHrAmUnqpK6/9QWnE8ygL96uZqCg8OqZ4S6Z1Wz?=
+ =?iso-8859-1?Q?d/RGxuX0u/AXV4XqJILrYk+1RcajRWi3zKaDNfTFkJHgaReh7W54N9tYb2?=
+ =?iso-8859-1?Q?mtcbKn8XhtnQmCDH8JB3rZrTbSbyV0dtoY60FC23ItU1hB5VZKuEU3w9i1?=
+ =?iso-8859-1?Q?2Tz5pMIBZenvvXVObuXGgKMuGkX8h/5rdrfAh4TUFRE7mxs63aluxqq+AV?=
+ =?iso-8859-1?Q?Qp9SQ7m8QF57KX8X/Vlv0lSyoaaVtDUWQfa6TbH8jJSard025PZX3wzX6p?=
+ =?iso-8859-1?Q?OldwNZFKZirmxGD5sVkodO1z0yHVAZynPKLEH0eFQRBUlKQ0AXYOVdb1tV?=
+ =?iso-8859-1?Q?z/FFuUKEjOjt07CWnwBDmTW2LuJWHKnZgai3EP+hPjfESv/sa0SaIc7mRN?=
+ =?iso-8859-1?Q?8e6U4Rv+FsVK4af01mVL9kLjfB0fnXg6UYYyp07MbtPOnWdwp/oH+PEPZc?=
+ =?iso-8859-1?Q?Xq0E5pVCaHB6DJCsOOZnmf32CYFV0UM9M6WLuDWEiZS2wfAzeNmf9wgVOs?=
+ =?iso-8859-1?Q?2Zx755r9iA3yYh/uqbQBOTJMhlXcwqZv9Ujgkta/y+M0Qg0epQLd7My/IT?=
+ =?iso-8859-1?Q?Cf/Wrj5c+YHwrRxXAnck2b/F6O5CxWqnKeYTfKIRGythTgLIgydEolvxNH?=
+ =?iso-8859-1?Q?FLnbz+ZmGQI1U/ZEJ21lluOdBbKHB23Dbu59fV/5CtHSWI5h3OQ0ItC2nw?=
+ =?iso-8859-1?Q?VZz9OVcbj5xooELRhdkF6eJACDBpGZ2+kSrH2eygb4z7hJEbHL6lZJWLTy?=
+ =?iso-8859-1?Q?L8ixVyZrY4RMQMHLh/CFFTNBM8XulMbqM21QNLG9BSNU7igDWJAC235XV6?=
+ =?iso-8859-1?Q?yhBoYMgSBGI9zuyv2WHVvaTh47KBFAWzv6pKSKEHh2tn0SkeqaCwv5gLup?=
+ =?iso-8859-1?Q?ExoJSkH6oV/FNYsrdd/h5uu0m0hkDIYsoUswpqXYFyr74s6f/C7wzkCp/n?=
+ =?iso-8859-1?Q?jEYota66JOL6U9NQprUoA4MkTqSvgrj7LNLFu/5FTtrBOt5jrfqUOKNf9q?=
+ =?iso-8859-1?Q?pBWXdTBXX53zsFOu69xsBQLmhD9E/O6NY8XASur8sXqAQy9sMrYbrynvQ0?=
+ =?iso-8859-1?Q?M/jL86w6Ibikdrx6ToTxriKGIUBYiIRnxC9/9xhKQOTwV0CkZ0mPz37UYj?=
+ =?iso-8859-1?Q?BPHL+aFq4oWJxCTBDNnV4VzXHlpqD9CtFDrgyQRZia0dCW/Xdud3aK87nb?=
+ =?iso-8859-1?Q?4ai1cYH7TjheXudAZg3r2PKfRjdmSYI/ex55M60sEOr9Iee+YWRw1Dk0S9?=
+ =?iso-8859-1?Q?p/tBCS5vexOFzZU7q0TKIoP9Aa0jMCV6/mYfBhbrH/j5Vkt4Pj1ZIQctIF?=
+ =?iso-8859-1?Q?XXKUGpmAS2gjx4hkU0FHks3d2YkKeU+eYAyJFQPPtRlO+9mVkNQ/6a7foK?=
+ =?iso-8859-1?Q?CpIQBqHFQOVOkoeUUwye2tiFlVEl8WEJLasz/cTcVMVXwtdClF4PtT/Exe?=
+ =?iso-8859-1?Q?RhqSlbt7FvT+up22kSRDwAL0u1IzWNJ56lzUqUPfPXiibolwEoKxPlzrJ7?=
+ =?iso-8859-1?Q?ulyz++90mn5JrEn4nmA7GNcg/xgtuuSz25s+X/ta6ZMu8UH0RO1UW4ReDu?=
+ =?iso-8859-1?Q?Gf1lQunX9GkQW7KZS0rZaJjkPmlwEb63d3hiz1JCnjX8PcmDlwVXpPAWPQ?=
+ =?iso-8859-1?Q?9ap2nVCC3tDlYLqdrEJ9GbcxLd7BoYCKF72F+jxoFe9pH7hs9lu/U4VE3g?=
+ =?iso-8859-1?Q?6lLDQCrcMd3pDIAj1lkKpbqaFIWDInk=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <99228803-b8b7-47a3-b77c-6fdf3b785730@suse.com>
-X-purgate-ID: tlsNG-42698a/1784281148-1B0DD9EA-11A2E36E/0/0
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PA6PR03MB10266.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4e6edfd0-305c-4aa4-0ecf-08dee3f8d70a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Jul 2026 11:45:03.1675
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: C9/VBiPjEcUwC2dUO/uopyNtgEzykaPNHBqEFBkT+0uMqOloqbm6Nt4uwt3+wylLTpm01Ju/vuTszDYU8CTuOeHwRx5fss96dSktEgVK2Zg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB6949
+X-purgate-ID: tlsNG-c201ff/1784288708-F7ABF2A1-69EC98EC/0/0
 X-purgate-type: clean
-X-purgate-size: 1373
+X-purgate-size: 4094
 
+schedule_cpu_rm() clears the cpupool pointer of the scheduling
+resource before calling sched_deinit_pdata():
 
-* Juergen Gross <jgross@suse.com> wrote:
+    sr->cpupool =3D NULL;
+    ...
+    sched_deinit_pdata(data->old_ops, data->ppriv_old, cpu);
 
-> On 02.07.26 12:07, Ingo Molnar wrote:
-> > 
-> > * Sean Christopherson <seanjc@google.com> wrote:
-> > 
-> > > > Note that the individual patches are IMO significantly easier to review
-> > > > through the actual 32-bit => 64-bit variable assignment changes done
-> > > > in isolation (which sometimes include minor cleanups), while
-> > > > the Coccinelle semantic patch:
-> > > > 
-> > > >     { a(b,c) => c = a(b) }
-> > > > 
-> > > > which changes both the function signature and the order of terms as
-> > > > well, is just a single add-on treewide patch.
-> > > 
-> > > Is the plan for subsystem maintainers to pick up the relevant patches,
-> > > and then do the treewide change one release cycle later?
-> > 
-> > I'll try to keep the patches in a single tree (tip:x86/msr)
-> > in the hope of not prolonging the pain two cycles - but it's
-> > of course fine for maintainers to pick up the patches too
-> > (most of them are standalone), we'll sort it all out in the end.
-> 
-> Ingo, would you be fine with me posting patch updates just as replies to the
-> original patch emails? This would speed things up, as I wouldn't need to wait
-> for more review input of all the patches before sending out new versions.
+For RTDS, rt_deinit_pdata() calls move_repl_timer() when the
+replenishment timer lives on the cpu being removed, and
+move_repl_timer() dereferences get_sched_res(old_cpu)->cpupool
+without checking it for NULL. Removing a pCPU owning the timer from
+an RTDS cpupool therefore dereferences NULL + 0x10 (the res_valid
+member) and panics:
 
-Sure, that works for me too. I've picked up a couple of -v2 patches
-already.
+    (XEN) Data Abort Trap. Syndrome=3D0x1c28005
+    (XEN) Walking Hypervisor VA 0x10 on CPU0 via TTBR ...
+    (XEN) Xen call trace:
+    (XEN)    [<...>] find_next_bit+0x74/0xa8 (PC)
+    (XEN)    [<...>] rt.c#move_repl_timer+0xb8/0xec (LR)
+    (XEN)
+    (XEN) Panic on CPU 0:
+    (XEN) CPU0: Unexpected Trap: Data Abort
 
-Thanks,
+Reproducer, on any host with at least 2 pCPUs and RTDS compiled in
+(observed on arm64, but the path is common code):
 
-	Ingo
+    xl cpupool-create name=3D"test" sched=3D"rtds"
+    xl cpupool-cpu-remove Pool-0 1
+    xl cpupool-cpu-add test 1
+    xl cpupool-cpu-remove test 1
+
+The last command moves the RTDS replenishment timer to cpu1 (first
+and only cpu of the pool) and then removes cpu1, hitting the NULL
+dereference in the sched_deinit_pdata() callback.
+
+Use the cpupool back-pointer of the scheduler instead of the one of
+the scheduling resource. It is set by cpupool_create() before any
+pCPU can be assigned to the pool and stays valid for the whole
+lifetime of the scheduler, so it is still available when
+rt_deinit_pdata() runs. Other schedulers already rely on it the same
+way, e.g. credit2 in cpu_add_to_runqueue().
+
+Fixes: b6f5334aeaca ("sched: fix cpu offlining with core scheduling")
+Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
+---
+
+Changes in v2:
+- Do not kill the replenishment timer when the cpupool still owns other
+pCPUs.
+- struct scheduler already back-pointer that could be used
+(see 524cc89c288b "xen: cpupool: add a back-pointer from a scheduler to its=
+ pool").
+
+ xen/common/sched/rt.c | 16 +++++++++++-----
+ 1 file changed, 11 insertions(+), 5 deletions(-)
+
+diff --git a/xen/common/sched/rt.c b/xen/common/sched/rt.c
+index f1feb4384e..3896814dfd 100644
+--- a/xen/common/sched/rt.c
++++ b/xen/common/sched/rt.c
+@@ -764,10 +764,16 @@ rt_switch_sched(struct scheduler *new_ops, unsigned i=
+nt cpu,
+     return &prv->lock;
+ }
+=20
+-static void move_repl_timer(struct rt_private *prv, unsigned int old_cpu)
++static void move_repl_timer(const struct scheduler *ops, unsigned int old_=
+cpu)
+ {
+-    cpumask_t *online =3D get_sched_res(old_cpu)->cpupool->res_valid;
+-    unsigned int new_cpu =3D cpumask_cycle(old_cpu, online);
++    struct rt_private *prv =3D rt_priv(ops);
++    /*
++     * Use the cpupool of the scheduler: the one of the scheduling resourc=
+e
++     * is already cleared when this is called from rt_deinit_pdata().
++     */
++    const struct cpupool *c =3D ops->cpupool;
++    unsigned int new_cpu =3D c ? cpumask_cycle(old_cpu, c->res_valid)
++                             : nr_cpu_ids;
+=20
+     /*
+      * Make sure the timer run on one of the cpus that are still available
+@@ -794,7 +800,7 @@ rt_deinit_pdata(const struct scheduler *ops, void *pcpu=
+, int cpu)
+     spin_lock_irqsave(&prv->lock, flags);
+=20
+     if ( prv->repl_timer.cpu =3D=3D cpu )
+-        move_repl_timer(prv, cpu);
++        move_repl_timer(ops, cpu);
+=20
+     spin_unlock_irqrestore(&prv->lock, flags);
+ }
+@@ -812,7 +818,7 @@ rt_move_timers(const struct scheduler *ops, struct sche=
+d_resource *sr)
+     if ( prv->repl_timer.status !=3D TIMER_STATUS_invalid &&
+          prv->repl_timer.status !=3D TIMER_STATUS_killed &&
+          !cpumask_test_cpu(old_cpu, sr->cpupool->res_valid) )
+-        move_repl_timer(prv, old_cpu);
++        move_repl_timer(ops, old_cpu);
+=20
+     spin_unlock_irqrestore(&prv->lock, flags);
+ }
+--=20
+2.43.0
+
+base-commit: dc4342ccd35a8f3fcc8832885453a08179cd0ccf
+branch: amoi_sched_7=
 
