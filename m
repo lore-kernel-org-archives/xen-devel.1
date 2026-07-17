@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB827C4450F
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Jul 2026 06:35:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1364668.1615685 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E0D6C44507
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Jul 2026 07:12:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1364692.1615734 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkcAL-0008TK-V4; Fri, 17 Jul 2026 06:35:21 +0000
+	id 1wkcjx-0006NE-A2; Fri, 17 Jul 2026 07:12:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1364668.1615685; Fri, 17 Jul 2026 06:35:21 +0000
+Received: by outflank-mailman (output) from mailman id 1364692.1615734; Fri, 17 Jul 2026 07:12:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkcAL-0008TD-QZ; Fri, 17 Jul 2026 06:35:21 +0000
-Received: by outflank-mailman (input) for mailman id 1364668;
- Fri, 17 Jul 2026 06:35:20 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wkcjx-0006Lr-4r; Fri, 17 Jul 2026 07:12:09 +0000
+Received: by outflank-mailman (input) for mailman id 1364692;
+ Fri, 17 Jul 2026 07:12:08 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wkcAK-0008T7-4O
- for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 06:35:20 +0000
+ (envelope-from <Mykola_Kvach@epam.com>) id 1wkcjw-0006Fh-2j
+ for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 07:12:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkcAJ-00A1X1-1Q
- for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 08:35:19 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wkcjv-0083h9-FP
+ for xen-devel@lists.xenproject.org; Fri, 17 Jul 2026 09:12:07 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a59cd23-e002-0a2a0a5209dd-0a2a45039fde-10
- for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 08:35:18 +0200
-Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a59cd26-fae8-0a2a45030019-d155dd30b4bb-3
- for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 08:35:18 +0200
-Received: by mail-wr1-f48.google.com with SMTP id
- ffacd0b85a97d-476d8e647e9so6820184f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jul 2026 23:35:18 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f63eeece9sm1087742f8f.37.2026.07.16.23.35.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Jul 2026 23:35:17 -0700 (PDT)
+ (envelope-from <Mykola_Kvach@epam.com>)
+ id 6a59d5be-2eae-0a2a0a5409dd-0a2a4507dbc4-18
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 09:12:07 +0200
+Received: from [52.101.70.127]
+ (helo=AS8PR04CU009.outbound.protection.outlook.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Mykola_Kvach@epam.com>)
+ id 6a59d5c6-b4ea-0a2a45070019-3465467f3013-3
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 09:12:06 +0200
+Received: from AS8PR03MB9746.eurprd03.prod.outlook.com (2603:10a6:20b:61d::18)
+ by AS8PR03MB7985.eurprd03.prod.outlook.com (2603:10a6:20b:428::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.13; Fri, 17 Jul
+ 2026 07:12:05 +0000
+Received: from AS8PR03MB9746.eurprd03.prod.outlook.com
+ ([fe80::cf11:309:1384:58f7]) by AS8PR03MB9746.eurprd03.prod.outlook.com
+ ([fe80::cf11:309:1384:58f7%6]) with mapi id 15.21.0223.011; Fri, 17 Jul 2026
+ 07:12:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,116 +55,510 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784270118; x=1784874918; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=i64y5Ylws3MCEM9Vm4wVilaHLyqkjcjnhA3fxTdiclM=;
-        b=JMtfpMxk8/6kKTGiFS8y4NzDu2CgjWIm4jhoVQY7KyL1PRIySHlI0rzMo3TZNl5eo0
-         rPmkrMTpIn7eVABuX1tM7PtNReOOroXlLQF41m2iqYc2jz8+1xwS3SzdDXnKrEWZGRZ0
-         cJZjPBrjuMvORGnnSuKpr/0WKMamMoDwlMrOL4BTem8tYTzfR77sgG6pKAv/E6rEobPP
-         pwvePuEyb+oraP96wcp81A0tK0nO+BVp//NRgxCaeOKtj314mVcQl+lA+nhN0pQKShq5
-         YqTO6XffBhefLRwwdCMlykzu4xbw2YM9qYh7ATMWZijG9n9sS2Iz5z/tuE2bXsxgc3fI
-         YOhQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784270118; x=1784874918;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=i64y5Ylws3MCEM9Vm4wVilaHLyqkjcjnhA3fxTdiclM=;
-        b=LeIgjkXpyooR+wBm9gma9b37K01u6xkfq2VpvPO9Wzxj9VL1jJon0rEQIrEnyNev2v
-         AwKc39VXh+m7VnlELoNfftT57hyUZa733WNKsWilPTkWiamDhDylMXGwzO7YSWeJLYcY
-         tZXI6TNVtyf6gyU0oCt/6IJIit6f+saPOcE1C494b2bp/vjU9Q3T58LSyxDN9pWP8CP0
-         F9hVc/MjoM/PyJFXg8zAkDfuBM9vBE/oRx1IsiwRn0hbdwuqndXKoqJuA26+yZhWlhbq
-         KiqOMUPxoFAf4dtJERZVkAuitsFJ3QzY1dURJB6TzS1iuBu+61UZ2/uLotq/TkbNYQ5D
-         96Ew==
-X-Forwarded-Encrypted: i=1; AHgh+RpFww88KI1Y4kylAYJVkGACQ41w9QJnwBKJqIWXU298flOdKHXe1pFbWNqux9rH/EpWavcs0XUoTjM=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Ywo/hKMNCVHSdqBHkK3KeD6fs7ZfgCLKQPhM2vfqPg6awP0xdkL
-	nLroGew0E80XRxsn5krZnfuSlVzOH/Ef71fhOIrKe7qX8fgTMW/d0ZNP99s5PHVsHg==
-X-Gm-Gg: AfdE7cnRIstNGi23ORPsPwn7AReiRMbeaVwNC/GjSEPgO06MyvxwKOO9sC3clmnmpla
-	Ef/sRjXK623hBj+ZekZgFK1ryTIvBSYeYPi1lhFO5o7ZzCWaASQWhUjT5UVOsJZYpNhh9vYTejI
-	xk9c1oWie0C1pJ19h/KuTQ97OYvfrDRBnYaD9iOmT0rN9VsgwrFR7gYShbSXcckPh71ggG61Ni5
-	sMYwgtIwApfd2/116f9JnTjgDCh/S89WBh0fF51fCH5htSW2hK2Ts8jUUVNSvWxzsn7yoqy02Rj
-	J8AeBBKl+4Sl2QFR82IITeOnpgEEii/hleztBHoE0b4DVVLRfuZDveSJMYEkNXwtcamU03+dcjw
-	wArjDtlS90yBpDOaFTWbp66EBZYCBluwQvp4oK8xRTXSMh1DhG0vN2f5o/jfpIQdM/2UZKfDjaJ
-	CEFTRK48nckvzH9g3uobizb4oAwUis28WohMJDnc0EetYmOiOkLYQWFRQGCYrOBVRb0A==
-X-Received: by 2002:a05:6000:4201:b0:472:ec66:274a with SMTP id ffacd0b85a97d-47f6230649cmr1677474f8f.7.1784270118205;
-        Thu, 16 Jul 2026 23:35:18 -0700 (PDT)
-Message-ID: <0381fa54-8f7a-403c-99d7-59497f5e9850@suse.com>
-Date: Fri, 17 Jul 2026 08:35:16 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=dUc/2qtKQ5ZlnX8XY9KtmUFGA/haDup8GMKT7p/Fn1YHlPR3i7YEcvElRzCTrO4kpJfBmRFRUKa2YNQiop40b5V7gQ2SAcqpeuJ5QLO2VQ/hITRkr1wT6DGaYRvJkdM6cCWgjly4aCzw4I+p1GPo40SORTyk7zexc8/pQvitMP4ULkrgTs1/GaFitVc7q7jE/K0jgyic7rMHptXHa1p+UZyp+AL6TiJ6GLB/iHJuaK3TdDYtM0f691MA51lAK5oYFqYlaemCQp9fEuRMLQDW0HJD0hn03TzhH5WIhjujDi/I0yI2UXo8sJhYS89PwQxoHn6yI5WRnhvTFhNPvJH2RA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=WIciFQaFNHypn0GkHYDK8/qC14CWFarWv6ht6FIi8uQ=;
+ b=qPT+PUTDy7m493s1nop/LFySYEZK03l6giNDL7mW5C6oofJZQiVaWwxMmRZQhoyvSx7LLUaMdmoPvkb3aaxxp4u6f2+pD8hq9oTzJzZWF3PIoaXRUgmCba0NZI+9LLxmHg6/9HsShaz5HFlrKogc4T85IJt/LLJoAeKgQXR1txfwgdx98ROWV2ppcGm7q+43zKObPXAKEFR5ELJZTBItsQma0zVQn7s/UI837MFcYSwVBhPfuYIIxBu9UqhB/UpLK//NbAqmutSIneLe8O+NphGgqrP5BHCoWBHQvmhMMnpiHP847nwJVniv+NjP/Sug3Hj81LrkP93om548LKSDBg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=WIciFQaFNHypn0GkHYDK8/qC14CWFarWv6ht6FIi8uQ=;
+ b=PMUkvUp7b52RVb6lef07/n8F3gyhIl0MbLFQqEW4Nhkd9KBlF0k0l3wK5ZTT2OeMneu8lLhlnZE3q9/Oi7k89a8/DvU1kPzHk4g8H9TYi78V3yk7LAAMKWJfoWS0VSeIcTweZ5G1Ef31IstobOTpOgKAVMGP+GEg6KDn0f4CVgCICWpYSTFZGcweRHk+X4v3th2KrGFxKX9quG4hX13rrrc5b/xVaIn+QvAa2wD1wdMF8PUtGHQNjgJpoTobjtVz+UYrt0kdtCp9r+AAX1ioXWrkTXp7gymTNB53HNLt+68QUWyuDMTO3M8QTK4exqd3QNEx4vn7PhTqpGJjYbDC5Q==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+From: Mykola Kvach <mykola_kvach@epam.com>
+To: xen-devel@lists.xenproject.org
+Subject: [REQUIREMENTS][PATCH v2 5/6] reqs: add guest vITS requirements
+Date: Fri, 17 Jul 2026 10:11:26 +0300
+Message-ID: <b593bb50e580ca32247c2ba7e3aa3b412ef360e3.1784272211.git.mykola_kvach@epam.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1784272211.git.mykola_kvach@epam.com>
+References: <cover.1784272211.git.mykola_kvach@epam.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: WA0P291CA0022.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1::22) To AS8PR03MB9746.eurprd03.prod.outlook.com
+ (2603:10a6:20b:61d::18)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 3/7] xen/console: use memcpy() in conring_puts()
-To: dmukhin@ford.com
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, julien@xen.org,
- michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org,
- xen-devel@lists.xenproject.org
-References: <20260713181619.672176-1-dmukhin@ford.com>
- <20260713181619.672176-4-dmukhin@ford.com>
- <40223b4b-4cf4-4cd2-8085-5323784b2d33@suse.com> <alnJI+8Whp3ES3Hz@kraken>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <alnJI+8Whp3ES3Hz@kraken>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1784270118-6CADC4E9-F7CE7232/0/0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR03MB9746:EE_|AS8PR03MB7985:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6ef09fd2-55b5-46bc-f819-08dee3d2b509
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|366016|23010399003|376014|18002099003|22082099003|3023799007|10067099003|56012099006|11063799006|6133799003;
+X-Microsoft-Antispam-Message-Info:
+	wxuvcW1r/sYYWZ7zSAPumUSZPOTJw3hqV3caXFqE+lREK3pQkNRHNj8MpUeDAnX4ilaudkWYJnCrDgzKRsM5Od8QzwjizMApDcjKV/2EmS/4aQMQLkEA+h1+xqhOB98eiHm95f8KsNMFjSEAaYRg88fT/Cgc8A9iUb6X7iZCrSn2dM+bR6pXsgl3Yb5AfAGkl0/MQmeU8D0gwXZQyOu9vXPo959vygfk7gIKa7zCY94LpxlQjHDjjO7fejnz+0M/8C/4AY9+UdwqNUiFKGIHVyl1mzIsHWeeWuS1AzaP+4Wxf1gUh9DDjJNSZuqZFuLyd5OgjcCeaGvJgjvoghGHljS2/v6KrvTSGqSKd+74YGNY7IrrUgSqycZ01xaK+d4SUK3s2p/9aSlDabLIiWyDCgQcorE3ig6BcZwGccA5ANlBaPCm3djip3KHXDZUFc2uqPEvhQIl9VmmR/xou8aNQCN9425FDI17YQnpEC6yLZ3+iOOHUjQ57o1s4E90qDu3V5B2wo646PbB6PD8yYXg3oJ9+1kAJp6+2zNoxjKMK+O8vhiPCAZGDef8FWDgmwrUdAcSWNfANRIF8Uh/Mu7xc94YvqLIvQX2L2YytaPRL+LpjrqjMYwyi5Bzxvtyvnub6Q4by6MpNY9cGAiWv8Q72QxEOjgxnhUBRixsa3Py+0k=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9746.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(18002099003)(22082099003)(3023799007)(10067099003)(56012099006)(11063799006)(6133799003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?dl4zlOGJfyesQ+vxuxRfcMWG51HP8SJ3IGmXW1gMfySyRf4+0uxGHv266QBC?=
+ =?us-ascii?Q?sEiAcjTmQameAKJ4MATr33LC4AhjufPqbRv3sUudo6h1LALVxeximWAgln30?=
+ =?us-ascii?Q?KiFBy71/dSzZwsivUR+/JVrjUJbNekchNCzaowskkif+/hEncwh35vN5lD0Q?=
+ =?us-ascii?Q?aPY9E5Y7jpfLDaVwPbjn6OQLnORz4MA1MkNdj2VqCntmpMmJxHM3N+pwCgw7?=
+ =?us-ascii?Q?TNihOjfj8rc8HYOmWhTBdwBH53LE3FGfc7QjYQAWd2cry4zvAndGYrUAiY0Y?=
+ =?us-ascii?Q?hKd+WJ+s8LNCb/znEzMd3xrhFN4jyD5Hdfzy/WGgmler0tlEaGeroJiWE18z?=
+ =?us-ascii?Q?GLZaQRW8q7JOJuhdkr62VEvzLUjxVFWzFaH7YP7FUbH5yM4Fh47ABknCBsi8?=
+ =?us-ascii?Q?wD19ZwqQ1crvOA7r9Idb0HahAo1QWUgGa6CJ4SMkp5aybQ2lXTrEhpAaby1j?=
+ =?us-ascii?Q?ay0Gjh/tCH9WuF0kAKd+gzogvfiLEYD9u3+uFB+kvTlIB29rrxFyRTUQJ7+w?=
+ =?us-ascii?Q?+6CB/cTfFiy78QDsPOBGxdnWyKioJIHw7Fshm24gOXHrqC7x7i0fsNR047mt?=
+ =?us-ascii?Q?TywqERus+LWY4m6otuKg8mLuQgQA+g9B7qxUBSE95/NBHuJcIs2dVmDxyghZ?=
+ =?us-ascii?Q?ZK+gqVE727zika169ZDKDif0kw+XinoN5riu1Nbl4byimAYVrzxN9/36cTVM?=
+ =?us-ascii?Q?R7dJjfXHgerpLUSvRo+yGX8UFBd0jrhSaKvXTViqzVtApjauWMw117BZT07t?=
+ =?us-ascii?Q?uhCWcxkxy1FlLgTpObYD6kORZyHSKqrkOxkQC0W5EuSqs7B7UEnT61F3u/2P?=
+ =?us-ascii?Q?pdQs6AzSdGIGBpCvn/X4DLTsZJ+VuAjHV4vDUJ4x/cCMRHjyNmhajgF+sCA4?=
+ =?us-ascii?Q?0iNacngE+e7qcENqKhSUz4fwCJ85CZDfeFTZnVtAkgs24Y6sj5Uubor08oMm?=
+ =?us-ascii?Q?uZxHdPfYv0Ju1mVHxe12+mmNbeJ8AaYca90rXBMo00jCD54ht9f42sDXqhtn?=
+ =?us-ascii?Q?ia1kUXbzMpfiAsuRB1rA/plgGtm82VHT5jENifCpObcQIE56rO1sbSAvId8z?=
+ =?us-ascii?Q?NlkxzlMYkJN3Dhp6BMLn4uO7QFKzXbiK2OM/R+TNyZ04ONX1e2E2C4GyBiu8?=
+ =?us-ascii?Q?l5VSnvLBl5MR/TC9IwTMdZYjB4lKR9Z2okVZn/3xzG6y9TZjggTfm7n/Xv7/?=
+ =?us-ascii?Q?ouLNZtzpg7OIf3UzqPD4POurEv5RiLYW2IhY0bG/bDcOmIX9NFXRaBs1sSrW?=
+ =?us-ascii?Q?1/LoRl018Ll5g6+pjVEGTs3QWWKJrfg23+4xep7mlV6UX3LbGQvudHdHKY74?=
+ =?us-ascii?Q?Zi9M3dNdsdxPBX2E36/lwtz7uGOxLs2enRhDTUr8p8JNq+R4hxKDrfFaolMG?=
+ =?us-ascii?Q?jOWcqwc/vZpqqIf6hExwT0h7obmE4/JVM/ipxk8HSnAXpgXZZaQ4Adfa0QbH?=
+ =?us-ascii?Q?v10uUi1MeU/AFSz++3sZbZ4ctmocot5wuYZOaV5ETn0H3X27oBe4aCI5NYQ2?=
+ =?us-ascii?Q?4+m37fI4S9nGuJOwXzlaYDEXXVGm3B4Ux7oggu3zLjernBGJr2Vx7OtvV069?=
+ =?us-ascii?Q?NZPUgzJrIGhUrU+wl5zUZ9ISqMZF91SLGHHecbGuB2FllQpG1AusWD7Chtqo?=
+ =?us-ascii?Q?gxdLuyg6694owgoNRvVzWe/EYpLdeUR+lNBTsvKFW8OU54VRS8G9Qk1XzevX?=
+ =?us-ascii?Q?3c34G69t8RBt/XiTlKw+htldNnWXPQ6KDA1nbCgrr4/H0ioWbVm95BfGApTo?=
+ =?us-ascii?Q?Z2shvdUXMg=3D=3D?=
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6ef09fd2-55b5-46bc-f819-08dee3d2b509
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR03MB9746.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2026 07:12:05.4821
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8HONH4tvVkR2pCLIsqbipnIN6/kj0lfCuazOs6cOf8fDVfPERtB0Vk1fLq+DVy+4IQERyWWmaeg8YtvksL1s7Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB7985
+X-purgate-ID: tlsNG-ef75cf/1784272326-3C212AE4-EA0E1285/0/0
 X-purgate-type: clean
-X-purgate-size: 1338
+X-purgate-size: 12315
 
-On 17.07.2026 08:18, dmukhin@ford.com wrote:
-> On Thu, Jul 16, 2026 at 06:08:01PM +0200, Jan Beulich wrote:
->> On 13.07.2026 20:16, dmukhin@ford.com wrote:
->>> --- a/xen/drivers/char/console.c
->>> +++ b/xen/drivers/char/console.c
->>> @@ -360,12 +360,22 @@ static DECLARE_SOFTIRQ_TASKLET(conring_tasklet, conring_notify, NULL);
->>>  /* NB: Do not send conring VIRQs during panic. */
->>>  static bool conring_no_notify;
->>>  
->>> -static void conring_puts(const char *str, size_t len)
->>> +static void conring_puts(const char *str, unsigned int len)
->>>  {
->>> +    unsigned int src = likely(len < conring_size) ? 0 : len - conring_size;
->>
->> Isn't the attempt to handle strings longer than conring_size pretty much in
->> vain? Things look correct as far as the rest of the logic in the function
->> goes, but is this useful? It certainly warrants at least a brief comment imo.
-> 
-> Thanks for taking a look!
-> 
-> I don't think there ever will callers of conring_puts() with strings longer
-> than conring_size... and I could not decide whether to keep the extra check
-> or not.
+Add requirements for Xen's guest-visible virtual ITS model.
 
-Having though about this a little more over night, I actually wonder whether
-e.g. len > PAGE_SIZE wouldn't already be indicative of an error. And which
-hence may instead want flagging by a BUG_ON(). REST maintainers, thoughts?
+The requirements cover virtual ITS instance creation, guest-visible ITS
+identification and capability registers, guest ITS table base programming,
+guest command queue processing, guest command validation, MAPD, MAPC,
+MAPTI, MAPI, INT, CLEAR, DISCARD, MOVI, INV and INVALL command semantics,
+command failure containment and virtual ITS MMIO access-width handling.
 
-Jan
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+---
+ .../arm64/index.rst                           |   1 +
+ .../arm64/its.rst                             | 382 ++++++++++++++++++
+ 2 files changed, 383 insertions(+)
+ create mode 100644 software_safety_reqs/domain_creation_and_runtime/domain_partially_emulated_resources/arm64/its.rst
+
+diff --git a/software_safety_reqs/domain_creation_and_runtime/domain_partially_emulated_resources/arm64/index.rst b/software_safety_reqs/domain_creation_and_runtime/domain_partially_emulated_resources/arm64/index.rst
+index 263fc09..7896770 100644
+--- a/software_safety_reqs/domain_creation_and_runtime/domain_partially_emulated_resources/arm64/index.rst
++++ b/software_safety_reqs/domain_creation_and_runtime/domain_partially_emulated_resources/arm64/index.rst
+@@ -8,5 +8,6 @@ Arm64
+ 
+    generic_timer
+    gicv3
++   its
+    tee
+    viommu
+diff --git a/software_safety_reqs/domain_creation_and_runtime/domain_partially_emulated_resources/arm64/its.rst b/software_safety_reqs/domain_creation_and_runtime/domain_partially_emulated_resources/arm64/its.rst
+new file mode 100644
+index 0000000..5258588
+--- /dev/null
++++ b/software_safety_reqs/domain_creation_and_runtime/domain_partially_emulated_resources/arm64/its.rst
+@@ -0,0 +1,382 @@
++.. SPDX-License-Identifier: CC-BY-4.0
++
++vITS requirements
++=================
++
++The following requirements define Xen's virtual ITS model exposed to the
++hardware domain. Non-hardware domain virtual ITS exposure is outside the scope
++of this requirement group.
++
++Assumption of use
++^^^^^^^^^^^^^^^^^
++
++Guest software virtual ITS command use
++--------------------------------------
++
++`XenAoU~arm64~vits_command_use~1`
++
++Description:
++Guest software using Xen's virtual ITS interface shall be compatible with a
++virtual ITS model where the following guest ITS command behaviours have limited
++guest-visible semantics:
++
++ - ``MOVALL`` is not used to move virtual LPI mappings between collections.
++
++Rationale:
++Xen exposes a virtual ITS ABI, not a complete emulation of every physical ITS
++command side effect.
++
++Xen maintains virtual LPI translation state through Xen's virtual ITS device,
++collection and event mapping state. Guest software is assumed to use the
++supported virtual ITS command subset rather than relying on unsupported command
++semantics or on asynchronous physical ITS command-processing behaviour.
++
++Software Safety Requirements
++^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++
++Guest ITS instance creation
++---------------------------
++
++`XenSSR~arm64~vits_creation~1`
++
++Description:
++Xen shall create a virtual ITS instance for the hardware domain when the
++hardware domain is configured to observe an ITS.
++
++Rationale:
++A virtual ITS provides the guest-visible ITS register interface and command
++processing model used by the hardware domain to configure LPI translation.
++
++Covers:
++ - `XenPRQ~virtual_interrupt_controller~1`
++
++Needs:
++ - XenVerTestCase
++
++Guest ITS identification and capability registers
++-------------------------------------------------
++
++`XenSSR~arm64~vits_ident_and_cap_regs~1`
++
++Description:
++Xen shall expose guest ITS identification and capability registers according to
++the virtual ITS model implemented for the hardware domain. This shall include
++use of:
++
++ - ``GITS_IIDR``
++ - ``GITS_TYPER``
++ - ``GITS_PIDR2``
++
++Rationale:
++The hardware domain uses the virtual ITS identification and capability
++registers to discover the virtual ITS interface, DeviceID width, EventID width,
++table entry size and supported translation behaviour.
++
++Covers:
++ - `XenPRQ~virtual_interrupt_controller~1`
++
++Needs:
++ - XenVerTestCase
++
++Guest ITS control and quiescent state
++-------------------------------------
++
++`XenSSR~arm64~vits_ctlr_and_quiescent_state~1`
++
++Description:
++Xen shall process guest ITS commands and report guest ITS quiescent state
++according to the guest-visible ``GITS_CTLR`` state.
++
++Rationale:
++``GITS_CTLR.Enable`` controls guest-visible ITS command processing.
++``GITS_CTLR.Quiescent`` reports whether virtual ITS command queue processing
++has completed.
++
++Covers:
++ - `XenPRQ~virtual_interrupt_controller~1`
++
++Needs:
++ - XenVerTestCase
++
++Guest ITS table base programming
++--------------------------------
++
++`XenSSR~arm64~vits_table_base_programming~1`
++
++Description:
++Xen shall apply guest ITS command queue and translation table base updates only
++while the virtual ITS is disabled. This shall include use of:
++
++ - ``GITS_CBASER``
++ - ``GITS_BASER0``
++ - ``GITS_BASER1``
++
++Rationale:
++Guest ``GITS_CBASER`` and ``GITS_BASER<n>`` values define the guest command
++queue and guest translation tables consumed by the virtual ITS model.
++
++Covers:
++ - `XenPRQ~virtual_interrupt_controller~1`
++
++Needs:
++ - XenVerTestCase
++
++Guest ITS table model
++---------------------
++
++`XenSSR~arm64~vits_table_model~1`
++
++Description:
++Xen shall expose guest Device and Collection tables supported by Xen's virtual
++ITS model. This shall include use of:
++
++ - ``GITS_BASER0`` for the guest Device table
++ - ``GITS_BASER1`` for the guest Collection table
++
++Rationale:
++The virtual ITS uses guest Device and Collection table state to translate guest
++DeviceID, EventID and CollectionID values.
++
++Covers:
++ - `XenPRQ~virtual_interrupt_controller~1`
++
++Needs:
++ - XenVerTestCase
++
++Guest command queue processing
++------------------------------
++
++`XenSSR~arm64~vits_command_queue_processing~1`
++
++Description:
++Xen shall process guest ITS commands from the command queue range described by
++guest ``GITS_CBASER``, ``GITS_CREADR`` and ``GITS_CWRITER`` and advance
++``GITS_CREADR`` for handled commands.
++
++Rationale:
++The guest command queue is guest memory. The queue base and command queue
++pointers define which commands the hardware domain submitted for processing,
++and ``GITS_CREADR`` is the guest-visible command progress indicator.
++
++Covers:
++ - `XenPRQ~virtual_interrupt_controller~1`
++
++Needs:
++ - XenVerTestCase
++
++Guest ITS command validation
++----------------------------
++
++`XenSSR~arm64~vits_command_validation~1`
++
++Description:
++Xen shall reject guest ITS commands whose fields do not identify valid virtual
++ITS state visible to the hardware domain before applying the requested mapping
++change.
++
++Rationale:
++Guest ITS commands contain guest-controlled DeviceID, EventID, CollectionID,
++virtual LPI and table fields. Xen validates these fields before applying
++mapping changes so that invalid commands do not create invalid virtual ITS
++translation state.
++
++Covers:
++ - `XenPRQ~virtual_interrupt_controller~1`
++
++Needs:
++ - XenVerTestCase
++
++Guest MAPD device mapping
++-------------------------
++
++`XenSSR~arm64~vits_mapd_device_mapping~1`
++
++Description:
++Xen shall apply a guest ``MAPD`` command with the valid bit set when the
++DeviceID, ITT address and event range describe a guest Device table entry
++supported by the virtual ITS model.
++
++Rationale:
++``MAPD`` with the valid bit set establishes the guest DeviceID-to-ITT
++relationship used by later event translation.
++
++Covers:
++ - `XenPRQ~virtual_interrupt_controller~1`
++
++Needs:
++ - XenVerTestCase
++
++Guest MAPD device mapping removal
++---------------------------------
++
++`XenSSR~arm64~vits_mapd_device_mapping_removal~1`
++
++Description:
++Xen shall apply a guest MAPD command with the valid bit clear by removing
++the virtual ITS device mapping and the event mappings associated with that
++DeviceID.
++
++Rationale:
++MAPD with the valid bit clear removes the guest DeviceID-to-ITT
++relationship. Event mappings that depend on the removed device mapping cannot
++remain active after the device mapping has been removed.
++
++Covers:
++ - `XenPRQ~virtual_interrupt_controller~1`
++
++Needs:
++ - XenVerTestCase
++
++Guest MAPC command
++------------------
++
++`XenSSR~arm64~vits_mapc_command~1`
++
++Description:
++Xen shall apply a guest ``MAPC`` command when the CollectionID is valid and the
++target Redistributor maps to a vCPU of the same hardware domain.
++
++Rationale:
++A collection selects the target vCPU for translated LPIs.
++
++Covers:
++ - `XenPRQ~virtual_interrupt_controller~1`
++
++Needs:
++ - XenVerTestCase
++
++Guest MAPTI and MAPI commands
++-----------------------------
++
++`XenSSR~arm64~vits_mapti_and_mapi_commands~1`
++
++Description:
++Xen shall apply guest ``MAPTI`` or ``MAPI`` commands when the DeviceID,
++EventID, CollectionID and virtual LPI are valid for the hardware domain.
++
++Rationale:
++``MAPTI`` and ``MAPI`` create the guest event-to-virtual-LPI mapping used by
++later event delivery.
++
++Covers:
++ - `XenPRQ~virtual_interrupt_controller~1`
++
++Needs:
++ - XenVerTestCase
++
++Guest INT command
++-----------------
++
++`XenSSR~arm64~vits_int_command~1`
++
++Description:
++Xen shall inject a guest ``INT`` command as the virtual LPI selected by the
++command's valid DeviceID and EventID translation.
++
++Rationale:
++``INT`` requests delivery of a translated guest ITS event.
++
++Covers:
++ - `XenPRQ~virtual_interrupt_controller~1`
++
++Needs:
++ - XenVerTestCase
++
++Guest CLEAR command
++-------------------
++
++`XenSSR~arm64~vits_clear_command~1`
++
++Description:
++Xen shall apply a guest ``CLEAR`` command to the pending state of the virtual
++LPI selected by the command's DeviceID and EventID translation.
++
++Rationale:
++``CLEAR`` removes pending state for a translated LPI.
++
++Covers:
++ - `XenPRQ~virtual_interrupt_controller~1`
++
++Needs:
++ - XenVerTestCase
++
++Guest DISCARD command
++---------------------
++
++`XenSSR~arm64~vits_discard_command~1`
++
++Description:
++Xen shall apply a guest ``DISCARD`` command by removing the virtual ITS mapping
++for the command's DeviceID and EventID.
++
++Rationale:
++``DISCARD`` makes the selected event unmapped in the guest ITS model and
++removes the associated virtual LPI state from the active event mapping.
++
++Covers:
++ - `XenPRQ~virtual_interrupt_controller~1`
++
++Needs:
++ - XenVerTestCase
++
++Guest MOVI command
++------------------
++
++`XenSSR~arm64~vits_movi_command~1`
++
++Description:
++Xen shall apply a guest ``MOVI`` command to an existing mapped event when the
++destination CollectionID is valid for the same hardware domain.
++
++Rationale:
++``MOVI`` changes the collection target for a translated event.
++
++Covers:
++ - `XenPRQ~virtual_interrupt_controller~1`
++
++Needs:
++ - XenVerTestCase
++
++Guest LPI property invalidation
++-------------------------------
++
++`XenSSR~arm64~vits_lpi_property_invalidation~1`
++
++Description:
++Xen shall apply guest LPI property-table changes to virtual LPIs selected by
++guest ``INV`` and ``INVALL`` commands. This shall include use of:
++
++ - ``INV``
++ - ``INVALL``
++
++Rationale:
++The guest LPI property table is the guest-visible source of LPI enable and
++priority state. ``INV`` refreshes one translated LPI and ``INVALL`` refreshes
++LPIs targeted to a selected collection.
++
++Covers:
++ - `XenPRQ~virtual_interrupt_controller~1`
++
++Needs:
++ - XenVerTestCase
++
++Guest ITS MMIO access width
++---------------------------
++
++`XenSSR~arm64~vits_mmio_access_width~1`
++
++Description:
++Xen shall apply a guest ITS MMIO access to an implemented virtual ITS register
++only when the access width is supported by that register.
++
++Rationale:
++The virtual ITS MMIO interface has register-specific access widths. Xen uses
++the target register definition to decode guest accesses so that unsupported
++byte, halfword or unsupported-width accesses do not update implemented virtual
++ITS register state incorrectly.
++
++Covers:
++ - `XenPRQ~virtual_interrupt_controller~1`
++
++Needs:
++ - XenVerTestCase
+-- 
+2.43.0
+
 
