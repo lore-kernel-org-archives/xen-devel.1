@@ -4,69 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 920C9C44515
-	for <xen-devel@archiver.kernel.org>; Sat, 18 Jul 2026 02:55:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1365345.1615894 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94E4EC4451B
+	for <xen-devel@archiver.kernel.org>; Sat, 18 Jul 2026 14:04:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1365564.1615903 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkvD3-000104-Ul; Sat, 18 Jul 2026 02:55:25 +0000
+	id 1wl5dg-0004uD-RN; Sat, 18 Jul 2026 14:03:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1365345.1615894; Sat, 18 Jul 2026 02:55:25 +0000
+Received: by outflank-mailman (output) from mailman id 1365564.1615903; Sat, 18 Jul 2026 14:03:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wkvD3-0000zx-RO; Sat, 18 Jul 2026 02:55:25 +0000
-Received: by outflank-mailman (input) for mailman id 1365345;
- Sat, 18 Jul 2026 02:55:24 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wl5dg-0004u5-M5; Sat, 18 Jul 2026 14:03:36 +0000
+Received: by outflank-mailman (input) for mailman id 1365564;
+ Sat, 18 Jul 2026 14:03:35 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmukhin@ford.com>) id 1wkvD2-0000zp-8c
- for xen-devel@lists.xenproject.org; Sat, 18 Jul 2026 02:55:24 +0000
+ (envelope-from <marmarek@invisiblethingslab.com>) id 1wl5de-0004tg-VG
+ for xen-devel@lists.xenproject.org; Sat, 18 Jul 2026 14:03:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wkvD1-00B3GI-LW
- for xen-devel@lists.xenproject.org; Sat, 18 Jul 2026 04:55:23 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wl5dd-00BMRH-QI
+ for xen-devel@lists.xenproject.org; Sat, 18 Jul 2026 16:03:33 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <dmukhin@ford.com>)
- id 6a5aeae2-e002-0a2a0a5209dd-0a2a45088f8a-12
- for <xen-devel@lists.xenproject.org>; Sat, 18 Jul 2026 04:55:23 +0200
-Received: from [148.163.146.23] (helo=mx0a-00498f03.pphosted.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <dmukhin@ford.com>)
- id 6a5aeb19-f659-0a2a45080019-94a392174da6-3
- for <xen-devel@lists.xenproject.org>; Sat, 18 Jul 2026 04:55:23 +0200
-Received: from pps.filterd (m0482517.ppops.net [127.0.0.1])
- by m0482517.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 66I2rv3G3597608
- for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 19:55:21 -0700
-Received: from bl0pr03cu003.outbound.protection.outlook.com
- (mail-eastusazon11012008.outbound.protection.outlook.com [52.101.53.8])
- by m0482517.ppops.net (PPS) with ESMTPS id 4fft0yb3nh-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 19:55:21 -0700 (PDT)
-Received: from PH5P220CA0004.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:34a::16)
- by SA1PR16MB5744.namprd16.prod.outlook.com (2603:10b6:806:3d9::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.13; Sat, 18 Jul
- 2026 02:55:18 +0000
-Received: from CY4PEPF0000EE38.namprd03.prod.outlook.com
- (2603:10b6:510:34a:cafe::33) by PH5P220CA0004.outlook.office365.com
- (2603:10b6:510:34a::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.223.14 via Frontend Transport; Sat,
- 18 Jul 2026 02:55:17 +0000
-Received: from mx0a-00498f04.pphosted.com (205.220.161.53) by
- CY4PEPF0000EE38.mail.protection.outlook.com (10.167.242.10) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.245.5
- via Frontend Transport; Sat, 18 Jul 2026 02:55:17 +0000
-Received: from pps.filterd (m0373460.ppops.net [127.0.0.1])
- by mx0a-00498f04.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66HNIJ5U3443497
- for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 22:55:16 -0400
-Received: from smtp-us.ser.proofpoint.com (pmta-use.ser.proofpoint.com
- [44.208.76.22])
- by mx0a-00498f04.pphosted.com (PPS) with ESMTPS id 4fc6py04rk-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Fri, 17 Jul 2026 22:55:16 -0400 (EDT)
-Received: from localhost ([19.12.76.221]) by cmsmtp with ESMTPSA
- id kvCrwfHLT4QlWkvCswT3H3; Sat, 18 Jul 2026 02:55:15 +0000
+ (envelope-from <marmarek@invisiblethingslab.com>)
+ id 6a5b87a7-bab6-0a2a0a5309dd-0a2a45079f5c-10
+ for <xen-devel@lists.xenproject.org>; Sat, 18 Jul 2026 16:03:33 +0200
+Received: from [103.168.172.159] (helo=fhigh-a8-smtp.messagingengine.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <marmarek@invisiblethingslab.com>)
+ id 6a5b87b4-b4ea-0a2a45070019-67a8ac9fd4e3-3
+ for <xen-devel@lists.xenproject.org>; Sat, 18 Jul 2026 16:03:32 +0200
+Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id A17E0140011B;
+ Sat, 18 Jul 2026 10:03:31 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+ by phl-compute-06.internal (MEProxy); Sat, 18 Jul 2026 10:03:31 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
+ 18 Jul 2026 10:03:30 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -78,238 +52,212 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=ppford header.d=ford.com header.i="@ford.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=fail header.s=selector2-azureford-onmicrosoft-com header.d=azureford.onmicrosoft.com header.i="@azureford.onmicrosoft.com"; dkim=pass header.s=ppserprodsaar header.d=saarlouis.ford.com header.i="@saarlouis.ford.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=ppfserpocford header.d=ford.com header.i="@ford.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=ppford; bh=M6E
-	FZXNDmLdlof77oLNKidYOiydwJvlB1hpV5kHz2vg=; b=vWSPfmLrdmlC0a9TGpt
-	NuNn0niphrX1B/Oj/Q5hVzjrhzDX0KbiKl8DNls1Q1DYdjLDhG2fLzGmp3O9dvGA
-	lYSxfF8h92m/nIZSxe02/GvIay+GJjay/UjSmsZo4njhywXkFH04dRlZgbEiDt7R
-	aQlhOF9d/zni1oy+hnaUZiDXAcmYxSmeKZoUh2EXBjmM+UxY3aCMKmAbLpK/FGp6
-	EH4kX0vbcigmXQ4lieDxZa4g4PsV9IHAYL97tZupzlewhK8N/zx0wqUS4SdC6NSF
-	BWpeSEUV3OUsop+KyPSXEbC/LTtKtLYWjBYTEY76utVhVp5K8ap2wY0VlidGDBd5
-	8DQ==
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qdLS81o3mUKvw++7fcFRZ41M/MzAHcWo8WjgZIxWJLbxKle595VaM66R6nb2VWNKN0kvcLdtazUA0sJr4yQtKNsetx7HuRjsuFBc4JRkNmJEvfB7WnV+JJ2uIfWtl0hbV2hL5uTL7Y1YPxiJqUr0yeJzdncnQxesb/TQ6tiB4JYcB6ptgoOvOf2P47ytsK1pV6gMyXyTHSgn81kFjeLNyJLCQbj4afJBL0twptKoNbuTq/cO4tVjF5FBzoYVaM95hCqvCBMMye5rntELHHa3ArcyG5P8v3DgUGOeOmNRfSZQLObM0j7GOmy/l8xT1ktEV/ic7za8qbKTHTNtYgzRZQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=24Xsuhi7oZ6eiVhoWkhf6/X8FCPySQ4HnBJ/b6jNeV0=;
- b=TO0drwQFTcPFNFpnSmpB//r7ZZoSCU2XZcO0V2YaXrkG+ayVknlbM3Bf+3mIeD+1WaH93bb37lN8Cj6YFzGM8QxaP6qgpoGhrc4rg4KfimBc0TkZvApTtaE4btz00Kyr/kx5zKo09rPWl7uHQjn8ZdqLqnCltpPwUKUfsBLnVzXJQeKIn1Cg68TXuSb8mf953jm8PcPmp3/F16HV8UzU4xBye4UDfo8TMgFvh/ipdNbDpbYBmwoEUsWoKhl8gN+xKHeIUyy2f6bw2V3dOS6SMN1eG4OcvH4t4lt0XGjMJjKOb+gGqPxcNUg4+lbgnANn7qqqMwCaxXkNOpYc9PmA/w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 205.220.161.53) smtp.rcpttodomain=lists.xenproject.org
- smtp.mailfrom=ford.com; dmarc=pass (p=reject sp=reject pct=100) action=none
- header.from=ford.com; dkim=pass (signature was verified)
- header.d=saarlouis.ford.com; dkim=pass (signature was verified)
- header.d=ford.com; arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=azureford.onmicrosoft.com; s=selector2-azureford-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=24Xsuhi7oZ6eiVhoWkhf6/X8FCPySQ4HnBJ/b6jNeV0=;
- b=LivgX51jkTvH2ClQwFYf+8AobbVT0JGkp7E+MTi39kib7NE/go7ztNU7YFYqYVPPz/DT/J/XG86dEkqFaiNyX8C7iPHwGp+KlbGVYoLvbgNE4/lWIKeGLm79VEn+0imyjKZtnEO7S0XXJvk5s1hLT4gefwmYF8LnppBJtJOkHV8=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 205.220.161.53)
- smtp.mailfrom=ford.com; dkim=pass (signature was verified)
- header.d=saarlouis.ford.com;dkim=pass (signature was verified)
- header.d=ford.com;dmarc=pass action=none header.from=ford.com;
-Received-SPF: Pass (protection.outlook.com: domain of ford.com designates
- 205.220.161.53 as permitted sender) receiver=protection.outlook.com;
- client-ip=205.220.161.53; helo=mx0a-00498f04.pphosted.com; pr=C
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm2 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm2 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	saarlouis.ford.com; h=cc:content-transfer-encoding:content-type
-	:date:from:in-reply-to:message-id:mime-version:references
-	:subject:to; s=ppserprodsaar; bh=M6EFZXNDmLdlof77oLNKidYOiydwJvl
-	B1hpV5kHz2vg=; b=Lk5Bm78YGClhQ8A6M1fjnul0Efk73EzaO06bABiaaHbnSp9
-	hSGpycX4PVzwbjUJ/l62v/h4qHZPuNcg09a9ndk+Q95tUhHx5W6N6mkXdg74Kysb
-	maMwk8kKFjvBZaunam9hG3xvQ2cXwMQFN0kB1oIoJku9j7AuEFgV28Bqhp2Du4kO
-	4xaOw3VcLm23s5G08INxQKav2dj94WCCPaoRZdos9VJjfokVrv/fjQgmumO/QXB8
-	yWB9a1IIwo0ct+iWd1epA89Z8Q4r/9ScnH7E8+CgfYUNJ7U2fDwAM2Flb50mM+C/
-	w41LVs3re3GXMJ9MyU56v2hKb7iMZS8ZURKy2Bw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=ppfserpocford;
-	 bh=M6EFZXNDmLdlof77oLNKidYOiydwJvlB1hpV5kHz2vg=; b=sPTHKo9KOQZr
-	isPJH4I4tDDK7Ac246dAjbDxyOhbtEEswQS9f3OW9z8gmMoiP3ULMe5STRV6SzOx
-	wvREb6yI+qC+Kfo4rKP3G7fo0+nAynTNDMx5ehX4R0eJUqtxVSDW6bxs5wBBTRrR
-	5ipludppM7huALriS6OP8Tb5RK+oYmdB6uGp1RBiZx9MsN4bed+DDyd3ltgmszEu
-	DofJ+/5MnL5J0GHKQI+qmCvkbvEp0FRRvUOZWV1sdeMZHpJl0ajPgtalSaePyMxN
-	lr3P7+w/MqN7JLzGcgfDAaL8yFqsrPyw4PVUwIvI19fjnWGXjYckyRAh5kNOvtOd
-	j77adS9Udg==
-X-Mailer: SER-76bead168636dc6ed1c9e51ce4dea80dbdd4163750742b614a4d871e565792b7
-X-Cloudmark-MID: kvCrwfHLT4QlWkvCswT3H3
-X-Proofpoint-CID: eb09f7eb-2dc2-34ab-a188-7b293c1db1fe
-From: dmukhin@ford.com
-Date: Fri, 17 Jul 2026 19:55:13 -0700
-To: Teddy Astie <teddy.astie@vates.tech>
-Cc: dmukhin@ford.com, xen-devel@lists.xenproject.org,
-        andrew.cooper3@citrix.com, anthony.perard@vates.tech,
-        jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com,
-        roger.pau@citrix.com, sstabellini@kernel.org
-Subject: Re: [PATCH v3 2/4] xen/console: correct leaky-bucket rate limiter
-Message-ID: <alrrESRtt7pkLowv@kraken>
-References: <20260715201902.2984407-1-dmukhin@ford.com>
- <20260715201902.2984407-3-dmukhin@ford.com>
- <1784195449.8631fc262581453bbf619ec5b2062170.19f6a5603fd000edb5@vates.tech>
+	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm2; t=1784383411;
+	 x=1784469811; bh=dUZjqeNV9O8XFmgIDunVFPeL7mArc/vhn5dDixvyo/M=; b=
+	pyiMl2faJkWw7yCucQdYhreR8JxmS1qV6TLyyfMgDrDLGeeGMl55XttRE1pCDesG
+	lvuHj8ErjmDz1xN79hvYxLSUsmznovFBgf2f+BiIlbhVeiu2QScaiZk0+2QcZKDv
+	EPztC4lpcwSJr9GWMQ3pDV78D/fIsDQ4v2Lz4WTFXT9ELyHbvejN62vrc52nGtac
+	Q4X9iG2uMfRTYxJJRY5e2cdnWBdxY31pZpfTpbWUBFHYoB1s4Qpnp2Zom0ATTk0K
+	gBwLVBYBNPH4lfmPhpSAn/nJjDf+8am0kXuhMtqFDuUvzWAP4IVkSEzgUoqTmHD6
+	zHJgUkiUzxHzRmaiA9/OkQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:subject:subject:to
+	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=
+	1784383411; x=1784469811; bh=dUZjqeNV9O8XFmgIDunVFPeL7mArc/vhn5d
+	Dixvyo/M=; b=CHSiAmcfPJoMPYpDMkVzubbDqKejodk4B7yTuR4Nuw/yd1Tr5/e
+	p+H+9wxt2/msp47RgSoT6XsbOQFNR8lkPfS3OSaVtOwkKgdJANymBzAlBybL9Gc/
+	+cL0gCg/POT0g892o0mKF7rsNGHm18SGUCKlJaQfA715sXHfDqTywh/RHrpnSZaq
+	qtxLl8gZuY9kAlvl+ONWGyIuF3kR9IbcV/SZA4qqC6gYT9B4vdPeb9zT8Y2X4YsK
+	KrulPWB3ucB+EzlMfGql7Pk+5v0eubaYCA63WqSU5jyaeNPZBmD+BD+2BiaAAJXZ
+	wfcF+lfSuA37OTKQyVue0Wxk9rl+cpRMpmQ==
+X-ME-Sender: <xms:s4dbasWct-IJE399b-HaXGVr0fOu3sPhIecvsiXwyHHQ-InnsmkT1Q>
+    <xme:s4dbamldNrNoCTkoweLm3UkSLV_FbLq3XjFGHSfvFDci80KuE-HCOornBlzCBryOn
+    r0yjG4nRV9jcbcauIsa8ibHJT53vaESPblQqblJgN8CD3cC4A>
+X-ME-Received: <xmr:s4dbauARJ4UTPnOIcu8WtFIWPWwLESw46gEVo16oj_hHxM9QdeQ3S-nxJ4fOzEH27rMPnZzkbyosWbdkskZvAjyuGOfJ9-QuJ-M>
+X-ME-Proxy-Cause: dmFkZTGNMs+atV6X6essUDq39J0quKdiKZwFDBMdiN5uczZVBJG43rtCngECVrGea8jAU6
+    wRygrXodnSrn/OI3eqOtScFtiKexfforiWmyDr3e1sFWcJR8/kh25OHByQzWxKKAcZNkgA
+    TnnwMQyzyO2HOWHczzi1q0xXPql5ImmTScZDpstcudgYP/hGma4+2gkY88oKhrLX/OnjQv
+    078dF7AHtIuwdqrIPsDhkekj6n9/aB3xHZFhIPnZO0qC2n5A5mpP4nfwL+ISNfGoo/Au9V
+    JYBLMkRwpUIxtny1uHyW9CMZWE5/U4S1Zr0m1JtLAIEWeWTMx6m4hkjmjN7n7Jkl+tqbNa
+    P6E1VdhHQ3ZW7T65iNJaD2j+I414Fhymme2DwaNLZcCY7nid+fk0PNsrBlYQAO1/l6SA6m
+    n/ro1y8nz1hJQpSPacDj86m4HXqtJcu3wSswgU0adEL618vkh2TlE7MeV8UmObBwzs17SX
+    K8t2bSfAlg/xg6KkRqFDlKu+tlI2tc9K9UKxXzEtVkEmF1JZ/BdYxjo7wNab89EZosLZT+
+    GWU4QL4VcYaREZDiGrN60akqXlSkj6J4YxsgYyJi5mk0NIFie/cRLjyKQdOTZh0L+P5pIJ
+    non6hDotPl8mnPnj8ug48VsB08fJY+MyF63YWELkWNssxWS2BgwCkRXBchOw
+X-ME-Proxy: <xmx:s4dbamclDK4HY-tSffcGE604Mabh0ESpeAfE4B4t2EZP8tG7P24ilw>
+    <xmx:s4dbapL0gLvZcyqXb_wEZ6pkH45Oa8f8hOafhF4F2fdJnbrrPmxMaw>
+    <xmx:s4dbapc502Fjb61-CTDAbyJtGqGefkKc42y378FnZTqgq-enPjvSMw>
+    <xmx:s4dbag3idVFNHqBDuDGf9DHgSKmy6OJq0_NbLW-NRGxlA91TNCp0_A>
+    <xmx:s4dbavTY7oVdMsM9OyOs3RQoicF8MMX6ycc02TwakoFAZA0Nt_M7rkr3>
+Feedback-ID: i1568416f:Fastmail
+Date: Sat, 18 Jul 2026 16:03:29 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Frediano Ziglio <freddy77@gmail.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
+Subject: Re: domU crash when resuming from suspend - Xen 4.22
+Message-ID: <aluHsZA0hK8FcKnM@mail-itl>
+References: <ajUm2SQtMD6Y-K9S@mail-itl>
+ <alZt_boT-hJuVlD6@mail-itl>
+ <CAHt6W4eBibmZ3fXd=sW4=nbuYV1QQMCQzEX=L7FaqL5aXeOvGQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="igHU3V1eAOL0i68e"
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <1784195449.8631fc262581453bbf619ec5b2062170.19f6a5603fd000edb5@vates.tech>
-PSER-M365-App: SER-APP
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-17_07,2026-07-17_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
- adultscore=0 suspectscore=0 spamscore=0 phishscore=0 malwarescore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607180026
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE38:EE_|SA1PR16MB5744:EE_
-X-MS-Office365-Filtering-Correlation-Id: 49071d4a-84b5-47a6-cfc7-08dee477ff81
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|36860700016|376014|1800799024|82310400026|4143699003|56012099006|11063799006|10067099003|6133799003|22082099003|18002099003|13003099007;
-X-Microsoft-Antispam-Message-Info:
-	f/+az3THIR0bAazn5cJ+V0VGGaJ3FXqlVXihW59+lLf93iKHQYZNr2IWe6Te2xQON5Oxxa1id/h2jQPEzK755VKfFIRZIteIaEIr4nyRgy3J5eNt+qGR30oSlQNSIqeCLykh+4wDLJUhsoRqkAL1EcSUftAIgL3oOG7ydnWWzu8W6mdQM+NqpAdNILgRx2YKMvnWyCpObbNZopKeZkStMWYHE4uXRFMAt092yqu1aeFnMFljughhjD0qHiAwH277aoGlnYT5IA2kIuEueRpRdqQPHu94FzluJ4Gj+m/mgq13mo0feyGEc4K5Y4JjjSZkspL1vuCCCiE7WRKBO5qkCIdESdfmuEDqAkfx3YsbeG5WJkLgnKbOmbzfwkzVikvqOIl/2Ha5uJaUZeZgOoaCD2ZkyC4lZy0ENfCrqfGfZGNpO//6kukJ8PmdOWmCawlPhSb6GTecQQFFbJ0wLUJ9fkirqHenkvr8vjoZM+Hn2RFK0c7e+uvarCiF2sz3W3vNLfwyW9ORRPh/T7m3HZmzKb/GJpQ2xaAUv5/WhrpxCGPXldNDpJ38KFx8TxdmTsXDgbRUgNa2NYojfcv5a08Z0+3M+rbvzJX+Komq4RZ9yNdaxZaa2eCU38sbvrscpYzzAe6FZEx3yfNeMcD77SbyAG8EG8Y/kuiRg11e4jvgbVsIwOtP3PN81L+Nh2CWj1cTW3jrUUw8b1QNZ/JfKY6Qaw==
-X-Forefront-Antispam-Report:
-	CIP:205.220.161.53;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mx0a-00498f04.pphosted.com;PTR:mx0a-00498f04.pphosted.com;CAT:NONE;SFS:(13230040)(23010399003)(36860700016)(376014)(1800799024)(82310400026)(4143699003)(56012099006)(11063799006)(10067099003)(6133799003)(22082099003)(18002099003)(13003099007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	7fJTWKNCHkkrLxUwQ/ceXk5C0y2vXqJArwdJ8lcUv+0zssW5lVfTr/omT3JGTNtDQqVy1lSCK55bUgW2E7Olhgp8w58O9gVnoyZsFOsHj+io2UHwRxSlusFhZePlS7G6mAZhP1cKhtlFMPl6Ium75OUAF/VGZuoi54mHzmyf9LpiCkwSoSIuWuJiHS72kFdcv5TPjMxFgrNrJ8CnPH+9q/3YTRqbITfOo1V1zeQ74LmmuTbVegEDOS/xZIpi2ZDkbI6WEtDMo1DWg+4218Dg5MeYFnNImPmC0i9lbNIXOEaKgQKUTCY8JZNCnMq7f+YcpYbwmUql2BdXgQMle6/mfg3IT8QKhYL2Tgii05Qs1sHFuO25nkhRkCRQ/U/0mJ5hT023RLW1J26N9xAiXUx1PR69TDo+Ki3MD8mObIWNaTbAuN9njLhiWhbiEObUAkmK
-X-Exchange-RoutingPolicyChecked:
-	mWbO0xmi/GV39jB5qJePo5jZvZCNFlJEmza+CFaNjw3YWrHHW5t6ZLvIrV1xB8X1QWhKA7RpKBZFzyMbX0bSVH1Y+DQk+HwLU10jP8Y+oe6CzLkb/LEob3my7W6NWERQuAHn5rkyB8WzCrogM8Shex39UcdW+0GLc+n/1+CBUwK/MtR13nqOYy/GR3U8z6F+OtoBRdSc8IYGxIwG1nbkgp9uJjoPJqNas5mNR5I9L6Lusq/WXi9pOILaKu+Jh+3b7zc6fMTv+ejj3m+QnEFfocongUIAJBObWuntH0SvFkQDVgmCUaOteDQgaYz/uROtYbu8y4/XsfhA3WwwvCLrRw==
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
-	f+wNKZwAelo23MV1j9uP2MaKSxNrSvINAL5rOi7mlK/v7RlUph+1C6+dfCxZ6FYuWBdHc31mA2vbNOUIX1HnYHTNhL0MjlUILheh7tesZnAkILEF5cdcAGuHAOua+jou/A/PkOYSxyYLlk6vrLFeFAzBj9euHkfQvFpXbAWP7XQ4cRtJPeWwVF6Mu/4ANNucrK+THMYyGvGZ4hULDEbLp9Q96688Zk+C5uNueukJmWIgzHIR6DgHUAB6SN3owwwZXpE6d6sDlYBJ6V0MMzkHSNi3OCp9Gx1R3dJ5laEazYl8sJ4AgOiyw0dYTpgM3TOZWAO0k7sshIon6lgX4ZEjAhOHuODAz8TOPBc0rKau6z6JXoqezCRbFvcU9tLjvC7dJrkA7kdbykinLA3spLg/DFgG7O1C9IERvVzg4rmfrudyXlX0wyPMfeWMBfd4Vs7Ha7tLwltKkypOFm57LooRsKfVqjVknLxoXHnAEGSl9cvuAZFWdPnrgXtyr4h2Bv5glulZOLYCm5vqb3A2NwPrjvbmzGkJCwMci7nsYuH2Tvv85UtL9eEy4O7HlUoWuaijOLzsVfpJu5JQMYjn0nxPIl/Hgarl23iH7ipsL894YxHv79GRf4zRTFx1Ugj55NqKfDwtyMcztXofcSFfMrZeOw==
-X-OriginatorOrg: ford.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jul 2026 02:55:17.0669
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 49071d4a-84b5-47a6-cfc7-08dee477ff81
-X-MS-Exchange-CrossTenant-Id: c990bb7a-51f4-439b-bd36-9c07fb1041c0
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c990bb7a-51f4-439b-bd36-9c07fb1041c0;Ip=[205.220.161.53];Helo=[mx0a-00498f04.pphosted.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CY4PEPF0000EE38.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR16MB5744
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE4MDAyNyBTYWx0ZWRfX0g+m3ttWvbid
- Iz5AkS5j61fEfTQJUr2Q8YA3FADcLoXY1yBt0qxzMpoPk4I3dex8iys9vD+eC1IxY6wsM1Qfa87
- X7353kF4CqQgF8roHE39UwWGedpn/pbEC19J5OPNB4CwZOEYCszO
-X-Proofpoint-ORIG-GUID: wrwsOyFSXirzaIYaCuvdpBdZyjwyairf
-X-Authority-Analysis: v=2.4 cv=WPBPmHsR c=1 sm=1 tr=0 ts=6a5aeb19 cx=c_pps
- a=JgOmb2+ItGzuqF5frRSN9Q==:117 a=lOEMawUel/sSvQipkIvNbg==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=8nJEP1OIZ-IA:10 a=RAioF0-LDSMA:10
- a=3PXLN80vpJUA:10 a=6NUGLSImWEsA:10 a=w9pew1qAHqMA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=P_n1zlmtWsCQbjROFjcg:22 a=MLwXIh1eZMowsRZfVxRb:22
- a=PeOOapuUAAAA:8 a=cbNQJ9GKAAAA:8 a=d65vQ875o1Adj3X0mQ8A:9 a=3ZKOabzyN94A:10
- a=wPNLvfGTeEIA:10 a=3whSkbs7g9Me0DR5EJEX:22 a=0BaqRfgCL6CLbWgV2pdm:22
-X-Proofpoint-GUID: wrwsOyFSXirzaIYaCuvdpBdZyjwyairf
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE4MDAyNyBTYWx0ZWRfXw27EXxlq4xJd
- CX5Za9IJ87NYLJjFwGzAbS0p02sVYBrSqYR2ooHrDjguD787CbX7YVr/7bACg3x2GxKj5DOyw21
- 3FQEvy0dYH3axzZ6afJAQfoiVoa8Jgcnq57upeLYTus14I4OHAVIuBiTysGnW3Zw7DZu6EkLhWL
- K0j/Kmcbp+H/yYunLYKgy/uvKxqpRC556Ae5oQrHrvwNPA5eeq2ZTqLIuSFlt3GRVGiHSj+/+w1
- WVHNIpH9kIIvIIhNgwtRGl8F3OcN5RLEhg3lCfYXjiaQYw+6ZDQAOSOXjqeTj3WN55F/hWEhg27
- 8QM7CTCP3ciWb8OeEkMpUdqqsLd1IAYFnnAxLue4w7sFBPpGPTtICwx2PTvnJ9si3kGwhXDsmCP
- JVm2cHNgbmQWigH3LlEjgZzgXJ6DGBSvDiuxhiVCVCFHAgnEFxLmxsrFewxn2FL9ZDtn3RJBS88
- UuWJASO/J/q8/U1jBmw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-18_01,2026-07-17_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
- lowpriorityscore=0 impostorscore=0 spamscore=0 adultscore=0 clxscore=1015
- malwarescore=0 phishscore=0 bulkscore=0 priorityscore=1501 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607180027
-X-purgate-ID: tlsNG-c1860d/1784343323-D5D4887B-D77316BE/0/0
+In-Reply-To: <CAHt6W4eBibmZ3fXd=sW4=nbuYV1QQMCQzEX=L7FaqL5aXeOvGQ@mail.gmail.com>
+X-purgate-ID: tlsNG-ef75cf/1784383413-3C610AE4-404B737C/0/0
 X-purgate-type: clean
-X-purgate-size: 3097
+X-purgate-size: 6718
 
-On Thu, Jul 16, 2026 at 11:50:48AM +0200, Teddy Astie wrote:
-> Le 15/07/2026 à 22:24, dmukhin@ford.com a écrit :
-> > From: Denis Mukhin <dmukhin@ford.com>
-> > 
-> > Use existing printk_ratelimit_ms and printk_ratelimit_burst variables in
-> > do_printk_ratelimit() instead of hardcoded values 5000 and 10 respectively.
-> > 
-> > Ensure rate limiter is disabled if either printk_ratelimit_ms or
-> > printk_ratelimit_burst is 0. Make sure no unnecessary initialization is done
-> > in the corner case.
-> > 
-> > Also, simplify the limiter code by using min().
-> > 
-> > Signed-off-by: Denis Mukhin <dmukhin@ford.com>
-> > ---
-> > Changes since v2:
-> > - fixed typing and 32-bit integer overflow problem
-> > ---
-> >   xen/drivers/char/console.c | 21 +++++++++++++--------
-> >   1 file changed, 13 insertions(+), 8 deletions(-)
-> > 
-> > diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-> > index 5d395f882e08..de9f2432445d 100644
-> > --- a/xen/drivers/char/console.c
-> > +++ b/xen/drivers/char/console.c
-> > @@ -1274,21 +1274,26 @@ bool __printk_ratelimit(unsigned int ratelimit_ms,
-> >                           unsigned int ratelimit_burst)
-> >   {
-> >       static DEFINE_SPINLOCK(ratelimit_lock);
-> > -    static unsigned long toks = 10 * 5 * 1000;
-> > -    static unsigned long last_msg;
-> > +    static unsigned long long toks, last_msg;
-> >       static unsigned int missed;
-> > +    unsigned long long now, limit;
-> >       unsigned long flags;
-> > -    unsigned long long now = NOW(); /* ns */
-> > -    unsigned long ms;
-> > +    s_time_t ms;
-> > -    do_div(now, 1000000);
-> > -    ms = (unsigned long)now;
-> > +    if ( !ratelimit_burst || !ratelimit_burst )
-> 
-> Do you intend here ( !ratelimit_ms || !ratelimit_burst ) ?
+--igHU3V1eAOL0i68e
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Date: Sat, 18 Jul 2026 16:03:29 +0200
+From: Marek =?utf-8?B?PT91dGYtOD9RP01hcmN6eWtvd3NraS1HPUMzPUIzcmVja2k/PQ==?= <marmarek@invisiblethingslab.com>
+To: Frediano Ziglio <freddy77@gmail.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
+Subject: Re: domU crash when resuming from suspend - Xen 4.22
 
-Whoops, thanks for the catch!
+On Fri, Jul 17, 2026 at 09:22:47PM +0100, Frediano Ziglio wrote:
+> On Tue, 14 Jul 2026 at 18:12, Marek Marczykowski-G=C3=B3recki
+> <marmarek@invisiblethingslab.com> wrote:
+> >
+> > On Fri, Jun 19, 2026 at 01:24:09PM +0200, Marek Marczykowski-G=C3=B3rec=
+ki wrote:
+> > > Hi,
+> > >
+> > > I'm continuing testing 4.22 and found this:
+> > >
+> > > When a domU is suspended (even without host suspend) it crashes on
+> > > resume with:
+> > >
+> > >     [   24.374629] BUG: kernel NULL pointer dereference, address: 000=
+0000000000020
+> > >     [   24.374647] #PF: supervisor read access in kernel mode
+> > >     [   24.374657] #PF: error_code(0x0000) - not-present page
+> > >     [   24.374668] PGD 0 P4D 0
+> > >     [   24.374675] Oops: Oops: 0000 [#1] SMP NOPTI
+> > >     [   24.374685] CPU: 0 UID: 0 PID: 19 Comm: migration/0 Not tainte=
+d 6.18.31-1.qubes.13.fc41.x86_64 #1 PREEMPT(full)
+> > >     [   24.374705] Stopper: multi_cpu_stop+0x0/0x140 <- __stop_cpus.c=
+onstprop.0+0x6f/0xb0
+> > >     [   24.374723] RIP: 0010:multi_cpu_stop+0x63/0x140
+> > >     [   24.374734] Code: 49 0f a3 1c 24 41 0f 92 c6 c7 44 24 04 00 00=
+ 00 00 31 ed 49 8d 5f 24 eb 2d 41 83 fd 02 74 6e 41 83 fd 03 74 49 f0 ff 0b=
+ 75 13 <41> 8b 47 20 41 8b 77 10 83 c0 01 41 89 77 24 41 89 47 20 41 83 fd
+> > >     [   24.374764] RSP: 0018:ffffc900000abe30 EFLAGS: 00010046
+> > >     [   24.374775] RAX: 0000000000000000 RBX: ffffc90000a13de4 RCX: 0=
+000000000000404
+> > >     [   24.374790] RDX: 0000000000000040 RSI: ffffffffffffffff RDI: 0=
+000000000770ef0
+> > >     [   24.374801] RBP: 0000000000000002 R08: ffffc900000abc80 R09: f=
+fffc900000abc8c
+> > >     [   24.374813] R10: 0000000000000000 R11: ffff88801e81cdc0 R12: f=
+fffffff81835ac0
+> > >     [   24.374825] R13: 0000000000000000 R14: 0000000000000000 R15: 0=
+000000000000000
+> > >     [   24.374837] FS:  0000000000000000(0000) GS:ffff88809b369000(00=
+00) knlGS:0000000000000000
+> > >     [   24.374850] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> > >     [   24.374860] CR2: 0000000000000020 CR3: 000000000d6a2002 CR4: 0=
+000000000770ef0
+> > >     [   24.374873] PKRU: 00000000
+> > >     [   24.374877] Call Trace:
+> > >     [   24.374884]  <TASK>
+> > >     [   24.374891]  ? __pfx_multi_cpu_stop+0x10/0x10
+> > >     [   24.374900]  cpu_stopper_thread+0xa3/0x170
+> > >     [   24.374908]  ? __pfx_smpboot_thread_fn+0x10/0x10
+> > >     [   24.374917]  smpboot_thread_fn+0xf3/0x220
+> > >     [   24.374925]  kthread+0xfc/0x240
+> > >     [   24.374933]  ? __pfx_kthread+0x10/0x10
+> > >     [   24.374940]  ? __pfx_kthread+0x10/0x10
+> > >     [   24.374949]  ret_from_fork+0x158/0x170
+> > >     [   24.374957]  ? __pfx_kthread+0x10/0x10
+> > >     [   24.374965]  ret_from_fork_asm+0x1a/0x30
+> > >     [   24.374973]  </TASK>
+> > >     [   24.374978] Modules linked in: snd_seq_dummy snd_hrtimer snd_s=
+eq snd_seq_device snd_timer snd soundcore cfg80211 rfkill vfat fat xenfs bi=
+nfmt_misc nft_reject_inet nf_reject_ipv4 nf_reject_ipv6 nft_reject nft_ct n=
+f_conntrack nf_defrag_ipv6 nf_defrag_ipv4 nf_tables intel_rapl_msr intel_ra=
+pl_common intel_uncore_frequency_common intel_pmc_ssram_telemetry intel_vse=
+c polyval_clmulni ghash_clmulni_intel xen_netfront xen_privcmd xen_gntdev x=
+en_gntalloc xen_blkback xen_evtchn fuse loop nfnetlink ip_tables overlay xe=
+n_blkfront
+> > >     [   24.375064] CR2: 0000000000000020
+> > >     [   24.375071] ---[ end trace 0000000000000000 ]---
+> > >     [   24.375080] RIP: 0010:multi_cpu_stop+0x63/0x140
+> > >     [   24.375089] Code: 49 0f a3 1c 24 41 0f 92 c6 c7 44 24 04 00 00=
+ 00 00 31 ed 49 8d 5f 24 eb 2d 41 83 fd 02 74 6e 41 83 fd 03 74 49 f0 ff 0b=
+ 75 13 <41> 8b 47 20 41 8b 77 10 83 c0 01 41 89 77 24 41 89 47 20 41 83 fd
+> > >     [   24.375115] RSP: 0018:ffffc900000abe30 EFLAGS: 00010046
+> > >     [   24.375124] RAX: 0000000000000000 RBX: ffffc90000a13de4 RCX: 0=
+000000000000404
+> > >     [   24.375142] RDX: 0000000000000040 RSI: ffffffffffffffff RDI: 0=
+000000000770ef0
+> > >     [   24.375155] RBP: 0000000000000002 R08: ffffc900000abc80 R09: f=
+fffc900000abc8c
+> > >     [   24.375170] R10: 0000000000000000 R11: ffff88801e81cdc0 R12: f=
+fffffff81835ac0
+> > >     [   24.375184] R13: 0000000000000000 R14: 0000000000000000 R15: 0=
+000000000000000
+> > >     [   24.375200] FS:  0000000000000000(0000) GS:ffff88809b369000(00=
+00) knlGS:0000000000000000
+> > >     [   24.375214] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> > >     [   24.375226] CR2: 0000000000000020 CR3: 000000000d6a2002 CR4: 0=
+000000000770ef0
+> > >     [   24.375241] PKRU: 00000000
+> > >     [   24.375247] Kernel panic - not syncing: Fatal exception
+> > >     [   25.417403] Shutting down cpus with NMI
+> > >     [   25.417447] Kernel Offset: disabled
+> > >
+> > > There is no change on the Linux kernel side (neither dom0 nor domU), =
+the
+> > > only change is updating Xen 4.19.4 -> 4.22-rc2 (seems to be already
+> > > broken on -rc1 too). This happens for both HVM and PVH domains. Haven=
+'t
+> > > tried PV domU (but dom0 survives host suspend).
+> >
+> > Any ideas?
+> >
+>=20
+> Hi,
+>    not many ideas but while testing my libxenguest changes I found
+> similar failures using xl create/save/restore. But I was testing more
+> PV guests.
+> Does 4.21 work ?
 
-> 
-> > +        return true;
-> > +
-> > +    limit = min(ratelimit_burst * ratelimit_ms, UINT_MAX);
-> 
-> That looks no-op (at least at first stance), as UINT_MAX is the largest
-> unsigned int value; hence `ratelimit_burst * ratelimit_ms` (both unsigned
-> int) can't be larger than it; even if it overflows.
-> 
-> I think we need to cast both ratelimit_ms and ratelimit_burst to unsigned
-> long long before doing the multiply, so that the multiply can't overflow
-> (not sure exactly how to write it without being too verbose though).
-> 
-> https://godbolt.org/z/sxWaPM3cr
-> 
-> > +    if ( !toks )
-> > +        toks = limit;
-> > +
-> > +    now = NOW(); /* ns */
-> > +    ms = do_div(now, MILLISECS(1));
-> >       spin_lock_irqsave(&ratelimit_lock, flags);
-> >       toks += ms - last_msg;
-> >       last_msg = ms;
-> > -    if ( toks > (ratelimit_burst * ratelimit_ms))
-> > -        toks = ratelimit_burst * ratelimit_ms;
-> > +    toks = min(toks, limit);
-> >       if ( toks >= ratelimit_ms )
-> >       {
-> >           unsigned int lost = missed;
-> 
-> With the if part fixed and the adjustments in the limit computation (cast to
-> unsigned long long before the multiply) :
-> Reviewed-by: Teddy Astie <teddy.astie@vates.tech>
-> 
-> Teddy
+It seems 4.21 also has this issue:
+https://gitlab.com/xen-project/people/marmarek/xen/-/jobs/15414211523
+But 4.20 is okay:
+https://gitlab.com/xen-project/people/marmarek/xen/-/jobs/15414227095
 
+I guess I can bisect it further.
 
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
 
+--igHU3V1eAOL0i68e
+Content-Type: application/pgp-signature; name=signature.asc
 
+-----BEGIN PGP SIGNATURE-----
 
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmpbh7EACgkQ24/THMrX
+1yz3ZAf9HiZ0RQJ8Hx2w+i4nGwwRjErh/GdZAHcQgeUdSKc6VaRu72iquajZuKy1
+3GblAgiMCnKQ/biFV+EUCQnnRVKXrLr1ydeC/hKLe7n9xm7XzasUky1Ul05xLfn4
+nvB2y+gAVkGBuf27N5UIxjkgt88fF9lxsMeZxnrEPRpFBiOZOpueUTT6/7Xu2vAU
+gzANRKJ8AWdYasFlqQwHC/8Na74FI7a7r34nwUYvRc5pzqIS0S7qzWoOiFvz+kIp
+VLsjdHMQwHiThkPNR9mGo0fmPvM6NPgPFgm8QNn5+IonduUnt2X2ZJgFdMDYE/ty
+kbn1t0pmRuVUCbFmrNnmKsgiIW1i7g==
+=o/3J
+-----END PGP SIGNATURE-----
+
+--igHU3V1eAOL0i68e--
 
