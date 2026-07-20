@@ -4,44 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80761C44521
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 07:19:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1366135.1616028 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17E03C44524
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 07:56:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1366145.1616037 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wliHp-0008CD-64; Mon, 20 Jul 2026 07:19:37 +0000
+	id 1wlirC-0004k2-Pq; Mon, 20 Jul 2026 07:56:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1366135.1616028; Mon, 20 Jul 2026 07:19:37 +0000
+Received: by outflank-mailman (output) from mailman id 1366145.1616037; Mon, 20 Jul 2026 07:56:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wliHp-0008C6-3S; Mon, 20 Jul 2026 07:19:37 +0000
-Received: by outflank-mailman (input) for mailman id 1366135;
- Mon, 20 Jul 2026 07:19:35 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wlirC-0004jv-Mm; Mon, 20 Jul 2026 07:56:10 +0000
+Received: by outflank-mailman (input) for mailman id 1366145;
+ Mon, 20 Jul 2026 07:56:09 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wliHn-0008C0-1b
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 07:19:35 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1wlirB-0004jp-Al
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 07:56:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wliHm-000DDV-EL
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 09:19:34 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wlirA-006OD5-8j
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 09:56:08 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a5dcbf7-5cb7-0a2a0a5109dd-0a2a4509ec72-34
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:19:34 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a5dcbff-be1a-0a2a45090019-d155802cc44a-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:19:27 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-4954df200ddso12753855e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 00:19:27 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f63ee926dsm25670999f8f.35.2026.07.20.00.19.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Jul 2026 00:19:26 -0700 (PDT)
+ (envelope-from <marcandre.lureau@redhat.com>)
+ id 6a5dd48b-e002-0a2a0a5209dd-0a2a4508d7e8-46
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:56:07 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <marcandre.lureau@redhat.com>)
+ id 6a5dd496-f659-0a2a45080019-aa0a817c7e1f-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:56:07 +0200
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-193-CpgzGo4-MYukQUb9BufLvA-1; Mon,
+ 20 Jul 2026 03:56:03 -0400
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 96D251955F22; Mon, 20 Jul 2026 07:55:59 +0000 (UTC)
+Received: from localhost (unknown [10.44.22.17])
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 35B0418001E0; Mon, 20 Jul 2026 07:55:56 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,157 +60,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784531967; x=1785136767; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ykyWWK+VUt4EYjbVAGccjri2nV/bqYhJg97wYXOcOU4=;
-        b=JfzzEMaJ7WyNGiadADD5Q0SI2VTVuTdWCV2rSIYgZFHo08JBjOUNc/LaA3oob1rdl4
-         MVw41RV3NRLQOxgzCVahzBnjplYoX7+34tjpinlQD7P1gfJ32yfRLTlCum79AJmy67qn
-         sgm84FfLZmxuG3J5bN1lWPhcT11JP8th/mt/VzFUHtYEyjQtFVk4fzx2Jl34e2bg89n9
-         YgKRn2YmPftpeUiNza6p0FH/12J3V3Nps3F6lcpL6jFdx2tWNGoKoousuev1qLzdUo2V
-         ClqY8yoojVowzVIetHqcx1jfF5ncx+1Fftyn0Ej71aoPIpeo+gpM2aWDElLdIS7oJ60W
-         BkRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784531967; x=1785136767;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ykyWWK+VUt4EYjbVAGccjri2nV/bqYhJg97wYXOcOU4=;
-        b=FhWm0zg1cpH0BxavlemFplxFnAuiN0+IsabNKsfSs+cS3ap5N3cdBWwAu6bftqfTZk
-         J/MmaGZeFWIooPA1DGBJMflqLiBLGTl1wFQA/SES9mbepk3FGTbzCIdu2k7OeuN3qnD5
-         8IgMzrFP0tE7OCieYfsLDwEKPZLwo7hwrpAWUF4KVcS+MZANzRn3DY+KUZvoszS2KwSk
-         D0SPRFeME/PjnKOzx1ny6MDmaS1X8BJQdKzOGbXrSjSfWL61L7dINtTP5PuVcJYJYCEi
-         CT0JL4j+ybflLCozbCViwWE9bW01nvpNNgIbforVAabR0Fv5Xkl5xY4r6P5iXK/MPoXs
-         mgiw==
-X-Forwarded-Encrypted: i=1; AHgh+RqfNX3WexCG8biy6SwDLoKNCTXQZNSWeCEBfi8XJxDd+Xf0/5fdXCsrX7cQ3norrIOqwJjETYsJRZE=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyAgsJ04ngj6y6uSXRv4EX1bqInmei+1RkZ5brkIExZQX/CczUJ
-	m9DWQCIDSPvsc1KwAgYCHHW5UzUD8faimgHFVv9HYZbEJbyQZJxCfhxdaYEqNWYw1Q==
-X-Gm-Gg: AfdE7cmmAQq91aRYclkLI1gaSY+LhNXhzy3S1hgxMC7PyeoRA/jbip/hnUhr+if8/6D
-	cEx9eZfVJ4KWpE9DS7PyJIBoG9KlODVeBQAomj+B7duCPN21LIGj2wYSyFUF0tG9Hz0ldqwwE2r
-	tJT9DnZwUnhHmS2vRljAMelM7EH0evjB+66wp5EYEKNv0LK1zUHxtoSfvTgRT20s1gQV2F9673A
-	bHfyrvZDxuOWQ/UYOYZFhPa6NBbAI+1BgmpUwo3QhEqq14FgkkbltsnsSEgEFlTKKVJ7Ba/hGop
-	a9fd+hD7KeXTANKYAIu/84utv4d0Q37tq3b5BVpee4SpxUgeAEmDzmj0u+f/klCm3UV5uJPGTek
-	aF3AsTjMA98thOPLfhRB0GMtsJAKJZ7+HOpNmn6+XdU6ll3kZQdU2PnNTa5RKCTh2iSRRH6BAWa
-	mOy78tzWE9Nf1kf9V8r9rKN405WX6P1AhB6WELMGrHoo44SMi0txF2mims/citAdqUg2+npn558
-	gl6
-X-Received: by 2002:a05:600c:6212:b0:495:5375:2510 with SMTP id 5b1f17b1804b1-495537526b4mr75573005e9.24.1784531967087;
-        Mon, 20 Jul 2026 00:19:27 -0700 (PDT)
-Message-ID: <83ac6e9b-3aaf-402d-9877-2ed63d365367@suse.com>
-Date: Mon, 20 Jul 2026 09:19:27 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1784534166;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=D6SwdudhFqpaKV0XMGXiUeT/Rco0k1hj7dJhN9XTk30=;
+	b=QB6UfHIZsQxnO20/sxBTkz6JwB53hi24THZvC6E9/mzqh5xWvEe5Bm0b5zbBzmCBY90etV
+	sl6f1hpV3igK+Ogg2+2KOedQYZDGBh+yb4MBO91tLRPYu+P90tT3lxbPyBKHiSsbYVUQse
+	DELcUrlZfbBoQOjNOSTzIeDksnMk/Oo=
+X-MC-Unique: CpgzGo4-MYukQUb9BufLvA-1
+X-Mimecast-MFC-AGG-ID: CpgzGo4-MYukQUb9BufLvA_1784534161
+From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+Subject: [PATCH 0/8] coroutine: add missing annotations
+Date: Mon, 20 Jul 2026 11:55:29 +0400
+Message-Id: <20260720-co-v1-0-fabb4db3c204@redhat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: [4.22] Re: [PATCH] x86/domctl: restore all registers in
- arch_{get,set}_info_guest()
-To: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <20260720001223.2876628-1-marmarek@invisiblethingslab.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260720001223.2876628-1-marmarek@invisiblethingslab.com>
-Content-Type: text/plain; charset=UTF-8
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDcyMD3eR8XTMj0xRLi2TzlGTTVCWgwoKi1LTMCrAh0bEQfnFpUlZqcgl
+ Ip1JtLQALZewkZgAAAA==
+X-Change-ID: 20260720-co-625d98c7dc5e
+To: qemu-devel@nongnu.org
+Cc: Markus Armbruster <armbru@redhat.com>, Peter Xu <peterx@redhat.com>, 
+ Fabiano Rosas <farosas@suse.de>, 
+ =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ John Snow <jsnow@redhat.com>, 
+ Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>, 
+ Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>, 
+ qemu-block@nongnu.org, Stefan Hajnoczi <stefanha@redhat.com>, 
+ Fam Zheng <fam@euphon.net>, "Denis V. Lunev" <den@openvz.org>, 
+ Christian Schoenebeck <qemu_oss@crudebyte.com>, Greg Kurz <groug@kaod.org>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Anthony PERARD <anthony@xenproject.org>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ xen-devel@lists.xenproject.org, Li Zhijian <lizhijian@fujitsu.com>, 
+ =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1771;
+ i=marcandre.lureau@redhat.com; h=from:subject:message-id;
+ bh=3p+9mnh7A1Sd9gkpZEuHm2Arv0B2DJblMllOqVWD9JU=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqXdSJGhUyT1s/3ctymKycGnr95OA0QKInBP1Ui
+ yXIJzazgUKJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCal3UiQAKCRDa6OEJdZac
+ 5eMbEACq8EYoKuxQ9/nJnUX4f5S9btARbnstqg+dSMili5YH/rKseLzJI6ASS9TRCiSaLbKxCHr
+ J0NH1UiF6C9zFiw2Fcpt7ZQafNIFmEAf8xLYSC0Uuf0RrO97+r+IXptsPvua0gcVAULgRrDkGZh
+ aiTm8owI247yvspBOR7nty5r5jfYB6o4znP70TAd2hhGTB5YN43ajTnooWxl1joh+byoU/csVqS
+ 1g47AbXMZyZLxkpwayh4IcPRZaiEu9XM1JsMHOceeOkvfG68vRzNYwmFNeDyGtJeQCU+e4P3GdO
+ JqGc/DDDP5CO2K88SV4AouRI0wP3xzV+IWZFXMqPPURxKomVtZMesnur2fwIZpD2ANvVLkx8IG4
+ 4Vvt486nrxm6rqGjCG8qqGX8bMUGwN1kwPxwcLKB+T9uUD5dut147306SNOFxE2TTecc49oEFlF
+ PiL9bmKXCYgE7082Jyv8XQpnvqDo9Qjt+biA3A3IPdPghJYlFvrCDu0hkY3aqHqmZdnC1WkKFXi
+ 23+TLZlfkBIOOeqjLQ/er5TRHC4NIB1yTeUqYXTb/vJH2nbbrzJBchS6rmCtAdNJuePl8SIq1az
+ Ay2aGD4BDqnMux3yzImPX4z0wGgcu+1/8LfK7yxA5x6n/x887t2hbwyNe/mwkZXHggL6a4TAcWh
+ PAxjQOvVtrBQiZg==
+X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
+ fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Mimecast-MFC-PROC-ID: Gs2gCMUFiNtEyGmhq8tuB64h2kLNndpA9hZVegf1ffE_1784534161
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1784531967-FDC6D034-4274AEA1/0/0
+X-purgate-ID: tlsNG-c1860d/1784534167-D594A87B-1BF89B59/0/0
 X-purgate-type: clean
-X-purgate-size: 3336
+X-purgate-size: 1773
 
-On 20.07.2026 02:12, Marek Marczykowski-Górecki wrote:
-> Commit 9f892f84c279 ("x86/domctl: Stop using XLAT_cpu_user_regs()")
-> converted memcpy() of the cpu_user_regs structure to explicit copy of
-> its fields. In the compat case, it intentionally missed few of them,
-> named in the commit message. But the 64bit case missed also r8-r15
-> registers, which was not intentional. This, at least, caused Linux
-> 6.18.x crash when resuming PVH domU.
+Hi
 
-Oh, wow, what a bad mistake (including by me as the reviewer).
+Add missing coroutine_fn, coroutine_mixed_fn annotations and fix
+a few related issues across monitor, migration, io, block, and
+9pfs subsystems.
 
-> Fix it by adding missing assignments.
-> 
-> Fixes: 9f892f84c279 ("x86/domctl: Stop using XLAT_cpu_user_regs()")
-> Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+---
+Marc-André Lureau (8):
+      monitor: annotate monitor_qmp_dispatcher_pop_any() as coroutine
+      migration: fix qemu_get_counted_string annotation
+      io: add missing coroutine annotation
+      block: add missing coroutine annotation
+      qcow2: remove invalid qcow2_check_refcounts calls
+      block: add missing coroutine_fn annotations
+      hw/9pfs: annotate V9fsTransport callbacks as coroutine_fn
+      migration/rdma: annotate and simplify wait_comp_channel()
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+ hw/9pfs/9p.h                 | 26 +++++++++++++++-----------
+ include/block/blockjob_int.h |  2 +-
+ include/io/channel.h         |  4 ++--
+ block/commit.c               |  5 +++--
+ block/crypto.c               | 13 +++++++------
+ block/io.c                   |  8 +++++---
+ block/parallels.c            |  5 +++--
+ block/qcow2-snapshot.c       | 18 ------------------
+ block/qcow2.c                | 11 +++++++----
+ blockjob.c                   |  3 ++-
+ hw/9pfs/9p.c                 | 31 +++++++++++++++++++------------
+ hw/9pfs/virtio-9p-device.c   | 24 +++++++++++++-----------
+ hw/9pfs/xen-9p-backend.c     | 34 +++++++++++++++++-----------------
+ io/channel.c                 |  5 +++--
+ migration/qemu-file.c        |  2 +-
+ migration/rdma.c             | 12 ++++--------
+ monitor/qmp.c                |  3 ++-
+ 17 files changed, 104 insertions(+), 102 deletions(-)
+---
+base-commit: 5ef0ecc5942ee07bb581cc96a97bbfc0fdf4005c
+change-id: 20260720-co-625d98c7dc5e
 
-One remark though (equally applying to the original change):
+Best regards,
+--  
+Marc-André Lureau <marcandre.lureau@redhat.com>
 
-> --- a/xen/arch/x86/domain.c
-> +++ b/xen/arch/x86/domain.c
-> @@ -1255,6 +1255,14 @@ int arch_set_info_guest(
->  
->      if ( !compat )
->      {
-> +        v->arch.user_regs.r15               = c.nat->user_regs.r15;
-> +        v->arch.user_regs.r14               = c.nat->user_regs.r14;
-> +        v->arch.user_regs.r13               = c.nat->user_regs.r13;
-> +        v->arch.user_regs.r12               = c.nat->user_regs.r12;
-> +        v->arch.user_regs.r11               = c.nat->user_regs.r11;
-> +        v->arch.user_regs.r10               = c.nat->user_regs.r10;
-> +        v->arch.user_regs.r9                = c.nat->user_regs.r9;
-> +        v->arch.user_regs.r8                = c.nat->user_regs.r8;
->          v->arch.user_regs.rbx               = c.nat->user_regs.rbx;
->          v->arch.user_regs.rcx               = c.nat->user_regs.rcx;
->          v->arch.user_regs.rdx               = c.nat->user_regs.rdx;
-
-Neither here nor ...
-
-> --- a/xen/arch/x86/domctl.c
-> +++ b/xen/arch/x86/domctl.c
-> @@ -1481,6 +1481,14 @@ void arch_get_info_guest(struct vcpu *v, vcpu_guest_context_u c)
->      if ( !compat )
->      {
->          /* Backing memory is pre-zeroed. */
-> +        c.nat->user_regs.r15               = v->arch.user_regs.r15;
-> +        c.nat->user_regs.r14               = v->arch.user_regs.r14;
-> +        c.nat->user_regs.r13               = v->arch.user_regs.r13;
-> +        c.nat->user_regs.r12               = v->arch.user_regs.r12;
-> +        c.nat->user_regs.r11               = v->arch.user_regs.r11;
-> +        c.nat->user_regs.r10               = v->arch.user_regs.r10;
-> +        c.nat->user_regs.r9                = v->arch.user_regs.r9;
-> +        c.nat->user_regs.r8                = v->arch.user_regs.r8;
->          c.nat->user_regs.rbx               = v->arch.user_regs.rbx;
->          c.nat->user_regs.rcx               = v->arch.user_regs.rcx;
->          c.nat->user_regs.rdx               = v->arch.user_regs.rdx;
-
-... here it becomes clear what has determined the order in which fields
-are copied. It's neither by register number nor by field order nor
-alphabetically. We might do ourselves a (however minor) favor if we used
-a clear criteria; likely field order would be best. The more that the
-new internal struct cpu_user_regs mirrors field order from the original
-external one. Andrew (in particular)?
-
-Also, despite this being an issue in 4.21 already, I think this definitely
-wants considering for 4.22.
-
-Jan
 
