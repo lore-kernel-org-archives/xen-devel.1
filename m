@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E9B1C44521
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 07:00:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1366124.1616020 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80761C44521
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 07:19:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1366135.1616028 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlhz2-00068N-Lq; Mon, 20 Jul 2026 07:00:12 +0000
+	id 1wliHp-0008CD-64; Mon, 20 Jul 2026 07:19:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1366124.1616020; Mon, 20 Jul 2026 07:00:12 +0000
+Received: by outflank-mailman (output) from mailman id 1366135.1616028; Mon, 20 Jul 2026 07:19:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlhz2-00068F-Gk; Mon, 20 Jul 2026 07:00:12 +0000
-Received: by outflank-mailman (input) for mailman id 1366124;
- Mon, 20 Jul 2026 07:00:11 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wliHp-0008C6-3S; Mon, 20 Jul 2026 07:19:37 +0000
+Received: by outflank-mailman (input) for mailman id 1366135;
+ Mon, 20 Jul 2026 07:19:35 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wlhz1-000689-1G
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 07:00:11 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wliHn-0008C0-1b
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 07:19:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wlhyz-005gkV-Bi
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 09:00:09 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wliHm-000DDV-EL
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 09:19:34 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a5dc772-2eae-0a2a0a5409dd-0a2a450ba4b2-30
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:00:09 +0200
+ id 6a5dcbf7-5cb7-0a2a0a5109dd-0a2a4509ec72-34
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:19:34 +0200
 Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a5dc778-b7e8-0a2a450b0019-d155802ce02a-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:00:08 +0200
+ id 6a5dcbff-be1a-0a2a45090019-d155802cc44a-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:19:27 +0200
 Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-4956242332dso1565935e9.2
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 00:00:08 -0700 (PDT)
+ 5b1f17b1804b1-4954df200ddso12753855e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 00:19:27 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4955fee64dasm38632805e9.10.2026.07.20.00.00.06
+ ffacd0b85a97d-47f63ee926dsm25670999f8f.35.2026.07.20.00.19.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Jul 2026 00:00:07 -0700 (PDT)
+ Mon, 20 Jul 2026 00:19:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,63 +55,57 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784530808; x=1785135608; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1784531967; x=1785136767; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=xfAGzmmbM30stEk1fHIw9A+/NFSI9D65VLhLXj5CZo0=;
-        b=L/vIeEZ9PRVBeSpC03v7K3IvQQflKVh40kiB3KLiIFY0GkNv1UMijzUIdWuqxa8UsB
-         xnDb9GbDIS/fOog61xFR8BHXjtRH5I3+bCUuF6S0VSzD2d6/E6kBdwPzpd/gRwU1NGxO
-         +x7kCc7F1IjXPNF9/2pPktFTJ5qEupL5R5HPEUtNpDv635e5hOPOu9qu0pYmCIm5pMgo
-         6KyMKxEnUG3j7gdIaTP2HmVMWWgqA5DOrziQ1iTNMghqxlpi5E8AfykvVbcM6fMDNOw/
-         sggYzkVHFxQPY3qL05AuFWqfAW88NDVzHgRnrmJx6euS1Ga173Puj+WFYAzGliilL43i
-         69xw==
+        bh=ykyWWK+VUt4EYjbVAGccjri2nV/bqYhJg97wYXOcOU4=;
+        b=JfzzEMaJ7WyNGiadADD5Q0SI2VTVuTdWCV2rSIYgZFHo08JBjOUNc/LaA3oob1rdl4
+         MVw41RV3NRLQOxgzCVahzBnjplYoX7+34tjpinlQD7P1gfJ32yfRLTlCum79AJmy67qn
+         sgm84FfLZmxuG3J5bN1lWPhcT11JP8th/mt/VzFUHtYEyjQtFVk4fzx2Jl34e2bg89n9
+         YgKRn2YmPftpeUiNza6p0FH/12J3V3Nps3F6lcpL6jFdx2tWNGoKoousuev1qLzdUo2V
+         ClqY8yoojVowzVIetHqcx1jfF5ncx+1Fftyn0Ej71aoPIpeo+gpM2aWDElLdIS7oJ60W
+         BkRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784530808; x=1785135608;
+        d=1e100.net; s=20251104; t=1784531967; x=1785136767;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=xfAGzmmbM30stEk1fHIw9A+/NFSI9D65VLhLXj5CZo0=;
-        b=UtFrZO5dlRHMCnBgACkB9206RLBAO3Pee30NvtO4RbPEf5yGtfNiw7QjCXuFw2KtTd
-         NwfDe4DsJti/0QpAoeVAlOBmilJVNGvws35H25BO+6JQcKI1omdpDuN6ETQMuFhAoziJ
-         FGtRVK6ZF23j4IUl94C7ohzzseOr4tp53qwX+ew67jZKOtvPPr3+yLyopERaMYFoHIx1
-         OHdcFiCwidnMgAj2hKMZ9fBTDAJT6/4o6Q8E4AwsGITcP1dvPwQutbjcRnIhEx9xBBTA
-         KRk5bw6K5yc7AUCwmOQxh5kSYY37ggCiaOr1Xl4berNHnBpjMrUYHFd136O+1dAxzwB9
-         3kAQ==
-X-Forwarded-Encrypted: i=1; AHgh+RryPyGKOQWLM8apWjzi4yhn6Hi+/LF+O7mXgUHltiKn6c/V1P+BHKfbRQOi6yTgezsGDKyLJjk2d/I=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwwBuI75w57o9Cdi27zRmeKb4xzjdPXxNtygdpur78QbcDPEoBJ
-	8edQhnfNfC2mkdKQH/t/LYCex4nPCgIDStNd3aj4x5rP0XQ9STtVq2C49UBq9hnesA==
-X-Gm-Gg: AfdE7clEQcuxH2SQJ+Cfo4U9842Pqttmvb5OR40sf2wC25oVVoXwpoUNvi8E52CMEKz
-	yRfof7+okUDfZys0lR+pLTHiYPNZPqhS6hnbcID87e0RsZ7mdmXA/ZbqpOUMPsKtKUafEPgi/vi
-	JHOYyZvA9Ywyioj/BE8P6I+I/r3N2iAOUzo9dYHevTZp+8Hp0rsUrT+WTIsaVqJ/xagHcUqdClo
-	/ezOJ5qx7iQyiDsHD74FtoA4qloXi3tGDrZabXa5nzsn/NItJwPm7eeRQg3KqNiOI3h8NJLPCoR
-	lc5epyKfNDDp1mazEIuLaaPg16qDNSRPDkH53+63wCfgiXYzqwRpq1YSVQ9Qevh37/MOrrKJS3A
-	wTU6IULdDendQsyN/y2eSVmZpE5VG8V/2cNK3sryfvIWFjW/rK4+6c1YPlvNIS7bT1+95o0/3s5
-	T/bFD4xesAhMYLZeKl7q/d3PysIOrdY2KBOMPsrj9NH1jwn5pXVFi2H83euQbQH+GjZA==
-X-Received: by 2002:a05:600c:3512:b0:495:4572:21af with SMTP id 5b1f17b1804b1-4954a3ef7dbmr132736855e9.9.1784530807574;
-        Mon, 20 Jul 2026 00:00:07 -0700 (PDT)
-Message-ID: <572ff8b3-99dd-489e-b01f-76d7dee07a14@suse.com>
-Date: Mon, 20 Jul 2026 09:00:07 +0200
+        bh=ykyWWK+VUt4EYjbVAGccjri2nV/bqYhJg97wYXOcOU4=;
+        b=FhWm0zg1cpH0BxavlemFplxFnAuiN0+IsabNKsfSs+cS3ap5N3cdBWwAu6bftqfTZk
+         J/MmaGZeFWIooPA1DGBJMflqLiBLGTl1wFQA/SES9mbepk3FGTbzCIdu2k7OeuN3qnD5
+         8IgMzrFP0tE7OCieYfsLDwEKPZLwo7hwrpAWUF4KVcS+MZANzRn3DY+KUZvoszS2KwSk
+         D0SPRFeME/PjnKOzx1ny6MDmaS1X8BJQdKzOGbXrSjSfWL61L7dINtTP5PuVcJYJYCEi
+         CT0JL4j+ybflLCozbCViwWE9bW01nvpNNgIbforVAabR0Fv5Xkl5xY4r6P5iXK/MPoXs
+         mgiw==
+X-Forwarded-Encrypted: i=1; AHgh+RqfNX3WexCG8biy6SwDLoKNCTXQZNSWeCEBfi8XJxDd+Xf0/5fdXCsrX7cQ3norrIOqwJjETYsJRZE=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyAgsJ04ngj6y6uSXRv4EX1bqInmei+1RkZ5brkIExZQX/CczUJ
+	m9DWQCIDSPvsc1KwAgYCHHW5UzUD8faimgHFVv9HYZbEJbyQZJxCfhxdaYEqNWYw1Q==
+X-Gm-Gg: AfdE7cmmAQq91aRYclkLI1gaSY+LhNXhzy3S1hgxMC7PyeoRA/jbip/hnUhr+if8/6D
+	cEx9eZfVJ4KWpE9DS7PyJIBoG9KlODVeBQAomj+B7duCPN21LIGj2wYSyFUF0tG9Hz0ldqwwE2r
+	tJT9DnZwUnhHmS2vRljAMelM7EH0evjB+66wp5EYEKNv0LK1zUHxtoSfvTgRT20s1gQV2F9673A
+	bHfyrvZDxuOWQ/UYOYZFhPa6NBbAI+1BgmpUwo3QhEqq14FgkkbltsnsSEgEFlTKKVJ7Ba/hGop
+	a9fd+hD7KeXTANKYAIu/84utv4d0Q37tq3b5BVpee4SpxUgeAEmDzmj0u+f/klCm3UV5uJPGTek
+	aF3AsTjMA98thOPLfhRB0GMtsJAKJZ7+HOpNmn6+XdU6ll3kZQdU2PnNTa5RKCTh2iSRRH6BAWa
+	mOy78tzWE9Nf1kf9V8r9rKN405WX6P1AhB6WELMGrHoo44SMi0txF2mims/citAdqUg2+npn558
+	gl6
+X-Received: by 2002:a05:600c:6212:b0:495:5375:2510 with SMTP id 5b1f17b1804b1-495537526b4mr75573005e9.24.1784531967087;
+        Mon, 20 Jul 2026 00:19:27 -0700 (PDT)
+Message-ID: <83ac6e9b-3aaf-402d-9877-2ed63d365367@suse.com>
+Date: Mon, 20 Jul 2026 09:19:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 1/5] xen/device-tree: Parse 'cpu-map' node for CPU
- topology exploration
-To: Hirokazu Takahashi <taka@valinux.co.jp>
-Cc: "Mykyta_Poturai@epam.com" <Mykyta_Poturai@epam.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <20260714104445.919830-1-taka@valinux.co.jp>
- <20260714104445.919830-2-taka@valinux.co.jp>
- <f2f3572c-6a77-4f65-bf8e-82298d145a6e@suse.com>
- <OS9P286MB722280A3A0E6E36B8194501B82C42@OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM>
+Subject: [4.22] Re: [PATCH] x86/domctl: restore all registers in
+ arch_{get,set}_info_guest()
+To: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20260720001223.2876628-1-marmarek@invisiblethingslab.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -137,46 +131,79 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <OS9P286MB722280A3A0E6E36B8194501B82C42@OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM>
+In-Reply-To: <20260720001223.2876628-1-marmarek@invisiblethingslab.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1784530808-A8AC89EA-E6B2B860/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-bad1c0/1784531967-FDC6D034-4274AEA1/0/0
 X-purgate-type: clean
-X-purgate-size: 1469
+X-purgate-size: 3336
 
-On 19.07.2026 03:17, Hirokazu Takahashi wrote:
->>> +/* SPDX-License-Identifier: GPL-2.0-only */
->>> +
->>> +#ifndef XEN_CPU_TOPOLOGY_H
->>> +#define XEN_CPU_TOPOLOGY_H
->>> +
->>> +#include <xen/cpumask.h>
->>> +
->>> +#ifdef CONFIG_GENERIC_CPU_TOPOLOGY
->>> +
->>> +struct cpu_topology {
->>> +    cpumask_var_t thread_sibling;
->>
->> Btw, as this aspect becomes more apparent when looking at patch 2: What is the
->> relationship of this (i.e. cpu_topology[cpu].thread_sibling) to
->> per_cpu(cpu_sibling_mask, cpu)? The two ought to be identical, but I can't see
->> this being guaranteed. And if they were identical, why would both be needed?
->>
->>> +    cpumask_var_t core_sibling;
->>
->> Same for this vs the per-CPU cpu_core_mask.
-> 
-> I have considered the same thing before. However, considering the CPU hotplug
-> support that Mykyta Poturai is currently implementing, it is difficult to remove
-> thread_sibling and core_sibling from struct cpu_topology. We intend to use 
-> cpu_topology to hold information for CPUs that haven't been hotplugged yet.
-> 
-> While it might make more sense to remove the per-CPU masks instead, 
-> I hesitated to do so because the impact on x86 Xen would be quite large.
+On 20.07.2026 02:12, Marek Marczykowski-Górecki wrote:
+> Commit 9f892f84c279 ("x86/domctl: Stop using XLAT_cpu_user_regs()")
+> converted memcpy() of the cpu_user_regs structure to explicit copy of
+> its fields. In the compat case, it intentionally missed few of them,
+> named in the commit message. But the 64bit case missed also r8-r15
+> registers, which was not intentional. This, at least, caused Linux
+> 6.18.x crash when resuming PVH domU.
 
-That's understood, but imo removing the duplication should still be a follow-on
-work item, if it can't reasonably be done right here. And the duplication then
-imo wants an extra word of justification in the patch(es) introducing it.
+Oh, wow, what a bad mistake (including by me as the reviewer).
+
+> Fix it by adding missing assignments.
+> 
+> Fixes: 9f892f84c279 ("x86/domctl: Stop using XLAT_cpu_user_regs()")
+> Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+One remark though (equally applying to the original change):
+
+> --- a/xen/arch/x86/domain.c
+> +++ b/xen/arch/x86/domain.c
+> @@ -1255,6 +1255,14 @@ int arch_set_info_guest(
+>  
+>      if ( !compat )
+>      {
+> +        v->arch.user_regs.r15               = c.nat->user_regs.r15;
+> +        v->arch.user_regs.r14               = c.nat->user_regs.r14;
+> +        v->arch.user_regs.r13               = c.nat->user_regs.r13;
+> +        v->arch.user_regs.r12               = c.nat->user_regs.r12;
+> +        v->arch.user_regs.r11               = c.nat->user_regs.r11;
+> +        v->arch.user_regs.r10               = c.nat->user_regs.r10;
+> +        v->arch.user_regs.r9                = c.nat->user_regs.r9;
+> +        v->arch.user_regs.r8                = c.nat->user_regs.r8;
+>          v->arch.user_regs.rbx               = c.nat->user_regs.rbx;
+>          v->arch.user_regs.rcx               = c.nat->user_regs.rcx;
+>          v->arch.user_regs.rdx               = c.nat->user_regs.rdx;
+
+Neither here nor ...
+
+> --- a/xen/arch/x86/domctl.c
+> +++ b/xen/arch/x86/domctl.c
+> @@ -1481,6 +1481,14 @@ void arch_get_info_guest(struct vcpu *v, vcpu_guest_context_u c)
+>      if ( !compat )
+>      {
+>          /* Backing memory is pre-zeroed. */
+> +        c.nat->user_regs.r15               = v->arch.user_regs.r15;
+> +        c.nat->user_regs.r14               = v->arch.user_regs.r14;
+> +        c.nat->user_regs.r13               = v->arch.user_regs.r13;
+> +        c.nat->user_regs.r12               = v->arch.user_regs.r12;
+> +        c.nat->user_regs.r11               = v->arch.user_regs.r11;
+> +        c.nat->user_regs.r10               = v->arch.user_regs.r10;
+> +        c.nat->user_regs.r9                = v->arch.user_regs.r9;
+> +        c.nat->user_regs.r8                = v->arch.user_regs.r8;
+>          c.nat->user_regs.rbx               = v->arch.user_regs.rbx;
+>          c.nat->user_regs.rcx               = v->arch.user_regs.rcx;
+>          c.nat->user_regs.rdx               = v->arch.user_regs.rdx;
+
+... here it becomes clear what has determined the order in which fields
+are copied. It's neither by register number nor by field order nor
+alphabetically. We might do ourselves a (however minor) favor if we used
+a clear criteria; likely field order would be best. The more that the
+new internal struct cpu_user_regs mirrors field order from the original
+external one. Andrew (in particular)?
+
+Also, despite this being an issue in 4.21 already, I think this definitely
+wants considering for 4.22.
 
 Jan
 
