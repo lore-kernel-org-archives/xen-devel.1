@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EAC0C44515
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 14:58:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1366693.1616639 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9705C44515
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 15:09:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1366701.1616647 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlpRE-0006tb-Sv; Mon, 20 Jul 2026 14:57:48 +0000
+	id 1wlpcW-0000LY-Ra; Mon, 20 Jul 2026 15:09:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1366693.1616639; Mon, 20 Jul 2026 14:57:48 +0000
+Received: by outflank-mailman (output) from mailman id 1366701.1616647; Mon, 20 Jul 2026 15:09:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlpRE-0006tU-Pb; Mon, 20 Jul 2026 14:57:48 +0000
-Received: by outflank-mailman (input) for mailman id 1366693;
- Mon, 20 Jul 2026 14:57:47 +0000
+	id 1wlpcW-0000LR-Oi; Mon, 20 Jul 2026 15:09:28 +0000
+Received: by outflank-mailman (input) for mailman id 1366701;
+ Mon, 20 Jul 2026 15:09:27 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wlpRD-0006sG-7w
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 14:57:47 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wlpcV-0000LL-Bw
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 15:09:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wlpRC-00719u-HS
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 16:57:46 +0200
+ id 1wlpcT-009sHG-KR
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 17:09:25 +0200
 Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a5e3766-bab6-0a2a0a5309dd-0a2a4503e61a-6
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 16:57:46 +0200
-Received: from [209.85.221.50] (helo=mail-wr1-f50.google.com)
+ id 6a5e3a16-e002-0a2a0a5209dd-0a2a4503e8d8-44
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 17:09:25 +0200
+Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
  by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a5e376a-fae8-0a2a45030019-d155dd32c155-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 16:57:46 +0200
-Received: by mail-wr1-f50.google.com with SMTP id
- ffacd0b85a97d-47f752b3423so1048665f8f.3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 07:57:46 -0700 (PDT)
+ id 6a5e3a24-fae8-0a2a45030019-d155dd2fe59e-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 17:09:24 +0200
+Received: by mail-wr1-f47.google.com with SMTP id
+ ffacd0b85a97d-47f707e5d75so960378f8f.1
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 08:09:24 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f6fa848fcsm20675064f8f.0.2026.07.20.07.57.45
+ ffacd0b85a97d-47f63e496ffsm30186835f8f.3.2026.07.20.08.09.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Jul 2026 07:57:45 -0700 (PDT)
+ Mon, 20 Jul 2026 08:09:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,55 +55,54 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784559466; x=1785164266; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1784560164; x=1785164964; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=gWaBeMNDr+Npz16fsL5v+nUe3108yEO7NWb8C6McDBw=;
-        b=FzM7y2ezIjMsLDq3ejdT+zZrbSVsUCE54QJ8q9qg6fZpYTAV/Blb7CvfulyxJ+KBb4
-         3Jsr9PSmuzpSDOANxPorEPecgY0BfODND9bUM+7I0FI4SLTclnxKTNWz0kjqHKl9x7Oz
-         g8Dm3h3vx9E442UHS3Ya1GJ8moK8vQEh5c08hGH7JMWL/68kr1CVD+h5nZCdprxRXHTa
-         UAvmFOTsVfhZZbLOkjMcff2CgWEEyWVAnzgg1hNDRWdp43iq559ahteNo0+ycWjSVGto
-         P7bftwZ+gxYkU1B1W+OVLxQlDxmAAFlsvHF7fei1oYmQiXZWPdsL0FZiyT/MJ9QTu4JN
-         JKXw==
+        bh=1zb1vNkLBdFCkrNLsS+pMSBjXT/0AYGorFJ2yERp/1w=;
+        b=DrXh1ONU1503SH9BCCyUvV89o6UP8UALJborVH2yRMdgUv/xEd8sP/lu04Md5cKIb7
+         ldSOHUNEUZL5Gjb/lOvYYD/5ftSbfy9Ni7Mo1G64sm6KiqTFIhCCj61NB3m7DhHA8Pdy
+         yvb8zjRpdTkb1cdHTw8XRonA16yjsQsGeBbsD7htagurTVignZW4Xrt2Q6DUSFhdfE4J
+         4EmjW1lJMADz1vna5tJOEcqgtQ2FKidT2sh6sosWJb2z04kUUNLOFky2O8J1iZ91wIz9
+         KwOeUr7/NmZpfajjF5rKW364xbYdgTp3FsH2YA1QDTEsRBoaMwffIJrpYhlzz934k9+E
+         7gEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784559466; x=1785164266;
+        d=1e100.net; s=20251104; t=1784560164; x=1785164964;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=gWaBeMNDr+Npz16fsL5v+nUe3108yEO7NWb8C6McDBw=;
-        b=KTPfXv7tgUNj8zzT/MWpUAHW5mfcFwKnftQdSQ3m//xmPdX/VLTCkvIIoAFjofYhWz
-         f/wqT1pk21mtoFirEP8TKTsBwx1H6WiNC4ctCZEn8HDvDMmpfLfT7JKFQvO6GtZx/Wj1
-         FzEVTW5w54EiTMD1+5tAZZgt3hy7wnXiJD9EELebx894IGWZ+iEWkfxpRWIS6JQ51dJi
-         /yGYpBNUKpjIb9EIJwdS7Ymzxvgu1hoO+/ZlBJVC+fX4TfZORGhNGckcAGojPoumR6RE
-         baYvfUe39zOBplDhrsI1yLhAqmZe3F/FrrvZA4NAUgbL+6uwgQl2yddbMEN/WuUbEQmB
-         vYAA==
-X-Forwarded-Encrypted: i=1; AHgh+RpKd6iwRq/bMdWqGf62mTTeQ7LU+wMu0fNYoiCKMJwse5O7AV6N/k1aO1G9+OV/xDgRlxSngsGHuEg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxErDoKNKpm2XKV6cBogvxBmYNaMyfjI2L+i06ad+/JhuQhySiO
-	br1gEQApKbulXFogmXtrb/xXJW2MbygKv952AHX5Qy1wI8NyOGV8YfPjiuwYVYU/lQ==
-X-Gm-Gg: AR+sD13bJzSoRFpuiJJoGkU02E6GA+6/m9DROLo0gB9NEK680fhXfpx3S9JQrz6mbwD
-	2E+xPpTjyd8R7GtanZD5HMGw1BGCgjoB2Tsp+b0nUPdqYPFzzrbt0x1sb26A75mSbKGXI+tEmHU
-	TvN3HJ39Kie2ZmlPgygiW4hn/pDdt6RrMf61TxT61dj5RIxhfBIMIfR5LWSlCkcobnz3hrW6X52
-	JvSjepdNheacCsGB1JuP/EKU1GcaokdMR5aryU0FG6SylVq1bO9G4fxB/r7asW3z4UeV+BHhaYM
-	5kEL6WWvjVtAXQv0TqiEXps/3CvuaHUkZKRxj6P+J/VvZGinlYbm40g5qQh1oZtOyyN6tuQJeOK
-	Mra0En+GnraQVTa1gK/BL+J5KEYW4tnvKfLHFqclqcgXa3L+BlHlYkJrngz55aIwFSqQfi6k9Up
-	J+2kOwPntoPJ8gcrr0UkrSk93qrcDEPkKhkHNVww8CGQWn4aiS8Ytmz+cczGaBVkVjcQ==
-X-Received: by 2002:a5d:5f0a:0:b0:477:6874:542c with SMTP id ffacd0b85a97d-47f6230c34dmr18338510f8f.22.1784559465958;
-        Mon, 20 Jul 2026 07:57:45 -0700 (PDT)
-Message-ID: <0fefa50c-46aa-4ede-a8e2-8c2c619bc2ab@suse.com>
-Date: Mon, 20 Jul 2026 16:57:44 +0200
+        bh=1zb1vNkLBdFCkrNLsS+pMSBjXT/0AYGorFJ2yERp/1w=;
+        b=rBIMi7TuP3f4jgZLmRNpvmDNTAvHa8oUZshxPSKxM+zubjLaT8VDmOgJexcOdk5Qwo
+         MeZQGpCfNunrYhdrCBLg3rqaK2VwDM8aTduK81jq7RDVMzoD3g4kOHZSE3SYiP5/gEnu
+         2ROcw1l9D2a4m5zwkirJw4qufi3TUFI4Z8od2pMp1vgYhp7zynSMb4/ZIWQjY8ja2XxQ
+         2HGEbG2qTdg5JZOf0dZiIow27ZSbQFKdAqJ4Z8jw7Xm1bH/Q3wvsdh9jcg5xmOAx82bg
+         t2qCWg85t3qTGn2nlFrdc1d9k3pQWSgyPFHhN1V88EvQe9Qu3z17/RcR4yWEDOvX427I
+         80/w==
+X-Forwarded-Encrypted: i=1; AHgh+RqW4vG9etKXFCtYzpKdpBUDk7QF/DG7cIInzr40552pcF9P2Bbjo1BE8c7m2Ea7FSfcCFO9mMVQw7E=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yy9h2/iY00JHRS5J4jUymhuy3KhcXL33SicJySde2PBp90fvMEB
+	agQDHwGVXbsdmVx5vk/szZWXIdgW7Muj22jDElnFH0OvCbhWpueIhOzZxRXCQSdy+A==
+X-Gm-Gg: AR+sD13qVCpOkD/lGIUZVTAI2NC2qjhNKf3yQjXBzPGcAzK7kUZuFu8ce5pBBk9wmuf
+	uRUvFAwvzc/0c/ozyFaJfwd6Ve3ZodHz8hueCXMvIiJ8ZzpIJAhh4mkLcqzShkA6YAwu6jzc+Iz
+	FpAOgo52fNnpJWuIRU0pwEfpRKJrs77u9ePpaQTi7GdhOwX1WNu/6+hlrPxDk+gwvQsS6+c37MW
+	ufB3Fmvl88RmQZRRt5e8TPlv/PUkH55TMWeHNoKdOz56BIm2zZLG1CLsVkiXfxeeE59GUD4gBI9
+	2PMWataApmxdmgoooeufCFBsA7XuAn9a3WTLT7GcTUT6lreL2bMfoceiPadr7E+zWrpZ/tH70B8
+	UAS9feB4HHcAMO9hPMMLVXdnAt1/ZX8pIO3mIp7zgWssdsf6zvY9r/Fhz7HRuIi9yHflqLWu/3g
+	hoDzE0pToRuIyO9A5Gf81CpFWO4ysqhw/siV1QwXN25OI8CK7HQ/kln2WdYRiqNl++IQ==
+X-Received: by 2002:a05:6000:4615:b0:473:1ccc:15bf with SMTP id ffacd0b85a97d-47f62334c16mr17230718f8f.42.1784560164316;
+        Mon, 20 Jul 2026 08:09:24 -0700 (PDT)
+Message-ID: <89029dbd-df1f-45d4-8a02-720cd6a42cab@suse.com>
+Date: Mon, 20 Jul 2026 17:09:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 4/7] xen/console: switch conring runtime allocation to
- xvmalloc
+Subject: Re: [PATCH v7 6/7] xen/serial: harden serial_tx_buffer checks
 To: dmukhin@ford.com
 Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, julien@xen.org,
  michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org,
  xen-devel@lists.xenproject.org
 References: <20260713181619.672176-1-dmukhin@ford.com>
- <20260713181619.672176-5-dmukhin@ford.com>
+ <20260713181619.672176-7-dmukhin@ford.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,63 +128,87 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260713181619.672176-5-dmukhin@ford.com>
+In-Reply-To: <20260713181619.672176-7-dmukhin@ford.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1784559466-6F0C94E9-F65332C1/0/0
+X-purgate-ID: tlsNG-33051d/1784560164-6C6DE4E9-B29DD7A9/0/0
 X-purgate-type: clean
-X-purgate-size: 1743
+X-purgate-size: 2730
 
 On 13.07.2026 20:16, dmukhin@ford.com wrote:
-> @@ -474,20 +475,26 @@ void __init console_init_ring(void)
->  {
->      char *ring;
->      XENCONS_RING_IDX done, size, n;
-> -    unsigned int order, memflags;
->      unsigned long flags;
+> From: Denis Mukhin <dmukhin@ford.com> 
+> 
+> Ensure the user-defined value never crosses 2GB boundary and always
+> rounded to the next power of 2 to align with console driver conring
+> buffer management code.
+> 
+> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+> ---
+> Changes since v6:
+> - new patch
+> ---
+>  docs/misc/xen-command-line.pandoc |  2 ++
+>  xen/drivers/char/serial.c         | 21 ++++++++++++++++++++-
+>  2 files changed, 22 insertions(+), 1 deletion(-)
+> 
+> diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+> index 1c711fa98086..2be8772b329a 100644
+> --- a/docs/misc/xen-command-line.pandoc
+> +++ b/docs/misc/xen-command-line.pandoc
+> @@ -2396,6 +2396,8 @@ accidentally leaking secrets by releasing pages without proper sanitization.
 >  
->      if ( !opt_conring_size )
->          return;
-> -
+>  Set the serial transmit buffer size.
+>  
+> +The value provided will be rounded down to the nearest power of 2.
+> +
+>  ### serrors (ARM)
+>  > `= diverse | panic`
+>  
+> --- a/xen/drivers/char/serial.c
+> +++ b/xen/drivers/char/serial.c
+> @@ -16,7 +16,26 @@
+>  #include <asm/processor.h>
+>  
+>  unsigned int __ro_after_init serial_txbufsz = CONFIG_SERIAL_TX_BUFSIZE;
+> -size_param("serial_tx_buffer", serial_txbufsz);
 
-Please can we keep this blank line and ...
+Before making this change, surely you did look at the difference between
+size_param() and integer_param()? You should have noticed that you regress
+behavior by ...
 
-> -    order = get_order_from_bytes(max(opt_conring_size, conring_size));
-> -    memflags = MEMF_bits(crashinfo_maxaddr_bits);
-> -    while ( (ring = alloc_xenheap_pages(order, memflags)) == NULL )
-> +    else if ( opt_conring_size > GB(2) )
+> +static int __init cf_check parse_serial_txbufsz(const char *s)
+> +{
+> +    long long val;
+> +
+> +    if ( parse_signed_integer("serial_tx_buffer", s, NULL, &val) )
+> +        return 0;
 
-... have this be just "if ()"? (I'd also suggest to make the "positive" case
-the "if()" part and have the out-of-range one in the "else" body.)
+... using this function. It's additionally unclear why a signed value
+would want parsing here: What's a ring of negative size?
 
->      {
-> -        BUG_ON(order == 0);
-> -        order--;
-> +        printk(XENLOG_WARNING "Limiting user-configured console ring size to 2 GiB\n");
-
-Nit: Too long line. Yes, format strings shouldn't be split, but XENLOG_* can
-every well live on a separate line.
-
-> +        opt_conring_size = GB(2);
->      }
-> -    opt_conring_size = PAGE_SIZE << order;
-> +    else
+> +    if ( val < KB(16) || val > GB(2) )
 > +    {
-> +        unsigned int order = get_order_from_bytes(max(opt_conring_size,
-> +                                                      conring_size));
-> +        opt_conring_size = PAGE_SIZE << order;
+> +        printk(XENLOG_WARNING "'serial_tx_buffer=%lld' value out of range, "
+> +               "falling back to default\n", val);
+> +        val = CONFIG_SERIAL_TX_BUFSIZE;
 
-Nit: Blank line please between declaration(s) and statement(s).
+In the earlier patch you used the upper bound for too large a value. Why
+does it become the default size here in such a case?
 
 > +    }
 > +
-> +    ring = xvmalloc_array(char, opt_conring_size);
-> +    if ( !ring )
-> +        panic("Unable to allocate console ring of %u KiB\n",
-> +              opt_conring_size >> 10);
+> +    serial_txbufsz = PAGE_SIZE << get_order_from_bytes(val);
+> +
+> +    return 0;
+> +}
+> +custom_param("serial_tx_buffer", parse_serial_txbufsz);
 
-Why do you lose the prior behavior of halving the size until allocation
-succeeds (or we can't even allocate a single page)?
+Overall you're duplicating behavior that serial_async_transmit() provides.
+Why would we need such duplication? The more that there everything up from
+PAGE_SIZE is permitted, while you require at least 16k. If you want to add
+useful extra checks, put them there. Bonus would be to also replace the
+alloc_xenheap_pages() there (unless there's a hidden reason for it to
+remain physically contiguous).
 
 Jan
 
