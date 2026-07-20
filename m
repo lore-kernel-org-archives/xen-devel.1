@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10079C44524
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 16:00:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1366948.1616747 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6A19C4452D
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 16:00:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1366949.1616753 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlqPl-0004RU-6s; Mon, 20 Jul 2026 16:00:21 +0000
+	id 1wlqPl-0004UK-Hi; Mon, 20 Jul 2026 16:00:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1366948.1616747; Mon, 20 Jul 2026 16:00:21 +0000
+Received: by outflank-mailman (output) from mailman id 1366949.1616753; Mon, 20 Jul 2026 16:00:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlqPl-0004RJ-3R; Mon, 20 Jul 2026 16:00:21 +0000
-Received: by outflank-mailman (input) for mailman id 1366948;
- Mon, 20 Jul 2026 16:00:19 +0000
+	id 1wlqPl-0004U1-Bw; Mon, 20 Jul 2026 16:00:21 +0000
+Received: by outflank-mailman (input) for mailman id 1366949;
+ Mon, 20 Jul 2026 16:00:20 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wlqPj-0004Dz-Q0
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 16:00:19 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wlqPk-0004Oc-QL
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 16:00:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wlqPj-001mbV-6s
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 18:00:19 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wlqPk-00CGfz-75
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 18:00:20 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a5e460b-2eae-0a2a0a5409dd-0a2a4506bcec-16
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 18:00:19 +0200
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a5e460a-bab6-0a2a0a5309dd-0a2a4509cfca-20
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 18:00:20 +0200
+Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a5e4612-195a-0a2a45060019-d1558034c9d6-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 18:00:19 +0200
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-493b966dd74so43738535e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:00:19 -0700 (PDT)
+ id 6a5e4614-be1a-0a2a45090019-d155dd2bd5d7-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 18:00:20 +0200
+Received: by mail-wr1-f43.google.com with SMTP id
+ ffacd0b85a97d-47c6e9a694bso5724921f8f.1
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:00:20 -0700 (PDT)
 Received: from fedora (user-109-243-144-234.play-internet.pl.
  [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f63edd7d3sm30084673f8f.25.2026.07.20.09.00.16
+ ffacd0b85a97d-47f63edd7d3sm30084673f8f.25.2026.07.20.09.00.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 09:00:17 -0700 (PDT)
+ Mon, 20 Jul 2026 09:00:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,42 +52,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784563218; x=1785168018; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=EKkncs/MVbSUd+vQGpfC/FsRQ3Kf/ToKIui4GZQixqs=;
-        b=bqZ17V+bGIXKY7/QgylU6GScGT+lx4r2hAaL0vxNJ4ONrrRZFyvLI0PHmvO6u2YdsF
-         Bj9xI4fQP7YrK0S4fd7UMrgm4X/MxVHyhoL+Z5mKbDzCy+AJbWjpCrX2nl5o9n7kLCH5
-         nSTrX09wgzBATrYu52OkbgspmCSc2nw3n69B76T2sKnaMxk5riHuFU3IU4CXfu/34J2R
-         63IkdI94YPRybF35HpMou4g5OawwZqckYKMeFTUpOnV0w5ul6Kv7ArEQeOiqhPJeQZTZ
-         afAT3ddIEnFBBoDJBYn5SkXSuhyVZszQeiqUbqVmP/JLTyThNSuVnjHVLdEfNzto4XY4
-         lpyQ==
+        d=gmail.com; s=20251104; t=1784563220; x=1785168020; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Jpi1OQhQ+cckOTheI6EzqlufPMg8rElGByM+dRD5uB4=;
+        b=Aj9TeBKiwfyGD4b3qH0HXQMp5qM20UcckCbPaXxLAauS7aLWg7lgkXQYQXVZIQHTpT
+         OcSX4kGerfdWNolKihRjMoMZIoKtHWhy0abVZWVWSM8MRoGlLvT8n+IA65V9EQb6pMtS
+         5EBFVt9/pSZVhle0tYI6v592RKLsfRDLzJsmvuwthtgrCOil4248qYSF0c0WCbPhe5lM
+         EeJKuKio/P7Rreb9l8tbQi5ImZxB0FZSsHKqxuRfm3SgeQhvltQ6AADCBvsRhjtcY+m1
+         dr6FzipyNxvJykf3uxUQNZ3n1IDw0lwykBGtcEbpex9CsagC9pYIovnhvx/DkH29o2hG
+         S1Yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784563218; x=1785168018;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=EKkncs/MVbSUd+vQGpfC/FsRQ3Kf/ToKIui4GZQixqs=;
-        b=mMcRJQg6VkGwZednnWLoLeuCFLY3aJGWxvFP2cy7Td3sVTCCYvgwvOJy+DAPfMNJ+v
-         bB31E11YtjLISrONv0pZxo19QfUFObXm9J5hq3lzlrOSHPJ2mNHKmBFuKTjwDpGYQuSG
-         DYQPL2Y1eutbewuwFNAcN23eBGHI1kTAw0ID//WesxAeP1APO9jntQRcU4F+EwZCM0Bu
-         2dpnNYEAU2vQvfch01YpqZHzuyK+ELAkSIhX2/aIq2n0vLHTOd/4ftMGZYfFkr3oG9eO
-         ZYA5R2psk2pOtVeUiyQJ/UgfW4cz2xA4YZLqZ4DvWCcGoX4xm8lXpjR6Q/zQb9TNalJ8
-         Fpdg==
-X-Gm-Message-State: AOJu0YzhWXRPE5ckCHf+TOyYR7askEb5TDatN4LHr6dIl4PV4pvBafv2
-	QJdCnKBtpCKE0TGgi08oqkbBXZLCuYSqKhAHlupAzZLsOdUWgEzlhbnImWuAyg==
-X-Gm-Gg: AfdE7cmc3+jGIDst6L/48WSlxamtt7uhC5cMxtQPT5aWJITYkzKk8Xy0KMfLCpTNelV
-	MnRcJKysVEJQ3wJJbF8jXAu5NML1KcbANCc4H0dG3K4H3zGD4+lmY9fgL9hnWQC0xxYDLCfUIqO
-	ETQJtc4VyACzfxKCPK2m72Jg23VCYDclBs5JE3Ins0qg7vItZW1/Nlbsh/KzTJ0NAli1H5Xdcb6
-	us9flHhqnBByfBUr3LNNGw/PZ09ZTj9yIpg8cJbydSL/quEOS3SpbBKQkr+W6JkYNWK2z4PUcXL
-	bEW9tZ8L+ns2IjqmvpqAaL/uk0tpPa6OZiXkk9LbYdbYsBTl0TnwMHm0gauHv86Hepsr7tIH+Fh
-	/YHtwl4qM0gCwj47hlUM/pw1nS2/nAcy/qbSrKVSzYNHluO208jw+H165BkolcvhqP67c68ViwM
-	mhVrXfAXwGWFzwg9F+kXIVe3lOcAzooZzOXHs6BsW1ZivZYP4=
-X-Received: by 2002:a05:600c:3b8e:b0:495:4bf3:2150 with SMTP id 5b1f17b1804b1-4954bf3216amr178623735e9.8.1784563218062;
-        Mon, 20 Jul 2026 09:00:18 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1784563220; x=1785168020;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Jpi1OQhQ+cckOTheI6EzqlufPMg8rElGByM+dRD5uB4=;
+        b=qDhJf2JcDUtJaZjDDjNv73KLfXVrF6xfOeEpLSBi57W1NHPhZO+heDJrImwzXTMbf5
+         zX0VkxKP5Gqt7YUj1bvQl3D5KFb8LDY2nXV5bYXrgDTvR2KFeP4DGypp92Gfn9ipE43B
+         gpCSvCSn1RDKtKsh+RYlv11tIhkct4tWXu/hX4lUz1AANYpwdSJSwvYByVerVzFV/EaN
+         NFXEHkTF76qBRdjD/DEelJkYFJ4Uz3siu7xm1V4hAlM/xJGRE409eZkBhIKa5itm0+xF
+         8L0TYWLDr9om7bRoBJdq8Pph0kYdt1MJr91EUJmOru9pU/jPeLhZUeDe8XZREQVLrVDi
+         TfqQ==
+X-Gm-Message-State: AOJu0YyWKj1zAzC6W1k6C8am1uhKSOK0WBMkCHoLaf8WH3aMnPZ/hqlA
+	DJ7SwI1hHk6W62ajh/Da9w7wm+NY5mlSzg7if+KnvPtm7Q8FTR6BH/LYfzSm9w==
+X-Gm-Gg: AR+sD12iz72M5BzufQFtAEdVqgLOUxV7Oj5q08TdDskcRMyic+PFk4gF/WfYWiv5kAd
+	X+wKqs9myzEKjMJn2PPYyK7NDAT6DHA9lkz1SzIPUaMSyIw0IJYPhrFl8qVO7+PY7EU3MWxd1Hs
+	UiKEGBFZ02t92Bzx3CCMc5cMAOfVOy5Gib/U6Dj4r4KijNCPLdRYA81P1uYTXMJ2z3r2JMBZFHQ
+	/A61D0qR408t7pDrGQFM0q/mkORyCoqV7ih7OMfd7EtCJAh1pZpaqvXZ4DWRoCpNi58Sjew/UlS
+	P7EbJM1sKDG80GnixJPyp+xftl5cfPRWdrFwZsFRTie8QdAEXH0xEL6bSF30cJE7FemsYKcqxEB
+	+M1Inc17XloNBK/E9s8GOCrPj6V3k0rgt6fwxl7NAAQuMeNergkCiRaxk7Z7aRNtLzivD9KC9yb
+	Dnd6YkTkirgH++pHCzfvDJ4ZMJXhZaDdFn
+X-Received: by 2002:a05:6000:607:b0:47f:5367:73a3 with SMTP id ffacd0b85a97d-47f62305a1cmr17834461f8f.13.1784563219337;
+        Mon, 20 Jul 2026 09:00:19 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -102,192 +103,250 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Jan Beulich <jbeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Timothy Pearson <tpearson@raptorengineering.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v6 02/23] xen/dom0less: turn max_init_domid into a common variable
-Date: Mon, 20 Jul 2026 17:59:43 +0200
-Message-ID: <7dac805d42b3adb6df3cdd1c2be4f0e511f30439.1784559209.git.oleksii.kurochko@gmail.com>
+	Connor Davis <connojdavis@gmail.com>
+Subject: [PATCH v6 03/23] xen: arm: update p2m_set_allocation() prototype
+Date: Mon, 20 Jul 2026 17:59:44 +0200
+Message-ID: <2ebda180488310a6f862242cb173ffc9b106756e.1784559209.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <cover.1784559209.git.oleksii.kurochko@gmail.com>
 References: <cover.1784559209.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1784563219-F4C0777B-0E330D7F/10/73395122804
+X-purgate-ID: tlsNG-bad1c0/1784563220-BF6D2034-1ABBD91C/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 5823
+X-purgate-size: 8946
 
-Until now every architecture carried its own notion of max_init_domid:
-Arm defined a real variable (declared in asm/setup.h, defined in
-setup.c), while ppc, riscv and x86 each provided a "#define
-max_init_domid (0)" stub in their asm/setup.h. This duplicated the same
-declaration across all arches and placed a purely dom0less concept in
-arch setup headers.
+p2m_set_allocation() uses a bool *preempted out-argument that overloads two
+meanings. When non-NULL, the value written back (true) duplicates information
+already carried by the -ERESTART return code — pure redundancy, which the
+caller-side ASSERT(preempted == (rc == -ERESTART)) only documents. Separately,
+a NULL pointer is an implicit calling convention meaning "preemption is not
+permitted in this context".
 
-Now that the dom0less build code lives in common (xen/common/
-device-tree/dom0less-build.c sets max_init_domid, and the console
-serial-input switcher reads it), there is no reason for the symbol to be
-per-arch. Provide a single declaration in <xen/dom0less-build.h>, with
-the !CONFIG_DOM0LESS_BOOT stub kept there as well, so there is one source
-of truth and the arch headers no longer need to mention it. Update
-console.c to include <xen/dom0less-build.h> for the declaration instead
-of relying on asm/setup.h.
+Replace the pointer with a plain bool can_preempt that explicitly controls
+whether the preemption check runs, making the NULL-to-suppress convention
+type-safe and self-documenting, and rely on the -ERESTART return code alone to
+report that preemption occurred.
 
-Place the definition in xen/common/domid.c rather than in dom0less-
-build.c. The latter is built as dom0less-build.init.o, i.e. the whole
-object is relocated into the .init.* sections and freed after boot,
-whereas max_init_domid must outlive boot because it is read at runtime
-by the console serial-input switcher. domid.c is always linked (obj-y)
-and resides in regular (non-init) sections, so it is a correct home for
-the variable. It is marked __ro_after_init since it is only updated
-while creating boot-time domains and read-only afterwards, and guarded
-by CONFIG_DOM0LESS_BOOT as domid.c itself is unconditional.
+Since p2m_set_allocation() is called by the common dom0less build code,
+move its declaration from the ARM-specific asm/p2m.h to xen/p2m-common.h.
 
+Reported-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 ---
 Changes in v6:
  - Nothing changed. Only rebase.
 ---
 Changes in v5:
- - Add Reviewed-by: Jan Beulich <jbeulich@suse.com>
+ - Add Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 ---
 Changes in v4:
- - New patch.
+ - Reword commit message: a NULL pointer was a calling convention meaning
+   "preemption not permitted", not pure redundancy.
+ - Annotate the explicit can_preempt arguments at the call sites with
+   /* can_preempt */ comments for readability.
+ - Move the function's doc comment to the prototype in xen/p2m-common.h
+   (dropping the duplicate above the Arm and RISC-V definitions) and clarify
+   that -ERESTART is only returned when can_preempt is true.
+ - Add __must_check to the prototype, since the return code is now the only
+   preemption-status indicator.
+---
+Changes in v3:
+ - Nothing changed. Only rebase.
+---
+Changes in v2:
+ - new patch
 ---
 ---
- xen/arch/arm/include/asm/setup.h   | 2 --
- xen/arch/arm/setup.c               | 2 --
- xen/arch/ppc/include/asm/setup.h   | 2 --
- xen/arch/riscv/include/asm/setup.h | 2 --
- xen/arch/x86/include/asm/setup.h   | 2 --
- xen/common/domid.c                 | 5 +++++
- xen/drivers/char/console.c         | 1 +
- xen/include/xen/dom0less-build.h   | 7 +++++++
- 8 files changed, 13 insertions(+), 10 deletions(-)
+ xen/arch/arm/include/asm/p2m.h          |  1 -
+ xen/arch/arm/mmu/p2m.c                  | 24 ++++++------------------
+ xen/arch/riscv/include/asm/paging.h     |  2 +-
+ xen/arch/riscv/p2m.c                    |  9 ++-------
+ xen/arch/riscv/paging.c                 |  7 ++-----
+ xen/common/device-tree/dom0less-build.c |  2 +-
+ xen/include/xen/p2m-common.h            |  8 ++++++++
+ 7 files changed, 20 insertions(+), 33 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index 0adfa4993a8f..2af780512540 100644
---- a/xen/arch/arm/include/asm/setup.h
-+++ b/xen/arch/arm/include/asm/setup.h
-@@ -25,8 +25,6 @@ struct map_range_data
-     struct rangeset *irq_ranges;
- };
+diff --git a/xen/arch/arm/include/asm/p2m.h b/xen/arch/arm/include/asm/p2m.h
+index 4a4913716bdd..737da60dcf58 100644
+--- a/xen/arch/arm/include/asm/p2m.h
++++ b/xen/arch/arm/include/asm/p2m.h
+@@ -238,7 +238,6 @@ void p2m_restore_state(struct vcpu *n);
+ /* Print debugging/statistial info about a domain's p2m */
+ void p2m_dump_info(struct domain *d);
  
--extern domid_t max_init_domid;
--
- void copy_from_paddr(void *dst, paddr_t paddr, unsigned long len);
+-int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted);
+ int p2m_teardown_allocation(struct domain *d);
  
- size_t estimate_efi_size(unsigned int mem_nr_banks);
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 6310a47d68b6..86532d0a35b6 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -62,8 +62,6 @@ struct cpuinfo_arm __read_mostly system_cpuinfo;
- bool __read_mostly acpi_disabled;
- #endif
- 
--domid_t __read_mostly max_init_domid;
--
- static __used void noreturn init_done(void)
- {
-     /* Must be done past setting system_state. */
-diff --git a/xen/arch/ppc/include/asm/setup.h b/xen/arch/ppc/include/asm/setup.h
-index e4f64879b68c..956fa6985adb 100644
---- a/xen/arch/ppc/include/asm/setup.h
-+++ b/xen/arch/ppc/include/asm/setup.h
-@@ -1,6 +1,4 @@
- #ifndef __ASM_PPC_SETUP_H__
- #define __ASM_PPC_SETUP_H__
- 
--#define max_init_domid (0)
--
- #endif /* __ASM_PPC_SETUP_H__ */
-diff --git a/xen/arch/riscv/include/asm/setup.h b/xen/arch/riscv/include/asm/setup.h
-index 2215894cfbb1..73ce2f293348 100644
---- a/xen/arch/riscv/include/asm/setup.h
-+++ b/xen/arch/riscv/include/asm/setup.h
-@@ -5,8 +5,6 @@
- 
- #include <xen/types.h>
- 
--#define max_init_domid (0)
--
- void setup_mm(void);
- 
- void copy_from_paddr(void *dst, paddr_t paddr, unsigned long len);
-diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
-index b01e83a8ed9f..5925c5f39cff 100644
---- a/xen/arch/x86/include/asm/setup.h
-+++ b/xen/arch/x86/include/asm/setup.h
-@@ -68,6 +68,4 @@ extern bool opt_dom0_verbose;
- extern bool opt_dom0_cpuid_faulting;
- extern bool opt_dom0_msr_relaxed;
- 
--#define max_init_domid (0)
--
- #endif
-diff --git a/xen/common/domid.c b/xen/common/domid.c
-index b0258e477c1a..cd46cf952be6 100644
---- a/xen/common/domid.c
-+++ b/xen/common/domid.c
-@@ -9,6 +9,11 @@
-  */
- 
- #include <xen/domain.h>
-+#include <xen/dom0less-build.h>
-+
-+#ifdef CONFIG_DOM0LESS_BOOT
-+domid_t __ro_after_init max_init_domid;
-+#endif
- 
- static DEFINE_SPINLOCK(domid_lock);
- static DECLARE_BITMAP(domid_bitmap, DOMID_FIRST_RESERVED);
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index ea4e3ff34178..4c735cc04c67 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -31,6 +31,7 @@
- #include <xen/warning.h>
- #include <xen/pv_console.h>
- #include <asm/setup.h>
-+#include <xen/dom0less-build.h>
- #include <xen/sections.h>
- #include <xen/consoled.h>
- 
-diff --git a/xen/include/xen/dom0less-build.h b/xen/include/xen/dom0less-build.h
-index 4118dec76c0a..8d4da16d1f0a 100644
---- a/xen/include/xen/dom0less-build.h
-+++ b/xen/include/xen/dom0less-build.h
-@@ -5,6 +5,8 @@
- 
- #include <xen/stdbool.h>
- 
-+#include <public/xen.h>
-+
- struct domain;
- 
- #ifdef CONFIG_DOM0LESS_BOOT
-@@ -13,6 +15,9 @@ struct boot_domain;
- struct dt_device_node;
- struct kernel_info;
- 
-+/* Highest domain ID assigned to a boot-time (dom0less) domain. */
-+extern domid_t max_init_domid;
-+
- /*
-  * List of possible features for dom0less domUs
-  *
-@@ -72,6 +77,8 @@ static inline bool is_dom0less_mode(void)
+ static inline void p2m_write_lock(struct p2m_domain *p2m)
+diff --git a/xen/arch/arm/mmu/p2m.c b/xen/arch/arm/mmu/p2m.c
+index 51abf3504fcf..2cf35d8a3709 100644
+--- a/xen/arch/arm/mmu/p2m.c
++++ b/xen/arch/arm/mmu/p2m.c
+@@ -65,12 +65,7 @@ int arch_get_paging_mempool_size(struct domain *d, uint64_t *size)
+     return 0;
  }
- static inline void set_xs_domain(struct domain *d) {}
  
-+#define max_init_domid 0
-+
- #endif /* CONFIG_DOM0LESS_BOOT */
+-/*
+- * Set the pool of pages to the required number of pages.
+- * Returns 0 for success, non-zero for failure.
+- * Call with d->arch.paging.lock held.
+- */
+-int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
++int p2m_set_allocation(struct domain *d, unsigned long pages, bool can_preempt)
+ {
+     struct page_info *pg;
  
- #endif /* __ASM_GENERIC_DOM0LESS_BUILD_H__ */
+@@ -112,11 +107,8 @@ int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
+             break;
+ 
+         /* Check to see if we need to yield and try again */
+-        if ( preempted && general_preempt_check() )
+-        {
+-            *preempted = true;
++        if ( can_preempt && general_preempt_check() )
+             return -ERESTART;
+-        }
+     }
+ 
+     return 0;
+@@ -125,7 +117,6 @@ int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
+ int arch_set_paging_mempool_size(struct domain *d, uint64_t size)
+ {
+     unsigned long pages = size >> PAGE_SHIFT;
+-    bool preempted = false;
+     int rc;
+ 
+     if ( (size & ~PAGE_MASK) ||          /* Non page-sized request? */
+@@ -133,27 +124,24 @@ int arch_set_paging_mempool_size(struct domain *d, uint64_t size)
+         return -EINVAL;
+ 
+     spin_lock(&d->arch.paging.lock);
+-    rc = p2m_set_allocation(d, pages, &preempted);
++    rc = p2m_set_allocation(d, pages, /* can_preempt */ true);
+     spin_unlock(&d->arch.paging.lock);
+ 
+-    ASSERT(preempted == (rc == -ERESTART));
+-
+     return rc;
+ }
+ 
+ int p2m_teardown_allocation(struct domain *d)
+ {
+     int ret = 0;
+-    bool preempted = false;
+ 
+     spin_lock(&d->arch.paging.lock);
+     if ( d->arch.paging.p2m_total_pages != 0 )
+     {
+-        ret = p2m_set_allocation(d, 0, &preempted);
+-        if ( preempted )
++        ret = p2m_set_allocation(d, 0, /* can_preempt */ true);
++        if ( ret == -ERESTART )
+         {
+             spin_unlock(&d->arch.paging.lock);
+-            return -ERESTART;
++            return ret;
+         }
+         ASSERT(d->arch.paging.p2m_total_pages == 0);
+     }
+diff --git a/xen/arch/riscv/include/asm/paging.h b/xen/arch/riscv/include/asm/paging.h
+index e487c89a4ccd..103384723dc5 100644
+--- a/xen/arch/riscv/include/asm/paging.h
++++ b/xen/arch/riscv/include/asm/paging.h
+@@ -9,7 +9,7 @@ struct page_info;
+ int paging_domain_init(struct domain *d);
+ 
+ int paging_freelist_adjust(struct domain *d, unsigned long pages,
+-                           bool *preempted);
++                           bool can_preempt);
+ 
+ int paging_ret_to_domheap(struct domain *d, unsigned int nr_pages);
+ int paging_refill_from_domheap(struct domain *d, unsigned int nr_pages);
+diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
+index 703b9f4d2540..566266e3e78f 100644
+--- a/xen/arch/riscv/p2m.c
++++ b/xen/arch/riscv/p2m.c
+@@ -428,17 +428,12 @@ int p2m_init(struct domain *d, const struct xen_domctl_createdomain *config)
+     return 0;
+ }
+ 
+-/*
+- * Set the pool of pages to the required number of pages.
+- * Returns 0 for success, non-zero for failure.
+- * Call with d->arch.paging.lock held.
+- */
+-int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
++int p2m_set_allocation(struct domain *d, unsigned long pages, bool can_preempt)
+ {
+     struct p2m_domain *p2m = p2m_get_hostp2m(d);
+     int rc;
+ 
+-    if ( (rc = paging_freelist_adjust(d, pages, preempted)) )
++    if ( (rc = paging_freelist_adjust(d, pages, can_preempt)) )
+         return rc;
+ 
+     /*
+diff --git a/xen/arch/riscv/paging.c b/xen/arch/riscv/paging.c
+index 76a203edbb0c..35f572689a7c 100644
+--- a/xen/arch/riscv/paging.c
++++ b/xen/arch/riscv/paging.c
+@@ -47,7 +47,7 @@ static int _paging_add_to_freelist(struct domain *d)
+ }
+ 
+ int paging_freelist_adjust(struct domain *d, unsigned long pages,
+-                           bool *preempted)
++                           bool can_preempt)
+ {
+     ASSERT(spin_is_locked(&d->arch.paging.lock));
+ 
+@@ -66,11 +66,8 @@ int paging_freelist_adjust(struct domain *d, unsigned long pages,
+             return rc;
+ 
+         /* Check to see if we need to yield and try again */
+-        if ( preempted && general_preempt_check() )
+-        {
+-            *preempted = true;
++        if ( can_preempt && general_preempt_check() )
+             return -ERESTART;
+-        }
+     }
+ 
+     return 0;
+diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tree/dom0less-build.c
+index 9513c1c83766..fcbeb8adbd73 100644
+--- a/xen/common/device-tree/dom0less-build.c
++++ b/xen/common/device-tree/dom0less-build.c
+@@ -760,7 +760,7 @@ static int __init domain_p2m_set_allocation(struct domain *d, uint64_t mem,
+                 domain_p2m_pages(mem, d->max_vcpus);
+ 
+     spin_lock(&d->arch.paging.lock);
+-    rc = p2m_set_allocation(d, p2m_pages, NULL);
++    rc = p2m_set_allocation(d, p2m_pages, /* can_preempt */ false);
+     spin_unlock(&d->arch.paging.lock);
+ 
+     return rc;
+diff --git a/xen/include/xen/p2m-common.h b/xen/include/xen/p2m-common.h
+index f0bd9a6b9896..0eb061991283 100644
+--- a/xen/include/xen/p2m-common.h
++++ b/xen/include/xen/p2m-common.h
+@@ -43,5 +43,13 @@ int __must_check check_get_page_from_gfn(struct domain *d, gfn_t gfn,
+                                          bool readonly, p2m_type_t *p2mt_p,
+                                          struct page_info **page_p);
+ 
++/*
++ * Set the pool of pages to the required number of pages.
++ * Returns 0 for success, -ERESTART if preempted (only when can_preempt is
++ * true), or a negative error code on failure.
++ * Call with d->arch.paging.lock held.
++ */
++int __must_check p2m_set_allocation(struct domain *d, unsigned long pages,
++                                    bool can_preempt);
+ 
+ #endif /* _XEN_P2M_COMMON_H */
 -- 
 2.54.0
 
