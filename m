@@ -4,46 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC018C44527
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 10:22:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1366398.1616345 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC069C44527
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 10:22:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1366463.1616354 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wll85-00047K-Lx; Mon, 20 Jul 2026 10:21:45 +0000
+	id 1wll8U-0004VZ-0S; Mon, 20 Jul 2026 10:22:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1366398.1616345; Mon, 20 Jul 2026 10:21:45 +0000
+Received: by outflank-mailman (output) from mailman id 1366463.1616354; Mon, 20 Jul 2026 10:22:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wll85-00047D-JM; Mon, 20 Jul 2026 10:21:45 +0000
-Received: by outflank-mailman (input) for mailman id 1366398;
- Mon, 20 Jul 2026 09:38:16 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <hongyan.xia@transsion.com>) id 1wlkS0-0002oF-1J
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 09:38:16 +0000
+	id 1wll8T-0004VS-Tn; Mon, 20 Jul 2026 10:22:09 +0000
+Received: by outflank-mailman (input) for mailman id 1366463;
+ Mon, 20 Jul 2026 10:22:08 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f7f0c1081000edb5@swg.vates.tech>)
+ id 1wll8S-0004Ty-MA
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 10:22:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wlkRz-000gYb-4i
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 11:38:15 +0200
-Received: from [10.42.69.5] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <hongyan.xia@transsion.com>)
- id 6a5dec81-bab6-0a2a0a5309dd-0a2a4505aedc-18
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 11:38:15 +0200
-Received: from [52.101.126.78]
- (helo=TYPPR03CU001.outbound.protection.outlook.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <hongyan.xia@transsion.com>)
- id 6a5dec84-4cb1-0a2a45050019-34657e4e94a6-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 11:38:14 +0200
-Received: from KL1PR0401MB6196.apcprd04.prod.outlook.com
- (2603:1096:820:c7::13) by TYSPR04MB7923.apcprd04.prod.outlook.com
- (2603:1096:405:8f::12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.6; Mon, 20 Jul
- 2026 09:38:10 +0000
-Received: from KL1PR0401MB6196.apcprd04.prod.outlook.com
- ([fe80::f2ee:1e28:9022:99f3]) by KL1PR0401MB6196.apcprd04.prod.outlook.com
- ([fe80::f2ee:1e28:9022:99f3%3]) with mapi id 15.21.0245.009; Mon, 20 Jul 2026
- 09:38:10 +0000
+ id 1wll8S-00GTE8-2o
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 12:22:08 +0200
+Received: from [10.42.69.1] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f7f0c1081000edb5@swg.vates.tech>)
+ id 6a5df6cb-2eae-0a2a0a5409dd-0a2a4501b1fe-12
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 12:22:08 +0200
+Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19f7f0c1081000edb5@swg.vates.tech>)
+ id 6a5df6ce-5984-0a2a45010019-b9ff1c238fd3-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 12:22:06 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 19f7f0c1081000edb5.004 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Mon, 20 Jul 2026 10:22:04 +0000
+Received: from [192.168.1.18] (88-188-240-210.subs.proxad.net [88.188.240.210])
+ (Authenticated sender: teddy.astie)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 1909882089;
+ Mon, 20 Jul 2026 12:22:04 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,331 +58,186 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=transsion.com header.i="@transsion.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MYQFWwU4BhmfJKviDLZGgEgrjOyJ+2Kovi4iEAGG/TbAHrmiyVh217EI+RIi1AFmj9vP8dEUlkqSY97qUB4pci07pKAqCFLH6R6HI/37wXr15XY35WDl9PY/rywFB8GRgcUgMQ4oL8a/MEcwrQhq/6ucoaocb96oCV539xORC0SI93WHkMffH3ufF2v7P32MxjPNmmJNuv6xFyDUbV3owU9ZdMv8Yw6UrgWpmEuitGfD2cuXYbwhO7Iob0t8HVSiKh0ytHare30w62ALyQ6NOemlPBxD0bHO3l3tUFmPXPWA4k6/zvvc64+R1kkW5ICJiy0obpKGYUmLN+V916RAeg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=S0tdWGsY8ovK8tJeJyM3lFSP9EHZNI48Z0Uy16r6Azs=;
- b=KvOeDp4or4NHf3vkt+CvwU8QCX+OQz23zdo/nGiE4hEHtZ8IYanCl+xawHths7oDR7NAGXP2yIfqBLnPFSS+7/ucLmuI2l3lZpL90EGsKb3YGThAq+ao7S8kiMrxmyx6E+E2IXqXLjXRZ18hbL1rnRViEi9LmHTkBPbTfvgo7a4A3I6jbAlBLwtGxSgm6esKpSKbX9JtZLnaLL/SFsXMOIu8gQk1qiLJ+4S+Kp0EHeuV1plZNw20eyFw/LHxZo1QKxljKjsIOFM9zZAWanuUSPR6VvFwVF8PAEniiHzlFAG8rhEKXcGUZgQLoiM9JBQV805wtMAXn6JmZRxuM2mYgA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=transsion.com; dmarc=pass action=none
- header.from=transsion.com; dkim=pass header.d=transsion.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=transsion.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=S0tdWGsY8ovK8tJeJyM3lFSP9EHZNI48Z0Uy16r6Azs=;
- b=UWH7Mfa20aRABHcBN1gY0dimzV9YAvCxgfcai7PVU+DoZgHr5bwVKoag4Xef+2N9eEhhC3NReSxtiVjsnG0WoWMK3XnVYNpFibMNmNE2P/ReIuhlhihfdlPZ+/9FD9COTBdIYnlT86LPtuCMYbJn9vKKnDuyz9yHqgnxwSfLi48=
-From: Hongyan Xia <hongyan.xia@transsion.com>
-To: "mingo@redhat.com" <mingo@redhat.com>, "peterz@infradead.org"
-	<peterz@infradead.org>, "juri.lelli@redhat.com" <juri.lelli@redhat.com>,
-	"vincent.guittot@linaro.org" <vincent.guittot@linaro.org>,
-	"dietmar.eggemann@arm.com" <dietmar.eggemann@arm.com>, "rostedt@goodmis.org"
-	<rostedt@goodmis.org>, "bsegall@google.com" <bsegall@google.com>,
-	"mgorman@suse.de" <mgorman@suse.de>, "vschneid@redhat.com"
-	<vschneid@redhat.com>, "kprateek.nayak@amd.com" <kprateek.nayak@amd.com>,
-	Juergen Gross <jgross@suse.com>, Ajay Kaher <ajay.kaher@broadcom.com>, Alexey
- Makhalov <alexey.makhalov@broadcom.com>, Broadcom internal kernel review list
-	<bcm-kernel-feedback-list@broadcom.com>, Catalin Marinas
-	<catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Huacai Chen
-	<chenhuacai@kernel.org>, WANG Xuerui <kernel@xen0n.name>, Madhavan Srinivasan
-	<maddy@linux.ibm.com>, Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin
-	<npiggin@gmail.com>, "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, Paul
- Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou
-	<aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>, Thomas Gleixner
-	<tglx@kernel.org>, Borislav Petkov <bp@alien8.de>, Dave Hansen
-	<dave.hansen@linux.intel.com>, "x86@kernel.org" <x86@kernel.org>, "H. Peter
- Anvin" <hpa@zytor.com>, Paolo Bonzini <pbonzini@redhat.com>, Vitaly Kuznetsov
-	<vkuznets@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, Oleksandr
- Tyshchenko <oleksandr_tyshchenko@epam.com>
-CC: Jiazi Li <jiazi.li@transsion.com>, "linux-kernel@vger.kernel.org"
-	<linux-kernel@vger.kernel.org>, "virtualization@lists.linux.dev"
-	<virtualization@lists.linux.dev>, "linux-arm-kernel@lists.infradead.org"
-	<linux-arm-kernel@lists.infradead.org>, "loongarch@lists.linux.dev"
-	<loongarch@lists.linux.dev>, "linuxppc-dev@lists.ozlabs.org"
-	<linuxppc-dev@lists.ozlabs.org>, "linux-riscv@lists.infradead.org"
-	<linux-riscv@lists.infradead.org>, "kvm@vger.kernel.org"
-	<kvm@vger.kernel.org>, "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>
-Subject: [PATCH 2/3] sched: Convert paravirt_steal to new static key APIs
-Thread-Topic: [PATCH 2/3] sched: Convert paravirt_steal to new static key APIs
-Thread-Index: AQHdGCt41jgQ0Gd26kKdzbVxHXHoxA==
-Date: Mon, 20 Jul 2026 09:38:07 +0000
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=PxIgHpypjZu52avUkpXZZ3P4Glv3l0JvXDCT1DSm+BA=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=RJOzUjAs2FY07rVPEDgvKwSL5stj04E0pQ7XZfLXC6rY//cRZ/9zmxrO+kCvCeToxel/8CoGJ
+ cKlMoQs5gyviutapJ4eowpXkCzssZ215u6ytt3fecmkDMuuGHOfs+Zo156n1xRWthNRkebZ7DjZ
+ 50naouO5jEkxUG3zqcVWedqd2AJV3sSyKVd+atABLvy0kNhKo5PHtQflp+M7wFhTvARdUpmsDcf
+ z9sRh89EBi1nDBPJtFaJKR0Ju8CvSWiA2zY89uIEkNig//SS31LR9nk8QH21DEv9jakXsaf/xx+
+ sczGGI2Q+cas4ytFwDJVgq0rSo7PWhg6zfLj2MMpaJag==
+X-Zone-Loop: 5394329121e29a272e0b3e8636f8930430bed7c780de
+x-campaign-type: default
+x-transaction-id: 2a276d66-e6cf-46b0-9727-264aa4db63f1
+x-swg-uid: 01-3719d7f3-f318-4bf1-84a3-75c7db6c3f10
+X-Mailer: Sweego
 Message-ID:
- <773bbd8fcd5ef2ebfe1c64303c7a71a56368de69.1784538478.git.hongyan.xia@transsion.com>
-References: <cover.1784538478.git.hongyan.xia@transsion.com>
-In-Reply-To: <cover.1784538478.git.hongyan.xia@transsion.com>
-Accept-Language: zh-CN, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=transsion.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: KL1PR0401MB6196:EE_|TYSPR04MB7923:EE_
-x-ms-office365-filtering-correlation-id: 63fea150-c8cb-4d86-a7ac-08dee6429caa
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|1800799024|366016|376014|23010399003|7416014|10067099003|56012099006|11063799006|38070700021|6133799003|22082099003|18002099003|921020;
-x-microsoft-antispam-message-info:
- yh5mlue1Iw8cl0uEdIvMARq0emXCCTnLQUzpkmJ/bGuZg1DAJNMCdD0eZgjEQ5YoKdbt7wJiu4uINN5s8w4qI32lIAA1yhm8hecS/eyEPjlvFfcmTgExOVgF7SvRQAeK3uweD05fpdKR24cNVFSWdU2LCCJgMPO5YfERS25h7q52/esYgCQnbLJ0uMZ+6gCTVAWbBuW2o86hVWqRWZnsRJEAtpQd1bXSkchaN0T7/G6CMUXOMzmJpNwXj7Msp52kdHyi8Pl/5e8NB5PcF8jbI9HuJ4T5ik5D45L6MH2wze+PHtqytWSUWQG02n5TxSFbVAv0DCSS21XwoX4LjOU60NlnZmmhEG96wz8pboybvvI80Z5esLacGPji0hypFz5EHkR4awn3Z2qhFwd/NWgfuN1JbXjejzQdbEwOtBaNOvX0gPNpZ1lp0pOk30I+BzDJ1MorSb+TWs/3ETgleLUFFusDOj2kaVtBhV7oWFYgfswVIYhF8XG6KnRIhCUoOcXkv2bqdOiIA5geQdGwf7Oc6sbLGpqBopRbOWa37Isf7/J378wzb+HiXcGk8elu0UY7O+S1gOe8c9HlmfyIG5Jbu7DjGUW1Lw1IvNrx+rSrVx2fr324geruXdtX2JzpAIvSMSodSKwaLnpGDV3Cf9heUhlIL7lFQtCbphC9qfMwQuDCZSU6JIili1Ki9Wnsk0AKlOKIVaP+PgISQjz5tzaMuxrOocKEA75LyQBhnQkF2IPcosfvF2E+y1cKRjKZsMId
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:KL1PR0401MB6196.apcprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(7416014)(10067099003)(56012099006)(11063799006)(38070700021)(6133799003)(22082099003)(18002099003)(921020);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?eBUVMW7/w2cI/IxTnB8SV7GR+w1qa7lThnaWmawlaQG7fv5lnQhEw/06Hk?=
- =?iso-8859-1?Q?A20S/9p8yJp8vMFMFBt64Q+ktwMGf5YzVjOdUJUZWUywbOOGQQ6Xd8SOlx?=
- =?iso-8859-1?Q?RviphnmYISWfbpOlM6wuN9IKxvjiPPcNDLm7oy4CQ7+vRl0+nkJfyzVtIe?=
- =?iso-8859-1?Q?0/c9DLzDaxMb1SnDc0KgeXxo0Zhcztbuw33qtKBiNypfFOLK46wosVUpcI?=
- =?iso-8859-1?Q?UOwCPMou35+Ax8fJPfNnS7eEAX5kFsROGoeZoqt87hX59FLl89nn/n0727?=
- =?iso-8859-1?Q?ce79hLA4m3GOWMdqm+NZINaIOYBoA+zMjvJO60NzkwIc29xiKE6hFvMOG2?=
- =?iso-8859-1?Q?PV1oLK6NXsnR2GYRGStPQhnfRnhFuYBBy+tpyAazgCfPpRirt6mKTpc48L?=
- =?iso-8859-1?Q?rK/SsL5N4AqYpitxTM+NZr/pWYU6GrzZ+BAZdVmh7IPo1LTS92Eoau8FTV?=
- =?iso-8859-1?Q?qdCT6a1CMLBVjqNWT6lJvXb8fdElZCPHHghvLyzqtNme8Bv95swiP8fJvm?=
- =?iso-8859-1?Q?ENEqgzaASdoWVTfIWJeONkB7QltIG8krk4kU0KgaQHq3tsTPeLOdOTtpsK?=
- =?iso-8859-1?Q?dvqj8Jo1IBAdeneHidkf1yXY6x7BDJRTeqDNu/QTLsUTz/JCPuU5pxU3xD?=
- =?iso-8859-1?Q?6mY7C+Jv8P86aLqEVNGgq/mz7wukYbhepaOuLfB7j8oM47XCTbkvW5QvC7?=
- =?iso-8859-1?Q?a39sOPR64joC5WttLC9a9BRIcj9JZuWyc7j9BYYKPtrYCA9ThPuFan2gI9?=
- =?iso-8859-1?Q?1R3bnKS6WeAkjsgz4Kvqp9AErbttAWgSEx+uMz7jB2rIsL9XKMWwpsz/UQ?=
- =?iso-8859-1?Q?3PzcqhENmQ19aWZknX0ceaNxsB1muHeiD5THFa+/VNsELRIde7PofXo3SJ?=
- =?iso-8859-1?Q?fL3tNtiAK0buMdj9AhRJX6Tr03vdCVB1DHCPgw0JXpPkF3saJ7PC1hN4ze?=
- =?iso-8859-1?Q?/7EKK5OpK0ZJAk8/0fhxf58v5hUU3bYMe43UsQZ7q7Jt7QMgTsaFkV/E4a?=
- =?iso-8859-1?Q?XLSy+IcwA+duL52gB+3N+MAHZ6GW3KLVjmIPZsOIPSOW3A51HoyA2XEk9G?=
- =?iso-8859-1?Q?Hu4xF8MWvCTdAV9gXB66bUtFUSODAwVnPUmM4OHCBY38y7MjhJ0W84P2B7?=
- =?iso-8859-1?Q?PLxfEy4nc4nT3juDVA0PgTR47otXzvqOu0q6Zse9qdgNDh3ynLKBdwXD7i?=
- =?iso-8859-1?Q?95p/uQKUrXqJADAdYHA5A3h5sxRWbQ643qfBP1R6Yk5hvPBT0AF0yP7xVb?=
- =?iso-8859-1?Q?RoQAigoZK0MiIvisRFMKldDLnd5xcEEEk9GHj25Okd6hUa++CGMLY9a+xI?=
- =?iso-8859-1?Q?XF5MZT6FtNwYMN8pperlWmmaP1gEGVg0nHj5+1nNiDpbfonE0KRo3DfBe3?=
- =?iso-8859-1?Q?HDdmPLiqv6ZAAi+GstAc8xUvkfV7LUrtHMs2f61KRsNL5S4asGVjr6oCar?=
- =?iso-8859-1?Q?uYn/uPai2zvo+zUDaTDWOd/o2ggmoE3UeqsTWGfxjekNxEbMS1lXt9zXND?=
- =?iso-8859-1?Q?wZm0OqEcDec2LUHyk6wyHCoTyVVixmL3eUQOjO7+/1z4WzMe7OwM6FSOyV?=
- =?iso-8859-1?Q?4WB8GwXVKp2BNQKVNGV6TC0eg48ph/XC0/AuxCxwtOWFKIb4wzrNp4bk0m?=
- =?iso-8859-1?Q?iNEZa/d9+1EQ5XCy/bYoVFNte9DEkJ2t1EzMmsmIXom5fR2o2x5lL5RL5Z?=
- =?iso-8859-1?Q?19/kFehHikj4+xEeCu/8nJPXEwkup2SrDquFZ0RDJfY1WpzRsr+zGk2ESe?=
- =?iso-8859-1?Q?mF7JqZFjwzKdT2wu8cgUO8JEEtwfzVrPPUZAAGouRnAqacoprVJoH3AE9l?=
- =?iso-8859-1?Q?Oh1w4/zEdg=3D=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ <1784542925.8631fc262581453bbf619ec5b2062170.19f7f0c1081000edb5@vates.tech>
+x-swg-bid: 1784542925.8631fc262581453bbf619ec5b2062170.19f7f0c1081000edb5
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+Date: Mon, 20 Jul 2026 12:22:03 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: transsion.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: KL1PR0401MB6196.apcprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 63fea150-c8cb-4d86-a7ac-08dee6429caa
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Jul 2026 09:38:07.6005
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 2e8503a6-2d01-4333-8e36-6ab7c8cd7ae2
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: iL3zE7b8rMUVTzwzyUk7DRTgOGTS2BPssQcGsgjIRskDDC2269Ewz5hnWQ43ECc/YJhsXvWGFpyzWFVs5qeCW6ZWLNABU9tWKNQnzoaHuJY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYSPR04MB7923
-X-purgate-ID: tlsNG-c201ff/1784540295-F7EB92A1-437FDE4F/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] x86/domctl: Reorder user_regs accesses for efficiency
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>,
+ =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+References: <20260720092238.2094500-1-andrew.cooper3@citrix.com>
+Content-Language: en-US
+From: Teddy Astie <teddy.astie@vates.tech>
+Autocrypt: addr=teddy.astie@vates.tech; keydata=
+ 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
+ x9fhaZEsniw8/bYgC3igkk5YJiOa
+In-Reply-To: <20260720092238.2094500-1-andrew.cooper3@citrix.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------90LObHJ3aNi40bZxyOnFLoGA"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1784542924224
+X-purgate-ID: tlsNG-d62444/1784542926-C4D44757-F268C9DE/0/0
 X-purgate-type: clean
-X-purgate-size: 8123
+X-purgate-size: 5674
 
-From: Hongyan Xia <hongyan.xia@transsion.com>=0A=
-=0A=
-paravirt_steal_rq_enabled and paravirt_steal_enabled use raw static_key=0A=
-APIs which are now deprecated. Use the new API instead.=0A=
-=0A=
-No functional change.=0A=
-=0A=
-Signed-off-by: Hongyan Xia <hongyan.xia@transsion.com>=0A=
----=0A=
- arch/arm64/kernel/paravirt.c           | 4 ++--=0A=
- arch/loongarch/kernel/paravirt.c       | 4 ++--=0A=
- arch/powerpc/platforms/pseries/setup.c | 4 ++--=0A=
- arch/riscv/kernel/paravirt.c           | 4 ++--=0A=
- arch/x86/kernel/cpu/vmware.c           | 4 ++--=0A=
- arch/x86/kernel/kvm.c                  | 4 ++--=0A=
- drivers/xen/time.c                     | 4 ++--=0A=
- include/linux/sched/cputime.h          | 6 +++---=0A=
- kernel/sched/core.c                    | 4 ++--=0A=
- kernel/sched/cputime.c                 | 4 ++--=0A=
- 10 files changed, 21 insertions(+), 21 deletions(-)=0A=
-=0A=
-diff --git a/arch/arm64/kernel/paravirt.c b/arch/arm64/kernel/paravirt.c=0A=
-index 572efb96b23f..30bf61d031eb 100644=0A=
---- a/arch/arm64/kernel/paravirt.c=0A=
-+++ b/arch/arm64/kernel/paravirt.c=0A=
-@@ -157,9 +157,9 @@ int __init pv_time_init(void)=0A=
- =0A=
- 	static_call_update(pv_steal_clock, para_steal_clock);=0A=
- =0A=
--	static_key_slow_inc(&paravirt_steal_enabled);=0A=
-+	static_branch_inc(&paravirt_steal_enabled);=0A=
- 	if (steal_acc)=0A=
--		static_key_slow_inc(&paravirt_steal_rq_enabled);=0A=
-+		static_branch_inc(&paravirt_steal_rq_enabled);=0A=
- =0A=
- 	pr_info("using stolen time PV\n");=0A=
- =0A=
-diff --git a/arch/loongarch/kernel/paravirt.c b/arch/loongarch/kernel/parav=
-irt.c=0A=
-index 10821cce554c..e8965a3f8082 100644=0A=
---- a/arch/loongarch/kernel/paravirt.c=0A=
-+++ b/arch/loongarch/kernel/paravirt.c=0A=
-@@ -308,10 +308,10 @@ int __init pv_time_init(void)=0A=
- =0A=
- 	static_call_update(pv_steal_clock, paravt_steal_clock);=0A=
- =0A=
--	static_key_slow_inc(&paravirt_steal_enabled);=0A=
-+	static_branch_inc(&paravirt_steal_enabled);=0A=
- #ifdef CONFIG_PARAVIRT_TIME_ACCOUNTING=0A=
- 	if (steal_acc)=0A=
--		static_key_slow_inc(&paravirt_steal_rq_enabled);=0A=
-+		static_branch_inc(&paravirt_steal_rq_enabled);=0A=
- #endif=0A=
- =0A=
- 	if (static_key_enabled(&virt_preempt_key))=0A=
-diff --git a/arch/powerpc/platforms/pseries/setup.c b/arch/powerpc/platform=
-s/pseries/setup.c=0A=
-index 1223dc961242..8dcbc4bb7025 100644=0A=
---- a/arch/powerpc/platforms/pseries/setup.c=0A=
-+++ b/arch/powerpc/platforms/pseries/setup.c=0A=
-@@ -852,9 +852,9 @@ static void __init pSeries_setup_arch(void)=0A=
- 			static_branch_enable(&shared_processor);=0A=
- 			pv_spinlocks_init();=0A=
- #ifdef CONFIG_PARAVIRT_TIME_ACCOUNTING=0A=
--			static_key_slow_inc(&paravirt_steal_enabled);=0A=
-+			static_branch_inc(&paravirt_steal_enabled);=0A=
- 			if (steal_acc)=0A=
--				static_key_slow_inc(&paravirt_steal_rq_enabled);=0A=
-+				static_branch_inc(&paravirt_steal_rq_enabled);=0A=
- #endif=0A=
- 		}=0A=
- =0A=
-diff --git a/arch/riscv/kernel/paravirt.c b/arch/riscv/kernel/paravirt.c=0A=
-index 5f56be79cd06..9c13a6f1ea2a 100644=0A=
---- a/arch/riscv/kernel/paravirt.c=0A=
-+++ b/arch/riscv/kernel/paravirt.c=0A=
-@@ -116,9 +116,9 @@ int __init pv_time_init(void)=0A=
- =0A=
- 	static_call_update(pv_steal_clock, pv_time_steal_clock);=0A=
- =0A=
--	static_key_slow_inc(&paravirt_steal_enabled);=0A=
-+	static_branch_inc(&paravirt_steal_enabled);=0A=
- 	if (steal_acc)=0A=
--		static_key_slow_inc(&paravirt_steal_rq_enabled);=0A=
-+		static_branch_inc(&paravirt_steal_rq_enabled);=0A=
- =0A=
- 	pr_info("Computing paravirt steal-time\n");=0A=
- =0A=
-diff --git a/arch/x86/kernel/cpu/vmware.c b/arch/x86/kernel/cpu/vmware.c=0A=
-index 34b73573b108..f7ab9e7902cf 100644=0A=
---- a/arch/x86/kernel/cpu/vmware.c=0A=
-+++ b/arch/x86/kernel/cpu/vmware.c=0A=
-@@ -328,9 +328,9 @@ static int vmware_cpu_down_prepare(unsigned int cpu)=0A=
- static __init int activate_jump_labels(void)=0A=
- {=0A=
- 	if (has_steal_clock) {=0A=
--		static_key_slow_inc(&paravirt_steal_enabled);=0A=
-+		static_branch_inc(&paravirt_steal_enabled);=0A=
- 		if (steal_acc)=0A=
--			static_key_slow_inc(&paravirt_steal_rq_enabled);=0A=
-+			static_branch_inc(&paravirt_steal_rq_enabled);=0A=
- 	}=0A=
- =0A=
- 	return 0;=0A=
-diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c=0A=
-index dcef84da304b..d3dcd64f22c2 100644=0A=
---- a/arch/x86/kernel/kvm.c=0A=
-+++ b/arch/x86/kernel/kvm.c=0A=
-@@ -1052,9 +1052,9 @@ const __initconst struct hypervisor_x86 x86_hyper_kvm=
- =3D {=0A=
- static __init int activate_jump_labels(void)=0A=
- {=0A=
- 	if (has_steal_clock) {=0A=
--		static_key_slow_inc(&paravirt_steal_enabled);=0A=
-+		static_branch_inc(&paravirt_steal_enabled);=0A=
- 		if (steal_acc)=0A=
--			static_key_slow_inc(&paravirt_steal_rq_enabled);=0A=
-+			static_branch_inc(&paravirt_steal_rq_enabled);=0A=
- 	}=0A=
- =0A=
- 	return 0;=0A=
-diff --git a/drivers/xen/time.c b/drivers/xen/time.c=0A=
-index a2be0a4d45b0..a02d48a2aa68 100644=0A=
---- a/drivers/xen/time.c=0A=
-+++ b/drivers/xen/time.c=0A=
-@@ -169,7 +169,7 @@ void __init xen_time_setup_guest(void)=0A=
- =0A=
- 	static_call_update(pv_steal_clock, xen_steal_clock);=0A=
- =0A=
--	static_key_slow_inc(&paravirt_steal_enabled);=0A=
-+	static_branch_inc(&paravirt_steal_enabled);=0A=
- 	if (xen_runstate_remote)=0A=
--		static_key_slow_inc(&paravirt_steal_rq_enabled);=0A=
-+		static_branch_inc(&paravirt_steal_rq_enabled);=0A=
- }=0A=
-diff --git a/include/linux/sched/cputime.h b/include/linux/sched/cputime.h=
-=0A=
-index e90efaf6d26e..694126411dfe 100644=0A=
---- a/include/linux/sched/cputime.h=0A=
-+++ b/include/linux/sched/cputime.h=0A=
-@@ -182,9 +182,9 @@ extern unsigned long long=0A=
- task_sched_runtime(struct task_struct *task);=0A=
- =0A=
- #ifdef CONFIG_PARAVIRT=0A=
--struct static_key;=0A=
--extern struct static_key paravirt_steal_enabled;=0A=
--extern struct static_key paravirt_steal_rq_enabled;=0A=
-+#include <linux/jump_label.h>=0A=
-+DECLARE_STATIC_KEY_FALSE(paravirt_steal_enabled);=0A=
-+DECLARE_STATIC_KEY_FALSE(paravirt_steal_rq_enabled);=0A=
- =0A=
- #ifdef CONFIG_HAVE_PV_STEAL_CLOCK_GEN=0A=
- u64 dummy_steal_clock(int cpu);=0A=
-diff --git a/kernel/sched/core.c b/kernel/sched/core.c=0A=
-index 96226707c2f6..786975d4ca1e 100644=0A=
---- a/kernel/sched/core.c=0A=
-+++ b/kernel/sched/core.c=0A=
-@@ -795,7 +795,7 @@ struct rq *_task_rq_lock(struct task_struct *p, struct =
-rq_flags *rf)=0A=
- =0A=
- /* Use CONFIG_PARAVIRT as this will avoid more #ifdef in arch code. */=0A=
- #ifdef CONFIG_PARAVIRT=0A=
--struct static_key paravirt_steal_rq_enabled;=0A=
-+DEFINE_STATIC_KEY_FALSE(paravirt_steal_rq_enabled);=0A=
- #endif=0A=
- =0A=
- static void update_rq_clock_task(struct rq *rq, s64 delta)=0A=
-@@ -834,7 +834,7 @@ static void update_rq_clock_task(struct rq *rq, s64 del=
-ta)=0A=
- 	}=0A=
- #endif=0A=
- #ifdef CONFIG_PARAVIRT_TIME_ACCOUNTING=0A=
--	if (static_key_false((&paravirt_steal_rq_enabled))) {=0A=
-+	if (static_branch_unlikely(&paravirt_steal_rq_enabled)) {=0A=
- 		u64 prev_steal;=0A=
- =0A=
- 		steal =3D prev_steal =3D paravirt_steal_clock(cpu_of(rq));=0A=
-diff --git a/kernel/sched/cputime.c b/kernel/sched/cputime.c=0A=
-index 06bddaa738e5..f16970ca81d0 100644=0A=
---- a/kernel/sched/cputime.c=0A=
-+++ b/kernel/sched/cputime.c=0A=
-@@ -255,7 +255,7 @@ void __account_forceidle_time(struct task_struct *p, u6=
-4 delta)=0A=
-  * occasion account more time than the calling functions think elapsed.=0A=
-  */=0A=
- #ifdef CONFIG_PARAVIRT=0A=
--struct static_key paravirt_steal_enabled;=0A=
-+DEFINE_STATIC_KEY_FALSE(paravirt_steal_enabled);=0A=
- =0A=
- #ifdef CONFIG_HAVE_PV_STEAL_CLOCK_GEN=0A=
- static u64 native_steal_clock(int cpu)=0A=
-@@ -270,7 +270,7 @@ DEFINE_STATIC_CALL(pv_steal_clock, native_steal_clock);=
-=0A=
- static __always_inline u64 steal_account_process_time(u64 maxtime)=0A=
- {=0A=
- #ifdef CONFIG_PARAVIRT=0A=
--	if (static_key_false(&paravirt_steal_enabled)) {=0A=
-+	if (static_branch_unlikely(&paravirt_steal_enabled)) {=0A=
- 		u64 steal;=0A=
- =0A=
- 		steal =3D paravirt_steal_clock(smp_processor_id());=0A=
--- =0A=
-2.47.3=0A=
-=0A=
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------90LObHJ3aNi40bZxyOnFLoGA
+Content-Type: multipart/mixed; boundary="------------WP005mfmPwQvPkbQtsgWQCW5";
+ protected-headers="v1"
+From: Teddy Astie <teddy.astie@vates.tech>
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>,
+ =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Message-ID: <9ff44163-bc51-4aea-a97d-e730b6ccd9bf@vates.tech>
+Subject: Re: [PATCH] x86/domctl: Reorder user_regs accesses for efficiency
+References: <20260720092238.2094500-1-andrew.cooper3@citrix.com>
+In-Reply-To: <20260720092238.2094500-1-andrew.cooper3@citrix.com>
+
+--------------WP005mfmPwQvPkbQtsgWQCW5
+Content-Type: multipart/mixed; boundary="------------b17DZbHBFK5cDuQxBPkj1yHt"
+
+--------------b17DZbHBFK5cDuQxBPkj1yHt
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
+
+TGUgMjAvMDcvMjAyNiDDoCAxMToyMiwgQW5kcmV3IENvb3BlciBhIMOpY3JpdMKgOg0KPiBU
+aGUgY3VycmVudCBvcmRlciBpcyBkZXJpdmVkIGZyb20gZXhwYW5kaW5nIFhMQVRfY3B1X3Vz
+ZXJfcmVncygpIHdoaWNoIHVzZXMNCj4gdGhlIHg4Nl8zMiBjcHVfdXNlcl9yZWdzIG9yZGVy
+LiAgVGhpcyBpcyBjb3JyZWN0IGZvciBvbmUgdGhlIGJsb2NrcywgYnV0IG5vdA0KPiB0aGUg
+b3RoZXJzLg0KPiANCj4gSW4gb3JkZXIgdG8gd29yayB3aXRoIHRoZSBwcmVmZXRjaGVyLCBy
+YXRoZXIgdGhhbiBhZ2FpbnN0IGl0LCBsb2FkcyB3YW50IHRvIGJlDQo+IGluIGZpZWxkIG9y
+ZGVyLiAgTWFrZSB0aGlzIHNvIGZvciB0aGUgdGhyZWUgcGF0aHMgcmVhZGluZyBhbiB4ODZf
+NjQNCj4gY3B1X3VzZXJfcmVncy4NCj4gDQo+IE5vIGZ1bmN0aW9uYWwgY2hhbmdlLg0KPiAN
+Cj4gUmVwb3J0ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4NCj4gU2ln
+bmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4N
+ClJldmlld2VkLWJ5OiBUZWRkeSBBc3RpZSA8dGVkZHkuYXN0aWVAdmF0ZXMudGVjaD4NCg==
+
+--------------b17DZbHBFK5cDuQxBPkj1yHt
+Content-Type: application/pgp-keys; name="OpenPGP_0x660FA9D102CBCFD0.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x660FA9D102CBCFD0.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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
+x9fhaZEsniw8/bYgC3igkk5YJiOa
+=3DlUIA
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------b17DZbHBFK5cDuQxBPkj1yHt--
+
+--------------WP005mfmPwQvPkbQtsgWQCW5--
+
+--------------90LObHJ3aNi40bZxyOnFLoGA
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmpd9ssFAwAAAAAACgkQZg+p0QLLz9A0
+7gv/cTlzB8PMN1aoz/Bdd+Af6tVbWoXp3UGe4/f5hHWpKHsG8k4fzt88LtR2bNOW1TnJPwACe1V+
+pwwsxUOBl+YDYYv0na7kMRdqD4PyHiD/mkY7wbLo5S34O1etdPJ+pQNrOq6g9pZ17nqrsq+RumUe
+hzNkfnZ8J4NLucDjb9gWhvydSB57aSFDt+9pu577NwtcSeqP8gnP7doMX7auGKTcPr7FnWn2dCou
+bLnxNpmAyP8oVRdX3S3iakImqTzr7rW/7jdDl7l6QbHNUMswQezL1xPqTbYvFM5EGZtLqQSs6tQn
+iH+LGU4e5kQXDlzmAtp3DtoM1UcF9S7yFqytFSjGGzpAtc6YoU+0iTtzhEUbtXNVZbvw4kajjZHH
+3faXfo+NZALtuGdC6NSNiL3E8fmGAbR454AeUEdOV5jsCmvql6mv4mp0IPp/pE90UJ8+gPrbwixw
++bbmFOfzG3QLhUaqiVvPBJ8zdLh/1mW65n/KfgiiwHY9iecme8cGr6pHcdbZ
+=pDAs
+-----END PGP SIGNATURE-----
+
+--------------90LObHJ3aNi40bZxyOnFLoGA--
 
