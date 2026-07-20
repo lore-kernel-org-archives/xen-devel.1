@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B41AFC44524
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 16:02:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1367144.1616980 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E269C44520
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 16:02:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1367149.1617000 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlqRw-0008I8-00; Mon, 20 Jul 2026 16:02:36 +0000
+	id 1wlqS0-0000Zl-Re; Mon, 20 Jul 2026 16:02:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1367144.1616980; Mon, 20 Jul 2026 16:02:35 +0000
+Received: by outflank-mailman (output) from mailman id 1367149.1617000; Mon, 20 Jul 2026 16:02:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlqRv-0008HB-RV; Mon, 20 Jul 2026 16:02:35 +0000
-Received: by outflank-mailman (input) for mailman id 1367144;
- Mon, 20 Jul 2026 16:02:34 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wlqRu-0007uP-Q1
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 16:02:34 +0000
+	id 1wlqS0-0000Ya-Iq; Mon, 20 Jul 2026 16:02:40 +0000
+Received: by outflank-mailman (input) for mailman id 1367149;
+ Mon, 20 Jul 2026 16:02:39 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wlqRz-0000Fd-An
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 16:02:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wlqRu-00HTXg-6e
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 18:02:34 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wlqRy-007AIh-O0
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 18:02:38 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a5e4688-bab6-0a2a0a5309dd-0a2a45019a96-24
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 18:02:34 +0200
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a5e469c-5cb7-0a2a0a5109dd-0a2a450a8204-10
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 18:02:38 +0200
+Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a5e469a-5984-0a2a45010019-d1558034c4fc-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 18:02:34 +0200
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-4954df200ddso17326535e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:02:34 -0700 (PDT)
+ id 6a5e469e-f2d2-0a2a450a0019-d1558035d1c9-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 18:02:38 +0200
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-4955158f26aso13613725e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:02:38 -0700 (PDT)
 Received: from fedora (user-109-243-144-234.play-internet.pl.
  [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49563eee22esm31331765e9.1.2026.07.20.09.02.31
+ 5b1f17b1804b1-49563eee22esm31331765e9.1.2026.07.20.09.02.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 09:02:32 -0700 (PDT)
+ Mon, 20 Jul 2026 09:02:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,40 +54,40 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784563354; x=1785168154; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1784563358; x=1785168158; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=2GtGX4lSvWuVxHxTWIzl2qVUw75GgyetUNG8vpXRat0=;
-        b=FwLgMuTATHeUZ6OD+31cbou8UfUGjpP/pWudRvZX94Wkm5YClwgxFSVO31yG5Jidl9
-         ++cVq5IK3yNrcquTxVj7f+fVqxa+dCYX0eFqeUTocXrTB8yngZe0f6hKpNet8zomJhpG
-         5zawLFT1UnnyuG+DtXGv3/X/gxyYj/p/EVFw2xASC759wvntEXbOrmeQKEsM0Ew22aGC
-         fTUOwto6vicEEDefx+FU9kn0UOc+AC2CRDao2Hagu6tv50QBeP0OqTNRyqo3b5XsgwM1
-         VWmmKrCmvgFJtUmlJ0AJXpv0w2xk/2k+aWn/y7pH5RMGEayT0hQr5YRPwAI3fEegt/8t
-         hpSQ==
+        bh=ttSCZ7TXUpbcfCdm+1KEOjSX9YfjLTnnL4XcxrjkzxU=;
+        b=l2Y3DT2sTP1fkxZpNdoVMYPUsQVjJLJv9w0Se946jQZnfNU4scb/2FZzm0SMLxNoqC
+         CBhdlS1JgEAHK7HjQJBQpq8Vu/pu9Rt9In48jWNyu17vs/rb5mw49N/nfHUrufcHH4TI
+         FLcRRH+xZp7RjfxxGS9z1k2WsP1IDmSrczsIkLg9tYZMeiRVyvtKww4Xr+8A9mwTprqm
+         XowDk9J7Ia+NZpwYsSpmscZgUZmNKpuBprqM21eX51xX7YowSblr2c/CCTqXApCmuLwW
+         jRY2/SQi6rzfRlbO5gp2tlldd657Dcx0E2rQLII/243zWoQTMl6oj+nNH7ua+C3uSm5p
+         UAhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784563354; x=1785168154;
+        d=1e100.net; s=20251104; t=1784563358; x=1785168158;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=2GtGX4lSvWuVxHxTWIzl2qVUw75GgyetUNG8vpXRat0=;
-        b=IiNMS9hZBjtfmNBxPqt0K1M2tXtBsiz2gUPuZNInL+6xHikhkTp4UMI5fq4vlpi32P
-         9Nua8JLEX8aIOwsFyHqiuaAACaQquL/pVo/PgI86Az0fpDRgqOTliPEdintOIfpG1Jti
-         +XBqZngn/FKi4x1W6NXTNjIiBsCscyOr7HWCM2PDJIFYAR4Dgchoe6cz1MacHiLmDJq6
-         pkBjJ5JEs2YZgFVxbul7dl0RlJhZqoP5i3JmxMHcMs/fQHbW8564LGhEUDrIcRoso8wf
-         hpXB09GKexU9/e4/DMjpB14lDFlMNvQRTDdcxXyOJjZPitAT+Cc/UNflMNHMGt/XWROS
-         jZFA==
-X-Gm-Message-State: AOJu0Ywzfh05Cgwyytw0GpL4J7YDHqoUaXMuMrKzfcl+x/HdOytH8bNs
-	tKqPBCH5Gg2zQq5dMkVa88TcbVDf78zepoanK48/tG8WTmEK7IXaZiQnmcPO4A==
-X-Gm-Gg: AfdE7cm6kx0A7q+LYJX+VShB69s936Fyy0NvsZ6Zd2m/gco+AcQabNlcY1V0bKODoTj
-	XeB06TNo5AJf7yu/PiNlrIcRK0mgl08beR9WLRb+6NZj5/inO9QneOeoE05GL+hqvmvDqXBNsFH
-	HxoA9KkOmsXQ+VZOj0jwu31iKWwNgSy6xVyto7nWrld2BYtOC/DB3y5LY/fTMbMvIPye82j3cno
-	e6LlD1Fvnh5tByNX+uRM5gjRb6WYdAtQSuVINHKFJh/PHYb6dgQ+Zd8/OZH8t8bvqst9gFVP2y6
-	fAf+Xr6A2Afu0otC29vOEGkVLaye3B4kWV/ogXPjs0yoCN9zRgWKf3g4C8p4m3tko383+hfZGY0
-	SdAWg0fcoF6XAaYm9Wxdys2Fpf0XPqVwYC9X6t8DacDyGVSELRX1s8699Ss78a3X53XrR1FwuCc
-	hrmSR0Th3pnUd2+rqI5p7lt3DjK273FGVWuGXGXVSrdid5Ebk=
-X-Received: by 2002:a05:600c:4fc9:b0:493:e974:41ac with SMTP id 5b1f17b1804b1-4954a3f3b28mr171637645e9.16.1784563353289;
-        Mon, 20 Jul 2026 09:02:33 -0700 (PDT)
+        bh=ttSCZ7TXUpbcfCdm+1KEOjSX9YfjLTnnL4XcxrjkzxU=;
+        b=nsvtGZT8vfvRjFi7UQFpahuAtJ+JabmO+GDaIBH3Wn1qGR66m1H8WP/6i844DoQxB3
+         BY3mXDjwEKUZFZy5eqgfCdbYgX5FOgGmtbRMoKATMZii+5Lk+h6hWJfm0vxToJYwDKtf
+         QxPRF8wMfEne4UzJDgiNYxemv1mIZX8Z74ANwCkr/9yZhYW7lyWkflOWghZFUj7V+O56
+         HxTNWqjdvlPqG2WSXCkUmk/23q1GoUDUDui6rYukVV58l5Q9mImSUsqO1GIRVt8GAR5r
+         wLxzfG8Y87+WilBCGVBLNhE3zvsfbcHnQZDijXbZxQNgbeaA/wtIzpmY7idfA6mNNqzL
+         AzsQ==
+X-Gm-Message-State: AOJu0YxMVBGqjnLWKPCwFFARUd5y42UWfW6XZsV2AnwKgC1nJIpd2J/k
+	WRBhkcT+OCeD4g5Oq56INbZKy8ur588lLHM+aVzXY74+hIN4a1xQfMO0zFuvcQ==
+X-Gm-Gg: AfdE7cloWjKodQnVu8BjSKPOI6az0oWhtsE4RuT9IGcGH0LYYrKdvtWFn6VdYq9PY+v
+	fWZxLFfWHK1yDoKTY4p3I1EJC26uLDpqF6rKEWVc1Mg9STTMk3Xsyyr5HiSzWKaK8BhoJGxz0Zd
+	e+T+m+WJaAz0aMBzAYZ+0OfGVQRvikuV/wBuYtCIiG5laUecnjRHKReBu03bbBWXwAGDaLdbObb
+	15MmtnaKlLfgoDNSSsNC2IkQuDg+t+bKjQtq1CWPdAS2mh4eVYMeka04B4N/LhVIYCEHiEExorx
+	5ZB9bcy3K9HO/1Ul2bjAetXT8XTiyOYHck7shjF13zuM96feKpTUXSln1S5a6nnXpsa6Owy6Vwe
+	EMwl/M4MnGRIzzcXnKNHExLEIw57eCVu0xFvCogfd4GEJ5IxwX967fLFUcrpx2q3F1d1bX+2qFN
+	hwn9NujKKQKCrS90aRXsLquMTrkdBXlU7S9RWdK1IPWCx1ilY=
+X-Received: by 2002:a05:600c:4593:b0:495:3a52:cd7e with SMTP id 5b1f17b1804b1-4954a40e2f3mr172180365e9.25.1784563357648;
+        Mon, 20 Jul 2026 09:02:37 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -102,329 +102,128 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 04/17] xen/riscv: introduce device-agnostic MMIO emulation dispatch
-Date: Mon, 20 Jul 2026 18:02:02 +0200
-Message-ID: <c12b69710d7b79bfc0c110f3fa043d871d8b8394.1784560663.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 06/17] xen/riscv: map IMSIC interrupt file for vCPUs
+Date: Mon, 20 Jul 2026 18:02:04 +0200
+Message-ID: <254f470ae2e2b2a4affa7c405be8c07a7d8b300e.1784560663.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <cover.1784560663.git.oleksii.kurochko@gmail.com>
 References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1784563354-1EE60757-489F366A/10/73395122804
+X-purgate-ID: tlsNG-4011c0/1784563358-59FDECFC-57277793/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 9383
+X-purgate-size: 4521
 
-RISC-V guests can expose several virtual interrupt controllers at
-distinct GPA ranges: vPLIC (hasn't been introduced yet) for legacy machines,
-vAPLIC and vIMSIC for AIA-compliant ones (is being introduced in the follow
-up patches). Routing MMIO faults via a per-device is_access() check in the
-trap handler would couple it to every device it must serve, requiring a
-new conditional branch in the fault path each time a new emulated device is
-added.
-
-Introduce a per-domain MMIO handler registration table, modeled
-after the equivalent ARM framework, so that virtual devices
-self-register their GPA ranges and read/write callbacks at domain
-creation time. The MMIO fault path delegates to a single
-try_handle_mmio() entry point and remains agnostic of which device
-owns a particular address.
-
-Subsequent patches wire this into arch_domain_create() and the MMIO fault
-path in traps.c.
+A guest running in VS-mode expects its own IMSIC S-file at offset 0 of its
+guest-physical IMSIC block. Physically, the guest-file (G-file) assigned to
+this vCPU lives at a hart-relative offset given by guest_file_id (assigned
+via the vGEIN allocator). Therefore, imsic_map_guest_file() uses stage-2
+translation to redirect the guest's fixed per-vCPU GPA page (offset 0) to
+the specific physical guest-file page.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Reviewed-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 ---
-Note that find_mmio_handler() and try_handle_mmio() is handling found
-handler differently for now in comparison to Arm. But this behaviour will
-be aligned at the end. Look at discussion:
-  https://lore.kernel.org/xen-devel/cd78972e-88d5-471d-a201-5f9cd1392c73@gmail.com/T/#t
+The corresponding unmap of the IMSIC interrupt file will be introduced
+separately when the need arises.
 ---
 ---
- xen/arch/riscv/Makefile             |   1 +
- xen/arch/riscv/domain.c             |   4 +
- xen/arch/riscv/include/asm/domain.h |   3 +
- xen/arch/riscv/include/asm/mmio.h   |  63 ++++++++++++
- xen/arch/riscv/mmio.c               | 145 ++++++++++++++++++++++++++++
- 5 files changed, 216 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/mmio.h
- create mode 100644 xen/arch/riscv/mmio.c
+ xen/arch/riscv/imsic.c             | 63 ++++++++++++++++++++++++++++++
+ xen/arch/riscv/include/asm/imsic.h |  2 +
+ 2 files changed, 65 insertions(+)
 
-diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
-index 046f73f4d87c..c452ebc3cf61 100644
---- a/xen/arch/riscv/Makefile
-+++ b/xen/arch/riscv/Makefile
-@@ -14,6 +14,7 @@ obj-y += intc.o
- obj-y += irq.o
- obj-y += kernel.init.o
- obj-y += mm.o
-+obj-y += mmio.o
- obj-y += p2m.o
- obj-y += paging.o
- obj-y += pt.o
-diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
-index 4db9c28662c7..1e6f0ef66c2f 100644
---- a/xen/arch/riscv/domain.c
-+++ b/xen/arch/riscv/domain.c
-@@ -12,6 +12,7 @@
- #include <asm/cpufeature.h>
- #include <asm/csr.h>
- #include <asm/intc.h>
-+#include <asm/mmio.h>
- #include <asm/riscv_encoding.h>
- #include <asm/vtimer.h>
+diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
+index ffce77209c26..c5ae74e456e8 100644
+--- a/xen/arch/riscv/imsic.c
++++ b/xen/arch/riscv/imsic.c
+@@ -25,7 +25,9 @@
+ #include <xen/spinlock.h>
+ #include <xen/xvmalloc.h>
  
-@@ -308,6 +309,9 @@ int arch_domain_create(struct domain *d,
-     if ( (rc = p2m_init(d, config)) != 0)
-         goto fail;
++#include <asm/aia.h>
+ #include <asm/imsic.h>
++#include <asm/p2m.h>
  
-+    if ( (rc = domain_io_init(d, MAX_IO_HANDLER)) != 0 )
-+        goto fail;
-+
-     if ( (rc = domain_vintc_init(d)) )
-         goto fail;
+ #define IMSIC_HART_SIZE(guest_bits) (BIT(guest_bits, U) * IMSIC_MMIO_PAGE_SZ)
  
-diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
-index e035b33ddfdc..15e8fa19685e 100644
---- a/xen/arch/riscv/include/asm/domain.h
-+++ b/xen/arch/riscv/include/asm/domain.h
-@@ -9,6 +9,7 @@
+@@ -342,6 +344,67 @@ static int __init imsic_parse_node(const struct dt_device_node *node,
+     return 0;
+ }
  
- #include <asm/cpufeature.h>
- #include <asm/guest-layout.h>
-+#include <asm/mmio.h>
- #include <asm/p2m.h>
- #include <asm/vtimer.h>
- 
-@@ -101,6 +102,8 @@ struct arch_domain {
-     const unsigned long *isa;
- 
-     struct vintc *vintc;
-+
-+    struct vmmio vmmio;
- };
- 
- #include <xen/sched.h>
-diff --git a/xen/arch/riscv/include/asm/mmio.h b/xen/arch/riscv/include/asm/mmio.h
-new file mode 100644
-index 000000000000..18df1133e621
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/mmio.h
-@@ -0,0 +1,63 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+#ifndef RISCV_MMIO_H
-+#define RISCV_MMIO_H
-+
-+#include <xen/lib.h>
-+#include <xen/rwlock.h>
-+
-+#define MAX_IO_HANDLER  16
-+
-+typedef struct {
-+    paddr_t gpa;
-+    unsigned int len;  /* access width in bytes (1, 2, 4, 8) */
-+    bool is_write;
-+    register_t data;   /* store: value to write; load: value read (set by handler) */
-+} mmio_info_t;
-+
-+enum io_state
-+{
-+    IO_ABORT,       /* The IO was handled and led to an abort. */
-+    IO_HANDLED,     /* The IO was successfully handled. */
-+    IO_UNHANDLED,   /* No handler found for the IO. */
-+};
-+
-+typedef enum io_state (*mmio_read_t)(struct vcpu *v, mmio_info_t *info,
-+                                     register_t *r);
-+typedef enum io_state (*mmio_write_t)(struct vcpu *v, mmio_info_t *info,
-+                                      register_t r);
-+
-+struct mmio_handler_ops {
-+    mmio_read_t read;
-+    mmio_write_t write;
-+};
-+
-+struct mmio_handler {
-+    paddr_t addr;
-+    paddr_t size;
-+    const struct mmio_handler_ops *ops;
-+};
-+
-+struct vmmio {
-+    unsigned int num_entries;
-+    unsigned int max_num_entries;
-+    rwlock_t lock;
-+    struct mmio_handler *handlers;
-+};
-+
-+enum io_state try_handle_mmio(mmio_info_t *info);
-+void register_mmio_handler(struct domain *d,
-+                           const struct mmio_handler_ops *ops,
-+                           paddr_t addr, paddr_t size);
-+int domain_io_init(struct domain *d, unsigned int max_count);
-+void domain_io_free(struct domain *d);
-+
-+#endif /* RISCV_MMIO_H */
-+
 +/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
++ * Map the physical IMSIC guest interrupt file (G-file) assigned to vCPU v
++ * into the domain's stage-2 guest-physical address space.
++ *
++ * In the machine's physical address space (SPA), each hart's IMSIC
++ * supervisor-level file (S-file) is located at offset 0 of its address block,
++ * followed contiguously by GEILEN guest files at offsets of 1, 2, ..., N pages.
++ *
++ * Because a guest OS running in VS-mode expects its own supervisor-level
++ * interrupt file to be at offset 0 of its guest-physical IMSIC block, the
++ * hypervisor must use stage-2 address translation to map the vCPU's
++ * guest-physical "supervisor" page (GPA offset 0) to the specific
++ * physical guest file page (SPA offset guest_file_id) on the physical hart.
++ *
++ * Xen pins each vCPU to a pCPU (v->processor) and assigns it a physical
++ * guest file index (guest_file_id) from the vGEIN allocator. A guest_file_id
++ * of 0 indicates that no hardware guest file is selected (matching the
++ * architectural behavior where vGEIN = 0 in the hstatus CSR selects no
++ * guest external interrupt source), requiring the VS-file to be emulated
++ * in software.
++ *
++ * The base guest-physical address advertised to the guest in the device
++ * tree matches offset 0 of the vCPU's virtual IMSIC block. Stage-2
++ * translation ensures that guest supervisor accesses to this page are
++ * transparently routed to the real hardware VS-file granted to it on
++ * the current pCPU.
 + */
-diff --git a/xen/arch/riscv/mmio.c b/xen/arch/riscv/mmio.c
-new file mode 100644
-index 000000000000..7d56bc8b27c5
---- /dev/null
-+++ b/xen/arch/riscv/mmio.c
-@@ -0,0 +1,145 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * Copyright (C) Vates
-+ */
-+
-+#include <xen/bsearch.h>
-+#include <xen/lib.h>
-+#include <xen/rwlock.h>
-+#include <xen/sched.h>
-+#include <xen/sort.h>
-+#include <xen/xvmalloc.h>
-+
-+#include <asm/current.h>
-+#include <asm/mmio.h>
-+
-+static enum io_state handle_read(const struct mmio_handler *handler,
-+                                 struct vcpu *v,
-+                                 mmio_info_t *info)
++int imsic_map_guest_file(struct vcpu *v, unsigned int vsfile_id)
 +{
-+    register_t r = 0;
-+    enum io_state rc;
++    int res = 0;
++    struct domain *d = v->domain;
++    unsigned int cpu = v->processor;
++    vaddr_t gaddr = imsic_cfg.base_addr + (IMSIC_MMIO_PAGE_SZ * v->vcpu_id);
++    paddr_t paddr;
++    unsigned long guest_stride;
 +
-+    rc = handler->ops->read(v, info, &r);
-+    if ( rc == IO_HANDLED )
-+        info->data = r;
++    /* Nothing to map in the case of sw interrupt file. */
++    if ( !vsfile_id )
++        return res;
 +
-+    return rc;
++    guest_stride = vsfile_id * IMSIC_MMIO_PAGE_SZ;
++
++    paddr = imsic_cfg.msi[cpu].base_addr + imsic_cfg.msi[cpu].offset +
++            guest_stride;
++
++#ifdef IMSIC_DEBUG
++    printk("%s: %pv: ga(%#lx) -> pa(%#lx), cpu(%#x), guest_file_id(%d) "
++           "base_addr(%#lx) offset(%#lx)\n", __func__, v, gaddr, paddr, cpu,
++           vsfile_id, imsic_cfg.msi[cpu].base_addr, imsic_cfg.msi[cpu].offset);
++#endif
++
++    res = map_regions_p2mt(d, gaddr_to_gfn(gaddr),
++                           PFN_DOWN(IMSIC_MMIO_PAGE_SZ), maddr_to_mfn(paddr),
++                           arch_dt_passthrough_p2m_type());
++    if ( res )
++        printk("%s: Failed to map %#lx to the guest at %#lx\n",
++               __func__, paddr, gaddr);
++
++    return res;
 +}
 +
-+static enum io_state handle_write(const struct mmio_handler *handler,
-+                                  struct vcpu *v,
-+                                  mmio_info_t *info)
-+{
-+    return handler->ops->write(v, info, info->data);
-+}
+ int vcpu_imsic_init(struct vcpu *v)
+ {
+     struct vimsic_state *imsic_state;
+diff --git a/xen/arch/riscv/include/asm/imsic.h b/xen/arch/riscv/include/asm/imsic.h
+index 612f503b5799..f2c649517fd1 100644
+--- a/xen/arch/riscv/include/asm/imsic.h
++++ b/xen/arch/riscv/include/asm/imsic.h
+@@ -106,4 +106,6 @@ unsigned int vcpu_guest_file_id(const struct vcpu *v);
+ 
+ int vimsic_make_domu_dt_node(struct kernel_info *kinfo, unsigned int *phandle);
+ 
++int imsic_map_guest_file(struct vcpu *v, unsigned int vsfile_id);
 +
-+/* Assumes mmio regions are not overlapping. */
-+static int cmp_mmio_handler(const void *key, const void *elem)
-+{
-+    const struct mmio_handler *handler0 = key;
-+    const struct mmio_handler *handler1 = elem;
-+
-+    if ( handler0->addr < handler1->addr )
-+        return -1;
-+
-+    if ( handler0->addr >= (handler1->addr + handler1->size) )
-+        return 1;
-+
-+    return 0;
-+}
-+
-+static void swap_mmio_handler(void *a, void *b)
-+{
-+    struct mmio_handler *t1 = a, *t2 = b;
-+
-+    SWAP(*t1, *t2);
-+}
-+
-+/*
-+ * Return a copy of the matching handler rather than a pointer into
-+ * vmmio->handlers: a concurrent register_mmio_handler() re-sorts the
-+ * array, so an escaped pointer could refer to a different (or torn)
-+ * entry once the lock is dropped.  The copy stays valid as the ops
-+ * structures are never freed.
-+ */
-+static bool find_mmio_handler(struct domain *d, paddr_t gpa,
-+                              struct mmio_handler *out)
-+{
-+    struct vmmio *vmmio = &d->arch.vmmio;
-+    struct mmio_handler key = { .addr = gpa };
-+    const struct mmio_handler *handler;
-+
-+    read_lock(&vmmio->lock);
-+    handler = bsearch(&key, vmmio->handlers, vmmio->num_entries,
-+                      sizeof(*handler), cmp_mmio_handler);
-+    if ( handler )
-+        *out = *handler;
-+    read_unlock(&vmmio->lock);
-+
-+    return handler != NULL;
-+}
-+
-+enum io_state try_handle_mmio(mmio_info_t *info)
-+{
-+    struct vcpu *v = current;
-+    struct mmio_handler handler = {};
-+
-+    if ( !find_mmio_handler(v->domain, info->gpa, &handler) )
-+        return IO_UNHANDLED;
-+
-+    if ( info->is_write )
-+        return handle_write(&handler, v, info);
-+    else
-+        return handle_read(&handler, v, info);
-+}
-+
-+void register_mmio_handler(struct domain *d,
-+                           const struct mmio_handler_ops *ops,
-+                           paddr_t addr, paddr_t size)
-+{
-+    struct vmmio *vmmio = &d->arch.vmmio;
-+    struct mmio_handler *handler;
-+
-+    write_lock(&vmmio->lock);
-+
-+    BUG_ON(vmmio->num_entries >= vmmio->max_num_entries);
-+
-+    handler = &vmmio->handlers[vmmio->num_entries];
-+    handler->ops = ops;
-+    handler->addr = addr;
-+    handler->size = size;
-+    vmmio->num_entries++;
-+
-+    /* Sort mmio handlers in ascending order based on base address */
-+    sort(vmmio->handlers, vmmio->num_entries, sizeof(struct mmio_handler),
-+         cmp_mmio_handler, swap_mmio_handler);
-+
-+    write_unlock(&vmmio->lock);
-+}
-+
-+int domain_io_init(struct domain *d, unsigned int max_count)
-+{
-+    rwlock_init(&d->arch.vmmio.lock);
-+    d->arch.vmmio.num_entries = 0;
-+    d->arch.vmmio.max_num_entries = max_count;
-+    d->arch.vmmio.handlers = xvzalloc_array(struct mmio_handler, max_count);
-+    if ( !d->arch.vmmio.handlers )
-+        return -ENOMEM;
-+
-+    return 0;
-+}
-+
-+void domain_io_free(struct domain *d)
-+{
-+    XVFREE(d->arch.vmmio.handlers);
-+}
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+ #endif /* ASM_RISCV_IMSIC_H */
 -- 
 2.54.0
 
