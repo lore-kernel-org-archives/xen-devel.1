@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17E03C44524
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B2D8C44515
 	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 07:56:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1366145.1616037 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1366146.1616047 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlirC-0004k2-Pq; Mon, 20 Jul 2026 07:56:10 +0000
+	id 1wlirL-0004xt-1K; Mon, 20 Jul 2026 07:56:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1366145.1616037; Mon, 20 Jul 2026 07:56:10 +0000
+Received: by outflank-mailman (output) from mailman id 1366146.1616047; Mon, 20 Jul 2026 07:56:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlirC-0004jv-Mm; Mon, 20 Jul 2026 07:56:10 +0000
-Received: by outflank-mailman (input) for mailman id 1366145;
- Mon, 20 Jul 2026 07:56:09 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wlirK-0004xl-U6; Mon, 20 Jul 2026 07:56:18 +0000
+Received: by outflank-mailman (input) for mailman id 1366146;
+ Mon, 20 Jul 2026 07:56:18 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1wlirB-0004jp-Al
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 07:56:09 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1wlirK-0004xK-CE
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 07:56:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wlirA-006OD5-8j
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 09:56:08 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wlirJ-00FzlO-GA
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 09:56:17 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6a5dd48b-e002-0a2a0a5209dd-0a2a4508d7e8-46
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:56:07 +0200
-Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a5dd498-5cb7-0a2a0a5109dd-0a2a4503bdd2-44
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:56:17 +0200
+Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6a5dd496-f659-0a2a45080019-aa0a817c7e1f-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:56:07 +0200
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ id 6a5dd49f-fae8-0a2a45030019-aa0a857cd14f-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:56:17 +0200
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-193-CpgzGo4-MYukQUb9BufLvA-1; Mon,
- 20 Jul 2026 03:56:03 -0400
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-284-JgVuit-kMgK1jPYX8qS_FA-1; Mon,
+ 20 Jul 2026 03:56:09 -0400
+Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 96D251955F22; Mon, 20 Jul 2026 07:55:59 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 2C2E5195DE19; Mon, 20 Jul 2026 07:56:07 +0000 (UTC)
 Received: from localhost (unknown [10.44.22.17])
- by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 35B0418001E0; Mon, 20 Jul 2026 07:55:56 +0000 (UTC)
+ by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id AEE44158C; Mon, 20 Jul 2026 07:56:03 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,27 +60,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1784534166;
+	s=mimecast20190719; t=1784534175;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=D6SwdudhFqpaKV0XMGXiUeT/Rco0k1hj7dJhN9XTk30=;
-	b=QB6UfHIZsQxnO20/sxBTkz6JwB53hi24THZvC6E9/mzqh5xWvEe5Bm0b5zbBzmCBY90etV
-	sl6f1hpV3igK+Ogg2+2KOedQYZDGBh+yb4MBO91tLRPYu+P90tT3lxbPyBKHiSsbYVUQse
-	DELcUrlZfbBoQOjNOSTzIeDksnMk/Oo=
-X-MC-Unique: CpgzGo4-MYukQUb9BufLvA-1
-X-Mimecast-MFC-AGG-ID: CpgzGo4-MYukQUb9BufLvA_1784534161
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=IjhaPEySj2ajiT+j39JgZYAcWp9YnSZM59v8er2az0s=;
+	b=CsF/V7WwMgGhUn9q2Gkl5XU7ikCezj6SmlXJPJz7CBDnbbWIUyfQSYARDugWYu0OwztuPj
+	Jfiy4N28MjjsN7FICfhORUivJD8sKsi8w66NXZNPHp7SWYLeZg+LdXVtuafULfE8mxay2j
+	Ui5GRWR8ffZXK0iyNghE8YhAIh25uAQ=
+X-MC-Unique: JgVuit-kMgK1jPYX8qS_FA-1
+X-Mimecast-MFC-AGG-ID: JgVuit-kMgK1jPYX8qS_FA_1784534168
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Subject: [PATCH 0/8] coroutine: add missing annotations
-Date: Mon, 20 Jul 2026 11:55:29 +0400
-Message-Id: <20260720-co-v1-0-fabb4db3c204@redhat.com>
+Date: Mon, 20 Jul 2026 11:55:30 +0400
+Subject: [PATCH 1/8] monitor: annotate monitor_qmp_dispatcher_pop_any() as
+ coroutine
 MIME-Version: 1.0
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDcyMD3eR8XTMj0xRLi2TzlGTTVCWgwoKi1LTMCrAh0bEQfnFpUlZqcgl
- Ip1JtLQALZewkZgAAAA==
-X-Change-ID: 20260720-co-625d98c7dc5e
+Message-Id: <20260720-co-v1-1-fabb4db3c204@redhat.com>
+References: <20260720-co-v1-0-fabb4db3c204@redhat.com>
+In-Reply-To: <20260720-co-v1-0-fabb4db3c204@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Markus Armbruster <armbru@redhat.com>, Peter Xu <peterx@redhat.com>, 
  Fabiano Rosas <farosas@suse.de>, 
@@ -97,74 +97,57 @@ Cc: Markus Armbruster <armbru@redhat.com>, Peter Xu <peterx@redhat.com>,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
  xen-devel@lists.xenproject.org, Li Zhijian <lizhijian@fujitsu.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1771;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=741;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=3p+9mnh7A1Sd9gkpZEuHm2Arv0B2DJblMllOqVWD9JU=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqXdSJGhUyT1s/3ctymKycGnr95OA0QKInBP1Ui
- yXIJzazgUKJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCal3UiQAKCRDa6OEJdZac
- 5eMbEACq8EYoKuxQ9/nJnUX4f5S9btARbnstqg+dSMili5YH/rKseLzJI6ASS9TRCiSaLbKxCHr
- J0NH1UiF6C9zFiw2Fcpt7ZQafNIFmEAf8xLYSC0Uuf0RrO97+r+IXptsPvua0gcVAULgRrDkGZh
- aiTm8owI247yvspBOR7nty5r5jfYB6o4znP70TAd2hhGTB5YN43ajTnooWxl1joh+byoU/csVqS
- 1g47AbXMZyZLxkpwayh4IcPRZaiEu9XM1JsMHOceeOkvfG68vRzNYwmFNeDyGtJeQCU+e4P3GdO
- JqGc/DDDP5CO2K88SV4AouRI0wP3xzV+IWZFXMqPPURxKomVtZMesnur2fwIZpD2ANvVLkx8IG4
- 4Vvt486nrxm6rqGjCG8qqGX8bMUGwN1kwPxwcLKB+T9uUD5dut147306SNOFxE2TTecc49oEFlF
- PiL9bmKXCYgE7082Jyv8XQpnvqDo9Qjt+biA3A3IPdPghJYlFvrCDu0hkY3aqHqmZdnC1WkKFXi
- 23+TLZlfkBIOOeqjLQ/er5TRHC4NIB1yTeUqYXTb/vJH2nbbrzJBchS6rmCtAdNJuePl8SIq1az
- Ay2aGD4BDqnMux3yzImPX4z0wGgcu+1/8LfK7yxA5x6n/x887t2hbwyNe/mwkZXHggL6a4TAcWh
- PAxjQOvVtrBQiZg==
+ bh=yCQTIOZ3vdGSd0wX9FrJ+Idz4YTHnIHGhg0Q7MfK0Pk=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqXdSJm3lJfJ6ohY7uz1cUw8l9YT42D+RXR3qnr
+ vkvsHJbEpaJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCal3UiQAKCRDa6OEJdZac
+ 5fkOD/9cRo7MNM4+pqSDsys8gDgW3GuMHh1KDecO9oSlPlFqHPZR8xKJW+UBUPeBLfzWe0SkXVM
+ EgwtKvxHf2nJFxJIXoQ3RmYPXZvcu0bbwW09aoTgffW0SvZ90NvdVu5gGRJL77VN7OX13se0qrk
+ Nq/FOmPbOi7mlgoQJR2E0tP3td6Pm8T1XtUwoDEDFu+jTS7UUPU7nCNtgL9R8bnpp2ZeYQ+t73l
+ jBkM71m6SEkFlWlnmb/EYAedmt/GVhFMfty1Jw32BLdWR5cVsEK+PcKuPluonj2ieIUEyrSnFzc
+ nx0SYxXkUVKwQLSgvhaTUREGh1tsD1mic9T97mHZXIdXUtjAPfpF07kbvHFAGGQBpRv5I+fw609
+ IF9jB2Ca7v11FvsXm+u2dAservR9BMb14AIdjuPXfFdAFvqkvNoHAqyHojAjgLLFJJ8O2elle1B
+ W1og6muJNAUKv7Whp4O6iogUgKaWqfyq+Cxv3v4nmywF80qu3q+gZw42NQg9q2bYR1CtlYN6e22
+ +cVsnQvg4S5XHkx2WF0quyrrz/K+xm15m4e0PrLWvLm+MivthT3jm0FDbf5x58HGlcJf7/ALfV2
+ 2UvvhgcA6bBTr9KZj/idyZw23D4534bk/iDP1Knx34kY6MkQV3ZNsoNln8fFL63llOBZynv5swW
+ M1sHhwUCyZ0bglw==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
-X-Mimecast-MFC-PROC-ID: Gs2gCMUFiNtEyGmhq8tuB64h2kLNndpA9hZVegf1ffE_1784534161
+X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
+X-Mimecast-MFC-PROC-ID: rRwGkq0iRjchcu31WImX_NQxiMKmMtPNAgQQpwPw07I_1784534168
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1784534167-D594A87B-1BF89B59/0/0
+X-purgate-ID: tlsNG-33051d/1784534177-6DCD34E9-4E41D8CB/0/0
 X-purgate-type: clean
-X-purgate-size: 1773
+X-purgate-size: 743
 
-Hi
+The function calls qemu_coroutine_yield(), and is called from
+monitor_qmp_dispatcher_co().
 
-Add missing coroutine_fn, coroutine_mixed_fn annotations and fix
-a few related issues across monitor, migration, io, block, and
-9pfs subsystems.
-
+Fixes: 60f4f62efeb ("monitor: extract request dequeuing to a new function")
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
-Marc-André Lureau (8):
-      monitor: annotate monitor_qmp_dispatcher_pop_any() as coroutine
-      migration: fix qemu_get_counted_string annotation
-      io: add missing coroutine annotation
-      block: add missing coroutine annotation
-      qcow2: remove invalid qcow2_check_refcounts calls
-      block: add missing coroutine_fn annotations
-      hw/9pfs: annotate V9fsTransport callbacks as coroutine_fn
-      migration/rdma: annotate and simplify wait_comp_channel()
+ monitor/qmp.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
- hw/9pfs/9p.h                 | 26 +++++++++++++++-----------
- include/block/blockjob_int.h |  2 +-
- include/io/channel.h         |  4 ++--
- block/commit.c               |  5 +++--
- block/crypto.c               | 13 +++++++------
- block/io.c                   |  8 +++++---
- block/parallels.c            |  5 +++--
- block/qcow2-snapshot.c       | 18 ------------------
- block/qcow2.c                | 11 +++++++----
- blockjob.c                   |  3 ++-
- hw/9pfs/9p.c                 | 31 +++++++++++++++++++------------
- hw/9pfs/virtio-9p-device.c   | 24 +++++++++++++-----------
- hw/9pfs/xen-9p-backend.c     | 34 +++++++++++++++++-----------------
- io/channel.c                 |  5 +++--
- migration/qemu-file.c        |  2 +-
- migration/rdma.c             | 12 ++++--------
- monitor/qmp.c                |  3 ++-
- 17 files changed, 104 insertions(+), 102 deletions(-)
----
-base-commit: 5ef0ecc5942ee07bb581cc96a97bbfc0fdf4005c
-change-id: 20260720-co-625d98c7dc5e
+diff --git a/monitor/qmp.c b/monitor/qmp.c
+index 223e0643c2a..338d37cb7e5 100644
+--- a/monitor/qmp.c
++++ b/monitor/qmp.c
+@@ -342,7 +342,8 @@ static QMPRequest *monitor_qmp_requests_pop_any_with_lock(void)
+     return req_obj;
+ }
+ 
+-static QMPRequest *monitor_qmp_dispatcher_pop_any(void)
++static QMPRequest * coroutine_fn
++monitor_qmp_dispatcher_pop_any(void)
+ {
+     while (true) {
+         /*
 
-Best regards,
---  
-Marc-André Lureau <marcandre.lureau@redhat.com>
+-- 
+2.55.0
 
 
