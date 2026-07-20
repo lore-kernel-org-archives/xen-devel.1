@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6357CC44524
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 16:01:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1367029.1616924 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7703EC44520
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 16:02:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1367138.1616944 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlqQO-0003DX-J2; Mon, 20 Jul 2026 16:01:00 +0000
+	id 1wlqRp-0007IO-Kp; Mon, 20 Jul 2026 16:02:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1367029.1616924; Mon, 20 Jul 2026 16:01:00 +0000
+Received: by outflank-mailman (output) from mailman id 1367138.1616944; Mon, 20 Jul 2026 16:02:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlqQO-0003B6-41; Mon, 20 Jul 2026 16:01:00 +0000
-Received: by outflank-mailman (input) for mailman id 1367029;
- Mon, 20 Jul 2026 16:00:57 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wlqQL-0002Vb-2P
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 16:00:57 +0000
+	id 1wlqRp-0007IH-Hu; Mon, 20 Jul 2026 16:02:29 +0000
+Received: by outflank-mailman (input) for mailman id 1367138;
+ Mon, 20 Jul 2026 16:02:28 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wlqRo-0007Hb-JY
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 16:02:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wlqQK-00AdLl-Ei
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 18:00:56 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wlqRn-00CH1I-PR
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 18:02:27 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a5e462d-5cb7-0a2a0a5109dd-0a2a4505c1fe-26
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 18:00:56 +0200
-Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a5e4689-bab6-0a2a0a5309dd-0a2a4509c2b8-28
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 18:02:27 +0200
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a5e4638-4cb1-0a2a45050019-d155dd2ed001-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 18:00:56 +0200
-Received: by mail-wr1-f46.google.com with SMTP id
- ffacd0b85a97d-4799b3f7c83so7492535f8f.2
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:00:56 -0700 (PDT)
+ id 6a5e4693-be1a-0a2a45090019-d155802fb0ea-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 18:02:27 +0200
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-4954d29264cso13154365e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:02:27 -0700 (PDT)
 Received: from fedora (user-109-243-144-234.play-internet.pl.
  [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f63edd7d3sm30084673f8f.25.2026.07.20.09.00.53
+ 5b1f17b1804b1-49563eee22esm31331765e9.1.2026.07.20.09.02.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 09:00:54 -0700 (PDT)
+ Mon, 20 Jul 2026 09:02:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,43 +52,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784563256; x=1785168056; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=5RL+fNVvhfSSFDFHK7c1euVp7Huy4szKsBRgrEGEPIw=;
-        b=bo5HY5+pqP7n/rTSHGkUBzPp+UXR4790XxrLRlsZo9RpjOXeNhYet8BHQT3fslCMy6
-         qKeLkgHn31EW1Zz/BLxr4xvN5j8RI2xPny7NibKg9Qgvo77FdnRTos52h/hdiJBacLV+
-         LlMOQZzSwh9Pa1sEzVWFuQxu1znt0jfQ99/35ADRhKLg4b2ytrb/C7AtmTze5Hp9EEjQ
-         oCTr3Lzk/Gc3g2x0wP0G+Qz+vMB5blxiKeglIS9dPWEXz9zGwq1OdUxTD+FgzmSSIMN6
-         eKlkLbiRfj0emwnle7pMjn5AKAJkl5O9WgUqVlCfcKLZmzZjE2seJWOqtq72SHOwVVYr
-         KFFA==
+        d=gmail.com; s=20251104; t=1784563347; x=1785168147; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=2xa6+dQ11deO/ZHG6Wg1wVnwIRhJcIvRdzhiY0swYLs=;
+        b=kBVhjvl/VwziSMXBxz0Qdft7dsOoCg5lcREzg7mjllpoTRY/LqOGizOHUhxuqkOpkd
+         k+yGxOW2fX7Sroy2iKG0UzyZgI2npAgD5XyoZPCpd/qW2L6vkIsuSh+lf/3jOhtXJNGo
+         rL13RAGdmqmPEdbk00GPsoBI5WUCjIFUF3Lf+BdbRdDqOpxBhWxAwF8xUbnGr5hjFRd/
+         KrYT/ev+8IB8I+9nXziFAwzk0y6es/ilXowkRyWKpgM/KQxksUSXT/d2f7qGUJ0rK+Qx
+         WdkpPCmzpQ2Q3nAyCf4KA1D4NonCEqKjobwIjPGgr0dRyB0TE+W7rAXTe9kgha+vuMLj
+         dgXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784563256; x=1785168056;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=5RL+fNVvhfSSFDFHK7c1euVp7Huy4szKsBRgrEGEPIw=;
-        b=Vp9O07gWILQ6NzhNGhm6jtPJNP3bDEhMkeLFcVNkM31CVUecfxdzZvV7GQIfPgkwMM
-         Zf25oAwRpWw6vCSIxeylkOpUFjK1RzNr3sdeRrqrWMiMxwvsV6e8uMWa2uAtm96+fEhU
-         uaNYmspPntpJ5EoNxo++sbHQ9HTc2UzyzXkdp9u7BawTq9AXLrgTvqMXFDm1OfeuF1Lu
-         4QDQtCOGKqhRNr4d79DL+IiJwIh1RsfD+uC1XRXzydGnpP3qVq+UvqxrEXMfP0WE0f+B
-         GI17/vpRhEPqRsPMP7lKYVM8giippd6mleO0kO7Hhzfaixw6cMGLYTNcFoJMNx2Dj6yt
-         iRXA==
-X-Gm-Message-State: AOJu0Yx7asguPJ4YYvR4NeZpZuQusAsQMOPCpBpANXofS8aVgZdUrW4Y
-	rPH/qTz/lMuovFRn7NHRmxNzdBjqeHFetyPriKtovDb/2t4xCly95lmD+IFAyg==
-X-Gm-Gg: AR+sD13vTDrR99QX3rjTdfQRBANjTJ/wOfx0znv/HwCNCZAl3rkbsH90vdpp2h8TZKY
-	KOEpZxvWC1VjCgZDblhg3wL6I4W3SA8YeLMZzEfBCcceoLM53E8L4ueCmf4AyvbVJ1SYlbW2Blx
-	xPCDHvocstIKeq5YfNUcS9YJ82XpsN3iSGo3G7VbvclNojVyYnwNPVmOk2JgUuzs3Lk5lwJFTZR
-	hAQ3JVVd3puXJ7qJfX0Bjj+1W7C17jjaC+dNXJzBsKV3f+Gc0eJ2jo+sRIXeeuUIgL1ZUPHkdtz
-	opFcWiidfOKqk0xLM3UB+lGlRedYkGu7bW/wtFJdVYp2xGvkiMtnDiNbUOc/BU8lhf5c6Nvl6hR
-	Bdy45SYi4/eZj/uQ8TYhJFUnupJ1x/aNB67WOMPjPD7SNCpkLya7CZ/zUP5IweeENE7DnFWRpTJ
-	np1OSIEmOubgGsXU94I8iMqC29uP+P5pmsy94NvpE/paHP6xs=
-X-Received: by 2002:a5d:5d0e:0:b0:46e:8226:96ba with SMTP id ffacd0b85a97d-47f623036aamr18227330f8f.13.1784563255708;
-        Mon, 20 Jul 2026 09:00:55 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1784563347; x=1785168147;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=2xa6+dQ11deO/ZHG6Wg1wVnwIRhJcIvRdzhiY0swYLs=;
+        b=Y102Tn0X9bsKf3Fv0+CHTc+xzScOIC7R25VW12K8mRtaqCQjVkt2mV5KZpwDq7cuNT
+         P5mIcqZIca6MBlv8kfBa6zmivsiQjVneJo7IhOUswcc41Urc+3vX2OH3V+vz+l6BYoL+
+         K3L9v1Mcg7DR84ldqEDAMXATlnIKBUiLAZ9u+pW0ArdCYGWae2U5tNzVNerdnTwtwChW
+         ToueClawE3hrxd8D7l//iJc0valjo/T3pomqAntCdTslH0bJn2xEmSGYJL5WMXeKsBay
+         RhXDIG5+dDi1SAHLx95Ia/q2QGmJ2WvbksNx6l3sSqkz74HcPhpw/gshNQGLAUf8l2sq
+         QuDQ==
+X-Gm-Message-State: AOJu0YwnOMtYd2UYImW4iLADfGO0ayXkhnM/MmTADyuHzvlm4v47i8qp
+	zMaXtlTVxsFhhbFCKV/QHK1VywOkexnoThkS+bKz1L8SI+blRDVP4uNfRG+wwQ==
+X-Gm-Gg: AfdE7cnYqHRs8u/9z2WrWK0CSxdvNbbIUGpyzIGtFCqZGsDyu60Nnjmuwe68PnpmzUv
+	TLFRbsO7ZvTyIu0B+3ffqaRFzH8knHYcnxreAzMF7lDLRswXYUVaQghzB8iNyEmyfDH/19oE/8+
+	2TAFusoCkw0acCHQlC8LHsyV2aRGmiigIWzWpMuBmGB6kGeIybjef1cp8oKQaP8gAQUJOWhtnUG
+	vLH/08kKU1aWCHI50QFpULlCEXVWElK9MIDFPtkfNoBYWvETQ+rvS/Vv/Hyfgu9XYpjAGoBjreZ
+	OF4C6PDLnBEej4tK9+uihBBpS1MB4KbqjB+u8U98jep9ZYY4Xv1QC1euXeGzkNGnr0ZywlfQ0em
+	2QJmGZaSxktVqXDG1zy8b1hsI9jyFSsY1KEHNxW4DBGNGRorAtAdcA9/AFMfkkwHDmdmMvflQtW
+	5q4MQgbcoDm2/1exufBYa13kQWPGLCKxJk48JUyCDLIHnDSw8=
+X-Received: by 2002:a05:600c:4c2a:b0:493:c535:3934 with SMTP id 5b1f17b1804b1-4954a51fc5fmr126136265e9.36.1784563346894;
+        Mon, 20 Jul 2026 09:02:26 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -103,85 +101,136 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v6 23/23] xen/riscv: do a 4th linking pass if necessary
-Date: Mon, 20 Jul 2026 18:00:04 +0200
-Message-ID: <ff85121d7aea88f5e1e8eec729a11512f22c168c.1784559209.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 00/17] [RISC-V] virtual interrupt controller (vAPLIC/vIMSIC) support
+Date: Mon, 20 Jul 2026 18:01:58 +0200
+Message-ID: <cover.1784560663.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.54.0
-In-Reply-To: <cover.1784559209.git.oleksii.kurochko@gmail.com>
-References: <cover.1784559209.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1784563256-247132A1-BF3EEEF7/10/73395122804
+X-purgate-ID: tlsNG-bad1c0/1784563347-3AEDE034-1F00645B/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 2901
+X-purgate-size: 6285
 
-Embedding the symbol table can shift sections and flip relaxation
-decisions, changing code size and thus the set of emitted tools/symbols
-(e.g. gap end markers).  Re-link with a regenerated table when its
-size differs from the previous pass.
+Hi all,
 
-This takes the same remedy as commit 35de7285d508 ("Arm: do a 4th
-linking pass if necessary"), though the underlying cause differs:
-here no symbol (dis)appears from the ELF symbol table; instead the
-set of end markers emitted by tools/symbols legitimately changes,
-because want_symbol_end() depends on code layout, and layout differs
-between passes due to linker relaxation.
+This series adds the initial virtual interrupt controller (vINTC) support
+for RISC-V guests in Xen, based on the Advanced Interrupt Architecture
+(AIA): a virtual APLIC (vAPLIC) in MSI mode backed by a virtual IMSIC
+(vIMSIC) using hardware guest interrupt files.
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-I faced this issue again in downstream:
-  https://gitlab.com/xen-project/people/olkur/xen/-/jobs/15171254706
+Rather than emulating APLIC in direct-delivery mode (which requires
+trap-and-emulate for every interrupt and is costly), the series targets
+IMSIC from the start. AIA lets a hart implement several "guest interrupt
+files" (up to GEILEN), so external interrupts can be delivered to a vCPU
+directly by hardware via the VGEIN field of hstatus, without a hypervisor
+round-trip. Xen only has to emulate the APLIC MMIO programming interface
+and route the guest's intent onto the physical MSI topology; interrupt
+delivery itself stays in hardware.
 
-Root cause: embedding the symbol table shifts .init.text far enough
-that 4 JAL call sites from .text into .init.text (e.g. to
-alloc_boot_pages()) exceed the ±1MB range the linker can relax, so
-they fall back to auipc+jalr, growing .text by 16 bytes total. That
-shift moves simple_strtoull() by the same amount, closing a 16-byte
-alignment gap that used to precede turn_on_mmu(). Since
-want_symbol_end() no longer sees a gap, tools/symbols stops emitting
-the synthetic "end of symbol" marker for simple_strtoull(), which is
-why symbols_addresses/symbols_names differ in size between pass 1
-and pass 2.
----
-Changes in v6:
- - Update the commit message and footer after it.
----
-Changes in v5:
- - New patch.
----
----
- xen/arch/riscv/Makefile | 16 ++++++++++++++--
- 1 file changed, 14 insertions(+), 2 deletions(-)
+The work breaks down into a few logical blocks:
 
-diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
-index fc6b34661111..046f73f4d87c 100644
---- a/xen/arch/riscv/Makefile
-+++ b/xen/arch/riscv/Makefile
-@@ -50,9 +50,21 @@ $(TARGET)-syms: $(objtree)/prelink.o $(obj)/xen.lds
- 		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
- 		> $(dot-target).2.S
- 	$(MAKE) $(build)=$(@D) $(dot-target).2.o
--	$(call compare-symbol-tables, $(dot-target).1.o, $(dot-target).2.o)
-+	if ! { $(call compare-symbol-tables, $(dot-target).1.o, $(dot-target).2.o) >/dev/null; }; \
-+	then \
-+		set -e; \
-+		$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $< $(build_id_linker) \
-+		    $(dot-target).2.o -o $(dot-target).2; \
-+		$(NM) -pa --format=sysv $(dot-target).2 \
-+			| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
-+			> $(dot-target).3.S; \
-+		$(MAKE) $(build)=$(@D) $(dot-target).3.o; \
-+		$(call compare-symbol-tables, $(dot-target).2.o, $(dot-target).3.o); \
-+	else \
-+		ln -sf $(dot-target).2.o $(dot-target).3.o; \
-+	fi
- 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $< $(build_id_linker) \
--	    $(dot-target).2.o -o $@
-+	    $(dot-target).3.o -o $@
- 	$(NM) -pa --format=sysv $@ \
- 		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
- 		> $@.map
+Physical APLIC/AIA groundwork (patches 1-3)
+  - Correctly track IRQ_DISABLED across runtime enable/disable and order
+    the ->status update against the IMSIC CSR write.
+  - Per-pCPU VGEIN (guest interrupt file) allocator: assign/release a
+    hardware guest file to a vCPU and program hstatus.VGEIN.
+  - Add the missing APLIC register offsets/masks needed by both the
+    physical and virtual APLIC code (no functional change).
+
+Device-agnostic MMIO dispatch + vAPLIC emulation (patches 4-5)
+  - A per-domain MMIO handler table modelled on Arm's framework, so
+    emulated devices self-register their GPA ranges and the fault path
+    stays agnostic via a single try_handle_mmio() entry point.
+  - vAPLIC MMIO read/write emulation. Writes are gated by the domain's
+    authorised-IRQ bitmap so a guest cannot touch interrupts it does not
+    own, and TARGET writes are translated from virtual to physical
+    hart/guest-file indices. Delegation (SOURCECFG.D) is not yet
+    supported.
+
+vIMSIC guest interrupt files and state (patches 6-9)
+  - Stage-2 map a vCPU's physical guest interrupt file to the fixed
+    per-vCPU GPA page the guest expects at offset 0.
+  - vcpu_aia_init(): assign a VGEIN, map its guest file and record the
+    IMSIC state as a consistent unit.
+  - IMSIC state save/restore (currently tracking which pCPU owns the
+    guest file, needed because the pCPU id is part of the MSI address).
+  - has_msi_support() helper to decide whether IMSIC state has to be
+    saved/restored.
+
+vINTC state save/restore plumbing (patches 10-11)
+  - vintc_state_{save,restore}() wrappers over new store/restore hooks in
+    struct vintc_ops, and the vAPLIC implementation of those hooks. No
+    callers are wired up yet; the context-switch calls arrive with vCPU
+    context switch support.
+
+Trap and instruction emulation infrastructure (patches 12-17)
+  - Extend the exception-table format with type/data fields and add
+    EX_TYPE_TRAP_INFO so fixups can capture sepc/scause/stval.
+  - riscv_vcpu_unpriv_read() (HLV/HLVX) to read guest memory/instructions
+    safely, and riscv_vcpu_trap_redirect() to forward a synchronous trap
+    back into the guest's VS-mode handler.
+  - A guest page-fault handler that decodes the trapped load/store
+    instruction (HTINST, or an unprivileged fetch as a fallback) and
+    dispatches the MMIO access through try_handle_mmio().
+
+Note on versioning: the series is posted as v1 as a freshly split-out
+series, but several patches carry v2/v3 changelogs because they were
+previously circulated as part of a larger another patches [1] from which the
+current depends.
+
+CI tests: https://gitlab.com/xen-project/people/olkur/xen/-/pipelines/2690874319
+
+[1] https://lore.kernel.org/xen-devel/cover.1784559209.git.oleksii.kurochko@gmail.com/T/#t
+
+Oleksii Kurochko (17):
+  xen/riscv: manage IRQ_DISABLED flag in APLIC irq enable/disable
+    callbacks
+  xen/riscv: add basic VGEIN management for AIA guests
+  xen/riscv: add missing APLIC register offsets, masks to asm/aplic.h
+  xen/riscv: introduce device-agnostic MMIO emulation dispatch
+  xen/riscv: implement virtual APLIC MMIO emulation
+  xen/riscv: map IMSIC interrupt file for vCPUs
+  xen/riscv: introduce vCPU AIA initialization
+  xen/riscv: add IMSIC state save/restore
+  xen/riscv: add helper to check APLIC MSI mode
+  xen/riscv: introduce vintc_state_{save,restore}()
+  xen/riscv: add vAPLIC state save/restore hooks
+  xen/riscv: extend exception tables with type and data fields
+  xen/riscv: add unprivileged guest memory read helper
+  xen/riscv: add guest page fault handling stub
+  xen/riscv: implement trap redirection to a guest
+  xen/riscv: add guest load emulation for trapped MMIO accesses
+  xen/riscv: add guest store emulation for trapped MMIO accesses
+
+ xen/arch/riscv/Makefile                   |   1 +
+ xen/arch/riscv/aia.c                      | 175 ++++++++++++
+ xen/arch/riscv/aplic-priv.h               |   2 +
+ xen/arch/riscv/aplic.c                    |  83 +++++-
+ xen/arch/riscv/domain.c                   |   4 +
+ xen/arch/riscv/extable.c                  |  60 +++-
+ xen/arch/riscv/guestcopy.c                | 145 ++++++++++
+ xen/arch/riscv/imsic.c                    |  99 +++++++
+ xen/arch/riscv/include/asm/aia.h          |  10 +
+ xen/arch/riscv/include/asm/aplic.h        |  61 +++++
+ xen/arch/riscv/include/asm/domain.h       |   3 +
+ xen/arch/riscv/include/asm/extable.h      |  62 +++--
+ xen/arch/riscv/include/asm/gpr-num.h      |  33 +++
+ xen/arch/riscv/include/asm/guest_access.h |   8 +
+ xen/arch/riscv/include/asm/imsic.h        |  17 ++
+ xen/arch/riscv/include/asm/intc.h         |   9 +
+ xen/arch/riscv/include/asm/mmio.h         |  63 +++++
+ xen/arch/riscv/include/asm/processor.h    |   2 +
+ xen/arch/riscv/include/asm/traps.h        |  12 +
+ xen/arch/riscv/include/asm/vaplic.h       |   6 +
+ xen/arch/riscv/intc.c                     |  14 +
+ xen/arch/riscv/mmio.c                     | 145 ++++++++++
+ xen/arch/riscv/traps.c                    | 279 +++++++++++++++++++
+ xen/arch/riscv/vaplic.c                   | 319 ++++++++++++++++++++++
+ 24 files changed, 1590 insertions(+), 22 deletions(-)
+ create mode 100644 xen/arch/riscv/include/asm/gpr-num.h
+ create mode 100644 xen/arch/riscv/include/asm/mmio.h
+ create mode 100644 xen/arch/riscv/mmio.c
+
 -- 
 2.54.0
 
