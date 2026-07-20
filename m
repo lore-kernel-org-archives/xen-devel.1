@@ -4,46 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ABEBC4452A
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 13:59:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1366573.1616506 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBF47C4452B
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 14:03:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1366582.1616514 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wloWA-0000jo-SD; Mon, 20 Jul 2026 13:58:50 +0000
+	id 1wloaP-0002Jp-BI; Mon, 20 Jul 2026 14:03:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1366573.1616506; Mon, 20 Jul 2026 13:58:50 +0000
+Received: by outflank-mailman (output) from mailman id 1366582.1616514; Mon, 20 Jul 2026 14:03:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wloWA-0000jh-P2; Mon, 20 Jul 2026 13:58:50 +0000
-Received: by outflank-mailman (input) for mailman id 1366573;
- Mon, 20 Jul 2026 13:58:49 +0000
+	id 1wloaP-0002Ji-8b; Mon, 20 Jul 2026 14:03:13 +0000
+Received: by outflank-mailman (input) for mailman id 1366582;
+ Mon, 20 Jul 2026 14:03:11 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <taka@valinux.co.jp>) id 1wloW8-0000jZ-Gr
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 13:58:49 +0000
+ (envelope-from <qemu_oss@crudebyte.com>) id 1wloaN-0002Ja-N8
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 14:03:11 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wloW7-006rcI-88
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 15:58:47 +0200
+ id 1wloaN-009huI-3s
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 16:03:11 +0200
 Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <taka@valinux.co.jp>)
- id 6a5e2977-bab6-0a2a0a5309dd-0a2a4501ba9a-32
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 15:58:46 +0200
-Received: from [52.101.125.86]
- (helo=TYVP286CU001.outbound.protection.outlook.com)
+ (envelope-from <qemu_oss@crudebyte.com>)
+ id 6a5e2a88-bab6-0a2a0a5309dd-0a2a4501a332-46
+ for <multiple-recipients>; Mon, 20 Jul 2026 16:03:10 +0200
+Received: from [5.189.157.229] (helo=kylie.crudebyte.com)
  by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <taka@valinux.co.jp>)
- id 6a5e2993-5984-0a2a45010019-34657d561bf2-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 15:58:45 +0200
-Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:458::18)
- by TYTP286MB3628.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:39d::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.18; Mon, 20 Jul
- 2026 13:58:40 +0000
-Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
- ([fe80::c8c9:25cd:8d13:96d6]) by OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
- ([fe80::c8c9:25cd:8d13:96d6%6]) with mapi id 15.21.0223.017; Mon, 20 Jul 2026
- 13:58:40 +0000
+ (envelope-from <qemu_oss@crudebyte.com>)
+ id 6a5e2a9e-5984-0a2a45010019-05bd9de5a917-3
+ for <multiple-recipients>; Mon, 20 Jul 2026 16:03:10 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,147 +45,128 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NV19UG1HN/wyso/4gmKi8fttUh+ZHKttaJ1qfJNe+sH0y18IVbzXEVyxHJwd/QXJjRQyrZbTnh+qscw2IKJ9r/gtherLQ9FYaiU+GdVaYU6SLXfjqNSUQvRCoeEG0lFuOUreH+ufPhPuJUBMDK7fEipqC4tPF8SgZeHcTF8+eiE5HJ/diqc9kyQG/mEowQ9LnRPsAmAAZgd+04SzFdURF/9jVkfx14JQLMEHgzDkpYBR86Fg3jtK/eFRDTDIPXnla+uhFgKa78EQH9B6JkqH8YYr2uI4T7TeS5kCAPKkEA27HmvT/LdFYrsRnWjHddFo+UEJqjr6jvnzrNyWyJLrGg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fSYn3GTdMh9uIo67hUNajliknLF5kASQdRj+mh5V/QQ=;
- b=sGvglbrkq/Mr9YNyschz9kwH+8PdIM0Xh9HtUGtVJgZyicIAOsv6xU5nQjBssZO1s46eDnAdu1eBug+9099TFd/6hopkh1wyk/GM7+k81iz/dSGA2OQ0d/HIAcKLwKIu8/3gvfgENs8o7g95xA8etMKhu9nJhAunfjFnCcX0p+//KHaskhWhpiRY2GBsuRgw6Sv0jmpn9yiBJP8QeZU9VkKjK7Gxa/KxzSlP5smQqsRUGXRBRMy4ieJpCIbLMoKl3NSkJKmhFK/cNRvlGZCm1YF0TaulEvgSE1ff/49CmUywYSaKo0wyvRY+AY9GAWBCbetCSJozvy+mAfericyJqQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
- header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fSYn3GTdMh9uIo67hUNajliknLF5kASQdRj+mh5V/QQ=;
- b=jG4jKZAkpYMeLebHFqKq8sdmQnhGP3gxqvw6sz8ZHmJmaUCz1MhGnHiGMCyJSsEJDXboKPLLZeNoZQ2Z3RMK0YOPGCJ7RMD8IuJmuSX4wHghabkCFSoyWlnYnjXJxBj2c6sJIJI/WphRhC5qQhpBnd2yKZWymVA2Ab5FI00oZ/Q=
-From: Hirokazu Takahashi <taka@valinux.co.jp>
-To: Jan Beulich <jbeulich@suse.com>
-CC: "Mykyta_Poturai@epam.com" <Mykyta_Poturai@epam.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
-	=?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger.pau@citrix.com>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: RE: [PATCH v6 1/5] xen/device-tree: Parse 'cpu-map' node for CPU
- topology exploration
-Thread-Topic: [PATCH v6 1/5] xen/device-tree: Parse 'cpu-map' node for CPU
- topology exploration
-Thread-Index: AQHdE33lRSerj/u3kU6sfibELhxcvrZwJ2MAgAPosBCAAmbKUA==
-Date: Mon, 20 Jul 2026 13:58:40 +0000
-Message-ID:
- <OS9P286MB7222F9243B20CFE5FE145A9182C32@OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM>
-References: <20260714104445.919830-1-taka@valinux.co.jp>
- <20260714104445.919830-2-taka@valinux.co.jp>
- <f2f3572c-6a77-4f65-bf8e-82298d145a6e@suse.com>
- <OS9P286MB722280A3A0E6E36B8194501B82C42@OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM>
-In-Reply-To:
- <OS9P286MB722280A3A0E6E36B8194501B82C42@OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM>
-Accept-Language: ja-JP, en-US
-Content-Language: ja-JP
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=valinux.co.jp;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: OS9P286MB7222:EE_|TYTP286MB3628:EE_
-x-ms-office365-filtering-correlation-id: 9301d547-48c7-4a2d-f0aa-08dee6670104
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|1800799024|7416014|376014|23010399003|366016|18002099003|22082099003|38070700021|56012099006|4143699003|10067099003;
-x-microsoft-antispam-message-info:
- GwbHJPt3kwHsEzLe2ut43ZuWMQ0M7CdlknUmDrAWnisIT0w1qOKsotm8pUEMcqZXytkCB4fJFpGwe1LPf9J3ZiCZEXrm2exfhq8qL/MSrUkPFg2dLiRUIZVm84DIdXEARMnHZcuHoSKgLV+woc+orFjNOLQ8vy9PKgaOZSyW5PEkdlGeE0SKgdjZBCNdkKWK6b4np+VAJmSJYZJKQEF8TmOdXAfmklTuWM/o+qGpTLcuWXe0Z45Mw/9f1PQFnLq8YDIe1YxT1SNiU/3/juRhnxxNAcujvRD6DcnmGSanlKPJTvCcy/vq826d8/6sVCUSGAX/JiiJeNW6DR6jq0TLF5QANAmo5QtR8RLeWP0M4vA/gW155qZ5Cgi56TTy9xS4nsWpzyJswy2Rtsw6ujYOJVtsiEsiFLqxS9v+rWgpaJVYq/RafMq6NRH8misfexAkUJ6GsTSchQnErB+BbahnkG4tVu3lLgUekWTJrxvDhWZl2FAb7QiFojAXdYmul9mDiu/j2we7xb/+05g4k/bWd3DLW6l1nGHO2y8NWyi+UOZcrRwb8vpVRzyuCyA5qAyxA4qqJcGNqNgcY4ibTCiak3KSCF8Jv4Wp8d++MjCtmKgL+3300EEuf13zUk/Q930ozCd51nt3OuZe9cD45cqJbuHdfPL0YMez/ieKoxni5HkgJBvhSgFo7kaMIANm+g+Ha1w3rUFvFSD9GU9d+Aq7laekaeKhapJ+EQRPChxdZ4A=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:ja;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(23010399003)(366016)(18002099003)(22082099003)(38070700021)(56012099006)(4143699003)(10067099003);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?utf-8?B?d2k2dXU1Smo3SmVkbWRVZTBadmdva2N4MHN2Z1dsVkc1ajh5SWhvcko3MVJZ?=
- =?utf-8?B?cFNkbEF6MzEvWHlUTjFOWSttWU9qSHNZVjZmUG9pbVZxQU02Sjk3aEluL1cr?=
- =?utf-8?B?Q00wcmVDSEJRUkw1VFkya0R1U1IrU0RDaHVkTzNrbWhrN29FK0hPcjhzc2JY?=
- =?utf-8?B?L0ZTZHlCZDJBK3dBcHIrOGVXRi9DVjRWa2ZjNkd4Q0MwSVVDVzdFSnQrY3Mz?=
- =?utf-8?B?cG55Tzh5YmU1RmR3Y3Q0bHc3V0VZZWJCMEN1ZlBPNzVFN1YzOHY4T2RCd2Q2?=
- =?utf-8?B?dGZ2ek94bWFBTDJLY0FXNXloRWkxcW56alRUMGdjR0NmTUJzZWlLdkU5OXE3?=
- =?utf-8?B?QnBqemZiY1ZZS3JNcVJQeXBxUk80NFc1Z3JOVE0rTDJKRHgyNXE0N21yVDJj?=
- =?utf-8?B?dUZkNmNINkRxaGtKNlo1ZlA0ajBJUnJPQnU0NnVCYzRSeDE1Ylc1cmZiNkFv?=
- =?utf-8?B?aCsveFNtYVU3UVRiZm5uVGFJNW9ocFFnNXoySVNUTTZIdkI1a3loU05Mazd5?=
- =?utf-8?B?LytOWmMySlZhZWMxaXJBY08rek9RdWI0V0RPbk5YZUJmRkR1S2NqZVNQbzU5?=
- =?utf-8?B?NFlMdVZXNk56UkZTTEpRWmhuYTIrN3JacVhpdzZCaXE0OXUrRWlqcW5sTDdx?=
- =?utf-8?B?cWJwa1QrbW0vQUJmckd5aEp0U1BHM3JBWld5d2tWZG5wZjRBTU9jbVJpbGJ1?=
- =?utf-8?B?MHRJQlVWMndxTHhXTFlwdmQ2VlpKSXQrNXVTV2I2MlNQeFBlTlNvUUxQM1c1?=
- =?utf-8?B?bmFJcmNPbkJvVklBd2d3RTVIQVZHUzFubFFCWFFMOUNDU2NWRlNJV0ZzeUx5?=
- =?utf-8?B?ZU9uaDhabW50anlSeDVTaUZiQ3JqQ3d5bFR0blpEZEZ1dnVzaE9jSE1TZllJ?=
- =?utf-8?B?YXlEL2lwUGpCaXVTTUlxL3kzSHA4VkNxcitoSDU5Y1RjQXJyOVhFZkM5MVJx?=
- =?utf-8?B?MXFkRDFXN3R0Tk9zdWJSd2s5QTdVMStBZ1RWc3dMalFjZGJBTllJdndYUC9N?=
- =?utf-8?B?T3hDWDZFb1VSbnh6a25mcG1FaUhXTzlBcDQ4aHBmdkh2cFFaakE5ZzRVWVRm?=
- =?utf-8?B?TWp3TmtkYlhvZ3VRTkxsS285OWFENE9sNWoyREFvVzVtQ1B2WFY4THdia0JT?=
- =?utf-8?B?WWJ2TTNvQklMZ2pQUXpLbkErSXZhRGR6cnJ6M1BTOWI5RU13eGtaR1NYTVov?=
- =?utf-8?B?d3dOL0hreUJ1WGNia1l1VEhHME9ENzZ2b3k2bkpzRmxoSEVRS2ZicFR2RVA1?=
- =?utf-8?B?TGpmRHgwK2lHSGJkZlkzT2lDV09lUDVObld5YTI0ZVFQdHdMV0Evck9VNmtk?=
- =?utf-8?B?Tktna3VPMVFjQ1VrTFVqQldrWDZQV0N6WnhabHk2U1drVTBWZzF5cTZQYlZ1?=
- =?utf-8?B?ZUJFdCtYSHVqNExncW5LU0tGRGlISXFCV2N3VzZTNUhYTTJLZVJNMEpaT1Zo?=
- =?utf-8?B?ejlWcktxZGJmbkduQVhrYXBoY2Q2UUVrRHo3QWNaQ2JqZ1JzVVdHVGh5d2ph?=
- =?utf-8?B?Q2U5S2RJdlZQcEFqQlI5TjFVeG9yMVVpZkxMVC9JZXUzUGQ0cThRUjdWaWNU?=
- =?utf-8?B?cnNTbld0UmMyanBmVFc1MEhlbFZPYkY0MWtSR3I3eGtDdlZLaFc3cmc3VW9j?=
- =?utf-8?B?MUJpN3dqUk5ibGFuSi91RWRTa2ZWQTVPWEVWWGxVdEZjQXpPWTVnSGJqcmcv?=
- =?utf-8?B?NThxcWYvRUV1SkNPdDExUlJTeXBpS3A1bEVEYWNCTGxCZ1NjZlRHNHN0Zk5P?=
- =?utf-8?B?bmVyVDdFeHFVempqRDVabXlNVEtXSi9kbzVFU0VjU1M4bGFBMXVUQ092ZHpK?=
- =?utf-8?B?bE9rODJwYmZ3MjA2cTVya0RLNVY2alk1R0t0UHUvMWZQa0JyUFNVUXBDbHI0?=
- =?utf-8?B?NE0zWkh3UmFtVjBDckhFK21BeFRrMVFESWowRG0yN0hReUpFMGhpZzNlclVO?=
- =?utf-8?B?VnVuWEp3VUFzeUFsZGd4dm0vQ3pWOG01bnB2a3pnYU1kTWhVTEQ1SmNkbHBZ?=
- =?utf-8?B?YW9LTHRJbE5mNGhobEFFM0RNQnpINmd1T1drc2MyaGJvTjI4Yit0MmV4MFgr?=
- =?utf-8?B?c1c1UDh6WUxYN2FiNXdWbXYwSW5aeXVpZDR4eWkxUllxZVZHMk1UdVBiMXVJ?=
- =?utf-8?B?Q2hMdTkxVVBGWTFoWWJ1N1BQM0hxblM4QTlOc1h1eklFd2xyRTNvMEdFRDJD?=
- =?utf-8?B?TzlKSzZ6aVkrV0V1SEt3UWdJU2VSWUhON0RHeDY0UCtSOVJRbUZMWHRxRlJT?=
- =?utf-8?B?N1YzejBPM2xBdS82S3RNQS8rWi90VGg3ZVR3cEtoSEorYW04WExkMUJnc2lr?=
- =?utf-8?Q?fHfwg+PctPPceNbBxZ?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=kylie header.d=crudebyte.com header.i="@crudebyte.com" header.h="Content-Type:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=crudebyte.com; s=kylie; h=Content-Type:Content-Transfer-Encoding:
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
+	Content-ID:Content-Description;
+	bh=deAIsGyaqzcj2x0SnSBtTCwTRpVH+o12cTxZxyGW6R8=; b=QAlDcnSvqzW2fsUfyEmW7V1BzL
+	4b/4ygTcLe/Agh3ctzr4ClJBza+Yuo1Apd62xS7aRAT/vDM5sUp4Zzyxu/IaaE/YrIQCNXWCbTBIY
+	6M5Psongq1IlSunPbN0v3zQ/yET3KSrnSDwURXmMwj4wXMue/C9CZwCj9f+N1Aj+v5W905HJ4GK9r
+	w8hDHkFVTOFS0e3hw0gbGO5yEagQ8hwbeCU6C5cnRqCyIBC7TVE7iuffOnTEEykCgDwtWKAS77Z1R
+	Q+fIQ1th70xhlAozDlr24L14gFYsvki4r4hC4Usb3wmzOOKFWkwn/n8RVP26u11Kh/RmthAkBVSnj
+	+2kkfrpeFC+QFypRfXvtX2Z3a7KTe1nlxMSNd4DoIiBj6KAd0LSnr3iSIfl3SxaV/BXd7961QQkbH
+	4Z4IjKyDGbpvx9gEL6A/J0xVbiRGhaTebs5JQPEYqqESX9WAIv46ISGEbVZOBUPQgasRsbzKRlxF0
+	arMeA8/pxMPhKLR8fct4i/8nFNdx7u+39jYLKPawUPGCrX6iZUkamPbjU/M3+95Q6jr2FoYO3W0rj
+	x2a7KI4GWEpLYOkleUHkBKnMqs2y5SX9dWIgk1hwsHriulHeRbi+wcGVE5e85vn6K5TrKFB1OH1eN
+	zfWpl9H85+ZoNfe5UDenB6ZfD52Uye1TrmZlmfZyk=;
+From: Christian Schoenebeck <qemu_oss@crudebyte.com>
+To: qemu-devel@nongnu.org,
+ =?UTF-8?B?TWFyYy1BbmRyw6k=?= Lureau <marcandre.lureau@redhat.com>
+Cc: Markus Armbruster <armbru@redhat.com>, Peter Xu <peterx@redhat.com>,
+ Fabiano Rosas <farosas@suse.de>,
+ Daniel =?UTF-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>,
+ John Snow <jsnow@redhat.com>,
+ Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
+ Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>,
+ qemu-block@nongnu.org, Stefan Hajnoczi <stefanha@redhat.com>,
+ Fam Zheng <fam@euphon.net>, "Denis V. Lunev" <den@openvz.org>,
+ Greg Kurz <groug@kaod.org>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony@xenproject.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ xen-devel@lists.xenproject.org, Li Zhijian <lizhijian@fujitsu.com>
+Subject:
+ Re: [PATCH 7/8] hw/9pfs: annotate V9fsTransport callbacks as coroutine_fn
+Date: Mon, 20 Jul 2026 16:02:47 +0200
+Message-ID: <7970030.EvYhyI6sBW@weasel>
+In-Reply-To: <20260720-co-v1-7-fabb4db3c204@redhat.com>
+References:
+ <20260720-co-v1-0-fabb4db3c204@redhat.com>
+ <20260720-co-v1-7-fabb4db3c204@redhat.com>
 MIME-Version: 1.0
-X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9301d547-48c7-4a2d-f0aa-08dee6670104
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Jul 2026 13:58:40.5762
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: xEdoP+v06oTranLKO+QYyaCc0q3AuYNmogW4PLw8tAuz1JoP3lcy2mgzq2RN6U4zM7F16yH+0sxFwO0IWIopkw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYTP286MB3628
-X-purgate-ID: tlsNG-d62444/1784555926-1DC79757-9AB5C4EF/0/0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+X-purgate-ID: tlsNG-d62444/1784556190-BD146757-80610A7F/0/0
 X-purgate-type: clean
-X-purgate-size: 2160
+X-purgate-size: 3580
 
-SGVsbG8sDQoNCkkgc3VzcGVjdCB0aGF0IHdoZW4gQ1BVIGhvdHBsdWcgaXMgaW1wbGVtZW50ZWQs
-IGNwdV90b3BvbG9neVtjcHVdLmNvcmVfc2libGluZw0KQW5kIHBlcl9jcHUoY3B1X2NvcmVfbWFz
-aywgY3B1KSB3aWxsIGFjdHVhbGx5IGRpdmVyZ2UuDQpjcHVfdG9wb2xvZ3lbY3B1XS5jb3JlX3Np
-Ymxpbmcgd2lsbCBpbmNsdWRlIHJlc2VydmVkIENQVXMgdGhhdCBtYXkgYmUgaG90cGx1Z2dlZA0K
-aW4gdGhlIGZ1dHVyZSwgd2hlcmVhcyBwZXJfY3B1KGNwdV9zaWJsaW5nX21hc2ssIGNwdSkgd2ls
-bCBvbmx5IHRyYWNrIGN1cnJlbnRseQ0KYWN0aXZlIENQVXMuDQoNCj4gPiA+ICsvKiBTUERYLUxp
-Y2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMC1vbmx5ICovDQo+ID4gPiArDQo+ID4gPiArI2lmbmRl
-ZiBYRU5fQ1BVX1RPUE9MT0dZX0gNCj4gPiA+ICsjZGVmaW5lIFhFTl9DUFVfVE9QT0xPR1lfSA0K
-PiA+ID4gKw0KPiA+ID4gKyNpbmNsdWRlIDx4ZW4vY3B1bWFzay5oPg0KPiA+ID4gKw0KPiA+ID4g
-KyNpZmRlZiBDT05GSUdfR0VORVJJQ19DUFVfVE9QT0xPR1kNCj4gPiA+ICsNCj4gPiA+ICtzdHJ1
-Y3QgY3B1X3RvcG9sb2d5IHsNCj4gPiA+ICsgICAgY3B1bWFza192YXJfdCB0aHJlYWRfc2libGlu
-ZzsNCj4gPg0KPiA+IEJ0dywgYXMgdGhpcyBhc3BlY3QgYmVjb21lcyBtb3JlIGFwcGFyZW50IHdo
-ZW4gbG9va2luZyBhdCBwYXRjaCAyOiBXaGF0IGlzDQo+IHRoZQ0KPiA+IHJlbGF0aW9uc2hpcCBv
-ZiB0aGlzIChpLmUuIGNwdV90b3BvbG9neVtjcHVdLnRocmVhZF9zaWJsaW5nKSB0bw0KPiA+IHBl
-cl9jcHUoY3B1X3NpYmxpbmdfbWFzaywgY3B1KT8gVGhlIHR3byBvdWdodCB0byBiZSBpZGVudGlj
-YWwsIGJ1dCBJIGNhbid0DQo+IHNlZQ0KPiA+IHRoaXMgYmVpbmcgZ3VhcmFudGVlZC4gQW5kIGlm
-IHRoZXkgd2VyZSBpZGVudGljYWwsIHdoeSB3b3VsZCBib3RoIGJlIG5lZWRlZD8NCj4gPg0KPiA+
-ID4gKyAgICBjcHVtYXNrX3Zhcl90IGNvcmVfc2libGluZzsNCj4gPg0KPiA+IFNhbWUgZm9yIHRo
-aXMgdnMgdGhlIHBlci1DUFUgY3B1X2NvcmVfbWFzay4NCj4gDQo+IEkgaGF2ZSBjb25zaWRlcmVk
-IHRoZSBzYW1lIHRoaW5nIGJlZm9yZS4gSG93ZXZlciwgY29uc2lkZXJpbmcgdGhlIENQVSBob3Rw
-bHVnDQo+IHN1cHBvcnQgdGhhdCBNeWt5dGEgUG90dXJhaSBpcyBjdXJyZW50bHkgaW1wbGVtZW50
-aW5nLCBpdCBpcyBkaWZmaWN1bHQgdG8gcmVtb3ZlDQo+IHRocmVhZF9zaWJsaW5nIGFuZCBjb3Jl
-X3NpYmxpbmcgZnJvbSBzdHJ1Y3QgY3B1X3RvcG9sb2d5LiBXZSBpbnRlbmQgdG8gdXNlDQo+IGNw
-dV90b3BvbG9neSB0byBob2xkIGluZm9ybWF0aW9uIGZvciBDUFVzIHRoYXQgaGF2ZW4ndCBiZWVu
-IGhvdHBsdWdnZWQgeWV0Lg0KPiANCj4gV2hpbGUgaXQgbWlnaHQgbWFrZSBtb3JlIHNlbnNlIHRv
-IHJlbW92ZSB0aGUgcGVyLUNQVSBtYXNrcyBpbnN0ZWFkLA0KPiBJIGhlc2l0YXRlZCB0byBkbyBz
-byBiZWNhdXNlIHRoZSBpbXBhY3Qgb24geDg2IFhlbiB3b3VsZCBiZSBxdWl0ZSBsYXJnZS4NCj4g
-DQo+IFRoYW5rIHlvdSwNCj4gSGlyb2thenUgVGFrYWhhc2hpLg0K
+On Monday, 20 July 2026 09:55:36 CEST Marc-Andr=C3=A9 Lureau wrote:
+> All V9fsTransport callbacks are invoked exclusively from coroutine
+> context (the v9fs_* PDU handlers). Annotate the function pointer
+> types in V9fsTransport and all implementations (virtio and xen
+> backends), as well as intermediate callers in 9p.c (pdu_marshal,
+> pdu_unmarshal, v9fs_init_qiov_from_pdu, etc.).
+>=20
+> Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+> ---
+>  hw/9pfs/9p.h               | 26 +++++++++++++++-----------
+>  hw/9pfs/9p.c               | 31 +++++++++++++++++++------------
+>  hw/9pfs/virtio-9p-device.c | 24 +++++++++++++-----------
+>  hw/9pfs/xen-9p-backend.c   | 34 +++++++++++++++++-----------------
+>  4 files changed, 64 insertions(+), 51 deletions(-)
+>=20
+> diff --git a/hw/9pfs/9p.h b/hw/9pfs/9p.h
+> index 1a309664f6e..0e52ffbdf38 100644
+> --- a/hw/9pfs/9p.h
+> +++ b/hw/9pfs/9p.h
+> @@ -472,17 +472,21 @@ void pdu_submit(V9fsPDU *pdu, P9MsgHeader *hdr);
+>  void v9fs_reset(V9fsState *s);
+>=20
+>=20
+>  struct V9fsTransport {
+> -    ssize_t     (*pdu_vmarshal)(V9fsPDU *pdu, size_t offset, const char =
+*fmt,
+> -                                va_list ap);
+> -    ssize_t     (*pdu_vunmarshal)(V9fsPDU *pdu, size_t offset, const cha=
+r *fmt,
+> -                                  va_list ap);
+> -    void        (*init_in_iov_from_pdu)(V9fsPDU *pdu, struct iovec **pio=
+v,
+> -                                        unsigned int *pniov, size_t size=
+);
+> -    void        (*init_out_iov_from_pdu)(V9fsPDU *pdu, struct iovec **pi=
+ov,
+> -                                         unsigned int *pniov, size_t siz=
+e);
+> -    void        (*push_and_notify)(V9fsPDU *pdu);
+> -    size_t      (*msize_limit)(V9fsState *s);
+> -    size_t      (*response_buffer_size)(V9fsPDU *pdu);
+> +    ssize_t     coroutine_fn (*pdu_vmarshal)(V9fsPDU *pdu, size_t offset,
+> +                                             const char *fmt, va_list ap=
+);
+> +    ssize_t     coroutine_fn (*pdu_vunmarshal)(V9fsPDU *pdu, size_t offs=
+et,
+> +                                               const char *fmt, va_list =
+ap);
+> +    void        coroutine_fn (*init_in_iov_from_pdu)(V9fsPDU *pdu,
+> +                                                     struct iovec **piov,
+> +                                                     unsigned int *pniov,
+> +                                                     size_t size);
+> +    void        coroutine_fn (*init_out_iov_from_pdu)(V9fsPDU *pdu,
+> +                                                      struct iovec **pio=
+v,
+> +                                                      unsigned int *pnio=
+v,
+> +                                                      size_t size);
+> +    void        coroutine_fn (*push_and_notify)(V9fsPDU *pdu);
+> +    size_t      coroutine_fn (*msize_limit)(V9fsState *s);
+> +    size_t      coroutine_fn (*response_buffer_size)(V9fsPDU *pdu);
+>  };
+
+I wonder whether that could be made more diff/blame-friendly. Especially as
+this currently only serves documentation purposes.
+
+They way you are positioning coroutine_fn it usually resolves to an attribu=
+te
+attached to the function's return type, not to the function itself, even
+though clang/gcc handling it flexible. For attaching an attribute to the
+function itself the attribute should either be attached before the function
+declaration or after the function declaration. In both cases you could then
+add it to its own, separate line, avoiding a lot of noise.
+
+/Christian
+
+
+
 
