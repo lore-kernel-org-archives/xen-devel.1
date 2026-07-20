@@ -4,52 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDA1AC4451B
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 08:19:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1366244.1616149 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCA6AC44525
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 08:19:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1366254.1616166 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wljDD-0006Dk-Ol; Mon, 20 Jul 2026 08:18:55 +0000
+	id 1wljDO-00078h-7G; Mon, 20 Jul 2026 08:19:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1366244.1616149; Mon, 20 Jul 2026 08:18:55 +0000
+Received: by outflank-mailman (output) from mailman id 1366254.1616166; Mon, 20 Jul 2026 08:19:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wljDD-0006Dd-L9; Mon, 20 Jul 2026 08:18:55 +0000
-Received: by outflank-mailman (input) for mailman id 1366244;
- Mon, 20 Jul 2026 08:18:53 +0000
+	id 1wljDO-00078Z-4M; Mon, 20 Jul 2026 08:19:06 +0000
+Received: by outflank-mailman (input) for mailman id 1366254;
+ Mon, 20 Jul 2026 08:19:04 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1wljDB-0006BU-QP
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 08:18:53 +0000
+ (envelope-from <jgross@suse.com>) id 1wljDM-0006zX-Og
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 08:19:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wljDB-000Q8b-7D
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 10:18:53 +0200
+ id 1wljDM-000QCH-5L
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 10:19:04 +0200
 Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jgross@suse.com>)
- id 6a5dd9e5-2eae-0a2a0a5409dd-0a2a4506b5d4-32
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 10:18:53 +0200
-Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
+ id 6a5dd9f2-2eae-0a2a0a5409dd-0a2a4506c774-24
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 10:19:04 +0200
+Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
  by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jgross@suse.com>)
- id 6a5dd9ed-195a-0a2a45060019-c387df828f60-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 10:18:53 +0200
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
+ id 6a5dd9f7-195a-0a2a45060019-c387df8397dc-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 10:19:04 +0200
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id BAF3379E46;
- Mon, 20 Jul 2026 08:18:52 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id CB2A23E18;
+ Mon, 20 Jul 2026 08:19:03 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 95AB1779AA;
- Mon, 20 Jul 2026 08:18:52 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id A8BD1779AA;
+ Mon, 20 Jul 2026 08:19:03 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id ABMqI+zZXWrLXgAAD6G6ig
- (envelope-from <jgross@suse.com>); Mon, 20 Jul 2026 08:18:52 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id ERvhJ/fZXWrXXgAAD6G6ig
+ (envelope-from <jgross@suse.com>); Mon, 20 Jul 2026 08:19:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -63,95 +62,440 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1784535532; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1784535543; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=+rR6a7u62PrIE8LmzzOCco11yRON8r8BBfjyeOxn53M=;
-	b=Twg0vhucaNAvaoxVABi3APoMRF/QHfavTSV6x2mEHmnlb+3B2ClmXyFhuPK1bTY/HzXDG9
-	9FypavQX2z88Yytf6SG0mRaFCE2ng8KXZJHFbuT/fjMNsY718Z7J0CwKJbY8O8tjnSsci+
-	jaQSq5Z7ucQo7R0qnNBS3NfFbUoY60U=
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=Twg0vhuc
+	bh=dKp2RqqaXDo0PHr9j/gRjRh2meprNkvF0eE5dIq0h18=;
+	b=eOMVapg44BA3yltb4cx7k1w3X3FMwoRaDy8wdaojBbgwY2PqHQkQVEaHJ2UMzlov5nflAp
+	F4cwEzEtXiuDKaacbObIFi/hcH5Sshf/ceVNypcJt1xaMHxmvyaMqsUM8m7tDVaOFZMB9e
+	ZUpwwJxq45/pPf4/+Cbk1zqIsF6XD1w=
+Authentication-Results: smtp-out2.suse.de;
+	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1784535532; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1784535543; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=+rR6a7u62PrIE8LmzzOCco11yRON8r8BBfjyeOxn53M=;
-	b=Twg0vhucaNAvaoxVABi3APoMRF/QHfavTSV6x2mEHmnlb+3B2ClmXyFhuPK1bTY/HzXDG9
-	9FypavQX2z88Yytf6SG0mRaFCE2ng8KXZJHFbuT/fjMNsY718Z7J0CwKJbY8O8tjnSsci+
-	jaQSq5Z7ucQo7R0qnNBS3NfFbUoY60U=
+	bh=dKp2RqqaXDo0PHr9j/gRjRh2meprNkvF0eE5dIq0h18=;
+	b=eOMVapg44BA3yltb4cx7k1w3X3FMwoRaDy8wdaojBbgwY2PqHQkQVEaHJ2UMzlov5nflAp
+	F4cwEzEtXiuDKaacbObIFi/hcH5Sshf/ceVNypcJt1xaMHxmvyaMqsUM8m7tDVaOFZMB9e
+	ZUpwwJxq45/pPf4/+Cbk1zqIsF6XD1w=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Samuel Thibault <samuel.thibault@ens-lyon.org>
-Subject: [PATCH v2 3/5] stubdom: remove building of libxenguest and libxenctrl
-Date: Mon, 20 Jul 2026 10:18:30 +0200
-Message-ID: <20260720081833.4122182-4-jgross@suse.com>
+	Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH v2 5/5] tools/libxenguest: remove Mini-OS specific parts
+Date: Mon, 20 Jul 2026 10:18:32 +0200
+Message-ID: <20260720081833.4122182-6-jgross@suse.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260720081833.4122182-1-jgross@suse.com>
 References: <20260720081833.4122182-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.01 / 50.00];
-	BAYES_HAM(-3.00)[99.99%];
+X-Spamd-Result: default: False [-2.80 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
 	MID_CONTAINS_FROM(1.00)[];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
 	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	NEURAL_HAM_SHORT(-0.20)[-0.997];
 	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.com:email,suse.com:dkim,suse.com:mid];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
 	MIME_TRACE(0.00)[0:+];
 	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	FROM_EQ_ENVFROM(0.00)[];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	RCVD_COUNT_TWO(0.00)[2];
+	ARC_NA(0.00)[];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
 	RCVD_TLS_ALL(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
-	DKIM_TRACE(0.00)[suse.com:+]
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Queue-Id: BAF3379E46
-X-purgate-ID: tlsNG-16d1c6/1784535533-F480577B-4A5DA928/0/0
+	RCPT_COUNT_THREE(0.00)[3];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:email,suse.com:mid]
+X-purgate-ID: tlsNG-16d1c6/1784535544-F540B77B-A338931E/0/0
 X-purgate-type: clean
-X-purgate-size: 784
+X-purgate-size: 11480
 
-grub-pv was the last user of the stubdom variants of libxenguest and
-libxenctrl.
-
-Remove both libraries from the stubdom build system.
+The last Mini-OS use case of libxenguest is gone, so remove the
+Mini-OS specific parts of libxenguest.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- stubdom/Makefile | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ tools/libs/guest/Makefile.common              | 15 ------
+ tools/libs/guest/xg_dom_decompress_unsafe.c   | 48 -------------------
+ tools/libs/guest/xg_dom_decompress_unsafe.h   | 28 -----------
+ .../guest/xg_dom_decompress_unsafe_bzip2.c    | 14 ------
+ .../libs/guest/xg_dom_decompress_unsafe_lz4.c | 39 ---------------
+ .../guest/xg_dom_decompress_unsafe_lzma.c     | 14 ------
+ .../guest/xg_dom_decompress_unsafe_lzo1x.c    | 44 -----------------
+ .../libs/guest/xg_dom_decompress_unsafe_xz.c  | 46 ------------------
+ .../guest/xg_dom_decompress_unsafe_zstd.c     | 44 -----------------
+ 9 files changed, 292 deletions(-)
+ delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe.c
+ delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe.h
+ delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe_bzip2.c
+ delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe_lz4.c
+ delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe_lzma.c
+ delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe_lzo1x.c
+ delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe_xz.c
+ delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe_zstd.c
 
-diff --git a/stubdom/Makefile b/stubdom/Makefile
-index 2698bddc9d..40b6ececf1 100644
---- a/stubdom/Makefile
-+++ b/stubdom/Makefile
-@@ -256,9 +256,7 @@ $(CROSS_ROOT): cross-newlib cross-zlib cross-libpci
- # libraries under tools/libs
- #######
- 
--STUB_LIBS := toolcore toollog evtchn gnttab call foreignmemory devicemodel ctrl guest manage
+diff --git a/tools/libs/guest/Makefile.common b/tools/libs/guest/Makefile.common
+index 86b1f160e5..47b3a52360 100644
+--- a/tools/libs/guest/Makefile.common
++++ b/tools/libs/guest/Makefile.common
+@@ -1,8 +1,3 @@
+-ifeq ($(CONFIG_LIBXC_MINIOS),y)
+-# Save/restore of a domain is currently incompatible with a stubdom environment
+-override CONFIG_MIGRATE := n
+-endif
 -
--LIBDEP_guest := cross-zlib
-+STUB_LIBS := toolcore toollog evtchn gnttab call foreignmemory devicemodel manage
+ OBJS-y += xg_private.o
+ OBJS-y += xg_domain.o
+ OBJS-y += xg_suspend.o
+@@ -55,16 +50,6 @@ OBJS-$(CONFIG_X86)     += xg_dom_x86.o
+ OBJS-$(CONFIG_X86)     += xg_cpuid_x86.o
+ OBJS-$(CONFIG_ARM)     += xg_dom_arm.o
  
- #######
- # common handling
+-ifeq ($(CONFIG_LIBXC_MINIOS),y)
+-OBJS-y                 += xg_dom_decompress_unsafe.o
+-OBJS-y                 += xg_dom_decompress_unsafe_bzip2.o
+-OBJS-y                 += xg_dom_decompress_unsafe_lz4.o
+-OBJS-y                 += xg_dom_decompress_unsafe_lzma.o
+-OBJS-y                 += xg_dom_decompress_unsafe_lzo1x.o
+-OBJS-y                 += xg_dom_decompress_unsafe_xz.o
+-OBJS-y                 += xg_dom_decompress_unsafe_zstd.o
+-endif
+-
+ CFLAGS += -D__XEN_TOOLS__
+ CFLAGS += -include $(XEN_ROOT)/tools/config.h
+ CFLAGS += -iquote ../../../xen/common/libelf
+diff --git a/tools/libs/guest/xg_dom_decompress_unsafe.c b/tools/libs/guest/xg_dom_decompress_unsafe.c
+deleted file mode 100644
+index 21d964787d..0000000000
+--- a/tools/libs/guest/xg_dom_decompress_unsafe.c
++++ /dev/null
+@@ -1,48 +0,0 @@
+-#include <stdio.h>
+-#include <stdlib.h>
+-#include <inttypes.h>
+-
+-#include "xg_private.h"
+-#include "xg_dom_decompress_unsafe.h"
+-
+-static struct xc_dom_image *unsafe_dom;
+-static unsigned char *output_blob;
+-static unsigned int output_size;
+-
+-static void unsafe_error(const char *msg)
+-{
+-    xc_dom_panic(unsafe_dom->xch, XC_INVALID_KERNEL, "%s", msg);
+-}
+-
+-static int unsafe_flush(void *src, unsigned int size)
+-{
+-    void *n = realloc(output_blob, output_size + size);
+-    if (!n)
+-        return -1;
+-    output_blob = n;
+-
+-    memcpy(&output_blob[output_size], src, size);
+-    output_size += size;
+-    return size;
+-}
+-
+-int xc_dom_decompress_unsafe(
+-    decompress_fn fn, struct xc_dom_image *dom, void **blob, size_t *size)
+-{
+-    int ret;
+-
+-    unsafe_dom = dom;
+-    output_blob = NULL;
+-    output_size = 0;
+-
+-    ret = fn(dom->kernel_blob, dom->kernel_size, NULL, unsafe_flush, NULL, NULL, unsafe_error);
+-
+-    if (ret)
+-        free(output_blob);
+-    else {
+-        *blob = output_blob;
+-        *size = output_size;
+-    }
+-
+-    return ret;
+-}
+diff --git a/tools/libs/guest/xg_dom_decompress_unsafe.h b/tools/libs/guest/xg_dom_decompress_unsafe.h
+deleted file mode 100644
+index 5bc2222076..0000000000
+--- a/tools/libs/guest/xg_dom_decompress_unsafe.h
++++ /dev/null
+@@ -1,28 +0,0 @@
+-#ifdef __MINIOS__
+-# include "../../xen/include/xen/decompress.h"
+-#else
+-typedef int decompress_fn(unsigned char *inbuf, unsigned int len,
+-                          int (*fill)(void*, unsigned int),
+-                          int (*flush)(void*, unsigned int),
+-                          unsigned char *outbuf, unsigned int *posp,
+-                          void (*error)(const char *x));
+-#endif
+-
+-#define cf_check /* No Control Flow Integriy checking */
+-
+-int xc_dom_decompress_unsafe(
+-    decompress_fn fn, struct xc_dom_image *dom, void **blob, size_t *size)
+-    __attribute__((visibility("internal")));
+-
+-int xc_try_bzip2_decode(struct xc_dom_image *dom, void **blob, size_t *size)
+-    __attribute__((visibility("internal")));
+-int xc_try_lz4_decode(struct xc_dom_image *dom, void **blob, size_t *size)
+-    __attribute__((visibility("internal")));
+-int xc_try_lzma_decode(struct xc_dom_image *dom, void **blob, size_t *size)
+-    __attribute__((visibility("internal")));
+-int xc_try_lzo1x_decode(struct xc_dom_image *dom, void **blob, size_t *size)
+-    __attribute__((visibility("internal")));
+-int xc_try_xz_decode(struct xc_dom_image *dom, void **blob, size_t *size)
+-    __attribute__((visibility("internal")));
+-int xc_try_zstd_decode(struct xc_dom_image *dom, void **blob, size_t *size)
+-    __attribute__((visibility("internal")));
+diff --git a/tools/libs/guest/xg_dom_decompress_unsafe_bzip2.c b/tools/libs/guest/xg_dom_decompress_unsafe_bzip2.c
+deleted file mode 100644
+index 9d3709e6cc..0000000000
+--- a/tools/libs/guest/xg_dom_decompress_unsafe_bzip2.c
++++ /dev/null
+@@ -1,14 +0,0 @@
+-#include <stdio.h>
+-#include <stdlib.h>
+-#include <inttypes.h>
+-
+-#include "xg_private.h"
+-#include "xg_dom_decompress_unsafe.h"
+-
+-#include "../../xen/common/bunzip2.c"
+-
+-int xc_try_bzip2_decode(
+-    struct xc_dom_image *dom, void **blob, size_t *size)
+-{
+-    return xc_dom_decompress_unsafe(bunzip2, dom, blob, size);
+-}
+diff --git a/tools/libs/guest/xg_dom_decompress_unsafe_lz4.c b/tools/libs/guest/xg_dom_decompress_unsafe_lz4.c
+deleted file mode 100644
+index 405143aa61..0000000000
+--- a/tools/libs/guest/xg_dom_decompress_unsafe_lz4.c
++++ /dev/null
+@@ -1,39 +0,0 @@
+-#include <stdio.h>
+-#include <stdlib.h>
+-#include <inttypes.h>
+-#include <stdint.h>
+-
+-#include INCLUDE_ENDIAN_H
+-
+-#define XG_NEED_UNALIGNED
+-#include "xg_private.h"
+-#include "xg_dom_decompress.h"
+-
+-#define CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS
+-
+-typedef uint8_t u8;
+-typedef uint16_t u16;
+-typedef uint32_t u32;
+-typedef uint64_t u64;
+-
+-#define likely(a) a
+-#define unlikely(a) a
+-
+-static inline uint16_t le16_to_cpu(uint16_t v)
+-{
+-#if BYTE_ORDER == BIG_ENDIAN
+-    return __builtin_bswap16(v);
+-#else
+-    return v;
+-#endif
+-}
+-
+-#include "../../xen/include/xen/lz4.h"
+-#include "../../xen/common/decompress.h"
+-#include "../../xen/common/unlz4.c"
+-
+-int xc_try_lz4_decode(
+-    struct xc_dom_image *dom, void **blob, size_t *size)
+-{
+-    return xc_dom_decompress_unsafe(unlz4, dom, blob, size);
+-}
+diff --git a/tools/libs/guest/xg_dom_decompress_unsafe_lzma.c b/tools/libs/guest/xg_dom_decompress_unsafe_lzma.c
+deleted file mode 100644
+index 5d178f0c43..0000000000
+--- a/tools/libs/guest/xg_dom_decompress_unsafe_lzma.c
++++ /dev/null
+@@ -1,14 +0,0 @@
+-#include <stdio.h>
+-#include <stdlib.h>
+-#include <inttypes.h>
+-
+-#include "xg_private.h"
+-#include "xg_dom_decompress_unsafe.h"
+-
+-#include "../../xen/common/unlzma.c"
+-
+-int xc_try_lzma_decode(
+-    struct xc_dom_image *dom, void **blob, size_t *size)
+-{
+-    return xc_dom_decompress_unsafe(unlzma, dom, blob, size);
+-}
+diff --git a/tools/libs/guest/xg_dom_decompress_unsafe_lzo1x.c b/tools/libs/guest/xg_dom_decompress_unsafe_lzo1x.c
+deleted file mode 100644
+index 356f228718..0000000000
+--- a/tools/libs/guest/xg_dom_decompress_unsafe_lzo1x.c
++++ /dev/null
+@@ -1,44 +0,0 @@
+-#include <stdio.h>
+-#include <stdlib.h>
+-#include <inttypes.h>
+-#include INCLUDE_ENDIAN_H
+-#include <stdint.h>
+-
+-#include "xg_private.h"
+-#include "xg_dom_decompress_unsafe.h"
+-
+-typedef uint8_t u8;
+-typedef uint32_t u32;
+-typedef uint16_t u16;
+-typedef uint64_t u64;
+-
+-#define likely(a) a
+-#define noinline
+-#define unlikely(a) a
+-
+-static inline uint16_t be16_to_cpu(const uint16_t v)
+-{
+-#if BYTE_ORDER == LITTLE_ENDIAN
+-	return __builtin_bswap16(v);
+-#else
+-	return v;
+-#endif
+-}
+-
+-static inline uint32_t be32_to_cpu(const uint32_t v)
+-{
+-#if BYTE_ORDER == LITTLE_ENDIAN
+-	return __builtin_bswap32(v);
+-#else
+-	return v;
+-#endif
+-}
+-
+-#include "../../xen/common/lzo.c"
+-#include "../../xen/common/unlzo.c"
+-
+-int xc_try_lzo1x_decode(
+-    struct xc_dom_image *dom, void **blob, size_t *size)
+-{
+-    return xc_dom_decompress_unsafe(unlzo, dom, blob, size);
+-}
+diff --git a/tools/libs/guest/xg_dom_decompress_unsafe_xz.c b/tools/libs/guest/xg_dom_decompress_unsafe_xz.c
+deleted file mode 100644
+index 0501f7f693..0000000000
+--- a/tools/libs/guest/xg_dom_decompress_unsafe_xz.c
++++ /dev/null
+@@ -1,46 +0,0 @@
+-#include <stdio.h>
+-#include INCLUDE_ENDIAN_H
+-#include <stdlib.h>
+-#include <stddef.h>
+-#include <stdint.h>
+-#include <inttypes.h>
+-
+-#include "xg_private.h"
+-#include "xg_dom_decompress_unsafe.h"
+-
+-// TODO
+-#define XZ_DEC_X86
+-
+-typedef uint8_t u8;
+-typedef uint16_t u16;
+-typedef uint32_t u32;
+-typedef uint32_t __le32;
+-
+-static inline uint32_t cpu_to_le32(const uint32_t v)
+-{
+-#if BYTE_ORDER == BIG_ENDIAN
+-	return __builtin_bswap32(v);
+-#else
+-	return v;
+-#endif
+-}
+-
+-static inline uint32_t le32_to_cpu(const uint32_t v)
+-{
+-#if BYTE_ORDER == BIG_ENDIAN
+-	return __builtin_bswap32(v);
+-#else
+-	return v;
+-#endif
+-}
+-
+-#define __force
+-#define always_inline
+-
+-#include "../../xen/common/unxz.c"
+-
+-int xc_try_xz_decode(
+-    struct xc_dom_image *dom, void **blob, size_t *size)
+-{
+-    return xc_dom_decompress_unsafe(unxz, dom, blob, size);
+-}
+diff --git a/tools/libs/guest/xg_dom_decompress_unsafe_zstd.c b/tools/libs/guest/xg_dom_decompress_unsafe_zstd.c
+deleted file mode 100644
+index 319816a390..0000000000
+--- a/tools/libs/guest/xg_dom_decompress_unsafe_zstd.c
++++ /dev/null
+@@ -1,44 +0,0 @@
+-#include <stdio.h>
+-#include INCLUDE_ENDIAN_H
+-#include <stdlib.h>
+-#include <stddef.h>
+-#include <stdint.h>
+-#include <inttypes.h>
+-
+-#include "xg_private.h"
+-#include "xg_dom_decompress_unsafe.h"
+-
+-typedef uint8_t u8;
+-
+-typedef uint16_t __u16;
+-typedef uint32_t __u32;
+-typedef uint64_t __u64;
+-
+-typedef uint16_t __le16;
+-typedef uint32_t __le32;
+-typedef uint64_t __le64;
+-
+-typedef uint16_t __be16;
+-typedef uint32_t __be32;
+-typedef uint64_t __be64;
+-
+-#define attr_const
+-#define __force
+-#define always_inline
+-#define noinline
+-#define __packed __attribute__((__packed__))
+-
+-#undef ERROR
+-
+-#define __TYPES_H__ /* xen/types.h guard */
+-#include "../../xen/include/xen/byteorder.h"
+-#include "../../xen/include/xen/unaligned.h"
+-#include "../../xen/include/xen/xxhash.h"
+-#include "../../xen/lib/xxhash64.c"
+-#include "../../xen/common/unzstd.c"
+-
+-int xc_try_zstd_decode(
+-    struct xc_dom_image *dom, void **blob, size_t *size)
+-{
+-    return xc_dom_decompress_unsafe(unzstd, dom, blob, size);
+-}
 -- 
 2.54.0
 
