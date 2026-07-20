@@ -4,46 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38046C44515
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 20:07:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1367376.1617158 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6775DC44529
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 20:43:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1367385.1617167 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wluGj-0006vw-Bu; Mon, 20 Jul 2026 20:07:17 +0000
+	id 1wlupF-0003eW-VQ; Mon, 20 Jul 2026 20:42:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1367376.1617158; Mon, 20 Jul 2026 20:07:17 +0000
+Received: by outflank-mailman (output) from mailman id 1367385.1617167; Mon, 20 Jul 2026 20:42:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wluGj-0006vp-8t; Mon, 20 Jul 2026 20:07:17 +0000
-Received: by outflank-mailman (input) for mailman id 1367376;
- Mon, 20 Jul 2026 20:07:16 +0000
+	id 1wlupF-0003eP-Rv; Mon, 20 Jul 2026 20:42:57 +0000
+Received: by outflank-mailman (input) for mailman id 1367385;
+ Mon, 20 Jul 2026 20:42:57 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>) id 1wluGi-0006vj-9J
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 20:07:16 +0000
+ (envelope-from <philmd@oss.qualcomm.com>) id 1wlupF-0003eJ-88
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 20:42:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wluGh-00GmEm-5B
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 22:07:15 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wlupE-0089Rx-5p
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 22:42:56 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6a5e7fd9-e002-0a2a0a5209dd-0a2a45048c4a-30
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 22:07:14 +0200
-Received: from [52.101.61.12]
- (helo=DM1PR04CU001.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6a5e7ff1-b57f-0a2a45040019-34653d0cf81e-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 22:07:14 +0200
-Received: from IA1PR03MB8288.namprd03.prod.outlook.com (2603:10b6:208:59e::6)
- by MN6PR03MB7718.namprd03.prod.outlook.com (2603:10b6:208:4f7::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.18; Mon, 20 Jul
- 2026 20:07:11 +0000
-Received: from IA1PR03MB8288.namprd03.prod.outlook.com
- ([fe80::b5ee:28c6:e04b:5599]) by IA1PR03MB8288.namprd03.prod.outlook.com
- ([fe80::b5ee:28c6:e04b:5599%3]) with mapi id 15.21.0223.017; Mon, 20 Jul 2026
- 20:07:11 +0000
+ (envelope-from <philmd@oss.qualcomm.com>)
+ id 6a5e884e-2eae-0a2a0a5409dd-0a2a4507aea6-2
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 22:42:56 +0200
+Received: from [205.220.168.131] (helo=mx0a-0031df01.pphosted.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <philmd@oss.qualcomm.com>)
+ id 6a5e884e-b4ea-0a2a45070019-cddca8833bfa-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 22:42:55 +0200
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66KJU21R3369163
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 20:42:53 GMT
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhgs02yad-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 20:42:53 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id
+ d75a77b69052e-51c0ab07320so149420321cf.2
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 13:42:53 -0700 (PDT)
+Received: from [192.168.69.219] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4955de8895dsm100865115e9.4.2026.07.20.13.42.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 20 Jul 2026 13:42:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,334 +62,188 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=kQa8X1aIHIK8L1vBjv3sRMoktvUC/BhRnjhMIHKdtXfGxAlS7/e7DHQg81EEnJcuahaMvAkRaSUfAujcN9XaTjMuqFgUDXB2bmD7GsaSv81QZFcfJZ3JK/a1LCttQrTpLOJpbDjx2WGa7tOFZk1hmA9bh5x+5WCDR2TSkOx1mDHCfF9j6bpZNBw2TGTYTqmULavDspwlicYLLYm1VzndjkEGQb+Ct6RdnOk9nLeqQ8NlqHkohNI+zZbiCYvrbKCNxBvL1hZ5HMHjmvlUiKdo5KlYcwQImHI+zVn6PsTzBH4A9eATjHpT/0D3t02VR75qPiUSiO3tGbsBF3FAYjHqTg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Nycr5DSd6udKG3a5OHn6rARcQA9gCmYTXB5zsEivD88=;
- b=sPRqK8FLKlGV749WfW9pGcWrKD76CwTRMMrvXtZARn0ZL9UOxdLwt19eLTDJi1WnmwB5Y+zo9hsFuCBj5mLnU8Gw9oMT4Z4gXSaqdkV2DMw88nQaqCOiaR8RcafXfbVd6fJQK+lK1caXt6cPYum+T6uyCzBe9cXp2eNQJ3HoeetoJGnZ6lCEM/6toCJN11szxdbx/Nx/rEsHkmLZ4qxaJwIfGYUAjUgwwq/p5Z8FL8TxxKjy9iwO1Mf0TuKhDETdTXPR6UmgCAaRs8W3VfuuHIplV0qP6HV18QocQSwagf+THepEb5vZ3pA1dvYSNhickJAav/AQQBiYsPpNDmE5EQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Nycr5DSd6udKG3a5OHn6rARcQA9gCmYTXB5zsEivD88=;
- b=y5UAzajW3w96R2z1rvrCNuUPTt10n19JajHDsY2G5xTMYGutheXSRYVag86E1AvSD/tESJTx+iYTB/6UTsdD8llDYi8t9+u8gZ/+suT6dVVje3+MlvhzCHlYHWwz94swvVaJ6K1dJ6m/qdIjdiQOeWnpwHiCTVjoIUaRibwlsoo=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <d1a522ac-5b28-4e9b-bc45-d9cc61245662@citrix.com>
-Date: Mon, 20 Jul 2026 21:07:09 +0100
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>
-Subject: Re: [PATCH RFC] x86/PV: avoid HVM-copying alternatives in PV-only
- code
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <8e6f5ad5-21e4-4325-96de-e03ba65a1b8d@suse.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <8e6f5ad5-21e4-4325-96de-e03ba65a1b8d@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO4P123CA0518.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:272::11) To IA1PR03MB8288.namprd03.prod.outlook.com
- (2603:10b6:208:59e::6)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=qcppdkim1 header.d=qualcomm.com header.i="@qualcomm.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=google header.d=oss.qualcomm.com header.i="@oss.qualcomm.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:Content-Language:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	evPbccQePK9+xKuCm0xjXOtQA/aq6aTomkUzqkmA3sI=; b=SLa7x4EDAUB2qvWE
+	DjgorCNFfsNHAB5w0MAZH/NMyfsLES5n4vEiJSBybOp0ROx4hTOadd2CwnGyWR9m
+	FtuQgTTLjcogVixa7fbJc2A9sRcVNUC0PhD0Wka/k/aeC5tlxo4wJESwohAJNcVF
+	Ffd6+DU50IF0gWuVpt1CNgwhGMtsT0PhATMo3gevv6g8Czv+5hixtuPvB/heM+7i
+	6r+8Dv+5G7pF6OsLGPV7aVhksBX5AXXGXmR+Fyz0JGbN404hFgKPapSvXgkrimVx
+	0EA6WfxOz0FrrfH8eYsAO0gH+8vTcfe/C4eqzH+u5tcXCO4Se8NOIFXnKsMGdxho
+	pOQFkg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784580172; x=1785184972; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:content-language:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=evPbccQePK9+xKuCm0xjXOtQA/aq6aTomkUzqkmA3sI=;
+        b=D0uq+y0DhX0OoX9VIT4KIO4qyQNDiNEKooHJoRDR1bk73SAEE51hRQvfu+pngN0RnE
+         6eMa150ZUSnN624D7P4B0FHOEXehsJRONw7lpcCJnvESp6JQlppdWT3qh/njvXpApJ6W
+         nTTfld9PJ+PfgWzfIj6i4GIpm7O/M9G4q83c+XeJvWg0QZr8QTrilB2vOf/YSQhc3RCo
+         HRxDxhchHH89njQc4zPzIsnDKeoOqUX0tAE5L5fdZvM7bwzEd4Eva3QzCCeNt48CnJZX
+         2dj5Gr8yACuDGCzGSthsCqFG19RWlWIcbaIP6Bf8Brcwf0Ge8xPpq0EVx12WJ2jDBhtl
+         z1Ew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784580172; x=1785184972;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:content-language:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=evPbccQePK9+xKuCm0xjXOtQA/aq6aTomkUzqkmA3sI=;
+        b=MWmqcAjpIW2M0SiEEw6gB+6xoI5ice8TaCdPbAGKsMf4cHFBjZ1Uu7LNH+fTnUXaHN
+         8+V9sS7M8iriQIGAWRutCGASGlxSMq8fggq7PldsTxJXp6/HcVLuTMiBfeSzr0HMjecM
+         emWMaUROU6ksqCx7PqUuA6d/xY9w+0Wa/EP2ZJEr6eIGpk7NmHIUMxUIuAGfZyj+Feag
+         Y0KDS5pjQKLB8pboj7ffKKMDrrYYlBpb4s9jJfPJEvHVBR70TjI7Q0J+06i36WvnvTAM
+         DmSa/Uy6Cy1+h1GZgXmhAypiXl8xso9hI2/GZTs+W4HQpYHFCaxXlhaEpKtXKspAJxHV
+         Fgtw==
+X-Forwarded-Encrypted: i=1; AHgh+RpxmXh8r0p/JFhyogb/yqbecsrsUFcSye+xNDVlW+UeFN1LHZ4R+of5UejCoEPJ41oBvutdxnYJyOw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxsDEaN+wUcUsuekUJJctqnhcQzHli1dzpIUQbZC2GlgCygifWn
+	4lCQXFMUdQpyAdeMG3LCsMdC82sQJZfpbZna+WRFV4mKp07YcFSQKKp60Xp5tn1aY+W4sC3sKn3
+	UDz9eRJW/S1dJx0CotMLn9wfWFKpHmjKb4Vr12c91UgIWsjOaU8FFB23crNrTM60lDq4tMA==
+X-Gm-Gg: AfdE7clx+AIdQT0VOHnDtCSv9FzA7v/kDel9RjKsu89LOo3zKDPT8vemzFP/b9B+IZq
+	p8Vk3ZNtwMRjXy6+8QkzYIgfgPtlU7f4IEhUzbhUsE9wt+5ngDPQexCgKHoSwRhYGzTcHJ2FAO4
+	zRpauviTkz/IV/kvIdfkypGoEr8x+VTft5n9E5DNdwQzn17ADciY3d4CF9IBNbRudOnD50yyiRX
+	cQ4Qmve7jvO8KbNVd2cAoqjIuwOez3RRKRIZceJX4LiZAf0qEuX0n7k6gmYAAY8xNRd/vWd2B3L
+	2P7uhgkxth9CYFmSRZX/ftXsnoZ5HHZdquoxNRzW15ZBbwMGoBjIfczqy76c4S6TWClAPHNzJVk
+	0zBsAcYAKfeVNR/j1UWXTcl+xKbNcQopNFl4agz71h2SulhNzNiE=
+X-Received: by 2002:a05:622a:5e88:b0:51c:b98a:244a with SMTP id d75a77b69052e-5213d0c6e6emr149550631cf.62.1784580172394;
+        Mon, 20 Jul 2026 13:42:52 -0700 (PDT)
+X-Received: by 2002:a05:622a:5e88:b0:51c:b98a:244a with SMTP id d75a77b69052e-5213d0c6e6emr149550271cf.62.1784580171948;
+        Mon, 20 Jul 2026 13:42:51 -0700 (PDT)
+Message-ID: <7790107e-1256-4ed8-ba49-cab980197938@oss.qualcomm.com>
+Date: Mon, 20 Jul 2026 22:42:49 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: IA1PR03MB8288:EE_|MN6PR03MB7718:EE_
-X-MS-Office365-Filtering-Correlation-Id: e2c5ec45-7a2f-448f-7005-08dee69a7c1c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|1800799024|23010399003|376014|18002099003|22082099003|3023799007|10067099003|56012099006|11063799006|6133799003;
-X-Microsoft-Antispam-Message-Info:
-	/vqhqER94N31rWJ+6HTJ4RccudVCm8pAUTvmNh4D8+tPfy9litIT3Ca/qzCnwcsvjksQQdwMHVEkZz/a+G/kZwYsKY6s3SHg/HTvDlyZIL4NtodORyQlGJ/xzyWiOn8KRK4VjRlVgTaQj4TzWZex/v1KzvFzvQffwYyvD2IbPuPjd7re63tYZu8Gslml9mrOsodaQYGbTdI+Dekuxk+0UlUNB0312jWO+tGrkrtmcWh/XExtY7a4cwYC3hKEL71UujPpYcy3+TekiS/6sGWhop+oQhG3kdt9igFL8PQ+ZD1Ox3fMrj1kxZR0vij+ZWmzga/EgnVad0lKYoOn61pyuezTduXmXRV4+xCJOHKGThoiZWjxS7woCoEzyewSHvuWkb5r3/GPqARJF8FxICUbCUkHi6Jx7VJ5YoRPfO+w3VrV65a5O823FHFnh6SntZxitrjXhztBoLzaDLFF9qfcU0H/oFfIAn5npedcSFB0FTdXtfyZZtjdCxE7hoIJrS0zrsSqG6RQv4PsEZrf/GVk/m4tNqvBu9vOns7RvlnhKiNiG6nhqt/3IuFVGX5QVcMKPTjduzZReP8u7k2C+uvWS8t0TY/M+fU7owlnnud9LX5v2xs9q45uWERmMyxyJjSOxzR1/4j2Z2clURUgdqNfaqD1mdamtNSq9G3/xtXXLAU=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA1PR03MB8288.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(18002099003)(22082099003)(3023799007)(10067099003)(56012099006)(11063799006)(6133799003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?c2IvZWxDUDFKbGkzK2xrd0Nvb2F5ZjBHZjJLT0gyWGcyMHluOTc1RjYyUzd1?=
- =?utf-8?B?MytuYklCdlpUSnI5Ui9CTkQwdnRkV2lLK09Rb2FjWENGL3JKSVlUc29RWXZ3?=
- =?utf-8?B?N0g0dkNBOVhYbUtIWGdPYzFGMFpFdi9DUytmc3hGU3B6VUhVTnpsR1hYOE0x?=
- =?utf-8?B?YXhST0lFTGJMSnRncWgrYk1lQTN6Tk1kU0x6eE83a0pZUExackx1K3FQUzNW?=
- =?utf-8?B?K1pscHRRYTJxeXZNZVJKeVM0N1hNSExxaFJSai91WjNxNXFIaDB1OE5jVlJ4?=
- =?utf-8?B?R08yRVNvSEZ3WDAzaHFSbVpaN09OWGNVdDlZUS81RkNsbFFMc3lZNEJlc2tM?=
- =?utf-8?B?MVdVTCt2NCsyaVJwblFMUUdaY3lBTllMYUwzREwxMDlNQjBrM0VnNy9CSkJj?=
- =?utf-8?B?OWJYcTNRMGFyTEUyeXZKTnh6NklHZHBVb2JJRVZsMk42RkRqa04vZU9rZTBS?=
- =?utf-8?B?ZWd3em14aEJFN012OWVKMTJYME1ENEhrbSsyWHVPdHNzdkpxc3AvQ014K1ZR?=
- =?utf-8?B?U0J3STZOc2czUlZ6Ri94N3BwOUxiWjVVZ01tV0x6cUdHb3U5b1R1clVwWmJK?=
- =?utf-8?B?Y3R3c3JROFVzckZJaUlVeVBCaEkveW85ODFCYitJNjVFVzNGM2RLOG9vMjNp?=
- =?utf-8?B?TzlLVE9DdzY3Nks0NGRNOXZvbTV5TXVwSVBPZTFPZXlONmZSZ2lSWDJHOWdy?=
- =?utf-8?B?OFI1UEhrMXVOTHhSU0JCcmhHdlN0K08vU2NWRk8wUGJFbXZmckNRTDlDbklO?=
- =?utf-8?B?Yktlcm5kUWlrK014OGV6QUpTQjg3Z3FpNnpmaTgyYnJ1cDNoZjQxQlY2bkMx?=
- =?utf-8?B?bnl5YW5qbmx3TUY1SVBuVmFsRmdkSTVnVXFId0JoRWJ2WGZTVExyQ2FYMUNz?=
- =?utf-8?B?RWk1N2NRTVdmOHdHZG1uL050VDdSR1FLZm53dFFyanNFTWwrZFdMbHdUbFMx?=
- =?utf-8?B?VmhMZlJVSW4xbzBYMU85WFBHdEU1WTdCcVdKSDNqNXBYVFVGYkV4RVJPbXJm?=
- =?utf-8?B?blV3N21BdFAzb0xITC9VOE05cUdhanFzY2lVTjErMzhEMFpLUjh6Y0U0UTgy?=
- =?utf-8?B?WEI5a1RyQVpMZzhWbWNNQVI5VTNxYlRLdlZvaE9FbXE2dEhFdG5XWVBab0J3?=
- =?utf-8?B?cUxLSHRlSERZOUtpM0Npc1BseUowdG9wbFBtL2prZmZEa0tseTNTempFKzZW?=
- =?utf-8?B?Z2FiWjQwMW8rUVR6M2Rmd1BNdkZNMjdYeko3YnBZcnJsbmwreHhLTWFWTzR5?=
- =?utf-8?B?YVIwZnRVYUhjQWsvL1NUY0hvcVlhb3prSjFDWFlLcGdVS1FzMk5sZ0RLRWZx?=
- =?utf-8?B?VVNCUmh6Smx6c2IwYW01UG16MkVVM0huZHV2aXRwQjVmZ2JSSnBreWtrS3lG?=
- =?utf-8?B?aFNlTDQyUjkzRXZWZzJZakxvRjY4OHBrdUZkcDZuVzgyc2hxbmh4SW1yYW9X?=
- =?utf-8?B?OFhwNzVoaFczUTV5TnlGVlVpVkVzaElEWlRBWkUydmYzbkpWQURLbmtHelFL?=
- =?utf-8?B?NWh3VHh2Ui93LzYwZlkrTWc2L21xQzJ5L3hpUnJLNXUzaVVtVmpTSWphUmNa?=
- =?utf-8?B?cWpSQjhGQUt6Vjc1cnZsTkM0VkRERUljYnRvMUhJc1V0ZC8wOGM2NTZ1NVRh?=
- =?utf-8?B?YzNERDh5YzFCTzY1STVBbkRGZWh6S0dXN2dNTHVFamdtZFhRcE10Z1NaQ1pU?=
- =?utf-8?B?Y2hkR3BmT0paR2x1bHRMTk1iem5Tdy9oSkd2eU5nenI5NXZTMDdwWUlVUmpj?=
- =?utf-8?B?OXo4UWJDYTBVbFJWWXpNWi9rSXNEaHRtMllVaE4rTVF4cHhFUlRlOE5YK3VW?=
- =?utf-8?B?d3U1K3lwQXVSU0JaYmlrNnFOdFJTVDhmaHNEU3M1R0VKdllHMkhSRDhXV3VE?=
- =?utf-8?B?V0psTXNaQ3NZM2Vsd1IvWEdxMU91YmJQcno0WkpuanZNa1RhdllNcm9wWTQw?=
- =?utf-8?B?b29LOEowdGxqa2pBVFp2UDRVYmdoV3lFVEEwRXhoK0dtUnJFcGgrMFZCT05j?=
- =?utf-8?B?bVpWb0JnTkhHcE5EMXJTeWs1OTVFeVM3V3VEV2hmbENIcytDbkdtTW9NMkZD?=
- =?utf-8?B?RTN1N3IxNXFhZ1RjS3dkRmQ2RjdmTDk4RWdZWjhxaHJGbExBZk1ONDlUbkE4?=
- =?utf-8?B?QzZCelJvM3ViajNqRWExZDJvM1lCNnh3YzJOSUYyandtc25NWUtWYitYSkpv?=
- =?utf-8?B?azNKcXlEUTMxWUpUcFVNclZlRG5DOWRwNGYzSVVzWnFtNlltMVgyS1F0dWpF?=
- =?utf-8?B?cHFYUUFacVpySWpLelFhZUdnQ0psMktDbFNuODBQVEk4MUN6bVN1bHJRSWIw?=
- =?utf-8?B?V21sVUJwRXJpTS82RWFzbzFTc3hxVlNLSk1HZHZrQWJtZ0dIS2ZKUT09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e2c5ec45-7a2f-448f-7005-08dee69a7c1c
-X-MS-Exchange-CrossTenant-AuthSource: IA1PR03MB8288.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jul 2026 20:07:11.5409
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: F0UoGCKHAfkdKqr7MOFge2Sx6clySu96j3rkoISz5zeat9/wQqPyg13UUcAjFqCUzCEbMVUWMWYggbjCZrzLHmAJXm7E7EARnfEV2BYjtxA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN6PR03MB7718
-X-purgate-ID: tlsNG-ebf023/1784578034-C0AD8B50-85DFD729/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 7/8] hw/9pfs: annotate V9fsTransport callbacks as
+ coroutine_fn
+Content-Language: en-US
+To: Christian Schoenebeck <qemu_oss@crudebyte.com>, qemu-devel@nongnu.org,
+        =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+Cc: Markus Armbruster <armbru@redhat.com>, Peter Xu <peterx@redhat.com>,
+        Fabiano Rosas <farosas@suse.de>,
+        =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
+ <berrange@redhat.com>,
+        John Snow <jsnow@redhat.com>,
+        Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
+        Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>,
+        qemu-block@nongnu.org, Stefan Hajnoczi <stefanha@redhat.com>,
+        Fam Zheng <fam@euphon.net>, "Denis V. Lunev" <den@openvz.org>,
+        Greg Kurz <groug@kaod.org>, "Michael S. Tsirkin" <mst@redhat.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Anthony PERARD <anthony@xenproject.org>,
+        "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+        xen-devel@lists.xenproject.org, Li Zhijian <lizhijian@fujitsu.com>
+References: <20260720-co-v1-0-fabb4db3c204@redhat.com>
+ <20260720-co-v1-7-fabb4db3c204@redhat.com> <7970030.EvYhyI6sBW@weasel>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+In-Reply-To: <7970030.EvYhyI6sBW@weasel>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDIyNiBTYWx0ZWRfX3yguUldX1aHs
+ HmPUvbb6JYq7FaKs8iOluQ0GEhNKK6y8z5HnYJ2/8axsWA5opRYsfQrxgSqoAiMRJU5GxlhUkg6
+ +81jmsNPkfNIcBXYWUmxo8EjA2bEuZE=
+X-Proofpoint-ORIG-GUID: sAW4TZIwtvq3Qfg2q-zjHxqG3U-w6wDN
+X-Authority-Analysis: v=2.4 cv=DMS/JSNb c=1 sm=1 tr=0 ts=6a5e884d cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=20KFwNOVAAAA:8 a=U4s93ykpB3yW7ajRV6YA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=a_PwQJl-kcHnX1M80qC6:22
+X-Proofpoint-GUID: sAW4TZIwtvq3Qfg2q-zjHxqG3U-w6wDN
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDIyNiBTYWx0ZWRfXx+AbRS/+CF8R
+ udketZKN3kA4c9MbbANs7kcAYCcs1I5YYE7kc8ICzPqXxHqZdvBsNeJtoIvo05x9RWu6enW0xh/
+ w3/T3Er85kuZIK8M5q3DuwCOWmPHyubPgVrJNkoXr95YoW2qEmgwOB0zGpFHlyNkbFnOI2tvHYs
+ IuftAgq/QNoQsgsR9sIArZ2CPHwSSlFgcOYwcfWYGI9FwNjd47Po1qgsabHTwJDB3ksv/QwQphp
+ LtcFvb8coxJBdZnUPuYIcL5oCIM+ugsGEQkqR6UU7nAH9CwMk1pL+toc3PSg0uOo25QQJKxrQDf
+ UNJAvXB+gl2UHnAO828SsOP9hyJBECmUDFXMOL7k0J5f56l9M2JFJJe6HdMuPSGg7vTJu5z1+FZ
+ v7DCDzcZh7ip2Iofj+cGMk5DQKuOQeepEm/VPho/qaG+Xn1JgDbgseAPSjNjp4du1PC36gApC8w
+ 2kVemy3endfnVc/2zeg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-20_05,2026-07-20_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 impostorscore=0 priorityscore=1501 spamscore=0 bulkscore=0
+ lowpriorityscore=0 clxscore=1015 phishscore=0 malwarescore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607200226
+X-purgate-ID: tlsNG-ef75cf/1784580176-A74D3AE4-3B77BB32/0/0
 X-purgate-type: clean
-X-purgate-size: 6905
+X-purgate-size: 3784
 
-On 30/06/2026 2:38 pm, Jan Beulich wrote:
-> --- a/xen/arch/x86/include/asm/guest_access.h
-> +++ b/xen/arch/x86/include/asm/guest_access.h
-> @@ -14,11 +14,15 @@
->  
->  /* Raw access functions: no type checking. */
->  #define raw_copy_to_guest(dst, src, len)        \
-> -    (is_hvm_vcpu(current) ?                     \
-> +    ((IS_ENABLED(HVM_ONLY_SOURCE) ||            \
-> +      (!IS_ENABLED(PV_ONLY_SOURCE) &&           \
-> +       is_hvm_vcpu(current))) ?                 \
->       copy_to_user_hvm((dst), (src), (len)) :    \
->       copy_to_guest_pv(dst, src, len))
->  #define raw_copy_from_guest(dst, src, len)      \
-> -    (is_hvm_vcpu(current) ?                     \
-> +    ((IS_ENABLED(HVM_ONLY_SOURCE) ||            \
-> +      (!IS_ENABLED(PV_ONLY_SOURCE) &&           \
-> +       is_hvm_vcpu(current))) ?                 \
->       copy_from_user_hvm((dst), (src), (len)) :  \
->       copy_from_guest_pv(dst, src, len))
->  #define raw_clear_guest(dst,  len)              \
-> @@ -26,11 +30,15 @@
->       clear_user_hvm((dst), (len)) :             \
->       clear_guest_pv(dst, len))
->  #define __raw_copy_to_guest(dst, src, len)      \
-> -    (is_hvm_vcpu(current) ?                     \
-> +    ((IS_ENABLED(HVM_ONLY_SOURCE) ||            \
-> +      (!IS_ENABLED(PV_ONLY_SOURCE) &&           \
-> +       is_hvm_vcpu(current))) ?                 \
->       copy_to_user_hvm((dst), (src), (len)) :    \
->       __copy_to_guest_pv(dst, src, len))
->  #define __raw_copy_from_guest(dst, src, len)    \
-> -    (is_hvm_vcpu(current) ?                     \
-> +    ((IS_ENABLED(HVM_ONLY_SOURCE) ||            \
-> +      (!IS_ENABLED(PV_ONLY_SOURCE) &&           \
-> +       is_hvm_vcpu(current))) ?                 \
->       copy_from_user_hvm((dst), (src), (len)) :  \
->       __copy_from_guest_pv(dst, src, len))
+On 20/7/26 16:02, Christian Schoenebeck wrote:
+> On Monday, 20 July 2026 09:55:36 CEST Marc-André Lureau wrote:
+>> All V9fsTransport callbacks are invoked exclusively from coroutine
+>> context (the v9fs_* PDU handlers). Annotate the function pointer
+>> types in V9fsTransport and all implementations (virtio and xen
+>> backends), as well as intermediate callers in 9p.c (pdu_marshal,
+>> pdu_unmarshal, v9fs_init_qiov_from_pdu, etc.).
+>>
+>> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+>> ---
+>>   hw/9pfs/9p.h               | 26 +++++++++++++++-----------
+>>   hw/9pfs/9p.c               | 31 +++++++++++++++++++------------
+>>   hw/9pfs/virtio-9p-device.c | 24 +++++++++++++-----------
+>>   hw/9pfs/xen-9p-backend.c   | 34 +++++++++++++++++-----------------
+>>   4 files changed, 64 insertions(+), 51 deletions(-)
+>>
+>> diff --git a/hw/9pfs/9p.h b/hw/9pfs/9p.h
+>> index 1a309664f6e..0e52ffbdf38 100644
+>> --- a/hw/9pfs/9p.h
+>> +++ b/hw/9pfs/9p.h
+>> @@ -472,17 +472,21 @@ void pdu_submit(V9fsPDU *pdu, P9MsgHeader *hdr);
+>>   void v9fs_reset(V9fsState *s);
+>>
+>>
+>>   struct V9fsTransport {
+>> -    ssize_t     (*pdu_vmarshal)(V9fsPDU *pdu, size_t offset, const char *fmt,
+>> -                                va_list ap);
+>> -    ssize_t     (*pdu_vunmarshal)(V9fsPDU *pdu, size_t offset, const char *fmt,
+>> -                                  va_list ap);
+>> -    void        (*init_in_iov_from_pdu)(V9fsPDU *pdu, struct iovec **piov,
+>> -                                        unsigned int *pniov, size_t size);
+>> -    void        (*init_out_iov_from_pdu)(V9fsPDU *pdu, struct iovec **piov,
+>> -                                         unsigned int *pniov, size_t size);
+>> -    void        (*push_and_notify)(V9fsPDU *pdu);
+>> -    size_t      (*msize_limit)(V9fsState *s);
+>> -    size_t      (*response_buffer_size)(V9fsPDU *pdu);
+>> +    ssize_t     coroutine_fn (*pdu_vmarshal)(V9fsPDU *pdu, size_t offset,
+>> +                                             const char *fmt, va_list ap);
+>> +    ssize_t     coroutine_fn (*pdu_vunmarshal)(V9fsPDU *pdu, size_t offset,
+>> +                                               const char *fmt, va_list ap);
+>> +    void        coroutine_fn (*init_in_iov_from_pdu)(V9fsPDU *pdu,
+>> +                                                     struct iovec **piov,
+>> +                                                     unsigned int *pniov,
+>> +                                                     size_t size);
+>> +    void        coroutine_fn (*init_out_iov_from_pdu)(V9fsPDU *pdu,
+>> +                                                      struct iovec **piov,
+>> +                                                      unsigned int *pniov,
+>> +                                                      size_t size);
+>> +    void        coroutine_fn (*push_and_notify)(V9fsPDU *pdu);
+>> +    size_t      coroutine_fn (*msize_limit)(V9fsState *s);
+>> +    size_t      coroutine_fn (*response_buffer_size)(V9fsPDU *pdu);
+>>   };
+> 
+> I wonder whether that could be made more diff/blame-friendly. Especially as
+> this currently only serves documentation purposes.
+> 
+> They way you are positioning coroutine_fn it usually resolves to an attribute
+> attached to the function's return type, not to the function itself, even
+> though clang/gcc handling it flexible. For attaching an attribute to the
+> function itself the attribute should either be attached before the function
+> declaration or after the function declaration.
 
-Looking back at my own attempt to do this, which was from August 2024, I
-started by cleaning up this code block as such:
+I tend to aggree it would be clearer to have these attributes /before/
+the function prototype declaration.
 
-diff --git a/xen/arch/x86/include/asm/guest_access.h b/xen/arch/x86/include/asm/guest_access.h
-index 69716c8b41bb..49920e181832 100644
---- a/xen/arch/x86/include/asm/guest_access.h
-+++ b/xen/arch/x86/include/asm/guest_access.h
-@@ -12,27 +12,33 @@
- #include <asm/hvm/support.h>
- #include <asm/hvm/guest_access.h>
- 
-+#define GUEST_ACCESS_HVM is_hvm_vcpu(current)
-+
- /* Raw access functions: no type checking. */
- #define raw_copy_to_guest(dst, src, len)        \
--    (is_hvm_vcpu(current) ?                     \
--     copy_to_user_hvm((dst), (src), (len)) :    \
--     copy_to_guest_pv(dst, src, len))
-+    (GUEST_ACCESS_HVM                           \
-+     ? copy_to_user_hvm(dst, src, len)          \
-+     : copy_to_guest_pv(dst, src, len))
-+
- #define raw_copy_from_guest(dst, src, len)      \
--    (is_hvm_vcpu(current) ?                     \
--     copy_from_user_hvm((dst), (src), (len)) :  \
--     copy_from_guest_pv(dst, src, len))
-+    (GUEST_ACCESS_HVM                           \
-+     ? copy_from_user_hvm(dst, src, len)        \
-+     : copy_from_guest_pv(dst, src, len))
-+
- #define raw_clear_guest(dst,  len)              \
--    (is_hvm_vcpu(current) ?                     \
--     clear_user_hvm((dst), (len)) :             \
--     clear_guest_pv(dst, len))
-+    (GUEST_ACCESS_HVM                           \
-+     ? clear_user_hvm(dst, len)                 \
-+     : clear_guest_pv(dst, len))
-+
- #define __raw_copy_to_guest(dst, src, len)      \
--    (is_hvm_vcpu(current) ?                     \
--     copy_to_user_hvm((dst), (src), (len)) :    \
--     __copy_to_guest_pv(dst, src, len))
-+    (GUEST_ACCESS_HVM                           \
-+     ?   copy_to_user_hvm(dst, src, len)        \
-+     : __copy_to_guest_pv(dst, src, len))
-+
- #define __raw_copy_from_guest(dst, src, len)    \
--    (is_hvm_vcpu(current) ?                     \
--     copy_from_user_hvm((dst), (src), (len)) :  \
--     __copy_from_guest_pv(dst, src, len))
-+    (GUEST_ACCESS_HVM                           \
-+     ?   copy_from_user_hvm(dst, src, len)      \
-+     : __copy_from_guest_pv(dst, src, len))
- 
- /*
-  * Pre-validate a guest handle.
+> In both cases you could then
+> add it to its own, separate line, avoiding a lot of noise.
+> 
+> /Christian
+> 
+> 
+> 
+> 
 
-
-
-so they're all consistent and legible, then extended GUEST_ACCESS_HVM to:
-
-diff --git a/xen/arch/x86/include/asm/guest_access.h b/xen/arch/x86/include/asm/guest_access.h
-index 49920e181832..eba47e46de88 100644
---- a/xen/arch/x86/include/asm/guest_access.h
-+++ b/xen/arch/x86/include/asm/guest_access.h
-@@ -12,7 +12,12 @@
- #include <asm/hvm/support.h>
- #include <asm/hvm/guest_access.h>
- 
--#define GUEST_ACCESS_HVM is_hvm_vcpu(current)
-+#define GUEST_ACCESS_HVM                        \
-+    (IS_ENABLED(GA_ALWAYS_PV)                   \
-+     ? 0                                        \
-+     : (IS_ENABLED(GA_ALWAYS_HVM)               \
-+        ? 1                                     \
-+        : is_hvm_vcpu(current)))                \
- 
- /* Raw access functions: no type checking. */
- #define raw_copy_to_guest(dst, src, len)        \
-
-
-
-to allow ways to force it one way or another.
-
-For forcing it one way or another, while ...
-
-
->  
-> --- a/xen/arch/x86/mm.c
-> +++ b/xen/arch/x86/mm.c
-> @@ -3407,6 +3407,9 @@ int new_guest_cr3(mfn_t mfn)
->  #endif
->  
->  #ifdef CONFIG_PV
-> +
-> +#define PV_ONLY_SOURCE 1
-> +
-
-... mm.c is certainly complicated, others like ...
-
-> --- a/xen/arch/x86/pv/callback.c
-> +++ b/xen/arch/x86/pv/callback.c
-> @@ -5,6 +5,8 @@
->   * hypercall handles and helper functions for guest callback
->   */
->  
-> +#define PV_ONLY_SOURCE 1
-> +
->  #include <xen/event.h>
->  #include <xen/hypercall.h>
->  #include <xen/guest_access.h>
-> --- a/xen/arch/x86/pv/descriptor-tables.c
-> +++ b/xen/arch/x86/pv/descriptor-tables.c
-> @@ -8,6 +8,8 @@
->   * Copyright (c) 2004 Christian Limpach
->   */
->  
-> +#define PV_ONLY_SOURCE 1
-> +
->  #include <xen/guest_access.h>
->  #include <xen/hypercall.h>
->  
-> --- a/xen/arch/x86/pv/shim.c
-> +++ b/xen/arch/x86/pv/shim.c
-> @@ -6,6 +6,9 @@
->   *
->   * Copyright (c) 2017 Citrix Systems Ltd.
->   */
-> +
-> +#define PV_ONLY_SOURCE 1
-> +
->  #include <xen/event.h>
->  #include <xen/guest_access.h>
->  #include <xen/hypercall.h>
-
-all of these could have a general CFLAGS += in arch/x86/pv/Makefile
-rather than having to state it in every file.
-
-Naming wise, while PV_ONLY_SOURCE works in pv/, it's more dubious in
-arch/x86/mm.c.  GUEST_ACCESS_* at least identifies the property that's
-being decided upon.
-
-~Andrew
 
