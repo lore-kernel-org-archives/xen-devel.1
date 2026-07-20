@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79112C44515
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 10:29:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1366483.1616372 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0157EC44527
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 10:35:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1366494.1616385 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wllFA-00060J-Sx; Mon, 20 Jul 2026 10:29:04 +0000
+	id 1wllL2-0007cD-Kn; Mon, 20 Jul 2026 10:35:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1366483.1616372; Mon, 20 Jul 2026 10:29:04 +0000
+Received: by outflank-mailman (output) from mailman id 1366494.1616385; Mon, 20 Jul 2026 10:35:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wllFA-00060C-P6; Mon, 20 Jul 2026 10:29:04 +0000
-Received: by outflank-mailman (input) for mailman id 1366483;
- Mon, 20 Jul 2026 10:29:03 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wllL2-0007c6-He; Mon, 20 Jul 2026 10:35:08 +0000
+Received: by outflank-mailman (input) for mailman id 1366494;
+ Mon, 20 Jul 2026 10:35:06 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1wllF9-0005zo-DR
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 10:29:03 +0000
+ (envelope-from <jgross@suse.com>) id 1wllL0-0007c0-GQ
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 10:35:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wllF8-00GUEy-QV
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 12:29:02 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wllKz-000rkH-Ke
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 12:35:05 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jgross@suse.com>)
- id 6a5df861-e002-0a2a0a5209dd-0a2a4503ed0e-40
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 12:29:02 +0200
-Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a5df9c6-2eae-0a2a0a5409dd-0a2a4506bfc4-34
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 12:35:05 +0200
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jgross@suse.com>)
- id 6a5df86e-fae8-0a2a45030019-d155dd2ad936-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 12:29:02 +0200
-Received: by mail-wr1-f42.google.com with SMTP id
- ffacd0b85a97d-47f71156e1aso595903f8f.3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 03:29:02 -0700 (PDT)
+ id 6a5df9d9-195a-0a2a45060019-d1558030cdeb-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 12:35:05 +0200
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-493f75f7172so78024075e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 03:35:05 -0700 (PDT)
 Received: from ?IPV6:2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112?
  (2a00-12d0-af5d-ad01-5d3f-14e6-9bcb-5112.ip.tng.de.
  [2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f63e65644sm27469406f8f.16.2026.07.20.03.29.01
+ 5b1f17b1804b1-4954a2b074csm291431975e9.6.2026.07.20.03.35.03
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Jul 2026 03:29:01 -0700 (PDT)
+ Mon, 20 Jul 2026 03:35:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,52 +57,87 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784543342; x=1785148142; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1784543705; x=1785148505; darn=lists.xenproject.org;
         h=content-type:in-reply-to:autocrypt:from:content-language:references
          :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=aJSBu+o6iIRDp5321QLe+PQzf5+ZDn1LJAcsjtQtgFo=;
-        b=Dq2UhlWxjyIuxDpxAuMfDu8vVNJAUIUDsj6nu1x5qLoXSUrGMDFGYFPGLNr6axmOiC
-         BYKEGQ9DIywco5UV4uHvd2t7S8hEd2n9vuzuJs+pO/hh6sJSA4SYNIz04n7nHSJsZ4dE
-         KV8IPatQi1WoWMeV82TAz5IRlR38C4cacDFYT1dOUPQ/Ncqv2cPtQdkLNLiQj0jJIwPm
-         QjTpkncaul5SOCslbYk6DO4f2mGAXOtaGWUhnpTBp6IYvR+eIFVhAmww+jzVLD2oGisF
-         gL1LFWU6qoA2pBY7eqrAsExT6y4J7aBDGNiMyvARq4rGzSRvxQYNwT3i1tGgonKvyaZ6
-         5FhQ==
+        bh=k37RWmWff7zt+PtsvHIuhzz9otckpy6kRhbc8EISwX4=;
+        b=KRXfxqN8ZfAOgsAfAp55toXs4EmCAAF2m0PIaQH4vg3NqFaTmFY4N8ZKmBTRddR1qm
+         SLUTh9IGhjI0Lqj2opPoIM6wY0ssxPML2I+tOxPKaH10H49LYxcfHAiEa8VFX94qsroj
+         n5IByRG4vBtkO+pmSzGug1VFLYFKJ23xXgychBpDrBVxLpfM2a46hgHhLRhxfjcdBTK9
+         229/0f8B7tfPbbXr+Qq2rbfD6SObGxUlgasSEIxQRezXkyml7TyeTo9U0Vpo1GuvegcS
+         ufNgzHcn6myLEEs1D+2q9dgaoJ420oJVR+W9ruOvZUSDWJNL112oezpIAmQ0tCpZ2rSH
+         oOTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784543342; x=1785148142;
+        d=1e100.net; s=20251104; t=1784543705; x=1785148505;
         h=content-type:in-reply-to:autocrypt:from:content-language:references
          :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=aJSBu+o6iIRDp5321QLe+PQzf5+ZDn1LJAcsjtQtgFo=;
-        b=GX/TMqvaIKFIcXK/a5isfV3wRoxuY1nVmrodGBArAq5s0KruM7D4ES3ZxVATbFmavV
-         ZDD6zl4gse7cSppWc05gMOPwkpmWgt+8Pr/ePliMAt2W59Rud5C9fZgxDWBArtw9vw+3
-         B+txHV8pQNKdnzdfTc+EUxsqxWh67rG2azg67Kt3v89xbqxEHzlHbkd4lfIqbXeNM6Es
-         Bf24P9upjmIHOo5iewH1J9gnPbQhwJ4wbUqXDnG4OYy8a5N1T9GqEAUwdbHIOndp8XVt
-         SpfOz7GF2qSTCImvvX4XuNrNECb2tVdI1oZbBq33sKyt8RENVjJigHMQLlugBI1M/kWn
-         akqg==
-X-Forwarded-Encrypted: i=1; AHgh+Ro04PgdGcd3PpclR2D6vpVbLwtIcHF3TPiHbYav0HT6C17/17L1mlGGCiyb2G5Zcq1G4VYD+9Oc5L0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx1gRKNc+WfuYZhlKyxgMBtBmFcnSssmnIyH5xXsDdLtGznHjCX
-	4Sp8NkWoyyIktHtIVo0we7xVhB5UD473c3sR79Ddm7BKDsr+VRBX02K11XgTfvzdETA=
-X-Gm-Gg: AR+sD12l0UKdeUh7Z3FmKkyQzHkvJ5JNNIT50EXWpLKys5xqtz3c7uwjOPxNDrtslIQ
-	QUPPl5ocejI3RCq9A+FkXZ+p8O/x4MUTy8C43nEewPwQJn8Yg9r5fHREqmxtUwdMHjXKgf6iPXN
-	prhFYDUaW335rz1eTiLNXNrHT2tIlfnCTSo0BEVg6HSojJxoOKj8+t0d1dalyQglPQSN6yGVHIB
-	MzNh57Gl/zIxF4RUetna7pGG+Eo4CmtdhxfDzPbIjoZKSeQYENqp1NU/amXOhGB9ES/6RY/GNDK
-	MhrCv5Eg6HgAONP+bo1xXUicpwnJ/egt10yN6WNWs8K6BTQRKiz9R0EjkhWhaZh55XALbukhgGo
-	7LWHH0S9tgtlp8hxZOEAXMSKmAly+/KGqc7XqppaD6H47vrSDvd1ozB1zmbhVvaenief+2ZMxEO
-	FXQRtlF0uezIhd6r+3IN03wnsOklN+uw9J0Sc8cMTLgsVOhh/VqbXC9dPce3DKy2e1Iz9vLCGMP
-	3CGcc5Sra20ZC/gGMdpnk6itH0/ML79
-X-Received: by 2002:a5d:59a4:0:b0:47d:f43b:fd63 with SMTP id ffacd0b85a97d-47f6230e5a4mr14881024f8f.26.1784543342086;
-        Mon, 20 Jul 2026 03:29:02 -0700 (PDT)
-Message-ID: <2b954e31-0551-4706-ab56-f24a8380b527@suse.com>
-Date: Mon, 20 Jul 2026 12:29:01 +0200
+        bh=k37RWmWff7zt+PtsvHIuhzz9otckpy6kRhbc8EISwX4=;
+        b=p3TFcWkBwZn5+D6wdx9lYMU3czUcZGFKE4U+RVqXKHWe5HiYGrJUV1FUehv2OnwKh8
+         2Dnnzy0ajN3R9EW5bV4wA2dPZEEYGs8MTy7Z3Op/FXb+rP4f8Qc8chJptK3Le0VbgV2k
+         cenQxmC2V9U6g9BS8WUH4BhlWaYj1EwnGDq5cxQ2nhW6IwvPcoLQIkCkUQyhlbnxt3v+
+         M3UAwQX9o51Fu0BZGC6nZjK6QOfdcwaxcC+UJM/wx09SZ4hGLWN+LuQij/fqKb0guLGf
+         4lBiAAWvbNMmpWok61xbRdaO5tDF3nO2+v5jTNULwpC0/oQhz0w+FXy84Ozj5VgRt2hC
+         t5Zw==
+X-Forwarded-Encrypted: i=1; AHgh+Roc2U9AKekC713I24pwZK23VwEMKI9yTBUFu1+bfa/Nx8NR0E4qhWSrbvCXvpnTFi89JuTFEx/9khQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw4nU67wgt++fpA7PgQlPmSb4+QoEz1DvG1jIpNcoVLMAujB2lB
+	MjxxTf5YR2NfeDZ90qwRbGkXHraaDDXZxm8Aiorgh+fy4dNcws7T2ykfkLgQ58KoESI=
+X-Gm-Gg: AfdE7cka+49IoZVr0YKhdDzcystxnTCodH8y68URI65Yui+DN7G/PCyQKP39p7NbDiY
+	6lLIdmr6Y8n/6X1IxP9iEXyX0/Anfw2XYm4g47arDZATW2W+7foxS3O2Ue3ClBsCwnLq8wkMj4t
+	jMe42LpsCuEKzDtpN7M1G/A6u9sgKWiJQV86aS6+boiFdEurLrIOc6qYZkTfICmtB0DoTDAtqZZ
+	0ooDxeWy9bpqtngWTgoYzIbTHArz2X7x3Q+Sv04x1LaJm51ToKAShYjOwxKCDkCPhDVfWt8WkKG
+	Z1gTchLfdl8pgd/IliDjF6RPVqEBGffMwStW68iNfRRWvqPsvdleGFg3zU9NbI86X1euLUo6iZu
+	0gnUP49auYKfxJiLDNtxxJl2nj4iTLFUD7bB1C57+cjesOLhJj4fuUy2ygQ1Qpp0vxyD/MSJmeT
+	kmhqMFtEUIQlhVwFrsUcV6gb4Ih0lv7+EqXCCInuoUwRJq118EQUxFnELCG50pNCXCF9sLHKXPB
+	m0tMmBt2n4/u0almshAf9ImtXHkCYzg
+X-Received: by 2002:a05:600c:4f14:b0:495:5ce6:9c18 with SMTP id 5b1f17b1804b1-4955ce6a33cmr61097885e9.27.1784543704827;
+        Mon, 20 Jul 2026 03:35:04 -0700 (PDT)
+Message-ID: <e258581c-a17f-4b5a-aafd-82e513a6288e@suse.com>
+Date: Mon, 20 Jul 2026 12:35:02 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] {libxl,xl}: Add xl trigger debug
-To: Tu Dinh <ngoc-tu.dinh@vates.tech>, xen-devel@lists.xenproject.org
-Cc: Anthony PERARD <anthony.perard@vates.tech>
-References: <1784539531.8631fc262581453bbf619ec5b2062170.19f7ed8472c000edb5@vates.tech>
- <1784539672.8631fc262581453bbf619ec5b2062170.19f7eda70d8000edb5@vates.tech>
+Subject: Re: [PATCH 2/3] sched: Convert paravirt_steal to new static key APIs
+To: Hongyan Xia <hongyan.xia@transsion.com>,
+ "mingo@redhat.com" <mingo@redhat.com>,
+ "peterz@infradead.org" <peterz@infradead.org>,
+ "juri.lelli@redhat.com" <juri.lelli@redhat.com>,
+ "vincent.guittot@linaro.org" <vincent.guittot@linaro.org>,
+ "dietmar.eggemann@arm.com" <dietmar.eggemann@arm.com>,
+ "rostedt@goodmis.org" <rostedt@goodmis.org>,
+ "bsegall@google.com" <bsegall@google.com>, "mgorman@suse.de"
+ <mgorman@suse.de>, "vschneid@redhat.com" <vschneid@redhat.com>,
+ "kprateek.nayak@amd.com" <kprateek.nayak@amd.com>,
+ Ajay Kaher <ajay.kaher@broadcom.com>,
+ Alexey Makhalov <alexey.makhalov@broadcom.com>,
+ Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>,
+ Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
+ Huacai Chen <chenhuacai@kernel.org>, WANG Xuerui <kernel@xen0n.name>,
+ Madhavan Srinivasan <maddy@linux.ibm.com>,
+ Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>,
+ "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+ Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
+ Thomas Gleixner <tglx@kernel.org>, Borislav Petkov <bp@alien8.de>,
+ Dave Hansen <dave.hansen@linux.intel.com>, "x86@kernel.org"
+ <x86@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Vitaly Kuznetsov <vkuznets@redhat.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: Jiazi Li <jiazi.li@transsion.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "virtualization@lists.linux.dev" <virtualization@lists.linux.dev>,
+ "linux-arm-kernel@lists.infradead.org"
+ <linux-arm-kernel@lists.infradead.org>,
+ "loongarch@lists.linux.dev" <loongarch@lists.linux.dev>,
+ "linuxppc-dev@lists.ozlabs.org" <linuxppc-dev@lists.ozlabs.org>,
+ "linux-riscv@lists.infradead.org" <linux-riscv@lists.infradead.org>,
+ "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <cover.1784538478.git.hongyan.xia@transsion.com>
+ <773bbd8fcd5ef2ebfe1c64303c7a71a56368de69.1784538478.git.hongyan.xia@transsion.com>
 Content-Language: en-US
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
 Autocrypt: addr=jgross@suse.com; keydata=
@@ -128,57 +163,77 @@ Autocrypt: addr=jgross@suse.com; keydata=
  HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
  QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
  ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <1784539672.8631fc262581453bbf619ec5b2062170.19f7eda70d8000edb5@vates.tech>
+In-Reply-To: <773bbd8fcd5ef2ebfe1c64303c7a71a56368de69.1784538478.git.hongyan.xia@transsion.com>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------84ZHUl0IOgdOn8wZYiHk8hG8"
-X-purgate-ID: tlsNG-33051d/1784543342-6C6DE4E9-7774DC77/0/0
+ boundary="------------xRaoXSGgLc0vY9TPQoiqAmqD"
+X-purgate-ID: tlsNG-16d1c6/1784543705-1ECC577B-C8E99BC2/0/0
 X-purgate-type: clean
-X-purgate-size: 7490
+X-purgate-size: 8421
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------84ZHUl0IOgdOn8wZYiHk8hG8
-Content-Type: multipart/mixed; boundary="------------Zb0Rkc1pAxSfr7IPDu6zoum0";
+--------------xRaoXSGgLc0vY9TPQoiqAmqD
+Content-Type: multipart/mixed; boundary="------------GCGLUHAC00omEipMv2gl1qSr";
  protected-headers="v1"
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-To: Tu Dinh <ngoc-tu.dinh@vates.tech>, xen-devel@lists.xenproject.org
-Cc: Anthony PERARD <anthony.perard@vates.tech>
-Message-ID: <2b954e31-0551-4706-ab56-f24a8380b527@suse.com>
-Subject: Re: [PATCH 2/2] {libxl,xl}: Add xl trigger debug
-References: <1784539531.8631fc262581453bbf619ec5b2062170.19f7ed8472c000edb5@vates.tech>
- <1784539672.8631fc262581453bbf619ec5b2062170.19f7eda70d8000edb5@vates.tech>
-In-Reply-To: <1784539672.8631fc262581453bbf619ec5b2062170.19f7eda70d8000edb5@vates.tech>
+To: Hongyan Xia <hongyan.xia@transsion.com>,
+ "mingo@redhat.com" <mingo@redhat.com>,
+ "peterz@infradead.org" <peterz@infradead.org>,
+ "juri.lelli@redhat.com" <juri.lelli@redhat.com>,
+ "vincent.guittot@linaro.org" <vincent.guittot@linaro.org>,
+ "dietmar.eggemann@arm.com" <dietmar.eggemann@arm.com>,
+ "rostedt@goodmis.org" <rostedt@goodmis.org>,
+ "bsegall@google.com" <bsegall@google.com>, "mgorman@suse.de"
+ <mgorman@suse.de>, "vschneid@redhat.com" <vschneid@redhat.com>,
+ "kprateek.nayak@amd.com" <kprateek.nayak@amd.com>,
+ Ajay Kaher <ajay.kaher@broadcom.com>,
+ Alexey Makhalov <alexey.makhalov@broadcom.com>,
+ Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>,
+ Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
+ Huacai Chen <chenhuacai@kernel.org>, WANG Xuerui <kernel@xen0n.name>,
+ Madhavan Srinivasan <maddy@linux.ibm.com>,
+ Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>,
+ "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+ Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
+ Thomas Gleixner <tglx@kernel.org>, Borislav Petkov <bp@alien8.de>,
+ Dave Hansen <dave.hansen@linux.intel.com>, "x86@kernel.org"
+ <x86@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Vitaly Kuznetsov <vkuznets@redhat.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: Jiazi Li <jiazi.li@transsion.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "virtualization@lists.linux.dev" <virtualization@lists.linux.dev>,
+ "linux-arm-kernel@lists.infradead.org"
+ <linux-arm-kernel@lists.infradead.org>,
+ "loongarch@lists.linux.dev" <loongarch@lists.linux.dev>,
+ "linuxppc-dev@lists.ozlabs.org" <linuxppc-dev@lists.ozlabs.org>,
+ "linux-riscv@lists.infradead.org" <linux-riscv@lists.infradead.org>,
+ "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Message-ID: <e258581c-a17f-4b5a-aafd-82e513a6288e@suse.com>
+Subject: Re: [PATCH 2/3] sched: Convert paravirt_steal to new static key APIs
+References: <cover.1784538478.git.hongyan.xia@transsion.com>
+ <773bbd8fcd5ef2ebfe1c64303c7a71a56368de69.1784538478.git.hongyan.xia@transsion.com>
+In-Reply-To: <773bbd8fcd5ef2ebfe1c64303c7a71a56368de69.1784538478.git.hongyan.xia@transsion.com>
 
---------------Zb0Rkc1pAxSfr7IPDu6zoum0
-Content-Type: multipart/mixed; boundary="------------zHb70pH6EhL14DLemQkMlpi3"
+--------------GCGLUHAC00omEipMv2gl1qSr
+Content-Type: multipart/mixed; boundary="------------mHisnunnxH4NBSrCYMbsXcuq"
 
---------------zHb70pH6EhL14DLemQkMlpi3
+--------------mHisnunnxH4NBSrCYMbsXcuq
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: base64
 
-T24gMjAuMDcuMjYgMTE6MjcsIFR1IERpbmggd3JvdGU6DQo+IFVzZSBYRU5fRE9NQ1RMX1NF
-TkRUUklHR0VSX0RFQlVHIHRvIGFsbG93IHByaW50aW5nIGRpYWdub3N0aWNzDQo+IGluZm9y
-bWF0aW9uIG9mIGEgc3BlY2lmaWMgZG9tYWluLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogVHUg
-RGluaCA8bmdvYy10dS5kaW5oQHZhdGVzLnRlY2g+DQo+IC0tLQ0KPiAgIHRvb2xzL2xpYnMv
-bGlnaHQvbGlieGxfZG9tYWluLmMgIHwgNCArKysrDQo+ICAgdG9vbHMvbGlicy9saWdodC9s
-aWJ4bF90eXBlcy5pZGwgfCAxICsNCj4gICB0b29scy94bC94bF9jbWR0YWJsZS5jICAgICAg
-ICAgICB8IDIgKy0NCj4gICAzIGZpbGVzIGNoYW5nZWQsIDYgaW5zZXJ0aW9ucygrKSwgMSBk
-ZWxldGlvbigtKQ0KPiANCj4gZGlmZiAtLWdpdCBhL3Rvb2xzL2xpYnMvbGlnaHQvbGlieGxf
-ZG9tYWluLmMgYi90b29scy9saWJzL2xpZ2h0L2xpYnhsX2RvbWFpbi5jDQo+IGluZGV4IDM3
-ZmNkOTI4NzEuLjJkODI5MGRiZmEgMTAwNjQ0DQo+IC0tLSBhL3Rvb2xzL2xpYnMvbGlnaHQv
-bGlieGxfZG9tYWluLmMNCj4gKysrIGIvdG9vbHMvbGlicy9saWdodC9saWJ4bF9kb21haW4u
-Yw0KPiBAQCAtMjE5MCw2ICsyMTkwLDEwIEBAIGludCBsaWJ4bF9zZW5kX3RyaWdnZXIobGli
-eGxfY3R4ICpjdHgsIHVpbnQzMl90IGRvbWlkLA0KPiAgICAgICBjYXNlIExJQlhMX1RSSUdH
-RVJfUzNSRVNVTUU6DQo+ICAgICAgICAgICBkb21haW5fczNfcmVzdW1lKGFvLCBlZ2MsIGRv
-bWlkKTsgLyogbXVzdCBiZSBsYXN0ICovDQo+ICAgICAgICAgICByZXR1cm4gQU9fSU5QUk9H
-UkVTUzsNCj4gKyAgICBjYXNlIExJQlhMX1RSSUdHRVJfREVCVUc6DQo+ICsgICAgICAgIHJj
-ID0geGNfZG9tYWluX3NlbmRfdHJpZ2dlcihjdHgtPnhjaCwgZG9taWQsDQo+ICsgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBYRU5fRE9NQ1RMX1NFTkRUUklHR0VSX0RF
-QlVHLCB2Y3B1aWQpOw0KPiArICAgICAgICBicmVhazsNCg0KWW91IGFyZSBzZW5kaW5nIFZJ
-UlFfREVCVUcgb25seSB0byBvbmUgdmNwdS4gV291bGRuJ3QgaXQgbWFrZSBzZW5zZSB0byBh
-ZGQNCnRoZSBjYXBhYmlsaXR5IHRvIHNlbmQgaXQgdG8gYWxsIHZjcHVzIG9mIGEgZG9tYWlu
-Pw0KDQoNCkp1ZXJnZW4NCg==
---------------zHb70pH6EhL14DLemQkMlpi3
+T24gMjAuMDcuMjYgMTE6MzgsIEhvbmd5YW4gWGlhIHdyb3RlOg0KPiBGcm9tOiBIb25neWFu
+IFhpYSA8aG9uZ3lhbi54aWFAdHJhbnNzaW9uLmNvbT4NCj4gDQo+IHBhcmF2aXJ0X3N0ZWFs
+X3JxX2VuYWJsZWQgYW5kIHBhcmF2aXJ0X3N0ZWFsX2VuYWJsZWQgdXNlIHJhdyBzdGF0aWNf
+a2V5DQo+IEFQSXMgd2hpY2ggYXJlIG5vdyBkZXByZWNhdGVkLiBVc2UgdGhlIG5ldyBBUEkg
+aW5zdGVhZC4NCj4gDQo+IE5vIGZ1bmN0aW9uYWwgY2hhbmdlLg0KPiANCj4gU2lnbmVkLW9m
+Zi1ieTogSG9uZ3lhbiBYaWEgPGhvbmd5YW4ueGlhQHRyYW5zc2lvbi5jb20+DQoNCkFja2Vk
+LWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+DQoNCg0KSnVlcmdlbg0K
+--------------mHisnunnxH4NBSrCYMbsXcuq
 Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Description: OpenPGP public key
@@ -245,25 +300,25 @@ kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
 =3DeeAB
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------zHb70pH6EhL14DLemQkMlpi3--
+--------------mHisnunnxH4NBSrCYMbsXcuq--
 
---------------Zb0Rkc1pAxSfr7IPDu6zoum0--
+--------------GCGLUHAC00omEipMv2gl1qSr--
 
---------------84ZHUl0IOgdOn8wZYiHk8hG8
+--------------xRaoXSGgLc0vY9TPQoiqAmqD
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmpd+G0FAwAAAAAACgkQsN6d1ii/Ey96
-Ngf+OzzSqO1C7qcfyafd+giSdFD3AE+p0cnyTIEyFrlYvz1jcKF02chmlFZukZ7eCFNUIB9KL5ti
-Zp/JCeheqceD6OINeLY+hav6iTu+w3HCNuwvo2ngEFLTDteOk8DpleyKnCYEyJtBfhG/gdVqw91W
-aoSRatQFGLYDnCgeNk6eAa2cyfUTSFNzJZRb/0ZrX6k3NbWlN7V+fXSJleVYHW6B8wGCOJRtgwrB
-M19zpkYlQq3Zv1j4ruwqf2pJwgt0GifobZYTYeYnbj43gehcnIfn5inMUwG6fNOIbIsk3TkMniqL
-X877FNIDvIoYRw7KLvHrdQFX+RyYK1g4FzE78805yA==
-=tWOZ
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmpd+dYFAwAAAAAACgkQsN6d1ii/Ey+9
+dQf+MNwHi0AEoRwM0kGFqoNIkbCEeUDIsEPaZE6ECmiLVl6im8D6Tu03Xw92X3m4V6P4h8KP0cln
+E8xuh65pmvJfOkhbG6w3tnHb2DSaHJ3uBB1XN0hhnoe5LC2FjhTSrxSvUC9FTEmia3pQ/bsUMq1g
+s1BGaaxWDZhqOb5KP+W7tHOds08mT0VosshO8KzjtGtIpD+Hge6qd/LrxV6unk6MKQNSVdDJWwEl
+jB01KSXN6J0RnTSyvU9e/oCJWCrUdEBsjxd2JOFyef4dVLLVeFCm0gp0PLDEZEA+1VQSW0CE6Rjk
+TWjyd5V7/0D5UL8U6E38KHqqAuYS7WBJJGJF/Nx96Q==
+=Pl2M
 -----END PGP SIGNATURE-----
 
---------------84ZHUl0IOgdOn8wZYiHk8hG8--
+--------------xRaoXSGgLc0vY9TPQoiqAmqD--
 
