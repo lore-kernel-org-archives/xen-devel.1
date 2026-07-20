@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B2D8C44515
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 07:56:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1366146.1616047 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B716DC44524
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 07:56:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1366147.1616056 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlirL-0004xt-1K; Mon, 20 Jul 2026 07:56:19 +0000
+	id 1wlirQ-0005EX-8p; Mon, 20 Jul 2026 07:56:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1366146.1616047; Mon, 20 Jul 2026 07:56:19 +0000
+Received: by outflank-mailman (output) from mailman id 1366147.1616056; Mon, 20 Jul 2026 07:56:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlirK-0004xl-U6; Mon, 20 Jul 2026 07:56:18 +0000
-Received: by outflank-mailman (input) for mailman id 1366146;
- Mon, 20 Jul 2026 07:56:18 +0000
+	id 1wlirQ-0005EN-5I; Mon, 20 Jul 2026 07:56:24 +0000
+Received: by outflank-mailman (input) for mailman id 1366147;
+ Mon, 20 Jul 2026 07:56:23 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1wlirK-0004xK-CE
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 07:56:18 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1wlirP-0005DQ-4t
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 07:56:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wlirJ-00FzlO-GA
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 09:56:17 +0200
+ id 1wlirO-00FzlO-HX
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 09:56:22 +0200
 Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6a5dd498-5cb7-0a2a0a5109dd-0a2a4503bdd2-44
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:56:17 +0200
-Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
+ id 6a5dd4a2-5cb7-0a2a0a5109dd-0a2a450387d4-10
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:56:22 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
  by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6a5dd49f-fae8-0a2a45030019-aa0a857cd14f-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:56:17 +0200
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ id 6a5dd4a5-fae8-0a2a45030019-aa0a817c885b-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:56:22 +0200
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-284-JgVuit-kMgK1jPYX8qS_FA-1; Mon,
- 20 Jul 2026 03:56:09 -0400
-Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-329-1ephcCtmPOaVdVcRD1KrdA-1; Mon,
+ 20 Jul 2026 03:56:15 -0400
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 2C2E5195DE19; Mon, 20 Jul 2026 07:56:07 +0000 (UTC)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id A9EA41944EAB; Mon, 20 Jul 2026 07:56:13 +0000 (UTC)
 Received: from localhost (unknown [10.44.22.17])
- by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id AEE44158C; Mon, 20 Jul 2026 07:56:03 +0000 (UTC)
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 6F35E1955F73; Mon, 20 Jul 2026 07:56:10 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,23 +62,22 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1784534175;
+	s=mimecast20190719; t=1784534181;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=IjhaPEySj2ajiT+j39JgZYAcWp9YnSZM59v8er2az0s=;
-	b=CsF/V7WwMgGhUn9q2Gkl5XU7ikCezj6SmlXJPJz7CBDnbbWIUyfQSYARDugWYu0OwztuPj
-	Jfiy4N28MjjsN7FICfhORUivJD8sKsi8w66NXZNPHp7SWYLeZg+LdXVtuafULfE8mxay2j
-	Ui5GRWR8ffZXK0iyNghE8YhAIh25uAQ=
-X-MC-Unique: JgVuit-kMgK1jPYX8qS_FA-1
-X-Mimecast-MFC-AGG-ID: JgVuit-kMgK1jPYX8qS_FA_1784534168
+	bh=COHT7p/iqsTdPamcZicw3oA4ocmXtjDA5E14rv82Tas=;
+	b=iKdZNprc6a6hFAXyuYjlxcFuz4Axt4BqAXs0ykU7zcfvLPrWDRFpRfCwovmXmzivlElivf
+	R0SLGM8CFSqSxIb1mVBGhkcg1HM3yPDfcrggMAgGXhjAwywOgGV1MfLe5h/ucIRrZWEFt2
+	nzACVtCXj6rvx89fXMIAJxPc9fSHG9M=
+X-MC-Unique: 1ephcCtmPOaVdVcRD1KrdA-1
+X-Mimecast-MFC-AGG-ID: 1ephcCtmPOaVdVcRD1KrdA_1784534174
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Mon, 20 Jul 2026 11:55:30 +0400
-Subject: [PATCH 1/8] monitor: annotate monitor_qmp_dispatcher_pop_any() as
- coroutine
+Date: Mon, 20 Jul 2026 11:55:31 +0400
+Subject: [PATCH 2/8] migration: fix qemu_get_counted_string annotation
 MIME-Version: 1.0
-Message-Id: <20260720-co-v1-1-fabb4db3c204@redhat.com>
+Message-Id: <20260720-co-v1-2-fabb4db3c204@redhat.com>
 References: <20260720-co-v1-0-fabb4db3c204@redhat.com>
 In-Reply-To: <20260720-co-v1-0-fabb4db3c204@redhat.com>
 To: qemu-devel@nongnu.org
@@ -97,55 +96,51 @@ Cc: Markus Armbruster <armbru@redhat.com>, Peter Xu <peterx@redhat.com>,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
  xen-devel@lists.xenproject.org, Li Zhijian <lizhijian@fujitsu.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=741;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=799;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=yCQTIOZ3vdGSd0wX9FrJ+Idz4YTHnIHGhg0Q7MfK0Pk=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqXdSJm3lJfJ6ohY7uz1cUw8l9YT42D+RXR3qnr
- vkvsHJbEpaJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCal3UiQAKCRDa6OEJdZac
- 5fkOD/9cRo7MNM4+pqSDsys8gDgW3GuMHh1KDecO9oSlPlFqHPZR8xKJW+UBUPeBLfzWe0SkXVM
- EgwtKvxHf2nJFxJIXoQ3RmYPXZvcu0bbwW09aoTgffW0SvZ90NvdVu5gGRJL77VN7OX13se0qrk
- Nq/FOmPbOi7mlgoQJR2E0tP3td6Pm8T1XtUwoDEDFu+jTS7UUPU7nCNtgL9R8bnpp2ZeYQ+t73l
- jBkM71m6SEkFlWlnmb/EYAedmt/GVhFMfty1Jw32BLdWR5cVsEK+PcKuPluonj2ieIUEyrSnFzc
- nx0SYxXkUVKwQLSgvhaTUREGh1tsD1mic9T97mHZXIdXUtjAPfpF07kbvHFAGGQBpRv5I+fw609
- IF9jB2Ca7v11FvsXm+u2dAservR9BMb14AIdjuPXfFdAFvqkvNoHAqyHojAjgLLFJJ8O2elle1B
- W1og6muJNAUKv7Whp4O6iogUgKaWqfyq+Cxv3v4nmywF80qu3q+gZw42NQg9q2bYR1CtlYN6e22
- +cVsnQvg4S5XHkx2WF0quyrrz/K+xm15m4e0PrLWvLm+MivthT3jm0FDbf5x58HGlcJf7/ALfV2
- 2UvvhgcA6bBTr9KZj/idyZw23D4534bk/iDP1Knx34kY6MkQV3ZNsoNln8fFL63llOBZynv5swW
- M1sHhwUCyZ0bglw==
+ bh=N6+L/HnMPoOeFVHLSkUq4poAfMYUnwCM4couCI5iOrU=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqXdSJlx+ej+bpFQ3bSPwwRWhu1sAyEaprMReIu
+ r6EYhcqf5uJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCal3UiQAKCRDa6OEJdZac
+ 5RAIEACPwUGNBa4OSzulBfcHmirufW7Q9ZWtVD8WRKl4QUwYh0x8Vw0wi8AIy8fzd4vXzHG+9SU
+ iuJwNvxODCPewrohwvuzDEFNhfj/d80OL7s1wW4zuYWr3mt3I48r0HpBZrG6GFx/fh+JKh/lV9V
+ yHM74KG/iXF33Qf21gOX2aw/KCFAfGjQ+YgMRf8j55j3uoZOV4rA4KEho/PctuD0xF8GPfRLBUa
+ V4gpAf8InyTVps3Qj068taPoy3njqHXwytycp4WeAG5Cr3DG4QP20zkw2ufPGebXcbm9WlkW8Kj
+ lANa4PkcYh8h6j6oWGX6Tp27ajZeemLSXckz0ZtPS1cVcoWquGHMHe+fBJMisXqkkRawGqShLQ0
+ 9aajHGOdymqfU7zpvfYOKwyhW9YuCLeZ1am7ukvgliGx0pa5mAVUARArVHBV8XY2Wg2Rao3IPFs
+ a9TW6Y5biJGr3YAKMD6SkBXZzq+86hHy/LFyOw8G0iMixpfLkvb7L3yROPwHKC53pa+xUIIfEkZ
+ SA6L6R04xlo7Pyt5ShqF80J3DWQjzHwmr5tgOOjiAXaP6HLGUimlycrzPfKsC0hEEGdvVzzmtSK
+ qxwC2l46fIJFl/BebrwRX2f81u5r8fg9dW767+2Wb9FQ8HUHoxPKpKXBDAfBPHEhPX6Ufv1LWIi
+ NwJ4kSn5fS9vNnQ==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: rRwGkq0iRjchcu31WImX_NQxiMKmMtPNAgQQpwPw07I_1784534168
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+X-Mimecast-MFC-PROC-ID: Ag06DzM2M9puXfuujwFa8RvHUVOg8xyS-uco_M5Sryg_1784534174
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1784534177-6DCD34E9-4E41D8CB/0/0
+X-purgate-ID: tlsNG-33051d/1784534182-754844E9-E6ED378A/0/0
 X-purgate-type: clean
-X-purgate-size: 743
+X-purgate-size: 801
 
-The function calls qemu_coroutine_yield(), and is called from
-monitor_qmp_dispatcher_co().
-
-Fixes: 60f4f62efeb ("monitor: extract request dequeuing to a new function")
+Fixes: 394b9407e4c ("migration: mark mixed functions that can suspend")
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- monitor/qmp.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ migration/qemu-file.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/monitor/qmp.c b/monitor/qmp.c
-index 223e0643c2a..338d37cb7e5 100644
---- a/monitor/qmp.c
-+++ b/monitor/qmp.c
-@@ -342,7 +342,8 @@ static QMPRequest *monitor_qmp_requests_pop_any_with_lock(void)
-     return req_obj;
- }
- 
--static QMPRequest *monitor_qmp_dispatcher_pop_any(void)
-+static QMPRequest * coroutine_fn
-+monitor_qmp_dispatcher_pop_any(void)
+diff --git a/migration/qemu-file.c b/migration/qemu-file.c
+index d5a48115bd6..f30e13c66d7 100644
+--- a/migration/qemu-file.c
++++ b/migration/qemu-file.c
+@@ -830,7 +830,7 @@ uint64_t qemu_get_be64(QEMUFile *f)
+  *          else 0
+  *          (Note a 0 length string will return 0 either way)
+  */
+-size_t coroutine_fn qemu_get_counted_string(QEMUFile *f, char buf[256])
++size_t coroutine_mixed_fn qemu_get_counted_string(QEMUFile *f, char buf[256])
  {
-     while (true) {
-         /*
+     size_t len = qemu_get_byte(f);
+     size_t res = qemu_get_buffer(f, (uint8_t *)buf, len);
 
 -- 
 2.55.0
