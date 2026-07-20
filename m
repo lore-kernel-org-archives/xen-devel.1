@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9111AC44515
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 07:56:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1366170.1616092 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FF32C44524
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 07:56:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1366178.1616101 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlirl-0006nj-F3; Mon, 20 Jul 2026 07:56:45 +0000
+	id 1wlirp-0007G4-Qt; Mon, 20 Jul 2026 07:56:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1366170.1616092; Mon, 20 Jul 2026 07:56:45 +0000
+Received: by outflank-mailman (output) from mailman id 1366178.1616101; Mon, 20 Jul 2026 07:56:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlirl-0006nc-9p; Mon, 20 Jul 2026 07:56:45 +0000
-Received: by outflank-mailman (input) for mailman id 1366170;
- Mon, 20 Jul 2026 07:56:44 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wlirp-0007Ft-NY; Mon, 20 Jul 2026 07:56:49 +0000
+Received: by outflank-mailman (input) for mailman id 1366178;
+ Mon, 20 Jul 2026 07:56:48 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1wlirk-0006jL-0R
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 07:56:44 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1wlirn-0007Bm-SO
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 07:56:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wlirj-008bDr-DC
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 09:56:43 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wlirn-006OPL-9I
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 09:56:47 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6a5dd4ad-bab6-0a2a0a5309dd-0a2a450bbf00-32
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:56:43 +0200
+ id 6a5dd4a2-e002-0a2a0a5209dd-0a2a450ae50a-44
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:56:47 +0200
 Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6a5dd4ba-b7e8-0a2a450b0019-aa0a857cbde1-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:56:43 +0200
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ id 6a5dd4bd-f2d2-0a2a450a0019-aa0a857cd803-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:56:46 +0200
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-564-ueMBmxX3NoiCR6Lyx6dC8g-1; Mon,
- 20 Jul 2026 03:56:38 -0400
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-436-mvZGYl0uNn6hoGgqO_KziA-1; Mon,
+ 20 Jul 2026 03:56:44 -0400
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 84BF6180135D; Mon, 20 Jul 2026 07:56:36 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 5B0991956062; Mon, 20 Jul 2026 07:56:42 +0000 (UTC)
 Received: from localhost (unknown [10.44.22.17])
- by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 7FDD818001E1; Mon, 20 Jul 2026 07:56:34 +0000 (UTC)
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 9A224300019F; Mon, 20 Jul 2026 07:56:40 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,22 +62,23 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1784534202;
+	s=mimecast20190719; t=1784534205;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=7KbttnCatQH9tfMpq5G3nrwTwf9fJs3VEPqTLa4lGS4=;
-	b=iVe0tUdzL3aMI9gjIFQeCj1JGi2qDlcdoKWdATxBImbqRuYFYDalkvmvJ3cpyRNf7iCWNC
-	CUyjLo6lpNrrL2NNQCm7qm1PtBwbwVatdsB8KPRUlkW03UuhvxQXlCjdgCH30Q4LL48VOA
-	IWMC4KGe9/dQjlHyRhNM7n80cePTqVY=
-X-MC-Unique: ueMBmxX3NoiCR6Lyx6dC8g-1
-X-Mimecast-MFC-AGG-ID: ueMBmxX3NoiCR6Lyx6dC8g_1784534196
+	bh=xTUNd/oAznZ+5DBJcrLXPZUtAhiWELpozE94IO79kVM=;
+	b=XKk+GR8AnbUtw8PmqRJ9nSJaGK5jkug+K5W1VErYd3UR8w2iXNE4euOYa754Svgzmt8agI
+	r61uxwVONPyUKWClJRu3e6+hS/xLH7qgX4v0c0hyBcHWcGvBMarYMvZzNMVytDBeaCdoBy
+	AlePbv8uWA3dFuci5n0sY4ZQYoMt/mg=
+X-MC-Unique: mvZGYl0uNn6hoGgqO_KziA-1
+X-Mimecast-MFC-AGG-ID: mvZGYl0uNn6hoGgqO_KziA_1784534202
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Mon, 20 Jul 2026 11:55:35 +0400
-Subject: [PATCH 6/8] block: add missing coroutine_fn annotations
+Date: Mon, 20 Jul 2026 11:55:36 +0400
+Subject: [PATCH 7/8] hw/9pfs: annotate V9fsTransport callbacks as
+ coroutine_fn
 MIME-Version: 1.0
-Message-Id: <20260720-co-v1-6-fabb4db3c204@redhat.com>
+Message-Id: <20260720-co-v1-7-fabb4db3c204@redhat.com>
 References: <20260720-co-v1-0-fabb4db3c204@redhat.com>
 In-Reply-To: <20260720-co-v1-0-fabb4db3c204@redhat.com>
 To: qemu-devel@nongnu.org
@@ -96,176 +97,315 @@ Cc: Markus Armbruster <armbru@redhat.com>, Peter Xu <peterx@redhat.com>,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
  xen-devel@lists.xenproject.org, Li Zhijian <lizhijian@fujitsu.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5107;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=12144;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=MElhPudYde5N+AmBqX8hc/jkArXPzRKcda7rMFMqgZk=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqXdSJQZyOC7EnnGJBFtdOw9SYol+ehCZ6GIiJn
- Cq9QWoT7wWJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCal3UiQAKCRDa6OEJdZac
- 5d/3D/9H9eWiSP6C6d6WvD53puNrUJgnuw0goXTDAtzGeGO+v0k/NJRuPcV75b11nLEmePNBtdK
- CtfU7+pYuJ7IP26KuzaKT4k/oPrsL2oTXWQnmMXJBRh1qLGBqby2jLiWPs+WW3ZcYXqlBBljb/m
- BoFMAlunoJOZCh4Matysnrlgc/0TqZfYQkTzZnoAgDqQir+AjzFwxLKDOd9su+gbWibeyLCcuxv
- Ve4yev3jk4PHQZJj8SjObjDfJ1bGMapRkr/2kKtF8Hfe15lGegb/tmk2dvUe+sy+saqbQVUuBkf
- kc3tpBJSghwNTNjBRkDrab9+psFk2aj+vuzNrhQ1BJgjipZ15UxpgqyINd0xPdHI4F7yaQwXK+t
- btMjOnyrxv9kABv7xoOZeFJPzr5Wp4DRUcx4x0QP6b2lqzStrAdsnYckaVZy86JY/TP3Qrc0IlP
- e0zAWVnVONmkuQDZ8BRbOypopE/7Y83/RHkVn4ucCTHjyitVsVrwUBCUZSzhb2M5GOsBfkaUlzd
- x+5MYr8zFtcrX2Jlhf0zk+KDUsn43gm+RPr3Ot5vMlrqx7eDvUhN++G85/Dc9kdVTJCGMKlghaI
- /2fJnx4sqs+wBfbvx6mmDwbMv8lzQJg9DghaOAqEt7Iq1U2QoD4J/9tB3MB5kJBqOWCGwIrNkRw
- YfBQTcHKkoJvNig==
+ bh=VQVGJfDT80KbK+AoENxEwrM6bfEWbX5AlZ6JqJMH9mA=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqXdSJ6Z/QPH7kTs/Jsir+p4sjk7mKxJ2hfNQ1M
+ /Fy5ozeaXyJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCal3UiQAKCRDa6OEJdZac
+ 5dFEEACKxwmBieIUQRK10iarYOhSucm6MTcqL3qywn4+lGJ+NNksfanaaamPcctgBnspAtjzBHc
+ seNnEj8oQVxTaRaPY/pTyTNKyGEnVhVyIy6qyrEvyz1QNeNXs0ac/kb3lkBnjEnuVD89uK8LuMv
+ zd7CEVW38RWWzwUAhalsgpqYHHsoirgJzZjEL4RVWW1ENzejaP8YO3qQjkBwMGH1z5q3bWsytIC
+ nF3JHbSrgeCu50zrAEzgW7Go5RmySvrjGQ1ZUrb6815X3LJp5jwOXJzftQK4JMqkcR6OXqHPS+a
+ l9RAUVe9S3pPIYjIrDBKPhnOwvl+852JcQa7a4cttv5OQijV5+V1W34s2Y9yRQC0H1NwGunB489
+ MXVCUbsmLtlAsrYXuPbtVELkADlfL/wkuI93Zx7ifI2rUVHkPR2oLtIEUNgSqyA3d1CTHCE4+9B
+ zBfCbHrDJruj+KN6vEgePCqfdVdm//Z0RwpTfVIGiCCpv7pqCLzWOi5fJ8Y9/g+VvMhnpVZfEzm
+ 3tC7BGwwMK1MBQycfVamm7lA9bpt2iEGgPLPfbpkMh/x97A1rRFEdPgDbOBuptkMUu3uc4NzG1B
+ xqqTQRDsN02SYrXXj6jQR0QJmIpCSszEUl7OmaHT1g+Zae2RBRdBloaqbDujHbHbm3nlZ9YE5sA
+ Z8Rwyt+9qwQKv8w==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
-X-Mimecast-MFC-PROC-ID: vVwH-QvV6ykjHbsyTHIxPJQ6qnkiOJ4-Y3j05xdPLvA_1784534196
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+X-Mimecast-MFC-PROC-ID: 0VF2pb0k2WT6-UNijesCY355SA8lswKj3l5O9552cV8_1784534202
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1784534203-1BCD79EA-1B41C265/0/0
+X-purgate-ID: tlsNG-4011c0/1784534207-5A3DCCFC-3F4119B5/0/0
 X-purgate-type: clean
-X-purgate-size: 5109
+X-purgate-size: 12146
 
-The functions call coroutine functions or are called by coroutine.
-
-Add an assert() in qcow2_do_close() code path which calls a
-no_coroutine_fn bdrv_graph_wrlock_drained().
+All V9fsTransport callbacks are invoked exclusively from coroutine
+context (the v9fs_* PDU handlers). Annotate the function pointer
+types in V9fsTransport and all implementations (virtio and xen
+backends), as well as intermediate callers in 9p.c (pdu_marshal,
+pdu_unmarshal, v9fs_init_qiov_from_pdu, etc.).
 
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- include/block/blockjob_int.h |  2 +-
- block/crypto.c               | 13 +++++++------
- block/io.c                   |  8 +++++---
- block/parallels.c            |  5 +++--
- block/qcow2.c                | 11 +++++++----
- blockjob.c                   |  3 ++-
- 6 files changed, 25 insertions(+), 17 deletions(-)
+ hw/9pfs/9p.h               | 26 +++++++++++++++-----------
+ hw/9pfs/9p.c               | 31 +++++++++++++++++++------------
+ hw/9pfs/virtio-9p-device.c | 24 +++++++++++++-----------
+ hw/9pfs/xen-9p-backend.c   | 34 +++++++++++++++++-----------------
+ 4 files changed, 64 insertions(+), 51 deletions(-)
 
-diff --git a/include/block/blockjob_int.h b/include/block/blockjob_int.h
-index 4c3d2e25a20..34e172874fa 100644
---- a/include/block/blockjob_int.h
-+++ b/include/block/blockjob_int.h
-@@ -150,7 +150,7 @@ void block_job_ratelimit_processed_bytes(BlockJob *job, uint64_t n);
-  * Put the job to sleep (assuming that it wasn't canceled) to throttle it to the
-  * right speed according to its rate limiting.
-  */
--void block_job_ratelimit_sleep(BlockJob *job);
-+void coroutine_fn block_job_ratelimit_sleep(BlockJob *job);
+diff --git a/hw/9pfs/9p.h b/hw/9pfs/9p.h
+index 1a309664f6e..0e52ffbdf38 100644
+--- a/hw/9pfs/9p.h
++++ b/hw/9pfs/9p.h
+@@ -472,17 +472,21 @@ void pdu_submit(V9fsPDU *pdu, P9MsgHeader *hdr);
+ void v9fs_reset(V9fsState *s);
  
- /**
-  * block_job_error_action:
-diff --git a/block/crypto.c b/block/crypto.c
-index 36abb7af468..8a34d92fded 100644
---- a/block/crypto.c
-+++ b/block/crypto.c
-@@ -56,12 +56,13 @@ static int block_crypto_probe_generic(QCryptoBlockFormat format,
- }
+ struct V9fsTransport {
+-    ssize_t     (*pdu_vmarshal)(V9fsPDU *pdu, size_t offset, const char *fmt,
+-                                va_list ap);
+-    ssize_t     (*pdu_vunmarshal)(V9fsPDU *pdu, size_t offset, const char *fmt,
+-                                  va_list ap);
+-    void        (*init_in_iov_from_pdu)(V9fsPDU *pdu, struct iovec **piov,
+-                                        unsigned int *pniov, size_t size);
+-    void        (*init_out_iov_from_pdu)(V9fsPDU *pdu, struct iovec **piov,
+-                                         unsigned int *pniov, size_t size);
+-    void        (*push_and_notify)(V9fsPDU *pdu);
+-    size_t      (*msize_limit)(V9fsState *s);
+-    size_t      (*response_buffer_size)(V9fsPDU *pdu);
++    ssize_t     coroutine_fn (*pdu_vmarshal)(V9fsPDU *pdu, size_t offset,
++                                             const char *fmt, va_list ap);
++    ssize_t     coroutine_fn (*pdu_vunmarshal)(V9fsPDU *pdu, size_t offset,
++                                               const char *fmt, va_list ap);
++    void        coroutine_fn (*init_in_iov_from_pdu)(V9fsPDU *pdu,
++                                                     struct iovec **piov,
++                                                     unsigned int *pniov,
++                                                     size_t size);
++    void        coroutine_fn (*init_out_iov_from_pdu)(V9fsPDU *pdu,
++                                                      struct iovec **piov,
++                                                      unsigned int *pniov,
++                                                      size_t size);
++    void        coroutine_fn (*push_and_notify)(V9fsPDU *pdu);
++    size_t      coroutine_fn (*msize_limit)(V9fsState *s);
++    size_t      coroutine_fn (*response_buffer_size)(V9fsPDU *pdu);
+ };
  
+ #endif
+diff --git a/hw/9pfs/9p.c b/hw/9pfs/9p.c
+index 3119f011173..00cfbae6dd5 100644
+--- a/hw/9pfs/9p.c
++++ b/hw/9pfs/9p.c
+@@ -55,7 +55,8 @@ enum {
  
--static int block_crypto_read_func(QCryptoBlock *block,
--                                  size_t offset,
--                                  uint8_t *buf,
--                                  size_t buflen,
--                                  void *opaque,
--                                  Error **errp)
-+static int coroutine_mixed_fn
-+block_crypto_read_func(QCryptoBlock *block,
-+                       size_t offset,
-+                       uint8_t *buf,
-+                       size_t buflen,
-+                       void *opaque,
-+                       Error **errp)
+ P9ARRAY_DEFINE_TYPE(V9fsPath, v9fs_path_free);
+ 
+-static ssize_t pdu_marshal(V9fsPDU *pdu, size_t offset, const char *fmt, ...)
++static ssize_t coroutine_fn
++pdu_marshal(V9fsPDU *pdu, size_t offset, const char *fmt, ...)
  {
-     BlockDriverState *bs = opaque;
-     BlockCrypto *crypto = bs->opaque;
-diff --git a/block/io.c b/block/io.c
-index a916b236c3c..99dd16864a3 100644
---- a/block/io.c
-+++ b/block/io.c
-@@ -346,8 +346,9 @@ static void coroutine_fn bdrv_co_yield_to_drain(BlockDriverState *bs,
-     assert(data.done);
- }
- 
--static void bdrv_do_drained_begin(BlockDriverState *bs, BdrvChild *parent,
--                                  bool poll)
-+static void coroutine_mixed_fn
-+bdrv_do_drained_begin(BlockDriverState *bs, BdrvChild *parent,
-+                      bool poll)
- {
-     IO_OR_GS_CODE();
- 
-@@ -397,7 +398,8 @@ bdrv_drained_begin(BlockDriverState *bs)
-  * This function does not poll, nor must any of its recursively called
-  * functions.
-  */
--static void bdrv_do_drained_end(BlockDriverState *bs, BdrvChild *parent)
-+static void coroutine_mixed_fn
-+bdrv_do_drained_end(BlockDriverState *bs, BdrvChild *parent)
- {
-     IO_OR_GS_CODE();
- 
-diff --git a/block/parallels.c b/block/parallels.c
-index 7a90fb5220b..46a6e8f2743 100644
---- a/block/parallels.c
-+++ b/block/parallels.c
-@@ -142,8 +142,9 @@ static uint32_t host_cluster_index(BDRVParallelsState *s, int64_t off)
-     return off / s->cluster_size;
- }
- 
--static int64_t block_status(BDRVParallelsState *s, int64_t sector_num,
--                            int nb_sectors, int *pnum)
-+static int64_t coroutine_fn
-+block_status(BDRVParallelsState *s, int64_t sector_num,
-+             int nb_sectors, int *pnum)
- {
-     int64_t start_off = -2, prev_end_off = -2;
- 
-diff --git a/block/qcow2.c b/block/qcow2.c
-index 19271b10a49..161626fa3cb 100644
---- a/block/qcow2.c
-+++ b/block/qcow2.c
-@@ -1287,9 +1287,10 @@ fail:
- }
- 
- /* s_locked specifies whether s->lock is held or not */
--static void qcow2_update_options_commit(BlockDriverState *bs,
--                                        Qcow2ReopenState *r,
--                                        bool s_locked)
-+static void coroutine_fn
-+qcow2_update_options_commit(BlockDriverState *bs,
-+                            Qcow2ReopenState *r,
-+                            bool s_locked)
- {
-     BDRVQcow2State *s = bs->opaque;
-     int i;
-@@ -2126,7 +2127,8 @@ fail:
+     ssize_t ret;
+     va_list ap;
+@@ -67,7 +68,8 @@ static ssize_t pdu_marshal(V9fsPDU *pdu, size_t offset, const char *fmt, ...)
      return ret;
  }
  
--static void qcow2_reopen_commit(BDRVReopenState *state)
-+static void coroutine_fn
-+qcow2_reopen_commit(BDRVReopenState *state)
+-static ssize_t pdu_unmarshal(V9fsPDU *pdu, size_t offset, const char *fmt, ...)
++static ssize_t coroutine_fn
++pdu_unmarshal(V9fsPDU *pdu, size_t offset, const char *fmt, ...)
  {
-     BDRVQcow2State *s = state->bs->opaque;
- 
-@@ -2905,6 +2907,7 @@ qcow2_do_close(BlockDriverState *bs, bool close_data_file)
-     g_free(s->image_backing_format);
- 
-     if (close_data_file && has_data_file(bs)) {
-+        assert(!qemu_in_coroutine());
-         GLOBAL_STATE_CODE();
-         bdrv_graph_rdunlock_main_loop();
-         bdrv_graph_wrlock_drained();
-diff --git a/blockjob.c b/blockjob.c
-index f3b11cc7a19..f3ad6a93125 100644
---- a/blockjob.c
-+++ b/blockjob.c
-@@ -338,7 +338,8 @@ void block_job_ratelimit_processed_bytes(BlockJob *job, uint64_t n)
-     ratelimit_calculate_delay(&job->limit, n);
+     ssize_t ret;
+     va_list ap;
+@@ -1841,7 +1843,8 @@ out_nofid:
+     pdu_complete(pdu, err);
  }
  
--void block_job_ratelimit_sleep(BlockJob *job)
-+void coroutine_fn
-+block_job_ratelimit_sleep(BlockJob *job)
+-static int v9fs_walk_marshal(V9fsPDU *pdu, uint16_t nwnames, V9fsQID *qids)
++static int coroutine_fn
++v9fs_walk_marshal(V9fsPDU *pdu, uint16_t nwnames, V9fsQID *qids)
  {
-     uint64_t delay_ns;
+     int i;
+     ssize_t err;
+@@ -2363,9 +2366,10 @@ out_nofid:
+  * The resulting QEMUIOVector has heap-allocated iovecs and must be cleaned up
+  * with qemu_iovec_destroy().
+  */
+-static void v9fs_init_qiov_from_pdu(QEMUIOVector *qiov, V9fsPDU *pdu,
+-                                    size_t skip, size_t size,
+-                                    bool is_write)
++static void coroutine_fn
++v9fs_init_qiov_from_pdu(QEMUIOVector *qiov, V9fsPDU *pdu,
++                        size_t skip, size_t size,
++                        bool is_write)
+ {
+     QEMUIOVector elem;
+     struct iovec *iov;
+@@ -2382,8 +2386,9 @@ static void v9fs_init_qiov_from_pdu(QEMUIOVector *qiov, V9fsPDU *pdu,
+     qemu_iovec_concat(qiov, &elem, skip, size);
+ }
  
+-static int v9fs_xattr_read(V9fsState *s, V9fsPDU *pdu, V9fsFidState *fidp,
+-                           uint64_t off, uint32_t max_count)
++static int coroutine_fn
++v9fs_xattr_read(V9fsState *s, V9fsPDU *pdu, V9fsFidState *fidp,
++                uint64_t off, uint32_t max_count)
+ {
+     ssize_t err;
+     size_t offset = 7;
+@@ -2793,9 +2798,10 @@ out_nofid:
+     pdu_complete(pdu, retval);
+ }
+ 
+-static int v9fs_xattr_write(V9fsState *s, V9fsPDU *pdu, V9fsFidState *fidp,
+-                            uint64_t off, uint32_t count,
+-                            struct iovec *sg, int cnt)
++static int coroutine_fn
++v9fs_xattr_write(V9fsState *s, V9fsPDU *pdu, V9fsFidState *fidp,
++                 uint64_t off, uint32_t count,
++                 struct iovec *sg, int cnt)
+ {
+     int i, to_copy;
+     ssize_t err = 0;
+@@ -3729,7 +3735,8 @@ out_nofid:
+     pdu_complete(pdu, err);
+ }
+ 
+-static int v9fs_fill_statfs(V9fsState *s, V9fsPDU *pdu, struct statfs *stbuf)
++static int coroutine_fn
++v9fs_fill_statfs(V9fsState *s, V9fsPDU *pdu, struct statfs *stbuf)
+ {
+     uint32_t f_type;
+     uint32_t f_bsize;
+diff --git a/hw/9pfs/virtio-9p-device.c b/hw/9pfs/virtio-9p-device.c
+index 50dc93091d3..b2dd859fb56 100644
+--- a/hw/9pfs/virtio-9p-device.c
++++ b/hw/9pfs/virtio-9p-device.c
+@@ -28,7 +28,7 @@
+ #include "qemu/module.h"
+ #include "system/qtest.h"
+ 
+-static void virtio_9p_push_and_notify(V9fsPDU *pdu)
++static void coroutine_fn virtio_9p_push_and_notify(V9fsPDU *pdu)
+ {
+     V9fsState *s = pdu->s;
+     V9fsVirtioState *v = container_of(s, V9fsVirtioState, state);
+@@ -117,8 +117,8 @@ static void virtio_9p_reset(VirtIODevice *vdev)
+     v9fs_reset(&v->state);
+ }
+ 
+-static ssize_t virtio_pdu_vmarshal(V9fsPDU *pdu, size_t offset,
+-                                   const char *fmt, va_list ap)
++static ssize_t coroutine_fn
++virtio_pdu_vmarshal(V9fsPDU *pdu, size_t offset, const char *fmt, va_list ap)
+ {
+     V9fsState *s = pdu->s;
+     V9fsVirtioState *v = container_of(s, V9fsVirtioState, state);
+@@ -135,8 +135,8 @@ static ssize_t virtio_pdu_vmarshal(V9fsPDU *pdu, size_t offset,
+     return ret;
+ }
+ 
+-static ssize_t virtio_pdu_vunmarshal(V9fsPDU *pdu, size_t offset,
+-                                     const char *fmt, va_list ap)
++static ssize_t coroutine_fn
++virtio_pdu_vunmarshal(V9fsPDU *pdu, size_t offset, const char *fmt, va_list ap)
+ {
+     V9fsState *s = pdu->s;
+     V9fsVirtioState *v = container_of(s, V9fsVirtioState, state);
+@@ -152,8 +152,9 @@ static ssize_t virtio_pdu_vunmarshal(V9fsPDU *pdu, size_t offset,
+     return ret;
+ }
+ 
+-static void virtio_init_in_iov_from_pdu(V9fsPDU *pdu, struct iovec **piov,
+-                                        unsigned int *pniov, size_t size)
++static void coroutine_fn
++virtio_init_in_iov_from_pdu(V9fsPDU *pdu, struct iovec **piov,
++                            unsigned int *pniov, size_t size)
+ {
+     V9fsState *s = pdu->s;
+     V9fsVirtioState *v = container_of(s, V9fsVirtioState, state);
+@@ -172,8 +173,9 @@ static void virtio_init_in_iov_from_pdu(V9fsPDU *pdu, struct iovec **piov,
+     *pniov = elem->in_num;
+ }
+ 
+-static void virtio_init_out_iov_from_pdu(V9fsPDU *pdu, struct iovec **piov,
+-                                         unsigned int *pniov, size_t size)
++static void coroutine_fn
++virtio_init_out_iov_from_pdu(V9fsPDU *pdu, struct iovec **piov,
++                             unsigned int *pniov, size_t size)
+ {
+     V9fsState *s = pdu->s;
+     V9fsVirtioState *v = container_of(s, V9fsVirtioState, state);
+@@ -192,13 +194,13 @@ static void virtio_init_out_iov_from_pdu(V9fsPDU *pdu, struct iovec **piov,
+     *pniov = elem->out_num;
+ }
+ 
+-static size_t virtio_9p_msize_limit(V9fsState *s)
++static size_t coroutine_fn virtio_9p_msize_limit(V9fsState *s)
+ {
+     const size_t guestPageSize = 4096;
+     return (VIRTQUEUE_MAX_SIZE - 2) * guestPageSize;
+ }
+ 
+-static size_t virtio_9p_response_buffer_size(V9fsPDU *pdu)
++static size_t coroutine_fn virtio_9p_response_buffer_size(V9fsPDU *pdu)
+ {
+     V9fsState *s = pdu->s;
+     V9fsVirtioState *v = container_of(s, V9fsVirtioState, state);
+diff --git a/hw/9pfs/xen-9p-backend.c b/hw/9pfs/xen-9p-backend.c
+index 24c90d97ec9..7f674f84642 100644
+--- a/hw/9pfs/xen-9p-backend.c
++++ b/hw/9pfs/xen-9p-backend.c
+@@ -131,10 +131,10 @@ static void xen_9pfs_out_sg(Xen9pfsRing *ring,
+     }
+ }
+ 
+-static ssize_t xen_9pfs_pdu_vmarshal(V9fsPDU *pdu,
+-                                     size_t offset,
+-                                     const char *fmt,
+-                                     va_list ap)
++static ssize_t coroutine_fn xen_9pfs_pdu_vmarshal(V9fsPDU *pdu,
++                                                  size_t offset,
++                                                  const char *fmt,
++                                                  va_list ap)
+ {
+     Xen9pfsDev *xen_9pfs = container_of(pdu->s, Xen9pfsDev, state);
+     struct iovec in_sg[2];
+@@ -155,10 +155,10 @@ static ssize_t xen_9pfs_pdu_vmarshal(V9fsPDU *pdu,
+     return ret;
+ }
+ 
+-static ssize_t xen_9pfs_pdu_vunmarshal(V9fsPDU *pdu,
+-                                       size_t offset,
+-                                       const char *fmt,
+-                                       va_list ap)
++static ssize_t coroutine_fn xen_9pfs_pdu_vunmarshal(V9fsPDU *pdu,
++                                                    size_t offset,
++                                                    const char *fmt,
++                                                    va_list ap)
+ {
+     Xen9pfsDev *xen_9pfs = container_of(pdu->s, Xen9pfsDev, state);
+     struct iovec out_sg[2];
+@@ -178,10 +178,10 @@ static ssize_t xen_9pfs_pdu_vunmarshal(V9fsPDU *pdu,
+     return ret;
+ }
+ 
+-static void xen_9pfs_init_out_iov_from_pdu(V9fsPDU *pdu,
+-                                           struct iovec **piov,
+-                                           unsigned int *pniov,
+-                                           size_t size)
++static void coroutine_fn xen_9pfs_init_out_iov_from_pdu(V9fsPDU *pdu,
++                                                        struct iovec **piov,
++                                                        unsigned int *pniov,
++                                                        size_t size)
+ {
+     Xen9pfsDev *xen_9pfs = container_of(pdu->s, Xen9pfsDev, state);
+     Xen9pfsRing *ring = &xen_9pfs->rings[pdu->tag % xen_9pfs->num_rings];
+@@ -195,10 +195,10 @@ static void xen_9pfs_init_out_iov_from_pdu(V9fsPDU *pdu,
+     *pniov = num;
+ }
+ 
+-static void xen_9pfs_init_in_iov_from_pdu(V9fsPDU *pdu,
+-                                          struct iovec **piov,
+-                                          unsigned int *pniov,
+-                                          size_t size)
++static void coroutine_fn xen_9pfs_init_in_iov_from_pdu(V9fsPDU *pdu,
++                                                       struct iovec **piov,
++                                                       unsigned int *pniov,
++                                                       size_t size)
+ {
+     Xen9pfsDev *xen_9pfs = container_of(pdu->s, Xen9pfsDev, state);
+     Xen9pfsRing *ring = &xen_9pfs->rings[pdu->tag % xen_9pfs->num_rings];
+@@ -227,7 +227,7 @@ again:
+     *pniov = num;
+ }
+ 
+-static void xen_9pfs_push_and_notify(V9fsPDU *pdu)
++static void coroutine_fn xen_9pfs_push_and_notify(V9fsPDU *pdu)
+ {
+     RING_IDX prod;
+     Xen9pfsDev *priv = container_of(pdu->s, Xen9pfsDev, state);
 
 -- 
 2.55.0
