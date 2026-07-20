@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81C36C44515
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 16:02:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1367158.1617025 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 210C8C44515
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 16:03:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1367166.1617053 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlqS4-0001Lq-W8; Mon, 20 Jul 2026 16:02:45 +0000
+	id 1wlqSB-0002WN-DU; Mon, 20 Jul 2026 16:02:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1367158.1617025; Mon, 20 Jul 2026 16:02:44 +0000
+Received: by outflank-mailman (output) from mailman id 1367166.1617053; Mon, 20 Jul 2026 16:02:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlqS4-0001K4-In; Mon, 20 Jul 2026 16:02:44 +0000
-Received: by outflank-mailman (input) for mailman id 1367158;
- Mon, 20 Jul 2026 16:02:43 +0000
+	id 1wlqSB-0002Vb-3T; Mon, 20 Jul 2026 16:02:51 +0000
+Received: by outflank-mailman (input) for mailman id 1367166;
+ Mon, 20 Jul 2026 16:02:49 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wlqS3-0000wd-8D
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 16:02:43 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wlqS8-00028v-NL
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 16:02:48 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wlqS2-007AIh-LM
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 18:02:42 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wlqS8-007AIH-3f
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 18:02:48 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a5e469c-5cb7-0a2a0a5109dd-0a2a450a8204-16
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 18:02:42 +0200
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a5e468a-e002-0a2a0a5209dd-0a2a4505d2c2-46
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 18:02:48 +0200
+Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a5e46a2-f2d2-0a2a450a0019-d1558034bc69-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 18:02:42 +0200
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-4921eed3fa2so78889385e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:02:42 -0700 (PDT)
+ id 6a5e46a7-4cb1-0a2a45050019-d155dd2aace0-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 18:02:48 +0200
+Received: by mail-wr1-f42.google.com with SMTP id
+ ffacd0b85a97d-47f703a9e5dso520767f8f.0
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:02:47 -0700 (PDT)
 Received: from fedora (user-109-243-144-234.play-internet.pl.
  [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49563eee22esm31331765e9.1.2026.07.20.09.02.40
+ 5b1f17b1804b1-49563eee22esm31331765e9.1.2026.07.20.09.02.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 09:02:40 -0700 (PDT)
+ Mon, 20 Jul 2026 09:02:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,40 +54,40 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784563362; x=1785168162; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1784563367; x=1785168167; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=XgMU0pUtppSI68GIa5n7RmZzS7ral2/2Ov01KOO67Uk=;
-        b=DJ/jK+POYsldfJ+TKZt9Z9a7SXu61+8htVLPB1G2EpUWdyahkv5TC0/OWjeoVTpFkY
-         otAYpOhryaSxCYE2RFlDaCM44D9/YgZld/Tvzvt5R6k2wezfV24Hwy71SPVTG1/O1AeY
-         U5GIPp0HzNwqfFRUzWtT+DeJ9xnxswNnn7FPbeRM1eXnmjdyVq23clTHZ5SmvtpsVYiM
-         5TVCIkaORBXPhiQxwSyfkydX2QUBD75mMnTTsfVWWsrySyN4VEh7pKvjGvk/dKhuvztq
-         lqrXRzulG3EEnVpWiGt1JW254V+DoIM9m//p4CNlAQh/Qh+uEZEYS5BeSyFlxdL90d8o
-         dlHw==
+        bh=hF0EPypo37qwTT5HP45kbII8Abg9/xZofbCDxXGst1A=;
+        b=ElxYcvlglDoP6BCX3FjwxdcIOcdUZ1iwxqlsN3mkMzJeBaLnkeA6S4+KczUEnm07rH
+         KUnfikERamzMYJZZO4nfqIOal7Wue22Ic1KVPQf4d0MHQwhpt3zT0jtl0UpGfrwHZxPQ
+         lENIgGZ+/H40CabkNgIrZadx2OHUVSnnSnkW+VqpdncRGent3MnyPb7EozJ7oVCK1Qjp
+         4m4CyCwJSzJXqEapc+d4PltVHihnrr2d3fzRXRAx/wXDE1741JvUMwgRLKi1fR0Y2fdJ
+         AD2qqWxnGSOirXdP7qlfaJZXQgqZk/peSY8XLZymvTbZllw69ObgRsPlWcWv+Bo8tDbq
+         Gj/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784563362; x=1785168162;
+        d=1e100.net; s=20251104; t=1784563367; x=1785168167;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=XgMU0pUtppSI68GIa5n7RmZzS7ral2/2Ov01KOO67Uk=;
-        b=b8WcYtow4zeYuQxclqcxFZXjmuQ8W8QgTHkk74H4H+CiBwlMImo/DSEZ02bCguP4fv
-         Ve9bNoxAQ2M0KJFDi9tNUG/xLI4je9p9nnn5d9GY+9DqinFXUEeC0UjaMpNtRkjZ5QuM
-         /mvL9cDOpBU44SGY99lhMwrzYCw2mnSWKOmltHqyAtr6/lFW5g/CdkPArClJ43hpyikC
-         /fuKw2ih/gA2LczwYl5hNvg3Jajirl/b72J7BIQ3dMeSsYdFtmRzYXgecaSNAL6LKsfc
-         xCGyQR3UONMZ0TKznxBaK9KMV2KSF/6bQLVyqd7D0y58gq5mDIuRlacObv4X67dlHYbY
-         1Efg==
-X-Gm-Message-State: AOJu0YxJosDZHzTcsrpUFpAjAz2AAzb+jh2q4swxLC9U1IoO96/6eT6a
-	qUmr8s6SonkpxhBP2umItqpzWI2i6I8QoqZG2u1rgTe9GmG6kBcH8GNfeV0wJw==
-X-Gm-Gg: AfdE7clF8FNACmB8GYNFKD9ORapdatTZ22gzMpWd/qE/MGn3JfkPDMMuEsEdUQ/7oIV
-	W4Ko01dL37GOhwbPSG/NjJBQ3lUffio5hf9tIDC/la//MT+7Wn7aAyXFzuOYEJoXZD4VgZhpjNi
-	Oydjago+AQFJ6/ZelaN0lwILLCyK9fajW7EIexc29JFa7uZQi5XrjrA1Cy00J7gg8jqOnnZynfP
-	2em59gVQAX1GQE2rLOX9KWPX2ayliie6OP3/xQTqaK2SWLpdVyZJRBPmpc9JgPAid8okym2T4Ju
-	rcpphjPGEIgm+ZfDVgJvs1kQDEwv3ch4EYy9K1q3SxAjQ5iPSGa8e+pSR6L3JDZhfFxIIlzr8AS
-	YQgpD66KHPAXeNaEZEnaOeZLXbq+v4YA/VSrm80tbA9gRdXi5TONPVqfdV0eS2kFpRqZG50wW+Y
-	DH/zjtx8IAx20up2f/spP/mQ1aYnEaujlOK/7oXZA792myyh0=
-X-Received: by 2002:a05:600c:1f8c:b0:493:bfea:2780 with SMTP id 5b1f17b1804b1-4954a3db165mr180616745e9.9.1784563361746;
-        Mon, 20 Jul 2026 09:02:41 -0700 (PDT)
+        bh=hF0EPypo37qwTT5HP45kbII8Abg9/xZofbCDxXGst1A=;
+        b=o43C2D1SCOFuWzxH+Js/Z+stpaQSqDMqUQQJaE/cqVCMMKjTcLvQo0Ja4Qpj9yuoMe
+         EYsO9lVwwx1taNyQ7D1dxju10A/NOOmw//B9IIYGYVAvlQwZLCqFwG2R+ecK+T8HdP4a
+         muEsmaolFfLz1VK+kb88IVcQ1ySWetH9rtynV6ghumBF2cgtwsj7h/J2i9QJOxqpOsjP
+         5PEOXQfdlDJwshZRNQy2lv93pbgPsQf938ofmoZcFxKszhCOR3iW3hBZnLfTKwXzBrZV
+         e/PG1Tf0KfwhVxCa1NP1xW52zj/vvnE9UmSfOyTKtkHKNll5NidOxl4jxuwot1BhpF+Q
+         KUvQ==
+X-Gm-Message-State: AOJu0YxnwbTiviWIWvisHL2oMn8aT+xjdy80flpa0m1DZWVeV/wrAr0i
+	BDWHXZnu0w9dR8j9iBrS42CPOtfYgUsS+5OFxolRZjWs+5e2Fj2WA7m6x7IhAA==
+X-Gm-Gg: AfdE7cnPpnoE7MsTkmx34AE4RsTiX9kdSiX3KJielifJQwmRBZYcEGT9elVQTsAZ79B
+	USVuGM5X8Sdi6Xdjh0T12wry3cRPpjq1tt7H/tA2iNgTlrwS36ye0LNEtxe6iwjMf6uhevhHrwK
+	yHAKrfkt4c1Xdb1ClWFQRtdZVQld0yjuK8cQ0pB8oOgbTR0a+viCXyk5Sk4yFFD4vQSQD4Yq9py
+	sIciz7cjhuaucI5/toDtNUjV4SFvjvoGu6KD8eZGIDEViZiTWJga2YEEb1tpwRqcGJtZS+9SVvW
+	wdNppcYarx3sRBAiRHwTVQzMKf5s4c7wWGRM/5MXFqBQR5GGbD2bNRMsQAnhMXPDaZCiFofxFEp
+	rtfAlM5Cm/ogt1A/eZIshE26OhU6zcJX84vZrBh0kq3yfj4ZZdHjKDnUKXVn7PQkExMTE41Qhh1
+	aUL+VQtAGzd0/SYsjlyim7bKAgkkCmqJgB8a+SvZ+NCo1E8ak=
+X-Received: by 2002:a7b:c344:0:b0:494:282:106c with SMTP id 5b1f17b1804b1-4954a3f5295mr124904515e9.16.1784563367334;
+        Mon, 20 Jul 2026 09:02:47 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -102,73 +102,307 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 09/17] xen/riscv: add helper to check APLIC MSI mode
-Date: Mon, 20 Jul 2026 18:02:07 +0200
-Message-ID: <c6c5b05886520586041ca4f50ae554c3536ee662.1784560663.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 12/17] xen/riscv: extend exception tables with type and data fields
+Date: Mon, 20 Jul 2026 18:02:10 +0200
+Message-ID: <1eb9050ff6632f91682151471440990bd718ed90.1784560663.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <cover.1784560663.git.oleksii.kurochko@gmail.com>
 References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1784563362-591C5CFC-CE103537/10/73395122804
+X-purgate-ID: tlsNG-c201ff/1784563368-F52A32A1-5D3BFB3C/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 2105
+X-purgate-size: 10163
 
-This helper can be used outside aplic.c to determine whether MSI mode
-is enabled. A follow-up patch uses it to decide whether the guest
-IMSIC state should be saved/restored.
+Extend the RISC-V exception table format to include a type and
+auxiliary data field.
+
+The existing format only supports simple fixups. Some use cases require
+additional context from the fault (e.g. capturing trap information),
+which cannot be expressed with the current EX_TYPE_FIXUP entries.
+
+Introduce a generic ASM_EXTABLE_RAW() helper to describe entries with a
+handler type and associated data. Reimplement ASM_EXTABLE() in terms of
+it using EX_TYPE_FIXUP for compatibility.
+
+Add EX_TYPE_TRAP_INFO to allow handlers to retrieve trap state
+(sepc/scause/stval) and pass it to the fixup path. The data field is
+used to encode which GPR contains a pointer to a struct trap_info.
+
+Provide ASM_EXTABLE_TRAP_INFO() as a convenience wrapper for this case.
+
+Also add gpr-num.h, providing symbolic GPR numbers for use in assembly
+and inline asm. This is derived from Linux 6.16 with minor adjustments such
+as using .irp instead of open-coding the same using a set of .equ.
+
+Update the exception handling code to dispatch based on the entry type.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/aplic.c             | 9 +++++++--
- xen/arch/riscv/include/asm/aplic.h | 2 ++
- 2 files changed, 9 insertions(+), 2 deletions(-)
+ xen/arch/riscv/extable.c               | 60 ++++++++++++++++++++++++-
+ xen/arch/riscv/include/asm/extable.h   | 62 ++++++++++++++++++--------
+ xen/arch/riscv/include/asm/gpr-num.h   | 33 ++++++++++++++
+ xen/arch/riscv/include/asm/processor.h |  2 +
+ xen/arch/riscv/include/asm/traps.h     |  6 +++
+ 5 files changed, 143 insertions(+), 20 deletions(-)
+ create mode 100644 xen/arch/riscv/include/asm/gpr-num.h
 
-diff --git a/xen/arch/riscv/aplic.c b/xen/arch/riscv/aplic.c
-index 87f2134bc561..1ce844cd2162 100644
---- a/xen/arch/riscv/aplic.c
-+++ b/xen/arch/riscv/aplic.c
-@@ -93,6 +93,11 @@ void aplic_hw_write_reg(unsigned int offset, uint32_t value)
-     spin_unlock_irqrestore(&aplic.lock, flags);
+diff --git a/xen/arch/riscv/extable.c b/xen/arch/riscv/extable.c
+index 77e5e9e89439..e0ced0537182 100644
+--- a/xen/arch/riscv/extable.c
++++ b/xen/arch/riscv/extable.c
+@@ -7,8 +7,10 @@
+ #include <xen/sort.h>
+ #include <xen/virtual_region.h>
+ 
++#include <asm/csr.h>
+ #include <asm/extable.h>
+ #include <asm/processor.h>
++#include <asm/traps.h>
+ 
+ #define EX_FIELD(ptr, field) ((unsigned long)&(ptr)->field + (ptr)->field)
+ 
+@@ -33,6 +35,12 @@ static void __init cf_check swap_ex(void *a, void *b)
+ 
+     x->fixup = y->fixup + delta;
+     y->fixup = tmp.fixup - delta;
++
++    x->type = y->type;
++    y->type = tmp.type;
++
++    x->data = y->data;
++    y->data = tmp.data;
  }
  
-+bool has_msi_support(void)
+ static int cf_check cmp_ex(const void *a, const void *b)
+@@ -60,6 +68,40 @@ static void ex_handler_fixup(const struct exception_table_entry *ex,
+     regs->sepc = ex_fixup(ex);
+ }
+ 
++static inline unsigned long regs_get_gpr(struct cpu_user_regs *regs,
++                                         unsigned int offset)
 +{
-+    return readl(&aplic.regs->domaincfg) & APLIC_DOMAINCFG_DM;
++    /*
++     * The GPR number -> offset arithmetic below relies on x0..x31 being
++     * laid out at the start of struct cpu_user_regs in architectural
++     * order.
++     */
++    BUILD_BUG_ON(offsetof(struct cpu_user_regs, ra) !=
++                 sizeof(unsigned long));
++    BUILD_BUG_ON(offsetof(struct cpu_user_regs, t6) !=
++                 31 * sizeof(unsigned long));
++
++    if ( unlikely(!offset || (offset > MAX_REG_OFFSET)) )
++        return 0;
++
++    return *(unsigned long *)((unsigned long)regs + offset);
 +}
 +
- static void __init aplic_init_hw_interrupts(void)
- {
-     unsigned int i;
-@@ -185,7 +190,7 @@ static void cf_check aplic_irq_enable(struct irq_desc *desc)
-      *       If APLIC without MSI interrupts is required in the future,
-      *       this function will need to be updated accordingly.
-      */
--    ASSERT(readl(&aplic.regs->domaincfg) & APLIC_DOMAINCFG_DM);
-+    ASSERT(has_msi_support());
- 
-     ASSERT(spin_is_locked(&desc->lock));
- 
-@@ -216,7 +221,7 @@ static void cf_check aplic_irq_disable(struct irq_desc *desc)
-      *       If APLIC without MSI interrupts is required in the future,
-      *       this function will need to be updated accordingly.
-      */
--    ASSERT(readl(&aplic.regs->domaincfg) & APLIC_DOMAINCFG_DM);
-+    ASSERT(has_msi_support());
- 
-     ASSERT(spin_is_locked(&desc->lock));
- 
-diff --git a/xen/arch/riscv/include/asm/aplic.h b/xen/arch/riscv/include/asm/aplic.h
-index 4ae5fb8f26d1..9a0b23351154 100644
---- a/xen/arch/riscv/include/asm/aplic.h
-+++ b/xen/arch/riscv/include/asm/aplic.h
-@@ -144,4 +144,6 @@ struct aplic_regs {
- uint32_t aplic_hw_read_reg(unsigned int offset, uint32_t mask);
- void aplic_hw_write_reg(unsigned int offset, uint32_t value);
- 
-+bool has_msi_support(void);
++static void ex_handler_trap_info(const struct exception_table_entry *ex,
++                                 struct cpu_user_regs *regs)
++{
++    struct trap_info *trap_info =
++        (struct trap_info *)regs_get_gpr(regs, ex->data * sizeof(unsigned long));
 +
- #endif /* ASM_RISCV_APLIC_H */
++    BUG_ON(!trap_info);
++
++    trap_info->sepc = csr_read(CSR_SEPC);
++    trap_info->scause = csr_read(CSR_SCAUSE);
++    trap_info->stval = csr_read(CSR_STVAL);
++
++    regs->sepc = ex_fixup(ex);
++}
++
+ bool fixup_exception(struct cpu_user_regs *regs)
+ {
+     unsigned long pc = regs->sepc;
+@@ -78,7 +120,23 @@ bool fixup_exception(struct cpu_user_regs *regs)
+     if ( !ex )
+         return false;
+ 
+-    ex_handler_fixup(ex, regs);
++    switch ( ex->type )
++    {
++    case EX_TYPE_FIXUP:
++        ex_handler_fixup(ex, regs);
++        break;
++
++    case EX_TYPE_TRAP_INFO:
++        ex_handler_trap_info(ex, regs);
++        break;
++
++    default:
++        printk(XENLOG_ERR
++               "Unsupported exception table entry type %u for pc %#lx\n",
++               ex->type, pc);
++
++        return false;
++    }
+ 
+     return true;
+ }
+diff --git a/xen/arch/riscv/include/asm/extable.h b/xen/arch/riscv/include/asm/extable.h
+index c0128a91818f..287ce962b5cf 100644
+--- a/xen/arch/riscv/include/asm/extable.h
++++ b/xen/arch/riscv/include/asm/extable.h
+@@ -3,17 +3,24 @@
+ #ifndef ASM__RISCV__ASM_EXTABLE_H
+ #define ASM__RISCV__ASM_EXTABLE_H
+ 
++#include <asm/gpr-num.h>
++
++#define EX_TYPE_FIXUP 0
++#define EX_TYPE_TRAP_INFO 1
++
+ #ifdef __ASSEMBLER__
+ 
+-#define ASM_EXTABLE(insn, fixup) \
+-    .pushsection .ex_table, "a"; \
+-    .balign     4;               \
+-    .word       (insn) - .;      \
+-    .word       (fixup) - .;     \
+-    .popsection
++#define ASM_EXTABLE_RAW(insn, fixup, type, data)    \
++    .pushsection .ex_table, "a";                    \
++    .balign     4;                                  \
++    .long       ((insn) - .);                       \
++    .long       ((fixup) - .);                      \
++    .short      (type);                             \
++    .short      (data);                             \
++    .popsection;
+ 
+-.macro asm_extable, insn, fixup
+-    ASM_EXTABLE(\insn, \fixup)
++.macro _asm_extable, insn, fixup
++    ASM_EXTABLE_RAW(\insn, \fixup, EX_TYPE_FIXUP, 0)
+ .endm
+ 
+ #else /* __ASSEMBLER__ */
+@@ -23,20 +30,36 @@
+ 
+ struct cpu_user_regs;
+ 
+-#define ASM_EXTABLE(insn, fixup)      \
+-    ".pushsection .ex_table, \"a\"\n" \
+-    ".balign    4\n"                  \
+-    ".word      (" #insn " - .)\n"    \
+-    ".word      (" #fixup " - .)\n"   \
++#define ASM_EXTABLE_RAW(insn, fixup, type, data)    \
++    ".pushsection .ex_table, \"a\"\n"               \
++    ".balign    4\n"                                \
++    ".long      ((" insn ") - .)\n"                 \
++    ".long      ((" fixup ") - .)\n"                \
++    ".short      (" type ")\n"                      \
++    ".short      (" data ")\n"                      \
+     ".popsection\n"
+ 
++#define ASM_EXTABLE(insn, fixup)    \
++    ASM_EXTABLE_RAW(#insn, #fixup, __stringify(EX_TYPE_FIXUP), "0")
++
++#define EX_TRAP_INFO_REG(gpr)   \
++    "(.L_gpr_num_" #gpr ")"
++
++#define ASM_EXTABLE_TRAP_INFO(insn, fixup, data)                    \
++    DEFINE_ASM_GPR_NUMS                                             \
++    ASM_EXTABLE_RAW(#insn, #fixup, __stringify(EX_TYPE_TRAP_INFO),  \
++                    EX_TRAP_INFO_REG(data))
++
+ /*
+- * The exception table consists of pairs of relative offsets: the first
+- * is the relative offset to an instruction that is allowed to fault,
+- * and the second is the relative offset at which the program should
+- * continue. No general-purpose registers are modified by the exception
+- * handling mechanism itself, so it is up to the fixup code to handle
+- * any necessary state cleanup.
++ * Each exception table entry consists of two relative offsets and a
++ * handler description: `insn` is the relative offset to an instruction
++ * that is allowed to fault, `fixup` is the relative offset at which the
++ * program should continue, `type` selects how the exception is handled
++ * (EX_TYPE_*), and `data` holds auxiliary information for the handler
++ * (e.g. for EX_TYPE_TRAP_INFO, the number of the GPR that contains a
++ * pointer to a struct trap_info). No general-purpose registers are
++ * modified by the exception handling mechanism itself, so it is up to
++ * the fixup code to handle any necessary state cleanup.
+  *
+  * The exception table and fixup code live out of line with the main
+  * instruction path. This means when everything is well, we don't even
+@@ -45,6 +68,7 @@ struct cpu_user_regs;
+  */
+ struct exception_table_entry {
+     int32_t insn, fixup;
++    uint16_t type, data;
+ };
+ 
+ extern struct exception_table_entry __start___ex_table[];
+diff --git a/xen/arch/riscv/include/asm/gpr-num.h b/xen/arch/riscv/include/asm/gpr-num.h
+new file mode 100644
+index 000000000000..1578f55cbd97
+--- /dev/null
++++ b/xen/arch/riscv/include/asm/gpr-num.h
+@@ -0,0 +1,33 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef RISCV_GPR_NUM_H
++#define RISCV_GPR_NUM_H
++
++/* GPR ABI names, in register-number order (x0 .. x31). */
++#define GPR_ABI_NAMES                   \
++    zero, ra, sp, gp, tp, t0, t1, t2,   \
++    s0, s1, a0, a1, a2, a3, a4, a5,     \
++    a6, a7, s2, s3, s4, s5, s6, s7,     \
++    s8, s9, s10, s11, t3, t4, t5, t6
++
++#ifdef __ASSEMBLER__
++
++    .equ    .L_gpr_num, 0
++    .irp    name, GPR_ABI_NAMES
++    .equ    .L_gpr_num_\name, .L_gpr_num
++    .equ    .L_gpr_num, .L_gpr_num + 1
++    .endr
++
++#else /* __ASSEMBLER__ */
++
++#include <xen/stringify.h>
++
++#define DEFINE_ASM_GPR_NUMS                         \
++"   .equ    .L_gpr_num, 0\n"                        \
++"   .irp    name, " __stringify(GPR_ABI_NAMES) "\n" \
++"   .equ    .L_gpr_num_\\name, .L_gpr_num\n"        \
++"   .equ    .L_gpr_num, .L_gpr_num + 1\n"           \
++"   .endr\n"
++
++#endif /* __ASSEMBLER__ */
++
++#endif /* RISCV_GPR_NUM_H */
+diff --git a/xen/arch/riscv/include/asm/processor.h b/xen/arch/riscv/include/asm/processor.h
+index 6b89df4a2d4f..a5ccfa61bb9f 100644
+--- a/xen/arch/riscv/include/asm/processor.h
++++ b/xen/arch/riscv/include/asm/processor.h
+@@ -54,6 +54,8 @@ struct cpu_user_regs
+     unsigned long pregs;
+ };
+ 
++#define MAX_REG_OFFSET offsetof(struct cpu_user_regs, t6)
++
+ /* TODO: need to implement */
+ #define cpu_to_core(cpu)   0
+ #define cpu_to_socket(cpu) 0
+diff --git a/xen/arch/riscv/include/asm/traps.h b/xen/arch/riscv/include/asm/traps.h
+index 21fa3c3259b3..8d4ab664bca9 100644
+--- a/xen/arch/riscv/include/asm/traps.h
++++ b/xen/arch/riscv/include/asm/traps.h
+@@ -7,6 +7,12 @@
+ 
+ #ifndef __ASSEMBLER__
+ 
++struct trap_info {
++    register_t sepc;
++    register_t scause;
++    register_t stval;
++};
++
+ void do_trap(struct cpu_user_regs *cpu_regs);
+ void handle_trap(void);
+ void trap_init(void);
 -- 
 2.54.0
 
