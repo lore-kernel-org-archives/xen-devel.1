@@ -4,51 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A51A6C44515
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 07:57:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1366188.1616110 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8DD6C44515
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 08:19:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1366243.1616139 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wliry-0007nq-2A; Mon, 20 Jul 2026 07:56:58 +0000
+	id 1wljD7-0005ti-Gh; Mon, 20 Jul 2026 08:18:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1366188.1616110; Mon, 20 Jul 2026 07:56:58 +0000
+Received: by outflank-mailman (output) from mailman id 1366243.1616139; Mon, 20 Jul 2026 08:18:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlirx-0007ng-VY; Mon, 20 Jul 2026 07:56:57 +0000
-Received: by outflank-mailman (input) for mailman id 1366188;
- Mon, 20 Jul 2026 07:56:56 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wljD7-0005tV-Dp; Mon, 20 Jul 2026 08:18:49 +0000
+Received: by outflank-mailman (input) for mailman id 1366243;
+ Mon, 20 Jul 2026 08:18:48 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1wlirw-0007i0-6M
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 07:56:56 +0000
+ (envelope-from <jgross@suse.com>) id 1wljD6-0005si-8L
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 08:18:48 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wlirv-006OPL-Iv
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 09:56:55 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wljD5-008gXE-LC
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 10:18:47 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <marcandre.lureau@redhat.com>)
- id 6a5dd4c1-e002-0a2a0a5209dd-0a2a45098e2e-32
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:56:55 +0200
-Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <marcandre.lureau@redhat.com>)
- id 6a5dd4c6-be1a-0a2a45090019-aa0a857ce7cb-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 09:56:55 +0200
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-654-a-9sm84FOP-1Id4qXsae5A-1; Mon,
- 20 Jul 2026 03:56:49 -0400
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ (envelope-from <jgross@suse.com>)
+ id 6a5dd9e5-e002-0a2a0a5209dd-0a2a45039940-18
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 10:18:47 +0200
+Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jgross@suse.com>)
+ id 6a5dd9e7-fae8-0a2a45030019-c387df82bd3c-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 10:18:47 +0200
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 9D017195C27E; Mon, 20 Jul 2026 07:56:47 +0000 (UTC)
-Received: from localhost (unknown [10.44.22.17])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 906B5300019F; Mon, 20 Jul 2026 07:56:45 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 42BC379E46;
+ Mon, 20 Jul 2026 08:18:47 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 1E01B779AA;
+ Mon, 20 Jul 2026 08:18:47 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id gY8KBufZXWrGXgAAD6G6ig
+ (envelope-from <jgross@suse.com>); Mon, 20 Jul 2026 08:18:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,109 +61,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1784534214;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1784535527; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=QtMvLnVwqMzsmDla/+s5l4nRkQgIhL5LT1ivzwU06OA=;
-	b=GQGuyA/m6r/R3GF4YOhItEl/FV46Ht7TnauDUY79IB2mIXKL8O7bBmdCoibt6/mj3NnI7U
-	RJMXFsrFhwKGk36D3myqXlWoSy7Xl9PFRzjsoNKik6QsI8qOy2/oAGKddP0TSXWUtgH/yg
-	7YCOyC+kLXQygw/zDsIrtu4hTiFRCR8=
-X-MC-Unique: a-9sm84FOP-1Id4qXsae5A-1
-X-Mimecast-MFC-AGG-ID: a-9sm84FOP-1Id4qXsae5A_1784534207
-From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Mon, 20 Jul 2026 11:55:37 +0400
-Subject: [PATCH 8/8] migration/rdma: annotate and simplify
- wait_comp_channel()
+	bh=Z6EAc2AbX/aQuKD/P9abpYa37fs6FYgsEE4fa9CoGsA=;
+	b=BSVnLg8oYtfHgJlFSRoU8KoDH7hEe74V41rkCOQ86k+f1GeGwBySCD5UHiAwj35RzVoUST
+	+tN6OvPoYeA7Hy5NGeyDoPUCQNsq0aXxg2ZewTQdFILIu1YzNOWSd2a9KkShAMWAP1iwvO
+	QLG2UUzeYOCC7fNyFyw9FNG3zwketyg=
+Authentication-Results: smtp-out1.suse.de;
+	dkim=pass header.d=suse.com header.s=susede1 header.b=BSVnLg8o
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1784535527; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Z6EAc2AbX/aQuKD/P9abpYa37fs6FYgsEE4fa9CoGsA=;
+	b=BSVnLg8oYtfHgJlFSRoU8KoDH7hEe74V41rkCOQ86k+f1GeGwBySCD5UHiAwj35RzVoUST
+	+tN6OvPoYeA7Hy5NGeyDoPUCQNsq0aXxg2ZewTQdFILIu1YzNOWSd2a9KkShAMWAP1iwvO
+	QLG2UUzeYOCC7fNyFyw9FNG3zwketyg=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Samuel Thibault <samuel.thibault@ens-lyon.org>
+Subject: [PATCH v2 2/5] stubdom: remove support for building in 32-bit mode
+Date: Mon, 20 Jul 2026 10:18:29 +0200
+Message-ID: <20260720081833.4122182-3-jgross@suse.com>
+X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260720081833.4122182-1-jgross@suse.com>
+References: <20260720081833.4122182-1-jgross@suse.com>
 MIME-Version: 1.0
-Message-Id: <20260720-co-v1-8-fabb4db3c204@redhat.com>
-References: <20260720-co-v1-0-fabb4db3c204@redhat.com>
-In-Reply-To: <20260720-co-v1-0-fabb4db3c204@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Markus Armbruster <armbru@redhat.com>, Peter Xu <peterx@redhat.com>, 
- Fabiano Rosas <farosas@suse.de>, 
- =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- John Snow <jsnow@redhat.com>, 
- Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>, 
- Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>, 
- qemu-block@nongnu.org, Stefan Hajnoczi <stefanha@redhat.com>, 
- Fam Zheng <fam@euphon.net>, "Denis V. Lunev" <den@openvz.org>, 
- Christian Schoenebeck <qemu_oss@crudebyte.com>, Greg Kurz <groug@kaod.org>, 
- "Michael S. Tsirkin" <mst@redhat.com>, 
- Stefano Stabellini <sstabellini@kernel.org>, 
- Anthony PERARD <anthony@xenproject.org>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- xen-devel@lists.xenproject.org, Li Zhijian <lizhijian@fujitsu.com>, 
- =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1578;
- i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=oJIZjL5v3qPuEfmBmoADXHdeUtnH1fO9aSt78aaOTQA=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqXdSJmwU3fDMJVOh8NuPQiJP+1ImSwWEZ2LEnz
- qyx/VYPaPuJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCal3UiQAKCRDa6OEJdZac
- 5QRXD/9BDWYERq9hLRl+MFCCSV5uIL8qHuaXkYPzavZXz7FtCWheLKyyvu7gNq789M2FyuM6L/U
- SmN25PuDKXTlF0LLOKYvy6NCVOmVtdB7O4X9Hr/527c79DSfow3UbQOHHLIPnWy9R7s6YKriGsc
- EhBrRia46wFO7TjPaDdYpX/fKWOpgm2Fushi3gMbtZcac+5WWg0SkECprjBV0b+OXThYzlzpe9o
- N/kxmJMzJOj5BSePFncuxHyN6VlkssZrgd4MhWf0PthYCSnetE1WDSMPBCv2644cXFk1EUdkBPM
- pouk07hjPvPgyI8GRY8cKNn/j3crriZPAMd9obZ3+nI34KECpH9aINhlRs7jMl1mQkq0NU3eDug
- 9omDTtOEUTZYs9U4LGSptWwmVklM12krTzNUeuabXyG6EA9tcBuIo2d+GhtOvgrXRO2IfGkz1Mj
- c7+oQjf8y0ZuQYAkw0rTQQ9CXjh+qaNGv6hTHg5hHhmbEwTGSZraj1RzRNvu4s1A5qtSAQkRmGW
- frqDSIk1ncj1UZ1Cz7aWKNP11TsjvC7DqePEvURkQvZCzTLg5IZiD5Aq+XfQiJqcF7jIv7oeo6y
- z4BpSH8CNBkAYoPujDpgvdtJ4Sk3Dx4rPgNrKoXeg9mOq7ONID/yFe4vKn7XQFs3ZxaJeZ7hZ1f
- WBJ+qu9IhQiLhRA==
-X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
- fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: riYuG6eBLdHJ-1YoEq7v_NdOQR7HQYhixnx53Uqv3tA_1784534207
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1784534215-BC8C9034-6191174D/0/0
+X-Rspamd-Action: no action
+X-Rspamd-Queue-Id: 42BC379E46
+X-Spamd-Result: default: False [-3.01 / 50.00];
+	BAYES_HAM(-3.00)[99.99%];
+	MID_CONTAINS_FROM(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.com:dkim,suse.com:email,suse.com:mid];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	FROM_EQ_ENVFROM(0.00)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+	RCVD_COUNT_TWO(0.00)[2];
+	RCVD_TLS_ALL(0.00)[];
+	RCPT_COUNT_THREE(0.00)[4];
+	DKIM_TRACE(0.00)[suse.com:+]
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-purgate-ID: tlsNG-33051d/1784535527-6D4D74E9-FE930673/0/0
 X-purgate-type: clean
-X-purgate-size: 1580
+X-purgate-size: 1110
 
-The function calls yield_until_fd_readable() (coroutine_fn) when in
-coroutine context, and polls with qemu_poll_ns() otherwise.
+With the removal of grub-pv there is no 32-bit stubdom left.
 
-Replace the migration-state proxy check with qemu_in_coroutine(),
-which directly tests what matters.
+Remove 32-bit support from the stubdom build system.
 
-Fixes: 2da776db4846 ("rdma: core logic")
-Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- migration/rdma.c | 12 ++++--------
- 1 file changed, 4 insertions(+), 8 deletions(-)
+ stubdom/Makefile | 11 -----------
+ 1 file changed, 11 deletions(-)
 
-diff --git a/migration/rdma.c b/migration/rdma.c
-index 3e37a1d4401..438419d1894 100644
---- a/migration/rdma.c
-+++ b/migration/rdma.c
-@@ -1348,17 +1348,13 @@ static int qemu_rdma_poll(RDMAContext *rdma, struct ibv_cq *cq,
- /* Wait for activity on the completion channel.
-  * Returns 0 on success, none-0 on error.
-  */
--static int qemu_rdma_wait_comp_channel(RDMAContext *rdma,
--                                       struct ibv_comp_channel *comp_channel)
-+static int coroutine_mixed_fn
-+qemu_rdma_wait_comp_channel(RDMAContext *rdma,
-+                            struct ibv_comp_channel *comp_channel)
- {
-     struct rdma_cm_event *cm_event;
+diff --git a/stubdom/Makefile b/stubdom/Makefile
+index 850e8544ca..2698bddc9d 100644
+--- a/stubdom/Makefile
++++ b/stubdom/Makefile
+@@ -31,15 +31,7 @@ endef
+ $(foreach lib,$(LIBS_LIBS),$(eval $(call LIB_deps,$(lib))))
  
--    /*
--     * Coroutine doesn't start until migration_fd_process_incoming()
--     * so don't yield unless we know we're running inside of a coroutine.
--     */
--    if (rdma->migration_started_on_destination &&
--        migration_incoming_get_current()->state == MIGRATION_STATUS_ACTIVE) {
-+    if (qemu_in_coroutine()) {
-         yield_until_fd_readable(comp_channel->fd);
-     } else {
-         /* This is the source side, we're in a separate thread
-
+ GNU_TARGET_ARCH:=$(XEN_TARGET_ARCH)
+-ifeq ($(XEN_TARGET_ARCH),x86_32)
+-GNU_TARGET_ARCH:=i686
+-endif
+ 
+-ifeq ($(GNU_TARGET_ARCH), i686)
+-TARGET_CFLAGS=
+-NEWLIB_CFLAGS+=-D_I386MACH_ALLOW_HW_INTERRUPTS
+-STUBDOM_SUPPORTED=1
+-endif
+ ifeq ($(GNU_TARGET_ARCH), x86_64)
+ TARGET_CFLAGS=-mno-red-zone
+ NEWLIB_CFLAGS+=-D_I386MACH_ALLOW_HW_INTERRUPTS
+@@ -179,9 +171,6 @@ gmp-$(GMP_VERSION).tar.bz2:
+ 	$(FETCHER) $@ $(GMP_URL)/$@
+ 
+ .PHONY: cross-gmp
+-ifeq ($(XEN_TARGET_ARCH), x86_32)
+-   GMPEXT=ABI=32
+-endif
+ gmp-$(XEN_TARGET_ARCH): gmp-$(GMP_VERSION).tar.bz2 $(NEWLIB_STAMPFILE)
+ 	tar xjf $<
+ 	rm $@ -rf || :
 -- 
-2.55.0
+2.54.0
 
 
