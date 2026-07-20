@@ -4,44 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 753AEC44520
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 15:41:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1366712.1616658 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAB69C44520
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 15:49:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1366720.1616667 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlq6m-0005Tk-5W; Mon, 20 Jul 2026 15:40:44 +0000
+	id 1wlqFH-00064g-V2; Mon, 20 Jul 2026 15:49:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1366712.1616658; Mon, 20 Jul 2026 15:40:44 +0000
+Received: by outflank-mailman (output) from mailman id 1366720.1616667; Mon, 20 Jul 2026 15:49:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlq6m-0005Td-1n; Mon, 20 Jul 2026 15:40:44 +0000
-Received: by outflank-mailman (input) for mailman id 1366712;
- Mon, 20 Jul 2026 15:40:43 +0000
+	id 1wlqFH-00064Z-Qz; Mon, 20 Jul 2026 15:49:31 +0000
+Received: by outflank-mailman (input) for mailman id 1366720;
+ Mon, 20 Jul 2026 15:49:30 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wlq6l-0005TV-1j
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 15:40:43 +0000
+ (envelope-from <marcus.granado@citrix.com>) id 1wlqFF-00064T-TW
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 15:49:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wlq6k-001kTk-01
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 17:40:42 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wlqFF-00CFQ6-5e
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 17:49:29 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a5e4163-5cb7-0a2a0a5109dd-0a2a4508b5ec-12
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 17:40:41 +0200
-Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a5e4179-f659-0a2a45080019-d155dd30b05f-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 17:40:41 +0200
-Received: by mail-wr1-f48.google.com with SMTP id
- ffacd0b85a97d-472326ca506so7942356f8f.2
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 08:40:41 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f6b85970esm24675928f8f.15.2026.07.20.08.40.40
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Jul 2026 08:40:40 -0700 (PDT)
+ (envelope-from <marcus.granado@citrix.com>)
+ id 6a5e4387-e002-0a2a0a5209dd-0a2a450bacbc-2
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 17:49:29 +0200
+Received: from [160.101.131.9] (helo=na1pdmzitismtp02.tibco.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <marcus.granado@citrix.com>)
+ id 6a5e4388-b7e8-0a2a450b0019-a0658309d8a6-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 17:49:29 +0200
+Received: from mewpvdipd1023.citrite.net (unknown [10.113.40.46])
+ by na1pdmzitismtp02.tibco.com (Postfix) with ESMTPS id 0668D8291CA3;
+ Mon, 20 Jul 2026 11:47:46 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,111 +48,189 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784562041; x=1785166841; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=2X8mR/1VAWx9xNH27DUHchiHZDckXmTuxhRcRPJdEeA=;
-        b=NhQe4sJMD4qJe2Sr/o6P65Kf2sQWCp/CUPSjLqgS86RmpvzmUzwWeRm9oqq+Qjv7uN
-         6griCh3lYu7JpElHGOnlVrVGkggZc8MQVcgT2Aw+Zi2McMat+VdP0RiCwpgm19zUtyt9
-         KAiv6LoZxrh153xovKEzja+0BFRfAVSOp95Vv1hRzCdVab1hSGOwLLpTs2UIfe/THke1
-         uRdbRWxlHXBHfOQEW7VORkVXLChczkh2rxHgvEbNSgFIYjPupS+9GdlZqjehZAyDa6ZV
-         VJZzOGnBiUrE8IvMMJ520uJBhnf1fRi/7nGLHWzR00GY8vvaqEtzA3i+gy+6vx4bvoTR
-         AwOw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784562041; x=1785166841;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=2X8mR/1VAWx9xNH27DUHchiHZDckXmTuxhRcRPJdEeA=;
-        b=Zk6y7WM6CwbGuMPrtMHEabvrtQrDovAqe8Vh5MuOLAfruHJigRU0TKyEGNlKGXUkuV
-         QAI4F0G0bcfguvMvFYYM3lhKZHLKYHPLqH1UZR+J4XhgwyAdluJ+t4i9kM6cuicaJ43H
-         d1bGeW5WPRy1OZt/Bm2LfPOmbm1j2aRWuDp88VU40b7MWxOfSVLfHfdVQDWGwnPzseNZ
-         v3CyOq+CPlh3+9dpb7KBZjpGrdJg9CDo8a3lwKOOyN2PQPD2lMvVUCs/ExA1qg8DDwTv
-         52PtA9V6q2FO+nOR/GaHD9TG5Flnz0buIWCJ6oXBAH3DY2uHUZ2BdLgsNqaAoFQe+kLh
-         cqTg==
-X-Forwarded-Encrypted: i=1; AHgh+RrV2SnVjMunhaHeaQ87XVR7j4yxjW6jTb6HUFriTVyym/hJ0QGbVxR1h/m9ZdwzsCrVxQ0FfECqHfQ=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzFJTYvbsFCZj8W4Ss5cdz69sqn7yXZouN7tnqtK9gpmuHy5COQ
-	uQ7njh39cYYAo+UuUIe9EB7xjdVQv/rVLW5hIBSEK/SLAMo8NL517jF8FBsHdEpe1A==
-X-Gm-Gg: AR+sD1212dHvj5U90jEyp0h9KQPhf5VTcvk8kIVZHzDxvkqYtdBpzW83OGoQpz06Fjl
-	vBZUGzBnWvSuQfy+QKov8pLyXaJw1LHeRqt5T/lJJ3Iutxvjc3jB2TlKtmQGv+wMLPv7kOTFYaS
-	n8MmmKtX83qKzHIl2NHMPQtZLX67byWz9EBTNP2DvDFaNh+Q3AHvKu4H/6rET8NW3SvOEaxsOV6
-	GKvDF+vn/LJLZXetFuJo8Zvzz9aGGnr8u/+3y/17yf4P+511RgyYPQhoNhPrIyUQXCJDJxZNfFt
-	B6zgqi4792wyCIOJDskltvuLmmkimxajQbKsyf+YDW7EzCEPKfzhNPzBCMY0puy52Rd4NMiO/c0
-	EdGX46LGFElGwZWdeCt77uebqE/4X68asTv8mOscGupFW35q2nii6rLNVDPZHwN6wW53G50a/Bu
-	SxDNHjjA/GSpMNbk+DtzuiT6yU7enbk+F8GS2qKn7Y0L1hDFhvWYyfR7ik+5xCsxIokg==
-X-Received: by 2002:a05:6000:4a01:b0:47a:b86f:3ed1 with SMTP id ffacd0b85a97d-47f623060bemr18223846f8f.21.1784562041348;
-        Mon, 20 Jul 2026 08:40:41 -0700 (PDT)
-Message-ID: <330e8bd1-c00b-470c-97af-fb273e11cf73@suse.com>
-Date: Mon, 20 Jul 2026 17:40:40 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; none
+From: Marcus Granado <marcus.granado@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Frediano Ziglio <freddy77@gmail.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Marcus Granado <marcus.granado@citrix.com>
+Subject: [PATCH v1 0/6] tools: optional LZ4 compression of the libxenguest migration stream
+Date: Mon, 20 Jul 2026 16:48:25 +0100
+Message-ID: <20260720154832.1907401-1-marcus.granado@citrix.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 5/7] xen/serial: drop stale SERIAL_NEVER_DROP_CHARS
-To: dmukhin@ford.com
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, julien@xen.org,
- michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org,
- xen-devel@lists.xenproject.org
-References: <20260713181619.672176-1-dmukhin@ford.com>
- <20260713181619.672176-6-dmukhin@ford.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260713181619.672176-6-dmukhin@ford.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1784562041-D694287B-888BC1E1/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-42698a/1784562569-188C99EA-9387D184/0/0
 X-purgate-type: clean
-X-purgate-size: 824
+X-purgate-size: 7126
 
-On 13.07.2026 20:16, dmukhin@ford.com wrote:
-> From: Denis Mukhin <dmukhin@ford.com> 
-> 
-> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+Hello,
 
-It would have helped if the origin of it being stale was identified right
-away. Looks like 275485700163 ("Bring back console_start_log_everything()
-as a milder alternative to") dropped the sole use only a few weeks after
-its introduction.
+This series adds optional LZ4 compression of the REC_TYPE_PAGE_DATA records
+of the libxenguest migration stream, reducing the data transferred during
+live migration (and suspend-to-file).
+It is opt-in for:
+* the build: compiled in only when liblz4 is present (HAVE_LZ4), which
+  tools/configure already autodetects
+* the toolstack: via new flag XCFLAGS_COMPRESS_LZ4 (off by default)
+* libxl: via new option xl migrate --compress
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Example usage:
 
-> --- a/xen/drivers/char/serial.c
-> +++ b/xen/drivers/char/serial.c
-> @@ -15,9 +15,6 @@
->  
->  #include <asm/processor.h>
->  
-> -/* Never drop characters, even if the async transmit buffer fills. */
-> -/* #define SERIAL_NEVER_DROP_CHARS 1 */
-> -
->  unsigned int __ro_after_init serial_txbufsz = CONFIG_SERIAL_TX_BUFSIZE;
->  size_param("serial_tx_buffer", serial_txbufsz);
->  
+ xl -vvv migrate --compress <vm> <destination host>
+
+ xc: detail: fd .., dom .., flags 5, hvm  <= 5: XCFLAGS_COMPRESS_LZ4 is on
+ xc: debug: LZ4: 4190208 -> 20732 bytes (0.5% ratio) <= compress 4MB batch
+ ...
+ Migration successful.
+
+
+Motivation
+==========
+
+It's common for recent VMs to have large memory footprints. This increases
+the effort to stream the memory during live migration or suspend, as the
+streamed data hops across several steps before the VM memory reaches the
+intended endpoint. The stream is encrypted, transmited over the network or
+persisted in storage, decrypted at the endpoint etc. In each step, CPU
+could have been saved and I/O data paths avoided bottlenecks if the stream
+had been compressed as close to the origin of the data as possible.
+Compressing at the first opportunity, inside libxenguest:
+* keeps the compressor co-located with the guest page mapping so the fast
+  path can be made zero-copy from the guest page into the compressor,
+* saves on the amount of data copied/piped across processes in dom0,
+* saves on the amount of data transmitted/persisted.
+
+The LZ4 compression has a small cost, but this cost is amortized across all
+the operations above, resulting in a net gain (see below). LZ4 was chosen
+for its very high compression/decompression throughput on commodity CPUs,
+low memory footprint, and the existence of a stable common upstream
+library (liblz4).
+
+We found the use of compression useful in general when migrating individual
+VMs, as LZ4 typically halves or better the streamed data, and especially
+useful when:
+* migrating several VMs in parallel, as the net savings in CPU and I/O data
+  paths reduce bottlenecks in dom0.
+* networks are slow, as less data is transmitted
+* many pipelined processes in dom0 are used to manipulate the stream data,
+  as the dom0 kernel avoids data copy and scheduling activities.
+
+
+Wire format
+===========
+
+A new record type REC_TYPE_PAGE_DATA_LZ4 (0x00000013) is added. It shares
+the existing xc_sr_rec_page_data_header layout but the trailing payload is
+a sequence of per-page sub-blocks: for each page a uint16 little-endian
+length `clen` then `clen` octets of a independently compressed page,
+or the raw page when clen == 0.
+Senders that do not opt in continue to emit REC_TYPE_PAGE_DATA exactly as
+before; receivers built without liblz4 produce a clear error when they meet
+a compressed record rather than the generic "unrecognised record"
+diagnostic.
+
+
+Compatibility
+=============
+
+* Default behaviour is unchanged: without XCFLAGS_COMPRESS_LZ4 (or
+  xl migrate --compress), the stream is byte-for-byte identical to before
+  this series.
+* A receiver that includes this series can decompress streams from any
+  sender (legacy or compressed)
+* If the toolstack asks for compression but libxenguest was built
+  without liblz4, xc_domain_save() fails immediately with EOPNOTSUPP
+  rather than silently emitting an uncompressed stream.
+
+
+Testing
+=======
+
+Tested with xl migrate --compress and with a patched version of XAPI.
+
+
+Measurements
+============
+
+XAPI host-evacuation scenario: 64GB VMs, dom0 with 16 vCPUs, stunnel-
+encrypted migration transport, where
+* hosts: 2x Intel Xeon Gold 6430, 1TB DDR5-4800, NIC 100 Gbps
+* VM: 12 vCPUs, 64GB RAM, Windows OS
+show significant wall-clock reduction when LZ4 compression is enabled.
+
+Test           = time xe host-evacuate (for 10x VMs)
+evacuate_ratio = host_evacuate_time_with_LZ4 / host_evacuate_without_LZ4
+LZ4_ratio      = transmitted_LZ4_compressed_memory / total_VM_memory
+
+Host Evacuation: Scenario 1: (BEST CASE)
+----------------------------------------
+guest load:
+* VMs idle just after reboot
+LZ4  LZ4_ratio  evacuate_time  evacuate_time_ratio
+off  -          3m18s          100% (baseline)
+on   1.4%       1m44s          52% when LZ4 is on
+
+Host Evacuation: Scenario 2: (AVERAGE CASE)
+-------------------------------------------
+guest load: 
+* VMs running desktop apps in loop for 1 hour before migration
+LZ4  LZ4_ratio  evacuate_time  evacuate_time_ratio
+off  -          3m18s          100% (baseline)
+on   7.0%       2m02s          62% when LZ4 is on
+
+Host Evacuation: Scenario 3: (WORST CASE)
+-----------------------------------------
+guest load:
+* 100% constant CPU load quickly dirtying all memory pages
+* all memory filled with random uncompressible buffers
+* constant swapping to disk
+LZ4  LZ4_ratio  evacuate_time  evacuate_time_ratio
+off  -          23m12s         100% (baseline)
+on   98.8%      23m25s         101% when LZ4 is on
+
+The scenario 3 is the expected upper bound of time when LZ4 compression is
+used, and it's around 101% compared to when LZ4 compression is not used.
+The limit of 1% maximum overhead when compression is enabled is due to:
+* using a fast LZ4 compression/decompression algorithm
+* if the 4MB compressed batch ratio is >97%, then send uncompressed to
+  save the time that would be used decompressing on the receiver.
+* if a whole iteration of migration achieves >90% LZ4_ratio, then
+  disable compression for the subsequent iterations.
+
+The thresholds are conservative: 97% per-batch compresses only when it
+saves over 3% (when compression is more likely to repay decompression),
+and 90% per-iteration disables compression for the rest of the migration
+once a iteration saves under 10% (effectively uncompressible). Together
+they cap the worst case (Scenario 3) at about 1% over uncompressed.
+
+
+Patch summary
+=============
+ 
+ 1. tools/migration: introduce PAGE_DATA_LZ4 stream record type
+     - define `REC_TYPE_PAGE_DATA_LZ4` (0x00000013)
+ 2. tools/libs/guest: decompress PAGE_DATA_LZ4 records on restore
+     - empower the receiver to handle and decompress incoming LZ4 payloads
+ 3. tools/libs/guest: compress PAGE_DATA with LZ4 on save
+     - add the save-side LZ4 batching and streaming path with persistent
+       buffers
+     - emit REC_TYPE_PAGE_DATA_LZ4 records depending on per-batch ratio
+       threshold (XC_SR_COMPRESS_BATCH_THRESHOLD = 97%)
+ 4. tools/libs/guest: adaptively disable LZ4 on poor compression ratio
+     - downgrade ctx->compression to XC_SR_COMPRESS_NONE after an
+       iteration whose average per-batch ratio fails the 90% threshold
+ 5. tools/libs/guest: opt in to LZ4 save-side compression
+     - via XCFLAGS_COMPRESS_LZ4 flag in public API to request
+       compression
+ 6. tools/libxl,xl: add --compress flag to xl migrate
+     - wire the feature up to `xl migrate --compress` and libxl, so that
+       xl users can opt in to compression during migration
+
+
+Comments/feedback are welcome!
 
 
