@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 703DCC44529
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 20:58:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1367403.1617185 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EF05C44515
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 20:59:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1367411.1617194 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlv3p-00069o-Ei; Mon, 20 Jul 2026 20:58:01 +0000
+	id 1wlv4d-0006db-Nn; Mon, 20 Jul 2026 20:58:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1367403.1617185; Mon, 20 Jul 2026 20:58:01 +0000
+Received: by outflank-mailman (output) from mailman id 1367411.1617194; Mon, 20 Jul 2026 20:58:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlv3p-00069h-C7; Mon, 20 Jul 2026 20:58:01 +0000
-Received: by outflank-mailman (input) for mailman id 1367403;
- Mon, 20 Jul 2026 20:58:00 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wlv4d-0006dU-K2; Mon, 20 Jul 2026 20:58:51 +0000
+Received: by outflank-mailman (input) for mailman id 1367411;
+ Mon, 20 Jul 2026 20:58:50 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <philmd@oss.qualcomm.com>) id 1wlv3o-00069b-4E
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 20:58:00 +0000
+ (envelope-from <philmd@oss.qualcomm.com>) id 1wlv4b-0006dH-W4
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 20:58:50 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wlv3n-000OSU-9m
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 22:57:59 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wlv4b-008B4H-Cv
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 22:58:49 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <philmd@oss.qualcomm.com>)
- id 6a5e8bd5-bab6-0a2a0a5309dd-0a2a450caa3c-6
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 22:57:58 +0200
+ id 6a5e8c09-5cb7-0a2a0a5109dd-0a2a45048f10-0
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 22:58:49 +0200
 Received: from [205.220.168.131] (helo=mx0a-0031df01.pphosted.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <philmd@oss.qualcomm.com>)
- id 6a5e8bd4-f479-0a2a450c0019-cddca883901a-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 22:57:58 +0200
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ id 6a5e8c07-b57f-0a2a45040019-cddca8838ef4-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 22:58:49 +0200
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66KJTXM23106528
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 20:57:56 GMT
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhgs531kx-1
+ 66KJTSu63283928
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 20:58:47 GMT
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhh5y2yad-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 20:57:56 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id
- d75a77b69052e-51c1eb52e1fso93420001cf.0
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 13:57:55 -0700 (PDT)
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 20:58:46 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id
+ d75a77b69052e-51c26012cd0so187275871cf.0
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 13:58:46 -0700 (PDT)
 Received: from [192.168.69.219] (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49548e075d4sm221781295e9.1.2026.07.20.13.57.52
+ 5b1f17b1804b1-495653bfed7sm17139495e9.11.2026.07.20.13.58.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Jul 2026 13:57:53 -0700 (PDT)
+ Mon, 20 Jul 2026 13:58:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -66,57 +66,57 @@ Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=qcppdkim1 he
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	q5m5YhLzsuHt+goJykgjATSDXmmGEZj6f/t2DG1fv54=; b=gypfM1C+hunrJKHP
-	PjUplKokm19F9kwMHfHjJXb83UIG+z/+cXd0m7YHJBxAq59vkEL68OqFB/fwlPw8
-	EjjzoRbSI253roi6ECXdNTBWjE0TdXujyVQlNmF9W2bjuzCkpUGPr8/n2ozUUBGG
-	jWLnAA/2HqXOi92LTnGypSyHcb0bDgVjyNoZUSnvD/zzaHJA9geKQtDOMgXQrJCy
-	qF9MEauOAmdkFQnsHOtNvZH6OU6+f/GN3wBQX63y4BFLSK2RTMAktpeE659hhxqN
-	WLNt4QXyrJKDfU674Xj8cePSrBV1NyPWHk02iGk5+8Y0GwQxG2VwwvnXLJsJU+8I
-	CP79Xw==
+	yXvKzkuRVGbi0KnPF83YKFfobJ/BYgNqxZq8H29B9BI=; b=E607B0YNz5K5jpeZ
+	jEqdtXqAigBiCaEfBMwN0vJy2sIthhYHYqbhBcNvRHQbO6gQm35Frz172RVPOKxC
+	/Wv2IkO79fBNPjSBlQ+tGcjq24b6Fysr2Op8RdkcqJqJboSVqsYt18cE0S13dsCX
+	tQRorCxnaDQMbPQ728W6s6Fax5Stxu7bZeU/LoD6VXPnJecj8Cqf6wtpPPB70aPD
+	4vkmMvtGT4OxvOLMTd2lkW9NFL66VNnxERJvaabEgzD7tLGGhkNxfDkOpPYMO830
+	seGJmiwchQNgxeaSSwpSb+3dFiN/IGKEvyKtitZdUeqZyogjO6QfveIdJq//wxmB
+	wsto+Q==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784581075; x=1785185875; darn=lists.xenproject.org;
+        d=oss.qualcomm.com; s=google; t=1784581126; x=1785185926; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:from:references
          :cc:to:content-language:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=q5m5YhLzsuHt+goJykgjATSDXmmGEZj6f/t2DG1fv54=;
-        b=MD2jXP3CLQShtFM7S0kfRXqoxmAzKEt3E9SD3/4JOoO4uV8thU/zkZh/dPXxWLOfej
-         DiaZHzh1igXebjUGhAW2niMnaFo0HB9aKmlEoP8k4Uj4/97uJJZ1Irkol7+kz6o5ZpXk
-         27xuU3IA23651nHK22jTS0H0FO5GfvIuMepcRKzTpthv+BdQzovr2s8od2rhY+n/Vn6j
-         a6oFAg6HNittT8Qty1C9v8rCYyUtVmCNefEBiFp4LBRtV7zF/5TWTl/dsJ2MgiXN48P0
-         7YOAG8PGjHmLaQU6IdKdPNfJQbhGnmT4AXjG/yi9LuHWumrafichCfduHil0AvMjyD5s
-         b6qg==
+        bh=yXvKzkuRVGbi0KnPF83YKFfobJ/BYgNqxZq8H29B9BI=;
+        b=Dj0byijnTdPT6YiRSOyLO0D2Q1Hh3M+233tMMDf7hV+sHxcUigF8B7UzQ6l9B1P2d7
+         cyHBM9qE5AuyYbUzcnIOTFhBdqSTSk4sGRpl4mZaCGnwjGFfvzgT6TakE5ePPIokm/qI
+         AOBCL/jirYqC3Ifgys6LauNl763lQ+S/AceG3MG6FcoP/70VXrcCX0g5BNShM2j5aQj6
+         TBer/lxzSqF8wiYkObPXGSO2/NXDlZ+aVS3alzFBNaliTxNnI+qtf7YKLYzNhQdxr6Ur
+         I6KHYn8CztFqNngFy3t0hIbeefdpP4XxMMf8EzqzAD2gnhVzEjDbhOCyJ0a4bnNLggpu
+         9rbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784581075; x=1785185875;
+        d=1e100.net; s=20251104; t=1784581126; x=1785185926;
         h=content-transfer-encoding:content-type:in-reply-to:from:references
          :cc:to:content-language:subject:user-agent:mime-version:date
          :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=q5m5YhLzsuHt+goJykgjATSDXmmGEZj6f/t2DG1fv54=;
-        b=qlyAXByKtH+ypYgGPYaG6Y8Q3BwrbWAnNgFGDBUjiWJP+WRKimsoYVFyoHTt89Wb2R
-         NBGPYrYGJv57zkA2bLOMIXFJ2ExO6/0eVlHUPYf6diw63uW9DlK5EheGBd4nvYuqTZMm
-         BOnR1+dj6XYFGiPxQ8RPi1oi9bFe/nbMWTJ+MTp3xhWs0Dnf07l/xoXXdnvwQt6WBkSv
-         87Y9RfsSSGVfUNm4sd+13B569hGsV1oVJi43xQyH/sbRnhE+2SrvJiF5eXi5uhO1ylUv
-         6RfplKYko/JH58Fmr3DQx/zlld9PC3yS3ZIqpNjXXnU9sBd9HbEyvBLg+KWjKdCn8Cpx
-         jcOg==
-X-Forwarded-Encrypted: i=1; AHgh+Rrp9riUf7kvgz9uoIq49Tt3Kiw2Rn9trSYi0Imn3wNpt95alekeO8tJosSWEoGcEaoHAbUIqxdpQ7Y=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyUyUIdW27+Dz/SJzYqk+kYvh2U1dd1qoWFHqTsoTeQltVRLBjV
-	gU69/mVo3KB84qUmeNBeAUayXHfnmu8H1btNqrxAZHKEwn+cm4qLfX/OadyntZmh2YIGg1qRx8u
-	VAiPxPLe77KcA90GIN8Tul/dXeJoTxBxvDu3lE+NGWQ9loCCS0JEyF102stAQKHQjjEraeA==
-X-Gm-Gg: AfdE7ck9BoIXRDb4mOOcWgJ/ztwlWKlzWw+7hZCMTPgkCrLTMSVRn8NxucVSf7l3g8Z
-	UL0OZX7Gk/3SMRJPvbOLLS8cOY66LBLVaGYLQXJy5JmrLV5/8nLgeftCsijKZZGW0wlDzQSM5W9
-	XiPkh5mt649W/tVDqsTCZfVGyGGEF5y6qQeVTkk8mld2XhUdnfgzEU3/iGN5Y+xEIohEZaQ6xUh
-	FqAgV5riQwNcxd066WR4JXNAI20zyEarFlRwb+0hwILA/i95dHZzitDC+sFxBHWDiJgvoVOL3vl
-	Vn6m6e0hZpu+NO03PXzbaEFV12VOdNQiOV+0Ooo8oH6fl7JfPsod2ie1pOiGHPZBEPivk5iS33Y
-	BEpdtL5kxYvVEC9IdMlAFwM1o6rPxclOsapVbBTLAKKk8L8S9okI=
-X-Received: by 2002:ac8:7d4f:0:b0:51c:185b:29e0 with SMTP id d75a77b69052e-5213a3824d6mr151131211cf.10.1784581075119;
-        Mon, 20 Jul 2026 13:57:55 -0700 (PDT)
-X-Received: by 2002:ac8:7d4f:0:b0:51c:185b:29e0 with SMTP id d75a77b69052e-5213a3824d6mr151130961cf.10.1784581074544;
-        Mon, 20 Jul 2026 13:57:54 -0700 (PDT)
-Message-ID: <797f3cd6-5ca2-4cba-8aa0-43fa883f274c@oss.qualcomm.com>
-Date: Mon, 20 Jul 2026 22:57:51 +0200
+        bh=yXvKzkuRVGbi0KnPF83YKFfobJ/BYgNqxZq8H29B9BI=;
+        b=mYJU49XdSzPD2zIVB43HzYD1IZ1Y8zCC/4H3AGIj8aW+q0DrHLEC+n3c1a1i73Z9Y5
+         nQWxHTIjpFJZYN6QfcDURv/f2eeEZDvzSEy1z8MqHmE9oasP4ex4M3pvpYYsjiF2lmuT
+         B6T9szLKwllqceoXhOSJT7kaZBygj7Kaqg35LgJffTAvuaQqOhMrfCVzEyQSbc8wSruG
+         kso2uva+zFrPj7v6XABQmnBi9uhIDl9FVNpKZ9mhzb+KruvtCAFQdmTFYACmAo+YdZrL
+         MhLfa4Ncac9aoMGbChh+zvM6+b49hmSrIkuFjS8YJqAQFu3PZe54y+KU/2gN9wdiTIww
+         +d0g==
+X-Forwarded-Encrypted: i=1; AHgh+Roe03Yapmz/b6Hg+c3t4rLKRTgMxOlaxpOWOjUd1ByDNx5qLJmY1d8+J9grKocxqgbstrzvbjfu6bk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyOsAYLXNnQCTpZtpvVVM51Ib/jtqSgtttR3okO3uuMSfuF7nFY
+	DKer1yDT3m9nWFaaSIvxz9t5c6PV67hVvIwJJgHbCjWi16f1aI7hzAziIBvR4rY7RMxbEn5+3Cp
+	jX33UQOVl/Y8GWyNQEq6jPE4Hb8Pkw8PdQCpC9yfRYH4QIbhr/h7nd6gU/x9Fw+pjlCuAuA==
+X-Gm-Gg: AfdE7clRP+K+GOnpmC93fAG0SIKvPzTqPR9HC6zGt/nKZJpqNTEd+j2yaLjg+QgfMjA
+	Q5DqIVX/QmoTZwecQMn9ORVbzo+RUw/g6hM+9QGay3XhGi1fYCrctWO/Qhwu5j5OYqAKm6ZnR4d
+	8sPlIZ68bqC2N34yy0o5xLkFlPLknopXvyYcQeoQQ2SdAth8AktCEXnZyJWdulod2Sorwi0zX/S
+	YoEMNRhxtQdz3qJelALdXjvOD/Gf5HJPX0/F2YUSiKK/Lo56rY90us41rgOt/CXZC5nvPM2Jk+w
+	YyezTVd+c9aVEm3Va8mt2nPlLe/Jf5pT1vucgHuQ9admAPDs3ACOSDWB7ErVLbz1256YJTA0v8x
+	ZSkngWmgE2t9jyDVTJDVlqyLfhJ/pjBIsBBQj7sKCoEhBnIKq6q4=
+X-Received: by 2002:a05:622a:5cd:b0:51c:a8:51cd with SMTP id d75a77b69052e-5213bb21707mr147059781cf.1.1784581125517;
+        Mon, 20 Jul 2026 13:58:45 -0700 (PDT)
+X-Received: by 2002:a05:622a:5cd:b0:51c:a8:51cd with SMTP id d75a77b69052e-5213bb21707mr147059411cf.1.1784581125140;
+        Mon, 20 Jul 2026 13:58:45 -0700 (PDT)
+Message-ID: <985035ee-2577-4b99-8eaa-948a56ad62e0@oss.qualcomm.com>
+Date: Mon, 20 Jul 2026 22:58:42 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/8] qcow2: remove invalid qcow2_check_refcounts calls
+Subject: Re: [PATCH 6/8] block: add missing coroutine_fn annotations
 Content-Language: en-US
 To: =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
         qemu-devel@nongnu.org
@@ -136,97 +136,58 @@ Cc: Markus Armbruster <armbru@redhat.com>, Peter Xu <peterx@redhat.com>,
         "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
         xen-devel@lists.xenproject.org, Li Zhijian <lizhijian@fujitsu.com>
 References: <20260720-co-v1-0-fabb4db3c204@redhat.com>
- <20260720-co-v1-5-fabb4db3c204@redhat.com>
+ <20260720-co-v1-6-fabb4db3c204@redhat.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <20260720-co-v1-5-fabb4db3c204@redhat.com>
+In-Reply-To: <20260720-co-v1-6-fabb4db3c204@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDIyOSBTYWx0ZWRfX5LrmAv1hw6Km
- o2dznOFgpm4nAKG5ashC5PKBjjeklsSJzFvbSjy/kFHRwe3fn+AurNb7ugBrbVHEceu0bspoGEt
- WYxNgzCainfyKMdfAIQMdgbXBa0zBw0=
-X-Proofpoint-GUID: GVZBM1WGNFBl2wyKtmcIinlf2LF_czIz
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDIyOSBTYWx0ZWRfX007B5VLoy1wS
- +Ha2perKgzO03AJzVzU+Y/3JAOZzCndOjcMiXmzB96Pc+ckVEMSqiPbWcRYz9fDTv2eZPHB/m/r
- uWK/j5tupGrNjxFdcL2YiRDPMhLDBdC0PyT+9wvwX1rtKeRCbJXnPfurHwNgQ51FpoHCq3VotlS
- QNzQZbvyYHHZt82/W4Eo7JEPUQ72aVzL1VRL6FaRJ4EearlwOAptizn8KgU/GT4f9KlrDPX8pTG
- 1xPZVMth8dhj+B0CB4PqG9OhBGOYlZ+1VKiecVpfgrl2t19f0ZnhPHhpg3lJvASKhbJZQYlr/o/
- ATvppM2g4vkxJKW3exFxz+eNswe3BeqQfvowme/PK6GrchekTewLm6fYiJfb3m+0nnptGPw19Tz
- 3+CN4kNmi9J0QfxYL4wLDwAoikYTiobaY5CM2oYaFqycAS6Ov6c9BmiLfJ4RVjxx1PIRAauVqLm
- CPRhtB79J7Wye6hJVCg==
-X-Authority-Analysis: v=2.4 cv=CpiPtH4D c=1 sm=1 tr=0 ts=6a5e8bd4 cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDIyOSBTYWx0ZWRfX5G7yxmoCABfS
+ p0uOcnS31Z1w2reCq/S1hSaEyWpLhDYS8akEzfiTUZ36qAOYLCSCgxfdFJXPd+JKIkGB/PzAEj1
+ gx0nqq7BWzW5jKgbSsLVwe64RJSV2dI=
+X-Proofpoint-GUID: PlyockgLh3T1VLa0yD-qVzdeZZB0xUPp
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDIyOSBTYWx0ZWRfX4ngMRQRxbe67
+ MOSVBOLkSYkrbFFockB7W4OosuPRYYSo3BE4yeBP4tBHxJYY/VONKtRx2t986+zGrOCYp8dHoiV
+ Fllq+kZPAdunEu8IRn6HV3WVlq9jNQuXLa0xSM3OlGzZ451bcY9hKUryFfF95xBi2Pdu5itEtpj
+ T4pMRNmE9j+RgW5qOCXrtUeSnfCAebgaNhEw3iHJiUVsDaP9rzc30f7+bxxnuwLu+mUCctiQuSg
+ theYtWHayBKk4ObfMm+1liTYSjbh6jjaLMGii9UJ0wEiBxVKMUOJgNa3q0fFZnWXHODZ4LbmEuk
+ +ZOELMuBy7KIhilm8W6hCj5R0ppOYJFksd+Q/rzd4Ha/Ld0SgvwmiwSwg/cBdsfIUExmrnP34lr
+ G3fb2esrr+vGLCcWJ9rGrSyhsd1QiesQR/MmM7tvsp9hFVcIzn7u+8fJoB+Sb2sdfSzeqhnpW7Q
+ jgEPFciVPhnulKIXIyw==
+X-Proofpoint-ORIG-GUID: PlyockgLh3T1VLa0yD-qVzdeZZB0xUPp
+X-Authority-Analysis: v=2.4 cv=f/x4wuyM c=1 sm=1 tr=0 ts=6a5e8c06 cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=20KFwNOVAAAA:8 a=EUspDBNiAAAA:8 a=bejFeoJku8wluUMwU-oA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-ORIG-GUID: GVZBM1WGNFBl2wyKtmcIinlf2LF_czIz
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=20KFwNOVAAAA:8 a=1BCzUFiEGB2mR181h8AA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=dawVfQjAaf238kedN5IG:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-20_05,2026-07-20_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 priorityscore=1501 phishscore=0 spamscore=0 clxscore=1015
- suspectscore=0 lowpriorityscore=0 impostorscore=0 adultscore=0 bulkscore=0
+ phishscore=0 bulkscore=0 priorityscore=1501 clxscore=1015 adultscore=0
+ malwarescore=0 impostorscore=0 lowpriorityscore=0 spamscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607200229
-X-purgate-ID: tlsNG-d25034/1784581078-51737A5B-2EEA796E/0/0
+X-purgate-ID: tlsNG-ebf023/1784581129-C1AD0B50-7BCAEC9D/0/0
 X-purgate-type: clean
-X-purgate-size: 1719
+X-purgate-size: 723
 
 On 20/7/26 09:55, Marc-AndrÃ© Lureau wrote:
-> Those DEBUG_ALLOC-guarded are dead code incorrectly calling coroutine fn
-> from non-coroutine. Remove it.
+> The functions call coroutine functions or are called by coroutine.
+> 
+> Add an assert() in qcow2_do_close() code path which calls a
+> no_coroutine_fn bdrv_graph_wrlock_drained().
 > 
 > Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 > ---
->   block/qcow2-snapshot.c | 18 ------------------
->   1 file changed, 18 deletions(-)
-> 
-> diff --git a/block/qcow2-snapshot.c b/block/qcow2-snapshot.c
-> index 1e8dc48be1c..8453ad73d10 100644
-> --- a/block/qcow2-snapshot.c
-> +++ b/block/qcow2-snapshot.c
-> @@ -740,12 +740,6 @@ int qcow2_snapshot_create(BlockDriverState *bs, QEMUSnapshotInfo *sn_info)
->                             ROUND_UP(sn->vm_state_size, s->cluster_size),
->                             QCOW2_DISCARD_NEVER, false);
->   
-> -#ifdef DEBUG_ALLOC
-> -    {
-> -      BdrvCheckResult result = {0};
-> -      qcow2_check_refcounts(bs, &result, 0);
-> -    }
-> -#endif
->       return 0;
->   
+>   include/block/blockjob_int.h |  2 +-
+>   block/crypto.c               | 13 +++++++------
+>   block/io.c                   |  8 +++++---
+>   block/parallels.c            |  5 +++--
+>   block/qcow2.c                | 11 +++++++----
+>   blockjob.c                   |  3 ++-
+>   6 files changed, 25 insertions(+), 17 deletions(-)
 
-Fixes: 70bacc44532 ("qcow2: mark more functions as coroutine_fns and 
-GRAPH_RDLOCK")
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-
-While here we could remove DEBUG_ALLOC:
-
--- >8 --
-diff --git a/block/qcow2.h b/block/qcow2.h
-index ce517040c47..5e1f916d58f 100644
---- a/block/qcow2.h
-+++ b/block/qcow2.h
-@@ -33,3 +33,2 @@
-
--//#define DEBUG_ALLOC
-  //#define DEBUG_ALLOC2
-diff --git a/block/qcow2.c b/block/qcow2.c
-index 19271b10a49..6965b80af03 100644
---- a/block/qcow2.c
-+++ b/block/qcow2.c
-@@ -1965,9 +1965,2 @@ qcow2_do_open(BlockDriverState *bs, QDict 
-*options, int flags,
-
--#ifdef DEBUG_ALLOC
--    {
--        BdrvCheckResult result = {0};
--        qcow2_check_refcounts(bs, &result, 0);
--    }
--#endif
--
-      qemu_co_queue_init(&s->thread_task_queue);
----
+Too many distinct code paths in a single patch to my
+taste, I'll skip.
 
