@@ -4,44 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD1D1C44525
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 09:53:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1366406.1616290 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D97E8C44527
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2026 09:57:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1366414.1616299 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlkgQ-0005Nl-Di; Mon, 20 Jul 2026 09:53:10 +0000
+	id 1wlkkt-00061P-UI; Mon, 20 Jul 2026 09:57:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1366406.1616290; Mon, 20 Jul 2026 09:53:10 +0000
+Received: by outflank-mailman (output) from mailman id 1366414.1616299; Mon, 20 Jul 2026 09:57:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wlkgQ-0005Ne-An; Mon, 20 Jul 2026 09:53:10 +0000
-Received: by outflank-mailman (input) for mailman id 1366406;
- Mon, 20 Jul 2026 09:53:09 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wlkkt-00061I-RR; Mon, 20 Jul 2026 09:57:47 +0000
+Received: by outflank-mailman (input) for mailman id 1366414;
+ Mon, 20 Jul 2026 09:57:47 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wlkgP-0005NY-0F
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 09:53:09 +0000
+ (envelope-from <freddy77@gmail.com>) id 1wlkkt-00061C-2V
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 09:57:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wlkgO-00GMc3-DL
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 11:53:08 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wlkks-006E5l-3h
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2026 11:57:46 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a5deff8-2eae-0a2a0a5409dd-0a2a450be680-34
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 11:53:08 +0200
-Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a5df002-b7e8-0a2a450b0019-d1558030b5e4-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 11:53:06 +0200
-Received: by mail-wm1-f48.google.com with SMTP id
- 5b1f17b1804b1-49557167508so14150065e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 02:53:06 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4954a2692a3sm234681515e9.0.2026.07.20.02.53.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Jul 2026 02:53:01 -0700 (PDT)
+ (envelope-from <freddy77@gmail.com>)
+ id 6a5df10e-e002-0a2a0a5209dd-0a2a4508ae0a-32
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 11:57:46 +0200
+Received: from [74.125.224.42] (helo=mail-yx1-f42.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <freddy77@gmail.com>)
+ id 6a5df118-f659-0a2a45080019-4a7de02af02b-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 11:57:45 +0200
+Received: by mail-yx1-f42.google.com with SMTP id
+ 956f58d0204a3-664c6304683so5498768d50.2
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jul 2026 02:57:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,124 +48,143 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1784541464; cv=none;
+        d=google.com; s=arc-20260327;
+        b=QBEq9KI0mdYctJi1ZNllxni4XhSjhqtYH+QLUjRKdpV823mWNNbaT4WItrqn6/8wMj
+         MdPNbtgMN5DIQ1KDRnNE0XvH/As47f+ZdVAC7qVvEi8o3K9EJEiQwIw7ahpDG9/U2Sut
+         ZpwX2lrlh+KFQuAECU4BU399OArOaTy/0XiUzJuNSV+4MAkLVbNklA41yQ3qRAzZf+ux
+         7oF2+P7Fw5JKmMFKwHIhRNuxL7s5HyIma4A2LSPc8lcVOHJz/K5JlSOcvCxsq6i7r2eR
+         EUpreypvImmLLzIPluYBVu+KUzVbmXB/x6FbhFJX/24IxkTkEJKzOd8uAeK9ABQuC9B+
+         eHoQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=o9wv+vt0kf3eYShVpVbOtz1n6i3oPEqytW0Oh8ZxUN4=;
+        fh=cnTo6Tg69lXnwSXiPguVimOwedesAXdkped6OqKsO8k=;
+        b=AYzcK+Yo95NF1D3Y+XqqcWwNUs53zePmKOus1VaZswFLej5uC3CFNG2Rb7UCq6OeCB
+         VaIHR+u2SboDTynQr4wL+b7yW5J5zav/1SRHYvouXSoYA7txrte4vgaOfdHB3Sof2Zfy
+         FDGV5qS3diHzdPYI3qna/kfwk638ru5ICV6Jp6fNpy7b6Gt/xDPHDg2t8sqXjzVepfRc
+         XQ112asH9esspnEaud2LjIiUFBs/8j9OkJDx90B6sz8kvSWZgRZy3QujjQP9frNsrmWL
+         UF5iTZPUatKISCYxbN6taTcHsN7QSSFt0D1axYQK2FSGXnkEbyU845mo2LMHUeG6QcOI
+         hXcA==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784541186; x=1785145986; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=nUjAV7VVSrXXJH0eYmRtHDd8vFVtaItUrZ5KU4Pdv3k=;
-        b=V5wwcQgfMXLD/yWjk1G80artCDnsLuFJajvAlQgrjdKiGoJRqy125H9/Q1seo5j1ig
-         IT5A8hxMYrx09uv62ksNn71ouCt5cGubey3ZxMEf1cbpcwElyIPnwgJ3lRUpxK4u5rLL
-         KSSHJnSXQ6a/eBmB7/tKN/ihZCK/Ai1Q20Z2KlDGdjV7CdTKQAF39Z4CEbRzr8iwDx/E
-         Yx9S256O/BL7zx+QfGMCD+IQVNGK5+1nog8hyw1ixCYipiopo6d9fj5VKSLWWuiL2aVt
-         NBbR+YOfg2op16jtZD4TqtQ09j1H0/M/o6yZ8PP9NO22XzzYCthkQ82nfudr2SZPLnLY
-         jfeQ==
+        d=gmail.com; s=20251104; t=1784541464; x=1785146264; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=o9wv+vt0kf3eYShVpVbOtz1n6i3oPEqytW0Oh8ZxUN4=;
+        b=QEi2exMirR0B88ZEG4oDJkAVitllF3nOfy+mN3cHAsrKAktpxiqnRfmx2HhoDMWpB5
+         PmHl9uDLe3F6zcU1nfx30720+44UWHZAj4rKoEIolrsc47lLUF44TTGFh7vX6TZeutFg
+         CjZ0jDjwTZj8z4yYCpWBT4rUDCgpfjsKZbW2MSC+J9kC57t3i2FOXRlPqKss6bBJtBfs
+         7vh0Fkj2crvk3TAVp40KRk8Lz/4gbaHkxKY4E8PRN117aiI0ENvodfwsoeqnVeiWYKV9
+         hyHg21aVZOBMQeKr//C7KyyyBXrUKudzosqSh+TUhSFqL+4tmQqqrdg56E+Y46iwVANx
+         pgaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784541186; x=1785145986;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=nUjAV7VVSrXXJH0eYmRtHDd8vFVtaItUrZ5KU4Pdv3k=;
-        b=DdVblUuxYkmcy6usMporzJHJMA196d018e4dyKdOGMqvLYC9ZG6oIFO5VL64+bhYF4
-         Ek4YP81QqzmjGO6/YSwuZrphaz92AsUZuSexzlk3eQJ+3CI78MWkHWDaPXRFCzurdDxm
-         TglA7vxjDUAqEZ7qZ40vH2rvB9wH2uMBAmu/60Dis103wXNeumXrkit5xXSO4BIX+QZr
-         fnFyoGMztKoHLtLIHo4NEPcjbYO0yXGkIuOoc84ZfT0stU9eLdHUaZ1aNlqy7VGEqoPR
-         tlUqJMIwDg+ebA4CWSQ8I2gCMceLXWOV45TV7yBLqL1L/sWTxXUzr5ttjbNyAmUsu3Sw
-         ujqg==
-X-Forwarded-Encrypted: i=1; AHgh+RpD5/uldSwDDEFAHWy+yy7QIYgiFLpbvL8zXdhsjBzMBW5hoYp+uTdYnSlUw+vzVDVDtjH32X1zxZY=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxwejciSS6cEsXDQ6SbdlRwEa2qo/4lv3HTvzbCMeZtltDhjaKX
-	Qq9voo8nSDrwM2Ik5sXEH8gnYQHTohHB6UHiI5cqBkgyibgTJjSOwAIQ7hVJxeasEw==
-X-Gm-Gg: AfdE7cmgjpCMRgNlIWWTnIADZ6xkX4Qpw9t/kQnZGy773k0/vQxh1PHPde8qMsaMwnC
-	E/MNl0y+CYuma2GTbsdu41L6l2xXSXl4qe1sTUejy8UsS0lufI6toK2U3SQj2tuk9xqWRVbiZxR
-	510urq+/mmZe+Hu/eZkZlHjN7ArV38Q/xyi7jpDrWJEASuHnX06ln5de/dUiwpV4u2m+HbJK8fW
-	grEUfJuv773HjO6QSa/BjPt6GaSdT89zYA/aGGtesKjgxjoy1MiQT9Df6VVLz0rMeCtaPezlFIf
-	R/LgdnioduM9Ti0Ny0InoV8BhqHleH3nY3GjUs+YLl/ahw0jv471Z+yBFaVGZM4Nb32J1W4rCwJ
-	dVPck0jtp6xuNleQvkGv5SAtvEgDrcEBRp4KFFjSwx7vfhJURrkLSgmeuIovLCzAD25+yVhlWAx
-	wSzZxeoz/lK00riLwMdCY4y6tsu3yYjMJ2OrOKDvdmCuRDSbcCBlUJDxmmm2+aOUZZbA==
-X-Received: by 2002:a05:600c:4685:b0:495:4aff:5fdf with SMTP id 5b1f17b1804b1-4954aff61f3mr161154705e9.28.1784541182193;
-        Mon, 20 Jul 2026 02:53:02 -0700 (PDT)
-Message-ID: <b839ad67-c6dd-4d72-9910-dcabe28afaa0@suse.com>
-Date: Mon, 20 Jul 2026 11:53:02 +0200
+        d=1e100.net; s=20251104; t=1784541464; x=1785146264;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=o9wv+vt0kf3eYShVpVbOtz1n6i3oPEqytW0Oh8ZxUN4=;
+        b=gzvEvOAU9Ue1Iw5FCXzCXMCOPgzzmDzPUwtwGPA5XDpp9M5SsDujaia/lgi1SNpLq0
+         7CzL+O8iUNgtBusfvahV5hPUZdbzFW26JqFxMygx5x9Sl2mnSt90/Lv1+8QJfYUxaHR1
+         e2+K6nvNVOvu1MYUpwjk8En6HjVWqGFI3q05FJ/LcQ/Va5MDxep5oZ2qRoa+6Xwovkzs
+         Cq+qEKE/wcfO0sl8hMUvxpiSjRWlXdv9xKTxr2Vmu2TJQ7udVaprdagg1YFTdjPtlXCg
+         9zhUxUKo76mRpcqACTvOo8Is6Rd77usktJjJz80BuipStzrYCt5I7i9vd3wrcovES2Wo
+         Gltg==
+X-Gm-Message-State: AOJu0YwVcaM5kTCKhvg3t/D1y6dqvskoGWo0H7NQYREBIcO+i/jlJN9V
+	7bB8NoSsMa8qRWyP9AGShMFY7SP9DCtcBz2vuF0tDTnjRxwyVAuDHRSXV6ZMyRhdGJxJfCzDOdt
+	E78MiX4b9ztIZK82Otybuzd/tSPRf7WLXK6Eb
+X-Gm-Gg: AR+sD13WWdWWAuUyNzwo8ahSx8uXtK/6EoWjRSj3Ugnj6BKepBE9/F6lkU/4oP79VXW
+	piPkJlFCU+D1hLEXwfctYSmpM04Rsjho44caxYivGCqV92alsWVZoJDtdznhSDFCevVxDLjMJnC
+	7Wa2aRBMePO+TVsNuZlqWoJOFVx8gTt3knsUI3/NT+47otqa6mtdDIQab7Z/pJ/d8L5HzZtmoXC
+	ILZLf8AD5ncFe54jqStU8LRggksCI7oqzVcEXaWPRKISa3NdCsWSMV4mevsyP6rAkygx2TfHOi+
+	O6eKXyRjiMdvf5/3O1MtyFAkPWxa
+X-Received: by 2002:a05:690c:46c1:b0:80c:85e5:8745 with SMTP id
+ 00721157ae682-81ef262b5famr43042617b3.67.1784541464152; Mon, 20 Jul 2026
+ 02:57:44 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] x86/domctl: Introduce XEN_DOMCTL_SENDTRIGGER_DEBUG
-To: Tu Dinh <ngoc-tu.dinh@vates.tech>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <1784539531.8631fc262581453bbf619ec5b2062170.19f7ed8472c000edb5@vates.tech>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1784539531.8631fc262581453bbf619ec5b2062170.19f7ed8472c000edb5@vates.tech>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1784541186-A9AC09EA-112E1A2B/0/0
+References: <20260720001223.2876628-1-marmarek@invisiblethingslab.com>
+In-Reply-To: <20260720001223.2876628-1-marmarek@invisiblethingslab.com>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Mon, 20 Jul 2026 10:57:33 +0100
+X-Gm-Features: AUfX_mz919yePEREmTPdnG0zI60iGVMzi5zlnPglgeLGU4oRqx7Oi5DWAq241rQ
+Message-ID: <CAHt6W4derNf71m6hjB=8DOeghtSQ6N+sMenJZd2iOn1EJxRaiw@mail.gmail.com>
+Subject: Re: [PATCH] x86/domctl: restore all registers in arch_{get,set}_info_guest()
+To: =?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>, 
+	Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Teddy Astie <teddy.astie@vates.tech>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-c1860d/1784541466-D735D87B-E299431A/0/0
 X-purgate-type: clean
-X-purgate-size: 1401
+X-purgate-size: 3128
 
-On 20.07.2026 11:25, Tu Dinh wrote:
-> VIRQ_DEBUG causes guests to print their diagnostic information.
-> Currently, the only way to send VIRQ_DEBUG to a domain is via the 'q'
-> debug key. This method indiscriminately sends VIRQ_DEBUG to all domains
-> and vcpus.
-> 
-> When debugging guests, it's useful to have a way to target a specific
-> domain with VIRQ_DEBUG. Add XEN_DOMCTL_SENDTRIGGER_DEBUG for this
-> purpose.
-> 
-> Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
-
-Fine in principle, but ...
-
+On Mon, 20 Jul 2026 at 01:13, Marek Marczykowski-G=C3=B3recki
+<marmarek@invisiblethingslab.com> wrote:
+>
+> Commit 9f892f84c279 ("x86/domctl: Stop using XLAT_cpu_user_regs()")
+> converted memcpy() of the cpu_user_regs structure to explicit copy of
+> its fields. In the compat case, it intentionally missed few of them,
+> named in the commit message. But the 64bit case missed also r8-r15
+> registers, which was not intentional. This, at least, caused Linux
+> 6.18.x crash when resuming PVH domU.
+>
+> Fix it by adding missing assignments.
+>
+> Fixes: 9f892f84c279 ("x86/domctl: Stop using XLAT_cpu_user_regs()")
+> Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingsl=
+ab.com>
+> ---
+>  xen/arch/x86/domain.c | 8 ++++++++
+>  xen/arch/x86/domctl.c | 8 ++++++++
+>  2 files changed, 16 insertions(+)
+>
+> diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+> index 1d458f1372e5..ba7244ccc513 100644
+> --- a/xen/arch/x86/domain.c
+> +++ b/xen/arch/x86/domain.c
+> @@ -1255,6 +1255,14 @@ int arch_set_info_guest(
+>
+>      if ( !compat )
+>      {
+> +        v->arch.user_regs.r15               =3D c.nat->user_regs.r15;
+> +        v->arch.user_regs.r14               =3D c.nat->user_regs.r14;
+> +        v->arch.user_regs.r13               =3D c.nat->user_regs.r13;
+> +        v->arch.user_regs.r12               =3D c.nat->user_regs.r12;
+> +        v->arch.user_regs.r11               =3D c.nat->user_regs.r11;
+> +        v->arch.user_regs.r10               =3D c.nat->user_regs.r10;
+> +        v->arch.user_regs.r9                =3D c.nat->user_regs.r9;
+> +        v->arch.user_regs.r8                =3D c.nat->user_regs.r8;
+>          v->arch.user_regs.rbx               =3D c.nat->user_regs.rbx;
+>          v->arch.user_regs.rcx               =3D c.nat->user_regs.rcx;
+>          v->arch.user_regs.rdx               =3D c.nat->user_regs.rdx;
+> diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
+> index 07f712a0a40d..3ea4c650eee0 100644
 > --- a/xen/arch/x86/domctl.c
 > +++ b/xen/arch/x86/domctl.c
-> @@ -605,6 +605,11 @@ long arch_do_domctl(
->              }
->              break;
->  
-> +        case XEN_DOMCTL_SENDTRIGGER_DEBUG:
-> +            ret = 0;
-> +            send_guest_vcpu_virq(v, VIRQ_DEBUG);
-> +            break;
+> @@ -1481,6 +1481,14 @@ void arch_get_info_guest(struct vcpu *v, vcpu_gues=
+t_context_u c)
+>      if ( !compat )
+>      {
+>          /* Backing memory is pre-zeroed. */
+> +        c.nat->user_regs.r15               =3D v->arch.user_regs.r15;
+> +        c.nat->user_regs.r14               =3D v->arch.user_regs.r14;
+> +        c.nat->user_regs.r13               =3D v->arch.user_regs.r13;
+> +        c.nat->user_regs.r12               =3D v->arch.user_regs.r12;
+> +        c.nat->user_regs.r11               =3D v->arch.user_regs.r11;
+> +        c.nat->user_regs.r10               =3D v->arch.user_regs.r10;
+> +        c.nat->user_regs.r9                =3D v->arch.user_regs.r9;
+> +        c.nat->user_regs.r8                =3D v->arch.user_regs.r8;
+>          c.nat->user_regs.rbx               =3D v->arch.user_regs.rbx;
+>          c.nat->user_regs.rcx               =3D v->arch.user_regs.rcx;
+>          c.nat->user_regs.rdx               =3D v->arch.user_regs.rdx;
 
-... unlike the other XEN_DOMCTL_SENDTRIGGER_* this one isn't really x86-specific.
-Hence, at the risk of being called guilty in causing scope creep, I think this
-wants some re-structuring. The handling of XEN_DOMCTL_sendtrigger wants to move
-to common code (at that occasion also making it properly use domain_vcpu()), with
-a new arch-specific handler to deal with non-generic XEN_DOMCTL_SENDTRIGGER_*.
+Reviewed-by: Frediano Ziglio <frediano.ziglio@citrix.com>
 
-And then, if already moving this, it will also want considering where to move it
-in do_domctl(): It doesn't look as if holding the domctl lock would be required
-here.
-
-Jan
+Frediano
 
