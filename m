@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1EFBC44532
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2026 14:50:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1367842.1617503 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41A48C44533
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2026 14:58:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1367852.1617511 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmBnT-0007Ef-89; Tue, 21 Jul 2026 14:50:15 +0000
+	id 1wmBue-0008Gd-Tl; Tue, 21 Jul 2026 14:57:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1367842.1617503; Tue, 21 Jul 2026 14:50:15 +0000
+Received: by outflank-mailman (output) from mailman id 1367852.1617511; Tue, 21 Jul 2026 14:57:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmBnT-0007EY-4e; Tue, 21 Jul 2026 14:50:15 +0000
-Received: by outflank-mailman (input) for mailman id 1367842;
- Tue, 21 Jul 2026 14:50:14 +0000
+	id 1wmBue-0008GW-R2; Tue, 21 Jul 2026 14:57:40 +0000
+Received: by outflank-mailman (input) for mailman id 1367852;
+ Tue, 21 Jul 2026 14:57:39 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wmBnS-0007EQ-CK
- for xen-devel@lists.xenproject.org; Tue, 21 Jul 2026 14:50:14 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wmBud-0008GQ-ES
+ for xen-devel@lists.xenproject.org; Tue, 21 Jul 2026 14:57:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wmBnR-001aWB-Ib
- for xen-devel@lists.xenproject.org; Tue, 21 Jul 2026 16:50:13 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wmBuc-00AWZe-Ni
+ for xen-devel@lists.xenproject.org; Tue, 21 Jul 2026 16:57:38 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a5f8714-bab6-0a2a0a5309dd-0a2a4501902c-38
- for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 16:50:13 +0200
-Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a5f88e1-2eae-0a2a0a5409dd-0a2a4503dcb2-2
+ for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 16:57:38 +0200
+Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a5f8725-5984-0a2a45010019-d155dd29c801-3
- for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 16:50:13 +0200
-Received: by mail-wr1-f41.google.com with SMTP id
- ffacd0b85a97d-475417f010dso6504294f8f.2
- for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 07:50:13 -0700 (PDT)
+ id 6a5f88e2-fae8-0a2a45030019-d155dd2ed9e2-3
+ for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 16:57:38 +0200
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-47f71156e1aso1371170f8f.3
+ for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 07:57:38 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f63ed2314sm3638528f8f.23.2026.07.21.07.50.11
+ ffacd0b85a97d-47f63eddd1csm39684898f8f.29.2026.07.21.07.57.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 21 Jul 2026 07:50:12 -0700 (PDT)
+ Tue, 21 Jul 2026 07:57:37 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,63 +55,57 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784645413; x=1785250213; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1784645858; x=1785250658; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=VKNl9daCaij5y5TcJNO2d7ZVTKIkAXyOcwP4Ouzi2z8=;
-        b=WYZmGAYhfCrwUg3fO1WQL3Zo2Qne4jDlhhaXurR1kMjE78Y5PBOCnIU4RVFXnRNs4f
-         P7CPiMU2e2GWgieFiVVmkI1Z3Q2xzTHJX4e5FMj5omxjwFzZdrjFEHOGvevYcMM/5c7e
-         dcIzZIiJ6nVW0SE7EH8VcK8GuCTQ2wyvdnuYfUEC/IfEtGyNPzYyZmzON6iTsO0HUw5z
-         YFILD8+IeNLarM2jrXAHaQaYN0CeXuaXhEfc4rybxriqgK1sOhGDJmwreghCFngyIeXR
-         YAR6zyYVTtxwj91nm00TOZB0qZj10IBziCRHrk4cSDVQqhFA4IImHDpus+O/BTTSWdh8
-         6Cow==
+        bh=YeOcu0/SzSC3+BNyx2E8YApufOuWfXX7Ddo6NWcd9vQ=;
+        b=V02Z0ahLSIAkPGDDiMDN20HQTbWRIb3yGkZSfT2z6Wd9A5sYKSL08wsxYQJY1uH7zJ
+         8nQkddyqBGBE5gZA4iLtTqd+pUNrcvX7R7sZN+Q8SKfTr+LXmG8vKwWbg/g+Le2ZMV0u
+         WdK2LaIO1sAaYCa1qWqs58UMgpicF/x+lG0Td2713Iy27eK6XZJ1jUfBpTBUEA7XWZPC
+         1tPB+RqfJB50mlzOjtwYYmkO7h7AELzqAPh2xf/3vt1QmsxZLlgJIg51nrj7Ibv8WWZW
+         percmUDxQHLYEXuOmFE9L0rvsc++Se7dA3k7kehNjQ3yeGe/zWOH7UqqVoBmES3THQWk
+         cy4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784645413; x=1785250213;
+        d=1e100.net; s=20251104; t=1784645858; x=1785250658;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=VKNl9daCaij5y5TcJNO2d7ZVTKIkAXyOcwP4Ouzi2z8=;
-        b=KRrPr7WceZzXIhmBkevsXvvG+h2tA+SA+vOxVxc5FPzYslky8eokUrGqamu4QlN2l4
-         DTsZHkqoBlkdhX6REoL/yNSWOgi56enmd++IwCbdB8J6yF2N3U+VjwobDyaaie1Ex+UM
-         BCA1qGh31CzGewQxkbC60CsB9TN+c2Tziw2FyTVp2wGOiuWuz30MD4Cw/Uwto9wWAGIf
-         zDQbM1q/0yAAoU4ARL6Ys7ZzOSIkqQTmLMvLaZKq/LF6UFdntmXkC1hem97fIkfQqIHZ
-         4V3ATOdLKcAkT0VtkMyjId1JeVR8zRVZzsRZdyLp3vlwQBIN5Vbx5USTnsdBKICOYWdX
-         39AA==
-X-Forwarded-Encrypted: i=1; AHgh+Rq9ULVHj1sN6aowz/JVQXDqDPvPKhpqcfRYpi6snou2R6eRSp/LOYf5jV5lkL/uAXGk+omTRwsgvCY=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzqeQZvPusknMQLHofs4f7ldUebtyC4TBap58hsQThRUrgSEOje
-	n74GzlSolBplYeoPZvyZX2ujZX9S4YyWEJaE7BPUSo1qao5IUMbGRHjuC/WVvIA3NA==
-X-Gm-Gg: AR+sD116OsxydYBVM1OB44tmzFQ0U0xxPVI485u6uWgQ1Jinfk0nzY4A2rGkXLzQzcL
-	jE/TioyBqOtkN+H9cj36HEfI7VlZ5BrCPHJ6oUdhQWmgQxTVGXNfN4L+6zcZ6P4MhcUF6NAG7uC
-	YfGlPOt9mfwkO2i8Hp/r5f7a4i+wMgWSjm3UgUdrLC4A4MSgcGAv/xv5ROaeLyMooBpSdrjtWx2
-	T4sSNJU3isJfnL4qXQC8CpRqiG42E2dRvpAhYpqcvQfXi6hF+UmFfyCA/K5ZR6P/Yv+B/NJOIiI
-	R2Up8sC6/Thl14z6uPN6RvtxDKz4eTvRbOcFxb5whreuaAHECvZh0yfFuZVh0zV+jCIihAbPxUS
-	CJ5fZIDFeQhXRjmSm8zwHex+0Qqcb59XUREQpv6Ap0iIPgH1JWk/NMMOlfATLCTaraPGVBZMviq
-	Ct9/xIi6P3/dlWVL4nnzr12kZGDUEJIoplsNxnAp+lGxpMlmmagDm4R2HYBp9BNGZhCnqboKipt
-	ONQ
-X-Received: by 2002:a05:6000:2f84:b0:47f:25b1:e7b6 with SMTP id ffacd0b85a97d-47f623369damr20334439f8f.30.1784645412746;
-        Tue, 21 Jul 2026 07:50:12 -0700 (PDT)
-Message-ID: <e8b6669c-a938-43b4-bb9e-d9c26b83fc57@suse.com>
-Date: Tue, 21 Jul 2026 16:50:10 +0200
+        bh=YeOcu0/SzSC3+BNyx2E8YApufOuWfXX7Ddo6NWcd9vQ=;
+        b=gHCl86RFEOHWuaprFBx+bSk+ogiYOrP7z1VUYM7iAZ0CfD249tN0ob301jEm/HNEUE
+         cnaaoo67w1uA68cnbjj5KbWcEIoOnaN48rnPQIw6ZftdrbrkFFa5n1qoBi8JpHG0/r4R
+         lWR8+QPkOFC7vfkYo0UW4PNFp3tLiWldAJakTB1FfsiOMjLhI31/Lq/vtGzRAJ8YBbsF
+         E5e1yTzy2LpYBj3HghfBttJSyCRGOGc118IS/5KQWQHKDWmWCtGsjOzgQjJtaWZh1P/n
+         hWYMBAjIG1D1Sqt6rmdJ6uC8LWSzxW0JDeCWPH1YqUrOgAX6h+w5cMv1bWEou6ZaZq/+
+         863A==
+X-Gm-Message-State: AOJu0YznVfHPeaJiYNgRBdyviX3fLZM/YUTCbsoA48QZo5IJIkkNtsgB
+	rbJVQi1Sb6+28wppJsyRVCfDEyKGn66ZWnAygQtpXGFf2ggqWNPF2nn5H83m49qNfQ==
+X-Gm-Gg: AR+sD10Q7kZqwNBbpQ+Lo2PWKEHemT3iJPV0aS0B/G/SQrwQC2GmMve6KCWPLCQPh/3
+	JHQGpQBWpfcPYgrXWFuW05qrJJltGgayg63O68Jq8JfipqLguEXoVWcX5ezS0HaOqFB2nxtts6w
+	DLDp2bPVSRTOaZ2dzniNWBZgDdFWu20cVHeQ4zbt0j3a1kG3XtSCkOBrJ+CyLTYzXjLhMQcgiG1
+	N5/0d3G3WmjAw0leD9NcLzQEmUFs5GKRcUOUO+rjV1Dskgc4TT+SE4gb8/xRSmQroFFXI879E1b
+	BsWSx+9IeJ4dHCxjblfMDOuTuVkGYSJ/Tr0opPiavurOt871J6MJ8xpVxvvcoWPoLeshaUYyoQz
+	vw2JPxgKXmXvS/e/Z2vg5uHn3u7nkHVduGXtkxFF5IU0eGBhBt9iWjFiBxeVrHcnBoTax8FPCel
+	UjkRUcRT4FutX3Bks2Nci1jwNaKzLJ66bdTKnd78Gx94EABn8KySaZN1sYf/20VRoZWg==
+X-Received: by 2002:a05:6000:310f:b0:47f:83f8:a956 with SMTP id ffacd0b85a97d-47f83f8ac9cmr204433f8f.37.1784645858030;
+        Tue, 21 Jul 2026 07:57:38 -0700 (PDT)
+Message-ID: <05425d51-965f-4176-a297-c5e6f966d886@suse.com>
+Date: Tue, 21 Jul 2026 16:57:36 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 01/23] xen: introduce CONFIG_HAS_SHARED_INFO for archs
- without a shared page
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+Subject: Re: [PATCH v3 1/2] x86/domctl: don't imply I/O port permissions from
+ I/O port mapping
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Anthony PERARD <anthony.perard@vates.tech>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <cover.1784559209.git.oleksii.kurochko@gmail.com>
- <01df5be27b502a19dd51ded7577af68cee234c58.1784559209.git.oleksii.kurochko@gmail.com>
+ Teddy Astie <teddy.astie@vates.tech>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>
+References: <65f69026-f284-4cfd-b502-8d8955b412f5@suse.com>
+ <724bd14c-ebba-4e29-be7c-012aa7aa82b2@suse.com>
+ <al-G7l2IM736d-Q6@macbook.local>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -137,42 +131,67 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <01df5be27b502a19dd51ded7577af68cee234c58.1784559209.git.oleksii.kurochko@gmail.com>
+In-Reply-To: <al-G7l2IM736d-Q6@macbook.local>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1784645413-1E867757-4EE04575/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-33051d/1784645858-74A894E9-5A992A30/0/0
 X-purgate-type: clean
-X-purgate-size: 1442
+X-purgate-size: 2344
 
-On 20.07.2026 17:59, Oleksii Kurochko wrote:
-> --- a/xen/common/domctl.c
-> +++ b/xen/common/domctl.c
-> @@ -102,9 +102,14 @@ void getdomaininfo(struct domain *d, struct xen_domctl_getdomaininfo *info)
->  #ifdef CONFIG_MEM_PAGING
->      info->paged_pages       = atomic_read(&d->paged_pages);
->  #endif
-> -    info->shared_info_frame =
-> -        gfn_x(mfn_to_gfn(d, _mfn(virt_to_mfn(d->shared_info))));
-> -    BUG_ON(SHARED_M2P(info->shared_info_frame));
-> +    if ( IS_ENABLED(CONFIG_HAS_SHARED_INFO) )
-> +    {
-> +        info->shared_info_frame =
-> +            gfn_x(mfn_to_gfn(d, _mfn(virt_to_mfn(d->shared_info))));
-> +        BUG_ON(SHARED_M2P(info->shared_info_frame));
-> +    }
-> +    else
-> +        info->shared_info_frame = gfn_x(INVALID_GFN);
+On 21.07.2026 16:49, Roger Pau Monné wrote:
+> On Tue, Jun 30, 2026 at 03:54:04PM +0200, Jan Beulich wrote:
+>> Rather than granting permissions when mapping (an operation that DM-s are
+>> allowed to carry out, while they can't invoke ioport-permission), check
+>> whether permissions actually were granted when adding a mapping. This then
+>> also allows relaxing the necessary locking.
+>>
+>> While no longer granting permissions upon mapping is "only" at risk of
+>> breaking guests, no longer revoking permissions upon unmapping strictly
+>> requires callers to additionally invoke XEN_DOMCTL_ioport_permission. Or
+>> else a security issue would arise. In-tree code already does so.
+>>
+>> While there switch to using %pd in the two log messages.
+>>
+>> Fixes: 192c4dabc344 ("domctl and p2m changes for PCI passthru")
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> 
+> It's difficult to not think about someone appearing in 3 or 4 years
+> complaining that this change in behavior has caused them a security
+> issue, but I do agree that the previous behavior was inconsistent at
+> best:
 
-There's one issue left here: INVALID_GFN is a Xen internal concept. It could
-change value if we saw a need. Therefore you cannot use that value here, to
-supply it as hypercall output. It needs to be ~0, and imo the public header
-also wants amending to indicate the special meaning of this value.
+A positive aspect here is that the similar change for MMIO went without
+any fallout, as far as I'm aware.
 
-And there's one further aspect to consider: Do we really want to retain the
-shared_info struct domain field when !HAS_SHARED_INFO? Making it conditional
-would require some adjustment here, but might be tidier overall. In
-particular doing so would eliminate the risk of new uses of the field
-appearing, with people not noticing that they'd break RISC-V.
+> Acked-by: Roger Pau Monné <roger@xenproject.org>
+
+Thanks, but ...
+
+> However you need to bump XEN_DOMCTL_INTERFACE_VERSION to note the ABI
+> change as we are in 4.23 now.
+
+... there's no interface change here. A bump therefore won't buy us
+anything. I'm hesitant to take your ack as long as we disagree here.
+
+> We possibly need to sort out the questions below, in case there are
+> changes required to either libxl or QEMU.
+
+Indeed.
+
+>> ---
+>> libxl has libxl__grant_vga_iomem_permission(), but I can't spot any I/O
+>> port equivalent (nor a revoke counterpart, btw). Everywhere else MMIO and
+>> I/O ports look to be treated equally.
+>>
+>> Qemu uses both xc_domain_{iomem_permission,memory_mapping}() in
+>> igd_write_opregion(), but only xc_domain_{memory,ioport}_mapping() in
+>> xen_pt_region_update() and xen_pt_{,un}register_vga_regions(). Is the IGD
+>> region special in any way? Clearly this can't work from a stubdom.
+> 
+> Those possibly need to be answered by Anthony, but he isn't on Cc?
+
+Oh, I had him Cc-ed on v2, but forgot to on v3. Anthony, your input is much
+appreciated.
 
 Jan
 
