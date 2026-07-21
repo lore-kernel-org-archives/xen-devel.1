@@ -4,36 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF771C44529
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2026 08:51:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1367642.1617365 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B750CC4451C
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2026 09:08:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1367651.1617374 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wm6Bw-0005ct-FE; Tue, 21 Jul 2026 08:51:08 +0000
+	id 1wm6SQ-0002Sv-P3; Tue, 21 Jul 2026 09:08:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1367642.1617365; Tue, 21 Jul 2026 08:51:08 +0000
+Received: by outflank-mailman (output) from mailman id 1367651.1617374; Tue, 21 Jul 2026 09:08:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wm6Bw-0005cm-CD; Tue, 21 Jul 2026 08:51:08 +0000
-Received: by outflank-mailman (input) for mailman id 1367642;
- Tue, 21 Jul 2026 08:51:06 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wm6SQ-0002So-Lf; Tue, 21 Jul 2026 09:08:10 +0000
+Received: by outflank-mailman (input) for mailman id 1367651;
+ Tue, 21 Jul 2026 09:08:09 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <qemu_oss@crudebyte.com>) id 1wm6Bu-0005cg-NC
- for xen-devel@lists.xenproject.org; Tue, 21 Jul 2026 08:51:06 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wm6SP-0002Si-Jt
+ for xen-devel@lists.xenproject.org; Tue, 21 Jul 2026 09:08:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wm6Bt-008zRe-Kw
- for xen-devel@lists.xenproject.org; Tue, 21 Jul 2026 10:51:05 +0200
+ id 1wm6SO-001q47-Fb
+ for xen-devel@lists.xenproject.org; Tue, 21 Jul 2026 11:08:08 +0200
 Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <qemu_oss@crudebyte.com>)
- id 6a5f32ea-5cb7-0a2a0a5109dd-0a2a450897f0-40
- for <multiple-recipients>; Tue, 21 Jul 2026 10:51:05 +0200
-Received: from [5.189.157.229] (helo=kylie.crudebyte.com)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a5f36ef-5cb7-0a2a0a5109dd-0a2a4508ab8a-24
+ for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 11:08:08 +0200
+Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
  by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <qemu_oss@crudebyte.com>)
- id 6a5f32f8-f659-0a2a45080019-05bd9de5b62d-3
- for <multiple-recipients>; Tue, 21 Jul 2026 10:51:05 +0200
+ (envelope-from <jbeulich@suse.com>)
+ id 6a5f36f8-f659-0a2a45080019-d1558032b510-3
+ for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 11:08:08 +0200
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-49557167508so27051395e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 02:08:08 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47f6fa848fcsm27086663f8f.0.2026.07.21.02.08.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 21 Jul 2026 02:08:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,96 +53,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=kylie header.d=crudebyte.com header.i="@crudebyte.com" header.h="Content-Type:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=crudebyte.com; s=kylie; h=Content-Type:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
-	Content-ID:Content-Description;
-	bh=RjimWnqmHsNVDASdqxBR6CDlPbi3iLgTQoVIt7skhHg=; b=PM8Q9kJ50RgUnZhenHWgJSroUh
-	9d24X9ALnyODosKeawNs8M6RHGbxAkDzATbRverUFQYS7kN5i0/YEvE7riyVXuhByoCzNpmR2F+uf
-	RjnvN2dr9hCERsctmaCk4YtCDhRDCobIHQfCt5IbJinWlRblSfkbdP3vauJxybxrdkmb6BjPVIPq6
-	Y3dPvXSo7YoNHggKhg11q2VbfDI9nX6GlxuRl+bgvsiQUUrwdU3QZoHKceWE0OR4wmg24OQJR978y
-	H0S1KbsDzUINWYfyXe/JdwBDJMagAgsKONq5NzYXK0/aVx7upfaugcoPIf8Uy88cgbHTM+siOVFOB
-	CQoQVBOus418Sta3g+c3LtDvyboclxS4nxR9s83FADKEzoE8YO4Peb1ik/A5uAYEBG9k48HtTll+y
-	I7efPhu8rU2PqqX9+d/Lj3tFEiFi16IwD4rtbLFlNYcYmuSlU8+WcYZYwjrABF8TXV9e5z8PPn24j
-	YiAPBd9MMgTtNpu7Z5QJpDxVIzKMXr9aKP+uRba+rXGYbLjRCgYBhVw+e34/gTOojL18GhiVtAMvO
-	N8sxa+8/F4xJFqIXONy2UmIkCJXBEXmyYYZMm42MOGhPVHe7fPP98RKEyezazCKeQkAY5MGwp2jtC
-	kr/Rte0ErDQ9ZiJx75A3aVMCCKhmjgoeHiozfK7UQ=;
-From: Christian Schoenebeck <qemu_oss@crudebyte.com>
-To: qemu-devel@nongnu.org,
- Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@oss.qualcomm.com>,
- =?UTF-8?B?TWFyYy1BbmRyw6k=?= Lureau <marcandre.lureau@redhat.com>
-Cc: Markus Armbruster <armbru@redhat.com>, Peter Xu <peterx@redhat.com>,
- Fabiano Rosas <farosas@suse.de>,
- Daniel =?UTF-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>,
- John Snow <jsnow@redhat.com>,
- Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
- Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>,
- qemu-block@nongnu.org, Stefan Hajnoczi <stefanha@redhat.com>,
- Fam Zheng <fam@euphon.net>, "Denis V. Lunev" <den@openvz.org>,
- Greg Kurz <groug@kaod.org>, "Michael S. Tsirkin" <mst@redhat.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony@xenproject.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- xen-devel@lists.xenproject.org, Li Zhijian <lizhijian@fujitsu.com>
-Subject:
- Re: [PATCH 7/8] hw/9pfs: annotate V9fsTransport callbacks as coroutine_fn
-Date: Tue, 21 Jul 2026 10:50:49 +0200
-Message-ID: <1962171.tdWV9SEqCh@weasel>
-In-Reply-To:
- <CAMxuvay01r=EchTO=PocqPtdtZtxcJs+AJZExRA8rBao31mH7w@mail.gmail.com>
-References:
- <20260720-co-v1-0-fabb4db3c204@redhat.com> <6287083.lOV4Wx5bFT@weasel>
- <CAMxuvay01r=EchTO=PocqPtdtZtxcJs+AJZExRA8rBao31mH7w@mail.gmail.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1784624888; x=1785229688; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=XKU0jgt8tnx7GAk1wsI3Ni5Sb3Ie6Gh1dC40swdoaGI=;
+        b=MhLswk/p5IyAN4hlPlFAjDWxWtEHwMq0TSZAefxCGj5RqFRILQBKrmv0gIkdFFp/j6
+         3PedwwuZf7RMHusSfgrVS+t+mP8S0UukAp8W8AWSkpe7L7Gt7S8rMPBi8eK+XJZDSK+K
+         Stxr2dR620bYDQ7Qu5DU29W4pShEeaOllTJCFFvqxDDXzpiZh3WY2hG4Izl8Li7zi5KX
+         Co6yZ1eo6D0F6BG1pYw4D7oVR1TUiaQJJYsdOJ21Ow3TmxA4Q0LqR7gPRc2i+dgj7Frj
+         bJnEd5d3wAAQjVFbrc0wzWkPLKaHQhH9iLhGKIv4SS7hzyBB7qvCZJZ5cFbaTXMidmXg
+         QfGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784624888; x=1785229688;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=XKU0jgt8tnx7GAk1wsI3Ni5Sb3Ie6Gh1dC40swdoaGI=;
+        b=k8qbC3VwoIIgiyZVH1EkmPGxtr+XI0sqsqZthsJJPSVGUdGFRpquyS8Ekh+Rwz8MG5
+         FQdcN58DKyTQ/s+8b2qv6djElPkr+/XViRB+FVw+9ZEIzqYHE9vYQY1g0zeWvzxnVTOO
+         lYJqyY1Ig0GT5F6qNZsep0By9I8B7PWojpWUgGoqJajNCzAxHMiHQK9U4y7mcDDaV7hx
+         5KUECu8X/mBjL8+0w06u0eqM/u/HRdUr4dtqNkjBzFMgAJ8bwh8OKmfkfnI+HRI9jeKA
+         cghd6/ZXYrNvr1niPeEJSvZ0ipCdhs6sPxx3xPDMCllvcLyP0J2bJ8yfQUv/MHJduq2F
+         322w==
+X-Forwarded-Encrypted: i=1; AHgh+Rr+0vzBjnn1GKCr17rdfLmYLOIY8G36QPLENszo8gd/tYpgLjRCG2JoPs+74oXfbu1cfuOmsN8bjyQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxoRv7t2XWGsa6t7dohUKZOqhtdnzg9We+yKhS8bxB8c9UqXfJK
+	21k40dlA8MoBATQZN0Co4nJagZqPsMIoltspwkwQj8rRfm8kVVJHHbZDfS7Wj1iPrg==
+X-Gm-Gg: AfdE7clTZFecFtm7ZsepTYgBNp684LLNw31IeRDqI3dxi0JaWcwQk/Pupqw26vu3Hz7
+	OY7Zw4zt8GoM4FQuamvbPLcX2UswMGri2brioGp4gkOtgiAQCqRQ51BkXgER1K2V7xGC+DMadAx
+	6+7yETb6J9uyMc/NqWBLXZFMjcmS3UT/Hcs/dst89jWtO78SmgmqRTROQE0EawmJHlIAYPGY8XY
+	SHJMX4y5OLCDHjj67ythKUBjlFaYTMoQHPkEKakzrW4Tm+dLRihOYIKqZwTFfssMe72hDkHr6/4
+	6dv4KbVy23oJVaG0Pq5n8Rej+NvLvhDF07wRg1ut2Vtk6EyPw7ZBGQM6CUinZWIADi7vqHnNc1B
+	Tp07OtsdXx9T+TlLtV0jtINrPgwoY71yi1AtLdhHvZllIsH0nnFFQDxAUmK1hSN0Z63jW4ZUCHL
+	w6DGaqOOfSGKImAFysPVpPiirDocMPW/WQp/QoBhZUFxD20ey4Hlo9xxGkGUD9/5ZJMw==
+X-Received: by 2002:a05:600c:1911:b0:495:4fd4:619b with SMTP id 5b1f17b1804b1-4954fd46219mr164776875e9.1.1784624887819;
+        Tue, 21 Jul 2026 02:08:07 -0700 (PDT)
+Message-ID: <5d0a00ab-aaf8-4aaf-ad6b-2ea7b8e1d8b0@suse.com>
+Date: Tue, 21 Jul 2026 11:08:06 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
-X-purgate-ID: tlsNG-c1860d/1784623865-CFED287B-B038B302/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] MAINTAINERS: update my email address
+To: Roger Pau Monne <roger@xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20260721081906.80803-1-roger@xenproject.org>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260721081906.80803-1-roger@xenproject.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c1860d/1784624888-CD14E87B-79B7755C/0/0
 X-purgate-type: clean
-X-purgate-size: 1675
+X-purgate-size: 178
 
-On Tuesday, 21 July 2026 10:39:52 CEST Marc-Andr=C3=A9 Lureau wrote:
-> Hi
->=20
-> On Tue, Jul 21, 2026 at 12:38=E2=80=AFPM Christian Schoenebeck
->=20
-> <qemu_oss@crudebyte.com> wrote:
-> > On Tuesday, 21 July 2026 10:25:34 CEST Philippe Mathieu-Daud=C3=A9 wrot=
-e:
-> > > On 21/7/26 10:06, Marc-Andr=C3=83=C2=A9 Lureau wrote:
-> > > > Hi
-> > > >=20
-> > > > On Tue, Jul 21, 2026 at 11:58=E2=80=AFAM Marc-Andr=C3=A9 Lureau
-> >=20
-> > > > <marcandre.lureau@redhat.com> wrote:
-> > [...]
-> >=20
-> > > >> most of them are "return-type co_annotation fn(..)"
-> > > >> we even have scripts/block-coroutine-wrapper.py that relies and
-> > > >> produce this order..
-> > > >> a bit late to change the style imho...
-> > > >>=20
-> > > >> At least, let's not make this a requirement for this series, please
-> > >=20
-> > > Not a requirement on my side, but if we had to pick a style,
-> > > I'd vote for "attribute before return type".
-> >=20
-> > Yep, because that's a) the most compiler-friendly option (all compilers
-> > allow it, including MSC) and b) it's the most diff-noise friendly
-> > solution (can be prepended on its own line without touching any of the
-> > existing line(s) at all).
->=20
-> ok, what should I do? Send a preliminary patch to fix all annotation
-> positions? or just change the position in this patch or series?
+On 21.07.2026 10:19, Roger Pau Monne wrote:
+> Signed-off-by: Roger Pau Monné <roger@xenproject.org>
 
-Your decision. I'm just giving my 2cts. As this is not a behaviour change, =
-it=20
-is way below my threshold level for taking any strong position. If you can=
-=20
-make this for this patch for now, that would nice, but if not, not a deal=20
-breaker either:
+For formality's sake:
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
-Acked-by: Christian Schoenebeck <qemu_oss@crudebyte.com>
-
-
+Jan
 
