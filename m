@@ -4,45 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E84BC44529
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2026 07:05:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1367470.1617212 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A599C44529
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2026 07:18:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1367480.1617221 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wm4XI-0003MU-Lu; Tue, 21 Jul 2026 07:05:04 +0000
+	id 1wm4jr-0005UE-RM; Tue, 21 Jul 2026 07:18:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1367470.1617212; Tue, 21 Jul 2026 07:05:04 +0000
+Received: by outflank-mailman (output) from mailman id 1367480.1617221; Tue, 21 Jul 2026 07:18:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wm4XI-0003MN-IJ; Tue, 21 Jul 2026 07:05:04 +0000
-Received: by outflank-mailman (input) for mailman id 1367470;
- Tue, 21 Jul 2026 07:05:02 +0000
+	id 1wm4jr-0005U7-Ob; Tue, 21 Jul 2026 07:18:03 +0000
+Received: by outflank-mailman (input) for mailman id 1367480;
+ Tue, 21 Jul 2026 07:18:02 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <vsementsov@yandex-team.ru>) id 1wm4XG-0003MH-3a
- for xen-devel@lists.xenproject.org; Tue, 21 Jul 2026 07:05:02 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wm4jq-0005U1-DO
+ for xen-devel@lists.xenproject.org; Tue, 21 Jul 2026 07:18:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wm4XF-00BZDq-2i
- for xen-devel@lists.xenproject.org; Tue, 21 Jul 2026 09:05:01 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wm4jp-00Bc77-B1
+ for xen-devel@lists.xenproject.org; Tue, 21 Jul 2026 09:18:01 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <vsementsov@yandex-team.ru>)
- id 6a5f1a17-e002-0a2a0a5209dd-0a2a45039a52-6
- for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 09:04:57 +0200
-Received: from [178.154.239.200] (helo=forwardcorp1d.mail.yandex.net)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <vsementsov@yandex-team.ru>)
- id 6a5f1a13-fae8-0a2a45030019-b29aefc8863e-3
- for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 09:04:52 +0200
-Received: from mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net
- (mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net
- [IPv6:2a02:6b8:c42:86a0:0:640:75de:0])
- by forwardcorp1d.mail.yandex.net (postfix) with ESMTPS id AC555807C6;
- Tue, 21 Jul 2026 10:04:51 +0300 (MSK)
-Received: from [IPV6:2a02:6bf:8080:45b::1:22] (unknown
- [2a02:6bf:8080:45b::1:22])
- by mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net (smtpcorp) with ESMTPSA
- id n4QARH1Z2qM0-rIM1JkaF; Tue, 21 Jul 2026 10:04:51 +0300
+ (envelope-from <jbeulich@suse.com>)
+ id 6a5f1d20-bab6-0a2a0a5309dd-0a2a450a96d0-42
+ for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 09:18:01 +0200
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a5f1d28-f2d2-0a2a450a0019-d155802fa572-3
+ for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 09:18:01 +0200
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-495437bb891so37676165e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 00:18:01 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47f63e49469sm38134762f8f.7.2026.07.21.00.17.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 21 Jul 2026 00:17:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,364 +51,318 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
+Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=default header.d=yandex-team.ru header.i="@yandex-team.ru" header.h="From:In-Reply-To:Cc:Date:References:To:Subject:Message-ID"
-Precedence: bulk
-X-Yandex-Fwd: 1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
-	s=default; t=1784617491;
-	bh=5eXo5OMb05NzrqYIKMUqwTtEMWdHoYTOtALuQXSrorY=;
-	h=From:In-Reply-To:Cc:Date:References:To:Subject:Message-ID;
-	b=nzgq2HueebqPNHf6NPcPL3668BJ4XjXv7hcR8XNDf2RCSP0uD6bMwDvTgHElsWWnF
-	 v27O2rTooJbPifLiEYAlEoF9TvlLonrXrucm2DT77ZdzVo0ESXmkRyee7Li5xr9S1B
-	 e98W4slHamru2tv9lehCt3BbWrGU9gQk4YtUgbBg=
-Authentication-Results: mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net; dkim=pass header.i=@yandex-team.ru
-Message-ID: <3460003e-8e38-438c-ab81-730103880571@yandex-team.ru>
-Date: Tue, 21 Jul 2026 10:04:49 +0300
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1784618280; x=1785223080; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=kC7MsGOcZE9ciOq8ZcLifHjHtsVdqYHkmGO7ekhF7o0=;
+        b=Quk0dtstxC59+tn3WQ1E3Z/ZBbhsDmBXdHx2zcGbn+5ayWN6jyoaCPU8OLJFqbYEjE
+         1b0CwfSysC+TxoY1Z+bDCIw/9NQIkw5a39umF9tZBgaDNGtdkPHjCKJcIko15eC0PXHL
+         FIExDJ9d0OGCXrIrVTshp4fPdFCoHyMVvl6EWx5+P1KN7gAnjMnChkF/HfUr9/q92gsJ
+         C1MASZ9uryaDi/monNerE/EbCEe/kTo2soHxjRnyGH5PGN8oFf2mVC0xL4cdLmFlU1RC
+         2xO948I082o6Jdj5WIhvUXr+xZohXNE6XIrsVTzPof+dAf5B8td8qCgHr+yWMqj7eCRJ
+         5iMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784618280; x=1785223080;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=kC7MsGOcZE9ciOq8ZcLifHjHtsVdqYHkmGO7ekhF7o0=;
+        b=DIIlTEhJunKosnNVBSINI6ZILwYey7KohmCPUZ34voEWA53PQSPaYYoSuWj70CtvI5
+         pTK+xfO2lNbJUGQzO6JvSG/ihsbZdvqVRwXtVbJObFKVhobPPiAocqFBqkfTP/SzRnp0
+         6xe6OHDiKqJh5nribI9beBzwqEMaAtWJXsPUKKCggALLYUTlshIE75S/8MepSsLqVNgU
+         mJnyC7upVG3hLc4DTkdsnURgNuHrEbFCcvY4xtdWaEAC45cz0YnqWS6rekDkE2MTaT+7
+         /krvM+5JFyWmt6rwXrNuxym/YhV1wtwu+9I3SvY3E5hibnTeNmCzXrlrxiJJbtBKW+Ch
+         169w==
+X-Forwarded-Encrypted: i=1; AHgh+RqM0vAgKF/JmNEaBo9wS1roteI7jBxg5LtCZSmzYaGDdGtcGJ6EMMkVrbF2fJ76m8quNylkRZa8XIk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YynfzoN1zP6fYK9No1kllBNm4MMK6muKpJaJeYAwKAyId76otjl
+	4lwQISv0H1tX3lCSfZ+RaQP37v/UcsAoQGkq9knVnOugHh4vMLGpnbMiY2U6eCvEvQ==
+X-Gm-Gg: AfdE7cmMxj65zdgR2FMtwDBM49rRwDFxEpbAK1GaMcoxkPzZ2ua4VfaKvtU/HFUonMA
+	2Abs7PPUUe2WRZndxJBi+OGIy0JUq1PzrYDhxEr+DzFih8Aa/OkRPCI/A37X6IWvX+l+iBgNKNm
+	tHCX/wZhSQB9rxkh7UYdgiAc/hv5R6VD0l5yzEG1NXzDCWi5BizU8HAEhnveVh6dqkP4fJiUhbG
+	HfDv0LXdL6sssiJrj/blfRRx/z2Lv2o4A/AkHOXrqihQHbtVputop9CdmaUnBhMhQDM5Urskye5
+	n/uU6UJetSazJuiYTBor0V6/eJTV8B+UDnLDrm0E/NgOhON6ZMUEXfO+pc6/wJZlvZuzaWxsF4c
+	qsjSkvVyh39N8qe34Exi7UCFng/UzHXHVShd8VoMahOySaojPsFHTmK5erHp/ARr0i3dBblPiLd
+	tO7Flvka8B0diAtCsCEeex5jgO5Tu5Pg8OD2tI6KZLhKjKj42ThooZAaC/svwpv2FE4g==
+X-Received: by 2002:a05:600c:1906:b0:495:3bc6:d381 with SMTP id 5b1f17b1804b1-4954affd764mr181176405e9.2.1784618280528;
+        Tue, 21 Jul 2026 00:18:00 -0700 (PDT)
+Message-ID: <fc46a5b8-ed98-414c-b643-7d1fac53e733@suse.com>
+Date: Tue, 21 Jul 2026 09:17:58 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v19 03/15] net/tap: deprecate "no" as special value for
- script/downscript
-To: Markus Armbruster <armbru@redhat.com>
-Cc: jasowang@redhat.com, mst@redhat.com, peterx@redhat.com, farosas@suse.de,
- raphael.s.norwitz@gmail.com, bchaney@akamai.com, qemu-devel@nongnu.org,
- berrange@redhat.com, pbonzini@redhat.com, yc-core@yandex-team.ru,
- mark.caveayland@nutanix.com,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Sergio Lopez <slp@redhat.com>, Zhao Liu <zhao1.liu@intel.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony@xenproject.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Bernhard Beschow <shentey@gmail.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Jason Wang <jasowangio@gmail.com>,
- Eric Blake <eblake@redhat.com>,
- "open list:Incompatible changes" <devel@lists.libvirt.org>,
- "open list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>,
- "open list:e500" <qemu-ppc@nongnu.org>,
- "open list:Microchip PolarFi..." <qemu-riscv@nongnu.org>
-References: <20260714154246.1242856-1-vsementsov@yandex-team.ru>
- <20260714154246.1242856-4-vsementsov@yandex-team.ru>
- <87pl0gsvec.fsf@pond.sub.org>
+Subject: Re: [PATCH RFC] x86/PV: avoid HVM-copying alternatives in PV-only
+ code
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <8e6f5ad5-21e4-4325-96de-e03ba65a1b8d@suse.com>
+ <d1a522ac-5b28-4e9b-bc45-d9cc61245662@citrix.com>
 Content-Language: en-US
-From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-In-Reply-To: <87pl0gsvec.fsf@pond.sub.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <d1a522ac-5b28-4e9b-bc45-d9cc61245662@citrix.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1784617497-74C884E9-FC02A206/0/0
+X-purgate-ID: tlsNG-4011c0/1784618281-5A3DCCFC-08588CE5/0/0
 X-purgate-type: clean
-X-purgate-size: 14349
+X-purgate-size: 9065
 
-On 21.07.26 09:34, Markus Armbruster wrote:
-> Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru> writes:
+On 20.07.2026 22:07, Andrew Cooper wrote:
+> On 30/06/2026 2:38 pm, Jan Beulich wrote:
+>> --- a/xen/arch/x86/include/asm/guest_access.h
+>> +++ b/xen/arch/x86/include/asm/guest_access.h
+>> @@ -14,11 +14,15 @@
+>>  
+>>  /* Raw access functions: no type checking. */
+>>  #define raw_copy_to_guest(dst, src, len)        \
+>> -    (is_hvm_vcpu(current) ?                     \
+>> +    ((IS_ENABLED(HVM_ONLY_SOURCE) ||            \
+>> +      (!IS_ENABLED(PV_ONLY_SOURCE) &&           \
+>> +       is_hvm_vcpu(current))) ?                 \
+>>       copy_to_user_hvm((dst), (src), (len)) :    \
+>>       copy_to_guest_pv(dst, src, len))
+>>  #define raw_copy_from_guest(dst, src, len)      \
+>> -    (is_hvm_vcpu(current) ?                     \
+>> +    ((IS_ENABLED(HVM_ONLY_SOURCE) ||            \
+>> +      (!IS_ENABLED(PV_ONLY_SOURCE) &&           \
+>> +       is_hvm_vcpu(current))) ?                 \
+>>       copy_from_user_hvm((dst), (src), (len)) :  \
+>>       copy_from_guest_pv(dst, src, len))
+>>  #define raw_clear_guest(dst,  len)              \
+>> @@ -26,11 +30,15 @@
+>>       clear_user_hvm((dst), (len)) :             \
+>>       clear_guest_pv(dst, len))
+>>  #define __raw_copy_to_guest(dst, src, len)      \
+>> -    (is_hvm_vcpu(current) ?                     \
+>> +    ((IS_ENABLED(HVM_ONLY_SOURCE) ||            \
+>> +      (!IS_ENABLED(PV_ONLY_SOURCE) &&           \
+>> +       is_hvm_vcpu(current))) ?                 \
+>>       copy_to_user_hvm((dst), (src), (len)) :    \
+>>       __copy_to_guest_pv(dst, src, len))
+>>  #define __raw_copy_from_guest(dst, src, len)    \
+>> -    (is_hvm_vcpu(current) ?                     \
+>> +    ((IS_ENABLED(HVM_ONLY_SOURCE) ||            \
+>> +      (!IS_ENABLED(PV_ONLY_SOURCE) &&           \
+>> +       is_hvm_vcpu(current))) ?                 \
+>>       copy_from_user_hvm((dst), (src), (len)) :  \
+>>       __copy_from_guest_pv(dst, src, len))
 > 
->> The interface is ambiguous, as "no" is valid file name. So,
->> using "no" as a special value to disable script is deprecated.
->> Use an empty string ("script=" / "downscript=") instead.
->>
->> In a future version, "no" will be treated as a plain file name, just
->> like any other non-empty value.
->>
->> Document the deprecation in docs/about/deprecated.rst, qapi/net.json,
->> and qemu-options.hx. Update other docs to use empty string instead of
->> "no". Add a warning.
->>
->> Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
->> ---
->>   docs/about/deprecated.rst                  | 18 ++++++++++++++
->>   docs/system/i386/microvm.rst               |  4 +--
->>   docs/system/i386/xenpvh.rst                |  2 +-
->>   docs/system/ppc/ppce500.rst                |  4 +--
->>   docs/system/riscv/microchip-icicle-kit.rst |  2 +-
->>   docs/system/riscv/sifive_u.rst             |  2 +-
->>   net/tap.c                                  | 29 ++++++++++++++--------
->>   qapi/net.json                              | 12 ++++++---
->>   qemu-options.hx                            |  7 ++++--
->>   9 files changed, 56 insertions(+), 24 deletions(-)
->>
->> diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
->> index 0c656a968fc..c4929317e3a 100644
->> --- a/docs/about/deprecated.rst
->> +++ b/docs/about/deprecated.rst
->> @@ -71,6 +71,15 @@ flexible enough. The monitor objects have been converted to QOM, so
->>   ``-mon mode=control`` is replaced by ``-object monitor-qmp``. The
->>   short convenience options are not deprecated, only ``-mon``.
->>   
->> +``script=no`` and ``downscript=no`` for ``-netdev tap`` (since 11.2)
->> +'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+> Looking back at my own attempt to do this, which was from August 2024, I
+> started by cleaning up this code block as such:
+> 
+> --- a/xen/arch/x86/include/asm/guest_access.h
+> +++ b/xen/arch/x86/include/asm/guest_access.h
+> @@ -12,27 +12,33 @@
+>  #include <asm/hvm/support.h>
+>  #include <asm/hvm/guest_access.h>
+>  
+> +#define GUEST_ACCESS_HVM is_hvm_vcpu(current)
+> +
+>  /* Raw access functions: no type checking. */
+>  #define raw_copy_to_guest(dst, src, len)        \
+> -    (is_hvm_vcpu(current) ?                     \
+> -     copy_to_user_hvm((dst), (src), (len)) :    \
+> -     copy_to_guest_pv(dst, src, len))
+> +    (GUEST_ACCESS_HVM                           \
+> +     ? copy_to_user_hvm(dst, src, len)          \
+> +     : copy_to_guest_pv(dst, src, len))
+> +
+>  #define raw_copy_from_guest(dst, src, len)      \
+> -    (is_hvm_vcpu(current) ?                     \
+> -     copy_from_user_hvm((dst), (src), (len)) :  \
+> -     copy_from_guest_pv(dst, src, len))
+> +    (GUEST_ACCESS_HVM                           \
+> +     ? copy_from_user_hvm(dst, src, len)        \
+> +     : copy_from_guest_pv(dst, src, len))
+> +
+>  #define raw_clear_guest(dst,  len)              \
+> -    (is_hvm_vcpu(current) ?                     \
+> -     clear_user_hvm((dst), (len)) :             \
+> -     clear_guest_pv(dst, len))
+> +    (GUEST_ACCESS_HVM                           \
+> +     ? clear_user_hvm(dst, len)                 \
+> +     : clear_guest_pv(dst, len))
+> +
+>  #define __raw_copy_to_guest(dst, src, len)      \
+> -    (is_hvm_vcpu(current) ?                     \
+> -     copy_to_user_hvm((dst), (src), (len)) :    \
+> -     __copy_to_guest_pv(dst, src, len))
+> +    (GUEST_ACCESS_HVM                           \
+> +     ?   copy_to_user_hvm(dst, src, len)        \
+> +     : __copy_to_guest_pv(dst, src, len))
+> +
+>  #define __raw_copy_from_guest(dst, src, len)    \
+> -    (is_hvm_vcpu(current) ?                     \
+> -     copy_from_user_hvm((dst), (src), (len)) :  \
+> -     __copy_from_guest_pv(dst, src, len))
+> +    (GUEST_ACCESS_HVM                           \
+> +     ?   copy_from_user_hvm(dst, src, len)      \
+> +     : __copy_from_guest_pv(dst, src, len))
+>  
+>  /*
+>   * Pre-validate a guest handle.
+> 
+> 
+> 
+> so they're all consistent and legible,
+
+Sure, why not. There's one Misra concern though: In my patch I'm
+specifically avoiding (naming aside)
+
+#define GUEST_ACCESS_HVM is_hvm_vcpu(current)
+
+in the header, as that then requires #undef elsewhere to override. Misra
+wants us to avoid #undef as much as possible. In x86/mm.c this then would
+also require the original form to be re-instated. (Yes, I'm not getting
+away without #undef either, but it's truly removal of the definition, not
+removal to then re-instate the macro with a different expansion.)
+
+Perhaps something like
+
+#define IS_HVM_ACCESS                    \
+    (IS_ENABLED(GUEST_ACCESS_HVM) ||     \
+     (!IS_ENABLED(GUEST_ACCESS_PV) &&    \
+      is_hvm_vcpu(current)))             \
+
+to reduce redundancy in the macros while keeping the property of my patch?
+
+> then extended GUEST_ACCESS_HVM to:
+> 
+> --- a/xen/arch/x86/include/asm/guest_access.h
+> +++ b/xen/arch/x86/include/asm/guest_access.h
+> @@ -12,7 +12,12 @@
+>  #include <asm/hvm/support.h>
+>  #include <asm/hvm/guest_access.h>
+>  
+> -#define GUEST_ACCESS_HVM is_hvm_vcpu(current)
+> +#define GUEST_ACCESS_HVM                        \
+> +    (IS_ENABLED(GA_ALWAYS_PV)                   \
+> +     ? 0                                        \
+> +     : (IS_ENABLED(GA_ALWAYS_HVM)               \
+> +        ? 1                                     \
+> +        : is_hvm_vcpu(current)))                \
+>  
+>  /* Raw access functions: no type checking. */
+>  #define raw_copy_to_guest(dst, src, len)        \
+> 
+> 
+> 
+> to allow ways to force it one way or another.
+
+Sure, perhaps simplified to
+
+#define GUEST_ACCESS_HVM                        \
+    (IS_ENABLED(GA_ALWAYS_PV)                   \
+     ? false                                    \
+     : (IS_ENABLED(GA_ALWAYS_HVM) ||            \
+        is_hvm_vcpu(current)))                  \
+
+or something yet closer to what I have in my patch. The conditional
+operators aren't overly useful here.
+
+Yet one of the RFC questions remains with this: Is there anywhere we'd
+actually be able to use GA_ALWAYS_HVM?
+
+> For forcing it one way or another, while ...
+> 
+>> --- a/xen/arch/x86/mm.c
+>> +++ b/xen/arch/x86/mm.c
+>> @@ -3407,6 +3407,9 @@ int new_guest_cr3(mfn_t mfn)
+>>  #endif
+>>  
+>>  #ifdef CONFIG_PV
 >> +
->> +The special value ``"no"`` for the ``script`` and ``downscript``
->> +parameters of ``-netdev tap`` disables script execution.  This special
->> +treatment of ``"no"`` is deprecated.  Use an empty string (``script=``
->> +or ``downscript=``) to disable script execution instead.  In a future
->> +version, ``"no"`` will be treated as a plain file name.
+>> +#define PV_ONLY_SOURCE 1
 >> +
->>   QEMU Machine Protocol (QMP) commands
->>   ------------------------------------
->>   
->> @@ -164,6 +173,15 @@ Use ``job-finalize`` instead.
->>   
->>   Use ``query-accelerators`` instead.
->>   
->> +``"no"`` as value of ``script``/``downscript`` for tap in ``netdev_add`` (since 11.2)
->> +'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+> 
+> ... mm.c is certainly complicated, others like ...
+> 
+>> --- a/xen/arch/x86/pv/callback.c
+>> +++ b/xen/arch/x86/pv/callback.c
+>> @@ -5,6 +5,8 @@
+>>   * hypercall handles and helper functions for guest callback
+>>   */
+>>  
+>> +#define PV_ONLY_SOURCE 1
 >> +
->> +The special value ``"no"`` for the ``script`` and ``downscript``
->> +parameters of ``netdev_add`` with ``type=tap`` disables script
->> +execution.  This special treatment of ``"no"`` is deprecated.  Use an
->> +empty string instead.  In a future version, ``"no"`` will be treated as
->> +a plain file name.
+>>  #include <xen/event.h>
+>>  #include <xen/hypercall.h>
+>>  #include <xen/guest_access.h>
+>> --- a/xen/arch/x86/pv/descriptor-tables.c
+>> +++ b/xen/arch/x86/pv/descriptor-tables.c
+>> @@ -8,6 +8,8 @@
+>>   * Copyright (c) 2004 Christian Limpach
+>>   */
+>>  
+>> +#define PV_ONLY_SOURCE 1
 >> +
->>   Human Machine Protocol (HMP) commands
->>   -------------------------------------
->>   
->> diff --git a/docs/system/i386/microvm.rst b/docs/system/i386/microvm.rst
->> index 1675e37d3e7..077ea15751e 100644
->> --- a/docs/system/i386/microvm.rst
->> +++ b/docs/system/i386/microvm.rst
->> @@ -79,7 +79,7 @@ legacy ``ISA serial`` device as console::
->>        -serial stdio \
->>        -drive id=test,file=test.img,format=raw,if=none \
->>        -device virtio-blk-device,drive=test \
->> -     -netdev tap,id=tap0,script=no,downscript=no \
->> +     -netdev tap,id=tap0,script=,downscript= \
->>        -device virtio-net-device,netdev=tap0
->>   
->>   While the example above works, you might be interested in reducing the
->> @@ -103,7 +103,7 @@ disabled::
->>        -device virtconsole,chardev=virtiocon0 \
->>        -drive id=test,file=test.img,format=raw,if=none \
->>        -device virtio-blk-device,drive=test \
->> -     -netdev tap,id=tap0,script=no,downscript=no \
->> +     -netdev tap,id=tap0,script=,downscript= \
->>        -device virtio-net-device,netdev=tap0
->>   
->>   
->> diff --git a/docs/system/i386/xenpvh.rst b/docs/system/i386/xenpvh.rst
->> index 904778e3f5c..862f38830b1 100644
->> --- a/docs/system/i386/xenpvh.rst
->> +++ b/docs/system/i386/xenpvh.rst
->> @@ -42,7 +42,7 @@ case you need to construct one manually:
->>         -vnc none                                       \
->>         -display none                                   \
->>         -device virtio-net-pci,id=nic0,netdev=net0,mac=00:16:3e:5c:81:78 \
->> -      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=no,downscript=no \
->> +      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=,downscript= \
->>         -smp 4,maxcpus=4                                \
->>         -nographic                                      \
->>         -machine xenpvh,ram-low-base=0,ram-low-size=2147483648,ram-high-base=4294967296,ram-high-size=2147483648,pci-ecam-base=824633720832,pci-ecam-size=268435456,pci-mmio-base=4026531840,pci-mmio-size=33554432,pci-mmio-high-base=824902156288,pci-mmio-high-size=68719476736 \
->> diff --git a/docs/system/ppc/ppce500.rst b/docs/system/ppc/ppce500.rst
->> index c9fe0915dc5..ec5aaf14fd9 100644
->> --- a/docs/system/ppc/ppce500.rst
->> +++ b/docs/system/ppc/ppce500.rst
->> @@ -158,14 +158,14 @@ interface at PCI address 0.1.0, but we can switch that to an e1000 NIC by:
->>     $ qemu-system-ppc64 -M ppce500 -smp 4 -m 2G \
->>                         -display none -serial stdio \
->>                         -bios u-boot \
->> -                      -nic tap,ifname=tap0,script=no,downscript=no,model=e1000
->> +                      -nic tap,ifname=tap0,script=,downscript=,model=e1000
->>   
->>   The QEMU ``ppce500`` machine can also dynamically instantiate an eTSEC device
->>   if “-device eTSEC” is given to QEMU:
->>   
->>   .. code-block:: bash
->>   
->> -  -netdev tap,ifname=tap0,script=no,downscript=no,id=net0 -device eTSEC,netdev=net0
->> +  -netdev tap,ifname=tap0,script=,downscript=,id=net0 -device eTSEC,netdev=net0
->>   
->>   Root file system on flash drive
->>   -------------------------------
->> diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/riscv/microchip-icicle-kit.rst
->> index 9809e94b84b..7fdb96601ad 100644
->> --- a/docs/system/riscv/microchip-icicle-kit.rst
->> +++ b/docs/system/riscv/microchip-icicle-kit.rst
->> @@ -84,7 +84,7 @@ Then we can boot the machine by:
->>     $ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 -m 2G \
->>         -sd path/to/sdcard.img \
->>         -nic user,model=cadence_gem \
->> -      -nic tap,ifname=tap,model=cadence_gem,script=no \
->> +      -nic tap,ifname=tap,model=cadence_gem,script= \
->>         -display none -serial stdio \
->>         -kernel path/to/u-boot/build/dir/u-boot.bin \
->>         -dtb path/to/u-boot/build/dir/u-boot.dtb
->> diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.rst
->> index 8f55ae8e313..0e4dcf3e70c 100644
->> --- a/docs/system/riscv/sifive_u.rst
->> +++ b/docs/system/riscv/sifive_u.rst
->> @@ -199,7 +199,7 @@ To boot the VxWorks kernel in QEMU with the ``sifive_u`` machine, use:
->>   
->>     $ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \
->>         -display none -serial stdio \
->> -      -nic tap,ifname=tap0,script=no,downscript=no \
->> +      -nic tap,ifname=tap0,script=,downscript= \
->>         -kernel /path/to/vxWorks \
->>         -append "gem(0,0)host:vxWorks h=192.168.200.1 e=192.168.200.2:ffffff00 u=target pw=vxTarget f=0x01"
->>   
->> diff --git a/net/tap.c b/net/tap.c
->> index fedd48c48d2..2e94b4015f6 100644
->> --- a/net/tap.c
->> +++ b/net/tap.c
->> @@ -92,34 +92,40 @@ static void launch_script(const char *setup_script, const char *ifname,
->>   static void tap_send(void *opaque);
->>   static void tap_writable(void *opaque);
->>   
->> -static bool tap_is_explicit_no_script(const char *script_arg)
->> +static bool tap_is_explicit_no_script(const char *script_arg_name,
->> +                                      const char *script_arg_value)
->>   {
->> -    if (!script_arg) {
->> +    if (!script_arg_value) {
->>           return false;
->>       }
->>   
->> -    if (script_arg[0] == '\0') {
->> +    if (script_arg_value[0] == '\0') {
->>           return true;
->>       }
->>   
->> -    if (strcmp(script_arg, "no") == 0) {
->> +    if (strcmp(script_arg_value, "no") == 0) {
->> +        warn_report("%s=no is deprecated; use %s= instead "
+>>  #include <xen/guest_access.h>
+>>  #include <xen/hypercall.h>
+>>  
+>> --- a/xen/arch/x86/pv/shim.c
+>> +++ b/xen/arch/x86/pv/shim.c
+>> @@ -6,6 +6,9 @@
+>>   *
+>>   * Copyright (c) 2017 Citrix Systems Ltd.
+>>   */
+>> +
+>> +#define PV_ONLY_SOURCE 1
+>> +
+>>  #include <xen/event.h>
+>>  #include <xen/guest_access.h>
+>>  #include <xen/hypercall.h>
 > 
-> Maybe "'%s=no' is deprecated; use '%s=' instead ".
+> all of these could have a general CFLAGS += in arch/x86/pv/Makefile
+> rather than having to state it in every file.
 
-Ok
+A general CFLAGS += is (at least latently / conceptually) wrong in pv/,
+as code there may come into play when a PVH Dom0 controls a PV DomU. Much
+like a fair bit of care is needed in x86/mm.c (where we may want to try
+to move some more code to x86/pv/mm.c).
 
-> 
->> +                    "(empty string instead of 'no')",
-> 
-> Not sure this is needed.
+I did consider this on a per-object basis and meant to put in a remark to
+this effect, but then forgot. The issue I see with using this approach is
+the disconnect between setting of the control (Makefile) and it being
+correct to use for the particular source file (in particular when making
+changes down the road). Having the #define near the top of the files has
+(imo) at least slightly better chances of being noticed when opening the
+file for editing.
 
-With you single quotes, agree, everything is clear without this note.
+> Naming wise, while PV_ONLY_SOURCE works in pv/, it's more dubious in
+> arch/x86/mm.c.  GUEST_ACCESS_* at least identifies the property that's
+> being decided upon.
 
-> 
->> +                    script_arg_name, script_arg_name);
->>           return true;
->>       }
->>   
->>       return false;
->>   }
-> 
-> Less churn if you name the argument @script_arg_value in PATCH 01.
+I'm happy to see your naming used; I wasn't overly happy with my naming
+choice anyway.
 
-Right, will move.
-
-> 
->>   
->> -static char *tap_parse_script(const char *script_arg, const char *default_path)
->> +static char *tap_parse_script(const char *script_arg_name,
->> +                              const char *script_arg_value,
->> +                              const char *default_path)
->>   {
->> -    if (tap_is_explicit_no_script(script_arg)) {
->> +    if (tap_is_explicit_no_script(script_arg_name, script_arg_value)) {
->>           return NULL;
->>       }
->>   
->> -    if (!script_arg) {
->> +    if (!script_arg_value) {
->>           return get_relocated_path(default_path);
->>       }
->>   
->> -    return g_strdup(script_arg);
->> +    return g_strdup(script_arg_value);
->>   }
->>   
->>   static void tap_update_fd_handler(TAPState *s)
->> @@ -740,7 +746,7 @@ static bool net_init_tap_one(const NetdevTapOptions *tap, NetClientState *peer,
->>           qemu_set_info_str(&s->nc, "helper=%s", tap->helper);
->>       } else {
->>           qemu_set_info_str(&s->nc, "ifname=%s,script=%s,downscript=%s", ifname,
->> -                          script ?: "no", downscript ?: "no");
->> +                          script ?: "", downscript ?: "");
->>   
->>           if (downscript) {
->>               snprintf(s->down_script, sizeof(s->down_script), "%s", downscript);
->> @@ -946,9 +952,10 @@ int net_init_tap(const Netdev *netdev, const char *name,
->>           }
->>       } else {
->>           g_autofree char *script =
->> -            tap_parse_script(tap->script, DEFAULT_NETWORK_SCRIPT);
->> +            tap_parse_script("script", tap->script, DEFAULT_NETWORK_SCRIPT);
->>           g_autofree char *downscript =
->> -            tap_parse_script(tap->downscript, DEFAULT_NETWORK_DOWN_SCRIPT);
->> +            tap_parse_script("downscript", tap->downscript,
->> +                             DEFAULT_NETWORK_DOWN_SCRIPT);
->>   
->>           if (tap->ifname) {
->>               pstrcpy(ifname, sizeof ifname, tap->ifname);
->> diff --git a/qapi/net.json b/qapi/net.json
->> index 8f0915c4d86..ada0329ef9d 100644
->> --- a/qapi/net.json
->> +++ b/qapi/net.json
->> @@ -399,15 +399,19 @@
->>   # @fds: multiple file descriptors of already opened multiqueue capable
->>   #     tap
->>   #
->> -# @script: script to initialize the interface.  An empty string or
->> -#     "no" disables script execution.  Defaults to
->> +# @script: script to initialize the interface.  An empty string
->> +#     disables script execution.  Defaults to
->>   #     ``<sysconfdir>/qemu-ifup``, where ``<sysconfdir>`` is the
->>   #     system configuration directory at build time (typically /etc).
->> +#     Using "no" to disable script execution is deprecated (since
->> +#     11.2); use an empty string instead.
->>   #
->> -# @downscript: script to shut down the interface.  An empty string or
->> -#     "no" disables script execution.  Defaults to
->> +# @downscript: script to shut down the interface.  An empty string
->> +#     disables script execution.  Defaults to
->>   #     ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the
->>   #     system configuration directory at build time (typically /etc).
->> +#     Using "no" to disable script execution is deprecated (since
->> +#     11.2); use an empty string instead.
->>   #
->>   # @br: bridge name (since 2.8)
->>   #
->> diff --git a/qemu-options.hx b/qemu-options.hx
->> index 200949655ea..7b9a14f5b38 100644
->> --- a/qemu-options.hx
->> +++ b/qemu-options.hx
->> @@ -3014,7 +3014,8 @@ DEF("netdev", HAS_ARG, QEMU_OPTION_netdev,
->>       "                use network scripts 'file' (default=" DEFAULT_NETWORK_SCRIPT ")\n"
->>       "                to configure it and 'dfile' (default=" DEFAULT_NETWORK_DOWN_SCRIPT ")\n"
->>       "                to deconfigure it\n"
->> -    "                use '[down]script=no' or '[down]script=' to disable script execution\n"
->> +    "                use '[down]script=' to disable script execution\n"
->> +    "                ('[down]script=no' is deprecated and will be treated as a file name in future)\n"
->>       "                use network helper 'helper' (default=" DEFAULT_BRIDGE_HELPER ") to\n"
->>       "                configure it\n"
->>       "                use 'fd=h' to connect to an already opened TAP interface\n"
->> @@ -3553,7 +3554,9 @@ SRST
->>       ``<sysconfdir>/qemu-ifup`` and the default network deconfigure script is
->>       ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the system
->>       configuration directory at build time (typically ``/etc``).
->> -    Use ``[down]script=no`` or ``[down]script=`` to disable script execution.
->> +    Use ``[down]script=`` to disable script execution.
->> +    Using ``[down]script=no`` is deprecated; in a future version it will
->> +    be treated as a plain file name.
->>   
->>       If running QEMU as an unprivileged user, use the network helper
->>       to configure the TAP interface and attach it to the bridge.
-> 
-> You mention what "no" does only in QMP documentation.
-> 
-> You mention what "no" will do in a future version only in CLI
-> documentation.
-
-Inconsistent, right.. Will touch up.
-
-> 
-> If information is useful enough to justify the space in one place, it's
-> likely useful enough in the other place, too.
-> 
-> Up to you.
-> 
-> Reviewed-by: Markus Armbruster <armbru@redhat.com>
-> 
-
-
--- 
-Best regards,
-Vladimir
+Jan
 
