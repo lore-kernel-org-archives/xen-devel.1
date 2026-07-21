@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53DA5C4451C
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2026 07:55:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1367524.1617274 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EA95C44529
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2026 07:55:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1367525.1617284 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wm5Jg-0005Ad-GD; Tue, 21 Jul 2026 07:55:04 +0000
+	id 1wm5Ji-0005Oi-RX; Tue, 21 Jul 2026 07:55:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1367524.1617274; Tue, 21 Jul 2026 07:55:04 +0000
+Received: by outflank-mailman (output) from mailman id 1367525.1617284; Tue, 21 Jul 2026 07:55:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wm5Jg-0005AW-DQ; Tue, 21 Jul 2026 07:55:04 +0000
-Received: by outflank-mailman (input) for mailman id 1367524;
- Tue, 21 Jul 2026 07:55:02 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wm5Ji-0005OZ-OG; Tue, 21 Jul 2026 07:55:06 +0000
+Received: by outflank-mailman (input) for mailman id 1367525;
+ Tue, 21 Jul 2026 07:55:06 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <haseebashraf091@gmail.com>) id 1wm5Je-00050T-KD
- for xen-devel@lists.xenproject.org; Tue, 21 Jul 2026 07:55:02 +0000
+ (envelope-from <haseebashraf091@gmail.com>) id 1wm5Jh-0005Nt-Uh
+ for xen-devel@lists.xenproject.org; Tue, 21 Jul 2026 07:55:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wm5Je-00E2ej-0M
- for xen-devel@lists.xenproject.org; Tue, 21 Jul 2026 09:55:02 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wm5Jh-001akS-4C
+ for xen-devel@lists.xenproject.org; Tue, 21 Jul 2026 09:55:05 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <haseebashraf091@gmail.com>)
- id 6a5f25cd-2eae-0a2a0a5409dd-0a2a4506cfb8-22
- for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 09:55:01 +0200
-Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a5f25d7-bab6-0a2a0a5309dd-0a2a45028c5c-6
+ for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 09:55:05 +0200
+Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <haseebashraf091@gmail.com>)
- id 6a5f25d5-195a-0a2a45060019-d155802fe909-3
- for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 09:55:01 +0200
-Received: by mail-wm1-f47.google.com with SMTP id
- 5b1f17b1804b1-4955de8797cso10836425e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 00:55:01 -0700 (PDT)
+ id 6a5f25d8-6ca4-0a2a45020019-d155802cf148-3
+ for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 09:55:05 +0200
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-49548aebcd8so25133395e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2026 00:55:05 -0700 (PDT)
 Received: from PKL-HASEEBA-LT.. ([139.135.37.55])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4956537c7desm64018485e9.7.2026.07.21.00.54.58
+ 5b1f17b1804b1-4956537c7desm64018485e9.7.2026.07.21.00.55.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Jul 2026 00:55:00 -0700 (PDT)
+ Tue, 21 Jul 2026 00:55:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,40 +55,40 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784620501; x=1785225301; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1784620504; x=1785225304; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=AENZ0AC4KepQ7USLtmlsrEkAPkSmxijOL+eq95NbtDQ=;
-        b=eqAyCQUuCR+47NsDk9Z0ZnYjEyrek4v+M7tMLb4dcJqDyRoeNqbJ1kEAlRV6KtvxIl
-         rgqDSjRLSwNEO2MrZS8pjqrgKkY6mtXaVPSccc3eQdkVPvcjfaGUj0+KS1h20DCxiXhb
-         rfPfoa+ub/cRDnySVblVvY6KaZ/mX5ECYJf5435VHATcTL/vvRE2YLuNS/pvf6LxZnqX
-         b2ZuzgUDJSZZL4EemagiFI/DfPSPrRMyqFuLr51SyHc7uFCfqDn8CPq20MC0r/bZ/6EQ
-         SABWCmhU6WjiWi+MnVzqpm1gY8+d+zZ9H1WLx5wbRATfpV3oXzHzqI6Yvhb1h7+vsL17
-         KDRw==
+        bh=l1YwPtqEAgkhkVo9sNpi4i947+4EUoWWzwp3eKb1YOA=;
+        b=ou7ygeDv2ecqmZ/YD/vdNCOtSb4T9dGPoMEzQrxgrIjRV/j1kA4RIg23VooO2FbYX6
+         IKr//XpUNGzI85LwjR+OSwPxqw3Cm0LS6x0qxBf/XmGRrFKAJQv1ObwNQjmVTNThd705
+         ITnxHZzfEcnkQ3rtoiyw01UVYiKu5M19JuFRSn5pli7LV0M8o9y4eFeD1Cr9PM0vVKJM
+         rFRzQfRpWrB6jAguzy1JTSSxx3zSppu8rH2BM7JBheICSlRIgRLYc4H8yr3GBlYuJBWc
+         hjvpA5dZ4fekXJLstssExLm/0scBsmuEiVU2Cc4E2ErGSVUuyuMrvnu3v5VI1t2xyCfW
+         uTAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784620501; x=1785225301;
+        d=1e100.net; s=20251104; t=1784620504; x=1785225304;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=AENZ0AC4KepQ7USLtmlsrEkAPkSmxijOL+eq95NbtDQ=;
-        b=WMJ7t5rODyU0aa5NLPzdUbduxxIbGEz6ePuQ62Xc/Ghk0c8OgDFaYnE1q7wLxoX3oT
-         MWGnVH9YhQ1bCk1Beic7tFPVRqctnAYLi4Sj1T8BbId+sDzZEkzl7k223n0X4IsrRa0p
-         o+FQBwpnuSfdTVUhcSfIUDG/sq/2oAxzhQCA6tB7dwA7IdaQJIqiuSMpQpaOViHhXpHc
-         2YDsZo6XBCb2j5td6H1k77k+7MRKYfiwislSN87PF1QyHsfCv8aKhISYK3NItX/8joL7
-         3Ar7US6t5WuVM41Q1hOC6pSDj9VfABNTXJ9Zynaa9r+FjhH2tWS1oNaGiYAVSwzfUG2f
-         pTeQ==
-X-Gm-Message-State: AOJu0YydB/uBZ1B9oP9jSBccabQa0A9oOU4A+dtVKFgZaSNJwGeFzFTz
-	uA5sWEtMX9tdRYm4WC9mamllmE7hd5Or9c09CxrUcdf3malLGhPRvDcgLI+40rne
-X-Gm-Gg: AfdE7cmKWt+rYKjFJhEZU78yfLyOOqg1eT4teEZcELUH+TeqMxaALJXZZwi/5ULKH/O
-	5M74ww32D4oqfsQ404/qO7WWk/vXLJXhAGDLe4fzSHwX5sUWTTaJh16HJRWfDgHjBlntZ+a+s6e
-	E+cYs8JuN6apqhbUvXrkqcv0ynKfQb3gHGkN+a2M7/4tKTsaujWLJXCDIB4Gb/XCNaAB9TkjGT0
-	uFE6AdCuWJFagqg00loXjWOeNezt6t0dmOFT2WbyrQycoC5MvzdDPKEkTosZ7gMULe0hjUSRyrR
-	9O6l1tjEjACfGbVnGod4AUfbZnHkJmFlxpxmdrgvaME/S0vuJZyj51V5Unv+MR46QWSQ3pLkNYR
-	z4YuxDZ6jYWPv2rpcxbzOe9rl34OVWkxb39MC/cV85teb+de62y6J8DnYf81YyrFzCZHYL00fmn
-	WTw9mbFNbXQZQY3D5EZMFTbnaie6dW+o+Ezy1QF+v9HNc=
-X-Received: by 2002:a7b:c054:0:b0:495:5172:661f with SMTP id 5b1f17b1804b1-49551726896mr103037815e9.19.1784620501056;
-        Tue, 21 Jul 2026 00:55:01 -0700 (PDT)
+        bh=l1YwPtqEAgkhkVo9sNpi4i947+4EUoWWzwp3eKb1YOA=;
+        b=Lf/4iAKuS+nBfS+ZOGyLOZVwsrWu2ezAP31u45HfAFpM0UlVku3k8AB2nC543mpbRp
+         6jYNjSJQEz1rAMxxYt3iDDnY6n8rvmbQmlFF9O2x0wHkvnYbo8MlQE1ehqdmOY47xMnt
+         62NeIH42yTTWAkY/a3tGLRGxX1BGW9e3X21RtBjapM5LCjtBcuFfV8jKPLZwWf+NLFfb
+         M1fp5izHwJSY9KOquWv+U4kIj+7pHTK9Y35l3fXFjg6SStFJ+Sns8yUq5NB4QJcde2mx
+         LND3XQH8NfYaycHAOAOovPYBLuaP7HMHGYHSifu5gm3RqHMZrY+sNIRmCqMVUhhLbuAL
+         WB1Q==
+X-Gm-Message-State: AOJu0Yz6yWK4cfYdDI3/D8NRFwGoKfxBbfjERAqx6r7B5nqbDw5oFPAW
+	1sk6Ir/dmXqOF8uxoP3H3n5rtjM51+YmXijedqwaZ3Fa2IN5ukVRO4GwcdlpAD52
+X-Gm-Gg: AfdE7cleyvlq5WWx7WR3vALlpqGdsFWs635BehbTEUOIo0rqJU8p9uOI2M9NAjbB3EP
+	j6ifP4Q7o9+FqW4edukULi3i9VbA3i6PfMEiTWRCcxMtTIRrusSoO7tpnFxCpuS7RQNMXlmcz5q
+	WGNvT5ehHdCvZ+KRGDhAldTLs3bmKnkjRqhdufOy+cZG1is5g/cC01jCdXmczHc9ALQEcppuONV
+	QEixr5eDbYJXl5y/pQrSi8ydDiqIX4YJyKMBIgUvwopOk9eS9xwbGBq8AWb/E3S7MnVBN7/acX2
+	w83HRxxpsveN5PauM4Rc2KiasTVwqhzUB4cugISr6udS9ptzjo8w+UDKnZB9p94sEo3CbnbEcLW
+	nAOejJwJr17E3XNznJGCmFlzTc59G9TuIIJt88E/MXKqZHZXA4gHX/Ty0fwe2YGR1PF29b5ovf3
+	YZwkh/m9CaY3rzYCH9zOy9+8wZCH8nI22FC3wr/JfW8mI=
+X-Received: by 2002:a05:600c:3112:b0:495:472c:208d with SMTP id 5b1f17b1804b1-4954a41307cmr179462365e9.38.1784620504275;
+        Tue, 21 Jul 2026 00:55:04 -0700 (PDT)
 From: Haseeb Ashraf <haseebashraf091@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: haseeb.ashraf@siemens.com,
@@ -96,443 +96,307 @@ Cc: haseeb.ashraf@siemens.com,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [XEN][RESEND][PATCH 1/3] xen/arm/p2m: perform IPA-based TLBI when IPA is known
-Date: Tue, 21 Jul 2026 12:54:49 +0500
-Message-ID: <e933703bf76cbc33e5d05a023900389fd6a9f925.1784619778.git.haseeb.ashraf@siemens.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Mohamed Mediouni <mohamed@unpredictable.fr>
+Subject: [XEN][RESEND][PATCH 2/3] xen/arm: optimize stage-1,2 combined TLBI in presence of FEAT_nTLBPA
+Date: Tue, 21 Jul 2026 12:54:50 +0500
+Message-ID: <ed2e6c02d99bf75b6e6dfc0b7275573c58f4e076.1784619778.git.haseeb.ashraf@siemens.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1765197209.git.haseeb.ashraf@siemens.com>
-References: <cover.1765197209.git.haseeb.ashraf@siemens.com>
+In-Reply-To: <e933703bf76cbc33e5d05a023900389fd6a9f925.1784619778.git.haseeb.ashraf@siemens.com>
+References: <e933703bf76cbc33e5d05a023900389fd6a9f925.1784619778.git.haseeb.ashraf@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1784620501-F580D77B-F0D363E8/0/0
+X-purgate-ID: tlsNG-720697/1784620505-31FD62AC-B943B358/0/0
 X-purgate-type: clean
-X-purgate-size: 14776
+X-purgate-size: 11048
 
 From: Haseeb Ashraf <haseeb.ashraf@siemens.com>
 
-Running Xen as an L1 hypervisor on KVM exposes the high cost of
-emulating VMALLS12E1IS, especially when it is issued repeatedly.
+FEAT_nTLBPA guarantees that intermediate caching of translation table
+walks does not retain non-coherent cached copies of previously valid
+translation table entries since the last completed applicable TLBI.
 
-Two p2m-related paths are particularly affected:
+When FEAT_nTLBPA is present, a stage-2 invalidation no longer needs to
+be paired with an additional stage-1 invalidation solely to discard
+such side effects. Use this to avoid redundant stage-1 invalidation in
+the combined guest TLBI paths.
 
-  (a) vCPU migration on a pCPU, where the flush is intended to avoid
-      stage-1 translations associated with one vCPU leaking into
-      another, even though the effective stage-2 translation regime is
-      shared at the domain p2m level.
+Update the stage-1-only guest TLBI helpers so that they become no-ops
+when FEAT_nTLBPA is present. This allows existing call sites that
+conservatively issue stage-1 invalidation after stage-2 invalidation to
+benefit without further restructuring.
 
-  (b) p2m updates where the affected IPA range is known, for example
-      when XENMEM_remove_from_physmap removes mappings one page at a
-      time.
+Also update the Arm64 IPA-based invalidation helper so that:
+  - stage-2 invalidation by IPA is performed explicitly,
+  - stage-1 invalidation is issued separately only when FEAT_nTLBPA is
+    absent,
+  - completion of the broadcast TLBI sequence remains explicit.
 
-Address both cases by narrowing the invalidation where possible.
+This makes the architectural intent clearer and avoids redundant
+invalidations on systems that implement FEAT_nTLBPA.
 
-For the vCPU migration case, replace the combined guest flush with a
-stage-1-only invalidation. This preserves the required separation
-between per-vCPU stage-1 translations while avoiding unnecessary
-stage-2 invalidation.
-
-For p2m updates where the affected IPA range is known, invalidate by
-IPA range instead of always flushing the whole guest TLB. Since the
-Arm64 TLBI-by-IPA sequence loops per page, cap the range at an
-empirically chosen threshold and fall back to the full guest flush
-above that point.
-
-On Graviton4 running Xen-on-KVM, the cost of a full guest TLBI was
-measured to be roughly comparable to tens of thousands of single-page
-IPA invalidations, so a 256MB threshold is used as a practical cutoff.
-
-On Arm32 this patch keeps the conservative full-flush behaviour for the
-IPA-range helper. Follow-up patches will refine that path further.
-
-Suggested-by: Julien Grall <julien@xen.org>
+Suggested-by: Mohamed Mediouni <mohamed@unpredictable.fr>
 Signed-off-by: Haseeb Ashraf <haseeb.ashraf@siemens.com>
 
 Changes in v4:
-- Reworked the Arm64 IPA-based TLBI sequence to make completion of the
-  broadcast TLBI explicit instead of relying on a stage-1 helper for
-  the final barriers/workaround.
-- Reused __tlb_repeat_sync() for the repeat-TLBI workaround handling.
-- Added a small robustness check in p2m_force_tlb_flush_range_sync().
+- Reworked the Arm64 IPA-based invalidation helper so that stage-2,
+  optional stage-1, and final TLBI completion are expressed
+  separately and explicitly.
+- Simplified the FEAT_nTLBPA optimization by reusing the explicit TLBI
+  completion helper instead of open-coding a special final IPA TLBI
+  sequence.
 - Refined comments and commit message wording.
 
 Changes in v3:
-- Updated IPA-based TLBI sequence to apply ARM64 repeat TLBI
-  workaround to only final TLBI and DSB of the sequence.
-- Removed TLB_HELPER_IPA and instead directly used the TLBI
-  instruction where needed as that was the only instance where it is
-  being used.
-- Removed flush_guest_tlb_range_ipa_local() as it was not being used.
-- Updated comments as per feedback in v2 about holding lock before
-  p2m_load_vttbr.
-- Updated references of ARM ARM to use newer version DDI 0487L.b
-  instead of older version DDI 0487A.e.
+- This commit has no functional change in v3, only rebasing changes
+  due to updates in commit-1.
 
 Changes in v2:
-- This commit implements the baseline implementation to address the
-  problem at hand. Removed the FEAT_nTLBPA implementation from this
-  commit which will be implemented in following commit using CPU
-  capability.
-- Moved ARM32 and ARM64 specific implementations of TLBIs to
-  architecture specific flushtlb.h.
-- Added references of ARM ARM in code comments.
-- Evaluated and added a threshold to select between IPA-based TLB
-  invalidation vs fallback to full stage TLB invalidation above
-  the threshold.
+- This commit is implemented in v2 and is splitted from commit-1 in
+  v1. This is implemented by using CPU capability.
 ---
- xen/arch/arm/include/asm/arm32/flushtlb.h |  53 +++++++++++
- xen/arch/arm/include/asm/arm64/flushtlb.h |  62 +++++++++++++
- xen/arch/arm/include/asm/mmu/p2m.h        |   2 +
- xen/arch/arm/mmu/p2m.c                    | 105 ++++++++++++++++------
- 4 files changed, 195 insertions(+), 27 deletions(-)
+ xen/arch/arm/cpufeature.c                 | 19 ++++++++++
+ xen/arch/arm/include/asm/arm32/flushtlb.h | 14 ++++----
+ xen/arch/arm/include/asm/arm64/flushtlb.h | 44 +++++++++++++++++++----
+ xen/arch/arm/include/asm/cpufeature.h     | 24 +++++++++++--
+ xen/arch/arm/include/asm/processor.h      |  7 ++++
+ 5 files changed, 93 insertions(+), 15 deletions(-)
 
+diff --git a/xen/arch/arm/cpufeature.c b/xen/arch/arm/cpufeature.c
+index 94d14fb6a9..86720c10a3 100644
+--- a/xen/arch/arm/cpufeature.c
++++ b/xen/arch/arm/cpufeature.c
+@@ -17,7 +17,19 @@ DECLARE_BITMAP(cpu_hwcaps, ARM_NCAPS);
+ 
+ struct cpuinfo_arm __read_mostly domain_cpuinfo;
+ 
++#ifdef CONFIG_ARM_32
++static bool has_ntlbpa(const struct arm_cpu_capabilities *entry)
++{
++    return system_cpuinfo.mm32.ntlbpa == MM32_NTLBPA_SUPPORT_IMP;
++}
++#endif
++
+ #ifdef CONFIG_ARM_64
++static bool has_ntlbpa(const struct arm_cpu_capabilities *entry)
++{
++    return system_cpuinfo.mm64.ntlbpa == MM64_NTLBPA_SUPPORT_IMP;
++}
++
+ static bool has_sb_instruction(const struct arm_cpu_capabilities *entry)
+ {
+     return system_cpuinfo.isa64.sb;
+@@ -25,6 +37,13 @@ static bool has_sb_instruction(const struct arm_cpu_capabilities *entry)
+ #endif
+ 
+ static const struct arm_cpu_capabilities arm_features[] = {
++#if defined(CONFIG_ARM_32) || defined(CONFIG_ARM_64)
++    {
++        .desc = "Intermediate caching of translation table walks (nTLBPA)",
++        .capability = ARM_HAS_NTLBPA,
++        .matches = has_ntlbpa,
++    },
++#endif
+ #ifdef CONFIG_ARM_64
+     {
+         .desc = "Speculation barrier instruction (SB)",
 diff --git a/xen/arch/arm/include/asm/arm32/flushtlb.h b/xen/arch/arm/include/asm/arm32/flushtlb.h
-index 5483be08fb..1497f16ba5 100644
+index 1497f16ba5..30df161323 100644
 --- a/xen/arch/arm/include/asm/arm32/flushtlb.h
 +++ b/xen/arch/arm/include/asm/arm32/flushtlb.h
-@@ -45,6 +45,43 @@ TLB_HELPER(flush_xen_tlb_local, TLBIALLH, nsh)
- 
- #undef TLB_HELPER
- 
-+/*
-+ * Flush TLB of local processor. Use when flush for only stage-1 is intended.
-+ *
-+ * The following function should be used where intention is to clear only
-+ * stage-1 TLBs. This would be helpful in future in identifying which stage-1
-+ * TLB flushes can be skipped such as in present of FEAT_nTLBPA.
-+ */
-+static inline void flush_guest_tlb_s1_local(void)
-+{
-+    /*
-+     * Same instruction can invalidate both stage-1 and stage-2 TLBs depending
-+     * upon the execution context.
-+     *
-+     * See ARMv8 (DDI 0487L.b): G5-11698 Table G5-23.
-+     */
-+    return flush_guest_tlb_local();
-+}
-+
-+/*
-+ * Flush TLB of inner-shareable processor domain. Use when flush for only
-+ * stage-1 is intended.
-+ *
-+ * The following function should be used where intention is to clear only
-+ * stage-1 TLBs. This would be helpful in future in identifying which stage-1
-+ * TLB flushes can be skipped such as in present of FEAT_nTLBPA.
-+ */
-+static inline void flush_guest_tlb_s1(void)
-+{
-+    /*
-+     * Same instruction can invalidate both stage-1 and stage-2 TLBs depending
-+     * upon the execution context.
-+     *
-+     * See ARMv8 (DDI 0487L.b): G5-11698 Table G5-23.
-+     */
-+    return flush_guest_tlb();
-+}
-+
- /* Flush TLB of local processor for address va. */
- static inline void __flush_xen_tlb_one_local(vaddr_t va)
+@@ -49,8 +49,8 @@ TLB_HELPER(flush_xen_tlb_local, TLBIALLH, nsh)
+  * Flush TLB of local processor. Use when flush for only stage-1 is intended.
+  *
+  * The following function should be used where intention is to clear only
+- * stage-1 TLBs. This would be helpful in future in identifying which stage-1
+- * TLB flushes can be skipped such as in present of FEAT_nTLBPA.
++ * stage-1 TLBs. This would be helpful in identifying which stage-1 TLB flushes
++ * can be skipped such as in present of FEAT_nTLBPA.
+  */
+ static inline void flush_guest_tlb_s1_local(void)
  {
-@@ -60,6 +97,22 @@ static inline void __flush_xen_tlb_one(vaddr_t va)
- /* Only for ARM64_WORKAROUND_REPEAT_TLBI */
- static inline void __tlb_repeat_sync(void) {}
+@@ -60,7 +60,8 @@ static inline void flush_guest_tlb_s1_local(void)
+      *
+      * See ARMv8 (DDI 0487L.b): G5-11698 Table G5-23.
+      */
+-    return flush_guest_tlb_local();
++    if ( !cpus_have_const_cap(ARM_HAS_NTLBPA) )
++        flush_guest_tlb_local();
+ }
  
-+/*
-+ * Flush a range of IPA's mappings from the TLB of all processors in the
-+ * inner-shareable domain.
-+ */
-+static inline void flush_guest_tlb_range_ipa(paddr_t ipa,
-+                                             unsigned long size)
-+{
-+    /*
-+     * Following can invalidate both stage-1 and stage-2 TLBs depending upon
-+     * the execution mode.
-+     *
-+     * See ARMv8 (DDI 0487L.b): G5-11698 Table G5-23.
-+     */
-+    flush_guest_tlb();
-+}
-+
- #endif /* __ASM_ARM_ARM32_FLUSHTLB_H__ */
  /*
-  * Local variables:
+@@ -68,8 +69,8 @@ static inline void flush_guest_tlb_s1_local(void)
+  * stage-1 is intended.
+  *
+  * The following function should be used where intention is to clear only
+- * stage-1 TLBs. This would be helpful in future in identifying which stage-1
+- * TLB flushes can be skipped such as in present of FEAT_nTLBPA.
++ * stage-1 TLBs. This would be helpful in identifying which stage-1 TLB flushes
++ * can be skipped such as in present of FEAT_nTLBPA.
+  */
+ static inline void flush_guest_tlb_s1(void)
+ {
+@@ -79,7 +80,8 @@ static inline void flush_guest_tlb_s1(void)
+      *
+      * See ARMv8 (DDI 0487L.b): G5-11698 Table G5-23.
+      */
+-    return flush_guest_tlb();
++    if ( !cpus_have_const_cap(ARM_HAS_NTLBPA) )
++        flush_guest_tlb();
+ }
+ 
+ /* Flush TLB of local processor for address va. */
 diff --git a/xen/arch/arm/include/asm/arm64/flushtlb.h b/xen/arch/arm/include/asm/arm64/flushtlb.h
-index 1606b26bf2..cbe2a0da57 100644
+index cbe2a0da57..de266b0e11 100644
 --- a/xen/arch/arm/include/asm/arm64/flushtlb.h
 +++ b/xen/arch/arm/include/asm/arm64/flushtlb.h
-@@ -1,6 +1,8 @@
- #ifndef __ASM_ARM_ARM64_FLUSHTLB_H__
- #define __ASM_ARM_ARM64_FLUSHTLB_H__
+@@ -63,6 +63,36 @@ static inline void name(void)                         \
+         : : : "memory"); \
+ }
  
-+#include <xen/sizes.h> /* For SZ_* macros. */
++#define TLB_HELPER_NTLBPA_LOCAL(name, tlbop)     \
++static inline void name(void)                    \
++{                                                \
++    if ( !cpus_have_const_cap(ARM_HAS_NTLBPA) )  \
++        asm_inline volatile (                    \
++            "dsb  nshst;"                        \
++            "tlbi "  # tlbop  ";"                \
++            "dsb  nsh;"                          \
++            "isb;"                               \
++            : : : "memory");                     \
++}
 +
- /*
-  * Every invalidation operation use the following patterns:
-  *
-@@ -67,6 +69,12 @@ TLB_HELPER_LOCAL(flush_guest_tlb_local, vmalls12e1)
- /* Flush innershareable TLBs, current VMID only */
++#define TLB_HELPER_NTLBPA(name, tlbop)                \
++static inline void name(void)                         \
++{                                                     \
++    if ( !cpus_have_const_cap(ARM_HAS_NTLBPA) )       \
++        asm_inline volatile (                         \
++            "dsb  ishst;"                             \
++            "tlbi "  # tlbop  ";"                     \
++            ALTERNATIVE(                              \
++                "nop; nop;",                          \
++                "dsb  ish;"                           \
++                "tlbi vale2is, xzr;",                 \
++                ARM64_WORKAROUND_REPEAT_TLBI,         \
++                CONFIG_ARM64_WORKAROUND_REPEAT_TLBI)  \
++            "dsb  ish;"                               \
++            "isb;"                                    \
++            : : : "memory");                          \
++}
++
+ /* Flush local TLBs, current VMID only. */
+ TLB_HELPER_LOCAL(flush_guest_tlb_local, vmalls12e1)
+ 
+@@ -70,10 +100,10 @@ TLB_HELPER_LOCAL(flush_guest_tlb_local, vmalls12e1)
  TLB_HELPER(flush_guest_tlb, vmalls12e1is)
  
-+/* Flush local TLBs, current VMID, stage-1 only */
-+TLB_HELPER(flush_guest_tlb_s1_local, vmalle1, nsh)
-+
-+/* Flush innershareable TLBs, current VMID, stage-1 only */
-+TLB_HELPER(flush_guest_tlb_s1, vmalle1is, ish)
-+
+ /* Flush local TLBs, current VMID, stage-1 only */
+-TLB_HELPER(flush_guest_tlb_s1_local, vmalle1, nsh)
++TLB_HELPER_NTLBPA_LOCAL(flush_guest_tlb_s1_local, vmalle1)
+ 
+ /* Flush innershareable TLBs, current VMID, stage-1 only */
+-TLB_HELPER(flush_guest_tlb_s1, vmalle1is, ish)
++TLB_HELPER_NTLBPA(flush_guest_tlb_s1, vmalle1is)
+ 
  /* Flush local TLBs, all VMIDs, non-hypervisor mode */
  TLB_HELPER_LOCAL(flush_all_guests_tlb_local, alle1)
+@@ -86,6 +116,8 @@ TLB_HELPER_LOCAL(flush_xen_tlb_local, alle2)
  
-@@ -116,6 +124,60 @@ static inline void __tlb_repeat_sync(void)
-         : : : "memory");
- }
+ #undef TLB_HELPER_LOCAL
+ #undef TLB_HELPER
++#undef TLB_HELPER_NTLBPA_LOCAL
++#undef TLB_HELPER_NTLBPA
  
-+/*
-+ * Complete a broadcast TLBI sequence.
-+ *
-+ * For all relevant errata it is only necessary to execute a single
-+ * additional TLBI;DSB sequence after the invalidation sequence has completed.
-+ */
-+static inline void tlbi_complete_broadcast(void)
-+{
-+    __tlb_repeat_sync();
-+    dsb(ish);
-+    isb();
-+}
-+
-+/*
-+ * Flush a range of IPA's mappings from the TLB of all processors in the
-+ * inner-shareable domain.
-+ */
-+static inline void flush_guest_tlb_range_ipa(paddr_t ipa, unsigned long size)
-+{
-+    paddr_t end;
-+
-+    /*
-+     * If IPA range is too big (empirically found to be 256M), then fallback to
-+     * full TLB flush.
-+     */
-+    if ( size > SZ_256M )
-+        return flush_guest_tlb();
-+
-+    end = ipa + size;
-+
-+    /*
-+     * See ARM ARM DDI 0487L.b D8.17.6.1 (Invalidating TLB entries from stage 2
-+     * translations) for details of TLBI sequence.
-+     */
-+    dsb(ishst); /* Ensure prior page-table updates have completed */
-+    while ( ipa < end )
-+    {
-+        /* Flush stage-2 TLBs for IPA address */
-+        asm_inline volatile(
-+            "tlbi ipas2e1is, %0"
-+            : : "r" (ipa >> PAGE_SHIFT) : "memory");
-+        ipa += PAGE_SIZE;
-+    }
-+
-+    /*
-+     * Invalidate stage-1 entries for the current VMID as well. Keep this
-+     * separate from completion of the broadcast TLBI sequence so that the
-+     * final barriers/workaround are explicit.
-+     */
-+    asm_inline volatile("tlbi vmalle1is" : : : "memory");
-+
-+    tlbi_complete_broadcast();
-+}
-+
- #endif /* __ASM_ARM_ARM64_FLUSHTLB_H__ */
  /*
-  * Local variables:
-diff --git a/xen/arch/arm/include/asm/mmu/p2m.h b/xen/arch/arm/include/asm/mmu/p2m.h
-index 58496c0b09..8a16722b82 100644
---- a/xen/arch/arm/include/asm/mmu/p2m.h
-+++ b/xen/arch/arm/include/asm/mmu/p2m.h
-@@ -10,6 +10,8 @@ extern unsigned int p2m_root_level;
- 
- struct p2m_domain;
- void p2m_force_tlb_flush_sync(struct p2m_domain *p2m);
-+void p2m_force_tlb_flush_range_sync(struct p2m_domain *p2m, uint64_t start_ipa,
-+                                    uint64_t page_count);
- void p2m_tlb_flush_sync(struct p2m_domain *p2m);
- 
- void p2m_clear_root_pages(struct p2m_domain *p2m);
-diff --git a/xen/arch/arm/mmu/p2m.c b/xen/arch/arm/mmu/p2m.c
-index 51abf3504f..525afcc210 100644
---- a/xen/arch/arm/mmu/p2m.c
-+++ b/xen/arch/arm/mmu/p2m.c
-@@ -231,37 +231,33 @@ void p2m_restore_state(struct vcpu *n)
-     isb();
+  * FLush TLB by VA. This will likely be used in a loop, so the caller
+@@ -169,11 +201,11 @@ static inline void flush_guest_tlb_range_ipa(paddr_t ipa, unsigned long size)
+     }
  
      /*
--     * Flush local TLB for the domain to prevent wrong TLB translation
--     * when running multiple vCPU of the same domain on a single pCPU.
-+     * This only needs to invalidate stage-1 TLB state. All vCPUs of the
-+     * domain share the same p2m, and therefore the same effective stage-2
-+     * translation regime.
+-     * Invalidate stage-1 entries for the current VMID as well. Keep this
+-     * separate from completion of the broadcast TLBI sequence so that the
+-     * final barriers/workaround are explicit.
++     * Without FEAT_nTLBPA, invalidate corresponding stage-1 side effects
++     * separately. Completion of the broadcast TLBI sequence remains explicit.
       */
-     if ( *last_vcpu_ran != INVALID_VCPU_ID && *last_vcpu_ran != n->vcpu_id )
--        flush_guest_tlb_local();
-+        flush_guest_tlb_s1_local();
+-    asm_inline volatile("tlbi vmalle1is" : : : "memory");
++    if ( !cpus_have_const_cap(ARM_HAS_NTLBPA) )
++        asm_inline volatile("tlbi vmalle1is" : : : "memory");
  
-     *last_vcpu_ran = n->vcpu_id;
+     tlbi_complete_broadcast();
  }
+diff --git a/xen/arch/arm/include/asm/cpufeature.h b/xen/arch/arm/include/asm/cpufeature.h
+index bf902a3970..3e56dd27ef 100644
+--- a/xen/arch/arm/include/asm/cpufeature.h
++++ b/xen/arch/arm/include/asm/cpufeature.h
+@@ -76,8 +76,9 @@
+ #define ARM_WORKAROUND_BHB_SMCC_3 15
+ #define ARM_HAS_SB 16
+ #define ARM64_WORKAROUND_1508412 17
++#define ARM_HAS_NTLBPA 18
  
- /*
-- * Force a synchronous P2M TLB flush.
-+ * Loads VTTBR from given P2M.
-  *
-  * Must be called with the p2m lock held.
-+ *
-+ * This returns switched out VTTBR.
-  */
--void p2m_force_tlb_flush_sync(struct p2m_domain *p2m)
-+static uint64_t p2m_load_vttbr(struct p2m_domain *p2m, unsigned long *flags)
- {
--    unsigned long flags = 0;
-     uint64_t ovttbr;
+-#define ARM_NCAPS           18
++#define ARM_NCAPS           19
  
--    ASSERT(p2m_is_write_locked(p2m));
--
--    /*
--     * ARM only provides an instruction to flush TLBs for the current
--     * VMID. So switch to the VTTBR of a given P2M if different.
--     */
-     ovttbr = READ_SYSREG64(VTTBR_EL2);
-     if ( ovttbr != p2m->vttbr )
-     {
-         uint64_t vttbr;
+ #ifndef __ASSEMBLER__
  
--        local_irq_save(flags);
-+        local_irq_save(*flags);
+@@ -276,7 +277,8 @@ struct cpuinfo_arm {
+             unsigned long ets:4;
+             unsigned long __res2:4;
+             unsigned long afp:4;
+-            unsigned long __res3:12;
++            unsigned long ntlbpa:4;
++            unsigned long __res3:8;
+             unsigned long ecbhb:4;
  
-         /*
-          * ARM64_WORKAROUND_AT_SPECULATE: We need to stop AT to allocate
-@@ -280,8 +276,14 @@ void p2m_force_tlb_flush_sync(struct p2m_domain *p2m)
-         isb();
-     }
+             /* MMFR2 */
+@@ -437,8 +439,24 @@ struct cpuinfo_arm {
+         register_t bits[1];
+     } aux32;
  
--    flush_guest_tlb();
-+    return ovttbr;
-+}
+-    struct {
++    union {
+         register_t bits[6];
++        struct {
++            /* MMFR0 */
++            unsigned long __res0:32;
++            /* MMFR1 */
++            unsigned long __res1:32;
++            /* MMFR2 */
++            unsigned long __res2:32;
++            /* MMFR3 */
++            unsigned long __res3:32;
++            /* MMFR4 */
++            unsigned long __res4:32;
++            /* MMFR5 */
++            unsigned long __res5:4;
++            unsigned long ntlbpa:4;
++            unsigned long __res6:24;
++        };
+     } mm32;
  
-+/*
-+ * Restores VTTBR which was switched out as a result of p2m_load_vttbr().
-+ */
-+static void p2m_restore_vttbr(uint64_t ovttbr, unsigned long flags)
-+{
-     if ( ovttbr != READ_SYSREG64(VTTBR_EL2) )
-     {
-         WRITE_SYSREG64(ovttbr, VTTBR_EL2);
-@@ -289,10 +291,66 @@ void p2m_force_tlb_flush_sync(struct p2m_domain *p2m)
-         isb();
-         local_irq_restore(flags);
-     }
-+}
+     struct {
+diff --git a/xen/arch/arm/include/asm/processor.h b/xen/arch/arm/include/asm/processor.h
+index a3753c317f..dbf9471a7a 100644
+--- a/xen/arch/arm/include/asm/processor.h
++++ b/xen/arch/arm/include/asm/processor.h
+@@ -484,9 +484,16 @@
+ /* FSR long format */
+ #define FSRL_STATUS_DEBUG       (_AC(0x22,UL)<<0)
+ 
++#ifdef CONFIG_ARM_32
++#define MM32_NTLBPA_SUPPORT_NI      0x0
++#define MM32_NTLBPA_SUPPORT_IMP     0x1
++#endif
 +
-+/*
-+ * Force a synchronous P2M TLB flush.
-+ *
-+ * Must be called with the p2m lock held.
-+ */
-+void p2m_force_tlb_flush_sync(struct p2m_domain *p2m)
-+{
-+    unsigned long flags = 0;
-+    uint64_t ovttbr;
-+
-+    ASSERT(p2m_is_write_locked(p2m));
-+
-+    /*
-+     * ARM only provides an instruction to flush TLBs for the current
-+     * VMID. So switch to the VTTBR of a given P2M if different.
-+     */
-+    ovttbr = p2m_load_vttbr(p2m, &flags);
-+
-+    flush_guest_tlb();
-+
-+    p2m_restore_vttbr(ovttbr, flags);
+ #ifdef CONFIG_ARM_64
+ #define MM64_VMID_8_BITS_SUPPORT    0x0
+ #define MM64_VMID_16_BITS_SUPPORT   0x2
++#define MM64_NTLBPA_SUPPORT_NI      0x0
++#define MM64_NTLBPA_SUPPORT_IMP     0x1
+ #endif
  
-     p2m->need_flush = false;
- }
- 
-+/*
-+ * Force a synchronous P2M TLB flush on a range of addresses.
-+ *
-+ * Must be called with the p2m lock held.
-+ */
-+void p2m_force_tlb_flush_range_sync(struct p2m_domain *p2m, uint64_t start_ipa,
-+                                    uint64_t page_count)
-+{
-+    unsigned long flags = 0;
-+    uint64_t ovttbr;
-+
-+    ASSERT(p2m_is_write_locked(p2m));
-+
-+    if ( !page_count )
-+        return;
-+
-+    /*
-+     * ARM only provides an instruction to flush TLBs for the current
-+     * VMID. So switch to the VTTBR of a given P2M if different.
-+     */
-+    ovttbr = p2m_load_vttbr(p2m, &flags);
-+
-+    /* Invalidate TLB entries by IPA range */
-+    if ( unlikely(page_count > ULONG_MAX / PAGE_SIZE) )
-+        flush_guest_tlb();
-+    else
-+    {
-+        flush_guest_tlb_range_ipa(start_ipa, page_count * PAGE_SIZE);
-+    }
-+
-+    p2m_restore_vttbr(ovttbr, flags);
-+}
-+
- void p2m_tlb_flush_sync(struct p2m_domain *p2m)
- {
-     if ( p2m->need_flush )
-@@ -1034,7 +1092,8 @@ static int __p2m_set_entry(struct p2m_domain *p2m,
-          * For more details see (D4.7.1 in ARM DDI 0487A.j).
-          */
-         p2m_remove_pte(entry, p2m->clean_pte);
--        p2m_force_tlb_flush_sync(p2m);
-+        p2m_force_tlb_flush_range_sync(p2m, gfn_x(sgfn) << PAGE_SHIFT,
-+                                       1UL << page_order);
- 
-         p2m_write_pte(entry, split_pte, p2m->clean_pte);
- 
-@@ -1090,8 +1149,8 @@ static int __p2m_set_entry(struct p2m_domain *p2m,
-         p2m_remove_pte(entry, p2m->clean_pte);
- 
-     if ( removing_mapping )
--        /* Flush can be deferred if the entry is removed */
--        p2m->need_flush |= !!lpae_is_valid(orig_pte);
-+        p2m_force_tlb_flush_range_sync(p2m, gfn_x(sgfn) << PAGE_SHIFT,
-+                                       1UL << page_order);
-     else
-     {
-         lpae_t pte = mfn_to_p2m_entry(smfn, t, a);
-@@ -1102,18 +1161,10 @@ static int __p2m_set_entry(struct p2m_domain *p2m,
-         /*
-          * It is necessary to flush the TLB before writing the new entry
-          * to keep coherency when the previous entry was valid.
--         *
--         * Although, it could be defered when only the permissions are
--         * changed (e.g in case of memaccess).
-          */
-         if ( lpae_is_valid(orig_pte) )
--        {
--            if ( likely(!p2m->mem_access_enabled) ||
--                 P2M_CLEAR_PERM(pte) != P2M_CLEAR_PERM(orig_pte) )
--                p2m_force_tlb_flush_sync(p2m);
--            else
--                p2m->need_flush = true;
--        }
-+            p2m_force_tlb_flush_range_sync(p2m, gfn_x(sgfn) << PAGE_SHIFT,
-+                                           1UL << page_order);
-         else if ( !p2m_is_valid(orig_pte) ) /* new mapping */
-             p2m->stats.mappings[level]++;
- 
+ #define MM64_MSA_PMSA_SUPPORT       0xf
 -- 
 2.43.0
 
