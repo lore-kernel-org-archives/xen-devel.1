@@ -4,41 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DE66C44532
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Jul 2026 16:15:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1368612.1617910 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9167EC44532
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Jul 2026 17:04:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1368659.1617917 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmZbe-0004df-Cb; Wed, 22 Jul 2026 16:15:38 +0000
+	id 1wmaMX-0004mQ-Nr; Wed, 22 Jul 2026 17:04:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1368612.1617910; Wed, 22 Jul 2026 16:15:38 +0000
+Received: by outflank-mailman (output) from mailman id 1368659.1617917; Wed, 22 Jul 2026 17:04:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmZbe-0004dX-8r; Wed, 22 Jul 2026 16:15:38 +0000
-Received: by outflank-mailman (input) for mailman id 1368612;
- Wed, 22 Jul 2026 16:15:36 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wmaMX-0004mJ-LI; Wed, 22 Jul 2026 17:04:05 +0000
+Received: by outflank-mailman (input) for mailman id 1368659;
+ Wed, 22 Jul 2026 17:04:04 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <vbabka@kernel.org>) id 1wmZbc-0004dQ-CS
- for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 16:15:36 +0000
+ (envelope-from <bp@alien8.de>) id 1wmaMW-0004mD-2P
+ for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 17:04:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wmZbb-00DkLC-IH
- for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 18:15:35 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wmaMV-00H1TA-CJ
+ for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 19:04:03 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <vbabka@kernel.org>)
- id 6a60ec97-2eae-0a2a0a5409dd-0a2a4505e596-16
- for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 18:15:35 +0200
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <vbabka@kernel.org>)
- id 6a60eca5-4cb1-0a2a45050019-aceafc1faf16-3
- for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 18:15:35 +0200
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id F414E43964;
- Wed, 22 Jul 2026 16:15:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A3F941F000E9;
- Wed, 22 Jul 2026 16:15:13 +0000 (UTC)
+ (envelope-from <bp@alien8.de>)
+ id 6a60f7f6-2eae-0a2a0a5409dd-0a2a4508db70-32
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 19:04:03 +0200
+Received: from [65.109.113.108] (helo=mail.alien8.de)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <bp@alien8.de>)
+ id 6a60f802-f659-0a2a45080019-416d716ce040-3
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 19:04:03 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id 676B440E014C; 
+ Wed, 22 Jul 2026 17:04:02 +0000 (UTC)
+Received: from mail.alien8.de ([127.0.0.1])
+ by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id XvFiLD8XTnGS; Wed, 22 Jul 2026 17:03:52 +0000 (UTC)
+Received: from stx.tnic (unknown [IPv6:2600:1700:38ca:c00::2b])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest
+ SHA256) (No client certificate requested)
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 7369240E019E;
+ Wed, 22 Jul 2026 17:03:37 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,161 +57,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784736932;
-	bh=YtoXCA62CyJBNC7Tbkqm6QUVmIJyF8vWZgzG8HkNlzI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=DZFALzRwUkrcWF32RmBloDBG4APMVkGxhtgaZyfkfq4w77n6RpNrdAHXIykI0LwMX
-	 tGTerPv7RnSpnWTQAISeMEzjQWr0uGJk7k+k1pIaGnKeBR4YxJpt9RyDLS1Ii9bIGB
-	 43/hCcIIVUkgRJS7+JSbLJBvsJXvM8ST2ld2ORuO4pGg5dZ4eXczqK6/TJ9lcC7zTV
-	 184NzHUANyj1upIfiufIzTzgFXEU4ol0nH+6Z9pEAlACTIbjzOLfqyhBSUIaxXrwXh
-	 gLiKpiTLLNgHpkBvl6V4zRf6clxml/U/1TOwopiR7NwCRl7coCul519YgSFNAZ8pPL
-	 5ogQPeJG8QmfA==
-Message-ID: <fd9defdf-5d82-4f07-a496-4fe8064710ff@kernel.org>
-Date: Wed, 22 Jul 2026 18:15:11 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=alien8 header.d=alien8.de header.i="@alien8.de" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
+X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
+Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
+	header.d=alien8.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
+	t=1784739830; bh=0TMyZJ+2oYdfk/x6fhwC12KPd/UX0c869fa4clJ+aPo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=ZhtkdSZkxAhyAZ8ADc7HxuMK/GaikUBwGUUA0nbJC7FzNV5bvFxEpYyz3/MTr6daN
+	 M5BRpHk8CQRN/vRRnhnUSAcvTGkmJyvGF5ZvOQSWEpm2PJKa/JMub9g++/Qx5X6jw0
+	 nn5m5LJ/5gd+PulU9uBaXUigHhG+NB+unF0I4DD0ZyKxlleS48VreKflMcAVaM+3ym
+	 hskVZ1cOt9ffyULhkZTCr9Zy75T5AAhRjoM18W9wueHo34+8YJbulLdOOxfCMXRXv/
+	 JTHWksTA4AF9+e20kkW865tVMLj4QSouV/YLEoRqQ79a/KX3BvHY71g5EGALYICIxc
+	 hhUI2nUJbv582HtR9SqBHyA0xRViXim49oqhtODjWqr5zc+HwRjcvZ0M9+e1MWMJrj
+	 RPfuvjl2BLUBnUFhIS+nUOlqOfWq+pyYvs/xVOEH561d31o6K0E1SQWjJuihpYM5RL
+	 xDZq5EdtVFDfdj69NZIM7tAh5rPqJ7n+OzxwJEITyTJfrN2ugFVHSiVPZSptKDKKzO
+	 mpVnwvEpGostusQwfe29KG6LfHvWwyr/5z5cz6fJMfRj25U1v3RG8SGMvZBuW8kC5S
+	 TOfpDb/FiPp1EcDmqacGcvqfWPr57hh+EJvnOTCL2hZuyZHtj3kX86/C9Ntybq0Ypz
+	 eXmu+N1uuPDGsbeRX0mtONA0=
+Date: Wed, 22 Jul 2026 10:03:34 -0700
+From: Borislav Petkov <bp@alien8.de>
+To: Mauricio Faria de Oliveira <mfo@igalia.com>,
+	"H. Peter Anvin" <hpa@zytor.com>
+Cc: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+	Juergen Gross <jgross@suse.com>,
+	Alexey Dobriyan <adobriyan@gmail.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>, kernel-dev@igalia.com,
+	linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v7 2/5] x86/asm: add volatile, clobbers and zero-length
+ check in inline memcmp
+Message-ID: <20260722170334.GCamD35gwrCng30WH1@fat_crate.local>
+References: <20260721-pvh-kasan-inline-v7-0-38979a50cef0@igalia.com>
+ <20260721-pvh-kasan-inline-v7-2-38979a50cef0@igalia.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 13/13] mm/mremap: convert mremap code to use
- vma_flags_t
-Content-Language: en-US
-To: Lorenzo Stoakes <ljs@kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>,
- David Hildenbrand <david@kernel.org>, "Liam R. Howlett"
- <liam@infradead.org>, Mike Rapoport <rppt@kernel.org>,
- Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- Benjamin LaHaise <bcrl@kvack.org>, Alexander Viro <viro@zeniv.linux.org.uk>,
- Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
- Hugh Dickins <hughd@google.com>, Baolin Wang
- <baolin.wang@linux.alibaba.com>, Jann Horn <jannh@google.com>,
- Pedro Falcato <pfalcato@suse.de>, Muchun Song <muchun.song@linux.dev>,
- Oscar Salvador <osalvador@suse.de>, Zi Yan <ziy@nvidia.com>,
- Nico Pache <npache@redhat.com>, Ryan Roberts <ryan.roberts@arm.com>,
- Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>,
- Lance Yang <lance.yang@linux.dev>, Usama Arif <usama.arif@linux.dev>,
- Madhavan Srinivasan <maddy@linux.ibm.com>,
- Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>,
- "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Lucas Stach <l.stach@pengutronix.de>,
- Russell King <linux+etnaviv@armlinux.org.uk>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Inki Dae <inki.dae@samsung.com>, Seung-Woo Kim <sw0312.kim@samsung.com>,
- Kyungmin Park <kyungmin.park@samsung.com>,
- Krzysztof Kozlowski <krzk@kernel.org>,
- Peter Griffin <peter.griffin@linaro.org>,
- Alim Akhtar <alim.akhtar@samsung.com>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin
- <tursulin@ursulin.net>, Rob Clark <robin.clark@oss.qualcomm.com>,
- Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar
- <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>,
- Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>,
- Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
- Sandy Huang <hjc@rock-chips.com>, =?UTF-8?Q?Heiko_St=C3=BCbner?=
- <heiko@sntech.de>, Andy Yan <andy.yan@rock-chips.com>,
- Thierry Reding <thierry.reding@kernel.org>,
- Mikko Perttunen <mperttunen@nvidia.com>,
- Jonathan Hunter <jonathanh@nvidia.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Dmitry Osipenko <dmitry.osipenko@collabora.com>,
- Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu
- <olvaffe@gmail.com>, Zack Rusin <zack.rusin@broadcom.com>,
- Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>,
- Matthew Brost <matthew.brost@intel.com>,
- =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- Helge Deller <deller@gmx.de>, Kees Cook <kees@kernel.org>,
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
- Boris Brezillon <boris.brezillon@collabora.com>,
- Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>
-Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
- linux-mips@vger.kernel.org, linux-aio@kvack.org,
- linux-fsdevel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- dri-devel@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
- linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-tegra@vger.kernel.org,
- virtualization@lists.linux.dev, intel-xe@lists.freedesktop.org,
- xen-devel@lists.xenproject.org, linux-fbdev@vger.kernel.org,
- linux-sound@vger.kernel.org
-References: <20260711-b4-vma-flags-mm-v2-0-0fa2357d5431@kernel.org>
- <20260711-b4-vma-flags-mm-v2-13-0fa2357d5431@kernel.org>
-From: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
-Autocrypt: addr=vbabka@kernel.org; keydata=
- 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
-In-Reply-To: <20260711-b4-vma-flags-mm-v2-13-0fa2357d5431@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1784736935-716AD2A1-E2DDF39F/0/0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260721-pvh-kasan-inline-v7-2-38979a50cef0@igalia.com>
+X-purgate-ID: tlsNG-c1860d/1784739843-CDF4787B-8A1AE63E/0/0
 X-purgate-type: clean
-X-purgate-size: 1014
+X-purgate-size: 2120
 
-On 7/11/26 20:45, Lorenzo Stoakes wrote:
-> Replace use of the legacy vm_flags_t flags with vma_flags_t values
-> throughout the mremap logic.
-> 
-> Note that, in replacing vm_flags_clear() (which takes the VMA write lock)
-> with vma_clear_flags() and vma_clear_flags_mask() (which do not)
-> respectively in unmap_source_vma() and dontunmap_complete(), we do not add
-> a VMA write lock to account for htis.
-> 
-> This is because, in both cases, move_vma() is their calling function and
-> this has already acquired the VMA write lock on vrm->vma whose VMA flags
-> are being cleared.
-> 
-> In the case of vma_set_flags() in unmap_source_vma() we do need to do this
-> - as prev and next were not necessarily write locked at this point.
-> 
-> Additionally update comments to reflect the changes to be consistent.
-> 
-> No functional change intended.
-> 
-> Reviewed-by: Zi Yan <ziy@nvidia.com>
-> Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
+hpa in To:.
 
-Reviewed-by: Vlastimil Babka (SUSE) <vbabka@kernel.org>
+On Tue, Jul 21, 2026 at 12:56:43PM -0300, Mauricio Faria de Oliveira wrote:
+> Add the volatile qualifier and clobbers parameter to prevent bugs with
+> instruction reordering and optimization.
+> 
+> Also check the zero-length case, as the 'repe' prefix does not run the
+> 'cmpsb' instruction if the 'count' register is zero, which doesn't set
 
+Please use capital letters for insns: REPE, CMPSB and you don't need to put
+words in '' - it reads fine without them.
+
+> the condition-code/zero flag, so the result is based on a stale flag.
+> 
+> Those are pre-existing issues found by Sashiko.
+> 
+> Link: https://sashiko.dev/#/patchset/20260701-pvh-kasan-inline-v6-0-ba99045dfa9f%40igalia.com
+> Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
+> ---
+>  arch/x86/include/asm/shared/string.h | 8 ++++++--
+>  1 file changed, 6 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/x86/include/asm/shared/string.h b/arch/x86/include/asm/shared/string.h
+> index 02b92927553f7b8e1c87e6122bbaa70439e57ea7..166274e44f3cb49e3dccab3cdac281d67aef5d44 100644
+> --- a/arch/x86/include/asm/shared/string.h
+> +++ b/arch/x86/include/asm/shared/string.h
+> @@ -11,8 +11,12 @@ static __always_inline int __inline_memcmp(const void *s1, const void *s2, size_
+>  {
+>  	bool diff;
+>  
+> -	asm("repe cmpsb"
+> -	    : "=@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len));
+> +	if (len == 0)
+> +		return 0;
+> +
+> +	asm volatile("repe cmpsb"
+> +		     : "=@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len)
+> +		     : : "cc", "memory");
+>  
+>  	return diff;
+>  }
+
+So this is a fix which should probably go to stable, I think. Going back into
+git history, it points to
+
+  62bd0337d0c4 ("Top header file for new x86 setup code")
+
+from 2007. And we have carried it this way through the years and who knows
+what hit this or not. So please make this the first patch in your set - you
+can even send it separately so that I can get route it through stable.
+
+Then you can base the rest ontop.
+
+Thx.
+
+-- 
+Regards/Gruss,
+    Boris.
+
+https://people.kernel.org/tglx/notes-about-netiquette
 
