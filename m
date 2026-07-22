@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86282C4451C
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Jul 2026 07:26:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1368164.1617649 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB318C44533
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Jul 2026 07:40:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1368173.1617658 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmRL4-0007Uw-Dg; Wed, 22 Jul 2026 07:25:58 +0000
+	id 1wmRYw-0002z1-HW; Wed, 22 Jul 2026 07:40:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1368164.1617649; Wed, 22 Jul 2026 07:25:58 +0000
+Received: by outflank-mailman (output) from mailman id 1368173.1617658; Wed, 22 Jul 2026 07:40:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmRL4-0007Up-An; Wed, 22 Jul 2026 07:25:58 +0000
-Received: by outflank-mailman (input) for mailman id 1368164;
- Wed, 22 Jul 2026 07:25:56 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wmRL2-0007Uj-Es
- for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 07:25:56 +0000
+	id 1wmRYw-0002yu-Er; Wed, 22 Jul 2026 07:40:18 +0000
+Received: by outflank-mailman (input) for mailman id 1368173;
+ Wed, 22 Jul 2026 07:40:16 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wmRYu-0002yo-HE
+ for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 07:40:16 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wmRL1-003MA3-Gj
- for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 09:25:55 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wmRYt-00HEQX-U1
+ for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 09:40:15 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a607076-e002-0a2a0a5209dd-0a2a4505dbee-32
- for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 09:25:55 +0200
-Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a6073db-e002-0a2a0a5209dd-0a2a4508c810-36
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 09:40:15 +0200
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a607083-4cb1-0a2a45050019-d155dd29e953-3
- for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 09:25:55 +0200
-Received: by mail-wr1-f41.google.com with SMTP id
- ffacd0b85a97d-47f7027ca11so2530927f8f.3
- for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 00:25:55 -0700 (PDT)
+ id 6a6073df-f659-0a2a45080019-d155dd31c521-3
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 09:40:15 +0200
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-47640541585so6384784f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 00:40:15 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f85c67339sm3547028f8f.31.2026.07.22.00.25.53
+ ffacd0b85a97d-47f864305f5sm2910463f8f.17.2026.07.22.00.40.14
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Jul 2026 00:25:54 -0700 (PDT)
+ Wed, 22 Jul 2026 00:40:14 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,48 +54,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784705155; x=1785309955; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1784706015; x=1785310815; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Lc3WFYehMRjFDh2jw61gUKjIm9F4rkbF89KNXp20xVw=;
-        b=Xdq3oBCDdZFXoe4GyXAqO04jaqWNo4XEP1zkH7txJHFZ+klvGo9WaWbbgokYHe7ESy
-         pboqchfIzvMCgLcpGefQ2cltahBAVwn5bGTI/M4y3j64DNIFENe2S9TG3HEQ1G5XTDSz
-         P9GXgeT5sFWOXV90W2g4bGTZ4drUY37ozCyta1wahBfXZvyd3h8PVWx49ZpCTBW/368q
-         TxtdGrDIrEchYN2gBZ87YU6rtTlyB3RkZbsk0X0w/IO96jkwMuHZF4lA5YWY30XKtGjb
-         O7rvFtPbnJgu2dL2lOeXMB+Na5YeAe9KFn2HytLry+yD0BCf3uob75rmODghHStgVQbu
-         Vvkg==
+        bh=MlPIhISv92VaZdn74ygYSngw8iSSKtskrahdd9BcbXE=;
+        b=QWQJxmqEL3qorpmOHtnyq0Q2DDtq/SL5ZiLQfkkMiDCypcp6RBATB+YG3z3itUq1GD
+         VqVQ0SQrYGVNPE6lEGMP+1SjCrPSrD6YfCTH5KeRJP5tuxgqkyobOBfQxmGwXVcbJahf
+         bwVtGt++VP1p11hN1OWbEciJqiRJhSyGlplJZrMcLv1KWhS2wtRU3T8opUlXjMjDzyZs
+         UT2rk7Ze8rdHb9yRAlK/nPVuf7lf5VXALgU0jwW0rz9XugBYaTaH0vYJE8cRFJYm4m6Z
+         nPPlv/bveQRWMF0KB+WIbxUfPCQyBVLE8cbHbyZIWLdaop2xi5lQnwqx9Ax3h0Bxdqbr
+         sV8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784705155; x=1785309955;
+        d=1e100.net; s=20251104; t=1784706015; x=1785310815;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Lc3WFYehMRjFDh2jw61gUKjIm9F4rkbF89KNXp20xVw=;
-        b=Be/eZaj3KiHdKBK4s7PZGU9hteKpNsC1XWuEHi6vDAqucNo9eeqP3BFLUIARgvMs41
-         aUN5fvoQcNtp+q58imQUd8/yZHSEOEtYbkauun5w2nsP7erh0MpD/pm76NwgD7ndTxIi
-         1NLLCNEIEcF2zq4AUZfvXF6/CBFjBj0VtbzbOR51Ud/z3iG1soF3NGNQUYWZ+8mHb7AF
-         A371iklvFCneMmaH4+xvQa4/bbSlGBo4QO7qEMAEAdXUwo+9iAW6hcIzmqPofgmbtb7O
-         t5oE7gIaBQuVguEDMQTb7upBQotgUgM2CsvIDH6/2N5kJivSQKdLDNDQwmF+PQTXWhCO
-         Nd/w==
-X-Forwarded-Encrypted: i=1; AHgh+RqvMkF+hONO7f2vo1wy+mPJ4+Ea89Em0Ot7uPkCGuN0std0sCSOxY+ss3U3k57OwKhGIO2ZfmoIv/0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzczpS08/p49jj5ff7VZWHKQdJFdcepduJomeRmyVXNuKAjNZ4W
-	uRsDu3s3c37j/LRWg16i7YFoy/kkBojCrfrpVvNfwRgpLDM2ftDT/+go1ljwR59/+A==
-X-Gm-Gg: AR+sD13iq3Jhbtp4sTf24ZLBPOEwhogcUs6BCYcJ2QIJ2tij4DEfol+vie2O/8hNCbM
-	/WvR8qL9BGMnm1l8CcToPgu71t4qySRbV8ftYsIOgqEPuj8lU3uk5ZO12M8Tbs7EdIdkld32K6r
-	k2nzrpgaPGD5byR3cNVA/RgwsU6WYm3Q9sDcKTFp5iMXdGcGD9QZZA0/nBCJEf/xlrKAX0uO/Nk
-	S0m1cXhAhkMbnmlSiY8lz6fyDiNg/WvvWoh+5OY1kSQMGEd9mOIDclpFvZIa+v0zyLons5RAZMF
-	WyLmPfzccjv1nwJoTS0CRBwg/+xNVT9VZdsTSA89TGc9qinetXRHYI3GgDutaMgmJ8FyrYlNxXc
-	BmbK5oFx4v3WGnVpXG4zbxdv2HkNwLY3dHi/wKPgrpwAM51cIA35P6+M1LMJyMrvW6nYlLDglKs
-	YTXv5jGShq8mwd1EvrRdqPeAsZ6wiqu4Nmz4X42YMg1M+lYnAuCAAm6TXUKgQc8VjsJw==
-X-Received: by 2002:a05:6000:2208:b0:47f:7736:5485 with SMTP id ffacd0b85a97d-47f7736551dmr16258443f8f.16.1784705154932;
-        Wed, 22 Jul 2026 00:25:54 -0700 (PDT)
-Message-ID: <d329d1c0-59b1-4aa8-b72d-5aad3e310f07@suse.com>
-Date: Wed, 22 Jul 2026 09:25:52 +0200
+        bh=MlPIhISv92VaZdn74ygYSngw8iSSKtskrahdd9BcbXE=;
+        b=D9Fe7IBG1nkf9Ze/RTl923UqUquNGvJWxlB/VHsFaeHvnC0XWx/T/d6cPiwQOABbFJ
+         8i3en4sVqhbaXY2SDWaifY+6ykGBXJQdxpDQZFcSIYhWarsoRqqgHYGUTvszJ9OeY9Sf
+         39TK6bHTim/pStGa25CLybeN3N4f9SWF9KFq2ZdeQoaj8qWGywnJtYi4ZaYhxrHIMvOd
+         orInIGAIjkBwSp2mx60mGLcYg0SDCFitdbn8DzbpytNG/MaGADmly/qcPQ/DuxQ5eP0j
+         OWD917XzwsGWSzZTRc0QW6pYkhVoZsfwnBaOiNWl2caGWa/UFQcPsoD/hNHGJHPVMSXu
+         AjRg==
+X-Forwarded-Encrypted: i=1; AHgh+RrjECft9Z2+Z9ez/apJGQeMlik0fnfp9Xu4DxMsuiBrx34kjncGWcwmJDspODKV39p8MzDFq7TcO3M=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxSlXdRIdQVOPJVLRYMaw5AQzO1MkfvBkNV+nkAlcX3xZY8rtDg
+	lBBjnz9n6pWlfg5A2NviStDGNVVjefnMx5FWwvkknBBdEODpTrD4pOUuoWq1DFI/NA==
+X-Gm-Gg: AR+sD13C1cUHUObCFjgI8MtKckWwc49Yh2TNvvux/zmHY0DRyLuHrH5FPOiX3dxUjBN
+	90Ntx42xj4MFOEaqHtm7GKQVb5ZgA2NRdviHMjyJ3cYuURIVqT8PCaZ8QjDGyeVzz+ci3Jz0jfE
+	oGW88QGTLp2DZTAAqJ9yHLArrRpqEj5Nk0Pz1dnvOaUsFrC+nXo8a0fVUBzKFyJpGML4Bzv2IHV
+	Ond14DmBG3+Uj0b3/ueGlrwg/NGr6EgODrXbgsyX04wcIcqEZFSZ1VDS4wSKAlVqV5RaeN9bhp9
+	JIRSkRw7CSr4kIxGQcpEXbN3P9YqfvppMDwIZZ4PpaTAKf6asp+tJGfCamBbIMRsC98P2uRTKYR
+	pUE37hatv4ln1qIB/qRE283CaYWCT+nrQCP3EopVAcrYF+SuI82YqUaNjsqShEQOywvApjIoRdQ
+	Q/6yqJef89CQNja+RWvVWRtGuZslZRvmte/t22Es8FdLSnSeSRK1Q5DvD5qZgi+FMA7A==
+X-Received: by 2002:a05:6000:4914:b0:47f:6e23:64d6 with SMTP id ffacd0b85a97d-47f6e2366f5mr18025576f8f.16.1784706015071;
+        Wed, 22 Jul 2026 00:40:15 -0700 (PDT)
+Message-ID: <e5ac074d-c824-4fe4-a1d4-ba986236fbb1@suse.com>
+Date: Wed, 22 Jul 2026 09:40:13 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 06/23] xen/riscv: introduce guest riscv,isa string
+Subject: Re: [PATCH v6 14/23] xen/riscv: introduce minimal virtual APLIC
+ (vAPLIC) infrastructure
 To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  Baptiste Le Duc <baptiste.le-duc@vates.tech>,
@@ -107,7 +108,7 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 References: <cover.1784559209.git.oleksii.kurochko@gmail.com>
- <9f5d1005611daa4ba9e4324950fcfe10adbebc32.1784559209.git.oleksii.kurochko@gmail.com>
+ <98bcad12ca4e5ee270cc1ef9db09d89a32f863f8.1784559209.git.oleksii.kurochko@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -133,67 +134,75 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <9f5d1005611daa4ba9e4324950fcfe10adbebc32.1784559209.git.oleksii.kurochko@gmail.com>
+In-Reply-To: <98bcad12ca4e5ee270cc1ef9db09d89a32f863f8.1784559209.git.oleksii.kurochko@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1784705155-F5CA82A1-A858D65B/10/73395122804
+X-purgate-ID: tlsNG-c1860d/1784706015-D634587B-D0896945/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 2751
+X-purgate-size: 2575
 
 On 20.07.2026 17:59, Oleksii Kurochko wrote:
-> Introduce build_guest_isa_str() to generate the riscv,isa string to be
-> passed to the guest via the Device Tree riscv,isa property.
+> At the current development stage, only domain vINTC init and deinit
+> operations are required, so implement those first.
 > 
-> Introduce the per-domain guest ISA bitmap, populated during domain
-> creation by calling init_guest_isa().
+> Initialize vAPLIC's domaincfg to with the interrupt-enable bit set and
+> MSI delivery mode selected as the current solution is exepcted to have
+> always IMSIC, and initialize vintc->ops.
 > 
-> Introduce struct riscv_isa_ext_entry with a new guest_supported field
-> to filter out ISA extensions that should not be exposed to guests:
+> Other operations such as emulate_load(), emulate_store(), and is_access()
+> will be needed once guests are running and MMIO accesses to APLIC MMIO
+> range must be handled. These will be introduced separately later.
 > 
-> - f/d/q/v: FPU and vector context save/restore are not yet implemented
->   for guests.
-> - Z*inx are not exposed either: they aren't in riscv_isa_ext[], so they
->   can never be set in riscv_isa and thus never reach a guest, and no
->   current hardware/guest-OS advertises or expects them. Supporting them
->   would be cheaper than F/D/Q (FP values stay in integer registers Xen
->   already context-switches), but is left as future work.
-> - h: Nested virtualisation is not supported.
-> - sstc: Xen owns the supervisor timer; guests must use SBI.
-> - svade: Xen manages hardware A/D bit updates in stage-2 page tables.
-> - svpbmt: Page-based memory types are not yet wired up in stage-2 code.
+> Introduce a structure to describe a virtual interrupt controller (vINTC)
+> and a vintc_ops structure, which provides operations to emulate load and
+> store accesses to interrupt controller MMIOs and to check whether a given
+> address falls within the MMIO range of a specific virtual interrupt
+> controller.
+> Note that already existed init_ops field in struct vintc will be init-ed
+> for APLIC in the follow up patch.
 > 
+> The vAPLIC implementation of these operations will be provided later
+> once guests can be run and these operations are actually needed.
+> 
+> Introduce these structures here as they are required for the implementation
+> of domain_vaplic_init() and domain_vaplic_alloc(). Also, introduce
+> vaplic_init() and init vintc_ops->vcpu_init() with it.
+> 
+> Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
 > Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
-In principle
 Acked-by: Jan Beulich <jbeulich@suse.com>
+albeit I (continue to) think that ...
 
-But see below.
+> --- a/xen/arch/riscv/include/asm/intc.h
+> +++ b/xen/arch/riscv/include/asm/intc.h
+> @@ -17,6 +17,7 @@ enum intc_variant {
+>  struct cpu_user_regs;
+>  struct irq_desc;
+>  struct kernel_info;
+> +struct vcpu;
+>  
+>  struct intc_info {
+>      enum intc_variant hw_variant;
+> @@ -53,8 +54,19 @@ struct vintc_init_ops {
+>      int (*make_domu_dt_node)(struct kernel_info *kinfo);
+>  };
+>  
+> +struct vintc_ops {
+> +    /* Initialize some vINTC-related stuff for a vCPU */
+> +    int (*vcpu_init)(struct vcpu *v);
+> +
+> +    /* Deinitialize some vINTC-related stuff for a vCPU */
+> +    void (*vcpu_deinit)(struct vcpu *v);
+> +};
+> +
+>  struct vintc {
+> +    /* Used during domain build only; dropped afterwards. */
+>      const struct vintc_init_ops *init_ops;
 
-> ---
-> Changes in v6:
-> - build_guest_isa_str() now takes a `const struct domain *d` instead of a
->   raw `const unsigned long *isa_bitmap`, to leave room for using more than
->   just the bitmap in the future.
-> - Compute the guest-visible ISA bitmap once at boot, into a new
->   __ro_after_init `guest_isa` bitmap (compute_guest_isa(), called at the
->   end of riscv_fill_hwcap()), instead of re-deriving it from
->   riscv_isa_ext[] on every domain creation in init_guest_isa(). All guests
->   currently get the same extension set, so this avoids repeating
->   identical work per domain; will need revisiting if/when per-domain ISA
->   policy is introduced.
-> - struct arch_domain's `isa` field is now `const unsigned long *isa`
->   instead of an embedded bitmap; init_guest_isa() just points it at the
->   shared `guest_isa` bitmap rather than copying bits into a per-domain
->   array.
-> - Mark riscv_isa_ext[] __initconstrel, since its entries hold name pointers
->   and the need for relocations requires that the compiler emit the data to
->   a writable section.
-> - Make build_guest_isa_str() __init as it is called during make_cpus_node()
->   which is used only (at least, for now) in build time of domain.
-
-This last item is confusing. For one as there's no call site being added here
-in the first place. And then - why would the string need re-calculating when
-the bitmap is calculated once at start of day?
+... "dropped" in the comment is misleading - there's nothing being dropped
+here, as that's technically impossible. Iirc you don't even poison the
+field once domain build is finished.
 
 Jan
 
