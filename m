@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18DF2C44539
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Jul 2026 13:30:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1368431.1617790 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A26DC44539
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Jul 2026 13:34:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1368439.1617798 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmX12-0007Gp-BW; Wed, 22 Jul 2026 13:29:40 +0000
+	id 1wmX5Y-0000L0-S4; Wed, 22 Jul 2026 13:34:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1368431.1617790; Wed, 22 Jul 2026 13:29:40 +0000
+Received: by outflank-mailman (output) from mailman id 1368439.1617798; Wed, 22 Jul 2026 13:34:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmX12-0007Gi-7s; Wed, 22 Jul 2026 13:29:40 +0000
-Received: by outflank-mailman (input) for mailman id 1368431;
- Wed, 22 Jul 2026 13:26:50 +0000
+	id 1wmX5Y-0000Kt-Oq; Wed, 22 Jul 2026 13:34:20 +0000
+Received: by outflank-mailman (input) for mailman id 1368439;
+ Wed, 22 Jul 2026 13:34:20 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <vbabka@kernel.org>) id 1wmWyI-000749-Nt
- for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 13:26:50 +0000
+ (envelope-from <vbabka@kernel.org>) id 1wmX5Y-0000Kn-2V
+ for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 13:34:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wmWyH-004UIE-Sm
- for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 15:26:49 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wmX5X-00DMVY-BU
+ for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 15:34:19 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <vbabka@kernel.org>)
- id 6a60c515-bab6-0a2a0a5309dd-0a2a4502aefe-14
- for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 15:26:49 +0200
+ id 6a60c6c3-2eae-0a2a0a5409dd-0a2a450190c8-34
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 15:34:19 +0200
 Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <vbabka@kernel.org>)
- id 6a60c517-6ca4-0a2a45020019-aceafc1f9934-3
- for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 15:26:49 +0200
+ id 6a60c6d6-5984-0a2a45010019-aceafc1fcb7a-3
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 15:34:15 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 118DF4180C;
- Wed, 22 Jul 2026 13:26:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 409D51F000E9;
- Wed, 22 Jul 2026 13:26:28 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id A94EB43211;
+ Wed, 22 Jul 2026 13:34:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D05801F000E9;
+ Wed, 22 Jul 2026 13:33:54 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,21 +52,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784726806;
-	bh=+M61kMMTxzMqLJW/I9S72vEXtmCkFlbPyR+NRZBxKrM=;
+	s=k20260515; t=1784727253;
+	bh=DjW3IoJngeCa8GtjqJn2j2qE4s7NfPfHtuHffq4DmkI=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=ZXxvQz/+5vEhls9X1WnsdaijtSh4+KMh+sWHRLjatPV9xb4hEbr8G7i+SgsJpyldQ
-	 mfdIbbK/dtwweQdY6q9Z2dTqHvG52A7c0ZGpajSxdgBLMT2ZHax1fZUdkSJwotodwB
-	 GIZ8il6H1obl/L2YNl/gvIQ9I7nGSRtDtHY3VNq7vMpOeuCV07KK7YlHMiYwT2CMau
-	 PsBYdDJ/BmBPkoAkpFxvcPBQkMkbFXmT76mSfEXcHUk8JW4aoAwNQKlZUyKfOxL3CS
-	 hmwrMiEce5S8fEue7P5cjfo10ImHtxtE2AnFwqacXJFSzF8f9QoiB5KF/gtv5iDKns
-	 H6mqJTkUMl9fg==
-Message-ID: <848cc2f9-9314-427c-90e9-39a6e483a335@kernel.org>
-Date: Wed, 22 Jul 2026 15:26:25 +0200
+	b=Xf2Qo7nfk8o5oFsdnRyvwfFlDT+UNHYxpWkdWS9jpYlddyaBbeTmAt4TSKYjBQ6nC
+	 VQT5FSiqo8vVJq/R82X3RyjGnMFjVe2qzMcG3VgXV669ofkFC8DZnKS+UkWwrpzb6q
+	 Fi0Sx6sVMnRuvnBvyBvom3YRXCjGdDRHypbqW5x1R/Uji66gdMwF7l9mOVCq62z3nl
+	 gJr90z+D+N2GhFNNOkLY7sMLu7nS8Z2MkG2ZCFRrrGTu/B/Ym82LsdWUrflTm6uGaV
+	 oU9g4AgXa58RSoCWW8YaDO+USyZcemM+PmqZeWYEvuz91dURSvCpGTEaOa63HF+ZkH
+	 oAveIZpLt2mkA==
+Message-ID: <5d133def-b9ab-4c4a-8c37-3acd05841756@kernel.org>
+Date: Wed, 22 Jul 2026 15:33:53 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/13] mm: introduce vma_flags_can_grow() and
- vma_can_grow()
+Subject: Re: [PATCH v2 02/13] mm/vma: update do_mmap() to use vma_flags_t
 Content-Language: en-US
 To: Lorenzo Stoakes <ljs@kernel.org>,
  Andrew Morton <akpm@linux-foundation.org>,
@@ -134,7 +133,7 @@ Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
  intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
  linux-fbdev@vger.kernel.org, linux-sound@vger.kernel.org
 References: <20260711-b4-vma-flags-mm-v2-0-0fa2357d5431@kernel.org>
- <20260711-b4-vma-flags-mm-v2-1-0fa2357d5431@kernel.org>
+ <20260711-b4-vma-flags-mm-v2-2-0fa2357d5431@kernel.org>
 From: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
 Autocrypt: addr=vbabka@kernel.org; keydata=
  xsFNBFZdmxYBEADsw/SiUSjB0dM+vSh95UkgcHjzEVBlby/Fg+g42O7LAEkCYXi/vvq31JTB
@@ -175,26 +174,40 @@ Autocrypt: addr=vbabka@kernel.org; keydata=
  NcaZ+c6J4H+nEJGi2SkHAUJz5oBzuThvPudLvPA/SK8sKoM01IRxSihev/S/5WLazXB1PGem
  OCbvzC1IjWJJraxiDJ5IygokapUa2RP7+WBR22skQ3SSl6G107QgWKSyTOGWEaRmV53vxQLV
  jXuCmzSSasTL60zq5yGrT4/DYQVSNEUiUbG4pYekxJujNeEDkUlky0Y=
-In-Reply-To: <20260711-b4-vma-flags-mm-v2-1-0fa2357d5431@kernel.org>
+In-Reply-To: <20260711-b4-vma-flags-mm-v2-2-0fa2357d5431@kernel.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1784726809-30BC02AC-D925F2D2/0/0
+X-purgate-ID: tlsNG-d62444/1784727256-C4B45757-71FFC619/0/0
 X-purgate-type: clean
-X-purgate-size: 668
+X-purgate-size: 1370
 
 On 7/11/26 20:44, Lorenzo Stoakes wrote:
-> These test whether the VMA has stack semantics, i.e. is able to grow
-> upwards or downwards depending on the architecture.
+> The core do_mmap() function accepts a vm_flags_t parameter which it then
+> manipulates before passing to mmap_region() to do the heavy lifting of the
+> memory mapping.
 > 
-> In order to account for arches which do not support upward-growing stacks,
-> introduce VMA_GROWSUP whose definition depends on the architecture
-> supporting it, and use vma_flags_test_single_mask() in vma_flags_can_grow()
-> to account for this.
+> Update do_mmap() to instead accept a vma_flags_t parameter, and adjust all
+> the logic within do_mmap() to manipulate this instead.
+> 
+> This is as part of the ongoing effort to convert VMA flags from a system
+> word size to a bitmap type which allows us to unrestrict the number of VMA
+> flags, as well as gain control over how VMA flag manipulation occurs.
+> 
+> We do not cascade these changes to all functions which accept vm_flags_t,
+> but rather use vma_flags_to_legacy() where necessary, specifically
+> deferring converting calc_vm_prot_bits(), calc_vm_flag_bits() and
+> __get_unmapped_area() to vma_flags_t.
+> 
+> Also utilise the new vma_flags_can_grow() predicate which correctly handles
+> the case of architectures without upward growing stacks.
+> 
+> As part of this change, introduce VMA_SHADOW_STACK so we can correctly
+> handle the case of the shadow stack not being defined.
 > 
 > No functional change intended.
 > 
-> Reviewed-by: Zi Yan <ziy@nvidia.com>
 > Reviewed-by: Lance Yang <lance.yang@linux.dev>
+> Reviewed-by: Zi Yan <ziy@nvidia.com>
 > Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
 
 Reviewed-by: Vlastimil Babka (SUSE) <vbabka@kernel.org>
