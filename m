@@ -4,58 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AAACC44536
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Jul 2026 11:56:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1368392.1617779 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18DF2C44539
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Jul 2026 13:30:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1368431.1617790 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmVYx-0003Y7-NM; Wed, 22 Jul 2026 11:56:35 +0000
+	id 1wmX12-0007Gp-BW; Wed, 22 Jul 2026 13:29:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1368392.1617779; Wed, 22 Jul 2026 11:56:35 +0000
+Received: by outflank-mailman (output) from mailman id 1368431.1617790; Wed, 22 Jul 2026 13:29:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmVYx-0003Y0-Jy; Wed, 22 Jul 2026 11:56:35 +0000
-Received: by outflank-mailman (input) for mailman id 1368392;
- Wed, 22 Jul 2026 11:56:34 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wmX12-0007Gi-7s; Wed, 22 Jul 2026 13:29:40 +0000
+Received: by outflank-mailman (input) for mailman id 1368431;
+ Wed, 22 Jul 2026 13:26:50 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1wmVYw-0003Xu-03
- for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 11:56:34 +0000
+ (envelope-from <vbabka@kernel.org>) id 1wmWyI-000749-Nt
+ for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 13:26:50 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wmVYv-000Rf7-CX
- for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 13:56:33 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wmWyH-004UIE-Sm
+ for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 15:26:49 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a60afe3-5cb7-0a2a0a5109dd-0a2a45079086-46
- for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 13:56:32 +0200
-Received: from [52.101.48.22]
- (helo=MW6PR02CU001.outbound.protection.outlook.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a60afee-b4ea-0a2a45070019-346530162bbf-3
- for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 13:56:32 +0200
-Received: from SJ0PR03CA0237.namprd03.prod.outlook.com (2603:10b6:a03:39f::32)
- by LV0PR12MB999068.namprd12.prod.outlook.com (2603:10b6:408:32d::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.10; Wed, 22 Jul
- 2026 11:56:27 +0000
-Received: from SJ1PEPF00002314.namprd03.prod.outlook.com
- (2603:10b6:a03:39f:cafe::4c) by SJ0PR03CA0237.outlook.office365.com
- (2603:10b6:a03:39f::32) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.245.10 via Frontend Transport; Wed,
- 22 Jul 2026 11:56:27 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- SJ1PEPF00002314.mail.protection.outlook.com (10.167.242.168) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.245.5 via Frontend Transport; Wed, 22 Jul 2026 11:56:27 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 22 Jul
- 2026 06:56:26 -0500
-Received: from [10.252.145.116] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.41 via Frontend
- Transport; Wed, 22 Jul 2026 06:56:24 -0500
+ (envelope-from <vbabka@kernel.org>)
+ id 6a60c515-bab6-0a2a0a5309dd-0a2a4502aefe-14
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 15:26:49 +0200
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <vbabka@kernel.org>)
+ id 6a60c517-6ca4-0a2a45020019-aceafc1f9934-3
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 15:26:49 +0200
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 118DF4180C;
+ Wed, 22 Jul 2026 13:26:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 409D51F000E9;
+ Wed, 22 Jul 2026 13:26:28 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -67,105 +50,153 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=m6P+qN8Cid6s4tx0CO4CpovMuBjefUHWk3RpNtsJORgvUyObHQYjTD7SQM9fmZZ4LvIi/+nCtrQMF1LBUdiZNqhcr5nL7DYzAzk9EH7RoakNhlwxZQeW4+ghNi4JpFfA7Q031aHG3a6byaIVglln2lzIH6fKCjhxEh0RjylhDNd1gnvyIWQAe7GdRuVCTFPcbBvr7kA7nTXL7a0uYSn8b2ZZ8/EuufJGNnvC5PB00RkWWvG4gMMj6cRQskG9GBTZAxciBDn2b2XURdXFik6NBVM343dT+WaR1X9G6DbV2iGVnQAqCV3soupPHvQzmQp/bgLwees9j+7XXpEFy9+czA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OxA7GjW9jlIdbzhagtnlPo7nhTEZoqt+Dj0efLRJRS0=;
- b=kM4jNIZ3hcJ4K4GWhD+xoPzeAtxA1Uryjysq6mMzKED7mXhDe3XbhU3Gnjao9KDdCUJBaCjfEr7T9+1xsQH3URthO8SJOosElXprCXbqk7ZFQ1OT6fdWsadZG2+IKLezTDtCS/77J8Fj/tpHEPQHmofcK68R1NbRzt8DcP0CSqly4PNLlRqBfkj8V/tZJrifW4CzrRFzmLuOSZBDag5t4S9oDDs2YenwVCSoU83bAJ9nxR9o0Lkn16KIFHN9+lGHTvsgc1v8Zwrh3MTTubI0o3+IPabPKVhGlSHCTLvfhGVpwc0PJTSWzUfPo3NUHTr32WlFOltABiFp3Yt1Wb5fWQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OxA7GjW9jlIdbzhagtnlPo7nhTEZoqt+Dj0efLRJRS0=;
- b=BLraPtPVjv5Ka5A6pnGSwQWxfN3Po3yhZDdqcfDpSiWZoBkDnqYLWAwO2MLUW0OvTTx2YBSrLptHzPBO/CMO4TeaIVCzKPhczG9YaJ+6ZHunN2gGIpDMWrwamA+qqNCCVRt/vOPLL768oL4qtv5SYO7SDqjmIvMXy8bb8vOkBIU=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <3d7a6f21-e1bb-4e95-b4b8-9d07d5255da0@amd.com>
-Date: Wed, 22 Jul 2026 13:56:24 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784726806;
+	bh=+M61kMMTxzMqLJW/I9S72vEXtmCkFlbPyR+NRZBxKrM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=ZXxvQz/+5vEhls9X1WnsdaijtSh4+KMh+sWHRLjatPV9xb4hEbr8G7i+SgsJpyldQ
+	 mfdIbbK/dtwweQdY6q9Z2dTqHvG52A7c0ZGpajSxdgBLMT2ZHax1fZUdkSJwotodwB
+	 GIZ8il6H1obl/L2YNl/gvIQ9I7nGSRtDtHY3VNq7vMpOeuCV07KK7YlHMiYwT2CMau
+	 PsBYdDJ/BmBPkoAkpFxvcPBQkMkbFXmT76mSfEXcHUk8JW4aoAwNQKlZUyKfOxL3CS
+	 hmwrMiEce5S8fEue7P5cjfo10ImHtxtE2AnFwqacXJFSzF8f9QoiB5KF/gtv5iDKns
+	 H6mqJTkUMl9fg==
+Message-ID: <848cc2f9-9314-427c-90e9-39a6e483a335@kernel.org>
+Date: Wed, 22 Jul 2026 15:26:25 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/4] xen/arm: its: separate ITS and host LPI quirk
- scopes
-To: Mykola Kvach <xakep.amatop@gmail.com>, <xen-devel@lists.xenproject.org>
-CC: Mykola Kvach <mykola_kvach@epam.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Luca Fancellu <luca.fancellu@arm.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>
-References: <cover.1779922874.git.mykola_kvach@epam.com>
- <5edcb9ec3e643133d115f009d0d942869ffb6955.1779922874.git.mykola_kvach@epam.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
+Subject: Re: [PATCH v2 01/13] mm: introduce vma_flags_can_grow() and
+ vma_can_grow()
 Content-Language: en-US
-In-Reply-To: <5edcb9ec3e643133d115f009d0d942869ffb6955.1779922874.git.mykola_kvach@epam.com>
-Content-Type: text/plain; charset="UTF-8"
+To: Lorenzo Stoakes <ljs@kernel.org>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ David Hildenbrand <david@kernel.org>, "Liam R. Howlett"
+ <liam@infradead.org>, Mike Rapoport <rppt@kernel.org>,
+ Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
+ Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+ Benjamin LaHaise <bcrl@kvack.org>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
+ Hugh Dickins <hughd@google.com>, Baolin Wang
+ <baolin.wang@linux.alibaba.com>, Jann Horn <jannh@google.com>,
+ Pedro Falcato <pfalcato@suse.de>, Muchun Song <muchun.song@linux.dev>,
+ Oscar Salvador <osalvador@suse.de>, Zi Yan <ziy@nvidia.com>,
+ Nico Pache <npache@redhat.com>, Ryan Roberts <ryan.roberts@arm.com>,
+ Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>,
+ Lance Yang <lance.yang@linux.dev>, Usama Arif <usama.arif@linux.dev>,
+ Madhavan Srinivasan <maddy@linux.ibm.com>,
+ Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>,
+ "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Lucas Stach <l.stach@pengutronix.de>,
+ Russell King <linux+etnaviv@armlinux.org.uk>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Inki Dae <inki.dae@samsung.com>, Seung-Woo Kim <sw0312.kim@samsung.com>,
+ Kyungmin Park <kyungmin.park@samsung.com>,
+ Krzysztof Kozlowski <krzk@kernel.org>,
+ Peter Griffin <peter.griffin@linaro.org>,
+ Alim Akhtar <alim.akhtar@samsung.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin
+ <tursulin@ursulin.net>, Rob Clark <robin.clark@oss.qualcomm.com>,
+ Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar
+ <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>,
+ Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>,
+ Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
+ Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+ Sandy Huang <hjc@rock-chips.com>, =?UTF-8?Q?Heiko_St=C3=BCbner?=
+ <heiko@sntech.de>, Andy Yan <andy.yan@rock-chips.com>,
+ Thierry Reding <thierry.reding@kernel.org>,
+ Mikko Perttunen <mperttunen@nvidia.com>,
+ Jonathan Hunter <jonathanh@nvidia.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Dmitry Osipenko <dmitry.osipenko@collabora.com>,
+ Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu
+ <olvaffe@gmail.com>, Zack Rusin <zack.rusin@broadcom.com>,
+ Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>,
+ Matthew Brost <matthew.brost@intel.com>,
+ =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ Helge Deller <deller@gmx.de>, Kees Cook <kees@kernel.org>,
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+ Boris Brezillon <boris.brezillon@collabora.com>,
+ Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+ linux-mips@vger.kernel.org, linux-aio@kvack.org,
+ linux-fsdevel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+ dri-devel@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
+ linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
+ linux-tegra@vger.kernel.org, virtualization@lists.linux.dev,
+ intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
+ linux-fbdev@vger.kernel.org, linux-sound@vger.kernel.org
+References: <20260711-b4-vma-flags-mm-v2-0-0fa2357d5431@kernel.org>
+ <20260711-b4-vma-flags-mm-v2-1-0fa2357d5431@kernel.org>
+From: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
+Autocrypt: addr=vbabka@kernel.org; keydata=
+ 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
+In-Reply-To: <20260711-b4-vma-flags-mm-v2-1-0fa2357d5431@kernel.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00002314:EE_|LV0PR12MB999068:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6ee7051a-2de2-480d-bd2a-08dee7e842f4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|36860700016|1800799024|23010399003|376014|22082099003|18002099003|11063799006|4143699003|3023799007|10067099003|56012099006|6133799003;
-X-Microsoft-Antispam-Message-Info:
-	CT4tMOfrBDcVIQQ1c48ANIfYAIt1zhxnxakPpkAK/f/mg47thg8oUkSOqagFJRqhraEZkgKHxWMzw4JfU7r83aRVYQzaUmj2aQF6zQOD5BxM/LpMddxXDPC6/UH/JGOLuXHhAIfrNAcnKHRFu/84kGYl7N/IhEhGWOJCNikMdnw19d/Wth2flosjnzFgaKmT8tGsM3rwoUPvfDwiHaK4mCJ+UR4i6YyHXkB6c+2M40J5W7lK9JEGTWKtaqWuUgj/3AJA4SVx3T8YRAPKUU93hGLFICa9wkAHggtlNX+DTYYhCXZ9qUNsQgwTEvh1IY7a3756OQgdepAF1sIhmv6fHVN9MHxJY0Vg+ZPKfMMcTWHJBcrmBqSkYQyA5pX2MPaAY/HmDMRhznTwJ1bjprlAuh186SdLs5OFSIaJ5QWPiKDWbuaqD9OIwK/Y7EB4ieJRpc/SRttkehZBf3R+eFBQe47Yiksp0r6UNIg+4acygvOwCQxYhPiv47GU01F1AL6281pp9e4sgUVz9RlSNeeIFdkY8Fe/cMJhNsU0OzIPBFQRZ6lfrvX8XlKudd1LSNr6uvZufL9Zu+z8raT+Lnc2lvDJV9Eu+FUJqEAW+N5AZKBG6VyrJqmvGsOp402lxa84GTmQROXtgw3QTj2qaZ5mfj4cbmZ1EgazwHpSt2OIJFEgp0kWXq8UuCLcXSgg33GK3ysBsjaUzOKiaCdu0qmatw==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(1800799024)(23010399003)(376014)(22082099003)(18002099003)(11063799006)(4143699003)(3023799007)(10067099003)(56012099006)(6133799003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	EYcVYeCHMnP6t4zoVtTANcOsKuLfMlB/eIHgCRO0cf83XmjGIZRYOSesuYG4eUU2COzsQM4xeMpfGyNMXdNsCIHAuDYuFAw57mt6n7ApPC+QAaDfXAbQHDrQEPjNFegnE4GTxh2ApRpMroo6gUkFnJ00d0am5OFqFRM2cax8MYnk4v3gE2BtQO/RQ70sYWfGE4B9RofSo3Gajb4tJtT2Dos1L9wKZQBIzAOcv6bAzpRFghi8QbQFcqxCsAf1Bf53UatavZR0PYlOgwj7LsIhk2BY2nIjOjsVn1nMUVdbOOsLL6hyRArBgA1u2my+C+EpzrdUrBixCr581VJ8ai96sbVs0BdFdG8NZ3w1Ey85oMoPbwrUASQd2Ww1IHAch0/kbcpQ7rSZDqv19dX7GPOAsaoK/kLvDPjO0Xbl4KcRtW/5sZENZ4ZCGd9IdkS4B1S1
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jul 2026 11:56:27.3894
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6ee7051a-2de2-480d-bd2a-08dee7e842f4
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SJ1PEPF00002314.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV0PR12MB999068
-X-purgate-ID: tlsNG-ef75cf/1784721392-378D1AE4-7F72ABCB/0/0
+X-purgate-ID: tlsNG-720697/1784726809-30BC02AC-D925F2D2/0/0
 X-purgate-type: clean
-X-purgate-size: 1389
+X-purgate-size: 668
 
+On 7/11/26 20:44, Lorenzo Stoakes wrote:
+> These test whether the VMA has stack semantics, i.e. is able to grow
+> upwards or downwards depending on the architecture.
+> 
+> In order to account for arches which do not support upward-growing stacks,
+> introduce VMA_GROWSUP whose definition depends on the architecture
+> supporting it, and use vma_flags_test_single_mask() in vma_flags_can_grow()
+> to account for this.
+> 
+> No functional change intended.
+> 
+> Reviewed-by: Zi Yan <ziy@nvidia.com>
+> Reviewed-by: Lance Yang <lance.yang@linux.dev>
+> Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
 
-
-On 28-May-26 02:25, Mykola Kvach wrote:
-> From: Mykola Kvach <mykola_kvach@epam.com>
-> 
-> ITS quirks can impose restrictions on memory accessed by the ITS itself and
-> on shared host LPI/Redistributor state. These scopes are not identical, so
-> a single global ITS quirk state makes the host LPI policy depend implicitly
-> on the quirks seen while initializing host ITSes.
-> 
-> Add per-ITS quirk_flags to struct host_its and keep a separate
-> host_lpi_flags state in the LPI code. The quirk table now records the
-> ITS-private and host LPI scopes explicitly through its_flags and lpi_flags.
-> The R-Car Gen4 quirk applies the same memory-related restrictions to both
-> scopes, preserving the existing behavior without relying on an implicit
-> aggregation step.
-> 
-> This also removes the old assumption that all host ITSes must expose the
-> same quirk state. Host LPI restrictions are accumulated only from quirk
-> entries that explicitly set lpi_flags.
-> 
-> Use per-ITS quirk_flags for GITS_CBASER, GITS_BASER<n> and ITT allocations.
-> Use host_lpi_flags directly in gic-v3-lpi.c for GICR_PROPBASER and
-> GICR_PENDBASER setup. Memory-related quirk bits are named GICV3_QUIRK_MEM_*
-> and are translated by shared gicv3_mem_get_*() helpers.
-> 
-> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
-
-~Michal
+Reviewed-by: Vlastimil Babka (SUSE) <vbabka@kernel.org>
 
 
