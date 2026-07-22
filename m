@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A622EC44536
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Jul 2026 14:35:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1368491.1617834 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 792BAC44536
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Jul 2026 14:36:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1368505.1617843 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmY2U-0001wd-RB; Wed, 22 Jul 2026 14:35:14 +0000
+	id 1wmY3b-0002TT-6x; Wed, 22 Jul 2026 14:36:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1368491.1617834; Wed, 22 Jul 2026 14:35:14 +0000
+Received: by outflank-mailman (output) from mailman id 1368505.1617843; Wed, 22 Jul 2026 14:36:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmY2U-0001wW-OM; Wed, 22 Jul 2026 14:35:14 +0000
-Received: by outflank-mailman (input) for mailman id 1368491;
- Wed, 22 Jul 2026 14:35:14 +0000
+	id 1wmY3b-0002TM-3r; Wed, 22 Jul 2026 14:36:23 +0000
+Received: by outflank-mailman (input) for mailman id 1368505;
+ Wed, 22 Jul 2026 14:36:22 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <vbabka@kernel.org>) id 1wmY2U-0001wQ-0Z
- for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 14:35:14 +0000
+ (envelope-from <vbabka@kernel.org>) id 1wmY3a-0002TE-7X
+ for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 14:36:22 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wmY2T-00D1HJ-Cm
- for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 16:35:13 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wmY3Z-005x9b-Kh
+ for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 16:36:21 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <vbabka@kernel.org>)
- id 6a60d511-e002-0a2a0a5209dd-0a2a4507ab7e-32
- for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 16:35:13 +0200
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a60d562-5cb7-0a2a0a5109dd-0a2a4506ae12-2
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 16:36:21 +0200
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <vbabka@kernel.org>)
- id 6a60d51f-b4ea-0a2a45070019-ac6904fead32-3
- for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 16:35:13 +0200
+ id 6a60d563-195a-0a2a45060019-aceafc1fb0c0-3
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 16:36:21 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 4B0A1600AF;
- Wed, 22 Jul 2026 14:35:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 526301F000E9;
- Wed, 22 Jul 2026 14:34:53 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 266D94377D;
+ Wed, 22 Jul 2026 14:36:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A298F1F000E9;
+ Wed, 22 Jul 2026 14:36:01 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,21 +52,21 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784730911;
-	bh=v3Dka0Kxl0RaJGtuTH0yTzaDEXoIUNO9u9IFv8oVYKs=;
+	s=k20260515; t=1784730979;
+	bh=rncOYEHNQZnCerUEAUIKUY0kxzd/Rst4GSYy3YkGBiE=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=BoNSrvzJYQLAEfX3sCIxyc7ZkwirgsWknsff/Mra8/IlU74HXActL9HeMA579jh44
-	 T9qmfb4rlcf+ZSuQDXLSpBUeDY2tak0s32nJdFgrBrk09Qk7VXEx5T5+B2A9t2i4lb
-	 T7KREF6hvGI4oAnK+1xITP1UHiLneP8l7RBubqbljEBi0slULes/fvkmxRdOX71MpV
-	 bMSLulS5NDO9ufYBlKQbRqcLa2jMXn1Kw4jzPErEyJEwl6CA4ywx5ldWZSfTgLsHwM
-	 sBj+KtFeUnsVFLsqvy7yitX1QTr82nsrUT3PDi6UDnxpJzhWaBjScQs6EGuKMa4pWl
-	 ZBBB1SQ2Xhywg==
-Message-ID: <eea9c6bf-5ff9-45de-ac92-784a174ff61b@kernel.org>
-Date: Wed, 22 Jul 2026 16:34:51 +0200
+	b=cFGra5ufilocIuJfM8gSzW60rH5UffaGWTjVoku9icCvdKfbGshoBgtpoU9J4TBAR
+	 Ns3ac9kv1Th/g54QOx5z56SLMZe2ySiEIv65XpPoMjA3UFpsdZzi0oJqofN4x98D2p
+	 m4lZ9oMMil7zMd9k9+rzQMvGQdzHReyfYjjBBm955F4gkk4KFjIQOOT/mPUzrrmxtD
+	 43IiL1O3Fmq0qqGqb9k2MDnCWisp77KJ0x6mk3tstlzQOGQrq1aJdtHXn8pW6ulVrO
+	 jeZk5ldH2UFluVUmoTqWL6jsrRH19TDzr1NKw9PWN4J5MDMUhRoM2zp1AiEyGdBH8q
+	 UANALHWmfhrFQ==
+Message-ID: <7b43e8e2-eb03-4c44-b7a9-1f0640141612@kernel.org>
+Date: Wed, 22 Jul 2026 16:36:00 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 06/13] mm/vma: convert vm_pgprot_modify() to use
- vma_flags_t and rename
+Subject: Re: [PATCH v2 07/13] mm/vma: rename vma_get_page_prot to
+ vma_flags_to_page_prot
 Content-Language: en-US
 To: Lorenzo Stoakes <ljs@kernel.org>,
  Andrew Morton <akpm@linux-foundation.org>,
@@ -134,7 +134,7 @@ Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
  intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
  linux-fbdev@vger.kernel.org, linux-sound@vger.kernel.org
 References: <20260711-b4-vma-flags-mm-v2-0-0fa2357d5431@kernel.org>
- <20260711-b4-vma-flags-mm-v2-6-0fa2357d5431@kernel.org>
+ <20260711-b4-vma-flags-mm-v2-7-0fa2357d5431@kernel.org>
 From: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
 Autocrypt: addr=vbabka@kernel.org; keydata=
  xsFNBFZdmxYBEADsw/SiUSjB0dM+vSh95UkgcHjzEVBlby/Fg+g42O7LAEkCYXi/vvq31JTB
@@ -175,25 +175,19 @@ Autocrypt: addr=vbabka@kernel.org; keydata=
  NcaZ+c6J4H+nEJGi2SkHAUJz5oBzuThvPudLvPA/SK8sKoM01IRxSihev/S/5WLazXB1PGem
  OCbvzC1IjWJJraxiDJ5IygokapUa2RP7+WBR22skQ3SSl6G107QgWKSyTOGWEaRmV53vxQLV
  jXuCmzSSasTL60zq5yGrT4/DYQVSNEUiUbG4pYekxJujNeEDkUlky0Y=
-In-Reply-To: <20260711-b4-vma-flags-mm-v2-6-0fa2357d5431@kernel.org>
+In-Reply-To: <20260711-b4-vma-flags-mm-v2-7-0fa2357d5431@kernel.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ef75cf/1784730913-362C4AE4-D73ED1DE/0/0
+X-purgate-ID: tlsNG-16d1c6/1784730981-FD20877B-23C0A8D1/0/0
 X-purgate-type: clean
-X-purgate-size: 840
+X-purgate-size: 483
 
 On 7/11/26 20:45, Lorenzo Stoakes wrote:
-> Update vm_pgprot_modify() to use the new VMA flags type vma_flags_t, and
-> rename to vma_pgprot_modify() accordingly.
+> Having vma_get_page_prot() refer to VMA flags and vma_set_page_prot() refer
+> to a VMA is confusing.
 > 
-> This is part of the ongoing work to convert vm_flags_t to vma_flags_t, in
-> order to eliminate the arbitrary limit of the number of bits in a system
-> word on available VMA flags.
-> 
-> Update VMA userland tests accordingly, updating vma_set_page_prot() to no
-> longer inline vma_pgprot_modify(), rather we can simply define
-> vma_pgprot_modify() as a static inline function and the tests will pick it
-> up from vma.h.
+> Rename vma_get_page_prot() to vma_flags_to_page_prot() to resolve this
+> confusion.
 > 
 > No functional change intended.
 > 
