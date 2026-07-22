@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80627C44536
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Jul 2026 18:47:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1368750.1617935 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9197C4453C
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Jul 2026 18:49:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1368758.1617945 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmbxl-000338-V4; Wed, 22 Jul 2026 18:46:37 +0000
+	id 1wmbzu-0003l4-8v; Wed, 22 Jul 2026 18:48:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1368750.1617935; Wed, 22 Jul 2026 18:46:37 +0000
+Received: by outflank-mailman (output) from mailman id 1368758.1617945; Wed, 22 Jul 2026 18:48:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmbxl-000331-SO; Wed, 22 Jul 2026 18:46:37 +0000
-Received: by outflank-mailman (input) for mailman id 1368750;
- Wed, 22 Jul 2026 18:46:36 +0000
+	id 1wmbzu-0003kx-68; Wed, 22 Jul 2026 18:48:50 +0000
+Received: by outflank-mailman (input) for mailman id 1368758;
+ Wed, 22 Jul 2026 18:48:48 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <hpa@zytor.com>) id 1wmbxk-00032v-Fb
- for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 18:46:36 +0000
+ (envelope-from <hpa@zytor.com>) id 1wmbzs-0003kr-O6
+ for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 18:48:48 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wmbxj-001RnD-Hs
- for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 20:46:35 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wmbzs-008fEq-4u
+ for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 20:48:48 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <hpa@zytor.com>)
- id 6a610fd6-e002-0a2a0a5209dd-0a2a450483c8-36
- for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 20:46:35 +0200
+ id 6a61107b-2eae-0a2a0a5409dd-0a2a4502dc66-12
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 20:48:48 +0200
 Received: from [198.137.202.136] (helo=mail.zytor.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <hpa@zytor.com>)
- id 6a611009-b57f-0a2a45040019-c689ca888c9e-3
- for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 20:46:34 +0200
+ id 6a61108c-6ca4-0a2a45020019-c689ca88964a-3
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 20:48:45 +0200
 Received: from ehlo.thunderbird.net (c-76-133-66-138.hsd1.ca.comcast.net
  [76.133.66.138]) (authenticated bits=0)
- by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 66MIk0ND1108880
+ by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 66MImErH1111943
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
- Wed, 22 Jul 2026 11:46:00 -0700
+ Wed, 22 Jul 2026 11:48:15 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,18 +51,18 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=2026062701 header.d=zytor.com header.i="@zytor.com" header.h="Date:From:To:CC:Subject:In-Reply-To:References"
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 66MIk0ND1108880
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 66MImErH1111943
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2026062701; t=1784745962;
-	bh=vv4NuIBgZGQHoBeIg2Gczd78scbr9EeELphLC+J5EGM=;
+	s=2026062701; t=1784746096;
+	bh=R6SrU57hacFG4oDF/kYYKWpCQdfvx2DZX725okXN7iw=;
 	h=Date:From:To:CC:Subject:In-Reply-To:References:From;
-	b=G+VJrcS9id2noY1BwUOadPgJWvVLD/Xwm2zTX13Ngabaz7Yz+8RLG/TMTx01Q5D+f
-	 MlBWUNAMa954zO71aQx7POjCALNV6uGVMyufkHzV7oLn5kCkKX+/JQ2Kwi5n7ZVNHn
-	 Ji7syA5AXrUcjh8JWOtGVUgot4EqnKLS3LevTR1ib2omzG654U2DL/Ab3uq0AwS3si
-	 5VM1p075Y8udmFZ/Y7dZFyABLFg8vfixx2PFIWipmDrDalOUW5wrfEvrSiB2pZ7inA
-	 w1f8jxH0HuxoD4wv+9fvarI8pfbbKZtiXMWiX69ki/bmkSF+JjeUXiYaIy7IVeZC/h
-	 pQ9WOmR8VNbNA==
-Date: Wed, 22 Jul 2026 11:45:55 -0700
+	b=Q6StkghlczxK+J5XaMrzi6vOfMthD0fNqpLGD2xxRvav4SXtzQbGl8G3TQJSPmIXI
+	 VlC+SWKyDDKO6lA6W4YTRVVUnfWVZT2feqY9u7A27/QGVXzg8C5imn9MUKg++Wx88p
+	 O7lkbsYu1cAmC6tV4j/atzG8Nhl0Gh/fsPWmniLeHvYWZzsAKE4VlXPKzlRjqY3vYU
+	 jbJSPwAduf1GFKTCUTyt+RgOLrq46hI1sOsTv4eecah+EVLjooNiBEX0km9SavCooH
+	 PuzwSnPt9o6iN6XRiPh+0plPgSeKwXNinL+984p/ZIUuFtRe92a9N59/wQFHWIIFFW
+	 L/dwyiY+JrEVw==
+Date: Wed, 22 Jul 2026 11:48:10 -0700
 From: "H. Peter Anvin" <hpa@zytor.com>
 To: Borislav Petkov <bp@alien8.de>,
         Mauricio Faria de Oliveira <mfo@igalia.com>
@@ -76,14 +76,14 @@ Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v7_2/5=5D_x86/asm=3A_add_volatile=2C_cl?=
 User-Agent: K-9 Mail for Android
 In-Reply-To: <20260722170334.GCamD35gwrCng30WH1@fat_crate.local>
 References: <20260721-pvh-kasan-inline-v7-0-38979a50cef0@igalia.com> <20260721-pvh-kasan-inline-v7-2-38979a50cef0@igalia.com> <20260722170334.GCamD35gwrCng30WH1@fat_crate.local>
-Message-ID: <0F3A1121-208F-4F71-8C88-BEAE7CB50E75@zytor.com>
+Message-ID: <829A5D01-29A2-454E-AE78-AEAD8FC597E6@zytor.com>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-ebf023/1784745995-50CDFB50-E9D11BB6/0/0
+X-purgate-ID: tlsNG-720697/1784746125-674BE2AC-53246492/0/0
 X-purgate-type: clean
-X-purgate-size: 2391
+X-purgate-size: 2395
 
 On July 22, 2026 10:03:34 AM PDT, Borislav Petkov <bp@alien8=2Ede> wrote:
 >hpa in To:=2E
@@ -151,6 +151,6 @@ ows
 >Thx=2E
 >
 
-Also, this is silly=2E Instead of adding a whole separate test, just do "t=
-est %3,%3" before the repe to set ZF and let the REPE skip=2E
+I suspect that the zero-length case simply can't happen in the real code, =
+but who knows; the use of the code has expanded over the years=2E
 
