@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A26DC44539
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Jul 2026 13:34:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1368439.1617798 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7DE0C4453C
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Jul 2026 14:18:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1368460.1617807 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmX5Y-0000L0-S4; Wed, 22 Jul 2026 13:34:20 +0000
+	id 1wmXlw-0006Nh-0b; Wed, 22 Jul 2026 14:18:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1368439.1617798; Wed, 22 Jul 2026 13:34:20 +0000
+Received: by outflank-mailman (output) from mailman id 1368460.1617807; Wed, 22 Jul 2026 14:18:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmX5Y-0000Kt-Oq; Wed, 22 Jul 2026 13:34:20 +0000
-Received: by outflank-mailman (input) for mailman id 1368439;
- Wed, 22 Jul 2026 13:34:20 +0000
+	id 1wmXlv-0006Na-Tm; Wed, 22 Jul 2026 14:18:07 +0000
+Received: by outflank-mailman (input) for mailman id 1368460;
+ Wed, 22 Jul 2026 14:18:07 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <vbabka@kernel.org>) id 1wmX5Y-0000Kn-2V
- for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 13:34:20 +0000
+ (envelope-from <vbabka@kernel.org>) id 1wmXlu-0006NU-Vx
+ for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 14:18:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wmX5X-00DMVY-BU
- for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 15:34:19 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wmXlu-004eWi-4y
+ for xen-devel@lists.xenproject.org; Wed, 22 Jul 2026 16:18:06 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <vbabka@kernel.org>)
- id 6a60c6c3-2eae-0a2a0a5409dd-0a2a450190c8-34
- for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 15:34:19 +0200
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a60d119-bab6-0a2a0a5309dd-0a2a4509a2e0-20
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 16:18:05 +0200
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <vbabka@kernel.org>)
- id 6a60c6d6-5984-0a2a45010019-aceafc1fcb7a-3
- for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 15:34:15 +0200
+ id 6a60d11c-be1a-0a2a45090019-ac6904fedcd0-3
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 16:18:05 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id A94EB43211;
- Wed, 22 Jul 2026 13:34:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D05801F000E9;
- Wed, 22 Jul 2026 13:33:54 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id F1253600B0;
+ Wed, 22 Jul 2026 14:18:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 998571F000E9;
+ Wed, 22 Jul 2026 14:17:45 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,20 +52,21 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784727253;
-	bh=DjW3IoJngeCa8GtjqJn2j2qE4s7NfPfHtuHffq4DmkI=;
+	s=k20260515; t=1784729883;
+	bh=nr20QdluTC6Xb2QJCx/L2OqHD3wYjRZzxUHD+ltN0io=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=Xf2Qo7nfk8o5oFsdnRyvwfFlDT+UNHYxpWkdWS9jpYlddyaBbeTmAt4TSKYjBQ6nC
-	 VQT5FSiqo8vVJq/R82X3RyjGnMFjVe2qzMcG3VgXV669ofkFC8DZnKS+UkWwrpzb6q
-	 Fi0Sx6sVMnRuvnBvyBvom3YRXCjGdDRHypbqW5x1R/Uji66gdMwF7l9mOVCq62z3nl
-	 gJr90z+D+N2GhFNNOkLY7sMLu7nS8Z2MkG2ZCFRrrGTu/B/Ym82LsdWUrflTm6uGaV
-	 oU9g4AgXa58RSoCWW8YaDO+USyZcemM+PmqZeWYEvuz91dURSvCpGTEaOa63HF+ZkH
-	 oAveIZpLt2mkA==
-Message-ID: <5d133def-b9ab-4c4a-8c37-3acd05841756@kernel.org>
-Date: Wed, 22 Jul 2026 15:33:53 +0200
+	b=a4vdnNdZSy07RDuS+C9gat8xlWANgEMGre2Gt8w50+S/RARkD/NxqriSXn9wrozPj
+	 E5W9CBr1d7eepeguATkGjOrPXaqKaMp0+xcdJH6JVLGWRdkxSRqsBQirTItAu9VNRf
+	 xKAJOUg/URAYNGPYd8y4vGKj+ONw/nWOpgBtlfPsR8ltFxfx8IoinmWT2jtQMA7WpP
+	 nozoGRCEMkB8851Fg9u/prJ/JOJKbaLEpz8L+8Zr68k62Ilb0p88pE+y3ZC8cSKbhK
+	 kBpgQZfX/d3Rxy5rU6yBQqCx1AN3uW+o51yyGmm2In6YviRmTxHVmf6qDl7Zlbt9Ib
+	 DwnPnhWrhgAMw==
+Message-ID: <ac18f5bc-62a9-41b0-8980-a4c465a4229a@kernel.org>
+Date: Wed, 22 Jul 2026 16:17:43 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 02/13] mm/vma: update do_mmap() to use vma_flags_t
+Subject: Re: [PATCH v2 03/13] mm: convert __get_unmapped_area() to use
+ vma_flags_t
 Content-Language: en-US
 To: Lorenzo Stoakes <ljs@kernel.org>,
  Andrew Morton <akpm@linux-foundation.org>,
@@ -133,7 +134,7 @@ Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
  intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
  linux-fbdev@vger.kernel.org, linux-sound@vger.kernel.org
 References: <20260711-b4-vma-flags-mm-v2-0-0fa2357d5431@kernel.org>
- <20260711-b4-vma-flags-mm-v2-2-0fa2357d5431@kernel.org>
+ <20260711-b4-vma-flags-mm-v2-3-0fa2357d5431@kernel.org>
 From: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
 Autocrypt: addr=vbabka@kernel.org; keydata=
  xsFNBFZdmxYBEADsw/SiUSjB0dM+vSh95UkgcHjzEVBlby/Fg+g42O7LAEkCYXi/vvq31JTB
@@ -174,35 +175,21 @@ Autocrypt: addr=vbabka@kernel.org; keydata=
  NcaZ+c6J4H+nEJGi2SkHAUJz5oBzuThvPudLvPA/SK8sKoM01IRxSihev/S/5WLazXB1PGem
  OCbvzC1IjWJJraxiDJ5IygokapUa2RP7+WBR22skQ3SSl6G107QgWKSyTOGWEaRmV53vxQLV
  jXuCmzSSasTL60zq5yGrT4/DYQVSNEUiUbG4pYekxJujNeEDkUlky0Y=
-In-Reply-To: <20260711-b4-vma-flags-mm-v2-2-0fa2357d5431@kernel.org>
+In-Reply-To: <20260711-b4-vma-flags-mm-v2-3-0fa2357d5431@kernel.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1784727256-C4B45757-71FFC619/0/0
+X-purgate-ID: tlsNG-bad1c0/1784729885-FD26A034-E70BD70E/0/0
 X-purgate-type: clean
-X-purgate-size: 1370
+X-purgate-size: 641
 
-On 7/11/26 20:44, Lorenzo Stoakes wrote:
-> The core do_mmap() function accepts a vm_flags_t parameter which it then
-> manipulates before passing to mmap_region() to do the heavy lifting of the
-> memory mapping.
+On 7/11/26 20:45, Lorenzo Stoakes wrote:
+> Update __get_unmapped_area() to be parameterised by vma_flags_t rather than
+> vm_flags_t as part of the effort to move VMA flags from a system word to a
+> bitmap.
 > 
-> Update do_mmap() to instead accept a vma_flags_t parameter, and adjust all
-> the logic within do_mmap() to manipulate this instead.
-> 
-> This is as part of the ongoing effort to convert VMA flags from a system
-> word size to a bitmap type which allows us to unrestrict the number of VMA
-> flags, as well as gain control over how VMA flag manipulation occurs.
-> 
-> We do not cascade these changes to all functions which accept vm_flags_t,
-> but rather use vma_flags_to_legacy() where necessary, specifically
-> deferring converting calc_vm_prot_bits(), calc_vm_flag_bits() and
-> __get_unmapped_area() to vma_flags_t.
-> 
-> Also utilise the new vma_flags_can_grow() predicate which correctly handles
-> the case of architectures without upward growing stacks.
-> 
-> As part of this change, introduce VMA_SHADOW_STACK so we can correctly
-> handle the case of the shadow stack not being defined.
+> We cascade the changes up to arch_get_unmapped_area_topdown() and
+> arch_get_unmapped_area(), where, for now, we use vma_flags_to_legacy() in
+> order to propagate the VMA flags.
 > 
 > No functional change intended.
 > 
