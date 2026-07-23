@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44852C531CC
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 19:38:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1369538.1618184 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F213CC531D0
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 20:10:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1369571.1618192 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmzF6-0004Qc-5b; Thu, 23 Jul 2026 19:38:04 +0000
+	id 1wmzjx-00005j-G4; Thu, 23 Jul 2026 20:09:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1369538.1618184; Thu, 23 Jul 2026 19:38:04 +0000
+Received: by outflank-mailman (output) from mailman id 1369571.1618192; Thu, 23 Jul 2026 20:09:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmzF6-0004QR-0Q; Thu, 23 Jul 2026 19:38:04 +0000
-Received: by outflank-mailman (input) for mailman id 1369538;
- Thu, 23 Jul 2026 19:38:02 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wmzjx-00005b-DH; Thu, 23 Jul 2026 20:09:57 +0000
+Received: by outflank-mailman (input) for mailman id 1369571;
+ Thu, 23 Jul 2026 20:09:56 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brgerst@gmail.com>) id 1wmzF3-0004QL-Ua
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 19:38:02 +0000
+ (envelope-from <dpsmith@apertussolutions.com>) id 1wmzjw-00005V-EK
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 20:09:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wmzF3-0026Ml-BL
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 21:38:01 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wmzjv-00HFoP-NM
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 22:09:55 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <brgerst@gmail.com>)
- id 6a626d77-e002-0a2a0a5209dd-0a2a4504dc08-36
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 21:38:01 +0200
-Received: from [209.85.217.49] (helo=mail-vs1-f49.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <brgerst@gmail.com>)
- id 6a626d98-b57f-0a2a45040019-d155d931e9f8-3
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 21:38:01 +0200
-Received: by mail-vs1-f49.google.com with SMTP id
- ada2fe7eead31-738cdd667ceso276384137.3
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 12:38:00 -0700 (PDT)
+ (envelope-from <dpsmith@apertussolutions.com>)
+ id 6a6274cd-5cb7-0a2a0a5109dd-0a2a4505e70a-26
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 22:09:54 +0200
+Received: from [136.143.188.51] (helo=sender4-of-o51.zoho.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <dpsmith@apertussolutions.com>)
+ id 6a627510-4cb1-0a2a45050019-888fbc33528c-3
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 22:09:54 +0200
+Received: by mx.zohomail.com with SMTPS id 1784837383134238.7169774010447;
+ Thu, 23 Jul 2026 13:09:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,165 +47,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1784835480; cv=none;
-        d=google.com; s=arc-20260327;
-        b=JK2o17UXWsvtA94km22snwH6gJSIy+vnriPiv9ZdUUz+uC/NPaic83tyRiOKsb+Ewr
-         i8oKWgf4pyyb8O/Kea2cTNKOrdEnL6LqxCJCSnchZaufzGNmDIpZ6esxqasmSfz7UsM2
-         z3cnTNmqXvtTHw3IGslymH+zdXIKQRSTe+4nw+Pq8cWSxB9t06flL0lB7lheSVdnXtkI
-         Bd/htiUC43A5iKlbTlv3zUKIbXJwb/MbginUak1+sm7hCdOfCPeJQxFMa/pNibFkD7r7
-         2McnzTBrz6aMV9SiyzCpts8afXG7ztVjT2argJYLmJWOdqMomV954yA5ghZ8y3rfyhIX
-         D0bQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=oWKbsBbm9eg9R7aduyFLAHcnNHPcWLLQDbRXMW+g5LI=;
-        fh=zsexs5QKyhlFxqTRjP77L6TwkfDMn9yRs0P53mmNGEs=;
-        b=JZ01/APj29x9Zwv6t13kscKArZrlVC2kC0i0PlFpcLLWHJ64D+jnnjt2MHnIdG/nA8
-         GiIvs9Xhtv8C6//R4al9nga2Yk1OJ30zzZ9RWQRQRK1hTciR/Zp8XUqFl+G7yBVyJ9dB
-         G9s1yKddo3UabviSXtwNtxOcV43xOXE4K7cISVl4IhU3C/5OEXrfHT90mCm42pnInBsu
-         MJ5YM3hU+LWUieMoo879pft69BwuLFp7TuHSw0/IN126W63hukMEFIFrrb4QMBr9o5X7
-         bbYNx/urF9FGW9N6+r4f4qGvQxPQhbb8/mmPltKLYVXBKAP9fcfEChBrVzw6E7n2QPlc
-         kLbQ==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784835480; x=1785440280; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=oWKbsBbm9eg9R7aduyFLAHcnNHPcWLLQDbRXMW+g5LI=;
-        b=DNnHfnoRBT3AMSlXDOP8HJJranQ4IG7vu5MlMC5QiDa/RLKgJ1MgAYndgvdGl2GtZ9
-         f1dJqjUjeo9Q/W0naYblTZ6oiO7frM7yk8Bty9gYo6GaWbOWxRYEuX3JlYBLsSHuWnlF
-         +eAoWT6CrT2xzHSoGIysbjqke8Im634D5/0H3eb+3r5DjVFWVRuC/h09Z5hR+GAxrH7j
-         cZwpsVFRldQbz3xlBx/tGXyKg9EHxjMEriv2aQtt6ATH22p0X5rWFKJiuvysWDrA6koX
-         dDO3Fuvvmo5/OfpoKzOjGI2UFk00tOL0xPMjhMEDkuX6wPHOgVqDpfpotnCn+3D5xvUy
-         aOCQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784835480; x=1785440280;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=oWKbsBbm9eg9R7aduyFLAHcnNHPcWLLQDbRXMW+g5LI=;
-        b=lP7jcmnzYS0dhsidzgzC/16DQLgQXovqQbk5LXp2hJeiGI6fmmzOCRyvZcllhijpRi
-         Fac2su2qr/rSottEaqe/RVc7FZhshPfesXt6q30a3ABz7gCaEl4v+k8msRSHJzSrDSv7
-         ALlZ7TS7FKR8x4MsqEKe1t/WiDLw9XRwL6qPlTIc/QhOUXwr0Qh48+eZK8xQV1vuqbfq
-         E++tnLoKEryvJEQ1acOuXv9RDa9uCc32xeS1aC1ngtddsblPnYM5jPyXMY3lpjL+QxGR
-         sgNRCN5+SMAjmm47fc4UZZ0xZbZn2p34LTmnyOnHgDFGe1PcD9YYfd9oEh8UObd+lglp
-         5hOA==
-X-Forwarded-Encrypted: i=1; AHgh+RriSqoIuRbMZAMDzCvfXbny9XMHxiD1WHfKSfMKnhdMv5x6tRw8S1QEUdmgs5r89Umd1x7ykvGraWw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxPGELoeSLTKvCWimj9dZNcQahuTMtrvjIbUwYoppOfAqDYUDdU
-	AjDCzd5cPtNXSJOXfWPvHEfi2AOYykWwj/twajXMGoIaAXdk57MhFLysWdYUQC1wjLZRPss2mqD
-	UTm5n/ZiMP69IyvgZzFn3/gX++DTZ9g==
-X-Gm-Gg: AR+sD11w1gslcRScS9tPwmmk+ON9S023kVU0yQNcZnNN+bi9+5WxRJmI7dUZ9xlkq7l
-	2m0mVL0bo0cu6QYvq9FK7ZrA/zWpVlHe9e8JGL3lFpw20ze7jPyYaPsA+6cd/AsZNrWw8339XpC
-	AEoZ44wjugX+aiiWkDxUX4n8E1qTcPtH/EJTE23TrACw8TVErtPxPK6k7v/qph5jusbRXzMRFA5
-	k+wrm7qcGePSGv1jsdUFA0QN+GsbfhHRwuNoTIrJzAcbf6p2PyMK8STD6tmv8FEd+h+ASQfEfqD
-X-Received: by 2002:a05:6102:953:b0:745:9c0f:9353 with SMTP id
- ada2fe7eead31-74d6110cc5fmr2202108137.27.1784835479735; Thu, 23 Jul 2026
- 12:37:59 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=zoho header.d=apertussolutions.com header.i="dpsmith@apertussolutions.com" header.h="Message-ID:Date:MIME-Version:Subject:To:Cc:From:In-Reply-To:Content-Type:Content-Transfer-Encoding"
+ARC-Seal: i=1; a=rsa-sha256; t=1784837386; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=H0nT+hIsHvsJyPbgFEkcIj3W2pXB8QumH6K/s5nb/mz5h69y6RsyqcKdam8INKAEhzOANLopiP1KUgm3tozC3kaTsYuQG3KAq0wT2xe/5Vnu0iIvmj9ysbpDhzWcXP98p9p1C6qYTr6v/ILlcRJzlnWTWiYGG6jNYlTNsv31Klo=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1784837386; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=xyrZrnO7UUfiAb9p2N/AvrPPLvs3tA1EnMk7suP4ZRY=; 
+	b=nx4uVH0Y569ywsIYvIEriD20kAwAWCfWzu6px5EOuTEOzlqDl482PSJZpcpQCNZoOeh+/3Hm8XJ9B0/Wb+rCGALxIDAW/aFwzdcdl8W20iILc/fA69YlJOPz8VqH136pb//lCTbkz1trqyKFmGmplHu8lTBv+k8D1Ia822AxB4k=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=apertussolutions.com;
+	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
+	dmarc=pass header.from=<dpsmith@apertussolutions.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1784837386;
+	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
+	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=xyrZrnO7UUfiAb9p2N/AvrPPLvs3tA1EnMk7suP4ZRY=;
+	b=KsGpC0vPShCctCiNUDu1twotwDCggACy9LFHcWNdIyvzD6EQ7z/nj4oyx9t+84tf
+	PC7zSr4dorjz2giL476tYlaKEWyDCkATjNAO4oAeATBVgcHaIHXMM5m3veoeND8J+OV
+	jBRNPRcmCTGZU+5TU1rwWf9OFj/u8pLit/wOJk5c=
+Message-ID: <9ee6c888-f0ca-402f-9b4f-64d9777cd41f@apertussolutions.com>
+Date: Thu, 23 Jul 2026 16:09:53 -0400
 MIME-Version: 1.0
-References: <20260721-pvh-kasan-inline-v7-0-38979a50cef0@igalia.com>
- <20260721-pvh-kasan-inline-v7-2-38979a50cef0@igalia.com> <20260722170334.GCamD35gwrCng30WH1@fat_crate.local>
- <0F3A1121-208F-4F71-8C88-BEAE7CB50E75@zytor.com>
-In-Reply-To: <0F3A1121-208F-4F71-8C88-BEAE7CB50E75@zytor.com>
-From: Brian Gerst <brgerst@gmail.com>
-Date: Thu, 23 Jul 2026 15:37:48 -0400
-X-Gm-Features: AUfX_mwBzqaUZxwX7i1MT2KeOpbwLGgmkPYGJI_vQ13SYop1F_xWidxI_jhgaXk
-Message-ID: <CAMzpN2hyupAUk-XGRzM2wwQojPrsN66jWtT+saVf1NWdOzFXuw@mail.gmail.com>
-Subject: Re: [PATCH v7 2/5] x86/asm: add volatile, clobbers and zero-length
- check in inline memcmp
-To: "H. Peter Anvin" <hpa@zytor.com>
-Cc: Borislav Petkov <bp@alien8.de>, Mauricio Faria de Oliveira <mfo@igalia.com>, Thomas Gleixner <tglx@kernel.org>, 
-	Ingo Molnar <mingo@redhat.com>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	Juergen Gross <jgross@suse.com>, Alexey Dobriyan <adobriyan@gmail.com>, 
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>, kernel-dev@igalia.com, 
-	linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-ebf023/1784835481-587C6B50-E896C5FD/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 1/9] vpci: move BAR mapping permissions checks
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Jan Beulich <jbeulich@suse.com>
+Cc: Stewart Hildebrand <stewart.hildebrand@amd.com>,
+ xen-devel@lists.xenproject.org
+References: <20260708210233.922275-1-stewart.hildebrand@amd.com>
+ <20260708210233.922275-2-stewart.hildebrand@amd.com>
+ <0255d2bf-748e-444b-8c09-f69925ec88c4@suse.com>
+ <amIrwLuIdOBaAi9d@macbook.local>
+Content-Language: en-US
+From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+In-Reply-To: <amIrwLuIdOBaAi9d@macbook.local>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ZohoMailClient: External
+X-purgate-ID: tlsNG-c201ff/1784837394-72CB02A1-41A0C1FA/0/0
 X-purgate-type: clean
-X-purgate-size: 2873
+X-purgate-size: 3489
 
-On Wed, Jul 22, 2026 at 2:53=E2=80=AFPM H. Peter Anvin <hpa@zytor.com> wrot=
-e:
->
-> On July 22, 2026 10:03:34 AM PDT, Borislav Petkov <bp@alien8.de> wrote:
-> >hpa in To:.
-> >
-> >On Tue, Jul 21, 2026 at 12:56:43PM -0300, Mauricio Faria de Oliveira wro=
-te:
-> >> Add the volatile qualifier and clobbers parameter to prevent bugs with
-> >> instruction reordering and optimization.
-> >>
-> >> Also check the zero-length case, as the 'repe' prefix does not run the
-> >> 'cmpsb' instruction if the 'count' register is zero, which doesn't set
-> >
-> >Please use capital letters for insns: REPE, CMPSB and you don't need to =
-put
-> >words in '' - it reads fine without them.
-> >
-> >> the condition-code/zero flag, so the result is based on a stale flag.
-> >>
-> >> Those are pre-existing issues found by Sashiko.
-> >>
-> >> Link: https://sashiko.dev/#/patchset/20260701-pvh-kasan-inline-v6-0-ba=
-99045dfa9f%40igalia.com
-> >> Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
-> >> ---
-> >>  arch/x86/include/asm/shared/string.h | 8 ++++++--
-> >>  1 file changed, 6 insertions(+), 2 deletions(-)
-> >>
-> >> diff --git a/arch/x86/include/asm/shared/string.h b/arch/x86/include/a=
-sm/shared/string.h
-> >> index 02b92927553f7b8e1c87e6122bbaa70439e57ea7..166274e44f3cb49e3dccab=
-3cdac281d67aef5d44 100644
-> >> --- a/arch/x86/include/asm/shared/string.h
-> >> +++ b/arch/x86/include/asm/shared/string.h
-> >> @@ -11,8 +11,12 @@ static __always_inline int __inline_memcmp(const vo=
-id *s1, const void *s2, size_
-> >>  {
-> >>      bool diff;
-> >>
-> >> -    asm("repe cmpsb"
-> >> -        : "=3D@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len));
-> >> +    if (len =3D=3D 0)
-> >> +            return 0;
-> >> +
-> >> +    asm volatile("repe cmpsb"
-> >> +                 : "=3D@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len=
-)
-> >> +                 : : "cc", "memory");
-> >>
-> >>      return diff;
-> >>  }
-> >
-> >So this is a fix which should probably go to stable, I think. Going back=
- into
-> >git history, it points to
-> >
-> >  62bd0337d0c4 ("Top header file for new x86 setup code")
-> >
-> >from 2007. And we have carried it this way through the years and who kno=
-ws
-> >what hit this or not. So please make this the first patch in your set - =
-you
-> >can even send it separately so that I can get route it through stable.
-> >
-> >Then you can base the rest ontop.
-> >
-> >Thx.
-> >
->
-> Also, this is silly. Instead of adding a whole separate test, just do "te=
-st %3,%3" before the repe to set ZF and let the REPE skip.
+On 7/23/26 10:57 AM, Roger Pau Monné wrote:
+> On Thu, Jul 23, 2026 at 04:44:26PM +0200, Jan Beulich wrote:
+>> On 08.07.2026 23:02, Stewart Hildebrand wrote:
+>>> There's no need to defer the permissions checks. Perform them right away
+>>> in modify_bars().
+>>>
+>>> As a result of the move, the permissions checks will now cover the whole
+>>> BAR before any holes are removed.
+>>
+>> Is this a good idea though? A really good toolstack would avoid granting
+>> access to e.g. the MSI-X table.
+>>
+>>> Carry over the domain_crash() in the error path for domUs.
+>>
+>> I don't think this is warranted.
+>>
+>>> --- a/xen/drivers/vpci/header.c
+>>> +++ b/xen/drivers/vpci/header.c
+>>> @@ -58,24 +58,6 @@ static int cf_check map_range(
+>>>            * offset of the current address from the BAR start.
+>>>            */
+>>>           unsigned long map_mfn = start_mfn + s - start_gfn;
+>>> -        unsigned long m_end = map_mfn + size - 1;
+>>> -
+>>> -        if ( !iomem_access_permitted(map->d, map_mfn, m_end) )
+>>> -        {
+>>> -            printk(XENLOG_G_WARNING
+>>> -                   "%pd denied access to MMIO range [%#lx, %#lx]\n",
+>>> -                   map->d, map_mfn, m_end);
+>>> -            return -EPERM;
+>>> -        }
+>>> -
+>>> -        rc = xsm_iomem_mapping_vpci(XSM_HOOK, map->d, map_mfn, m_end, map->map);
+>>> -        if ( rc )
+>>> -        {
+>>> -            printk(XENLOG_G_WARNING
+>>> -                   "%pd XSM denied access to MMIO range [%#lx, %#lx]: %d\n",
+>>> -                   map->d, map_mfn, m_end, rc);
+>>
+>> I realize you literally only take what's here, but ...
+>>
+>>> @@ -369,6 +351,28 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
+>>>               return -EINVAL;
+>>>           }
+>>>   
+>>> +        if ( !iomem_access_permitted(pdev->domain, start, end) )
+>>> +        {
+>>> +            printk(XENLOG_G_WARNING
+>>> +                   "%pd denied access to MMIO range [%#lx, %#lx]\n",
+>>> +                   pdev->domain, start, end);
+>>> +            if ( !is_hardware_domain(pdev->domain) )
+>>> +                domain_crash(pdev->domain);
+>>> +            return -EPERM;
+>>> +        }
+>>> +
+>>> +        rc = xsm_iomem_mapping_vpci(XSM_HOOK, pdev->domain, start, end,
+>>> +                                    !!(cmd & PCI_COMMAND_MEMORY));
+>>> +        if ( rc )
+>>> +        {
+>>> +            printk(XENLOG_G_WARNING
+>>> +                   "%pd XSM denied access to MMIO range [%#lx, %#lx]: %d\n",
+>>> +                   pdev->domain, start, end, rc);
+>>
+>> ... is the logging of rc actually useful? Afaict it's only ever going to be
+>> -EPERM.
+> 
+> I think Flask can also return -EACCES, not that it's very relevant I'm
+> afraid.  It's likely too late now, but those XSM checks should instead
+> return a bool to avoid this kind of confusion with the returned
+> error? (or whether diverse return codes are indeed expected).
 
-REPE does not check ZF before the first iteration.
+An XSM access check may return -EACCES as one of any number of error 
+codes depending on which XSM module is loaded. I haven't traced this 
+specific path but a quick grep for the direct FLASK hooks shows EPERM, 
+EINVAL, ENOMEM, and ENOENT directly in the hooks themselves. This does 
+not even include the error codes that could come from the AVC. This is a 
+consist interface provided by all XSM calls and fairly standard behavior 
+across any number of respectable kernels such as Linux.
 
-From the Intel SDM:
-"When the REPE/REPZ and REPNE/REPNZ prefixes are used, the ZF flag
-does not require initialization because both
-the CMPS and SCAS instructions affect the ZF flag according to the
-results of the comparisons they make."
+v/r,
+dps
 
