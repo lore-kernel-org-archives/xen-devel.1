@@ -4,45 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6225C531D1
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 13:31:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1369144.1618058 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8298C531D2
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 14:07:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1369208.1618075 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmtWX-0002Uj-QO; Thu, 23 Jul 2026 13:31:41 +0000
+	id 1wmu5J-0007v8-Iy; Thu, 23 Jul 2026 14:07:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1369144.1618058; Thu, 23 Jul 2026 13:31:41 +0000
+Received: by outflank-mailman (output) from mailman id 1369208.1618075; Thu, 23 Jul 2026 14:07:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmtWX-0002Sl-Jo; Thu, 23 Jul 2026 13:31:41 +0000
-Received: by outflank-mailman (input) for mailman id 1369144;
- Thu, 23 Jul 2026 13:17:28 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wmu5J-0007v0-Dm; Thu, 23 Jul 2026 14:07:37 +0000
+Received: by outflank-mailman (input) for mailman id 1369208;
+ Thu, 23 Jul 2026 14:07:36 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <neil.armstrong@linaro.org>) id 1wmtIm-00080P-Hr
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 13:17:28 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wmu5I-0007u9-LB
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 14:07:36 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wmtIl-001Hcl-LN
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 15:17:27 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wmu5I-0045Tz-25
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 16:07:36 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <neil.armstrong@linaro.org>)
- id 6a62145f-2eae-0a2a0a5409dd-0a2a450ccd46-16
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 15:17:27 +0200
-Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <neil.armstrong@linaro.org>)
- id 6a621467-f479-0a2a450c0019-d1558032b9d0-3
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 15:17:27 +0200
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-4954a2e73a9so4405625e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 06:17:27 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:f234:5e35:82ba:6d6c?
- ([2a01:e0a:106d:1080:f234:5e35:82ba:6d6c])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f85c63bd3sm14637989f8f.27.2026.07.23.06.17.25
+ (envelope-from <jbeulich@suse.com>)
+ id 6a622024-2eae-0a2a0a5409dd-0a2a4504bdae-14
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 16:07:35 +0200
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a622027-b57f-0a2a45040019-d155802ae89e-3
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 16:07:35 +0200
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-4954f5e8020so3609455e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 07:07:35 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47f85c63bd3sm14982041f8f.27.2026.07.23.07.07.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Jul 2026 06:17:26 -0700 (PDT)
+ Thu, 23 Jul 2026 07:07:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,463 +53,168 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=linaro.org header.i="@linaro.org" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Organization:Autocrypt:Content-Language:From:References:Cc:To:Subject:Reply-To:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1784812647; x=1785417447; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:from:references:cc:to:subject:reply-to
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=9iBEUWCa780NKREnuZlfqOv1A8GdvpYRK+dYt5P3FuE=;
-        b=RxHqxXWxy1w0Hxbqje43oes111DDQoRozj/OxPa00fvvXSNixRCmrVeK2ZZO+PaoSL
-         NxJyiw8OKDqMjtTDHzmSMK4RaohiHJp3gLUaFiAxZp3iFwgXBTFgMxnmpc/NY/n5FAj9
-         6LcEhGNihbdDImFq4cuQmIo6xOHGcu66yWdyaXL1HugdAXc+x3pYqDYxzGxTX5YJW5uG
-         MbqlaEdPt8kGXBS1vQDG3ZCcYcK4KayBCuapEoSzCAxeXXHWm4C5pZcipz2hSFFWkh/4
-         BBIatKzd8Cwk3kYS6C0HdKPf7prDsK5oFxh9xFGS7bT6oUzsGit6n2VbhBI95P54d78b
-         7Ksg==
+        d=suse.com; s=google; t=1784815655; x=1785420455; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=t2Z39gjDljzmghj0wBYM46+uVXypWWsuVv1ytjgC4ik=;
+        b=MCxGtXU6AVdbc3L0+Fqr9fzwwscACv0lkyfJHMPEi82QODuwW3pxlMf9o+d0zrcJml
+         2kFCwGJPR0BZ57AJHnSfLtjE8ufKXvyBj61810UZ/7INqBCxGVsiVUguy3gfMn+YquhB
+         YI5205xzQEZGvRJmxxUFzVRxcjQZwiNh469tHOhtCvrtkBd3Gzg9m1K2QR/eumXtcEH9
+         YPjT4gDMK29vGahoKN/NAbHs7CMxG5oF6KVXMiOJcm87Cn/q+5L/1PGEsutvYdugqKJi
+         rZ+uyagl+CwZZoQL1TOlW7Orc50DABlltYq2H82LHUCUblb19KwiV1pBUxL07r2CaRqy
+         8KCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784812647; x=1785417447;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:from:references:cc:to:subject:reply-to
-         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=9iBEUWCa780NKREnuZlfqOv1A8GdvpYRK+dYt5P3FuE=;
-        b=kIoG1SMTUMmg8WguuKE2WMScx/aEUnzVJcORCiTUPjjJd2qM/Dwjha+pWkWxcp0fV1
-         1LNKzx3rTwWDNgbX2VxxTnKaoXJIId7qdjuMdK0szGdamb1AGKhvkFY+1FbZC2vkYspo
-         EAKv886v7t9jtamTkyk/JvzfeKYx+dyXPZ3aZOMRybPM++MxpPh9CRGy0poPAxNwPg3L
-         9veJzFERX7SvCAtC1uDeKahX/XeBDE6UVEOiaHuI05S+lBl3XvXsn8qAD7nsbIZOvkwl
-         rOdZj5eVP682o/2KaadR1nvGGvg14KsewLZoQaVQRyQVQ+z1DfaTnntY9j/YcJAGv3J8
-         o2JA==
-X-Forwarded-Encrypted: i=1; AHgh+Rrj4vdTMUUhWzsTV8ivoH9+XbAAfWzLKFydOv3BzeyJQqdsOzZzYEdRAd/5N+/H21Ih4monvgU+7/M=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yyo6jc70QP/QOK8AcrNzqHBY+1lNensRBpZNrY2gwNaZtBVPg3u
-	CRNI1Vaxq0wK1p6wsJ2B803H7inntfsSumRW6rKMsud/J8V12p84GAfdXtjd77PKDig=
-X-Gm-Gg: AR+sD12PZTMHu1ovrwwAaeAb+JghJdP8R7TZXdDxzdNe5oNIQUXPbe5hu3Rs3xF1kiA
-	SiZ0AjIl6v3c7RzYAKbWhO8ZHXNSUC/K9RO3xncOd7FASDkv1eZlvgQksawu5GuQ3t+GjXm/+Fm
-	FXCCiGj3q0+bY3LvUtNiVJRnzj0H9NaBtkKWBpLQFKsFrFLdYCStXMN80cxkmogvzQBy/QORZnn
-	wS+UZILJJOzeac/LkIpVlu2/L8BJ9mcAt/L4AlZCX/TFJ5lEOaKktXOxJ5tXy0q6KcylB3V24m8
-	bURe9m+e6noDlXCDallie9/pAjebeja/Q3Jpw4tfqn/F3uXCnhMG2DOMxxxql8uFXABrlYBjy6j
-	VB6IWCCwqfKBp6l/X5EEFhrNT8WU8u1+6U52kO7Zda5AIuznfdMEH35AzvMZbUGbqDg4a5vIxEC
-	QAsVfKJH2AYOMG7b/Fh5vANgVKYcDL+lop6rZzaFXLppuH1hBO6ofVVeByWg==
-X-Received: by 2002:a05:600c:4583:b0:495:52a5:8829 with SMTP id 5b1f17b1804b1-49573ccd1ddmr33553745e9.11.1784812646529;
-        Thu, 23 Jul 2026 06:17:26 -0700 (PDT)
-Message-ID: <3f5c974f-425d-47a5-9fda-e05de1f39d79@linaro.org>
-Date: Thu, 23 Jul 2026 15:17:24 +0200
+        d=1e100.net; s=20251104; t=1784815655; x=1785420455;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=t2Z39gjDljzmghj0wBYM46+uVXypWWsuVv1ytjgC4ik=;
+        b=m4EN3w4Awj2d36BtsfKlcMBDDIGZiCQ6z+84nNiWLMYDwB0H3h0oq1Jvze+T0ybZ+T
+         sLhro1IpE5KaFvAoSG87py0YdLd/VsY4v4/pL8QTLNwmbuVuuicJxpTpDSmYF6Ftsapb
+         KGucUIVDnXlNXDL6l4lj0gyTRybUwPAO+kEtqQfxr2qXU2qxyLM49Y4tg4Qre0QYQDlj
+         6QnLK+oeO4QJXN4yY6Pv39vejpd22JhTLgHyKLbVGNz0vadeuFVfcyIhseOAfEja/lWn
+         P+fghixARLCIMR9rxqwxzuYXnuqFA6ySkMDAhhv5xu+ok/t/D1aIQu+EKVuZyH+BxhIQ
+         DraQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rqa/X28FmGAH9+fFboyxTxUKO6a0C7/0512mLdUoEG8uC2C7rfUy/vdi+I6VeV0SHw8W8cNvrlIvMU=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwOxCsWSUPA1+lDOch7ih1PyDcN5etmW4HWKMSXmzxJUhWrOWgu
+	S6pLG6TSNjKHPHqid28pegkQaI+QOscPCRx7dWXPaZ80QGmF1BZcuWPUEJqjkTo/Vw==
+X-Gm-Gg: AR+sD13e1UO3bSIDuSWcsLa03oP5gwZ0LlDPmFiPzbqPyQs9fvrnf7I22jdYcbD6GKA
+	O+L5E4/XsXIeZfBxgUpQeLsZkmu1eNR2skYGnP1O/ZEk/YjpBJI7vgbM+R4uqUeU9sfzfk+LFrG
+	yplMFcS4Rm/5DJhE1zSPNmJFvkG8NESVXSUIrUMN/qqrHLZytm+6pTVaHrS92jgV+1qQEf/A1Kn
+	AuKxEIprqr9AT+50JQUUV5yaW1u5p19ImQlvEsVsiSwyqyCcF20zdmkoUQnZPtt6ZYec6s82/M2
+	FysUKXTesqYR32dJVoGXQouvBgGiCr4jKKlgQfeLokrz2rRMm2gprhyATY6Zuh12UTzjb0Ap1vD
+	m0bCJOujokSz2fLCsfAm/NWWHftnpI9TRuU3My2S1fQm/CwDtwGOeZMwv1sDcaPysvAJl5UpiEh
+	en4IvIpikkf2JgcKYmXRH4wpbFaS45cx963a6IvfcYsxAsjNj2YIEYvnijscTwD/mm8w==
+X-Received: by 2002:a05:600c:8b63:b0:495:7990:a1d0 with SMTP id 5b1f17b1804b1-4957990a215mr4516475e9.19.1784815655444;
+        Thu, 23 Jul 2026 07:07:35 -0700 (PDT)
+Message-ID: <88b09f24-13c6-427b-b7a9-aa631e59420a@suse.com>
+Date: Thu, 23 Jul 2026 16:07:33 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v16 3/3] of: Respect #{iommu,msi}-cells in maps
-To: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>,
- Nipun Gupta <nipun.gupta@amd.com>, Nikhil Agarwal <nikhil.agarwal@amd.com>,
- Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
- Robin Murphy <robin.murphy@arm.com>,
- Lorenzo Pieralisi <lpieralisi@kernel.org>, Marc Zyngier <maz@kernel.org>,
- Thomas Gleixner <tglx@kernel.org>, Rob Herring <robh@kernel.org>,
- Saravana Kannan <saravanak@kernel.org>, Richard Zhu <hongxing.zhu@nxp.com>,
- Lucas Stach <l.stach@pengutronix.de>,
- =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
- Manivannan Sadhasivam <mani@kernel.org>, Bjorn Helgaas
- <bhelgaas@google.com>, Frank Li <Frank.Li@nxp.com>,
- Sascha Hauer <s.hauer@pengutronix.de>,
- Pengutronix Kernel Team <kernel@pengutronix.de>,
- Fabio Estevam <festevam@gmail.com>, Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
- iommu@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
- devicetree@vger.kernel.org, linux-pci@vger.kernel.org, imx@lists.linux.dev,
- xen-devel@lists.xenproject.org,
- Charan Teja Kalla <charan.kalla@oss.qualcomm.com>
-References: <20260603-parse_iommu_cells-v16-0-dc509dacb19a@oss.qualcomm.com>
- <20260603-parse_iommu_cells-v16-3-dc509dacb19a@oss.qualcomm.com>
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260603-parse_iommu_cells-v16-3-dc509dacb19a@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [PATCH v7 1/5] xen/device-tree: Parse 'cpu-map' node for CPU
+ topology exploration
+To: Hirokazu Takahashi <taka@valinux.co.jp>
+Cc: Mykyta_Poturai@epam.com, Stefano Stabellini <sstabellini@kernel.org>,
+ Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ xen-devel@lists.xenproject.org
+References: <20260720162819.308326-1-taka@valinux.co.jp>
+ <20260720162819.308326-2-taka@valinux.co.jp>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260720162819.308326-2-taka@valinux.co.jp>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d25034/1784812647-772D8A5B-19FE1F3E/0/0
+X-purgate-ID: tlsNG-ebf023/1784815655-C1AD0B50-3005842B/0/0
 X-purgate-type: clean
-X-purgate-size: 14264
+X-purgate-size: 2134
 
-Hi,
-
-On 6/3/26 09:13, Vijayanand Jitta wrote:
-> From: Robin Murphy <robin.murphy@arm.com>
-> 
-> So far our parsing of {iommu,msi}-map properties has always blindly
-> assumed that the output specifiers will always have exactly 1 cell.
-> This typically does happen to be the case, but is not actually enforced
-> (and the PCI msi-map binding even explicitly states support for 0 or 1
-> cells) - as a result we've now ended up with dodgy DTs out in the field
-> which depend on this behaviour to map a 1-cell specifier for a 2-cell
-> provider, despite that being bogus per the bindings themselves.
-> 
-> Since there is some potential use in being able to map at least single
-> input IDs to multi-cell output specifiers (and properly support 0-cell
-> outputs as well), add support for properly parsing and using the target
-> nodes' #cells values, albeit with the unfortunate complication of still
-> having to work around expectations of the old behaviour too.
-> 
-> Since there are multi-cell output specifiers, the callers of of_map_id()
-> may need to get the exact cell output value for further processing.
-> Update of_map_id() to set args_count in the output to reflect the actual
-> number of output specifier cells.
-> 
-> Signed-off-by: Robin Murphy <robin.murphy@arm.com>
-> Signed-off-by: Charan Teja Kalla <charan.kalla@oss.qualcomm.com>
-> Signed-off-by: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
-> ---
->   drivers/of/base.c  | 168 +++++++++++++++++++++++++++++++++++++++++------------
->   include/linux/of.h |   6 +-
->   2 files changed, 135 insertions(+), 39 deletions(-)
-> 
-> diff --git a/drivers/of/base.c b/drivers/of/base.c
-> index d658c2620135..ac7961cbab94 100644
-> --- a/drivers/of/base.c
-> +++ b/drivers/of/base.c
-> @@ -2116,19 +2116,49 @@ int of_find_last_cache_level(unsigned int cpu)
->   	return cache_level;
->   }
->   
-> +/*
-> + * Some DTs have an iommu-map targeting a 2-cell IOMMU node while
-> + * specifying only 1 cell. Fortunately they all consist of value '1'
-> + * as the 2nd cell entry with the same target, so check for that pattern.
-> + *
-> + * Example:
-> + *	IOMMU node:
-> + *		#iommu-cells = <2>;
-> + *
-> + *	Device node:
-> + *		iommu-map = <0x0000 &smmu 0x0000 0x1>,
-> + *			    <0x0100 &smmu 0x0100 0x1>;
-
-So the sm8650 PCIe controllers has:
-
-pcie@1c08000:
-			iommu-map = <0     &apps_smmu 0x1480 0x1>,
-				    <0x100 &apps_smmu 0x1481 0x1>;
-
-and
-
-pcie@1c00000:
-
-			iommu-map = <0     &apps_smmu 0x1400 0x1>,
-				    <0x100 &apps_smmu 0x1401 0x1>;
-
-and apps_smmu has #iommu-cells = <2>, but gets flagged at wrong:
-
-[    7.538800] OF: /soc@0/pcie@1c08000: iommu-map has 1-cell entries targeting 2-cell #iommu-cells, treating as 1-cell output
-
-Returning false in of_check_bad_map() triggers:
-
-[    7.642680] OF: /soc@0/pcie@1c08000: Unsupported iommu-map - cannot handle 256-ID range with 2-cell output specifier
-
-I don't understand the issue here, we use 2 cells as expected by
-the iommu-cells, so why is it wrong ? can somebody explain in
-comprehensive words ? I'm super confused, it worked like a charm until now.
-
-Neil
-
-> + */
-> +static bool of_check_bad_map(const __be32 *map, int len)
-> +{
-> +	__be32 phandle = map[1];
+On 20.07.2026 18:28, Hirokazu Takahashi wrote:
+> --- /dev/null
+> +++ b/xen/common/cpu-topology.c
+> @@ -0,0 +1,62 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
 > +
-> +	if (len % 4)
-> +		return false;
-> +	for (int i = 0; i < len; i += 4) {
-> +		if (map[i + 1] != phandle || map[i + 3] != cpu_to_be32(1))
-> +			return false;
-> +	}
-> +	return true;
+> +#include <xen/acpi.h>
+> +#include <xen/cpu-topology.h>
+> +#include <xen/cpumask.h>
+> +#include <xen/dt-cpu-topology.h>
+> +#include <xen/init.h>
+> +#include <xen/xvmalloc.h>
+> +
+> +static void __init free_topology_table(void)
+> +{
+> +    unsigned int cpu;
+> +
+> +    for ( cpu = 0; cpu < nr_cpu_ids; cpu++ )
+> +    {
+> +        free_cpumask_var(cpu_topology[cpu].thread_sibling);
+> +        free_cpumask_var(cpu_topology[cpu].core_sibling);
+> +        free_cpumask_var(cpu_topology[cpu].cluster_sibling);
+> +    }
+> +
+> +    XVFREE(cpu_topology);
 > +}
 > +
->   /**
->    * of_map_id - Translate an ID through a downstream mapping.
->    * @np: root complex device node.
->    * @id: device ID to map.
->    * @map_name: property name of the map to use.
-> + * @cells_name: property name of target specifier cells.
->    * @map_mask_name: optional property name of the mask to use.
->    * @filter_np: pointer to an optional filter node, or NULL to allow bypass.
->    *	If non-NULL, the map property must exist (-ENODEV if absent). If
->    *	*filter_np is also non-NULL, only entries targeting that node match.
->    * @arg: pointer to a &struct of_phandle_args for the result. On success,
-> - *	@arg->args[0] will contain the translated ID. If a map entry was
-> - *	matched, @arg->np will be set to the target node with a reference
-> - *	held that the caller must release with of_node_put().
-> + *	@arg->args_count will be set to the number of output specifier cells
-> + *	as defined by @cells_name in the target node, and
-> + *	@arg->args[0..args_count-1] will contain the translated output
-> + *	specifier values. If a map entry was matched, @arg->np will be set
-> + *	to the target node with a reference held that the caller must release
-> + *	with of_node_put().
->    *
->    * Given a device ID, look up the appropriate implementation-defined
->    * platform ID and/or the target device which receives transactions on that
-> @@ -2137,19 +2167,21 @@ int of_find_last_cache_level(unsigned int cpu)
->    * Return: 0 on success or a standard error code on failure.
->    */
->   int of_map_id(const struct device_node *np, u32 id,
-> -	       const char *map_name, const char *map_mask_name,
-> +	       const char *map_name, const char *cells_name,
-> +	       const char *map_mask_name,
->   	       struct device_node * const *filter_np, struct of_phandle_args *arg)
->   {
->   	u32 map_mask, masked_id;
-> -	int map_len;
-> +	int map_bytes, map_len, offset = 0;
-> +	bool bad_map = false;
->   	const __be32 *map = NULL;
->   
-> -	if (!np || !map_name || !arg)
-> +	if (!np || !map_name || !cells_name || !arg)
->   		return -EINVAL;
->   	/* Ensure bypass/no-match success never returns a stale target node. */
->   	arg->np = NULL;
->   
-> -	map = of_get_property(np, map_name, &map_len);
-> +	map = of_get_property(np, map_name, &map_bytes);
->   	if (!map) {
->   		if (filter_np)
->   			return -ENODEV;
-> @@ -2159,11 +2191,9 @@ int of_map_id(const struct device_node *np, u32 id,
->   		return 0;
->   	}
->   
-> -	if (!map_len || map_len % (4 * sizeof(*map))) {
-> -		pr_err("%pOF: Error: Bad %s length: %d\n", np,
-> -			map_name, map_len);
-> -		return -EINVAL;
-> -	}
-> +	if (map_bytes % sizeof(*map))
-> +		goto err_map_len;
-> +	map_len = map_bytes / sizeof(*map);
->   
->   	/* The default is to select all bits. */
->   	map_mask = 0xffffffff;
-> @@ -2176,39 +2206,93 @@ int of_map_id(const struct device_node *np, u32 id,
->   		of_property_read_u32(np, map_mask_name, &map_mask);
->   
->   	masked_id = map_mask & id;
-> -	for ( ; map_len > 0; map_len -= 4 * sizeof(*map), map += 4) {
+> +void __init init_cpu_topology(void)
+> +{
+> +    unsigned int cpu;
+> +    int ret;
 > +
-> +	while (offset < map_len) {
->   		struct device_node *phandle_node;
-> -		u32 id_base = be32_to_cpup(map + 0);
-> -		u32 phandle = be32_to_cpup(map + 1);
-> -		u32 out_base = be32_to_cpup(map + 2);
-> -		u32 id_len = be32_to_cpup(map + 3);
-> +		u32 id_base, phandle, id_len, id_off, cells = 0;
-> +		const __be32 *out_base;
+> +    cpu_topology = xvzalloc_array(struct cpu_topology, nr_cpu_ids);
+> +    if ( !cpu_topology )
+> +        return;
 > +
-> +		if (map_len - offset < 2)
-> +			goto err_map_len;
-> +
-> +		id_base = be32_to_cpup(map + offset);
->   
->   		if (id_base & ~map_mask) {
-> -			pr_err("%pOF: Invalid %s translation - %s-mask (0x%x) ignores id-base (0x%x)\n",
-> -				np, map_name, map_name,
-> -				map_mask, id_base);
-> +			pr_err("%pOF: Invalid %s translation - %s (0x%x) ignores id-base (0x%x)\n",
-> +			       np, map_name, map_mask_name, map_mask, id_base);
->   			return -EFAULT;
->   		}
->   
-> -		if (masked_id < id_base || masked_id >= id_base + id_len)
-> -			continue;
-> -
-> +		phandle = be32_to_cpup(map + offset + 1);
->   		phandle_node = of_find_node_by_phandle(phandle);
->   		if (!phandle_node)
->   			return -ENODEV;
->   
-> +		/*
-> +		 * Assume 1-cell output specifier if the target node lacks the
-> +		 * #cells property, for backward compatibility with controllers
-> +		 * that predate the property (e.g. arm,gic-v2m-frame).
-> +		 */
-> +		if (bad_map || of_property_read_u32(phandle_node, cells_name, &cells))
-> +			cells = 1;
-> +
-> +		if (cells > MAX_PHANDLE_ARGS) {
-> +			pr_err("%pOF: %s cell count %d exceeds maximum\n",
-> +			       phandle_node, cells_name, cells);
-> +			of_node_put(phandle_node);
-> +			return -EINVAL;
-> +		}
-> +
-> +		if (offset == 0 && cells == 2) {
-> +			bad_map = of_check_bad_map(map, map_len);
-> +			if (bad_map) {
-> +				pr_warn_once("%pOF: %s has 1-cell entries targeting 2-cell %s, treating as 1-cell output\n",
-> +					     np, map_name, cells_name);
-> +				cells = 1;
-> +			}
-> +		}
-> +
-> +		if (map_len - offset < 3 + cells) {
-> +			of_node_put(phandle_node);
-> +			goto err_map_len;
-> +		}
-> +
-> +		out_base = map + offset + 2;
-> +		offset += 3 + cells;
-> +
-> +		id_len = be32_to_cpup(map + offset - 1);
-> +		id_off = masked_id - id_base;
-> +		if (masked_id < id_base || id_off >= id_len) {
-> +			of_node_put(phandle_node);
-> +			continue;
-> +		}
-> +		if (id_len > 1 && cells > 1) {
-> +			/*
-> +			 * With 1 output cell we reasonably assume its value
-> +			 * has a linear relationship to the input; with more,
-> +			 * we'd need help from the provider to know what to do.
-> +			 */
-> +			pr_err("%pOF: Unsupported %s - cannot handle %d-ID range with %d-cell output specifier\n",
-> +			       np, map_name, id_len, cells);
-> +			of_node_put(phandle_node);
-> +			return -EINVAL;
-> +		}
-> +
->   		if (filter_np && *filter_np && *filter_np != phandle_node) {
->   			of_node_put(phandle_node);
->   			continue;
->   		}
->   
->   		arg->np = phandle_node;
-> -		arg->args[0] = masked_id - id_base + out_base;
-> -		arg->args_count = 1;
-> +		for (int i = 0; i < cells; i++)
-> +			arg->args[i] = id_off + be32_to_cpu(out_base[i]);
-> +		arg->args_count = cells;
->   
->   		pr_debug("%pOF: %s, using mask %08x, id-base: %08x, out-base: %08x, length: %08x, id: %08x -> %08x\n",
-> -			np, map_name, map_mask, id_base, out_base,
-> -			id_len, id, masked_id - id_base + out_base);
-> +			np, map_name, map_mask, id_base,
-> +			cells ? be32_to_cpup(out_base) : 0,
-> +			id_len, id,
-> +			cells ? id_off + be32_to_cpup(out_base) : id_off);
->   		return 0;
->   	}
->   
-> @@ -2219,6 +2303,10 @@ int of_map_id(const struct device_node *np, u32 id,
->   	arg->args[0] = id;
->   	arg->args_count = 1;
->   	return 0;
-> +
-> +err_map_len:
-> +	pr_err("%pOF: Error: Bad %s length: %d\n", np, map_name, map_bytes);
-> +	return -EINVAL;
->   }
->   EXPORT_SYMBOL_GPL(of_map_id);
->   
-> @@ -2228,18 +2316,21 @@ EXPORT_SYMBOL_GPL(of_map_id);
->    * @id: Requester ID of the device (e.g. PCI RID/BDF or a platform
->    *      stream/device ID) used as the lookup key in the iommu-map table.
->    * @arg: pointer to a &struct of_phandle_args for the result. On success,
-> - *	@arg->args[0] contains the translated ID. If a map entry was matched,
-> - *	@arg->np holds a reference to the target node that the caller must
-> - *	release with of_node_put().
-> + *	@arg->args_count will be set to the number of output specifier cells
-> + *	and @arg->args[0..args_count-1] will contain the translated output
-> + *	specifier values. If a map entry was matched, @arg->np holds a
-> + *	reference to the target node that the caller must release with
-> + *	of_node_put().
->    *
-> - * Convenience wrapper around of_map_id() using "iommu-map" and "iommu-map-mask".
-> + * Convenience wrapper around of_map_id() using "iommu-map", "#iommu-cells",
-> + * and "iommu-map-mask".
->    *
->    * Return: 0 on success or a standard error code on failure.
->    */
->   int of_map_iommu_id(const struct device_node *np, u32 id,
->   		    struct of_phandle_args *arg)
->   {
-> -	return of_map_id(np, id, "iommu-map", "iommu-map-mask", NULL, arg);
-> +	return of_map_id(np, id, "iommu-map", "#iommu-cells", "iommu-map-mask", NULL, arg);
->   }
->   EXPORT_SYMBOL_GPL(of_map_iommu_id);
->   
-> @@ -2252,17 +2343,20 @@ EXPORT_SYMBOL_GPL(of_map_iommu_id);
->    *	If non-NULL, the map property must exist (-ENODEV if absent). If
->    *	*filter_np is also non-NULL, only entries targeting that node match.
->    * @arg: pointer to a &struct of_phandle_args for the result. On success,
-> - *	@arg->args[0] contains the translated ID. If a map entry was matched,
-> - *	@arg->np holds a reference to the target node that the caller must
-> - *	release with of_node_put().
-> + *	@arg->args_count will be set to the number of output specifier cells
-> + *	and @arg->args[0..args_count-1] will contain the translated output
-> + *	specifier values. If a map entry was matched, @arg->np holds a
-> + *	reference to the target node that the caller must release with
-> + *	of_node_put().
->    *
-> - * Convenience wrapper around of_map_id() using "msi-map" and "msi-map-mask".
-> + * Convenience wrapper around of_map_id() using "msi-map", "#msi-cells",
-> + * and "msi-map-mask".
->    *
->    * Return: 0 on success or a standard error code on failure.
->    */
->   int of_map_msi_id(const struct device_node *np, u32 id,
->   		  struct device_node * const *filter_np, struct of_phandle_args *arg)
->   {
-> -	return of_map_id(np, id, "msi-map", "msi-map-mask", filter_np, arg);
-> +	return of_map_id(np, id, "msi-map", "#msi-cells", "msi-map-mask", filter_np, arg);
->   }
->   EXPORT_SYMBOL_GPL(of_map_msi_id);
-> diff --git a/include/linux/of.h b/include/linux/of.h
-> index ea50b45d9ff7..374b249766a2 100644
-> --- a/include/linux/of.h
-> +++ b/include/linux/of.h
-> @@ -465,7 +465,8 @@ const char *of_prop_next_string(const struct property *prop, const char *cur);
->   bool of_console_check(const struct device_node *dn, char *name, int index);
->   
->   int of_map_id(const struct device_node *np, u32 id,
-> -	       const char *map_name, const char *map_mask_name,
-> +	       const char *map_name, const char *cells_name,
-> +	       const char *map_mask_name,
->   	       struct device_node * const *filter_np,
->   	       struct of_phandle_args *arg);
->   
-> @@ -950,7 +951,8 @@ static inline void of_property_clear_flag(struct property *p, unsigned long flag
->   }
->   
->   static inline int of_map_id(const struct device_node *np, u32 id,
-> -			     const char *map_name, const char *map_mask_name,
-> +			     const char *map_name, const char *cells_name,
-> +			     const char *map_mask_name,
->   			     struct device_node * const *filter_np,
->   			     struct of_phandle_args *arg)
->   {
-> 
+> +    for ( cpu = 0; cpu < nr_cpu_ids; cpu++ )
+> +    {
+> +        if ( !zalloc_cpumask_var(&cpu_topology[cpu].thread_sibling)
+> +             || !zalloc_cpumask_var(&cpu_topology[cpu].core_sibling)
+> +             || !zalloc_cpumask_var(&cpu_topology[cpu].cluster_sibling) )
 
+In v6 the || here were correctly placed. Why did they move?
+
+> --- a/xen/common/cpu.c
+> +++ b/xen/common/cpu.c
+> @@ -46,6 +46,10 @@ const unsigned long cpu_bit_bitmap[BITS_PER_LONG+1][BITS_TO_LONGS(NR_CPUS)] = {
+>  #undef MASK_DECLARE_2
+>  #undef MASK_DECLARE_1
+>  
+> +#ifdef CONFIG_GENERIC_CPU_TOPOLOGY
+> +struct cpu_topology *__ro_after_init cpu_topology;
+> +#endif /* CONFIG_GENERIC_CPU_TOPOLOGY */
+
+Looks like you also need to include xen/cpu-topology.h here. I can't see
+it being included implicitly.
+
+> --- a/xen/drivers/acpi/Kconfig
+> +++ b/xen/drivers/acpi/Kconfig
+> @@ -2,6 +2,9 @@
+>  config ACPI
+>  	bool
+>  
+> +config ACPI_CPU_TOPOLOGY
+> +	bool
+> +
+>  config ACPI_LEGACY_TABLES_LOOKUP
+>  	bool
+>  
+
+Did you forget to undo this change?
+
+With all three adjustments:
+Reviewed-by: Jan Beulich <jbeulich@suse.com> # common, acpi
+
+Jan
 
