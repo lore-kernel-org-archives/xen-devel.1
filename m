@@ -4,40 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BB75C531FA
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 23:14:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1369678.1618264 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 489EFC531D0
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 23:17:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1369712.1618272 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wn2cU-0008UA-69; Thu, 23 Jul 2026 23:14:26 +0000
+	id 1wn2fK-0001Ud-JT; Thu, 23 Jul 2026 23:17:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1369678.1618264; Thu, 23 Jul 2026 23:14:26 +0000
+Received: by outflank-mailman (output) from mailman id 1369712.1618272; Thu, 23 Jul 2026 23:17:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wn2cU-0008U3-26; Thu, 23 Jul 2026 23:14:26 +0000
-Received: by outflank-mailman (input) for mailman id 1369678;
- Thu, 23 Jul 2026 23:14:24 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wn2fK-0001UW-GP; Thu, 23 Jul 2026 23:17:22 +0000
+Received: by outflank-mailman (input) for mailman id 1369712;
+ Thu, 23 Jul 2026 23:17:20 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mfo@igalia.com>) id 1wn2cS-0008Qm-Nl
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 23:14:24 +0000
+ (envelope-from <mfo@igalia.com>) id 1wn2fI-0001UQ-Pt
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 23:17:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wn2cS-002RKf-4b
- for xen-devel@lists.xenproject.org; Fri, 24 Jul 2026 01:14:24 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wn2fI-00AA3Z-6o
+ for xen-devel@lists.xenproject.org; Fri, 24 Jul 2026 01:17:20 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <mfo@igalia.com>)
- id 6a62a04f-bab6-0a2a0a5309dd-0a2a450cde10-0
- for <xen-devel@lists.xenproject.org>; Fri, 24 Jul 2026 01:14:23 +0200
+ id 6a62a0a3-bab6-0a2a0a5309dd-0a2a4503bfb4-46
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Jul 2026 01:17:20 +0200
 Received: from [213.97.179.56] (helo=fanzine2.igalia.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <mfo@igalia.com>)
- id 6a62a04e-f479-0a2a450c0019-d561b338ed68-3
- for <xen-devel@lists.xenproject.org>; Fri, 24 Jul 2026 01:14:23 +0200
-Received: from 186-249-149-197.shared.desktop.com.br ([186.249.149.197]
- helo=[127.0.1.1]) by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1wn2cP-003dsJ-Jn; Fri, 24 Jul 2026 01:14:21 +0200
+ id 6a62a0ff-fae8-0a2a45030019-d561b338d4d6-3
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Jul 2026 01:17:20 +0200
+Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
+ by fanzine2.igalia.com with esmtps 
+ (Cipher TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1wn2f3-003dxL-E8; Fri, 24 Jul 2026 01:17:05 +0200
+Received: from webmail.service.igalia.com ([192.168.21.45])
+ by mail.igalia.com with esmtp (Exim)
+ id 1wn2f0-001vGh-UY; Fri, 24 Jul 2026 01:17:05 +0200
+Received: from localhost ([127.0.0.1] helo=webmail.igalia.com)
+ by webmail.service.igalia.com with esmtp (Exim 4.98.2)
+ (envelope-from <mfo@igalia.com>) id 1wn2f0-000000031om-34zR;
+ Fri, 24 Jul 2026 01:17:02 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,77 +56,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20170329 header.d=igalia.com header.i="@igalia.com" header.h="Cc:To:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20170329 header.d=igalia.com header.i="@igalia.com" header.h="Content-Transfer-Encoding:Content-Type:Message-ID:Subject:Cc:To:From:Date:MIME-Version"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; h=Cc:To:Message-Id:Content-Transfer-Encoding:Content-Type:
-	MIME-Version:Subject:Date:From:From:Reply-To;
-	bh=zBAAE6UPiVcuOT4Hdx5zYoG+Uei+rPkEJSxQ4+nbtAc=; b=R/gjQH2VSgkl4pACIKZMge3cYq
-	mEx2tgfcbgdYNPGm9D38BSk4JWIG350FyRZnrJ91Nq159jjVPzrr1xs+sq6JH2ShauIebrVQxZP36
-	/MYI/+PJf26/q+EoxLTiK9i45/spWyDtNoWXurvB/GR/hhSeDa/E6VmDZKq6qiIZouVE59xVJimjh
-	7hUhbvPPVIHB09zhVgv1TmM+7R0x+q7HIkcsj5KkPE9EK1iKOx2hE1J1flI3vNqpufm5F9iKRFh/Y
-	BHK8Vu1JA9EtzvVAx20riQAcho0e8+ppozUg/YXzlBOwMIuFxBBUn9kPS9/IxMiEX4MardB9mTFjI
-	mRKV173A==;
-From: Mauricio Faria de Oliveira <mfo@igalia.com>
-Date: Thu, 23 Jul 2026 20:13:54 -0300
-Subject: [PATCH v8 4/4] x86/pvh: fix unbootable VMs by really inlining
- memset() in xen_prepare_pvh()
+	s=20170329; h=Content-Transfer-Encoding:Content-Type:Message-ID:Subject:Cc:To
+	:From:Date:MIME-Version:From:Reply-To;
+	bh=iz6E4BrpWd+r0aWdrdKsx0L9pMZaz696rZOSQQ8lwLQ=; b=WvmO2NuGiN1okDC4E61j4ggHNW
+	33/Rc2fCFQXaqeZgaHYNnCckzodMQS+KjAJngAKh/TqS5qiW3aNDwY2SW9DOFMfpeC88LIUZM+PJQ
+	XMZK+3oE5JnRaoVnTH3wphiwjC3c69DbckSzRYGYCmSHSJrRrg6wVOtuXgpNQnQcxAT/Sisw/ZpPO
+	GzRdxFVfItLlHCBs8gsRSSCUQH18PLmvA62ZhPvCVfWhC/ydugpf5W9prsO4Sb2zv1E0XQxWJ/iQx
+	DJy9dcTLSUNGYDO1HgyiCOST8663Eap8NxbzoFS4QAj4Gt0EXsGVNLLcYKUK95P/Bf8Pgk4khtW1p
+	7PJz8cUw==;
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Date: Thu, 23 Jul 2026 20:17:02 -0300
+From: Mauricio Faria de Oliveira <mfo@igalia.com>
+To: Borislav Petkov <bp@alien8.de>
+Cc: "H. Peter Anvin" <hpa@zytor.com>, Thomas Gleixner <tglx@kernel.org>,
+ Ingo Molnar <mingo@redhat.com>, Dave Hansen <dave.hansen@linux.intel.com>,
+ x86@kernel.org, Juergen Gross <jgross@suse.com>, Alexey Dobriyan
+ <adobriyan@gmail.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ kernel-dev@igalia.com, linux-kernel@vger.kernel.org,
+ xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v7 2/5] x86/asm: add volatile, clobbers and zero-length
+ check in inline memcmp
+In-Reply-To: <20260722170334.GCamD35gwrCng30WH1@fat_crate.local>
+References: <20260721-pvh-kasan-inline-v7-0-38979a50cef0@igalia.com>
+ <20260721-pvh-kasan-inline-v7-2-38979a50cef0@igalia.com>
+ <20260722170334.GCamD35gwrCng30WH1@fat_crate.local>
+Message-ID: <1e451a9179c1faa8e7805d17c6e1ee10@igalia.com>
+X-Sender: mfo@igalia.com
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260723-pvh-kasan-inline-v8-4-c1f62c156f52@igalia.com>
-References: <20260723-pvh-kasan-inline-v8-0-c1f62c156f52@igalia.com>
-In-Reply-To: <20260723-pvh-kasan-inline-v8-0-c1f62c156f52@igalia.com>
-To: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, 
- x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
- Juergen Gross <jgross@suse.com>, Alexey Dobriyan <adobriyan@gmail.com>, 
- Boris Ostrovsky <boris.ostrovsky@oracle.com>, 
- Jan Beulich <jbeulich@suse.com>, Brian Gerst <brgerst@gmail.com>
-Cc: kernel-dev@igalia.com, linux-kernel@vger.kernel.org, 
- xen-devel@lists.xenproject.org, Mauricio Faria de Oliveira <mfo@igalia.com>
-X-Mailer: b4 0.14.2
-X-purgate-ID: tlsNG-d25034/1784848463-00ACCA5B-16A44BEB/0/0
+X-purgate-ID: tlsNG-33051d/1784848640-7428D4E9-EE9D286A/0/0
 X-purgate-type: clean
-X-purgate-size: 1416
+X-purgate-size: 2370
 
-Even with __builtin the compiler may decide to use the out of line function
-instead of the inline implementation.
+On 2026-07-22 14:03, Borislav Petkov wrote:
+> hpa in To:.
+> 
+> On Tue, Jul 21, 2026 at 12:56:43PM -0300, Mauricio Faria de Oliveira wrote:
+>> Add the volatile qualifier and clobbers parameter to prevent bugs with
+>> instruction reordering and optimization.
+>> 
+>> Also check the zero-length case, as the 'repe' prefix does not run the
+>> 'cmpsb' instruction if the 'count' register is zero, which doesn't set
+> 
+> Please use capital letters for insns: REPE, CMPSB and you don't need to put
+> words in '' - it reads fine without them.
 
-This particular one (still) generated the inline implementation as expected
-(at least in these compiler versions) but this is not guaranteed to remain.
+Ok.
 
-Switch the builtin to the inline implementation to address it.
+> 
+>> the condition-code/zero flag, so the result is based on a stale flag.
+>> 
+>> Those are pre-existing issues found by Sashiko.
+>> 
+>> Link: https://sashiko.dev/#/patchset/20260701-pvh-kasan-inline-v6-0-ba99045dfa9f%40igalia.com
+>> Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
+>> ---
+>>  arch/x86/include/asm/shared/string.h | 8 ++++++--
+>>  1 file changed, 6 insertions(+), 2 deletions(-)
+>> 
+>> diff --git a/arch/x86/include/asm/shared/string.h b/arch/x86/include/asm/shared/string.h
+>> index 02b92927553f7b8e1c87e6122bbaa70439e57ea7..166274e44f3cb49e3dccab3cdac281d67aef5d44 100644
+>> --- a/arch/x86/include/asm/shared/string.h
+>> +++ b/arch/x86/include/asm/shared/string.h
+>> @@ -11,8 +11,12 @@ static __always_inline int __inline_memcmp(const void *s1, const void *s2, size_
+>>  {
+>>  	bool diff;
+>>  
+>> -	asm("repe cmpsb"
+>> -	    : "=@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len));
+>> +	if (len == 0)
+>> +		return 0;
+>> +
+>> +	asm volatile("repe cmpsb"
+>> +		     : "=@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len)
+>> +		     : : "cc", "memory");
+>>  
+>>  	return diff;
+>>  }
+> 
+> So this is a fix which should probably go to stable, I think. Going back into
+> git history, it points to
+> 
+>   62bd0337d0c4 ("Top header file for new x86 setup code")
+> 
+> from 2007. And we have carried it this way through the years and who knows
+> what hit this or not. So please make this the first patch in your set - you
+> can even send it separately so that I can get route it through stable.
 
-Fixes: fbe5a6dfe492 ("xen, pvh: fix unbootable VMs by inlining memset() in xen_prepare_pvh()")
-Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
-Reviewed-by: Juergen Gross <jgross@suse.com>
----
- arch/x86/platform/pvh/enlighten.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Sure:
+https://lore.kernel.org/all/20260723-x86-memcmp-asm-v2-1-d93ecb43797f@igalia.com/
 
-diff --git a/arch/x86/platform/pvh/enlighten.c b/arch/x86/platform/pvh/enlighten.c
-index f2053cbe9b0ce3d2178938269607c652ae8f528e..cb442cbd9d828619421babb281bfe9759edbca8a 100644
---- a/arch/x86/platform/pvh/enlighten.c
-+++ b/arch/x86/platform/pvh/enlighten.c
-@@ -8,6 +8,7 @@
- #include <asm/hypervisor.h>
- #include <asm/e820/api.h>
- #include <asm/x86_init.h>
-+#include <asm/string.h>
- 
- #include <asm/xen/interface.h>
- 
-@@ -129,7 +130,7 @@ void __init xen_prepare_pvh(void)
- 	 * This must not compile to "call memset" because memset() may be
- 	 * instrumented.
- 	 */
--	__builtin_memset(&pvh_bootparams, 0, sizeof(pvh_bootparams));
-+	__inline_memset(&pvh_bootparams, 0, sizeof(pvh_bootparams));
- 
- 	hypervisor_specific_init(xen_guest);
- 
+> Then you can base the rest ontop.
+
+Done:
+https://lore.kernel.org/all/20260723-pvh-kasan-inline-v8-0-c1f62c156f52@igalia.com/
+
+Thanks,
+
+> 
+> Thx.
 
 -- 
-2.47.3
-
+Mauricio
 
