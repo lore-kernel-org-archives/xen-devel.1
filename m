@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13440C531D4
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 14:44:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1369268.1618120 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7E81C531F7
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 14:55:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1369285.1618129 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmuf1-0006qx-52; Thu, 23 Jul 2026 14:44:31 +0000
+	id 1wmupY-0000BC-2p; Thu, 23 Jul 2026 14:55:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1369268.1618120; Thu, 23 Jul 2026 14:44:31 +0000
+Received: by outflank-mailman (output) from mailman id 1369285.1618129; Thu, 23 Jul 2026 14:55:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmuf1-0006qq-24; Thu, 23 Jul 2026 14:44:31 +0000
-Received: by outflank-mailman (input) for mailman id 1369268;
- Thu, 23 Jul 2026 14:44:30 +0000
+	id 1wmupX-0000B5-W8; Thu, 23 Jul 2026 14:55:23 +0000
+Received: by outflank-mailman (input) for mailman id 1369285;
+ Thu, 23 Jul 2026 14:55:22 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wmuez-0006qk-VL
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 14:44:30 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wmupW-0000Az-Ed
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 14:55:22 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wmuey-00BSTo-Vz
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 16:44:29 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wmupV-004CGn-Gz
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 16:55:21 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a6228b9-5cb7-0a2a0a5109dd-0a2a4502e446-44
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 16:44:28 +0200
-Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a622b49-e002-0a2a0a5209dd-0a2a450a8cc4-32
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 16:55:21 +0200
+Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a6228cc-6ca4-0a2a45020019-d155dd34d8ac-3
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 16:44:28 +0200
-Received: by mail-wr1-f52.google.com with SMTP id
- ffacd0b85a97d-47f878135e0so458950f8f.2
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 07:44:28 -0700 (PDT)
+ id 6a622b59-f2d2-0a2a450a0019-d155dd29a9b6-3
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 16:55:21 +0200
+Received: by mail-wr1-f41.google.com with SMTP id
+ ffacd0b85a97d-4720f3bf164so396132f8f.1
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 07:55:21 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f85c63678sm14792257f8f.29.2026.07.23.07.44.27
+ ffacd0b85a97d-47f85b9a596sm16738928f8f.4.2026.07.23.07.55.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Jul 2026 07:44:27 -0700 (PDT)
+ Thu, 23 Jul 2026 07:55:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,55 +55,54 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784817868; x=1785422668; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1784818521; x=1785423321; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=iU2vQ3LZhSYrdK8dH0cM7l6dQ5LgVRLh6Aarzr4LeAc=;
-        b=VG02npxSit+I6fnXqpa3Ib+35ucE74Wfk3TZCWrjqMZHXIyqHCJ075pHTC+nX9/I3y
-         ujh4KRJXJtM0shf5Iy3o+FU48/AAYWjaZkibCpMIZCTGDSMHeKZnRqvwKT0C5JHBRjVo
-         85zb4ccY2bq/uFVemtbBv0mPZNCZ/YAW1ArbLylp9KkO6BFy/cvAHvU/bmihtb4Hskus
-         1Q/M9RScHSW3SnM76LkqjlZCutEouB9j2Cr8UZLUzywP+kQ8kvgKE9A9eaAJE/nilJnG
-         QlxvqBfHUD5bc+K8exOKHKOCCcglsPYFKzHMY8/sCCM0V5SFaesugBbZirNpi1nltbIP
-         PpQA==
+        bh=il3JEqMCYbc7juYJmftpaflwuk9Up1TDVfBFz9IMMCU=;
+        b=bZs2+BLfpFWwoIk7YlJopjPh77lDn0Q55iFHounKglR715FGTeqmz/ctwwCUbnDESZ
+         KLdvDnmYIW25dsT8Ol9kIGA5cLXBl7scFA37H5dekq6VPrUyCm6lJJkPOeOsgyC04Xkr
+         8xQ9zw+cvVaU80EjFvB/2eCA7Gq65TGBW262AeHB6SZByplj6PCNWAPgIlYpERPOXfso
+         1e1BNpL22HB2J1fvPQhS06HIopb9j1xHzWh2IyN1eY/zBECfQAmMjmvZjGiZ5XvsDNL6
+         Sgm8co2JNtPF6fmACpKNf3p8JeLl2MWolVTMNHanFuN+0Qz0npy4Sjsy/iVbxZH+is0h
+         D4vA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784817868; x=1785422668;
+        d=1e100.net; s=20251104; t=1784818521; x=1785423321;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=iU2vQ3LZhSYrdK8dH0cM7l6dQ5LgVRLh6Aarzr4LeAc=;
-        b=r2S5tazgmGRxfLabteSRLNx0SkKEhPRNnWCC5lRqHB54t8YCIKmaX2nqub2MX8TUML
-         pfrRw1Et/gpD/8uOFMT9L3CYVbj2YPXhB2U+K8PAeau7UJD5Cd98yArUB/t7h2N8EADF
-         ysapZpbYMACkQTwVoAUfV5MTXBmCG9/SgZiUcYn7Bs3Z4NHWIBwtCkp8XsrCUle7XWjO
-         KUb/ILf1/BemQV68IFc8suoLhNyiRi1wGERVh9XFdOe861fMlRTnH3yPd/gL2yQ/ps6L
-         PsDUZRn7eNhFGn2aODjEzv3WvUrFkOXmKND4cvjClyrHGiIOcB2iyv5B9UO4uAafBKuN
-         hqGA==
-X-Forwarded-Encrypted: i=1; AHgh+RqtZhg6v/GeFlu0z8Yd5pwoId7Ye7cQ5O0IEkXyZel/8nQFgihHfMHZllv+qa/qGNiq6C9uL9L978I=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyMKNS2xQMEeGRsfQKZ62gLqNrnjLy5l9q8se0L2c+P4PMSJv6W
-	4BPjNekpFuQRHbpNpvG2BvDKm7O7PaRp6VnFeqab6PtNmrUrwb6BRt7cEsGJ2U0AQQ==
-X-Gm-Gg: AR+sD126EMLKAgEIGSx5YT11BN+u0YLq5RlBlermO5TQOMTo0EumBR6GYmixYqQ3wHB
-	t4BhAG5vXdEF4R/MGl2wwQ4Z2Whs886ru/Z/2skdQ9ytzO91ZebNGFc5mQMc15BD2muVDNwuctX
-	n+MJ82jkDOYQ6FNPAuLTCzaVKQHsCmybZSieM3C7/ezRQBFBVxIVDMRYInyG9Q6fQYsHPak42Zr
-	buczSoKUQjwfhztfTjvBg+G2E5lqVY0/4ptQOG59IJvdgysjN+yU4LaucqvA9N3+UR1UVn9tjvx
-	pi5vtlR1Dk+HqQGLymjl55FKbbWwrA5EnCZAaLmCWeWIeX6wSu+9yNQm/uwxxLv+vj4cWroHlJF
-	N/zkj14+M5OJkc647vwX3qUPYzkHBU8hpnbOJxhpA4XXU9SKCtI116SXlgxQdi0XxL0QGg9n4up
-	MazE3YQHnZpSWuKKupF9EOqMzgAwWQJdOCGFO7qJ3AjD3VeotC13mXtIyAp/N8wM7uUNodH5GyH
-	/46
-X-Received: by 2002:a05:6000:2687:b0:47e:8e7a:90a0 with SMTP id ffacd0b85a97d-47f8dcaefebmr4542489f8f.52.1784817868173;
-        Thu, 23 Jul 2026 07:44:28 -0700 (PDT)
-Message-ID: <0255d2bf-748e-444b-8c09-f69925ec88c4@suse.com>
-Date: Thu, 23 Jul 2026 16:44:26 +0200
+        bh=il3JEqMCYbc7juYJmftpaflwuk9Up1TDVfBFz9IMMCU=;
+        b=GZC4A+v1kZNpcyRbneJ12iA9XVzoPlu2iWR3EwVk1UdHF4xddnbEj3bm3NXJ1fl+Ut
+         xnYgipsK00iiLbThs0vccQuB4HhnH4pZaOkhk+INZnpsx6WV9PDV/Cs/G1rdPIZ2AkmX
+         woNONI97H8y59bGU6k7E1detFQZBqCrPVP2htF/N8p9rdHG3E4AKMd5HlwlbOpOoYi9d
+         IfHSTGHrYEoSAnw1nEapZzqJB+ruliE03R14J7Yd+h+qnxUB7hLr7SHyZDCZfJ3Ptwqa
+         +sk2zJ13I/HPX6TC9cVsEynWNIiSt3vBoCin/Co/cLBJkHqHK0yNTbKwB8acciNSAtoi
+         Gy+w==
+X-Forwarded-Encrypted: i=1; AHgh+RrOLx6stgehUXhjezlXVjIjRCBBinqf0t/tC0AiaQLq25yB6Gi/n+L1GruN18PT+yWepqV+IJ+Fa9Y=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxOhKBxp3y9OhUkFDksw/idkGu+9X7grt51mIhDcxkF+yDAUJcD
+	GCZwARaIjProqsLdbyHdJhTH/0qvSf0htNfXIHrtqN22O6TDiWYJzSel8M7/ynt/XA==
+X-Gm-Gg: AR+sD132nDZUu1tQWqaDkqCHKdIubMjPbPKV2sZ7UysiwisOvegrN+6IVWLtgRzpBdu
+	RQ6BzJ6s8q9bJ0H6rrdLjRUv/2LRv51rxC4/A7NUcta1YppEpuJkDphd560wDPhY53NVQZahkgg
+	CFmCvKDyjOxnylTly/2pGhYBIJ4c9O4cZ6+mPFEehPWREDvOjUfBNf+j5ZlkoM8SPdiUPF6TORQ
+	jNKIOFuZmgy+9tERV+yX4FP2iGKcGJQgnWw8iSg8bJoW4pfjrF19b9vb+hEeAEuvFU1nfkgJcT3
+	3pCDpquKmwkWeVZztBr++jYf9gmpj4X9Lkvi88adl1erxzojiGA7Vnkwa1BZNv/ZUxAn+7oSVV8
+	rotNZlUzPNhHkaGB2GsiXTzy1e7VykWT24gygqCfIpqol4nBoSyC0CiWH2hoVwWRbOfObmtI2zy
+	0XC5hIJ+1ylt8QUZkc9SF2lOTe/9lmKY6dIwlyrTQXoeovFSg1wqJ9CdNR1jsbF2wtYA==
+X-Received: by 2002:a05:6000:40c6:b0:47f:71a0:c060 with SMTP id ffacd0b85a97d-47f901b4cc7mr4136089f8f.2.1784818520660;
+        Thu, 23 Jul 2026 07:55:20 -0700 (PDT)
+Message-ID: <252e7f23-24d7-47c5-b5d2-e03864a4fe2f@suse.com>
+Date: Thu, 23 Jul 2026 16:55:19 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 1/9] vpci: move BAR mapping permissions checks
+Subject: Re: [PATCH v5 2/9] vpci: make BAR mapping more resilient for the
+ hardware domain
 To: Stewart Hildebrand <stewart.hildebrand@amd.com>
 Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
  xen-devel@lists.xenproject.org
 References: <20260708210233.922275-1-stewart.hildebrand@amd.com>
- <20260708210233.922275-2-stewart.hildebrand@amd.com>
+ <20260708210233.922275-3-stewart.hildebrand@amd.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,76 +128,76 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260708210233.922275-2-stewart.hildebrand@amd.com>
+In-Reply-To: <20260708210233.922275-3-stewart.hildebrand@amd.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1784817868-66AB52AC-F90D51DE/0/0
+X-purgate-ID: tlsNG-4011c0/1784818521-599C1CFC-8AEEF6FD/0/0
 X-purgate-type: clean
-X-purgate-size: 2454
+X-purgate-size: 2582
 
 On 08.07.2026 23:02, Stewart Hildebrand wrote:
-> There's no need to defer the permissions checks. Perform them right away
-> in modify_bars().
+> From: Roger Pau Monne <roger.pau@citrix.com>
 > 
-> As a result of the move, the permissions checks will now cover the whole
-> BAR before any holes are removed.
+> The logic in map_range() will bubble up failures to the upper layer, which
+> will result in any remaining regions being skip, and for the non-hardware
+> domain case the owner domain of the device would be destroyed.  However for
+> the hardware domain the intent is to continue execution, hoping the
+> failure to modify the p2m could be worked around by the hardware domain.
+> 
+> To accomplish that in a better way, ignore failures and skip the range in
+> that case, possibly continuing to map further ranges.
+> 
+> Since the error path in vpci_process_pending() should only be used by domUs
+> now, and it will unconditionally end up calling domain_crash(), simplify
+> it: there's no need to cleanup if the domain will be destroyed.
 
-Is this a good idea though? A really good toolstack would avoid granting
-access to e.g. the MSI-X table.
+Aren't we increasing the number of places adjustments will need making if
+that (not really nice) crashing of the domain was sorted at some point?
 
-> Carry over the domain_crash() in the error path for domUs.
+> Memory decoding may be left enabled in case of mapping error for devices
+> assigned to domUs.
 
-I don't think this is warranted.
+I'm similarly concerned of this. I also can't spot why this would be for
+DomU-s only. The original code did it for all domains.
 
 > --- a/xen/drivers/vpci/header.c
 > +++ b/xen/drivers/vpci/header.c
-> @@ -58,24 +58,6 @@ static int cf_check map_range(
->           * offset of the current address from the BAR start.
->           */
->          unsigned long map_mfn = start_mfn + s - start_gfn;
-> -        unsigned long m_end = map_mfn + size - 1;
-> -
-> -        if ( !iomem_access_permitted(map->d, map_mfn, m_end) )
-> -        {
-> -            printk(XENLOG_G_WARNING
-> -                   "%pd denied access to MMIO range [%#lx, %#lx]\n",
-> -                   map->d, map_mfn, m_end);
-> -            return -EPERM;
-> -        }
-> -
-> -        rc = xsm_iomem_mapping_vpci(XSM_HOOK, map->d, map_mfn, m_end, map->map);
-> -        if ( rc )
-> -        {
-> -            printk(XENLOG_G_WARNING
-> -                   "%pd XSM denied access to MMIO range [%#lx, %#lx]: %d\n",
-> -                   map->d, map_mfn, m_end, rc);
-
-I realize you literally only take what's here, but ...
-
-> @@ -369,6 +351,28 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
->              return -EINVAL;
->          }
+> @@ -70,17 +70,26 @@ static int cf_check map_range(
 >  
-> +        if ( !iomem_access_permitted(pdev->domain, start, end) )
-> +        {
-> +            printk(XENLOG_G_WARNING
-> +                   "%pd denied access to MMIO range [%#lx, %#lx]\n",
-> +                   pdev->domain, start, end);
-> +            if ( !is_hardware_domain(pdev->domain) )
-> +                domain_crash(pdev->domain);
-> +            return -EPERM;
+>          rc = map->map ? map_mmio_regions(map->d, _gfn(s), size, _mfn(map_mfn))
+>                        : unmap_mmio_regions(map->d, _gfn(s), size, _mfn(map_mfn));
+> -        if ( rc == 0 )
+> -        {
+> -            *c += size;
+> -            break;
+> -        }
+>          if ( rc < 0 )
+>          {
+>              printk(XENLOG_G_WARNING
+>                     "Failed to %smap [%lx %lx] -> [%lx %lx] for %pd: %d\n",
+>                     map->map ? "" : "un", s, e, map_mfn,
+>                     map_mfn + size, map->d, rc);
+> +            goto done;
 > +        }
-> +
-> +        rc = xsm_iomem_mapping_vpci(XSM_HOOK, pdev->domain, start, end,
-> +                                    !!(cmd & PCI_COMMAND_MEMORY));
-> +        if ( rc )
+> +        if ( rc == 0 )
 > +        {
-> +            printk(XENLOG_G_WARNING
-> +                   "%pd XSM denied access to MMIO range [%#lx, %#lx]: %d\n",
-> +                   pdev->domain, start, end, rc);
+> + done:
+> +            if ( is_hardware_domain(map->d) )
+> +                /*
+> +                 * Ignore failures for the hardware domain and skip the range.
+> +                 * Do it as a best effort workaround to attempt to get the
+> +                 * hardware domain to boot.
+> +                 */
+> +                rc = 0;
 
-... is the logging of rc actually useful? Afaict it's only ever going to be
--EPERM.
+Why would this not move ahead of the "goto done"? For the if() here it's
+a no-op. Then (really: independently) ...
+
+> +            *c += size;
+>              break;
+>          }
+
+... the remaining piece could be in "if ( rc <= 0 )".
 
 Jan
 
