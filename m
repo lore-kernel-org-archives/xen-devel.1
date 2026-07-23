@@ -4,44 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97C9EC531CA
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 13:31:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1369155.1618038 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1568EC531CA
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 13:31:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1369130.1618048 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmtVc-0001rs-TN; Thu, 23 Jul 2026 13:30:44 +0000
+	id 1wmtWX-0002N5-8I; Thu, 23 Jul 2026 13:31:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1369155.1618038; Thu, 23 Jul 2026 13:30:44 +0000
+Received: by outflank-mailman (output) from mailman id 1369130.1618048; Thu, 23 Jul 2026 13:31:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmtVc-0001rl-QK; Thu, 23 Jul 2026 13:30:44 +0000
-Received: by outflank-mailman (input) for mailman id 1369155;
- Thu, 23 Jul 2026 13:30:43 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wmtWX-0002Mw-5O; Thu, 23 Jul 2026 13:31:41 +0000
+Received: by outflank-mailman (input) for mailman id 1369130;
+ Thu, 23 Jul 2026 13:09:31 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wmtVb-0001rd-Eg
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 13:30:43 +0000
+ (envelope-from <tomitamoeko@gmail.com>) id 1wmtB5-0006NY-IK
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 13:09:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wmtVa-00FvMJ-HS
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 15:30:42 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wmtB4-00GMLd-VD
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 15:09:30 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a621778-2eae-0a2a0a5409dd-0a2a4508e8e2-24
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 15:30:42 +0200
-Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a621782-f659-0a2a45080019-d155dd36d126-3
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 15:30:42 +0200
-Received: by mail-wr1-f54.google.com with SMTP id
- ffacd0b85a97d-471eeac43bfso628153f8f.3
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 06:30:42 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f8635c8d7sm14471327f8f.21.2026.07.23.06.30.40
+ (envelope-from <tomitamoeko@gmail.com>)
+ id 6a62128a-e002-0a2a0a5209dd-0a2a4505a566-4
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 15:09:30 +0200
+Received: from [74.125.227.129] (helo=mail-pj2-f1.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <tomitamoeko@gmail.com>)
+ id 6a621289-4cb1-0a2a45050019-4a7de3818ac1-3
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 15:09:30 +0200
+Received: by mail-pj2-f1.google.com with SMTP id
+ 98e67ed59e1d1-3810f0aba07so344339a91.1
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 06:09:30 -0700 (PDT)
+Received: from ?IPV6:2408:820c:8ffa:c0f0:e439:d3f2:d7e2:d97a?
+ ([2408:820c:8ffa:c0f0:e439:d3f2:d7e2:d97a])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-3147e1ca3efsm24631825eec.30.2026.07.23.06.09.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Jul 2026 06:30:40 -0700 (PDT)
+ Thu, 23 Jul 2026 06:09:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,155 +54,244 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784813442; x=1785418242; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=RD6qRQL1y86TWiBYPwsDblFWyLfSp0GjXcXDx6AN+P8=;
-        b=X9E9liboJd41RnFXnPm+Cmj9AJq0hvw310cjbfkfV8qia3QRGp9DhCr14IE8E25QrY
-         1KHXr8k3byBX4XXGP4Bm8tmZNglooqVjHFCl8m9uyvU4nJY6k0aKu9a6SEjrP2+piUzR
-         XngvQcRwNMt4L2d/KFX84MrojuGMbvH0tGn7GHXPtmuv8X+LwQFnd9nQCKwTrn62Qk22
-         L9NYwBnhrVGd7Z58E0ccAjfdApJDB+GCGNXkZ7RB+m82L1KIJovd/hdMuTJ+DOTyvdmD
-         B6gfQVoCCGgJF1z0rH2XM5jxOaCrh+TKgAM9EX0b7mr4jPcWLgoLykYGWSfxy2Ua5dH4
-         51bQ==
+        d=gmail.com; s=20251104; t=1784812169; x=1785416969; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=P53LU1z00TsQ0rdICiDq5utAVkvnHaR3/n8SoYgZC9s=;
+        b=ipIWsoyGxq06b7DSS+FOCZDBMR9yFztkxosdgTFYeHVsnKYVWGOQN1tNgW2wqN7zBu
+         pHYVl6MK6ZZVq2I8CHKgnF7xRtycz6vUqVbC/0BdWoMPhHKSpIAh0HllnX3mYS1KjytV
+         oYWa1IrGH0gytV6hg1Ze/vszKhM6CnxjHSc7q8ASzxyn1AFixzG6TEIjexu4MtrRHKeC
+         8FZsXshcsFCwG0/c/qH57NKNWZkONqP1x8TWRf//WtIkdXPUYY+5yd2V4GqllfdrAC0U
+         M8zQw8ET8ovYxIzi8cG6jSgHzbPnryDR8JQJQbr+NcjcCYVR/16ohTVJxTBGjZKG6Mwn
+         RHVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784813442; x=1785418242;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=RD6qRQL1y86TWiBYPwsDblFWyLfSp0GjXcXDx6AN+P8=;
-        b=QR7VKehqVYwtuIAtKsUvjanfMsFmwOh8RQVX55RciMEn3f1RA8KbgFgJUOjCJAD1EB
-         0k5gvoToDRVtFYizb6b9RxmybEd2OBxMtPwHV8dxstKR7FHEhciLQugCLXOMYHgtrD//
-         f7f0NVWwekRp66QhbxyEO/eDWDU3Hg130s9BjacFueDxDuLlQgjwS2JHJTOPOmAxNKSD
-         zI7KxLjrTF5ar272igWA10fXLdSbY4ks7FnEKpvxCU/kp3P9gsBSUZcmsUodcTeXsrsp
-         I0M0xrLq1V6Y1bH3Tiz205IriUBWcYlTkvHDYw52k06T9bIBZqsd3D6biicL7AW2ZMmg
-         6Mzg==
-X-Forwarded-Encrypted: i=1; AHgh+RrnITLLP5ZvSefGZIQ0sMV6O2n3jbCkg2qH8BcPcvR4hd4Smk6V0sUVlScAnjCL5Q0BkVj1AVdjUdI=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwmEoJDJ7NoEXy/acdYtZeb9lJblPlRio4ZL2s8wVgwpoMA3gPT
-	IBrPCWETv4dFgIMCuSKDwgRi6s4fMJQh77+Zb4Hz2pkraHfqqyLPGVtedHH+Xx2YMQ==
-X-Gm-Gg: AR+sD13OGZfxQie/hff3wlrYdN+UEShHsFnSzvB9rCUxZjCn9v1QNViAhw9Osr6MR7m
-	WE9elvVqPQJinrimg1vgYrndonjePXF4SbDtT5bcaO3ci8ILWTBmckXkIALo5Ur4hT2Il1RC21q
-	eg20YLile2zHxX7IAUNkBZjaOAqDbgd8pFcdvH8kE27GcSQ8HrDsVfMG8OPKh2yg0p1U7xTiHXL
-	Lu5wq8VkdjLKr2405vw5s5aL/i7QrwkQqO8PjSCAPY6Jtbn1v9igWLuM+viOdqXmslSHH6yu+CD
-	6ZzPDYd0mtgompTet7s7IV1nkmX7I98YDPpkL2xxBKq5fgOT6embFKXqAUTBws3wRWUMcBiiedt
-	VrlgqopSI8QdLA4T/rxDx3ecfXoautYMgd4tzCICSO/2QqAJLlVya7V+gNe7INsRs6kOtugb1I3
-	dC4CehSGbpx/o89uMGzxSN4ZZ5ElKGYxcaC4a5VmkEETvFLD0VDFhZ0uVQrsyYzs7Sfg==
-X-Received: by 2002:a05:6000:454d:b0:47f:9311:34cf with SMTP id ffacd0b85a97d-47f931135edmr1126684f8f.22.1784813441547;
-        Thu, 23 Jul 2026 06:30:41 -0700 (PDT)
-Message-ID: <c64fc958-73bb-44ed-a3b2-dc368ce675ac@suse.com>
-Date: Thu, 23 Jul 2026 15:30:40 +0200
+        d=1e100.net; s=20251104; t=1784812169; x=1785416969;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=P53LU1z00TsQ0rdICiDq5utAVkvnHaR3/n8SoYgZC9s=;
+        b=AxPbiSHKwSnnPX0IHyJambxap43Fu68t+uRaisAtozba5D4pTtZzKB8YsPovUjXzus
+         ljB9CkJuSbFVQfc5URGcv6mn9ihUjE2yc/pg8eZZOyP/rCUZNhxFrsC3DWDCuo1LZgTU
+         knunTnDmsk5xD3H2i0DYd8vG7ZRj1x6ogtBhh/nO5TjLXViewGzX4xR9v1CcZLhJj2Tj
+         hPZlD7axsyPmiGQrhwJEtrP3X8SLwcWy/hwwAhrEhZ5yx/gWBctdpsrbFH358yaape/1
+         BaVwtxoMddc5bu2csxnlrC3VReEUY+sepM+x8TruTach+8aIxioKDZR0SZ2d3+tQ0ihu
+         I25w==
+X-Forwarded-Encrypted: i=1; AHgh+Rq2QkldQcloIzNIotVLE+XASFtne+oxBNWRBTSAZWgMUg8dMMEZNfAB8hv+bt0t1TamLUCd8qyJkFE=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzQ6dSMRlAj/Nzy7od6Qv7hDjJFFdqmvoxij1NHADBkEUC1fRlC
+	MzRBBsOVw2LveZwibw40l25p3BsJ9pdFW5tynYp7kS/QB6zurNehl5c=
+X-Gm-Gg: AR+sD13743sXpsd4WRZBOy1AbOc/b9NwaiHwaTVB1c2kvy8PFPUXiqEuuztPtwVfP6F
+	mowW9TtO6E8YsWUGIezu/MqyPFkZJ7yFhWgVjy2bjLULsk1CuIjxu9l6avHKC2OWGgK12mqlmEC
+	GXNLVjgUclvGD7mf/pinrxPzx8PUVzGSTLWkiFHffv/lEBhY/uDAonVqlqoHqX8qz+3/a4i3nAx
+	9pDdrw/VOU7sxlsO6kUnovkjvxxYEh/QSQzSzsHYc+jVBIRt9sZLyxEnSenkJYjbmYJcEBzVLjE
+	MOEiOel36Ixd0t9MRzI5D6/1SgEbBVFwg0kLI85qvrA4jYMgbi4lcnMj/DeD6xmrIYSkTLO/8fO
+	tij86W4YOvIjxpP+PnwPtATYTJJPofwPvkg8fqrryycnZ2bKnfsBJFAqiFA9IYhl0pmgqdQHc6Z
+	cP4wuN40bAhhzTCm4uZkGhDyGK3jI+NgjikMU5Hlp4hdWp26ez4h8V5vwIiA==
+X-Received: by 2002:a05:6300:614e:b0:3c3:8651:b317 with SMTP id adf61e73a8af0-3c44afaac10mr3303939637.10.1784812168685;
+        Thu, 23 Jul 2026 06:09:28 -0700 (PDT)
+Message-ID: <5cb8d286-f013-4400-aef4-baddaa775995@gmail.com>
+Date: Thu, 23 Jul 2026 21:09:24 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 18/23] xen/riscv: implement IRQ routing for device
- passthrough
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- xen-devel@lists.xenproject.org
-References: <cover.1784559209.git.oleksii.kurochko@gmail.com>
- <c489a420b1c01c5312773c2e2b51f63d3babf855.1784559209.git.oleksii.kurochko@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <c489a420b1c01c5312773c2e2b51f63d3babf855.1784559209.git.oleksii.kurochko@gmail.com>
+Subject: Re: [PATCH v3 1/3] xen/igd: get PCH info from host sysfs
+To: Chuck Zmudzinski <brchuckz@aol.com>, qemu-devel@nongnu.org
+Cc: qemu-stable@nongnu.org, xen-devel@lists.xenproject.org,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony@xenproject.org>,
+ "Edgar E . Iglesias" <edgar.iglesias@gmail.com>
+References: <20260709183517.25866-1-brchuckz@aol.com>
+ <20260709183517.25866-2-brchuckz@aol.com>
+From: Tomita Moeko <tomitamoeko@gmail.com>
+In-Reply-To: <20260709183517.25866-2-brchuckz@aol.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1784813442-CDF4787B-9ABFEA81/0/0
+X-purgate-ID: tlsNG-c201ff/1784812170-24F1F2A1-2FC17A21/0/0
 X-purgate-type: clean
-X-purgate-size: 1997
+X-purgate-size: 6756
 
-On 20.07.2026 17:59, Oleksii Kurochko wrote:
-> --- a/xen/arch/riscv/Makefile
-> +++ b/xen/arch/riscv/Makefile
-> @@ -1,6 +1,7 @@
->  obj-y += aia.o
->  obj-y += aplic.o
->  obj-y += cpufeature.o
-> +obj-y += device.o
+Sorry I am not the maintainer/reviewer of Xen IGD passthrough, just out
+of my personal interest
 
-Since you don't permit OVERLAY_DTB=y just yet, this could simply be
+On 2026-07-10 02:35, Chuck Zmudzinski wrote:
+> The igd_combo_id_infos[] data is more than 10 years
+> out of date with many Intel IGD devices missing from
+> igd_combo_id_infos[]. This means that many devices
+> that could be supported will not work with the
+> current implementation.
+> 
+> For newer devices not listed in igd_combo_id_infos[],
+> get infos from the host sysfs to enable support for the
+> newer devices not listed in igd_combo_id_infos[].
+> 
+> Introduce the helper function xen_pt_get_host_pch_info
+> to facilitate getting the necessary information from
+> sysfs.
+> 
+> Also, use errp in xen_igd_passthrough_isa_bridge_create
+> to set errors from xen_pt_get_host_pch_info.
+> 
+> Signed-off-by: Chuck Zmudzinski <brchuckz@aol.com>
+> ---
+> Changes in v2:
+>   - call error_setg* after closing files instead of before closing
+>     files
+>   - in last line of commit message change "to propagate errors" to
+>     "to set errors"
+>   - add stable to Cc list
+> 
+> Changes in v3:
+>   - whitespace fix at line 380 of xen_pt_graphics.c
+>   - fix Cc address for qemu-stable
+> 
+>  hw/xen/xen_pt.c          |  2 +-
+>  hw/xen/xen_pt_graphics.c | 82 ++++++++++++++++++++++++++++++++++++++--
+>  include/hw/xen/xen_igd.h |  3 +-
+>  3 files changed, 82 insertions(+), 5 deletions(-)
+> 
+> diff --git a/hw/xen/xen_pt.c b/hw/xen/xen_pt.c
+> index 0fe9c0a..474606e 100644
+> --- a/hw/xen/xen_pt.c
+> +++ b/hw/xen/xen_pt.c
+> @@ -867,7 +867,7 @@ static void xen_pt_realize(PCIDevice *d, Error **errp)
+>          }
+>  
+>          /* Register ISA bridge for passthrough GFX. */
+> -        xen_igd_passthrough_isa_bridge_create(s, &s->real_device);
+> +        xen_igd_passthrough_isa_bridge_create(s, &s->real_device, errp);
 
-obj-y += device.init.o
+The `errp` need to be handled here if any error occurs.
 
-for the time being. Else use Arm's construct. (And I can't help the feeling
-that I did point this out before.)
-
-> @@ -227,3 +253,215 @@ void do_IRQ(struct cpu_user_regs *regs, unsigned int irq)
->      spin_unlock(&desc->lock);
->      irq_exit();
+>      }
+>  
+>      /* Handle real device's MMIO/PIO BARs */
+> diff --git a/hw/xen/xen_pt_graphics.c b/hw/xen/xen_pt_graphics.c
+> index 7df9344..2ef941e 100644
+> --- a/hw/xen/xen_pt_graphics.c
+> +++ b/hw/xen/xen_pt_graphics.c
+> @@ -376,8 +376,75 @@ static void pt_graphics_register_types(void)
 >  }
-> +
-> +static struct irq_guest *irq_get_guest_info(struct irq_desc *desc)
+>  type_init(pt_graphics_register_types)
+>  
+> +static void xen_pt_get_host_pch_info(PCIDevice *dev, uint16_t *pch_dev_id,
+> +                                     uint8_t *pch_rev_id, Error **errp)
 > +{
-> +    ASSERT(spin_is_locked(&desc->lock));
-> +    ASSERT(test_bit(_IRQ_GUEST, &desc->status));
-> +    ASSERT(desc->action != NULL);
+> +    FILE *fp1, *fp2;
+> +    char *endptr;
+> +    char device_id[7], rev[5];
+> +    size_t len;
+> +    const char *device = "/sys/bus/pci/devices/0000:00:1f.0/device";
+> +    const char *revision = "/sys/bus/pci/devices/0000:00:1f.0/revision";
+> +    unsigned long val;
 > +
-> +    return desc->action->dev_id;
+> +    fp1 = fopen(device, "r");
+> +    if (fp1 == NULL) {
+> +        error_setg_errno(errp, errno, "Cannot open %s", device);
+> +        return;
+> +    }
+> +    fp2 = fopen(revision, "r");
+> +    if (fp2 == NULL) {
+> +        fclose(fp1);
+> +        error_setg_errno(errp, errno, "Cannot open %s", revision);
+> +        return;
+> +    }
+> +
+> +    len = fread(device_id, 1, 7, fp1);
+> +    if (!len) {
+> +        fclose(fp1);
+> +        fclose(fp2);
+> +        error_setg(errp, "Cannot read %s", device);
+> +        return;
+> +    }
+> +    len = fread(rev, 1, 5, fp2);
+> +    if (!len) {
+> +        fclose(fp1);
+> +        fclose(fp2);
+> +        error_setg(errp, "Cannot read %s", revision);
+> +        return;
+> +    }
+> +    fclose(fp1);
+> +    fclose(fp2);
+> +
+> +    val = strtoul(device_id, &endptr, 16);
+> +    if (val > 0xffff) {
+> +        error_setg(errp, "PCH device id is out of range: 0x%lx", val);
+> +        return;
+> +    }
+> +    if ((endptr > device_id) && (errno != ERANGE) &&
+> +        (errno != EINVAL)) {
+> +        *pch_dev_id = (uint16_t)val;
+> +    } else {
+> +        error_setg_errno(errp, errno, "device id strtoul "
+> +                                      "conversion failed");
+> +        return;
+> +    }
+> +    val = strtoul(rev, &endptr, 16);
+> +    if (val > 0xff) {
+> +        error_setg(errp, "PCH revision is out of range: 0x%lx", val);
+> +        return;
+> +    }
+> +    if ((endptr > rev) && (errno != ERANGE) && (errno != EINVAL)) {
+> +        *pch_rev_id = (uint8_t)val;
+> +    } else {
+> +        error_setg_errno(errp, errno, "revision strtoul "
+> +                                      "conversion failed");
+> +    }
 > +}
 > +
+
+It would be better to reuse existing xen_host_pci_device_get() to read host
+LPC bridge ids instead of parsing it on our own here.
+
+>  void xen_igd_passthrough_isa_bridge_create(XenPCIPassthroughState *s,
+> -                                           XenHostPCIDevice *dev)
+> +                                           XenHostPCIDevice *dev,
+> +                                           Error **errp)
+>  {
+>      PCIBus *bus = pci_get_bus(&s->dev);
+>      struct PCIDevice *bridge_dev;
+> @@ -394,7 +461,16 @@ void xen_igd_passthrough_isa_bridge_create(XenPCIPassthroughState *s,
+>          }
+>      }
+>  
+> -    if (pch_dev_id == 0xffff) {
+> +    /* Newer devices get PCH infos from host sysfs */
+> +    if ((pch_dev_id == 0xffff) || !pch_rev_id) {
+> +        xen_pt_get_host_pch_info(&s->dev, &pch_dev_id, &pch_rev_id, errp);
+> +    }
 > +
-
-Nit: Just to remind you - no double blank lines please.
-
-> +/* Route an IRQ to a specific guest */
-> +int route_irq_to_guest(struct domain *d, unsigned int virq,
-> +                       unsigned int irq, const char *devname)
-> +{
-> +    struct irqaction *action;
-> +    struct irq_guest *info;
-> +    struct irq_desc *desc;
-> +    unsigned long flags;
-> +    int retval = 0;
+> +    XEN_PT_LOG(&s->dev, "PCH device id: 0x%x\n", pch_dev_id);
+> +    XEN_PT_LOG(&s->dev, "PCH revision: 0x%x\n", pch_rev_id);
 > +
-> +    if ( d->is_dying )
-> +        return -EINVAL;
-> +
-> +    desc = irq_to_desc(irq);
-> +
-> +    /*
-> +     * release_irq() frees this action via xvfree(), relying on action
-> +     * being the first member of struct irq_guest so that &info->action
-> +     * coincides with info itself. Guard the layout so a future field
-> +     * reorder can't silently turn that into a free() of a mid-allocation
-> +     * pointer.
-> +     */
-> +    BUILD_BUG_ON(offsetof(struct irq_guest, action) != 0);
+> +    if ((pch_dev_id == 0xffff) || !pch_rev_id) {
+> +        error_setg(errp, "failed to get PCH device id or revision");
+>          return;
+>      }
+>  
+> @@ -406,7 +482,7 @@ void xen_igd_passthrough_isa_bridge_create(XenPCIPassthroughState *s,
+>       * Note that vendor id is always PCI_VENDOR_ID_INTEL.
+>       */
+>      if (!bridge_dev) {
+> -        fprintf(stderr, "set igd-passthrough-isa-bridge failed!\n");
+> +        error_setg(errp, "set igd-passthrough-isa-bridge failed!");
+>          return;
+>      }
+>      pci_config_set_device_id(bridge_dev->config, pch_dev_id);
+> diff --git a/include/hw/xen/xen_igd.h b/include/hw/xen/xen_igd.h
+> index 7ffca06..da51f09 100644
+> --- a/include/hw/xen/xen_igd.h
+> +++ b/include/hw/xen/xen_igd.h
+> @@ -22,7 +22,8 @@ uint32_t igd_read_opregion(XenPCIPassthroughState *s);
+>  void xen_igd_reserve_slot(PCIBus *pci_bus);
+>  void igd_write_opregion(XenPCIPassthroughState *s, uint32_t val);
+>  void xen_igd_passthrough_isa_bridge_create(XenPCIPassthroughState *s,
+> -                                           XenHostPCIDevice *dev);
+> +                                           XenHostPCIDevice *dev,
+> +                                           Error **errp);
+>  
+>  static inline bool is_igd_vga_passthrough(XenHostPCIDevice *dev)
+>  {
 
-Can't release_irq() simply use container_of()? One way or another it feels
-like you're painting yourself into a particular corner ...
-
-With at least the earlier two issues taken care of:
-Acked-by: Jan Beulich <jbeulich@suse.com>
-
-Jan
 
