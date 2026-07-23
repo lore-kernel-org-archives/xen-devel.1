@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D15EDC44524
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 07:00:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1368922.1617972 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5226C531CA
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 13:08:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1369122.1618021 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmnPE-00046X-OB; Thu, 23 Jul 2026 06:59:44 +0000
+	id 1wmt9h-0005vt-Nj; Thu, 23 Jul 2026 13:08:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1368922.1617972; Thu, 23 Jul 2026 06:59:44 +0000
+Received: by outflank-mailman (output) from mailman id 1369122.1618021; Thu, 23 Jul 2026 13:08:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmnPE-00046P-Jb; Thu, 23 Jul 2026 06:59:44 +0000
-Received: by outflank-mailman (input) for mailman id 1368922;
- Thu, 23 Jul 2026 06:59:42 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wmt9h-0005vl-KM; Thu, 23 Jul 2026 13:08:05 +0000
+Received: by outflank-mailman (input) for mailman id 1369122;
+ Thu, 23 Jul 2026 13:08:04 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wmnPC-00046J-P8
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 06:59:42 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wmt9g-0005vf-Ir
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 13:08:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wmnPB-00Ehdg-O4
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 08:59:41 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wmt9f-007a6B-Oq
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 15:08:03 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a61bbdb-bab6-0a2a0a5309dd-0a2a4502a22a-12
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 08:59:41 +0200
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a621226-5cb7-0a2a0a5109dd-0a2a4504e060-30
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 15:08:03 +0200
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a61bbdd-6ca4-0a2a45020019-d1558035e016-3
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 08:59:41 +0200
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-4956242332dso2650695e9.2
- for <xen-devel@lists.xenproject.org>; Wed, 22 Jul 2026 23:59:41 -0700 (PDT)
+ id 6a621233-b57f-0a2a45040019-d155802fe4fd-3
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 15:08:03 +0200
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-4953de5be0aso4528995e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 06:08:03 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4956a6354a3sm198616985e9.10.2026.07.22.23.59.40
+ 5b1f17b1804b1-4956d475e24sm112064885e9.0.2026.07.23.06.08.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Jul 2026 23:59:40 -0700 (PDT)
+ Thu, 23 Jul 2026 06:08:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,61 +55,61 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784789981; x=1785394781; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1784812083; x=1785416883; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=xjAZiGXpd0CSGVgZfcdRxovUfmNvf7gTbYTIde+ER0I=;
-        b=IfU6VVu/Bqiqws5EJFGbJvjRdm9GLudOzEL6ITLimNUPcvQGZYLSw7vtHPuhFVlP4f
-         2lGkr/x5Gpvw7dQGTyLfqhp7TMO8tjljC+4U+jfhyuCvH3PpU6mIF7R69dfdwFaaArri
-         JqeUbyuu63bLxJXMvgQ0nmkpqMtTkwssy1EAxsRpRNKcPwoawHJtJN2EihCg8uGJoUs6
-         Ysk8ScnEUfnn5FhbtURwWDODSO2MoM0znmax9qpttoZSh/Y1E31BGh2CoUe2p6f2PAxu
-         im625OFSTTzJ2E73c554QjEDUMNrBc7xC8HcfhfMlaQUgGSc7h3jMfuP/zw3miRPb3wV
-         rMGg==
+        bh=KTvd0XfdsApJ0kLzdbwtfFmDzasozlUZn0+6DVqx15Y=;
+        b=cOWnZ+Ikupvo0dRf5v5B4So6SV7R5Ar8rL13Sm+rVN7t68zuV2K2Ew23rjkUHxbAZ1
+         OqOQnEi4xjatYm775Fcl9iXRyx8QINWGqbGYRz/L6t6/OxAOV/49fSGiHaAZzSwRK2Ld
+         ybTG/lSqCK1pLmFYj+6HLY92jn62dWSCuO8rYIV2TZZM2sBOm2vNLgFPP8PMlZ/rb9nN
+         Pklt0dYa9MxuQ7vV1RxFktyEjFrk69PpjEyIQdH3yd8FTZXdcG723W/TBBXtL3yD4a0A
+         eCKNrXwIcRYWo4vHwXF9f2/u6k5hqEDKaOoyoiKXndgQynFwN54n1fNUlU/oJNyjCafW
+         /xAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784789981; x=1785394781;
+        d=1e100.net; s=20251104; t=1784812083; x=1785416883;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=xjAZiGXpd0CSGVgZfcdRxovUfmNvf7gTbYTIde+ER0I=;
-        b=iRGMWmZvDyRSULwbv+OjnXLViPafC/WPoaqVP3UNQtFD+OJZ/qaFCc79awmHOELcxT
-         cjQKleCKWB76ws5JAsrmv9k360kEr+Dq//914AxbsLOqjgjy+7U/EZyE8XUXuqlUUO5P
-         MRJ/Q9uQZCzqyX0gckcYtAmjH/3zkRpQ4G6fRr6YID7uCOLSHXZh3c1iYiIrcHhv2DX4
-         WP27o5s2QviL3TStY+J6OOhUT42QmRTheqAqMXubZ0c653mQMVNGl3EpU4Jx/ejcMx1V
-         2HWnkLaVhSREVpwBkccpPLYtiAUBP8JOPRqqen4xQpi6Wxcw9mz/aR1GSPSV6nEdmph8
-         YQNg==
-X-Forwarded-Encrypted: i=1; AHgh+Ro1LWUqw15dw19SmsMpxcfSFOzBsMGzJWQW9fcsbbKctZslLyu2A5zQSCxpICl3Vj+Q2SNPY8rHMHE=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwmX3ofPUZ+toJAi86FpJLH6Ct2GxUfxq0ponQ9IXObDP6buwv0
-	/W7eAzlpb2dU9MXP9yByFui4vatOyCiaJ/Y8iu4iHLk3dAgglt+ebo+KF4ircxdr7g==
-X-Gm-Gg: AR+sD11Wxnep8jcBAeAKTsRQCIu2fDzAdqkGNd918lGGhdopPLWUcBmHz2UN4POnjw/
-	mfKsNwuVskZ21zTKvXIYQjvtLMyDbjvnxj3EAAGFJHjPaiAcMKiUlVzmalrbmG5KS+LyIIapiEq
-	hjVki1tGBPRgNM4hLyN+quaG3AsTQk5OR76L74X+SHpKYR5Sq8egrVWcp6Q1HaRoQb/1LABB3Bc
-	bK5+g6SrL56BaH+62h8HQBzzsfqgHIOy9XKQz9rGFdzuGrAo66hDbC78yzBd/m/sHuPNXcvkZTj
-	S+UHfqdxad8cpdy10Cr/FeV0WemcKrufB0cxfEmgzVAhv5IlkmDis60EFh9xX9E8gj8BMithO9y
-	6bMvebr0kWlOIf3IaecFS4+X0ouuv4edGcoZYMpwwGb15QF2boIahbwZYOauvWLshA7fF+CoHIY
-	6rnrLidw7zyZcy99Xhv6VXUTiPjuRx9hbbx/cLsWv5DyJjDZNuLED/KSSrphcZ6hT0/Q==
-X-Received: by 2002:a05:600c:6012:b0:495:4d2d:82f2 with SMTP id 5b1f17b1804b1-49573d0eb3emr12449405e9.26.1784789980946;
-        Wed, 22 Jul 2026 23:59:40 -0700 (PDT)
-Message-ID: <4daed8ac-b533-436f-9f86-6d297b87abbb@suse.com>
-Date: Thu, 23 Jul 2026 08:59:39 +0200
+        bh=KTvd0XfdsApJ0kLzdbwtfFmDzasozlUZn0+6DVqx15Y=;
+        b=R4aYB23VM/XTXN/BFw4oznabEUYaDaE7nGQauoyPQC33eamfN1Pllye4pDH5uV9bIb
+         rb6XQaLUhDqSzUjY0uQviecxGN2rPL3wz+bgomrQ+HR2OLKZ+VdD2lOtYuTEayJ+Qz1h
+         j7oN6pfUXWIsV5WBb6eVemel/eO7/A+wKK2XFwZHOrCm40qSeM9rSJ/zlH2TiP47BeFW
+         iUeaqXIHaWpgXTr4xKbgkCmlpDqWN5vj1naE/tMxSGgqIBp1epAIv7UYBS0LkwhW5gKZ
+         HIUkN3z7HY9VMtf4ULV8gxfoHYUZIRVOV7lSBP1fmt1TwrDIxRIOTjXLiVQSCVu+qXE3
+         ZdYQ==
+X-Forwarded-Encrypted: i=1; AHgh+RpnCSIPTthG8IGfy79jTvORba6Yycx9Rod0jjWdW+skj8jvIWtAeQC6bvU+CCSKJ0isRJufpGd9JNc=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxaRqO0mNbtUZXP1V5Otj3FY/PxAF+ZJ5wg1HgajSXHhLQY3QSM
+	hRnwp2LlYky0NCK1GCKZ+rg88IqRWcmnvFM6eWin8cDP+KFIaIp8zCxpscQFv8UyQw==
+X-Gm-Gg: AR+sD13+Efl1PIY2Ya7BMwyJoHW8tOU3XzCcpTRpgx6L9DeCh6bKvJLh0MG55Y6XCEr
+	kdm0Ro5aVY47iuLzxH7Hk5rs+EqHUPo2GrRBXNF3wAt/O9xKUrIjcixk6HbCTRZmKniJls3R3UK
+	HlCjGqr9nZyJdM6BgtG8tIDfwudiwuvaEXQLVRTBEy4Lipy6Iyq8Ngwn4qvQOKcXkzQeRh8TNz2
+	nBp2dq79iwXU5RAZ+/mldA6FPZAZE4/Ucbq9JB7deAqbkyaVnkO9cTQFI4zpmgr7+hFoWw45yVy
+	VGelnCwX7jaBiJdfVaVI0LDhIdiEYHQMLftW24fuAtqHbGyJJM2AdtMATEkh6EM959wwEexfNE2
+	XymBX5sWNG15eH6I4Ji823XfgYZtV3AyHG0UAEEKnbJAsyGgt4eO2FHniI9Jc1ohZQRyAU5Wy6K
+	k10p4lGbzVjffik/Zm33WUP5Fs9vy/EipyFQ+zxWQPDDT6BusUkD+lgEQowOue6QmsJA==
+X-Received: by 2002:a05:600c:6a07:b0:493:a613:56b2 with SMTP id 5b1f17b1804b1-49573c8d700mr23330985e9.8.1784812082858;
+        Thu, 23 Jul 2026 06:08:02 -0700 (PDT)
+Message-ID: <c37949ce-5858-4b62-b6c8-5cc17d40c9b4@suse.com>
+Date: Thu, 23 Jul 2026 15:08:01 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 2/5] x86/asm: add volatile, clobbers and zero-length
- check in inline memcmp
-To: "H. Peter Anvin" <hpa@zytor.com>,
- Mauricio Faria de Oliveira <mfo@igalia.com>
-Cc: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
- Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
- Juergen Gross <jgross@suse.com>, Alexey Dobriyan <adobriyan@gmail.com>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>, kernel-dev@igalia.com,
- linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org,
- Borislav Petkov <bp@alien8.de>
-References: <20260721-pvh-kasan-inline-v7-0-38979a50cef0@igalia.com>
- <20260721-pvh-kasan-inline-v7-2-38979a50cef0@igalia.com>
- <20260722170334.GCamD35gwrCng30WH1@fat_crate.local>
- <0F3A1121-208F-4F71-8C88-BEAE7CB50E75@zytor.com>
+Subject: Re: [PATCH v6 17/23] xen/riscv: create APLIC DT node for guest
+ domains
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1784559209.git.oleksii.kurochko@gmail.com>
+ <06c022159e9cf70bacd0c061b7460b99a3dc88ea.1784559209.git.oleksii.kurochko@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -135,76 +135,68 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <0F3A1121-208F-4F71-8C88-BEAE7CB50E75@zytor.com>
+In-Reply-To: <06c022159e9cf70bacd0c061b7460b99a3dc88ea.1784559209.git.oleksii.kurochko@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1784789981-F38BC2AC-E185D1F4/0/0
+X-purgate-ID: tlsNG-ebf023/1784812083-51CD7B50-ACEA01AA/0/0
 X-purgate-type: clean
-X-purgate-size: 2580
+X-purgate-size: 1991
 
-On 22.07.2026 20:45, H. Peter Anvin wrote:
-> On July 22, 2026 10:03:34 AM PDT, Borislav Petkov <bp@alien8.de> wrote:
->> hpa in To:.
->>
->> On Tue, Jul 21, 2026 at 12:56:43PM -0300, Mauricio Faria de Oliveira wrote:
->>> Add the volatile qualifier and clobbers parameter to prevent bugs with
->>> instruction reordering and optimization.
->>>
->>> Also check the zero-length case, as the 'repe' prefix does not run the
->>> 'cmpsb' instruction if the 'count' register is zero, which doesn't set
->>
->> Please use capital letters for insns: REPE, CMPSB and you don't need to put
->> words in '' - it reads fine without them.
->>
->>> the condition-code/zero flag, so the result is based on a stale flag.
->>>
->>> Those are pre-existing issues found by Sashiko.
->>>
->>> Link: https://sashiko.dev/#/patchset/20260701-pvh-kasan-inline-v6-0-ba99045dfa9f%40igalia.com
->>> Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
->>> ---
->>>  arch/x86/include/asm/shared/string.h | 8 ++++++--
->>>  1 file changed, 6 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/arch/x86/include/asm/shared/string.h b/arch/x86/include/asm/shared/string.h
->>> index 02b92927553f7b8e1c87e6122bbaa70439e57ea7..166274e44f3cb49e3dccab3cdac281d67aef5d44 100644
->>> --- a/arch/x86/include/asm/shared/string.h
->>> +++ b/arch/x86/include/asm/shared/string.h
->>> @@ -11,8 +11,12 @@ static __always_inline int __inline_memcmp(const void *s1, const void *s2, size_
->>>  {
->>>  	bool diff;
->>>  
->>> -	asm("repe cmpsb"
->>> -	    : "=@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len));
->>> +	if (len == 0)
->>> +		return 0;
->>> +
->>> +	asm volatile("repe cmpsb"
->>> +		     : "=@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len)
->>> +		     : : "cc", "memory");
->>>  
->>>  	return diff;
->>>  }
->>
->> So this is a fix which should probably go to stable, I think. Going back into
->> git history, it points to
->>
->>  62bd0337d0c4 ("Top header file for new x86 setup code")
->>
->>from 2007. And we have carried it this way through the years and who knows
->> what hit this or not. So please make this the first patch in your set - you
->> can even send it separately so that I can get route it through stable.
->>
->> Then you can base the rest ontop.
->>
->> Thx.
->>
-> 
-> Also, this is silly. Instead of adding a whole separate test, just do "test %3,%3" before the repe to set ZF and let the REPE skip.
+On 20.07.2026 17:59, Oleksii Kurochko wrote:
+> --- a/xen/arch/riscv/aplic-priv.h
+> +++ b/xen/arch/riscv/aplic-priv.h
+> @@ -34,4 +34,18 @@ struct aplic_priv {
+>      const struct imsic_config *imsic_cfg;
+>  };
+>  
+> +/*
+> + * Value is inspired by what QEMU is using for riscv,num-sources property for
+> + * APLIC node.
+> + */
+> +#define GUEST_APLIC_MAX_SOURCES 96U
+> +
+> +/*
+> + * Specifies the number of wired interrupt sources supported by guest APLIC
+> + * domain.
+> + * Could be limited by host interrupt controller and is identical for every
+> + * domain.
+> + */
+> +extern unsigned int guest_aplic_num_sources;
 
-Besides this, isn't the function effectively returning bool wrong anyway? This
-way you can use it for equal / not-equal comparisons, but not for sorting and
-alike.
+It being only IMSIC which is supported right now together with APLIC, what
+exactly does the word "wired" mean to express in the comment? MSI, as their
+name says, aren't "wired interrupts" but messages on the system bus.
+
+You may also want to add "for now" to the latter sentence.
+
+> @@ -29,6 +37,74 @@ static void cf_check vaplic_deinit(struct vcpu *v)
+>      return vcpu_imsic_deinit(v);
+>  }
+>  
+> +static int __init cf_check vaplic_make_domu_dt_node(struct kernel_info *kinfo)
+> +{
+> +    struct domain *d = kinfo->bd.d;
+> +    int res;
+> +    void *fdt = kinfo->fdt;
+> +    unsigned int msi_parent_phandle;
+> +    char vaplic_name[32];
+> +    unsigned int aplic_size = APLIC_SIZE(d->max_vcpus);
+> +    const __be32 reg[] = {
+> +        cpu_to_be32(GUEST_APLIC_S_BASE >> 32),
+> +        cpu_to_be32(GUEST_APLIC_S_BASE),
+> +        cpu_to_be32(0),
+> +        cpu_to_be32(aplic_size),
+> +    };
+> +
+> +    BUILD_BUG_ON(APLIC_SIZE(MAX_VIRT_CPUS) > UINT_MAX);
+> +
+> +    res = snprintf(vaplic_name, sizeof(vaplic_name), "/soc/aplic@%lx",
+
+Well, what should I say? I really expected you to have gone through all of your
+pending patches. replacing sizeof() by ARRAY_SIZE() in cases like this one.
+
+With this adjusted and with the question above sorted one way or the other:
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
 Jan
 
