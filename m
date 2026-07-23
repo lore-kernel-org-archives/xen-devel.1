@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80031C531D1
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 15:46:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1369344.1618156 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CE77C531F7
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 15:59:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1369356.1618165 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmvcr-00085v-5G; Thu, 23 Jul 2026 15:46:21 +0000
+	id 1wmvpN-0001VE-60; Thu, 23 Jul 2026 15:59:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1369344.1618156; Thu, 23 Jul 2026 15:46:21 +0000
+Received: by outflank-mailman (output) from mailman id 1369356.1618165; Thu, 23 Jul 2026 15:59:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmvcr-00085o-2B; Thu, 23 Jul 2026 15:46:21 +0000
-Received: by outflank-mailman (input) for mailman id 1369344;
- Thu, 23 Jul 2026 15:46:20 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wmvpN-0001V7-3O; Thu, 23 Jul 2026 15:59:17 +0000
+Received: by outflank-mailman (input) for mailman id 1369356;
+ Thu, 23 Jul 2026 15:59:16 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wmvcq-00085i-NS
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 15:46:20 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wmvpM-0001V1-6t
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 15:59:16 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wmvcp-00Bc75-Sn
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 17:46:19 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wmvpL-00GIlZ-K7
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 17:59:15 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a623740-bab6-0a2a0a5309dd-0a2a4504d7e8-36
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 17:46:19 +0200
-Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a623a51-5cb7-0a2a0a5109dd-0a2a45089eda-4
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 17:59:15 +0200
+Received: from [209.85.221.44] (helo=mail-wr1-f44.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a62374b-b57f-0a2a45040019-d1558033d083-3
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 17:46:19 +0200
-Received: by mail-wm1-f51.google.com with SMTP id
- 5b1f17b1804b1-495757ccbc1so6461655e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 08:46:19 -0700 (PDT)
+ id 6a623a53-f659-0a2a45080019-d155dd2ca950-3
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 17:59:15 +0200
+Received: by mail-wr1-f44.google.com with SMTP id
+ ffacd0b85a97d-4720f3bf164so441984f8f.1
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 08:59:15 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4956b021fa6sm114823435e9.2.2026.07.23.08.46.17
+ ffacd0b85a97d-47f85c6d277sm17006857f8f.32.2026.07.23.08.59.14
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Jul 2026 08:46:17 -0700 (PDT)
+ Thu, 23 Jul 2026 08:59:14 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,53 +55,54 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784821579; x=1785426379; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1784822355; x=1785427155; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=EIeSokgDTNwxjhnrGX/Nzsxwu/8Yf05TaPejsmfWFgo=;
-        b=W55uOdqrJ4NZURzFC9tR4qIQtgYSsxHUB5BBDyDy9QiHU/pOdBP4jnapkQY15UB7bS
-         siVS6mMPUabTkoTne5kK2Hykbo9rfm0+eV1Cje56ck2fAljbHpmtZJdEwraq2O+GijDa
-         2Nnxxxj7ae1uD7a2taCjO8QzwX20kfasjJyfC9Z0z27IXTJNlOLmwIcgUPB03va47A2g
-         I+8UJG5hVzjOD5NFAtucgsi8xLkhx2Xw6AM46Ai4SulktJst8anQhEPQgNZKCJmsBajz
-         WC3L1vRSkXnecpUJSNAj3D0z8jnKYi5MpgARPLgTG+vioUMQNkfhpnSCcgNAf7Qrc68p
-         WN6A==
+        bh=evsyqrqieCD0C8dQZlE01KrvCm/bGqDTqEzmszC6Rgg=;
+        b=gFrXsemYJTEOJHT1mCHf/bBwWRWqxY9AhqEE1435jM41zAjW9oZuVehGkqr0fcbU8+
+         SLtEDXh4biUsm5WSWtRCnUOIhRES+43enbexTWSCcRkZieIhTFSe773XVCtyDmGo6lQZ
+         Oi2WzeJtpK5bx5GfjcTznxawIILG8Yl3xepaHPlWgOM0ePttJ4RcN4ydE2CZEUlpk4Sj
+         RCrBlYbJkMc7kIqbH8DlVBk/AvKLS8kIx+Af5L8xkWlrU5SR7N4gRLceDyp8ae/XrsP8
+         Ve7ldvdoMv5US5TQwtsTolLIAZwaTUSfD/w2pESDHN55uyjD1ruwcRw3HI5NGB3fjOGT
+         1TLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784821579; x=1785426379;
+        d=1e100.net; s=20251104; t=1784822355; x=1785427155;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=EIeSokgDTNwxjhnrGX/Nzsxwu/8Yf05TaPejsmfWFgo=;
-        b=dJey6N2yjxvdZ332i8xdQErY2FGBIMayNp8IpgrqGrZ4ajCKUHzNSKN8TUUKQSTcwz
-         bs4q/wa7NUj/cTrApaHeWcjhxB9milwLMj15PHxC53a0SVpxcLGVm0Yl5YnyejaHVFfe
-         dXWokUH89w2ii/QpwapZWOdaSC3x//pkYOp54GKUQ2F4Sis1iFXYaH009fHTDIxjCyLr
-         RcXI/r9GYgYJyDJUeivkfXdgW7JJA2aEa/JH5rVdO14LCs5o1D8nM6XUS0Tu1pyAdebb
-         XVXb6tqBFjfXeUpTVHD89PlD6u8iN3tRaFg0YsvasafMJEyuiDG/6mB4shJ7xvOdSa/l
-         A5CQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rpn5k/2+u2OnNV604cPCHzziiLHqZL2WUU4jd3/gSFtlZ1zzArQJIfS0va8p2dUBi0XeFtWSyfElqw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yya1AC6zpRShvHXfVFIhd20qVRzgGMjYk0Qcf6CgfNVQj60Crs2
-	gN9MtbsjasVXF7vuZLIFZ7+drFeEgeH8hDqDUfAOKroOZ2YX+RhGF4KhLy83mZRXRw==
-X-Gm-Gg: AR+sD13bXRo9h0oygxQ0+tnt0DSEB2LW2ksyJYV0v8jtOQ4RG/JP+gAD2er8OGcX+b8
-	2H/Pl30IAbQkYkPzK7V5/ShzHZBUSGQDQ5WOCZpfquo0l8UDOcTvIf8m0Pnx7zKSQXkonjUOLkZ
-	9hyTsHa6Vno6vqPir0NKL2+Tjy37xd6HTLUGMsqfE3WGOG4+8u5hzciVz3emAI8vJm4jmgsebmz
-	hX11yQGNNlM4DH1BNpb9XsSVGM40ufPeXroLO/reNMQrQhdB8NMYeKeijHOBS97M4OCFTlLbpnq
-	7/V/HIWkcnmMTgnNfqzg/QO6l4meXaobBM4nsUkm+gDk2rP4MsVJuYF7HmDiaDFtjaebk0DVufV
-	3DIYcakmsY3QYtD+aNhH6iIEJHDchvCRsAHh1VTRMw2Cwib1hWxZr1IUg3ZOdpBxh1LcuI5unjf
-	Zg6M579dzUceEn0B2sgHAvsBO9xNVbb5Fs96rkgLauuJuSesPgjyRNZgZolk3IGFlQRg==
-X-Received: by 2002:a05:600c:3b1d:b0:495:7ab0:445b with SMTP id 5b1f17b1804b1-4957ab0447cmr4130015e9.27.1784821579171;
-        Thu, 23 Jul 2026 08:46:19 -0700 (PDT)
-Message-ID: <691cd080-b41b-4921-8524-9ce97137801b@suse.com>
-Date: Thu, 23 Jul 2026 17:46:16 +0200
+        bh=evsyqrqieCD0C8dQZlE01KrvCm/bGqDTqEzmszC6Rgg=;
+        b=FHDBfddA449dmrRsP80uyLVz9ayLOz40buCtpo8SrUepK2CmkH4JHj8lkslmkL3ZPG
+         L8xmLuMyiSq7fntDL8s9SLCz+g8fXbwBJ7L+4EtT/Ozj0Oy8/3YcSUa5ZPx96uNVUqzu
+         M8CLjne+F/qkYzgfxa1hX4c46i0MAGWugVrL8WuZDECOdkftRmEGWTjWFAHsAHjxHsQp
+         Bq6d3dhRBEVWuYkDq/nX+JCP59eSgBgAKQBKx/YzEsZnBM0tDtoBxeSACrOpPoGo2aF4
+         KI7wZiPTwczJIP5U6Tk24bh0TeuDFy1W9ZIwVAun1GQBv+0HWuiSkhzouWd8arzhrrK4
+         Zy0A==
+X-Forwarded-Encrypted: i=1; AHgh+Roh2B38VxkdBjM37DcULwnUum4kMN7Fese9De/tc5YSFEzAS1oBoAh66gWhegevh3q7atSK+uYVwbI=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw/aiZefmuDRNAS8dDCQuIVmVMZAgncmZCahNAbHPutHjUm2Bzs
+	A9ASIFuehxWbAF/mYE6+swdE9JN/A2l4SJmiI+E2oybJ0MwxBUumQCqgqLa11IP5hw==
+X-Gm-Gg: AR+sD10p244yJibnqs2LAvMd8i8OtSb9qpqLfWAPyFuj04V9Fs8gfAK1JmnSrN2bMJi
+	u0G/73Qc8I8ds9gEYCTugtPRWW7Xj6n0K0y3Jg2Z7SyCzJ2ODXWxFj9lq8hHz6gxxMi3EEN0F+N
+	/WcnpxtLazunGqKmXw8UnqcK7RqiovQCcpyinqL6zYFks2dYMcXZhDrySnrywlwOrz78WuPlrY5
+	/zjA82fDoqvmhFixC08tuBxmJpUHKKfSENqzzHuBDrsH27ycZNoKmeDTOrBFGJk5MxeGCAFnXrO
+	LpI8VUDy0bT/A89lEv6V1YObh8NKlt7+/zDWjWP5s/mHKsYVjjaTMft7MNwW6dp1C1u+UbzwdEa
+	fdpSg8p+3IGRE5Qf3BrOGtdQmYpmQ7dt9QsYcYp3A20ItpYDHtDZXns5A8qT1x+89p5dUgSV0bR
+	OAv2+30RJKbcl8apNtVxUKcP0oScZMBic3DpSIaOAgVBAAfZvlGjR3BnmnzdXvYvbDmQ==
+X-Received: by 2002:a05:6000:385:b0:47f:853c:ad7b with SMTP id ffacd0b85a97d-47f901ce2e3mr3929075f8f.9.1784822354923;
+        Thu, 23 Jul 2026 08:59:14 -0700 (PDT)
+Message-ID: <7f8ad0ec-d93e-4664-ab9a-c2b9199f3d2a@suse.com>
+Date: Thu, 23 Jul 2026 17:59:13 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 3/9] vpci: only check BAR validity once
+Subject: Re: [PATCH v5 4/9] vpci/msix: move MSI-X hole punching as a result of
+ memory decoding enable
 To: Stewart Hildebrand <stewart.hildebrand@amd.com>
 Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+ xen-devel@lists.xenproject.org
 References: <20260708210233.922275-1-stewart.hildebrand@amd.com>
- <20260708210233.922275-4-stewart.hildebrand@amd.com>
+ <20260708210233.922275-5-stewart.hildebrand@amd.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -127,39 +128,73 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260708210233.922275-4-stewart.hildebrand@amd.com>
+In-Reply-To: <20260708210233.922275-5-stewart.hildebrand@amd.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1784821579-C1AD0B50-5B437FFE/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c1860d/1784822355-CD94A87B-98097305/0/0
 X-purgate-type: clean
-X-purgate-size: 1176
+X-purgate-size: 2640
 
 On 08.07.2026 23:02, Stewart Hildebrand wrote:
 > From: Roger Pau Monne <roger.pau@citrix.com>
 > 
-> The BAR validity checks in modify_decoding() are redundant since they
-> are already done in modify_bars().
+> Deferring the p2m unpopulate of the MSI-X table region to after the BARs are
+> mapped in the p2m is not needed.  The aim of vpci_make_msix_hole() is to
+> cope with the BAR containing the MSI-X table being positioned over a
+> reserved e820 region, by making sure the MSI-X table region is
+> unpopulated on the p2m. Note that reserved e820 regions are identity mapped
+> in the hardware domain p2m by default.
 > 
-> Avoid multiple calls to pci_check_bar() for the same memory decoding
-> related operation, as each call can possibly print a warning message
-> about a BAR being in an invalid position.
+> Doing it before or after the BAR p2m changes are done is irrelevant, hence
+> do it ahead of the p2m changes, as that's simpler.
 > 
-> Further, there's no need to defer setting bar->enabled until p2m
-> operations are finished. It can safely be set in modify_bars() itself.
-> This slightly changes the meaning of the bar->enabled flag: when true,
-> it means a BAR is either mapped or queued to be mapped.
+> Note that vpci_make_msix_hole() should be invoked strictly after setting
+> bar->enabled. The movement of vpci_make_msix_hole() is OK since
+> bar->enabled is set in modify_bars().
+> 
+> Take the opportunity to store the memory decoding enabled bit in a local
+> variable.
+> 
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
+> ---
+> Note that this should not be committed until after the bar->enabled
+> setting movement in ("xen/vpci: only check BAR validity once")
+> 
+> I tested this with hot-plug as described in 7c24d58a6e64 ("vpci/msix:
+> check for BARs enabled in vpci_make_msix_hole").
+> 
+> The return at the end of the function will gain a purpose again after a
+> later code movement patch in the series.
+> 
+> The new_enabled variable will gain 2 additional uses later in the series.
+> 
+> v1->v5:
+> * order after ("xen/vpci: only check BAR validity once")
+> * preserve behavior of only invoking vpci_make_msix_hole() when memory
+>   decoding toggles from 0 to 1
+> * add note about vpci_make_msix_hole() invocation after setting bar->enabled
+> * use local variable
+> * Jan offered an R-b tag in [1], though I hesitated to pick it up due to
+>   changes, and it was offered prior to 7c24d58a6e64 going upstream
+> [1] https://lore.kernel.org/xen-devel/e2c4944d-d089-490c-879d-b6baec5e4cae@suse.com/
 
-But are all consumers of the flag okay with this semantic change? What
-would clear the flag if the mapping failed? It looks to me as if e.g.
-msix_find()'s behavior would change then.
+If there wasn't ...
 
-> @@ -296,6 +287,7 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
->      struct pci_dev *tmp;
->      const struct domain *d;
->      const struct vpci_msix *msix = pdev->vpci->msix;
-> +    bool bar_valid[ARRAY_SIZE(header->bars)] = { false };
+> @@ -556,6 +544,12 @@ static void cf_check cmd_write(
+>          modify_bars(pdev, cmd, false);
+>      else
+>          pci_conf_write16(pdev->sbdf, reg, cmd);
+> +
+> +#ifdef CONFIG_HAS_PCI_MSI
+> +    /* Unpopulate MSI-X table region, so accesses trap into Xen. */
+> +    if ( !header->bars_mapped && new_enabled && vpci_make_msix_hole(pdev) )
+> +        return;
+> +#endif
 
-Just {} ?
+... the new first part of the conditional, I'd re-offer R-b right away. With
+that check added, aren't we at risk of leaving the range mapped when it
+shouldn't be?
 
 Jan
 
