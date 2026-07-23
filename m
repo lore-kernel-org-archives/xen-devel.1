@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FCA7C531D0
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 23:14:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1369674.1618255 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BB75C531FA
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 23:14:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1369678.1618264 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wn2cO-00088Q-Tm; Thu, 23 Jul 2026 23:14:20 +0000
+	id 1wn2cU-0008UA-69; Thu, 23 Jul 2026 23:14:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1369674.1618255; Thu, 23 Jul 2026 23:14:20 +0000
+Received: by outflank-mailman (output) from mailman id 1369678.1618264; Thu, 23 Jul 2026 23:14:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wn2cO-00088H-QH; Thu, 23 Jul 2026 23:14:20 +0000
-Received: by outflank-mailman (input) for mailman id 1369674;
- Thu, 23 Jul 2026 23:14:19 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wn2cU-0008U3-26; Thu, 23 Jul 2026 23:14:26 +0000
+Received: by outflank-mailman (input) for mailman id 1369678;
+ Thu, 23 Jul 2026 23:14:24 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mfo@igalia.com>) id 1wn2cN-000865-BW
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 23:14:19 +0000
+ (envelope-from <mfo@igalia.com>) id 1wn2cS-0008Qm-Nl
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 23:14:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wn2cM-00A9m0-Od
- for xen-devel@lists.xenproject.org; Fri, 24 Jul 2026 01:14:18 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wn2cS-002RKf-4b
+ for xen-devel@lists.xenproject.org; Fri, 24 Jul 2026 01:14:24 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <mfo@igalia.com>)
- id 6a629fc2-e002-0a2a0a5209dd-0a2a4502ebd2-42
- for <xen-devel@lists.xenproject.org>; Fri, 24 Jul 2026 01:14:18 +0200
+ id 6a62a04f-bab6-0a2a0a5309dd-0a2a450cde10-0
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Jul 2026 01:14:23 +0200
 Received: from [213.97.179.56] (helo=fanzine2.igalia.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <mfo@igalia.com>)
- id 6a62a049-6ca4-0a2a45020019-d561b338e4ac-3
- for <xen-devel@lists.xenproject.org>; Fri, 24 Jul 2026 01:14:18 +0200
+ id 6a62a04e-f479-0a2a450c0019-d561b338ed68-3
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Jul 2026 01:14:23 +0200
 Received: from 186-249-149-197.shared.desktop.com.br ([186.249.149.197]
  helo=[127.0.1.1]) by fanzine2.igalia.com with esmtpsa 
  (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1wn2cK-003dsJ-D3; Fri, 24 Jul 2026 01:14:16 +0200
+ id 1wn2cP-003dsJ-Jn; Fri, 24 Jul 2026 01:14:21 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,20 +53,20 @@ Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20170329 hea
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
 	s=20170329; h=Cc:To:Message-Id:Content-Transfer-Encoding:Content-Type:
 	MIME-Version:Subject:Date:From:From:Reply-To;
-	bh=H2GAc7mtrFpKl87p+adcJZhrkVbc1evwDywNzt1ulrU=; b=Ur7Yt83nqIk/wpx4DPoDQVuRHt
-	YHYl3AzgDiwl86MiN+W7vEu1yvRIOwnFrEU+ugLCqkQ7j882mWh5ZxtXD4O3G/pDWEIuWXFk63NqA
-	KZ9ggpizpV+1Ejg2taK9IFeWWpyxjkmCemu+mArn1f/uj7sTif1XYyQrJMCGU2eu030bFnfiRKo33
-	C5mQFqkWmMQ1xUJIQ31uOn00VgKp/6pTrRZgTh8JLqunabmQ1v+mA2mKAnSjDlTuVYmsCEfCXhG1g
-	KavB3Eg5daAVTkG3we0F6mWOjUn/ECTmH51MXfDZtBnecP5cgKyWNfRmHAwWUwASkZiiGx6Rc9cc8
-	JyxilkEg==;
+	bh=zBAAE6UPiVcuOT4Hdx5zYoG+Uei+rPkEJSxQ4+nbtAc=; b=R/gjQH2VSgkl4pACIKZMge3cYq
+	mEx2tgfcbgdYNPGm9D38BSk4JWIG350FyRZnrJ91Nq159jjVPzrr1xs+sq6JH2ShauIebrVQxZP36
+	/MYI/+PJf26/q+EoxLTiK9i45/spWyDtNoWXurvB/GR/hhSeDa/E6VmDZKq6qiIZouVE59xVJimjh
+	7hUhbvPPVIHB09zhVgv1TmM+7R0x+q7HIkcsj5KkPE9EK1iKOx2hE1J1flI3vNqpufm5F9iKRFh/Y
+	BHK8Vu1JA9EtzvVAx20riQAcho0e8+ppozUg/YXzlBOwMIuFxBBUn9kPS9/IxMiEX4MardB9mTFjI
+	mRKV173A==;
 From: Mauricio Faria de Oliveira <mfo@igalia.com>
-Date: Thu, 23 Jul 2026 20:13:53 -0300
-Subject: [PATCH v8 3/4] x86/cpuid: fix unbootable VMs by really inlining
- memcmp() in hypervisor_cpuid_base()
+Date: Thu, 23 Jul 2026 20:13:54 -0300
+Subject: [PATCH v8 4/4] x86/pvh: fix unbootable VMs by really inlining
+ memset() in xen_prepare_pvh()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260723-pvh-kasan-inline-v8-3-c1f62c156f52@igalia.com>
+Message-Id: <20260723-pvh-kasan-inline-v8-4-c1f62c156f52@igalia.com>
 References: <20260723-pvh-kasan-inline-v8-0-c1f62c156f52@igalia.com>
 In-Reply-To: <20260723-pvh-kasan-inline-v8-0-c1f62c156f52@igalia.com>
 To: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
@@ -78,41 +78,46 @@ To: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
 Cc: kernel-dev@igalia.com, linux-kernel@vger.kernel.org, 
  xen-devel@lists.xenproject.org, Mauricio Faria de Oliveira <mfo@igalia.com>
 X-Mailer: b4 0.14.2
-X-purgate-ID: tlsNG-720697/1784848458-F0AA52AC-CC2B6E7F/0/0
+X-purgate-ID: tlsNG-d25034/1784848463-00ACCA5B-16A44BEB/0/0
 X-purgate-type: clean
-X-purgate-size: 1458
+X-purgate-size: 1416
 
 Even with __builtin the compiler may decide to use the out of line function
 instead of the inline implementation.
 
-The existing code is broken with gcc-14/15 but not gcc-12/13 (Ubuntu 25.10)
-and vmlinux no longer boots with CONFIG_PVH if CONFIG_KASAN_GENERIC is set.
-
-For testing purposes, if the size argument is reduced from 12 to 8 then the
-compiler decides to use the inline implementation; that shows results vary.
+This particular one (still) generated the inline implementation as expected
+(at least in these compiler versions) but this is not guaranteed to remain.
 
 Switch the builtin to the inline implementation to address it.
 
-Fixes: 416a33c9afce ("x86/cpu: fix unbootable VMs by inlining memcmp() in hypervisor_cpuid_base()")
+Fixes: fbe5a6dfe492 ("xen, pvh: fix unbootable VMs by inlining memset() in xen_prepare_pvh()")
 Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
 Reviewed-by: Juergen Gross <jgross@suse.com>
 ---
- arch/x86/include/asm/cpuid/api.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/x86/platform/pvh/enlighten.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/arch/x86/include/asm/cpuid/api.h b/arch/x86/include/asm/cpuid/api.h
-index 82eddfa2347b32b76c2ea9b85f005ca5416ac71f..2d9f3d4d63de6e721f275d9e80d372edbdfedf30 100644
---- a/arch/x86/include/asm/cpuid/api.h
-+++ b/arch/x86/include/asm/cpuid/api.h
-@@ -204,7 +204,7 @@ static inline u32 cpuid_base_hypervisor(const char *sig, u32 leaves)
- 		 * from PVH early boot code before instrumentation is set up
- 		 * and memcmp() itself may be instrumented.
- 		 */
--		if (!__builtin_memcmp(sig, signature, 12) &&
-+		if (!__inline_memcmp(sig, signature, 12) &&
- 		    (leaves == 0 || ((eax - base) >= leaves)))
- 			return base;
- 	}
+diff --git a/arch/x86/platform/pvh/enlighten.c b/arch/x86/platform/pvh/enlighten.c
+index f2053cbe9b0ce3d2178938269607c652ae8f528e..cb442cbd9d828619421babb281bfe9759edbca8a 100644
+--- a/arch/x86/platform/pvh/enlighten.c
++++ b/arch/x86/platform/pvh/enlighten.c
+@@ -8,6 +8,7 @@
+ #include <asm/hypervisor.h>
+ #include <asm/e820/api.h>
+ #include <asm/x86_init.h>
++#include <asm/string.h>
+ 
+ #include <asm/xen/interface.h>
+ 
+@@ -129,7 +130,7 @@ void __init xen_prepare_pvh(void)
+ 	 * This must not compile to "call memset" because memset() may be
+ 	 * instrumented.
+ 	 */
+-	__builtin_memset(&pvh_bootparams, 0, sizeof(pvh_bootparams));
++	__inline_memset(&pvh_bootparams, 0, sizeof(pvh_bootparams));
+ 
+ 	hypervisor_specific_init(xen_guest);
+ 
 
 -- 
 2.47.3
