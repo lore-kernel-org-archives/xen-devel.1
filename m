@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1CE3C531FA
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 23:21:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1369720.1618281 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33D6CC531FA
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 23:27:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1369730.1618291 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wn2im-0003LN-Vf; Thu, 23 Jul 2026 23:20:56 +0000
+	id 1wn2oh-0003wV-Mv; Thu, 23 Jul 2026 23:27:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1369720.1618281; Thu, 23 Jul 2026 23:20:56 +0000
+Received: by outflank-mailman (output) from mailman id 1369730.1618291; Thu, 23 Jul 2026 23:27:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wn2im-0003LG-Si; Thu, 23 Jul 2026 23:20:56 +0000
-Received: by outflank-mailman (input) for mailman id 1369720;
- Thu, 23 Jul 2026 23:20:55 +0000
+	id 1wn2oh-0003wO-KC; Thu, 23 Jul 2026 23:27:03 +0000
+Received: by outflank-mailman (input) for mailman id 1369730;
+ Thu, 23 Jul 2026 23:27:02 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mfo@igalia.com>) id 1wn2il-0003L6-Hf
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 23:20:55 +0000
+ (envelope-from <mfo@igalia.com>) id 1wn2og-0003wI-FC
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 23:27:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wn2ik-0038G9-Qu
- for xen-devel@lists.xenproject.org; Fri, 24 Jul 2026 01:20:54 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wn2of-0038pO-Dj
+ for xen-devel@lists.xenproject.org; Fri, 24 Jul 2026 01:27:01 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <mfo@igalia.com>)
- id 6a62a15d-e002-0a2a0a5209dd-0a2a450b933a-40
- for <xen-devel@lists.xenproject.org>; Fri, 24 Jul 2026 01:20:54 +0200
+ id 6a62a2e0-5cb7-0a2a0a5109dd-0a2a4502b998-26
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Jul 2026 01:27:01 +0200
 Received: from [213.97.179.56] (helo=fanzine2.igalia.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <mfo@igalia.com>)
- id 6a62a1d6-b7e8-0a2a450b0019-d561b338a07c-3
- for <xen-devel@lists.xenproject.org>; Fri, 24 Jul 2026 01:20:54 +0200
+ id 6a62a344-6ca4-0a2a45020019-d561b338a7e8-3
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Jul 2026 01:27:01 +0200
 Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
  by fanzine2.igalia.com with esmtps 
  (Cipher TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1wn2iT-003e1x-CQ; Fri, 24 Jul 2026 01:20:37 +0200
+ id 1wn2oM-003e8A-1v; Fri, 24 Jul 2026 01:26:42 +0200
 Received: from webmail.service.igalia.com ([192.168.21.45])
  by mail.igalia.com with esmtp (Exim)
- id 1wn2iQ-001vgG-TF; Fri, 24 Jul 2026 01:20:37 +0200
+ id 1wn2oJ-001vz2-GQ; Fri, 24 Jul 2026 01:26:41 +0200
 Received: from localhost ([127.0.0.1] helo=webmail.igalia.com)
  by webmail.service.igalia.com with esmtp (Exim 4.98.2)
- (envelope-from <mfo@igalia.com>) id 1wn2iQ-000000031qI-2r1S;
- Fri, 24 Jul 2026 01:20:34 +0200
+ (envelope-from <mfo@igalia.com>) id 1wn2oJ-000000031ty-1Ci6;
+ Fri, 24 Jul 2026 01:26:39 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,14 +60,14 @@ Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20170329 hea
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
 	s=20170329; h=Content-Transfer-Encoding:Content-Type:Message-ID:Subject:Cc:To
 	:From:Date:MIME-Version:From:Reply-To;
-	bh=DS/VCUC/4IbrLXtLc7lyjjd6XVFRv5g2nDbRWVShaGk=; b=c6zWkTi72rgX7bdnOSCCyIl7Sg
-	MuapfGPST4KEJJTjmVDwKfci5Lubitq2W7jBsAXcONJidDySs/YsF29RWZHkv1PKBPYnQ1T3qLPDz
-	vn6/jB3gWw5Ybsl3M4IS+/wTY3b5+GV2po7fvladXMLRhIhKVCSL1/ke+dhI/smx5gsi8oqaIY0ZX
-	DM3djyFfAM5NURGH49eu5uMUDJymz9pYilvqjAW+4H/jpwN1eRLnydzrW5EVWcSeDPzlDF0Xize22
-	Ow/zJDKjy0ZEpWYBqNV85T+RbatDggswEtD+kqXh6X07rNr3P4AyboB62AaPRb7e0YEm7CLeZTc4H
-	z4+j0a4Q==;
+	bh=fLZIWX2wSccqFNik9bhUsUlx9S80wKp6f12wJ1NBHj8=; b=cr/zucLaHLMdD0S1h4riL0nIts
+	y9InaI9oC8hrKeP2gFjWw0b0i9wSmasJfpAB4xnXGfLPgtnp5mLkvrJ3rIGzB2bR+iTQivVTKjl5j
+	jvXq/qnpoZrCAX6GfXffP9sL7/Ne5nvBUBxKsupykJC3Zm4pU6BzgBpn4teszoaokNz7yWfvy11lb
+	D057F9tzX/JozgyY1E3QxOw4GiJ6GMlbAsuCsIPlICBumzEEzYMCLY8eS3pSYRJbLv6CaqSkifuq/
+	Ir88SDy8SpbFTp0XZs5uqeFvFWHJqSy4mZ0YELdNC8Vlv/LinUBe/R5GPrebmCarOR81IfKhuHNGu
+	aONrK+Yg==;
 MIME-Version: 1.0
-Date: Thu, 23 Jul 2026 20:20:34 -0300
+Date: Thu, 23 Jul 2026 20:26:39 -0300
 From: Mauricio Faria de Oliveira <mfo@igalia.com>
 To: "H. Peter Anvin" <hpa@zytor.com>
 Cc: Borislav Petkov <bp@alien8.de>, Thomas Gleixner <tglx@kernel.org>, Ingo
@@ -78,20 +78,20 @@ Cc: Borislav Petkov <bp@alien8.de>, Thomas Gleixner <tglx@kernel.org>, Ingo
  xen-devel@lists.xenproject.org
 Subject: Re: [PATCH v7 2/5] x86/asm: add volatile, clobbers and zero-length
  check in inline memcmp
-In-Reply-To: <0F3A1121-208F-4F71-8C88-BEAE7CB50E75@zytor.com>
+In-Reply-To: <829A5D01-29A2-454E-AE78-AEAD8FC597E6@zytor.com>
 References: <20260721-pvh-kasan-inline-v7-0-38979a50cef0@igalia.com>
  <20260721-pvh-kasan-inline-v7-2-38979a50cef0@igalia.com>
  <20260722170334.GCamD35gwrCng30WH1@fat_crate.local>
- <0F3A1121-208F-4F71-8C88-BEAE7CB50E75@zytor.com>
-Message-ID: <1251d04d8da8e2ecaba28eaaeab4a13a@igalia.com>
+ <829A5D01-29A2-454E-AE78-AEAD8FC597E6@zytor.com>
+Message-ID: <182aa568ea05a0f1297d307a169eb687@igalia.com>
 X-Sender: mfo@igalia.com
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1784848854-182F49EA-1B8E9F53/0/0
+X-purgate-ID: tlsNG-720697/1784849221-66CB22AC-13660725/0/0
 X-purgate-type: clean
-X-purgate-size: 2449
+X-purgate-size: 2532
 
-On 2026-07-22 15:45, H. Peter Anvin wrote:
+On 2026-07-22 15:48, H. Peter Anvin wrote:
 > On July 22, 2026 10:03:34 AM PDT, Borislav Petkov <bp@alien8.de> wrote:
 >>hpa in To:.
 >>
@@ -149,9 +149,12 @@ On 2026-07-22 15:45, H. Peter Anvin wrote:
 >>Thx.
 >>
 > 
-> Also, this is silly. Instead of adding a whole separate test, just do "test %3,%3" before the repe to set ZF and let the REPE skip.
+> I suspect that the zero-length case simply can't happen in the real code, but who knows; the use of the code has expanded over the years.
 
-This is elegant; done. Thanks!
+Agreed, and its use may expand more in the future, being in a header
+(e.g., this very series :)
+
+Thanks,
 
 -- 
 Mauricio
