@@ -4,48 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0081EC531D0
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 22:00:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1369629.1618201 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B28C6C531D0
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 23:14:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1369656.1618215 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wn1SQ-00059G-UN; Thu, 23 Jul 2026 21:59:58 +0000
+	id 1wn2bn-0006ZQ-06; Thu, 23 Jul 2026 23:13:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1369629.1618201; Thu, 23 Jul 2026 21:59:58 +0000
+Received: by outflank-mailman (output) from mailman id 1369656.1618215; Thu, 23 Jul 2026 23:13:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wn1SQ-000599-Qw; Thu, 23 Jul 2026 21:59:58 +0000
-Received: by outflank-mailman (input) for mailman id 1369629;
- Thu, 23 Jul 2026 21:59:57 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wn2bm-0006Yt-SU; Thu, 23 Jul 2026 23:13:42 +0000
+Received: by outflank-mailman (input) for mailman id 1369656;
+ Thu, 23 Jul 2026 23:13:41 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <bp@alien8.de>) id 1wn1SO-000593-RX
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 21:59:57 +0000
+ (envelope-from <hpa@zytor.com>) id 1wn2bl-0006WX-Md
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 23:13:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wn1SO-0030l2-5N
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 23:59:56 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wn2bk-00A8PH-VH
+ for xen-devel@lists.xenproject.org; Fri, 24 Jul 2026 01:13:41 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <bp@alien8.de>)
- id 6a628ecc-e002-0a2a0a5209dd-0a2a4508c8e8-12
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 23:59:55 +0200
-Received: from [65.109.113.108] (helo=mail.alien8.de)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <bp@alien8.de>)
- id 6a628edb-f659-0a2a45080019-416d716ceb22-3
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 23:59:55 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
- by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id DB7A540E014C; 
- Thu, 23 Jul 2026 21:59:54 +0000 (UTC)
-Received: from mail.alien8.de ([127.0.0.1])
- by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id WsJnCXk2IarN; Thu, 23 Jul 2026 21:59:45 +0000 (UTC)
-Received: from stx.tnic (unknown [IPv6:2600:1700:38ca:c00::1b])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest
- SHA256) (No client certificate requested)
- by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id A4E7340E00E6;
- Thu, 23 Jul 2026 21:59:31 +0000 (UTC)
+ (envelope-from <hpa@zytor.com>)
+ id 6a629fcf-5cb7-0a2a0a5109dd-0a2a450cce32-28
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Jul 2026 01:13:40 +0200
+Received: from [198.137.202.136] (helo=mail.zytor.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <hpa@zytor.com>)
+ id 6a62a01e-f479-0a2a450c0019-c689ca88a876-3
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Jul 2026 01:13:35 +0200
+Received: from [IPV6:2601:646:8081:7da1:14d6:374d:d1f7:d29c]
+ ([IPv6:2601:646:8081:7da1:14d6:374d:d1f7:d29c])
+ (authenticated bits=0)
+ by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 66NNCwoN3915882
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
+ Thu, 23 Jul 2026 16:12:59 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,80 +51,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=alien8 header.d=alien8.de header.i="@alien8.de" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
-X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
-Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
-	header.d=alien8.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
-	t=1784843984; bh=7Jhx3OuJbEDdsSSsXaqPPUx169LpZd6Yo6COE6d5ndA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Ax5QKjlE54yydhF+Sfo8H0cW6DIhOqKh71pUTskSTe6OgR0lyRpB/PQahU8BX0MSv
-	 ynUhDTvRXKsdcardX/S6szI2T6dCMWVb49nzlUKY8t1nsoAnr85p+gO8nwtDfOlbqh
-	 0TxhT4Lt1lliwbJ9RMcZdSh8+76DHSkyhM9i4YAC079uyYKY7w8up0ln88waElX3Ws
-	 I1Adh4B0BdIDPzKxRakm7nNJQy/eG7dGxIKIA7BmRdpBcPn3Q5mAqHn8Dz5cIgvGpg
-	 /n298iTumHy64OjY0ZJ5tdT3aYIXY28s5+fKOQ9djx9z7zlphgiTZSwTdzy9BPscnp
-	 qNaUAluc2L9/P9eXvNn7qiFA/RBkqMar/yId54tn8kyJ25wl8gaMiqk7qz3douKQ9m
-	 dNmCgsjkeVJWKEGC5DTNgpwFgtyaxB0LiMr4EaimA6CkR7YBBL7uqvoKcNXoAVg1qu
-	 iG0ayGHepCIe8ArU8B8cY3/5wJI5u07gzRn0gthpBi2GQO+RFTozz1zHhUj82jV31m
-	 mFwEJFcuXTg9ZtA3OPY5mQ1J5LrmsGqbTYGAtESOvSJeaZKHnouLrEjSygbRDqBH4c
-	 qCefy9K+FgVC3S++daKtf+uiVnCNioB32mZUz34TYWb7PODayMYRkqa3PlR2NfWl5M
-	 LEjKQ2InfHfeb4zyj6Fw6i0g=
-Date: Thu, 23 Jul 2026 14:59:28 -0700
-From: Borislav Petkov <bp@alien8.de>
-To: Mauricio Faria de Oliveira <mfo@igalia.com>
-Cc: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>, Juergen Gross <jgross@suse.com>,
-	Alexey Dobriyan <adobriyan@gmail.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>, kernel-dev@igalia.com,
-	linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v7 3/5] x86/asm: group inline string functions
-Message-ID: <20260723215928.GBamKOwB3PIaHrQFbs@fat_crate.local>
-References: <20260721-pvh-kasan-inline-v7-0-38979a50cef0@igalia.com>
- <20260721-pvh-kasan-inline-v7-3-38979a50cef0@igalia.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=2026062701 header.d=zytor.com header.i="@zytor.com" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 66NNCwoN3915882
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
+	s=2026062701; t=1784848380;
+	bh=8PXTFQp+nc5iVg72qAvrsYZWp0ruRgVFKDvX1SpODZA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=Mgr/tfdGvfkXlD4MS+SPjW7hHK1yidys1xkpttHHbJUlxPm7b7xMyRLFnyMHxmYMW
+	 51nrlM9UpGo2LnwQRysOl0IrVAmFvcHWLFQD1xBDpzz9MSWBuly8fp4gLvKn8VK1X3
+	 lJ1KVRbhR5wK+OumlEjGzaXI8U9ReflDqRcaQmUBnyWwdD2GYy0yUrzMKc14YFgHPu
+	 D2YjJg9pBDCu7f3skgUYAltAJjuKtM1iHwKMOlLiXTuuL6knxnwaY8PA9IRkNg2tao
+	 jGrUiQ7Aiilb1VAFHI/ENrEu91vR36HX89vTrFuhDCwSNDkgTIfPk09woC6yEwOH24
+	 bACxElX0CQXvA==
+Message-ID: <5e19b195-0ca2-4510-81cb-497b40e4aaf5@zytor.com>
+Date: Thu, 23 Jul 2026 16:12:53 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260721-pvh-kasan-inline-v7-3-38979a50cef0@igalia.com>
-X-purgate-ID: tlsNG-c1860d/1784843995-D4B7187B-AE6622F4/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 2/5] x86/asm: add volatile, clobbers and zero-length
+ check in inline memcmp
+To: Jan Beulich <jbeulich@suse.com>,
+        Mauricio Faria de Oliveira <mfo@igalia.com>
+Cc: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+        Juergen Gross <jgross@suse.com>, Alexey Dobriyan <adobriyan@gmail.com>,
+        Boris Ostrovsky <boris.ostrovsky@oracle.com>, kernel-dev@igalia.com,
+        linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org,
+        Borislav Petkov <bp@alien8.de>
+References: <20260721-pvh-kasan-inline-v7-0-38979a50cef0@igalia.com>
+ <20260721-pvh-kasan-inline-v7-2-38979a50cef0@igalia.com>
+ <20260722170334.GCamD35gwrCng30WH1@fat_crate.local>
+ <0F3A1121-208F-4F71-8C88-BEAE7CB50E75@zytor.com>
+ <4daed8ac-b533-436f-9f86-6d297b87abbb@suse.com>
+Content-Language: en-US, sv-SE
+From: "H. Peter Anvin" <hpa@zytor.com>
+In-Reply-To: <4daed8ac-b533-436f-9f86-6d297b87abbb@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d25034/1784848420-004CFA5B-22FB9C21/0/0
 X-purgate-type: clean
-X-purgate-size: 1384
+X-purgate-size: 1495
 
-On Tue, Jul 21, 2026 at 12:56:44PM -0300, Mauricio Faria de Oliveira wrote:
-> Group the __inline string functions in the same header.
+On 2026-07-22 23:59, Jan Beulich wrote:
+>>
+>> Also, this is silly. Instead of adding a whole separate test, just do "test %3,%3" before the repe to set ZF and let the REPE skip.
 > 
-> Use <asm/shared/string.h> since __inline_memcmp() must remain there for use
-> by arch/x86/boot/string.c.
-
-"No functional changes."
-
-> Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
-> ---
->  arch/x86/include/asm/shared/string.h | 26 ++++++++++++++++++++++++++
->  arch/x86/include/asm/string.h        | 21 +--------------------
->  2 files changed, 27 insertions(+), 20 deletions(-)
+> Besides this, isn't the function effectively returning bool wrong anyway? This
+> way you can use it for equal / not-equal comparisons, but not for sorting and
+> alike.
 > 
-> diff --git a/arch/x86/include/asm/shared/string.h b/arch/x86/include/asm/shared/string.h
-> index 166274e44f3cb49e3dccab3cdac281d67aef5d44..9714fbda8b734e20686bfb88a6ca857bfee59e1a 100644
-> --- a/arch/x86/include/asm/shared/string.h
-> +++ b/arch/x86/include/asm/shared/string.h
-> @@ -2,6 +2,32 @@
->  #ifndef _ASM_X86_SHARED_STRING_H
->  #define _ASM_X86_SHARED_STRING_H
->  
-> +/*
-> + * The __inline string functions are grouped in this file for consistency and
-> + * for use by arch/x86/boot code due to limitations on including asm/string.h.
+There is no use case in the early code for sorting, and it seems rather broken
+to burden the code with that.
 
-What limitations?
+That being said it probably should return bool explicitly (it makes no sense
+for the prototype to be different than the internal variable.)
 
-Either explain them or don't bother adding a comment. asm/shared/ is generally
-an understood concept if you grep the tree and you don't really need a comment
-here.
+We could call it memneq() if someone really, really cares, I guess.
 
--- 
-Regards/Gruss,
-    Boris.
+The early code is very size-sensitive, so I'm really not fond of the idea of
+burdening it further. Perhaps something like:
 
-https://people.kernel.org/tglx/notes-about-netiquette
+A memory clobber is ugly here since no memory is actually modified, although
+it probably doesn't affect code; "cc" is completely redundant with condition
+code output operand.
+
+static __always_inline bool
+__inline_memcmp(const void *s1, const void *s2, size_t len)
+{
+	bool diff;
+
+	if (__builtin_constant_p(len == 0)) {
+		if (!len)
+			return false;
+		asm volatile("repe cmpsb"
+				: "=@ccnz" (diff),
+				  "+D" (s1), "+S" (s2), "+c" (len)
+				: : "memory");
+	} else {
+		/* Clear ZF beforehand in case len == 0 */
+		asm volatile("test %3,%3; repe cmpsb"
+				: "=@ccnz" (diff),
+				  "+D" (s1), "+S" (s2), "+c" (len)
+				: : "memory");
+	}
+	return diff;
+}
+
 
