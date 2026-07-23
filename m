@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77773C531F7
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 15:06:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1369303.1618146 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80031C531D1
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 15:46:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1369344.1618156 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmv0A-0002Te-4g; Thu, 23 Jul 2026 15:06:22 +0000
+	id 1wmvcr-00085v-5G; Thu, 23 Jul 2026 15:46:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1369303.1618146; Thu, 23 Jul 2026 15:06:22 +0000
+Received: by outflank-mailman (output) from mailman id 1369344.1618156; Thu, 23 Jul 2026 15:46:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmv0A-0002TX-1z; Thu, 23 Jul 2026 15:06:22 +0000
-Received: by outflank-mailman (input) for mailman id 1369303;
- Thu, 23 Jul 2026 15:06:20 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wmvcr-00085o-2B; Thu, 23 Jul 2026 15:46:21 +0000
+Received: by outflank-mailman (input) for mailman id 1369344;
+ Thu, 23 Jul 2026 15:46:20 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wmv08-0002TP-2r
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 15:06:20 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wmvcq-00085i-NS
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 15:46:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wmv07-007viq-4Y
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 17:06:19 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wmvcp-00Bc75-Sn
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 17:46:19 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a622dc5-bab6-0a2a0a5309dd-0a2a45039cec-44
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 17:06:19 +0200
-Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a623740-bab6-0a2a0a5309dd-0a2a4504d7e8-36
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 17:46:19 +0200
+Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a622dea-fae8-0a2a45030019-d155dd34d490-3
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 17:06:18 +0200
-Received: by mail-wr1-f52.google.com with SMTP id
- ffacd0b85a97d-47f93b2fe4cso299361f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 08:06:18 -0700 (PDT)
+ id 6a62374b-b57f-0a2a45040019-d1558033d083-3
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 17:46:19 +0200
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-495757ccbc1so6461655e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 08:46:19 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f85c63678sm14919860f8f.29.2026.07.23.08.06.17
+ 5b1f17b1804b1-4956b021fa6sm114823435e9.2.2026.07.23.08.46.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Jul 2026 08:06:17 -0700 (PDT)
+ Thu, 23 Jul 2026 08:46:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,58 +55,53 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784819178; x=1785423978; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1784821579; x=1785426379; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=R4P8vmSdxeRWT1lULMVK7NIjbqCuYx/eXCTVexcFIV0=;
-        b=T/v73WdUqLKzlvjO2mxDNvomD0JzHJOVfe0KNbJNS+ULtT4ovI5aIn8oyMedaRF3Qa
-         mhgzS+4vYcytAveN5khWpEt2nqTBAMe/lRfpn78mGMdlSj69VPVfWh3WO2lwpv3x3LcF
-         fOMLs8X2DboWpQwrppICVPVpHGCej6Aef0PS2AJZMoDajmArSmLyLfOUyCxH2x6TjPqk
-         ayiG5vOavMexL39M+v3O1rQckVbhwlKuwz2LmMePvyh5QCABHeywRXVMrgr+jpjov/1q
-         rUY+mu8ZePCSVitxVPolt5zH0c+uIlMVu2vDNzVCTgsGwUEgBHO5SVxAaUiGpRd/HXEh
-         qRCQ==
+        bh=EIeSokgDTNwxjhnrGX/Nzsxwu/8Yf05TaPejsmfWFgo=;
+        b=W55uOdqrJ4NZURzFC9tR4qIQtgYSsxHUB5BBDyDy9QiHU/pOdBP4jnapkQY15UB7bS
+         siVS6mMPUabTkoTne5kK2Hykbo9rfm0+eV1Cje56ck2fAljbHpmtZJdEwraq2O+GijDa
+         2Nnxxxj7ae1uD7a2taCjO8QzwX20kfasjJyfC9Z0z27IXTJNlOLmwIcgUPB03va47A2g
+         I+8UJG5hVzjOD5NFAtucgsi8xLkhx2Xw6AM46Ai4SulktJst8anQhEPQgNZKCJmsBajz
+         WC3L1vRSkXnecpUJSNAj3D0z8jnKYi5MpgARPLgTG+vioUMQNkfhpnSCcgNAf7Qrc68p
+         WN6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784819178; x=1785423978;
+        d=1e100.net; s=20251104; t=1784821579; x=1785426379;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=R4P8vmSdxeRWT1lULMVK7NIjbqCuYx/eXCTVexcFIV0=;
-        b=raaY69FlyMYQI4wJ6tNfK1xTckeX7kr00gD3YLKH8rTQnR++Y2pkqp8TVrH40M8irh
-         1C6BR8ZjmkinoKzu6KFvQg+MKZiR2ByYoNJtgQrTipGIMVUpRm5MObkzncKakEDiXF4f
-         sLH8OHKjSaR9iQTsAZUXomQbxNBR2Tjp85DzqvRW/mtgpomNe0fsgXMgjFQuRN21M97K
-         qRoF06RipnhpuhlEcWc6lSN8a9aMzkBu1KhhpJfuZTJUbPH3+dCX0zRNZ9I+/yJf/xYo
-         3n8lb4o/EFqs3gApKA+RH7BXv1C+RKn+GXfUf7pdXD8BH1ZF9p/Ob4OHPa8trvtGBDP3
-         eyHg==
-X-Forwarded-Encrypted: i=1; AHgh+RrR5kOLn8hIvS4WOwAxmVkThOBmG5mSy1K41Ckv1CybYYwVKvh7GKa0qpUycA0sywJCWymRjvq7w5g=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwgprsbM/Myy0eAENqSxMn2Q0qKqHMxt74CwUYiCab7kPzYYzyr
-	pWIVQdIm1xlWLmJmR/buhJKX9wg/1xat00SwvHq7AONDIgQmIHELyA5Jl4afPv+Ws1vr/ZyGo7s
-	umhP86Q==
-X-Gm-Gg: AR+sD13Cn9qmwoGJhDSE7MsyI8IWB38bLNLRh6NFkCmBZvYRpUgoztHi0SbEPeWA21G
-	+gr2geI7sOMjzBqJ+q3oB9O3F15QJxaiQUvAg2nNE/u2gkJ3ClILI31BkPqOZub6FUIRxkOcjZK
-	oR+iJEzMHoiEbRKyEeRMTO9qUMzVQNGxAFegcbuQCeHPK4nfRx21RXDMwqicTc4n5/WsuIMGhkW
-	IQ+KfrWF/849d4XpHGHwvLrG5ya8B1SCLwQvKwDJASBLia9EMPWUa/dRRoJ/Q6/eBXwGw6+bzVB
-	I+hmqydcKr8jEvxu1iPKQ/H+XAlNu8X1R4+k6Aby4meq+F8bmSwAtfxCuID9yiVPzyjtzk7mqYx
-	WGE/KuKRIjFpvZ01eNb9Pfdhv7q52wB0aYAXSkOYgNo/y4OrHwVpFaz3X4A/v5JRPg0p8cOPwS4
-	DVJj7LXx1iCBT4J34XjmvaMr35lsHxd1U02YS6Mll4eOQcDz62bdPJRf/lnzs6+effFjHvFMYmh
-	Zg9
-X-Received: by 2002:a05:6000:4a1b:b0:472:7dce:d8c7 with SMTP id ffacd0b85a97d-47f8dc9739fmr4481193f8f.36.1784819178267;
-        Thu, 23 Jul 2026 08:06:18 -0700 (PDT)
-Message-ID: <21e786bb-7ea6-47eb-97de-5b6b25466a83@suse.com>
-Date: Thu, 23 Jul 2026 17:06:16 +0200
+        bh=EIeSokgDTNwxjhnrGX/Nzsxwu/8Yf05TaPejsmfWFgo=;
+        b=dJey6N2yjxvdZ332i8xdQErY2FGBIMayNp8IpgrqGrZ4ajCKUHzNSKN8TUUKQSTcwz
+         bs4q/wa7NUj/cTrApaHeWcjhxB9milwLMj15PHxC53a0SVpxcLGVm0Yl5YnyejaHVFfe
+         dXWokUH89w2ii/QpwapZWOdaSC3x//pkYOp54GKUQ2F4Sis1iFXYaH009fHTDIxjCyLr
+         RcXI/r9GYgYJyDJUeivkfXdgW7JJA2aEa/JH5rVdO14LCs5o1D8nM6XUS0Tu1pyAdebb
+         XVXb6tqBFjfXeUpTVHD89PlD6u8iN3tRaFg0YsvasafMJEyuiDG/6mB4shJ7xvOdSa/l
+         A5CQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rpn5k/2+u2OnNV604cPCHzziiLHqZL2WUU4jd3/gSFtlZ1zzArQJIfS0va8p2dUBi0XeFtWSyfElqw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yya1AC6zpRShvHXfVFIhd20qVRzgGMjYk0Qcf6CgfNVQj60Crs2
+	gN9MtbsjasVXF7vuZLIFZ7+drFeEgeH8hDqDUfAOKroOZ2YX+RhGF4KhLy83mZRXRw==
+X-Gm-Gg: AR+sD13bXRo9h0oygxQ0+tnt0DSEB2LW2ksyJYV0v8jtOQ4RG/JP+gAD2er8OGcX+b8
+	2H/Pl30IAbQkYkPzK7V5/ShzHZBUSGQDQ5WOCZpfquo0l8UDOcTvIf8m0Pnx7zKSQXkonjUOLkZ
+	9hyTsHa6Vno6vqPir0NKL2+Tjy37xd6HTLUGMsqfE3WGOG4+8u5hzciVz3emAI8vJm4jmgsebmz
+	hX11yQGNNlM4DH1BNpb9XsSVGM40ufPeXroLO/reNMQrQhdB8NMYeKeijHOBS97M4OCFTlLbpnq
+	7/V/HIWkcnmMTgnNfqzg/QO6l4meXaobBM4nsUkm+gDk2rP4MsVJuYF7HmDiaDFtjaebk0DVufV
+	3DIYcakmsY3QYtD+aNhH6iIEJHDchvCRsAHh1VTRMw2Cwib1hWxZr1IUg3ZOdpBxh1LcuI5unjf
+	Zg6M579dzUceEn0B2sgHAvsBO9xNVbb5Fs96rkgLauuJuSesPgjyRNZgZolk3IGFlQRg==
+X-Received: by 2002:a05:600c:3b1d:b0:495:7ab0:445b with SMTP id 5b1f17b1804b1-4957ab0447cmr4130015e9.27.1784821579171;
+        Thu, 23 Jul 2026 08:46:19 -0700 (PDT)
+Message-ID: <691cd080-b41b-4921-8524-9ce97137801b@suse.com>
+Date: Thu, 23 Jul 2026 17:46:16 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 1/9] vpci: move BAR mapping permissions checks
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Cc: Stewart Hildebrand <stewart.hildebrand@amd.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v5 3/9] vpci: only check BAR validity once
+To: Stewart Hildebrand <stewart.hildebrand@amd.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
 References: <20260708210233.922275-1-stewart.hildebrand@amd.com>
- <20260708210233.922275-2-stewart.hildebrand@amd.com>
- <0255d2bf-748e-444b-8c09-f69925ec88c4@suse.com>
- <amIrwLuIdOBaAi9d@macbook.local>
+ <20260708210233.922275-4-stewart.hildebrand@amd.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -132,77 +127,39 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <amIrwLuIdOBaAi9d@macbook.local>
+In-Reply-To: <20260708210233.922275-4-stewart.hildebrand@amd.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1784819179-776F34E9-5F49C462/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ebf023/1784821579-C1AD0B50-5B437FFE/0/0
 X-purgate-type: clean
-X-purgate-size: 2689
+X-purgate-size: 1176
 
-On 23.07.2026 16:57, Roger Pau Monné wrote:
-> On Thu, Jul 23, 2026 at 04:44:26PM +0200, Jan Beulich wrote:
->> On 08.07.2026 23:02, Stewart Hildebrand wrote:
->>> --- a/xen/drivers/vpci/header.c
->>> +++ b/xen/drivers/vpci/header.c
->>> @@ -58,24 +58,6 @@ static int cf_check map_range(
->>>           * offset of the current address from the BAR start.
->>>           */
->>>          unsigned long map_mfn = start_mfn + s - start_gfn;
->>> -        unsigned long m_end = map_mfn + size - 1;
->>> -
->>> -        if ( !iomem_access_permitted(map->d, map_mfn, m_end) )
->>> -        {
->>> -            printk(XENLOG_G_WARNING
->>> -                   "%pd denied access to MMIO range [%#lx, %#lx]\n",
->>> -                   map->d, map_mfn, m_end);
->>> -            return -EPERM;
->>> -        }
->>> -
->>> -        rc = xsm_iomem_mapping_vpci(XSM_HOOK, map->d, map_mfn, m_end, map->map);
->>> -        if ( rc )
->>> -        {
->>> -            printk(XENLOG_G_WARNING
->>> -                   "%pd XSM denied access to MMIO range [%#lx, %#lx]: %d\n",
->>> -                   map->d, map_mfn, m_end, rc);
->>
->> I realize you literally only take what's here, but ...
->>
->>> @@ -369,6 +351,28 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
->>>              return -EINVAL;
->>>          }
->>>  
->>> +        if ( !iomem_access_permitted(pdev->domain, start, end) )
->>> +        {
->>> +            printk(XENLOG_G_WARNING
->>> +                   "%pd denied access to MMIO range [%#lx, %#lx]\n",
->>> +                   pdev->domain, start, end);
->>> +            if ( !is_hardware_domain(pdev->domain) )
->>> +                domain_crash(pdev->domain);
->>> +            return -EPERM;
->>> +        }
->>> +
->>> +        rc = xsm_iomem_mapping_vpci(XSM_HOOK, pdev->domain, start, end,
->>> +                                    !!(cmd & PCI_COMMAND_MEMORY));
->>> +        if ( rc )
->>> +        {
->>> +            printk(XENLOG_G_WARNING
->>> +                   "%pd XSM denied access to MMIO range [%#lx, %#lx]: %d\n",
->>> +                   pdev->domain, start, end, rc);
->>
->> ... is the logging of rc actually useful? Afaict it's only ever going to be
->> -EPERM.
+On 08.07.2026 23:02, Stewart Hildebrand wrote:
+> From: Roger Pau Monne <roger.pau@citrix.com>
 > 
-> I think Flask can also return -EACCES, not that it's very relevant I'm
-> afraid.
+> The BAR validity checks in modify_decoding() are redundant since they
+> are already done in modify_bars().
+> 
+> Avoid multiple calls to pci_check_bar() for the same memory decoding
+> related operation, as each call can possibly print a warning message
+> about a BAR being in an invalid position.
+> 
+> Further, there's no need to defer setting bar->enabled until p2m
+> operations are finished. It can safely be set in modify_bars() itself.
+> This slightly changes the meaning of the bar->enabled flag: when true,
+> it means a BAR is either mapped or queued to be mapped.
 
-Hmm, looks like this can indeed happen. Please disregard this comment of
-mine then.
+But are all consumers of the flag okay with this semantic change? What
+would clear the flag if the mapping failed? It looks to me as if e.g.
+msix_find()'s behavior would change then.
 
->  It's likely too late now, but those XSM checks should instead
-> return a bool to avoid this kind of confusion with the returned
-> error? (or whether diverse return codes are indeed expected).
+> @@ -296,6 +287,7 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
+>      struct pci_dev *tmp;
+>      const struct domain *d;
+>      const struct vpci_msix *msix = pdev->vpci->msix;
+> +    bool bar_valid[ARRAY_SIZE(header->bars)] = { false };
 
-Depends on whether having distinct error codes is wanted. Daniel?
+Just {} ?
 
 Jan
 
