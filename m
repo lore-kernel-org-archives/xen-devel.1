@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E70AC531D2
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 14:26:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1369240.1618101 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AA2AC531F7
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 14:36:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1369255.1618110 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmuNk-0003L0-CW; Thu, 23 Jul 2026 14:26:40 +0000
+	id 1wmuXF-00055G-9w; Thu, 23 Jul 2026 14:36:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1369240.1618101; Thu, 23 Jul 2026 14:26:40 +0000
+Received: by outflank-mailman (output) from mailman id 1369255.1618110; Thu, 23 Jul 2026 14:36:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wmuNk-0003Kt-9s; Thu, 23 Jul 2026 14:26:40 +0000
-Received: by outflank-mailman (input) for mailman id 1369240;
- Thu, 23 Jul 2026 14:26:38 +0000
+	id 1wmuXF-000559-7F; Thu, 23 Jul 2026 14:36:29 +0000
+Received: by outflank-mailman (input) for mailman id 1369255;
+ Thu, 23 Jul 2026 14:36:28 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1wmuNi-0003Kn-GE
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 14:26:38 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wmuXD-000551-SG
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 14:36:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wmuNh-00BPus-T1
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 16:26:37 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wmuXD-0049y0-8r
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 16:36:27 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jgross@suse.com>)
- id 6a62248c-bab6-0a2a0a5309dd-0a2a4507cc2a-34
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 16:26:37 +0200
-Received: from [209.85.208.45] (helo=mail-ed1-f45.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jgross@suse.com>)
- id 6a62249d-b4ea-0a2a45070019-d155d02de07b-3
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 16:26:37 +0200
-Received: by mail-ed1-f45.google.com with SMTP id
- 4fb4d7f45d1cf-69e2266b07fso1114296a12.2
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 07:26:37 -0700 (PDT)
-Received: from ?IPV6:2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112?
- (2a00-12d0-af5d-ad01-5d3f-14e6-9bcb-5112.ip.tng.de.
- [2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-69f34b9b064sm2446949a12.11.2026.07.23.07.26.36
+ (envelope-from <jbeulich@suse.com>)
+ id 6a6226df-2eae-0a2a0a5409dd-0a2a450a8906-40
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 16:36:27 +0200
+Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a6226eb-f2d2-0a2a450a0019-d155dd2ed4cb-3
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 16:36:27 +0200
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-47f93b2fe4cso266593f8f.0
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jul 2026 07:36:27 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-495653c9d99sm228385865e9.12.2026.07.23.07.36.25
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Jul 2026 07:26:36 -0700 (PDT)
+ Thu, 23 Jul 2026 07:36:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,116 +53,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1784816797; x=1785421597; darn=lists.xenproject.org;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=ausYtxs6Q005CBaRLXZGH/2iTE72Pvk8xqArtCg/jdE=;
-        b=chr+U+SPFnuUandajSdInMAdDw6RG9SXEX5RA8mBoTiSvVswuo9YgEix/w6Gda0PxR
-         piE7O0g/P/gynaUv2z85pv/VIFu252ZMqeK0TICSNjZZlENVsiMETIRjKj5e9GHb3NZI
-         J6cLD6T2AjliXpKsm/+nv7C6A2EJdn/3rMaKXUveTHyy02LWyDtNKcIndsfvsxKb6NC9
-         gu3y9myUlBzbQLZWO7HN0irSacBANFxnd8LzlVByTbFI1V3E87Aq4cworlxvwzL3As/H
-         ThclR8iyrVe90M1aEMpc7eylYSd6D4RbnFx9djx5fqeyWRv8Ob3AIwx7zLz4CIIzyq0x
-         wIJw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784816797; x=1785421597;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=suse.com; s=google; t=1784817387; x=1785422187; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ausYtxs6Q005CBaRLXZGH/2iTE72Pvk8xqArtCg/jdE=;
-        b=XfESE9zOth2YFHC+aXIEHjCB7LNBDUi4k4Ajt1H0Sf/6S6GD450Bqh3/z3OPpx4Dfe
-         gfabQcKNV/hjeJQc/WA70lTEyvpbSlqAeEpLz6lpdpl8TzsplWGSMNDv1kdXDCu6tyI4
-         4iFbMll91T136FVkChMJzeNymEIYlWSpWP7fKnMxxebX3PWyxd8Mq56JO7xUVM+BsHp/
-         kJCRxSiNncmfBxEs9GD6eH29kd977W91sx+6Yacc22tnEZjMnE7xuMP6sqSJQlUHIgqV
-         zMvONTG5HLXcxBCYPjOaEOCZfAwBjS2b8fwDbwjSsqMbRdUMdf3shyQTfLC9SVyH0kT7
-         YgFQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rqk6valIPAuFlXT8kdWwHCb7r8dKKHKZ6PxkXJ7poRlJwzsapx+L5lGPqyakrZ9TV1AlZmN1lfwIRg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yz+vQHlUABTgmw9SAzWoxiW1xqhZpTqBc1r5nglaFyGjBMBs3ep
-	SGyHSSUJIepn04AQiueopmGlJafN7J73JxAeUjQgWzldxkLq9zAbte/8N/XLpHZBgvo=
-X-Gm-Gg: AR+sD12axKdJxmt8G0M/Jq2n52ZSpOCzs8kAtj3CUxZfZq5xjRJdO8UdOFy/dkBHz7n
-	N+1qNs7h10NExKOL6tAv5c42DgKG7lFRT5J4xg2evLcmXyLOpxmwghMr9A/uId/Ml3GK0VLaAY+
-	4G9ObfJbKPEoKMhvNz16BFoM7qS2i9OJgwp3Ows34q6cGTyeKTerMm+BqKCzwyINqZR/5Tq5MMD
-	NP+vMKnxgNxYL4komKc/dUnx870XRmlbxeQ0jvja2WeoQK96UvS5DOxa41rX1I1j2PCMJ8wF0pZ
-	hrmXPLaFG/gQBxEklccLVX94O8FQoONjgnVOcx/FZyC2rfl/azvwGxdDJ+dYLPILzMXx7WWLALO
-	dVmlxyzdquGFHQpiFhfdmRqQXUghI6a8jJy0eTEEgfBTTqkhiuHiS91OYlNoAzYkxMkV5hVSpXs
-	gGC0NQHLXz5zaKZxDH39YbevYJZ4SrTX7F/0v2ytIa8xAl7mipnqcPu03p4fTVbiY68QVGeKF+2
-	aNlMSl0Pt4NSNANMhzlyIvztskATp6HaE8+L2ucPtQ=
-X-Received: by 2002:a05:6402:5191:b0:69c:3ea3:6d39 with SMTP id 4fb4d7f45d1cf-69f6c5e50c3mr1486153a12.35.1784816797188;
-        Thu, 23 Jul 2026 07:26:37 -0700 (PDT)
-Message-ID: <e21f3059-66c6-4fab-a04f-a33bd27c5c32@suse.com>
-Date: Thu, 23 Jul 2026 16:26:36 +0200
+        bh=nER6+fszNpRb0dqePPmSfFaJqau7v8SSgi5J5pliadE=;
+        b=WwEeXd+tM0bDdMLC2aIgMMfs5eOagfw9rKLbhFJH4UHHadTb/op40V1uKVKGcmAg3l
+         QRJUe6qfGYYTrOc5VF5McFhZnOzyfTh8h+67PVQ36NGtts0/mFU+feaqo4BeKlpiy1gq
+         zTLDNQ7vXylDBzzt8OBu7mz+siX0eCbDwDGJc+3aZn7rbxCjABVt5MSHWCan7k5pXoEh
+         +E39UU1t3YwyrQWDxZLaPPaPVloTZMGkektgjjs3JPVXDevn34SNYOC7mAk58fQMMXbS
+         FhrRYJ7w8fqF9Eg4fLM/FtES/d2yo4RNVzKNiiTkHZahf1mHLku3CAQDNza0rJfbOHq3
+         irfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784817387; x=1785422187;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=nER6+fszNpRb0dqePPmSfFaJqau7v8SSgi5J5pliadE=;
+        b=EB+FkK1tRbeOik8sKmeFmC6vniP3mDuoG2pviTfSQ0Oq63IpX2y2S8YsqS0OqBxhSV
+         a91AIYdLT+O20WEQxDqDp0sPaZZPebovRLlqXiVI2Ikpvrxx6MDsMI3I5gj3ppsRr5x4
+         FbX8QPS3aAtP6TdJygpVYRArAJPN/4B4aj10UplrkL4mdMBktgMHQSEZrX5q8o4DW6jh
+         FyK5ATK66dWYH3FldChj/xY1iRCZj3sp3ncbFYuqLIAL5QObaJlHR8lSX9ebQD1/qMLY
+         X3yi5JbMjzsd019gcTw96vXZryqDNIIo8Z7qW3XjmrhFR0zPHNzVTA+krnrLgripbYsr
+         G2lw==
+X-Forwarded-Encrypted: i=1; AHgh+RoAo3Dd0sf6DcfYhjr3tVDbRKXb0dWrYIno5bSxqRuSNgrG98fZ4grG0xngBJ/vltMHxtrFY+4AI18=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxVoSuVYbouP4tcJhWWNbpVQyr3wJlPHpItKB76Tj03zeI18ORa
+	Ah8cVyT/Ke1AabWKZN/qn4yG1JC/vvaL7cV6pzCjQFJW8QHc0jBMKvxKi/ESNUQkDw==
+X-Gm-Gg: AR+sD11aEPjsouRztPHTPdXyGhFY7Pmd1r5punOMHq3PoMEYZbi+AiKSTvNXNHY6Awd
+	kxcolmldWkqmObEJ/1eBE0RBBoFATgkyKnrM3j6mKXjx84EPc0aGDM7P4972gXpiMpQyusV/wnG
+	XnRJIJmhWwS/4acgUWYQrDxo5USPUIMjbHwnaJMY9AHfBsb7Hav+bynzcoy0BW7bIFC5+ugZ3ki
+	xKZP8df7GZwg6CvCAfhhgELWLACLmNaI0BXPKVvYeOS8tdPtd8PtI5ds3a2V1lecQldGScGZiSE
+	dOrY6Z1TBgLS0mLSQzi/iLmH8sw7r4SzhOy7Xxu7KdsEbbqoF46fwkAa2iAChEka11HIf6g9jE9
+	6yh3j5LZuTZT/Ehh1VqE4Ygut5gJU+ZPw+PRJ1H2Hz/PrvZkH3PsTdUA6+A8sxzqHG+5W70ahQH
+	eYYdhXKEnFhXAEyp4EGrYPcM/cLWlpIbCrAZMUqp9QxEs77Omi4x10DkKOVCP4k/iQNA==
+X-Received: by 2002:a05:600c:c084:b0:493:fa66:4861 with SMTP id 5b1f17b1804b1-49573cfa044mr32124015e9.25.1784817386595;
+        Thu, 23 Jul 2026 07:36:26 -0700 (PDT)
+Message-ID: <60128094-5cf5-4fce-89ba-646e9790b27f@suse.com>
+Date: Thu, 23 Jul 2026 16:36:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 3/5] xen/sched: Make cpu_nr_siblings()
- architecture-specific
-To: Hirokazu Takahashi <taka@valinux.co.jp>, xen-devel@lists.xenproject.org
-Cc: Mykyta_Poturai@epam.com, Jan Beulich <jbeulich@suse.com>,
+Subject: Re: [PATCH v7 5/5] xen/acpi: Parse PPTT to initialize CPU topology
+To: Hirokazu Takahashi <taka@valinux.co.jp>
+Cc: Mykyta_Poturai@epam.com, Stefano Stabellini <sstabellini@kernel.org>,
+ Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>,
  Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Dario Faggioli <dfaggioli@suse.com>, George Dunlap <gwd@xenproject.org>
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ xen-devel@lists.xenproject.org
 References: <20260720162819.308326-1-taka@valinux.co.jp>
- <20260720162819.308326-4-taka@valinux.co.jp>
+ <20260720162819.308326-6-taka@valinux.co.jp>
 Content-Language: en-US
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Autocrypt: addr=jgross@suse.com; keydata=
- xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
- ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
- dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
- NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
- XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
- AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
- CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
- mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
- G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
- kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
- Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
- RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
- vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
- sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
- aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
- w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
- auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
- 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
- fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
- HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
- QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
- ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <20260720162819.308326-4-taka@valinux.co.jp>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------szKKitpJ3zD4nOxLyTKzR1gR"
-X-purgate-ID: tlsNG-ef75cf/1784816797-A6AD8AE4-94602A03/0/0
-X-purgate-type: clean
-X-purgate-size: 8493
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------szKKitpJ3zD4nOxLyTKzR1gR
-Content-Type: multipart/mixed; boundary="------------r5aDTY590nB4304RJggLzXXt";
- protected-headers="v1"
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-To: Hirokazu Takahashi <taka@valinux.co.jp>, xen-devel@lists.xenproject.org
-Cc: Mykyta_Poturai@epam.com, Jan Beulich <jbeulich@suse.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Dario Faggioli <dfaggioli@suse.com>, George Dunlap <gwd@xenproject.org>
-Message-ID: <e21f3059-66c6-4fab-a04f-a33bd27c5c32@suse.com>
-Subject: Re: [PATCH v7 3/5] xen/sched: Make cpu_nr_siblings()
- architecture-specific
-References: <20260720162819.308326-1-taka@valinux.co.jp>
- <20260720162819.308326-4-taka@valinux.co.jp>
-In-Reply-To: <20260720162819.308326-4-taka@valinux.co.jp>
-Autocrypt-Gossip: addr=jbeulich@suse.com; keydata=
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
  7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
@@ -173,122 +119,256 @@ Autocrypt-Gossip: addr=jbeulich@suse.com; keydata=
  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
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJ3BBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AAIQkQoDSui/t3IH4WIQQ+pJkfkcoLMCa4X6CgNK6L+3cgfgn7AJ9DmMd0SMJE
- ePbc7/m22D2v04iu7ACffXTdZQhNl557tJuDXZSBxDmW/tLOwU0EWTecRBAIAIK5OMKMU5R2
- Lk2bbjgX7vyQuCFFyKf9rC/4itNwhYWFSlKzVj3WJBDsoi2KvPm7AI+XB6NIkNAkshL5C0kd
- pcNd5Xo0jRR5/WE/bT7LyrJ0OJWS/qUit5eNNvsO+SxGAk28KRa1ieVLeZi9D03NL0+HIAtZ
- tecfqwgl3Y72UpLUyt+r7LQhcI/XR5IUUaD4C/chB4Vq2QkDKO7Q8+2HJOrFIjiVli4lU+Sf
- OBp64m//Y1xys++Z4ODoKh7tkh5DxiO3QBHG7bHK0CSQsJ6XUvPVYubAuy1XfSDzSeSBl//C
- v78Fclb+gi9GWidSTG/4hsEzd1fY5XwCZG/XJJY9M/sAAwUH/09Ar9W2U1Qm+DwZeP2ii3Ou
- 14Z9VlVVPhcEmR/AFykL9dw/OV2O/7cdi52+l00reUu6Nd4Dl8s4f5n8b1YFzmkVVIyhwjvU
- jxtPyUgDOt6DRa+RaDlXZZmxQyWcMv2anAgYWGVszeB8Myzsw8y7xhBEVV1S+1KloCzw4V8Z
- DSJrcsZlyMDoiTb7FyqxwQnM0f6qHxWbmOOnbzJmBqpNpFuDcz/4xNsymJylm6oXiucHQBAP
- Xb/cE1YNHpuaH4SRhIxwQilCYEznWowQphNAbJtEKOmcocY7EbSt8VjXTzmYENkIfkrHRyXQ
- dUm5AoL51XZljkCqNwrADGkTvkwsWSvCSQQYEQIACQUCWTecRAIbDAAKCRCgNK6L+3cgfuef
- AJ9wlZQNQUp0KwEf8Tl37RmcxCL4bQCcC5alCSMzUBJ5DBIcR4BY+CyQFAs=
+ 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
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260720162819.308326-6-taka@valinux.co.jp>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-4011c0/1784817387-53CD3CFC-1F8ABE19/0/0
+X-purgate-type: clean
+X-purgate-size: 7427
 
---------------r5aDTY590nB4304RJggLzXXt
-Content-Type: multipart/mixed; boundary="------------96I6fWAJVB8RES040nLlGyup"
+On 20.07.2026 18:28, Hirokazu Takahashi wrote:
+> --- a/xen/arch/arm/include/asm/acpi.h
+> +++ b/xen/arch/arm/include/asm/acpi.h
+> @@ -61,6 +61,8 @@ paddr_t acpi_get_table_offset(struct membank tbl_add[], EFI_MEM_RES index);
+>      (!(entry) || (unsigned long)(entry) + sizeof(*(entry)) > (end) ||	\
+>       (entry)->header.length != ACPI_MADT_GICC_LENGTH)
+>  
+> +#define INVALID_ACPIID		(-1U)
 
---------------96I6fWAJVB8RES040nLlGyup
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+This way the constant is becoming available only on Arm, but ...
 
-T24gMjAuMDcuMjYgMTg6MjgsIEhpcm9rYXp1IFRha2FoYXNoaSB3cm90ZToNCj4gTWFrZSBj
-cHVfbnJfc2libGluZ3MoKSBhbiBhcmNoaXRlY3R1cmUtc3BlY2lmaWMgZnVuY3Rpb24uDQo+
-IFRoaXMgcGF0Y2ggcHJvdmlkZXMgdGhlIGltcGxlbWVudGF0aW9uIGZvciB4ODYgYW5kIGEg
-Y29tbW9uDQo+IHZlcnNpb24gZm9yIERldmljZSBUcmVlLWJhc2VkIGFyY2hpdGVjdHVyZXMu
-DQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBIaXJva2F6dSBUYWthaGFzaGkgPHRha2FAdmFsaW51
-eC5jby5qcD4NCj4gQWNrZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4N
-Cg0KUmV2aWV3ZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4gIyBzY2hl
-ZHVsZXIgcGFydA0KDQoNCkp1ZXJnZW4NCg==
---------------96I6fWAJVB8RES040nLlGyup
-Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+> --- a/xen/drivers/acpi/topology.c
+> +++ b/xen/drivers/acpi/topology.c
+> @@ -4,33 +4,319 @@
+>  #include <xen/cpu-topology.h>
+>  #include <xen/cpumask.h>
+>  #include <xen/init.h>
+> +#include <xen/xvmalloc.h>
+> +
+> +#define ACPI_PPTT_MAX_LEVELS 16
+> +
+> +static uint32_t __initdata map_cpu_acpiid[NR_CPUS] = {
+> +    [0 ... NR_CPUS - 1] = INVALID_ACPIID
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+... you use it in code which (in principle) isn't Arm-specific (it only
+happens to be right now).
 
-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
-kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
-=3DeeAB
------END PGP PUBLIC KEY BLOCK-----
+> +};
+>  
+>  /*
+> - * TODO: Populate the topology information by scanning the ACPI
+> - *       PPTT (Processor Properties Topology Table).
+> + * The first argument 'cpu' is the logical CPU ID assigned by Xen,
+> + * and the second argument 'acpi_id' is passed the 'uid' field from
+> + * the ACPI MADT Generic Interrupt subtable.
 
---------------96I6fWAJVB8RES040nLlGyup--
+This comment also looks to be (in part) Arm-specific, which it shouldn't be
+here.
 
---------------r5aDTY590nB4304RJggLzXXt--
+>   */
+> -int __init acpi_init_cpu_topology(void)
+> +void __init acpi_map_cpu_acpiid(unsigned int cpu, uint32_t acpi_id)
+>  {
+> -    unsigned int cpu;
+> +    map_cpu_acpiid[cpu] = acpi_id;
+> +}
+> +
+> +static unsigned int __init get_logical_id(unsigned int key,
+> +                                          unsigned int *map,
+> +                                          unsigned int *count)
+> +{
+> +    unsigned int id;
+> +
+> +    for ( id = 0; id < *count; id++ )
+> +        if ( map[id] == key )
+> +            return id;
+> +
+> +    map[*count] = key;
+> +
+> +    return (*count)++;
+> +}
+> +
+> +static bool __init verify_subtable(const struct acpi_subtable_header *entry,
+> +                                   const struct acpi_table_pptt *pptt)
+> +{
+> +    unsigned long table_end = (unsigned long)pptt + pptt->header.length;
+> +
+> +    if ( entry->length < sizeof(*entry) || entry->length & 3 )
 
---------------szKKitpJ3zD4nOxLyTKzR1gR
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+Parentheses please around & or alike within || or alike.
 
------BEGIN PGP SIGNATURE-----
+> +    {
+> +        printk(XENLOG_ERR "ACPI: PPTT subtable length is invalid\n");
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmpiJJwFAwAAAAAACgkQsN6d1ii/Ey8N
-iQf8DbAZU9Yf5xd/aHcmRn6Mxl2RmVz+N3yVI+9HBYC/1j6cfWHel/ax2I48/0BmmBUbaVJfS/8r
-SPpKH8v2NrnkDqc2E3th/wz6Hjl3sgkgkmMmXCBT+CAVJ3WrGiCLGgIgqbXIXBfPHo4Zp6QHICOE
-qQgg6i/U6oOIwuPqd/M0NS34CW0wWB8NsFli2fK9ZWMBXUYo+KQtcgdcplkED/mNt7S/htxgPFJP
-5zBLDWZMluV7GVzBnUTpaXEfy7YDFTMjfd8cJs5ynLRs6QULF7j+Z1Talo7qM3MPaGGWbbmHZllp
-LPpSTahqomI/roCVUJyim1GM56OU8fAtVSQiNp5Jiw==
-=zSG6
------END PGP SIGNATURE-----
+Like you have it here, ...
 
---------------szKKitpJ3zD4nOxLyTKzR1gR--
+> +        return false;
+> +    }
+> +
+> +    if ( (unsigned long)entry + entry->length > table_end )
+> +    {
+> +        printk(XENLOG_ERR "ACPI: PPTT subtable extends beyond table end.\n");
+
+... no full stop please in log messages (applies elsewhere as well).
+
+> +        return false;
+> +    }
+> +
+> +    return true;
+> +}
+> +
+> +static bool __init verify_proc(const struct acpi_pptt_processor *proc)
+> +{
+> +    unsigned long table_size;
+> +
+> +    if ( proc->header.length < sizeof(*proc) )
+> +    {
+> +        printk(XENLOG_ERR "ACPI: PPTT processor node length is too small.\n");
+> +        return false;
+> +    }
+>  
+>      /*
+> -     * Generate temporary cpu topology information for now.
+> -     * It assumes that the cpu doesn't have SMT and all CPUs
+> -     * belong to the same socket.
+> +     * Each private resource is represented by a 32-bit resource ID.
+> +     * Ensure the structure length accurately accounts for the trailing array.
+>       */
+> +    table_size = sizeof(*proc)
+> +        + (unsigned long)proc->number_of_priv_resources * sizeof(uint32_t);
+> +
+> +    if ( proc->header.length != table_size )
+
+Isn't != overly strict?
+
+> +    {
+> +        printk(XENLOG_ERR "ACPI: PPTT processor node length invalid.\n");
+> +        return false;
+> +    }
+> +
+> +    return true;
+> +}
+> +
+> +static const struct acpi_pptt_processor *__init find_pptt_node(
+> +    const struct acpi_table_pptt *pptt, uint32_t acpi_id)
+> +{
+> +    const struct acpi_subtable_header *entry;
+> +    unsigned long table_end;
+> +    const void *ptr;
+> +
+> +    table_end = (unsigned long)pptt + pptt->header.length;
+> +
+> +    ptr = pptt + 1;
+
+Make these the initializers of their variables?
+
+> +    while ( (unsigned long)ptr + sizeof(*entry) <= table_end )
+> +    {
+> +        entry = ptr;
+> +
+> +        if ( !verify_subtable(entry, pptt) )
+> +            break;
+> +
+> +        if ( entry->type == ACPI_PPTT_TYPE_PROCESSOR )
+> +        {
+> +            const struct acpi_pptt_processor *proc;
+> +
+> +            proc = container_of(entry, const struct acpi_pptt_processor,
+> +                                header);
+> +
+> +            if ( !verify_proc(proc) )
+> +                break;
+> +
+> +            /*
+> +             * Leaf node verification is only required for ACPI 6.3
+> +             * (PPTT revision 2) or later.
+> +             */
+> +            if ( (proc->flags & ACPI_PPTT_ACPI_PROCESSOR_ID_VALID)
+> +                 && proc->acpi_processor_id == acpi_id
+> +                 && (pptt->header.revision < 2
+> +                     || (proc->flags & ACPI_PPTT_ACPI_LEAF_NODE)) )
+
+Misplaced binary operators (also elsewhere). On continued lines they go at
+the end of the earlier line.
+
+> +                return proc;
+> +        }
+> +
+> +        ptr += entry->length;
+> +    }
+> +
+> +    return NULL;
+> +}
+> +
+> +/*
+> + * Populate the topology information by scanning the ACPI PPTT
+> + * (Processor Properties Topology Table).
+> + */
+> +int __init acpi_init_cpu_topology(void)
+> +{
+> +    acpi_status status;
+> +    struct acpi_table_header *table_header;
+> +    const struct acpi_table_pptt *pptt;
+> +    unsigned int num_sockets = 0;
+> +    unsigned int num_clusters = 0;
+> +    unsigned int num_cores = 0;
+> +    unsigned int *socket_map = xvzalloc_array(unsigned int, nr_cpu_ids);
+> +    unsigned int *cluster_map = xvzalloc_array(unsigned int, nr_cpu_ids);
+> +    unsigned int *core_map = xvzalloc_array(unsigned int, nr_cpu_ids);
+> +    unsigned int cpu;
+> +    int ret = 0;
+> +
+> +    status = acpi_get_table(ACPI_SIG_PPTT, 0, &table_header);
+> +    if ( ACPI_FAILURE(status) )
+> +    {
+> +        /* A missing PPTT is benign; fall back to the default topology. */
+> +        ret = -ENODEV;
+> +        goto out;
+> +    }
+> +
+> +    if ( !socket_map || !cluster_map || !core_map )
+> +    {
+> +        printk(XENLOG_ERR
+> +               "ACPI: Failed to allocate memory for topology parsing.\n");
+> +        ret = -ENOMEM;
+> +        goto out;
+> +    }
+> +
+> +    pptt = container_of(table_header, const struct acpi_table_pptt, header);
+> +
+>      for_each_possible_cpu(cpu)
+>      {
+> +        uint32_t acpi_id = map_cpu_acpiid[cpu];
+>          struct cpu_topology *topo = &cpu_topology[cpu];
+> +        const struct acpi_pptt_processor *proc;
+> +        unsigned int level;
+> +        unsigned int core_group_key = 0;
+> +        unsigned int cluster_group_key = 0;
+> +        unsigned int socket_group_key = 0;
+> +        bool threading = false;
+> +
+> +        proc = find_pptt_node(pptt, acpi_id);
+> +        if ( !proc )
+> +        {
+> +            printk(XENLOG_WARNING
+> +                   "ACPI: No PPTT leaf node for CPU %u (ACPI ID 0x%u)\n",
+
+Please prefer the slightly shorter %#x (and definitely please don't mix a 0x
+prefix with %u). Again applies elsewhere as well.
+
+Jan
 
