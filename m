@@ -4,46 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E6A5C531CC
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2026 23:59:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1369744.1618300 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8359AC531D0
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2026 00:36:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1369762.1618309 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wn3K1-00019F-4D; Thu, 23 Jul 2026 23:59:25 +0000
+	id 1wn3t1-0007Uy-3s; Fri, 24 Jul 2026 00:35:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1369744.1618300; Thu, 23 Jul 2026 23:59:25 +0000
+Received: by outflank-mailman (output) from mailman id 1369762.1618309; Fri, 24 Jul 2026 00:35:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wn3K1-000198-18; Thu, 23 Jul 2026 23:59:25 +0000
-Received: by outflank-mailman (input) for mailman id 1369744;
- Thu, 23 Jul 2026 23:59:24 +0000
+	id 1wn3t1-0007Ur-12; Fri, 24 Jul 2026 00:35:35 +0000
+Received: by outflank-mailman (input) for mailman id 1369762;
+ Fri, 24 Jul 2026 00:35:32 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <taka@valinux.co.jp>) id 1wn3Jz-000192-6p
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2026 23:59:24 +0000
+ (envelope-from <mfo@igalia.com>) id 1wn3sy-0007Ul-HH
+ for xen-devel@lists.xenproject.org; Fri, 24 Jul 2026 00:35:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wn3Jy-00H4h7-9i
- for xen-devel@lists.xenproject.org; Fri, 24 Jul 2026 01:59:22 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wn3sx-00H7aB-Co
+ for xen-devel@lists.xenproject.org; Fri, 24 Jul 2026 02:35:31 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <taka@valinux.co.jp>)
- id 6a62a9d5-bab6-0a2a0a5309dd-0a2a4502dd36-14
- for <xen-devel@lists.xenproject.org>; Fri, 24 Jul 2026 01:59:20 +0200
-Received: from [52.101.125.140]
- (helo=TYVP286CU001.outbound.protection.outlook.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <taka@valinux.co.jp>)
- id 6a62aad5-6ca4-0a2a45020019-34657d8c8971-3
- for <xen-devel@lists.xenproject.org>; Fri, 24 Jul 2026 01:59:19 +0200
-Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:458::18)
- by TY4P286MB5663.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:2d1::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.11; Thu, 23 Jul
- 2026 23:59:14 +0000
-Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
- ([fe80::c8c9:25cd:8d13:96d6]) by OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
- ([fe80::c8c9:25cd:8d13:96d6%6]) with mapi id 15.21.0245.010; Thu, 23 Jul 2026
- 23:59:14 +0000
+ (envelope-from <mfo@igalia.com>)
+ id 6a62b2f0-e002-0a2a0a5209dd-0a2a45048ad0-48
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Jul 2026 02:35:30 +0200
+Received: from [213.97.179.56] (helo=fanzine2.igalia.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <mfo@igalia.com>)
+ id 6a62b350-b57f-0a2a45040019-d561b33881da-3
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Jul 2026 02:35:29 +0200
+Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
+ by fanzine2.igalia.com with esmtps 
+ (Cipher TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1wn3sX-003fP3-Lm; Fri, 24 Jul 2026 02:35:05 +0200
+Received: from webmail.service.igalia.com ([192.168.21.45])
+ by mail.igalia.com with esmtp (Exim)
+ id 1wn3sV-001zJH-53; Fri, 24 Jul 2026 02:35:05 +0200
+Received: from localhost ([127.0.0.1] helo=webmail.igalia.com)
+ by webmail.service.igalia.com with esmtp (Exim 4.98.2)
+ (envelope-from <mfo@igalia.com>) id 1wn3sU-000000032Rd-3vQK;
+ Fri, 24 Jul 2026 02:35:02 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,142 +56,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=d2zj00JxiSnkIe6YxPhbaj73QVIp8XqaMqzYI+d46gIOlzA2q5ZzdSnAW/jpCG1YLdiXVvM+UZWpe/T4WcgK3O70tn/H2gugj+8Ywdlrv6T/n/x4We4UutRK87gNokbDAHbqRpci4lNoDg76vuYPWzS6o4CgLr5wigJ3vgm+fl7Ev9zFJcvbb5FFfDMKMphyloEO9CBRI0+cjmWa9YOAqombSRE5Sc4BLnzS+wVs+GDrCwarjJPGZdEh3ZlOc5GbdVaPwDRAI451oS+v+oHle8rF4P6DenDuyrTMqXY7Iyz99WJOfRGVaWbup9TaszQtZnJrgR7StJ1H2GW+jCzQnw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=13dEvq/ewY/xexku2x0QJbrao3fVtokZRbReHLDqpNY=;
- b=SAQpWusMwKLyKdTeRa9qtzPof4rNxhBD1BtCJuf8JKWFewBea6ov2iKxufuJcf5ilQ7AByEA5/9HfZllr3Wx6LDpajYp96N0hNCqalzeP11e3wPxyIV8wGhu+Bxg99wUnFGghtoffB9TXKq51ER9Dq18SlFGb1ir9rc57RYwmMrS7wQG93nehsZt1SnZRGuy2pXACgfnn4u0+4j1zmVqzp6/RzGv4fE0RDEBLh3WuVaNV5Jb2IP5IHMC+OjYl3sKv6oMazqs8FeWZUf21jARqa4McSUEiVt2eFvkbT2BHL5OitlV3FCNq9xiVwS5oP+UXrZ6Na1Lv9ovO511rcPWhw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
- header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=13dEvq/ewY/xexku2x0QJbrao3fVtokZRbReHLDqpNY=;
- b=FHTj4dBeoZBnE/WnR8Qz3zNP86rEzIDo3+CJVPNiVhwxgEITppzIawZvy28e/geTmwf4CPFa/IuI4Ho7PHDH/5/BlGNwAAy8LrXs6PSulIeYuNTGzujPs+UAMN0f4i9DQtTsMnGETiZf1xi/3niR5tb/L8ICc3u6QVWJqmXLSSQ=
-From: Hirokazu Takahashi <taka@valinux.co.jp>
-To: Jan Beulich <jbeulich@suse.com>
-CC: "Mykyta_Poturai@epam.com" <Mykyta_Poturai@epam.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
-	=?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger@xenproject.org>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: RE: [PATCH v7 1/5] xen/device-tree: Parse 'cpu-map' node for CPU
- topology exploration
-Thread-Topic: [PATCH v7 1/5] xen/device-tree: Parse 'cpu-map' node for CPU
- topology exploration
-Thread-Index: AQHdGGUCLSiIMXaUSUq2V68Fo2g2DrZ7KGyAgACkGPA=
-Date: Thu, 23 Jul 2026 23:59:14 +0000
-Message-ID:
- <OS9P286MB7222C0714304BA316DD42A4382C02@OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM>
-References: <20260720162819.308326-1-taka@valinux.co.jp>
- <20260720162819.308326-2-taka@valinux.co.jp>
- <88b09f24-13c6-427b-b7a9-aa631e59420a@suse.com>
-In-Reply-To: <88b09f24-13c6-427b-b7a9-aa631e59420a@suse.com>
-Accept-Language: ja-JP, en-US
-Content-Language: ja-JP
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=valinux.co.jp;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: OS9P286MB7222:EE_|TY4P286MB5663:EE_
-x-ms-office365-filtering-correlation-id: aacdc449-0891-4497-5995-08dee91665df
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|376014|7416014|1800799024|23010399003|366016|18002099003|22082099003|38070700021|56012099006|4143699003|10067099003;
-x-microsoft-antispam-message-info:
- H4VoKmpy89gmaIUUqZczVHV4h5vHY57HJhFGhq7Yeexgtws+oeIv4uUgrlYrZ9Uv4497f1QF9sp0Sxpkp8UkXzFSUHfhiyO8xjdkmHrZBzb3t8lnzbiKpVcl0j2adx70GWby0WX/Wf8yN8QZxKEYa7TiBRZx1hlAZBF7pataNexQaNxTb7/OXYGbmk5atlhTeX8k8axjKPPeMCIXNXnQxFT6HJFlg59DaW16TXCUJMkRn+pA2KO9C29U24e+rYJrvJqrEySD9rk0cnUjWqR2RCKuX7JjygzQZOIkfxrPeJUOd/U++fRWttXZbXqz0Tq9brrqpUuGOzVN8p8rHnGkX8hd/RyXpEhwUVk3xttlvhkaIVUmgwMY5+e4DaU+gRjGjy82EVcYFbHr4MJ1UDgXSWylgQlGOOysRnVzX5ueAThnYv1a5ByyJiAYSqoJ3uYOKJH+38XFNRVxc5MYypeZMRyBRZewcmCVRvREgsfpx/dkGYmgpDJ0rEsuhA1UOtHq7IvMylkBVulVGMXK31qWl3dprOYqtpUOxqWPK2Lxg7mNK5L7HqOKx/T2CgteAzv8xNFnY1EhWTiJVrV+mAlL+lE72mBU7yJSB7wf9An7Mv5Hbb+wb+yztgDavxU0NAwBWfqJnz40koj2B6Lu1PmaBjaFJWC2GlVd9ERyAQYonHB78mQBk5emV98J2thwcCuTD8VlHWwVW6b7vOgA4HPJkR31u37dnSiCgtV/7k0wf1s=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:ja;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(23010399003)(366016)(18002099003)(22082099003)(38070700021)(56012099006)(4143699003)(10067099003);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?utf-8?B?ZGlvUi9CM2tEU3M2SzNpemdjR0dkL2JrOFM2aGgydVhleHowUU5nNmRhczR4?=
- =?utf-8?B?V0kySm9Xa1ZGVHQ1VWZVbkRoTGx5Y1FEc0RKSkRhd1hVQ2VaL0cwd3M3S3Yv?=
- =?utf-8?B?L1ErYVIxdm9NWGpZVDJpSXdYMkRMZWJKSVhjV2JNTGNJZjNDWVFIbXpTNTNK?=
- =?utf-8?B?ekNpbmN6dElMSkRXY0FTVDJscHcvdk42dnJvdE02bzliRk44NWpBcHFWaDA1?=
- =?utf-8?B?bTN5M1pITkJlZkdnQ1BTY3dONGxWbkJnWEJQOVpwMVpUL28rYm51MTI3b1B5?=
- =?utf-8?B?dmo3V0VpN1ArbmhlbUQ5SnRlZ1dVYlFhTm9pazlWdGxUWUhKSzlib1VKcWFq?=
- =?utf-8?B?RmV3dmpPRCsxTy9UTnN6ejlZTmRQZ3IxcUVMek5pUGZjSVN5bWF3bXRYSDJi?=
- =?utf-8?B?c092RTNZcUY5MGI5QXNrMjVyTDhNcElJRWszc3lXQkRydnNTV0ZNT1Q0ODl5?=
- =?utf-8?B?ZkJZQU5XN0kyZmh0bjIyK2J5VUNOcTZIS2JPYkhBdzRvZzlJR05ZSFY2OXBh?=
- =?utf-8?B?YU55cHlhdXZJbmJqbmFRR3hjZmd5YjNKMTZDYmpFSmg2T1pjOHQ3WTN4Q0g1?=
- =?utf-8?B?azNSWDlYSThZZW1Nb1RTTHhpc2duR3BLaHNlYUxNZTdqU0VuaGltVkRJK0tV?=
- =?utf-8?B?UTN5cGlyZUdEb1dPV0xYS2NwdkhsYmRmbGxCT3RaTU84eDlzcXQvbTdZa0Ft?=
- =?utf-8?B?QVNvZWxFdUJGTEgzREJYZGdIRXR5SnRTTGp4YnhUKzRkUXEwcW1OZWZtdGdX?=
- =?utf-8?B?Z3pIQnEySmtLZndNejFHNXJPajB2OWx5b3dRbUF4cTNuZFJaN3pmdE1kK05M?=
- =?utf-8?B?SEV5NkhIQU9GdjU1NEs4ZTVhVE03ZGlVWWx6QzFLd1BaSER3L2ZEYVBjbm8y?=
- =?utf-8?B?NjMvNklEYW5CeVJNZG02L1BjMFNxMlQ2WWZHckhiUWt0N25OcGZXQTlJbEd1?=
- =?utf-8?B?UExwdHZvYU9JbGFaRmlUZ0ZZTFh5UWh5MTJoeFljdmNIM29yb25TaGlYNDZK?=
- =?utf-8?B?U3ppSng2VWZVcjhHNll1SU55allRWVIrWHg0ZW1GeVNBOUMrTWdOcmxaRkI0?=
- =?utf-8?B?U050eHVtVC91RzhNR3lhVG41cmptK0F4TGtGV0RYMVpvajBvQW9RcWYrVGFz?=
- =?utf-8?B?VTJRRksrL2VRVFBFKzdiNHFMbDN3QUQ4clczYUR4Q3EwcU0yN05UZUppc2ZU?=
- =?utf-8?B?U3RjRHU3cWtvOS9GbG92VExiRTEzY2hVbEpJWXBRcDk4RUtJQ2FSeEYrUWhP?=
- =?utf-8?B?RGhOYkJDWjFUMVJZOU0wYVRETDVJZ2lLUnhYcjdWNWlYUHk0Z0RFWEVDYkZo?=
- =?utf-8?B?MkErMzFSY3RxWXc2UXBlWUp2dDkzK0NSUXRsVHIrdEt5NjU4ejU1dm4vZDlo?=
- =?utf-8?B?OEliZ3lDdUhmNk9MRFJhckJmK01IV1FVdlFYQVR3Qyt6dSs2R1BKLzRzdjJZ?=
- =?utf-8?B?U29xN1crVUpZclpFaHk5V1VRVDhFb29RK0VveUhSdVBaNlY1WVN0VVVjVWVD?=
- =?utf-8?B?eUU4RmNuL2ZiZjlrUSs3elhKNEpJVXpUK090NitPNzVSVklWbEhjQ2hkci9Z?=
- =?utf-8?B?S1JNOUdERm5MZW1KY2NXZWprUUFWRzJtM25VVVBoYWVCalFPMlNHK1VGS25L?=
- =?utf-8?B?RU1xVS9Kei9laFhGRFluakN6SHY2ekk5amJ6MHBZRE9ERHhaN0FkbUhCcGxX?=
- =?utf-8?B?Mk1ZTW0reW1aS0oxWDVjTHNMNUp6dWlxTFJGQ2lEbFc1b1J0NUsxMm5rblE3?=
- =?utf-8?B?RFFCNkFZZUhtYXYraHhpdjAyaFVKYWRyK1hWMHlLdUdvUTkrRk04d1V5a242?=
- =?utf-8?B?VU5vOWF3anJXb2lhKzdsVDlaZjJSYU13WGEwV2N1dTBQZG5KUzlVYWtxMnk3?=
- =?utf-8?B?dEZXSWdzQ1RsSHpQNUZNVzkrejFUMW1VM0p6bmFtaFRnanZydFRhZ2IwYUlO?=
- =?utf-8?B?c3M3Q1BWK3MzdjVtbUloQ2dtODBiVnBiTDk3Wlc3M2svUDlsRm9nbEFIdi82?=
- =?utf-8?B?RFFXVHgrMXIrVHZpN0VwbHVXU0tvL1FnaUFjRXJVeUtjR0U3Y1lXUjB2VTFh?=
- =?utf-8?B?TG1tS0NGZHV2M3NYdDZjSGgwcjZIalJPWlNkcm14K1NNTEVrNFNvZW9SbG43?=
- =?utf-8?B?WTlTcXlFazNnN1FENlJ5MXR1eTZHSlRHL1BMNDlJYzBtOVk0U0JrRW43V01m?=
- =?utf-8?B?RHF0SHZOZGtZNmlJNkxSKzM4OUdtWXVES211NlJ6dFNqczdESzZxWUhuYll2?=
- =?utf-8?B?RUljWEp3RXgyaGdsMnI3N1dTMmVyMG1lR3F5dkVIbmxqd05TTi91SWpGQjVY?=
- =?utf-8?Q?vXJ/i8d+paV+rbeDDE?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20170329 header.d=igalia.com header.i="@igalia.com" header.h="Content-Transfer-Encoding:Content-Type:Message-ID:Subject:Cc:To:From:Date:MIME-Version"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Content-Transfer-Encoding:Content-Type:Message-ID:Subject:Cc:To
+	:From:Date:MIME-Version:From:Reply-To;
+	bh=za9DVNeNQi2CkxfiaNpm43Br1tng2ZjZAAgVDdOwwuk=; b=crJzBPGuYnh42uDIAkGdg9100i
+	cSwv8BdzsmzDDmyeYB6+8Rk5tCfr/WYJRGisnmywBCTKpYUjED51+phtVyvri8UXmmjfykOy8NTwS
+	M2bD0OIukZo0Bp3rm9hX3kGWAsW8gXUAEZPh/lqHDyU6B2HgslnbWu1X9lTOIuNPyKpZ5RxATZczR
+	/RxF8egA4Phr8JBySYycZx82VlPnbF+z6/eOlOT6+/ynMVwiyeA0ofe2Y4Y3fuzj6AELlH5MLkdS6
+	LASl3I04JBBWmQcoKEowBigorxQ+yyu6oG2YPQsMWduO2R4WFpOVLo5Hqum80pctA9a6UigvaCNU8
+	fPU+Gi9g==;
 MIME-Version: 1.0
-X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: aacdc449-0891-4497-5995-08dee91665df
-X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Jul 2026 23:59:14.0244
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: CwYdD2JMpGps0l/tAfU6iNH7uFw3sKct3CMDqwZZjSxJOYF+SUAl5wB63ONvIzJgLg+3twdAf0ZEc4NKzI6pjQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY4P286MB5663
-X-purgate-ID: tlsNG-720697/1784851160-F32B12AC-00685305/0/0
+Date: Thu, 23 Jul 2026 21:35:02 -0300
+From: Mauricio Faria de Oliveira <mfo@igalia.com>
+To: "H. Peter Anvin" <hpa@zytor.com>, Borislav Petkov <bp@alien8.de>
+Cc: Jan Beulich <jbeulich@suse.com>, Thomas Gleixner <tglx@kernel.org>, Ingo
+ Molnar <mingo@redhat.com>, Dave Hansen <dave.hansen@linux.intel.com>,
+ x86@kernel.org, Juergen Gross <jgross@suse.com>, Alexey Dobriyan
+ <adobriyan@gmail.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ kernel-dev@igalia.com, linux-kernel@vger.kernel.org,
+ xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v7 2/5] x86/asm: add volatile, clobbers and zero-length
+ check in inline memcmp
+In-Reply-To: <5e19b195-0ca2-4510-81cb-497b40e4aaf5@zytor.com>
+References: <20260721-pvh-kasan-inline-v7-0-38979a50cef0@igalia.com>
+ <20260721-pvh-kasan-inline-v7-2-38979a50cef0@igalia.com>
+ <20260722170334.GCamD35gwrCng30WH1@fat_crate.local>
+ <0F3A1121-208F-4F71-8C88-BEAE7CB50E75@zytor.com>
+ <4daed8ac-b533-436f-9f86-6d297b87abbb@suse.com>
+ <5e19b195-0ca2-4510-81cb-497b40e4aaf5@zytor.com>
+Message-ID: <8df0340f0dc7f6c303c6a7da78fad7b8@igalia.com>
+X-Sender: mfo@igalia.com
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ebf023/1784853330-C14D3B50-9B5BE693/0/0
 X-purgate-type: clean
-X-purgate-size: 1946
+X-purgate-size: 4130
 
-SGkgSmFuLA0KDQpUaGFuayB5b3UgZm9yIHRoZSByZXZpZXdpbmcuDQoNCj4gPiArICAgIGZvciAo
-IGNwdSA9IDA7IGNwdSA8IG5yX2NwdV9pZHM7IGNwdSsrICkNCj4gPiArICAgIHsNCj4gPiArICAg
-ICAgICBpZiAoICF6YWxsb2NfY3B1bWFza192YXIoJmNwdV90b3BvbG9neVtjcHVdLnRocmVhZF9z
-aWJsaW5nKQ0KPiA+ICsgICAgICAgICAgICAgfHwgIXphbGxvY19jcHVtYXNrX3ZhcigmY3B1X3Rv
-cG9sb2d5W2NwdV0uY29yZV9zaWJsaW5nKQ0KPiA+ICsgICAgICAgICAgICAgfHwgIXphbGxvY19j
-cHVtYXNrX3ZhcigmY3B1X3RvcG9sb2d5W2NwdV0uY2x1c3Rlcl9zaWJsaW5nKSApDQo+IA0KPiBJ
-biB2NiB0aGUgfHwgaGVyZSB3ZXJlIGNvcnJlY3RseSBwbGFjZWQuIFdoeSBkaWQgdGhleSBtb3Zl
-Pw0KDQpJIHNhdyBvdGhlciBjb2RlIHVzaW5nIGxlYWRpbmcgfHwgYW5kIHRyaWVkIHRvIG1hdGNo
-IHRoYXQsIGJ1dCBJJ2xsIHJldmVydCBpdCBiYWNrLg0KDQo+ID4gLS0tIGEveGVuL2NvbW1vbi9j
-cHUuYw0KPiA+ICsrKyBiL3hlbi9jb21tb24vY3B1LmMNCj4gPiBAQCAtNDYsNiArNDYsMTAgQEAg
-Y29uc3QgdW5zaWduZWQgbG9uZw0KPiBjcHVfYml0X2JpdG1hcFtCSVRTX1BFUl9MT05HKzFdW0JJ
-VFNfVE9fTE9OR1MoTlJfQ1BVUyldID0gew0KPiA+ICAjdW5kZWYgTUFTS19ERUNMQVJFXzINCj4g
-PiAgI3VuZGVmIE1BU0tfREVDTEFSRV8xDQo+ID4NCj4gPiArI2lmZGVmIENPTkZJR19HRU5FUklD
-X0NQVV9UT1BPTE9HWQ0KPiA+ICtzdHJ1Y3QgY3B1X3RvcG9sb2d5ICpfX3JvX2FmdGVyX2luaXQg
-Y3B1X3RvcG9sb2d5Ow0KPiA+ICsjZW5kaWYgLyogQ09ORklHX0dFTkVSSUNfQ1BVX1RPUE9MT0dZ
-ICovDQo+IA0KPiBMb29rcyBsaWtlIHlvdSBhbHNvIG5lZWQgdG8gaW5jbHVkZSB4ZW4vY3B1LXRv
-cG9sb2d5LmggaGVyZS4gSSBjYW4ndCBzZWUNCj4gaXQgYmVpbmcgaW5jbHVkZWQgaW1wbGljaXRs
-eS4NCg0KT2theSwNCiANCj4gPiAtLS0gYS94ZW4vZHJpdmVycy9hY3BpL0tjb25maWcNCj4gPiAr
-KysgYi94ZW4vZHJpdmVycy9hY3BpL0tjb25maWcNCj4gPiBAQCAtMiw2ICsyLDkgQEANCj4gPiAg
-Y29uZmlnIEFDUEkNCj4gPiAgCWJvb2wNCj4gPg0KPiA+ICtjb25maWcgQUNQSV9DUFVfVE9QT0xP
-R1kNCj4gPiArCWJvb2wNCj4gPiArDQo+ID4gIGNvbmZpZyBBQ1BJX0xFR0FDWV9UQUJMRVNfTE9P
-S1VQDQo+ID4gIAlib29sDQo+ID4NCj4gDQo+IERpZCB5b3UgZm9yZ2V0IHRvIHVuZG8gdGhpcyBj
-aGFuZ2U/DQoNCk9vcHMsIEkgd2lsbCByZW1vdmUgaXQuDQoNCj4gV2l0aCBhbGwgdGhyZWUgYWRq
-dXN0bWVudHM6DQo+IFJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+
-ICMgY29tbW9uLCBhY3BpDQoNClRoYW5rIHlvdSwNCkhpcm9rYXp1IFRha2FoYXNoaS4NCg==
+On 2026-07-23 20:12, H. Peter Anvin wrote:
+> On 2026-07-22 23:59, Jan Beulich wrote:
+>>> 
+>>> Also, this is silly. Instead of adding a whole separate test, just do "test %3,%3" before the repe to set ZF and let the REPE skip.
+>> 
+>> Besides this, isn't the function effectively returning bool wrong anyway? This
+>> way you can use it for equal / not-equal comparisons, but not for sorting and
+>> alike.
+>> 
+> There is no use case in the early code for sorting, and it seems rather broken
+> to burden the code with that.
+
+If this is merged, other users not in early code might eventually
+appear, which might introduce the use case for sorting. Even though that
+is unlikely, as such users could probably use regular memcmp() instead,
+consider that just in case, so I can ask for your input/advice on this:
+
+> That being said it probably should return bool explicitly (it makes no sense
+> for the prototype to be different than the internal variable.)
+> 
+> We could call it memneq() if someone really, really cares, I guess.
+> 
+> The early code is very size-sensitive, so I'm really not fond of the idea of
+> burdening it further. Perhaps something like:
+
+Do you think this implementation (returns -1/0/+1) is reasonable,
+size-wise, for early code?
+
+I considered submitting it eventually, once the return value difference
+to regular memcmp() was called out [0], as an improvement, if there's
+agreement this would be a good idea considering the scenario above.
+
+static __always_inline int __inline_memcmp(const void *s1, const void
+*s2, size_t len)
+{
+        int above, below;
+
+        asm volatile("test %2, %2\n\t"
+                     "repe cmpsb"
+                     : "+S" (s1), "+D" (s2), "+c" (len),
+                       "=@cca" (above), "=@ccb" (below)
+                     : : "memory");
+
+        return above - below;
+}
+
+@ arch/x86/boot/string.o
+00000028 <memcmp>:
+  28:   66 57                   push   %di
+  2a:   66 56                   push   %si
+  2c:   66 89 c6                mov    %ax,%si
+  2f:   66 89 d7                mov    %dx,%di
+
+  32:   66 85 c9                test   %cx,%cx
+  35:   f3 a6                   repz cmpsb %es:(%edi),%ds:(%esi)
+  37:   0f 97 c0                seta   %al
+  3a:   66 0f b6 c0             movzbw %al,%ax
+  3e:   0f 92 c2                setb   %dl
+  41:   66 0f b6 d2             movzbw %dl,%dx
+  45:   66 29 d0                sub    %dx,%ax
+
+  48:   66 5e                   pop    %si
+  4a:   66 5f                   pop    %di
+  4c:   66 c3                   retw
+
+> A memory clobber is ugly here since no memory is actually modified, although
+
+I'm definitely not an expert, but IIUIC, this memory clobber is for
+reads, not writes? Say, a caller/optimized code that writes to the
+buffer(s) prior to __inline_memcmp() and data might still reside in
+registers; even if theoretical/unlikely.
+
+As in [1]:
+
+  The "memory" clobber tells the compiler that the assembly code
+performs memory reads or writes [...] (for example, accessing the memory
+pointed to [...]). To ensure memory contains correct values, GCC may
+need to flush specific register values to memory before executing the
+asm.
+
+> it probably doesn't affect code; "cc" is completely redundant with condition
+> code output operand.
+
+Thanks for explaining. I'll remove that in the next version.
+
+[0]
+https://lore.kernel.org/all/324ef97b16f52e0ccc72f6381d1b5dd2@igalia.com/
+[1]
+https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Clobbers-and-Scratch-Registers-1
+
+cheers,
+
+> static __always_inline bool
+> __inline_memcmp(const void *s1, const void *s2, size_t len)
+> {
+> 	bool diff;
+> 
+> 	if (__builtin_constant_p(len == 0)) {
+> 		if (!len)
+> 			return false;
+> 		asm volatile("repe cmpsb"
+> 				: "=@ccnz" (diff),
+> 				  "+D" (s1), "+S" (s2), "+c" (len)
+> 				: : "memory");
+> 	} else {
+> 		/* Clear ZF beforehand in case len == 0 */
+> 		asm volatile("test %3,%3; repe cmpsb"
+> 				: "=@ccnz" (diff),
+> 				  "+D" (s1), "+S" (s2), "+c" (len)
+> 				: : "memory");
+> 	}
+> 	return diff;
+> }
+
+
+-- 
+Mauricio
 
