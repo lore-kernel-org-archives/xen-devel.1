@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D8DCC531C9
-	for <xen-devel@archiver.kernel.org>; Sat, 25 Jul 2026 07:48:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1370485.1618593 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 594A7C531C9
+	for <xen-devel@archiver.kernel.org>; Sat, 25 Jul 2026 07:53:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1370493.1618603 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wnX74-0005wL-Vr; Sat, 25 Jul 2026 07:48:02 +0000
+	id 1wnXCE-0007iV-IR; Sat, 25 Jul 2026 07:53:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1370485.1618593; Sat, 25 Jul 2026 07:48:02 +0000
+Received: by outflank-mailman (output) from mailman id 1370493.1618603; Sat, 25 Jul 2026 07:53:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wnX74-0005wE-Sn; Sat, 25 Jul 2026 07:48:02 +0000
-Received: by outflank-mailman (input) for mailman id 1370485;
- Sat, 25 Jul 2026 07:48:01 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wnXCE-0007iO-Ea; Sat, 25 Jul 2026 07:53:22 +0000
+Received: by outflank-mailman (input) for mailman id 1370493;
+ Sat, 25 Jul 2026 07:53:21 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+5c502c0e710a0fe11638+8371+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1wnX72-0005w6-BK
- for xen-devel@lists.xenproject.org; Sat, 25 Jul 2026 07:48:01 +0000
+ id 1wnXCD-0007hz-6V
+ for xen-devel@lists.xenproject.org; Sat, 25 Jul 2026 07:53:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wnX70-00DkvX-Sg; Sat, 25 Jul 2026 09:47:59 +0200
+ id 1wnXCC-008j9h-75; Sat, 25 Jul 2026 09:53:20 +0200
 Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+5c502c0e710a0fe11638+8371+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a646a17-5cb7-0a2a0a5109dd-0a2a450bd096-8
- for <multiple-recipients>; Sat, 25 Jul 2026 09:47:58 +0200
+ id 6a646b02-2eae-0a2a0a5409dd-0a2a450bdd18-42
+ for <multiple-recipients>; Sat, 25 Jul 2026 09:53:19 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
  by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+5c502c0e710a0fe11638+8371+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a646a2d-b7e8-0a2a450b0019-5a9b3222c82a-3
- for <multiple-recipients>; Sat, 25 Jul 2026 09:47:57 +0200
+ id 6a646b6f-b7e8-0a2a450b0019-5a9b3222b0a8-3
+ for <multiple-recipients>; Sat, 25 Jul 2026 09:53:19 +0200
 Received: from [2001:8b0:10b:5:5b17:8d34:712e:739e]
  (helo=u09cd745991455d.ant.amazon.com)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wnX6j-00000005lYS-2DkA; Sat, 25 Jul 2026 07:47:41 +0000
+ id 1wnXC2-00000005m2Y-0C0t; Sat, 25 Jul 2026 07:53:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,15 +55,14 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
 	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
 	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=QXkK/9Px96JKbHfq/UN3bBzmYtF2w6Ep+yDY5BATFc4=; b=NHzOuIGof+pE+Q7lMzP4z9Uvaq
-	W2Wx1WNA62tXxqzuUoLI5xA5nCsBqoryYhBDMwxMOIR0y9MuZYI6OVU79Cy998y5+9Z6NITu0+5wm
-	MoI0vCH4FwMy6zpPkKRNdxIGZWlfVge2jQheGsHd3bExYuXpcFWhyY7yC+Ez7YJPU2sVU9xqBM9fh
-	t+zm7rwNdTDfkxu6HeoRTdDQCL8K0Mdqi2G1xJ4Ei06pbyxuMED9g77+4G1lLnRA32pkIi9WrpJa4
-	HwrX7ouoH3cwxSLjsoFRi6Sg/scaMOAsDTRuIazlNHo3xMoepMK6gq426Zh3QKhCCpwl2YrftYkds
-	Kb/wH3ew==;
-Message-ID: <e8e7554debef481d13265f0870e847e2fa37f7c2.camel@infradead.org>
-Subject: Re: [PATCH v6 05/36] KVM: x86: Add KVM_[GS]ET_CLOCK_GUEST for
- accurate KVM clock migration
+	bh=M7/WPeZBsoSxpSBfBI8WVo8T/ypKP3M2wrzRNig2VKw=; b=jQJzK/k5mkE0L75BzBmn3dFEas
+	yUHKOFQQg+oCysnYyYZqERqQbVSo66xWrv/uIxZxBBrMZ0qOaCVZiHXxSgtc/8QKzvuRsJ6HHSWhv
+	EXJvwQYXikZaWdqjk1sOXOoYCltxxBUvm/QoXIaqds2ywS8XT0odgoI+tWbcQzhIEZ/7vkK0nmZ2V
+	BguA+Kn21kLNKexp/kXAFklWhT/nu5jADnNpAuaDS9bhbpf8NqweOm1pRE8DrKOqmUQkwZ+91tuM9
+	4IDG3+TsbTP7HG+4zUK1OzYRyAxMcgQwMmBkw3E2REVopAsHF9c27R4o9K6h+iH2cIcjb+pLPKXvY
+	6ZgPq7xw==;
+Message-ID: <19ec3f984a494a0d5e97b8d2fa843668b953a212.camel@infradead.org>
+Subject: Re: [PATCH v6 12/36] KVM: x86: Restructure get_kvmclock()
 From: David Woodhouse <dwmw2@infradead.org>
 To: Sean Christopherson <seanjc@google.com>
 Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
@@ -78,116 +77,56 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
  Zhang	 <dongli.zhang@oracle.com>, joe.jin@oracle.com, kvm@vger.kernel.org, 
 	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
 	xen-devel@lists.xenproject.org, linux-kselftest@vger.kernel.org
-Date: Sat, 25 Jul 2026 08:47:40 +0100
-In-Reply-To: <amPWX8lKXw2KS_kZ@google.com>
+Date: Sat, 25 Jul 2026 08:53:09 +0100
+In-Reply-To: <amPZRkxTLE-rZcJf@google.com>
 References: <20260703212145.343527-1-dwmw2@infradead.org>
-	 <20260703212145.343527-6-dwmw2@infradead.org> <amPWX8lKXw2KS_kZ@google.com>
+	 <20260703212145.343527-13-dwmw2@infradead.org>
+	 <amPZRkxTLE-rZcJf@google.com>
 Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-rBtXsowMEivQPp4CPNL1"
+	boundary="=-Y6nBW7nV6dQqWGAjG/7v"
 User-Agent: Evolution 3.60.3-0ubuntu1~ppa9~24.04 
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-42698a/1784965678-ABED69EA-B142622D/0/0
+X-purgate-ID: tlsNG-42698a/1784965999-19AC09EA-3442FE1B/0/0
 X-purgate-type: clean
-X-purgate-size: 13126
+X-purgate-size: 10184
 
 
---=-rBtXsowMEivQPp4CPNL1
+--=-Y6nBW7nV6dQqWGAjG/7v
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, 2026-07-24 at 14:17 -0700, Sean Christopherson wrote:
-> On Fri, Jul 03, 2026, David Woodhouse wrote:
-> > From: Jack Allister <jalliste@amazon.com>
+On Fri, 2026-07-24 at 14:29 -0700, Sean Christopherson wrote:
+> =C2=A0
+> > Given that, the get_cpu()/put_cpu() pinning is not needed either: both
+> > the TSC read and get_cpu_tsc_khz() are CPU-independent when the master
+> > clock is in use, so drop them.
 > >=20
-> > In the common case (where kvm->arch.use_master_clock is true), the KVM
-> > clock is defined as a simple arithmetic function of the guest TSC, base=
-d
-> > on a reference point stored in kvm->arch.master_kernel_ns and
-> > kvm->arch.master_cycle_now.
+> > Wrap the entire use_master_clock block in #ifdef CONFIG_X86_64, since
+> > use_master_clock is never true on 32-bit (host_tsc_clocksource is only
+> > set under CONFIG_X86_64), and declare hv_clock inside the block so it i=
+s
+> > not left as an unused variable on 32-bit.
 > >=20
-> > The existing KVM_[GS]ET_CLOCK functionality does not allow for this
-> > relationship to be precisely saved and restored by userspace. All it ca=
-n
-> > currently do is set the KVM clock at a given UTC reference time, which
-> > is necessarily imprecise.
-> >=20
-> > So on live update, the guest TSC can remain cycle accurate at precisely
-> > the same offset from the host TSC, but there is no way for userspace to
-> > restore the KVM clock accurately.
-> >=20
-> > Even on live migration to a new host, where the accuracy of the guest
-> > time-keeping is fundamentally limited by the accuracy of wallclock
-> > synchronization between the source and destination hosts, the clock jum=
-p
-> > experienced by the guest's TSC and its KVM clock should at least be
-> > *consistent*. Even when the guest TSC suffers a discontinuity, its KVM
-> > clock should still remain the *same* arithmetic function of the guest
-> > TSC, and not suffer an *additional* discontinuity.
-> >=20
-> > To allow for accurate migration of the KVM clock, add per-vCPU ioctls
-> > which save and restore the actual PV clock info in
-> > pvclock_vcpu_time_info.
-> >=20
-> > The restoration in KVM_SET_CLOCK_GUEST works by creating a new referenc=
+> > Use 'continue' on the master-clock success path so the non-master-clock
+> > computation becomes the common tail, avoiding a goto and label. When th=
 e
-> > point in time just as kvm_update_masterclock() does, and calculating th=
-e
-> > corresponding guest TSC value. This guest TSC value is then passed
-> > through the user-provided pvclock structure to generate the *intended*
-> > KVM clock value at that point in time, and through the *actual* KVM
-> > clock calculation. Then kvm->arch.kvmclock_offset is adjusted to
-> > eliminate the difference.
-> >=20
-> > Where kvm->arch.use_master_clock is false (because the host TSC is
-> > unreliable, or the guest TSCs are configured strangely), the KVM clock
-> > is *not* defined as a function of the guest TSC so KVM_GET_CLOCK_GUEST
-> > returns an error. In this case, as documented, userspace shall use the
-> > legacy KVM_GET_CLOCK ioctl. The loss of precision is acceptable in this
-> > case since the clocks are imprecise in this mode anyway.
-> >=20
-> > On *restoration*, if kvm->arch.use_master_clock is false, an error is
-> > returned for similar reasons and userspace shall fall back to using
-> > KVM_SET_CLOCK. This does mean that, as documented, userspace needs to
-> > use *both* KVM_GET_CLOCK_GUEST and KVM_GET_CLOCK and send both results
-> > with the migration data (unless the intent is to refuse to resume on a
-> > host with bad TSC).
+> > clock read fails (e.g. clocksource transitioning away from TSC), fall
+> > back to that path rather than proceeding with uninitialised data or
+> > spinning in the seqcount loop.
 >=20
-> Please post this as a standalone mini-series.=C2=A0 AFAICT, the only depe=
-ndency of
-> any kind is a minor conflict with the s/hw_tsc_khz/hw_tsc_hz change, and =
-that's
-> trivial to sort out later on.
+> Please split this up.=C2=A0 The changelog suggests there are at least thr=
+ee logical
+> changes here.=C2=A0 Yeah, the series is big, but smaller patches helps wi=
+th review,
+> even if it results in more total patches.
 
-Hm? The calculations in kvm_vcpu_ioctl_set_clock_guest() are all Hz-
-based, not kHz. This *was* the start of the series (Jack posted it on
-its own in 2024), and I thought I'd moved the khz/hz thing to live
-before it on purpose?
+I don't think the latter two are separable; the refactoring of the
+ifdef and the loop and the way it breaks out to the tail are all
+intertwined. I may be able to pull the get_cpu()/get_cpu_tsc_khz() part
+out into a preliminary commit though. I'll take a look.
 
-The kvm_xen_shared_info_init() one could be later, I guess. But is also
-trivial (and its commit message sets the stage for a bunch of the
-cleanups by analysing the various *different* ways that kvmclock gets
-derived).=20
-
-I confess I'm not stunningly keen on breaking the series up. How about
-we just do it in stages? Merge patch 1 as it's fairly trivial, and then
-I can use its commit ID when I refer to its taxonomy later. Then we can
-do patches 2-6 which are the KVM_[GS]ET_CLOCK_GUEST support. And I can
-repost the remainder on top of that?
-
-> > +4.145 KVM_GET_CLOCK_GUEST
-> > +----------------------------
-> > +
-> > +:Capability: none
->=20
-> Why not add a CAP?=C2=A0 The check in the subsequent selftest is quite gr=
-oss.
-
-Because nobody would ever use it in practice anyway. Even if the ioctl
-is present, you *still* have to try it and fall back to the old method
-because there are ways that a *guest* can force master clock mode off.
-
---=-rBtXsowMEivQPp4CPNL1
+--=-Y6nBW7nV6dQqWGAjG/7v
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Disposition: attachment; filename="smime.p7s"
 Content-Transfer-Encoding: base64
@@ -285,23 +224,23 @@ vFEOOmuaq7VamuLEPFQtJM4olmipOW6CzrLcFz6J/6yAecEG3P1ZDoy08eSHvM40MAUgpwGa/w6o
 MAkGA1UEBhMCVVMxFzAVBgNVBAoTDkRpZ2lDZXJ0LCBJbmMuMTowOAYDVQQDEzFEaWdpQ2VydCBB
 c3N1cmVkIEcyIFNNSU1FIFJTQTQwOTYgU0hBMzg0IDIwMjQgQ0ExAhADNSi2uzJskfEdOMo4hV0g
 MA0GCWCGSAFlAwQCAQUAoIIBezAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJ
-BTEPFw0yNjA3MjUwNzQ3NDBaMC8GCSqGSIb3DQEJBDEiBCDp9ZuvVig2rWYpLurUwLkU5Pb7MTaW
-HZW5vxNlGsORejCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGln
+BTEPFw0yNjA3MjUwNzUzMDlaMC8GCSqGSIb3DQEJBDEiBCA/Lvd03+VjutTZijYiDyp7uPZDrs5U
+qwQRbqImitYbUTCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGln
 aUNlcnQsIEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFzc3VyZWQgRzIgU01JTUUgUlNBNDA5NiBT
 SEEzODQgMjAyNCBDQTECEAM1KLa7MmyR8R04yjiFXSAwgYcGCyqGSIb3DQEJEAILMXigdjBiMQsw
 CQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQsIEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFz
 c3VyZWQgRzIgU01JTUUgUlNBNDA5NiBTSEEzODQgMjAyNCBDQTECEAM1KLa7MmyR8R04yjiFXSAw
-DQYJKoZIhvcNAQEBBQAEggIADDLMNeOp/IufkOSjTdh3LO0QlquYI4G9wOYpHsybZ0IpmZVSHgPx
-8xVVcRSV9zjuDZarzo4bSLuZ41V1IngZmFIdid3aARu2pIwx3880UfWV2HZ2yhCy6pT0LMxBkREs
-I00j86fmOQZ3NNTNqzSoXK01kckVAu+qs8bDYfNrd2uaR5g8iD/hOuVh+kMP4Wdr5MsFb+dMSBO3
-36X8tlhPFqbgGDnFbGvOdaax7rTmQUZ7bVDMwwAD4gNNVzJ8N9NqFZtLSDCzVtMphmtkghDUDCBj
-1P5/+nNqpGQGCziD+U7gLBo6/UNf7aVSxIUKuND3GA2JLwnEmSY6iX82pxOOXoq6L5iSLZcb5lao
-QXNMElXIUHCmnnujKU0iJ4cqFXMAvXv434wsyrnqREPVjw0DP917a75vfhG2Qy1bnoq1ys5RXp6D
-iXdIZsdoWf1GzW7E+v4kck6LDtEpAxmCIhT+BH1WqVDP9BuCqob2VyagywG4QJ0H5tGcT1zYfF8G
-ssWuCUwlrN1TZPSO/FRjpvGG7UAl0sBT4VE08jqwZBRojehgZK4mWDeGgBxrf87D0ZtfmDumq8ps
-a31jff1HjV+635OCxtkfegyL3hl2nzXxgmu9KjQ0PQM/OYC0TE23iLAsohWtFXjRYyF396Ro7T/D
-NETRPWeq9/DoMPhEtzriRH0AAAAAAAA=
+DQYJKoZIhvcNAQEBBQAEggIAPmmHGnIj4nkqf3KDfUVZ6Jaqm5xm7CYAsNLdI51GHWIwZUYVTcfK
+I3N6WUA4JK2yncQNPVvMBp1bfLbtK5ukEyZUURqBwOCMA/Ku9Uj2ommEiOlWryHjTBbNUPRq6vWn
+hnQv/Q9GsiYl/8Nd4Zw3dLIL/74s3le6uJCnI3ppG+76MCo8RDkQOljemngBTz0elKSYTI5JGjeD
+2N/SyMi3VvHfWAtwPsifhA7eyTlgt7CZGQhI17NiMwcj/0KQeO3wJxDbRUH2+0kTBUXOOfBWSQ3i
+Cq79eG6qsCSFYfKKKkWkpnJu/lMpZBMxiNxWtVW573rCWkf36/5uzOfhvyi8IQOOu4N2QU7LTN+N
+U6uu0vLUxEUQ0QZ5bb430lAS8GLmnJd5KA/FNLFkmy6Ney6xRZ9g0vprOekhTpJWuXup65COg+mQ
+IdMq6hUu4/t2W/yXywlKOPxuGE/1pE5LUFryAcniGLhPepLPmC8C1AHlhpfBmIBu+/BfRIpof/OP
+8IsmzE7MfZJ9nerVdhiP7vhqo7tpNKyL5L37i2WglvBCOwhDSxvEc3RX3iw2tsH4wQlzcYl2Y7pZ
+MBvGCYvhh9UDBIl7FAa2h/rboOoKMoybeztbwC5Oq3a3Y/ywJ3WGWil2r/Ci91F7nGfhQWGf7dfP
+FBSXqUX4XQapnr3n3/NQ3KkAAAAAAAA=
 
 
---=-rBtXsowMEivQPp4CPNL1--
+--=-Y6nBW7nV6dQqWGAjG/7v--
 
