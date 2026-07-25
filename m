@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BD26C531C9
-	for <xen-devel@archiver.kernel.org>; Sat, 25 Jul 2026 07:57:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1370502.1618612 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A304C531C9
+	for <xen-devel@archiver.kernel.org>; Sat, 25 Jul 2026 07:59:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1370510.1618622 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wnXFg-0008Tn-4E; Sat, 25 Jul 2026 07:56:56 +0000
+	id 1wnXI4-0000nT-Iz; Sat, 25 Jul 2026 07:59:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1370502.1618612; Sat, 25 Jul 2026 07:56:56 +0000
+Received: by outflank-mailman (output) from mailman id 1370510.1618622; Sat, 25 Jul 2026 07:59:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wnXFg-0008Tg-0z; Sat, 25 Jul 2026 07:56:56 +0000
-Received: by outflank-mailman (input) for mailman id 1370502;
- Sat, 25 Jul 2026 07:56:55 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wnXI4-0000nM-DE; Sat, 25 Jul 2026 07:59:24 +0000
+Received: by outflank-mailman (input) for mailman id 1370510;
+ Sat, 25 Jul 2026 07:59:23 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+5c502c0e710a0fe11638+8371+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1wnXFf-0008Ta-7z
- for xen-devel@lists.xenproject.org; Sat, 25 Jul 2026 07:56:55 +0000
+ id 1wnXI3-0000nG-9C
+ for xen-devel@lists.xenproject.org; Sat, 25 Jul 2026 07:59:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wnXFe-00DlrV-AD; Sat, 25 Jul 2026 09:56:54 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wnXI2-003K0G-Eu; Sat, 25 Jul 2026 09:59:22 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+5c502c0e710a0fe11638+8371+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a646c02-e002-0a2a0a5209dd-0a2a4508cacc-36
- for <multiple-recipients>; Sat, 25 Jul 2026 09:56:53 +0200
+ id 6a646c73-5cb7-0a2a0a5109dd-0a2a450ac0ec-28
+ for <multiple-recipients>; Sat, 25 Jul 2026 09:59:21 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+5c502c0e710a0fe11638+8371+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a646c45-f659-0a2a45080019-5a9b3222b648-3
- for <multiple-recipients>; Sat, 25 Jul 2026 09:56:53 +0200
-Received: from [2001:8b0:10b:5:5b17:8d34:712e:739e]
- (helo=u09cd745991455d.ant.amazon.com)
+ id 6a646cd9-f2d2-0a2a450a0019-5a9b3222b97a-3
+ for <multiple-recipients>; Sat, 25 Jul 2026 09:59:21 +0200
+Received: from 54-240-197-235.amazon.com ([54.240.197.235]
+ helo=freeip.amazon.com)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wnXFW-00000005mS3-31BS; Sat, 25 Jul 2026 07:56:46 +0000
+ id 1wnXHu-00000005maH-3WEH; Sat, 25 Jul 2026 07:59:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,15 +55,15 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
 	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
 	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=1qABX9vINQPftk3vF3d3lgoPe1oYQvcL3sVi03wzJpo=; b=sOORCWKM8W+VUb/S1Zus69/eCu
-	Die6st5bOthOpDs1R7JJYD1M3Rcm2I5+gnoalPrcGdtjvts8zG1mxP22sl3x8wI+RfMxRWT4vAGJB
-	EC5NcPx7oMw7veoVWncvG69X3UskoD0/I5e3oc0i1wZUW70DjWVN/Izi/43xOnA8rnvxe0C9e9lCW
-	td9t0p3kus3nLuqpwVMAxa3k6S+cvyhqTTm08kChwwBATVCXoVXyV7/edvYKtL/GKI8giUKYOKeo9
-	hiCb+57+QeUPFv7egNaOqGzHab83DgrCNAoP7Hy7bKlPOG/LpnCNAoZ6r1Qn4LAu+Krce87ORCJnC
-	g8/2rQuQ==;
-Message-ID: <b38f67187d3312c4bf2c9eddf89e14e8b10573d6.camel@infradead.org>
-Subject: Re: [PATCH v6 15/36] KVM: x86: Fix compute_guest_tsc() to handle
- negative time deltas
+	bh=KVS+cBKDEZ+wwitTdlfGoa4B397OdlVymNENj5yyKtc=; b=Yp4SEYJumtDtSNIfr+5CsWf+FC
+	N9wIoiptsLGzg13WofG8ABkX2Jqas1ohSmGfldyeeGE2x3xVTvJ7NzwdTaJtQ00hTAlmwwpy8FRX1
+	zw9XHfbJRAtQV8OnN/LaMz2NxaJpObMFUa6oB7RGV1uGlmZcJI/+YZu3dDscnwVzZnqiykR/+zu04
+	AZO3bETZgJhle6vjl2a1uoskiv5yERmbjvKaj/b5qELnrR/Sc8AlWGcrrUPByizXoz0zKwB277fPL
+	Lvb/O1webdd/Zay5GtLfNhPgECMyL+edGMB89QMEHr3MO4erM//ezMW7tWEVnyyuCM0pBjAMhd7Nk
+	bQDG8J5A==;
+Message-ID: <06561667eee52c40ef4587fcc11f6bf964ce40bf.camel@infradead.org>
+Subject: Re: [PATCH v6 08/36] KVM: x86: Activate master clock immediately on
+ vCPU creation
 From: David Woodhouse <dwmw2@infradead.org>
 To: Sean Christopherson <seanjc@google.com>
 Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
@@ -78,56 +78,72 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
  Zhang	 <dongli.zhang@oracle.com>, joe.jin@oracle.com, kvm@vger.kernel.org, 
 	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
 	xen-devel@lists.xenproject.org, linux-kselftest@vger.kernel.org
-Date: Sat, 25 Jul 2026 08:56:45 +0100
-In-Reply-To: <amPYq48J9TPbmFNl@google.com>
+Date: Sat, 25 Jul 2026 08:59:13 +0100
+In-Reply-To: <amPW1eAPpUuxLoj_@google.com>
 References: <20260703212145.343527-1-dwmw2@infradead.org>
-	 <20260703212145.343527-16-dwmw2@infradead.org>
-	 <amPYq48J9TPbmFNl@google.com>
+	 <20260703212145.343527-9-dwmw2@infradead.org> <amPW1eAPpUuxLoj_@google.com>
 Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-7lSfI0le9i6p711gUU0E"
+	boundary="=-CgYaxXwPNfSHyCXn6DUp"
 User-Agent: Evolution 3.60.3-0ubuntu1~ppa9~24.04 
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-c1860d/1784966213-D437587B-DF5B48AC/0/0
+X-purgate-ID: tlsNG-4011c0/1784966361-5A7DACFC-9DDA2DF5/0/0
 X-purgate-type: clean
-X-purgate-size: 10151
+X-purgate-size: 10700
 
 
---=-7lSfI0le9i6p711gUU0E
+--=-CgYaxXwPNfSHyCXn6DUp
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, 2026-07-24 at 14:27 -0700, Sean Christopherson wrote:
+On Fri, 2026-07-24 at 14:19 -0700, Sean Christopherson wrote:
 > On Fri, Jul 03, 2026, David Woodhouse wrote:
 > > From: David Woodhouse <dwmw@amazon.co.uk>
 > >=20
-> > The compute_guest_tsc() function computes the guest TSC at a given
-> > kernel_ns timestamp. When the master clock reference point
-> > (master_kernel_ns) is earlier than vcpu->arch.this_tsc_nsec, the delta
-> > is negative. Since pvclock_scale_delta() takes a u64, the negative
-> > value wraps to a huge positive number, producing a wildly wrong result.
+> > Previously, the master clock was only activated when the first vCPU
+> > processed KVM_REQ_MASTERCLOCK_UPDATE during KVM_RUN. This meant that
+> > KVM_GET_CLOCK could not return the host_tsc field until after the
+> > first KVM_RUN, making it impossible for userspace to follow the
+> > documented TSC migration procedure without a dummy vCPU run.
 > >=20
-> > Handle negative deltas explicitly by negating the delta, scaling it,
-> > and subtracting from this_tsc_write.
+> > Fix this by calling kvm_update_masterclock() directly from
+> > kvm_arch_vcpu_postcreate(), after kvm_synchronize_tsc() has already
+> > set all_vcpus_matched_freq. This ensures the master clock is active
+> > immediately, and KVM_GET_CLOCK returns a valid {host_tsc, realtime}
+> > pair as soon as a vCPU exists.
+> >=20
+> > Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+> > ---
+> > =C2=A0 arch/x86/kvm/x86.c | 2 ++
+> > =C2=A0 1 file changed, 2 insertions(+)
+> >=20
+> > diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+> > index ff45577ed90c..2039bd8518fb 100644
+> > --- a/arch/x86/kvm/x86.c
+> > +++ b/arch/x86/kvm/x86.c
+> > @@ -13110,6 +13110,8 @@ void kvm_arch_vcpu_postcreate(struct kvm_vcpu *=
+vcpu)
+> > =C2=A0=C2=A0		return;
+> > =C2=A0=C2=A0	vcpu_load(vcpu);
+> > =C2=A0=C2=A0	kvm_synchronize_tsc(vcpu, NULL);
+> > +	if (!vcpu->kvm->arch.use_master_clock)
 >=20
-> Does this need=20
+> Any reason this can't be?
 >=20
-> =C2=A0 Cc: stable@vger.kernel.org
+> 	if (kvm_check_request(KVM_REQ_MASTERCLOCK_UPDATE, vcpu))
+> 		kvm_update_masterclock(vcpu->kvm);
 >=20
-> or is this a "technically a bug fix, but can't happen in practice" sort o=
-f thing?
+> > +		kvm_update_masterclock(vcpu->kvm);
+>=20
+> I don't love doing work outside of KVM_RUN that is typically handled by K=
+VM_RUN,
+> but this seems fine?
 
-Honestly, there's so much hosed in kvmclock that we could debate a
-cc:stable for half of this series. I'm not doing *any* of this to
-actually add new features. For this one I'm not sure it's reachable in
-practice; I think I did it mostly to shut Sashiko up.
+I think I tried that first and it didn't work because
+KVM_REQ_MASTERCLOCK_UPDATE wasn't actually set yet. I remember going
+round in circles a few times here. I'll take another look.
 
-I think even in the KVM_SET_CLOCK_GUEST it can't trigger, although I
-have fantasies about changing the way KVM_SET_CLOCK_GUEST works to fix
-that final =C2=B11ns imprecision (which requires separate work on the
-timekeeping core), that *might* trigger the negative delta here...
-
---=-7lSfI0le9i6p711gUU0E
+--=-CgYaxXwPNfSHyCXn6DUp
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Disposition: attachment; filename="smime.p7s"
 Content-Transfer-Encoding: base64
@@ -225,23 +241,23 @@ vFEOOmuaq7VamuLEPFQtJM4olmipOW6CzrLcFz6J/6yAecEG3P1ZDoy08eSHvM40MAUgpwGa/w6o
 MAkGA1UEBhMCVVMxFzAVBgNVBAoTDkRpZ2lDZXJ0LCBJbmMuMTowOAYDVQQDEzFEaWdpQ2VydCBB
 c3N1cmVkIEcyIFNNSU1FIFJTQTQwOTYgU0hBMzg0IDIwMjQgQ0ExAhADNSi2uzJskfEdOMo4hV0g
 MA0GCWCGSAFlAwQCAQUAoIIBezAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJ
-BTEPFw0yNjA3MjUwNzU2NDVaMC8GCSqGSIb3DQEJBDEiBCCv0MGVIX3LmMPVrA6IBAP2+JkXzOvM
-R86cLENyIPfBfDCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGln
+BTEPFw0yNjA3MjUwNzU5MTNaMC8GCSqGSIb3DQEJBDEiBCB8t4ZszhrGAIHlyWrb/G/y7JngkfnA
+FP+TFLvOnPOmsDCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGln
 aUNlcnQsIEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFzc3VyZWQgRzIgU01JTUUgUlNBNDA5NiBT
 SEEzODQgMjAyNCBDQTECEAM1KLa7MmyR8R04yjiFXSAwgYcGCyqGSIb3DQEJEAILMXigdjBiMQsw
 CQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQsIEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFz
 c3VyZWQgRzIgU01JTUUgUlNBNDA5NiBTSEEzODQgMjAyNCBDQTECEAM1KLa7MmyR8R04yjiFXSAw
-DQYJKoZIhvcNAQEBBQAEggIACI4bk1lRlvW99l30vTHxWt4m6LYi0+uxnCy92fFNZpr7NJrefB1o
-4DamaWpaalMJNOJCOOAcqOyDluJ9Pq2abezA5ScGGH4GoLYpQ20N1G5GTdccZVEPmvgvDOlSVoD8
-wmjD5XWBM+U8WRg9iAtel/RTR8Ug3dNYW+jRNFJSHQfkt3oYdD9pAwQWXGRW0nlmymbpFgSxyTXN
-m1Fzonf1mWhou60ztz5L4auqzNE/CvDnqGstnF0svZSJcRhUQQO5Pmxw8z4jxMA1OcHT9JeZujdg
-DPmjlf81KGwtmvf3T6wgnKQYk2dkQQ0VcQ2m4YndrbCDEDZ36xL1r56EEBNhznbGG2Jo2aI1cUDo
-jtnL1BG3Wo6RZrHRDtmxPydJTEVUemwj1sLmvuCPmNoehT1GsjRCjc2K882vAE2IxyrLvwZljzIp
-syHzUSuMD/bBEvE2WOaTxztuCmHrOq/itsieTTCehnP4MzPW0mZFo1cnbJ5eWKfSFGv96sGs7VKk
-r7SF0AcsvVVD2erjr+z/TW7Op8CttVbn9YrL+xYas46yZHWUhibg3UK2UcdoKpNFg5a5FGUmXEeu
-ZvNq6lr//X1byU9Sw97ZzhFxFj2HzmQxuxuV1tBSllT4vcF2EpTAp6pOBxx/mTtjnG3sJVQDGzYi
-BkglX3ezIgYHcS1sKsiat+YAAAAAAAA=
+DQYJKoZIhvcNAQEBBQAEggIAyTHJMROIOLLF9gAXhw+KaaechdLTWFoQ3FWsMiO0plVK2mmNcCbG
+m5MQ+obRH0Z3duJsOnYk7ju8JjGgEmHzv01ur7B7SdWeJ+s6PWgdhXBjObKX+4yl4IOJ34RsG3F2
+PbsTfm4vobmNqpvl4hYxe4Niv881aE/U8Ah3cRsKqMPdchCJwT75ysyY/01sruvPq8fVsyJh2hF4
+s+jXEpEqJPOzkS2DotZcDRepVA6e5aV1JPn26YtjJQ2O1mY8ow336QO0/YzRVcSBZk96ICd5ITGb
+Tu2uH3OFz1cSWtMSOJXt3+uHCp3Gixq4rPIew3gFRbpslf6JTI7zY2stFPaUjkbDYOpY0WPlVcOo
+cD9/UKyj03YtMYRTeyWhLDtSeAIqYoHbYbgIxmFbAT82ZyRdtSRDx86nwlwfw19bGvvz5Al0RyeC
+7N/oyznMbuDgxLKM8tZCxXNG+o00p6jrvzTk0JjKjTSf61yuWuII8jVMAAPKA8VzsfEsHggifuxq
+6Ec9JgDViD9q4T004uqpR7P+kCa3aCZHAcFO4Vt6+ZpDYvh2pEkd4MX8mHAc/aLgcjfL1/WpC8mF
+mu02sZ1SM3UPhbwmDi6nt2zCpA0LlCDc06oth7xRGKwI4NhWukgE6ZrR2rJsqHD5ahkdKw+rCluM
+peQNSnpALLlkZlng8Uc0Rq8AAAAAAAA=
 
 
---=-7lSfI0le9i6p711gUU0E--
+--=-CgYaxXwPNfSHyCXn6DUp--
 
