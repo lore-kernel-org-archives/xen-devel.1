@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6AACC531F9
-	for <xen-devel@archiver.kernel.org>; Sat, 25 Jul 2026 09:49:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1370562.1618666 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 405ABC53209
+	for <xen-devel@archiver.kernel.org>; Sat, 25 Jul 2026 09:49:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1370575.1618675 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wnZ0N-0004dC-L2; Sat, 25 Jul 2026 09:49:15 +0000
+	id 1wnZ0R-00057S-Vs; Sat, 25 Jul 2026 09:49:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1370562.1618666; Sat, 25 Jul 2026 09:49:15 +0000
+Received: by outflank-mailman (output) from mailman id 1370575.1618675; Sat, 25 Jul 2026 09:49:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wnZ0N-0004d3-I7; Sat, 25 Jul 2026 09:49:15 +0000
-Received: by outflank-mailman (input) for mailman id 1370562;
- Sat, 25 Jul 2026 09:49:13 +0000
+	id 1wnZ0R-00057G-Rr; Sat, 25 Jul 2026 09:49:19 +0000
+Received: by outflank-mailman (input) for mailman id 1370575;
+ Sat, 25 Jul 2026 09:49:19 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1wnZ0L-0004WJ-IQ
- for xen-devel@lists.xenproject.org; Sat, 25 Jul 2026 09:49:13 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1wnZ0R-00053l-B4
+ for xen-devel@lists.xenproject.org; Sat, 25 Jul 2026 09:49:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wnZ0K-00CSAW-Vd
- for xen-devel@lists.xenproject.org; Sat, 25 Jul 2026 11:49:12 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wnZ0Q-003Tyx-OB
+ for xen-devel@lists.xenproject.org; Sat, 25 Jul 2026 11:49:18 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6a648657-2eae-0a2a0a5409dd-0a2a4504d2a2-32
- for <xen-devel@lists.xenproject.org>; Sat, 25 Jul 2026 11:49:12 +0200
-Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a648665-bab6-0a2a0a5309dd-0a2a4505c29e-46
+ for <xen-devel@lists.xenproject.org>; Sat, 25 Jul 2026 11:49:18 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6a648697-b57f-0a2a45040019-aa0a857c863f-3
- for <xen-devel@lists.xenproject.org>; Sat, 25 Jul 2026 11:49:12 +0200
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ id 6a64869d-4cb1-0a2a45050019-aa0a817c7f87-3
+ for <xen-devel@lists.xenproject.org>; Sat, 25 Jul 2026 11:49:18 +0200
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-258-KQRq2d8_MVSDC6JQEZgt4Q-1; Sat,
- 25 Jul 2026 05:49:07 -0400
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-621-BrmrMhXXN0i2jceZC3B3Mw-1; Sat,
+ 25 Jul 2026 05:49:13 -0400
+Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 809991955DB5; Sat, 25 Jul 2026 09:49:05 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 8249419560BF; Sat, 25 Jul 2026 09:49:11 +0000 (UTC)
 Received: from localhost (unknown [10.44.22.7])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 81503300019F; Sat, 25 Jul 2026 09:49:02 +0000 (UTC)
+ by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id D7A2B15AD; Sat, 25 Jul 2026 09:49:09 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,22 +62,22 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1784972951;
+	s=mimecast20190719; t=1784972957;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=HBzav5r/PRxvX7B889078bhSww2+z17xh67+UFrqARc=;
-	b=CcLzqTLxu9vudrkG8Ak+iwVsWSJXDuQTfjXx6wSqq/nBT9d2JXUHttNKc5S2vxaMDwLVmP
-	RJMZPfAp6g+NJieLefCz4jFQhzpbeem3zlo39EPWyp4ZxITmC2DQknkrra7lFFsrPrS972
-	iKPOap/D7zV6hOVz253fhzdliOr0m7s=
-X-MC-Unique: KQRq2d8_MVSDC6JQEZgt4Q-1
-X-Mimecast-MFC-AGG-ID: KQRq2d8_MVSDC6JQEZgt4Q_1784972946
+	bh=w9P2W4JHcW8gHi5z7gIDq25C1oCq7ThbiMkHET5NoPI=;
+	b=HYVMFAFFNk0G9Gu5TRjShkGNtkdPwqWRsXgYXwD20pEShaBguEl1GAvThMyj/UWfx1EgCt
+	pI9oD+3xxFGfu8vJMpGU3azWtxvnwYOJ2ZcCOJeZaljK16LMQJBi10xbI4TnyWX7MKDdyU
+	v2l+czEJFrxCWiKDm1wLTDG16fNIuuE=
+X-MC-Unique: BrmrMhXXN0i2jceZC3B3Mw-1
+X-Mimecast-MFC-AGG-ID: BrmrMhXXN0i2jceZC3B3Mw_1784972951
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Sat, 25 Jul 2026 13:48:35 +0400
-Subject: [PATCH v2 4/8] block: add missing coroutine annotation
+Date: Sat, 25 Jul 2026 13:48:36 +0400
+Subject: [PATCH v2 5/8] qcow2: remove invalid qcow2_check_refcounts calls
 MIME-Version: 1.0
-Message-Id: <20260725-co-v2-4-d3552ddb3931@redhat.com>
+Message-Id: <20260725-co-v2-5-d3552ddb3931@redhat.com>
 References: <20260725-co-v2-0-d3552ddb3931@redhat.com>
 In-Reply-To: <20260725-co-v2-0-d3552ddb3931@redhat.com>
 To: qemu-devel@nongnu.org
@@ -97,58 +97,85 @@ Cc: Markus Armbruster <armbru@redhat.com>, Peter Xu <peterx@redhat.com>,
  xen-devel@lists.xenproject.org, Li Zhijian <lizhijian@fujitsu.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>, 
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=971;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1528;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=abdp1jnclsipbx9mt5zdr1x5wsYMVTEvTXCKXSBolV8=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqZIZz9grl3rujFFr0nC5HACNLTbHVapJE30Tmf
- AxKPYXjJrKJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCamSGcwAKCRDa6OEJdZac
- 5b19D/9DHwTT2RdkS9aJSCsfO+Q/NGFEh9JrYG5r24XOrgePClcjmV6TX6TPmooLrmYjGYUxepw
- MS1Q/eR46z0qBQZjFcnkKGCNcmTDAezrz02GCkl0hx34GcbFD39HfIAtMBuQ1rcnsMh0QZYqVcJ
- 6fwbJdczYk7txUDhNzcNggOrBEgxw4Nv3dlib8ml/eS5+Q+8gTcaPAlsnn5NRKJ8uU+Ug+LrJme
- uuhte+vOvucePU8FIfb6xLmBvizXiujdEfxytHNMT7zNW7jv2zUk0A1brsZv2lNEiCEUtaLbSQK
- W42RevaVr/PbVh7K+ZMD4EABp+13+qwcvlzfeKihasmbFrbA7KK6P/2/WaHW3+q78BeDyJdI7uw
- TzVPZT87QQFcT0U3Ie/+8z5JpDYd5G4ntBrW32oNIMc+eKVFH9a/8+9XKw+yYZZSvfbagLllckw
- OypJubbbIDZxk6TkQEcMyMZk8UvH+2N3U0OeeFn4DY7LTTW5gM8zwjHqDMDUXArkaPjnySvgB7F
- oEgFoj9skf+OzmtyuOhYCVTwErqMi+RslzhIDu5/Hy6FR6zIyA4epj3pQWfwtuUS6ek2iMw+JxD
- qmDqWeFF56u5d/lccsQqUcchkfXxlWrYfADVWRzD9om998gZ6CWAghc/uwUCzFsC2DhLTX9Cx1f
- Ejr+wyhOvjIwxQw==
+ bh=OO6u4jc/oE85ygnu76Eff+BQJm9qaSylokab/TrhS7g=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqZIZzfPevyXGRv+xnq8r35PAUtTMrTUb4NAqe+
+ hkubEX4UVGJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCamSGcwAKCRDa6OEJdZac
+ 5aAKD/wN53cO9tA13mklf71VFEHO7NQPXDCZjyms/h620vuCWbhJgtsXdTs/vauCTj6QNUvEbur
+ fuKl3k2FkArKGYeX7xE4xQEmNJGupnV3nGUeCvIYmGXf0fAJqwjXdF5fN60c+mZ8uVMPW5WjXRB
+ sefOQhmb7hNT1u7G50hQo6Lywi1rAlAltWxCnf/j2yK2LyBHQCArIMzwM+tGfR63ImLvUVeCrHw
+ FU3dbk5dCWNDXGYcNF71kJVvxiqCdLxVEiWbkEtNJHUU2JSh6malEhnFsjaKnz1V5ZIB2BmOCZj
+ NJ5ds5WC3g+koW/4yh9pAajJo3MIWtkpKA4hnm3RT7MpJ3vngIkbT6Qk2u7EjfvNLqInYHWWQfo
+ lt40V1rdSWT5tY6bwj3Gou/6P3xwFWZSk7/ko0C3XvgaW3mml7X9oVls5rGXc65kBE4jtQB3va8
+ RxD9Cio/knC3ua+Brls+Rm33paasb73NYZdiaqXW3a0zk2DmK6l1y+G5lKQfGOW6bvUDv1yfNwB
+ wrSOTxQXxj/Wy/oO2tTL6aVKdqJxMtBnSEo2gCtcfgC8xeXXA49wmMbOLq0s8RmQ8E47BcVzcn/
+ EqOfZPC7iOFaoI1cyhfCAQBS7zyDXyhuv2kB1jV+/W/xKKMPQw6oLSHhUVx4+BNmDDsTO83NyvQ
+ z3SBv86fYOVjKbA==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: EfftffwCwfONULJnmW9tAL3l0fUDb3XtzURpf3XtjF0_1784972946
+X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
+X-Mimecast-MFC-PROC-ID: QFOr934oFcxZcDR0MHZwAqlYO5gAaiEYl9r7OHod3qE_1784972951
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1784972952-C04DBB50-54EDAF33/0/0
+X-purgate-ID: tlsNG-c201ff/1784972958-F6AB72A1-6BD7D1DE/0/0
 X-purgate-type: clean
-X-purgate-size: 973
+X-purgate-size: 1530
 
-The function was extracted without carrying the annotation.
+Those DEBUG_ALLOC-guarded are dead code incorrectly calling coroutine fn
+from non-coroutine. Remove it.
 
-Fixes: 23743ab282af ("block: move commit_run loop to separate function")
 Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-Reviewed-by: Kevin Wolf <kwolf@redhat.com>
+Fixes: 70bacc44532 ("qcow2: mark more functions as coroutine_fns and  GRAPH_RDLOCK")
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- block/commit.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ block/qcow2-snapshot.c | 18 ------------------
+ 1 file changed, 18 deletions(-)
 
-diff --git a/block/commit.c b/block/commit.c
-index c5e3ef03a21b..2d52c39594cd 100644
---- a/block/commit.c
-+++ b/block/commit.c
-@@ -128,8 +128,9 @@ static void commit_clean(Job *job)
-     blk_unref(s->top);
+diff --git a/block/qcow2-snapshot.c b/block/qcow2-snapshot.c
+index 1e8dc48be1c5..8453ad73d10f 100644
+--- a/block/qcow2-snapshot.c
++++ b/block/qcow2-snapshot.c
+@@ -740,12 +740,6 @@ int qcow2_snapshot_create(BlockDriverState *bs, QEMUSnapshotInfo *sn_info)
+                           ROUND_UP(sn->vm_state_size, s->cluster_size),
+                           QCOW2_DISCARD_NEVER, false);
+ 
+-#ifdef DEBUG_ALLOC
+-    {
+-      BdrvCheckResult result = {0};
+-      qcow2_check_refcounts(bs, &result, 0);
+-    }
+-#endif
+     return 0;
+ 
+ fail:
+@@ -893,12 +887,6 @@ int qcow2_snapshot_goto(BlockDriverState *bs, const char *snapshot_id)
+         goto fail;
+     }
+ 
+-#ifdef DEBUG_ALLOC
+-    {
+-        BdrvCheckResult result = {0};
+-        qcow2_check_refcounts(bs, &result, 0);
+-    }
+-#endif
+     return 0;
+ 
+ fail:
+@@ -975,12 +963,6 @@ int qcow2_snapshot_delete(BlockDriverState *bs,
+         return ret;
+     }
+ 
+-#ifdef DEBUG_ALLOC
+-    {
+-        BdrvCheckResult result = {0};
+-        qcow2_check_refcounts(bs, &result, 0);
+-    }
+-#endif
+     return 0;
  }
  
--static int commit_iteration(CommitBlockJob *s, int64_t offset,
--                            int64_t *requested_bytes, void *buf)
-+static int coroutine_fn
-+commit_iteration(CommitBlockJob *s, int64_t offset,
-+                 int64_t *requested_bytes, void *buf)
- {
-     BlockErrorAction action;
-     int64_t bytes = *requested_bytes;
 
 -- 
 2.55.0
