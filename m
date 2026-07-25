@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 594A7C531C9
-	for <xen-devel@archiver.kernel.org>; Sat, 25 Jul 2026 07:53:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1370493.1618603 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BD26C531C9
+	for <xen-devel@archiver.kernel.org>; Sat, 25 Jul 2026 07:57:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1370502.1618612 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wnXCE-0007iV-IR; Sat, 25 Jul 2026 07:53:22 +0000
+	id 1wnXFg-0008Tn-4E; Sat, 25 Jul 2026 07:56:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1370493.1618603; Sat, 25 Jul 2026 07:53:22 +0000
+Received: by outflank-mailman (output) from mailman id 1370502.1618612; Sat, 25 Jul 2026 07:56:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wnXCE-0007iO-Ea; Sat, 25 Jul 2026 07:53:22 +0000
-Received: by outflank-mailman (input) for mailman id 1370493;
- Sat, 25 Jul 2026 07:53:21 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wnXFg-0008Tg-0z; Sat, 25 Jul 2026 07:56:56 +0000
+Received: by outflank-mailman (input) for mailman id 1370502;
+ Sat, 25 Jul 2026 07:56:55 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+5c502c0e710a0fe11638+8371+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1wnXCD-0007hz-6V
- for xen-devel@lists.xenproject.org; Sat, 25 Jul 2026 07:53:21 +0000
+ id 1wnXFf-0008Ta-7z
+ for xen-devel@lists.xenproject.org; Sat, 25 Jul 2026 07:56:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wnXCC-008j9h-75; Sat, 25 Jul 2026 09:53:20 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wnXFe-00DlrV-AD; Sat, 25 Jul 2026 09:56:54 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+5c502c0e710a0fe11638+8371+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a646b02-2eae-0a2a0a5409dd-0a2a450bdd18-42
- for <multiple-recipients>; Sat, 25 Jul 2026 09:53:19 +0200
+ id 6a646c02-e002-0a2a0a5209dd-0a2a4508cacc-36
+ for <multiple-recipients>; Sat, 25 Jul 2026 09:56:53 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+5c502c0e710a0fe11638+8371+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a646b6f-b7e8-0a2a450b0019-5a9b3222b0a8-3
- for <multiple-recipients>; Sat, 25 Jul 2026 09:53:19 +0200
+ id 6a646c45-f659-0a2a45080019-5a9b3222b648-3
+ for <multiple-recipients>; Sat, 25 Jul 2026 09:56:53 +0200
 Received: from [2001:8b0:10b:5:5b17:8d34:712e:739e]
  (helo=u09cd745991455d.ant.amazon.com)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wnXC2-00000005m2Y-0C0t; Sat, 25 Jul 2026 07:53:10 +0000
+ id 1wnXFW-00000005mS3-31BS; Sat, 25 Jul 2026 07:56:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,14 +55,15 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
 	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
 	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=M7/WPeZBsoSxpSBfBI8WVo8T/ypKP3M2wrzRNig2VKw=; b=jQJzK/k5mkE0L75BzBmn3dFEas
-	yUHKOFQQg+oCysnYyYZqERqQbVSo66xWrv/uIxZxBBrMZ0qOaCVZiHXxSgtc/8QKzvuRsJ6HHSWhv
-	EXJvwQYXikZaWdqjk1sOXOoYCltxxBUvm/QoXIaqds2ywS8XT0odgoI+tWbcQzhIEZ/7vkK0nmZ2V
-	BguA+Kn21kLNKexp/kXAFklWhT/nu5jADnNpAuaDS9bhbpf8NqweOm1pRE8DrKOqmUQkwZ+91tuM9
-	4IDG3+TsbTP7HG+4zUK1OzYRyAxMcgQwMmBkw3E2REVopAsHF9c27R4o9K6h+iH2cIcjb+pLPKXvY
-	6ZgPq7xw==;
-Message-ID: <19ec3f984a494a0d5e97b8d2fa843668b953a212.camel@infradead.org>
-Subject: Re: [PATCH v6 12/36] KVM: x86: Restructure get_kvmclock()
+	bh=1qABX9vINQPftk3vF3d3lgoPe1oYQvcL3sVi03wzJpo=; b=sOORCWKM8W+VUb/S1Zus69/eCu
+	Die6st5bOthOpDs1R7JJYD1M3Rcm2I5+gnoalPrcGdtjvts8zG1mxP22sl3x8wI+RfMxRWT4vAGJB
+	EC5NcPx7oMw7veoVWncvG69X3UskoD0/I5e3oc0i1wZUW70DjWVN/Izi/43xOnA8rnvxe0C9e9lCW
+	td9t0p3kus3nLuqpwVMAxa3k6S+cvyhqTTm08kChwwBATVCXoVXyV7/edvYKtL/GKI8giUKYOKeo9
+	hiCb+57+QeUPFv7egNaOqGzHab83DgrCNAoP7Hy7bKlPOG/LpnCNAoZ6r1Qn4LAu+Krce87ORCJnC
+	g8/2rQuQ==;
+Message-ID: <b38f67187d3312c4bf2c9eddf89e14e8b10573d6.camel@infradead.org>
+Subject: Re: [PATCH v6 15/36] KVM: x86: Fix compute_guest_tsc() to handle
+ negative time deltas
 From: David Woodhouse <dwmw2@infradead.org>
 To: Sean Christopherson <seanjc@google.com>
 Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
@@ -77,56 +78,56 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
  Zhang	 <dongli.zhang@oracle.com>, joe.jin@oracle.com, kvm@vger.kernel.org, 
 	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
 	xen-devel@lists.xenproject.org, linux-kselftest@vger.kernel.org
-Date: Sat, 25 Jul 2026 08:53:09 +0100
-In-Reply-To: <amPZRkxTLE-rZcJf@google.com>
+Date: Sat, 25 Jul 2026 08:56:45 +0100
+In-Reply-To: <amPYq48J9TPbmFNl@google.com>
 References: <20260703212145.343527-1-dwmw2@infradead.org>
-	 <20260703212145.343527-13-dwmw2@infradead.org>
-	 <amPZRkxTLE-rZcJf@google.com>
+	 <20260703212145.343527-16-dwmw2@infradead.org>
+	 <amPYq48J9TPbmFNl@google.com>
 Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-Y6nBW7nV6dQqWGAjG/7v"
+	boundary="=-7lSfI0le9i6p711gUU0E"
 User-Agent: Evolution 3.60.3-0ubuntu1~ppa9~24.04 
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-42698a/1784965999-19AC09EA-3442FE1B/0/0
+X-purgate-ID: tlsNG-c1860d/1784966213-D437587B-DF5B48AC/0/0
 X-purgate-type: clean
-X-purgate-size: 10184
+X-purgate-size: 10151
 
 
---=-Y6nBW7nV6dQqWGAjG/7v
+--=-7lSfI0le9i6p711gUU0E
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, 2026-07-24 at 14:29 -0700, Sean Christopherson wrote:
-> =C2=A0
-> > Given that, the get_cpu()/put_cpu() pinning is not needed either: both
-> > the TSC read and get_cpu_tsc_khz() are CPU-independent when the master
-> > clock is in use, so drop them.
+On Fri, 2026-07-24 at 14:27 -0700, Sean Christopherson wrote:
+> On Fri, Jul 03, 2026, David Woodhouse wrote:
+> > From: David Woodhouse <dwmw@amazon.co.uk>
 > >=20
-> > Wrap the entire use_master_clock block in #ifdef CONFIG_X86_64, since
-> > use_master_clock is never true on 32-bit (host_tsc_clocksource is only
-> > set under CONFIG_X86_64), and declare hv_clock inside the block so it i=
-s
-> > not left as an unused variable on 32-bit.
+> > The compute_guest_tsc() function computes the guest TSC at a given
+> > kernel_ns timestamp. When the master clock reference point
+> > (master_kernel_ns) is earlier than vcpu->arch.this_tsc_nsec, the delta
+> > is negative. Since pvclock_scale_delta() takes a u64, the negative
+> > value wraps to a huge positive number, producing a wildly wrong result.
 > >=20
-> > Use 'continue' on the master-clock success path so the non-master-clock
-> > computation becomes the common tail, avoiding a goto and label. When th=
-e
-> > clock read fails (e.g. clocksource transitioning away from TSC), fall
-> > back to that path rather than proceeding with uninitialised data or
-> > spinning in the seqcount loop.
+> > Handle negative deltas explicitly by negating the delta, scaling it,
+> > and subtracting from this_tsc_write.
 >=20
-> Please split this up.=C2=A0 The changelog suggests there are at least thr=
-ee logical
-> changes here.=C2=A0 Yeah, the series is big, but smaller patches helps wi=
-th review,
-> even if it results in more total patches.
+> Does this need=20
+>=20
+> =C2=A0 Cc: stable@vger.kernel.org
+>=20
+> or is this a "technically a bug fix, but can't happen in practice" sort o=
+f thing?
 
-I don't think the latter two are separable; the refactoring of the
-ifdef and the loop and the way it breaks out to the tail are all
-intertwined. I may be able to pull the get_cpu()/get_cpu_tsc_khz() part
-out into a preliminary commit though. I'll take a look.
+Honestly, there's so much hosed in kvmclock that we could debate a
+cc:stable for half of this series. I'm not doing *any* of this to
+actually add new features. For this one I'm not sure it's reachable in
+practice; I think I did it mostly to shut Sashiko up.
 
---=-Y6nBW7nV6dQqWGAjG/7v
+I think even in the KVM_SET_CLOCK_GUEST it can't trigger, although I
+have fantasies about changing the way KVM_SET_CLOCK_GUEST works to fix
+that final =C2=B11ns imprecision (which requires separate work on the
+timekeeping core), that *might* trigger the negative delta here...
+
+--=-7lSfI0le9i6p711gUU0E
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Disposition: attachment; filename="smime.p7s"
 Content-Transfer-Encoding: base64
@@ -224,23 +225,23 @@ vFEOOmuaq7VamuLEPFQtJM4olmipOW6CzrLcFz6J/6yAecEG3P1ZDoy08eSHvM40MAUgpwGa/w6o
 MAkGA1UEBhMCVVMxFzAVBgNVBAoTDkRpZ2lDZXJ0LCBJbmMuMTowOAYDVQQDEzFEaWdpQ2VydCBB
 c3N1cmVkIEcyIFNNSU1FIFJTQTQwOTYgU0hBMzg0IDIwMjQgQ0ExAhADNSi2uzJskfEdOMo4hV0g
 MA0GCWCGSAFlAwQCAQUAoIIBezAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJ
-BTEPFw0yNjA3MjUwNzUzMDlaMC8GCSqGSIb3DQEJBDEiBCA/Lvd03+VjutTZijYiDyp7uPZDrs5U
-qwQRbqImitYbUTCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGln
+BTEPFw0yNjA3MjUwNzU2NDVaMC8GCSqGSIb3DQEJBDEiBCCv0MGVIX3LmMPVrA6IBAP2+JkXzOvM
+R86cLENyIPfBfDCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGln
 aUNlcnQsIEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFzc3VyZWQgRzIgU01JTUUgUlNBNDA5NiBT
 SEEzODQgMjAyNCBDQTECEAM1KLa7MmyR8R04yjiFXSAwgYcGCyqGSIb3DQEJEAILMXigdjBiMQsw
 CQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQsIEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFz
 c3VyZWQgRzIgU01JTUUgUlNBNDA5NiBTSEEzODQgMjAyNCBDQTECEAM1KLa7MmyR8R04yjiFXSAw
-DQYJKoZIhvcNAQEBBQAEggIAPmmHGnIj4nkqf3KDfUVZ6Jaqm5xm7CYAsNLdI51GHWIwZUYVTcfK
-I3N6WUA4JK2yncQNPVvMBp1bfLbtK5ukEyZUURqBwOCMA/Ku9Uj2ommEiOlWryHjTBbNUPRq6vWn
-hnQv/Q9GsiYl/8Nd4Zw3dLIL/74s3le6uJCnI3ppG+76MCo8RDkQOljemngBTz0elKSYTI5JGjeD
-2N/SyMi3VvHfWAtwPsifhA7eyTlgt7CZGQhI17NiMwcj/0KQeO3wJxDbRUH2+0kTBUXOOfBWSQ3i
-Cq79eG6qsCSFYfKKKkWkpnJu/lMpZBMxiNxWtVW573rCWkf36/5uzOfhvyi8IQOOu4N2QU7LTN+N
-U6uu0vLUxEUQ0QZ5bb430lAS8GLmnJd5KA/FNLFkmy6Ney6xRZ9g0vprOekhTpJWuXup65COg+mQ
-IdMq6hUu4/t2W/yXywlKOPxuGE/1pE5LUFryAcniGLhPepLPmC8C1AHlhpfBmIBu+/BfRIpof/OP
-8IsmzE7MfZJ9nerVdhiP7vhqo7tpNKyL5L37i2WglvBCOwhDSxvEc3RX3iw2tsH4wQlzcYl2Y7pZ
-MBvGCYvhh9UDBIl7FAa2h/rboOoKMoybeztbwC5Oq3a3Y/ywJ3WGWil2r/Ci91F7nGfhQWGf7dfP
-FBSXqUX4XQapnr3n3/NQ3KkAAAAAAAA=
+DQYJKoZIhvcNAQEBBQAEggIACI4bk1lRlvW99l30vTHxWt4m6LYi0+uxnCy92fFNZpr7NJrefB1o
+4DamaWpaalMJNOJCOOAcqOyDluJ9Pq2abezA5ScGGH4GoLYpQ20N1G5GTdccZVEPmvgvDOlSVoD8
+wmjD5XWBM+U8WRg9iAtel/RTR8Ug3dNYW+jRNFJSHQfkt3oYdD9pAwQWXGRW0nlmymbpFgSxyTXN
+m1Fzonf1mWhou60ztz5L4auqzNE/CvDnqGstnF0svZSJcRhUQQO5Pmxw8z4jxMA1OcHT9JeZujdg
+DPmjlf81KGwtmvf3T6wgnKQYk2dkQQ0VcQ2m4YndrbCDEDZ36xL1r56EEBNhznbGG2Jo2aI1cUDo
+jtnL1BG3Wo6RZrHRDtmxPydJTEVUemwj1sLmvuCPmNoehT1GsjRCjc2K882vAE2IxyrLvwZljzIp
+syHzUSuMD/bBEvE2WOaTxztuCmHrOq/itsieTTCehnP4MzPW0mZFo1cnbJ5eWKfSFGv96sGs7VKk
+r7SF0AcsvVVD2erjr+z/TW7Op8CttVbn9YrL+xYas46yZHWUhibg3UK2UcdoKpNFg5a5FGUmXEeu
+ZvNq6lr//X1byU9Sw97ZzhFxFj2HzmQxuxuV1tBSllT4vcF2EpTAp6pOBxx/mTtjnG3sJVQDGzYi
+BkglX3ezIgYHcS1sKsiat+YAAAAAAAA=
 
 
---=-Y6nBW7nV6dQqWGAjG/7v--
+--=-7lSfI0le9i6p711gUU0E--
 
