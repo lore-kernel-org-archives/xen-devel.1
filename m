@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6351CC531D0
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2026 12:23:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1371653.1619136 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F445C531D0
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2026 12:32:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1371663.1619145 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woKMi-0005Xl-2v; Mon, 27 Jul 2026 12:23:28 +0000
+	id 1woKV9-0007Gb-SN; Mon, 27 Jul 2026 12:32:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1371653.1619136; Mon, 27 Jul 2026 12:23:28 +0000
+Received: by outflank-mailman (output) from mailman id 1371663.1619145; Mon, 27 Jul 2026 12:32:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woKMi-0005Xe-0K; Mon, 27 Jul 2026 12:23:28 +0000
-Received: by outflank-mailman (input) for mailman id 1371653;
- Mon, 27 Jul 2026 12:23:26 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1woKV9-0007GU-Op; Mon, 27 Jul 2026 12:32:11 +0000
+Received: by outflank-mailman (input) for mailman id 1371663;
+ Mon, 27 Jul 2026 12:32:09 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1woKMg-0005XU-67
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 12:23:26 +0000
+ (envelope-from <jbeulich@suse.com>) id 1woKV7-0007GO-Tl
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 12:32:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woKMe-0080Fr-Sd
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 14:23:24 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1woKV6-00BdIA-Mg
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 14:32:08 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a674dbc-2eae-0a2a0a5409dd-0a2a4506e0e2-0
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 14:23:24 +0200
-Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a674fbd-bab6-0a2a0a5309dd-0a2a4507e916-36
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 14:32:08 +0200
+Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a674dbc-195a-0a2a45060019-d155dd36a9dd-3
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 14:23:24 +0200
-Received: by mail-wr1-f54.google.com with SMTP id
- ffacd0b85a97d-4720f3bf164so2136095f8f.1
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 05:23:24 -0700 (PDT)
+ id 6a674fc2-b4ea-0a2a45070019-d1558036bccc-3
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 14:32:03 +0200
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-4921eed3fa2so18401105e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 05:32:03 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f85c67339sm50945133f8f.31.2026.07.27.05.23.23
+ 5b1f17b1804b1-4957f9ae5c3sm317860385e9.3.2026.07.27.05.32.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Jul 2026 05:23:23 -0700 (PDT)
+ Mon, 27 Jul 2026 05:32:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,53 +55,58 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785155004; x=1785759804; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785155522; x=1785760322; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=egNyHdNN2UvjznrPSLXfehphZBRnNfRmxXDWUw/tZNU=;
-        b=O7s6f/QjgyPEPmiUUgSVLP2zmomIoLtMvSaugT9gmJtKe2quVA3IC6+oB/kCnC1rYA
-         Z7RCHOorFB+sp+lXp6Yd98q1TooxJMlW5f1l0Vsjl9bvhVket0YW6+Fsf6hKIN6PVFwE
-         DB+C0TJG05LZL47pPQr/cptQDJ6Edr4U1s3OEDfRrEtJDAXIIZ2tdg04N9JdSTnQm44p
-         tDaC/3ZaPqyT2y0hJ5HF+H11lsMkplIAWxXtWFj32cTwNZtTa/B+RvmucDnklC57xaQb
-         F+rVxlnFEmIhDsJw56ggfub0i8mwAlN6hn0gXiTBPokDqVQU3Vb5CvMNXJgtRbhI9DTe
-         TqiQ==
+        bh=VOBLruOjWVa15LATPjQeGrS7AXROMCpYrldYgMQZ5PI=;
+        b=cPfiSj15pGjvjUfYMIyd6gumN6X5IdRhpwhS9son0VWL8gyJYXn93BtF7k4tnBi9MQ
+         Mp0zPbd6ikceU0qAtpfsyOnjugd0RYPkEAq+kPR+NggcGdfnJERXzYzkAuKfH5bagWo+
+         sFf4iZoXeKuT+/XNJMjtP4T3VrQHCSKpNvWBRVoRMYhoZ+1y5u1GVPxiU8PnF4us77Dm
+         mDeNVMvtUoDo5czT1PNUBPIvNKokM2UJ4EsCu71E1oFj/aySiFM71ChXhWeiZC9YKup5
+         PhqSAiwLFN8R6qxWZtqqO8hzNo5X2j2Rh3Nd7Aau/iPBirl6nMA8sz1/ARPSP5w6rBSL
+         C4Ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785155004; x=1785759804;
+        d=1e100.net; s=20251104; t=1785155522; x=1785760322;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=egNyHdNN2UvjznrPSLXfehphZBRnNfRmxXDWUw/tZNU=;
-        b=DAluK9uPhA0G9Kruu2ylTsNAZaQgRBHRp34lJPBKcrkccZUBk+Fe82yMS6sawm+mrM
-         Mg69M1yTfqIFViJ8nLpwgXYI7wBhgPqmaxvdeii3LuWupQupE/9HQmii7diZdL7XrnC5
-         jXo39QqfhHnL+FbdOCEajaL0M6mItI/Hrd9sO7jiqodHr77NlZgMf1heI0JG/gupu5sK
-         /on7KsEgWahje+X9OTW5PdmDVRJN+S7ZVfjw6LCw2qRwpvmIdDi/U9eI+9fLnVGvOogy
-         AuGZ322UZ/Gyoj98FVV9I6U0rz8DM3kIVYLH5PYkgkao1csyX5rs7UfOWU4vwLGXkrbz
-         8bBQ==
-X-Forwarded-Encrypted: i=1; AHgh+RpV7hWfI7iKNsTdkl0ZExOciXObl44U7pzdtDNBuPWUwfbKKRHMpyUxUqTzMKmmKyJ1Q8BzdGsNh4g=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzF2/Vz4v16TTgh3uOmsidKlJNXriHAypci8/H730MZ88WwSZ6n
-	P4kIoyPpC89Dvok/pRxu7Ble4Xs3zQFkc6XQ+4W+0nlOKzDUElhrkv5qWpRs5agMDw==
-X-Gm-Gg: AR+sD11gdDICHavHXziIddE9USjmCEjEjyhnozQRlbSs8FEtxWspLGDnfaoB0TJtsmq
-	wXl395YRA6EepF5berJ1Qi2sqb39q+3HlGyZj2sWJ7qLQ4QPDV3B3wbkUvj0EpeAIj93gPaEtaD
-	Z/tO4XOqcJiifZPBIE+DXQIY+d7j49MIzIhGIEgXPVWspwkmljgtQ2mZiPjSJge1C38KwOxmZfU
-	B4XcL6w6HHM79R7JNKA8t/s10qRrSetg8h3GdJaNgNpH9BgL3MyJgr4d5JFeDzyCjpuzeirI2eh
-	zEjNcnqk4yxbu4QA2qm+W6W5LWcvZC9dMt+29s7ZSACUOGlw0VzbNa4KawUusLfeB7s+h01lvhF
-	anSrLocz6gWJGLaKyrWHJS9mrPUO2kF6sjS5aDJxLwa+aTAqY2QhtPV+lMpXMlSeB3JjYJBShD7
-	92pspFFjE6KwXoHTkGPMrbjUKD/Ufg7toFBNinJnNsimZ87dyOBQFN6f5za+p1U5DE3w==
-X-Received: by 2002:a05:6000:4013:b0:47f:8603:a879 with SMTP id ffacd0b85a97d-47f9fe901e9mr11428489f8f.11.1785155004162;
-        Mon, 27 Jul 2026 05:23:24 -0700 (PDT)
-Message-ID: <5b8b6a2e-b074-4dc4-adc0-d7c242d04710@suse.com>
-Date: Mon, 27 Jul 2026 14:23:22 +0200
+        bh=VOBLruOjWVa15LATPjQeGrS7AXROMCpYrldYgMQZ5PI=;
+        b=B6+/MDRd7l6fC4V2o9Vv52QRUbLy5HjEUMUzxI3TO28qsxNeoYQCTtqCyF4HzMYKrC
+         COLevzCF01QBkXgk1yaDJuJjz41gRcRquH4LJ9Dw855jkpa0DDeWlhtPymA4bG7XxNoN
+         kSHKYppJKKdrxS3yfeagSHAgCDUq7neRi6rAvfcnAMdlNHzQlg7yW4MWDax2wH8Iq9NZ
+         Bc11tlzOM81+skbBxvk2jCvZYQ+0MsHRIjrgdIa5QBdJQM03xecL0iL1OM0GCJexoen7
+         voOJY4Ir1c+1qNeGpTJglwzmXtja41wV1Q2W5sz7P3gsxzboS09A+NSWJ6ksZbjtBFoz
+         49wQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rqsm6evxrYpj+CO47CJYIEjofXOH23AcHZlqJsMZArYIq4VxJZwXpDfebeEZr68ytJgg8sSn8Ck8Fc=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyprTuS7UIMb9kvbTUbOvXlWrGavkz4/Fhrmx/H99MDAsL2x694
+	wOum3CK5WVy6JQsrlVhjCIZkDnxjepzrwvjkdc+e/FvBX4jfNfe1TsxewkCnaKkIHQ==
+X-Gm-Gg: AR+sD107vU33hl2Rp12jiCal0CYg6QnNsikHGeYa5MCoVEMLaFFQgr8pEI5GSu6ZqrN
+	VpGIdKZ0YZS2UalfQCPicjdqJbnd3Hp15DqBYajhCR+g9f+krLdg49lt55TkH4zTYU6RezG+W60
+	9W0X+/sXHb6Mq2DpS0iTqag2IAK/0TW0z3j3ihNReJ4Pf7HSTdcKGhHJMg1ph0hB6pTkaUo5Xmr
+	wBqBFpTnXcaJDnOcJ9I72qHsPcka8zoqt/CWwv3Vd5V1XRIi5ZZ50gdZTthKIwaAlUu9IlcHQE3
+	iWYdgEQ62FK53/oiYWvpmqAEVcPa8aTC7pMyB9nXAtHt6whDAhZZOQ81Jqu7+UXHSvBNVL8irHS
+	YVG26Mu7JZmMg/fWeTm3ctykAmr3DuS8H47m2DiW5DtuQOepfnuMca25roy4TwLvJa5INv7bAHE
+	UNqWRXCxb/TSTnYZgw5+nP4fFbRlbH0HxPpVnp5MrBC3wYkEh60FGEquvSa/4EX/ve7mAxk+0rk
+	6rk
+X-Received: by 2002:a05:600c:190b:b0:493:bcba:46a4 with SMTP id 5b1f17b1804b1-496b570dbb0mr104579715e9.20.1785155522528;
+        Mon, 27 Jul 2026 05:32:02 -0700 (PDT)
+Message-ID: <8f8d902a-b464-4e18-bec4-90b45edae4c8@suse.com>
+Date: Mon, 27 Jul 2026 14:32:01 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 7/9] vpci: split vpci_process_pending()
+Subject: Re: [PATCH v5 8/9] vpci: allow queueing of mapping operations
 To: Stewart Hildebrand <stewart.hildebrand@amd.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Mykyta Poturai <mykyta_poturai@epam.com>, xen-devel@lists.xenproject.org
 References: <20260708210233.922275-1-stewart.hildebrand@amd.com>
- <20260708210233.922275-8-stewart.hildebrand@amd.com>
+ <20260708210233.922275-9-stewart.hildebrand@amd.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -127,34 +132,32 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260708210233.922275-8-stewart.hildebrand@amd.com>
+In-Reply-To: <20260708210233.922275-9-stewart.hildebrand@amd.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1785155004-1F0C777B-E7E79EB0/0/0
+X-purgate-ID: tlsNG-ef75cf/1785155523-A5EC6AE4-D19ED8F7/0/0
 X-purgate-type: clean
-X-purgate-size: 805
+X-purgate-size: 952
 
 On 08.07.2026 23:02, Stewart Hildebrand wrote:
-> Create a new function to separate the mapping logic from the pdev
-> validation and lock-acquiring logic. Slightly consolidate exit paths for
-> hardware_domain and !hardware_domain.
-> 
-> No functional change.
+> +static struct map_task *alloc_map_task(const struct pci_dev *pdev, bool map,
+> +                                       bool rom_only)
+> +{
+> +    struct map_task *task;
+> +    unsigned int i;
+> +
+> +    task = xvzalloc(struct map_task);
+> +    if ( !task )
+> +        return NULL;
 
-Is this then just for the sake of splitting, perhaps indeed helping clarity some?
-Or is this split also going to be leveraged later?
-
-> --- a/xen/drivers/vpci/header.c
-> +++ b/xen/drivers/vpci/header.c
-> @@ -102,23 +102,12 @@ static int cf_check map_range(
->      return rc;
->  }
->  
-> -bool vpci_process_pending(struct vcpu *v)
-> +static int process_map_task(const struct pci_dev *pdev, bool map)
-
-In the end it'll of course be Roger's call, yet I wonder: What's the significance
-of "task" in the new function's name?
+Just one remark here, as generally I'm trying to stay away from this: From what
+Stefano said on earlier occasions (more generally, and not on any vPCI-specific
+thread) new runtime allocations want avoiding for the purposes that you have.
+How come such a crucial one, required for correct operation at potentially any
+point in time, is then deemed acceptable? Even more so as, from the description,
+only single items will be queued right now anyway, i.e. this apparently being a
+step towards worse overall behavior? This aspect imo needs explicitly discussing
+and justifying in the description.
 
 Jan
 
