@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DFE6C531D0
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2026 12:01:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1371636.1619117 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9954BC531D0
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2026 12:13:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1371645.1619127 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woK0v-0001io-63; Mon, 27 Jul 2026 12:00:57 +0000
+	id 1woKCn-0003f3-7O; Mon, 27 Jul 2026 12:13:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1371636.1619117; Mon, 27 Jul 2026 12:00:57 +0000
+Received: by outflank-mailman (output) from mailman id 1371645.1619127; Mon, 27 Jul 2026 12:13:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woK0v-0001ih-3S; Mon, 27 Jul 2026 12:00:57 +0000
-Received: by outflank-mailman (input) for mailman id 1371636;
- Mon, 27 Jul 2026 12:00:56 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1woKCn-0003ew-3j; Mon, 27 Jul 2026 12:13:13 +0000
+Received: by outflank-mailman (input) for mailman id 1371645;
+ Mon, 27 Jul 2026 12:13:11 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1woK0t-0001iV-Ug
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 12:00:56 +0000
+ (envelope-from <jbeulich@suse.com>) id 1woKCl-0003eq-Fn
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 12:13:11 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woK0t-007vAI-2T
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 14:00:55 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1woKCk-003gUR-Dy
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 14:13:10 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a674875-e002-0a2a0a5209dd-0a2a4509d568-6
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 14:00:54 +0200
-Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a674b48-2eae-0a2a0a5409dd-0a2a450b8154-38
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 14:13:10 +0200
+Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a674876-be1a-0a2a45090019-d155dd2bd92b-3
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 14:00:54 +0200
-Received: by mail-wr1-f43.google.com with SMTP id
- ffacd0b85a97d-47f71156e1aso1160301f8f.3
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 05:00:54 -0700 (PDT)
+ id 6a674b56-b7e8-0a2a450b0019-d1558035d17c-3
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 14:13:10 +0200
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-4955158f26aso16969275e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 05:13:10 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4957bfe07e1sm229802885e9.3.2026.07.27.05.00.53
+ 5b1f17b1804b1-4957bfd1a60sm232393315e9.2.2026.07.27.05.13.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Jul 2026 05:00:53 -0700 (PDT)
+ Mon, 27 Jul 2026 05:13:09 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,54 +55,54 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785153654; x=1785758454; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785154390; x=1785759190; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Ay4E3J2TPozCmi47FWW7WBqpfGdfi6JsR37XYggDNR8=;
-        b=PIyjEeIpqZn6EZuQx/Og+1bkUGzIcZQEth52gcI/gap7QNc6QnoXAa4JeFEvp+CBGh
-         Il4/MTGeZojwdOk9kFLJieGkV390CqkvgBgXNfZLpUzXs0FXAOJAT9E9uG6mfnjfo1ZF
-         SQ9yBPmt75bhSyv7itNZynnM6AVpKvTTGkXU7Ce2H0PpDTjR9z7aG/QyKcpcL6497PvE
-         mxDdSXsswS7avL09dQD9CTLbNP9BnIGmj6cEsf3dv2Qv4BG3ge7dO21M0MmPCm77Ceci
-         A3FE7T/UgmfDp7PTSFo5TNIWRAW/dIryiI0vMuLg9/4eu0aO9jLMOZDBkjbBoVykVGqC
-         msuw==
+        bh=OvbafVmBAOD4G/3HqlBa2OMetCsCIoid95w/exmuzDo=;
+        b=IW79x4QqVedygHBFDbeD4XcvtL9ndWjA/c4Z5NIsrl8yFULujNB7myeFEEtytbnigx
+         RcyGt0FIMxgtbYKjL3gDVfHNL1s5LL3EukH25V2lTQPOlVRQUhfCf3Cvk/8O0Cs1ZpVv
+         ZBTVWHE1E9ULtfyDB7eVAE6+1734J4I5ac2OxEnqI8GonHD9srGXtUqENgTgPKQJHA+2
+         QDPWsp4KwvvFgsaVUeFAQ+YtvtFSGC6R1VWIPKIeR1/w85Rq4PlkmIrQ7PPIWxAvb261
+         4gefvkyOaELUgcP7QP7lJJdJxMeZ/+hXhB1SxykH1G4AUpdgt76HciaYBaTlCU5vhErN
+         knUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785153654; x=1785758454;
+        d=1e100.net; s=20251104; t=1785154390; x=1785759190;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Ay4E3J2TPozCmi47FWW7WBqpfGdfi6JsR37XYggDNR8=;
-        b=AIJHGoFxxDYOKDiiitxSnphIqXIZx46Tn0Ob5DNHSXcEuSILmUwiIBx4vilKOtLdza
-         q4GgkUa2+5v8N3beCBBTLCSmRcEB4R9X7OU2TeMr31RwHiQoxJY8v8mWIpCspzo5delZ
-         Yox8arL4JHhqBWTcx2xYfnv7H8ZUNulK4PXWI9TkJablIY1Xt7wtuh0z7cqULKLW4o4J
-         aViUae91uklY3TmBP3qzv/S5RlaGk0vOPLKOPUe1qWG/loyQGd1h/bp+rIa+FVrCFSTZ
-         9NmhaejRYhYCGiqFZLCEIEAve4EDmpDH8SJmqpK67I4MkE4EaXNkxXTJxSIorekcppmG
-         xK0g==
-X-Forwarded-Encrypted: i=1; AHgh+RpSDMZx69FC3U19vi+J3vVvTxvU0aaUGd1rPbxotxbaIVdCAHWcPWN6kNjUW+c/HCSfjy2TCO1NoXI=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yyi75MW1yNbExoZmUucuX5xut9Ob6C4wCxu1h9wZAx6JdiSAnu/
-	dq5nt/FL6+4rZVL86jWwBG07Jmqun+/JNXQ4qzgGuOFKpD1CWaLgh2pY8i7+PLIPpg==
-X-Gm-Gg: AR+sD10jynrTaj1q2V/sjky4OXDQn5PdsnduImO5SvZKILeooscr/2d0txsG5Xt9glP
-	WtPABw810msckvyMuybAAB3ORhwwXkFrntLuXGPe5N5iP0uMIDh7v3tl2ThGOvPGuvey4ewNC/P
-	vcuWSLz3wcAsyFzk/JuW8IyEm3AlVAYLDJ1t7gDVxkLxfsa0abnM6ukVB7ncNiqQsSAOC5iHQs4
-	oR3ZZ4oLf/F8R0+FSbIY4ByMACU7523zNfY2QIgNj2jxHck2ZbAZiokSjabff10fN3e9yYypZ0B
-	5sivT+i4RAa2tog16mnjFH2wfaqRnEm6qrCAaMMupCNRRjE0x/DhOG/z5uktirojRzxjHeYI35d
-	bmAQtq7qa8oQbUdqOJvExBwz0va61CnslIon9CuVowaM6T/v8YsLVBfbWIKLgwX6wZWg7J6gqri
-	J1rWL3X9RPB+jPKg0qAr8swUwrq3rwDjg2pq2y5Ko6o087KH6YFNKboAoDnqqjUmgIYw==
-X-Received: by 2002:a05:600c:3113:b0:495:39aa:1359 with SMTP id 5b1f17b1804b1-496b570fb1bmr92262275e9.3.1785153654237;
-        Mon, 27 Jul 2026 05:00:54 -0700 (PDT)
-Message-ID: <1f62781b-7312-4360-ab02-b5b65c9ff407@suse.com>
-Date: Mon, 27 Jul 2026 14:00:53 +0200
+        bh=OvbafVmBAOD4G/3HqlBa2OMetCsCIoid95w/exmuzDo=;
+        b=BHZHhQkc1NXy5fx0ZlGAGaNKRmMqu8LVzEExo7KM+FArDuAIGzO0W8eXUIwtC4QDnK
+         WezicaSa6APDPgYhCa5aLIJO1shUbVmD8B/0Z7L4WYaCGBp8x/JZmfGH6N2V8jkaC4U9
+         Erf5IQa296kzMQZHNo3QNnDS0VIgrZasieFV27nB4XgNLW5qm5nBc8uk0oE7Bqw/IGes
+         tzzmhcBFlV70HCWKw9sT7kTbNruCJ8AxCGeUudLGa5OH/kN7rIUAjBkkHEYVEREuFt5i
+         QGWMKX5OPnuVamBmwy/lvDUZAU3o/Vx1th5cMKAsXfTXdD0S7dEIWUSUUda+IkbI56Dj
+         NeYA==
+X-Forwarded-Encrypted: i=1; AHgh+Rp4i7MFH5pC4o8rM4XXNmERUQWM39NxKDPas2sEe/AStHyPqxEvtsECcJsW05ayPkzW7Ycntv8IxLc=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw4+LQ3DBzxJOtmv1dJj8+D0SeMDBxc7cM6ilzm8Ba8dgzRAENw
+	p/glBS/1Ikx6dOip0zp2KFr8rbfm8HxcKmuKDezJ6D/FY6/2jtxJeZPguhXemDk5ZQ==
+X-Gm-Gg: AR+sD12vSUd+0Q3+uLm3WmGK7wd/3uG/JFpq5K0tnL9ApLOcYGribsf9eBR1/QZhurh
+	eQfLyOoMTDTkL2zNqwAF9Zdc5wNGAYpT4VNViTE1spxkz9nKKtjAnnhHem0Pq05x88J1KRk80fb
+	76NLJ8abRjOPnYykMS3Yx60hxhVIgpogi0nneoV6c3Nn5oiyQCm34rRyW7WfRd1a/OGJV9aRFNa
+	n+jscSVdN6IvKPa1rNfavZrb41yIgqT1cOeG2QJWfB8+s43nUJXV/mIUbS+NcaEa7l2MXoFPyVA
+	gL18GUCDOc7lntnfnxsl+qtNZWJ6aEXh/TV8xuc0hBwZyL87OM7kLhxTjGLPiJ1lBXFcjo7Xn55
+	EWzbjsJlW1E+uRi3KvgLqJ/50m0XxeXY7z3L92SrOF8GKcEGTYgmC2vZg7AnzOhiRaaS2QuO9rZ
+	nYMuFYKc6loUUKpQKk6zauJng9BtuEUwl66D2yhlEDhzEN5egZYOkSCqCuQeHSThMq3kHsIHX42
+	9iU
+X-Received: by 2002:a05:600c:210c:b0:495:4a27:483f with SMTP id 5b1f17b1804b1-496b5700419mr67328755e9.29.1785154389652;
+        Mon, 27 Jul 2026 05:13:09 -0700 (PDT)
+Message-ID: <06a539f0-a15d-44da-8b3b-f49720669adb@suse.com>
+Date: Mon, 27 Jul 2026 14:13:08 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 5/9] vpci: simplify handling of memory decoding and ROM
- enable writes
+Subject: Re: [PATCH v5 6/9] vpci: create mem local variables
 To: Stewart Hildebrand <stewart.hildebrand@amd.com>
 Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- xen-devel@lists.xenproject.org
+ Mykyta Poturai <mykyta_poturai@epam.com>, xen-devel@lists.xenproject.org
 References: <20260708210233.922275-1-stewart.hildebrand@amd.com>
- <20260708210233.922275-6-stewart.hildebrand@amd.com>
+ <20260708210233.922275-7-stewart.hildebrand@amd.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -128,104 +128,30 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260708210233.922275-6-stewart.hildebrand@amd.com>
+In-Reply-To: <20260708210233.922275-7-stewart.hildebrand@amd.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1785153654-BD0CD034-F5CC3FD1/0/0
+X-purgate-ID: tlsNG-42698a/1785154390-AA0C59EA-204FC795/0/0
 X-purgate-type: clean
-X-purgate-size: 4175
+X-purgate-size: 885
 
 On 08.07.2026 23:02, Stewart Hildebrand wrote:
-> From: Roger Pau Monne <roger.pau@citrix.com>
+> Use local variables to reference struct rangeset *mem in preparation of
+> moving it out of struct vpci. No functional change.
 > 
-> Deferring the actual write of the PCI register bit, either the memory
-> decoding or the ROM enable is not helpful, and adds an unnecessary amount of
-> complexity to the preemptible handling of BAR related p2m modifications.
-> 
-> In the hardware domain case, whether the PCI register write is done ahead
-> or after the p2m changes doesn't matter, a hardware domain has plenty of
-> ways to mess with the PCI register state if it wants to.  Any poking at the
-> BAR p2m regions ahead of the guest write having completed will be
-> undefined.
-> 
-> On the other hand, for domUs the memory decoding bit shouldn't really
-> change as a result of guest actions, and should always be enabled.  Guest
-> toggling the memory decoding command register should only result in p2m
-> modifications, but no propagation to the device PCI registers.  Having
-> memory decoding unconditionally enabled ensures the domU attempting to
-> perform p2m accesses while the p2m changes are taking place will always
-> access the BAR contents.
+> Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
+> Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
+> ---
+> v4->v5:
+> * Patch adapted from [1] ("vpci: Use pervcpu ranges for BAR mapping").
+>   I kept Mykyta's S-o-b tag since many of the changes are similar.
 
-I'm not quite following in particular this last aspect: Doing the P2M change
-isn't atomic. How will it be possible, in principle, to guarantee accesses
-will always access BAR contents (perhaps really: the contents of what BARs
-point at)?
-
-> @@ -534,22 +487,29 @@ static void cf_check cmd_write(
->       * decoding one. Bits that are not allowed for DomU are already
->       * handled above and by the rsvdp_mask.
->       */
-> -    if ( header->bars_mapped != new_enabled )
-> +    if ( header->bars_mapped != new_enabled &&
-> +         modify_bars(pdev, cmd, false) )
->          /*
->           * Ignore the error. No memory has been added or removed from the p2m
->           * (because the actual p2m changes are deferred in defer_map) and the
->           * memory decoding bit has not been changed, so leave everything as-is,
->           * hoping the guest will realize and try again.
->           */
-> -        modify_bars(pdev, cmd, false);
-> -    else
-> -        pci_conf_write16(pdev->sbdf, reg, cmd);
-> +        return;
->  
->  #ifdef CONFIG_HAS_PCI_MSI
->      /* Unpopulate MSI-X table region, so accesses trap into Xen. */
->      if ( !header->bars_mapped && new_enabled && vpci_make_msix_hole(pdev) )
->          return;
->  #endif
-> +
-> +    /*
-> +     * FIXME: for domUs we don't want the guest toggling the memory decoding
-> +     * bit.  It should be set in vpci_init_header() and guest attempts to
-> +     * modify it should only lead to guest p2m changes.
-> +     */
-> +    header->bars_mapped = new_enabled;
-> +    pci_conf_write16(pdev->sbdf, reg, cmd);
->  }
-
-First, to avoid any ambiguity, "the memory decoding bit" wants clarifying that
-it's the physical bit which is meant. The virtual one we really should leave
-for the guest to play with as it sees fit.
-
-Then, disallowing the turning off of memory decoding may be problematic. I
-have a vague recollection that dealing with certain quirks may require doing
-so. Plus why would we force decoding to be on when it's not needed by the
-domain driving the device? I'm saying this not the least because in principle
-memory and I/O decoding bits should be treated equally. Yet especially on
-platforms without the concept of I/O ports disallowing the turning off of that
-bit would feel pretty irritating.
-
-> @@ -927,6 +884,13 @@ int vpci_init_header(struct pci_dev *pdev)
->              goto fail;
->      }
->  
-> +    if ( cmd & PCI_COMMAND_MEMORY )
-
-Fold this condition with ...
-
-> +    {
-> +        /* Restore command register value. */
-> +        header->bars_mapped = true;
-> +        pci_conf_write16(pdev->sbdf, PCI_COMMAND, cmd);
-> +    }
-> +
->      return (cmd & PCI_COMMAND_MEMORY) ? modify_bars(pdev, cmd, false) : 0;
-
-... the pre-existing one here (perhaps by inverting and having a simply
-"return 0" there)? Then modify_bars() could also be called before restoring
-the command register, at which point it almost looks as if you could then
-drop the justification for re-ordering the two operations.
+I think can see your intention, but I think there's a formal issue with
+this: The original author's S-o-b wants to be first. That may plausibly
+be you here. The submitter's S-o-b wants to be last, though, as the
+change last went through their hands. In the case here this may mean
+two S-o-b of yours, or yet some different arrangement - all depending on
+what changes were done by whom in which order.
 
 Jan
 
