@@ -4,52 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36EC5C53219
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2026 08:44:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1371469.1618973 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C230C531D0
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2026 09:11:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1371480.1618983 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woGw9-0002nf-7P; Mon, 27 Jul 2026 08:43:49 +0000
+	id 1woHN7-0006dM-A7; Mon, 27 Jul 2026 09:11:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1371469.1618973; Mon, 27 Jul 2026 08:43:49 +0000
+Received: by outflank-mailman (output) from mailman id 1371480.1618983; Mon, 27 Jul 2026 09:11:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woGw9-0002nX-4Q; Mon, 27 Jul 2026 08:43:49 +0000
-Received: by outflank-mailman (input) for mailman id 1371469;
- Mon, 27 Jul 2026 08:43:47 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <regressions@leemhuis.info>) id 1woGw6-0002nP-SR
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 08:43:47 +0000
+	id 1woHN7-0006dF-7B; Mon, 27 Jul 2026 09:11:41 +0000
+Received: by outflank-mailman (input) for mailman id 1371480;
+ Mon, 27 Jul 2026 09:11:40 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fa2d80d54000e099@swg.vates.tech>)
+ id 1woHN6-0006d9-Az
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 09:11:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woGw5-007KKS-Rq
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 10:43:45 +0200
-Received: from [10.42.69.8] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <regressions@leemhuis.info>)
- id 6a671a3f-2eae-0a2a0a5409dd-0a2a4508e9cc-6
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 10:43:44 +0200
-Received: from [188.68.61.103] (helo=relay.yourmailgateway.de)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <regressions@leemhuis.info>)
- id 6a671a40-f659-0a2a45080019-bc443d67c9b5-3
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 10:43:44 +0200
-Received: from mors-relay-8403.netcup.net (localhost [127.0.0.1])
- by mors-relay-8403.netcup.net (Postfix) with ESMTPS id 4h7sXz5wWlz85yT;
- Mon, 27 Jul 2026 10:42:27 +0200 (CEST)
-Received: from policy02-mors.netcup.net (unknown [46.38.225.35])
- by mors-relay-8403.netcup.net (Postfix) with ESMTPS id 4h7sXz5CtLz85yB;
- Mon, 27 Jul 2026 10:42:27 +0200 (CEST)
-Received: from mxe9fb.netcup.net (unknown [10.243.12.53])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest
- SHA256) (No client certificate requested)
- by policy02-mors.netcup.net (Postfix) with ESMTPS id 4h7sXy24Yzz8sch;
- Mon, 27 Jul 2026 10:42:26 +0200 (CEST)
-Received: from [IPV6:2a02:8108:8984:1d00:a0cf:1912:4be:477f] (unknown
- [IPv6:2a02:8108:8984:1d00:a0cf:1912:4be:477f])
- by mxe9fb.netcup.net (Postfix) with ESMTPSA id 851D35FBA6;
- Mon, 27 Jul 2026 10:42:25 +0200 (CEST)
+ id 1woHN4-00Giu4-QN
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 11:11:38 +0200
+Received: from [10.42.69.9] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fa2d80d54000e099@swg.vates.tech>)
+ id 6a6720c8-e002-0a2a0a5209dd-0a2a4509de18-8
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 11:11:38 +0200
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fa2d80d54000e099@swg.vates.tech>)
+ id 6a6720ca-be1a-0a2a45090019-b9ff1c1288e1-3
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 11:11:38 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 19fa2d80d54000e099.002 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Mon, 27 Jul 2026 09:11:36 +0000
+Received: from julian.home (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: julian.vetter@vates.tech)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 5CA768214F;
+ Mon, 27 Jul 2026 11:11:35 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,78 +58,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=key2 header.d=leemhuis.info header.i="@leemhuis.info" header.h="Date:From:To:Cc:Subject"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=leemhuis.info;
-	s=key2; t=1785141747;
-	bh=dg2PdX38sKrE/AgiN98q4bIDUpM5WsUPGpi34yki+0w=;
-	h=Date:From:To:Cc:Subject:From;
-	b=fWHg+giyCHnqiclmqOW/FRjJRYDY/7x6tQEUjJ1iy/f/uF1vK7f34hyYdBjWdzb1j
-	 5Tc+5V4m4CVP+AtoIQWkLSkzjvRgnDS4Unr5wpPq1ggsJLfdFjLG8GOoOoYAFKlxcH
-	 wH1dfD4KC/q8Pikf+CB9PtvuygoFutPZsKNyIxfh1zy+mlajPYfsNLHxySnuDJ0n1o
-	 lkeHdlmfj37+Ymv2UN8vWan+WLzTDQIIaOp2oxqnsXkuCiEItqER7P514q3ZZ28gnS
-	 Gmkim0v3caz6OlMwFqTwOAwqXNaATXnIYbobJEzaC3B3wYNCrF5yX3FkLoIXcRArEb
-	 FLxNuQwmpl4Ug==
-Authentication-Results: mxe9fb;
-        spf=pass (sender IP is 2a02:8108:8984:1d00:a0cf:1912:4be:477f) smtp.mailfrom=regressions@leemhuis.info smtp.helo=[IPV6:2a02:8108:8984:1d00:a0cf:1912:4be:477f]
-Received-SPF: pass (mxe9fb: connection is authenticated)
-Message-ID: <f7fe5959-f0c6-430c-8404-927d7944c836@leemhuis.info>
-Date: Mon, 27 Jul 2026 10:42:25 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=LBol3HUYj8yNM7RMJBRbeCwo2nqp18ia/cUHJKMWjoA=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:feedback-id;
+ b=KR2arOR9o9SmkyVDscnbf393QcVjV6uIzF/e7NUt2M5UUusSJ7/OTZ9FZ7gMOv2AEctcs2KSs
+ Nt+b7IJ4SAt3BlBYkpijDBa5rSXgKGY4qar0+Tm1NiBFD9tcXqMqeozIT9DHLME8HIjGn130rCk
+ Hdre2yYm+mAAVXtKIo9swREB5CtfliXx8XUP8d+dnm73pqYFItJwthMU+5AOrz81CfZqIYFRgjv
+ GpNa7EWquU91RQ14voJ1/mtBCKDOCo14bMUZWz2wAHk9bdwkv4U7lhq/CqFMtn0g3IiMzIFwwp0
+ Ysa2F9HeRjDeb5IpDIHylnT9aGiu+Aq3AB2zFU4aTjMA==
+X-Zone-Loop: 38a3bc0b903d4d8bfe35007b78e653d491c05c0d1cf0
+x-campaign-type: default
+x-transaction-id: 20526fa3-6386-4743-a269-1873c229619f
+x-swg-uid: 01-45072346-eeca-4b47-86f7-83b5cca3a019
+X-Mailer: Sweego
+Message-ID:
+ <1785143496.8631fc262581453bbf619ec5b2062170.19fa2d80d54000e099@vates.tech>
+x-swg-bid: 1785143496.8631fc262581453bbf619ec5b2062170.19fa2d80d54000e099
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+From: Julian Vetter <julian.vetter@vates.tech>
+To: xen-devel@lists.xenproject.org
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Andrii Sultanov <andriy.sultanov@vates.tech>,
+	Guillaume Thouvenin <guillaume.thouvenin@vates.tech>,
+	Julian Vetter <julian.vetter@vates.tech>
+Subject: [PATCH] tools/ocaml: fill arch_config for ARM in domain_getinfolist
+Date: Mon, 27 Jul 2026 11:11:29 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Thorsten Leemhuis <regressions@leemhuis.info>
-Content-Language: de-DE, en-US
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Linux kernel regressions list <regressions@lists.linux.dev>,
- yannick.martin+kernelorg@okazoo.eu
-Subject: [regression] Bug 221745 - PV DomU ballooning driver init issue
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-PPP-Message-ID: <178514174583.976006.15917720183139081453@mxe9fb.netcup.net>
-X-NC-CID: fBr7XczVS2ya6Qqy17DIK86+ueCERFBW/JVA7MLO2EUsYNBv5Og=
-X-purgate-ID: tlsNG-c1860d/1785141824-D755C87B-2B978668/0/0
+X-BM-Disclaimer: Yes
+Content-Type: multipart/alternative; boundary="-=Part.13d4.6e6ab21c4c536447.19fa2d80b46.419e05ddcd83bf7f=-"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1785143495495
+X-purgate-ID: tlsNG-bad1c0/1785143498-BC4CB034-F8CED5E1/0/0
 X-purgate-type: clean
-X-purgate-size: 1619
+X-purgate-size: 2390
 
-Hi Roger! FYI, it seems your change 0949c646d64697 ("Partial revert
-"x86/xen: fix balloon target initialization for PVH dom0"") [v7.0-rc1]
-caued a regression. For details see
-https://bugzilla.kernel.org/show_bug.cgi?id=221745
+---=Part.13d4.6e6ab21c4c536447.19fa2d80b46.419e05ddcd83bf7f=-
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-To quote the initial comment:
+In the function alloc_domaininfo() the arch_config field in domaininfo
+is only filled inside #if defined(__i386__) || defined(__x86_64__)=2E On
+ARM the field is left unpopulated=2E caml_alloc_tuple() does not zero new
+blocks, so di=2EXenctrl=2Earch_config on ARM is uninitialised garbage for
+every caller of Xenctrl=2Edomain_getinfolist/domain_getinfo=2E Any toolsta=
+ck
+dereferencing that value, segfaults once a VM is enumerated in a domain
+scan=2E
 
-> Since commit db8c4b1 (Partial revert "x86/xen: fix balloon target initialization for PVH dom0"), xen ballooning fails to init correctly on domU (on amd64 arch) with the following configuration:
-> 
-> -- xl.cfg
-> ...
-> memory      = '2048'
-> maxmem      = '4096'
-> ...
-> --
-> 
-> -- domU balloon dmesg (init fails)
-> [    0.908337] xen:balloon: Initialising balloon driver
-> [    0.940721] Extra pages underflow current target
-> --
+Add the missing ARM equivalent, populating xen_arm_arch_domainconfig
+from the raw xc_domaininfo_t the same way the x86 branch does for
+xen_x86_arch_domainconfig=2E
 
-db8c4b1 is the backport of the commit to 6.12.y; the reporter (CCed) in
-a later comment to the bug tracker confirmed that the problem happens
-with 7.2.0-rc3, too, and also stated:
+Signed-off-by: Julian Vetter <julian=2Evetter@vates=2Etech>
+---
+ tools/ocaml/libs/xc/xenctrl_stubs=2Ec | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-> The dmesg by itself is not relevant except:
-> [    1.105207] xen:balloon: Initialising balloon driver
-> [    1.222758] ------------[ cut here ]------------
-> [    1.222790] Extra pages underflow current target
-> [    1.222792] WARNING: at 0xffffffff8252a424, CPU#1: swapper/0/1
-> 
-> init exits on ERANGE handling:
-> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/xen/balloon.c?h=v7.2-rc4#n772
-> 
-> because of ERANGE:
-> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/xen/balloon.c?h=v7.2-rc4#n714
-> 
-> kernel thread xen-balloon does not exist on VM with kernel newer than 6.12.75 (on 6.12 branch) where the patch was merged.
+diff --git a/tools/ocaml/libs/xc/xenctrl_stubs=2Ec b/tools/ocaml/libs/xc/x=
+enctrl_stubs=2Ec
+index 7f6381cdd2=2E=2Eb60ea9f12e 100644
+--- a/tools/ocaml/libs/xc/xenctrl_stubs=2Ec
++++ b/tools/ocaml/libs/xc/xenctrl_stubs=2Ec
+@@ -415,6 +415,7 @@ static value alloc_domaininfo(xc_domaininfo_t * info)
+ {
+ 	CAMLparam0();
+ 	CAMLlocal5(result, tmp, arch_config, x86_arch_config, emul_list);
++	CAMLlocal1(arm_arch_config);
+ 	int i;
+=20
+ 	result =3D caml_alloc_tuple(17);
+@@ -460,6 +461,19 @@ static value alloc_domaininfo(xc_domaininfo_t * info)
+=20
+ 	Store_field(arch_config, 0, x86_arch_config);
+=20
++	Store_field(result, 16, arch_config);
++#elif defined(__arm__) || defined(__aarch64__)
++	/* xen_arm_arch_domainconfig */
++	arm_arch_config =3D caml_alloc_tuple(3);
++	Store_field(arm_arch_config, 0, Val_int(info->arch_config=2Egic_version)=
+);
++	Store_field(arm_arch_config, 1, Val_int(info->arch_config=2Enr_spis));
++	Store_field(arm_arch_config, 2, caml_copy_int32(info->arch_config=2Ecloc=
+k_frequency));
++
++	/* arch_config: arch_domainconfig */
++	arch_config =3D caml_alloc_small(1, 0);
++
++	Store_field(arch_config, 0, arm_arch_config);
++
+ 	Store_field(result, 16, arch_config);
+ #endif
+=20
+--=20
+2=2E53=2E0
 
-Ciao, Thorsten
+
+
+-- 
+Julian Vetter | Vates Hypervisor & Kernel Developer
+
+XCP-ng & Xen Orch=
+estra - Vates solutions
+
+web: https://vates=2Etech
+---=Part.13d4.6e6ab21c4c536447.19fa2d80b46.419e05ddcd83bf7f=---
 
