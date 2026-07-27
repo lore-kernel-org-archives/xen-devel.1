@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D641DC54F4E
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2026 16:56:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1371811.1619327 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9C51C54F4D
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2026 16:56:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1371797.1619282 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woOcL-0000Gg-8m; Mon, 27 Jul 2026 16:55:53 +0000
+	id 1woOcI-0007lY-7A; Mon, 27 Jul 2026 16:55:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1371811.1619327; Mon, 27 Jul 2026 16:55:53 +0000
+Received: by outflank-mailman (output) from mailman id 1371797.1619282; Mon, 27 Jul 2026 16:55:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woOcK-0000Ej-RH; Mon, 27 Jul 2026 16:55:52 +0000
-Received: by outflank-mailman (input) for mailman id 1371811;
- Mon, 27 Jul 2026 16:48:58 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1woOcH-0007jN-Uz; Mon, 27 Jul 2026 16:55:49 +0000
+Received: by outflank-mailman (input) for mailman id 1371797;
+ Mon, 27 Jul 2026 16:47:56 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <usama.anjum@arm.com>) id 1woOVe-0005nN-Oq
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 16:48:58 +0000
+ (envelope-from <usama.anjum@arm.com>) id 1woOUe-0005hq-0r
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 16:47:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woOVe-00CEIp-5m
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 18:48:58 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1woOUc-008hCR-Uq
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 18:47:55 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <usama.anjum@arm.com>)
- id 6a678bf6-bab6-0a2a0a5309dd-0a2a450c9a16-6
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 18:48:58 +0200
+ id 6a678b9f-5cb7-0a2a0a5109dd-0a2a4509c1d6-44
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 18:47:54 +0200
 Received: from [217.140.110.172] (helo=foss.arm.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
  (envelope-from <usama.anjum@arm.com>)
- id 6a678bf9-f479-0a2a450c0019-d98c6eaca1c4-1
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 18:48:57 +0200
+ id 6a678bba-be1a-0a2a45090019-d98c6eaca880-1
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 18:47:54 +0200
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A614F1764;
- Mon, 27 Jul 2026 09:48:52 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6328C1756;
+ Mon, 27 Jul 2026 09:47:49 -0700 (PDT)
 Received: from e142334-100.cambridge.arm.com (e142334-100.cambridge.arm.com
  [10.2.198.93])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 1AEFB3F86F;
- Mon, 27 Jul 2026 09:48:47 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id CAAF73F86F;
+ Mon, 27 Jul 2026 09:47:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,11 +54,11 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1785170936; bh=qEy/4+Wk/vbSZVdyK/qjuUUSc2n2G8gdddSYiTCTNvs=;
+	t=1785170873; bh=OeHCtGC0uAROhEyzqyRGicgDGQ57E/f+pQoW3sVwCjU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=cDo3Do/rskCw4TMjsksYR/tTcB5Uv/vDrx6ixPR1mOTM9Q1q7fU9kGjz12p9Id7LU
-	 nUuEt+vwKjZkAjRnRdC1eDlKTRvfsr1Lh1WkbMYT2XqOqXc7LIJh1KJzggyS6NyLvN
-	 HLK4yn08JVV6tDRzci16mxLBAw0vZjMCqreNmXG8=
+	b=d9t9pVk3z+LotvxypYLqFho7KP5XEkp7l8lfha+xgcBRash4qGjZ0Vd/mV34z3ngj
+	 YCiqC4R9lIHqddTtejnz0iRZ+amGDO4RrpcG6DeJWoifcWXWkFCXl4PCx8iVJw3r/E
+	 fHskF6P1T34bdcplSjvRlLirD1a3/E+yp9d0XlLw=
 From: Muhammad Usama Anjum <usama.anjum@arm.com>
 To: Jani Nikula <jani.nikula@linux.intel.com>,
 	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
@@ -127,47 +127,71 @@ Cc: Muhammad Usama Anjum <usama.anjum@arm.com>,
 	bpf@vger.kernel.org,
 	linux-perf-users@vger.kernel.org,
 	damon@lists.linux.dev
-Subject: [PATCH RFC 09/11] misc/sgi-gru: use ptep_get() for page-table reads
-Date: Mon, 27 Jul 2026 17:47:00 +0100
-Message-ID: <20260727164715.2866609-10-usama.anjum@arm.com>
+Subject: [PATCH RFC 02/11] mm: make hw_pte_t visible to generic PTE interfaces
+Date: Mon, 27 Jul 2026 17:46:53 +0100
+Message-ID: <20260727164715.2866609-3-usama.anjum@arm.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260727164715.2866609-1-usama.anjum@arm.com>
 References: <20260727164715.2866609-1-usama.anjum@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1785170937-008CDA5B-8579A142/0/0
+X-purgate-ID: tlsNG-bad1c0/1785170874-FDC6D034-99337F8F/0/0
 X-purgate-type: clean
-X-purgate-size: 1091
+X-purgate-size: 1823
 
-A leaf PMD is being read through ptep_get() by treating the PMD address
-as PTE-sized table storage. ptep_get() now accepts hw_pte_t *, so update
-the cast accordingly.
+Later conversions use hw_pte_t in page-table checking, generic page-table
+helpers, and vmalloc interfaces. Include linux/pgtable_types.h from the
+headers that declare those interfaces before changing their types.
 
-pte_offset_kernel() also returns hw_pte_t *. Get pte_t value by calling
-ptep_get().
+For vmalloc.h, replace the direct asm/page.h include with
+linux/pgtable_types.h. The latter includes asm/page.h, so pgprot_t remains
+available.
 
 Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
 ---
- drivers/misc/sgi-gru/grufault.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ include/linux/page_table_check.h | 2 ++
+ include/linux/pgtable.h          | 1 +
+ include/linux/vmalloc.h          | 2 +-
+ 3 files changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/misc/sgi-gru/grufault.c b/drivers/misc/sgi-gru/grufault.c
-index 3557d78ee47a2..ff89d34ad2aa4 100644
---- a/drivers/misc/sgi-gru/grufault.c
-+++ b/drivers/misc/sgi-gru/grufault.c
-@@ -228,10 +228,10 @@ static int atomic_pte_lookup(struct vm_area_struct *vma, unsigned long vaddr,
- 		goto err;
- #ifdef CONFIG_X86_64
- 	if (unlikely(pmd_leaf(*pmdp)))
--		pte = ptep_get((pte_t *)pmdp);
-+		pte = ptep_get((hw_pte_t *)pmdp);
- 	else
- #endif
--		pte = *pte_offset_kernel(pmdp, vaddr);
-+		pte = ptep_get(pte_offset_kernel(pmdp, vaddr));
+diff --git a/include/linux/page_table_check.h b/include/linux/page_table_check.h
+index 12268a32e8be1..12ee6d16ad339 100644
+--- a/include/linux/page_table_check.h
++++ b/include/linux/page_table_check.h
+@@ -7,6 +7,8 @@
+ #ifndef __LINUX_PAGE_TABLE_CHECK_H
+ #define __LINUX_PAGE_TABLE_CHECK_H
  
- 	if (unlikely(!pte_present(pte) ||
- 		     (write && (!pte_write(pte) || !pte_dirty(pte)))))
++#include <linux/pgtable_types.h>
++
+ #ifdef CONFIG_PAGE_TABLE_CHECK
+ #include <linux/jump_label.h>
+ 
+diff --git a/include/linux/pgtable.h b/include/linux/pgtable.h
+index 8c093c119e5a8..cf595608cc4c4 100644
+--- a/include/linux/pgtable.h
++++ b/include/linux/pgtable.h
+@@ -4,6 +4,7 @@
+ 
+ #include <linux/pfn.h>
+ #include <asm/pgtable.h>
++#include <linux/pgtable_types.h>
+ 
+ #define PMD_ORDER	(PMD_SHIFT - PAGE_SHIFT)
+ #define PUD_ORDER	(PUD_SHIFT - PAGE_SHIFT)
+diff --git a/include/linux/vmalloc.h b/include/linux/vmalloc.h
+index e4d8d0a9f30f9..c59a68c183110 100644
+--- a/include/linux/vmalloc.h
++++ b/include/linux/vmalloc.h
+@@ -8,7 +8,7 @@
+ #include <linux/init.h>
+ #include <linux/list.h>
+ #include <linux/llist.h>
+-#include <asm/page.h>		/* pgprot_t */
++#include <linux/pgtable_types.h>	/* pgprot_t, hw_pte_t */
+ #include <linux/rbtree.h>
+ #include <linux/overflow.h>
+ 
 -- 
 2.47.3
 
