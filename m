@@ -4,51 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D0E8C53219
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2026 11:53:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1371626.1619108 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DFE6C531D0
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2026 12:01:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1371636.1619117 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woJtw-0008He-CU; Mon, 27 Jul 2026 11:53:44 +0000
+	id 1woK0v-0001io-63; Mon, 27 Jul 2026 12:00:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1371626.1619108; Mon, 27 Jul 2026 11:53:44 +0000
+Received: by outflank-mailman (output) from mailman id 1371636.1619117; Mon, 27 Jul 2026 12:00:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woJtw-0008HX-9t; Mon, 27 Jul 2026 11:53:44 +0000
-Received: by outflank-mailman (input) for mailman id 1371626;
- Mon, 27 Jul 2026 11:53:43 +0000
+	id 1woK0v-0001ih-3S; Mon, 27 Jul 2026 12:00:57 +0000
+Received: by outflank-mailman (input) for mailman id 1371636;
+ Mon, 27 Jul 2026 12:00:56 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1woJtv-0008HR-7L
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 11:53:43 +0000
+ (envelope-from <jbeulich@suse.com>) id 1woK0t-0001iV-Ug
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 12:00:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woJtt-007uEr-W8
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 13:53:42 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1woK0t-007vAI-2T
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 14:00:55 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <marcandre.lureau@redhat.com>)
- id 6a6746c4-2eae-0a2a0a5409dd-0a2a4505df56-4
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 13:53:41 +0200
-Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <marcandre.lureau@redhat.com>)
- id 6a6746c4-4cb1-0a2a45050019-aa0a857c7d71-3
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 13:53:41 +0200
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-308-7mzw_8iXNTqT0Td6tTII9Q-1; Mon,
- 27 Jul 2026 07:53:38 -0400
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 097571955F3D; Mon, 27 Jul 2026 11:53:37 +0000 (UTC)
-Received: from localhost (unknown [10.44.24.5])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 6C8E5180025A; Mon, 27 Jul 2026 11:53:34 +0000 (UTC)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a674875-e002-0a2a0a5209dd-0a2a4509d568-6
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 14:00:54 +0200
+Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a674876-be1a-0a2a45090019-d155dd2bd92b-3
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 14:00:54 +0200
+Received: by mail-wr1-f43.google.com with SMTP id
+ ffacd0b85a97d-47f71156e1aso1160301f8f.3
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 05:00:54 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4957bfe07e1sm229802885e9.3.2026.07.27.05.00.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 27 Jul 2026 05:00:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,347 +53,179 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1785153220;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=9oYIu6ucbeyhcRhj8yqHtduIC8JKpxj/ZV2BhttSk7M=;
-	b=BHhQ7g8E+XZO0aFKdIOFy5METvwLgb4eSgRVyjrG6wBCmIiB2XdPZbu+8PuH+/hb0qv42G
-	jufszB3FYgEOWSaoe4BLBTePRojKbREatPzwJWJuEdpZPyWmxH2X+FOGkfhHJ4Xh6TUS4M
-	YM224PnfyENDXYOAGyKXkWT6F5RkoLo=
-X-MC-Unique: 7mzw_8iXNTqT0Td6tTII9Q-1
-X-Mimecast-MFC-AGG-ID: 7mzw_8iXNTqT0Td6tTII9Q_1785153217
-From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Mon, 27 Jul 2026 15:51:31 +0400
-Subject: [GIT PULL 22/23] hw/9pfs: annotate V9fsTransport callbacks as
- coroutine_fn
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1785153654; x=1785758454; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Ay4E3J2TPozCmi47FWW7WBqpfGdfi6JsR37XYggDNR8=;
+        b=PIyjEeIpqZn6EZuQx/Og+1bkUGzIcZQEth52gcI/gap7QNc6QnoXAa4JeFEvp+CBGh
+         Il4/MTGeZojwdOk9kFLJieGkV390CqkvgBgXNfZLpUzXs0FXAOJAT9E9uG6mfnjfo1ZF
+         SQ9yBPmt75bhSyv7itNZynnM6AVpKvTTGkXU7Ce2H0PpDTjR9z7aG/QyKcpcL6497PvE
+         mxDdSXsswS7avL09dQD9CTLbNP9BnIGmj6cEsf3dv2Qv4BG3ge7dO21M0MmPCm77Ceci
+         A3FE7T/UgmfDp7PTSFo5TNIWRAW/dIryiI0vMuLg9/4eu0aO9jLMOZDBkjbBoVykVGqC
+         msuw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785153654; x=1785758454;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Ay4E3J2TPozCmi47FWW7WBqpfGdfi6JsR37XYggDNR8=;
+        b=AIJHGoFxxDYOKDiiitxSnphIqXIZx46Tn0Ob5DNHSXcEuSILmUwiIBx4vilKOtLdza
+         q4GgkUa2+5v8N3beCBBTLCSmRcEB4R9X7OU2TeMr31RwHiQoxJY8v8mWIpCspzo5delZ
+         Yox8arL4JHhqBWTcx2xYfnv7H8ZUNulK4PXWI9TkJablIY1Xt7wtuh0z7cqULKLW4o4J
+         aViUae91uklY3TmBP3qzv/S5RlaGk0vOPLKOPUe1qWG/loyQGd1h/bp+rIa+FVrCFSTZ
+         9NmhaejRYhYCGiqFZLCEIEAve4EDmpDH8SJmqpK67I4MkE4EaXNkxXTJxSIorekcppmG
+         xK0g==
+X-Forwarded-Encrypted: i=1; AHgh+RpSDMZx69FC3U19vi+J3vVvTxvU0aaUGd1rPbxotxbaIVdCAHWcPWN6kNjUW+c/HCSfjy2TCO1NoXI=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yyi75MW1yNbExoZmUucuX5xut9Ob6C4wCxu1h9wZAx6JdiSAnu/
+	dq5nt/FL6+4rZVL86jWwBG07Jmqun+/JNXQ4qzgGuOFKpD1CWaLgh2pY8i7+PLIPpg==
+X-Gm-Gg: AR+sD10jynrTaj1q2V/sjky4OXDQn5PdsnduImO5SvZKILeooscr/2d0txsG5Xt9glP
+	WtPABw810msckvyMuybAAB3ORhwwXkFrntLuXGPe5N5iP0uMIDh7v3tl2ThGOvPGuvey4ewNC/P
+	vcuWSLz3wcAsyFzk/JuW8IyEm3AlVAYLDJ1t7gDVxkLxfsa0abnM6ukVB7ncNiqQsSAOC5iHQs4
+	oR3ZZ4oLf/F8R0+FSbIY4ByMACU7523zNfY2QIgNj2jxHck2ZbAZiokSjabff10fN3e9yYypZ0B
+	5sivT+i4RAa2tog16mnjFH2wfaqRnEm6qrCAaMMupCNRRjE0x/DhOG/z5uktirojRzxjHeYI35d
+	bmAQtq7qa8oQbUdqOJvExBwz0va61CnslIon9CuVowaM6T/v8YsLVBfbWIKLgwX6wZWg7J6gqri
+	J1rWL3X9RPB+jPKg0qAr8swUwrq3rwDjg2pq2y5Ko6o087KH6YFNKboAoDnqqjUmgIYw==
+X-Received: by 2002:a05:600c:3113:b0:495:39aa:1359 with SMTP id 5b1f17b1804b1-496b570fb1bmr92262275e9.3.1785153654237;
+        Mon, 27 Jul 2026 05:00:54 -0700 (PDT)
+Message-ID: <1f62781b-7312-4360-ab02-b5b65c9ff407@suse.com>
+Date: Mon, 27 Jul 2026 14:00:53 +0200
 MIME-Version: 1.0
-Message-Id: <20260727-fix-v1-22-ca3fa3851347@redhat.com>
-References: <20260727-fix-v1-0-ca3fa3851347@redhat.com>
-In-Reply-To: <20260727-fix-v1-0-ca3fa3851347@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Stefan Hajnoczi <stefanha@redhat.com>, 
- Christian Schoenebeck <qemu_oss@crudebyte.com>, Greg Kurz <groug@kaod.org>, 
- "Michael S. Tsirkin" <mst@redhat.com>, 
- Stefano Stabellini <sstabellini@kernel.org>, 
- Anthony PERARD <anthony@xenproject.org>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 5/9] vpci: simplify handling of memory decoding and ROM
+ enable writes
+To: Stewart Hildebrand <stewart.hildebrand@amd.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  xen-devel@lists.xenproject.org
-X-Developer-Signature: v=1; a=openpgp-sha256; l=12210;
- i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=kIVXvSiYvzjRZ5/GpYFflICxn39LG3s3JicrtUIOOKw=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqZ0Y/InBqkiqgdux+2VziZo11jHAPJh08la6E6
- AaTlKt6htqJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCamdGPwAKCRDa6OEJdZac
- 5cQ0EACCWlZ8GGsTXxQvK81AsXtdlhpWUKq7GI/rQlpxXM+XuTBJKER+BlIWnLNaPdhWA2he5Db
- SJPMVkVXaTDunQv3RGE0K+PByfftg0GI3T1QgpxfUz9sBe2R7oDBX7wLWnkafpgHDaJOCJbcr1M
- SGn8iH2iiBEqyB8XhtHVvK6OiNtrIjtW152yRdvYK1cFoCUUPHNcnWNyyk9kRW71KyP1t876Zu4
- Iv+rBW/nHlfva796PBdFwqkCuRtX5YlM/v1zH5SHHQ3+z9pyolNnHz8meigEIC1L+N1hm7Cuu5c
- ke4YbEwLgB1wj/71vug9qOt9MGYnPxekE6osZxMjGMStxxpd/AvK1sWlg4xZFTv0C3cpPUpXbz3
- kjrILkbAdDsj9gOpiwVzD73/3O+PBIvXKT4Ua6ht0uQSVIPCuqVbOuKIDw0ZUXkVj8ocsA/5NRq
- DbclLmil8vvfU6VXfPjAvZksKQuyJTJ6tSPYd9Wyv6g05g3zRfuu0nbvGRnA5BTXZrhbDmZ3VFW
- qjQDj9wuInuNtdPDBWHlAeDiQzWklxLgbePNxypQDefIV+h/7NfMPxIM58mPD3E7pD5kiXVdA48
- 1/4plEo+L6eqUmR32H15UrgymlrklgclH2ym4VVDkYX6/uR6PqejQAPka7Ld0+CNejMAlVA/9W9
- TiypcFk/ky/YTbQ==
-X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
- fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: MSn5grMGLaPVzUZ_2N9qC6llwOiza6v_PowqN69UJpc_1785153217
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1785153221-F4EA12A1-F25F1B9D/0/0
+References: <20260708210233.922275-1-stewart.hildebrand@amd.com>
+ <20260708210233.922275-6-stewart.hildebrand@amd.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260708210233.922275-6-stewart.hildebrand@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-bad1c0/1785153654-BD0CD034-F5CC3FD1/0/0
 X-purgate-type: clean
-X-purgate-size: 12212
+X-purgate-size: 4175
 
-All V9fsTransport callbacks are invoked exclusively from coroutine
-context (the v9fs_* PDU handlers). Annotate the function pointer
-types in V9fsTransport and all implementations (virtio and xen
-backends), as well as intermediate callers in 9p.c (pdu_marshal,
-pdu_unmarshal, v9fs_init_qiov_from_pdu, etc.).
+On 08.07.2026 23:02, Stewart Hildebrand wrote:
+> From: Roger Pau Monne <roger.pau@citrix.com>
+> 
+> Deferring the actual write of the PCI register bit, either the memory
+> decoding or the ROM enable is not helpful, and adds an unnecessary amount of
+> complexity to the preemptible handling of BAR related p2m modifications.
+> 
+> In the hardware domain case, whether the PCI register write is done ahead
+> or after the p2m changes doesn't matter, a hardware domain has plenty of
+> ways to mess with the PCI register state if it wants to.  Any poking at the
+> BAR p2m regions ahead of the guest write having completed will be
+> undefined.
+> 
+> On the other hand, for domUs the memory decoding bit shouldn't really
+> change as a result of guest actions, and should always be enabled.  Guest
+> toggling the memory decoding command register should only result in p2m
+> modifications, but no propagation to the device PCI registers.  Having
+> memory decoding unconditionally enabled ensures the domU attempting to
+> perform p2m accesses while the p2m changes are taking place will always
+> access the BAR contents.
 
-Acked-by: Christian Schoenebeck <qemu_oss@crudebyte.com>
-Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
----
- hw/9pfs/9p.h               | 26 +++++++++++++++-----------
- hw/9pfs/9p.c               | 31 +++++++++++++++++++------------
- hw/9pfs/virtio-9p-device.c | 24 +++++++++++++-----------
- hw/9pfs/xen-9p-backend.c   | 34 +++++++++++++++++-----------------
- 4 files changed, 64 insertions(+), 51 deletions(-)
+I'm not quite following in particular this last aspect: Doing the P2M change
+isn't atomic. How will it be possible, in principle, to guarantee accesses
+will always access BAR contents (perhaps really: the contents of what BARs
+point at)?
 
-diff --git a/hw/9pfs/9p.h b/hw/9pfs/9p.h
-index 1a309664f6e3..0e52ffbdf38b 100644
---- a/hw/9pfs/9p.h
-+++ b/hw/9pfs/9p.h
-@@ -472,17 +472,21 @@ void pdu_submit(V9fsPDU *pdu, P9MsgHeader *hdr);
- void v9fs_reset(V9fsState *s);
- 
- struct V9fsTransport {
--    ssize_t     (*pdu_vmarshal)(V9fsPDU *pdu, size_t offset, const char *fmt,
--                                va_list ap);
--    ssize_t     (*pdu_vunmarshal)(V9fsPDU *pdu, size_t offset, const char *fmt,
--                                  va_list ap);
--    void        (*init_in_iov_from_pdu)(V9fsPDU *pdu, struct iovec **piov,
--                                        unsigned int *pniov, size_t size);
--    void        (*init_out_iov_from_pdu)(V9fsPDU *pdu, struct iovec **piov,
--                                         unsigned int *pniov, size_t size);
--    void        (*push_and_notify)(V9fsPDU *pdu);
--    size_t      (*msize_limit)(V9fsState *s);
--    size_t      (*response_buffer_size)(V9fsPDU *pdu);
-+    ssize_t     coroutine_fn (*pdu_vmarshal)(V9fsPDU *pdu, size_t offset,
-+                                             const char *fmt, va_list ap);
-+    ssize_t     coroutine_fn (*pdu_vunmarshal)(V9fsPDU *pdu, size_t offset,
-+                                               const char *fmt, va_list ap);
-+    void        coroutine_fn (*init_in_iov_from_pdu)(V9fsPDU *pdu,
-+                                                     struct iovec **piov,
-+                                                     unsigned int *pniov,
-+                                                     size_t size);
-+    void        coroutine_fn (*init_out_iov_from_pdu)(V9fsPDU *pdu,
-+                                                      struct iovec **piov,
-+                                                      unsigned int *pniov,
-+                                                      size_t size);
-+    void        coroutine_fn (*push_and_notify)(V9fsPDU *pdu);
-+    size_t      coroutine_fn (*msize_limit)(V9fsState *s);
-+    size_t      coroutine_fn (*response_buffer_size)(V9fsPDU *pdu);
- };
- 
- #endif
-diff --git a/hw/9pfs/9p.c b/hw/9pfs/9p.c
-index 1c61e6b3e773..4764d9db13b1 100644
---- a/hw/9pfs/9p.c
-+++ b/hw/9pfs/9p.c
-@@ -55,7 +55,8 @@ enum {
- 
- P9ARRAY_DEFINE_TYPE(V9fsPath, v9fs_path_free);
- 
--static ssize_t pdu_marshal(V9fsPDU *pdu, size_t offset, const char *fmt, ...)
-+static ssize_t coroutine_fn
-+pdu_marshal(V9fsPDU *pdu, size_t offset, const char *fmt, ...)
- {
-     ssize_t ret;
-     va_list ap;
-@@ -67,7 +68,8 @@ static ssize_t pdu_marshal(V9fsPDU *pdu, size_t offset, const char *fmt, ...)
-     return ret;
- }
- 
--static ssize_t pdu_unmarshal(V9fsPDU *pdu, size_t offset, const char *fmt, ...)
-+static ssize_t coroutine_fn
-+pdu_unmarshal(V9fsPDU *pdu, size_t offset, const char *fmt, ...)
- {
-     ssize_t ret;
-     va_list ap;
-@@ -1841,7 +1843,8 @@ out_nofid:
-     pdu_complete(pdu, err);
- }
- 
--static int v9fs_walk_marshal(V9fsPDU *pdu, uint16_t nwnames, V9fsQID *qids)
-+static int coroutine_fn
-+v9fs_walk_marshal(V9fsPDU *pdu, uint16_t nwnames, V9fsQID *qids)
- {
-     int i;
-     ssize_t err;
-@@ -2363,9 +2366,10 @@ out_nofid:
-  * The resulting QEMUIOVector has heap-allocated iovecs and must be cleaned up
-  * with qemu_iovec_destroy().
-  */
--static void v9fs_init_qiov_from_pdu(QEMUIOVector *qiov, V9fsPDU *pdu,
--                                    size_t skip, size_t size,
--                                    bool is_write)
-+static void coroutine_fn
-+v9fs_init_qiov_from_pdu(QEMUIOVector *qiov, V9fsPDU *pdu,
-+                        size_t skip, size_t size,
-+                        bool is_write)
- {
-     QEMUIOVector elem;
-     struct iovec *iov;
-@@ -2382,8 +2386,9 @@ static void v9fs_init_qiov_from_pdu(QEMUIOVector *qiov, V9fsPDU *pdu,
-     qemu_iovec_concat(qiov, &elem, skip, size);
- }
- 
--static int v9fs_xattr_read(V9fsState *s, V9fsPDU *pdu, V9fsFidState *fidp,
--                           uint64_t off, uint32_t max_count)
-+static int coroutine_fn
-+v9fs_xattr_read(V9fsState *s, V9fsPDU *pdu, V9fsFidState *fidp,
-+                uint64_t off, uint32_t max_count)
- {
-     ssize_t err;
-     size_t offset = 7;
-@@ -2793,9 +2798,10 @@ out_nofid:
-     pdu_complete(pdu, retval);
- }
- 
--static int v9fs_xattr_write(V9fsState *s, V9fsPDU *pdu, V9fsFidState *fidp,
--                            uint64_t off, uint32_t count,
--                            struct iovec *sg, int cnt)
-+static int coroutine_fn
-+v9fs_xattr_write(V9fsState *s, V9fsPDU *pdu, V9fsFidState *fidp,
-+                 uint64_t off, uint32_t count,
-+                 struct iovec *sg, int cnt)
- {
-     int i, to_copy;
-     ssize_t err = 0;
-@@ -3729,7 +3735,8 @@ out_nofid:
-     pdu_complete(pdu, err);
- }
- 
--static int v9fs_fill_statfs(V9fsState *s, V9fsPDU *pdu, struct statfs *stbuf)
-+static int coroutine_fn
-+v9fs_fill_statfs(V9fsState *s, V9fsPDU *pdu, struct statfs *stbuf)
- {
-     uint32_t f_type;
-     uint32_t f_bsize;
-diff --git a/hw/9pfs/virtio-9p-device.c b/hw/9pfs/virtio-9p-device.c
-index 576a794ea434..2774fc2290a8 100644
---- a/hw/9pfs/virtio-9p-device.c
-+++ b/hw/9pfs/virtio-9p-device.c
-@@ -28,7 +28,7 @@
- #include "qemu/module.h"
- #include "system/qtest.h"
- 
--static void virtio_9p_push_and_notify(V9fsPDU *pdu)
-+static void coroutine_fn virtio_9p_push_and_notify(V9fsPDU *pdu)
- {
-     V9fsState *s = pdu->s;
-     V9fsVirtioState *v = container_of(s, V9fsVirtioState, state);
-@@ -117,8 +117,8 @@ static void virtio_9p_reset(VirtIODevice *vdev)
-     v9fs_reset(&v->state);
- }
- 
--static ssize_t virtio_pdu_vmarshal(V9fsPDU *pdu, size_t offset,
--                                   const char *fmt, va_list ap)
-+static ssize_t coroutine_fn
-+virtio_pdu_vmarshal(V9fsPDU *pdu, size_t offset, const char *fmt, va_list ap)
- {
-     V9fsState *s = pdu->s;
-     V9fsVirtioState *v = container_of(s, V9fsVirtioState, state);
-@@ -135,8 +135,8 @@ static ssize_t virtio_pdu_vmarshal(V9fsPDU *pdu, size_t offset,
-     return ret;
- }
- 
--static ssize_t virtio_pdu_vunmarshal(V9fsPDU *pdu, size_t offset,
--                                     const char *fmt, va_list ap)
-+static ssize_t coroutine_fn
-+virtio_pdu_vunmarshal(V9fsPDU *pdu, size_t offset, const char *fmt, va_list ap)
- {
-     V9fsState *s = pdu->s;
-     V9fsVirtioState *v = container_of(s, V9fsVirtioState, state);
-@@ -152,8 +152,9 @@ static ssize_t virtio_pdu_vunmarshal(V9fsPDU *pdu, size_t offset,
-     return ret;
- }
- 
--static void virtio_init_in_iov_from_pdu(V9fsPDU *pdu, struct iovec **piov,
--                                        unsigned int *pniov, size_t size)
-+static void coroutine_fn
-+virtio_init_in_iov_from_pdu(V9fsPDU *pdu, struct iovec **piov,
-+                            unsigned int *pniov, size_t size)
- {
-     V9fsState *s = pdu->s;
-     V9fsVirtioState *v = container_of(s, V9fsVirtioState, state);
-@@ -172,8 +173,9 @@ static void virtio_init_in_iov_from_pdu(V9fsPDU *pdu, struct iovec **piov,
-     *pniov = elem->in_num;
- }
- 
--static void virtio_init_out_iov_from_pdu(V9fsPDU *pdu, struct iovec **piov,
--                                         unsigned int *pniov, size_t size)
-+static void coroutine_fn
-+virtio_init_out_iov_from_pdu(V9fsPDU *pdu, struct iovec **piov,
-+                             unsigned int *pniov, size_t size)
- {
-     V9fsState *s = pdu->s;
-     V9fsVirtioState *v = container_of(s, V9fsVirtioState, state);
-@@ -192,13 +194,13 @@ static void virtio_init_out_iov_from_pdu(V9fsPDU *pdu, struct iovec **piov,
-     *pniov = elem->out_num;
- }
- 
--static size_t virtio_9p_msize_limit(V9fsState *s)
-+static size_t coroutine_fn virtio_9p_msize_limit(V9fsState *s)
- {
-     const size_t guestPageSize = 4096;
-     return (VIRTQUEUE_MAX_SIZE - 2) * guestPageSize;
- }
- 
--static size_t virtio_9p_response_buffer_size(V9fsPDU *pdu)
-+static size_t coroutine_fn virtio_9p_response_buffer_size(V9fsPDU *pdu)
- {
-     V9fsState *s = pdu->s;
-     V9fsVirtioState *v = container_of(s, V9fsVirtioState, state);
-diff --git a/hw/9pfs/xen-9p-backend.c b/hw/9pfs/xen-9p-backend.c
-index d44fa8d61e2e..06709d54084b 100644
---- a/hw/9pfs/xen-9p-backend.c
-+++ b/hw/9pfs/xen-9p-backend.c
-@@ -136,10 +136,10 @@ static void xen_9pfs_out_sg(Xen9pfsRing *ring,
-     }
- }
- 
--static ssize_t xen_9pfs_pdu_vmarshal(V9fsPDU *pdu,
--                                     size_t offset,
--                                     const char *fmt,
--                                     va_list ap)
-+static ssize_t coroutine_fn xen_9pfs_pdu_vmarshal(V9fsPDU *pdu,
-+                                                  size_t offset,
-+                                                  const char *fmt,
-+                                                  va_list ap)
- {
-     Xen9pfsDev *xen_9pfs = container_of(pdu->s, Xen9pfsDev, state);
-     struct iovec in_sg[2];
-@@ -161,10 +161,10 @@ static ssize_t xen_9pfs_pdu_vmarshal(V9fsPDU *pdu,
-     return ret;
- }
- 
--static ssize_t xen_9pfs_pdu_vunmarshal(V9fsPDU *pdu,
--                                       size_t offset,
--                                       const char *fmt,
--                                       va_list ap)
-+static ssize_t coroutine_fn xen_9pfs_pdu_vunmarshal(V9fsPDU *pdu,
-+                                                    size_t offset,
-+                                                    const char *fmt,
-+                                                    va_list ap)
- {
-     Xen9pfsDev *xen_9pfs = container_of(pdu->s, Xen9pfsDev, state);
-     struct iovec out_sg[2];
-@@ -185,10 +185,10 @@ static ssize_t xen_9pfs_pdu_vunmarshal(V9fsPDU *pdu,
-     return ret;
- }
- 
--static void xen_9pfs_init_out_iov_from_pdu(V9fsPDU *pdu,
--                                           struct iovec **piov,
--                                           unsigned int *pniov,
--                                           size_t size)
-+static void coroutine_fn xen_9pfs_init_out_iov_from_pdu(V9fsPDU *pdu,
-+                                                        struct iovec **piov,
-+                                                        unsigned int *pniov,
-+                                                        size_t size)
- {
-     Xen9pfsDev *xen_9pfs = container_of(pdu->s, Xen9pfsDev, state);
-     Xen9pfsRing *ring = &xen_9pfs->rings[pdu->tag % xen_9pfs->num_rings];
-@@ -202,10 +202,10 @@ static void xen_9pfs_init_out_iov_from_pdu(V9fsPDU *pdu,
-     *pniov = num;
- }
- 
--static void xen_9pfs_init_in_iov_from_pdu(V9fsPDU *pdu,
--                                          struct iovec **piov,
--                                          unsigned int *pniov,
--                                          size_t size)
-+static void coroutine_fn xen_9pfs_init_in_iov_from_pdu(V9fsPDU *pdu,
-+                                                       struct iovec **piov,
-+                                                       unsigned int *pniov,
-+                                                       size_t size)
- {
-     Xen9pfsDev *xen_9pfs = container_of(pdu->s, Xen9pfsDev, state);
-     Xen9pfsRing *ring = &xen_9pfs->rings[pdu->tag % xen_9pfs->num_rings];
-@@ -234,7 +234,7 @@ again:
-     *pniov = num;
- }
- 
--static void xen_9pfs_push_and_notify(V9fsPDU *pdu)
-+static void coroutine_fn xen_9pfs_push_and_notify(V9fsPDU *pdu)
- {
-     RING_IDX prod;
-     Xen9pfsDev *priv = container_of(pdu->s, Xen9pfsDev, state);
+> @@ -534,22 +487,29 @@ static void cf_check cmd_write(
+>       * decoding one. Bits that are not allowed for DomU are already
+>       * handled above and by the rsvdp_mask.
+>       */
+> -    if ( header->bars_mapped != new_enabled )
+> +    if ( header->bars_mapped != new_enabled &&
+> +         modify_bars(pdev, cmd, false) )
+>          /*
+>           * Ignore the error. No memory has been added or removed from the p2m
+>           * (because the actual p2m changes are deferred in defer_map) and the
+>           * memory decoding bit has not been changed, so leave everything as-is,
+>           * hoping the guest will realize and try again.
+>           */
+> -        modify_bars(pdev, cmd, false);
+> -    else
+> -        pci_conf_write16(pdev->sbdf, reg, cmd);
+> +        return;
+>  
+>  #ifdef CONFIG_HAS_PCI_MSI
+>      /* Unpopulate MSI-X table region, so accesses trap into Xen. */
+>      if ( !header->bars_mapped && new_enabled && vpci_make_msix_hole(pdev) )
+>          return;
+>  #endif
+> +
+> +    /*
+> +     * FIXME: for domUs we don't want the guest toggling the memory decoding
+> +     * bit.  It should be set in vpci_init_header() and guest attempts to
+> +     * modify it should only lead to guest p2m changes.
+> +     */
+> +    header->bars_mapped = new_enabled;
+> +    pci_conf_write16(pdev->sbdf, reg, cmd);
+>  }
 
--- 
-2.55.0
+First, to avoid any ambiguity, "the memory decoding bit" wants clarifying that
+it's the physical bit which is meant. The virtual one we really should leave
+for the guest to play with as it sees fit.
 
+Then, disallowing the turning off of memory decoding may be problematic. I
+have a vague recollection that dealing with certain quirks may require doing
+so. Plus why would we force decoding to be on when it's not needed by the
+domain driving the device? I'm saying this not the least because in principle
+memory and I/O decoding bits should be treated equally. Yet especially on
+platforms without the concept of I/O ports disallowing the turning off of that
+bit would feel pretty irritating.
+
+> @@ -927,6 +884,13 @@ int vpci_init_header(struct pci_dev *pdev)
+>              goto fail;
+>      }
+>  
+> +    if ( cmd & PCI_COMMAND_MEMORY )
+
+Fold this condition with ...
+
+> +    {
+> +        /* Restore command register value. */
+> +        header->bars_mapped = true;
+> +        pci_conf_write16(pdev->sbdf, PCI_COMMAND, cmd);
+> +    }
+> +
+>      return (cmd & PCI_COMMAND_MEMORY) ? modify_bars(pdev, cmd, false) : 0;
+
+... the pre-existing one here (perhaps by inverting and having a simply
+"return 0" there)? Then modify_bars() could also be called before restoring
+the command register, at which point it almost looks as if you could then
+drop the justification for re-ordering the two operations.
+
+Jan
 
