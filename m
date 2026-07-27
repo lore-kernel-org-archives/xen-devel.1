@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBF1AC531D0
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2026 10:20:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1371519.1619009 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11CF4C53219
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2026 10:20:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1371525.1619019 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woIRT-0007lE-HQ; Mon, 27 Jul 2026 10:20:15 +0000
+	id 1woIRu-0008Dv-Se; Mon, 27 Jul 2026 10:20:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1371519.1619009; Mon, 27 Jul 2026 10:20:15 +0000
+Received: by outflank-mailman (output) from mailman id 1371525.1619019; Mon, 27 Jul 2026 10:20:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woIRT-0007l7-Ed; Mon, 27 Jul 2026 10:20:15 +0000
-Received: by outflank-mailman (input) for mailman id 1371519;
- Mon, 27 Jul 2026 10:20:13 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1woIRu-0008Do-Ps; Mon, 27 Jul 2026 10:20:42 +0000
+Received: by outflank-mailman (input) for mailman id 1371525;
+ Mon, 27 Jul 2026 10:20:41 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1woIRR-0007kp-9Q
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 10:20:13 +0000
+ (envelope-from <jbeulich@suse.com>) id 1woIRt-0008DY-Hu
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 10:20:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woIRQ-000sPx-Az
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 12:20:12 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1woIRs-003M40-UB
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 12:20:40 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a6730d3-bab6-0a2a0a5309dd-0a2a450c9838-24
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 12:20:12 +0200
-Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a6730eb-e002-0a2a0a5209dd-0a2a4504e8f6-34
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 12:20:40 +0200
+Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a6730dc-f479-0a2a450c0019-d155dd36e01d-3
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 12:20:12 +0200
-Received: by mail-wr1-f54.google.com with SMTP id
- ffacd0b85a97d-47f3b39f2a1so2094476f8f.2
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 03:20:12 -0700 (PDT)
+ id 6a6730f8-b57f-0a2a45040019-d155802ddc3e-3
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 12:20:40 +0200
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-4954afac04bso29923265e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 03:20:40 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f85b9a596sm46797487f8f.4.2026.07.27.03.20.10
+ 5b1f17b1804b1-4957bfe07e1sm224907225e9.3.2026.07.27.03.20.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Jul 2026 03:20:11 -0700 (PDT)
+ Mon, 27 Jul 2026 03:20:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,56 +55,54 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785147612; x=1785752412; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785147640; x=1785752440; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=FN7W45SrJHwi206FXCh2uedKhx/KQMiLh+IoEidA5MA=;
-        b=JvlO8rTgRDXpiZ06aJC3RGCQagDpqY9Yi5jzd8WnIQ7o+GnRz9R2zccPU7/me9ABhO
-         dl1GhLsrJT2tpOjoeBij3wLrF+hjYsCVd8OQq6tG0vqRI3+ovr7nfQumQBYm2tXWhVuD
-         wWoni2lkCOqKgU/7pvWCMjzXxFUX18QqPPaxxx8ZZ5ZEM9hVoZu9mlWnesKfD1ngJQX7
-         3ccHf12IxnL3rIr97dAE/O/zhW1Mnl1iQGpF5A4ZnLmEE5g2qhh+ZGNmfuiENbeZIIGr
-         Ty7Pc5J6qozY0mIIJ44HPFkp6I5tulf4IGnOHnonYrz4jijfe37Ku/wbk92J1M7hft0U
-         9u9Q==
+        bh=R+gGXDm7e3E7luUT03vkRevAy5s7Sddb9vqNWLAUZMQ=;
+        b=Hb1aVC10FSzRxeUfP6Jfrf+6LBwOlPqHBwgCOkWtLCe5kaHRAZIXN7elQe/tHWzwm/
+         yGr5S4GdM2/GQi+1QjfXCIQcDkH0PJm3XCBpwGes1RunXk+aE9Q+GPoqI8JbGiA9uYOU
+         5+QjPPdZ4ySYDsj0wxARgcfyiOSxr3r119fs5qIAn4Mqng2ET2Dos1bVolSib/2jdheQ
+         UApHT+B70pT7hO+OfUPCT/0r14G/QCpDUEt5Ox/yGKjYM3GXo8muQxi3Iohw4K62NuFe
+         SLZg1tdovtmeJOiIc3fwgwZit7wgh6WHDz6719HHiuqUCKb4TdV3PhDyXmSnSQX8Syot
+         3Jbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785147612; x=1785752412;
+        d=1e100.net; s=20251104; t=1785147640; x=1785752440;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=FN7W45SrJHwi206FXCh2uedKhx/KQMiLh+IoEidA5MA=;
-        b=fxabuECFmBUP13/ffo1ptt+WXj58OFammGRAGGoXQR5CEmpGEaryUuUdGIJ1yK4Ee5
-         HSsY+4SjhHajuqEiNkN7lW2UZgzDINHGALHz0khFwx0mten0jXJ8z1E4gxuL02PfiSLI
-         YmvyI/VSORpVbzjJTDdtzGENS9AZ4osyEyORf7w50pGf1MvvsqC2jtFJHQHaUMa6/vYY
-         JbuFgR0J9iqT88crHBUONL/RH4OcO0wLqxXEabY2BRgZqmj4Aj0EFi5To9oyPhFp9P/2
-         sHqgHq0Zt1h/bhdhQyU/37WXMfdVml8K5RSDiGkqbkb7mgXkVEYY5zZ3FK1Grj+vZt9d
-         A2nA==
-X-Gm-Message-State: AOJu0YwFMe89Eto2Pg1O92t4DmXW+i43SOsWgHGt337oEKi3Nh+ScfMN
-	uTqBVnVP6lPlw4Nv6FYc8z072gBfZ7F8yYTYWE6X6QS65syAHp0/zDxRqT/LAxMG6qIpCc7aPmc
-	83nGG6Q==
-X-Gm-Gg: AR+sD13NvrmX62KnsTmzYnxTWNOTwnq1btqACwApfV3NnUcYER6QYvu5eDnaxK9W7zy
-	tHuW/dUzq6GqCLiruLeeHuqvJIOEWA2ZJ0vvrXy+N8Wy9Xdq+CReLDBJ2GqG1SYW5zy9cQlgi42
-	BB/hFJ3uHTYAj4TGL8EousR/UJ80FIJzR1qmO5UVjxuFAbRkPK10z9SXR4dkhbd9aduQCnUA8yN
-	r0wtL233f7sKUAT+vyTtHMsV4QHJLuhJMvfvkpyxgnPqViFwwA80z79t265AtcoIasS2OilzMeX
-	76Iw46o+QrMJeasGlAx18aP325apILEQbv2lVeyWXDZAtV0Aa3UWADewNcHyf5xOSAg9BgspNan
-	YXtGjYoz2GfdyFxOPm35B4pkMHLFp3EWYtia2FcJyu6urbBZNFBgHKjRNnAoqC0TZxzkNGszLK3
-	bnBvlYWnf/qhGhD6MhtTY2aWk7kGtonPm+Rsc2I9ruJjfIRs1uWvtN81NlX+uDiGnH2g==
-X-Received: by 2002:a05:6000:4903:b0:47f:93d8:f480 with SMTP id ffacd0b85a97d-47f9fea2d13mr9482811f8f.39.1785147611673;
-        Mon, 27 Jul 2026 03:20:11 -0700 (PDT)
-Message-ID: <98388998-c5c6-4991-8662-2b4bf25188f2@suse.com>
-Date: Mon, 27 Jul 2026 12:20:09 +0200
+        bh=R+gGXDm7e3E7luUT03vkRevAy5s7Sddb9vqNWLAUZMQ=;
+        b=BgNT9G70vSA248MEBTwinfa7Vk3oCJ1ByxCAFndfn/HijymQaVswQGok2Zrrn5hE9x
+         +bVf6BgYW6zzpDdwwnS2Rs3SdgXiyln3ofi9TZiXEYPLnRsPXyiIO3a5AmKlvf/Z7Jm8
+         o1xvrem3EjYcWNv7zq/TQ2RWVGJ6JCG4805QWzHT8nMeSJ8bTphBIDydWEqC3t6ch0Xy
+         KK+6LoUxSC3JI/DQOcF4BqgEI4Hs33JC0iFK+Ch8Cft4ONd99X1eipS37phHFKxDOGcM
+         lI3lqjKQtBGL+i5JsKxK8r2FPVRC5cNRScxGvNg3ZEt0f9fS9VNzTF0e6Nbii3Mc7tsU
+         WPNw==
+X-Gm-Message-State: AOJu0YzcXWRXo0IR3YIXKHTTgnxpkXsuvtGMDT+pqHDiJ8ZJlJ7g4Rnb
+	J8rDsZ+2uLEje+mE/FjTRgoemO625Bz5UFmacMt38027YuO11jLwilelOGSUEr7tp8Ch/gbMrEm
+	+qttGcA==
+X-Gm-Gg: AR+sD12LNt0qL7PCghOoVuCnKpl41u624aTHZ8NZRp+oYvC20A8Rk6XaWx+6rRNdV0k
+	KSt+fAyqEyD/dTPxDSui5kKdzqONue5vnuV2Ys2WXJAM8Pk6ZdwjABVkaiyMl/d3KBwixwGZadX
+	UkVn/R1zNqrRSkQdjm5WM0qfGJ0Uaizl5Cpdq/g40U4mZUl99sf/JVCOIjJ4lFXE2pAKmApoBU6
+	pNKaZJ7b38mBMcKr59k8k/whyfcLGkRoeWkumPTjhQPk06QCLq8J/O/DCcnUG7TPVp8ZrFr9xOQ
+	14uZ7PKRpoVci0RfqSNdabcSqJILOY2q3XMvlEbURFESWKvzZD/qENR9eoEf3dizPLSHVZJjL3I
+	XowqR+4NrxefMD2iwLb6RV7Bb32s98WPkKYoQ93valoyg6/mVw4SRUsG4fsorzcxnhtR2NN4w3l
+	qwFs+EqRdO3Aq8GJ/yM7ck3BhxYJKsiSRZYB0X9fdA6jpSTmNYSNIeD+kJKEZU5d6Ydf1It2eru
+	jtv
+X-Received: by 2002:a05:600c:12d4:b0:495:4dd3:ca97 with SMTP id 5b1f17b1804b1-496b56fa62bmr62636045e9.29.1785147640288;
+        Mon, 27 Jul 2026 03:20:40 -0700 (PDT)
+Message-ID: <a8ecb969-d0a0-40af-a49c-a94e6fbda0f7@suse.com>
+Date: Mon, 27 Jul 2026 12:20:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2 2/3] x86/EFI: replace ebmalloc()
+Subject: [PATCH v2 3/3] xhci-dbc: use brk_alloc()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Teddy Astie <teddy.astie@vates.tech>,
- Marek Marczykowski <marmarek@invisiblethingslab.com>,
- Daniel Smith <dpsmith@apertussolutions.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Marek Marczykowski <marmarek@invisiblethingslab.com>
 References: <31ba7ff2-a42d-44aa-976c-17fbff44a56f@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -133,347 +131,89 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <31ba7ff2-a42d-44aa-976c-17fbff44a56f@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1785147612-03ED2A5B-FCB42320/0/0
+X-purgate-ID: tlsNG-ebf023/1785147640-C26CAB50-33559181/0/0
 X-purgate-type: clean
-X-purgate-size: 11267
+X-purgate-size: 2748
 
-Use the new brk_alloc() instead, with ebmalloc() merely being a thin
-wrapper.
+This way the relatively large chunk of DMA buffers can be freed when the
+driver isn't in use.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 Reviewed-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
----
-I'm not quite certain whether we ought to permit non-page-granular
-reservations. The in-memory image being somewhat larger due to possibly
-excessive padding isn't really a big problem, I think.
----
-v2: Re-base.
 
---- a/xen/Rules.mk
-+++ b/xen/Rules.mk
-@@ -263,7 +263,7 @@ quiet_cmd_obj_init_o = INIT_O  $@
- define cmd_obj_init_o
-     $(OBJDUMP) -h $< | while read idx name sz rest; do \
-         case "$$name" in \
--        .*.local) ;; \
-+        .*.local|.bss..brk*) ;; \
-         .text|.text.*|.data|.data.*|.bss|.bss.*) \
-             test $$(echo $$sz | sed 's,00*,0,') != 0 || continue; \
-             echo "Error: size of $<:$$name is 0x$$sz" >&2; \
---- a/xen/arch/x86/efi/efi-boot.h
-+++ b/xen/arch/x86/efi/efi-boot.h
-@@ -10,6 +10,7 @@
- #include <xen/vga.h>
- 
- #include <asm/boot-helpers.h>
-+#include <asm/brk.h>
- #include <asm/e820.h>
- #include <asm/edd.h>
- #include <asm/microcode.h>
-@@ -119,6 +120,18 @@ static void __init relocate_trampoline(u
-     reloc_trampoline64();
- }
- 
-+DEFINE_BRK(efi, MB(1));
-+
-+static void *__init ebmalloc(size_t size)
-+{
-+    void *ptr = brk_alloc(size);
-+
-+    if ( !ptr )
-+        blexit(L"Out of BRK memory\r\n");
-+
-+    return ptr;
-+}
-+
- static void __init place_string(u32 *addr, const char *s)
- {
-     char *alloc = NULL;
---- a/xen/arch/x86/efi/stub.c
-+++ b/xen/arch/x86/efi/stub.c
-@@ -41,12 +41,4 @@ void __init noreturn efi_multiboot2(EFI_
- 
- void __init efi_init_memory(void) { }
- 
--bool efi_boot_mem_unused(unsigned long *start, unsigned long *end)
--{
--    /* FIXME: Simplify once the call here with two NULLs goes away. */
--    if ( start || end )
--        *start = *end = (unsigned long)_end;
--    return false;
--}
--
- void efi_update_l4_pgtable(unsigned int l4idx, l4_pgentry_t l4e) { }
---- a/xen/arch/x86/include/asm/brk.h
-+++ b/xen/arch/x86/include/asm/brk.h
-@@ -2,6 +2,10 @@
- 
+--- a/xen/drivers/char/xhci-dbc.c
++++ b/xen/drivers/char/xhci-dbc.c
+@@ -27,6 +27,8 @@
+ #include <xen/serial.h>
+ #include <xen/timer.h>
  #include <xen/types.h>
- 
-+#define DEFINE_BRK(var, size) \
-+    static char __section(".bss..brk.page_aligned") __aligned(PAGE_SIZE) \
-+        __used var ## _brk_[size]
 +
- void *brk_alloc(size_t size);
- unsigned long brk_get_unused_start(void);
- void brk_free_unused(void);
---- a/xen/arch/x86/include/asm/setup.h
-+++ b/xen/arch/x86/include/asm/setup.h
-@@ -9,6 +9,8 @@ extern const char __2M_rodata_start[], _
- extern char __2M_init_start[], __2M_init_end[];
- extern char __2M_rwdata_start[], __2M_rwdata_end[];
- 
-+extern unsigned long brk_end;
-+
- extern unsigned long xenheap_initial_phys_start;
- extern uint64_t boot_tsc_stamp;
- 
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -31,6 +31,7 @@
- #include <asm/alternative.h>
- #include <asm/apic.h>
- #include <asm/bootinfo.h>
 +#include <asm/brk.h>
- #include <asm/bzimage.h>
- #include <asm/cpu-policy.h>
- #include <asm/e820.h>
-@@ -164,6 +165,8 @@ cpumask_t __read_mostly cpu_present_map;
+ #include <asm/fixmap.h>
+ #include <asm/io.h>
+ #include <asm/string.h>
+@@ -1321,7 +1323,7 @@ static struct uart_driver dbc_uart_drive
+ };
  
- unsigned long __read_mostly xen_phys_start;
+ /* Those are accessed via DMA. */
+-struct dbc_dma_bufs {
++struct __aligned(PAGE_SIZE) dbc_dma_bufs {
+     struct xhci_trb evt_trb[DBC_TRB_RING_CAP];
+     struct xhci_trb out_trb[DBC_TRB_RING_CAP];
+     struct xhci_trb in_trb[DBC_TRB_RING_CAP];
+@@ -1335,8 +1337,7 @@ struct dbc_dma_bufs {
+      * DMA-reachable by the USB controller.
+      */
+ };
+-static struct dbc_dma_bufs __section(".bss.page_aligned") __aligned(PAGE_SIZE)
+-    dbc_dma_bufs;
++DEFINE_BRK(xhci, sizeof(struct dbc_dma_bufs));
  
-+unsigned long __ro_after_init brk_end;
-+
- /* Only used in asm code and within this source file */
- char asmlinkage __section(".init.bss.stack_aligned") __aligned(STACK_SIZE)
-     cpu0_stack[STACK_SIZE];
-@@ -1141,7 +1144,6 @@ void asmlinkage __init noreturn __start_
-     struct boot_info *bi;
-     unsigned long nr_pages, raw_max_page;
-     int i, j, bytes = 0;
--    unsigned long eb_start, eb_end;
-     bool acpi_boot_table_init_done = false, relocated = false;
-     bool vm_init_done = false;
-     int ret;
-@@ -1511,7 +1513,7 @@ void asmlinkage __init noreturn __start_
-         /*
-          * This needs to remain in sync with remove_xen_ranges() and the
-          * respective reserve_e820_ram() invocation below. No need to
--         * query efi_boot_mem_unused() here, though.
-+         * query brk_get_unused_start() here, though.
-          */
-         xen->start = virt_to_maddr(_stext);
-         xen->size  = __2M_rwdata_end - _stext;
-@@ -1654,18 +1656,11 @@ void asmlinkage __init noreturn __start_
-     if ( !xen_phys_start )
-         panic("Not enough memory to relocate Xen\n");
- 
--    /* FIXME: Putting a hole in .bss would shatter the large page mapping. */
--    if ( using_2M_mapping() )
--        efi_boot_mem_unused(NULL, NULL);
--
-     /* This needs to remain in sync with remove_xen_ranges(). */
--    if ( efi_boot_mem_unused(&eb_start, &eb_end) )
--    {
--        reserve_e820_ram(&boot_e820, __pa(_stext), __pa(eb_start));
--        reserve_e820_ram(&boot_e820, __pa(eb_end), __pa(__2M_rwdata_end));
--    }
--    else
--        reserve_e820_ram(&boot_e820, __pa(_stext), __pa(__2M_rwdata_end));
-+    brk_end = brk_get_unused_start();
-+    if ( using_2M_mapping() )
-+        brk_end = PAGE_ALIGN_2M(brk_end);
-+    reserve_e820_ram(&boot_e820, __pa(_stext), __pa(brk_end));
- 
-     /* Late kexec reservation (dynamic start address). */
-     kexec_reserve_area();
-@@ -2267,7 +2262,6 @@ __initcall(init_xen_cap_info);
- 
- int __hwdom_init remove_xen_ranges(struct rangeset *r)
+ static int __init cf_check xhci_parse_dbgp(const char *opt_dbgp)
  {
--    paddr_t start, end;
-     int rc;
+@@ -1413,24 +1414,33 @@ void __init xhci_dbc_uart_init(void)
+ {
+     struct dbc_uart *uart = &dbc_uart;
+     struct dbc *dbc = &uart->dbc;
++    struct dbc_dma_bufs *dma_bufs;
  
-     /* S3 resume code (and other real mode trampoline code) */
-@@ -2289,26 +2283,10 @@ int __hwdom_init remove_xen_ranges(struc
-         return rc;
- 
-     /* hypervisor .data + .bss */
--    if ( efi_boot_mem_unused(&start, &end) )
--    {
--        ASSERT(__pa(start) >= __pa(&__2M_rwdata_start));
--        rc = rangeset_remove_range(r, PFN_DOWN(__pa(&__2M_rwdata_start)),
--                                   PFN_DOWN(__pa(start) - 1));
--        if ( rc )
--            return rc;
--        ASSERT(__pa(end) <= __pa(&__2M_rwdata_end));
--        rc = rangeset_remove_range(r, PFN_DOWN(__pa(end)),
--                                   PFN_DOWN(__pa(&__2M_rwdata_end) - 1));
--        if ( rc )
--            return rc;
--    }
--    else
--    {
--        rc = rangeset_remove_range(r, PFN_DOWN(__pa(&__2M_rwdata_start)),
--                                   PFN_DOWN(__pa(&__2M_rwdata_end) - 1));
--        if ( rc )
--            return rc;
--    }
-+    rc = rangeset_remove_range(r, PFN_DOWN(__pa(&__2M_rwdata_start)),
-+                               PFN_DOWN(__pa(brk_end) - 1));
-+    if ( rc )
-+        return rc;
- 
-     return 0;
- }
---- a/xen/arch/x86/tboot.c
-+++ b/xen/arch/x86/tboot.c
-@@ -321,8 +321,6 @@ void tboot_shutdown(uint32_t shutdown_ty
-     /* if this is S3 then set regions to MAC */
-     if ( shutdown_type == TB_SHUTDOWN_S3 )
-     {
--        unsigned long s, e;
--
-         /*
-          * Xen regions for tboot to MAC. This needs to remain in sync with
-          * remove_xen_ranges().
-@@ -336,16 +334,8 @@ void tboot_shutdown(uint32_t shutdown_ty
-         g_tboot_shared->mac_regions[1].size = __2M_rodata_end - _stext;
-         /* hypervisor .data + .bss */
-         g_tboot_shared->mac_regions[2].start = (uint64_t)__pa(&__2M_rwdata_start);
--        g_tboot_shared->mac_regions[2].size = __2M_rwdata_end - __2M_rwdata_start;
--        if ( efi_boot_mem_unused(&s, &e) )
--        {
--            g_tboot_shared->mac_regions[2].size =
--                s - (unsigned long)__2M_rwdata_start;
--            g_tboot_shared->mac_regions[3].start = __pa(e);
--            g_tboot_shared->mac_regions[3].size =
--                (unsigned long)__2M_rwdata_end - e;
--            g_tboot_shared->num_mac_regions = 4;
--        }
-+        g_tboot_shared->mac_regions[2].size =
-+            brk_end - (unsigned long)__2M_rwdata_start;
- 
-         /*
-          * MAC domains and other Xen memory
---- a/xen/common/efi/boot.c
-+++ b/xen/common/efi/boot.c
-@@ -1825,8 +1825,6 @@ void __init efi_init_memory(void)
-         pte_attr_t prot;
-     } *extra, *extra_head = NULL;
- 
--    free_ebmalloc_unused_mem();
--
-     if ( !efi_enabled(EFI_BOOT) )
+     if ( !dbc->enable )
          return;
  
---- a/xen/common/efi/ebmalloc.c
-+++ /dev/null
-@@ -1,74 +0,0 @@
--#include "efi.h"
--#include <xen/init.h>
--#include <xen/mm.h>
--
--#ifdef CONFIG_ARM
--/*
-- * TODO: Enable EFI boot allocator on ARM.
-- * This code can be common for x86 and ARM.
-- * Things TODO on ARM before enabling ebmalloc:
-- *   - estimate required EBMALLOC_SIZE value,
-- *   - where (in which section) ebmalloc_mem[] should live; if in
-- *     .bss.page_aligned, as it is right now, then whole BSS zeroing
-- *     have to be disabled in xen/arch/arm/arm64/head.S; though BSS
-- *     should be initialized somehow before use of variables living there,
-- *   - use ebmalloc() in ARM/common EFI boot code,
-- *   - call free_ebmalloc_unused_mem() somewhere in init code.
-- */
--#define EBMALLOC_SIZE	MB(0)
--#else
--#define EBMALLOC_SIZE	MB(1)
--#endif
--
--static char __section(".bss.page_aligned") __aligned(PAGE_SIZE)
--    ebmalloc_mem[EBMALLOC_SIZE];
--static unsigned long __read_mostly ebmalloc_allocated;
--
--/* EFI boot allocator. */
--void __init *ebmalloc(size_t size)
--{
--    void *ptr = ebmalloc_mem + ebmalloc_allocated;
--
--    ebmalloc_allocated += ROUNDUP(size, sizeof(void *));
--
--    if ( ebmalloc_allocated > sizeof(ebmalloc_mem) )
--        blexit(L"Out of static memory\r\n");
--
--    return ptr;
--}
--
--bool efi_boot_mem_unused(unsigned long *start, unsigned long *end)
--{
--    /* FIXME: Drop once the call here with two NULLs goes away. */
--    if ( !start && !end )
--    {
--        ebmalloc_allocated = sizeof(ebmalloc_mem);
--        return false;
--    }
--
--    *start = (unsigned long)ebmalloc_mem + PAGE_ALIGN(ebmalloc_allocated);
--    *end = (unsigned long)ebmalloc_mem + sizeof(ebmalloc_mem);
--
--    return *start < *end;
--}
--
--void __init free_ebmalloc_unused_mem(void)
--{
--    unsigned long start, end;
--
--    if ( !efi_boot_mem_unused(&start, &end) )
--        return;
--
--    destroy_xen_mappings(start, end);
--
--#ifdef CONFIG_X86
--    /*
--     * By reserving the space early in the E820 map, it gets freed way before
--     * we make it here. Don't free the range a 2nd time.
--     */
--#else
--    init_xenheap_pages(__pa(start), __pa(end));
--#endif
--
--    printk(XENLOG_INFO "Freed %lukB unused BSS memory\n", (end - start) >> 10);
--}
---- a/xen/common/efi/efi-common.mk
-+++ b/xen/common/efi/efi-common.mk
-@@ -1,4 +1,4 @@
--EFIOBJ-y := boot.init.o pe.init.o ebmalloc.o runtime.o
-+EFIOBJ-y := boot.init.o pe.init.o runtime.o
- EFIOBJ-$(CONFIG_COMPAT) += compat.o
+-    dbc->dbc_ctx = &dbc_dma_bufs.ctx;
+-    dbc->dbc_erst = &dbc_dma_bufs.erst;
+-    dbc->dbc_ering.trb = dbc_dma_bufs.evt_trb;
+-    dbc->dbc_oring.trb = dbc_dma_bufs.out_trb;
+-    dbc->dbc_iring.trb = dbc_dma_bufs.in_trb;
+-    dbc->dbc_owork.buf = dbc_dma_bufs.out_wrk_buf;
+-    dbc->dbc_iwork.buf = dbc_dma_bufs.in_wrk_buf;
+-    dbc->dbc_str = dbc_dma_bufs.str_buf;
++    dma_bufs = brk_alloc(sizeof(*dma_bufs));
++    if ( !dma_bufs )
++    {
++        dbc->enable = false;
++        printk(XENLOG_ERR "XHCI: not enough BRK space available\n");
++        return;
++    }
++
++    dbc->dbc_ctx = &dma_bufs->ctx;
++    dbc->dbc_erst = &dma_bufs->erst;
++    dbc->dbc_ering.trb = dma_bufs->evt_trb;
++    dbc->dbc_oring.trb = dma_bufs->out_trb;
++    dbc->dbc_iring.trb = dma_bufs->in_trb;
++    dbc->dbc_owork.buf = dma_bufs->out_wrk_buf;
++    dbc->dbc_iwork.buf = dma_bufs->in_wrk_buf;
++    dbc->dbc_str = dma_bufs->str_buf;
  
- CFLAGS-y += -fshort-wchar
---- a/xen/common/efi/efi.h
-+++ b/xen/common/efi/efi.h
-@@ -48,10 +48,6 @@ void noreturn blexit(const CHAR16 *str);
- 
- const CHAR16 *wmemchr(const CHAR16 *s, CHAR16 c, UINTN n);
- 
--/* EFI boot allocator. */
--void *ebmalloc(size_t size);
--void free_ebmalloc_unused_mem(void);
--
- const void *pe_find_section(const void *image, const UINTN image_size,
-                             const CHAR16 *section_name, UINTN *size_out);
- 
---- a/xen/include/xen/efi.h
-+++ b/xen/include/xen/efi.h
-@@ -39,7 +39,6 @@ static inline bool efi_enabled(unsigned
- extern bool efi_secure_boot;
- 
- void efi_init_memory(void);
--bool efi_boot_mem_unused(unsigned long *start, unsigned long *end);
- unsigned long efi_get_time(void);
- void efi_reset_system(bool warm);
- #ifndef COMPAT
+     if ( dbc_open(dbc) )
+     {
+         iommu_add_extra_reserved_device_memory(
+-                PFN_DOWN(virt_to_maddr(&dbc_dma_bufs)),
+-                PFN_UP(sizeof(dbc_dma_bufs)),
++                PFN_DOWN(virt_to_maddr(dma_bufs)),
++                PFN_DOWN(sizeof(*dma_bufs)),
+                 uart->dbc.sbdf,
+                 "XHCI console");
+         serial_register_uart(SERHND_XHCI, &dbc_uart_driver, &dbc_uart);
 
 
