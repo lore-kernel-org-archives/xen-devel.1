@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DC40C531D0
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2026 15:19:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1371763.1619235 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3096C531FC
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2026 15:22:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1371771.1619243 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woN6q-0007dM-Gp; Mon, 27 Jul 2026 15:19:16 +0000
+	id 1woN9T-0000i2-Sq; Mon, 27 Jul 2026 15:21:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1371763.1619235; Mon, 27 Jul 2026 15:19:16 +0000
+Received: by outflank-mailman (output) from mailman id 1371771.1619243; Mon, 27 Jul 2026 15:21:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woN6q-0007dF-Dm; Mon, 27 Jul 2026 15:19:16 +0000
-Received: by outflank-mailman (input) for mailman id 1371763;
- Mon, 27 Jul 2026 15:19:15 +0000
+	id 1woN9T-0000hv-Pd; Mon, 27 Jul 2026 15:21:59 +0000
+Received: by outflank-mailman (input) for mailman id 1371771;
+ Mon, 27 Jul 2026 15:21:58 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1woN6p-0007d9-FD
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 15:19:15 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1woN9S-0000hp-BZ
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 15:21:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woN6o-001k0v-7z
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 17:19:14 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1woN9R-00C2nv-Ix
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 17:21:57 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a6776e1-5cb7-0a2a0a5109dd-0a2a4503b71e-24
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 17:19:14 +0200
-Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a677786-bab6-0a2a0a5309dd-0a2a45079cf0-24
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 17:21:57 +0200
+Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a6776f1-fae8-0a2a45030019-d155802aa9ed-3
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 17:19:14 +0200
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-4954a9e8490so19889045e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 08:19:14 -0700 (PDT)
+ id 6a677795-b4ea-0a2a45070019-d155dd2eecf3-3
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 17:21:57 +0200
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-476a130c138so2774324f8f.0
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 08:21:57 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4957e334f63sm195479555e9.1.2026.07.27.08.19.11
+ ffacd0b85a97d-47f85b9a5d9sm48106900f8f.5.2026.07.27.08.21.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Jul 2026 08:19:12 -0700 (PDT)
+ Mon, 27 Jul 2026 08:21:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,49 +55,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785165553; x=1785770353; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785165717; x=1785770517; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=buzS5elld4WXgqvh6aKSEm5gegztoi/eCUi3U+AJwQA=;
-        b=Kgypshuk8q31fnpIYmyirstTaZYxNtKXbs+vDDVnZ86jjFswWDi0Xh3BWE6BTBGE8O
-         4AFxS971SISKSi59mWYUjlopvZsQ7NnI0XQOnUcGPa3VfSZ+gx70VG7tX1KxHWvidPys
-         weYSWmLSQXaVIodB84aQiyfNy62Q1CAa1TYP8escKaZ7Dky4TiNBuAFrwx9GwpUXphPN
-         oFZ7MsgT8WL8J87f5nI6GpZRRH+65uNvupTvRYYS/f9szDUTqhDUBNZwU/HFByAaa2vS
-         cP8hV77gOQSt/h0R4RM8gn3N1cYu8YIjKBxjOR2Llnjqq+1k+98fKEFlrpPpIi/+X3ml
-         retg==
+        bh=PHfNj3rPAqTUD3/jrcxv/70F+JeLAtHUxp0y1WIHsAY=;
+        b=XOAYiemNVF/jv32mCkmZvHOXzccr/IDr+cy3aeQMAiVhIc96cqbpHhQngYWFv3rrft
+         pNr0ypD6cM7Z3nEy7CDfke2z5hmPqzIN0NUK/HoFA931QwU6lhKSHetIGFG3/4z+0stv
+         iSOotgljv0hLfXwA29Qit0DoCZkrkJGQ0wbQDSEHfh4wl8ZpQT6JlBmVPuRTbBbTZAzS
+         bemOZDi1Qp5y0U05m2iyU7TX5PrZpYlTfCnjTppx+cd8pMGgaJaxO39+2i7/YeqXYY3K
+         nn4ObdM6Bhs4W+L+GJSS/Q2N/yIskULp1XO+picUVWlrkJWQ4XG9rCl+76NHtw+/pfXt
+         vvhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785165553; x=1785770353;
+        d=1e100.net; s=20251104; t=1785165717; x=1785770517;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=buzS5elld4WXgqvh6aKSEm5gegztoi/eCUi3U+AJwQA=;
-        b=dNBSGS9Yv4qZrNpoan0oPoBD2CNpHhQ/We7jyctdnOKGKAcBup2HSsEOA4Q6yEyS1m
-         qEMgHtm+o9F843CdsjiJSlnUL4bQ32/JZFCGrf8Xy0VFIH4+/CG3RNkGC6m5s/7kPEmG
-         HPFt6sqiAtaMAm8CAUiBf2XG3OhNAOLy1xUk/Efa8E3dfU0gaVUnd0u076Uc7zwR/DgY
-         73eUPP00H3pFa/2bn2pqQyUpojTHxNiT+iE3asxP5pNEA3ih36IjJA0xfcv6uCMHunWZ
-         IfSjmrxvocl98aMmoV5ozZC2Gbd/MWB/FCv8WNnTJSji/AUkegHEAnFsYJF9imVpZjI1
-         HwxA==
-X-Forwarded-Encrypted: i=1; AHgh+RqUMsm7zX5cEQdM9GaUFYyVV6WtqDZMOdMlQbJp1itHUXOD+fi62tTyICcCBii0qMG/hXxCV9ysKcE=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwmP85FxkSvYRo/pg0185M0svW2jtMBubjaAe/j6aBpMUWdSyI6
-	AW7zEQx2zNpsrcRWdssLmH9tb4vlLx8kx4WyiXuOvNOyyRRwt0sp1bya+PWgX8ASnQ==
-X-Gm-Gg: AR+sD12YgBQcBipO+bymViMPPRKPShVgQjs5XsATG6hHWd9LUrqurwqXTL/5etNvJsE
-	qlsA2CNDLWIfqDynnYUrYzR1U5Nqxui98kaTTA0t60cATetqQEQ/2VC+wBdIg8g5w+1nyje0I2B
-	7fFG7HbLnpVK6TlN7Jr91bBgZQ6YdKKeD+XahMC42LcJw4d+mXhv7gSqloDXJ8undLFJQGZo0U/
-	xyTQEwLdCgXBBhJ94RLOnNwVvrb2CAhiZq/BYChbB12lHZqs6R4LuaJeJV2P92CUhDFDgC+quqr
-	+/sgCyyCAk93SNmcevsXKAl73qg+/y41gSE++GyI38mQo2dBLMFN/nWIWhoCaf+lJWnoNaLKWUn
-	TZrZYvvBI0tNCBBGQ/oToKURbYJxzvQUo6TWZiGnbR3USnDiqtx4CRTaNsFTXp25FkkpQwuseXm
-	lFodXHt/kDw1MxeXIowhV42Hgj+W1NHNDtn9lCdX+vdyw/kbhLXoA=
-X-Received: by 2002:a05:600c:8b4c:b0:493:f783:c46a with SMTP id 5b1f17b1804b1-496b5b474e2mr110090835e9.6.1785165553650;
-        Mon, 27 Jul 2026 08:19:13 -0700 (PDT)
-Message-ID: <e630574d-320c-47e7-af59-2a6855603939@suse.com>
-Date: Mon, 27 Jul 2026 17:19:11 +0200
+        bh=PHfNj3rPAqTUD3/jrcxv/70F+JeLAtHUxp0y1WIHsAY=;
+        b=Yxk3WcglSD+ruhAzFp/RphBmjp3AKJpHNNPzRPbYP9tUdLoQ2BRThTZthGW5nZmfp5
+         jYdfEedJ356+efePx2RL6meOEdqzuOX69pfifxwN10JXPyYpFPQ9gA1rKwvioKNjRhgz
+         Z4RWeg4cC5Ne5leYIzesfCKhnSBMrnqUGX5Dr9v1dIRQK9HBf9kZ8ZaEA+607ShzC0JI
+         b0QGQALWKni3SnRQy2Pn/td5vrh1N+9QfKL+lwEuTZVOLcIKDcBiPwC9ZAyaKZYf4V5J
+         S9hBWC/Q/0Nn9CPm9ALgd52NVWVQKYk8yXLmu4a2KlaOMAXfplnolvYFwxHRLPewcqaM
+         3UXw==
+X-Forwarded-Encrypted: i=1; AHgh+RpTND10p0mT3iulywlQkjaOU6ixdg9jUU8LuVuCqVdFEhebmoeoSMsS2qSZvfVcUnxBwGYbK1GC1XM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwiFEZJfZ0P4MEs1rEMUjhJj2qGJNUfvK745VTV8bR678YRSAgD
+	1AvRHX75DexlGEf9O6Gw75uNcpmen4/80McEsKuEC1/k93LDsuFFz5cB+GGH+kKKWA==
+X-Gm-Gg: AR+sD10OS+umis/DSzlX2ukS4GMEu6+URaU0ISCrIrBe9aKj+uG7D/fTqmzQi8OYZoZ
+	9/8etZWGVtvp2ineF0oIfhsQPAEiQI9O7BVcXV3zy4xn7GgJMJAZp4zLQ8jMJypynSCCjhQ+Rk4
+	pUaSdXeqU0f9Z3oiayUpg+S/lIaEO93kCeMNc66DOY7SLoFSOS26/JDYCuchdcfd/VYelx8SMm6
+	oLmgLHX6r3Cmmea6QHQSQpv+fjTrwPjIlqnajGpLXDncKm+a7hNSkq/jkIx/eQ/0lMMQ8Fcz1LC
+	x9afC23Owu+OhwFp0H5krxrYPKxy8THBUIMaWZ9KNUUlmSrkO3ITqdMtNQL48mD057o5g5eJlk6
+	ZKAf99UCmhLOrTgY9nnu07kHwtWuvX+BFOKffvmqJ2GJT20grFh62gMycXbaRJx8lLew1QqlyOv
+	lQfCRlvTq+aMfev/uJdmCNfCqEwkAW71gdvZ1Y1bx+ocSCbdDUxibWFp7peYlk0SLFtA==
+X-Received: by 2002:a05:6000:24c9:b0:47f:8860:5663 with SMTP id ffacd0b85a97d-47f9fe92f7cmr12045076f8f.34.1785165716843;
+        Mon, 27 Jul 2026 08:21:56 -0700 (PDT)
+Message-ID: <29fcc402-f953-4b51-b077-729bb0e5b4e0@suse.com>
+Date: Mon, 27 Jul 2026 17:21:55 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 01/17] xen/riscv: manage IRQ_DISABLED flag in APLIC irq
- enable/disable callbacks
+Subject: Re: [PATCH v1 00/17] [RISC-V] virtual interrupt controller
+ (vAPLIC/vIMSIC) support
 To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  Baptiste Le Duc <baptiste.le-duc@vates.tech>,
@@ -108,7 +109,6 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
- <a6d85647d0d726ffb25708829813510421ed5234.1784560663.git.oleksii.kurochko@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -134,27 +134,109 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <a6d85647d0d726ffb25708829813510421ed5234.1784560663.git.oleksii.kurochko@gmail.com>
+In-Reply-To: <cover.1784560663.git.oleksii.kurochko@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1785165554-772F54E9-FA4E8D3B/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 800
+X-purgate-ID: tlsNG-ef75cf/1785165717-36CDFAE4-66BFDF97/0/0
+X-purgate-type: clean
+X-purgate-size: 5120
 
 On 20.07.2026 18:01, Oleksii Kurochko wrote:
-> desc->status is only set once during setup_irq(), but interrupts can be
-> enabled/disabled at runtime, so update it in the corresponding callbacks.
+> Hi all,
 > 
-> For the purposes of the FENCE instruction, CSR read accesses are
-> classified as device input (I) and CSR write accesses as device output
-> (O), while the barriers used by spin locks (fence rw,rw) only order
-> normal memory accesses. An explicit wmb() (fence ow,ow) is therefore
-> added in aplic_irq_{enable,disable}() to order the desc->status update
-> with respect to the IMSIC CSR write.
+> This series adds the initial virtual interrupt controller (vINTC) support
+> for RISC-V guests in Xen, based on the Advanced Interrupt Architecture
+> (AIA): a virtual APLIC (vAPLIC) in MSI mode backed by a virtual IMSIC
+> (vIMSIC) using hardware guest interrupt files.
 > 
-> Fixes: d4676a1398bc5 ("xen/riscv: implementation of aplic and imsic operations")
-> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> Rather than emulating APLIC in direct-delivery mode (which requires
+> trap-and-emulate for every interrupt and is costly), the series targets
+> IMSIC from the start. AIA lets a hart implement several "guest interrupt
+> files" (up to GEILEN), so external interrupts can be delivered to a vCPU
+> directly by hardware via the VGEIN field of hstatus, without a hypervisor
+> round-trip. Xen only has to emulate the APLIC MMIO programming interface
+> and route the guest's intent onto the physical MSI topology; interrupt
+> delivery itself stays in hardware.
+> 
+> The work breaks down into a few logical blocks:
+> 
+> Physical APLIC/AIA groundwork (patches 1-3)
+>   - Correctly track IRQ_DISABLED across runtime enable/disable and order
+>     the ->status update against the IMSIC CSR write.
+>   - Per-pCPU VGEIN (guest interrupt file) allocator: assign/release a
+>     hardware guest file to a vCPU and program hstatus.VGEIN.
+>   - Add the missing APLIC register offsets/masks needed by both the
+>     physical and virtual APLIC code (no functional change).
+> 
+> Device-agnostic MMIO dispatch + vAPLIC emulation (patches 4-5)
+>   - A per-domain MMIO handler table modelled on Arm's framework, so
+>     emulated devices self-register their GPA ranges and the fault path
+>     stays agnostic via a single try_handle_mmio() entry point.
+>   - vAPLIC MMIO read/write emulation. Writes are gated by the domain's
+>     authorised-IRQ bitmap so a guest cannot touch interrupts it does not
+>     own, and TARGET writes are translated from virtual to physical
+>     hart/guest-file indices. Delegation (SOURCECFG.D) is not yet
+>     supported.
+> 
+> vIMSIC guest interrupt files and state (patches 6-9)
+>   - Stage-2 map a vCPU's physical guest interrupt file to the fixed
+>     per-vCPU GPA page the guest expects at offset 0.
+>   - vcpu_aia_init(): assign a VGEIN, map its guest file and record the
+>     IMSIC state as a consistent unit.
+>   - IMSIC state save/restore (currently tracking which pCPU owns the
+>     guest file, needed because the pCPU id is part of the MSI address).
+>   - has_msi_support() helper to decide whether IMSIC state has to be
+>     saved/restored.
+> 
+> vINTC state save/restore plumbing (patches 10-11)
+>   - vintc_state_{save,restore}() wrappers over new store/restore hooks in
+>     struct vintc_ops, and the vAPLIC implementation of those hooks. No
+>     callers are wired up yet; the context-switch calls arrive with vCPU
+>     context switch support.
+> 
+> Trap and instruction emulation infrastructure (patches 12-17)
+>   - Extend the exception-table format with type/data fields and add
+>     EX_TYPE_TRAP_INFO so fixups can capture sepc/scause/stval.
+>   - riscv_vcpu_unpriv_read() (HLV/HLVX) to read guest memory/instructions
+>     safely, and riscv_vcpu_trap_redirect() to forward a synchronous trap
+>     back into the guest's VS-mode handler.
+>   - A guest page-fault handler that decodes the trapped load/store
+>     instruction (HTINST, or an unprivileged fetch as a fallback) and
+>     dispatches the MMIO access through try_handle_mmio().
+> 
+> Note on versioning: the series is posted as v1 as a freshly split-out
+> series, but several patches carry v2/v3 changelogs because they were
+> previously circulated as part of a larger another patches [1] from which the
+> current depends.
+> 
+> CI tests: https://gitlab.com/xen-project/people/olkur/xen/-/pipelines/2690874319
+> 
+> [1] https://lore.kernel.org/xen-devel/cover.1784559209.git.oleksii.kurochko@gmail.com/T/#t
+> 
+> Oleksii Kurochko (17):
+>   xen/riscv: manage IRQ_DISABLED flag in APLIC irq enable/disable
+>     callbacks
+>   xen/riscv: add basic VGEIN management for AIA guests
+>   xen/riscv: add missing APLIC register offsets, masks to asm/aplic.h
+>   xen/riscv: introduce device-agnostic MMIO emulation dispatch
+>   xen/riscv: implement virtual APLIC MMIO emulation
+>   xen/riscv: map IMSIC interrupt file for vCPUs
+>   xen/riscv: introduce vCPU AIA initialization
+>   xen/riscv: add IMSIC state save/restore
+>   xen/riscv: add helper to check APLIC MSI mode
+>   xen/riscv: introduce vintc_state_{save,restore}()
+>   xen/riscv: add vAPLIC state save/restore hooks
+>   xen/riscv: extend exception tables with type and data fields
+>   xen/riscv: add unprivileged guest memory read helper
+>   xen/riscv: add guest page fault handling stub
+>   xen/riscv: implement trap redirection to a guest
+>   xen/riscv: add guest load emulation for trapped MMIO accesses
+>   xen/riscv: add guest store emulation for trapped MMIO accesses
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Where did the last two patches go? My inbox agrees with [1] that only 15 of the
+17 patches arrived.
 
+Jan
+
+[1] https://lists.xen.org/archives/html/xen-devel/2026-07/threads.html
 
