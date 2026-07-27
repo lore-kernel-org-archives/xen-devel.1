@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5040EC54F51
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83376C54F52
 	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2026 16:56:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1371805.1619305 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1371793.1619270 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woOcJ-0008DJ-Ly; Mon, 27 Jul 2026 16:55:51 +0000
+	id 1woOcH-0007ff-Jc; Mon, 27 Jul 2026 16:55:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1371805.1619305; Mon, 27 Jul 2026 16:55:51 +0000
+Received: by outflank-mailman (output) from mailman id 1371793.1619270; Mon, 27 Jul 2026 16:55:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woOcJ-0008B1-BS; Mon, 27 Jul 2026 16:55:51 +0000
-Received: by outflank-mailman (input) for mailman id 1371805;
- Mon, 27 Jul 2026 16:48:31 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1woOcH-0007fY-GS; Mon, 27 Jul 2026 16:55:49 +0000
+Received: by outflank-mailman (input) for mailman id 1371793;
+ Mon, 27 Jul 2026 16:47:40 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <usama.anjum@arm.com>) id 1woOVD-0005lP-JA
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 16:48:31 +0000
+ (envelope-from <usama.anjum@arm.com>) id 1woOUN-0005gn-MB
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 16:47:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woOVD-00CEGl-01
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 18:48:31 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1woOUM-004PRh-BH
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 18:47:38 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <usama.anjum@arm.com>)
- id 6a678bcf-2eae-0a2a0a5409dd-0a2a450c9380-24
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 18:48:30 +0200
+ id 6a678ba4-2eae-0a2a0a5409dd-0a2a45089e06-12
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 18:47:37 +0200
 Received: from [217.140.110.172] (helo=foss.arm.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
  (envelope-from <usama.anjum@arm.com>)
- id 6a678bde-f479-0a2a450c0019-d98c6eacb156-1
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 18:48:30 +0200
+ id 6a678ba8-f659-0a2a45080019-d98c6eac9352-1
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 18:47:36 +0200
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AAB971762;
- Mon, 27 Jul 2026 09:48:25 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 635E51682;
+ Mon, 27 Jul 2026 09:47:31 -0700 (PDT)
 Received: from e142334-100.cambridge.arm.com (e142334-100.cambridge.arm.com
  [10.2.198.93])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 1D0C13F86F;
- Mon, 27 Jul 2026 09:48:20 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id C8E073F86F;
+ Mon, 27 Jul 2026 09:47:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,13 +52,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="From:To:Cc:Subject:Date"
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1785170909; bh=qlMBEgSYanOpxaG5+GObNIcpflrmglgvjw2BYgGRiAs=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=cGls7zQnlsACMOdTrPwDBJKOvhD8kH8mv7YPFdOjvjhXwbN8u4sgWSL3YZNOD0Pml
-	 XyFgMqudxOPDpAUOdEAXMsBPUM1LKrruj30a0mmvs9giDguNXB6O7JxdB2zaKUWPNm
-	 8j3C5nbVhGELOQy1dslFMHRX+rphcvgUZy5T3uvw=
+	t=1785170855; bh=w4k+bQmvUuHGI/24VevNijHqxyxPwL/+LhPYxLtjyuU=;
+	h=From:To:Cc:Subject:Date:From;
+	b=eNStiesHwmBomV6wrOQ8H5zsD4tgspqHk2F4hp05t+nsAbON7NhhaJZIlsbIoaDE5
+	 MQeD7VCk0M0n0M/zvl59Kf+yEaeZvKmNlr01S/W3ryf24Ziy0VJkB3GKbm+aeaR8ZL
+	 t+/uPNoYKFC+9W5v+wKeGdyfY/NjlIvdqscmhDX0=
 From: Muhammad Usama Anjum <usama.anjum@arm.com>
 To: Jani Nikula <jani.nikula@linux.intel.com>,
 	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
@@ -127,76 +127,409 @@ Cc: Muhammad Usama Anjum <usama.anjum@arm.com>,
 	bpf@vger.kernel.org,
 	linux-perf-users@vger.kernel.org,
 	damon@lists.linux.dev
-Subject: [PATCH RFC 06/11] mm/kasan: use hw_pte_t for the early shadow PTE table
-Date: Mon, 27 Jul 2026 17:46:57 +0100
-Message-ID: <20260727164715.2866609-7-usama.anjum@arm.com>
+Subject: [PATCH RFC 00/11] mm: distinguish PTE table storage from PTE values
+Date: Mon, 27 Jul 2026 17:46:51 +0100
+Message-ID: <20260727164715.2866609-1-usama.anjum@arm.com>
 X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260727164715.2866609-1-usama.anjum@arm.com>
-References: <20260727164715.2866609-1-usama.anjum@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1785170910-51538A5B-9A1C4A4F/0/0
+X-purgate-ID: tlsNG-c1860d/1785170857-D5D4887B-4913AD63/0/0
 X-purgate-type: clean
-X-purgate-size: 2210
+X-purgate-size: 11155
 
-kasan_early_shadow_pte is a complete PTE table rather than a
-standalone PTE value. Declare and define its elements as hw_pte_t so
-the object uses the PTE table storage type.
+Hi,
 
-Read the first element through ptep_get(), which returns the logical
-pte_t value expected by note_page_pte(), instead of accessing hw_pte_t
-storage directly. This also uses the accessor selected by the
-architecture.
+pte_t currently describes both a logical PTE value and an element stored in
+a PTE table. Consequently, pte_t * can point either to a standalone value,
+often a stack copy, or to a PTE-table slot. The compiler cannot distinguish
+these cases. A value pointer can therefore be passed to an interface that
+expects table storage, while table storage can be read by direct
+dereference instead of the architecture accessor.
 
-The generic hw_pte_t remains an alias of pte_t, so the storage
-representation is unchanged.
+This series begins a staged conversion at the PTE level. It introduces
+hw_pte_t as the element type for PTE-table storage and converts generic MM
+to use hw_pte_t *. Logical PTE values remain pte_t. Interfaces that
+intentionally return a value through pte_t *, such as install_pte, remain
+value interfaces; the relevant parameters are named ptentp to make that
+distinction explicit.
 
-Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
+The generic definition aliases hw_pte_t to pte_t, so this series preserves
+the representation and behaviour of every architecture. ptep_get() keeps
+its existing READ_ONCE() semantics and converts the stored element through
+__pte_from_hw(). An architecture can later define a distinct hw_pte_t and
+convert its PTE interfaces to make the distinction compiler-enforced.
+Architecture PTE implementations and most architecture code are
+deliberately left for those later opt-in conversions.
+
+Here, hw_pte_t identifies PTE-table storage rather than table lifetime:
+complete PTE tables use hw_pte_t whether or not they are currently linked
+into a page-table hierarchy, while standalone copied values use pte_t. The
+distinction between complete but unlinked tables and hardware-reachable
+tables was raised during discussion and remains an important point for
+review.
+
+PMD, PUD, P4D and PGD storage are deliberately out of scope. They can be
+converted in later series after the PTE boundary is agreed, avoiding the
+PMD-specific cases that made an all-level conversion difficult to review.
+
+Most mechanical pointer conversions were generated with the Coccinelle
+script included below, then audited and fixed by hand.
+
+This series does not add a second ptep_get_once() accessor and does not
+remove or replace STRICT_MM_TYPECHECKS.
+
+The design discussion is available at [1]; while the original idea came from
+[2].
+
+[1] https://lore.kernel.org/all/6110202c-057b-4701-8c04-1a76ee7bb9ab@arm.com/
+[2] https://lore.kernel.org/all/a063f6c5-2785-4a9f-8079-25edb3e54cef@arm.com
+
+Thanks,
+Usama
 ---
- include/linux/kasan.h | 2 +-
- mm/kasan/init.c       | 2 +-
- mm/ptdump.c           | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+// SPDX-License-Identifier: GPL-2.0-only
+///
+/// Rename raw PTE pointer types to hardware PTE pointer types.
+///
+/// This is a mechanical type rename. It converts common declarations,
+/// function parameters, prototypes, return types and casts from "pte_t *"
+/// to "hw_pte_t *". Plain "pte_t" objects are intentionally left unchanged.
+/// Pointers named "ptentp" refer to temporary logical PTE values and are
+/// intentionally ignored in all modes.
+/// Re-run in context mode afterwards to audit remaining raw pte_t pointers
+/// and cases that need hand conversion, such as trace macros and mixed
+/// declarations.
+///
+/// Confidence: Moderate
+// Options: --no-includes --include-headers
 
-diff --git a/include/linux/kasan.h b/include/linux/kasan.h
-index bf233bde68c7e..ff41949c0ac08 100644
---- a/include/linux/kasan.h
-+++ b/include/linux/kasan.h
-@@ -51,7 +51,7 @@ typedef unsigned int __bitwise kasan_vmalloc_flags_t;
- #endif
- 
- extern unsigned char kasan_early_shadow_page[PAGE_SIZE];
--extern pte_t kasan_early_shadow_pte[MAX_PTRS_PER_PTE + PTE_HWTABLE_PTRS];
-+extern hw_pte_t kasan_early_shadow_pte[MAX_PTRS_PER_PTE + PTE_HWTABLE_PTRS];
- extern pmd_t kasan_early_shadow_pmd[MAX_PTRS_PER_PMD];
- extern pud_t kasan_early_shadow_pud[MAX_PTRS_PER_PUD];
- extern p4d_t kasan_early_shadow_p4d[MAX_PTRS_PER_P4D];
-diff --git a/mm/kasan/init.c b/mm/kasan/init.c
-index 30c5266eaf37e..9bbc2a41d23f0 100644
---- a/mm/kasan/init.c
-+++ b/mm/kasan/init.c
-@@ -64,7 +64,7 @@ static inline bool kasan_pmd_table(pud_t pud)
- 	return false;
- }
- #endif
--pte_t kasan_early_shadow_pte[MAX_PTRS_PER_PTE + PTE_HWTABLE_PTRS]
-+hw_pte_t kasan_early_shadow_pte[MAX_PTRS_PER_PTE + PTE_HWTABLE_PTRS]
- 	__bss_pgtbl;
- 
- static inline bool kasan_pte_table(pmd_t pmd)
-diff --git a/mm/ptdump.c b/mm/ptdump.c
-index 376880071ca2a..8f19f20be3c44 100644
---- a/mm/ptdump.c
-+++ b/mm/ptdump.c
-@@ -19,7 +19,7 @@ static inline int note_kasan_page_table(struct mm_walk *walk,
- {
- 	struct ptdump_state *st = walk->private;
- 
--	st->note_page_pte(st, addr, kasan_early_shadow_pte[0]);
-+	st->note_page_pte(st, addr, ptep_get(kasan_early_shadow_pte));
- 
- 	walk->action = ACTION_CONTINUE;
- 
+virtual patch
+virtual report
+virtual context
+
+@local_decl depends on patch@
+identifier x != ptentp;
+@@
+- pte_t *x;
++ hw_pte_t *x;
+
+@local_decl_init depends on patch@
+identifier x != ptentp;
+expression e;
+@@
+- pte_t *x = e;
++ hw_pte_t *x = e;
+
+@param_proto depends on patch@
+identifier f;
+identifier x != ptentp;
+type R;
+@@
+R f(...,
+- pte_t *x
++ hw_pte_t *x
+,...);
+
+@param_proto_unnamed depends on patch@
+identifier f;
+type R;
+@@
+R f(...,
+- pte_t *
++ hw_pte_t *
+,...);
+
+@param_def depends on patch@
+identifier f;
+identifier x != ptentp;
+type R;
+@@
+R f(...,
+- pte_t *x
++ hw_pte_t *x
+,...)
+{ ... }
+
+@ret_proto depends on patch@
+identifier f;
+parameter list ps;
+@@
+- pte_t *
++ hw_pte_t *
+  f(ps);
+
+@ret_def depends on patch@
+identifier f;
+parameter list ps;
+@@
+- pte_t *
++ hw_pte_t *
+  f(ps)
+{ ... }
+
+@struct_member depends on patch@
+identifier S;
+identifier x != ptentp;
+@@
+struct S {
+...
+- pte_t *x;
++ hw_pte_t *x;
+...
+};
+
+@union_member depends on patch@
+identifier x != ptentp;
+@@
+union {
+...
+- pte_t *x;
++ hw_pte_t *x;
+...
+};
+
+@union_member_in_struct depends on patch@
+identifier S;
+identifier x != ptentp;
+@@
+struct S {
+...
+union {
+...
+- pte_t *x;
++ hw_pte_t *x;
+...
+};
+...
+};
+
+@fnptr_struct_member depends on patch@
+identifier S,f;
+identifier x != ptentp;
+type R;
+@@
+struct S {
+...
+R (*f)(...,
+- pte_t *x
++ hw_pte_t *x
+,...);
+...
+};
+
+@fnptr_typedef_pte_fn_t depends on patch@
+identifier x != ptentp;
+@@
+typedef int (*pte_fn_t)(...,
+- pte_t *x
++ hw_pte_t *x
+,...);
+
+@cast depends on patch@
+expression e;
+@@
+- (pte_t *)e
++ (hw_pte_t *)e
+
+@remaining_decl depends on context || report@
+identifier x != ptentp;
+position p;
+@@
+* pte_t *x@p;
+
+@remaining_decl_init depends on context || report@
+identifier x != ptentp;
+expression e;
+position p;
+@@
+* pte_t *x@p = e;
+
+@remaining_param_proto depends on context || report@
+identifier f;
+identifier x != ptentp;
+type R;
+position p;
+@@
+R f(...,
+* pte_t *x@p
+,...);
+
+@remaining_param_proto_unnamed depends on context || report@
+identifier f;
+type R;
+position p;
+@@
+R f(...,
+* pte_t *@p
+,...);
+
+@remaining_param_def depends on context || report@
+identifier f;
+identifier x != ptentp;
+type R;
+position p;
+@@
+R f(...,
+* pte_t *x@p
+,...)
+{ ... }
+
+@remaining_ret_proto depends on context || report@
+identifier f;
+parameter list ps;
+position p;
+@@
+* pte_t *f@p(ps);
+
+@remaining_ret_def depends on context || report@
+identifier f;
+parameter list ps;
+position p;
+@@
+* pte_t *f@p(ps)
+{ ... }
+
+@remaining_struct_member depends on context || report@
+identifier S;
+identifier x != ptentp;
+position p;
+@@
+struct S {
+...
+* pte_t *x@p;
+...
+};
+
+@remaining_union_member depends on context || report@
+identifier x != ptentp;
+position p;
+@@
+union {
+...
+* pte_t *x@p;
+...
+};
+
+@remaining_union_member_in_struct depends on context || report@
+identifier S;
+identifier x != ptentp;
+position p;
+@@
+struct S {
+...
+union {
+...
+* pte_t *x@p;
+...
+};
+...
+};
+
+@remaining_fnptr_struct_member depends on context || report@
+identifier S,f;
+identifier x != ptentp;
+type R;
+position p;
+@@
+struct S {
+...
+R (*f)(...,
+* pte_t *x@p
+,...);
+...
+};
+
+@remaining_fnptr_typedef_pte_fn_t depends on context || report@
+identifier x != ptentp;
+position p;
+@@
+typedef int (*pte_fn_t)(...,
+* pte_t *x@p
+,...);
+
+Muhammad Usama Anjum (11):
+  mm: introduce hw_pte_t for PTE table storage
+  mm: make hw_pte_t visible to generic PTE interfaces
+  mm: name pointers to copied PTE values ptentp
+  mm: use hw_pte_t for generic PTE table storage
+  mm: convert PTE table entries in ptep_get()
+  mm/kasan: use hw_pte_t for the early shadow PTE table
+  mm/mremap: use ptep_get() for the destination PTE
+  drm/i915: use hw_pte_t for PTE range callbacks
+  misc/sgi-gru: use ptep_get() for page-table reads
+  parisc: use hw_pte_t for the data-break callback
+  xen: use hw_pte_t for PTE range callbacks
+
+ MAINTAINERS                                   |  1 +
+ .../drm/i915/gem/selftests/i915_gem_mman.c    |  4 +-
+ drivers/gpu/drm/i915/i915_mm.c                |  4 +-
+ drivers/misc/sgi-gru/grufault.c               |  4 +-
+ drivers/parisc/sba_iommu.c                    |  4 +-
+ drivers/xen/gntdev.c                          |  2 +-
+ drivers/xen/privcmd.c                         |  2 +-
+ drivers/xen/xenbus/xenbus_client.c            |  2 +-
+ drivers/xen/xlate_mmu.c                       |  4 +-
+ fs/hugetlbfs/inode.c                          |  3 +-
+ fs/proc/task_mmu.c                            | 39 ++++-----
+ include/asm-generic/hugetlb.h                 | 15 ++--
+ include/asm-generic/pgalloc.h                 |  6 +-
+ include/asm-generic/tlb.h                     |  6 +-
+ include/linux/hugetlb.h                       | 50 +++++++-----
+ include/linux/kasan.h                         |  2 +-
+ include/linux/mm.h                            | 26 +++---
+ include/linux/page_table_check.h              | 10 ++-
+ include/linux/pagewalk.h                      | 10 +--
+ include/linux/pgtable.h                       | 81 ++++++++++---------
+ include/linux/pgtable_types.h                 | 12 +++
+ include/linux/rmap.h                          |  2 +-
+ include/linux/swapops.h                       |  6 +-
+ include/linux/vmalloc.h                       |  4 +-
+ include/trace/events/xen.h                    | 10 +--
+ kernel/bpf/arena.c                            |  9 ++-
+ kernel/events/core.c                          |  3 +-
+ mm/damon/ops-common.c                         |  2 +-
+ mm/damon/ops-common.h                         |  2 +-
+ mm/damon/vaddr.c                              | 20 ++---
+ mm/debug_vm_pgtable.c                         |  2 +-
+ mm/filemap.c                                  |  4 +-
+ mm/gup.c                                      |  9 ++-
+ mm/highmem.c                                  | 15 ++--
+ mm/hmm.c                                      |  6 +-
+ mm/huge_memory.c                              |  4 +-
+ mm/hugetlb.c                                  | 60 +++++++-------
+ mm/hugetlb_vmemmap.c                          | 13 +--
+ mm/internal.h                                 | 16 ++--
+ mm/kasan/init.c                               | 14 ++--
+ mm/kasan/shadow.c                             |  6 +-
+ mm/khugepaged.c                               | 23 +++---
+ mm/ksm.c                                      | 11 +--
+ mm/madvise.c                                  | 18 +++--
+ mm/mapping_dirty_helpers.c                    |  4 +-
+ mm/memory-failure.c                           |  6 +-
+ mm/memory.c                                   | 78 +++++++++---------
+ mm/mempolicy.c                                |  4 +-
+ mm/migrate.c                                  |  4 +-
+ mm/migrate_device.c                           |  4 +-
+ mm/mincore.c                                  |  4 +-
+ mm/mlock.c                                    |  4 +-
+ mm/mprotect.c                                 | 19 ++---
+ mm/mremap.c                                   |  6 +-
+ mm/page_table_check.c                         |  4 +-
+ mm/pagewalk.c                                 |  9 ++-
+ mm/percpu.c                                   |  2 +-
+ mm/pgtable-generic.c                          | 20 ++---
+ mm/ptdump.c                                   |  4 +-
+ mm/rmap.c                                     |  6 +-
+ mm/sparse-vmemmap.c                           | 24 +++---
+ mm/swap_state.c                               |  3 +-
+ mm/swapfile.c                                 |  5 +-
+ mm/userfaultfd.c                              | 32 ++++----
+ mm/util.c                                     |  2 +-
+ mm/vmalloc.c                                  | 13 +--
+ mm/vmscan.c                                   |  6 +-
+ 67 files changed, 435 insertions(+), 374 deletions(-)
+ create mode 100644 include/linux/pgtable_types.h
+
 -- 
 2.47.3
 
