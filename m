@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A477DC531D0
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2026 10:27:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1371562.1619063 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 861B0C531D0
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2026 10:29:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1371573.1619073 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woIYf-0002RN-G8; Mon, 27 Jul 2026 10:27:41 +0000
+	id 1woIaX-0003B5-R6; Mon, 27 Jul 2026 10:29:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1371562.1619063; Mon, 27 Jul 2026 10:27:41 +0000
+Received: by outflank-mailman (output) from mailman id 1371573.1619073; Mon, 27 Jul 2026 10:29:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woIYf-0002Qf-Cm; Mon, 27 Jul 2026 10:27:41 +0000
-Received: by outflank-mailman (input) for mailman id 1371562;
- Mon, 27 Jul 2026 10:27:40 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1woIaX-0003Ay-OA; Mon, 27 Jul 2026 10:29:37 +0000
+Received: by outflank-mailman (input) for mailman id 1371573;
+ Mon, 27 Jul 2026 10:29:37 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1woIYe-0002PL-B5
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 10:27:40 +0000
+ (envelope-from <jbeulich@suse.com>) id 1woIaW-0003As-Vl
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 10:29:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woIYd-003N6b-O9
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 12:27:39 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1woIaW-0016nf-Bk
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 12:29:36 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a673293-bab6-0a2a0a5309dd-0a2a45059aa8-36
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 12:27:39 +0200
+ id 6a6732f7-e002-0a2a0a5209dd-0a2a450bbaa6-48
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 12:29:36 +0200
 Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a67329b-4cb1-0a2a45050019-d1558033e18a-3
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 12:27:39 +0200
+ id 6a673310-b7e8-0a2a450b0019-d1558033c002-3
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 12:29:36 +0200
 Received: by mail-wm1-f51.google.com with SMTP id
- 5b1f17b1804b1-49554ebb87dso23340315e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 03:27:39 -0700 (PDT)
+ 5b1f17b1804b1-49555a0e68bso12542915e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 03:29:36 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-496b49a6e17sm204668195e9.13.2026.07.27.03.27.38
+ 5b1f17b1804b1-496b4f30126sm211724845e9.13.2026.07.27.03.29.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Jul 2026 03:27:38 -0700 (PDT)
+ Mon, 27 Jul 2026 03:29:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,56 +53,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Content-Language:Cc:To:Subject:From:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785148059; x=1785752859; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=y40rikzKdW41I0gcKC+jqL54qXX/dn+hAUR30HB1xyE=;
-        b=eN1HgbjSNoKcDbMR551t7P/VdBvPAI7V6So8cCmSHKbRbC3XKdwbAU239kcKwTEHMR
-         IAjKMfWNRvC5U4B0NIaOPxLj/nCfqyvWI9q4qpTA9VLE3HkxWJtE02yQQSnt+SkO7zsk
-         k9+URCIfURbTCF5qh6YWYApUIE9TbcSi/MJ54flyokOSmy9xxxGvzHKAzMC1lf4mZxXB
-         2hI0Hq1uHYO4tByD6livb6yYTmBpUlpiXyOGh1U/YxuY4cbuE2aheNDY9Y/RD3XtF4sx
-         CbuZR58/q7MGGvuZpFYz1UsBTqG7fFXU98gvIEmxmYso9S1z5kopUMHg4THCHa4C8SOm
-         0Ckw==
+        d=suse.com; s=google; t=1785148176; x=1785752976; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:autocrypt:content-language
+         :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=vXZrrvznAleh7c2VaqwSltJKFwyZgtr0U+NrASsBteY=;
+        b=IqzcAGw0LeJtXAqPmsv2SPULBlXyD26G0ZRgf50xMYyZjyI7ehvbHf+IDgqJPdQOfG
+         ybmNmmOvhUg+JblYJGET2NLQF6hcc4tcjfxXvlluA/zBIxROET03FFesiOZeq2nEqzs6
+         AVs0nqhLOmGsrbTrFdk7Q3gnI2Igumg/bzMK8kpNq9HH6ySllJ8stbbcsLf9ouRC4t5H
+         UN7iLBimqiHpEdHZxMo+1l9aWU+BKjk+9hSUD1X3oHEXMPV+ZPewgqNgxKkcW2WNfjuN
+         k1pDzRqqCZkjtsAYVdPRawFN+Y4tfDo8BxXzicM/IcbZPzMbXjDw01n/+Eld8Wz7BypU
+         Ftwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785148059; x=1785752859;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=y40rikzKdW41I0gcKC+jqL54qXX/dn+hAUR30HB1xyE=;
-        b=W3SGXKiFqyzCdyQvYZqACNyMI3zv8/wLqgtogactHW6IO7DaPGXHU+1qs95anKBpvk
-         L9ZfWzvcaMkKiRI9Lsong81D2kwbhphd7DpyqyYvYCVvsjNfzBr9ZMCNP1Ci181U/Q7V
-         JUNv9OKhbd9aAg1WbxnSZRO7W/RPZ+Huos+msi6G7JZl9ydeye2uMT3x1IKwXAHeLADx
-         VDBk7BM33Qr6zha2vDUWAku9oeF2fx36QdbWaei5uq67LMkMKzYozwYfG9KXdJSbNgLq
-         zbUz53A28BWhbKvKr5qTTp21GnQaxcPgg/eeG+tLmV6Wp42404xnGzyzlT6yq8PviDG8
-         Ca8g==
-X-Gm-Message-State: AOJu0YyrN1RTlc45W18AEnaLWlM0bXA/SDq2+oi32WTp47LFNuMvEtzA
-	v2ZLh0xhw0otFFydYHWtrvtNh43uCSyyhEMaAn0wpwNvV7Usah2RMeLCmFaWrYpUeFrdqkrL169
-	7ybW3fg==
-X-Gm-Gg: AR+sD11NaT/kSG4+eoj648xaaSYTmcvWrmZTBhYRUUfNqOhluLuam567zwkQjizJ43S
-	TRcxiTmwEvih5C6DmpgBue4/QUF2uKMu6jUzHTqPLHPlVuho1FbYp90UAOU9N/9FqxWQfQI71kl
-	wVUozRLQYgK3+lzH2HWd38J4oYlz2WNX6Ig8VDLNd4tKOSOx7kd7vWv95W62Kl4mJvvdTDgrE/i
-	3jJsFXiW0i2Hhm/nJCLpyslLCT1xEGmafSvklCzESUT1jlLBy9u44ymGEn0dLLrq/+xZN9uPz9Z
-	KZmSTBJaNVEJMbGENh1CIjHn4fQmLgSFysJF4dP62aHcyiUY+6UjMzGC8gSWTCgT3dvv5FxhGk2
-	MxuHE6kLrrzPwvwGygayyzzNhGZq4NDcMdH5rgWOaAkxHpFqRzg7TPeDfHUPmnmB7mNXf9bfa6s
-	pofw9XgL8VkACCiThRBuk7kukOgxFfyJ0jXhJRFcQ6WqPqpBbNFtpJcJ/OWdsSedzfMA==
-X-Received: by 2002:a05:600c:1986:b0:496:c249:ddb7 with SMTP id 5b1f17b1804b1-496c249dfaemr12725075e9.6.1785148059174;
-        Mon, 27 Jul 2026 03:27:39 -0700 (PDT)
-Message-ID: <b0753d91-5519-4ca8-8251-99e08392ea07@suse.com>
-Date: Mon, 27 Jul 2026 12:27:38 +0200
+        d=1e100.net; s=20251104; t=1785148176; x=1785752976;
+        h=content-transfer-encoding:content-type:autocrypt:content-language
+         :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=vXZrrvznAleh7c2VaqwSltJKFwyZgtr0U+NrASsBteY=;
+        b=tAZ/oTicNnZ2jgr1pWNB0WJJ99H9KOx65EPBMASNjF22NTlYHr/MnK8u2d2bCh1C3P
+         cNooTeshLvey2eHYbSz+l4KHS7k/OBKgbHCWS6G5ybu61hk06tLlHfQGtBUrgHIWG5Yf
+         qNcmZUf92uB6eCgaLNkJGGmTOr+YYGX3hG/x7iIIJI3AQ+PqObOzhEo1iSsnweasYJMT
+         NIiSQK4wyKMaShV7vqdU2meoomIXowVG/qFL0iK6vo9da+gkqF11oLl+04/vIGSsSl4N
+         h3kFEbqIvO1TmGPPE0u6Mhzx+DWD6A5EjoA5a6aHNSkU3mI7o6xPqCAFC5BE7rJiZiyu
+         Mf2w==
+X-Gm-Message-State: AOJu0YxSltBa5XDu9ciVcivONqlG9h+yof1XB0IjQl+IPhby3x3wUI6o
+	ZxHsJS9aDUmVcd8KXQtThPPrijXbiAcSX2dDPumQzIXeCksyUUwV9orl+xSoRw38nZpM1KM80NK
+	ccybWZQ==
+X-Gm-Gg: AR+sD10pap7u8VgGaViB9h/Sc/NCGRWwQhPHzEKFOBCnhie1iTpzJPKLQEApCbtfb6X
+	gDsLGb6Je6y6cCoIHafkKHc7dZBZyFHi4DlHMCQSKMYRRrDYzxVBt4BGIzIbK94onPHNPFqeov6
+	zOOdsfAq0AFfLR4ZcuzkPJODM/zudlsXxSbdwBSKBiTwx/v3uHYtOFghtySn5Se+eYRy9f/AcM3
+	hlWbT8PUs98lfmfFbHx/KW1CE5OVdJCtuZY10b+7H8f1pwAp0l9a/MbkDxaENpfNXVgbCKBj/Ef
+	GgIEm0RiggF3H94prasIKmK0SbOeluc1essL/EkiIJ7PTlnAK5dTVb4RtZn8yQQPIwuinVKF2yw
+	fmpvEigIS0+sDckpui8Is6QwjUt9uOAW7BHHnAFmUGEhEdCWfKi+XzDxhLG7Zq5GSrh/fRxwrIN
+	maRtBWTIa24NDVZQVdH2LH+Cwe6xBGGOjc4C8hnOLPrzKvUylBrzzUbTyEz8E/ghLpwQ==
+X-Received: by 2002:a05:600c:35d6:b0:496:bbce:fd with SMTP id 5b1f17b1804b1-496bc0500bemr71406525e9.6.1785148175775;
+        Mon, 27 Jul 2026 03:29:35 -0700 (PDT)
+Message-ID: <e4ec42aa-91c8-4102-84f9-844cecbe2eb0@suse.com>
+Date: Mon, 27 Jul 2026 12:29:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v4 4/4] x86: prefer shadow stack for producing call traces
 From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v2] x86/PV: avoid HVM-copying alternatives in PV-only code
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
-References: <f6dd91c2-f43a-4c9a-89f3-a42c8b954959@suse.com>
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -127,137 +125,177 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <f6dd91c2-f43a-4c9a-89f3-a42c8b954959@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1785148059-F7CB82A1-D626C62C/0/0
+X-purgate-ID: tlsNG-42698a/1785148176-1B2DC9EA-EFA468EA/0/0
 X-purgate-type: clean
-X-purgate-size: 4605
+X-purgate-size: 5001
 
-Shadow stacks contain little more than return addresses, and they in
-particular allow precise call traces also with FRAME_POINTER=n:
+x86/PV: avoid HVM-copying alternatives in PV-only code
 
-(XEN) Xen call trace:
-(XEN)    [<ffff82d04032d730>] R extable.c#search_one_extable+0x70/0x73
-(XEN)    [<ffff82d04032d802>] C search_exception_table+0xc2/0x177
-(XEN)    [<ffff82d040358378>] C traps.c#extable_fixup.isra.0+0x18/0x6c
-(XEN)    [<ffff82d040358e3b>] C do_invalid_op+0xab/0x106
-(XEN)    [<ffff82d040201d98>] C x86_64/entry.S#handle_exception_saved+0x88/0xf4
-(XEN)    [<ffff82d07fffe044>] E ffff82d07fffe044
-(XEN)    [<ffff82d040412db0>] C stub_selftest+0xd0/0x168
-(XEN)    [<ffff82d0403508d6>] C setup.c#init_done+0x116/0x15a
-
-as opposed to this counterpart (earlier during the same boot, before CET
-is enabled):
-
-(XEN) Xen call trace:
-(XEN)    [<ffff82d04032d730>] R extable.c#search_one_extable+0x70/0x73
-(XEN)    [<ffff82d04032d802>] S search_exception_table+0xc2/0x177
-(XEN)    [<ffff82d040358378>] S traps.c#extable_fixup.isra.0+0x18/0x6c
-(XEN)    [<ffff82d040358e3b>] S do_invalid_op+0xab/0x106
-(XEN)    [<ffff82d040201d98>] S x86_64/entry.S#handle_exception_saved+0x88/0xf4
-(XEN)    [<ffff82d040412db0>] S stub_selftest+0xd0/0x168
-(XEN)    [<ffff82d0403d0cc9>] S do_initcalls+0x29/0x38
-(XEN)    [<ffff82d04041adf2>] S __start_xen+0x1c72/0x2235
-(XEN)    [<ffff82d040288a57>] S __high_start+0xb7/0xc0
-
-(note the entirely missing entry for the stub itself [1]; sadly there are
-no stray entries there).
-
-[1] Arguably we could teach FRAME_POINTER=n traces to recognize stubs as
-    well. But not FRAME_POINTER=y ones. In fact, what's missing there
-    isn't the stub itself, but (of course) its immediate caller.
+raw_copy_*_guest*() expanding to both a HVM and a PV alternative leaves a
+lot of unreachable code, violating Misra C:2012 rule 2.1 (without Eclair
+being able to spot this). Introduce a mechanism to avoid that in handling
+of PV-only hypercalls (i.e. ones which only PV domains can issue and which
+only act on PV domains [or which are not domain related]).
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-While the 'E' for exception frames is probably okay, I'm not overly
-happy with the 'C' (for CET). I would have preferred 'S' (for shadow),
-but we use that character already.
+In my default test build this reduces overall code size by almost 2k, and
+that's with PV_SHIM=n.
 
-As an alternative to suppressing output for the top level exception
-frame, adding the new code ahead of the 'R' output line (and then also
-ahead of the stack top read) could be considered.
+RFC: The HVM-only enabling is just in case; right now it doesn't look as
+     if that would actually be usable anywhere.
 
-Quite likely a number of other uses of is_active_kernel_text() also want
-amending with in_stub().
+Overriding is_hvm_vcpu() (and/or is_hvm_domain()) of course has yet better
+effects, which pv/shim.c shows particularly well. Yet Misra won't like us
+doing so.
 ---
-v3: Correct "link to other shadow stack" check. Don't log a line for the
-    (impossible) PV case. Add example stack trace to description.
-v2: IS_ENABLED() -> #ifdef. Re-base.
+v2: Rename manifest constants. Also change raw_clear_guest(). Drop kexec
+    change.
 
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -48,6 +48,7 @@
- #include <asm/shared.h>
- #include <asm/shstk.h>
- #include <asm/smp.h>
-+#include <asm/stubs.h>
- #include <asm/system.h>
- #include <asm/traps.h>
- #include <asm/uaccess.h>
-@@ -705,6 +706,13 @@ unsigned long get_stack_dump_bottom(unsi
+--- a/xen/arch/x86/compat.c
++++ b/xen/arch/x86/compat.c
+@@ -5,6 +5,8 @@
+  * hypercall after doing necessary argument munging.
+  */
+ 
++#define GUEST_ACCESS_PV true
++
+ #include <xen/guest_access.h>
+ #include <xen/hypercall.h>
+ #include <xen/trace.h>
+--- a/xen/arch/x86/cpu/mcheck/mce.c
++++ b/xen/arch/x86/cpu/mcheck/mce.c
+@@ -1262,6 +1262,8 @@ static void cf_check __maybe_unused x86_
+ 
+ #ifdef CONFIG_PV /* do_mca() hypercall is PV-only */
+ 
++#define GUEST_ACCESS_PV true
++
+ #if BITS_PER_LONG == 64
+ 
+ /* Two layers of casting to cover Misra C:2012 rule 11.2. */
+@@ -1666,6 +1668,8 @@ long do_mca(XEN_GUEST_HANDLE_PARAM(xen_m
+     return ret;
+ }
+ 
++#undef GUEST_ACCESS_PV
++
+ #endif /* CONFIG_PV */
+ 
+ static int mcinfo_dumped;
+--- a/xen/arch/x86/include/asm/guest_access.h
++++ b/xen/arch/x86/include/asm/guest_access.h
+@@ -12,25 +12,30 @@
+ #include <asm/hvm/support.h>
+ #include <asm/hvm/guest_access.h>
+ 
++#define IS_HVM_ACCESS                           \
++    (IS_ENABLED(GUEST_ACCESS_HVM) ||            \
++     (!IS_ENABLED(GUEST_ACCESS_PV) &&           \
++      is_hvm_vcpu(current)))                    \
++
+ /* Raw access functions: no type checking. */
+ #define raw_copy_to_guest(dst, src, len)        \
+-    (is_hvm_vcpu(current) ?                     \
++    (IS_HVM_ACCESS ?                            \
+      copy_to_user_hvm((dst), (src), (len)) :    \
+      copy_to_guest_pv(dst, src, len))
+ #define raw_copy_from_guest(dst, src, len)      \
+-    (is_hvm_vcpu(current) ?                     \
++    (IS_HVM_ACCESS ?                            \
+      copy_from_user_hvm((dst), (src), (len)) :  \
+      copy_from_guest_pv(dst, src, len))
+ #define raw_clear_guest(dst,  len)              \
+-    (is_hvm_vcpu(current) ?                     \
++    (IS_HVM_ACCESS ?                            \
+      clear_user_hvm((dst), (len)) :             \
+      clear_guest_pv(dst, len))
+ #define __raw_copy_to_guest(dst, src, len)      \
+-    (is_hvm_vcpu(current) ?                     \
++    (IS_HVM_ACCESS ?                            \
+      copy_to_user_hvm((dst), (src), (len)) :    \
+      __copy_to_guest_pv(dst, src, len))
+ #define __raw_copy_from_guest(dst, src, len)    \
+-    (is_hvm_vcpu(current) ?                     \
++    (IS_HVM_ACCESS ?                            \
+      copy_from_user_hvm((dst), (src), (len)) :  \
+      __copy_from_guest_pv(dst, src, len))
+ 
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -3407,6 +3407,9 @@ int new_guest_cr3(mfn_t mfn)
+ #endif
+ 
+ #ifdef CONFIG_PV
++
++#define GUEST_ACCESS_PV true
++
+ static int vcpumask_to_pcpumask(
+     struct domain *d, XEN_GUEST_HANDLE_PARAM(const_void) bmap, cpumask_t *pmask)
+ {
+@@ -3447,6 +3450,8 @@ static int vcpumask_to_pcpumask(
      }
  }
  
-+#ifdef CONFIG_XEN_SHSTK
-+static bool in_stub(unsigned long addr)
-+{
-+    return !((this_cpu(stubs.addr) ^ addr) >> STUB_BUF_SHIFT);
-+}
-+#endif
++#undef GUEST_ACCESS_PV
 +
- #if !defined(CONFIG_FRAME_POINTER)
+ long do_mmuext_op(
+     XEN_GUEST_HANDLE_PARAM(mmuext_op_t) uops,
+     unsigned int count,
+@@ -3983,6 +3988,8 @@ long do_mmuext_op(
+     return rc;
+ }
+ 
++#define GUEST_ACCESS_PV true
++
+ long do_mmu_update(
+     XEN_GUEST_HANDLE_PARAM(mmu_update_t) ureqs,
+     unsigned int count,
+@@ -4361,6 +4368,9 @@ long do_mmu_update(
+ 
+     return rc;
+ }
++
++#undef GUEST_ACCESS_PV
++
+ #endif /* CONFIG_PV */
  
  /*
-@@ -797,6 +805,49 @@ static void show_trace(const struct cpu_
-          !is_active_kernel_text(tos) )
-         printk("   [<%p>] R %pS\n", _p(regs->rip), _p(regs->rip));
+--- a/xen/arch/x86/pv/callback.c
++++ b/xen/arch/x86/pv/callback.c
+@@ -5,6 +5,8 @@
+  * hypercall handles and helper functions for guest callback
+  */
  
-+#ifdef CONFIG_XEN_SHSTK
-+    if ( rdssp() != SSP_NO_SHSTK )
-+    {
-+        const unsigned long *ptr = _p(regs->entry_ssp);
-+        unsigned int n;
++#define GUEST_ACCESS_PV true
 +
-+        for ( n = 0; (unsigned long)ptr & (PAGE_SIZE - sizeof(*ptr)); ++n )
-+        {
-+            unsigned long val = *ptr;
+ #include <xen/event.h>
+ #include <xen/hypercall.h>
+ #include <xen/guest_access.h>
+--- a/xen/arch/x86/pv/descriptor-tables.c
++++ b/xen/arch/x86/pv/descriptor-tables.c
+@@ -8,6 +8,8 @@
+  * Copyright (c) 2004 Christian Limpach
+  */
+ 
++#define GUEST_ACCESS_PV true
 +
-+            if ( is_active_kernel_text(val) || in_stub(val) )
-+            {
-+                /* Normal return address entry.  */
-+                printk("   [<%p>] C %pS\n", _p(val), _p(val));
-+                ++ptr;
-+            }
-+            else if ( !((val ^ (unsigned long)ptr) >>
-+                        (PAGE_SHIFT + STACK_ORDER)) )
-+            {
-+                if ( val & (sizeof(val) - 1) )
-+                {
-+                    /* Most likely a supervisor token. */
-+                    break;
-+                }
+ #include <xen/guest_access.h>
+ #include <xen/hypercall.h>
+ 
+--- a/xen/arch/x86/pv/shim.c
++++ b/xen/arch/x86/pv/shim.c
+@@ -6,6 +6,9 @@
+  *
+  * Copyright (c) 2017 Citrix Systems Ltd.
+  */
 +
-+                /*
-+                 * Ought to be a hypervisor interruption frame.  But don't
-+                 * (re)log the current frame's %rip.
-+                 */
-+                if ( n || ptr[1] != regs->rip )
-+                    printk("   [<%p>] E %pS\n", _p(ptr[1]), _p(ptr[1]));
-+                ptr = _p(val);
-+            }
-+            else /* Bogus. */
-+                break;
-+        }
++#define GUEST_ACCESS_PV true
 +
-+        /* Fall back to legacy stack trace if nothing was logged at all. */
-+        if ( n )
-+            return;
-+    }
-+#endif /* CONFIG_XEN_SHSTK */
-+
-     if ( fault )
-     {
-         printk("   [Fault on access]\n");
+ #include <xen/event.h>
+ #include <xen/guest_access.h>
+ #include <xen/hypercall.h>
 
 
