@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9CA6C531FC
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2026 15:05:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1371724.1619217 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B866DC531FC
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2026 15:05:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1371726.1619226 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woMtK-0004J8-WD; Mon, 27 Jul 2026 15:05:19 +0000
+	id 1woMtT-0004iF-BN; Mon, 27 Jul 2026 15:05:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1371724.1619217; Mon, 27 Jul 2026 15:05:18 +0000
+Received: by outflank-mailman (output) from mailman id 1371726.1619226; Mon, 27 Jul 2026 15:05:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woMtK-0004J1-Sk; Mon, 27 Jul 2026 15:05:18 +0000
-Received: by outflank-mailman (input) for mailman id 1371724;
- Mon, 27 Jul 2026 15:05:17 +0000
+	id 1woMtT-0004i8-8G; Mon, 27 Jul 2026 15:05:27 +0000
+Received: by outflank-mailman (input) for mailman id 1371726;
+ Mon, 27 Jul 2026 15:05:25 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <kevin.lampis@citrix.com>) id 1woMtJ-0004GB-3D
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 15:05:17 +0000
+ (envelope-from <kevin.lampis@citrix.com>) id 1woMtR-0004ej-5H
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 15:05:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woMtI-008bcG-GJ
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 17:05:16 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1woMtQ-0007gq-Hr
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2026 17:05:24 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <kevin.lampis@citrix.com>)
- id 6a6773a7-2eae-0a2a0a5409dd-0a2a45068392-24
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 17:05:16 +0200
-Received: from [40.107.208.39]
- (helo=PH0PR06CU001.outbound.protection.outlook.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a6773b1-bab6-0a2a0a5309dd-0a2a45099ac8-6
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 17:05:24 +0200
+Received: from [52.101.48.8]
+ (helo=MW6PR02CU001.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <kevin.lampis@citrix.com>)
- id 6a6773aa-195a-0a2a45060019-286bd027246f-3
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 17:05:15 +0200
+ id 6a6773b1-be1a-0a2a45090019-34653008bc71-4
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 17:05:23 +0200
 Received: from BY1PR03MB7996.namprd03.prod.outlook.com (2603:10b6:a03:5b2::8)
  by SA3PR03MB8182.namprd03.prod.outlook.com (2603:10b6:806:465::7)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.19; Mon, 27 Jul
- 2026 15:05:12 +0000
+ 2026 15:05:19 +0000
 Received: from BY1PR03MB7996.namprd03.prod.outlook.com
  ([fe80::5068:e1b5:b478:8d07]) by BY1PR03MB7996.namprd03.prod.outlook.com
  ([fe80::5068:e1b5:b478:8d07%3]) with mapi id 15.21.0245.012; Mon, 27 Jul 2026
- 15:05:12 +0000
+ 15:05:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,20 +57,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JWcMQ3ykFM9xof0UWt7anfKXNQuKG9b7XTca5CaFjffp/OcKEkkDkA7nZIH3BMW7KqsBcqNI/GcFQInhLlLj02p4DuRUgajp2qdOe3Mip83+5quG4DGon28QEqItpwwCS7mOQk//wpRpDy5ebc1x+ztTLzbgF+xzSA39++DRmiDgzhyP4cW1G9dFm3FRdz9lcO+Y44i2BtZRekvuEILTHcz05CoiuSxBaQ4iLs4iDF5Wmsc80Fz4A/7F8k5rcCVPNwz5+ipY6oNbeMN+9m+1rEkDS3xHclDz4sN/0Zmr2le1ZyO2hJ50tT/VxIQiCAwbTIGptydA8h+i2C9WizOjVw==
+ b=bagaMyk3/tc1uanchugvAElI5+0lYM2n/edTxQsDtAW0exAagpCWDRF9bwH85fTSBb/92uE8zTh+xiIrO+HCa4oQ1fGCSw682+ufakIsk64l+yGv86wF/6T9ZLj0dQtp43uPBzci13l1FjRTTAKXlcNBeM3gzfUkQqj2pQ38Foippqtv0ufeG9EF3B14mP8jQoGZzsiQNaJ23xOg6AD8+ZsSQy0MnOXcUzAfUpFDZDDbHlsisV1gp7MZMuxa1G1gFeZf9ZQ3LDI9zdAXrwoRuG/0dFDd9FvEcSUKvDCklJfAYcnaPDlrAtPbLBw6Gh9qJMGjk4pq90lcOPBSFQMPUQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=srJPZVfKyCLc9jNc72RgnPcAtxJpFYEiKTbfZigXhyU=;
- b=AWfwf0VC+jJcxruADW6rJU+LtyAW7vNYwXb+gsBs9DqU2Vkpstc2uQR8lwunCdERaJLZ9gNx3Gdo5E3aW0Nq5KAGW7poqi5x2iUahcK4LSiGwkttZo20oDCyC21VdCpBa+W4y3z8/eW+hobgQ3Emy7t54+V/iPTE61tvKWjNKnSHmCWVfZ1s+2MgER1BmMIDYPRG8S7LLvH7zhtdYe6BwbmoXCLmzTdGvsK40lUswlVBZX/rMSPXJ0UAvEeIWv6SyoJczd04VpvK1SKGC1INVn/hyt/ov7KBhAtb9qWXH5S8z8TnS+jXFwk5ebnAcnSmCtZ3ZLA6wWfOEcsx5Sm13Q==
+ bh=ujfQculv3wHfFyekrZ5tWOrthojOAbuyk/54bXUGct4=;
+ b=RGoDZDx3ikcs5wm77zia7brzx6sQ8wcD18HI9QZlaoUAkFiG4vLrT374sVtYXRggMNj3v9/jDFUHcZzGfzQ8Mvw7JYYElO1i11tv0bjsnQY1sG8RYzLyIcykJ/V6/LPg1wAe6P30AjnBFI/DjEeFE9of6uivXvb+KiSXYr5Ns3TcGuOU7zjz41GWbAHxv9GKSYdBlTF9wnVkX46k5igvc29cv+6XWGlWplGtDD7uTSwv9WfOl9untPfGuLRQltIoQDGrgOQWr4XXIjMnhfKEo0ectIhdnHWDBp+hldXe486UEYceWdFhUlyq692VFW3/bBxirGJSeGZKmCOysvjviA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=srJPZVfKyCLc9jNc72RgnPcAtxJpFYEiKTbfZigXhyU=;
- b=xCMdwgknE5+30ehzknbRtBzmRpYVpEd0OhpzwfVGTWWd7rQ3b6/aXUjSC70D0p+flSazGxzVvkNjudk1DAZ+quMs0vYrT4ZiUOnSO5Ag9dwBIEXjqbNsYlfZCmCYN82oYQlM+jr8qkPf9DOjjLaH1krjNyV2/apowsChBEig5XA=
+ bh=ujfQculv3wHfFyekrZ5tWOrthojOAbuyk/54bXUGct4=;
+ b=nA8TbS+M5zVDtVgljFnXdmsxKb57AonEJqplL5ZJcbjZt3gzIJgnPihkoFg4JMM1yqse4adfSPVu+MyUg5eeIgd/QKQtSznuVAyRy8BTYXQpZfpg5wAVx2AV1klwMRfz8H3g4MhgXUG+DGgiIO/0933ArAgZ0LJdTbpDAYjdyVE=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
 From: Kevin Lampis <kevin.lampis@citrix.com>
@@ -79,215 +79,185 @@ Cc: jbeulich@suse.com,
 	andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	Kevin Lampis <kevin.lampis@citrix.com>
-Subject: [PATCH 3/4] x86: extend do_mmu_update() to support returning the old PTE value
-Date: Mon, 27 Jul 2026 16:06:14 +0100
-Message-ID: <20260727150615.1373200-4-kevin.lampis@citrix.com>
+Subject: [PATCH 4/4] x86: add new pte_get_and_clear hypercall
+Date: Mon, 27 Jul 2026 16:06:15 +0100
+Message-ID: <20260727150615.1373200-5-kevin.lampis@citrix.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260727150615.1373200-1-kevin.lampis@citrix.com>
 References: <20260727150615.1373200-1-kevin.lampis@citrix.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: LO4P123CA0470.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:1a8::7) To BY1PR03MB7996.namprd03.prod.outlook.com
+X-ClientProxiedBy: LO4P123CA0576.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:276::23) To BY1PR03MB7996.namprd03.prod.outlook.com
  (2603:10b6:a03:5b2::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: BY1PR03MB7996:EE_|SA3PR03MB8182:EE_
-X-MS-Office365-Filtering-Correlation-Id: b62bd515-cbd6-47b4-959e-08deebf0751e
+X-MS-Office365-Filtering-Correlation-Id: 7fbd3f07-383e-4a26-3678-08deebf07907
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
 	BCL:0;ARA:13230040|1800799024|23010399003|366016|376014|18002099003|56012099006|11063799006|22082099003|10067099003;
 X-Microsoft-Antispam-Message-Info:
-	PwWkAVObzw1bf6HxQ6XrXvXyU2p6FCHRPzzODmHsnGtmgwNfzMFPYIBFvuRtD2oNL6Aj3Y7mShJKpyHzleidZuz8dPFcZbCE4uYssiu40gCD8af4dwfjj0De6J8NDO47k0ERSTDJrtPqi4WC7sqOjgg5G2r/bCH1PyhHqUPdToo2Q2350zeJzhGEeeKN+FzlcIACX5H8NcM1JLCZ0z1x9Wj7xOyxa2+e3xueAIM92PxQm1J1sST2rLnX++ceF1SK5KjMuXmdGPSpNYi1RDjHybgUSKZAGLSQgk4Vs2Bsp083cRCD0Yzxoa8+81jDOZNgw3exG9A8Dh4LqkVUMo8XqaHx43oBHkpyENOD4uWlo4uonCSt91FM4yf4enTjVX4OEfHr0iGjzuszuB+3xwJ105EN3ELWNbxXaYTSAM6xLyfNEX4UiJLuULL2g0NNLugW2xamb8WlcG2z3LWTxEnxpfDqgtiZnC45Nnzb79jz3UnMW0AHOY3xFn7PsquYGUPzDMuzFVHpHNAp0VH4VLCMnApB0zzc58GS0sj4g9wM0rK1MY3mSn0Ufwe3DkzKu+SqWvf8h7JtFX4eNnzaKA4RMglMmKxdoiolm4HwdqBum1bi4NAjrWG8iQCeWGQdbswXUPFB29/7SuqneVcQgyLGYWDlLWxBMjtk3xEj/tc0jBU=
+	oSKSOAwFZLLKaLKdryqMteqUGUHxX6rfKwmR7Q8fALr9NsnUwCnO+WkAAdsrUVFgcnAGR1QEedC7q8T77pPYzIW29PHED5ah5dLDveXn6byLYYMs8qNiCUDYXYwDGSpV/K/enQGSBX+wqky3bmUQmeMbv9sybzILrnt2Rs20VYYuWmfukuarN0Iwbi/AmfP7gU2Y/QEt5Fq7GS0fh0/8GEvi5VLBzLZKcf+THh/k24tJpz0GzwtnsjttOYygFHHfdI5+mI58bR/eFHgrqQCMo/MwFOUPJ0MkfD/9HbPnSHlisLAFRi9kJl4EiY2GPc8k5FkFnaKR0Y4hL7/cqqeEV4HVrQIttiYRYnqyUtGZ1XFJ3BPg20djEOq09igSLtXJQAMDQxhgo8ZISg+72L9kCc4O3aLEvFtsr8Fwo6TT0dKiKJOlb+u4Ldzypz+ejE/Lo4bnmm1m3ltWyzekaZy4UzE9Ynm67TmgSWnPMT6OL1sbZzjBb/Fl+WFADYbxXL26JP6kg/4xm8s90L7phf5+vwaKzFKZNemX7K1R+qJ7BUMfx32Yc3SiumQT9n2qSGmozNOyvUug4F0HgR552gk3ek/SvPuT4YymVX1RE+O5/XitWlss1SPnoj5ZdU8kPz2JfqwStc3TvXjiRV4qNI4cXvaWcXier2HPqfGyXmzPF8M=
 X-Forefront-Antispam-Report:
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY1PR03MB7996.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(366016)(376014)(18002099003)(56012099006)(11063799006)(22082099003)(10067099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?E8hN9BTCtNKllX1wrEPea5yMeixEfw6RsabQwKkYy0ymqi5kXFBe7s7685R0?=
- =?us-ascii?Q?Vxl1a7otfdwVtpfl+O1WZJH26sNO7LAmpR26CquJf5GpNr3lUdyvllMFeVHO?=
- =?us-ascii?Q?LeFrdJiropQb6UTTCd3wxvodBJzSdqMHECaUzCGAdOGFbwyJWrnI5rR//ZxJ?=
- =?us-ascii?Q?+8rwbrp7zfH4q+fPU/MrsM7Z6/5VamZtLxI9lXQLx/6S8kWugGEyb0cOr64U?=
- =?us-ascii?Q?0wCRs21XbwEPFXjUs7NxO3RzvYnHtVLNBlKYUkIP1VTSF7NAWZ/5fSg9v7Bm?=
- =?us-ascii?Q?r+Udmn7fjuLcmuFg/m+RTa8P59d/B7TLPFDy3mgIIOeyXa61y1wNkWu86Rkc?=
- =?us-ascii?Q?1jgAjXIRApBvKDw194ukXFfBMA6IuOxyMxIquVgGnZHD58jLdgLewLWQO3Hk?=
- =?us-ascii?Q?6pVOr2w/DM/XwhD5ycRC8akyoxtdYijWFCcEIUgvE4uWe4YoZIuSiV1G3e/h?=
- =?us-ascii?Q?Mo7SVsbUUFafU9sNTP/KB3j6aJxCJ/2mPhkwXF9fAs7LigF3tedjMDwAyV71?=
- =?us-ascii?Q?rUCXasenJd3Wv3p0iPQg/pVkrJpWF043Imj5Ot4/Y7wZkruk9rd4hbcIr52g?=
- =?us-ascii?Q?GIcjWmmcVGXKdt097COWX322wplBH69lDJe1MNgEW/XtFT3nx29R74jDkSPQ?=
- =?us-ascii?Q?XDdlfTiJOQE8IfWy4rYzOwukeR4PgqREIYb0+X6uMLTuIFBpxJAUzmRM+/bg?=
- =?us-ascii?Q?8y2DKN6OTmKiyiDfH/U4MW+sUNlwwL+IRmkoTpdG3lQs4lmtpfd63kyV0sxV?=
- =?us-ascii?Q?DITmJHcQUf3J0+7NjhppFVzB7kcqYfWNuAW5HC6+PFhXX0VuqTbqZNraQ8kc?=
- =?us-ascii?Q?JhtSK6HVA7uXsJEaXwUjsxK1buSF3PyIGvfNyK9akzlkBzrwxInAAjIirkFY?=
- =?us-ascii?Q?O19aEpTq7VNJx7h0XFHtR0FMNLnMp9Aa6zluM0I5GtoTtKzzjvScOggwjUpU?=
- =?us-ascii?Q?fRoTNwyeyHJ6fbWXUtm2L/mJaU0meE6L4vFjxxSCxKcr4MOQZeaIqpuS3U9P?=
- =?us-ascii?Q?KJhlt6/3sbaCacrSlD/oi93CkDlyF/1pKrK5eLZFOJpsaftu7AbH5mqibO+m?=
- =?us-ascii?Q?W2pomkmlZR3CQCVhdiTiFU4obV9/vRmyA5zyj7PEzE7mDY5cmikGjUCDnqhy?=
- =?us-ascii?Q?rkwQrIoxTERiWpAUgy3QGGeUCI9A+8ulunGfhpWCOLV6elK+hbCyv4kMR594?=
- =?us-ascii?Q?XPemxViZitk54iFLrEjA4ZuCZsFOqHajtGisHwPhmc/q9JRFE4v9qFmMU/r1?=
- =?us-ascii?Q?sDMko2gdJSWQPgF3PsV2mf9toOUIZUhMxKtCTt3zcOpE7CbA2t0EIW3izSTA?=
- =?us-ascii?Q?tzYQydIDqK2VMXBTxH7uJv8MvnGbzwspQn0PtOxbOIGWf1NHOUqZZXZU25Ec?=
- =?us-ascii?Q?tNh0OiYmORhWti6ZUFywcx7+W5WeepafENwU/JweKGM12V6SCG0rZfNDfPeF?=
- =?us-ascii?Q?TvqxoSaBLNQCJuGn6cxEWz2M5ziu14n0RPdGBpoTe0OWQO9uNmHi1O0LAHmY?=
- =?us-ascii?Q?WgrjiKuVFNCjBz1CI6AmMHxYpdQTpEjoIjbOeeHERa7aq6hrm26u/mp8kOLd?=
- =?us-ascii?Q?8vsBy0BNPIaehk8GQvukN9z6t452jdCEYGMOL6dGXMXIq7shLwk/B7Lg+pjw?=
- =?us-ascii?Q?KSwfFgyplposNlNuxjxaLK7L6AZXpo1bOHpiQTUvqeDs//g5cNCifWofYZ7B?=
- =?us-ascii?Q?jwOPq1SnaDq1EqDboRHVjui4JQwAKyboJpgJo7KLQAu12zxpVey1aV17MPwI?=
- =?us-ascii?Q?H0hlWAy0yQ=3D=3D?=
+	=?us-ascii?Q?CYYxcZYZwWapWm7MOu9/X9N88orSBcs7+2aYM97kRsEpsewtwnyQA4WJnfNf?=
+ =?us-ascii?Q?Mtss54AviFlb6h46MiZGbDu2ZNDwgljpjNgVz37TalQ2oXKYJcWrVg7Arx37?=
+ =?us-ascii?Q?ef+Z3UOpiYnSOg0Tsdp4mg8T32kas0+xDfe01cSJLx5BEBD+0AjKx/txEU4u?=
+ =?us-ascii?Q?5henOVebrDE8+vd6evVJzKee1FmMTxq5B31J6MYjlnLiqdz82aClZcWguFys?=
+ =?us-ascii?Q?W8rKBaaZCNkcurOjT5QYVP/4NJmHrNcVX+vRDscN7wczIcNEEgyr4vf76PF6?=
+ =?us-ascii?Q?RrLZ4TBYD9jP5Y7aX2WbLyaxt58LAb2PqBXUwUgBZ71Ul/zHGBLkskkCQ7Dv?=
+ =?us-ascii?Q?znOZV1HnWU6q2OTFVx4wrtZTvTOJqFzGZpOJqlG1QK7qajlw93IAtcz3bKnn?=
+ =?us-ascii?Q?YkdM+q6dZ/WnHbLItAjI0vK9xyMwHDPQTQ54agnVU+dGg03S/96Sq5SJZUb2?=
+ =?us-ascii?Q?ISqcnRXEtrOj3UEaA170OsW6i4Wwt8fhN5a3HzwX7UasdQY0n6OigT4ykEu9?=
+ =?us-ascii?Q?dYwh+8ooFhTFLNp2lwhfXFhlpJ5AxR7qu5CIeGytFk8hNGi6aM6AFSoJ8fz4?=
+ =?us-ascii?Q?/FdZGYwAbWkP4Kmxl58g+lTi7WvZY4RAupzy9aTvnbP4xykhN1HS4yNzN6Ze?=
+ =?us-ascii?Q?kbz57INWKLT4lIrPKkvDtljWhCRX/vMQfT+S/h0aTk2jGS30mf1aJpuHQYt6?=
+ =?us-ascii?Q?1jU4PVUdjpY8v8IAYUSZMg6xmxit5j9HDhJe5Kj6WxPQnv4jXPxDVRRntvZf?=
+ =?us-ascii?Q?FhqXt0nAqco0Sd/Y+d3tRiymm8RcgxRqVEWkupyUImQ3r1egAp0JiW3s3lp6?=
+ =?us-ascii?Q?D7JfVKYocI/y5/svf67Vki40J0ttcpJtwKIwm6gltLcyuFzU83upAFn/pfeo?=
+ =?us-ascii?Q?45dEl4P+TKh8T3qByQewe/wx4iMCHRoIKg5FXpYGVRERSCTCuUIEXv6kGE8F?=
+ =?us-ascii?Q?PzbNNlN26Rwv78f62IBlxDfWm4U9oB84ui0LcDbfuDV+9XMv6i7gZMOYQQIx?=
+ =?us-ascii?Q?wFkmX1a91I32p+KzQsi//R7kJ5RZ/unl3eWnsN7+SPYuIFot0zyc//cNfgUz?=
+ =?us-ascii?Q?xTclYS3nRJhAQ/+B6afS+q6yPj9b2Y9jYDd6g9PZ/YBsEIIUm+D4zSI2DY2X?=
+ =?us-ascii?Q?AHXNuuvYynYQMzXAJm6NRx9i9g4R1VJLndTTOGr20RPZ5RpqSVl2I4TsYjEp?=
+ =?us-ascii?Q?5nbFTPJVgNUObpr9IDeMSx19AnZwNNa962C/JqjfDDmXGrHL9fPXMMCbW0zl?=
+ =?us-ascii?Q?pOztliLPAeO2lKFSdi0NscvzTGQZP/hLjaUeJDN/0X0bP3FSmjxp8FvyKFDp?=
+ =?us-ascii?Q?noI9QUtbar4p57BhQLbAJj2FxLwt4Uhfy2CMB/swuLcj1qgabDm0qR0Zd1qa?=
+ =?us-ascii?Q?aFyA0bz9+CzlkcQqPXR/KMBYlMZ2nBknWQUM7QIgooxS2XPgH51NqkLmqLjP?=
+ =?us-ascii?Q?7sbJbbpoDC4RU0+EasEqFLA8SjXhbJ9mcg0pW1KAPCCiKT1sVirK0I1ClJXi?=
+ =?us-ascii?Q?7zIozmBIlyB9RPWqKdAkSmUpJMMSZo+1jYpspKt7FoDLkDNOHdAVW1DxAyVW?=
+ =?us-ascii?Q?KHoryqgi1Jp3ZKlDLFWe9tnIHmRSfAYzvnJpUExFf3Gotz5MzFrv+M4oXuH7?=
+ =?us-ascii?Q?ZwytHg5Vu8hT2lSLx8czVaA2vNh6q6qTnkDtVhEBh4x6Rdfd1i6xuuMXScIy?=
+ =?us-ascii?Q?Rf/tDyi0ef7NGJdBgCfiHPpC9IP+s+TZVOVzjgNVXH26xTnVNHua5h3anw78?=
+ =?us-ascii?Q?oAqVmX9vWQ=3D=3D?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b62bd515-cbd6-47b4-959e-08deebf0751e
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7fbd3f07-383e-4a26-3678-08deebf07907
 X-MS-Exchange-CrossTenant-AuthSource: BY1PR03MB7996.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jul 2026 15:05:12.3559
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jul 2026 15:05:18.9583
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: e+tc0ShppoZdiQzkvMQAOf+x8AdqRmDhtuMR69GYGLw4NLiMLiPNjRUwfrOUVNaicUyG893hsie0DfOeTMwsLw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: i7Y04Od7Kd3YQuMtUXJUGKr7uuoRGE4twA5a4uxZ7WNh9Y03QVrjhCRLYt2+Q3Gx81iGy+3EIkUMg6eXwypzaA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR03MB8182
-X-purgate-ID: tlsNG-16d1c6/1785164716-1FCCD77B-FFBA1D60/0/0
+X-purgate-ID: tlsNG-bad1c0/1785164723-3A8D9034-D49B0814/0/0
 X-purgate-type: clean
-X-purgate-size: 5251
+X-purgate-size: 4655
 
-A new parameter write_back_old when set will return the old PTE value.
+This new hypercall uses the same interface as the mmu_update hypercall except
+the old PTE value is returned in the mmu_update_t->val field.
 
-- The new PTE value in req.val must be 0, this is for clearing only.
-
-- The PRESERVE_AD flag is rejected with -EINVAL because preserving
-  Accessed/Dirty bits into a zero'ed PTE doesn't make sense.
-
-- Only l1 PTEs are supported because they are the most frequent and have the
-  biggest performance impact.
-
-- The old PTE value is passed back to the guest through the req.val field
-
-If the write_back_old flag is not set then the old behavior is preserved
-  do_mmu_update -> mod_l1_entry -> UPDATE_ENTRY -> paging_write_guest_entry
-
-The new get_and_clear call chain looks like this
-  do_mmu_update -> mod_l1_entry -> update_intpte -> paging_cmpxchg_guest_entry
+The purpose of this new hypercall is to improve performance over the current
+trap and emulate behavior. Only l1 PTEs are supported because they have the
+biggest performance impact.
 
 Signed-off-by: Kevin Lampis <kevin.lampis@citrix.com>
 ---
- xen/arch/x86/mm.c | 62 ++++++++++++++++++++++++++++++++++++++++++++---
- 1 file changed, 58 insertions(+), 4 deletions(-)
+ xen/arch/x86/mm.c            | 24 +++++++++++++++++-------
+ xen/include/hypercall-defs.c |  2 ++
+ xen/include/public/xen.h     |  1 +
+ 3 files changed, 20 insertions(+), 7 deletions(-)
 
 diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 500549c8e036..278b992aca5c 100644
+index 278b992aca5c..e5fdfc66081a 100644
 --- a/xen/arch/x86/mm.c
 +++ b/xen/arch/x86/mm.c
-@@ -3988,11 +3988,12 @@ long do_mmuext_op(
-     return rc;
- }
- 
--long do_mmu_update(
-+static long __do_mmu_update(
-     XEN_GUEST_HANDLE_PARAM(mmu_update_t) ureqs,
+@@ -3993,6 +3993,7 @@ static long __do_mmu_update(
      unsigned int count,
      XEN_GUEST_HANDLE_PARAM(uint) pdone,
--    unsigned int foreigndom)
-+    unsigned int foreigndom,
-+    bool write_back_old)
+     unsigned int foreigndom,
++    unsigned int op,
+     bool write_back_old)
  {
      struct mmu_update req;
-     void *va = NULL;
-@@ -4144,13 +4145,41 @@ long do_mmu_update(
-                 switch ( page->u.inuse.type_info & PGT_type_mask )
-                 {
-                 case PGT_l1_page_table:
--                    rc = mod_l1_entry(va, l1e_from_intpte(req.val), mfn,
--                                      cmd, v, pg_owner, NULL);
-+                {
-+                    if ( !write_back_old )
-+                        rc = mod_l1_entry(va, l1e_from_intpte(req.val), mfn,
-+                                          cmd, v, pg_owner, NULL);
-+                    else
-+                    {
-+                        l1_pgentry_t ol1e;
-+                        if ( unlikely(req.val != 0 ||
-+                                      cmd == MMU_PT_UPDATE_PRESERVE_AD) )
-+                        {
-+                            rc = -EINVAL;
-+                            break;
-+                        }
-+
-+                        rc = mod_l1_entry(va, l1e_from_intpte(req.val), mfn,
-+                                          cmd, v, pg_owner, &ol1e);
-+
-+                        if ( !rc )
-+                        {
-+                            req.val = ol1e.l1;
-+                            if ( unlikely(copy_to_guest(ureqs, &req, 1)) )
-+                                rc = -EFAULT;
-+                        }
-+                    }
-                     break;
-+                }
+@@ -4013,8 +4014,7 @@ static long __do_mmu_update(
+     {
+         if ( likely(rc == -ERESTART) )
+             rc = hypercall_create_continuation(
+-                     __HYPERVISOR_mmu_update, "hihi", ureqs, count, pdone,
+-                     foreigndom);
++                     op, "hihi", ureqs, count, pdone, foreigndom);
+         return rc;
+     }
  
-                 case PGT_l2_page_table:
-                     if ( unlikely(pg_owner != pt_owner) )
-                         break;
-+                    if ( unlikely(write_back_old) )
-+                    {
-+                        rc = -EINVAL;
-+                        break;
-+                    }
-                     rc = mod_l2_entry(va, l2e_from_intpte(req.val), mfn,
-                                       cmd == MMU_PT_UPDATE_PRESERVE_AD, v);
-                     if ( !rc )
-@@ -4160,6 +4189,11 @@ long do_mmu_update(
-                 case PGT_l3_page_table:
-                     if ( unlikely(pg_owner != pt_owner) )
-                         break;
-+                    if ( unlikely(write_back_old) )
-+                    {
-+                        rc = -EINVAL;
-+                        break;
-+                    }
-                     rc = mod_l3_entry(va, l3e_from_intpte(req.val), mfn,
-                                       cmd == MMU_PT_UPDATE_PRESERVE_AD, v);
-                     if ( !rc )
-@@ -4169,6 +4203,11 @@ long do_mmu_update(
-                 case PGT_l4_page_table:
-                     if ( unlikely(pg_owner != pt_owner) )
-                         break;
-+                    if ( unlikely(write_back_old) )
-+                    {
-+                        rc = -EINVAL;
-+                        break;
-+                    }
-                     rc = mod_l4_entry(va, l4e_from_intpte(req.val), mfn,
-                                       cmd == MMU_PT_UPDATE_PRESERVE_AD, v);
-                     if ( !rc )
-@@ -4198,6 +4237,11 @@ long do_mmu_update(
-                     break;
+@@ -4316,8 +4316,8 @@ static long __do_mmu_update(
  
-                 case PGT_writable_page:
-+                    if ( unlikely(write_back_old) )
-+                    {
-+                        rc = -EINVAL;
-+                        break;
-+                    }
-                     perfc_incr(writable_mmu_updates);
-                     paging_write_guest_entry(v, va, req.val, mfn);
-                     rc = 0;
-@@ -4366,6 +4410,16 @@ long do_mmu_update(
+     if ( rc == -ERESTART )
+         rc = hypercall_create_continuation(
+-            __HYPERVISOR_mmu_update, "hihi",
+-            ureqs, (count - i) | MMU_UPDATE_PREEMPTED, pdone, foreigndom);
++            op, "hihi", ureqs, (count - i) | MMU_UPDATE_PREEMPTED,
++            pdone, foreigndom);
+     else if ( curr->arch.old_guest_table )
+     {
+         XEN_GUEST_HANDLE_PARAM(void) null;
+@@ -4330,8 +4330,7 @@ static long __do_mmu_update(
+          * on the fact that this argument isn't needed anymore.
+          */
+         rc = hypercall_create_continuation(
+-                __HYPERVISOR_mmu_update, "hihi", null,
+-                MMU_UPDATE_PREEMPTED, null, rc);
++                op, "hihi", null, MMU_UPDATE_PREEMPTED, null, rc);
+     }
  
-     return rc;
- }
+     put_pg_owner(pg_owner);
+@@ -4417,7 +4416,18 @@ long do_mmu_update(
+     XEN_GUEST_HANDLE_PARAM(uint) pdone,
+     unsigned int foreigndom)
+ {
+-    return __do_mmu_update(ureqs, count, pdone, foreigndom, false);
++    return __do_mmu_update(ureqs, count, pdone, foreigndom,
++                           __HYPERVISOR_mmu_update, false);
++}
 +
-+long do_mmu_update(
++long do_pte_get_and_clear(
 +    XEN_GUEST_HANDLE_PARAM(mmu_update_t) ureqs,
 +    unsigned int count,
 +    XEN_GUEST_HANDLE_PARAM(uint) pdone,
 +    unsigned int foreigndom)
 +{
-+    return __do_mmu_update(ureqs, count, pdone, foreigndom, false);
-+}
-+
- #endif /* CONFIG_PV */
++    return __do_mmu_update(ureqs, count, pdone, foreigndom,
++                           __HYPERVISOR_pte_get_and_clear, true);
+ }
  
- /*
+ #endif /* CONFIG_PV */
+diff --git a/xen/include/hypercall-defs.c b/xen/include/hypercall-defs.c
+index a625d634b694..0552e93ab560 100644
+--- a/xen/include/hypercall-defs.c
++++ b/xen/include/hypercall-defs.c
+@@ -174,6 +174,7 @@ multicall(multicall_entry_t *call_list, unsigned long nr_calls)
+ #ifdef CONFIG_PV
+ mmuext_op(mmuext_op_t *uops, unsigned int count, unsigned int *pdone, unsigned int foreigndom)
+ mmu_update(mmu_update_t *ureqs, unsigned int count, unsigned int *pdone, unsigned int foreigndom)
++pte_get_and_clear(mmu_update_t *ureqs, unsigned int count, unsigned int *pdone, unsigned int foreigndom)
+ stack_switch(unsigned long ss, unsigned long esp)
+ fpu_taskswitch(int set)
+ set_debugreg(int reg, unsigned long value)
+@@ -232,6 +233,7 @@ caller: arm
+ table:                             pv32     pv64     hvm32    hvm64    arm
+ set_trap_table                     compat   do       -        -        -
+ mmu_update                         do:1     do:1     -        -        -
++pte_get_and_clear                  do:1     do:1     -        -        -
+ set_gdt                            compat   do       -        -        -
+ stack_switch                       do:2     do:2     -        -        -
+ set_callbacks                      compat   do       -        -        -
+diff --git a/xen/include/public/xen.h b/xen/include/public/xen.h
+index 2149b8dd3808..9e2ba0107d3b 100644
+--- a/xen/include/public/xen.h
++++ b/xen/include/public/xen.h
+@@ -118,6 +118,7 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
+ #define __HYPERVISOR_xenpmu_op            40
+ #define __HYPERVISOR_dm_op                41
+ #define __HYPERVISOR_hypfs_op             42
++#define __HYPERVISOR_pte_get_and_clear    43
+ 
+ /* Architecture-specific hypercall definitions. */
+ #define __HYPERVISOR_arch_0               48
 -- 
 2.52.0
 
