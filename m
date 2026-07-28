@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 964FFC54F4C
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:50:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374510.1621784 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BE1CC54F56
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:50:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374511.1621800 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woj8W-0000UZ-5j; Tue, 28 Jul 2026 14:50:28 +0000
+	id 1woj8Z-00012n-S3; Tue, 28 Jul 2026 14:50:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374510.1621784; Tue, 28 Jul 2026 14:50:27 +0000
+Received: by outflank-mailman (output) from mailman id 1374511.1621800; Tue, 28 Jul 2026 14:50:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woj8V-0000Pg-0N; Tue, 28 Jul 2026 14:50:27 +0000
-Received: by outflank-mailman (input) for mailman id 1374510;
+	id 1woj8Y-0000vD-Lp; Tue, 28 Jul 2026 14:50:30 +0000
+Received: by outflank-mailman (input) for mailman id 1374511;
  Tue, 28 Jul 2026 14:50:16 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+0bab86ec5884d1af5d78+8374+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1woj8K-0006ag-4k
+ id 1woj8K-0006gA-KA
  for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:50:16 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woj8J-00BbE3-GR; Tue, 28 Jul 2026 16:50:15 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1woj8K-00EhwD-08; Tue, 28 Jul 2026 16:50:16 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+0bab86ec5884d1af5d78+8374+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 6a68c19e-e002-0a2a0a5209dd-0a2a45078960-42
+ id 6a68c1a5-5cb7-0a2a0a5109dd-0a2a450cb8be-6
  for <multiple-recipients>; Tue, 28 Jul 2026 16:50:15 +0200
 Received: from [90.155.92.199] (helo=desiato.infradead.org)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+0bab86ec5884d1af5d78+8374+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 6a68c1a7-b4ea-0a2a45070019-5a9b5cc7bcc8-3
+ id 6a68c1a7-f479-0a2a450c0019-5a9b5cc79a06-3
  for <multiple-recipients>; Tue, 28 Jul 2026 16:50:15 +0200
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.99.2 #2 (Red Hat Linux))
- id 1woj82-000000052Vl-33KW; Tue, 28 Jul 2026 14:49:59 +0000
+ id 1woj82-000000052VZ-34kc; Tue, 28 Jul 2026 14:49:59 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.4 #2 (Red
- Hat Linux)) id 1woj80-00000001UaB-3CEt;
- Tue, 28 Jul 2026 15:49:56 +0100
+ Hat Linux)) id 1woj7z-00000001UY7-18gQ;
+ Tue, 28 Jul 2026 15:49:55 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=desiato.20200630 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=desiato.20200630 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:
-	From:Reply-To:Cc:Content-ID:Content-Description;
-	bh=OGYK0XSUEhB9/heovBH1MiZWmZi8F4JBTWX7mmCKaE4=; b=hgCg6c6D2UGxE9PBLU9NUGJ6iw
-	dqEPZCsDaXmXmvtbSn0pnlZleosyFUaUnDRI/jmGs636N8b62kkKGxznr2G7uF2hQsxmAnXtDzAaa
-	S79T5Y0su6TUsZPQq7+Evomim9ZIqMDeg2KX1MfQjzjYnqeRjb+GJt5iexSW0zl0v6m8g7fnb4YzN
-	c96KgzuCGP5tOZRzIVUeJ9Jl5vwo5xJO42BGQ+9E+lGVbyEEjmotizPiy8xq0ZGx4TpCO5ilu1Y5s
-	F2VwPink6Sej6FvMGLFjCgrpBjgQI4RyoRYpVzWQTJ2NFevNIU/m7itlKYbh+4VSnmv7Q6LzOefgu
-	rFYKuv8A==;
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
+	Cc:Content-Type:Content-ID:Content-Description;
+	bh=qkfTVUiMDU3wKVqEggFLaaqFoc9wZ8/CDkXcDl8wfs0=; b=EZXf/fjJb4bOv4RLTciNzKGITv
+	yW5CZm7kcCdngyDq5Eqa12QMXVZh9we9s4k6WdQMnX+WVIczKVbyAnkS3W91RTszUtVKEzCBw4UL8
+	VkshZUr3RNILQ1iQnos08xmZMd3rmjXrQRxTBVqSNbhZhDK59AnNSEiJ1uHmKgbDqKU2HPTUya0Q3
+	wDz7oviobriZSOeV+EGQXokzr0bSE1RXIcwHLbw12rlpI6+UiExPionyLGoUJRBj3f39waio0KBtz
+	Ggv5MCuUvBMMOZUcBzDe8SPB44Hj6+uR6JNFtW/AqpyaKvZXHmS8ZVgy1gjQraBTJu5fNxkrRxskV
+	Dc5DUoAA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	Jonathan Corbet <corbet@lwn.net>,
@@ -90,279 +90,66 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v7 36/36] KVM: selftests: Add Xen runstate migration test
-Date: Tue, 28 Jul 2026 15:40:16 +0100
-Message-ID: <20260728144954.355376-37-dwmw2@infradead.org>
+Subject: [PATCH v7 06/36] KVM: x86: Drop CPU pinning in get_kvmclock()
+Date: Tue, 28 Jul 2026 15:39:46 +0100
+Message-ID: <20260728144954.355376-7-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260728144954.355376-1-dwmw2@infradead.org>
 References: <20260728144954.355376-1-dwmw2@infradead.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-ef75cf/1785250215-37CD7AE4-980573A2/0/0
+X-purgate-ID: tlsNG-d25034/1785250215-030D9A5B-39D97A59/0/0
 X-purgate-type: clean
-X-purgate-size: 9613
+X-purgate-size: 1693
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Test that Xen runstate (steal time) is correctly accounted across a
-simulated live migration using KVM_XEN_VCPU_ATTR and KVM_[GS]ET_CLOCK_GUEST.
+The master clock branch of get_kvmclock() pinned the task to a CPU so
+that the rdtsc() and the __this_cpu_read(cpu_tsc_khz) would agree. But
+ka->use_master_clock can only be true when the host clocksource is TSC
+based, which in turn requires a stable, constant and synchronised TSC
+across all CPUs.
 
-The test simulates what a real VMM does during migration:
-1. Creates a VM with Xen HVM config and runstate tracking
-2. Runs the guest to accumulate some kvmclock time
-3. Saves clock (KVM_GET_CLOCK_GUEST), TSC offset, and runstate
-4. Marks the saved state as RUNSTATE_runnable (vCPU not running)
-5. Destroys the source VM
-6. Sleeps 10ms (simulating migration network transfer time)
-7. Creates a new VM and restores all state precisely as saved
-8. Runs the guest and verifies the migration gap appears as steal
-
-The guest TSC is transferred via the KVM_VCPU_TSC_OFFSET attribute. As
-the "migration" is to a new VM on the same host, restoring the same
-offset makes the guest TSC continue uninterrupted across the gap, so the
-restored pvclock yields a kvmclock which has kept running too. That is
-what makes the migration gap visible: the destination kvmclock is ahead
-of the saved state_entry_time by (at least) the gap duration, rather
-than restarting from the destination VM's creation time.
-
-The kernel accounts the gap because: on vcpu_load, it transitions from
-RUNSTATE_runnable to RUNSTATE_running, computing delta = kvmclock_now -
-state_entry_time. Since kvmclock has advanced past the saved entry time
-(real time elapsed during migration), the delta is added to time_runnable.
+Given that, the open-coded CONSTANT_TSC || cpu_tsc_khz check is
+redundant (with CONSTANT_TSC, cpu_tsc_khz is tsc_khz on every CPU and
+KVM does not even register the cpufreq notifier), and both the TSC read
+and get_cpu_tsc_khz() are CPU-independent. Drop the condition and the
+get_cpu()/put_cpu() pinning.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- tools/testing/selftests/kvm/Makefile.kvm      |   1 +
- .../selftests/kvm/x86/xen_migration_test.c    | 205 ++++++++++++++++++
- 2 files changed, 206 insertions(+)
- create mode 100644 tools/testing/selftests/kvm/x86/xen_migration_test.c
+ arch/x86/kvm/x86.c | 8 +-------
+ 1 file changed, 1 insertion(+), 7 deletions(-)
 
-diff --git a/tools/testing/selftests/kvm/Makefile.kvm b/tools/testing/selftests/kvm/Makefile.kvm
-index 2029190f86d1..a2c4aadeb844 100644
---- a/tools/testing/selftests/kvm/Makefile.kvm
-+++ b/tools/testing/selftests/kvm/Makefile.kvm
-@@ -146,6 +146,7 @@ TEST_GEN_PROGS_x86 += x86/debug_regs
- TEST_GEN_PROGS_x86 += x86/tsc_msrs_test
- TEST_GEN_PROGS_x86 += x86/vmx_pmu_caps_test
- TEST_GEN_PROGS_x86 += x86/xen_cpuid_timing_test
-+TEST_GEN_PROGS_x86 += x86/xen_migration_test
- TEST_GEN_PROGS_x86 += x86/xen_shinfo_test
- TEST_GEN_PROGS_x86 += x86/xen_vmcall_test
- TEST_GEN_PROGS_x86 += x86/sev_dbg_test
-diff --git a/tools/testing/selftests/kvm/x86/xen_migration_test.c b/tools/testing/selftests/kvm/x86/xen_migration_test.c
-new file mode 100644
-index 000000000000..e43846a77e61
---- /dev/null
-+++ b/tools/testing/selftests/kvm/x86/xen_migration_test.c
-@@ -0,0 +1,205 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Test Xen runstate (steal time) preservation across simulated migration.
-+ *
-+ * Verifies that the kernel correctly accounts the migration gap as
-+ * steal time (runnable) when runstate data is saved and restored
-+ * precisely, but real time elapses during the migration.
-+ *
-+ * The key insight: userspace saves the runstate with state=RUNSTATE_runnable
-+ * (the vCPU is not running during migration). On restore, the kernel sees
-+ * that kvmclock has advanced past state_entry_time, and accounts the
-+ * difference as time spent in the runnable state.
-+ */
-+#include <inttypes.h>
-+#include <stdint.h>
-+#include <stdio.h>
-+#include <string.h>
-+#include <unistd.h>
-+
-+#include "test_util.h"
-+#include "kvm_util.h"
-+#include "processor.h"
-+
-+#include <asm/pvclock-abi.h>
-+
-+#define SHINFO_GPA	0xc0000000ULL
-+#define RUNSTATE_GPA	(SHINFO_GPA + 0x1000)
-+
-+#define RUNSTATE_running  0
-+#define RUNSTATE_runnable 1
-+#define RUNSTATE_blocked  2
-+#define RUNSTATE_offline  3
-+
-+struct vcpu_runstate_info {
-+	uint32_t state;
-+	uint64_t state_entry_time;
-+	uint64_t time[4];
-+} __attribute__((packed));
-+
-+static void guest_code(void)
-+{
-+	volatile struct vcpu_runstate_info *rs =
-+		(void *)(unsigned long)RUNSTATE_GPA;
-+
-+	/* Report runstate times — no need to enable kvmclock MSR,
-+	 * the kernel writes runstate using its internal kvmclock. */
-+	GUEST_SYNC_ARGS(0, rs->time[RUNSTATE_runnable],
-+			rs->time[RUNSTATE_running], 0, 0);
-+}
-+
-+static struct kvm_vm *create_xen_vm(struct kvm_vcpu **vcpu)
-+{
-+	struct kvm_vm *vm;
-+	int xen_caps;
-+
-+	vm = vm_create_with_one_vcpu(vcpu, guest_code);
-+
-+	xen_caps = kvm_check_cap(KVM_CAP_XEN_HVM);
-+	TEST_REQUIRE(xen_caps & KVM_XEN_HVM_CONFIG_SHARED_INFO);
-+	TEST_REQUIRE(xen_caps & KVM_XEN_HVM_CONFIG_RUNSTATE);
-+
-+	/* Map pages */
-+	vm_userspace_mem_region_add(vm, VM_MEM_SRC_ANONYMOUS,
-+				    SHINFO_GPA, 1, 2, 0);
-+	virt_map(vm, SHINFO_GPA, SHINFO_GPA, 2);
-+
-+	/* Enable Xen HVM with MSR interception (enables runstate tracking) */
-+	struct kvm_xen_hvm_config cfg = {
-+		.flags = KVM_XEN_HVM_CONFIG_INTERCEPT_HCALL,
-+		.msr = 0x40000000,
-+	};
-+	vm_ioctl(vm, KVM_XEN_HVM_CONFIG, &cfg);
-+
-+	/* Set shared_info */
-+	struct kvm_xen_hvm_attr ha = {
-+		.type = KVM_XEN_ATTR_TYPE_SHARED_INFO,
-+		.u.shared_info.gfn = SHINFO_GPA >> 12,
-+	};
-+	vm_ioctl(vm, KVM_XEN_HVM_SET_ATTR, &ha);
-+
-+	/* Set runstate address */
-+	struct kvm_xen_vcpu_attr rs_addr = {
-+		.type = KVM_XEN_VCPU_ATTR_TYPE_RUNSTATE_ADDR,
-+		.u.gpa = RUNSTATE_GPA,
-+	};
-+	vcpu_ioctl(*vcpu, KVM_XEN_VCPU_SET_ATTR, &rs_addr);
-+
-+	return vm;
-+}
-+
-+int main(void)
-+{
-+	struct pvclock_vcpu_time_info pvti;
-+	struct kvm_xen_vcpu_attr runstate_save;
-+	struct kvm_vcpu *vcpu;
-+	struct kvm_vm *vm;
-+	struct ucall uc;
-+	uint64_t tsc_offset;
-+	int ret;
-+
-+	/* === SOURCE SIDE === */
-+	pr_info("=== Source: create VM and run guest ===\n");
-+	vm = create_xen_vm(&vcpu);
-+
-+	/* Run guest once to accumulate some runstate time */
-+	vcpu_run(vcpu);
-+	TEST_ASSERT_KVM_EXIT_REASON(vcpu, KVM_EXIT_IO);
-+	TEST_ASSERT_EQ(get_ucall(vcpu, &uc), UCALL_SYNC);
-+
-+	pr_info("  Guest sees: runnable=%" PRIu64 " running=%" PRIu64 "\n",
-+		uc.args[2], uc.args[3]);
-+
-+	/* Save clock state */
-+	ret = __vcpu_ioctl(vcpu, KVM_GET_CLOCK_GUEST, &pvti);
-+	TEST_ASSERT(!ret, "KVM_GET_CLOCK_GUEST failed");
-+
-+	/*
-+	 * Save the guest TSC offset. This test migrates to a new VM on
-+	 * the same host, so restoring the same offset makes the guest
-+	 * TSC continue uninterrupted across the migration gap, and the
-+	 * restored pvclock (KVM_SET_CLOCK_GUEST) then yields a kvmclock
-+	 * which has also kept running across the gap. (A real migration
-+	 * to a different host would compute the destination offset from
-+	 * KVM_GET_CLOCK's {host_tsc, realtime} pair as described in
-+	 * Documentation/virt/kvm/devices/vcpu.rst.)
-+	 */
-+	vcpu_device_attr_get(vcpu, KVM_VCPU_TSC_CTRL, KVM_VCPU_TSC_OFFSET,
-+			     &tsc_offset);
-+
-+	/* Save runstate — the vCPU is now "runnable" (not running) */
-+	runstate_save.type = KVM_XEN_VCPU_ATTR_TYPE_RUNSTATE_DATA;
-+	vcpu_ioctl(vcpu, KVM_XEN_VCPU_GET_ATTR, &runstate_save);
-+
-+	/*
-+	 * Transition to runnable state before saving — the vCPU is
-+	 * not running during migration.
-+	 */
-+	runstate_save.u.runstate.state = RUNSTATE_runnable;
-+
-+	pr_info("  Saved runstate: running=%" PRIu64 " runnable=%" PRIu64
-+		" entry=%" PRIu64 "\n",
-+		(uint64_t)runstate_save.u.runstate.time_running,
-+		(uint64_t)runstate_save.u.runstate.time_runnable,
-+		(uint64_t)runstate_save.u.runstate.state_entry_time);
-+
-+	uint64_t saved_runnable = runstate_save.u.runstate.time_runnable;
-+
-+	kvm_vm_free(vm);
-+
-+	/* === MIGRATION GAP === */
-+	pr_info("=== Simulating migration (sleeping 10ms) ===\n");
-+	usleep(10000);
-+
-+	/* === DESTINATION SIDE === */
-+	pr_info("=== Destination: create new VM and restore ===\n");
-+	vm = create_xen_vm(&vcpu);
-+
-+	/* Restore the guest TSC offset (same host: TSC continues) */
-+	vcpu_device_attr_set(vcpu, KVM_VCPU_TSC_CTRL, KVM_VCPU_TSC_OFFSET,
-+			     &tsc_offset);
-+
-+	/* Restore clock — kvmclock will now be ~10ms ahead of the snapshot */
-+	vcpu_ioctl(vcpu, KVM_SET_CLOCK_GUEST, &pvti);
-+
-+	/* Restore runstate exactly as saved (state=runnable) */
-+	runstate_save.type = KVM_XEN_VCPU_ATTR_TYPE_RUNSTATE_DATA;
-+	ret = __vcpu_ioctl(vcpu, KVM_XEN_VCPU_SET_ATTR, &runstate_save);
-+	TEST_ASSERT(!ret, "Restore runstate failed: errno %d", errno);
-+
-+	/*
-+	 * Run the guest. When the vCPU enters vcpu_run, the kernel
-+	 * transitions from RUNSTATE_runnable to RUNSTATE_running.
-+	 * It computes: delta = kvmclock_now - state_entry_time
-+	 * This delta (which includes the migration gap) is added to
-+	 * time_runnable (steal time).
-+	 */
-+	vcpu_run(vcpu);
-+	TEST_ASSERT_KVM_EXIT_REASON(vcpu, KVM_EXIT_IO);
-+	TEST_ASSERT_EQ(get_ucall(vcpu, &uc), UCALL_SYNC);
-+
-+	uint64_t guest_runnable = uc.args[2];
-+	uint64_t guest_running = uc.args[3];
-+
-+	pr_info("  Guest sees: runnable=%" PRIu64 " running=%" PRIu64 "\n",
-+		guest_runnable, guest_running);
-+
-+	uint64_t steal_increase = guest_runnable - saved_runnable;
-+	pr_info("  Steal time increase: %" PRIu64 " ns (migration gap)\n",
-+		steal_increase);
-+
-+	/*
-+	 * The steal time increase should be at least 10ms (the sleep)
-+	 * but not more than 5s (allowing for VM creation overhead).
-+	 * The actual gap is from the source's state_entry_time to the
-+	 * destination's kvmclock "now" at vcpu_load time.
-+	 */
-+	TEST_ASSERT(steal_increase >= 10000000ULL &&
-+		    steal_increase < 5000000000ULL,
-+		    "Steal time increase %" PRIu64 " ns not in expected range "
-+		    "[10ms, 5s]", steal_increase);
-+
-+	kvm_vm_free(vm);
-+	pr_info("PASS: Migration gap correctly accounted as steal time\n");
-+	return 0;
-+}
+diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+index 1a598e99852c..590a7ba723f7 100644
+--- a/arch/x86/kvm/x86.c
++++ b/arch/x86/kvm/x86.c
+@@ -1659,12 +1659,8 @@ static void get_kvmclock(struct kvm *kvm, struct kvm_clock_data *data)
+ 	do {
+ 		seq = read_seqcount_begin(&ka->pvclock_sc);
+ 
+-		/* both __this_cpu_read() and rdtsc() should be on the same cpu */
+-		get_cpu();
+-
+ 		data->flags = 0;
+-		if (ka->use_master_clock &&
+-		    (static_cpu_has(X86_FEATURE_CONSTANT_TSC) || __this_cpu_read(cpu_tsc_khz))) {
++		if (ka->use_master_clock) {
+ #ifdef CONFIG_X86_64
+ 			struct timespec64 ts;
+ 
+@@ -1685,8 +1681,6 @@ static void get_kvmclock(struct kvm *kvm, struct kvm_clock_data *data)
+ 		} else {
+ 			data->clock = get_kvmclock_base_ns() + ka->kvmclock_offset;
+ 		}
+-
+-		put_cpu();
+ 	} while (read_seqcount_retry(&ka->pvclock_sc, seq));
+ }
+ 
 -- 
 2.55.0
 
