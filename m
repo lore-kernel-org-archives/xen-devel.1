@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EC9EC53219
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 12:07:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1373153.1620230 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56A34C54F52
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 12:07:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1373165.1620265 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wogax-0004jz-5P; Tue, 28 Jul 2026 12:07:39 +0000
+	id 1wogb0-0005bG-FH; Tue, 28 Jul 2026 12:07:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1373153.1620230; Tue, 28 Jul 2026 12:07:39 +0000
+Received: by outflank-mailman (output) from mailman id 1373165.1620265; Tue, 28 Jul 2026 12:07:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wogaw-0004jU-QI; Tue, 28 Jul 2026 12:07:38 +0000
-Received: by outflank-mailman (input) for mailman id 1373153;
- Tue, 28 Jul 2026 12:07:36 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wogb0-0005Zb-72; Tue, 28 Jul 2026 12:07:42 +0000
+Received: by outflank-mailman (input) for mailman id 1373165;
+ Tue, 28 Jul 2026 12:07:40 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 1wogau-0004a7-Lq; Tue, 28 Jul 2026 12:07:36 +0000
+ id 1wogay-0004wc-1W; Tue, 28 Jul 2026 12:07:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wogau-00EcR4-2W; Tue, 28 Jul 2026 14:07:36 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wogax-006yAC-DV; Tue, 28 Jul 2026 14:07:39 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 6a689b7b-5cb7-0a2a0a5109dd-0a2a450ce798-34
- for <multiple-recipients>; Tue, 28 Jul 2026 14:07:36 +0200
+ id 6a689b7a-bab6-0a2a0a5309dd-0a2a4507b18c-48
+ for <multiple-recipients>; Tue, 28 Jul 2026 14:07:39 +0200
 Received: from [104.130.215.37] (helo=mail.xenproject.org)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 6a689b0e-f479-0a2a450c0019-6882d725b970-3
- for <multiple-recipients>; Tue, 28 Jul 2026 14:05:35 +0200
+ id 6a689b11-b4ea-0a2a45070019-6882d7259636-3
+ for <multiple-recipients>; Tue, 28 Jul 2026 14:05:39 +0200
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <andrewcoop@xenbits.xen.org>) id 1wogYt-00DPGA-0x;
- Tue, 28 Jul 2026 12:05:31 +0000
+ (envelope-from <andrewcoop@xenbits.xen.org>) id 1wogYw-00DPGa-1s;
+ Tue, 28 Jul 2026 12:05:34 +0000
 Received: from andrewcoop by xenbits.xenproject.org with local (Exim 4.96)
- (envelope-from <andrewcoop@xenbits.xen.org>) id 1wogYs-003Dzb-3C;
- Tue, 28 Jul 2026 12:05:30 +0000
+ (envelope-from <andrewcoop@xenbits.xen.org>) id 1wogYw-003E18-0s;
+ Tue, 28 Jul 2026 12:05:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,13 +60,13 @@ To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
  xen-users@lists.xen.org, oss-security@lists.openwall.com
 From: Xen.org security team <security@xen.org>
 CC: Xen.org security team <security-team-members@xen.org>
-Subject: Xen Security Advisory 507 v2 (CVE-2026-62434) - PoD: Don't try to
- reclaim special pages
-Message-Id: <E1wogYs-003Dzb-3C@xenbits.xenproject.org>
-Date: Tue, 28 Jul 2026 12:05:30 +0000
-X-purgate-ID: tlsNG-d25034/1785240335-01AC4A5B-4B6FAA98/0/0
+Subject: Xen Security Advisory 508 v2 - pygrub is only supported in
+ de-privileged mode
+Message-Id: <E1wogYw-003E18-0s@xenbits.xenproject.org>
+Date: Tue, 28 Jul 2026 12:05:34 +0000
+X-purgate-ID: tlsNG-ef75cf/1785240339-35CC7AE4-356D51DD/0/0
 X-purgate-type: clean
-X-purgate-size: 6587
+X-purgate-size: 5079
 
 --=separator
 Content-Type: text/plain; charset="utf-8"
@@ -76,10 +76,10 @@ Content-Transfer-Encoding: 7bit
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA256
 
-            Xen Security Advisory CVE-2026-62434 / XSA-507
-                               version 2
+                    Xen Security Advisory XSA-508
+                              version 2
 
-                PoD: Don't try to reclaim special pages
+            pygrub is only supported in de-privileged mode
 
 UPDATES IN VERSION 2
 ====================
@@ -89,50 +89,55 @@ Public release.
 ISSUE DESCRIPTION
 =================
 
-A guest started with Populated on Demand enabled (PoD) can attempt to
-reclaim pages which aren't regular guest RAM.  This can cause corruption
-of memory management state in Xen.
+XSA-443 and XSA-497 addressed specific issues in specific file system
+drivers (libfsimage) used by pygrub.  Further issues were reported, and
+yet more are to be expected. XSA-443 introduced a means to run pygrub
+de-privileged.  Only this mode of operation is security supported from
+now on.
 
 IMPACT
 ======
 
-A buggy or malicious guest can cause corruption of Xen's state, leading
-to crashes or other malfunctions.  Information leak and privilege
-escalation cannot be ruled out.
+A guest using pygrub can escalate its privilege to that of the domain
+construction tools (i.e., normally, to control of the host).
 
 VULNERABLE SYSTEMS
 ==================
 
-All Xen versions from 3.4 onwards are vulnerable.  Xen versions 3.3 and
-earlier are not vulnerable.
-
-Only x86 systems are vulnerable.
-
-Only x86 HVM and PVH guests started in populate-on-demand mode are
-believed to be able to leverage the vulnerability.  Populate-on-demand
-mode is activated when the guest's xl configuration file specifies a
-"maxmem" value which is larger than the "memory" value.
+All Xen versions from at least 3.2 onwards are affected.  Older versions
+have not been inspected.
 
 MITIGATION
 ==========
 
-Running only PV guests or HVM/PVH guests without PoD will avoid the
+XSA-443 added a mechanism to run pygrub de-privileged.  Using this mode
+will mitigate the vulnerability.
+
+Ensuring that guests do not use the pygrub bootloader will avoid this
 vulnerability.
+
+For cases where the PV guest is known to be 64bit, and uses grub2 as a
+bootloader, pvgrub is a suitable alternative to pygrub.
+
+Running only HVM or PVH guests will avoid the vulnerability.
 
 RESOLUTION
 ==========
 
-Applying the attached patch resolves this issue.
+Applying the attached patch documents this issue.  Patches for XSA-443
+added additional functionality to pygrub and libxl in order to run pygrub
+in a restricted environment using a specific UID.  Check xl.cfg man page
+for information on the bootloader_restrict option.
 
 Note that patches for released versions are generally prepared to
 apply to the stable branches, and may not apply cleanly to the most
 recent release tarball.  Downstreams are encouraged to update to the
 tip of the stable branch before applying these patches.
 
-xsa507.patch           xen-unstable - Xen 4.17.x
+xsa508.patch           xen-unstable - Xen 4.17.x
 
-$ sha256sum xsa507*
-41485ddf0912cfa53fa05e236aa27c3c6490919ac2dab5b9f57ed69f5b38f60a  xsa507.patch
+$ sha256sum xsa508*
+f1e4b6490228b7fac61fd968229f98a3dfb782d56c6729d3fe01bc34c77fbd5c  xsa508.patch
 $
 
 DEPLOYMENT DURING EMBARGO
@@ -160,70 +165,41 @@ consult the Xen Project community's agreed Security Policy:
   http://www.xenproject.org/security-policy.html
 -----BEGIN PGP SIGNATURE-----
 
-iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmpomr4MHHBncEB4ZW4u
-b3JnAAoJEIP+FMlX6CvZ+04H/i3UMWbGcPG2kp978waMmF3Gtfb/r8mw3UBzVGCi
-cIOBWf/FizjWu54SQEQtjwYPfi0nKftFN1UPqAGs+OUtyiZ8EcPL5x9i7arrqA2T
-uGfpCTb3NtFmacBbrpGnqkNahMtSLWtE8aSVEQhLxvZcLTPB6OPzIi/MVPGyA7jl
-/LSGWs4vd99Y8ZvAN20rhxaEAjYynfd7N4tXn38EoW9WiQBuPZ5eNzsbieah8PEo
-Ajntyx774ipvtYYStA4fhsLwO+6LyqH7okDR1g8Xkq6IVrOshP194mxnsuEfcMIO
-4TCkWbzhmspfxQ1E2aW2VVPzIC2X2b+i8JieUK/z3mmrRSU=
-=AfG5
+iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmpomsAMHHBncEB4ZW4u
+b3JnAAoJEIP+FMlX6CvZLhoH/38QGcVs3Xc3KuskdvBx57IV/vW9XjNlVYSngmdm
+lKzXTZhjrecrPZvwBbhuqOBXkaFQSL17+lLVK3xRAzv2dd5hn2PqXkMj06JSwcrh
+haXN/JWUDwQtmJuLfGNkQ9P1W27oMXZ3pBGhv1SsEfD0mNiyC7ZZKizU291usZbF
+6JMUGNUmQ1Dyom2CiylmJGmrNrHzKdfNqURc+DoSOctpS9vbT0U0xLtKYvbVr3cj
+7DuITo1/gS/3pxiUw/7E5uR7zPusBGISP1ir5rBqTkgoMf2tJkt7tfygqJtrqnkU
+BaUt0ZCo7NBKg71o0AESZIdO3Ddg2QD6xrymtI0BVqa0n1E=
+=9mkq
 -----END PGP SIGNATURE-----
 
 --=separator
-Content-Type: application/octet-stream; name="xsa507.patch"
-Content-Disposition: attachment; filename="xsa507.patch"
+Content-Type: application/octet-stream; name="xsa508.patch"
+Content-Disposition: attachment; filename="xsa508.patch"
 Content-Transfer-Encoding: base64
 
-RnJvbSBjMWZlN2QxMGU4YjQ4OWRkNjZhZDVhMmQ3NTA4ZTk4ZTljOGRhYmM2
-IE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBSb2dlciBQYXUgTW9u
-bmUgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgpEYXRlOiBUdWUsIDE0IEp1bCAy
-MDI2IDE3OjA1OjQ1ICswMjAwClN1YmplY3Q6IHg4Ni9wb2Q6IGRvIG5vdCBy
-ZWNsYWltIHNwZWNpYWwgcGFnZXMgZm9yIFBvRCBjYWNoZQpNSU1FLVZlcnNp
-b246IDEuMApDb250ZW50LVR5cGU6IHRleHQvcGxhaW47IGNoYXJzZXQ9VVRG
-LTgKQ29udGVudC1UcmFuc2Zlci1FbmNvZGluZzogOGJpdAoKV2hlbiBkb2lu
-ZyBQb0QgY2FjaGUgcmVjbGFpbSBhcyBwYXJ0IG9mIGEgZGVjcmVhc2UgcmVz
-ZXJ2YXRpb24gY2FsbCwgYXZvaWQKcmVjbGFpbWluZyBzcGVjaWFsIHBhZ2Vz
-IGZvciB0aGUgUG9EIGNhY2hlLiAgT3RoZXJ3aXNlIHN1Y2ggcGFnZXMgZ2V0
-IG1vdmVkCmZyb20gdGhlIGRvbWFpbiAtPnhlbnBhZ2VfbGlzdCB0byB0aGUg
-LT5wYWdlX2xpc3QsIHdoaWxlIHN0aWxsIGJlaW5nCnJlZmVyZW5jZWQgaW4g
-LT5zaGFyZWRfaW5mbyBkb21haW4gZmllbGQuCgpQcmV2ZW50IFBvRCBjYWNo
-ZSBmcm9tIHJlY2xhaW1pbmcgc3BlY2lhbCBwYWdlcywgYXMgbm90aGluZyBn
-b29kIGNhbiBjb21lCm91dCBvZiBpdC4KClRoaXMgaXMgWFNBLTUwNyAvIENW
-RS0yMDI2LTYyNDM0LgoKRml4ZXM6IDQxYWEwYjYyNjk5ZSAoIlBvRCBtZW1v
-cnkgNC85OiBEZWNyZWFzZSByZXNlcnZhdGlvbiIpClNpZ25lZC1vZmYtYnk6
-IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgpSZXZp
-ZXdlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgotLS0K
-IHhlbi9hcmNoL3g4Ni9tbS9wMm0tcG9kLmMgfCA4ICsrKysrKy0tCiAxIGZp
-bGUgY2hhbmdlZCwgNiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQoK
-ZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9tbS9wMm0tcG9kLmMgYi94ZW4v
-YXJjaC94ODYvbW0vcDJtLXBvZC5jCmluZGV4IDdhMGJlYmQyZDNiNS4uNDYw
-MmMzMmNmZmFmIDEwMDY0NAotLS0gYS94ZW4vYXJjaC94ODYvbW0vcDJtLXBv
-ZC5jCisrKyBiL3hlbi9hcmNoL3g4Ni9tbS9wMm0tcG9kLmMKQEAgLTUzNiwx
-MiArNTM2LDEzIEBAIGRlY3JlYXNlX3Jlc2VydmF0aW9uKHN0cnVjdCBkb21h
-aW4gKmQsIGdmbl90IGdmbiwgdW5zaWduZWQgaW50IG9yZGVyKQogICAgICAg
-ICBwMm1fYWNjZXNzX3QgYTsKICAgICAgICAgcDJtX3R5cGVfdCB0OwogICAg
-ICAgICB1bnNpZ25lZCBpbnQgY3VyX29yZGVyOworICAgICAgICBtZm5fdCBt
-Zm4gPSBwMm0tPmdldF9lbnRyeShwMm0sIGdmbl9hZGQoZ2ZuLCBpKSwgJnQs
-ICZhLCAwLCAmY3VyX29yZGVyLAorICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBOVUxMKTsKIAotICAgICAgICBwMm0tPmdldF9lbnRyeShw
-Mm0sIGdmbl9hZGQoZ2ZuLCBpKSwgJnQsICZhLCAwLCAmY3VyX29yZGVyLCBO
-VUxMKTsKICAgICAgICAgbiA9IDFVTCA8PCBtaW4ob3JkZXIsIGN1cl9vcmRl
-cik7CiAgICAgICAgIGlmICggcDJtX2lzX3BvZCh0KSApCiAgICAgICAgICAg
-ICBwb2QgKz0gbjsKLSAgICAgICAgZWxzZSBpZiAoIHAybV9pc19yYW0odCkg
-KQorICAgICAgICBlbHNlIGlmICggcDJtX2lzX3JhbSh0KSAmJiAhaXNfc3Bl
-Y2lhbF9wYWdlKG1mbl90b19wYWdlKG1mbikpICkKICAgICAgICAgICAgIHJh
-bSArPSBuOwogICAgIH0KIApAQCAtNjQ0LDYgKzY0NSw5IEBAIGRlY3JlYXNl
-X3Jlc2VydmF0aW9uKHN0cnVjdCBkb21haW4gKmQsIGdmbl90IGdmbiwgdW5z
-aWduZWQgaW50IG9yZGVyKQogICAgICAgICAgICAgQVNTRVJUKG1mbl92YWxp
-ZChtZm4pKTsKIAogICAgICAgICAgICAgcGFnZSA9IG1mbl90b19wYWdlKG1m
-bik7CisgICAgICAgICAgICBpZiAoIGlzX3NwZWNpYWxfcGFnZShwYWdlKSAp
-CisgICAgICAgICAgICAgICAgLyogRG8gbm90IHRvdWNoIHNwZWNpYWwgcGFn
-ZXMsIGxldCBnZW5lcmljIGNvZGUgaGFuZGxlIHRoZW0uICovCisgICAgICAg
-ICAgICAgICAgY29udGludWU7CiAKICAgICAgICAgICAgIC8qIFRoaXMgc2hv
-dWxkbid0IGJlIGFibGUgdG8gZmFpbCAqLwogICAgICAgICAgICAgaWYgKCBw
-Mm1fc2V0X2VudHJ5KHAybSwgZ2ZuX2FkZChnZm4sIGkpLCBJTlZBTElEX01G
-TiwgY3VyX29yZGVyLAotLSAKMi41My4wCgo=
+RnJvbTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpTdWJqZWN0
+OiBweWdydWI6IHNlY3VyaXR5LXN1cHBvcnRlZCBvbmx5IHdoZW4gcnVuIGRl
+LXByaXZpbGVnZWQKClhTQS00NDMgYW5kIFhTQS00OTcgYWRkcmVzc2VkIHNw
+ZWNpZmljIGlzc3VlcyBpbiBzcGVjaWZpYyBmaWxlIHN5c3RlbQpkcml2ZXJz
+IChsaWJmc2ltYWdlKSB1c2VkIGJ5IHB5Z3J1Yi4gRnVydGhlciBpc3N1ZXMg
+d2VyZSByZXBvcnRlZCwgYW5kIHlldAptb3JlIGFyZSB0byBiZSBleHBlY3Rl
+ZC4gWFNBLTQ0MyBpbnRyb2R1Y2VkIGEgbWVhbnMgdG8gcnVuIHB5Z3J1YiBk
+ZS0KcHJpdmlsZWdlZC4gT25seSB0aGlzIG1vZGUgb2Ygb3BlcmF0aW9uIGlz
+IHNlY3VyaXR5IHN1cHBvcnRlZCBmcm9tIG5vdyBvbi4KClRoaXMgaXMgWFNB
+LTUwOC4KClNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBz
+dXNlLmNvbT4KUmV2aWV3ZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0Bz
+dXNlLmNvbT4KCi0tLSBhL1NVUFBPUlQubWQKKysrIGIvU1VQUE9SVC5tZApA
+QCAtMjg4LDYgKzI4OCwxMiBAQCBvciBpdHNlbGYgd2lsbCBub3QgYmUgcmVn
+YXJkZWQgYSBzZWN1cml0CiAgICAgU3RhdHVzLCB1bnRydXN0ZWQgZHJpdmVy
+IGRvbWFpbnM6IFN1cHBvcnRlZCwgbm90IHNlY3VyaXR5IHN1cHBvcnRlZAog
+ICAgIFN0YXR1cywgTGl2ZXVwZGF0ZTogTm90IGZ1bmN0aW9uYWwKIAorIyMg
+R3Vlc3QgYm9vdCBsb2FkZXJzCisKKyMjIyBQeWdydWIKKworICAgIFN0YXR1
+czogU3VwcG9ydGVkLCBzZWN1cml0eSBzdXBwb3J0ZWQgb25seSB3aGVuIHJ1
+biBkZS1wcml2aWxlZ2VkCisKICMjIFRvb2xzdGFjay8zcmQgcGFydHkKIAog
+IyMjIGxpYnZpcnQgZHJpdmVyIGZvciB4bAo=
 
 --=separator--
 
