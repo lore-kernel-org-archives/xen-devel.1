@@ -4,44 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76E78C53219
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 10:01:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1372318.1619678 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 199C7C53219
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 10:04:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1372327.1619687 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woecX-0007ir-Be; Tue, 28 Jul 2026 10:01:09 +0000
+	id 1woefw-0008Pf-RX; Tue, 28 Jul 2026 10:04:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1372318.1619678; Tue, 28 Jul 2026 10:01:09 +0000
+Received: by outflank-mailman (output) from mailman id 1372327.1619687; Tue, 28 Jul 2026 10:04:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woecX-0007ik-8s; Tue, 28 Jul 2026 10:01:09 +0000
-Received: by outflank-mailman (input) for mailman id 1372318;
- Tue, 28 Jul 2026 10:01:08 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1woefw-0008PY-Oy; Tue, 28 Jul 2026 10:04:40 +0000
+Received: by outflank-mailman (input) for mailman id 1372327;
+ Tue, 28 Jul 2026 10:04:39 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1woecW-0007ie-4d
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 10:01:08 +0000
+ (envelope-from <robin.murphy@arm.com>) id 1woefu-0008PS-OV
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 10:04:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woecV-002M47-HZ
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 12:01:07 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1woeft-00ApHs-Dj
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 12:04:37 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a687de3-bab6-0a2a0a5309dd-0a2a4507b59a-0
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 12:01:07 +0200
-Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a687de1-b4ea-0a2a45070019-d155802ac8cb-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 12:01:05 +0200
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-4956869750eso27524215e9.2
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 03:01:05 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4957bff4784sm290629245e9.4.2026.07.28.03.01.03
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Jul 2026 03:01:04 -0700 (PDT)
+ (envelope-from <robin.murphy@arm.com>)
+ id 6a687eb0-bab6-0a2a0a5309dd-0a2a45019d30-20
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 12:04:36 +0200
+Received: from [217.140.110.172] (helo=foss.arm.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
+ (envelope-from <robin.murphy@arm.com>)
+ id 6a687eb3-5984-0a2a45010019-d98c6eacdcda-1
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 12:04:36 +0200
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0A3C61A9A;
+ Tue, 28 Jul 2026 03:04:31 -0700 (PDT)
+Received: from [10.2.212.23] (e121345-lin.cambridge.arm.com [10.2.212.23])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 65EF83F66F;
+ Tue, 28 Jul 2026 03:04:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,172 +51,170 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785232865; x=1785837665; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=lpx2aid6gy0abl8xxEkqC6FysZqM94pHfw7hx0UNm6M=;
-        b=BTBKRMeRapdFQxSk+cz1u/uu5nBUcrZVbIYcgq0QWV1r7TnxFOcLMnFcFatSVsBt/P
-         9e8DfpV9VRvRUaSZajbb50izTrj6oCF/xAL/1kJ49hw2442A8wBl5xBac1QA2oTg8KKX
-         9xpJhOH1VznJcM70ALBWvs8oeeE9zGYubhpqYBa/wlkMqAY3fX+UELMX55JLwWoFhR1m
-         dmUweAxpYkm2kJ6v3CcIJhqH3dmteHqV4ONQJFJZBqdc+GtNdxie1KUqN2KifH4zxMEY
-         2bgWjgGfMdB8GgTiRjG9OB50cEwF2NFz3rFyDnLHHqFEC8YVsO/KIdGs3LC4UgvgDh4Y
-         31hQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785232865; x=1785837665;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=lpx2aid6gy0abl8xxEkqC6FysZqM94pHfw7hx0UNm6M=;
-        b=SdV+o0Xe+ODcvd2VNYMriXpIIKj5sgZQGTk9vojeIahDFZsuk3n4tHY97jumX4dOdH
-         ERf7PhP6+sJd450FX0rrV0AGVT5eyGaKL04ifefy6pt5WtGvzNC84KzIkuiuurfqhDG6
-         8WxoweOWWYFxjoWSagFZ0ETJayQ9k6DE2CHM6eQxgHQVC+RJYX6j/S87tA7jnAC7szO1
-         TF1CYwk5dVq8ZxrZnS10ppgKm/hYFqi8omSodk0P7g7BC87cV9j7n+i+cUxPmZY0TQJz
-         7+wY8Zsq/AzMhkELWWNlf7sTb7b6E9iPCRWfG0DHr7yFnP7hUm5AkpreSlSvMPhj7BCa
-         9jzg==
-X-Gm-Message-State: AOJu0Yzp7Qs9LIbWkwLWj7tuqCT/H1GfAF+l+NMfc5NUMO7PzsnONaPS
-	PWJzXiaFWRMcneuzbLMyk5WuCRdbpyf9mPtp72zDW3QRzyXrSPdTjYQkTD0l9MLfeQ==
-X-Gm-Gg: AR+sD11MIAL+Lnp7V26KdKKiyvjEWJs01xoJ396OJlU8g1zRh6BSsBxyUPAwM6kIxe1
-	XtsR4HtcaOdpth3x6mMa76gdlz0fe39GTzMxJoKXxOoDH/5CooVNMhntf3P0dpiPJWJSVRlyIkd
-	87wdyyHRCsoMsp6vJqQHkz3mCJ2FZz9DTvjW9k1ycLb1SrsYIGJSpl3j5nIxCMsunBZplyocE4G
-	1BBvPVknTz+69RlpANhm0cAd1ggF8pGjGIdX82X5aThF2GI5isD8qvAOwNI4aN1HGhBEuK9V4Lj
-	/nm3McuUaal+EA9gRhEYTzIQVmCSzJWT/cIhB2oA2DkNCWdEIiGMSLptUhKtzL9+F/Wz8HKeR1/
-	I2HxzCOUCEEq/mQRhP+NiThwO856zxTBrPOE09le++VHc16UJcuApsm5yjMaz2vAQU6JfaM5/O5
-	Eu86EIWVEQPKqsdcD00IQSx37B+KrsqSg6//x3huoJkQhZ/kyEvyoRxmRp34em0ztIcA==
-X-Received: by 2002:a7b:c016:0:b0:495:3eb2:b763 with SMTP id 5b1f17b1804b1-496c6568d56mr11615485e9.21.1785232865049;
-        Tue, 28 Jul 2026 03:01:05 -0700 (PDT)
-Message-ID: <f95aaae3-1e49-471f-9f44-ddd60309cbe7@suse.com>
-Date: Tue, 28 Jul 2026 12:01:03 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1785233075; bh=+qX0PisZeeHdH3l6bVP09rcJGyaK5NPPSnPr7a+dMEw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=U/3yd7eegPyWLuJHUkzkeeGrphZ47PXls1SubSIWwjip58s0E+SE7riunJeIfLcPx
+	 ppgx9yxl0tVjZeG4zkuT3BFqtreOyzfaMEugWDntUEB+T8lRsqdKjraMXdTxPkJLw5
+	 t3w4/FCRW3AqW7K+EwdrIXYR/en1GCKKdGsfQmZ0=
+Message-ID: <69b1235a-832b-4a00-bcfd-f51991d23488@arm.com>
+Date: Tue, 28 Jul 2026 11:04:27 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 3/3] x86/time: avoid early uses of NOW() to return zero
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>
-References: <f5040939-b166-4050-9a27-117b772547d4@suse.com>
- <a53601c4-dab7-4d75-9cf0-323acc980ede@suse.com>
- <amhrKd-736ymBrfD@macbook.local>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <amhrKd-736ymBrfD@macbook.local>
-Content-Type: text/plain; charset=UTF-8
+Subject: Re: [PATCH v16 3/3] of: Respect #{iommu,msi}-cells in maps
+To: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Nipun Gupta
+ <nipun.gupta@amd.com>, Nikhil Agarwal <nikhil.agarwal@amd.com>,
+ Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+ Lorenzo Pieralisi <lpieralisi@kernel.org>, Marc Zyngier <maz@kernel.org>,
+ Thomas Gleixner <tglx@kernel.org>, Rob Herring <robh@kernel.org>,
+ Saravana Kannan <saravanak@kernel.org>, Richard Zhu <hongxing.zhu@nxp.com>,
+ Lucas Stach <l.stach@pengutronix.de>,
+ =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+ Manivannan Sadhasivam <mani@kernel.org>, Bjorn Helgaas
+ <bhelgaas@google.com>, Frank Li <Frank.Li@nxp.com>,
+ Sascha Hauer <s.hauer@pengutronix.de>,
+ Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>, Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ iommu@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
+ devicetree@vger.kernel.org, linux-pci@vger.kernel.org, imx@lists.linux.dev,
+ xen-devel@lists.xenproject.org,
+ Charan Teja Kalla <charan.kalla@oss.qualcomm.com>
+References: <20260603-parse_iommu_cells-v16-0-dc509dacb19a@oss.qualcomm.com>
+ <20260603-parse_iommu_cells-v16-3-dc509dacb19a@oss.qualcomm.com>
+ <3f5c974f-425d-47a5-9fda-e05de1f39d79@linaro.org>
+ <0d0896af-a4a5-445d-8db7-fdb9eecd07a2@oss.qualcomm.com>
+Content-Language: en-GB
+From: Robin Murphy <robin.murphy@arm.com>
+In-Reply-To: <0d0896af-a4a5-445d-8db7-fdb9eecd07a2@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1785232865-A54C3AE4-1F2653CA/0/0
+X-purgate-ID: tlsNG-d62444/1785233076-BE27A757-D742E5B9/0/0
 X-purgate-type: clean
-X-purgate-size: 3431
+X-purgate-size: 5471
 
-On 28.07.2026 10:41, Roger Pau Monné wrote:
-> On Tue, Jun 30, 2026 at 04:06:41PM +0200, Jan Beulich wrote:
->> Waiting loops like the one in flush_command_buffer() will degenerate to
->> infinite ones when used early enough for NOW() to still return constant
->> zero. Make sure the returned value at least monotonically increases. When
->> available, use nominal frequency values as initial approximation.
+On 28/07/2026 5:05 am, Vijayanand Jitta wrote:
+> 
+> 
+> On 7/23/2026 6:47 PM, Neil Armstrong wrote:
+>> Hi,
 >>
->> Do this only in get_s_time(), as producing a sane value in
->> get_s_time_fixed() for non-zero inputs won't be reasonably possible.
->> Put an assertion there.
+>> On 6/3/26 09:13, Vijayanand Jitta wrote:
+>>> From: Robin Murphy <robin.murphy@arm.com>
+>>>
+>>> So far our parsing of {iommu,msi}-map properties has always blindly
+>>> assumed that the output specifiers will always have exactly 1 cell.
+>>> This typically does happen to be the case, but is not actually enforced
+>>> (and the PCI msi-map binding even explicitly states support for 0 or 1
+>>> cells) - as a result we've now ended up with dodgy DTs out in the field
+>>> which depend on this behaviour to map a 1-cell specifier for a 2-cell
+>>> provider, despite that being bogus per the bindings themselves.
+>>>
+>>> Since there is some potential use in being able to map at least single
+>>> input IDs to multi-cell output specifiers (and properly support 0-cell
+>>> outputs as well), add support for properly parsing and using the target
+>>> nodes' #cells values, albeit with the unfortunate complication of still
+>>> having to work around expectations of the old behaviour too.
+>>>
+>>> Since there are multi-cell output specifiers, the callers of of_map_id()
+>>> may need to get the exact cell output value for further processing.
+>>> Update of_map_id() to set args_count in the output to reflect the actual
+>>> number of output specifier cells.
+>>>
+>>> Signed-off-by: Robin Murphy <robin.murphy@arm.com>
+>>> Signed-off-by: Charan Teja Kalla <charan.kalla@oss.qualcomm.com>
+>>> Signed-off-by: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
+>>> ---
+>>>    drivers/of/base.c  | 168 +++++++++++++++++++++++++++++++++++++++++------------
+>>>    include/linux/of.h |   6 +-
+>>>    2 files changed, 135 insertions(+), 39 deletions(-)
+>>>
+>>> diff --git a/drivers/of/base.c b/drivers/of/base.c
+>>> index d658c2620135..ac7961cbab94 100644
+>>> --- a/drivers/of/base.c
+>>> +++ b/drivers/of/base.c
+>>> @@ -2116,19 +2116,49 @@ int of_find_last_cache_level(unsigned int cpu)
+>>>        return cache_level;
+>>>    }
+>>>    +/*
+>>> + * Some DTs have an iommu-map targeting a 2-cell IOMMU node while
+>>> + * specifying only 1 cell. Fortunately they all consist of value '1'
+>>> + * as the 2nd cell entry with the same target, so check for that pattern.
+>>> + *
+>>> + * Example:
+>>> + *    IOMMU node:
+>>> + *        #iommu-cells = <2>;
+>>> + *
+>>> + *    Device node:
+>>> + *        iommu-map = <0x0000 &smmu 0x0000 0x1>,
+>>> + *                <0x0100 &smmu 0x0100 0x1>;
 >>
->> Reported-by: Roger Pau Monné <roger.pau@citrix.com>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->> ---
->> RFC: While generally the mentioned waiting loops will take longer to time
->>      out, on a very fast CPU tight loops may time out too early.
+>> So the sm8650 PCIe controllers has:
+>>
+>> pcie@1c08000:
+>>              iommu-map = <0     &apps_smmu 0x1480 0x1>,
+>>                      <0x100 &apps_smmu 0x1481 0x1>;
+>>
+>> and
+>>
+>> pcie@1c00000:
+>>
+>>              iommu-map = <0     &apps_smmu 0x1400 0x1>,
+>>                      <0x100 &apps_smmu 0x1401 0x1>;
+>>
+>> and apps_smmu has #iommu-cells = <2>, but gets flagged at wrong:
+>>
+>> [    7.538800] OF: /soc@0/pcie@1c08000: iommu-map has 1-cell entries targeting 2-cell #iommu-cells, treating as 1-cell output
+>>
+>> Returning false in of_check_bad_map() triggers:
+>>
+>> [    7.642680] OF: /soc@0/pcie@1c08000: Unsupported iommu-map - cannot handle 256-ID range with 2-cell output specifier
+>>
+>> I don't understand the issue here, we use 2 cells as expected by
+>> the iommu-cells, so why is it wrong ? can somebody explain in
+>> comprehensive words ? I'm super confused, it worked like a charm until now.
+>>
+>> Neil
+>>
 > 
-> While we know this is not ideal, it's better than getting stuck in an
-> infinite NOW() loop without any timeout.  IMO it's best to timeout
-> early than not timeout at all.
-
-Good, thanks for confirming.
-
->> RFC: On the 2nd pass through early_cpu_init() it may be okay to skip the
->>      new additions.
+> Hi Neil,
 > 
-> Possibly, yes, maybe add a static variable there to avoid re-doing?
-
-I don't think a static would be needed: We can key this off of the function
-parameter.
-
->> @@ -403,6 +404,36 @@ void __init early_cpu_init(bool verbose)
->>  				    &c->x86_capability[FEATURESET_7d1]);
->>  	}
->>  
->> +	if (c->cpuid_level >= 0x15) {
->> +		cpuid(0x15, &eax, &ebx, &ecx, &edx);
->> +
->> +		if (ecx && ebx && eax)
->> +			preset_tsc_scale(DIV_ROUND_UP(ecx * 1UL * ebx, eax));
->> +		else if (c->cpuid_level >= 0x16) {
->> +			/* Assume CPU base freq ≈ TSC freq. */
->> +			cpuid(0x16, &eax, &ebx, &ecx, &edx);
->> +			if (eax)
->> +				preset_tsc_scale(eax * 1000000UL);
->> +			else if (ebx) /* See preset_tsc_scale() for why. */
->> +				preset_tsc_scale(ebx * 1000000UL);
->> +		}
->> +	} else if (c->vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) {
->> +		unsigned int nom_mhz = 0, hi_mhz = 0;
->> +
->> +		amd_process_freq(c, NULL, &nom_mhz, &hi_mhz);
->> +		if (nom_mhz)
->> +			preset_tsc_scale(nom_mhz * 1000000UL);
->> +		else if (hi_mhz) /* See preset_tsc_scale() for why. */
->> +			preset_tsc_scale(hi_mhz * 1000000UL);
->> +	} else if (c->vendor & X86_VENDOR_INTEL) {
->> +		unsigned int hi_mhz = 0;
->> +
->> +		/* See preset_tsc_scale() for why. */
+> iommu-map = <0     &apps_smmu 0x1480 0x1>,
+>              <0x100 &apps_smmu 0x1481 0x1>;
 > 
-> I would avoid those repeated "See preset_tsc_scale() for why."
-> comments, and simply state at the beginning of the block that either
-> the nominal or the higher reported frequencies will be used, as in the
-> worse case when using the high frequency the timer will run slower,
-> but not faster.
-
-Can do.
-
->> --- a/xen/arch/x86/time.c
->> +++ b/xen/arch/x86/time.c
->> @@ -1664,6 +1664,9 @@ s_time_t get_s_time_fixed(uint64_t at_ts
->>      const struct cpu_time *t = &this_cpu(cpu_time);
->>      uint64_t tsc, delta;
->>  
->> +    /* scale_delta() degenerates when the scale wasn't set yet. */
->> +    ASSERT(t->tsc_scale.mul_frac);
 > 
-> Hm, so for release builds we would just return 0 in get_s_time_fixed()
-> when called before the scale is initialized.  I guess that's as good
-> as we can do.  I wonder whether using BUG_ON() won't be better here,
-> but it's likely best to return 0 than plain crash.
+> Entries here are not 2-cell format, Even though apps_smmu declares #iommu-cells = <2>,
+> this DT only supplies one output cell (0x1480/0x1481) — the trailing 0x1 is the length field,
+> not a second output cell. (<id-base phandle out-base length>)
+> 
+> The new code detects exactly this pattern (same target phandle across all entries, length always 1)
+> and falls back to treating the map as 1-cell output for backward compatibility — hence the pr_warn_once.
+> It's harmless and expected, your RIDs still resolve to the correct SIDs (0 → 0x1480, 0x100 → 0x1481).
+> 
+> The second message is a different case and shouldn't be coming from this same map — once the 1-cell
+> fallback triggers on the first entry, it applies to the whole map, so you shouldn't hit both warnings
+> together on the same node. That error only fires for a genuine 2-cell output specifier combined with
+> an id_len > 1, e.g.:
+> 
+> iommu-map = <0x0 &apps_smmu 0x1480 0x1 0x100>;
+> 
+> (<id-base, phandle, out0, out1, length=256>) — which isn't supported, since there's no way to
+> linearly scale a multi-cell output specifier across a range of IDs.
+> 
+> Are you seeing that second error on the same pcie node, or a different one?
+> If it's the same node, can you share the exact iommu-map entry that triggers it?
 
-Yeah, crashing release builds because of this felt excessive to me.
+I think Neil is saying he bypassed the fallback check so that it *did* 
+try to parse the given map with the real #iommu-cells=2 in precisely the 
+way you've shown - so even if it could have got past that point, it 
+would have then blown trying to parse the second "entry" of just 
+<&apps_smmu 0x1481 0x1>, since 0x1481 almost certainly isn't a valid 
+phandle to read an #iommu-cells value from.
 
-Jan
+Cheers,
+Robin.
 
