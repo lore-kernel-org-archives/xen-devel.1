@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E5DBC54EFC
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 08:39:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1372254.1619639 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAD74C54EFC
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 08:41:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1372279.1619648 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wodLj-0002qJ-4v; Tue, 28 Jul 2026 08:39:43 +0000
+	id 1wodNI-0004O9-IH; Tue, 28 Jul 2026 08:41:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1372254.1619639; Tue, 28 Jul 2026 08:39:43 +0000
+Received: by outflank-mailman (output) from mailman id 1372279.1619648; Tue, 28 Jul 2026 08:41:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wodLj-0002qC-29; Tue, 28 Jul 2026 08:39:43 +0000
-Received: by outflank-mailman (input) for mailman id 1372254;
- Tue, 28 Jul 2026 08:39:41 +0000
+	id 1wodNI-0004O2-FV; Tue, 28 Jul 2026 08:41:20 +0000
+Received: by outflank-mailman (input) for mailman id 1372279;
+ Tue, 28 Jul 2026 08:41:19 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <roger.pau@citrix.com>) id 1wodLh-0002q6-Of
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 08:39:41 +0000
+ (envelope-from <roger@xenproject.org>) id 1wodNH-0004Nw-Mg
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 08:41:19 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <roger.pau@citrix.com>) id 1wodLh-00DKNt-0u;
- Tue, 28 Jul 2026 08:39:41 +0000
+ (envelope-from <roger@xenproject.org>) id 1wodNH-00DKSk-2L;
+ Tue, 28 Jul 2026 08:41:19 +0000
 Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
  helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <roger.pau@citrix.com>) id 1wodLg-002eJX-28;
- Tue, 28 Jul 2026 08:39:40 +0000
+ (envelope-from <roger@xenproject.org>) id 1wodNH-002eXQ-0O;
+ Tue, 28 Jul 2026 08:41:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,14 +41,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Date: Tue, 28 Jul 2026 10:39:25 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date;
+	bh=UkNDLWKV1kvkQ8g8jrlIKhKkw41KXLJQNnaGb0D/ifU=; b=mbsT79RK9vTNuzk8yPRn+TizLX
+	ufdXTxJLs/vToRQ1qYT++kdGNugUVo6eXr3pQlnt0EP90FO/272P+yA883sN78Rk7afzIPoHV0tuz
+	MwLj5GMhLhb/8Dk99ZVBDo43eeIIHb1xkF1o8+kMWJV3q/D8MgsrG5NRPNh9LYb7NbQ0=;
+Date: Tue, 28 Jul 2026 10:41:13 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
 To: Jan Beulich <jbeulich@suse.com>
 Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Teddy Astie <teddy.astie@vates.tech>
 Subject: Re: [PATCH v4 3/3] x86/time: avoid early uses of NOW() to return zero
-Message-ID: <amhqvSAdzGjCuvCT@macbook.local>
+Message-ID: <amhrKd-736ymBrfD@macbook.local>
 References: <f5040939-b166-4050-9a27-117b772547d4@suse.com>
  <a53601c4-dab7-4d75-9cf0-323acc980ede@suse.com>
 MIME-Version: 1.0
