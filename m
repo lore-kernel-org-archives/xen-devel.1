@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA635C54F54
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:51:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374549.1621936 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D43DBC54F4C
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:51:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374535.1621927 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woj9A-0008Sp-4X; Tue, 28 Jul 2026 14:51:08 +0000
+	id 1woj98-00084K-8v; Tue, 28 Jul 2026 14:51:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374549.1621936; Tue, 28 Jul 2026 14:51:07 +0000
+Received: by outflank-mailman (output) from mailman id 1374535.1621927; Tue, 28 Jul 2026 14:51:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woj98-0008MR-92; Tue, 28 Jul 2026 14:51:06 +0000
-Received: by outflank-mailman (input) for mailman id 1374549;
- Tue, 28 Jul 2026 14:50:33 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1woj96-0007xR-AH; Tue, 28 Jul 2026 14:51:04 +0000
+Received: by outflank-mailman (input) for mailman id 1374535;
+ Tue, 28 Jul 2026 14:50:29 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1woj8a-0001Jy-JH
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:50:32 +0000
+ id 1woj8W-0000ZJ-6t
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:50:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woj8Z-004rVO-UR; Tue, 28 Jul 2026 16:50:31 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1woj8V-00EhwD-JS; Tue, 28 Jul 2026 16:50:27 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a68c1a9-bab6-0a2a0a5309dd-0a2a4502e3e6-6
- for <multiple-recipients>; Tue, 28 Jul 2026 16:50:23 +0200
+ id 6a68c1a5-5cb7-0a2a0a5109dd-0a2a450cb8be-20
+ for <multiple-recipients>; Tue, 28 Jul 2026 16:50:22 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a68c1ae-6ca4-0a2a45020019-5a9b3222b0a6-3
+ id 6a68c1ae-f479-0a2a450c0019-5a9b3222b0a0-3
  for <multiple-recipients>; Tue, 28 Jul 2026 16:50:22 +0200
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1woj80-0000000DUP6-2hqC; Tue, 28 Jul 2026 14:49:57 +0000
+ id 1woj80-0000000DUOo-0Osr; Tue, 28 Jul 2026 14:49:56 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.4 #2 (Red
- Hat Linux)) id 1woj80-00000001UZl-1jZF;
- Tue, 28 Jul 2026 15:49:56 +0100
+ Hat Linux)) id 1woj7z-00000001UYb-2tcQ;
+ Tue, 28 Jul 2026 15:49:55 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,12 +56,12 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
 	Cc:Content-Type:Content-ID:Content-Description;
-	bh=u9O6eMJWPEiCuOzOKx7hWrotGcpuvpoKHiLFSq+dRQ8=; b=osmvVwXK3BKgOGHTz3sUtx96/m
-	MVqS38yzmvoisPEV4JzC8iatafIsLOvPbq2WoaXL0eyurSYWe5ZpyEbk/fKjgX1Y219V0NhLiNLjy
-	sfBFcLNp+K8sW9GeErWzYSt+wDd3mUdylsDI1Xn7LH7jfI0/x6W4NIsX914Bc3mhweI6xCi2PANEg
-	ZRA1YaIJytIo+pGgSqv/toZ6/5C3A0M+6a8jTklX5vbPhL7B0HDJCcIZxACI3vdi+XiIUT3fQEmUn
-	OqhvYfXy+wTehcYsu2OnMeXQRIetKHLG2LEWFUwd/8tlL85xjmTwJ6uEfe+n4ac0zT5aatCCpYHSS
-	Qi/4nLtA==;
+	bh=eanGRtFbt0e/6VhCHpzLvK8yKD/dtj+EuVn1/O+45Sw=; b=U3C5lpvyJz2mfvqci4tSiwtFKR
+	7OfszrTn9ujeY4IvnPfYSPiaKWDcs5nUWKHCYvFBqFeWmYlBfPsyhfH91PbeoVs1G8Bsq6yQg8n8E
+	JNCWozAd2Tm3OIPcpECeNpzaB0nWzmoUHOlo25IZHiSsRXA8WkwWfRkivYLeVi2Ql6nIMyZr/6cN2
+	hk7TzoiQJqvBLvdrkRxnqV9VMszyqZVxinmFPgXX9iTUn2knE7O9gqHZ2vzq2UEdzzjwt4r8uJVKD
+	IbngnRVRx+EOrhmOKu8OF0gWy9ywFBg0RaybNSIucFtxxTOn6QjwuftuHS/I4uOIFhz+nYL58Hfb1
+	M69m13yw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	Jonathan Corbet <corbet@lwn.net>,
@@ -90,9 +90,9 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v7 30/36] KVM: selftests: Use UAPI pvclock-abi.h in xen_shinfo_test
-Date: Tue, 28 Jul 2026 15:40:10 +0100
-Message-ID: <20260728144954.355376-31-dwmw2@infradead.org>
+Subject: [PATCH v7 16/36] KVM: x86: Replace nr_vcpus_matched_tsc count with all_vcpus_matched_tsc bool
+Date: Tue, 28 Jul 2026 15:39:56 +0100
+Message-ID: <20260728144954.355376-17-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260728144954.355376-1-dwmw2@infradead.org>
 References: <20260728144954.355376-1-dwmw2@infradead.org>
@@ -100,48 +100,78 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-720697/1785250223-313CC2AC-F7E6D4E7/0/0
+X-purgate-ID: tlsNG-d25034/1785250222-01CC3A5B-3DFB382D/0/0
 X-purgate-type: clean
-X-purgate-size: 1138
+X-purgate-size: 2850
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Now that pvclock-abi.h is a UAPI header, use it in xen_shinfo_test.c
-instead of locally duplicating the struct definitions.
+Using a count and comparing with kvm->online_vcpus was always racy
+because a new vCPU could be created while kvm_track_tsc_matching() was
+running and comparing with kvm->online_vcpus. That variable is only
+atomic with respect to itself; kvm_arch_vcpu_create() runs before
+kvm->online_vcpus is incremented for the new vCPU.
+
+Replace the count with a boolean that is set in kvm_track_tsc_matching()
+after comparing the count, and cleared when a new TSC generation starts.
+The boolean is consumed by pvclock_update_vm_gtod_copy() under the
+tsc_write_lock, which serializes against __kvm_synchronize_tsc().
+
+Keep the count for now as it's still used in the trace event.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- .../testing/selftests/kvm/x86/xen_shinfo_test.c | 17 +----------------
- 1 file changed, 1 insertion(+), 16 deletions(-)
+ arch/x86/include/asm/kvm_host.h |  1 +
+ arch/x86/kvm/x86.c              | 10 ++++++----
+ 2 files changed, 7 insertions(+), 4 deletions(-)
 
-diff --git a/tools/testing/selftests/kvm/x86/xen_shinfo_test.c b/tools/testing/selftests/kvm/x86/xen_shinfo_test.c
-index 5076f6a75455..2f241ca4f096 100644
---- a/tools/testing/selftests/kvm/x86/xen_shinfo_test.c
-+++ b/tools/testing/selftests/kvm/x86/xen_shinfo_test.c
-@@ -98,22 +98,7 @@ struct sched_poll {
- 	u64 timeout;
- };
+diff --git a/arch/x86/include/asm/kvm_host.h b/arch/x86/include/asm/kvm_host.h
+index 2f01f3f9ba97..46919fe1cf4b 100644
+--- a/arch/x86/include/asm/kvm_host.h
++++ b/arch/x86/include/asm/kvm_host.h
+@@ -1238,6 +1238,7 @@ struct kvm_arch {
+ 	u64 cur_tsc_write;
+ 	u64 cur_tsc_offset;
+ 	u64 cur_tsc_generation;
++	bool all_vcpus_matched_tsc;
+ 	int nr_vcpus_matched_tsc;
  
--struct pvclock_vcpu_time_info {
--	u32   version;
--	u32   pad0;
--	u64   tsc_timestamp;
--	u64   system_time;
--	u32   tsc_to_system_mul;
--	s8    tsc_shift;
--	u8    flags;
--	u8    pad[2];
--} __attribute__((__packed__)); /* 32 bytes */
--
--struct pvclock_wall_clock {
--	u32   version;
--	u32   sec;
--	u32   nsec;
--} __attribute__((__packed__));
-+#include <asm/pvclock-abi.h>
+ 	u32 default_tsc_khz;
+diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+index dceb6d3660a2..d3c4009b92bc 100644
+--- a/arch/x86/kvm/x86.c
++++ b/arch/x86/kvm/x86.c
+@@ -1112,8 +1112,10 @@ static void kvm_track_tsc_matching(struct kvm_vcpu *vcpu, bool new_generation)
+ 	 * and all vCPUs must have matching TSCs.  Note, the count for matching
+ 	 * vCPUs doesn't include the reference vCPU, hence "+1".
+ 	 */
+-	bool use_master_clock = (ka->nr_vcpus_matched_tsc + 1 ==
+-				 atomic_read(&vcpu->kvm->online_vcpus)) &&
++	ka->all_vcpus_matched_tsc = (ka->nr_vcpus_matched_tsc + 1 ==
++				     atomic_read(&vcpu->kvm->online_vcpus));
++
++	bool use_master_clock = ka->all_vcpus_matched_tsc &&
+ 				gtod_is_based_on_tsc(gtod->clock.vclock_mode);
  
- struct vcpu_runstate_info {
- 	u32 state;
+ 	/*
+@@ -1298,6 +1300,7 @@ static void __kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 offset, u64 tsc,
+ 		kvm->arch.cur_tsc_write = tsc;
+ 		kvm->arch.cur_tsc_offset = offset;
+ 		kvm->arch.nr_vcpus_matched_tsc = 0;
++		kvm->arch.all_vcpus_matched_tsc = false;
+ 	} else if (vcpu->arch.this_tsc_generation != kvm->arch.cur_tsc_generation) {
+ 		kvm->arch.nr_vcpus_matched_tsc++;
+ 	}
+@@ -1614,8 +1617,7 @@ static void pvclock_update_vm_gtod_copy(struct kvm *kvm)
+ 	bool host_tsc_clocksource, vcpus_matched;
+ 
+ 	lockdep_assert_held(&kvm->arch.tsc_write_lock);
+-	vcpus_matched = (ka->nr_vcpus_matched_tsc + 1 ==
+-			atomic_read(&kvm->online_vcpus));
++	vcpus_matched = ka->all_vcpus_matched_tsc;
+ 
+ 	/*
+ 	 * If the host uses TSC clock, then passthrough TSC as stable
 -- 
 2.55.0
 
