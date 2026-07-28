@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4940AC53219
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 13:50:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374244.1621280 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7154C54F4C
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 13:51:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374253.1621289 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woiCm-00067N-Te; Tue, 28 Jul 2026 13:50:48 +0000
+	id 1woiD6-0006eo-57; Tue, 28 Jul 2026 13:51:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374244.1621280; Tue, 28 Jul 2026 13:50:48 +0000
+Received: by outflank-mailman (output) from mailman id 1374253.1621289; Tue, 28 Jul 2026 13:51:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woiCm-00067G-Qm; Tue, 28 Jul 2026 13:50:48 +0000
-Received: by outflank-mailman (input) for mailman id 1374244;
- Tue, 28 Jul 2026 13:50:47 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1woiD6-0006eh-1t; Tue, 28 Jul 2026 13:51:08 +0000
+Received: by outflank-mailman (input) for mailman id 1374253;
+ Tue, 28 Jul 2026 13:51:06 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1woiCl-00066s-4k
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 13:50:47 +0000
+ (envelope-from <jbeulich@suse.com>) id 1woiD4-0006cW-EY
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 13:51:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woiCk-00EvdR-Hn
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 15:50:46 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1woiD3-00BRHU-RL
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 15:51:05 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68b3b4-2eae-0a2a0a5409dd-0a2a450ba9bc-10
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:50:46 +0200
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a68b3c9-5cb7-0a2a0a5109dd-0a2a4505837a-0
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:51:05 +0200
+Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68b3b6-b7e8-0a2a450b0019-d1558036ad62-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:50:46 +0200
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-49558ce01afso29242115e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 06:50:46 -0700 (PDT)
+ id 6a68b3c9-4cb1-0a2a45050019-d155dd34dc83-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:51:05 +0200
+Received: by mail-wr1-f52.google.com with SMTP id
+ ffacd0b85a97d-47f92e3c14bso3499450f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 06:51:05 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-496c45ba4b0sm82523515e9.6.2026.07.28.06.50.44
+ ffacd0b85a97d-47f85c63bd3sm58862990f8f.27.2026.07.28.06.51.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Jul 2026 06:50:45 -0700 (PDT)
+ Tue, 28 Jul 2026 06:51:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,49 +55,48 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785246646; x=1785851446; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785246665; x=1785851465; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=VGDGiJPmLE14ZfHvAKCk4xWyMnkwoww93SfDim7yWaQ=;
-        b=WkvRLoUkTWG2LO9sbo7gqaI6+j3u3mBB6kGyP0bXzVSv7dLYbTzPubWjztRbyfmSrP
-         rWlBxTDuxAk/adtMStVBpuPfWJ4B/AfAg+T0YYh82zu1MR7l5/iAENgMO1GV+pBJF0eS
-         WwYMk/H3OopvPSRqOJKSe6yxQHyobiaz1Bn0BGdwZ8qqPMq1Dz+O+4FZDkKXDoXqaTn/
-         Vdd6rg3gHnO7AaSVEaOx7866dYGg0yGSdu/R2oqustXoxttZ1AAAr7NyxWuqzsaEtYSD
-         3vlgM7fdPk+XnkiwvNi0k+I/AHloCrbIP/aXJmm0VvmNbEN/5j4AEdg9zdQsAqKAYzT8
-         UBfw==
+        bh=VmsmB3SZeOUc6ARdQUTuy227vcpv9NvZgtecFoLVbnQ=;
+        b=PlyahEoMAkNJnMPwvL3Afr4EX87EozkpBZrMqh9bwRT+j22wZcmw5rFeP624PXP4VA
+         hetl9IqBI3UwcKeOVk3F+rWFf+7i+b+5o0KTOkYe4QtR3u8yi07PiWTg3xjyAd8+LtG0
+         S42qcEMwS2Kbxo9VRJVtp2FgDUx+0BPDqvtC1m8mjyv9sbid9oLKhe/6zQaGtq5UOkDC
+         9GjRMy263qsrIK7IHaOiAlgCObC56KgGaId9BsxlcktBiqhqEEHhy+ZmBXZpDxJG7d9c
+         kMd58dvwUtS1gK1+DZUlVLGEmBnuZv6yniFmbLTpXAbhLZkDROAySdSHiFRQw4hOJoMq
+         JaWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785246646; x=1785851446;
+        d=1e100.net; s=20251104; t=1785246665; x=1785851465;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=VGDGiJPmLE14ZfHvAKCk4xWyMnkwoww93SfDim7yWaQ=;
-        b=Dfz1ysCG7Rr1ynzM7sdMDUTyAIlkQwxT6RvY/g8ag9KkRnvyNzGBx6btAzKL8efkWU
-         Czd1MVGrBpWoggEa5QZ33e80Vhcd/7206KIZ+Gqh5Ul0WxKhw39u9PSYEQVJmD8CFue8
-         YHOLduszoYRLLm2RGKsEMeQ4lVY/s9oioXjfYz4Ztp1BjSukIBmskk+UKS0Z5cOEAO1H
-         uwFV31cb2RBejdYsCnPS8egrhn2CjCpluVyBmVKddWz88EWix0Ot61MLiY+GxylCqTiz
-         WRcjANVyUjt9rQ45/PwTMuFHrP6LUFq1jSAHRyULeyeUezcFcvb3jlwjW7tO5n5mj+dG
-         Sxcg==
-X-Gm-Message-State: AOJu0YxYR2ijeXExwVmTk4aJYPDuAIu6vh13Tbpi+JYW/dNmLNHEpQeB
-	cgpCguzhGDAp+Ynrd9qcRyF7JEh0EDJGHmMxcMfjQC64ucU/TpHhnh6unzt6+fhzb+adr4j5KMH
-	a6JnPqg==
-X-Gm-Gg: AR+sD12hBF09fUNzUl3zE3n/DeF7lRCkBuP/0onZeOmsP3N0est+n9Aegu/lwaa+3kF
-	Sfc80kThCUN2xZPd6dN4Imf9jAQ78P1asCceETKL89kYzk/nxBacmfAJ0Aj+mLfL6lwJC0nLFSy
-	i/8ivVctZdBeFDxX3NttwgYMjCBgE1JF2lCYj3L5eLSk23RTJG7sz0pi/ftTBdr0asrO97MZk8A
-	VZKiL6yitsJPX/84rrHepTGE9w1JBT7Q8+JwDl1IYYfNQyRc3C68YqixjYiWdUN4aE4hf7h64Ji
-	0wnxRrkpDaajVyOgUMo/C7o0M3ctHIbfvS+XDLoo4xNT/hAk2b8hMHIILeMDlLf8gowulbIuMKE
-	jz48zlg2g775UhZMeH7ad2RAG4eIKpnnxbXgiErlosZNiei3HNwApZYeR5MXyXmP4lTomuxGfAZ
-	Q0bqQfPjpIc7rfsdCce4z8XrJh5oGn8byl16Eo5FBSlwb4S/iXHBzSLEnedF47okJKckTNB/CGL
-	X0b
-X-Received: by 2002:a05:600c:1c07:b0:496:c8d5:aa5e with SMTP id 5b1f17b1804b1-496c8d5aa8emr17145795e9.29.1785246645893;
-        Tue, 28 Jul 2026 06:50:45 -0700 (PDT)
-Message-ID: <9ad78491-7759-483d-8ef9-91b026efb83f@suse.com>
-Date: Tue, 28 Jul 2026 15:50:44 +0200
+        bh=VmsmB3SZeOUc6ARdQUTuy227vcpv9NvZgtecFoLVbnQ=;
+        b=NV7+gDKFHCV5W6HNWkiCssWgo0mJwH8jnAHOmwIlmddnU1LBQB+v8sFVAA3xq77LGS
+         BwRHPlLOLK8g9mAxBNse/z1kbpK2rutR4B905w5PVId4UxLgxbVgaBsjrAHA++hxdikq
+         H+1lVbK8BkKK1aBbbPgTBwEKPF8qdjoQwwo7+YQf7tiHd318Wc/Gp8OvJJT87T/EOS30
+         cPxTccpTWXu8FF2Ytt24dI4RQifD8d0Sv04vK+1DnnirX+UqWYnkiBCWt6T1Lm0zDqtR
+         8y/uGhNsxIl+UFxjVZ48WNHVTO/4xvjukpC4WBMVjvhCKUXFDkGeUx3Gc+xdrREgCJf0
+         2NVw==
+X-Gm-Message-State: AOJu0YyhN149SVWsse2Oqo6svorN6o5HFf/o/dr1aO4Edrn4KNA8AbXI
+	kE5b74xlYITirWD0DU4f3nMg0QdtsutZK6xmnP/VuPfFiGfay+KsIOb4v1/WKZ6glui6NjIySOW
+	QEh+Fug==
+X-Gm-Gg: AR+sD125B/O+S7iMuWHS/bESZ4L3iqy//EAxKA6k75G8caBLejVTcyihG89WgSVUEjH
+	x6utBjLSjXWEJcORdk00fGgjWyy1RZmSubeaQUXWuzvWXvlhBWzknDCDZtr8M9WZQ2Y4Es1Eck7
+	NX2K2pKXPqx3i/ie+AXv43VlVIgdaQkxTqhQlVyFTPRqsP1/TxtpEFnW44uKApWERsVFQ8NdCok
+	XNqOjcp9exf1t3oD2rR+w5rggMikSEBuQFgbKKTM+xdM2AGRwC0XpK6OblvaHUWzLir3TzBb3mF
+	DPgs5y5euROi0xZqfw+411iE5kGN6YWOpcSaToVngGGi6zqGFCTxroF2e3K3ejoqI1dD4NiD9bz
+	2AYFuXMNa0yGljs77/HAuaR0s33qELn+7GNEzJvD4/07NARHqC+6nQqn+78me6a2KQRNe2OFEd3
+	wfHFq1gPfqAsK0uwVVxpG4ei6Ei4uyk2W47ywSzF7OXYsUw8brgF9xfRwuqzjIdXHgqQ==
+X-Received: by 2002:a05:6000:707:b0:47f:90df:4ec6 with SMTP id ffacd0b85a97d-47fb1e5ffa9mr2814316f8f.6.1785246665147;
+        Tue, 28 Jul 2026 06:51:05 -0700 (PDT)
+Message-ID: <7392c56e-7250-496f-bb66-bdb6c04d3ed4@suse.com>
+Date: Tue, 28 Jul 2026 15:51:03 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 2/7] gnttab: limit scope of transitive-only variables in
+Subject: [PATCH 3/7] gnttab: fold redundant error code paths in
  acquire_grant_for_copy()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
@@ -133,97 +132,52 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <38850629-8bfa-4737-99ff-0fd3f489e56e@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1785246646-A9EC69EA-3DEED1D2/0/0
+X-purgate-ID: tlsNG-c201ff/1785246665-F4EA12A1-19DF5A0E/0/0
 X-purgate-type: clean
-X-purgate-size: 3238
+X-purgate-size: 1370
 
-Especially their use outside of the transitive grant handling code can be
-confusing. Two of the variables were merely used as aliases in the "needs
-pin update" path, while one of them was purely used because it's available
-in the "already pinned" case.
-
-trans_{page_off,length} remain where they are: They're misnamed imo, and
-would better be sub_page_{off,len}.
+One of the open-coded error paths of transitive grant handling is an exact
+match of the code at the unlock_out_clear label. The other can be made so
+by moving the put_page() earlier.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
 --- a/xen/common/grant_table.c
 +++ b/xen/common/grant_table.c
-@@ -2608,9 +2608,6 @@ acquire_grant_for_copy(
-     grant_status_t *status;
-     unsigned int shflags;
-     uint32_t old_pin;
--    domid_t trans_domid;
--    grant_ref_t trans_gref;
--    struct domain *td;
-     mfn_t grant_mfn;
-     uint16_t trans_page_off;
-     uint16_t trans_length;
-@@ -2662,6 +2659,10 @@ acquire_grant_for_copy(
-     old_pin = act->pin;
-     if ( sha2 && (shflags & GTF_type_mask) == GTF_transitive )
-     {
-+        domid_t trans_domid;
-+        grant_ref_t trans_gref;
-+        struct domain *td;
-+
-         if ( (!old_pin || (!readonly &&
-                            !(old_pin & (GNTPIN_devw_mask|GNTPIN_hstw_mask)))) &&
-              (rc = _set_status_v2(shah, status, rd, act, readonly, 0,
-@@ -2803,8 +2804,6 @@ acquire_grant_for_copy(
-                                readonly, 0, ldom)) != GNTST_okay )
-              goto unlock_out;
- 
--        td = rd;
--        trans_gref = gref;
-         if ( !sha2 )
+@@ -2729,10 +2729,7 @@ acquire_grant_for_copy(
          {
-             gfn = shared_entry_v1(rgt, gref).frame;
-@@ -2841,16 +2840,16 @@ acquire_grant_for_copy(
-             act->is_sub_page = is_sub_page;
-             act->start = trans_page_off;
-             act->length = trans_length;
--            act->src_domid = td->domain_id;
--            act->trans_gref = trans_gref;
-+            act->src_domid = rd->domain_id;
-+            act->trans_gref = gref;
-             act->mfn = grant_mfn;
- 
-             if ( is_sub_page )
-                 atomic_inc(&rgt->nr_v2_ops);
+             atomic_dec(&rgt->nr_v2_ops);
+             rcu_unlock_domain(td);
+-            reduce_status_for_pin(rd, act, status, readonly);
+-            active_entry_release(act);
+-            grant_read_unlock(rgt);
+-            return rc;
++            goto unlock_out_clear;
          }
-         else if ( !mfn_eq(act->mfn, grant_mfn) ||
--                  act->src_domid != td->domain_id ||
--                  act->trans_gref != trans_gref ||
-+                  act->src_domid != rd->domain_id ||
-+                  act->trans_gref != gref ||
-                   (act->is_sub_page &&
-                    (!is_sub_page ||
-                     act->start != trans_page_off ||
-@@ -2866,9 +2865,11 @@ acquire_grant_for_copy(
-     }
-     else
-     {
-+        struct domain *d;
-+
-         ASSERT(mfn_valid(act->mfn));
-         *page = mfn_to_page(act->mfn);
--        td = page_get_owner_and_reference(*page);
-+        d = page_get_owner_and_reference(*page);
+ 
          /*
-          * act->pin being non-zero should guarantee the page to have a
-          * non-zero refcount and hence a valid owner (matching the one on
-@@ -2877,9 +2878,9 @@ acquire_grant_for_copy(
-          * updates pin counts before obtaining page references, for
-          * example).
-          */
--        if ( td != rd || rd->is_dying )
-+        if ( d != rd || rd->is_dying )
-         {
--            if ( td )
-+            if ( d )
-                 put_page(*page);
-             *page = NULL;
-             rc = GNTST_bad_domain;
+@@ -2763,17 +2760,16 @@ acquire_grant_for_copy(
+             release_grant_for_copy(td, trans_gref, readonly);
+             rcu_unlock_domain(td);
+ 
++            put_page(*page);
++            *page = NULL;
++
+             grant_read_lock(rgt);
+             atomic_dec(&rgt->nr_v2_ops);
+ 
+             act = active_entry_acquire(rgt, gref);
+-            reduce_status_for_pin(rd, act, status, readonly);
+-            active_entry_release(act);
+-            grant_read_unlock(rgt);
+ 
+-            put_page(*page);
+-            *page = NULL;
+-            return ERESTART;
++            rc = ERESTART;
++            goto unlock_out_clear;
+         }
+ 
+         if ( !old_pin )
 
 
