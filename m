@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDE88C54F55
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:50:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374499.1621688 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7EB5C54F54
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:50:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374509.1621770 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woj8I-0005tD-1x; Tue, 28 Jul 2026 14:50:14 +0000
+	id 1woj8S-0008KI-MK; Tue, 28 Jul 2026 14:50:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374499.1621688; Tue, 28 Jul 2026 14:50:13 +0000
+Received: by outflank-mailman (output) from mailman id 1374509.1621770; Tue, 28 Jul 2026 14:50:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woj8H-0005pp-L9; Tue, 28 Jul 2026 14:50:13 +0000
-Received: by outflank-mailman (input) for mailman id 1374499;
- Tue, 28 Jul 2026 14:50:10 +0000
+	id 1woj8R-0008IO-T3; Tue, 28 Jul 2026 14:50:23 +0000
+Received: by outflank-mailman (input) for mailman id 1374509;
+ Tue, 28 Jul 2026 14:50:16 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1woj8C-00058C-IY
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:50:10 +0000
+ <BATV+0bab86ec5884d1af5d78+8374+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1woj8I-00060V-Bx
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:50:16 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woj8B-00Ehpw-OC; Tue, 28 Jul 2026 16:50:07 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1woj8H-00EhwD-Oh; Tue, 28 Jul 2026 16:50:13 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a68c197-2eae-0a2a0a5409dd-0a2a4509d620-12
- for <multiple-recipients>; Tue, 28 Jul 2026 16:50:07 +0200
-Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <BATV+0bab86ec5884d1af5d78+8374+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 6a68c1a5-5cb7-0a2a0a5109dd-0a2a450cb8be-0
+ for <multiple-recipients>; Tue, 28 Jul 2026 16:50:13 +0200
+Received: from [90.155.92.199] (helo=desiato.infradead.org)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a68c19f-be1a-0a2a45090019-5a9b3222e786-3
- for <multiple-recipients>; Tue, 28 Jul 2026 16:50:07 +0200
+ <BATV+0bab86ec5884d1af5d78+8374+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 6a68c1a4-f479-0a2a450c0019-5a9b5cc78090-3
+ for <multiple-recipients>; Tue, 28 Jul 2026 16:50:13 +0200
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1woj80-0000000DUOk-0PS1; Tue, 28 Jul 2026 14:49:57 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.99.2 #2 (Red Hat Linux))
+ id 1woj82-000000052Vd-33c7; Tue, 28 Jul 2026 14:49:59 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.4 #2 (Red
- Hat Linux)) id 1woj7z-00000001UYG-1d7k;
+ Hat Linux)) id 1woj7z-00000001UZ8-3up5;
  Tue, 28 Jul 2026 15:49:55 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -51,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=desiato.20200630 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:
-	From:Reply-To:Cc:Content-ID:Content-Description;
-	bh=+I3dInpptLqTW26MdB6BEu7uqX7SVYa01mQD7irMSeI=; b=XtKNCiknoJw9CdufrCRb6Qkxg3
-	5JVjfUAy3Qvd53x8eFTkkhBvRaaX+/ve6hijfLYVVWfnXLXAsQcgZUKS9kPtBB4ZZ1HPC+DScHJBd
-	JoNaHYZC0GhqXTHr/dwb3HaGAkCUD0CZb4I/sQN1hWpTYpk7e+KcuhK3PSxZklOg2kbk1FZNyhu9t
-	fVtCKZQC94T7q/P7m4MdZXyVODtVPrBXB3VxmDGS+CBDjcVfRJWF3ykUFtNIe7dVFEdBTjDuB7UgA
-	ArT0WakOTueOrz2XPs0FPni6KS+nptBZrwAlwanzw0p6jCF7IFSeBrjZ08H1s4LXwoy/MCcxBIQ4t
-	Y1CvLU7g==;
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
+	Cc:Content-Type:Content-ID:Content-Description;
+	bh=1SfIHepEq3J7+SYj5KFg2Bkl7CKo6vSyjVCrF+poSEs=; b=TqzVc2Ug4pWcAQpipk4b7x8bv4
+	PzfQaaItDAYUXMB23oD/H43IwloUM5wWThs1JICBh7rS1kPIafJ+A6rHWECVUZaBQ43PfkrtNCTO9
+	3N24Y3Um4xOlLSvteLpQf3jgxhfzOZedF5sCo9TsJkRlh3PbjVzkYrOUG6p2zA5EJdqqNXR0eDboi
+	c098UJkVJyzPGUl6mLtVGz7rivsFlOD3/iH0zpbOU2BbUflleTSe7UdztUEiLRaASNACAKgBk3cnA
+	Fx2n4/hneTFqzwoF7no1fwD7p+z0mIKbLfwkxk4Eije8AZqDu0UEFvFrk61LcuCMXBDgtldtJwKf9
+	iIdsO0rQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	Jonathan Corbet <corbet@lwn.net>,
@@ -90,116 +90,162 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v7 09/36] KVM: x86: Use get_kvmclock() in kvm_get_wall_clock_epoch()
-Date: Tue, 28 Jul 2026 15:39:49 +0100
-Message-ID: <20260728144954.355376-10-dwmw2@infradead.org>
+Subject: [PATCH v7 21/36] KVM: x86: Avoid redundant masterclock updates from multiple vCPUs
+Date: Tue, 28 Jul 2026 15:40:01 +0100
+Message-ID: <20260728144954.355376-22-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260728144954.355376-1-dwmw2@infradead.org>
 References: <20260728144954.355376-1-dwmw2@infradead.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-bad1c0/1785250207-FD668034-CFDEC24A/0/0
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-d25034/1785250213-774D7A5B-A98F0F14/0/0
 X-purgate-type: clean
-X-purgate-size: 3232
+X-purgate-size: 5177
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Now that get_kvmclock() correctly handles TSC scaling and captures both
-wallclock and kvmclock from the same TSC reading,
-kvm_get_wall_clock_epoch() can simply call it instead of duplicating
-the pvclock computation.
+When a masterclock update is triggered (e.g. by the clocksource change
+notifier), KVM_REQ_MASTERCLOCK_UPDATE is set on all vCPUs. Without this
+fix, each vCPU independently processes the request and redundantly
+re-executes the entire pvclock_update_vm_gtod_copy() sequence, serialized
+only by tsc_write_lock. Each redundant re-snapshot of the master clock
+reference point introduces potential clock drift.
 
-This eliminates the last instance of the "definition C" kvmclock
-calculation — as described in commit 710b3a30f407 ("KVM: x86/xen: Do
-not corrupt KVM clock in kvm_xen_shared_info_init()") — which computed
-nanoseconds directly from the host TSC without accounting for guest
-TSC scaling.
+Fix this by having __kvm_start_pvclock_update() check, after acquiring
+the lock, whether the requesting vCPU's KVM_REQ_MASTERCLOCK_UPDATE is
+still set. If another vCPU already did the update and cleared it, bail
+out. Otherwise, clear the request on all other vCPUs before proceeding.
 
+The caller in vcpu_enter_guest() now uses kvm_test_request() (non-clearing)
+since the clearing is done inside __kvm_start_pvclock_update() under the
+lock.
+
+Suggested-by: Dongli Zhang <dongli.zhang@oracle.com>
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Tested-by: Dongli Zhang <dongli.zhang@oracle.com>
 ---
- arch/x86/kvm/x86.c | 59 +++++++---------------------------------------
- 1 file changed, 9 insertions(+), 50 deletions(-)
+ arch/x86/kvm/x86.c | 60 +++++++++++++++++++++++++++++++++++-----------
+ 1 file changed, 46 insertions(+), 14 deletions(-)
 
 diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index c00b1e19c3af..f7a9fb69e69d 100644
+index 83db915ef1d4..06f968007f1a 100644
 --- a/arch/x86/kvm/x86.c
 +++ b/arch/x86/kvm/x86.c
-@@ -1930,63 +1930,22 @@ int kvm_guest_time_update(struct kvm_vcpu *v)
-  * wallclock and kvmclock times, and subtracting one from the other.
-  *
-  * Fall back to using their values at slightly different moments by
-- * calling ktime_get_real_ns() and get_kvmclock_ns() separately.
-+ * calling ktime_get_real_ns() and get_kvmclock() separately.
-  */
- uint64_t kvm_get_wall_clock_epoch(struct kvm *kvm)
+@@ -1727,10 +1727,39 @@ static void kvm_make_mclock_inprogress_request(struct kvm *kvm)
+ 	kvm_make_all_cpus_request(kvm, KVM_REQ_MCLOCK_INPROGRESS);
+ }
+ 
+-static void __kvm_start_pvclock_update(struct kvm *kvm)
++static void kvm_clear_mclock_inprogress_request(struct kvm *kvm)
  {
--#ifdef CONFIG_X86_64
--	struct pvclock_vcpu_time_info hv_clock;
--	struct kvm_arch *ka = &kvm->arch;
--	unsigned long seq, local_tsc_khz;
--	struct timespec64 ts;
--	uint64_t host_tsc;
--
--	do {
--		seq = read_seqcount_begin(&ka->pvclock_sc);
--
--		local_tsc_khz = 0;
--		if (!ka->use_master_clock)
--			break;
--
--		/*
--		 * The TSC read and the call to get_cpu_tsc_khz() must happen
--		 * on the same CPU.
--		 */
--		get_cpu();
--
--		local_tsc_khz = get_cpu_tsc_khz();
--
--		if (local_tsc_khz &&
--		    !kvm_get_walltime_and_clockread(&ts, &host_tsc))
--			local_tsc_khz = 0; /* Fall back to old method */
--
--		put_cpu();
--
--		/*
--		 * These values must be snapshotted within the seqcount loop.
--		 * After that, it's just mathematics which can happen on any
--		 * CPU at any time.
--		 */
--		hv_clock.tsc_timestamp = ka->master_cycle_now;
--		hv_clock.system_time = ka->master_kernel_ns + ka->kvmclock_offset;
-+	struct kvm_clock_data data;
- 
--	} while (read_seqcount_retry(&ka->pvclock_sc, seq));
-+	get_kvmclock(kvm, &data);
- 
- 	/*
--	 * If the conditions were right, and obtaining the wallclock+TSC was
--	 * successful, calculate the KVM clock at the corresponding time and
--	 * subtract one from the other to get the guest's epoch in nanoseconds
--	 * since 1970-01-01.
-+	 * If get_kvmclock() captured both wallclock and kvmclock from the
-+	 * same TSC reading, use them for a precise epoch calculation.
- 	 */
--	if (local_tsc_khz) {
--		kvm_get_time_scale(NSEC_PER_SEC, local_tsc_khz * NSEC_PER_USEC,
--				   &hv_clock.tsc_shift,
--				   &hv_clock.tsc_to_system_mul);
--		return ts.tv_nsec + NSEC_PER_SEC * ts.tv_sec -
--			__pvclock_read_cycles(&hv_clock, host_tsc);
--	}
--#endif
--	return ktime_get_real_ns() - get_kvmclock_ns(kvm);
-+	if (data.flags & KVM_CLOCK_REALTIME)
-+		return data.realtime - data.clock;
++	struct kvm_vcpu *vcpu;
++	unsigned long i;
 +
-+	return ktime_get_real_ns() - data.clock;
++	kvm_for_each_vcpu(i, vcpu, kvm)
++		kvm_clear_request(KVM_REQ_MCLOCK_INPROGRESS, vcpu);
++}
++
++static bool __kvm_start_pvclock_update(struct kvm *kvm, struct kvm_vcpu *requesting_vcpu)
++{
++	struct kvm_vcpu *vcpu;
++	unsigned long i;
++
+ 	raw_spin_lock_irq(&kvm->arch.tsc_write_lock);
++
++	/*
++	 * If another vCPU already did the update while we were waiting
++	 * for the lock, our request will have been cleared. Bail out.
++	 */
++	if (requesting_vcpu &&
++	    !kvm_test_request(KVM_REQ_MASTERCLOCK_UPDATE, requesting_vcpu)) {
++		kvm_clear_mclock_inprogress_request(kvm);
++		raw_spin_unlock_irq(&kvm->arch.tsc_write_lock);
++		return false;
++	}
++
++	/* The update is VM-wide; prevent other vCPUs from redoing it. */
++	kvm_for_each_vcpu(i, vcpu, kvm)
++		kvm_clear_request(KVM_REQ_MASTERCLOCK_UPDATE, vcpu);
++
+ 	write_seqcount_begin(&kvm->arch.pvclock_sc);
++	return true;
+ }
+ 
+ static void kvm_start_pvclock_update(struct kvm *kvm)
+@@ -1738,7 +1767,7 @@ static void kvm_start_pvclock_update(struct kvm *kvm)
+ 	kvm_make_mclock_inprogress_request(kvm);
+ 
+ 	/* no guest entries from this point */
+-	__kvm_start_pvclock_update(kvm);
++	__kvm_start_pvclock_update(kvm, NULL);
+ }
+ 
+ static void kvm_end_pvclock_update(struct kvm *kvm)
+@@ -1747,22 +1776,25 @@ static void kvm_end_pvclock_update(struct kvm *kvm)
+ 	struct kvm_vcpu *vcpu;
+ 	unsigned long i;
+ 
+-	write_seqcount_end(&ka->pvclock_sc);
+-	raw_spin_unlock_irq(&ka->tsc_write_lock);
+ 	kvm_for_each_vcpu(i, vcpu, kvm)
+ 		kvm_make_request(KVM_REQ_CLOCK_UPDATE, vcpu);
+ 
+ 	/* guest entries allowed */
+-	kvm_for_each_vcpu(i, vcpu, kvm)
+-		kvm_clear_request(KVM_REQ_MCLOCK_INPROGRESS, vcpu);
++	kvm_clear_mclock_inprogress_request(kvm);
++
++	write_seqcount_end(&ka->pvclock_sc);
++	raw_spin_unlock_irq(&ka->tsc_write_lock);
+ }
+ 
+-static void kvm_update_masterclock(struct kvm *kvm)
++static void kvm_update_masterclock(struct kvm *kvm, struct kvm_vcpu *vcpu)
+ {
+ 	kvm_hv_request_tsc_page_update(kvm);
+-	kvm_start_pvclock_update(kvm);
+-	pvclock_update_vm_gtod_copy(kvm);
+-	kvm_end_pvclock_update(kvm);
++	kvm_make_mclock_inprogress_request(kvm);
++
++	if (__kvm_start_pvclock_update(kvm, vcpu)) {
++		pvclock_update_vm_gtod_copy(kvm);
++		kvm_end_pvclock_update(kvm);
++	}
  }
  
  /*
+@@ -6822,7 +6854,7 @@ static void kvm_hyperv_tsc_notifier(void)
+ 	kvm_caps.max_guest_tsc_khz = tsc_khz;
+ 
+ 	list_for_each_entry(kvm, &vm_list, vm_list) {
+-		__kvm_start_pvclock_update(kvm);
++		__kvm_start_pvclock_update(kvm, NULL);
+ 		pvclock_update_vm_gtod_copy(kvm);
+ 		kvm_end_pvclock_update(kvm);
+ 	}
+@@ -8204,8 +8236,8 @@ static int vcpu_enter_guest(struct kvm_vcpu *vcpu)
+ 			kvm_mmu_free_obsolete_roots(vcpu);
+ 		if (kvm_check_request(KVM_REQ_MIGRATE_TIMER, vcpu))
+ 			__kvm_migrate_timers(vcpu);
+-		if (kvm_check_request(KVM_REQ_MASTERCLOCK_UPDATE, vcpu))
+-			kvm_update_masterclock(vcpu->kvm);
++		if (kvm_test_request(KVM_REQ_MASTERCLOCK_UPDATE, vcpu))
++			kvm_update_masterclock(vcpu->kvm, vcpu);
+ 		if (kvm_check_request(KVM_REQ_GLOBAL_CLOCK_UPDATE, vcpu))
+ 			kvm_gen_kvmclock_update(vcpu);
+ 		if (kvm_check_request(KVM_REQ_CLOCK_UPDATE, vcpu)) {
+@@ -9557,7 +9589,7 @@ void kvm_arch_vcpu_postcreate(struct kvm_vcpu *vcpu)
+ 	vcpu_load(vcpu);
+ 	kvm_synchronize_tsc(vcpu, NULL);
+ 	if (!vcpu->kvm->arch.use_master_clock)
+-		kvm_update_masterclock(vcpu->kvm);
++		kvm_update_masterclock(vcpu->kvm, NULL);
+ 	vcpu_put(vcpu);
+ 
+ 	/* poll control enabled by default */
 -- 
 2.55.0
 
