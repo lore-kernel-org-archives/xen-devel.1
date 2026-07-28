@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74E41C53219
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 13:52:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374265.1621307 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7646BC54F4C
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 13:52:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374276.1621316 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woiDn-0007gt-L6; Tue, 28 Jul 2026 13:51:51 +0000
+	id 1woiEM-0008LH-0e; Tue, 28 Jul 2026 13:52:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374265.1621307; Tue, 28 Jul 2026 13:51:51 +0000
+Received: by outflank-mailman (output) from mailman id 1374276.1621316; Tue, 28 Jul 2026 13:52:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woiDn-0007gl-H6; Tue, 28 Jul 2026 13:51:51 +0000
-Received: by outflank-mailman (input) for mailman id 1374265;
- Tue, 28 Jul 2026 13:51:50 +0000
+	id 1woiEL-0008LA-U8; Tue, 28 Jul 2026 13:52:25 +0000
+Received: by outflank-mailman (input) for mailman id 1374276;
+ Tue, 28 Jul 2026 13:52:24 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1woiDm-0007f2-Ja
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 13:51:50 +0000
+ (envelope-from <jbeulich@suse.com>) id 1woiEK-0008Kr-Dx
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 13:52:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woiDm-00BRgj-01
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 15:51:50 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1woiEJ-00EYkd-Qe
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 15:52:23 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68b3f0-bab6-0a2a0a5309dd-0a2a45029e8c-44
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:51:49 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a68b404-bab6-0a2a0a5309dd-0a2a4503b880-48
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:52:23 +0200
+Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68b3f5-6ca4-0a2a45020019-d155802cf133-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:51:49 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-49548aebcd8so28917165e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 06:51:49 -0700 (PDT)
+ id 6a68b417-fae8-0a2a45030019-d155dd33a4c1-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:52:23 +0200
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-4758bd3731bso933323f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 06:52:23 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-496c44afaecsm91547275e9.2.2026.07.28.06.51.48
+ ffacd0b85a97d-47f85bb5127sm55034291f8f.10.2026.07.28.06.52.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Jul 2026 06:51:48 -0700 (PDT)
+ Tue, 28 Jul 2026 06:52:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,48 +55,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785246709; x=1785851509; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785246743; x=1785851543; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=wUqQLSl9FHIBU5/My3xhEwCWgDaa9Jd42rl/ByxW6kQ=;
-        b=MxvLZcwYmXivdiEQumix3L4dVZYhRuaBkGWx1Q0ZJ2vSeX+dhOE5YEE/eooQds258U
-         YyaQqYA9FZmDV0IWbtJV3dVjclYm2wsSFUGXGgM4W5wVKvO/I8HtXQGO9gk79WmDStz1
-         yqmCNw1jqa+Kodz9+4uSwvyZxcC+oQmp2HYuOmDPkoyBcAv3Ucfzl6ePkHtm3JtbUegH
-         Od42ISpvp6v6uDh25Wbz22LTpoo+PGS5ornvpPVF3YHKIVdGYHNvt1Cw4BIa06Y4TPKz
-         Y9jyhtVrRpEW7xOAxh+K/e5GzqI3AqL8Pwk3QmUFtYdWiGS/eH0sxgnDlm6kS3lfgdI+
-         oO1A==
+        bh=sjq1+NwUBvPK4RcSVOHsjrwrht1DWC2Q5O4CPfABIqM=;
+        b=SI24Np5LbKlGkAOBvdOjHPyut1L+LTj+lwci/uT4FXx1Mnot569uAQDKVtbhxg1I+E
+         UESOCeVLPdUYkR6zClhQkaDMCa4HCoG1F4sWs1mR+ova2p5gzxNqmjMb2zleGk+DR5lK
+         352DtF7tLd2aSShooPHmfX7GI8Xig+YiEyJ9konI24lhPXChVPFJs14se4BdWJRK5nJf
+         lTFO7FpgK84j9lRf5AP7nRS+ARoDYmgEH7DyKgDeE9TE828Sqjhwd6eC8jmBAoAZRfri
+         KgsVA4B//qNML7pUgwcbldks2HZkWttROlV/hs8DhVEMicRmXSN8qNlcVDsDSaOlIWiI
+         x3Qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785246709; x=1785851509;
+        d=1e100.net; s=20251104; t=1785246743; x=1785851543;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=wUqQLSl9FHIBU5/My3xhEwCWgDaa9Jd42rl/ByxW6kQ=;
-        b=OACL3oI/a3TUastLxURcz57PK5RapGvVRLuSiwY7GpO1cItA6y7hlrf6dy8dQ3xBe/
-         A3D2a+WwNGY/bh3zFV9GzjI/OoByI/nj7nREMFSUzM7hYIicVy8xqY1RUJIuFR+fCvi7
-         NpNLWqD42r7jASqn8V/qRIY5DvLCuU2gKKsT6oHH9h+ODWNJZaH8jlssLhjn/u9Tjhl9
-         kDOFTMwIBPDFNTMv4dXTB3O57QwDUuUCHfK35yBuK5ZZjdxqLh0VQCjcG1si9smCIQL2
-         Z7tVIBHNOBNjZ45xe8+eN38G+bB+07ybduo790jE+ySL1dtAjIjMFDZf5hfRNXkQBY2D
-         TiYA==
-X-Gm-Message-State: AOJu0YyiMqzjyJ5yKuuNRniFSapYwK+qCCiC9NMyhMO36G0eAswy0uPy
-	PoEuQ0cnQCgOjtpUdEDj9fdcg2xcIKH/WM2BBz286Deme+I9N4/TaIbvyOmJ5QJl6QYUBo6Kc99
-	Qpzm2Xg==
-X-Gm-Gg: AR+sD11U+800tUHHQ9dohDwBMnTsHFMNOiBEXZfvBFH24GuKcRIy5euEavIuND5lJHg
-	oqqoiXtyu9mHGvYsaJnJrIebEEiPf9jWQJFYJYXhKPDg+u093ohpQVwxDgpT1tvH+uYm78z4TtC
-	z0+BXI0/QYoZ8xq165J7pt+IJdsMRPqEwBTd4OJBXRu5VsDt30EiVpyt+6BGTMgWjubMox8P4J0
-	EHhqjtosN2ejaA2aBjbdNl+u6ROEwgo4eqwy/XdDkAOqVM8fpbjvU0TtQtid/+o7QhoapE2eu8g
-	wwrX3JMbB5MHrV+5H16wUPXgsGPYrGmgcGTh8LEdYzOqcVFrabU5xnj5GA8llp6VUpOgEuygolK
-	IcSvwA3UQ7wws+bst9mAITW0LDL8ymraPS0KPvk/VNb6DCoVuIvji6p99/hmSDUOy2bFPmxs5/Y
-	FcwHtWi2tI3ytNL0SxEyLODBR8Jw9fDReViUO7bai2plnzvQ/byXnNrscqWyZM/3qqsw==
-X-Received: by 2002:a05:600c:3f10:b0:495:7278:95c3 with SMTP id 5b1f17b1804b1-496c657de59mr26303885e9.26.1785246709449;
-        Tue, 28 Jul 2026 06:51:49 -0700 (PDT)
-Message-ID: <6e9d7bc5-3e1d-4262-b806-e59595f3584f@suse.com>
-Date: Tue, 28 Jul 2026 15:51:47 +0200
+        bh=sjq1+NwUBvPK4RcSVOHsjrwrht1DWC2Q5O4CPfABIqM=;
+        b=nn3S87g/JNj8W4DGU3lO3MKJbTmWORa9lxLLcUoRZi1fAI1fA65xkqbz2prI4FsB3V
+         gZ2FOy5yZyWZLyPSWYr4yRZHfbTXbQdQD/bitdLR6h9F0J1M6dNeVDWp4O8Zj+lOesIf
+         QIiDoCynu41tq5+KgS9xZtfkc19K5b7GuILn3UJG/Rj8Yqq5ZXCcEe8MKD9id42UaumZ
+         u5uN18tn8clZXKb8wID5qfsH+RpN150CqWM6dIfmvmGg7LC79TT78g0OJ14dlRAprFCp
+         ++xY976qDt15F0W9HACbdQfmoRDbNEMPaubBQVoe5QihoNHQ9ekhUaym6qXefxqVlbei
+         hUFA==
+X-Gm-Message-State: AOJu0YygVgnW6fWpTwuUqjJ/+/mwvt9QwgG2oRmXETa0zW2h/yYDy+o6
+	6qzeUImv3BkgkcYu7NJh8QVCm4O9BZRXzdFg3E8dbaC8fbI78YmrDNGn3KSrI0GPuxmm4bRGew/
+	Q/bpheA==
+X-Gm-Gg: AR+sD110HPKcig49NX3hHHy8skT4hCPZfZHPWqQj16ERunzY+4+QWXI66m2g/1KQREV
+	NhLv+G5TNL8GxPa8LxyZT5kLqPK7aouQ1WCoSj8hi7m97cSBZQptT7dbrFZqvjDOxKn8C6X47qC
+	ES6MGqJUNPwRntWj6a3/J57Jm0wNg4auSCVQ9YLg3mFZYQVx9z5aq4ALhks6rdoLZJUpKfGbcBq
+	LtYOXCRkVZA36EPDtR6gGt9DcaID1TOPGMVLzJfPB8jqtPXT3KNCt1sjdhLmVbw7fCiBc71ysgA
+	SqkA75D82WMjogmhHZglMKzojJ0gY8ChQ88WrBRB5tLzHGnVgPRViru8qVSwKol3R+N/bQLfRoi
+	8jyjH5jtuCqN8vgiOiMvtqGdG7F0K+yHsP4T6zbZqVAjtwHXSJ0UdFRS/jmya8yVhYibISIhpX1
+	fJdsxaLOR8PaVSVZCyE6SrnN3z5c4f1nIaVoDJNIyXeopTIUej/m/CauvTzX1OozSH3Q==
+X-Received: by 2002:a05:6000:41ed:b0:47f:8cd3:4bed with SMTP id ffacd0b85a97d-47fb1e8547cmr3258724f8f.5.1785246743193;
+        Tue, 28 Jul 2026 06:52:23 -0700 (PDT)
+Message-ID: <06d74bd4-86f1-4c25-a6f7-f4e1c9de199f@suse.com>
+Date: Tue, 28 Jul 2026 15:52:21 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 5/7] gnttab: drop local "ld" from unmap_common_complete()
+Subject: [PATCH 6/7] gnttab: rename a parameter of
+ gnttab_populate_status_frames()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
@@ -131,43 +132,37 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <38850629-8bfa-4737-99ff-0fd3f489e56e@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1785246709-668B42AC-45990A5F/0/0
+X-purgate-ID: tlsNG-33051d/1785246743-6F6C64E9-1CE03113/0/0
 X-purgate-type: clean
-X-purgate-size: 1080
+X-purgate-size: 1078
 
-It's used exactly once, and even then only conditionally. No need to
-establish the value in all cases.
+In a function of this name, "nr" (and hence req_nr_frames) is, at the
+first and second glance, the number of frames to populate. That's
+misleading, and it's also only what one of the two callers
+(gnttab_grow_table()) actually passes in; the other (gnttab_set_version())
+passes the number of grant frames already in place.
+
+Fold declarations while at it, and convert the assignment to an
+initializer.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
 --- a/xen/common/grant_table.c
 +++ b/xen/common/grant_table.c
-@@ -1606,7 +1606,7 @@ unmap_common(
- static void
- unmap_common_complete(struct gnttab_unmap_common *op)
+@@ -1807,12 +1807,9 @@ fault:
+ 
+ static int
+ gnttab_populate_status_frames(struct domain *d, struct grant_table *gt,
+-                              unsigned int req_nr_frames)
++                              unsigned int grant_frames)
  {
--    struct domain *ld, *rd = op->rd;
-+    struct domain *rd = op->rd;
-     struct grant_table *rgt;
-     struct active_grant_entry *act;
-     struct page_info *pg;
-@@ -1618,8 +1618,6 @@ unmap_common_complete(struct gnttab_unma
-         return;
-     }
- 
--    ld = current->domain;
+-    unsigned int i;
+-    unsigned int req_status_frames;
 -
-     rcu_lock_domain(rd);
-     rgt = rd->grant_table;
+-    req_status_frames = grant_to_status_frames(req_nr_frames);
++    unsigned int i, req_status_frames = grant_to_status_frames(grant_frames);
  
-@@ -1656,7 +1654,7 @@ unmap_common_complete(struct gnttab_unma
-         if ( pg )
-         {
-             if ( gnttab_host_mapping_get_page_type(op->done & GNTMAP_readonly,
--                                                   ld, rd) )
-+                                                   current->domain, rd) )
-                 put_page_type(pg);
-             put_page(pg);
-         }
+     /* Make sure, prior version checks are architectural visible */
+     block_speculation();
 
 
