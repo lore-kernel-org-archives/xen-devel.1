@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F73EC54F4C
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:24:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374418.1621575 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E653C53219
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:25:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374421.1621585 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woijO-0005Cw-LT; Tue, 28 Jul 2026 14:24:30 +0000
+	id 1woiji-0005Zt-Tk; Tue, 28 Jul 2026 14:24:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374418.1621575; Tue, 28 Jul 2026 14:24:30 +0000
+Received: by outflank-mailman (output) from mailman id 1374421.1621585; Tue, 28 Jul 2026 14:24:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woijO-0005Cn-Io; Tue, 28 Jul 2026 14:24:30 +0000
-Received: by outflank-mailman (input) for mailman id 1374418;
- Tue, 28 Jul 2026 14:24:29 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1woiji-0005Zl-PW; Tue, 28 Jul 2026 14:24:50 +0000
+Received: by outflank-mailman (input) for mailman id 1374421;
+ Tue, 28 Jul 2026 14:24:49 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1woijN-0005Cf-KW
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:24:29 +0000
+ (envelope-from <jbeulich@suse.com>) id 1woijh-0005YJ-IM
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:24:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woijM-00F1g5-UP
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 16:24:28 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1woijg-00Ee9J-VP
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 16:24:48 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68bb95-2eae-0a2a0a5409dd-0a2a450bb4fa-18
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 16:24:28 +0200
-Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a68bb93-bab6-0a2a0a5309dd-0a2a4505ca28-42
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 16:24:48 +0200
+Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68bb9c-b7e8-0a2a450b0019-d155dd31a402-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 16:24:28 +0200
-Received: by mail-wr1-f49.google.com with SMTP id
- ffacd0b85a97d-4758bd3731bso970106f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 07:24:28 -0700 (PDT)
+ id 6a68bbb0-4cb1-0a2a45050019-d1558033ecff-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 16:24:48 +0200
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-4954dff6536so27618075e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 07:24:48 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f85c7880dsm58999551f8f.37.2026.07.28.07.24.27
+ ffacd0b85a97d-47f85b9a64dsm64542593f8f.1.2026.07.28.07.24.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Jul 2026 07:24:27 -0700 (PDT)
+ Tue, 28 Jul 2026 07:24:47 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,49 +55,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785248668; x=1785853468; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785248688; x=1785853488; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=3lzZ7GYxAZkVGEZUpJdPRfH1NuosiuFuGkMMzSnec4o=;
-        b=CH7/s/3o7uf7KReGiZ9e0vkmQdCS/HSAfL91+oPm2FmGXcbpXJXgDQsfzbnoCNBQ5k
-         d0ouMlHRiZMtFXIdew75JHvu2Ani2Ovy5BloCmRmc2UxdECQd8CuZ1C994fHbQ2FQtip
-         tWz3nRdxcmgBCWEREMh8be0wAoy4kSQvsBS6Y4oeBbTxC9R7QQvasZaNKsJnGtEAwFl8
-         e7DYt5F2/LgEY3cFf/AT7Kk45q8+QbT70CONUmaN+jOe6e8gU+YeRWnImD8bd9es8Ad7
-         vSqyF9ktHU3bMIfsbkqQcvXOIhQE/Mj0vJOYTkYtW8ZKhzlLEXb944TJBf8N5kctUKC8
-         M2YA==
+        bh=MDGxnQq9Xo0BHzcriwVqTJe+L979oWo8O6l6vHLNF/M=;
+        b=APhgNz0mnimzYWh1zBtPx6kIMPnOSrOM7oyVI1PHBzBx2AO6eZmoOPb4dwbIkxggqs
+         kji3ljPbWK4Wu4k7wyG2txzjTvyriGbfJJiGOnTwVlVunQRfzxlEIfiZzk6WXk6OdpQi
+         kcBSvXMPW7W2BXqxeatcXxHKhdZcMzn50Q3gvWvDMajMjZKImiOOWwiBoAejtXKEC791
+         SIc8Z7MFoc7s+vg1Xy3SgHmj0W5VcWYlqtDT4SFe9rwJ0XnUJmwDludWW4O8i37v1ORC
+         PalkQQujxF/4XKXb4OfVzQrbEBantkACRIIE8G6rho2CFy2ihG2sqxpqGBYF7xdHaHN4
+         t4Ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785248668; x=1785853468;
+        d=1e100.net; s=20251104; t=1785248688; x=1785853488;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=3lzZ7GYxAZkVGEZUpJdPRfH1NuosiuFuGkMMzSnec4o=;
-        b=BL+heQHICeFH+R2GjvP9c9ryHHBzA2xZbjYuQJcHv3pGGZa4eqHYQGRDMhDdvT+p4/
-         7vTN7UabheyDwNn8nFPuCBsFmLcBJ8YY3a12cLEMYySIeNX463ztiadwM/lVTa/P2Ds8
-         0U2SLkU6pI/nlov9KU3obv0bM5ByLG6UVUa/NFDE+QdYWD0zNb9s8Pipb+HVDlMt8oSk
-         xevUcWvao75/fnaj79bIp7sGUALq/siMbgL3b8kMuS58GUfgxCJPrO8hmwUaOY9fyPOv
-         HNTW3MdqtanTJF4nkas7RP4iu0GQJ12jN8ino6NWAMtS454Ej+iBDamMd8zVtgxAURbL
-         0A8A==
-X-Gm-Message-State: AOJu0YxNTOGz8yGn90s1QnUFkEAl8j1qHVr2T2K4+RLHbK8isZTIjUXM
-	llLdOOOpVtOXU3dtUzDqQQC0AIs9w+DAeZyh38stap9xp0dtF24FQLTk8JFoFV4uQzpbkM/pCEb
-	Uav/How==
-X-Gm-Gg: AR+sD11jLz22tZrByJVaUMvTEUB98+7R0gazqB8iuKg/bOIOzLMSM6ccO1fBZwgzK8D
-	liEaqwz7/XRuk0BipxDEFTHOS+TpvuDMkbld9cPsYK2LxUP7b5VXMqaW1GIo0bassYpkED6D/w/
-	+I6N2rNaxl+KVR4Q/dEvxrjBC9EXCY4yU7CK2+vZCyoL9l+e8re2234g5C3vshu2wshxF39N601
-	oRIHQ0XMJO3pv9urf89ITBcNVpBEI7ui5bQ14y1vzp7tc+8rKPjplyJZhu75ZILhMRNXJKMYuSY
-	b4tA6U0fkusfWJMRONgNXCmXq912ox6TpnNtli64u0M2r/aKmhB8Cd7ta3tpBJhbmuSh7h9sbcB
-	kRhf4cI/PTE1h8i5KOGy/Aj3y/qI/7f8xHjnmjPVhpTLJoFieyuPbnOaBkZp+SgojbRjPUWfg0b
-	CeXWrcLg8KVdySYTjMVcZTv5KTCsfFwCwURKcOGjEA4ON1nsp1fXuJN6Mhp1P1lIGNEw==
-X-Received: by 2002:adf:e19c:0:b0:47f:8282:42be with SMTP id ffacd0b85a97d-47fb1ecacaamr3144645f8f.18.1785248668204;
-        Tue, 28 Jul 2026 07:24:28 -0700 (PDT)
-Message-ID: <0798cafd-50e9-4910-990e-37c64bfa59aa@suse.com>
-Date: Tue, 28 Jul 2026 16:24:27 +0200
+        bh=MDGxnQq9Xo0BHzcriwVqTJe+L979oWo8O6l6vHLNF/M=;
+        b=Kn9soMkf58G8p9XuLkU0XBDS767nJP86xNZwOxp4irYxGPzgxg7vye7wlSaR9M0Skx
+         GNEcckszghr3TUaXSv35QumJiEvggyAlffbcZRzi8xqyk7HGcoZAWzSLY3OaUkRPh4Ym
+         JKPJ/YcIWvV/IXGcdWpXtkuWbtLDlC8pWglSwqIootwkwkqQQOHpRNYtZs/3FggYq2PZ
+         DiHYfUrbJNF+8+s5cwOERYUkCeGkB6u6xnCp71EIwC2NYXZqjrnvv5OizATCPzkL8m1g
+         q+rVe9u0M0azWmOnnch+b32Q5aCLSEKuRnxw5zVwokuACIb2g1PvgvYOIw5Hnsfz1Xl4
+         vdTg==
+X-Gm-Message-State: AOJu0YxByfv42nUqmZ0d/oW1zOUYCj04iIp+5tf4SwijdDrbeLGQPmEO
+	rqFqH6WgXuUqYOTYy1/cfrnHlzt5DoFbdcmWnh1i0tFb6vvFzYIiPDo4VSIBS6wM6d5p+HT1D6C
+	m6NoFOg==
+X-Gm-Gg: AR+sD12FZXOheL5m1M/nwrG9LSAciN2NWUiO1jIHuHY9OvXtk8dymO2rYF3nmBZX04T
+	CsXeWho5S2dqjaXXvXkhvQ5iWfZYTpAknT0AL8ZngI86d5U3fCM8ejK9X2RLtfeq9KiiSDfIRyt
+	mIFoyEyuycR14UT5MgxFKz82EPQBW3/2oqgV/lXZL+heAQ+4t7j4aE8J11LMVSlxfH/c4s+i13u
+	JPbwfWC67qyWe+5XZ7xqdfJLprSlhD+b9f7OGEgBdE2JcFObFjnhoToxUGuPFESYdoGNO68QNta
+	YmVf7G13XaaTogpPPdyQmjdgeBCB82VIN2mdwXxufJlgeegVFWcqhd3Dj1voH7pekJrlFgkLjKs
+	qrAK+qO1yMUSMCa/qVnTvIisGE1LjEgCD+WBiFrIPhic1DzzjbD3UVi3I+6d6n+S/fW/VFHXDTS
+	pFIuU9sQ96jRJLbyq5Vq+hoYLpgMBFSopfr7k3AxdUlyUmf+IVyh7xdAQM39XOYXFEyQ==
+X-Received: by 2002:a05:600c:3b14:b0:492:3e69:a86f with SMTP id 5b1f17b1804b1-496c6426375mr29663455e9.1.1785248688238;
+        Tue, 28 Jul 2026 07:24:48 -0700 (PDT)
+Message-ID: <c8e80bd0-cb7e-4885-82eb-6e747467da73@suse.com>
+Date: Tue, 28 Jul 2026 16:24:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v15 09/10] x86/shadow: make forced (L1TF) mode enable properly
- preemptable
+Subject: [PATCH v15 10/10] x86/shadow: limit the number of pages which may be
+ in use as shadows
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>
@@ -128,162 +128,222 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
 In-Reply-To: <68c16600-a4bf-4060-a1fc-56c4ae655b03@suse.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1785248668-A8AC89EA-1A344F84/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c201ff/1785248688-F72B32A1-A6C2A9CF/0/0
 X-purgate-type: clean
-X-purgate-size: 5979
+X-purgate-size: 8663
 
-Like for log-dirty enable/disable, reduce the amount of work to do
-underneath sh_new_mode() by calling shadow_blow_tables() (which is
-properly preemptable) up front. shadow_set_allocation() possibly taking
-long also is handled similar to log-dirty enable.
+In order to bound the amount of work a single invocation of
+shadow_unhook_mappings() may be doing all in one go, constrain the
+number of pages which may be in use as shadows. To achieve that, simply
+adjust the "success" exit condition of _shadow_prealloc(), thus forcing
+removal of shadows not only when we're short of memory.
 
-Since this code runs inside a tasklet, carrying out preemption isn't
-straightforward; see the code comment.
+Note that, depending on workload, this may have a severe effect on
+performance, due to the potentially much larger rate of thrashed
+shadows.
 
+In the context of "x86/shadow: account for log-dirty mode when pre-
+allocating" it is relevant to note that we will be too strict in
+sh_prealloc_okay() when log-dirty mode is enabled: Only part of the
+pages considered are actually to become shadows. But I think accepting
+this is better than further complicating the logic.
+
+Requested-by: Roger Pau Monné <roger.pau@citrix.com>
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Acked-by: Tim Deegan <tim@xen.org>
 ---
-The single-CPU case could of course do with improvement. Plus even on
-multi-CPU systems there will still be problems if there are enough
-domains all being switched to shadow mode at roughly the same time.
+What exactly we want the upper bound to be is up for discussion. This
+may need to go together with an upper limit on the number of vCPU-s we
+deem supportable in a (shadow) guest.
 
-Interaction with other shadow-op preemption is a little rough: Any
-attempt to issue a shadow-op (other than get-allocation) will result in
--EBUSY while the operation here is still in progress.
+Really 32-bit HVM guests have 3 monitor tables. But I think that not
+accounting for that in sh_prealloc_okay() is acceptable. How to
+correctly do such accounting there would be unclear anyway, as we mean
+to only take domain properties into account, whereas mode dependent
+properties are per-vCPU.
 
-Notes from discussion:
-- if there weren't certain special situations (realtime scheduling requirements, null scheduler,
-  vCPU pinning), simply handling softirqs _only_ in the tasklet might be okay
-- instead of doing shadow_blow_tables() and shadow_set_allocation() from the tasklet, we may be
-  able to arrange doing that in the context of the initiating vCPU (with all other vCPU-s paused),
-  scheduling the tasklet only once done, and making sure we don't fully exit back to guest context
-  in the process (but enough to allow scheduling to occur) [Could we have paravirt_ctxt_switch_to()
-  schedule a softirq-tasklet for VMs in transitional state, which then does the work?]
+Backporting note: The placement of the setting of the new per-domain
+                  field relies on d->max_vcpus being set right at domain
+                  creation. Hence this will need to move elsewhere for
+                  4.11 and older (perhaps into shadow_set_allocation()'s
+                  "if ( pages > 0 )" block, conditional upon the value
+                  still being zero and max_vcpus already set).
+
+Backporting note: 1d3668664df7 ("x86/shadow: restrict OOS allocation to
+                  when it's really needed") is a necessary prereq for
+                  the respective part of sh_prealloc_okay().
 ---
-v14: New.
+v14: Re-base over XSA-427 and new earlier patches. Restrict allowance
+     for monitor tables to HVM. Restrict allowance for OOS to when
+     that's actually in use.
+v13: Prevent underflow in sh_prealloc_okay(). Re-base.
+v12: Re-base past the XSA-410 series.
+v11: Account for monitor tables and OOS snapshots in sh_prealloc_okay().
+     Calculate the (default) maximum value once during domain
+     initialization, into a new per-domain field.
+v10: Extend commit message.
+v9: New.
 
 --- a/xen/arch/x86/include/asm/domain.h
 +++ b/xen/arch/x86/include/asm/domain.h
-@@ -237,6 +237,7 @@ struct paging_domain {
-         const struct domain *dom;
-         unsigned int op;
-         bool drop_allocation:1;
-+        bool pv_l1tf_paused:1;
-         union {
-             struct {
-                 unsigned long done:PADDR_BITS - PAGE_SHIFT;
+@@ -108,6 +108,9 @@ void init_hypercall_page(struct domain *
+ struct shadow_domain {
+ #ifdef CONFIG_SHADOW_PAGING
+     unsigned int      opt_flags;    /* runtime tunable optimizations on/off */
++
++    unsigned int      max_pages;    /* limit on the number of shadows in use */
++
+     struct page_list_head pinned_shadows;
+ 
+     /* 1-to-1 map for use when HVM vcpus have paging disabled */
 --- a/xen/arch/x86/mm/shadow/common.c
 +++ b/xen/arch/x86/mm/shadow/common.c
-@@ -18,6 +18,7 @@
- #include <xen/domain_page.h>
- #include <xen/guest_access.h>
- #include <xen/keyhandler.h>
-+#include <xen/softirq.h>
- #include <asm/event.h>
- #include <asm/page.h>
- #include <asm/current.h>
-@@ -2444,11 +2445,11 @@ static int shadow_one_bit_enable(struct
+@@ -96,6 +96,32 @@ int shadow_domain_init(struct domain *d)
+     d->arch.paging.flush_tlb = shadow_flush_tlb;
+ #endif
  
-         /* Init the shadow memory allocation if the user hasn't done so */
-         if ( shadow_set_allocation(d, 1,
--                                   mode & PG_log_dirty ? &preempted
--                                                       : NULL) != 0 )
-+                                   mode & ~PG_SH_enable ? &preempted
-+                                                        : NULL) != 0 )
-         {
-             shadow_set_allocation(d, 0,
--                                  mode & PG_log_dirty ? &preempted : NULL);
-+                                  mode & ~PG_SH_enable ? &preempted : NULL);
-             if ( !preempted )
-                 return -ENOMEM;
-             d->arch.paging.preempt.drop_allocation = true;
-@@ -2785,22 +2786,80 @@ void shadow_audit_tables(struct vcpu *v)
- void cf_check pv_l1tf_tasklet(void *data)
- {
-     struct domain *d = data;
-+    int ret = 0;
- 
--    domain_pause(d);
-+    /* Lock-less read is okay: The field is only written inside this tasklet. */
-+    if ( !d->arch.paging.preempt.pv_l1tf_paused )
-+        domain_pause(d);
-     paging_lock(d);
- 
--    if ( !paging_mode_sh_forced(d) && !d->is_dying )
-+    while ( !paging_mode_sh_forced(d) && !d->is_dying )
-     {
--        int ret = shadow_one_bit_enable(d, PG_SH_forced);
-+        bool preempted = false;
-+        unsigned int cpu, next;
- 
--        if ( ret )
-+        if ( !d->arch.paging.preempt.dom )
-+        {
-+            d->arch.paging.preempt.dom = dom_xen;
-+            d->arch.paging.preempt.drop_allocation = false;
-+        }
-+
-+        if ( unlikely(d->arch.paging.preempt.dom != dom_xen) )
-+        {
-+            /* Wait for other continuation to finish. */
-+        }
-+        else if ( unlikely(d->arch.paging.preempt.drop_allocation) )
-         {
--            printk(XENLOG_G_ERR "d%d Failed to enable PG_SH_forced: %d\n",
--                   d->domain_id, ret);
--            domain_crash(d);
-+            ret = -ENOMEM;
-+            shadow_set_allocation(d, 0, &preempted);
-+            if ( !preempted )
-+                break;
-         }
-+        else
-+        {
-+            /*
-+             * Limit the amount of work to do from sh_detach_old_tables()
-+             * (called from shadow_one_bit_enable() via sh_new_mode() ->
-+             * sh_update_paging_modes()), such that it doesn't also need to
-+             * deal with preemption checks.
-+             */
-+            shadow_blow_tables(d, &preempted);
-+            if ( !preempted &&
-+                 (ret = shadow_one_bit_enable(d, PG_SH_forced)) != -ERESTART )
-+                break;
-+        }
-+
-+        d->arch.paging.preempt.pv_l1tf_paused = true;
-+        paging_unlock(d);
-+
++    /*
++     * Figure out the default for the highest acceptable quantity of shadow
++     * memory. This is because we need to bound the amount of work potentially
++     * in need of doing by a single shadow_unhook_mappings() invocation.
++     */
++    d->arch.paging.shadow.max_pages = 2048;
++    if ( d->max_vcpus > 8 )
++    {
 +        /*
-+         * Crude "preemption" of a tasklet: To avoid hogging the local CPU,
-+         * re-schedule the tasklet on another one. Unless of course there
-+         * is none, in which case we will simply continue here.
++         * This is
++         *
++         *             128 * (max_vcpus + 8)
++         * max_vcpus * ---------------------
++         *                   max_vcpus
++         *
++         * suitably resolved, with the right side of the multiplication
++         * (when expressed as f(x)) satisfying
++         *   f(8) = 256
++         *   lim f(x) = 128
++         *   x->∞
++         * i.e. continuous with the simpler case above and converging to
++         * shadow_min_acceptable_pages() for large values.
 +         */
-+        cpu = smp_processor_id();
-+        next = cpumask_cycle(cpu, &cpu_online_map);
-+        if ( next != cpu )
-+        {
-+            tasklet_schedule_on_cpu(&d->arch.paging.shadow.pv_l1tf_tasklet,
-+                                    next);
-+            return;
-+        }
-+
-+        process_pending_softirqs();
-+        paging_lock(d);
++        d->arch.paging.shadow.max_pages = 128 * (d->max_vcpus + 8);
 +    }
 +
-+    if ( ret )
-+    {
-+        printk(XENLOG_G_ERR "%pd: Failed to enable PG_SH_forced: %d\n",
-+               d, ret);
-+        domain_crash(d);
-     }
- 
-+    d->arch.paging.preempt.dom = NULL;
-+    d->arch.paging.preempt.drop_allocation = false;
-+    d->arch.paging.preempt.pv_l1tf_paused = false;
-     paging_unlock(d);
-     domain_unpause(d);
+     return 0;
  }
+ 
+@@ -372,7 +398,7 @@ static inline void trace_shadow_prealloc
+ }
+ 
+ static bool sh_blow_tables(struct domain *d, unsigned int goal,
+-                           bool *preempted);
++                           unsigned int type, bool *preempted);
+ 
+ /* Make sure there are at least count pages of the order according to
+  * type available in the shadow page pool.
+@@ -396,7 +422,7 @@ bool shadow_prealloc(struct domain *d, u
+          ((SHF_L1_ANY | SHF_FL1_ANY) & (1u << type)) )
+         count += paging_logdirty_levels();
+ 
+-    ret = sh_blow_tables(d, count, NULL);
++    ret = sh_blow_tables(d, count, type, NULL);
+     if ( !ret && (!d->is_shutting_down || d->shutdown_code != SHUTDOWN_crash) )
+         /*
+          * Failing to allocate memory required for shadow usage can only result in
+@@ -408,6 +434,31 @@ bool shadow_prealloc(struct domain *d, u
+ }
+ 
+ /*
++ * Check that
++ * - there are enough free pages,
++ * - there aren't too many pages in use as shadows already when about to make
++ *   a (set of) new shadow page(s).
++ */
++static bool sh_prealloc_okay(const struct domain *d, unsigned int goal,
++                             unsigned int type)
++{
++    if ( d->arch.paging.free_pages < goal )
++        return false;
++
++    if ( type < SH_type_min_shadow || type > SH_type_max_shadow )
++        return true;
++
++    return d->arch.paging.total_pages -
++           (d->arch.paging.free_pages - goal) <=
++           d->arch.paging.shadow.max_pages +
++#if (SHADOW_OPTIMIZATIONS & SHOPT_OUT_OF_SYNC)
++           (d->options & XEN_DOMCTL_CDF_oos_off ? 0 : SHADOW_OOS_PAGES) +
++#endif
++           /* Allow for one monitor table per HVM vCPU. */
++           paging_mode_external(d) * d->max_vcpus;
++}
++
++/*
+  * When @goal is zero: Deliberately free all the memory we can: This will
+  * tear down all of this domain's shadows.
+  *
+@@ -415,7 +466,7 @@ bool shadow_prealloc(struct domain *d, u
+  * available in the shadow page pool.
+  */
+ static bool sh_blow_tables(struct domain *d, unsigned int goal,
+-                           bool *preempted)
++                           unsigned int type, bool *preempted)
+ {
+     struct page_info *sp, *t;
+     struct vcpu *v;
+@@ -423,7 +474,7 @@ static bool sh_blow_tables(struct domain
+     int i;
+     unsigned int done = 0;
+ 
+-    if ( goal && d->arch.paging.free_pages >= goal )
++    if ( goal && sh_prealloc_okay(d, goal, type) )
+         return true;
+ 
+     /*
+@@ -465,7 +516,7 @@ static bool sh_blow_tables(struct domain
+             while ( hash_foreach(d, masks[i], callbacks, _mfn(0)) )
+             {
+                 /* See if that freed up enough space */
+-                if ( goal && d->arch.paging.free_pages >= goal )
++                if ( goal && sh_prealloc_okay(d, goal, type) )
+                     return true;
+ 
+                 if ( general_preempt_check() )
+@@ -491,7 +542,7 @@ static bool sh_blow_tables(struct domain
+         sh_unpin(d, smfn);
+ 
+         /* See if that freed up enough space */
+-        if ( goal && d->arch.paging.free_pages >= goal )
++        if ( goal && sh_prealloc_okay(d, goal, type) )
+             return true;
+ 
+         if ( preempted && !(++done & 0xff) && general_preempt_check() )
+@@ -519,7 +570,7 @@ static bool sh_blow_tables(struct domain
+                     0);
+ 
+                 /* See if that freed up enough space */
+-                if ( goal && d->arch.paging.free_pages >= goal )
++                if ( goal && sh_prealloc_okay(d, goal, type) )
+                 {
+                     guest_flush_tlb_mask(d, d->dirty_cpumask);
+                     return true;
+@@ -569,7 +620,7 @@ static bool sh_blow_tables(struct domain
+  * this domain's shadows */
+ void shadow_blow_tables(struct domain *d, bool *preempted)
+ {
+-    sh_blow_tables(d, 0, preempted);
++    sh_blow_tables(d, 0, SH_type_none, preempted);
+ }
+ 
+ void shadow_blow_tables_per_domain(struct domain *d)
+@@ -904,7 +955,7 @@ int shadow_set_allocation(struct domain
+         else if ( d->arch.paging.total_pages > pages )
+         {
+             /* Need to return memory to domheap */
+-            if ( !sh_blow_tables(d, 1, preempted) )
++            if ( !sh_blow_tables(d, 1, SH_type_none, preempted) )
+                 return preempted && *preempted ? 0 : -ENOMEM;
+ 
+             sp = page_list_remove_head(&d->arch.paging.freelist);
 
 
