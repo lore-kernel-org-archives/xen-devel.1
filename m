@@ -4,41 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54A64C531D0
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 02:14:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1372021.1619425 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A69EC53219
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 04:08:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1372037.1619432 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woXKW-0001Dw-5T; Tue, 28 Jul 2026 02:14:04 +0000
+	id 1woZ6k-0007Z7-VM; Tue, 28 Jul 2026 04:07:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1372021.1619425; Tue, 28 Jul 2026 02:14:04 +0000
+Received: by outflank-mailman (output) from mailman id 1372037.1619432; Tue, 28 Jul 2026 04:07:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woXKW-0001Dp-21; Tue, 28 Jul 2026 02:14:04 +0000
-Received: by outflank-mailman (input) for mailman id 1372021;
- Tue, 28 Jul 2026 02:14:03 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1woXKT-0001Dj-So
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 02:14:03 +0000
+	id 1woZ6k-0007Z0-S7; Tue, 28 Jul 2026 04:07:58 +0000
+Received: by outflank-mailman (input) for mailman id 1372037;
+ Tue, 28 Jul 2026 04:07:57 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <vijayanand.jitta@oss.qualcomm.com>)
+ id 1woZ6j-0007Yu-9f
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 04:07:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woXKR-009bkx-Sa; Tue, 28 Jul 2026 04:14:00 +0200
-Received: from [10.42.69.2] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a681034-e002-0a2a0a5209dd-0a2a4502c82e-20
- for <multiple-recipients>; Tue, 28 Jul 2026 04:13:58 +0200
-Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a681065-6ca4-0a2a45020019-5a9b3222e614-3
- for <multiple-recipients>; Tue, 28 Jul 2026 04:13:57 +0200
-Received: from [2001:8b0:10b:5:dc99:b954:ecbb:94c8]
- (helo=u09cd745991455d.ant.amazon.com)
- by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1woXKD-0000000C2JY-1Kxn; Tue, 28 Jul 2026 02:13:45 +0000
+ id 1woZ6f-00FcUh-L7
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 06:07:53 +0200
+Received: from [10.42.69.7] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <vijayanand.jitta@oss.qualcomm.com>)
+ id 6a682b0f-2eae-0a2a0a5409dd-0a2a4507de70-8
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 06:07:53 +0200
+Received: from [205.220.168.131] (helo=mx0a-0031df01.pphosted.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <vijayanand.jitta@oss.qualcomm.com>)
+ id 6a682b17-b4ea-0a2a45070019-cddca8830902-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 06:07:52 +0200
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66S3aWSu1303371
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 04:07:50 GMT
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
+ [209.85.216.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fpbp8acd3-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 04:07:50 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id
+ 98e67ed59e1d1-38ec0f510a9so8482064a91.2
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2026 21:07:50 -0700 (PDT)
+Received: from [192.168.1.14] ([103.28.245.137])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-314bc3e127asm62422249eec.2.2026.07.27.21.07.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 27 Jul 2026 21:07:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,190 +63,500 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="MIME-Version:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
-	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=GCpfHtrYQawezIZUO1LR06raphZYNnQ7cY8TQO4z/FY=; b=lLAzdzEQl4ElZLY3Lc/nJ9PoYv
-	OxTCkwtykmNtIo4u0J7ihZdfvrOw3ZElsB7HHmXlInfnkDE0qO8NeB0Z+LQjsK4R2O5JrJU+pcNGo
-	SFnBwdJFz3qLISY38qQ4SFdXiX44LiUr6t1uqFAxibmlebwSysKdYpdn+ZJs23ThCaDUMYbT458ZE
-	hefyrl1vvavacElb8zHOyuL46NHHNwdLjBDz/1YW6ejk6xJfkXxcE55wgJ/NtFGT1KHFiDMb1Rqf2
-	kHTOqAJJt9DoDJwzBQE04e/mMV52dWODAKgdHl6r96CfpmKqEVzwlXtVb/C9AhAJ8P7VNji6YHIIg
-	6zeuamNw==;
-Message-ID: <8d53fa812a0bd457b53f0948c046214f209d86a1.camel@infradead.org>
-Subject: Re: [PATCH v6 05/36] KVM: x86: Add KVM_[GS]ET_CLOCK_GUEST for
- accurate KVM clock migration
-From: David Woodhouse <dwmw2@infradead.org>
-To: Sean Christopherson <seanjc@google.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <skhan@linuxfoundation.org>, Thomas Gleixner <tglx@kernel.org>,
- Ingo Molnar <mingo@redhat.com>,  Borislav Petkov	 <bp@alien8.de>, Dave
- Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin"	
- <hpa@zytor.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, Juergen Gross	
- <jgross@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Paul
- Durrant	 <paul@xen.org>, Jonathan Cameron <jic23@kernel.org>, Sascha
- Bischoff	 <Sascha.Bischoff@arm.com>, Marc Zyngier <maz@kernel.org>, Joey
- Gouly	 <joey.gouly@arm.com>, Jack Allister <jalliste@amazon.com>, Dongli
- Zhang	 <dongli.zhang@oracle.com>, joe.jin@oracle.com, kvm@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	xen-devel@lists.xenproject.org, linux-kselftest@vger.kernel.org
-Date: Tue, 28 Jul 2026 03:13:44 +0100
-In-Reply-To: <amgCrqyqg0zFbhO4@google.com>
-References: <20260703212145.343527-1-dwmw2@infradead.org>
-	 <20260703212145.343527-6-dwmw2@infradead.org> <amPWX8lKXw2KS_kZ@google.com>
-	 <e8e7554debef481d13265f0870e847e2fa37f7c2.camel@infradead.org>
-	 <amgCrqyqg0zFbhO4@google.com>
-Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-iOYyDNY3mpnbpc85Vz8q"
-User-Agent: Evolution 3.60.3-0ubuntu1~ppa9~24.04 
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=qcppdkim1 header.d=qualcomm.com header.i="@qualcomm.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=google header.d=oss.qualcomm.com header.i="@oss.qualcomm.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	LK3y07L9JsKqzOy/FLTAxwpeW1DK6L0Aa7RC06zF1Gc=; b=FFgE1xJe6UKoNQYE
+	+igk/lKKKT2gc1TXlw7wG5U2X4N88qZIopsTTXkEHMOr+nrTgOX2g8/rEBlALAJ3
+	41DH2X3DseYCwgCcoo8soqHkig9SRruLONrjfJ+/uMfJFtYPcw/Ktef8FDYhnUqO
+	gGaiYdzllKLuD7zATWwLnnX3kk+g6jOeQ4SLHxKWICwjmOqiYIjg8gteKs4rtP7T
+	Qk8q6ck3aQIKxYjdPbnX1mg1beTunEGa9MAz4MvsiV17J4Q2O4ucKd1yg8hR/xT+
+	FBRAgm/m3Wbx6m+luhxgff2BIBImaXbhJlxfSkO6Y8P0IA0qVLyLGSiW/fZ0fDI3
+	Ej2kRw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785211670; x=1785816470; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=LK3y07L9JsKqzOy/FLTAxwpeW1DK6L0Aa7RC06zF1Gc=;
+        b=SV2q1SOpPLNzx8hW7O/BEI8Ml/u7puwrbbM/GveLXDNk/MipI+/K+7cRw3XRAK3iaf
+         iS3U7Xh+zSfSpjT9r7fjCkw3NvQwwku9ZOYPCWRifhJoHErfA85gsHGZpRd5PzFJ3cbo
+         ldskiKmNj+m9kOqQZS7J1mJgFEE+VRoez7PFz1LCezFjS5Cb8RQDc8dZjdGmRTUM7/Wb
+         gBuCGfUR0XYj1XUNCo3M5rSAdCHHXjg41e0dYxnL5gFbO1fGEABmXMS0xgyRArxGzpyP
+         tr+FFGY5v12PD71LLgSqEBF9jUDPAcxmue6C8sTc4dTjrLnpAMJz+eAl55wbq/5aMCUq
+         KdUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785211670; x=1785816470;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=LK3y07L9JsKqzOy/FLTAxwpeW1DK6L0Aa7RC06zF1Gc=;
+        b=D5e4qBt7IlPzMx0eWlOYYjhTLm4ewEwmt8VrkpLU+9ZVAb7vvraFjBpLi2jyEiyYt0
+         nm9vmiN5kJrRRNH30JcBdeqqwmqwHQq7bXwFuf/CVJzTi3QeG5qcU+dCWF9/ZG2z2E7M
+         ZyZbwj025heLp79tbAuZYIpZ3v8EU6AqZxDOMKumta6/rFGcDoEOH8b6e+tIO3uy9Mol
+         r7XKTZ1yZy9afxVR70SbhxtZuWNXbHYLUQmvy/1bas+M3k0gUIW/6vGAKqlQD6TXCy6c
+         +DChQJG/DZt4rfvqpiGgp6WLx5IiEA7F/TeoLrTwUy3JXMIt3CBXZYkvwqog2o1GChc0
+         6kug==
+X-Forwarded-Encrypted: i=1; AHgh+RobtL7hwJ2+dT/iM/mXbhbGI2210KTEvmuJYrHuWv99nAnx0XP/CiQ9V12klj2wQ+vCvElBVjH7rm4=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwV+BSCk0cOKgb6aKxkDP+U5qNk+6bvUpxbQ4EoXU2fEdlEfLv0
+	tGswZ2+7jvC4CBkSr8XrJvWKMPoZjIXagdLr+T3KgbYSAoOBij80OxF4vvxGFADTGlt4c9e3nsl
+	ESce3UxMwPXXRP4udDg3lc9suYj5DfNHDgE62ftwr4gE+dsvMaTmx7l/x43Cas1MAdAfzsg==
+X-Gm-Gg: AR+sD10y6/MtU3vtFFyl7SOiEGn/7F3RlsorKSDfO8/JNnU6ouFMfMhvO6M0GQla9no
+	prGnamml4yyDvTmhHmi/ervxx6STZIr7OBDBpO8TFeNNAF6tf/g/F8KVcL5FXW0uRjQsROdPslh
+	IH4+6fnAntMByK7eJyHqKNZSO0a/2Jvy7fwsaz/gOKqkG8X3sFQfKjcPHfJrJQLIAVTJwsu0/VQ
+	LJzS4LlWfD0SSuaiLOSlzWzQJLSMBggJjrdz8nbE6fAJVtRWKqXkY3FzhuuCqS6MXzAQMqoErep
+	q9Uz+W92j4xJtg3V7wpCn+hacKpYNkg8LXrv++sHXr18QvxcNSPheQZ7k6GRN0LdpGKcRtIJOCa
+	e+HTd/m2+WWcJheIXE+5dB7vQf3r0Zgaf/tBc
+X-Received: by 2002:a05:6a20:6a15:b0:3c4:1708:9cd8 with SMTP id adf61e73a8af0-3c8ba6862bbmr1003935637.76.1785211669589;
+        Mon, 27 Jul 2026 21:07:49 -0700 (PDT)
+X-Received: by 2002:a05:6a20:6a15:b0:3c4:1708:9cd8 with SMTP id adf61e73a8af0-3c8ba6862bbmr1003878637.76.1785211668977;
+        Mon, 27 Jul 2026 21:07:48 -0700 (PDT)
+Message-ID: <0d0896af-a4a5-445d-8db7-fdb9eecd07a2@oss.qualcomm.com>
+Date: Tue, 28 Jul 2026 09:35:58 +0530
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-720697/1785204838-319CB2AC-917A8AEF/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v16 3/3] of: Respect #{iommu,msi}-cells in maps
+To: Neil Armstrong <neil.armstrong@linaro.org>,
+        Nipun Gupta <nipun.gupta@amd.com>,
+        Nikhil Agarwal <nikhil.agarwal@amd.com>,
+        Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+        Robin Murphy <robin.murphy@arm.com>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        Marc Zyngier <maz@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
+        Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@kernel.org>,
+        Richard Zhu <hongxing.zhu@nxp.com>,
+        Lucas Stach <l.stach@pengutronix.de>,
+        =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Bjorn Helgaas
+ <bhelgaas@google.com>, Frank Li <Frank.Li@nxp.com>,
+        Sascha Hauer <s.hauer@pengutronix.de>,
+        Pengutronix Kernel Team <kernel@pengutronix.de>,
+        Fabio Estevam <festevam@gmail.com>, Juergen Gross <jgross@suse.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        iommu@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
+        devicetree@vger.kernel.org, linux-pci@vger.kernel.org,
+        imx@lists.linux.dev, xen-devel@lists.xenproject.org,
+        Charan Teja Kalla <charan.kalla@oss.qualcomm.com>
+References: <20260603-parse_iommu_cells-v16-0-dc509dacb19a@oss.qualcomm.com>
+ <20260603-parse_iommu_cells-v16-3-dc509dacb19a@oss.qualcomm.com>
+ <3f5c974f-425d-47a5-9fda-e05de1f39d79@linaro.org>
+Content-Language: en-US
+From: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
+In-Reply-To: <3f5c974f-425d-47a5-9fda-e05de1f39d79@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI4MDAzNCBTYWx0ZWRfX0ApkeaphKhvE
+ EjF8Wf7fIVWLeeYup5ePMbxw/o90pGEiSr22qMVGeHIg8021lugFhc+YfdP0Na7qSXI+8cGjXgp
+ Yie9f3XENm9jmJyOOJ5Bm8M0yQPE9YQ=
+X-Proofpoint-GUID: 57cetw_og1f5EyatxirDXgtbp1N6Fggk
+X-Proofpoint-ORIG-GUID: 57cetw_og1f5EyatxirDXgtbp1N6Fggk
+X-Authority-Analysis: v=2.4 cv=KLJqylFo c=1 sm=1 tr=0 ts=6a682b16 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=squdMJ+4YbgyfOnWmi5+Dg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=7CQSdrXTAAAA:8 a=EUspDBNiAAAA:8 a=q5R4RTgJWa76_yJtbd4A:9
+ a=8pEowBHnLtz2IKIQ:21 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=rl5im9kqc5Lf4LNbBjHf:22 a=a-qgeE7W1pNrGK8U0ZQC:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI4MDAzNCBTYWx0ZWRfX765VEc1bZyMc
+ +dwRfzslHKMUeeq6WeOzZ72j7W4CVCt6B9qK8zlQXwqTWMHRcF3xf+AL79is4phu/DxZ92PFVm/
+ 3/AXcSmTY/M8GFcBlIpAzD5997mzZ0M0z8bqk4kPc9FFmbRHPx/cueh5i6phaktSHlUuGyPJEIg
+ j7RfyFXJqimUbcRNzIpn+IdashXBSB+uG1pmIh/h6FnFRnt4gfW5n81bwXLnJJR9nm69Ab7exp/
+ qmFDDKmPeJKors14TEJMelPG0QzAOk96f9g1lhTJzWbvJ/tAQDpqFfiU3Rc9CC0tqONiyKodkJB
+ CLoW5t1V6+6iv7RMbk4TbIXhhkdzur9w8esJmOFDvQHqEFGqHSphJazEhfr/z1TGJB3gencXMtX
+ La9A6FfO8efGXJSMg/n1tihRwpdk53WHN+HE9XFfMImy7hBAge6pvQ/Wd0tVQLfRFt4GY0nZJjn
+ 8RhmBBDkZUX1KSupRYg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-28_01,2026-07-27_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 priorityscore=1501 suspectscore=0 spamscore=0 impostorscore=0
+ lowpriorityscore=0 malwarescore=0 adultscore=0 bulkscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607280034
+X-purgate-ID: tlsNG-ef75cf/1785211673-3C817AE4-7F31BFA5/0/0
 X-purgate-type: clean
-X-purgate-size: 9583
+X-purgate-size: 18720
 
 
---=-iOYyDNY3mpnbpc85Vz8q
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, 2026-07-27 at 18:15 -0700, Sean Christopherson wrote:
->=20
-> Can the KVM_[GS]ET_CLOCK_GUEST changes be moved to the end of the series?=
-=C2=A0 The
-> total size of the series doesn't scare me, I just don't want to end up wi=
-th all
-> the fixes and cleanups stuck behind a patch that isn't a hard dependency.=
-=C2=A0 E.g.
-> AFAICT, none of the following changes, include selftests updates, actualy=
- rely
-> on KVM_[GS]ET_CLOCK_GUEST existing.
+On 7/23/2026 6:47 PM, Neil Armstrong wrote:
+> Hi,
+> 
+> On 6/3/26 09:13, Vijayanand Jitta wrote:
+>> From: Robin Murphy <robin.murphy@arm.com>
+>>
+>> So far our parsing of {iommu,msi}-map properties has always blindly
+>> assumed that the output specifiers will always have exactly 1 cell.
+>> This typically does happen to be the case, but is not actually enforced
+>> (and the PCI msi-map binding even explicitly states support for 0 or 1
+>> cells) - as a result we've now ended up with dodgy DTs out in the field
+>> which depend on this behaviour to map a 1-cell specifier for a 2-cell
+>> provider, despite that being bogus per the bindings themselves.
+>>
+>> Since there is some potential use in being able to map at least single
+>> input IDs to multi-cell output specifiers (and properly support 0-cell
+>> outputs as well), add support for properly parsing and using the target
+>> nodes' #cells values, albeit with the unfortunate complication of still
+>> having to work around expectations of the old behaviour too.
+>>
+>> Since there are multi-cell output specifiers, the callers of of_map_id()
+>> may need to get the exact cell output value for further processing.
+>> Update of_map_id() to set args_count in the output to reflect the actual
+>> number of output specifier cells.
+>>
+>> Signed-off-by: Robin Murphy <robin.murphy@arm.com>
+>> Signed-off-by: Charan Teja Kalla <charan.kalla@oss.qualcomm.com>
+>> Signed-off-by: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
+>> ---
+>>   drivers/of/base.c  | 168 +++++++++++++++++++++++++++++++++++++++++------------
+>>   include/linux/of.h |   6 +-
+>>   2 files changed, 135 insertions(+), 39 deletions(-)
+>>
+>> diff --git a/drivers/of/base.c b/drivers/of/base.c
+>> index d658c2620135..ac7961cbab94 100644
+>> --- a/drivers/of/base.c
+>> +++ b/drivers/of/base.c
+>> @@ -2116,19 +2116,49 @@ int of_find_last_cache_level(unsigned int cpu)
+>>       return cache_level;
+>>   }
+>>   +/*
+>> + * Some DTs have an iommu-map targeting a 2-cell IOMMU node while
+>> + * specifying only 1 cell. Fortunately they all consist of value '1'
+>> + * as the 2nd cell entry with the same target, so check for that pattern.
+>> + *
+>> + * Example:
+>> + *    IOMMU node:
+>> + *        #iommu-cells = <2>;
+>> + *
+>> + *    Device node:
+>> + *        iommu-map = <0x0000 &smmu 0x0000 0x1>,
+>> + *                <0x0100 &smmu 0x0100 0x1>;
+> 
+> So the sm8650 PCIe controllers has:
+> 
+> pcie@1c08000:
+>             iommu-map = <0     &apps_smmu 0x1480 0x1>,
+>                     <0x100 &apps_smmu 0x1481 0x1>;
+> 
+> and
+> 
+> pcie@1c00000:
+> 
+>             iommu-map = <0     &apps_smmu 0x1400 0x1>,
+>                     <0x100 &apps_smmu 0x1401 0x1>;
+> 
+> and apps_smmu has #iommu-cells = <2>, but gets flagged at wrong:
+> 
+> [    7.538800] OF: /soc@0/pcie@1c08000: iommu-map has 1-cell entries targeting 2-cell #iommu-cells, treating as 1-cell output
+> 
+> Returning false in of_check_bad_map() triggers:
+> 
+> [    7.642680] OF: /soc@0/pcie@1c08000: Unsupported iommu-map - cannot handle 256-ID range with 2-cell output specifier
+> 
+> I don't understand the issue here, we use 2 cells as expected by
+> the iommu-cells, so why is it wrong ? can somebody explain in
+> comprehensive words ? I'm super confused, it worked like a charm until now.
+> 
+> Neil
+> 
 
-That only matters if we plan to backport them, surely? And I wasn't.=20
+Hi Neil,
 
-I suspect it won't be pretty, but I can have a go at moving
-KVM_[GS]ET_CLOCK_GUEST to the end. I guess in a similar vein we'd want
-to move KVM_VCPU_TSC_SCALE to the end too.
-
-Some of the selftests will have to move too, as they do use those
-features.
-
---=-iOYyDNY3mpnbpc85Vz8q
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Transfer-Encoding: base64
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCE8Ew
-ggWvMIIEl6ADAgECAhANkOKMSmGXhF5eMl0rsRhvMA0GCSqGSIb3DQEBDAUAMGUxCzAJBgNVBAYT
-AlVTMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xJDAi
-BgNVBAMTG0RpZ2lDZXJ0IEFzc3VyZWQgSUQgUm9vdCBHMjAeFw0yNDAzMTMwMDAwMDBaFw0zNDAz
-MTIyMzU5NTlaMGIxCzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UE
-AxMxRGlnaUNlcnQgQXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTCCAiIw
-DQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBAOfSIeC0vv1xPQ+dgSxbIIrkaru6skAWJYaGFzmv
-q4Kq+2wU2jxhcWlJg/JeP5jEkq/LM3pn5aaLao79j+XRmS7J1ZpJKUODJVoM4s9MQJhTMvo4qS5Z
-S64g6QR7Obkz3I1Lr3aWeSBmDDEyzue+NKtuWZ1Cxy3RdXo/w5HgRc3l2AercOM3Gt1XonTzEtTb
-Z/Hwc0Sn9Gz8RmGRK6Ka4hVDl8q/2l110KaV233Kh5etP0csXS8MIMdVRfRu3sc5hp13DG7lCKzK
-72a2GEpI8Wpl26G6I1/LMzz/98T+FqjTqxsdquk7Cj7m2vKGLW1BorpQH7WFGPdJQXJe1hfbfiZA
-CcVdCtl4nAacFacmsiArZBfX7AQGL7isvHUwwYFEtcApyGW4p2Lt+t8nvU0CANA6BHOpOz1xOP8W
-mAESbUriIjyuTUf3fJ9oDNCurVqhASMJCDaWI3lYX/QAoiAzt6akqbbZxo2ujW7mGGqc0KxqE2cs
-h2T79v7pC8aUtHBfwNrTR19GnZVxE0eQ7ViIQhR6mpSaUQFA9sG+cmD2G8TnCgYsLa0q8De6F61a
-CBevQGHNzrbZ3JAMneveYg/Jy1XxQHDRcvrMfWKe0jjcWbdKYlaGVPm5V1ILwYz7Yv5ewo3NUrxI
-GJiywe9qPhuJSDZs7VehTuI0FxGIsgKzVjgbAgMBAAGjggFcMIIBWDASBgNVHRMBAf8ECDAGAQH/
-AgEAMB0GA1UdDgQWBBT3m6JO05fF9DQPQw6Bhc6RkzKv+TAfBgNVHSMEGDAWgBTOw0q5mVXyuNtg
-v6l+vVa1lzan1jAOBgNVHQ8BAf8EBAMCAYYwHQYDVR0lBBYwFAYIKwYBBQUHAwQGCCsGAQUFBwMC
-MHkGCCsGAQUFBwEBBG0wazAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29tMEMG
-CCsGAQUFBzAChjdodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkSURS
-b290RzIuY3J0MEUGA1UdHwQ+MDwwOqA4oDaGNGh0dHA6Ly9jcmwzLmRpZ2ljZXJ0LmNvbS9EaWdp
-Q2VydEFzc3VyZWRJRFJvb3RHMi5jcmwwEQYDVR0gBAowCDAGBgRVHSAAMA0GCSqGSIb3DQEBDAUA
-A4IBAQA+b8Uw53sDspdZgukU+qzLyyHkcjlxGGhHlP+zrmDLKm1wEFvCRS2pili3Hy67i8N4N5NU
-vw5Rg6kv3lxb9S9Rktxk43k+tvm68pl7OxQE55ZjVY87P0lUPGwEqOOwLLyH02ZQcsfq5p5LrOH9
-0JvmvZ1yy73HS+VpDAqOlytE0NSvTIRqFFkKQGQwfjvtql9YflujuNNvJztjBaHKYZsnNSg+J38o
-jYq4TP3pSg3UdVH0PncVjPQyqxC9xef5Xae92Kbkzol3x7Nel3A1bwAkalrDMspvTHvey6LfiBks
-FIqviTnoy7fgjaRAJgHS+RXx/cmuRd3rUAclSVVrYu8RMIIHAzCCBOugAwIBAgIQAzUotrsybJHx
-HTjKOIVdIDANBgkqhkiG9w0BAQsFADBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQs
-IEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFzc3VyZWQgRzIgU01JTUUgUlNBNDA5NiBTSEEzODQg
-MjAyNCBDQTEwHhcNMjYwNzE4MDAwMDAwWhcNMjgwMTA0MjM1OTU5WjAeMRwwGgYDVQQDDBNkd213
-MkBpbmZyYWRlYWQub3JnMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA2pYux73kdbYX
-sWF8f1u6DJP91qcqaZetsyfPkZk0B+MmXmAEv0kVes5n15V2mbDThOnpoPFly0UugQO9JYqLfrtD
-tKD5yL58fgrDB9Dw+LQikgrHafl6YSCds5AvUu/8hw2J6noKrcOLJpKlKn9Fl/4IB9Q3JIdLx5aa
-EtTqMalIPqHFOlgrJ7s+aua8xbB8YQ9ahqYBXWRJNv3P/2b1DYtdrz1oqZPE3CcB8Pc6Gf2a1Tcm
-6TAgtEx7Cf1BFcrsrMz7TWHmGQITieNb2r9UYWSc2Gp+GtYFNJCgT0JJXKUBIauPMKBLteYrL8Fo
-ff/uY44dC/mDWjdCP/5x0qelPQjlBvWdHL5zvBTOj06rJ0m3HNI/hnIcDh0Qu2j9reb9rLVcdym6
-bWmBM4uDEB8Zv9Ph0KTBFSy1IosyakuD1j1Os30EzjGfbi0EUXIvnOcYbTBAbM5UAzrxEHMhBvoX
-Pvnx+OyvjJmc9tWxTX6AcSz+m40esbT17URBeZS18afgieiikm5TynlUYP1LciR3hSgGVzvGXnKO
-02VDFR5itGWdRKZ2W5wIShNfWfhSa0D0K5UdIDt5Qc7sjzwK1Yb1sY5Tu0uA5mhIS82q1ov83uxB
-sFkriNnhGv/M1NCDVLBiOMsHu73qUM+yKmgKLwF9Hfn9WI25glbAMI4S5r3hYzcCAwEAAaOCAfcw
-ggHzMB8GA1UdIwQYMBaAFPebok7Tl8X0NA9DDoGFzpGTMq/5MB0GA1UdDgQWBBRcYhqbcGzn1jrT
-JOZaB8O7qllDpzAwBgNVHREEKTAngRNkd213MkBpbmZyYWRlYWQub3JngRBkYXZpZEB3b29kaG91
-LnNlMBQGA1UdIAQNMAswCQYHZ4EMAQUBAjAOBgNVHQ8BAf8EBAMCBeAwHQYDVR0lBBYwFAYIKwYB
-BQUHAwIGCCsGAQUFBwMEMIGpBgNVHR8EgaEwgZ4wTaBLoEmGR2h0dHA6Ly9jcmwzLmRpZ2ljZXJ0
-LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsME2gS6BJ
-hkdodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZT
-SEEzODQyMDI0Q0ExLmNybDCBjQYIKwYBBQUHAQEEgYAwfjAkBggrBgEFBQcwAYYYaHR0cDovL29j
-c3AuZGlnaWNlcnQuY29tMFYGCCsGAQUFBzAChkpodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20v
-RGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZTSEEzODQyMDI0Q0ExLmNydDANBgkqhkiG9w0B
-AQsFAAOCAgEAocabrh1cPd5s3vY5rnlBVQSTc7zs2ZWs67dAIltR+05WELrYClVzzUhMs/LOJPlr
-EUo45UDDomXq38DxFepaPd9+iNLjXfn33EX/IG44j04lU/oF/Rg9VeQILkYLbCZ/x9wOjNHZc4SN
-ydY7Dhvf/sT5aBz88u7D5+azZJ7Qf1U57wYseCH1Mt0nDrtr5y19IJ8D9xJJ33RFL6vfpHZBBAQ8
-+3RqkKNxLoV2aFvQhxdhjNLDqTv3LjUIdicwPraN7JkxEu7CV2Lka7eRqJgkWL7SK0YmBjGpRafs
-+icP/ON5RCCKTTb6VlX8eTG2sJJfsFhvJNCCt6xexbWzWtIrfP7NvPBvwBB737AyEGBZkS5aNizT
-McURJGTv9UKvBh1LF/+tNhYtLvPCN7oecGzhCHht9jcwSkygTo3Y6YlK3QgOu+ncmiBbfeuwlLZ1
-LxbYvG6hgNqXv7u6YyADbYajAQJXJ2OQen39pm3Q/AQSyLYG+B8lDglWsM8tYXPlEdrYJcksGK6F
-nqIX6Bumn43rBooLJdiZp4WmfWdL2pxe+LxRDjprmqu1WprixDxULSTOKJZoqTlugs6y3Bc+if+s
-gHnBBtz9WQ6MtPHkh7zONDAFIKcBmv8OqPQCx0F3Wv3OEybwMpXx0OsKgK8wLldaX1pXcMuyDgTL
-Sqs0AV0OHUgwggcDMIIE66ADAgECAhADNSi2uzJskfEdOMo4hV0gMA0GCSqGSIb3DQEBCwUAMGIx
-CzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UEAxMxRGlnaUNlcnQg
-QXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTAeFw0yNjA3MTgwMDAwMDBa
-Fw0yODAxMDQyMzU5NTlaMB4xHDAaBgNVBAMME2R3bXcyQGluZnJhZGVhZC5vcmcwggIiMA0GCSqG
-SIb3DQEBAQUAA4ICDwAwggIKAoICAQDali7HveR1thexYXx/W7oMk/3Wpyppl62zJ8+RmTQH4yZe
-YAS/SRV6zmfXlXaZsNOE6emg8WXLRS6BA70liot+u0O0oPnIvnx+CsMH0PD4tCKSCsdp+XphIJ2z
-kC9S7/yHDYnqegqtw4smkqUqf0WX/ggH1Dckh0vHlpoS1OoxqUg+ocU6WCsnuz5q5rzFsHxhD1qG
-pgFdZEk2/c//ZvUNi12vPWipk8TcJwHw9zoZ/ZrVNybpMCC0THsJ/UEVyuyszPtNYeYZAhOJ41va
-v1RhZJzYan4a1gU0kKBPQklcpQEhq48woEu15isvwWh9/+5jjh0L+YNaN0I//nHSp6U9COUG9Z0c
-vnO8FM6PTqsnSbcc0j+GchwOHRC7aP2t5v2stVx3KbptaYEzi4MQHxm/0+HQpMEVLLUiizJqS4PW
-PU6zfQTOMZ9uLQRRci+c5xhtMEBszlQDOvEQcyEG+hc++fH47K+MmZz21bFNfoBxLP6bjR6xtPXt
-REF5lLXxp+CJ6KKSblPKeVRg/UtyJHeFKAZXO8Zeco7TZUMVHmK0ZZ1EpnZbnAhKE19Z+FJrQPQr
-lR0gO3lBzuyPPArVhvWxjlO7S4DmaEhLzarWi/ze7EGwWSuI2eEa/8zU0INUsGI4ywe7vepQz7Iq
-aAovAX0d+f1YjbmCVsAwjhLmveFjNwIDAQABo4IB9zCCAfMwHwYDVR0jBBgwFoAU95uiTtOXxfQ0
-D0MOgYXOkZMyr/kwHQYDVR0OBBYEFFxiGptwbOfWOtMk5loHw7uqWUOnMDAGA1UdEQQpMCeBE2R3
-bXcyQGluZnJhZGVhZC5vcmeBEGRhdmlkQHdvb2Rob3Uuc2UwFAYDVR0gBA0wCzAJBgdngQwBBQEC
-MA4GA1UdDwEB/wQEAwIF4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwgakGA1UdHwSB
-oTCBnjBNoEugSYZHaHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0QXNzdXJlZEcyU01J
-TUVSU0E0MDk2U0hBMzg0MjAyNENBMS5jcmwwTaBLoEmGR2h0dHA6Ly9jcmw0LmRpZ2ljZXJ0LmNv
-bS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsMIGNBggrBgEF
-BQcBAQSBgDB+MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wVgYIKwYBBQUH
-MAKGSmh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNB
-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
-V5pl50Gs9C719YdTYejhI7wAAAAAAAA=
+iommu-map = <0     &apps_smmu 0x1480 0x1>,
+            <0x100 &apps_smmu 0x1481 0x1>;
 
 
---=-iOYyDNY3mpnbpc85Vz8q--
+Entries here are not 2-cell format, Even though apps_smmu declares #iommu-cells = <2>,
+this DT only supplies one output cell (0x1480/0x1481) — the trailing 0x1 is the length field,
+not a second output cell. (<id-base phandle out-base length>)
+
+The new code detects exactly this pattern (same target phandle across all entries, length always 1)
+and falls back to treating the map as 1-cell output for backward compatibility — hence the pr_warn_once.
+It's harmless and expected, your RIDs still resolve to the correct SIDs (0 → 0x1480, 0x100 → 0x1481).
+
+The second message is a different case and shouldn't be coming from this same map — once the 1-cell
+fallback triggers on the first entry, it applies to the whole map, so you shouldn't hit both warnings
+together on the same node. That error only fires for a genuine 2-cell output specifier combined with
+an id_len > 1, e.g.:
+
+iommu-map = <0x0 &apps_smmu 0x1480 0x1 0x100>;
+
+(<id-base, phandle, out0, out1, length=256>) — which isn't supported, since there's no way to
+linearly scale a multi-cell output specifier across a range of IDs.
+
+Are you seeing that second error on the same pcie node, or a different one?
+If it's the same node, can you share the exact iommu-map entry that triggers it?
+
+
+Thanks,
+Vijay
+
+>> + */
+>> +static bool of_check_bad_map(const __be32 *map, int len)
+>> +{
+>> +    __be32 phandle = map[1];
+>> +
+>> +    if (len % 4)
+>> +        return false;
+>> +    for (int i = 0; i < len; i += 4) {
+>> +        if (map[i + 1] != phandle || map[i + 3] != cpu_to_be32(1))
+>> +            return false;
+>> +    }
+>> +    return true;
+>> +}
+>> +
+>>   /**
+>>    * of_map_id - Translate an ID through a downstream mapping.
+>>    * @np: root complex device node.
+>>    * @id: device ID to map.
+>>    * @map_name: property name of the map to use.
+>> + * @cells_name: property name of target specifier cells.
+>>    * @map_mask_name: optional property name of the mask to use.
+>>    * @filter_np: pointer to an optional filter node, or NULL to allow bypass.
+>>    *    If non-NULL, the map property must exist (-ENODEV if absent). If
+>>    *    *filter_np is also non-NULL, only entries targeting that node match.
+>>    * @arg: pointer to a &struct of_phandle_args for the result. On success,
+>> - *    @arg->args[0] will contain the translated ID. If a map entry was
+>> - *    matched, @arg->np will be set to the target node with a reference
+>> - *    held that the caller must release with of_node_put().
+>> + *    @arg->args_count will be set to the number of output specifier cells
+>> + *    as defined by @cells_name in the target node, and
+>> + *    @arg->args[0..args_count-1] will contain the translated output
+>> + *    specifier values. If a map entry was matched, @arg->np will be set
+>> + *    to the target node with a reference held that the caller must release
+>> + *    with of_node_put().
+>>    *
+>>    * Given a device ID, look up the appropriate implementation-defined
+>>    * platform ID and/or the target device which receives transactions on that
+>> @@ -2137,19 +2167,21 @@ int of_find_last_cache_level(unsigned int cpu)
+>>    * Return: 0 on success or a standard error code on failure.
+>>    */
+>>   int of_map_id(const struct device_node *np, u32 id,
+>> -           const char *map_name, const char *map_mask_name,
+>> +           const char *map_name, const char *cells_name,
+>> +           const char *map_mask_name,
+>>              struct device_node * const *filter_np, struct of_phandle_args *arg)
+>>   {
+>>       u32 map_mask, masked_id;
+>> -    int map_len;
+>> +    int map_bytes, map_len, offset = 0;
+>> +    bool bad_map = false;
+>>       const __be32 *map = NULL;
+>>   -    if (!np || !map_name || !arg)
+>> +    if (!np || !map_name || !cells_name || !arg)
+>>           return -EINVAL;
+>>       /* Ensure bypass/no-match success never returns a stale target node. */
+>>       arg->np = NULL;
+>>   -    map = of_get_property(np, map_name, &map_len);
+>> +    map = of_get_property(np, map_name, &map_bytes);
+>>       if (!map) {
+>>           if (filter_np)
+>>               return -ENODEV;
+>> @@ -2159,11 +2191,9 @@ int of_map_id(const struct device_node *np, u32 id,
+>>           return 0;
+>>       }
+>>   -    if (!map_len || map_len % (4 * sizeof(*map))) {
+>> -        pr_err("%pOF: Error: Bad %s length: %d\n", np,
+>> -            map_name, map_len);
+>> -        return -EINVAL;
+>> -    }
+>> +    if (map_bytes % sizeof(*map))
+>> +        goto err_map_len;
+>> +    map_len = map_bytes / sizeof(*map);
+>>         /* The default is to select all bits. */
+>>       map_mask = 0xffffffff;
+>> @@ -2176,39 +2206,93 @@ int of_map_id(const struct device_node *np, u32 id,
+>>           of_property_read_u32(np, map_mask_name, &map_mask);
+>>         masked_id = map_mask & id;
+>> -    for ( ; map_len > 0; map_len -= 4 * sizeof(*map), map += 4) {
+>> +
+>> +    while (offset < map_len) {
+>>           struct device_node *phandle_node;
+>> -        u32 id_base = be32_to_cpup(map + 0);
+>> -        u32 phandle = be32_to_cpup(map + 1);
+>> -        u32 out_base = be32_to_cpup(map + 2);
+>> -        u32 id_len = be32_to_cpup(map + 3);
+>> +        u32 id_base, phandle, id_len, id_off, cells = 0;
+>> +        const __be32 *out_base;
+>> +
+>> +        if (map_len - offset < 2)
+>> +            goto err_map_len;
+>> +
+>> +        id_base = be32_to_cpup(map + offset);
+>>             if (id_base & ~map_mask) {
+>> -            pr_err("%pOF: Invalid %s translation - %s-mask (0x%x) ignores id-base (0x%x)\n",
+>> -                np, map_name, map_name,
+>> -                map_mask, id_base);
+>> +            pr_err("%pOF: Invalid %s translation - %s (0x%x) ignores id-base (0x%x)\n",
+>> +                   np, map_name, map_mask_name, map_mask, id_base);
+>>               return -EFAULT;
+>>           }
+>>   -        if (masked_id < id_base || masked_id >= id_base + id_len)
+>> -            continue;
+>> -
+>> +        phandle = be32_to_cpup(map + offset + 1);
+>>           phandle_node = of_find_node_by_phandle(phandle);
+>>           if (!phandle_node)
+>>               return -ENODEV;
+>>   +        /*
+>> +         * Assume 1-cell output specifier if the target node lacks the
+>> +         * #cells property, for backward compatibility with controllers
+>> +         * that predate the property (e.g. arm,gic-v2m-frame).
+>> +         */
+>> +        if (bad_map || of_property_read_u32(phandle_node, cells_name, &cells))
+>> +            cells = 1;
+>> +
+>> +        if (cells > MAX_PHANDLE_ARGS) {
+>> +            pr_err("%pOF: %s cell count %d exceeds maximum\n",
+>> +                   phandle_node, cells_name, cells);
+>> +            of_node_put(phandle_node);
+>> +            return -EINVAL;
+>> +        }
+>> +
+>> +        if (offset == 0 && cells == 2) {
+>> +            bad_map = of_check_bad_map(map, map_len);
+>> +            if (bad_map) {
+>> +                pr_warn_once("%pOF: %s has 1-cell entries targeting 2-cell %s, treating as 1-cell output\n",
+>> +                         np, map_name, cells_name);
+>> +                cells = 1;
+>> +            }
+>> +        }
+>> +
+>> +        if (map_len - offset < 3 + cells) {
+>> +            of_node_put(phandle_node);
+>> +            goto err_map_len;
+>> +        }
+>> +
+>> +        out_base = map + offset + 2;
+>> +        offset += 3 + cells;
+>> +
+>> +        id_len = be32_to_cpup(map + offset - 1);
+>> +        id_off = masked_id - id_base;
+>> +        if (masked_id < id_base || id_off >= id_len) {
+>> +            of_node_put(phandle_node);
+>> +            continue;
+>> +        }
+>> +        if (id_len > 1 && cells > 1) {
+>> +            /*
+>> +             * With 1 output cell we reasonably assume its value
+>> +             * has a linear relationship to the input; with more,
+>> +             * we'd need help from the provider to know what to do.
+>> +             */
+>> +            pr_err("%pOF: Unsupported %s - cannot handle %d-ID range with %d-cell output specifier\n",
+>> +                   np, map_name, id_len, cells);
+>> +            of_node_put(phandle_node);
+>> +            return -EINVAL;
+>> +        }
+>> +
+>>           if (filter_np && *filter_np && *filter_np != phandle_node) {
+>>               of_node_put(phandle_node);
+>>               continue;
+>>           }
+>>             arg->np = phandle_node;
+>> -        arg->args[0] = masked_id - id_base + out_base;
+>> -        arg->args_count = 1;
+>> +        for (int i = 0; i < cells; i++)
+>> +            arg->args[i] = id_off + be32_to_cpu(out_base[i]);
+>> +        arg->args_count = cells;
+>>             pr_debug("%pOF: %s, using mask %08x, id-base: %08x, out-base: %08x, length: %08x, id: %08x -> %08x\n",
+>> -            np, map_name, map_mask, id_base, out_base,
+>> -            id_len, id, masked_id - id_base + out_base);
+>> +            np, map_name, map_mask, id_base,
+>> +            cells ? be32_to_cpup(out_base) : 0,
+>> +            id_len, id,
+>> +            cells ? id_off + be32_to_cpup(out_base) : id_off);
+>>           return 0;
+>>       }
+>>   @@ -2219,6 +2303,10 @@ int of_map_id(const struct device_node *np, u32 id,
+>>       arg->args[0] = id;
+>>       arg->args_count = 1;
+>>       return 0;
+>> +
+>> +err_map_len:
+>> +    pr_err("%pOF: Error: Bad %s length: %d\n", np, map_name, map_bytes);
+>> +    return -EINVAL;
+>>   }
+>>   EXPORT_SYMBOL_GPL(of_map_id);
+>>   @@ -2228,18 +2316,21 @@ EXPORT_SYMBOL_GPL(of_map_id);
+>>    * @id: Requester ID of the device (e.g. PCI RID/BDF or a platform
+>>    *      stream/device ID) used as the lookup key in the iommu-map table.
+>>    * @arg: pointer to a &struct of_phandle_args for the result. On success,
+>> - *    @arg->args[0] contains the translated ID. If a map entry was matched,
+>> - *    @arg->np holds a reference to the target node that the caller must
+>> - *    release with of_node_put().
+>> + *    @arg->args_count will be set to the number of output specifier cells
+>> + *    and @arg->args[0..args_count-1] will contain the translated output
+>> + *    specifier values. If a map entry was matched, @arg->np holds a
+>> + *    reference to the target node that the caller must release with
+>> + *    of_node_put().
+>>    *
+>> - * Convenience wrapper around of_map_id() using "iommu-map" and "iommu-map-mask".
+>> + * Convenience wrapper around of_map_id() using "iommu-map", "#iommu-cells",
+>> + * and "iommu-map-mask".
+>>    *
+>>    * Return: 0 on success or a standard error code on failure.
+>>    */
+>>   int of_map_iommu_id(const struct device_node *np, u32 id,
+>>               struct of_phandle_args *arg)
+>>   {
+>> -    return of_map_id(np, id, "iommu-map", "iommu-map-mask", NULL, arg);
+>> +    return of_map_id(np, id, "iommu-map", "#iommu-cells", "iommu-map-mask", NULL, arg);
+>>   }
+>>   EXPORT_SYMBOL_GPL(of_map_iommu_id);
+>>   @@ -2252,17 +2343,20 @@ EXPORT_SYMBOL_GPL(of_map_iommu_id);
+>>    *    If non-NULL, the map property must exist (-ENODEV if absent). If
+>>    *    *filter_np is also non-NULL, only entries targeting that node match.
+>>    * @arg: pointer to a &struct of_phandle_args for the result. On success,
+>> - *    @arg->args[0] contains the translated ID. If a map entry was matched,
+>> - *    @arg->np holds a reference to the target node that the caller must
+>> - *    release with of_node_put().
+>> + *    @arg->args_count will be set to the number of output specifier cells
+>> + *    and @arg->args[0..args_count-1] will contain the translated output
+>> + *    specifier values. If a map entry was matched, @arg->np holds a
+>> + *    reference to the target node that the caller must release with
+>> + *    of_node_put().
+>>    *
+>> - * Convenience wrapper around of_map_id() using "msi-map" and "msi-map-mask".
+>> + * Convenience wrapper around of_map_id() using "msi-map", "#msi-cells",
+>> + * and "msi-map-mask".
+>>    *
+>>    * Return: 0 on success or a standard error code on failure.
+>>    */
+>>   int of_map_msi_id(const struct device_node *np, u32 id,
+>>             struct device_node * const *filter_np, struct of_phandle_args *arg)
+>>   {
+>> -    return of_map_id(np, id, "msi-map", "msi-map-mask", filter_np, arg);
+>> +    return of_map_id(np, id, "msi-map", "#msi-cells", "msi-map-mask", filter_np, arg);
+>>   }
+>>   EXPORT_SYMBOL_GPL(of_map_msi_id);
+>> diff --git a/include/linux/of.h b/include/linux/of.h
+>> index ea50b45d9ff7..374b249766a2 100644
+>> --- a/include/linux/of.h
+>> +++ b/include/linux/of.h
+>> @@ -465,7 +465,8 @@ const char *of_prop_next_string(const struct property *prop, const char *cur);
+>>   bool of_console_check(const struct device_node *dn, char *name, int index);
+>>     int of_map_id(const struct device_node *np, u32 id,
+>> -           const char *map_name, const char *map_mask_name,
+>> +           const char *map_name, const char *cells_name,
+>> +           const char *map_mask_name,
+>>              struct device_node * const *filter_np,
+>>              struct of_phandle_args *arg);
+>>   @@ -950,7 +951,8 @@ static inline void of_property_clear_flag(struct property *p, unsigned long flag
+>>   }
+>>     static inline int of_map_id(const struct device_node *np, u32 id,
+>> -                 const char *map_name, const char *map_mask_name,
+>> +                 const char *map_name, const char *cells_name,
+>> +                 const char *map_mask_name,
+>>                    struct device_node * const *filter_np,
+>>                    struct of_phandle_args *arg)
+>>   {
+>>
+> 
+
 
