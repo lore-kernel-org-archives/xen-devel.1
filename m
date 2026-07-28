@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC19BC54F52
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 12:06:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1372605.1620143 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EC9EC53219
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 12:07:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1373153.1620230 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wogZe-0003cZ-Mp; Tue, 28 Jul 2026 12:06:18 +0000
+	id 1wogax-0004jz-5P; Tue, 28 Jul 2026 12:07:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1372605.1620143; Tue, 28 Jul 2026 12:06:17 +0000
+Received: by outflank-mailman (output) from mailman id 1373153.1620230; Tue, 28 Jul 2026 12:07:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wogZc-0003T5-1N; Tue, 28 Jul 2026 12:06:16 +0000
-Received: by outflank-mailman (input) for mailman id 1372605;
- Tue, 28 Jul 2026 12:05:38 +0000
+	id 1wogaw-0004jU-QI; Tue, 28 Jul 2026 12:07:38 +0000
+Received: by outflank-mailman (input) for mailman id 1373153;
+ Tue, 28 Jul 2026 12:07:36 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 1wogYu-0004Zl-Pp; Tue, 28 Jul 2026 12:05:32 +0000
+ id 1wogau-0004a7-Lq; Tue, 28 Jul 2026 12:07:36 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wogYu-00EbuA-2u; Tue, 28 Jul 2026 14:05:32 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wogau-00EcR4-2W; Tue, 28 Jul 2026 14:07:36 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 6a689b0a-5cb7-0a2a0a5109dd-0a2a4506d2aa-4
- for <multiple-recipients>; Tue, 28 Jul 2026 14:05:32 +0200
+ id 6a689b7b-5cb7-0a2a0a5109dd-0a2a450ce798-34
+ for <multiple-recipients>; Tue, 28 Jul 2026 14:07:36 +0200
 Received: from [104.130.215.37] (helo=mail.xenproject.org)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 6a689b0a-195a-0a2a45060019-6882d725acb0-3
- for <multiple-recipients>; Tue, 28 Jul 2026 14:05:31 +0200
+ id 6a689b0e-f479-0a2a450c0019-6882d725b970-3
+ for <multiple-recipients>; Tue, 28 Jul 2026 14:05:35 +0200
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <andrewcoop@xenbits.xen.org>) id 1wogYp-00DPFi-1f;
- Tue, 28 Jul 2026 12:05:27 +0000
+ (envelope-from <andrewcoop@xenbits.xen.org>) id 1wogYt-00DPGA-0x;
+ Tue, 28 Jul 2026 12:05:31 +0000
 Received: from andrewcoop by xenbits.xenproject.org with local (Exim 4.96)
- (envelope-from <andrewcoop@xenbits.xen.org>) id 1wogYp-003Dy5-0f;
- Tue, 28 Jul 2026 12:05:27 +0000
+ (envelope-from <andrewcoop@xenbits.xen.org>) id 1wogYs-003Dzb-3C;
+ Tue, 28 Jul 2026 12:05:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,13 +60,13 @@ To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
  xen-users@lists.xen.org, oss-security@lists.openwall.com
 From: Xen.org security team <security@xen.org>
 CC: Xen.org security team <security-team-members@xen.org>
-Subject: Xen Security Advisory 506 v2 (CVE-2026-62433) - correct buffer
- checks for DM_OP hypercalls
-Message-Id: <E1wogYp-003Dy5-0f@xenbits.xenproject.org>
-Date: Tue, 28 Jul 2026 12:05:27 +0000
-X-purgate-ID: tlsNG-16d1c6/1785240331-FEA7477B-8DF5F12B/0/0
+Subject: Xen Security Advisory 507 v2 (CVE-2026-62434) - PoD: Don't try to
+ reclaim special pages
+Message-Id: <E1wogYs-003Dzb-3C@xenbits.xenproject.org>
+Date: Tue, 28 Jul 2026 12:05:30 +0000
+X-purgate-ID: tlsNG-d25034/1785240335-01AC4A5B-4B6FAA98/0/0
 X-purgate-type: clean
-X-purgate-size: 7333
+X-purgate-size: 6587
 
 --=separator
 Content-Type: text/plain; charset="utf-8"
@@ -76,10 +76,10 @@ Content-Transfer-Encoding: 7bit
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA256
 
-            Xen Security Advisory CVE-2026-62433 / XSA-506
+            Xen Security Advisory CVE-2026-62434 / XSA-507
                                version 2
 
-              correct buffer checks for DM_OP hypercalls
+                PoD: Don't try to reclaim special pages
 
 UPDATES IN VERSION 2
 ====================
@@ -89,40 +89,35 @@ Public release.
 ISSUE DESCRIPTION
 =================
 
-Parts of the DM_OP handling code assumes the caller has provided the
-required number of buffers for the given operation without any checking
-being done.  As a result, certain operations might access stack
-rubble as structures are possibly uninitialized.
+A guest started with Populated on Demand enabled (PoD) can attempt to
+reclaim pages which aren't regular guest RAM.  This can cause corruption
+of memory management state in Xen.
 
 IMPACT
 ======
 
-A device model of a HVM guest can gain insight on the contents of the
-Xen stack, thus possibly leaking data from other guests contexts.
+A buggy or malicious guest can cause corruption of Xen's state, leading
+to crashes or other malfunctions.  Information leak and privilege
+escalation cannot be ruled out.
 
 VULNERABLE SYSTEMS
 ==================
 
-All Xen versions from 4.10 onwards are vulnerable.  Xen versions 4.9 and
+All Xen versions from 3.4 onwards are vulnerable.  Xen versions 3.3 and
 earlier are not vulnerable.
 
-Only entities controlling HVM guests can leverage the vulnerability.
-These are device models running in either a stub domain or de-privileged
-in Dom0.
+Only x86 systems are vulnerable.
+
+Only x86 HVM and PVH guests started in populate-on-demand mode are
+believed to be able to leverage the vulnerability.  Populate-on-demand
+mode is activated when the guest's xl configuration file specifies a
+"maxmem" value which is larger than the "memory" value.
 
 MITIGATION
 ==========
 
-Running only PV or PVH guests will avoid the vulnerability.
-
-(Switching from a device model stub domain or a de-privileged device
-model to a fully privileged Dom0 device model does NOT mitigate this
-vulnerability.  Rather, it simply recategorises the vulnerability to
-hostile management code, regarding it "as designed"; thus it merely
-reclassifies these issues as "not a bug".  The security of a Xen system
-using stub domains is still better than with a qemu-dm running as a Dom0
-process.  Users and vendors of stub qemu dm systems should not change
-their configuration to use a Dom0 QEMU process.)
+Running only PV guests or HVM/PVH guests without PoD will avoid the
+vulnerability.
 
 RESOLUTION
 ==========
@@ -134,10 +129,10 @@ apply to the stable branches, and may not apply cleanly to the most
 recent release tarball.  Downstreams are encouraged to update to the
 tip of the stable branch before applying these patches.
 
-xsa506.patch           xen-unstable - Xen 4.17.x
+xsa507.patch           xen-unstable - Xen 4.17.x
 
-$ sha256sum xsa506*
-7fa79f0421eafa420f7af791ad35a96a769c945260d81419052611771347b411  xsa506.patch
+$ sha256sum xsa507*
+41485ddf0912cfa53fa05e236aa27c3c6490919ac2dab5b9f57ed69f5b38f60a  xsa507.patch
 $
 
 DEPLOYMENT DURING EMBARGO
@@ -165,75 +160,70 @@ consult the Xen Project community's agreed Security Policy:
   http://www.xenproject.org/security-policy.html
 -----BEGIN PGP SIGNATURE-----
 
-iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmpomrwMHHBncEB4ZW4u
-b3JnAAoJEIP+FMlX6CvZNF4H/0c6JMsivAWWDIQ920Bwh7EEOKhMv3nGIrBqrN8/
-TGKJNNoNQinhoQv9fnqwsHaiC8e49PNUJqTpEN8/o/b0obnl4Tw2JyUXFY1bZyaz
-XNS85rkrUc0+Ue/Ka2464mmQ826TJXfaXG9CZYlC5cO/JtzX65ecMW4H7ju2tdnt
-c9xK+I5kIQPwUwy3HUMrKFvWi+JIvpCzhuHYDH2iJDecmk42pOmnKtS54q6YO15n
-c4xdn7aNyeECKQw4qUcjKC7zKRgrqFu5J3BlvXauZOkJCL50PK+OpWK6QV+fRNGy
-N7dnY5w+1BMVrHywZI5iy8WqZtJoi6TOO1Gl0WcB07/vvJk=
-=APkr
+iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmpomr4MHHBncEB4ZW4u
+b3JnAAoJEIP+FMlX6CvZ+04H/i3UMWbGcPG2kp978waMmF3Gtfb/r8mw3UBzVGCi
+cIOBWf/FizjWu54SQEQtjwYPfi0nKftFN1UPqAGs+OUtyiZ8EcPL5x9i7arrqA2T
+uGfpCTb3NtFmacBbrpGnqkNahMtSLWtE8aSVEQhLxvZcLTPB6OPzIi/MVPGyA7jl
+/LSGWs4vd99Y8ZvAN20rhxaEAjYynfd7N4tXn38EoW9WiQBuPZ5eNzsbieah8PEo
+Ajntyx774ipvtYYStA4fhsLwO+6LyqH7okDR1g8Xkq6IVrOshP194mxnsuEfcMIO
+4TCkWbzhmspfxQ1E2aW2VVPzIC2X2b+i8JieUK/z3mmrRSU=
+=AfG5
 -----END PGP SIGNATURE-----
 
 --=separator
-Content-Type: application/octet-stream; name="xsa506.patch"
-Content-Disposition: attachment; filename="xsa506.patch"
+Content-Type: application/octet-stream; name="xsa507.patch"
+Content-Disposition: attachment; filename="xsa507.patch"
 Content-Transfer-Encoding: base64
 
-RnJvbSA2YzM4ODIzZTg5NzFmYWJkNGQyZTRkNDQ3YzY1YjM5ZjU3Yjk1M2Uz
+RnJvbSBjMWZlN2QxMGU4YjQ4OWRkNjZhZDVhMmQ3NTA4ZTk4ZTljOGRhYmM2
 IE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBSb2dlciBQYXUgTW9u
 bmUgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgpEYXRlOiBUdWUsIDE0IEp1bCAy
-MDI2IDEzOjEzOjEyICswMjAwClN1YmplY3Q6IHhlbi9kbW9wOiBjaGVjayBu
-dW1iZXIgb2YgaW5wdXQgYnVmZmVycwpNSU1FLVZlcnNpb246IDEuMApDb250
-ZW50LVR5cGU6IHRleHQvcGxhaW47IGNoYXJzZXQ9VVRGLTgKQ29udGVudC1U
-cmFuc2Zlci1FbmNvZGluZzogOGJpdAoKVGhlIGh5cGVyY2FsbCByZXF1aXJl
-cyBhdCBsZWFzdCBvbmUgaW5wdXQgYnVmZmVyLCBhcyBib3RoIGFyY2gtc3Bl
-Y2lmaWMKaW1wbGVtZW50YXRpb25zIG9mIGRtX29wKCkgdW5jb25kaXRpb25h
-bGx5IGFzc3VtZSAtPmJ1ZlswXSB0byBiZSB2YWxpZCAoYW5kCm5vdCBzdGFj
-ayBydWJibGUpLgoKQWRkaXRpb25hbGx5LCBYRU5fRE1PUF9tb2RpZmllZF9t
-ZW1vcnkgcmVxdWlyZXMgdHdvIGlucHV0IGJ1ZmZlcnMsIHlldCB0aGUKY29k
-ZSB3YXMgYXNzdW1pbmcgdGhlIHNlY29uZCBidWZmZXIgdG8gYWx3YXlzIGJl
-IHByb3ZpZGVkIGJ5IHRoZSB1c2VyIHdoZW4KY2hlY2tpbmcgZm9yIHRoZSBu
-dW1iZXIgb2YgZXh0ZW50cy4gIEluIGNhc2UgdGhlIGNhbGxlciBzZXRzIG5y
-X2J1ZnMgdG8gMSwKdGhlIGNvZGUgaW4gbW9kaWZpZWRfbWVtb3J5KCkgd2ls
-bCByZWFkIHN0YWNrIGdhcmJhZ2UgYXMgdGhlIHNpemUgb2YgdGhlCmJ1ZmZl
-ciwgdGh1cyBhbGxvd2luZyB0aGUgY2FsbGVyIHNvbWUgZGVncmVlIG9mIGlu
-c2lnaHQgb24gdGhlIGNvbnRlbnRzIG9mCnRoZSBzdGFjayBieSBwcm9iaW5n
-IHdoZXRoZXIgdGhlIGh5cGVyY2FsbCByZXR1cm5zIC1FSU5WQUwgb3IgLUVG
-QVVMVCBhcyBhCnJlc3VsdCBvZiBzdWNoIGJvZ3VzIGNhbGwuCgpUaGlzIGlz
-IFhTQS01MDYgLyBDVkUtMjAyNi02MjQzMy4KCkZpeGVzOiBlM2I5M2IzYzU5
-NTQgKCJkbW9wOiBhZGQgeGVuZGV2aWNlbW9kZWxfbW9kaWZpZWRfbWVtb3J5
-X2J1bGsoKSIpCkZpeGVzOiA4NWNiMTVkZmU0ZDEgKCJ4ODYvaHZtL2Rtb3A6
-IG9ubHkgY29weSB3aGF0IGlzIG5lZWRlZCB0by9mcm9tIHRoZSBndWVzdCIp
-ClNpZ25lZC1vZmYtYnk6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBj
-aXRyaXguY29tPgpSZXZpZXdlZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3
-LmNvb3BlcjNAY2l0cml4LmNvbT4KUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNo
-IDxqYmV1bGljaEBzdXNlLmNvbT4KLS0tCiB4ZW4vYXJjaC94ODYvaHZtL2Rt
-LmMgfCA5ICsrKysrKysrKwogeGVuL2NvbW1vbi9kbS5jICAgICAgIHwgMyAr
-KysKIDIgZmlsZXMgY2hhbmdlZCwgMTIgaW5zZXJ0aW9ucygrKQoKZGlmZiAt
-LWdpdCBhL3hlbi9hcmNoL3g4Ni9odm0vZG0uYyBiL3hlbi9hcmNoL3g4Ni9o
-dm0vZG0uYwppbmRleCAwNjY0OThlMDdlYTEuLjFmNDRmZmYxMmEyMSAxMDA2
-NDQKLS0tIGEveGVuL2FyY2gveDg2L2h2bS9kbS5jCisrKyBiL3hlbi9hcmNo
-L3g4Ni9odm0vZG0uYwpAQCAtNDk0LDYgKzQ5NCwxMiBAQCBpbnQgZG1fb3Ao
-Y29uc3Qgc3RydWN0IGRtb3BfYXJncyAqb3BfYXJncykKICAgICAgICAgc3Ry
-dWN0IHhlbl9kbV9vcF9tb2RpZmllZF9tZW1vcnkgKmRhdGEgPQogICAgICAg
-ICAgICAgJm9wLnUubW9kaWZpZWRfbWVtb3J5OwogCisgICAgICAgIGlmICgg
-b3BfYXJncy0+bnJfYnVmcyAhPSAyICkKKyAgICAgICAgeworICAgICAgICAg
-ICAgcmMgPSAtRUlOVkFMOworICAgICAgICAgICAgYnJlYWs7CisgICAgICAg
-IH0KKwogICAgICAgICByYyA9IG1vZGlmaWVkX21lbW9yeShkLCBvcF9hcmdz
-LCBkYXRhKTsKICAgICAgICAgY29uc3Rfb3AgPSAhcmM7CiAgICAgICAgIGJy
-ZWFrOwpAQCAtNjU1LDYgKzY2MSw5IEBAIGludCBjb21wYXRfZG1fb3AoCiAg
-ICAgdW5zaWduZWQgaW50IGk7CiAgICAgaW50IHJjOwogCisgICAgaWYgKCAh
-bnJfYnVmcyApCisgICAgICAgIHJldHVybiAtRU5PREFUQTsKKwogICAgIGlm
-ICggbnJfYnVmcyA+IEFSUkFZX1NJWkUoYXJncy5idWYpICkKICAgICAgICAg
-cmV0dXJuIC1FMkJJRzsKIApkaWZmIC0tZ2l0IGEveGVuL2NvbW1vbi9kbS5j
-IGIveGVuL2NvbW1vbi9kbS5jCmluZGV4IDIwMWI2NTJkZWI3ZS4uODY4OTcy
-OGFiN2EzIDEwMDY0NAotLS0gYS94ZW4vY29tbW9uL2RtLmMKKysrIGIveGVu
-L2NvbW1vbi9kbS5jCkBAIC0yNiw2ICsyNiw5IEBAIGxvbmcgZG9fZG1fb3Ao
-CiAgICAgc3RydWN0IGRtb3BfYXJncyBhcmdzOwogICAgIGludCByYzsKIAor
-ICAgIGlmICggIW5yX2J1ZnMgKQorICAgICAgICByZXR1cm4gLUVOT0RBVEE7
-CisKICAgICBpZiAoIG5yX2J1ZnMgPiBBUlJBWV9TSVpFKGFyZ3MuYnVmKSAp
-CiAgICAgICAgIHJldHVybiAtRTJCSUc7CiAKLS0gCjIuNTMuMAoK
+MDI2IDE3OjA1OjQ1ICswMjAwClN1YmplY3Q6IHg4Ni9wb2Q6IGRvIG5vdCBy
+ZWNsYWltIHNwZWNpYWwgcGFnZXMgZm9yIFBvRCBjYWNoZQpNSU1FLVZlcnNp
+b246IDEuMApDb250ZW50LVR5cGU6IHRleHQvcGxhaW47IGNoYXJzZXQ9VVRG
+LTgKQ29udGVudC1UcmFuc2Zlci1FbmNvZGluZzogOGJpdAoKV2hlbiBkb2lu
+ZyBQb0QgY2FjaGUgcmVjbGFpbSBhcyBwYXJ0IG9mIGEgZGVjcmVhc2UgcmVz
+ZXJ2YXRpb24gY2FsbCwgYXZvaWQKcmVjbGFpbWluZyBzcGVjaWFsIHBhZ2Vz
+IGZvciB0aGUgUG9EIGNhY2hlLiAgT3RoZXJ3aXNlIHN1Y2ggcGFnZXMgZ2V0
+IG1vdmVkCmZyb20gdGhlIGRvbWFpbiAtPnhlbnBhZ2VfbGlzdCB0byB0aGUg
+LT5wYWdlX2xpc3QsIHdoaWxlIHN0aWxsIGJlaW5nCnJlZmVyZW5jZWQgaW4g
+LT5zaGFyZWRfaW5mbyBkb21haW4gZmllbGQuCgpQcmV2ZW50IFBvRCBjYWNo
+ZSBmcm9tIHJlY2xhaW1pbmcgc3BlY2lhbCBwYWdlcywgYXMgbm90aGluZyBn
+b29kIGNhbiBjb21lCm91dCBvZiBpdC4KClRoaXMgaXMgWFNBLTUwNyAvIENW
+RS0yMDI2LTYyNDM0LgoKRml4ZXM6IDQxYWEwYjYyNjk5ZSAoIlBvRCBtZW1v
+cnkgNC85OiBEZWNyZWFzZSByZXNlcnZhdGlvbiIpClNpZ25lZC1vZmYtYnk6
+IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgpSZXZp
+ZXdlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgotLS0K
+IHhlbi9hcmNoL3g4Ni9tbS9wMm0tcG9kLmMgfCA4ICsrKysrKy0tCiAxIGZp
+bGUgY2hhbmdlZCwgNiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQoK
+ZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9tbS9wMm0tcG9kLmMgYi94ZW4v
+YXJjaC94ODYvbW0vcDJtLXBvZC5jCmluZGV4IDdhMGJlYmQyZDNiNS4uNDYw
+MmMzMmNmZmFmIDEwMDY0NAotLS0gYS94ZW4vYXJjaC94ODYvbW0vcDJtLXBv
+ZC5jCisrKyBiL3hlbi9hcmNoL3g4Ni9tbS9wMm0tcG9kLmMKQEAgLTUzNiwx
+MiArNTM2LDEzIEBAIGRlY3JlYXNlX3Jlc2VydmF0aW9uKHN0cnVjdCBkb21h
+aW4gKmQsIGdmbl90IGdmbiwgdW5zaWduZWQgaW50IG9yZGVyKQogICAgICAg
+ICBwMm1fYWNjZXNzX3QgYTsKICAgICAgICAgcDJtX3R5cGVfdCB0OwogICAg
+ICAgICB1bnNpZ25lZCBpbnQgY3VyX29yZGVyOworICAgICAgICBtZm5fdCBt
+Zm4gPSBwMm0tPmdldF9lbnRyeShwMm0sIGdmbl9hZGQoZ2ZuLCBpKSwgJnQs
+ICZhLCAwLCAmY3VyX29yZGVyLAorICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBOVUxMKTsKIAotICAgICAgICBwMm0tPmdldF9lbnRyeShw
+Mm0sIGdmbl9hZGQoZ2ZuLCBpKSwgJnQsICZhLCAwLCAmY3VyX29yZGVyLCBO
+VUxMKTsKICAgICAgICAgbiA9IDFVTCA8PCBtaW4ob3JkZXIsIGN1cl9vcmRl
+cik7CiAgICAgICAgIGlmICggcDJtX2lzX3BvZCh0KSApCiAgICAgICAgICAg
+ICBwb2QgKz0gbjsKLSAgICAgICAgZWxzZSBpZiAoIHAybV9pc19yYW0odCkg
+KQorICAgICAgICBlbHNlIGlmICggcDJtX2lzX3JhbSh0KSAmJiAhaXNfc3Bl
+Y2lhbF9wYWdlKG1mbl90b19wYWdlKG1mbikpICkKICAgICAgICAgICAgIHJh
+bSArPSBuOwogICAgIH0KIApAQCAtNjQ0LDYgKzY0NSw5IEBAIGRlY3JlYXNl
+X3Jlc2VydmF0aW9uKHN0cnVjdCBkb21haW4gKmQsIGdmbl90IGdmbiwgdW5z
+aWduZWQgaW50IG9yZGVyKQogICAgICAgICAgICAgQVNTRVJUKG1mbl92YWxp
+ZChtZm4pKTsKIAogICAgICAgICAgICAgcGFnZSA9IG1mbl90b19wYWdlKG1m
+bik7CisgICAgICAgICAgICBpZiAoIGlzX3NwZWNpYWxfcGFnZShwYWdlKSAp
+CisgICAgICAgICAgICAgICAgLyogRG8gbm90IHRvdWNoIHNwZWNpYWwgcGFn
+ZXMsIGxldCBnZW5lcmljIGNvZGUgaGFuZGxlIHRoZW0uICovCisgICAgICAg
+ICAgICAgICAgY29udGludWU7CiAKICAgICAgICAgICAgIC8qIFRoaXMgc2hv
+dWxkbid0IGJlIGFibGUgdG8gZmFpbCAqLwogICAgICAgICAgICAgaWYgKCBw
+Mm1fc2V0X2VudHJ5KHAybSwgZ2ZuX2FkZChnZm4sIGkpLCBJTlZBTElEX01G
+TiwgY3VyX29yZGVyLAotLSAKMi41My4wCgo=
 
 --=separator--
 
