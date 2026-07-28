@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 707BCC53219
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 07:59:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1372180.1619576 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B603AC53219
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 08:03:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1372199.1619586 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wociU-0001Ky-Ft; Tue, 28 Jul 2026 07:59:10 +0000
+	id 1wocmX-0003XB-DO; Tue, 28 Jul 2026 08:03:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1372180.1619576; Tue, 28 Jul 2026 07:59:10 +0000
+Received: by outflank-mailman (output) from mailman id 1372199.1619586; Tue, 28 Jul 2026 08:03:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wociU-0001Kr-DK; Tue, 28 Jul 2026 07:59:10 +0000
-Received: by outflank-mailman (input) for mailman id 1372180;
- Tue, 28 Jul 2026 07:59:09 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wocmX-0003X4-AX; Tue, 28 Jul 2026 08:03:21 +0000
+Received: by outflank-mailman (input) for mailman id 1372199;
+ Tue, 28 Jul 2026 08:03:19 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wociS-0001JM-UK
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 07:59:09 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wocmV-0003Wy-SN
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 08:03:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wociR-003oVB-5j
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 09:59:07 +0200
+ id 1wocmV-001y52-8n
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 10:03:19 +0200
 Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68613f-e002-0a2a0a5209dd-0a2a450cd80c-18
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 09:59:07 +0200
-Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ id 6a686244-2eae-0a2a0a5409dd-0a2a450cec56-38
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 10:03:19 +0200
+Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
  by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a686148-f479-0a2a450c0019-d1558031e123-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 09:59:04 +0200
-Received: by mail-wm1-f49.google.com with SMTP id
- 5b1f17b1804b1-49554ebb87dso32230435e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 00:59:04 -0700 (PDT)
+ id 6a686246-f479-0a2a450c0019-d155dd34c95b-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 10:03:19 +0200
+Received: by mail-wr1-f52.google.com with SMTP id
+ ffacd0b85a97d-47f7854678bso1213656f8f.3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 01:03:19 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4957f9ae5c3sm395756935e9.3.2026.07.28.00.59.03
+ 5b1f17b1804b1-496c46240c4sm57476945e9.12.2026.07.28.01.03.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Jul 2026 00:59:04 -0700 (PDT)
+ Tue, 28 Jul 2026 01:03:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,53 +55,55 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785225544; x=1785830344; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785225798; x=1785830598; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=4kNw43z49eToA5T4V8xwk3lsJGSM/6nZj1+mJKzDiZ8=;
-        b=WBX6OyulcxwR5+PVmWwOZv0+aNug1N0asFd7K6ri/SDqTWd/dwPpuJR/HIgQdha3l/
-         JQeB5Z8fBY9jNM93r3zFZUUOOKgnG6cBJcWqn/oVRiNE6LEjrU5M8k8zqQdUgRFqIojk
-         3utGSZDpzWlP3lucpDZIAc6si4nHAefJg5D8eNu2iIj4cwPbNXygPhAJIKdwEcj02ebp
-         T5Z7mtop157IFxUBmu4ghyMIku0fcFgA8DDaVJrYd3XrYDtosRhREuneM28SIB8ARMl4
-         k6zP9XOIyquw6rVO/jnklytPOyZH0IHlpZa7zpCS+VyLC8XaJAAKB6BjFJEqP+WbeAYV
-         Z0oQ==
+        bh=+2GLG6+V1DlfEJxeQ+3HMIeqcrQuJlhbxT8+jpUHpdw=;
+        b=G9P7Gb9FqiddT1ZxB+siTZWnFEPzqrikxS1N9hYmavtNXfVnPZJgA1oHOL4gaU/5rD
+         BYuVOQ/dbaYrSZxYYxAJHbyiotJn+k/jQJXWvfU18oOH3ZFt1Fuoxee3vZju/woC3t9A
+         BShnm9vmtXc5utntbAHi4hwWmKgl2/0H9/s2Zow4KK6O95i6pNMpHIe/To54QWL0YmMK
+         bzJYwLWqpDWfzmljsjRKDyFwcNq9fkw3LNU1uDKig0z4Y95LcJ6kA9jyLPWnyEXfQQgk
+         Sl9Hp77ak0nYrV3pcClIaUJoATQjDfjLj/4c7nGODA5XY7AOhO12JfkLgt4ebkmryGqa
+         QhEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785225544; x=1785830344;
+        d=1e100.net; s=20251104; t=1785225798; x=1785830598;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=4kNw43z49eToA5T4V8xwk3lsJGSM/6nZj1+mJKzDiZ8=;
-        b=ku7Z9qCgHQB275bkmGTLNluWiG4i+9Ya+NN8Y9uozvhVqj8i01t2GwEdDWjfeML1gb
-         uzQFXKrKG0tzh73QD6QXXjHQNjACJNpDp7YloQDJ73PwQoP0n+pdfUJ1GkJrsKS1gA7t
-         QULnY3NMlSQYscPJLhU09L0m7yhCIlEsEFNm07cccIxho/n59Px0P0nupVT6HRXYlD3R
-         Vm2RxYGDpteatuS6i2XI+8HHFxXR3JJx+5PGbtDiYqfUnxuIoDYl5S86LFaRtdIDcx93
-         0KPK2Leh9UJsdYPaQxmvrvPTmsXQKR6w0z0gyMQFDup2gUa9KuOlyURUAkvs0iVey5m9
-         Jbog==
-X-Forwarded-Encrypted: i=1; AHgh+RpgtcEOkbD9UjD7EG1c1VSJ1BCz95D0P+/2PlNl6KT6oW1Ig6COapMEI1Ixx0TFYoPciMNCDvOkEE4=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx64z9tZx5AG1fCff0qZ89vre/QuNWyd/oMKgu8TaMTK2XphSqJ
-	fzVjhvfT6VAvAB7n0TCjzoZYuwA7GMPvE9iSMwZb3L4QA4nz35A3+4sKzESYlQ8wCA==
-X-Gm-Gg: AR+sD12C+5CHFK1cC2H/doQVO+dU3EsbII3zNToZwbYK+cZHpqzMPrntuthyvfbFGHm
-	BPi/gh4zsVNbgHOC+zbmcEho4qpHUTeEANara9C6yu5lejjXkpTT+vo5tQTNap/2+rav9RPLmac
-	xW29O9bjzDHqKyDGkpJprkGla/PGd8FiEkqHgvHMLvWfnNaUrfisi9virhDaMpVb3lNzLGnrzWF
-	R5ezLYirGCfBtGe9gLMd+Rcs7YTQyS2XAMRXaF5gDyLUsDi+OoxS2exCaHW94EdVLTzVRwH4xhx
-	A2+/0c0wDNlMH8xir+ruJW4n4ISPoiaGbtIGNTrBuHANeNUFYHl9Ot53wHdrMzgawx77R82So3Q
-	osah9tR5fvtZOefQcc3Od73Rg72T8QLfSl7qunycIzXDoI7mJP+uAag4cAeCQdM3HuhOEJVA+sa
-	IUQ0DNA3Kdklwz46gVqZ6oV5Uc1btgbJhFuW9kL32fM4DNLF6YPLhMyZUdAmVohYwu8Mols0/9a
-	WSc
-X-Received: by 2002:a05:600c:8b2e:b0:495:4dd3:ca97 with SMTP id 5b1f17b1804b1-496c659f843mr14541765e9.29.1785225544425;
-        Tue, 28 Jul 2026 00:59:04 -0700 (PDT)
-Message-ID: <6ebc44f2-c7a3-4b33-9f6a-cd48be13ad27@suse.com>
-Date: Tue, 28 Jul 2026 09:59:03 +0200
+        bh=+2GLG6+V1DlfEJxeQ+3HMIeqcrQuJlhbxT8+jpUHpdw=;
+        b=IRrohSlEVkTwj2Jo6HnIpsj+/cY7wySjiTgSwhliKrqdeQGqkdrfyWs6DbKKP3r/XR
+         cB3xziOEd2fK0TrNOUDIOqywN5a71/HqUM42OWTssFneF7nYWlaHU111jw7bro8vnZ3g
+         W4NajMBcvCg3z0gRUz11Z0DdBJOdZeyATbRPnzB1qBCu1lXbI1dE029xyXG4iPNTt9aL
+         pAu5torPHUt74fmlBWW/YjvMVJK/Z3jWP+xWbFPu1y/O8s1WzewuSPj4Hg9899/NmqJd
+         30kBtNbIQa0nZbCs/dg2z//XDlygvQ+DC3hIpLUO5Iq+h5LJwEcQif/T1QXof9sud6o4
+         l3QA==
+X-Forwarded-Encrypted: i=1; AHgh+RrPFIojxuVpVutCtG1+dr4swR7BJ85Fk6wQCbaHLQIi/m2jV0hWm1RQRkckBicsCaPdBhFCEQVieLk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyhIA8DNwJc71L8SSVgATfmrQCPUm95qk2vzX7XFcWcXBqt9aYK
+	/Os3/3ZwQVQkUK3CT50XgBoepXwVWcT7nw0fdB4Ls1RyaIZHorCWBEoymhG8wK5/NQ==
+X-Gm-Gg: AR+sD12RHCgqYWqvsyU6WiqKbNNzLU19yKcftJqr5jIKtmcxCA1DPKEQ8MmtlsltZtZ
+	zpBpe/v31LIXc4UbcvV0/wDwBzC5Muzrh9GALiMy2n2YzpgTaJPGK41NZFgm6K4JV1SLDWC/New
+	FiCDpp1r6aLRsBAMaYqkp+jBxsDowFO0rgdRi0Uq2nbIt9SXwTM/hgOu0v3vGoaQLLlBxyq5OYi
+	Zifk542XA4JwXITWkRlcUoY7gdnr8GUqsvXkYcE+eWFT9aqlGJ2tV73k7gIYT7QTWu9OAtHrxH6
+	1CG6JlyNxOKDoMPvosqZKksl+H3Rtv+YIPxJlDIwTXVZ8XJC+w6/SO1oIH3rh6z9jQFqRaLed+2
+	TUJlDObi6q6ge97j3fOhdFmMc92mb1cs6KvRURD9ZENj1XO29BTdYoGocVvBszWtVtVyiaL6QZB
+	ffCQHXAojph1N7MJFAthFQ9aGQAr5LVBoSGFpp+iC/xjsUYgds+BCWteeyR0wpHOYRkg==
+X-Received: by 2002:a05:600c:1d19:b0:493:aa0a:45ad with SMTP id 5b1f17b1804b1-496c641518dmr14388755e9.2.1785225797345;
+        Tue, 28 Jul 2026 01:03:17 -0700 (PDT)
+Message-ID: <874be4f5-b7fc-4114-959e-1b31ed4e7608@suse.com>
+Date: Tue, 28 Jul 2026 10:03:15 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 0/4] xen/acpi,device-tree: Introduce generic CPU
- topology support for ACPI and DT
-To: Hirokazu Takahashi <taka@valinux.co.jp>
-Cc: Mykyta_Poturai@epam.com, xen-devel@lists.xenproject.org
-References: <20260728050642.411240-1-taka@valinux.co.jp>
+Subject: Re: [PATCH] x86/svm: require VMSAVEvirt for nested virt
+To: Stephen Cheng <stephen.cheng@citrix.com>
+Cc: ross.lagerwall@citrix.com, andrew.cooper3@citrix.com,
+ anthony.perard@vates.tech, jason.andryuk@amd.com, julien@xen.org,
+ michal.orzel@amd.com, roger@xenproject.org, sstabellini@kernel.org,
+ xen-devel@lists.xenproject.org, teddy.astie@vates.tech
+References: <1785152912.8631fc262581453bbf619ec5b2062170.19fa367bc22000e099@vates.tech>
+ <20260728071641.263677-1-stephen.cheng@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -127,35 +129,35 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260728050642.411240-1-taka@valinux.co.jp>
+In-Reply-To: <20260728071641.263677-1-stephen.cheng@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d25034/1785225545-51339A5B-0519C495/0/0
+X-purgate-ID: tlsNG-d25034/1785225799-03CD3A5B-5C2489AB/0/0
 X-purgate-type: clean
-X-purgate-size: 1107
+X-purgate-size: 1201
 
-On 28.07.2026 07:06, Hirokazu Takahashi wrote:
-> Hello,
+On 28.07.2026 09:16, Stephen Cheng wrote:
+> On 27/07/2026 11:48, Teddy Astie wrote:
+>> Had you considered improving the current implementation of virtualized
+>> VMLOAD/VMSAVE ? AIUI, the way Xen currently implements this instruction
+>> (by mapping the L1 VMCB then calling vmload/vmsave on it) is more of a
+>> implementation choice than a requirement.
+>>
+>> A better (at least, likely safer) way to emulate such instructions (and
+>> not relying on VMSAVEvirt) would be to copy parts of L1 VMCB from/to L0
+>> VMCB and let Xen perform the appropriate vmload/vmsave on its own VMCBs
+>> as usual.
 > 
-> This patch series integrates CPU topology discovery into the Xen hypervisor
-> for both ACPI and Device Tree platforms.
-> 
-> Changes in v9:
->  - Add bounds checking for the number of private resources in the PPTT
->    processor table.
->  - Verify the validity of entries when indexing into the map_cpu_acpiid table.
->  - Coding style adjustments (following Xen standards):
->    * Place logical operators ('||', '&&') at the end of lines when splitting
->      multi-line conditions.
->    * Place arithmetic operators ('+', '-') at the end of lines when wrapping
->      long assignment statements.
->    * Enclose bitwise operations in parentheses within conditional expressions
->      that combine logical operators.
->    * Combine variable declaration and initialization where applicable.
+> You're right that it's an implementation choice rather than a hardware
+> requirement.  On whether it's worth building, I'll defer to Ross's
+> reply: given how limited our resources for nested virt are, and that
+> AMD nested virt doesn't work today, dropping support for older parts
+> isn't a functional regression.
 
-May I ask that you slow down your re-submission rate? Iirc Arm people haven't
-really looked at the series so far, yet without them doing so none of this can
-go in anyway. You may therefore rather want to ping for their feedback.
+But the functions you drop aren't needed just for older parts. They're also
+going to be needed when the insn emulator hits these insns. This still is
+in need of properly wiring up, but imo we better wouldn't delete code which
+is going to be needed later on.
 
 Jan
 
