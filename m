@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6350C53219
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:50:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374493.1621661 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D55FC54F5B
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:50:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374498.1621675 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woj8G-0005NJ-EK; Tue, 28 Jul 2026 14:50:12 +0000
+	id 1woj8H-0005gO-9O; Tue, 28 Jul 2026 14:50:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374493.1621661; Tue, 28 Jul 2026 14:50:12 +0000
+Received: by outflank-mailman (output) from mailman id 1374498.1621675; Tue, 28 Jul 2026 14:50:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woj8G-0005MM-8M; Tue, 28 Jul 2026 14:50:12 +0000
-Received: by outflank-mailman (input) for mailman id 1374493;
+	id 1woj8G-0005e6-Vj; Tue, 28 Jul 2026 14:50:12 +0000
+Received: by outflank-mailman (input) for mailman id 1374498;
  Tue, 28 Jul 2026 14:50:10 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1woj8C-00058D-R9
+ id 1woj8D-00059P-R5
  for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:50:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woj8C-004rLp-0I; Tue, 28 Jul 2026 16:50:08 +0200
+ id 1woj8D-004rRp-7l; Tue, 28 Jul 2026 16:50:09 +0200
 Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a68c19f-bab6-0a2a0a5309dd-0a2a4501bf8e-0
- for <multiple-recipients>; Tue, 28 Jul 2026 16:50:07 +0200
+ id 6a68c19f-bab6-0a2a0a5309dd-0a2a4501bf8e-8
+ for <multiple-recipients>; Tue, 28 Jul 2026 16:50:09 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
  by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a68c19f-5984-0a2a45010019-5a9b322294de-3
- for <multiple-recipients>; Tue, 28 Jul 2026 16:50:07 +0200
+ id 6a68c1a0-5984-0a2a45010019-5a9b32229150-3
+ for <multiple-recipients>; Tue, 28 Jul 2026 16:50:09 +0200
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1woj80-0000000DUOi-0MAA; Tue, 28 Jul 2026 14:49:59 +0000
+ id 1woj80-0000000DUOs-0RPb; Tue, 28 Jul 2026 14:49:59 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.4 #2 (Red
- Hat Linux)) id 1woj7y-00000001UXo-3m6Z;
- Tue, 28 Jul 2026 15:49:54 +0100
+ Hat Linux)) id 1woj7z-00000001UYh-3DtG;
+ Tue, 28 Jul 2026 15:49:55 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:Message-ID:Date:Subject:To:From:Reply-To:Cc:Content-Type:
-	Content-ID:Content-Description:In-Reply-To:References;
-	bh=BrGFErkBIg68f71LqKvwO1FDGYKc02JGxomF5JLDYzU=; b=VXbaCjsIawB18OTg0d61vKLhQj
-	xvN0gx/rLhETd4S4qz4cXmD00ftzJNP/EkfQlw4o779NWET0obf/BzHXTstvBIwcG/2dBTAqgSwfN
-	zVpLBkFE10eZqhmOB4voQ1dfqDhZ0BBrSXwnX3/EYTWll2d7o9E9xw757XKf15yrOvDzU6xIrPbt9
-	1/VE8Uz36y3XCk6z69eTCQiCfuC5+lXTCGMtmCc+/ka4OxfAGgQysShSuzfZDXggHcFIsr8zw8x+7
-	0MrzZUSWRtCJhqNEL/Tjx+/roJyukbhuBtET//xZwE3Ub496060JFIKNEYTljBOX4D2aaSzhDvIHp
-	WPQzizbw==;
+	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:
+	From:Reply-To:Cc:Content-ID:Content-Description;
+	bh=++5qh5a/EZporPaBmUjkvlK1lBNfKxGhRulmzrMyPaw=; b=vS0bqspjbSpvjcv2YCDR1watQ4
+	b2cTWMYT5H51bJIbWrzyEqkaxkWkJO7Ccwa4r97/YGW8Kh2IoxPgqRkerr4fEaWrhve2ULy2ejEut
+	wFE6nslGGfPG0vXzIFh9Fs/GqA3SqHb+xciJ59jyqMezq4DRSshc+akAQisCOf8ujsRKD0sge89uL
+	kFJqhoX4rR+j4+Pxz1Xp4d5hhlU4W5RLPEpASsCIgB2xKPViJ6PMFv9338PGNcobaVTx5oilN0+fD
+	zY5Ul1GLtKCJDN9hhtdTZqTMSNZoYTacm3ufK7W0rdutkLQGo+tK2hn53BE3Vq2bk0U6ny3MsAKH4
+	qS5Upabw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	Jonathan Corbet <corbet@lwn.net>,
@@ -90,134 +90,134 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v7 00/36] Cleaning up the KVM clock mess
-Date: Tue, 28 Jul 2026 15:39:40 +0100
-Message-ID: <20260728144954.355376-1-dwmw2@infradead.org>
+Subject: [PATCH v7 18/36] KVM: x86: Factor out kvm_use_master_clock()
+Date: Tue, 28 Jul 2026 15:39:58 +0100
+Message-ID: <20260728144954.355376-19-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260728144954.355376-1-dwmw2@infradead.org>
+References: <20260728144954.355376-1-dwmw2@infradead.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-d62444/1785250207-1FC69757-4C957742/0/0
+X-purgate-ID: tlsNG-d62444/1785250209-1F46D757-E8428679/0/0
 X-purgate-type: clean
-X-purgate-size: 6750
+X-purgate-size: 4292
 
-This is v7 of the series to clean up the KVM clock, rebased onto
-kvm-x86/next (patch 1 of v6 is already merged there as commit
-710b3a30f407).
+From: David Woodhouse <dwmw@amazon.co.uk>
 
-The KVM clock has historically suffered from three problems:
+Both kvm_track_tsc_matching() and pvclock_update_vm_gtod_copy() make a
+decision about whether the KVM clock should be in master clock mode.
+They used *different* criteria for the decision though. This isn't
+really a problem; it only has the potential to cause unnecessary
+invocations of KVM_REQ_MASTERCLOCK_UPDATE if the masterclock was
+disabled due to TSC going backwards, or the guest using the old MSR.
+But it isn't pretty.
 
- 1. Imprecision: get_kvmclock_ns() computed the clock from the *host*
-    TSC without applying guest TSC scaling, causing systemic drift from
-    the values the guest computes from its own TSC.
+Factor the decision out to a single function. And document the
+historical reason why it's disabled for guests that use the old
+MSR_KVM_SYSTEM_TIME.
 
- 2. Unnecessary discontinuities: gratuitous KVM_REQ_MASTERCLOCK_UPDATE
-    requests caused the master clock reference point to be re-snapshotted,
-    yanking the guest's clock due to arithmetic precision differences.
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Paul Durrant <paul@xen.org>
+---
+ arch/x86/kvm/x86.c | 40 ++++++++++++++++++++++++++++++----------
+ 1 file changed, 30 insertions(+), 10 deletions(-)
 
- 3. No precise migration API: the existing KVM_[GS]ET_CLOCK only allows
-    setting the clock at a given UTC reference time, which is necessarily
-    imprecise. There was no way to preserve the exact arithmetic
-    relationship between guest TSC and KVM clock across live migration.
-
-This series addresses all three, and adds new APIs for precise clock
-migration and TSC frequency reporting. As an added bonus, it now rips
-out the whole pvclock_gtod_data hack which was shadowing the kernel's
-timekeeping, and uses ktime snapshots as $DEITY (well, Thomas) intended.
-
-The series is now ordered with the fixes and cleanups first; the new
-uAPI (the pvclock-abi UAPI move, KVM_[GS]ET_CLOCK_GUEST and
-KVM_VCPU_TSC_SCALE) and all the new selftests come at the end, so that
-the former are not gated on review of the latter.
-
-v7: https://git.infradead.org/?p=users/dwmw2/linux.git;a=shortlog;h=refs/heads/kvmclock7
-
- - Rebased onto kvm-x86/next; dropped the already-merged first patch.
- - Reordered so that all the new uAPI (pvclock-abi UAPI move,
-   KVM_[GS]ET_CLOCK_GUEST, KVM_VCPU_TSC_SCALE) and the new selftests
-   come at the end of the series, after the fixes and cleanups which
-   do not depend on them (Sean).
- - Split "Restructure get_kvmclock()" into two: dropping the CPU
-   pinning is now a separate preliminary patch (Sean).
- - compute_guest_tsc(): use abs() and a conditional negation instead
-   of duplicated scaling logic, and note in the changelog that the
-   negative delta case is believed unreachable in practice (Sean).
- - Use HZ_PER_KHZ instead of literal 1000 for TSC unit conversions
-   (Sean).
- - xen_migration_test: transfer the guest TSC via KVM_VCPU_TSC_OFFSET
-   instead of a no-op TSC_ADJUST save/restore, making the runstate
-   restore and steal-time assertions deterministic instead of racing
-   VM-creation latency.
- - Reference the kvmclock definitions taxonomy by its now-stable
-   (hopefully) commit ID 710b3a30f407.
-
-v6: https://lore.kernel.org/all/20260703212145.343527-1-dwmw2@infradead.org/
-    https://git.infradead.org/?p=users/dwmw2/linux.git;a=shortlog;h=refs/heads/kvmclock6
-
-David Woodhouse (33):
-      KVM: x86: Improve accuracy of KVM clock when TSC scaling is in force
-      KVM: x86: Explicitly disable TSC scaling without CONSTANT_TSC
-      KVM: x86: Activate master clock immediately on vCPU creation
-      KVM: x86: Avoid NTP frequency skew for KVM clock on 32-bit host
-      KVM: x86: Fold __get_kvmclock() into get_kvmclock()
-      KVM: x86: Drop CPU pinning in get_kvmclock()
-      KVM: x86: Restructure get_kvmclock()
-      KVM: x86: Fix KVM clock precision in get_kvmclock() with TSC scaling
-      KVM: x86: Use get_kvmclock() in kvm_get_wall_clock_epoch()
-      KVM: x86: Fix compute_guest_tsc() to handle negative time deltas
-      KVM: x86: Restructure kvm_guest_time_update() for TSC upscaling
-      KVM: x86: Simplify and comment kvm_get_time_scale()
-      KVM: x86: Remove implicit rdtsc() from kvm_compute_l1_tsc_offset()
-      KVM: x86: Improve synchronization in kvm_synchronize_tsc()
-      KVM: x86: Kill last_tsc_{nsec,write,offset} fields
-      KVM: x86: Replace nr_vcpus_matched_tsc count with all_vcpus_matched_tsc bool
-      KVM: x86: Allow KVM master clock mode when TSCs are offset from each other
-      KVM: x86: Factor out kvm_use_master_clock()
-      KVM: x86: Avoid gratuitous global clock updates
-      KVM: x86/xen: Prevent runstate times from becoming negative
-      KVM: x86: Avoid redundant masterclock updates from multiple vCPUs
-      KVM: x86: Remove runtime Xen TSC frequency CPUID update
-      KVM: x86: Re-synchronize TSC after KVM_SET_TSC_KHZ
-      KVM: x86: Use ktime_get_snapshot_id() for master clock
-      KVM: x86: Compute kvmclock base without pvclock_gtod_data
-      KVM: x86: Cache host vclock_mode for masterclock eligibility checks
-      KVM: x86: Remove pvclock_gtod_data and private timekeeping code
-      KVM: x86: Activate master clock from kvm_arch_init_vm()
-      KVM: selftests: Use UAPI pvclock-abi.h in xen_shinfo_test
-      KVM: x86: Add KVM_VCPU_TSC_SCALE and fix the documentation on TSC migration
-      KVM: selftests: Add master clock offset test
-      KVM: selftests: Add Xen/generic CPUID timing leaf test
-      KVM: selftests: Add Xen runstate migration test
-
-Jack Allister (3):
-      UAPI: x86: Move pvclock-abi to UAPI for x86 platforms
-      KVM: x86: Add KVM_[GS]ET_CLOCK_GUEST for accurate KVM clock migration
-      KVM: selftests: Add KVM/PV clock selftest to prove timer correction
-
- Documentation/virt/kvm/api.rst                     |   37 +
- Documentation/virt/kvm/devices/vcpu.rst            |  120 ++-
- MAINTAINERS                                        |    4 +-
- arch/x86/include/asm/kvm_host.h                    |   16 +-
- arch/x86/include/uapi/asm/kvm.h                    |    7 +
- arch/x86/include/{ => uapi}/asm/pvclock-abi.h      |   27 +-
- arch/x86/kvm/cpuid.c                               |   16 -
- arch/x86/kvm/msrs.c                                |    9 +-
- arch/x86/kvm/svm/svm.c                             |    3 +-
- arch/x86/kvm/vmx/vmx.c                             |   10 +
- arch/x86/kvm/x86.c                                 | 1089 ++++++++++++--------
- arch/x86/kvm/x86.h                                 |    3 +-
- arch/x86/kvm/xen.c                                 |   28 +-
- arch/x86/kvm/xen.h                                 |   13 -
- include/uapi/linux/kvm.h                           |    3 +
- scripts/xen-hypercalls.sh                          |    2 +-
- tools/testing/selftests/kvm/Makefile.kvm           |    5 +
- .../selftests/kvm/x86/masterclock_offset_test.c    |  180 ++++
- .../selftests/kvm/x86/pvclock_migration_test.c     |  383 +++++++
- tools/testing/selftests/kvm/x86/pvclock_test.c     |  443 ++++++++
- .../selftests/kvm/x86/xen_cpuid_timing_test.c      |  230 +++++
- .../testing/selftests/kvm/x86/xen_migration_test.c |  205 ++++
- tools/testing/selftests/kvm/x86/xen_shinfo_test.c  |   17 +-
- 23 files changed, 2325 insertions(+), 525 deletions(-)
+diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+index 7615e1cd5835..ce80ee808777 100644
+--- a/arch/x86/kvm/x86.c
++++ b/arch/x86/kvm/x86.c
+@@ -1099,11 +1099,30 @@ static inline bool gtod_is_based_on_tsc(int mode)
+ {
+ 	return mode == VDSO_CLOCKMODE_TSC || mode == VDSO_CLOCKMODE_HVCLOCK;
+ }
+-#endif
++
++static bool kvm_use_master_clock(struct kvm *kvm)
++{
++	struct kvm_arch *ka = &kvm->arch;
++
++	/*
++	 * The 'old kvmclock' check is a workaround (from 2015) for a
++	 * SUSE 2.6.16 kernel that didn't boot if the system_time in
++	 * its kvmclock was too far behind the current time. So the
++	 * mode of just setting the reference point and allowing time
++	 * to proceed linearly from there makes it fail to boot.
++	 * Despite that being kind of the *point* of the way the clock
++	 * is exposed to the guest. By coincidence, the offending
++	 * kernels used the old MSR_KVM_SYSTEM_TIME, which was moved
++	 * only because it resided in the wrong number range. So the
++	 * workaround is activated for *all* guests using the old MSR.
++	 */
++	return ka->all_vcpus_matched_freq &&
++		!ka->backwards_tsc_observed &&
++		!ka->boot_vcpu_runs_old_kvmclock;
++}
+ 
+ static void kvm_track_tsc_matching(struct kvm_vcpu *vcpu, bool update_mclock)
+ {
+-#ifdef CONFIG_X86_64
+ 	struct kvm_arch *ka = &vcpu->kvm->arch;
+ 	struct pvclock_gtod_data *gtod = &pvclock_gtod_data;
+ 	bool prev_matched_tsc = ka->all_vcpus_matched_tsc;
+@@ -1141,7 +1160,7 @@ static void kvm_track_tsc_matching(struct kvm_vcpu *vcpu, bool update_mclock)
+ 	 * are fine — each vCPU's pvclock has its own tsc_timestamp that
+ 	 * accounts for its offset.
+ 	 */
+-	bool use_master_clock = ka->all_vcpus_matched_freq &&
++	bool use_master_clock = kvm_use_master_clock(vcpu->kvm) &&
+ 				gtod_is_based_on_tsc(gtod->clock.vclock_mode);
+ 
+ 	/*
+@@ -1156,8 +1175,11 @@ static void kvm_track_tsc_matching(struct kvm_vcpu *vcpu, bool update_mclock)
+ 	trace_kvm_track_tsc(vcpu->vcpu_id, ka->nr_vcpus_matched_tsc,
+ 			    atomic_read(&vcpu->kvm->online_vcpus),
+ 		            ka->use_master_clock, gtod->clock.vclock_mode);
+-#endif
+ }
++#else
++static inline void kvm_track_tsc_matching(struct kvm_vcpu *vcpu,
++					  bool new_generation) {}
++#endif
+ 
+ /*
+  * Multiply tsc by a fixed point number represented by ratio.
+@@ -1655,10 +1677,9 @@ static void pvclock_update_vm_gtod_copy(struct kvm *kvm)
+ #ifdef CONFIG_X86_64
+ 	struct kvm_arch *ka = &kvm->arch;
+ 	int vclock_mode;
+-	bool host_tsc_clocksource, vcpus_matched;
++	bool host_tsc_clocksource;
+ 
+ 	lockdep_assert_held(&kvm->arch.tsc_write_lock);
+-	vcpus_matched = ka->all_vcpus_matched_freq;
+ 
+ 	/*
+ 	 * If the host uses TSC clock, then passthrough TSC as stable
+@@ -1668,9 +1689,8 @@ static void pvclock_update_vm_gtod_copy(struct kvm *kvm)
+ 					&ka->master_kernel_ns,
+ 					&ka->master_cycle_now);
+ 
+-	ka->use_master_clock = host_tsc_clocksource && vcpus_matched
+-				&& !ka->backwards_tsc_observed
+-				&& !ka->boot_vcpu_runs_old_kvmclock;
++	ka->use_master_clock = host_tsc_clocksource &&
++				kvm_use_master_clock(kvm);
+ 
+ 	if (ka->use_master_clock) {
+ 		u64 tsc_hz;
+@@ -1698,7 +1718,7 @@ static void pvclock_update_vm_gtod_copy(struct kvm *kvm)
+ 
+ 	vclock_mode = pvclock_gtod_data.clock.vclock_mode;
+ 	trace_kvm_update_master_clock(ka->use_master_clock, vclock_mode,
+-					vcpus_matched);
++					ka->all_vcpus_matched_freq);
+ #endif
+ }
+ 
+-- 
+2.55.0
 
 
