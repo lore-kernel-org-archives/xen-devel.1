@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF5B5C54F4D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4294DC54F5C
 	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:50:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374501.1621713 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1374494.1621644 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woj8J-0006VC-U4; Tue, 28 Jul 2026 14:50:15 +0000
+	id 1woj8F-0005AN-Kv; Tue, 28 Jul 2026 14:50:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374501.1621713; Tue, 28 Jul 2026 14:50:15 +0000
+Received: by outflank-mailman (output) from mailman id 1374494.1621644; Tue, 28 Jul 2026 14:50:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woj8J-0006Tc-BZ; Tue, 28 Jul 2026 14:50:15 +0000
-Received: by outflank-mailman (input) for mailman id 1374501;
- Tue, 28 Jul 2026 14:50:11 +0000
+	id 1woj8F-0005AG-Hm; Tue, 28 Jul 2026 14:50:11 +0000
+Received: by outflank-mailman (input) for mailman id 1374494;
+ Tue, 28 Jul 2026 14:50:10 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1woj8F-0005AA-9p
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:50:11 +0000
+ id 1woj8C-00058H-Sg
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:50:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woj8E-00EhwD-Mq; Tue, 28 Jul 2026 16:50:10 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1woj8C-00BbE3-5R; Tue, 28 Jul 2026 16:50:08 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a68c19e-5cb7-0a2a0a5109dd-0a2a450ae24e-16
- for <multiple-recipients>; Tue, 28 Jul 2026 16:50:10 +0200
+ id 6a68c190-e002-0a2a0a5209dd-0a2a4503a92a-42
+ for <multiple-recipients>; Tue, 28 Jul 2026 16:50:08 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a68c1a2-f2d2-0a2a450a0019-5a9b32229268-3
- for <multiple-recipients>; Tue, 28 Jul 2026 16:50:10 +0200
+ id 6a68c19f-fae8-0a2a45030019-5a9b3222e78a-3
+ for <multiple-recipients>; Tue, 28 Jul 2026 16:50:08 +0200
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1woj80-0000000DUOx-21dv; Tue, 28 Jul 2026 14:49:57 +0000
+ id 1woj80-0000000DUOn-0ON8; Tue, 28 Jul 2026 14:49:57 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.4 #2 (Red
- Hat Linux)) id 1woj80-00000001UZd-1F1s;
- Tue, 28 Jul 2026 15:49:56 +0100
+ Hat Linux)) id 1woj7z-00000001UYe-3448;
+ Tue, 28 Jul 2026 15:49:55 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,12 +56,12 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:
 	From:Reply-To:Cc:Content-ID:Content-Description;
-	bh=AhrOLRSCrNBvlBnZAjLfNnRsdG9qHTgKeEj17ZRlPXE=; b=Ye65D5VeKg9qacBebQB2C9y+D4
-	rfZL0yOdDKo/kRxCDfdORG7ZEYTbfkXtzLxIxmqK1ykPEtJpcGaawAqYU/7qIT4RGWGXWdjCscrlF
-	bCu3vlfaRZRAlu01S9dMvmUgDXeZT2nBsTSo2VjuH4QPq1VmoS2S3BrZWdYR+0u9d2RqVf3fKuA0V
-	gywJq1jR0pCa9egWfdF15/YQAyo0n3D44CUlCzu2I6NhtCfsMzYnkA+mn18M4Mh8vadEIH15dBCXa
-	J1tvJGiQDLiDCFK41VnAhd5jol90l7b7M5AOBMX5oVisrD3Yhu4EwchONo6/BBW27mzrrAhtzoNt5
-	1F/UCUhg==;
+	bh=gLlcSwhGKTUl3qInTw6GStNzIYjtuT3gHS62xzVp7Q0=; b=CTB0QjKeipJ49VnJV6/Q2cjkhb
+	Mt4AGuq5bPg+zMUj5XeHwve4XlyfaIFcE6tDGNxyejc0R0AM+B9hQ0l1uJaH+kJO04u9IGuO8XAEG
+	jqa1Oplch4A/H3O5iNTTZqaLEdfXsV155w2IkwMXPF2BlOJGZQCszHqe+d84p64IdoZvgiMpMe+Jy
+	eOI6zGBNWSADruEw9gQKY5//ByTwr9jj9mbw73Du3XeAIunP025naMk2IIrVwUYiGzq7HAc2ga864
+	jU0lIZftFrGE5e+ySsqDr5ZA61pm5Rp2UjJ+5tg99R4JxDjnmLI6UsYkOi2nfR7Z4oxsQ77V70v6o
+	eh6VNawA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	Jonathan Corbet <corbet@lwn.net>,
@@ -90,9 +90,9 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v7 28/36] KVM: x86: Activate master clock from kvm_arch_init_vm()
-Date: Tue, 28 Jul 2026 15:40:08 +0100
-Message-ID: <20260728144954.355376-29-dwmw2@infradead.org>
+Subject: [PATCH v7 17/36] KVM: x86: Allow KVM master clock mode when TSCs are offset from each other
+Date: Tue, 28 Jul 2026 15:39:57 +0100
+Message-ID: <20260728144954.355376-18-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260728144954.355376-1-dwmw2@infradead.org>
 References: <20260728144954.355376-1-dwmw2@infradead.org>
@@ -101,114 +101,228 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-4011c0/1785250210-538D5CFC-318DE19E/0/0
+X-purgate-ID: tlsNG-33051d/1785250208-770F64E9-41A4A9A1/0/0
 X-purgate-type: clean
-X-purgate-size: 4169
+X-purgate-size: 9527
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Initialize the TSC generation and master clock state at VM creation
-time, rather than relying on kvm_update_masterclock() from
-kvm_arch_vcpu_postcreate().
+Previously, a guest writing different TSC values on different vCPUs could
+force KVM out of master clock mode. With this change, only a frequency
+mismatch disables master clock. The only ways for non-master-clock mode
+to happen now are archaic hardware without a TSC-based clocksource, a
+VMM that sets different TSC frequencies across vCPUs, or a guest using
+the legacy MSR_KVM_SYSTEM_TIME (which could be addressed in future by
+simply updating tsc_timestamp more frequently rather than falling out of
+master clock mode entirely).
 
-Set cur_tsc_generation=1, cur_tsc_khz, cur_tsc_scaling_ratio,
-cur_tsc_offset, cur_tsc_nsec and kvmclock_offset from an atomic
-ktime/TSC snapshot. This establishes a coherent epoch so that:
+Running at a different frequency would lead to a systemic skew between
+the clock(s) as observed by different vCPUs due to arithmetic precision
+in the scaling. So that should indeed force the clock to be based on the
+host's CLOCK_MONOTONIC_RAW instead of being in masterclock mode where it
+is defined by the guest TSC.
 
- - The first vCPU synchronizes to the existing generation (getting
-   the pre-computed TSC offset) rather than computing its own.
- - pvclock_update_vm_gtod_copy() succeeds immediately (no zero
-   tsc_hz from uninitialized cur_tsc_scaling_ratio).
- - KVM_GET_CLOCK returns valid {host_tsc, realtime} fields as soon
-   as any vCPU exists.
- - KVM_[GS]ET_CLOCK_GUEST works without a prior KVM_RUN.
- - No O(N) iteration of all vCPUs on each vCPU creation.
+But when the vCPUs merely have a different TSC *offset*, that's not a
+problem. The offset is applied to that vCPU's kvmclock->tsc_timestamp
+field, and it all comes out in the wash.
 
-This replaces the kvm_update_masterclock() call that was added to
-kvm_arch_vcpu_postcreate() to work around the missing initialization.
+Track frequency matching separately from offset matching using a
+dedicated freq generation counter (cur_tsc_freq_generation) that only
+bumps on actual frequency changes. Each vCPU is counted exactly once per
+freq generation via a per-vCPU this_tsc_freq_generation field, preventing
+repeated syncs of the same vCPU from falsely re-enabling master clock.
+
+Note that the generation-based counting has a known limitation: if all
+vCPUs are in sync and one changes away and then back again, the other
+vCPUs are still at the old generation and won't be counted until they
+sync again (which may never happen). This was always the case for the
+offset tracking and isn't expected VMM behaviour — although it is the
+scenario that the VM-wide KVM_SET_TSC_KHZ ioctl was introduced to handle
+cleanly.
+
+While at it, restructure the existing TSC offset generation tracking to
+use the same pattern: reset counter to zero on new generation, then
+unconditionally count vCPUs that haven't been seen in this generation.
+Both counters now use a consistent >= online_vcpus threshold (1-based
+counting where the reference vCPU is included in the count).
+
+Use frequency match for master clock eligibility, and full TSC match
+(including offset) only for PVCLOCK_TSC_STABLE_BIT, which tells the
+guest it is safe to skip cross-vCPU monotonicity enforcement.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Assisted-by: Kiro (claude-opus-4.6-1m)
 ---
- arch/x86/kvm/x86.c | 45 +++++++++++++++++++++++++++++++++++++--------
- 1 file changed, 37 insertions(+), 8 deletions(-)
+ arch/x86/include/asm/kvm_host.h |  4 ++
+ arch/x86/kvm/x86.c              | 80 +++++++++++++++++++++++++--------
+ 2 files changed, 65 insertions(+), 19 deletions(-)
 
+diff --git a/arch/x86/include/asm/kvm_host.h b/arch/x86/include/asm/kvm_host.h
+index 46919fe1cf4b..293b7cfeb316 100644
+--- a/arch/x86/include/asm/kvm_host.h
++++ b/arch/x86/include/asm/kvm_host.h
+@@ -884,6 +884,7 @@ struct kvm_vcpu_arch {
+ 	u64 this_tsc_nsec;
+ 	u64 this_tsc_write;
+ 	u64 this_tsc_generation;
++	u64 this_tsc_freq_generation;
+ 	bool tsc_catchup;
+ 	bool tsc_always_catchup;
+ 	s8 virtual_tsc_shift;
+@@ -1239,6 +1240,9 @@ struct kvm_arch {
+ 	u64 cur_tsc_offset;
+ 	u64 cur_tsc_generation;
+ 	bool all_vcpus_matched_tsc;
++	bool all_vcpus_matched_freq;
++	int nr_vcpus_matched_freq;
++	u64 cur_tsc_freq_generation;
+ 	int nr_vcpus_matched_tsc;
+ 
+ 	u32 default_tsc_khz;
 diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index e8e75e47fc33..5c78dd1e4c69 100644
+index d3c4009b92bc..7615e1cd5835 100644
 --- a/arch/x86/kvm/x86.c
 +++ b/arch/x86/kvm/x86.c
-@@ -9456,8 +9456,6 @@ void kvm_arch_vcpu_postcreate(struct kvm_vcpu *vcpu)
- 		return;
- 	vcpu_load(vcpu);
- 	kvm_synchronize_tsc(vcpu, NULL);
--	if (!vcpu->kvm->arch.use_master_clock)
--		kvm_update_masterclock(vcpu->kvm, NULL);
- 	vcpu_put(vcpu);
+@@ -1101,30 +1101,55 @@ static inline bool gtod_is_based_on_tsc(int mode)
+ }
+ #endif
  
- 	/* poll control enabled by default */
-@@ -9867,6 +9865,8 @@ int kvm_arch_init_vm(struct kvm *kvm, unsigned long type)
+-static void kvm_track_tsc_matching(struct kvm_vcpu *vcpu, bool new_generation)
++static void kvm_track_tsc_matching(struct kvm_vcpu *vcpu, bool update_mclock)
  {
- 	int ret;
- 	unsigned long flags;
-+	u64 kvmclock_host_tsc;
-+	s64 kvmclock_ns;
+ #ifdef CONFIG_X86_64
+ 	struct kvm_arch *ka = &vcpu->kvm->arch;
+ 	struct pvclock_gtod_data *gtod = &pvclock_gtod_data;
++	bool prev_matched_tsc = ka->all_vcpus_matched_tsc;
  
- 	if (!kvm_is_vm_type_supported(type))
- 		return -EINVAL;
-@@ -9898,18 +9898,47 @@ int kvm_arch_init_vm(struct kvm *kvm, unsigned long type)
- 	seqcount_raw_spinlock_init(&kvm->arch.pvclock_sc, &kvm->arch.tsc_write_lock);
- 	ratelimit_state_init(&kvm->arch.kvmclock_update_rs, HZ, 10);
- 	ratelimit_set_flags(&kvm->arch.kvmclock_update_rs, RATELIMIT_MSG_ON_RELEASE);
--	kvm->arch.kvmclock_offset = -get_kvmclock_base_ns();
--	kvm->arch.all_vcpus_matched_freq = true;
--
--	raw_spin_lock_irqsave(&kvm->arch.tsc_write_lock, flags);
--	pvclock_update_vm_gtod_copy(kvm);
--	raw_spin_unlock_irqrestore(&kvm->arch.tsc_write_lock, flags);
- 
- 	kvm->arch.default_tsc_khz = max_tsc_khz ? : tsc_khz;
- 	kvm->arch.apic_bus_cycle_ns = APIC_BUS_CYCLE_NS_DEFAULT;
- 	kvm->arch.guest_can_read_msr_platform_info = true;
- 	kvm->arch.enable_pmu = enable_pmu && !kvm->arch.has_protected_pmu;
- 
-+	kvm->arch.all_vcpus_matched_freq = true;
-+	kvm->arch.all_vcpus_matched_tsc = true;
-+	kvm->arch.cur_tsc_scaling_ratio = kvm_caps.default_tsc_scaling_ratio;
-+	kvm->arch.cur_tsc_khz = kvm->arch.default_tsc_khz;
-+
-+	raw_spin_lock_irqsave(&kvm->arch.tsc_write_lock, flags);
+ 	/*
+-	 * To use the masterclock, the host clocksource must be based on TSC
+-	 * and all vCPUs must have matching TSCs.  Note, the count for matching
+-	 * vCPUs doesn't include the reference vCPU, hence "+1".
++	 * Track whether all vCPUs have matching TSC offsets (for
++	 * PVCLOCK_TSC_STABLE_BIT) and matching frequencies (for
++	 * master clock eligibility).
++	 */
 +
 +	/*
-+	 * Establish the initial TSC generation for synchronization logic.
-+	 * The first vCPU will sync to this, starting its guest TSC at the
-+	 * number of cycles elapsed since VM creation rather than at zero.
-+	 * This ensures coherence with the kvmclock epoch (also set here)
-+	 * and means the master clock snapshot taken below is immediately
-+	 * valid — no need to redo it at first vCPU creation.
++	 * A new vCPU might already have incremented ->online_vcpus
++	 * and cause a temporary false negative here. But will then
++	 * call kvm_synchronize_tsc() from kvm_arch_vcpu_postcreate()
++	 * and finish the job.
+ 	 */
+-	ka->all_vcpus_matched_tsc = (ka->nr_vcpus_matched_tsc + 1 ==
+-				     atomic_read(&vcpu->kvm->online_vcpus));
++	int online = atomic_read(&vcpu->kvm->online_vcpus);
++	ka->all_vcpus_matched_tsc = (ka->nr_vcpus_matched_tsc >= online);
++
++	update_mclock |= (prev_matched_tsc != ka->all_vcpus_matched_tsc);
+ 
+-	bool use_master_clock = ka->all_vcpus_matched_tsc &&
++	/*
++	 * all_vcpus_matched_freq starts true and is cleared when
++	 * __kvm_synchronize_tsc() detects a frequency mismatch.
++	 * Re-enable when all vCPUs have synced with matching frequency.
++	 * If all offsets also match, that implies frequencies match too.
 +	 */
-+#ifdef CONFIG_X86_64
-+	if (!kvm_get_time_and_clockread(&kvmclock_ns, &kvmclock_host_tsc))
-+#endif
-+	{
-+		/*
-+		 * If not simultaneous, we want the TSC to be zero slightly
-+		 * *after* the kvmclock is zero.
-+		 */
-+		kvmclock_ns = get_kvmclock_base_ns();
-+		kvmclock_host_tsc = rdtsc();
++	if (ka->all_vcpus_matched_tsc ||
++	    ka->nr_vcpus_matched_freq >= online)
++		ka->all_vcpus_matched_freq = true;
++
++	/*
++	 * To use the masterclock, the host clocksource must be based on TSC
++	 * and all vCPUs must have matching TSC *frequency*. Different offsets
++	 * are fine — each vCPU's pvclock has its own tsc_timestamp that
++	 * accounts for its offset.
++	 */
++	bool use_master_clock = ka->all_vcpus_matched_freq &&
+ 				gtod_is_based_on_tsc(gtod->clock.vclock_mode);
+ 
+ 	/*
+-	 * Request a masterclock update if the masterclock needs to be toggled
+-	 * on/off, or when starting a new generation and the masterclock is
+-	 * enabled (compute_guest_tsc() requires the masterclock snapshot to be
+-	 * taken _after_ the new generation is created).
++	 * Request a masterclock update if needed: toggling master clock,
++	 * new generation requiring a fresh snapshot, or a change in
++	 * all_vcpus_matched_tsc (to broadcast PVCLOCK_TSC_STABLE_BIT).
+ 	 */
+-	if ((ka->use_master_clock && new_generation) ||
++	if ((ka->use_master_clock && update_mclock) ||
+ 	    (ka->use_master_clock != use_master_clock))
+ 		kvm_make_request(KVM_REQ_MASTERCLOCK_UPDATE, vcpu);
+ 
+@@ -1279,7 +1304,22 @@ static void __kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 offset, u64 tsc,
+ 	 * Track the TSC frequency, scaling ratio, and offset for the current
+ 	 * generation. These are used to detect matching TSC writes and to
+ 	 * compute the guest TSC from the host clock.
++	 *
++	 * If the frequency changed, master clock mode can no longer be used
++	 * since the kvmclock scaling factors differ between vCPUs.
+ 	 */
++	if (vcpu->arch.virtual_tsc_khz != kvm->arch.cur_tsc_khz) {
++		kvm->arch.cur_tsc_freq_generation++;
++		kvm->arch.all_vcpus_matched_freq = false;
++		kvm->arch.nr_vcpus_matched_freq = 0;
 +	}
-+	kvm->arch.cur_tsc_write = 0;
-+	kvm->arch.cur_tsc_offset = -(s64)kvmclock_host_tsc;
-+	kvm->arch.cur_tsc_nsec = kvmclock_ns;
-+	kvm->arch.cur_tsc_generation = 1;
-+	kvm->arch.kvmclock_offset = -kvmclock_ns;
 +
-+	pvclock_update_vm_gtod_copy(kvm);
-+	raw_spin_unlock_irqrestore(&kvm->arch.tsc_write_lock, flags);
++	/* Count each vCPU once per freq generation */
++	if (vcpu->arch.this_tsc_freq_generation != kvm->arch.cur_tsc_freq_generation) {
++		vcpu->arch.this_tsc_freq_generation = kvm->arch.cur_tsc_freq_generation;
++		kvm->arch.nr_vcpus_matched_freq++;
++	}
 +
- #if IS_ENABLED(CONFIG_HYPERV)
- 	spin_lock_init(&kvm->arch.hv_root_tdp_lock);
- 	kvm->arch.hv_root_tdp = INVALID_PAGE;
+ 	kvm->arch.cur_tsc_khz = vcpu->arch.virtual_tsc_khz;
+ 	kvm->arch.cur_tsc_scaling_ratio = vcpu->arch.l1_tsc_scaling_ratio;
+ 
+@@ -1296,17 +1336,18 @@ static void __kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 offset, u64 tsc,
+ 		 * exact software computation in compute_guest_tsc()
+ 		 */
+ 		kvm->arch.cur_tsc_generation++;
++		kvm->arch.all_vcpus_matched_tsc = false;
++		kvm->arch.nr_vcpus_matched_tsc = 0;
+ 		kvm->arch.cur_tsc_nsec = ns;
+ 		kvm->arch.cur_tsc_write = tsc;
+ 		kvm->arch.cur_tsc_offset = offset;
+-		kvm->arch.nr_vcpus_matched_tsc = 0;
+-		kvm->arch.all_vcpus_matched_tsc = false;
+-	} else if (vcpu->arch.this_tsc_generation != kvm->arch.cur_tsc_generation) {
++	}
++
++	if (vcpu->arch.this_tsc_generation != kvm->arch.cur_tsc_generation) {
++		vcpu->arch.this_tsc_generation = kvm->arch.cur_tsc_generation;
+ 		kvm->arch.nr_vcpus_matched_tsc++;
+ 	}
+ 
+-	/* Keep track of which generation this VCPU has synchronized to */
+-	vcpu->arch.this_tsc_generation = kvm->arch.cur_tsc_generation;
+ 	vcpu->arch.this_tsc_nsec = kvm->arch.cur_tsc_nsec;
+ 	vcpu->arch.this_tsc_write = kvm->arch.cur_tsc_write;
+ 
+@@ -1617,7 +1658,7 @@ static void pvclock_update_vm_gtod_copy(struct kvm *kvm)
+ 	bool host_tsc_clocksource, vcpus_matched;
+ 
+ 	lockdep_assert_held(&kvm->arch.tsc_write_lock);
+-	vcpus_matched = ka->all_vcpus_matched_tsc;
++	vcpus_matched = ka->all_vcpus_matched_freq;
+ 
+ 	/*
+ 	 * If the host uses TSC clock, then passthrough TSC as stable
+@@ -1948,7 +1989,7 @@ int kvm_guest_time_update(struct kvm_vcpu *v)
+ 
+ 	/* If the host uses TSC clocksource, then it is stable */
+ 	hv_clock.flags = 0;
+-	if (use_master_clock)
++	if (use_master_clock && ka->all_vcpus_matched_tsc)
+ 		hv_clock.flags |= PVCLOCK_TSC_STABLE_BIT;
+ 
+ 	if (vcpu->pv_time.active) {
+@@ -9938,6 +9979,7 @@ int kvm_arch_init_vm(struct kvm *kvm, unsigned long type)
+ 	ratelimit_state_init(&kvm->arch.kvmclock_update_rs, HZ, 10);
+ 	ratelimit_set_flags(&kvm->arch.kvmclock_update_rs, RATELIMIT_MSG_ON_RELEASE);
+ 	kvm->arch.kvmclock_offset = -get_kvmclock_base_ns();
++	kvm->arch.all_vcpus_matched_freq = true;
+ 
+ 	raw_spin_lock_irqsave(&kvm->arch.tsc_write_lock, flags);
+ 	pvclock_update_vm_gtod_copy(kvm);
 -- 
 2.55.0
 
