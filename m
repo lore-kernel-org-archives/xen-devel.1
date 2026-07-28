@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2295C54F4C
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:23:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374396.1621558 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5BC4C53219
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:23:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374405.1621567 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woihx-0003xk-0D; Tue, 28 Jul 2026 14:23:01 +0000
+	id 1woiiJ-0004Sy-7s; Tue, 28 Jul 2026 14:23:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374396.1621558; Tue, 28 Jul 2026 14:23:00 +0000
+Received: by outflank-mailman (output) from mailman id 1374405.1621567; Tue, 28 Jul 2026 14:23:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woihw-0003xa-TD; Tue, 28 Jul 2026 14:23:00 +0000
-Received: by outflank-mailman (input) for mailman id 1374396;
- Tue, 28 Jul 2026 14:22:59 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1woiiJ-0004Sr-4x; Tue, 28 Jul 2026 14:23:23 +0000
+Received: by outflank-mailman (input) for mailman id 1374405;
+ Tue, 28 Jul 2026 14:23:21 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1woihv-0003vs-1N
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:22:59 +0000
+ (envelope-from <jbeulich@suse.com>) id 1woiiH-0004SU-Ih
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:23:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woihu-004xX0-E4
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 16:22:58 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1woiiG-007NWv-Vj
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 16:23:20 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68bb33-2eae-0a2a0a5409dd-0a2a4502ac72-34
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 16:22:58 +0200
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a68bb4c-e002-0a2a0a5209dd-0a2a4504d6e4-36
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 16:23:20 +0200
+Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68bb42-6ca4-0a2a45020019-d1558036c5e5-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 16:22:58 +0200
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-4954c0833b4so29224255e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 07:22:58 -0700 (PDT)
+ id 6a68bb58-b57f-0a2a45040019-d155802eecfd-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 16:23:20 +0200
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-4954dff6536so27607815e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 07:23:20 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-496c45cb67esm86210395e9.8.2026.07.28.07.22.56
+ 5b1f17b1804b1-4957f9ae5c3sm429559225e9.3.2026.07.28.07.23.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Jul 2026 07:22:57 -0700 (PDT)
+ Tue, 28 Jul 2026 07:23:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,49 +55,50 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785248578; x=1785853378; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785248600; x=1785853400; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=g3jdcGX3ZHkyd51//1sqLgUrNqK78wVltQSxO9SrAuc=;
-        b=Y9RlXmUOcWtX+GwCgMBsFEzimD6JRZTYK2LYylH3qwhfThBD//MjWLF5Ba0hZ3yKfa
-         x6XJ8apVIATXZ6EswDohIYzTXZU/EOg6I2+QNxCvbokA9h9dpmR7vysJ7YpaE2k9FsJb
-         0hxYc7gIdB5eUYAUNE3pEqVyT4sAFKv/yt4kXZht1QSud1C20LD2T8W6cGRGkyJF70rb
-         macKyD9jlj8V37eyJXwUnoPB4ukmoRvN25yQB+fX3xNn1DUq2/7tTlg+4p+a2d+04LBC
-         +dEwhiN6JgLWCJnLvMLFPrkBVrEkoMVTXPAOYMiNav3ZNqDCc6cyWAnAgCmanVXcwX1p
-         OVVg==
+        bh=w1o+lRjL5Bu7MJj4eoJSBjI4Yb8dSfa5/A/XYawdiOo=;
+        b=JwW2JhE10m8PYeo+htnT6JIt8x135vxDxvQ4aMp0GfcK3iXsKGCEgILrgXO/GbEu8e
+         13O3BJkuVtCUHHV4LyBKu2ClN0ixVOytNtSEmYj84rglo0wG6xqETEzeGJyYi/XvT176
+         QmFlUh15r4WDKHpFxw2yu7t3BhUnMORtkWi2toKOpfkEYBkzYTdVkCZjGtd92yezaS7d
+         4+zthzFi0WOL1m2XJR8y8VQtQ0ZwvwcyHP7RxEtxNZXF9Rzeam4XyJ5eCwudG0ZmryfN
+         hSETK2mqIj04WN48XzFUEzb1aCdZ8ckTSyw7Pp/d+F7y7aXNCnihkuwYx1GGpvq2q5x0
+         5f+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785248578; x=1785853378;
+        d=1e100.net; s=20251104; t=1785248600; x=1785853400;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=g3jdcGX3ZHkyd51//1sqLgUrNqK78wVltQSxO9SrAuc=;
-        b=hjZ2e9pJa35shCImeyh517OQi4OVNWeglr4zBQlxv5o0B4RUvtRWC/ANLKMZPZOrF2
-         vV28S7wCPKw375NJGTxdP1oVZlZWiu34p5/ckHVEuS/OVOfFrYN2mSBIdh4DnIgQSnIu
-         CxTI5zUmgvF/YXV6TEtutif/FUYhKd9lCvjMVRbb+rk6NOJ1Z9WrBaKEfaZoyo2INZJH
-         hx+ZBjG0cvJ2dwQgBUAGSmoheA9VT6cYF2p1kgKuhIbhy/kkmLkA09r6f02fK8JrgcuK
-         VmU1ZTSCGQFonBN3Z5ad2NpT+WGFGUwgJgwQ1GRkM+NWojNVC8fPJnPy6rZGcq+QFLHr
-         6fIw==
-X-Gm-Message-State: AOJu0YwRmH4vOMipMzX7qEjh0vE/4SF6f9nGsKtp7PrcPJzS+dqzpUHD
-	eU0bCtjmw8oTOMW8GZB1lpv0TlT5SbtcEJI13G/dAVavdcQiRn17YPhTVtGE0ddufzt7j9S6aS7
-	l4nINPQ==
-X-Gm-Gg: AR+sD13yBajch73kdiVRIQhcaFWCgSUNXLtU6hjeItOaM648ur7iBQ2BKsNvk94tYe6
-	fuuj3VbtSg/wd3+vhUZOdWZ3m7RvRIDMncSfcnSrwhP7Psu+FWxdHLTqprXE95G718IxfU4T2P5
-	D1nr/ZqiQjYVZQOLr630pSs4Las0Gw5YmoHsCHWc674r6DaGj2CSIZSHjDpeJ2dXNTsGxGXDZaC
-	kjZ6iYQ9tWXwb2GtqETUYITsmSIbQJTX5vCFQAfR6j1XZ6WM5s3Zbq1cc5xaWlMFY38Xi+fK8ml
-	V/ex10uqyaMwDp2YNABLuWOMfgoyjUI3Y5JB5xFrqRd+KtUM4e0bVMis3dEOx+iIAIqrdoazQk+
-	ponDgblXH7KeujOy+wRHBqoNkOsLcDncPLPVBiK0V3Ep2SG8fbqtJyW3KbFFv4j0NAVz3qbQmvl
-	7qrkCoG+ScrYrlXhCWtOVJcE9ndhBhwtCd+8ttjlemS38/98PWH0p8KHieRcdTGJ3bjw==
-X-Received: by 2002:a05:600c:6095:b0:495:6022:5a14 with SMTP id 5b1f17b1804b1-496c65802a3mr28931925e9.34.1785248577796;
-        Tue, 28 Jul 2026 07:22:57 -0700 (PDT)
-Message-ID: <548d021a-7299-4ca4-afae-00fce1c1d549@suse.com>
-Date: Tue, 28 Jul 2026 16:22:56 +0200
+        bh=w1o+lRjL5Bu7MJj4eoJSBjI4Yb8dSfa5/A/XYawdiOo=;
+        b=RJNOW2TTmW4Ba4FUrs7n7nLu3nwIMwltO9NuJxgAlw5yY/tQ11iZ3GUPvOHuVH7/93
+         TO3/CyWB9gtx5FWk3Cq3gfZDwwBPrfyAX9VgQmDzWc2sNSpGqzisvlg4UNnwtI0D9zc2
+         qlHohE3thWZ0SlfUCR3+TzcO6MBDoId4s4ym/tHQLJR19qxT1kwyl81zCjqPwhqLPwiU
+         RBwC+9msoigi4gO/9VbmuFuTkDbxO6QkKS/8FQgkFyREJkOKg8NRHhXM/eXDHevg+wDM
+         usXU42xu5XEgEshdJIIr4VN04S/jL1/pxEPb+O466PqaSyMmuU8CnwByjd4S5U/+HCux
+         kuCg==
+X-Gm-Message-State: AOJu0YyLn+t+eaf1GCFysH+m3q4hD1QiTNOIgWJGpoCXq9BbNMJD+fqa
+	qHf9eYu9rvQH7s+Tnj2mwWmtgGRTypXTjrHlaqw1BMcuzXNzrW+Uy/CYQO7y5VRVmqK3sbCjSS+
+	Nf99Tqw==
+X-Gm-Gg: AR+sD12Gile6slctf56hUyW7xY2xlD6tHDf74ntgvluKxq9nIk1QJQz6eYAj+y1l5fh
+	LLfdB97NidASbOpr0Y0EPiY3DvN/5JeuNnxaNl65NjnjRy4UwaUqT4nMZzW6wFn1owr6D1bm9+f
+	9TKqBQrFuPwzdKyrd66C8xbpP8cNJHLkvFGBh93eeChM+G01lcgAre+z+GyWLHv1mJO2w3KCMJJ
+	vDQ8BQCEfSaofpFeM99CMV2najkhaSrBismv9HqnWLj7aSQMq/wlOVaz9y+Im5YoapzcJ7aQUrQ
+	5u/aLK4txDwTbLtYi6bVp4o2jinigTcdKnKcGMfBFHXCpJA4edvNy3oXEBZ0sSveCJa/EJHyk9T
+	sbGO+xAbQXwXwTi20OM9+hV76OLlRKdWN1NO2x2ak4xW1W+uA9vLhc+42Q/FHk4nTforg0cxEfi
+	y5khLg5OMr3R6rFu51LbIqV0rjvT5mrpg5w1h1DCwg+RbhWAqCheoO/IHi1tSg9j2mqLe1AAtMl
+	k6c
+X-Received: by 2002:a05:600c:1d1b:b0:493:bb0:3b43 with SMTP id 5b1f17b1804b1-496c6426bc8mr31339625e9.2.1785248600381;
+        Tue, 28 Jul 2026 07:23:20 -0700 (PDT)
+Message-ID: <0051a0fb-9ca7-4f90-960e-08e0898ea874@suse.com>
+Date: Tue, 28 Jul 2026 16:23:18 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v15 07/10] x86/shadow: fold _shadow_prealloc() with
- shadow_blow_tables()
+Subject: [PATCH v15 08/10] x86/shadow: make log-dirty mode enable/disable
+ properly preemptable
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>
@@ -129,307 +130,178 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <68c16600-a4bf-4060-a1fc-56c4ae655b03@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1785248578-F0CA22AC-5F56EB08/0/0
+X-purgate-ID: tlsNG-ebf023/1785248600-C2AC8B50-467A7E34/0/0
 X-purgate-type: clean
-X-purgate-size: 10900
+X-purgate-size: 6503
 
-The two functions are pretty similar, and hence changes commonly need to
-occur in both places. Fold the functions by introducing a new shared
-helper, which then will be used from the three relevant places. Note
-that this way preemptability can then be communicated down from
-shadow_set_allocation() right away.
+Their calls to shadow_set_allocation() are the last missing piece.
+
+While it may seem a little odd, it actually turns out easier to deal
+with the continuation a level up from where the need for it was first
+recognized.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-To have the compiler eliminate the extra conditionals, should we make
-sh_blow_tables() always-inline?
+I think the point was raised before: It's questionable whether
+shadow_one_bit_enable(), upon error, should bring the allocation back
+down to zero. This is going to be especially bad for a domain which
+previously had shadow enabled already (which could be HVM or L1TF-
+affected PV). Even in shadow_one_bit_disable() it's not clear this is
+the best possible behavior - the pool may have been set to something
+larger than the default by the admin. For now I'm maintaining prior
+behavior, but of course things would end up simpler if we could just get
+rid of those set-to-zero operations (and then perhaps also on
+shadow_enable()'s similar error path); the possible caveat there would
+be that overall memory consumption may then appear to grow for people
+monitoring a system.
+
+Originally I was considering to further qualify the
+d->arch.paging.preempt.drop_allocation checks by passing further down
+the "resuming" flag, but for a well-behaved tool stack (which allows one
+shadow-op to finish before starting another one) there shouldn't be a
+difference. Thoughts?
 ---
 v14: New.
 
---- a/xen/arch/x86/include/asm/perfc_defn.h
-+++ b/xen/arch/x86/include/asm/perfc_defn.h
-@@ -49,7 +49,8 @@ PERFCOUNTER(shadow_alloc_tlbflush, "shad
- /* STATUS counters do not reset when 'P' is hit */
- PERFSTATUS(shadow_alloc_count,         "number of shadow pages in use")
- PERFCOUNTER(shadow_free,           "calls to shadow_free")
--PERFCOUNTER(shadow_prealloc_1,     "shadow recycles old shadows")
-+PERFCOUNTER(shadow_prealloc_0,     "shadow recycles old shadows")
-+PERFCOUNTER(shadow_prealloc_1,     "shadow recycles pinned shadows")
- PERFCOUNTER(shadow_prealloc_2,     "shadow recycles in-use shadows")
- PERFCOUNTER(shadow_linear_map_failed, "shadow hit read-only linear map")
- PERFCOUNTER(shadow_a_update,       "shadow A bit update")
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -236,6 +236,7 @@ struct paging_domain {
+     struct {
+         const struct domain *dom;
+         unsigned int op;
++        bool drop_allocation:1;
+         union {
+             struct {
+                 unsigned long done:PADDR_BITS - PAGE_SHIFT;
+--- a/xen/arch/x86/mm/paging.c
++++ b/xen/arch/x86/mm/paging.c
+@@ -215,9 +215,10 @@ static int paging_log_dirty_enable(struc
+ 
+     paging_lock(d);
+ 
+-    if ( d->arch.paging.preempt.dom &&
+-         (d->arch.paging.preempt.dom != current->domain ||
+-          d->arch.paging.preempt.op != op) )
++    if ( !d->arch.paging.preempt.dom )
++        d->arch.paging.preempt.drop_allocation = false;
++    else if ( d->arch.paging.preempt.dom != current->domain ||
++              d->arch.paging.preempt.op != op )
+     {
+         paging_unlock(d);
+         if ( !resuming )
+@@ -259,9 +260,10 @@ static int paging_log_dirty_disable(stru
+ 
+     paging_lock(d);
+ 
+-    if ( d->arch.paging.preempt.dom &&
+-         (d->arch.paging.preempt.dom != current->domain ||
+-          d->arch.paging.preempt.op != XEN_DOMCTL_SHADOW_OP_OFF) )
++    if ( !d->arch.paging.preempt.dom )
++        d->arch.paging.preempt.drop_allocation = false;
++    else if ( d->arch.paging.preempt.dom != current->domain ||
++              d->arch.paging.preempt.op != XEN_DOMCTL_SHADOW_OP_OFF )
+     {
+         paging_unlock(d);
+         if ( !resuming )
 --- a/xen/arch/x86/mm/shadow/common.c
 +++ b/xen/arch/x86/mm/shadow/common.c
-@@ -370,79 +370,8 @@ static inline void trace_shadow_prealloc
-     }
- }
+@@ -2440,12 +2440,22 @@ static int shadow_one_bit_enable(struct
  
--/* Make sure there are at least count order-sized pages
-- * available in the shadow page pool. */
--static bool __must_check _shadow_prealloc(struct domain *d, unsigned int pages)
--{
--    struct vcpu *v;
--    struct page_info *sp, *t;
--    mfn_t smfn;
--    int i;
--
--    if ( d->arch.paging.free_pages >= pages )
--        return true;
--
--    if ( unlikely(d->is_dying) )
--        /* No reclaim when the domain is dying, teardown will take care of it. */
--        return false;
--
--    /* Nothing to reclaim when there are no vcpus yet. */
--    if ( !d->vcpu[0] )
--        return false;
--
--    /* Stage one: walk the list of pinned pages, unpinning them */
--    perfc_incr(shadow_prealloc_1);
--    foreach_pinned_shadow(d, sp, t)
--    {
--        smfn = page_to_mfn(sp);
--
--        /* Unpin this top-level shadow */
--        trace_shadow_prealloc_unpin(d, smfn);
--        sh_unpin(d, smfn);
--
--        /* See if that freed up enough space */
--        if ( d->arch.paging.free_pages >= pages )
--            return true;
--    }
--
--    /* Stage two: all shadow pages are in use in hierarchies that are
--     * loaded in cr3 on some vcpu.  Walk them, unhooking the non-Xen
--     * mappings. */
--    perfc_incr(shadow_prealloc_2);
--
--    for_each_vcpu(d, v)
--        for ( i = 0; i < ARRAY_SIZE(v->arch.paging.shadow.shadow_table); i++ )
--        {
--            if ( !pagetable_is_null(v->arch.paging.shadow.shadow_table[i]) )
--            {
--                TRACE_SHADOW_PATH_FLAG(TRCE_SFLAG_PREALLOC_UNHOOK);
--                shadow_unhook_mappings(
--                    d,
--                    pagetable_get_mfn(v->arch.paging.shadow.shadow_table[i]),
--                    0);
--
--                /* See if that freed up enough space */
--                if ( d->arch.paging.free_pages >= pages )
--                {
--                    guest_flush_tlb_mask(d, d->dirty_cpumask);
--                    return true;
--                }
--            }
--        }
--
--    /* Nothing more we can do: all remaining shadows are of pages that
--     * hold Xen mappings for some vcpu.  This can never happen. */
--    printk(XENLOG_ERR "Can't pre-allocate %u shadow pages!\n"
--           "  shadow pages total = %u, free = %u, p2m=%u\n",
--           pages, d->arch.paging.total_pages,
--           d->arch.paging.free_pages, d->arch.paging.p2m_pages);
--
--    ASSERT_UNREACHABLE();
--
--    guest_flush_tlb_mask(d, d->dirty_cpumask);
--
--    return false;
--}
-+static bool sh_blow_tables(struct domain *d, unsigned int goal,
-+                           bool *preempted);
- 
- /* Make sure there are at least count pages of the order according to
-  * type available in the shadow page pool.
-@@ -466,7 +395,7 @@ bool shadow_prealloc(struct domain *d, u
-          ((SHF_L1_ANY | SHF_FL1_ANY) & (1u << type)) )
-         count += paging_logdirty_levels();
- 
--    ret = _shadow_prealloc(d, count);
-+    ret = sh_blow_tables(d, count, NULL);
-     if ( !ret && (!d->is_shutting_down || d->shutdown_code != SHUTDOWN_crash) )
-         /*
-          * Failing to allocate memory required for shadow usage can only result in
-@@ -477,9 +406,15 @@ bool shadow_prealloc(struct domain *d, u
-     return ret;
- }
- 
--/* Deliberately free all the memory we can: this will tear down all of
-- * this domain's shadows */
--void shadow_blow_tables(struct domain *d, bool *preempted)
-+/*
-+ * When @goal is zero: Deliberately free all the memory we can: This will
-+ * tear down all of this domain's shadows.
-+ *
-+ * When @goal is non-zero: Make sure there are at least as many pages
-+ * available in the shadow page pool.
-+ */
-+static bool sh_blow_tables(struct domain *d, unsigned int goal,
-+                           bool *preempted)
- {
-     struct page_info *sp, *t;
-     struct vcpu *v;
-@@ -487,19 +422,25 @@ void shadow_blow_tables(struct domain *d
-     int i;
-     unsigned int done = 0;
- 
-+    if ( goal && d->arch.paging.free_pages >= goal )
-+        return true;
-+
-     /*
-      * When the domain is dying a call to shadow_blow_tables() will be
-      * performed from the teardown path with preemption support, ignore any
-      * other calls as we want to do the final teardown with preemption support.
-      * Teardown of shadow related data can only be avoided when all domain
-      * vCPUs are stopped.
-+     *
-+     * For the pre-allocation case, no reclaim when the domain is dying,
-+     * teardown will take care of it.
-      */
--    if ( unlikely(d->is_dying) && !preempted )
--        return;
-+    if ( unlikely(d->is_dying) && (goal || !preempted) )
-+        return false;
- 
-     /* Nothing to do when there are no vcpus yet. */
-     if ( !d->vcpu[0] )
--        return;
-+        return false;
- 
-     /* First pass: reduce page table depth */
-     if ( preempted )
-@@ -513,16 +454,23 @@ void shadow_blow_tables(struct domain *d
- #endif
-         };
- 
-+        if ( goal )
-+            perfc_incr(shadow_prealloc_0);
-+
-         HASH_CALLBACKS_CHECK(SHF_page_type_mask & ~(SHF_L1_ANY | SHF_FL1_ANY));
- 
-         for ( i = 0; i < ARRAY_SIZE(masks); ++i )
-         {
-             while ( hash_foreach(d, masks[i], callbacks, _mfn(0)) )
-             {
-+                /* See if that freed up enough space */
-+                if ( goal && d->arch.paging.free_pages >= goal )
-+                    return true;
-+
-                 if ( general_preempt_check() )
-                 {
-                     *preempted = true;
--                    return;
-+                    return false;
-                 }
-             }
-         }
-@@ -530,18 +478,31 @@ void shadow_blow_tables(struct domain *d
-     }
- 
-     /* Second pass: unpin all pinned pages */
-+    if ( goal )
-+        perfc_incr(shadow_prealloc_1);
-     foreach_pinned_shadow(d, sp, t)
+     if ( d->arch.paging.total_pages < sh_min_allocation(d) )
      {
-         smfn = page_to_mfn(sp);
++        bool preempted = false;
 +
-+        /* Unpin this top-level shadow */
-+        if ( goal )
-+            trace_shadow_prealloc_unpin(d, smfn);
-         sh_unpin(d, smfn);
-+
-+        /* See if that freed up enough space */
-+        if ( goal && d->arch.paging.free_pages >= goal )
-+            return true;
-+
-         if ( preempted && !(++done & 0xff) && general_preempt_check() )
+         /* Init the shadow memory allocation if the user hasn't done so */
+-        if ( shadow_set_allocation(d, 1, NULL) != 0 )
++        if ( shadow_set_allocation(d, 1,
++                                   mode & PG_log_dirty ? &preempted
++                                                       : NULL) != 0 )
          {
-             *preempted = true;
--            return;
-+            return false;
+-            shadow_set_allocation(d, 0, NULL);
+-            return -ENOMEM;
++            shadow_set_allocation(d, 0,
++                                  mode & PG_log_dirty ? &preempted : NULL);
++            if ( !preempted )
++                return -ENOMEM;
++            d->arch.paging.preempt.drop_allocation = true;
          }
++
++        if ( preempted )
++            return -ERESTART;
      }
  
-     /* Third pass: unhook entries of in-use shadows */
-+    if ( goal )
-+        perfc_incr(shadow_prealloc_2);
-     for_each_vcpu(d, v)
-         for ( i = 0; i < ARRAY_SIZE(v->arch.paging.shadow.shadow_table); i++ )
-             if ( !pagetable_is_null(v->arch.paging.shadow.shadow_table[i]) )
-@@ -549,11 +510,20 @@ void shadow_blow_tables(struct domain *d
-                 unsigned int num = d->arch.paging.total_pages -
-                                    d->arch.paging.free_pages;
- 
-+                if ( goal )
-+                    TRACE_SHADOW_PATH_FLAG(TRCE_SFLAG_PREALLOC_UNHOOK);
-                 shadow_unhook_mappings(
-                     d,
-                     pagetable_get_mfn(v->arch.paging.shadow.shadow_table[i]),
-                     0);
- 
-+                /* See if that freed up enough space */
-+                if ( goal && d->arch.paging.free_pages >= goal )
-+                {
-+                    guest_flush_tlb_mask(d, d->dirty_cpumask);
-+                    return true;
-+                }
+     /* Allow p2m and log-dirty code to borrow shadow memory */
+@@ -2484,6 +2494,8 @@ static int shadow_one_bit_disable(struct
+     sh_new_mode(d, mode);
+     if ( d->arch.paging.mode == 0 )
+     {
++        bool preempted = false;
 +
-                 /*
-                  * Make sure we are making progress before yielding: if domain
-                  * is dying progress will be seen by total_pages decreasing, if
-@@ -573,9 +543,32 @@ void shadow_blow_tables(struct domain *d
-                 }
-             }
+         /* Get this domain off shadows */
+         SHADOW_PRINTK("un-shadowing of domain %u starts."
+                        "  Shadow pages total = %u, free = %u, p2m=%u\n",
+@@ -2511,8 +2523,16 @@ static int shadow_one_bit_disable(struct
+         }
  
-+    if ( goal )
-+    {
-+        /*
-+         * Nothing more we can do: All remaining shadows are of pages that
-+         * hold Xen mappings for some vcpu.  This can never happen.
-+         */
-+        printk(XENLOG_ERR "Can't pre-allocate %u shadow pages!\n"
-+               "  shadow pages total = %u, free = %u, p2m=%u\n",
-+               goal, d->arch.paging.total_pages,
-+               d->arch.paging.free_pages, d->arch.paging.p2m_pages);
+         /* Pull down the memory allocation */
+-        if ( shadow_set_allocation(d, 0, NULL) != 0 )
++        if ( shadow_set_allocation(d, 0,
++                                   mode & PG_log_dirty ? &preempted
++                                                       : NULL) != 0 )
+             BUG(); /* In fact, we will have BUG()ed already */
++        if ( preempted )
++        {
++            d->arch.paging.preempt.drop_allocation = true;
++            return -ERESTART;
++        }
 +
-+        ASSERT_UNREACHABLE();
+         shadow_hash_teardown(d);
+         SHADOW_PRINTK("un-shadowing of domain %u done."
+                        "  Shadow pages total = %u, free = %u, p2m=%u\n",
+@@ -2558,14 +2578,20 @@ static int shadow_test_disable(struct do
+  */
+ static int cf_check sh_enable_log_dirty(struct domain *d)
+ {
++    bool preempted = false;
+     int ret;
+ 
+     ASSERT(paging_locked_by_me(d));
+ 
+-    if ( shadow_mode_enabled(d) )
++    if ( d->arch.paging.preempt.drop_allocation )
+     {
+-        bool preempted = false;
++        shadow_set_allocation(d, 0, &preempted);
+ 
++        return preempted ? -ERESTART : -ENOMEM;
 +    }
 +
-  out:
-     /* Make sure everyone sees the unshadowings */
-     guest_flush_tlb_mask(d, d->dirty_cpumask);
++    if ( shadow_mode_enabled(d) )
++    {
+         /*
+          * This domain already has some shadows: need to clear them out
+          * of the way to make sure that all references to guest memory are
+@@ -2598,6 +2624,21 @@ static int cf_check sh_disable_log_dirty
+ 
+     ASSERT(paging_locked_by_me(d));
+ 
++    if ( d->arch.paging.preempt.drop_allocation )
++    {
++        shadow_set_allocation(d, 0, &preempted);
 +
-+    return false;
-+}
++        if ( preempted )
++            return -ERESTART;
 +
-+/* Deliberately free all the memory we can: this will tear down all of
-+ * this domain's shadows */
-+void shadow_blow_tables(struct domain *d, bool *preempted)
-+{
-+    sh_blow_tables(d, 0, preempted);
- }
- 
- void shadow_blow_tables_per_domain(struct domain *d)
-@@ -910,8 +903,8 @@ int shadow_set_allocation(struct domain
-         else if ( d->arch.paging.total_pages > pages )
-         {
-             /* Need to return memory to domheap */
--            if ( !_shadow_prealloc(d, 1) )
--                return -ENOMEM;
-+            if ( !sh_blow_tables(d, 1, preempted) )
-+                return preempted && *preempted ? 0 : -ENOMEM;
- 
-             sp = page_list_remove_head(&d->arch.paging.freelist);
-             ASSERT(sp);
-@@ -2320,7 +2313,7 @@ void shadow_teardown(struct domain *d, b
- 
++        shadow_hash_teardown(d);
++        SHADOW_PRINTK("un-shadowing of domain %u done."
++                       "  Shadow pages total = %u, free = %u, p2m=%u\n",
++                       d->domain_id, d->arch.paging.total_pages,
++                       d->arch.paging.free_pages, d->arch.paging.p2m_pages);
++        return 0;
++    }
++
      /*
-      * Reclaim all shadow memory so that shadow_set_allocation() doesn't find
--     * in-use pages, as _shadow_prealloc() will no longer try to reclaim pages
-+     * in-use pages, as sh_blow_tables() will no longer try to reclaim pages
-      * because the domain is dying.
-      */
-     paging_lock(d);
+      * Limit the amount of work to do from sh_detach_old_tables() (called from
+      * shadow_one_bit_disable() via sh_new_mode() -> sh_update_paging_modes()),
 
 
