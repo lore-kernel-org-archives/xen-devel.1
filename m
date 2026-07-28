@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90A1AC53219
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:51:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374526.1621899 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E397C54F4D
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:51:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374533.1621916 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woj91-0006h2-Ps; Tue, 28 Jul 2026 14:50:59 +0000
+	id 1woj94-0007QI-Sy; Tue, 28 Jul 2026 14:51:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374526.1621899; Tue, 28 Jul 2026 14:50:59 +0000
+Received: by outflank-mailman (output) from mailman id 1374533.1621916; Tue, 28 Jul 2026 14:51:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woj90-0006Zf-6Y; Tue, 28 Jul 2026 14:50:58 +0000
-Received: by outflank-mailman (input) for mailman id 1374526;
- Tue, 28 Jul 2026 14:50:25 +0000
+	id 1woj93-0007L6-Du; Tue, 28 Jul 2026 14:51:01 +0000
+Received: by outflank-mailman (input) for mailman id 1374533;
+ Tue, 28 Jul 2026 14:50:28 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1woj8S-0008Jq-7g
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:50:24 +0000
+ id 1woj8V-0000Wg-VP
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:50:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woj8R-00BbHr-J7; Tue, 28 Jul 2026 16:50:23 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1woj8V-00EhwD-Al; Tue, 28 Jul 2026 16:50:27 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a68c19f-2eae-0a2a0a5409dd-0a2a4505e402-48
+ id 6a68c1ae-5cb7-0a2a0a5109dd-0a2a4506abd0-2
  for <multiple-recipients>; Tue, 28 Jul 2026 16:50:22 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a68c1ae-4cb1-0a2a45050019-5a9b32229bba-3
+ id 6a68c1ae-195a-0a2a45060019-5a9b32228b74-3
  for <multiple-recipients>; Tue, 28 Jul 2026 16:50:22 +0200
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1woj80-0000000DUOq-0Pyj; Tue, 28 Jul 2026 14:49:56 +0000
+ id 1woj80-0000000DUOm-0ID4; Tue, 28 Jul 2026 14:49:56 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.4 #2 (Red
- Hat Linux)) id 1woj7z-00000001UYJ-1rI0;
+ Hat Linux)) id 1woj7z-00000001UXy-0SWc;
  Tue, 28 Jul 2026 15:49:55 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -56,12 +56,12 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
 	Cc:Content-Type:Content-ID:Content-Description;
-	bh=TzgYEQycZnk9NREs4BkWOyKg6Tp5meskn+6VMFWWmpQ=; b=DZKx6RFvQHAQs1Ojm8AZEO8oH5
-	EdXrPppB8RpLp8SjdUC5USPmltd9ZTJnJIw5OXYR+xL5uk00Wq5GotDuiSIBZWs8I7i9yKwfNhMS/
-	NsKmg9j/6LwR4eRzAhx9sKuy6/J/fX7nU9Vew91XzYZFeUPOwTEyQOa+SP0vveHaHr3VzVtraDzJ5
-	+KtPwFC7rybqp1C6uDODOJ4kuNDepZeX5+DXeOn8r9xA7tooRGLs+EQhChjOHFQdJY+L61w9UXoWY
-	mi+pT09OFVSUvomFpPWgAhWBDSNzkLG88+gztgItGkkEceaXLXT5+vp3fctgF0m+6PyB560hhcyru
-	bUk+dNTA==;
+	bh=4VY/igWUqNSJOEWywP/U3Qrf0q3GjhRxhpOp9zM//ng=; b=k3sg5sh1Feq7DCYO0jDXScowpK
+	bffW+fbxmlKRgpEweZ7JGgTlwVBVdVSJur8POhpUe+THC5dBHhdLdBB8xzjT+dmXGm/p2vdVM+rJd
+	9WNJjogAGZy3xZWrui+kQNG7s+a6YiMPq0+AaQUmkxRBtQmA+Aq/F0N5mb2ZlImdKJ3PAa45EYTEp
+	vSzc1pI1PKi/0KkJnyKgUaAaULfEQWLNTgrMsMZrKHNG3Tkkzout893NSdhu06r4NCD4wLBmC3qVw
+	MdmFoAbnAmXbncNrwyVF78jJY6Rbfuc90Cy/wO9y69oDu6EvgSyPevFDxgoa9uR5qWFsADRZQzxLg
+	sQKGEmoQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	Jonathan Corbet <corbet@lwn.net>,
@@ -90,9 +90,9 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v7 10/36] KVM: x86: Fix compute_guest_tsc() to handle negative time deltas
-Date: Tue, 28 Jul 2026 15:39:50 +0100
-Message-ID: <20260728144954.355376-11-dwmw2@infradead.org>
+Subject: [PATCH v7 03/36] KVM: x86: Activate master clock immediately on vCPU creation
+Date: Tue, 28 Jul 2026 15:39:43 +0100
+Message-ID: <20260728144954.355376-4-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260728144954.355376-1-dwmw2@infradead.org>
 References: <20260728144954.355376-1-dwmw2@infradead.org>
@@ -100,56 +100,42 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-c201ff/1785250222-2491C2A1-E88C9274/0/0
+X-purgate-ID: tlsNG-16d1c6/1785250222-FD80D77B-6776E78B/0/0
 X-purgate-type: clean
-X-purgate-size: 1831
+X-purgate-size: 1252
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-The compute_guest_tsc() function computes the guest TSC at a given
-kernel_ns timestamp. When the master clock reference point
-(master_kernel_ns) is earlier than vcpu->arch.this_tsc_nsec, the delta
-is negative. Since pvclock_scale_delta() takes a u64, the negative
-value wraps to a huge positive number, producing a wildly wrong result.
+Previously, the master clock was only activated when the first vCPU
+processed KVM_REQ_MASTERCLOCK_UPDATE during KVM_RUN. This meant that
+KVM_GET_CLOCK could not return the host_tsc field until after the
+first KVM_RUN, making it impossible for userspace to follow the
+documented TSC migration procedure without a dummy vCPU run.
 
-Handle negative deltas explicitly by scaling the absolute value of the
-delta and applying it to this_tsc_write with the appropriate sign.
-
-This is believed to be unreachable in practice; no path has been
-identified which invokes compute_guest_tsc() with a timestamp from
-before the vCPU's TSC generation was established. Fix it for
-robustness, in the spirit of defence in depth.
+Fix this by calling kvm_update_masterclock() directly from
+kvm_arch_vcpu_postcreate(), after kvm_synchronize_tsc() has already
+set all_vcpus_matched_freq. This ensures the master clock is active
+immediately, and KVM_GET_CLOCK returns a valid {host_tsc, realtime}
+pair as soon as a vCPU exists.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- arch/x86/kvm/x86.c | 14 +++++++++-----
- 1 file changed, 9 insertions(+), 5 deletions(-)
+ arch/x86/kvm/x86.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index f7a9fb69e69d..52c9268007f8 100644
+index f7e1031f8eb0..dac9264497e8 100644
 --- a/arch/x86/kvm/x86.c
 +++ b/arch/x86/kvm/x86.c
-@@ -1054,11 +1054,15 @@ static int kvm_set_tsc_khz(struct kvm_vcpu *vcpu, u32 user_tsc_khz)
+@@ -9434,6 +9434,8 @@ void kvm_arch_vcpu_postcreate(struct kvm_vcpu *vcpu)
+ 		return;
+ 	vcpu_load(vcpu);
+ 	kvm_synchronize_tsc(vcpu, NULL);
++	if (!vcpu->kvm->arch.use_master_clock)
++		kvm_update_masterclock(vcpu->kvm);
+ 	vcpu_put(vcpu);
  
- static u64 compute_guest_tsc(struct kvm_vcpu *vcpu, s64 kernel_ns)
- {
--	u64 tsc = pvclock_scale_delta(kernel_ns-vcpu->arch.this_tsc_nsec,
--				      vcpu->arch.virtual_tsc_mult,
--				      vcpu->arch.virtual_tsc_shift);
--	tsc += vcpu->arch.this_tsc_write;
--	return tsc;
-+	s64 delta_ns = kernel_ns - vcpu->arch.this_tsc_nsec;
-+	u64 tsc;
-+
-+	/* Handle negative deltas gracefully (master clock ref may be earlier) */
-+	tsc = pvclock_scale_delta(abs(delta_ns),
-+				  vcpu->arch.virtual_tsc_mult,
-+				  vcpu->arch.virtual_tsc_shift);
-+
-+	return vcpu->arch.this_tsc_write + (delta_ns >= 0 ? tsc : -tsc);
- }
- 
- #ifdef CONFIG_X86_64
+ 	/* poll control enabled by default */
 -- 
 2.55.0
 
