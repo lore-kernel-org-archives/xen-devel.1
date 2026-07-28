@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D90E4C54F4C
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 13:16:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374070.1621029 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3633EC53219
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 13:17:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374079.1621037 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wohfO-0005nD-2s; Tue, 28 Jul 2026 13:16:18 +0000
+	id 1wohgE-0006S0-DN; Tue, 28 Jul 2026 13:17:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374070.1621029; Tue, 28 Jul 2026 13:16:18 +0000
+Received: by outflank-mailman (output) from mailman id 1374079.1621037; Tue, 28 Jul 2026 13:17:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wohfN-0005n6-VC; Tue, 28 Jul 2026 13:16:17 +0000
-Received: by outflank-mailman (input) for mailman id 1374070;
- Tue, 28 Jul 2026 13:16:17 +0000
+	id 1wohgE-0006Rr-AM; Tue, 28 Jul 2026 13:17:10 +0000
+Received: by outflank-mailman (input) for mailman id 1374079;
+ Tue, 28 Jul 2026 13:17:09 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wohfM-0005ms-VK
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 13:16:16 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wohgD-0006Rh-HH
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 13:17:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wohfM-00EpXl-8X
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 15:16:16 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wohgC-004cso-UC
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 15:17:08 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68ab98-e002-0a2a0a5209dd-0a2a45018de0-42
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:16:16 +0200
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a68abd2-e002-0a2a0a5209dd-0a2a4504c8be-10
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:17:08 +0200
+Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68ab9f-5984-0a2a45010019-d1558034d5bf-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:16:16 +0200
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-490cf322ed0so27646635e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 06:16:16 -0700 (PDT)
+ id 6a68abd4-b57f-0a2a45040019-d155802dedc1-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:17:08 +0200
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-49553515a8bso47543815e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 06:17:08 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4957bd9e980sm306652945e9.0.2026.07.28.06.16.14
+ ffacd0b85a97d-47f85bdac28sm56348963f8f.16.2026.07.28.06.17.07
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Jul 2026 06:16:14 -0700 (PDT)
+ Tue, 28 Jul 2026 06:17:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,49 +55,48 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785244575; x=1785849375; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785244628; x=1785849428; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=zetRrDWUxrCa7/9hdGwxlCdEe6eXsmxWFslnNICnQn8=;
-        b=eRkjOq2hJ6JQrfCRlVepoWNeKeJbQHQavqQJEY1l707q0LLJBzfeH5H4jjZH00KD1a
-         PiQodM6oEVZh5LcTftdmunxvwDYIxTnnILugy7SdEC73JYbVuUlnkrULPwOzH+6U59h8
-         0Zjl9MlVYNkGjJTcF4AFwb67E8VS2+vTK0AFHPGE1HjMg4oskBDxCYPrPBmpDmUrpM/S
-         VgcWANEsk4hUrY11nJuXeXUHPTYyshX0XFnC7vFEe7nO2pIMuxmWcxJbagLy0oindjTI
-         7+MbX6TYtISTeFIR2nw3Ah9lXSYkCxRU4WNKYcgXonqdqTDFp1Z5umHfhxmmpKTBVQNf
-         e+4g==
+        bh=WFTGwAO/jWijw2cBrXOLfG+sKxJS+HJkR11e/wlol9E=;
+        b=HlUYvbyuJZTLehkMduc/OAicUNe7KUuoqLt8L8hnwuF94hKHA+LTKFhKpJZee2J4Dp
+         lNKJ/BqMwolIBQfza4FjGYuHcBzKbO1EzYcagYuivfaHL5DAZjoDORyX3RkS2ekIp1k4
+         6cTFhMIKI8yHZfQUvzVFu2Ehcxe9ImIS3lafv96uqjvANe5jHOuxA1X3ZlHVrg1C/3an
+         HxDW0EbKnu5ZCzyIcr5HiMMCwYDjfJEWG1cL6I0dh6Y6uKK67KSJRMEH+bTt+KHdh4QA
+         cau0dfJ3i/5acr3iB9gRG3rhlO1ZgML6yarTXsPU+fDclhQv09nlmEIQeZtNcF1t+WUa
+         1pKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785244575; x=1785849375;
+        d=1e100.net; s=20251104; t=1785244628; x=1785849428;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=zetRrDWUxrCa7/9hdGwxlCdEe6eXsmxWFslnNICnQn8=;
-        b=Rq7IcgthbIavIKzhmyn5rQQnwTsdmfT72QcYMyWF4bjH6JGmsfcRTFIwUlkgJdqJgu
-         POy6ZKe7rh9XYV9SeVlsHRkJRkSRzc11Bnm6GeW58hLCdVVH+YpYeXO0OXb05QkB/Y8H
-         Xys1vCOUSjlVB+LESq7tT74vbT23Yz7CWJ1mOMrw5UKcLN19Ui+rlJcubruM409LxreO
-         DxffYAOjnXxfNA7j8I64jismd88ilPsNXRS4YbZltJe905PVz+5us993+4h+fZM+zWP+
-         JaYcV/WccXrk5vcSmr9gzqOKg3DGN6wu5yLdf049JCNH5/pBtQ0ETb3XwXTLmDGr5v9D
-         i1EQ==
-X-Gm-Message-State: AOJu0Yy2R6xUm7RPeTimZz2EfzoWtA9fYtC/f1Ia2ZTWoEhyBAEmehHy
-	xPush3ry+KkRatA/6PBC0rQJDxmWEBM/nlKCqdEmD/9aYPm2vMN+ZXS7AAo1aywmJHHMnXL3xV6
-	7EWxzDg==
-X-Gm-Gg: AR+sD13dZUsvNl+XAeyMzUP8hRyUIjiNcyNJTvZbWUtPuKjaTCXjXFZ59Sinj1gRir4
-	GcITLdqJimZumDKy/VTcSKXXzg159GbyYQYW6u3D5NzGbDonzfQC5v2EME9CyBJ4FDqDxO5m+MA
-	pzXW3P56J/rkOLA/t+r5R6PR6Sg8bntotRlw5DchD+EkSwGSWdncj1NbgdSsosIxmGyqIqV62AU
-	KFuzfZB6hDrvpFIJli/pM/dAoLhhW2N7Wcx26065dEuYnToPLA6BL2njFoUdtCmKTbZRtl6aY8d
-	e0gXRzVNqSzutMllwJ3/4kdc0u2hXfhCuZmrptdanmpo33MVQU1Ol0r62hjy0NtJgAfhp+FoIw1
-	LyR3ky0JN+1lHKievpJJLG0Gqm9UkLtCtVVyvn8dAeNRyeaScD4MAzpXk23zYCOsMfgxZfTchrk
-	fzjc4N6mfKeyNLioO4kQa/dyAqgUnfU2gwj8elYO4CzNLXZvwldP/SLtjPeMnIUrsrOA==
-X-Received: by 2002:a05:600c:698d:b0:493:bc4a:fb56 with SMTP id 5b1f17b1804b1-496c6586a23mr25150305e9.39.1785244575383;
-        Tue, 28 Jul 2026 06:16:15 -0700 (PDT)
-Message-ID: <5250093e-174f-4d2d-b19b-95a314b38469@suse.com>
-Date: Tue, 28 Jul 2026 15:16:12 +0200
+        bh=WFTGwAO/jWijw2cBrXOLfG+sKxJS+HJkR11e/wlol9E=;
+        b=TD2yGPhGA5QUuv6+W5lQ7plH3htxi9X+/hHG43cG/rY4U95uCAcxLaQK1MXibQYOhv
+         GKM9oN0LnuZcwsImIIoipskcEK7nhfuPdCP/CFgpZaFnCvGAKb2Mcj6emm2njyd5+T8Q
+         KtIVtj5y+cy3RPI70O9XD2dgkCUaSU69tzMjilXfT0JkfG6/iA+KAFS1U4kGBcpObwxu
+         1J+M/vl9uTvePGTAWdNYscbWSq6KQBL1B1N+90LPIRO1j1bgY2QgPtYZCWphSHMcWo94
+         jwYvydQTncyVWya3rulyNSX0ueWa7Rl6RfzF7QVrg5FNH89Gp0+UDP98/ElpPjW+Pggs
+         pZNg==
+X-Gm-Message-State: AOJu0YydutTO7qIZsocWrLpax1AJ65SAVwx2qfqwhWpdY6dhIGLA4tm+
+	VBGeyWc+MpDMd7ZY8QL33gW1v1LETXyy/qnFQjuW2GBcGbN7y+z46T3+bmX6p59d8QC5CVXVsVg
+	tveTj7Q==
+X-Gm-Gg: AR+sD11W/EzPTiQ38A8Gk9Hict/M7fEaFtkG6a02WwrHA4wyPNblrbZKAOzGismrcBL
+	/XkJQ3Iq6ku+cCgxkbRZafgmOrv0crMQvXxhNYC5cO9qml+RqPOhquzq7+zmG9CGbDEh16IBF6d
+	Ou7RlfXz6zijawSOTkNivofNKKA8BfJFah6DVUGbcWY24woancAL67/smzXWsdkvwd80meZZfWE
+	8fQ6F4kcf9HPNA5MQLlZSNj+7dnMcYYxE3gtp5/fEFEjxiGXpEicRjl5no5T/PMlJI5wH+W34wj
+	qS/qMLz+6CL0uKcM7hSXJCEKBIb+pR9K6bF/7SU5vcrzNlm/Rbez0roQ+siU2/UWQ884s+h3p8k
+	VpzuAb327W5p7h66oMJssUwPbLWbAg3iqlabAnxd79d6hAHyuhcKw03FB86mv43Rx3KCmDzcteQ
+	67A7OM0LwfL9gahttadf6CuEKUm53TYG+yUxrRv4Py6GnJWZoqu1gUBZFBM6A4Cuv3Ig==
+X-Received: by 2002:a05:600c:34c2:b0:493:aab3:c09c with SMTP id 5b1f17b1804b1-496c657ec5cmr27684955e9.28.1785244628159;
+        Tue, 28 Jul 2026 06:17:08 -0700 (PDT)
+Message-ID: <7947b62f-6763-4561-b3aa-c451cfa3dacb@suse.com>
+Date: Tue, 28 Jul 2026 15:17:06 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 08/24] XSM: make .hvm_altp2mhvm_op() hook dependent upon
- ALTP2M=y
+Subject: [PATCH 09/24] XSM: make .hvm_param*() hooks dependent upon HVM=y
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Daniel Smith <dpsmith@apertussolutions.com>
@@ -129,63 +128,69 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <758c8410-a18e-45dc-8944-5913e5832397@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1785244576-BDA7E757-CF311A0A/0/0
+X-purgate-ID: tlsNG-ebf023/1785244628-502E4B50-F1A6BBC9/0/0
 X-purgate-type: clean
-X-purgate-size: 1651
+X-purgate-size: 1847
 
-It's unreachable / dead otherwise.
+They're unreachable / dead otherwise.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+Strictly speaking .hvm_param_altp2mhvm() is dependent upon X86=y as well
+(but oddly not dependent upon ALTP2M=y).
 
 --- a/xen/include/xsm/dummy.h
 +++ b/xen/include/xsm/dummy.h
-@@ -583,6 +583,7 @@ static XSM_INLINE int cf_check xsm_hvm_p
+@@ -569,6 +569,8 @@ static XSM_INLINE int cf_check xsm_map_g
+     return xsm_default_action(action, d, t);
+ }
+ 
++#ifdef CONFIG_HVM
++
+ static XSM_INLINE int cf_check xsm_hvm_param(
+     XSM_DEFAULT_ARG struct domain *d, unsigned long op)
+ {
+@@ -583,6 +585,8 @@ static XSM_INLINE int cf_check xsm_hvm_p
      return xsm_default_action(action, current->domain, d);
  }
  
-+#ifdef CONFIG_ALTP2M
++#endif /* CONFIG_HVM */
++
+ #ifdef CONFIG_ALTP2M
  static XSM_INLINE int cf_check xsm_hvm_altp2mhvm_op(
      XSM_DEFAULT_ARG struct domain *d, uint64_t mode, uint32_t op)
- {
-@@ -602,6 +603,7 @@ static XSM_INLINE int cf_check xsm_hvm_a
-         return -EPERM;
-     }
- }
-+#endif /* CONFIG_ALTP2M */
- 
- #ifdef CONFIG_VM_EVENT
- static XSM_INLINE int cf_check xsm_mem_access(XSM_DEFAULT_ARG struct domain *d)
 --- a/xen/include/xsm/hooks.h
 +++ b/xen/include/xsm/hooks.h
-@@ -106,7 +106,11 @@ XSM_HOOK(int, hypfs_op)
+@@ -104,8 +104,10 @@ XSM_HOOK(int, pci_config_permission, str
+ XSM_HOOK(int, hypfs_op)
+ #endif
  
++#ifdef CONFIG_HVM
  XSM_HOOK(int, hvm_param, struct domain *, unsigned long)
  XSM_HOOK(int, hvm_param_altp2mhvm, struct domain *)
-+
-+#ifdef CONFIG_ALTP2M
- XSM_HOOK(int, hvm_altp2mhvm_op, struct domain *, uint64_t, uint32_t)
 +#endif
-+
- XSM_HOOK(int, get_vnumainfo, struct domain *)
  
- #ifdef CONFIG_VM_EVENT
+ #ifdef CONFIG_ALTP2M
+ XSM_HOOK(int, hvm_altp2mhvm_op, struct domain *, uint64_t, uint32_t)
 --- a/xen/xsm/flask/hooks.c
 +++ b/xen/xsm/flask/hooks.c
-@@ -1393,6 +1393,7 @@ static int cf_check flask_hvm_param_altp
+@@ -1368,6 +1368,8 @@ static int cf_check flask_map_gmfn_forei
+     return domain_has_perm(d, t, SECCLASS_MMU, MMU__MAP_READ | MMU__MAP_WRITE);
+ }
+ 
++#ifdef CONFIG_HVM
++
+ static int cf_check flask_hvm_param(struct domain *d, unsigned long op)
+ {
+     uint32_t perm;
+@@ -1393,6 +1395,8 @@ static int cf_check flask_hvm_param_altp
      return current_has_perm(d, SECCLASS_HVM, HVM__ALTP2MHVM);
  }
  
-+#ifdef CONFIG_ALTP2M
++#endif /* CONFIG_HVM */
++
+ #ifdef CONFIG_ALTP2M
  static int cf_check flask_hvm_altp2mhvm_op(struct domain *d, uint64_t mode, uint32_t op)
  {
-     /*
-@@ -1416,6 +1417,7 @@ static int cf_check flask_hvm_altp2mhvm_
- 
-     return current_has_perm(d, SECCLASS_HVM, HVM__ALTP2MHVM_OP);
- }
-+#endif /* CONFIG_ALTP2M */
- 
- #ifdef CONFIG_VM_EVENT
- static int cf_check flask_mem_access(struct domain *d)
 
 
