@@ -4,46 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CED4C54F4C
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 12:39:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1373915.1620844 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31169C53219
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 12:58:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1373953.1620853 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woh5n-0001MB-Uf; Tue, 28 Jul 2026 12:39:31 +0000
+	id 1wohNN-0005S8-Ao; Tue, 28 Jul 2026 12:57:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1373915.1620844; Tue, 28 Jul 2026 12:39:31 +0000
+Received: by outflank-mailman (output) from mailman id 1373953.1620853; Tue, 28 Jul 2026 12:57:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woh5n-0001M4-RC; Tue, 28 Jul 2026 12:39:31 +0000
-Received: by outflank-mailman (input) for mailman id 1373915;
- Tue, 28 Jul 2026 12:39:31 +0000
+	id 1wohNN-0005S1-85; Tue, 28 Jul 2026 12:57:41 +0000
+Received: by outflank-mailman (input) for mailman id 1373953;
+ Tue, 28 Jul 2026 12:57:40 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>) id 1woh5m-0001Ly-Tj
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 12:39:31 +0000
+ (envelope-from <neil.armstrong@linaro.org>) id 1wohNM-0005Rv-8H
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 12:57:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woh5m-00EIIW-81
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:39:30 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wohNL-00ELix-HS
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:57:39 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6a68a2fb-2eae-0a2a0a5409dd-0a2a450ae7a4-14
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 14:39:30 +0200
-Received: from [40.107.200.22]
- (helo=CH5PR02CU005.outbound.protection.outlook.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6a68a300-f2d2-0a2a450a0019-286bc8169afc-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 14:39:29 +0200
-Received: from CH8PR03MB8276.namprd03.prod.outlook.com (2603:10b6:610:2c1::14)
- by SJ0PR03MB6456.namprd03.prod.outlook.com (2603:10b6:a03:397::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.12; Tue, 28 Jul
- 2026 12:39:26 +0000
-Received: from CH8PR03MB8276.namprd03.prod.outlook.com
- ([fe80::8420:cc3e:23e9:7a0e]) by CH8PR03MB8276.namprd03.prod.outlook.com
- ([fe80::8420:cc3e:23e9:7a0e%3]) with mapi id 15.21.0245.009; Tue, 28 Jul 2026
- 12:39:25 +0000
+ (envelope-from <neil.armstrong@linaro.org>)
+ id 6a68a737-2eae-0a2a0a5409dd-0a2a450ccb58-20
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 14:57:39 +0200
+Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <neil.armstrong@linaro.org>)
+ id 6a68a743-f479-0a2a450c0019-d155dd36c462-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 14:57:39 +0200
+Received: by mail-wr1-f54.google.com with SMTP id
+ ffacd0b85a97d-4728c12ba97so2290725f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 05:57:39 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:5788:c4e1:cf35:7211?
+ ([2a01:e0a:106d:1080:5788:c4e1:cf35:7211])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47f9c4fe4c5sm38412732f8f.12.2026.07.28.05.57.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 28 Jul 2026 05:57:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,183 +54,257 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=X4iESyg1h/+4yvap1I2rMmxbfFRWGMqsm52Y3KVqcpQZF9n34AbzHCS8iwd6QK6Kt9pnAiKgfNTkEActZYai/olKX2ZZKEdMiLstRBeYt/6zyBOgw/C2gg41eGLyZC/ubL+vl0WVVpDBxSmtLtfj9Bd4AMGiqbMOYzpJQobyxUu4D2osTnFOPXUB5KDwEQCQ30i8aEB/6r5sq+Ju6hPqZ0zyCqRthGphcVQCon5sedECDX48TJCnvhwWEWfOGbipGuddNZ9Ip86IVMEfNc1cf3jHxAR7nyt4D2PM7Fyu5IluqJlSNVQrp6qEncCjqjf387PkQR9RBNMDe1DvSZQimQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/pAYhclLHvcCjImLNBCeAPyS/EiAxCznlSJeU+QPvu4=;
- b=kAt+hvX7IeDCOG+ecs7xpjqqrIK7c24W7DrRLTjMhymQVdC6PFQBX5yDJFOxEq346UyrlA1MANa4mWrPl/w8MEKvLOe6V+JwkxdJ+uh6IpbKovHx53PrLE+OKWY+AcH8dDEBQ6S9hVJfMX/Ca+ou3Hgg2fbaRlutVIa88FxbHTIEHxPtxVbZ3DOXn5CKJc3fKhWuOZ6RnDGQCN6ycMS4kriS5Whf+z0+tmRrl8r2iDQzIYhlKX3Cw+PEIi1HJJa5IornUXlDAX4i6guQCUdIHn2ecdZaN/8lRoxYiDFDyfQ724ShEfxXbduylbEockydp08mjaVVscjdm8fPBoC8fw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/pAYhclLHvcCjImLNBCeAPyS/EiAxCznlSJeU+QPvu4=;
- b=CbYrjZJveaRc2DFL2bzvp2kzmNRfaRiu6G+wUav0A6+Q3AY/W9+DBq2bZm7pAKSak7m9BRuycQxteMm93Z2u2QmEsQv3viEJHYZswAwj0Y/Z4cxSqm+fSGw4IjvpXm8zQHWNL/JX6fLZCq1bjGiH5ot7S9wyvWGeKa0fUiVlQSk=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <89ea45da-dc21-4dc4-b6e6-dc4ac5b2f45d@citrix.com>
-Date: Tue, 28 Jul 2026 13:39:22 +0100
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>,
- Xen-devel <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH] x86/vrtc: Use a real type for rtc_ioport_write()
-To: Jan Beulich <jbeulich@suse.com>
-References: <20260728123137.41861-1-andrew.cooper3@citrix.com>
- <b8be4d29-e92e-4ecb-8122-07d370e7c6d1@suse.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <b8be4d29-e92e-4ecb-8122-07d370e7c6d1@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO4P123CA0027.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:151::14) To CH8PR03MB8276.namprd03.prod.outlook.com
- (2603:10b6:610:2c1::14)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=linaro.org header.i="@linaro.org" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Organization:Autocrypt:Content-Language:References:Cc:To:Subject:Reply-To:From:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1785243459; x=1785848259; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:references:cc:to:subject:reply-to:from
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=aHwnyYbdVqw8Gfk40ksLWUw1FSirv4HShvCRuaQuLzM=;
+        b=OQYI1oaZBBE5cQPIg/n9/JUWRRyE7lMggQX+doawyzZfsY+U2q8Yv6ihfzL2Fc9gAq
+         1XkO90rrpSM8bqANKe9z7kdRMjHJF+4o0krZK7t0otSDMtsVRCD4Xe1zWoVKqrIfW2ly
+         oafxLuc7UtwNmFZuD4W57w0QYM5ckiM54OLjMZz0aZQj9CgDEePiMhB3RvSbWRmBZwEJ
+         sjE+/KCk7SeyFGlWiwuAFeFeglbu7W1PisQuEx7EdxpzBa/npgZg0SAq8MuKS+G1Tjin
+         0TuQc7XSFZ4vIL8XGBQPJiVzKEbMiZ6VR2b00RDKdii3W8Dk5g7iNViU1y7xZA/53W34
+         BgWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785243459; x=1785848259;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:references:cc:to:subject:reply-to:from
+         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=aHwnyYbdVqw8Gfk40ksLWUw1FSirv4HShvCRuaQuLzM=;
+        b=LsUYDKCoL3GQOY8FaEEtmROdXwXzaL77jaL8mTzr9AC8/yofQNNBhXUpAn83IcIEpQ
+         scMs2cDpfKxvB5QpoJpYl39siYCjNctpPtoyf9baTSydYMjU8cCmeMlGATkfP4P12Gg/
+         TEuADv4af112FRjoQWvmKyq5q+FSjeoAtBB0z6BocSPiqHs3OIgCaF1l4PgrZzxIGLoh
+         kzqNBUEIkmqHjA+y09VnYvx76zna+bhbwEGpCuUcl6VYoOiXdgaTMi+TdzOF/c8oU9dN
+         k5cY52ZeJ+BGVyCw3RYfKZDwDGSPjzeRGNkK1Kh+2xvGsqS8CDKOxLSwWygnxSDMr+My
+         MUlw==
+X-Forwarded-Encrypted: i=1; AHgh+RpirOs3tfc3JicASXGg3ZJ4o0sGNe0keEJ4wtOxUdMJdzmrUHzXq0iqh9xcuTNG3dtBLVqQUcmCf2k=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzBrYVMIfAxltH8DJ/RMvGUvNpyQ7u6H01MqrJsG70xU2G6QUo2
+	ALODzYWY80M5S1tUipodZlFpCSAupTAYFGqRbke8gxuViIMdA27EdZoE67D4AlM+Vds=
+X-Gm-Gg: AR+sD11XoMuZuU+yV2lUvULc84nRwRFu8rxF4ZD28SsZkLVHGPL8mq9lURyvVqwfUA9
+	aBCSEMPR+sVq2K8+Rwb+17804a7G0RYCv8B7le2CLBabEUDoCy+O0cOvm/wR+/fG8wzEMou4nQa
+	FelfQC8PbFDK7/O0qfD6xBKEyTNhs1hk7h6aOXLiMmMF69/nQ45Oyct/HkQc0/tDDnPBkh5pX6T
+	7Ep1WE8QLuSfHecI8P90HESpGPTpNuM48wWezzRv2fPofqiD9e1sUxATdIFv1E+qG+LZiSJv9tt
+	A+pX9yyj/MOSUvLAW3QPOrgV7bPX1zEIG/FPDpN0RbauCp156wFYz2pvgx36Xhs0aSOTpnsJ41q
+	Lr48Ed9BzI/w7ZEtnlEiU+b/6Bg0ovYTC6IBA7GoBp/mzytLcPZB98QsKQmzf/jAj4fplh6BpCd
+	v2Wg8/o3tTv6URn2Y77Z58u5atpg5M9NQdee7o8j5Qz7RONZkcqWuqqRJ/JbbDYQ9SVmSt
+X-Received: by 2002:a05:6000:4387:b0:47f:89cd:b48 with SMTP id ffacd0b85a97d-47fb1ecc2acmr2978593f8f.5.1785243458685;
+        Tue, 28 Jul 2026 05:57:38 -0700 (PDT)
+Message-ID: <13d040a7-4fe2-400b-99c8-433f19aad9bc@linaro.org>
+Date: Tue, 28 Jul 2026 14:57:37 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8276:EE_|SJ0PR03MB6456:EE_
-X-MS-Office365-Filtering-Correlation-Id: 38785060-6ef2-4d29-369c-08deeca54244
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|376014|366016|1800799024|56012099006|11063799006|4143699003|10067099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	f3VMX7qe/uXWMTcEtFmVFNVCoIhU8JuqRUKTbAYitJebhH4YIE3cbyvxxj0XpueWBPLNoEfRbP6n+B5E7hFvzrnOGKOdltiU/cy8PiyBHn8C2jxCkSxCiI3iWxJui9UZoS9mJyfTsFKxhq/wCUNaer4hBB8VqTiWZ5QuMIj/myxAcjfjhNSRBNe22wPpJMT+b/Bk1pdEXId9DPYLxDuW4cV6SRI/yk8OSWjbIPsmdRrzmy84701Cc+8ANGsw84s7UsvtmLyYUo1w+rUrIPDAwOXWHzeWQIdx4xg8xc1kavf8r+n+ecv/vowjjr1MQE3q/l1OWsLD1DCm8CuSK+jtqt9R73+q7DUBUq51fUpnM7V1wKu5qa0ha3Y6pHmIcE7zH6zc/T1CBS34sJqSRqbQj5B/yUeUk6rbtxX++lNO0HZwE7beGxGRwAFW86oZ4/yHOvXbxCQNuByGrlJsIeLWr5FOT+fQgEtbQTUyQPHlssTWgP2s4lOUWqiFPjI07I10PZTVaYmLZ6MVbJ3TXqaJlzZazRanOyftnuqUZv2pewUQxdNOgN779N1haF2w6fKXjUMQqHtPJQPPcYdOnggKNO9tCxw+DpQqVXz0N/7vJVaJJxFvhQ2hHiV7+howmBIMsaGJA5jkz6WjYXWkeL8XpylvMYwFDs1xsEKKcSlptDo=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8276.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(56012099006)(11063799006)(4143699003)(10067099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?ZnZqdkk2SnhaSWV4WkdCZWEwSTZTQ29YbE1OemdoVWZneWk1MytydmdTaUty?=
- =?utf-8?B?ZUdXSE5kb3l1ZS8xc3k4K0FiT1c0Wi9DLzIvZy9QOHc2YnpKWWtISWpabmdG?=
- =?utf-8?B?Nkg0d2NnZWRaNG9YRzl4TGN4eE8xdEQ0d2gvcVBIWkxMUlhYQ2Nkd2RicGQz?=
- =?utf-8?B?UHFKRFZSRUgwTUJHU2hkVlY1SkRtbC9VNEg5VHRReDBRbkMwc2dFdGhlR2ZD?=
- =?utf-8?B?WXJHbUYvOXM2QlF6UjI5alA3R3VoWnJoUnFhN2VoWk4rajVGQkpuYlZkckQ3?=
- =?utf-8?B?UXNwejZ5Ti9UNzBPZUNsNHlEY3VUK2hLV2NkcXRObzV0NU52N042TjNuMysy?=
- =?utf-8?B?aHV5R1kwREk4WXRzYktFS3dVcFpBV3dJRGpHa21XSWNLSzZKVHd2OGRjN0c3?=
- =?utf-8?B?K3NDczlkaldoZDZMeDNnN1hCSzFVbVJ0ZlNTNVpFZlE3V25qUjB1ei9WY0I4?=
- =?utf-8?B?c1RGZ0Y4cm1Qd2Exb09QWFFMam5OS1NmTzNMN3ZiMXNIRC9qMUczZTF2eTMy?=
- =?utf-8?B?MmNBTjZJK2RXQ0tCd09WRnIzUUVNQXFzWUJJWmVLeXpLL0cyaUVTNFhETXVG?=
- =?utf-8?B?Mm8xOWVKRUNKc3J5N21CbytMMEVSZEFITHNCWGhzT2J4eUVieDBMc2RYamFu?=
- =?utf-8?B?ZWZ5VzJrTGRRNDV4Nlh2Rm1Mc1hodFg4NGpWSUNjVTlQZ0FoOEJ5aHA1TG9K?=
- =?utf-8?B?bHRKMnA2dFZVdWQ5b3ByU080SzNocWF3djBpRUp4ZDdyVHkzQ2F5Y3hkVnFZ?=
- =?utf-8?B?Z3p5aXRSbWpiU0Z5M0UrWG9JUHl5UFU5dXVOZHJFVU5VeXloNzJDTlZZeXdX?=
- =?utf-8?B?eWlVcTRwdFlDQzZNY1ZGSWZMc2ZGbVUzUWJQMzRwcE5NYnc5UmRaeXFoOTd4?=
- =?utf-8?B?aHYweDhreTlLbklUMzF0ZWU2YnNQNHUyNU5BVU56bW9udjMvdTQwR3NlY2ty?=
- =?utf-8?B?eXJCTk1UZ2grMVdFdG1pWlBDR09ubDNpbkV0ZXhmd21TYVUwRjVnSXdUeHcr?=
- =?utf-8?B?TUZhS3BsOUNZY0dRREM1dCtoZm9OQnRJSHp4Vi9TVXE1KzZYaTVYRnErVUxm?=
- =?utf-8?B?bDNTRzlidkN4NTRwbEV2WWFLbkxEVGpaZTQwdEdQNjMvejVPZkliYWdUdlo5?=
- =?utf-8?B?elEyNUcxUXZlb3lJKzI0SS9ObDZPSGZGaXdTMCtTT05yL0VhN0NrZEg5RGpj?=
- =?utf-8?B?aUpkL2F3eEJXY1dBZDcrb2F6a0k4cElGWndCc0dNTGI2Sno0WUQwR2FUTUYw?=
- =?utf-8?B?SGw4YVpIRnA1R1NuaVdhLzBtVk1hRE9yUU1maFZyTXNpWWdKTm9GbC9CTXRU?=
- =?utf-8?B?ZkFUOWdRY2YvU2lHWGJjUDYzVlJEWEh4S2ZOc0VaajZwWHZBdmNkRld4ZjRq?=
- =?utf-8?B?S1pkOStsbXpPTTJFSm9naEl4eUc0T0M2cG1mVktzR3g0ZnFCbDU4WFBqWXh5?=
- =?utf-8?B?RS9xZ0xxRlVSTzIrNjNxZUJsMHBwY3dKUjdGNHQyOVFxSEJWbjVZbk93WndE?=
- =?utf-8?B?SnA1aWhsYjNORnp0NWtrNGxiZ1laaFByZllJZUtVWUYrM0l2SFBwSU5wVmVv?=
- =?utf-8?B?SjJSckF4VTdiL2Q0R3BvNFlyVzI3ZFFPeTcxMjRaZGk1bEtObk5YdS9sTUF5?=
- =?utf-8?B?SUtmaWRvNUdhM1ViejBKYmhvMlBpeGJRWEZpSTlYbTJRT1BUdVltZDBjd3lE?=
- =?utf-8?B?VkpRc2RXSGwzejZ0T1RIN1paaXg2WGJ2emkzV3paUDlGWGV0VFhtMWlQSnZ2?=
- =?utf-8?B?eEI3TklZVlhHODY4V2RZbm1DZG1nZlNxeHB1WTBRZWV2MW4xcWJQNFdxeEx1?=
- =?utf-8?B?L2VXM29MOXpZVTRUdUVXZlBud3Jrdldkb2Vab1NOdXJhT0dXcTc5OUhBMW55?=
- =?utf-8?B?Z2FCVktEVFpZZHdvZEFja3FESnlmcEJ6VlVVU1lMQmtiQ0dYelNDZ1JGbnpj?=
- =?utf-8?B?RTM5VGRLUFlCRE5pbG92SGlFM1FmQUZ2OHprTlNTMjNWeWl0M2U3dTVGKzZN?=
- =?utf-8?B?cG5uODBWRkc5NG41a3drdDBhRUlrWnRNamhKcjZUaDNZcGUvUUFOMDFnblps?=
- =?utf-8?B?d3Y3dU8wS0d5ZFFJUmQ2emZTT2dqV2FHbTZTUGw1emlQeWpEWk5PQ05PT3FE?=
- =?utf-8?B?dHEvdkhPTWlCK0J6Z1hTQ1cwZTdVRmMrcG8wZXUvVmZvY0UxUTl1dnVIc2FP?=
- =?utf-8?B?eDZOa2dQWGN6ejdKUVRoemtWcnVJS01ybFZmVVQ1MFM2TnFHUXhkTzB4TXpJ?=
- =?utf-8?B?ZVVBRjVlQTZuZUFRN3BRNUJuK2J6V05RcER1VitydmhWV1NQN2x6RFF3akgw?=
- =?utf-8?B?OWV3ZVIyQ0doejZ2VW9oTHBKazVjdnpCSWtuNnZxQWQ0c2llOHFPcXpFcDAz?=
- =?utf-8?Q?QGxxXeKX5S2117l0=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 38785060-6ef2-4d29-369c-08deeca54244
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8276.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2026 12:39:25.9370
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: t3aq3FkjNdaWS0OfkwF9WpGzYZSPtKSeXaWJM5QrcwqcHEuDbcsF6Www0BGaspRH0Opn9D1M8zJa4LwyWVXe15LHBV3TS9omC8tkQnC9vWk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB6456
-X-purgate-ID: tlsNG-4011c0/1785242370-583CCCFC-24A89E62/0/0
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v16 3/3] of: Respect #{iommu,msi}-cells in maps
+To: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>,
+ Robin Murphy <robin.murphy@arm.com>, Nipun Gupta <nipun.gupta@amd.com>,
+ Nikhil Agarwal <nikhil.agarwal@amd.com>, Joerg Roedel <joro@8bytes.org>,
+ Will Deacon <will@kernel.org>, Lorenzo Pieralisi <lpieralisi@kernel.org>,
+ Marc Zyngier <maz@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
+ Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@kernel.org>,
+ Richard Zhu <hongxing.zhu@nxp.com>, Lucas Stach <l.stach@pengutronix.de>,
+ =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+ Manivannan Sadhasivam <mani@kernel.org>, Bjorn Helgaas
+ <bhelgaas@google.com>, Frank Li <Frank.Li@nxp.com>,
+ Sascha Hauer <s.hauer@pengutronix.de>,
+ Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>, Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ iommu@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
+ devicetree@vger.kernel.org, linux-pci@vger.kernel.org, imx@lists.linux.dev,
+ xen-devel@lists.xenproject.org,
+ Charan Teja Kalla <charan.kalla@oss.qualcomm.com>
+References: <20260603-parse_iommu_cells-v16-0-dc509dacb19a@oss.qualcomm.com>
+ <20260603-parse_iommu_cells-v16-3-dc509dacb19a@oss.qualcomm.com>
+ <3f5c974f-425d-47a5-9fda-e05de1f39d79@linaro.org>
+ <0d0896af-a4a5-445d-8db7-fdb9eecd07a2@oss.qualcomm.com>
+ <69b1235a-832b-4a00-bcfd-f51991d23488@arm.com>
+ <569bd4d8-2d77-457e-a0fb-388180c34711@oss.qualcomm.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <569bd4d8-2d77-457e-a0fb-388180c34711@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d25034/1785243459-5073FA5B-E9802B20/0/0
 X-purgate-type: clean
-X-purgate-size: 1044
+X-purgate-size: 6372
 
-On 28/07/2026 1:36 pm, Jan Beulich wrote:
-> On 28.07.2026 14:31, Andrew Cooper wrote:
->> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+On 7/28/26 12:39, Vijayanand Jitta wrote:
+> 
+> 
+> On 7/28/2026 3:34 PM, Robin Murphy wrote:
+>> On 28/07/2026 5:05 am, Vijayanand Jitta wrote:
+>>>
+>>>
+>>> On 7/23/2026 6:47 PM, Neil Armstrong wrote:
+>>>> Hi,
+>>>>
+>>>> On 6/3/26 09:13, Vijayanand Jitta wrote:
+>>>>> From: Robin Murphy <robin.murphy@arm.com>
+>>>>>
+>>>>> So far our parsing of {iommu,msi}-map properties has always blindly
+>>>>> assumed that the output specifiers will always have exactly 1 cell.
+>>>>> This typically does happen to be the case, but is not actually enforced
+>>>>> (and the PCI msi-map binding even explicitly states support for 0 or 1
+>>>>> cells) - as a result we've now ended up with dodgy DTs out in the field
+>>>>> which depend on this behaviour to map a 1-cell specifier for a 2-cell
+>>>>> provider, despite that being bogus per the bindings themselves.
+>>>>>
+>>>>> Since there is some potential use in being able to map at least single
+>>>>> input IDs to multi-cell output specifiers (and properly support 0-cell
+>>>>> outputs as well), add support for properly parsing and using the target
+>>>>> nodes' #cells values, albeit with the unfortunate complication of still
+>>>>> having to work around expectations of the old behaviour too.
+>>>>>
+>>>>> Since there are multi-cell output specifiers, the callers of of_map_id()
+>>>>> may need to get the exact cell output value for further processing.
+>>>>> Update of_map_id() to set args_count in the output to reflect the actual
+>>>>> number of output specifier cells.
+>>>>>
+>>>>> Signed-off-by: Robin Murphy <robin.murphy@arm.com>
+>>>>> Signed-off-by: Charan Teja Kalla <charan.kalla@oss.qualcomm.com>
+>>>>> Signed-off-by: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
+>>>>> ---
+>>>>>     drivers/of/base.c  | 168 +++++++++++++++++++++++++++++++++++++++++------------
+>>>>>     include/linux/of.h |   6 +-
+>>>>>     2 files changed, 135 insertions(+), 39 deletions(-)
+>>>>>
+>>>>> diff --git a/drivers/of/base.c b/drivers/of/base.c
+>>>>> index d658c2620135..ac7961cbab94 100644
+>>>>> --- a/drivers/of/base.c
+>>>>> +++ b/drivers/of/base.c
+>>>>> @@ -2116,19 +2116,49 @@ int of_find_last_cache_level(unsigned int cpu)
+>>>>>         return cache_level;
+>>>>>     }
+>>>>>     +/*
+>>>>> + * Some DTs have an iommu-map targeting a 2-cell IOMMU node while
+>>>>> + * specifying only 1 cell. Fortunately they all consist of value '1'
+>>>>> + * as the 2nd cell entry with the same target, so check for that pattern.
+>>>>> + *
+>>>>> + * Example:
+>>>>> + *    IOMMU node:
+>>>>> + *        #iommu-cells = <2>;
+>>>>> + *
+>>>>> + *    Device node:
+>>>>> + *        iommu-map = <0x0000 &smmu 0x0000 0x1>,
+>>>>> + *                <0x0100 &smmu 0x0100 0x1>;
+>>>>
+>>>> So the sm8650 PCIe controllers has:
+>>>>
+>>>> pcie@1c08000:
+>>>>               iommu-map = <0     &apps_smmu 0x1480 0x1>,
+>>>>                       <0x100 &apps_smmu 0x1481 0x1>;
+>>>>
+>>>> and
+>>>>
+>>>> pcie@1c00000:
+>>>>
+>>>>               iommu-map = <0     &apps_smmu 0x1400 0x1>,
+>>>>                       <0x100 &apps_smmu 0x1401 0x1>;
+>>>>
+>>>> and apps_smmu has #iommu-cells = <2>, but gets flagged at wrong:
+>>>>
+>>>> [    7.538800] OF: /soc@0/pcie@1c08000: iommu-map has 1-cell entries targeting 2-cell #iommu-cells, treating as 1-cell output
+>>>>
+>>>> Returning false in of_check_bad_map() triggers:
+>>>>
+>>>> [    7.642680] OF: /soc@0/pcie@1c08000: Unsupported iommu-map - cannot handle 256-ID range with 2-cell output specifier
+>>>>
+>>>> I don't understand the issue here, we use 2 cells as expected by
+>>>> the iommu-cells, so why is it wrong ? can somebody explain in
+>>>> comprehensive words ? I'm super confused, it worked like a charm until now.
+>>>>
+>>>> Neil
+>>>>
+>>>
+>>> Hi Neil,
+>>>
+>>> iommu-map = <0     &apps_smmu 0x1480 0x1>,
+>>>               <0x100 &apps_smmu 0x1481 0x1>;
+>>>
+>>>
+>>> Entries here are not 2-cell format, Even though apps_smmu declares #iommu-cells = <2>,
+>>> this DT only supplies one output cell (0x1480/0x1481) — the trailing 0x1 is the length field,
+>>> not a second output cell. (<id-base phandle out-base length>)
+>>>
+>>> The new code detects exactly this pattern (same target phandle across all entries, length always 1)
+>>> and falls back to treating the map as 1-cell output for backward compatibility — hence the pr_warn_once.
+>>> It's harmless and expected, your RIDs still resolve to the correct SIDs (0 → 0x1480, 0x100 → 0x1481).
+>>>
+>>> The second message is a different case and shouldn't be coming from this same map — once the 1-cell
+>>> fallback triggers on the first entry, it applies to the whole map, so you shouldn't hit both warnings
+>>> together on the same node. That error only fires for a genuine 2-cell output specifier combined with
+>>> an id_len > 1, e.g.:
+>>>
+>>> iommu-map = <0x0 &apps_smmu 0x1480 0x1 0x100>;
+>>>
+>>> (<id-base, phandle, out0, out1, length=256>) — which isn't supported, since there's no way to
+>>> linearly scale a multi-cell output specifier across a range of IDs.
+>>>
+>>> Are you seeing that second error on the same pcie node, or a different one?
+>>> If it's the same node, can you share the exact iommu-map entry that triggers it?
+>>
+>> I think Neil is saying he bypassed the fallback check so that it *did* try to parse the given map with the real #iommu-cells=2 in precisely the way you've shown - so even if it could have got past that point, it would have then blown trying to parse the second "entry" of just <&apps_smmu 0x1481 0x1>, since 0x1481 almost certainly isn't a valid phandle to read an #iommu-cells value from.
+>>
+>> Cheers,
+>> Robin.
+> 
+> Right, I get it now, so when it tried to parse with iommu-cells as 2,
+> 
+> iommu-map = <0     &apps_smmu 0x1480 0x1>,
+>              <0x100 &apps_smmu 0x1481 0x1>;
+> 
+> Above tuples would look something like <0  &apps_smmu 0x1480 0x1 0x100>, where 0x100 from next tuple would be seen as length. Hence, the above error log.
+> And the next tuple <&apps_smmu 0x1481 0x1> won't be able to get parsed as you mentioned.
 
-Thanks.
+Thanks for the explanation, clearer now.
 
->
->> --- a/xen/arch/x86/hvm/rtc.c
->> +++ b/xen/arch/x86/hvm/rtc.c
->> @@ -469,9 +469,8 @@ static void cf_check rtc_alarm_cb(void *opaque)
->>      spin_unlock(&s->lock);
->>  }
->>  
->> -static int rtc_ioport_write(void *opaque, uint32_t addr, uint32_t data)
->> +static int rtc_ioport_write(RTCState *s, uint32_t addr, uint32_t data)
->>  {
->> -    RTCState *s = opaque;
->>      struct domain *d = vrtc_domain(s);
->>      uint32_t orig;
-> It's entirely unclear why it was ever done like this. Even in 3.2 it could
-> already have been done the type-correct way.
+Neil
 
-There are a whole bunch of callbacks which use this pattern.  They must
-continue to use void * for the function types to work.
+> 
+> 
+> Thanks,
+> Vijay
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
 
-I wonder if at any point in the past rtc_ioport_write() was used
-directly as a pointee, but I haven't gone looking.
-
-~Andrew
 
