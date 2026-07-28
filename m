@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7154C54F4C
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 13:51:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374253.1621289 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 991E8C54F4C
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 13:51:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374260.1621298 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woiD6-0006eo-57; Tue, 28 Jul 2026 13:51:08 +0000
+	id 1woiDS-0007Dl-CK; Tue, 28 Jul 2026 13:51:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374253.1621289; Tue, 28 Jul 2026 13:51:08 +0000
+Received: by outflank-mailman (output) from mailman id 1374260.1621298; Tue, 28 Jul 2026 13:51:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woiD6-0006eh-1t; Tue, 28 Jul 2026 13:51:08 +0000
-Received: by outflank-mailman (input) for mailman id 1374253;
- Tue, 28 Jul 2026 13:51:06 +0000
+	id 1woiDS-0007De-9S; Tue, 28 Jul 2026 13:51:30 +0000
+Received: by outflank-mailman (input) for mailman id 1374260;
+ Tue, 28 Jul 2026 13:51:29 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1woiD4-0006cW-EY
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 13:51:06 +0000
+ (envelope-from <jbeulich@suse.com>) id 1woiDR-0007CA-4w
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 13:51:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woiD3-00BRHU-RL
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 15:51:05 +0200
+ id 1woiDQ-00EYdu-I1
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 15:51:28 +0200
 Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68b3c9-5cb7-0a2a0a5109dd-0a2a4505837a-0
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:51:05 +0200
-Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
+ id 6a68b3d4-e002-0a2a0a5209dd-0a2a4505de42-46
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:51:28 +0200
+Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68b3c9-4cb1-0a2a45050019-d155dd34dc83-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:51:05 +0200
-Received: by mail-wr1-f52.google.com with SMTP id
- ffacd0b85a97d-47f92e3c14bso3499450f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 06:51:05 -0700 (PDT)
+ id 6a68b3e0-4cb1-0a2a45050019-d155802bb802-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:51:28 +0200
+Received: by mail-wm1-f43.google.com with SMTP id
+ 5b1f17b1804b1-496bb7cdf51so23621965e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 06:51:28 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f85c63bd3sm58862990f8f.27.2026.07.28.06.51.04
+ 5b1f17b1804b1-4957bffc501sm250222935e9.4.2026.07.28.06.51.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Jul 2026 06:51:04 -0700 (PDT)
+ Tue, 28 Jul 2026 06:51:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,49 +55,48 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785246665; x=1785851465; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785246688; x=1785851488; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=VmsmB3SZeOUc6ARdQUTuy227vcpv9NvZgtecFoLVbnQ=;
-        b=PlyahEoMAkNJnMPwvL3Afr4EX87EozkpBZrMqh9bwRT+j22wZcmw5rFeP624PXP4VA
-         hetl9IqBI3UwcKeOVk3F+rWFf+7i+b+5o0KTOkYe4QtR3u8yi07PiWTg3xjyAd8+LtG0
-         S42qcEMwS2Kbxo9VRJVtp2FgDUx+0BPDqvtC1m8mjyv9sbid9oLKhe/6zQaGtq5UOkDC
-         9GjRMy263qsrIK7IHaOiAlgCObC56KgGaId9BsxlcktBiqhqEEHhy+ZmBXZpDxJG7d9c
-         kMd58dvwUtS1gK1+DZUlVLGEmBnuZv6yniFmbLTpXAbhLZkDROAySdSHiFRQw4hOJoMq
-         JaWQ==
+        bh=Mw7VsvfNJTXTcegWX2idkXl4Jj1/NWvy2zHyn00rWXA=;
+        b=EuUOjQSwyOnANwlE/lyXstis7npwmig/W788G+QJaYNXFDPb0JjJJS8Yd2w61BgM92
+         3BLP1tmDgVG+49+0SH4wZ+99GLk5CFxvg50iVW8Ec0lIaON4TcTfeVR8Qr9yudP1FsIi
+         PfrJkWlr0QcQzjWExR83RxZ+C3jzmyAMo84RnEZ2w6655mjBeJxAwjdco2+E62tUn8ZS
+         l8kpTF5jpe0CVzO4E2y+CMfiukxsyAeOPwEFIH9+zNGW89thpVfFCSHjkjKEAX7YtIkl
+         UU3T6WiY1XheUSTZxIpWopFZYVxKvs5ayg5NRrmbpLc6pkv/Zkl0GyE0agjB5pg4v1OO
+         /5Ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785246665; x=1785851465;
+        d=1e100.net; s=20251104; t=1785246688; x=1785851488;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=VmsmB3SZeOUc6ARdQUTuy227vcpv9NvZgtecFoLVbnQ=;
-        b=NV7+gDKFHCV5W6HNWkiCssWgo0mJwH8jnAHOmwIlmddnU1LBQB+v8sFVAA3xq77LGS
-         BwRHPlLOLK8g9mAxBNse/z1kbpK2rutR4B905w5PVId4UxLgxbVgaBsjrAHA++hxdikq
-         H+1lVbK8BkKK1aBbbPgTBwEKPF8qdjoQwwo7+YQf7tiHd318Wc/Gp8OvJJT87T/EOS30
-         cPxTccpTWXu8FF2Ytt24dI4RQifD8d0Sv04vK+1DnnirX+UqWYnkiBCWt6T1Lm0zDqtR
-         8y/uGhNsxIl+UFxjVZ48WNHVTO/4xvjukpC4WBMVjvhCKUXFDkGeUx3Gc+xdrREgCJf0
-         2NVw==
-X-Gm-Message-State: AOJu0YyhN149SVWsse2Oqo6svorN6o5HFf/o/dr1aO4Edrn4KNA8AbXI
-	kE5b74xlYITirWD0DU4f3nMg0QdtsutZK6xmnP/VuPfFiGfay+KsIOb4v1/WKZ6glui6NjIySOW
-	QEh+Fug==
-X-Gm-Gg: AR+sD125B/O+S7iMuWHS/bESZ4L3iqy//EAxKA6k75G8caBLejVTcyihG89WgSVUEjH
-	x6utBjLSjXWEJcORdk00fGgjWyy1RZmSubeaQUXWuzvWXvlhBWzknDCDZtr8M9WZQ2Y4Es1Eck7
-	NX2K2pKXPqx3i/ie+AXv43VlVIgdaQkxTqhQlVyFTPRqsP1/TxtpEFnW44uKApWERsVFQ8NdCok
-	XNqOjcp9exf1t3oD2rR+w5rggMikSEBuQFgbKKTM+xdM2AGRwC0XpK6OblvaHUWzLir3TzBb3mF
-	DPgs5y5euROi0xZqfw+411iE5kGN6YWOpcSaToVngGGi6zqGFCTxroF2e3K3ejoqI1dD4NiD9bz
-	2AYFuXMNa0yGljs77/HAuaR0s33qELn+7GNEzJvD4/07NARHqC+6nQqn+78me6a2KQRNe2OFEd3
-	wfHFq1gPfqAsK0uwVVxpG4ei6Ei4uyk2W47ywSzF7OXYsUw8brgF9xfRwuqzjIdXHgqQ==
-X-Received: by 2002:a05:6000:707:b0:47f:90df:4ec6 with SMTP id ffacd0b85a97d-47fb1e5ffa9mr2814316f8f.6.1785246665147;
-        Tue, 28 Jul 2026 06:51:05 -0700 (PDT)
-Message-ID: <7392c56e-7250-496f-bb66-bdb6c04d3ed4@suse.com>
-Date: Tue, 28 Jul 2026 15:51:03 +0200
+        bh=Mw7VsvfNJTXTcegWX2idkXl4Jj1/NWvy2zHyn00rWXA=;
+        b=hsHHfOz+U7BZOiQBZzFSlhw2MJjU3KnsECPTgsrnvO5MsiqIba6Gn76+wZNk2D+Jx2
+         /044yTRvUSZnL8bUXMvuFD+2j+eNznKxcY4Kf94iGffgIJ6iqb/636sdiGVh6mNAenKa
+         jPXafp5zstPgDvRs87P5ony8ZEL3zjsJzts5so6GITeRUNR1GbJqu5lNypwxo/HAThcH
+         uJKX6IAmc0fZgS6rh0RouL8KHAS6c7gx6B+7Ve0sqfCoQAbrfKbWsIdNtz1Exrwmc84v
+         Gvm+Js4Se4Q+OpESVb7feky6vNGQEAQl3oyZcZb80FLjXXb+IA4khIIaf96zk74q0vhp
+         99aA==
+X-Gm-Message-State: AOJu0YwoYKBpyeAa1Z1JtX9tKr8b3DF0ERImt+TLDbaOYn6kqKvaz37k
+	Rbta8hjdQXCo4tLKiM/9m+B0dZL7yshU9RRZ1lIdfbSBeDJuuCf1kb5rJvbzhNXxp3XXA9E0BNR
+	Ckb4QTA==
+X-Gm-Gg: AR+sD119CEJwr9RdV2CvYzhSxJabSHc4XoCD3jcfimzPAr2c5N4N491XPMEHeBEzN4x
+	pBfeG9UHqVnqSpkDlJSMAhEXH2XlJZerFr6mj7x8uKnhx8GaG8bCbVLVplPJgTfIS4dmBf/pZUd
+	2tt9IAiB0rZmo6qCgRhafS7RujaQ1qxxQhTQhVn4lgoobJklAg0hthmLYFeflR/Bc3jztcRGZWH
+	pNtM/kuaLo15A+ceNGh7rfQUpO6bbyav6QzHcfqLe4K/355pSXRgfgyDU35xutp2ZrQQXvrwc6y
+	uIwxuDTcKR7xCjKBCm7FymjVlPoMgEcDlTkirj9gUsRYnKQ57bjjj0vcc4kb66BOx5DIWC2LkCj
+	hN4lR3VNxEnuteZmDZM0xFjVA4QQMWtkhLPjLlkWgzCWy7uFyVAEMLLUHN15JzhJOGWKhogt76+
+	rbZbJyb9OMn8SGv9KBfw7Y+KdJjdbI2tNQ/+7v15Ocj6i+9dgHzPBWtRgs4WZuU2EIJw==
+X-Received: by 2002:a05:600c:3e18:b0:495:71fc:3a64 with SMTP id 5b1f17b1804b1-496c6569058mr27439655e9.25.1785246688035;
+        Tue, 28 Jul 2026 06:51:28 -0700 (PDT)
+Message-ID: <47051ab0-fce2-4c9d-8e45-ab4b598fc2ee@suse.com>
+Date: Tue, 28 Jul 2026 15:51:26 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 3/7] gnttab: fold redundant error code paths in
- acquire_grant_for_copy()
+Subject: [PATCH 4/7] gnttab: use available local var in map_grant_ref()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
@@ -132,52 +131,35 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <38850629-8bfa-4737-99ff-0fd3f489e56e@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1785246665-F4EA12A1-19DF5A0E/0/0
+X-purgate-ID: tlsNG-c201ff/1785246688-6BEB92A1-013C0595/0/0
 X-purgate-type: clean
-X-purgate-size: 1370
+X-purgate-size: 746
 
-One of the open-coded error paths of transitive grant handling is an exact
-match of the code at the unlock_out_clear label. The other can be made so
-by moving the put_page() earlier.
+Commit a62776332cac ("grant_table: harden bound accesses") introduced a
+local variable "ref" in map_grant_ref(), but then didn't use it
+consistently throughout the function.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
 --- a/xen/common/grant_table.c
 +++ b/xen/common/grant_table.c
-@@ -2729,10 +2729,7 @@ acquire_grant_for_copy(
-         {
-             atomic_dec(&rgt->nr_v2_ops);
-             rcu_unlock_domain(td);
--            reduce_status_for_pin(rd, act, status, readonly);
--            active_entry_release(act);
--            grant_read_unlock(rgt);
--            return rc;
-+            goto unlock_out_clear;
-         }
+@@ -1324,7 +1324,7 @@ map_grant_ref(
+      */
+     mt = &maptrack_entry(lgt, handle);
+     mt->domid = op->dom;
+-    mt->ref   = op->ref;
++    mt->ref   = ref;
+     smp_wmb();
+     write_atomic(&mt->flags, op->flags);
  
-         /*
-@@ -2763,17 +2760,16 @@ acquire_grant_for_copy(
-             release_grant_for_copy(td, trans_gref, readonly);
-             rcu_unlock_domain(td);
+@@ -1366,7 +1366,7 @@ map_grant_ref(
+             status = NULL;
+     }
  
-+            put_page(*page);
-+            *page = NULL;
-+
-             grant_read_lock(rgt);
-             atomic_dec(&rgt->nr_v2_ops);
+-    act = active_entry_acquire(rgt, op->ref);
++    act = active_entry_acquire(rgt, ref);
+     act->pin -= pin_incr;
  
-             act = active_entry_acquire(rgt, gref);
--            reduce_status_for_pin(rd, act, status, readonly);
--            active_entry_release(act);
--            grant_read_unlock(rgt);
- 
--            put_page(*page);
--            *page = NULL;
--            return ERESTART;
-+            rc = ERESTART;
-+            goto unlock_out_clear;
-         }
- 
-         if ( !old_pin )
+  unlock_out_clear:
 
 
