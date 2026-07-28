@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8690DC53219
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 15:48:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374915.1622275 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69C5CC54F4C
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 15:49:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374914.1622261 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wok2p-0002cl-Hc; Tue, 28 Jul 2026 15:48:39 +0000
+	id 1wok2m-0002A0-8x; Tue, 28 Jul 2026 15:48:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374915.1622275; Tue, 28 Jul 2026 15:48:39 +0000
+Received: by outflank-mailman (output) from mailman id 1374914.1622261; Tue, 28 Jul 2026 15:48:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wok2p-0002cZ-CL; Tue, 28 Jul 2026 15:48:39 +0000
-Received: by outflank-mailman (input) for mailman id 1374915;
- Tue, 28 Jul 2026 15:48:37 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wok2n-0002ZF-Hp
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 15:48:37 +0000
+	id 1wok2m-00029R-48; Tue, 28 Jul 2026 15:48:36 +0000
+Received: by outflank-mailman (input) for mailman id 1374914;
+ Tue, 28 Jul 2026 15:48:35 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wok2l-00025b-7a
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 15:48:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wok2m-00FCsc-Us
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 17:48:36 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wok2k-003IVm-KU
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 17:48:34 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6a68cf45-5cb7-0a2a0a5109dd-0a2a4504c9e6-28
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 17:48:36 +0200
-Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a68cf2b-e002-0a2a0a5209dd-0a2a4507d9ae-38
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 17:48:34 +0200
+Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6a68cf54-b57f-0a2a45040019-d1558031e4a7-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 17:48:36 +0200
-Received: by mail-wm1-f49.google.com with SMTP id
- 5b1f17b1804b1-4953de5be0aso4855e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 08:48:36 -0700 (PDT)
+ id 6a68cf52-b4ea-0a2a45070019-d1558035b1b1-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 17:48:34 +0200
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-49545ba3d4eso23147245e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 08:48:34 -0700 (PDT)
 Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
  [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
  5b1f17b1804b1-496c44b6b93sm88807765e9.4.2026.07.28.08.48.33
@@ -54,64 +54,73 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1785253715; x=1785858515; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1785253714; x=1785858514; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=te7fPojePD/ct/6l3gGMOIxNs8LzWVNztC4ZdtL5AmQ=;
-        b=uNjREsJJgmpEith7rCy3jv18RE+10G3v4GvF7CCWhFmDrNlsMUq9ZDYRZjtql0G0R9
-         HNTeXzQT4hNT8rN/1HdBU370GeUcekqA8ZOhQ0XKZIrR7+uzr/6PLrzxWj6tsXwTCERQ
-         KDrg7D3OTL0R8AgHsUiohDe5VSutbUfEwECHY=
+        bh=xsDN+AQLbvmNAQEIOp0aFB4rB8Yl6TO3U84KiiThsS0=;
+        b=Ahs2fdKDBIiVhqEyfjCQB+lFttZXWNx8y+15JuuzxUAGvEb3OqTzs/bzi1Yb2pqFJy
+         0J9L5vBdCAgWiRg3RyjOwzaGhnZHKoZKEYC+e8bHNpyFhCub+eCJSRI9AT9ZllHktwt4
+         k7R2I2oAERYge5jlhnCqj5jmeQhYlKvFU79vQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785253715; x=1785858515;
+        d=1e100.net; s=20251104; t=1785253714; x=1785858514;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=te7fPojePD/ct/6l3gGMOIxNs8LzWVNztC4ZdtL5AmQ=;
-        b=VqxoHjsWMGSCAzMaLtkc01S08J0zjUmydXWEFSnrQwfBX8zt4gCIqqpm7CpkAjXacL
-         27S1SZSygD576Kf+YbFpbcWBgLLqOF+7jCLgMsVlONAVrIiPis4Dh1ZqnhikELC3HT70
-         R+hKIp2lEaebTVtMCGHibJ8xN1g5SXu3PJZHe36ISuHbvkrZx6hZ8chSlYCW4VGS6m6q
-         v54wlipgAv1MT9Bo2WjY3M9OlFNOiQe4rA4UnwmfD6QS+9+5Osls9z/ZGjiEtPsnhVHL
-         wJL9GeOZbkj4cR/IMZBsQkDUeVCjijQctB8+h6w5tEgj1G5RfawV4utLAmRJTuAyF3Dx
-         FCCA==
-X-Gm-Message-State: AOJu0Yy0GcEDoVRikdDZUVM7zsl0/y2k8wB47FtIRH3VwgIccbjTj6XY
-	HP6xU/jHUDEdKjCGLcb+/WXzkmAySEgw7QS4luDvS4n3Pt5c46Mx9/BeelAPb1lB7inI12LvvqY
-	RST7x
-X-Gm-Gg: AR+sD11tVqDIkwOVRS4rHtZH8yWaXmQ4e2bNpIVpg0piUpZjMQyZvOSAN0i/SOB3W3v
-	LWXkKL0fQ+5a3FxdmCdZ4yvzTQkEgR+o3j80few4Y65j52tnXtqCzUZjvvJ/4SGM2oC70NrmDQo
-	Pv6JYYZ3lX1TCSU66O7nVq/+yxq72hOk7pShA1yd3N+xK0/kdqard6J+VLss9/41fXPqh+UqiAb
-	ntllEpLeMmzYAnSwGg12xcsTnHYMUzDVsb12XyTCUYiQ1JyChZYHv0KddvwpWYqs+n9A7akyPet
-	HExtlUKAvu0PbxEj/rkQk1K+HPBrDIMDXaK3vxMnJvvBeq+yq/SLVXvRykAqz0SmJlK28YgEpAL
-	jm+5Q3iZj8zh1b8Ahd8YOQRaiH10qhsSIQdhTLVBWgAeaYlME2SiRba2rcjew2R/DgUeupOnUmm
-	LKZudXz6/UeBuG4UdQfeGWxoP4jAQAXrVfqkqMAvMhU+L+LwDv/z22
-X-Received: by 2002:a05:600c:e549:10b0:496:c1f3:e8f9 with SMTP id 5b1f17b1804b1-496c658efe9mr22233615e9.20.1785253714322;
-        Tue, 28 Jul 2026 08:48:34 -0700 (PDT)
+        bh=xsDN+AQLbvmNAQEIOp0aFB4rB8Yl6TO3U84KiiThsS0=;
+        b=rC6ZAACnaWamP++2QCXV4k4pcFDIMbWydc+GEPgDHtjm8d3xnAroJWiPCj8uWbfQZ+
+         gN1Jy4rQ84tPmk7wp8Q7EJusGnSTWayj/1qdsu/4Clew2uv889Q0TFYOm8fy1n0lw+WN
+         qocZWtA0On/yi+K4VyKfCc0uq7iBAvaQr8R/cCpFqFjrVKd5RYCiYaBm+ZAoUDV89/69
+         EizcBShpFb+r2UJD4QhruD9SX+Nc6JuJbcrgfB/6bJ6m8VEi7a7lieeFStp7rwc1Ybf/
+         QixXjr+jfewzi1MaaixLUwMTuYMpKutBkcXo21lMoEv+KBQ29Abq74Dv0zKqWE/BQ6rm
+         6/Lg==
+X-Gm-Message-State: AOJu0Yw2dyfFGVBcRk1Lguq44y7sgNgC2SJhQsW9VHk7klSHybC2+Dw8
+	x/hv5p10ExzTNKABnQoXjEEjxD5/ywnJcYw0MJ9tuB/X1SwaY/+nrqVkCDpPp5vSbR0Yoss2rQW
+	h3qE8JZU=
+X-Gm-Gg: AR+sD10MR4hLfN2O7oA9OB9KQrz9ZTyocUTj3/VfmR/lklpuOCJqp7Nn+Orq2JREK2g
+	q4tEytwg6AKonoNeecFobCTCKCW4AIJd0uWXRjWVl4TU/2SV7x4Ganym+8QAHGDb4F7eKXU/RwQ
+	O3ynbLNn8LDC+4CceH20/03LRUu07fU3uF+suqfphbNBtyaXHQRDbLMnBK5vJbHlcJDM9BO5oZs
+	TXBpKziYTGHgh2jXMJv5N7uROYOQ3O8V95EOaapT5jlrErfi3VCq48pdjUflME0kb4Lcdc6o3wG
+	hEaFQ4b3QFxxG7Xi+IkUHwiEW7j7ywshmq4ho/w9ZIwa/PrOrokOpwD6Ge++plh74PwHFPONZc8
+	fBkSnFa3bQXXaU0+ACBEF0PS+AEhYBJ9ga8PkSwkuqsDGXP1MVyLfbTPbSZWPRAz5S0oQW+S6OI
+	VRBoNilssC2A14qwugW5V8tES0MmpDQTXHviNVeLVlcrMqaYwuKvrg
+X-Received: by 2002:a05:600c:46d0:b0:495:4a34:16e1 with SMTP id 5b1f17b1804b1-496c656e064mr32504195e9.23.1785253713623;
+        Tue, 28 Jul 2026 08:48:33 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Julian Vetter <julian.vetter@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Julian Vetter <julian.vetter@vates.tech>,
 	Andrii Sultanov <andriy.sultanov@vates.tech>,
 	Guillaume Thouvenin <guillaume.thouvenin@vates.tech>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH 2/2] tools/ocaml: Fill arch_config for ARM in domain_getinfo{,list}()
-Date: Tue, 28 Jul 2026 16:48:30 +0100
-Message-Id: <20260728154830.67734-3-andrew.cooper3@citrix.com>
+Subject: [PATCH 1/2] tools/ocaml: Fix crash in Xenctrl.domain_getinfo{,list} on ARM
+Date: Tue, 28 Jul 2026 16:48:29 +0100
+Message-Id: <20260728154830.67734-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20260728154830.67734-1-andrew.cooper3@citrix.com>
 References: <20260728154830.67734-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1785253716-C3AC0B50-EC86FC9C/10/73395122804
+X-purgate-ID: tlsNG-ef75cf/1785253714-376D2AE4-CD27929D/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 1684
+X-purgate-size: 2904
 
-From: Julian Vetter <julian.vetter@vates.tech>
+The Store_field(result, 16, arch_config) sits inside an ifdef x86, meaning
+that on other archtiectures the pointer is not filled in.  The Ocaml runtime
+then falls over a NULL pointer (really the Val_unit used to initialise
+'result') when the layout in the heap doesn't match the type system.
 
-Add the missing ARM logic, populating xen_arm_arch_domainconfig
-from the raw xc_domaininfo_t the same way the x86 branch does for
-xen_x86_arch_domainconfig.
+Rearrange alloc_domaininfo() to avoid this.  Similarly to
+physinfo_arch_caps(), raise an exception if the architecture code hasn't
+filled in an appropriate tag.  Move the setup of arch_domainconfig to be
+common logic.
 
-Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
+In order to simplify the addition of other architectures, remove the
+arch_config variable (resuing tmp as it's touched exactly once), and rename
+x86_arch_config to be arch_config so each architecture can fill in a suitable
+one without needing more local variables.
+
+Reported-by: Julian Vetter <julian.vetter@vates.tech>
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
@@ -120,37 +129,59 @@ CC: Guillaume Thouvenin <guillaume.thouvenin@vates.tech>
 CC: Julian Vetter <julian.vetter@vates.tech>
 CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- tools/ocaml/libs/xc/xenctrl_stubs.c | 16 ++++++++++++++--
- 1 file changed, 14 insertions(+), 2 deletions(-)
+ tools/ocaml/libs/xc/xenctrl_stubs.c | 23 ++++++++++++++---------
+ 1 file changed, 14 insertions(+), 9 deletions(-)
 
 diff --git a/tools/ocaml/libs/xc/xenctrl_stubs.c b/tools/ocaml/libs/xc/xenctrl_stubs.c
-index 441e1d83cfec..fb983709066f 100644
+index 7f6381cdd2fe..441e1d83cfec 100644
 --- a/tools/ocaml/libs/xc/xenctrl_stubs.c
 +++ b/tools/ocaml/libs/xc/xenctrl_stubs.c
-@@ -444,9 +444,21 @@ static value alloc_domaininfo(xc_domaininfo_t * info)
+@@ -414,7 +414,8 @@ CAMLprim value stub_xc_domain_shutdown(value xch_val, value domid, value reason)
+ static value alloc_domaininfo(xc_domaininfo_t * info)
+ {
+ 	CAMLparam0();
+-	CAMLlocal5(result, tmp, arch_config, x86_arch_config, emul_list);
++	CAMLlocal4(result, tmp, arch_config, emul_list);
++	int tag = -1;
+ 	int i;
  
+ 	result = caml_alloc_tuple(17);
+@@ -444,6 +445,9 @@ static value alloc_domaininfo(xc_domaininfo_t * info)
  	Store_field(result, 15, tmp);
  
--#if defined(__i386__) || defined(__x86_64__)
-+#if defined(__arm__) || defined(__aarch64__)
- 
--	tag = 1; /* tag x86 */
-+	tag = 0; /* tag ARM */
+ #if defined(__i386__) || defined(__x86_64__)
 +
-+        /* xen_arm_arch_domainconfig */
-+        arch_config = caml_alloc_tuple(3);
-+        Field(arch_config, 0) = Val_int(info->arch_config.gic_version);
-+        Field(arch_config, 1) = Val_int(info->arch_config.nr_spis);
++	tag = 1; /* tag x86 */
 +
-+	tmp = caml_copy_int32(info->arch_config.clock_frequency);
-+        Field(arch_config, 2) = tmp;
-+
-+#elif defined(__i386__) || defined(__x86_64__)
-+
-+        tag = 1; /* tag x86 */
- 
  	/*
  	 * emulation_flags: x86_arch_emulation_flags list;
+ 	 */
+@@ -452,16 +456,17 @@ static value alloc_domaininfo(xc_domaininfo_t * info)
+ 		(info->arch_config.emulation_flags);
+ 
+ 	/* xen_x86_arch_domainconfig */
+-	x86_arch_config = caml_alloc_tuple(1);
+-	Store_field(x86_arch_config, 0, emul_list);
++	arch_config = caml_alloc_tuple(1);
++	Field(arch_config, 0) = emul_list;
+ 
+-	/* arch_config: arch_domainconfig */
+-	arch_config = caml_alloc_small(1, 1);
+-
+-	Store_field(arch_config, 0, x86_arch_config);
+-
+-	Store_field(result, 16, arch_config);
+ #endif
++	if (tag < 0)
++		caml_failwith("Unimplemented architecutre in alloc_domaininfo()");
++
++	/* arch_config: arch_domainconfig */
++	tmp = caml_alloc_small(1, tag);
++	Field(tmp, 0) = arch_config;
++	Field(result, 16) = tmp;
+ 
+ 	CAMLreturn(result);
+ }
 -- 
 2.39.5
 
