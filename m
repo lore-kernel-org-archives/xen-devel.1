@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45080C53219
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:35:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374474.1621614 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 377D3C54F4D
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:50:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374500.1621694 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woitw-0000rK-6j; Tue, 28 Jul 2026 14:35:24 +0000
+	id 1woj8I-00061r-EB; Tue, 28 Jul 2026 14:50:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374474.1621614; Tue, 28 Jul 2026 14:35:24 +0000
+Received: by outflank-mailman (output) from mailman id 1374500.1621694; Tue, 28 Jul 2026 14:50:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woitw-0000rD-3w; Tue, 28 Jul 2026 14:35:24 +0000
-Received: by outflank-mailman (input) for mailman id 1374474;
- Tue, 28 Jul 2026 14:35:22 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <liviu.dudau@arm.com>) id 1woitt-0000r5-Pf
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:35:22 +0000
+	id 1woj8I-0005z3-4y; Tue, 28 Jul 2026 14:50:14 +0000
+Received: by outflank-mailman (input) for mailman id 1374500;
+ Tue, 28 Jul 2026 14:50:10 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1woj8E-0005A4-PK
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:50:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woits-004p4X-LH
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 16:35:20 +0200
-Received: from [10.42.69.4] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <liviu.dudau@arm.com>)
- id 6a68be21-5cb7-0a2a0a5109dd-0a2a4504b612-22
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 16:35:20 +0200
-Received: from [217.140.110.172] (helo=foss.arm.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
- (envelope-from <liviu.dudau@arm.com>)
- id 6a68be26-b57f-0a2a45040019-d98c6eac920e-1
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 16:35:18 +0200
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D070E1E8D
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 07:35:13 -0700 (PDT)
-Received: from [10.2.11.34] (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id
- 8F98B3F66F
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 07:35:17 -0700 (PDT)
+ id 1woj8E-00EhwD-6E; Tue, 28 Jul 2026 16:50:10 +0200
+Received: from [10.42.69.10] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a68c19e-5cb7-0a2a0a5109dd-0a2a450ae24e-14
+ for <multiple-recipients>; Tue, 28 Jul 2026 16:50:10 +0200
+Received: from [90.155.50.34] (helo=casper.infradead.org)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a68c1a1-f2d2-0a2a450a0019-5a9b3222aafe-3
+ for <multiple-recipients>; Tue, 28 Jul 2026 16:50:10 +0200
+Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
+ by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+ id 1woj80-0000000DUOp-0PsO; Tue, 28 Jul 2026 14:49:59 +0000
+Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.4 #2 (Red
+ Hat Linux)) id 1woj7y-00000001UXs-48Me;
+ Tue, 28 Jul 2026 15:49:55 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,542 +51,184 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1785249317; bh=Inv7KrlemkdgK5E3nHXTAHNRQzVGjk/0dJV4TgUWtLg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=K7toJuA5tDJtTq3gLjkT8hOIh2Got1ZB1d0RPNuWqRMToXyoeZ3IMDlIjaWwjlfUr
-	 6D0UdRMv1ue1EogFDVCKhYF32ribBV2dW7oRo/foe/s/mbLaY0Uyk+vhihZ8eWe/e8
-	 B7KSdejl97vMf+cVh9ty+wjMNgtk4geUi2cNZYw8=
-Date: Tue, 28 Jul 2026 15:34:00 +0100
-From: Liviu Dudau <liviu.dudau@arm.com>
-To: =?utf-8?Q?Adri=C3=A1n?= Larumbe <adrian.larumbe@collabora.com>
-Cc: Alex Deucher <alexander.deucher@amd.com>,
-	Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Lucas Stach <l.stach@pengutronix.de>,
-	Russell King <linux+etnaviv@armlinux.org.uk>,
-	Christian Gmeiner <christian.gmeiner@gmail.com>,
-	Jianmin Lv <lvjianmin@loongson.cn>,
-	Qianhai Wu <wuqianhai@loongson.cn>,
-	Huacai Chen <chenhuacai@kernel.org>, Mingcong Bai <jeffbai@aosc.io>,
-	Xi Ruoyao <xry111@xry111.site>,
-	Icenowy Zheng <zhengxingda@iscas.ac.cn>,
-	Rob Clark <robin.clark@oss.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
-	Boris Brezillon <boris.brezillon@collabora.com>,
-	Steven Price <steven.price@arm.com>,
-	Sandy Huang <hjc@rock-chips.com>,
-	Heiko =?utf-8?Q?St=C3=BCbner?= <heiko@sntech.de>,
-	Andy Yan <andy.yan@rock-chips.com>,
-	Thierry Reding <thierry.reding@kernel.org>,
-	Mikko Perttunen <mperttunen@nvidia.com>,
-	Jonathan Hunter <jonathanh@nvidia.com>,
-	Zack Rusin <zack.rusin@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Matthew Brost <matthew.brost@intel.com>,
-	Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org, etnaviv@lists.freedesktop.org,
-	linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
-	nouveau@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
-	linux-arm-kernel@lists.infradead.org, linux-tegra@vger.kernel.org,
-	intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
-	linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
-Subject: Re: [PATCH] drm/gem: Move pages_to_sg helper into drm_gem.c
-Message-ID: <ami92JFN-yU_22xX@e142607>
-References: <20260724-get_pages-v1-1-b10e5d65628e@collabora.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
+	Cc:Content-Type:Content-ID:Content-Description;
+	bh=e/GsYKz0pMOG8zTWZYGttSiBilY1RWe8Ai2810usw0k=; b=Jiixrmxs2uO1KMlro/kcFd7OoR
+	UymNdsIswG1NHxkJWRMbPxTO4uVpF8JGPj7hpU5z+fkHRo642OFsOB3E9gbnotIZSy82Nfv1a+rgC
+	FKslcdlrF1Q8SKbjURn55jHJaB96T7WC0aBr8YlRRmCCOWLeIQS7EOZfkQjTjweHFPa1Oc5n5ISpr
+	ISmqkz8Mw+OG68MiUAU+/bXRDjC+jovXeMwwD0OCIf3N39cfJIzPnHch5cfvilStzHJww2AvwVttv
+	+9IMMuufPcE5zLelaSObs9iAOAeyIeG/elt20owcrLirJmJgUffWNGcnvoe/0ZbxgnT2TsLPbGtL7
+	nPCQmLDg==;
+From: David Woodhouse <dwmw2@infradead.org>
+To: Paolo Bonzini <pbonzini@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Sean Christopherson <seanjc@google.com>,
+	Thomas Gleixner <tglx@kernel.org>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Vitaly Kuznetsov <vkuznets@redhat.com>,
+	Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	David Woodhouse <dwmw2@infradead.org>,
+	Paul Durrant <paul@xen.org>,
+	Jonathan Cameron <jic23@kernel.org>,
+	Sascha Bischoff <Sascha.Bischoff@arm.com>,
+	Marc Zyngier <maz@kernel.org>,
+	Joey Gouly <joey.gouly@arm.com>,
+	Jack Allister <jalliste@amazon.com>,
+	Dongli Zhang <dongli.zhang@oracle.com>,
+	joe.jin@oracle.com,
+	kvm@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-kselftest@vger.kernel.org
+Subject: [PATCH v7 01/36] KVM: x86: Improve accuracy of KVM clock when TSC scaling is in force
+Date: Tue, 28 Jul 2026 15:39:41 +0100
+Message-ID: <20260728144954.355376-2-dwmw2@infradead.org>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260728144954.355376-1-dwmw2@infradead.org>
+References: <20260728144954.355376-1-dwmw2@infradead.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260724-get_pages-v1-1-b10e5d65628e@collabora.com>
-X-purgate-ID: tlsNG-ebf023/1785249319-C38C1B50-7ECA81E3/0/0
+Sender: David Woodhouse <dwmw2@infradead.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-4011c0/1785250210-53CD3CFC-40409D68/0/0
 X-purgate-type: clean
-X-purgate-size: 18825
+X-purgate-size: 4548
 
-On Fri, Jul 24, 2026 at 01:08:58PM +0100, Adrián Larumbe wrote:
-> None of the semantics of the function tell of it being a PRIME-exclusive
-> entry point. In fact, most drivers seem to be using it to translate a list
-> of pages into an sg table that can be used for GPU mapping later on, rather
-> than just for sharing an object's pages with another driver.
-> 
-> Move it across files and rename accordingly.
-> 
-> Signed-off-by: Adrián Larumbe <adrian.larumbe@collabora.com>
-> ---
-> drm_prime_pages_to_sg() has no real dependency on PRIME/dma-buf interfaces.
-> It is a generic helper that converts a page array into a scatter/gather
-> table via dma_map_sg_attrs. Nothing in its implementation touches struct
-> dma_buf or import/export logic.
-> ---
->  drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c |  6 ++---
->  drivers/gpu/drm/drm_gem.c                   | 35 ++++++++++++++++++++++++++
->  drivers/gpu/drm/drm_gem_shmem_helper.c      |  2 +-
->  drivers/gpu/drm/drm_prime.c                 | 38 -----------------------------
->  drivers/gpu/drm/etnaviv/etnaviv_gem.c       |  3 +--
->  drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c |  3 ++-
->  drivers/gpu/drm/loongson/lsdc_gem.c         |  3 +--
->  drivers/gpu/drm/msm/msm_gem.c               |  2 +-
->  drivers/gpu/drm/msm/msm_gem_prime.c         |  2 +-
->  drivers/gpu/drm/nouveau/nouveau_prime.c     |  4 +--
->  drivers/gpu/drm/panthor/panthor_gem.c       |  6 ++---
+From: David Woodhouse <dwmw@amazon.co.uk>
 
-For Panthor and the general rename:
+The kvm_guest_time_update() function scales the host TSC frequency to
+the guest's using kvm_scale_tsc() and the v->arch.l1_tsc_scaling_ratio
+scaling ratio previously calculated for that vCPU. Then calculates the
+scaling factors for the KVM clock itself based on that guest TSC
+frequency.
 
-Reviewed-by: Liviu Dudau <liviu.dudau@arm.com>
+However, it uses kHz as the unit when scaling, and then multiplies by
+1000 only at the end.
 
-Best regards,
-Liviu
+With a host TSC frequency of 3000MHz and a guest set to 2500MHz, the
+result of kvm_scale_tsc() will actually come out at 2,499,999kHz. So
+the KVM clock advertised to the guest is based on a frequency of
+2,499,999,000 Hz.
 
->  drivers/gpu/drm/radeon/radeon_prime.c       |  5 ++--
->  drivers/gpu/drm/rockchip/rockchip_drm_gem.c |  6 ++---
->  drivers/gpu/drm/tegra/gem.c                 |  4 +--
->  drivers/gpu/drm/vmwgfx/vmwgfx_gem.c         |  4 +--
->  drivers/gpu/drm/xe/xe_dma_buf.c             |  6 ++---
->  drivers/gpu/drm/xen/xen_drm_front_gem.c     |  2 +-
->  include/drm/drm_gem.h                       |  5 +++-
->  include/drm/drm_prime.h                     |  2 --
->  19 files changed, 68 insertions(+), 70 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c
-> index b33c300e26e2..c9a98aec7eb6 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c
-> @@ -203,9 +203,9 @@ static struct sg_table *amdgpu_dma_buf_map(struct dma_buf_attachment *attach,
->  
->  	switch (bo->tbo.resource->mem_type) {
->  	case TTM_PL_TT:
-> -		sgt = drm_prime_pages_to_sg(obj->dev,
-> -					    bo->tbo.ttm->pages,
-> -					    bo->tbo.ttm->num_pages);
-> +		sgt = drm_pages_to_sg(obj->dev,
-> +				      bo->tbo.ttm->pages,
-> +				      bo->tbo.ttm->num_pages);
->  		if (IS_ERR(sgt))
->  			return sgt;
->  
-> diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
-> index 018df97d590d..22c8a3b5f667 100644
-> --- a/drivers/gpu/drm/drm_gem.c
-> +++ b/drivers/gpu/drm/drm_gem.c
-> @@ -780,6 +780,41 @@ void drm_gem_put_pages(struct drm_gem_object *obj, struct page **pages,
->  }
->  EXPORT_SYMBOL(drm_gem_put_pages);
->  
-> +/**
-> + * drm_pages_to_sg - converts a page array into an sg list
-> + * @dev: DRM device
-> + * @pages: pointer to the array of page pointers to convert
-> + * @nr_pages: length of the page vector
-> + *
-> + * This helper creates an sg table object from a set of pages.
-> + * This is useful for implementing &drm_gem_object_funcs.get_sg_table.
-> + */
-> +struct sg_table *drm_pages_to_sg(struct drm_device *dev,
-> +				 struct page **pages, unsigned int nr_pages)
-> +{
-> +	struct sg_table *sg;
-> +	size_t max_segment = 0;
-> +	int err;
-> +
-> +	sg = kmalloc_obj(struct sg_table);
-> +	if (!sg)
-> +		return ERR_PTR(-ENOMEM);
-> +
-> +	if (dev)
-> +		max_segment = dma_max_mapping_size(drm_dev_dma_dev(dev));
-> +	if (max_segment == 0)
-> +		max_segment = UINT_MAX;
-> +	err = sg_alloc_table_from_pages_segment(sg, pages, nr_pages, 0,
-> +						(unsigned long)nr_pages << PAGE_SHIFT,
-> +						max_segment, GFP_KERNEL);
-> +	if (err) {
-> +		kfree(sg);
-> +		sg = ERR_PTR(err);
-> +	}
-> +	return sg;
-> +}
-> +EXPORT_SYMBOL(drm_pages_to_sg);
-> +
->  static int objects_lookup(struct drm_file *filp, u32 *handle, int count,
->  			  struct drm_gem_object **objs)
->  {
-> diff --git a/drivers/gpu/drm/drm_gem_shmem_helper.c b/drivers/gpu/drm/drm_gem_shmem_helper.c
-> index 22ec52e2ffb8..144d088a477f 100644
-> --- a/drivers/gpu/drm/drm_gem_shmem_helper.c
-> +++ b/drivers/gpu/drm/drm_gem_shmem_helper.c
-> @@ -825,7 +825,7 @@ struct sg_table *drm_gem_shmem_get_sg_table(struct drm_gem_shmem_object *shmem)
->  
->  	drm_WARN_ON(obj->dev, drm_gem_is_imported(obj));
->  
-> -	return drm_prime_pages_to_sg(obj->dev, shmem->pages, obj->size >> PAGE_SHIFT);
-> +	return drm_pages_to_sg(obj->dev, shmem->pages, obj->size >> PAGE_SHIFT);
->  }
->  EXPORT_SYMBOL_GPL(drm_gem_shmem_get_sg_table);
->  
-> diff --git a/drivers/gpu/drm/drm_prime.c b/drivers/gpu/drm/drm_prime.c
-> index 9b44c78cd77f..54539a8929c1 100644
-> --- a/drivers/gpu/drm/drm_prime.c
-> +++ b/drivers/gpu/drm/drm_prime.c
-> @@ -835,44 +835,6 @@ static const struct dma_buf_ops drm_gem_prime_dmabuf_ops =  {
->  	.vunmap = drm_gem_dmabuf_vunmap,
->  };
->  
-> -/**
-> - * drm_prime_pages_to_sg - converts a page array into an sg list
-> - * @dev: DRM device
-> - * @pages: pointer to the array of page pointers to convert
-> - * @nr_pages: length of the page vector
-> - *
-> - * This helper creates an sg table object from a set of pages
-> - * the driver is responsible for mapping the pages into the
-> - * importers address space for use with dma_buf itself.
-> - *
-> - * This is useful for implementing &drm_gem_object_funcs.get_sg_table.
-> - */
-> -struct sg_table *drm_prime_pages_to_sg(struct drm_device *dev,
-> -				       struct page **pages, unsigned int nr_pages)
-> -{
-> -	struct sg_table *sg;
-> -	size_t max_segment = 0;
-> -	int err;
-> -
-> -	sg = kmalloc_obj(struct sg_table);
-> -	if (!sg)
-> -		return ERR_PTR(-ENOMEM);
-> -
-> -	if (dev)
-> -		max_segment = dma_max_mapping_size(drm_dev_dma_dev(dev));
-> -	if (max_segment == 0)
-> -		max_segment = UINT_MAX;
-> -	err = sg_alloc_table_from_pages_segment(sg, pages, nr_pages, 0,
-> -						(unsigned long)nr_pages << PAGE_SHIFT,
-> -						max_segment, GFP_KERNEL);
-> -	if (err) {
-> -		kfree(sg);
-> -		sg = ERR_PTR(err);
-> -	}
-> -	return sg;
-> -}
-> -EXPORT_SYMBOL(drm_prime_pages_to_sg);
-> -
->  /**
->   * drm_prime_get_contiguous_size - returns the contiguous size of the buffer
->   * @sgt: sg_table describing the buffer to check
-> diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem.c b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-> index b0436a1e103f..a8e8614f8210 100644
-> --- a/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-> +++ b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-> @@ -3,7 +3,6 @@
->   * Copyright (C) 2015-2018 Etnaviv Project
->   */
->  
-> -#include <drm/drm_prime.h>
->  #include <drm/drm_print.h>
->  #include <linux/dma-mapping.h>
->  #include <linux/shmem_fs.h>
-> @@ -104,7 +103,7 @@ struct page **etnaviv_gem_get_pages(struct etnaviv_gem_object *etnaviv_obj)
->  		unsigned int npages = etnaviv_obj->base.size >> PAGE_SHIFT;
->  		struct sg_table *sgt;
->  
-> -		sgt = drm_prime_pages_to_sg(dev, etnaviv_obj->pages, npages);
-> +		sgt = drm_pages_to_sg(dev, etnaviv_obj->pages, npages);
->  		if (IS_ERR(sgt)) {
->  			dev_err(dev->dev, "failed to allocate sgt: %ld\n",
->  				PTR_ERR(sgt));
-> diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c b/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c
-> index 6757ae6ec304..f44484325ddb 100644
-> --- a/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c
-> +++ b/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c
-> @@ -3,6 +3,7 @@
->   * Copyright (C) 2014-2018 Etnaviv Project
->   */
->  
-> +#include <drm/drm_gem.h>
->  #include <drm/drm_prime.h>
->  #include <linux/dma-buf.h>
->  #include <linux/module.h>
-> @@ -22,7 +23,7 @@ struct sg_table *etnaviv_gem_prime_get_sg_table(struct drm_gem_object *obj)
->  	if (WARN_ON(!etnaviv_obj->pages))  /* should have already pinned! */
->  		return ERR_PTR(-EINVAL);
->  
-> -	return drm_prime_pages_to_sg(obj->dev, etnaviv_obj->pages, npages);
-> +	return drm_pages_to_sg(obj->dev, etnaviv_obj->pages, npages);
->  }
->  
->  int etnaviv_gem_prime_vmap(struct drm_gem_object *obj, struct iosys_map *map)
-> diff --git a/drivers/gpu/drm/loongson/lsdc_gem.c b/drivers/gpu/drm/loongson/lsdc_gem.c
-> index 2fb03487c983..37160228244c 100644
-> --- a/drivers/gpu/drm/loongson/lsdc_gem.c
-> +++ b/drivers/gpu/drm/loongson/lsdc_gem.c
-> @@ -9,7 +9,6 @@
->  #include <drm/drm_dumb_buffers.h>
->  #include <drm/drm_file.h>
->  #include <drm/drm_gem.h>
-> -#include <drm/drm_prime.h>
->  #include <drm/drm_print.h>
->  
->  #include "lsdc_drv.h"
-> @@ -51,7 +50,7 @@ static struct sg_table *lsdc_gem_prime_get_sg_table(struct drm_gem_object *obj)
->  		return ERR_PTR(-ENOMEM);
->  	}
->  
-> -	return drm_prime_pages_to_sg(obj->dev, tt->pages, tt->num_pages);
-> +	return drm_pages_to_sg(obj->dev, tt->pages, tt->num_pages);
->  }
->  
->  static void lsdc_gem_object_free(struct drm_gem_object *obj)
-> diff --git a/drivers/gpu/drm/msm/msm_gem.c b/drivers/gpu/drm/msm/msm_gem.c
-> index efd3d3c9a449..7e3418290c22 100644
-> --- a/drivers/gpu/drm/msm/msm_gem.c
-> +++ b/drivers/gpu/drm/msm/msm_gem.c
-> @@ -207,7 +207,7 @@ static struct page **get_pages(struct drm_gem_object *obj)
->  
->  		msm_obj->pages = p;
->  
-> -		msm_obj->sgt = drm_prime_pages_to_sg(obj->dev, p, npages);
-> +		msm_obj->sgt = drm_pages_to_sg(obj->dev, p, npages);
->  		if (IS_ERR(msm_obj->sgt)) {
->  			void *ptr = ERR_CAST(msm_obj->sgt);
->  
-> diff --git a/drivers/gpu/drm/msm/msm_gem_prime.c b/drivers/gpu/drm/msm/msm_gem_prime.c
-> index 036d34c674d9..d25393a9e549 100644
-> --- a/drivers/gpu/drm/msm/msm_gem_prime.c
-> +++ b/drivers/gpu/drm/msm/msm_gem_prime.c
-> @@ -23,7 +23,7 @@ struct sg_table *msm_gem_prime_get_sg_table(struct drm_gem_object *obj)
->  	if (WARN_ON(!msm_obj->pages))  /* should have already pinned! */
->  		return ERR_PTR(-ENOMEM);
->  
-> -	return drm_prime_pages_to_sg(obj->dev, msm_obj->pages, npages);
-> +	return drm_pages_to_sg(obj->dev, msm_obj->pages, npages);
->  }
->  
->  int msm_gem_prime_vmap(struct drm_gem_object *obj, struct iosys_map *map)
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_prime.c b/drivers/gpu/drm/nouveau/nouveau_prime.c
-> index caab60fc62f6..b95f2f07df74 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_prime.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_prime.c
-> @@ -32,8 +32,8 @@ struct sg_table *nouveau_gem_prime_get_sg_table(struct drm_gem_object *obj)
->  {
->  	struct nouveau_bo *nvbo = nouveau_gem_object(obj);
->  
-> -	return drm_prime_pages_to_sg(obj->dev, nvbo->bo.ttm->pages,
-> -				     nvbo->bo.ttm->num_pages);
-> +	return drm_pages_to_sg(obj->dev, nvbo->bo.ttm->pages,
-> +			       nvbo->bo.ttm->num_pages);
->  }
->  
->  struct drm_gem_object *nouveau_gem_prime_import_sg_table(struct drm_device *dev,
-> diff --git a/drivers/gpu/drm/panthor/panthor_gem.c b/drivers/gpu/drm/panthor/panthor_gem.c
-> index 9855df738194..ec530d254fa4 100644
-> --- a/drivers/gpu/drm/panthor/panthor_gem.c
-> +++ b/drivers/gpu/drm/panthor/panthor_gem.c
-> @@ -321,8 +321,8 @@ panthor_gem_dev_map_get_sgt_locked(struct panthor_gem_object *bo)
->  	if (ret)
->  		return ERR_PTR(ret);
->  
-> -	sgt = drm_prime_pages_to_sg(bo->base.dev, bo->backing.pages,
-> -				    bo->base.size >> PAGE_SHIFT);
-> +	sgt = drm_pages_to_sg(bo->base.dev, bo->backing.pages,
-> +			      bo->base.size >> PAGE_SHIFT);
->  	if (IS_ERR(sgt))
->  		return sgt;
->  
-> @@ -702,7 +702,7 @@ static struct sg_table *panthor_gem_get_sg_table(struct drm_gem_object *obj)
->  	drm_WARN_ON_ONCE(obj->dev, !bo->backing.pages);
->  	drm_WARN_ON_ONCE(obj->dev, !refcount_read(&bo->backing.pin_count));
->  
-> -	return drm_prime_pages_to_sg(obj->dev, bo->backing.pages, obj->size >> PAGE_SHIFT);
-> +	return drm_pages_to_sg(obj->dev, bo->backing.pages, obj->size >> PAGE_SHIFT);
->  }
->  
->  static int panthor_gem_vmap_locked(struct drm_gem_object *obj,
-> diff --git a/drivers/gpu/drm/radeon/radeon_prime.c b/drivers/gpu/drm/radeon/radeon_prime.c
-> index a77881f035e7..4cfc4282a59c 100644
-> --- a/drivers/gpu/drm/radeon/radeon_prime.c
-> +++ b/drivers/gpu/drm/radeon/radeon_prime.c
-> @@ -26,6 +26,7 @@
->  
->  #include <linux/dma-buf.h>
->  
-> +#include <drm/drm_gem.h>
->  #include <drm/drm_prime.h>
->  #include <drm/radeon_drm.h>
->  
-> @@ -38,8 +39,8 @@ struct sg_table *radeon_gem_prime_get_sg_table(struct drm_gem_object *obj)
->  {
->  	struct radeon_bo *bo = gem_to_radeon_bo(obj);
->  
-> -	return drm_prime_pages_to_sg(obj->dev, bo->tbo.ttm->pages,
-> -				     bo->tbo.ttm->num_pages);
-> +	return drm_pages_to_sg(obj->dev, bo->tbo.ttm->pages,
-> +			       bo->tbo.ttm->num_pages);
->  }
->  
->  struct drm_gem_object *radeon_gem_prime_import_sg_table(struct drm_device *dev,
-> diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-> index b188539dca0b..7897da0becf4 100644
-> --- a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-> +++ b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-> @@ -89,8 +89,8 @@ static int rockchip_gem_get_pages(struct rockchip_gem_object *rk_obj)
->  
->  	rk_obj->num_pages = rk_obj->base.size >> PAGE_SHIFT;
->  
-> -	rk_obj->sgt = drm_prime_pages_to_sg(rk_obj->base.dev,
-> -					    rk_obj->pages, rk_obj->num_pages);
-> +	rk_obj->sgt = drm_pages_to_sg(rk_obj->base.dev,
-> +				      rk_obj->pages, rk_obj->num_pages);
->  	if (IS_ERR(rk_obj->sgt)) {
->  		ret = PTR_ERR(rk_obj->sgt);
->  		goto err_put_pages;
-> @@ -432,7 +432,7 @@ struct sg_table *rockchip_gem_prime_get_sg_table(struct drm_gem_object *obj)
->  	int ret;
->  
->  	if (rk_obj->pages)
-> -		return drm_prime_pages_to_sg(obj->dev, rk_obj->pages, rk_obj->num_pages);
-> +		return drm_pages_to_sg(obj->dev, rk_obj->pages, rk_obj->num_pages);
->  
->  	sgt = kzalloc_obj(*sgt);
->  	if (!sgt)
-> diff --git a/drivers/gpu/drm/tegra/gem.c b/drivers/gpu/drm/tegra/gem.c
-> index 436394e04812..701af672b4e5 100644
-> --- a/drivers/gpu/drm/tegra/gem.c
-> +++ b/drivers/gpu/drm/tegra/gem.c
-> @@ -17,7 +17,7 @@
->  
->  #include <drm/drm_drv.h>
->  #include <drm/drm_dumb_buffers.h>
-> -#include <drm/drm_prime.h>
-> +#include <drm/drm_gem.h>
->  
->  #include "drm.h"
->  #include "gem.h"
-> @@ -352,7 +352,7 @@ static int tegra_bo_get_pages(struct drm_device *drm, struct tegra_bo *bo)
->  
->  	bo->num_pages = bo->gem.size >> PAGE_SHIFT;
->  
-> -	bo->sgt = drm_prime_pages_to_sg(bo->gem.dev, bo->pages, bo->num_pages);
-> +	bo->sgt = drm_pages_to_sg(bo->gem.dev, bo->pages, bo->num_pages);
->  	if (IS_ERR(bo->sgt)) {
->  		err = PTR_ERR(bo->sgt);
->  		goto put_pages;
-> diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_gem.c b/drivers/gpu/drm/vmwgfx/vmwgfx_gem.c
-> index 39f8c46550c2..c9e7f2e3668c 100644
-> --- a/drivers/gpu/drm/vmwgfx/vmwgfx_gem.c
-> +++ b/drivers/gpu/drm/vmwgfx/vmwgfx_gem.c
-> @@ -28,7 +28,7 @@
->  #include "vmwgfx_bo.h"
->  #include "vmwgfx_drv.h"
->  
-> -#include "drm/drm_prime.h"
-> +#include "drm/drm_gem.h"
->  #include "drm/drm_gem_ttm_helper.h"
->  
->  #include <linux/debugfs.h>
-> @@ -76,7 +76,7 @@ static struct sg_table *vmw_gem_object_get_sg_table(struct drm_gem_object *obj)
->  	if (vmw_tt->vsgt.sgt)
->  		return vmw_tt->vsgt.sgt;
->  
-> -	return drm_prime_pages_to_sg(obj->dev, vmw_tt->dma_ttm.pages, vmw_tt->dma_ttm.num_pages);
-> +	return drm_pages_to_sg(obj->dev, vmw_tt->dma_ttm.pages, vmw_tt->dma_ttm.num_pages);
->  }
->  
->  static int vmw_gem_vmap(struct drm_gem_object *obj, struct iosys_map *map)
-> diff --git a/drivers/gpu/drm/xe/xe_dma_buf.c b/drivers/gpu/drm/xe/xe_dma_buf.c
-> index 8a920e58245c..f0fe80706b79 100644
-> --- a/drivers/gpu/drm/xe/xe_dma_buf.c
-> +++ b/drivers/gpu/drm/xe/xe_dma_buf.c
-> @@ -118,9 +118,9 @@ static struct sg_table *xe_dma_buf_map(struct dma_buf_attachment *attach,
->  
->  	switch (bo->ttm.resource->mem_type) {
->  	case XE_PL_TT:
-> -		sgt = drm_prime_pages_to_sg(obj->dev,
-> -					    bo->ttm.ttm->pages,
-> -					    obj->size >> PAGE_SHIFT);
-> +		sgt = drm_pages_to_sg(obj->dev,
-> +				      bo->ttm.ttm->pages,
-> +				      obj->size >> PAGE_SHIFT);
->  		if (IS_ERR(sgt))
->  			return sgt;
->  
-> diff --git a/drivers/gpu/drm/xen/xen_drm_front_gem.c b/drivers/gpu/drm/xen/xen_drm_front_gem.c
-> index eec4c1da3f9e..a4a7c7f2c91c 100644
-> --- a/drivers/gpu/drm/xen/xen_drm_front_gem.c
-> +++ b/drivers/gpu/drm/xen/xen_drm_front_gem.c
-> @@ -236,7 +236,7 @@ struct sg_table *xen_drm_front_gem_get_sg_table(struct drm_gem_object *gem_obj)
->  	if (!xen_obj->pages)
->  		return ERR_PTR(-ENOMEM);
->  
-> -	return drm_prime_pages_to_sg(gem_obj->dev,
-> +	return drm_pages_to_sg(gem_obj->dev,
->  				     xen_obj->pages, xen_obj->num_pages);
->  }
->  
-> diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
-> index 885244e375d3..7b9cc6335689 100644
-> --- a/include/drm/drm_gem.h
-> +++ b/include/drm/drm_gem.h
-> @@ -155,7 +155,7 @@ struct drm_gem_object_funcs {
->  	 * here cannot be used for sg tables pointing at driver private memory
->  	 * ranges.
->  	 *
-> -	 * See also drm_prime_pages_to_sg().
-> +	 * See also drm_pages_to_sg().
->  	 */
->  	struct sg_table *(*get_sg_table)(struct drm_gem_object *obj);
->  
-> @@ -589,6 +589,9 @@ struct page **drm_gem_get_pages(struct drm_gem_object *obj);
->  void drm_gem_put_pages(struct drm_gem_object *obj, struct page **pages,
->  		bool dirty, bool accessed);
->  
-> +struct sg_table *drm_pages_to_sg(struct drm_device *dev,
-> +				 struct page **pages, unsigned int nr_pages);
-> +
->  void drm_gem_lock(struct drm_gem_object *obj);
->  void drm_gem_unlock(struct drm_gem_object *obj);
->  
-> diff --git a/include/drm/drm_prime.h b/include/drm/drm_prime.h
-> index f50f862f0d8b..603e16a40ae7 100644
-> --- a/include/drm/drm_prime.h
-> +++ b/include/drm/drm_prime.h
-> @@ -92,8 +92,6 @@ void drm_gem_dmabuf_vunmap(struct dma_buf *dma_buf, struct iosys_map *map);
->  int drm_gem_prime_mmap(struct drm_gem_object *obj, struct vm_area_struct *vma);
->  int drm_gem_dmabuf_mmap(struct dma_buf *dma_buf, struct vm_area_struct *vma);
->  
-> -struct sg_table *drm_prime_pages_to_sg(struct drm_device *dev,
-> -				       struct page **pages, unsigned int nr_pages);
->  struct dma_buf *drm_gem_prime_export(struct drm_gem_object *obj,
->  				     int flags);
->  
-> 
-> ---
-> base-commit: 48dd37d1fef33fbf42f1d6887c61e242fd21d00d
-> change-id: 20260724-get_pages-e2e91c53eaa3
-> 
-> Best regards,
-> --  
-> Adrián Larumbe <adrian.larumbe@collabora.com>
-> 
+By using Hz as the unit from the beginning, the KVM clock would be based
+on a more accurate frequency of 2,499,999,999 Hz in this example.
 
+Use u64 for the hw_tsc_hz field since an unsigned int would overflow for
+TSC frequencies above 4GHz. Use div_u64() for the Xen CPUID leaf to
+play nice with 32-bit kernels.
+
+Fixes: 78db6a503796 ("KVM: x86: rewrite handling of scaled TSC for kvmclock")
+Reviewed-by: Paul Durrant <paul@xen.org>
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Tested-by: Dongli Zhang <dongli.zhang@oracle.com>
+---
+ arch/x86/include/asm/kvm_host.h |  2 +-
+ arch/x86/kvm/cpuid.c            |  3 ++-
+ arch/x86/kvm/x86.c              | 18 ++++++++++--------
+ 3 files changed, 13 insertions(+), 10 deletions(-)
+
+diff --git a/arch/x86/include/asm/kvm_host.h b/arch/x86/include/asm/kvm_host.h
+index 7a258831616f..bffce2167141 100644
+--- a/arch/x86/include/asm/kvm_host.h
++++ b/arch/x86/include/asm/kvm_host.h
+@@ -864,7 +864,7 @@ struct kvm_vcpu_arch {
+ 	gpa_t time;
+ 	s8  pvclock_tsc_shift;
+ 	u32 pvclock_tsc_mul;
+-	unsigned int hw_tsc_khz;
++	u64 hw_tsc_hz;
+ 	struct gfn_to_pfn_cache pv_time;
+ 	/* set guest stopped flag in pvclock flags field */
+ 	bool pvclock_set_guest_stopped_request;
+diff --git a/arch/x86/kvm/cpuid.c b/arch/x86/kvm/cpuid.c
+index 9e9cf6538a96..7049f5a5597b 100644
+--- a/arch/x86/kvm/cpuid.c
++++ b/arch/x86/kvm/cpuid.c
+@@ -16,6 +16,7 @@
+ #include <linux/vmalloc.h>
+ #include <linux/uaccess.h>
+ #include <linux/sched/stat.h>
++#include <linux/units.h>
+ 
+ #include <asm/processor.h>
+ #include <asm/user.h>
+@@ -2146,7 +2147,7 @@ bool kvm_cpuid(struct kvm_vcpu *vcpu, u32 *eax, u32 *ebx,
+ 				*ecx = vcpu->arch.pvclock_tsc_mul;
+ 				*edx = vcpu->arch.pvclock_tsc_shift;
+ 			} else if (index == 2) {
+-				*eax = vcpu->arch.hw_tsc_khz;
++				*eax = div_u64(vcpu->arch.hw_tsc_hz, HZ_PER_KHZ);
+ 			}
+ 		}
+ 	} else {
+diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+index 0f1a829032c0..f7e1031f8eb0 100644
+--- a/arch/x86/kvm/x86.c
++++ b/arch/x86/kvm/x86.c
+@@ -61,6 +61,7 @@
+ #include <linux/mem_encrypt.h>
+ #include <linux/suspend.h>
+ #include <linux/smp.h>
++#include <linux/units.h>
+ 
+ #include <trace/events/ipi.h>
+ #include <trace/events/kvm.h>
+@@ -1763,7 +1764,8 @@ static void kvm_setup_guest_pvclock(struct pvclock_vcpu_time_info *ref_hv_clock,
+ int kvm_guest_time_update(struct kvm_vcpu *v)
+ {
+ 	struct pvclock_vcpu_time_info hv_clock = {};
+-	unsigned long flags, tgt_tsc_khz;
++	unsigned long flags;
++	u64 tgt_tsc_hz;
+ 	unsigned seq;
+ 	struct kvm_vcpu_arch *vcpu = &v->arch;
+ 	struct kvm_arch *ka = &v->kvm->arch;
+@@ -1789,8 +1791,8 @@ int kvm_guest_time_update(struct kvm_vcpu *v)
+ 
+ 	/* Keep irq disabled to prevent changes to the clock */
+ 	local_irq_save(flags);
+-	tgt_tsc_khz = get_cpu_tsc_khz();
+-	if (unlikely(tgt_tsc_khz == 0)) {
++	tgt_tsc_hz = (u64)get_cpu_tsc_khz() * HZ_PER_KHZ;
++	if (unlikely(tgt_tsc_hz == 0)) {
+ 		local_irq_restore(flags);
+ 		kvm_make_request(KVM_REQ_CLOCK_UPDATE, v);
+ 		return 1;
+@@ -1825,16 +1827,16 @@ int kvm_guest_time_update(struct kvm_vcpu *v)
+ 	/* With all the info we got, fill in the values */
+ 
+ 	if (kvm_caps.has_tsc_control) {
+-		tgt_tsc_khz = kvm_scale_tsc(tgt_tsc_khz,
++		tgt_tsc_hz = kvm_scale_tsc(tgt_tsc_hz,
+ 					    v->arch.l1_tsc_scaling_ratio);
+-		tgt_tsc_khz = tgt_tsc_khz ? : 1;
++		tgt_tsc_hz = tgt_tsc_hz ? : 1;
+ 	}
+ 
+-	if (unlikely(vcpu->hw_tsc_khz != tgt_tsc_khz)) {
+-		kvm_get_time_scale(NSEC_PER_SEC, tgt_tsc_khz * 1000LL,
++	if (unlikely(vcpu->hw_tsc_hz != tgt_tsc_hz)) {
++		kvm_get_time_scale(NSEC_PER_SEC, tgt_tsc_hz,
+ 				   &vcpu->pvclock_tsc_shift,
+ 				   &vcpu->pvclock_tsc_mul);
+-		vcpu->hw_tsc_khz = tgt_tsc_khz;
++		vcpu->hw_tsc_hz = tgt_tsc_hz;
+ 	}
+ 
+ 	hv_clock.tsc_shift = vcpu->pvclock_tsc_shift;
+
+base-commit: 271255273d5ff348fe29d89fe4712b2f7f7907c3
 -- 
-====================
-| I would like to |
-| fix the world,  |
-| but they're not |
-| giving me the   |
- \ source code!  /
-  ---------------
-    ¯\_(ツ)_/¯
+2.55.0
+
 
