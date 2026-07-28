@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 738C5C53219
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:51:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374524.1621879 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAF2DC54F4D
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:51:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374531.1621904 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woj8x-0005xG-KM; Tue, 28 Jul 2026 14:50:55 +0000
+	id 1woj93-00079O-64; Tue, 28 Jul 2026 14:51:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374524.1621879; Tue, 28 Jul 2026 14:50:55 +0000
+Received: by outflank-mailman (output) from mailman id 1374531.1621904; Tue, 28 Jul 2026 14:51:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woj8w-0005sI-G3; Tue, 28 Jul 2026 14:50:54 +0000
-Received: by outflank-mailman (input) for mailman id 1374524;
- Tue, 28 Jul 2026 14:50:24 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1woj92-00074n-7T; Tue, 28 Jul 2026 14:51:00 +0000
+Received: by outflank-mailman (input) for mailman id 1374531;
+ Tue, 28 Jul 2026 14:50:27 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1woj8R-0008D4-MM
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:50:23 +0000
+ id 1woj8U-0000K0-Rc
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:50:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woj8R-004rVO-20; Tue, 28 Jul 2026 16:50:23 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1woj8U-00HSng-1q; Tue, 28 Jul 2026 16:50:26 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a68c182-bab6-0a2a0a5309dd-0a2a4504aa18-44
+ id 6a68c1a2-e002-0a2a0a5209dd-0a2a45038b12-42
  for <multiple-recipients>; Tue, 28 Jul 2026 16:50:22 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a68c1ae-b57f-0a2a45040019-5a9b322287a6-3
+ id 6a68c1ae-fae8-0a2a45030019-5a9b3222874e-3
  for <multiple-recipients>; Tue, 28 Jul 2026 16:50:22 +0200
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1woj80-0000000DUOr-0QkL; Tue, 28 Jul 2026 14:49:59 +0000
+ id 1woj80-0000000DUOv-1RqP; Tue, 28 Jul 2026 14:49:56 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.4 #2 (Red
- Hat Linux)) id 1woj7z-00000001UYS-2Nsg;
- Tue, 28 Jul 2026 15:49:55 +0100
+ Hat Linux)) id 1woj80-00000001UZQ-0eZI;
+ Tue, 28 Jul 2026 15:49:56 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,12 +56,12 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
 	Cc:Content-Type:Content-ID:Content-Description;
-	bh=7tWCZ3O6g9mRHicwm5+/uwyfebvOB/GXlJK47aUBcYs=; b=IRn8U3JSQsqxuRBHBhPk+7VjVw
-	K14km9FYw/AHhg5l66WIvxx9eEvkX+dcmIBtNDKPKbG1Luyw9ZWwJlOETDtakCZf7ZGMsyhaQhiVT
-	niHXoWijNtcTKqDN5pfiQjg+8Scjxh5wGVV5P3UeAAJZdF00soXm3IENtMwPX1lpdk8315iLisVjl
-	LzktSV7kfA4Vi0NVJS3+BLBRD1FlbpyRwL0EmNwSWJXIcZBuE86JWWN0Qse1g5tEVezH3VdM9nqeV
-	1AnHEEaeG0GXKIPqNAPJ3i11pvRvcDAiQ3eaTshS5CWdUu1+OyBHXlNy7l0zUo44jzeT3obFpqIUJ
-	Q8VwS/uQ==;
+	bh=aGl8eHQJHZwWcbaCoMM2Z87yd80DKJIrhyfcCcwLE5s=; b=hH1CEifDJ//b2cMYXgplgpffBw
+	JlbIHb06uSkz8so4EFVbV4TF7K/rID1U5/d5XdHyYgYIGqhyAErKFHmrB/Y685UVi9+GCnJeY4z37
+	uFVeBIU+60NbsvskpXYmxHEOWl54TaKHVjCfhNfEohUvzdryNaJXcdsQQk3WPha70ougr2PoIcmtP
+	apL/bA5DgMNsSc4NP3wRPsDV8rkv4zJvnNHpvdeFVINlAwQoNIEqYXwNyAiYDSOmEMydUnhRBFYAE
+	Cp+pKq3neAWKhzRyvlL8dWn66AISJciwa75YlnYTbdSF2A/zgplTvNw7D2ofR7055NB/FTHRjUzIv
+	H+zpeANQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	Jonathan Corbet <corbet@lwn.net>,
@@ -90,9 +90,9 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v7 13/36] KVM: x86: Remove implicit rdtsc() from kvm_compute_l1_tsc_offset()
-Date: Tue, 28 Jul 2026 15:39:53 +0100
-Message-ID: <20260728144954.355376-14-dwmw2@infradead.org>
+Subject: [PATCH v7 25/36] KVM: x86: Compute kvmclock base without pvclock_gtod_data
+Date: Tue, 28 Jul 2026 15:40:05 +0100
+Message-ID: <20260728144954.355376-26-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260728144954.355376-1-dwmw2@infradead.org>
 References: <20260728144954.355376-1-dwmw2@infradead.org>
@@ -100,105 +100,36 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-ebf023/1785250222-C12DCB50-4E13AD96/0/0
+X-purgate-ID: tlsNG-33051d/1785250222-76AF94E9-185D792B/0/0
 X-purgate-type: clean
-X-purgate-size: 3813
+X-purgate-size: 1068
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Let the callers pass the host TSC value in as an explicit parameter.
-This leaves some fairly obviously stupid code, which is using this
-function to compare the guest TSC at some *other* time, with the
-newly-minted TSC value from rdtsc(). Unless it's being used to measure
-*elapsed* time, that isn't very sensible.
-
-In this case, "obviously stupid" is an improvement over being
-non-obviously so.
-
-No functional change intended.
+get_kvmclock_base_ns() needs CLOCK_MONOTONIC_RAW + offs_boot. Compute
+this directly rather than reading offs_boot from the pvclock_gtod_data
+private copy. offs_boot only changes at suspend/resume so does not
+need to be atomically paired with the raw clock read.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Paul Durrant <paul@xen.org>
+Assisted-by: Kiro:claude-opus-4.6-1m
 ---
- arch/x86/kvm/msrs.c |  3 ++-
- arch/x86/kvm/x86.c  | 11 ++++++-----
- arch/x86/kvm/x86.h  |  3 ++-
- 3 files changed, 10 insertions(+), 7 deletions(-)
+ arch/x86/kvm/x86.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/x86/kvm/msrs.c b/arch/x86/kvm/msrs.c
-index 66fa7140d65d..22ceb39d41f6 100644
---- a/arch/x86/kvm/msrs.c
-+++ b/arch/x86/kvm/msrs.c
-@@ -1631,7 +1631,8 @@ int kvm_set_msr_common(struct kvm_vcpu *vcpu, struct msr_data *msr_info)
- 		if (msr_info->host_initiated) {
- 			kvm_synchronize_tsc(vcpu, &data);
- 		} else if (!vcpu->arch.guest_tsc_protected) {
--			u64 adj = kvm_compute_l1_tsc_offset(vcpu, data) - vcpu->arch.l1_tsc_offset;
-+			u64 adj = kvm_compute_l1_tsc_offset(vcpu, rdtsc(), data) -
-+				  vcpu->arch.l1_tsc_offset;
- 			adjust_tsc_offset_guest(vcpu, adj);
- 			vcpu->arch.ia32_tsc_adjust_msr += adj;
- 		}
 diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 77feed979b59..c4fd2367686c 100644
+index 74776dd497f2..a64e5a596a4e 100644
 --- a/arch/x86/kvm/x86.c
 +++ b/arch/x86/kvm/x86.c
-@@ -1153,11 +1153,12 @@ u64 kvm_scale_tsc(u64 tsc, u64 ratio)
- 	return _tsc;
- }
- 
--u64 kvm_compute_l1_tsc_offset(struct kvm_vcpu *vcpu, u64 target_tsc)
-+u64 kvm_compute_l1_tsc_offset(struct kvm_vcpu *vcpu, u64 host_tsc,
-+			      u64 target_tsc)
+@@ -933,7 +933,7 @@ static void update_pvclock_gtod(struct timekeeper *tk)
+ static s64 get_kvmclock_base_ns(void)
  {
- 	u64 tsc;
- 
--	tsc = kvm_scale_tsc(rdtsc(), vcpu->arch.l1_tsc_scaling_ratio);
-+	tsc = kvm_scale_tsc(host_tsc, vcpu->arch.l1_tsc_scaling_ratio);
- 
- 	return target_tsc - tsc;
+ 	/* Count up from boot time, but with the frequency of the raw clock.  */
+-	return ktime_to_ns(ktime_add(ktime_get_raw(), pvclock_gtod_data.offs_boot));
++	return ktime_to_ns(ktime_mono_to_any(ktime_get_raw(), TK_OFFS_BOOT));
  }
-@@ -1319,7 +1320,7 @@ void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value)
- 	bool synchronizing = false;
  
- 	raw_spin_lock_irqsave(&kvm->arch.tsc_write_lock, flags);
--	offset = kvm_compute_l1_tsc_offset(vcpu, data);
-+	offset = kvm_compute_l1_tsc_offset(vcpu, rdtsc(), data);
- 	ns = get_kvmclock_base_ns();
- 	elapsed = ns - kvm->arch.last_tsc_nsec;
- 
-@@ -1368,7 +1369,7 @@ void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value)
- 		} else {
- 			u64 delta = nsec_to_cycles(vcpu, elapsed);
- 			data += delta;
--			offset = kvm_compute_l1_tsc_offset(vcpu, data);
-+			offset = kvm_compute_l1_tsc_offset(vcpu, rdtsc(), data);
- 		}
- 		matched = true;
- 	}
-@@ -2628,7 +2629,7 @@ void kvm_arch_vcpu_load(struct kvm_vcpu *vcpu, int cpu)
- 			mark_tsc_unstable("KVM discovered backwards TSC");
- 
- 		if (kvm_check_tsc_unstable()) {
--			u64 offset = kvm_compute_l1_tsc_offset(vcpu,
-+			u64 offset = kvm_compute_l1_tsc_offset(vcpu, rdtsc(),
- 						vcpu->arch.last_guest_tsc);
- 			kvm_vcpu_write_tsc_offset(vcpu, offset);
- 			if (!vcpu->arch.guest_tsc_protected)
-diff --git a/arch/x86/kvm/x86.h b/arch/x86/kvm/x86.h
-index 0f5919b092e4..1d9a66048b01 100644
---- a/arch/x86/kvm/x86.h
-+++ b/arch/x86/kvm/x86.h
-@@ -335,7 +335,8 @@ u64 kvm_scale_tsc(u64 tsc, u64 ratio);
- u64 kvm_read_l1_tsc(struct kvm_vcpu *vcpu, u64 host_tsc);
- u64 kvm_calc_nested_tsc_offset(u64 l1_offset, u64 l2_offset, u64 l2_multiplier);
- u64 kvm_calc_nested_tsc_multiplier(u64 l1_multiplier, u64 l2_multiplier);
--u64 kvm_compute_l1_tsc_offset(struct kvm_vcpu *vcpu, u64 target_tsc);
-+u64 kvm_compute_l1_tsc_offset(struct kvm_vcpu *vcpu, u64 host_tsc,
-+			      u64 target_tsc);
- void kvm_vcpu_write_tsc_offset(struct kvm_vcpu *vcpu, u64 l1_offset);
- 
- static inline void adjust_tsc_offset_guest(struct kvm_vcpu *vcpu,
+ static uint32_t div_frac(uint32_t dividend, uint32_t divisor)
 -- 
 2.55.0
 
