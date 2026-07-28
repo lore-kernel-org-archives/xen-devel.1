@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AC85C54F55
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:51:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374519.1621862 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C938C54F4C
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:51:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374525.1621889 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woj8s-0004lN-Nr; Tue, 28 Jul 2026 14:50:50 +0000
+	id 1woj8z-0006J0-Lj; Tue, 28 Jul 2026 14:50:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374519.1621862; Tue, 28 Jul 2026 14:50:50 +0000
+Received: by outflank-mailman (output) from mailman id 1374525.1621889; Tue, 28 Jul 2026 14:50:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woj8q-0004cX-N5; Tue, 28 Jul 2026 14:50:48 +0000
-Received: by outflank-mailman (input) for mailman id 1374519;
- Tue, 28 Jul 2026 14:50:21 +0000
+	id 1woj8y-0006D6-7M; Tue, 28 Jul 2026 14:50:56 +0000
+Received: by outflank-mailman (input) for mailman id 1374525;
+ Tue, 28 Jul 2026 14:50:24 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+0bab86ec5884d1af5d78+8374+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1woj8O-0007ZH-Ii
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:50:20 +0000
+ <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1woj8R-0008Dv-Ng
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:50:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woj8N-004rRp-Uy; Tue, 28 Jul 2026 16:50:19 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1woj8R-004rVO-4V; Tue, 28 Jul 2026 16:50:23 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <BATV+0bab86ec5884d1af5d78+8374+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 6a68c19c-bab6-0a2a0a5309dd-0a2a4508ad20-48
- for <multiple-recipients>; Tue, 28 Jul 2026 16:50:19 +0200
-Received: from [90.155.92.199] (helo=desiato.infradead.org)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a68c19f-bab6-0a2a0a5309dd-0a2a4501bf8e-42
+ for <multiple-recipients>; Tue, 28 Jul 2026 16:50:22 +0200
+Received: from [90.155.50.34] (helo=casper.infradead.org)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <BATV+0bab86ec5884d1af5d78+8374+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 6a68c1ab-f659-0a2a45080019-5a9b5cc79fe2-3
- for <multiple-recipients>; Tue, 28 Jul 2026 16:50:19 +0200
+ <BATV+a16dffe8eb885fac2cd9+8374+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a68c1ae-5984-0a2a45010019-5a9b3222e8c2-3
+ for <multiple-recipients>; Tue, 28 Jul 2026 16:50:22 +0200
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.99.2 #2 (Red Hat Linux))
- id 1woj82-000000052VW-34Y5; Tue, 28 Jul 2026 14:50:09 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+ id 1woj80-0000000DUP3-2REx; Tue, 28 Jul 2026 14:49:57 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.4 #2 (Red
- Hat Linux)) id 1woj7z-00000001UXv-0HsP;
- Tue, 28 Jul 2026 15:49:55 +0100
+ Hat Linux)) id 1woj80-00000001UZh-1PBL;
+ Tue, 28 Jul 2026 15:49:56 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=desiato.20200630 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
 	Cc:Content-Type:Content-ID:Content-Description;
-	bh=1Yco73wB/YAFQVFh4qtx3O3nsbhsRJaJSFcRl6aWB0A=; b=V7Ehwcw9eOAULq/s5oipFIX68F
-	dC6GgzpKNZbbxDDcVdmqRpaKbDG4gz2XtW2HSqVZ59+FAUfV4SMVr79ynEcIBuzSnDaMD1w8p+d85
-	5xjRhx74GdZ256bIKWGpLlkIkTnZMUXICHb4uBu1hs7UiJnYHK9lbmxxvqtFhiLcv7AhFgQ3FWjhp
-	eJxe276SjXTMQXwuTuBWJEjs6vyOR4NpGWk6rUR7wx7HF8S6hgHkx6Qiu0Tpt4CzYc+xRXJaHbEdi
-	nQIcA+ExBUQNC759eZc5Rd8KUb7Tho/WALx/OycRhV/GO22Au2ATGfiOx+720FIDv3AkvszzylVad
-	SlXbDBPw==;
+	bh=iB5YYfvike65tIF3MOOBW8Lv1PZp8ABfxzZ5+cQ99SE=; b=mSv1FLKQmy9qmTlaSg8paMot5w
+	5myNTsrs1dZDL35ce2gh7Yo5ei9NKVscpYTX7Jy6gk7srDYNbj0B3HiLmIin9OFRKtibsOu+2BehZ
+	6Qtj0U3D3yD8WOjOOhB+TSvi/9xZdVBSxq0HwNsbaYljtXQQ0JfrT5r6miVvHqC/UfIQBSzu1CeJv
+	W6FiTzFS3hfiN/uZv79cQOCAah4i/cZI6cNV1gAu6Gc+ZEfhgIgCsxOwsbsZ1sVt8xWfeCBGzcxFb
+	cEM3muB7ScHvaIW+DBa475+pnF0wUV1cZG+A0Jsp3zwHAr5MBpArDqBggVXFjGY8nKhaHGYk6WVk9
+	LCfqUWyw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	Jonathan Corbet <corbet@lwn.net>,
@@ -90,77 +90,127 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v7 02/36] KVM: x86: Explicitly disable TSC scaling without CONSTANT_TSC
-Date: Tue, 28 Jul 2026 15:39:42 +0100
-Message-ID: <20260728144954.355376-3-dwmw2@infradead.org>
+Subject: [PATCH v7 29/36] UAPI: x86: Move pvclock-abi to UAPI for x86 platforms
+Date: Tue, 28 Jul 2026 15:40:09 +0100
+Message-ID: <20260728144954.355376-30-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260728144954.355376-1-dwmw2@infradead.org>
 References: <20260728144954.355376-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-c1860d/1785250219-CC37587B-84426C70/0/0
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-d62444/1785250222-1F66C757-741C5DBA/0/0
 X-purgate-type: clean
-X-purgate-size: 2365
+X-purgate-size: 3570
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+From: Jack Allister <jalliste@amazon.com>
 
-KVM does make an attempt to cope with non-constant TSC, and has
-notifiers to handle host TSC frequency changes. However, it *only*
-adjusts the KVM clock, and doesn't adjust TSC frequency scaling when
-the host changes.
+A subsequent commit will provide a new KVM interface for performing a
+fixup/correction of the KVM clock against the reference TSC. The
+KVM_[GS]ET_CLOCK_GUEST API requires a pvclock_vcpu_time_info, as such
+the caller must know about this definition.
 
-This is presumably because non-constant TSCs were fixed in hardware
-long before TSC scaling was implemented, so there should never be real
-CPUs which have TSC scaling but *not* CONSTANT_TSC.
+Move the definition to the UAPI folder so that it is exported to
+usermode and also change the type definitions to use the standard for
+UAPI exports.
 
-Such a combination could potentially happen in some odd L1 nesting
-environment, but it isn't worth trying to support it. Just make the
-dependency explicit.
-
+Signed-off-by: Jack Allister <jalliste@amazon.com>
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Paul Durrant <paul@xen.org>
+Tested-by: Dongli Zhang <dongli.zhang@oracle.com>
 ---
- arch/x86/kvm/svm/svm.c |  3 ++-
- arch/x86/kvm/vmx/vmx.c | 10 ++++++++++
- 2 files changed, 12 insertions(+), 1 deletion(-)
+ MAINTAINERS                                   |  4 +--
+ arch/x86/include/{ => uapi}/asm/pvclock-abi.h | 27 ++++++++++---------
+ scripts/xen-hypercalls.sh                     |  2 +-
+ 3 files changed, 18 insertions(+), 15 deletions(-)
+ rename arch/x86/include/{ => uapi}/asm/pvclock-abi.h (82%)
 
-diff --git a/arch/x86/kvm/svm/svm.c b/arch/x86/kvm/svm/svm.c
-index d68cba12c772..d7fb98a2aaa2 100644
---- a/arch/x86/kvm/svm/svm.c
-+++ b/arch/x86/kvm/svm/svm.c
-@@ -5624,7 +5624,8 @@ static __init int svm_hardware_setup(void)
- 				     XFEATURE_MASK_BNDCSR);
- 
- 	if (tsc_scaling) {
--		if (!boot_cpu_has(X86_FEATURE_TSCRATEMSR)) {
-+		if (!boot_cpu_has(X86_FEATURE_TSCRATEMSR) ||
-+		    !boot_cpu_has(X86_FEATURE_CONSTANT_TSC)) {
- 			tsc_scaling = false;
- 		} else {
- 			pr_info("TSC scaling supported\n");
-diff --git a/arch/x86/kvm/vmx/vmx.c b/arch/x86/kvm/vmx/vmx.c
-index e4b9ac7fed9f..d553537004cf 100644
---- a/arch/x86/kvm/vmx/vmx.c
-+++ b/arch/x86/kvm/vmx/vmx.c
-@@ -2838,6 +2838,16 @@ static int setup_vmcs_config(struct vmcs_config *vmcs_conf,
- 	if (!cpu_has_sgx())
- 		_cpu_based_2nd_exec_control &= ~SECONDARY_EXEC_ENCLS_EXITING;
- 
-+	/*
-+	 * KVM doesn't re-derive the TSC scaling ratio when the host TSC
-+	 * frequency changes, so TSC scaling is only usable with a constant
-+	 * TSC.  Clear the control here rather than in vmx_hardware_setup() so
-+	 * that the per-CPU configs recomputed by vmx_check_processor_compat()
-+	 * stay consistent with the golden vmcs_config.
-+	 */
-+	if (!boot_cpu_has(X86_FEATURE_CONSTANT_TSC))
-+		_cpu_based_2nd_exec_control &= ~SECONDARY_EXEC_TSC_SCALING;
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 4a8b0fd665ce..4d5e1088458d 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -14546,7 +14546,7 @@ S:	Supported
+ T:	git git://git.kernel.org/pub/scm/virt/kvm/kvm.git
+ F:	arch/um/include/asm/kvm_para.h
+ F:	arch/x86/include/asm/kvm_para.h
+-F:	arch/x86/include/asm/pvclock-abi.h
++F:	arch/x86/include/uapi/asm/pvclock-abi.h
+ F:	arch/x86/include/uapi/asm/kvm_para.h
+ F:	arch/x86/kernel/kvm.c
+ F:	arch/x86/kernel/kvmclock.c
+@@ -29435,7 +29435,7 @@ R:	Boris Ostrovsky <boris.ostrovsky@oracle.com>
+ L:	xen-devel@lists.xenproject.org (moderated for non-subscribers)
+ S:	Supported
+ F:	arch/x86/configs/xen.config
+-F:	arch/x86/include/asm/pvclock-abi.h
++F:	arch/x86/include/uapi/asm/pvclock-abi.h
+ F:	arch/x86/include/asm/xen/
+ F:	arch/x86/platform/pvh/
+ F:	arch/x86/xen/
+diff --git a/arch/x86/include/asm/pvclock-abi.h b/arch/x86/include/uapi/asm/pvclock-abi.h
+similarity index 82%
+rename from arch/x86/include/asm/pvclock-abi.h
+rename to arch/x86/include/uapi/asm/pvclock-abi.h
+index b9fece5fc96d..6d70cf640362 100644
+--- a/arch/x86/include/asm/pvclock-abi.h
++++ b/arch/x86/include/uapi/asm/pvclock-abi.h
+@@ -1,6 +1,9 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
++/* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
+ #ifndef _ASM_X86_PVCLOCK_ABI_H
+ #define _ASM_X86_PVCLOCK_ABI_H
 +
- 	if (_cpu_based_exec_control & CPU_BASED_ACTIVATE_TERTIARY_CONTROLS)
- 		_cpu_based_3rd_exec_control =
- 			adjust_vmx_controls64(KVM_OPTIONAL_VMX_TERTIARY_VM_EXEC_CONTROL,
++#include <linux/types.h>
++
+ #ifndef __ASSEMBLER__
+ 
+ /*
+@@ -24,20 +27,20 @@
+  */
+ 
+ struct pvclock_vcpu_time_info {
+-	u32   version;
+-	u32   pad0;
+-	u64   tsc_timestamp;
+-	u64   system_time;
+-	u32   tsc_to_system_mul;
+-	s8    tsc_shift;
+-	u8    flags;
+-	u8    pad[2];
++	__u32   version;
++	__u32   pad0;
++	__u64   tsc_timestamp;
++	__u64   system_time;
++	__u32   tsc_to_system_mul;
++	__s8    tsc_shift;
++	__u8    flags;
++	__u8    pad[2];
+ } __attribute__((__packed__)); /* 32 bytes */
+ 
+ struct pvclock_wall_clock {
+-	u32   version;
+-	u32   sec;
+-	u32   nsec;
++	__u32   version;
++	__u32   sec;
++	__u32   nsec;
+ } __attribute__((__packed__));
+ 
+ #define PVCLOCK_TSC_STABLE_BIT	(1 << 0)
+diff --git a/scripts/xen-hypercalls.sh b/scripts/xen-hypercalls.sh
+index f18b00843df3..51a722198997 100755
+--- a/scripts/xen-hypercalls.sh
++++ b/scripts/xen-hypercalls.sh
+@@ -5,7 +5,7 @@ shift
+ in="$@"
+ 
+ for i in $in; do
+-	eval $CPP $LINUXINCLUDE -dD -imacros "$i" -x c /dev/null
++	eval $CPP -D__KERNEL__ $LINUXINCLUDE -dD -imacros "$i" -x c /dev/null
+ done | \
+ awk '$1 == "#define" && $2 ~ /__HYPERVISOR_[a-z][a-z_0-9]*/ { v[$3] = $2 }
+ 	END {   print "/* auto-generated by scripts/xen-hypercall.sh */"
 -- 
 2.55.0
 
