@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4325DC53219
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 13:15:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374045.1621000 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC53EC54F4C
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 13:15:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374054.1621010 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woheI-0004HF-CZ; Tue, 28 Jul 2026 13:15:10 +0000
+	id 1wohee-0004m7-Ju; Tue, 28 Jul 2026 13:15:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374045.1621000; Tue, 28 Jul 2026 13:15:10 +0000
+Received: by outflank-mailman (output) from mailman id 1374054.1621010; Tue, 28 Jul 2026 13:15:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woheI-0004H8-9q; Tue, 28 Jul 2026 13:15:10 +0000
-Received: by outflank-mailman (input) for mailman id 1374045;
- Tue, 28 Jul 2026 13:15:08 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wohee-0004ly-Ge; Tue, 28 Jul 2026 13:15:32 +0000
+Received: by outflank-mailman (input) for mailman id 1374054;
+ Tue, 28 Jul 2026 13:15:31 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1woheG-0004DE-Ok
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 13:15:08 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wohed-0004kQ-4V
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 13:15:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woheG-002tTP-5F
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 15:15:08 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wohec-004lat-HR
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 15:15:30 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68ab5b-5cb7-0a2a0a5109dd-0a2a450794a2-4
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:15:08 +0200
-Received: from [209.85.221.44] (helo=mail-wr1-f44.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a68ab58-2eae-0a2a0a5409dd-0a2a4505aeaa-34
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:15:30 +0200
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68ab5a-b4ea-0a2a45070019-d155dd2cd8b0-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:15:06 +0200
-Received: by mail-wr1-f44.google.com with SMTP id
- ffacd0b85a97d-47f97d310caso2737405f8f.2
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 06:15:06 -0700 (PDT)
+ id 6a68ab72-4cb1-0a2a45050019-d155802acc5a-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:15:30 +0200
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-4955aa106b1so36772235e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 06:15:30 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f85c52fa9sm60329966f8f.20.2026.07.28.06.15.05
+ ffacd0b85a97d-47f85c67339sm61424883f8f.31.2026.07.28.06.15.28
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Jul 2026 06:15:05 -0700 (PDT)
+ Tue, 28 Jul 2026 06:15:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,49 +55,48 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785244506; x=1785849306; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785244530; x=1785849330; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=hfN4Ana84xKH4bZHnbxldP7VbRY/aTI5+X/yItg8+gc=;
-        b=SMUcck84gjvUcakGCLyWlTw0xasshhOzbwBdvagj94tJ/kL2PRFhiQKsDpD33Nf5Q5
-         Ro1xU/J1LjG7AA3UB6ZM9iVh+bRV8WSRGhc5pRZap0YHTXnJBLWOLTKFsm/4+bRIJsp9
-         djGUn78+zUbEp4HLjEVtixo80sKJpfaVuzJ3/c58JHQNT5VCk39yO5RtjmbTpKyrTAWt
-         gnE05ph5ItbeUM0MCOK1H5ex9O2dNVPcV9UZ+qvOY76y+VPlJoZ5XQIg1Zy18pTJ7q14
-         98dw2C/iWlgxC/YJDWTLP/cX5laicGRvo3Oynf1XtdoZa2sj/2dZLM3FxU4/SyE9Ztyu
-         kBdg==
+        bh=x5Ura/4aSJTT1yjoaooe8WKNPNZs5RjaVEYUlZ6AWEA=;
+        b=GehQfQTV2NQJOnoyAKgo+0WjICNtJpSxbDh/D7rsEyYLwmHpOMFhDFc4qAJjax+oWx
+         ATFsPoBCSTjuXVM2c2Enn5K4A/bma5MX4g4aRnPBscOM+H8cgUow8o1TJsXrOTEiR++k
+         MavkqEwDUtQEbUJlEXC3/gL0wuKzD0KKUx10zMdRaffDlaouBZsk7al5HBwbMhDq9SgK
+         PsM+q5nwRGI8nYXKO4+8BaCzPoneTypVLKCjp1TELw/usU6944x77h+4bAwWXmVZisvU
+         U4gwgfXQv9J7JV3lIUVRkov+GmX5sMgseXBVHgWQJSTp+CXIdQsJoQFvBGOrOd1FRbpI
+         59WQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785244506; x=1785849306;
+        d=1e100.net; s=20251104; t=1785244530; x=1785849330;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=hfN4Ana84xKH4bZHnbxldP7VbRY/aTI5+X/yItg8+gc=;
-        b=ip7VFMxkpTcJilNVPZOrbmKS6AfK8JTZzoBTFy/kIBCITxiaX/fT3zbbwrOo+uGYRq
-         XUt8COqv9kA7ZHO25QDpUfkpx0TOZdixKDKL0LxA/ZFVFXrQ3pmeiuDgzfB0kLjGe1m8
-         oyO8rOfr2NU65vXvHkRc3FxhCNSQdt4wTWp2g25JZhcyloZM9+rma90Pi//o1ufP3r5s
-         p212vTQbnoQedwZYSvO8jfMG01rXbZCujy2G2EEQSXgsxxGxvu0KyPSy0Q2/YtPuIDEr
-         U14bQV0b/qyz1VdLrrFenyuRvp7aq+bgH7SmS8EGz+5TCQSvTLBraOA7bM6u/KZ7etI1
-         YsIg==
-X-Gm-Message-State: AOJu0YyFnbW2GWUvnGHPIJBVtfq6dWsmcxeR87uZZWD7IpHqGSZtA6oB
-	Xz1TD3KiKEnc5gAb0QkGHjz4eL+VHM8FmEExt+oYdSVoWWMPYtmHLQ+l0Nl98MQDofG/JhMHc5W
-	d0tiAjg==
-X-Gm-Gg: AR+sD10kJhNudDJo7d/O7Jg1kT98kTDw9aNIOIdvb96cTEOd6FzVckn6da4pHlhvvZy
-	TvzJyByQU/VcPOYrXGrW8D9k7lZ0YhN6P3+P5ovcsiaUR/0y1ISrILjVxnhJbHHMmzsTF2W8si6
-	Rqz4TiF5K0gLywAZr1XFLzIL+J9sn9f/lzTfLFTYed5kOQ2qeedL5wjg7FmAalwNeQBBycHg2mW
-	5K5RMJ3DwRZ5rQQzGlaNgtGN9taYw/WjqeGQR0qrP2A7mNPaGyOfv7sf2dzr9EJ7wY7MnFlmJv5
-	mxfjuiO42rUhbGyig0iHM86dDhmBuqN1b5xG0Hy5aQuZ3Osc591hT3rcb8Tj60UZMPLXOEldJ/I
-	0N6vvzFcGWo4zKf8g7YQh0+dUHqxgsatERm9bECz8U1I2Z3LHwuBngQX7eVR0iM1GSZEFiDonYz
-	B6Q47czMRfyx8y68PhPMVOceqUjvFKvSw2uYsYF+EBXyIdFSdM/NA/mD3aIdOmKd2HDw==
-X-Received: by 2002:a05:6000:5c5:b0:47f:8ac6:1b8d with SMTP id ffacd0b85a97d-47fb1e22423mr3240190f8f.0.1785244506148;
-        Tue, 28 Jul 2026 06:15:06 -0700 (PDT)
-Message-ID: <d466a04f-8151-4b83-972b-3525eaa39bd5@suse.com>
-Date: Tue, 28 Jul 2026 15:15:04 +0200
+        bh=x5Ura/4aSJTT1yjoaooe8WKNPNZs5RjaVEYUlZ6AWEA=;
+        b=WHC3mRK6v7iD4r/0I9nQRyucTk/DYgAPoWNSUIswL+E0LPxzvewiQR4mumLfBLs8nS
+         h1fP5lgALEyW7IMhL3NQu8MoLN6/JKB5v7y940U3sKiNQBPTeKG7iRCGjh1HLsqyiliW
+         JLPAGUjcyrReScJdvpBTcxPDzs0/iTb3Eyw4idtPcr7vT/aGq5gjTPjWcaK3ocAFEFzP
+         Wsn2wrG+x7ur5pnYoLSFVljviJ+j23phouMe/ZEnMdVH8dqynWZqp1AStoou9LNC5biD
+         cnh+OuGKyNr15dAuG+ltaxH7sxW8/O+FZReo3tyImLayM7Oji0ovbkRIuCUKt65Olfff
+         GRyw==
+X-Gm-Message-State: AOJu0YyFP7Y3QCnShHUaBaU4IiNp118sV71405aoDjRAsBy9Rs9ZEmpP
+	VlMkRuLmX3raiezYPGbxRr3fbwDKr2cK2g2Ss5JxBTDAQv/fZcYX9fgf7JsAyH4RS3kZilfIg8M
+	8odn/Aw==
+X-Gm-Gg: AR+sD12dVWGbyRnahD/88wSvWe8Eu089L07VdOsTjt9abQbtTRNc9Aw22A9E6lOSpyh
+	1a8dRKwQcLffz/VBThqxSCIFrtUwbjGoCJ8mD2PvG4+8blGiJEUhZGpn0HY1uQ8SjWzFPxRNxX+
+	NgPQx8aAhGmYZS1WLekIMf4oD0RjTlzcFXbjqd8TSB5/CSkQBAUTKhDbgUPrRyUOxOlPxJWMKkC
+	PZ15tMAJgRXusskIKVungvkjU2tVq81IjJ53ABLQcUIcaM1uvxw7MTjUyc/ebYcm1YbxSJ6dzEA
+	OFGsXJYxSL1rsNjlDmc7FSQNhP6SFcbCfBCgJZKr2N4dmIxTti3P/7fKX6x+Z4ySYELytJ4JFfv
+	aEvN66EvNrLOAXOGxjPDyFu8y5f1lCeIJY693uqUvHguYsc95Euq/yUUtxoQ2nr0tqSmnI2R8YG
+	K1Dl4eq1jmW8li6HcUCCiVrKj6sRLiG1wj922JMOoN1GS7EMF1FUILuhq+prgjRJ6tOQ==
+X-Received: by 2002:a05:600c:8b2e:b0:495:7952:64df with SMTP id 5b1f17b1804b1-496c659f5a9mr31947615e9.36.1785244529680;
+        Tue, 28 Jul 2026 06:15:29 -0700 (PDT)
+Message-ID: <2916d9d7-9a9f-4e1f-9202-628532abe35f@suse.com>
+Date: Tue, 28 Jul 2026 15:15:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 05/24] XSM: make .iomem_mapping_vcpi() hook dependent upon
- HAS_VPCI=y
+Subject: [PATCH 06/24] XSM: make .kexec() hook dependent upon KEXEC=y
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Daniel Smith <dpsmith@apertussolutions.com>
@@ -129,9 +128,9 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <758c8410-a18e-45dc-8944-5913e5832397@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ef75cf/1785244506-364DBAE4-26D51F2F/0/0
+X-purgate-ID: tlsNG-c201ff/1785244530-F72B32A1-A26F38C1/0/0
 X-purgate-type: clean
-X-purgate-size: 1156
+X-purgate-size: 1292
 
 It's unreachable / dead otherwise.
 
@@ -139,32 +138,46 @@ Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
 --- a/xen/include/xsm/dummy.h
 +++ b/xen/include/xsm/dummy.h
-@@ -525,12 +525,14 @@ static XSM_INLINE int cf_check xsm_iomem
-     return xsm_default_action(action, current->domain, d);
+@@ -271,11 +271,13 @@ static XSM_INLINE int cf_check xsm_conso
+     return xsm_default_action(XSM_PRIV, d, NULL);
  }
  
-+#ifdef CONFIG_HAS_VPCI
- static XSM_INLINE int cf_check xsm_iomem_mapping_vpci(
-     XSM_DEFAULT_ARG struct domain *d, uint64_t s, uint64_t e, uint8_t allow)
++#ifdef CONFIG_KEXEC
+ static XSM_INLINE int cf_check xsm_kexec(XSM_DEFAULT_VOID)
  {
-     XSM_ASSERT_ACTION(XSM_HOOK);
-     return xsm_default_action(action, current->domain, d);
+     XSM_ASSERT_ACTION(XSM_PRIV);
+     return xsm_default_action(action, current->domain, NULL);
  }
 +#endif
  
- #ifdef CONFIG_HAS_PCI
- static XSM_INLINE int cf_check xsm_pci_config_permission(
+ static XSM_INLINE int cf_check xsm_schedop_shutdown(
+     XSM_DEFAULT_ARG struct domain *d1, struct domain *d2)
 --- a/xen/include/xsm/hooks.h
 +++ b/xen/include/xsm/hooks.h
-@@ -79,7 +79,9 @@ XSM_HOOK(int, irq_permission, struct dom
- XSM_HOOK(int, iomem_permission, struct domain *, uint64_t, uint64_t, uint8_t)
+@@ -61,7 +61,9 @@ XSM_HOOK(int, claim_pages, struct domain
  
- XSM_HOOK(int, iomem_mapping, struct domain *, uint64_t, uint64_t, uint8_t)
-+#ifdef CONFIG_HAS_VPCI
- XSM_HOOK(int, iomem_mapping_vpci, struct domain *, uint64_t, uint64_t, uint8_t)
+ XSM_HOOK(int, console_io, struct domain *, int)
+ 
++#ifdef CONFIG_KEXEC
+ XSM_HOOK(int, kexec)
 +#endif
  
- #if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_PCI)
- XSM_HOOK(int, resource_plug_pci, uint32_t)
+ XSM_HOOK(int, schedop_shutdown, struct domain *, struct domain *)
+ 
+--- a/xen/xsm/flask/hooks.c
++++ b/xen/xsm/flask/hooks.c
+@@ -536,10 +536,12 @@ static int cf_check flask_console_io(str
+     return domain_has_xen(d, perm);
+ }
+ 
++#ifdef CONFIG_KEXEC
+ static int cf_check flask_kexec(void)
+ {
+     return domain_has_xen(current->domain, XEN__KEXEC);
+ }
++#endif
+ 
+ static int cf_check flask_schedop_shutdown(struct domain *d1, struct domain *d2)
+ {
 
 
