@@ -4,46 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02DC2C53219
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 12:58:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1373958.1620862 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F32CDC53219
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 12:58:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1373959.1620870 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wohNr-0005pg-IE; Tue, 28 Jul 2026 12:58:11 +0000
+	id 1wohNw-00066N-Tq; Tue, 28 Jul 2026 12:58:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1373958.1620862; Tue, 28 Jul 2026 12:58:11 +0000
+Received: by outflank-mailman (output) from mailman id 1373959.1620870; Tue, 28 Jul 2026 12:58:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wohNr-0005pZ-Ew; Tue, 28 Jul 2026 12:58:11 +0000
-Received: by outflank-mailman (input) for mailman id 1373958;
- Tue, 28 Jul 2026 12:58:10 +0000
+	id 1wohNw-00066G-Qw; Tue, 28 Jul 2026 12:58:16 +0000
+Received: by outflank-mailman (input) for mailman id 1373959;
+ Tue, 28 Jul 2026 12:58:15 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>) id 1wohNq-0005pI-Aw
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 12:58:10 +0000
+ (envelope-from <neil.armstrong@linaro.org>) id 1wohNv-00065Q-2z
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 12:58:15 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wohNp-00ELxn-Nb
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:58:09 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wohNu-00EM1D-G4
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:58:14 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6a68a758-e002-0a2a0a5209dd-0a2a4506a76a-26
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 14:58:09 +0200
-Received: from [52.101.52.14]
- (helo=BL2PR02CU003.outbound.protection.outlook.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6a68a760-195a-0a2a45060019-3465340e071b-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 14:58:09 +0200
-Received: from CH8PR03MB8276.namprd03.prod.outlook.com (2603:10b6:610:2c1::14)
- by LV5PR03MB8436.namprd03.prod.outlook.com (2603:10b6:408:363::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.12; Tue, 28 Jul
- 2026 12:58:07 +0000
-Received: from CH8PR03MB8276.namprd03.prod.outlook.com
- ([fe80::8420:cc3e:23e9:7a0e]) by CH8PR03MB8276.namprd03.prod.outlook.com
- ([fe80::8420:cc3e:23e9:7a0e%3]) with mapi id 15.21.0245.009; Tue, 28 Jul 2026
- 12:58:07 +0000
+ (envelope-from <neil.armstrong@linaro.org>)
+ id 6a68a74c-bab6-0a2a0a5309dd-0a2a450c9bac-26
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 14:58:14 +0200
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <neil.armstrong@linaro.org>)
+ id 6a68a766-f479-0a2a450c0019-d1558031e93d-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 14:58:14 +0200
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-4955de8797cso24503605e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 05:58:14 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:5788:c4e1:cf35:7211?
+ ([2a01:e0a:106d:1080:5788:c4e1:cf35:7211])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-496c4615681sm77642695e9.11.2026.07.28.05.58.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 28 Jul 2026 05:58:13 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,168 +54,180 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=tRYxn0FUdmgg7SjdwgAAMI8aGVuokewYJ1Grt+IoMeRS1PWQJBDGTCcBLj/zqi50gJY+4d6f45GdeWge5f6eMQ26EHakvfbfAz7HEmQuK1qXp0SgdjBQzkQ4PvtYmIoLD6wCGo1pADgViQkZt1y5NkX4vagXljmwvrMcW/VoHcfaA0jO1OgiTpzY0NhLIlN7DISLTkGmvx6NatLH/1OlH+zfBHUHAj8rybBjoiyMVLgDTE43I/fVsOm3nPtp8NiEfhh9GBJ7RFxlhsOzjOPLMlRwpSJbWh95utuN+t62cw0JT1slyrm+Ah1+3DdFfQJ8P60o7CRV6krtptkXoq3cpQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pl+CNZzZchFuKaqFlBdG0xNrJV1Mh4ogyzcdf0ysjYM=;
- b=glu7Q2SsPw9eFtJ8XS7dvL5u67QurdRyxY96uQJ+lPKeq/5gEr2JyIe2Vtb/4Jq3S2f5L+EnOGVau53yzBnqVpPFcVj7I2lYLlUuL7rSXh9BOpxqB7osCH5Xy9G5H1LSvs8EOR6o9cfP6nBDMqcgCF7qPFWHWuO7NjEmD2HeIG1cz7cdL9layPJxjT1sT0FThBXU/hcx+cou2SmL+g4I80VHCqcmLLt1aLDyuC6rGuGoJ9oLyqj+aRDuUlnw+NO73+oz+Da8ddDfg2vpEYA6JcxBK7bWi/sGOcNWIgtZykCuBsVc80I+dSJgm4AwcO21H7vX2AmZFKgz+rFtpObRbA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pl+CNZzZchFuKaqFlBdG0xNrJV1Mh4ogyzcdf0ysjYM=;
- b=QvguYVM+2R/QwZBjJwOvC5ZCou4NPJ40srIQ9FLDclDXB+ETAsnZbX48z/ZthldgcHDQwwkTvndXLtnU+vOiahtN/KpiQcM17s9oGnKcFBzv7WLmOX5Y7L6PEof6VhJJm+EBEzfBRLkzZnQEVbpIxmEAo8EX9dikPBVwxOdd4mY=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <49b43341-5075-4989-a066-745373b0dc7e@citrix.com>
-Date: Tue, 28 Jul 2026 13:58:04 +0100
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Andrii Sultanov <andriy.sultanov@vates.tech>,
- Guillaume Thouvenin <guillaume.thouvenin@vates.tech>
-Subject: Re: [PATCH] tools/ocaml: fill arch_config for ARM in
- domain_getinfolist
-To: Julian Vetter <julian.vetter@vates.tech>, xen-devel@lists.xenproject.org
-References: <1785143496.8631fc262581453bbf619ec5b2062170.19fa2d80d54000e099@vates.tech>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <1785143496.8631fc262581453bbf619ec5b2062170.19fa2d80d54000e099@vates.tech>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO4P265CA0240.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:350::20) To CH8PR03MB8276.namprd03.prod.outlook.com
- (2603:10b6:610:2c1::14)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=linaro.org header.i="@linaro.org" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Organization:Autocrypt:Content-Language:References:Cc:To:Subject:Reply-To:From:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1785243494; x=1785848294; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:references:cc:to:subject:reply-to:from
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=hC8sRjnafAE4kvTJxwUbBr2JgmCMzJbZTFX3udFXll0=;
+        b=P1oJJbl2+ig7dupVa4S3qd7UJTQ0r27QK7GB7L1kCwczQnuoNUp0/vQWJyega/KiGG
+         MngeIJAfcHSZv7YxEVfRZGJXoDjNanLXSVzUSYUZ41oqcEjJRTDTz6jFjOSe2vlzn9KY
+         yw0wFZfW75nPrd3cNeRYlfh2+fU2lVRSjn4CHHGBd1lK71b17rl+1HgZAzZ9LdiT3sgS
+         uir9s/akSWoBEy1N2Ot098vcDXTw4qoYy3vjebC/lbdJM39SLvkBmhbTmQsBNbqktasQ
+         ge8o+fOcLnpmoWJAFtCeyBQ9YT6bLOzyPlJXV0j4IkhBpk4DjI7kexQS8TpLxqJF63+t
+         GN1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785243494; x=1785848294;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:references:cc:to:subject:reply-to:from
+         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=hC8sRjnafAE4kvTJxwUbBr2JgmCMzJbZTFX3udFXll0=;
+        b=UP7GOLFOXrmK9/QGcHNYncIJe5fRRxv6l2UEWprLg+NMNoJACFfSZIVe7WSx6eLf4D
+         sEtqLHSGgepNMoFXnVHaHBJFeFV3RMY5UsCxeVx4IqlCV1Qt4VAFk8tg1peiZPqRxLf9
+         MLsDh0VnWOcKOo48L8Cex8/kHS0eySZm7zEPC4h77jSAlOn+TZ80GjewSsZT7bNuzlEv
+         vYveRcIqabrI6XN3cEzWEqLeN5VmLG1rBGry5r57iNDEL1VbI1JTX6+tkLMXWZ3ZqQd2
+         zb/q4JEFqbvLovFOLH+LoEftF0ZLLqrvQEDvY36ZNdPsZCrBnImpKvXkn4/ImB/5zu37
+         Wu6A==
+X-Forwarded-Encrypted: i=1; AHgh+RrJJpCOhHfFVChmj6aE3ZF+fAxM7XP6dwx9O474d/+HxwvWccs+q+HdCWBe0SYreGw7+slcqqKhUnw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzkJ2FDdBIRYuLgErPmvVhMuUVyPjCC8AgntzK1Lm/QPjqKr/Cb
+	5GuC6aXnjGauxixKIET/lk/idu/lAHhJUbTcRkZE1kGIXsRc4qtuLF1YIqxm4ms7zlI=
+X-Gm-Gg: AR+sD12KISQcpRkTtukEHEfluHbcBPcrOSSzD9ohlQ38Gui3ufIRgThpkQ3uLIT6T+r
+	WgI0BUFm3DUrHvVDzewmPxmmgC+bJq2tvbNFPoDSMD3Gx8Lnpm09SfUwUUW6gcFamBhgFSVRgbF
+	fOvQVMmszXcmcopcgB1wsAYgNINQiFWCGkapyhRk+WjEVYMeDCXumGIB+2ye+NotMp8eShDFD7F
+	3znXDbRLL0J/VbWiVfE5/5l0W2wwIhS9+c8jUT/wbyGT0e4vEelp1jiQy1efmcEWS8eMQtf6Xof
+	zj1Wj2ZQCg/UKKDdr+Ew2IaxvyZG4vJWPt/1hahudNmfIf6QIgpRF/75lGoOuFAqd9vL+TspzEy
+	lzbSZ7nBL8woO5aXrCKm6+W0PQ8VHiViupDfsgXoQ3/KSr6LKRTHwY1tyqkSR4t5dSl/Wgi8ojx
+	gq5dxin1XkRDwZQxaidqzCPehVUZFS68nkz9eMGiwuUYJ1YbnRHoBEExwPmTKNdzXV4OY+
+X-Received: by 2002:a05:600c:3b1e:b0:493:bd2a:93bb with SMTP id 5b1f17b1804b1-496c653d055mr24700215e9.3.1785243493668;
+        Tue, 28 Jul 2026 05:58:13 -0700 (PDT)
+Message-ID: <df81c03b-6d2b-4c5d-8818-1aa42c146d44@linaro.org>
+Date: Tue, 28 Jul 2026 14:58:11 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8276:EE_|LV5PR03MB8436:EE_
-X-MS-Office365-Filtering-Correlation-Id: 72f799f5-9dbd-416b-7467-08deeca7ded6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|23010399003|376014|1800799024|56012099006|11063799006|10067099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	7NS6ETfRGj1kAFrhMq0B8lJrvHrA3gatPWWwtibsE1R3OAqjQDQUrUwfrY6y1Ac0sRUupbNkMk9YmrJ4a7ed865vp79SOF241NVvnZ/pUEHKUEMJChRklEFBh9qtoPyAKGTsXxj2th51I8wcuSv55tWPfuq+AM57bBt9aHFElPx/gaurB4s/tv1vAtNeGsxnfxOoqQUQUUC1+0GwGiCWXsF957KQd2VlfQ77V6ZLwQaQoz/MrBGdUq5v8x8S4qOqIZwNzusfpVGk+Po0d/uLwrMyprboXvpu/jXMfGf37JR6JzVp6F9POqgjyRIiZJz43Mh+7k/DAMuvICbzzqGZILBD9xCsqooQ/iG3SALuFrJI6KsTy8vBv9dFdbwdwL6IE4+AFJEGPb6uVOvQYSXzk/84iegMd1v3eEVlHdWF2pZugivtiXSybI6FOSyzlrH2cRwdmgh9kIH16vCKSzPccSz5zecfxYC4Ue88eT9eQ/5mzLa1mJFf8GJw65Vj+ighTB7dwm5EjsWYRgZ8kBXyfeYvFK2fmA9Y6IN0aXhCrJAPcq6PSjbwXr0GbkNqzHiTgYxl55lubQGm82r0EzBK1AImXR1rPAi8hmn1ZZtsqkEfTrIUJYrGRcv/bmnvAXop7eScyHyw/1Jz+7xuyxCD+bFvH0CBANczsLYefTSVAyY=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8276.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(56012099006)(11063799006)(10067099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?aWIyQjRKWGJTbXQ5RzM3NEJYWnl4d2JXYUxZWklCczB3YzlmNkFCQ1k4VWVv?=
- =?utf-8?B?Y290cElQMHhkNkhlYkJ1aUJCVEx0d3dTbVhMc3IrdzB1aFNNNU1nVFZNUHFN?=
- =?utf-8?B?c2UxR2QwWTZ0KzBUcnc4Y0FWN1ZLbTNWTUQ3cG5hZG5kbmcyTmNJNmVoSlpN?=
- =?utf-8?B?OGcwQnZTWXdSTXlRdnVRaDI2a1h4TU0vM0lwdFUrV2c4cDJGL1MxOHJVSnRS?=
- =?utf-8?B?OEMrWGdGbWduSlJ4VUJWY1RadzR5eFU5MlNmbldybjM3YmY1OC96NlRYMlpx?=
- =?utf-8?B?QStvY0ZvMGNqT215SExMbGVCQnFxWkw1WlhIYnZIY2hKdWdCeFhCV2xibkJl?=
- =?utf-8?B?NU1sNzN2U3ZpWW14cUYzSUdXM0crVmFZZ2NrN1phTkU5SlZ4eUNySnB6em9T?=
- =?utf-8?B?TjZKWEJ2bnFWdGZWcTM3VzZXRzlsZ1NtWWZIbGVsSVVmUzloRlplM1QwalVn?=
- =?utf-8?B?YVhHTzczaG56cjloaTkrbWpzaW5KbmoyZDQraWxFM2VkZjQyTUNKMTBWRE01?=
- =?utf-8?B?OXRxQlpDV1lsTHBEZnhUVkFsd2EzZ1NzeUJNdDBWRUxnSXUvVENDei80RmVz?=
- =?utf-8?B?d21DSm5qRW02SXZWQ2dOa1RGNWxaYmxOeVlFUFpPYUdqK0I1Y3RCNi9GSld3?=
- =?utf-8?B?TXhPM3NOdEF6bnpSTFV1Yk5HU0dKZzNGaXZSdlYvR25KczhpQWF6ZFNmL3Z3?=
- =?utf-8?B?SkR4N1dlczUveVV5N2VISnNvZ3FlVHBXdWZKMWR5SGoyb3pRWHJDNTNMM2Jw?=
- =?utf-8?B?RlprZDh0d3dGamVWRHphcWhGMkFkSXhkRlRpZVByS05QNHRSa3hNdXkrSUVK?=
- =?utf-8?B?YWJMdktRamR2N1ZqMEY4d0w4c1dnVFM4aEVUdTZGSnBtNUFMajBLdzNqN3lt?=
- =?utf-8?B?eVNsa3QyVFU0TEQvdFR2Um1EK1FOSUExYjRRMldRbGpIbWtOL0NDeGk3STZY?=
- =?utf-8?B?WEJwZVRIc2QzWHArTlhIb1lwTW03bGpTVFB1UHV3STNDYkhzK1U0ZGVPMkYv?=
- =?utf-8?B?Q0p3cXR3MFptNFNtMTVJK2VUTVQvUFFhZTQ3bU9WbkRCblNyTU8vcXFld2c2?=
- =?utf-8?B?Z2FuaTU4eDhMRkFyZVZBdmg2NmZ0cFowWSt2Z2VDNmh4VWNWZ0d0bURVV1kw?=
- =?utf-8?B?NmdUVDJFRTVjL3JqdEdBM2lZMS9ZQTMxaWdNdm5jaExzOHRKVW1qenBpd0FF?=
- =?utf-8?B?aERJbWdDM3ROM0xYZmNwbkFMbjNXRmJUL05heFdhMFRieEw1MUwwSytIWm9S?=
- =?utf-8?B?eG9HWUVIeXpJYzZZakhDUXlJeTlmRFVReVFrZmlYVG1xUGI2RXVaajdNdEQz?=
- =?utf-8?B?dG9ybENLeHVYYnVOaENZenFFUlI5K2tEZUtleXkvdTZwcXVRZzMvZkRWcWpy?=
- =?utf-8?B?YVc4MkpRSlJwZXB4TndtbFduWXczeTNrV2o5ZlovdlgwZmk3M0Z1ZHN0OVp0?=
- =?utf-8?B?RlVhUjQ0ZmlWeDlKblhnYlkrQWNpZ2dPMmtVMStWT0F5L1I4RmtGSTVwbVJz?=
- =?utf-8?B?anFPbjRkOTAzMzcwOCs3RjZqYVI2Mnl6UmtYNFFCSFpGTnRXdEE4VFBuM2U4?=
- =?utf-8?B?V0V0RlNCVWZFS2U0STMwaGFMZ3ljMlVYZXlaK3QzM0NPSHBTM3RqSy9aTFlj?=
- =?utf-8?B?VlJ2aElMY284L2h0L3p6UGp0dTVEVjMyVDhaMUdpRExocVdVYkNZYjdxNUVq?=
- =?utf-8?B?Rzl1dkt2UCs2d2duaVlXZ0E4N2R1Z242TTlvOFJOOWplaXdYNlkwYnE3ZHdu?=
- =?utf-8?B?WnBvRDgvdDJ2aWNEb2FLckVZUzdneHhBZ2ZsWFMxVkp5dnNWTk0rR1NGNCs4?=
- =?utf-8?B?NHlsMUtlVVV3TFU2OFhKVXJyelkyclRkWncxZFNMN3pYN29OVW1EcFBlVFc3?=
- =?utf-8?B?NmJjcG04TWRzMHQySVVuWTd5bTYyNk5LNEs5c212V256b0ZVSWhXUjB3RGQv?=
- =?utf-8?B?cmNnN1V2WUdhdVFvSnljZnU3NHcyTVpyellPcUFBRW9wUEZ4SlppSFl4Ym9q?=
- =?utf-8?B?V2N5bldWMm8rMStUOVdkTmlRYVByOFRTdzFqQkVOdmtzdGFYZUZMajV3SWZ5?=
- =?utf-8?B?aVF3VzdhN3RaeDQ5ZWk4T0ZNNHdEejRXMldtSWNaMWFKaXFGVU1sWkF6dHA2?=
- =?utf-8?B?KzNURE9oSTFWQXJVT1V2S3BuQ00vQnNMYUUvSXMyRTFLWUJaRk9RZ3dVbmEv?=
- =?utf-8?B?ck02R1l4Q3R0dkxWNm9uM24wTjIzeTN2am1KenJoamRpT1dlOFpkcnRhTG8z?=
- =?utf-8?B?WFd6eElBbkNwMlpCNlQ4dERhZ2xIODBvNmJLZ21YRGdEaTZxdm9XSENFQml4?=
- =?utf-8?B?enNqcTdRcW1CYWpHRldrN3RtK3czYTIxZXpraFpFSUx1eUJKZllWQT09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 72f799f5-9dbd-416b-7467-08deeca7ded6
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8276.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2026 12:58:07.6073
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: suKQdjNpZVk0SblOezXk08TInFHJxBRnmUB4xhNE0aTUtAY0AK9+P+7Uvu7Msk0BiheCDSr3Fqs+5a75Cd1dLM91H5qDhqsmpTUBRiYl8tA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV5PR03MB8436
-X-purgate-ID: tlsNG-16d1c6/1785243489-FD00977B-FB5E03DB/0/0
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v16 3/3] of: Respect #{iommu,msi}-cells in maps
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>,
+ Nipun Gupta <nipun.gupta@amd.com>, Nikhil Agarwal <nikhil.agarwal@amd.com>,
+ Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+ Robin Murphy <robin.murphy@arm.com>,
+ Lorenzo Pieralisi <lpieralisi@kernel.org>, Marc Zyngier <maz@kernel.org>,
+ Thomas Gleixner <tglx@kernel.org>, Rob Herring <robh@kernel.org>,
+ Saravana Kannan <saravanak@kernel.org>, Richard Zhu <hongxing.zhu@nxp.com>,
+ Lucas Stach <l.stach@pengutronix.de>,
+ =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+ Manivannan Sadhasivam <mani@kernel.org>, Bjorn Helgaas
+ <bhelgaas@google.com>, Frank Li <Frank.Li@nxp.com>,
+ Sascha Hauer <s.hauer@pengutronix.de>,
+ Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>, Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ iommu@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
+ devicetree@vger.kernel.org, linux-pci@vger.kernel.org, imx@lists.linux.dev,
+ xen-devel@lists.xenproject.org,
+ Charan Teja Kalla <charan.kalla@oss.qualcomm.com>
+References: <20260603-parse_iommu_cells-v16-0-dc509dacb19a@oss.qualcomm.com>
+ <20260603-parse_iommu_cells-v16-3-dc509dacb19a@oss.qualcomm.com>
+ <3f5c974f-425d-47a5-9fda-e05de1f39d79@linaro.org>
+ <fuqnxdknkajqotzmmlknwnthqpku7as5kpvmgogexl5bi7x6y4@tthbasf5lqvc>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <fuqnxdknkajqotzmmlknwnthqpku7as5kpvmgogexl5bi7x6y4@tthbasf5lqvc>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d25034/1785243494-03AD4A5B-131A5FA0/0/0
 X-purgate-type: clean
-X-purgate-size: 634
+X-purgate-size: 2899
 
-On 27/07/2026 10:11 am, Julian Vetter wrote:
-> In the function alloc_domaininfo() the arch_config field in domaininfo
-> is only filled inside #if defined(__i386__) || defined(__x86_64__). On
-> ARM the field is left unpopulated. caml_alloc_tuple() does not zero new
-> blocks,
+On 7/28/26 13:34, Dmitry Baryshkov wrote:
+> On Thu, Jul 23, 2026 at 03:17:24PM +0200, Neil Armstrong wrote:
+>> Hi,
+>>
+>> On 6/3/26 09:13, Vijayanand Jitta wrote:
+>>> From: Robin Murphy <robin.murphy@arm.com>
+>>>
+>>> So far our parsing of {iommu,msi}-map properties has always blindly
+>>> assumed that the output specifiers will always have exactly 1 cell.
+>>> This typically does happen to be the case, but is not actually enforced
+>>> (and the PCI msi-map binding even explicitly states support for 0 or 1
+>>> cells) - as a result we've now ended up with dodgy DTs out in the field
+>>> which depend on this behaviour to map a 1-cell specifier for a 2-cell
+>>> provider, despite that being bogus per the bindings themselves.
+>>>
+>>> Since there is some potential use in being able to map at least single
+>>> input IDs to multi-cell output specifiers (and properly support 0-cell
+>>> outputs as well), add support for properly parsing and using the target
+>>> nodes' #cells values, albeit with the unfortunate complication of still
+>>> having to work around expectations of the old behaviour too.
+>>>
+>>> Since there are multi-cell output specifiers, the callers of of_map_id()
+>>> may need to get the exact cell output value for further processing.
+>>> Update of_map_id() to set args_count in the output to reflect the actual
+>>> number of output specifier cells.
+>>>
+>>> Signed-off-by: Robin Murphy <robin.murphy@arm.com>
+>>> Signed-off-by: Charan Teja Kalla <charan.kalla@oss.qualcomm.com>
+>>> Signed-off-by: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
+>>> ---
+>>>    drivers/of/base.c  | 168 +++++++++++++++++++++++++++++++++++++++++------------
+>>>    include/linux/of.h |   6 +-
+>>>    2 files changed, 135 insertions(+), 39 deletions(-)
+>>>
+>>> diff --git a/drivers/of/base.c b/drivers/of/base.c
+>>> index d658c2620135..ac7961cbab94 100644
+>>> --- a/drivers/of/base.c
+>>> +++ b/drivers/of/base.c
+>>> @@ -2116,19 +2116,49 @@ int of_find_last_cache_level(unsigned int cpu)
+>>>    	return cache_level;
+>>>    }
+>>> +/*
+>>> + * Some DTs have an iommu-map targeting a 2-cell IOMMU node while
+>>> + * specifying only 1 cell. Fortunately they all consist of value '1'
+>>> + * as the 2nd cell entry with the same target, so check for that pattern.
+>>> + *
+>>> + * Example:
+>>> + *	IOMMU node:
+>>> + *		#iommu-cells = <2>;
+>>> + *
+>>> + *	Device node:
+>>> + *		iommu-map = <0x0000 &smmu 0x0000 0x1>,
+>>> + *			    <0x0100 &smmu 0x0100 0x1>;
+>>
+>> So the sm8650 PCIe controllers has:
+>>
+>> pcie@1c08000:
+>> 			iommu-map = <0     &apps_smmu 0x1480 0x1>,
+>> 				    <0x100 &apps_smmu 0x1481 0x1>;
+> 
+> To silence the warning, update the iommu maps to:
+> 
+> 			iommu-map = <0     &apps_smmu 0x1480 0x0 0x1>,
+> 				    <0x100 &apps_smmu 0x1481 0x0 0x1>;
+> 
+> 
 
-Hmm.  Yes it does.  caml_alloc_tuple() calls caml_alloc() which
-initialises with Val_unit everywhere.
+Will do, I was surprised none of the DT were fixed.
 
-It is only caml_alloc_small() which doesn't allocate, and potentially
-ends up with garbage.
-
-Do you have details of the crash?  I think it ought to be a plain
-NULL(ish) deference from trying to interpret Val_unit as a pointer.
-
-~Andrew
+Thanks,
+Neil
 
