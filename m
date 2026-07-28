@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 414F4C53219
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:22:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374381.1621539 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25C71C54F4C
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:22:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374391.1621549 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woihD-0002xw-DO; Tue, 28 Jul 2026 14:22:15 +0000
+	id 1woihb-0003VQ-Lm; Tue, 28 Jul 2026 14:22:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374381.1621539; Tue, 28 Jul 2026 14:22:15 +0000
+Received: by outflank-mailman (output) from mailman id 1374391.1621549; Tue, 28 Jul 2026 14:22:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woihD-0002xn-Ad; Tue, 28 Jul 2026 14:22:15 +0000
-Received: by outflank-mailman (input) for mailman id 1374381;
- Tue, 28 Jul 2026 14:22:14 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1woihb-0003VH-Iq; Tue, 28 Jul 2026 14:22:39 +0000
+Received: by outflank-mailman (input) for mailman id 1374391;
+ Tue, 28 Jul 2026 14:22:37 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1woihC-0002xG-Fr
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:22:14 +0000
+ (envelope-from <jbeulich@suse.com>) id 1woihZ-0003Sw-OR
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:22:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woihB-00HOAI-T1
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 16:22:13 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1woihZ-004xTM-5A
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 16:22:37 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68bafb-5cb7-0a2a0a5109dd-0a2a450bc7ee-44
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 16:22:13 +0200
-Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a68bb1e-2eae-0a2a0a5409dd-0a2a450880f2-28
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 16:22:37 +0200
+Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68bb15-b7e8-0a2a450b0019-d155dd2eb983-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 16:22:13 +0200
-Received: by mail-wr1-f46.google.com with SMTP id
- ffacd0b85a97d-47f84023916so3909473f8f.3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 07:22:13 -0700 (PDT)
+ id 6a68bb2c-f659-0a2a45080019-d1558032c93b-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 16:22:37 +0200
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-493b966dd74so24570335e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 07:22:37 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f85c6f076sm59359286f8f.34.2026.07.28.07.22.12
+ 5b1f17b1804b1-496c44a873csm85807545e9.2.2026.07.28.07.22.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Jul 2026 07:22:12 -0700 (PDT)
+ Tue, 28 Jul 2026 07:22:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,49 +55,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785248533; x=1785853333; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785248556; x=1785853356; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=YAcoPIBVIk35F4UuhNNjahrwo2SklVXZ2m2wuexNepE=;
-        b=NQT3b/l1U/0AHnFoVyVGdUrKKFGRn8j6g5egzmJbO4CCblTXk6M4llqgKZrtjbPtIg
-         uyRnzuNLtjmp7VQYlfi0C0a8w8UQtrAhVlefLM3UizzB8Ue3lGMFifoLK4fhkCl1czDI
-         1JJHcyVbuwSzwsoPzkCAehhBKDkK+2tPHd74cjZOKGNF5kMhd3p+nAtS+u8et5A9om/x
-         0lGCXfP5E1LJyfHZZi5TCpCBS4/h62be4ICpHwxi5sZvIXDk76x+esTd8WEPfA3BlXK5
-         7crs2NTr2ZBtZZwFeJ/rhPYRB0e/5L4E9T9LOCVTRz7Wc2Dxl8BU35IrghmONgCQr1r5
-         OHjg==
+        bh=xzunNfHOxzhHTSPk1dD1REpFH01TRuP3mjZJ3vTTN8k=;
+        b=eLA93yqF4LR0hFlDou/xeKlw5KABpSb/Mup8kNmCEbASP0MgpD85jUkerJepjllZ1N
+         8BkpSefeBza2K5D5EXHzGOn5wB2IaFTDpXTAJtV4x4+RzPeQU9glutoMBhRGW+HXv/Jw
+         r3ROGKTa7r9uxm0X0S2QHH+U2Z0/L92UaacpUH8VlQwnHimse7+UK4WvZWedMv82DPPr
+         7iV16mU2kByI8jWDNECTN3HkjYz5dOD6C2w11LZtu3/lwqIwLvkzx6QdmvrkXur3pBVP
+         81bYJ37oSfeGzxRqEhn/POE8flwGun60tLRZxsFNDYJmegESb6W2QwzluRBj9OonUnxK
+         QBHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785248533; x=1785853333;
+        d=1e100.net; s=20251104; t=1785248556; x=1785853356;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=YAcoPIBVIk35F4UuhNNjahrwo2SklVXZ2m2wuexNepE=;
-        b=NO8wQ4YtuZT7DSe/R+npHfP87Q8zGu/gculo4nluzaNUuN0vLLW7QADQ/tAL1L95SD
-         cfwkHbzuC81j3WVSZG9IC7CK9j+xLdK3p0+4MTqnHnbXRTacuBt54Wk+w0xrhIT0V8jD
-         7xh57B9PEw/L1wPybsKFw/6nSgNqbYpm2aUWTJpHEOmLFjO6HOaPj/TGUelp1ILi6Sp+
-         5JdH1L3cy2EFOd2hgzswZGHNiaGNQWINATqnBM+3EPIBNR9P910lPciQMkIiR5ut1T7Q
-         BsAv6x0aiDCGpfTwRLG0k4crfCD2BjOg9dJsiw1ZA7W+miyKZVWCea0amg+KbV/v89kO
-         XN8A==
-X-Gm-Message-State: AOJu0YwTxgKYLiWaOcCk7fD2JiCf9TvGE6GZMauRthQWQ4kY3kJARUpW
-	gtZH1+9cxRl+4Qi4Ze7IK0s88mf7oAZec+axdpIaX4GIoeceJ2QKPAkm5XHxtv31zySA8O+ETrC
-	ifwHGOQ==
-X-Gm-Gg: AR+sD12nmcPFH2Nwq84+IJ3jR+z0ggNs8K1Bw6Tpl1wHzUYZxdG+06hrGRaHIzSdVUg
-	Hb8UQ0KmA+SNAdxUFEpaDPYz39S9VyGYN9oodKAf88kMc0fS6KrC+H6HDugs3Z/KNfleWxFzSck
-	q0U29Sgpt2GgUvOIG4JQNc7t8dVZzt2GWlRUse3Oqp/sFO7x3QXoqyVFLfAMrnQmQQpOo6qxGhL
-	XzQvsQ0nSkCO/gi2uNq528SKkzkgddLInwYu83ugb4GqT9uEIOerO+AfjPIuBUkgxSLkFdT95+d
-	/GComwCnD9ue1mzsWlOyXi3/efwTmfyQjpQZgvtoUPLazpLUzMgGeBZYvzXHpqcX77QDpQmzERc
-	SfknWokGuTKerg43ST/3gUJzRGUqt85H9PchsKu6+MCak8ypmA49K4gvPdTafOnXeALBVkmS5wX
-	Q/LxdbB+UJsP3Qq7sVg5ASeudtGZepr5xs3ubQHyrxSx0yqkLtmaqLTQgHqRnqDUtbkjFKf+X+g
-	CHp
-X-Received: by 2002:a05:6000:22c3:b0:47f:9567:e63b with SMTP id ffacd0b85a97d-47fb1f26115mr3657417f8f.55.1785248533183;
-        Tue, 28 Jul 2026 07:22:13 -0700 (PDT)
-Message-ID: <274756a3-83da-4594-8909-25a3a9eb94d2@suse.com>
-Date: Tue, 28 Jul 2026 16:22:11 +0200
+        bh=xzunNfHOxzhHTSPk1dD1REpFH01TRuP3mjZJ3vTTN8k=;
+        b=Xdc5XD+iEa4IxGnFBak/G5RHGo4zyRbeqnbwM06s7kCPCreGc3smuzTZ1ZHJbrkyIn
+         1ziT4LewEhv+9dWK/a/449Ruf9QKeAM5h0vWIKEUeKDVBxBRGX/z67Jhf3PN/jZ7IRuG
+         eD60z643lP7BfHakREj/U7BNSs4YdKlKIPGnVfymDxYNDtp0ClmDqdbqBV2Fg/6wgw7k
+         fDl79DjSXA/zERbD96kmwaL6YhAP0wIlsOaN/lRtxQ4O7kWdIzxRJXVTBCH+Eov4VRv0
+         VpQmC04Pg9PZJsiLBjAQlusO6faIKwlO7rP9ApB4CCfFwDeNlwZEQ92SvBc+fv1holMt
+         E9kg==
+X-Gm-Message-State: AOJu0Yyi4MC4ku0OGvL24BxdoKMHLA5kO1pW3Py/2Ql9T8jIKPe7xJDv
+	FqrjtOXXbyMFdd9WTqNDsiAVotkc2fl0MJLto3bAqyvBazmGWqUbN/gZDu38ThFOXyU+GkXWgr8
+	bOUAsiA==
+X-Gm-Gg: AR+sD11Vws+2fpvMZPiGMYeNq42GJFznq/OIurkfQ52XVPv04wyMgFeCzS+gALzFkSh
+	g3RbSVhfjGVnhNXjbbRUdcshb76amS6K41EeMc83W17dfL1FTIpQGpqi9BBqhnpETTatWCZUWPa
+	lMIiIQ0HcVdBcibbcndyFjhrMwwceKJyX5wLwE3XR2w0zeSSFJEzXJ8c2wuvWPPeGYw4gHW4i7b
+	jCOhkC139kEcttF+dne2cm4gVU7Aky9j1T2+2d5eabfCTuuddVsyTjh57DnfVJJakojQ4rOyWKi
+	u31xJfTgatBndY8okzCvQKp3E9r5o+kGLOeC6OJ79HEAuhkcyyBvvxVnDVvvk690j0MsEFFpMii
+	NQAq7TgGxg4ID9MXqJ8sfN8mjvPtaq66J1kNmj254a1NV0RyHChbGVZejYhzAsEFER2BP53ozJw
+	Ybcu/2J7OhGYyDcORSVTGWE51gyTgOjY7Kiw62fW8SHZ0X8PamvTD/cJAHlfz8YtmLqX+mBNGVd
+	ReE5AKCBbYDL24=
+X-Received: by 2002:a05:600c:c16d:b0:493:c8a6:b517 with SMTP id 5b1f17b1804b1-496c6588c3cmr27756545e9.38.1785248556294;
+        Tue, 28 Jul 2026 07:22:36 -0700 (PDT)
+Message-ID: <ed14e7f9-6e65-4646-84ae-0b167383a50f@suse.com>
+Date: Tue, 28 Jul 2026 16:22:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v15 05/10] x86/shadow: make clean-dirty-bitmap post-processing
+Subject: [PATCH v15 06/10] x86/mm: make more of log-dirty mode enable/disable
  preemptable
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
@@ -130,180 +130,328 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <68c16600-a4bf-4060-a1fc-56c4ae655b03@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1785248533-A86CA9EA-898524F5/0/0
+X-purgate-ID: tlsNG-c1860d/1785248557-CED4087B-82A37201/0/0
 X-purgate-type: clean
-X-purgate-size: 6534
+X-purgate-size: 10439
 
-What this currently amounts to is blowing the domain's tables. To make
-that call preemptable and to record state in a race-free manner, it
-needs to be moved inside the paging-locked region. Since the
-corresponding HAP function wants to acquire the P2M lock, the hook
-invocation itself cannot be moved. Call the shadow function directly,
-and prevent the hook from being invoked in that case.
+So far only part of disable was preemptable. Shadow code, however, will
+need to purge all earlier shadows, which may take quite a bit of time.
+In the general (paging) layer arrange for the hook functions to possibly
+indicate the need for resuming. In shadow code leverage "enable" already
+calling shadow_blow_tables(), simply making that call preemptable, while
+adding a call to that function for "disable".
 
-To prevent "extra" accounting from being done more than once in
-paging_log_dirty_op(), the mapping of the top level table also becomes
-conditional (upon the subsequent loop doing nothing anyway).
+In order for resume state to be properly guarded, the paging lock now
+needs acquiring in paging_log_dirty_{en,dis}able(). HAP's need to
+acquire the P2M lock makes it necessary to allow the hook functions to
+drop the paging lock.
 
-Further note that this now also avoids sh{,adow}_clean_dirty_bitmap()
-needlessly being called when no paging mode was enabled at all for the
-domain. (The function continues to be called even when log-dirty mode
-isn't enabled.)
+Note that when requesting resuming, the hook functions must not have
+changed the paging (shadow) mode yet; the actual mode change part is
+expected to be performed quickly enough to not require preemption. This
+is why "blow" (done ahead of mode switching) is preferred over
+"detach-old" (occurring with mode already updated). While this may mean
+more purging being done now for "disable", starting from a clean state
+afterwards may be better overall anyway.
+
+Note further that HAP code is, except for the locking adjustments,
+(intended to be) largely unaffected, for not having a need for
+preemption checking.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-The hook functions were/are slightly mis-named, as they don't clean
-anything. However, to keep names similar (and hence possible to grep
-for) the new directly called function is still named in the same manner.
+Locking isn't really nice here, but I see no better way given HAP's need
+to acquire the P2M lock in its hook functions. Things may end up a little
+better if doing away with the hooks and handling HAP and shadow (in part)
+separately in paging.c, and then building upon HAP not needing any
+preemption checking. Yet whether purging the hooks right here is okay is
+unclear (see also "x86/shadow: make clean-dirty-bitmap post-processing
+preemptable", where the question also arises).
 
-Of course we could purge the hook altogether, calling the HAP function
-directly as well. If so, question would be whether to do so right here
-or in a public follow-up (perhaps the latter).
-
-In the course of doing this work I've noticed that libxenguest uses
-XEN_DOMCTL_SHADOW_OP_CLEAN even on the last iteration. Wouldn't it
-suffice to invoke the non-cleaning (peek) operation there instead,
-reducing the overhead of shadow's post-processing?
+See also the comments in "x86/shadow: 1-bit-disable doesn't need to
+detach old tables". Specifically avoiding shadow_blow_tables() here
+would mean pinned shadows wouldn't be needlessly unpinned.
 ---
-v15: Fix !SHADOW_PAGING build.
-v14: New.
+v15: Add missing domain_unpause() to paging_log_dirty_enable()'s HAP
+     path. Re-base.
+v14: (Re)check and update preemption state under paging lock. Adjust
+     locking accordingly. Re-base.
+v13: New.
 
 --- a/xen/arch/x86/include/asm/domain.h
 +++ b/xen/arch/x86/include/asm/domain.h
-@@ -234,7 +234,7 @@ struct paging_domain {
-         union {
-             struct {
-                 unsigned long done:PADDR_BITS - PAGE_SHIFT;
--                unsigned long i4:PAGETABLE_ORDER;
-+                unsigned long i4:PAGETABLE_ORDER + 1;
-                 unsigned long i3:PAGETABLE_ORDER;
-             } log_dirty;
-         };
---- a/xen/arch/x86/include/asm/shadow.h
-+++ b/xen/arch/x86/include/asm/shadow.h
-@@ -56,6 +56,9 @@ int shadow_domain_init(struct domain *d)
-  * paging_vcpu_init() in paging.c */
- void shadow_vcpu_init(struct vcpu *v);
+@@ -199,6 +199,11 @@ struct log_dirty_domain {
  
-+/* Post-processing necessary after the log-dirty bitmap was cleaned. */
-+bool shadow_clean_dirty_bitmap(struct domain *d);
-+
- #ifdef CONFIG_SHADOW_PAGING
- 
- /* Enable an arbitrary shadow mode.  Call once at domain creation. */
---- a/xen/arch/x86/mm/paging.c
-+++ b/xen/arch/x86/mm/paging.c
-@@ -473,8 +473,9 @@ static int paging_log_dirty_op(struct do
-         goto out;
-     }
- 
--    l4 = paging_map_log_dirty_bitmap(d);
-     i4 = d->arch.paging.preempt.log_dirty.i4;
-+    if ( i4 < LOGDIRTY_NODE_ENTRIES )
-+        l4 = paging_map_log_dirty_bitmap(d);
-     i3 = d->arch.paging.preempt.log_dirty.i3;
-     pages = d->arch.paging.preempt.log_dirty.done;
- 
-@@ -542,6 +543,19 @@ static int paging_log_dirty_op(struct do
-     if ( l4 )
-         unmap_domain_page(l4);
- 
-+    /*
-+     * In the shadow case post-processing may take long and hence needs to be
-+     * preemptable. Since continuation state is protected by the paging lock,
-+     * we need to call its function (and record state) before dropping that
-+     * lock. The hook invocation further down therefore will be skipped.
-+     */
-+    if ( !rv && clean && paging_mode_shadow(d) &&
-+         !shadow_clean_dirty_bitmap(d) )
-+    {
-+        d->arch.paging.preempt.log_dirty.i4 = LOGDIRTY_NODE_ENTRIES;
-+        rv = -ERESTART;
-+    }
-+
-     if ( !rv )
-     {
-         d->arch.paging.preempt.dom = NULL;
-@@ -569,10 +583,12 @@ static int paging_log_dirty_op(struct do
- 
-     if ( pages < sc->pages )
-         sc->pages = pages;
--    if ( clean )
-+    if ( clean && paging_mode_hap(d) )
-     {
--        /* We need to further call clean_dirty_bitmap() functions of specific
--         * paging modes (shadow or hap).  Safe because the domain is paused. */
+     /* functions which are paging mode specific */
+     const struct log_dirty_ops {
 +        /*
-+         * We need to further call HAP's clean_dirty_bitmap() function (shadow
-+         * was dealt with above).  Safe because the domain is paused.
++         * enable() and disable() will be called with the paging lock held.
++         * They may drop the lock (but not drop and re-acquire it), but then
++         * need to indicate so by returning a positive value.
 +         */
-         d->arch.paging.log_dirty.ops->clean(d);
-     }
-     domain_unpause(d);
---- a/xen/arch/x86/mm/shadow/common.c
-+++ b/xen/arch/x86/mm/shadow/common.c
-@@ -71,7 +71,6 @@ DEFINE_PER_CPU(uint32_t,trace_shadow_pat
+         int        (*enable  )(struct domain *d);
+         int        (*disable )(struct domain *d);
+         void       (*clean   )(struct domain *d);
+--- a/xen/arch/x86/mm/hap/hap.c
++++ b/xen/arch/x86/mm/hap/hap.c
+@@ -184,7 +184,7 @@ static int cf_check hap_enable_log_dirty
+         return -EBUSY;
  
- static int cf_check sh_enable_log_dirty(struct domain *d);
- static int cf_check sh_disable_log_dirty(struct domain *d);
--static void cf_check sh_clean_dirty_bitmap(struct domain *d);
+     /* turn on PG_log_dirty bit in paging mode */
+-    paging_lock(d);
++    ASSERT(paging_locked_by_me(d));
+     d->arch.paging.mode |= PG_log_dirty;
+     paging_unlock(d);
  
- static void cf_check shadow_update_paging_modes(struct vcpu *v);
+@@ -198,12 +198,12 @@ static int cf_check hap_enable_log_dirty
+     p2m_change_entry_type_global(d, p2m_ram_rw, p2m_ram_logdirty);
+     guest_flush_tlb_mask(d, d->dirty_cpumask);
  
-@@ -82,7 +81,7 @@ int shadow_domain_init(struct domain *d)
-     static const struct log_dirty_ops sh_ops = {
-         .enable  = sh_enable_log_dirty,
-         .disable = sh_disable_log_dirty,
--        .clean   = sh_clean_dirty_bitmap,
-+        .clean   = ZERO_BLOCK_PTR,
-     };
+-    return 0;
++    return 1;
+ }
  
-     INIT_PAGE_LIST_HEAD(&d->arch.paging.shadow.pinned_shadows);
-@@ -2606,14 +2605,18 @@ static int cf_check sh_disable_log_dirty
- /* This function is called when we CLEAN log dirty bitmap. See
-  * paging_log_dirty_op() for details.
-  */
--static void cf_check sh_clean_dirty_bitmap(struct domain *d)
-+bool shadow_clean_dirty_bitmap(struct domain *d)
+ static int cf_check hap_disable_log_dirty(struct domain *d)
  {
 -    paging_lock(d);
-+    bool preempted = false;
++    ASSERT(paging_locked_by_me(d));
+     d->arch.paging.mode &= ~PG_log_dirty;
+     paging_unlock(d);
+ 
+@@ -215,7 +215,7 @@ static int cf_check hap_disable_log_dirt
+      * normal mode, or via hardware-assisted log-dirty.
+      */
+     p2m_change_entry_type_global(d, p2m_ram_logdirty, p2m_ram_rw);
+-    return 0;
++    return 1;
+ }
+ 
+ static void cf_check hap_clean_dirty_bitmap(struct domain *d)
+--- a/xen/arch/x86/mm/paging.c
++++ b/xen/arch/x86/mm/paging.c
+@@ -104,13 +104,10 @@ static int paging_free_log_dirty_bitmap(
+     mfn_t *l4, *l3, *l2;
+     int i4, i3, i2;
+ 
+-    paging_lock(d);
++    ASSERT(paging_locked_by_me(d));
+ 
+     if ( mfn_eq(d->arch.paging.log_dirty.top, INVALID_MFN) )
+-    {
+-        paging_unlock(d);
+         return 0;
+-    }
+ 
+     if ( !d->arch.paging.preempt.dom )
+     {
+@@ -121,10 +118,7 @@ static int paging_free_log_dirty_bitmap(
+     }
+     else if ( d->arch.paging.preempt.dom != current->domain ||
+               d->arch.paging.preempt.op != XEN_DOMCTL_SHADOW_OP_OFF )
+-    {
+-        paging_unlock(d);
+         return -EBUSY;
+-    }
+ 
+     l4 = map_domain_page(d->arch.paging.log_dirty.top);
+     i4 = d->arch.paging.preempt.log_dirty.i4;
+@@ -196,12 +190,11 @@ static int paging_free_log_dirty_bitmap(
+         d->arch.paging.preempt.op = XEN_DOMCTL_SHADOW_OP_OFF;
+     }
+ 
+-    paging_unlock(d);
+-
+     return rc;
+ }
+ 
+-static int paging_log_dirty_enable(struct domain *d)
++static int paging_log_dirty_enable(struct domain *d, unsigned int op,
++                                   bool resuming)
+ {
+     int ret;
+ 
+@@ -217,9 +210,42 @@ static int paging_log_dirty_enable(struc
+     if ( paging_mode_log_dirty(d) )
+         return -EINVAL;
+ 
+-    domain_pause(d);
++    if ( !resuming )
++        domain_pause(d);
 +
++    paging_lock(d);
++
++    if ( d->arch.paging.preempt.dom &&
++         (d->arch.paging.preempt.dom != current->domain ||
++          d->arch.paging.preempt.op != op) )
++    {
++        paging_unlock(d);
++        if ( !resuming )
++            domain_unpause(d);
++        return -EBUSY;
++    }
++
+     ret = d->arch.paging.log_dirty.ops->enable(d);
+-    domain_unpause(d);
++
++    if ( ret > 0 )
++    {
++        /* Paging lock dropped by hook. */
++        domain_unpause(d);
++        ret = 0;
++    }
++    else if ( ret != -ERESTART )
++    {
++        d->arch.paging.preempt.dom = NULL;
++        paging_unlock(d);
++        domain_unpause(d);
++    }
++    else
++    {
++        ASSERT(!paging_mode_log_dirty(d));
++        d->arch.paging.preempt.dom = current->domain;
++        d->arch.paging.preempt.op = op;
++        paging_unlock(d);
++    }
+ 
+     return ret;
+ }
+@@ -229,21 +255,49 @@ static int paging_log_dirty_disable(stru
+     int ret = 1;
+ 
+     if ( !resuming )
+-    {
+         domain_pause(d);
+-        /* Safe because the domain is paused. */
+-        if ( paging_mode_log_dirty(d) )
++
++    paging_lock(d);
++
++    if ( d->arch.paging.preempt.dom &&
++         (d->arch.paging.preempt.dom != current->domain ||
++          d->arch.paging.preempt.op != XEN_DOMCTL_SHADOW_OP_OFF) )
++    {
++        paging_unlock(d);
++        if ( !resuming )
++            domain_unpause(d);
++        return -EBUSY;
++    }
++
++    /* Safe because the domain is paused. */
++    if ( paging_mode_log_dirty(d) )
++    {
++        ret = d->arch.paging.log_dirty.ops->disable(d);
++        if ( ret > 0 ) /* Paging lock dropped by hook? */
++        {
++            paging_lock(d);
++            ret = 0;
++        }
++        else if ( ret != -ERESTART )
++            d->arch.paging.preempt.dom = NULL;
++        else
+         {
+-            ret = d->arch.paging.log_dirty.ops->disable(d);
+-            ASSERT(ret <= 0);
++            ASSERT(paging_mode_log_dirty(d));
++            d->arch.paging.preempt.dom = current->domain;
++            d->arch.paging.preempt.op = XEN_DOMCTL_SHADOW_OP_OFF;
++            paging_unlock(d);
++            return ret;
+         }
++
++        ASSERT(ret < 0 || !paging_mode_log_dirty(d));
+     }
+ 
+     ret = paging_free_log_dirty_bitmap(d, ret);
+-    if ( ret == -ERESTART )
+-        return ret;
+ 
+-    domain_unpause(d);
++    paging_unlock(d);
++
++    if ( ret != -ERESTART )
++        domain_unpause(d);
+ 
+     return ret;
+ }
+@@ -720,7 +774,7 @@ int paging_domctl(struct domain *d, stru
+             break;
+         fallthrough;
+     case XEN_DOMCTL_SHADOW_OP_ENABLE_LOGDIRTY:
+-        return paging_log_dirty_enable(d);
++        return paging_log_dirty_enable(d, sc->op, resuming);
+ 
+     case XEN_DOMCTL_SHADOW_OP_OFF:
+         if ( (rc = paging_log_dirty_disable(d, resuming)) != 0 )
+@@ -812,7 +866,9 @@ int paging_teardown(struct domain *d)
+ 
+ #if PG_log_dirty
+     /* clean up log dirty resources. */
++    paging_lock(d);
+     rc = paging_free_log_dirty_bitmap(d, 0);
++    paging_unlock(d);
+     if ( rc == -ERESTART )
+         return rc;
+ #endif
+--- a/xen/arch/x86/mm/shadow/common.c
++++ b/xen/arch/x86/mm/shadow/common.c
+@@ -2567,13 +2567,22 @@ static int cf_check sh_enable_log_dirty(
+ {
+     int ret;
+ 
+-    paging_lock(d);
 +    ASSERT(paging_locked_by_me(d));
 +
-     /* Need to revoke write access to the domain's pages again.
-      * In future, we'll have a less heavy-handed approach to this,
-      * but for now, we just unshadow everything except Xen. */
--    shadow_blow_tables(d, NULL);
+     if ( shadow_mode_enabled(d) )
+     {
+-        /* This domain already has some shadows: need to clear them out
++        bool preempted = false;
++
++        /*
++         * This domain already has some shadows: need to clear them out
+          * of the way to make sure that all references to guest memory are
+-         * properly write-protected */
+-        shadow_blow_tables(d, NULL);
++         * properly write-protected.
++         *
++         * Furthermore see sh_disable_log_dirty() below.
++         */
++        shadow_blow_tables(d, &preempted);
++        if ( preempted )
++            return -ERESTART;
+     }
+ 
+ #if (SHADOW_OPTIMIZATIONS & SHOPT_LINUX_L3_TOPLEVEL)
+@@ -2585,7 +2594,6 @@ static int cf_check sh_enable_log_dirty(
+ #endif
+ 
+     ret = shadow_one_bit_enable(d, PG_log_dirty);
 -    paging_unlock(d);
+ 
+     return ret;
+ }
+@@ -2593,13 +2601,18 @@ static int cf_check sh_enable_log_dirty(
+ /* shadow specfic code which is called in paging_log_dirty_disable() */
+ static int cf_check sh_disable_log_dirty(struct domain *d)
+ {
+-    int ret;
++    bool preempted = false;
+ 
+-    paging_lock(d);
+-    ret = shadow_one_bit_disable(d, PG_log_dirty);
+-    paging_unlock(d);
++    ASSERT(paging_locked_by_me(d));
+ 
+-    return ret;
++    /*
++     * Limit the amount of work to do from sh_detach_old_tables() (called from
++     * shadow_one_bit_disable() via sh_new_mode() -> sh_update_paging_modes()),
++     * such that it doesn't also need to deal with preemption checks.
++     */
 +    shadow_blow_tables(d, &preempted);
 +
-+    return !preempted;
++    return preempted ? -ERESTART : shadow_one_bit_disable(d, PG_log_dirty);
  }
  
- /**************************************************************************/
---- a/xen/arch/x86/mm/shadow/none.c
-+++ b/xen/arch/x86/mm/shadow/none.c
-@@ -7,11 +7,6 @@ static int cf_check _toggle_log_dirty(st
-     return -EOPNOTSUPP;
- }
- 
--static void cf_check _clean_dirty_bitmap(struct domain *d)
--{
--    ASSERT(is_pv_domain(d));
--}
--
- static void cf_check _update_paging_modes(struct vcpu *v)
- {
-     ASSERT_UNREACHABLE();
-@@ -23,7 +18,7 @@ int shadow_domain_init(struct domain *d)
-     static const struct log_dirty_ops sh_none_ops = {
-         .enable  = _toggle_log_dirty,
-         .disable = _toggle_log_dirty,
--        .clean   = _clean_dirty_bitmap,
-+        .clean   = ZERO_BLOCK_PTR,
-     };
- 
-     paging_log_dirty_init(d, &sh_none_ops);
+ /* This function is called when we CLEAN log dirty bitmap. See
 
 
