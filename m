@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95AD6C53219
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 13:50:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374242.1621270 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4940AC53219
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 13:50:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374244.1621280 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woiCT-0005mg-HN; Tue, 28 Jul 2026 13:50:29 +0000
+	id 1woiCm-00067N-Te; Tue, 28 Jul 2026 13:50:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374242.1621270; Tue, 28 Jul 2026 13:50:29 +0000
+Received: by outflank-mailman (output) from mailman id 1374244.1621280; Tue, 28 Jul 2026 13:50:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woiCT-0005mZ-Eg; Tue, 28 Jul 2026 13:50:29 +0000
-Received: by outflank-mailman (input) for mailman id 1374242;
- Tue, 28 Jul 2026 13:50:28 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1woiCm-00067G-Qm; Tue, 28 Jul 2026 13:50:48 +0000
+Received: by outflank-mailman (input) for mailman id 1374244;
+ Tue, 28 Jul 2026 13:50:47 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1woiCS-0005mS-G2
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 13:50:28 +0000
+ (envelope-from <jbeulich@suse.com>) id 1woiCl-00066s-4k
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 13:50:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woiCQ-00BQxQ-DA
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 15:50:26 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1woiCk-00EvdR-Hn
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 15:50:46 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68b38b-5cb7-0a2a0a5109dd-0a2a4505dec6-42
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:50:26 +0200
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a68b3b4-2eae-0a2a0a5409dd-0a2a450ba9bc-10
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:50:46 +0200
+Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68b3a2-4cb1-0a2a45050019-d1558034ad53-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:50:26 +0200
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-49558ce01afso29238695e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 06:50:26 -0700 (PDT)
+ id 6a68b3b6-b7e8-0a2a450b0019-d1558036ad62-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:50:46 +0200
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-49558ce01afso29242115e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 06:50:46 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-496c44b84edsm128749065e9.5.2026.07.28.06.50.24
+ 5b1f17b1804b1-496c45ba4b0sm82523515e9.6.2026.07.28.06.50.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Jul 2026 06:50:25 -0700 (PDT)
+ Tue, 28 Jul 2026 06:50:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,49 +55,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785246626; x=1785851426; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785246646; x=1785851446; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=O19QP3xK+jBJGuTPifAq7K+sTyafDuxBrZmdycbbFB4=;
-        b=adAUasnuXTgFIflJp5hvpDOhLBfCqhr1WHiLCRrvl6vNO4EVJDz1N7WKWqkxAXrfue
-         jXnCueHCmjyQOaRgzOIEdAc/ZZ0DjbuZbKcu7UyFu9KWCMGnjW1SffwyCeEI6k9Gth1w
-         mpXjnLndR4/SlS/Mr1fYI1vLNi1dnSdVsiKT5DtrL2ryDCMteZQA2NBJiBtKnS8TdpWx
-         QetprwQgFYBJ5UEgG7UgjBq6efLAztQw5bab+GNhNIWWrfh0udI8c9GuLa9IL1HHuJyJ
-         d80DsHsZPnOHG4ZRlWeYc3xRuS2oamhL/6qjJ4VCekTZ4SYqoRCGk1FWcHfaZTLCOuP/
-         IpQA==
+        bh=VGDGiJPmLE14ZfHvAKCk4xWyMnkwoww93SfDim7yWaQ=;
+        b=WkvRLoUkTWG2LO9sbo7gqaI6+j3u3mBB6kGyP0bXzVSv7dLYbTzPubWjztRbyfmSrP
+         rWlBxTDuxAk/adtMStVBpuPfWJ4B/AfAg+T0YYh82zu1MR7l5/iAENgMO1GV+pBJF0eS
+         WwYMk/H3OopvPSRqOJKSe6yxQHyobiaz1Bn0BGdwZ8qqPMq1Dz+O+4FZDkKXDoXqaTn/
+         Vdd6rg3gHnO7AaSVEaOx7866dYGg0yGSdu/R2oqustXoxttZ1AAAr7NyxWuqzsaEtYSD
+         3vlgM7fdPk+XnkiwvNi0k+I/AHloCrbIP/aXJmm0VvmNbEN/5j4AEdg9zdQsAqKAYzT8
+         UBfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785246626; x=1785851426;
+        d=1e100.net; s=20251104; t=1785246646; x=1785851446;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=O19QP3xK+jBJGuTPifAq7K+sTyafDuxBrZmdycbbFB4=;
-        b=ExR4QPmmnjALEUa3icukNJ6nQUG7+PUb1dtEfoxPGW1cExIbwYfjGXlKa/EBFCHdS7
-         UDl/2LK1CTTFsOQRiVgMzcyClpcdrADTCMxNgO0yFPnSdRVMEyhg0kc6Tgw8+eq7IDMh
-         6Ja4kk8kosg6o/XZim7b1pw6mUl7daBlEuRnyR9ha2nxO3ecjdQAWZrSPRAPMq+MtHqi
-         mKqjGpjUQcOjEsvTH1iwrfr1ERg37Ur9nBIdXmue8hk/TZMsNOtNCvFRrALO9j+7ugo7
-         gmNxmxkGJEEu0CvvdNVKdel2XxsboU5060A+fFMv8PddSOZOYWLaDmlQ9apM4nWItts2
-         3o1Q==
-X-Gm-Message-State: AOJu0Yz81Np9YzY0o1cHA0P/pCjg+Y5ExneOu4MOGGg1ifGlEDmwbGMM
-	z4NfqaTD2FNPZ4C4CmIC1KlgaZ6YG4tgVrAvxVQbmPs5T6lx/xa3gujm8ZuxrBKgGUnvSIHAb9t
-	OvaFpBA==
-X-Gm-Gg: AR+sD11QckNunU2VI81SUMaWiWk9o2N9C0MAB7d5ulGPYaIsfP3FHauRllww4vcb1pC
-	RfU4fVjHem924oFcIHKLI0DCG0SoL4/wms7mccsJV2aNwB09wtvOthgrYUrIEtMp5l3MQEy2jt0
-	mVVGptnUQ7PQnA4NuFyKbF+0ft8EnvbhuleYuj7xncrBXFWUxOkYu99TlDy7iekr+rtq6UioIfW
-	xSSqS3Ofk5eSph5Da6En7R8IwK78RuAeJr9gTbih1KysDhYMtCe7wJ7HZuYZ7oN7C0LEa7LBvut
-	c4mE88GSFilC9LFBGynpHPIi4oavg1MT8hMqrOOlRH//3atLaqzxqJpurzGO2uP4po7A2bMYqk7
-	H4TC+Xp8ouGi0Uj5o5PfCLdZGjWHQ3fpR7pwEDCA8/B0AosFcFrbcYzBz1pbFiIr0X9J/FhEFcP
-	QszqWvwPzBQQLH/M1qp24zVb2f1SYXd7LIExMkgdk2hMB65Vlf0UqIKIcj/mkhrieSNOpSaMlKL
-	C8x
-X-Received: by 2002:a05:600c:c8f:b0:495:6b55:f938 with SMTP id 5b1f17b1804b1-496c642200emr27255995e9.10.1785246625683;
-        Tue, 28 Jul 2026 06:50:25 -0700 (PDT)
-Message-ID: <6b05328c-7983-44fa-a1a1-bb81eed9615f@suse.com>
-Date: Tue, 28 Jul 2026 15:50:24 +0200
+        bh=VGDGiJPmLE14ZfHvAKCk4xWyMnkwoww93SfDim7yWaQ=;
+        b=Dfz1ysCG7Rr1ynzM7sdMDUTyAIlkQwxT6RvY/g8ag9KkRnvyNzGBx6btAzKL8efkWU
+         Czd1MVGrBpWoggEa5QZ33e80Vhcd/7206KIZ+Gqh5Ul0WxKhw39u9PSYEQVJmD8CFue8
+         YHOLduszoYRLLm2RGKsEMeQ4lVY/s9oioXjfYz4Ztp1BjSukIBmskk+UKS0Z5cOEAO1H
+         uwFV31cb2RBejdYsCnPS8egrhn2CjCpluVyBmVKddWz88EWix0Ot61MLiY+GxylCqTiz
+         WRcjANVyUjt9rQ45/PwTMuFHrP6LUFq1jSAHRyULeyeUezcFcvb3jlwjW7tO5n5mj+dG
+         Sxcg==
+X-Gm-Message-State: AOJu0YxYR2ijeXExwVmTk4aJYPDuAIu6vh13Tbpi+JYW/dNmLNHEpQeB
+	cgpCguzhGDAp+Ynrd9qcRyF7JEh0EDJGHmMxcMfjQC64ucU/TpHhnh6unzt6+fhzb+adr4j5KMH
+	a6JnPqg==
+X-Gm-Gg: AR+sD12hBF09fUNzUl3zE3n/DeF7lRCkBuP/0onZeOmsP3N0est+n9Aegu/lwaa+3kF
+	Sfc80kThCUN2xZPd6dN4Imf9jAQ78P1asCceETKL89kYzk/nxBacmfAJ0Aj+mLfL6lwJC0nLFSy
+	i/8ivVctZdBeFDxX3NttwgYMjCBgE1JF2lCYj3L5eLSk23RTJG7sz0pi/ftTBdr0asrO97MZk8A
+	VZKiL6yitsJPX/84rrHepTGE9w1JBT7Q8+JwDl1IYYfNQyRc3C68YqixjYiWdUN4aE4hf7h64Ji
+	0wnxRrkpDaajVyOgUMo/C7o0M3ctHIbfvS+XDLoo4xNT/hAk2b8hMHIILeMDlLf8gowulbIuMKE
+	jz48zlg2g775UhZMeH7ad2RAG4eIKpnnxbXgiErlosZNiei3HNwApZYeR5MXyXmP4lTomuxGfAZ
+	Q0bqQfPjpIc7rfsdCce4z8XrJh5oGn8byl16Eo5FBSlwb4S/iXHBzSLEnedF47okJKckTNB/CGL
+	X0b
+X-Received: by 2002:a05:600c:1c07:b0:496:c8d5:aa5e with SMTP id 5b1f17b1804b1-496c8d5aa8emr17145795e9.29.1785246645893;
+        Tue, 28 Jul 2026 06:50:45 -0700 (PDT)
+Message-ID: <9ad78491-7759-483d-8ef9-91b026efb83f@suse.com>
+Date: Tue, 28 Jul 2026 15:50:44 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 1/7] gnttab: add another compiler barrier to
+Subject: [PATCH 2/7] gnttab: limit scope of transitive-only variables in
  acquire_grant_for_copy()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
@@ -133,121 +133,97 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <38850629-8bfa-4737-99ff-0fd3f489e56e@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1785246626-24D1E2A1-12E7E466/0/0
+X-purgate-ID: tlsNG-42698a/1785246646-A9EC69EA-3DEED1D2/0/0
 X-purgate-type: clean
-X-purgate-size: 4105
+X-purgate-size: 3238
 
-... and mem_sharing_gref_to_gfn().
+Especially their use outside of the transitive grant handling code can be
+confusing. Two of the variables were merely used as aliases in the "needs
+pin update" path, while one of them was purely used because it's available
+in the "already pinned" case.
 
-Like for the fetching of trans_{domid,gref} in the former we ought to also
-fetch other fields exactly once.
+trans_{page_off,length} remain where they are: They're misnamed imo, and
+would better be sub_page_{off,len}.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-Strictly speaking mem_sharing_gref_to_gfn() would need another barriers
-added on the v2 path, but it being different sub-fields of the flags looks
-to make the uses okay there. Thoughts?
-
-Note that the calculation of cache_flags in map_grant_ref() has enough of
-a barrier after it already, by virtue of active_entry_release() being
-called right afterwards.
-
-The fetching of the frame in gnttab_transfer() is hopefully good enough,
-by each fetch happening exactly once. The sole risk there is load tearing,
-which can occur elsewhere as well.
 
 --- a/xen/common/grant_table.c
 +++ b/xen/common/grant_table.c
-@@ -2606,6 +2606,7 @@ acquire_grant_for_copy(
-     grant_entry_header_t *shah;
-     struct active_grant_entry *act;
+@@ -2608,9 +2608,6 @@ acquire_grant_for_copy(
      grant_status_t *status;
-+    unsigned int shflags;
+     unsigned int shflags;
      uint32_t old_pin;
-     domid_t trans_domid;
-     grant_ref_t trans_gref;
-@@ -2655,8 +2656,11 @@ acquire_grant_for_copy(
-         status = &status_entry(rgt, gref);
-     }
- 
-+    shflags = shah->flags;
-+    barrier();
-+
+-    domid_t trans_domid;
+-    grant_ref_t trans_gref;
+-    struct domain *td;
+     mfn_t grant_mfn;
+     uint16_t trans_page_off;
+     uint16_t trans_length;
+@@ -2662,6 +2659,10 @@ acquire_grant_for_copy(
      old_pin = act->pin;
--    if ( sha2 && (shah->flags & GTF_type_mask) == GTF_transitive )
-+    if ( sha2 && (shflags & GTF_type_mask) == GTF_transitive )
+     if ( sha2 && (shflags & GTF_type_mask) == GTF_transitive )
      {
++        domid_t trans_domid;
++        grant_ref_t trans_gref;
++        struct domain *td;
++
          if ( (!old_pin || (!readonly &&
                             !(old_pin & (GNTPIN_devw_mask|GNTPIN_hstw_mask)))) &&
-@@ -2793,6 +2797,8 @@ acquire_grant_for_copy(
-     else if ( !old_pin ||
-               (!readonly && !(old_pin & (GNTPIN_devw_mask|GNTPIN_hstw_mask))) )
-     {
-+        unsigned long gfn;
-+
-         if ( (rc = _set_status(shah, status, rd, rgt->gt_version, act,
+              (rc = _set_status_v2(shah, status, rd, act, readonly, 0,
+@@ -2803,8 +2804,6 @@ acquire_grant_for_copy(
                                 readonly, 0, ldom)) != GNTST_okay )
               goto unlock_out;
-@@ -2801,39 +2807,34 @@ acquire_grant_for_copy(
-         trans_gref = gref;
+ 
+-        td = rd;
+-        trans_gref = gref;
          if ( !sha2 )
          {
--            unsigned long gfn = shared_entry_v1(rgt, gref).frame;
--
--            rc = get_paged_frame(gfn, &grant_mfn, page, readonly, rd);
--            if ( rc != GNTST_okay )
--                goto unlock_out_clear;
--            act_set_gfn(act, _gfn(gfn));
-+            gfn = shared_entry_v1(rgt, gref).frame;
-             is_sub_page = false;
-             trans_page_off = 0;
-             trans_length = PAGE_SIZE;
-         }
--        else if ( !(sha2->hdr.flags & GTF_sub_page) )
-+        else if ( !(shflags & GTF_sub_page) )
-         {
--            rc = get_paged_frame(sha2->full_page.frame, &grant_mfn, page,
--                                 readonly, rd);
--            if ( rc != GNTST_okay )
--                goto unlock_out_clear;
--            act_set_gfn(act, _gfn(sha2->full_page.frame));
-+            gfn = sha2->full_page.frame;
-             is_sub_page = false;
-             trans_page_off = 0;
-             trans_length = PAGE_SIZE;
-         }
-         else
-         {
--            rc = get_paged_frame(sha2->sub_page.frame, &grant_mfn, page,
--                                 readonly, rd);
--            if ( rc != GNTST_okay )
--                goto unlock_out_clear;
--            act_set_gfn(act, _gfn(sha2->sub_page.frame));
-+            gfn = sha2->sub_page.frame;
-             is_sub_page = true;
-             trans_page_off = sha2->sub_page.page_off;
-             trans_length = sha2->sub_page.length;
-         }
+             gfn = shared_entry_v1(rgt, gref).frame;
+@@ -2841,16 +2840,16 @@ acquire_grant_for_copy(
+             act->is_sub_page = is_sub_page;
+             act->start = trans_page_off;
+             act->length = trans_length;
+-            act->src_domid = td->domain_id;
+-            act->trans_gref = trans_gref;
++            act->src_domid = rd->domain_id;
++            act->trans_gref = gref;
+             act->mfn = grant_mfn;
  
-+        /* Use latched copies of the shared entry fields from here on. */
-+        barrier();
-+
-+        rc = get_paged_frame(gfn, &grant_mfn, page, readonly, rd);
-+        if ( rc != GNTST_okay )
-+            goto unlock_out_clear;
-+        act_set_gfn(act, _gfn(gfn));
-+
-         if ( !act->pin )
-         {
-             act->domid = ldom;
-@@ -4145,6 +4146,8 @@ int mem_sharing_gref_to_gfn(struct grant
-            *gfn = _gfn(sha2->full_page.frame);
+             if ( is_sub_page )
+                 atomic_inc(&rgt->nr_v2_ops);
+         }
+         else if ( !mfn_eq(act->mfn, grant_mfn) ||
+-                  act->src_domid != td->domain_id ||
+-                  act->trans_gref != trans_gref ||
++                  act->src_domid != rd->domain_id ||
++                  act->trans_gref != gref ||
+                   (act->is_sub_page &&
+                    (!is_sub_page ||
+                     act->start != trans_page_off ||
+@@ -2866,9 +2865,11 @@ acquire_grant_for_copy(
      }
- 
-+    barrier();
+     else
+     {
++        struct domain *d;
 +
-     if ( !rc && (flags & GTF_type_mask) != GTF_permit_access )
-         rc = -ENXIO;
-     else if ( !rc && status )
+         ASSERT(mfn_valid(act->mfn));
+         *page = mfn_to_page(act->mfn);
+-        td = page_get_owner_and_reference(*page);
++        d = page_get_owner_and_reference(*page);
+         /*
+          * act->pin being non-zero should guarantee the page to have a
+          * non-zero refcount and hence a valid owner (matching the one on
+@@ -2877,9 +2878,9 @@ acquire_grant_for_copy(
+          * updates pin counts before obtaining page references, for
+          * example).
+          */
+-        if ( td != rd || rd->is_dying )
++        if ( d != rd || rd->is_dying )
+         {
+-            if ( td )
++            if ( d )
+                 put_page(*page);
+             *page = NULL;
+             rc = GNTST_bad_domain;
 
 
