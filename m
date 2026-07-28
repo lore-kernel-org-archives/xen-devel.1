@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2911C54F4C
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 13:23:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374157.1621127 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A1E8C53219
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 13:24:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374163.1621135 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wohmO-0004ee-8J; Tue, 28 Jul 2026 13:23:32 +0000
+	id 1wohmu-00055x-Er; Tue, 28 Jul 2026 13:24:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374157.1621127; Tue, 28 Jul 2026 13:23:32 +0000
+Received: by outflank-mailman (output) from mailman id 1374163.1621135; Tue, 28 Jul 2026 13:24:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wohmO-0004eX-5c; Tue, 28 Jul 2026 13:23:32 +0000
-Received: by outflank-mailman (input) for mailman id 1374157;
- Tue, 28 Jul 2026 13:23:31 +0000
+	id 1wohmu-00055q-C8; Tue, 28 Jul 2026 13:24:04 +0000
+Received: by outflank-mailman (input) for mailman id 1374163;
+ Tue, 28 Jul 2026 13:24:02 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wohmM-0004eL-Rq
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 13:23:30 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wohms-00055Y-NH
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 13:24:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wohmM-004meQ-8J
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 15:23:30 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wohms-00ET9U-43
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 15:24:02 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68ad48-bab6-0a2a0a5309dd-0a2a4506bea2-30
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:23:30 +0200
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a68ad72-5cb7-0a2a0a5109dd-0a2a45029d7a-0
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:24:02 +0200
+Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68ad52-195a-0a2a45060019-d1558036cc2c-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:23:30 +0200
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-4955aa106b1so36863885e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 06:23:30 -0700 (PDT)
+ id 6a68ad71-6ca4-0a2a45020019-d155dd2adca8-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 15:24:02 +0200
+Received: by mail-wr1-f42.google.com with SMTP id
+ ffacd0b85a97d-47f92e3c14bso3470097f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 06:24:01 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-496c45de1a3sm88411125e9.11.2026.07.28.06.23.27
+ ffacd0b85a97d-47f96b9abc0sm37655516f8f.32.2026.07.28.06.24.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Jul 2026 06:23:28 -0700 (PDT)
+ Tue, 28 Jul 2026 06:24:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,49 +55,48 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785245010; x=1785849810; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785245041; x=1785849841; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=uWalkTy0K6dBubCLA5u6FxobY3yZutCgqd3ZaxzhGJc=;
-        b=HUnYihVJ3A3HADe6SfY1OVrqXKv614wkHx/eweK0BPyDiafhXhFvbKrdPytMcZELb2
-         cwS5tiA9CW3LldU8Wa2tyRW1B3jzxAb5Yw+GqQEiFByjvNsASGcXHXCdjRbn0r8kQuQD
-         4W+RfY2l0W5arYCwAOreggVs06Odj7Zp8SkACjwg0QC1v5soSvVwecZykCPDVVBDlRmI
-         9X5T7WeK0ipt9utPb/F64Ac/V+1Vf36apu+voUKchyQMGwl61GPFc21f8crZLz0gSAYa
-         kakk41zMhldps5WGmW1i3KvVphx1R4sgAXtBAr1LGKDfK3zAqVbH4PO/7TB00QKLb1DK
-         kBvw==
+        bh=UbHOO48bxllxTgePghgzdylwCnZvEEGiTmisl0RNAjk=;
+        b=V0VJWrEeQzZ8V0lAInWhk61Ys4kaEywpcupcpe02f2QcNmr09hgVnlVojijSUDmkGl
+         RwJsw9zX0UquyKh1RFJWqU2PdqTCYen3hdMAQEEbEwt8pQwo/Pg62r4lOfK6wz1k2fQd
+         Pa+RK8UQoJG9cDfTwP8lxVY2jRDhdPP0ZNCOrHurANdlqe10QSW0yce2bVjJDPkKEdXw
+         7fYpuxeG4Oo5RRhqicwLEzNoa2QLrFAjGqdfxa5jOj/oV1MQz9elxwsbSJ/6uSuqmlnp
+         MwBaps3RZ13ak92CumkPNWY6ixCasTNNFato/YMb6WmMG6UlizaUF7VnmkY8OuxVO4WI
+         5++w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785245010; x=1785849810;
+        d=1e100.net; s=20251104; t=1785245041; x=1785849841;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=uWalkTy0K6dBubCLA5u6FxobY3yZutCgqd3ZaxzhGJc=;
-        b=GCdb5Bck4t94wvcHV9L4kto6+fIZWLsmWiDeIy87PLXzFj5oRCEUqA43cIiVL74f0u
-         r1UVSGULETjS5+6mmu/5ZObT0yVgbWB312bPiRSoL3jC7NF6MWgQS2a8n0EdJffXCZlB
-         7xZiM+fM7fxL/90uQ3fK8K4nhoOPdbS54TChBfCKXFU1aaGIO4pbK4NaVOXkDFTy6a4r
-         2XGhwyBiWeRruLa/RvytOB6Il/ASbmCBQZGjRQmhhCCpNxAWHvJmxY3hxWpHjihWJLSx
-         qtDrnXvN80pwocgj1C9uKHpC/tCe4dMHDdCMQAqa2SAtj6iW8pc8CaoSEOfGythPp651
-         SMyw==
-X-Gm-Message-State: AOJu0YxonsjZq1hTFksMPGqJqSA1usW/Vo/7pH5kaaQEF/37XVPxxowt
-	VOlJ87ayVE3hRtdpbuR7UjNLRI7eCAn+2deY8HVII4Xf3EjVdfv+Yqdyg8yEGMioiQocHSwkADK
-	46xyhmg==
-X-Gm-Gg: AR+sD13TSqs0LooMXLAdUAAwQj8pkEGZvEOjaE2gglSgVRk8cuVGh8VV1QAGhJFrkAC
-	NfJ0UTAkUrru+yWH7yWclONjGiaq6CqQhvpCOqNxeZ4xxWwGJ5DiiOHKj51vo/D2HN1o8FNP7v/
-	tnB9NOu/z7jGl65DXcJco/bxzdxUJPyCCgcbD/Iugz3WCLG7CMBlEhTmYSGLgI9N/tEAR7kRJGt
-	BLkfKuDmtfk0Hfk0LlpoMsFLzlIbPbT3zvNw7aoNm3evTL1PruhRBq4N/pyELd+IyjG/v/0jLm+
-	BnFJcD3leR46tfY9aScHS3bQv4rTK+kt3os62gEpcefDlWwgofimhBftZH5NEkc2Lu48QC6Tb7d
-	aIcjRTtq+6954285I5yjUPM1UA00cZyZf57WLAsBnpHGpdrT+j9FmFDJ3JRoZ5pgbb33ultG3TN
-	ORpyf/Kk3HIsHKf/1SSyojydbLsz0ZS7afgsvMnmHglQzpM7oajKAxN88WXnQEgUBatw==
-X-Received: by 2002:a05:600c:5298:b0:495:4df2:b8c1 with SMTP id 5b1f17b1804b1-496c659dd06mr25253695e9.35.1785245009342;
-        Tue, 28 Jul 2026 06:23:29 -0700 (PDT)
-Message-ID: <dc7d05da-ace4-4dc9-ad55-bdb178dfbee0@suse.com>
-Date: Tue, 28 Jul 2026 15:23:26 +0200
+        bh=UbHOO48bxllxTgePghgzdylwCnZvEEGiTmisl0RNAjk=;
+        b=nR64FZM59oRpQYgCQGgDkLviiqUczxu97avEL/edyG2FXNc3Q9m63fyW7nZ0gpvAWl
+         k14YWg8U6IF9b2ZlVmK+YhguzTkOEctZxr6rWwaTSF0J6LnlRllF3EaYN+5Meog9x6Ka
+         X2ZM8xpn8ul6I6Lsez9fsQcPcUOi059Vu7qxVTvmRxjHxisoJEPdvRB9vPS+gXebjbx7
+         BSgVJGqfwtN3YaGyvhgicF6zPzTswon2PCTGKWd1CYwbfBhV+seHKqlC/EGiYFk0TPtt
+         msZqBc5E0f2rYodBiUMuI2YsV37xi9kkiOCgGVlryEK8uMRSrgjSrzQAvaa4+HfqJ2B7
+         TOxA==
+X-Gm-Message-State: AOJu0YyT4yyqmG3k6faIWBnKkkAIKvMeZcGNmSVFzQPCMJ1KwIAbwTOz
+	ZE5myf398Hi1n38zQm7I5t2BKimL9bxsctOjTAA9x1CSrArXAHBpA9ri9LZVBb7xFwT7/yIxUb6
+	sKm+bNQ==
+X-Gm-Gg: AR+sD11ObgxhKS8Ax2jNlv46wHa4i4yL+wwqIRANg8gSYDZUUhF2TiDKJYk66cxr6Km
+	TbDL3j0SBSdpDG8ieutJnVO4xxiO9Lu+fEuQ8QBUjicfnpwIelSL4O0zaPOokjtJErMPKBlF4gT
+	tib1XVHD2nIEWRZgoSv4MAoZy8Lz5/djy3ZOmBwef2eHK5nYf1JiOzS5pzUeKonxRTowwWdNZ2u
+	v8iazOkJQH28YBXPhzHq60hCCg1ThYqI0/qkyBQ/lUPWsPH30OtSWsuPjsbc+rL8DkC0L1dnzh7
+	hDAwQDS8mtDBnjyjwAblkGKZNMK8j1X6YbBzXGDbBpbsMyzgKM5TQqoJmy48zrfh6ALzG9W6LE0
+	h0PZe5F2XXy0Mc4/CEM5bYz3chzFNOHtlTm8xUBTvngWF+GhlgOoa4PHLBwAFRltROb7bsMCEPd
+	TR4afO3pKcmx1vXDllQCBsFz6JoA3ymuhZb181sHLLAkIu7SLjCKtXQ3wtgeudOakglQ==
+X-Received: by 2002:a05:6000:2403:b0:47f:9661:6766 with SMTP id ffacd0b85a97d-47fb1ec4d77mr2993788f8f.61.1785245041294;
+        Tue, 28 Jul 2026 06:24:01 -0700 (PDT)
+Message-ID: <c973c612-153d-413b-a6c8-aeacd25f28a8@suse.com>
+Date: Tue, 28 Jul 2026 15:23:59 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 19/24] XSM: convert "allow" (Flask: "access") parameters to
- bool
+Subject: [PATCH 20/24] XSM: fold xsm_{,un}map_domain_pirq() hooks
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Daniel Smith <dpsmith@apertussolutions.com>,
@@ -132,238 +131,84 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <758c8410-a18e-45dc-8944-5913e5832397@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1785245010-F540B77B-F487D2A6/0/0
+X-purgate-ID: tlsNG-720697/1785245042-319CB2AC-6E26CAA7/0/0
 X-purgate-type: clean
-X-purgate-size: 9351
+X-purgate-size: 2536
 
-These are boolean, so they should always have used bool (originally
-bool_t), not uint8_t. Leverage recent changes to arrange for this with
-(now) fewer places which need changing (within the XSM machinery itself).
-Adjust call sites as well, where the conversion wasn't done so far.
+Like other resource management hooks they are different in just "add
+resource" vs "remove resource". Hence like in other cases a single hook
+can easily serve both purposes.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-Why is it that Arm doesn't use xsm_irq_permission() at all? Same for Arm64
-vs xsm_pci_config_permission().
 
---- a/xen/arch/x86/domctl.c
-+++ b/xen/arch/x86/domctl.c
-@@ -235,7 +235,7 @@ long arch_do_domctl(
-     {
-         unsigned int fp = domctl->u.ioport_permission.first_port;
-         unsigned int np = domctl->u.ioport_permission.nr_ports;
--        int allow = domctl->u.ioport_permission.allow_access;
-+        bool allow = domctl->u.ioport_permission.allow_access;
+--- a/xen/arch/x86/physdev.c
++++ b/xen/arch/x86/physdev.c
+@@ -109,7 +109,7 @@ int physdev_map_pirq(struct domain *d, i
+         return physdev_hvm_map_pirq(d, type, index, pirq_p);
+     }
  
-         ret = -EINVAL;
-         if ( (fp + np) <= fp || (fp + np) > MAX_IOPORTS )
-@@ -306,7 +306,8 @@ long arch_do_domctl(
-             break;
-         }
+-    ret = xsm_map_domain_pirq(XSM_DM_PRIV, d);
++    ret = xsm_map_domain_pirq(XSM_DM_PRIV, d, true);
+     if ( ret )
+         return ret;
  
--        ret = xsm_irq_permission(XSM_PRIV, d, irq, flags);
-+        ret = xsm_irq_permission(XSM_PRIV, d, irq,
-+                                 flags & XEN_DOMCTL_GSI_ACTION_MASK);
-         if ( ret )
-             break;
+@@ -142,7 +142,7 @@ int physdev_unmap_pirq(struct domain *d,
+     int ret = 0;
  
-@@ -687,7 +688,7 @@ long arch_do_domctl(
-         unsigned int fgp = domctl->u.ioport_mapping.first_gport;
-         unsigned int fmp = domctl->u.ioport_mapping.first_mport;
-         unsigned int np = domctl->u.ioport_mapping.nr_ports;
--        unsigned int add = domctl->u.ioport_mapping.add_mapping;
-+        bool add = domctl->u.ioport_mapping.add_mapping;
-         struct hvm_domain *hvm;
-         struct g2m_ioport *g2m_ioport;
-         int found = 0;
---- a/xen/arch/x86/pci.c
-+++ b/xen/arch/x86/pci.c
-@@ -78,7 +78,7 @@ int pci_conf_write_intercept(unsigned in
- {
-     struct pci_dev *pdev;
-     int rc = xsm_pci_config_permission(XSM_HOOK, current->domain, bdf,
--                                       reg, reg + size - 1, 1);
-+                                       reg, reg + size - 1, true);
- 
-     if ( rc < 0 )
-         return rc;
---- a/xen/arch/x86/pv/emul-priv-op.c
-+++ b/xen/arch/x86/pv/emul-priv-op.c
-@@ -260,7 +260,7 @@ static bool pci_cfg_ok(struct domain *cu
- 
-     return !write ?
-            xsm_pci_config_permission(XSM_HOOK, currd, machine_bdf,
--                                     start, start + size - 1, 0) == 0 :
-+                                     start, start + size - 1, false) == 0 :
-            pci_conf_write_intercept(0, machine_bdf, start, size, write) >= 0;
- }
+     if ( d != current->domain || !is_hvm_domain(d) || !has_pirq(d) )
+-        ret = xsm_unmap_domain_pirq(XSM_DM_PRIV, d);
++        ret = xsm_map_domain_pirq(XSM_DM_PRIV, d, false);
+     if ( ret )
+         return ret;
  
 --- a/xen/include/xsm/dummy.h
 +++ b/xen/include/xsm/dummy.h
-@@ -505,21 +505,21 @@ static XSM_INLINE int xsm_unmap_domain_i
- }
+@@ -461,14 +461,7 @@ static XSM_INLINE char *xsm_show_irq_sid
+ #ifdef CONFIG_HAS_PIRQ
  
- static XSM_INLINE int xsm_irq_permission(
--    XSM_DEFAULT_ARG struct domain *d, int pirq, uint8_t allow)
-+    XSM_DEFAULT_ARG struct domain *d, int pirq, bool allow)
- {
-     XSM_ASSERT_ACTION(XSM_PRIV);
-     return xsm_default_action(action, current->domain, d);
- }
- 
- static XSM_INLINE int xsm_iomem_permission(
--    XSM_DEFAULT_ARG struct domain *d, uint64_t s, uint64_t e, uint8_t allow)
-+    XSM_DEFAULT_ARG struct domain *d, uint64_t s, uint64_t e, bool allow)
- {
-     XSM_ASSERT_ACTION(XSM_PRIV);
-     return xsm_default_action(action, current->domain, d);
- }
- 
- static XSM_INLINE int xsm_iomem_mapping(
--    XSM_DEFAULT_ARG struct domain *d, uint64_t s, uint64_t e, uint8_t allow)
-+    XSM_DEFAULT_ARG struct domain *d, uint64_t s, uint64_t e, bool allow)
- {
-     XSM_ASSERT_ACTION(XSM_DM_PRIV);
-     return xsm_default_action(action, current->domain, d);
-@@ -527,7 +527,7 @@ static XSM_INLINE int xsm_iomem_mapping(
- 
- #ifdef CONFIG_HAS_VPCI
- static XSM_INLINE int xsm_iomem_mapping_vpci(
--    XSM_DEFAULT_ARG struct domain *d, uint64_t s, uint64_t e, uint8_t allow)
-+    XSM_DEFAULT_ARG struct domain *d, uint64_t s, uint64_t e, bool allow)
- {
-     XSM_ASSERT_ACTION(XSM_HOOK);
-     return xsm_default_action(action, current->domain, d);
-@@ -537,7 +537,7 @@ static XSM_INLINE int xsm_iomem_mapping_
- #ifdef CONFIG_HAS_PCI
- static XSM_INLINE int xsm_pci_config_permission(
-     XSM_DEFAULT_ARG struct domain *d, uint32_t machine_bdf, uint16_t start,
--    uint16_t end, uint8_t access)
-+    uint16_t end, bool access)
- {
-     XSM_ASSERT_ACTION(XSM_HOOK);
-     return xsm_default_action(action, current->domain, d);
-@@ -711,14 +711,14 @@ static XSM_INLINE int xsm_priv_mapping(
- #endif
- 
- static XSM_INLINE int xsm_ioport_permission(
--    XSM_DEFAULT_ARG struct domain *d, uint32_t s, uint32_t e, uint8_t allow)
-+    XSM_DEFAULT_ARG struct domain *d, uint32_t s, uint32_t e, bool allow)
- {
-     XSM_ASSERT_ACTION(XSM_PRIV);
-     return xsm_default_action(action, current->domain, d);
- }
- 
- static XSM_INLINE int xsm_ioport_mapping(
--    XSM_DEFAULT_ARG struct domain *d, uint32_t s, uint32_t e, uint8_t allow)
-+    XSM_DEFAULT_ARG struct domain *d, uint32_t s, uint32_t e, bool allow)
+ static XSM_INLINE int xsm_map_domain_pirq(
+-    XSM_DEFAULT_ARG struct domain *d)
+-{
+-    XSM_ASSERT_ACTION(XSM_DM_PRIV);
+-    return xsm_default_action(action, current->domain, d);
+-}
+-
+-static XSM_INLINE int xsm_unmap_domain_pirq(
+-    XSM_DEFAULT_ARG struct domain *d)
++    XSM_DEFAULT_ARG struct domain *d, bool allow)
  {
      XSM_ASSERT_ACTION(XSM_DM_PRIV);
      return xsm_default_action(action, current->domain, d);
 --- a/xen/include/xsm/hooks.h
 +++ b/xen/include/xsm/hooks.h
-@@ -77,12 +77,12 @@ XSM_HOOK(int, unmap_domain_irq, struct d
- XSM_HOOK(int, bind_pt_irq, struct domain *, struct xen_domctl_bind_pt_irq *)
- XSM_HOOK(int, unbind_pt_irq, struct domain *, struct xen_domctl_bind_pt_irq *)
+@@ -68,8 +68,7 @@ XSM_HOOK(int, kexec)
+ XSM_HOOK(int, schedop_shutdown, struct domain *, struct domain *)
  
--XSM_HOOK(int, irq_permission, struct domain *, int, uint8_t)
--XSM_HOOK(int, iomem_permission, struct domain *, uint64_t, uint64_t, uint8_t)
-+XSM_HOOK(int, irq_permission, struct domain *, int, bool)
-+XSM_HOOK(int, iomem_permission, struct domain *, uint64_t, uint64_t, bool)
- 
--XSM_HOOK(int, iomem_mapping, struct domain *, uint64_t, uint64_t, uint8_t)
-+XSM_HOOK(int, iomem_mapping, struct domain *, uint64_t, uint64_t, bool)
- #ifdef CONFIG_HAS_VPCI
--XSM_HOOK(int, iomem_mapping_vpci, struct domain *, uint64_t, uint64_t, uint8_t)
-+XSM_HOOK(int, iomem_mapping_vpci, struct domain *, uint64_t, uint64_t, bool)
+ #ifdef CONFIG_HAS_PIRQ
+-XSM_HOOK(int, map_domain_pirq, struct domain *)
+-XSM_HOOK(int, unmap_domain_pirq, struct domain *)
++XSM_HOOK(int, map_domain_pirq, struct domain *, bool)
  #endif
  
- #if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_PCI)
-@@ -97,7 +97,7 @@ XSM_HOOK(int, resource_setup_misc)
- XSM_HOOK(int, resource_setup_pci, uint32_t)
- XSM_HOOK(int, resource_setup_gsi, int)
- XSM_HOOK(int, pci_config_permission, struct domain *, uint32_t, uint16_t,
--                                     uint16_t, uint8_t)
-+                                     uint16_t, bool)
- #endif
- 
- #ifdef CONFIG_HYPFS
-@@ -144,8 +144,8 @@ XSM_HOOK(int, update_va_mapping, struct
- #if defined(CONFIG_PV) || defined(CONFIG_SHADOW_PAGING)
- XSM_HOOK(int, priv_mapping, struct domain *, struct domain *)
- #endif
--XSM_HOOK(int, ioport_permission, struct domain *, uint32_t, uint32_t, uint8_t)
--XSM_HOOK(int, ioport_mapping, struct domain *, uint32_t, uint32_t, uint8_t)
-+XSM_HOOK(int, ioport_permission, struct domain *, uint32_t, uint32_t, bool)
-+XSM_HOOK(int, ioport_mapping, struct domain *, uint32_t, uint32_t, bool)
- XSM_HOOK(int, pmu_op, struct domain *, unsigned int)
- #endif /* CONFIG_X86 */
- 
+ XSM_HOOK(int, map_domain_irq, struct domain *, int, const void *)
 --- a/xen/xsm/flask/hooks.c
 +++ b/xen/xsm/flask/hooks.c
-@@ -998,7 +998,7 @@ static int cf_check flask_sysctl(const s
- }
- #endif /* CONFIG_SYSCTL */
+@@ -1022,14 +1022,9 @@ static char *cf_check flask_show_irq_sid
  
--static inline uint32_t resource_to_perm(uint8_t access)
-+static inline uint32_t resource_to_perm(bool access)
- {
-     if ( access )
-         return RESOURCE__ADD;
-@@ -1166,7 +1166,7 @@ static int cf_check flask_unbind_pt_irq(
- }
+ #ifdef CONFIG_HAS_PIRQ
  
- static int cf_check flask_irq_permission(
--    struct domain *d, int pirq, uint8_t access)
-+    struct domain *d, int pirq, bool access)
+-static int cf_check flask_map_domain_pirq(struct domain *d)
++static int cf_check flask_map_domain_pirq(struct domain *d, bool access)
  {
-     /* the PIRQ number is not useful; real IRQ is checked during mapping */
-     return current_has_perm(d, SECCLASS_RESOURCE, resource_to_perm(access));
-@@ -1199,7 +1199,7 @@ static int cf_check _iomem_has_perm(
+-    return current_has_perm(d, SECCLASS_RESOURCE, RESOURCE__ADD);
+-}
+-
+-static int cf_check flask_unmap_domain_pirq(struct domain *d)
+-{
+-    return current_has_perm(d, SECCLASS_RESOURCE, RESOURCE__REMOVE);
++    return current_has_perm(d, SECCLASS_RESOURCE, resource_to_perm(access));
  }
  
- static int cf_check flask_iomem_permission(
--    struct domain *d, uint64_t start, uint64_t end, uint8_t access)
-+    struct domain *d, uint64_t start, uint64_t end, bool access)
- {
-     struct iomem_has_perm_data data;
-     int rc;
-@@ -1221,7 +1221,8 @@ static int cf_check flask_iomem_permissi
-     return security_iterate_iomem_sids(start, end, _iomem_has_perm, &data);
- }
- 
--static int cf_check flask_iomem_mapping(struct domain *d, uint64_t start, uint64_t end, uint8_t access)
-+static int cf_check flask_iomem_mapping(
-+    struct domain *d, uint64_t start, uint64_t end, bool access)
- {
-     return flask_iomem_permission(d, start, end, access);
- }
-@@ -1230,7 +1231,7 @@ static int cf_check flask_iomem_mapping(
- #ifdef CONFIG_HAS_PCI
- static int cf_check flask_pci_config_permission(
-     struct domain *d, uint32_t machine_bdf, uint16_t start, uint16_t end,
--    uint8_t access)
-+    bool access)
- {
-     uint32_t dsid, rsid;
-     int rc = -EPERM;
-@@ -1709,7 +1710,7 @@ static int cf_check _ioport_has_perm(
- }
- 
- static int cf_check flask_ioport_permission(
--    struct domain *d, uint32_t start, uint32_t end, uint8_t access)
-+    struct domain *d, uint32_t start, uint32_t end, bool access)
- {
-     int rc;
-     struct ioport_has_perm_data data;
-@@ -1733,7 +1734,7 @@ static int cf_check flask_ioport_permiss
- }
- 
- static int cf_check flask_ioport_mapping(
--    struct domain *d, uint32_t start, uint32_t end, uint8_t access)
-+    struct domain *d, uint32_t start, uint32_t end, bool access)
- {
-     return flask_ioport_permission(d, start, end, access);
- }
+ #endif /* CONFIG_HAS_PIRQ */
 
 
