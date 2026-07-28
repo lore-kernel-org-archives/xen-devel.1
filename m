@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5BC4C53219
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:23:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1374405.1621567 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F73EC54F4C
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 14:24:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1374418.1621575 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woiiJ-0004Sy-7s; Tue, 28 Jul 2026 14:23:23 +0000
+	id 1woijO-0005Cw-LT; Tue, 28 Jul 2026 14:24:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1374405.1621567; Tue, 28 Jul 2026 14:23:23 +0000
+Received: by outflank-mailman (output) from mailman id 1374418.1621575; Tue, 28 Jul 2026 14:24:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woiiJ-0004Sr-4x; Tue, 28 Jul 2026 14:23:23 +0000
-Received: by outflank-mailman (input) for mailman id 1374405;
- Tue, 28 Jul 2026 14:23:21 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1woijO-0005Cn-Io; Tue, 28 Jul 2026 14:24:30 +0000
+Received: by outflank-mailman (input) for mailman id 1374418;
+ Tue, 28 Jul 2026 14:24:29 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1woiiH-0004SU-Ih
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:23:21 +0000
+ (envelope-from <jbeulich@suse.com>) id 1woijN-0005Cf-KW
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 14:24:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woiiG-007NWv-Vj
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 16:23:20 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1woijM-00F1g5-UP
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 16:24:28 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68bb4c-e002-0a2a0a5209dd-0a2a4504d6e4-36
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 16:23:20 +0200
-Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a68bb95-2eae-0a2a0a5409dd-0a2a450bb4fa-18
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 16:24:28 +0200
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a68bb58-b57f-0a2a45040019-d155802eecfd-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 16:23:20 +0200
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-4954dff6536so27607815e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 07:23:20 -0700 (PDT)
+ id 6a68bb9c-b7e8-0a2a450b0019-d155dd31a402-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 16:24:28 +0200
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-4758bd3731bso970106f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 07:24:28 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4957f9ae5c3sm429559225e9.3.2026.07.28.07.23.19
+ ffacd0b85a97d-47f85c7880dsm58999551f8f.37.2026.07.28.07.24.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Jul 2026 07:23:19 -0700 (PDT)
+ Tue, 28 Jul 2026 07:24:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,50 +55,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785248600; x=1785853400; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785248668; x=1785853468; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=w1o+lRjL5Bu7MJj4eoJSBjI4Yb8dSfa5/A/XYawdiOo=;
-        b=JwW2JhE10m8PYeo+htnT6JIt8x135vxDxvQ4aMp0GfcK3iXsKGCEgILrgXO/GbEu8e
-         13O3BJkuVtCUHHV4LyBKu2ClN0ixVOytNtSEmYj84rglo0wG6xqETEzeGJyYi/XvT176
-         QmFlUh15r4WDKHpFxw2yu7t3BhUnMORtkWi2toKOpfkEYBkzYTdVkCZjGtd92yezaS7d
-         4+zthzFi0WOL1m2XJR8y8VQtQ0ZwvwcyHP7RxEtxNZXF9Rzeam4XyJ5eCwudG0ZmryfN
-         hSETK2mqIj04WN48XzFUEzb1aCdZ8ckTSyw7Pp/d+F7y7aXNCnihkuwYx1GGpvq2q5x0
-         5f+w==
+        bh=3lzZ7GYxAZkVGEZUpJdPRfH1NuosiuFuGkMMzSnec4o=;
+        b=CH7/s/3o7uf7KReGiZ9e0vkmQdCS/HSAfL91+oPm2FmGXcbpXJXgDQsfzbnoCNBQ5k
+         d0ouMlHRiZMtFXIdew75JHvu2Ani2Ovy5BloCmRmc2UxdECQd8CuZ1C994fHbQ2FQtip
+         tWz3nRdxcmgBCWEREMh8be0wAoy4kSQvsBS6Y4oeBbTxC9R7QQvasZaNKsJnGtEAwFl8
+         e7DYt5F2/LgEY3cFf/AT7Kk45q8+QbT70CONUmaN+jOe6e8gU+YeRWnImD8bd9es8Ad7
+         vSqyF9ktHU3bMIfsbkqQcvXOIhQE/Mj0vJOYTkYtW8ZKhzlLEXb944TJBf8N5kctUKC8
+         M2YA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785248600; x=1785853400;
+        d=1e100.net; s=20251104; t=1785248668; x=1785853468;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=w1o+lRjL5Bu7MJj4eoJSBjI4Yb8dSfa5/A/XYawdiOo=;
-        b=RJNOW2TTmW4Ba4FUrs7n7nLu3nwIMwltO9NuJxgAlw5yY/tQ11iZ3GUPvOHuVH7/93
-         TO3/CyWB9gtx5FWk3Cq3gfZDwwBPrfyAX9VgQmDzWc2sNSpGqzisvlg4UNnwtI0D9zc2
-         qlHohE3thWZ0SlfUCR3+TzcO6MBDoId4s4ym/tHQLJR19qxT1kwyl81zCjqPwhqLPwiU
-         RBwC+9msoigi4gO/9VbmuFuTkDbxO6QkKS/8FQgkFyREJkOKg8NRHhXM/eXDHevg+wDM
-         usXU42xu5XEgEshdJIIr4VN04S/jL1/pxEPb+O466PqaSyMmuU8CnwByjd4S5U/+HCux
-         kuCg==
-X-Gm-Message-State: AOJu0YyLn+t+eaf1GCFysH+m3q4hD1QiTNOIgWJGpoCXq9BbNMJD+fqa
-	qHf9eYu9rvQH7s+Tnj2mwWmtgGRTypXTjrHlaqw1BMcuzXNzrW+Uy/CYQO7y5VRVmqK3sbCjSS+
-	Nf99Tqw==
-X-Gm-Gg: AR+sD12Gile6slctf56hUyW7xY2xlD6tHDf74ntgvluKxq9nIk1QJQz6eYAj+y1l5fh
-	LLfdB97NidASbOpr0Y0EPiY3DvN/5JeuNnxaNl65NjnjRy4UwaUqT4nMZzW6wFn1owr6D1bm9+f
-	9TKqBQrFuPwzdKyrd66C8xbpP8cNJHLkvFGBh93eeChM+G01lcgAre+z+GyWLHv1mJO2w3KCMJJ
-	vDQ8BQCEfSaofpFeM99CMV2najkhaSrBismv9HqnWLj7aSQMq/wlOVaz9y+Im5YoapzcJ7aQUrQ
-	5u/aLK4txDwTbLtYi6bVp4o2jinigTcdKnKcGMfBFHXCpJA4edvNy3oXEBZ0sSveCJa/EJHyk9T
-	sbGO+xAbQXwXwTi20OM9+hV76OLlRKdWN1NO2x2ak4xW1W+uA9vLhc+42Q/FHk4nTforg0cxEfi
-	y5khLg5OMr3R6rFu51LbIqV0rjvT5mrpg5w1h1DCwg+RbhWAqCheoO/IHi1tSg9j2mqLe1AAtMl
-	k6c
-X-Received: by 2002:a05:600c:1d1b:b0:493:bb0:3b43 with SMTP id 5b1f17b1804b1-496c6426bc8mr31339625e9.2.1785248600381;
-        Tue, 28 Jul 2026 07:23:20 -0700 (PDT)
-Message-ID: <0051a0fb-9ca7-4f90-960e-08e0898ea874@suse.com>
-Date: Tue, 28 Jul 2026 16:23:18 +0200
+        bh=3lzZ7GYxAZkVGEZUpJdPRfH1NuosiuFuGkMMzSnec4o=;
+        b=BL+heQHICeFH+R2GjvP9c9ryHHBzA2xZbjYuQJcHv3pGGZa4eqHYQGRDMhDdvT+p4/
+         7vTN7UabheyDwNn8nFPuCBsFmLcBJ8YY3a12cLEMYySIeNX463ztiadwM/lVTa/P2Ds8
+         0U2SLkU6pI/nlov9KU3obv0bM5ByLG6UVUa/NFDE+QdYWD0zNb9s8Pipb+HVDlMt8oSk
+         xevUcWvao75/fnaj79bIp7sGUALq/siMbgL3b8kMuS58GUfgxCJPrO8hmwUaOY9fyPOv
+         HNTW3MdqtanTJF4nkas7RP4iu0GQJ12jN8ino6NWAMtS454Ej+iBDamMd8zVtgxAURbL
+         0A8A==
+X-Gm-Message-State: AOJu0YxNTOGz8yGn90s1QnUFkEAl8j1qHVr2T2K4+RLHbK8isZTIjUXM
+	llLdOOOpVtOXU3dtUzDqQQC0AIs9w+DAeZyh38stap9xp0dtF24FQLTk8JFoFV4uQzpbkM/pCEb
+	Uav/How==
+X-Gm-Gg: AR+sD11jLz22tZrByJVaUMvTEUB98+7R0gazqB8iuKg/bOIOzLMSM6ccO1fBZwgzK8D
+	liEaqwz7/XRuk0BipxDEFTHOS+TpvuDMkbld9cPsYK2LxUP7b5VXMqaW1GIo0bassYpkED6D/w/
+	+I6N2rNaxl+KVR4Q/dEvxrjBC9EXCY4yU7CK2+vZCyoL9l+e8re2234g5C3vshu2wshxF39N601
+	oRIHQ0XMJO3pv9urf89ITBcNVpBEI7ui5bQ14y1vzp7tc+8rKPjplyJZhu75ZILhMRNXJKMYuSY
+	b4tA6U0fkusfWJMRONgNXCmXq912ox6TpnNtli64u0M2r/aKmhB8Cd7ta3tpBJhbmuSh7h9sbcB
+	kRhf4cI/PTE1h8i5KOGy/Aj3y/qI/7f8xHjnmjPVhpTLJoFieyuPbnOaBkZp+SgojbRjPUWfg0b
+	CeXWrcLg8KVdySYTjMVcZTv5KTCsfFwCwURKcOGjEA4ON1nsp1fXuJN6Mhp1P1lIGNEw==
+X-Received: by 2002:adf:e19c:0:b0:47f:8282:42be with SMTP id ffacd0b85a97d-47fb1ecacaamr3144645f8f.18.1785248668204;
+        Tue, 28 Jul 2026 07:24:28 -0700 (PDT)
+Message-ID: <0798cafd-50e9-4910-990e-37c64bfa59aa@suse.com>
+Date: Tue, 28 Jul 2026 16:24:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v15 08/10] x86/shadow: make log-dirty mode enable/disable
- properly preemptable
+Subject: [PATCH v15 09/10] x86/shadow: make forced (L1TF) mode enable properly
+ preemptable
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>
@@ -130,178 +129,161 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <68c16600-a4bf-4060-a1fc-56c4ae655b03@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1785248600-C2AC8B50-467A7E34/0/0
+X-purgate-ID: tlsNG-42698a/1785248668-A8AC89EA-1A344F84/0/0
 X-purgate-type: clean
-X-purgate-size: 6503
+X-purgate-size: 5979
 
-Their calls to shadow_set_allocation() are the last missing piece.
+Like for log-dirty enable/disable, reduce the amount of work to do
+underneath sh_new_mode() by calling shadow_blow_tables() (which is
+properly preemptable) up front. shadow_set_allocation() possibly taking
+long also is handled similar to log-dirty enable.
 
-While it may seem a little odd, it actually turns out easier to deal
-with the continuation a level up from where the need for it was first
-recognized.
+Since this code runs inside a tasklet, carrying out preemption isn't
+straightforward; see the code comment.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-I think the point was raised before: It's questionable whether
-shadow_one_bit_enable(), upon error, should bring the allocation back
-down to zero. This is going to be especially bad for a domain which
-previously had shadow enabled already (which could be HVM or L1TF-
-affected PV). Even in shadow_one_bit_disable() it's not clear this is
-the best possible behavior - the pool may have been set to something
-larger than the default by the admin. For now I'm maintaining prior
-behavior, but of course things would end up simpler if we could just get
-rid of those set-to-zero operations (and then perhaps also on
-shadow_enable()'s similar error path); the possible caveat there would
-be that overall memory consumption may then appear to grow for people
-monitoring a system.
+The single-CPU case could of course do with improvement. Plus even on
+multi-CPU systems there will still be problems if there are enough
+domains all being switched to shadow mode at roughly the same time.
 
-Originally I was considering to further qualify the
-d->arch.paging.preempt.drop_allocation checks by passing further down
-the "resuming" flag, but for a well-behaved tool stack (which allows one
-shadow-op to finish before starting another one) there shouldn't be a
-difference. Thoughts?
+Interaction with other shadow-op preemption is a little rough: Any
+attempt to issue a shadow-op (other than get-allocation) will result in
+-EBUSY while the operation here is still in progress.
+
+Notes from discussion:
+- if there weren't certain special situations (realtime scheduling requirements, null scheduler,
+  vCPU pinning), simply handling softirqs _only_ in the tasklet might be okay
+- instead of doing shadow_blow_tables() and shadow_set_allocation() from the tasklet, we may be
+  able to arrange doing that in the context of the initiating vCPU (with all other vCPU-s paused),
+  scheduling the tasklet only once done, and making sure we don't fully exit back to guest context
+  in the process (but enough to allow scheduling to occur) [Could we have paravirt_ctxt_switch_to()
+  schedule a softirq-tasklet for VMs in transitional state, which then does the work?]
 ---
 v14: New.
 
 --- a/xen/arch/x86/include/asm/domain.h
 +++ b/xen/arch/x86/include/asm/domain.h
-@@ -236,6 +236,7 @@ struct paging_domain {
-     struct {
+@@ -237,6 +237,7 @@ struct paging_domain {
          const struct domain *dom;
          unsigned int op;
-+        bool drop_allocation:1;
+         bool drop_allocation:1;
++        bool pv_l1tf_paused:1;
          union {
              struct {
                  unsigned long done:PADDR_BITS - PAGE_SHIFT;
---- a/xen/arch/x86/mm/paging.c
-+++ b/xen/arch/x86/mm/paging.c
-@@ -215,9 +215,10 @@ static int paging_log_dirty_enable(struc
- 
-     paging_lock(d);
- 
--    if ( d->arch.paging.preempt.dom &&
--         (d->arch.paging.preempt.dom != current->domain ||
--          d->arch.paging.preempt.op != op) )
-+    if ( !d->arch.paging.preempt.dom )
-+        d->arch.paging.preempt.drop_allocation = false;
-+    else if ( d->arch.paging.preempt.dom != current->domain ||
-+              d->arch.paging.preempt.op != op )
-     {
-         paging_unlock(d);
-         if ( !resuming )
-@@ -259,9 +260,10 @@ static int paging_log_dirty_disable(stru
- 
-     paging_lock(d);
- 
--    if ( d->arch.paging.preempt.dom &&
--         (d->arch.paging.preempt.dom != current->domain ||
--          d->arch.paging.preempt.op != XEN_DOMCTL_SHADOW_OP_OFF) )
-+    if ( !d->arch.paging.preempt.dom )
-+        d->arch.paging.preempt.drop_allocation = false;
-+    else if ( d->arch.paging.preempt.dom != current->domain ||
-+              d->arch.paging.preempt.op != XEN_DOMCTL_SHADOW_OP_OFF )
-     {
-         paging_unlock(d);
-         if ( !resuming )
 --- a/xen/arch/x86/mm/shadow/common.c
 +++ b/xen/arch/x86/mm/shadow/common.c
-@@ -2440,12 +2440,22 @@ static int shadow_one_bit_enable(struct
+@@ -18,6 +18,7 @@
+ #include <xen/domain_page.h>
+ #include <xen/guest_access.h>
+ #include <xen/keyhandler.h>
++#include <xen/softirq.h>
+ #include <asm/event.h>
+ #include <asm/page.h>
+ #include <asm/current.h>
+@@ -2444,11 +2445,11 @@ static int shadow_one_bit_enable(struct
  
-     if ( d->arch.paging.total_pages < sh_min_allocation(d) )
-     {
-+        bool preempted = false;
-+
          /* Init the shadow memory allocation if the user hasn't done so */
--        if ( shadow_set_allocation(d, 1, NULL) != 0 )
-+        if ( shadow_set_allocation(d, 1,
-+                                   mode & PG_log_dirty ? &preempted
-+                                                       : NULL) != 0 )
+         if ( shadow_set_allocation(d, 1,
+-                                   mode & PG_log_dirty ? &preempted
+-                                                       : NULL) != 0 )
++                                   mode & ~PG_SH_enable ? &preempted
++                                                        : NULL) != 0 )
          {
--            shadow_set_allocation(d, 0, NULL);
--            return -ENOMEM;
-+            shadow_set_allocation(d, 0,
-+                                  mode & PG_log_dirty ? &preempted : NULL);
-+            if ( !preempted )
-+                return -ENOMEM;
-+            d->arch.paging.preempt.drop_allocation = true;
-         }
-+
-+        if ( preempted )
-+            return -ERESTART;
-     }
+             shadow_set_allocation(d, 0,
+-                                  mode & PG_log_dirty ? &preempted : NULL);
++                                  mode & ~PG_SH_enable ? &preempted : NULL);
+             if ( !preempted )
+                 return -ENOMEM;
+             d->arch.paging.preempt.drop_allocation = true;
+@@ -2785,22 +2786,80 @@ void shadow_audit_tables(struct vcpu *v)
+ void cf_check pv_l1tf_tasklet(void *data)
+ {
+     struct domain *d = data;
++    int ret = 0;
  
-     /* Allow p2m and log-dirty code to borrow shadow memory */
-@@ -2484,6 +2494,8 @@ static int shadow_one_bit_disable(struct
-     sh_new_mode(d, mode);
-     if ( d->arch.paging.mode == 0 )
+-    domain_pause(d);
++    /* Lock-less read is okay: The field is only written inside this tasklet. */
++    if ( !d->arch.paging.preempt.pv_l1tf_paused )
++        domain_pause(d);
+     paging_lock(d);
+ 
+-    if ( !paging_mode_sh_forced(d) && !d->is_dying )
++    while ( !paging_mode_sh_forced(d) && !d->is_dying )
      {
+-        int ret = shadow_one_bit_enable(d, PG_SH_forced);
 +        bool preempted = false;
-+
-         /* Get this domain off shadows */
-         SHADOW_PRINTK("un-shadowing of domain %u starts."
-                        "  Shadow pages total = %u, free = %u, p2m=%u\n",
-@@ -2511,8 +2523,16 @@ static int shadow_one_bit_disable(struct
-         }
++        unsigned int cpu, next;
  
-         /* Pull down the memory allocation */
--        if ( shadow_set_allocation(d, 0, NULL) != 0 )
-+        if ( shadow_set_allocation(d, 0,
-+                                   mode & PG_log_dirty ? &preempted
-+                                                       : NULL) != 0 )
-             BUG(); /* In fact, we will have BUG()ed already */
-+        if ( preempted )
+-        if ( ret )
++        if ( !d->arch.paging.preempt.dom )
 +        {
-+            d->arch.paging.preempt.drop_allocation = true;
-+            return -ERESTART;
++            d->arch.paging.preempt.dom = dom_xen;
++            d->arch.paging.preempt.drop_allocation = false;
 +        }
 +
-         shadow_hash_teardown(d);
-         SHADOW_PRINTK("un-shadowing of domain %u done."
-                        "  Shadow pages total = %u, free = %u, p2m=%u\n",
-@@ -2558,14 +2578,20 @@ static int shadow_test_disable(struct do
-  */
- static int cf_check sh_enable_log_dirty(struct domain *d)
- {
-+    bool preempted = false;
-     int ret;
- 
-     ASSERT(paging_locked_by_me(d));
- 
--    if ( shadow_mode_enabled(d) )
-+    if ( d->arch.paging.preempt.drop_allocation )
-     {
--        bool preempted = false;
-+        shadow_set_allocation(d, 0, &preempted);
- 
-+        return preempted ? -ERESTART : -ENOMEM;
++        if ( unlikely(d->arch.paging.preempt.dom != dom_xen) )
++        {
++            /* Wait for other continuation to finish. */
++        }
++        else if ( unlikely(d->arch.paging.preempt.drop_allocation) )
+         {
+-            printk(XENLOG_G_ERR "d%d Failed to enable PG_SH_forced: %d\n",
+-                   d->domain_id, ret);
+-            domain_crash(d);
++            ret = -ENOMEM;
++            shadow_set_allocation(d, 0, &preempted);
++            if ( !preempted )
++                break;
+         }
++        else
++        {
++            /*
++             * Limit the amount of work to do from sh_detach_old_tables()
++             * (called from shadow_one_bit_enable() via sh_new_mode() ->
++             * sh_update_paging_modes()), such that it doesn't also need to
++             * deal with preemption checks.
++             */
++            shadow_blow_tables(d, &preempted);
++            if ( !preempted &&
++                 (ret = shadow_one_bit_enable(d, PG_SH_forced)) != -ERESTART )
++                break;
++        }
++
++        d->arch.paging.preempt.pv_l1tf_paused = true;
++        paging_unlock(d);
++
++        /*
++         * Crude "preemption" of a tasklet: To avoid hogging the local CPU,
++         * re-schedule the tasklet on another one. Unless of course there
++         * is none, in which case we will simply continue here.
++         */
++        cpu = smp_processor_id();
++        next = cpumask_cycle(cpu, &cpu_online_map);
++        if ( next != cpu )
++        {
++            tasklet_schedule_on_cpu(&d->arch.paging.shadow.pv_l1tf_tasklet,
++                                    next);
++            return;
++        }
++
++        process_pending_softirqs();
++        paging_lock(d);
 +    }
 +
-+    if ( shadow_mode_enabled(d) )
++    if ( ret )
 +    {
-         /*
-          * This domain already has some shadows: need to clear them out
-          * of the way to make sure that all references to guest memory are
-@@ -2598,6 +2624,21 @@ static int cf_check sh_disable_log_dirty
++        printk(XENLOG_G_ERR "%pd: Failed to enable PG_SH_forced: %d\n",
++               d, ret);
++        domain_crash(d);
+     }
  
-     ASSERT(paging_locked_by_me(d));
- 
-+    if ( d->arch.paging.preempt.drop_allocation )
-+    {
-+        shadow_set_allocation(d, 0, &preempted);
-+
-+        if ( preempted )
-+            return -ERESTART;
-+
-+        shadow_hash_teardown(d);
-+        SHADOW_PRINTK("un-shadowing of domain %u done."
-+                       "  Shadow pages total = %u, free = %u, p2m=%u\n",
-+                       d->domain_id, d->arch.paging.total_pages,
-+                       d->arch.paging.free_pages, d->arch.paging.p2m_pages);
-+        return 0;
-+    }
-+
-     /*
-      * Limit the amount of work to do from sh_detach_old_tables() (called from
-      * shadow_one_bit_disable() via sh_new_mode() -> sh_update_paging_modes()),
++    d->arch.paging.preempt.dom = NULL;
++    d->arch.paging.preempt.drop_allocation = false;
++    d->arch.paging.preempt.pv_l1tf_paused = false;
+     paging_unlock(d);
+     domain_unpause(d);
+ }
 
 
