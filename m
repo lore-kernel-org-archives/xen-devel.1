@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB6ABC53219
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 05:07:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1372052.1619475 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBF8EC54F4C
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 05:07:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1372048.1619441 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woa1t-0001IK-Km; Tue, 28 Jul 2026 05:07:01 +0000
+	id 1woa1r-0000ZK-3r; Tue, 28 Jul 2026 05:06:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1372052.1619475; Tue, 28 Jul 2026 05:07:01 +0000
+Received: by outflank-mailman (output) from mailman id 1372048.1619441; Tue, 28 Jul 2026 05:06:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woa1t-0001Hs-Gp; Tue, 28 Jul 2026 05:07:01 +0000
-Received: by outflank-mailman (input) for mailman id 1372052;
- Tue, 28 Jul 2026 05:07:00 +0000
+	id 1woa1r-0000ZD-0U; Tue, 28 Jul 2026 05:06:59 +0000
+Received: by outflank-mailman (input) for mailman id 1372048;
+ Tue, 28 Jul 2026 05:06:57 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <taka@valinux.co.jp>) id 1woa1s-00011Q-HG
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 05:07:00 +0000
+ (envelope-from <taka@valinux.co.jp>) id 1woa1o-0000Yv-00
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 05:06:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woa1r-00Fj7M-UB
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 07:06:59 +0200
+ id 1woa1m-00Fj7M-Mw
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 07:06:54 +0200
 Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <taka@valinux.co.jp>)
- id 6a6838ed-bab6-0a2a0a5309dd-0a2a4504d6a2-30
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 07:06:59 +0200
+ id 6a6838ed-bab6-0a2a0a5309dd-0a2a4504d6a2-0
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 07:06:53 +0200
 Received: from [52.101.125.79]
  (helo=TYVP286CU001.outbound.protection.outlook.com)
  by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <taka@valinux.co.jp>)
- id 6a6838ea-b57f-0a2a45040019-34657d4f8021-7
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 07:06:59 +0200
+ id 6a6838ea-b57f-0a2a45040019-34657d4f8021-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 07:06:52 +0200
 Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:458::18)
  by TY1P286MB3277.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:2e5::9) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.13; Tue, 28 Jul
- 2026 05:06:57 +0000
+ 2026 05:06:48 +0000
 Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  ([fe80::c8c9:25cd:8d13:96d6]) by OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  ([fe80::c8c9:25cd:8d13:96d6%6]) with mapi id 15.21.0245.012; Tue, 28 Jul 2026
- 05:06:57 +0000
+ 05:06:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,116 +57,100 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=kYlJlerv89DcY5PlB0gA2Jy5rfjxKteyAQA2B4xzTQFR7lfZhC2v7ugm76YUfHklkKEQqKGlNgdu0xpJPvKrD5V5abNSCuYbMIG8V7AmUsFEsUT9cof/JWJNXWliFlNAj1cq6yvGGZqAPuCV7u+cqY11d2SHbX3JujyWzTzqZlCZnyd8NQRYTGy5dpuKNsB+eAHVSj+rIEvi5vR5h3qhCE7JqIkx7kqvldCW18FahZREgUDlwv9dXDMM3WzdHg5n53+mlPDNrC0mS+rIgO/4DaOPEZiY3xKG1Z9Ir/QKJr2xLF1Xlxl1obv5SUZ9CCF7LPCguXT/LzY01woP2nIsnw==
+ b=flmWxBVhf2Bwo8el3iB3hRs/hMG6YputCcmyrZjPwp9ZHXCRF9i8oQW5RIBYR1bycA5lktAjYCDtUsfnb8uaYsSo9QfMJGrb/cr7lM0LzMDvKZFjyv+aFg/lsQlY2r0xnZrrTDsXLFDa9wjYULn6mbs1XzSB+XvFFSI/Kd5TJBGfHxbXl0eXKoHzcQWTcFLhjciTtQSx64qvx4wq+T4PUMCURv0YbPOLrFSEvcmgWzAQZqVfTlLpApy79CvWjbFHZ7x1syXxy1cUZrCtOu1GI7dn4aPKjSHIkwc4Ms11wK1kSu3czCjcKhm20wCSDxrjDZqFxenEmJl4wQzOkXLWmQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NRJALSvaO0+13oGmqfWWX2m0DlQpLj2Y93MTzehhhNM=;
- b=uFlae9nVykJzHD9Cb3xgdOsXKWvUnxixh2XBzz9rt5Ox8JHthMoMWQIxxiG+U/oL5MXD3cvg06Bx08E/MBu9CfMmQgX4KnutRUncItX09Ozb3Yek5S6VCJ5qzIPZ9ZE52F4uattx1Nkapa2H87kPO9B11ckCfSWOet5D/TUNycBWba0ikg0cdZ568Z3XPkxfyE25gLyPtjQcLMsT2q7L6q3WMAtr6vSC9q1cjb3WJ9Zs0iV1QSFSVWkbKr01H9vnUt1g/Tta24aloARxOFdgJTNqpLXCljWz211blUpFokKMBxKAybVYRqErjKUsW0HIs9fwmJlPU+WkS1nzNn1NBQ==
+ bh=lIH8iTkHiSnoxIPOsKQcpvdot41oBGlcBy+kpYGk440=;
+ b=tD+4JcjCpOzqDcEmXKckXGS/WkQaDt4Rxkto41Ib0U9CsRYCTz8Vc+1X/MaGz4/66PznLl3JLR3qVIpeQIFQOEDHkmZlBJ7N7SDuEB3yV7OrJEELahkAuo1/2d7gl9ez/mOyGcN3Wnhi501YnbS2WystDURekC3ioqZnhb0RUDXZ4YQCiSkCGnGDHqEzoJTi91v134WA5AaoKBzMblWAUemmribG/zXMdepufw6pY+M+b/g5QsArJDwIlY5+aekzDUpD6UI0RqACdl3zx5RjRS8s+EhYlE/AmPcLm36njoGYxV6sls+mGLuVmLaqrCqCZ7798okK4SfIEc2sqzpraw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
  header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NRJALSvaO0+13oGmqfWWX2m0DlQpLj2Y93MTzehhhNM=;
- b=uKbAEwiKS2R/N/MaiDMqJScXBov/lvNTEdvX+5VfvjsO6kxOb/b40tGnuAxCpmoX5IjHhnfxts1f8CjfdfPP5Wq3TdZBkMbA6TVspBXajx8y6VwPYqSNQSz5O8CYEtTanMGec9HuColGMgknD3PXAhCNQ42AgWyoNhNkVwk5xeE=
+ bh=lIH8iTkHiSnoxIPOsKQcpvdot41oBGlcBy+kpYGk440=;
+ b=rBcR2ygloXQaDabXxYu3hjk43T9ulaeNZw1Oy2MuXBEp9mhRfJzeDs8U9qkQk6JfKjLK4VZHlcVUfI1QwPPpjre2Vd0dx6d62by+SalHeQ/uBzP/MMyBCjcMmr7D/CKjk29hJDqQuuZ8F5rdlt8DTsW708Zik+pr1iy5wY1fiwI=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=valinux.co.jp;
 From: Hirokazu Takahashi <taka@valinux.co.jp>
 To: xen-devel@lists.xenproject.org
 Cc: Mykyta_Poturai@epam.com,
-	Hirokazu Takahashi <taka@valinux.co.jp>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v9 4/4] xen/acpi: Parse PPTT to initialize CPU topology
-Date: Tue, 28 Jul 2026 14:06:42 +0900
-Message-ID: <20260728050642.411240-5-taka@valinux.co.jp>
+	Hirokazu Takahashi <taka@valinux.co.jp>
+Subject: [PATCH v9 0/4] xen/acpi,device-tree: Introduce generic CPU topology support for ACPI and DT
+Date: Tue, 28 Jul 2026 14:06:38 +0900
+Message-ID: <20260728050642.411240-1-taka@valinux.co.jp>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260728050642.411240-1-taka@valinux.co.jp>
-References: <20260728050642.411240-1-taka@valinux.co.jp>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: TYCPR01CA0157.jpnprd01.prod.outlook.com
- (2603:1096:400:2b1::10) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+X-ClientProxiedBy: TYCPR01CA0164.jpnprd01.prod.outlook.com
+ (2603:1096:400:2b1::19) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:604:458::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: OS9P286MB7222:EE_|TY1P286MB3277:EE_
-X-MS-Office365-Filtering-Correlation-Id: b6a8b051-f3c6-45bf-c610-08deec660c6a
+X-MS-Office365-Filtering-Correlation-Id: fddb030b-bcc5-4634-d091-08deec660707
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|7416014|366016|10070799003|23010399003|1800799024|6133799003|18002099003|22082099003|56012099006|10067099003;
+	BCL:0;ARA:13230040|376014|366016|10070799003|23010399003|1800799024|29003799003|6133799003|18002099003|25016099003|3023799007|56012099006|10067099003;
 X-Microsoft-Antispam-Message-Info:
-	U9BaHD7BqVrFWkrt0r4EdTQhLXVEVIldRjPPlhOoF8joANhWu+ngR8v6F/nfjQaLBJ3KvzfZcIC4KVerQ7wFtBK4EjIkwXXM7O+fXbRWrVHfDQKMuUH0UaFdRKqTkz64UmCYu/0dB+SGnUqRK35t30TcMPQmvpCIa3P010PIdwM7ZBqRsqlXUsBndRfF1NJ4tXvZJeSGT2E4Wt4o2nGSpQYSrGY6pPHIoMyKOlzzlXoCIII7Cp/pIUdM943Sm/fjgMwhp87dyspAFNsM9vqQ0Q/77QazKDI6YUQ3G9+p4gN8b+/iXwyaZVviZ3hbw84Pep1sYHB8Dhz4E4V78ooSOEidY83TwoP9RyHbY0AbCm9As+19AFlIxJ2+HlmJUtUb7T8eX3BfE08GSVw2ILBegKr85tBMR9ktfU99jj4y7tsrcKLHnOkorNwsae+jR4AAmYPAdmrCuWg9GDkd2A9sdV7QtR6tuhf72i4oYyc63sFuCguQp+d8sNXeZwdYO4QokyH9oMRZBEDKMRMPCQbT5Ibfj3OK/N2OeOV625Bh/U0ykEv/ztOB0FGUZKOZz+2pSHMHGfx67wABjxEBMulRqb88MDJlM/rECMthGNvo6fxIxdWrEOkXqzWWXfOB6drUyDBRv5RCOVHA1W7j84VdzQuAxaeFRErFTsSWbaUxBpY=
+	GZAPflQFMGMnj/UAkqQSTHcTMZsOH7L7kh6ElLZ3T6avwcpZOU/2PAEre6PwexUPyTmFUDHZ1/BOT/2GGJxNDXFeTwLTGMsU1Vo7MzDtBnA9lzxhBcOkGM2CNkJIlYzC3iSmF+2DYT95tW5au9vxxpn8lPlwCGYhViMqhOIgYUzDnVKo/qUpdQcIpN0t4Sw3B6GpQCh90GCjI/sijNjD/PvXjKbduoAUos5M/OgOM16nP13uBgDZO8ryWvUmrvd27SVgacBkHxUcnqFRr6RI9Ot2oNRAFA0x50w6zTl1JkjAzrXx9kFF0/pfch948jHB/L51CIfrDDkSs39yT6gpS0dACwsgjv2i0nkX/oD+Muh8vOj8WDaUWcsxxp91txx2Rhj1inOVAAM2ndbNe+ZzSV0d9V7ZVbJRaNO1wY5aQPFYLVEB4q0cYrTLgZOhwr69Lb3q3hkEUcMZi35wpfT3VhbevnfynhwI++nh3HCldLUvpy/sk3/JmnOwVz9WhvSYJUEZ4Dl4lNKfNj3dk2/gdDKrZTTRK1ZC+QyskP3XUoae0QRHZfc2RaPvT7kph8qCTUTILnPQqs3HhiGYKxREm6YIadvpeXd2njjWxuvWe5lnCWtldCCRk2Qj/rHGMY6ocYYLo1r4Ih3dCfk6moLDKHLtea9VK8pp7dTEtxoQH68=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(10070799003)(23010399003)(1800799024)(6133799003)(18002099003)(22082099003)(56012099006)(10067099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(10070799003)(23010399003)(1800799024)(29003799003)(6133799003)(18002099003)(25016099003)(3023799007)(56012099006)(10067099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?AMjoq4XAp0RSTdOXLivQZMn3moZ0cryEh0FC8O3PFznFolElxcvxSfoIw5/7?=
- =?us-ascii?Q?i6pdGL8OBOD+058kiDXr+pjmurivzHZzL2SgReycgAjuMVkHy08dHbLop6la?=
- =?us-ascii?Q?xLxYvT5l2IfbxxI38Pr7QyFAV+6AnTHurIS2TVTZpvdQc7jVvegQP0pT90A+?=
- =?us-ascii?Q?yNo0l7Z/d9qX0LFNTG/+j17d2yhzgnGG08ygVuTf2qdtIVq2fbLmlT7M5zWo?=
- =?us-ascii?Q?HMD6/mDODqanxpQpqLnxJFefi07OYIB8ZjEdg2lnGYP8th6GSks91cGTpoW3?=
- =?us-ascii?Q?QFYmpgs6tfdCjJwV6/KmVBlwY86bEezCIFWBpUDPhD6SqcdvY4yD/V15F5O0?=
- =?us-ascii?Q?Ui5ys7N5UHEtJ+WFGIj0rqRAyyP6XK73oIIgbeThRRAwnvkbbSCV4AdIWwI7?=
- =?us-ascii?Q?5Pen6Yx3ZKHCEM0EfHpnQ6WSrLqLmanNDbDz65w8v2gsCaz/iy/Nzo4UkFi4?=
- =?us-ascii?Q?cIJkCrCLEDi9QToCWmznR5sPmQfNqTvcamB8Yeld4zmsIkAVVw8UajHwIFKa?=
- =?us-ascii?Q?HbIvB1DS9PVz6uEiZLp3s+fumwBU6S50IWHBMMMvCMVAkMDSuVZEWKxCta6c?=
- =?us-ascii?Q?5CTW/2BIdSsxU1xVlXOYugMjwySiZXzJd5pjRHV3nBEGYHVPhs1ZW5g2ddK+?=
- =?us-ascii?Q?YVRnJ2gPSr7Y7vIPjZ2CjOffBEjcpcyg33moyFOb4qZC8hEHkRTJ2MOb+eD6?=
- =?us-ascii?Q?l2NRBSRoOFYwZYfKsi/I2l/atXzIXKrrJti0r4gG8PIDHZhyd65n+mGaRvl5?=
- =?us-ascii?Q?S2U0CZ/3g5WwU69oBjb7a30/KcnPFaC5JFZwLIID3Vh2BI5jSDxiaRY53YxZ?=
- =?us-ascii?Q?qb9OE1BQUudtSKbH2fwRn74IOJqyEN1JJOUFxDoyWzIec2UzxeGQPq5LtHnJ?=
- =?us-ascii?Q?N9yHj2XLQ2JkKr5KckdG7Q7V7IzYnfayis5pVZ76H5DD0np7CIMWC0Q3ajQE?=
- =?us-ascii?Q?sdW6p4YcEUYPLW6yJ+2lhHM5FswKQZvgEzkh2jDKj2GGh+g9w9Kqcia3CxUc?=
- =?us-ascii?Q?Jzk758diJKQYlGAqEGGSYyEuCNDS5QRtXouWtZgemY4aLCzG/jrxN0dVfdne?=
- =?us-ascii?Q?6hoXLgEYO34l/Z2QQ553r64PoCY4FCpSlevLn6PB/pms29JHRorxO4fMTIDY?=
- =?us-ascii?Q?vzLPbS74mS3ld5VDOhZkKovvRWOpUZr1WURIca0wLszL3I7WjDoeAcXUmS78?=
- =?us-ascii?Q?9ecZuSw7IH/DOGt+SumrccpnbVy8DDTLvjIkNVXEXqUaCDE2sHcYGGHO4B9J?=
- =?us-ascii?Q?c78taqqO66bL/2PE/0Sn3oIvX8PT+LXIkMRQVBcLZZCVjxDO9BgEHqUflGyW?=
- =?us-ascii?Q?s0k64cqPp7ysUUlyodsQvNxuuXXU92DuzlkgjnF6vRMAWy/Ig/zjHmXfyVWE?=
- =?us-ascii?Q?mljj1TRvEvstKNZq/EStd4R5shy7E6wDQ4Nce28mjtpWD0U4lyPIPANoN5Fw?=
- =?us-ascii?Q?62DrnULjN4TLxWx0t3EgJkuABTi90qzsDs+D08QwOv/LeOFlO/irpSNxgyC1?=
- =?us-ascii?Q?HwR7Hw8UTvaMyMilmx5YtWuR5Q3r8sJ9kI0vdIO3gYG5ktpA2lJuWdoBSApU?=
- =?us-ascii?Q?RsoHVys9HbgQsnwNMi3UJO0zyRGtcFz1W/t8JNRsbz02o1nm7iMlGsd+78A3?=
- =?us-ascii?Q?QI5MLuXykEPhOr6ElYaGfQi31BtPkMo5f1QtVwRSIbDbmPemHJTWQZGXGc/F?=
- =?us-ascii?Q?wwkIq6VGyZIbtWx4L+H+B88+Qqn3ceUFNfp7SOzYJxzGvfYcT+DT3VLD3ehm?=
- =?us-ascii?Q?6LIv1rRLKjMlrjtcMPVV4+e2kFo8PHMKzNQk8WfE9VSbWdvotACZOLNGRKU3?=
-X-MS-Exchange-AntiSpam-MessageData-1: hzfyaBwDCKnJOA==
+	=?us-ascii?Q?0IBbGEk9RlW5KkF/EQUu89X/fdkipBj6b4oZCxYmrB3I3B96Gw1/hl/lYUnU?=
+ =?us-ascii?Q?1hQBo7r/rkmq0x6g3v+Np/0imgmRW95Yvq5X7+n93qo5IG7eFSV/1ZblbcuE?=
+ =?us-ascii?Q?QQCAm9ANwTUkYu9yonaLMxMVYIgBDCRc4CPKbvjj9sJTF71lvSodKB3TYth/?=
+ =?us-ascii?Q?Q5glSg0l3nmAtzU5H4CDaQ5MeDR+WR3Mn7Rje6X2LDbHxkxlPzP3qmOTOjZI?=
+ =?us-ascii?Q?a1ixLnMlPpcGpKeHAruzFGZOzHJAiLKOB0kqcYma0dOO6maRlZOm54TwtllO?=
+ =?us-ascii?Q?Bow7n0Hb/T4HP99yw/MYYYlGsvF7QyOfzzMvJnIS+DL7DWSLfM3BwdG/RUCA?=
+ =?us-ascii?Q?rQPwDUHFaYghF2u/YFFBdY029MftedJo+lfZIBn3hkYB4uL2zZqAbrUdaL2R?=
+ =?us-ascii?Q?gt9WajsVstniZOo2tsVZDtdXerpklcU5aja+oK+j8EeTp+oPyZceziqYocRV?=
+ =?us-ascii?Q?gIBoCuAlCh5SYe/QJnrWswEVP0m6XBAGoSUB9smlH5lj9A3Xjz7+Dm9dw8dF?=
+ =?us-ascii?Q?jvahVtIhSXpSiZQbMiqPxTWkp2plcjFmEV79PYKIwWMORDkyhYzli/QZwpaP?=
+ =?us-ascii?Q?mGl8iiaDV8+YbKnEZ6h0EZ06IHHwq7InlMgVJhB50il53Y3gFTm3z5h4/vZR?=
+ =?us-ascii?Q?Ta5PWdF1/L4B8zhetJbLIGu5tbSSRqADQzjoPW0+gGTyN4yY21surjEwVmwa?=
+ =?us-ascii?Q?3kotLesGHGboU0GMsJWFKqQSmWlIHynq0CqVlaN5j6SR2CwlfQn8CXeXQfjQ?=
+ =?us-ascii?Q?ag/S3Q+lKvf3IKC7AF2WZH5o5cHoxyF2b7rF4PNW4GVDhgCv+jdVdXP3nHnS?=
+ =?us-ascii?Q?zvtOBcB64o6VPLGBI172Tz49NrtFe/mHQPethPbG+YsLz9wpBE6N83E05Crz?=
+ =?us-ascii?Q?jeRZCCtFNSwGp1y6OfLuP0vU7Gdx1wEScLbLDEUWphG5b5elnbiC8wgCns+l?=
+ =?us-ascii?Q?xDVrPm3WYWkdsqd6v0Goocsyn0Fo1nReCm2NWd8pDuhFYn7gBcY22/bxtZ99?=
+ =?us-ascii?Q?LznAbRwdwUSEWGnCPlkbVgvYh2IWwByqQYMXGmtOoLbYvrIVzVsM3Avv7FLc?=
+ =?us-ascii?Q?Ei0P3/XqIH0QANgpYNE0OOAcYGki+vWTwp+N2WZjO0fRO/ix6WmqkDMygGAb?=
+ =?us-ascii?Q?ZhtQBTlqq8iziDYc6onP4zr5Ax1B2OS18weUZgRrd1jjcbakrNhUxqa97ia0?=
+ =?us-ascii?Q?1VMZ6T4QM/Y6tuwxctFn4cEqgrV5homQkTOmoDYBkKaHT+p4JTCcHzVbqjSo?=
+ =?us-ascii?Q?Cisjtxs7jtwEpgeiXH858kx97xSspEzrQJiETQcPXShXOr97wWdh5nOT2Dgx?=
+ =?us-ascii?Q?REpez22b54oexIVJ8zdeparKgOJIOj8huXJAjbDYVjJ7a9CHF8VPl31IYvxs?=
+ =?us-ascii?Q?dGTFQBixwJCOq9IXSqxFr31Z4FOR9pJz2z0/dwFsestnunYtFG9BkgWJ3N0G?=
+ =?us-ascii?Q?8aYUKxhhxfQdJ/LwfpxrN4VWqLOWI6jpnVJXToTGoFa451QIJW47S4hoB7i6?=
+ =?us-ascii?Q?ITV+BET0PiPVUQL5KfLwgQdEB4qN0sVns21uwQDflYZM7bXDxKTFZO+PP51q?=
+ =?us-ascii?Q?QDxZ8g/+BMx+MmMF+sVWKqZoP9xLwgGQCJfrzKxIu/6g8s5pYdmv5dWluNzk?=
+ =?us-ascii?Q?JVBmeaadYkfXTrKy4YXCAMaTtjoBFsDTV7vusC5HqT7YXTB721FvaEhF0cg/?=
+ =?us-ascii?Q?9uScMagfNOWyMURi+gFWmxbl9MTX+IQ+7qfKEbU0uOKqpwWUUIxyritwlcWP?=
+ =?us-ascii?Q?47/r6ywoksri6eUmCXHyXJhgYJEXTt+diacRmLyyveeHs6mep7+t3urn07/w?=
+X-MS-Exchange-AntiSpam-MessageData-1: pwdX/IUX3rfCGw==
 X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: b6a8b051-f3c6-45bf-c610-08deec660c6a
+X-MS-Exchange-CrossTenant-Network-Message-Id: fddb030b-bcc5-4634-d091-08deec660707
 X-MS-Exchange-CrossTenant-AuthSource: OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2026 05:06:57.4042
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2026 05:06:48.3477
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2ddBm6qrEYYsLuMZ/uvPlDFpA/YkKcJx5O3Huf7dJomzXaVwwvU1iPFkcC/6mNdq6Q8lYNHROFB15EFV/rGvMQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: Tco9q+oZKBcmPdNqbA04Jbsn/J+v88/bIw0YKov7BwZ+1iEsUyAQxLf7vqQ2lwmEUZN/zES76cKGCdX4SiSe+Q==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY1P286MB3277
-X-purgate-ID: tlsNG-ebf023/1785215219-C08D9B50-33643606/0/0
+X-purgate-ID: tlsNG-ebf023/1785215213-C0AD8B50-9C0FCA69/0/0
 X-purgate-type: clean
-X-purgate-size: 14692
+X-purgate-size: 11491
 
-Parse the ACPI PPTT (Processor Properties Topology Table) to
-initialize the CPU topology.
+Hello,
 
-For ACPI 6.3 and later, the ACPI_PPTT_ACPI_PROCESSOR_IS_THREAD flag
-is checked to determine the presence of threading. For ACPI 6.2 and
-earlier, CPUs are assumed not to support threading.
+This patch series integrates CPU topology discovery into the Xen hypervisor
+for both ACPI and Device Tree platforms.
 
-Signed-off-by: Hirokazu Takahashi <taka@valinux.co.jp>
----
 Changes in v9:
  - Add bounds checking for the number of private resources in the PPTT
    processor table.
@@ -180,419 +164,223 @@ Changes in v9:
      that combine logical operators.
    * Combine variable declaration and initialization where applicable.
 
- xen/arch/arm/acpi/boot.c        |   2 +
- xen/arch/x86/include/asm/acpi.h |   2 -
- xen/drivers/acpi/topology.c     | 323 ++++++++++++++++++++++++++++++--
- xen/include/xen/acpi.h          |   4 +
- 4 files changed, 316 insertions(+), 15 deletions(-)
+Changes in v8:
+- PPTT Table Validation & Hardening:
+  * Relaxed processor node length check to allow
+    proc->header.length >= table_size.
+  * Treated root nodes (nodes with parent == 0) as equivalent to
+    ACPI_PPTT_PHYSICAL_PACKAGE nodes.
 
-diff --git a/xen/arch/arm/acpi/boot.c b/xen/arch/arm/acpi/boot.c
-index 4ac0fd8f51..fc7ecb5749 100644
---- a/xen/arch/arm/acpi/boot.c
-+++ b/xen/arch/arm/acpi/boot.c
-@@ -85,6 +85,7 @@ acpi_map_gic_cpu_interface(struct acpi_madt_generic_interrupt *processor)
-             return;
-         }
-         bootcpu_valid = true;
-+        acpi_map_cpu_acpiid(0, processor->uid);
-         return;
-     }
- 
-@@ -119,6 +120,7 @@ acpi_map_gic_cpu_interface(struct acpi_madt_generic_interrupt *processor)
- 
-     /* map the logical cpu id to cpu MPIDR */
-     cpu_logical_map(enabled_cpus) = mpidr;
-+    acpi_map_cpu_acpiid(enabled_cpus, processor->uid);
- 
-     enabled_cpus++;
- }
-diff --git a/xen/arch/x86/include/asm/acpi.h b/xen/arch/x86/include/asm/acpi.h
-index 217819dd61..7a89baa143 100644
---- a/xen/arch/x86/include/asm/acpi.h
-+++ b/xen/arch/x86/include/asm/acpi.h
-@@ -132,8 +132,6 @@ struct acpi_sleep_info {
- extern u32 x86_acpiid_to_apicid[];
- #define MAX_LOCAL_APIC		MAX(256, 4 * NR_CPUS)
- 
--#define INVALID_ACPIID		(-1U)
--
- extern u32 pmtmr_ioport;
- extern unsigned int pmtmr_width;
- 
-diff --git a/xen/drivers/acpi/topology.c b/xen/drivers/acpi/topology.c
-index 56fcfa4945..c543ed85c9 100644
---- a/xen/drivers/acpi/topology.c
-+++ b/xen/drivers/acpi/topology.c
-@@ -4,33 +4,330 @@
- #include <xen/cpu-topology.h>
- #include <xen/cpumask.h>
- #include <xen/init.h>
-+#include <xen/xvmalloc.h>
-+
-+#define ACPI_PPTT_MAX_LEVELS 16
-+
-+static uint32_t __initdata map_cpu_acpiid[NR_CPUS] = {
-+    [0 ... NR_CPUS - 1] = INVALID_ACPIID
-+};
- 
- /*
-- * TODO: Populate the topology information by scanning the ACPI
-- *       PPTT (Processor Properties Topology Table).
-+ * The first argument 'cpu' is the logical CPU ID assigned by Xen,
-+ * and the second argument 'acpi_id' the 32-bit ACPI processor ID.
-  */
--int __init acpi_init_cpu_topology(void)
-+void __init acpi_map_cpu_acpiid(unsigned int cpu, uint32_t acpi_id)
- {
--    unsigned int cpu;
-+    map_cpu_acpiid[cpu] = acpi_id;
-+}
-+
-+static unsigned int __init get_logical_id(unsigned int key,
-+                                          unsigned int *map,
-+                                          unsigned int *count)
-+{
-+    unsigned int id;
-+
-+    for ( id = 0; id < *count; id++ )
-+        if ( map[id] == key )
-+            return id;
-+
-+    map[*count] = key;
-+
-+    return (*count)++;
-+}
-+
-+static bool __init verify_subtable(const struct acpi_subtable_header *entry,
-+                                   const struct acpi_table_pptt *pptt)
-+{
-+    unsigned long table_end = (unsigned long)pptt + pptt->header.length;
-+
-+    if ( entry->length < sizeof(*entry) || (entry->length & 3) )
-+    {
-+        printk(XENLOG_ERR "ACPI: PPTT subtable length is invalid\n");
-+        return false;
-+    }
-+
-+    if ( (unsigned long)entry + entry->length > table_end )
-+    {
-+        printk(XENLOG_ERR "ACPI: PPTT subtable extends beyond table end\n");
-+        return false;
-+    }
-+
-+    return true;
-+}
-+
-+static bool __init verify_proc(const struct acpi_pptt_processor *proc)
-+{
-+    unsigned long table_size;
-+
-+    if ( proc->header.length < sizeof(*proc) )
-+    {
-+        printk(XENLOG_ERR "ACPI: PPTT processor node length is too small\n");
-+        return false;
-+    }
- 
-     /*
--     * Generate temporary cpu topology information for now.
--     * It assumes that the cpu doesn't have SMT and all CPUs
--     * belong to the same socket.
-+     * Each private resource is represented by a 32-bit resource ID.
-+     * Reject if the number of private resources exceeds what can fit in
-+     * the 8-bit limit of proc->header.length.
-      */
-+    if ( proc->number_of_priv_resources >
-+         (UINT8_MAX - sizeof(*proc)) / sizeof(uint32_t) )
-+    {
-+        printk(XENLOG_ERR "ACPI: PPTT too many private resources\n");
-+        return false;
-+    }
-+
-+    /*
-+     * Ensure the structure length accurately accounts for the trailing array.
-+     */
-+    table_size = sizeof(*proc) +
-+                 proc->number_of_priv_resources * sizeof(uint32_t);
-+
-+    if ( proc->header.length < table_size )
-+    {
-+        printk(XENLOG_ERR "ACPI: PPTT processor node length invalid\n");
-+        return false;
-+    }
-+
-+    return true;
-+}
-+
-+static const struct acpi_pptt_processor *__init find_pptt_node(
-+    const struct acpi_table_pptt *pptt, uint32_t acpi_id)
-+{
-+    const struct acpi_subtable_header *entry;
-+    unsigned long table_end = (unsigned long)pptt + pptt->header.length;
-+    const void *ptr = pptt + 1;
-+
-+    while ( (unsigned long)ptr + sizeof(*entry) <= table_end )
-+    {
-+        entry = ptr;
-+
-+        if ( !verify_subtable(entry, pptt) )
-+            break;
-+
-+        if ( entry->type == ACPI_PPTT_TYPE_PROCESSOR )
-+        {
-+            const struct acpi_pptt_processor *proc =
-+                container_of(entry, const struct acpi_pptt_processor, header);
-+
-+            if ( !verify_proc(proc) )
-+                break;
-+
-+            /*
-+             * Leaf node verification is only required for ACPI 6.3
-+             * (PPTT revision 2) or later.
-+             */
-+            if ( (proc->flags & ACPI_PPTT_ACPI_PROCESSOR_ID_VALID) &&
-+                 proc->acpi_processor_id == acpi_id &&
-+                 (pptt->header.revision < 2 ||
-+                  (proc->flags & ACPI_PPTT_ACPI_LEAF_NODE)) )
-+                return proc;
-+        }
-+
-+        ptr += entry->length;
-+    }
-+
-+    return NULL;
-+}
-+
-+/*
-+ * Populate the topology information by scanning the ACPI PPTT
-+ * (Processor Properties Topology Table).
-+ */
-+int __init acpi_init_cpu_topology(void)
-+{
-+    struct acpi_table_header *table_header;
-+    const struct acpi_table_pptt *pptt;
-+    unsigned int num_sockets = 0;
-+    unsigned int num_clusters = 0;
-+    unsigned int num_cores = 0;
-+    unsigned int *socket_map = xvzalloc_array(unsigned int, nr_cpu_ids);
-+    unsigned int *cluster_map = xvzalloc_array(unsigned int, nr_cpu_ids);
-+    unsigned int *core_map = xvzalloc_array(unsigned int, nr_cpu_ids);
-+    unsigned int cpu;
-+    int ret = 0;
-+    acpi_status status = acpi_get_table(ACPI_SIG_PPTT, 0, &table_header);
-+
-+    if ( ACPI_FAILURE(status) )
-+    {
-+        /* A missing PPTT is benign; fall back to the default topology. */
-+        ret = -ENODEV;
-+        goto out;
-+    }
-+
-+    if ( !socket_map || !cluster_map || !core_map )
-+    {
-+        printk(XENLOG_ERR
-+               "ACPI: Failed to allocate memory for topology parsing\n");
-+        ret = -ENOMEM;
-+        goto out;
-+    }
-+
-+    pptt = container_of(table_header, const struct acpi_table_pptt, header);
-+
-+    for_each_possible_cpu(cpu)
-+    {
-+        uint32_t acpi_id = map_cpu_acpiid[cpu];
-+        struct cpu_topology *topo = &cpu_topology[cpu];
-+        const struct acpi_pptt_processor *proc;
-+        unsigned int level;
-+        unsigned int core_group_key = 0;
-+        unsigned int cluster_group_key = 0;
-+        unsigned int socket_group_key = 0;
-+        bool threading = false;
-+
-+        if ( acpi_id == INVALID_ACPIID )
-+        {
-+            printk(XENLOG_WARNING "ACPI: Invalid ACPI ID for CPU %u\n", cpu);
-+            ret = -EINVAL;
-+            goto out;
-+        }
-+
-+        proc = find_pptt_node(pptt, acpi_id);
-+        if ( !proc )
-+        {
-+            printk(XENLOG_WARNING
-+                   "ACPI: No PPTT leaf node for CPU %u (ACPI ID %#x)\n",
-+                   cpu, acpi_id);
-+            ret = -ENOENT;
-+            goto out;
-+        }
-+
-+        /*
-+         * Limit the maximum loop depth to prevent an infinite loop in case
-+         * the PPTT is corrupted or contains cyclic references.
-+         */
-+        for ( level = 0; level < ACPI_PPTT_MAX_LEVELS; level++ )
-+        {
-+            const unsigned int offset = (const void *)proc - (const void *)pptt;
-+
-+            /*
-+             * If this proc has no parent node, it is the root node. Treat it
-+             * as equivalent to an ACPI_PPTT_PHYSICAL_PACKAGE node.
-+             */
-+            if ( (proc->flags & ACPI_PPTT_PHYSICAL_PACKAGE) || !proc->parent )
-+            {
-+                socket_group_key = offset;
-+
-+                /*
-+                 * If cluster/core info is absent upon reaching the physical
-+                 * package, assume one cluster per socket and one core per
-+                 * cluster.
-+                 */
-+                if ( cluster_group_key == 0 )
-+                    cluster_group_key = socket_group_key;
-+
-+                if ( core_group_key == 0 )
-+                    core_group_key = cluster_group_key;
-+
-+                break;
-+            }
-+            else if ( level == 0 )
-+            {
-+                /*
-+                 * ACPI_PPTT_PROCESSOR_IS_THREAD is supported in PPTT
-+                 * revision 2 and later. Assume no threading support when
-+                 * PPTT revision is 1.
-+                 */
-+                if ( proc->flags & ACPI_PPTT_ACPI_PROCESSOR_IS_THREAD )
-+                    threading = true;
-+                else
-+                    core_group_key = offset;
-+            }
-+            else if ( level == 1 )
-+            {
-+                if ( threading )
-+                    core_group_key = offset;
-+                else
-+                    cluster_group_key = offset;
-+            }
-+            else if ( level == 2 && threading )
-+                cluster_group_key = offset;
-+
-+            if ( (proc->parent & 3) ||
-+                 proc->parent < sizeof(*pptt) ||
-+                 proc->parent > pptt->header.length - sizeof(*proc) ||
-+                 (proc->parent + sizeof(*proc) > offset &&
-+                  proc->parent < offset + proc->header.length) )
-+            {
-+                printk(XENLOG_WARNING
-+                       "ACPI: PPTT parent offset is invalid\n");
-+                break;
-+            }
-+
-+            proc = (const void *)pptt + proc->parent;
-+
-+            if ( proc->header.type != ACPI_PPTT_TYPE_PROCESSOR )
-+            {
-+                printk(XENLOG_WARNING
-+                       "ACPI: PPTT parent node is not a processor structure\n");
-+                break;
-+            }
-+
-+            if ( !verify_subtable(&proc->header, pptt) ||
-+                 !verify_proc(proc) )
-+                break;
-+        }
-+
-+        if ( socket_group_key == 0 )
-+        {
-+            printk(XENLOG_WARNING
-+                   "ACPI: Could not reach the physical package node for CPU %u (ACPI ID %#x)\n",
-+                   cpu, acpi_id);
-+            ret = -ENOENT;
-+            goto out;
-+        }
-+
-+        topo->phys_socket_id =
-+            get_logical_id(socket_group_key, socket_map, &num_sockets);
-+        topo->phys_cluster_id =
-+            get_logical_id(cluster_group_key, cluster_map, &num_clusters);
-+        topo->phys_core_id =
-+            get_logical_id(core_group_key, core_map, &num_cores);
-+    }
-+
-     for_each_possible_cpu(cpu)
-     {
-         struct cpu_topology *topo = &cpu_topology[cpu];
-+        unsigned int tcpu;
- 
--        topo->phys_core_id = cpu;
--        topo->num_siblings = 1;
-+        for_each_possible_cpu(tcpu)
-+        {
-+            struct cpu_topology *ttopo = &cpu_topology[tcpu];
- 
--        cpumask_set_cpu(cpu, topo->thread_sibling);
--        cpumask_copy(topo->core_sibling, &cpu_possible_map);
--        cpumask_copy(topo->cluster_sibling, &cpu_possible_map);
-+            if ( cpu > tcpu )
-+                continue;
-+
-+            if ( topo->phys_core_id == ttopo->phys_core_id )
-+            {
-+                cpumask_set_cpu(tcpu, topo->thread_sibling);
-+                cpumask_set_cpu(cpu, ttopo->thread_sibling);
-+            }
-+
-+            if ( topo->phys_cluster_id == ttopo->phys_cluster_id )
-+            {
-+                cpumask_set_cpu(tcpu, topo->cluster_sibling);
-+                cpumask_set_cpu(cpu, ttopo->cluster_sibling);
-+            }
-+
-+            if ( topo->phys_socket_id == ttopo->phys_socket_id )
-+            {
-+                cpumask_set_cpu(tcpu, topo->core_sibling);
-+                cpumask_set_cpu(cpu, ttopo->core_sibling);
-+            }
-+        }
-+
-+        topo->num_siblings = cpumask_weight(topo->thread_sibling);
-     }
- 
--    return 0;
-+ out:
-+    xvfree(socket_map);
-+    xvfree(cluster_map);
-+    xvfree(core_map);
-+
-+    return ret;
- }
- 
- /*
-diff --git a/xen/include/xen/acpi.h b/xen/include/xen/acpi.h
-index cbb02e0f35..9788586be4 100644
---- a/xen/include/xen/acpi.h
-+++ b/xen/include/xen/acpi.h
-@@ -52,6 +52,8 @@
-                 (!(entry)) || (unsigned long)(entry) + sizeof(*(entry)) > (end) ||  \
-                 (entry)->header.length < sizeof(*(entry)))
- 
-+#define INVALID_ACPIID		(-1U)
-+
- #ifdef CONFIG_ACPI
- 
- #include <acpi/acpi.h>
-@@ -137,10 +139,12 @@ static inline int acpi_boot_table_init(void)
- 
- #ifdef CONFIG_ACPI_CPU_TOPOLOGY
- 
-+void acpi_map_cpu_acpiid(unsigned int cpu, uint32_t acpi_id);
- int acpi_init_cpu_topology(void);
- 
- #else /* CONFIG_ACPI_CPU_TOPOLOGY */
- 
-+static inline void acpi_map_cpu_acpiid(unsigned int cpu, uint32_t acpi_id) {}
- static inline int acpi_init_cpu_topology(void)
- {
-     return -EOPNOTSUPP;
+- Build & Kconfig Adjustments:
+  * Removed leftovers of ACPI_CPU_TOPOLOGY definition from
+    xen/drivers/acpi/Kconfig.
+
+- Code Cleanups & Style Conformance:
+  * Moved INVALID_ACPIID definition to xen/acpi.h to make it available
+    cross-architecture.
+  * Removed ARM-specific references from comments in
+    architecture-agnostic code.
+  * Added explicit parentheses around bitwise operations in logical
+    expressions.
+  * Placed binary logical operators (||, &&) at the end of lines when
+    splitting conditional statements.
+  * Combined variable declarations and initializations where appropriate.
+  * Removed trailing full stops ('.') from printk log messages.
+  * Fixed printk format specifier mix-up.
+  * Explicitly included <xen/cpu-topology.h> in xen/common/cpu.c.
+
+Changes in v7:
+- PPTT Table Validation & Hardening:
+  * find_pptt_node(): Added leaf node verification (ACPI 6.3+).
+  * acpi_init_cpu_topology(): Added bounds checks to ensure proc->parent
+    validly references memory strictly inside the PPTT table bounds.
+  * Factored out shared table checking helper functions used by both
+    find_pptt_node() and acpi_init_cpu_topology().
+  * Added subtable alignment checks and strengthened processor structure
+    size validation.
+
+- Graceful Fallback & Allocation:
+  * Treated missing topology definitions as benign conditions.
+  * Used xvzalloc_array() for temporary memory allocations during
+    initialization.
+
+- Build & Kconfig Adjustments:
+  * Updated Kconfig to use "depends on UNSUPPORTED" instead of "if UNSUPPORTED".
+
+- Code Cleanups & Style Conformance:
+  * Used designated initializers for structure data initializations.
+  * Consolidated topology helpers with IS_ENABLED().
+  * Removed redundant error checks and reduced unnecessary pointer casts.
+  * Switched type-based sizeof(type) to variable-based sizeof(*var).
+  * Added leading spaces before labels ( out:)
+
+Changes in v6:
+ - Renamed the series subject from "xen/arm: Device Tree based CPU topology
+   support" to reflect the inclusion of generic ACPI PPTT topology parsing.
+
+ - Infrastructure & Kconfig:
+   * Updated Kconfig to make both DT_CPU_TOPOLOGY and ACPI_CPU_TOPOLOGY
+     select GENERIC_CPU_TOPOLOGY.
+   * Ensured that if topology parsing from either DT or ACPI PPTT fails, the
+     CPU topology table is freed to fall back to the non-topology behavior.
+   * Moved the `cpu_topology` definition to `cpu.c` so that variables and
+     functions in `cpu-topology.c` can be completely freed after Xen init.
+
+ - Topology Logic (DT / ACPI):
+   * Set the cluster ID to 0 when the cluster definition is missing from the
+     Device Tree `cpu-map` node.
+   * Handled cases where cluster info is missing upon reaching a physical
+     package in the PPTT parser by assuming one cluster per socket.
+   * Split out the import of ACPI PPTT definitions from the Linux kernel
+     (including unused definitions) into a separate standalone patch.
+
+ - Robustness & Safety:
+   * Avoided assuming `np` becomes NULL after exiting `dt_for_each_child_node()`;
+     explicitly return NULL instead.
+   * Added bounds-checking `ASSERT`s for values returned by `cpumask_first()`.
+   * Added explicit braces `{}` to nested `if` statements to clarify `else`
+     scoping and maintain style symmetry.
+   * Enforced an upper limit on the PPTT parsing loop iterations to prevent
+     infinite loops on corrupted tables.
+   * Treat the absence of a physical package node definition in PPTT as a
+     parsing error.
+
+ - Optimization & Efficiency:
+   * Optimized `setup_siblings_masks()` to eliminate redundant loop iterations.
+   * Dynamically allocate the temporary data storage used during ACPI PPTT
+     parsing.
+
+ - Code Cleanup & Refactoring:
+   * Replaced the `invalid_topo_id` constant with the `INVALID_TOPO_ID` macro.
+   * Initialized all members of the `cpu_map` array with `INVALID_TOPO_ID`.
+   * Added a blank line between `<xen/...>` and `<asm/...>` header groups.
+   * Reordered `#ifdef` blocks to prioritize generic logic over architecture-
+     specific ones.
+   * Corrected code indentation.
+   * Applied the `static` specifier to file-local data structures and functions.
+   * Minimized the use of fixed-width `uint32_t` types, restricting its use only
+     where strictly required by the 32-bit ACPI ID specification.
+   * Declared `map_cpu_acpiid[]` as static and introduced the helper function
+     `acpi_map_cpu_acpiid()` for managed access.
+   * Renamed local variables to more intuitive names.
+   * Simplified the implementation of `get_logical_id()`.
+   * Refactored PPTT parsing to reduce type casting by using `container_of()`
+     and switching from `char *` to `void *` pointers.
+   * Removed redundant error checks.
+   * Cleaned up unused variables and eliminated debug print statements.
+
+Changes in v5:
+ - Extracted CPU topology information from the ACPI PPTT.
+ - Corrected the erroneous use of CONFIG_CPU_TOPOLOGY to
+   CONFIG_GENERIC_CPU_TOPOLOGY.
+
+Changes in v4:
+ - Only display the CPU topology configuration prompt in common/Kconfig
+   if the architecture defines HAS_GENERIC_CPU_TOPOLOGY.
+ - Move the definition of the global 'cpu_topology' pointer to
+   common/cpu-topology.c.
+ - Update the Makefile to explicitly build objects as .init.o when all
+   functions and data within a file are annotated with __init/__initdata,
+   ensuring their memory is reclaimed after system initialization.
+ - Add an error log in the CPU-to-node mapping function for out-of-bounds
+   cases.
+ - Use ARRAY_SIZE() instead of raw macros when guarding array accesses.
+ - Rename variables and functions to avoid ambiguous or misleading terms:
+   - Avoid 'cpuid' to prevent confusion with x86 CPUID features/instructions.
+   - Avoid 'node' where it could be confused with a NUMA node, explicitly
+     renaming them to clarify they refer to a Device Tree node.
+ - Move local variable declarations into the narrowest possible scope.
+ - Replace the unsupported "%pOF" printk format specifier with "%s" and
+   explicit node name retrieval.
+ - Remove #include <dt-cpu-topology.h> from cpu-topology.h, and ensure
+   the header directly includes only what its definitions require.
+ - Remove #include <xen/device_tree.h> from dt-cpu-topology.h, replacing
+   it with a forward declaration of 'struct dt_device_node'.
+ - Use 'const' qualifiers for pointer declarations where the pointed-to
+   structure is not modified.
+ - Explicitly #include <asm/processor.h> in cpu-topology.h to guarantee
+   that arch-specific definitions of cpu_to_core() and cpu_to_socket()
+   take precedence over the generic fallbacks.
+ - Introduce inline initialization functions for cpu_sibling_mask and
+   cpu_core_mask in cpu-topology.h, providing separate variants for both
+   when CONFIG_GENERIC_CPU_TOPOLOGY is enabled and disabled.
+
+Changes in v3:
+ - Use (nr_cpu_ids - 1) as the maximum CPU ID here. The fix for the sparse
+   map mismatch issue on ARM Xen has been split out into a separate patch.
+ - Switch topology sibling masks to cpumask_var_t for dynamic allocation.
+ - Allow the system to keep running with a degraded fallback even if
+   the topology table allocation fails.
+ - Remove the temporary definitions of cpu_to_core() and cpu_to_socket()
+   from RISC-V and PPC processor.h.
+ - Minimize the use of #ifdef blocks, leveraging compiler Dead Code
+   Elimination (DCE) where possible.
+ - Clean up the code to follow the Xen coding style. Please let me know
+   if I missed any style nits!
+ - Verify successful builds across x86, RISC-V, and PPC environments.
+
+Changes in v2:
+ - Generate topology information even when ACPI is enabled. Note that
+   this is a temporary implementation and doesn't yet parse the PPTT
+   (Processor Properties Topology Table).
+ - Added support for cpu-map node in Device Tree that doesn't contain
+   explicit cluster node definitions.
+
+Changes in v1 from the previous series "Introduce Device Tree based NUMA
+support for ARM Xen":
+
+1. Optimized Memory Allocation:
+   The series now allocates only the minimum required memory area to manage
+   the essential data for the CPUs.
+
+2. Flexible Device Tree Parsing:
+   The parsing logic no longer depends on the definition order of the 'cpu'
+   nodes and 'cpu-map' nodes in the Device Tree. They can now be read
+   correctly even if their orders do not match.
+
+3. CPU Hotplug Readiness:
+   To support future CPU hotplug, the system assumes that inactive CPUs are
+   also described in the Device Tree. Xen will pre-load and generate the
+   topology information for these inactive CPUs during the boot phase so
+   it stays available in memory.
+
+Thank you,
+Hirokazu Takahashi
+
+Hirokazu Takahashi (4):
+  xen/device-tree: Parse 'cpu-map' node for CPU topology exploration
+  xen/sched: Link CPU topology to scheduler
+  xen/sched: Make cpu_nr_siblings() architecture-specific
+  xen/acpi: Parse PPTT to initialize CPU topology
+
+ xen/arch/arm/Kconfig                   |   1 +
+ xen/arch/arm/acpi/boot.c               |   2 +
+ xen/arch/arm/include/asm/processor.h   |   4 -
+ xen/arch/arm/smpboot.c                 |  15 +-
+ xen/arch/ppc/include/asm/processor.h   |   4 -
+ xen/arch/riscv/include/asm/processor.h |   4 -
+ xen/arch/x86/include/asm/acpi.h        |   2 -
+ xen/arch/x86/include/asm/processor.h   |   1 +
+ xen/common/Kconfig                     |  22 ++
+ xen/common/Makefile                    |   1 +
+ xen/common/cpu-topology.c              |  62 ++++
+ xen/common/cpu.c                       |   5 +
+ xen/common/device-tree/Makefile        |   1 +
+ xen/common/device-tree/cpu-topology.c  | 409 +++++++++++++++++++++++++
+ xen/common/sched/credit2.c             |  21 +-
+ xen/common/sysctl.c                    |   1 +
+ xen/drivers/acpi/Makefile              |   1 +
+ xen/drivers/acpi/topology.c            | 341 +++++++++++++++++++++
+ xen/include/xen/acpi.h                 |  17 +
+ xen/include/xen/cpu-topology.h         |  76 +++++
+ xen/include/xen/dt-cpu-topology.h      |  35 +++
+ 21 files changed, 987 insertions(+), 38 deletions(-)
+ create mode 100644 xen/common/cpu-topology.c
+ create mode 100644 xen/common/device-tree/cpu-topology.c
+ create mode 100644 xen/drivers/acpi/topology.c
+ create mode 100644 xen/include/xen/cpu-topology.h
+ create mode 100644 xen/include/xen/dt-cpu-topology.h
+
 -- 
 2.43.0
 
