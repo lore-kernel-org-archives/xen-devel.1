@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C341CC54EFC
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 08:16:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1372224.1619604 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A8DCC54EFC
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 08:17:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1372231.1619613 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woczK-0006IS-Ql; Tue, 28 Jul 2026 08:16:34 +0000
+	id 1wod0S-0006tc-48; Tue, 28 Jul 2026 08:17:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1372224.1619604; Tue, 28 Jul 2026 08:16:34 +0000
+Received: by outflank-mailman (output) from mailman id 1372231.1619613; Tue, 28 Jul 2026 08:17:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woczK-0006IL-O5; Tue, 28 Jul 2026 08:16:34 +0000
-Received: by outflank-mailman (input) for mailman id 1372224;
- Tue, 28 Jul 2026 08:16:33 +0000
+	id 1wod0S-0006tV-0V; Tue, 28 Jul 2026 08:17:44 +0000
+Received: by outflank-mailman (input) for mailman id 1372231;
+ Tue, 28 Jul 2026 08:17:42 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <roger@xenproject.org>) id 1woczJ-0006IF-AJ
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 08:16:33 +0000
+ (envelope-from <roger@xenproject.org>) id 1wod0Q-0006tL-Q4
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 08:17:42 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <roger@xenproject.org>) id 1woczJ-00DJsI-0R;
- Tue, 28 Jul 2026 08:16:32 +0000
+ (envelope-from <roger@xenproject.org>) id 1wod0P-00DJt1-38;
+ Tue, 28 Jul 2026 08:17:41 +0000
 Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
  helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <roger@xenproject.org>) id 1woczH-002c8w-21;
- Tue, 28 Jul 2026 08:16:32 +0000
+ (envelope-from <roger@xenproject.org>) id 1wod0O-002cFs-1j;
+ Tue, 28 Jul 2026 08:17:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,38 +42,80 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date;
-	bh=7oGaqfsemSBSrXtzjs1/LsnbYBcTO+WY+Mx/Osl3AA4=; b=fHk7ZnKnNDW9UR4bbTqY6IcFcq
-	3cKULKbWQ8Vk5TurSQA02CW7SvCR4esP8A/2EhIwnnzK4CjQxd0ThvdlISXBc7CkBL7Zj0BdNGNPt
-	vab0qcT0nCDRMdiRbqLlH4cqkhNwONykJ9qQwb9gdry/LsuPhLuhBpk1JgJXtAHXcn/U=;
-Date: Tue, 28 Jul 2026 10:16:23 +0200
+	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date;
+	bh=/cpPESGMrq1pMBtG/Prd4+n4WCvgO59CbBPcrJSQi0M=; b=Qe8fTj44MFXBQsXbU8rUgWQEJ2
+	i3SQ5lIYRMCqjgITdsLqF6hlUwkqU+oloZ9TkGGOgRp78iNYTdiV33qRD/YVJJJvyFO8p4fVOuq6T
+	NQApb3YCRNDxRdTo2yFisK8uTTKoZOnCRz1fRtmFUFgKi87h6gcgUWBcudwFfxGuETNk=;
+Date: Tue, 28 Jul 2026 10:17:33 +0200
 From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
 To: Jan Beulich <jbeulich@suse.com>
 Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: Re: [PATCH v4 2/3] x86/Intel: split model-specific freq calculation
- off of intel_log_freq()
-Message-ID: <amhlV4FGWcfxcfLV@macbook.local>
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: Re: [PATCH v4 1/3] time: add "NOW() good" indicator
+Message-ID: <amhlnWAwF-AS_sH7@macbook.local>
 References: <f5040939-b166-4050-9a27-117b772547d4@suse.com>
- <80b20aa4-8954-47ed-85f0-3f09d46717cf@suse.com>
+ <b7513795-9e4b-4358-9d46-6c7036d64b81@suse.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <80b20aa4-8954-47ed-85f0-3f09d46717cf@suse.com>
+In-Reply-To: <b7513795-9e4b-4358-9d46-6c7036d64b81@suse.com>
 
-On Tue, Jun 30, 2026 at 04:06:21PM +0200, Jan Beulich wrote:
-> ..., for that logic to become reusable. While doing so undo the open-
-> coding of DIV_ROUND_UP(). Also switch to the new struct cpuinfo_x86 field
-> names.
+On Tue, Jun 30, 2026 at 04:06:00PM +0200, Jan Beulich wrote:
+> printk_start_of_line() checks for a value of 0 right now. In order to be
+> able to have NOW() return at least monotonically increasing values, that
+> needs replacing by an explicit indicator.
 > 
 > Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> ---
+> Arm and RISC-V may want to consider whether their initial get_cycles()
+> can't be moved yet earlier, such that the indicator also can be set
+> yet earlier.
+> ---
+> v4: Add barriers.
+> v3: New.
+> 
+> --- a/xen/arch/arm/time.c
+> +++ b/xen/arch/arm/time.c
+> @@ -145,6 +145,8 @@ void __init preinit_xen_time(void)
+>          panic("Timer: Cannot initialize platform timer\n");
+>  
+>      boot_count = get_cycles();
+> +    smp_wmb();
+> +    NOW_good = true;
+>  }
+>  
+>  static void __init init_dt_xen_time(void)
+> --- a/xen/arch/riscv/time.c
+> +++ b/xen/arch/riscv/time.c
+> @@ -87,6 +87,8 @@ void __init preinit_xen_time(void)
+>          panic("%s: ACPI isn't supported\n", __func__);
+>  
+>      boot_clock_cycles = get_cycles();
+> +    smp_wmb();
+> +    NOW_good = true;
+>  
+>      /* set_xen_timer must have been set by sbi_init() already */
+>      ASSERT(set_xen_timer);
+> --- a/xen/arch/x86/time.c
+> +++ b/xen/arch/x86/time.c
+> @@ -2660,6 +2660,7 @@ void __init early_time_init(void)
+>  
+>      set_time_scale(&t->tsc_scale, tmp);
+>      t->stamp.local_tsc = boot_tsc_stamp;
+> +    NOW_good = true;
 
-AFAICT this doesn't introduce any functional change.
-
-Acked-by: Roger Pau Monné <roger@xenproject.org>
+Would you need a barrier here to ensure compiler doesn't re-order the
+writes?  Maybe using ACCESS_ONCE(), or a smp_wmb() like it's used in
+other arches?
 
 Thanks, Roger.
 
