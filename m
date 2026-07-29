@@ -4,48 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E30AAC53219
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2026 23:34:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1375095.1622374 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6826C53200
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Jul 2026 06:04:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1375145.1622382 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1worJD-0001Pi-Os; Tue, 28 Jul 2026 23:34:03 +0000
+	id 1woxO0-0007NX-Mp; Wed, 29 Jul 2026 06:03:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1375095.1622374; Tue, 28 Jul 2026 23:34:03 +0000
+Received: by outflank-mailman (output) from mailman id 1375145.1622382; Wed, 29 Jul 2026 06:03:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1worJD-0001Pb-LF; Tue, 28 Jul 2026 23:34:03 +0000
-Received: by outflank-mailman (input) for mailman id 1375095;
- Tue, 28 Jul 2026 23:34:02 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1woxO0-0007NP-HU; Wed, 29 Jul 2026 06:03:24 +0000
+Received: by outflank-mailman (input) for mailman id 1375145;
+ Wed, 29 Jul 2026 06:03:22 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <bp@alien8.de>) id 1worJB-0001PV-LS
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2026 23:34:01 +0000
+ (envelope-from <jbeulich@suse.com>) id 1woxNy-0007MD-GA
+ for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 06:03:22 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1worJA-00FzzM-NZ
- for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 01:34:00 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1woxNu-004gcM-Uv
+ for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 08:03:18 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <bp@alien8.de>)
- id 6a693bf4-5cb7-0a2a0a5109dd-0a2a4508e1c2-44
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 01:34:00 +0200
-Received: from [65.109.113.108] (helo=mail.alien8.de)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <bp@alien8.de>)
- id 6a693c68-f659-0a2a45080019-416d716c8b76-3
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 01:34:00 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
- by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id 5EBAC40E00E6; 
- Tue, 28 Jul 2026 23:33:59 +0000 (UTC)
-Received: from mail.alien8.de ([127.0.0.1])
- by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id x3ufB0EG3hup; Tue, 28 Jul 2026 23:33:49 +0000 (UTC)
-Received: from stx.tnic (unknown [IPv6:2600:1700:38ca:c00::43])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest
- SHA256) (No client certificate requested)
- by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id D143E40E00C3;
- Tue, 28 Jul 2026 23:33:35 +0000 (UTC)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a699798-e002-0a2a0a5209dd-0a2a45028b4a-40
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 08:03:18 +0200
+Received: from [209.85.221.44] (helo=mail-wr1-f44.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a6997a6-6ca4-0a2a45020019-d155dd2ca4d8-3
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 08:03:18 +0200
+Received: by mail-wr1-f44.google.com with SMTP id
+ ffacd0b85a97d-4758bd3731bso439154f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jul 2026 23:03:18 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47fb6acfdafsm4632419f8f.15.2026.07.28.23.03.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 28 Jul 2026 23:03:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,80 +53,116 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=alien8 header.d=alien8.de header.i="@alien8.de" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
-X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
-Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
-	header.d=alien8.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
-	t=1785281629; bh=BZMdPuQinJISZTZHQlTHGCynNapMMtcWSMKh359hUuU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=bHiQV5hlef0rkWel34orSzsGD68DGqhZx+z5YOPob5mabwkqCqvL7WpZUzyGgfzSH
-	 Oqh4c+fMa1KDyxutfsALJh4t3589gwUZdfdC6FH5MZH47bGxcvOkT97HUCfyiR0TUG
-	 MoLKcsXikVMpfblhC61NRQRSu5OQ+gwutjuv2pOx1PfkM/jJjnDXaoJxXUuwJNrIlb
-	 ITEIfAZ+sIvFHtw96d+fuFvE/GHp7H/L2GB3xMipcjL1lHiVFokgGlHIVf4dy48rwO
-	 ZH2lJIRolNdL++p+uLs7sv2b2H6XMLEUAr0lGsghBNpN0HV9op22qNLGado0oU4ciS
-	 HFzzJZC1m6LEXyiULpylVPC52b9imxnXN8BuE19NnuvhwwRtqgSoCmfFFZnOvMdzDn
-	 haSaPijyPob0unAaq8M7MXaT2iasP1mrQWgTuao98orrttP6hmM0gBsplAleBU+Wf1
-	 rSGDzFfrmUOBFbetpyp5YZ9nyNDJ+HLy+Hyd5lN+CFVnN4k0A1tnZoJe70H7JtqgSm
-	 B5CNe3bQrlPS5OXBSPjjNCg5R7YRw3R1XECsi5SKYh91LW4vZyP8egr3ovkjBWz8oe
-	 m6C5uPzA+E1lR6WFazQo268sWEqFQdQHKMttz9TwA9P3oVoUVqAelHEHboScitYWqk
-	 h1CDnq5U6NOgoHLZIVTAPsTg=
-Date: Tue, 28 Jul 2026 16:33:32 -0700
-From: Borislav Petkov <bp@alien8.de>
-To: Brian Gerst <brgerst@gmail.com>
-Cc: "H. Peter Anvin" <hpa@zytor.com>,
-	Mauricio Faria de Oliveira <mfo@igalia.com>,
-	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-	Juergen Gross <jgross@suse.com>,
-	Alexey Dobriyan <adobriyan@gmail.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>, kernel-dev@igalia.com,
-	linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v7 2/5] x86/asm: add volatile, clobbers and zero-length
- check in inline memcmp
-Message-ID: <20260728233332.GCamk8TN3cyN-Ohr31@fat_crate.local>
-References: <20260721-pvh-kasan-inline-v7-0-38979a50cef0@igalia.com>
- <20260721-pvh-kasan-inline-v7-2-38979a50cef0@igalia.com>
- <20260722170334.GCamD35gwrCng30WH1@fat_crate.local>
- <0F3A1121-208F-4F71-8C88-BEAE7CB50E75@zytor.com>
- <CAMzpN2hyupAUk-XGRzM2wwQojPrsN66jWtT+saVf1NWdOzFXuw@mail.gmail.com>
- <2f22094d-b8c5-46ec-92b9-dd6752a8dc2e@zytor.com>
- <CAMzpN2hdw60=Un+mAFS5CEQqDRZ-d3fMogEwE4NxUe75P-GfSA@mail.gmail.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1785304998; x=1785909798; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ZDGEM4zt2j6l2ZIqBC8vF6kjKRs2J9Iy1JHD8Oi+Fvk=;
+        b=WGKlOabsp6x5uMkoSchVm1MwTLTVnzuE4QKYKFocYW1tHPWFUxQcNvxCV1vdbJpq4v
+         nliDICSup2D3KadpOAqCkbgsgwh62D0r2zaFEwwJEbUsHpOyLqPgVtZYILXNLTkBRv5H
+         v3JkGR9I0ZivoAmUSSr2dk20e5M/HwiN3Nv6uJRgbosOqWyTEO44avoj3JjCEf91ZZSZ
+         lsiSOoz2t2/XmkyqnpS8JKec5cBC4FPal1U3SJcjZgPE9oK0LKcfUYK0sdmiq1/BEcVE
+         j6ZNIx1VdxLEnFJrbo0WKaj4GRCm3dZpK8JsTefChrIwalOEc634is0/pUIYbTV7i2kW
+         CKJg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785304998; x=1785909798;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ZDGEM4zt2j6l2ZIqBC8vF6kjKRs2J9Iy1JHD8Oi+Fvk=;
+        b=Rafp/XXII3bhIItBk1wUkQUYJAoht04K4RHSVm4irZN/XH9+jO1OsRtPVl9llz8Ddy
+         HPQ1nAkxRnkJpq0qZB0fNaADJI1vQpayWfuwU/MPyyfjSS+3/Hf30NpcHCFo2F4gH/8A
+         qEVhoDmSVb176JYnA1kYN6ZvrRPLCysY7m+QfqtYJ7ivIunDZ4tq2zxSkWcUZEnoxDvA
+         5+EA0Tk7AUO3L1WqR5J6ERqMR6vUZ1IWJjRwEMjJPVstjEjf1epkJ39LFxo5L07BfnW6
+         Gn4G7XG3zlycfvYWsiG5D1l9fL9wlGdsWYlLDeyoR4ta/8hgeoT1f+IhAEBPQF/fC8Ao
+         z1vQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rox8P6/25Ll0VluQrdI9YzfDrmmktxb/ik71iP+1OZXX2rMTb+wOdLPcXv0L+QcInjRydu+ljvpKYQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzrfxEt5Les5D/7Y3hX8Fd/Z/lGGK+TX195IYN2i1toamGRQmK1
+	w9QQ2ScDW6Hk1gytHJDLvYXhmr9V0tcMnUuRpq40KvoidCnsBQ5Rv14KfJByoGst7w==
+X-Gm-Gg: AR+sD12cjsKsu0qOfec03QR/4T6wXPvohyxW/k4zHZcGt3oWcySZOu/JCw0swP5t428
+	k6/5fcCNW7fNatSmPisz9QX+Ft6SR5u/6uD8U+NYTVxRs9SCZ3NpmgkEBpyGChsu8QKnS61kPKs
+	lyPLoZYTgU4b1fbhVcVXG5YZHtKapg7zf79xEnrRj+9xx6pgqIFF6YQvfcYwp1Sl65efxUCfT5c
+	puQFmRV4Z1vC5b1qzE/GJJQSdMOx/4FIF7Ap2Mqzg2mn0ccYryX600h1QFuk98VLA7+tElytu2X
+	g8raL8pvdTTfemVn8B1xmzmBuWnZqGefrlpO6w3jiWQm7ke+HqCmHqpqlnqdyHifF5Ne1CyfzGs
+	winjvUybHi46JYhhdCPHpzxaS60HNM3Nm5mgtSNEG8cR/41m9GxkiFOZ53AWJBkbr863stgkafi
+	GBgHttAAaJz+aifYnfnupkCl2PD6xnZk6f3M2nP8MOXJzlcBdLzVe5bW4b4rDJN+R7K11dxPTzt
+	NCDoFHvpYvREWJ16KWcSgTDU9nel0Ih2fCZgzhtQRo3SUfKA9Gp
+X-Received: by 2002:a05:6000:184d:b0:45e:dd32:92fa with SMTP id ffacd0b85a97d-47fbabd61b2mr1105970f8f.12.1785304997887;
+        Tue, 28 Jul 2026 23:03:17 -0700 (PDT)
+Message-ID: <b050c051-c165-42a4-a76f-781c8d43248e@suse.com>
+Date: Wed, 29 Jul 2026 08:03:15 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <CAMzpN2hdw60=Un+mAFS5CEQqDRZ-d3fMogEwE4NxUe75P-GfSA@mail.gmail.com>
-X-purgate-ID: tlsNG-c1860d/1785281640-CE54487B-D223EFC7/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] tools/ocaml: Fix crash in
+ Xenctrl.domain_getinfo{,list} on ARM
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Julian Vetter <julian.vetter@vates.tech>,
+ Andrii Sultanov <andriy.sultanov@vates.tech>,
+ Guillaume Thouvenin <guillaume.thouvenin@vates.tech>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20260728154830.67734-1-andrew.cooper3@citrix.com>
+ <20260728154830.67734-2-andrew.cooper3@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260728154830.67734-2-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-720697/1785304998-323D42AC-AFDDCD41/0/0
 X-purgate-type: clean
-X-purgate-size: 823
+X-purgate-size: 880
 
-On Thu, Jul 23, 2026 at 08:49:13PM -0400, Brian Gerst wrote:
-> Your suggestion is good, but should have a comment explaining why it's there
-> to someone reading the code in the future.
+On 28.07.2026 17:48, Andrew Cooper wrote:
+> @@ -452,16 +456,17 @@ static value alloc_domaininfo(xc_domaininfo_t * info)
+>  		(info->arch_config.emulation_flags);
+>  
+>  	/* xen_x86_arch_domainconfig */
+> -	x86_arch_config = caml_alloc_tuple(1);
+> -	Store_field(x86_arch_config, 0, emul_list);
+> +	arch_config = caml_alloc_tuple(1);
+> +	Field(arch_config, 0) = emul_list;
+>  
+> -	/* arch_config: arch_domainconfig */
+> -	arch_config = caml_alloc_small(1, 1);
+> -
+> -	Store_field(arch_config, 0, x86_arch_config);
+> -
+> -	Store_field(result, 16, arch_config);
+>  #endif
+> +	if (tag < 0)
+> +		caml_failwith("Unimplemented architecutre in alloc_domaininfo()");
 
-I have this there now:
+As I now ended up looking here as well (to determine whether this series will
+want backporting): s/architecutre/architecture/ .
 
-diff --git a/arch/x86/boot/string.c b/arch/x86/boot/string.c
-index 6827551720dd..7bc34f9272fb 100644
---- a/arch/x86/boot/string.c
-+++ b/arch/x86/boot/string.c
-@@ -32,6 +32,11 @@
- int memcmp(const void *s1, const void *s2, size_t len)
- {
- 	bool diff;
-+
-+	/*
-+	 * Make sure ZF is properly set in the len==0 case because in it,
-+	 * RCX==0 and the REPE; CMPSB won't get executed.
-+	 */
- 	asm volatile("test %3, %3\n\t"
- 		     "repe cmpsb"
- 		     : "=@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len)
+As to backporting: Both patches may want to have Fixes: tags?
 
-
--- 
-Regards/Gruss,
-    Boris.
-
-https://people.kernel.org/tglx/notes-about-netiquette
+Jan
 
