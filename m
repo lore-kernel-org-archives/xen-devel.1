@@ -4,49 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82F96C54F51
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Jul 2026 10:08:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1375439.1622600 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A05FC54F51
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Jul 2026 10:14:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1375448.1622610 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wp1Cl-0007lP-Qt; Wed, 29 Jul 2026 10:08:03 +0000
+	id 1wp1Ig-00012Q-Iy; Wed, 29 Jul 2026 10:14:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1375439.1622600; Wed, 29 Jul 2026 10:08:03 +0000
+Received: by outflank-mailman (output) from mailman id 1375448.1622610; Wed, 29 Jul 2026 10:14:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wp1Cl-0007lI-OR; Wed, 29 Jul 2026 10:08:03 +0000
-Received: by outflank-mailman (input) for mailman id 1375439;
- Wed, 29 Jul 2026 10:08:02 +0000
+	id 1wp1Ig-00012J-GA; Wed, 29 Jul 2026 10:14:10 +0000
+Received: by outflank-mailman (input) for mailman id 1375448;
+ Wed, 29 Jul 2026 10:14:09 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fad586037000e099@swg.vates.tech>)
- id 1wp1Cj-0007jT-V4
- for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 10:08:01 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <agordeev@linux.ibm.com>) id 1wp1If-00012A-6Q
+ for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 10:14:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wp1Cj-00HNLw-7z
- for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 12:08:01 +0200
-Received: from [10.42.69.3] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fad586037000e099@swg.vates.tech>)
- id 6a69d0f3-2eae-0a2a0a5409dd-0a2a45039a82-10
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 12:08:01 +0200
-Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fad586037000e099@swg.vates.tech>)
- id 6a69d100-fae8-0a2a45030019-b9ff1c12832d-3
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 12:08:01 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19fad586037000e099.002 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 29 Jul 2026 10:07:58 +0000
-Received: from localhost.localdomain (88-188-240-210.subs.proxad.net
- [88.188.240.210]) (Authenticated sender: teddy.astie@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id 451A98320D;
- Wed, 29 Jul 2026 12:07:57 +0200 (CEST)
+ id 1wp1Ie-007Blt-4G
+ for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 12:14:08 +0200
+Received: from [10.42.69.8] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <agordeev@linux.ibm.com>)
+ id 6a69d262-2eae-0a2a0a5409dd-0a2a4508c59e-34
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 12:14:08 +0200
+Received: from [148.163.158.5] (helo=mx0b-001b2d01.pphosted.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <agordeev@linux.ibm.com>)
+ id 6a69d26e-f659-0a2a45080019-94a39e050b12-3
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 12:14:07 +0200
+Received: from pps.filterd (m0353725.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66T7mVIS3510234; Wed, 29 Jul 2026 10:13:24 GMT
+Received: from ppma13.dal12v.mail.ibm.com
+ (dd.9e.1632.ip4.static.sl-reverse.com [50.22.158.221])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4fmv0ns9wk-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 29 Jul 2026 10:13:24 +0000 (GMT)
+Received: from pps.filterd (ppma13.dal12v.mail.ibm.com [127.0.0.1])
+ by ppma13.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 66T9uISf001554;
+ Wed, 29 Jul 2026 10:13:23 GMT
+Received: from smtprelay06.fra02v.mail.ibm.com ([9.218.2.230])
+ by ppma13.dal12v.mail.ibm.com (PPS) with ESMTPS id 4fn9pge0sk-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 29 Jul 2026 10:13:22 +0000 (GMT)
+Received: from smtpav04.fra02v.mail.ibm.com (smtpav04.fra02v.mail.ibm.com
+ [10.20.54.103])
+ by smtprelay06.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 66TADL8529688252
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 29 Jul 2026 10:13:21 GMT
+Received: from smtpav04.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id E576B20063;
+ Wed, 29 Jul 2026 10:13:20 +0000 (GMT)
+Received: from smtpav04.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 75E452005A;
+ Wed, 29 Jul 2026 10:13:19 +0000 (GMT)
+Received: from li-008a6a4c-3549-11b2-a85c-c5cc2836eea2.ibm.com (unknown
+ [9.224.92.206])
+ by smtpav04.fra02v.mail.ibm.com (Postfix) with ESMTPS;
+ Wed, 29 Jul 2026 10:13:19 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,119 +76,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=kP34VkRmXUHEqgTF9zcqnvF5Ro7DYiwr7LhOjNgGxHI=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=t67146ahM3hirT1qDy9IsyOBZkzKFtkprnERXBpX+TF/syho6nwNqPTzb+zGNUncoQRSj5Lej
- 9x5VGyP7o8OettPaiBzC5CUAa/QLzxKaFm4vEgIt+3PvEZ2mUfmpQDkfXHjktBeud+zTXqIKoqB
- GVgHnSoAlbB8Md04XIp3iKTcBXT+m6XmS9ug/4PnXIShuEqX6hwLsS4oDgpWe699BglXTI1lhwd
- FjKm3yZLDFM025XqY5FrnfG6siD1VhwHjslPu1nUbcZ/k8ELFNREgio+Dq7TwGgCbodjOUk2zsu
- eIv7VRb9aObYquYTXn3r2QbPpSWj752Pdd/AjEW0b3ag==
-X-Zone-Loop: defc1e1d417112baefa663110e8549dbb5d5bf66416d
-x-campaign-type: default
-x-transaction-id: 1d1ebdbe-a5fd-4ea0-bdfa-1daaee9e224f
-x-swg-uid: 01-13b89d0d-80cf-4c56-8878-fa8581d52ba5
-X-Mailer: Sweego
-Message-ID:
- <1785319678.8631fc262581453bbf619ec5b2062170.19fad586037000e099@vates.tech>
-x-swg-bid: 1785319678.8631fc262581453bbf619ec5b2062170.19fad586037000e099
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-From: Teddy Astie <teddy.astie@vates.tech>
-To: xen-devel@lists.xenproject.org
-Cc: Teddy Astie <teddy.astie@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>
-Subject: [RESEND PATCH 1/5] vtd: Ensure root entry is updated consistently
-Date: Wed, 29 Jul 2026 12:05:39 +0200
-In-Reply-To: <1785319236.8631fc262581453bbf619ec5b2062170.19fad51a4be000e099@vates.tech>
-References: <1785319236.8631fc262581453bbf619ec5b2062170.19fad51a4be000e099@vates.tech>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=pp1 header.d=ibm.com header.i="@ibm.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=pp1; bh=20PLe0W5WCIDnL84N1zaO+HLc/2Flu
+	i3NV1Ycbs9FQE=; b=FE0GRe0Ogg0GxdOaqXto7RlECSlIgi6U4FPECF0W06Wbwd
+	M7AONk2CWa7g6JpJI2ObBumRdUA1swYmrWpTmd7Yhg8jwPbDZPgtdHdki7lJdXyx
+	a5ku0VmqhUWIT7fE2R31EKwMjGZ2WPjK8OmL/dgfnk9UoMkRCYyUVAcgLhPRPvN0
+	kLIPDOKCSIvgAGARWTb1EH2yPFCJ8AUOWyTqPNEJnE/lDGlRVk3V4VuWQqKVkVwv
+	H1IG3I44nBqMpAKFAi/QqfRPlQYTmOhtD2sUL446yWQE95juDDEVE2tYcHYUFzYi
+	2UV21GPh0m5G/vyMvB1cyXeyKTzcyGbuTrgbPIEQ==
+Date: Wed, 29 Jul 2026 12:13:18 +0200
+From: Alexander Gordeev <agordeev@linux.ibm.com>
+To: "David Hildenbrand (Arm)" <david@kernel.org>
+Cc: Muhammad Usama Anjum <usama.anjum@arm.com>,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        Tvrtko Ursulin <tursulin@ursulin.net>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Dimitri Sivanich <dimitri.sivanich@hpe.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+        Helge Deller <deller@gmx.de>, Juergen Gross <jgross@suse.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Muchun Song <muchun.song@linux.dev>,
+        Oscar Salvador <osalvador@suse.de>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        "Liam R. Howlett" <liam@infradead.org>,
+        Lorenzo Stoakes <ljs@kernel.org>, Will Deacon <will@kernel.org>,
+        "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
+        Nick Piggin <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
+        Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+        Pasha Tatashin <pasha.tatashin@soleen.com>,
+        Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
+        Uladzislau Rezki <urezki@gmail.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Andrii Nakryiko <andrii@kernel.org>,
+        Eduard Zingerman <eddyz87@gmail.com>,
+        Kumar Kartikeya Dwivedi <memxor@gmail.com>,
+        Ingo Molnar <mingo@redhat.com>,
+        Arnaldo Carvalho de Melo <acme@kernel.org>,
+        Namhyung Kim <namhyung@kernel.org>, SJ Park <sj@kernel.org>,
+        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+        Jan Kara <jack@suse.cz>, Jason Gunthorpe <jgg@ziepe.ca>,
+        Leon Romanovsky <leon@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>,
+        Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>,
+        Christoph Lameter <cl@gentwo.org>, Mike Rapoport <rppt@kernel.org>,
+        Johannes Weiner <hannes@cmpxchg.org>, ziy@nvidia.com, pfalcato@suse.de,
+        ryan.roberts@arm.com, linux-kernel@vger.kernel.org,
+        intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+        linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org,
+        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
+        linux-arch@vger.kernel.org, kasan-dev@googlegroups.com,
+        linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
+        linux-perf-users@vger.kernel.org, damon@lists.linux.dev
+Subject: Re: [PATCH RFC 00/11] mm: distinguish PTE table storage from PTE
+ values
+Message-ID: <7813b5fe-e767-442c-a356-afc1a5c567ad-agordeev@linux.ibm.com>
+References: <20260727164715.2866609-1-usama.anjum@arm.com>
+ <2c19247e-bee6-45f4-a353-2fcc60db26e6@kernel.org>
 MIME-Version: 1.0
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.1669.af91e764794eb07c.19fad585de6.7c53ed0f29ba61cc=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1785319677415
-X-purgate-ID: tlsNG-33051d/1785319681-6CCDB4E9-7B68D1A4/0/0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <2c19247e-bee6-45f4-a353-2fcc60db26e6@kernel.org>
+X-TM-AS-GCONF: 00
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI5MDA4MCBTYWx0ZWRfX5gvztvTGa1TS
+ cVvs9sLHjmDvl0pv/qnDx3AnLV3WD1PhcS6rWZcrYanN4eoy1jfYhO0/byBUN7m85v7yOdOHFEd
+ jkwp4KNx5XSDCb91frhZzFZIHZypXvU=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI5MDA4MCBTYWx0ZWRfX1UTcCITLhsoM
+ WVmB1D9GH0QMtrIKGHgL7p0GW+jxunYYOgpbX+DXyGN5j53LZmEz/XAfzXnJVoe6iYvkeEMQ0zl
+ U72YvirOw6n7XecUaLxufeDZ3k7zUoWhwsOzzDr2PnO5B+rHRlQanyNs10kmLyGk0SbO5yjhmsl
+ X/wsvmN7W20tzA/W6s+/Go/LRPoLITRcA0wiEE2RX3SL5wjJQy6dbIfOKXB23C7J+7CUDxsv1hH
+ 2UL0d8RcWDG1m2MOfvzdP1DDLgoJ5qa4fNMDY3Dujfh/q4BEQ3LxkwjYYEZLquYPNzSt8jlE0CR
+ W0NplSr/y92efigHBaNWZE689G10/Vfvu4jsCRV1WwdOJDDLrJCdFPCcT3EXgYundIBLpChodfB
+ V3DgSeKuQKYmWhytTg7Qp/bafc3JxPNb2dXgROBBI3XlcwL1Fe7vq5FAcDbVZ+iHosYceQA6qsM
+ opbeSLXsz6GP+frEBNA==
+X-Authority-Analysis: v=2.4 cv=b5WCJNGx c=1 sm=1 tr=0 ts=6a69d244 cx=c_pps
+ a=AfN7/Ok6k8XGzOShvHwTGQ==:117 a=AfN7/Ok6k8XGzOShvHwTGQ==:17
+ a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=V8glGbnc2Ofi9Qvn3v5h:22 a=17MMwBHFoGJDYN7e9MwA:9
+ a=CjuIK1q_8ugA:10
+X-Proofpoint-GUID: 83X-ft2oRkMXo03OQPgEqsBuw75g_R7Y
+X-Proofpoint-ORIG-GUID: 83X-ft2oRkMXo03OQPgEqsBuw75g_R7Y
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-29_03,2026-07-28_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 spamscore=0 adultscore=0 malwarescore=0 impostorscore=0
+ bulkscore=0 phishscore=0 suspectscore=0 clxscore=1011 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607290080
+X-purgate-ID: tlsNG-c1860d/1785320048-D574B87B-CD1F08A8/0/0
 X-purgate-type: clean
-X-purgate-size: 2626
+X-purgate-size: 982
 
----=Part.1669.af91e764794eb07c.19fad585de6.7c53ed0f29ba61cc=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+On Tue, Jul 28, 2026 at 09:26:06PM +0200, David Hildenbrand (Arm) wrote:
+> > The generic definition aliases hw_pte_t to pte_t, so this series preserves
+> > the representation and behaviour of every architecture. ptep_get() keeps
+> > its existing READ_ONCE() semantics and converts the stored element through
+> > __pte_from_hw(). An architecture can later define a distinct hw_pte_t and
+> > convert its PTE interfaces to make the distinction compiler-enforced.
+> > Architecture PTE implementations and most architecture code are
+> > deliberately left for those later opt-in conversions.
+...
+> Do you have a pointer at the arm64 part, so people can get a feeling for how an
+> actual hw_pte_t implementation can look like.
 
-Make sure the root entry is updated consistently such that the compiler
-is not allowed to perform optimizations around setting present bit (and
-i=2Ee set present bit before setting up the pagetable addresss, which woul=
-d
-cause the IOMMU to use a pagetable at address 0 instead)=2E
+May be we need the generic hw_pte_t implementation as { pte_t pte; }
+right away?
 
-This issue can only occurs at boot time where present bit is initially cle=
-ared
-or when a bus is first introduced in the machine=2E
+Also, can you envision a case when sizeof(pte_t) != sizeof(hw_pte_t)?
+If not, the compile-time check is worth adding.
 
-Fixes: ccfe4e08455f ("Intel vt-d specific changes in arch/x86/hvm/vmx/vtd=
-=2E")
-Signed-off-by: Teddy Astie <teddy=2Eastie@vates=2Etech>
----
- xen/drivers/passthrough/vtd/iommu=2Ec | 15 ++++++++-------
- 1 file changed, 8 insertions(+), 7 deletions(-)
+> -- 
+> Cheers,
+> 
+> David
 
-diff --git a/xen/drivers/passthrough/vtd/iommu=2Ec b/xen/drivers/passthrou=
-gh/vtd/iommu=2Ec
-index 3d6f787b3c=2E=2Ec314ce1db8 100644
---- a/xen/drivers/passthrough/vtd/iommu=2Ec
-+++ b/xen/drivers/passthrough/vtd/iommu=2Ec
-@@ -281,13 +281,13 @@ void free_pgtable_maddr(u64 maddr)
- /* context entry handling */
- static u64 bus_to_context_maddr(struct vtd_iommu *iommu, u8 bus)
- {
--    struct root_entry *root, *root_entries;
-+    struct root_entry root, *root_entries;
-     u64 maddr;
-=20
-     ASSERT(spin_is_locked(&iommu->lock));
-     root_entries =3D (struct root_entry *)map_vtd_domain_page(iommu->root=
-_maddr);
--    root =3D &root_entries[bus];
--    if ( !root_present(*root) )
-+    root=2Eval =3D ACCESS_ONCE(root_entries[bus]=2Eval);
-+    if ( !root_present(root) )
-     {
-         maddr =3D alloc_pgtable_maddr(1, iommu->node);
-         if ( maddr =3D=3D 0 )
-@@ -295,11 +295,12 @@ static u64 bus_to_context_maddr(struct vtd_iommu *io=
-mmu, u8 bus)
-             unmap_vtd_domain_page(root_entries);
-             return 0;
-         }
--        set_root_value(*root, maddr);
--        set_root_present(*root);
--        iommu_sync_cache(root, sizeof(struct root_entry));
-+        set_root_value(root, maddr);
-+        set_root_present(root);
-+        ACCESS_ONCE(root_entries[bus]=2Eval) =3D root=2Eval;
-+        iommu_sync_cache(&root_entries[bus], sizeof(struct root_entry));
-     }
--    maddr =3D (u64) get_context_addr(*root);
-+    maddr =3D (u64) get_context_addr(root);
-     unmap_vtd_domain_page(root_entries);
-     return maddr;
- }
---=20
-2=2E54=2E0
-
-
-
--- 
-Teddy Astie | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates s=
-olutions
-
-web: https://vates=2Etech
----=Part.1669.af91e764794eb07c.19fad585de6.7c53ed0f29ba61cc=---
+Thanks!
 
