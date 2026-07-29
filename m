@@ -4,43 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB669C54F51
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Jul 2026 10:42:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1375468.1622619 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2C64C54F51
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Jul 2026 10:42:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1375475.1622628 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wp1jM-0006Ab-Ih; Wed, 29 Jul 2026 10:41:44 +0000
+	id 1wp1k6-0006bz-Qj; Wed, 29 Jul 2026 10:42:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1375468.1622619; Wed, 29 Jul 2026 10:41:44 +0000
+Received: by outflank-mailman (output) from mailman id 1375475.1622628; Wed, 29 Jul 2026 10:42:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wp1jM-0006AU-FW; Wed, 29 Jul 2026 10:41:44 +0000
-Received: by outflank-mailman (input) for mailman id 1375468;
- Wed, 29 Jul 2026 10:41:43 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wp1jL-0006AO-H0
- for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 10:41:43 +0000
+	id 1wp1k6-0006bs-Ni; Wed, 29 Jul 2026 10:42:30 +0000
+Received: by outflank-mailman (input) for mailman id 1375475;
+ Wed, 29 Jul 2026 10:42:29 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <BATV+e9b046261242b536d9dc+8375+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1wp1k4-0006a9-Di
+ for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 10:42:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wp1jK-00E0HS-U6
- for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 12:41:42 +0200
-Received: from [10.42.69.3] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a69d8e2-bab6-0a2a0a5309dd-0a2a450384ae-12
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 12:41:42 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a69d8e6-fae8-0a2a45030019-d155802cad0f-3
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 12:41:42 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-49558ce01afso5372475e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 03:41:42 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
- [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-497fecfccc7sm17390895e9.12.2026.07.29.03.41.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 Jul 2026 03:41:41 -0700 (PDT)
+ id 1wp1k3-00E5Kd-79; Wed, 29 Jul 2026 12:42:27 +0200
+Received: from [10.42.69.9] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <BATV+e9b046261242b536d9dc+8375+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a69d912-5cb7-0a2a0a5109dd-0a2a4509cf5c-0
+ for <multiple-recipients>; Wed, 29 Jul 2026 12:42:26 +0200
+Received: from [90.155.50.34] (helo=casper.infradead.org)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <BATV+e9b046261242b536d9dc+8375+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a69d911-be1a-0a2a45090019-5a9b32228b0c-3
+ for <multiple-recipients>; Wed, 29 Jul 2026 12:42:25 +0200
+Received: from [2001:8b0:10b:5:6576:c48e:4c9a:e70c]
+ (helo=u09cd745991455d.ant.amazon.com)
+ by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+ id 1wp1jk-00000001IF4-0jMt; Wed, 29 Jul 2026 10:42:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,146 +50,205 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785321702; x=1785926502; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=zI5fF/KZ5gecqb5PeF3jTPYTKHb1nH8BxuQH5siZpNs=;
-        b=BWDTbJHVWM03Xv/hDyTmQYb62K2SGSc8tXAN7HzaVR/aAI8zlwALY8Kf1oWiTEXbNW
-         EfK+634b2DedhYmN7M6jsnr1E9446nAihTk8KP3qL6FJVf/v6mQqrvK/nj7SRN2DT6Fm
-         jWueDN3MnyDSJCOOhyRdO9TnLcdoHvyym/9ewlsrUKZUuNgIYee651iJayO395x+LyKH
-         jQvVhmneh8Qlop7aGdfHVmWkG7BoQahZdAzHa7pZG44f1i+KHw00M4akooQ+mAgLmF2/
-         Ya1pM+mV1cK1CeddY/L5RdhsqNJfeYFNwTaN4e88iE1/v4+PiSDdOjh+AXoDUMInCEqE
-         95jg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785321702; x=1785926502;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=zI5fF/KZ5gecqb5PeF3jTPYTKHb1nH8BxuQH5siZpNs=;
-        b=KDb8Uyjt0z9HBW6H6aFYYQmai/83laR42mF66ksJsiD8KU+IN1vt5LFLmeVhHbwAUt
-         JvXQn905vjEU4rQ5XiYWAtde+VOz49v2wQXj55XsZI+gPbjTd6i4swKH0jiCv1C3JiS5
-         ke9LRrvrfA4dhBa276idzZpXOIc2OK730BtFeSPnHK0OlZGZApx3wNDl5Itnh6SwsXd2
-         m23LkkErLQ06AEfi/kPY69gIpcLuPesejn+7MKew+21s/7F9NSQ32/uZZ3W54GhJB/NI
-         Gxzmion4gu1SHk4KourdRgLeqVoFO4WQoQsSbFWyEynmkUJgSmmJm7l27YBaw0u3cBFu
-         zfTw==
-X-Forwarded-Encrypted: i=1; AHgh+RrG0UknMrCyqnvROKyCY8n9Cdea0rWNkTpOju6Vz9elbKPqR8TVpWFSsbry1f1xTvyqMqOrlBTi0bQ=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwzFcTtvyJrVd0iIgl2Ev74XK1XvawtvHiaOxjz3m6dkC9ZsLei
-	MI5YYJLmHfykAgKvBD5ecUwovcyEtCEmCe26kp+bLfZbCYDEbqCq0VvQ
-X-Gm-Gg: AR+sD11l7CQkH/ON2DxLqUPSfAXxtzzjA0aVmBBAfo8Kpuz4nbBOb5a+g9tvVYLZbxE
-	jBB2tQCCUZXj9Z2CZZkirj6IQXkVtIYt0gAmqGMreUe++GKlbDFOpSMRvikdqmGFsxNODDP1Hl/
-	iew7Lc2ucnb4gLpcFSAYq0EudN6jG4qKbQmnPENL11EaA0iMhp0k+er+Nm2BZhsvocHnHmTOTYs
-	W8WHnoMiVmhP20/UOMGuBhXDEQLaFTg4vBFsiIJbY+1JHeGzYJP5KCksus27KUtC3uIInDoPHA/
-	J8MCRSeSJzjDqNBwOr04ni0NUwIqxsc5XQJWMisPsmd4rFmZF2Hu+37Qi0qakSVvTwWpkvei2th
-	OxcEd+tuLEwM2/95IjWJqJblWWySoexGS+8/sZP/O4NVrxbfie/L2dQdBvpHuAxawbz7yPSYKsL
-	RhVOoR9jOCbEXHpyA+uRdnU1PfPeN2kLoiFrDqSpr9ceTFg3BilX3sDjxEJVFcMbR/sgdUQI7Vh
-	7DM8mzWiKUj9/Q0Idni+rYsylO4f08He7/TPmVjih4rGoHVZFiqo4o=
-X-Received: by 2002:a05:600c:3153:b0:493:c10c:22f0 with SMTP id 5b1f17b1804b1-496c656e484mr72386725e9.20.1785321702235;
-        Wed, 29 Jul 2026 03:41:42 -0700 (PDT)
-Message-ID: <43cf6077-c1c1-4aab-b769-736a3912e02f@gmail.com>
-Date: Wed, 29 Jul 2026 12:41:40 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="MIME-Version:Content-Type:In-Reply-To:Date:Cc:To:From:Subject:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:In-Reply-To:
+	Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
+	Content-ID:Content-Description:References;
+	bh=Qsk6Dt1YdIozovrzXqE9M0zemdCZHrSiNsSLk3bigVg=; b=KQ/IstSyUljyF4Oxx92/m7Ug7w
+	6TquI1+NyYlp9JhCZBnkAY+gIDlfK0pn27z8VuO0FTLD39Hr9lBn3fUlg6nQQjDf4N231vh9Xy8Nv
+	QyD6AewrUtE+xsuF1P+eg3snS/d3RelWiLNi/BjseA3Wn0zgXPayrFSapTHl1U18ncSBVjaSJYJM7
+	u0/T5wnjXD4Mwag11DGcrAp77nAnCEj3toYUVjdx+8MWY5a+9HnFxYTBv38iFL2+LHV0VDLJtf2kl
+	SpNbtn2PrCSv3+sZjfg45Wxh6siL+z3Fm/+B7HKzrhjuR4oB8f/2BNnky9LrwkcTJoUSl2vu03G3X
+	7hGQjSPA==;
+Message-ID: <46a037e1680bfbc6e35b0dbe404f83dc5a3fd1cf.camel@infradead.org>
+Subject: Re: [PATCH v7 00/36] Cleaning up the KVM clock mess
+From: David Woodhouse <dwmw2@infradead.org>
+To: Sean Christopherson <seanjc@google.com>
+Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>, Thomas Gleixner <tglx@kernel.org>,
+ Ingo Molnar <mingo@redhat.com>,  Borislav Petkov	 <bp@alien8.de>, Dave
+ Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin"	
+ <hpa@zytor.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, Juergen Gross	
+ <jgross@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Paul
+ Durrant	 <paul@xen.org>, Jonathan Cameron <jic23@kernel.org>, Sascha
+ Bischoff	 <Sascha.Bischoff@arm.com>, Marc Zyngier <maz@kernel.org>, Joey
+ Gouly	 <joey.gouly@arm.com>, Jack Allister <jalliste@amazon.com>, Dongli
+ Zhang	 <dongli.zhang@oracle.com>, joe.jin@oracle.com, kvm@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	xen-devel@lists.xenproject.org, linux-kselftest@vger.kernel.org
+Date: Wed, 29 Jul 2026 11:42:07 +0100
+In-Reply-To: <amk4sX57FwapIp9B@google.com>
+Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
+	boundary="=-kbFPbhmb9kKG7ytWfOyv"
+User-Agent: Evolution 3.60.3-0ubuntu1~ppa9~24.04 
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 14/23] xen/riscv: introduce minimal virtual APLIC
- (vAPLIC) infrastructure
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1784559209.git.oleksii.kurochko@gmail.com>
- <98bcad12ca4e5ee270cc1ef9db09d89a32f863f8.1784559209.git.oleksii.kurochko@gmail.com>
- <e5ac074d-c824-4fe4-a1d4-ba986236fbb1@suse.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <e5ac074d-c824-4fe4-a1d4-ba986236fbb1@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1785321702-6ECCB4E9-AE635AF7/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 2820
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-bad1c0/1785321746-BF4D3034-B1BDF817/0/0
+X-purgate-type: clean
+X-purgate-size: 10943
 
 
+--=-kbFPbhmb9kKG7ytWfOyv
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 7/22/26 9:40 AM, Jan Beulich wrote:
-> On 20.07.2026 17:59, Oleksii Kurochko wrote:
->> At the current development stage, only domain vINTC init and deinit
->> operations are required, so implement those first.
->>
->> Initialize vAPLIC's domaincfg to with the interrupt-enable bit set and
->> MSI delivery mode selected as the current solution is exepcted to have
->> always IMSIC, and initialize vintc->ops.
->>
->> Other operations such as emulate_load(), emulate_store(), and is_access()
->> will be needed once guests are running and MMIO accesses to APLIC MMIO
->> range must be handled. These will be introduced separately later.
->>
->> Introduce a structure to describe a virtual interrupt controller (vINTC)
->> and a vintc_ops structure, which provides operations to emulate load and
->> store accesses to interrupt controller MMIOs and to check whether a given
->> address falls within the MMIO range of a specific virtual interrupt
->> controller.
->> Note that already existed init_ops field in struct vintc will be init-ed
->> for APLIC in the follow up patch.
->>
->> The vAPLIC implementation of these operations will be provided later
->> once guests can be run and these operations are actually needed.
->>
->> Introduce these structures here as they are required for the implementation
->> of domain_vaplic_init() and domain_vaplic_alloc(). Also, introduce
->> vaplic_init() and init vintc_ops->vcpu_init() with it.
->>
->> Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
->> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> 
-> Acked-by: Jan Beulich <jbeulich@suse.com>
+On Tue, 2026-07-28 at 16:18 -0700, Sean Christopherson wrote:
+> I'll post a new version up through here, get it applied soon-ish, and
+> then get back to chipping away at the rest of the series.
 
-Thanks.
+Thanks. I'll leave that first part alone now, and rebase the remainder
+on top of what lands.=20
 
-> albeit I (continue to) think that ...
-> 
->> --- a/xen/arch/riscv/include/asm/intc.h
->> +++ b/xen/arch/riscv/include/asm/intc.h
->> @@ -17,6 +17,7 @@ enum intc_variant {
->>   struct cpu_user_regs;
->>   struct irq_desc;
->>   struct kernel_info;
->> +struct vcpu;
->>   
->>   struct intc_info {
->>       enum intc_variant hw_variant;
->> @@ -53,8 +54,19 @@ struct vintc_init_ops {
->>       int (*make_domu_dt_node)(struct kernel_info *kinfo);
->>   };
->>   
->> +struct vintc_ops {
->> +    /* Initialize some vINTC-related stuff for a vCPU */
->> +    int (*vcpu_init)(struct vcpu *v);
->> +
->> +    /* Deinitialize some vINTC-related stuff for a vCPU */
->> +    void (*vcpu_deinit)(struct vcpu *v);
->> +};
->> +
->>   struct vintc {
->> +    /* Used during domain build only; dropped afterwards. */
->>       const struct vintc_init_ops *init_ops;
-> 
-> ... "dropped" in the comment is misleading - there's nothing being dropped
-> here, as that's technically impossible. Iirc you don't even poison the
-> field once domain build is finished.
+Not sure why Sashiko didn't reply to v6, but I've addressed the two
+real bugs it found in v7:
 
-I will rephrase that in the following way:
+ - "Re-synchronize TSC after KVM_SET_TSC_KHZ" made kvm_set_tsc_khz()
+   call kvm_synchronize_tsc() with a non-NULL value, which set
+   kvm->arch.user_set_tsc from the kernel's own vCPU-creation path and
+   thus enabled the 1-second slop heuristic before userspace ever
+   wrote a TSC =E2=80=94 breaking restore of a guest with <1s of runtime.
+   Fixed by making "user initiated" an explicit parameter instead of
+   inferring it from the pointer being non-NULL. I've also added a
+   selftest which fails on v7 and passes with the fix (first user
+   write of a TSC value ~500ms of cycles from the kernel default gets
+   snapped back to the default generation by the bug).
 
-/* Callbacks invoked during domain construction only. */
+ - The S4 backwards-TSC adjustment in "Kill last_tsc_{nsec,write,
+   offset} fields" adjusted cur_tsc_offset by the raw host-cycle delta
+   while each vCPU's offset moves by the guest-scaled delta (via
+   adjust_tsc_offset_host()), so they disagreed for scaled guests. And
+   the cur_tsc_write adjustment shouldn't have existed at all =E2=80=94 the
+   guest TSC is kept continuous across S4 and the {cur_tsc_nsec,
+   cur_tsc_write} pair lives in the wall-clock/guest-cycle domain.
 
-~ Oleksii
+Also fixed the unused-function breakage you hit in "Use
+ktime_get_snapshot_id() for master clock" (the private readers are now
+deleted in that patch, where their last callers go away), a stale
+paragraph in the kvm_synchronize_tsc() changelog, the =CE=94T*freq unit
+confusion in the TSC migration documentation, and a handful of
+legitimate selftest nits from the same review.
+
+All pushed to a kvmclock8 branch (which is identical up to commit
+dcbe8dc4ca "Remove implicit rdtsc()"):
+https://git.infradead.org/?p=3Dusers/dwmw2/linux.git;a=3Dshortlog;h=3Drefs/=
+heads/kvmclock8
+
+--=-kbFPbhmb9kKG7ytWfOyv
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Transfer-Encoding: base64
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCE8Ew
+ggWvMIIEl6ADAgECAhANkOKMSmGXhF5eMl0rsRhvMA0GCSqGSIb3DQEBDAUAMGUxCzAJBgNVBAYT
+AlVTMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xJDAi
+BgNVBAMTG0RpZ2lDZXJ0IEFzc3VyZWQgSUQgUm9vdCBHMjAeFw0yNDAzMTMwMDAwMDBaFw0zNDAz
+MTIyMzU5NTlaMGIxCzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UE
+AxMxRGlnaUNlcnQgQXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTCCAiIw
+DQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBAOfSIeC0vv1xPQ+dgSxbIIrkaru6skAWJYaGFzmv
+q4Kq+2wU2jxhcWlJg/JeP5jEkq/LM3pn5aaLao79j+XRmS7J1ZpJKUODJVoM4s9MQJhTMvo4qS5Z
+S64g6QR7Obkz3I1Lr3aWeSBmDDEyzue+NKtuWZ1Cxy3RdXo/w5HgRc3l2AercOM3Gt1XonTzEtTb
+Z/Hwc0Sn9Gz8RmGRK6Ka4hVDl8q/2l110KaV233Kh5etP0csXS8MIMdVRfRu3sc5hp13DG7lCKzK
+72a2GEpI8Wpl26G6I1/LMzz/98T+FqjTqxsdquk7Cj7m2vKGLW1BorpQH7WFGPdJQXJe1hfbfiZA
+CcVdCtl4nAacFacmsiArZBfX7AQGL7isvHUwwYFEtcApyGW4p2Lt+t8nvU0CANA6BHOpOz1xOP8W
+mAESbUriIjyuTUf3fJ9oDNCurVqhASMJCDaWI3lYX/QAoiAzt6akqbbZxo2ujW7mGGqc0KxqE2cs
+h2T79v7pC8aUtHBfwNrTR19GnZVxE0eQ7ViIQhR6mpSaUQFA9sG+cmD2G8TnCgYsLa0q8De6F61a
+CBevQGHNzrbZ3JAMneveYg/Jy1XxQHDRcvrMfWKe0jjcWbdKYlaGVPm5V1ILwYz7Yv5ewo3NUrxI
+GJiywe9qPhuJSDZs7VehTuI0FxGIsgKzVjgbAgMBAAGjggFcMIIBWDASBgNVHRMBAf8ECDAGAQH/
+AgEAMB0GA1UdDgQWBBT3m6JO05fF9DQPQw6Bhc6RkzKv+TAfBgNVHSMEGDAWgBTOw0q5mVXyuNtg
+v6l+vVa1lzan1jAOBgNVHQ8BAf8EBAMCAYYwHQYDVR0lBBYwFAYIKwYBBQUHAwQGCCsGAQUFBwMC
+MHkGCCsGAQUFBwEBBG0wazAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29tMEMG
+CCsGAQUFBzAChjdodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkSURS
+b290RzIuY3J0MEUGA1UdHwQ+MDwwOqA4oDaGNGh0dHA6Ly9jcmwzLmRpZ2ljZXJ0LmNvbS9EaWdp
+Q2VydEFzc3VyZWRJRFJvb3RHMi5jcmwwEQYDVR0gBAowCDAGBgRVHSAAMA0GCSqGSIb3DQEBDAUA
+A4IBAQA+b8Uw53sDspdZgukU+qzLyyHkcjlxGGhHlP+zrmDLKm1wEFvCRS2pili3Hy67i8N4N5NU
+vw5Rg6kv3lxb9S9Rktxk43k+tvm68pl7OxQE55ZjVY87P0lUPGwEqOOwLLyH02ZQcsfq5p5LrOH9
+0JvmvZ1yy73HS+VpDAqOlytE0NSvTIRqFFkKQGQwfjvtql9YflujuNNvJztjBaHKYZsnNSg+J38o
+jYq4TP3pSg3UdVH0PncVjPQyqxC9xef5Xae92Kbkzol3x7Nel3A1bwAkalrDMspvTHvey6LfiBks
+FIqviTnoy7fgjaRAJgHS+RXx/cmuRd3rUAclSVVrYu8RMIIHAzCCBOugAwIBAgIQAzUotrsybJHx
+HTjKOIVdIDANBgkqhkiG9w0BAQsFADBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQs
+IEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFzc3VyZWQgRzIgU01JTUUgUlNBNDA5NiBTSEEzODQg
+MjAyNCBDQTEwHhcNMjYwNzE4MDAwMDAwWhcNMjgwMTA0MjM1OTU5WjAeMRwwGgYDVQQDDBNkd213
+MkBpbmZyYWRlYWQub3JnMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA2pYux73kdbYX
+sWF8f1u6DJP91qcqaZetsyfPkZk0B+MmXmAEv0kVes5n15V2mbDThOnpoPFly0UugQO9JYqLfrtD
+tKD5yL58fgrDB9Dw+LQikgrHafl6YSCds5AvUu/8hw2J6noKrcOLJpKlKn9Fl/4IB9Q3JIdLx5aa
+EtTqMalIPqHFOlgrJ7s+aua8xbB8YQ9ahqYBXWRJNv3P/2b1DYtdrz1oqZPE3CcB8Pc6Gf2a1Tcm
+6TAgtEx7Cf1BFcrsrMz7TWHmGQITieNb2r9UYWSc2Gp+GtYFNJCgT0JJXKUBIauPMKBLteYrL8Fo
+ff/uY44dC/mDWjdCP/5x0qelPQjlBvWdHL5zvBTOj06rJ0m3HNI/hnIcDh0Qu2j9reb9rLVcdym6
+bWmBM4uDEB8Zv9Ph0KTBFSy1IosyakuD1j1Os30EzjGfbi0EUXIvnOcYbTBAbM5UAzrxEHMhBvoX
+Pvnx+OyvjJmc9tWxTX6AcSz+m40esbT17URBeZS18afgieiikm5TynlUYP1LciR3hSgGVzvGXnKO
+02VDFR5itGWdRKZ2W5wIShNfWfhSa0D0K5UdIDt5Qc7sjzwK1Yb1sY5Tu0uA5mhIS82q1ov83uxB
+sFkriNnhGv/M1NCDVLBiOMsHu73qUM+yKmgKLwF9Hfn9WI25glbAMI4S5r3hYzcCAwEAAaOCAfcw
+ggHzMB8GA1UdIwQYMBaAFPebok7Tl8X0NA9DDoGFzpGTMq/5MB0GA1UdDgQWBBRcYhqbcGzn1jrT
+JOZaB8O7qllDpzAwBgNVHREEKTAngRNkd213MkBpbmZyYWRlYWQub3JngRBkYXZpZEB3b29kaG91
+LnNlMBQGA1UdIAQNMAswCQYHZ4EMAQUBAjAOBgNVHQ8BAf8EBAMCBeAwHQYDVR0lBBYwFAYIKwYB
+BQUHAwIGCCsGAQUFBwMEMIGpBgNVHR8EgaEwgZ4wTaBLoEmGR2h0dHA6Ly9jcmwzLmRpZ2ljZXJ0
+LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsME2gS6BJ
+hkdodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZT
+SEEzODQyMDI0Q0ExLmNybDCBjQYIKwYBBQUHAQEEgYAwfjAkBggrBgEFBQcwAYYYaHR0cDovL29j
+c3AuZGlnaWNlcnQuY29tMFYGCCsGAQUFBzAChkpodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20v
+RGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZTSEEzODQyMDI0Q0ExLmNydDANBgkqhkiG9w0B
+AQsFAAOCAgEAocabrh1cPd5s3vY5rnlBVQSTc7zs2ZWs67dAIltR+05WELrYClVzzUhMs/LOJPlr
+EUo45UDDomXq38DxFepaPd9+iNLjXfn33EX/IG44j04lU/oF/Rg9VeQILkYLbCZ/x9wOjNHZc4SN
+ydY7Dhvf/sT5aBz88u7D5+azZJ7Qf1U57wYseCH1Mt0nDrtr5y19IJ8D9xJJ33RFL6vfpHZBBAQ8
++3RqkKNxLoV2aFvQhxdhjNLDqTv3LjUIdicwPraN7JkxEu7CV2Lka7eRqJgkWL7SK0YmBjGpRafs
++icP/ON5RCCKTTb6VlX8eTG2sJJfsFhvJNCCt6xexbWzWtIrfP7NvPBvwBB737AyEGBZkS5aNizT
+McURJGTv9UKvBh1LF/+tNhYtLvPCN7oecGzhCHht9jcwSkygTo3Y6YlK3QgOu+ncmiBbfeuwlLZ1
+LxbYvG6hgNqXv7u6YyADbYajAQJXJ2OQen39pm3Q/AQSyLYG+B8lDglWsM8tYXPlEdrYJcksGK6F
+nqIX6Bumn43rBooLJdiZp4WmfWdL2pxe+LxRDjprmqu1WprixDxULSTOKJZoqTlugs6y3Bc+if+s
+gHnBBtz9WQ6MtPHkh7zONDAFIKcBmv8OqPQCx0F3Wv3OEybwMpXx0OsKgK8wLldaX1pXcMuyDgTL
+Sqs0AV0OHUgwggcDMIIE66ADAgECAhADNSi2uzJskfEdOMo4hV0gMA0GCSqGSIb3DQEBCwUAMGIx
+CzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UEAxMxRGlnaUNlcnQg
+QXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTAeFw0yNjA3MTgwMDAwMDBa
+Fw0yODAxMDQyMzU5NTlaMB4xHDAaBgNVBAMME2R3bXcyQGluZnJhZGVhZC5vcmcwggIiMA0GCSqG
+SIb3DQEBAQUAA4ICDwAwggIKAoICAQDali7HveR1thexYXx/W7oMk/3Wpyppl62zJ8+RmTQH4yZe
+YAS/SRV6zmfXlXaZsNOE6emg8WXLRS6BA70liot+u0O0oPnIvnx+CsMH0PD4tCKSCsdp+XphIJ2z
+kC9S7/yHDYnqegqtw4smkqUqf0WX/ggH1Dckh0vHlpoS1OoxqUg+ocU6WCsnuz5q5rzFsHxhD1qG
+pgFdZEk2/c//ZvUNi12vPWipk8TcJwHw9zoZ/ZrVNybpMCC0THsJ/UEVyuyszPtNYeYZAhOJ41va
+v1RhZJzYan4a1gU0kKBPQklcpQEhq48woEu15isvwWh9/+5jjh0L+YNaN0I//nHSp6U9COUG9Z0c
+vnO8FM6PTqsnSbcc0j+GchwOHRC7aP2t5v2stVx3KbptaYEzi4MQHxm/0+HQpMEVLLUiizJqS4PW
+PU6zfQTOMZ9uLQRRci+c5xhtMEBszlQDOvEQcyEG+hc++fH47K+MmZz21bFNfoBxLP6bjR6xtPXt
+REF5lLXxp+CJ6KKSblPKeVRg/UtyJHeFKAZXO8Zeco7TZUMVHmK0ZZ1EpnZbnAhKE19Z+FJrQPQr
+lR0gO3lBzuyPPArVhvWxjlO7S4DmaEhLzarWi/ze7EGwWSuI2eEa/8zU0INUsGI4ywe7vepQz7Iq
+aAovAX0d+f1YjbmCVsAwjhLmveFjNwIDAQABo4IB9zCCAfMwHwYDVR0jBBgwFoAU95uiTtOXxfQ0
+D0MOgYXOkZMyr/kwHQYDVR0OBBYEFFxiGptwbOfWOtMk5loHw7uqWUOnMDAGA1UdEQQpMCeBE2R3
+bXcyQGluZnJhZGVhZC5vcmeBEGRhdmlkQHdvb2Rob3Uuc2UwFAYDVR0gBA0wCzAJBgdngQwBBQEC
+MA4GA1UdDwEB/wQEAwIF4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwgakGA1UdHwSB
+oTCBnjBNoEugSYZHaHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0QXNzdXJlZEcyU01J
+TUVSU0E0MDk2U0hBMzg0MjAyNENBMS5jcmwwTaBLoEmGR2h0dHA6Ly9jcmw0LmRpZ2ljZXJ0LmNv
+bS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsMIGNBggrBgEF
+BQcBAQSBgDB+MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wVgYIKwYBBQUH
+MAKGSmh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNB
+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
+8uZpMdOKtX7zgiECLQRqJsMAAAAAAAA=
+
+
+--=-kbFPbhmb9kKG7ytWfOyv--
 
