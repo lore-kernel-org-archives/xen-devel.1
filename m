@@ -4,45 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4C82C54F51
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Jul 2026 12:35:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1375743.1622808 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 426CEC53200
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Jul 2026 12:37:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1375752.1622818 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wp3Uw-0000Zy-On; Wed, 29 Jul 2026 12:34:58 +0000
+	id 1wp3XA-00017m-4f; Wed, 29 Jul 2026 12:37:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1375743.1622808; Wed, 29 Jul 2026 12:34:58 +0000
+Received: by outflank-mailman (output) from mailman id 1375752.1622818; Wed, 29 Jul 2026 12:37:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wp3Uw-0000Zr-M3; Wed, 29 Jul 2026 12:34:58 +0000
-Received: by outflank-mailman (input) for mailman id 1375743;
- Wed, 29 Jul 2026 12:34:56 +0000
+	id 1wp3XA-00017f-0k; Wed, 29 Jul 2026 12:37:16 +0000
+Received: by outflank-mailman (input) for mailman id 1375752;
+ Wed, 29 Jul 2026 12:37:14 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wp3Uu-0000Zl-QF
- for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 12:34:56 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <pfalcato@suse.de>) id 1wp3X7-00017X-QM
+ for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 12:37:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wp3Ut-005pgP-VO
- for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 14:34:55 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wp3X7-00EQJw-73
+ for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 14:37:13 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6a69f361-2eae-0a2a0a5409dd-0a2a450ae574-14
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 14:34:55 +0200
-Received: from [52.101.52.59]
- (helo=BL2PR02CU003.outbound.protection.outlook.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6a69f36e-f2d2-0a2a450a0019-3465343b0daa-4
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 14:34:55 +0200
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by SA0PR03MB5449.namprd03.prod.outlook.com (2603:10b6:806:bd::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.12; Wed, 29 Jul
- 2026 12:34:53 +0000
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37%7]) with mapi id 15.21.0245.012; Wed, 29 Jul 2026
- 12:34:53 +0000
+ (envelope-from <pfalcato@suse.de>)
+ id 6a69f3ea-5cb7-0a2a0a5109dd-0a2a4506ae1e-34
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 14:37:13 +0200
+Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <pfalcato@suse.de>)
+ id 6a69f3f8-195a-0a2a45060019-c387df82a860-3
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 14:37:13 +0200
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 0AE6C7CAFF;
+ Wed, 29 Jul 2026 12:37:04 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 11699779A1;
+ Wed, 29 Jul 2026 12:37:00 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id +/ToAOzzaWpxRgAAD6G6ig
+ (envelope-from <pfalcato@suse.de>); Wed, 29 Jul 2026 12:37:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,168 +61,156 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FM+cvm2bVCfWQDvQ4N8Mi6FYGI7WtUbfkauDwhWzLWgE1FdvEQ2wa6X6xhEVNU0ycYmFJcav/oMx1kwJZtZws+lx/lwbNFAqUzKjrsavgK0k3E/WtCdMKzcrXZRqRZN4s7ng0xRqAleBbK8Gi4NSXd/KopAk2XtdMBaAjoOWGOHN035h4Y9EDL0Vu2Lm096FeANxperSDKGHxNXCRZCh2zD+BuyeFXpWPUJ8niLTGziKOUbZ7EsK+RMl429sAigSND0i18GEUTEaUYu2uoRl2xiSwi9+Hjg6tuUS79Szo7NC3eAYy5nJSl3GhqGywCPhoPuUsaHBBBKs/Owwfc9yAg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ijf+AaFwzvLrYWZoURADwHPayIRU8qj1kNcu6J1mUaQ=;
- b=vVhJ+yUqUA5gZvFSgX+bvKGVomWwuAlM+dkLYlAU64PspwiOVlKfJO1xV92te4Eqq1dYboRmX4CKE0D5LxjAwUGuHHUgskSswkWvVIuCMdsTHpH2IKNwS1ueDvwYI6R+F/A1HBZwW8S72fc3v54ndnlNw+25GdA0inQkyccvh1tjvTTnkRUzoIF9FWBZxShj3Oxn/cDtOIsuGCtwZ7q/1aqWP/J/KEqkqcHrlMHKTqPFvQsa3EaaaOH4PtD+SGTjwIyIIOcYE1lYenEacYqVZxzOzhlmurIbjDCosuWMSazh/3v2dD73gkUaZKMGzranvkozAe0RZHwTVUCm/kB37w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ijf+AaFwzvLrYWZoURADwHPayIRU8qj1kNcu6J1mUaQ=;
- b=hV9crrCHxq4XQwRkaVG16FAxq1ef3Xsmt3cjPTZw9ol4QUz65/Y8EK8aAOsEzoIbaJ0C7b+rq5xCAMyljTfNAxPcYxWmaJfstdz9/7Kp/X0eN/5jPs2E/uYKkDfUf5Pd7xxjMJ5XVE+arbe3/Ebt+Eq3enxeoJoCQfys0eedZ7M=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <9c05828f-2034-4178-9ab3-ddee0003724f@citrix.com>
-Date: Wed, 29 Jul 2026 13:34:49 +0100
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Community Manager <community.manager@xenproject.org>,
- "committers @ xenproject . org" <committers@xenproject.org>,
- Julien Grall <julien@xen.org>, "Orzel, Michal" <michal.orzel@amd.com>,
- Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH] CHANGELOG: add Arm and RISC-V entries for 4.22
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>
-References: <8087862a1149a8875b578c2b3d044919d8563a39.1783950107.git.oleksii.kurochko@gmail.com>
- <24C3741F-1803-4ED7-84E3-0A2801468D41@arm.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <24C3741F-1803-4ED7-84E3-0A2801468D41@arm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P123CA0248.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:1a7::19) To CH8PR03MB8275.namprd03.prod.outlook.com
- (2603:10b6:610:2b9::7)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1785328628; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=aCPopA3duELZWRFQ7PC+zcU7UIlf1ZyVyMzN0xmYHFs=;
+	b=HsBO/9wNGNK0BBi/KZnybjT4wfzH1RbauNRa3BkCq1Gz1ZFYfyulio9BMMz/Qhlayjht8v
+	gD7JzPlP/j/lbzamJYZIEmtCD/24X5mlh9Cm7ueizVVj2a3/38UgR1iUgozDxsYGd00nVJ
+	81gftDjjAsCoQcZd/g/wQgIFNVzYSPo=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1785328628;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=aCPopA3duELZWRFQ7PC+zcU7UIlf1ZyVyMzN0xmYHFs=;
+	b=vhLdNBgT3LES3Nfy+reOhuZbF+sRDMgTm8/+rp44QydsQ0PgJmekRb7kN8gf1KeP/gQfF2
+	vhVMad65mEjeOWBw==
+Authentication-Results: smtp-out1.suse.de;
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=nBonCs6a;
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=BT3fFBrc
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1785328624; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=aCPopA3duELZWRFQ7PC+zcU7UIlf1ZyVyMzN0xmYHFs=;
+	b=nBonCs6auu91fwhTCPSwwqM/BnHZLlIGXt/TmMHVYSy429b64ZCJOljFWGBAHwpGwsp+VY
+	26DPb6Xoz2zlvJd7icT3XVFcHRopeHCqPAv9U3TcLO99ha0MheRXkinzHltD+E4YU5GueL
+	hsbqCAyQMiJN0MmV5BgL9eX8TbAHxvo=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1785328624;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=aCPopA3duELZWRFQ7PC+zcU7UIlf1ZyVyMzN0xmYHFs=;
+	b=BT3fFBrcAWB//UVTCQRGI3kpRDayFQs1zsoB1XrNCj60pSuBHTbHXO+sVcJVpP7eK4LEaV
+	7UMRX0P/16CpuzAw==
+Date: Wed, 29 Jul 2026 13:36:58 +0100
+From: Pedro Falcato <pfalcato@suse.de>
+To: Muhammad Usama Anjum <usama.anjum@arm.com>
+Cc: Jani Nikula <jani.nikula@linux.intel.com>, 
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, 
+	Tvrtko Ursulin <tursulin@ursulin.net>, David Airlie <airlied@gmail.com>, 
+	Simona Vetter <simona@ffwll.ch>, Dimitri Sivanich <dimitri.sivanich@hpe.com>, 
+	Arnd Bergmann <arnd@arndb.de>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>, Helge Deller <deller@gmx.de>, Juergen Gross <jgross@suse.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Muchun Song <muchun.song@linux.dev>, 
+	Oscar Salvador <osalvador@suse.de>, Andrew Morton <akpm@linux-foundation.org>, 
+	"Liam R. Howlett" <liam@infradead.org>, Lorenzo Stoakes <ljs@kernel.org>, Will Deacon <will@kernel.org>, 
+	"Aneesh Kumar K.V" <aneesh.kumar@kernel.org>, Nick Piggin <npiggin@gmail.com>, 
+	Peter Zijlstra <peterz@infradead.org>, Andrey Ryabinin <ryabinin.a.a@gmail.com>, 
+	David Hildenbrand <david@kernel.org>, Pasha Tatashin <pasha.tatashin@soleen.com>, 
+	Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>, 
+	Uladzislau Rezki <urezki@gmail.com>, Steven Rostedt <rostedt@goodmis.org>, 
+	Masami Hiramatsu <mhiramat@kernel.org>, Alexei Starovoitov <ast@kernel.org>, 
+	Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>, 
+	Eduard Zingerman <eddyz87@gmail.com>, Kumar Kartikeya Dwivedi <memxor@gmail.com>, 
+	Ingo Molnar <mingo@redhat.com>, Arnaldo Carvalho de Melo <acme@kernel.org>, 
+	Namhyung Kim <namhyung@kernel.org>, SJ Park <sj@kernel.org>, 
+	"Matthew Wilcox (Oracle)" <willy@infradead.org>, Jan Kara <jack@suse.cz>, Jason Gunthorpe <jgg@ziepe.ca>, 
+	Leon Romanovsky <leon@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>, 
+	Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>, Christoph Lameter <cl@gentwo.org>, 
+	Mike Rapoport <rppt@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>, ziy@nvidia.com, 
+	agordeev@linux.ibm.com, ryan.roberts@arm.com, linux-kernel@vger.kernel.org, 
+	intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-parisc@vger.kernel.org, 
+	xen-devel@lists.xenproject.org, linux-mm@kvack.org, linux-fsdevel@vger.kernel.org, 
+	linux-arch@vger.kernel.org, kasan-dev@googlegroups.com, linux-trace-kernel@vger.kernel.org, 
+	bpf@vger.kernel.org, linux-perf-users@vger.kernel.org, damon@lists.linux.dev
+Subject: Re: [PATCH RFC 09/11] misc/sgi-gru: use ptep_get() for page-table
+ reads
+Message-ID: <amnxCmFU40QQaxTx@pedro-suse.lan>
+References: <20260727164715.2866609-1-usama.anjum@arm.com>
+ <20260727164715.2866609-10-usama.anjum@arm.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|SA0PR03MB5449:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6ee97425-765c-474c-f3ad-08deed6dc9ef
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|366016|376014|23010399003|4143699003|10067099003|11063799006|56012099006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	srjqMekBdA5+aWV0Y1rsR7yB2fUX3f0gOnno6ZPc9mSbTfWzHe4ERIw+royTKyQxiHbPYmJ/rAsVeXB3PlkmHFJ9zJuvOGzrXuDpPGIFDBqQqitrr6rY2A7mMRSazVa5nvHUGfSp/mcYrGrsMzQUVqm6awjqs4U+awwxnEWHnj5AqBrEDjcJfsRw3Xn1zJlE+elRPcDgOqMlKQLEeFG0l2nz0pJl/7PxRDvo7NriTJnPAmwk3eyJIYrHB6aXp7DmKSPFJcvy5Vo5JQ80CO4TD+xHS6MV7yqolnyZORePAqWWiQcGcS3xwr+GJAiEeDQmsHT7b14CSSZtfDiOt/bns2Cm1ZLdLXaiFunaUSJvI2XJaHBaxON+zQB9pJ3F2peshkYBNQPBD2ZwoCRSej5aNIjWkQzm0vYA1Tj26LL4psczRetNTtWAnyBPcsP6BvZiyoPxyM3YiYr8CAZBlvBcZkdDxQBc0pHRtzDt6d6/pmBdbNOR2nxf0/UBHBCipK96jFPKIp9sUherR8WZmtxSxd830ZN0uDOMSyhnaNwFXkrau6sPHVHq1QyDLM84u+XPY1jdXF9Tf5tImX6Duhxsr10j9tB/zbHkzMFyQ5INWhFM08kMs626YJeBKVPBtJAMK2PpWQkKrH8KrvQLXOmKxRqBnlfgluDlm3Rzr+ySifY=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(4143699003)(10067099003)(11063799006)(56012099006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?UE1rKzVYcUZWZGJpcG5nSExTVnRtZGwzR29yU3NYREY4WUtrdDZITE1ZZWRy?=
- =?utf-8?B?NVRXdVlraURyNWo5L3ZJUWpIalBPWmdRWHlaMXo4ZlRGL2V3ZmZxcXdnTGll?=
- =?utf-8?B?YS93YWhUWHJxR29acE1iM2pHMGJvQlJsZEMxQXpPNlVnSkdHOTNwckpiVXNl?=
- =?utf-8?B?SnlhWnRhZDNuWGMwNGJtekdKbDY5T1BISDJ6aExFVHp6S1JXUDhaSnhMd2hV?=
- =?utf-8?B?bGcyY01LYlgyditqakl6a0dZdmVOSW9IRUd3bnRwZ3FtK0ZiRjdwYU5PSW1U?=
- =?utf-8?B?ekE1QURodXVBbjd3TGV1SS9XZFFWR3BmNEVSdzFGMmprbForT013UWVBeDZO?=
- =?utf-8?B?VHQyVDRMeUp4Y2NKay9nZk9GMExkYy95MFVjd1VlWTluMlBiSmpiYmczUStH?=
- =?utf-8?B?dWVwQUUvRGI3Szc0N3pkWmxHRVYyaVNUSVZOUVB3UWlLQzU4QlBVb2tWL0Zq?=
- =?utf-8?B?UnlUekNIdWNzTzR6bmdHTnVOR0Y4eTRBTWgxUE0wbnlyb2JMNTZGR0w3NWpG?=
- =?utf-8?B?T3NYdklLTmlZbDB1ZGpRbFNhT2lGNkQ5Z2NqVGczTVYwVmVGN1N4NjhyZERK?=
- =?utf-8?B?dlJMWmsyMGRWZ0VsdE44eWdJTWxud0RNN1RaTm4vY01Gd0cyOW5xTnd4VFV3?=
- =?utf-8?B?STY4R0ZqYkJjZ05NMlU4WHRFdmozak5lYlY3UUt5U1gxck1xY0JPdXJKaVdT?=
- =?utf-8?B?TTA4ZDVWdjJwdnJrZXlRTjJPM0ZiTzhhMG9pUVg2cHpubW9NRG5KS1U3WFll?=
- =?utf-8?B?RzhRM1NNTG9YWWJKYmJXMWhLZGJBaFZXWDZhVk1WQXRqKzRPQVVVb0JRLzFn?=
- =?utf-8?B?YUJTTURUZTgyYW96clNScFJ6Q3dWUDlzcmxsQVo3SlpJMWJ4MmtYa1dSMW94?=
- =?utf-8?B?LzRyV1NsaXV2M0piZFVWK3lCRUlQRFVVQXhuU0VlUTVPcXB1Ti9vd2MxVnlo?=
- =?utf-8?B?ZGRGU1l4eXZ3aDBUZWd1NlN3Mm5kai9EVkJhRDhNY3BodFpOSzdBUnpHNWNp?=
- =?utf-8?B?TmNoUnBZT2c5VUg1U0VVenFTVjlNMmdJekN1YVNRUVNQZUY5WHV2c01ZNEVN?=
- =?utf-8?B?d3RtSUdTM2V1bDltTElUeGd6ZVdIejJNK1ZCbHdDSXQzVzRib0p6M1g1bUhO?=
- =?utf-8?B?cHFHMVZvaDlXOE4wMU1WWW1Ld2x6ajRPOWZLeXJmOHE1SkV4a3htY2Jac2VL?=
- =?utf-8?B?ZmI5VHRmdjJVSG42TTljbG9JbVJqQkxWc0I3QmRya2JRSDRYaTdpNmR5MjQy?=
- =?utf-8?B?Wi9HMUJHME1COUYrNVFmRkhRc084VkxjWjhZQmNzL1NqeWw1TExuWUxlSVl5?=
- =?utf-8?B?RlYzOEZCWnN5S3gzL2JMdXlrKzh2N213TEFzYmhSUXYvZHhtejdHSnVyV2JF?=
- =?utf-8?B?akwwRkJzMWFXbkM3OVZNYlM0VkZTRHdlTlBmSlNycFdpbkgvbnA1R0J1aVhT?=
- =?utf-8?B?TU5Cc0NjQVBIcng5WXVCSUZOcllzUGRIVGVCdkpwdXoyY0p3ZnpDR3VzZkly?=
- =?utf-8?B?bkRkQmdWWjUvcGd4dUhTRTJBRzlWY1pMTTBwdXgwUzlpMk9HYUo0cVc2ZGt0?=
- =?utf-8?B?SHRrdHZid0ZlbXJnbGtzWG9yN0gvcXBMMm01c3dHenZ5MmFFc3hiZXVISWJX?=
- =?utf-8?B?a1ZSRFZjOWg4UXBnZnFrM2xVNVN4dFZvdE96aXoyYXFvVnR0Sys3R2l0dHc2?=
- =?utf-8?B?eG94ZHhrUzl3ODA5VzFKSU5FUTRsdmVHVTRmcHdtMFVpVW0yRkx4YU1tdFdB?=
- =?utf-8?B?V0R2OXE4OS9SenFsbHJzQWdVVnFNWnlzU0JadFRiamZHZEhLbHkxaEJabEpF?=
- =?utf-8?B?aGczUVpsZFRmNVhiRjI4ejZrazdtZktheSt2VGpXTU4rWEFjeU5QejlCOUNP?=
- =?utf-8?B?eWlOc0V0MnZ5MzdmaDQyZWF2dVhUN092Nzdubk1yL1FUL2VhQ1Q4cjJaaThL?=
- =?utf-8?B?K2VMeDQxaHh6QWR4Ny9tdWFuSjNtaklYcXlxaHBESkVjaGF4UVlIWFNReTFO?=
- =?utf-8?B?OWVhR2NxQ2l2WThTS3BpUXdGQ2pIVWcydk5wK25TUk1OVWE0RlBlVS90c2hq?=
- =?utf-8?B?clNBZzRLZzhGcnVTUEp4dnZkTG9lKzFwaVFER3huNFB4b2lxMkNSd0M2a1F4?=
- =?utf-8?B?UEMxVmF3bGc4NXNGbnE2VCtDSjgra0RIQUxsL0lFK2RKZ2lQcUlPWkJqNXE5?=
- =?utf-8?B?SmUzTE9iVjFBRFpmWDlKZjQrelJHU3NrbElpYkN1SmVXOEZpRW5xKzR1MXBW?=
- =?utf-8?B?dUYvU2l2ZmR2NmdnbWpXRVMyeVZFUm04YysySnllN1l2SENZTmlvQ2I4b1dz?=
- =?utf-8?B?T3JwdXlidnZZcFkvZmtvZFJtNnhPdE1LeVZTUTJQVlJHaVpoZFFJdz09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6ee97425-765c-474c-f3ad-08deed6dc9ef
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jul 2026 12:34:52.9848
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LsLJLTo2yZ2uVncoIQaglOKXkuQ7B+USE8B7DTzjIZfGKw0JVoUi1wsLQt72RAsEBciVKpk9e6nezDReZrK3zgaLsWIg/KoTzAaY5XpXuuI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR03MB5449
-X-purgate-ID: tlsNG-4011c0/1785328495-58FC6CFC-3DFCA697/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 376
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260727164715.2866609-10-usama.anjum@arm.com>
+X-Rspamd-Action: no action
+X-Rspamd-Queue-Id: 0AE6C7CAFF
+X-Spamd-Result: default: False [-3.01 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	FREEMAIL_CC(0.00)[linux.intel.com,intel.com,ursulin.net,gmail.com,ffwll.ch,hpe.com,arndb.de,linuxfoundation.org,hansenpartnership.com,gmx.de,suse.com,kernel.org,linux.dev,suse.de,linux-foundation.org,infradead.org,soleen.com,tencent.com,goodmis.org,iogearbox.net,redhat.com,suse.cz,ziepe.ca,huawei.com,gentwo.org,cmpxchg.org,nvidia.com,linux.ibm.com,arm.com,vger.kernel.org,lists.freedesktop.org,lists.xenproject.org,kvack.org,googlegroups.com,lists.linux.dev];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.de];
+	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_ALL(0.00)[];
+	ARC_NA(0.00)[];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	DKIM_TRACE(0.00)[suse.de:+];
+	R_RATELIMIT(0.00)[to_ip_from(RL68tbpjnwz7cuja85sfonjfqu)];
+	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+	RCPT_COUNT_GT_50(0.00)[66];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,pedro-suse.lan:mid,suse.de:dkim,arm.com:email]
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-purgate-ID: tlsNG-16d1c6/1785328633-F420077B-6156D45C/0/0
+X-purgate-type: clean
+X-purgate-size: 1632
 
-On 29/07/2026 7:43 am, Bertrand Marquis wrote:
-> Hi Oleksii,
->
-> It seems that this was missed.
->
->> On 13 Jul 2026, at 15:43, Oleksii Kurochko <oleksii.kurochko@gmail.com> wrote:
->>
->> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+On Mon, Jul 27, 2026 at 05:47:00PM +0100, Muhammad Usama Anjum wrote:
+> A leaf PMD is being read through ptep_get() by treating the PMD address
+> as PTE-sized table storage. ptep_get() now accepts hw_pte_t *, so update
+> the cast accordingly.
+> 
+> pte_offset_kernel() also returns hw_pte_t *. Get pte_t value by calling
+> ptep_get().
+> 
+> Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
+> ---
+>  drivers/misc/sgi-gru/grufault.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/misc/sgi-gru/grufault.c b/drivers/misc/sgi-gru/grufault.c
+> index 3557d78ee47a2..ff89d34ad2aa4 100644
+> --- a/drivers/misc/sgi-gru/grufault.c
+> +++ b/drivers/misc/sgi-gru/grufault.c
+> @@ -228,10 +228,10 @@ static int atomic_pte_lookup(struct vm_area_struct *vma, unsigned long vaddr,
+>  		goto err;
+>  #ifdef CONFIG_X86_64
+>  	if (unlikely(pmd_leaf(*pmdp)))
+> -		pte = ptep_get((pte_t *)pmdp);
+> +		pte = ptep_get((hw_pte_t *)pmdp);
+>  	else
+>  #endif
+> -		pte = *pte_offset_kernel(pmdp, vaddr);
+> +		pte = ptep_get(pte_offset_kernel(pmdp, vaddr));
+>  
+>  	if (unlikely(!pte_present(pte) ||
+>  		     (write && (!pte_write(pte) || !pte_dirty(pte)))))
 
-I'll pick this up with the Ocaml changes then.
+This code is super, super broken. Can we remove this ASAP? For starters,
+we're using is_vm_hugetlb_page() to detect page shift, the code does not
+grab refs on the pages, uses pte_offset_kernel() on user page tables,
+does not handle PUD-level hugepages, does not handle PMD-level hugepages on !x86_64,
+does not hold page table locks nor check for pte table retraction, etc
 
-~Andrew
+I don't think I need to go on.
+
+-- 
+Pedro
 
