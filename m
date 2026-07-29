@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49964C53200
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Jul 2026 11:51:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1375577.1622708 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C478DC54F51
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Jul 2026 11:53:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1375583.1622717 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wp2ow-0004m4-Oj; Wed, 29 Jul 2026 11:51:34 +0000
+	id 1wp2qG-0005GZ-2F; Wed, 29 Jul 2026 11:52:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1375577.1622708; Wed, 29 Jul 2026 11:51:34 +0000
+Received: by outflank-mailman (output) from mailman id 1375583.1622717; Wed, 29 Jul 2026 11:52:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wp2ow-0004lx-Lz; Wed, 29 Jul 2026 11:51:34 +0000
-Received: by outflank-mailman (input) for mailman id 1375577;
- Wed, 29 Jul 2026 11:51:33 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wp2qF-0005GS-Vk; Wed, 29 Jul 2026 11:52:55 +0000
+Received: by outflank-mailman (input) for mailman id 1375583;
+ Wed, 29 Jul 2026 11:52:55 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <david@kernel.org>) id 1wp2ov-0004lr-FB
- for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 11:51:33 +0000
+ (envelope-from <david@kernel.org>) id 1wp2qF-0005GG-6g
+ for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 11:52:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wp2ou-0003Eq-Qw
- for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 13:51:32 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wp2qE-00ECQJ-Fy
+ for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 13:52:54 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <david@kernel.org>)
- id 6a69e93a-bab6-0a2a0a5309dd-0a2a450cb33c-38
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 13:51:32 +0200
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a69e991-2eae-0a2a0a5409dd-0a2a450293ec-18
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 13:52:54 +0200
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <david@kernel.org>)
- id 6a69e943-f479-0a2a450c0019-aceafc1fce0e-3
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 13:51:32 +0200
+ id 6a69e995-6ca4-0a2a45020019-ac6904feb062-3
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 13:52:54 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 514454367E;
- Wed, 29 Jul 2026 11:51:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 231861F000E9;
- Wed, 29 Jul 2026 11:51:18 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 95C6C60A5E;
+ Wed, 29 Jul 2026 11:52:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B8671F000E9;
+ Wed, 29 Jul 2026 11:52:40 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,24 +52,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785325890;
-	bh=UhKC2rWDc0nqivSNnMMapSrop+/S8ksf4kWUVmW36RU=;
+	s=k20260515; t=1785325972;
+	bh=8F6WAbJF8b0+/lVo//yrlr1XJ8a9Kbyft0CZ3XPUVYk=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=j/rdTFQ5D+V9nF350bJFVbABN4LrkdsttdXl0LTG5diGS3qfpE1d+CHl9CbSex6ib
-	 zqh8hsz9l3VaQPnS5omwpQ4W93RN11H6fIAUPogAreBHTqCDzslNEnArGZn7XQd2Nh
-	 L60L5+Er4w8vr9eNKEbKvwf0I2mjYLbJRtU3mP4hA552hqDOeaUCdQ3coC6W+Yrxob
-	 0GfjMAvTYGFs0eYP7gECmOhuDEd4qb4E6ZRFuvxkWAYMyVwJ44RcFC5R45zVPN0jpd
-	 8duzo9AGfdWaObfcg4y6i3UpveG99T2I3kDQU7SMr0C91jCQDkN2f+1bryJUJIPF5z
-	 SyB3dhLtFqa2g==
-Message-ID: <26b1cb23-bb68-45c4-a28f-698b34fa3aed@kernel.org>
-Date: Wed, 29 Jul 2026 13:51:17 +0200
+	b=RAKfZ2hlnqur+lPLRDZhd6ll5wLFkTHMz4LI8eJaulXjieYAenmJmk4PMTQBKFZ/U
+	 pyK0RNiqn70Ad+1GSsmrI6B8F0wYm30sXDWHDNst0Az9PbGi+TL/KORuZnT9sqQo9u
+	 Rzh1V/+oM6ZDs940TjFOqs5yohNNslJjyJ8iJeoA7WeF7cquNvL+t9q9S4Ic9dWWSq
+	 4Iq5kwkGBW1Jk7vbZTiYIDehoEYYdr2IUaB8x6zsF7dvrh9VnNBcSXaGSuIBDNZs7f
+	 4jIUxCejHJULeLyIkGbqfPXxbWzy7/VjVvik+QZrAxtb829aluzCnGwByuZkktgqQX
+	 wmpaiiZ29+lbg==
+Message-ID: <78a0402d-5436-4aab-a704-90fab56eec50@kernel.org>
+Date: Wed, 29 Jul 2026 13:52:39 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH RFC 00/11] mm: distinguish PTE table storage from PTE
  values
-To: Alexander Gordeev <agordeev@linux.ibm.com>
-Cc: Muhammad Usama Anjum <usama.anjum@arm.com>,
- Jani Nikula <jani.nikula@linux.intel.com>,
+To: Muhammad Usama Anjum <usama.anjum@arm.com>,
+ Alexander Gordeev <agordeev@linux.ibm.com>
+Cc: Jani Nikula <jani.nikula@linux.intel.com>,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin
  <tursulin@ursulin.net>, David Airlie <airlied@gmail.com>,
@@ -110,7 +110,7 @@ References: <20260727164715.2866609-1-usama.anjum@arm.com>
  <2c19247e-bee6-45f4-a353-2fcc60db26e6@kernel.org>
  <7813b5fe-e767-442c-a356-afc1a5c567ad-agordeev@linux.ibm.com>
  <6db0a8c0-b500-4364-be3d-d3a537c61258@kernel.org>
- <e3b6dd13-2cea-4dc5-9038-a3abde71ec10-agordeev@linux.ibm.com>
+ <46319967-0338-4532-b953-dbea77084fe3@arm.com>
 From: "David Hildenbrand (Arm)" <david@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=david@kernel.org; keydata=
@@ -157,15 +157,15 @@ Autocrypt: addr=david@kernel.org; keydata=
  3iyY2Nsd7JxfKu1PRhCGwXzRw5TlfEsoRI7V9A8isUCoqE2Dzh3FvYHVeX4Us+bRL/oqareJ
  CIFqgYMyvHj7Q06kTKmauOe4Nf0l0qEkIuIzfoLJ3qr5UyXc2hLtWyT9Ir+lYlX9efqh7mOY
  qIws/H2t
-In-Reply-To: <e3b6dd13-2cea-4dc5-9038-a3abde71ec10-agordeev@linux.ibm.com>
+In-Reply-To: <46319967-0338-4532-b953-dbea77084fe3@arm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d25034/1785325892-008CDA5B-AACC47B5/0/0
+X-purgate-ID: tlsNG-720697/1785325974-F38BC2AC-862DC83F/0/0
 X-purgate-type: clean
-X-purgate-size: 2235
+X-purgate-size: 683
 
-On 7/29/26 13:44, Alexander Gordeev wrote:
-> On Wed, Jul 29, 2026 at 01:05:35PM +0200, David Hildenbrand (Arm) wrote:
+On 7/29/26 13:33, Muhammad Usama Anjum wrote:
+> On 29/07/2026 12:05 pm, David Hildenbrand (Arm) wrote:
 >> On 7/29/26 12:13, Alexander Gordeev wrote:
 >>> ...
 >>>
@@ -174,60 +174,13 @@ On 7/29/26 13:44, Alexander Gordeev wrote:
 >>
 >> Indeed, that makes sense. We just need a way for the architecture to opt-in that
 >> it did the conversion.
->>
->>>
->>> Also, can you envision a case when sizeof(pte_t) != sizeof(hw_pte_t)?
->>> If not, the compile-time check is worth adding.
->>
->> That wouldn't work as is. We'd have to intercept ptep++ and instead have a
->> helper to advance the ptep pointer.
-> 
-> I think I am missing the point. That is my takeaway from your previous mail:
-> https://lore.kernel.org/lkml/31d36023-d728-4eee-90f8-158c7066f565@kernel.org/
-> 
-> <quote>
->>    {
->>       page_table_check_ptes_set(mm, addr, ptep, pte, nr);
->>       for (;;) {
->>               set_pte(ptep, pte);
->>               if (--nr == 0)
->>                       break;
->>   -           ptep++;
->>   +           ptep = hw_pte_next(ptep);
-> 
-> We should really just let ptep++ work as before.
-> 
->>               pte = pte_next_pfn(pte);
->>       }
->>    }
-> </quote>
-> 
-> So are we going after hw_pte_next(ptep) or ptep++?
+> Yeah and architecture cannot opt-in until its converted. So we should leave
+> it to architecture to define hw_pte_t.
 
-As I said "That wouldn't work as is. We'd have ".
+In the context of this series, we should have something like an
+CONFIG_ARCH_HAS_XXX and select the definition based on that.
 
-So in this series here we are clearly going for ptep++ and sizeof(pte_t) ==
-sizeof(hw_pte_t).
-
-Because otherwise it wouldn't work.
-
-> 
->> One idea for that would be to let the compiler catch that by marking hw_pte_t an
->> undefined struct (unknown size), such that the compiler would indicate any usage
->> of ptep++ properly.
-> 
-> What is the purpose of that? I mean when pte_t vs hw_pte_t uses are sorted
-> out what is the benefit of preventing hw_ptep++?
-
-One thing I could pull out of my magic hat is that you might be able to decide
-at runtime the size of your underlying page table entries.
-
-E.g., have 128bit pteval, but allow running on HW with either 64bit ptes or
-128bit ptes.
-
-I'm sure there are more challenges to that, but that's an easy thing to imagine.
-
-But again, the focus of this patch set here is ptep++ to just keep working.
+So we'd have a generic variant.
 
 -- 
 Cheers,
