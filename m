@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 837B5C54F51
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Jul 2026 13:40:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1375925.1622918 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75DD9C54F51
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Jul 2026 13:40:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1375924.1622913 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wp4WU-0006Ei-3v; Wed, 29 Jul 2026 13:40:38 +0000
+	id 1wp4WT-0006C0-Sf; Wed, 29 Jul 2026 13:40:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1375925.1622918; Wed, 29 Jul 2026 13:40:38 +0000
+Received: by outflank-mailman (output) from mailman id 1375924.1622913; Wed, 29 Jul 2026 13:40:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wp4WU-0006Eb-0K; Wed, 29 Jul 2026 13:40:38 +0000
-Received: by outflank-mailman (input) for mailman id 1375925;
- Wed, 29 Jul 2026 13:40:37 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wp4WS-0006Bm-Tn
- for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 13:40:37 +0000
+	id 1wp4WT-0006Bt-PH; Wed, 29 Jul 2026 13:40:37 +0000
+Received: by outflank-mailman (input) for mailman id 1375924;
+ Wed, 29 Jul 2026 13:40:36 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wp4WS-0006Bh-Hy
+ for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 13:40:36 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wp4WS-007nhf-Ab
- for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 15:40:36 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wp4WR-00AUZE-R4
+ for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 15:40:35 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a6a02cb-5cb7-0a2a0a5109dd-0a2a450ae118-40
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 15:40:36 +0200
+ id 6a6a02d3-2eae-0a2a0a5409dd-0a2a45019e30-4
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 15:40:35 +0200
 Received: from [209.85.221.50] (helo=mail-wr1-f50.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a6a02d4-f2d2-0a2a450a0019-d155dd32c164-3
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 15:40:36 +0200
+ id 6a6a02d3-5984-0a2a45010019-d155dd32bc7e-3
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 15:40:35 +0200
 Received: by mail-wr1-f50.google.com with SMTP id
- ffacd0b85a97d-47f752b3423so627127f8f.3
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 06:40:36 -0700 (PDT)
+ ffacd0b85a97d-47f96c5b722so598854f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 06:40:35 -0700 (PDT)
 Received: from fedora (user-109-243-144-234.play-internet.pl.
  [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47fb6aa392asm7585952f8f.5.2026.07.29.06.40.34
+ ffacd0b85a97d-47fb6aa392asm7585952f8f.5.2026.07.29.06.40.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Jul 2026 06:40:35 -0700 (PDT)
+ Wed, 29 Jul 2026 06:40:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,41 +54,41 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785332436; x=1785937236; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1785332435; x=1785937235; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=d1Ccio9WdwnqMCPVek92jryf1sYedrjQokSPetFgDpc=;
-        b=l5cJqmFUTTboHzRmEPEdiG95A9jRLVVlajHbX0rDsJH5LrmQTcYairgFtVGY/oHfpI
-         hn0bhFzeI7PIfSE7HzDvCdPMov/mTuDtFRgxtof1tSNlAWvIffhpIyT0ore18fvkUKRQ
-         J/wsFdWtF4c1vW8u/CsrGFX5ybBH8JYan1VNj2yaD2VyGOyir5O78jTi1uHGGCqT1l+E
-         ubf7iZ6fydvG7RfhTCw8/k4Fm4Cj/0Sfnurw/FKhuEcWqhBsNzd2DQkc1qj/zDNbq90S
-         2amI9SXlq9cfHt6YBW65GU96f9m+6LHs37MPGDkwiMcTv+zdr6lUYiHy3l1cK58tKLfj
-         rIuw==
+        bh=sFuIFHaAW+8s2KlN+hWBa0uRW0aaM8NroxXcUO611lM=;
+        b=AhUu/oPe0RHfljWGYyzfC/lBnSFgIWZcBu5FOwdv5wuqQqzpilLDslMdvmEeGuNip7
+         mCog17lof+kguudT+Wsz9f9f9CnAgmci6x8wTaYPTBC5frdT2rMV2YVd/9wZJ3BRCCC0
+         FGGwf6dg4yTVZN8eiVmolFh6/VFrWmc+23KWwxBF6yzVd6OWRI93gx5AYML7yl6aMogn
+         VOYjVyFgKQEqRjCKfaTajqOsD0rPmJXtUhJIKM+zAlCRz18TrhKqjVxcgUCL5zOVI6JP
+         TY6WwCYIAAV8rUK1gzRlSYbI5OkCsiXjBpMN3fZpTyPAlAbgnXPZrHWC45UnNd9cRcXR
+         3Gtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785332436; x=1785937236;
+        d=1e100.net; s=20251104; t=1785332435; x=1785937235;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=d1Ccio9WdwnqMCPVek92jryf1sYedrjQokSPetFgDpc=;
-        b=KYiCkXaod4rohDzHUyCngBPLYbtLJKD2V8HLyW419xwky5ICAJvPEr4JcukQ6Pl7gz
-         4PxmOiWeARbVIkUI2HoAh86O38ghaRIOj5vT8kakMYn8/g4A9Puq0KBBtwhxmwDUTSf4
-         9MtYQ5CyEInyA23wVWwuW2BwSj+20JjVqr+Avu9Ks+mnsh4FNQGiLfmOXQo79j8OBIOm
-         JFMf4cFiu/gmmymyGnNyCzl5LwFoLcSFCosNSMr2kK6bpzVOpM8sX+SpavI9BReH/tOz
-         wcYk5HfMOQnIxF7llFSEjU7uxCPhSbhxQeYXS2U9qbGGvtDM6ZOIdzK/JpjZniZytY/Z
-         FNDw==
-X-Gm-Message-State: AOJu0YzjV3+V6C9SK5P1vA6E6Udo4kmOEuucpRvWtbnGntXdA9sRppro
-	iOXnDMhZ2oyEdP0ER8kT/hKEN06pcKCyZuiEU6hDlc5U5SXMjg8Foq3VpVJ52g==
-X-Gm-Gg: AR+sD12h5FtdrwB1bSBsiZG5kaXkDLAE7GrYHgUo8MdFgRqcYS8EmTXb6I4IQQjp9tZ
-	Y6fWx2iyGVHvRWGIfJBoVqIomQ6rIUKAfFnXSfK56u07iDEeW3EjBbQCz752XDf7oGAm9jAwLt/
-	WAUHpNi9g8YYvefYLGNsDF+A2EEnkj/82FKK/R8ByaWy+Z76/yMNqyo1zgucTiVb/vWsBP1kl88
-	Pl28S5shMv7ucwGavx0VDB1iCtwtgvheKy2Bc7RVnxIz6p8QUUjllSst0s3iryrK8rQ1d8HZ8vr
-	RaTEb5hl91MkLXP37RmhGy+qH+BjBfEvktws9K3c8tZXkdF1p5LKS3gM01wPZUvOFfXZFV5UuKx
-	r/FgHL3NS8EV5Hub9wLBBhTtfnOkPnmCNdpzWuyAuEcmp3+pkemxBQDnMtO4LY+1lNMCBwkso62
-	+wBjus6Ukv3yaLdp9eO6LZXbQ3sLcPVi2KNz+Hx8msIucK3LCPTmxzCfYsO/2wN8AJaaeGnEvqi
-	Caw4aH8zJyGVgAblz61VBA3lbxjY84Kfg==
-X-Received: by 2002:a05:6000:2012:b0:47f:753c:5393 with SMTP id ffacd0b85a97d-47fb1ec88a5mr7819651f8f.6.1785332435679;
-        Wed, 29 Jul 2026 06:40:35 -0700 (PDT)
+        bh=sFuIFHaAW+8s2KlN+hWBa0uRW0aaM8NroxXcUO611lM=;
+        b=hMhvFZ5sRZHLBrV2jVn2lyty0+LBXdImj2Hj1KiAuO7EdaFiGNVBKQt2DHT9uqk28K
+         ueoZfJCAptKf0QZAoreFVJB8cqDNIDKIZCerGeS3gnmLZJCkdHdZBSoxtykinB+Vawqj
+         1elceRP1FtpXnsWiVUwzdrGKAv+Dnzrv+N8mrSuFuW/fy08QZPp+OR2PHYHJGZNsTTdZ
+         2FHzzXVsHuTj9ixlE3X8dKlVuwmDSUooX+0tBTpSAfB0nwqK0xL9JVs8XQdec1frnE1f
+         DMnyatgkSVw84xYrAgyCJeBBdMMhmaosl5Jhbm9w8d/kX4GvVDeyGW1wpZ0mSwPkkvJx
+         6+hg==
+X-Gm-Message-State: AOJu0YwtpmKvwE9VvG1U5PGYJxhOiCFhhy8MsiMmCGv7hnpk2P/pkvkp
+	hQFJ1Bi9X+ELVAppeusb7G6Vv0pRGVE6PEtNqTcioBfrxNFJyr8npxX9Dxkoag==
+X-Gm-Gg: AR+sD13UlhJ1TuO8vFlmYAzKfaaP6UzD+k7gWRWEBD3/Pc4cdSXywvIcuCrablJa+Dy
+	DRuJKf+QkNsJbbO5kOOTHOV9PBm+IM9sMyGb0AXUM09d2SEevViQY0WN7R9D4zvGVAxano1AGdc
+	V3asCqXlo2+H9PBQdD9roGNWeFn15GpSAmlyHrc157m3Knneh0PnpCQAKSPURwccQToZZ4Al9Op
+	tJzJPcMzEhieHkZ7LnMnDLXukDhe3+98God/D/ytYFzcZq0pQReXb0CY3OiknGQjsiafYdlXrvM
+	eFi0GPzfBH5tP+967zWyW7FjHBTJenj+IewXBD1VyFmZSg3yoyUALrg2Oae7OfJCphuhXZK0OY+
+	P7GoVOPPTyThKfvPUnHKtZm6+DQ4oO5PLMAnHy4ybpwTRCYU9NSRAdRfCOiJpdYAdYilrFca4dg
+	zUcsD/pb6UCASAbCodOSO9Kcv4cROqViXluN+4DsYAGz79ayL7SCbuKjWvDpOSYXdb6JRPcgXr1
+	jJ5ltkmnH1cnJ7MJ9xu8e4lOiWaeV54bw==
+X-Received: by 2002:a5d:5888:0:b0:47f:97b9:13e1 with SMTP id ffacd0b85a97d-47fb1f13e15mr7975292f8f.31.1785332434788;
+        Wed, 29 Jul 2026 06:40:34 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -103,109 +103,271 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 17/17] xen/riscv: add guest store emulation for trapped MMIO accesses
-Date: Wed, 29 Jul 2026 15:40:22 +0200
-Message-ID: <d82ab235ee0a90be0b2f9956a76e8951ad67e832.1784560663.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 16/17] xen/riscv: add guest load emulation for trapped MMIO accesses
+Date: Wed, 29 Jul 2026 15:40:21 +0200
+Message-ID: <9b18a20367754605efd6a6b5bf09d4483d9c3ab2.1784560663.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <cover.1784560663.git.oleksii.kurochko@gmail.com>
 References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1785332436-58FC6CFC-4F94D90B/10/73395122804
+X-purgate-ID: tlsNG-d62444/1785332435-BD67C757-853EDD4D/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 3082
+X-purgate-size: 8507
 
-Extend the guest page fault handler with store emulation to support MMIO
-write accesses.
+Introduce emulate_load() to decode and emulate guest load instructions
+that fault due to MMIO accesses. This provides the basic infrastructure
+required for MMIO emulation on RISC-V.
 
-The instruction decode mirrors emulate_load() and, like it, is adapted
-from Linux's KVM RISC-V implementation. As with the load path, the
-completion is synchronous through try_handle_mmio() rather than KVM's
-userspace exit/return split, since Xen's MMIO handlers run in the
-hypervisor. Faults taken while re-reading the trapped instruction are
-handled by decode_trapped_insn(), shared with the load path.
+The instruction decode (decode_trapped_insn() and the mask/match chain
+for standard and compressed load encodings) is adapted from Linux's KVM
+RISC-V implementation. The completion path differs from KVM's,
+since Xen dispatches MMIO synchronously to an in-hypervisor handler via
+try_handle_mmio() and has no userspace exit/return step equivalent to
+KVM's kvm_io_bus_read() / KVM_EXIT_MMIO / kvm_riscv_vcpu_mmio_return()
+split.
 
-When a guest store instruction faults, the trapped instruction is decoded
-using HTINST or, if unavailable, fetched via unprivileged access. At the
-moment only virtual interrupt controller (vINTC) traps are expected to
-occur, since it is currently the only backend registered with the MMIO
-handler dispatch, so in practice the store is emulated via the vINTC
-backend.
+A fault taken while re-reading the trapped instruction is handled
+depending on the faulting translation stage:
+ - A VS-stage fault is the guest's own fault (e.g. it modified its page
+   tables from another vCPU) and, as in KVM, is redirected to the
+   guest's trap vector, with the cause remapped to
+   CAUSE_FETCH_PAGE_FAULT since HLVX reports execute-permission failures
+   as load faults.
+ - A G-stage fault would mean the P2M mapping of the instruction page
+   disappeared after the instruction was fetched. KVM must handle this
+   by resuming the guest and retrying, as Linux MM can invalidate
+   G-stage mappings at any time. Xen does not remove P2M mappings of a
+   running domain at the moment, so this case is asserted unreachable with
+   BUG_ON(); it will need to be revisited once such removal is implemented.
 
-Together with load emulation, this completes the basic MMIO handling path
-needed for virtual interrupt controller support on RISC-V.
+When a guest load triggers a page fault, the trapped instruction is
+decoded using HTINST or, if unavailable, fetched via unprivileged access.
+At the moment only virtual interrupt controller (vINTC) traps are
+expected to occur, since it is currently the only backend registered
+with the MMIO handler dispatch, so in practice the load is emulated via
+the vINTC backend and the guest register state is updated accordingly.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/traps.c | 55 +++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 54 insertions(+), 1 deletion(-)
+ xen/arch/riscv/include/asm/traps.h |   6 ++
+ xen/arch/riscv/traps.c             | 162 ++++++++++++++++++++++++++++-
+ 2 files changed, 167 insertions(+), 1 deletion(-)
 
+diff --git a/xen/arch/riscv/include/asm/traps.h b/xen/arch/riscv/include/asm/traps.h
+index 8d4ab664bca9..937295c5c76c 100644
+--- a/xen/arch/riscv/include/asm/traps.h
++++ b/xen/arch/riscv/include/asm/traps.h
+@@ -4,6 +4,7 @@
+ #define ASM__RISCV__TRAPS_H
+ 
+ #include <asm/processor.h>
++#include <asm/riscv_encoding.h>
+ 
+ #ifndef __ASSEMBLER__
+ 
+@@ -13,6 +14,11 @@ struct trap_info {
+     register_t stval;
+ };
+ 
++static inline bool is_load_guest_page_fault(unsigned long scause)
++{
++    return (scause == CAUSE_LOAD_GUEST_PAGE_FAULT);
++}
++
+ void do_trap(struct cpu_user_regs *cpu_regs);
+ void handle_trap(void);
+ void trap_init(void);
 diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
-index 12690ae37aba..18156627d7cd 100644
+index 1c97bd101948..12690ae37aba 100644
 --- a/xen/arch/riscv/traps.c
 +++ b/xen/arch/riscv/traps.c
-@@ -377,7 +377,60 @@ static int emulate_load(unsigned long fault_addr, unsigned long htinst)
+@@ -14,7 +14,9 @@
  
- static int emulate_store(unsigned long fault_addr, unsigned long htinst)
+ #include <asm/extable.h>
+ #include <asm/cpufeature.h>
++#include <asm/guest_access.h>
+ #include <asm/intc.h>
++#include <asm/mmio.h>
+ #include <asm/processor.h>
+ #include <asm/riscv_encoding.h>
+ #include <asm/traps.h>
+@@ -191,6 +193,11 @@ static void timer_interrupt(void)
+     raise_softirq(TIMER_SOFTIRQ);
+ }
+ 
++static always_inline void advance_pc(struct cpu_user_regs *regs, int step)
++{
++    regs->sepc += step;
++}
++
+ static always_inline unsigned long get_faulting_gpa(void)
+ {
+     /*
+@@ -210,9 +217,162 @@ static always_inline unsigned long get_faulting_gpa(void)
+     return (csr_read(CSR_HTVAL) << 2) | (csr_read(CSR_STVAL) & 0x3);
+ }
+ 
++/*
++ * Determine the trapped instruction which caused a guest MMIO trap.
++ *
++ * Returns true if the trap was redirected to the guest, in which case
++ * the caller must stop emulation and return success. Otherwise *insn
++ * and *insn_len are filled in and the caller should continue decoding.
++ */
++static bool decode_trapped_insn(unsigned long htinst, unsigned long *insn,
++                                unsigned int *insn_len)
++{
++    if ( htinst & 0x1 )
++    {
++        /*
++         * Bit[0] == 1 implies trapped instruction value is
++         * transformed instruction or custom instruction.
++         */
++        *insn = htinst | INSN_16BIT_MASK;
++        *insn_len = (htinst & BIT(1, UL)) ? INSN_LEN(*insn) : 2;
++    }
++    else
++    {
++        struct cpu_user_regs *regs = vcpu_guest_cpu_user_regs(current);
++        struct trap_info utrap = { 0 };
++
++        /*
++         * Bit[0] == 0 implies trapped instruction value is
++         * zero or special value.
++         */
++        *insn = riscv_vcpu_unpriv_read(true, regs->sepc, &utrap);
++        if ( utrap.scause )
++        {
++            /*
++             * A G-stage fault here would mean the P2M mapping of the page
++             * containing the trapped instruction disappeared after it was
++             * fetched. Nothing removes P2M mappings of a running domain yet,
++             * so this cannot happen.
++             *
++             * TODO: Revisit once P2M mappings can be removed at runtime.
++             */
++            BUG_ON(is_load_guest_page_fault(utrap.scause));
++
++            utrap.sepc = regs->sepc;
++            utrap.stval = utrap.sepc;
++
++            riscv_vcpu_trap_redirect(&utrap);
++
++            return true;
++        }
++
++        *insn_len = INSN_LEN(*insn);
++    }
++
++    return false;
++}
++
++/*
++ * Check alignment and dispatch a decoded MMIO access to a registered
++ * handler. On success (0), info->data holds the read value for loads.
++ */
++static int do_mmio(mmio_info_t *info, unsigned long fault_addr,
++                   unsigned int len)
++{
++    /* Fault address should be aligned to length of MMIO */
++    if ( fault_addr & (len - 1) )
++        return -EIO;
++
++    info->gpa = fault_addr;
++    info->len = len;
++
++    switch ( try_handle_mmio(info) )
++    {
++    case IO_HANDLED:
++        return 0;
++    case IO_ABORT:
++        return -EIO;
++    default:
++        return -EOPNOTSUPP;
++    }
++}
++
+ static int emulate_load(unsigned long fault_addr, unsigned long htinst)
  {
 -    return -EOPNOTSUPP;
 +    struct cpu_user_regs *regs = vcpu_guest_cpu_user_regs(current);
-+    mmio_info_t info = { .is_write = true };
-+    register_t data;
++    mmio_info_t info = { .is_write = false };
 +    unsigned long insn;
-+    unsigned int len, insn_len;
++    unsigned int shift = 0, len, insn_len;
++    bool is_unsigned = false;
 +    int rc;
 +
 +    if ( decode_trapped_insn(htinst, &insn, &insn_len) )
 +        return 0;
 +
-+    data = GET_RS2(insn, regs);
-+
-+    if ( (insn & INSN_MASK_SB) == INSN_MATCH_SB )
++    /* Decode length of MMIO and whether it is a sign- or zero-extending load */
++    if ( (insn & INSN_MASK_LB) == INSN_MATCH_LB )
 +        len = 1;
-+    else if ( (insn & INSN_MASK_SH) == INSN_MATCH_SH )
++    else if ( (insn & INSN_MASK_LBU) == INSN_MATCH_LBU )
++    {
++        len = 1;
++        is_unsigned = true;
++    }
++    else if ( (insn & INSN_MASK_LH) == INSN_MATCH_LH )
 +        len = 2;
-+    else if ( (insn & INSN_MASK_SW) == INSN_MATCH_SW )
-+        len = 4;
-+    else if ( (insn & INSN_MASK_C_SW) == INSN_MATCH_C_SW )
++    else if ( (insn & INSN_MASK_LHU) == INSN_MATCH_LHU )
 +    {
-+        len = 4;
-+        data = GET_RS2S(insn, regs);
++        len = 2;
++        is_unsigned = true;
 +    }
-+    else if ( (insn & INSN_MASK_C_SWSP) == INSN_MATCH_C_SWSP )
-+    {
++    else if ( (insn & INSN_MASK_LW) == INSN_MATCH_LW )
 +        len = 4;
-+        data = GET_RS2C(insn, regs);
-+    }
 +#ifndef CONFIG_RISCV_32
-+    else if ( (insn & INSN_MASK_SD) == INSN_MATCH_SD )
++    else if ( (insn & INSN_MASK_LWU) == INSN_MATCH_LWU )
++    {
++        len = 4;
++        is_unsigned = true;
++    }
++#endif
++    else if ( (insn & INSN_MASK_C_LW) == INSN_MATCH_C_LW )
++    {
++        len = 4;
++        insn = RVC_RS2S(insn) << SH_RD;
++    }
++    else if ( (insn & INSN_MASK_C_LWSP) == INSN_MATCH_C_LWSP &&
++              RV_X(insn, SH_RD, 5) )
++        len = 4;
++#ifndef CONFIG_RISCV_32
++    else if ( (insn & INSN_MASK_LD) == INSN_MATCH_LD )
 +        len = 8;
-+    else if ( (insn & INSN_MASK_C_SD) == INSN_MATCH_C_SD )
++    else if ( (insn & INSN_MASK_C_LD) == INSN_MATCH_C_LD )
 +    {
 +        len = 8;
-+        data = GET_RS2S(insn, regs);
++        insn = RVC_RS2S(insn) << SH_RD;
 +    }
-+    else if ( (insn & INSN_MASK_C_SDSP) == INSN_MATCH_C_SDSP )
-+    {
++    else if ( (insn & INSN_MASK_C_LDSP) == INSN_MATCH_C_LDSP &&
++              RV_X(insn, SH_RD, 5) )
 +        len = 8;
-+        data = GET_RS2C(insn, regs);
-+    }
 +#endif
 +    else
 +        return -EOPNOTSUPP;
 +
-+    info.data = data;
++    if ( !is_unsigned )
++        shift = BITS_PER_BYTE * (sizeof(unsigned long) - len);
++
++#ifdef EMULATE_LOAD_DEBUG
++    gdprintk(XENLOG_DEBUG, "pc=%#02lx, addr=%#02lx, len=%d, shift=%d\n",
++             regs->sepc, fault_addr, len, shift);
++#endif
 +
 +    rc = do_mmio(&info, fault_addr, len);
 +    if ( rc )
 +        return rc;
++
++    SET_RD(insn, regs, (long)((unsigned long)info.data << shift) >> shift);
 +
 +    advance_pc(regs, insn_len);
 +
 +    return 0;
  }
  
- static void handle_guest_page_fault(unsigned long cause,
+ static int emulate_store(unsigned long fault_addr, unsigned long htinst)
 -- 
 2.54.0
 
