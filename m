@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE11CC53200
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Jul 2026 16:25:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1376392.1623147 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DA80C53219
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Jul 2026 16:26:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1376402.1623156 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wp75q-0007GE-St; Wed, 29 Jul 2026 16:25:18 +0000
+	id 1wp76Y-0007lK-7q; Wed, 29 Jul 2026 16:26:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1376392.1623147; Wed, 29 Jul 2026 16:25:18 +0000
+Received: by outflank-mailman (output) from mailman id 1376402.1623156; Wed, 29 Jul 2026 16:26:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wp75q-0007G7-PE; Wed, 29 Jul 2026 16:25:18 +0000
-Received: by outflank-mailman (input) for mailman id 1376392;
- Wed, 29 Jul 2026 16:25:17 +0000
+	id 1wp76Y-0007lD-4z; Wed, 29 Jul 2026 16:26:02 +0000
+Received: by outflank-mailman (input) for mailman id 1376402;
+ Wed, 29 Jul 2026 16:26:01 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <roger@xenproject.org>) id 1wp75p-0007Fz-QP
- for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 16:25:17 +0000
+ (envelope-from <roger@xenproject.org>) id 1wp76X-0007l2-4k
+ for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 16:26:01 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <roger@xenproject.org>) id 1wp75p-00FKup-1o;
- Wed, 29 Jul 2026 16:25:17 +0000
+ (envelope-from <roger@xenproject.org>) id 1wp76W-00FKv3-16;
+ Wed, 29 Jul 2026 16:26:00 +0000
 Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
  helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <roger@xenproject.org>) id 1wp75o-003KXJ-2Z;
- Wed, 29 Jul 2026 16:25:17 +0000
+ (envelope-from <roger@xenproject.org>) id 1wp76V-003KdF-2M;
+ Wed, 29 Jul 2026 16:25:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,73 +44,36 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Transfer-Encoding:
 	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date;
-	bh=qV3EvUh5OQEPaTBVwlyY5LkzHaBdR30WgZFoCywwwTo=; b=2oJI4Dw0zCIeBkenNjoKjjNrlz
-	qxEvqgH7thsn9whXjEEcjEDc6jsrEFmviZa7USgnmlFQmQ1NGtNueFiUYZccN/iNsGmOjPPJ3i/2j
-	NdCOnDRJDKRBYPn53xr63IkU9AIq6xUk2UTl1GmBlu+IbZdfa4r4svKJtat1Js8PoNmo=;
-Date: Wed, 29 Jul 2026 18:25:04 +0200
+	bh=wp32tEvOjN2yWO+yKWB94G+4Dbq3boje4rjXkVlOyFI=; b=n1ey8PYHMg81vqIXHFGZKMMfOo
+	AgMRXFUi0TU/5P48Tal7B8z4CE0rMm4eKRxnzvx6la0M2caKYFiHSco/bmQVMZ0tEnxoyLR+7lOi8
+	nsfVW8rC1btmzG5NNNTAKFHTrN5fhVmbA+uVb5NgU5ahOBAykkFcjzkkoJAEh2NvJzn8=;
+Date: Wed, 29 Jul 2026 18:25:54 +0200
 From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Cody Zuschlag <cody.zuschlag@gmail.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: Xen-devel <xen-devel@lists.xenproject.org>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 2/2] SUPPOT: Define support lifetime
-Message-ID: <amopYL9OuFaMODDR@macbook.local>
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: Re: [PATCH for-4.22 0/2] Final prep
+Message-ID: <amopknY3DltQwGcQ@macbook.local>
 References: <20260729161529.164017-1-andrew.cooper3@citrix.com>
- <20260729161529.164017-3-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260729161529.164017-3-andrew.cooper3@citrix.com>
+In-Reply-To: <20260729161529.164017-1-andrew.cooper3@citrix.com>
 
-On Wed, Jul 29, 2026 at 05:15:29PM +0100, Andrew Cooper wrote:
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> ---
-> CC: Anthony PERARD <anthony.perard@vates.tech>
-> CC: Michal Orzel <michal.orzel@amd.com>
-> CC: Jan Beulich <jbeulich@suse.com>
-> CC: Julien Grall <julien@xen.org>
-> CC: Roger Pau Monné <roger@xenproject.org>
-> CC: Stefano Stabellini <sstabellini@kernel.org>
-> CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> 
-> For 4.22 only.
-> ---
->  SUPPORT.md | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
-> 
-> diff --git a/SUPPORT.md b/SUPPORT.md
-> index 7c42de4c1602..b945fc83afde 100644
-> --- a/SUPPORT.md
-> +++ b/SUPPORT.md
-> @@ -9,13 +9,13 @@ for the definitions of the support status levels etc.
->  
->  # Release Support
->  
-> -    Xen-Version: 4.22-rc
-> -    Initial-Release: n/a
-> -    Supported-Until: TBD
-> -    Security-Support-Until: Unreleased - not yet security-supported
-> +    Xen-Version: 4.22
-> +    Initial-Release: 2026-07-30
-> +    Supported-Until: 2029-07-30
-> +    Security-Support-Until: 2031-07-30
->  
->  Release Notes
-> -: <a href="https://wiki.xenproject.org/wiki/Xen_Project_X.YY_Release_Notes">RN</a>
-> +: <a href="https://wiki.xenproject.org/wiki/Xen_Project_4.22_Release_Notes">RN</a>
+On Wed, Jul 29, 2026 at 05:15:27PM +0100, Andrew Cooper wrote:
+> Andrew Cooper (2):
+>   CHANGELOG: Set release date for 4.22
+>   SUPPOT: Define support lifetime
+    ^ SUPPORT
 
-Will this wiki page get created?  It's still not there, and given we
-are moving out of wiki usage, we might want to put the release notes
-somewhere else?
+Otherwise:
 
-This is likely for Cody/oleksii to decide, since I assume they are the
-ones that create the wiki page.
+Acked-by: Roger Pau Monné <roger.pau@citrix.com>
 
 Thanks, Roger.
 
