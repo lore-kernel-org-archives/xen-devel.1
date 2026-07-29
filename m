@@ -4,43 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25DCFC54F51
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Jul 2026 13:41:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1375939.1622930 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54DE3C54F51
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Jul 2026 14:01:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1375971.1622964 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wp4XL-0007A5-FM; Wed, 29 Jul 2026 13:41:31 +0000
+	id 1wp4pq-0002dr-7z; Wed, 29 Jul 2026 14:00:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1375939.1622930; Wed, 29 Jul 2026 13:41:31 +0000
+Received: by outflank-mailman (output) from mailman id 1375971.1622964; Wed, 29 Jul 2026 14:00:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wp4XL-00079y-Cb; Wed, 29 Jul 2026 13:41:31 +0000
-Received: by outflank-mailman (input) for mailman id 1375939;
- Wed, 29 Jul 2026 13:41:30 +0000
+	id 1wp4pq-0002dk-4d; Wed, 29 Jul 2026 14:00:38 +0000
+Received: by outflank-mailman (input) for mailman id 1375971;
+ Wed, 29 Jul 2026 14:00:37 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wp4XK-00079J-7X
- for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 13:41:30 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wp4pp-0002de-F7
+ for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 14:00:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wp4XJ-002ryt-KU
- for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 15:41:29 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wp4po-00AYav-Rg
+ for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 16:00:36 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a6a02f2-e002-0a2a0a5209dd-0a2a450bd3ac-40
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 15:41:29 +0200
-Received: from [209.85.167.49] (helo=mail-lf1-f49.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a6a0309-b7e8-0a2a450b0019-d155a731b952-3
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 15:41:29 +0200
-Received: by mail-lf1-f49.google.com with SMTP id
- 2adb3069b0e04-5b015b2d792so922972e87.3
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 06:41:29 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
- [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5b2d78ea9efsm399663e87.44.2026.07.29.06.41.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 Jul 2026 06:41:28 -0700 (PDT)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6a6a0779-bab6-0a2a0a5309dd-0a2a4503be22-40
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 16:00:36 +0200
+Received: from [40.107.209.59]
+ (helo=PH8PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6a6a0783-fae8-0a2a45030019-286bd13b6690-3
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 16:00:36 +0200
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
+ by SAWPR03MB989572.namprd03.prod.outlook.com (2603:10b6:806:55a::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.13; Wed, 29 Jul
+ 2026 14:00:33 +0000
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37%7]) with mapi id 15.21.0245.012; Wed, 29 Jul 2026
+ 14:00:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,173 +54,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785332489; x=1785937289; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=kh0eSunNeEG770Hq1VLFazSA/3JCq5NHBTAoVpXKORQ=;
-        b=EyiGHj4cgcWvIhxZY1Um9SEek7xcbscGuugSc8s+E76qXf07eDZCWH3AGUgvfbXKNV
-         sl7q9nFavxQjuFXtgp9DJyaRarEUqpAA7NAMev0vEP5FCx3tMubWR9nSRSd1JBkgnbLw
-         aLcP5D5g9iiD7e/Exlwh9ycqa7jq4ZbTRgL3PvoJzDH4qfQYeD/OxYC+L+TWfoZvcB9Y
-         sxh/mkaIFptIAv/9FYGsbLpH24Cc3/ixyHARRh32ESBM5Q5VPT3y0f5OnwiBLQOlhi/z
-         9NuDk2QyhqYMM1ZFeP8jtjZ0ky539Xwn5o1K8MxLQ8/DWdBF5uxMYGOVS2HZbOWyutHC
-         tHAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785332489; x=1785937289;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=kh0eSunNeEG770Hq1VLFazSA/3JCq5NHBTAoVpXKORQ=;
-        b=EmOPb2qvV8anY/PJQSpeKVmMOL+r2NmlQk+EQgAuDf4CmBEP5+EblY/orF+5PO2+L1
-         h6RxqbicH5/r9Nvpp8wrNxhTiHqI9hZ+JN/2ChLw+Zgyllas3D4ghZLOHkLOb4tCM5J/
-         tBkECashD3Kikj/VHXYE6CKK61ChwrBIHXm/vAWBdBwjOWB+9vJohZsvNKUdCVX1uMBe
-         1TGu1NOTiXwgutAAF8lm0rUS7B8jiROmv12V26CVOZm5GLy5UFvz7nvgqnHAdLrYnz7i
-         EjdJXVtNLOus+HOjW5c4k6bycpdpMfvstUQtNq3UfxOKjj9FytcT1njO3Xf/w3vLKWZ6
-         RcVQ==
-X-Forwarded-Encrypted: i=1; AHgh+RpxEQbKpZm7JDKebmzVAxGLdAb+AzV1ZeVB5oKqObsMWzWtIU6aF9P476V1uO2U20x3+3DJElpuhG8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yyt2Ic4pM2lLFgUUDvAl3m0Lt9Hv4AqDBG66dUjfKG4WcC1v7Ko
-	pV504GG/5hbnXmTTOigRocbJZ8FgARI6vVwWQ1/PSHsWESoFLOZe5uNViK8GLQ==
-X-Gm-Gg: AR+sD12KoqvuuTImZXVDa3/bSwymAzV2eiaFr8ZxexczUlzmt+tHrwD2DF1x80b0QPv
-	v0WimR8Ne4oONFvEj9h8y3VEPuw06IVMhCRMC6qkAQWLNwo7SiE9xJs5n+DcTBQv0jqdy/xA/5D
-	1c6OPxdx4q1XL3Ncph5Ds9w/6tpAljVuIy+KQVMASw9eaELcTyUoSUJY5ZyPKO3ll5oa+j9wpIh
-	FyqcffC5AiqKReZ1lZ0jduwY5mBJ792mYVHFYUleuQxQju+Sfg3ymT2Tjhh2XB9h4e20eK64xc8
-	FvT9fS/DSEbVQR/oKHrS1ZJjMoukSYwNVanUGv84rjvGxxf4Xq8jkAgUUg9FJKgBdeFgSk+zc7u
-	cO/7F8Kp88cYYwZzn1m6iXm8yqvxfJhF2nNmP62oOYs0277xmWmgtF+Og8wvaZAypU4AeguCLtf
-	OO+YEXaUQ2hyYh1v3ryCsrFzj87MNGXswMmVZsdgpbxe76l7VW8jUHGM6tVAMNluDkxJi27MTiz
-	bOFTnXdNPPAd4aA2QgnjH7Xy7Bg7w6oDN8DPVgCUP4=
-X-Received: by 2002:a05:6512:1387:b0:5b1:5ad4:8374 with SMTP id 2adb3069b0e04-5b2d02519c1mr1504693e87.42.1785332488438;
-        Wed, 29 Jul 2026 06:41:28 -0700 (PDT)
-Message-ID: <c4f9cef5-572e-4265-a51f-170ef0fc7f60@gmail.com>
-Date: Wed, 29 Jul 2026 15:41:26 +0200
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=BeSnPXA7dhuTv33afgtiH/ivPLv40Zrz6z5+TUcYFcNG6kx15ACMDZio9azBWkvWK3Qm0l5PhuYvmtvPA4RwvcSudZ6W3rS05BIivBgqXNggAxkUh5FpHUFE7EIBkZDo/guj13zXkI+/CypfqJG31UTIL2XzCPGEsJF+rjAUeKyq06SSMB/o2r3e0MvOYG2tA/BKDSkFGlF6O6fRZrQLyUmzl5Kz5lgk2mgwMl2JSMP7ThzemLgslVGSZ1IsbeQLbV4tRh4Q2zSJ60vVvDMYfnImovZTDIY30ByKnb8hXw8U5DaaI5XW75UZ7qlxtj6gTucK5PrQQNwSKmqhp8sQJQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ave1qZswxRkOqiXb8vxI8HtgqORTJHvHmqmx4Jv+D4w=;
+ b=UqfXJKShaf4AODRjCj8cSRAG3ynVOCUpltAAE6qS0io8irdLCviEsA14BoM202Fp5sBT39sNJ5TmllD5XsnKNdWuxwC5dpIj1h69wZ+/Y3wzDz4QlAVSyeisudmxULUERz2/klKkZ2i0m2uA624YjMrPXNNcYVSYWIrKjIC5fhxNwVAR6Uj1sjjpMSGXRGaYPdSRT3nMtpfibTKRfkuMmc3FIuqT56ZMruMnF78pqfJLEnxl/HXOQS6UlIFXa8HsjbewExk6o8/q5XIbski70QVABxjvz6+W+Za94ZJnWfZctC/nTSnRS2evVhFz4tjrIupqsU2GqhOQ40GAf+GdLA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ave1qZswxRkOqiXb8vxI8HtgqORTJHvHmqmx4Jv+D4w=;
+ b=PfCIx+hlWjzq5mTDige+zc8kYR6m4Hz400hMfHlk/GDiP8PUwCAh67pyT4ZeKW1trklCyZ4RX67bz+CAcuMzTram5fM18KdmrI4+Fpbe//swGSHXIl7w0e84ccBL6M+sx6p/tbeeC8R7yZL47UzC02Ack4MTusfwfJR2pKXd1eE=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <b75026d3-c129-4aee-baf4-17203ab46e26@citrix.com>
+Date: Wed, 29 Jul 2026 15:00:29 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 00/17] [RISC-V] virtual interrupt controller
- (vAPLIC/vIMSIC) support
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
- <29fcc402-f953-4b51-b077-729bb0e5b4e0@suse.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <29fcc402-f953-4b51-b077-729bb0e5b4e0@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1785332489-1BCD79EA-5018854F/10/73395122804
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Marek Marczykowski <marmarek@invisiblethingslab.com>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: Re: [PATCH v3 for-4.22] x86/cpu-policy: set up host policy earlier
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <da502f31-17fa-4b2d-90e3-1f6988717454@suse.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <da502f31-17fa-4b2d-90e3-1f6988717454@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: LO4P123CA0096.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:191::11) To CH8PR03MB8275.namprd03.prod.outlook.com
+ (2603:10b6:610:2b9::7)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|SAWPR03MB989572:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5b50b869-05fe-4407-98f9-08deed79c18d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|376014|366016|23010399003|56012099006|11063799006|10067099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	Ml8EgQGXLte4vJPblEdjzFtWdr8Oawc4Mc0Hz2Kp0jMpmGTFQJ/VwqsZ3tR5Hr83CGfROsP2OT2rpKhg+Bx4nfeISzWJmFBqSpaWAMg93cDF0sh8rmb80t7SRGseYCUtAe28QDrbM027c7Sx1l0Krh+LHjoINHEGtEJuDr29ltTmJRfJZ5yklZs62EyhUtq5hWlA1TUPzoXK9UPfufXwbGu9f7kXtcEKrkvKMKNBTXB6QJzJYcUHwlvGPXyTJjFmania7iGmfqMJYvXKayDGbXOAJbZ875nLQ8ijiOuzxrms+tw/uZtDX5PelvQPCvJR+omvIDiINmctuG6hZtnU48trHM0LKt4PK1ujDeJllu1UKJ5NqXginPiDQiMBAo9X+QnxKKq3z/TJpScl3FK+Y1bdk5F2eRGLTcTzy2tKsTjyS6t6dsO+1VPYkUVgmnLgHPxsT+XgRH7rmPXDePUTJ+zas71TnItfEkbl6Xa0nqaV1Ug77Dkc0bgW1fZBpSQ4nApNw/DxrsMT68y6/9gRV7K1EdPZ17cJNC6SXzLr4VRS9eblWTsAX2keFi9fCBBw3NhDq16sgO44S3ltmxaXm7o5TDg04FFi8XUFmMHjbq51ECgxnjfACnJ6Maaqq6GhPlIkMnCL5cV++iCeMBQppluSxY684zdh4SQXpp1XtmE=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(23010399003)(56012099006)(11063799006)(10067099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?Um9pYmFrNXRjSnQ1UDdJbUxoZDdISlo4RmpZZjc0M04vRFFIUFNwdGorTVhQ?=
+ =?utf-8?B?ZFNRVkpnRzRnMUhRQ0UwdFQxQ05SZDJjQnMyOFBIRllWOUZiN201TG90czFm?=
+ =?utf-8?B?ZWlRVmV2VE1yOUdaRHhHUTl1WkkxTHpCa1ZWV0srM3NSbkRoSWQ1TnQyNHRm?=
+ =?utf-8?B?RnFVdjNEcmpTbzVnWDhuOXR3VGJMa28wWmZ1eVFRMVg5cUJSMjdaSy9jOXF0?=
+ =?utf-8?B?Vyt0NWIzUzMrYTVUUi81aDJUNXhJUDUrSHV4UWxMaHhGbzJkbENOTFVYVUs4?=
+ =?utf-8?B?am5qV2ptUlVRb1NBdzZDR3Q1c1hCNy9qV256b2FidHpiK0dTOExZbXA5a1lX?=
+ =?utf-8?B?d2Vob2puaEM2cjA1SzBhbTZVWkFhN1VaSjRDSm1KakJCZDdTYnRuY2dicWp4?=
+ =?utf-8?B?MHdtdnh5ZHd5TWlPYnFGcjhPT25kazVEWTBmaHRxS1gwd09NN3ZHb3JFclNC?=
+ =?utf-8?B?R1NrbnBjRVRoL21XV1RZTkowNVlnK2tjV3dra2RHUm14cUMrdi9YaU5EY3Rp?=
+ =?utf-8?B?VG1UVktCcXNGY2NRRGMxaDN4SWRIUkZLMTBnTG5ZOXBHM0FRNEpWNTZIbFM5?=
+ =?utf-8?B?cS82VzQzVXpmOGU3WDByZWZoY2tPUEsxbzdBWFpWSjlrOWRaWFJka3NlOUZt?=
+ =?utf-8?B?RHdIWDMyTjV0dEtDOUpwUXRDS1BUM09pM2l6KzR2TGRqL0V3QWpNcjlqTVVO?=
+ =?utf-8?B?dXQ3WHJBaStObDE1VFBLNWJwYVB3TnptQThFMWFOU2huL0hzM2dETjFmL05q?=
+ =?utf-8?B?eUFPNUJrYTBCVFlYSlRZaXQ1L3VKV2JCOG1pRS9iQnNXQ29lNVJYejF2bllZ?=
+ =?utf-8?B?WUlHL3pDWldRckYvZ3QwbkI2N1ZzeWgxSEthcTN4WTJyVkZKZkY2TlR0bW43?=
+ =?utf-8?B?Z3dpWHRUVzViZTliaERjK0ZCNktoQTV1N01maVY4NmpJL2xGaVhLNCt3RXpz?=
+ =?utf-8?B?bGJZZUpuUmJ1eCt1bjNNTzlPN2NLMWp5MHdnNmpkdnoxSXFzTzlTVWdGNGxk?=
+ =?utf-8?B?NHFYTXE5T2JvUjg3L0xsQzhqZFVGVGRtVEVNd1BiVnFPcE0xeTlnTWtlbUhI?=
+ =?utf-8?B?NGMxa3owekpjYnJwYjFObktKQnV3dUtRL1FOTTlHZ0xKWDNLZzF3OXVmb3Vr?=
+ =?utf-8?B?d2laQ0t6NVRXcUJRZTdCcGpHUGEzc1llRXdnMXJCd0tNbHd4cDJteGk2NERj?=
+ =?utf-8?B?Ujd5WUdSeHRvQ1hiSHJIK3RnMVNpTEE4SU1BRjRaQXJoZzlnSHZvK0VXRGcw?=
+ =?utf-8?B?UmpHdnR6S0xEbnQvTHJmYW1hT1FzTlhhdWk5Unc0ek9IVHFBVEtEeHFiSXJS?=
+ =?utf-8?B?Q3F5dk13djNzNXdoR0t1T1YyYWZ5dUo5MjJKKzlMVENRbGJYSW1jVkhua1pI?=
+ =?utf-8?B?OFZPTEJTREtraGJBOUgrWUszUHZFaThDWEFQalhUY3ZZWXpEZHNROEp2WEZI?=
+ =?utf-8?B?R0wzRm5hSmVGVDlTd0xSM1FYK0lUWVdvc0hjcERRazZORFgyemJSUHlrdU91?=
+ =?utf-8?B?L1o3eWg5eloxa3lybkVJSGZoaWkrUTFLZC9wUjJTRHRjWi93MUtxcDV0ZE5W?=
+ =?utf-8?B?cjM2NFZvZUFrdllEOHZFdkhwYjFIckdTVmdUeU85R0lBNmwvb0xOSjdXK0tW?=
+ =?utf-8?B?VWZuc3ZLOTR6bTBYOXcraUxKRi9ZclEySGVzeGgrVnV2K2s2V2VzK1VzQk5R?=
+ =?utf-8?B?OTk4b0Q1Ymp6TkxyZmRENXJmQUx2VUdKN1FLdUYyUVJzRXV1ZzJsUHJaeGV1?=
+ =?utf-8?B?c2gwMC9PSm5OOHk5SHlZWFFZeTdlZG1aZ0xHc2JhbUJwc2JhcU9LV3QzeUpS?=
+ =?utf-8?B?RnBtRzFaT3ltSG9qMmtpZVNOdS9aM3oyWGlmUFJHVWNFM1c4VmZja1o3QnIv?=
+ =?utf-8?B?dUpVS0tUemhqdEh4b2hKeGFubnpPbWVaU1NvakRzcnlTQWQ3blNrUTRiWTRp?=
+ =?utf-8?B?WU4yeDZpL3NaM1NKREdVYUNNdytBRktCbzNnK2ZzLzgwUnNVaFlxUGJDM2cw?=
+ =?utf-8?B?VUppMWFQN3V5dk5uYWQ3YkVkVjJ5SkVudmlWcExWSEl5NnlOU2Q2RXJsYWYz?=
+ =?utf-8?B?b1RnYnRSdFBWajd0V0s4aE8wdElIU0R4dXpPMUNVTTlFYzBoVURLZHptQzFV?=
+ =?utf-8?B?RE1wa1JJZUtmdloxZDhKZ3I2N25JRWlRQ2FSSHI3TDVEMWxsUytvT3lwUmQ5?=
+ =?utf-8?B?enZ2WE5JVCt5SC9GZ2FPS29kd2hUck42RTRKRlZPYUlTaDAyRlkyc2JqU2hr?=
+ =?utf-8?B?ZHpnc04wNjRtRjdLV0xQS3RpdzRIVFgveXE1OXRLaWNaNHpZNGE2dFBLV1Jm?=
+ =?utf-8?B?YnFSK3UzbjZFaC9LQnp6YkRJeHoxckRhZ1ZlRW9MZ0JsUXVsbk0rbkhpMkdl?=
+ =?utf-8?Q?llhWb1FQ3tOEBMbI=3D?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5b50b869-05fe-4407-98f9-08deed79c18d
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jul 2026 14:00:32.9013
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Iz523lvY/EBJp2g3W3ztgYczoBC2rJtnZ1AcDFQvpkdzj9sCqK80/C7tkMmFGnB2T2xnTBXYwKQiGZOzRzRzwfRnglUgLpcJ6ZKKbhMiJDo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SAWPR03MB989572
+X-purgate-ID: tlsNG-33051d/1785333636-778C54E9-38AD36D5/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 5384
+X-purgate-size: 863
 
+On 08/07/2026 3:55 pm, Jan Beulich wrote:
+> In order to use cpu_has_* expanding to host_cpu_policy.*, the host policy
+> needs setting up alongside boot_cpu_data.x86_capability[]. Arrange for
+> that towards the end of identify_cpu(). Then make sure .x86_capability[]
+> and host policy remain in sync when setup_{force,clear}_cpu_cap() are
+> used.
+>
+> Rename the function now it's no longer static.
+>
+> Fixes: 894bd7617924 ("x86/Intel: use host CPU policy for ARAT checking")
+> Reported-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> Release-Acked-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-On 7/27/26 5:21 PM, Jan Beulich wrote:
-> On 20.07.2026 18:01, Oleksii Kurochko wrote:
->> Hi all,
->>
->> This series adds the initial virtual interrupt controller (vINTC) support
->> for RISC-V guests in Xen, based on the Advanced Interrupt Architecture
->> (AIA): a virtual APLIC (vAPLIC) in MSI mode backed by a virtual IMSIC
->> (vIMSIC) using hardware guest interrupt files.
->>
->> Rather than emulating APLIC in direct-delivery mode (which requires
->> trap-and-emulate for every interrupt and is costly), the series targets
->> IMSIC from the start. AIA lets a hart implement several "guest interrupt
->> files" (up to GEILEN), so external interrupts can be delivered to a vCPU
->> directly by hardware via the VGEIN field of hstatus, without a hypervisor
->> round-trip. Xen only has to emulate the APLIC MMIO programming interface
->> and route the guest's intent onto the physical MSI topology; interrupt
->> delivery itself stays in hardware.
->>
->> The work breaks down into a few logical blocks:
->>
->> Physical APLIC/AIA groundwork (patches 1-3)
->>    - Correctly track IRQ_DISABLED across runtime enable/disable and order
->>      the ->status update against the IMSIC CSR write.
->>    - Per-pCPU VGEIN (guest interrupt file) allocator: assign/release a
->>      hardware guest file to a vCPU and program hstatus.VGEIN.
->>    - Add the missing APLIC register offsets/masks needed by both the
->>      physical and virtual APLIC code (no functional change).
->>
->> Device-agnostic MMIO dispatch + vAPLIC emulation (patches 4-5)
->>    - A per-domain MMIO handler table modelled on Arm's framework, so
->>      emulated devices self-register their GPA ranges and the fault path
->>      stays agnostic via a single try_handle_mmio() entry point.
->>    - vAPLIC MMIO read/write emulation. Writes are gated by the domain's
->>      authorised-IRQ bitmap so a guest cannot touch interrupts it does not
->>      own, and TARGET writes are translated from virtual to physical
->>      hart/guest-file indices. Delegation (SOURCECFG.D) is not yet
->>      supported.
->>
->> vIMSIC guest interrupt files and state (patches 6-9)
->>    - Stage-2 map a vCPU's physical guest interrupt file to the fixed
->>      per-vCPU GPA page the guest expects at offset 0.
->>    - vcpu_aia_init(): assign a VGEIN, map its guest file and record the
->>      IMSIC state as a consistent unit.
->>    - IMSIC state save/restore (currently tracking which pCPU owns the
->>      guest file, needed because the pCPU id is part of the MSI address).
->>    - has_msi_support() helper to decide whether IMSIC state has to be
->>      saved/restored.
->>
->> vINTC state save/restore plumbing (patches 10-11)
->>    - vintc_state_{save,restore}() wrappers over new store/restore hooks in
->>      struct vintc_ops, and the vAPLIC implementation of those hooks. No
->>      callers are wired up yet; the context-switch calls arrive with vCPU
->>      context switch support.
->>
->> Trap and instruction emulation infrastructure (patches 12-17)
->>    - Extend the exception-table format with type/data fields and add
->>      EX_TYPE_TRAP_INFO so fixups can capture sepc/scause/stval.
->>    - riscv_vcpu_unpriv_read() (HLV/HLVX) to read guest memory/instructions
->>      safely, and riscv_vcpu_trap_redirect() to forward a synchronous trap
->>      back into the guest's VS-mode handler.
->>    - A guest page-fault handler that decodes the trapped load/store
->>      instruction (HTINST, or an unprivileged fetch as a fallback) and
->>      dispatches the MMIO access through try_handle_mmio().
->>
->> Note on versioning: the series is posted as v1 as a freshly split-out
->> series, but several patches carry v2/v3 changelogs because they were
->> previously circulated as part of a larger another patches [1] from which the
->> current depends.
->>
->> CI tests: https://gitlab.com/xen-project/people/olkur/xen/-/pipelines/2690874319
->>
->> [1] https://lore.kernel.org/xen-devel/cover.1784559209.git.oleksii.kurochko@gmail.com/T/#t
->>
->> Oleksii Kurochko (17):
->>    xen/riscv: manage IRQ_DISABLED flag in APLIC irq enable/disable
->>      callbacks
->>    xen/riscv: add basic VGEIN management for AIA guests
->>    xen/riscv: add missing APLIC register offsets, masks to asm/aplic.h
->>    xen/riscv: introduce device-agnostic MMIO emulation dispatch
->>    xen/riscv: implement virtual APLIC MMIO emulation
->>    xen/riscv: map IMSIC interrupt file for vCPUs
->>    xen/riscv: introduce vCPU AIA initialization
->>    xen/riscv: add IMSIC state save/restore
->>    xen/riscv: add helper to check APLIC MSI mode
->>    xen/riscv: introduce vintc_state_{save,restore}()
->>    xen/riscv: add vAPLIC state save/restore hooks
->>    xen/riscv: extend exception tables with type and data fields
->>    xen/riscv: add unprivileged guest memory read helper
->>    xen/riscv: add guest page fault handling stub
->>    xen/riscv: implement trap redirection to a guest
->>    xen/riscv: add guest load emulation for trapped MMIO accesses
->>    xen/riscv: add guest store emulation for trapped MMIO accesses
-> 
-> Where did the last two patches go? My inbox agrees with [1] that only 15 of the
-> 17 patches arrived.
-> 
-They lost for some reason, I sent them separately again. Now it should 
-be okay.
-> [1] https://lists.xen.org/archives/html/xen-devel/2026-07/threads.html
-
+I really really dislike this patch, but I can't come up with a better
+solution in the 0 time we have until the 4.22 release.
 
