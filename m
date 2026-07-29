@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5142BC54F51
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Jul 2026 07:13:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1375190.1622408 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43421C53219
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Jul 2026 07:20:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1375200.1622417 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woyTC-0003Yr-5a; Wed, 29 Jul 2026 07:12:50 +0000
+	id 1woyaW-0005JL-SV; Wed, 29 Jul 2026 07:20:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1375190.1622408; Wed, 29 Jul 2026 07:12:50 +0000
+Received: by outflank-mailman (output) from mailman id 1375200.1622417; Wed, 29 Jul 2026 07:20:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1woyTC-0003Yk-2w; Wed, 29 Jul 2026 07:12:50 +0000
-Received: by outflank-mailman (input) for mailman id 1375190;
- Wed, 29 Jul 2026 07:12:48 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1woyaW-0005JE-Pk; Wed, 29 Jul 2026 07:20:24 +0000
+Received: by outflank-mailman (input) for mailman id 1375200;
+ Wed, 29 Jul 2026 07:20:22 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1woyTA-0003Ye-BR
- for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 07:12:48 +0000
+ (envelope-from <jbeulich@suse.com>) id 1woyaU-0005J8-Rt
+ for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 07:20:22 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1woyT9-00GVrT-Jj
- for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 09:12:47 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1woyaU-001gQ2-8Y
+ for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 09:20:22 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a69a7ec-bab6-0a2a0a5309dd-0a2a450bd480-18
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 09:12:46 +0200
-Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a69a9ae-e002-0a2a0a5209dd-0a2a4509aef4-22
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 09:20:19 +0200
+Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a69a7ee-b7e8-0a2a450b0019-d155dd34d013-3
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 09:12:46 +0200
-Received: by mail-wr1-f52.google.com with SMTP id
- ffacd0b85a97d-4799b3f7c83so435512f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 00:12:46 -0700 (PDT)
+ id 6a69a9b3-be1a-0a2a45090019-d1558036ac76-3
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 09:20:19 +0200
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-495590dde14so6083915e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 00:20:19 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4976bd83fabsm35555545e9.15.2026.07.29.00.12.45
+ 5b1f17b1804b1-496c4443396sm146007625e9.0.2026.07.29.00.20.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 Jul 2026 00:12:45 -0700 (PDT)
+ Wed, 29 Jul 2026 00:20:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,57 +53,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785309166; x=1785913966; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=2hL52lnp9gqaLZUAYsO8OIwtkTJek9qYOqyta5glYfo=;
-        b=BTEO0kucNwl+UDOC8b8YDEY64lQbwjVJ/5cFzdKlBem3BCPf20qcFasc9nKwEE0aDa
-         qrYc4HQPu1lazU7Vv5QgYcSJvi0Pyl+BPT8hctrzO+EEyyk5AgX76FwDsqVqvnKbKjS4
-         mW808K6r8X4tljaIaszOWI2UA65sWbjyfRlkFT8VU+8ppGObshxahZAYyPLtS0fSevFa
-         41PZYcG1rmHE7xiT9QxxwITn7EaH3j3aqF10ViDNMhxTObv5CJwkY3SS3zf087LNsemt
-         HV/OM4zjlE7yFsz13bA18IP3mn1PWUkW80c39SP1QyFZRKXTuX5FZIsoHI9AHnxvH+jz
-         CHTw==
+        d=suse.com; s=google; t=1785309619; x=1785914419; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=ffPJoyALqJv+4DOTSChxWutci4D3bIEXcRNWkvcNHU4=;
+        b=VcWTFNjO+0DLI7s4esBUGU0vNDEUFmXLD3pn5pzEX/GOqF23KYFuVBoPLTa3GIAP6G
+         jJbHRPEJW5HiUnuuaYK9R8iW7q6IxW5QW++0CEt/c8nklx4uUOz+a2oFP55FVWwiy5XW
+         /dRJABAUZAacL65LzPYH3mI/NDDuzBuERXGOf6wo7K+H/J7HYLNrnMQwXFv0pDGOJkFH
+         voFv+plQTDqY8iOnmxJYAHdEC0Xn5kT3Z5eL7ZIVKoKiVhaNbmsP1qjr8ryNkit7hqcL
+         EdB5CSGKdC4JR0cZk0b4gS4cRcccQCJ+BkltpGonsMmSYz0aMctL/q4XBm1hFek0DgfW
+         PuJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785309166; x=1785913966;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=2hL52lnp9gqaLZUAYsO8OIwtkTJek9qYOqyta5glYfo=;
-        b=j5Ppr6DA+lyy2PJvYbNKfMXhzghLLJ5TWEgJlhNul07FusF/OLziHMsCIz5C/0Ykdp
-         UGnpAvWNGXJv8B0cr3InRwU7Vj+9HTumxYhh6UcW91Ux+9HngRkz/m5nNB3zZDH0c0TZ
-         ZlcxN8/oCwaPrifih2GTMim3O0bfgc4qIBWejd3Qeaf5kmdfujymhQOtpSWtXtgRbiWJ
-         4MkDK7+FAfmYM5Oggzr7PbGfb4phHK5gFtTDmTNeUgUA4vSjSSqUeElm/TXBZpMVs8BO
-         ON+NwKUIB9466Gry7esOhHHs3bYSRPj+0XjLNSKHLNEu/IqQWwopzGEclnMHu8pXs4u+
-         UI7w==
-X-Gm-Message-State: AOJu0YwEYxpqi3wlx4d1SJKTENHH/N1Rc7RciZzROrRCj4J/l0LB9FFC
-	5OHYUr5EC3F2+nHLCt0E5CiSS5Jofc56dOy0sA5TIakL4Q+JA5HxE5/mKxLtmr9zSg==
-X-Gm-Gg: AR+sD11UpQU+Gpc4D605weB0q6c8yeBvFT8a90OhPqskCMGC/ZOvmjzDQhX13kYYl3y
-	4qbvFpBBdZWOrmXwz7dJW7bkdz9XaZPYyTQ4f1ArjoNbyoQ9KxQjSaD3+ItS1wogiJI8sEeHTaT
-	fwj0icEihUpjNeopELIyFkvR1/VKS80hShfwPxBKhII1OeW7nkoVe1Vt2+eChB0UQogkQSqVCrk
-	QQ1loO/cDAa+Ee5OiwF3jzAxAdTxBbswBjR5EJw+h2lGFZiFTh33laZ9tipA7NjTlSl3KiGrYDP
-	GYOUynNmDGGeL/4VE2un1XXvc76bkzLaZmyw1Qm24xVYwlBuvngXfxQjM4HBWqEuBStHgP8iFLa
-	SYQJge/Vw/sI9H1Nl0UlnfnLXqGp3RkyhZuUVjpdM6wJni9RDdZIjSEktM56aBfjctQANicAY3G
-	5ua5cMyExC9h2OkYm0ixHCopbLRtn7EYrzrqC/37GRrX5WzL4kUD8/cKzU/lI6IzbDqH1mqI7rE
-	qvsdiLc2lHpdXu5WtINUyZqttZbXRxgjxCsRuX/BfMr+Ep0A9lUs1TGD7fjrZA=
-X-Received: by 2002:a05:600c:4744:b0:495:4c74:6a14 with SMTP id 5b1f17b1804b1-496c6438e91mr58230785e9.14.1785309166340;
-        Wed, 29 Jul 2026 00:12:46 -0700 (PDT)
-Message-ID: <bb802772-c960-4c9d-bd90-78979d7c7fc4@suse.com>
-Date: Wed, 29 Jul 2026 09:12:45 +0200
+        d=1e100.net; s=20251104; t=1785309619; x=1785914419;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=ffPJoyALqJv+4DOTSChxWutci4D3bIEXcRNWkvcNHU4=;
+        b=sAPn5jISg6EMFQxjo2iAdrJpEMZwojRVJbych9pAGXrPe7awolhBk6aOMZCg0ljtBI
+         VD0ZXyK5GA88XWq0BylBj919Bpv+K4xnN2B873nPVqp7GVtWDkTljh5iU4K4iMCtVnhH
+         2DAhFv6li+yjEZrQRk5mG8ZH0IrkJhNs0cqdpG7OyS+rAlvqXFvXP0HF2pBXxEx3e9+B
+         1VH3YI9NNjTxxAmw1tzUTp3qVhly7h87StXazwl2A7nRJkZFEjEE3UJ+vrBjag7PJeJC
+         eth/Dh6RzcFbVACDW6VEVD0VYs+z5PVdw7uVc15FnYMGVgWQS+cqLESGx+2aipjIOz/c
+         4qgw==
+X-Gm-Message-State: AOJu0Yx1/6BWgAKkCYVJPRw91tg0McnI5NIrZuNtBSCXpvE51yXRJIj8
+	GPq0QNtkzKxXzS3tYZ01Pph7wQfmI0lHhkzoMP1DCqAROQQwcjwODrZDepIS3OURsz32GPwx2Mh
+	qXSQuZA==
+X-Gm-Gg: AR+sD11N+xbCghRmXCuvXDcr5vZpewikvQYFfmYVax6Z/lMEJY+LtIUYY//lDXH3jxJ
+	8L/FZTF3tSPxkep2ixrUIkpekMB2jzLlmxMp85Gz3GiBzVIyYZzw4KukD/KHILX+uelPC6rBnzv
+	9FbB78F5oM72nzSEpkb3Akn6tgJC/6hTueTHzQaXR6Q9FMlDYU6z4Jnjt404mXVQKaKa5GAcSbd
+	g1UpaTsixdDZ2I+a9huASCaW+qy3/AS4wgcrdqw/lWlNyZvvxNjZCGwaplMSznnVS4W89mH9OIO
+	0gA1IFJT3ezpV4zo+5WNLdUAvllW6Z6oshG1VyUT7dmEUmi8JUpQ69oCaO+0bvXHblU3PEszRvP
+	sEHqcLgn67FhUv4fX7kHm//1kwF65VdX/K7qAPi1cxMSg4MEQxdpQI/g4pTfm9I4K6ZC3Hkh3Qk
+	/+MOb7MCtRnnzAT51Kg2szQbaHQGw5WmpER/qj92XrNHvwGthZO7gMVdCRK9K8j2vyrweYVb2JH
+	kVMApgA+beH/oFT2d49DTun11YumqHs+EBXb6DFZBzWA689WlON
+X-Received: by 2002:a05:600c:4eca:b0:495:7379:17b1 with SMTP id 5b1f17b1804b1-496c6585036mr60262965e9.30.1785309618627;
+        Wed, 29 Jul 2026 00:20:18 -0700 (PDT)
+Message-ID: <8b3abd15-9bed-430d-86f3-2682a210ae7a@suse.com>
+Date: Wed, 29 Jul 2026 09:20:17 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 0/4] xen/arm: Device Tree based CPU topology support
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Hirokazu Takahashi <taka@valinux.co.jp>
-References: <20260709220552.646462-1-taka@valinux.co.jp>
- <07327966-7E81-44CA-A1EA-F227C1C9EA51@arm.com>
-Content-Language: en-US
+Subject: Re: [PATCH v3 16/22] x86: introduce struct for TILECFG register
 From: Jan Beulich <jbeulich@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>
+References: <322de6db-e01f-0b57-5777-5d94a13c441a@suse.com>
+ <022f5561-8c90-e5c5-9a9c-1878ef17518c@suse.com>
+Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -127,20 +129,30 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <07327966-7E81-44CA-A1EA-F227C1C9EA51@arm.com>
+In-Reply-To: <022f5561-8c90-e5c5-9a9c-1878ef17518c@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1785309166-192CC9EA-41B6E884/0/0
+X-purgate-ID: tlsNG-bad1c0/1785309619-BC8C9034-8B203292/0/0
 X-purgate-type: clean
-X-purgate-size: 398
+X-purgate-size: 780
 
-On 29.07.2026 08:47, Bertrand Marquis wrote:
-> Please use the add_maintainers.pl script before sending to make sure the right maintainers
-> are in copy of your patches otherwise some might miss your patches.
+On 22.04.2021 16:53, Jan Beulich wrote:
+> Introduce a new x86-types.h to hold various architectural type
+> definitions, the TILECFG register layout being the first. Arrange for
+> the insn emulator to include this header.
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> ---
+> v3: New.
 
-The Cc list on this cover letter is pretty short, yes, but the individual patches
-look to have appropriate Cc lists, and I guess that's what matters for not missing
-anything?
+For the eventual v4 (likely still far out) I've added this remark, which
+we will want make up our minds on:
+
+"As per https://sourceware.org/pipermail/binutils/2026-July/150499.html
+ TILECFG can be wider than 64 bytes. Simply extending the struct to 128
+ bytes is one option to cover the specific case there, but the suggestion
+ really is to avoid use of a compile-time determined size. Dynamically
+ allocated storage, otoh, comes with extra overhead / complexity."
 
 Jan
 
