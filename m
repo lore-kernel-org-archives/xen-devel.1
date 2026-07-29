@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 106CDC54F51
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Jul 2026 13:32:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1375907.1622889 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 837B5C54F51
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Jul 2026 13:40:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1375925.1622918 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wp4OI-0003kq-Vm; Wed, 29 Jul 2026 13:32:10 +0000
+	id 1wp4WU-0006Ei-3v; Wed, 29 Jul 2026 13:40:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1375907.1622889; Wed, 29 Jul 2026 13:32:10 +0000
+Received: by outflank-mailman (output) from mailman id 1375925.1622918; Wed, 29 Jul 2026 13:40:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wp4OI-0003kj-SP; Wed, 29 Jul 2026 13:32:10 +0000
-Received: by outflank-mailman (input) for mailman id 1375907;
- Wed, 29 Jul 2026 13:32:09 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wp4OH-0003kd-CM
- for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 13:32:09 +0000
+	id 1wp4WU-0006Eb-0K; Wed, 29 Jul 2026 13:40:38 +0000
+Received: by outflank-mailman (input) for mailman id 1375925;
+ Wed, 29 Jul 2026 13:40:37 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wp4WS-0006Bm-Tn
+ for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 13:40:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wp4OG-0004uH-2T
- for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 15:32:08 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wp4WS-007nhf-Ab
+ for xen-devel@lists.xenproject.org; Wed, 29 Jul 2026 15:40:36 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a6a00d1-bab6-0a2a0a5309dd-0a2a4509e85e-8
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 15:32:08 +0200
-Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a6a02cb-5cb7-0a2a0a5109dd-0a2a450ae118-40
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 15:40:36 +0200
+Received: from [209.85.221.50] (helo=mail-wr1-f50.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a6a00d7-be1a-0a2a45090019-d1558031a445-3
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 15:32:08 +0200
-Received: by mail-wm1-f49.google.com with SMTP id
- 5b1f17b1804b1-493f6de72faso7166785e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 06:32:07 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
+ id 6a6a02d4-f2d2-0a2a450a0019-d155dd32c164-3
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 15:40:36 +0200
+Received: by mail-wr1-f50.google.com with SMTP id
+ ffacd0b85a97d-47f752b3423so627127f8f.3
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 06:40:36 -0700 (PDT)
+Received: from fedora (user-109-243-144-234.play-internet.pl.
  [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-496fa499a96sm45797375e9.3.2026.07.29.06.32.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 Jul 2026 06:32:06 -0700 (PDT)
+ ffacd0b85a97d-47fb6aa392asm7585952f8f.5.2026.07.29.06.40.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Jul 2026 06:40:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,101 +52,161 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785331927; x=1785936727; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ivu+IxWUmxA+L8S93A5sn3yj//0duegd51RJ/1LjPXo=;
-        b=rUyWOqBceuYhzQTuqsx/A2BhidQIoZ58cXyLyRuIrRN8b39nzDaqsyXBRnUygkFBbV
-         C8GBuGQJHKSIIMZ8lMHVhVYG3rJt3we6F5dqPvaDSHq1/tKmmSu9swa0U3LmvgrLe0rb
-         pOm9PEA5U4RYWfVzRk+gh5wft7WWvLSc6p1HJq0b1/cJ8Zciz/1Uuqot0/CznYLavLGm
-         C7SvfF9ih826eVAwU0FT351F5CrPW7L9h6DHP9kUXqr8/s/iVbZieuYtaVXXLuhiQJTm
-         0oAiMBTwllyo90twbwQZeC5Dvt4lXkCYAkGHAFsBBRM7G9TJekeT0Tnw0kxjKihXub43
-         UihA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785331927; x=1785936727;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1785332436; x=1785937236; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ivu+IxWUmxA+L8S93A5sn3yj//0duegd51RJ/1LjPXo=;
-        b=MCsh3JL3wM5rNg0zpfizXJVaMehjNUGTiyyPbME5F3CF5ZzPbLGxWPkjA8lFYvjYvS
-         3tJ1Hro4Dng+8y4riYlhitViNWku5r6LOT5QwgazDPzSrcdB24XxFh4P/h0+Hnjtom4d
-         lvJywwyc6tyzTDDwL5n9q8nDd0GxKxKMn+3dZez9Qx1KDL2PEwPSd65o6pyp17Q/If1l
-         KYWJruiErvHVeiQRD5ntjwjrfDAodoOGY2PB9Jnr/M3kaCMku+pCT9GSaQ8D7CqLptqa
-         MSgcvQj5Zjd3nOAZbbgdo5VptGq1K5BQ2uuzut78yLIAUPgiLMdcIIRMsh+lWfYPUNtM
-         +h8g==
-X-Forwarded-Encrypted: i=1; AHgh+RolD27BR+PBRCM5gtKqkpISD/eMLcE1MH6olHu91bGLTQDo9PsgRFYQlmjM2rR/bsXum8FIQwD7Edg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwIpwviq2vCI9N8W7Yk37iDIQ41UoqLQCzOWS4eRp0OeU4NE2Fg
-	9RVvLkT580Rm6Dqv48PYIR7UovfOjBVfO1ZIzr9ieDkOL92hxs1iXrF8
-X-Gm-Gg: AR+sD13lQ/qYraQBeL/YyTZDwMVrJa/8D6NBi3mSzRt7ZLbu3p0RtwI5cUfG8qboO60
-	qIRiLGnblFoqkiSpHjgbonaA38UdR2dav60W39msVppP7GDmLEfP4qJ72I1yNl2gdCDG9YLeWxu
-	gYgTLn3EULXkZfbpVgUZpAf0efO9B7db8nAPQlGNqyUc2AUrzGnQc7aO2tKmxRBKkw0g1ixQYY2
-	zvaHJhW8n+cvj6aMzk/iCB+b4qT/PHJj9U+pVFfo9h7ZHWm82vkKaKH8NTD4ywoMk/aEFa7/7SN
-	4Ve4+nzo73jdnrq6NDCIQU6cy9M6zAGJJV1cYiEeye4b6u9BwLZLNA8EdMPnYgYuwBH3pJ2T5IJ
-	CKlRVRY75IZzuF2hH+Ty+25Vu9xEe4REQXvr99u0/bLY3aBX4ff0+whGSw1rDDKP4RfmG0lHICI
-	KzvQKvl/7liFz2lUK9uPkM4IbYmrvd4zssctwP0Vnub4ajoN+7NwjJZiAFlvdXZgfr6kQ3wYYdQ
-	3+6Uk3JSDSU89guWwTs0VoYL2dcWLscj/ESpBuoQyg=
-X-Received: by 2002:a05:600c:46cf:b0:494:1f7:8057 with SMTP id 5b1f17b1804b1-497fd2f5070mr27928775e9.1.1785331927219;
-        Wed, 29 Jul 2026 06:32:07 -0700 (PDT)
-Message-ID: <8692455e-f285-4805-9394-0313b17d2b1b@gmail.com>
-Date: Wed, 29 Jul 2026 15:32:05 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] xen/credit: fix race with schedule_cpu_rm() in
- csched_timer()
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Juergen Gross
- <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: Dario Faggioli <dfaggioli@suse.com>, George Dunlap <gwd@xenproject.org>,
- Dietmar Hahn <dietmar.hahn@fujitsu.com>
-References: <20260729120643.327387-1-jgross@suse.com>
- <20260729120643.327387-2-jgross@suse.com>
- <e30a9ef3-bedb-42d8-b6d8-f716112ba7c1@citrix.com>
-Content-Language: en-US
+        bh=d1Ccio9WdwnqMCPVek92jryf1sYedrjQokSPetFgDpc=;
+        b=l5cJqmFUTTboHzRmEPEdiG95A9jRLVVlajHbX0rDsJH5LrmQTcYairgFtVGY/oHfpI
+         hn0bhFzeI7PIfSE7HzDvCdPMov/mTuDtFRgxtof1tSNlAWvIffhpIyT0ore18fvkUKRQ
+         J/wsFdWtF4c1vW8u/CsrGFX5ybBH8JYan1VNj2yaD2VyGOyir5O78jTi1uHGGCqT1l+E
+         ubf7iZ6fydvG7RfhTCw8/k4Fm4Cj/0Sfnurw/FKhuEcWqhBsNzd2DQkc1qj/zDNbq90S
+         2amI9SXlq9cfHt6YBW65GU96f9m+6LHs37MPGDkwiMcTv+zdr6lUYiHy3l1cK58tKLfj
+         rIuw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785332436; x=1785937236;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=d1Ccio9WdwnqMCPVek92jryf1sYedrjQokSPetFgDpc=;
+        b=KYiCkXaod4rohDzHUyCngBPLYbtLJKD2V8HLyW419xwky5ICAJvPEr4JcukQ6Pl7gz
+         4PxmOiWeARbVIkUI2HoAh86O38ghaRIOj5vT8kakMYn8/g4A9Puq0KBBtwhxmwDUTSf4
+         9MtYQ5CyEInyA23wVWwuW2BwSj+20JjVqr+Avu9Ks+mnsh4FNQGiLfmOXQo79j8OBIOm
+         JFMf4cFiu/gmmymyGnNyCzl5LwFoLcSFCosNSMr2kK6bpzVOpM8sX+SpavI9BReH/tOz
+         wcYk5HfMOQnIxF7llFSEjU7uxCPhSbhxQeYXS2U9qbGGvtDM6ZOIdzK/JpjZniZytY/Z
+         FNDw==
+X-Gm-Message-State: AOJu0YzjV3+V6C9SK5P1vA6E6Udo4kmOEuucpRvWtbnGntXdA9sRppro
+	iOXnDMhZ2oyEdP0ER8kT/hKEN06pcKCyZuiEU6hDlc5U5SXMjg8Foq3VpVJ52g==
+X-Gm-Gg: AR+sD12h5FtdrwB1bSBsiZG5kaXkDLAE7GrYHgUo8MdFgRqcYS8EmTXb6I4IQQjp9tZ
+	Y6fWx2iyGVHvRWGIfJBoVqIomQ6rIUKAfFnXSfK56u07iDEeW3EjBbQCz752XDf7oGAm9jAwLt/
+	WAUHpNi9g8YYvefYLGNsDF+A2EEnkj/82FKK/R8ByaWy+Z76/yMNqyo1zgucTiVb/vWsBP1kl88
+	Pl28S5shMv7ucwGavx0VDB1iCtwtgvheKy2Bc7RVnxIz6p8QUUjllSst0s3iryrK8rQ1d8HZ8vr
+	RaTEb5hl91MkLXP37RmhGy+qH+BjBfEvktws9K3c8tZXkdF1p5LKS3gM01wPZUvOFfXZFV5UuKx
+	r/FgHL3NS8EV5Hub9wLBBhTtfnOkPnmCNdpzWuyAuEcmp3+pkemxBQDnMtO4LY+1lNMCBwkso62
+	+wBjus6Ukv3yaLdp9eO6LZXbQ3sLcPVi2KNz+Hx8msIucK3LCPTmxzCfYsO/2wN8AJaaeGnEvqi
+	Caw4aH8zJyGVgAblz61VBA3lbxjY84Kfg==
+X-Received: by 2002:a05:6000:2012:b0:47f:753c:5393 with SMTP id ffacd0b85a97d-47fb1ec88a5mr7819651f8f.6.1785332435679;
+        Wed, 29 Jul 2026 06:40:35 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <e30a9ef3-bedb-42d8-b6d8-f716112ba7c1@citrix.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1785331928-BDCC7034-168E6D48/10/73395122804
+To: xen-devel@lists.xenproject.org
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+	Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v1 17/17] xen/riscv: add guest store emulation for trapped MMIO accesses
+Date: Wed, 29 Jul 2026 15:40:22 +0200
+Message-ID: <d82ab235ee0a90be0b2f9956a76e8951ad67e832.1784560663.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <cover.1784560663.git.oleksii.kurochko@gmail.com>
+References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-4011c0/1785332436-58FC6CFC-4F94D90B/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 1199
+X-purgate-size: 3082
 
+Extend the guest page fault handler with store emulation to support MMIO
+write accesses.
 
+The instruction decode mirrors emulate_load() and, like it, is adapted
+from Linux's KVM RISC-V implementation. As with the load path, the
+completion is synchronous through try_handle_mmio() rather than KVM's
+userspace exit/return split, since Xen's MMIO handlers run in the
+hypervisor. Faults taken while re-reading the trapped instruction are
+handled by decode_trapped_insn(), shared with the load path.
 
-On 7/29/26 2:27 PM, Andrew Cooper wrote:
-> On 29/07/2026 1:06 pm, Juergen Gross wrote:
->> When removing a CPU from a cpupool running the credit scheduler, a
->> race might happen between schedule_cpu_rm() and csched_timer(),
->> resulting in a NULL dereference.
->>
->> The timer associated with csched_timer() is killed only in
->> csched_deinit_pdata(), which is called by schedule_cpu_rm() after
->> setting the scheduler's per-cpu data to NULL AND after enabling
->> interrupts again. This can result in the timer to fire before it is
->> being killed,
-> 
-> "... the timer firing before being killed,"
-> 
->>   so csched_timer() needs to test the per-cpu data to be
->> set before accessing it.
->>
->> Fixes: 78be3dbbfefa ("cpupools [1/6]: hypervisor changes")
->> Reported-by: Dietmar Hahn <dietmar.hahn@fujitsu.com>
->> Signed-off-by: Juergen Gross <jgross@suse.com>
-> 
-> Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> 
+When a guest store instruction faults, the trapped instruction is decoded
+using HTINST or, if unavailable, fetched via unprivileged access. At the
+moment only virtual interrupt controller (vINTC) traps are expected to
+occur, since it is currently the only backend registered with the MMIO
+handler dispatch, so in practice the store is emulated via the vINTC
+backend.
 
-Despite the fact that the race is very unlikely, the fix is very simple 
-and still resolves a race condition, so we could consider including it 
-in 4.22:
-  Release-Acked-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Together with load emulation, this completes the basic MMIO handling path
+needed for virtual interrupt controller support on RISC-V.
 
-Thanks.
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+ xen/arch/riscv/traps.c | 55 +++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 54 insertions(+), 1 deletion(-)
 
-~ Oleksii
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index 12690ae37aba..18156627d7cd 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -377,7 +377,60 @@ static int emulate_load(unsigned long fault_addr, unsigned long htinst)
+ 
+ static int emulate_store(unsigned long fault_addr, unsigned long htinst)
+ {
+-    return -EOPNOTSUPP;
++    struct cpu_user_regs *regs = vcpu_guest_cpu_user_regs(current);
++    mmio_info_t info = { .is_write = true };
++    register_t data;
++    unsigned long insn;
++    unsigned int len, insn_len;
++    int rc;
++
++    if ( decode_trapped_insn(htinst, &insn, &insn_len) )
++        return 0;
++
++    data = GET_RS2(insn, regs);
++
++    if ( (insn & INSN_MASK_SB) == INSN_MATCH_SB )
++        len = 1;
++    else if ( (insn & INSN_MASK_SH) == INSN_MATCH_SH )
++        len = 2;
++    else if ( (insn & INSN_MASK_SW) == INSN_MATCH_SW )
++        len = 4;
++    else if ( (insn & INSN_MASK_C_SW) == INSN_MATCH_C_SW )
++    {
++        len = 4;
++        data = GET_RS2S(insn, regs);
++    }
++    else if ( (insn & INSN_MASK_C_SWSP) == INSN_MATCH_C_SWSP )
++    {
++        len = 4;
++        data = GET_RS2C(insn, regs);
++    }
++#ifndef CONFIG_RISCV_32
++    else if ( (insn & INSN_MASK_SD) == INSN_MATCH_SD )
++        len = 8;
++    else if ( (insn & INSN_MASK_C_SD) == INSN_MATCH_C_SD )
++    {
++        len = 8;
++        data = GET_RS2S(insn, regs);
++    }
++    else if ( (insn & INSN_MASK_C_SDSP) == INSN_MATCH_C_SDSP )
++    {
++        len = 8;
++        data = GET_RS2C(insn, regs);
++    }
++#endif
++    else
++        return -EOPNOTSUPP;
++
++    info.data = data;
++
++    rc = do_mmio(&info, fault_addr, len);
++    if ( rc )
++        return rc;
++
++    advance_pc(regs, insn_len);
++
++    return 0;
+ }
+ 
+ static void handle_guest_page_fault(unsigned long cause,
+-- 
+2.54.0
 
 
