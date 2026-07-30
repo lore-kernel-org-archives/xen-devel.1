@@ -4,48 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE0FDC54FDF
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2026 08:43:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1377313.1623421 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D75C1C54FD2
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2026 08:43:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1377319.1623429 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpMMH-0005v4-62; Thu, 30 Jul 2026 08:43:17 +0000
+	id 1wpMMm-0006M9-D1; Thu, 30 Jul 2026 08:43:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1377313.1623421; Thu, 30 Jul 2026 08:43:17 +0000
+Received: by outflank-mailman (output) from mailman id 1377319.1623429; Thu, 30 Jul 2026 08:43:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpMMH-0005ux-2m; Thu, 30 Jul 2026 08:43:17 +0000
-Received: by outflank-mailman (input) for mailman id 1377313;
- Thu, 30 Jul 2026 08:43:16 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wpMMF-0005ur-FN
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 08:43:16 +0000
+	id 1wpMMm-0006M2-A0; Thu, 30 Jul 2026 08:43:48 +0000
+Received: by outflank-mailman (input) for mailman id 1377319;
+ Thu, 30 Jul 2026 08:43:46 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1wpMMk-0006Lu-LP
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 08:43:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wpMME-005Fz3-4S
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 10:43:14 +0200
-Received: from [10.42.69.7] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fb2311930000e099@swg.vates.tech>)
- id 6a6b0ea1-bab6-0a2a0a5309dd-0a2a4507d344-2
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 10:43:13 +0200
-Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fb2311930000e099@swg.vates.tech>)
- id 6a6b0ea0-b4ea-0a2a45070019-b9ff1c12b4a1-3
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 10:43:13 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19fb2311930000e099.003 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 30 Jul 2026 08:43:10 +0000
-Received: from [192.168.0.38]
- (ipservice-092-208-102-202.092.208.pools.vodafone-ip.de [92.208.102.202])
- (Authenticated sender: julian.vetter)
- by mail2.vates.fr (Postfix) with ESMTPSA id B349580DCE;
- Thu, 30 Jul 2026 10:43:08 +0200 (CEST)
+ id 1wpMMk-002SDZ-1x
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 10:43:46 +0200
+Received: from [10.42.69.2] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a6b0eb4-bab6-0a2a0a5309dd-0a2a450284b2-42
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 10:43:45 +0200
+Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a6b0ec1-6ca4-0a2a45020019-d1558035ad1a-3
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 10:43:45 +0200
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-49558ce01afso12366745e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 01:43:45 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49764d6d0f8sm114474435e9.2.2026.07.30.01.43.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 30 Jul 2026 01:43:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,121 +53,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=76uFIIQsN0BXvQ/+0uCUREFFiEZPLC4foQuubccsf4c=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=k2Kn57LByvu0f68JENfueGdRlzg+eBMu/DewKHqnNk4k/BB6eY12++rvjSqNNVcVJfEgU+7zB
- 6JOL7XtdpCEEET0ZrTY918Yqq1k8v0dcNv7YZtKiu/Z+tIkc4gVOyNz9Qitgq6XfGgiYehKW3Rl
- SkMyiAEBmuWjDIExYwlcOmdSvVhR7vPnZtrLL3ehDFh95Gwe2K734TUbEessipZyuZ913TIKmm6
- vLUkSeUBqreU+p7F8NY97GksKkofZj26xHixKED9/aSgHHh/O9n/hkdRTXS3arNDtDfPvRLwW1x
- fUpQ9uMjFqITIaokOTMejw8D6+5Jgx396tz/FDfepgFw==
-X-Zone-Loop: 4adcf48b18d7bab2b01e59bcb33f4e7ab7838d822f83
-x-campaign-type: default
-x-transaction-id: a832d35b-7fdf-4d26-9ca8-b369dca35b0f
-x-swg-uid: 01-75867dce-c9bf-4f73-aace-221620361fb9
-X-Mailer: Sweego
-Message-ID:
- <1785400990.8631fc262581453bbf619ec5b2062170.19fb2311930000e099@vates.tech>
-x-swg-bid: 1785400990.8631fc262581453bbf619ec5b2062170.19fb2311930000e099
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-Date: Thu, 30 Jul 2026 10:43:08 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1785401025; x=1786005825; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=M2aUYlvSnFQyHqLqh6TDTs9lMuK0bX5eXRwDs/M2T8c=;
+        b=S7uF8HYVd2SoG5rTs+ehBBVVSvRc2WP04sbeRBeSpyxMXjfYSI5DL7qa8nQ42oinKO
+         /88Ur66D/8wAZUk1GIX9gnLDDG1SXRlQ/ahru7bOeYBm5hRl0sSj9ah1RAXTpsgO/ZfL
+         eDLT6RcG7O1Iv3CbKX8/l4x+EsQARp7503cCnnXM/JuCGSCqbM2H5cbRSnIg/N7h1ERG
+         ZPbeLtPY2ZUJCiYib35daqoagNqSMkHC68tXLMw8BNE6rIV8M15U5G3TuJFUW0TDcnXZ
+         gVl6PN9SUrXWBFkrKlEykREyKqrBNkd+3Jmj1ocxGE+U2zx3ijoYJoiMSt+wFZaaSkRY
+         lMyw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785401025; x=1786005825;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=M2aUYlvSnFQyHqLqh6TDTs9lMuK0bX5eXRwDs/M2T8c=;
+        b=NiKqkOpP9GMtIAwEa2tDdYYoRqvLgIAedGTrmcoQWby/Id611j3QMSN46C9sNGlZx3
+         +Lnz80qvea0IS6xnX8ccSU9vCUtuCQF1syAzkh6LhKjjKPTh8tW6yOqoiz3MulzZju/a
+         mc0d11HR01820XHbhzaTOg0f7X9vwRVp8Wc8NupSlENOxwR8PZk9UB5mYCeH2MqSm8Pz
+         dbzWSSBLmeGbzOjrpkfod0UhsQdtPlYWkAD3PW3kpLmhr9ueqLysYDlOPopaslmf/68S
+         +9JVotGihL9kzzavlwEqiWXorb+hARylqxzd6yDDI2f5sRdipwh4LXtLbkadLLhDUmQM
+         jFcw==
+X-Forwarded-Encrypted: i=1; AHgh+Rqjk09FM8Dm09mTcJ8Kux8LBgQRRsHT4X4iTSRkd3IyjZXyy3qGjUgHQUYKL1vnUy6adt3/0uGwxys=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yz0yo5KWO8Nk7EjwOY8gd7/WBEQdME+Mm4JD/r3bgLjjgJzJvEh
+	9U8ctFIgwe7sb3sycAgIIeZI02oVdLzVUGlLweaZ3KD613NwQYJwcKkbSDCH0YabVg==
+X-Gm-Gg: AR+sD12Kh5rn8yBCLOBe0dlyI01k6FTxrBKiOcH0T6PlmZbyzQ1Ws0Rkd+7s3x1lHhK
+	Bn7FHTRQcFH4Aikh1IVNVrZvGrT9l1iKfS0r50qHHa+a1q2Y0hZs4z18AGqVtvON/5OxfwPFGTq
+	atf23hyDitS/MqDMh8UoGm5MI86ASHMmuQYtOSMeXtVl2JQPBivtcRRHiM5JsERDzHSt91O4ul1
+	HsQtK2RYntnjd8+H9ky/0oGfjfCyUkKmrgSQDE77PFVh/2EkggJqGM2aSR/sGDK+JoI2qITegrx
+	yLtY4sgCwhR4G8Oc+f3GIHGSyrJfkb9TpJatASB/UmB61C63eUAqoaX+sApOH6tdeq7mTG6BXQw
+	prRYGQ4UScu/P2oXY11nyTgUGYIX8FUsNRK+eQCYkJZCrSCZNWwZPQUWjyM8ld7ezjFZprsiFy3
+	UidRFJQJs2WgIAN29XRsRwHPCXcFvwHRRzM6WxmBPAcxeBJ9IFw9Xs9BUtotkwGnZ2RBGThkX3s
+	GfhsKzkcI76pNdbEFSe5wrQycapFa5FbSq8w3qg9dlrBEc6P/yOLA==
+X-Received: by 2002:a05:600c:b95:b0:495:3b8a:bf11 with SMTP id 5b1f17b1804b1-49800ebb830mr23188915e9.26.1785401025320;
+        Thu, 30 Jul 2026 01:43:45 -0700 (PDT)
+Message-ID: <66fc571d-4e6e-4d2e-973c-2de4789df432@suse.com>
+Date: Thu, 30 Jul 2026 10:43:43 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] tools/ocaml: Fill arch_config for ARM in
- domain_getinfo{,list}()
-To: Andrew Cooper <andrew.cooper3@citrix.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrii Sultanov <andriy.sultanov@vates.tech>,
- Guillaume Thouvenin <guillaume.thouvenin@vates.tech>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>
-References: <20260728154830.67734-1-andrew.cooper3@citrix.com>
- <20260728154830.67734-3-andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] xen/blkback: Prevent missed completion when draining I/O
+To: Gui-Dong Han <hanguidong02@gmail.com>
+Cc: axboe@kernel.dk, linux-block@vger.kernel.org, konrad.wilk@oracle.com,
+ linux-kernel@vger.kernel.org, baijiaju1990@gmail.com, roger@xenproject.org,
+ xen-devel@lists.xenproject.org
+References: <20260730084000.3305702-1-hanguidong02@gmail.com>
 Content-Language: en-US
-From: Julian Vetter <julian.vetter@vates.tech>
-In-Reply-To: <20260728154830.67734-3-andrew.cooper3@citrix.com>
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.1712.cbb2ec61aafbc5a5.19fb23114e8.a6439b7f2d9a4174=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1785400988904
-X-purgate-ID: tlsNG-ef75cf/1785400993-3C212AE4-A195272F/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 2499
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260730084000.3305702-1-hanguidong02@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-720697/1785401025-30DC12AC-199C709E/0/0
+X-purgate-type: clean
+X-purgate-size: 805
 
----=Part.1712.cbb2ec61aafbc5a5.19fb23114e8.a6439b7f2d9a4174=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+On 30.07.2026 10:40, Gui-Dong Han wrote:
+> --- a/drivers/block/xen-blkback/blkback.c
+> +++ b/drivers/block/xen-blkback/blkback.c
+> @@ -1021,6 +1021,13 @@ static void xen_blk_drain_io(struct xen_blkif_ring *ring)
+>  	struct xen_blkif *blkif = ring->blkif;
+>  
+>  	atomic_set(&blkif->drain, 1);
+> +	/*
+> +	 * Publish drain before checking inflight. Otherwise,
+> +	 * xen_blkbk_unmap_and_respond_callback() can decrement inflight with
+> +	 * atomic_dec_and_test() and still see drain == 0 after this path saw
+> +	 * inflight > 0, missing the completion.
+> +	 */
+> +	smp_mb();
+>  	do {
+>  		if (atomic_read(&ring->inflight) == 0)
+>  			break;
 
+Yet then don't we also need a barrier in xen_blkbk_unmap_and_respond_callback()'s
+check? Barriers almost always come in pairs, after all.
 
-
-On 7/28/26 17:48, Andrew Cooper wrote:
-> From: Julian Vetter <julian=2Evetter@vates=2Etech>
->=20
-> Add the missing ARM logic, populating xen_arm_arch_domainconfig
-> from the raw xc_domaininfo_t the same way the x86 branch does for
-> xen_x86_arch_domainconfig=2E
->=20
-> Signed-off-by: Julian Vetter <julian=2Evetter@vates=2Etech>
-> Signed-off-by: Andrew Cooper <andrew=2Ecooper3@citrix=2Ecom>
-> ---
-> CC: Andrew Cooper <andrew=2Ecooper3@citrix=2Ecom>
-> CC: Andrii Sultanov <andriy=2Esultanov@vates=2Etech>
-> CC: Guillaume Thouvenin <guillaume=2Ethouvenin@vates=2Etech>
-> CC: Julian Vetter <julian=2Evetter@vates=2Etech>
-> CC: Oleksii Kurochko <oleksii=2Ekurochko@gmail=2Ecom>
-> ---
->   tools/ocaml/libs/xc/xenctrl_stubs=2Ec | 16 ++++++++++++++--
->   1 file changed, 14 insertions(+), 2 deletions(-)
->=20
-> diff --git a/tools/ocaml/libs/xc/xenctrl_stubs=2Ec b/tools/ocaml/libs/xc=
-/xenctrl_stubs=2Ec
-> index 441e1d83cfec=2E=2Efb983709066f 100644
-> --- a/tools/ocaml/libs/xc/xenctrl_stubs=2Ec
-> +++ b/tools/ocaml/libs/xc/xenctrl_stubs=2Ec
-> @@ -444,9 +444,21 @@ static value alloc_domaininfo(xc_domaininfo_t * inf=
-o)
->  =20
->   	Store_field(result, 15, tmp);
->  =20
-> -#if defined(__i386__) || defined(__x86_64__)
-> +#if defined(__arm__) || defined(__aarch64__)
->  =20
-> -	tag =3D 1; /* tag x86 */
-> +	tag =3D 0; /* tag ARM */
-> +
-> +        /* xen_arm_arch_domainconfig */
-> +        arch_config =3D caml_alloc_tuple(3);
-> +        Field(arch_config, 0) =3D Val_int(info->arch_config=2Egic_versi=
-on);
-> +        Field(arch_config, 1) =3D Val_int(info->arch_config=2Enr_spis);
-> +
-> +	tmp =3D caml_copy_int32(info->arch_config=2Eclock_frequency);
-> +        Field(arch_config, 2) =3D tmp;
-
-Shouldn't the Field() be a `Store_field(arch_config, 2, tmp);`, because=20
-the `caml_copy_int32` makes an allocation on the minor heap to allow=20
-OCAML's GC to keep track of this pointer if ever the arch_config is=20
-promoted?
-
-> +
-> +#elif defined(__i386__) || defined(__x86_64__)
-> +
-> +        tag =3D 1; /* tag x86 */
->  =20
->   	/*
->   	 * emulation_flags: x86_arch_emulation_flags list;
-
-
-
--- 
-Julian Vetter | Vates Hypervisor & Kernel Developer
-
-XCP-ng & Xen Orch=
-estra - Vates solutions
-
-web: https://vates=2Etech
----=Part.1712.cbb2ec61aafbc5a5.19fb23114e8.a6439b7f2d9a4174=---
+Jan
 
