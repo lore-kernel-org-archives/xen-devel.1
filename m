@@ -4,60 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58B17C54FD2
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2026 10:26:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1377446.1623511 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22BFEC54FDF
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2026 10:30:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1377376.1623519 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpNyR-0002iL-DB; Thu, 30 Jul 2026 10:26:47 +0000
+	id 1wpO1h-0004rW-RU; Thu, 30 Jul 2026 10:30:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1377446.1623511; Thu, 30 Jul 2026 10:26:47 +0000
+Received: by outflank-mailman (output) from mailman id 1377376.1623519; Thu, 30 Jul 2026 10:30:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpNyR-0002iE-AG; Thu, 30 Jul 2026 10:26:47 +0000
-Received: by outflank-mailman (input) for mailman id 1377446;
- Thu, 30 Jul 2026 10:26:46 +0000
+	id 1wpO1h-0004rP-P0; Thu, 30 Jul 2026 10:30:09 +0000
+Received: by outflank-mailman (input) for mailman id 1377376;
+ Thu, 30 Jul 2026 09:36:49 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Usama.Anjum@arm.com>) id 1wpNyQ-0002i6-8h
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 10:26:46 +0000
+ (envelope-from <yannick.martin@okazoo.eu>) id 1wpNC4-00082u-GO
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 09:36:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wpNyP-008c43-Gw
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 12:26:45 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wpNC3-008RUv-Sy
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 11:36:47 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Usama.Anjum@arm.com>)
- id 6a6b26d2-5cb7-0a2a0a5109dd-0a2a4505d054-34
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 12:26:44 +0200
-Received: from [52.101.65.28]
- (helo=DU2PR03CU002.outbound.protection.outlook.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Usama.Anjum@arm.com>)
- id 6a6b26e3-4cb1-0a2a45050019-3465411cce92-3
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 12:26:43 +0200
-Received: from DB9PR02CA0009.eurprd02.prod.outlook.com (2603:10a6:10:1d9::14)
- by AS4PR08MB7758.eurprd08.prod.outlook.com (2603:10a6:20b:515::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.12; Thu, 30 Jul
- 2026 10:26:38 +0000
-Received: from DU2PEPF0001E9C3.eurprd03.prod.outlook.com
- (2603:10a6:10:1d9:cafe::4f) by DB9PR02CA0009.outlook.office365.com
- (2603:10a6:10:1d9::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.14 via Frontend Transport; Thu,
- 30 Jul 2026 10:26:38 +0000
-Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- DU2PEPF0001E9C3.mail.protection.outlook.com (10.167.8.72) with Microsoft SMTP
- Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.5 via
- Frontend Transport; Thu, 30 Jul 2026 10:26:37 +0000
-Received: from VI1PR08MB3421.eurprd08.prod.outlook.com (2603:10a6:803:80::16)
- by PAVPR08MB8799.eurprd08.prod.outlook.com (2603:10a6:102:32b::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.14; Thu, 30 Jul
- 2026 10:25:32 +0000
-Received: from VI1PR08MB3421.eurprd08.prod.outlook.com
- ([fe80::e079:6bd:fbe0:89b4]) by VI1PR08MB3421.eurprd08.prod.outlook.com
- ([fe80::e079:6bd:fbe0:89b4%3]) with mapi id 15.21.0270.009; Thu, 30 Jul 2026
- 10:25:32 +0000
+ (envelope-from <yannick.martin@okazoo.eu>)
+ id 6a6b1b24-2eae-0a2a0a5409dd-0a2a4502cd24-28
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 11:36:47 +0200
+Received: from [62.210.211.125] (helo=yop24.okazoo.eu)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <yannick.martin@okazoo.eu>)
+ id 6a6b1b2f-6ca4-0a2a45020019-3ed2d37dccf6-3
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 11:36:47 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -69,213 +45,278 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=sRJc0rLoy8gcF3NArSz9853A6rzaldEhaXQkIWreqs4Pz76rSuPtvxl/BnyUN7w6CVyP7Ge2OZUWzEFIGGIthJqhU+MP9jyDAMvVefoMcbcIUzRNX6Vx7E/b2V6dYQKjBR28/MkRTJlWZxy68/rL12ysH5rApRmFQTgk2+KGdn8JRi6p+Lk714qR0Pcv6mq39GmE5Ugij29SUXqtlMveWiKB9Vbm5s8jfMpZJQG358xVnRYvLPyWSw1OYKXCoDwcJCc/WL7Iz1hHfF9jcBHRLRgLfOx2FtgSEqLB7+X3lw9RO3tSS1TO+EUUWpiyBG/FRLJd5ZfhdiVodtRqD38w1Q==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=W3wZAwMMPZoTgl0+TvR5LTWocvVN0gVFmphGcUzdiRM=;
- b=ABJ1CrzgUr48o1FG28XFjvNGL6JjE12+0r7ORKJRgCdjIYWom0mdjODfLK1UWdcZ1C2PqYjKzIUGvv34YkHSpb+7HxdW3OGz9tFeOPQZt7YuFzaRw9HKGEARi/53RhKle0DNY+MgzIA5E/UMWkAZTn2ed7+M8bOfHUzSeHt/wwJi1/NhsOZXM8DNgqQkTS/ebHJXZug854AQ6870OnD30ED7bK2vUPVFHeWC/VWPjrVc0TO23Gxoh7SrJPg3nBKqetZKJq9nVUYk6BuFARoI81nXE3SftoXfPJ3LohWaOr4YLYIwuJd1fD/CN7kxbOMxToGMqBmay5vDyQBUSxDz8g==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 4.158.2.129) smtp.rcpttodomain=linux.ibm.com smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=pass (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=W3wZAwMMPZoTgl0+TvR5LTWocvVN0gVFmphGcUzdiRM=;
- b=I3KGM4UbiK3WIJNvtMLyCLKEtgAXgD6bn0xN3RM8BZUiRELjJKB8aNg0GS0K0Zkm8DgbPZTATfeO89kDomtxbUreYjDNWfu2IAQJ0kt8rZD/6dyYZfSbFtfCeNR43NYJtBUMxXjH5BfKeE1xftNRWFhpLkvvVhRAM+3b6bPrwKM=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
- client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JDk6Z05YfJ98U+ROp9YQdvIgUvkAtmelCatjajEmueB0eqWoORKpIhSBuCWJg34MDT2YYcVhzaT+UFHip6u+ZDFk8Ll6OJiE5FaULhQ/dcbHjaiQXr4qMWeENZoIgTdzfYE6OYkbYmGscMVE8dMLgn4V2CxeRAiMB7O7PQ45JFDFbcnXJll0lDLF+1iflOy43hFBsVUFWFQCwpdQP3YtatJ3B/KzCxs4NZfWv2sVLI8lL7+i5J1VbrhK/D8xgDcGs1XkLch7eSwMOfHxEIKwUghWx3muEZRg0m67eH3bodkccjFs/Z0zY5G+i5d6Ia5KRdKMgLBv0RYK3NageiSCdQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=W3wZAwMMPZoTgl0+TvR5LTWocvVN0gVFmphGcUzdiRM=;
- b=sF1ye7kIvwABa0k/uw5UtDb/io5ZKbiWz0C1UkI+KXUOucKXfwVcyW4TsIAfR4XxHS8lf3++fFrreuLymWXgiEJC5UBQu2FDNEpAE19alIoXox1cgU97AmS9AauP9zCjWyy8ZXDx5JpUWLfn2fUFaqkl7gq9B59dHyLEEa1s26ds8TRtfxtMBtasP4sJKQthSYe/URkdMuCgbBR1My4lGgXtmetVSAx3FyPTElnVzxHDYIg12xYdq9FcRhs/OdKtqrsInhPY+GQyqV5vS4IGj0QSzYpIyFFnCaFggPyeyULfuNxwXEyf48i21grm3tUkToFKBn6g3mDYs0V/iyGmLQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=W3wZAwMMPZoTgl0+TvR5LTWocvVN0gVFmphGcUzdiRM=;
- b=I3KGM4UbiK3WIJNvtMLyCLKEtgAXgD6bn0xN3RM8BZUiRELjJKB8aNg0GS0K0Zkm8DgbPZTATfeO89kDomtxbUreYjDNWfu2IAQJ0kt8rZD/6dyYZfSbFtfCeNR43NYJtBUMxXjH5BfKeE1xftNRWFhpLkvvVhRAM+3b6bPrwKM=
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-Message-ID: <cc3cbd79-d606-41dc-a83e-220ccc220ea8@arm.com>
-Date: Thu, 30 Jul 2026 11:25:29 +0100
-User-Agent: Mozilla Thunderbird
-Cc: usama.anjum@arm.com, Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin
- <tursulin@ursulin.net>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Dimitri Sivanich
- <dimitri.sivanich@hpe.com>, Arnd Bergmann <arnd@arndb.de>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
- Helge Deller <deller@gmx.de>, Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>,
- Andrew Morton <akpm@linux-foundation.org>,
- "Liam R. Howlett" <liam@infradead.org>, Lorenzo Stoakes <ljs@kernel.org>,
- Will Deacon <will@kernel.org>, "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
- Nick Piggin <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
- Andrey Ryabinin <ryabinin.a.a@gmail.com>,
- David Hildenbrand <david@kernel.org>,
- Pasha Tatashin <pasha.tatashin@soleen.com>, Chris Li <chrisl@kernel.org>,
- Kairui Song <kasong@tencent.com>, Uladzislau Rezki <urezki@gmail.com>,
- Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu
- <mhiramat@kernel.org>, Alexei Starovoitov <ast@kernel.org>,
- Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>,
- Eduard Zingerman <eddyz87@gmail.com>,
- Kumar Kartikeya Dwivedi <memxor@gmail.com>, Ingo Molnar <mingo@redhat.com>,
- Arnaldo Carvalho de Melo <acme@kernel.org>,
- Namhyung Kim <namhyung@kernel.org>, SJ Park <sj@kernel.org>,
- "Matthew Wilcox (Oracle)" <willy@infradead.org>, Jan Kara <jack@suse.cz>,
- Jason Gunthorpe <jgg@ziepe.ca>, Leon Romanovsky <leon@kernel.org>,
- Miaohe Lin <linmiaohe@huawei.com>, Dennis Zhou <dennis@kernel.org>,
- Tejun Heo <tj@kernel.org>, Christoph Lameter <cl@gentwo.org>,
- Mike Rapoport <rppt@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>,
- ziy@nvidia.com, pfalcato@suse.de, ryan.roberts@arm.com,
- linux-kernel@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-parisc@vger.kernel.org,
- xen-devel@lists.xenproject.org, linux-mm@kvack.org,
- linux-fsdevel@vger.kernel.org, linux-arch@vger.kernel.org,
- kasan-dev@googlegroups.com, linux-trace-kernel@vger.kernel.org,
- bpf@vger.kernel.org, linux-perf-users@vger.kernel.org, damon@lists.linux.dev
-Subject: Re: [PATCH RFC 05/11] mm: convert PTE table entries in ptep_get()
-To: Alexander Gordeev <agordeev@linux.ibm.com>
-References: <20260727164715.2866609-1-usama.anjum@arm.com>
- <20260727164715.2866609-6-usama.anjum@arm.com>
- <34eed5fd-c569-49d8-bc4d-a3d4b1207fbd-agordeev@linux.ibm.com>
- <fec9e0c7-07c3-442c-819b-f9f5316cb6a2@arm.com>
- <9ac3f058-2a22-4801-8633-65635053c8ea-agordeev@linux.ibm.com>
-From: Muhammad Usama Anjum <usama.anjum@arm.com>
-Content-Language: en-US
-In-Reply-To: <9ac3f058-2a22-4801-8633-65635053c8ea-agordeev@linux.ibm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P265CA0318.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:390::17) To VI1PR08MB3421.eurprd08.prod.outlook.com
- (2603:10a6:803:80::16)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=yop20250924 header.d=okazoo.eu header.i="@okazoo.eu" header.h="Content-Type:Message-ID:Date:MIME-Version:User-Agent:Subject:From:To:Cc:References:Content-Language:In-Reply-To"
+Authentication-Results: yop24.okazoo.eu; arc=none smtp.remote-ip="2001:861:81:ab03:a8da:71bb:ac4c:8efe"
+ARC-Seal: i=1; d=okazoo.eu; s=_arc_yop20260218; a=rsa-sha256; cv=none;
+	t=1785404207;
+	b=U7E6nRuEKu5gH0YdoAMZuc+jwsPWpXB9w1C90boZ+J9EOR7+7My0cqN21SDkO9YEJqwA
+	 vOWHLmq05gXt4i+NhD8qpZzo1EShRev4eRQl0PLqpqZCw96Rkyswfn7lgXtwNqV9DefTx
+	 5WmikfKD5KUaYzpkcIcyXkug5aGUIjmyB9PcufsEIpoWXV1mKIAGnheIQCifF28Rd7G1E
+	 RQwYvNl5ihz/N5G1CBn9q4CotYvqf8mVzL9C5E7unWWlHpHaYqG+UEP8DsSI87sbKJDuA
+	 2agk6gQU44h6XHa03GkZSFCWYikBiLGlex7aSz2FIoEUN6eIYhuPqFsjqVkP3Pv8FrA==
+ARC-Message-Signature: i=1; d=okazoo.eu; s=_arc_yop20260218; a=rsa-sha256;
+	c=relaxed/relaxed; t=1785404207;
+	h=DKIM-Signature:Content-Type:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:From:To:Cc:References:Content-Language:In-Reply-To;
+	bh=sQRMRRFPnLwRU9VpwRbZlfnzUOMkA2Be4k9DBLnfosU=;
+	b=cJ7hNsdpSIIXXEdQJaG8HiWfNTm37glBjrVYoOS3DSDzLbLQbyMzOvN8RW7o4R0SKimF
+	 GNa+TOLC9Kea3D0Z9KqYBW/7qflo73jt4NrY1XQZWGCB6AWSV4n4LI7p25EONyHa3nttH
+	 bwICtyhVKSdvuPZrUG89GzzmGGkQb5Be/kD8OAVIAsL+OWkTPfxaOJNdXHiH46Rp7iXNl
+	 3ptvBdRIR+Xn+ecqdHq9f8N/c2Thvj4FRXqRzM1aCeBvGLWpIiqM7Vxt5OSvxGvPljKas
+	 xBFgeND0Tmr4AJ50LGhU1SOb56EWDlwskcdnXp3c7BGzYCF7q9blaB2FDX5haMsDn1w==
+ARC-Authentication-Results: i=1; yop24.okazoo.eu; arc=none smtp.remote-ip="2001:861:81:ab03:a8da:71bb:ac4c:8efe"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=okazoo.eu;
+	s=yop20250924; t=1785404207; r=y;
+	bh=sQRMRRFPnLwRU9VpwRbZlfnzUOMkA2Be4k9DBLnfosU=;
+	h=Content-Type:Message-ID:Date:MIME-Version:User-Agent:Subject:From:
+	 To:Cc:References:Content-Language:In-Reply-To;
+	b=HcnsHe4w4J3KAy3NaMHMeEQ9yji5d55JNKqYqG+wBNiUOs2ejIpf+D5z4L1QttXzP
+	 E0ut7xp5sEXwcturRxo7KjrgQ1iwfgSaW5Ch5XGor2CS9+FWyPWOy5HqxAPWLQrUep
+	 9L5pSOMqFukd4RedmVnXidxd/f7G9KfKY4gZleMp1eSGlxu2b8940mQahjh0jxDbJ6
+	 TjyzDLXApCY5GPoffewyhL0XTG+UgSyoAl5Xs5+/iDlbIjT1yaTu2BqwmyEe4x6hmp
+	 NaKUuud/+0k49Oa+W11Bmom60zPmegEl8CCPa2y+1HYHuu618Bez4QFDyhHLRahl3N
+	 I0I0mwtkjiGvQ==
+Content-Type: multipart/alternative;
+ boundary="------------jrC2FWRPAOdkLGqhkPnFxVLj"
+Message-ID: <99ef3e01-980f-4bdd-aada-4af4d12d337f@okazoo.eu>
+Date: Thu, 30 Jul 2026 11:36:58 +0200
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic:
-	VI1PR08MB3421:EE_|PAVPR08MB8799:EE_|DU2PEPF0001E9C3:EE_|AS4PR08MB7758:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2ed62004-bbf5-4e4d-44e5-08deee2509ae
-x-checkrecipientrouted: true
-NoDisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted:
- BCL:0;ARA:13230040|7416014|376014|23010399003|1800799024|366016|10067099003|4143699003|11063799006|56012099006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info-Original:
- bXoevxLyBomTzrUcrVhun0Lz2qvSwqjhqFFv+0ABdtpcPStwD5Hf1TDhqSe6LXZw/RcSmI8TgDhUuUgRZ8IzmdSe9EwwmXnYb8gOnnxQheQPRyNeLSm+QZpL9Jyn9F2ukAQypbuSj+yOY6FQRKtildCDNSrBXYt8lQsM43yNUPSSHqfcRGjt2gbPe01TXLohTFVnQahK8mNAG3aCg8e5ATUKoB4j1boNWR5bqhE11KZoIHKyrQ9rGMLHo+utUPmD14NYZ2FeZ5LsVK4yqjha6ZE9NIfBRFQ6cbeM0Wcke0zMh5NmmncdG1DHtV3WmQlYYOBd3O9llxqeE+fPwbgprPki19mkYjuVsr2T2oveffhVTfiVHWIHobneT5i3NEKBi7jzrX7D9xRYjgT9qEY5aVcFkh/m7H3tYN5zON+LPD9KSqTMDI8orON72pqvLBPvfDcp2iWdDLy6W2PoQR/XaZ+j/kwupVpFzIC+wxl5pX7MvLvB1IeAnp4McwatuYW/vlE/E37hGQjM5FQuI3q2jrWQuXA8Usdm9xZLvsaIeiRVfq6akZTBTuKZuRUQRvRJYByjY5lNjOxXNzDgsifEw2kb5UD7kTHTofzUwTsnzHlgkCh3nnbV2DZY4orM2j0B3VJoRa7yNgbm6B1vJCVelxM1FXpCB095oQdEwc7XLes=
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR08MB3421.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(23010399003)(1800799024)(366016)(10067099003)(4143699003)(11063799006)(56012099006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-Exchange-RoutingPolicyChecked:
- fRfLvb6r8bsLj3g3MnaBsYK69jHABWYM5adlkAvFoXPc0l1et+e3sDQ3fVIRsEzSSUHvudUiLQSN1kl8DLhZgvreDww/cFr1g86SOnt7wO2FBTIUO/ZzlkT8Wvwu46XHD4O+KL+0Cg/Diiz2llOOhpq4aiE6EXMnR9Jty79jMbo4WlVoDwk7rCf0ZFgswXd0qvS4UDhThZBdUyZiw6CtADRjNgY5a9diCihtmRmWmQpuHqLJKwydC+Dpvuc9V5JKWLq1AXqkddTyT6hxcedajVUdf8dGPi6m5F3LRifURcDqh+yjXIqzzZzhIheI+Vld8LNBlcPPqqB+vdkb22xPOw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR08MB8799
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- DU2PEPF0001E9C3.eurprd03.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	17a892ef-686f-4e19-2c23-08deee24e2a3
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|35042699022|376014|7416014|36860700016|23010399003|14060799003|1800799024|82310400026|56012099006|11063799006|10067099003|4143699003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	Z1BAaOk6B9uCMw7HqCIVFa23sWZ/KUwa1hSxiZ+zIwpADynN/vhnmecI9+b7C6DFpmJ67xEAkEyLjiB9o6OSPEl4wH8ezUIcep3QykY3naEnwIxg4xPleEV/W2cWBnoIrmiG0D/Wi7RAwLiwKowSiTaFlvNdh2oqksCuZqTHhS5KCB12G8rDx0rWEU62yEJ4DlX5UGrU0s0oERsJl4LqX2Zfe5zuy4oZf6C1P9htyUrB7o7c2pDexCAPr8UZfui8XYb/U4ExxaFK/dVp3IWrow2dGgAL06mh7t7HvNAiwHfPmf+Zzql+HGuYvL5a2vSFSDu1JNzqCjpQ3hIbUPpGpGOwjiPFLzwjdrz12bVOpZ+HM4VI3tD1ratUjYqQmZE1bxgzeriMQCp8DXI2tU4jzf0jYjOTEbziNyqSXOuo9upQhlKgcTz9JhLst2wRl5NTxqkaBWSmaCT0Xh114NhpfAqJpJ7gTMgGufMAHLEjbCUSBQvEezNCpdJopO61udd8ML0JiNs/RkWGEcY9ZNOFUxy+/k+6Jkh3zcanQesE39dtNFrGdLlcIhQTd7M5/s1uCcGJWrXEBthPk59n/bHlnjh00Wo8VtRHIrbbniIceIYHIEP9hzZRptCmqm0bw+Grp4mwkRN0IjgCYIN6M+8TD/Wh4ZBHHjv64DSmyAo0IiNsoLT+CVKXOJNqVrmUFwCAtEgXXgU8hgMQIzvBb63v5Q==
-X-Forefront-Antispam-Report:
-	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(35042699022)(376014)(7416014)(36860700016)(23010399003)(14060799003)(1800799024)(82310400026)(56012099006)(11063799006)(10067099003)(4143699003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	jp8hMIbXZEYBINRi8OIiVYCjAxWHMFaXfKeVo6xRWmXbe3ar6XJ0MFjdSsFmetL1MZUnz047Doifpuq9kGIPdWUzBlRHWb02yz1SEdzs9MBiRzo6ZrYJKpYiMta+6R9EYpgfnerBlOBrP+O1U9KAwNUFppmcKoRyqrxdgI8DagKKw7pEaS9V54HMRUyCNG3xqM+2i0HmePDEV97XBbmN9IuMZEO4X9LY2132llfEx44J2W9a4rxE4kobhz+FIbs6IeZAChBLFUuqXD0XcQXk71PdtZxD45+nCovImRvfKyBCT7843oEa365lFiGacSFfnNapSWJZhTuNpY4qm2GBZ6OWY0lDl63lvKVoPbJ3RAZkSw9r0oOFno1rt4zdXpayntNaX9zEDJxRBiEEiDYVpS1HSr8KCuKXJojlwJ/dx5KWMhiTUVer/j29V9G+mHuZ
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jul 2026 10:26:37.6141
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2ed62004-bbf5-4e4d-44e5-08deee2509ae
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DU2PEPF0001E9C3.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR08MB7758
-X-purgate-ID: tlsNG-c201ff/1785407204-718AE2A1-D9A2C9D4/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [regression] Bug 221745 - PV DomU ballooning driver init issue
+From: Yannick Martin <yannick.martin@okazoo.eu>
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Thorsten Leemhuis <regressions@leemhuis.info>
+Cc: Juergen Gross <jgross@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Linux kernel regressions list <regressions@lists.linux.dev>,
+ yannick.martin+kernelorg@okazoo.eu
+References: <f7fe5959-f0c6-430c-8404-927d7944c836@leemhuis.info>
+ <ameMgwuUIhZbslHh@macbook.local>
+ <519EE50D-9B83-424F-8800-B19DFA81FD79@okazoo.eu>
+Content-Language: fr
+In-Reply-To: <519EE50D-9B83-424F-8800-B19DFA81FD79@okazoo.eu>
+X-purgate-ID: tlsNG-720697/1785404207-670B02AC-CA9DE5E3/37/8813544393-1941467
 X-purgate-type: clean
-X-purgate-size: 2158
+X-purgate-size: 10353
 
-On 30/07/2026 11:24 am, Alexander Gordeev wrote:
-> On Thu, Jul 30, 2026 at 11:11:35AM +0100, Muhammad Usama Anjum wrote:
->> On 30/07/2026 11:08 am, Alexander Gordeev wrote:
->>> On Mon, Jul 27, 2026 at 05:46:56PM +0100, Muhammad Usama Anjum wrote:
->>>> ptep_get() now accepts a pointer to hw_pte_t storage but must continue to
->>>> return a logical pte_t value. Add __pte_from_hw() as the conversion hook
->>>> and apply it in the generic ptep_get() implementation.
->>>>
->>>> Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
->>>> ---
->>>>  include/linux/pgtable.h       | 2 +-
->>>>  include/linux/pgtable_types.h | 1 +
->>>>  2 files changed, 2 insertions(+), 1 deletion(-)
->>>>
->>>> diff --git a/include/linux/pgtable.h b/include/linux/pgtable.h
->>>> index dad80d264aac2..3003ac9cd81fe 100644
->>>> --- a/include/linux/pgtable.h
->>>> +++ b/include/linux/pgtable.h
->>>> @@ -493,7 +493,7 @@ static inline int pudp_set_access_flags(struct vm_area_struct *vma,
->>>>  #ifndef ptep_get
->>>>  static inline pte_t ptep_get(hw_pte_t *ptep)
->>>>  {
->>>> -	return READ_ONCE(*ptep);
->>>> +	return READ_ONCE(__pte_from_hw(*ptep));
->>>
->>> Should it be something like?
->>>
->>> 	return __pte_from_hw(READ_ONCE(*ptep));
->> I'd thought about it. My thinking is that we should get the pte_t first before
->> before calling READ_ONCE(). Please correct me what makes more sense?
-> 
-> I have a problem with "get the pte_t first" part ;) I think what we want
-> is atomically read the hw_pte_t from the HW table and then convert the
-> result to pte_t.
-Got it. I'll fix it in the next version.
+This is a multi-part message in MIME format.
+--------------jrC2FWRPAOdkLGqhkPnFxVLj
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-> 
->>>
->>>>  }
->>>>  #endif
->>>>  
->>>> diff --git a/include/linux/pgtable_types.h b/include/linux/pgtable_types.h
->>>> index ed5dba42a4f8c..61afe27307ec2 100644
->>>> --- a/include/linux/pgtable_types.h
->>>> +++ b/include/linux/pgtable_types.h
->>>> @@ -6,6 +6,7 @@
->>>>  
->>>>  #ifndef __HAVE_ARCH_HW_PTE_T
->>>>  #define hw_pte_t pte_t
->>>> +#define __pte_from_hw(pte)	(pte)
->>>>  #endif
->>>>  
->>>>  #endif /* _LINUX_PGTABLE_TYPES_H */
->>>> -- 
->>>> 2.47.3
->>>>
->>
->> -- 
->> Thanks,
->> Usama
->>
+SGVsbG8NCg0KSXQgd29ya3MgISEhDQoNCnVuYW1lIC1hDQpMaW51eCBzdGF0dXMgNy4yLjAt
+cmMzLXhlbmRvbXUgIzEgU01QIFBSRUVNUFQgVGh1IEp1bCAzMCAxMDozOToxMyBDRVNUIA0K
+MjAyNiB4ODZfNjQgR05VL0xpbnV4DQoNCiMgcHMgYXV4d3d3ZiB8IGdyZXAgLWkgYmFsbA0K
+cm9vdMKgIMKgIMKgIMKgIMKgIDQ4wqAgMC4wwqAgMC4wwqAgwqAgwqAgMMKgIMKgIMKgMCA/
+wqAgwqAgwqAgwqAgU8KgIMKgIDExOjMzwqAgwqAwOjAwIFxfIA0KW3hlbi1iYWxsb29uXQ0K
+DQpkbWVzZ8KgIHwgZ3JlcCAtaSBiYWxsbw0KW8KgIMKgIDAuNDM2NjU3XSB4ZW46YmFsbG9v
+bjogSW5pdGlhbGlzaW5nIGJhbGxvb24gZHJpdmVyDQoNCmRvbVUgbWVtb3J5IHJlc2l6ZSB3
+b3JrcywgdGVzdGVkIDEwMjRtIC0+IDEyMDBtIC0+IDEwMDBtLg0KDQpSZWdhcmRzDQoNCg0K
+TGUgMjcvMDcvMjAyNiDDoCAxOToxMCwgWWFubmljayBNYXJ0aW4gYSDDqWNyaXTCoDoNCj4g
+SGVsbG8NCj4NCj4gSSB3aWxsIHRyeSB0aGlzIHRvbW9ycm93ICENCj4NCj4gUmVnYXJkcw0K
+Pg0KPg0KPiBMZSAyNyBqdWlsbGV0IDIwMjYgMTg6NTE6MTUgR01UKzAyOjAwLCAiUm9nZXIg
+UGF1IE1vbm7DqSIgDQo+IDxyb2dlci5wYXVAY2l0cml4LmNvbT4gYSDDqWNyaXQgOg0KPg0K
+PiAgICAgT24gTW9uLCBKdWwgMjcsIDIwMjYgYXQgMTA6NDI6MjVBTSArMDIwMCwgVGhvcnN0
+ZW4gTGVlbWh1aXMgd3JvdGU6DQo+DQo+ICAgICAgICAgSGkgUm9nZXIhIEZZSSwgaXQgc2Vl
+bXMgeW91ciBjaGFuZ2UgMDk0OWM2NDZkNjQ2OTcgKCJQYXJ0aWFsDQo+ICAgICAgICAgcmV2
+ZXJ0ICJ4ODYveGVuOiBmaXggYmFsbG9vbiB0YXJnZXQgaW5pdGlhbGl6YXRpb24gZm9yIFBW
+SA0KPiAgICAgICAgIGRvbTAiIikgW3Y3LjAtcmMxXSBjYXVlZCBhIHJlZ3Jlc3Npb24uIEZv
+ciBkZXRhaWxzIHNlZQ0KPiAgICAgICAgIGh0dHBzOi8vYnVnemlsbGEua2VybmVsLm9yZy9z
+aG93X2J1Zy5jZ2k/aWQ9MjIxNzQ1IFRvIHF1b3RlDQo+ICAgICAgICAgdGhlIGluaXRpYWwg
+Y29tbWVudDoNCj4NCj4gICAgICAgICAgICAgU2luY2UgY29tbWl0IGRiOGM0YjEgKFBhcnRp
+YWwgcmV2ZXJ0ICJ4ODYveGVuOiBmaXggYmFsbG9vbg0KPiAgICAgICAgICAgICB0YXJnZXQg
+aW5pdGlhbGl6YXRpb24gZm9yIFBWSCBkb20wIiksIHhlbiBiYWxsb29uaW5nIGZhaWxzDQo+
+ICAgICAgICAgICAgIHRvIGluaXQgY29ycmVjdGx5IG9uIGRvbVUgKG9uIGFtZDY0IGFyY2gp
+IHdpdGggdGhlDQo+ICAgICAgICAgICAgIGZvbGxvd2luZyBjb25maWd1cmF0aW9uOiAtLSB4
+bC5jZmcgLi4uIG1lbW9yeSA9ICcyMDQ4Jw0KPiAgICAgICAgICAgICBtYXhtZW0gPSAnNDA5
+NicgLi4uIC0tIC0tIGRvbVUgYmFsbG9vbiBkbWVzZyAoaW5pdCBmYWlscykNCj4gICAgICAg
+ICAgICAgWyAwLjkwODMzN10geGVuOmJhbGxvb246IEluaXRpYWxpc2luZyBiYWxsb29uIGRy
+aXZlciBbDQo+ICAgICAgICAgICAgIDAuOTQwNzIxXSBFeHRyYSBwYWdlcyB1bmRlcmZsb3cg
+Y3VycmVudCB0YXJnZXQgDQo+DQo+ICAgICBZZWFoLCBJJ20gYWZyYWlkIHRoZSBvcmlnaW5h
+bCBmaXggY29tbWl0IGRpZG4ndCBmdWxseSBmaXggdGhlDQo+ICAgICBpc3N1ZXMsIHNvIHRo
+ZXJlJ3MgdGhlIGZvbGxvd2luZyBjaGFuZ2UgKGNodW5rIGJlbG93KSB0aGF0J3MNCj4gICAg
+IG5lZWRlZCBhZGRpdGlvbmFsbHkgdG8gY29wZSB3aXRoIG1lbW9yeSAhPSBtYXhtZW0gb24g
+UFYgZ3Vlc3RzLg0KPiAgICAgSSd2ZSBkb25lIHNvbWUgYmFzaWMgdGVzdGluZyBhbmQgaXQg
+c2VlbXMgdG8gc29sdmUgdGhlIGlzc3VlLA0KPiAgICAgY291bGQgeW91IGdpdmUgaXQgYSBz
+cGluIGFsc28/IChqdXN0IHRvIG1ha2Ugc3VyZSBJJ20gbm90IG1pc3NpbmcNCj4gICAgIGFu
+eXRoaW5nIGVsc2UpLiBUaGFua3MsIFJvZ2VyLg0KPiAgICAgLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+DQo+ICAgICBkaWZmIC0tZ2l0IGEvZHJpdmVycy94ZW4vYmFsbG9vbi5jIGIvZHJpdmVycy94
+ZW4vYmFsbG9vbi5jIGluZGV4DQo+ICAgICBlN2YxZDRjYTZkNzUuLmMyMGExZmY4MjkyZCAx
+MDA2NDQgLS0tIGEvZHJpdmVycy94ZW4vYmFsbG9vbi5jICsrKw0KPiAgICAgYi9kcml2ZXJz
+L3hlbi9iYWxsb29uLmMgQEAgLTcwMywxOSArNzAzLDI2IEBAIHN0YXRpYyBpbnQgX19pbml0
+DQo+ICAgICBiYWxsb29uX2FkZF9yZWdpb25zKHZvaWQpIGJhbGxvb25fYXBwZW5kKHBmbl90
+b19wYWdlKHBmbikpOyAvKiAtICoNCj4gICAgIEV4dHJhIHJlZ2lvbnMgYXJlIGFjY291bnRl
+ZCBmb3IgaW4gdGhlIHBoeXNtYXAsIGJ1dCBuZWVkIC0gKg0KPiAgICAgZGVjcmVhc2luZyBm
+cm9tIGN1cnJlbnRfcGFnZXMgYW5kIHRhcmdldF9wYWdlcyB0byBiYWxsb29uIC0gKiBkb3du
+DQo+ICAgICB0aGUgaW5pdGlhbCBhbGxvY2F0aW9uLCBiZWNhdXNlIHRoZXkgYXJlIGFscmVh
+ZHkgLSAqIGFjY291bnRlZCBmb3INCj4gICAgIGluIHRvdGFsX3BhZ2VzLiArICogRm9yIEhW
+TSBkb21haW5zOiBleHRyYSByZWdpb25zIGFyZSBhY2NvdW50ZWQNCj4gICAgIGZvciBpbiB0
+aGUgKyAqIHBoeXNtYXAsIGJ1dCBuZWVkIGRlY3JlYXNpbmcgZnJvbSBjdXJyZW50X3BhZ2Vz
+IGFuZA0KPiAgICAgKyAqIHRhcmdldF9wYWdlcyB0byBiYWxsb29uIGRvd24gdGhlIGluaXRp
+YWwgYWxsb2NhdGlvbiwgYmVjYXVzZSArDQo+ICAgICAqIHRoZXkgYXJlIGFscmVhZHkgYWNj
+b3VudGVkIGZvciBpbiB0b3RhbF9wYWdlcy4gKyAqICsgKiBGb3IgUFYNCj4gICAgIGRvbWFp
+bnM6IGV4dHJhIHJlZ2lvbnMgYXJlIG5vdCBhY2NvdW50ZWQgZm9yIGluIHRoZSArICogaW5p
+dGlhbA0KPiAgICAgbWVtb3J5IHRhcmdldCwgYW5kIGhlbmNlIG5lZWQgYWRkaW5nIHRvIHRo
+ZSBzdGF0cyBhcyArICoNCj4gICAgIGFkZGl0aW9uYWwgdW5wb3B1bGF0ZWQgcmVnaW9ucy4g
+Ki8gcGFnZXMgPSBleHRyYV9wZm5fZW5kIC0NCj4gICAgIHN0YXJ0X3BmbjsgLSBpZiAocGFn
+ZXMgPj0gYmFsbG9vbl9zdGF0cy5jdXJyZW50X3BhZ2VzIHx8IC0gcGFnZXMNCj4gICAgID49
+IGJhbGxvb25fc3RhdHMudGFyZ2V0X3BhZ2VzKSB7ICsgaWYgKHhlbl9wdl9kb21haW4oKSkg
+eyArDQo+ICAgICBiYWxsb29uX3N0YXRzLnRvdGFsX3BhZ2VzICs9IHBhZ2VzOyArIH0gZWxz
+ZSBpZiAocGFnZXMgPj0NCj4gICAgIGJhbGxvb25fc3RhdHMuY3VycmVudF9wYWdlcyB8fCAr
+IHBhZ2VzID49DQo+ICAgICBiYWxsb29uX3N0YXRzLnRhcmdldF9wYWdlcykgeyBXQVJOKDEs
+ICJFeHRyYSBwYWdlcyB1bmRlcmZsb3cNCj4gICAgIGN1cnJlbnQgdGFyZ2V0Iik7IHJldHVy
+biAtRVJBTkdFOyArIH0gZWxzZSB7ICsNCj4gICAgIGJhbGxvb25fc3RhdHMuY3VycmVudF9w
+YWdlcyAtPSBwYWdlczsgKyBiYWxsb29uX3N0YXRzLnRhcmdldF9wYWdlcw0KPiAgICAgLT0g
+cGFnZXM7IH0gLSBiYWxsb29uX3N0YXRzLmN1cnJlbnRfcGFnZXMgLT0gcGFnZXM7IC0NCj4g
+ICAgIGJhbGxvb25fc3RhdHMudGFyZ2V0X3BhZ2VzIC09IHBhZ2VzOyB9IHJldHVybiAwOw0K
+Pg0KDQo=
+--------------jrC2FWRPAOdkLGqhkPnFxVLj
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
--- 
-Thanks,
-Usama
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF=
+-8">
+  </head>
+  <body>
+    Hello<br>
+    <br>
+    It works !!!<br>
+    <br>
+    uname -a<br>
+    Linux status 7.2.0-rc3-xendomu #1 SMP PREEMPT Thu Jul 30 10:39:13
+    CEST 2026 x86_64 GNU/Linux<br>
+    <br>
+    # ps auxwwwf | grep -i ball<br>
+    root=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 48=C2=A0 0.0=C2=A0 0.0=C2=A0 =C2=
+=A0 =C2=A0 0=C2=A0 =C2=A0 =C2=A00 ?=C2=A0 =C2=A0 =C2=A0 =C2=A0 S=C2=A0 =C2=
+=A0 11:33=C2=A0 =C2=A00:00=C2=A0
+    \_ [xen-balloon]<br>
+    <br>
+    dmesg=C2=A0 | grep -i ballo<br>
+    [=C2=A0 =C2=A0 0.436657] xen:balloon: Initialising balloon driver<br>=
 
+    <br>
+    domU memory resize works, tested 1024m -&gt; 1200m -&gt; 1000m.<br>
+    <br>
+    Regards<br>
+    <br>
+    <br>
+    <div class=3D"moz-cite-prefix">Le 27/07/2026 =C3=A0 19:10, Yannick Ma=
+rtin a
+      =C3=A9crit=C2=A0:<br>
+    </div>
+    <blockquote type=3D"cite"
+      cite=3D"mid:519EE50D-9B83-424F-8800-B19DFA81FD79@okazoo.eu">
+      <meta http-equiv=3D"content-type" content=3D"text/html; charset=3DU=
+TF-8">
+      <div dir=3D"auto">Hello<br>
+        <br>
+        I will try this tomorrow !<br>
+        <br>
+        Regards</div>
+      <br>
+      <br>
+      <div class=3D"gmail_quote">
+        <div dir=3D"auto">Le 27 juillet 2026 18:51:15 GMT+02:00, "Roger
+          Pau Monn=C3=A9" <a class=3D"moz-txt-link-rfc2396E" href=3D"mail=
+to:roger.pau@citrix.com">&lt;roger.pau@citrix.com&gt;</a> a =C3=A9crit :<=
+/div>
+        <blockquote class=3D"gmail_quote"
+style=3D"margin: 0pt 0pt 0pt 0.8ex; border-left: 1px solid rgb(204, 204, =
+204); padding-left: 1ex;">
+          <pre class=3D"com-fsck-k9__plain-text-message-pre"><div
+          dir=3D"auto">On Mon, Jul 27, 2026 at 10:42:25AM +0200, Thorsten=
+ Leemhuis wrote:
+</div><blockquote class=3D"gmail_quote"
+style=3D"margin-bottom: 1ex; --com-fsck-k9__blockquote-default-border-col=
+or: #729fcf;"><div
+          dir=3D"auto">Hi Roger! FYI, it seems your change 0949c646d64697=
+ ("Partial revert
+"x86/xen: fix balloon target initialization for PVH dom0"") [v7.0-rc1]
+caued a regression. For details see
+<a href=3D"https://bugzilla.kernel.org/show_bug.cgi?id=3D221745"
+          moz-do-not-send=3D"true" class=3D"moz-txt-link-freetext">https:=
+//bugzilla.kernel.org/show_bug.cgi?id=3D221745</a>
+
+To quote the initial comment:
+
+</div><blockquote class=3D"gmail_quote"
+style=3D"margin-bottom: 1ex; --com-fsck-k9__blockquote-default-border-col=
+or: #ad7fa8;"><div
+          dir=3D"auto">Since commit db8c4b1 (Partial revert "x86/xen: fix=
+ balloon target initialization for PVH dom0"), xen ballooning fails to in=
+it correctly on domU (on amd64 arch) with the following configuration:
+
+-- xl.cfg
+=2E..
+memory      =3D '2048'
+maxmem      =3D '4096'
+=2E..
+--
+
+-- domU balloon dmesg (init fails)
+[    0.908337] xen:balloon: Initialising balloon driver
+[    0.940721] Extra pages underflow current target
+</div></blockquote></blockquote><div dir=3D"auto">
+Yeah, I'm afraid the original fix commit didn't fully fix the issues,
+so there's the following change (chunk below) that's needed
+additionally to cope with memory !=3D maxmem on PV guests.
+
+I've done some basic testing and it seems to solve the issue, could
+you give it a spin also?  (just to make sure I'm not missing anything
+else).
+
+Thanks, Roger.<hr>diff --git a/drivers/xen/balloon.c b/drivers/xen/balloo=
+n.c
+index e7f1d4ca6d75..c20a1ff8292d 100644
+--- a/drivers/xen/balloon.c
++++ b/drivers/xen/balloon.c
+@@ -703,19 +703,26 @@ static int __init balloon_add_regions(void)
+ 			balloon_append(pfn_to_page(pfn));
+=20
+ 		/*
+-		 * Extra regions are accounted for in the physmap, but need
+-		 * decreasing from current_pages and target_pages to balloon
+-		 * down the initial allocation, because they are already
+-		 * accounted for in total_pages.
++		 * For HVM domains: extra regions are accounted for in the
++		 * physmap, but need decreasing from current_pages and
++		 * target_pages to balloon down the initial allocation, because
++		 * they are already accounted for in total_pages.
++		 *
++		 * For PV domains: extra regions are not accounted for in the
++		 * initial memory target, and hence need adding to the stats as
++		 * additional unpopulated regions.
+ 		 */
+ 		pages =3D extra_pfn_end - start_pfn;
+-		if (pages &gt;=3D balloon_stats.current_pages ||
+-		    pages &gt;=3D balloon_stats.target_pages) {
++		if (xen_pv_domain()) {
++			balloon_stats.total_pages +=3D pages;
++		} else if (pages &gt;=3D balloon_stats.current_pages ||
++		           pages &gt;=3D balloon_stats.target_pages) {
+ 			WARN(1, "Extra pages underflow current target");
+ 			return -ERANGE;
++		} else {
++			balloon_stats.current_pages -=3D pages;
++			balloon_stats.target_pages -=3D pages;
+ 		}
+-		balloon_stats.current_pages -=3D pages;
+-		balloon_stats.target_pages -=3D pages;
+ 	}
+=20
+ 	return 0;
+</div></pre>
+        </blockquote>
+      </div>
+    </blockquote>
+    <br>
+  </body>
+</html>
+
+--------------jrC2FWRPAOdkLGqhkPnFxVLj--
 
