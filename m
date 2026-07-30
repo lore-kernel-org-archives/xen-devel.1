@@ -4,48 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5569CC54FDF
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2026 09:58:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1377403.1623475 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2272DC54FDF
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2026 10:09:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1377415.1623483 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpNWF-0004Hs-Hz; Thu, 30 Jul 2026 09:57:39 +0000
+	id 1wpNhP-0006Zj-FY; Thu, 30 Jul 2026 10:09:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1377403.1623475; Thu, 30 Jul 2026 09:57:39 +0000
+Received: by outflank-mailman (output) from mailman id 1377415.1623483; Thu, 30 Jul 2026 10:09:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpNWF-0004Hl-F3; Thu, 30 Jul 2026 09:57:39 +0000
-Received: by outflank-mailman (input) for mailman id 1377403;
- Thu, 30 Jul 2026 09:57:38 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wpNWE-0004HP-CT
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 09:57:38 +0000
+	id 1wpNhP-0006Zc-Cz; Thu, 30 Jul 2026 10:09:11 +0000
+Received: by outflank-mailman (input) for mailman id 1377415;
+ Thu, 30 Jul 2026 10:09:09 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <agordeev@linux.ibm.com>) id 1wpNhN-0006ZT-HO
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 10:09:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wpNWD-00H5P7-Pa
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 11:57:37 +0200
-Received: from [10.42.69.6] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fb2753d7d000e099@swg.vates.tech>)
- id 6a6b2008-bab6-0a2a0a5309dd-0a2a4506edf6-20
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 11:57:37 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fb2753d7d000e099@swg.vates.tech>)
- id 6a6b2011-195a-0a2a45060019-b9ff1c229add-3
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 11:57:37 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19fb2753d7d000e099.003 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 30 Jul 2026 09:57:35 +0000
-Received: from [192.168.0.38]
- (ipservice-092-208-102-202.092.208.pools.vodafone-ip.de [92.208.102.202])
- (Authenticated sender: julian.vetter)
- by mail2.vates.fr (Postfix) with ESMTPSA id E03EB80C5A;
- Thu, 30 Jul 2026 11:57:34 +0200 (CEST)
+ id 1wpNhM-00D9U6-U5
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 12:09:08 +0200
+Received: from [10.42.69.10] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <agordeev@linux.ibm.com>)
+ id 6a6b22c1-2eae-0a2a0a5409dd-0a2a450ac8fa-14
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 12:09:08 +0200
+Received: from [148.163.158.5] (helo=mx0b-001b2d01.pphosted.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <agordeev@linux.ibm.com>)
+ id 6a6b22c3-f2d2-0a2a450a0019-94a39e052c2e-3
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 12:09:08 +0200
+Received: from pps.filterd (m0360072.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66U6m2hU2316588; Thu, 30 Jul 2026 10:08:26 GMT
+Received: from ppma21.wdc07v.mail.ibm.com
+ (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4fmuwd6a7b-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 30 Jul 2026 10:08:25 +0000 (GMT)
+Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma21.wdc07v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 66U9fHHZ004184;
+ Thu, 30 Jul 2026 10:08:25 GMT
+Received: from smtprelay03.fra02v.mail.ibm.com ([9.218.2.224])
+ by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4fn8fkatpu-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 30 Jul 2026 10:08:24 +0000 (GMT)
+Received: from smtpav03.fra02v.mail.ibm.com (smtpav03.fra02v.mail.ibm.com
+ [10.20.54.102])
+ by smtprelay03.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 66UA8Mar34079042
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 30 Jul 2026 10:08:22 GMT
+Received: from smtpav03.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 8C9E62004F;
+ Thu, 30 Jul 2026 10:08:22 +0000 (GMT)
+Received: from smtpav03.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id C8DEC20040;
+ Thu, 30 Jul 2026 10:08:21 +0000 (GMT)
+Received: from li-008a6a4c-3549-11b2-a85c-c5cc2836eea2.ibm.com (unknown
+ [9.224.92.206])
+ by smtpav03.fra02v.mail.ibm.com (Postfix) with ESMTPS;
+ Thu, 30 Jul 2026 10:08:21 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,180 +76,146 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=jSmaPJ9GcjKc6f6V+1Fcid+mSn7qr37sr4rr76JwcTM=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=FeHu/14EmyYgjX1pQ4st5WjmimkE+UbOVCAQu9dpSq6jfAxu7VBv0s3l4DJvXKxYP1eNq/p49
- 0Dm9A4oF9V/toIjPJtn4BJ7kws5hqU+McGPdLxGbWH36DfbG/5q2kkE5fPGB4vCswP1XWfImyS7
- TxHqVyh8Rx8/pAXQXXtw0KtLanV/Fkg1JSGewj3+WBLwJSDt3FT5A0YCR96HhdLigZnRKHYA9GO
- MJmmBPTDU+58fIcv2XYtP5XYM02gsEnDPDXGgF4x+gDjq8Z23cjhjnmfHAqiSOlZXsI2Ko2j7Xq
- WINTMQYexvOawgwyf4uw9WJh4EufiWl1Q8kzBqD84F/Q==
-X-Zone-Loop: 78397653c0ab4927f94d7fe70b3b794304ea02fa8c67
-x-campaign-type: default
-x-transaction-id: 5ac5cc55-0c35-411c-99ed-33991f7e2abf
-x-swg-uid: 01-e099b33a-27fa-416f-b143-af5084ffde98
-X-Mailer: Sweego
-Message-ID:
- <1785405455.8631fc262581453bbf619ec5b2062170.19fb2753d7d000e099@vates.tech>
-x-swg-bid: 1785405455.8631fc262581453bbf619ec5b2062170.19fb2753d7d000e099
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-Date: Thu, 30 Jul 2026 11:57:34 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=pp1 header.d=ibm.com header.i="@ibm.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=pp1; bh=SyEKmgQDKWQNaqyjGD9/StXJGEDRDY
+	1U+s/7IVPb15Q=; b=mpgStl8w7nM9YhaejMlJKR3MpAZdEg3CMrKaAXvLKHr7vT
+	6VVwUWTv94MCyV0t0LoEvX4NTx8I4oV6Z0RyamfkVYt+l2AOdDneecdkibOEY1+b
+	fD9XwZ3K4X8hUfJXGoIotglUANfOJDNKrE0DS35mkwFOijc9A8vDRLcyW5rJpkQl
+	ZSz6TwC2s319vuPGylh8x/WmuWHPvwVDTCys8JeV+xWvLk555y/ELhHSpwIRUICY
+	YonccknjvF9P+MZBOhJqIBxdnhuPD4Gkn7+w9bgCc5mVY0U6J1Gm6Uc9d61V0Jez
+	zbYakob6m6/arpoFMao3y0RyGCx0NamVLgwru4iQ==
+Date: Thu, 30 Jul 2026 12:08:20 +0200
+From: Alexander Gordeev <agordeev@linux.ibm.com>
+To: Muhammad Usama Anjum <usama.anjum@arm.com>
+Cc: Jani Nikula <jani.nikula@linux.intel.com>,
+        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        Tvrtko Ursulin <tursulin@ursulin.net>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Dimitri Sivanich <dimitri.sivanich@hpe.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+        Helge Deller <deller@gmx.de>, Juergen Gross <jgross@suse.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Muchun Song <muchun.song@linux.dev>,
+        Oscar Salvador <osalvador@suse.de>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        "Liam R. Howlett" <liam@infradead.org>,
+        Lorenzo Stoakes <ljs@kernel.org>, Will Deacon <will@kernel.org>,
+        "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
+        Nick Piggin <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
+        Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+        David Hildenbrand <david@kernel.org>,
+        Pasha Tatashin <pasha.tatashin@soleen.com>,
+        Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
+        Uladzislau Rezki <urezki@gmail.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Andrii Nakryiko <andrii@kernel.org>,
+        Eduard Zingerman <eddyz87@gmail.com>,
+        Kumar Kartikeya Dwivedi <memxor@gmail.com>,
+        Ingo Molnar <mingo@redhat.com>,
+        Arnaldo Carvalho de Melo <acme@kernel.org>,
+        Namhyung Kim <namhyung@kernel.org>, SJ Park <sj@kernel.org>,
+        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+        Jan Kara <jack@suse.cz>, Jason Gunthorpe <jgg@ziepe.ca>,
+        Leon Romanovsky <leon@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>,
+        Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>,
+        Christoph Lameter <cl@gentwo.org>, Mike Rapoport <rppt@kernel.org>,
+        Johannes Weiner <hannes@cmpxchg.org>, ziy@nvidia.com, pfalcato@suse.de,
+        ryan.roberts@arm.com, linux-kernel@vger.kernel.org,
+        intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+        linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org,
+        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
+        linux-arch@vger.kernel.org, kasan-dev@googlegroups.com,
+        linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
+        linux-perf-users@vger.kernel.org, damon@lists.linux.dev
+Subject: Re: [PATCH RFC 05/11] mm: convert PTE table entries in ptep_get()
+Message-ID: <34eed5fd-c569-49d8-bc4d-a3d4b1207fbd-agordeev@linux.ibm.com>
+References: <20260727164715.2866609-1-usama.anjum@arm.com>
+ <20260727164715.2866609-6-usama.anjum@arm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] tools/ocaml: Fill arch_config for ARM in
- domain_getinfo{,list}()
-To: Andrew Cooper <andrew.cooper3@citrix.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrii Sultanov <andriy.sultanov@vates.tech>,
- Guillaume Thouvenin <guillaume.thouvenin@vates.tech>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>
-References: <20260728154830.67734-1-andrew.cooper3@citrix.com>
- <20260728154830.67734-3-andrew.cooper3@citrix.com>
- <1785400990.8631fc262581453bbf619ec5b2062170.19fb2311930000e099@vates.tech>
- <dadee869-5ab8-48c3-8eb7-3b760eb6e12a@citrix.com>
-Content-Language: en-US
-From: Julian Vetter <julian.vetter@vates.tech>
-In-Reply-To: <dadee869-5ab8-48c3-8eb7-3b760eb6e12a@citrix.com>
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.1739.ea49de7e1093a1ac.19fb2753b03.1ca6ff1d6c76837d=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1785405455108
-X-purgate-ID: tlsNG-16d1c6/1785405457-F687577B-2BA319E6/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 4828
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260727164715.2866609-6-usama.anjum@arm.com>
+X-TM-AS-GCONF: 00
+X-Proofpoint-ORIG-GUID: o0rywYqMRb9-o-diVy_ik6hJzY7jXbKp
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDA3MiBTYWx0ZWRfX9YzlV5X9xylI
+ niwszbMcVKFzbqv5lB4+x3UMXHiu2Na/LX64PyF/7hm6373GBwUh9Nzp3rKvPU5zk189VQCofLr
+ rPG5w4Fu4iCy4m6kL6IwmlpOMbpH93Q=
+X-Authority-Analysis: v=2.4 cv=E/z9Y6dl c=1 sm=1 tr=0 ts=6a6b2299 cx=c_pps
+ a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17
+ a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=RzCfie-kr_QcCd8fBx8p:22 a=7CQSdrXTAAAA:8
+ a=rd7UzSewfSqtCNqF-5IA:9 a=CjuIK1q_8ugA:10 a=a-qgeE7W1pNrGK8U0ZQC:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDA3MiBTYWx0ZWRfX5SpBi0HAiQ/C
+ 9ni/l34t00qdV/3lkOyjkRQMHI/bzArsCFIkiciKZ8adXpzfTg+v45rnYJqhyhndiqeJpPiwNep
+ VZubCJTxxNPdh7fUODcM7dZfoUnpFjzvPK4ZEbfqEnIme5xp5/3dh/jC+Bz0wOnfq0jzNGqzp01
+ zPArarMM0ovv+hNUMHMW7KFO1ciq6TJyi7CqiLbDAikACDO4XCNopg90PkO7ZmmtnKQKZqCc3Iu
+ vjfATt8qU+7UDSj5FM+YWzMlFLtZ7yd+VsugakgEKb3nBJHhgB/c4j80i+hmodLARApOX/lUvJi
+ hIn4WaO+yfetcmUKLTaNKagXUiUaD1+XmWFrHFYPqNS0/OPuPyGwB/Il8okWMucK5lVYiKp9Avl
+ wy0uPYNZ2zKQHtwferVMHYGgVjDdrnJfKZLKq+RVgKww7RVJrU9y33ZnAADV+Y5aXFTSzYQrdU5
+ SYDEkUDGowOYGL7zbLg==
+X-Proofpoint-GUID: o0rywYqMRb9-o-diVy_ik6hJzY7jXbKp
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-30_02,2026-07-29_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 priorityscore=1501 spamscore=0 clxscore=1015 phishscore=0
+ lowpriorityscore=0 bulkscore=0 malwarescore=0 impostorscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607300072
+X-purgate-ID: tlsNG-4011c0/1785406148-504CFCFC-B01684B5/0/0
+X-purgate-type: clean
+X-purgate-size: 1409
 
----=Part.1739.ea49de7e1093a1ac.19fb2753b03.1ca6ff1d6c76837d=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+On Mon, Jul 27, 2026 at 05:46:56PM +0100, Muhammad Usama Anjum wrote:
+> ptep_get() now accepts a pointer to hw_pte_t storage but must continue to
+> return a logical pte_t value. Add __pte_from_hw() as the conversion hook
+> and apply it in the generic ptep_get() implementation.
+> 
+> Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
+> ---
+>  include/linux/pgtable.h       | 2 +-
+>  include/linux/pgtable_types.h | 1 +
+>  2 files changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/include/linux/pgtable.h b/include/linux/pgtable.h
+> index dad80d264aac2..3003ac9cd81fe 100644
+> --- a/include/linux/pgtable.h
+> +++ b/include/linux/pgtable.h
+> @@ -493,7 +493,7 @@ static inline int pudp_set_access_flags(struct vm_area_struct *vma,
+>  #ifndef ptep_get
+>  static inline pte_t ptep_get(hw_pte_t *ptep)
+>  {
+> -	return READ_ONCE(*ptep);
+> +	return READ_ONCE(__pte_from_hw(*ptep));
 
-On 7/30/26 11:38, Andrew Cooper wrote:
-> On 30/07/2026 9:43 am, Julian Vetter wrote:
->>
->> On 7/28/26 17:48, Andrew Cooper wrote:
->>> From: Julian Vetter <julian=2Evetter@vates=2Etech>
->>>
->>> Add the missing ARM logic, populating xen_arm_arch_domainconfig
->>> from the raw xc_domaininfo_t the same way the x86 branch does for
->>> xen_x86_arch_domainconfig=2E
->>>
->>> Signed-off-by: Julian Vetter <julian=2Evetter@vates=2Etech>
->>> Signed-off-by: Andrew Cooper <andrew=2Ecooper3@citrix=2Ecom>
->>> ---
->>> CC: Andrew Cooper <andrew=2Ecooper3@citrix=2Ecom>
->>> CC: Andrii Sultanov <andriy=2Esultanov@vates=2Etech>
->>> CC: Guillaume Thouvenin <guillaume=2Ethouvenin@vates=2Etech>
->>> CC: Julian Vetter <julian=2Evetter@vates=2Etech>
->>> CC: Oleksii Kurochko <oleksii=2Ekurochko@gmail=2Ecom>
->>> ---
->>>    tools/ocaml/libs/xc/xenctrl_stubs=2Ec | 16 ++++++++++++++--
->>>    1 file changed, 14 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/tools/ocaml/libs/xc/xenctrl_stubs=2Ec b/tools/ocaml/libs/=
-xc/xenctrl_stubs=2Ec
->>> index 441e1d83cfec=2E=2Efb983709066f 100644
->>> --- a/tools/ocaml/libs/xc/xenctrl_stubs=2Ec
->>> +++ b/tools/ocaml/libs/xc/xenctrl_stubs=2Ec
->>> @@ -444,9 +444,21 @@ static value alloc_domaininfo(xc_domaininfo_t * i=
-nfo)
->>>   =20
->>>    	Store_field(result, 15, tmp);
->>>   =20
->>> -#if defined(__i386__) || defined(__x86_64__)
->>> +#if defined(__arm__) || defined(__aarch64__)
->>>   =20
->>> -	tag =3D 1; /* tag x86 */
->>> +	tag =3D 0; /* tag ARM */
->>> +
->>> +        /* xen_arm_arch_domainconfig */
->>> +        arch_config =3D caml_alloc_tuple(3);
->>> +        Field(arch_config, 0) =3D Val_int(info->arch_config=2Egic_ver=
-sion);
->>> +        Field(arch_config, 1) =3D Val_int(info->arch_config=2Enr_spis=
-);
->>> +
->>> +	tmp =3D caml_copy_int32(info->arch_config=2Eclock_frequency);
->>> +        Field(arch_config, 2) =3D tmp;
->> Shouldn't the Field() be a `Store_field(arch_config, 2, tmp);`, because
->> the `caml_copy_int32` makes an allocation on the minor heap to allow
->> OCAML's GC to keep track of this pointer if ever the arch_config is
->> promoted?
->=20
-> No (ish)=2E=C2=A0 The Ocaml/C manual is subtly wrong in it's advice abou=
-t this=2E
->=20
-> Using Store_field() would be safe, but it has an obscene overhead for a
-> scalar store, and caml_modify() does a whole bunch of barriers/atomics
-> which are not necessary on anything which isn't allocated from
-> caml_alloc_shr() (which we don't use at all)=2E
->=20
-> The buggy construct is:
->=20
->  =C2=A0 =C2=A0 Field(foo, bar) =3D caml_{copy,alloc,etc}(baz);
->=20
-> because C does not provide an ordering between evaluation of the Rvalue
-> vs the Lvalue=2E=C2=A0 Specifically, if the Lvalue were evaluated prior =
-to the
-> function call, then indeed we could store into a stale pointer=2E
->=20
-> But, using tmp in the way we do:
->=20
->  =C2=A0 =C2=A0 tmp =3D caml_copy_*(baz);
->  =C2=A0 =C2=A0 Field(foo, bar) =3D tmp;
->=20
-> puts a sequence point after calling caml_copy_*(), and prior to
-> evaluating Field(), so guarantees to do them in the correct order=2E
->=20
+Should it be something like?
 
-Aha, thank you for the clarification=2E Indeed the Ocaml/C manual=20
-suggested that this might be triggered by any caml_copy_* and not just a=
-=20
-caml_alloc_shr()=2E
+	return __pte_from_hw(READ_ONCE(*ptep));
 
-I've tested this series (both patches applied together) on real Ampere=20
-ARM64 hardware (XCP-ng 9=2E0'ish, based on Xen 4=2E21=2E1)=2E The crash in=
-=20
-Xenctrl=2Edomain_getinfo{,list} on ARM is gone, and VMs create and boot=20
-correctly=2E So,
-
-Patch 1 ("tools/ocaml: Fix crash in Xenctrl=2Edomain_getinfo{,list} on ARM=
-"):
-Reviewed-by: Julian Vetter <julian=2Evetter@vates=2Etech>
-Tested-by: Julian Vetter <julian=2Evetter@vates=2Etech>
-
-Patch 2 ("tools/ocaml: Fill arch_config for ARM in=20
-domain_getinfo{,list}()"):
-Tested-by: Julian Vetter <julian=2Evetter@vates=2Etech>
-
-
-> In the Store_field() macro, this occurs by taking (val) into a local
-> variable, and not because of how it calls caml_modify()=2E
->=20
->=20
-> In a perfect world we'd have a Store_field() that arranged for the
-> intermediate safety without calling caml_modify()=2E
->=20
-> It is also telling that the Ocaml runtime has a total of 15 uses of
-> Store_field, and we've got more than that in this function alone, let
-> alone the rest of our bindings=2E
->=20
-> I do have a cleanup patch for those as well, once we got this bug sorted=
-=2E
->=20
-> ~Andrew
->=20
-
-
-
--- 
-Julian Vetter | Vates Hypervisor & Kernel Developer
-
-XCP-ng & Xen Orch=
-estra - Vates solutions
-
-web: https://vates=2Etech
----=Part.1739.ea49de7e1093a1ac.19fb2753b03.1ca6ff1d6c76837d=---
+>  }
+>  #endif
+>  
+> diff --git a/include/linux/pgtable_types.h b/include/linux/pgtable_types.h
+> index ed5dba42a4f8c..61afe27307ec2 100644
+> --- a/include/linux/pgtable_types.h
+> +++ b/include/linux/pgtable_types.h
+> @@ -6,6 +6,7 @@
+>  
+>  #ifndef __HAVE_ARCH_HW_PTE_T
+>  #define hw_pte_t pte_t
+> +#define __pte_from_hw(pte)	(pte)
+>  #endif
+>  
+>  #endif /* _LINUX_PGTABLE_TYPES_H */
+> -- 
+> 2.47.3
+> 
 
