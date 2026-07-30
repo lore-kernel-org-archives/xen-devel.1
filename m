@@ -4,67 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5201C55160
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2026 11:30:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1377642.1623571 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FD6AC55162
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2026 11:32:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1377650.1623579 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpOxj-0002cy-JF; Thu, 30 Jul 2026 11:30:07 +0000
+	id 1wpOzN-0003CP-RT; Thu, 30 Jul 2026 11:31:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1377642.1623571; Thu, 30 Jul 2026 11:30:07 +0000
+Received: by outflank-mailman (output) from mailman id 1377650.1623579; Thu, 30 Jul 2026 11:31:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpOxj-0002cp-E8; Thu, 30 Jul 2026 11:30:07 +0000
-Received: by outflank-mailman (input) for mailman id 1377642;
- Thu, 30 Jul 2026 11:30:05 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <agordeev@linux.ibm.com>) id 1wpOxh-0002RS-KN
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 11:30:05 +0000
+	id 1wpOzN-0003CI-OW; Thu, 30 Jul 2026 11:31:49 +0000
+Received: by outflank-mailman (input) for mailman id 1377650;
+ Thu, 30 Jul 2026 11:31:49 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wpOzM-0003CA-U4
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 11:31:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wpOxh-00Aev2-14
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 13:30:05 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wpOzK-00HNMU-W6
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 13:31:47 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <agordeev@linux.ibm.com>)
- id 6a6b35b2-2eae-0a2a0a5409dd-0a2a450aaa60-24
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 13:30:05 +0200
-Received: from [148.163.156.1] (helo=mx0a-001b2d01.pphosted.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <agordeev@linux.ibm.com>)
- id 6a6b35bb-f2d2-0a2a450a0019-94a39c013cd2-3
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 13:30:04 +0200
-Received: from pps.filterd (m0360083.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66UAHuns2709587; Thu, 30 Jul 2026 11:29:29 GMT
-Received: from ppma11.dal12v.mail.ibm.com
- (db.9e.1632.ip4.static.sl-reverse.com [50.22.158.219])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4fmuw7qdv8-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 30 Jul 2026 11:29:29 +0000 (GMT)
-Received: from pps.filterd (ppma11.dal12v.mail.ibm.com [127.0.0.1])
- by ppma11.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 66UBQg3P005008;
- Thu, 30 Jul 2026 11:29:28 GMT
-Received: from smtprelay02.fra02v.mail.ibm.com ([9.218.2.226])
- by ppma11.dal12v.mail.ibm.com (PPS) with ESMTPS id 4fna5yat6k-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 30 Jul 2026 11:29:28 +0000 (GMT)
-Received: from smtpav05.fra02v.mail.ibm.com (smtpav05.fra02v.mail.ibm.com
- [10.20.54.104])
- by smtprelay02.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 66UBTQAJ43581894
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 30 Jul 2026 11:29:26 GMT
-Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 2BC1C20043;
- Thu, 30 Jul 2026 11:29:26 +0000 (GMT)
-Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 39C4320040;
- Thu, 30 Jul 2026 11:29:25 +0000 (GMT)
-Received: from li-008a6a4c-3549-11b2-a85c-c5cc2836eea2.ibm.com (unknown
- [9.224.92.206])
- by smtpav05.fra02v.mail.ibm.com (Postfix) with ESMTPS;
- Thu, 30 Jul 2026 11:29:25 +0000 (GMT)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a6b3622-bab6-0a2a0a5309dd-0a2a4508b2bc-2
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 13:31:46 +0200
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a6b3622-f659-0a2a45080019-d155802aa5c5-3
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 13:31:46 +0200
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-495437bb891so5488325e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 04:31:46 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
+ [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47fc88d7097sm5329959f8f.5.2026.07.30.04.31.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 30 Jul 2026 04:31:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -76,138 +52,176 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=pp1 header.d=ibm.com header.i="@ibm.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=pp1; bh=iqt2s1hq4p/5rHwvwtT1k5VmvNMosI
-	CBR3I5pd05C5g=; b=LOlhvmIFhW/EngAbWhcK7RbynBbOcMLn8k9M44UoY1doH4
-	CQvK5x3I2gQ+I/eDxx00AjEnGtglp7EP68wc5irkslKwFXFeJyl0JpnizTObLrfc
-	wnyqyVaeaaICVHqF2o3nzEsKAdgN/Yna9ginLJBQYB1NQh6VV3ax2kGWMpJVTv1w
-	Whce7mFVUCRYyM740D1Il6BuX9SbUGAUDXA28opS6pOfQXzqxqb5sws7Ac3yDMnD
-	KtYJdCmUTspQr6cTO/OMjZNmWB4NVe1S/2N8p4JSmv7CA0Tz7QReSsr7LIs1FL0h
-	Sa1KUyP3rTtmf7GCyJSTJvX4W0zsccVa7vEHk3Xw==
-Date: Thu, 30 Jul 2026 13:29:24 +0200
-From: Alexander Gordeev <agordeev@linux.ibm.com>
-To: Muhammad Usama Anjum <usama.anjum@arm.com>
-Cc: Jani Nikula <jani.nikula@linux.intel.com>,
-        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-        Rodrigo Vivi <rodrigo.vivi@intel.com>,
-        Tvrtko Ursulin <tursulin@ursulin.net>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Dimitri Sivanich <dimitri.sivanich@hpe.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
-        Helge Deller <deller@gmx.de>, Juergen Gross <jgross@suse.com>,
-        Stefano Stabellini <sstabellini@kernel.org>,
-        Muchun Song <muchun.song@linux.dev>,
-        Oscar Salvador <osalvador@suse.de>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        "Liam R. Howlett" <liam@infradead.org>,
-        Lorenzo Stoakes <ljs@kernel.org>, Will Deacon <will@kernel.org>,
-        "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
-        Nick Piggin <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
-        Andrey Ryabinin <ryabinin.a.a@gmail.com>,
-        David Hildenbrand <david@kernel.org>,
-        Pasha Tatashin <pasha.tatashin@soleen.com>,
-        Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
-        Uladzislau Rezki <urezki@gmail.com>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Masami Hiramatsu <mhiramat@kernel.org>,
-        Alexei Starovoitov <ast@kernel.org>,
-        Daniel Borkmann <daniel@iogearbox.net>,
-        Andrii Nakryiko <andrii@kernel.org>,
-        Eduard Zingerman <eddyz87@gmail.com>,
-        Kumar Kartikeya Dwivedi <memxor@gmail.com>,
-        Ingo Molnar <mingo@redhat.com>,
-        Arnaldo Carvalho de Melo <acme@kernel.org>,
-        Namhyung Kim <namhyung@kernel.org>, SJ Park <sj@kernel.org>,
-        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
-        Jan Kara <jack@suse.cz>, Jason Gunthorpe <jgg@ziepe.ca>,
-        Leon Romanovsky <leon@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>,
-        Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>,
-        Christoph Lameter <cl@gentwo.org>, Mike Rapoport <rppt@kernel.org>,
-        Johannes Weiner <hannes@cmpxchg.org>, ziy@nvidia.com, pfalcato@suse.de,
-        ryan.roberts@arm.com, linux-kernel@vger.kernel.org,
-        intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
-        linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org,
-        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
-        linux-arch@vger.kernel.org, kasan-dev@googlegroups.com,
-        linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
-        linux-perf-users@vger.kernel.org, damon@lists.linux.dev
-Subject: Re: [PATCH RFC 07/11] mm/mremap: use ptep_get() for the destination
- PTE
-Message-ID: <50dd77c0-b6cc-43e2-abd5-6d44a29b5597-agordeev@linux.ibm.com>
-References: <20260727164715.2866609-1-usama.anjum@arm.com>
- <20260727164715.2866609-8-usama.anjum@arm.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1785411106; x=1786015906; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=cAZumL/Aqc7BPMoLy5wLpf6cWCOxSKCjfqYITDKbJx8=;
+        b=DfeN6qotOMRR4qoXyfMVgip8KJSKz0XuRQpjyWgKoBqfuh4EKRsMPYyfzQJM1HXLEu
+         s5qWfrRgMPbtVAsS6fRQObjItaG43Hh3eOvMjYuGGH+QZ9qdclU90XwnrJvXXN4dRLpO
+         FD72m6wn4k0hjURTgBNkCkWiqXtjIFFGLV5U06+UwOfeP8JK30vYBVIUDW4ucXeDezxu
+         bkgkE1BlZUCdxRmyLQAarW0lgZxTNJTuG5z2orYmasj2tlHckLjF0kHEFcHRqwNuF6uQ
+         JX1OowovV+Z22gaykaEe9I8U4/YEQtC7x77oEygoSpiqpesDW2tiIgthgMrz+ua+ZWem
+         7P8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785411106; x=1786015906;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=cAZumL/Aqc7BPMoLy5wLpf6cWCOxSKCjfqYITDKbJx8=;
+        b=A/zMWk4q0NN0qVXk0jaZRevc4bnTKF/KGq+bN+1/hbZmNmDG7JiHsEEJQ4T44q1spf
+         FhaD80jWlffm9KKz3CSOMA8QvnXJarY4iG+Jm9+KmnXw96JKKgW2HMivWiyDFSUTq8cB
+         jFDjAhh8ORFnbdCus6QFgNxDG2QvCcNob4LWCpvSzJa+rWfo97LoA919SztvQiTYKSYr
+         JWZeUoEzX9M7jkC3+UODLeByqlaCBKufzpr628ixHeI1jZVcqTe/L3M0JSXdRfrfIX3+
+         62h4v5FVdhstNVbhRC9DqC1yl1hJlHCDV/XitUTZRlGP+PrQjrP/16UsjtOlHu9OGp5f
+         26oQ==
+X-Forwarded-Encrypted: i=1; AHgh+RpudzeZwCacmDb2kKPA2Si2ysiElIpY+oFxYnT6s6ykNn2NYEaLVBBX5QeT32fxa6iEP0v8+ZL6DBg=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxRFJijUmAepPKLaBklY1XeZbAgbfeRoAYW7Tl2jRwaEyRV8yOP
+	WD31Ts076trvnwDvwsXhaFDLZjY4WXMXuYhVotkc8Do31HSBiQEQDJbG
+X-Gm-Gg: AR+sD1346qCNXUKa+92mXs3x1Q4MQLAI8BznW/VdXbL5Eu9bM4V24ohJKV6Q878oNVK
+	VrFbqtXlnAqFbHDalI5z36EeNrGXi8Df4tR25bRsj89aUEdgem8cgAYIlvH1VY24DlK1BYec26m
+	8IvK7p/6TwcosynRi4bAWJElTf8TVtXKUkzvumsBAonshmjBC7a5rsbPEqABNPrVJENdZ8nfFAU
+	DzEZgllBZa1x0LMh2VBMP9bFi1gbitZ17rIF6ZAK9rSPljR2PmodjTlfpFat4p8wcTzj7vO1/4f
+	JpEbJ8zBhZu+W5sNlbqRXY6koaSEFMoqj8A3Ed27EMFik6fGA53TMY3pdGtDf0SvuGqII8DyTX5
+	G22cSnPMBuCr0KQsMEx5q8HAmlwGJEcfyhvOzBWDTzBXIbNlNrxLVee4VfWY6T1JI1F4/q49DSz
+	i9kbm6wZPkLpzrOxvx27/f6XjF6lbMG+jkZiDXF3iOZ515T/8PmPpoWJT4hXoj2/U0gWNEDuDUo
+	9LtfOLDukevn3VnEoR9wuucwUNDWoM0lubrL3UUjbk=
+X-Received: by 2002:a05:600c:4847:b0:495:5ed2:3756 with SMTP id 5b1f17b1804b1-49801f19b4emr15830665e9.16.1785411106062;
+        Thu, 30 Jul 2026 04:31:46 -0700 (PDT)
+Message-ID: <e7d1775d-3c91-43d1-b7a7-30600dcd23dd@gmail.com>
+Date: Thu, 30 Jul 2026 13:31:44 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260727164715.2866609-8-usama.anjum@arm.com>
-X-TM-AS-GCONF: 00
-X-Proofpoint-GUID: V4x9pQxNwD7ZNr5cxCV2-nvUuRwrRIk1
-X-Proofpoint-ORIG-GUID: V4x9pQxNwD7ZNr5cxCV2-nvUuRwrRIk1
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDA4NCBTYWx0ZWRfX0CQsHlonvlnH
- AF8GXubMVqrPdR5q2n+7Pi5IhSvnRClhhnIlGsM45pj9nS5tbh9v0OQ7ZDryymjJZRFKeKVHtnB
- 2WWJA774SAFONtJMa1V+ZFbhY/GluaeNfrJWfajh0aeP9y3KCj2N7q61IT/ZcqjPD8Ux1nEITrp
- lqWGD3CVkHnuWYvD92qt1C/5PMxyLshMO14JBLRDs++WhJByj0BHkXcsWNivsbVrtdJT6sVZwbe
- dzeDGI8gWjRNMh7nT2wbxj0bb+I7NqjrGKSVMqorBDA3g5atHjQfxeyyy1zH1imIK+WiEUWLOj2
- QQUIajHJgwMTOVFObZZxwcDbjinR/ict/W/9rkboCapJlq+7peril/x1TLLHoImfIa1fT9/ascw
- AjAYP3c7Nyd6rCK2zbdbMkwiwAS4FHnHFqkFfsWMAkhtZLdazd3x2FNYbpmW9FLWL90LlaufF1X
- g6HAqpq5Re1qYW6+N8A==
-X-Authority-Analysis: v=2.4 cv=SKFykuvH c=1 sm=1 tr=0 ts=6a6b3599 cx=c_pps
- a=aDMHemPKRhS1OARIsFnwRA==:117 a=aDMHemPKRhS1OARIsFnwRA==:17
- a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=iQ6ETzBq9ecOQQE5vZCe:22 a=VwQbUJbxAAAA:8
- a=VnNF1IyMAAAA:8 a=7CQSdrXTAAAA:8 a=nEq6qJbkOf9lyMFAmGoA:9 a=CjuIK1q_8ugA:10
- a=a-qgeE7W1pNrGK8U0ZQC:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDA4NCBTYWx0ZWRfX+toP0yvqLwe3
- 5MpM2JLPKFYcitSFhNnjhmLQzv/6TWy3jhaIxgQDqHwpJrQHSWwSOVkfjDxzt8TAMHiE7g64vAw
- 8VzOqfzQntIJPAir8I8JMkTRPXuGciY=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-30_03,2026-07-29_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 malwarescore=0 clxscore=1015 adultscore=0
- lowpriorityscore=0 bulkscore=0 impostorscore=0 phishscore=0 spamscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607300084
-X-purgate-ID: tlsNG-4011c0/1785411004-587CACFC-E7F0BC8C/0/0
-X-purgate-type: clean
-X-purgate-size: 1251
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 18/23] xen/riscv: implement IRQ routing for device
+ passthrough
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ xen-devel@lists.xenproject.org
+References: <cover.1784559209.git.oleksii.kurochko@gmail.com>
+ <c489a420b1c01c5312773c2e2b51f63d3babf855.1784559209.git.oleksii.kurochko@gmail.com>
+ <c64fc958-73bb-44ed-a3b2-dc368ce675ac@suse.com>
+ <6cebc63c-2f21-4ef8-ab10-e2ec62f887b7@gmail.com>
+ <534eef4c-7f5d-4565-97b8-e0cc3b3290c2@suse.com>
+ <5c5f04e2-56fb-42b5-b49c-faebac313c54@gmail.com>
+ <756041b3-14e2-4c1d-bbee-548ca3bea349@gmail.com>
+ <ea3417c9-bf6a-4b07-9a74-d9a767a87c9e@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <ea3417c9-bf6a-4b07-9a74-d9a767a87c9e@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c1860d/1785411106-D534D87B-575496D0/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 4148
 
-On Mon, Jul 27, 2026 at 05:46:58PM +0100, Muhammad Usama Anjum wrote:
-> move_ptes() directly dereferences new_ptep when checking that the
-> destination slot is empty. new_ptep now points to hw_pte_t table storage,
-> while pte_none() consumes a logical pte_t value.
-> 
-> Read the destination entry through the standard ptep_get() accessor before
-> passing the logical value to pte_none().
-> 
-> Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
-> ---
->  mm/mremap.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/mm/mremap.c b/mm/mremap.c
-> index d966ee8248b6b..ecb90ccee6fdd 100644
-> --- a/mm/mremap.c
-> +++ b/mm/mremap.c
-> @@ -264,7 +264,7 @@ static int move_ptes(struct pagetable_move_control *pmc,
->  
->  	for (; old_addr < old_end; old_ptep += nr_ptes, old_addr += nr_ptes * PAGE_SIZE,
->  		new_ptep += nr_ptes, new_addr += nr_ptes * PAGE_SIZE) {
-> -		VM_WARN_ON_ONCE(!pte_none(*new_ptep));
-> +		VM_WARN_ON_ONCE(!pte_none(ptep_get(new_ptep)));
 
-Same as the previous patch, except that I did it already:
-https://lore.kernel.org/linux-mm/20260720141633.501799-1-agordeev@linux.ibm.com/
 
->  
->  		nr_ptes = 1;
->  		max_nr_ptes = (old_end - old_addr) >> PAGE_SHIFT;
-> -- 
-> 2.47.3
+On 7/30/26 9:18 AM, Jan Beulich wrote:
+> On 29.07.2026 17:23, Oleksii Kurochko wrote:
+>>
+>>
+>> On 7/29/26 5:02 PM, Oleksii Kurochko wrote:
+>>>
+>>>
+>>> On 7/29/26 4:15 PM, Jan Beulich wrote:
+>>>> On 29.07.2026 13:59, Oleksii Kurochko wrote:
+>>>>> On 7/23/26 3:30 PM, Jan Beulich wrote:
+>>>>>> On 20.07.2026 17:59, Oleksii Kurochko wrote:
+>>>>>>> +/* Route an IRQ to a specific guest */
+>>>>>>> +int route_irq_to_guest(struct domain *d, unsigned int virq,
+>>>>>>> +                       unsigned int irq, const char *devname)
+>>>>>>> +{
+>>>>>>> +    struct irqaction *action;
+>>>>>>> +    struct irq_guest *info;
+>>>>>>> +    struct irq_desc *desc;
+>>>>>>> +    unsigned long flags;
+>>>>>>> +    int retval = 0;
+>>>>>>> +
+>>>>>>> +    if ( d->is_dying )
+>>>>>>> +        return -EINVAL;
+>>>>>>> +
+>>>>>>> +    desc = irq_to_desc(irq);
+>>>>>>> +
+>>>>>>> +    /*
+>>>>>>> +     * release_irq() frees this action via xvfree(), relying on
+>>>>>>> action
+>>>>>>> +     * being the first member of struct irq_guest so that &info-
+>>>>>>>> action
+>>>>>>> +     * coincides with info itself. Guard the layout so a future field
+>>>>>>> +     * reorder can't silently turn that into a free() of a mid-
+>>>>>>> allocation
+>>>>>>> +     * pointer.
+>>>>>>> +     */
+>>>>>>> +    BUILD_BUG_ON(offsetof(struct irq_guest, action) != 0);
+>>>>>>
+>>>>>> Can't release_irq() simply use container_of()? One way or another it
+>>>>>> feels
+>>>>>> like you're painting yourself into a particular corner ...
+>>>>>
+>>>>> If it isn't the best option then it is needed to follow they way we had
+>>>>> before:
+>>>>
+>>>> I don't understand why you think you need to go back.
+>>>
+>>> Because, based on your reply—specifically, "One way or another it feels
+>>> like you're painting yourself into a particular corner..." — it seems
+>>> that even if I replaced BUILD_BUG_ON() with container_of() in
+>>> release_irq(), you would still consider it a bad solution. Did I
+>>> misunderstand your point?
+>>
+>> One more thing: I'm not really sure it's safe to do the following in
+>> release_irq():
+>>
+>> if ( action->free_on_release )
+>>       xvfree(container_of(action, struct irq_guest, action));
+>>
+>> release_irq() is a generic API, but this kind of allocation is only
+>> needed for guest IRQs. Wouldn't it be better to set:
+>>
+>> action->free_on_release = false;
+>>
+>> for guest IRQs, and then free the memory in release_guest_irq() after
+>> the call to release_irq()?
 > 
+> Perhaps.
+> 
+>> Wouldn't that be a better approach than calling
+>> `xvfree(container_of(...))` from within the generic release_irq()?
+> 
+> Perhaps.
+> 
+> What I'd really like to see you do is come up with an approach that is
+> both self-consistent and future-proof. With the latter aspect meaning that
+> it should be (reasonably) easy to identify places that need changing if
+> e.g. the "->free_on_release is only ever one value" property goes away.
+> 
+
+An approach with action->free_on_release = false; together with 
+vfree(info) in release_guest_irq() seems to be the best option. Since 
+action is no longer allocated dynamically, it should not be freed 
+through free_on_release, so setting it to false makes that explicit. 
+Additionally, guest IRQs have extra state (struct irq_guest), and it is 
+the responsibility of release_guest_irq() to clean it up.
+
+This also keeps the semantics of ->free_on_release consistent for Xen 
+IRQs. If it is set to true, release_irq() is responsible for freeing 
+struct irq_action; if it is false, release_irq() should not free it.
+
+For guest interrupts, release_irq() should not free anything because 
+struct irq_action is embedded in struct irq_guest, which is freed by 
+release_guest_irq(). If, in the future, guest interrupts need 
+->free_on_release = true, the only required change would be to allocate 
+struct irq_action dynamically and set ->free_on_release = true. All 
+other is already covered. That makes the design, in my opinion, 
+self-consistent and future-proof.
+
+~ Oleksii
 
