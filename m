@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A3B2C531D0
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2026 06:42:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1377177.1623376 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA735C54FDF
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2026 07:18:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1377200.1623385 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpKTA-00015H-HZ; Thu, 30 Jul 2026 06:42:16 +0000
+	id 1wpL2D-0007I3-6c; Thu, 30 Jul 2026 07:18:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1377177.1623376; Thu, 30 Jul 2026 06:42:16 +0000
+Received: by outflank-mailman (output) from mailman id 1377200.1623385; Thu, 30 Jul 2026 07:18:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpKTA-00015A-EI; Thu, 30 Jul 2026 06:42:16 +0000
-Received: by outflank-mailman (input) for mailman id 1377177;
- Thu, 30 Jul 2026 06:42:15 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wpL2D-0007Hv-3E; Thu, 30 Jul 2026 07:18:29 +0000
+Received: by outflank-mailman (input) for mailman id 1377200;
+ Thu, 30 Jul 2026 07:18:27 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wpKT9-00014T-8b
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 06:42:15 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wpL2B-0007Hn-3V
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 07:18:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wpKT8-00GRxE-10
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 08:42:14 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wpL27-007xx4-Sy
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 09:18:23 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a6af239-e002-0a2a0a5209dd-0a2a450a9480-26
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 08:42:14 +0200
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a6afab1-e002-0a2a0a5209dd-0a2a450591b6-22
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 09:18:23 +0200
+Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a6af245-f2d2-0a2a450a0019-d155802dbc63-3
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 08:42:13 +0200
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-4921eed3fa2so11305875e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jul 2026 23:42:13 -0700 (PDT)
+ id 6a6afabf-4cb1-0a2a45050019-d155dd36edbf-3
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 09:18:23 +0200
+Received: by mail-wr1-f54.google.com with SMTP id
+ ffacd0b85a97d-47ddf7b09e5so1855448f8f.1
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 00:18:23 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-498012168e7sm35019385e9.15.2026.07.29.23.42.12
+ ffacd0b85a97d-47fc8941717sm3719113f8f.34.2026.07.30.00.18.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 Jul 2026 23:42:13 -0700 (PDT)
+ Thu, 30 Jul 2026 00:18:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,55 +55,64 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785393733; x=1785998533; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785395903; x=1786000703; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=DTHw4ouoEYc3Bsw7nfpsiEzD5mR19Y0mgVjpPmSqEns=;
-        b=KbosETfGRjc+Vt+tntAknTVwS8cJ4u8fl2iHcghB4OlGaZ1oZJasafgBbknFhTf6u+
-         Dq6q/AwH1OxjobRdvUzlkiPxtQDrXKTQt2cC1h9kdF1+PkcwMTLVDA9rAbRfKQEswYXQ
-         /rPowj2OmYBwFwWM855rdhCakSKMgXDj1kjOxk8tJ8w/Xgn4w+dcVTHwjingGvhR5VDs
-         pumzO4zNQkB+Y9Iz13WubFWNu0OjhlbxaBxDXM6IjbSqaqL2EF8gAB1IfOvAmDiMOT57
-         g5qMlORoj39sWRZ/Gax4UD4ku6bPmUBFds2tjIHOG95RSmEmX5kP0Fbbjjia40ldt2H/
-         Y4mw==
+        bh=58tasoTcyOoWqv+JenkfyeG0hVZf1YkGYryOdAuwfL0=;
+        b=KV/U8kETiDHSAwn+w5vnKXCOCWOYfmQm/mUVfBEt5rDQ00j4P19C3qNlonQIyi+FVh
+         EiBx4X0DhhwMBFwdYBpjlO+Bcd27XTGx+cQdN6/WvAaanphmJ8yP7m8dlyLFGeR4qN94
+         DTxlhnuLefo7WuUVwjIhIwVf4pA/DEgTKsHgHCNAQagCJT+mm0seLSTxwDl97iAnL0JT
+         pZ5oid3/D8Sz0c0YDKYZuF1KqcxrBySPi2g73mxEPGYV9tN5AKF9BgRzpCdhOgakiCw2
+         XOlO/DP9JidvKQ5wWiEwV9fpW7KQM//X09L7yCf1m/sEySKehrLfGQsVZL+gNCor2fwK
+         iyQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785393733; x=1785998533;
+        d=1e100.net; s=20251104; t=1785395903; x=1786000703;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=DTHw4ouoEYc3Bsw7nfpsiEzD5mR19Y0mgVjpPmSqEns=;
-        b=j6fn0/jIe6bU030b2iDHYhyZyPb0fTU07US9llBi19ngQC2GgukWsz70kcJMJxWicN
-         8abXF/aLW/evGr5E3f5fqUVghVjI7Rs4cOOeci/joD9Oryth5o1GgMuvI2H0Q02lK8b2
-         F0MjAtrHMAUNrf0A8Ov91u58qWQNPnr06uhRkwI1t1/vskRJ7XKRHSCzsj7192dXaqiY
-         w6X+qEaTj92qbT2jHmlzEtVqVXuIXl6sw8bqFLX4JZnuXEC/D1tJS2egtZIQATVqj8nS
-         ec/U8ppuDVK6Dsk9DenQZfqJzFZsg93bn/tiu4ojNDM45WP/WrMghvtjJFhqz8sbpFqf
-         t2hg==
-X-Forwarded-Encrypted: i=1; AHgh+RqDZL6H1JknlTNLRA6bdwl1TNMPqIxFGuV6uzu4eHzS11EcRVYU8z3p1miKQO7JS03PM75YpqKuPzc=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx+pdmKyanNroTwHbYOx2+55+5pg63pwnVTFEko3Dl5lYz/YV3H
-	Ho+Jkfq5pPIofDh5Cl20vH0/z+TTcmoMAesh+706zRpU6A/Ge1ztJ7KENOfmZ9qrmw==
-X-Gm-Gg: AR+sD13fkVZ5dyJBZ0lI91dr3shiNak/PGOQFrsANv0htwKApc0N80vMI0xBbrl+FXn
-	eem2gf2PibW9UUB7DEyA5VlVkkfozKgjeQsRwgEuvOXgdQxE5Eq9UA0sSL74eJg10Q0NdPjMmXL
-	RmtCd4t7MNzuz0xF/p1Vw/zL4LDNG5GjEmPAQy1811E0m/mH/KzmF7GGnscV4fUDdJgsjPVcOO6
-	AjtFWNJ6DUHjjnp8l+DnCceL1/pszRJ7n9SmeHTBJb0yJTbfTpLfaZcmc8UBmfbO+cmBmrJMIDA
-	FWtdmN/6ZMFLJrOTFQqMY/sHjr6eLiSRSxbwwZwdaaxMg7YEfafr6tK5K/pdyra1wN567QCt3YA
-	ZiQ/WC5CYB75mv+QjxspaFR7T3pMyjjIDqNJmNDzTovv+082Fe2JLUHqm4yyuq1Fwm+5CKVKoMB
-	SL6rG+7YNDfsvlcC5JsWCXyMy1Zksp4l+VOgKbK7saqwwF/AarN1e6ntHmpu6Lo0MK0j8SgoBav
-	qoK/6wV9axtzngRpdC8Br4KZqZNUXebGkQsi/AFJKLBYecRrtpF
-X-Received: by 2002:a7b:cc14:0:b0:495:518a:d95a with SMTP id 5b1f17b1804b1-49800eac4b8mr9868055e9.29.1785393733525;
-        Wed, 29 Jul 2026 23:42:13 -0700 (PDT)
-Message-ID: <98911b08-cb5b-4211-949f-f800ecb48ffa@suse.com>
-Date: Thu, 30 Jul 2026 08:42:11 +0200
+        bh=58tasoTcyOoWqv+JenkfyeG0hVZf1YkGYryOdAuwfL0=;
+        b=YSmn++6wodyOAJgqxs3KIk+pqWhBfsXhqsdlL5F6QPdUm+NX5n+JAC/myQ4sfm9Niy
+         UAL7oXnPchSxd3Fwx/V5kBNTEXTYhdw6Yvb3pgsokrJt6tlA+eg+1TAA6Jb9elyLdkRF
+         N9oNVCjUVOU5a+xPX6oi2RzV3WXaKYvx+a9Jtwgh1Plcs6dpG74uiE18xJH/0ibQCwTQ
+         DsqTakIYK3R34uwxCe2tgrHgjaZs64KttaQAlbnj1ViYSOmVpSqHUM5kZY/c/ueDh746
+         14fhOkHSuNYIIJYMgs0L4SpiQCx2Amq5fc95m38YGQ4FvhzzcqZnAHsPRFt+S24XdVzO
+         umJw==
+X-Forwarded-Encrypted: i=1; AHgh+Ro5JygGwfqkDyQB+gbD1PumuYBtYv1osoUy4Q+IDcCeLNE/WkDT6aXMlfN6kAlPk7MGuwJ1LVyUCtM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwXUz3ZGvjltKXQEA/kyZMSvd+SrVpZffRm9tEO/vb+MXDgD06r
+	30sFj/pUNQHwWybndc9W4J5qREciSTp5AALESrbboUAQBUyrvsxbfVvmeYLJnrhL7g==
+X-Gm-Gg: AR+sD103TJEPE+nSA7RCihD8PpidZ6194HNqN6uDOwSuZOTWbj43ByqZ0eqReW0LEPs
+	HyYqBCUryaFcYzGvgsRGxx+WjOx/CE7fwS5jaMlLvCwIxw8+EbgZvGhfE74MQX/qZWcQBNHniZ2
+	X2A38KEg9PFm2UTL0fynZt7rhzPojLWbXXEMZJaLXvjXjhIR4BXTxKVT1xt1vYpx2jQZppACOKw
+	GUMmcBhRY7WHjEdWiF0Z73apY386o2RSia7DbzxR1OOAnmpeLQ4XbeTeBMlgG/1ktguRGRQeJEt
+	urcfFACkg046EJLYjkfBTuuwl7yc+UFN5dyCWn3qJfU3cMTodk6az7ytFC+LVRk6rY93RsLYB/g
+	dL/pCHulEAVn3De/ar2uqg6jUZAh+3gEt7L9NG+ZHLxlbv5XKNiatOBYi90oyi0mDPa/NcsXgEb
+	XEkCYAIEs8YmZzVC/dqd3KPeDfRqs39+9U8Iq/OEsJTNQeYp/P/FKedwVAuzml7umkKoMC6hsX/
+	/2qgK0E+acs3lIPqwOgY2Ey3CETcprlzdp5cwWMUelAOo3bGdy70FUR0ct4EqLZ
+X-Received: by 2002:a05:6000:2683:b0:47f:9404:80d7 with SMTP id ffacd0b85a97d-47fc820d689mr1647986f8f.46.1785395903187;
+        Thu, 30 Jul 2026 00:18:23 -0700 (PDT)
+Message-ID: <ea3417c9-bf6a-4b07-9a74-d9a767a87c9e@suse.com>
+Date: Thu, 30 Jul 2026 09:18:21 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] keyhandler: add handler to show Xen command line
-To: dmukhin@ford.com
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, julien@xen.org,
- michal.orzel@amd.com, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, sstabellini@kernel.org,
+Subject: Re: [PATCH v6 18/23] xen/riscv: implement IRQ routing for device
+ passthrough
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ "Daniel P. Smith" <dpsmith@apertussolutions.com>,
  xen-devel@lists.xenproject.org
-References: <20260730061459.2702672-2-dmukhin@ford.com>
+References: <cover.1784559209.git.oleksii.kurochko@gmail.com>
+ <c489a420b1c01c5312773c2e2b51f63d3babf855.1784559209.git.oleksii.kurochko@gmail.com>
+ <c64fc958-73bb-44ed-a3b2-dc368ce675ac@suse.com>
+ <6cebc63c-2f21-4ef8-ab10-e2ec62f887b7@gmail.com>
+ <534eef4c-7f5d-4565-97b8-e0cc3b3290c2@suse.com>
+ <5c5f04e2-56fb-42b5-b49c-faebac313c54@gmail.com>
+ <756041b3-14e2-4c1d-bbee-548ca3bea349@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,99 +138,90 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260730061459.2702672-2-dmukhin@ford.com>
+In-Reply-To: <756041b3-14e2-4c1d-bbee-548ca3bea349@gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1785393733-4ABD8CFC-BD51A037/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c201ff/1785395903-F54AC2A1-19DF21A1/0/0
 X-purgate-type: clean
-X-purgate-size: 3511
+X-purgate-size: 2944
 
-On 30.07.2026 08:15, dmukhin@ford.com wrote:
-> From: Denis Mukhin <dmukhin@ford.com> 
-
-First, you want to update Roger's email address that you use. This is now the
-2nd patch that you sent to his old address, and the latest after sending the 1st
-you should have noticed.
-
-> Currently there's no way to print Xen command line on the emergency console
-> for debugging purposes.
+On 29.07.2026 17:23, Oleksii Kurochko wrote:
 > 
-> Add new keyhander 'C' to add (saved) command line printout for debugging
-> the system.
+> 
+> On 7/29/26 5:02 PM, Oleksii Kurochko wrote:
+>>
+>>
+>> On 7/29/26 4:15 PM, Jan Beulich wrote:
+>>> On 29.07.2026 13:59, Oleksii Kurochko wrote:
+>>>> On 7/23/26 3:30 PM, Jan Beulich wrote:
+>>>>> On 20.07.2026 17:59, Oleksii Kurochko wrote:
+>>>>>> +/* Route an IRQ to a specific guest */
+>>>>>> +int route_irq_to_guest(struct domain *d, unsigned int virq,
+>>>>>> +                       unsigned int irq, const char *devname)
+>>>>>> +{
+>>>>>> +    struct irqaction *action;
+>>>>>> +    struct irq_guest *info;
+>>>>>> +    struct irq_desc *desc;
+>>>>>> +    unsigned long flags;
+>>>>>> +    int retval = 0;
+>>>>>> +
+>>>>>> +    if ( d->is_dying )
+>>>>>> +        return -EINVAL;
+>>>>>> +
+>>>>>> +    desc = irq_to_desc(irq);
+>>>>>> +
+>>>>>> +    /*
+>>>>>> +     * release_irq() frees this action via xvfree(), relying on 
+>>>>>> action
+>>>>>> +     * being the first member of struct irq_guest so that &info- 
+>>>>>>> action
+>>>>>> +     * coincides with info itself. Guard the layout so a future field
+>>>>>> +     * reorder can't silently turn that into a free() of a mid- 
+>>>>>> allocation
+>>>>>> +     * pointer.
+>>>>>> +     */
+>>>>>> +    BUILD_BUG_ON(offsetof(struct irq_guest, action) != 0);
+>>>>>
+>>>>> Can't release_irq() simply use container_of()? One way or another it 
+>>>>> feels
+>>>>> like you're painting yourself into a particular corner ...
+>>>>
+>>>> If it isn't the best option then it is needed to follow they way we had
+>>>> before:
+>>>
+>>> I don't understand why you think you need to go back.
+>>
+>> Because, based on your reply—specifically, "One way or another it feels 
+>> like you're painting yourself into a particular corner..." — it seems 
+>> that even if I replaced BUILD_BUG_ON() with container_of() in 
+>> release_irq(), you would still consider it a bad solution. Did I 
+>> misunderstand your point?
+> 
+> One more thing: I'm not really sure it's safe to do the following in 
+> release_irq():
+> 
+> if ( action->free_on_release )
+>      xvfree(container_of(action, struct irq_guest, action));
+> 
+> release_irq() is a generic API, but this kind of allocation is only 
+> needed for guest IRQs. Wouldn't it be better to set:
+> 
+> action->free_on_release = false;
+> 
+> for guest IRQs, and then free the memory in release_guest_irq() after 
+> the call to release_irq()?
 
-If others think spending a precious character on this, I think I won't attempt
-to veto this, but I'm definitely not going to ack such. More importantly though
-you shouldn't be using a character that's already in use.
+Perhaps.
 
-Nevertheless a few comments below.
+> Wouldn't that be a better approach than calling 
+> `xvfree(container_of(...))` from within the generic release_irq()?
 
-> Also, fix indentation for KEYHANDLER() entries in 'keyhandler' array.
+Perhaps.
 
-"fix" as in "break"? Patch context alone doesn't make clear at all why you'd
-do this. Looking at the full source I think I can see why you think something
-may be wrong there, but I don't think it is - the earlier block outside of the
-#ifdef-s is different in this regard, imo.
-
-> --- a/xen/common/kernel.c
-> +++ b/xen/common/kernel.c
-> @@ -232,6 +232,11 @@ void __init cmdline_parse(const char *cmdline)
->  #endif
->  }
->  
-> +const char *cmdline_get(void)
-> +{
-> +    return saved_cmdline;
-> +}
-
-To accompany both this use and the pre-existing ones, perhaps it's time to
-mark saved_cmdline[] __ro_after_init (in a separate patch preferably)?
-
-> --- a/xen/common/keyhandler.c
-> +++ b/xen/common/keyhandler.c
-> @@ -28,7 +28,7 @@ static unsigned char keypress_key;
->  static bool alt_key_handling;
->  
->  static keyhandler_fn_t cf_check show_handlers, cf_check dump_hwdom_registers,
-> -    cf_check dump_domains, cf_check read_clocks;
-> +    cf_check dump_domains, cf_check read_clocks, show_cmdline;
->  static irq_keyhandler_fn_t cf_check do_toggle_alt_key, cf_check dump_registers,
->      cf_check reboot_machine, cf_check run_all_keyhandlers;
->  
-> @@ -60,15 +60,17 @@ static struct keyhandler {
->      IRQ_KEYHANDLER('*', run_all_keyhandlers, "print all diagnostics", 0),
->  
->  #ifdef CONFIG_PERF_COUNTERS
-> -    KEYHANDLER('p', perfc_printall, "print performance counters", 1),
-> -    KEYHANDLER('P', perfc_reset, "reset performance counters", 0),
-> +        KEYHANDLER('p', perfc_printall, "print performance counters", 1),
-> +        KEYHANDLER('P', perfc_reset, "reset performance counters", 0),
->  #endif
->  
->  #ifdef CONFIG_DEBUG_LOCK_PROFILE
-> -    KEYHANDLER('l', spinlock_profile_printall, "print lock profile info", 1),
-> -    KEYHANDLER('L', spinlock_profile_reset, "reset lock profile info", 0),
-> +        KEYHANDLER('l', spinlock_profile_printall, "print lock profile info", 1),
-> +        KEYHANDLER('L', spinlock_profile_reset, "reset lock profile info", 0),
->  #endif
->  
-> +        KEYHANDLER('C', show_cmdline, "show saved command line", 0),
-
-Why not insert at the appropriate slot in the earlier block outside of any
-#ifdef?
-
-As to the help text - in how far is "saved" relevant there?
-
-> @@ -512,6 +514,12 @@ static void cf_check do_toggle_alt_key(unsigned char key, bool unused)
->             alt_key_handling ? "alternative" : "normal");
->  }
->  
-> +static void cf_check show_cmdline(unsigned char key)
-> +{
-> +    printk("'%c' pressed -> showing saved command line\n", key);
-> +    printk("%s\n", cmdline_get());
-> +}
-
-If this lived in kernel.c, the new cmdline_get() wouldn't be needed at all.
+What I'd really like to see you do is come up with an approach that is
+both self-consistent and future-proof. With the latter aspect meaning that
+it should be (reasonably) easy to identify places that need changing if
+e.g. the "->free_on_release is only ever one value" property goes away.
 
 Jan
 
