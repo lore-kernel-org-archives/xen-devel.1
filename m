@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 470C0C55162
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2026 14:40:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1377929.1623644 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BC39C55164
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2026 14:58:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1377964.1623652 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpRvV-0002wf-C0; Thu, 30 Jul 2026 14:40:01 +0000
+	id 1wpSCv-0006Tc-Rl; Thu, 30 Jul 2026 14:58:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1377929.1623644; Thu, 30 Jul 2026 14:40:01 +0000
+Received: by outflank-mailman (output) from mailman id 1377964.1623652; Thu, 30 Jul 2026 14:58:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpRvV-0002wY-7w; Thu, 30 Jul 2026 14:40:01 +0000
-Received: by outflank-mailman (input) for mailman id 1377929;
- Thu, 30 Jul 2026 14:39:59 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wpSCv-0006TV-OM; Thu, 30 Jul 2026 14:58:01 +0000
+Received: by outflank-mailman (input) for mailman id 1377964;
+ Thu, 30 Jul 2026 14:58:00 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wpRvT-0002wQ-BM
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 14:39:59 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wpSCu-0006TP-Rf
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 14:58:00 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wpRvS-000Jnn-L0
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 16:39:58 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wpSCu-000N1A-84
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 16:58:00 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a6b622b-5cb7-0a2a0a5109dd-0a2a450b9b70-42
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 16:39:58 +0200
-Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a6b666b-2eae-0a2a0a5409dd-0a2a45068766-28
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 16:58:00 +0200
+Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a6b623e-b7e8-0a2a450b0019-d155802fa47e-3
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 16:39:58 +0200
-Received: by mail-wm1-f47.google.com with SMTP id
- 5b1f17b1804b1-493f6de72faso6441465e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 07:39:58 -0700 (PDT)
+ id 6a6b6677-195a-0a2a45060019-d155dd30ed96-3
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 16:58:00 +0200
+Received: by mail-wr1-f48.google.com with SMTP id
+ ffacd0b85a97d-47ddf7b09e5so2309453f8f.1
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 07:58:00 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-498011e5febsm61548765e9.3.2026.07.30.07.39.56
+ ffacd0b85a97d-47fc89347bfsm5890152f8f.28.2026.07.30.07.57.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Jul 2026 07:39:56 -0700 (PDT)
+ Thu, 30 Jul 2026 07:57:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,58 +53,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Cc:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785422398; x=1786027198; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=KWY4T4iy+unDopf0OnXyWJbGCaInsS7fGYaAHmEqU9Y=;
-        b=LUcjjhAIe0Uj2jtrAI+JibI0gQRcMDBdm7MlvwHtZGsIJH6wu0rb5wHTjK+lniVpkd
-         LHCoRv5HWtfdPVsirqQP7aQGZoSXdwd7gN7erV5F6EYeUqkKQRpWr4CQh5/Gj2xOhres
-         DNMxkHPsy5dcMtxyC8SsElEq6nXcDMNP3mg/w2VMTVfbeDiWxp1s6+z2W932bszJIEc4
-         +l0KS+9OZMMkgth8rPDKv26l2LzqZ08WwPpe8ukVJm/s2l0Y6b+XemQsW6mhm2vUjPG+
-         7aP8Cv9m7nq5bPWu/So40L82oJP1lSvocReidod99r7vtiw3ZG5S9016av/u2vFQnLoi
-         3usg==
+        d=suse.com; s=google; t=1785423479; x=1786028279; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=Kbr4KlJ4X4RLyJuddVEthaAtCz+hy6m4xdECCXkOzhg=;
+        b=ItMZf8VDorylKSvF8LSv5u2xo6eK8xncEv2GJkBG9IfMBkhbQbF7ShlLAcmT/m1tku
+         NFt/KoRkyr5MyaBZLjtWEdiyavd5raEPrU8nbP/T3/hqK8S2p/9/bvIxJ4oIOoQ5Waj4
+         Bvmd4vyvYtr2CENwNekpBs2arjOQ/0PsQ+RaU9znTXd8mE8lXsiNJseGe9vQ3SEQK4iz
+         YxvWEQWKKOywacvdiMAD1i19pMX05Lz1jFZFwTGeRd+oCXGpohZRzUrbhndJXuboB1o4
+         C1bnd3JxaVDS53L/FMCHXHLRRk+JAG+mVmPTUCGbT0mLY8bmjKhFJg6b1rknbNUbXvcR
+         sL8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785422398; x=1786027198;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=KWY4T4iy+unDopf0OnXyWJbGCaInsS7fGYaAHmEqU9Y=;
-        b=FOgbyav8iOqe6sGsW/eOZzFGNjtEIKS93RG6vZOHMfL0aTIWYBH9P0tvlprm/dCrCJ
-         cQ7X8SmZCGzCKW+kReKptJGtA1G0H+MG+IQtcFnlmOb/QO0fBEGmUITc046ysDtsfpVT
-         W3WCLogRY845D5NcM3/hdhIeGVl4zIGGDEYDhf8b4F3Ir+BLOfRzNVJY8PbrXaYGJRk4
-         55EP9X2wz9HQHOLqGb/SS3YQ2s2HcZ5auehQFqllA1HSiCr0EfjFyo0JNpgQrzWJBIK+
-         +D60p+rHcF5jylz5RJ140ACnVDcpdjrO80ijtGa9ENLPf702veQ+V6viRhDQTd86lO4Q
-         m/Xw==
-X-Gm-Message-State: AOJu0Yxj8BhKusTxA8vW802GheFhkoqF4sJIXpwX2/qNbYFp+epMgrqi
-	0LJ0HhJ2i6KzhpTxE3qTUfSE5vHdJdeNXiepf4jqv5y52Dh+6Eg2IIrgpuJIW2b96iuSqgp8+v6
-	dexvhXw==
-X-Gm-Gg: AR+sD10JRVjYClIO8qK3/LM9jaSzRMX8jUwWXu9vctKjcIu0f1ueWZE7YEq6ySris0+
-	G/x5OczGNG+ylm7tleanpcX8n8AB0coALM6ji/f12KWox4pfFD8e1gxcij6/pOCzCPsWUC1J18H
-	h2vpkYf04xL9X12CuvoLanJtKoECP+nT/XXRQDcWbaTyC9JMjZs9C5V32DiCzh32MLtWm/fF3Lg
-	NAIYbzfdWYYL4RsEwrpRA4gvHkkrIQAhdKVBFxmdrcr1WfDQQnj7auGc291eFluD7+kxOdmVsaU
-	IcMjlV/xR1sJekrHoquXsNya6bJClsgQ9LOmKXx60wCKr97g0z3/O/UYFzZniKvQfnus1Z4A47V
-	WF160bSRmmnZwfQenfOEnjI8/W27qRHyMcUsT/DZRHVCAwhUZ7W927IK9QOiLDjGRbW27xzgdnF
-	5I7YyrtsVDF0uvO+cRK/wKaSvhTvBOT/uzVMAgcpjmt9g6sqJJpk01K1nDirqZEZlRqGm5c4KB/
-	kEMkQU74Imq70jKbuV9jJpDjU0Zn5BE2+bYuL/iERRf6JL5CuMf
-X-Received: by 2002:a05:600c:4688:b0:48f:e230:29f5 with SMTP id 5b1f17b1804b1-49804d18413mr8041295e9.16.1785422397042;
-        Thu, 30 Jul 2026 07:39:57 -0700 (PDT)
-Message-ID: <c2c01987-1ccd-4f14-8300-f637e816cbb7@suse.com>
-Date: Thu, 30 Jul 2026 16:39:55 +0200
+        d=1e100.net; s=20251104; t=1785423479; x=1786028279;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Kbr4KlJ4X4RLyJuddVEthaAtCz+hy6m4xdECCXkOzhg=;
+        b=GXkzMRHoqWx1b2okRDvKyRUaXiPtdI36ceHE1wf6pB2byLha08PIBuFTp9BMb0Y85f
+         SXOjglNgJNsnR9GUuojIR/QIkQnKdnpFfGkUjUkOrBFYe7qrrvyU7QRMK0Xkiny+lCFY
+         0H23TXeEuGYvjo9RQ3mhnXAn0WMw8p5kQV13eLlKTQuPTYc6zuBYpTk+XBFWloUCGSTw
+         w4jpAl/tANkplHh6tTW4NHgrCn3rhlWmt4Ued6vzhBCF8gyMy/GbXgRwLE2HW8koNz2m
+         arz4pKqBNCjgX74x9raYf7V61EC+ZF7aJV/hfbROnq7KZsZUGFqg13MawN6i/697n9o+
+         bVog==
+X-Gm-Message-State: AOJu0YxeLEL8HBlg5rmZcZ8Lj0nRDv7rfOVT7sHyn94JMY+0T0a+0oeg
+	PYgZxKGmQGNVt2gkPVvmaNbFWcGow+RyB2o6SXY+KriGPs0UH42OjoWkqiLHgRAkE6p6MipDyTR
+	FqErHxw==
+X-Gm-Gg: AR+sD120Al/m8Av1whSKFNd/c2Fqo14tnDRMVZJyOl75wiWpkLlv9xtvmUODANc2/+1
+	rQOwUd5MNultzY/9BeXwffjxtXQ1xLEZHMN/gReWQpU5xQZXjT421kPHbFQbfvjAC+apqJrdyKk
+	stkgYfPTJKwI4+fn5ZvKnT798R5G4EBgPMkGHykAWrmkWyThzjbvSIrvTQ38k3uhR+A+eiJZHCJ
+	UhiXQlOYY+iPOpmJSiwC8AHWl8Pvc5NXuk948Zw4TCwfgc29C1mpmNEwj6SQul5wk5clq85xWuv
+	ktA3dGIO6BXaGV4xHPn3iRnXxyb8TaDrccjdXFA5zoAdchiCsCjujBkYzO+/OVIHybwhiNqnlzq
+	fLk/7PdW8m32OlrnKXFKaqneirW+3l0OHuUvZVKlXqMk+OOOpoCx7GnLRFgLwzAY/jpEYljfrGP
+	/DhDpdS+MCHkL+MdscgFZlornuCUriEIYP4BOZC9nzyYOaauJktUNM2ecOVPiutlRwdLwDxOBH5
+	9qejQw2+YKCUkySeNHPmE+yW0uQk9rGTNLYZ1CUlA7a/Zwo9cN0XhWxFpK6K08=
+X-Received: by 2002:a05:6000:1865:b0:47f:9a5c:d2dd with SMTP id ffacd0b85a97d-47fc820d567mr4191056f8f.40.1785423479574;
+        Thu, 30 Jul 2026 07:57:59 -0700 (PDT)
+Message-ID: <0ddff6c4-7ec7-41a9-9417-687ca16aaafd@suse.com>
+Date: Thu, 30 Jul 2026 16:57:58 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: New Defects reported by Coverity Scan for XenProject
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-References: <6a6b266559168_35fb2bc1be9079a4147ab@prd-scan-dashboard-0.mail>
- <d0ff411c-3bd9-4306-8782-ac63f7b202da@suse.com>
- <ab6d9fe6-e239-49ac-9bcf-79779cf63420@citrix.com>
 Content-Language: en-US
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH] Xen/gnttab: adjust two uses of sizeof()
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -128,139 +126,37 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <ab6d9fe6-e239-49ac-9bcf-79779cf63420@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1785422398-1A4DB9EA-4EA54AB5/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-16d1c6/1785423480-FC20077B-ABD52E46/0/0
 X-purgate-type: clean
-X-purgate-size: 6245
+X-purgate-size: 1040
 
-On 30.07.2026 15:21, Andrew Cooper wrote:
-> On 30/07/2026 2:14 pm, Jan Beulich wrote:
->> On 30.07.2026 12:24, scan-admin@coverity.com wrote:
->>> ** CID 1697485:       Control flow issues  (DEADCODE)
->>> /xen/arch/x86/hvm/hvm.c: 2436           in hvm_set_cr3()
->>>
->>>
->>> _____________________________________________________________________________________________
->>> *** CID 1697485:         Control flow issues  (DEADCODE)
->>> /xen/arch/x86/hvm/hvm.c: 2436             in hvm_set_cr3()
->>> 2430                 curr->arch.vm_event->write_data.cr3_noflush = noflush;
->>> 2431     
->>> 2432                 return X86EMUL_OKAY;
->>> 2433             }
->>> 2434         }
->>> 2435     
->>>>>>     CID 1697485:         Control flow issues  (DEADCODE)
->>>>>>     Execution cannot reach the expression "(value ^ curr->arch.hvm.guest_cr[3]) >> 12" inside this statement: "if (!!(curr->arch.hvm.guest...".
->>> 2436         if ( hvm_paging_enabled(curr) && paging_mode_shadow(currd) &&
->>> 2437              ((value ^ curr->arch.hvm.guest_cr[3]) >> PAGE_SHIFT) )
->>> 2438         {
->>> 2439             /* Shadow-mode CR3 change. Check PDBR and update refcounts. */
->>> 2440             struct page_info *page;
->>> 2441     
->>>
->>> ** CID 1697484:       Control flow issues  (DEADCODE)
->>> /xen/arch/x86/hvm/svm/svm.c: 128           in svm_update_guest_cr()
->>>
->>>
->>> _____________________________________________________________________________________________
->>> *** CID 1697484:         Control flow issues  (DEADCODE)
->>> /xen/arch/x86/hvm/svm/svm.c: 128             in svm_update_guest_cr()
->>> 122                      monitor_ctrlreg_bitmask(VM_EVENT_X86_CR3) )
->>> 123                    vmcb_set_cr_intercepts(vmcb, intercepts | CR_INTERCEPT_CR3_WRITE);
->>> 124             }
->>> 125     
->>> 126             value = v->arch.hvm.guest_cr[0];
->>> 127             if ( paging_mode_shadow(v->domain) )
->>>>>>     CID 1697484:         Control flow issues  (DEADCODE)
->>>>>>     Execution cannot reach this statement: "value |= 0x80010000UL;".
->>> 128                 value |= X86_CR0_PG | X86_CR0_WP;
->>> 129             vmcb_set_cr0(vmcb, value);
->>> 130             break;
->>> 131     
->>> 132         case 2:
->>> 133             vmcb_set_cr2(vmcb, v->arch.hvm.guest_cr[2]);
->>>
->>> ** CID 1697483:       Control flow issues  (DEADCODE)
->>> /xen/arch/x86/hvm/svm/svm.c: 396           in svm_vmcb_restore()
->>>
->>>
->>> _____________________________________________________________________________________________
->>> *** CID 1697483:         Control flow issues  (DEADCODE)
->>> /xen/arch/x86/hvm/svm/svm.c: 396             in svm_vmcb_restore()
->>> 390                 return -EINVAL;
->>> 391             }
->>> 392         }
->>> 393     
->>> 394         if ( paging_mode_shadow(v->domain) )
->>> 395         {
->>>>>>     CID 1697483:         Control flow issues  (DEADCODE)
->>>>>>     Execution cannot reach this statement: "if (c->cr0 & 0x80000000UL) ...".
->>> 396             if ( c->cr0 & X86_CR0_PG )
->>> 397             {
->>> 398                 page = get_page_from_gfn(v->domain, c->cr3 >> PAGE_SHIFT,
->>> 399                                          NULL, P2M_ALLOC);
->>> 400                 if ( !page )
->>> 401                 {
->>>
->>> ** CID 1697482:         (DEADCODE)
->>> /xen/arch/x86/hvm/hvm.c: 2332           in hvm_set_cr0()
->>> /xen/arch/x86/hvm/hvm.c: 2382           in hvm_set_cr0()
->>>
->>>
->>> _____________________________________________________________________________________________
->>> *** CID 1697482:           (DEADCODE)
->>> /xen/arch/x86/hvm/hvm.c: 2332             in hvm_set_cr0()
->>> 2326                 hvm_update_guest_efer(v);
->>> 2327             }
->>> 2328     
->>> 2329             if ( paging_mode_shadow(d) )
->>> 2330             {
->>> 2331                 /* The guest CR3 must be pointing to the guest physical. */
->>>>>>     CID 1697482:           (DEADCODE)
->>>>>>     Execution cannot reach this statement: "gfn = v->arch.hvm.guest_cr[...".
->>> 2332                 gfn = v->arch.hvm.guest_cr[3] >> PAGE_SHIFT;
->>> 2333                 page = get_page_from_gfn(d, gfn, NULL, P2M_ALLOC);
->>> 2334                 if ( !page )
->>> 2335                 {
->>> 2336                     gdprintk(XENLOG_ERR, "Invalid CR3 value = %lx\n",
->>> 2337                              v->arch.hvm.guest_cr[3]);
->>> /xen/arch/x86/hvm/hvm.c: 2382             in hvm_set_cr0()
->>> 2376                 v->arch.hvm.guest_efer &= ~EFER_LMA;
->>> 2377                 hvm_update_guest_efer(v);
->>> 2378             }
->>> 2379     
->>> 2380             if ( paging_mode_shadow(d) )
->>> 2381             {
->>>>>>     CID 1697482:           (DEADCODE)
->>>>>>     Execution cannot reach this statement: "put_page((struct page_info ...".
->>> 2382                 put_page(pagetable_get_page(v->arch.guest_table));
->>> 2383                 v->arch.guest_table = pagetable_null();
->>> 2384             }
->>> 2385         }
->>> 2386     
->>> 2387         if ( ((value ^ old_value) & X86_CR0_CD) &&
->> For all of the above (and maybe more further down the original report): Do we have
->> control over the .config Coverity uses? These (not really) issues all result from
->> SHADOW_PAGING=n by default now, i.e. the unreachable statements are expected in
->> that configuration (and they were there before, if the build had been done with
->> SHADOW_PAGING=n).
-> 
-> Yes.  It is .github/workflows/coverity.yml which does the build and
-> submission to Coverity.
-> 
-> Right now it's a plain `make build-xen`, so will go from absolute
-> defaults, but we can change it if needs be.
+The use in gnttab_map() is latently buggy, as "frames" there is
+xen_pfn_t *, not unsigned long *. Adjust the correct use in
+gnttab_map_frames_v2() as well, just to avoid the problematic pattern of
+sizeof(<type>).
 
-So first question: Which exact way do we want the Coverity scan to be done? Is there
-a reason we have it use a plain default config (which can change at any time, as has
-happened now), rather than e.g. an allyesconfig one? Or something yet further
-customized (e.g. in xen/arch/*/configs/coverity_defconfig)?
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-It's only going to be a follow-up question then how exactly to make changes to that
-file you point at. I, for one, have no insight into how to try out changes being
-made, before actually sending out a patch.
-
-Jan
+--- a/drivers/xen/grant-table.c
++++ b/drivers/xen/grant-table.c
+@@ -1406,7 +1406,7 @@ static int gnttab_map_frames_v2(xen_pfn_
+ 	/* No need for kzalloc as it is initialized in following hypercall
+ 	 * GNTTABOP_get_status_frames.
+ 	 */
+-	sframes = kmalloc_array(nr_sframes, sizeof(uint64_t), GFP_ATOMIC);
++	sframes = kmalloc_array(nr_sframes, sizeof(*sframes), GFP_ATOMIC);
+ 	if (!sframes)
+ 		return -ENOMEM;
+ 
+@@ -1478,7 +1478,7 @@ static int gnttab_map(unsigned int start
+ 	/* No need for kzalloc as it is initialized in following hypercall
+ 	 * GNTTABOP_setup_table.
+ 	 */
+-	frames = kmalloc_array(nr_gframes, sizeof(unsigned long), GFP_ATOMIC);
++	frames = kmalloc_array(nr_gframes, sizeof(*frames), GFP_ATOMIC);
+ 	if (!frames)
+ 		return -ENOMEM;
+ 
 
