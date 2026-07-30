@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C408C54FD2
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2026 02:38:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1376989.1623330 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F905C54FCD
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2026 03:03:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1377009.1623339 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpGeL-0003sr-8z; Thu, 30 Jul 2026 02:37:33 +0000
+	id 1wpH3K-0000Y7-6x; Thu, 30 Jul 2026 03:03:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1376989.1623330; Thu, 30 Jul 2026 02:37:33 +0000
+Received: by outflank-mailman (output) from mailman id 1377009.1623339; Thu, 30 Jul 2026 03:03:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpGeL-0003sk-61; Thu, 30 Jul 2026 02:37:33 +0000
-Received: by outflank-mailman (input) for mailman id 1376989;
- Thu, 30 Jul 2026 02:37:31 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wpH3K-0000Y0-4M; Thu, 30 Jul 2026 03:03:22 +0000
+Received: by outflank-mailman (input) for mailman id 1377009;
+ Thu, 30 Jul 2026 03:03:20 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <stephen.cheng@citrix.com>) id 1wpGeJ-0003r1-F8
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 02:37:31 +0000
+ (envelope-from <stephen.cheng@citrix.com>) id 1wpH3I-0000Xu-B9
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 03:03:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wpGeG-001XeN-Pm
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 04:37:28 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wpH3H-00G3XI-0l
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 05:03:19 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <stephen.cheng@citrix.com>)
- id 6a6ab8cc-5cb7-0a2a0a5109dd-0a2a4501a2b4-24
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 04:37:28 +0200
-Received: from [40.93.196.4]
- (helo=SA9PR02CU001.outbound.protection.outlook.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a6abeef-e002-0a2a0a5209dd-0a2a4509e2be-22
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 05:03:18 +0200
+Received: from [52.101.61.53]
+ (helo=DM1PR04CU001.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <stephen.cheng@citrix.com>)
- id 6a6ab8e7-5984-0a2a45010019-285dc404f6dd-3
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 04:37:28 +0200
+ id 6a6abef5-be1a-0a2a45090019-34653d35f0a0-3
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 05:03:18 +0200
 Received: from CO1PR03MB7889.namprd03.prod.outlook.com (2603:10b6:303:275::14)
- by DSVPR03MB886569.namprd03.prod.outlook.com (2603:10b6:8:37b::19)
+ by MW4PR03MB6618.namprd03.prod.outlook.com (2603:10b6:303:129::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.14; Thu, 30 Jul
- 2026 02:37:25 +0000
+ 2026 03:03:13 +0000
 Received: from CO1PR03MB7889.namprd03.prod.outlook.com
  ([fe80::2d02:5605:87a2:6767]) by CO1PR03MB7889.namprd03.prod.outlook.com
  ([fe80::2d02:5605:87a2:6767%5]) with mapi id 15.21.0270.009; Thu, 30 Jul 2026
- 02:37:25 +0000
+ 03:03:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,127 +57,196 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uZMFrnR9JFzVzIgWNVBjtRs8fyUxwZqSENsDvCvjT489vBrGQllXJ+v7cMPEEi74xVfWaEoaexB6Ior2N9iPhBtCxHmIxh1CCxJq9gBcZVOmJiQoZydR1cKUpS0BB/09HJrIKDmab/goXZiNA7bgbDt58JmuMSsTOJx1GQKgUaRTUNnKH9FaLi+gcDMsNBxq5HvrsuymMw93IsZXB7lGg73B+xZ4xHTtaMPd8iWjzD4ci7NOs1KB1CXn6ZoF1urdBdNQNuVZJucgreenHLLB3Y6Ul2w7J4UYeDI2ZPT2EO8zlsjDdeB6nG5D5gMQc/sHlAueMLAb9yXUAxtTqpRVSQ==
+ b=pLXyma42BoVdXdlSgXiY/zqLBacL1MfNvw5vMwBRUSbHWpDs4lvoyooVELS8VF+RkNhsOP1otp+v3ovLuERVtIbPaNYVMSmNcJLQKtatjgxNE8ZSQ9G4HrJOfHbJaN1PjSRNR2beRtUtnmD3VQfliUIlelPJcTM0GjKzEmoy7q6Ofhb/Mcg4XouPWOzkW39WL8LywiEx6qMFw99LPBj6SZFjGMda2aZtACmg1aJNpcvIGmuRG6DbJQaed5TAfOnwAU0on/oOtLZDsOeC2pcrig0eK6831cFKHh3jvdvXbwIN2VxCWtl3WFF8INtHuZqNqUhMWv2xH4xdSNaZgW9wfQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tJgCWAtxLESc93+q4IZg34kflkg07FIREavXKChpPb8=;
- b=TKkXMlE/YKomgs6AhgeTuSNYYCC/dVvwARlJ91qujSgqHahmPQU+NE1/sNnl2HbGJrcF+yA8+vbnQwut2ZXI04zNPbP1Dcl9OIHxorHxPwzzMcw/OjZeet2DTHu4X5tXoNM+DDFxQl6CADHPNSvp5xwZoMt60rj47DSm+Zc6PJ0U/VvMVNeVkHGWJdmVwYhK4HDEOhnV9V5WC7RNTCG9vIyIcoFvMnW6jnAPSE5vL1fpY/ch1kLxpZIZSiOUxoKOh5f/eVp1ZZqUIqLsQyjmhcP37yYsl1E07L6RJnXDIcuLe+lAC2DxCWdlvzEM4bA05MHC2ykvSWE1bYpp4Yiq8Q==
+ bh=thUNhPVrSqsh39u30ukzZsaD61bWiNYS6JsEfE/vAZQ=;
+ b=x4rLK1jfFSDwGP1uxtxa5xblM7awvemCeax37bWWkMMq1hpicuagwCT8sOj7W/Ore6nK+IEKx4n55rrIC3TFuDEscau6mw+fipIqnJNXn45VZzRzGiQZvq0eUbLRQW2zWke6zEcqemNmOhfO2SxS9+fXYeegsX/Nx9KjAYNd4eL67gD/0JojQZ1t9zxavVSEKcfDK7pPJfheJ9TZqeSB8/AgSJbPBzP7aLM2KrJqEnt39zWs5flpoihERkTwqgFJShudVOa7a7h7SK4u4UVfSpN9xU+mLuDj9dqj9GwveKRXhHxhYELGvdJQllqdxCNK3ZTlKCaajsLiEeFlBNiMyg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tJgCWAtxLESc93+q4IZg34kflkg07FIREavXKChpPb8=;
- b=xuUrKah4nY+LpRDM5IQwr9DPiFg4AZNIUb51kaH2jE4yF+FuZQ8zHAbeqWVLhyiiEgSgYYL+b3PZcnkKjILOErc48JFRPhSEuql3PytKuh+4yQoV7YlQf/TdyBi61Sx4s+q5DOvvhtQ+w4jqPwrqB1f2RpoVLPQxho6CYCHBXdY=
+ bh=thUNhPVrSqsh39u30ukzZsaD61bWiNYS6JsEfE/vAZQ=;
+ b=gMdupJuqYhukGUfECaiqvVHiJpzLLW501ej5er3WkkRsJsop4zU5ABWhc67HqMOpJ4CE/3Be9TIxHuy9IpehiENv3LSJDTyJSA7nvyPjoM1LgaYoxYlqJf6qJl86SlmF60wO37CFdSnB9nV9khq5fifw/uKgk8ddPTioL9ND23c=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
 From: Stephen Cheng <stephen.cheng@citrix.com>
-To: jbeulich@suse.com
-Cc: andrew.cooper3@citrix.com,
-	anthony.perard@vates.tech,
-	jason.andryuk@amd.com,
-	julien@xen.org,
-	michal.orzel@amd.com,
-	roger@xenproject.org,
-	ross.lagerwall@citrix.com,
-	sstabellini@kernel.org,
-	stephen.cheng@citrix.com,
-	teddy.astie@vates.tech,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH] x86/svm: require VMSAVEvirt for nested virt
-Date: Thu, 30 Jul 2026 10:37:15 +0800
-Message-ID: <20260730023715.68531-1-stephen.cheng@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
+	Stephen Cheng <stephen.cheng@citrix.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Jason Andryuk <jason.andryuk@amd.com>,
+	Teddy Astie <teddy.astie@vates.tech>
+Subject: [PATCH v2] x86/svm: require VMSAVEvirt for nested virt
+Date: Thu, 30 Jul 2026 11:03:03 +0800
+Message-ID: <20260730030303.71388-1-stephen.cheng@citrix.com>
 X-Mailer: git-send-email 2.49.0
-In-Reply-To: <874be4f5-b7fc-4114-959e-1b31ed4e7608@suse.com>
-References: <874be4f5-b7fc-4114-959e-1b31ed4e7608@suse.com>
+In-Reply-To: <20260727071709.196088-1-stephen.cheng@citrix.com>
+References: <20260727071709.196088-1-stephen.cheng@citrix.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: KL1PR01CA0156.apcprd01.prod.exchangelabs.com
- (2603:1096:820:149::13) To CO1PR03MB7889.namprd03.prod.outlook.com
+X-ClientProxiedBy: JH0PR01CA0018.apcprd01.prod.exchangelabs.com
+ (2603:1096:990:5a::18) To CO1PR03MB7889.namprd03.prod.outlook.com
  (2603:10b6:303:275::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PR03MB7889:EE_|DSVPR03MB886569:EE_
-X-MS-Office365-Filtering-Correlation-Id: 53ccaefc-c47e-4fd9-08b7-08deede37d84
+X-MS-TrafficTypeDiagnostic: CO1PR03MB7889:EE_|MW4PR03MB6618:EE_
+X-MS-Office365-Filtering-Correlation-Id: 61e57dca-7892-4166-ab38-08deede7185e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|23010399003|376014|1800799024|6133799003|56012099006|11063799006|10067099003|22082099003|18002099003;
+	BCL:0;ARA:13230040|366016|23010399003|376014|1800799024|6133799003|56012099006|5023799004|11063799006|10067099003|3023799007|22082099003|18002099003;
 X-Microsoft-Antispam-Message-Info:
-	maM2h07suG8F01D84V0OKNhWfaBwos4xmYOLbcio1zyiZCvSQUI6LiIRfnaOsACsreQvJs2Nem6nY6MDX6k80sJv5B+LVpEdiL/STBd66DjJjB1hxH+/KQLceRbUS7hjf7/f0DRQu+kVfzijGcMNEh8R2Qz90amM8o6yxTUlEWUECbmmyyCyLINYCyWJrA6BBIwHgaNuW6DGCQU94gI0NbKFsPrGm9uHBSnH2sol0Wi+jn/NVPrl6svdRxjie20QQgxHRewAh2eTg/O7FCOpyFHKBkyWrrcuquCOvKPJKJSie3ju3INY00muPdFTcdDrO83OYyZ0OQelIY1Yrbw9Qiy4/5XqIa0aKs5w85px+47uQbOcLRuBATaQkhj+Ljqs3ahElrpw2+IH9wHhHEb4RSZFcrEFKT9m7txt3iODcomZLQ8gS2/X73GZ0g7EFLK3OEtVoVBdicdLKrzendQA7RbdqN5xQ5yqZfye2CvKGYNHJKfTL3jwEkxeTtcJAZ+f/o5iv0jGc8BPpgRTKKkwpFlohBQHtZ0H44ZowD+zDn97APQ2uOBAi93TcmcQbmOpTQf4uxkg+rVnvuRfeyEa2Lj+5foYzsqbXNN+Hsp7ysljsXskB+pD7YQzMlrpSUVmLZSEZQFw6XU83ScVfreWdzP1Bq48O4zeFZFe/aHzElw=
+	GeM7jn9Cys63dWvYkywqAKlV3SIgMlFgyTfkhd5FB8TjU7WKgXQkfph+FmaLzVtqcPlZh17YPWjDw/mKkJFX/F7l4VN64Kg+AUzNExmmz68a9CzUiwKT0kEdks0akXv+wpdBle7hBkCfQAu5FyM10JvznBef36MPqjQeRB9I6lwwcOmOdNAc4Ewod8VEMORheqFHqACvEprmLZ/kKn5stCVJT6Gy7ohH9uoUaPn5QLkaOSBE1vaKtZny8NsjC4hTBvwVOLWS9CFv/goRHRVR40Wq6u2UHfWgejbv42wOxUc2Hd6U+EXPzjuGE6xAPOGlYe3X266cAzCLyvDL5Aeee6CSHWrZDzCTBgWlDeDi/LIVJhawfVO4VqVrHXG1hGSHuZGiOpcyUqFwTLY4tSf2Lm5RYLarZnEcPEQ4NXGauvtx2wHpm7462UvWtg+x/ZHn6dwcIqH8uN6S20enqMk4OrJuk+FmXqC27U5IO5mqMIPofHqZ8AlMq1Rttas9IP3F1VfPHpxYkTg03+KBh7ombza0PEIsp6CZObXCHTCjUrBfZ1ce3RecbUjCegVgszdcD7UIHrmlCk454H0ta8R+Z2cLOzz9Pl5tRoMWWURe4sK1M6bb9K+qiZRV6ENn1+sFU+tUfu8Q9rCkuyczV2QiRQ==
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR03MB7889.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(6133799003)(56012099006)(11063799006)(10067099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR03MB7889.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(6133799003)(56012099006)(5023799004)(11063799006)(10067099003)(3023799007)(22082099003)(18002099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?VBpu+JAHFXcGJs0gBqs1aG4755Iwd/2a/DgysQS9/iCFhPulJnGxYtrLOa+q?=
- =?us-ascii?Q?ZAitqkYbIVyNvFOPiafXD/CAp/HXEaTPREPyVj0EM5slWgwE8T6ENX+8mBmR?=
- =?us-ascii?Q?NSwDfT/3lJP53941bySzBvHHWFiS+pB9k+pXR1DT6VbQN3EZfFw/qjuA9Zl8?=
- =?us-ascii?Q?dmkPLXlQd7uj4znBQK9kW+BO/f4x5t55fMT700mT/JTlLu1YGr9/TGjcZEvo?=
- =?us-ascii?Q?LvATA3t7zkBDP8Kx0cpMGoQfkGarMgyNCem+D93HHTImoNFccwE5o3fiKwXP?=
- =?us-ascii?Q?PilUsyhIxqUxhlGwvFhw1COA8BWzJgjeKGrY6WXG4B4rUtxLjNUCx0ker/iH?=
- =?us-ascii?Q?DBkwOH93qvNF7MD+Tk/JPyMbvYHGmiwZiijBOczmrQqurBSVdo92O1uqmXb7?=
- =?us-ascii?Q?bnK3TLZmkFQJzaAGwxvTqimKM/iqw1TXxKYqIqHM2/VrBL+eKM1RJwJWnHQR?=
- =?us-ascii?Q?fdyP7FQ3x7I14DhNfiufaYfebOcaB51fQOsHSBVvmEZLcSjuPNn4cSDiowPR?=
- =?us-ascii?Q?HsQG+XFAoz5zm032saTp4LMlodkYtY1+0TCr093DcZTVpWxjQGTaFd6lcVAv?=
- =?us-ascii?Q?3Ar6RmLVurEEqFSrRyoEmL3e0SxHhNFI1fZrKYT5Qr4S7+jF1/beCLyOfd4N?=
- =?us-ascii?Q?3Gr12AE/zoLliPfEYhxq9k+k+YmUwajDoTflHUd2Ew8qKH9DUOpw5KhC9DWM?=
- =?us-ascii?Q?IuXMLQ/hA3qGwuFq3WBq9+1mN7wDO/2Z81oqMA/SINyiHq1/wX0pOmpK1st+?=
- =?us-ascii?Q?2GczB0UXylMBjBSgMZaI+fG7GbYbQaZhWFZ2WeL0qkfTGypF0Z1iq6LOOgYZ?=
- =?us-ascii?Q?tz5l+PLSzLBingQlNEQKW9ahkW9O0dKsqA5pNMHl8zdES4LBjknOs8yHbC8F?=
- =?us-ascii?Q?Vy0Vj7mWs0/Twn2hBwngfuIhiR7lkJYMZPtR/o5SJDiuU1pheytCsY1m0qdv?=
- =?us-ascii?Q?HHPr3tQqEhujUrpeN2d0Ukci2cwdpqA8T7DxVMlTKEC83sIJkGBpTw5G57lE?=
- =?us-ascii?Q?GbO3B4jmFonbpvu4NuvpUoyfMfXCu8h0uU3+tBG3lEEpyi5D0DRlihGyuTTJ?=
- =?us-ascii?Q?u1M+/5OLMpY96s6seZ+d1q7K2gE4zUlLtEa5ar6I411JNexNlqN0Imbj2mkL?=
- =?us-ascii?Q?qc8uLLCdFkuprE30k/3H7Sx3IJJIUuAgt56FlVWTWPuEaNlrf3SnIAFBbxob?=
- =?us-ascii?Q?TeBHG0OuhaTZL7RmGZDmWUyBAAdFNP99fV6W0o7P7JQdz7KJdlFDqmyS+uNW?=
- =?us-ascii?Q?a8Dn3AVD5jUlgblyc2f/OPd/wCXs7zDWDOtLygP2o4yBRbpdK2AYEVOUFDWV?=
- =?us-ascii?Q?fJjjjuZYOV0FiqpFGc5nS3baVKmkznGp8bmzGYyk6zOwtofuSw+1fsKG06ax?=
- =?us-ascii?Q?jKGbnIJI9XXYErn4WWkXpH3caxVNnCmdic6eROarvlhJkx7gOobwVIOstIVQ?=
- =?us-ascii?Q?wTugNBp7pc4vopR15x5nnJZgbjqnqLO9998e3SK4c4lXVa6X4y5WuLyzpfA4?=
- =?us-ascii?Q?JyijLY0ECyPuHmZN48e+L+F+O3ZOXk2wytrM3rSQ7Vr3h5hH70xH4iGZH+xp?=
- =?us-ascii?Q?q9iubj61x6g6dyobQbP66XdoAuXU9VWXmAiNpqfUC3Kawk3uifpPcLp3HH2s?=
- =?us-ascii?Q?cIs2fUeYd2EFiW0rWAqy6s25rfEpFnTREaXXZnYo1IrnIRNP8d3ILTra9kZ8?=
- =?us-ascii?Q?qraIuDnkV4IunD9Wa+7j9TYykZnUn74+Dz3eKw9+PZALBQDIVrNZXb9gFayz?=
- =?us-ascii?Q?RvRy9HexSw=3D=3D?=
+	=?us-ascii?Q?P9v+Ttv4HRuPj5w7J4gQbptEJU3diRsLpi1TbPIki6P8saVK2C0yp2HTBIPg?=
+ =?us-ascii?Q?KEcUa+o6abBcKBzYabDNiPTMVWtfXHVsEEgA/4UaqFlFVle3RrDdJAI7fqBn?=
+ =?us-ascii?Q?khJ1QcbMb5rzFQD8vN2/gA+ZKa9jn32UYCPHzk/5CsWd/oTAOggSEWQsskAw?=
+ =?us-ascii?Q?NQzb8kcpFGC231SRdDe3HyoLU2AZMA3mgUDpFofSJQYnpCNv0Z4a2Rt6FQ7o?=
+ =?us-ascii?Q?DpkAZ4co8EWVUpaFAA/88A8KkY88dqCGUhmTUFuBUL6/e20oYRxTiTZpUwyY?=
+ =?us-ascii?Q?7fnJ7B950zVt19nOXNovKGGsONrOmSGBfAeT9avt2EmVHG7d1Oe35rKfk4Dz?=
+ =?us-ascii?Q?b+5rLAH3cFPvjwX3tmjMRAjFxLgmEkKVjOafhaiF005vp/aaAsZVtj6luNoO?=
+ =?us-ascii?Q?C1E5oDX9YFNFA+yFs7kSOQfTaH71Kgh1RaW17Lpsob2qsgYqdNNG6qW3PdnQ?=
+ =?us-ascii?Q?h6JNlOfcISTDcfqn58W2q6mA55PfVmV8Y6ztd+Vy/S5hG2StsaWrWCvQ8aKV?=
+ =?us-ascii?Q?1jXH4EUYdGNkgODsnl1iTi9Sd0ZUOAx/Etb1u81VWUgSx+Zm5SuO2AerjKBk?=
+ =?us-ascii?Q?Cqfr6h66VZq3BW8HIPmYuMCFzsWD6JGad8xc3wQ2+F71kHHjaNjefi98Kznz?=
+ =?us-ascii?Q?F6CcPeVcgKeMyfqbbdqsp1NF8kkVuUZUbAOlTfVJFcck030jMrWwihOG2g3n?=
+ =?us-ascii?Q?Pen7afVTALXJn/Myu1DxH44K1eZPHjKFD7ZyqgkZaQEVoJ2BkXb7V/7pZ45n?=
+ =?us-ascii?Q?J5gnIjB8F9AhMUMkLcHtm8wuB+qZEWD7FqV9Q5CfHuKcxc+ySXZ5j0s5M6Ah?=
+ =?us-ascii?Q?bp/67rft4sqrdxFxszLMksjJvXijdRS+WJKwMXctLaRuF8YJMaWUyUMFrzfd?=
+ =?us-ascii?Q?JMHdOW+KZQwK6l4kqv9wFp4aoF/VqXNeI/+jgWOfiYf1dPWp5RsuBBWjaHaj?=
+ =?us-ascii?Q?wF6NQudc/UqaV+Cp5Tyk15r21bUDsG27LpGR1Q5/7itgfPCiCUebW/cDyU0b?=
+ =?us-ascii?Q?0Uxkx472la1zgkiReak2fAiEVGQa5ShpTaSIsBSl0scF72kElrVbXm62o5KR?=
+ =?us-ascii?Q?Km8R8g3oVERU77io52qNPh4xiU2M0Ib+dDWQDFE70blvDeH9y4ujfDMCqtFO?=
+ =?us-ascii?Q?kAWbkAjwSXfAcaUp9Ro6QBbJvmDtNrEMkV/1bPzRpnGomldoXJECKG68KWs8?=
+ =?us-ascii?Q?Fp1LqVKZFY+ocmfv22h0GD0zZtBw4zVlj7/1Wf7TJ/SloNyBIEPtnDPy3cIE?=
+ =?us-ascii?Q?pFrsfMOpAsvVEwFHcJkGD3D80CP1D6+tLlZ6SvBFHKaa8jc1LRX2esXcbCx5?=
+ =?us-ascii?Q?Cxfz7N/NAD7u/cZ+BPV/U1AAGovRktQPX3lvJiwqmWgvsvPEdK5vLj4umTrb?=
+ =?us-ascii?Q?fGRJdedqEv/iOblt9uLHBI2SkjWqSU8jYA9gL/Qkv35HVOiABcQ9fs+wsTXy?=
+ =?us-ascii?Q?zMwyuKgCNbsR9dnusTq+/JAKeIxCwtPfpQHhNmg2VeAg5mQ16jMWzRazsFKF?=
+ =?us-ascii?Q?jd4ej5sh4N7xdcq3/lan8y/fwR6m9NFP3sVm0Llo7dmGA8UjvV29cmGlhkHa?=
+ =?us-ascii?Q?f8Lo6YCjK1Naus4a5p6X4kEQP6EVdKmeSxcBldN5DzqIZXp61IGBLatFEiM/?=
+ =?us-ascii?Q?mtIYvQsnQDOsL8K8NPAoQeZ3RC6hIKDmExT0lW7EP97CzgCVdFzf3hWIu2Mu?=
+ =?us-ascii?Q?vuArL9MKFl3N109vSyMrO5utVPH13B58f13eXroH6/Zc6RvWLAY3688Temla?=
+ =?us-ascii?Q?QKvWxnf0Fw=3D=3D?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 53ccaefc-c47e-4fd9-08b7-08deede37d84
+X-MS-Exchange-CrossTenant-Network-Message-Id: 61e57dca-7892-4166-ab38-08deede7185e
 X-MS-Exchange-CrossTenant-AuthSource: CO1PR03MB7889.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jul 2026 02:37:25.4101
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jul 2026 03:03:13.7943
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: B9d+VgRBbQ7jOUyDfdM9wRF/T165CcYbrKTawr0p9iti/sxh/JdUWU2QWVHFcUHsEvl0Pr0uh+fUn1Bq8BSGumZqJsbZ4iGjjnPW3ht0a9c=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSVPR03MB886569
-X-purgate-ID: tlsNG-d62444/1785379048-1F46D757-5198BE5A/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: jeqQdXbFnlw9zQdwa9hfiimex0Iuk6g9Ai7FGyM9CJrRa/9HTSKcL1HsTWlf1FUhWnWNRzanMgWHnXJRWa27S/tXQtE0kCuLpakpl7W6K8s=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR03MB6618
+X-purgate-ID: tlsNG-bad1c0/1785380598-FD86F034-3FB9DC71/0/0
 X-purgate-type: clean
-X-purgate-size: 1052
+X-purgate-size: 4262
 
-On 28/07/2026 10:03, Jan Beulich wrote:
-> But the functions you drop aren't needed just for older parts. They're also
-> going to be needed when the insn emulator hits these insns. This still is
-> in need of properly wiring up, but imo we better wouldn't delete code which
-> is going to be needed later on.
+Virtual VMLOAD/VMSAVE lets an L1 guest execute VMLOAD and VMSAVE
+without intercepts.  Without it, Xen has to map the L1-provided VMCB
+and re-execute each instruction in L0, handling a complex,
+security-sensitive subset of state on the way.
 
-Fair enough.  I've talked this over with Andrew and he makes the same
-point -- the emulator needs VMLOAD/VMSAVE wired up for reasons that go
-beyond older parts.  I'll drop the removal.
+Make VMSAVEvirt a hard requirement for nested SVM.  The
+cpu_has_svm_vloadsave test in svm_nested_features_on_efer_update() is
+then redundant, as nested virt now requires the feature, and is
+dropped.
 
-Worth noting for the record that the handlers become unreachable in
-practice, since svm_nested_features_on_efer_update() clears the
-VMLOAD/VMSAVE intercepts whenever the guest sets EFER.SVME.  They sit
-dormant until the emulator work picks them up.  Keeping them or
-removing them makes no behavioural difference.
+Assisted-by: Claude:claude-opus-4-8
+Signed-off-by: Stephen Cheng <stephen.cheng@citrix.com>
+---
+ docs/designs/nested-svm-cpu-features.md | 17 +++++++++++++++++
+ xen/arch/x86/hvm/svm/nestedsvm.c        | 16 +++++++++++-----
+ 2 files changed, 28 insertions(+), 5 deletions(-)
 
-Ross -- this reverses your suggestion to fold VMEXIT_VMLOAD and
-VMEXIT_VMSAVE into the VMEXIT_RDPRU #UD group, as that only works if
-the handlers go away.
+diff --git a/docs/designs/nested-svm-cpu-features.md b/docs/designs/nested-svm-cpu-features.md
+index ce168e68e1..eed40a958c 100644
+--- a/docs/designs/nested-svm-cpu-features.md
++++ b/docs/designs/nested-svm-cpu-features.md
+@@ -109,3 +109,20 @@ leaf 8000000A:edx
+   Using it in L0 reduces the chance that we'll make some sort of error
+   in the decode path.  And if hardware supports it, it's easy enough
+   to provide to the L1.
++
++- 15 `VLoadSave` *Virtual VMLOAD/VMSAVE*: Require for L0
++
++  Without this feature Xen has to intercept the L1 hypervisor's VMLOAD
++  and VMSAVE instructions and emulate them by re-executing the real
++  instruction on a mapped copy of the L1-supplied VMCB.  That path
++  handles a complex, security-sensitive subset of state (the hidden
++  segment descriptors for FS/GS/TR/LDTR plus the SYSCALL/SYSENTER
++  MSRs), so on faithfulness grounds we'd much rather let the hardware
++  do it.  When present, the instructions execute natively in the guest
++  without a #VMEXIT, which is both simpler and faster.
++
++  Whether to provide it to the L1 is a separate question, deliberately
++  left for a later change.  It needs care over whether an L2's
++  `vloadsave_enable` should follow L0's setting or L1's, and over what
++  should happen if L1 leaves the feature disabled without intercepting
++  VMLOAD/VMSAVE.
+diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
+index b06124c2c9..96de03a5ec 100644
+--- a/xen/arch/x86/hvm/svm/nestedsvm.c
++++ b/xen/arch/x86/hvm/svm/nestedsvm.c
+@@ -562,7 +562,10 @@ static int nsvm_vmcb_prepare4vmrun(struct vcpu *v, struct cpu_user_regs *regs)
+ 
+     /* Keep the host values of the fs, gs, ldtr, tr, kerngsbase,
+      * star, lstar, cstar, sfmask, sysenter_cs, sysenter_esp,
+-     * sysenter_eip. These are handled via VMSAVE/VMLOAD emulation.
++     * sysenter_eip. These are not transferred by VMRUN/#VMEXIT; they
++     * are moved directly to/from the L1-provided VMCB by the guest's
++     * own VMSAVE/VMLOAD, which run natively (VMSAVEvirt is required
++     * for nested virt).
+      */
+ 
+     /* PAT */
+@@ -1097,7 +1100,10 @@ nsvm_vmcb_prepare4vmexit(struct vcpu *v, struct cpu_user_regs *regs)
+ 
+     /* Keep the l2 guest values of the fs, gs, ldtr, tr, kerngsbase,
+      * star, lstar, cstar, sfmask, sysenter_cs, sysenter_esp,
+-     * sysenter_eip. These are handled via VMSAVE/VMLOAD emulation.
++     * sysenter_eip. These are not transferred by VMRUN/#VMEXIT; they
++     * are moved directly to/from the L1-provided VMCB by the guest's
++     * own VMSAVE/VMLOAD, which run natively (VMSAVEvirt is required
++     * for nested virt).
+      */
+ 
+     /* CR2 */
+@@ -1548,8 +1554,7 @@ void svm_nested_features_on_efer_update(struct vcpu *v)
+     if ( nsvm_efer_svm_enabled(v) )
+     {
+         if ( !vmcb->virt_ext.fields.vloadsave_enable &&
+-             paging_mode_hap(v->domain) &&
+-             cpu_has_svm_vloadsave )
++             paging_mode_hap(v->domain) )
+         {
+             vmcb->virt_ext.fields.vloadsave_enable = 1;
+             general2_intercepts  = vmcb_get_general2_intercepts(vmcb);
+@@ -1607,5 +1612,6 @@ void __init start_nested_svm(struct hvm_function_table *hvm_function_table)
+         cpu_has_svm_lbrv &&
+         cpu_has_svm_nrips &&
+         cpu_has_svm_flushbyasid &&
+-        cpu_has_svm_decode;
++        cpu_has_svm_decode &&
++        cpu_has_svm_vloadsave;
+ }
 
-I'll submit a v2 patch soon.
-Thanks all for the review.
+base-commit: 644ea6f84510af27ee1847e981df945a94068479
+-- 
+2.49.0
 
-Stephen
 
