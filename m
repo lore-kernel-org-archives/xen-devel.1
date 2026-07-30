@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F4A7C55164
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2026 15:19:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1378004.1623670 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC44BC55162
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2026 15:26:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1378020.1623679 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpSXI-000287-MY; Thu, 30 Jul 2026 15:19:04 +0000
+	id 1wpSdm-0003jl-F5; Thu, 30 Jul 2026 15:25:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1378004.1623670; Thu, 30 Jul 2026 15:19:04 +0000
+Received: by outflank-mailman (output) from mailman id 1378020.1623679; Thu, 30 Jul 2026 15:25:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpSXI-000280-Jy; Thu, 30 Jul 2026 15:19:04 +0000
-Received: by outflank-mailman (input) for mailman id 1378004;
- Thu, 30 Jul 2026 15:19:03 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wpSdm-0003je-Bf; Thu, 30 Jul 2026 15:25:46 +0000
+Received: by outflank-mailman (input) for mailman id 1378020;
+ Thu, 30 Jul 2026 15:25:45 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wpSXG-00027u-Tw
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 15:19:03 +0000
+ (envelope-from <andrew.cooper@citrix.com>) id 1wpSdk-0003jX-PF
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 15:25:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wpSXG-000PWx-AS
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 17:19:02 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wpSdk-000R1g-5p
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 17:25:44 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a6b6b5a-bab6-0a2a0a5309dd-0a2a4502bd4e-28
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 17:19:02 +0200
-Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a6b6b65-6ca4-0a2a45020019-d155802eb4a5-3
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 17:19:02 +0200
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-495635a85d2so18210135e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 08:19:02 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-498011f2b45sm66953885e9.4.2026.07.30.08.18.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Jul 2026 08:19:00 -0700 (PDT)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6a6b6cea-2eae-0a2a0a5409dd-0a2a4503bbbe-22
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 17:25:44 +0200
+Received: from [52.101.52.49]
+ (helo=BL2PR02CU003.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6a6b6cf6-fae8-0a2a45030019-34653431cd2b-3
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 17:25:43 +0200
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
+ by MW5PR03MB6907.namprd03.prod.outlook.com (2603:10b6:303:1c2::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.12; Thu, 30 Jul
+ 2026 15:25:39 +0000
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37%7]) with mapi id 15.21.0245.012; Thu, 30 Jul 2026
+ 15:25:38 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,207 +55,165 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Cc:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785424741; x=1786029541; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=DK9G7ufTPTHJ9ZGVwRcesKJc9Bel6xGMhNXZ87Rz87c=;
-        b=afOlprapHTv7j+kdsy55c58XkmIKLOUjJB2q1K7mi6Lq3WjjpUzbH9L8jGE98HuV+b
-         RGnszrOb8zJL1yR4GsPDDKbczewkvEkFltV4nm9CF8n13JbDr2Ju1ChgII+jUsag5ECr
-         /dypDUqPDK41oq8pOrnreHHJ3MpyZL5W5BjU/hilxrYhBZyAHCT49CHr/LE086fJM+mk
-         TKxHpNpGh6/5CZ59EUkwxDSVkRiSQgz0qrCnfOH1/ndkVz7yyDn0cdkwOTlrU3QhsTlt
-         UiT2wyfUEdtwp0zdvaQD5/5k7cjNiiC/wCJNe0Lc3+JZQpk0eZBABI6/SQ8GOIY14Mcy
-         LfoQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785424741; x=1786029541;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=DK9G7ufTPTHJ9ZGVwRcesKJc9Bel6xGMhNXZ87Rz87c=;
-        b=G6dEloWKkBNN3ykvfFDbHIwKcDKeF1MEXQ/34R2SMpudiV1XVdC7p/O7Z3QnPHje5h
-         IBwVD3m8blOgUKWBniRzJSArWTREXUNAqr629dx/hjhynjjxmwfDqdRZ/j12B1NFj4GB
-         dCyMGqrdwHqgr9kFQxiyaigkFK7MhSzJ/zsYOP1aslbIFXH38TuV+QyoYsSESs+4XEAc
-         8e5jLOdmQvchOXP7H/MXsKpKDn33DbhYpI7+1j7NtidP7Gtyls2CdPqLzuYoyRLoWLoF
-         FZfbT+lssIohzFhP1O6wgTBTU7Z4oS7dgsc3NFJ4vo0q1zJjCtQn45P2e1A+nB3budh/
-         2Ecg==
-X-Gm-Message-State: AOJu0YwFG95ZQikM0hLYaksbzGhuN1lIy+FsIlfB4Fp55R4BElEdBcaY
-	aySSoGdL/83s5cIDCFZT+Mo8iTw0y7a/K5SbWVpLrZDy2HsSBplgOIJhq5aGip4T3bu+FT4p6xS
-	XckZkaA==
-X-Gm-Gg: AR+sD12l5JFX56vhOKvTnO+KOYa/PVvbCRGJVs/hnOS13CKrXGc2kOH20D9mzOgcqeE
-	OQfHJpzFtrg4dhIXSz6fxsObOV7YXrgpq1cTbRADxvCDorOuGl/YCLRq9CwU20sx1+6pJ/A/WhD
-	eTCc4TE8offSc24oVGc0AoQny3HIRcYJccRfkBy6QjOxDuVk6jN+pZBV/HUrLY3OB1ZWLb1VJdv
-	+bF7m169AY8qBPt0OVW31mj3IPSdYNWKuQRn5Ahmee2yObqG2J5G7QpCMidBVXnBRUaD5xS+pYc
-	fnX5yxbT2Vt3jxz/6/MYSc9zn6j6EtF2lN4lIla0PqwUqyEGEA7PFeQfyx1Zbg44X/pUJ+S43Wr
-	PJp7YUISb+oboZ+ZWnSCeXFxmhs3wVp4/MQAdy36c9NAaQrRvZydOCtvvsF08Qfpq6hR1U1HbBv
-	AQCU540H4dpxlldxQb5W9ZGZ6W21d2FqVW58uDJ7FxScVKuuyJy7YTlrI/V8rDJqyk0b5VpNFbT
-	wXhp6SOBvf0CTtl6Ta2H8Lew8Z4VQ7iLhes6F82BN/ZlmmFxfZA
-X-Received: by 2002:a05:600c:1c27:b0:495:5045:39e6 with SMTP id 5b1f17b1804b1-49800e9d3abmr48995155e9.17.1785424741500;
-        Thu, 30 Jul 2026 08:19:01 -0700 (PDT)
-Message-ID: <8030ff8e-ed83-46c4-ba69-4954ee645c38@suse.com>
-Date: Thu, 30 Jul 2026 17:18:58 +0200
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=rI3QYooJmyt1CLYWTdcAqRg9f8qVev8DjfzaD/f1aOsAMU7bp+TZLnSV0/rbjLRmcySGLtMXARze2eGv5V2zbTf3M11gE/2hFr0pItVejt1/GSy+amgze18Hqzb/+v+bsACgmz1OzDo9IYBTO2mSe1sh+Cd9rfobSWhHcmhPPFRQGkgILOEyKplbG1+HfMliZhYP7uw5Zz5prPge/d/CT7VTI7WDRWkD8tlcuV0ugVeZc0+0r+h0eDCoiqPSHlScY0feSQosQ5c4L8J0ftMh+BhZn5YIupD3i1bY/r3G2LVHShmrTRQPkqaFuJFeJmobPCA8HTiwoNlK0lHJT6N07Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=hEbBBu7f0vlQuw/Tllw754+GezU9wzCG0Gh0oIjsTiM=;
+ b=fzkA63QwEP+zv4QbwFBy02H8au9AE+gyEWiCkCKCDqBLq660UGt6UXzjC4g0Zjk1M95kb9Z+fVJNrWQ2S/Cebf4+sXiuGQwrxxLWR0r6VVlfugVf+sZyDeFWB7dPWzmrPdTWSTn0aUZ9AbDPMNMDrGISp1zUimF4+j7zhETXLVBTyQvivTpextnbrcq9Ns7XHoGFICZiCV69EfNJDm9bDKK+xUzPx6ojUHBzicQ8fukATfAZWwejMb601yPoqdsLp42Jh2nN24WTBeUlBG8ZZ+U4OYokWVD7kWtBwQRiCVyit6n4BzBWyny0Azo3qWjrHvHS6woTU+ieaFNqErKAnA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hEbBBu7f0vlQuw/Tllw754+GezU9wzCG0Gh0oIjsTiM=;
+ b=V+1Zb7qahhTPCAXtZy8pPd9vWO2lNpx0CB0AY2jF5bPKfaG0ZJB7E1P/4JhplZKjiJDo6l3QcpyxRaYjbcSJsHfpvAm9yCnTQym04FaJYMU9kOBM1kW76qYAojoRjLZwTpedLmfbLwzG07vHeQx2giPcXCUt489Q7ozUz1JmqRU=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <d360b101-0368-4f59-854b-2cb881e5d552@citrix.com>
+Date: Thu, 30 Jul 2026 16:25:34 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/24] XSM: reduce redundancy in hook machinery
-To: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-References: <758c8410-a18e-45dc-8944-5913e5832397@suse.com>
- <7487f138-e5e9-41d6-9291-f5eef42d09a1@suse.com>
- <62738b20-ef4b-47ac-832c-5c5fe353e56f@apertussolutions.com>
-Content-Language: en-US
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <62738b20-ef4b-47ac-832c-5c5fe353e56f@apertussolutions.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Juergen Gross
+ <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Subject: Re: [PATCH] Xen/gnttab: adjust two uses of sizeof()
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <0ddff6c4-7ec7-41a9-9417-687ca16aaafd@suse.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <0ddff6c4-7ec7-41a9-9417-687ca16aaafd@suse.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1785424742-664B62AC-A08EA0E0/0/0
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: LO4P123CA0396.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:18f::23) To CH8PR03MB8275.namprd03.prod.outlook.com
+ (2603:10b6:610:2b9::7)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|MW5PR03MB6907:EE_
+X-MS-Office365-Filtering-Correlation-Id: a5737431-8046-4f5b-f682-08deee4ecf09
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|366016|1800799024|23010399003|10067099003|11063799006|56012099006|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	C9uP1AjI+n5c2p5cnZciRsz6oxiloHpamZYqKr9sFw/rSYal7E3Ogi+07azywkbveb93xhIbZTzzlWRlR2n0DytmKa7r+ZNiM2kI+Vs7vkznt6ECyf/OBosrc23sT4horuchyDD6ywYGT8viCv5xYJ1PfAT4skfj7invWQWG9/EkXXM/56FgTVtavH+YeqiyGLevT0B21rEQ1/ZBRedt8jfkg08lRDFDxJTLczXf2ulIeIvkp/zoogtIh/R9jz3aUUtqHv4zwc0H88THWpBvSYz1KdVOUKhZLVYMi55AUnn8v4dK6om6h4lvJfI94GUlybt5K91UohpK1cIcMlfqACfHDboSBcEOPcHHVEXskv7lqWGMnWmm5MFj5AqJLGOWVaaP6eJrj9i7YxNUg63RotLhyuNP0OvUsIoLgCIwYSMX4lkVbJCgVvNkHBrFVywysb+lzYsrYK/g1XZZ/6iiqnU3HVDOjZnHUmxys6o1ce5vfW8/3eZtLLwtTkrDxj4oz1H6/UwPrl5J/yPX/WsU+buR6YmU8crN56axTpmRa8MLGbYGqGjI3X/qVnVuZcyDxqlFpl0dwLNhEYMcDDHXkt/dEBYR9mMX+ohvCPZNCbUKuk7WskWE1e31Kaa1g6X8Rv39c944qmdc6/RsLDseV8N7797seaHExsQQqR2ZDB0=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(23010399003)(10067099003)(11063799006)(56012099006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?UVRkN3h6WWlWbDdoNndPQWxNRXNwMmVOMS9TOXFKSTNPTWc1cURtN3JJQUl5?=
+ =?utf-8?B?ZzJDa095Y1RCZDEvbGtVRjM0dTdUV1BQVTZFRndCb0R5YnBqZ1J4a1gyOWhL?=
+ =?utf-8?B?NGpoT1VpN3ZWVzlWWEU3ODNEMlkwSVpJMEhKdnJUTURLWjBVc2NGLzBaQ1dS?=
+ =?utf-8?B?OWhya21GWFhpQTF6VGdTOG5pRGZUT1FpYTMzTXdqRDBpdDNVNVBQaXJoWlpX?=
+ =?utf-8?B?Qy80c2xpT1JneVR6VWVJekUrMzJTYXVRRXg4aFprUXg0Wm43c3k2SS82Q0sv?=
+ =?utf-8?B?SVE5eldIM2Y4YktZRFpWWHdGTS92UmZMblhZQnJXNHVKQWlnazY2UVZ0ajIy?=
+ =?utf-8?B?NFErRnRNZC9RbnY2SkdHQ0dzWVpGSGpHb0tDK1hPZlF0Y2FqdEFGTllRTDRJ?=
+ =?utf-8?B?VUE2MHh0cndJYkZYWDNuVFN1VzBUbTQwQUVrdUprZ21oNEFCU0oxZjdXbitB?=
+ =?utf-8?B?SjlqZHB3aHBreFNyWHhVWnZ5UkhuZldIODFndWJMaUVCOHdSVGFQWkFIM1Bq?=
+ =?utf-8?B?bE1ETGlLQ244blZENis5STV3Q0hwTXlKTEhxSDl6dFpSNHQyTGhtczBzMUtl?=
+ =?utf-8?B?enVPb1FadUNmaFdycmlFaHR0UnJVVG45L2FaRy9HN3JSekxUVTgwdTRGTHNY?=
+ =?utf-8?B?WFdTQXJKMSthdTdJUHB6eEhwV201ZS9SWVBVQmhmdjl0T1BUMVNHaHJ5QzlM?=
+ =?utf-8?B?MUVnNXZGM1dVU09sa1U2SGR4TXNVUHlnTUNoUlF3RG5aR25PVkphN3BxOEJp?=
+ =?utf-8?B?LzBqeVRkNEg4VnBXTVo3UXM2QzFpbWNJMEo5NlpmMFVxcWMxZXRFQzNGM1FS?=
+ =?utf-8?B?Rkt3TEVBb2tsMnJqdU82am5GU3ArUnROZUFWNUxQeVJzS1lCUENQL0tMYXlP?=
+ =?utf-8?B?b3RpQk0relM0T0dxNndRdGVFTDUxQVRmZ256ODVTNTUzNlk5L1hoVXhXSllu?=
+ =?utf-8?B?alpTOUVNUTBUeEhGV0ZWM0NwY1RKOGhBbkE4WjNkOWZnc1B2WVNjRjl0VmNt?=
+ =?utf-8?B?a0N4dCswVS8yM281d2JoS0JsTklLSG9lUDNBdUJWQXh5VHN2VFVyZCtDQ2JJ?=
+ =?utf-8?B?bk1FOVhVYWlGK01lS3BwaUJIclp0bnQrektmczNxNnNDY1Q5UXZrbFdqWDJj?=
+ =?utf-8?B?eW9FZThiN29JN2RYL3BYenZnaVRUck9Jd2FQQlp2TVhGLytOMHJ0VWJSUk1D?=
+ =?utf-8?B?S0U5UzRXSWZISnRhbEV1OERNMmN4T21oTTVzdmQzNVRFV0V4SE9zNDZjS21s?=
+ =?utf-8?B?bGtDUG1qeUsyMFo5Ulkyejg1V2MrT0Y5Q2ljQTl2Z0JPdHEraTVxM3hxL2xW?=
+ =?utf-8?B?cEVuVjdUREZxSVNRemRvSE1iVTZONW0wWVdJcStHV0NxNkJNWFdUYnZJSEZt?=
+ =?utf-8?B?WHM0STlLMllkTERWWjRwenl1NE5ua3U4amJ2OG5TUCs1MkZUWEZEQ3A3TWkz?=
+ =?utf-8?B?YitUME8vQmpPSEZjdU5nT2Y5RHdHMVhhVWpOQisrN2k0b2RaYkhUeUtpdkpS?=
+ =?utf-8?B?VktMUUg0dXp1OUJ3L2NhakxBaUFQTXRtQ29odU02OC9DS2xhRWFVRkJlU1Bn?=
+ =?utf-8?B?aS9jVHRRTHJOa243aXArUko1cGk1dDJaM2dYY1dSYjU3Z3lncDRmMVV0TS9P?=
+ =?utf-8?B?dkVtRWtZcHREWmgvOGV3Z1J6Tlp2U2E1YXY4WkgybWVVUmpWQ0o3ZzduMEE5?=
+ =?utf-8?B?alF2SnRIL2R2WUNoZHdVK2Z4RmVHMzE2SldTczd2YUQ2ckoraTRiQ05CcGpk?=
+ =?utf-8?B?b1R0Tmxxc0VjTDRJOGhrQzNQVEZzUWk4bkZQZjkxYmpXNmJUWUxwK0RUSnFj?=
+ =?utf-8?B?dHVvRzQvcFo0Y01aZnM1bW5KMzdSRWp2dGMwajFnRS9ZNU5vamZUNFFjZHZn?=
+ =?utf-8?B?LzNJUUdReUs0NFhWMWNSbEtxVG56SWFBNC9WNS9RbUJCaGpVUlFSWFhHQS9Z?=
+ =?utf-8?B?Qi9ZZVVMd2hMSS9ZWVBlaXlPSmlRSEVYNHdGS1JTRU41VHhPWGtLdmRBV3pS?=
+ =?utf-8?B?NytJZFFPNGlNSTN2T0VkUjZsbHFTMEVFZHZtYXVESVJQcWswWWREek5VT3hM?=
+ =?utf-8?B?a0I5akxUaXh1Ymdsc1RwZWQ3L2Zxd1oybmdBa1lnYzluZlZWZEs1NTZUWDRu?=
+ =?utf-8?B?R21RQjZ2aFBBTVl3NHo4OVRXdXdIY09QeFNHaU9jcVhJT1AyNXBVMlFyWWFW?=
+ =?utf-8?B?QytXb2ZhcWdwRGh5djZvZnJ5eTQvdlFyalgxUDNLcWtjRnFDNjdxNHp3eEFZ?=
+ =?utf-8?B?dlEyaEo1cUZMTWNqSzNUTjVoTlNTTzlzUHZZN2M0bm83ZnJOYVZJV3JaM1lw?=
+ =?utf-8?B?V0QrNkFsU1Bzem5LSzc4UUc3TzRBMEZ1bGdVU29sVWRCNjZ4Tzc2S25xNTFX?=
+ =?utf-8?Q?kMdZzQYHV+fiTBoo=3D?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a5737431-8046-4f5b-f682-08deee4ecf09
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jul 2026 15:25:38.3270
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 0X6qB2DlpwvYQDJgO3AFlLozZ26Rq15xXfMU8bkstYjhPmBZBgPWMoM/MPlBeojw7hNl/cY3RXO5Yu4UwuzckdFmy0w7+Pe9Dp9ofZpT48s=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW5PR03MB6907
+X-purgate-ID: tlsNG-33051d/1785425144-6EACC4E9-FB84DC43/0/0
 X-purgate-type: clean
-X-purgate-size: 4765
+X-purgate-size: 462
 
-On 30.07.2026 17:05, Daniel P. Smith wrote:
-> On 7/28/26 9:13 AM, Jan Beulich wrote:
->> Hooks not taking xsm_default_t as first argument could of course be
->> adjusted to take one, at which point they could be covered here as well.
->> Question is why there is this difference in the first place.
-> 
-> I have a theory but I am not confident to write it down. I can see if I 
-> can confirm with DDG if you really care that much to know the why. 
-> Personally having a consistent hook interface convention would provide a 
-> simpler pattern for people to follow if they are having to introdcue a 
-> new hook.
+On 30/07/2026 3:57 pm, Jan Beulich wrote:
+> The use in gnttab_map() is latently buggy, as "frames" there is
+> xen_pfn_t *, not unsigned long *.
 
-Well, I don't really need to know the reason. If you agree that making
-things uniform is a good move, I can simply stick a few more patches at
-the end of this series.
+ARM32 has 64bit xen_pfn_t's.  At least it's wrong in the safe direction.
 
->> .{alloc,free}_security_evtchns() and their dummy wrappers use struct
->> evtchn[] notation, while xsm_{alloc,free}_security_evtchns() use struct
->> evtchn *. Is there a reason for this inconsistency?
-> 
-> Person had one habit that was counter to Xen preference and missed one? 
-> I have no justification for it. IMHO the interfaces should be kept 
-> consistent to enable better grep-ability.
+>  Adjust the correct use in
+> gnttab_map_frames_v2() as well, just to avoid the problematic pattern of
+> sizeof(<type>).
+>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Which direction would you want it changed? Personally I like the []
-notation better when arrays are meant, but the pointer notation will be
-quite a bit easier with the new hooks.h machinery.
-
->> @@ -206,113 +117,57 @@ static inline void xsm_security_domainin
->>       alternative_vcall(xsm_ops.security_domaininfo, d, info);
->>   }
->>   
->> -static inline int xsm_domain_create(
->> -    xsm_default_t def, struct domain *d, uint32_t ssidref)
->> -{
->> -    return alternative_call(xsm_ops.domain_create, d, ssidref);
->> -}
->> +#define XSM_ALT_void alternative_vcall
->> +#define XSM_ALT_int  return alternative_call
->>   
->> -static inline int xsm_getdomaininfo(xsm_default_t def, struct domain *d)
->> -{
->> -    return alternative_call(xsm_ops.getdomaininfo, d);
->> +#define XSM_HOOK0(rtype, name) \
->> +static inline rtype xsm_ ## name(xsm_default_t def) \
->> +{ \
->> +    XSM_ALT_ ## rtype(xsm_ops.name); \
->>   }
->>   
->> -static inline int xsm_get_domain_state(xsm_default_t def, struct domain *d)
->> -{
->> -    return alternative_call(xsm_ops.get_domain_state, d);
->> +#define XSM_HOOK1(rtype, name, type1) \
->> +static inline rtype xsm_ ## name(xsm_default_t def, type1 arg1) \
->> +{ \
->> +    XSM_ALT_ ## rtype(xsm_ops.name, arg1); \
->>   }
->>   
->> -static inline int xsm_set_target(
->> -    xsm_default_t def, struct domain *d, struct domain *e)
->> -{
->> -    return alternative_call(xsm_ops.set_target, d, e);
->> +#define XSM_HOOK2(rtype, name, type1, type2) \
->> +static inline rtype xsm_ ## name( \
->> +    xsm_default_t def, type1 arg1, type2 arg2) \
->> +{ \
->> +    XSM_ALT_ ## rtype(xsm_ops.name, arg1, arg2); \
->>   }
->>   
->> -static inline int xsm_domctl(xsm_default_t def, struct domain *d,
->> -                             struct xen_domctl *op)
->> -{
->> -    return alternative_call(xsm_ops.domctl, d, op);
->> +#define XSM_HOOK3(rtype, name, type1, type2, type3) \
->> +static inline rtype xsm_ ## name( \
->> +    xsm_default_t def, type1 arg1, type2 arg2, type3 arg3) \
->> +{ \
->> +    XSM_ALT_ ## rtype(xsm_ops.name, arg1, arg2, arg3); \
->>   }
->>   
->> -#ifdef CONFIG_SYSCTL
->> -static inline int xsm_sysctl(xsm_default_t def, const struct xen_sysctl *op)
->> -{
->> -    return alternative_call(xsm_ops.sysctl, op);
->> +#define XSM_HOOK4(rtype, name, type1, type2, type3, type4) \
->> +static inline rtype xsm_ ## name( \
->> +    xsm_default_t def, type1 arg1, type2 arg2, type3 arg3, type4 arg4) \
->> +{ \
->> +    XSM_ALT_ ## rtype(xsm_ops.name, arg1, arg2, arg3, arg4); \
->>   }
->> -#endif
->>   
->> -static inline int xsm_evtchn_unbound(
->> -    xsm_default_t def, struct domain *d1, struct evtchn *chn, domid_t id2)
->> -{
->> -    return alternative_call(xsm_ops.evtchn_unbound, d1, chn, id2);
->> +#define XSM_HOOK5(rtype, name, type1, type2, type3, type4, type5) \
->> +static inline rtype xsm_ ## name( \
->> +    xsm_default_t def, type1 arg1, type2 arg2, type3 arg3, type4 arg4, \
->> +    type4 arg5) \
-> 
-> Looks like you have copy/paste typo?
-
-Indeed. And the last two parameters of .pci_config_permission() sadly aren't
-distinct enough to make the flaw apparent at build time. (That looks to be
-the only hook with 5 parameters.)
-
-Thanks much for spotting.
-
-> I would just note there is quite a bit of churn in this patch, most of 
-> it is mechanical, but makes it easy for these to slip through.
-
-Right. Fortunately this needs doing only once.
-
-> After fixing this typo,
-> 
-> Acked-by: Daniel P. Smith <dpsmith@apertussolutions.com>
-
-Thanks.
-
-Jan
+Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
