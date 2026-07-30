@@ -4,43 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FD6AC55162
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2026 11:32:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1377650.1623579 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E2DBC55160
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2026 13:01:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1377752.1623588 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpOzN-0003CP-RT; Thu, 30 Jul 2026 11:31:49 +0000
+	id 1wpQNO-000274-9w; Thu, 30 Jul 2026 13:00:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1377650.1623579; Thu, 30 Jul 2026 11:31:49 +0000
+Received: by outflank-mailman (output) from mailman id 1377752.1623588; Thu, 30 Jul 2026 13:00:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpOzN-0003CI-OW; Thu, 30 Jul 2026 11:31:49 +0000
-Received: by outflank-mailman (input) for mailman id 1377650;
- Thu, 30 Jul 2026 11:31:49 +0000
+	id 1wpQNO-00026x-7K; Thu, 30 Jul 2026 13:00:42 +0000
+Received: by outflank-mailman (input) for mailman id 1377752;
+ Thu, 30 Jul 2026 13:00:41 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wpOzM-0003CA-U4
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 11:31:49 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Usama.Anjum@arm.com>) id 1wpQNN-00026r-3O
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 13:00:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wpOzK-00HNMU-W6
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 13:31:47 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wpQNM-0002Tr-9p
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2026 15:00:40 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a6b3622-bab6-0a2a0a5309dd-0a2a4508b2bc-2
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 13:31:46 +0200
-Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a6b3622-f659-0a2a45080019-d155802aa5c5-3
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 13:31:46 +0200
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-495437bb891so5488325e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 04:31:46 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
- [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47fc88d7097sm5329959f8f.5.2026.07.30.04.31.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Jul 2026 04:31:45 -0700 (PDT)
+ (envelope-from <Usama.Anjum@arm.com>)
+ id 6a6b4aed-e002-0a2a0a5209dd-0a2a450ca4de-38
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 15:00:38 +0200
+Received: from [52.101.69.16]
+ (helo=AM0PR83CU005.outbound.protection.outlook.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Usama.Anjum@arm.com>)
+ id 6a6b4af3-f479-0a2a450c0019-34654510e1c5-3
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2026 15:00:36 +0200
+Received: from AM8P190CA0002.EURP190.PROD.OUTLOOK.COM (2603:10a6:20b:219::7)
+ by PR3PR08MB5609.eurprd08.prod.outlook.com (2603:10a6:102:81::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.14; Thu, 30 Jul
+ 2026 13:00:32 +0000
+Received: from AMS1EPF00000049.eurprd04.prod.outlook.com
+ (2603:10a6:20b:219:cafe::9d) by AM8P190CA0002.outlook.office365.com
+ (2603:10a6:20b:219::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.14 via Frontend Transport; Thu,
+ 30 Jul 2026 13:00:31 +0000
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ AMS1EPF00000049.mail.protection.outlook.com (10.167.16.133) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.292.8
+ via Frontend Transport; Thu, 30 Jul 2026 13:00:31 +0000
+Received: from VI1PR08MB3421.eurprd08.prod.outlook.com (2603:10a6:803:80::16)
+ by AM8PR08MB6499.eurprd08.prod.outlook.com (2603:10a6:20b:317::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.15; Thu, 30 Jul
+ 2026 12:59:27 +0000
+Received: from VI1PR08MB3421.eurprd08.prod.outlook.com
+ ([fe80::e079:6bd:fbe0:89b4]) by VI1PR08MB3421.eurprd08.prod.outlook.com
+ ([fe80::e079:6bd:fbe0:89b4%3]) with mapi id 15.21.0270.009; Thu, 30 Jul 2026
+ 12:59:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,176 +69,187 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785411106; x=1786015906; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=cAZumL/Aqc7BPMoLy5wLpf6cWCOxSKCjfqYITDKbJx8=;
-        b=DfeN6qotOMRR4qoXyfMVgip8KJSKz0XuRQpjyWgKoBqfuh4EKRsMPYyfzQJM1HXLEu
-         s5qWfrRgMPbtVAsS6fRQObjItaG43Hh3eOvMjYuGGH+QZ9qdclU90XwnrJvXXN4dRLpO
-         FD72m6wn4k0hjURTgBNkCkWiqXtjIFFGLV5U06+UwOfeP8JK30vYBVIUDW4ucXeDezxu
-         bkgkE1BlZUCdxRmyLQAarW0lgZxTNJTuG5z2orYmasj2tlHckLjF0kHEFcHRqwNuF6uQ
-         JX1OowovV+Z22gaykaEe9I8U4/YEQtC7x77oEygoSpiqpesDW2tiIgthgMrz+ua+ZWem
-         7P8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785411106; x=1786015906;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=cAZumL/Aqc7BPMoLy5wLpf6cWCOxSKCjfqYITDKbJx8=;
-        b=A/zMWk4q0NN0qVXk0jaZRevc4bnTKF/KGq+bN+1/hbZmNmDG7JiHsEEJQ4T44q1spf
-         FhaD80jWlffm9KKz3CSOMA8QvnXJarY4iG+Jm9+KmnXw96JKKgW2HMivWiyDFSUTq8cB
-         jFDjAhh8ORFnbdCus6QFgNxDG2QvCcNob4LWCpvSzJa+rWfo97LoA919SztvQiTYKSYr
-         JWZeUoEzX9M7jkC3+UODLeByqlaCBKufzpr628ixHeI1jZVcqTe/L3M0JSXdRfrfIX3+
-         62h4v5FVdhstNVbhRC9DqC1yl1hJlHCDV/XitUTZRlGP+PrQjrP/16UsjtOlHu9OGp5f
-         26oQ==
-X-Forwarded-Encrypted: i=1; AHgh+RpudzeZwCacmDb2kKPA2Si2ysiElIpY+oFxYnT6s6ykNn2NYEaLVBBX5QeT32fxa6iEP0v8+ZL6DBg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxRFJijUmAepPKLaBklY1XeZbAgbfeRoAYW7Tl2jRwaEyRV8yOP
-	WD31Ts076trvnwDvwsXhaFDLZjY4WXMXuYhVotkc8Do31HSBiQEQDJbG
-X-Gm-Gg: AR+sD1346qCNXUKa+92mXs3x1Q4MQLAI8BznW/VdXbL5Eu9bM4V24ohJKV6Q878oNVK
-	VrFbqtXlnAqFbHDalI5z36EeNrGXi8Df4tR25bRsj89aUEdgem8cgAYIlvH1VY24DlK1BYec26m
-	8IvK7p/6TwcosynRi4bAWJElTf8TVtXKUkzvumsBAonshmjBC7a5rsbPEqABNPrVJENdZ8nfFAU
-	DzEZgllBZa1x0LMh2VBMP9bFi1gbitZ17rIF6ZAK9rSPljR2PmodjTlfpFat4p8wcTzj7vO1/4f
-	JpEbJ8zBhZu+W5sNlbqRXY6koaSEFMoqj8A3Ed27EMFik6fGA53TMY3pdGtDf0SvuGqII8DyTX5
-	G22cSnPMBuCr0KQsMEx5q8HAmlwGJEcfyhvOzBWDTzBXIbNlNrxLVee4VfWY6T1JI1F4/q49DSz
-	i9kbm6wZPkLpzrOxvx27/f6XjF6lbMG+jkZiDXF3iOZ515T/8PmPpoWJT4hXoj2/U0gWNEDuDUo
-	9LtfOLDukevn3VnEoR9wuucwUNDWoM0lubrL3UUjbk=
-X-Received: by 2002:a05:600c:4847:b0:495:5ed2:3756 with SMTP id 5b1f17b1804b1-49801f19b4emr15830665e9.16.1785411106062;
-        Thu, 30 Jul 2026 04:31:46 -0700 (PDT)
-Message-ID: <e7d1775d-3c91-43d1-b7a7-30600dcd23dd@gmail.com>
-Date: Thu, 30 Jul 2026 13:31:44 +0200
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=brhowPZaixhmItoK63D6dRP2HdCj5SxXd89zLkHVw7pOcFVeXeRa6dsm8MDQH2QdjHHroEFd6Vy44UqOzVenBzRaPsvq2w0EKl4/IUBXwYzmU5FD5qK98zkuVHmMIddytylp7fEVQEld1svrp9/gpgB0caXUxONBqz1/LErICzn4gwYGnJsc2+Ui0OSVwjry+j4F6v4JP23HSx/RTzA3YyUr19kWue54mZA4bYjLI4JtNd6PCkBYE8kJv5fNgQkVHSUF7DU8DJg2hcoyi/4JyMN/cq8S6/kq5jWAIfuLSDbG0lV2pE89qdy98lEN93IhPQHsGpZjPMIkgE+4LHtuHQ==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=TGN+4FAAC8jIvrpXYh0SLEvL/4I+/62MbZ2lH29z+TY=;
+ b=ld77FhXLKU8yRLcwuOJoBUXZowlHzw/KREmKaaKSNP4IboVn1/jT58no8kAbEK6CO7RiQ3p4rix/RkSc9V/9IDg45FUXT8q/DlphJbEYrV4PfD8jZXRgsWDWJMygGRuNeMbioQzSFFGYKFVVCl68TCsTTNZvnv2YGt/BxhdGB3WppribI5+hiH7pCMPEnErfjlebi7ZNwbSJ0KaFmFQ1Fgu0OiackJx4pHAYbXNXv22/TQ/kaXfhMZi/2H7eRZacVj8ZTjeEEZYZGVHsgt6HSgxqEJ5CwmKUZpLR4FO4z6UIGzXJ1PXVATOciDArVN7cGHl4zvT358xsO5m2ssZlpw==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=linux.ibm.com smtp.mailfrom=arm.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
+ dkim=pass (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TGN+4FAAC8jIvrpXYh0SLEvL/4I+/62MbZ2lH29z+TY=;
+ b=ehFlbI73LoxtbByzSNijQF7loKC3ZeZkxXqfibb33CjVmDNBoYQoepnyr1q1+I1wvvtby/Q9VRDpUKgcH09WljEJj8R5a76S1CKxrdWBk6bf1e/WMFtGccv8XgrF/uT+BZ9ZnJ9h1+A9xjW4ASKIJeakwn8760yq3o5hOm8kHDw=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Yyx+ToOaEnOvliHo5S5zNq7kYBNmgVSRSL0orMykREc9hqSqjsYxQs6C+lu7IYnDXiqlAhPCkdvWBpA4SH3qEK3mFGCnmqynn1L1wHgf/2D1/REgmU4jA1bZUfu4FJEoB4cUaInXCuzbVMHLc0/hyx9184MDrGAS4+YSQsaH2F8L4/e0zrFC6u2XZRkGkB+IRw+ipGNzOdlsNWrP94fZj8M5j1frcD0vHU01l0imGM/TFij8bUMMESJ4CqovmhZr4gEwzrh75Y7b9jhjgHkFozLm3Ik0uwrs9XixxlPemeJLSTjwELPeh+384IKVCn7ncub1OMEh+EfEplfh0oYX4g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=TGN+4FAAC8jIvrpXYh0SLEvL/4I+/62MbZ2lH29z+TY=;
+ b=OPOKjo3Rvy1I4POMIdhajtkJh+RtxKtxGV3xKvUK1yETsg6IzZIMYDDo2cAhLp1PGVZjKFQ6h+aM6JDuMdFWgOTq5x44s+3uUK1oEUbjJLJnVvcq8Ey7XHaO5Lp90rsOH65dFFx0AEyuzASd8q1VpHZVGCp1IHM+Njtzh7zFI5BkKadZCXEjFo2WWCmTIzp3QTVC7Wvb0frWM/amTwik2w880RYlT68zBtZ0gsz6n0kvCxcgn6eF0mUG3KquYfe6ExEhGkpWanzhMxR/C3/ueWLSOH7blAEAxexih86vrVpfwxsrr+Zx77zveIZpbP7Ato2fWzoLhPG2gG6HjGGhVA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TGN+4FAAC8jIvrpXYh0SLEvL/4I+/62MbZ2lH29z+TY=;
+ b=ehFlbI73LoxtbByzSNijQF7loKC3ZeZkxXqfibb33CjVmDNBoYQoepnyr1q1+I1wvvtby/Q9VRDpUKgcH09WljEJj8R5a76S1CKxrdWBk6bf1e/WMFtGccv8XgrF/uT+BZ9ZnJ9h1+A9xjW4ASKIJeakwn8760yq3o5hOm8kHDw=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+Message-ID: <fe1b4098-6ab7-4cf1-ad6b-ffadabbd587a@arm.com>
+Date: Thu, 30 Jul 2026 13:59:24 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 18/23] xen/riscv: implement IRQ routing for device
- passthrough
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- xen-devel@lists.xenproject.org
-References: <cover.1784559209.git.oleksii.kurochko@gmail.com>
- <c489a420b1c01c5312773c2e2b51f63d3babf855.1784559209.git.oleksii.kurochko@gmail.com>
- <c64fc958-73bb-44ed-a3b2-dc368ce675ac@suse.com>
- <6cebc63c-2f21-4ef8-ab10-e2ec62f887b7@gmail.com>
- <534eef4c-7f5d-4565-97b8-e0cc3b3290c2@suse.com>
- <5c5f04e2-56fb-42b5-b49c-faebac313c54@gmail.com>
- <756041b3-14e2-4c1d-bbee-548ca3bea349@gmail.com>
- <ea3417c9-bf6a-4b07-9a74-d9a767a87c9e@suse.com>
+Cc: usama.anjum@arm.com, Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin
+ <tursulin@ursulin.net>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Dimitri Sivanich
+ <dimitri.sivanich@hpe.com>, Arnd Bergmann <arnd@arndb.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+ Helge Deller <deller@gmx.de>, Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ "Liam R. Howlett" <liam@infradead.org>, Lorenzo Stoakes <ljs@kernel.org>,
+ Will Deacon <will@kernel.org>, "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
+ Nick Piggin <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
+ Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+ David Hildenbrand <david@kernel.org>,
+ Pasha Tatashin <pasha.tatashin@soleen.com>, Chris Li <chrisl@kernel.org>,
+ Kairui Song <kasong@tencent.com>, Uladzislau Rezki <urezki@gmail.com>,
+ Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu
+ <mhiramat@kernel.org>, Alexei Starovoitov <ast@kernel.org>,
+ Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>,
+ Eduard Zingerman <eddyz87@gmail.com>,
+ Kumar Kartikeya Dwivedi <memxor@gmail.com>, Ingo Molnar <mingo@redhat.com>,
+ Arnaldo Carvalho de Melo <acme@kernel.org>,
+ Namhyung Kim <namhyung@kernel.org>, SJ Park <sj@kernel.org>,
+ "Matthew Wilcox (Oracle)" <willy@infradead.org>, Jan Kara <jack@suse.cz>,
+ Jason Gunthorpe <jgg@ziepe.ca>, Leon Romanovsky <leon@kernel.org>,
+ Miaohe Lin <linmiaohe@huawei.com>, Dennis Zhou <dennis@kernel.org>,
+ Tejun Heo <tj@kernel.org>, Christoph Lameter <cl@gentwo.org>,
+ Mike Rapoport <rppt@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>,
+ ziy@nvidia.com, pfalcato@suse.de, ryan.roberts@arm.com,
+ linux-kernel@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-parisc@vger.kernel.org,
+ xen-devel@lists.xenproject.org, linux-mm@kvack.org,
+ linux-fsdevel@vger.kernel.org, linux-arch@vger.kernel.org,
+ kasan-dev@googlegroups.com, linux-trace-kernel@vger.kernel.org,
+ bpf@vger.kernel.org, linux-perf-users@vger.kernel.org, damon@lists.linux.dev
+Subject: Re: [PATCH RFC 07/11] mm/mremap: use ptep_get() for the destination
+ PTE
+To: Alexander Gordeev <agordeev@linux.ibm.com>
+References: <20260727164715.2866609-1-usama.anjum@arm.com>
+ <20260727164715.2866609-8-usama.anjum@arm.com>
+ <50dd77c0-b6cc-43e2-abd5-6d44a29b5597-agordeev@linux.ibm.com>
+From: Muhammad Usama Anjum <usama.anjum@arm.com>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <ea3417c9-bf6a-4b07-9a74-d9a767a87c9e@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1785411106-D534D87B-575496D0/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 4148
+In-Reply-To: <50dd77c0-b6cc-43e2-abd5-6d44a29b5597-agordeev@linux.ibm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: LO4P265CA0022.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:2ae::14) To VI1PR08MB3421.eurprd08.prod.outlook.com
+ (2603:10a6:803:80::16)
+MIME-Version: 1.0
+X-MS-TrafficTypeDiagnostic:
+	VI1PR08MB3421:EE_|AM8PR08MB6499:EE_|AMS1EPF00000049:EE_|PR3PR08MB5609:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2422e5ee-63ab-47d4-de99-08deee3a8993
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted:
+ BCL:0;ARA:13230040|1800799024|366016|376014|7416014|23010399003|10067099003|4143699003|11063799006|56012099006|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info-Original:
+ FC2/f3uqOPNNy96aL5tW8wkHImrCfVxh6gQab1ZKH0Q8V9H1vUmueEs6OtDiI8UtXir4rhhqasBx4ap8cYLSYxigO/kvUNlrkbD2UFdd/IpSC7NMQ5r2AdxEt7Dil8zElmXunvRoE5Tlg5sGnVdcymp/0GRd7uQDnxPOWfgMmzW1CCGhDM3v+DfMPVFosD2QLovucjpI0mdWXiiv3LhVLTTiqh85ygjUz5tiRxrntpo8otSPv4PIgvvvuRnm2hI0to5Mdar/A16FWVJK++gzpBzWDlclVVy9ObW6E9YNTB5AcXTLB2BRmht6C+LJ73SIGkvhND+munjpvjnCNX4GM+dv+iNc2yrnOKf3hduUdhhmqBZMJfBiFIXH6AC6j8q89bevK/2qXILNDQRfolUrwjbzI9gX0tiwMteCnIQTjkYrfh1NWlAMJBqRmVgkez0L1229MzW0FFHciClGqnCrHNlhG9+3JkyI/D1HQnoUBzVW2hMioefk3Nl3IAFu1t0UCQ9ab0zh4eIjPXw+czTd5wh5/3SUeVS2L3txx6cDHO6mWTMfg1iPlJNryIjRZOG4tQgZcfzHN0355IoQ1BJo9CIYMiBMGUUM/pO+t0/1P/UVaidrsdU8W1nwX5nKncAJfTqvDhCcwLQvvX6sZpr1j3KIOss8CU0HxU3z0QangmQ=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR08MB3421.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(7416014)(23010399003)(10067099003)(4143699003)(11063799006)(56012099006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-Exchange-RoutingPolicyChecked:
+ PJVqIA2lDgDWhewu7hYynL9BtEIPBvddMwyA6Osilo+gjydcsIvk19XXBZt97+CSHOBCcSG1lF5ESd//62FEcnuW0Op041L9mUSopM9qIiRcFzs6jxJ5UjR3ygaJFlN1jkDri8tj2JilMkEJV/f+jXbciV8JLgAAjrVUK1FCu8cKe10e2R3XzHtcJB0d0wf+6uvadBsnplj1Vi9ZrgFvKbcSQ3nWsFAKAwekW3nE4LknTIXxlkyGUKh4agwsjc5N6hK6U9AG4+8fxKtOCwiJW0F14FybdRB0nEtZgFHfgnVXGE59pb5a47YhLFojq6ZdSXR/ked5yu0EJrH2ID3F1g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB6499
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ AMS1EPF00000049.eurprd04.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	4668f8d0-8f81-4de8-943a-08deee3a6347
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|82310400026|1800799024|14060799003|7416014|376014|36860700016|35042699022|23010399003|22082099003|18002099003|4143699003|11063799006|56012099006|10067099003;
+X-Microsoft-Antispam-Message-Info:
+	O10KOqaXNNUMGR3ls13Np733WLe/+mOUvsHHZK/1xvrOwAaQ3gFyBxD+l4l/yBYETpIfea/UPYyKQXoQWiI0DSf1odiOCn6popV8LeIpeABO8yxkDTap5/ruOMVRfjZLI+0dyHD2AhwqvqDKwora12Uzpxg5urIAPa4gB4EupFRX2Hn9n44kVOaLGJvtbo8AwcybPdx/0cJa2AJXutypzyXOBgYu01V+1NdEtnTlnYyeIniUXiAnZO49zzm2SNvplb2ENgqH6kDZY6eds91aQiTx482FiXo7rQjGer9COEf14KfzsCpgPlo1fLcsJHpS0AhX+6OMTsFA8hsTeu15rGfNPkZrHHJ26Ckw3dA+BOJgVzXOj23My+cRSUZNShklge4arjFOhFMdufo1oPFS8qTpz2tmePAKyDSH7nPAGbR9xQbXnhP39MsUvAYKW9rqMxOtkcT0WsbMA10oUDQ75qNh/i9wl7+THUtbY6fK2MtIFC1s36xsX/Ic+6MccQazOuyXmxWpeY2nLID1Otx4XZpVckuFKv3PMeX4Jz/TThbno8qKIDdQQ82uFvW1ZyzaBwGQdGB3vQ/wX3zoRXr+FkEefBgM9O9xHiFWaZuexJKpGcJY0/ICp7lY2aJEmvGBR/wlK5Irpmo3gcy4rrPqBVgZzL8WivKrJwxuvXgYKM6AzbyC5XB5RWoaraT+RnB+bvHE26VpYqRqh7ejd3XkzA==
+X-Forefront-Antispam-Report:
+	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(14060799003)(7416014)(376014)(36860700016)(35042699022)(23010399003)(22082099003)(18002099003)(4143699003)(11063799006)(56012099006)(10067099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	O0tk75Jwa84mlQCh/jghGzah7Zx4wyBrsFKWBapww83B2Rc5zJP6DKPrz2Uug6JPaPNE+9z2QJlnOBHI5eVJvoivlaP5RB0CDEgLDuDWcRD+uFLUl7J24b6Fh42l/El51riqiL/qx8KLaCiZ3QEA+zMCBEPyTCyleaxfiFROcNsSg7Y0+OwvImkIDS3t6ybum1bYLPDeEvQ/niHon1ljqZi8pGpTndyPvy9tSEgttv7Cwu5YZ0FINdmLMPGMOdm4dq6a5pPvgR0KIEK4XtfwADa29iGw+N9A5AaE3kjZpOuY2T60KxAgD44ofaWhiDmg/gIpQeLlQgG0eGkeGaAhv8dZj8ZlgZmaMiccf1N7/RZyq3/dv3uUyldCsqo3IFF21Ksrf85EBWTicCY/fo8/58SOakbPyIkgIp44+9WMgCZzxrQeA0gufUQ9J4l3XfkD
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jul 2026 13:00:31.6304
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2422e5ee-63ab-47d4-de99-08deee3a8993
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	AMS1EPF00000049.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR08MB5609
+X-purgate-ID: tlsNG-d25034/1785416436-022C0A5B-2239D27B/0/0
+X-purgate-type: clean
+X-purgate-size: 1385
 
-
-
-On 7/30/26 9:18 AM, Jan Beulich wrote:
-> On 29.07.2026 17:23, Oleksii Kurochko wrote:
+On 30/07/2026 12:29 pm, Alexander Gordeev wrote:
+> On Mon, Jul 27, 2026 at 05:46:58PM +0100, Muhammad Usama Anjum wrote:
+>> move_ptes() directly dereferences new_ptep when checking that the
+>> destination slot is empty. new_ptep now points to hw_pte_t table storage,
+>> while pte_none() consumes a logical pte_t value.
 >>
+>> Read the destination entry through the standard ptep_get() accessor before
+>> passing the logical value to pte_none().
 >>
->> On 7/29/26 5:02 PM, Oleksii Kurochko wrote:
->>>
->>>
->>> On 7/29/26 4:15 PM, Jan Beulich wrote:
->>>> On 29.07.2026 13:59, Oleksii Kurochko wrote:
->>>>> On 7/23/26 3:30 PM, Jan Beulich wrote:
->>>>>> On 20.07.2026 17:59, Oleksii Kurochko wrote:
->>>>>>> +/* Route an IRQ to a specific guest */
->>>>>>> +int route_irq_to_guest(struct domain *d, unsigned int virq,
->>>>>>> +                       unsigned int irq, const char *devname)
->>>>>>> +{
->>>>>>> +    struct irqaction *action;
->>>>>>> +    struct irq_guest *info;
->>>>>>> +    struct irq_desc *desc;
->>>>>>> +    unsigned long flags;
->>>>>>> +    int retval = 0;
->>>>>>> +
->>>>>>> +    if ( d->is_dying )
->>>>>>> +        return -EINVAL;
->>>>>>> +
->>>>>>> +    desc = irq_to_desc(irq);
->>>>>>> +
->>>>>>> +    /*
->>>>>>> +     * release_irq() frees this action via xvfree(), relying on
->>>>>>> action
->>>>>>> +     * being the first member of struct irq_guest so that &info-
->>>>>>>> action
->>>>>>> +     * coincides with info itself. Guard the layout so a future field
->>>>>>> +     * reorder can't silently turn that into a free() of a mid-
->>>>>>> allocation
->>>>>>> +     * pointer.
->>>>>>> +     */
->>>>>>> +    BUILD_BUG_ON(offsetof(struct irq_guest, action) != 0);
->>>>>>
->>>>>> Can't release_irq() simply use container_of()? One way or another it
->>>>>> feels
->>>>>> like you're painting yourself into a particular corner ...
->>>>>
->>>>> If it isn't the best option then it is needed to follow they way we had
->>>>> before:
->>>>
->>>> I don't understand why you think you need to go back.
->>>
->>> Because, based on your reply—specifically, "One way or another it feels
->>> like you're painting yourself into a particular corner..." — it seems
->>> that even if I replaced BUILD_BUG_ON() with container_of() in
->>> release_irq(), you would still consider it a bad solution. Did I
->>> misunderstand your point?
+>> Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
+>> ---
+>>  mm/mremap.c | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
 >>
->> One more thing: I'm not really sure it's safe to do the following in
->> release_irq():
->>
->> if ( action->free_on_release )
->>       xvfree(container_of(action, struct irq_guest, action));
->>
->> release_irq() is a generic API, but this kind of allocation is only
->> needed for guest IRQs. Wouldn't it be better to set:
->>
->> action->free_on_release = false;
->>
->> for guest IRQs, and then free the memory in release_guest_irq() after
->> the call to release_irq()?
+>> diff --git a/mm/mremap.c b/mm/mremap.c
+>> index d966ee8248b6b..ecb90ccee6fdd 100644
+>> --- a/mm/mremap.c
+>> +++ b/mm/mremap.c
+>> @@ -264,7 +264,7 @@ static int move_ptes(struct pagetable_move_control *pmc,
+>>  
+>>  	for (; old_addr < old_end; old_ptep += nr_ptes, old_addr += nr_ptes * PAGE_SIZE,
+>>  		new_ptep += nr_ptes, new_addr += nr_ptes * PAGE_SIZE) {
+>> -		VM_WARN_ON_ONCE(!pte_none(*new_ptep));
+>> +		VM_WARN_ON_ONCE(!pte_none(ptep_get(new_ptep)));
 > 
-> Perhaps.
-> 
->> Wouldn't that be a better approach than calling
->> `xvfree(container_of(...))` from within the generic release_irq()?
-> 
-> Perhaps.
-> 
-> What I'd really like to see you do is come up with an approach that is
-> both self-consistent and future-proof. With the latter aspect meaning that
-> it should be (reasonably) easy to identify places that need changing if
-> e.g. the "->free_on_release is only ever one value" property goes away.
-> 
+> Same as the previous patch, except that I did it already:
+> https://lore.kernel.org/linux-mm/20260720141633.501799-1-agordeev@linux.ibm.com/
+I'll drop this patch.
 
-An approach with action->free_on_release = false; together with 
-vfree(info) in release_guest_irq() seems to be the best option. Since 
-action is no longer allocated dynamically, it should not be freed 
-through free_on_release, so setting it to false makes that explicit. 
-Additionally, guest IRQs have extra state (struct irq_guest), and it is 
-the responsibility of release_guest_irq() to clean it up.
+> 
+>>  
+>>  		nr_ptes = 1;
+>>  		max_nr_ptes = (old_end - old_addr) >> PAGE_SHIFT;
+>> -- 
+>> 2.47.3
+>>
 
-This also keeps the semantics of ->free_on_release consistent for Xen 
-IRQs. If it is set to true, release_irq() is responsible for freeing 
-struct irq_action; if it is false, release_irq() should not free it.
+-- 
+Thanks,
+Usama
 
-For guest interrupts, release_irq() should not free anything because 
-struct irq_action is embedded in struct irq_guest, which is freed by 
-release_guest_irq(). If, in the future, guest interrupts need 
-->free_on_release = true, the only required change would be to allocate 
-struct irq_action dynamically and set ->free_on_release = true. All 
-other is already covered. That makes the design, in my opinion, 
-self-consistent and future-proof.
-
-~ Oleksii
 
