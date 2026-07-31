@@ -4,40 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ACBBC54F54
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2026 14:30:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1379173.1623948 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01CCEC5516D
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2026 14:46:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1379220.1623958 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpoFp-0004WW-37; Fri, 31 Jul 2026 14:30:29 +0000
+	id 1wpoVJ-0006Q6-Cv; Fri, 31 Jul 2026 14:46:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1379173.1623948; Fri, 31 Jul 2026 14:30:29 +0000
+Received: by outflank-mailman (output) from mailman id 1379220.1623958; Fri, 31 Jul 2026 14:46:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpoFp-0004WP-01; Fri, 31 Jul 2026 14:30:29 +0000
-Received: by outflank-mailman (input) for mailman id 1379173;
- Fri, 31 Jul 2026 14:30:27 +0000
+	id 1wpoVJ-0006Pz-AF; Fri, 31 Jul 2026 14:46:29 +0000
+Received: by outflank-mailman (input) for mailman id 1379220;
+ Fri, 31 Jul 2026 14:46:27 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 1wpoFn-0004WJ-L2
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2026 14:30:27 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fb8a3efe8000e099@swg.vates.tech>)
+ id 1wpoVH-0006Pr-6S
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2026 14:46:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wpoFm-00H80u-Jt
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2026 16:30:26 +0200
-Received: from [10.42.69.4] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 6a6cb167-bab6-0a2a0a5309dd-0a2a45048a42-24
- for <xen-devel@lists.xenproject.org>; Fri, 31 Jul 2026 16:30:18 +0200
-Received: from [160.101.131.9] (helo=na1pdmzitismtp02.tibco.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 6a6cb179-b57f-0a2a45040019-a065830991ee-3
- for <xen-devel@lists.xenproject.org>; Fri, 31 Jul 2026 16:30:17 +0200
-Received: from fedora.eng.citrite.net (unknown [10.113.40.46])
- by na1pdmzitismtp02.tibco.com (Postfix) with ESMTP id 89848832FB23;
- Fri, 31 Jul 2026 10:28:30 -0400 (EDT)
+ id 1wpoVG-009enR-JU
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2026 16:46:26 +0200
+Received: from [10.42.69.11] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fb8a3efe8000e099@swg.vates.tech>)
+ id 6a6cb52b-bab6-0a2a0a5309dd-0a2a450bd2b6-20
+ for <xen-devel@lists.xenproject.org>; Fri, 31 Jul 2026 16:46:26 +0200
+Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fb8a3efe8000e099@swg.vates.tech>)
+ id 6a6cb541-b7e8-0a2a450b0019-b9ff1c239663-3
+ for <xen-devel@lists.xenproject.org>; Fri, 31 Jul 2026 16:46:25 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 19fb8a3efe8000e099.005 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Fri, 31 Jul 2026 14:46:19 +0000
+Received: from bazzite.gpn.vates.fr (88-188-240-210.subs.proxad.net
+ [88.188.240.210]) (Authenticated sender: teddy.astie)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 7D2BF81F53;
+ Fri, 31 Jul 2026 16:46:18 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,108 +58,168 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-From: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
-To: xen-devel@lists.xenproject.org,
-	teddy.astie@vates.tech
-Cc: jbeulich@suse.com,
-	andrew.cooper3@citrix.com,
-	roger.pau@citrix.com,
-	jason.andryuk@amd.com
-Subject: Re: Re: [PATCH v2] nSVM: Check injected event consistency
-Date: Fri, 31 Jul 2026 15:26:58 +0100
-Message-ID: <20260731142700.2207713-1-abdelkareem.abdelsaamad@citrix.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <1785247466.8631fc262581453bbf619ec5b2062170.19fa90a823a000e099@vates.tech>
-References: <1785247466.8631fc262581453bbf619ec5b2062170.19fa90a823a000e099@vates.tech>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=FdEEHXEwEp9GauUSnrbeP1nRZtiv7EadWHOhtK/7Cns=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:feedback-id;
+ b=Wg0sKZhmUe0Juh71O6JElta9u9eEy7++QuL9Bpq6urO2vLISEz8XKkYyf3qtavsiyabOWGx/o
+ b9RKBMqj2pP8efvipcE2FgfmWM0bjrqRz+ByZNCNtvjyP843igBY5/zueT9ARlqYTBGqZruEeNu
+ sjXLjalQgv/WnSkehZFSs76x+ZImniJ+cNaO5EArUCphsRrWS0OtiSNrC/MUK6k6VdjRNTEVJzj
+ wNXQmHs5ijkCzo23oa9p8zsYWKd4B1dwFMExCgrLoafCQ25vr9aM842hFbRHlKjwTH101lqnQtH
+ 6c5/jIWf3xqXY2xQOZYKXmRyLZqDdEwwXQSvTITjZ6gQ==
+X-Zone-Loop: e51c7ab60ecbde8f34239a0082bfd5054d892b336314
+x-campaign-type: default
+x-transaction-id: f67949aa-7a8e-4b4d-b488-60e30dfa40a4
+x-swg-uid: 01-e7a6bca7-e85b-4bf7-bea5-ec5baffb132a
+X-Mailer: Sweego
+Message-ID:
+ <1785509179.8631fc262581453bbf619ec5b2062170.19fb8a3efe8000e099@vates.tech>
+x-swg-bid: 1785509179.8631fc262581453bbf619ec5b2062170.19fb8a3efe8000e099
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+From: Teddy Astie <teddy.astie@vates.tech>
+To: xen-devel@lists.xenproject.org
+Cc: Teddy Astie <teddy.astie@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Jason Andryuk <jason.andryuk@amd.com>,
+	Tim Deegan <tim@xen.org>
+Subject: [RFC PATCH v2 0/5] x86: Use a single fixed ASID per domain
+Date: Fri, 31 Jul 2026 16:19:56 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1785508218-506DAB50-273F4A3F/0/0
+X-BM-Disclaimer: Yes
+Content-Type: multipart/alternative; boundary="-=Part.18fe.15b9ae96df1ee42d.19fb8a3ed88.3a0074c82c1a8b75=-"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1785509178760
+X-purgate-ID: tlsNG-42698a/1785509186-194C39EA-56AF8FE8/0/0
 X-purgate-type: clean
-X-purgate-size: 3546
+X-purgate-size: 4829
 
-On 28.07.2026 14:04, Teddy Astie wrote:
->On 16.07.2026 17:41, Abdelkareem Abdelsaamad wrote:
->> --- a/xen/arch/x86/hvm/svm/vmcb.c
->> +++ b/xen/arch/x86/hvm/svm/vmcb.c
->> @@ -320,6 +320,31 @@ void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb)
->>       svm_dump_sel("  TR", &vmcb->tr);
->>   }
->>   
->> +static bool is_valid_svm_vmcb_injected_exception_vector(
->> +    const struct vmcb_struct *vmcb, uint8_t vmcb_injected_vector)
->> +{
->> +    return ( (vmcb_injected_vector == X86_EXC_DE) ||
->> +             (vmcb_injected_vector == X86_EXC_DB) ||
->> +             (vmcb_injected_vector == X86_EXC_BP) ||
->> +             (vmcb_injected_vector == X86_EXC_OF) ||
->> +             (vmcb_injected_vector == X86_EXC_BR) ||
->
->This particular exception is special. AMD APM states that this event is 
->"impossible" if the guest is in 64-bit mode and will cause 
->VMEXIT_INVALID in such case.
->
-> > If the VMM attempts to inject an event that is impossible for the 
->guest mode (e.g., a #BR exception when the guest is in 64-bit mode), the 
->event injection will fail and no guest state instructions will be 
->executed; VMRUN will immediately exit with an error code of VMEXIT_INVALID.
->
->So this one likely want a additional check for hvm_guest_x86_mode() != 
->X86_MODE_64BIT.
->
->It looks like #OF has the same quirk (invalid in 64-bits mode).
->
-I agree your point is valid. I will address in V3.
->Though I don't know if any other exception has a similar behavior though.
-I have double-checked the APM vOL3(24594—Rev. 3.37—jULY 2025) regarding the
-other exception vectors and instructions. Vector 4 (#OF) and vector 5 (#BR) are
-unique because their triggering instructions BOUND and INTO are invalid and
-disabled in 64-bit mode, making them structurally invalid. Other vectors remain
-legal across the other modes. In V3, I will make use of hvm_guest_x86_mode to
-correctly isolate these two cases.
->
->> +             (vmcb_injected_vector == X86_EXC_UD) ||
->> +             (vmcb_injected_vector == X86_EXC_NM) ||
->> +             (vmcb_injected_vector == X86_EXC_DF) ||
->> +             (vmcb_injected_vector == X86_EXC_TS) ||
->> +             (vmcb_injected_vector == X86_EXC_NP) ||
->> +             (vmcb_injected_vector == X86_EXC_SS) ||
->> +             (vmcb_injected_vector == X86_EXC_GP) ||
->> +             (vmcb_injected_vector == X86_EXC_PF) ||
->> +             (vmcb_injected_vector == X86_EXC_MF) ||
->> +             (vmcb_injected_vector == X86_EXC_AC) ||
->> +             (vmcb_injected_vector == X86_EXC_MC) ||
->> +             (vmcb_injected_vector == X86_EXC_XM) ||
->> +             (vmcb_injected_vector == X86_EXC_HV) ||
->> +             (vmcb_injected_vector == X86_EXC_SX) ||
->> +             (vmcb_get_sev_es(vmcb) && vmcb_injected_vector == X86_EXC_VC) );
->> +}
->
->I think using a switch here would help making things more readable, 
->especially if we need to add additional comparisons in specific cases 
->(SEV-ES for #VC, !64-bits for #BR and #OF, ...).
->
->I have in mind something like
->
->   switch (vmcb_injected_vector)
->   {
->   case X86_EXC_OF:
->   case X86_EXC_BR:
->       return hvm_guest_x86_mode(v) != X86_MODE_64BIT;
->
->   (all other special cases, ...)
->
->   case X86_EXC_UD:
->   (all other simple cases ...)
->       return true;
->
->   default:
->       return false;
->   }
-Yes, I agree writing it with switch-case makes sense with this structure. I
-will change to switch structure in V3.
->
->Teddy
---Abdelkareem
+---=Part.18fe.15b9ae96df1ee42d.19fb8a3ed88.3a0074c82c1a8b75=-
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+(ASID can be replaced with VPID for Intel)
+
+Currently in Xen=2E In order to perform a TLB flush for a guest, we just i=
+ncrement
+the ASID, which has the same effect as flushing the TLB=2E When we run out=
+ of ASID,
+we flush the entire TLB and start over=2E
+This is done per pCPU, thus the ASID management is done on a per-pCPU basi=
+s=2E
+
+However, AMD SEV requires the ASID to be configured in advance and be uniq=
+ue per
+domain as it bound to the encryption key used for the domain=2E
+
+This patch series propose a new ASID model where a fixed single ASID is at=
+tributed
+to the domain, thus all vCPU share such ASID=2E Moreover, the TLB for a vC=
+PU needs to
+be flushed in these conditions :
+* the vCPU is migrated to another pCPU
+(remote pCPU TLB may be out of sync or lack flushes made previously)
+* a different vCPU of the same domain previously ran on this pCPU
+(TLB entries comes from the previous vCPU, which may have a different CR3)
+
+Albeit related to a SEV vulnerability, [1] gives more justifications on th=
+e needs
+of these rules for correctness=2E
+
+It is also important for making hypervisor-side guest broadcast TLB flushi=
+ng
+realistic, as a single fixed ASID per domain allows a broacast TLB flush t=
+o use
+such ASID as target=2E
+
+Moreover, AMD programmer manual also explicitely require this for correctl=
+y virtualizing
+INVLPGB in guests (through 090h:7 ("Enable INVLPGB/TLBSYNC=2E") in VMCB) :
+> A guest that executes a legal INVLPGB that is not intercepted will have =
+the requested
+> ASID field replaced by the current ASID and the valid ASID bit set befor=
+e doing the
+> broadcast invalidation=2E  Because of its broadcast nature, the ASID fie=
+ld must be global
+> and all processors must allocate the same ASID to the same Guest for pro=
+per operation=2E
+> Hypervisors that do not support a global ASID must intercept the Guest u=
+sage of INVLPGB,
+> if enabled, for proper behavior=2E
+
+In order to avoid making ASID management too complex, transition to only u=
+sing a fixed ASID
+per domain=2E If no ASID is available (e=2Eg out of ASID or ASID usage is =
+diabled), we use ASID=3D1
+as a placeholder (which is still a valid ASID), and always flush the TLB o=
+n context switch
+if the vcpu is using ASID=3D1=2E
+
+Also add a way to specify a prefered minimum ASID, it is meant to be used =
+later on to avoid
+clobbering the low ASID space of SEV-ES and favor allocating ASIDs over th=
+at space=2E
+
+[1] TLB Poisoning Attacks on AMD Secure Encrypted Virtualization
+https://dl=2Eacm=2Eorg/doi/epdf/10=2E1145/3485832=2E3485876
+
+v1: https://lore=2Ekernel=2Eorg/xen-devel/cover=2E1776259594=2Egit=2Eteddy=
+=2Eastie@vates=2Etech/
+
+Teddy Astie (5):
+  vmx: Refactor vpid_sync_vcpu_gva()
+  vmx: Introduce vcpu single context VPID invalidation
+  x86: Track vcpu context switches and introduce needs_tlb_flush field
+  x86/hvm: Transition to needs_tlb_flush logic, use per-domain ASID
+  hvm: Allow specifying a prefered asid minimum
+
+ docs/misc/xen-command-line=2Epandoc      |   2 +-
+ xen/arch/x86/domain=2Ec                  |  26 ++++
+ xen/arch/x86/flushtlb=2Ec                |  22 +--
+ xen/arch/x86/hvm/asid=2Ec                | 177 +++++++++++--------------
+ xen/arch/x86/hvm/emulate=2Ec             |   2 +-
+ xen/arch/x86/hvm/hvm=2Ec                 |  14 +-
+ xen/arch/x86/hvm/nestedhvm=2Ec           |   7 +-
+ xen/arch/x86/hvm/svm/asid=2Ec            |  67 +++++++---
+ xen/arch/x86/hvm/svm/nestedsvm=2Ec       |   2 +-
+ xen/arch/x86/hvm/svm/svm=2Ec             |  35 +++--
+ xen/arch/x86/hvm/svm/svm=2Eh             |   4 -
+ xen/arch/x86/hvm/vmx/vmcs=2Ec            |   6 +-
+ xen/arch/x86/hvm/vmx/vmx=2Ec             |  66 ++++-----
+ xen/arch/x86/hvm/vmx/vvmx=2Ec            |   4 +-
+ xen/arch/x86/include/asm/domain=2Eh      |   6 +
+ xen/arch/x86/include/asm/flushtlb=2Eh    |   7 -
+ xen/arch/x86/include/asm/hvm/asid=2Eh    |  39 +++---
+ xen/arch/x86/include/asm/hvm/domain=2Eh  |   1 +
+ xen/arch/x86/include/asm/hvm/hvm=2Eh     |  15 +--
+ xen/arch/x86/include/asm/hvm/svm=2Eh     |   5 +
+ xen/arch/x86/include/asm/hvm/vcpu=2Eh    |  10 +-
+ xen/arch/x86/include/asm/hvm/vmx/vmx=2Eh |  25 +++-
+ xen/arch/x86/mm/hap/hap=2Ec              |   9 +-
+ xen/arch/x86/mm/p2m=2Ec                  |   6 +-
+ xen/arch/x86/mm/paging=2Ec               |   2 +-
+ xen/arch/x86/mm/shadow/multi=2Ec         |  12 +-
+ 26 files changed, 302 insertions(+), 269 deletions(-)
+
+--=20
+2=2E54=2E0
+
+
+
+-- 
+Teddy Astie | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates s=
+olutions
+
+web: https://vates=2Etech
+---=Part.18fe.15b9ae96df1ee42d.19fb8a3ed88.3a0074c82c1a8b75=---
 
