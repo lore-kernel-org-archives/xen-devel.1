@@ -4,40 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34810C55167
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2026 10:04:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1378949.1623919 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0EDAC54F54
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2026 10:21:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1378981.1623929 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpk62-0000Js-Ox; Fri, 31 Jul 2026 10:04:06 +0000
+	id 1wpkMF-0003Ms-2q; Fri, 31 Jul 2026 10:20:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1378949.1623919; Fri, 31 Jul 2026 10:04:06 +0000
+Received: by outflank-mailman (output) from mailman id 1378981.1623929; Fri, 31 Jul 2026 10:20:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpk62-0000Jl-MR; Fri, 31 Jul 2026 10:04:06 +0000
-Received: by outflank-mailman (input) for mailman id 1378949;
- Fri, 31 Jul 2026 10:04:05 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wpkMF-0003Ml-08; Fri, 31 Jul 2026 10:20:51 +0000
+Received: by outflank-mailman (input) for mailman id 1378981;
+ Fri, 31 Jul 2026 10:20:49 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 1wpk61-0000Jf-GI
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2026 10:04:05 +0000
+ (envelope-from <Usama.Anjum@arm.com>) id 1wpkMD-0003Mf-9y
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2026 10:20:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wpk60-006E8r-LL
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2026 12:04:04 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wpkMC-00650t-Br
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2026 12:20:48 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 6a6c730f-2eae-0a2a0a5409dd-0a2a45028dfa-28
- for <xen-devel@lists.xenproject.org>; Fri, 31 Jul 2026 12:04:04 +0200
-Received: from [160.101.131.9] (helo=na1pdmzitismtp02.tibco.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 6a6c7313-6ca4-0a2a45020019-a06583098c8a-3
- for <xen-devel@lists.xenproject.org>; Fri, 31 Jul 2026 12:04:04 +0200
-Received: from fedora.eng.citrite.net (unknown [10.113.40.46])
- by na1pdmzitismtp02.tibco.com (Postfix) with ESMTP id 375FC832E6A3;
- Fri, 31 Jul 2026 06:02:17 -0400 (EDT)
+ (envelope-from <Usama.Anjum@arm.com>)
+ id 6a6c76f1-5cb7-0a2a0a5109dd-0a2a450ab530-36
+ for <xen-devel@lists.xenproject.org>; Fri, 31 Jul 2026 12:20:47 +0200
+Received: from [40.107.130.46]
+ (helo=MRWPR03CU001.outbound.protection.outlook.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Usama.Anjum@arm.com>)
+ id 6a6c76fe-f2d2-0a2a450a0019-286b822e4c7a-3
+ for <xen-devel@lists.xenproject.org>; Fri, 31 Jul 2026 12:20:46 +0200
+Received: from DU2PR04CA0220.eurprd04.prod.outlook.com (2603:10a6:10:2b1::15)
+ by DU4PR08MB11717.eurprd08.prod.outlook.com (2603:10a6:10:643::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.15; Fri, 31 Jul
+ 2026 10:20:42 +0000
+Received: from DU2PEPF00028D04.eurprd03.prod.outlook.com
+ (2603:10a6:10:2b1:cafe::62) by DU2PR04CA0220.outlook.office365.com
+ (2603:10a6:10:2b1::15) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.15 via Frontend Transport; Fri,
+ 31 Jul 2026 10:20:41 +0000
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ DU2PEPF00028D04.mail.protection.outlook.com (10.167.242.164) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.5
+ via Frontend Transport; Fri, 31 Jul 2026 10:20:41 +0000
+Received: from AM0PR08MB3410.eurprd08.prod.outlook.com (2603:10a6:208:df::33)
+ by GV2PR08MB11278.eurprd08.prod.outlook.com (2603:10a6:150:2f9::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.15; Fri, 31 Jul
+ 2026 10:19:34 +0000
+Received: from AM0PR08MB3410.eurprd08.prod.outlook.com
+ ([fe80::b6cc:973e:a807:c3d3]) by AM0PR08MB3410.eurprd08.prod.outlook.com
+ ([fe80::b6cc:973e:a807:c3d3%6]) with mapi id 15.21.0270.009; Fri, 31 Jul 2026
+ 10:19:33 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,37 +69,217 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-From: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: jbeulich@suse.com,
-	andrew.cooper3@citrix.com,
-	roger.pau@citrix.com,
-	jason.andryuk@amd.com,
-	teddy.astie@vates.tech
-Subject: PING: Re: [PATCH v2] nSVM: Check injected event consistency
-Date: Fri, 31 Jul 2026 11:01:05 +0100
-Message-ID: <20260731100110.2204957-1-abdelkareem.abdelsaamad@citrix.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <d7f21b51072743e5fb8743db53148231fef6fbb7.1784190077.git.abdelkareem.abdelsaamad@citrix.com>
-References: <d7f21b51072743e5fb8743db53148231fef6fbb7.1784190077.git.abdelkareem.abdelsaamad@citrix.com>
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=tfvxCysufYP2/Aj3rVfYlV7QM0IRfSDedX6Nae2AXjuVqubo/fX49ecMAZMlOqYh6nAqbPlpyWFYfJ6Xe/wr2IQBQ4t18+oiY2ak5dVmQCr7CGcHYr7gpW8pMpps5C1itk+U84qnS3ZVx3dBnkkTHTPi6PzVxv8fwY4n51ZFZm1SzGNmUChbia3+AbT6aZwe8o/3fHUVFk47H/40wPo8BopKtw807TAEp2z2wKVP2JKL3Yy18UBT4oh2HbB59Ak7qufDzfCAS0QEwbh8KLm1cNh3yBrXoQaQuxocVrTmacM7RayClBb2TLPBqt39M4dGRsu6HPkIiDQEXsObcrjsWw==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/9bGte8eqdxuMMzc6Sl3gDguhLqQI6GBUeVCbvVeu8A=;
+ b=mNVZB9SyaxZ6Xj3wn+Uvbe34FtEqty4UzniTgmvDHVr9e45fZgqPwaAFPghqIw14E3asWrQiCwDRS+BBwXiGVYYh0qmh2cuXkIUy3oFKPbeQ6+OIpVJbUdGj6kOth9oftC+QcdGgOD4Br4SwQCoAReXhRmyhDqHHszC2ySV7Wv7GMwtkwVbzAbLX/p5hHn0Gsg0/7Qctu2XiVyKYXf8X65hTZ4+k+cWUFnN3H+W2aB+PWkI5YxQaUw007litHRpBC9qT+02G9Up2v0Kryz5Rir3ei0bym9uVKBkM4XQHkJGPdaLBw6YAro1ya6MC+FhBsWw28QTKhKcwzKPmV373+w==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=suse.com smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/9bGte8eqdxuMMzc6Sl3gDguhLqQI6GBUeVCbvVeu8A=;
+ b=cB5r1Whn7zm4IjrU8ljCV0Q7/8waXW+Snz5qDVSFDT6iJQDf0Zs6ZV0KTsHR/rkcn4OBTHXCurcfBr79XtPVWA0L5Wdq7yzDThpWX+1uv0kvDXKB+/ZRMO+e2OcLAUCpFyIKwzCRYSTg/RxY/sHXEpuGqUrl+r5LTCe6RAf2ans=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=RA36WTR3u3SMRbdo4Q+GY9qftlofBtyl26SpHhVA1QL3wPiNHvi7neI8BbiGFjcNhz1+h1QDKcE0ZH29no90uYmqtrLrQnwRJD280YKRU7/gqA0+0tIUTJFKURvMSdpBS7eVPTouH84B16YiKeL88sietYvZ7XOa71dlK+ScH4hQhGonkDNwW4F/HaN4Nyh4duISMR/oBfVW6+GEH+aluV/FbgSsThnzenNYe2xxWAHtZIGyfkN7TPij1BBo+UJtNXsts1wyxh1TmDRLjnx5oc+i/7JjfOgPTZwDIaMTQt6vUTHSC5NoadpfnbkxWOFTla/gP6QR0jbh50pkYvcHGA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/9bGte8eqdxuMMzc6Sl3gDguhLqQI6GBUeVCbvVeu8A=;
+ b=g05P1/GLRVOKiLbD7Hb/VMYlyYCDfmaEF5OIYvGINkGPWcIpqHcFwbqMc0/AWM6+ODDDSdiJpDyVHnpd0FgL5QoOLa4CXqhA66pWz1YIkKejm8m0xccvKH5Uf2JK2DOaHrqRyEuyXM/tSe6/2ajwLwYxrWeEAzDI60Z1jX6CtU0kSJzN1NDxpWBMqJfRS4KJG6uG36/NayfVcXgpDfQZ0uiyJynnKgLdvaqB8OMJbDhMLUfxgeKSCY1pf/MDs5FtIpO0SH5u3N668OxAR5xp4xyyRMpEpZ+kXYeUJ1kqePf0+jMbrTuI7OlNQsxC6CaqVaoszEtJ6wUT2nO3X0+cmg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/9bGte8eqdxuMMzc6Sl3gDguhLqQI6GBUeVCbvVeu8A=;
+ b=cB5r1Whn7zm4IjrU8ljCV0Q7/8waXW+Snz5qDVSFDT6iJQDf0Zs6ZV0KTsHR/rkcn4OBTHXCurcfBr79XtPVWA0L5Wdq7yzDThpWX+1uv0kvDXKB+/ZRMO+e2OcLAUCpFyIKwzCRYSTg/RxY/sHXEpuGqUrl+r5LTCe6RAf2ans=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+Message-ID: <9ac33752-b587-4901-b5f2-473e573d7ede@arm.com>
+Date: Fri, 31 Jul 2026 11:19:32 +0100
+User-Agent: Mozilla Thunderbird
+Cc: usama.anjum@arm.com, Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin
+ <tursulin@ursulin.net>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Dimitri Sivanich
+ <dimitri.sivanich@hpe.com>, Arnd Bergmann <arnd@arndb.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+ Helge Deller <deller@gmx.de>, Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ "Liam R. Howlett" <liam@infradead.org>, Lorenzo Stoakes <ljs@kernel.org>,
+ Will Deacon <will@kernel.org>, "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
+ Nick Piggin <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
+ Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+ David Hildenbrand <david@kernel.org>,
+ Pasha Tatashin <pasha.tatashin@soleen.com>, Chris Li <chrisl@kernel.org>,
+ Kairui Song <kasong@tencent.com>, Uladzislau Rezki <urezki@gmail.com>,
+ Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu
+ <mhiramat@kernel.org>, Alexei Starovoitov <ast@kernel.org>,
+ Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>,
+ Eduard Zingerman <eddyz87@gmail.com>,
+ Kumar Kartikeya Dwivedi <memxor@gmail.com>, Ingo Molnar <mingo@redhat.com>,
+ Arnaldo Carvalho de Melo <acme@kernel.org>,
+ Namhyung Kim <namhyung@kernel.org>, SJ Park <sj@kernel.org>,
+ "Matthew Wilcox (Oracle)" <willy@infradead.org>, Jan Kara <jack@suse.cz>,
+ Jason Gunthorpe <jgg@ziepe.ca>, Leon Romanovsky <leon@kernel.org>,
+ Miaohe Lin <linmiaohe@huawei.com>, Dennis Zhou <dennis@kernel.org>,
+ Tejun Heo <tj@kernel.org>, Christoph Lameter <cl@gentwo.org>,
+ Mike Rapoport <rppt@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>,
+ ziy@nvidia.com, pfalcato@suse.de, agordeev@linux.ibm.com,
+ ryan.roberts@arm.com, linux-kernel@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org,
+ linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
+ linux-arch@vger.kernel.org, kasan-dev@googlegroups.com,
+ linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
+ linux-perf-users@vger.kernel.org, damon@lists.linux.dev
+Subject: Re: [PATCH RFC 01/11] mm: introduce hw_pte_t for PTE table storage
+To: Anshuman Khandual <anshuman.khandual@arm.com>,
+ =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+References: <20260727164715.2866609-1-usama.anjum@arm.com>
+ <20260727164715.2866609-2-usama.anjum@arm.com>
+ <6xah74eadjmo2bozyr62wcxo4hhpsiufx2mshh7tztyy2dzzps@63m327m7pl5u>
+From: Muhammad Usama Anjum <usama.anjum@arm.com>
+Content-Language: en-US
+In-Reply-To: <6xah74eadjmo2bozyr62wcxo4hhpsiufx2mshh7tztyy2dzzps@63m327m7pl5u>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1785492244-F0EA32AC-98BE6D7B/0/0
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: LO4P265CA0321.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:390::12) To AM0PR08MB3410.eurprd08.prod.outlook.com
+ (2603:10a6:208:df::33)
+MIME-Version: 1.0
+X-MS-TrafficTypeDiagnostic:
+	AM0PR08MB3410:EE_|GV2PR08MB11278:EE_|DU2PEPF00028D04:EE_|DU4PR08MB11717:EE_
+X-MS-Office365-Filtering-Correlation-Id: b9a6f79d-2568-4a69-150e-08deeeed5fa6
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted:
+ BCL:0;ARA:13230040|366016|23010399003|1800799024|7416014|376014|18002099003|22082099003|4143699003|11063799006|10067099003|56012099006|6133799003;
+X-Microsoft-Antispam-Message-Info-Original:
+ N2wlK7+ZRozJGmK0N2Kg0R4yJ5wOgZ0BD8bcmN9ckzK3UKJ2F4czXbrv7jZaWgvVUj2tZLGIy6TXZHVj8n7cCBGjmutqs1o22knL3OyEpVQm205U7W840n0BzB93Ls3ya0MZ3n6q0MiN1ZCHJEdhHH4FmcCqbn8amDqXdOS2JFy534KAR6w8Hode3mZKdiNOi4XHA4EMm4R4NmgNqv8BTHU1o1mrdwRGbDcLLTL/Uhcr5Zj2H23tyNGUWdzcb9/6Z+9bMpCyFaPdcHduC8sbRRNlTmKgEgaDWxAsRtFcZniZDxYHOO0wMLuvu/FIbZEpfc9mggB79qJPf78hwUaK6sCBMcFbFO1lIgj/xFLfWAMPLe5iSzSFLg+eGHiNLL7zlhllC5XRJ7sba3tAP1A5lpnMKQQ5InaimxmgfYr2EcWK5+6aNVUYhSXkZdPq7CHlTQ18QsDrrhmDdOi8MKesiDc4vc9VxGb/uuv4aw5rgyKAM7jO0sO/zN+AdxTpB9Vtc10PElC4ddyBnsaMt+zoJSiIhtu0ZzbyjOzgxOvSTZh9hr8fCJVH9BN7z4kFR0HmSW0uqGKEUsWoW1c6OA7FbV3EauzK0vM4jQZyqMS9znmYSKnSFtSl9lnT1Aih3rkG/pMOiNT7X9Xk05Vfb8Gxfo07Avde+ZzbUlyDqgQmWys=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR08MB3410.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(1800799024)(7416014)(376014)(18002099003)(22082099003)(4143699003)(11063799006)(10067099003)(56012099006)(6133799003);DIR:OUT;SFP:1101;
+X-Exchange-RoutingPolicyChecked:
+ jppYn+MrAjPlJcJEzGfQ1jvETR90CuL564Cvd3s5pQpSXb3FjdEezsTcu1l7Aw7vpXIhIhpPA4Fvjw06egzld5SxxNDODfBO3WGFQpssEDJnL8PWJRIWECUYo7TnCKu253Ngg+5ToeXKLgfCk4brktdsgrj7zk4W1crtnbpBsYC4BT30W2CElHRbMGQdk/8tVzUPeMqdRQtqQ59xKrgLxPMc3xsyjg/9StkRA3HpzyMoGJG+NEI4gVuZt6ij1C/0H9fj2NUUWGDqXiOrjsESkwvO2Ls29lOKFjcW8bSAMO3Y/NNJVoKjg8ty9x9AJ/wLhzWBu8NL0DMS7x6LKw8FeQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR08MB11278
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ DU2PEPF00028D04.eurprd03.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	8eb83e79-85e5-447e-8f2c-08deeeed372f
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|7416014|36860700016|35042699022|376014|23010399003|14060799003|82310400026|1800799024|13003099007|6133799003|56012099006|10067099003|11063799006|4143699003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	+cxUqkDAVXwJfo0/J+Unmn/UU7Qxuv/kG8jo/E6OUUholiIyLeeBG1dyUMGC+JTI9/jnKsgcOlSVUIBuMMp3/3ikCCv2hJ/V2g5yI1OLgpVuMK+GMlXGoJtSKO1RMevMxcrfaMZou7AdqgeW2JMX0/XGmyl0uMrkiB9oKgwkc3A63dlnJXUhvlQVXVNxDZt6eywKtDPuF8dUfhX0VF+bXa6O9rbSBVEymm+otUnW1knYJyYfyibDgoQMKcfmIdMEqSoJLQ11wplggq5TvNEDSxz7teq6AUCxWxMBBZVFyaP8PVD/04Yh2ME91ljkkyWMpDlxBIUY8opxOs0RLDbXZ/Ja2cbme9xQ6tbxbWQTrGqorky5G2ImsDl1F6GCBMknxiouThBH4HDrLiPURJtdyNY6JOepeeZyOQHOBLfmJQRMsh1O5L+y5ZUFHC50EF1Z54PU4auvrz9v3uu+cShBKToUDud39c30jHhrAI6XYaXolrZLzMmJtESd9+1DR1bQfg+V5fekbrMwodajnxapLGRksztZgQPm2BJ76/syx7w3iVWoZLJ8ARJhmzWnsmgyCPKnMtkFO67yBs+G2E2F5gRyAouK63Bt/OYPIAx8k+XFNslT0pGZeinwIQ0zoPsizMRGODBD4XgLp8hD2elCKAETHGbAIZ/Zq8dWJhpohwnTgqc8vFEGqKUnXtJIV7qEN5eKWDEvXQBX6SXujBOsug==
+X-Forefront-Antispam-Report:
+	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(7416014)(36860700016)(35042699022)(376014)(23010399003)(14060799003)(82310400026)(1800799024)(13003099007)(6133799003)(56012099006)(10067099003)(11063799006)(4143699003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	RBLROo5LiXS9uRgF34qTjim0wy19yK/eljpxXW0xvMggAoapFBz7lMXDw5Mwvqv2Fs3OGn1gD5anpvnhGf58NYa1Tk+IDYCnJ5kwjQkQ/koCnaFQp4JHJ9KgOIXnbj5bHJd+BEzgzzkuKX7a/5n9xPS7GbQDLZN62PaLbQxFVXUgYRkJR9ggJeHL3xiLcIJ5MzT62aKAKva3MI16Rc6y9uurr7Hsm9UGFdmC+GR9lCISR21RBLN+na/snbZrYb57C6grujG9yUHTbBopj+KIB10zX8OWI0IunkHd2NFpteTKd8WUZ0arTedwGYlI5/dETTMvtV+hj+hCWxB8C2Xb4PMbgL5u7ZD4CkT12KrJecNDeC0MEdggInAVlZv2peDghr0BwJQEFld88znFQL2v8a1OF8pRuyTqfhrvVZTPQUIL4KlUpwX8uk7u5PiNHSSD
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jul 2026 10:20:41.1870
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b9a6f79d-2568-4a69-150e-08deeeed5fa6
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DU2PEPF00028D04.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR08MB11717
+X-purgate-ID: tlsNG-4011c0/1785493247-51AC4CFC-04DFDE1E/0/0
 X-purgate-type: clean
-X-purgate-size: 333
+X-purgate-size: 2404
 
-Hey,
+On 31/07/2026 6:49 am, Anshuman Khandual wrote:
+> On Mon, Jul 27, 2026 at 05:46:52PM +0100, Muhammad Usama Anjum wrote:
+>> pte_t is used both for logical PTE values and for entries stored in a PTE
+>> table, so pte_t * does not distinguish a pointer to a copied value from a
+>> pointer to table storage.
+> 
+> Should we rather call them as "Linux PTE" and "HW PTE" instead ?
+> 
+> Some like "Logical PTE" does not really sound very clear on what it represents.
+Yeah, I should make distinction more visible in the cover letter.
 
-Friendly ping on this patch.
+> 
+>>
+>> Introduce hw_pte_t as the generic name for a PTE table element. Define it
+>> as an alias of pte_t by default so architectures retain their existing
+>> representation and behavior until they opt in to a distinct storage type.
+> 
+> Makes sense.
+> 
+>>
+>> Include asm/page.h so pte_t is defined before the generic alias.
+>>
+>> Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
+>> ---
+>>  MAINTAINERS                   |  1 +
+>>  include/linux/pgtable_types.h | 11 +++++++++++
+>>  2 files changed, 12 insertions(+)
+>>  create mode 100644 include/linux/pgtable_types.h
+>>
+>> diff --git a/MAINTAINERS b/MAINTAINERS
+>> index 15dd00c7ffec5..78aac05949829 100644
+>> --- a/MAINTAINERS
+>> +++ b/MAINTAINERS
+>> @@ -16981,6 +16981,7 @@ F:	include/linux/mmu_notifier.h
+>>  F:	include/linux/pagewalk.h
+>>  F:	include/linux/pgalloc.h
+>>  F:	include/linux/pgtable.h
+>> +F:	include/linux/pgtable_types.h
+> 
+> s/pgtable_types.h/pgtable_hw_types.h ?
+I prefer shorter file names.
 
-This revision, I think, is addressing all comments\feedback received from
-revision 1.
+> 
+>>  F:	include/linux/ptdump.h
+>>  F:	include/linux/vmpressure.h
+>>  F:	include/linux/vmstat.h
+>> diff --git a/include/linux/pgtable_types.h b/include/linux/pgtable_types.h
+>> new file mode 100644
+>> index 0000000000000..ed5dba42a4f8c
+>> --- /dev/null
+>> +++ b/include/linux/pgtable_types.h
+>> @@ -0,0 +1,11 @@
+>> +/* SPDX-License-Identifier: GPL-2.0 */
+>> +#ifndef _LINUX_PGTABLE_TYPES_H
+>> +#define _LINUX_PGTABLE_TYPES_H
+>> +
+>> +#include <asm/page.h>
+>> +
+>> +#ifndef __HAVE_ARCH_HW_PTE_T
+> 
+> __HAVE_ARCH_HW_PTE_T macro is a better approach here or a config ARCH_HAS_HW_PTE_T
+> based selective platform subscription should be introduced instead ?
+Moving to CONFIG_ARCH_HAS_PTE_T from the next version as suggested here [1].
 
-Could you please take another look when you have the time? If it looks good,
-I would appreciate an Acked-by or Reviewed-by; otherwise, I’m happy to
-iterate on any further feedback.
+[1] https://lore.kernel.org/all/78a0402d-5436-4aab-a704-90fab56eec50@kernel.org 
 
---Abdelkareem
+-- 
+Thanks,
+Usama
+
 
