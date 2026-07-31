@@ -4,42 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45EFEC5516D
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2026 13:28:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1379127.1623941 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ACBBC54F54
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2026 14:30:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1379173.1623948 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpnHf-0003cv-PL; Fri, 31 Jul 2026 13:28:19 +0000
+	id 1wpoFp-0004WW-37; Fri, 31 Jul 2026 14:30:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1379127.1623941; Fri, 31 Jul 2026 13:28:19 +0000
+Received: by outflank-mailman (output) from mailman id 1379173.1623948; Fri, 31 Jul 2026 14:30:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpnHf-0003co-Lm; Fri, 31 Jul 2026 13:28:19 +0000
-Received: by outflank-mailman (input) for mailman id 1379127;
- Fri, 31 Jul 2026 13:28:18 +0000
+	id 1wpoFp-0004WP-01; Fri, 31 Jul 2026 14:30:29 +0000
+Received: by outflank-mailman (input) for mailman id 1379173;
+ Fri, 31 Jul 2026 14:30:27 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <rostedt@goodmis.org>) id 1wpnHe-0003cf-Rn
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2026 13:28:18 +0000
+ (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
+ id 1wpoFn-0004WJ-L2
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2026 14:30:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wpnHd-00GynR-LD
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2026 15:28:17 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wpoFm-00H80u-Jt
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2026 16:30:26 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <rostedt@goodmis.org>)
- id 6a6ca2df-2eae-0a2a0a5409dd-0a2a4501860c-42
- for <xen-devel@lists.xenproject.org>; Fri, 31 Jul 2026 15:28:16 +0200
-Received: from [216.40.44.10] (helo=relay.hostedemail.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <rostedt@goodmis.org>)
- id 6a6ca2ef-5984-0a2a45010019-d8282c0ae97b-3
- for <xen-devel@lists.xenproject.org>; Fri, 31 Jul 2026 15:28:16 +0200
-Received: from omf12.hostedemail.com (lb01a-stub [10.200.18.249])
- by unirelay05.hostedemail.com (Postfix) with ESMTP id EF5564042A;
- Fri, 31 Jul 2026 13:28:09 +0000 (UTC)
-Received: from [HIDDEN] (Authenticated sender: rostedt@goodmis.org) by
- omf12.hostedemail.com (Postfix) with ESMTPA id E384117; 
- Fri, 31 Jul 2026 13:27:45 +0000 (UTC)
+ (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
+ id 6a6cb167-bab6-0a2a0a5309dd-0a2a45048a42-24
+ for <xen-devel@lists.xenproject.org>; Fri, 31 Jul 2026 16:30:18 +0200
+Received: from [160.101.131.9] (helo=na1pdmzitismtp02.tibco.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
+ id 6a6cb179-b57f-0a2a45040019-a065830991ee-3
+ for <xen-devel@lists.xenproject.org>; Fri, 31 Jul 2026 16:30:17 +0200
+Received: from fedora.eng.citrite.net (unknown [10.113.40.46])
+ by na1pdmzitismtp02.tibco.com (Postfix) with ESMTP id 89848832FB23;
+ Fri, 31 Jul 2026 10:28:30 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,96 +50,107 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; none
-Date: Fri, 31 Jul 2026 09:28:25 -0400
-From: Steven Rostedt <rostedt@goodmis.org>
-To: Muhammad Usama Anjum <usama.anjum@arm.com>
-Cc: Anshuman Khandual <anshuman.khandual@arm.com>, =?UTF-8?B?SsO8cmdlbiBH?=
- =?UTF-8?B?cm/Dnw==?= <jgross@suse.com>, Jani Nikula
- <jani.nikula@linux.intel.com>, Joonas Lahtinen
- <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Tvrtko Ursulin <tursulin@ursulin.net>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Dimitri Sivanich
- <dimitri.sivanich@hpe.com>, Arnd Bergmann <arnd@arndb.de>, Greg
- Kroah-Hartman <gregkh@linuxfoundation.org>, "James E.J. Bottomley"
- <James.Bottomley@hansenpartnership.com>, Helge Deller <deller@gmx.de>,
- Stefano Stabellini <sstabellini@kernel.org>, Muchun Song
- <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, Andrew Morton
- <akpm@linux-foundation.org>, "Liam R. Howlett" <liam@infradead.org>,
- Lorenzo Stoakes <ljs@kernel.org>, Will Deacon <will@kernel.org>, "Aneesh
- Kumar K.V" <aneesh.kumar@kernel.org>, Nick Piggin <npiggin@gmail.com>,
- Peter Zijlstra <peterz@infradead.org>, Andrey Ryabinin
- <ryabinin.a.a@gmail.com>, David Hildenbrand <david@kernel.org>, Pasha
- Tatashin <pasha.tatashin@soleen.com>, Chris Li <chrisl@kernel.org>, Kairui
- Song <kasong@tencent.com>, Uladzislau Rezki <urezki@gmail.com>, Masami
- Hiramatsu <mhiramat@kernel.org>, Alexei Starovoitov <ast@kernel.org>,
- Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko
- <andrii@kernel.org>, Eduard Zingerman <eddyz87@gmail.com>, Kumar Kartikeya
- Dwivedi <memxor@gmail.com>, Ingo Molnar <mingo@redhat.com>, Arnaldo
- Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, SJ
- Park <sj@kernel.org>, "Matthew Wilcox (Oracle)" <willy@infradead.org>, Jan
- Kara <jack@suse.cz>, Jason Gunthorpe <jgg@ziepe.ca>, Leon Romanovsky
- <leon@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>, Dennis Zhou
- <dennis@kernel.org>, Tejun Heo <tj@kernel.org>, Christoph Lameter
- <cl@gentwo.org>, Mike Rapoport <rppt@kernel.org>, Johannes Weiner
- <hannes@cmpxchg.org>, ziy@nvidia.com, pfalcato@suse.de,
- agordeev@linux.ibm.com, ryan.roberts@arm.com, linux-kernel@vger.kernel.org,
- intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org,
- linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
- linux-arch@vger.kernel.org, kasan-dev@googlegroups.com,
- linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
- linux-perf-users@vger.kernel.org, damon@lists.linux.dev
-Subject: Re: [PATCH RFC 01/11] mm: introduce hw_pte_t for PTE table storage
-Message-ID: <20260731092825.36992dc9@gandalf.local.home>
-In-Reply-To: <9ac33752-b587-4901-b5f2-473e573d7ede@arm.com>
-References: <20260727164715.2866609-1-usama.anjum@arm.com>
-	<20260727164715.2866609-2-usama.anjum@arm.com>
-	<6xah74eadjmo2bozyr62wcxo4hhpsiufx2mshh7tztyy2dzzps@63m327m7pl5u>
-	<9ac33752-b587-4901-b5f2-473e573d7ede@arm.com>
-X-Mailer: Claws Mail 3.20.0git84 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+From: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+To: xen-devel@lists.xenproject.org,
+	teddy.astie@vates.tech
+Cc: jbeulich@suse.com,
+	andrew.cooper3@citrix.com,
+	roger.pau@citrix.com,
+	jason.andryuk@amd.com
+Subject: Re: Re: [PATCH v2] nSVM: Check injected event consistency
+Date: Fri, 31 Jul 2026 15:26:58 +0100
+Message-ID: <20260731142700.2207713-1-abdelkareem.abdelsaamad@citrix.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <1785247466.8631fc262581453bbf619ec5b2062170.19fa90a823a000e099@vates.tech>
+References: <1785247466.8631fc262581453bbf619ec5b2062170.19fa90a823a000e099@vates.tech>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Stat-Signature: bk4wphtnyr8oskxq6ok6poi7ogrp6zg4
-X-Rspamd-Server: rspamout04
-X-Rspamd-Queue-Id: E384117
-X-Session-Marker: 726F737465647440676F6F646D69732E6F7267
-X-Session-ID: U2FsdGVkX188VTzKisaRifdK5JzAhtUj+tNTYkibFXo=
-X-HE-Tag: 1785504465-704596
-X-HE-Meta: U2FsdGVkX1+okbaURBZ2Qkn+l9IgiK40Gqe8ZThpseNdxUoxO6+yJtshZ3puroffdGsnNQX9lyVqqMfMDNqtsaiMVrZRSqd7CxcOf+tlTFcxBWBx10qhJ57MkLj8ndzBOYoA/OODEfAwWEkK0Ynym/vN8RHly0+jRGqqJSDy6cHg7VOGub/UmsJX6TfoBSOwr0+39CvO+c3eZRPTPuO9wuZjY0AitKZFKa26poYwhlLhVPb0FYC1FMbtcEIPwcv0BUAY4FqESIdzLvKNozpw1fVotcfhrX1NJojLWeahTii05xgjJv7utljWLfUJzJrqYVN7s4pCcDgRjK7TriyixEP+/JmhkJIq3qIe3n8mNyiV8HHld6EP1z7IlvkGJKR3
-X-purgate-ID: tlsNG-d62444/1785504496-BEC61757-59C4BEEC/0/0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ebf023/1785508218-506DAB50-273F4A3F/0/0
 X-purgate-type: clean
-X-purgate-size: 1301
+X-purgate-size: 3546
 
-On Fri, 31 Jul 2026 11:19:32 +0100
-Muhammad Usama Anjum <usama.anjum@arm.com> wrote:
-
-> On 31/07/2026 6:49 am, Anshuman Khandual wrote:
-> > On Mon, Jul 27, 2026 at 05:46:52PM +0100, Muhammad Usama Anjum wrote:  
-> >> pte_t is used both for logical PTE values and for entries stored in a PTE
-> >> table, so pte_t * does not distinguish a pointer to a copied value from a
-> >> pointer to table storage.  
-> > 
-> > Should we rather call them as "Linux PTE" and "HW PTE" instead ?
-> > 
-> > Some like "Logical PTE" does not really sound very clear on what it represents.  
-> Yeah, I should make distinction more visible in the cover letter.
-
-Just as an outside observer, so take this with a grain of salt and feel
-free to totally ignore it, the term "Logical" and "Physical" to me would be
-that the Logical one is created by software and is not mapped to hardware,
-whereas the "Physical" one would be backed by hardware.
-
-Just using the terminology from LVM where there are Logical volumes and
-Physical volumes.
-
-But if that doesn't represent what you are trying to accomplish here, then
-it is indeed not the appropriate terminology.
-
-Again, feel free to ignore this comment, but I just wanted to give an
-outside perspective of the terminology that I see.
-
-Cheers,
-
--- Steve
+On 28.07.2026 14:04, Teddy Astie wrote:
+>On 16.07.2026 17:41, Abdelkareem Abdelsaamad wrote:
+>> --- a/xen/arch/x86/hvm/svm/vmcb.c
+>> +++ b/xen/arch/x86/hvm/svm/vmcb.c
+>> @@ -320,6 +320,31 @@ void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb)
+>>       svm_dump_sel("  TR", &vmcb->tr);
+>>   }
+>>   
+>> +static bool is_valid_svm_vmcb_injected_exception_vector(
+>> +    const struct vmcb_struct *vmcb, uint8_t vmcb_injected_vector)
+>> +{
+>> +    return ( (vmcb_injected_vector == X86_EXC_DE) ||
+>> +             (vmcb_injected_vector == X86_EXC_DB) ||
+>> +             (vmcb_injected_vector == X86_EXC_BP) ||
+>> +             (vmcb_injected_vector == X86_EXC_OF) ||
+>> +             (vmcb_injected_vector == X86_EXC_BR) ||
+>
+>This particular exception is special. AMD APM states that this event is 
+>"impossible" if the guest is in 64-bit mode and will cause 
+>VMEXIT_INVALID in such case.
+>
+> > If the VMM attempts to inject an event that is impossible for the 
+>guest mode (e.g., a #BR exception when the guest is in 64-bit mode), the 
+>event injection will fail and no guest state instructions will be 
+>executed; VMRUN will immediately exit with an error code of VMEXIT_INVALID.
+>
+>So this one likely want a additional check for hvm_guest_x86_mode() != 
+>X86_MODE_64BIT.
+>
+>It looks like #OF has the same quirk (invalid in 64-bits mode).
+>
+I agree your point is valid. I will address in V3.
+>Though I don't know if any other exception has a similar behavior though.
+I have double-checked the APM vOL3(24594—Rev. 3.37—jULY 2025) regarding the
+other exception vectors and instructions. Vector 4 (#OF) and vector 5 (#BR) are
+unique because their triggering instructions BOUND and INTO are invalid and
+disabled in 64-bit mode, making them structurally invalid. Other vectors remain
+legal across the other modes. In V3, I will make use of hvm_guest_x86_mode to
+correctly isolate these two cases.
+>
+>> +             (vmcb_injected_vector == X86_EXC_UD) ||
+>> +             (vmcb_injected_vector == X86_EXC_NM) ||
+>> +             (vmcb_injected_vector == X86_EXC_DF) ||
+>> +             (vmcb_injected_vector == X86_EXC_TS) ||
+>> +             (vmcb_injected_vector == X86_EXC_NP) ||
+>> +             (vmcb_injected_vector == X86_EXC_SS) ||
+>> +             (vmcb_injected_vector == X86_EXC_GP) ||
+>> +             (vmcb_injected_vector == X86_EXC_PF) ||
+>> +             (vmcb_injected_vector == X86_EXC_MF) ||
+>> +             (vmcb_injected_vector == X86_EXC_AC) ||
+>> +             (vmcb_injected_vector == X86_EXC_MC) ||
+>> +             (vmcb_injected_vector == X86_EXC_XM) ||
+>> +             (vmcb_injected_vector == X86_EXC_HV) ||
+>> +             (vmcb_injected_vector == X86_EXC_SX) ||
+>> +             (vmcb_get_sev_es(vmcb) && vmcb_injected_vector == X86_EXC_VC) );
+>> +}
+>
+>I think using a switch here would help making things more readable, 
+>especially if we need to add additional comparisons in specific cases 
+>(SEV-ES for #VC, !64-bits for #BR and #OF, ...).
+>
+>I have in mind something like
+>
+>   switch (vmcb_injected_vector)
+>   {
+>   case X86_EXC_OF:
+>   case X86_EXC_BR:
+>       return hvm_guest_x86_mode(v) != X86_MODE_64BIT;
+>
+>   (all other special cases, ...)
+>
+>   case X86_EXC_UD:
+>   (all other simple cases ...)
+>       return true;
+>
+>   default:
+>       return false;
+>   }
+Yes, I agree writing it with switch-case makes sense with this structure. I
+will change to switch structure in V3.
+>
+>Teddy
+--Abdelkareem
 
