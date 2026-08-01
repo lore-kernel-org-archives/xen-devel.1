@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F84CC55173
-	for <xen-devel@archiver.kernel.org>; Sat,  1 Aug 2026 11:51:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1379955.1624238 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 195B6C55173
+	for <xen-devel@archiver.kernel.org>; Sat,  1 Aug 2026 12:03:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1379972.1624246 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wq8FW-0008Jt-Od; Sat, 01 Aug 2026 11:51:30 +0000
+	id 1wq8RA-0001tf-ST; Sat, 01 Aug 2026 12:03:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1379955.1624238; Sat, 01 Aug 2026 11:51:30 +0000
+Received: by outflank-mailman (output) from mailman id 1379972.1624246; Sat, 01 Aug 2026 12:03:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wq8FW-0008Jl-Im; Sat, 01 Aug 2026 11:51:30 +0000
-Received: by outflank-mailman (input) for mailman id 1379955;
- Sat, 01 Aug 2026 11:51:28 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wq8RA-0001tY-PH; Sat, 01 Aug 2026 12:03:32 +0000
+Received: by outflank-mailman (input) for mailman id 1379972;
+ Sat, 01 Aug 2026 12:03:31 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brchuckz@netscape.net>) id 1wq8FU-0008Je-DX
- for xen-devel@lists.xenproject.org; Sat, 01 Aug 2026 11:51:28 +0000
+ (envelope-from <brchuckz@netscape.net>) id 1wq8R9-0001tQ-BB
+ for xen-devel@lists.xenproject.org; Sat, 01 Aug 2026 12:03:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wq8FT-00EecW-QQ
- for xen-devel@lists.xenproject.org; Sat, 01 Aug 2026 13:51:27 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wq8R8-005qb0-OK
+ for xen-devel@lists.xenproject.org; Sat, 01 Aug 2026 14:03:30 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <brchuckz@netscape.net>)
- id 6a6ddd84-bab6-0a2a0a5309dd-0a2a4503971c-28
- for <xen-devel@lists.xenproject.org>; Sat, 01 Aug 2026 13:51:26 +0200
-Received: from [98.137.64.82] (helo=sonic305-19.consmr.mail.gq1.yahoo.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a6de084-2eae-0a2a0a5409dd-0a2a4501e058-24
+ for <xen-devel@lists.xenproject.org>; Sat, 01 Aug 2026 14:03:30 +0200
+Received: from [98.137.64.147] (helo=sonic301-21.consmr.mail.gq1.yahoo.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <brchuckz@netscape.net>)
- id 6a6dddbd-fae8-0a2a45030019-628940528cad-3
- for <xen-devel@lists.xenproject.org>; Sat, 01 Aug 2026 13:51:26 +0200
+ id 6a6de090-5984-0a2a45010019-628940938312-3
+ for <xen-devel@lists.xenproject.org>; Sat, 01 Aug 2026 14:03:29 +0200
 Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic305.consmr.mail.gq1.yahoo.com with HTTP; Sat, 1 Aug 2026 11:51:24 +0000
-Received: by hermes--production-ne1-6f6bdbdd7c-jtc22 (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID 2c6e9c6518a5b71581c74d9ac6047a6d; 
- Sat, 01 Aug 2026 11:51:20 +0000 (UTC)
+ sonic301.consmr.mail.gq1.yahoo.com with HTTP; Sat, 1 Aug 2026 12:03:28 +0000
+Received: by hermes--production-ne1-6f6bdbdd7c-w9xxm (Yahoo Inc. Hermes SMTP
+ Server) with ESMTPA ID ad3319020c74423f6b69925ddd631e52; 
+ Sat, 01 Aug 2026 12:03:23 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,100 +51,162 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=netscape.net header.i="@netscape.net" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=netscape.net; s=a2048; t=1785585084; bh=fuiv5o+ZM6uC/qcEX+Tzmuq7yIkIt71ND7aoktB7eoE=; h=Date:Subject:To:Cc:References:From:In-Reply-To:From:Subject:Reply-To; b=RzrSTEwcS6DdKfMZCyRalp4+SYc+zLSn8i0BDw8EJ+IqKSwtQ1YC+E0i6jvhUQoITreHxMMhubTFv4mH2Ap8VX9CbBDfZ8NXyBRuoneFABkpJc1reVMd58iEZhNqnRaCczrNAsZtt8y/9qGKxgvfyix0Eoq+rF/553X9Xro36R6GtG0EQs4Pk0Sr+HpKaRBMHd5ejBk5I0Z6BXRzF3CR7IeWCOM1z59aMWsBuXmNtZ5vFFyTqivcQ+zUChOpac12c+UqItZv1Fq5D++lAGwk+9PolsLHWhBq6sgc2nTkiy6EmfoCV9EWxlJhBUnZVMwYaJIfcEQ/JDf0UX5IQ0V6TQ==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1785585084; bh=N1KTBtU3ESCjUWEFdgsobkxQoc0Bd7zyUuVx50lfR4k=; h=X-Sonic-MF:Date:Subject:To:From:From:Subject; b=tCOVNGsXenhDGDx13ti0hjjT5Fs2Z6Mksu2Gftu24N4xBrQi5XSgDRMFcvp//TNG7iGPuWZd2P3RwTUOAZAqtjBa2X2NHEBr7YVLCeH2nkOYsTswBZ1353sjNFHKefJ2dBelpLB+tDIT1P8s/IbC+hXJRG2jYxsU//oyovSNKCsBQCELHot33BAUB7bXG42NwR/Wze15/sVLeWL1qSLUwPXrZ8To8kp6f5k1QBdmofIE5sAvTLTky4woa7a3vzxJiIxNygE70jwUCZPhkojEUH4DFPWsqirUqPhYlSjsYsDs1re1oKjFxpL50dihFJ4KarLybkbkm1cIIch5L1L7uA==
-X-YMail-OSG: aKsnXoYVM1msTfRexnj39EqPGrx117cWtsOWgBMvH8i.wtCxTTdrSq.xKjIGhhO
- 8lTaENnx.Xo71QG6aCfadwl10j5BWRCUFbZEmBK8nYFnJZPGqjzykIdoVlFJkhPgS7dO63IARVSe
- hnMAnDINxz9zG8vu7rUw2QIK9Xf7AcWXeuAMA7bSoKauxYxW9lii_CUX5t887g_wPE_dQo9SKXBF
- Yg3DWRVLAGXozWK4kXSr1OeSkNQGesu4y9tQ1YPKzy.lah4ydU7YYJ0Qzw7nRRHAT955kteiHpJB
- O2J3Wdd3ZzPsS1WgFA9rU7cq8UUSEdVv_0UCbxFlb_6Phzqa52c8Rd8w4zka8TQhirkXjxeqWGgC
- PfDVuu21XHzEoClVppiJdeYPi4oymsTjEbCuWpsuTkY8DDLuN5KBX9YZC28PsDniiiip1NoH5a4_
- NBiVYKNq7yRvnNLGiEbKdzeZ4u.6A1oDK25PH0AxbntTQisb8B10lp3j02Df_E6xp4N8Qzwa72jY
- duJZv14j_26ufz6sYMbknq8HfAjdXna9sd7W.ezfzqx7Np574d76tdlESBD7xIBdCSMV8hR7b70k
- qaSYI2HWBozE9Lt0DvXBm0AK6eVeGn1u9BVcxBiKE4emHqSvdtO4AELZEpLksHCIb7WzGWyipR2J
- 1Nm4gRF6IFyyLBxLK94NbZA_Vfs.KJSkL_AMpj3eAK.lBnvDcU1zqVrmyBCG2Mjgkn2UggHHyhaR
- 4RXSjRYc.R8194Q9N3_Fnk5PFJh9wv_A41hE3FgWG0LcN8CJR_YsqquLMfz9xEm7IcKqmylpoK33
- AHXzR5nSsR.0xsC.A9McnS79jd2X77yu0zX5rhec5oSjxR9eS46lZJ3Rtxpi8mvRnHskGfKCkER1
- drpBotZBSKUy911Q81Yf4YHRF.KSIa68On7FVAJGyGlIzGRoRsUbJnjXeZqxnIE7vOaNHo8uf_QQ
- xIgtGyDAPe2hSf6OEUhUDVL0lpIxOsSQ70cI2PfYNezQ1KHk3.HGH6shG3rZWZ6mn0IYRtqPktFF
- LgFFwwwK7FmobjmNT19pvsUv8C0EJ_588HWu38pBwSesiDWM.Rja_m4CHfNVBDTE9xj06yW.GfjF
- 8WZf.HwaSVvE4C_MpYKm4DIURVWq44GwjYJzwgiLCQKlKhFfzXKVAnsQgKCr9gdg7NlHifqve6h_
- MtOlBADM9Lawz0A9XYGhQ9vwvZjkIe.ae_s6nDqYMNi2AwOpLgrPTDgvukQmexdym3tx7Elpz9vF
- qtiQUpOarTaXtGaec3879KS.e.CoD3LkwWX28b1sEuwuxQOX1GCaiJYgV9hRIXrK9xZ56iV7MciI
- ORNQUdBt27x2zjlwwhyYCBRgLw7tTG61fGj8y9OQmfLskMi8nwtzDyH4M_eLLPgXC6TdvhC3ACbf
- ohN05lM.10W.u5mVmnUopLpl.8z33pOLEqqaQYIfQcIuS4TEuDCbY9z.qBvhfRBvH11EjtG77n6T
- D5Tt0iAMyw4MyvzgYri3ffFMG_sSzgBPAAlx85U7jcDooFaUiMFajhiBnlXPqhAYgpsEQnkudmJ6
- VKV4a6T9m0Fzr.CEII_QtUOJC9vTNly3zXYz2sdkMeJtcgOQv64hurf4qbsv0SZBF.ohrzBziImy
- RcfHR2oY9fnTxuRzZMtjZonw9uaTfXkmnwFMZ1d2Ln.K7OHrFo3J0ZbrTQzpH1ODkudlLkO6yfLM
- 0W1nIl470Fyl1oLUajyErKVDdp5wg47TzCmtqgrNotvvrl.IDEP3BBFvI.4iyQdSbMH.1f7rjKtt
- ELkUF4MQ3Ey_4Jw7dtJFwtJ1iSdbk_3hENT7LcrJKztteNQREAr5PEJwPx2mQDHaOX28y8Q7X1mR
- 2nHLW8oeNxwKD8wNhM1BxLNJ1fysYkWDMVGjCd3u0K2kpYvuCEkyJCnmIofToOvHHhoK0TXXIIXc
- 0scGm5z2JvQCXTZpG75wKaFd71l4ykoyNdK7tbs8BqL2F0_lEv0gxnhgxoeyuHh.hjqv5ncyunKT
- JyDOuGV_Ze2_sPIcQJUSIj7EHOiKOxK5C1pE..VP9gE28WCkTapNCpmxgU5mf1yxmD53OAazKudJ
- R753iIExk0QwgcKhQL8YyX1q2vFoHOeiXpPAH6RemvB9XQ26Pzwmo8R23nkVhD7GW9ntvJ2wJabJ
- IT7vxFkCTAlqVQq.PWsw8MO6Zsr3M6g65YYrKD2yARUoymbqYhHYK9ohd0_RhF9GzXDSeIhhkcwE
- oYn6aytZTzy2z1Yivb0zaqBfRGbEBlbHYxM3hIA1D0wHq0EdXJgc.G4CjL_YVO_h5
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=netscape.net; s=a2048; t=1785585808; bh=W0MydP2oUX8/HYVYaoYYc6r8/esVa87AQ2CEiLLTU1E=; h=Date:Subject:To:Cc:References:From:In-Reply-To:From:Subject:Reply-To; b=ffC9Ik3graT2CJhW++p7INhiiZEAHJIgo3bsG+g/reKKr7HZ/P4uyycCyMpDguWtYS38lLy9zPVLhB5RVYfHLQn86SacE1qCWbjmrdRH8H6NYE3iBqQ8Mhjc0U/LfNXdXuTs/ks5LYZLgOUfFWCNudc/Fh5Ad6OOLDgm/jv8KtOS26ttk2qzBI59+N4gCbbc48i3vJ/dKAcNmgMxKrjImk8jDZlxMjTKo3FU080qFYj/++60OOF1u19i6DIQRIsQ6zEk91nOnfXRB+8FToYJdsPktyZnxKiwwXBf3s5h4tHzHv7mPsy5WZN6SOUlX7goBlGWRpj6g88Rf8HF5lptVA==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1785585808; bh=VA3wADtmLWVH2/OEkFO9nIiNxhVsfZRpcgwrie4z1wo=; h=X-Sonic-MF:Date:Subject:To:From:From:Subject; b=TumVOIKNKpXhAVJmMPra0bLYp46neYIUct0hSGptSSiiP03izywkag8iVlv7cvg64oh9NqVpbsTq1SbDqSHaM/rnZy7u+/GFbqgAV46CpILoy8iwNNB1U/3znf0vQIYT1dGIlVGqgk2Lq5JndZfo1kd05515Sm/1iZMPXutm+g2RZH0yiYwjc3RLbJ2uXs0OJJ3VtGKqqDREuhijI0lc9BnavX5jCQLmeYhGgrxQP2fjo3schk4JrS9Jm55fkUZ7q4dU0feMwExuLWdd9HoYa6TQXb83wewLZw0LP/7fulU//MmRM8yrh/haRHjUH4zvwC8UsEmEU0xHmZTQJj657w==
+X-YMail-OSG: 7AOkLyYVM1nc0L2KIboVCyc2u3fUpk01ULdAuHHVXgEIrgHjs_utYiXQ7Qhf420
+ VT5ESB0Y6XHjA0QySs7e_CVe7JDA8XhV8k0EyCXUUDWHIEsvHsSzeajILGXneruw_uOJc_KgGol_
+ 7kyGnFb.8NtPYUWKyISUYzLSklmnE8pkyNgwODg0QdjVcDQD4LLGHVEGLpnRdGlxO0OWrJHG9bWA
+ MfOID75l5SZ7QYmQvviM38Xx2jrjcPzqtG.LRZRsGdST.nTLnAkmf0J2tZkUfcL.qyHJXGHqeHT0
+ DS6RG1elXwk.VYT1TyxR94EIqfwhcXST5HVjEv2azWmcQ10Z.q.EZ1nyAIa8dJ0YPSfr9HHS4R0K
+ bX9MEEPiUUFd.Bb6Ba8LmSGpnZ0g3zke7Sp0dtX0p7jn3KBUxrdo89331srrIz.JhSdSJLdw9_0h
+ DRn1bD3C3XySL0Hr.8rGMcOnBXJ6LSBYXYJTynxmOlmO_3JOFJ2ZsrasmqFxKl_6xHjUDCvRskm9
+ zbwA_bLtxZUcw4F.4TSJrEsAuupNxqBu1IFIpl_SUDAAXvbk9FeAhAiHronBFsykkvr0RTlKsPSj
+ h1OnB3xmCY_uhIyrznnyf9GX_gABBChwlX2wfr9s2ycJ8xNPAwLLVtONMNx5wD9E3S7jmTeEK6P5
+ 5mTvNr4qMBpCnGnBCvmlADi9Aong2W4lTkCBEU7vUiMfQPzu4QanDZfNJ_fDdospmBGNol3aKc_3
+ Z9nacZUYws1q1R3GRsDfgBYLcKsjdNYxiFw42kfQFcDfz.GFCqpVNIOZtYrlVQqKCOZUkvNWJAdC
+ and42_N3cqaddYlOuYWMYF0_7SC1aGA1UvH6k7MX1edgDOj1kK8Ue7SB1P90UEKXIXlfqzx8Gd5o
+ SmC.Z2kWbzKrfojIOswLtDzRvJneint46VOsuhqLa_sODPQ3INjBzvHXfykwjhJ.I2Cp4A2MyQ7L
+ Rvdm3HjHd4wLEeamS9TXJ8rVfLV8bMYYJ2t2RxHus_nELfQpvgu9s_2F8C5n6EftOwtU3SbmSIxm
+ Mr1U6Ug6pAnR8N6hRFRBrK3Q9fYD8i5yJzTnq2ZPLwcs1kOPagQE31QWVfGz6ZmBw4kphSM2MG48
+ S4Ja40GRmTfKYvNZIQzIlnM03HHw3kB99nk07qTDtn4v0lN4mlUMnJAOc2sIO00c4jZ0zC_lVP.x
+ HlUrEb6PI8H.jDPXfKRXCB1.hsDQBti4pfK1.3KoGZXjyryBr8r7EknKFzL_EWNcme2toBjP8W8Y
+ 2qPYWnV_RofGLsIUtbWwIkWLZU5pvNjEIbkDXBhqp7jBR5_Rb2O90Cvqa5Zshq4loupZa8P_Vt7_
+ vee549jbJ0OTVf2.D8gnRPdBrouQ5vR6paWvYNJt5R7YeojbZXC3HmahVClWcgjcqoZH.Ew4lLAM
+ YslY7bjVWhne0HqbAOhltpVgtc60dvBMhupgUgEoa7PkgUtUPSqtl6H5J9XPqGZyFm95cg0IGb36
+ FGxSBesQKzm4NCD6wWRujxR8taVaIg7YID6nrjlM3aQCElD4E8cvKns1eqWR1sKPeg0NdHA5nog6
+ SQyi5gPmDyDG1C9h1cq3LEghD9neV0yJ.sFILIifGsLVIrvDAuVhk61PNArv7J26fOQJl166IaUo
+ lW7waRJlvMEnQ0ZdcJByL683UlNSLltQ72bIaxs3wPg4iywosj1o9yXd7Ve1j1_OA7o0mo.fV3AH
+ jU_4JnOOLMIbwIEzr3Qg01wC8sUZkLl9GL27Ef5bYAcf5PRtu5tD4cTRRamLBjPIjAl8iK0pAfKu
+ NbJMB93KLenZRQ5KYqqEH2KBEEBLG5zsT6regLwEFrs81wrYm_WcohyQf9hJmRJv82DL6SNzXbCi
+ E9yGmtHUIKvfGwbQJezNDdXwnoiYE5mnpkFJEqlBMjuiW61rAFRePEJqgVK0SZs2UzZlUDrubnge
+ ._sszneJ7fX2LIf42Mx9mOG7BaLPUPelWDcyZFO3RkicjEtU092GENvuXqH2kUmhcCjxZRudSaKs
+ 6DidXiKiR8tDe9ZIsGdJcW8ppLOM...vpipu3sL7SUkGlxAfQKF.wvstak8WnZV9MHBIfvgxqQI0
+ WBYuEjB5C9IU_088XSD2tMGI2YUEHU3vetkXbewC6jvgjadaSu426Q4p9NGKi2_zxe6z7NegCAPV
+ TEZ9HDGDXVNM1FnjUNNvGkf_ZAyxMattWPy3d0LBVTlM1D8hzR3wtiACeNtbAgkaMtTdAOtqVfhx
+ qsZPZOeRuobdkp6rLtMe1.Ff.19IsqWMq4ekCGo78EvpfZYDNpo.Axw--
 X-Sonic-MF: <brchuckz@netscape.net>
-X-Sonic-ID: cf8f62cc-639d-4ae9-8f4f-fa4e168ee8ab
-Message-ID: <1418735a-2ed4-4f89-a9e4-631f5423608d@netscape.net>
-Date: Sat, 1 Aug 2026 07:51:19 -0400
+X-Sonic-ID: c0652755-41f1-40de-b129-bf55e3b14eed
+Message-ID: <7e4719b8-7396-4daa-aa8e-4c4836951de9@netscape.net>
+Date: Sat, 1 Aug 2026 08:03:23 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 6/6] xen/igd: use custom option ROM if provided
-To: Chuck Zmudzinski <brchuckz@aol.com>, qemu-devel@nongnu.org,
- Tomita Moeko <tomitamoeko@gmail.com>
-Cc: qemu-stable@nongnu.org, xen-devel@lists.xenproject.org,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony@xenproject.org>,
- "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
- Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+Subject: Re: [PATCH] tools/hvmloader: implement Intel IGD extended VBT support
+To: xen-devel@lists.xenproject.org
+Cc: qemu-devel@nongnu.org, Jan Beulich <jbeulich@suse.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>
-References: <20260801001737.16509-1-brchuckz@aol.com>
- <20260801001737.16509-7-brchuckz@aol.com>
+ Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>
+References: <20260801000354.16446-1-brchuckz.ref@aol.com>
+ <20260801000354.16446-1-brchuckz@aol.com>
 Content-Language: en-US
 From: Chuck Zmudzinski <brchuckz@netscape.net>
-In-Reply-To: <20260801001737.16509-7-brchuckz@aol.com>
+In-Reply-To: <20260801000354.16446-1-brchuckz@aol.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Mailer: WebService/1.1.26215 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
-X-purgate-ID: tlsNG-33051d/1785585086-770F64E9-F4A491CD/0/0
+X-purgate-ID: tlsNG-d62444/1785585810-BDA7E757-ED7C9CD1/0/0
 X-purgate-type: clean
-X-purgate-size: 1481
+X-purgate-size: 5498
 
-On 7/31/2026 8:17 PM, Chuck Zmudzinski wrote:
+On 7/31/2026 8:03 PM, Chuck Zmudzinski wrote:
+> Modern Intel IGD devices do not work well with the current
+> implementation of support for the Intel IGD in hvmloader because
+> it lacks support for an extended video bios table (VBT).
+> 
+> Code 43 errors in Windows guests and failure of the guest screen
+> to light up are some of the problems that occur with the
+> current implementation.
+> 
+> To address this problem, this patch implements support for
+> Intel IGD devices with an extended VBT and OpRegion version 2
+> and higher which is required for most modern Intel IGD devices.
+> 
+> This patch also depends on compatible support in the device
+> model. If hvmloader detects the device model lacks such support,
+> it will fall back to the currently implemented protocol for
+> configuring the OpRegion to provide backward compatibiltiy for
+> systems that lack a device model with support for an extended VBT.
+> 
+> Support for an extended VBT is implemented in the newly introduced
+> function opregion_setup() which is implemented in the new file
+> intel_opregion.c.
+> 
+> Major differences between this implementation and the current
+> implemntation that only supports older devices without an
+> extended VBT:
+> 
+> 1. The current implemntation reserves a constant number of
+>    pages (3) in the E820 map for the OpRegion which is set by
+>    the IGD_OPREGION_PAGES macro in the current implementation.
+>    With OpRegion 2 and higher, the OpRegion can have an
+>    extended VBT that must be provided to the guest with the
+>    OpRegion. This means the size of the region is not fixed,
+>    so in this new implementation the IGD_OPREGION_PAGES constant
+>    is changed to a variable in e820.c, igd_opregion_e820_pages,
+>    that is set to its proper value based on the the size of the
+>    VBT. In this new implemntation, the size of the ACPI NVS region
+>    reserved for the OpRegion in the E820 map is equal to the value
+>    of the igd_opregion_e820_pages variable instead of being set
+>    to the constant value determined by IGD_OPREGION_PAGES.
+> 
+> 2. The current implemntation provides the guest with access
+>    to the unmodified OpRegion on the host via memory mapping
+>    from the host to the guest. This is insufficient for
+>    OpRegion 2 and higher because some devices will require
+>    modifications to the OpRegion for proper operation in the
+>    guest. So this new implementation provides hvmloader with a
+>    copy of the host's OpRegion that hvmloader can modify as
+>    needed for proper operation. Mapping the OpRegion from the
+>    host to the guest is only used temporarily during setup of
+>    the OpRegion by hvmloader and once hvmloader has a copy of
+>    the OpRegion and the extended VBT, the device model removes
+>    the host mapping and hvmloader configures the guest to use
+>    the guest's possibly modified copy of the OpRegion instead.
+> 
+> 3. The current implementation lacks useful debugging information
+>    for the more recent devices. This new implementation provides
+>    useful debugging output from hvmloader, such as the detected
+>    host OpRegion version and address, the values for rvda, rvds,
+>    and the guest OpRegion address when the guest_loglvl is set
+>    to all/all.
+> 
+> Link: https://lore.kernel.org/kvm/20211012124855.52463-1-colin.xu@gmail.com/
+> Link: https://lore.kernel.org/kvm/20210325170953.24549-1-fred.gao@intel.com/
+> Signed-off-by: Chuck Zmudzinski <brchuckz@aol.com>
+> ---
+> Later versions of this patch will provide a link to the compatible patch
+> for extended VBT support in the device model which will be posted to
+> the qemu-devel and xen-devel mailing lists and Cc'd to the appropriate
+> maintainers and reviewers soon.
+
+I forgot to mention that there is an undocumented setting that works in
+the xl.cfg(5) domain configuration file, firmware_override, that makes it
+possible to use a patched version of hvmloader alongside an installation
+of unpatched upstream Xen or a version of Xen packaged by a distro. So
+one can download the source for one's installed version of Xen, apply this
+patch and build just hvmloader and then install the patched version of
+hvmloader with a different filename, such as hvmloader-igd-testing, into
+the same directory where hvmloader is installed (usually something like
+/usr/libexec/xen/boot) and then one can configure a guest to use the patched
+version of hvmloader with one's installed version of Xen by adding a line
+like this to the domain xl.cfg file:
+
+firmware_override = 'hvmloader-igd-testing'
 
 > 
-> As mentioned in the message accompanying Patch 4 of this patchset,
-> the official edk2 project does not provide support for the Intel
-> IGD, but some OVMF patches for Intel IGD support are available
-> online for KVM/VFIO guests, such as at the links below (they apply
-> to the OvmfPkgX64 platform):
+> The compatible patch for the device model is part of a larger patchset
+> that fixes many of the problems that currently affect the feature of
+> Intel IGD passthrough to Xen HVM guests. This patch should be considered
+> as a companion patch to that patchset for the device model. Do not try
+> to test this patch with a real Intel IGD device without also applying
+> the patchset for the device model because without those patches, the
+> guest will most likely fail to start if an Intel IGD is passed through
+> to the guest.
 > 
-> https://github.com/cmd2001/build-edk2-gvtd
-> https://eci.intel.com/docs/3.3/components/kvm-hypervisor.html#build-ovmf-fd-for-kvm
-> https://github.com/LongQT-sea/intel-igpu-passthru
-
-And also from Tomita:
-
-https://github.com/tomitamoeko/VfioIgdPkg
-
-Thanks, Tomita!
-
-> 
-> With such patches it is reported that the passed through Intel
-> IGD device lights up the display during early boot from OVMF
-> and the guest bootloader in KVM/VFIO guests provided that the
-> administrator provides the correct ROM file via the 'romfile'
-> setting for the passed thorugh Intel iGD device and applies
-> appropriate patches to the OvmfPkgX64 platform.
-> 
-> It should also be possible to add Intel IGD support for the OvmfXen
-> platform also but I have not seen any such patches online for OvmfXen
-> and if anyone knows of such patches online I would be interested to
-> be informed about them. I am also working on my own patches to
-> add Intel IGD support to the OvmfXen platform, in private for now.
-> If anyone is interested, I can make the work I have done so far
-> toward this goal avalable online.
+> There are different requirements to support OpRegion version 2.0
+> and OpRegion version 2.1+, with support for OpRegion 2 the more
+> difficult case because it always requires modifications to the OpRegion
+> for proper operation in the guest. For some details about OpRegion
+> 2 and higher and the extended VBT, see the links in the commit message.
 > 
 
