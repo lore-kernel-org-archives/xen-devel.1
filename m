@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7256C5516F
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2026 23:38:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1379692.1624111 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3E19C55171
+	for <xen-devel@archiver.kernel.org>; Sat,  1 Aug 2026 00:04:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1379703.1624120 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpwoM-00020B-1P; Fri, 31 Jul 2026 23:38:42 +0000
+	id 1wpxD1-00079x-AF; Sat, 01 Aug 2026 00:04:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1379692.1624111; Fri, 31 Jul 2026 23:38:42 +0000
+Received: by outflank-mailman (output) from mailman id 1379703.1624120; Sat, 01 Aug 2026 00:04:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wpwoL-000204-U5; Fri, 31 Jul 2026 23:38:41 +0000
-Received: by outflank-mailman (input) for mailman id 1379692;
- Fri, 31 Jul 2026 23:38:40 +0000
+	id 1wpxD1-00079q-6P; Sat, 01 Aug 2026 00:04:11 +0000
+Received: by outflank-mailman (input) for mailman id 1379703;
+ Sat, 01 Aug 2026 00:04:09 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3_DFtagYKCW8fRNaWPTbbTYR.PbZkRa-QRiRYYVfgf.kRacebWRPg.beT@flex--seanjc.bounces.google.com>)
- id 1wpwoK-0001zy-93
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2026 23:38:40 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <brchuckz@aol.com>) id 1wpxCy-00079R-TG
+ for xen-devel@lists.xenproject.org; Sat, 01 Aug 2026 00:04:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wpwoJ-004a2B-0v
- for xen-devel@lists.xenproject.org; Sat, 01 Aug 2026 01:38:39 +0200
-Received: from [10.42.69.11] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3_DFtagYKCW8fRNaWPTbbTYR.PbZkRa-QRiRYYVfgf.kRacebWRPg.beT@flex--seanjc.bounces.google.com>)
- id 6a6d3163-e002-0a2a0a5209dd-0a2a450bb140-40
- for <xen-devel@lists.xenproject.org>; Sat, 01 Aug 2026 01:38:38 +0200
-Received: from [209.85.210.197] (helo=mail-pf1-f197.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <3_DFtagYKCW8fRNaWPTbbTYR.PbZkRa-QRiRYYVfgf.kRacebWRPg.beT@flex--seanjc.bounces.google.com>)
- id 6a6d31fd-b7e8-0a2a450b0019-d155d2c5b503-3
- for <xen-devel@lists.xenproject.org>; Sat, 01 Aug 2026 01:38:38 +0200
-Received: by mail-pf1-f197.google.com with SMTP id
- d2e1a72fcca58-8486ffba174so2723306b3a.1
- for <xen-devel@lists.xenproject.org>; Fri, 31 Jul 2026 16:38:38 -0700 (PDT)
+ id 1wpxCy-00Fh5s-6F
+ for xen-devel@lists.xenproject.org; Sat, 01 Aug 2026 02:04:08 +0200
+Received: from [10.42.69.8] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <brchuckz@aol.com>)
+ id 6a6d37c7-2eae-0a2a0a5409dd-0a2a45089e78-22
+ for <xen-devel@lists.xenproject.org>; Sat, 01 Aug 2026 02:04:03 +0200
+Received: from [98.137.64.84] (helo=sonic305-21.consmr.mail.gq1.yahoo.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <brchuckz@aol.com>)
+ id 6a6d37f2-f659-0a2a45080019-628940548152-3
+ for <xen-devel@lists.xenproject.org>; Sat, 01 Aug 2026 02:04:03 +0200
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic305.consmr.mail.gq1.yahoo.com with HTTP; Sat, 1 Aug 2026 00:04:01 +0000
+Received: by hermes--production-ne1-6f6bdbdd7c-rppmz (Yahoo Inc. Hermes SMTP
+ Server) with ESMTPA ID c7608ec2cac0a95d3d8faa6ec551e65c; 
+ Sat, 01 Aug 2026 00:03:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,208 +50,549 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1785541117; x=1786145917; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:cc:to:from:subject
-         :message-id:references:mime-version:in-reply-to:date:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=dmKsJOviftvACUGPABBN88S+tJ91thYPhBWQcoJdx18=;
-        b=dJBoj3ZPE0CiYfljguCdQFb41rB3w22JoPZkln61893e34siy8Rq65O2Gm2W+nCJ6I
-         sh6Wh5mDTbvjaOczBpMe66X/uB0t3NmH0ylwXQmXS/jjwCGuxHjYbg1CL+bhEmxhcX+z
-         +2gCB6e+wG9ctIQNe/8ZrHr8hB5qjSEBovr3k76tnXUGUNU4ZoP4uYS9h6+6++6xDJIa
-         UnSRlBVHT9lRaoEBJmbz7gpxXRWurd/nhCTH2DW+fR17c1sIvkcGSK7Ds8kHgT2Aqghs
-         Uyg+fpoP4t5MYSM8wlVmTq5HMxnE8KtvRy+E2ubP4QAb7Y0qR6Zy9f5xM6CP2k0WRy6q
-         cdGg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785541117; x=1786145917;
-        h=content-transfer-encoding:content-type:cc:to:from:subject
-         :message-id:references:mime-version:in-reply-to:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=dmKsJOviftvACUGPABBN88S+tJ91thYPhBWQcoJdx18=;
-        b=CgQ6KhMaZq7dgQGWGyz1Pc9jzZetPaLEk8DbGeQXKHtIhmdAF9GiTzn56N4tV4L+r1
-         gHR8BUVsD0uUMqT207hUi2+Ji/B4ZKuckq2Qlq7++VdnfPBm8T100nDpFsG9LRBXmhMD
-         ANBejbI9y8P4nko2B3EqaISp+ApkzDMSypzTEULCm+qwWdxK6Q7O/tuopQqppC2z/1cJ
-         1O7rYl7p/8Mzh/3aR7uLU+8mxQyB94+tZoBPEvvt/o/ga85fQi7eVASyiIkF9oTUHRgZ
-         My38kzDAWVEUl4WCjh8AAmFPMisUZjmb7Szho+glpP64/LjhGbLtOzPwI7g6a5Hz7wjh
-         Ic7g==
-X-Forwarded-Encrypted: i=1; AHgh+RqAtDlbo1OqcqViZ7lTDtj2Q+HfWvVxkoLB1Q9EoyZE8q5Qs+TedyycTFRamF7qDu2iKER/Npo4+MM=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyFWBv6sgeFbIXncdx8nxckin5IsA5vvX4tqqkh0eOmwC3XDEAn
-	cnqaoU/CPI4vyBEHE+qa6OuEfrx/JlIV/Tus4pwjRYIfdIeV2W6fAT4dxbFqzImtQbLEfSsJB6Y
-	DMOPE9g==
-X-Received: from pful5.prod.google.com ([2002:a05:6a00:1405:b0:847:a85b:6c23])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a00:6c8f:b0:847:8b0f:2508
- with SMTP id d2e1a72fcca58-84ee47789c4mr1324782b3a.13.1785541116639; Fri, 31
- Jul 2026 16:38:36 -0700 (PDT)
-Date: Fri, 31 Jul 2026 16:38:36 -0700
-In-Reply-To: <20260728144954.355376-35-dwmw2@infradead.org>
-Mime-Version: 1.0
-References: <20260728144954.355376-1-dwmw2@infradead.org> <20260728144954.355376-35-dwmw2@infradead.org>
-Message-ID: <am0x_ORC0olomizu@google.com>
-Subject: Re: [PATCH v7 34/36] KVM: selftests: Add master clock offset test
-From: Sean Christopherson <seanjc@google.com>
-To: David Woodhouse <dwmw2@infradead.org>
-Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Thomas Gleixner <tglx@kernel.org>, 
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, Juergen Gross <jgross@suse.com>, 
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>, Paul Durrant <paul@xen.org>, 
-	Jonathan Cameron <jic23@kernel.org>, Sascha Bischoff <Sascha.Bischoff@arm.com>, 
-	Marc Zyngier <maz@kernel.org>, Joey Gouly <joey.gouly@arm.com>, Jack Allister <jalliste@amazon.com>, 
-	Dongli Zhang <dongli.zhang@oracle.com>, joe.jin@oracle.com, kvm@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	xen-devel@lists.xenproject.org, linux-kselftest@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-42698a/1785541118-2C39B9EA-345BD532/0/0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="From:To:Cc:Subject:Date:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1785542641; bh=ScxuLdCEEpt8xcvaZGVm8pblnaaeCXt2k3SUmUrCDDQ=; h=From:To:Cc:Subject:Date:References:From:Subject:Reply-To; b=BtZRziS2ygv2KGOSQFkP5aQBWo2876ju/GKwUxZmxJTPJzhXRwNiuHImAyZgXwr0xAKYD5SgYEx2SKUniLfHDuEPLuswLJCTtCpA2i0PkkN1YbiqxMgFRUe6uNN3bXxEnKaDsIHFIGBtHkvRLqpkyElptwGfyuJd0mrUHfnXUUum2hx5WYpn3bQSaVteWEtDq+wn8rmytq9M2Vf868PZ9j56hWV63DTEFHR4kyell+yDUqCjgXdFubYwUFQkwstPp1aB+/LzsUVWzKItZwT4yTzH077oVan8MvwF8yHMao5zvFqfvJC/zPA1hRrF9gxtfxCGthCf+aAANbBzTZtoYA==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1785542641; bh=EgevDvieZTrS5c5/q5o0sA8ls7qQ9KS6Qjw0ldsYmTK=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=QUuOUFJzgLja2jgoY0vvNkPuDILYmIpoA6zBTStqTSto/kWhVNX5D+bDyPDneyzeprvmya4CFPG16NDKtATHvw50bgwwVglJQKP+WW5JwT43JLCrdf6B4lnpxQItjso2UxoW8XNiumXHIlK80Y0pFD8a9nUAH/c5yOBDlL4sjEl+GKFOCt7m5+VEpYCk4b4qQIy+a0VGNeTsZLiISJZkeOEFSsBxMX4eChN5SUYoDqNEX1Xly18Tem0RoZCrBWcdO+3PDgb1wxt21dPPzhJIJjuUTea8R6bm6xEwCFV7PMDZxuk7aJCQMc/kt7jkBPwSq7AfOLDNPpP5mMcFytORRQ==
+X-YMail-OSG: NZZFObAVM1mQ8GuUv0FKMv9ixWb._8avAcvTzthF8BSuwGKlf2uXznS9QLs4qHu
+ cNSuiCa1BGPlLlHPquwa8hkq.Svb8y21.sX5taYNKrwxdRfi1nMpGGeik8E3mDKIBrw5qm3yhp7N
+ JwylAqzYZfc7.i67ygWf27FZ_BCi6BYNSENdrXEtrxfUmuFD2QGpCr2JhDDiS8IIEHBee4qBibkG
+ qmeDyvAJou8JGl39oNojjw6tJ3oWma3PWSl8JsknF4HOd6hVmDBu8qznZlxGJdTvdwry4xssFuvz
+ AMuv3jNMkOYxaXmaT1Jis1ANyveIEArGN_QvsMMaqKcSdTTuDwD.94C_2D1k9Xxt9zUXi5VT2hub
+ XBmQceX6E6X4IEncTk3Lv7X246HrGPdeeu0BbVoSVnPoso_7xM_NsPrV1PTu5pZWZnnXX2nFuq2K
+ 8kRZfSfuBtK2vc4hIhu.rFOdrP50kZ0lAH8ieip29_Cwallgo5aHpabQUfpKf.WyhM4UQnFXiqTj
+ GoZjF_S3eVSL9f4OBS3_JKiAOujJD6BVoY7AqaeQD8omDQMpT6klqGmQPT_3MCJ35ddSKLip0guO
+ Ot6J2NDn4LqHt94gJX22A9cbAECN1NkgIB_l1zchHbPjmqTHxDxCQs0nVb3QUWDzwRvjrX3ytXYF
+ nfOFmY2Jb8Nmd191LbSmUSRLe0tXxZZ915repd.4_pUUIW3SCN3tFKK2IwfxQQ_8XCJezkNLksFn
+ TBu2AIgzCd22pMALioITJmEQQz_2xTlutcgdy.1w7XofZlI6pnlZxNmZR_psdJObbAKTB34gNqFz
+ .TqzvO4R0NCvLps1zTV3PVVoV2hbUq69ezRuWYssjzlsnaE2a9r43Uk1on2aFUsBGd5a71mKFkXv
+ 81RoL20olZdxyX.Xq.5vpF68KIWifctNXs9ErAkakdLCJ911KeYSnlE8QPkP6QogBH3IU0VYwoIR
+ bLaIDLI7p_wJU8cuAhl_PHq.6WW15baogYVq7.kjuvz7e4xevteZXJGXPPhn1NcZZL3d7he9EmX.
+ VesxsFK.4X4MEFdU8fv27Cm4hqMXVRJK7a8mCxqxOd9UnUHkH_thy8HzVEnuCBc4FL90oBAx_7.F
+ xtYFaMQvYRfdzxdFh0XR5L4lnQDc9__WC_uIZ9vg4R9KwDYLyssCAWbPzKTCOX5MyErv.KTGMAI7
+ Ok8yrG9Lz5fdB3Qj.oZh.QqrUoS.5XnuQcM2.hiUnI8khOq9xuM5fJgEBhOlU2.Z3GmXmsCpRdcs
+ G2T0o5YjXwcmNL7WN4_aHqdhp4sGgE4Ei_TzpQOf9wpio2kRJE8xOMPSNVMpfigE39tDuARi_l_I
+ 6vT.yFuugjxncpY_FFk3sftXGu5.pVfkhZWD9KN1PIJ.5NaQy898Qqf4OVlGrQ2PlgkXGdLWHNlt
+ WCZ0CTk3ibM3qeDfnnYCuiIPoQKVnEpNXkEhSJFCrPoa6c2164tkOm58gyMgRTXSqAIvVupMj7i1
+ 5xkJtCW5r1k4NxY8qcW3zl_MPBlxNA98Df2Pttk8Q.oVXmuzUtqC04jFeVPjVXC7iFN50k1xIRr0
+ 4n0BoAs2HW7v5IY69MfAkGpscSvhj2BEv0ioCCSLH0msIeGmyVneSwUsvU7POwf1W9xt2LADJGIr
+ RzFs16RbnydAQL39dDzo1bVqhsCqUjWRI5HbiOVOjG.8v5RjXbtqXsLPWRKvMdhboA96gcyCL3_r
+ XOS4Z11jeCFvdl_gzMoO4NXDMux9sRVjOu1C3B3vlpSJDlSHTrCIbT..S7qZIsroYDQyjBW_na9q
+ kOmjygO2ayYw6ReN1dP7U8ma3FW_jkAM1C.Q6tm622SOGSmA10y3vyhE6AQEwAIxZyIodwJiwzp0
+ 9JOElHyeWEp6AEb.1win1FYbiQSjxME6WC0ZBxGwcSy8lFty6uFmOMJyF59j8lIUcogCNF2nngDI
+ .5Qe3fjO._cM.qwqWc84V1fZJ4qsJ04yFE.7.EAwmTn_OVkcCHZepP9se_nCGUkwxQOWKJlVsp4S
+ Js05WxoHo2uFx4Whomomp7v1pQ8gfuL4mE58KgYEq2n4x0geIIt_dmuWTuPKVlp0rlOQbJUElHwy
+ 8R.UK8mhEfrHlf7fRmhL.0CMaWWiWdQIMvceRNyZ6e3Dr72hWv5VXdL7JqJFzK2SsQrgfm_amXSc
+ l4po3C_DjBMPqC24wlaCc1XO4CqIQ6c9RrKu6LPHE.gyz291mZyCSD76NvNsqXQcyNXSpEkQbub9
+ jQLAXPt4_E4mSjfoR9h22fhzeaEvMStYKbQs4hr1q
+X-Sonic-MF: <brchuckz@aol.com>
+X-Sonic-ID: 81e8e4b2-3141-45c8-9bab-4fa037b5cbfb
+From: Chuck Zmudzinski <brchuckz@aol.com>
+To: xen-devel@lists.xenproject.org
+Cc: qemu-devel@nongnu.org,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Tomita Moeko <tomitamoeko@gmail.com>
+Subject: [PATCH] tools/hvmloader: implement Intel IGD extended VBT support
+Date: Fri, 31 Jul 2026 20:03:45 -0400
+Message-ID: <20260801000354.16446-1-brchuckz@aol.com>
+X-Mailer: git-send-email 2.47.3
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+References: <20260801000354.16446-1-brchuckz.ref@aol.com>
+X-purgate-ID: tlsNG-c1860d/1785542643-CE14687B-AF569FAE/0/0
 X-purgate-type: clean
-X-purgate-size: 5038
+X-purgate-size: 20214
 
-On Tue, Jul 28, 2026, David Woodhouse wrote:
-> From: David Woodhouse <dwmw@amazon.co.uk>
->=20
-> Verify that KVM master clock mode remains active when vCPUs have
-> different TSC offsets but the same frequency. Creates three vCPUs,
-> sets one to a different TSC value, and confirms:
->=20
->  - KVM_CLOCK_HOST_TSC is set (master clock active)
->  - KVM_CLOCK_TSC_STABLE IS set (master clock =E2=87=92 stable flag)
->  - PVCLOCK_TSC_STABLE_BIT is NOT set (offsets differ)
->=20
-> Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-> Assisted-by: Kiro (claude-opus-4.6-1m)
-> ---
->  tools/testing/selftests/kvm/Makefile.kvm      |   1 +
->  .../kvm/x86/masterclock_offset_test.c         | 180 ++++++++++++++++++
->  2 files changed, 181 insertions(+)
->  create mode 100644 tools/testing/selftests/kvm/x86/masterclock_offset_te=
-st.c
->=20
-> diff --git a/tools/testing/selftests/kvm/Makefile.kvm b/tools/testing/sel=
-ftests/kvm/Makefile.kvm
-> index 95539deea266..f6027a35f790 100644
-> --- a/tools/testing/selftests/kvm/Makefile.kvm
-> +++ b/tools/testing/selftests/kvm/Makefile.kvm
-> @@ -108,6 +108,7 @@ TEST_GEN_PROGS_x86 +=3D x86/pmu_event_filter_test
->  TEST_GEN_PROGS_x86 +=3D x86/private_mem_conversions_test
->  TEST_GEN_PROGS_x86 +=3D x86/private_mem_kvm_exits_test
->  TEST_GEN_PROGS_x86 +=3D x86/pvclock_test
-> +TEST_GEN_PROGS_x86 +=3D x86/masterclock_offset_test
+Modern Intel IGD devices do not work well with the current
+implementation of support for the Intel IGD in hvmloader because
+it lacks support for an extended video bios table (VBT).
 
-Keep these sorted alphabetically.
+Code 43 errors in Windows guests and failure of the guest screen
+to light up are some of the problems that occur with the
+current implementation.
 
->  TEST_GEN_PROGS_x86 +=3D x86/pvclock_migration_test
->  TEST_GEN_PROGS_x86 +=3D x86/set_boot_cpu_id
->  TEST_GEN_PROGS_x86 +=3D x86/set_sregs_test
-> diff --git a/tools/testing/selftests/kvm/x86/masterclock_offset_test.c b/=
-tools/testing/selftests/kvm/x86/masterclock_offset_test.c
-> new file mode 100644
-> index 000000000000..88e2bd2edab5
-> --- /dev/null
-> +++ b/tools/testing/selftests/kvm/x86/masterclock_offset_test.c
-> @@ -0,0 +1,180 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Test that KVM master clock mode works with different TSC offsets
-> + * as long as all vCPUs have the same TSC frequency.
-> + */
-> +#include <stdint.h>
-> +#include <string.h>
-> +
-> +#include "test_util.h"
-> +#include "kvm_util.h"
-> +#include "processor.h"
-> +
-> +#include <asm/pvclock-abi.h>
-> +
-> +#define KVMCLOCK_GPA	0xc0000000ull
-> +#define TSC_OFFSET	(1000000000ULL)
-> +
-> +static uint64_t pvclock_calc(struct pvclock_vcpu_time_info *pvti, uint64=
-_t guest_tsc)
-> +{
-> +	uint64_t delta =3D guest_tsc - pvti->tsc_timestamp;
-> +
-> +	if (pvti->tsc_shift >=3D 0)
-> +		delta <<=3D pvti->tsc_shift;
-> +	else
-> +		delta >>=3D -(int)pvti->tsc_shift;
-> +
-> +	return pvti->system_time + ((__uint128_t)delta * pvti->tsc_to_system_mu=
-l >> 32);
-> +}
-> +
-> +static void guest_code(void)
-> +{
-> +	wrmsr(MSR_KVM_SYSTEM_TIME_NEW, KVMCLOCK_GPA | KVM_MSR_ENABLED);
-> +	for (;;)
-> +		GUEST_SYNC(0);
-> +}
-> +
-> +int main(void)
-> +{
-> +	struct kvm_vcpu *vcpus[3];
-> +	struct kvm_clock_data clock;
-> +	struct pvclock_vcpu_time_info pvti[3];
-> +	struct kvm_vm *vm;
-> +	uint64_t offset0, host_tsc, clk0, clk2;
-> +	int i;
-> +
-> +	TEST_REQUIRE(sys_clocksource_is_based_on_tsc());
-> +
-> +	vm =3D vm_create_with_vcpus(3, guest_code, vcpus);
-> +
-> +	TEST_REQUIRE(!__vcpu_has_device_attr(vcpus[0], KVM_VCPU_TSC_CTRL,
-> +					     KVM_VCPU_TSC_OFFSET));
-> +
-> +	vm_userspace_mem_region_add(vm, VM_MEM_SRC_ANONYMOUS,
-> +				    KVMCLOCK_GPA, 1,
-> +				    vm_calc_num_guest_pages(VM_MODE_DEFAULT,
-> +							   getpagesize()), 0);
-> +	virt_map(vm, KVMCLOCK_GPA, KVMCLOCK_GPA,
-> +		 vm_calc_num_guest_pages(VM_MODE_DEFAULT, getpagesize()));
-> +
-> +	/* Get vCPU 0's default offset and set vCPU 2's offset higher */
-> +	vcpu_device_attr_get(vcpus[0], KVM_VCPU_TSC_CTRL,
-> +			     KVM_VCPU_TSC_OFFSET, &offset0);
-> +	uint64_t offset2 =3D offset0 + TSC_OFFSET;
-> +	vcpu_device_attr_set(vcpus[2], KVM_VCPU_TSC_CTRL,
-> +			     KVM_VCPU_TSC_OFFSET, &offset2);
-> +
-> +	/* Run each vCPU to enable kvmclock (with offset already set) */
-> +	for (i =3D 0; i < 3; i++) {
+To address this problem, this patch implements support for
+Intel IGD devices with an extended VBT and OpRegion version 2
+and higher which is required for most modern Intel IGD devices.
 
-ARRAY_SIZE(vcpus)
+This patch also depends on compatible support in the device
+model. If hvmloader detects the device model lacks such support,
+it will fall back to the currently implemented protocol for
+configuring the OpRegion to provide backward compatibiltiy for
+systems that lack a device model with support for an extended VBT.
 
-> +		vcpu_run(vcpus[i]);
-> +		TEST_ASSERT_KVM_EXIT_REASON(vcpus[i], KVM_EXIT_IO);
-> +	}
-> +
-> +	/* Check master clock is active */
-> +	memset(&clock, 0, sizeof(clock));
-> +	vm_ioctl(vm, KVM_GET_CLOCK, &clock);
+Support for an extended VBT is implemented in the newly introduced
+function opregion_setup() which is implemented in the new file
+intel_opregion.c.
 
-Provide an API.
+Major differences between this implementation and the current
+implemntation that only supports older devices without an
+extended VBT:
 
-> +	pr_info("KVM_GET_CLOCK flags: 0x%x\n", clock.flags);
-> +	TEST_ASSERT(clock.flags & KVM_CLOCK_HOST_TSC,
-> +		    "Master clock should be active, flags=3D0x%x", clock.flags);
-> +	TEST_ASSERT(clock.flags & KVM_CLOCK_TSC_STABLE,
-> +		    "KVM_CLOCK_TSC_STABLE should be set, flags=3D0x%x", clock.flags);
-> +
-> +	/* Get per-vCPU pvclock in order 0, 2, 1 */
-> +	int order[] =3D {0, 2, 1};
+1. The current implemntation reserves a constant number of
+   pages (3) in the E820 map for the OpRegion which is set by
+   the IGD_OPREGION_PAGES macro in the current implementation.
+   With OpRegion 2 and higher, the OpRegion can have an
+   extended VBT that must be provided to the guest with the
+   OpRegion. This means the size of the region is not fixed,
+   so in this new implementation the IGD_OPREGION_PAGES constant
+   is changed to a variable in e820.c, igd_opregion_e820_pages,
+   that is set to its proper value based on the the size of the
+   VBT. In this new implemntation, the size of the ACPI NVS region
+   reserved for the OpRegion in the E820 map is equal to the value
+   of the igd_opregion_e820_pages variable instead of being set
+   to the constant value determined by IGD_OPREGION_PAGES.
 
-Please don't declare variables in the middle code.  Yes, it's now technical=
-ly
-possible thanks to all the guard() magic, but it's still against preferred =
-kernel
-style.
+2. The current implemntation provides the guest with access
+   to the unmodified OpRegion on the host via memory mapping
+   from the host to the guest. This is insufficient for
+   OpRegion 2 and higher because some devices will require
+   modifications to the OpRegion for proper operation in the
+   guest. So this new implementation provides hvmloader with a
+   copy of the host's OpRegion that hvmloader can modify as
+   needed for proper operation. Mapping the OpRegion from the
+   host to the guest is only used temporarily during setup of
+   the OpRegion by hvmloader and once hvmloader has a copy of
+   the OpRegion and the extended VBT, the device model removes
+   the host mapping and hvmloader configures the guest to use
+   the guest's possibly modified copy of the OpRegion instead.
 
-Though this itself is probably a really, really good indication that this n=
-eeds
-to be split into multiple testcases.  Maybe using TEST_F() and a custom fix=
-ture?
+3. The current implementation lacks useful debugging information
+   for the more recent devices. This new implementation provides
+   useful debugging output from hvmloader, such as the detected
+   host OpRegion version and address, the values for rvda, rvds,
+   and the guest OpRegion address when the guest_loglvl is set
+   to all/all.
+
+Link: https://lore.kernel.org/kvm/20211012124855.52463-1-colin.xu@gmail.com/
+Link: https://lore.kernel.org/kvm/20210325170953.24549-1-fred.gao@intel.com/
+Signed-off-by: Chuck Zmudzinski <brchuckz@aol.com>
+---
+Later versions of this patch will provide a link to the compatible patch
+for extended VBT support in the device model which will be posted to
+the qemu-devel and xen-devel mailing lists and Cc'd to the appropriate
+maintainers and reviewers soon.
+
+The compatible patch for the device model is part of a larger patchset
+that fixes many of the problems that currently affect the feature of
+Intel IGD passthrough to Xen HVM guests. This patch should be considered
+as a companion patch to that patchset for the device model. Do not try
+to test this patch with a real Intel IGD device without also applying
+the patchset for the device model because without those patches, the
+guest will most likely fail to start if an Intel IGD is passed through
+to the guest.
+
+There are different requirements to support OpRegion version 2.0
+and OpRegion version 2.1+, with support for OpRegion 2 the more
+difficult case because it always requires modifications to the OpRegion
+for proper operation in the guest. For some details about OpRegion
+2 and higher and the extended VBT, see the links in the commit message.
+
+ tools/firmware/hvmloader/Makefile         |   1 +
+ tools/firmware/hvmloader/config.h         |  15 +-
+ tools/firmware/hvmloader/e820.c           |   4 +-
+ tools/firmware/hvmloader/intel_opregion.c | 297 ++++++++++++++++++++++
+ tools/firmware/hvmloader/pci.c            |  10 +-
+ 5 files changed, 313 insertions(+), 14 deletions(-)
+ create mode 100644 tools/firmware/hvmloader/intel_opregion.c
+
+diff --git a/tools/firmware/hvmloader/Makefile b/tools/firmware/hvmloader/Makefile
+index 21de721..ed42915 100644
+--- a/tools/firmware/hvmloader/Makefile
++++ b/tools/firmware/hvmloader/Makefile
+@@ -35,6 +35,7 @@ OBJS += smp.o cacheattr.o xenbus.o vnuma.o
+ OBJS += e820.o pci.o pir.o ctype.o
+ OBJS += hvm_param.o
+ OBJS += ovmf.o seabios.o
++OBJS += intel_opregion.o
+ ifeq ($(debug),y)
+ OBJS += tests.o
+ endif
+diff --git a/tools/firmware/hvmloader/config.h b/tools/firmware/hvmloader/config.h
+index c159db3..bd3c0f9 100644
+--- a/tools/firmware/hvmloader/config.h
++++ b/tools/firmware/hvmloader/config.h
+@@ -7,9 +7,6 @@
+ enum virtual_vga { VGA_none, VGA_std, VGA_cirrus, VGA_pt };
+ extern enum virtual_vga virtual_vga;
+ 
+-extern unsigned long igd_opregion_pgbase;
+-#define IGD_OPREGION_PAGES 3
+-
+ struct bios_config {
+     const char *name;
+ 
+@@ -43,6 +40,18 @@ extern struct bios_config ovmf_config;
+ 
+ #define PAGE_SHIFT 12
+ #define PAGE_SIZE  (1ul << PAGE_SHIFT)
++#define IGD_OPREGION_PAGES 3
++#define IGD_OPREGION_SIZE ((IGD_OPREGION_PAGES - 1) << PAGE_SHIFT)
++#define IGD_OPREGION_RVDA 0x3ba
++#define IGD_OPREGION_RVDS 0x3c2
++#define IGD_OPREGION_VERSION 0x16
++#define IGD_OPREGION_MASK 0xfff
++#define IGD_OPREGION2_SUPPORT_MASK 0x1
++#define IGD_OPREGION_SIGNATURE "IntelGraphicsMem"
++#define IGD_VBT_SIGNATURE "$VBT"
++extern unsigned long igd_opregion_pgbase;
++extern uint32_t igd_opregion_e820_pages;
++void intel_opregion_setup(uint32_t vga_devfn);
+ 
+ extern uint8_t ioapic_version;
+ 
+diff --git a/tools/firmware/hvmloader/e820.c b/tools/firmware/hvmloader/e820.c
+index 86d3954..97a234e 100644
+--- a/tools/firmware/hvmloader/e820.c
++++ b/tools/firmware/hvmloader/e820.c
+@@ -243,11 +243,11 @@ int build_e820_table(struct e820entry *e820,
+         nr++;
+ 
+         e820[nr].addr = igd_opregion_base;
+-        e820[nr].size = IGD_OPREGION_PAGES * PAGE_SIZE;
++        e820[nr].size = igd_opregion_e820_pages * PAGE_SIZE;
+         e820[nr].type = E820_NVS;
+         nr++;
+ 
+-        e820[nr].addr = igd_opregion_base + IGD_OPREGION_PAGES * PAGE_SIZE;
++        e820[nr].addr = igd_opregion_base + igd_opregion_e820_pages * PAGE_SIZE;
+         e820[nr].size = (uint32_t)-e820[nr].addr;
+         e820[nr].type = E820_RESERVED;
+         nr++;
+diff --git a/tools/firmware/hvmloader/intel_opregion.c b/tools/firmware/hvmloader/intel_opregion.c
+new file mode 100644
+index 0000000..59cb2c3
+--- /dev/null
++++ b/tools/firmware/hvmloader/intel_opregion.c
+@@ -0,0 +1,297 @@
++/*
++ * intel_opregion.c: HVM Intel OpRegion setup.
++ *
++ * Leendert van Doorn, leendert@watson.ibm.com
++ * Copyright (c) 2005, International Business Machines Corporation.
++ *
++ * Copyright (c) 2006, Keir Fraser, XenSource Inc.
++ *
++ * Copyright (c) 2026, Charles Zmudzinski.
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program; If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include "util.h"
++#include "config.h"
++#include "pci_regs.h"
++
++unsigned long igd_opregion_pgbase = 0;
++uint32_t igd_opregion_e820_pages = IGD_OPREGION_PAGES;
++
++static bool verify_opregion(const uint32_t addr)
++{
++    const char *opregion_signature = IGD_OPREGION_SIGNATURE;
++    if ( memcmp((const void *)addr, (const void *)opregion_signature, 16) )
++        return false;
++    return true;
++}
++
++static bool verify_vbt(const uint32_t addr)
++{
++    const char *vbt_signature = IGD_VBT_SIGNATURE;
++    if ( memcmp((const void *)addr, (const void *)vbt_signature, 4) )
++        return false;
++    return true;
++}
++
++void intel_opregion_setup(uint32_t vga_devfn)
++{
++    uint32_t igd_guest_opregion;
++    uint32_t pages_needed; /* for OpRegion + VBT */
++    void *opregion_scratch;
++    void *vbt_scratch;
++    void *vbt_source;
++    /*
++     * absolute value in the host/guest except
++     * as noted in the comments
++     */
++    static unsigned long rvda_host;
++    static unsigned long rvda_guest;
++
++    igd_opregion_pgbase = mem_hole_alloc(IGD_OPREGION_PAGES);
++    /*
++     * Tentative value for the number of pages to reserve
++     * in the E820 map for the OpRegion and VBT.
++     *
++     * This will be the final value for the E820 map if
++     * the device model lacks support for OpRegion 2 or
++     * if the host OpRegion version is < 2 or if we never
++     * allocate more pages in the E820 map for the VBT.
++     */
++    igd_opregion_e820_pages = IGD_OPREGION_PAGES;
++
++    /*
++     * Read the value the device model is initialized with.
++     * If the device model supports OpRegion 2, it will
++     * return the host IGD OpRegion address. If not, it
++     * will return 0. If the device model does not support
++     * OpRegion 2, the device model expects us to give it
++     * the address to which it will map the OpRegion in the
++     * guest and then expects us to do nothing more to setup
++     * the OpRegion, so that is all we will do in that case.
++     */
++    const uint32_t igd_host_opregion = pci_readl(vga_devfn,
++                                                 PCI_INTEL_OPREGION);
++    if ( !igd_host_opregion ) {
++        printf("device model lacks extended VBT "
++               "support. Continuing with legacy support only\n");
++        /*
++         * Write the the OpRegion offset to give the OpRegion
++         * address to the device model. The device model will trap
++         * and map the OpRegion at the give address.
++         */
++        pci_writel(vga_devfn, PCI_INTEL_OPREGION,
++                   igd_opregion_pgbase << PAGE_SHIFT);
++        return;
++    } else {
++        printf("host OpRegion address: 0x%x\n",
++               igd_host_opregion);
++    }
++
++    const uint32_t igd_host_opregion_page_offset =
++                   igd_host_opregion & IGD_OPREGION_MASK;
++    igd_guest_opregion = (igd_opregion_pgbase << PAGE_SHIFT) |
++                          igd_host_opregion_page_offset;
++
++    /*
++     * We know at this point the device model supports
++     * OpRegion 2.
++     *
++     * Indicate to the device model that we support
++     * OpRegion 2 by setting the least significant bit
++     * of the address we give to the device model.
++     * The device model will notice this bit set and
++     * respond appropriately to our writes to the
++     * register where the OpRegion address is stored.
++     */
++    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
++               (igd_opregion_pgbase << PAGE_SHIFT) |
++                IGD_OPREGION2_SUPPORT_MASK);
++
++    printf("guest OpRegion tentative "
++           "address: 0x%x\n", igd_guest_opregion);
++
++    if ( !verify_opregion(igd_guest_opregion) ) {
++        printf("error: IGD OpRegion signature "
++               "not found.\n");
++        BUG();
++    }
++
++    opregion_scratch = scratch_alloc(IGD_OPREGION_SIZE, 0);
++    memcpy(opregion_scratch, (const void *)igd_guest_opregion,
++           IGD_OPREGION_SIZE);
++
++    /* Read OpRegion version, rvda_host, and rvds */
++    const uint16_t version = *(uint16_t *)(opregion_scratch +
++                                           IGD_OPREGION_VERSION);
++    printf("OpRegion version: 0x%x\n", version);
++    if ( version >= 0x0200 ) {
++        rvda_host = *(unsigned long *)(opregion_scratch +
++                                       IGD_OPREGION_RVDA);
++        /* It is convenient to make rvda_host absolute */
++        if ( version > 0x0200 )
++            rvda_host += igd_host_opregion;
++        printf("host VBT address: 0x%lx\n", rvda_host);
++    } else {
++        printf("guest OpRegion address: 0x%x\n", igd_guest_opregion);
++        rvda_host = 0;
++    }
++    const uint32_t rvda_host_page_offset = rvda_host &
++                                           IGD_OPREGION_MASK;
++    const uint32_t rvds = *(uint32_t *)(opregion_scratch +
++                                        IGD_OPREGION_RVDS);
++    const uint32_t rvds_page_offset = rvds & IGD_OPREGION_MASK;
++    printf("VBT size: 0x%x\n", rvds);
++
++    if ( !rvds || !rvda_host ) {
++        printf("guest OpRegion address: 0x%x\n", igd_guest_opregion);
++        rvda_host = 0;
++    }
++    /*
++     * Write rvda_host as 2 successive 32-bit values
++     * to communicate location of the VBT to the device
++     * model. If rvda_host is not 0, The device model
++     * unmaps the OpRegion and eventually maps the VBT
++     * after we also write the guest address where the
++     * VBT will be mapped.
++     *
++     * If we send rvda_host = 0 to the device model, it
++     * will assume we do not need OpRegion 2 support and
++     * it will not unmap the OpRegion.
++     */
++    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
++               (uint32_t)(rvda_host & 0xfffffffful));
++    unsigned long rvda_host_upper_32 = (uint64_t)rvda_host >> 32;
++    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
++               (uint32_t)rvda_host_upper_32);
++
++    /* In this case, we use the mapped OpRegion */
++    if ( !rvda_host )
++        return;
++
++    /*
++     * Update the number of pages the device model
++     * needs to map for us to get a copy of the VBT.
++     *
++     * N.B.: Here, igd_opregion_pgbase is really the page
++     * base of the location where the device model will
++     * map the VBT.
++     */
++    uint32_t vbt_pages_needed = rvds >> PAGE_SHIFT;
++    if ( rvds & IGD_OPREGION_MASK )
++        vbt_pages_needed++;
++    if ( vbt_pages_needed > igd_opregion_e820_pages ) {
++        igd_opregion_pgbase = mem_hole_alloc
++                              (vbt_pages_needed - igd_opregion_e820_pages);
++        igd_opregion_e820_pages = vbt_pages_needed;
++    }
++
++    /*
++     * Write the location where the device model is to
++     * map the VBT in the guest with the 12 least
++     * significant bits encoded as the number of pages
++     * for the device model to map (vbt_pages_needed).
++     */
++    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
++               ((igd_opregion_pgbase << PAGE_SHIFT) | vbt_pages_needed));
++
++    /*
++     * When the VBT is mapped from the host, the page offset
++     * of the VBT will be the same as on the host
++     */
++    rvda_guest = (igd_opregion_pgbase << PAGE_SHIFT) |
++                  rvda_host_page_offset;
++    if ( !verify_vbt(rvda_guest) ) {
++        printf("error: VBT signature not found.\n");
++        BUG();
++    }
++
++    vbt_source = (void *)rvda_guest;
++    vbt_scratch = scratch_alloc(rvds, 0);
++    memcpy(vbt_scratch, vbt_source, rvds);
++
++    /* Compute how many pages we need for OpRegion + VBT */
++    pages_needed = (IGD_OPREGION_SIZE + rvds) >> PAGE_SHIFT;
++    if ( (IGD_OPREGION_SIZE + rvds) & IGD_OPREGION_MASK )
++        pages_needed++;
++
++    /* Update the number of pages we need for the E820 map */
++    igd_opregion_e820_pages = pages_needed;
++
++    /*
++     * So far we have allocated vbt_pages_needed
++     * and we will likely need to allocate more
++     * pages to fully contain OpRegion + VBT.
++     */
++    if ( pages_needed > vbt_pages_needed )
++        igd_opregion_pgbase = mem_hole_alloc
++                              (pages_needed - vbt_pages_needed);
++
++    /*
++     * Compute the final igd_guest_opregion value and
++     * keep the same offset as on the host if doing so
++     * will not push us across another page boundary.
++     */
++    igd_guest_opregion = igd_opregion_pgbase << PAGE_SHIFT;
++    if ( (igd_host_opregion_page_offset + rvds_page_offset) <= PAGE_SIZE )
++        igd_guest_opregion |= igd_host_opregion_page_offset;
++    printf("guest OpRegion address: 0x%x\n", igd_guest_opregion);
++
++    /* The device model will unmap the VBT */
++    pci_writel(vga_devfn, PCI_INTEL_OPREGION, igd_guest_opregion);
++
++    /*
++     * After unmapping we need to populate the memory hole.
++     * If the unmapping failed this will crash the guest.
++     *
++     * We could try to use the mapped VBT with our copy of the
++     * OpRegion, but it is probably better to BUG() if the
++     * device model failed to unmap the VBT.
++     */
++    if ( verify_vbt(rvda_guest) )
++        BUG();
++    mem_hole_populate_ram(igd_opregion_pgbase,
++                          igd_opregion_e820_pages);
++
++    /*
++     * After unmapping we are free to shift the VBT by
++     * an arbitrary number of bytes. For efficient use
++     * of memory and to keep the memory map simple,
++     * place the VBT contiguous after the OpRegion.
++     */
++    rvda_guest = igd_guest_opregion + IGD_OPREGION_SIZE;
++    printf("guest VBT address: 0x%lx\n", rvda_guest);
++
++    /*
++     * Until now, rvda_guest has been an absolute address
++     * in the guest. We need to translate it to a relative
++     * address if OpRegion version > 0x0200 and in that case
++     * we also verify it is contiguous with the OpRegion.
++     */
++    if ( version > 0x0200 ) {
++        rvda_guest -= igd_guest_opregion;
++        printf("guest rvda (relative): 0x%lx\n", rvda_guest);
++        BUG_ON(rvda_guest != IGD_OPREGION_SIZE);
++    }
++
++    /*
++     * Write the correct rvda_guest value to the
++     * guest copy of the OpRegion and copy the scratch
++     * buffers to the correct address in our E820 region.
++     */
++    *(unsigned long *)(opregion_scratch + IGD_OPREGION_RVDA) = rvda_guest;
++    memcpy((void *)(igd_guest_opregion + IGD_OPREGION_SIZE),
++           (const void *)vbt_scratch, rvds);
++    memcpy((void *)igd_guest_opregion,
++           (const void *)opregion_scratch, IGD_OPREGION_SIZE);
++}
+diff --git a/tools/firmware/hvmloader/pci.c b/tools/firmware/hvmloader/pci.c
+index c41c8d9..07a37e5 100644
+--- a/tools/firmware/hvmloader/pci.c
++++ b/tools/firmware/hvmloader/pci.c
+@@ -43,7 +43,6 @@ uint64_t pci_hi_mem_start = 0, pci_hi_mem_end = 0;
+ #define BAR_RELOC_THRESH GB(1)
+ 
+ enum virtual_vga virtual_vga = VGA_none;
+-unsigned long igd_opregion_pgbase = 0;
+ 
+ /* Check if the specified range conflicts with any reserved device memory. */
+ static bool check_overlap_all(uint64_t start, uint64_t size)
+@@ -190,14 +189,7 @@ void pci_setup(void)
+                 virtual_vga = VGA_pt;
+                 if ( vendor_id == 0x8086 )
+                 {
+-                    igd_opregion_pgbase = mem_hole_alloc(IGD_OPREGION_PAGES);
+-                    /*
+-                     * Write the the OpRegion offset to give the opregion
+-                     * address to the device model. The device model will trap 
+-                     * and map the OpRegion at the give address.
+-                     */
+-                    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
+-                               igd_opregion_pgbase << PAGE_SHIFT);
++                    intel_opregion_setup(vga_devfn);
+                 }
+             }
+             break;
+-- 
+2.52.0
+
 
