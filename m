@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F406C55184
-	for <xen-devel@archiver.kernel.org>; Sun,  2 Aug 2026 13:10:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1380618.1624331 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 133E6C55171
+	for <xen-devel@archiver.kernel.org>; Sun,  2 Aug 2026 13:10:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1380616.1624312 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqVww-0002yk-Lw; Sun, 02 Aug 2026 13:09:54 +0000
+	id 1wqVwu-0002XC-3R; Sun, 02 Aug 2026 13:09:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1380618.1624331; Sun, 02 Aug 2026 13:09:54 +0000
+Received: by outflank-mailman (output) from mailman id 1380616.1624312; Sun, 02 Aug 2026 13:09:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqVww-0002yd-Iv; Sun, 02 Aug 2026 13:09:54 +0000
-Received: by outflank-mailman (input) for mailman id 1380618;
- Sun, 02 Aug 2026 13:09:54 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wqVwt-0002Ww-VX; Sun, 02 Aug 2026 13:09:51 +0000
+Received: by outflank-mailman (input) for mailman id 1380616;
+ Sun, 02 Aug 2026 13:09:51 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <sergii.dmytruk@3mdeb.com>) id 1wqVwv-0002y1-Ud
- for xen-devel@lists.xenproject.org; Sun, 02 Aug 2026 13:09:54 +0000
+ (envelope-from <sergii.dmytruk@3mdeb.com>) id 1wqVws-0002Ls-Rc
+ for xen-devel@lists.xenproject.org; Sun, 02 Aug 2026 13:09:50 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wqVwv-00Beoh-Bb
- for xen-devel@lists.xenproject.org; Sun, 02 Aug 2026 15:09:53 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wqVwr-004d0q-Mc
+ for xen-devel@lists.xenproject.org; Sun, 02 Aug 2026 15:09:49 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <sergii.dmytruk@3mdeb.com>)
- id 6a6f4173-bab6-0a2a0a5309dd-0a2a450c9222-34
- for <xen-devel@lists.xenproject.org>; Sun, 02 Aug 2026 15:09:53 +0200
-Received: from [46.105.63.230] (helo=7.mo575.mail-out.ovh.net)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a6f417e-2eae-0a2a0a5409dd-0a2a4502c3a4-18
+ for <xen-devel@lists.xenproject.org>; Sun, 02 Aug 2026 15:09:49 +0200
+Received: from [87.98.181.248] (helo=5.mo560.mail-out.ovh.net)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <sergii.dmytruk@3mdeb.com>)
- id 6a6f41a0-f479-0a2a450c0019-2e693fe6ac23-3
- for <xen-devel@lists.xenproject.org>; Sun, 02 Aug 2026 15:09:52 +0200
-Received: from director1.ghost.mail-out.ovh.net (unknown [10.110.58.50])
- by mo575.mail-out.ovh.net (Postfix) with ESMTP id 4hCgBm1jnpz5xm0
- for <xen-devel@lists.xenproject.org>; Sun,  2 Aug 2026 13:09:51 +0000 (UTC)
-Received: from ghost-submission-7d8d68f679-57pcc (unknown [10.110.164.236])
- by director1.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 21241C0F98;
- Sun,  2 Aug 2026 13:09:50 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.101])
- by ghost-submission-7d8d68f679-57pcc with ESMTPSA
- id VxU1NJ5Bb2oLoxsA/StGhg
- (envelope-from <sergii.dmytruk@3mdeb.com>); Sun, 02 Aug 2026 13:09:50 +0000
+ id 6a6f4197-6ca4-0a2a45020019-5762b5f89245-3
+ for <xen-devel@lists.xenproject.org>; Sun, 02 Aug 2026 15:09:44 +0200
+Received: from director10.ghost.mail-out.ovh.net (unknown [10.110.37.197])
+ by mo560.mail-out.ovh.net (Postfix) with ESMTP id 4hCgBb5RkDzB5lq
+ for <xen-devel@lists.xenproject.org>; Sun,  2 Aug 2026 13:09:43 +0000 (UTC)
+Received: from ghost-submission-7d8d68f679-xdn7l (unknown [10.110.96.89])
+ by director10.ghost.mail-out.ovh.net (Postfix) with ESMTPS id AA4E2C0F4F;
+ Sun,  2 Aug 2026 13:09:41 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.96])
+ by ghost-submission-7d8d68f679-xdn7l with ESMTPSA
+ id 2ctPGpVBb2ofBBsATjhwOw
+ (envelope-from <sergii.dmytruk@3mdeb.com>); Sun, 02 Aug 2026 13:09:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,7 +56,7 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=ovhmo3617313-selector1 header.d=3mdeb.com header.i="@3mdeb.com" header.h=From
-Authentication-Results:garm.ovh; auth=pass (GARM-101G004acb215d6-7df5-4471-9e04-20cb55976478,
+Authentication-Results:garm.ovh; auth=pass (GARM-96R0016b89e747-1785-4152-95ae-486e00688f50,
                     A7BD45287BC66A7121136900083CD01C39616B1D) smtp.auth=sergii.dmytruk@3mdeb.com
 X-OVh-ClientIp:176.111.181.215
 From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
@@ -67,685 +67,256 @@ Cc: Jan Beulich <jbeulich@suse.com>,
 	Teddy Astie <teddy.astie@vates.tech>,
 	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Ross Philipson <ross.philipson@gmail.com>,
+	Lukasz Hawrylko <lukasz@hawrylko.pl>,
+	=?UTF-8?q?Mateusz=20M=C3=B3wka?= <mateusz.mowka@intel.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Nicola Vetrini <nicola.vetrini@bugseng.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	trenchboot-devel@googlegroups.com
-Subject: [PATCH v4 03/23] x86/tpm.c: hashing and extending PCRs for TPM1.2
-Date: Sun,  2 Aug 2026 16:09:19 +0300
-Message-ID: <d073552c7ae0ac84bbd178237421d5d497d19f77.1785668458.git.sergii.dmytruk@3mdeb.com>
+Subject: [PATCH v4 00/23] x86: Trenchboot Secure Launch DRTM (Xen)
+Date: Sun,  2 Aug 2026 16:09:16 +0300
+Message-ID: <cover.1785668458.git.sergii.dmytruk@3mdeb.com>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <cover.1785668458.git.sergii.dmytruk@3mdeb.com>
-References: <cover.1785668458.git.sergii.dmytruk@3mdeb.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-x-ovh-tracer-id: 4728498136041268668
+x-ovh-tracer-id: 4726246333962331580
 X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: dmFkZTEtK5p0SNYtBef44Zaajhk33i63wmjVwNNhJ4YROChk7mhZcpyT3bd5ACP3F2TkAykP416Z/qj7tU2KxG1rTRS8MypF1KRhaA/AvmFdmp6hM2n75hgvTPUkRMkZtHtCy5BQJTDAa5dye2uRhTva5lFRUMRQoQfXqDmPkoEsCcMiOXhj8LDb8bxT7fPbPw+L6oM3Ib4+Crk5z3znR8b12WvIauAwvZwi4TwyXrVt8t5cjjf6p6tk/jAP3JPPWAt8lJLbOqKqZPj2dLVv8AcggN/kQjhcbgaHkG9r5s4innAGR9o3gaGzW+PeUVjPnviytxFmoTk+gQnhQiwpJq7s595nro3dDeuJs3r7PQx7V1K5fDPxkXiSwZe2lpVbkaWyv2p59iz/SIXjpugOQqVbJPoyrz7LbnDBWXKS66PYZWt87iuau+QRV23XF3bPbO94TTOakCioNXrOvJoPu9PMtSMMbW3YdbI5o5UqzbO8YWccAbk8u+SYUA/6uc3oa/lV0FtXaaJ5xC/ERvxf3WNKd69NprOiXi6+whRVw4SZxeQvgnTLw0OsL65npUEtg8SMe3ZurJxyTwkqdtRFyNkYKaQbCsZQqwxivk0/snc2zf0vOS5BEafSj0PpsmTzt2HJ44FVbdFCYICCD6GbBvPFX/y6i2sn8twpHhGY/qQuos83Tg
-DKIM-Signature: a=rsa-sha256; bh=6hGSZXXcE+GcwWq+O2X1Dm5dHBDi/Fx386sIY1IuUps=;
+X-VR-SPAMSCORE: -51
+X-VR-SPAMCAUSE: dmFkZTFdXTrARFACQ6m9P7gTxX0PekKK8WeIVA15uE+Q8jnwA9gEyJa7xjXxo5vANI53/0+D44IJm6ZWpxAtd4w3ij7mPxMHSgilLVIAbFfDh74rWf79n1eaYlmPcZv5e6jI+mYGSty3r03VTenwEhPzEEAFz6EhCwT2dGzWQhDVwl7Wvgr5EyDql+zuQNMTRf0D8nzyFZGp15N6IkYLAr7uLr2cUucu71/cfXLIz/4eakvJn7uag/1v5Pka9Gi+tIHo0NtqsYPZIVphzck04C9GB6uAf2dfA8R8ZCdxSLdLJLip4cwRyE5bwLdAwax0O1xBzxePGB2TbRYRKAiiU/R9VFwcmJFnFqemLxjevb6bqC3OcwQg3SqHW2QNlhG0XgELBicbjxtMdkPA7T9MMgGaOmTZi+54x63HT3yvj+kLO6jmxmQxgDq5vJHm4U6fnVEf4hupdi4mg6ImUsJAb/16BOkq/SmCA6zb98joQZtJpiqYtz1ZOry7gpZSC8ZlfdpAAejx5FqdltDSrGM1e3LRoSxFCJziHrcGuKTiSGapnoCOLPVbkXMcx4RVTTvyv+LavBs8GkpYomQHQjrKYm2H3jDDZNRHCPloGrHv9Ndvv7kohZbstOpKU6A2nHx25hBWQdmBv5aC2gyCA4qJ6fJc3/ZzxP8sUaCsCzWkpNK6rBJDNg
+DKIM-Signature: a=rsa-sha256; bh=qHXC8mHNWg/aZvJUsYG80TVBq7kbjbeH1mde4zTkom8=;
  c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
- t=1785676192; v=1;
- b=I3zkZcWyzoVDVVQltodqnln/Uu0EsD3B6Wrjf4RDsJo5q1sTiAtbx/TrkxdIZ+8pAiMS5Ckm
- crNZo/3wIfpYqfwNm6s/pFKkQeLRZnXLxngR/jPg4rYV+FBxMt8zYFquw1FecesQHmOx0cRrkOK
- wtUD9SKCbn1jTtaOL371f/ivcx7fnKb1tERIZC0KuJ1L4VS4NM8wsetRhcSgp5vAi4PtHDjGlbB
- nqRV3TiHRThvtwov0Dp6lXf1xP+JZE/zMas3oM6YNT3AYObc+Hg+rEbzRJMRymkyNRmjorGK/Ln
- w6hTkj8Id5yz5OMtLkZEpRltCUHirQtMQ+APDjUHQWQiQ==
-X-purgate-ID: tlsNG-d25034/1785676192-52530A5B-7756090D/0/0
+ t=1785676183; v=1;
+ b=TRXyQY/eSHLhVvcblvdDseI8wit6I9NXOVUiHWc9PbvJDgJ5L3XPgXviZ4mQcCzoDvOKmvww
+ JX3w35rxT4hSszEayPR1PoruXap/gmtTGFeJZqaQrWS1nBdOo/OGcROqjFLuuW4ZwrfcNMi8uS1
+ Mktf0Bm6FqEe7UZfuO9OBjx9hg767448xVz9fhAiBkErQ1VeSqq5Md4Ln1MAHNduTjdJAIokOTg
+ w850fbkIqb0zauwsJegtUXYtXQZvno6t9P3HaKKhwNRwgFgqKEVyjNTuvil3RwvpVKag6TP6a/F
+ XubtPBpo+3dj78TZ4rC3rmu338U7cNkCSIzZm3hu4ddxA==
+X-purgate-ID: tlsNG-720697/1785676189-66EB32AC-0E948AD1/0/0
 X-purgate-type: clean
-X-purgate-size: 20343
+X-purgate-size: 10266
 
-From: Krystian Hebel <krystian.hebel@3mdeb.com>
+The aim of the [TrenchBoot] project is to provide an implementation of
+DRTM that is generic enough to cover various use cases:
+ - Intel TXT and AMD SKINIT on x86 CPUs
+ - legacy and UEFI boot
+ - TPM1.2 and TPM2.0 (TIS and CRB)
+ - (in the future) DRTM on Arm CPUs
 
-This file is built twice: for early 32b mode without paging and for 64b
-code.  The expectation is that the data that's measured early is small
-and thus sending it to TPM to do the hashing is viable.  Version with
-paging computes digests and only sends their values to TPM, thus
-permitting hashing of large chunks of data like dom0's kernel and
-initrd (sending them to TPM would take multiple minutes).
+DRTM is a version of a measured launch that starts on request rather
+than at the start of a boot cycle.  One of its advantages is in not
+including the firmware in the chain of trust.
 
-Signed-off-by: Krystian Hebel <krystian.hebel@3mdeb.com>
-Signed-off-by: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
----
+Xen already supports DRTM via [tboot] which targets Intel TXT only.
+tboot encapsulates some of the DRTM details within itself while with
+TrenchBoot Xen (or Linux) is meant to be a self-contained payload for a
+TrenchBoot-enabled bootloader (think GRUB).  The one exception is that
+UEFI case requires calling back into bootloader to initiate DRTM, which
+is necessary to give Xen a chance of querying all the information it
+needs from the firmware before performing DRTM start.
 
-Notes:
-    v4: renamed from "x86/tpm.c: code for early hashing and extending PCRs (for TPM1.2)"
-    v4: no longer depends on Slaunch
-    v4: __EARLY_SLAUNCH__ got replaced with __EARLY_TPM__
-    v4: fixed SPDX license comments
-    v4: added short description at the top
-    v4: TPM_TIS_* => TPM_MMIO_*
-    v4: tpm_hash_extend() now returns an error code
-    v4: tpm_hash_extend() now accepts list of hashes like TPM2 but expects at most SHA1
-    v4: turned is_tpm12() into public tpm_is_tpm1() function (to be used for event log)
-    v4: added xen/arch/x86/include/asm/tpm1.h with TPM1.2 TCG declarations
-    v4: removed swap16() and swap32() macros to use macros from <xen/byteorder.h>
-    v4: no more `static inline` in tpm.c, it's pointless there
-    v4: style fixes for empty loops, operator placement on wrapped lines, checking for unset bits
-    v4: take TPM burst count into account
-    v4: fixed incorrect check for `data_avail` when communicating with TPM
-    v4: internal functions return TPM error code instead of `bool`
-    v4: added command and response fields to `union cmd_rsp` to make using it easier
-    v4: `unsigned` => `unsigned int`
-    v4: not opencoding ROUNDDOWN() macro
-    v4: digest storage became optional
-    v4: returns TPM_INTERNAL_ERROR if not dealing with TPM1.2 or on communication error
-    v4: the code is written for TIS, but has room for other TPM interfaces
+From reading the above tboot might seem like a more abstracted, but the
+reality is that the payload needs to have DRTM-specific knowledge
+either way.  In principle, TrenchBoot, allows coming up with
+independent implementations of bootloaders and payloads that are
+compatible with each other.
 
- xen/arch/x86/Makefile           |   1 +
- xen/arch/x86/boot/Makefile      |   5 +
- xen/arch/x86/include/asm/tpm.h  |  69 ++++++
- xen/arch/x86/include/asm/tpm1.h |  79 +++++++
- xen/arch/x86/tpm.c              | 406 ++++++++++++++++++++++++++++++++
- 5 files changed, 560 insertions(+)
+The "x86/boot: choose AP stack based on APIC ID" patch is shared with
+[Parallelize AP bring-up] series and is required here because Intel TXT
+always releases all APs simultaneously.  The rest of the patches are
+unique.
+
+This version of the patches corresponds to this branch:
+  https://github.com/TrenchBoot/xen/compare/7c77acd452fb...tb-staging-2026-07-31-v4
+
+-----
+
+[TrenchBoot]: https://trenchboot.org/
+[tboot]: https://sourceforge.net/p/tboot/wiki/Home/
+[Parallelize AP bring-up]: https://lore.kernel.org/xen-devel/cover.1699982111.git.krystian.hebel@3mdeb.com/
+[v1]: https://lore.kernel.org/xen-devel/cover.1745172094.git.sergii.dmytruk@3mdeb.com/
+[v2]: https://lore.kernel.org/xen-devel/cover.1747155790.git.sergii.dmytruk@3mdeb.com/
+[v3]: https://lore.kernel.org/xen-devel/cover.1748611041.git.sergii.dmytruk@3mdeb.com/
+
+-----
+
+Changes in v4:
+ - added notes to individial commits, the notes below cover some of
+   more generic changes or those spanning multiple commits
+ - dropped SHA-1 changes (was committed independently of this patchset)
+ - added CONFIG_SLAUNCH Kconfig option
+ - TPM driver changes have been moved to the front and are now
+   independent from TPM event log and the rest of this patchset in
+   general
+ - a few commits were split, joined and/or renamed to make changes more
+   independent, see notes in individual patches
+ - added support for communicating with TPM2.0 via CRB and memory
+   protection using TPR to support newer handware
+ - moved UEFI_SLR_TABLE_GUID from xen/include/xen/slr-table.h to
+   xen/common/efi/boot.c
+ - changed the code for dealing with tables in TXT heap to be iterative
+ - added more implementation-specific error codes and removed unused
+   ones
+ - extracted declarations from tpm.c into headers for TPM1.2 and TPM2.0
+ - return EACCES instead of EPERM when refusing to go into S3 state
+ - moved SLAUNCH_BOOTLOADER_MAGIC from x86/asm/intel-txt.h to
+   x86/boot/head.S
+ - moved making MTRR-related functions public to commit which uses them
+ - use container_of() after slr_next_entry_by_tag() instead of a cast
+ - made more code that deals with SLRT const-correct (including adding
+   const to the parameter of dl_handler_func)
+ - absent TPM event log is now consistently allowed by both TPM1.2 and
+   TPM2.0 implementations
+
+Changes in [v3]:
+ - sorted `F:` entries in MAINTAINERS file
+ - made sha1 implementation more similar to sha256
+ - dropped unused parameter from
+   xen/arch/x86/cpu/intel.c:intel_log_smx_txt()
+ - updated header guards according to new style
+ - xen/arch/x86/include/asm/intel-txt.h:
+   + briefly explained what TXT is
+   + renamed: NR_TXT_CONFIG_SIZE -> TXT_CONFIG_SPACE_SIZE
+   + renamed: read_txt_reg() -> txt_read()
+   + renamed: write_txt_reg() -> txt_write()
+   + marked txt_reset() as noreturn and used unreacheable() instead of
+     while(1)
+   + explained a bit more about TXT Heap
+ - xen/include/xen/slr-table.h:
+   + briefly explained what SLRT is
+   + fixed checks in slr_next_entry()
+ - SPDX-License-Identifier: GPL-2.0 -> GPL-2.0-only
+ - made more code const-correct
+ - use arithmetic on pointers to `void` instead of pointers to
+   `uint8_t`
+
+Changes in [v2]:
+ - using dashes instead of underscores in the names of new files
+ - dropping of an extra sha256 implementation
+ - rewriting sha1 implementation to be in line with already present
+   sha256 implementation (simplifying it and getting rid of macros)
+ - correct placement of new lines in Makefile
+ - add header guards to all new files
+ - use correct names for header guards in new files
+ - update license of xen/include/xen/slr-table.h
+ - changed fixmlehdr to search for header within 8 instead of 4 KiB
+   file prefix
+ - don't print DRTM-related capabilities when resuming from S3
+ - forbade S3 in case of Secure Launch
+ - fixed an issue with resuming from S3 caused by inappropriate use of
+   __initdata
+ - added a new section to MAINTAINERS
+ - improved commit messages
+ - fixed MISRA C violations:
+   + shadowing of e820 global
+   + missing U literal suffixes
+   + use of ull literal suffix
+   + excluded fixmlehdr from analysis (similar to other build tools)
+   + use of 0 instead of NULL in one place
+   + provided declarations for some definitions
+   + marked asm-invoked functions with `asmlinkage`
+
+-----
+
+Kacper Stojek (2):
+  x86/boot: add CONFIG_SLAUNCH, MLE header and Secure Launch entry point
+  xen/arch/x86: reserve TXT memory during Slaunch
+
+Krystian Hebel (7):
+  x86/tpm.c: hashing and extending PCRs for TPM1.2
+  x86/include/asm/intel-txt.h: constants and accessors for TXT registers
+    and heap
+  x86/boot/slaunch-early: early Intel TXT sanity checks
+  x86/slaunch: restore boot MTRRs after Intel TXT DRTM
+  x86/slaunch: measure MBI into TPM
+  x86/boot: choose AP stack based on APIC ID
+  x86/smpboot.c: TXT AP bringup
+
+Michał Żygowski (2):
+  x86/cpu: report SMX, TXT and SKINIT capabilities
+  x86/hvm: check for VMX in SMX if Slaunch is active
+
+Sergii Dmytruk (10):
+  x86/mtrr: get rid of a static variable on pause/restore
+  x86/tpm.c: support extending PCRs of TPM2.0 via TIS
+  include/xen/slr-table.h: Secure Launch Resource Table definitions
+  x86/boot/slaunch-early: implement early initialization
+  x86/slaunch: update TPM event log (TPM1.2 or TPM2.0)
+  x86/slaunch: process DRTM policy
+  x86/acpi: disallow S3 on Secure Launch boot
+  x86/slaunch: support AMD CPUs
+  x86/slaunch: support EFI boot
+  MAINTAINERS: add a section for TrenchBoot Slaunch
+
+Szymon Acedański (2):
+  x86/tpm.c: add CRB interface support
+  xen/arch/x86: add TPR (TXT Protected Range) DMA protection support
+
+ .gitignore                                    |   1 +
+ MAINTAINERS                                   |  19 +
+ .../eclair_analysis/ECLAIR/out_of_scope.ecl   |   1 +
+ docs/hypervisor-guide/x86/how-xen-boots.rst   |  12 +
+ xen/arch/x86/Kconfig                          |   8 +
+ xen/arch/x86/Makefile                         |  16 +-
+ xen/arch/x86/acpi/power.c                     |   8 +
+ xen/arch/x86/boot/Makefile                    |  22 +-
+ xen/arch/x86/boot/head.S                      | 267 ++++++
+ xen/arch/x86/boot/slaunch-early.c             | 104 +++
+ xen/arch/x86/boot/trampoline.S                |  42 +-
+ xen/arch/x86/boot/x86_64.S                    |  67 +-
+ xen/arch/x86/cpu/amd.c                        |  16 +
+ xen/arch/x86/cpu/cpu.h                        |   1 +
+ xen/arch/x86/cpu/hygon.c                      |   1 +
+ xen/arch/x86/cpu/intel.c                      |  50 +
+ xen/arch/x86/cpu/mtrr/generic.c               |  50 +-
+ xen/arch/x86/e820.c                           |   5 +
+ xen/arch/x86/efi/efi-boot.h                   |  95 +-
+ xen/arch/x86/efi/fixmlehdr.c                  | 127 +++
+ xen/arch/x86/hvm/vmx/vmcs.c                   |   3 +-
+ xen/arch/x86/include/asm/apicdef.h            |   4 +
+ xen/arch/x86/include/asm/intel-txt.h          | 573 ++++++++++++
+ xen/arch/x86/include/asm/msr-index.h          |   3 +
+ xen/arch/x86/include/asm/mtrr.h               |   8 +
+ xen/arch/x86/include/asm/processor.h          |   1 +
+ xen/arch/x86/include/asm/setup.h              |   3 +
+ xen/arch/x86/include/asm/slaunch-tpm.h        |  26 +
+ xen/arch/x86/include/asm/slaunch.h            | 128 +++
+ xen/arch/x86/include/asm/tpm.h                |  74 ++
+ xen/arch/x86/include/asm/tpm1.h               |  94 ++
+ xen/arch/x86/include/asm/tpm2.h               | 150 +++
+ xen/arch/x86/intel-txt.c                      | 197 ++++
+ xen/arch/x86/setup.c                          |  32 +-
+ xen/arch/x86/slaunch-tpm.c                    | 312 +++++++
+ xen/arch/x86/slaunch.c                        | 478 ++++++++++
+ xen/arch/x86/smpboot.c                        |  75 ++
+ xen/arch/x86/tboot.c                          |  20 +-
+ xen/arch/x86/tpm.c                            | 862 ++++++++++++++++++
+ xen/arch/x86/x86_64/asm-offsets.c             |  13 +
+ xen/common/efi/boot.c                         |   6 +
+ xen/common/efi/runtime.c                      |   1 +
+ xen/include/xen/efi.h                         |   1 +
+ xen/include/xen/slr-table.h                   | 272 ++++++
+ 44 files changed, 4191 insertions(+), 57 deletions(-)
+ create mode 100644 xen/arch/x86/boot/slaunch-early.c
+ create mode 100644 xen/arch/x86/efi/fixmlehdr.c
+ create mode 100644 xen/arch/x86/include/asm/intel-txt.h
+ create mode 100644 xen/arch/x86/include/asm/slaunch-tpm.h
+ create mode 100644 xen/arch/x86/include/asm/slaunch.h
  create mode 100644 xen/arch/x86/include/asm/tpm.h
  create mode 100644 xen/arch/x86/include/asm/tpm1.h
+ create mode 100644 xen/arch/x86/include/asm/tpm2.h
+ create mode 100644 xen/arch/x86/intel-txt.c
+ create mode 100644 xen/arch/x86/slaunch-tpm.c
+ create mode 100644 xen/arch/x86/slaunch.c
  create mode 100644 xen/arch/x86/tpm.c
+ create mode 100644 xen/include/xen/slr-table.h
 
-diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
-index b14eca98bf..293f3bee35 100644
---- a/xen/arch/x86/Makefile
-+++ b/xen/arch/x86/Makefile
-@@ -68,6 +68,7 @@ obj-y += string.o
- obj-$(CONFIG_SYSCTL) += sysctl.o
- obj-$(CONFIG_TBOOT) += tboot.o
- obj-y += time.o
-+obj-y += tpm.o
- obj-y += traps-setup.o
- obj-y += traps.o
- obj-$(CONFIG_INTEL) += tsx.o
-diff --git a/xen/arch/x86/boot/Makefile b/xen/arch/x86/boot/Makefile
-index ff0d61d7ac..feae17c14a 100644
---- a/xen/arch/x86/boot/Makefile
-+++ b/xen/arch/x86/boot/Makefile
-@@ -5,6 +5,7 @@ obj-bin-y += $(obj64)
- obj32 := cmdline.32.o
- obj32 += reloc.32.o
- obj32 += reloc-trampoline.32.o
-+obj32 += tpm-early.32.o
- 
- obj64 := reloc-trampoline.o
- 
-@@ -28,6 +29,10 @@ $(obj32): XEN_CFLAGS := $(CFLAGS_x86_32) -fpic
- $(obj)/%.32.o: $(src)/%.c FORCE
- 	$(call if_changed_rule,cc_o_c)
- 
-+$(obj)/tpm-early.32.o: XEN_CFLAGS += -D__EARLY_TPM__
-+$(obj)/tpm-early.32.o: $(src)/../tpm.c FORCE
-+	$(call if_changed_rule,cc_o_c)
-+
- orphan-handling-$(call ld-option,--orphan-handling=error) := --orphan-handling=error
- LDFLAGS_DIRECT-$(call ld-option,--warn-rwx-segments) := --no-warn-rwx-segments
- LDFLAGS_DIRECT += $(LDFLAGS_DIRECT-y)
-diff --git a/xen/arch/x86/include/asm/tpm.h b/xen/arch/x86/include/asm/tpm.h
-new file mode 100644
-index 0000000000..06b54fb786
---- /dev/null
-+++ b/xen/arch/x86/include/asm/tpm.h
-@@ -0,0 +1,69 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * A TPM driver for both normal and early boot environments.
-+ *
-+ * Copyright (c) 2022-2026 3mdeb Sp. z o.o.  All rights reserved.
-+ */
-+
-+#ifndef X86_TPM_H
-+#define X86_TPM_H
-+
-+#include <xen/types.h>
-+
-+#define TPM_INTERNAL_ERROR  0xffffffffU
-+
-+#define TPM_MMIO_BASE  0xfed40000U
-+#define TPM_MMIO_SIZE  0x00010000U
-+
-+/* These are defined for TPM2, but they are used by generic API. */
-+#define TPM_ALG_SHA1    0x0004
-+#define TPM_ALG_SHA256  0x000b
-+#define TPM_ALG_NULL    0x0010
-+
-+/*
-+ * These two structures are for convenience, they don't correspond to anything
-+ * in any specification.
-+ */
-+struct tpm_log_hash {
-+    uint16_t alg;  /* TPM_ALG_* */
-+    uint16_t size;
-+    uint8_t *data; /* Non-owning reference to a buffer inside log entry. */
-+};
-+/* Should be more than enough for now and awhile in the future. */
-+#define MAX_TPM_HASH_COUNT 8
-+struct tpm_log_hashes {
-+    uint32_t count;
-+    struct tpm_log_hash hashes[MAX_TPM_HASH_COUNT];
-+};
-+
-+/* All fields of the following structs are big endian. */
-+
-+struct tpm_cmd_hdr {
-+    uint16_t tag;
-+    uint32_t paramSize;
-+    uint32_t ordinal;
-+} __packed;
-+
-+struct tpm_rsp_hdr {
-+    uint16_t tag;
-+    uint32_t paramSize;
-+    uint32_t returnCode;
-+} __packed;
-+
-+/* Checks whether TPM belongs to TPM 1 family, the only alternative is TPM 2. */
-+bool tpm_is_tpm1(void);
-+
-+/*
-+ * The list of hashes must either be empty or contain nothing but SHA1 hash when
-+ * tpm_is_tpm1() returns true.
-+ *
-+ * Returns:
-+ *  - TPM error code when < 4096 (0 means success)
-+ *  - TPM_INTERNAL_ERROR on invalid invocation or a failure to communicate with
-+ *    a TPM device
-+ */
-+uint32_t tpm_hash_extend(unsigned int loc, unsigned int pcr, const uint8_t *buf,
-+                         unsigned int size,
-+                         const struct tpm_log_hashes *log_hashes);
-+
-+#endif /* X86_TPM_H */
-diff --git a/xen/arch/x86/include/asm/tpm1.h b/xen/arch/x86/include/asm/tpm1.h
-new file mode 100644
-index 0000000000..d1cb2cc041
---- /dev/null
-+++ b/xen/arch/x86/include/asm/tpm1.h
-@@ -0,0 +1,79 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * TPM1.2-related declarations defined by Trusted Computing Group (TCG).
-+ *
-+ * Copyright (c) 2022-2026 3mdeb Sp. z o.o.  All rights reserved.
-+ */
-+
-+#ifndef X86_TPM1_H
-+#define X86_TPM1_H
-+
-+#include <xen/inttypes.h>
-+#include <xen/sha1.h>
-+
-+#include <asm/tpm.h>
-+
-+#define TPM_ORD_Extend              0x00000014
-+#define TPM_ORD_SHA1Start           0x000000A0
-+#define TPM_ORD_SHA1Update          0x000000A1
-+#define TPM_ORD_SHA1CompleteExtend  0x000000A3
-+
-+#define TPM_TAG_RQU_COMMAND         0x00C1
-+#define TPM_TAG_RSP_COMMAND         0x00C4
-+
-+/* All fields of the following structs are big endian. */
-+
-+struct extend_cmd {
-+    struct tpm_cmd_hdr h;
-+    uint32_t pcrNum;
-+    uint8_t inDigest[SHA1_DIGEST_SIZE];
-+} __packed;
-+
-+struct extend_rsp {
-+    struct tpm_rsp_hdr h;
-+    uint8_t outDigest[SHA1_DIGEST_SIZE];
-+} __packed;
-+
-+struct sha1_start_cmd {
-+    struct tpm_cmd_hdr h;
-+} __packed;
-+
-+struct sha1_start_rsp {
-+    struct tpm_rsp_hdr h;
-+    uint32_t maxNumBytes;
-+} __packed;
-+
-+struct sha1_update_cmd {
-+    struct tpm_cmd_hdr h;
-+    uint32_t numBytes;          /* Must be a multiple of 64 */
-+    uint8_t hashData[];
-+} __packed;
-+
-+struct sha1_update_rsp {
-+    struct tpm_rsp_hdr h;
-+} __packed;
-+
-+struct sha1_complete_extend_cmd {
-+    struct tpm_cmd_hdr h;
-+    uint32_t pcrNum;
-+    uint32_t hashDataSize;      /* 0-64, inclusive */
-+    uint8_t hashData[];
-+} __packed;
-+
-+struct sha1_complete_extend_rsp {
-+    struct tpm_rsp_hdr h;
-+    uint8_t hashValue[SHA1_DIGEST_SIZE];
-+    uint8_t outDigest[SHA1_DIGEST_SIZE];
-+} __packed;
-+
-+/* The structures below are for TPM event log and these are in little-endian. */
-+
-+struct TPM12_PCREvent {
-+    uint32_t PCRIndex;
-+    uint32_t Type;
-+    uint8_t Digest[SHA1_DIGEST_SIZE];
-+    uint32_t Size;
-+    uint8_t Data[];
-+};
-+
-+#endif /* X86_TPM1_H */
-diff --git a/xen/arch/x86/tpm.c b/xen/arch/x86/tpm.c
-new file mode 100644
-index 0000000000..9efaf75440
---- /dev/null
-+++ b/xen/arch/x86/tpm.c
-@@ -0,0 +1,406 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * TPM driver for extending PCRs.
-+ *
-+ * This file is built twice:
-+ *  1. For early 32b mode without paging the code sends data to be hashed to
-+ *     TPM.
-+ *  2. For 64b code which computes hashes and only extends them into PCRs.
-+ *
-+ * Copyright (c) 2022-2026 3mdeb Sp. z o.o.  All rights reserved.
-+ */
-+
-+#include <xen/byteorder.h>
-+#include <xen/sha1.h>
-+#include <xen/string.h>
-+#include <xen/types.h>
-+
-+#include <asm/tpm.h>
-+#include <asm/tpm1.h>
-+
-+#ifdef __EARLY_TPM__
-+
-+#include <xen/macros.h>
-+
-+#ifdef __va
-+#error "__va defined in non-paged mode!"
-+#endif
-+
-+#define __va(x)     _p(x)
-+
-+/*
-+ * The code is being compiled as a standalone binary without linking to any
-+ * other part of Xen.  Providing implementation of builtin functions in this
-+ * case is necessary if compiler chooses to not use an inline builtin.
-+ */
-+void *(memcpy)(void *dest, const void *src, size_t n)
-+{
-+    const uint8_t *s = src;
-+    uint8_t *d = dest;
-+
-+    while ( n-- )
-+        *d++ = *s++;
-+
-+    return dest;
-+}
-+
-+#else   /* __EARLY_TPM__ */
-+
-+#include <xen/mm.h>
-+#include <xen/pfn.h>
-+
-+#endif  /* __EARLY_TPM__ */
-+
-+#define TPM_LOC_REG(loc, reg)   (0x1000 * (loc) + (reg))
-+
-+/******************************** MMIO helpers ********************************/
-+
-+static uint32_t tpm_read32(unsigned int reg)
-+{
-+    return *(volatile uint32_t *)__va(TPM_MMIO_BASE + reg);
-+}
-+
-+static uint16_t tpm_read16(unsigned int reg)
-+{
-+    return *(volatile uint16_t *)__va(TPM_MMIO_BASE + reg);
-+}
-+
-+static uint8_t tpm_read8(unsigned int reg)
-+{
-+    return *(volatile uint8_t *)__va(TPM_MMIO_BASE + reg);
-+}
-+
-+static void tpm_write8(unsigned int reg, uint8_t val)
-+{
-+    *(volatile uint8_t *)__va(TPM_MMIO_BASE + reg) = val;
-+}
-+
-+/************************** TIS register definitions **************************/
-+
-+#define TIS_ACCESS_(x)          TPM_LOC_REG(x, 0x00)
-+#define ACCESS_REQUEST_USE       (1 << 1)
-+#define ACCESS_ACTIVE_LOCALITY   (1 << 5)
-+#define TIS_INTF_CAPABILITY_(x) TPM_LOC_REG(x, 0x14)
-+#define INTF_VERSION_MASK        0x70000000
-+#define TIS_STS_(x)             TPM_LOC_REG(x, 0x18)
-+#define STS_FAMILY_MASK          0x0C000000
-+#define STS_EXPECT_DATA          (1 << 3)
-+#define STS_DATA_AVAIL           (1 << 4)
-+#define STS_TPM_GO               (1 << 5)
-+#define STS_COMMAND_READY        (1 << 6)
-+#define STS_VALID                (1 << 7)
-+#define TIS_BURST_COUNT_(x)     TPM_LOC_REG(x, 0x19)  /* the middle of STS */
-+#define TIS_DATA_FIFO_(x)       TPM_LOC_REG(x, 0x24)
-+
-+/************************** TIS locality & command ****************************/
-+
-+static void tis_request_locality(unsigned int loc)
-+{
-+    tpm_write8(TIS_ACCESS_(loc), ACCESS_REQUEST_USE);
-+    /* Check that locality was actually activated. */
-+    while ( !(tpm_read8(TIS_ACCESS_(loc)) & ACCESS_ACTIVE_LOCALITY) )
-+        ;
-+}
-+
-+static void tis_relinquish_locality(unsigned int loc)
-+{
-+    tpm_write8(TIS_ACCESS_(loc), ACCESS_ACTIVE_LOCALITY);
-+}
-+
-+static uint16_t tis_get_burst_count(unsigned int loc)
-+{
-+    return tpm_read16(TIS_BURST_COUNT_(loc));
-+}
-+
-+static void tis_send_cmd(unsigned int loc, uint8_t *buf, unsigned int i_size,
-+                         unsigned int *o_size)
-+{
-+    /*
-+     * Values of "expect data" and "data available" bits count only when "valid"
-+     * field is set as well.
-+     */
-+    const unsigned int expect_data = STS_VALID | STS_EXPECT_DATA;
-+    const unsigned int data_avail = STS_VALID | STS_DATA_AVAIL;
-+
-+    unsigned int i;
-+    unsigned int burst_count;
-+
-+    /* Make sure TPM can accept a command. */
-+    if ( !(tpm_read8(TIS_STS_(loc)) & STS_COMMAND_READY) )
-+    {
-+        /* Abort current command. */
-+        tpm_write8(TIS_STS_(loc), STS_COMMAND_READY);
-+        /* Wait until TPM is ready for a new one. */
-+        while ( !(tpm_read8(TIS_STS_(loc)) & STS_COMMAND_READY) )
-+            ;
-+    }
-+
-+    i = 0;
-+    while ( i < i_size )
-+    {
-+        do
-+            burst_count = tis_get_burst_count(loc);
-+        while ( burst_count == 0 );
-+
-+        while ( burst_count-- > 0 && i < i_size )
-+            tpm_write8(TIS_DATA_FIFO_(loc), buf[i++]);
-+
-+        if ( i < i_size )
-+        {
-+            while ( (tpm_read8(TIS_STS_(loc)) & expect_data) != expect_data )
-+                ;
-+        }
-+    }
-+
-+    tpm_write8(TIS_STS_(loc), STS_TPM_GO);
-+
-+    /* Wait for the first byte of response. */
-+    while ( (tpm_read8(TIS_STS_(loc)) & data_avail) != data_avail )
-+        ;
-+
-+    i = 0;
-+    do {
-+        do
-+            burst_count = tis_get_burst_count(loc);
-+        while ( burst_count == 0 );
-+
-+        while ( burst_count-- > 0 && i < *o_size)
-+            buf[i++] = tpm_read8(TIS_DATA_FIFO_(loc));
-+
-+        while ( !(tpm_read8(TIS_STS_(loc)) & STS_VALID) )
-+            ;
-+    } while ( i < *o_size &&
-+              (tpm_read8(TIS_STS_(loc)) & data_avail) == data_avail );
-+
-+    *o_size = i;
-+
-+    tpm_write8(TIS_STS_(loc), STS_COMMAND_READY);
-+}
-+
-+/************************** Interface dispatch ********************************/
-+
-+static void request_locality(unsigned int loc)
-+{
-+    tis_request_locality(loc);
-+}
-+
-+static void relinquish_locality(unsigned int loc)
-+{
-+    tis_relinquish_locality(loc);
-+}
-+
-+static void send_cmd(unsigned int loc, uint8_t *buf, unsigned int i_size,
-+                     unsigned int *o_size)
-+{
-+    tis_send_cmd(loc, buf, i_size, o_size);
-+}
-+
-+bool tpm_is_tpm1(void)
-+{
-+    uint32_t intf_version;
-+
-+    /*
-+     * If one of these conditions is true:
-+     *  - INTF_CAPABILITY_x.interfaceVersion is 0 (TIS <= 1.21)
-+     *  - INTF_CAPABILITY_x.interfaceVersion is 2 (TIS == 1.3)
-+     *  - STS_x.tpmFamily is 0
-+     * we're dealing with TPM1.2.
-+     */
-+    intf_version = tpm_read32(TIS_INTF_CAPABILITY_(0)) & INTF_VERSION_MASK;
-+    return (intf_version == 0x00000000 || intf_version == 0x20000000 ||
-+            !(tpm_read32(TIS_STS_(0)) & STS_FAMILY_MASK));
-+}
-+
-+/****************************** TPM1.2 specific *******************************/
-+
-+#ifdef __EARLY_TPM__
-+/*
-+ * TPM1.2 is required to support commands of up to 1101 bytes, vendors rarely
-+ * go above that. Limit maximum size of block of data to be hashed to 1024.
-+ */
-+#define MAX_HASH_BLOCK      1024
-+#define CMD_RSP_BUF_SIZE    (sizeof(struct sha1_update_cmd) + MAX_HASH_BLOCK)
-+
-+union cmd_rsp {
-+    struct tpm_cmd_hdr c;
-+    struct tpm_rsp_hdr r;
-+    struct sha1_start_cmd start_c;
-+    struct sha1_start_rsp start_r;
-+    struct sha1_update_cmd update_c;
-+    struct sha1_update_rsp update_r;
-+    struct sha1_complete_extend_cmd finish_c;
-+    struct sha1_complete_extend_rsp finish_r;
-+    uint8_t buf[CMD_RSP_BUF_SIZE];
-+};
-+
-+static uint32_t tpm12_hash_extend(unsigned int loc, const uint8_t *buf,
-+                                  unsigned int size, unsigned int pcr,
-+                                  const struct tpm_log_hashes *log_hashes)
-+{
-+    union cmd_rsp cmd_rsp;
-+    unsigned int max_bytes = MAX_HASH_BLOCK;
-+    unsigned int o_size = sizeof(cmd_rsp);
-+    uint32_t rc;
-+
-+    request_locality(loc);
-+
-+    cmd_rsp.start_c = (struct sha1_start_cmd) {
-+        .h.tag = cpu_to_be16(TPM_TAG_RQU_COMMAND),
-+        .h.paramSize = cpu_to_be32(sizeof(cmd_rsp.start_c)),
-+        .h.ordinal = cpu_to_be32(TPM_ORD_SHA1Start),
-+    };
-+
-+    send_cmd(loc, cmd_rsp.buf, be32_to_cpu(cmd_rsp.c.paramSize), &o_size);
-+    if ( o_size < sizeof(cmd_rsp.start_r) )
-+    {
-+        rc = TPM_INTERNAL_ERROR;
-+        goto error;
-+    }
-+    rc = be32_to_cpu(cmd_rsp.r.returnCode);
-+    if ( rc != 0 )
-+        goto error;
-+
-+    if ( max_bytes > be32_to_cpu(cmd_rsp.start_r.maxNumBytes) )
-+        max_bytes = be32_to_cpu(cmd_rsp.start_r.maxNumBytes);
-+
-+    while ( size > 64 )
-+    {
-+        if ( size < max_bytes )
-+            max_bytes = ROUNDDOWN(size, 64);
-+
-+        o_size = sizeof(cmd_rsp);
-+
-+        cmd_rsp.update_c = (struct sha1_update_cmd) {
-+            .h.tag = cpu_to_be16(TPM_TAG_RQU_COMMAND),
-+            .h.paramSize = cpu_to_be32(sizeof(cmd_rsp.update_c) + max_bytes),
-+            .h.ordinal = cpu_to_be32(TPM_ORD_SHA1Update),
-+            .numBytes = cpu_to_be32(max_bytes),
-+        };
-+        memcpy(cmd_rsp.update_c.hashData, buf, max_bytes);
-+
-+        send_cmd(loc, cmd_rsp.buf, be32_to_cpu(cmd_rsp.c.paramSize), &o_size);
-+        if ( o_size < sizeof(cmd_rsp.update_r) )
-+        {
-+            rc = TPM_INTERNAL_ERROR;
-+            goto error;
-+        }
-+        rc = be32_to_cpu(cmd_rsp.r.returnCode);
-+        if ( rc != 0 )
-+            goto error;
-+
-+        size -= max_bytes;
-+        buf += max_bytes;
-+    }
-+
-+    o_size = sizeof(cmd_rsp);
-+
-+    cmd_rsp.finish_c = (struct sha1_complete_extend_cmd) {
-+        .h.tag = cpu_to_be16(TPM_TAG_RQU_COMMAND),
-+        .h.paramSize = cpu_to_be32(sizeof(cmd_rsp.finish_c) + size),
-+        .h.ordinal = cpu_to_be32(TPM_ORD_SHA1CompleteExtend),
-+        .pcrNum = cpu_to_be32(pcr),
-+        .hashDataSize = cpu_to_be32(size),
-+    };
-+    memcpy(cmd_rsp.finish_c.hashData, buf, size);
-+
-+    send_cmd(loc, cmd_rsp.buf, be32_to_cpu(cmd_rsp.c.paramSize), &o_size);
-+    if ( o_size < sizeof(cmd_rsp.finish_r) )
-+    {
-+        rc = TPM_INTERNAL_ERROR;
-+        goto error;
-+    }
-+    rc = be32_to_cpu(cmd_rsp.r.returnCode);
-+    if ( rc != 0 )
-+        goto error;
-+
-+    if ( log_hashes->count != 0 )
-+    {
-+        memcpy(log_hashes->hashes[0].data, cmd_rsp.finish_r.hashValue,
-+               SHA1_DIGEST_SIZE);
-+    }
-+
-+    rc = 0;
-+
-+ error:
-+    relinquish_locality(loc);
-+    return rc;
-+}
-+
-+#else
-+
-+union cmd_rsp {
-+    struct tpm_cmd_hdr c;
-+    struct tpm_rsp_hdr r;
-+    struct extend_cmd extend_c;
-+    struct extend_rsp extend_r;
-+};
-+
-+static uint32_t tpm12_hash_extend(unsigned int loc, const uint8_t *buf,
-+                                  unsigned int size, unsigned int pcr,
-+                                  const struct tpm_log_hashes *log_hashes)
-+{
-+    union cmd_rsp cmd_rsp;
-+    unsigned int o_size = sizeof(cmd_rsp);
-+    uint32_t rc;
-+
-+    request_locality(loc);
-+
-+    cmd_rsp.extend_c = (struct extend_cmd) {
-+        .h.tag = cpu_to_be16(TPM_TAG_RQU_COMMAND),
-+        .h.paramSize = cpu_to_be32(sizeof(cmd_rsp.extend_c)),
-+        .h.ordinal = cpu_to_be32(TPM_ORD_Extend),
-+        .pcrNum = cpu_to_be32(pcr),
-+    };
-+
-+    sha1(cmd_rsp.extend_c.inDigest, buf, size);
-+    if ( log_hashes->count != 0 )
-+    {
-+        memcpy(log_hashes->hashes[0].data, cmd_rsp.extend_c.inDigest,
-+               SHA1_DIGEST_SIZE);
-+    }
-+
-+    send_cmd(loc, (uint8_t *)&cmd_rsp, be32_to_cpu(cmd_rsp.c.paramSize),
-+             &o_size);
-+    if ( o_size < sizeof(cmd_rsp.extend_r) )
-+    {
-+        rc = TPM_INTERNAL_ERROR;
-+        goto error;
-+    }
-+    rc = be32_to_cpu(cmd_rsp.r.returnCode);
-+    if ( rc != 0 )
-+        goto error;
-+
-+    relinquish_locality(loc);
-+
-+    rc = 0;
-+
-+ error:
-+    return rc;
-+}
-+
-+#endif /* __EARLY_TPM__ */
-+
-+/************************** end of TPM1.2 specific ****************************/
-+
-+uint32_t tpm_hash_extend(unsigned int loc, unsigned int pcr, const uint8_t *buf,
-+                         unsigned int size,
-+                         const struct tpm_log_hashes *log_hashes)
-+{
-+    if ( tpm_is_tpm1() )
-+    {
-+        if (log_hashes->count != 0 &&
-+            !(log_hashes->count == 1 &&
-+              log_hashes->hashes[0].alg == TPM_ALG_SHA1 &&
-+              log_hashes->hashes[0].size == SHA1_DIGEST_SIZE))
-+        {
-+#ifndef __EARLY_TPM__
-+            printk(XENLOG_ERR "Bad TPM1 log hash for PCR-%u\n", pcr);
-+#endif
-+            return TPM_INTERNAL_ERROR;
-+        }
-+
-+        return tpm12_hash_extend(loc, buf, size, pcr, log_hashes);
-+    }
-+
-+    return TPM_INTERNAL_ERROR;
-+}
+
+base-commit: 7c77acd452fb6a3079661e75ebb5cf23ed985cc7
 -- 
 2.55.0
 
