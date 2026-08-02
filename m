@@ -4,41 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3414C55171
-	for <xen-devel@archiver.kernel.org>; Sun,  2 Aug 2026 05:27:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1380505.1624295 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08B88C55175
+	for <xen-devel@archiver.kernel.org>; Sun,  2 Aug 2026 13:10:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1380617.1624318 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqOil-0006Tq-7b; Sun, 02 Aug 2026 05:26:47 +0000
+	id 1wqVwu-0002bT-BN; Sun, 02 Aug 2026 13:09:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1380505.1624295; Sun, 02 Aug 2026 05:26:47 +0000
+Received: by outflank-mailman (output) from mailman id 1380617.1624318; Sun, 02 Aug 2026 13:09:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqOil-0006Tj-4d; Sun, 02 Aug 2026 05:26:47 +0000
-Received: by outflank-mailman (input) for mailman id 1380505;
- Sun, 02 Aug 2026 05:26:45 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wqVwu-0002ah-7a; Sun, 02 Aug 2026 13:09:52 +0000
+Received: by outflank-mailman (input) for mailman id 1380617;
+ Sun, 02 Aug 2026 13:09:51 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brchuckz@netscape.net>) id 1wqOij-0006Td-GQ
- for xen-devel@lists.xenproject.org; Sun, 02 Aug 2026 05:26:45 +0000
+ (envelope-from <sergii.dmytruk@3mdeb.com>) id 1wqVws-0002Lt-W5
+ for xen-devel@lists.xenproject.org; Sun, 02 Aug 2026 13:09:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wqOii-0016Gv-PJ
- for xen-devel@lists.xenproject.org; Sun, 02 Aug 2026 07:26:44 +0200
+ id 1wqVws-001l71-1i
+ for xen-devel@lists.xenproject.org; Sun, 02 Aug 2026 15:09:50 +0200
 Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <brchuckz@netscape.net>)
- id 6a6ed4fc-2eae-0a2a0a5409dd-0a2a45099800-12
- for <xen-devel@lists.xenproject.org>; Sun, 02 Aug 2026 07:26:44 +0200
-Received: from [98.137.68.204] (helo=sonic304-23.consmr.mail.gq1.yahoo.com)
+ (envelope-from <sergii.dmytruk@3mdeb.com>)
+ id 6a6f4184-e002-0a2a0a5209dd-0a2a4509b098-12
+ for <xen-devel@lists.xenproject.org>; Sun, 02 Aug 2026 15:09:49 +0200
+Received: from [46.105.40.108] (helo=3.mo583.mail-out.ovh.net)
  by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <brchuckz@netscape.net>)
- id 6a6ed512-be1a-0a2a45090019-628944ccb192-3
- for <xen-devel@lists.xenproject.org>; Sun, 02 Aug 2026 07:26:44 +0200
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic304.consmr.mail.gq1.yahoo.com with HTTP; Sun, 2 Aug 2026 05:26:42 +0000
-Received: by hermes--production-ne1-6f6bdbdd7c-dvlsw (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID 11499ee497b205444310b641ae38b9f1; 
- Sun, 02 Aug 2026 05:26:40 +0000 (UTC)
+ (envelope-from <sergii.dmytruk@3mdeb.com>)
+ id 6a6f419d-be1a-0a2a45090019-2e69286cbf7b-3
+ for <xen-devel@lists.xenproject.org>; Sun, 02 Aug 2026 15:09:49 +0200
+Received: from director11.ghost.mail-out.ovh.net (unknown [10.110.37.89])
+ by mo583.mail-out.ovh.net (Postfix) with ESMTP id 4hCgBj0K6Wz5yKg
+ for <xen-devel@lists.xenproject.org>; Sun,  2 Aug 2026 13:09:48 +0000 (UTC)
+Received: from ghost-submission-7d8d68f679-94gmt (unknown [10.110.113.120])
+ by director11.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 5580EC28DA;
+ Sun,  2 Aug 2026 13:09:48 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.101])
+ by ghost-submission-7d8d68f679-94gmt with ESMTPSA
+ id NPxXBZxBb2p7shoA8/69sg
+ (envelope-from <sergii.dmytruk@3mdeb.com>); Sun, 02 Aug 2026 13:09:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,80 +55,196 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=netscape.net header.i="@netscape.net" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=netscape.net; s=a2048; t=1785648402; bh=LH/ftC7GkUWQq6FB6XQBny4DcVZLjeM6/HaeFg9bv3w=; h=Date:Subject:To:Cc:References:From:In-Reply-To:From:Subject:Reply-To; b=Yah76xINiQI8Aa5SpWbJzbbV8erP/BHCmrBwMDQXSzEc7PeE2PEnVpsAOQfTCNRFRH4wCbkqgbQwZvmVX//B9xURciuDHjCwLUrgXK3YdfR/RGmvWRcHZxP8vxfUmrFfbabWwuE9nACL5iZbREkYmoOitTQkYoxGVKo2FrLGPUM2wjk3f9JaTP6IjE0T4SmD2VKwrdyS0p4khaKvIDPstYPu2IrefrijQBWe/CeB2RrmocuhP/ksBoV5HCexU7Qsiow54+gCOHzMz6YjUrTFOvd+oGPxAkafQldFBBFEWrWj6KkISpPvqEtORDLXxt2mwGMJj+1kAapcE88Rl0UxzQ==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1785648402; bh=MAFVCLLvA0klvEZcVA5etVjnRgqlL0lGl7k0CnhiFb3=; h=X-Sonic-MF:Date:Subject:To:From:From:Subject; b=nZk8q/7/fq/CD2AbOuARFOh3y0FI79kWvSlWMiRySvCh+pk07CQulJKMf9NCanDCKaXxzg1iK9MAeMftQ6A1YvkprwdaGFQVxRt77vA0tTC1xd6Z0wJyey1zowSDO5dtF0mpYkoZ4dw1NVAVBTH3idmmEvFDrE9uEQ98VBXwRkk6RCLmeFIX+wBqFRNm7Sr5OuTExy+rznYmCzsfUPoLpCI9O0dYsV/7HJmkidt9CK9FIcp7lyjiiQk3SV6vPiHRCBOJV2ctb5FVkpht34zhs7txDE6+GFzErfEgK5OcJka4YEkQiYxBGzw6Jx4CCY2pMzHFtFaYc6ONpa3BN3H4pA==
-X-YMail-OSG: IUYVv7QVM1ksrzGFnH34ZNa9tFKOa0UEiqQf8uWRUH518rC13_b5BhBg10Hv8aS
- FU.tLcrzA6dcAldNQwxkdReWoWUrWqmbk1yPxUno_wB92sn8NFLXp3rMXiUWrp.Jwr_wIk6a05ct
- mDVueUgAnXuOd_IHHGLcyuxG8BaGg29WaFAwd8Wt3CkCQYEb_46ks0Y3o34FB1NJtV.7yUAcgDLX
- hCuHV6LGD6.l6_fQrNVr.tLgfRWe20MPYRxtxEbwiKnHYsCmzxh2pD2y6W1YZdOCOE5WFNLV1tXg
- OgHQFfmIbAUSdURf6fjDV1u29yv8Af8OIj5tYTiLkYvFKe2aeseKsKDc4Qx41uyXaP60_JiQunqp
- PI8v_hSfVibZ65RTO5YM2DNm7dD9VWbl8ZZ5zM24Doiu.VQqNqrknB89wmYYN9AEOepTaefP7BeJ
- i6_AUqPY.te8V3OvI7OgXIYYXNNVKIQf_OsubclGSyXmUIAaMoJ7Kxm5xoxZNs1dq00pBSp9dV1C
- Jioq0Mg_HghYB6iJq5BzQ4GB3drAPwnUEJVSpxNKAbrMJj3HyF3s0gk_zGzA9y6etqbaIk9EfuSs
- uDeFvKVgxNrOnPCaFluN0lSKk6tC2srKBc5qoiU1.Gfx8jrT.wFa1plpNsOlEskrsm6tz.uogNR3
- ZWpUGpoxscWgBPDOqtR5dt5cggZ49CLyV1S.JalcD_HNDbfio7JGD0BP_WuEGGQRsOPMWbNlCtjp
- 4mGDqg1iKqWpM.HuSOsbek4mDKfZHbLLWYQHNgXUDwliTzFgPPBg.nb2RpjhQ8yxe4NE06upj4S9
- OHRhMyugeqIGPmdH6To0wIXdGZXZIC6FmFDDUPehbtL5Luv8I3VbuACP1GrWvxttds8S8dRGFrWj
- Yr4W0IPeqdVmVrsJbuUOdW8vyQNRNnSJf3cUn027m2vY0g6u9LzsgSmMbJz1MuaKj_LzXX_98uV.
- m8XbzpSkuvjkTtpLr9gRFbEYZKOqDVrk72YDuF43jSCWQ1pM1sbhL4Qc9J3sHxhai6IloRQLLTcP
- lAjshWJ0RWbBIl5U1ut2tM0_7jCj3Ci0jbW.3V9x648RDarmxbWK0s5OOcWbYD9cxur8vpv0mBnl
- 6LIt81l.a8261OM_S1o6Erh8yNzFcxNzrJsCkDEvPwqRadClrzzmCxEVywO2LFKoeItpWvxXGJkP
- sb1VgYRzAA_9o8rswI3I6utxqNbGhnUMmqBwwK0nWU52nqb2i5qvRNzKdhRJD2QmdXvdR4HSZLq_
- pkpegqCUaixQSQdQwN8mH8zUzoaKvVEccrzU7KsUcIfpcwbzei0MWx3Mca5Su_3UzD5HS.aIte9Y
- aEXw1NEObI1Dt_EZ94wZIr4fwJcafoOkHCkgXa8yxbWFCA__17aHCSEbE9laLwrRkaYhJrObrOGE
- Q2Y10r7wfdxhOsQ4u0okTzplvnSLkHHrDu6wZlvTrpgsYodk3f3g48vteAorOOP73MRQBaQZovhR
- NnqXxc9lPAnu1Gooy.G3D2H.XSGPCGy748JEEfzKc8lZgc6UEeqBhRjQgUh8N6pZ3NZLD5j7qDCH
- uBggtT983z95bZb4v6X.l8NuEzgutHRNw_u0DsXWTlQunY9kDqjTh1Q25rlRiAdx0R23ZmZTd1yK
- paQSaX0Bgjj8QNdrNAF6f2voB4qew9AVALIel07ru7rRu9Px9gax0l39SDgQe2eGLfYkN8uOEyIB
- 94FcytGQAjyF1_fWNwAud5fn4Q785HkLI6r7mvydaXGFBs3afHf3bitJmpkOGDheEZ.rzcsKJ8uq
- tf86tKay6tUd4WAq9YOrBqwmrdVW1P8ndt4x9y4xZo07L5GUrfSpmbAfD7gEzjpxVOagIvPrmAF5
- YenGnj51OQe0QuKcJSYvusVbtl7Dzpwd574bfqO77owdnoCZB7xtjgSawIiH.T62Cj85c4uA8co9
- 4qCCJqKCzRWERd8ZqghJFHomwUUzie0GEVfUpTeH73iiS_m5Iz9dmtsZTdaHiPTSq9q8s9eqgsn4
- hxd9GMlkEwXQcpgNIkH0bThGhoVpg2XQCdJtKSskJmyY0XbLEdgSygX1fouKklBqT7.Q4UGfUPi1
- 8GHbAEsQ5wkAArOMjx0sG8.Pi.qToLk58dEMPasVQw_UbHZpNCNYBoqdtZRnwooll3GdaL3yNSko
- jG9BRCYlb4MJszbc84BKqpWBIXMO_HDNalw1T3yXH27DK8QODIvT4lmo_nTDlC0mNdq8Om0JBO19
- zeMOgC1NLmMtsm9lr0mNgYCAFD7Iy.Ols2GQ0z.w2p.q4qMo-
-X-Sonic-MF: <brchuckz@netscape.net>
-X-Sonic-ID: 9ef0d839-c41c-43b5-90aa-8784cfba1c62
-Message-ID: <236b6db6-ddb2-4f60-935e-fcb153c1ab38@netscape.net>
-Date: Sun, 2 Aug 2026 01:26:38 -0400
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=ovhmo3617313-selector1 header.d=3mdeb.com header.i="@3mdeb.com" header.h=From
+Authentication-Results:garm.ovh; auth=pass (GARM-101G004d28b9708-d722-46a0-b753-19657ed76a3a,
+                    A7BD45287BC66A7121136900083CD01C39616B1D) smtp.auth=sergii.dmytruk@3mdeb.com
+X-OVh-ClientIp:176.111.181.215
+From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
+To: xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	trenchboot-devel@googlegroups.com
+Subject: [PATCH v4 02/23] x86/cpu: report SMX, TXT and SKINIT capabilities
+Date: Sun,  2 Aug 2026 16:09:18 +0300
+Message-ID: <be993e757550b69a6f94f89476ba71131b434741.1785668458.git.sergii.dmytruk@3mdeb.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <cover.1785668458.git.sergii.dmytruk@3mdeb.com>
+References: <cover.1785668458.git.sergii.dmytruk@3mdeb.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 5/6] xen/igd: implement support for extended VBT
-To: qemu-devel@nongnu.org
-Cc: qemu-stable@nongnu.org, xen-devel@lists.xenproject.org,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony@xenproject.org>,
- "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
- Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>
-References: <20260801001737.16509-1-brchuckz@aol.com>
- <20260801001737.16509-6-brchuckz@aol.com>
-Content-Language: en-US
-From: Chuck Zmudzinski <brchuckz@netscape.net>
-In-Reply-To: <20260801001737.16509-6-brchuckz@aol.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailer: WebService/1.1.26215 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
-X-purgate-ID: tlsNG-bad1c0/1785648404-BCCCF034-8C7A4A98/0/0
+Content-Transfer-Encoding: 8bit
+x-ovh-tracer-id: 4727653710698587580
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: dmFkZTEO37Lm1soAj3J6HJwxZueJ91jNrKiCMD9VOxO+7S6oZcwX5ZhHy/rf+u1q3gsSFBR0MQ0G/W66mTSt5xumJoxY/EyDpxdVBT5aAA1fHupbW88f/IumzeClwwf3PGe5NCfIC4rAkaw9D49zl0L3FOqYw1yebY9XQZPEoEgqOhxU7iAITzoi4rSZJugXTxFrfgz5z3QYtYzrLSr0w464iDE2Jv+mfsQyDLbPqlC9XEGpFu9KBxFx07+KPXWsR6kr02Tgk2fJ3ulvjdiKijPJd2EPMcqID96OcOqj/uCF/V+6MYDFkW6NlVR5eWMFf+caoPBoCiQxHguJ/BWn2Nt+/d7LNllcVQgdmgcry5NN7wS+7P244IVm1i3hxWTS0fY6l0mLmTrBdYMSj1l2MPXzfgrzKe+RwmeSG1PQWIXYbI81FBT96hhatZiup856cK5HOUf8jO43hH6Pam7Rb/cvxoRnQ189n0TR2SsNPS1cxZSJfG85p4aqQ61kgp59XqEL9nYtCPpVz0amvbk20nzSS6OIulbeXySnAFJAzehqeShpvFZ5FI2mFTvLc/rxG5Lgqfv02DJJ+HsLt4SETJwrMLt0L/KbPvgMIWS5lQQmVLxOofSfw0XSP0l/0tqgdtE0POhVRwEKgTJ54tR66Y6E2i0sC1FqUKF8QYD5nMk8jkj9JQ
+DKIM-Signature: a=rsa-sha256; bh=guK4ex2HH/E4mH457QyNnqirM8tblzphlMNWG1MrUQs=;
+ c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
+ t=1785676189; v=1;
+ b=ad4fknva8ekoVibK/O1uF7vEnWMXYQS4A8+qPP4vzp/vKVYUudVIhuUQzYx1wxUsjQxy+vQg
+ YbweWI0bsr05oWQ5Mfk8c03cDWsdhZmJapciYcaRneWnNcgESaKlreYlH/yS+vuWxwrTo8un1br
+ +LXKI7Z0LaSJj49ZGr1ZhpezOPzRYZrzo3BdoIh93I3wGjlzRtZfTLEvQ1TifMy0RxI2XM+PTgV
+ FZvdGLFSwnjGeO9+yOVffVjzCibhxeoDboO8n/jkrX/VsjqsM/4XRuL2cYJyQIXbbqgIT/rslYE
+ 4DKxlImaRh8A09Qn5wTAQuU+P8v05sEJEHuUtF9tAwghQ==
+X-purgate-ID: tlsNG-bad1c0/1785676189-FC817034-625FF1C6/0/0
 X-purgate-type: clean
-X-purgate-size: 403
+X-purgate-size: 5038
 
-On 7/31/26 8:17 PM, Chuck Zmudzinski wrote:
+From: Michał Żygowski <michal.zygowski@3mdeb.com>
 
-> 
-> The companion patch to hvmloader that is needed to make this patch take
-> effect is available here:
-> 
-> https://lore.kernel.org/qemu-devel/20260801000354.16446-1-brchuckz@aol.com/
+Report TXT capabilities so that dom0 can query the Intel TXT or AMD
+SKINIT support information using xl dmesg.
 
-This patch has been update to version 2 and is available here:
+Signed-off-by: Michał Żygowski <michal.zygowski@3mdeb.com>
+Signed-off-by: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
+---
 
-https://lore.kernel.org/qemu-devel/20260802050824.10554-1-brchuckz@aol.com/
+Notes:
+    v4: fixed conditions for not reporting capabilities (match correct comments)
+    v4: define GETSEC_* macros used only by xen/arch/x86/cpu/intel.c in the file itself (to not depend on Slaunch)
+    v4: don't postpone restoring state of X86_CR4_SMXE, do it before printing test results
 
-Thanks,
+ xen/arch/x86/cpu/amd.c   | 16 +++++++++++++
+ xen/arch/x86/cpu/cpu.h   |  1 +
+ xen/arch/x86/cpu/hygon.c |  1 +
+ xen/arch/x86/cpu/intel.c | 50 ++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 68 insertions(+)
 
-Chuck
+diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
+index 70783c9a0a..5ea16ad8a8 100644
+--- a/xen/arch/x86/cpu/amd.c
++++ b/xen/arch/x86/cpu/amd.c
+@@ -617,6 +617,21 @@ void amd_process_freq(const struct cpuinfo_x86 *c,
+ 		*low_mhz = amd_parse_freq(c->family, lo);
+ }
+ 
++void amd_log_skinit(const struct cpuinfo_x86 *c)
++{
++    /*
++     * Run only on BSP and not during resume to report the capability only once.
++     */
++    if ( system_state == SYS_STATE_resume || smp_processor_id() )
++        return;
++
++    printk("CPU: SKINIT capability ");
++    if ( !test_bit(X86_FEATURE_SKINIT, &boot_cpu_data.x86_capability) )
++        printk("not supported\n");
++    else
++        printk("supported\n");
++}
++
+ void cf_check early_init_amd(struct cpuinfo_x86 *c)
+ {
+ 	if (c == &boot_cpu_data)
+@@ -1325,6 +1340,7 @@ static void cf_check init_amd(struct cpuinfo_x86 *c)
+ 		setup_force_cpu_cap(X86_FEATURE_XEN_REP_MOVSB);
+ 
+ 	amd_log_freq(c);
++	amd_log_skinit(c);
+ }
+ 
+ const struct cpu_dev __initconst_cf_clobber amd_cpu_dev = {
+diff --git a/xen/arch/x86/cpu/cpu.h b/xen/arch/x86/cpu/cpu.h
+index bbede57ab0..17935190b7 100644
+--- a/xen/arch/x86/cpu/cpu.h
++++ b/xen/arch/x86/cpu/cpu.h
+@@ -21,6 +21,7 @@ extern bool detect_extended_topology(struct cpuinfo_x86 *c);
+ 
+ void cf_check early_init_amd(struct cpuinfo_x86 *c);
+ void amd_log_freq(const struct cpuinfo_x86 *c);
++void amd_log_skinit(const struct cpuinfo_x86 *c);
+ void amd_init_de_cfg(const struct cpuinfo_x86 *c);
+ void amd_init_lfence_dispatch(void);
+ void amd_init_ssbd(const struct cpuinfo_x86 *c);
+diff --git a/xen/arch/x86/cpu/hygon.c b/xen/arch/x86/cpu/hygon.c
+index 7a9fc25d31..608a7c4319 100644
+--- a/xen/arch/x86/cpu/hygon.c
++++ b/xen/arch/x86/cpu/hygon.c
+@@ -90,6 +90,7 @@ static void cf_check init_hygon(struct cpuinfo_x86 *c)
+ 	}
+ 
+ 	amd_log_freq(c);
++	amd_log_skinit(c);
+ }
+ 
+ const struct cpu_dev __initconst_cf_clobber hygon_cpu_dev = {
+diff --git a/xen/arch/x86/cpu/intel.c b/xen/arch/x86/cpu/intel.c
+index 90c9d36186..ddb34c0c02 100644
+--- a/xen/arch/x86/cpu/intel.c
++++ b/xen/arch/x86/cpu/intel.c
+@@ -14,6 +14,11 @@
+ 
+ #include "cpu.h"
+ 
++/* EAX value for GETSEC leaf functions. Intel SDM: GETSEC[CAPABILITIES] */
++#define GETSEC_CAPABILITIES             0
++/* Intel SDM: GETSEC Capability Result Encoding */
++#define GETSEC_CAP_TXT_CHIPSET          1
++
+ /*
+  * MSR_MCU_OPT_CTRL is a collection of unrelated functionality, with separate
+  * enablement requirements, but which want to be consistent across the system.
+@@ -620,6 +625,49 @@ static void init_intel_perf(struct cpuinfo_x86 *c)
+     }
+ }
+ 
++/*
++ * Print out the SMX and TXT capabilties, so that dom0 can determine if the
++ * system is DRTM-capable.
++ */
++static void intel_log_smx_txt(void)
++{
++    unsigned long cr4_val, getsec_caps;
++
++    /*
++     * Run only on BSP and not during resume to report the capability only once.
++     */
++    if ( system_state == SYS_STATE_resume || smp_processor_id() )
++        return;
++
++    printk("CPU: SMX capability ");
++    if ( !test_bit(X86_FEATURE_SMX, &boot_cpu_data.x86_capability) )
++    {
++        printk("not supported\n");
++        return;
++    }
++    printk("supported\n");
++
++    /* Can't run GETSEC without VMX and SMX */
++    if ( !test_bit(X86_FEATURE_VMX, &boot_cpu_data.x86_capability) )
++        return;
++
++    cr4_val = read_cr4();
++    if ( !(cr4_val & X86_CR4_SMXE) )
++        write_cr4(cr4_val | X86_CR4_SMXE);
++
++    asm volatile ("getsec\n"
++        : "=a" (getsec_caps)
++        : "a" (GETSEC_CAPABILITIES), "b" (0) :);
++
++    if ( !(cr4_val & X86_CR4_SMXE) )
++        write_cr4(cr4_val & ~X86_CR4_SMXE);
++
++    if ( getsec_caps & GETSEC_CAP_TXT_CHIPSET )
++        printk("Chipset supports TXT\n");
++    else
++        printk("Chipset does not support TXT\n");
++}
++
+ static void cf_check init_intel(struct cpuinfo_x86 *c)
+ {
+ 	/* Detect the extended topology information if available */
+@@ -634,6 +682,8 @@ static void cf_check init_intel(struct cpuinfo_x86 *c)
+ 		detect_ht(c);
+ 	}
+ 
++	intel_log_smx_txt();
++
+ 	/* Work around errata */
+ 	Intel_errata_workarounds(c);
+ 
+-- 
+2.55.0
+
 
