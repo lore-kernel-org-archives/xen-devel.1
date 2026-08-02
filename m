@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 281E9C55175
-	for <xen-devel@archiver.kernel.org>; Sun,  2 Aug 2026 15:05:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1380883.1624582 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D13D1C55171
+	for <xen-devel@archiver.kernel.org>; Sun,  2 Aug 2026 15:05:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1380885.1624592 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqXka-0005Fg-K3; Sun, 02 Aug 2026 15:05:16 +0000
+	id 1wqXkv-0005ap-S4; Sun, 02 Aug 2026 15:05:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1380883.1624582; Sun, 02 Aug 2026 15:05:16 +0000
+Received: by outflank-mailman (output) from mailman id 1380885.1624592; Sun, 02 Aug 2026 15:05:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqXka-0005FZ-HP; Sun, 02 Aug 2026 15:05:16 +0000
-Received: by outflank-mailman (input) for mailman id 1380883;
- Sun, 02 Aug 2026 15:05:16 +0000
+	id 1wqXkv-0005ai-OX; Sun, 02 Aug 2026 15:05:37 +0000
+Received: by outflank-mailman (input) for mailman id 1380885;
+ Sun, 02 Aug 2026 15:05:37 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dpsmith@apertussolutions.com>) id 1wqXka-0005FT-1W
- for xen-devel@lists.xenproject.org; Sun, 02 Aug 2026 15:05:16 +0000
+ (envelope-from <dpsmith@apertussolutions.com>) id 1wqXkv-0005aO-7U
+ for xen-devel@lists.xenproject.org; Sun, 02 Aug 2026 15:05:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wqXkZ-00BrS3-En
- for xen-devel@lists.xenproject.org; Sun, 02 Aug 2026 17:05:15 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wqXku-001xcr-KX
+ for xen-devel@lists.xenproject.org; Sun, 02 Aug 2026 17:05:36 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <dpsmith@apertussolutions.com>)
- id 6a6f5c72-bab6-0a2a0a5309dd-0a2a450bd02a-48
- for <xen-devel@lists.xenproject.org>; Sun, 02 Aug 2026 17:05:14 +0200
+ id 6a6f5cad-5cb7-0a2a0a5109dd-0a2a450aaae0-14
+ for <xen-devel@lists.xenproject.org>; Sun, 02 Aug 2026 17:05:36 +0200
 Received: from [136.143.188.51] (helo=sender4-of-o51.zoho.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <dpsmith@apertussolutions.com>)
- id 6a6f5ca8-b7e8-0a2a450b0019-888fbc33529e-3
- for <xen-devel@lists.xenproject.org>; Sun, 02 Aug 2026 17:05:14 +0200
-Received: by mx.zohomail.com with SMTPS id 1785683108310689.3839985231745;
- Sun, 2 Aug 2026 08:05:08 -0700 (PDT)
+ id 6a6f5cbe-f2d2-0a2a450a0019-888fbc3352a0-3
+ for <xen-devel@lists.xenproject.org>; Sun, 02 Aug 2026 17:05:36 +0200
+Received: by mx.zohomail.com with SMTPS id 17856831301261005.6998583405325;
+ Sun, 2 Aug 2026 08:05:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,26 +48,26 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=zoho header.d=apertussolutions.com header.i="dpsmith@apertussolutions.com" header.h="Message-ID:Date:MIME-Version:Subject:To:From:In-Reply-To:Content-Type:Content-Transfer-Encoding"
-ARC-Seal: i=1; a=rsa-sha256; t=1785683110; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1785683132; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=kJGfvfFGGUdVCpdJp0jQBcqrzBM3AF3QTRgXkCiwTAlasW1Tz/uqmlaXNDeR8aPGmBUVQc6dht9ugFn4P4PoEjJa4FqyiWLVpkvpnkIhE74NSsq7ZBZfloe/b8XwdxOBbVpv4ulNO/HqFWsL4z84pelKjgimt+Vc3QrzjtmAseI=
+	b=ZqRPG8fvxCgZkK6LfxcjzyLWWaAJMA0zF2gyrQYLnCF5YUoYJ3JZbEhgIBp0Fm+EjJlstpnaOPFEIUG2/nr9RH6xEvr7Zz5A/oFqUwsd2/bZPs4bewecFkTABqk3zlVo7mkYXOqAn3hHfeIu8d6K5rraOSYcOLwj2Ns9IHu9dnQ=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1785683110; h=Content-Type:Content-Transfer-Encoding:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To:Cc; 
+	t=1785683132; h=Content-Type:Content-Transfer-Encoding:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To:Cc; 
 	bh=kjBmZcGw1BB42KQvYs/PpCClxsoGAWvtXvcmYYyz9s0=; 
-	b=XRWg9THcX6KTmkb5++uWQkMaduSCGYjCm9jhlicmqS2JCG9RuufQLpCT41D4lgsb9Puu7xl+8qVTeTwMWcF3AjuZ4cyvtUsk21OwwtBYOjIn4hPrF/T4B/vQF18mvvuXMty7jGUM7TyOeXKWLo08I4e9dz7cuLkfJEM3Yb6YFCU=
+	b=VVFMidnOq0R+4tZfTf65HbPRZ4tF8Q3bVxzyQBgU+MoqUBIBzmXw9ibdzmBqR+wNQeOqqLBsAw2hAi55Q+pWUYgnnunDjq3/GuDrpd46qxvERVoM3uE/v5Xix0kLTmQxuWymRRccbAds3rGSHjL9gGvt/uE5oh6KnYPzrVGNPMw=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1785683110;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1785683132;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To:Cc;
 	bh=kjBmZcGw1BB42KQvYs/PpCClxsoGAWvtXvcmYYyz9s0=;
-	b=pvZDpAi7RQVMdnqXLKQdxQbBukZYsZdO21SMZWPQBygNQjcwomaL1cBtc4NO2nJV
-	Cqhhg5b8rM6oo+RFbaq7Zk85KcsswOss0rcvD9hssAbj2JggIOeCI9Fl09zDycSUnQ6
-	y5GxxKBxECXzCMa0Rs0s7ZzUG07IB7XL5kulZvUc=
-Message-ID: <1b4d5a82-bdc4-460d-a5a4-59e788fe1c3f@apertussolutions.com>
-Date: Sun, 2 Aug 2026 11:05:14 -0400
+	b=PUryuzvMSDtOuPz3h8gCgH52EVpu9tTiXPdUIY5g0IrYApwwtw7Tr02a2IYu3MTX
+	MGp5W9WsIfvahnjtuyfpHThEX/cAcEKzgVWncSBBK17L7nMC0p4XTticL4KZabSY8yK
+	pLs3QFtrb52qJTEiG6BBlOgxmqpLG4BlXfSU7qSk=
+Message-ID: <fd247260-8bad-44f1-adf4-5bae43a1e55b@apertussolutions.com>
+Date: Sun, 2 Aug 2026 11:05:36 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 09/24] XSM: make .hvm_param*() hooks dependent upon HVM=y
@@ -81,7 +81,7 @@ In-Reply-To: <7947b62f-6763-4561-b3aa-c451cfa3dacb@suse.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-ZohoMailClient: External
-X-purgate-ID: tlsNG-42698a/1785683114-19AC09EA-985CE3FF/0/0
+X-purgate-ID: tlsNG-4011c0/1785683136-59DDFCFC-E3355295/0/0
 X-purgate-type: clean
 X-purgate-size: 2234
 
