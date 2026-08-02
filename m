@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E465C55175
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B326BC55162
 	for <xen-devel@archiver.kernel.org>; Sun,  2 Aug 2026 13:10:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1380649.1624412 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1380655.1624421 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqVxO-00073e-Ls; Sun, 02 Aug 2026 13:10:22 +0000
+	id 1wqVxS-0007a7-52; Sun, 02 Aug 2026 13:10:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1380649.1624412; Sun, 02 Aug 2026 13:10:22 +0000
+Received: by outflank-mailman (output) from mailman id 1380655.1624421; Sun, 02 Aug 2026 13:10:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqVxO-00072q-Gf; Sun, 02 Aug 2026 13:10:22 +0000
-Received: by outflank-mailman (input) for mailman id 1380649;
- Sun, 02 Aug 2026 13:10:21 +0000
+	id 1wqVxR-0007Zy-Vt; Sun, 02 Aug 2026 13:10:25 +0000
+Received: by outflank-mailman (input) for mailman id 1380655;
+ Sun, 02 Aug 2026 13:10:24 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <sergii.dmytruk@3mdeb.com>) id 1wqVxN-0006yB-3h
- for xen-devel@lists.xenproject.org; Sun, 02 Aug 2026 13:10:21 +0000
+ (envelope-from <sergii.dmytruk@3mdeb.com>) id 1wqVxQ-0007Lq-1f
+ for xen-devel@lists.xenproject.org; Sun, 02 Aug 2026 13:10:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wqVxM-001lF1-Gh
- for xen-devel@lists.xenproject.org; Sun, 02 Aug 2026 15:10:20 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wqVxP-001lF1-Ew
+ for xen-devel@lists.xenproject.org; Sun, 02 Aug 2026 15:10:23 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <sergii.dmytruk@3mdeb.com>)
- id 6a6f41a9-e002-0a2a0a5209dd-0a2a4505e158-16
- for <xen-devel@lists.xenproject.org>; Sun, 02 Aug 2026 15:10:20 +0200
-Received: from [87.98.181.248] (helo=5.mo560.mail-out.ovh.net)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a6f4178-e002-0a2a0a5209dd-0a2a450adcca-26
+ for <xen-devel@lists.xenproject.org>; Sun, 02 Aug 2026 15:10:23 +0200
+Received: from [46.105.63.121] (helo=1.mo560.mail-out.ovh.net)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <sergii.dmytruk@3mdeb.com>)
- id 6a6f41bb-4cb1-0a2a45050019-5762b5f8891f-3
- for <xen-devel@lists.xenproject.org>; Sun, 02 Aug 2026 15:10:20 +0200
-Received: from director8.ghost.mail-out.ovh.net (unknown [10.110.43.172])
- by mo560.mail-out.ovh.net (Postfix) with ESMTP id 4hCgCH5LSBzB5rZ
- for <xen-devel@lists.xenproject.org>; Sun,  2 Aug 2026 13:10:19 +0000 (UTC)
-Received: from ghost-submission-7d8d68f679-mzsh5 (unknown [10.110.113.68])
- by director8.ghost.mail-out.ovh.net (Postfix) with ESMTPS id E6D71C0120;
- Sun,  2 Aug 2026 13:10:18 +0000 (UTC)
+ id 6a6f41be-f2d2-0a2a450a0019-2e693f79a513-3
+ for <xen-devel@lists.xenproject.org>; Sun, 02 Aug 2026 15:10:23 +0200
+Received: from director5.ghost.mail-out.ovh.net (unknown [10.110.58.120])
+ by mo560.mail-out.ovh.net (Postfix) with ESMTP id 4hCgCL66r7zB5rw
+ for <xen-devel@lists.xenproject.org>; Sun,  2 Aug 2026 13:10:22 +0000 (UTC)
+Received: from ghost-submission-7d8d68f679-m4frt (unknown [10.111.174.155])
+ by director5.ghost.mail-out.ovh.net (Postfix) with ESMTPS id EE3FC100020;
+ Sun,  2 Aug 2026 13:10:21 +0000 (UTC)
 Received: from 3mdeb.com ([37.59.142.105])
- by ghost-submission-7d8d68f679-mzsh5 with ESMTPSA
- id fXhJKLpBb2pj5QUAuSgMJA
- (envelope-from <sergii.dmytruk@3mdeb.com>); Sun, 02 Aug 2026 13:10:18 +0000
+ by ghost-submission-7d8d68f679-m4frt with ESMTPSA
+ id +ukvK71Bb2oAsRcAXQcPeQ
+ (envelope-from <sergii.dmytruk@3mdeb.com>); Sun, 02 Aug 2026 13:10:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,7 +56,7 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=ovhmo3617313-selector1 header.d=3mdeb.com header.i="@3mdeb.com" header.h=From
-Authentication-Results:garm.ovh; auth=pass (GARM-105G0066ba2b957-759b-4dab-a1b9-b171d58bcbdf,
+Authentication-Results:garm.ovh; auth=pass (GARM-105G0063c3aa204-ba72-4722-ade4-19b5dcf0e5f5,
                     A7BD45287BC66A7121136900083CD01C39616B1D) smtp.auth=sergii.dmytruk@3mdeb.com
 X-OVh-ClientIp:176.111.181.215
 From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
@@ -68,274 +68,301 @@ Cc: Jan Beulich <jbeulich@suse.com>,
 	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Ross Philipson <ross.philipson@gmail.com>,
 	trenchboot-devel@googlegroups.com
-Subject: [PATCH v4 12/23] x86/slaunch: restore boot MTRRs after Intel TXT DRTM
-Date: Sun,  2 Aug 2026 16:09:28 +0300
-Message-ID: <c0fa37704bd04e6e2a1ac4351e95ee3db0245de7.1785668458.git.sergii.dmytruk@3mdeb.com>
+Subject: [PATCH v4 13/23] x86/slaunch: measure MBI into TPM
+Date: Sun,  2 Aug 2026 16:09:29 +0300
+Message-ID: <8e971b5b87d6b5dd7aebba55a40ddaeed7b97616.1785668458.git.sergii.dmytruk@3mdeb.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <cover.1785668458.git.sergii.dmytruk@3mdeb.com>
 References: <cover.1785668458.git.sergii.dmytruk@3mdeb.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-x-ovh-tracer-id: 4736379434136577468
+x-ovh-tracer-id: 4737223860187702716
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: dmFkZTEO37Lm1soAj3J6HJwxZueJ91jNrKiCMD9VOxO+7S6oZcwX5ZhHy/rf+u1q3gsSFBR0MQ0G/W66mTSt5xumJoxY/EyDpxdVBT5aAA1fHupbW88f/IumzeClwwf3PGe5NCfIC4rAkaw9D49zl0L3FOqYw1yebY9XQZPEoEgqOhxU7iAITzoi4rSZJugXTxFrfgz5z3QYtYzrLSr0w464iDE2Jv+mfsQyDLbPqlC9XEGpFu9KBxFx07+KPXWsR6kr02Tgk2fJ3ulvjdiKijPJd2EPMcqID96OcOqj/uCF/V+6MYDFkW6NlVR5eWMFf+caoPBoCiQxHguJ/BWn2Nt+/d7LjfFvrcZF/8u8Q0n3PRHV4r3WKIwqRJzxJHPFSQxIKbl3XKNnFvBMXLOpuFHhZH23vljAyKNWXhmDAuNjJx+48Xd79wb1kFhk4s4YAFiFF/CVJN2Zsd6Gpz9N2JkkrsrlXnt3OHFvS8MHgPe6pYWDNjrhVTKEFh1bdt4tWvVVIZ+8woEhh6YA1yerfSR6yGkZEMy4A2UTcafcpvD2uDfNKO9Y5/nle0Uw/V9ra7AnWQwHcMv3n76VKKlBUNHLO4sKlPa1oupiaIcxzn7yOQZWEygxdQF5fsa33PPA/dvi89nZzUt4xXZ20devYMkWwQoLGOCH9fpurC4Yr9x5I7VD7w
-DKIM-Signature: a=rsa-sha256; bh=+7PqKj5rgs6xrE/At11/PBfNJMiWB0u0NPN3/ZI5tEc=;
+X-VR-SPAMCAUSE: dmFkZTErXTMJAFd1A/dXmS31doF3eHiFwFavtbE0IdxSAxcjBkbm/Y2r8C0ugmNxHgh0ttjc9HcWB48DtmHsboYn+R8rGouoQtvWBvuW7UoEIxsUWbq/tHAG5l0RfFjNSyhC5/+eLgR0uRIXbClVnnLU0J/e2MH+H41gFQHMN7aHv5oF4XCxU6iBwYAbzZv3Yhh++GCTcK0XOcSHoKOpYkiLjzaWT2sDXaneeSXeAAfPIRWbR3tUvr9IWTEkcXdO9/v8flsgALJWAnTuyhJyR7xa7rElw4l9ZKZPp4F7IlSUp4UkO78BMUlmU3YvvPg7A/cDjWsr7oy1auF5nv72TyzhOj1kihXXkuJHUxuhH70tfkuXm5adpj7kYIq40ucJWy4eC8j4fd5KD8Rjrj+faMOgHhQfHMXHXc/D+vxjCPoiXhdVJyUP1hH3j+BXHyKw9Tm0xzuxJs/dEVF0AWE6Y8pzOWujbxug4nS1eBH11qnIpTz4s9R8aGzvTzhCgv94NwckC+ebxuOt/l2btFhWFQHAoiqdtUsXR/i/4pBjb6y9MWckygLMxPIOgsvDY5lH16jia9YFKUGoEIfy7eaWSjXfgvkVWqQa/ykLH0W2krnjwb2FiHZynPwGWkL/fRdSDP/svwT+IR+/3WdSNXTDQirQHtqd04KTIx+HNfdXzKcP7YYOJA
+DKIM-Signature: a=rsa-sha256; bh=NTPb66lzSKmerltG0bBqdXZxKAyljMiz3zhpakFzmRs=;
  c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
- t=1785676219; v=1;
- b=ZiBwsSJKedYzeY7PbMzMY/56bIkaFnx4nGmP5x7pJ99HTIhHDEfiJxpXvWPTdojoG1f8STrF
- 6r9KQx0Un0fxHb3PIfDmsI65gi9VAYMbHAyUuK2lrhAfO+WcSea57kcYl/CB1CoQpzvXwkkahWM
- kAAIEhElCVL3uvBsZc+a7rfX0VRKDbRiWrN1oCS5HA59+b1ehsp8GQ2fnp0Cq3yMUYmGQdz5pG4
- KHsZ5RTDOiIFf63ZHzujLfbL5bn5UZzj9SCfzRPwDBUcTqcmVsnkCVkP2lo25Hp3U4fvSQcvg7K
- m9RkXEjA4AgayF4WoQoORDnXUk9oln9P4lr2gLWhjrdyg==
-X-purgate-ID: tlsNG-c201ff/1785676220-F74BC2A1-6258F757/0/0
+ t=1785676222; v=1;
+ b=Fj/IJVW2RxfGpPoBj7h4FcE+jcamEVbzMgjD/1vmGj7QEjOOJpDXyz3s7Ap8y0V5pHVqNkUL
+ i/5vI/j3deL8KfzJRVwmfjqMG0I6y6qRc2nDZsDCwZ9Ig63GJwWTxb6X/d1Qpd3yspWcnnmig5M
+ +fxKrqhGE/x8rcn/gRAtyt47+nvFCUyrIomu2EDu8g9GfRJmJJMzE80hs+pFl2n3o45VbluBr9Q
+ uvnU5dq04MW7WBUZqERGAPUs2FFw7OfTAGA6ssfG30NCWPObMDQg9FC8czVLq/+33qIB05qemH6
+ SYa6p36J/gNsIiNxe2vSOqttchdEH8UlAtEnofT4LfVOA==
+X-purgate-ID: tlsNG-4011c0/1785676223-4ABD8CFC-00CF7C25/0/0
 X-purgate-type: clean
-X-purgate-size: 8515
+X-purgate-size: 8972
 
 From: Krystian Hebel <krystian.hebel@3mdeb.com>
 
-In preparation for TXT SENTER call, GRUB had to modify MTRR settings
-to be UC for everything except SINIT ACM. Old values are restored
-from SLRT where they were saved by the bootloader.
+Make slaunch-tpm.c compile in early boot environment use it to measure
+MBI in early 32b code without paging (gets triggered from head.S).
+
+The fact of the measurement is not yet stored anywhere as there is no
+code for TPM event log discovery and modification.
 
 Signed-off-by: Krystian Hebel <krystian.hebel@3mdeb.com>
-Signed-off-by: Michał Żygowski <michal.zygowski@3mdeb.com>
 Signed-off-by: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
 ---
 
 Notes:
-    v4: now this commit makes two functions of mtrr/generic.c public
-    v4: take CONFIG_SLAUNCH into account
-    v4: restore MTRRs earlier: move from mtrr_top_of_ram() to machine_specific_memory_setup()
-    v4: renamed parameter of txt_restore_mtrrs(): e820_verbose => verbose
-    v4: don't use rdmsrl() and wrmsrl()
-    v4: extract part of an integer consistently (`mtrr_cap` in txt_restore_mtrrs(), was a mix of `(uint8_t)` cast and `& 0xff`)
-    v4: use container_of()
-    v4: manage MTRR count in txt_restore_mtrrs() better (separate variable, no weird ?: operator)
+    v4: was part of "x86/tpm.c: code for early hashing and extending PCRs (for TPM1.2)"
+    v4: tpm_extend_mbi => slaunch_measure_mbi
+    v4: doesn't touch tpm.c, uses slaunch-tpm.c instead
+    v4: use `const multiboot2_fixed_t *` instead of `uint32_t *` for MBI
 
- xen/arch/x86/cpu/mtrr/generic.c      |  9 +--
- xen/arch/x86/e820.c                  |  5 ++
- xen/arch/x86/include/asm/intel-txt.h |  3 +
- xen/arch/x86/include/asm/mtrr.h      |  8 +++
- xen/arch/x86/include/asm/slaunch.h   |  8 +++
- xen/arch/x86/intel-txt.c             | 84 ++++++++++++++++++++++++++++
- 6 files changed, 110 insertions(+), 7 deletions(-)
+ xen/arch/x86/boot/Makefile             |   7 +-
+ xen/arch/x86/boot/head.S               |   5 ++
+ xen/arch/x86/include/asm/slaunch-tpm.h |   7 ++
+ xen/arch/x86/include/asm/slaunch.h     |  14 ++++
+ xen/arch/x86/slaunch-tpm.c             | 112 +++++++++++++++++++++++++
+ xen/arch/x86/slaunch.c                 |   4 +
+ 6 files changed, 148 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/cpu/mtrr/generic.c b/xen/arch/x86/cpu/mtrr/generic.c
-index 86eb0f405b..c179935dd3 100644
---- a/xen/arch/x86/cpu/mtrr/generic.c
-+++ b/xen/arch/x86/cpu/mtrr/generic.c
-@@ -14,11 +14,6 @@
- #include <asm/cpufeature.h>
- #include "mtrr.h"
+diff --git a/xen/arch/x86/boot/Makefile b/xen/arch/x86/boot/Makefile
+index 02f690d34a..b31c96be18 100644
+--- a/xen/arch/x86/boot/Makefile
++++ b/xen/arch/x86/boot/Makefile
+@@ -7,6 +7,7 @@ obj32 += reloc.32.o
+ obj32 += reloc-trampoline.32.o
+ ifeq ($(CONFIG_SLAUNCH),y)
+ obj32 += slaunch-early.32.o
++obj32 += slaunch-tpm-early.32.o
+ endif
+ obj32 += tpm-early.32.o
  
--struct mtrr_pausing_state {
--	bool pge;
--	uint64_t def_type;
--};
--
- static const struct fixed_range_block {
- 	uint32_t base_msr;   /* start address of an MTRR block */
- 	unsigned int ranges; /* number of MTRRs in this block  */
-@@ -440,7 +435,7 @@ static DEFINE_SPINLOCK(set_atomicity_lock);
-  * has been called.
-  */
+@@ -14,7 +15,7 @@ obj64 := reloc-trampoline.o
  
--static void mtrr_pause_caching(struct mtrr_pausing_state *state)
-+void mtrr_pause_caching(struct mtrr_pausing_state *state)
- {
- 	unsigned long cr4;
+ exports := cmdline_parse_early,reloc,reloc_trampoline32
+ ifeq ($(CONFIG_SLAUNCH),y)
+-exports := $(exports),slaunch_early_init
++exports := $(exports),slaunch_early_init,slaunch_measure_mbi
+ endif
  
-@@ -481,7 +476,7 @@ static void mtrr_pause_caching(struct mtrr_pausing_state *state)
- 	alternative("wbinvd", "", X86_FEATURE_XEN_SELFSNOOP);
- }
+ nocov-y   += $(obj32) $(obj64)
+@@ -39,6 +40,10 @@ $(obj)/%.32.o: $(src)/%.c FORCE
  
--static void mtrr_resume_caching(struct mtrr_pausing_state state)
-+void mtrr_resume_caching(struct mtrr_pausing_state state)
- {
- 	/* Intel (P6) standard MTRRs */
- 	mtrr_wrmsr(MSR_MTRRdefType, state.def_type);
-diff --git a/xen/arch/x86/e820.c b/xen/arch/x86/e820.c
-index 872208ab37..c63b0b12cc 100644
---- a/xen/arch/x86/e820.c
-+++ b/xen/arch/x86/e820.c
-@@ -11,6 +11,8 @@
- #include <asm/mtrr.h>
- #include <asm/msr.h>
- #include <asm/guest.h>
-+#include <asm/intel-txt.h>
-+#include <asm/slaunch.h>
+ $(obj)/slaunch-early.32.o: XEN_CFLAGS += -D__EARLY_SLAUNCH__
  
- /*
-  * opt_mem: Limit maximum address of physical RAM.
-@@ -499,6 +501,9 @@ static void __init machine_specific_memory_setup(struct e820map *raw)
-     uint64_t top_of_ram, size;
-     unsigned int i;
- 
-+    if ( slaunch_active )
-+        txt_restore_mtrrs(e820_verbose);
++$(obj)/slaunch-tpm-early.32.o: XEN_CFLAGS += -D__EARLY_SLAUNCH__
++$(obj)/slaunch-tpm-early.32.o: $(src)/../slaunch-tpm.c FORCE
++	$(call if_changed_rule,cc_o_c)
 +
-     sanitize_e820_map(raw->map, &raw->nr_map);
-     copy_e820_map(raw->map, raw->nr_map);
+ $(obj)/tpm-early.32.o: XEN_CFLAGS += -D__EARLY_TPM__
+ $(obj)/tpm-early.32.o: $(src)/../tpm.c FORCE
+ 	$(call if_changed_rule,cc_o_c)
+diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
+index 700d1d850e..2c1a0f6306 100644
+--- a/xen/arch/x86/boot/head.S
++++ b/xen/arch/x86/boot/head.S
+@@ -539,6 +539,11 @@ __start:
+         pop     sym_esi(slaunch_slrt) /* save physical address of SLRT for C
+                                          code */
  
-diff --git a/xen/arch/x86/include/asm/intel-txt.h b/xen/arch/x86/include/asm/intel-txt.h
-index db6b0defd0..406929fac2 100644
---- a/xen/arch/x86/include/asm/intel-txt.h
-+++ b/xen/arch/x86/include/asm/intel-txt.h
-@@ -389,6 +389,9 @@ void txt_map_mem_regions(void);
- /* Marks TXT-specific memory as used to avoid its corruption. */
- void txt_reserve_mem_regions(void);
- 
-+/* Restores original MTRR values saved by a bootloader before starting DRTM. */
-+void txt_restore_mtrrs(bool verbose);
++        mov     sym_esi(slaunch_slrt), %edx /* physical SLRT address */
++        mov     %ebx, %eax                  /* physical MBI address */
++        /* slaunch_measure_mbi(mbi/eax, slrt/edx) using fastcall. */
++        call    slaunch_measure_mbi
 +
- #endif /* !__ASSEMBLER__ */
+         /* Move magic number expected by Multiboot 2 to EAX and fall through. */
+         movl    $MULTIBOOT2_BOOTLOADER_MAGIC, %eax
+ #endif
+diff --git a/xen/arch/x86/include/asm/slaunch-tpm.h b/xen/arch/x86/include/asm/slaunch-tpm.h
+index 68e9c8358a..79154f505b 100644
+--- a/xen/arch/x86/include/asm/slaunch-tpm.h
++++ b/xen/arch/x86/include/asm/slaunch-tpm.h
+@@ -16,4 +16,11 @@ struct slr_table;
+ void slaunch_find_log(const struct slr_table *slrt, paddr_t *evt_log,
+                       uint32_t *evt_log_size);
  
- #endif /* X86_INTEL_TXT_H */
-diff --git a/xen/arch/x86/include/asm/mtrr.h b/xen/arch/x86/include/asm/mtrr.h
-index 3a5b4f5b6e..bf82af8c47 100644
---- a/xen/arch/x86/include/asm/mtrr.h
-+++ b/xen/arch/x86/include/asm/mtrr.h
-@@ -63,6 +63,14 @@ extern uint8_t pat_type_2_pte_flags(uint8_t pat_type);
- extern void mtrr_aps_sync_begin(void);
- extern void mtrr_aps_sync_end(void);
- 
-+struct mtrr_pausing_state {
-+	bool pge;
-+	uint64_t def_type;
-+};
++/*
++ * Log data is optional (pass in NULL and/or zero size to indicate its absence).
++ */
++void slaunch_hash_extend(unsigned int loc, unsigned int pcr, const uint8_t *buf,
++                         unsigned int size, uint32_t type,
++                         const uint8_t *log_data, unsigned int log_data_size);
 +
-+extern void mtrr_pause_caching(struct mtrr_pausing_state *state);
-+extern void mtrr_resume_caching(struct mtrr_pausing_state state);
-+
- extern bool mtrr_var_range_msr_set(struct domain *d, struct mtrr_state *m,
-                                    uint32_t msr, uint64_t msr_content);
- extern bool mtrr_fix_range_msr_set(struct domain *d, struct mtrr_state *m,
+ #endif /* X86_SLAUNCH_TPM_H */
 diff --git a/xen/arch/x86/include/asm/slaunch.h b/xen/arch/x86/include/asm/slaunch.h
-index 3df7174b4b..459fc83388 100644
+index 459fc83388..65aab01f04 100644
 --- a/xen/arch/x86/include/asm/slaunch.h
 +++ b/xen/arch/x86/include/asm/slaunch.h
-@@ -23,8 +23,16 @@ struct slaunch_early_init_results
-     uint32_t slrt_pa;
- } __packed;
- 
-+#ifdef CONFIG_SLAUNCH
- /* Indicates an active Secure Launch boot. */
- extern bool slaunch_active;
-+#else
-+/*
-+ * This avoids `#ifdef CONFIG_SLAUNCH` around `if ( slaunch_active )` thanks to
-+ * dead code elimination.
-+ */
-+static bool slaunch_active = false;
-+#endif
- 
- /*
-  * Holds physical address of SLRT.  Use slaunch_get_slrt() to access SLRT
-diff --git a/xen/arch/x86/intel-txt.c b/xen/arch/x86/intel-txt.c
-index 4a42abf8df..e0344d3421 100644
---- a/xen/arch/x86/intel-txt.c
-+++ b/xen/arch/x86/intel-txt.c
-@@ -8,10 +8,13 @@
- 
- #include <xen/bug.h>
- #include <xen/init.h>
-+#include <xen/kernel.h>
- #include <xen/lib.h>
+@@ -17,6 +17,20 @@
+ #include <xen/slr-table.h>
  #include <xen/types.h>
- #include <asm/e820.h>
- #include <asm/intel-txt.h>
-+#include <asm/msr.h>
-+#include <asm/mtrr.h>
- #include <asm/slaunch.h>
  
++#define DRTM_LOC                   2
++#define DRTM_CODE_PCR              17
++#define DRTM_DATA_PCR              18
++
++/*
++ * Secure Launch event log entry types. The TXT specification defines the base
++ * event value as 0x400 for DRTM values, use it regardless of the DRTM for
++ * consistency.
++ */
++#define DLE_EVTYPE_BASE            0x400
++#define DLE_EVTYPE_SLAUNCH         (DLE_EVTYPE_BASE + 0x102)
++#define DLE_EVTYPE_SLAUNCH_START   (DLE_EVTYPE_BASE + 0x103)
++#define DLE_EVTYPE_SLAUNCH_END     (DLE_EVTYPE_BASE + 0x104)
++
+ struct slaunch_early_init_results
+ {
+     uint32_t mbi_pa;
+diff --git a/xen/arch/x86/slaunch-tpm.c b/xen/arch/x86/slaunch-tpm.c
+index f59170594d..21dec67dca 100644
+--- a/xen/arch/x86/slaunch-tpm.c
++++ b/xen/arch/x86/slaunch-tpm.c
+@@ -2,13 +2,71 @@
  /*
-@@ -111,3 +114,84 @@ void __init txt_reserve_mem_regions(void)
-                      TXT_PRIV_CONFIG_REGS_BASE + TXT_CONFIG_SPACE_SIZE);
-     BUG_ON(!ok);
+  * Slaunch functions related to TPM.
+  *
++ * This file is built twice:
++ *  1. For early 32b mode without paging when it also provides
++ *     slaunch_measure_mbi() to be called from assembly.
++ *  2. For 64b code.
++ *
+  * Copyright (c) 2022-2026 3mdeb Sp. z o.o.  All rights reserved.
+  */
+ 
++#include <xen/compiler.h>
++#include <xen/lib.h>
+ #include <xen/macros.h>
++#include <xen/multiboot2.h>
++#include <xen/sha1.h>
++#include <xen/sha2.h>
+ #include <xen/slr-table.h>
+ #include <xen/types.h>
+ 
++#include <asm/intel-txt.h>
++#include <asm/slaunch.h>
++#include <asm/slaunch-tpm.h>
++#include <asm/tpm.h>
++#include <asm/tpm2.h>
++
++#ifdef __EARLY_SLAUNCH__
++
++#ifdef __va
++#error "__va defined in non-paged mode!"
++#endif
++
++#define __va(x)  _p(x)
++
++static uint32_t slrt_location;
++
++/*
++ * The code is being compiled as a standalone binary without linking to any
++ * other part of Xen.  Providing implementation of builtin functions in this
++ * case is necessary if compiler chooses to not use an inline builtin.
++ */
++void *(memset)(void *s, int c, size_t n)
++{
++    uint8_t *d = s;
++
++    while ( n-- )
++        *d++ = c;
++
++    return s;
++}
++
++struct slr_table *slaunch_get_slrt(void)
++{
++    return _p(slrt_location);
++}
++
++void asmlinkage slaunch_measure_mbi(const multiboot2_fixed_t *mbi,
++                                    uint32_t slrt_pa)
++{
++    /* Need this to implement slaunch_get_slrt() for early TPM code. */
++    slrt_location = slrt_pa;
++
++    slaunch_hash_extend(DRTM_LOC, DRTM_DATA_PCR, (const uint8_t *)mbi,
++                        mbi->total_size, DLE_EVTYPE_SLAUNCH, NULL, 0);
++}
++
++#endif  /* __EARLY_SLAUNCH__ */
++
+ void slaunch_find_log(const struct slr_table *slrt, paddr_t *evt_log,
+                       uint32_t *evt_log_size)
+ {
+@@ -34,3 +92,57 @@ void slaunch_find_log(const struct slr_table *slrt, paddr_t *evt_log,
+         *evt_log_size = 0;
+     }
  }
 +
-+void __init txt_restore_mtrrs(bool verbose)
++void slaunch_hash_extend(unsigned int loc, unsigned int pcr, const uint8_t *buf,
++                         unsigned int size, uint32_t type,
++                         const uint8_t *log_data, unsigned int log_data_size)
 +{
-+    const struct slr_entry_hdr *entry;
-+    const struct slr_entry_intel_info *intel_info;
-+    uint64_t mtrr_cap, mtrr_def, base, mask;
-+    unsigned int i;
-+    unsigned int vcnt;
-+    uint64_t def_type;
-+    struct mtrr_pausing_state pausing_state;
++    paddr_t evt_log_paddr;
++    uint32_t evt_log_size;
++    struct tpm_log_hashes log_hashes;
++    uint8_t discarded_digests[SHA2_256_DIGEST_SIZE];
++    uint32_t rc;
 +
-+    mtrr_cap = rdmsr(MSR_MTRRcap);
-+    mtrr_def = rdmsr(MSR_MTRRdefType);
++    slaunch_find_log(slaunch_get_slrt(), &evt_log_paddr, &evt_log_size);
 +
-+    vcnt = mtrr_cap & 0xFF;
-+
-+    if ( verbose )
++    if ( tpm_is_tpm1() )
 +    {
-+        printk("MTRRs set previously for SINIT ACM:\n");
-+        printk(" MTRR cap: %"PRIx64" type: %"PRIx64"\n", mtrr_cap, mtrr_def);
-+
-+        for ( i = 0; i < vcnt; i++ )
-+        {
-+            base = rdmsr(MSR_IA32_MTRR_PHYSBASE(i));
-+            mask = rdmsr(MSR_IA32_MTRR_PHYSMASK(i));
-+
-+            printk(" MTRR[%d]: base %"PRIx64" mask %"PRIx64"\n",
-+                   i, base, mask);
-+        }
++        log_hashes = (struct tpm_log_hashes) {
++            .count = 1,
++            .hashes = {
++                {
++                    .alg = TPM_ALG_SHA1,
++                    .size = SHA1_DIGEST_SIZE,
++                    .data = discarded_digests,
++                },
++            },
++        };
++    }
++    else
++    {
++        log_hashes = (struct tpm_log_hashes) {
++            .count = 2,
++            .hashes = {
++                {
++                    .alg = TPM_ALG_SHA1,
++                    .size = SHA1_DIGEST_SIZE,
++                    .data = discarded_digests,
++                },
++                {
++                    .alg = TPM_ALG_SHA256,
++                    .size = SHA2_256_DIGEST_SIZE,
++                    .data = discarded_digests,
++                },
++            },
++        };
 +    }
 +
-+    entry =
-+        slr_next_entry_by_tag(slaunch_get_slrt(), NULL, SLR_ENTRY_INTEL_INFO);
-+    intel_info = container_of(entry, const struct slr_entry_intel_info, hdr);
-+
-+    if ( vcnt != intel_info->saved_bsp_mtrrs.mtrr_vcnt )
++    rc = tpm_hash_extend(loc, pcr, buf, size, &log_hashes);
++    if (rc != 0)
 +    {
-+        printk("Bootloader saved %ld MTRR values, but there should be %d\n",
-+               intel_info->saved_bsp_mtrrs.mtrr_vcnt, vcnt);
-+        /* Choose the smaller one to be on the safe side. */
-+        if ( intel_info->saved_bsp_mtrrs.mtrr_vcnt < vcnt )
-+            vcnt = intel_info->saved_bsp_mtrrs.mtrr_vcnt;
++#ifndef __EARLY_SLAUNCH__
++        printk(XENLOG_ERR "Extending PCR-%u failed with an error: 0x%08x\n",
++               pcr, rc);
++#endif
 +    }
-+
-+    def_type = intel_info->saved_bsp_mtrrs.default_mem_type;
-+    mtrr_pause_caching(&pausing_state);
-+
-+    for ( i = 0; i < vcnt; i++ )
-+    {
-+        base = intel_info->saved_bsp_mtrrs.mtrr_pair[i].mtrr_physbase;
-+        mask = intel_info->saved_bsp_mtrrs.mtrr_pair[i].mtrr_physmask;
-+        wrmsr(MSR_IA32_MTRR_PHYSBASE(i), base);
-+        wrmsr(MSR_IA32_MTRR_PHYSMASK(i), mask);
-+    }
-+
-+    pausing_state.def_type = def_type;
-+    mtrr_resume_caching(pausing_state);
-+
-+    if ( verbose )
-+    {
-+        printk("Restored MTRRs:\n");
-+
-+        /*
-+         * If MTRRs are not enabled or WB is not the default, MTRRs won't be
-+         * printed.
-+         */
-+        if ( !test_bit(11, &def_type) || (def_type & 0x7) == X86_MT_WB )
-+        {
-+            for ( i = 0; i < vcnt; i++ )
-+            {
-+                base = rdmsr(MSR_IA32_MTRR_PHYSBASE(i));
-+                mask = rdmsr(MSR_IA32_MTRR_PHYSMASK(i));
-+                printk(" MTRR[%d]: base %"PRIx64" mask %"PRIx64"\n",
-+                       i, base, mask);
-+            }
-+        }
-+    }
-+
-+    /* Restore IA32_MISC_ENABLES */
-+    wrmsr(MSR_IA32_MISC_ENABLE, intel_info->saved_misc_enable_msr);
 +}
+diff --git a/xen/arch/x86/slaunch.c b/xen/arch/x86/slaunch.c
+index ba1ba61c47..83dce3d57d 100644
+--- a/xen/arch/x86/slaunch.c
++++ b/xen/arch/x86/slaunch.c
+@@ -18,6 +18,7 @@
+ #include <asm/setup.h>
+ #include <asm/slaunch.h>
+ #include <asm/slaunch-tpm.h>
++#include <asm/tpm.h>
+ 
+ /*
+  * These variables are assigned to by the code near Xen's entry point.
+@@ -78,6 +79,9 @@ void __init slaunch_map_mem_regions(void)
+     paddr_t evt_log_addr;
+     uint32_t evt_log_size;
+ 
++    rc = slaunch_map_l2(TPM_MMIO_BASE, TPM_MMIO_SIZE);
++    BUG_ON(rc != 0);
++
+     /* Vendor-specific part. */
+     txt_map_mem_regions();
+ 
 -- 
 2.55.0
 
