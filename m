@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01674C55184
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF05CC55182
 	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2026 05:07:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1381105.1624690 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1381103.1624682 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqktc-0003Ly-0E; Mon, 03 Aug 2026 05:07:28 +0000
+	id 1wqktY-00034s-NP; Mon, 03 Aug 2026 05:07:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1381105.1624690; Mon, 03 Aug 2026 05:07:27 +0000
+Received: by outflank-mailman (output) from mailman id 1381103.1624682; Mon, 03 Aug 2026 05:07:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqktb-0003Lr-TR; Mon, 03 Aug 2026 05:07:27 +0000
-Received: by outflank-mailman (input) for mailman id 1381105;
- Mon, 03 Aug 2026 05:07:26 +0000
+	id 1wqktY-00034h-Jp; Mon, 03 Aug 2026 05:07:24 +0000
+Received: by outflank-mailman (input) for mailman id 1381103;
+ Mon, 03 Aug 2026 05:07:23 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <frn1furkan10@gmail.com>) id 1wqkta-0003Jz-Rr
- for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 05:07:26 +0000
+ (envelope-from <frn1furkan10@gmail.com>) id 1wqktX-00032f-Bx
+ for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 05:07:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wqkta-006WBT-8p
- for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 07:07:26 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wqktW-006W8q-P2
+ for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 07:07:22 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <frn1furkan10@gmail.com>)
- id 6a702204-e002-0a2a0a5209dd-0a2a4509bd80-24
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 07:07:26 +0200
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a7021f1-2eae-0a2a0a5409dd-0a2a450aec7a-34
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 07:07:22 +0200
+Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <frn1furkan10@gmail.com>)
- id 6a70220e-be1a-0a2a45090019-d1558035bc4b-3
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 07:07:26 +0200
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-4921eed3fa2so8338955e9.0
- for <xen-devel@lists.xenproject.org>; Sun, 02 Aug 2026 22:07:26 -0700 (PDT)
+ id 6a702209-f2d2-0a2a450a0019-d1558034b5d3-3
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 07:07:21 +0200
+Received: by mail-wm1-f52.google.com with SMTP id
+ 5b1f17b1804b1-49557167508so14758105e9.1
+ for <xen-devel@lists.xenproject.org>; Sun, 02 Aug 2026 22:07:21 -0700 (PDT)
 Received: from notebook.. ([78.173.117.153]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49807b917efsm310345185e9.11.2026.08.02.22.07.23
+ 5b1f17b1804b1-49807b917efsm310345185e9.11.2026.08.02.22.07.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 02 Aug 2026 22:07:25 -0700 (PDT)
+ Sun, 02 Aug 2026 22:07:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,40 +54,40 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785733646; x=1786338446; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1785733641; x=1786338441; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=21wuOD8HUjAVDqLCXgTFbv9BZRqUOWoQ8lloGzNNeyI=;
-        b=W23IIMugZihv/E9MpUAS+BTshG2DONDxQU8e4HBIv7F9awZTjnUrciiIjKI3ytTOnN
-         S0SjitHls5jaJ3iGwOoptFw48jeG+IFzMTJ3fNS4utYyMK301Qsdm2L+rTbuPkdpg2He
-         6mGb6YUZyMQb2vGgetwGTWEY5TK2CD8ql7twP7st9E1DhwQpQlKliJc8v3Dib8W/UXZy
-         tYxstGgejFRbfeMVT7tdP24aTyxh8YC07bohejlLN34exn+XLfl5pRuumumHokirBeTS
-         sOYUeRjQ+nSj+w+R0q2kw7CYY5z9grp1KPBFjl1Z1ivcHNvRx8eMjoJr1ftZY5nB3gB3
-         40mg==
+        bh=CM+qUXy25CRFKkF1HaPx8PYdTauLZnNcJY3C0JI+/Dc=;
+        b=TCB+1OEl9u/sNipcbKczY61o/1VCQ2cKvMu9vCsZxuZYjSCIC+lbD8uxSbSpA9hMkf
+         C7RQvNNHKu1AeZr7jHTyvZ0GTYURSf5ewWYa40W3s/rvl0zZHrmfpRUpMcfk3T6qIJxS
+         UzX283JLA7W1WpQ5ZGqvrKiFpJJlANnjnM/5bWXahjGJQpFHelDaDU+10i3Q0KtwFmeD
+         XCDCORthkgSwR+UJZGrqJiuhFDGqYr6WCTeMIXZx5xkqbMYfcnIU13FQStaHIIo98LLG
+         YvKwaXeNDJbk+yqv5oKVsQl1MQaA8WCQukDhTDGSgeqQ48uYdsOGE4ZfD2Tgel6ch8Jb
+         pmxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785733646; x=1786338446;
+        d=1e100.net; s=20251104; t=1785733641; x=1786338441;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=21wuOD8HUjAVDqLCXgTFbv9BZRqUOWoQ8lloGzNNeyI=;
-        b=H6oHgdCZgrsk4H6axV3roDcSR8/qykmtAYGjLFZJCVaTntmtSdewUWGR1Sfc0rvV2a
-         8TNiVMkm1ls9e20kAZ8+emvtuQjD2nlc/26XS9kHkqxMryVOKtDnHgP+gmVCAync6Hg7
-         2tcUEz2hbpg5rvCuiSX/fITi+iYsHvhhDW6RHZlk8AF9iWvwhoXghntsuj2FLqTdNfrc
-         XlxTJfSxxRO+5co28p4lsdsizPYq2V1Bals+b67D3kl4dtMgo4hYJA+CvfBAtQzsoxIi
-         uHlVAu7krYkeKjmf69ZXBVQIhmcWqnnQ10kAvHFiRO4AyQAlQtNbnxAohgONlktxDgql
-         ns+Q==
-X-Gm-Message-State: AOJu0YysNBoDhQ6/kWHS+H9elxYcqZs47xGn4j3EJkCn1uODDuo4+5Wk
-	3hWyPN3BpunpOA1T4y40QXkDAI7gG7wTWIh2k6C+zVDW7fYrs+zDQnX4WCl0fw==
-X-Gm-Gg: AR+sD13NVLoLS3Axl+d/RuimuCzfkWglb0hAOt/C604Hr9ndJUgY8Tuk0Vr4Lv4KROJ
-	mjqsnV7OrewQxl3O+wofqVpjIn+NcIiVUVsfwWzHtJa/+Rjk41ntLvPrFFt4oybv9nuooi8LyTA
-	V08aIKfwbRnT5hsdbPboAKyOl70PusSAmOSQ5LjAlO2RXnSmgdvGVYy3j0yuqjcj2RtuzX0o/9A
-	WjuPdNZyRLzHmukNf+mGjpagRRLrvBk3ybJ/FtxmHWjdV+NdDF9xm+6+tfIMdFLVaLCbWFSFpOw
-	Cre4nIF/FECs/gDUsT1Y/8IE60Ne6+mwmUTvnlugFZUPyr0kgx0RjgoWADEvko4bOpKh37TAmp9
-	osE9ITBLFAp6rdaEMIbVd1KiuDUeTLeuXiJl2at4yrSVSxYSt57Xtlx2uXAVBJF4M7bIu2R3TOH
-	7M9xgBLtauuGnMZxlnTqRDhDdTfLDVRd4JxvUl3jpI/Vfbbh6JIK4HZLN9pew6+w==
-X-Received: by 2002:a05:600d:8498:20b0:497:fecd:5b00 with SMTP id 5b1f17b1804b1-4980c673230mr145973255e9.9.1785733645587;
-        Sun, 02 Aug 2026 22:07:25 -0700 (PDT)
+        bh=CM+qUXy25CRFKkF1HaPx8PYdTauLZnNcJY3C0JI+/Dc=;
+        b=Fi5ahYbfUudRk+xY9zKdsQ0TGMN478GrmrMx6lq/NEkpj79j07uuU0Hx7Uy/ne+1DL
+         YH8CKQnaGUwR1P6HUQteaotZn5pP7uhnvkxDSSMfcUA/MjYhQQnEXBzEHHUwA1drh5Fe
+         4eZu6HG+lcnjVA7vUFZzlOyInGhKs75rFMdoCfsy/lCR1Wtcze9sWgHGEIPhgUm7TxMW
+         Hh7neA1W2sECaUVKct+SqDNW3sWBRzgYiII3FgNjP4gloKKdZcQxMB6zEP6uya2UUHeS
+         1WdwePmLn9sLwo5URu9didSk6H6msYxZ2HtK2/hGvraFZMRVJOoo6QKBlWm09+B7NTIp
+         fXeQ==
+X-Gm-Message-State: AOJu0YwYSU7n/hbCFNjkpvnZDMsooeCFb8MlOj5O+1HQUOBjeo3ZY5tU
+	gfNGqZyo8J8NBJOXPGS5rc4EdoUX+NzktkvZiRUtyM8P/t2AQoECaX33pmuz3w==
+X-Gm-Gg: AR+sD10wWtpzyABgA4Jnl+/5ppJRow5vpdjy958Co3o8wtwM6j0Y6xILBUX+nlN3c7u
+	sLMxRWd4GW9mgjrR+cLFajVryYHbu2yTuMoNYcjEdT98XAJxEg1gaW+/QODyAswv8D/KAxG9sO/
+	FaasbhF568aBSc/xZnkPykGkJAXhKBalS2G+YCD2qSXDLNdOl/S9CsfgjOl5s7tLRKZt8Q5ZZni
+	M/XdGKgKeTAInx0lMjWXo2Cu6USCUfKxd0yq7Z83oIPzLHlZkwHdHPBV5K4qofDPrHgduTlCsKe
+	uOemx92QnEe1v6hDL1CoWZxSK3o66xnqzDc/031W7CjRn3EgoZoW2lnOCyMvGNiVVV6HyQMLzjp
+	mKUv2HpaBR0kyc7Rx0aWOnDtkdDFCqcrAJJWASRKCoHdirdv+KAwQG2c6PT6d197MKtFe6vTYB6
+	Nvs+i4JyHCYsANXWexr92N0TsrW1dgYPgPb+xiKeNGbFVuVRyypVkZ4NYqLSqI0mA=
+X-Received: by 2002:a05:600c:354a:b0:490:b8c0:d470 with SMTP id 5b1f17b1804b1-4980c67d71emr173613755e9.19.1785733640879;
+        Sun, 02 Aug 2026 22:07:20 -0700 (PDT)
 From: Furkan Caliskan <frn1furkan10@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com,
@@ -110,54 +110,54 @@ Cc: andrew.cooper3@citrix.com,
 	connojdavis@gmail.com,
 	oleksii.kurochko@gmail.com,
 	Furkan Caliskan <frn1furkan10@gmail.com>
-Subject: [PATCH 4/7] xen/sched: rtds: migrate to new sched_ops
-Date: Mon,  3 Aug 2026 08:06:11 +0300
-Message-Id: <20260803050614.5222-5-frn1furkan10@gmail.com>
+Subject: [PATCH 3/7] xen/sched: credit2: migrate to new sched_ops
+Date: Mon,  3 Aug 2026 08:06:10 +0300
+Message-Id: <20260803050614.5222-4-frn1furkan10@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260803050614.5222-1-frn1furkan10@gmail.com>
 References: <20260803050614.5222-1-frn1furkan10@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1785733646-FDC6D034-B5E3BD18/0/0
+X-purgate-ID: tlsNG-4011c0/1785733641-518C5CFC-88A0B142/0/0
 X-purgate-type: clean
-X-purgate-size: 1259
+X-purgate-size: 1270
 
-Declare sched_rtds_def as a struct sched_ops instead of a struct
+Declare sched_credit2_def as a struct sched_ops instead of a struct
 scheduler, dropping the .sched_data field, and register it with
 REGISTER_SCHED_OPS() so it is found through sched_ops_array[]
 instead of schedulers[].
 
-This moves the rtds scheduler onto the new sched_ops
+This moves the credit2 scheduler onto the new sched_ops
 registration path.
 
 Signed-off-by: Furkan Caliskan <frn1furkan10@gmail.com>
 ---
- xen/common/sched/rt.c | 5 ++---
+ xen/common/sched/credit2.c | 5 ++---
  1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/xen/common/sched/rt.c b/xen/common/sched/rt.c
-index 744f214173..8b4f05e2d1 100644
---- a/xen/common/sched/rt.c
-+++ b/xen/common/sched/rt.c
-@@ -1617,11 +1617,10 @@ static void cf_check repl_timer_handler(void *data)
-     spin_unlock_irq(&prv->lock);
+diff --git a/xen/common/sched/credit2.c b/xen/common/sched/credit2.c
+index 95946634d1..9bcc90004a 100644
+--- a/xen/common/sched/credit2.c
++++ b/xen/common/sched/credit2.c
+@@ -4230,11 +4230,10 @@ csched2_deinit(struct scheduler *ops)
+     xfree(prv);
  }
  
--static const struct scheduler sched_rtds_def = {
-+static const struct sched_ops sched_rtds_def = {
-     .name           = "SMP RTDS Scheduler",
-     .opt_name       = "rtds",
-     .sched_id       = XEN_SCHEDULER_RTDS,
+-static const struct scheduler sched_credit2_def = {
++static const struct sched_ops sched_credit2_def = {
+     .name           = "SMP Credit Scheduler rev2",
+     .opt_name       = "credit2",
+     .sched_id       = XEN_SCHEDULER_CREDIT2,
 -    .sched_data     = NULL,
  
-     .dump_cpu_state = rt_dump_pcpu,
-     .dump_settings  = rt_dump,
-@@ -1646,4 +1645,4 @@ static const struct scheduler sched_rtds_def = {
-     .move_timers    = rt_move_timers,
+     .global_init    = csched2_global_init,
+ 
+@@ -4269,4 +4268,4 @@ static const struct scheduler sched_credit2_def = {
+     .free_domdata   = csched2_free_domdata,
  };
  
--REGISTER_SCHEDULER(sched_rtds_def);
-+REGISTER_SCHED_OPS(sched_rtds_def);
+-REGISTER_SCHEDULER(sched_credit2_def);
++REGISTER_SCHED_OPS(sched_credit2_def);
 -- 
 2.34.1
 
