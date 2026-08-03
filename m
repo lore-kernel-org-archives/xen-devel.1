@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BDA6C55184
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2026 10:37:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1381363.1624953 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6B87C55184
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2026 10:41:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1381373.1624960 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqq2k-0002MZ-QM; Mon, 03 Aug 2026 10:37:14 +0000
+	id 1wqq6c-0004f4-CZ; Mon, 03 Aug 2026 10:41:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1381363.1624953; Mon, 03 Aug 2026 10:37:14 +0000
+Received: by outflank-mailman (output) from mailman id 1381373.1624960; Mon, 03 Aug 2026 10:41:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqq2k-0002MS-Mp; Mon, 03 Aug 2026 10:37:14 +0000
-Received: by outflank-mailman (input) for mailman id 1381363;
- Mon, 03 Aug 2026 10:37:14 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wqq6c-0004ex-9Y; Mon, 03 Aug 2026 10:41:14 +0000
+Received: by outflank-mailman (input) for mailman id 1381373;
+ Mon, 03 Aug 2026 10:41:13 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wqq2k-0002MH-07
- for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 10:37:14 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wqq6b-0004er-6Z
+ for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 10:41:13 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wqq2i-004fKp-Hp
- for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 12:37:12 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wqq6a-004uuD-JD
+ for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 12:41:12 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a706f4f-e002-0a2a0a5209dd-0a2a4507ca84-28
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 12:37:12 +0200
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a70703b-5cb7-0a2a0a5109dd-0a2a450885bc-28
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 12:41:08 +0200
+Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a706f58-b4ea-0a2a45070019-d1558034ccd5-3
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 12:37:12 +0200
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-4955aa106b1so17849745e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 03:37:12 -0700 (PDT)
+ id 6a707044-f659-0a2a45080019-d155dd33a93f-3
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 12:41:08 +0200
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-4720f3bf164so2502575f8f.1
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 03:41:08 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47fd456a6besm30189824f8f.22.2026.08.03.03.37.10
+ ffacd0b85a97d-47fd41e2cf1sm31636029f8f.10.2026.08.03.03.41.05
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 Aug 2026 03:37:11 -0700 (PDT)
+ Mon, 03 Aug 2026 03:41:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,50 +55,50 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785753432; x=1786358232; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785753668; x=1786358468; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=W1YOnSiXDFhTOBMMsgIEia7N6LZYw+jLgptOHs4zxWg=;
-        b=SLbETNjhWzYILVPBwHWG9/LWpor6ZsSC+L3Ij5OuOnMstXU9AbD2yJ9S4Xv7Da2bbT
-         3Ba7cX8McoVO/106neU8za4wQZpgtHn2RhBLetPp+zmTutlKJQZyP+P4Mw+azdldW2vi
-         q9ISdK58wP3Ov7kBQ4g0iaha73BD3zsjj5qU8xJphQRNOWLf9cDK42TnHm8Zt4Lhm5ab
-         Ky9h2+lagY3nQLia2L1E2FHNHdfIFjksV81NTsZgriri1wODHAR4hYHYHutrDtJAbKMl
-         lDy6dfBK3KJWPepPhFXsIIXVdR6rPsdWB4ja2oxdmdz/8nZX3oZ7yuMXzCYAyh0vmyt3
-         Xz+A==
+        bh=IawgCP+jZFb3uk7JaxA8OP7ijbXNyIydlK45oaJI28w=;
+        b=STED+EnLx9pXeJULZgrne/eA/TX8R8pIn5YHWvk9navYUEXXSaNKjlpEd+77MeXKZV
+         ZFjfKhxpiyCO5wwMPkMZO7M8vElV9o0uXE6IHEIuUpkwPPJ0+4mDftcUD9pKqech4NNp
+         TTfV1/xEL3hMSF8f0ncKZq1bxq50zRhjmv2cWNaNK0D5aRcFPDpnoLBbYvVPy68DRks3
+         /jKJOyt1MpGSee22NY0dnb/6dwG7R/mu6C1xicaBHzNFni6gbaykiWvEX/qLw4DGEBcO
+         4Kpmmwn8qvo1cF1zlbChWBqi14VPivgNeXe0IcQ1tlEBNMKYAE8hQCtlOnlJmoC8G77C
+         Cc0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785753432; x=1786358232;
+        d=1e100.net; s=20251104; t=1785753668; x=1786358468;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=W1YOnSiXDFhTOBMMsgIEia7N6LZYw+jLgptOHs4zxWg=;
-        b=Y6+qaMlarSGQ5OIkQzAz3r+qhhus5Nn6QacZ4sbxgkf4wcznlk0DfdsOcjN60zN/Wj
-         B2JInbWW8nuDX7Wd+hhK85rNbbCBUMM/GBZxg7PWny6N8g4zoHgmN5HXxSIOSHMWd3i2
-         RhEGs/3XBYGTAL2vBGeYTXEhLFeowPSa2hZfszsWSF5scYEsTN6wRa5MPeCr18Xx0Th0
-         3rXhVXFmcjqqRRdm0j5k2s5K/FWkw4OYckkpGsekxv4JC5+6nHHRUITIpYaeXglSk2EQ
-         pGTUBOjygxkej5sqEjQw5p1iw/llx2eM2A8vEInVUsrg9pyRJ7s4nYCnOGhENTQjvKvh
-         ODwQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrtJYP9kuDP+tg8mYKQhgC6X6/IF9lcZLpfO+nrRkt1dAJdJsx+QmZNokZ3RROXWefLEaTX1K0Eja8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yz7cbB3wzL4M+MVl/oWBQJJ0R5ppfr6wi0SYPSG1dANnPFlhT3j
-	f7dODg13Mxf/1bnAkz8oY7+7E5A/Tvh1fecMyuwwjVymNVYp3JVf/4OdtzNJCegdrA==
-X-Gm-Gg: AR+sD13dvl2i3fKIxyiDUo7thAupV5mdVfn8bRs875jEdf0LNakXRN5T5IE02ijJC9R
-	lNzRdzi+TlOkBHLaTzk/EC9zENRrSjf7XMPwqwgL/CR6yv2OdwnPB6qbFWNACSxE6++DDhAOYQd
-	/O7g3WibB4bdl4+y8hV+WkX+ipgGn5SEgCsEDsSG9rzDfeYdTRfJPbAD/FoJmGe1otonUQpH/4c
-	1jsEXKFmWwJ4+v8XmQfa18J1oyd+L68xbz80979pzOlEVt2OkUsJIYI0gqd7rz+NCgepIYEWpR6
-	OEovdaLZp2pwslmCD1WCBuxOKtQaJyKWRCdQmu9lmKc6Z6fO6plsRPWDwFLLguheOyxGKm+BsMX
-	MZxpIGLRaO6qgShQAwp6VrmpeoLxxcndd8xMcsEyZ1W0GsXPkwGyjLUhSIPwuO9kzgrynZT6acd
-	oti57ypbrwPrPh4wT+pgA6yzYcfsIct14Evm5c90zE+yqVO3/Bsnek/p0fQCnxUgu1bwKm/1hOl
-	Ija2LB8/K5ZozRyI48dN1/QDR6yIFcRkIVgcP0+CuogqIYcJgSF
-X-Received: by 2002:a05:600c:2294:b0:492:4e09:9fc1 with SMTP id 5b1f17b1804b1-4980c67af97mr170252525e9.15.1785753431921;
-        Mon, 03 Aug 2026 03:37:11 -0700 (PDT)
-Message-ID: <3b1e19f9-ed72-4898-aa1a-f9f43c1700a0@suse.com>
-Date: Mon, 3 Aug 2026 12:37:10 +0200
+        bh=IawgCP+jZFb3uk7JaxA8OP7ijbXNyIydlK45oaJI28w=;
+        b=DsnKHt0/fRC5P+gpTIyAceYkxwv4XeHwP99aceA/Ix6+yYmCc6t26mZHEYLR9tWmzH
+         1MYVFR7x7LAdLkNbYFQLYeK1qSoaPQDSHpZFwRvYtSN3UKvmO4ZxVXBNX+JIdGfQxEb6
+         b/PmlGoRCwl8nMx/KzAdv2Bn/Ixr4f6d71OpciHpDejYiwD7UM6uAZkvquB5xaXt3R6U
+         LHhFfleyPRAb1nGkjbn4s8h3RbJr2L3LToguhTKC4aCCtdOFp8eFDpNjJINvKSFhhOAM
+         HcZE3M3Qpb314M0BZnQYuTEUncpjWA75qjfk+CdWpSSDmH4wU5ba9Bej4vLwgsT3QbmV
+         nhMw==
+X-Forwarded-Encrypted: i=1; AHgh+RqEB+Ykttz3QTAhFRcVEGJQBu454CeNlE+ls1Huhv/XOwrc8/2UEd30LxuHW0T/ZxuRCGp99EEH3Og=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yzfw1u38NhetE1znUqNwgG9ONhKlG8R057YnVPmh4Qm3DLZLQEk
+	LahmILfzWDVQDqrLaCWzTI7PD3u4RpE8YRak0dasB+aCdhnIZ9nfQv0/7sJb18OpnA==
+X-Gm-Gg: AR+sD12oJYUH2A7sgtvG8lfSuTh1i7JYgbgD/OLGGiPGu1pwRqiytlouu8ikWTwVPP3
+	yY0uamUvy/4I9NYXXE141iOXgJxPzyQ85ObFOP+E49xqFcuRqxJqUC1T3MoKdmQ9xjpwzWSbh8Z
+	mkGPlap9Ku/nHk6kr+NEHJAXfek9od/zJDvuD8AiY/WmIrsVBCriHlyTKaUcMy7Ts37HkSVY+xA
+	ziow4IBDYztJB78lnJdhhrvwmvMCCghM1hpupm9r2s0Ntj9gASvC25F+RFF4AsNiFopXT9ZlgtV
+	67JUtNsQLB8KvhTAHVkkrMWDZFtwTrFuigYpVi2llCXaN5Jw57cqObVD+Pwyc+OFIWjuxe9PVxk
+	6msopjkE+oXOzDTlxOPDfJxfeBchyskaXTCUgBm1DMCb/xMTInPJvRjzWePzI2RcnRU7WjSiy0A
+	GQkQBE1LWOKz3lJ7gXyziuxDsXpJwhMZ6h2xP96+qGzezOA4IH2ZslXLDpjj16bg/p0Sbo7YAgU
+	FvnB8VClRH+73aa0wVhAPxxyflNQO1xRdAtrADlpx5AZbHvOqoP
+X-Received: by 2002:a05:6000:18a6:b0:47f:7fe0:a287 with SMTP id ffacd0b85a97d-47fd725b307mr23032494f8f.2.1785753667898;
+        Mon, 03 Aug 2026 03:41:07 -0700 (PDT)
+Message-ID: <51e537a4-f568-458d-9625-ada7fbebd842@suse.com>
+Date: Mon, 3 Aug 2026 12:41:04 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 02/17] xen/riscv: add basic VGEIN management for AIA
- guests
+Subject: Re: [PATCH v1 04/17] xen/riscv: introduce device-agnostic MMIO
+ emulation dispatch
 To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  Baptiste Le Duc <baptiste.le-duc@vates.tech>,
@@ -110,13 +110,11 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
- <b141b8d976719bb9b76147cacfd5842fb7aac74e.1784560663.git.oleksii.kurochko@gmail.com>
- <6501f040-ea59-4e78-8854-030f786dbcf7@suse.com>
- <191a9ddc-9f37-4d26-9141-7dfaf88cb26c@gmail.com>
- <489a1b05-4ae5-44ac-a73b-485669190b59@suse.com>
- <aca9e72d-ff6d-49e0-b128-6675c5521493@gmail.com>
- <79ea95df-29bf-4c9e-8097-2c2b991f27bf@suse.com>
- <39aa93bb-edb8-4f05-8b62-c2677d12fb0b@gmail.com>
+ <c12b69710d7b79bfc0c110f3fa043d871d8b8394.1784560663.git.oleksii.kurochko@gmail.com>
+ <704870c1-18ec-4c7b-873c-e07e77ae0d39@suse.com>
+ <d5867843-802d-493f-a535-1f40d9337b63@gmail.com>
+ <2ef6b295-862b-40be-a7d2-c94a6378126b@suse.com>
+ <636a6183-8c66-41b2-b820-6a02098fd33d@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -142,90 +140,95 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <39aa93bb-edb8-4f05-8b62-c2677d12fb0b@gmail.com>
+In-Reply-To: <636a6183-8c66-41b2-b820-6a02098fd33d@gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ef75cf/1785753432-A68D9AE4-5E3DCEC8/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c1860d/1785753668-D6D4087B-0EB09F8A/0/0
 X-purgate-type: clean
-X-purgate-size: 3987
+X-purgate-size: 3188
 
-On 31.07.2026 16:59, Oleksii Kurochko wrote:
-> 
-> 
-> On 7/30/26 6:03 PM, Jan Beulich wrote:
->> On 30.07.2026 17:46, Oleksii Kurochko wrote:
->>> On 7/30/26 9:42 AM, Jan Beulich wrote:
->>>> On 29.07.2026 16:55, Oleksii Kurochko wrote:
->>>>> On 7/27/26 5:41 PM, Jan Beulich wrote:
->>>>>> On 20.07.2026 18:02, Oleksii Kurochko wrote:
->>>>>>> It was decided to add support for IMSIC from the start instead of having APLIC
->>>>>>> operate in direct delivery mode, as it requires a trap-and-emulation approach,
->>>>>>> which is not optimal from a performance standpoint.
->>>>>>>
->>>>>>> AIA provides a hardware-accelerated mechanism for delivering external
->>>>>>> interrupts to domains via "guest interrupt files" located in IMSIC.
->>>>>>> A single physical hart can implement multiple such files (up to GEILEN),
->>>>>>> allowing several virtual harts to receive interrupts directly from hardware.
->>>>>>>
->>>>>>> Introduce per-CPU tracking of guest interrupt file identifiers (VGEIN)
->>>>>>> for systems implementing AIA specification. Each CPU maintains
->>>>>>> a bitmap describing which guest interrupt files are currently in use.
->>>>>>>
->>>>>>> Add helpers to initialize the bitmap based on the number of available
->>>>>>> guest interrupt files (GEILEN), assign a VGEIN to a vCPU, and release it
->>>>>>> when no longer needed. When assigning a VGEIN, the corresponding value
->>>>>>> is written to the VGEIN field of the guest hstatus register so that
->>>>>>> VS-level external interrupts are delivered from the selected interrupt
->>>>>>> file.
->>>>>>
->>>>>> And when exactly is this "assignment" intended to occur? vgein_assign() and
->>>>>> vgein_release() have no callers here, so this remains entirely unclear.
->>>>>
->>>>> [A] Agreed, I should have added that information to the commit message:
->>>>>
->>>>> VGEIN is assigned (via vgein_assign()) before jumping to the new vCPU
->>>>> execution context (in continue_new_vcpu()) and is re-assigned during
->>>>> vCPU migration from one pCPU to another.
->>>>>
->>>>> VGEIN is released (via vgein_release()) on the old pCPU during migration.
+On 31.07.2026 17:24, Oleksii Kurochko wrote:
+> On 7/30/26 6:09 PM, Jan Beulich wrote:
+>> On 30.07.2026 18:03, Oleksii Kurochko wrote:
+>>> On 7/28/26 2:23 PM, Jan Beulich wrote:
+>>>> On 20.07.2026 18:02, Oleksii Kurochko wrote:
+>>>>> --- /dev/null
+>>>>> +++ b/xen/arch/riscv/mmio.c
+>>>>> @@ -0,0 +1,145 @@
+>>>>> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+>>>>> +/*
+>>>>> + * Copyright (C) Vates
+>>>>> + */
+>>>>> +
+>>>>> +#include <xen/bsearch.h>
+>>>>> +#include <xen/lib.h>
+>>>>> +#include <xen/rwlock.h>
+>>>>> +#include <xen/sched.h>
+>>>>> +#include <xen/sort.h>
+>>>>> +#include <xen/xvmalloc.h>
+>>>>> +
+>>>>> +#include <asm/current.h>
+>>>>> +#include <asm/mmio.h>
+>>>>> +
+>>>>> +static enum io_state handle_read(const struct mmio_handler *handler,
+>>>>> +                                 struct vcpu *v,
+>>>>> +                                 mmio_info_t *info)
+>>>>> +{
+>>>>> +    register_t r = 0;
+>>>>> +    enum io_state rc;
+>>>>> +
+>>>>> +    rc = handler->ops->read(v, info, &r);
+>>>>> +    if ( rc == IO_HANDLED )
+>>>>> +        info->data = r;
 >>>>
->>>> That is, state of that vCPU is held in hardware for perhaps an extended
->>>> period of time after the vCPU was last de-scheduled. That's a fair
->>>> optimization (we do something similar on x86, albeit that has been
->>>> increasingly under question lately). However, doesn't this then require
->>>> sync_local_execstate() to become non-empty?
+>>>> Extending my earlier comment: Why could ->read() not put the value directly
+>>>> into info->data? And why ...
+>>>>
+>>>>> +static enum io_state handle_write(const struct mmio_handler *handler,
+>>>>> +                                  struct vcpu *v,
+>>>>> +                                  mmio_info_t *info)
+>>>>> +{
+>>>>> +    return handler->ops->write(v, info, info->data);
+>>>>
+>>>> ... can't write take the value directly from info->data?
 >>>
->>> IIUC, sync_local_execstate() is needed for the lazy context switch case
->>> when switching from vCPUA to the idle vCPU.
+>>> I totally agree, it can. Do you think it is better to keep ->data and
+>>> drop an argument 'r' or vice versa?
 >>
->> Or when full state is to be obtained for a vCPU, for example.
+>> How can I know? You know future plans you have.
+>>
+>>>>> +}
+>>>>> +
+>>>>> +/* Assumes mmio regions are not overlapping. */
+>>>>
+>>>> Are you guaranteeing this anywhere?
+>>>
+>>> There is no such guarantee. register_mmio_handler() simply adds the
+>>> handler to the handlers array without performing any checks. I can add
+>>> such a check. The only question is whether it should be enabled only in
+>>> debug builds or in all builds.
+>>
+>> Depends on what other badness can happen when this is violated. My gut
+>> feeling is that checking in debug builds may be enough.
 > 
-> I assume you're referring to XEN_DOMCTL_getvcpucontext, right?
+> Overlapping regions would be a Xen bug rather than something a guest can 
+> trigger — register_mmio_handler() is only called from Xen's own emulated 
+> device code, so the layout isn't under guest control.
+> 
+> The badness is worse than just mis-emulating one device though: 
+> cmp_mmio_handler() is used both by bsearch() and by sort(). With 
+> overlapping regions it's no longer a consistent ordering, so sort() may 
+> produce an arbitrary order and lookups can then fail (or match the wrong 
+> handler) even for regions which don't overlap themselves. That would 
+> show up as a spurious fault injected into the guest, which is quite hard 
+> to debug.
 
-Yes.
+Didn't you say you'd get rid of the use of sort()?
 
-> In general, it seems that sync_local_execstate() is primarily an 
-> optimization. If lazy switching isn't supported, then every time a vCPU 
-> is de-scheduled, its state must be fully saved to memory. My 
-> understanding is that everything will still work correctly, just less 
-> efficiently.
+> So I agree a check is worthwhile; I'll add one under CONFIG_DEBUG in 
+> register_mmio_handler().
 
-The lazy switching is an optimization, yes. If any state is kept in
-hardware, sync_local_execstate() has to be used when full state of a
-vCPU is to be obtained. Supplying back stale state of "guest interrupt
-files" can't be correct. (Of course you can also arrange to obtain
-up-to-date state by custom means, but imo that's likely less desirable.)
-
-> I'm curious how much this optimization actually helps. How often does it 
-> happen that a vCPU is de-scheduled from a pCPU and then immediately 
-> scheduled back onto the same pCPU without any other vCPU being scheduled 
-> in between?
-
-That heavily depends on overall load of the system. When pCPU-s aren't
-over-subscribed, a HVM vCPU getting de-scheduled to wait for qemu to
-handle a certain operation may very well be able to resume on the same
-pCPU after completion of the ioreq. The less overhead there, the better.
-(Just to give an example.)
+Some assertion then hopefully, rather than an open-coded use of CONFIG_DEBUG.
 
 Jan
 
