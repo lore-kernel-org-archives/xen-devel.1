@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46E9DC55184
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2026 12:18:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1381420.1625000 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9569DC55179
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2026 12:35:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1381444.1625022 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqrc5-0007AZ-L2; Mon, 03 Aug 2026 12:17:49 +0000
+	id 1wqrsi-0003Oj-AD; Mon, 03 Aug 2026 12:35:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1381420.1625000; Mon, 03 Aug 2026 12:17:49 +0000
+Received: by outflank-mailman (output) from mailman id 1381444.1625022; Mon, 03 Aug 2026 12:35:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqrc5-00079X-GY; Mon, 03 Aug 2026 12:17:49 +0000
-Received: by outflank-mailman (input) for mailman id 1381420;
- Mon, 03 Aug 2026 12:17:48 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wqrsi-0003Oc-7B; Mon, 03 Aug 2026 12:35:00 +0000
+Received: by outflank-mailman (input) for mailman id 1381444;
+ Mon, 03 Aug 2026 12:34:59 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper3@citrix.com>) id 1wqrc4-00077T-4Z
- for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 12:17:48 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wqrsh-0003NR-9R
+ for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 12:34:59 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wqrc3-007wIE-3l
- for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 14:17:47 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wqrsg-005IeJ-M2
+ for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 14:34:58 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a7086e5-e002-0a2a0a5209dd-0a2a45059236-20
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 14:17:47 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a7086ea-4cb1-0a2a45050019-d155802ca8e8-3
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 14:17:47 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-4980fe6b3beso9420535e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 05:17:47 -0700 (PDT)
-Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
- [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4980878dbaesm385075295e9.12.2026.08.03.05.17.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Aug 2026 05:17:45 -0700 (PDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a708aef-2eae-0a2a0a5409dd-0a2a450cc58e-22
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 14:34:58 +0200
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a708af2-f479-0a2a450c0019-d155802fe025-3
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 14:34:58 +0200
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-4956242332dso18003175e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 05:34:58 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49808690ffbsm256801355e9.10.2026.08.03.05.34.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 03 Aug 2026 05:34:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,158 +53,124 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1785759466; x=1786364266; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=set/tVnmTwyRXbbS2/hm5WA+Lv6/Z4na9/ek1L2Zqls=;
-        b=cH/Iy6UsSU6DHVKYmaFEcS/x2i5uL7oEnjKgilZ36XcHrzdGQNn6JXdrGAYSL8Zfra
-         2X/xzUiwLWy3dacdLCoBfhZZuZvfgU2xz5XRaLINNqB82QkTmOw4ZDwI3AHjNwNT51ns
-         +8GuAXCKwoF1EeQ2Ed3SVdz/QWrirsaY8RMTw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785759466; x=1786364266;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=suse.com; s=google; t=1785760498; x=1786365298; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=set/tVnmTwyRXbbS2/hm5WA+Lv6/Z4na9/ek1L2Zqls=;
-        b=CkIKgvgU69wmdzcqfOU0ITV//v6z4rdurkyW4+jzrFRz+2TGv3HTpeB1jsRaz32KAF
-         lDthXnEL0cJ3jdc+MntOjMOp0oYVYBUGZjcU6MyZeJRlOrhmykUuI7TBe1j3/QhtepYR
-         80MTZCwzhUER58cIb0LoftfZ88Vl2shkbWzJr6F471X6k7dfNqwLqKflhG87qf1bWd7w
-         /ImoeVkX0jCsQH3wjZnAwpIDRyaKfYK7FrA/xKWRa/aPBX/oelDDx20+XQKM0GjuJldi
-         4Y/y0CfTb5EcjMf60MYSNl2PyNOH7FNKeW5ZBWoWrVjxSJZIGvC8IC4Ys8y2jyndbTGi
-         COqw==
-X-Gm-Message-State: AOJu0Yyy40q3dtH51z8lOshCm+xBfLz/D2q/KRcE6+Lu8Yq8r/b1mGQT
-	uiqoZNgwXgCBW8R87bcVTmRKh7C+bGQ4G/tMlsXV8mt9KqUdTh4PoQawSBgseqRUOD01cJu6Fc1
-	P3VWL
-X-Gm-Gg: AR+sD11Ienn+VMFqdTwDkUhqKpSgwJoZ1vMBIi7T1LRYF9GkYTPOGjd+ylsR5kEzpJz
-	66s+5S2/DANnkAirjaq+/WDp8WyyMw9PmL9Wpw1PKlhBYIt7080nMm9eqHiao8vIINjsYcRtsT0
-	2gALCWlw8rJVbVpkAxLFs3xeTxNpdNLvZOZKQv6rKQVuR85/EgW1LAX1Kl/h5Ko0zrghyrHRmQp
-	JgsjKQsVTHyYSgGEM+4dntQ4wtUvqqLQcgPieAelEG+78p2iqe7mM225a+dpVY9uAmh6lo5EDDJ
-	BOllFZ45TGChLD33UkivzMn4pgfESowxYfO/n7+E4HqdoXH0YTwWRF5rZv8cGRqY3d1fXs5xfHA
-	iQuDgpebdbX3yMocFajI1zJ7iHahTFfVBkKUH4+NERMdnUziXsuTdkZSUO8l1jjVNQOiyK70hQA
-	GVMaytQXxp52Z1vczQ4jYpayCG0Lh+dqkGNQ1PxbgrvAybpMrgjUBwk2jOyHiRnoZ2qvvc/tBOs
-	XinsxHN6atfFho2W6DPMkZVjOZURyuVYa49pik=
-X-Received: by 2002:a05:600c:5249:b0:495:3a52:71b1 with SMTP id 5b1f17b1804b1-4980eb9b2eemr144134715e9.5.1785759465972;
-        Mon, 03 Aug 2026 05:17:45 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Bernhard Kaindl <bernhard.kaindl@citrix.com>
-Subject: [PATCH 1/2] xen/mm: Alter get_outstanding_claims() to return information by value
-Date: Mon,  3 Aug 2026 13:17:38 +0100
-Message-Id: <20260803121739.370951-2-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20260803121739.370951-1-andrew.cooper3@citrix.com>
-References: <20260803121739.370951-1-andrew.cooper3@citrix.com>
+        bh=69n3Og5xkKdvFQyeK95WwlJPqVsgYp8WOb8rfW4Bplc=;
+        b=HP9ThGxsiSh1MYpFH8qbApBaNOIDJhCPrw+KQn5N2x6QWQZF4EmzDdt7CftEohtDF5
+         VRPbOJfgPjGR7oNe3TgIqqPYXoiDPdO9JSXBrqHxVSbkQBHdZL27jTU2tg5IA+KSqSZb
+         FGbz2TGtQ3+6tAQ+yN9L8awbGYUznmtgyLSlmFvJE2+ERfpGdugS7K5/S1qPdF3v8B91
+         KsynlmmVtgVW6HcaYGjuLv1djOOWiHHoeqqzePEF5DeMNWLdkGR50ADWY28DveAVOyEU
+         oniI173F+Oj2pErDJRyu3vO0MYRoPkVntEJi+r5bGElKJJIWkVQFoQld/+Diy9kI4hj8
+         tQEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785760498; x=1786365298;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=69n3Og5xkKdvFQyeK95WwlJPqVsgYp8WOb8rfW4Bplc=;
+        b=oTVzMY4k7ck0FiNo57VHVAF5GQnnBkj+L1pBtUaJUJWNynsUc17gATXw0NkNrChLl5
+         ukPn/Y5a7YJvX/FFdzFy2T9OnXDMx2cqHGb2v3QLNX25dmNqCv993j3atO6PKD33yZvW
+         eyyT/nlWMtjR8pgi9W6f4tylgQhtLjgjMEIXsEA4m0lvkaFoAFR/oVlNzkD5BKjUoZQW
+         DcIkZad9dSQOhKKDbKVCAf5cRRzxh+nvcIEhKIJuHf9x4z9uUUkjvvnVx0PupUXnqzJw
+         zqP6d3rHOeENx4H2hjHyvZ+qWyLRtM3u4K0Y9k0l9wXWMs3JcDfC4tJf2QFKBKHx+YhZ
+         G2Sw==
+X-Forwarded-Encrypted: i=1; AHgh+Rr3SaOuIywit3c2maQE/rlUEwIcbgGUx7mP0TJaojdx3IEfp02TnR/biJmzBMYJWYEMc8xDZuK09p8=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw11lWxIroyrVad8wqTAcEZmq1PRyo5ZJrvWh9jV8sw9gxG/R/8
+	LTfgiS44X6qxNboSemBbVKZr+xI1kKhvBhso1NK/p4qPbkpllHfQURvOW94oQYKvo0IOL9+buhF
+	PWG/AvA==
+X-Gm-Gg: AR+sD11OmaNxhZQ65FY6V34LBNj21A99Jdk+kIMiiSMZNZXJegNq/djxOAVLcC408pz
+	XSOXoEc4175Pj3aiLF891qZu/BO2O2yFwRWW/BPh+SkBqZPVK9HIiFt2g+9ho3Axsa+WB5AAcyS
+	/HwMiHGYFdFzb4DJM1XfEi+l0Aaiav3fWn4sWm92ddLo/SDVjTHGJAL1pBhPDqZMtglIrPxP3Pq
+	ETzxKq43EnSQao4AT4S548RBv37dJBW3tCxbAcTm50g8fxZU9SQiCNkBjyg6PV0dmLwxAet2LaJ
+	aZiPGico3stNhH5OAHfXfOM1S286eJJgqqCLcMojWciz196btEXRJA1oKPZGIMOOyqH275BBpfW
+	H6zbgd9kO/W7akIQAI7v1t7ED5GP4Nf/xu5qRYfLxX7ZI/NNEp0O7E/g7vxp36GS7GgTaCMNot3
+	3hZ61Iq78wprAMV37iCQeY0P9/KgaB3ezzIqCKySGy25D2BiNcx61F2t5inBDyxQ6aULfulmsGD
+	mVtdyXtCCwu8/nq9cihWVMx9Mp+F6jJfqjswkC5sJfHuLhdRX9p
+X-Received: by 2002:a05:600c:840f:b0:493:c42e:5be0 with SMTP id 5b1f17b1804b1-4980c60705amr202123705e9.0.1785760497947;
+        Mon, 03 Aug 2026 05:34:57 -0700 (PDT)
+Message-ID: <9ad2867a-3d01-4ff3-bb9f-d89cf9d4e96c@suse.com>
+Date: Mon, 3 Aug 2026 14:34:56 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] xen/mm: Alter get_outstanding_claims() to return
+ information by value
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Bernhard Kaindl <bernhard.kaindl@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20260803121739.370951-1-andrew.cooper3@citrix.com>
+ <20260803121739.370951-2-andrew.cooper3@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260803121739.370951-2-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1785759467-F429B2A1-838194D7/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d25034/1785760498-004CFA5B-D56C6D9E/0/0
 X-purgate-type: clean
-X-purgate-size: 3474
+X-purgate-size: 1281
 
-A void function with two output parameters is a weird choice.  Instead, return
-a two-element structure.
+On 03.08.2026 14:17, Andrew Cooper wrote:
+> A void function with two output parameters is a weird choice.  Instead, return
+> a two-element structure.
 
-No functional change.
+Hmm. Generally in reviews I'm trying to recommend against returning of structures
+by value. I don't like this very much here either, and it is (slightly) harder to
+use ...
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Anthony PERARD <anthony.perard@vates.tech>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Julien Grall <julien@xen.org>
-CC: Roger Pau Monné <roger@xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Bernhard Kaindl <bernhard.kaindl@citrix.com>
+> --- a/xen/common/sysctl.c
+> +++ b/xen/common/sysctl.c
+> @@ -248,6 +248,7 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
+>      case XEN_SYSCTL_physinfo:
+>      {
+>          struct xen_sysctl_physinfo *pi = &op->u.physinfo;
+> +        claim_info_t claim_info;
+>  
+>          memset(pi, 0, sizeof(*pi));
+>          pi->threads_per_core =
+> @@ -259,8 +260,11 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
+>          pi->max_node_id = MAX_NUMNODES-1;
+>          pi->max_cpu_id = nr_cpu_ids - 1;
+>          pi->total_pages = total_pages;
+> -        /* Protected by lock */
+> -        get_outstanding_claims(&pi->free_pages, &pi->outstanding_pages);
+> +
+> +        claim_info = get_outstanding_claims();
+> +        pi->free_pages = claim_info.avail;
+> +        pi->outstanding_pages = claim_info.claimed;
 
-Slightly RFC.  claim_info_t name subject to improvement, but see next patch.
+... here. If others think this is the way to go, so be it. But I'm not in favor.
 
-This is to help unwedge the XenServer patchqueue following commit
-44adbac3c7a6 ("xen/mm: Introduce per-node free page counter").
----
- xen/common/page_alloc.c | 10 +++++++---
- xen/common/sysctl.c     |  8 ++++++--
- xen/include/xen/mm.h    |  6 +++++-
- 3 files changed, 18 insertions(+), 6 deletions(-)
-
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index 598222e2c2e1..900fcf5755c1 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -582,12 +582,16 @@ int domain_set_outstanding_pages(struct domain *d, unsigned long pages)
- }
- 
- #ifdef CONFIG_SYSCTL
--void get_outstanding_claims(uint64_t *free_pages, uint64_t *outstanding_pages)
-+claim_info_t get_outstanding_claims(void)
- {
-+    claim_info_t info;
-+
-     spin_lock(&heap_lock);
--    *outstanding_pages = outstanding_claims;
--    *free_pages = avail_heap_pages(MEMZONE_XEN + 1, NR_ZONES - 1, -1);
-+    info.avail   = avail_heap_pages(MEMZONE_XEN + 1, NR_ZONES - 1, -1);
-+    info.claimed = outstanding_claims;
-     spin_unlock(&heap_lock);
-+
-+    return info;
- }
- #endif /* CONFIG_SYSCTL */
- 
-diff --git a/xen/common/sysctl.c b/xen/common/sysctl.c
-index 8fb5ff0af317..35c132564ef1 100644
---- a/xen/common/sysctl.c
-+++ b/xen/common/sysctl.c
-@@ -248,6 +248,7 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
-     case XEN_SYSCTL_physinfo:
-     {
-         struct xen_sysctl_physinfo *pi = &op->u.physinfo;
-+        claim_info_t claim_info;
- 
-         memset(pi, 0, sizeof(*pi));
-         pi->threads_per_core =
-@@ -259,8 +260,11 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
-         pi->max_node_id = MAX_NUMNODES-1;
-         pi->max_cpu_id = nr_cpu_ids - 1;
-         pi->total_pages = total_pages;
--        /* Protected by lock */
--        get_outstanding_claims(&pi->free_pages, &pi->outstanding_pages);
-+
-+        claim_info = get_outstanding_claims();
-+        pi->free_pages = claim_info.avail;
-+        pi->outstanding_pages = claim_info.claimed;
-+
-         pi->scrub_pages = 0;
-         pi->cpu_khz = cpu_khz;
-         pi->max_mfn = get_upper_mfn_bound();
-diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
-index b80bec00c124..74d28d2a1b7a 100644
---- a/xen/include/xen/mm.h
-+++ b/xen/include/xen/mm.h
-@@ -132,7 +132,11 @@ int populate_pt_range(unsigned long virt, unsigned long nr_mfns);
- unsigned long __must_check domain_adjust_tot_pages(struct domain *d,
-     long pages);
- int domain_set_outstanding_pages(struct domain *d, unsigned long pages);
--void get_outstanding_claims(uint64_t *free_pages, uint64_t *outstanding_pages);
-+
-+typedef struct {
-+    unsigned long avail, claimed;
-+} claim_info_t;
-+claim_info_t get_outstanding_claims(void);
- 
- /* Domain suballocator. These functions are *not* interrupt-safe.*/
- void init_domheap_pages(paddr_t ps, paddr_t pe);
--- 
-2.39.5
-
+Jan
 
