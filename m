@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74DB7C5518F
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2026 07:20:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1381225.1624789 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 444EDC55175
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2026 09:08:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1381303.1624867 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqmy7-0001wj-C9; Mon, 03 Aug 2026 07:20:15 +0000
+	id 1wqoe9-0007k2-6G; Mon, 03 Aug 2026 09:07:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1381225.1624789; Mon, 03 Aug 2026 07:20:15 +0000
+Received: by outflank-mailman (output) from mailman id 1381303.1624867; Mon, 03 Aug 2026 09:07:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqmy7-0001wb-9I; Mon, 03 Aug 2026 07:20:15 +0000
-Received: by outflank-mailman (input) for mailman id 1381225;
- Mon, 03 Aug 2026 07:20:14 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wqoe9-0007ju-2G; Mon, 03 Aug 2026 09:07:45 +0000
+Received: by outflank-mailman (input) for mailman id 1381303;
+ Mon, 03 Aug 2026 09:07:43 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper3@citrix.com>) id 1wqmy5-0001jf-Q6
- for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 07:20:14 +0000
+ (envelope-from <jgross@suse.com>) id 1wqoe7-0007h7-Ev
+ for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 09:07:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wqmy5-001lnU-6i
- for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 09:20:13 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wqoe6-00B0Hb-RS
+ for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 11:07:42 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a70411b-2eae-0a2a0a5409dd-0a2a4509eaca-46
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 09:20:13 +0200
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a70412c-be1a-0a2a45090019-d1558036d87d-3
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 09:20:12 +0200
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-496b7622a83so10889715e9.2
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 00:20:12 -0700 (PDT)
-Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
- [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49807b85be7sm254687935e9.2.2026.08.03.00.20.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Aug 2026 00:20:11 -0700 (PDT)
+ (envelope-from <jgross@suse.com>)
+ id 6a705a4e-e002-0a2a0a5209dd-0a2a4502ccc4-42
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 11:07:42 +0200
+Received: from [209.85.218.45] (helo=mail-ej1-f45.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jgross@suse.com>)
+ id 6a705a5e-6ca4-0a2a45020019-d155da2de4ef-3
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 11:07:42 +0200
+Received: by mail-ej1-f45.google.com with SMTP id
+ a640c23a62f3a-c197eaaab00so507729266b.0
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 02:07:42 -0700 (PDT)
+Received: from ?IPV6:2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112?
+ (2a00-12d0-af5d-ad01-5d3f-14e6-9bcb-5112.ip.tng.de.
+ [2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c1fd445432dsm507440166b.41.2026.08.03.02.07.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 03 Aug 2026 02:07:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,472 +55,316 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1785741612; x=1786346412; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=ub/V0kRy79kgAjDqq6A4lupnXHVPDMBJb38IyKztucA=;
-        b=m/LZlSJ73th47EW3aq+8u7uO4RvAinRPHAuSrcmRmu/VIojsArSoAzHjkOkq+woFyb
-         bxzaZjEWUUgNl0UDJx9WAwo04WZ2zWpYjz+CPWH+RuEjXUeBAyQvLHnURVTdVuiFYJ9+
-         iUyhdT7kCCT9n4MEBMGLzTtxr++iPB67FZmaU=
+        d=suse.com; s=google; t=1785748061; x=1786352861; darn=lists.xenproject.org;
+        h=content-type:in-reply-to:autocrypt:from:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=b16T4GW68hAFFc0osm9lAVRPnORne6TE2Xjz+8jsFek=;
+        b=P4olmWH6CfUDmU6sM4CVU3NrsiKSkPP3TmVonoy+u/7NAxj8/7GLjG0GJ2I2eDr/+1
+         yfrMYnGJsMvdFm3gt5gAKc5VHd+nD1acJsSgSwiAnI1k+rvKnY9vjgvSCKX6/x+j24XT
+         c4vsYFCtcFgVPg+5CVPLIplJh9NWLys5e2YGgHcmswsB8gW4l4HyQL2g3fGvWw6ydyEu
+         OU1VuhGR8alKr4tdubmSSEeEo0NZqk6ndKycC28AFXpry3/cCzxSpyAf0d5+ef0hi6vV
+         FM0r547H28TWnG6Up/lrl+3s4UYj6CsN1IW3xa2hBpzumPyRb/5BW6hwuaNNBkdWTwdZ
+         bNrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785741612; x=1786346412;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+        d=1e100.net; s=20251104; t=1785748061; x=1786352861;
+        h=content-type:in-reply-to:autocrypt:from:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ub/V0kRy79kgAjDqq6A4lupnXHVPDMBJb38IyKztucA=;
-        b=G7N9oMEKzwoxTXakgiFH+y3bXAu6dZbMLbW3LqaIUJUARQm53445XXYSp/VVrnAB8p
-         7tVs4sYR83X9/oPCDBWdplFEpv6fxoVOAQdXFF+2HnH6KnnszWgafAFYA7+FUWAYK6ZP
-         in6i+1NdCxToL3tMc2gQ72eiobPATjRRFDMLdRqp7uBVyC7jlxEjfxJp3B81BcRm3hJO
-         OlMoVfRY2bm52UmpLuCID1Jx5tOcbxw4Orc87eouuCJSo8Vwx5z0h6Wy3EvIzHGIGM+V
-         mcjgn6TjxuU+/ga8PmzfEZrfLB3iExlJ3EVwHkl7uO7UpQiCEJQOHG81EL4Oau8YxkVO
-         1nzw==
-X-Gm-Message-State: AOJu0YxSsbC62vZxHBECrOAZZ94UXEdxQUMX/y0H7uX0HWjAdVHIgwA3
-	HdmmU7Ul/0t0baoUIK9QUv5Vlg9BFLB42dd3kc5FfLe24LMwZX+rCL51HNaK0Fzvl3taDo8GQYh
-	3ppEq
-X-Gm-Gg: AR+sD11ScO9Q6cCqHtxDNsg+20OL1sYXYsUc41L55IVxh4O5b05G+jolDSUmZg61dRR
-	6ay9VnXYPLJN9cMI2DvsSjrtyF4V/Peoeny7lnyWr9XhUQfkHtsIoDfgk9dP/+Ia8X6sfAz87Lv
-	cWPFp+dbKcMi+IJoqeKmG7enkqJIfGCFSF5pwAvHQfRE2qjkq9Bm74S1Jg6483q8kJgr/lKWCyp
-	yeILcsX3fHDgW1QrYqwBF4IM4gZ3TTy2p7WSm2FudbSTQmApDVbyaS4c6jPJUrBClNKe1qx/LLZ
-	x5xuN/QBNp9/L35lOECIXgVLFi8BzcCj03Peuunh+jY2A5LnP761VzRecaVyFLf1Hmc9/pc8Y7P
-	wStYONuZsFlnFAT7KGXyY9aZ8qtk96orKyFUhVQcL8bJDsIffG2eEiBVa/5eSKi2KMBq6E6CzIf
-	t9ihKPqGIY6pS9bdo8PK9qwOgt39St0Vd4JBcDDMth4ZIlSr0fWX3W2ERC5FRlU6JqpfWDEaodW
-	nfOlq1HdE7H0R+AiwUHtGt6RPardryfnxUA6CANBdJgbG9C5g==
-X-Received: by 2002:a05:600c:19cf:b0:498:2b1f:e0c6 with SMTP id 5b1f17b1804b1-4982b1fe255mr23440215e9.18.1785741611381;
-        Mon, 03 Aug 2026 00:20:11 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v3 1/5] x86/emul: Introduce x86_decode_lite()
-Date: Mon,  3 Aug 2026 08:20:02 +0100
-Message-Id: <20260803072006.9678-2-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20260803072006.9678-1-andrew.cooper3@citrix.com>
-References: <20260803072006.9678-1-andrew.cooper3@citrix.com>
+        bh=b16T4GW68hAFFc0osm9lAVRPnORne6TE2Xjz+8jsFek=;
+        b=aBBUangYoOBq4g2ONO89D1ccSNnQajzVHDzMd4SPdW4D+HkthU6cibehhuLmt26v0I
+         ffczWzsxeXmpdQF1vuCqA+nPif6hYfK9kzxHUARwuU/2cQ3yMT67lNpHZXIPj4x8P9sR
+         87c/pzF+fx2ykls2NJz7WHSQfUZUpYVexeykQ5lZAwS3ekOqi8VAiygKtMCUe0Q0wQLt
+         b5W2O0z7/7nQiXgdOETH8B8HiBtsNPYomBZ+0wpO0UmjW0OrapZj466Q0of9M+4b4Hhx
+         TW9yngllSNesYnZon28NQ6tp7mEdOkZ0omBRMvF7bv99DWQ7pGnoWXkCqdBkhXmX/+IA
+         IcgQ==
+X-Forwarded-Encrypted: i=1; AHgh+RpRJxQJSetZ/eFih7ubzb0p1V8RvgioGEbElKOKt+JgUroUO+ZlJMPk+xw72HUTKJX4s5+b/SXQeQ0=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw1OL1SF0Nmx9odq5mv/krUED7bRisrJEcwoa4h97XqveQEjiwJ
+	vOm6QPTilgQuqsxRZzqRvl5TLRlqiDeAyR8mYOKH06fPLbgZicWWg4ys+k8BEjJSvr4=
+X-Gm-Gg: AR+sD11TtPEj5JUgZyi79HKVreDduPB2ihWRwzkphy38mrsL1khHXy2WDR45x7iGCCl
+	H19zaNQSnMe4T2TlHB61dGlfQGXxglXvlsEOa/Lv/N3R7dCQJzy9GA67V14TrM2jwOPI8jnAO+h
+	95Gw1dHQ8hX20FEalPlobdYylRzT7ue6U/rhIIkrE9TGQUY3y4Va+f1476Yk+wQWJhfG851Z8s7
+	p7lIRtl9kW225/vbSoI24GzTA9EskyIP9zkomH/Vvez2h3vBEhSfKYAF1EmdYZopdbD8eRw6c8B
+	9rvkxoAEv2BbB6qtkb7o35GzLaq1dSUpEcz6+Y8GwNtCNeqB4CBJRw/UdlbpBjGQ/Z/68t4IBgJ
+	6l7aPjams0TYu1d3jd9kElfzebtN7zADH1bYNRjsmN4jb3cSnxqNzzgc0dee0bAYMKWoy/fPu76
+	41Wi0y8fiScCXnZgvyS71uxdz8Nn9N/7n/mM0ZZRyK6KXhtoUS0riCesiAHm7Kk8cB7AFo2BPFS
+	1fLgi7Ii7s3lUAmoabK93YSshFHLONnKwi6uz9LWl+4Cj4dSz+p+ylcfOHTbDmVLEVD4IZPj6Pj
+	ihHukk1uiZkerVQ=
+X-Received: by 2002:a17:907:76fa:b0:c19:fb6e:5ff0 with SMTP id a640c23a62f3a-c1fe81a5d9fmr582774266b.15.1785748061532;
+        Mon, 03 Aug 2026 02:07:41 -0700 (PDT)
+Message-ID: <5ca4d0e4-1747-45a7-a916-a7516bb1692b@suse.com>
+Date: Mon, 3 Aug 2026 11:07:39 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1785741612-3B4D3034-D2B7BA1C/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC 00/14] Remove PG_private by using page/folio->private
+ checks instead
+To: Zi Yan <ziy@nvidia.com>, David Hildenbrand <david@kernel.org>,
+ "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Muchun Song <muchun.song@linux.dev>, Lorenzo Stoakes <ljs@kernel.org>,
+ "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>,
+ Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>,
+ Michal Hocko <mhocko@suse.com>, Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Nico Pache <nico.pache@linux.dev>, Ryan Roberts <ryan.roberts@arm.com>,
+ Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>,
+ Lance Yang <lance.yang@linux.dev>, Usama Arif <usama.arif@linux.dev>,
+ Gregory Price <gourry@gourry.net>, Ying Huang
+ <ying.huang@linux.alibaba.com>, Alistair Popple <apopple@nvidia.com>,
+ Johannes Weiner <hannes@cmpxchg.org>, Qi Zheng <qi.zheng@linux.dev>,
+ Shakeel Butt <shakeel.butt@linux.dev>, Kairui Song <kasong@tencent.com>
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+ Minchan Kim <minchan@kernel.org>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>,
+ Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>,
+ Arnaldo Carvalho de Melo <acme@kernel.org>,
+ Namhyung Kim <namhyung@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
+ x86@kernel.org, Mark Rutland <mark.rutland@arm.com>,
+ Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+ Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
+ Adrian Hunter <adrian.hunter@intel.com>, James Clark
+ <james.clark@linaro.org>, "H. Peter Anvin" <hpa@zytor.com>,
+ linux-perf-users@vger.kernel.org, Stefano Stabellini
+ <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ xen-devel@lists.xenproject.org, Eric Biggers <ebiggers@kernel.org>,
+ "Theodore Y. Ts'o" <tytso@mit.edu>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-fscrypt@vger.kernel.org, Oscar Salvador <osalvador@suse.de>,
+ Chao Yu <chao@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
+ Gao Xiang <xiang@kernel.org>, Jan Kara <jack@suse.cz>,
+ Yue Hu <zbestahu@gmail.com>, Jeffle Xu <jefflexu@linux.alibaba.com>,
+ Sandeep Dhavale <dhavale@google.com>, Hongbo Li <hongbohbli@tencent.com>,
+ Chunhai Guo <guochunhai@vivo.com>, linux-erofs@lists.ozlabs.org,
+ linux-fsdevel@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>,
+ Masami Hiramatsu <mhiramat@kernel.org>,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ Matthew Brost <matthew.brost@intel.com>,
+ Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>,
+ Byungchul Park <byungchul@sk.com>, Axel Rasmussen
+ <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>,
+ Wei Xu <weixugc@google.com>, linux-trace-kernel@vger.kernel.org,
+ Trond Myklebust <trondmy@kernel.org>, Anna Schumaker <anna@kernel.org>,
+ linux-nfs@vger.kernel.org, Song Liu <song@kernel.org>,
+ Yu Kuai <yukuai@fygo.io>, Ilya Dryomov <idryomov@gmail.com>,
+ Alex Markuze <amarkuze@redhat.com>, Viacheslav Dubeyko <slava@dubeyko.com>,
+ Li Nan <magiclinan@didiglobal.com>, Xiao Ni <xiao@kernel.org>,
+ linux-raid@vger.kernel.org, ceph-devel@vger.kernel.org,
+ Richard Weinberger <richard@nod.at>, Zhihao Cheng <chengzhihao1@huawei.com>,
+ linux-mtd@lists.infradead.org, Baoquan He <baoquan.he@linux.dev>,
+ Pasha Tatashin <pasha.tatashin@soleen.com>,
+ Pratyush Yadav <pratyush@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Dave Young <ruirui.yang@linux.dev>, Shuah Khan <skhan@linuxfoundation.org>,
+ kexec@lists.infradead.org, linux-doc@vger.kernel.org
+References: <20260731-remove-pg_private-v1-0-142c97ba3562@nvidia.com>
+Content-Language: en-US
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <20260731-remove-pg_private-v1-0-142c97ba3562@nvidia.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------Vg9NJvq3ine0Gyx1IX0BEzQC"
+X-purgate-ID: tlsNG-720697/1785748062-305C52AC-89ECAC62/0/0
 X-purgate-type: clean
-X-purgate-size: 14873
+X-purgate-size: 10188
 
-In order to relocate all IP-relative fields in an alternative replacement
-block, we need to decode the instructions enough to obtain their length and
-any relative fields.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------Vg9NJvq3ine0Gyx1IX0BEzQC
+Content-Type: multipart/mixed; boundary="------------1XNOHvG0ftKOzuceeKWaT2Id";
+ protected-headers="v1"
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+To: Zi Yan <ziy@nvidia.com>, David Hildenbrand <david@kernel.org>,
+ "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Muchun Song <muchun.song@linux.dev>, Lorenzo Stoakes <ljs@kernel.org>,
+ "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>,
+ Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>,
+ Michal Hocko <mhocko@suse.com>, Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Nico Pache <nico.pache@linux.dev>, Ryan Roberts <ryan.roberts@arm.com>,
+ Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>,
+ Lance Yang <lance.yang@linux.dev>, Usama Arif <usama.arif@linux.dev>,
+ Gregory Price <gourry@gourry.net>, Ying Huang
+ <ying.huang@linux.alibaba.com>, Alistair Popple <apopple@nvidia.com>,
+ Johannes Weiner <hannes@cmpxchg.org>, Qi Zheng <qi.zheng@linux.dev>,
+ Shakeel Butt <shakeel.butt@linux.dev>, Kairui Song <kasong@tencent.com>
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+ Minchan Kim <minchan@kernel.org>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>,
+ Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>,
+ Arnaldo Carvalho de Melo <acme@kernel.org>,
+ Namhyung Kim <namhyung@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
+ x86@kernel.org, Mark Rutland <mark.rutland@arm.com>,
+ Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+ Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
+ Adrian Hunter <adrian.hunter@intel.com>, James Clark
+ <james.clark@linaro.org>, "H. Peter Anvin" <hpa@zytor.com>,
+ linux-perf-users@vger.kernel.org, Stefano Stabellini
+ <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ xen-devel@lists.xenproject.org, Eric Biggers <ebiggers@kernel.org>,
+ "Theodore Y. Ts'o" <tytso@mit.edu>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-fscrypt@vger.kernel.org, Oscar Salvador <osalvador@suse.de>,
+ Chao Yu <chao@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
+ Gao Xiang <xiang@kernel.org>, Jan Kara <jack@suse.cz>,
+ Yue Hu <zbestahu@gmail.com>, Jeffle Xu <jefflexu@linux.alibaba.com>,
+ Sandeep Dhavale <dhavale@google.com>, Hongbo Li <hongbohbli@tencent.com>,
+ Chunhai Guo <guochunhai@vivo.com>, linux-erofs@lists.ozlabs.org,
+ linux-fsdevel@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>,
+ Masami Hiramatsu <mhiramat@kernel.org>,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ Matthew Brost <matthew.brost@intel.com>,
+ Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>,
+ Byungchul Park <byungchul@sk.com>, Axel Rasmussen
+ <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>,
+ Wei Xu <weixugc@google.com>, linux-trace-kernel@vger.kernel.org,
+ Trond Myklebust <trondmy@kernel.org>, Anna Schumaker <anna@kernel.org>,
+ linux-nfs@vger.kernel.org, Song Liu <song@kernel.org>,
+ Yu Kuai <yukuai@fygo.io>, Ilya Dryomov <idryomov@gmail.com>,
+ Alex Markuze <amarkuze@redhat.com>, Viacheslav Dubeyko <slava@dubeyko.com>,
+ Li Nan <magiclinan@didiglobal.com>, Xiao Ni <xiao@kernel.org>,
+ linux-raid@vger.kernel.org, ceph-devel@vger.kernel.org,
+ Richard Weinberger <richard@nod.at>, Zhihao Cheng <chengzhihao1@huawei.com>,
+ linux-mtd@lists.infradead.org, Baoquan He <baoquan.he@linux.dev>,
+ Pasha Tatashin <pasha.tatashin@soleen.com>,
+ Pratyush Yadav <pratyush@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Dave Young <ruirui.yang@linux.dev>, Shuah Khan <skhan@linuxfoundation.org>,
+ kexec@lists.infradead.org, linux-doc@vger.kernel.org
+Message-ID: <5ca4d0e4-1747-45a7-a916-a7516bb1692b@suse.com>
+Subject: Re: [PATCH RFC 00/14] Remove PG_private by using page/folio->private
+ checks instead
+References: <20260731-remove-pg_private-v1-0-142c97ba3562@nvidia.com>
+In-Reply-To: <20260731-remove-pg_private-v1-0-142c97ba3562@nvidia.com>
 
-Full x86_decode() is far too heavyweight, so introduce a minimal form which
-can make several simplifying assumptions.
+--------------1XNOHvG0ftKOzuceeKWaT2Id
+Content-Type: multipart/mixed; boundary="------------emnYBJyIfA0mAuf1FBk0JrWD"
 
-This a mostly-complete decoder for integer instruction in the onebyte and
-twobyte maps.  Some instructions are intentionally unrecognised, as finding
-them in an alternative is more likely to be a bug than intentional.  Some
-instruction groups and prefixes are unimplemented to reduce decode complexity.
+--------------emnYBJyIfA0mAuf1FBk0JrWD
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-This logic can decode all alternative blocks that exist in Xen right now.
+T24gMDEuMDguMjYgMDQ6MTMsIFppIFlhbiB3cm90ZToNCj4gSGkgYWxsLA0KPiANCj4gVGhp
+cyBwYXRjaHNldCByZW1vdmVzIFBHX3ByaXZhdGUgdG8gbWFrZSBzcGFjZSBmb3IgdXBjb21p
+bmcgUEdfZm9saW8NCj4gKHJlc2VydmVkIGFzIF9fUEdfZm9saW8pIGZvciBpZGVudGlmeWlu
+ZyBwYWdlcyBmcm9tIGEgZm9saW8gKG1vcmUgZGV0YWlscw0KPiBpbiBOb3RlIGJlbG93KS4g
+SW5zdGVhZCBvZiBjaGVja2luZyBQR19wcml2YXRlLCBhbGwgY29kZSBpcyBjaGFuZ2VkIHRv
+DQo+IGNoZWNrIHBhZ2UvZm9saW8tPnByaXZhdGUgIT0gTlVMTCBpbnN0ZWFkLg0KDQpJJ20g
+YSBsaXR0bGUgYml0IHdvcnJpZWQgdGhhdCBwYWdlL2ZvbGlvLT5wcml2YXRlIGlzIGluIGEg
+dW5pb24sIHNvIHRvZGF5DQppdCBjb3VsZCAoaW4gdGhlb3J5KSBiZSAhPSBOVUxMIHdoaWxl
+IFBHX3ByaXZhdGUgaXNuJ3Qgc2V0Lg0KDQpJcyBpdCByZWFsbHkgbm90IHBvc3NpYmxlIHRv
+IGVudGVyIGEgcGF0aCB3aGVyZSBQR19wcml2YXRlIGlzIHRlc3RlZCB3aGlsZQ0KcGFnZS9m
+b2xpby0+cHJpdmF0ZSAhPSBOVUxMIGR1ZSB0byB0aGUgdW5pb24gYmVpbmcgdXNlZCBvdGhl
+cndpc2UgKFBHX3ByaXZhdGUNCm5vdCBzZXQpPw0KDQoNCkp1ZXJnZW4NCg==
+--------------emnYBJyIfA0mAuf1FBk0JrWD
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Roger Pau Monné <roger@xenproject.org>
-CC: Teddy Astie <teddy.astie@vates.tech>
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-v3:
- * Rearrange decode tables to satisfy comment requests without splitting
- * Recognise UDB now it's used by Xen
- * Fix MISRA violations
- * Misc other changes
+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
+kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
+=3DeeAB
+-----END PGP PUBLIC KEY BLOCK-----
 
-v2:
- * Switch to 0 on failure, rel_sz in bytes
- * Mostly complete the integer instructions; paird with userspace harness
- * Put in .init when !CONFIG_LIVEPATCH
----
- xen/arch/x86/x86_emulate/Makefile      |   6 +
- xen/arch/x86/x86_emulate/decode-lite.c | 330 +++++++++++++++++++++++++
- xen/arch/x86/x86_emulate/x86_emulate.h |  14 ++
- 3 files changed, 350 insertions(+)
- create mode 100644 xen/arch/x86/x86_emulate/decode-lite.c
+--------------emnYBJyIfA0mAuf1FBk0JrWD--
 
-diff --git a/xen/arch/x86/x86_emulate/Makefile b/xen/arch/x86/x86_emulate/Makefile
-index 295e602f6b86..679bddbb1584 100644
---- a/xen/arch/x86/x86_emulate/Makefile
-+++ b/xen/arch/x86/x86_emulate/Makefile
-@@ -17,3 +17,9 @@ obj-y += decode.o
- obj-$(CONFIG_HVM) += fpu.o
- obj-y += util.o
- obj-y += util-xen.o
-+
-+ifeq ($(CONFIG_LIVEPATCH),y)
-+obj-y += decode-lite.o
-+else
-+obj-bin-y += decode-lite.init.o
-+endif
-diff --git a/xen/arch/x86/x86_emulate/decode-lite.c b/xen/arch/x86/x86_emulate/decode-lite.c
-new file mode 100644
-index 000000000000..131cc07d5516
---- /dev/null
-+++ b/xen/arch/x86/x86_emulate/decode-lite.c
-@@ -0,0 +1,330 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#ifdef __XEN__
-+# include <xen/init.h>
-+# include <xen/livepatch.h>
-+#endif
-+
-+#include "private.h"
-+
-+#undef ModRM
-+
-+/*
-+ * Bare minimum x86 instruction decoder to parse the alternative replacement
-+ * instructions and locate the IP-relative references that may need updating.
-+ *
-+ * These are:
-+ *  - disp8/32 from near direct branches
-+ *  - RIP-relative memory references
-+ *
-+ * The following simplifications are used:
-+ *  - All code is 64bit, the instruction stream is well formed and safe to
-+ *    read.
-+ *  - Instruction groups and prefixes not used by Xen's current alternatives
-+ *    are not implemented in order to reduce the decode complexity.
-+ *  - Certain instructions are intentionally not recognised, when it is more
-+ *    likely for their presence to be an error than intentional.
-+ *
-+ * Inputs:
-+ *  @ip  The position to start decoding from.
-+ *  @end End of the replacement block.  Exceeding this is considered an error.
-+ *
-+ * Returns: x86_decode_lite_t
-+ *  - On failure, length of 0.
-+ *  - On success, length > 0.  For rel_sz > 0, rel points at the relative
-+ *    field in the instruction stream.
-+ */
-+x86_decode_lite_t init_or_livepatch x86_decode_lite(void *ip, void *end)
-+{
-+#define Imm8   (1 << 0)
-+#define Imm    (1 << 1)
-+#define Moffs  (1 << 2)
-+#define Branch (1 << 5) /* Near direct branches, which have a displacement */
-+#define ModRM  (1 << 6)
-+#define Known  (1 << 7)
-+
-+    static const uint8_t init_or_livepatch_const onebyte[256] = {
-+
-+#define ALU_OPS(x)                              \
-+        [(x) + 0] = (Known|ModRM),              \
-+        [(x) + 1] = (Known|ModRM),              \
-+        [(x) + 2] = (Known|ModRM),              \
-+        [(x) + 3] = (Known|ModRM),              \
-+        [(x) + 4] = (Known|Imm8),               \
-+        [(x) + 5] = (Known|Imm)
-+
-+        ALU_OPS(0x00) /* ADD */, ALU_OPS(0x08) /* OR  */,
-+        ALU_OPS(0x10) /* ADC */, ALU_OPS(0x18) /* SBB */,
-+        ALU_OPS(0x20) /* AND */, ALU_OPS(0x28) /* SUB */,
-+        ALU_OPS(0x30) /* XOR */, ALU_OPS(0x38) /* CMP */,
-+
-+#undef ALU_OPS
-+
-+        [0x50 ... 0x5f] = (Known),             /* PUSH/POP %reg */
-+
-+        [0x62]          = 0,                   /* BOUND, but also EVEX prefix, not implemented. */
-+        [0x63]          = (Known|ModRM),       /* MOVSxd */
-+
-+        [0x68]          = (Known|Imm),         /* PUSH $imm */
-+        [0x69]          = (Known|ModRM|Imm),   /* IMUL $imm */
-+        [0x6a]          = (Known|Imm8),        /* PUSH $imm8 */
-+        [0x6b]          = (Known|ModRM|Imm8),  /* PUSH $imm8 */
-+        [0x6c ... 0x6f] = (Known),             /* INS/OUTS */
-+        [0x70 ... 0x7f] = (Known|Branch|Imm8), /* Jcc disp8 */
-+        [0x80]          = (Known|ModRM|Imm8),  /* Grp1 */
-+        [0x81]          = (Known|ModRM|Imm),   /* Grp1 */
-+
-+        [0x83]          = (Known|ModRM|Imm8),  /* Grp1 */
-+        [0x84 ... 0x8e] = (Known|ModRM),       /* TEST/XCHG/MOV/MOV-SREG/LEA */
-+        [0x8f]          = 0,                   /* Grp1A - POP but also XOP prefix, not implemented. */
-+        [0x90 ... 0x99] = (Known),             /* NOP/XCHG %rAX/CLTQ/CQTO */
-+
-+        [0x9b ... 0x9f] = (Known),             /* FWAIT/PUSHF/POPF/SAHF/LAHF */
-+        [0xa0 ... 0xa3] = (Known|Moffs),       /* MOVABS */
-+        [0xa4 ... 0xa7] = (Known),             /* MOVS/CMPS */
-+        [0xa8]          = (Known|Imm8),        /* TEST %al */
-+        [0xa9]          = (Known|Imm),         /* TEST %rAX */
-+        [0xaa ... 0xaf] = (Known),             /* STOS/LODS/SCAS */
-+        [0xb0 ... 0xb7] = (Known|Imm8),        /* MOV $imm8, %reg */
-+        [0xb8 ... 0xbf] = (Known|Imm),         /* MOV $imm{16,32,64}, %reg */
-+        [0xc0 ... 0xc1] = (Known|ModRM|Imm8),  /* Grp2 (ROL..SAR $imm8, %reg) */
-+
-+        [0xc3]          = (Known),             /* RET */
-+        [0xc4 ... 0xc5] = 0,                   /* LES/LDS but also VEX prefixes, not implemented. */
-+        [0xc6]          = (Known|ModRM|Imm8),  /* Grp11, Further ModRM decode */
-+        [0xc7]          = (Known|ModRM|Imm),   /* Grp11, Further ModRM decode */
-+
-+        [0xcb ... 0xcc] = (Known),             /* LRET/INT3 */
-+        [0xcd]          = (Known|Imm8),        /* INT $imm8 */
-+
-+        [0xd0 ... 0xd3] = (Known|ModRM),       /* Grp2 (ROL..SAR {$1,%cl}, %reg) */
-+
-+        [0xd6]          = (Known),             /* UDB */
-+
-+        [0xe4 ... 0xe7] = (Known|Imm8),        /* IN/OUT $imm8 */
-+        [0xe8 ... 0xe9] = (Known|Branch|Imm),  /* CALL/JMP disp32 */
-+
-+        [0xeb]          = (Known|Branch|Imm8), /* JMP disp8 */
-+        [0xec ... 0xef] = (Known),             /* IN/OUT %dx */
-+
-+        [0xf1]          = (Known),             /* ICEBP */
-+
-+        [0xf4]          = (Known),             /* HLT */
-+        [0xf5]          = (Known),             /* CMC */
-+        [0xf6 ... 0xf7] = (Known|ModRM),       /* Grp3, Further ModRM decode */
-+        [0xf8 ... 0xfd] = (Known),             /* CLC ... STD */
-+        [0xfe ... 0xff] = (Known|ModRM),       /* Grp4 */
-+    };
-+    static const uint8_t init_or_livepatch_const twobyte[256] = {
-+        [0x00 ... 0x03] = (Known|ModRM),       /* Grp6/Grp7/LAR/LSL */
-+
-+        [0x0b]          = (Known),             /* UD2 */
-+
-+        [0x18 ... 0x1f] = (Known|ModRM),       /* Grp16 (Hint Nop) */
-+        [0x20 ... 0x23] = (Known|ModRM),       /* MOV %cr/%dr */
-+
-+        [0x30 ... 0x33] = (Known),             /* WRMSR/RDTSC/RDMSR/RDPMC */
-+
-+        [0x40 ... 0x4f] = (Known|ModRM),       /* CMOVcc */
-+
-+        [0x80 ... 0x8f] = (Known|Branch|Imm),  /* Jcc disp32 */
-+        [0x90 ... 0x9f] = (Known|ModRM),       /* SETcc */
-+
-+        [0xa0 ... 0xa2] = (Known),             /* PUSH/POP %fs/CPUID */
-+        [0xa3]          = (Known|ModRM),       /* BT */
-+        [0xa4]          = (Known|ModRM|Imm8),  /* SHLD $imm8 */
-+        [0xa5]          = (Known|ModRM),       /* SHLD %cl */
-+
-+        [0xa8 ... 0xa9] = (Known),             /* PUSH/POP %gs */
-+
-+        [0xab]          = (Known|ModRM),       /* BTS */
-+        [0xac]          = (Known|ModRM|Imm8),  /* SHRD $imm8 */
-+        [0xad ... 0xaf] = (Known|ModRM),       /* SHRD %cl/Grp15/IMUL */
-+
-+        [0xb0 ... 0xb9] = (Known|ModRM),       /* CMPXCHG/LSS/BTR/LFS/LGS/MOVZxx/POPCNT/UD1 */
-+        [0xba]          = (Known|ModRM|Imm8),  /* Grp8 */
-+        [0xbb ... 0xbf] = (Known|ModRM),       /* BTC/BSF/BSR/MOVSX */
-+        [0xc0 ... 0xc1] = (Known|ModRM),       /* XADD */
-+        [0xc7]          = (Known|ModRM),       /* Grp9 */
-+        [0xc8 ... 0xcf] = (Known),             /* BSWAP */
-+    };
-+
-+    void *start = ip, *rel = NULL;
-+    unsigned int opc, rel_sz = 0;
-+    uint8_t b, d, rex = 0, osize = 4;
-+
-+#define OPC_TWOBYTE (1 << 8)
-+
-+    /* Mutates IP, uses END. */
-+#define FETCH(ty)                                       \
-+    ({                                                  \
-+        ty _val;                                        \
-+                                                        \
-+        if ( (ip + sizeof(ty)) > end )                  \
-+            goto overrun;                               \
-+        _val = *(ty *)ip;                               \
-+        ip += sizeof(ty);                               \
-+        _val;                                           \
-+    })
-+
-+    for ( ;; ) /* Prefixes */
-+    {
-+        switch ( b = FETCH(uint8_t) )
-+        {
-+        case 0x26: /* ES override */
-+        case 0x2e: /* CS override */
-+        case 0x36: /* DS override */
-+        case 0x3e: /* SS override */
-+        case 0x64: /* FS override */
-+        case 0x65: /* GS override */
-+        case 0xf0: /* LOCK */
-+        case 0xf2: /* REPNE */
-+        case 0xf3: /* REP */
-+            break;
-+
-+        case 0x66: /* Operand size override */
-+            osize = 2;
-+            break;
-+
-+        /* case 0x67: Address size override, not implemented */
-+
-+        case 0x40 ... 0x4f: /* REX */
-+            rex = b;
-+            continue;
-+
-+        default:
-+            goto prefixes_done;
-+        }
-+        rex = 0; /* REX cancelled by subsequent legacy prefix. */
-+    }
-+ prefixes_done:
-+
-+    if ( rex & REX_W )
-+        osize = 8;
-+
-+    /* Fetch the main opcode byte(s) */
-+    if ( b == 0x0f )
-+    {
-+        b = FETCH(uint8_t);
-+        opc = OPC_TWOBYTE | b;
-+
-+        d = twobyte[b];
-+    }
-+    else
-+    {
-+        opc = b;
-+        d = onebyte[b];
-+    }
-+
-+    if ( unlikely(!(d & Known)) )
-+        goto unknown;
-+
-+    if ( d & ModRM )
-+    {
-+        uint8_t modrm = FETCH(uint8_t);
-+        uint8_t mod = modrm >> 6;
-+        uint8_t reg = (modrm >> 3) & 7;
-+        uint8_t rm = modrm & 7;
-+
-+        /* ModRM/SIB decode */
-+        if ( mod == 0 && rm == 5 ) /* RIP relative */
-+        {
-+            rel = ip;
-+            rel_sz = 4;
-+            FETCH(int32_t);
-+        }
-+        else if ( mod != 3 && rm == 4 ) /* SIB */
-+        {
-+            uint8_t sib = FETCH(uint8_t);
-+            uint8_t base = sib & 7;
-+
-+            if ( mod == 0 && base == 5 )
-+                goto disp32;
-+        }
-+
-+        if ( mod == 1 ) /* disp8 */
-+            FETCH(int8_t);
-+        else if ( mod == 2 ) /* disp32 */
-+        {
-+        disp32:
-+            FETCH(int32_t);
-+        }
-+
-+        /* ModRM based decode adjustements */
-+        switch ( opc )
-+        {
-+        case 0xc7: /* Grp11 XBEGIN is a near direct branch. */
-+            if ( modrm == 0xf8 )
-+                d |= Branch;
-+            break;
-+
-+        case 0xf6: /* Grp3 TEST(s) have extra Imm8 */
-+            if ( reg == 0 || reg == 1 )
-+                d |= Imm8;
-+            break;
-+
-+        case 0xf7: /* Grp3 TEST(s) have extra Imm */
-+            if ( reg == 0 || reg == 1 )
-+                d |= Imm;
-+            break;
-+        }
-+    }
-+
-+    if ( d & Branch )
-+    {
-+        /*
-+         * We don't tolerate 66-prefixed call/jmp in alternatives.  Some are
-+         * genuinely decoded differently between Intel and AMD CPUs.
-+         *
-+         * We also don't implement APX instructions, so don't have to cope
-+         * with JMPABS which is the first branch to have an 8-byte immediate.
-+         */
-+        if ( osize < 4 )
-+            goto bad_osize;
-+
-+        rel = ip;
-+        rel_sz = (d & Imm8) ? 1 : 4;
-+    }
-+
-+    if ( d & (Imm | Imm8 | Moffs) )
-+    {
-+        if ( d & Imm8 )
-+            osize = 1;
-+        else if ( d & Moffs )
-+            osize = 8;
-+        else if ( osize == 8 && !(opc >= 0xb8 && opc <= 0xbf) )
-+            osize = 4;
-+
-+        switch ( osize )
-+        {
-+        case 1: FETCH(uint8_t);  break;
-+        case 2: FETCH(uint16_t); break;
-+        case 4: FETCH(uint32_t); break;
-+        case 8: FETCH(uint64_t); break;
-+        default: goto bad_osize;
-+        }
-+    }
-+
-+    return (x86_decode_lite_t){ ip - start, rel_sz, rel };
-+
-+ bad_osize:
-+    printk(XENLOG_ERR "%s() Bad osize %u in %*ph\n",
-+           __func__, osize,
-+           (int)(unsigned long)(end - start), start);
-+    return (x86_decode_lite_t){ 0, 0, NULL };
-+
-+ unknown:
-+    printk(XENLOG_ERR "%s() Unknown opcode in %*ph <%02x> %*ph\n",
-+           __func__,
-+           (int)(unsigned long)(ip - 1 - start), start, b,
-+           (int)(unsigned long)(end - ip), ip);
-+    return (x86_decode_lite_t){ 0, 0, NULL };
-+
-+ overrun:
-+    printk(XENLOG_ERR "%s() Decode overrun, got %*ph\n",
-+           __func__,
-+           (int)(unsigned long)(end - start), start);
-+    return (x86_decode_lite_t){ 0, 0, NULL };
-+
-+#undef FETCH
-+}
-diff --git a/xen/arch/x86/x86_emulate/x86_emulate.h b/xen/arch/x86/x86_emulate/x86_emulate.h
-index 0fd20747dc43..566a8297d8a5 100644
---- a/xen/arch/x86/x86_emulate/x86_emulate.h
-+++ b/xen/arch/x86/x86_emulate/x86_emulate.h
-@@ -835,4 +835,18 @@ static inline void x86_emul_reset_event(struct x86_emulate_ctxt *ctxt)
-     ctxt->event = (struct x86_event){};
- }
- 
-+/*
-+ * x86_decode_lite().  Very minimal decoder for managing alternatives.
-+ *
-+ * @len is 0 on error, or nonzero on success.  If the instruction has a
-+ * relative field, @rel_sz is nonzero, and @rel points at the field.
-+ */
-+typedef struct {
-+    uint8_t len;
-+    uint8_t rel_sz; /* bytes: 0, 1 or 4 */
-+    void *rel;
-+} x86_decode_lite_t;
-+
-+x86_decode_lite_t x86_decode_lite(void *ip, void *end);
-+
- #endif /* __X86_EMULATE_H__ */
--- 
-2.39.5
+--------------1XNOHvG0ftKOzuceeKWaT2Id--
 
+--------------Vg9NJvq3ine0Gyx1IX0BEzQC
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmpwWlsFAwAAAAAACgkQsN6d1ii/Ey/i
+jgf/ZwJPxlL37xKWgHvTpcOyxx9OjPwR5NnmxhKYC+qK1G+dCKRR2aNsNRd92IvtuR/zlwoSK3Bz
+7Knn/QAX+Sr8+MzzkoSZZy4464mITxuVnjBsYOy1wmVfTRA9xJ5kPDsLcow9h9fba5YWY5JKjJEr
+fuIk59vC3iZC8TXbrwFnUB118QfIzPMfnHvl18ioDjqN/X6ooFJudXLB3hTrlpzsxtdu1OFI+TsY
+0FUiNapbbcLYtM5X9v/bo7LSqQNdjZKmfV2DVQHs8Vj2bH/TyrIG+SvEggEztdqBgec9T7Ix66uU
+FOasApx6jWOz0UmYAKKBF0iBOhSZaPnQhSA6xqkzCw==
+=lraB
+-----END PGP SIGNATURE-----
+
+--------------Vg9NJvq3ine0Gyx1IX0BEzQC--
 
