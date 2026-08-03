@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9569DC55179
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2026 12:35:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1381444.1625022 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31206C55182
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2026 12:40:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1381453.1625032 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqrsi-0003Oj-AD; Mon, 03 Aug 2026 12:35:00 +0000
+	id 1wqrxd-0005Wo-0D; Mon, 03 Aug 2026 12:40:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1381444.1625022; Mon, 03 Aug 2026 12:35:00 +0000
+Received: by outflank-mailman (output) from mailman id 1381453.1625032; Mon, 03 Aug 2026 12:40:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqrsi-0003Oc-7B; Mon, 03 Aug 2026 12:35:00 +0000
-Received: by outflank-mailman (input) for mailman id 1381444;
- Mon, 03 Aug 2026 12:34:59 +0000
+	id 1wqrxc-0005Vy-S5; Mon, 03 Aug 2026 12:40:04 +0000
+Received: by outflank-mailman (input) for mailman id 1381453;
+ Mon, 03 Aug 2026 12:40:03 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wqrsh-0003NR-9R
- for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 12:34:59 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wqrxb-00056b-B4
+ for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 12:40:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wqrsg-005IeJ-M2
- for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 14:34:58 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wqrxa-005Jvb-Fl
+ for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 14:40:02 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a708aef-2eae-0a2a0a5409dd-0a2a450cc58e-22
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 14:34:58 +0200
-Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a708c1d-bab6-0a2a0a5309dd-0a2a4506e340-20
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 14:40:02 +0200
+Received: from [209.85.218.50] (helo=mail-ej1-f50.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a708af2-f479-0a2a450c0019-d155802fe025-3
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 14:34:58 +0200
-Received: by mail-wm1-f47.google.com with SMTP id
- 5b1f17b1804b1-4956242332dso18003175e9.2
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 05:34:58 -0700 (PDT)
+ id 6a708c22-195a-0a2a45060019-d155da32a49f-3
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 14:40:02 +0200
+Received: by mail-ej1-f50.google.com with SMTP id
+ a640c23a62f3a-c15e03c2763so621708866b.0
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 05:40:02 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49808690ffbsm256801355e9.10.2026.08.03.05.34.57
+ a640c23a62f3a-c1fd4662727sm496448466b.59.2026.08.03.05.40.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 Aug 2026 05:34:57 -0700 (PDT)
+ Mon, 03 Aug 2026 05:40:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,51 +55,50 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785760498; x=1786365298; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785760802; x=1786365602; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=69n3Og5xkKdvFQyeK95WwlJPqVsgYp8WOb8rfW4Bplc=;
-        b=HP9ThGxsiSh1MYpFH8qbApBaNOIDJhCPrw+KQn5N2x6QWQZF4EmzDdt7CftEohtDF5
-         VRPbOJfgPjGR7oNe3TgIqqPYXoiDPdO9JSXBrqHxVSbkQBHdZL27jTU2tg5IA+KSqSZb
-         FGbz2TGtQ3+6tAQ+yN9L8awbGYUznmtgyLSlmFvJE2+ERfpGdugS7K5/S1qPdF3v8B91
-         KsynlmmVtgVW6HcaYGjuLv1djOOWiHHoeqqzePEF5DeMNWLdkGR50ADWY28DveAVOyEU
-         oniI173F+Oj2pErDJRyu3vO0MYRoPkVntEJi+r5bGElKJJIWkVQFoQld/+Diy9kI4hj8
-         tQEw==
+        bh=1Rv9ekgCqFE0xkNpyFLzSLNtbTIiyypWYXYLZoy/njo=;
+        b=HgLZAaryCEs0vSZSyglCCysp5cBn168Ke+IThMbuhFHaqCwCgn4BPGsGjsukMRq8Cm
+         T0HD1a6TZJexssHtahpC/MyFShAJD9OJJWE58vW3QgPJ/uXTtVzsYLfe1v1bvz+Y62yQ
+         guUEG10MYkCi3Zp3uGIRZAT1ik+WgyRJg7Pg/y0k/Xbv6oWZjIktOW/paAEKT0PXs1Op
+         CI17u0CAVye8rf4MywTfsTRJ4AqWrZd82BBT7/JUxhYTPuLBG9S8h55hoedyw7BUDrRR
+         +kmVKS7agMmopXuDg7KOCt9mzKBZr3UoRVR/Y9EtItPWSBTxjLnWO1dOZfcBs2T0PXYk
+         akrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785760498; x=1786365298;
+        d=1e100.net; s=20251104; t=1785760802; x=1786365602;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=69n3Og5xkKdvFQyeK95WwlJPqVsgYp8WOb8rfW4Bplc=;
-        b=oTVzMY4k7ck0FiNo57VHVAF5GQnnBkj+L1pBtUaJUJWNynsUc17gATXw0NkNrChLl5
-         ukPn/Y5a7YJvX/FFdzFy2T9OnXDMx2cqHGb2v3QLNX25dmNqCv993j3atO6PKD33yZvW
-         eyyT/nlWMtjR8pgi9W6f4tylgQhtLjgjMEIXsEA4m0lvkaFoAFR/oVlNzkD5BKjUoZQW
-         DcIkZad9dSQOhKKDbKVCAf5cRRzxh+nvcIEhKIJuHf9x4z9uUUkjvvnVx0PupUXnqzJw
-         zqP6d3rHOeENx4H2hjHyvZ+qWyLRtM3u4K0Y9k0l9wXWMs3JcDfC4tJf2QFKBKHx+YhZ
-         G2Sw==
-X-Forwarded-Encrypted: i=1; AHgh+Rr3SaOuIywit3c2maQE/rlUEwIcbgGUx7mP0TJaojdx3IEfp02TnR/biJmzBMYJWYEMc8xDZuK09p8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yw11lWxIroyrVad8wqTAcEZmq1PRyo5ZJrvWh9jV8sw9gxG/R/8
-	LTfgiS44X6qxNboSemBbVKZr+xI1kKhvBhso1NK/p4qPbkpllHfQURvOW94oQYKvo0IOL9+buhF
-	PWG/AvA==
-X-Gm-Gg: AR+sD11OmaNxhZQ65FY6V34LBNj21A99Jdk+kIMiiSMZNZXJegNq/djxOAVLcC408pz
-	XSOXoEc4175Pj3aiLF891qZu/BO2O2yFwRWW/BPh+SkBqZPVK9HIiFt2g+9ho3Axsa+WB5AAcyS
-	/HwMiHGYFdFzb4DJM1XfEi+l0Aaiav3fWn4sWm92ddLo/SDVjTHGJAL1pBhPDqZMtglIrPxP3Pq
-	ETzxKq43EnSQao4AT4S548RBv37dJBW3tCxbAcTm50g8fxZU9SQiCNkBjyg6PV0dmLwxAet2LaJ
-	aZiPGico3stNhH5OAHfXfOM1S286eJJgqqCLcMojWciz196btEXRJA1oKPZGIMOOyqH275BBpfW
-	H6zbgd9kO/W7akIQAI7v1t7ED5GP4Nf/xu5qRYfLxX7ZI/NNEp0O7E/g7vxp36GS7GgTaCMNot3
-	3hZ61Iq78wprAMV37iCQeY0P9/KgaB3ezzIqCKySGy25D2BiNcx61F2t5inBDyxQ6aULfulmsGD
-	mVtdyXtCCwu8/nq9cihWVMx9Mp+F6jJfqjswkC5sJfHuLhdRX9p
-X-Received: by 2002:a05:600c:840f:b0:493:c42e:5be0 with SMTP id 5b1f17b1804b1-4980c60705amr202123705e9.0.1785760497947;
-        Mon, 03 Aug 2026 05:34:57 -0700 (PDT)
-Message-ID: <9ad2867a-3d01-4ff3-bb9f-d89cf9d4e96c@suse.com>
-Date: Mon, 3 Aug 2026 14:34:56 +0200
+        bh=1Rv9ekgCqFE0xkNpyFLzSLNtbTIiyypWYXYLZoy/njo=;
+        b=dK/BK3m+JZrtOhS1IAElgT7JsaTiIuYJFzuwBoWgJyn6Y+jE8sF130LxWGsN+GKKke
+         ce1wrZGbg5HfsbS08YS+UflW/HWNy7SfZD6QasL97n7egz4a+GDFrHq8lfWYsRntyt35
+         N9NwsFaYAvu5Y4akPswGw5/YoFWvzAcScoGtTy39Wx5VnCrrdlGfPzTs771StAmr6mWV
+         zOb37H34AvLccym5jdLMWCi9PYeaSc9fIR2z4/4+q46bgHBUnry3bDWv/bRwHsHL5/o2
+         u01+y16hLHh9kvJ51UC1R/5HjS/lD41APe2i+WcB9Jen80vpiF/jXEUijXlao4Hb7ulN
+         sCmg==
+X-Forwarded-Encrypted: i=1; AHgh+RpiUqqHy7pXL6MEq4XVp+qgzjShbbU3tmCpmFqjopk+SPOMIMs/862HjZJ+WFtlx/t3DeyvE6u3gvM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxvGQA+egGcyiyg7bjYVOsj+XqtYHjCNzPWFGzuVQWwonoP0OB7
+	m3fUWYGK0ChNSU+PcvD5cGDjfpmmVilDebZ7lWXHIJDkrqKUMC+DZ0X08p6WtSo4YQ==
+X-Gm-Gg: AR+sD13grdeFxoSsMN765r7+DQtGx3RiROd+afMgpUe6lBtBxn4XZupF43BJeYW2U+F
+	ztjEOiMZtzUhE4wda5TvpPEsAVYk/GMkhxzwMm9nA25yK/eXsmeteYlY8k6A/a12TwUVTjIXdBy
+	TOOgOSLP0I3xnPyElNYlvXs9dSeS23ePO7xMxZMkR1ttDxib7VF5BC0DUPXuuSGcTUPXAYRO5bZ
+	pmC+XWi2lr3bv/WdKFrWy18UKe2pqySFA2tYAc9mTk2niO6KFfJSONmTWuP3VxtiFjBFrXJ+b+0
+	bOb0R8WGxGedhWtJ7vS1TRv9rzpOkoCtfdQejY2KTU+EoKJ5AS5M+BDrPjFd9GT8MVi0xthZUz6
+	gDbcM/orftdTSlPRMoBu6IpL4/a0kaDwWy52DwyJq1JLFayfz64cONWIfdSJk1aQ3SS2MMj2Nyx
+	beHmDTcYNHSzdxoB7N6IsKCBELpRIKQ4JGL43nutWDtu108dKdluLGw/Gv0ZiJ9WHwofBTvK4OS
+	OS8RtIan9vLGSG8Np0oVs2I1I4OnOqr0Fy2pJBiIDXNMgk5PBvianUeEeHyeP6N
+X-Received: by 2002:a17:906:9c96:b0:c19:7908:c67e with SMTP id a640c23a62f3a-c1fd316d26bmr966117266b.4.1785760801966;
+        Mon, 03 Aug 2026 05:40:01 -0700 (PDT)
+Message-ID: <166491d8-70f2-4250-9212-e86b002d877a@suse.com>
+Date: Mon, 3 Aug 2026 14:40:00 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] xen/mm: Alter get_outstanding_claims() to return
- information by value
+Subject: Re: [PATCH RFC 2/2] xen/mm: Return claim information from
+ avail_node_heap_pages()
 To: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
@@ -108,7 +107,7 @@ Cc: Anthony PERARD <anthony.perard@vates.tech>,
  Bernhard Kaindl <bernhard.kaindl@citrix.com>,
  Xen-devel <xen-devel@lists.xenproject.org>
 References: <20260803121739.370951-1-andrew.cooper3@citrix.com>
- <20260803121739.370951-2-andrew.cooper3@citrix.com>
+ <20260803121739.370951-3-andrew.cooper3@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -134,43 +133,40 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260803121739.370951-2-andrew.cooper3@citrix.com>
+In-Reply-To: <20260803121739.370951-3-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d25034/1785760498-004CFA5B-D56C6D9E/0/0
+X-purgate-ID: tlsNG-16d1c6/1785760802-F5C0F77B-AA87A6BB/0/0
 X-purgate-type: clean
-X-purgate-size: 1281
+X-purgate-size: 1024
 
 On 03.08.2026 14:17, Andrew Cooper wrote:
-> A void function with two output parameters is a weird choice.  Instead, return
-> a two-element structure.
-
-Hmm. Generally in reviews I'm trying to recommend against returning of structures
-by value. I don't like this very much here either, and it is (slightly) harder to
-use ...
-
-> --- a/xen/common/sysctl.c
-> +++ b/xen/common/sysctl.c
-> @@ -248,6 +248,7 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
->      case XEN_SYSCTL_physinfo:
->      {
->          struct xen_sysctl_physinfo *pi = &op->u.physinfo;
-> +        claim_info_t claim_info;
+> --- a/xen/common/page_alloc.c
+> +++ b/xen/common/page_alloc.c
+> @@ -2852,12 +2852,14 @@ unsigned long avail_domheap_pages_region(
+>      return avail_heap_pages(zone_lo, zone_hi, node);
+>  }
 >  
->          memset(pi, 0, sizeof(*pi));
->          pi->threads_per_core =
-> @@ -259,8 +260,11 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
->          pi->max_node_id = MAX_NUMNODES-1;
->          pi->max_cpu_id = nr_cpu_ids - 1;
->          pi->total_pages = total_pages;
-> -        /* Protected by lock */
-> -        get_outstanding_claims(&pi->free_pages, &pi->outstanding_pages);
+> -unsigned long avail_node_heap_pages(unsigned int nodeid)
+> +claim_info_t avail_node_heap_pages(unsigned int nodeid)
+>  {
+> +    claim_info_t info = {};
 > +
-> +        claim_info = get_outstanding_claims();
-> +        pi->free_pages = claim_info.avail;
-> +        pi->outstanding_pages = claim_info.claimed;
+>      if ( nodeid < MAX_NUMNODES && node_online(nodeid) )
+> -        return node_avail_pages[nodeid];
+> +        info.avail = node_avail_pages[nodeid];
+>  
+> -    return 0;
+> +    return info;
+>  }
 
-... here. If others think this is the way to go, so be it. But I'm not in favor.
+Why would this be? What use is a compound return value consisting of two
+pieces, only one of which is ever going to be non-zero? In the form
+shown for per-node claims that effect goes away, yet at that point the
+function name doesn't really reflect its purpose anymore.
+
+As to the naming of claim_info_t - that's perhaps good enough if really
+we want to go with the return-by-value approach.
 
 Jan
 
