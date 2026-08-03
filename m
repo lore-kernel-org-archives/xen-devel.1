@@ -4,39 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93575C55184
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2026 14:52:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1381549.1625101 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56357C55179
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2026 14:52:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1381550.1625108 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqu19-0001TE-Ee; Mon, 03 Aug 2026 14:51:51 +0000
+	id 1wqu1d-0001mH-M3; Mon, 03 Aug 2026 14:52:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1381549.1625101; Mon, 03 Aug 2026 14:51:51 +0000
+Received: by outflank-mailman (output) from mailman id 1381550.1625108; Mon, 03 Aug 2026 14:52:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqu19-0001T7-B9; Mon, 03 Aug 2026 14:51:51 +0000
-Received: by outflank-mailman (input) for mailman id 1381549;
- Mon, 03 Aug 2026 14:51:49 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wqu1d-0001mA-Iw; Mon, 03 Aug 2026 14:52:21 +0000
+Received: by outflank-mailman (input) for mailman id 1381550;
+ Mon, 03 Aug 2026 14:52:20 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wqu17-0001Si-MV
- for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 14:51:49 +0000
+ (envelope-from <jgross@suse.com>) id 1wqu1c-0001kH-4b
+ for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 14:52:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wqu16-005i0I-E9
- for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 16:51:48 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wqu1b-00FD5N-5f
+ for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 16:52:19 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a70aaea-e002-0a2a0a5209dd-0a2a4503e5a6-42
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 16:51:48 +0200
-Received: from [74.125.224.44] (helo=mail-yx1-f44.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a70ab03-fae8-0a2a45030019-4a7de02cd8fb-3
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 16:51:48 +0200
-Received: by mail-yx1-f44.google.com with SMTP id
- 956f58d0204a3-668c1b780e5so5314004d50.2
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 07:51:48 -0700 (PDT)
+ (envelope-from <jgross@suse.com>)
+ id 6a70ab1c-bab6-0a2a0a5309dd-0a2a4506e79a-10
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 16:52:19 +0200
+Received: from [209.85.218.47] (helo=mail-ej1-f47.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jgross@suse.com>)
+ id 6a70ab22-195a-0a2a45060019-d155da2fadae-3
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 16:52:19 +0200
+Received: by mail-ej1-f47.google.com with SMTP id
+ a640c23a62f3a-c15ba3a2b4bso416268466b.1
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 07:52:19 -0700 (PDT)
+Received: from ?IPV6:2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112?
+ (2a00-12d0-af5d-ad01-5d3f-14e6-9bcb-5112.ip.tng.de.
+ [2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c1fd466271csm594663266b.60.2026.08.03.07.52.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 03 Aug 2026 07:52:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,291 +55,286 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1785768707; cv=none;
-        d=google.com; s=arc-20260327;
-        b=e0td3MPQbXv/HxNE6lcBu/VK6RXHrwrLYuQ9fkQjIjYvktd9UP8S48TSjWfVp6GR0E
-         hD9PasHOvFMEqLl9BQxCC/X7eOlcrlIIzqjZMbkn+aG68V7IgXS2Uf5p7N61z2pHx5wS
-         F3myns0I+o8LTOp9T3BjlZpuXT4rQ4bQhr5v1d6W6IlAOTUWDG0v+ef61o0ktaZ52k52
-         n7dlCwoX1MHdyCmY+ijfzX5fIUa693A9BHnUNpXjcu64cf5Twt4ISiLDPAtHsCKu0EqZ
-         E+NfRlM9nl0WSUSt4uSiPHmf5Nrz+u0CSr9GI3Oqef8pwovp7jxugOpLjanGFJsx4gI4
-         aJfw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=D9ggXvuJw0OfV/7DwKJBrE2gM6POgD68kCOokV6rNFg=;
-        fh=wWTf0SxaJts9rmPnRaimTcgF13vS7beuyeD2+6KhZkk=;
-        b=RTgI8l67HilPsDjihHeO69y/3NEc4fwBC5lkIf0sLdVgxMWxsfuBLNRUa6XIRfLXq4
-         sCCHjJMGZHSAtPwZdpXbt393je1JVvL1ommbkGIVwo0Vhfsv7MFL1yeq7Ki1FFRwmTkH
-         +dL73V+2lNHQyYPyb7BTYXaPnkDLSrb5+QAZ8QtdJUnOTpbEDKZlDwMbxCWLJqOWi43w
-         QvPlxAw1f95P9Cf03wAFpMf4ILbtrvbM/SzWYl5/9uqzHlcpg6KlCTyuEMO6CV/GGy7g
-         gIq74r+N3qISH0Ck536u2uVAX0dPlTh75xw1/0kzTYAMw1oXvGQpAjHD3WBfp9o1U8+X
-         3xRg==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785768707; x=1786373507; darn=lists.xenproject.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=D9ggXvuJw0OfV/7DwKJBrE2gM6POgD68kCOokV6rNFg=;
-        b=ICyiP5ifAHUUGf/3s9QWw1rwd0ifC1e9FWWH+J4UY9SiDSsavcIvGsAsbd4MlTJIMF
-         LTmbL5EYYHixm1WNTXjsNz2EQx6rlxa/ZXWhMtE10g6GSVHdVXOaX3zBw8ZldeD9/1OF
-         q4jr1iWb+0QrIVYA8fANUIENP5me9CN82jCjw+1BD/AFwzVttS/HAQiYph4XqvftzkI8
-         ahdxr/Eqteq0oN04iCDPVHkG0nBFxbtOYACoGPV7HIaRtWhKolZWlNE0fv3Tcx1n8tlf
-         InXCoa2t0D4NWu+YPHd8CAVnJMDtFgZKJH+JPc90iYeUgIg2ribCyKFGyL7cFQK1+n72
-         DHBg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785768707; x=1786373507;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+        d=suse.com; s=google; t=1785768738; x=1786373538; darn=lists.xenproject.org;
+        h=content-type:in-reply-to:autocrypt:from:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=D9ggXvuJw0OfV/7DwKJBrE2gM6POgD68kCOokV6rNFg=;
-        b=IjKB6DtOEbSrqU6Pzqi1d9vxIBDO2w469UN5KA0KBA6TNc/ylYCkolfyF+Hk3gC70T
-         PGfKyReHOi2ty9ERKnLNnfRgEMX0CAwjjr/OEXsWb0BG+uBPhzAirKLDm3iYGq64pfcN
-         4OYWCj4XaoKxH5o8cR2Z815sohqTwByQ86R+jWvd8+/nZbqY+b0Ob+Hn07X1g2eWf1Hr
-         KQg3P7dAZoT3xM5Jg/kVN2Pbvdl0w04grcHtCxVLwMeG2u78l1zaHSIKNA2vUWF1/fnN
-         dgVbTuEgyofTvefeDp85RdyFoKkO5TNkxaNNzVFIDC8bw3nWv4ea39pkxspGqZ360Ugz
-         JJjw==
-X-Forwarded-Encrypted: i=1; AHgh+RpMocEp5rzUBiPECuRjpwor1k2Hlweo7VRU6Z2PKHYneDFV8O4KnSC2BTBpZVW/NR5jraMDLJNwcg4=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzVpXpxZQqaxA/i0j89x/GWB6uBfNdqMn0FwjnsdjJou0k+DE+G
-	9EW9Y5dLKhPnUiVDX4me6OiSIXLxql4/hawaYRBQMG10n8mCl9XgwtRvJB7MayWFUw6Cjx4jGeJ
-	/I8CRSYIq5QJgM6gcH18kJWj3wpJrcHE=
-X-Gm-Gg: AR+sD10qE6DSMgDXy/kkswYnM353wzBGZOK3DBBh8uTXRZ05eyKhRXHYz1MSicqG/5F
-	gpgxW4snF7ZtWiaPU0COnz1ls6OzVMpbeImkTOXRjiTXL2RT96EF/8WW3VC8X+TxNL2Rjjj1qLG
-	rVLTqaeSJVp14LZuupxP/XCj7ky3c91LUYhDpwW3pip3KYLcDbTmV1UZcNDJcnQVaFiKxkzC+zE
-	0Zs7XePrquOxaHq83G7L+6eKO17pvBC7NQFh8NKGhryloBZEuhwku0EG5FkTgfcwqf8AZNk0dzX
-	VvER93Za7ewG1rtT8enS3L/DRxtVYs/45tKV+MaIfOBRQgLIjCIXZyRD2ZAayOekPmZOGSJwUls
-	j
-X-Received: by 2002:a53:ca4f:0:b0:667:a025:89a4 with SMTP id
- 956f58d0204a3-6694f08334emr9042125d50.18.1785768706580; Mon, 03 Aug 2026
- 07:51:46 -0700 (PDT)
+        bh=0qKWJoSCqTs9s/h/TtgzhU/DUhBV122CIkFwWPBNBUk=;
+        b=LwjccAjQtHAZ8Zh414NvjqxLsqVx6vNReCA+vPZxFgtkIMaMDiK2TSCssTIYfl9qsL
+         a/OPYH3M3rO2iVuu66FAbDeU8v93FRK0GQPwatktAshZAESevBzIuYui0I761XiRf/oJ
+         rtFu0UfkeNdCFfoXgsR87u1qpx7s2w2kVTEjWEJ9YCwQKNHxn9yUWOBahLPlxv/JqNbW
+         8CA37OZrW3x/tz4WOpgRs0PFrzMcTXVN+4r46A/mRdtUKsBL60h/FKfOK0RriEXCutTm
+         ac+CbNlpdi3AMGCfoEfkCNe+QDkIFc+ZDrGcid2CvBVB8k8cXw5hItU70uPGBY3OMK4b
+         94pQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785768738; x=1786373538;
+        h=content-type:in-reply-to:autocrypt:from:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=0qKWJoSCqTs9s/h/TtgzhU/DUhBV122CIkFwWPBNBUk=;
+        b=tIpPifRccrh56eyICJ0hLPcoJ5T/bEOznNyynB5Jr9KfR2iMUTP63jv2qKB+goJKBw
+         CLo+9Gdrs1EwWQtHmYKOp3T6qf0Bgv14+DfEIYBkQ3fpuLOmYTMXjh3MML3YKvfttd7m
+         dAjmffDeqroWe1j0Zj/PO/rGTy2SHQRwfDaeooJ5Za6a5U+naWcsi7JKtXK/QDbrUM/z
+         gNFEPYVv0ELPMyqSZ+JK/T+JQcKv5wF9wNKHXk9P7zXn7d6EfKh/pK+MPwkZ2H++TSew
+         6VLcpnEKjnNR5TayLYFLi4rWKhoYnD2aBSh1LMR3DcuIukYCQT6snsyEKTQVsRxKNEz5
+         5n/g==
+X-Gm-Message-State: AOJu0YxV5TiGDLqBZmO92M9zpi6vCmGP9HAunSRClFk1mgbBPteCqwFa
+	7N9oKbIcvnnzT2SXtO6cnB385vwl1qssF36ca1jloxw/6Pme6iZMZBOW8et3R5LjyBM=
+X-Gm-Gg: AR+sD10qb8XRIOQhRmuZY+sGJqfVeaSLEWcBnWbnAKkTr9OIRfZTS/Ta4DjR8KCiDBK
+	kHjUEKtmTJcAajKMA8eaIdpIM62eJFr6UqIooLLZ8F0cdXcX3BOhLl61R2+kmvTfE1EtsPTauPz
+	KHPEF0AMO2GyBwI9Obqe078cptTMqFbblyW/HvrHEgNzQomify3Xm1qTbT5xlDIQGuVsoGt6ULy
+	fvN86J5yBVzpfbbrBhFpgY+/uE+ijcc/wVjoyoTnfpABz5xeZFA0t19ZznT8sDXUZH5MzQ6lbVR
+	iPDikeKhvZr8qE6939s/86VpnJ5bZzXHr1V3wp+vihrkTF4Pw7zbtVcyasrFBGHnwdufk+GvUdS
+	TAFbORF/7yFZDIHxSGm8J9iaN6nWl3m94wVmFOk/cbbZushyeQg64WPPHqMV2LfYi3irOsanJgU
+	c+Qt/vrsymlvFylsF0Ffw5qVucNqTq+yeDx48yDrae0DNCwCx2FNzmXCiTVbgOL1NuOnUCcb1QH
+	lIEy4TO7PNpAjCvoMdRs6NI2A1coh0aIAf5hjuO4/LpfxMVTR4aQW2O2jGCPU/J3EJcvRv0PPCt
+	on+AvV/y2SAzCaYUenMMH3L0MA==
+X-Received: by 2002:a17:907:da15:b0:c15:cac2:1ec4 with SMTP id a640c23a62f3a-c1fe7ecaf45mr867318666b.1.1785768738422;
+        Mon, 03 Aug 2026 07:52:18 -0700 (PDT)
+Message-ID: <2f1348d8-c175-42e5-9b33-bdca19bde734@suse.com>
+Date: Mon, 3 Aug 2026 16:52:17 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH Linux v6 16/16] xen/privcmd: Add new ABI to allow copying
+ foreign memory
+To: Frediano Ziglio <freddy77@gmail.com>
+Cc: xen-devel@lists.xenproject.org,
+ Frediano Ziglio <frediano.ziglio@citrix.com>, Jan Beulich
+ <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Anthony PERARD <anthony.perard@vates.tech>
 References: <20260619130501.272832-1-frediano.ziglio@citrix.com>
- <20260619130501.272832-13-frediano.ziglio@citrix.com> <c5f00fa4-4d9e-4227-87a0-6e657fd523e9@suse.com>
- <CAHt6W4c0FDaMZK-4-7CReG_PdV+L=HNxVGNjV5vUjDkKq3EMBA@mail.gmail.com>
- <2889dc4e-33ec-4d8f-b01d-026506a39cbf@suse.com> <CAHt6W4cghz1Rh=MXqmx6ZHA0iOz9xTBDNhFWaqtZ=npd4Hb=GQ@mail.gmail.com>
- <07b3bbb6-ef62-419c-b708-1b9ae2774462@suse.com> <CAHt6W4ckkQOKn9jvNpMG5meFeagY8uFZJsC6CEUsu9tfc17cHQ@mail.gmail.com>
- <46b70e9d-1ade-4ba6-ad5f-87d2c9652a7b@suse.com>
-In-Reply-To: <46b70e9d-1ade-4ba6-ad5f-87d2c9652a7b@suse.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Mon, 3 Aug 2026 15:51:34 +0100
-X-Gm-Features: AUfX_mzy7nANcnwN3EGkyMZENWLyCWbjND7mD9ySmJskC8tgrgPc-DcdzJDw84U
-Message-ID: <CAHt6W4dq+FzgMzC+dU0C4K76X1Pmsf+vEc=P7Htg=jJXDPvRHw@mail.gmail.com>
-Subject: Re: [PATCH v6 12/16] xen: implement new foreign copy hypercall
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Frediano Ziglio <frediano.ziglio@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	Teddy Astie <teddy.astie@vates.tech>, Anthony PERARD <anthony.perard@vates.tech>, 
-	Juergen Gross <jgross@suse.com>, "Daniel P . Smith" <dpsmith@apertussolutions.com>, 
-	xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-33051d/1785768708-76AF94E9-CBE7C056/0/0
+ <20260619130501.272832-17-frediano.ziglio@citrix.com>
+ <439c2740-fb84-42cb-b001-cb290684a583@suse.com>
+ <CAHt6W4dMZtyvMuAfFVG36z53b=a5m6P5gQ4HONGO3WzOBUJ-qw@mail.gmail.com>
+Content-Language: en-US
+From: Juergen Gross <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <CAHt6W4dMZtyvMuAfFVG36z53b=a5m6P5gQ4HONGO3WzOBUJ-qw@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------pU6AunD4X9CW20zewjSsZ2ob"
+X-purgate-ID: tlsNG-16d1c6/1785768739-F7ACA77B-DB8132FD/0/0
 X-purgate-type: clean
-X-purgate-size: 8625
+X-purgate-size: 11849
 
-On Mon, 29 Jun 2026 at 07:59, Jan Beulich <jbeulich@suse.com> wrote:
->
-> On 26.06.2026 16:14, Frediano Ziglio wrote:
-> > On Wed, 24 Jun 2026 at 07:44, Jan Beulich <jbeulich@suse.com> wrote:
-> >> On 23.06.2026 23:18, Frediano Ziglio wrote:
-> >>> On Tue, 23 Jun 2026 at 14:21, Jan Beulich <jbeulich@suse.com> wrote:
-> >>>> On 23.06.2026 12:55, Frediano Ziglio wrote:
-> >>>>> On Mon, 22 Jun 2026 at 11:34, Jan Beulich <jbeulich@suse.com> wrote:
-> >>>>>> On 19.06.2026 15:04, Frediano Ziglio wrote:
-> >>>>>>> --- a/xen/common/memory.c
-> >>>>>>> +++ b/xen/common/memory.c
-> >>>>>>> @@ -1545,6 +1545,139 @@ static int acquire_resource(
-> >>>>>>>      return rc;
-> >>>>>>>  }
-> >>>>>>>
-> >>>>>>> +/*
-> >>>>>>> + * The "noinline" qualifier avoids the compiler to create a large function
-> >>>>>>> + * consuming quite a lot of stack.
-> >>>>>>> + */
-> >>>>>>> +static int noinline mem_foreigncopy(
-> >>>>>>> +    XEN_GUEST_HANDLE_PARAM(xen_foreigncopy_t) arg)
-> >>>>>>> +{
-> >>>>>>> +    struct domain *d, *const currd = current->domain;
-> >>>>>>> +    xen_foreigncopy_t copy;
-> >>>>>>> +    int rc, direction;
-> >>>>>>> +
-> >>>>>>> +    if ( copy_from_guest(&copy, arg, 1) )
-> >>>>>>> +        return -EFAULT;
-> >>>>>>> +
-> >>>>>>> +    if ( copy.flags & ~XENMEM_foreigncopy_direction )
-> >>>>>>> +        return -EINVAL;
-> >>>>>>> +
-> >>>>>>> +    direction = copy.flags & XENMEM_foreigncopy_direction;
-> >>>>>>> +
-> >>>>>>> +    rc = rcu_lock_remote_domain_by_id(copy.domid, &d);
-> >>>>>>
-> >>>>>> Iirc I did ask before why this isn't ..._by_any_id().
-> >>>>>
-> >>>>> I probably was confused by the question about MMUEXT and the 2 domains.
-> >>>>> There are different similar hypercalls (like the mentioned MMUEXT but
-> >>>>> also hypercalls to map foreign domain memory) that have this check
-> >>>>> (not the same domain). Any domain has, obviously, access to its own
-> >>>>> memory, so it should not have to use hypercall to access its own
-> >>>>> memory. If it does it looks like a mistake causing performance issues
-> >>>>> or an attempt to circumvent security; in either case you would like to
-> >>>>> avoid it.
-> >>>>
-> >>>> No. Self-grants are possible as well, for example, and for a good reason.
-> >>>> Allowing normally-remote operations on oneself helps with testing, for
-> >>>> example. It may also help avoid needing to special-case "self" in code
-> >>>> which needs to cover both cases.
-> >>>
-> >>> But this is not a grant, it's a copy.
-> >>
-> >> Sure, but the underlying principle is what matters. Plus you don't prevent
-> >> self-copy by using ..._by_id(), you only preclude the use of DOMID_SELF.
-> >
-> > Sure about this?
->
-> No, I'm sorry: I (repeatedly) managed to ignore the "remote" in the function
-> called. That said, my request stands: No arbitrary restrictions please. If
-> you can properly justify a restriction, that's a different thing.
->
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------pU6AunD4X9CW20zewjSsZ2ob
+Content-Type: multipart/mixed; boundary="------------lQhl9a0UTJFXvMiSh6rfC5yO";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Frediano Ziglio <freddy77@gmail.com>
+Cc: xen-devel@lists.xenproject.org,
+ Frediano Ziglio <frediano.ziglio@citrix.com>, Jan Beulich
+ <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Anthony PERARD <anthony.perard@vates.tech>
+Message-ID: <2f1348d8-c175-42e5-9b33-bdca19bde734@suse.com>
+Subject: Re: [PATCH Linux v6 16/16] xen/privcmd: Add new ABI to allow copying
+ foreign memory
+References: <20260619130501.272832-1-frediano.ziglio@citrix.com>
+ <20260619130501.272832-17-frediano.ziglio@citrix.com>
+ <439c2740-fb84-42cb-b001-cb290684a583@suse.com>
+ <CAHt6W4dMZtyvMuAfFVG36z53b=a5m6P5gQ4HONGO3WzOBUJ-qw@mail.gmail.com>
+In-Reply-To: <CAHt6W4dMZtyvMuAfFVG36z53b=a5m6P5gQ4HONGO3WzOBUJ-qw@mail.gmail.com>
+Autocrypt-Gossip: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJ3BBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AAIQkQoDSui/t3IH4WIQQ+pJkfkcoLMCa4X6CgNK6L+3cgfgn7AJ9DmMd0SMJE
+ ePbc7/m22D2v04iu7ACffXTdZQhNl557tJuDXZSBxDmW/tLOwU0EWTecRBAIAIK5OMKMU5R2
+ Lk2bbjgX7vyQuCFFyKf9rC/4itNwhYWFSlKzVj3WJBDsoi2KvPm7AI+XB6NIkNAkshL5C0kd
+ pcNd5Xo0jRR5/WE/bT7LyrJ0OJWS/qUit5eNNvsO+SxGAk28KRa1ieVLeZi9D03NL0+HIAtZ
+ tecfqwgl3Y72UpLUyt+r7LQhcI/XR5IUUaD4C/chB4Vq2QkDKO7Q8+2HJOrFIjiVli4lU+Sf
+ OBp64m//Y1xys++Z4ODoKh7tkh5DxiO3QBHG7bHK0CSQsJ6XUvPVYubAuy1XfSDzSeSBl//C
+ v78Fclb+gi9GWidSTG/4hsEzd1fY5XwCZG/XJJY9M/sAAwUH/09Ar9W2U1Qm+DwZeP2ii3Ou
+ 14Z9VlVVPhcEmR/AFykL9dw/OV2O/7cdi52+l00reUu6Nd4Dl8s4f5n8b1YFzmkVVIyhwjvU
+ jxtPyUgDOt6DRa+RaDlXZZmxQyWcMv2anAgYWGVszeB8Myzsw8y7xhBEVV1S+1KloCzw4V8Z
+ DSJrcsZlyMDoiTb7FyqxwQnM0f6qHxWbmOOnbzJmBqpNpFuDcz/4xNsymJylm6oXiucHQBAP
+ Xb/cE1YNHpuaH4SRhIxwQilCYEznWowQphNAbJtEKOmcocY7EbSt8VjXTzmYENkIfkrHRyXQ
+ dUm5AoL51XZljkCqNwrADGkTvkwsWSvCSQQYEQIACQUCWTecRAIbDAAKCRCgNK6L+3cgfuef
+ AJ9wlZQNQUp0KwEf8Tl37RmcxCL4bQCcC5alCSMzUBJ5DBIcR4BY+CyQFAs=
 
-Not strong about it.
-I'll change to rcu_lock_domain_by_any_id.
+--------------lQhl9a0UTJFXvMiSh6rfC5yO
+Content-Type: multipart/mixed; boundary="------------I41cUVayIIqMBA0WgqbDouAc"
 
-> >>>>>>> +    XEN_GUEST_HANDLE(uint8) buffer;
-> >>>>>>> +};
-> >>>>>>
-> >>>>>> What was (again) left unaddressed is the question towards using GFNs on both
-> >>>>>> sides of the copy. This would eliminate the need for the flags field, taken
-> >>>>>> by a 2nd domid_t one then.
-> >>>>>>
-> >>>>>
-> >>>>> This was addressed in
-> >>>>> https://lists.xenproject.org/archives/html/xen-devel/2026-06/msg00567.html
-> >>>>
-> >>>> Well, yes, but not in a satisfactory way. Back channels tell me that you
-> >>>> actually got the same feedback already on internal review. Which makes it
-> >>>> all the more puzzling that you insist on doing it differently. Multiple
-> >>>> maintainers asking for the same thing may be an indication of something.
-> >>>
-> >>> Not needing to have backchannel feedback, I already wrote that a
-> >>> similar approach was tried and made the code more complicated.
-> >>
-> >> Even if indeed so: Yet at the same time more flexible.
-> >>
-> >>> Both maintainers didn't comment on my replies so I assume they were
-> >>> fine with it.
-> >>> And you are failing to provide positive feedback.
-> >>> I asked (that one internally) for examples of guest buffers provided
-> >>> as frame numbers but I got no answer (or better the answer was more
-> >>> "currently there are not").
-> >>> Also note that the location of xen_foreigncopy_t structure is also
-> >>> provided using a guest pointer.
-> >>> I remember there were some discussions about ABI changes (2/3 years
-> >>> ago) to address this and other issues but I cannot see much progress.
-> >>
-> >> And it's that (very slowly progressing effort) which made me ask. The
-> >> fewer virtual addresses we bake into new sub-ops, the better for that
-> >> effort. And no, that doesn't go as far as completely eliminating
-> >> handles (presently representing virtual addresses) - that needs to be
-> >> part of the new ABI.
-> >
-> > In other words, you want me to code something temporary that you
-> > already know that needs to be changed.
->
-> What do you mean by "temporary"? We will need to live with the present
-> ABI for the foreseeable future. The new ABI's requirements haven't even
-> been spelled out yet. Patches to allow use of physical addresses in
-> place of virtual ones were actually turned down on the grounds of there
-> not having been a write-down of all requirements.
->
+--------------I41cUVayIIqMBA0WgqbDouAc
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Temporary in the sense that there will be new ABIs to deal with not
-using virtual addresses.
-The second sentence is a bit contradictory. You want me to address the
-virtual address complaint but you are telling me that the change will
-be turned down if I don't address everything. And this is why this is
-out of scope here.
+T24gMDMuMDguMjYgMTY6MjMsIEZyZWRpYW5vIFppZ2xpbyB3cm90ZToNCj4gT24gTW9uLCAz
+IEF1ZyAyMDI2IGF0IDE1OjA1LCBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+IHdy
+b3RlOg0KPj4NCj4+IE9uIDE5LjA2LjI2IDE1OjA1LCBGcmVkaWFubyBaaWdsaW8gd3JvdGU6
+DQo+Pj4gVGhpcyBuZXcgQUJJIGFsbG93cyB0byBjb3B5IGZvcmVpZ24gZG9tYWluIG1lbW9y
+eSB0by9mcm9tIGEgYnVmZmVyLg0KPj4+IFRoaXMgYXZvaWRzIGhhdmluZyB0byBtYXAvY29w
+eS91bm1hcCBmb3JlaWduIG1lbW9yeSB3aGljaCBpcw0KPj4+IGV4cGVuc2l2ZS4NCj4+PiBU
+aGlzIG9wZXJhdGlvbiBpcyBkb25lIHBhcnRpY3VsYXJseSB3aGVuIG1pZ3JhdGluZyBWTXMu
+DQo+Pj4NCj4+PiBTaWduZWQtb2ZmLWJ5OiBGcmVkaWFubyBaaWdsaW8gPGZyZWRpYW5vLnpp
+Z2xpb0BjaXRyaXguY29tPg0KPj4NCj4+IFdoaWxlIGRvaW5nIGEgdGVzdCBidWlsZCBJIGdv
+dCB0aGUgZm9sbG93aW5nIGJ1aWxkIGZhaWx1cmVzIGZvciAzMi1iaXQgYXJtOg0KPj4NCj4+
+ICAgICBDQyAgICAgIGFyY2gvYXJtL3hlbi9lbmxpZ2h0ZW4ubw0KPj4gSW4gZmlsZSBpbmNs
+dWRlZCBmcm9tIC9ob21lL2dyb3NzL2tvcmcvc3JjL2FyY2gvYXJtL2luY2x1ZGUvYXNtL3hl
+bi9pbnRlcmZhY2UuaDoxLA0KPj4gICAgICAgICAgICAgICAgICAgIGZyb20gL2hvbWUvZ3Jv
+c3Mva29yZy9zcmMvaW5jbHVkZS94ZW4vaW50ZXJmYWNlL3hlbi5oOjEzLA0KPj4gICAgICAg
+ICAgICAgICAgICAgIGZyb20gL2hvbWUvZ3Jvc3Mva29yZy9zcmMvaW5jbHVkZS94ZW4veGVu
+Lmg6NTIsDQo+PiAgICAgICAgICAgICAgICAgICAgZnJvbSAvaG9tZS9ncm9zcy9rb3JnL3Ny
+Yy9hcmNoL2FybS94ZW4vZW5saWdodGVuLmM6MjoNCj4+IC9ob21lL2dyb3NzL2tvcmcvc3Jj
+L2luY2x1ZGUveGVuL2FybS9pbnRlcmZhY2UuaDoyMjozNTogZXJyb3I6IHVua25vd24gdHlw
+ZSBuYW1lDQo+PiAnX19ndWVzdF9oYW5kbGVfdWludDhfdCcNCj4+ICAgICAgMjIgfCAjZGVm
+aW5lIEdVRVNUX0hBTkRMRShuYW1lKSAgICAgICAgX19ndWVzdF9oYW5kbGVfICMjIG5hbWUN
+Cj4+ICAgICAgICAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXn5+fn5+
+fn5+fn5+fn5+DQo+PiAvaG9tZS9ncm9zcy9rb3JnL3NyYy9pbmNsdWRlL3hlbi9pbnRlcmZh
+Y2UvbWVtb3J5Lmg6MzYxOjU6IG5vdGU6IGluIGV4cGFuc2lvbiBvZg0KPj4gbWFjcm8gJ0dV
+RVNUX0hBTkRMRScNCj4+ICAgICAzNjEgfCAgICAgR1VFU1RfSEFORExFKHVpbnQ4X3QpIGJ1
+ZmZlcjsNCj4+ICAgICAgICAgfCAgICAgXn5+fn5+fn5+fn5+DQo+PiBtYWtlWzVdOiAqKiog
+Wy9ob21lL2dyb3NzL2tvcmcvc3JjL3NjcmlwdHMvTWFrZWZpbGUuYnVpbGQ6Mjg5Og0KPj4g
+YXJjaC9hcm0veGVuL2VubGlnaHRlbi5vXSBFcnJvciAxDQo+PiBtYWtlWzRdOiAqKiogWy9o
+b21lL2dyb3NzL2tvcmcvc3JjL3NjcmlwdHMvTWFrZWZpbGUuYnVpbGQ6NTQ5OiBhcmNoL2Fy
+bS94ZW5dIEVycm9yIDINCj4+IG1ha2VbM106ICoqKiBbL2hvbWUvZ3Jvc3Mva29yZy9zcmMv
+c2NyaXB0cy9NYWtlZmlsZS5idWlsZDo1NDk6IGFyY2gvYXJtXSBFcnJvciAyDQo+Pg0KPj4N
+Cj4+IFBsZWFzZSBmaXggdGhvc2UuDQo+Pg0KPj4NCj4+IEp1ZXJnZW4NCj4gDQo+IE11bWJs
+ZS4uLg0KPiANCj4gSSBzdXBwb3NlIHRoaXMgd291bGQgZml4IGl0DQo+IA0KPiBkaWZmIC0t
+Z2l0IGEvaW5jbHVkZS94ZW4vYXJtL2ludGVyZmFjZS5oIGIvaW5jbHVkZS94ZW4vYXJtL2lu
+dGVyZmFjZS5oDQo+IGluZGV4IGMzZWFkYTI2NDJhYS4uN2U3OTg1M2IxODhkIDEwMDY0NA0K
+PiAtLS0gYS9pbmNsdWRlL3hlbi9hcm0vaW50ZXJmYWNlLmgNCj4gKysrIGIvaW5jbHVkZS94
+ZW4vYXJtL2ludGVyZmFjZS5oDQo+IEBAIC01Myw2ICs1Myw3IEBAIERFRklORV9HVUVTVF9I
+QU5ETEUoaW50KTsNCj4gICBERUZJTkVfR1VFU1RfSEFORExFKHZvaWQpOw0KPiAgIERFRklO
+RV9HVUVTVF9IQU5ETEUodWludDY0X3QpOw0KPiAgIERFRklORV9HVUVTVF9IQU5ETEUodWlu
+dDMyX3QpOw0KPiArREVGSU5FX0dVRVNUX0hBTkRMRSh1aW50OF90KTsNCj4gICBERUZJTkVf
+R1VFU1RfSEFORExFKHhlbl9wZm5fdCk7DQo+ICAgREVGSU5FX0dVRVNUX0hBTkRMRSh4ZW5f
+dWxvbmdfdCk7DQo+IA0KPiBGcmVkaWFubw0KPiANCg0KQW5kIG5vdyBhbm90aGVyIG9uZToN
+Cg0KL2hvbWUvZ3Jvc3Mva29yZy9zcmMvZHJpdmVycy94ZW4vcHJpdmNtZC5jOiBJbiBmdW5j
+dGlvbiAncHJpdmNtZF9pb2N0bF9mb3JlaWduY29weSc6DQovaG9tZS9ncm9zcy9rb3JnL3Ny
+Yy9kcml2ZXJzL3hlbi9wcml2Y21kLmM6MTU5MToyOTogZXJyb3I6IGluY29tcGF0aWJsZSB0
+eXBlcyANCndoZW4gYXNzaWduaW5nIHRvIHR5cGUgJ2NvbnN0IHhlbl9wZm5fdCAqJyB7YWth
+ICdjb25zdCBsb25nIGxvbmcgdW5zaWduZWQgaW50IA0KKid9IGZyb20gdHlwZSAnX19ndWVz
+dF9oYW5kbGVfeGVuX3Bmbl90Jw0KICAxNTkxIHwgICAgICAgICAgICAgICAgIGNvcHkucGZu
+cyA9IHhjb3B5LmZyYW1lX2xpc3Q7DQogICAgICAgfCAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgXn5+fn4NCi9ob21lL2dyb3NzL2tvcmcvc3JjL2RyaXZlcnMveGVuL3ByaXZjbWQu
+YzoxNTkyOjMxOiBlcnJvcjogaW5jb21wYXRpYmxlIHR5cGVzIA0Kd2hlbiBhc3NpZ25pbmcg
+dG8gdHlwZSAndm9pZCAqJyBmcm9tIHR5cGUgJ19fZ3Vlc3RfaGFuZGxlX3VpbnQ4X3QnDQog
+IDE1OTIgfCAgICAgICAgICAgICAgICAgY29weS5idWZmZXIgPSB4Y29weS5idWZmZXI7DQog
+ICAgICAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBefn5+fg0KDQoNCkp1ZXJn
+ZW4NCg==
+--------------I41cUVayIIqMBA0WgqbDouAc
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-> >> To preempt the argument towards "fewer virtual addresses" not really
-> >> being true when changing from handle-to-uint8 to handle-to-pfn: The
-> >> former won't be able to express a buffer mapped contiguously in VA
-> >> space, but discontiguous in PA space. The latter will, simply be
-> >> avoiding buffer VAs in the first place (the array of frame numbers
-> >> can e.g. be placed in a dedicated hypercall argument area known to be
-> >> physically contiguous).
-> >
-> > If it's mapped continuously in VA and you pass the VA I don't
-> > understand the problem. From the way I see it's more the latter that's
-> > the problem.
->
-> I'm talking of the future, where VAs wouldn't be used anymore. The
-> buffer you use couldn't be described by a single PA, unless the caller
-> took specific measures up front.
->
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-If you read my reply I suggested a way to avoid virtual addresses completely.
+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
+kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
+=3DeeAB
+-----END PGP PUBLIC KEY BLOCK-----
 
-> Jan
+--------------I41cUVayIIqMBA0WgqbDouAc--
 
-About the P2M type check it turned out that I was wrong with the
-checking. The MMAP way use MMU_UPDATE calls which do not care about
-P2M type at all. Changing the code to
+--------------lQhl9a0UTJFXvMiSh6rfC5yO--
 
-...
-        for ( unsigned int i = 0; i < todo; i++ )
-        {
-            struct page_info *foreign_page;
-            mfn_t foreign_mfn;
-            void *foreign;
-            p2m_type_t p2mt;
-            p2m_query_t q = (direction == XENMEM_foreigncopy_to) ?
-                            P2M_ALLOC | P2M_UNSHARE : P2M_ALLOC;
+--------------pU6AunD4X9CW20zewjSsZ2ob
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-            foreign_page = get_page_from_gfn(d, gfn_list[i], &p2mt, q);
+-----BEGIN PGP SIGNATURE-----
 
-            if ( unlikely(p2m_is_paged(p2mt)) )
-            {
-                if ( foreign_page )
-                    put_page(foreign_page);
-                p2m_mem_paging_populate(d, _gfn(gfn_list[i]));
-                p2mt = p2m_ram_paging_in;
-                foreign_page = NULL;
-            }
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmpwqyEFAwAAAAAACgkQsN6d1ii/Ey+X
+awf8DEKzTmCk+s5KRL6C70aTw6kpX+aMhkz2Mlnu1Hy2zzzb9abqos+57esHSIuvUCgJfhpbaKfI
+NKkrfLpt63PBmUBUfpO6g2lLqKcpPwBnlyTkmkLM8RkQ4ZO6kcB9iuwMvDuAkgeeJC5eFRPf9PPj
+zvkY/9nk1qjjLf/6GUqxspczKK5ti1CS5XtLHYPQwALl2Y4DGTMFggnQaEr41q3OlUvsqs5Pyno8
+5d5IEwu9xGRRpmm3VaIV/NTsNdH8eQO3QN/nVMyCUB/R06mq1o3f84Oq2+IlAaUP1rPX+f2LZ3/K
+A31Q/nSO0OPhail0y3iE3vvXcH59RnHfvp6DBg2YwA==
+=h9ye
+-----END PGP SIGNATURE-----
 
-            if ( unlikely(!foreign_page) )
-            {
-                rc = -ENOENT;
-                if ( p2mt != p2m_ram_paging_in )
-                {
-                    gdprintk(XENLOG_WARNING,
-                             "Error accessing foreign gfn %" PRI_gfn "\n",
-                             gfn_list[i]);
-                    rc = -EINVAL;
-                }
-                copy.nr_frames -= i;
-                guest_handle_add_offset(copy.frame_list, i);
-                goto out;
-            }
-...
-
-About the XSM part I have now
-
-...
-    /*
-     * Check we are allowed to map and access these foreign pages.
-     */
-    if ( direction == XENMEM_foreigncopy_from )
-        rc = xsm_foreigncopy_from(XSM_TARGET, currd, d);
-    else
-        rc = xsm_foreigncopy_to(XSM_TARGET, currd, d);
-    if ( rc )
-        goto out;
-...
-
-I wrote some code for the compat mode but I need to test it.
-Still I think that adding it it's a mistake, it's just a new, probably
-unused, ABI that must be maintained till a probable "no virtual
-address" ABI will replace it.
-
-Frediano
+--------------pU6AunD4X9CW20zewjSsZ2ob--
 
