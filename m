@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B92F6C55175
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2026 09:56:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1381331.1624905 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96F8BC55184
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2026 10:11:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1381345.1624933 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqpOk-0001X6-1l; Mon, 03 Aug 2026 09:55:54 +0000
+	id 1wqpdn-0005x6-I9; Mon, 03 Aug 2026 10:11:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1381331.1624905; Mon, 03 Aug 2026 09:55:54 +0000
+Received: by outflank-mailman (output) from mailman id 1381345.1624933; Mon, 03 Aug 2026 10:11:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wqpOj-0001Wz-UO; Mon, 03 Aug 2026 09:55:53 +0000
-Received: by outflank-mailman (input) for mailman id 1381331;
- Mon, 03 Aug 2026 09:55:52 +0000
+	id 1wqpdn-0005wz-FG; Mon, 03 Aug 2026 10:11:27 +0000
+Received: by outflank-mailman (input) for mailman id 1381345;
+ Mon, 03 Aug 2026 10:11:25 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wqpOi-0001Wm-A2
- for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 09:55:52 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wqpdl-0005wt-Mw
+ for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 10:11:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wqpOh-00B9i8-MV
- for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 11:55:51 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wqpdk-00EdkD-4a
+ for xen-devel@lists.xenproject.org; Mon, 03 Aug 2026 12:11:24 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7065a7-bab6-0a2a0a5309dd-0a2a4503b012-2
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 11:55:51 +0200
-Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a706948-bab6-0a2a0a5309dd-0a2a4508b0ea-18
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 12:11:24 +0200
+Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7065a5-fae8-0a2a45030019-d1558033c915-3
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 11:55:49 +0200
-Received: by mail-wm1-f51.google.com with SMTP id
- 5b1f17b1804b1-493b966dd74so10010125e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 02:55:49 -0700 (PDT)
+ id 6a70694b-f659-0a2a45080019-d155802ced93-3
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 12:11:23 +0200
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-49553515a8bso30564155e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2026 03:11:23 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4980878dcb4sm353186965e9.13.2026.08.03.02.55.48
+ 5b1f17b1804b1-49807b4bdc7sm130641945e9.0.2026.08.03.03.11.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 Aug 2026 02:55:48 -0700 (PDT)
+ Mon, 03 Aug 2026 03:11:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,57 +53,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Cc:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785750949; x=1786355749; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785751883; x=1786356683; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=qmDsnUCui8sqdr2eheUQXwVu5kWQQnxMMLiHzaFa0lM=;
-        b=Iu4/DQI+Dj9lmfWj8bgpE6L/mSD60x+hXjta65RMiYGMnMiJZZ3haLyGeP5NEaM0LR
-         Xgmmf30AhvFlCPcH3X4oRJ4lk+duFOTIUmI675QzRjxrKo6KsCNzhgsthr2COtZJ0Q1/
-         MI76b/yBIXkhaVKZ313ACr/CiuBdgs+GvQpcbZ4nmOkCBVO8I8/YvE8fokBwgv7FZMEi
-         T8MSUVmi0KA7+ZzwbPq8F5B97jpKQeqo4Qczf8wlSremYwIKe3I4wtiOinVWUKsHMIbD
-         9TXAk6cEMs1nidGy9ZwLrf/vh3SjiIAC4v6meCMgOqynnZ9GvAYQbxMcoOh6WrU4t1Tr
-         /BPQ==
+        bh=gnOva0LMcogndW3IgqX95g4dwlTyOBKUvXh5mUS4hXs=;
+        b=VOZmgU0D6QdELjqCTXzGwQsX9GLPRegp3YOcTZG9OcDNevvC3L5JvvMjBqxF4jTWHR
+         5j9Fyf8QdyJlTiWAsWSKUKZkF0E1qwTSZlLOrUNsS5glvvx2WqHvh3lOcnKZdLL9aGoW
+         bVwrp+iUeW5eYPRqc5p4U523wHxb5gEyPzUc0xqmGxLihHRrSGMtyqU2KJBe98LwARiE
+         uPLdOzzEiwi3+4LDmeUx670/uKA0zQS14A7IO7cWcEDUXrzJVmMIIy7VMaQgHdw4B9gA
+         DoMqEqMzO6BRw/w41SY6IXf7O8OgijoRkzZ9J05Uzm+qEWfdKRqvVapXRQwwREuhdH6S
+         P9Tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785750949; x=1786355749;
+        d=1e100.net; s=20251104; t=1785751883; x=1786356683;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=qmDsnUCui8sqdr2eheUQXwVu5kWQQnxMMLiHzaFa0lM=;
-        b=T2EhND8y7nUjwBJlHr3FekB2ZAf60W+UnpoBytKpR28N6nb1xPfDH3z3VsOGtPsp/J
-         1fZt4nE4ktlsTlGmL+YEaYJbXwZTEaanVWp8gOM0X0c4zNesleFf0tTG+jEW4+YP2Y0Y
-         P//WV1LLrJrnhEwtd2N9XoBuKAuX32D6x/ZlNxPZUJMQ+rPJH+DmLUfd6PUnT+dOgc0k
-         AbnaJ9VUe55msyxeGwb4CEHumjNnbNsf6PItZavDNXruk6nLpsHoKb2cNT9NQ2Uo8M+C
-         zfo3VlUZrOTO0ER+S5SdC7cQqDBz9t47bUoFwWz8z1Ntl30T0BNlDLp9QLbvqyFhGNi/
-         6acw==
-X-Gm-Message-State: AOJu0YzsRo9EmBdXS4ll8txE/YoAqPxbOGS4huDENyxzd6UN4IDmVDd5
-	eKlnIoK1fCwSRx4GHcvGyIYtGbFU0lqFatWIxxmF77Q//ggibspHrSyX3xMxx5am70joWYo3zwd
-	7x63v9g==
-X-Gm-Gg: AR+sD10Eqmuq1f3T2j1bGHWNzZjBix1lx337T1zopHBVlzwgfY5pN/uVefgx9OmbBVM
-	4THIbBl6rCjLhEC983hByu1NA0+c6TypPPcmLqRpEjJQ31za+NUDi3JEAQ/UFjTG0d8poZ2wYss
-	8Gmwq+VKSpjpFq9W7qVB3wayPMQx549DhLfwPsHnssTenaPwQVISLkGpVSR/mChNvfTyKEsUPs0
-	LZsDmtFjkz6nBdX9jzwYfgUgYQ+pPpJI25E1Buj5bQaJq5hkI0DBpczvaQsIws/+RWoNSRFBUxZ
-	Cc5gRf+7R8DignfN/zpgVCnP/S8OWDPoMVUR6JzNuTRsWZbBEMQ7kpH6KbN5l4DbJDggvY2fPM+
-	H3CF586N6UvR6Qm52Oho2AJppWSd7oKPPxtplIYwG1dn4+e3TwrdFjfaS6uwkGDFbmd+CWYqjdX
-	1LSvZXilaMsvh3HAcxeiXCWgAsG7967TNIW72i2FhGr4zSfltBdqlTx97c0Y0eFLPPEv5RL6/lk
-	eDs5gT/Legifb+qq+jQSZNyR454+W4uNMUneBl0I2zwA5AaQc09
-X-Received: by 2002:a05:600d:8443:20b0:493:e974:41ac with SMTP id 5b1f17b1804b1-4980c6562c5mr157611345e9.16.1785750949416;
-        Mon, 03 Aug 2026 02:55:49 -0700 (PDT)
-Message-ID: <7e9c755a-0cbd-45f3-9683-069627e540eb@suse.com>
-Date: Mon, 3 Aug 2026 11:55:47 +0200
+        bh=gnOva0LMcogndW3IgqX95g4dwlTyOBKUvXh5mUS4hXs=;
+        b=g1fkTWnxdpVjgX/3nqdrWF9u3unhh3K8tv/P9+ukEAwP2DScJX9Oy6u7XQa9gmZw2Y
+         7D+1aMOjt35n3kP79ckNToNexYDu1QdCU11kp/5pwAiP1SZQpa20VtQKDfhVNvhdvLvB
+         0ZrpTGl9rsTMqk4dYR6EUeEvDrUkFnxheCTkew1vPqFRJC9kjyCw6sA+o7odNIrMMecW
+         KeFWjMhBT9wRxgxxZ/w7nhQOTTnIR7WVZNGqJh79mbIkSENvawg0O+0h6prCBlw9oCTq
+         o3f53nrTMtXqcYZDFMNaxAH3b8TKird64BHR7uyj6myuqFFp7sbX8gGApXPsZPPx5ht+
+         zYXA==
+X-Forwarded-Encrypted: i=1; AHgh+Rqzn1WGT/5i7heShEnhubFRJzDHpboFEzWbsr+UL6ac7DlyukozXdNP4I7G18hoWWJws5Jy/QM1glM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwCDvMRT0M6InV4iBVSKNr1PwVxbvRlOa7ukke8WBJ7KO4UOGjA
+	xloEhFkz6l1RNTS0aR8xmnSFSzBQX1TPHJPcSNbi0YOvQk4QdnppwJrD1o/3bRnm6w==
+X-Gm-Gg: AR+sD11VdvfprLKYaUpMLZObDFAY0ghScY6IpbjBZZ6JlPDaXpGerv9tn33zOsLONfl
+	nm/TJi2eweCRjuh5H//F6j7CxaG4widF4YI3lZQct79cSdj3OQK116mOKroFb0QgQ+bMT0kOTiU
+	zyAC/h6hHtINW9I5a75f5Nj9rtrbdPpBKo4DfLT29ztloQ1yM/FVYLKK+gRWhYOgDw5Q7l/2wlb
+	e+gSepUjr1lyo7yHCD7FyII6iKgvwZuGIbWq4yd3vxHsxvanNV2oxSjqiCKs3Ph/11xxCBipBK2
+	c2c71VPBWZbJEL7Ntm7vtnROmlDuhjCkI1DJh4uKHEze360dJPeVy1emnHimweASpGfQI2mYH3d
+	ufTQkKPUDX+3BZ2SW6RnDAxPE1FZcRsRwC7snrwOtjcG1Gv4p5Yl5zQLfFbS5vtIiVjoKYOssI1
+	oVpxMQ17lruaIwiLZ3luSOheuZ1x1sDPeBqb9PBTAREdodyMBcLCvoarJmwSJX+5XBQZLEm0Wk/
+	XfrxGGnvpdNawV7ibRnWMqTqJRBaOSRF9Fgk/5cKb0APNam4Ka6nDYduIYkhSU=
+X-Received: by 2002:a05:600d:849c:10b0:499:48bb:417e with SMTP id 5b1f17b1804b1-49948bb41d5mr5396535e9.2.1785751882919;
+        Mon, 03 Aug 2026 03:11:22 -0700 (PDT)
+Message-ID: <b742fec6-730a-4138-b5f5-7197f24df247@suse.com>
+Date: Mon, 3 Aug 2026 12:11:20 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 09/24] XSM: make .hvm_param*() hooks dependent upon HVM=y
+Subject: Re: [PATCH 12/24] x86/mm: get_page_from_l1e() is PV-or-shadow-only
 To: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <758c8410-a18e-45dc-8944-5913e5832397@suse.com>
- <7947b62f-6763-4561-b3aa-c451cfa3dacb@suse.com>
- <1b4d5a82-bdc4-460d-a5a4-59e788fe1c3f@apertussolutions.com>
+ <07e90200-95b5-413f-9259-7f0481d36521@suse.com>
+ <4531d02a-3a37-4c57-ba17-32034ba08cf9@apertussolutions.com>
 Content-Language: en-US
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -128,31 +131,76 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1b4d5a82-bdc4-460d-a5a4-59e788fe1c3f@apertussolutions.com>
+In-Reply-To: <4531d02a-3a37-4c57-ba17-32034ba08cf9@apertussolutions.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1785750949-76CF84E9-1CF67549/0/0
+X-purgate-ID: tlsNG-c1860d/1785751883-CD34D87B-CF92F006/0/0
 X-purgate-type: clean
-X-purgate-size: 835
+X-purgate-size: 2352
 
-On 02.08.2026 17:05, Daniel P. Smith wrote:
-> On 7/28/26 9:17 AM, Jan Beulich wrote:
->> They're unreachable / dead otherwise.
+On 02.08.2026 17:55, Daniel P. Smith wrote:
+> On 7/28/26 9:18 AM, Jan Beulich wrote:
+>> Otherwise the function is unreachable, violating MISRA C:2012 rule 2.1.
+>> With the function compiled out, its dedicated XSM hook also becomes
+>> unreachable, so it is similarly guarded.
 >>
 >> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 >> ---
->> Strictly speaking .hvm_param_altp2mhvm() is dependent upon X86=y as well
->> (but oddly not dependent upon ALTP2M=y).
+>> It feels suspicious that the .priv_mapping() check is used for HVM guests
+>> in shadow mode, but not for ones in HAP mode.
 > 
-> At a minimum, would it be worth at least adding a comment about the 
-> dependency? Note, this is just a question/suggestion.
+> I believe a hint to it is laying in the comment,
+> 
+>   /*
+>    * Let privileged domains transfer the right to map their target
+>    * domain's pages. This is used to allow stub-domain pvfb export to
+>    * dom0, until pvfb supports granted mappings. At that time this
+>    * minor hack can go away.
+>    */
+> 
+> Correct me if I am wrong, but get_page_from_l1e() is only used by PV and 
+> HVM + Shadow. When in HVM + HAP is mapping a guest page, it is done 
+> through p2m_get_foreign() which will then be covered by 
+> xsm_map_gmfn_foreign(). So only HVM + Shadow can hit TARGET_HACK check.
 
-Just a comment would be too little imo. One way or another we want to sort
-this properly. With the first question being - why a separate hook, and
-hence why the double checking for HVM_PARAM_ALTP2M? With further data
-passed into the hook, the Flask case can easily be dealt with using just a
-single hook. The XSM_TARGET vs XSM_PRIV makes this a little less nice for
-dummy.
+Yes, sure; that wasn't the point of my comment. The point was that I'd
+expect _the same_ hook to be used by the other path. Aiui if you make a
+policy, you want same situations dealt with the same. Hence there shouldn't
+be a need to express the same thing two ways.
+
+> I think the question is how to address the TARGET_HACK situation.
+
+I fear I don't really know what exactly you mean here.
+
+>> --- a/xen/arch/x86/mm.c
+>> +++ b/xen/arch/x86/mm.c
+>> @@ -837,6 +837,8 @@ static int cf_check print_mmio_emul_rang
+>>   }
+>>   #endif
+>>   
+>> +#if defined(CONFIG_PV) || defined(CONFIG_SHADOW_PAGING)
+>> +
+>>   /*
+>>    * get_page_from_l1e returns:
+>>    *   0  => success (page not present also counts as such)
+>> @@ -1038,6 +1040,8 @@ get_page_from_l1e(
+>>       return -EBUSY;
+>>   }
+>>   
+>> +#endif /* CONFIG_PV || CONFIG_SHADOW_PAGING */
+>> +
+> 
+> Would it also not be prudent to #ifdef out the declaration in asm/mm.h?
+
+Ah, yes, this looks possible for this function - the decl isn't needed for any
+DCE-ing by the compiler.
+
+> I think it would be a good defensive approach to condition out the 
+> header declaration. Otherwise,
+> 
+> Acked-by: Daniel P. Smith <dpsmith@apertussolutions.com>
+
+Thanks, also for all the others.
 
 Jan
 
