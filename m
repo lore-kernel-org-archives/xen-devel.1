@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3420BC55822
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2026 15:58:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1382427.1625796 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 991A3C55ABF
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2026 16:04:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1382436.1625806 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrHXM-0001of-GP; Tue, 04 Aug 2026 15:58:40 +0000
+	id 1wrHcx-0004kD-5w; Tue, 04 Aug 2026 16:04:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1382427.1625796; Tue, 04 Aug 2026 15:58:40 +0000
+Received: by outflank-mailman (output) from mailman id 1382436.1625806; Tue, 04 Aug 2026 16:04:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrHXM-0001oY-Dg; Tue, 04 Aug 2026 15:58:40 +0000
-Received: by outflank-mailman (input) for mailman id 1382427;
- Tue, 04 Aug 2026 15:58:39 +0000
+	id 1wrHcx-0004k5-0D; Tue, 04 Aug 2026 16:04:27 +0000
+Received: by outflank-mailman (input) for mailman id 1382436;
+ Tue, 04 Aug 2026 16:04:26 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wrHXK-0001oQ-RJ
- for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 15:58:38 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wrHcv-0004jE-WC
+ for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 16:04:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrHXK-00Fm1T-7v
- for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 17:58:38 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wrHcu-001mZB-MB
+ for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 18:04:24 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a720c02-5cb7-0a2a0a5109dd-0a2a4501dff6-46
- for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 17:58:38 +0200
-Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a720d80-bab6-0a2a0a5309dd-0a2a450b8942-26
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 18:04:24 +0200
+Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a720c2d-5984-0a2a45010019-d155802bc07b-3
- for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 17:58:38 +0200
-Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-49555a0e68bso17102085e9.2
- for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 08:58:38 -0700 (PDT)
+ id 6a720d88-b7e8-0a2a450b0019-d155dd2fb82f-3
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 18:04:24 +0200
+Received: by mail-wr1-f47.google.com with SMTP id
+ ffacd0b85a97d-47362928f65so4540855f8f.2
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 09:04:24 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49807b8d04fsm477454045e9.3.2026.08.04.08.58.36
+ ffacd0b85a97d-47fec249a78sm642447f8f.34.2026.08.04.09.04.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 04 Aug 2026 08:58:37 -0700 (PDT)
+ Tue, 04 Aug 2026 09:04:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,55 +55,56 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785859117; x=1786463917; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785859464; x=1786464264; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=uTztnL3YIRuGnJqt6+Zduc6sY+i67CEbHhQ5R6Sx/LA=;
-        b=HTtcWdIJyRO8GV8Zf6bncXTfFK6DNLPSkYE53keYPF/9c7tAwHYQkGAHTM9Iktts9s
-         RjgRAzdP6+G41Re/nSMXudt81MX0lo+TI4hbifsofAouze6X011y0YzXImbUVqwYNS18
-         A1uSOz7yOy621A83nUwBFGmdbBsX0rMgNRmTLH50VTD5lGfaT9Q80ojC4UM4qXZad3Cg
-         1kn1hKKzbRGwe+wLXlVk/JUDyr7yk2kXzSVYz5KvA/cJ2Uj3wdskxK/LNoTBzvQ9sVjx
-         TC0CSrZ4L8N5o1gabupPdKuL5Pa5fUgjpmurWL2XOePWx7cBGICPfAUT/v6FwqV/JZXX
-         AVEw==
+        bh=m5PEtzj8mtJe7pFOG8I3FsyiHy4JEbRtR3I88EiU7ZQ=;
+        b=MX+irVqJ2dI01rJT/FniLmL2rBtcyz260T6tq4/5aZj2p1153/vecKPbA38XoTdJZ8
+         mFAk/ehQBz17WlK5Nl4H2ZTWEXR/JQWE6yJV8YdyTjq9m/7mihOOqLrseD+QFBy8T87M
+         e0XYDMhdElNmf482tK4Q54fjx9XSFbT8tvZVd4bD33qiQBP3rtaT7bn9OEDgj8lgr3sI
+         oeiTr+fBanIgBFZSUwlTYkhnZJztSC4WGU1myxAnNxRCOAbL6XP4UzabPsXYikGTqONZ
+         EpTUWIACb6Hd5V+tYd1HEdz57CSQFXgnagbjyQVw/EeLFPm2cRQgbcRitLD0q5DMxVWt
+         NMfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785859117; x=1786463917;
+        d=1e100.net; s=20251104; t=1785859464; x=1786464264;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=uTztnL3YIRuGnJqt6+Zduc6sY+i67CEbHhQ5R6Sx/LA=;
-        b=MfH/x0NG3T9jkZtUL5VALG43S29Fkjg+XiGX/BrrnCsUdUzPN5Xd9UpjGENBxduSRq
-         NmAhJNhPxpZUzdbqq8oxoY5rgsBYqwvU7kw9T/AsXbagJI7HFHRWupzw9n1hX07xbT8f
-         jXgVC7mveAPkE4t+cgagsFWV6JIf5413TNvg4vUWEP8Bh2kQlbJ57GSboQ4X80R3+tyh
-         IQgZLiVruFJZRJ5kAQcWJFVbSHCH4hD/Qwrvq7DvzBZJn+PC4F6wCjDHDxLPMFQSj2MG
-         ljIIIy27X9o2RFWThhAU7LNur8gDfz/HhxipUZT2fO3LAQRcM6sIRqOlZL7jFsQ2jb32
-         DnBA==
-X-Forwarded-Encrypted: i=1; AHgh+RooVTFQO0UMBwDI6lgHfMWLnIn0u4pteBQbVNJQLFtoWd0wqgRffHUFNT1V0tlCwqQ1gg4OpXO9cAs=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YztEd1b0P1YokoTUFPlQj6c22254h7MYGrZcFHwYK2p/6M4axkH
-	fSZjqon0e0wJ6Zfmxa/keb8y+8dvH9ol2i4mvuJ2sWHT0OTzkIAItMieXHrFPojDdg==
-X-Gm-Gg: AR+sD12gqdlgwJMTUI4r+VLgIkYXmA7X7zDrF9/04ie2gtqCQjAMq2G1U8H2MnWFMRC
-	jL9hU9nDDbL69Kmqt/538K83GE6sRWy4pRWSFheONm2L0QLeHYx79xmc3/w/MyEW4uEwRi0viOU
-	ISju0tnxvzxL2VCf3FLmOYVOA1c1CsBIx0tf28Tuj9oAdEPQAn3zY+tdoYDeBeKjZoVBc7DtMN5
-	P9RQHq66pv5EvgaYUCfL/qiZTU+fVXX/bLjq8y4wfNoNJeqjV0xi02yM6byHRQaRHK0kJV4vE7L
-	zu4plp+QpqRXLZut0E4g/5QTp8UbJYRNQCkqTNcaKFiDaGiPbYE+JcX67sMymtHfPvE43a2UPkW
-	YMof2SGrIzXbu8k9tfFA4IBfI82Lr2fCBGyeF6KsytRB2/lRwnQmMVrdNM89MlPuSe3z6Z4KESE
-	Op6NDjD/nPXAHroj/o6/7eOb48RJnlYtQLRsK0euGWFXTWt3gv4g7IJPQ8q7TZqNa+wFX1nSf8q
-	Zg/AfJOxYz/hWNxw+ssn3bwqO0yFcUGY2QD/djdhYYA1rwJVVbm
-X-Received: by 2002:a05:600c:3b23:b0:493:cc25:9c0e with SMTP id 5b1f17b1804b1-4980c679e43mr371092945e9.14.1785859117612;
-        Tue, 04 Aug 2026 08:58:37 -0700 (PDT)
-Message-ID: <a10f82fb-c4fa-493a-88cc-0b5d4c8db3ff@suse.com>
-Date: Tue, 4 Aug 2026 17:58:36 +0200
+        bh=m5PEtzj8mtJe7pFOG8I3FsyiHy4JEbRtR3I88EiU7ZQ=;
+        b=qoj6uvxt+/kdBUbtFyoD6Y2A547hO6XmodhFGHYHEx0LyeuuqKM9SSvIcKl8VY/q1m
+         0CoaGPsw7lIzUPuIzJBbNOGfpd/GRbNHS/f9oJwWoBdxmlN0J6mraBKMjXyfjGb6ce3r
+         ZMEJp3DBMuyOnUpJ6ENgOtq3dDIZ6CRNjk7j4Ut2lNWtHGBxI87z/A+a7zy3ka5VoiU8
+         cx/W5+vNJ4AkFt1p6VQKt2wC+nxFHo484gV5mWPxCfL0CG8HMpTjGdR3Bd7pWey5SyPE
+         76D5DHUIfLjPmaIu+DYiuIghEZa6G+aLvT1fp9hGpmsk21veF9lFHfN3UJE7JXljQ3Ws
+         ytxw==
+X-Forwarded-Encrypted: i=1; AHgh+RrMA5Dee2JgTbQlkFwoQFeFSXCAqzNRs+EsPYemrDLFG8+F612r0BWxTYV/WOxVBDm4GITDO+OWz10=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yx29rJVF93B7jRFhha4EAHGsOmS1DLzK1saYs0+LzTQbeoh28zI
+	Ogxtzd+nVENqNdMUltgE3bQysGew2XGmT+d+LmMELhOGuPYlNkcDxDccaoMQ004kdpcg/M1B7F0
+	2eeH8yQ==
+X-Gm-Gg: AR+sD10oo5siioo4NhlsdlYld2CPpMj4H3e2dYCygrE01HVRFC8OEjUg32KxFW8+teW
+	lt2gbqHGJ8kl/9Qn/zqrDrOJo06u18BLYR43vjHOH2Wp2yINISHm+wsXONB16h4jR61Z5zZUzxb
+	E/NtMJbEJbV9nYb9cN6SVD2Ff/10Rg5eoC2/ZdZ1NpMTCdbriX9FlnC5GlaLkJFF+yQymm6hu4I
+	dSU5yW948Ep0YuQArOXPgCFeXfwZMGaq1kB8tA8jpr1fu23qSLNWIObC0C/gP4pISaPSTPf1AS9
+	diaKtsyMz1A2kkyP3CGquOA62JhIRRnrREhQCOt8kI3jURISoNOs3qG+R2Jo2ilJFi+fIVRdqwt
+	092he3ON0+B4FTZEIyazb4dWjOyYNU8oYN7OHMnS5kBe5ZCebmHENCtjYE4I7+Hbp2tWcsRbGIK
+	0KEgQbmmkCpo4hfDvf72NRtpvNaFW7uN6dYClOkLiHTTH2L+W2r+wx2h36eQHI9yEaHYvSETFtN
+	EORn2YnGUhsO79Y/gz6D4BjRma14EwItNMfOO7x4Kycd3o7sXPy
+X-Received: by 2002:a5d:68c9:0:b0:474:18d9:8371 with SMTP id ffacd0b85a97d-47fec6359c1mr364268f8f.28.1785859464014;
+        Tue, 04 Aug 2026 09:04:24 -0700 (PDT)
+Message-ID: <55d55c27-a482-4b59-a1f9-1412c91d7835@suse.com>
+Date: Tue, 4 Aug 2026 18:04:21 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RESEND PATCH 1/5] vtd: Ensure root entry is updated consistently
+Subject: Re: [PATCH 2/5] vtd: Ensure context entry is cleared properly
 To: Teddy Astie <teddy.astie@vates.tech>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  xen-devel@lists.xenproject.org
 References: <1785319236.8631fc262581453bbf619ec5b2062170.19fad51a4be000e099@vates.tech>
- <1785319678.8631fc262581453bbf619ec5b2062170.19fad586037000e099@vates.tech>
+ <1785319341.8631fc262581453bbf619ec5b2062170.19fad533bfc000e099@vates.tech>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,55 +130,57 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1785319678.8631fc262581453bbf619ec5b2062170.19fad586037000e099@vates.tech>
+In-Reply-To: <1785319341.8631fc262581453bbf619ec5b2062170.19fad533bfc000e099@vates.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1785859118-1FA6E757-878CAEE4/0/0
+X-purgate-ID: tlsNG-42698a/1785859464-A8AC89EA-A8DC0F50/0/0
 X-purgate-type: clean
-X-purgate-size: 1791
+X-purgate-size: 1931
 
-On 29.07.2026 12:05, Teddy Astie wrote:
+On 29.07.2026 11:59, Teddy Astie wrote:
+> When removing a context entry for a device, the present bit needs to
+> be cleared first, then we can clear the rest of the field. In the current
+> logic, the compiler is allowed to perform optimizations in a way where high
+> is cleared before the present bit (which is in low part) is, leading to a
+> window where the context entry is invalid and would make the IOMMU fault
+> (as address width would be set to a reserved value).
+> 
+> Fix the logic by ensuring we clear the low part first (which also clears
+> the present bit) then the high part afterward.
+> 
+> Fixes: cada0c18f8d1 ("vtd: Move dom0 RMRR check to intel_iommu_remove_device()")
+> Reported-by: Teddy Astie <teddy.astie@vates.tech>
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
+> ---
+>  xen/drivers/passthrough/vtd/iommu.c | 10 ++++++++--
+>  1 file changed, 8 insertions(+), 2 deletions(-)
+> 
+> diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
+> index c314ce1db8..1005e200c1 100644
 > --- a/xen/drivers/passthrough/vtd/iommu.c
 > +++ b/xen/drivers/passthrough/vtd/iommu.c
-> @@ -281,13 +281,13 @@ void free_pgtable_maddr(u64 maddr)
->  /* context entry handling */
->  static u64 bus_to_context_maddr(struct vtd_iommu *iommu, u8 bus)
->  {
-> -    struct root_entry *root, *root_entries;
-> +    struct root_entry root, *root_entries;
->      u64 maddr;
+> @@ -1889,8 +1889,14 @@ int domain_context_unmap_one(
 >  
->      ASSERT(spin_is_locked(&iommu->lock));
->      root_entries = (struct root_entry *)map_vtd_domain_page(iommu->root_maddr);
-> -    root = &root_entries[bus];
-> -    if ( !root_present(*root) )
-> +    root.val = ACCESS_ONCE(root_entries[bus].val);
+>      iommu_domid = context_domain_id(*context);
+>  
+> -    context_clear_present(*context);
+> -    context_clear_entry(*context);
+> +    /*
+> +     * Clear the context entry.
+> +     *
+> +     * As this is performed with two stores, ensure lo (containing the present
+> +     * bit) is cleared first.
+> +     */
+> +    ACCESS_ONCE(context->lo) = 0;
+> +    ACCESS_ONCE(context->hi) = 0;
 
-I'm pretty concerned about this: You're reading only half of the entry here,
-and you're writing only half of it further down. The other half is reserved
-right now, but there's not even a comment being added to this effect. (Yet
-even with a comment, I'd still be concerned, just not as much.)
+Implying the placement of the present bit is again something I'm a little uneasy
+with.
 
-> @@ -295,11 +295,12 @@ static u64 bus_to_context_maddr(struct vtd_iommu *iommu, u8 bus)
->              unmap_vtd_domain_page(root_entries);
->              return 0;
->          }
-> -        set_root_value(*root, maddr);
-> -        set_root_present(*root);
-> -        iommu_sync_cache(root, sizeof(struct root_entry));
-> +        set_root_value(root, maddr);
-> +        set_root_present(root);
-> +        ACCESS_ONCE(root_entries[bus].val) = root.val;
-> +        iommu_sync_cache(&root_entries[bus], sizeof(struct root_entry));
-
-sizeof(<expression>) please in favor of sizeof(<type>), whenever possible.
-
->      }
-> -    maddr = (u64) get_context_addr(*root);
-> +    maddr = (u64) get_context_addr(root);
-
-While there, drop the pointless casts, thus getting rid of two style issues
-as well?
+With the uses of context_clear_{present,entry}() dropped, the macros are unused.
+I think they would better be dropped right away, to prevent misguided use
+elsewhere.
 
 Jan
 
