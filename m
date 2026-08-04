@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7462FC55184
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2026 13:41:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1382174.1625544 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A3CFC55822
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2026 13:56:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1382183.1625554 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrFO7-0001JG-6C; Tue, 04 Aug 2026 13:40:59 +0000
+	id 1wrFcg-0003Sz-Gi; Tue, 04 Aug 2026 13:56:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1382174.1625544; Tue, 04 Aug 2026 13:40:59 +0000
+Received: by outflank-mailman (output) from mailman id 1382183.1625554; Tue, 04 Aug 2026 13:56:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrFO7-0001J9-3T; Tue, 04 Aug 2026 13:40:59 +0000
-Received: by outflank-mailman (input) for mailman id 1382174;
- Tue, 04 Aug 2026 13:40:57 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wrFcg-0003Ss-D9; Tue, 04 Aug 2026 13:56:02 +0000
+Received: by outflank-mailman (input) for mailman id 1382183;
+ Tue, 04 Aug 2026 13:56:00 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wrFO5-0001J2-DR
- for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 13:40:57 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wrFce-0003Sm-CX
+ for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 13:56:00 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrFO4-00EzIj-AN
- for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 15:40:56 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wrFca-00Box7-1L
+ for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 15:55:56 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a71ebdc-5cb7-0a2a0a5109dd-0a2a4507af8a-44
- for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 15:40:56 +0200
-Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a71ef6a-e002-0a2a0a5209dd-0a2a45028796-10
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 15:55:55 +0200
+Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a71ebe7-b4ea-0a2a45070019-d1558029e403-3
- for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 15:40:56 +0200
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-4953de5be0aso22305565e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 06:40:56 -0700 (PDT)
+ id 6a71ef6b-6ca4-0a2a45020019-d155dd2dd0cd-3
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 15:55:55 +0200
+Received: by mail-wr1-f45.google.com with SMTP id
+ ffacd0b85a97d-4799b3f7c83so3027752f8f.2
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 06:55:55 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49949fc6f16sm159359965e9.2.2026.08.04.06.40.51
+ ffacd0b85a97d-47fd41e2484sm45261033f8f.11.2026.08.04.06.55.54
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 04 Aug 2026 06:40:51 -0700 (PDT)
+ Tue, 04 Aug 2026 06:55:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,56 +55,56 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785850855; x=1786455655; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785851755; x=1786456555; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=OJJQReJUi7fUzVzzuopy47u3RxzqcfK1FXi07EBFiFs=;
-        b=FzxPh1Hb5Zc+wY9VXIP0tz/nNr41bOv0/pEnbRWvFou+uHatSd3K2TspxcTqxL4yco
-         WJ66jnjO7EfbdH6zKB1Hgx22lYDBYO+LQYKdcGwjzMaW6LhOBYqKZkHiPjoyppHpZvzZ
-         TV7N5vqUuodoS9yIHh+S+oYSJj8cMEE9X730LYcPe1cysKYExCaBw6oTPgXqbfB/tAlx
-         TG+/yiEP2DFPkvWhLK+bFuPwG8Sp+GqeIRi9eVdCdwWXVmq47wtlJj2or1ahaT+7l+Fq
-         Np2k3N+wFYtXpc8RK+DhMFz/opAWa8sx29NBeDRMHD5IA5uJe5Xp4wS+tUTRqzYTlNqK
-         fyrQ==
+        bh=9h9+fq6Jp77OyWF1yf/69cNg6J6mI+PxR6Z5EORHM/I=;
+        b=A6DwsTGd+HY+bgcER38rKTb3mqFqy4B1SUT2vBjqc1s7KIBepArPAEuFmHczZJD/c7
+         Dd5g2TBrnKpGi/F+ljRnIeII4+gwmxoFVkJy3g6gucuKlOyCP/ETCULht0IiUmidG0jR
+         w4nyPinBtSgZ+lmfSF7vNdYsSi49JvdyTpAIWd58hLS3ob/4j0rY2wg1YIpzWEFLjZGY
+         XLKzcQktBgZVYUWwBf5HH+q/JbJB85Sls8Y5BVhyO2JZdyOBS1pVB3QVP2Y42ych/ehB
+         VasmNbstisrQ+FAKwO8T5wOTn3QhbhUpaq6YRlm3lSeDKbyTUiPk6vs57ljVE2Ee8e7T
+         WRfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785850855; x=1786455655;
+        d=1e100.net; s=20251104; t=1785851755; x=1786456555;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=OJJQReJUi7fUzVzzuopy47u3RxzqcfK1FXi07EBFiFs=;
-        b=IwQ9ss10WD4Xfid07yrdpzX6Ej8bCpSv4x4VsyFbz/A+Uh9ARjFtbZSAMOnnQwuJWQ
-         Cs1vMTKfl+1Ng6n9M+4ETz07xwhlqZVqKU5T1QrzLdaHsCDRNbbKimTCKctNMZMRoIDL
-         VnQWpKAorY17WXPO4fqzAktk8eFTBVSn4ESp160lyql5P6xPiU3YsY9dkgENXXrb92A6
-         eK5SJzjxEKZVCQkppNSw2eofAbSj3JUu2Uhn2HGdCxCi5DK9FAvcixR3ivWllivg9IvQ
-         Qm2P2laX+F6bDzyA4Dflfypx/g0Ru+yWYDL+QCwCUXpCgoCY6PsiKTrzTYep486GHPRa
-         Lycg==
-X-Forwarded-Encrypted: i=1; AHgh+RqjJBSr9eqVphtdrOaZyZTjNIjaQ6cvvC2XKEWKHBF0OUhrGy3BgIq1LGq8U8bE8StTwDEKByc8zNs=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yzw0ZbPpfkovqGlqDyXNNpJfV6IEHSKGkD8CXJV7cjWLwgQJGLa
-	ocJ0tA1KP3DkFHhLeUeeJ4tTnJGl3liKnRbdIXkTYM+z/YfD43jbkz03aDKtoO7+ow==
-X-Gm-Gg: AR+sD11LgpZ7BPZjRdnb27UwUQXh4WLsE9q1GR46dRHHEqr9GwQr4rqLhXyph6tx5RX
-	UT79dPUhb1KGBDLIBPabPbUkO+A51hYYdqKgQHz1lOViXbWgLEofJE6gy6l7e4YuLC3utehoebj
-	9VDw3oWyzS8yxB+usZMMVIZKGimDSFSE4svBjlSCYAiIb7/9Ey3CDVnYpAO+X/biuAzLEs2RDE/
-	gx8vR5ROowwlDITAT4z6eP2w7p46jYlxX3jRUabnsIslyskiahsWBt9/p1ARrZ01lta+9JJa3hr
-	pJCFh7QAKXw2OLIU0h4WUaAL8z7HL7fWUTnFqTb/pBoPzdOB2D0l+C1P7i+U2KJP+FUv9MM570o
-	alpYPiv5hl6pVaPmoXwzdbOmWS/4OrqTRmDb41Ot/i1olss/s8w+m+5WrkNCIW4k05DMsLXDDol
-	bYP+tj7ZCnlmgb8isgcgKCsuzpUs5LuqgoJnuDA1KfNdoSTvjZudCNELc41T5XvHq6fGRaLxGFk
-	cv7TJlBwwqC4XL4jiR664i25GAZrDbNlSmG0RGer2pGB8Vft5ni
-X-Received: by 2002:a05:600c:840f:b0:495:5fdf:2075 with SMTP id 5b1f17b1804b1-4980c5fa29amr299658695e9.0.1785850852314;
-        Tue, 04 Aug 2026 06:40:52 -0700 (PDT)
-Message-ID: <2c012213-0fd0-40f8-8806-0096040370aa@suse.com>
-Date: Tue, 4 Aug 2026 15:40:50 +0200
+        bh=9h9+fq6Jp77OyWF1yf/69cNg6J6mI+PxR6Z5EORHM/I=;
+        b=TG4K0Mtc0xfoEwnit0Kv6gXkXfGQ57M/72TuL/YmIkmiyT8Gamg/E5FVgFLjWtMuTQ
+         wPxnFQ30EAiEe5HggbtYRcUceGZkRv/wb8Tj9CVhOj7QstW2FWBZXs4jvEatbQJ9P59u
+         N8IrY0p0vUFU6E6sqf6FeARft4nnS2C/DMV+fIBAcdwP9H69PTfkHjbH/p28EY9ElohH
+         NxHBXKpM2G1v7C8dbza0uiIOHTRkYgbvpmlsAt782ZJZ/D/dCNY5O7MKLezfbF5NRSCE
+         7d/sJeOW8bpXocmNxuW1RSq52r3ytWjKWZ4VwYvMu/G6Q7aPttVRSI2alcF4e/f2qOx6
+         QP7g==
+X-Forwarded-Encrypted: i=1; AHgh+Rrwrtpq96DvpN+k7nh0fYx0juU2E7BUNoqBJsxE4ul9IjyJNTewi2VL8XdF3TRrQ555yT3jaCYNP7Y=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yxg27Qluu0/SHAXTHKkKClfSP9yGvE7Cb0ItdytH7/7aHAQ3cAx
+	EWrgjIbbwttXxcA9U+SfpOEp4YDP5QdsvggUupdgOjqOQ/S2j5V93ZCecjhFTRungw==
+X-Gm-Gg: AR+sD13rYj3EYIna8iuXLThwAUzFUUlo9oVEY6J/h0cmEx+GeCqWIXmVo9DSz2nwQFn
+	UJ6hNgwmXlESDdiXIYaH/eh4xqcCIgUYM1YdVHP9QY4Yc+nosbbFbzXUV4mEW/5U6sPcjVdLfz5
+	yDWV2fL732FHFv9Bef0FOJcdH8P1XlmKr6NrK7xZAfrDHEMnglCCKUV1z3giqLhgdJe2zF9I3oy
+	U1E0q6VSTL06bylr3GZ12mwNDlcr4qFAotHE1Ax66uyYCUW6IWmFw00RREiBA3l5uhP6ajpppMB
+	fCYaYCPIMl58ve4GBpdjzPmqSSmHfgwIH6vjfVthDOruy+ruMP2UnYru+m08tcxRE+0Pb4/NjAp
+	aV0LEPHP0vI1tZKnWXtA5njV5rx6UJTbro5DaShmpNLIjrvU5aE4g0a2igyc40+7AD3zZurioXQ
+	6MA5F24OShkPvLXCh5uTwr7/ReQOT+/y4dAgyjG4NiAQz5sH8aZ5IknWYVBr1q2/mbGUHLD/e/I
+	c7X2kgTkm77eDSKNJjWL7xVvhZei+IeyjD8i7l5PN+MYdlWRrJu
+X-Received: by 2002:a05:6000:40e1:b0:47f:8b1f:efa2 with SMTP id ffacd0b85a97d-47fd729e88bmr37834347f8f.8.1785851755310;
+        Tue, 04 Aug 2026 06:55:55 -0700 (PDT)
+Message-ID: <28d4e98a-2fd2-41fb-9f1c-c5f4768989f9@suse.com>
+Date: Tue, 4 Aug 2026 15:55:53 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] x86: introduce "brk" allocator
+Subject: Re: [PATCH] radix-tree: drop radix_tree_init_maxindex()
 To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Teddy Astie <teddy.astie@vates.tech>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+Cc: Julien Grall <julien@xen.org>, Stefano Stabellini
+ <sstabellini@kernel.org>, Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <31ba7ff2-a42d-44aa-976c-17fbff44a56f@suse.com>
- <f7e3cd68-f6de-4ada-87d9-1a5dff277b2f@suse.com>
- <91bdef16-2da7-49e7-af5a-e395da533330@citrix.com>
+References: <25cf9c88-7589-4a5d-994d-45f488a3e00b@suse.com>
+ <c00db623-82bc-4d7f-924f-25f35f8e057e@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -130,151 +130,78 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <91bdef16-2da7-49e7-af5a-e395da533330@citrix.com>
+In-Reply-To: <c00db623-82bc-4d7f-924f-25f35f8e057e@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1785850856-36CDFAE4-6EA4D02B/0/0
+X-purgate-ID: tlsNG-720697/1785851755-F0AA52AC-0FF330C8/0/0
 X-purgate-type: clean
-X-purgate-size: 4240
+X-purgate-size: 2864
 
-On 30.07.2026 19:59, Andrew Cooper wrote:
-> On 27/07/2026 11:19 am, Jan Beulich wrote:
->> --- /dev/null
->> +++ b/xen/arch/x86/boot/brk.c
+On 04.08.2026 14:58, Andrew Cooper wrote:
+> On 04/08/2026 1:30 pm, Jan Beulich wrote:
+>> Radix trees are in principle usable as soon as memory allocation works.
+>> (Radix trees with only index 0 populated are usable even earlier.) If only
+>> there wasn't height_to_maxindex[], which is filled only by a pre-SMP
+>> initcall. The benefit of this array is rather limited - the calculations
+>> done by __maxindex() can as well be done by radix_tree_maxindex(); the
+>> overhead isn't all this high.
 > 
-> While brk.c has x86 specifics, I'm not sure it's worthy if being in
-> boot/, rather than simply in x86/.  It's used until mid way through
-> __start_xen().
-
-As discussed, I'll move this to common/brk.c right away, abstracting out
-the x86 specifics.
-
->> @@ -0,0 +1,72 @@
->> +/* SPDX-License-Identifier: GPL-2.0-or-later */
->> +
->> +#include <xen/efi.h>
->> +#include <xen/lib.h>
->> +#include <xen/mm.h>
->> +#include <xen/page-defs.h>
->> +
->> +#include <asm/brk.h>
->> +
->> +extern char __brk_start[];
->> +extern const char __bss_end[];
->> +
->> +static unsigned long __initdata allocated;
->> +static bool __initdata finished;
->> +
->> +void *__init brk_alloc(size_t size)
->> +{
->> +    void *ptr = __brk_start + allocated;
->> +
->> +    if ( finished )
->> +        return NULL;
->> +
->> +    /* Allocations PAGE_SIZE and up will be page-aligned. */
->> +    if ( size >= PAGE_SIZE )
->> +        allocated = ROUNDUP(allocated, PAGE_SIZE);
->> +
->> +    allocated += ROUNDUP(size, sizeof(void *));
->> +
->> +    if ( allocated > __bss_end - __brk_start )
->> +        return NULL;
+> It's quite possibly lower overhead.  Some simple integer arithmetic vs a
+> memory read.
 > 
-> This means one (or more) subsystem has brk_alloc()'d more than they
-> reserved.
+> I think it's worth noting that this was found by UBSAN on a
+> multi-segment system:
 > 
-> While returning NULL is probably the best action, I think a
-> printk_once() is also warranted.
+> (XEN) UBSAN: Undefined behaviour in common/radix-tree.c:83:27
+> (XEN) index 12 is out of range for type 'long unsigned int [12]'
+> ...
+> (XEN) Xen call trace:
+> (XEN)    [<ffff82d040323f9c>] R common/ubsan/ubsan.c#ubsan_epilogue+0xa/0xd5
+> (XEN)    [<ffff82d040324d91>] F __ubsan_handle_out_of_bounds+0x9d/0xd4
+> (XEN)    [<ffff82d04029265a>] F radix_tree_insert+0x24d/0x570
+> (XEN)    [<ffff82d04037ac3e>] F drivers/passthrough/pci.c#alloc_pseg+0xc4/0x165
+> (XEN)    [<ffff82d040a3b526>] F pci_add_segment+0xc/0x1b
+> (XEN)    [<ffff82d040a5ad1b>] F acpi_parse_mcfg+0x29b/0x344
+> (XEN)    [<ffff82d040a3f612>] F acpi_table_parse+0x5d/0x92
+> (XEN)    [<ffff82d040a5bf55>] F acpi_mmcfg_init+0x3a2/0x71d
+> (XEN)    [<ffff82d040a71ba6>] F pci_setup+0x17/0x29
+> (XEN)    [<ffff82d040a784d0>] F __start_xen+0x394c/0x4ed8
+> (XEN)    [<ffff82d040423057>] F __high_start+0xb7/0xb8
 
-Hmm, yes, just that there's a quirk to work around: The static that
-printk_once() uses gets in the way of the file getting compiled into
-brk.init.o.
+Added in.
 
->> +
->> +    return ptr;
->> +}
->> +
->> +unsigned long __init brk_get_unused_start(void)
->> +{
->> +    finished = true;
+>> Fixes: 21844b0e32e7 ("PCI multi-seg: introduce notion of PCI segments")
+>> Fixes: 8dc6738dbb3c ("Update radix-tree.[ch] from upstream Linux to gain RCU awareness")
+>> Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 > 
-> This doesn't get the unused start.  It also terminates the allocator,
-> and the name needs to reflect that.
+> Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-brk_cease() then.
+Thanks.
 
-> But combined with brk_end in the next patch, it's really quite a mess. 
-> Integrating brk_end properly simplifies this patch too.
+> All the UBSAN violations are gone.
 
-No, brk_end really is an x86-specific helper variable. I'd like to keep
-that as it is.
+Good.
 
->> --- /dev/null
->> +++ b/xen/arch/x86/include/asm/brk.h
->> @@ -0,0 +1,7 @@
->> +/* SPDX-License-Identifier: GPL-2.0-or-later */
->> +
->> +#include <xen/types.h>
->> +
->> +void *brk_alloc(size_t size);
->> +unsigned long brk_get_unused_start(void);
->> +void brk_free_unused(void);
+> FWIW, there are still issues on this box, even after the fix:
 > 
-> It's inevitable that brk is going to be used in other architectures, and
-> none of this is x86 specific.
+> (XEN) setup 0000:fe:00.0 for d0 failed (-19)
+> (XEN) setup 0000:fe:00.1 for d0 failed (-19)
+> ...
+> (XEN) setup 0000:ff:19.0 for d0 failed (-19)
+> (XEN) setup 0000:ff:1a.0 for d0 failed (-19)
+> (XEN) setup 0001:fe:00.0 for d0 failed (-19)
+> (XEN) setup 0001:fe:00.1 for d0 failed (-19)
+> ...
+> (XEN) setup 0001:ff:19.0 for d0 failed (-19)
+> (XEN) setup 0001:ff:1a.0 for d0 failed (-19)
 > 
-> This should be xen/include/brk.h right from the outset, even if that's
-> all we do in the way of making it generic.
-> 
-> Except, brk_end in patch 2 really needs to live in common/brk.c so it's
-> probably easier to go in arch-neutral right from the outset and use
-> "select ARCH_HAS_BRK" or so to allow the arches to opt into using it.
-> 
-> Furthermore, this header needs some commentary.  To do this nicely,
-> DEFINE_BRK() needs to be introduced here so the comment makes sense.
+> These are the PCI devices for aspects of the uncore, mostly performance
+> counters it seems.  Despite the lack of information, I think the
+> complaint is about setting up the IOMMU context for them.
 
-Sure, I can move introduction of the macro here.
+This looks vaguely familiar. Are these devices properly covered by the ACPI
+DMAR table? (In the instance where I think I saw such before, they weren't.)
 
 Jan
-
-> -----
-> Early Boot memory allocator.
-> 
-> Subsystems which conditionally need memory prior to the main heap being
-> set up should use DEFINE_BRK() to reserve BSS space in Xen.
-> 
-> During boot, brk_alloc() allocates memory from the reserved space.  Such
-> allocations are good for the lifetime of Xen.  Subsystems MUST NOT
-> brk_alloc() more memory than they reserved.
-> 
-> When the main heap is set up, brk allocations become unavailable. 
-> Reserved but unallocated space is handed to the main heap, so it doesn't
-> go to waste.
-> -----
-> 
-> 
-> With just a few sentences, it's now far clearer what brk is and how to
-> use it.
-> 
-> 
->> --- a/xen/arch/x86/xen.lds.S
->> +++ b/xen/arch/x86/xen.lds.S
->> @@ -321,7 +321,11 @@ SECTIONS
->>         __bss_start = .;
->>         *(.bss.page_aligned*)
->>         PERCPU_BSS
->> -       *(.bss .bss.*)
->> +       *(.bss .bss.[a-zA-Z0-9_]*)
->> +       . = ALIGN(PAGE_SIZE);
->> +       __brk_start = .;
->> +       *(.bss..brk.page_aligned*)
->> +       *(.bss..brk*)
->>         . = ALIGN(POINTER_ALIGN);
-> 
-> This looks fine, but if it's becoming common then it wants to be a macro
-> in xen.lds.h
-> 
-> ~Andrew
-
 
