@@ -4,49 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A0D4C55184
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2026 09:15:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1382048.1625454 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 605E2C55172
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2026 09:28:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1382061.1625464 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrBEw-0006NU-2K; Tue, 04 Aug 2026 09:15:14 +0000
+	id 1wrBRI-0000MA-9c; Tue, 04 Aug 2026 09:28:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1382048.1625454; Tue, 04 Aug 2026 09:15:14 +0000
+Received: by outflank-mailman (output) from mailman id 1382061.1625464; Tue, 04 Aug 2026 09:28:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrBEv-0006NN-Vi; Tue, 04 Aug 2026 09:15:13 +0000
-Received: by outflank-mailman (input) for mailman id 1382048;
- Tue, 04 Aug 2026 09:15:12 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fcc0e18f8000e099@swg.vates.tech>)
- id 1wrBEt-0006NF-TI
- for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 09:15:12 +0000
+	id 1wrBRI-0000M2-4T; Tue, 04 Aug 2026 09:28:00 +0000
+Received: by outflank-mailman (input) for mailman id 1382061;
+ Tue, 04 Aug 2026 09:27:58 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <freddy77@gmail.com>) id 1wrBRG-0000Lv-K0
+ for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 09:27:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrBEr-00878h-EL
- for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 11:15:09 +0200
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fcc0e18f8000e099@swg.vates.tech>)
- id 6a71ad8d-e002-0a2a0a5209dd-0a2a450a89e8-40
- for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 11:15:09 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fcc0e18f8000e099@swg.vates.tech>)
- id 6a71ad9a-f2d2-0a2a450a0019-b9ff1c2291e9-3
- for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 11:15:06 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19fcc0e18f8000e099.006 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Tue, 04 Aug 2026 09:15:03 +0000
-Received: from [192.168.1.18] (88-188-240-210.subs.proxad.net [88.188.240.210])
- (Authenticated sender: teddy.astie)
- by mail2.vates.fr (Postfix) with ESMTPSA id B5BD38340E;
- Tue,  4 Aug 2026 11:15:02 +0200 (CEST)
+ id 1wrBRG-00EZdy-0g
+ for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 11:27:58 +0200
+Received: from [10.42.69.8] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <freddy77@gmail.com>)
+ id 6a71b08e-5cb7-0a2a0a5109dd-0a2a4508ec64-38
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 11:27:57 +0200
+Received: from [74.125.224.47] (helo=mail-yx1-f47.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <freddy77@gmail.com>)
+ id 6a71b09c-f659-0a2a45080019-4a7de02fb8ed-3
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 11:27:56 +0200
+Received: by mail-yx1-f47.google.com with SMTP id
+ 956f58d0204a3-66892c81725so5920962d50.2
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 02:27:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,320 +48,295 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=2V3Tn92zkbXcZR5dja6Se9zC0FVeI7Mgv3coqMu/3jk=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=sS5NoJqNKu33dP57KnbE6DYZUxHwjO97bSL0lzRo8wA99xNA0LSPNC5M/0ls7evQrTvC7s3t6
- wPINYChgw1EuGTdRJBmQ4NaEJgsrzRGpn+KD75mPVA2y61zP58w4Mx0zEEcN6hz2vNWrEnqm9IW
- 1t2HJv94v5A/OPNdpP+Nepmht1cDeYSrnp6y7+Sa1oYWstUB7jKvHuA0sOC8UXV5BGhs7MfOsNn
- EFYkIxZ8Hkjx1Ncaz6AyqlEmm6auQzaelucEuCu0WMFEC0JpCxzWwzJ/+cg3OYZ+gz+kSy4clsW
- +nNpE4Q/7c/U90XZAcDtF1TgtZDWtQp5tl9Fbskro8BQ==
-X-Zone-Loop: be9c5299de486e907cd307ba575e68146a1c6b48d74b
-x-campaign-type: default
-x-transaction-id: 12649b57-dd6f-4ceb-8776-fd8eac736d34
-x-swg-uid: 01-42eff819-3e4a-43cb-959f-933edb5dd093
-X-Mailer: Sweego
-Message-ID:
- <1785834903.8631fc262581453bbf619ec5b2062170.19fcc0e18f8000e099@vates.tech>
-x-swg-bid: 1785834903.8631fc262581453bbf619ec5b2062170.19fcc0e18f8000e099
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-Date: Tue, 4 Aug 2026 11:15:02 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1785835675; cv=none;
+        d=google.com; s=arc-20260327;
+        b=gTdAkbaR+cuCBKZz+pwgrlCYUatnChk+MfwON2JuZqM5KIsOGuC6q15YEc2z4VElQy
+         xAnwsy+YVmqAlFohDqtzOAWaq4hC1zB+y8hOGXxzYg/xA83Mssap6qD2I0q0neFV/qbY
+         WX2EzeTGPD8v78cLhq5e5kgiN2phQGl6uCGb3bn+sJV0Vnzme7yVbDTVCp2hLKvww8Tt
+         /frNv0qbLJdhvojVFld1Dm7rhU5ryx9ykQmZcDlsPJ9+qiqR1aCQCmQtyJ1zEGu06bZj
+         WRj5zi3kqeXwt6MKBQYr0Ij+1tw1sRMUuzM5M6w/IO1cZE3yzqFG323//3tqOkl3RaLN
+         75sg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=fQwOQ6fPXMYo5N5tkHcaXYRfhVBL6xu1DTd6Y7Q0NLk=;
+        fh=xbnCk1fMGZS2xoJIy7HSNqzoA8cI7GtUsg/C2XqwZXc=;
+        b=MIP+Gd68Sh39DtvaKeT4HMDX6FG26t23LCc9ZRrfLBJyiXJzsjibkosV0LnFZ9I9ms
+         Hmf5B7NNHO1piJ80Md5OLCTvtN2qLbjtL51LiH+WBj4vxbxcTtoauhX+Ualb2+A97dmy
+         RBr25WssZwOCvdwel1KuxfKo/ns0B7w1G7wqcChOmF+Jk9JObWvWOzmRab2VU5q99RO/
+         tSa6CjqTMT8R5pMWIACLUdYLE34vhkj9zlbkg3/CIfVsdwB4xaYyY3uwFmJyhx6qvKWy
+         VPFX7ekhbsZrUNpQ1L206SnGWf0dodFp1PZJ5ZugCQvQCbbskQArcjTTicxnuAS0gnyo
+         8drQ==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1785835675; x=1786440475; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=fQwOQ6fPXMYo5N5tkHcaXYRfhVBL6xu1DTd6Y7Q0NLk=;
+        b=DPEi/Kw/47tQGcGPnT9oS8L8/7/ebuWSHR4vS2bv/927yBTY92ltjUSEonyN06e4lJ
+         aDNDEbLEv1troLte9ri/HW3Vy6rvSQBNj7VlEx+w10m/YY/y/zqP9rOx9g93ODaBELgk
+         mbcLwACyDtdCsRgCIAC3Tgzne6kw6jcv7PUzzC220mxCXnQPivcmCK0cvk4eHJkeHncv
+         tytgk5vbg560mjBqmhQZgnxfhetvYwZIAUNhPR9tY7C0YpArlovgLbngKCXRCHdnHgZq
+         Ggcz03QLtVLonqKzYLV1GJEaVabyq90Fba1nLIPrqVtY73Uj2YY5rvunCrxSQOupHT7T
+         049Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785835675; x=1786440475;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=fQwOQ6fPXMYo5N5tkHcaXYRfhVBL6xu1DTd6Y7Q0NLk=;
+        b=hePIj4v+OHppFsq/ti80oyXNRX8gAbncwMH0lQ1WIPvuDcAc0f5D/pIYinOH1atPWm
+         ewgyjNuGn/3N57+kGo/Z6okBQFHJ0VJaELLq9faUR82lw1EopZ+Vweu678sf6eJTteYx
+         v1xOyumfYLc78S0qUB23DBK7wAxlE7XKFCdBzXVVN0follQd+Eu5nCe2FoYBrDlP908m
+         XTWDNc5ZZusAq2bemn5VVoG34G6QYv0f99uV7xYPN2CeqHdQkFYp7gHTWbyrfGM1348G
+         7/n5EjPnRXyGoGmD9aCdTWJ5eGOvZ3qALEFtk8g7OyqC3WRaXbLenIje0zxAABczQxw5
+         98sA==
+X-Forwarded-Encrypted: i=1; AHgh+RpWPlOZhsUxa+SZ9lXDlkFLhBOiC/Y79KVU7JY+gKHW1xW5wBwwCVWQaj8l+04Z5zXKa/0E6piCo94=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwS8OhoLTzDCqIhMqeH96VkuqMHm7WjA5+KOyqCeK2P56Mj3zWK
+	zXKkqBv61zRbn/ycBmagpzLJXATw7uUEnx9I/cqLwWYyz6gw0xep8/SjGmvKv9poFKcLS1PDFgG
+	euR1VgMmq0XFjRLPOQrznAXhWERXi+e8=
+X-Gm-Gg: AR+sD11i/EsstZcBcM2WEpIQD6utFlwDOU8HXtjYn9LEJQo6ttJoN2TC31KrvAaCEMM
+	pDP3KwaLV79GtMz2y9DWjB60C97y99RAnl5q2UUebm1M3AKjRXCBDz++f5+grQxoKDYNfAdMdO9
+	Tax3wbEnuETRpD7zBzLjDIiDssWwp3tQCGjp81n5hDrWB67vKAf3XZ7jlutXsVmDCzv76iJzSc6
+	ARIBDpUHLBWLPH9mVaehO2QvMk1IwxUeDVskByW2aJgGHliAjoHyWTxzVz2eTEEQebxwh2LO9Fe
+	xRt/gu/QlWktntDUMfsqHLTER6FB31C+ZHz+YvrBBCsxURhipIwXzHJYUWiRhaGHKEU9M5XCHsK
+	Q
+X-Received: by 2002:a53:c48e:0:b0:668:43ff:265d with SMTP id
+ 956f58d0204a3-6694f17589cmr12645410d50.33.1785835675350; Tue, 04 Aug 2026
+ 02:27:55 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/6] tools/migration: introduce PAGE_DATA_LZ4 stream
- record type
-To: Marcus Granado <marcus.granado@citrix.com>,
- Frediano Ziglio <freddy77@gmail.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Roger Pau Monne <roger.pau@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 References: <20260720154832.1907401-1-marcus.granado@citrix.com>
- <20260720154832.1907401-2-marcus.granado@citrix.com>
- <1784622046.8631fc262581453bbf619ec5b2062170.19f83c35cd4000edb5@vates.tech>
+ <20260720154832.1907401-2-marcus.granado@citrix.com> <1784622046.8631fc262581453bbf619ec5b2062170.19f83c35cd4000edb5@vates.tech>
  <CAHt6W4erBfB+H_0d+2rQ0apz9Jt6ex+WVjEjyPm6EApoHVJgmg@mail.gmail.com>
  <1784755834.8631fc262581453bbf619ec5b2062170.19f8bbccffd000edb5@vates.tech>
  <CAHt6W4cWLfSVoCSgr-YsQb1Mv=VZek0CakTBwK7tx_n9RkeiUg@mail.gmail.com>
  <LV4PR03MB8234F0C54B63FABE4D749FBBEDD52@LV4PR03MB8234.namprd03.prod.outlook.com>
-Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- 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
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <LV4PR03MB8234F0C54B63FABE4D749FBBEDD52@LV4PR03MB8234.namprd03.prod.outlook.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------tLoy9wFY8vD4kZQNnvXo5qTt"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1785834902930
-X-purgate-ID: tlsNG-4011c0/1785834907-53AD4CFC-CEFE82DC/0/0
-X-purgate-type: clean
-X-purgate-size: 14900
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------tLoy9wFY8vD4kZQNnvXo5qTt
-Content-Type: multipart/mixed; boundary="------------hNQ5LyUMizokDAxHrKBPhLw7";
- protected-headers="v1"
-From: Teddy Astie <teddy.astie@vates.tech>
-To: Marcus Granado <marcus.granado@citrix.com>,
- Frediano Ziglio <freddy77@gmail.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Roger Pau Monne <roger.pau@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Message-ID: <473315c8-6e90-4921-ac2b-e22ba3332f69@vates.tech>
+ <1785834903.8631fc262581453bbf619ec5b2062170.19fcc0e18f8000e099@vates.tech>
+In-Reply-To: <1785834903.8631fc262581453bbf619ec5b2062170.19fcc0e18f8000e099@vates.tech>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Tue, 4 Aug 2026 10:27:44 +0100
+X-Gm-Features: AUfX_myRCQgeCxpioVZftRZlPcB9bBWODlwGQuWLd2QIALmUwjZBZ_LIOFxb_iU
+Message-ID: <CAHt6W4dHih5z1LpRpdRiU_CC0dCQTF=324=KM6QJbUHS1xQ1GQ@mail.gmail.com>
 Subject: Re: [PATCH v1 1/6] tools/migration: introduce PAGE_DATA_LZ4 stream
  record type
-References: <20260720154832.1907401-1-marcus.granado@citrix.com>
- <20260720154832.1907401-2-marcus.granado@citrix.com>
- <1784622046.8631fc262581453bbf619ec5b2062170.19f83c35cd4000edb5@vates.tech>
- <CAHt6W4erBfB+H_0d+2rQ0apz9Jt6ex+WVjEjyPm6EApoHVJgmg@mail.gmail.com>
- <1784755834.8631fc262581453bbf619ec5b2062170.19f8bbccffd000edb5@vates.tech>
- <CAHt6W4cWLfSVoCSgr-YsQb1Mv=VZek0CakTBwK7tx_n9RkeiUg@mail.gmail.com>
- <LV4PR03MB8234F0C54B63FABE4D749FBBEDD52@LV4PR03MB8234.namprd03.prod.outlook.com>
-In-Reply-To: <LV4PR03MB8234F0C54B63FABE4D749FBBEDD52@LV4PR03MB8234.namprd03.prod.outlook.com>
-
---------------hNQ5LyUMizokDAxHrKBPhLw7
-Content-Type: multipart/mixed; boundary="------------qL9BXv60iFiNIQQzDu3jqzUh"
-
---------------qL9BXv60iFiNIQQzDu3jqzUh
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-
-TGUgMDMvMDgvMjAyNiDDoCAxOToyMywgTWFyY3VzIEdyYW5hZG8gYSDDqWNyaXTCoDoNCj4g
-T24gV2VkLCAyOSBKdWwgMjAyNiBhdCAxMDoxNCwgRnJlZGlhbm8gWmlnbGlvIDxmcmVkZHk3
-N0BnbWFpbC5jb20+IHdyb3RlOg0KPj4gQWJvdXQgY29tcHJlc3NpbmcgYWxsIHRvZ2V0aGVy
-IGFuZCBjb25zaWRlcmluZyBhbHNvIHRoZSBpc3N1ZSBvZg0KPj4gbWVtb3J5IGNoYW5naW5n
-IHdoaWxlIHNlbmRpbmcgSSB3b3VsZCB2b3RlIHRvIGNvcHkgdGhlIG1lbW9yeSBpbiBhDQo+
-PiB0ZW1wb3JhcnkgYnVmZmVyIHRvIGF2b2lkIHRoaXMuIE9uZSBhZHZhbnRhZ2UgaXMgdGhh
-dCBpdCBzaW1wbGlmaWVkDQo+PiB0aGUgZm9ybWF0LiBUaGUgY3VycmVudCBMWjQgaW1wbGVt
-ZW50YXRpb24gc2VlbXMgdG8gY29wZSB3aXRoIGRhdGENCj4+IGNoYW5nZXMgYnV0IG5vdGhp
-bmcgZ3VhcmFudGVlcyBpdCBpbiB0aGUgZnV0dXJlLCB0aGUgYnVmZmVyIHlvdSBhcmUNCj4+
-IHBhc3NpbmcgaXMgbm90IHN1cHBvc2VkIHRvIGNoYW5nZSB3aGlsZSB5b3UgY29tcHJlc3Mg
-aXQuDQo+IA0KPiANCj4gQWdyZWVkLiBGcmVkaWFubyBhbmQgSSBkaXNjdXNzZWQgdGhpcyBm
-dXJ0aGVyLCBpbmNsdWRpbmcgc2ltcGxpZmljYXRpb25zIG9uDQo+IHRoZSBjb21wcmVzc2lv
-biByZWNvcmQgZm9yIHYyIHNvIHRoYXQgdGhlIHBhZ2UgZGF0YSBjb21wcmVzc2lvbjoNCj4g
-KiBjb21wcmVzc2VzIHRoZSB3aG9sZSBiYXRjaCB0b2dldGhlcg0KPiAqIGFuZCB1c2VzIGEg
-c3RhZ2VkIGNvcHkgZm9yIGl0IGFzIHlvdSBhbmQgVGVkZHkgc3VnZ2VzdGVkIChzbyB0aGF0
-IHdlIGRvDQo+IG5vdCBuZWVkIHRvIHdvcnJ5IGFib3V0IG11dGF0aW5nIGJ1ZmZlcnMgYWZm
-ZWN0aW5nIExaNCBvciBvdGhlciBhbGdvcml0aG1zKS4NCj4gDQo+IE9uY2UgdGhlcmUncyBl
-eGFjdGx5IG9uZSBjb21wcmVzc2VkIGJsb2IgcGVyIHJlY29yZCwgdGhlcmUncyBubyBuZWVk
-IGZvcg0KPiBleHRyYSBmaWVsZHMgdG8gZGVzY3JpYmUgdGhlIGNvbXByZXNzZWQgZGF0YSwg
-YXMgdGhlIHVuY29tcHJlc3NlZCBiYXRjaA0KPiBzaXplIGlzIGtub3duIChhbmQgYm91bmRl
-ZCBieSBNQVhfQkFUQ0hfU0laRSAqIHBhZ2Vfc2l6ZSksIGFuZCBpdHMNCj4gY29tcHJlc3Nl
-ZCBzaXplIGNhbiBiZSBpbmZlcnJlZCBmcm9tIHRoZSBzaXplIG9mIHRoZSBlbWl0dGVkIGNv
-bXByZXNzZWQNCj4gcmVjb3JkIHdpdGhvdXQgYSBuZWVkIGZvciBhbiBleHBsaWNpdCBmaWVs
-ZCBmb3IgY2xlbiBvciBhIGZpZWxkIHdpdGggdGhlDQo+IG51bWJlciBvZiByYXcgY29tcHJl
-c3NlZCBibG9icy4gVGhpcyBtZWFucyB0aGUgc2VwYXJhdGUgUEFHRV9EQVRBX0xaNA0KPiBy
-ZWNvcmQgdHlwZSBpcyBub3QgbmVlZGVkLCBhbmQgdGhlIHByb3Bvc2FsIGZvciB2MiBjb21w
-cmVzc2lvbiByZWNvcmQgY291bGQNCj4gc2ltcGxpZnkgdG8gcmV1c2luZyBQQUdFX0RBVEEg
-YW5kIHNwZW5kaW5nIG9uZSBvY3RldCBvZiBpdHMgcmVzZXJ2ZWQgd29yZA0KPiBhcyBmb2xs
-b3dzOg0KPiANCj4gDQo+ICAgICAgIDAgICAgIDEgICAgIDIgICAgIDMgICAgIDQgICAgIDUg
-ICAgIDYgICAgIDcgb2N0ZXQNCj4gICAgICArLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0rLS0t
-LS0rLS0tLS0tLS0tLS0tLS0tLS0tLSsNCj4gICAgICB8IGNvdW50IChDKSAgICAgICAgICAg
-ICB8IGNvbXB8IChyZXNlcnZlZCkgICAgICAgIHwNCj4gICAgICArLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0rLS0tLS0rLS0tLS0tLS0tLS0tLS0tLS0tLSsNCj4gICAgICB8IHBmblswXSAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwNCj4gICAgICArLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSsNCj4gICAg
-ICAuLi4NCj4gICAgICArLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLSsNCj4gICAgICB8IHBmbltDLTFdICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHwNCj4gICAgICArLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLSsNCj4gICAgICB8IHBhZ2VfZGF0YVswLi5OLTFdIGlm
-IGNvbXAgPT0gMCAgICAgICAgICAgICAgICAgIHwNCj4gICAgICB8IG9yIHBhZ2VfY2RhdGEg
-ICAgIGlmIGNvbXAgIT0gMCAgICAgICAgICAgICAgICAgIHwNCj4gICAgICArLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSsNCj4gDQo+IHdpdGgg
-dHdvIG5ldyBlbnRyaWVzIGluIHRoZSBmaWVsZCB0YWJsZToNCj4gDQo+IGNvbXAgICAgICAg
-IENvbXByZXNzaW9uIGFsZ29yaXRobSBhcHBsaWVkIHRvIHRoZSBwYWdlIGNvbnRlbnRzLiAw
-DQo+ICAgICAgICAgICAgICBtZWFucyBub25lLCBhbmQgdGhlIHJlY29yZCBpcyBleGFjdGx5
-IGFzIGl0IGlzIHRvZGF5LiAxDQo+ICAgICAgICAgICAgICBtZWFucyBMWjQgYmxvY2sgZm9y
-bWF0LiBPdGhlciB2YWx1ZXMgYXJlIHJlc2VydmVkIGZvcg0KPiAgICAgICAgICAgICAgb3Ro
-ZXIgZnV0dXJlIGZvcm1hdHMgbGlrZSBaU1REIGV0Yy4gQSBjb21wICE9IDAgY2FuIG9ubHkN
-Cj4gICAgICAgICAgICAgIGJlIGVtaXR0ZWQgaWYgMCA8IGxlbihwYWdlX2NkYXRhKSA8IE4g
-KiBwYWdlX3NpemUuIEFuDQo+ICAgICAgICAgICAgICB1bmtub3duIGNvbXAgbXVzdCBjYXVz
-ZSB0aGUgcmVjZWl2ZXIgdG8gZmFpbCB3aXRoIGENCj4gICAgICAgICAgICAgICJDb21wcmVz
-c2lvbiBhbGdvcml0aG0gPHZhbHVlPiBub3QgaGFuZGxlZCIgZXJyb3IuDQo+IA0KPiBwYWdl
-X2NkYXRhICBQcmVzZW50IGluc3RlYWQgb2YgcGFnZV9kYXRhIHdoZW4gY29tcCBpcyBub24t
-emVyby4gQQ0KPiAgICAgICAgICAgICAgc2luZ2xlIGNvbXByZXNzZWQgb2JqZWN0IGhvbGRp
-bmcgdGhlIGNvbmNhdGVuYXRpb24gb2YgdGhlDQo+ICAgICAgICAgICAgICBOIHBhZ2VfZGF0
-YSBlbnRyaWVzLiBUaGUgcmVjZWl2ZXIgbXVzdCB2ZXJpZnkgdGhhdA0KPiAgICAgICAgICAg
-ICAgMCA8IGNvdW50IDw9IE1BWF9CQVRDSF9TSVpFLg0KPiANCj4gDQo+IFRlZGR5LCBJIGhv
-cGUgdGhpcyBmb3JtYXQgY292ZXJzIHlvdXIgcG9pbnRzOiBpdCdzIG5vIGxvbmdlciBMWjQg
-c3BlY2lmaWMsDQo+IHRoZSBpbmxpbmUgY2xlbiBpbmNvbnNpc3RlbmN5IGluIGxpYnhlbmd1
-ZXN0IHJlY29yZCBkaXNhcHBlYXJzLCBpdCdzIG9uZQ0KPiBibG9jayBvdmVyIGFuIGltbXV0
-YWJsZSBjb3B5IG9mIHRoZSBiYXRjaCBpbnN0ZWFkIG9mIG9uZSBwZXIgcGFnZSwgdGhlDQo+
-IGRlY29tcHJlc3NlZCBzaXplIGlzIGtub3duIHVwIGZyb250LCBhbmQgdGhlIGFsbG9jYXRp
-b24gZGVyaXZlZCBmcm9tIGNvdW50DQo+IGlzIGJvdW5kZWQgb24gdGhlIHJlY2VpdmVyLg0K
-PiANCg0KTG9va3MgZ29vZCB0byBtZS4NCg0KPiANCj4gVGhpcyBzaW1wbGlmaWNhdGlvbiBp
-cyBhbHNvIGZvcndhcmQtY29tcGF0aWJsZSBpbiB0d28gZGlmZmVyZW50IHdheXM6IHlvdXIN
-Cj4gNjRLQiBjaHVua2luZyBmb3IgY2FjaGUgbG9jYWxpdHkgZG9lc24ndCBkZXBlbmQgb24g
-dGhlIGZvcm1hdCwgYXMgdGhlDQo+IHN0YWdpbmcgY29weSBjYW4gYmUgZG9uZSBpbiBjaHVu
-a3Mgd2hpbGUgc3RpbGwgbWFraW5nIGEgc2luZ2xlIGNvbXByZXNzDQo+IGNhbGwgb3ZlciB0
-aGUgd2hvbGUgYmF0Y2guIEFuZCBpZiB3ZSBmaW5kIGJlbmVmaXRzIGluIHNwbGl0dGluZyB0
-aGUgcGF5bG9hZA0KPiBpbnRvIHNldmVyYWwgY29tcHJlc3NlZCB1bml0cywgdGhhdCBjYW4g
-YmUgaW1wbGVtZW50ZWQgYXMgYSBuZXcgY29tcCB2YWx1ZQ0KPiB1c2luZyBhIHNlbGYtZGVs
-aW1pdGluZyBmb3JtYXQgbGlrZSB6c3RkIG9yIGx6NGYgZnJhbWVzLCB3aGljaCByZXBvcnQg
-dGhlDQo+IGNvbnN1bWVkIGJ5dGVzIHdpdGhvdXQgYSBuZWVkIHRvIHNwZWNpZnkgY2xlbiBv
-ciBleHRyYSBmcmFtaW5nIGZpZWxkcyBhdCB0aGUNCj4gcmVjb3JkIGxldmVsLg0KPiANCj4g
-DQo+IE9uIFdlZCwgMjIgSnVsIDIwMjYgYXQgMjA6NDIsIEZyZWRpYW5vIFppZ2xpbyA8ZnJl
-ZGR5NzdAZ21haWwuY29tPiB3cm90ZToNCj4+IERvbid0IHdlIG5lZWQgdG8gYnVtcCB0aGUg
-dmVyc2lvbiBudW1iZXIgd2hpbGUgd2UgYWRkIGEgbmV3IG1hbmRhdG9yeSByZWNvcmQ/DQo+
-IA0KPiBJIGJlbGlldmUgd2UgbWF5IGF2b2lkIGhhdmluZyB0byBkbyBhIHZlcnNpb24gYnVt
-cCBpZiB3ZSBhZG9wdCB0aGUgcHJvcGVydHkNCj4gdGhhdCAwIDwgbGVuKHBhZ2VfY2RhdGEp
-IDwgTiAqIHBhZ2Vfc2l6ZSB3aGVuIGNvbXAgIT0gMCwgYXMgaW4gdGhpcyBjYXNlDQo+IHRo
-ZSBjb21wcmVzc2VkIGRhdGEgc2VudCB0byBhbiBvbGQgcmVjZWl2ZXIgd291bGQgZmFpbCBp
-biBoYW5kbGVfcGFnZV9kYXRhKCkNCj4gd2l0aCAiUEFHRV9EQVRBIHJlY29yZCB3cm9uZyBz
-aXplIi4gQnVtcGluZyB0aGUgdmVyc2lvbiB3b3VsZCBtYWtlDQo+IHVuY29tcHJlc3NlZCBt
-aWdyYXRpb25zIGZhaWwgaWYgdGhleSBhcmUgc2VudCB0byBvbGQgcmVjZWl2ZXJzIHRoYXQg
-YWxzbw0KPiB1bmRlcnN0YW5kIHVuY29tcHJlc3NlZCBtaWdyYXRpb24sIHNvIGF2b2lkaW5n
-IGlmIHBvc3NpYmxlIHdvdWxkIGJlIGdvb2QuDQo+IFRoZSBzcGVjIHNheXMgbWlncmF0aW9u
-IHRvb2xzICJzaGFsbCBhbHdheXMgc2F2ZSBpbWFnZXMgdXNpbmcgdmVyc2lvbiBWIiwNCj4g
-c28gaXQgZG9lc24ndCBzZWVtIGxpa2Ugd2UgY291bGQgYnVtcCB0aGUgdmVyc2lvbiBvbmx5
-IHdoZW4gY29tcHJlc3Npb24gaXMgb24uDQo+IA0KPiANCj4+IElzIHRoZXJlIG5vIGtpbmQg
-b2YgZGlhbG9nIGFib3V0IHRoZSBzdXBwb3J0ZWQgdmVyc2lvbj8NCj4gDQo+IFRoZXJlIGlz
-IG5vIGluLXN0cmVhbSBuZWdvdGlhdGlvbiwgYW5kIHRoaXMgcHJvcG9zYWwgZG9lcyBub3Qg
-YWRkIG9uZS4NCj4gQ29tcHJlc3Npb24gaXMgb3B0LWluIGF0IHRoZSBzZW5kZXIgdmlhIHhs
-IG1pZ3JhdGUgLS1jb21wcmVzcywgc28gYW4gb3BlcmF0b3INCj4gd2hvIGVuYWJsZXMgaXQg
-YWdhaW5zdCBhbiBvbGQgcmVjZWl2ZXIgZ2V0cyBhIGNsZWFuIGZhaWx1cmUgcmF0aGVyIHRo
-YW4NCj4gY29ycnVwdGlvbi4NCj4gDQo+PiBXaHkgbm90IGV4dGVuZGluZyB0aGUgZ2VuZXJh
-bGl6YXRpb24gY29tcHJlc3NpbmcgYWxsIHBheWxvYWQgb2YNCj4+IHVuY29tcHJlc3NlZCBw
-YWNrZXRzICh0eXBlK2JvZHkpLA0KPiANCj4gQSBjb21wb3NhYmxlIHdyYXBwZXIgd291bGQg
-YmUgYSBjbGVhbiBnZW5lcmljIG1lY2hhbmlzbSwgYnV0IEkgdGhpbmsgdGhlcmUNCj4gYXJl
-IHR3byByZWFzb25zIG5vdCB0byBnbyB0aGF0IHdheSBpbiB2MjogUEFHRV9EQVRBIGlzIGVm
-ZmVjdGl2ZWx5IGFsbCBvZiB0aGUNCj4gc3RyZWFtIGJ5dGVzLCBzbyBjb21wcmVzc2luZyB0
-aGUgb3RoZXIgcmVjb3JkIHR5cGVzIHdvdWxkIG5vdCBzaG93IHVwIGluIGENCj4gbWVhc3Vy
-ZW1lbnQuIEFuZCB0aGUgbm8tZXh0cmEtZmllbGRzIHByb3BlcnR5IGFib3ZlIGRlcGVuZHMg
-b24gUEFHRV9EQVRBDQo+IHNwZWNpZmljYWxseTogYSBnZW5lcmljIHdyYXBwZXIgaGFzIG5v
-IHBmbiBhcnJheSBmcm9tIHdoZXJlIHdlIGNhbiBkZXJpdmUNCj4gdGhlIHVuY29tcHJlc3Nl
-ZCBzaXplLCBzbyBpdCB3b3VsZCBuZWVkIGV4cGxpY2l0IGFsZ29yaXRobSwgY29tcHJlc3Nl
-ZA0KPiBzaXplIGFuZCB1bmNvbXByZXNzZWQgc2l6ZSBmaWVsZHMgb24gZXZlcnkgcmVjb3Jk
-LCB3aGljaCByZS1hZGRzIHRoZSBmaWVsZHMNCj4gdGhhdCB0aGlzIHByb3Bvc2FsIHRyaWVz
-IHRvIGF2b2lkLg0KPiANCj4gDQo+IFBsZWFzZSBsZXQgbWUga25vdyBpZiB0aGUgaWRlYXMg
-YWJvdmUgY2FwdHVyZSB3aGF0IHlvdSBoYWQgaW4gbWluZCBpbiB0ZXJtcyBvZg0KPiBzdWdn
-ZXN0aW9ucyB0byBpbXByb3ZlIHYxLg0KPiANCj4gSW4gcGFydGljdWxhciwgSSB3b25kZXIg
-d2hhdCB0aGUgbWFpbnRhaW5lcnMgdGhpbmsgb2YgdGhlIHVzZSBvZiBvbmUgb2YgdGhlDQo+
-IG9jdGV0cyBvZiB0aGUgUEFHRV9EQVRBIHJlc2VydmVkIGZpZWxkIGZvciB0aGUgcHVycG9z
-ZSBvZiBpbmRpY2F0aW5nIHRoZSBkYXRhDQo+IGlzIGNvbXByZXNzZWQsIG9yIGlzIGl0IHBy
-ZWZlcmFibGUgdG8gdXNlIGEgbmV3IFBBR0VfREFUQV9DT01QUkVTU0VEICgweDEzKQ0KPiB0
-eXBlIHJlY29yZCBhcyBhIG1hbmRhdG9yeSByZWNvcmQgc28gdGhhdCBhbiBvbGQgcmVjZWl2
-ZXIgZmFpbHMgbW9yZSBjbGVhbmx5DQo+IHdoZW4gaXQgZG9lc24ndCB1bmRlcnN0YW5kIGNv
-bXByZXNzaW9uICJNYW5kYXRvcnkgcmVjb3JkIDxuYW1lPiBub3QgaGFuZGxlZCINCj4gKGNh
-dXNlZCBieSB0aGUgc3BlY2lmaWNhdGlvbiBvZiBtYW5kYXRvcnkgcmVjb3JkcykgaW5zdGVh
-ZCBvZiB3aXRoIGEgZ2VuZXJpYw0KPiBlcnJvciAiUEFHRV9EQVRBIHJlY29yZCB3cm9uZyBz
-aXplIiAoY2F1c2VkIGJ5IHRoZSBjdXJyZW50IHNhZmV0eQ0KPiBpbXBsZW1lbnRhdGlvbiB0
-aGF0IHJlamVjdHMgdW5leHBlY3RlZCByZWNvcmQgc2l6ZXMpPw0KPiANCg0KVGhlIHNwZWNp
-ZmljYXRpb24gc2F5cw0KDQogPiBQYWRkaW5nIGFuZCByZXNlcnZlZCBmaWVsZHMgYXJlIHNl
-dCB0byB6ZXJvIG9uIHNhdmUgYW5kIG11c3QgYmUNCmlnbm9yZWQgZHVyaW5nIHJlc3RvcmUu
-DQoNCldoaWNoIGlzIG5vdCByZWFsbHkgZ29pbmcgdG8gaGVscCBpZiB3ZSBhZGQgYSBuZXcg
-ZmllbGQgdGhhdCBtYXR0ZXJzIG9uIA0KaG93IHRoZSBjb250ZW50IGlzIG9yZ2FuaXplZC4N
-Cg0KVG8gYXZvaWQgY29uZnVzaW9uLCBpdCBtYXkgYmUgZGVzaXJhYmxlIHRvIGFkZCBhIG5l
-dyB0eXBlIA0KKFBBR0VfREFUQV9DT01QUkVTU0VEKSwgYnV0IEknbSBub3QgZnVsbHkgc29s
-ZCBvbiBpdC4NCg0KPiANCj4gTWFyY3VzDQo+IA0KPiANCg0KVGVkZHkNCg==
---------------qL9BXv60iFiNIQQzDu3jqzUh
-Content-Type: application/pgp-keys; name="OpenPGP_0x660FA9D102CBCFD0.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x660FA9D102CBCFD0.asc"
-Content-Description: OpenPGP public key
+To: Teddy Astie <teddy.astie@vates.tech>
+Cc: Marcus Granado <marcus.granado@citrix.com>, 
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Andrew Cooper <andrew.cooper3@citrix.com>, 
+	Roger Pau Monne <roger.pau@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, 
+	=?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-c1860d/1785835677-CEF5F87B-66FF65BF/0/0
+X-purgate-type: clean
+X-purgate-size: 8056
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+On Tue, 4 Aug 2026 at 10:15, Teddy Astie <teddy.astie@vates.tech> wrote:
+>
+> Le 03/08/2026 =C3=A0 19:23, Marcus Granado a =C3=A9crit :
+> > On Wed, 29 Jul 2026 at 10:14, Frediano Ziglio <freddy77@gmail.com> wrot=
+e:
+> >> About compressing all together and considering also the issue of
+> >> memory changing while sending I would vote to copy the memory in a
+> >> temporary buffer to avoid this. One advantage is that it simplified
+> >> the format. The current LZ4 implementation seems to cope with data
+> >> changes but nothing guarantees it in the future, the buffer you are
+> >> passing is not supposed to change while you compress it.
+> >
+> >
+> > Agreed. Frediano and I discussed this further, including simplification=
+s on
+> > the compression record for v2 so that the page data compression:
+> > * compresses the whole batch together
+> > * and uses a staged copy for it as you and Teddy suggested (so that we =
+do
+> > not need to worry about mutating buffers affecting LZ4 or other algorit=
+hms).
+> >
+> > Once there's exactly one compressed blob per record, there's no need fo=
+r
+> > extra fields to describe the compressed data, as the uncompressed batch
+> > size is known (and bounded by MAX_BATCH_SIZE * page_size), and its
+> > compressed size can be inferred from the size of the emitted compressed
+> > record without a need for an explicit field for clen or a field with th=
+e
+> > number of raw compressed blobs. This means the separate PAGE_DATA_LZ4
+> > record type is not needed, and the proposal for v2 compression record c=
+ould
+> > simplify to reusing PAGE_DATA and spending one octet of its reserved wo=
+rd
+> > as follows:
+> >
+> >
+> >       0     1     2     3     4     5     6     7 octet
+> >      +-----------------------+-----+-------------------+
+> >      | count (C)             | comp| (reserved)        |
+> >      +-----------------------+-----+-------------------+
+> >      | pfn[0]                                          |
+> >      +-------------------------------------------------+
+> >      ...
+> >      +-------------------------------------------------+
+> >      | pfn[C-1]                                        |
+> >      +-------------------------------------------------+
+> >      | page_data[0..N-1] if comp =3D=3D 0                  |
+> >      | or page_cdata     if comp !=3D 0                  |
+> >      +-------------------------------------------------+
+> >
+> > with two new entries in the field table:
+> >
+> > comp        Compression algorithm applied to the page contents. 0
+> >              means none, and the record is exactly as it is today. 1
+> >              means LZ4 block format. Other values are reserved for
+> >              other future formats like ZSTD etc. A comp !=3D 0 can only
+> >              be emitted if 0 < len(page_cdata) < N * page_size. An
+> >              unknown comp must cause the receiver to fail with a
+> >              "Compression algorithm <value> not handled" error.
+> >
+> > page_cdata  Present instead of page_data when comp is non-zero. A
+> >              single compressed object holding the concatenation of the
+> >              N page_data entries. The receiver must verify that
+> >              0 < count <=3D MAX_BATCH_SIZE.
+> >
+> >
+> > Teddy, I hope this format covers your points: it's no longer LZ4 specif=
+ic,
+> > the inline clen inconsistency in libxenguest record disappears, it's on=
+e
+> > block over an immutable copy of the batch instead of one per page, the
+> > decompressed size is known up front, and the allocation derived from co=
+unt
+> > is bounded on the receiver.
+> >
+>
+> Looks good to me.
+>
+> >
+> > This simplification is also forward-compatible in two different ways: y=
+our
+> > 64KB chunking for cache locality doesn't depend on the format, as the
+> > staging copy can be done in chunks while still making a single compress
+> > call over the whole batch. And if we find benefits in splitting the pay=
+load
+> > into several compressed units, that can be implemented as a new comp va=
+lue
+> > using a self-delimiting format like zstd or lz4f frames, which report t=
+he
+> > consumed bytes without a need to specify clen or extra framing fields a=
+t the
+> > record level.
+> >
+> >
+> > On Wed, 22 Jul 2026 at 20:42, Frediano Ziglio <freddy77@gmail.com> wrot=
+e:
+> >> Don't we need to bump the version number while we add a new mandatory =
+record?
+> >
+> > I believe we may avoid having to do a version bump if we adopt the prop=
+erty
+> > that 0 < len(page_cdata) < N * page_size when comp !=3D 0, as in this c=
+ase
+> > the compressed data sent to an old receiver would fail in handle_page_d=
+ata()
+> > with "PAGE_DATA record wrong size". Bumping the version would make
+> > uncompressed migrations fail if they are sent to old receivers that als=
+o
+> > understand uncompressed migration, so avoiding if possible would be goo=
+d.
+> > The spec says migration tools "shall always save images using version V=
+",
+> > so it doesn't seem like we could bump the version only when compression=
+ is on.
+> >
+> >
+> >> Is there no kind of dialog about the supported version?
+> >
+> > There is no in-stream negotiation, and this proposal does not add one.
+> > Compression is opt-in at the sender via xl migrate --compress, so an op=
+erator
+> > who enables it against an old receiver gets a clean failure rather than
+> > corruption.
+> >
+> >> Why not extending the generalization compressing all payload of
+> >> uncompressed packets (type+body),
+> >
+> > A composable wrapper would be a clean generic mechanism, but I think th=
+ere
+> > are two reasons not to go that way in v2: PAGE_DATA is effectively all =
+of the
+> > stream bytes, so compressing the other record types would not show up i=
+n a
+> > measurement. And the no-extra-fields property above depends on PAGE_DAT=
+A
+> > specifically: a generic wrapper has no pfn array from where we can deri=
+ve
+> > the uncompressed size, so it would need explicit algorithm, compressed
+> > size and uncompressed size fields on every record, which re-adds the fi=
+elds
+> > that this proposal tries to avoid.
+> >
+> >
+> > Please let me know if the ideas above capture what you had in mind in t=
+erms of
+> > suggestions to improve v1.
+> >
+> > In particular, I wonder what the maintainers think of the use of one of=
+ the
+> > octets of the PAGE_DATA reserved field for the purpose of indicating th=
+e data
+> > is compressed, or is it preferable to use a new PAGE_DATA_COMPRESSED (0=
+x13)
+> > type record as a mandatory record so that an old receiver fails more cl=
+eanly
+> > when it doesn't understand compression "Mandatory record <name> not han=
+dled"
+> > (caused by the specification of mandatory records) instead of with a ge=
+neric
+> > error "PAGE_DATA record wrong size" (caused by the current safety
+> > implementation that rejects unexpected record sizes)?
+> >
+>
+> The specification says
+>
+>  > Padding and reserved fields are set to zero on save and must be
+> ignored during restore.
+>
+> Which is not really going to help if we add a new field that matters on
+> how the content is organized.
+>
 
-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
-x9fhaZEsniw8/bYgC3igkk5YJiOa
-=3DlUIA
------END PGP PUBLIC KEY BLOCK-----
+Yes, there's no check for "_res1" being 0, however there's this check:
 
---------------qL9BXv60iFiNIQQzDu3jqzUh--
+    if ( rec->length !=3D (sizeof(*pages) +
+                         (sizeof(uint64_t) * pages->count) +
+                         (PAGE_SIZE * pages_of_data)) )
+    {
+        ERROR("PAGE_DATA record wrong size: length %u, expected "
+              "%zu + %zu + %lu", rec->length, sizeof(*pages),
+              (sizeof(uint64_t) * pages->count), (PAGE_SIZE * pages_of_data=
+));
+        goto err;
+    }
 
---------------hNQ5LyUMizokDAxHrKBPhLw7--
+so, as long as we require that the compressed data is less than the
+uncompressed one (we should) it's fine.
 
---------------tLoy9wFY8vD4kZQNnvXo5qTt
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
------BEGIN PGP SIGNATURE-----
+> To avoid confusion, it may be desirable to add a new type
+> (PAGE_DATA_COMPRESSED), but I'm not fully sold on it.
+>
 
-wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmpxrZYFAwAAAAAACgkQZg+p0QLLz9CC
-EAwAqmEMd1SikFOClTEEjZw+ESDICB9UuEyhrZ5LK4CaAQsO3HxMYwfN7st4RyL/PBHy4CbyddvQ
-hu1HS0T3XyU2WjiahkSx9IhrEYjAU1B89bsNi5hpofhgGpBi4qCocQ6iJgpBWg9z6bPUhDCKC2qs
-tWg0wndY7ZwFqx/PiE1vPTpp1FRntQQwS+o9JlsUKuNlk8stMvrQz1j+vyaZlDBKbLZ+j76QrNti
-drccO+ikWGn4mAQWqfEdDhkRorR3hYrffs1bRT+/wy6BeoxGzUEPH+JnMY1kB5JohrwKKv0fNqwm
-oYj1XVInPKZXAnjMQqoVf/Ykm8xIAtPkWap4Cu9CteUQKe67Jg+wwURzN5HqV4GRFhPvBsRDptom
-TVsHe+ZDIQEJ1b73oVJEZzqx60Vq5Ws9ehvWMi0l8lfrwgDZKFu/6hibl5RSfX7YR0BQI+X0Io1/
-jFxYTrJjOwF7huiDb9TBj9eVSslKNLS1h0nUvMCFDuN7OAFD+r47h+m0y8Vk
-=gycT
------END PGP SIGNATURE-----
+Not strong but if I could vote I would just use part of "_res1" as proposed=
+.
 
---------------tLoy9wFY8vD4kZQNnvXo5qTt--
+> >
+> > Marcus
+> >
+> >
+>
+> Teddy
+
+Frediano
 
