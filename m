@@ -4,42 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D555C55ABA
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2026 20:07:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1382629.1625973 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1133EC55ABA
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2026 21:41:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1382653.1625982 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrLPI-0004Tg-7H; Tue, 04 Aug 2026 20:06:36 +0000
+	id 1wrMsd-0008Ml-PC; Tue, 04 Aug 2026 21:40:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1382629.1625973; Tue, 04 Aug 2026 20:06:36 +0000
+Received: by outflank-mailman (output) from mailman id 1382653.1625982; Tue, 04 Aug 2026 21:40:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrLPI-0004TZ-4m; Tue, 04 Aug 2026 20:06:36 +0000
-Received: by outflank-mailman (input) for mailman id 1382629;
- Tue, 04 Aug 2026 20:06:34 +0000
+	id 1wrMsd-0008Me-LE; Tue, 04 Aug 2026 21:40:59 +0000
+Received: by outflank-mailman (input) for mailman id 1382653;
+ Tue, 04 Aug 2026 21:40:58 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <peterz@infradead.org>) id 1wrLPF-0004TR-8T
- for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 20:06:34 +0000
+ (envelope-from <freddy77@gmail.com>) id 1wrMsc-0008MY-2z
+ for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 21:40:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrLPE-001eg9-Lb
- for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 22:06:32 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wrMsb-001obd-6Z
+ for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 23:40:57 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <peterz@infradead.org>)
- id 6a72462c-e002-0a2a0a5209dd-0a2a45069ecc-10
- for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 22:06:31 +0200
-Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <peterz@infradead.org>)
- id 6a724376-195a-0a2a45060019-5a9b3222c75a-3
- for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 21:54:31 +0200
-Received: from 77-249-17-252.cable.dynamic.v4.ziggo.nl ([77.249.17.252]
- helo=noisy.programming.kicks-ass.net)
- by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wrLDN-00000004dyG-3Yfn; Tue, 04 Aug 2026 19:54:17 +0000
-Received: by noisy.programming.kicks-ass.net (Postfix, from userid 1000)
- id 0A184300B40; Tue, 04 Aug 2026 21:54:17 +0200 (CEST)
+ (envelope-from <freddy77@gmail.com>)
+ id 6a725c2a-2eae-0a2a0a5409dd-0a2a450487ba-44
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 23:40:57 +0200
+Received: from [74.125.224.47] (helo=mail-yx1-f47.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <freddy77@gmail.com>)
+ id 6a725c68-b57f-0a2a45040019-4a7de02fbd12-3
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 23:40:57 +0200
+Received: by mail-yx1-f47.google.com with SMTP id
+ 956f58d0204a3-669944f5ef1so302167d50.1
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 14:40:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,136 +48,147 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=+IzxgHirXh8bANHLHHneykwXTiWqinCHzwnsN/D+w1g=; b=cgc/4q5XWxb+9KHledOTiCkjCj
-	qq0/2fvaHG7Qp83Vg+3/fUN0X2kukF2LFGusGOYQrH0obYRDUEtgSeWR3tr+4dGHM1+rpu/rLQ1Tk
-	0IRno6TRcPM9AAut3SiFQbVeIH55/1SLk/L57s2QIePicpmXv8BSEr/7MiSgs+DW6OKfkUVq4xyWW
-	f/Bg3OJHFn/zCKQb5ODfDBLhY5WYJ9QRUlrhLWFVC+XuxtxkMtKKJouvX0pcB5x+VcFKNyhAxS7MJ
-	mm2BbOwBUTRRIZYT5+BtfzMIOia+PY04wvaF7AiNa2bNuOBjcNm1RZO5LghLrrQ4rMN1nlxylF5zK
-	0KLtQp6A==;
-Date: Tue, 4 Aug 2026 21:54:16 +0200
-From: Peter Zijlstra <peterz@infradead.org>
-To: Borislav Petkov <bp@alien8.de>
-Cc: Dmitry Ilvokhin <d@ilvokhin.com>, Ingo Molnar <mingo@redhat.com>,
-	Will Deacon <will@kernel.org>, Boqun Feng <boqun@kernel.org>,
-	Waiman Long <longman@redhat.com>,
-	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-	"K. Y. Srinivasan" <kys@microsoft.com>,
-	Haiyang Zhang <haiyangz@microsoft.com>,
-	Wei Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>,
-	Long Li <longli@microsoft.com>, Thomas Gleixner <tglx@kernel.org>,
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>, Juergen Gross <jgross@suse.com>,
-	Ajay Kaher <ajay.kaher@broadcom.com>,
-	Alexey Makhalov <alexey.makhalov@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Vitaly Kuznetsov <vkuznets@redhat.com>,
-	Josh Poimboeuf <jpoimboe@kernel.org>,
-	Jason Baron <jbaron@akamai.com>, Alice Ryhl <aliceryhl@google.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Ard Biesheuvel <ardb@kernel.org>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Arnd Bergmann <arnd@arndb.de>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	linux-kernel@vger.kernel.org, linux-mips@vger.kernel.org,
-	linux-hyperv@vger.kernel.org, virtualization@lists.linux.dev,
-	kvm@vger.kernel.org, xen-devel@lists.xenproject.org,
-	linux-arch@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
-	kernel-team@meta.com
-Subject: Re: [PATCH 1/5] x86/paravirt: Use static_call() for the paravirt
- spinlock ops
-Message-ID: <20260804195416.GJ776954@noisy.programming.kicks-ass.net>
-References: <cover.1785778551.git.d@ilvokhin.com>
- <9a32ae399eb804a02a31af04dcabe7e7ee4f3fdf.1785778551.git.d@ilvokhin.com>
- <20260804190048.GCanI24Hb5P8qAyVZs@fat_crate.local>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1785879655; cv=none;
+        d=google.com; s=arc-20260327;
+        b=g36Z68Wwbq2TXta0huJSzjGl+bhGBcD2EFjefRfbqycj6X6JaZ+yp9QWAxYBJHkW4B
+         obuxWqfKz5sMs0hl9/BzcapFVmySqUAbEtO4PQ4EHTMLhQCP2e/DpO8/UyKyU6RFteRY
+         MtJXaGw0M4P/xev9yK0KYBj2E6/yAYuC5w8Itdxd2R54YVGdvkH7ysIVaK0Nl2WnSBbb
+         ZLhNPiB1FDpC1f7nHlXp5C5HRR7aD2eHsYKFfyQURDM0bGb/64yfLsLck9hPeKN8QVEh
+         M9iTHyUnpqG1gGCP02yDnpnaf6/X/k4d7J2lsTuKjfS8Q8FWaIV4mYJHckBvadX9iEnR
+         M8QA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=sUP90bFdYVViBJwMVU0ncUeotpyeUeVbV/REZdSDfEg=;
+        fh=K9IAd8BUey1PZ/zoeGTbn1ETVLXZhvAgW6PCZb/WSCU=;
+        b=PnSMeV0tNNIU72qLKz4gKYb+ihNbTjXp+EBL/BRfoXbrLW1UbeENhZ/8g+Iwuu3pNV
+         ZqNJs2SDNse1ED0kCgbSfpHcUC39ScrfeBWHZZI42GdkHoe6bwt8fgev4ZKgkGh2Z2IA
+         XBOBv8oOKI+3nDimCzvvn3SLhcyYAV1nlH4V/jTopS/OOdWIbZjOIYIiw/9eFZ5oblMa
+         jIoxe7AUUAXdSaAh1LnhU+PscieyXEJbCyV1ElgIKelKDL52OtNUAwyiIfarQm+MQY2H
+         fhCP2RY8i4gXtJdriPN5ogCPEflCNPYN9thPnm+dV/MGtVsYvUZPmoZie5wb0m1x0VPw
+         BcXA==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1785879655; x=1786484455; darn=lists.xenproject.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=sUP90bFdYVViBJwMVU0ncUeotpyeUeVbV/REZdSDfEg=;
+        b=HGXP0+GmRqgqY7wih4hjQo0WG8iDs4T+MH/XXM+RgUbbY6jjqne+7KysjimYmi+Peo
+         YcFneXnt4HIBBRMx7dRH7awBEiflpVr9MhP7LbPj0jyGi4sOpeCKVd6ATedg5r0BS4bC
+         GwG3ukrh8Knae5FYx+Y7peWWofSr5fKaI0/UfPbfxd4aZEt9xjAJj6/TSl/0njLF0r+E
+         nBQneR6Ws9jr/qLUqHpQwRucYHC6Nx76/655tYKTJlH6wrEwNdP252GUjcRn+Jc1A3Bf
+         +qucN4rOYuBk0WXtkeFC/eCA8B8Wg7gUoD9ESasaFH5XsWvEP7/okuZ79wubqmpuwQxk
+         64HA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785879655; x=1786484455;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=sUP90bFdYVViBJwMVU0ncUeotpyeUeVbV/REZdSDfEg=;
+        b=SQ5zvTDhCZQtGKgJo1wecctnICiZLeZyXiGAXUOoaqGTSQ1KX6CVCf09vYEVe/hfuu
+         2qwVf4TqLMRX+zmiv+PO3GtUeMpmUXchcwEU4a14IJG74Heai4aAZjTjEUyhZEiUA893
+         vptrSREgSD4ohsZbQqDVBhVLcf7vUnnHuDs086aV+PO2Gi2/8dK16dOO11TrE5qhgWqZ
+         wAo/fxGbolL19my4eUWkxjpcJt62IXn1C3g6B8VStYJCt3vFG4HEDDJZXekHMCWuUKFI
+         2hwkVa2Uf+YjOJDGXRCioX7efS5jrshMDhczZtKSkaRpQXqGkRpL6/Sr/GqRoxL1P6e8
+         w5Eg==
+X-Gm-Message-State: AOJu0Ywcd0LZ/KH/S4W7BDyakQdcpesO0A4PYBx9uX5DDKbCc3/JT8J7
+	D3JSscn6/w2LKeAjwyBs7J0NDQFa/4M1uw2AOz/Td97DH2Ygby9j+hqrvPTn1SmX+2IfmEL0Gle
+	oY7tT2TYVvZ6cw43U/OjBKcNXiYhKBLQ=
+X-Gm-Gg: AR+sD13BvMb80n+QmJf+uZZhY08LIZE7iFGsUFJUVDUO0auVvs9I45347W8gFbHjRIM
+	I0RiFwqp73YZ5FSkmj1AiwxqfwoqKj1/55jJaFjB8c+a6QlNLa4Amu5wPYy7OWTem/OtC6UoLmn
+	ew0Z+a5IeCznAbLXB3bytJOnEMOv93KWG1rSkTmzXv0b1GgpvePbRkxvcGvJBYPn6UjyEcPZomm
+	vdx76bpDM5YiwgUhpnzfQlAXNnjd7yihReV58Z7G9iR7oaTGoU/oNi3r49cXaC8EdGq1E9YTZKx
+	8Lt2lkqkjED8pnu0IYbV6Nl/t85byOIUUzp42WsY1SfaW0K2mXbda5JMcZGgUXrSppfsWs71GIu
+	h
+X-Received: by 2002:a53:b543:0:b0:667:e04a:8a3f with SMTP id
+ 956f58d0204a3-6699a919d86mr969713d50.5.1785879655484; Tue, 04 Aug 2026
+ 14:40:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260804190048.GCanI24Hb5P8qAyVZs@fat_crate.local>
-X-purgate-ID: tlsNG-16d1c6/1785873271-FEA7477B-2DE99309/13/0
+References: <20260804174219.835096-1-frediano.ziglio@citrix.com>
+ <20260804174219.835096-2-frediano.ziglio@citrix.com> <1785871743.8631fc262581453bbf619ec5b2062170.19fce4038dd000e099@vates.tech>
+In-Reply-To: <1785871743.8631fc262581453bbf619ec5b2062170.19fce4038dd000e099@vates.tech>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Tue, 4 Aug 2026 22:40:44 +0100
+X-Gm-Features: AUfX_mxHyihNtyDMkBfWJHdz09e80hO9TOwHB81ucSm2D6hWkksFcqiOiVQvCaw
+Message-ID: <CAHt6W4caSVXHx-bdNh0WDTk-K0UXTb0pN75NYuCC+A66woo9Vw@mail.gmail.com>
+Subject: Re: [PATCH 1/2] CI: Simplify directories creation
+To: Anthony PERARD <anthony.perard@vates.tech>
+Cc: xen-devel@lists.xenproject.org, 
+	Frediano Ziglio <frediano.ziglio@citrix.com>, Doug Goldstein <cardoe@cardoe.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich <jbeulich@suse.com>, 
+	Andrew Cooper <andrew.cooper3@citrix.com>, 
+	=?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Content-Type: text/plain; charset="UTF-8"
+X-purgate-ID: tlsNG-ebf023/1785879657-536C2B50-9A16AF3D/0/0
 X-purgate-type: clean
-X-purgate-size: 3811
+X-purgate-size: 2001
 
-On Tue, Aug 04, 2026 at 12:00:48PM -0700, Borislav Petkov wrote:
-> On Tue, Aug 04, 2026 at 07:15:41AM +0000, Dmitry Ilvokhin wrote:
-> > From: Peter Zijlstra <peterz@infradead.org>
-> > 
-> > queued_spin_lock_slowpath() and queued_spin_unlock() are dispatched
-> > through pv_ops_lock via the paravirt-ops ALTERNATIVE machinery, which
-> > picks the target (native inline store / hypervisor call) once at boot
-> > and cannot change at runtime.
-> > 
-> > Convert both to static_call(). The site becomes a direct call patched in
-> > place (one byte smaller), and on native the unlock still collapses to
-> > the inline "movb $0, (%rdi)" store, so the fast path is unchanged.
-> > 
-> > Unlike the ALTERNATIVE mechanism, a static_call() target can also be
-> > updated at runtime via static_call_update(). This is a prerequisite for
-> > the contended_release tracepoint, which has to swap in a traced unlock
-> > while the system is running.
-> > 
-> > [ ilvokhin: commit message; fix PARAVIRT_SPINLOCKS=n build; teach
-> >   __static_call_validate() about the inline unlock insn; make the
-> >   slowpath site module-safe: static_call_mod() +
-> >   EXPORT_STATIC_CALL_TRAMP(); pass @lock to the callee-save unlock,
-> >   fixing a boot hang under CALL_DEPTH_TRACKING. Boot tested native + KVM
-> >   PV guest. ]
-> > 
-> > Link: https://lore.kernel.org/all/20260603120811.GW3493090@noisy.programming.kicks-ass.net/
-> > Co-developed-by: Dmitry Ilvokhin <d@ilvokhin.com>
-> > Signed-off-by: Dmitry Ilvokhin <d@ilvokhin.com>
-> 
-> This needs Peter's SOB.
+On Tue, 4 Aug 2026 at 20:29, Anthony PERARD <anthony.perard@vates.tech> wrote:
+>
+> On Tue, Aug 04, 2026 at 06:42:17PM +0100, Frediano Ziglio wrote:
+> > diff --git a/automation/scripts/qemu-alpine-x86_64.sh b/automation/scripts/qemu-alpine-x86_64.sh
+> > index 242ffca693..60f5cc49fc 100755
+> > --- a/automation/scripts/qemu-alpine-x86_64.sh
+> > +++ b/automation/scripts/qemu-alpine-x86_64.sh
+> > @@ -4,16 +4,7 @@ set -ex -o pipefail
+> >
+> >  # DomU Busybox
+> >  cd binaries
+> > -mkdir -p initrd
+> > -mkdir -p initrd/bin
+> > -mkdir -p initrd/sbin
+> > -mkdir -p initrd/etc
+> > -mkdir -p initrd/dev
+> > -mkdir -p initrd/proc
+> > -mkdir -p initrd/sys
+> > -mkdir -p initrd/lib
+> > -mkdir -p initrd/var
+> > -mkdir -p initrd/mnt
+> > +mkdir -p initrd/{bin,sbin,etc,dev,proc,sys,lib,var,mnt}
+>
+> This makes it really hard to find out if more directory or less
+> directory are been created. When reviewing a patch, we don't see what
+> changed in a line without using more complex tools.
+>
+> For this patch, I have now idea at a glimpse if all the directory that
+> was created before are still created.
+>
+> In the future, we might need to create more directories, this would
+> change on very long line to another, and make it hard to find out what
+> was the logical change, by just looking at the output of `diff -u`.
+>
+> So I don't see this patch as an improvement.
+>
+> But that just my opinion, but that would apply equally to other similar
+> changes, like packing all the variable declaration on a single line in C.
+>
+> Cheers,
+>
 
-Yeah, that got fixed when I applied it ;-)
+Hi,
+   what about putting the directory names in alphabetical order?
+Either in multiline or in the concise single line?
+In both cases it makes it easier to check if it's already there.
 
-> > ---
-> >  arch/x86/hyperv/hv_spinlock.c            |  4 ++--
-> >  arch/x86/include/asm/cpufeatures.h       |  1 -
-> >  arch/x86/include/asm/paravirt-spinlock.h | 19 +++++++++++------
-> >  arch/x86/kernel/kvm.c                    |  5 ++---
-> >  arch/x86/kernel/paravirt-spinlocks.c     | 12 +++++------
-> >  arch/x86/kernel/static_call.c            | 27 ++++++++++++++++++++++++
-> >  arch/x86/xen/spinlock.c                  |  5 ++---
-> >  tools/arch/x86/include/asm/cpufeatures.h |  1 -
-> >  8 files changed, 51 insertions(+), 23 deletions(-)
-> > 
-> > diff --git a/arch/x86/hyperv/hv_spinlock.c b/arch/x86/hyperv/hv_spinlock.c
-> > index 210b494e4de0..6b4bdea18218 100644
-> > --- a/arch/x86/hyperv/hv_spinlock.c
-> > +++ b/arch/x86/hyperv/hv_spinlock.c
-> > @@ -78,8 +78,8 @@ void __init hv_init_spinlocks(void)
-> >  	pr_info("PV spinlocks enabled\n");
-> >  
-> >  	__pv_init_lock_hash();
-> > -	pv_ops_lock.queued_spin_lock_slowpath = __pv_queued_spin_lock_slowpath;
-> > -	pv_ops_lock.queued_spin_unlock = PV_CALLEE_SAVE(__pv_queued_spin_unlock);
-> > +	static_call_update(queued_spin_lock_slowpath, __pv_queued_spin_lock_slowpath);
-> > +	static_call_update(queued_spin_unlock, __raw_callee_save___pv_queued_spin_unlock);
-> >  	pv_ops_lock.wait = hv_qlock_wait;
-> >  	pv_ops_lock.kick = hv_qlock_kick;
-> >  	pv_ops_lock.vcpu_is_preempted = PV_CALLEE_SAVE(hv_vcpu_is_preempted);
-> > diff --git a/arch/x86/include/asm/cpufeatures.h b/arch/x86/include/asm/cpufeatures.h
-> > index 1b4a48bff18f..e41fe5c24841 100644
-> > --- a/arch/x86/include/asm/cpufeatures.h
-> > +++ b/arch/x86/include/asm/cpufeatures.h
-> > @@ -225,7 +225,6 @@
-> >  #define X86_FEATURE_EPT_AD		( 8*32+17) /* "ept_ad" Intel Extended Page Table access-dirty bit */
-> >  #define X86_FEATURE_VMCALL		( 8*32+18) /* Hypervisor supports the VMCALL instruction */
-> >  #define X86_FEATURE_VMW_VMMCALL		( 8*32+19) /* VMware prefers VMMCALL hypercall instruction */
-> > -#define X86_FEATURE_PVUNLOCK		( 8*32+20) /* PV unlock function */
-> 
-> No, do:
-> 
-> /* free: was #define X86_FEATURE_PVUNLOCK		( 8*32+20) /* PV unlock function */
-> 
-> so that we can reuse it by finding it easier.
+Or something like
 
-Sure, I can do that.
+mkdir -p binaries/initrd
+cd binaries/initrd
+mkdir -p \
+        bin \
+        dev \
+        etc \
+        lib \
+        mnt \
+        proc \
+        sbin \
+        sys \
+        var
+cd ..
+
+Regards,
+   Frediano
 
