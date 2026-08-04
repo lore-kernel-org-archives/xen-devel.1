@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1133EC55ABA
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2026 21:41:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1382653.1625982 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73360C55822
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2026 21:59:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1382660.1625990 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrMsd-0008Ml-PC; Tue, 04 Aug 2026 21:40:59 +0000
+	id 1wrNA7-0001nQ-3T; Tue, 04 Aug 2026 21:59:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1382653.1625982; Tue, 04 Aug 2026 21:40:59 +0000
+Received: by outflank-mailman (output) from mailman id 1382660.1625990; Tue, 04 Aug 2026 21:59:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrMsd-0008Me-LE; Tue, 04 Aug 2026 21:40:59 +0000
-Received: by outflank-mailman (input) for mailman id 1382653;
- Tue, 04 Aug 2026 21:40:58 +0000
+	id 1wrNA7-0001nJ-0x; Tue, 04 Aug 2026 21:59:03 +0000
+Received: by outflank-mailman (input) for mailman id 1382660;
+ Tue, 04 Aug 2026 21:59:02 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wrMsc-0008MY-2z
- for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 21:40:58 +0000
+ (envelope-from <freddy77@gmail.com>) id 1wrNA6-0001nC-DA
+ for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 21:59:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrMsb-001obd-6Z
- for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 23:40:57 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wrNA4-001qb7-7a
+ for xen-devel@lists.xenproject.org; Tue, 04 Aug 2026 23:59:00 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a725c2a-2eae-0a2a0a5409dd-0a2a450487ba-44
- for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 23:40:57 +0200
-Received: from [74.125.224.47] (helo=mail-yx1-f47.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a7260a4-2eae-0a2a0a5409dd-0a2a4507d66c-0
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 23:59:00 +0200
+Received: from [74.125.224.45] (helo=mail-yx1-f45.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a725c68-b57f-0a2a45040019-4a7de02fbd12-3
- for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 23:40:57 +0200
-Received: by mail-yx1-f47.google.com with SMTP id
- 956f58d0204a3-669944f5ef1so302167d50.1
- for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 14:40:56 -0700 (PDT)
+ id 6a7260a3-b4ea-0a2a45070019-4a7de02de46f-3
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 23:58:59 +0200
+Received: by mail-yx1-f45.google.com with SMTP id
+ 956f58d0204a3-664ce3000e6so295227d50.0
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 14:58:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,147 +48,222 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1785879655; cv=none;
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1785880738; cv=none;
         d=google.com; s=arc-20260327;
-        b=g36Z68Wwbq2TXta0huJSzjGl+bhGBcD2EFjefRfbqycj6X6JaZ+yp9QWAxYBJHkW4B
-         obuxWqfKz5sMs0hl9/BzcapFVmySqUAbEtO4PQ4EHTMLhQCP2e/DpO8/UyKyU6RFteRY
-         MtJXaGw0M4P/xev9yK0KYBj2E6/yAYuC5w8Itdxd2R54YVGdvkH7ysIVaK0Nl2WnSBbb
-         ZLhNPiB1FDpC1f7nHlXp5C5HRR7aD2eHsYKFfyQURDM0bGb/64yfLsLck9hPeKN8QVEh
-         M9iTHyUnpqG1gGCP02yDnpnaf6/X/k4d7J2lsTuKjfS8Q8FWaIV4mYJHckBvadX9iEnR
-         M8QA==
+        b=ocwEMswJr5/W5jBxixVcX9Vd3b+FhPofoJmEYAiNFQyfGRTh71cegqBR45pfB2aCbs
+         Yd3DF+y0uLpYGPXvTnKifMd9Fe2kc1JtpS7lLwflnPcIX9RA8MI+lzmOA6Tb90xqCAyV
+         WgwG1dfgZJR6FjsU3ze5MxjQlJccsPpLzD+7aUIpzemPbJQGA69CR4mWAaIIK56JwFoh
+         4ym3GMqE14g5gnjiCz9F3Xrrj7kl9XQjDa5TxX7fVx6SOFNVdV2nn3kfQB5Ir4Hx7Q6Q
+         pObIl98p/v/FWdGauZbou7ik/vl/wH2k5d3orixcKi3tghSLzp3s1W2dbyCocSEmUmVy
+         oFQg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=sUP90bFdYVViBJwMVU0ncUeotpyeUeVbV/REZdSDfEg=;
-        fh=K9IAd8BUey1PZ/zoeGTbn1ETVLXZhvAgW6PCZb/WSCU=;
-        b=PnSMeV0tNNIU72qLKz4gKYb+ihNbTjXp+EBL/BRfoXbrLW1UbeENhZ/8g+Iwuu3pNV
-         ZqNJs2SDNse1ED0kCgbSfpHcUC39ScrfeBWHZZI42GdkHoe6bwt8fgev4ZKgkGh2Z2IA
-         XBOBv8oOKI+3nDimCzvvn3SLhcyYAV1nlH4V/jTopS/OOdWIbZjOIYIiw/9eFZ5oblMa
-         jIoxe7AUUAXdSaAh1LnhU+PscieyXEJbCyV1ElgIKelKDL52OtNUAwyiIfarQm+MQY2H
-         fhCP2RY8i4gXtJdriPN5ogCPEflCNPYN9thPnm+dV/MGtVsYvUZPmoZie5wb0m1x0VPw
-         BcXA==;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=rVNb0qH2KaqSSA1wdzQ35ti5zCobKv53Fc4eqYo5Z2E=;
+        fh=S7vaYQF6ldLkXu1uh42X3MXXcRRChuuDlJZSyF3Eswo=;
+        b=npzm6QPk7iYEhS0tnki6E4Y6MwXEiwYqwRdGk+cLPOETYv8A8SiqhxfPcM7woiBfE5
+         Kbh7ovsCXSd96EgC6Gxy9eWTaEmEhXBpv35PQxXdCkjFoDI6VEcZcoYZd5PmSH2+pGDu
+         29phw1nsS4oRPsuKpr27YZ7s0xnujt9vKfXrhCkS534e+nlMlPW12NP8yKQB9sMKba+Q
+         oS5oGT6Lc/heUAm19s3zI5qr5mxUKOcEVVwS331OUSF4TYRFq9/nF+vWvXC0Z+Pkvjks
+         o5NTaYxss+v3APe5k+gjT8R+RU0jqs3LoCOJdCGl3z4rUcQjUnAyo2f5puJtdWYme+yZ
+         p7IQ==;
         darn=lists.xenproject.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785879655; x=1786484455; darn=lists.xenproject.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=sUP90bFdYVViBJwMVU0ncUeotpyeUeVbV/REZdSDfEg=;
-        b=HGXP0+GmRqgqY7wih4hjQo0WG8iDs4T+MH/XXM+RgUbbY6jjqne+7KysjimYmi+Peo
-         YcFneXnt4HIBBRMx7dRH7awBEiflpVr9MhP7LbPj0jyGi4sOpeCKVd6ATedg5r0BS4bC
-         GwG3ukrh8Knae5FYx+Y7peWWofSr5fKaI0/UfPbfxd4aZEt9xjAJj6/TSl/0njLF0r+E
-         nBQneR6Ws9jr/qLUqHpQwRucYHC6Nx76/655tYKTJlH6wrEwNdP252GUjcRn+Jc1A3Bf
-         +qucN4rOYuBk0WXtkeFC/eCA8B8Wg7gUoD9ESasaFH5XsWvEP7/okuZ79wubqmpuwQxk
-         64HA==
+        d=gmail.com; s=20251104; t=1785880738; x=1786485538; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=rVNb0qH2KaqSSA1wdzQ35ti5zCobKv53Fc4eqYo5Z2E=;
+        b=lGryzvdd4RipRBZWPyiGBo7dA+b13Z21+Rpdy/LqRqPp5JP+txPJNrPXVnMC6ZCrMf
+         lTlqcTy9bdmE9m6vqPXrkFzFYkUcCvc7wuTDL+caPznj2YgjfXDntY1YFmzddkn21xAx
+         uyWlnhYkyC4uxEO1XyxvKt2hp5OqL/BL0ytmEROhvnjQ9SBDM2yIg2p8z2+5J6fx/o5/
+         qEgu6fmx5a7DSXyV4qRAM5RBRPskeyJx4gqjrvmoa/h3lSYl6lSDEjcpY83RkJSSzvfL
+         HfGEEjoDWXDSloBwycLjQtS4EHEUKk3eT7mY+RRC5/BqkJQyIhCxAGxqd5YSlBvk+NHY
+         rdIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785879655; x=1786484455;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=sUP90bFdYVViBJwMVU0ncUeotpyeUeVbV/REZdSDfEg=;
-        b=SQ5zvTDhCZQtGKgJo1wecctnICiZLeZyXiGAXUOoaqGTSQ1KX6CVCf09vYEVe/hfuu
-         2qwVf4TqLMRX+zmiv+PO3GtUeMpmUXchcwEU4a14IJG74Heai4aAZjTjEUyhZEiUA893
-         vptrSREgSD4ohsZbQqDVBhVLcf7vUnnHuDs086aV+PO2Gi2/8dK16dOO11TrE5qhgWqZ
-         wAo/fxGbolL19my4eUWkxjpcJt62IXn1C3g6B8VStYJCt3vFG4HEDDJZXekHMCWuUKFI
-         2hwkVa2Uf+YjOJDGXRCioX7efS5jrshMDhczZtKSkaRpQXqGkRpL6/Sr/GqRoxL1P6e8
-         w5Eg==
-X-Gm-Message-State: AOJu0Ywcd0LZ/KH/S4W7BDyakQdcpesO0A4PYBx9uX5DDKbCc3/JT8J7
-	D3JSscn6/w2LKeAjwyBs7J0NDQFa/4M1uw2AOz/Td97DH2Ygby9j+hqrvPTn1SmX+2IfmEL0Gle
-	oY7tT2TYVvZ6cw43U/OjBKcNXiYhKBLQ=
-X-Gm-Gg: AR+sD13BvMb80n+QmJf+uZZhY08LIZE7iFGsUFJUVDUO0auVvs9I45347W8gFbHjRIM
-	I0RiFwqp73YZ5FSkmj1AiwxqfwoqKj1/55jJaFjB8c+a6QlNLa4Amu5wPYy7OWTem/OtC6UoLmn
-	ew0Z+a5IeCznAbLXB3bytJOnEMOv93KWG1rSkTmzXv0b1GgpvePbRkxvcGvJBYPn6UjyEcPZomm
-	vdx76bpDM5YiwgUhpnzfQlAXNnjd7yihReV58Z7G9iR7oaTGoU/oNi3r49cXaC8EdGq1E9YTZKx
-	8Lt2lkqkjED8pnu0IYbV6Nl/t85byOIUUzp42WsY1SfaW0K2mXbda5JMcZGgUXrSppfsWs71GIu
-	h
-X-Received: by 2002:a53:b543:0:b0:667:e04a:8a3f with SMTP id
- 956f58d0204a3-6699a919d86mr969713d50.5.1785879655484; Tue, 04 Aug 2026
- 14:40:55 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1785880738; x=1786485538;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=rVNb0qH2KaqSSA1wdzQ35ti5zCobKv53Fc4eqYo5Z2E=;
+        b=LOSV7/4rwDsR5Q2QPFtCwp0uJMbWcdEk2aki25pVcoEKU2FYKr/d+zZRVRW27C5pEm
+         1vLubSNTxL38UcWVRxnEhmQfTFdpXTozXI/UvFjkVgjUcl+iyYGuctInrteAVXklL677
+         svJz6rDeiSmKl+D4p82+gNXxrYOBGi1bw1fHJqjuVjDZXU0Xd7xWBPTl4MivT5cQbNvU
+         VXzB3c+YiVr4+49EmJWAIxFaUplzek76xlsPBu7gTYM6drnmJJtRH1rKAD+11vnkeOY1
+         RcnsfwuvhPr2ssbeCYeY1fa9Xss4SFPPUUBZG2aKFPAM4KxK9SJRd0KxePsILm7q2rSs
+         C8GA==
+X-Forwarded-Encrypted: i=1; AHgh+RrK1gTr2+xfklulqeShPslptjub+h9S24WhwEATbux6rXUhNzLZ397TB8sGzejQzYVKmWEwKvigGos=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzJ3GwHYjinGC59vD8ic0AiMzWJJIU0Phi57lp0F1oHt70999Yp
+	oZp/OYzEwPVL9lWYYhi+hUv44vLNZ90e9R8lR7ijYdTTtrdJlL7+MSRZV6o1hn19S9kKxSKbWau
+	MEl2km1+SbYuRXqBJh3PUtmnRitFfRFA=
+X-Gm-Gg: AR+sD123g1DZ4DR9fcjTs71xkvjwAFnnMYuomTDvQbY3xb1twfxbRvP0YB/KJWTyOTC
+	JEW/vg77W5cQP6c5sCI1gkyFE+0q1VD+7pgxWHW/bHTkXZHir2WQAbGfl2SECStHwAEPFuQkEdi
+	Q1o07Ehud2HPehwHHG54EMJvU8NTCFzEIiRuMUmUJVyIQtItX3qWIhRaXtpM1jsZK59PDyyNEOz
+	/yKaOyJz5xVOctYnbQihIotYTFvSsVTUl6MAEADVVCMS+eevas/NWBSebhmhzQfp2fbsB7uTmry
+	D4IVCmpxAJg4VfniMH987VzbymFgz2aZCv9TW4JKJaZX06AWi/fVRc3OieziA/6G7u+Nh3ygjwC
+	sHyqJpjKXI3s=
+X-Received: by 2002:a05:690e:454b:20b0:667:be4a:4b5f with SMTP id
+ 956f58d0204a3-6699aa26209mr991834d50.15.1785880738304; Tue, 04 Aug 2026
+ 14:58:58 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260804174219.835096-1-frediano.ziglio@citrix.com>
- <20260804174219.835096-2-frediano.ziglio@citrix.com> <1785871743.8631fc262581453bbf619ec5b2062170.19fce4038dd000e099@vates.tech>
-In-Reply-To: <1785871743.8631fc262581453bbf619ec5b2062170.19fce4038dd000e099@vates.tech>
+ <20260804174219.835096-3-frediano.ziglio@citrix.com> <anIn7VAt2oQJ90Js@mail-itl>
+ <CAHt6W4eCdqp2NDzjHyQ9vdezJkjVyxTwJH7HuReVxVSihox0Rw@mail.gmail.com>
+ <9dc1d91c-52e2-4cd9-a234-6d6ca6ecceb8@citrix.com> <anI6zLWzX8kDi7oC@mail-itl>
+In-Reply-To: <anI6zLWzX8kDi7oC@mail-itl>
 From: Frediano Ziglio <freddy77@gmail.com>
-Date: Tue, 4 Aug 2026 22:40:44 +0100
-X-Gm-Features: AUfX_mxHyihNtyDMkBfWJHdz09e80hO9TOwHB81ucSm2D6hWkksFcqiOiVQvCaw
-Message-ID: <CAHt6W4caSVXHx-bdNh0WDTk-K0UXTb0pN75NYuCC+A66woo9Vw@mail.gmail.com>
-Subject: Re: [PATCH 1/2] CI: Simplify directories creation
-To: Anthony PERARD <anthony.perard@vates.tech>
-Cc: xen-devel@lists.xenproject.org, 
+Date: Tue, 4 Aug 2026 22:58:47 +0100
+X-Gm-Features: AUfX_mzb93PcOca-QY5WJwRP4CkmwxCGy172nhyS-381muC9Oe8YoQ9qKC2mPWE
+Message-ID: <CAHt6W4enqcBQwEzq3w4PyzfUOnfveFa=KGbGfYK92nspf6eH9g@mail.gmail.com>
+Subject: Re: [PATCH 2/2] CI: Check save/restore of PV domain as part of qemu-alpine-x86_64
+To: =?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org, 
 	Frediano Ziglio <frediano.ziglio@citrix.com>, Doug Goldstein <cardoe@cardoe.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich <jbeulich@suse.com>, 
-	Andrew Cooper <andrew.cooper3@citrix.com>, 
-	=?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>
+	Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich <jbeulich@suse.com>
 Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-ebf023/1785879657-536C2B50-9A16AF3D/0/0
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-ef75cf/1785880740-34AC8AE4-AFEBA6B6/0/0
 X-purgate-type: clean
-X-purgate-size: 2001
+X-purgate-size: 5514
 
-On Tue, 4 Aug 2026 at 20:29, Anthony PERARD <anthony.perard@vates.tech> wrote:
+On Tue, 4 Aug 2026 at 20:17, Marek Marczykowski-G=C3=B3recki
+<marmarek@invisiblethingslab.com> wrote:
 >
-> On Tue, Aug 04, 2026 at 06:42:17PM +0100, Frediano Ziglio wrote:
-> > diff --git a/automation/scripts/qemu-alpine-x86_64.sh b/automation/scripts/qemu-alpine-x86_64.sh
-> > index 242ffca693..60f5cc49fc 100755
-> > --- a/automation/scripts/qemu-alpine-x86_64.sh
-> > +++ b/automation/scripts/qemu-alpine-x86_64.sh
-> > @@ -4,16 +4,7 @@ set -ex -o pipefail
+> On Tue, Aug 04, 2026 at 07:55:24PM +0100, Andrew Cooper wrote:
+> > On 04/08/2026 7:48 pm, Frediano Ziglio wrote:
+> > > On Tue, 4 Aug 2026 at 18:57, Marek Marczykowski-G=C3=B3recki
+> > > <marmarek@invisiblethingslab.com> wrote:
+> > >> On Tue, Aug 04, 2026 at 06:42:18PM +0100, Frediano Ziglio wrote:
+> > >>> Make sure that save/restore continue to work.
+> > >>> The check save and restore twice to check for corrupted status.
+> > >>> Also a command is launched in the guest to make sure that the
+> > >>> machine is not crashed but working.
+> > >>>
+> > >>> Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
+> > >>> ---
+> > >>>  automation/scripts/console.exp           |  8 +++++
+> > >>>  automation/scripts/qemu-alpine-x86_64.sh | 40 ++++++++++++++++++++=
+++--
+> > >>>  2 files changed, 46 insertions(+), 2 deletions(-)
+> > >>>
+> > >>> diff --git a/automation/scripts/console.exp b/automation/scripts/co=
+nsole.exp
+> > >>> index e27886bbef..ff58ed29b8 100755
+> > >>> --- a/automation/scripts/console.exp
+> > >>> +++ b/automation/scripts/console.exp
+> > >>> @@ -58,6 +58,14 @@ if {[info exists env(WAKEUP_CMD)]} {
+> > >>>      system "$env(WAKEUP_CMD)"
+> > >>>  }
+> > >>>
+> > >>> +if {[info exists env(EXPECT_TEXTS)]} {
+> > >>> +    set lines [split "$env(EXPECT_TEXTS)" "\n"]
+> > >>> +    foreach {exp snd} $lines {
+> > >>> +        expect -re "$exp"
+> > >>> +        send "$snd\n"
+> > >>> +    }
+> > >>> +}
+> > >>> +
+> > >>>  if {[info exists env(LOG_MSG)]} {
+> > >>>      expect {
+> > >>>          -notransfer -re "$env(PASSED)" {
+> > >>> diff --git a/automation/scripts/qemu-alpine-x86_64.sh b/automation/=
+scripts/qemu-alpine-x86_64.sh
+> > >>> index 60f5cc49fc..409a601c34 100755
+> > >>> --- a/automation/scripts/qemu-alpine-x86_64.sh
+> > >>> +++ b/automation/scripts/qemu-alpine-x86_64.sh
+> > >>> @@ -48,6 +48,28 @@ xl -vvv create -c /root/domU.cfg
+> > >>>
+> > >>>  " > etc/local.d/xen.start
+> > >>>  chmod +x etc/local.d/xen.start
+> > >>> +
+> > >>> +# Script to test save and restore.
+> > >>> +# It saves and restores domU domain twice to check if the domain w=
+as corrupted
+> > >>> +# during the first sequence.
+> > >>> +# At the end open the console to check if the domain is working.
+> > >>> +cat > root/save_restore_test << "EOF"
+> > >>> +#!/bin/sh
+> > >>> +set -ex
+> > >>> +xl list | grep -q domU
+> > >>> +rm -f save.dat
+> > >>> +xl save "$(xl list | awk '$1=3D=3D"domU" { print $2 }')" save.dat =
+/root/domU.cfg
+> > >>> +xl restore /root/domU.cfg save.dat
+> > >>> +xl list | grep -q domU
+> > >>> +rm -f save.dat
+> > >>> +xl save "$(xl list | awk '$1=3D=3D"domU" { print $2 }')" save.dat =
+/root/domU.cfg
+> > >>> +xl restore /root/domU.cfg save.dat
+> > >>> +xl list | grep -q domU
+> > >>> +rm -f save.dat
+> > >>> +xl console "$(xl list | awk '$1=3D=3D"domU" { print $2 }')"
+> > >>> +EOF
+> > >>> +chmod +x root/save_restore_test
+> > >>> +
+> > >>>  find . | cpio -R 0:0 -H newc -o | gzip >> ../dom0-rootfs.cpio.gz
+> > >>>  cd ../..
+> > >>>
+> > >>> @@ -70,9 +92,23 @@ export TEST_CMD=3D"qemu-system-x86_64 \
+> > >>>      -device virtio-net-pci,netdev=3Dn0 \
+> > >>>      -netdev user,id=3Dn0,tftp=3Dbinaries,bootfile=3D/pxelinux.0"
+> > >>>
+> > >>> +# Sequence of expect/send strings:
+> > >>> +# 1. wait domain start and close console;
+> > >>> +# 2. wait login prompt and login as root
+> > >>> +# 3. wait login and launch save/restore test;
+> > >>> +# 4. wait restore from domain console and send a command.
+> > >> Why doing this interactively over serial, instead of adding to
+> > >> etc/local.d/xen.start and then printing test result at the end?
+> > >>
+> > > I'm using expect to interact with the console. expect is not availabl=
+e
+> > > inside the alpine root filesystem.
+> > > Some failure I had during migration is that the VM crashed. In the
+> > > script I interact with the console to check that the VM is still able
+> > > to run commands.
 > >
-> >  # DomU Busybox
-> >  cd binaries
-> > -mkdir -p initrd
-> > -mkdir -p initrd/bin
-> > -mkdir -p initrd/sbin
-> > -mkdir -p initrd/etc
-> > -mkdir -p initrd/dev
-> > -mkdir -p initrd/proc
-> > -mkdir -p initrd/sys
-> > -mkdir -p initrd/lib
-> > -mkdir -p initrd/var
-> > -mkdir -p initrd/mnt
-> > +mkdir -p initrd/{bin,sbin,etc,dev,proc,sys,lib,var,mnt}
+> > We can add `expect` to the dom0 root filesystem if we find a need for
+> > it, and it looks like this might be a good enough reason.  You want a
+> > patch to https://gitlab.com/xen-project/hardware/test-artifacts
+> > images/alpine/*-x86_64-base.dockerfile to get it included.
 >
-> This makes it really hard to find out if more directory or less
-> directory are been created. When reviewing a patch, we don't see what
-> changed in a line without using more complex tools.
->
-> For this patch, I have now idea at a glimpse if all the directory that
-> was created before are still created.
->
-> In the future, we might need to create more directories, this would
-> change on very long line to another, and make it hard to find out what
-> was the logical change, by just looking at the output of `diff -u`.
->
-> So I don't see this patch as an improvement.
->
-> But that just my opinion, but that would apply equally to other similar
-> changes, like packing all the variable declaration on a single line in C.
->
-> Cheers,
+> FWIW, my suspend test (which tests a similar thing) uses ping to check
+> if domU is still alive:
+> https://gitlab.com/xen-project/people/marmarek/xen/-/blob/2184be51d426b60=
+f5e1a7e6e891d0f40e9488fc7/automation/scripts/qemu-alpine-domU-suspend-x86_6=
+4.sh
 >
 
-Hi,
-   what about putting the directory names in alphabetical order?
-Either in multiline or in the concise single line?
-In both cases it makes it easier to check if it's already there.
+Are you going to upstream the test?
+Why sleep between commands? Worrying about possible races? Probably
+there should be no race after the command exited so I personally would
+remove.
 
-Or something like
+Using the network seems like a good idea. I also discovered that there
+is nc and bash installed so something like
 
-mkdir -p binaries/initrd
-cd binaries/initrd
-mkdir -p \
-        bin \
-        dev \
-        etc \
-        lib \
-        mnt \
-        proc \
-        sbin \
-        sys \
-        var
-cd ..
+    # nc -lk -p 8888 -e sh -c "echo Still alive"
 
-Regards,
-   Frediano
+and
+
+    # bash -c 'read -t 1 line < /dev/tcp/localhost/8888; echo $line'
+    Still alive
+
+would even test if userspace is still working correctly
+
+>
+> > But, for migration testing, this really wants to run on the real
+> > hardware.  Besides the main memory image, there's variations in registe=
+r
+> > state and validity which will vary between hardware.
+>
+
+Which scripts/jobs are run on real hardware (well, I suppose all that
+starts with zen, kbl, xilink or adl). Are they all run for every
+build?
+--
+Frediano
 
