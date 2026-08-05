@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7036EC56203
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A7A3C561E6
 	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 14:57:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1383600.1626864 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1383604.1626905 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrd3A-0000jb-Ls; Wed, 05 Aug 2026 14:56:56 +0000
+	id 1wrd3I-0001nP-0A; Wed, 05 Aug 2026 14:57:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1383600.1626864; Wed, 05 Aug 2026 14:56:56 +0000
+Received: by outflank-mailman (output) from mailman id 1383604.1626905; Wed, 05 Aug 2026 14:57:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrd3A-0000j6-Hh; Wed, 05 Aug 2026 14:56:56 +0000
-Received: by outflank-mailman (input) for mailman id 1383600;
- Wed, 05 Aug 2026 14:56:55 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wrd3H-0001n8-OC; Wed, 05 Aug 2026 14:57:03 +0000
+Received: by outflank-mailman (input) for mailman id 1383604;
+ Wed, 05 Aug 2026 14:57:02 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marmarek@invisiblethingslab.com>) id 1wrd39-0000gL-3c
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 14:56:55 +0000
+ (envelope-from <marmarek@invisiblethingslab.com>) id 1wrd3G-0001db-47
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 14:57:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrd38-00Cdp1-GR
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 16:56:54 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wrd3F-00A5Sr-HC
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 16:57:01 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marmarek@invisiblethingslab.com>)
- id 6a734f2b-e002-0a2a0a5209dd-0a2a4501c102-14
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 16:56:54 +0200
-Received: from [202.12.124.150] (helo=fout-b7-smtp.messagingengine.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a734f30-bab6-0a2a0a5309dd-0a2a4505ce0c-22
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 16:57:01 +0200
+Received: from [202.12.124.152] (helo=fhigh-b1-smtp.messagingengine.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marmarek@invisiblethingslab.com>)
- id 6a734f35-5984-0a2a45010019-ca0c7c969577-3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 16:56:54 +0200
-Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
- by mailfout.stl.internal (Postfix) with ESMTP id 0A1B61D00141;
- Wed,  5 Aug 2026 10:56:53 -0400 (EDT)
+ id 6a734f3c-4cb1-0a2a45050019-ca0c7c98dfed-3
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 16:57:01 +0200
+Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
+ by mailfhigh.stl.internal (Postfix) with ESMTP id F10037A008E;
+ Wed,  5 Aug 2026 10:56:59 -0400 (EDT)
 Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-05.internal (MEProxy); Wed, 05 Aug 2026 10:56:53 -0400
+ by phl-compute-06.internal (MEProxy); Wed, 05 Aug 2026 10:57:00 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 5 Aug 2026 10:56:51 -0400 (EDT)
+ 5 Aug 2026 10:56:58 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,149 +57,175 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
 	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm2; t=1785941812; x=1786028212; bh=ZR1d1bGRuW
-	7PkpYXNT/MSUaHwUt8D8/XKZCozOxnmOo=; b=vRq70RxyIF7I4jufZwP/UbDIMa
-	ae5kBZB/LeAG7dK2DBrpmeSZOsg7CZ1GXg8BG44IxbEjq0eUPc/+jjXOomdtw5CJ
-	HuiMn+jxtn0GOFJt1mxf+oMZ+dKJfxr97mgmDHN4VKH9OSOjJBohJAuTWnqJSO/e
-	WSjOiLshyq32RGc2TLXv6H1G+BIEcBkZlhmWeg3Hz9Fh+VGY0AF1gDqSJAR4neVI
-	hQBjQXxSiNGpZNmu2RPJwOX4inygBJ+J6Z5eM0leAjSmMvawR97apwChuvVYJAq/
-	kguPg9dLaUsT8mZfjGElriKcsVSNyfA+6o0SURqQ3xOb9GZFxAiM1S3o5U/w==
+	:subject:to:to; s=fm2; t=1785941819; x=1786028219; bh=VIHXaX1e+f
+	fgdFqzeWyvSlfdqJI5vq9gFySsJjLA51g=; b=bulDFjky/O6MBmdY6opnGgaFXC
+	UU08ORMuosrIGedJpG1TBpuidEYA2Ze8EWlvRaNU3PTos/5pShOmM47pl6NEetLV
+	wYandMud6QOR5XR39HNtT2WsibgANJrbAju/VQzYEHsj4WjWjktUeSRbeis1gC4N
+	XGcn4MSd08orJvYQkA9Cvh2iANFqLNWo1UzGTL7a55BMIJhn5fW78MzXQ7hiP/MH
+	h9cHep4xx72Fiphka8co4WiOqeHlR+UbvQ7YDCDnvONjqaICrHz/B/duiOhcZ37/
+	8IWuc7ka8jrCRhx7H0gQyWdQmBPYB0/AWi0zWqvbRL3cWJjlcAa+Ps3Cdm3g==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
 	:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1785941812; x=
-	1786028212; bh=ZR1d1bGRuW7PkpYXNT/MSUaHwUt8D8/XKZCozOxnmOo=; b=O
-	cpOX6rtQ1SWfMcY2UsgEx6B7W8piD3gKamXRpE3RKInvXLrCILucVG4Ja0MtAYLg
-	8Kgd7Qz78Y7q92b29uIvzLdRwdaG7wIbRTAYr8Fpgv79G85Tn3zsUvtE9dnGioc+
-	Mef1MSv1sU91TWk/c82e+Aq6JCw1+5yVhExS7X5lSl13t7Ix75TeKA6Hg1kk59mv
-	ax4k2Ywhzb9KrK22iirYwtpBo0er/nt2xz1kQgUtc/gVm+Ib3T04c2voaWr/7cwc
-	YjsXxCSc6AN8028R/DwECp/taSnJxnDts+K6fH0+HQyd2Aas6e51u7mzf9e7Xt1n
-	R9chyGGrqFxFuyWwX5p8g==
-X-ME-Sender: <xms:NE9zappkLM1cIdRwWHZT9R1vTaGrItDmghoiD03TPvjBHK8v4PoO5w>
-    <xme:NE9zaigYbqNRWCguozHrpBi1vc1kQwB9j6LAM0v6pl_Cnuzw2vBbD8ZBZOZKySc8k
-    DrLH7rtYNvIpe_SLubTezi3l9jOnRAA52tvwW1BBHhAhepu1qk>
-X-ME-Received: <xmr:NE9zaujLhheOTynhj5Po4hE7MnwrhWNzr0RTIrUBhlb3d6rQ0HCQCVMPfrJ8MURx4l0hOYN1ee5ROrXQXzQuz2ODyxGF5iAUfd0pHlVPDbc>
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1785941819; x=
+	1786028219; bh=VIHXaX1e+ffgdFqzeWyvSlfdqJI5vq9gFySsJjLA51g=; b=C
+	2DmdOwu/f9N3SoLHK3Xs1vZ++r2SSALR0O1QAacHN0OXpnIADY0mw3lPcbRi2IZD
+	964+gVgyKREZ+jHjqyzFMeEI+oK3y8YsZqfWmAmIAKKiieicVUR6hu4sWGUWx5uL
+	snmDhfh0rgsmbh7yAEB4QiNHOBOWMRzrj2waXnEb1R17oST/QsaDyOIEQesUBaZ+
+	D+zBd7NN3u43iumv8E6n8jz/2pxkpE7XI/Tf35Y9AC9eJ0NcicEnfxSTpkKgGJ/I
+	nwdOfvQwnDvjo5VJOZVJkdSyjTMndb0ltKmoP6jqhfg/rQA8jAC/a8U5JAlPQJPz
+	0F2IOQNH9VHpGtMgOjsPg==
+X-ME-Sender: <xms:O09zanBhnh-ABZNqErvuhrFHwwE04-oD2YeSV0gjNSWgBGWPsNKjPQ>
+    <xme:O09zakYDZ9AOLZzuLiNUAEF_IVL5xy2oxbpvPcmkITFyJxI7zKyMp-x-r72RfJ-6K
+    ItAmWkspUyDEtfB_fIMUbtsN-Ks4wguZkwSZHYWDg5kp31aGQ>
+X-ME-Received: <xmr:O09zaq7bZ6T6BLtI5mkI7dYz8_oU0rx2mXjFqDPRUtfxwmLE1ADGV-FJNavsRi-D3Mv3OnIQcF3n9n0-cJu746WfgE_s0-rHJlFxasb0IX4>
 X-ME-Proxy-Cause: dmFkZTFg5HWH/RDqdPpR88i/6M1gtPWzLlXDm7puE44YW+OQRkCu0ypR/9JOPRDl1te3/p
     2ugUGdWUlQb8kocRthjZN7vvr6IWWNFcyKYmBFPe+BzKMnxGjKoBahL5VCHV3UAfs0EHAg
     nj3sYoDmr7GyZbFXABfsR3rbdQAxCafinJpMUI+6VqMVy7guc3dUP2M2goerpX03cWT8GB
     3tIsn5JiFR3GjgHhPz/r2yz7V7NDg477JFOnzakkhw9w+L8/GP2qYPPRO39CHuug0G7Ubo
-    N42GUSC5i0XOiRx9MufeivVdVi29Q812Jc2LJ90UxPjSbThjlODlkTjM/Zl+lF8/E+2aXQ
-    K57x5zBbETIFSPxn/glgXCEXI5Rd5omb7Rl9K0RE2BeAtMwCZ0c8U4ZMWkXw9ZMEZTz0RL
-    OKo0euqiJNUWJvCkgiR1XXxX8UjQn2EcgSU95KvZktQVlqmkSJW6SrX7eSZtO7u0FLxXFC
-    +6eMrs9ZGOWvo0W6EVGjorhGjfSTq2dn2cyNLMf1aA79VNRk14OTFLmAUYBet/ylkfmWj6
-    bblUIr7WrdCSerBW2Kz1BrDyJW8KxJoQ2Q5Q0D7TfY49vlQQLtfThuXNYjePMTOZx9i96e
-    iWsaoEND85aEUGHz6cEZEW4XI4r8UKX3UwdQ08gANR6AExLKijMDWrUcdCWA
-X-ME-Proxy: <xmx:NE9zaghsGM9_u-MCiKJjCjyxu4OEou7D83-AVYgx8t_0tY2QTZmilg>
-    <xmx:NE9zamLs6tqKAiBIjrtGag2eOmHbdvupWMhWb-xF0pXsF9cyDhdeaA>
-    <xmx:NE9zanELuzDB65V6DaiNhfSDc-SaAXDDjIHa_FtmA2OWty3Oh0Lu7w>
-    <xmx:NE9zaiStUKxFFjH_qiNdto1NrOhIGqcaua2YjzgNbPJ1a8NrtVv68w>
-    <xmx:NE9zauWon1p1BS9hGiFolrNWG0F8_gIG8WR6i1_t3gIhokFUmeVTnvyY>
+    N42GUSC5i0XOiRx9MufeivVdVi29Q812Jc2LJ90UxPjSbThjlODlkTjM/Zl+lF8/E+2aqt
+    yLt1OCe/nhAJMu2CJUS7qRdrtLxh2jFsE6WK4OVh+oT2+FC56uWyodULwj6z4RYpvXMpDn
+    ewuSorjvwbszn0rU/9FzOXB23lxuSQdgnDfmmO00Hvw8LbpbTYmtiqViV7RFvxunh50c3G
+    8VXisn+B7wyNhjl+xzIq5pMSVC7JZtPn2QiYC9iodIB1U6smXPV4xHBYegFH/vB2XAhqIJ
+    Dfq6UY98Zv5LIJAw15Ciy1EI0oCl+sMiLPNQ68YPpEzBsNGDmbcL5gnje631EYYPqZK7QR
+    /bOjS3BtFN/loXp192R7t9b32urTvDsuoKVrkyU3gvTDrnQiaWpCtVqW/TfQ
+X-ME-Proxy: <xmx:O09zalYHoD0fl8bfjwn2HujCqeRp9Q83q0D95yyNvj50BOa16kPl7A>
+    <xmx:O09zapggGJDqU_ufBrEJH0gXM0H-aJi1KsBHrZ5ozTsqWKuBAOXpZA>
+    <xmx:O09zam_KqudWhQP23OOJ14kaGl9E6dHAq_adDqcGAxUZAOrK2Z8CQQ>
+    <xmx:O09zakozJUzz63UB6mP0I1rb72RYtr3OH-pWFAN41JSg-jXPCjrXiQ>
+    <xmx:O09zaiOs77kzefBTQ3YWeaX0xEcpm1jw9pWxrxA0b-n3ebJrXHj3Qqv->
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v5 01/13] CI: set LOG_MSG as end-of-test marker consistently
-Date: Wed,  5 Aug 2026 16:55:29 +0200
-Message-ID: <6a0c80ab0f09bf471679f811e22ba51c034b29e2.1785941707.git-series.marmarek@invisiblethingslab.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Doug Goldstein <cardoe@cardoe.com>
+Subject: [PATCH v5 05/13] CI: Run driver domains test on Debian too
+Date: Wed,  5 Aug 2026 16:55:33 +0200
+Message-ID: <372962629561e96b83fc87039b0e6e31e4f9b6e6.1785941707.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <cover.099eede8b72ebc9acb07545472d72abceed1c8b7.1785941707.git-series.marmarek@invisiblethingslab.com>
 References: <cover.099eede8b72ebc9acb07545472d72abceed1c8b7.1785941707.git-series.marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1785941814-C5341757-CA20101A/0/0
+X-purgate-ID: tlsNG-c201ff/1785941821-F54AC2A1-1B0081E9/0/0
 X-purgate-type: clean
-X-purgate-size: 3715
+X-purgate-size: 3655
 
-Especially, do not set it to either empty string (not the same as
-unset), nor to a message found earlier in the test execution. This
-change will allow more consistent waiting for test end regardless of its
-result.
-
-Note for dom0less tests - waiting for dom0 prompt is not the right thing
-to do, as the actual test is executed in domU, and those are started
-asynchronously.
+The recent failure affected only glibc-based systems, so do the test on
+Debian too.
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
-New in v5
----
- automation/scripts/qemu-alpine-x86_64.sh        | 1 -
- automation/scripts/qemu-smoke-dom0-arm32.sh     | 1 -
- automation/scripts/qemu-smoke-dom0-arm64.sh     | 1 -
- automation/scripts/qemu-smoke-dom0less-arm32.sh | 5 ++++-
- automation/scripts/qemu-smoke-dom0less-arm64.sh | 1 -
- 5 files changed, 4 insertions(+), 5 deletions(-)
+Changes in v3:
+- update to trixie
+Changes in v2:
+- use systemd in Debian
 
-diff --git a/automation/scripts/qemu-alpine-x86_64.sh b/automation/scripts/qemu-alpine-x86_64.sh
-index 242ffca693fe..0c60b2503858 100755
---- a/automation/scripts/qemu-alpine-x86_64.sh
-+++ b/automation/scripts/qemu-alpine-x86_64.sh
-@@ -81,7 +81,6 @@ export TEST_CMD="qemu-system-x86_64 \
+Needs debian/13-x86_64 container rebuild.
+---
+ automation/build/debian/13-x86_64.dockerfile    |  1 +-
+ automation/gitlab-ci/test.yaml                  | 19 ++++++++++++++++++-
+ automation/scripts/qemu-driverdomains-x86_64.sh | 18 +++++++++++++++--
+ 3 files changed, 36 insertions(+), 2 deletions(-)
+
+diff --git a/automation/build/debian/13-x86_64.dockerfile b/automation/build/debian/13-x86_64.dockerfile
+index 5088f7435c1e..8a36774f1155 100644
+--- a/automation/build/debian/13-x86_64.dockerfile
++++ b/automation/build/debian/13-x86_64.dockerfile
+@@ -61,6 +61,7 @@ RUN <<EOF
+         fakeroot
+         ovmf
+         qemu-system-x86
++        systemctl
  
- export TEST_LOG="smoke.serial"
- export BOOT_MSG="Latest ChangeSet: "
--export LOG_MSG="Domain-0"
- export PASSED="BusyBox"
+         # for build-each-commit-gcc
+         ccache
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+index 566d1f4287d7..184cf9b47d46 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -27,6 +27,17 @@
+     job: microcode-x86
+     ref: $ARTIFACTS_BRANCH
  
- ./automation/scripts/console.exp |& sed 's/\r\+$//'
-diff --git a/automation/scripts/qemu-smoke-dom0-arm32.sh b/automation/scripts/qemu-smoke-dom0-arm32.sh
-index 5dc348c71aa9..4cda80843a84 100755
---- a/automation/scripts/qemu-smoke-dom0-arm32.sh
-+++ b/automation/scripts/qemu-smoke-dom0-arm32.sh
-@@ -91,7 +91,6 @@ export TEST_CMD="qemu-system-arm \
- export UBOOT_CMD="virtio scan; dhcp; tftpb 0x40000000 boot.scr; source 0x40000000"
- export TEST_LOG="${serial_log}"
- export BOOT_MSG="Latest ChangeSet: "
--export LOG_MSG="Domain-0"
- export PASSED="/ #"
- 
- ../automation/scripts/console.exp |& sed 's/\r\+$//'
-diff --git a/automation/scripts/qemu-smoke-dom0-arm64.sh b/automation/scripts/qemu-smoke-dom0-arm64.sh
-index 1d673f184251..6defd51ca449 100755
---- a/automation/scripts/qemu-smoke-dom0-arm64.sh
-+++ b/automation/scripts/qemu-smoke-dom0-arm64.sh
-@@ -101,7 +101,6 @@ export TEST_CMD="qemu-system-aarch64 \
- export UBOOT_CMD="virtio scan; dhcp; tftpb 0x40000000 boot.scr; source 0x40000000"
- export BOOT_MSG="Latest ChangeSet: "
- export TEST_LOG="smoke.serial"
--export LOG_MSG="Domain-0"
- export PASSED="BusyBox"
- 
- ./automation/scripts/console.exp |& sed 's/\r\+$//'
-diff --git a/automation/scripts/qemu-smoke-dom0less-arm32.sh b/automation/scripts/qemu-smoke-dom0less-arm32.sh
-index 20e43b4f049d..fff6d3b56df2 100755
---- a/automation/scripts/qemu-smoke-dom0less-arm32.sh
-+++ b/automation/scripts/qemu-smoke-dom0less-arm32.sh
-@@ -144,7 +144,10 @@ export TEST_CMD="qemu-system-arm \
- export UBOOT_CMD="virtio scan; dhcp; tftpb 0x40000000 boot.scr; source 0x40000000"
- export BOOT_MSG="Latest ChangeSet: "
- export TEST_LOG="${serial_log}"
--export LOG_MSG="${dom0_prompt}"
- export PASSED="${passed}"
- 
- ../automation/scripts/console.exp |& sed 's/\r\+$//'
++.debian-x86-64-test-needs: &debian-x86-64-test-needs
++  - project: xen-project/hardware/test-artifacts
++    job: linux-6.6.56-x86_64
++    ref: master
++  - project: xen-project/hardware/test-artifacts
++    job: debian-13-x86_64-rootfs
++    ref: master
++  - project: xen-project/hardware/test-artifacts
++    job: microcode-x86
++    ref: master
 +
-+if [ -n "$dom0_prompt" ]; then
-+    grep "$dom0_prompt" "${serial_log}"
+ .qemu-arm64:
+   extends: .test-jobs-common
+   variables:
+@@ -741,6 +752,14 @@ qemu-alpine-driverdomains-x86_64-gcc:
+     - *x86_64-test-needs
+     - alpine-3.24-x86_64-gcc
+ 
++qemu-debian-13-driverdomains-x86_64-gcc:
++  extends: .qemu-x86_64
++  script:
++    - ./automation/scripts/qemu-driverdomains-x86_64.sh 2>&1 | tee ${LOGFILE}
++  needs:
++    - *debian-x86-64-test-needs
++    - debian-13-x86_64-gcc-debug
++
+ qemu-smoke-x86_64-gcc:
+   extends: .qemu-smoke-x86_64
+   script:
+diff --git a/automation/scripts/qemu-driverdomains-x86_64.sh b/automation/scripts/qemu-driverdomains-x86_64.sh
+index bada6599842e..07bc617058f9 100755
+--- a/automation/scripts/qemu-driverdomains-x86_64.sh
++++ b/automation/scripts/qemu-driverdomains-x86_64.sh
+@@ -20,7 +20,11 @@ if grep -q test=backend /proc/cmdline; then
+     brctl addbr xenbr0
+     ip link set xenbr0 up
+     ip addr add 192.168.0.1/24 dev xenbr0
+-    bash /etc/init.d/xendriverdomain start
++    if [ -d /run/systemd ]; then
++        systemctl start xendriverdomain
++    else
++        bash /etc/init.d/xendriverdomain start
++    fi
+     # log backend-related logs to the console
+     tail -F /var/log/xen/xldevd.log /var/log/xen/xen-hotplug.log >>/dev/console 2>/dev/null &
+ else
+@@ -83,7 +87,11 @@ cat > etc/local.d/xen.start << EOF
+ 
+ set -x
+ 
+-bash /etc/init.d/xencommons start
++if [ -d /run/systemd ]; then
++    systemctl start xen-init-dom0.service
++else
++    bash /etc/init.d/xencommons start
 +fi
-diff --git a/automation/scripts/qemu-smoke-dom0less-arm64.sh b/automation/scripts/qemu-smoke-dom0less-arm64.sh
-index a9e99f1ae392..0d1244d3dc90 100755
---- a/automation/scripts/qemu-smoke-dom0less-arm64.sh
-+++ b/automation/scripts/qemu-smoke-dom0less-arm64.sh
-@@ -213,7 +213,6 @@ export TEST_CMD="qemu-system-aarch64 \
  
- export UBOOT_CMD="virtio scan; dhcp; tftpb 0x40000000 boot.scr; source 0x40000000"
- export TEST_LOG="smoke.serial"
--export LOG_MSG="Welcome to Alpine Linux"
- export PASSED="${passed}"
+ xl list
  
- ./automation/scripts/console.exp |& sed 's/\r\+$//'
+@@ -100,6 +108,12 @@ cp ../bzImage ./root/
+ mkdir -p etc/default
+ echo 'XENCONSOLED_TRACE=all' >> etc/default/xencommons
+ mkdir -p var/log/xen/console
++if [ -e etc/systemd/system.conf ]; then
++    systemctl --root=. enable \
++        xenstored.service \
++        xenconsoled.service \
++        xen-init-dom0.service
++fi
+ # this is a sparse file, not really using full 2GiB
+ fakeroot -i ../fakeroot-save mkfs.ext4 -d . ../dom0-rootfs.img 2048M
+ cd ..
 -- 
 git-series 0.9.1
 
