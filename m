@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0360C55174
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 10:18:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1383250.1626515 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B2ABC56201
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 10:36:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1383262.1626525 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrYhp-0003JS-9l; Wed, 05 Aug 2026 10:18:37 +0000
+	id 1wrYyu-0006GO-MG; Wed, 05 Aug 2026 10:36:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1383250.1626515; Wed, 05 Aug 2026 10:18:37 +0000
+Received: by outflank-mailman (output) from mailman id 1383262.1626525; Wed, 05 Aug 2026 10:36:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrYhp-0003JL-7D; Wed, 05 Aug 2026 10:18:37 +0000
-Received: by outflank-mailman (input) for mailman id 1383250;
- Wed, 05 Aug 2026 10:18:36 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wrYyu-0006GH-JM; Wed, 05 Aug 2026 10:36:16 +0000
+Received: by outflank-mailman (input) for mailman id 1383262;
+ Wed, 05 Aug 2026 10:36:15 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wrYho-0003JF-47
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 10:18:36 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wrYyt-0006GA-5d
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 10:36:15 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrYhn-006kKh-1o
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 12:18:35 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wrYys-00BgL6-Ek
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 12:36:14 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a730de4-e002-0a2a0a5209dd-0a2a450bc846-38
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 12:18:34 +0200
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a731210-5cb7-0a2a0a5109dd-0a2a4501c8c8-40
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 12:36:14 +0200
+Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a730dfa-b7e8-0a2a450b0019-d1558034a4dd-3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 12:18:34 +0200
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-4994c49f588so8219105e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 03:18:34 -0700 (PDT)
+ id 6a73121e-5984-0a2a45010019-d1558036e589-3
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 12:36:14 +0200
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-4957eefd361so5911415e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 03:36:14 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4994e52d819sm36549685e9.1.2026.08.05.03.18.33
+ 5b1f17b1804b1-4994dfe64e0sm78375335e9.6.2026.08.05.03.36.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Aug 2026 03:18:34 -0700 (PDT)
+ Wed, 05 Aug 2026 03:36:13 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,54 +55,55 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785925114; x=1786529914; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785926174; x=1786530974; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=KgX6bksTA+tpxqRFpettIyoHBmuDk3+MMPRxWFaS8nQ=;
-        b=XKe6TalWKGw5laz8btxNAQY6Efuwnu2T7Q4q/cfliOHU5kKsG+JUUNMj9xwPLlSNRR
-         jjS3yfcsIGgZiH2BXqV6Kxz1aOZwkUozwJIl1lU1AGGUaJDJGEjqtwJeg5dOaFeKbm/j
-         e0MNWgTaVzvgGq3gyZj33cvt2e8pb7ccFWoae2Gv2KSkfCy5di49R89d8+fsoIHXQTAM
-         EC32N/p05g5lHqFPR+Ymfqi9/Fpi6Eq1xoiXKH5OLYjBSZOWzs6hwwGQGyUaM3RDHBVe
-         EnkOR2dNvuKbf8iHN+OE1rfNiNm+UFIo3Rh22GkKKXQZig9mPLD3R5b5UWQBk8RnWEPO
-         iaIw==
+        bh=cxgXNItvPHboV3BvDE9sEHj4kQfZuokLFmgUl2MM48c=;
+        b=PTIw2ISP6anGSWdHxqsktqe9s+Apk04SNSgAhixjYnEzH1SfbJynFruxJxsKcSt5L2
+         6ygWa2KUbpbCdePdB6TSse+jsWvLa0efYKQMiEXNQ4mVEKgcYVgsJr2SB3kLCE/G9nD7
+         98xDvsB39jxSiGFDLi/PQXwQfkdPoSELnHLGU4NuJMDUosZRT5ndvWPkdzxMaKrYW56D
+         JvrHbdXp+lz5q+STG4js623YN99obSe3PjdPzAi/qbPCMZEgYLixBrgjEJJ/2SbBD5VV
+         K1cihG+GKjvKpz9j2gXl1v8ztOa5rFwntTMTu83Hrd68/VPOveVujJrjoFgu643f0tfd
+         VzpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785925114; x=1786529914;
+        d=1e100.net; s=20251104; t=1785926174; x=1786530974;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=KgX6bksTA+tpxqRFpettIyoHBmuDk3+MMPRxWFaS8nQ=;
-        b=ZCOy73LCHQzgz1T0PdVqZxLdc6TlYXmcMtQp9RhG0oro+ydxk/jWXlvwBx6NN1S2en
-         XGPNVQJYekxnaEgwKS6QCKSSXqr6lNqhN/lS6yfradDyt+wRQCgvaVnO0Z5CPGB7mwEv
-         hgOM1kMZB/QVWYVmZtQnbPiGJ+SKisn4oR5cIsg7Jlqg2/TYXC7eDMXpzd/8B0Wj6rHC
-         paiAg3ChwKTQPTlQl7FX49t5G1cFT5S3KuTRBxicEpkuvH+l9VXewZSv4VRYGK6En/eB
-         xD9wk/fvZlxlK0AIHVRQmG1mfbqfo9+znOWogKkscv4UJkUNZVr8AKQpzMntXDtOLWyb
-         GcaA==
-X-Forwarded-Encrypted: i=1; AHgh+RqoIa5aSvCAzGEqlTKBahrkzsZCe4HBHuibe+0vCFG9C7843KzshBv3WEyaiRCq7AM0oT/Odw0rFKg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yy2JKhb0mblJR8tj3rhOyBHt+kT5LwugPc5jK7U68VrRKR5SBZZ
-	gGmZ9OK1lIdqjWuLJAcP1N1SWybFXMfvemZxmdYxCBqSJ+boDWNkX2zGSa0+iK89NQ==
-X-Gm-Gg: AR+sD12s7XECbUlpiY5TRXC8QwlxeSqa5y8fMtsFHvomO68HUuxxRDdDzMnO21nCbZE
-	LO23wDY2Un67SVnJbwoSFzVzU1FnH9U/Xt/dAK4aEWYVuG6gP/QYWKHS5htvOcwRh3WSPIb26Oa
-	SWwIdCNi7nz10tx7VeYgvNzgEKtbxqkHypS6PPGeLvFU2y6GhwQziv7AqAxg2QnrW4Hxs6VPBLO
-	St0PZUdFe8lI8tznuH7q0Bi1ZegvT7g+g2mcvABpLKbTCLmFdZubEanrhCM16oXoY3HnLDqKpW5
-	hqtRkTIvTtPm2wf0YxAwKwJc3YeryKWZlB4XfYFz6SSDC1YyHQgcF56p60+jFH6obBbgaM86OQH
-	mTIR1u0WisEBxXkEAGfq8CwOdFGRlGtnQT6OUgBKWpF8lyoo3LAPnqMifR4GRH3sBeUe2A2Gbys
-	hQWetmYm00jQ8yHtVKQcCZOTIzM4X87XMgkrbSr4Qn6aufjzLfEwbpq5klkz+ebqNBI05x88+VN
-	XQKGLY4W+s7Udcf7ghmtWuUsKm8m6BWSfh6EtmoKxs1KcIvySZB2Q1Jvj9HU+A=
-X-Received: by 2002:a05:600c:468d:b0:493:f478:4c71 with SMTP id 5b1f17b1804b1-4994e382cacmr65576365e9.7.1785925114418;
-        Wed, 05 Aug 2026 03:18:34 -0700 (PDT)
-Message-ID: <0491d3fa-ea8f-4cd7-822a-9c5a9be8d8fd@suse.com>
-Date: Wed, 5 Aug 2026 12:18:33 +0200
+        bh=cxgXNItvPHboV3BvDE9sEHj4kQfZuokLFmgUl2MM48c=;
+        b=drQqmZOnGlFjjVQ1h/132pNlm1YT0cuG0HsWTD6BHTco0cKsJ+RoUU23FSRyi/9mSk
+         9WdeZfxNRDwgeP/39nwADOJHQrV1x+0Qx/dfflzeWCH4NoXryRsjTp2GciCKvrQPfnaK
+         T6SktSxLLUvrBafccIXg4wRJfIGONcfjDV6WN59Xf8KCAJsHppoXwIc47o4i9XGCxfPU
+         b4GahYFJH4qdkhVnnmhPyQh+SbIWETW2LDFz+qSoJHPN+UHGkHfa0WTt20TpoobAF40s
+         3EWbm3VRcuvEEyxML1whtax9v6cnHA3ABFejzulci6VC/geYy64FfSr8FnEnkxfhItlg
+         tflA==
+X-Forwarded-Encrypted: i=1; AHgh+RqGcfdOd+xg9XonUkHzhRMMR8ilwAsoLxYq4xZlCxv8BJ7C+RGil07gRRFeR8jF+6vFMHO0OX5FtSo=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxhW+besQ8XKP+XaIRS96alWF07vCHqQfcrGOvJmaqQtnmw5pE+
+	2SOztQxaJHgBzGjkwjjQ2l1d+MdwsUe5KNCByC35on0mkNr6jr8OEfC1Obw7SyElBw==
+X-Gm-Gg: AR+sD10PWvyNBptxLntow9xQHo3qIUSccOE3ciOtdjyjlVGsbxN7HZENtIPOCpQY8rO
+	4fS91wCzPHjll8svRotvqXTrNKSJ7WandCG8Qu7zXHQmlcXuh4tqy85s2XCHm6BMeSPbpD5YV0i
+	OtGjdh3Te8pfef5n7mIldbTVPhWI/VbOneQ718l7vUxWF4s2NxzSbRfCvPnkSR8iGvOFiPVloJV
+	t1MPMGb1dfpHxDGQ78DzGtUifIJrtlglLiDi7kmCdgXQ9NKJeNK0lBTNTkeQU4y2y+4rzO5H2cG
+	Uc7VrCrv1MbcxpeBXmHMSsdPu9t/wHLmIXnedr3ELG+aQEng8vILdP0EH1DKjBKus3UNgkNvV+v
+	Loeks8AHntEjnPl4yK8L/nIdan18MWJvPcxEQwIETTUTl7BVRVAQxx/eR9AhKwPzM/MACVloJyM
+	UUJtouen8JzVFsMGnpjxJO5nkZgei2oeL5IRkVrLrC1ZTbbDxZoyuQy2fu7Iztq8nfvuw2ijkQw
+	vixidO3C9IT0P25J9HY32mzI3B9/1JuKfTVWqvM1iH/TEI3vrhu
+X-Received: by 2002:a05:600c:524a:b0:495:5890:8f6c with SMTP id 5b1f17b1804b1-4994e71d349mr54947375e9.7.1785926173790;
+        Wed, 05 Aug 2026 03:36:13 -0700 (PDT)
+Message-ID: <ff01adce-5807-4fda-becc-3290ad6deafc@suse.com>
+Date: Wed, 5 Aug 2026 12:36:12 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] acpi: reboot: log reset parameters
-To: dmukhin@ford.com
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, julien@xen.org,
- michal.orzel@amd.com, roger@xenproject.org, sstabellini@kernel.org,
+Subject: Re: [PATCH v2] x86/nSVM: Check the L1 IOPM_BASE and MSRPM_BASE
+ assigned physical addresses
+To: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+Cc: andrew.cooper3@citrix.com, jason.andryuk@amd.com, teddy.astie@vates.tech,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  xen-devel@lists.xenproject.org
-References: <20260801031737.344756-3-dmukhin@ford.com>
+References: <966e58864089efbe30e9b900f09005fe13c74729.1785335079.git.abdelkareem.abdelsaamad@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -128,53 +129,43 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260801031737.344756-3-dmukhin@ford.com>
+In-Reply-To: <966e58864089efbe30e9b900f09005fe13c74729.1785335079.git.abdelkareem.abdelsaamad@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1785925114-1B6D29EA-20318E4D/0/0
+X-purgate-ID: tlsNG-d62444/1785926174-BF66C757-4FD77AB2/0/0
 X-purgate-type: clean
-X-purgate-size: 1659
+X-purgate-size: 1487
 
-On 01.08.2026 05:17, dmukhin@ford.com wrote:
-> From: Denis Mukhin <dmukhin@ford.com> 
-> 
-> Xen does not provide much details for system reset debugging in case
-> system reset happens via ACPI subsystem.
-> 
-> Log reset I/O address and reset value.
-> 
-> While here, add the missing default case, add breaks between case
-> statements and drop full stops in the loglines.
-> 
-> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
-> ---
-> - v1: https://lore.kernel.org/xen-devel/20260730001854.905354-2-dmukhin@ford.com/ 
-> - CI: https://gitlab.com/xen-project/people/dmukhin/xen/-/pipelines/2723268852
-> 
-> Changes since v1:
-> - removed wrong ASSERT_UNREACHABLE()
+On 29.07.2026 16:38, Abdelkareem Abdelsaamad wrote:
+> @@ -294,6 +296,24 @@ static int nsvm_vmrun_permissionmap(struct vcpu *v, bool viopm)
+>      enum hvm_translation_result ret;
+>      unsigned long *ns_viomap;
+>      bool ioport_80 = true, ioport_ed = true;
+> +    gfn_t ns_iopm_end =
+> +        gfn_add(gaddr_to_gfn(ns_vmcb->_iopm_base_pa), (IOPM_PAGES_COUNT - 1));
+> +    gfn_t ns_msrpm_end =
+> +        gfn_add(gaddr_to_gfn(ns_vmcb->_msrpm_base_pa), (MSRPM_PAGES_COUNT - 1));
 
-And you replaced it with a printk(), which I don't view as helpful. If we
-want to diagnose the address violating the spec, that should be done
-elsewhere.
+Nit: Why the excess parentheses around the 2nd arguments each? Without them
+the 2nd instance also more obviously stays within line length limits.
 
-> @@ -21,17 +22,30 @@ void acpi_reboot(void)
->  	 * on a device on bus 0. */
->  	switch (rr->space_id) {
->  	case ACPI_ADR_SPACE_PCI_CONFIG:
-> -		printk("Resetting with ACPI PCI RESET_REG.\n");
-> +		sbdf = PCI_SBDF(0, 0, rr->address >> 32, rr->address >> 16);
-> +		printk("Resetting with ACPI PCI %pp RESET_REG at %#lx (%#x)\n",
-> +		       &sbdf, rr->address & 0xff, reset_value);
+> +    if ( gfn_x(ns_iopm_end) > domain_get_maximum_gpfn(v->domain) )
 
-rr->address is u64, and the code here isn't arch-specific. Yes, the file is
-built for x86 only right now, so 'l' as format modifier is kind of okay for
-the time being. But really PRIx64 would want using. (I'm sorry for not
-noticing this on v1 already.)
+I don't think using domain_get_maximum_gpfn() is correct here. Imo you want
+to merely check against what the guest is told in CPUID. Everything else
+ought to be properly covered by hvm_copy_from_guest_phys() /
+hvm_map_guest_frame_ro() already. In fact for the MSR bitmap I thus can't
+see why further checking would be needed. And for the I/O bitmap it looks
+to be a matter of better error handling, rather than introducing extra
+checking.
 
-Preferably with that adjustment and with the excess log message dropped
-again (I can certainly do so while committing):
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+> +    {
+> +        gdprintk(XENLOG_ERR, "%s invalid _iopm_base_pa address (%#"PRIx64")\n",
+> +                 __func__, ns_vmcb->_iopm_base_pa);
+> +        return 1;
+
+Why literal 1? Yes, there is another such return in the function, but no, we
+don't want to extend that. Aiui NSVM_ERROR_VVMCB is meant here.
 
 Jan
 
