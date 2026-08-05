@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2B5CC55174
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 14:21:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1383569.1626842 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6BE1C55174
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 14:24:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1383578.1626850 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrcUO-0003ms-Mq; Wed, 05 Aug 2026 14:21:00 +0000
+	id 1wrcXR-0004Kg-2h; Wed, 05 Aug 2026 14:24:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1383569.1626842; Wed, 05 Aug 2026 14:21:00 +0000
+Received: by outflank-mailman (output) from mailman id 1383578.1626850; Wed, 05 Aug 2026 14:24:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrcUO-0003ml-IY; Wed, 05 Aug 2026 14:21:00 +0000
-Received: by outflank-mailman (input) for mailman id 1383569;
- Wed, 05 Aug 2026 14:20:59 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wrcXQ-0004KZ-Va; Wed, 05 Aug 2026 14:24:08 +0000
+Received: by outflank-mailman (input) for mailman id 1383578;
+ Wed, 05 Aug 2026 14:24:07 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wrcUN-0003md-J4
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 14:20:59 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wrcXP-0004KR-Cm
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 14:24:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrcUM-004Azg-W2
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 16:20:59 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wrcXO-00CYWN-PY
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 16:24:06 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7346c1-e002-0a2a0a5209dd-0a2a4506d2d2-42
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 16:20:58 +0200
-Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a734775-5cb7-0a2a0a5109dd-0a2a4507e9dc-46
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 16:24:06 +0200
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7346ca-195a-0a2a45060019-d155dd2fe8e4-3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 16:20:58 +0200
-Received: by mail-wr1-f47.google.com with SMTP id
- ffacd0b85a97d-47f6609c657so532307f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 07:20:58 -0700 (PDT)
+ id 6a734786-b4ea-0a2a45070019-d1558031b5bf-3
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 16:24:06 +0200
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-49557167508so9697765e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 07:24:06 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47fec23e5efsm9339266f8f.27.2026.08.05.07.20.57
+ 5b1f17b1804b1-4994a100e14sm171303405e9.14.2026.08.05.07.24.05
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Aug 2026 07:20:57 -0700 (PDT)
+ Wed, 05 Aug 2026 07:24:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,54 +55,60 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785939658; x=1786544458; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785939846; x=1786544646; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ztlQGn8DvKCCDgciuvr4MBrBLBlPYBDCgdZ1t25z4Cw=;
-        b=ayVM+D2Kxo4T09BKLOTN2LqLnpH42WWy7+KKpunvyIvUBVWs5trAZBZiHJ71LtcRvZ
-         JoDxuDJAWMG3RvjhE3dvdf5+a7WQamMS61K7qOOg3fzSM5nt4h9BAPffQhV4CV7ELY2M
-         ek/lqSFbz7jdolg4MISIs7sJlVGEuVc2XA4kSJHrZhPuN15mPQVRslKIn9ntBu1htGr2
-         BEr+0rrCIiORbigntd3FzGr9nykPRDDvdGmyusCl49vYXp7j5ry1U81bofubEwl5lBMx
-         y9grbC/+NUf/bbI8aZg+pBCp4x/Qgff34W0ZKn82sv8VXNiZI1H+8FmNcB9NSH5QQlmh
-         VjEg==
+        bh=vbRVw62g8SNCcV8AekHEQaKPLBlLD87oFEQk+G4hP3c=;
+        b=NGODxzB3nbbe9lBKUiIF1N+KcS4w/U8muYTDKADsjlAiQpRBVU735XU1G+QVUm+pLT
+         OxIhbeC71kQNYAQTPQrfwX64Ml3W4z7o0ftSaMvo3DnyILPVqSfzl7T2L8cb9mWIyUDJ
+         5mtg5qTUS/FuqNdY1D+P53A35xqr8VFo+NYwvswWrNoc2wWZ2K4/W+ugNmp4FBUmw2xS
+         4V8qf/7TcsWg0I9lHCsDzGqWB2oEUvbDH7Q49yIkg/4vjwm07d/F0fIeLNYBdX5anlQp
+         Rt5Q1lxDKXoFAJkHPk9CtnYTSgH5JMOwps6AlNkruI9PbIlQg14R033Jn1HZplXpXoPE
+         UfDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785939658; x=1786544458;
+        d=1e100.net; s=20251104; t=1785939846; x=1786544646;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ztlQGn8DvKCCDgciuvr4MBrBLBlPYBDCgdZ1t25z4Cw=;
-        b=MR+R40dwlBhsP2qqSoc8uoLIpKJxUPg42PQ64w3r9r5G19bBMGhcIlOKlmuXaceDpW
-         eXNAEgQZidQ5V7h7KJXuWJ58qoKNSsog/Ejrnkf8VFAQXahxOY7v4tTFIvILT5hfo6RH
-         KRNZpI9aCass5M/4crcNOw1M7Ro9I81R9pB72CWDgGR6RUHcid7eIGPHKBkRXPku+uUG
-         Kw3Ose2e/6MTBHmfQOcOcqiVcmnOr6/3vecrqTqlPP8BeNmINspq/4PvdceW/j7Y29vF
-         aDNbpx7g6ObVRaBmeTSc1vjnk1jiiak4e9dSIOTz+NBgHwW3YKwWq+2aGnpRWFoBFK/F
-         MZHQ==
-X-Forwarded-Encrypted: i=1; AHgh+RqBp1P4A3S3svoAOgYdRYc1DQ8bFql9OuO7h9lW5o26hJSOcfI4HceRUd1nspFLC885QPyN1EAxmPs=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyuP9LqLhl5+qCpEN6B0tu5MkA09ivr4UNRCP2PHTfLS2JqRYrb
-	RpkAuTrs/Y0QwJ0Er7dBFT3x9ApjW4dNJuSRgrrUo9/Ora1Ydn7OQVdBSf3IX1OE7w==
-X-Gm-Gg: AR+sD11BMzrcv2krFbha6zdtjOMrC9G1K3yK88cfAGmYStrXQigcHXt1+kAmNkAEs/T
-	GJeWUIeAiuAmA9GMbHTeSpB5wM7sCimKOqFNn54RveQ/7afYF3/HGnXAPi0BkJsIwpYjimN3YJq
-	zFthOVJsm0MABH4FThZLVr54/sN/SxxIV4eJqu2qqWnKO/0h8LKGeFdeWMR4yIHtxMnfahdQBuE
-	rxG5SNj2vNFMf0lMTpFlai8Frfcy+ruWLsIBdtF2UztTVG+tJ3BBpDpj99Z3r6Pp2ychdMdP7x7
-	9eHNIwoK7dMIX6g7jYjz8M2INura6eVBu5bxd7Ys+icIYU2QficQkVF0FdbERwBTTW2/E3rAzt/
-	X2BmmCSlMBRpM0/mC4PL6Z3YVztvLttc1Z8WfM72UqbAv8v/wu1jkzPi67rj+NaAQX37cii+nxt
-	13fxfD8TRABy8Mx747Xz+MVoFktHjQ9NXURAmc8kleku2sm8dXQ5NduPT2d6LXy3miOLUUq+W9S
-	ZKr+recQgFQRv5heoy2M5ZGAkEkNS8avaDR6GGAKRVDjkLdXSUs
-X-Received: by 2002:a05:6000:41d0:b0:45e:73eb:5119 with SMTP id ffacd0b85a97d-47fec62ea74mr13286445f8f.22.1785939658244;
-        Wed, 05 Aug 2026 07:20:58 -0700 (PDT)
-Message-ID: <d76fa0a2-1a53-4ee4-b077-d51715dba339@suse.com>
-Date: Wed, 5 Aug 2026 16:20:56 +0200
+        bh=vbRVw62g8SNCcV8AekHEQaKPLBlLD87oFEQk+G4hP3c=;
+        b=YQ2Uwd4cS0W74zUX641JxTk3AyAiGHFyLony0Q8GV7nc6ykFT0NgeAWx2BJTRa/tAY
+         6XXVI7DxqiZUWRk6bd4dbjzWxcPYNKqIroy7KSrklnZdEugP2wkEJPV+4JVGuMaIAen/
+         +uGYCswvSE8SDYnV8GEwnJ33iCvcmrzi/IFo0+8xNK4VfY0+msO79BGtbB98EDR2ahvD
+         bEXLxx2QDP6ZFvMkXR06bV9Y11c8u/ljUI4hlbbRFNmgwhgAd8xuLr4UU9jFX68HI1VP
+         xgPJ9T2rL+LZDqdMZzB36mrv8kl/4RFRwPLCf0wpKSNLMFQUCMJZrmJCQHXjv6gBHgGS
+         CmrQ==
+X-Forwarded-Encrypted: i=1; AHgh+RqRwoF8DcezR/YLeiI0ubYzn8B0Fp1iNdWoS2+45RPBrjPsDYgqCH2fwu+pSp8vCtGYORyPH32R1H8=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyNYOxhSHnk4bdUbiquEE1m3PUbAt7Ie6TWJ8IAmqH5S6j09BYd
+	mJvqeW7yGbqf5O5iIppfF/cjK+InUejuh/SRpFmaKde+9OFFpjl0lHT6yowtahJ4lg==
+X-Gm-Gg: AR+sD12cFfbd/TVGaGaQ6qDldMrThNDhOM0NgSvNqSM4HyPGMRnmi3BMlSaT2QOO+v2
+	MOCTMhp32SWk/gCq4MjNZW1F6bWfMvsUbRNnnnvcwy0pCn9K1uVnXNKw8zC3hfytwllg2nG8xUE
+	XwCoVt/yuPh3FLEq0yoxn9eood5pbrtmrke6cX0qK69v3s5CczKzCTpbcJeJwpY8MWBYZgELvSR
+	foUIN52L9Dn7Qmmxz2eDMI/1B00vM6wbR2MzJtQuU3l2pmsM+TNAdC1DWAWPOoy/voot/vkkirN
+	lKJ4DilMwbdYIsvmuYWPukFFgSujNxvLj5gAaLBPwVd0sCvDsM2XKpNLZIwEMaXIFsUDXRCG55d
+	2tjpstn4BhL9SToITBxEJ3PNcd07iCVD6KqufatHZ3GGEZfYcJqUg4twZxZYLfVos0qeedN1XMN
+	nCIELQ74LZ3ozgFFytrnvTfnQ41HlthplGOUPNCYgClS04XXNTgjqL6Wl8VXflF77pbqrYtGUOT
+	GzKtwz6aakBhGZDhShXtQRHLxTElb08DG7ImWj9S+sI9sXXnCRt
+X-Received: by 2002:a05:600c:1d23:b0:499:51b8:d649 with SMTP id 5b1f17b1804b1-49951b8d652mr25870305e9.3.1785939845902;
+        Wed, 05 Aug 2026 07:24:05 -0700 (PDT)
+Message-ID: <5a444465-1d4b-4618-825e-1be612408009@suse.com>
+Date: Wed, 5 Aug 2026 16:24:04 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/5] x86/nmi: Don't configure EvtSel repeatedly
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+Subject: Re: [PATCH v9 4/4] xen/acpi: Parse PPTT to initialize CPU topology
+To: Hirokazu Takahashi <taka@valinux.co.jp>
+Cc: Mykyta_Poturai@epam.com, Stefano Stabellini <sstabellini@kernel.org>,
+ Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <20260805124525.105457-1-andrew.cooper3@citrix.com>
- <20260805124525.105457-6-andrew.cooper3@citrix.com>
+References: <20260728050642.411240-1-taka@valinux.co.jp>
+ <20260728050642.411240-5-taka@valinux.co.jp>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -128,42 +134,23 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260805124525.105457-6-andrew.cooper3@citrix.com>
+In-Reply-To: <20260728050642.411240-5-taka@valinux.co.jp>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1785939658-FCA0477B-568236C7/0/0
+X-purgate-ID: tlsNG-ef75cf/1785939846-A7CD7AE4-C3F38FC4/0/0
 X-purgate-type: clean
-X-purgate-size: 1224
+X-purgate-size: 454
 
-On 05.08.2026 14:45, Andrew Cooper wrote:
-> In both setup_{k7,p6}_watchdog(), EvtSel0 is first zeroed, then written with
-> everything but the enable bit, then written with the enable bit.
+On 28.07.2026 07:06, Hirokazu Takahashi wrote:
+> Parse the ACPI PPTT (Processor Properties Topology Table) to
+> initialize the CPU topology.
 > 
-> setup_p4_watchdog() is slightly more complicated, owing to what
-> appears to be a bug introduced by commit 2a2bd8de16b6 ("Clean up NMI
-> watchdog handler."), which causes a second bit to be temporarily
-> different too.
+> For ACPI 6.3 and later, the ACPI_PPTT_ACPI_PROCESSOR_IS_THREAD flag
+> is checked to determine the presence of threading. For ACPI 6.2 and
+> earlier, CPUs are assumed not to support threading.
 > 
-> The middle of the three writes is useless in all cases.  Drop it.
-
-Spotting the 1st write in setup_p4_watchdog() wasn't quite as easy, as
-MSR_P4_BPU_CCCR0 (as passed to clear_msr_range()) has nothing to do with
-MSR_P4_IQ_CCCR0. Using unrelated MSR names there is as unhelpful as using
-raw hex numbers.
-
-> While doing this, rename the 'counter' parameter for
-> setup_p6_watchdog().  It is the event which is passed in; the counter
-> is always counter 0.
-> 
-> No functional change.
-
-These sequences of writes almost look as if they were trying to cover for
-errata. Are you sufficiently sure there are none anywhere, for this to
-truly be no functional change? If so, ...
-
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> Signed-off-by: Hirokazu Takahashi <taka@valinux.co.jp>
 
 Acked-by: Jan Beulich <jbeulich@suse.com>
 
-Jan
 
