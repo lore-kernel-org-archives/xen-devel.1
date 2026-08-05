@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0BA4C561E6
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 06:04:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1382821.1626099 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1DC9C55174
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 06:24:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1382831.1626108 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrUjp-0002WL-M6; Wed, 05 Aug 2026 06:04:25 +0000
+	id 1wrV3C-0005kA-8E; Wed, 05 Aug 2026 06:24:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1382821.1626099; Wed, 05 Aug 2026 06:04:25 +0000
+Received: by outflank-mailman (output) from mailman id 1382831.1626108; Wed, 05 Aug 2026 06:24:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrUjp-0002WE-JI; Wed, 05 Aug 2026 06:04:25 +0000
-Received: by outflank-mailman (input) for mailman id 1382821;
- Wed, 05 Aug 2026 06:04:24 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wrV3C-0005k3-4S; Wed, 05 Aug 2026 06:24:26 +0000
+Received: by outflank-mailman (input) for mailman id 1382831;
+ Wed, 05 Aug 2026 06:24:24 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wrUjo-0002W7-Ji
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 06:04:24 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wrV3A-0005jx-R2
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 06:24:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrUjo-00HIcz-0L
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 08:04:24 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wrV38-005ySU-NT
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 08:24:22 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a72d267-5cb7-0a2a0a5109dd-0a2a4502d022-0
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 08:04:23 +0200
-Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a72d709-5cb7-0a2a0a5109dd-0a2a4508c4ec-24
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 08:24:22 +0200
+Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a72d267-6ca4-0a2a45020019-d155dd2dcd3c-3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 08:04:23 +0200
-Received: by mail-wr1-f45.google.com with SMTP id
- ffacd0b85a97d-47c2b362ee2so393889f8f.1
- for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 23:04:23 -0700 (PDT)
+ id 6a72d716-f659-0a2a45080019-d1558034e9bb-3
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 08:24:22 +0200
+Received: by mail-wm1-f52.google.com with SMTP id
+ 5b1f17b1804b1-4955de8797cso3486835e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 23:24:22 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47fec23e2e4sm5507675f8f.25.2026.08.04.23.04.22
+ 5b1f17b1804b1-4994e0356d4sm66585515e9.10.2026.08.04.23.24.20
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 04 Aug 2026 23:04:22 -0700 (PDT)
+ Tue, 04 Aug 2026 23:24:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,57 +55,57 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785909863; x=1786514663; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785911062; x=1786515862; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=XBygFyzYJYS5+ICqbXp5tbWEYq5wUoX0qFqph9ian3g=;
-        b=IpoICVJ22gglvXwLNqCWPAj/+Ho8PSRUvhaDk7uSNUytl7gFR+g5p172ZHtfz7msrG
-         dokWiU8B5bcCz81lgwQFYn1elKRdQOgXkqu/t+71ebuxLDpCMMJmPcE2y3wj/DfbFI2r
-         soh5RtuifBrgD1tQ4aGvQFWNiohaTNPgZe3dXnVsU8wWvJHgSYzIZLM7WphjszcmZXGe
-         AxM9enOSLl3SbLkL/wLlcx/4WFFxSTWmbxlt6+qs0lDqmlTAFUrzH6RQh7UX6F+0sb+2
-         V43w7dx8Jbqapgi3CYEFndtR2Sb3vKQHypfn6pW41nTK4cl2bKeUasVUQukiE++nzVog
-         VMWg==
+        bh=tYw3nMG1tYUoCk6J6SHQzZAAsmfDb/DNYKs0P2jRYvU=;
+        b=BKw+klG0iOZHY7/p6fSGWI9gIoLKUs1y3OmBVDlbHJUKdunninKJRXFF54d7IXhk4X
+         nzEQLwUthSQfbUZaNMNHcNVp8BIysHX+gmf1LoxNr4hDCuukfhIr5wn2yPHkqULhGI0H
+         HgLzR0UehJaGJS7aPsJElBrSbkMwm9tEOP8TCBgzhaKPb/DRexD4T7dpw2/i3gmoaxnc
+         mUDObE5c7rdk5o1w0Pt4V2C+cFg36rgEBFC4Rj4UYFUZx+OySY55yNxR/JFLwB/Cp3X3
+         7xNH2FCoxhs8MQu3PY5RhZsn28Kz0GbmNw/S5ZQRjzud1DjHU9zjMFfNfptfOiZoNh/r
+         L8UQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785909863; x=1786514663;
+        d=1e100.net; s=20251104; t=1785911062; x=1786515862;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=XBygFyzYJYS5+ICqbXp5tbWEYq5wUoX0qFqph9ian3g=;
-        b=pV8EyPg7NfA9BIAtiim/uVVqZsx5FpankDChlcDXAO+4JgJ95j8vyvLoXQT0sYGhmn
-         oPhu7yADvQx/FBhtws63fGMVk8HhROU86gBPA5nmgQQpLf2FOURF+AhRVRs5qnK7w4V2
-         2luaayIbCccsBpEX2ThF1k3mIzpLLhjyiLmZeclNAwzShuKAqo6l9z3h5zkjKQg+aNx/
-         hZKHN+vJu6b0Qlqg3gtxNVZiJVfva8jfLgrS8AHSsJ+zEjWs+7rrEV8ytuSX85Xq+kcd
-         iDUs7qWLDP7dOL7POTYH7e8pwY3Sd8L9dQXvzJa1jIyLydw7Devu8ThRbXirmoPbhLgd
-         bPNw==
-X-Forwarded-Encrypted: i=1; AHgh+RpptCaLq9A3p7do19SNzy4yIAqkpT3K24r60km1fXqu6JvH98pbtgbnEoGuMUsIBePFac5nj2MW4Qs=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxBa49D6V47pAphyVzAAtijEBTfOhOoxVXlW08zNH8o77TGXJG7
-	dsRm7gBNjzjSrnjATmc82E9y8Fqmaavv4lNLlbu5g+FEUd4FGxe9r/uqtTLnFujWjoF6pF5bB+G
-	ex8vbiQ==
-X-Gm-Gg: AR+sD10oIyX+jVK0rdX+5yRZiDN+YpuV0RE/1o8SJVc60V0U60XvqceedyD0ScJbVui
-	y5vcwm/eoW7hwdut0HvsWCjfRQbr8TmtjOU2X/HleRgdvQ9MggDxsURdkMXp4lDzLLR7XbFZ3EW
-	TylAzDW/aWW6TPiDDQY6lvV01WEstqPsSOjoCkhf/Xb0dIOCVDgNoZbM/9XmYOAEqKqrnxCKtTz
-	64Va/M+SA21o0k2vZO6XUlxa56x9Zh8dr8I3o/ffirvph31RDBwCE40rvSJfiTVXbGW9Dp3/dT4
-	eaCqSq8M8Ggoq8cVI+lxDaexWPuo3Owll1JgtxADoUeMg30VEXPZqZQeEJ78k6alsIloc0+giNd
-	3ciDg65lOEnbHRfQLG0QeFN3enS+NcbmSk7QMfUE8n9c1oJQpKFtvM3CL7q4VcU6gRcLFIGauF9
-	HgyT2mfRY6+aB/ilWGtyEUbXRZp1K3ivwd6t/ixuc5YIUl6e7Os9HnN9JOKuAxiIvHd4tiG/HeW
-	IXtOZVPGzejNX/zwm+tySdYbhove+U/e0LPEBlJj0yiLUm9paU2
-X-Received: by 2002:a05:6000:491d:b0:47f:ec8a:214f with SMTP id ffacd0b85a97d-47fec8a2195mr6168363f8f.15.1785909863308;
-        Tue, 04 Aug 2026 23:04:23 -0700 (PDT)
-Message-ID: <cd877869-3d53-41e4-88b3-df629e4dcbbd@suse.com>
-Date: Wed, 5 Aug 2026 08:04:22 +0200
+        bh=tYw3nMG1tYUoCk6J6SHQzZAAsmfDb/DNYKs0P2jRYvU=;
+        b=Mtg0wE63BuVG6d8R/+TqaZzrLjVcoYC/WYTiAtAd4LrkHIpZ1Z6TDtMpx7gICsY+bJ
+         fdGr1DIAe8/tCDHXgUoEpIhTm5JJYmLpHuCWdu7VIu/JNYL2yeJuAFx0HZDx9+0JzE9/
+         ML2eg2zP2bJIww9Ctc+h8+xLJlsFFQJ5TDACJqnfn9h4g22G/9QrDjaKY8L3G8j3jQ6n
+         phsVwe65x+lE0tTdCXpioOvOrcHvL9ENcjieySp8Wbaezdrl72nOriDs6rCnUu8hmwaF
+         2yLuqSE/rbsxGG/gEizkGalOFoUrM8Ypc7mDnYgxuCFMvaB+c9Zd6CN9tdSDovh3ZMIV
+         EsxQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrIDiufsIns3wDkRvCO9IiGGj/5jbLs6ZyrqUtq0xZzusMfhS/2BXg9rInQVleeNdVHqmLXczQXsgQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YycAXbT2Vvw+Om3C6awHVdVu0zMXUXZzubJMSOIKCWsTll9uqGn
+	TE/V9I8Ikmn1Vl9WXBrkXo3Fdeb5h+NCg1whuKoK9M0ccH4JgJO7j+5MPhBTtejQNA==
+X-Gm-Gg: AR+sD1165FJ64qxUhY7ODPgmZmd93tlY2O9wHN88siVX42EhOfNmSjpvWv83PectX0z
+	HqAGmmtnhLf4RWeH1AGazWFOYNXnNiB8j6c9dpgFsuvY6zmRTxwcnqF5FRjf+ck4D0fGjgndyIz
+	Xy4DeSF9MQheP4ST3AndccJd8n+cBRkanaZy7AAJzqf/poVb66Z5BgyQcgfS6iFtIlX1DTJRAzW
+	Qnf32P+ZZ6YdsWqYZyzLuvx7PW6frj+/5ewHPhlPXaRXydub3+bHkvizQ4wH8XAsiY+UMHGIDlI
+	VfNUAB3H3qWIeBRnGL5FYgNymciQq/FGNBXd5Wxa+U6fTj7HYvyI56Feu+3d0HwY07xxSZ9M0n/
+	hP38PasfYzj1TWO1/bQd9KLrQ9P72oWcn6eTMvRX3PMyWRx0oadDyBZhfPYnkLeC8FRkNHVwdGL
+	cgtIRg7+Jd+vUG6MJhIyf+5o1Pr6ygf79vcUFRhoupEZqXoWo86cLLha0DfJNxvDpxIcXiRlCgG
+	HV/o1xX11JkPfUiDB9/7XRpLSDl8ytQv4i3pJmz5xJhOHL1OpQyJGyubbcVhyM=
+X-Received: by 2002:a05:600c:529b:b0:493:a613:56b2 with SMTP id 5b1f17b1804b1-4994e71d3e5mr47925195e9.8.1785911061197;
+        Tue, 04 Aug 2026 23:24:21 -0700 (PDT)
+Message-ID: <205b4024-c42f-48b6-a106-913b06485e53@suse.com>
+Date: Wed, 5 Aug 2026 08:24:20 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] x86/alternatives: Rework get_ideal_nops()
+Subject: Re: [PATCH v3 1/5] x86/emul: Introduce x86_decode_lite()
 To: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>,
  Xen-devel <xen-devel@lists.xenproject.org>
-References: <20250522150015.555492-1-andrew.cooper3@citrix.com>
- <20250522150015.555492-3-andrew.cooper3@citrix.com>
- <99a39800-dbba-4d37-afcb-ae041af648f4@suse.com>
- <f15222a9-1d61-4d9c-b923-8e6ad4994af3@citrix.com>
+References: <20260803072006.9678-1-andrew.cooper3@citrix.com>
+ <20260803072006.9678-2-andrew.cooper3@citrix.com>
+ <01b27228-fdc0-4546-aa23-2bcdafb22727@suse.com>
+ <1e1a1c4d-5ffc-44b1-b26c-244c9af1f250@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,56 +131,192 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <f15222a9-1d61-4d9c-b923-8e6ad4994af3@citrix.com>
+In-Reply-To: <1e1a1c4d-5ffc-44b1-b26c-244c9af1f250@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1785909863-674BE2AC-A40A59FF/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c1860d/1785911062-D6F5F87B-3799B6E3/0/0
 X-purgate-type: clean
-X-purgate-size: 1898
+X-purgate-size: 8566
 
-On 04.08.2026 19:13, Andrew Cooper wrote:
-> On 02/06/2025 10:57 am, Jan Beulich wrote:
->> On 22.05.2025 17:00, Andrew Cooper wrote:
->>> --- a/xen/arch/x86/alternative.c
->>> +++ b/xen/arch/x86/alternative.c
->>> @@ -20,7 +20,7 @@
->>>  #define MAX_PATCH_LEN (255-1)
->>>  
->>>  #ifdef K8_NOP1
->>> -static const unsigned char k8nops[] init_or_livepatch_const = {
->>> +static const unsigned char k8_nops[] init_or_livepatch_const = {
->>>      K8_NOP1,
->>>      K8_NOP2,
->>>      K8_NOP3,
->>> @@ -31,22 +31,10 @@ static const unsigned char k8nops[] init_or_livepatch_const = {
->>>      K8_NOP8,
->>>      K8_NOP9,
->>>  };
->>> -static const unsigned char * const k8_nops[ASM_NOP_MAX+1] init_or_livepatch_constrel = {
->> ... the (at least visual) connection to ASM_NOP_MAX. Could I talk you into
->> adding build time array-size checks for both arrays, to restore the
->> connection?
+On 04.08.2026 20:56, Andrew Cooper wrote:
+> On 03/08/2026 4:26 pm, Jan Beulich wrote:
+>>> +        [0x50 ... 0x5f] = (Known),             /* PUSH/POP %reg */
+>>> +
+>>> +        [0x62]          = 0,                   /* BOUND, but also EVEX prefix, not implemented. */
+>>> +        [0x63]          = (Known|ModRM),       /* MOVSxd */
+>>> +
+>>> +        [0x68]          = (Known|Imm),         /* PUSH $imm */
+>>> +        [0x69]          = (Known|ModRM|Imm),   /* IMUL $imm */
+>>> +        [0x6a]          = (Known|Imm8),        /* PUSH $imm8 */
+>>> +        [0x6b]          = (Known|ModRM|Imm8),  /* PUSH $imm8 */
+>>> +        [0x6c ... 0x6f] = (Known),             /* INS/OUTS */
+>>> +        [0x70 ... 0x7f] = (Known|Branch|Imm8), /* Jcc disp8 */
+>>> +        [0x80]          = (Known|ModRM|Imm8),  /* Grp1 */
+>>> +        [0x81]          = (Known|ModRM|Imm),   /* Grp1 */
+>>> +
+>>> +        [0x83]          = (Known|ModRM|Imm8),  /* Grp1 */
+>>> +        [0x84 ... 0x8e] = (Known|ModRM),       /* TEST/XCHG/MOV/MOV-SREG/LEA */
+>>> +        [0x8f]          = 0,                   /* Grp1A - POP but also XOP prefix, not implemented. */
+>> POP doesn't look all that unlikely to be used in inline assembly, and
+>> hence in alternatives. That said, of course using it with a memory
+>> operand requires quite a bit of care.
 > 
-> Sorry, but I have no idea what you're asking for here.
+> We have no alternatives playing with the stack (beyond CALL
+> instructions), and no alternatives which have any net %rsp delta.
+> 
+> PUSH/POP MEM are rare in general and Xen doesn't have any at all.
 
-    BUILD_BUG_ON(ARRAY_SIZE(k8_nops) != ASM_NOP_MAX);
-    BUILD_BUG_ON(ARRAY_SIZE(p6_nops) != ASM_NOP_MAX);
+Well, okay then. Nevertheless I'd like to mention that the encoding can
+also be used for REG forms. If needed for size reasons, that may or may
+not be more efficient than adding a NOP or no-op prefix.
 
-> The use of ASM_NOP_MAX was latently buggy before; it was easy to create
-> a NULL deference if the initialiser wasn't filled in when ASM_NOP_MAX
-> changed.
+>>> +        [0x90 ... 0x99] = (Known),             /* NOP/XCHG %rAX/CLTQ/CQTO */
+>>> +
+>>> +        [0x9b ... 0x9f] = (Known),             /* FWAIT/PUSHF/POPF/SAHF/LAHF */
+>>> +        [0xa0 ... 0xa3] = (Known|Moffs),       /* MOVABS */
+>>> +        [0xa4 ... 0xa7] = (Known),             /* MOVS/CMPS */
+>>> +        [0xa8]          = (Known|Imm8),        /* TEST %al */
+>>> +        [0xa9]          = (Known|Imm),         /* TEST %rAX */
+>>> +        [0xaa ... 0xaf] = (Known),             /* STOS/LODS/SCAS */
+>>> +        [0xb0 ... 0xb7] = (Known|Imm8),        /* MOV $imm8, %reg */
+>>> +        [0xb8 ... 0xbf] = (Known|Imm),         /* MOV $imm{16,32,64}, %reg */
+>>> +        [0xc0 ... 0xc1] = (Known|ModRM|Imm8),  /* Grp2 (ROL..SAR $imm8, %reg) */
+>>> +
+>>> +        [0xc3]          = (Known),             /* RET */
+>>> +        [0xc4 ... 0xc5] = 0,                   /* LES/LDS but also VEX prefixes, not implemented. */
+>> This may bite us sooner or later, due to the VEX-encoded integer insns
+>> that there are. Of course as long as we don't use this function on
+>> compiled code, and as long as my "x86: allow Kconfig control over psABI
+>> level" doesn't come close to going in, that's merely a theoretical
+>> concern.
+>>
+>> Same goes for not supporting the 3-byte opcodes, which also encode
+>> certain integer insns.
+> 
+> I have no doubt that we're going to need to add support eventually.
+> 
+> But,
+> a) I don't have time right now
+> b) We have real bugs/limitations right now needing this functionality to
+> address (patch 5, and the xsave fixes, and bus lock trap enablement)
+> c) GitlabCI will reliably notice any new alternative instructions that
+> this can't decode (patch 3)
+> d) This function is a fastpath during the alternatives patching critical
+> region (patch 4)
+> 
+> Option d alone is a good reason not to decode VEX prefixes yet.
 
-Partly, yes. But why make it worse when it can be made at least somewhat
-better? Omitted inner entries are reasonably easy to spot. Omitted trailing
-entries aren't, hence why even in the original code omitting the array
-dimension in the definitions and instead having such BUILD_BUG_ON()s would
-have been more robust.
+Personally I think a is most relevant. As said in the later reply, once
+we start using MSR-IMM insns, at least VEX3 map 7 will need decoding
+anyway.
 
-Also note how I said "(at least visual)" - by adding the BUILD_BUG_ON()s,
-grep-ing for ASM_NOP_MAX will hit here, providing links to the controlled
-arrays. Personally I consider it entirely plausible to possibly bump
-ASM_NOP_MAX, as technically we could go up to 15. (Whether going that far
-is efficient is a separate question.)
+>>> +        [0xe4 ... 0xe7] = (Known|Imm8),        /* IN/OUT $imm8 */
+>>> +        [0xe8 ... 0xe9] = (Known|Branch|Imm),  /* CALL/JMP disp32 */
+>>> +
+>>> +        [0xeb]          = (Known|Branch|Imm8), /* JMP disp8 */
+>>> +        [0xec ... 0xef] = (Known),             /* IN/OUT %dx */
+>>> +
+>>> +        [0xf1]          = (Known),             /* ICEBP */
+>>> +
+>>> +        [0xf4]          = (Known),             /* HLT */
+>>> +        [0xf5]          = (Known),             /* CMC */
+>>> +        [0xf6 ... 0xf7] = (Known|ModRM),       /* Grp3, Further ModRM decode */
+>>> +        [0xf8 ... 0xfd] = (Known),             /* CLC ... STD */
+>>> +        [0xfe ... 0xff] = (Known|ModRM),       /* Grp4 */
+>>> +    };
+>>> +    static const uint8_t init_or_livepatch_const twobyte[256] = {
+>>> +        [0x00 ... 0x03] = (Known|ModRM),       /* Grp6/Grp7/LAR/LSL */
+>> Leaving out INVD is surely find, but WBINVD?
+> 
+> Given now expensive WBINVD is, what possible reason can you think for
+> having it in an alternative ?
+
+It's more like e.g. WBNOINVD, which could appear in an alternative in
+principle, if its encoding didn't mean WBINVD anyway on older hardware.
+
+>>> +        [0x0b]          = (Known),             /* UD2 */
+>>> +
+>>> +        [0x18 ... 0x1f] = (Known|ModRM),       /* Grp16 (Hint Nop) */
+>>> +        [0x20 ... 0x23] = (Known|ModRM),       /* MOV %cr/%dr */
+>>> +
+>>> +        [0x30 ... 0x33] = (Known),             /* WRMSR/RDTSC/RDMSR/RDPMC */
+>>> +
+>>> +        [0x40 ... 0x4f] = (Known|ModRM),       /* CMOVcc */
+>>> +
+>>> +        [0x80 ... 0x8f] = (Known|Branch|Imm),  /* Jcc disp32 */
+>>> +        [0x90 ... 0x9f] = (Known|ModRM),       /* SETcc */
+>>> +
+>>> +        [0xa0 ... 0xa2] = (Known),             /* PUSH/POP %fs/CPUID */
+>>> +        [0xa3]          = (Known|ModRM),       /* BT */
+>>> +        [0xa4]          = (Known|ModRM|Imm8),  /* SHLD $imm8 */
+>>> +        [0xa5]          = (Known|ModRM),       /* SHLD %cl */
+>>> +
+>>> +        [0xa8 ... 0xa9] = (Known),             /* PUSH/POP %gs */
+>>> +
+>>> +        [0xab]          = (Known|ModRM),       /* BTS */
+>>> +        [0xac]          = (Known|ModRM|Imm8),  /* SHRD $imm8 */
+>>> +        [0xad ... 0xaf] = (Known|ModRM),       /* SHRD %cl/Grp15/IMUL */
+>>> +
+>>> +        [0xb0 ... 0xb9] = (Known|ModRM),       /* CMPXCHG/LSS/BTR/LFS/LGS/MOVZxx/POPCNT/UD1 */
+>>> +        [0xba]          = (Known|ModRM|Imm8),  /* Grp8 */
+>>> +        [0xbb ... 0xbf] = (Known|ModRM),       /* BTC/BSF/BSR/MOVSX */
+>>> +        [0xc0 ... 0xc1] = (Known|ModRM),       /* XADD */
+>> What about MOVNTI?
+> 
+> I judged that to be on the unlikely side to be needed.
+
+Hmm, I'm not going to insist, but I think we'd better have it right away.
+
+>>> +        [0xc7]          = (Known|ModRM),       /* Grp9 */
+>>> +        [0xc8 ... 0xcf] = (Known),             /* BSWAP */
+>>> +    };
+>> What about UD0?
+> 
+> UD0 differs between vendors and product lines from Intel.
+
+Would you mind leaving a commented (to this effect) 0 entry?
+
+>>> +        if ( mod == 1 ) /* disp8 */
+>>> +            FETCH(int8_t);
+>>> +        else if ( mod == 2 ) /* disp32 */
+>>> +        {
+>>> +        disp32:
+>>> +            FETCH(int32_t);
+>>> +        }
+>> In several cases the FETCH()ed value isn't used. Compilers as well as Eclair
+>> (and alike) are happy with that?
+> 
+> Yes.  The cover letter has a fully passing pipeline.
+
+Which you know as well as I do, says next to nothing, as we don't even come
+close to covering the complete version range. That said, it's likely good
+enough. I'm merely surprised no tool has to say anything about these unused
+"return" values of the macro.
+
+>>> --- a/xen/arch/x86/x86_emulate/x86_emulate.h
+>>> +++ b/xen/arch/x86/x86_emulate/x86_emulate.h
+>>> @@ -835,4 +835,18 @@ static inline void x86_emul_reset_event(struct x86_emulate_ctxt *ctxt)
+>>>      ctxt->event = (struct x86_event){};
+>>>  }
+>>>  
+>>> +/*
+>>> + * x86_decode_lite().  Very minimal decoder for managing alternatives.
+>>> + *
+>>> + * @len is 0 on error, or nonzero on success.  If the instruction has a
+>>> + * relative field, @rel_sz is nonzero, and @rel points at the field.
+>>> + */
+>>> +typedef struct {
+>>> +    uint8_t len;
+>>> +    uint8_t rel_sz; /* bytes: 0, 1 or 4 */
+>> Perhaps use bitfields in favor of fixed-width integers, seeing what
+>> ./CODING_STYLE says?
+> 
+> No.  That destroys the code generation improvements gained by returning
+> a pair like this in the first place.
+
+I was under the pretty clear impression that halfway recent compilers
+treat 8-bit bitfields the same as uint8_t ordinary fields. (And no, I
+did by no means suggest to shrink the width of the fields.)
 
 Jan
 
