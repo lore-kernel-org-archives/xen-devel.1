@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9946DC55822
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 09:24:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1383155.1626414 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DA44C55822
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 09:25:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1383163.1626423 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrXrW-0006ou-90; Wed, 05 Aug 2026 09:24:34 +0000
+	id 1wrXrs-0007Mi-Ji; Wed, 05 Aug 2026 09:24:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1383155.1626414; Wed, 05 Aug 2026 09:24:34 +0000
+Received: by outflank-mailman (output) from mailman id 1383163.1626423; Wed, 05 Aug 2026 09:24:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrXrW-0006on-69; Wed, 05 Aug 2026 09:24:34 +0000
-Received: by outflank-mailman (input) for mailman id 1383155;
- Wed, 05 Aug 2026 09:24:33 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wrXrs-0007Ma-Gd; Wed, 05 Aug 2026 09:24:56 +0000
+Received: by outflank-mailman (input) for mailman id 1383163;
+ Wed, 05 Aug 2026 09:24:55 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wrXrV-0006oU-HA
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 09:24:33 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wrXrq-0007Kl-Um
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 09:24:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrXrU-00HWng-U1
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 11:24:32 +0200
+ id 1wrXrq-006ZxT-BP
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 11:24:54 +0200
 Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a730150-e002-0a2a0a5209dd-0a2a450ccecc-2
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 11:24:32 +0200
-Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ id 6a73015e-2eae-0a2a0a5409dd-0a2a450ca81c-14
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 11:24:54 +0200
+Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
  by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a730150-f479-0a2a450c0019-d155dd31e523-3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 11:24:32 +0200
-Received: by mail-wr1-f49.google.com with SMTP id
- ffacd0b85a97d-47fdd674e17so433959f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 02:24:32 -0700 (PDT)
+ id 6a730166-f479-0a2a450c0019-d155dd35a468-3
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 11:24:54 +0200
+Received: by mail-wr1-f53.google.com with SMTP id
+ ffacd0b85a97d-47fde295992so609364f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 02:24:54 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47febfe5d7csm7756543f8f.15.2026.08.05.02.24.31
+ ffacd0b85a97d-47febfda0bfsm7238538f8f.5.2026.08.05.02.24.53
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Aug 2026 02:24:31 -0700 (PDT)
+ Wed, 05 Aug 2026 02:24:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,49 +55,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785921872; x=1786526672; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785921894; x=1786526694; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=Yh5sgqmpsiDgmmWKbLvnKvsyVo9fXTHQYMZ46x1tb84=;
-        b=S13YAMA4Sq3UqVAGo2NUs01F4Db/yaayCQ0DugXLpk+haMa9504+qCWsIghznJgp4M
-         FujhkJ3xfviyKy303eOU/AKomKe9M4dOTTwEyAhAKiNPHD2PY8vgQIEJi0HiRAZ33IHL
-         UWIdhE9JGICCJ0yTzVUBHKc2lYJPPv6ZUZYc2wya/Bo/aUXhKpv6ktJWXsoyoiyoXeuh
-         Ts+XHVGCYUbSLIaddn3qoQCZEe6RqRUoq/7l7qOEgNLw1p4ZYw54riv1HbTh/7FwE8eY
-         fZBddbzRQKYGDXNTiridvoEmLi2oFvn0auYTlU6n3epIOdHpksZol6xWIZ6awTcPNfMh
-         z2YQ==
+        bh=0P8KtrMj33FZR9rXeuoR9W9HprP82JFkO8XpOVKL9W4=;
+        b=WPTDfsHNT8Z/EIrSOINwOfKJpAGhXfcA0SpipIh8GZfrLtsW/etJkbFroeZJ8dBDvW
+         h/Vj2fztfzLh5RXJOg0MwsR+OGNp2EwwWrAWOZvpUPNGGYMQws2yRfnA48I7eHtb8NmJ
+         8IKiZboOeVqKIUNq0K9WqCcfTN+ExCvwjkp5qfg/ZzPlrj5l/LayeeG/llHg6uo/ibH8
+         Tw0EY3r/wTea3Hyxf9zb498JktsDFq17f2InIPpCU32AhcDoGUJUCjueZf6ziCPq5bHH
+         JJNsDlXH7PAvi5r5nNAau+eu28qkRzLPx58a9UhZN4DYvgjAEykx6+/YBDQQWE1D46M2
+         BO+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785921872; x=1786526672;
+        d=1e100.net; s=20251104; t=1785921894; x=1786526694;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=Yh5sgqmpsiDgmmWKbLvnKvsyVo9fXTHQYMZ46x1tb84=;
-        b=AN6kakfyv4KtavxfME1wy4dGWQfRc4GZpNr79pCPCVaMabpubb985eIKPILf1cJMgj
-         f+uKW3ajxPFSy46ErJy3wGC9xxXem8Du6lQaHAQFDGOZG40b8o66er31T4pTtlJJVyEj
-         VrlDrg/M0rDp2RfpoiYgdfrvFUwuEyqklGKUk6rgP6ZWzCKETkcnK9KAhv7Ds/Z5H51n
-         a7GIdMt/Z4QzV18nAwe7fMWH8MIbYreKonrW8X1sIZ0p31vs30t5LLmfWBJzYpi+AfXa
-         yWxJPmDvHlU55GROOvI17VuUG6rjcbDC/EIVYP8H9MihjnZ6ArMO92de0YPHgYrg1ZhG
-         1vmA==
-X-Gm-Message-State: AOJu0YxCbM6Rzh1lAmfyJ0K0SB73t2rHuUFD1iX0mDfXPdurrdcbwSEc
-	FTRq7Um+4PUlytHEm0TmJQaGlTAWF+uvmiSEVmavNGbQP0u72efhIzHLH5D/2p2VLPaKvKjxL7r
-	nmX+QIw==
-X-Gm-Gg: AR+sD13XywLOfX4kjMkV5F7lUZdZWZ9n8bOZeJwpcDOkFhdhLdM5y/d3/GQJzy3Vsb2
-	9yNgQE9Kx4JH901VzU/wlQWBgsHR0JT4eNomWAUciiUUk+fFdJf9vgq/3nHDhaIFNSKJFWVahTa
-	naCxex2RvtdeQOUX6MVPj5nI/LYkwWaQTvse/ygwAOoYpnva7lkKxynY4gbVizUQmK101rQW/H9
-	N5j6dPVTCwfJGN09erUhQgHvEhsIu+WhmhdIX4VGbBpwgRMweRTsTPGg5UK+RELRTv1DNEYEqTD
-	2OnuD7tAokHrX8bsBoNK0EhLpWMOeV4v0kLZ2I3DTBQQihLMLxsqU6txwazjroCeChBY9qVYGOx
-	eVFB1ETxZCD68UYas6G2QYc+NtUuhP0eXSt7h6DpxaVHGUGU8gIIW3OaAlTZAnv4yo/X5fceq5X
-	/AjIw4pvpee/JnEhYl++/Td7qojwCjAndz6jJLuw3RnWk86PzWIB5XUGDBLaWlTjAPl6qzfA64H
-	lRkmLByXaxST9yBUTc0FW/teIjEVqsYtntJ/RpF6+p5U8QG9uB/
-X-Received: by 2002:a05:6000:29d5:b0:47f:c648:e27b with SMTP id ffacd0b85a97d-47fec4e6fbcmr6793319f8f.2.1785921872105;
-        Wed, 05 Aug 2026 02:24:32 -0700 (PDT)
-Message-ID: <818b1fd4-ade7-4702-9dc6-f75fb0cfc575@suse.com>
-Date: Wed, 5 Aug 2026 11:24:30 +0200
+        bh=0P8KtrMj33FZR9rXeuoR9W9HprP82JFkO8XpOVKL9W4=;
+        b=MfyVl3XqwW4Q3mjlkWd0OCcL328Owe8ziRlhx14eTe/18kC8YQL8N9cJyB849k0VLz
+         RF4qzBTmh3LU7bsS1Qo1klyvCUAlPbnXX5QR1THyg83IFukXiXlk/vTCyUKdOfqBFz7c
+         qfdOZs//ECBUKmsZ6s9d+F7ZxeAuly6U5Qa2bMpMFYSYgdmGa2LzPwtyr4aNzXxdbIKQ
+         zhphKMxq9jxvZxylDQwUd4BpqrMeHgLt0wRo+B2CY//i7Rc7kMndt/6zNguvBpDSXTz4
+         iJu6MTyA9LEup1uV7uzD28BgEuCbvY14ZqcM/2gU9INkw3N9leqG5pfJ6sC9CSQ89P7g
+         f1kQ==
+X-Gm-Message-State: AOJu0Yw2o3zguHjSGs9XvlrTFq21LRczrE64u8x4UklDSSg+vVKTO8LQ
+	tgE/UHtcdPwTfB6dumXUklLq3YjUIMxKd6R6DKDBHRVhvh8jWNb6rO5ex7w7/z2ui4FupVDD7sF
+	PO/nlOA==
+X-Gm-Gg: AR+sD11+z7NlHEjhl3rIYHAZd9Xbv/i2Z+xNnw6cwUhEd3JZCX7znl6Mn/EVz3MuUDm
+	9IvocjZo9DeS5c4D9WlssYUDaFVhwDm3hmrB3OVoSd25mkMbH6mqoLsvl7omOeGYfCYGRxNl26f
+	JK3zl+yrhTQl0yMi4amjSYGuUQdyqOR7t09LS1mHnWM3EYAmCMey+lk9mXK8LhON4Hof0OeM8+r
+	gbGmXaQhns829JGLhj5yeiTicikf3Y45lGQLeHqgo2dlSONOeQEcCOJ4CfBmf+gA5cRrL9Y1Qxb
+	1OESrqMohTikynF2Jr0Ql1uHnbKOyEGB5PgGxL9gFv/oFOydniId40HQmcezsy54yvBco2KnGuG
+	quKcIMPUT4u0C+IooT1vTSNRSbcWc0LOnfmLNWK0Cjn+mlMeaviE8Iw8Ftk+ZGqKEMtRJkKe2xg
+	YYRXjKRMNR1EHJfV8oP+Ks+b8fCOvVuPcyKcB5njM1ADIsmlgGPjY9Tt1D9pJd+7aAntjkpYeei
+	1JigzF/0m7UbXNQzFWUVH8AobWMvwGN+o3Z/Zsb4toOWqNu9rSA
+X-Received: by 2002:a05:6000:480f:b0:47f:8554:a341 with SMTP id ffacd0b85a97d-47fe81d131emr23983559f8f.13.1785921893765;
+        Wed, 05 Aug 2026 02:24:53 -0700 (PDT)
+Message-ID: <2ccead84-eaa4-428a-8684-da26874c05e9@suse.com>
+Date: Wed, 5 Aug 2026 11:24:52 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v10 5/6] x86emul: support MSR-IMM instructions
+Subject: [PATCH v10 6/6] VMX: support MSR-IMM
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -131,156 +131,130 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <81a2c636-5a74-41c3-81a2-3f49ed717744@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d25034/1785921872-022C0A5B-BC100AB1/0/0
+X-purgate-ID: tlsNG-d25034/1785921894-00ACCA5B-A4C27296/0/0
 X-purgate-type: clean
-X-purgate-size: 6509
+X-purgate-size: 4687
 
-Encoding-wise these are very similar to URDMSR/UWRMSR, so existing logic
-is easy to extend.
+Hook up the new VM exit codes and handle guest uses of the insns.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-v10: Drop vex.opcx part of #UD check (wrongly copied from USER-MSR code).
-     Re-base.
-v8: Don't mark the feature 's' just yet. Re-base.
-v7: New.
+v10: Check feature bit in exit handler.
+v9: New.
+---
+The lack of an enable bit is concerning; at least for the nested case
+that's a security issue afaict (when L0 isn't aware of the insns, or more
+specifically the exit codes).
 
---- a/tools/tests/x86_emulator/predicates.c
-+++ b/tools/tests/x86_emulator/predicates.c
-@@ -1522,6 +1522,8 @@ static const struct vex {
-     { { 0xdf }, 3, T, R, pfx_66, WIG, Ln }, /* vaeskeygenassist */
-     { { 0xf0 }, 3, T, R, pfx_f2, Wn, L0 }, /* rorx */
- }, vex_map7[] = {
-+    { { 0xf6, 0xc0 }, 6, F, N, pfx_f3, W0, L0 }, /* wrmsrns */
-+    { { 0xf6, 0xc0 }, 6, F, N, pfx_f2, W0, L0 }, /* rdmsr */
-     { { 0xf8, 0xc0 }, 6, F, N, pfx_f3, W0, L0 }, /* uwrmsr */
-     { { 0xf8, 0xc0 }, 6, F, N, pfx_f2, W0, L0 }, /* urdmsr */
- };
---- a/tools/tests/x86_emulator/test_x86_emulator.c
-+++ b/tools/tests/x86_emulator/test_x86_emulator.c
-@@ -1571,6 +1571,30 @@ int main(int argc, char **argv)
-     if ( (rc != X86EMUL_EXCEPTION) ||
-          (regs.rip != (unsigned long)&instr[0]) )
-         goto fail;
-+    printf("okay\n");
-+
-+    printf("%-40s", "Testing rdmsr $MSR_GS_BASE,%rdx...");
-+    instr[0] = 0xc4; instr[1] = 0xe7; instr[2] = 0x7b; instr[3] = 0xf6; instr[4] = 0xc2;
-+    *(uint32_t *)&instr[5] = MSR_GS_BASE;
-+    regs.rip = (unsigned long)&instr[0];
-+    regs.rdx = ~gs_base;
-+    rc = x86_emulate(&ctxt, &emulops);
-+    if ( (rc != X86EMUL_OKAY) ||
-+         (regs.rip != (unsigned long)&instr[9]) ||
-+         (regs.rdx != gs_base) )
-+        goto fail;
-+    printf("okay\n");
-+
-+    printf("%-40s", "Testing wrmsrns %rsi,$MSR_SHADOW_GS_BASE...");
-+    instr[0] = 0xc4; instr[1] = 0xe7; instr[2] = 0x7a; instr[3] = 0xf6; instr[4] = 0xc6;
-+    *(uint32_t *)&instr[5] = MSR_SHADOW_GS_BASE;
-+    regs.rip = (unsigned long)&instr[0];
-+    regs.rsi = 0x665544332211UL;
-+    rc = x86_emulate(&ctxt, &emulops);
-+    if ( (rc != X86EMUL_OKAY) ||
-+         (regs.rip != (unsigned long)&instr[9]) ||
-+         (gs_base_shadow != 0x665544332211UL) )
-+        goto fail;
+--- a/xen/arch/x86/cpu-policy.c
++++ b/xen/arch/x86/cpu-policy.c
+@@ -834,10 +834,11 @@ static void __init calculate_hvm_max_pol
+         __clear_bit(X86_FEATURE_PKS, fs);
  
-     emulops.write_msr     = NULL;
- #endif
---- a/tools/tests/x86_emulator/x86-emulate.c
-+++ b/tools/tests/x86_emulator/x86-emulate.c
-@@ -67,6 +67,7 @@ bool emul_test_init(void)
-     cpu_policy.feat.lkgs = true;
-     cpu_policy.feat.wrmsrns = true;
-     cpu_policy.feat.msrlist = true;
-+    cpu_policy.feat.msr_imm = true;
-     cpu_policy.feat.user_msr = true;
-     cpu_policy.extd.clzero = true;
+         /*
+-         * Don't expose USER-MSR until it is known how (if at all) it is
+-         * virtualized on SVM.
++         * Don't expose USER-MSR and MSR-IMM until it is known how (if at all)
++         * they are virtualized on SVM.
+          */
+         __clear_bit(X86_FEATURE_USER_MSR, fs);
++        __clear_bit(X86_FEATURE_MSR_IMM, fs);
+     }
  
---- a/xen/arch/x86/x86_emulate/decode.c
-+++ b/xen/arch/x86/x86_emulate/decode.c
-@@ -1271,8 +1271,9 @@ int x86emul_decode(struct x86_emulate_st
-                     case vex_map7:
-                         opcode |= MASK_INSR(7, X86EMUL_OPC_EXT_MASK);
-                         /*
--                         * No table lookup here for now, as there's only a single
--                         * opcode point (0xf8) populated in map 7.
-+                         * No table lookup here for now, as there are only two
-+                         * (very similar) opcode points (0xf6, 0xf8) populated
-+                         * in map 7.
-                          */
-                         d = DstMem | SrcImm | ModRM | Mov;
-                         s->op_bytes = 8;
---- a/xen/arch/x86/x86_emulate/private.h
-+++ b/xen/arch/x86/x86_emulate/private.h
-@@ -616,6 +616,7 @@ amd_like(const struct x86_emulate_ctxt *
- #define vcpu_has_avx_ifma()    (ctxt->cpuid->feat.avx_ifma)
- #define vcpu_has_msrlist()     (ctxt->cpuid->feat.msrlist)
- #define vcpu_has_movrs()       (ctxt->cpuid->feat.movrs)
-+#define vcpu_has_msr_imm()     (ctxt->cpuid->feat.msr_imm)
- #define vcpu_has_avx_vnni_int8() (ctxt->cpuid->feat.avx_vnni_int8)
- #define vcpu_has_avx_ne_convert() (ctxt->cpuid->feat.avx_ne_convert)
- #define vcpu_has_avx_vnni_int16() (ctxt->cpuid->feat.avx_vnni_int16)
---- a/xen/arch/x86/x86_emulate/x86_emulate.c
-+++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-@@ -7086,6 +7086,35 @@ x86_emulate(
-         state->simd_size = simd_none;
+     if ( !cpu_has_vmx_msrlist )
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -453,7 +453,7 @@ void domain_cpu_policy_changed(struct do
+     }
+ 
+     /* Nested doesn't have the necessary processing, yet. */
+-    if ( nestedhvm_enabled(d) && p->feat.user_msr )
++    if ( nestedhvm_enabled(d) && (p->feat.user_msr || p->feat.msr_imm) )
+         return /* -EINVAL */;
+ 
+     for_each_vcpu ( d, v )
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -4712,6 +4712,14 @@ void asmlinkage vmx_vmexit_handler(struc
+             hvm_inject_hw_exception(X86_EXC_GP, 0);
          break;
  
-+    case X86EMUL_OPC_VEX_F3(7, 0xf6): /* wrmsrns r64,imm32 */
-+    case X86EMUL_OPC_VEX_F2(7, 0xf6): /* rdmsr imm32,r64 */
-+        generate_exception_if((!mode_64bit() || ea.type != OP_REG ||
-+                               (modrm_reg & 7) ||
-+                               vex.l || vex.w || vex.reg != 0xf),
-+                              X86_EXC_UD);
-+        vcpu_must_have(msr_imm);
-+        generate_exception_if(!mode_ring0(), X86_EXC_GP, 0);
-+        if ( vex.pfx == vex_f2 )
++    case EXIT_REASON_RDMSR_IMM:
++        /* Check the feature bit in lieu of an enable one. */
++        if ( !currd->arch.cpuid->feat.msr_imm )
 +        {
-+            /* urdmsr */
-+            fail_if(!ops->read_msr);
-+            if ( (rc = ops->read_msr(imm1, &msr_val, ctxt)) != X86EMUL_OKAY )
-+                goto done;
-+            dst.val = msr_val;
-+            ASSERT(dst.type == OP_REG);
-+            dst.bytes = 8;
++            hvm_inject_hw_exception(X86_EXC_UD, X86_EVENT_NO_EC);
++            break;
 +        }
-+        else
++        fallthrough;
+     case EXIT_REASON_URDMSR: /* NB: User-MSR bitmap was checked by the CPU. */
+     {
+         uint64_t msr_content = 0;
+@@ -4721,7 +4729,7 @@ void asmlinkage vmx_vmexit_handler(struc
+         {
+         case X86EMUL_OKAY:
+             *decode_gpr(regs, msr_imm_gpr()) = msr_content;
+-            update_guest_eip(); /* Safe: URDMSR */
++            update_guest_eip(); /* Safe: URDMSR / RDMSR <imm> */
+             break;
+ 
+         case X86EMUL_EXCEPTION:
+@@ -4731,6 +4739,14 @@ void asmlinkage vmx_vmexit_handler(struc
+         break;
+     }
+ 
++    case EXIT_REASON_WRMSRNS_IMM:
++        /* Check the feature bit in lieu of an enable one. */
++        if ( !currd->arch.cpuid->feat.msr_imm )
 +        {
-+            /* wrmsrns */
-+            fail_if(!ops->write_msr);
-+            if ( (rc = ops->write_msr(imm1, dst.val, ctxt,
-+                                      true)) != X86EMUL_OKAY )
-+                goto done;
-+            dst.type = OP_NONE;
++            hvm_inject_hw_exception(X86_EXC_UD, X86_EVENT_NO_EC);
++            break;
 +        }
-+        break;
-+
-     case X86EMUL_OPC_F3(0x0f38, 0xf8): /* enqcmds r,m512 / uwrmsr r64,r32 */
-     case X86EMUL_OPC_F2(0x0f38, 0xf8): /* enqcmd r,m512 / urdmsr r32,r64 */
-         if ( ea.type == OP_MEM )
++        fallthrough;
+     case EXIT_REASON_UWRMSR: /* NB: User-MSR bitmap was checked by the CPU. */
+         exit_qualification = vmread(EXIT_QUALIFICATION);
+         switch ( hvm_msr_write_intercept(exit_qualification,
+@@ -4738,7 +4754,7 @@ void asmlinkage vmx_vmexit_handler(struc
+                                          true) )
+         {
+         case X86EMUL_OKAY:
+-            update_guest_eip(); /* Safe: UWRMSR */
++            update_guest_eip(); /* Safe: UWRMSR / WRMSRNS <imm> */
+             break;
+ 
+         case X86EMUL_EXCEPTION:
+--- a/xen/arch/x86/include/asm/hvm/vmx/vmx.h
++++ b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
+@@ -205,6 +205,8 @@ static inline void pi_clear_sn(struct pi
+ #define EXIT_REASON_WRMSRLIST           79
+ #define EXIT_REASON_URDMSR              80
+ #define EXIT_REASON_UWRMSR              81
++#define EXIT_REASON_RDMSR_IMM           84
++#define EXIT_REASON_WRMSRNS_IMM         85
+ /* Remember to also update VMX_PERF_EXIT_REASON_SIZE! */
+ 
+ /*
+--- a/xen/arch/x86/include/asm/perfc_defn.h
++++ b/xen/arch/x86/include/asm/perfc_defn.h
+@@ -6,7 +6,7 @@ PERFCOUNTER_ARRAY(exceptions,
+ 
+ #ifdef CONFIG_HVM
+ 
+-#define VMX_PERF_EXIT_REASON_SIZE 82
++#define VMX_PERF_EXIT_REASON_SIZE 86
+ #define VMEXIT_NPF_PERFC 166
+ #define SVM_PERF_EXIT_REASON_SIZE (VMEXIT_NPF_PERFC + 1)
+ PERFCOUNTER_ARRAY(vmexits,              "vmexits",
 --- a/xen/include/public/arch-x86/cpufeatureset.h
 +++ b/xen/include/public/arch-x86/cpufeatureset.h
-@@ -354,6 +354,7 @@ XEN_CPUFEATURE(MCDT_NO,            13*32
+@@ -354,7 +354,7 @@ XEN_CPUFEATURE(MCDT_NO,            13*32
  XEN_CPUFEATURE(UC_LOCK_DIS,        13*32+ 6) /*   UC-lock disable */
  
  /* Intel-defined CPU features, CPUID level 0x00000007:1.ecx, word 14 */
-+XEN_CPUFEATURE(MSR_IMM,            14*32+ 5) /*   RDMSR/WRMSRNS with immediate operand */
+-XEN_CPUFEATURE(MSR_IMM,            14*32+ 5) /*   RDMSR/WRMSRNS with immediate operand */
++XEN_CPUFEATURE(MSR_IMM,            14*32+ 5) /*s  RDMSR/WRMSRNS with immediate operand */
  
  /* Intel-defined CPU features, CPUID level 0x00000007:1.edx, word 15 */
  XEN_CPUFEATURE(AVX_VNNI_INT8,      15*32+ 4) /*A  AVX-VNNI-INT8 Instructions */
---- a/xen/tools/gen-cpuid.py
-+++ b/xen/tools/gen-cpuid.py
-@@ -283,7 +283,7 @@ def crunch_numbers(state):
-         # NO_LMSL indicates the absense of Long Mode Segment Limits, which
-         # have been dropped in hardware.
-         LM: [CX16, PCID, LAHF_LM, PAGE1GB, PKU, NO_LMSL, AMX_TILE, CMPCCXADD,
--             LKGS, MOVRS, MSRLIST, USER_MSR],
-+             LKGS, MOVRS, MSRLIST, USER_MSR, MSR_IMM],
- 
-         # AMD K6-2+ and K6-III processors shipped with 3DNow+, beyond the
-         # standard 3DNow in the earlier K6 processors.
 
 
