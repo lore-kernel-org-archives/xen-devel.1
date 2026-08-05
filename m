@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE2AEC55174
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 11:43:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1383311.1626561 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7039BC55ABA
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 11:51:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1383318.1626570 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wra1f-0000Ub-UH; Wed, 05 Aug 2026 11:43:11 +0000
+	id 1wra95-0002C4-KS; Wed, 05 Aug 2026 11:50:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1383311.1626561; Wed, 05 Aug 2026 11:43:11 +0000
+Received: by outflank-mailman (output) from mailman id 1383318.1626570; Wed, 05 Aug 2026 11:50:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wra1f-0000UU-R4; Wed, 05 Aug 2026 11:43:11 +0000
-Received: by outflank-mailman (input) for mailman id 1383311;
- Wed, 05 Aug 2026 11:43:11 +0000
+	id 1wra95-0002Bx-H9; Wed, 05 Aug 2026 11:50:51 +0000
+Received: by outflank-mailman (input) for mailman id 1383318;
+ Wed, 05 Aug 2026 11:50:50 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wra1e-0000UL-SU
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 11:43:10 +0000
+ (envelope-from <matthias.goergens@gmail.com>) id 1wra94-0002Br-5b
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 11:50:50 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wra1e-006zTo-2D
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 13:43:10 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wra93-00EoM2-Dm
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 13:50:49 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a7321c8-e002-0a2a0a5209dd-0a2a450a9cfe-20
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 13:43:09 +0200
-Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a7321cd-f2d2-0a2a450a0019-d155802ee1a7-3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 13:43:09 +0200
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-49554ebb87dso8042765e9.3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 04:43:09 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4994dfda45asm102990935e9.4.2026.08.05.04.43.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Aug 2026 04:43:08 -0700 (PDT)
+ (envelope-from <matthias.goergens@gmail.com>)
+ id 6a73238f-bab6-0a2a0a5309dd-0a2a4506cdba-20
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 13:50:49 +0200
+Received: from [209.85.216.51] (helo=mail-pj1-f51.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <matthias.goergens@gmail.com>)
+ id 6a732397-195a-0a2a45060019-d155d833dd7d-3
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 13:50:49 +0200
+Received: by mail-pj1-f51.google.com with SMTP id
+ 98e67ed59e1d1-38e42560ebcso782359a91.1
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 04:50:48 -0700 (PDT)
+Received: from spider.bream-herring.ts.net ([103.252.203.158])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3903927db6esm2936674a91.10.2026.08.05.04.50.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 05 Aug 2026 04:50:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,125 +53,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785930189; x=1786534989; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=1MMNEWYOK+POe4jOwV1jz677BcJ7a9OOCBTCoAEQmRw=;
-        b=Nn/DxF1P5Dvt/wYGdJ1rO/LTjj0Ufa5cZrEdokwm1wBltHrRuCjnXWaO5Jvc0KcmGj
-         fT3JoJKmWytKjqNV2KUog+m/7UrfKHHobJfX4/FL33s5vld8LwBMTK0QLqKgcTEZmTq3
-         2cXFjSiKW45IQvmNLW9y1sjgLoSIbA37L7dg+RziZRYJiM2GWMEP+BWW4hRGRg5MIuWf
-         Iz/nj+PjDe/+dsqDwk1Vv+4tKjOR6p8sOIPpfR+6oB7PfGKGAbwZSTrVC1FKJnlOVg7+
-         P89TWlgO7pKsF/Z3edCTE12AiZdT9i45i/afBRre2HQSsJA1r8cIpG2lryuNKBWq8RdP
-         /6YA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785930189; x=1786534989;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1785930647; x=1786535447; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=1MMNEWYOK+POe4jOwV1jz677BcJ7a9OOCBTCoAEQmRw=;
-        b=laRIUlQhhFPgJueAJfUWEQ27MLkOxEtGNye5iR5LYbcnD675KNbTxWbExXOqYqDbNm
-         Fd+yd/AW6Ctc80pFYbWUECtx02xHaHIJHKsYhEcgjt1IEtwYd7vZig4k4EW6duxw+d0b
-         DHQWjyTwd/dW//dT/Co55k+MpvoHp7GeGr4+2qJdfqaSpgxNxzsMBid5WNIdbV+C8m/P
-         CnMZY2JsJb3bMzPHlN5ygob5G5IQmRoqdHYYHsmW6pd9U7pf+Zx5OB4K52QK6YEWC7zJ
-         c0mLAMElh6Zns2AmcEciknriLyon5g9f+GOh57NbFcHT0ccbbR3euq7pyU/vbiR74T1T
-         xKhw==
-X-Forwarded-Encrypted: i=1; AHgh+RqVQ/SB860RTHBVelZBly3YJECEA7OoYdXu5wg1avkgDBSdCKKpc0Ed+ee2zdDIrIhxqv9l/et7kYU=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yy5ainJqPg/Ermt7xs9UCE6xfl7lbSZg30ltRgvggeVDcOwGtk0
-	32imtU9lCSytiGd2hvLNnYIfy+90E3eZjLffnXZMlO4D0G+fOetNCPs88SV8baSY9Q==
-X-Gm-Gg: AR+sD130IJHhl68CpdLXfzuuqkKPPV3V5Uh+pHskal8s9Shc72fp0PXHaotP9I4N/pX
-	C+uVp/4rnpBQJywy/XazPUKy/v8lpIpBchARzBnGXfzM2WR2L3LM3gIGriYY3628UI7yGtDvwHH
-	Z5ffteMZA3R23iHTMctBXraK2ILZ98XF3jLgrYR1ymxaUoSfAUhTus3LdUHof8mhyugiiAA2Oz6
-	ReRyKTeKVq0cOlFWQoZhfaUDD0iOpjV78FoFQhQTeu2Z7igrys3ViZcIbEH/vi5dDscfs6PpDSQ
-	R6Y9hPuxUNy5OH5PpDlYc8OzbfzOCQfGrSAJXWPTQ/CNoTGzwa/EUSgF7X1tBUv9CNXAJPwEhNV
-	UH7FKaadrI/86gVJpysE4fth8jBqo7dw1g9GwSPGtjvBpxRk3H/Pk7tn1vf4BP3vu9Ok7TCJZqv
-	PnTG7TxN46gTHHpCJIe9HG5MIeWOvZKBDwJEJw6i7ZWe4VCLvxVHMmXhLfohvtbBoP88LVyt39c
-	Az74krFgNLAddWrol+Fy1Y/07/ibMYJ0Omw7y7fI1wTQhXfl5Zq
-X-Received: by 2002:a05:600c:8b23:b0:495:4d00:2fc0 with SMTP id 5b1f17b1804b1-4994e7bb12dmr64911675e9.12.1785930188902;
-        Wed, 05 Aug 2026 04:43:08 -0700 (PDT)
-Message-ID: <14dd261f-8d78-4c24-b927-f7f2c01dbdf8@suse.com>
-Date: Wed, 5 Aug 2026 13:43:07 +0200
+        bh=9VOjG1qeqbpED3aclWfN9lJ5XhH5+1/8WZV2to/loYI=;
+        b=KKR1bP08mU+SuGjic3P6//TyuUZDxrUn9Ytstok6joEPW/pUUciN+vt4yFwuI+iLjl
+         ylmmr2O0ljuIsjdR8sKXRW1d2ba9+jvXYVVae/6Z79KlovdgmoLVxfnlq1hhBtf8JyRb
+         ZMwvHouttC4MZumNX8+TQ75Pv6qux3DuVOGeWjskLAagRDkpxKwfxY9X+hjE1Fp1YSW2
+         Lqvf8Zr2ZNPjVtT5gGTyrRNH+mMlp2RCOmeWtHvabn1iozvPOGI38/rhE3iJ+mhocFXC
+         d2g13h2YHAnQPD3j7puwkWdxZXFCEhwP3jcdr5JN/GSwrJ6ZSsEDmVxInHWhcZbEzHxB
+         xc6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785930647; x=1786535447;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=9VOjG1qeqbpED3aclWfN9lJ5XhH5+1/8WZV2to/loYI=;
+        b=bEQV+Li4vWyHNg8LLvlyXJWgpPjbm7OiQiO1iyayIqnk387xZb/r8ZHNbmgZdlC59o
+         G1CwAU+byGGq2pCx7qnf1nx7HQY9209eUZUFzb805JChogkHdzOMihZ5Fr8ZWAnERSjW
+         RGRYNXmJ+L52ZPezZ6HHWOfC3EJw7S8a9bLzoy4YpkmL7F0SCyPIi7ok+dtRForrshHV
+         N2yfrqiXq3joeMA6AiZM+NKgwjun5SsnuHbryeUr6mzgi/uLHsSgJMJpVCewZQdQdyXm
+         +e9dfbb7G1XgwPqizFmF1FeDs50vhNiLPqkPIctmhLDYTjCSUHv6ELRQUgUNOhRPqGmi
+         ZHRQ==
+X-Forwarded-Encrypted: i=1; AHgh+RpDUIyktbVk7NKRGl5K+DM9eBCC9iFPOLwstFIEXmJkfU4zmUe2+tzOkV+dU98jufGZrJfm2NDD2ro=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzHq2z7dKLO3lSXUqKzkagw30mTXYN9BnhQevBB9fGGlWJzKPbf
+	Z0Fh9KISfmgYXr80KhvFS6RihyTXU8WZGFO0UAhm6cimqCFzQsl6XggV
+X-Gm-Gg: AR+sD11k69vJlZItCT4mONKBT+SjNktcDFZVzcjYpaZDNAIgAxLv8Gxfc5SVHPw0xua
+	LvJXBMKErySilrvSBvBAcaGF4SyX08SL4oqS89Q7H0/+WHBap0VF3c2O+Zwlm0wyzU8c1C/D0Qb
+	lLsJJGAw8eoG+LCIPz4p63nHmUBlsswekj8WzOqXvxLAWk6CSKOBSriWDAGIN+IrXIiqsfb3fU6
+	VVYYf81F7wcRQVvOFxnLSglFrRKdfsCOooe8iDB3gxWx53EMz5/mSS1igkovxzV4Ep+S9xkI33Z
+	LCYCxS7oDhikvHfkk5XsqA82XPeJ1vFCKl3KfFhAigpXNaZ8X6k8rAjuNNTK5FKtNYblsmQp8bN
+	UrI5IXaAgfHSBIEPKXj74rC7eBhKX2X8s1v71GEqbiGm+e1inOyA6+WoOPK2PZRbnVLyIck+LOT
+	cTbXatxpquGZkAewV585Xu3iOmk0PGLn/MJZ8jmuCRI+zamDcMpakHR1DjaTINjlx5BrZ04XpWx
+	WQfMkvqafc1turj1bGYq+WDBJtRKzhoWTfZXemBdaj2FCilyceuliAJ831T5eBJ9OUAF0cA4KgW
+	L1NNrmN/bZBQF6PXkE6xHVzm/nWTZuhHgkGHJqvZHBxXPZsmOJzo
+X-Received: by 2002:a17:90b:224e:b0:38e:9ef9:eb97 with SMTP id 98e67ed59e1d1-3903c5c443dmr5103146a91.16.1785930647103;
+        Wed, 05 Aug 2026 04:50:47 -0700 (PDT)
+From: Matthias Goergens <matthias.goergens@gmail.com>
+To: Roger Pau Monne <roger@xenproject.org>
+Cc: Matthias Goergens <matthias.goergens@gmail.com>,
+	Juergen Gross <jgross@suse.com>,
+	Roger Pau Monne <roger.pau@citrix.com>,
+	xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org,
+	Yannick Martin <yannick.martin@okazoo.eu>,
+	Thorsten Leemhuis <regressions@leemhuis.info>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Subject: Re: [PATCH v2] x86/xen: fix init of balloon stats again
+Date: Wed,  5 Aug 2026 19:50:41 +0800
+Message-ID: <20260805115041.409008-1-matthias.goergens@gmail.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260805094008.95778-1-roger@xenproject.org>
+References: <20260730143548.39320-1-roger@xenproject.org> <20260805094008.95778-1-roger@xenproject.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] xen/sched: rename scheduler registration symbols
-To: Furkan Caliskan <frn1furkan10@gmail.com>
-Cc: andrew.cooper3@citrix.com, jgross@suse.com, gwd@xenproject.org,
- dfaggioli@suse.com, stewart.hildebrand@amd.com,
- nathan.studer@dornerworks.com, roger@xenproject.org,
- anthony.perard@vates.tech, julien@xen.org, sstabellini@kernel.org,
- michal.orzel@amd.com, bertrand.marquis@arm.com, Volodymyr_Babchuk@epam.com,
- teddy.astie@vates.tech, tpearson@raptorengineering.com,
- alistair.francis@wdc.com, connojdavis@gmail.com,
- xen-devel@lists.xenproject.org
-References: <20260804055327.22119-1-frn1furkan10@gmail.com>
- <20260804055327.22119-3-frn1furkan10@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260804055327.22119-3-frn1furkan10@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1785930189-4B6D6CFC-18D1B315/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-16d1c6/1785930649-F440377B-5E610B4F/0/0
 X-purgate-type: clean
-X-purgate-size: 1311
+X-purgate-size: 1104
 
-On 04.08.2026 07:53, Furkan Caliskan wrote:
-> REGISTER_SCHEDULER(), schedulers[], NUM_SCHEDULERS, and the
-> per-arch SCHEDULER_ARRAY linker macro now register and hold
-> struct sched_ops instances rather than struct scheduler ones,
-> but still carry names describing the old type.
-> 
-> Rename them to match the current behaviour.
-> No functional change.
-> 
-> Signed-off-by: Furkan Caliskan <frn1furkan10@gmail.com>
-> ---
->  xen/arch/arm/xen.lds.S      |  2 +-
->  xen/arch/ppc/xen.lds.S      |  2 +-
->  xen/arch/riscv/xen.lds.S    |  2 +-
->  xen/arch/x86/xen.lds.S      |  2 +-
->  xen/common/sched/arinc653.c |  2 +-
->  xen/common/sched/core.c     | 33 +++++++++++++++++----------------
->  xen/common/sched/credit.c   |  2 +-
->  xen/common/sched/credit2.c  |  2 +-
->  xen/common/sched/null.c     |  2 +-
->  xen/common/sched/private.h  |  4 ++--
->  xen/common/sched/rt.c       |  2 +-
->  xen/include/xen/xen.lds.h   | 10 +++++-----
->  12 files changed, 33 insertions(+), 32 deletions(-)
+Hi Roger,
 
-I'm not quite sure if all of this is really useful. In many (all?) places
-I think "scheduler" as a term is still quite applicable.
+v2 looks good to me.  Keying append on the source of the initial count
+covers every case I can construct: by inspection, a domU always enters
+the fallback branch (current_pages stays 0), so HVM/PVH domU and the
+dom0 hypercall-failure path share the subtraction branch, while the PV
+start_info path and a successful dom0 XENMEM_current_reservation append.
 
-One (general) nit though: if already you touch malformed lines (overlong
-ones is which prompted this comment), please adjust them to be style-
-conformant.
+I also ran it on a nested-KVM Xen rig (Xen 4.23-unstable, Linux
+11028ab62899e as dom0, static busybox initramfs):
 
-Jan
+- PV dom0, dom0_mem=2048M,max:4096M and 3072M,max:4096M,
+  CONFIG_XEN_UNPOPULATED_ALLOC=n: no WARN, current_kb matches dom0_mem
+  (2 and 3 GiB respectively).  Same with =y.
+- PVH dom0, same two memory configurations, =n: v1 WARNed in
+  balloon_init and returned -ERANGE in exactly these cases; v2
+  completes cleanly and the balloon driver initialises.
+
+(Scope note: PVH dom0 userspace stalls later in boot under nested KVM
+for an unrelated reason, so the PVH evidence is boot-time dmesg and the
+balloon sysfs state.)
+
+Tested-by: Matthias Goergens <matthias.goergens@gmail.com>
+
+Thanks,
+Matthias
 
