@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2907CC55ABA
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 13:55:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1383529.1626805 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39BA8C55ABA
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 14:02:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1383537.1626814 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrc5g-0005yB-UH; Wed, 05 Aug 2026 13:55:28 +0000
+	id 1wrcCB-0007rJ-Jn; Wed, 05 Aug 2026 14:02:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1383529.1626805; Wed, 05 Aug 2026 13:55:28 +0000
+Received: by outflank-mailman (output) from mailman id 1383537.1626814; Wed, 05 Aug 2026 14:02:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrc5g-0005y4-Rc; Wed, 05 Aug 2026 13:55:28 +0000
-Received: by outflank-mailman (input) for mailman id 1383529;
- Wed, 05 Aug 2026 13:55:28 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wrcCB-0007rC-Gh; Wed, 05 Aug 2026 14:02:11 +0000
+Received: by outflank-mailman (input) for mailman id 1383537;
+ Wed, 05 Aug 2026 14:02:10 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <matthias.goergens@gmail.com>) id 1wrc5f-0005xy-TG
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 13:55:28 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wrcCA-0007r3-Ik
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 14:02:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrc5e-00FCef-Va
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 15:55:26 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wrcC9-000nzY-Hq
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 16:02:09 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <matthias.goergens@gmail.com>)
- id 6a7340c7-2eae-0a2a0a5409dd-0a2a4509e32c-18
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 15:55:26 +0200
-Received: from [209.85.160.51] (helo=mail-oa1-f51.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <matthias.goergens@gmail.com>)
- id 6a7340cd-be1a-0a2a45090019-d155a033c9d9-3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 15:55:26 +0200
-Received: by mail-oa1-f51.google.com with SMTP id
- 586e51a60fabf-44cedfaab6bso490880fac.3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 06:55:26 -0700 (PDT)
-Received: from spider.bream-herring.ts.net ([103.252.203.158])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4599e5b7ec1sm2484235fac.12.2026.08.05.06.55.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Aug 2026 06:55:24 -0700 (PDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a734257-bab6-0a2a0a5309dd-0a2a45028bae-40
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 16:02:09 +0200
+Received: from [209.85.208.45] (helo=mail-ed1-f45.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a734261-6ca4-0a2a45020019-d155d02dd484-3
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 16:02:09 +0200
+Received: by mail-ed1-f45.google.com with SMTP id
+ 4fb4d7f45d1cf-6a144c8eea2so1184316a12.0
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 07:02:09 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47ff34da5c4sm888240f8f.5.2026.08.05.07.02.07
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 05 Aug 2026 07:02:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,182 +53,129 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785938125; x=1786542925; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=u4KVtir626gFVd35a54C+CtXHXFocgfKtNH4N3LL1vI=;
-        b=JelmxEaNquBW0vHspdLQnmoyvaRtvZC5kJhF2vKJAh3lmmnqknhgRy0DfydtS+7lpw
-         RLypQpMZ0P/NC21jZtiFS3aal+wq/Cs+9Yx3YRjLPiIDi22t0OGkUcrgKuAKPVews5NM
-         oxkd96wLeMw5ZDDTwLfu6DTH/9dXthe/f8Fwl0F6G+3vJ0h9gp+S+wLAQT1+8ZQTD+xb
-         wX2ckwP4EKVGbimyevz8/Cr8RrPLSy4HyzOIiR85BFGlMGJNjY4r5TMvER9pxArTX0na
-         oo/r3OZpRm5LlO69QZYbJ0r5AmuchBCs/pHikRieSNQjAgK6I5AVwvOxCsVWJRAYrm+d
-         EEYg==
+        d=suse.com; s=google; t=1785938529; x=1786543329; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=UWqyquH56toU5J0j8tnzTyZp4IECkHmUybItXJUtOtc=;
+        b=M9sZVGnhRQC4dmFZQPUgxSbo+54VMdcdVLVEdb3p2z66gG9IhilIneQetjz+UDkru8
+         cZGGVhHTYDczbq9x+BL1ztYurFNewo2i9OM5yy3NTzEMBWb/6Se8EvGZK7AIJPDaUNV1
+         /DcMrf8rsxYVjr1torrfNOjGUvWxqEmPAI8JHaFOcOLvOJGq+ZOY04njgsYjNV1epFp4
+         hGhF4fC+BdTDfCfr8Ch/QVehLJPJuDsKd/19W20/6siWfFYt5kxP2gwpZCrH/htWKe8Y
+         RQleUAaupVKczsvOIVaIsWrGhhp/zR57YoQpSIVAj04X+M4l/7E8oYd9p1NLBtaRJ5rU
+         ONoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785938125; x=1786542925;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1785938529; x=1786543329;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=u4KVtir626gFVd35a54C+CtXHXFocgfKtNH4N3LL1vI=;
-        b=XyREivLMG9eqnoRmjbt5dHNUQXuJb/ixs1KnnvTmbaHTeTrAx+UTuRtXikFsJcULh1
-         4pyqdCCF1Q2AmiZkU7/k3/w42XN0kLhFD/ORd7su8PXGO/W9V/WPFFHoMqt2klB86Wwi
-         U44jUc4QZ9YNtYX6volaiLVYbEY2jEUxJgLsUkYGuZYImULeW+wSdrezay+mbjcgEAx3
-         sSBnfxB3XQSCDhEMrEPf+6mmCwM0nTDSD+ZmHy8iUMhT6SuhsRWXk5gRkA6ewWuU4J5z
-         vm8rfRO7Jjrw40h690Z29i/hgcfPXg0mRoC/If9KgTmbd+UK1tdaAICJhsVgqA/kdIKc
-         0DdA==
-X-Gm-Message-State: AOJu0Yy7XVuu4JkGgf32zIhMoQ2tgwGFrUubpKPSYxCPfKwD8QhWG1kF
-	bzGrugBHUjkcx/sIVqKr8ocY+qcWJbzEKVK0EPOLo+nGjlDz+gDAT/Pabz4oa0Mb
-X-Gm-Gg: AR+sD11NSSRAs/plcZ9++WU4ozN2j0rfHABBHWtzhO3E6+x0CqoZ/vtB6u6So+emLcD
-	Ssl1P/p6bGT9UDvAiQ0/oQgtJl//xZe+Nr9IFZyyoFWIY1DafYRfnfCfL2GyPzY4GM9bzcECMjG
-	CIGBUVoRC0tZqF0dISCbPg2G+8fqn65MzA3ekqYL+dCqFwA6WMMc+YmzHONWXJvJRhHRPSw/Rlg
-	L+Vord9tTYVZsKAQfRoDgE0dsPK6gIWNweordpApAqo+wj4sKYnpUz5dPA16mxjAl2ygXQYsyd3
-	9xj0jd6KuaZW1OSN7k6w9BGILPwxTYhxAyio+cPpwp1lo81kAdyRFUWEjo8L5tH9L+BINPtwBB5
-	vNCCQHbsewo8QW8x5o+VMihHLncfoYh65YQNurrNRA6rXof9ZQQV75GrIyakthFFUn6g5fP1/9z
-	AIBULk0fczEBmjgGAYtd0kj+8U1cFyLJW5UfPmnhlfEbILomznxMZ0um2j9CJmRwVUM5EY/vM10
-	NiSSd/keUfDxYJ4d19yWOt/zCqF8Dx3i9SF1lq9wAF5q0dY4UDUWDp51ktknfZJ5lVhlbutgOXK
-	1GCxfuAwiRLaIBybYjkbiTUIUwWPPJDaCiUJ0dJbs6U/KlecdWuf42LqgoG15YqF
-X-Received: by 2002:a05:6871:7996:b0:448:aaaa:6b93 with SMTP id 586e51a60fabf-4599f1246bamr3533288fac.17.1785938125108;
-        Wed, 05 Aug 2026 06:55:25 -0700 (PDT)
-From: Matthias Goergens <matthias.goergens@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: anthony.perard@vates.tech,
-	Matthias Goergens <matthias.goergens@gmail.com>
-Subject: [PATCH] tools/xentop: reject invalid --delay and --iterations arguments
-Date: Wed,  5 Aug 2026 21:55:21 +0800
-Message-ID: <20260805135521.790750-1-matthias.goergens@gmail.com>
-X-Mailer: git-send-email 2.55.0
+        bh=UWqyquH56toU5J0j8tnzTyZp4IECkHmUybItXJUtOtc=;
+        b=tB2TAPtNO5htYWdXpisGdkzrsA4LDQCs6WvVuzvzx5SP8ibYnAkv1kgPMGfPz46dKF
+         Hs028Irk5bfMNV+iTGWyQwWIQgFiF876vjMVvVPAZse3SIDs86Mr7a6mFEg16CTaSFlQ
+         slXnA4k4oB9Y+vRVggzWysDONisLo6RklUer3GW+qjeiHFb4aioCICA8DbtQbI4lxPz7
+         J9CvmQm9nN79xSv7IMd/1cMZCoGDHFd0NvHCV5SF9aXYj+0jd6m1kANu9t+dK5srZjM/
+         2282jzNAPiRQ+G8Qkj061tpEC7TONEwz43koBT+fevGGDKVS8wOLeIXgHq00+MAshIf9
+         VHRw==
+X-Forwarded-Encrypted: i=1; AHgh+RrXSWL2uTgGbQTcEv4MYASRtCsbVeduYE6m/gN37cnmrWl75LGCDjiBA5c7cHHCEayVkuD/N5uXR/M=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzeSUqxxkth2S/k2oOKpe/y1H3NAl3DmOpMg0/8ZlWBNKJH+jnD
+	y6aHQMcsW4faF8Fxj7mNVVDHPzGt55ljXlw3Z/Lqfd5J1dL1Y40+/+jmqGO2HbboMg==
+X-Gm-Gg: AR+sD138xgcpd5XqEmssjJfHf0nMMBh8oiuOtVFI6hOMCPKWx0kwFQVUfGw5Sal3Ip1
+	0708zlL4dLAEAxunOCpFy/I9zP8rSbdRBzqiv0uDLeIwSgmGXl1BuawNOmyjTtqXfuXFG/X/9KQ
+	GAH7eiQW2gC2dmKDY9ZFE16RWrwf6Boju7YW+q75CQdox4u7Ht1BKHucnJsksbCsX4vEEzB41T7
+	ci2T9ZVhbKFbpzxh90ermlza0KXTuknM/6j2S12nHNvJPf5U2JL80q2SPr7MA6eEx7RjRWPcSqI
+	fnRf3wa8wmsb2PHf4NAtPYkHSLx/pPtElEmb0sRWxTleDZ0N+Len/gvq3sgw6u17djdkKWLuz+8
+	M3VW3N8i2C9d9ikEzpGfHEWa8otan+F34nRVK1brU2M+lES/OtiRANRUJouaMPOWmHM+h1FxAeT
+	dUwk+1Wn4iz2nn7/g7EC4iCF29q2yKcVX9wQNo2F/Cb/Kb/gZVqwStffPh/UlfhcYijOYL7hTvS
+	UVYIoQ4KkOXJM1BMKKgzoX1esnjV8pnavIK1tJAZsPJv628XoEYBsGepiAWI7g=
+X-Received: by 2002:a17:907:961a:b0:c15:b67b:523e with SMTP id a640c23a62f3a-c2039e67177mr309632566b.19.1785938527924;
+        Wed, 05 Aug 2026 07:02:07 -0700 (PDT)
+Message-ID: <13568d23-b742-4a38-89d1-d49b761fd88c@suse.com>
+Date: Wed, 5 Aug 2026 16:02:06 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1785938126-BE4DB034-15ED710E/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/5] x86/nmi: Check MSR_MISC_ENABLE for all Intel
+ platforms
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20260805124525.105457-1-andrew.cooper3@citrix.com>
+ <20260805124525.105457-5-andrew.cooper3@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260805124525.105457-5-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-720697/1785938529-305C52AC-BFDF0866/0/0
 X-purgate-type: clean
-X-purgate-size: 4483
+X-purgate-size: 1296
 
-xentop parses -d/--delay and -i/--iterations with atoi(), so invalid
-input is silently accepted with surprising results: a fractional delay
-such as "-d 2.5" is truncated to 2; "-d abc" parses as 0, which in
-batch mode turns the output loop into a busy loop; "-d -1" wraps to an
-effective delay of about 136 years; and "-i 0" (or any unparsable
-iterations count) decrements an unsigned counter from zero, running
-for about 2^32 iterations.  atoi() also has undefined behaviour on
-out-of-range input.
+On 05.08.2026 14:45, Andrew Cooper wrote:
+> @@ -347,6 +343,14 @@ void setup_apic_nmi_watchdog(void)
+>          break;
+>  
+>      case X86_VENDOR_INTEL:
+> +        misc = rdmsr(MSR_IA32_MISC_ENABLE);
+> +
+> +        if ( !(misc & MSR_IA32_MISC_ENABLE_PERF_AVAIL) )
+> +        {
+> +            printk(XENLOG_WARNING "Intel Perfmon unavailable\n");
+> +            goto disable;
+> +        }
 
-Parse both options with strtoull() instead, and reject anything that
-is not a plain decimal integer in range: a sign, a fractional part,
-trailing junk or overflow now produce an error and exit rather than a
-silently wrong value.
+Please can we avoid "goto" when that's easily possible? You can use
+"break" here instead, and ...
 
-Compatibility considerations: "--delay 0" remains accepted, since
-updating as fast as possible is a plausible deliberate choice and
-works today; "--iterations 0" is rejected, since running the loop
-2^32 times cannot be what the caller meant.  The interactive 'D'
-prompt already validates its input and is unchanged.  The only
-previously useful invocation this breaks is a fractional delay, which
-now fails loudly instead of silently rounding down - which is the
-point of the change.
+>          switch ( boot_cpu_data.family )
+>          {
+>          case 6:
+> @@ -355,7 +359,7 @@ void setup_apic_nmi_watchdog(void)
+>                                : CORE_EVENT_CPU_CLOCKS_NOT_HALTED);
+>              break;
+>          case 15:
+> -            setup_p4_watchdog();
+> +            setup_p4_watchdog(misc);
+>              break;
+>          }
+>          break;
+> @@ -363,6 +367,7 @@ void setup_apic_nmi_watchdog(void)
+>  
+>      if ( nmi_perfctr_msr == 0 )
+>      {
+> +    disable:
+>          printk(XENLOG_WARNING "Failed to configure NMI watchdog\n");
+>          nmi_watchdog = NMI_NONE;
+>          return;
 
-A patch documenting the --delay truncation was posted in 2010 but
-never applied:
-Link: https://lore.kernel.org/xen-devel/01ea26d2420e3562eb30.1292604768@chilopoda.uk.xensource.com/
+... we'll still end up here, as nmi_perfctr_msr won't be written.
+Preferably with that change:
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-Signed-off-by: Matthias Goergens <matthias.goergens@gmail.com>
----
-Tested by compiling with -Wall -Wextra (no new warnings) and by running
-the parse helper, extracted verbatim from the patched file, against a
-19-case input matrix covering both the accepted and the rejected inputs
-listed above.  Not run against a live Xen host: the change is confined
-to command line parsing, ahead of any hypervisor interaction.
-
-Happy to add a CHANGELOG.md entry under "Changed" if that is wanted for
-a tools CLI change of this size.
-
- docs/man/xentop.1.pod |  5 +++--
- tools/xentop/xentop.c | 27 +++++++++++++++++++++++++--
- 2 files changed, 28 insertions(+), 4 deletions(-)
-
-diff --git a/docs/man/xentop.1.pod b/docs/man/xentop.1.pod
-index db64ceb..13f3f13 100644
---- a/docs/man/xentop.1.pod
-+++ b/docs/man/xentop.1.pod
-@@ -27,7 +27,7 @@ output version information and exit
- 
- =item B<-d>, B<--delay>=I<SECONDS>
- 
--seconds between updates (default 3)
-+seconds between updates (default 3); must be a non-negative integer
- 
- =item B<-n>, B<--networks>
- 
-@@ -55,7 +55,8 @@ output data in batch mode (to stdout)
- 
- =item B<-i>, B<--iterations>=I<ITERATIONS>
- 
--maximum number of iterations xentop should produce before ending
-+maximum number of iterations xentop should produce before ending; must
-+be a positive integer
- 
- =item B<-z>, B<--dom0-first>
- 
-diff --git a/tools/xentop/xentop.c b/tools/xentop/xentop.c
-index addb1c7..c7fb4ca 100644
---- a/tools/xentop/xentop.c
-+++ b/tools/xentop/xentop.c
-@@ -23,6 +23,7 @@
- 
- #include <ctype.h>
- #include <errno.h>
-+#include <limits.h>
- #include <math.h>
- #include <stdio.h>
- #include <stdlib.h>
-@@ -1297,6 +1298,28 @@ static void signal_exit_handler(int sig)
- 	signal_exit = 1;
- }
- 
-+/* Parse a numeric command line argument as a plain decimal integer no
-+ * smaller than min_val.  Anything else - a sign, a fractional part,
-+ * trailing junk, overflow - is fatal, rather than being silently
-+ * accepted as a wrong value the way atoi() would.
-+ */
-+static unsigned int parse_uint_arg(const char *name, const char *arg,
-+				   unsigned int min_val)
-+{
-+	unsigned long long val;
-+	char *end;
-+
-+	errno = 0;
-+	if (isdigit((unsigned char)arg[0])) {
-+		val = strtoull(arg, &end, 10);
-+		if (!errno && !*end && val >= min_val && val <= UINT_MAX)
-+			return val;
-+	}
-+	fprintf(stderr, "xentop: invalid %s argument '%s': expected a %s decimal integer\n",
-+		name, arg, min_val ? "positive" : "non-negative");
-+	exit(1);
-+}
-+
- int main(int argc, char **argv)
- {
- 	int opt, optind = 0;
-@@ -1347,7 +1370,7 @@ int main(int argc, char **argv)
- 			show_vcpus = 1;
- 			break;
- 		case 'd':
--			delay = atoi(optarg);
-+			delay = parse_uint_arg("--delay", optarg, 0);
- 			break;
- 		case 'b':
- 			batch = 1;
-@@ -1356,7 +1379,7 @@ int main(int argc, char **argv)
- 			show_pcpus = 1;
- 			break;
- 		case 'i':
--			iterations = atoi(optarg);
-+			iterations = parse_uint_arg("--iterations", optarg, 1);
- 			loop = 0;
- 			break;
- 		case 'f':
--- 
-2.55.0
-
+Jan
 
