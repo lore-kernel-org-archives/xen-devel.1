@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C921CC5AC76
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 14:57:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1383606.1626922 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DEB4C55ABA
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 14:57:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1383615.1626957 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrd3K-0002HS-DL; Wed, 05 Aug 2026 14:57:06 +0000
+	id 1wrd3S-0003b0-Ty; Wed, 05 Aug 2026 14:57:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1383606.1626922; Wed, 05 Aug 2026 14:57:06 +0000
+Received: by outflank-mailman (output) from mailman id 1383615.1626957; Wed, 05 Aug 2026 14:57:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrd3K-0002HD-8I; Wed, 05 Aug 2026 14:57:06 +0000
-Received: by outflank-mailman (input) for mailman id 1383606;
- Wed, 05 Aug 2026 14:57:05 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wrd3S-0003aQ-Pd; Wed, 05 Aug 2026 14:57:14 +0000
+Received: by outflank-mailman (input) for mailman id 1383615;
+ Wed, 05 Aug 2026 14:57:13 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marmarek@invisiblethingslab.com>) id 1wrd3J-00020K-4a
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 14:57:05 +0000
+ (envelope-from <marmarek@invisiblethingslab.com>) id 1wrd3R-0003Du-BJ
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 14:57:13 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrd3I-00Cdrb-HA
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 16:57:04 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wrd3Q-000x73-Ns
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 16:57:12 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marmarek@invisiblethingslab.com>)
- id 6a734f34-5cb7-0a2a0a5109dd-0a2a45098958-38
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 16:57:04 +0200
+ id 6a734f3c-5cb7-0a2a0a5109dd-0a2a45039e98-32
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 16:57:12 +0200
 Received: from [202.12.124.152] (helo=fhigh-b1-smtp.messagingengine.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marmarek@invisiblethingslab.com>)
- id 6a734f3f-be1a-0a2a45090019-ca0c7c98c8ef-3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 16:57:04 +0200
-Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
- by mailfhigh.stl.internal (Postfix) with ESMTP id 1BECE7A008E;
- Wed,  5 Aug 2026 10:57:03 -0400 (EDT)
+ id 6a734f47-fae8-0a2a45030019-ca0c7c98d795-3
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 16:57:12 +0200
+Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
+ by mailfhigh.stl.internal (Postfix) with ESMTP id 51A607A0036;
+ Wed,  5 Aug 2026 10:57:11 -0400 (EDT)
 Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-03.internal (MEProxy); Wed, 05 Aug 2026 10:57:03 -0400
+ by phl-compute-01.internal (MEProxy); Wed, 05 Aug 2026 10:57:11 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 5 Aug 2026 10:57:01 -0400 (EDT)
+ 5 Aug 2026 10:57:10 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,45 +57,45 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
 	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm2; t=1785941822; x=1786028222; bh=D4TMGAPIXT
-	KE8KLggURHTOvWsEJPhlI6eLx2c1m5BIU=; b=ohubngivkCKQVuc545HNXHpP6/
-	+s7e7NmX1I7isyjFwEj/Q3mdwiG95YuM6Y10dWhnVoP+67rxgOK6rrkEPP1xM4r7
-	GtVuLWk5fhet6HReTwVjb/6/i4eI0Y5ymga4qWHMYNEq2PcILh9r3/hREX6IZsM4
-	owpyy38F3LN2dIHxGxN6/55PXZbSAqBjrAiHmohqYhTY0oZECAgA7iDkyNZEzugZ
-	nTF48K3cY/OCs6GgRtGR7avVu18fOn9cpJNKg5lnijXRxM7NroXYCthtFsxkDsWR
-	Ja53xMXfJIbRi4z8UpzUP1qlb/SvqwdXZ8DKx/VEWFoqAg2AmUsejltqnEwg==
+	:subject:to:to; s=fm2; t=1785941831; x=1786028231; bh=AtMWHKAIdG
+	HRUVSdbCNClD81EvWMYyNJcMteHXAqTCA=; b=RlYV4alhVoFuXVE3Pd+sGcU+Fb
+	SBq1fqrKR0MkQO7u2XaYtffJyWv3jnM2u9CyqP02qe9Pz9V4KsYP3U+mxk7Y/Q/F
+	S0vqkWSXnYtaLtDJbjaSltW5mlQ/rXWlVbINAwnilVM1TGHhu56yx3oGCpF4h1n1
+	m5LWkVwzc+eC0D3jtayoog5RJOEwE6B7jP6iqw0+3QcYYUYBTLKy7kWeoUt7Bz8i
+	hwxDK87NQjBHjpsLUQatZBbMbHEIiSnIl/nVDLextekJj1Csb21yZnAsxRmTzKy6
+	FpQJBNFE9ByE+S5xEAhjqfGBx2xhzUXQdv1rycB8KOBKbYo0OIgNLUQ0KXsQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
 	:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1785941822; x=
-	1786028222; bh=D4TMGAPIXTKE8KLggURHTOvWsEJPhlI6eLx2c1m5BIU=; b=j
-	0avhJJQ/IsdWWu4NSI5uVM1bY2HUiFuofzythMYdIKrKimDXtDO2JYvaxKv8KM0Y
-	XpJK5PSyxLiTCNXdGuR5E9Pu0c3RFT+Nwc69kyN2Z8tZ8NGEALwnPttL4rjKLZRG
-	gey0vQr5k6Zfa48Ku+juoueSQvY1fVOiolezkGnzXJQjlCP3WeK2l2syBCJdGdh7
-	RXveyDn50m3JDeOHOyNZsZONNmQTfLdHdAWZa7XEnP/zVlWnx/0iZ07dbUPZBWjj
-	mp6b9O74gXGmDskT2hS3nAiMQPYPFqqM3mytToTuO/Ej5q7y8/luDlUnf3sx0BaN
-	qzWrJL/yTN+em/aqcU5Sw==
-X-ME-Sender: <xms:Pk9zaqa7Cwfw8o6U4qNx-k2xs7GusK84OZL5aPIe7NW0LbqLU5JqSw>
-    <xme:Pk9zakTwypYBoTu1Fw7Gu4EopRrJkXmV4UJrTJ4U-1OEQ0YSItGcEW0d8bfFTuAvV
-    q8bwrg_agGO6n0sWQaQdxPG8dLc275OJEX-6_7bvFxKxnq1sUU>
-X-ME-Received: <xmr:Pk9zatT3B6JGKmWgoQIh1cnA494i1iIB6QJ5l50r6SeZHiru-Z45BEOCIzB0iAhIRsJaC5wPaDK6lrd_lP8zEo0wp4doX4desJ17zKBaAUk>
-X-ME-Proxy-Cause: dmFkZTFg5HWH/RDqdPpR88i/6M1gtPWzLlXDm7puE44YW+OQRkCu0ypR/9JOPRDl1te3/p
-    2ugUGdWUlQb8kocRthjZN7vvr6IWWNFcyKYmBFPe+BzKMnxGjKoBahL5VCHV3UAfs0EHAg
-    nj3sYoDmr7GyZbFXABfsR3rbdQAxCafinJpMUI+6VqMVy7guc3dUP2M2goerpX03cWT8GB
-    3tIsn5JiFR3GjgHhPz/r2yz7V7NDg477JFOnzakkhw9w+L8/GP2qYPPRO39CHuug0G7Ubo
-    N42GUSC5i0XOiRx9MufeivVdVi29Q812Jc2LJ90UxPjSbThjlODlkTjM/Zl+lF8/E+2ajc
-    I8e4yupEnk/I7m2P4LYPmY0lkBVs/oS6MiW8d+RZvksuW60ckAKttxjQebuSBcn7dNi7zi
-    yYUrIntPstk/r96xUMuBjLaSpqpyqEEs81sxL765Hj2yE87S2VasrSZ305//Rm33ZjBu67
-    CjL5KLoeHME7mHkfB6nCh3KfETG7004vHb5/bFGf+uL1iTatYcZPuaGwv+/tMFetoYKKK5
-    u09P80XM9rJeJmjAhV0kZXFfAAUi4DQapWwdZTL0RTsTzTip+6WBQP0TEyqW7eK8iLrrIy
-    hGRZ7ERl7bZVEesG8E+pvrbEmezSJaujXl8NHBlD6uQQf4yKBXgoopxhw11g
-X-ME-Proxy: <xmx:Pk9zaoQnHvt_eYTdxFZMRJ0TYANlTS1a-HDdTED2j8VZAXTpx7Z5qA>
-    <xmx:Pk9zai4oHR5j3plZ_VUh7F0rG6B-s0CsioVssMqhK7Tl6fa5JY-Xhw>
-    <xmx:Pk9zak3J5_aeqAnRLkH8phD5T98NUedISDwDLOCC9D-Rk4JoYXiHZQ>
-    <xmx:Pk9zatArwQ6gybkAw5rRM6XdqvkPkCEAfgBlyoOhMIjxS29-4gCzSA>
-    <xmx:Pk9zakEzxyWM0tTBK5JLs8tPCtY5wklfZjKg8mIbiw_GaxW5Erat_rGw>
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1785941831; x=
+	1786028231; bh=AtMWHKAIdGHRUVSdbCNClD81EvWMYyNJcMteHXAqTCA=; b=e
+	IzWCS7WjIFceauE0YnCvNqNc9jT4CcUExCcULOwUEKXMzouNxiwEeqHmSI+SjqGb
+	3DZ6PEFMTuz+ynNv2KfZaeFbC4aIeu+1ORpTXHTNAd6+axQBYXKiCdE3RVIYv3cn
+	pqbzaahjplYX3rE4PZ6nMVW+ag/qI8AYa34YXvSHvVmQDNK6lKeEnPeUPMQQ95O4
+	1Jf+FTOQ46J/TiXz6J8CKlr0RWk+H1XWLMlsbnFfcfYx2PfFHuyVOSNy92Z4RNzA
+	F7gf8abr9b99hhrnP1zK+6PVc/t6nWENxI2pDpgnFYcSCTnhHhbAVESS5FkX+IS1
+	0Nr3OCeg2bOlhPok2f3cA==
+X-ME-Sender: <xms:R09zarE5_mWbsl2I1p_GMdt5Bg82F04TujgOxVxevX-bCn2bmpBZ2g>
+    <xme:R09zavN8bJ3opn-cab1eW9RFxc2ir1R9ICxtarfozqdZLXRbVDaHvJH5CCwzuo-q5
+    j1aboBpMRRqp0te-m3SF5YYyhy2ARrb8-V5ZJCT6s1rhvWCWw>
+X-ME-Received: <xmr:R09zalcYigwZahcfC7DKm4QcyC8Mxy2ARtVABd9P5NpFUxZ58dKlpyNIaC872Efb6VBzKje3MGlA1ktsNKnu7TBzYmlm8tGUSa6I9PBpTX8>
+X-ME-Proxy-Cause: dmFkZTE0EKbTjmPNLZDegeYJdEvPSKSCO9s22HLtuTKYZ7HLLcaPOQZvc2gjx+GpVjK1KQ
+    jrioOGZanX06/wIhePYLadU4DobC5qkSj8L7MnsO15xCkd0z3P7cB6csRPqHGlKuTaZb5h
+    bM8drPp/PFHwerIiCnTVd0Vgi6099jSCpXjCLjIJdn4zWBCVR6N9uvmLz0rWPjgF7BHWOt
+    vZlPGCN6uONSy4YX7Yy4Wn3rLisBe4bDC6tE4xTe6rnrMqnP5QjyYvMtgRyYANegauBYoF
+    kML4/02DYXlfbad4N9Brad2EsuDCdJwSnqfO7HDbcHdezGZGbNsN6UDmvsoEPXJBAd6vtz
+    mYRIaVy7tNuBhjd4t1GM2v0qfBu6bmE9e3SxBcsv1S69ZJNVNK3r996hIL74kmOFL1NLfl
+    PCG5FfvZl+akhjVy9VIK/zpS9sx5iBoeuuLSChYzkM0EQ86VRSCvxAVH3bd7xx7kuWT3FL
+    XMSR6dNqO5XE/rxJb5VTp1/YazROxPPhiz84dADYQNrBJqLiRJZOcH3CGp0RbDzehJJS4+
+    9AYchQUb0k4D/fCOLoc7CuO/GaQvUJaENnDARbzhsKip6aEAhLy6S7TZgjG7Lxcs8h6/xo
+    /rRKQDTO7MIB3/7nveTu1R+YHrluFxy5YhOQLKVGMwYHgTnUAS7Erdz3rCdw
+X-ME-Proxy: <xmx:R09zakuxf9AiwdL2QNLy37FY4SFuibBvS46taG0ff65Abae0zgd0VA>
+    <xmx:R09zaumb4S_T7WoXlHVxRWaOZ6rWjTQWhIVMEIEBnuoNj9o4Vv78ug>
+    <xmx:R09zauwR6-HC9MWUrrIi8EErtyZlAK7mF5amd2Gopd2rTq_c70Kd9Q>
+    <xmx:R09zaoPx-eZS_ZgIowFZokBXzrzlB00Q7wTDH9cXOp8HjUmNyU611Q>
+    <xmx:R09zagA6yR7zotDLfG17cRVfQOczG4J5X16zTgv7pSnYklGF94F4dXtf>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -103,122 +103,126 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v5 07/13] CI: add a smoke test for UKI xen.efi
-Date: Wed,  5 Aug 2026 16:55:35 +0200
-Message-ID: <bdb2ef7b0a351687f6c160e7e244e0d757726b8b.1785941707.git-series.marmarek@invisiblethingslab.com>
+Subject: [PATCH v5 12/13] CI: Add simple domU suspend test
+Date: Wed,  5 Aug 2026 16:55:40 +0200
+Message-ID: <dc30d924d8c2fa51275b660943f05da0ad541ee3.1785941707.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <cover.099eede8b72ebc9acb07545472d72abceed1c8b7.1785941707.git-series.marmarek@invisiblethingslab.com>
 References: <cover.099eede8b72ebc9acb07545472d72abceed1c8b7.1785941707.git-series.marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1785941824-BE8D9034-63D63DDD/0/0
+X-purgate-ID: tlsNG-33051d/1785941832-762FD4E9-E6B7DA1C/0/0
 X-purgate-type: clean
-X-purgate-size: 3267
+X-purgate-size: 2936
 
-Combine xen.efi test with alpine smoke test. This one should not use
-XTF, as having initrd is an important part of the test.
-The command to build UKI is constructed based on the documentation.
+Regression test for https://lore.kernel.org/xen-devel/ajUm2SQtMD6Y-K9S@mail-itl/
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 ---
 New in v5
-
-The documentation says to put extra sections after .pad section, but I
-don't see it anymore...
 ---
- automation/gitlab-ci/test.yaml                  |  8 ++-
- automation/scripts/qemu-smoke-x86-64-efi-uki.sh | 62 ++++++++++++++++++-
- 2 files changed, 70 insertions(+)
- create mode 100755 automation/scripts/qemu-smoke-x86-64-efi-uki.sh
+ automation/gitlab-ci/test.yaml                        |  8 +-
+ automation/scripts/qemu-alpine-domU-suspend-x86_64.sh | 71 ++++++++++++-
+ 2 files changed, 79 insertions(+)
+ create mode 100755 automation/scripts/qemu-alpine-domU-suspend-x86_64.sh
 
 diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
-index 184cf9b47d46..8e2db8c33528 100644
+index 1359d70ff2b4..b7cdb3a3eb09 100644
 --- a/automation/gitlab-ci/test.yaml
 +++ b/automation/gitlab-ci/test.yaml
-@@ -804,6 +804,14 @@ qemu-xtf-argo-x86_64-gcc-debug:
-   needs:
-     - alpine-3.24-x86_64-gcc-debug
+@@ -752,6 +752,14 @@ qemu-alpine-driverdomains-x86_64-gcc:
+     - *x86_64-test-needs
+     - alpine-3.24-x86_64-gcc
  
-+qemu-smoke-x86-64-gcc-efi-uki:
-+  extends: .qemu-smoke-x86_64
++qemu-alpine-domU-suspend-x86_64-gcc:
++  extends: .qemu-x86_64
 +  script:
-+    - ./automation/scripts/qemu-smoke-x86-64-efi-uki.sh pv 2>&1 | tee ${LOGFILE}
++    - ./automation/scripts/qemu-alpine-domU-suspend-x86_64.sh 2>&1 | tee ${LOGFILE}
 +  needs:
 +    - *x86_64-test-needs
-+    - alpine-3.24-x86_64-gcc-debug
++    - alpine-3.24-x86_64-gcc
 +
- qemu-smoke-riscv64-gcc:
-   extends: .qemu-riscv64
+ qemu-debian-13-driverdomains-x86_64-gcc:
+   extends: .qemu-x86_64
    script:
-diff --git a/automation/scripts/qemu-smoke-x86-64-efi-uki.sh b/automation/scripts/qemu-smoke-x86-64-efi-uki.sh
+diff --git a/automation/scripts/qemu-alpine-domU-suspend-x86_64.sh b/automation/scripts/qemu-alpine-domU-suspend-x86_64.sh
 new file mode 100755
-index 000000000000..8275dd1a81b3
+index 000000000000..f46a40b67306
 --- /dev/null
-+++ b/automation/scripts/qemu-smoke-x86-64-efi-uki.sh
-@@ -0,0 +1,62 @@
++++ b/automation/scripts/qemu-alpine-domU-suspend-x86_64.sh
+@@ -0,0 +1,71 @@
 +#!/bin/bash
 +
 +set -ex -o pipefail
 +
 +. "$(dirname "$0")"/qemu-alpine-lib.sh
 +
++dom0_test="
++
++$dom0_setup_network
++
++set -ex
++
++tail -F /var/log/xen/console/guest-domU.log 2>/dev/null | sed -e \"s/^/(domU) /\" &
++xl -vvv create /root/domU.cfg
++sleep 10
++ping -c 3 192.168.0.2
++xl -vvv suspend domU
++sleep 2
++xl -vvv resume domU
++sleep 2
++xl list domU
++alive_test=\$(nc 192.168.0.2 8888 </dev/null)
++test \"\$alive_test\" = \"Still alive\"
++# try again
++xl -vvv suspend domU
++sleep 2
++xl -vvv resume domU
++sleep 2
++xl list domU
++alive_test=\$(nc 192.168.0.2 8888 </dev/null)
++test \"\$alive_test\" = \"Still alive\"
++echo Test result: \$?
++"
++
++domU_test="$domU_setup_network
++
++nc -ll -p 8888 -e sh -c 'echo Still alive'
++"
++domU_config_add="vif=[ 'bridge=xenbr0' ]"
++
 +cd binaries
 +build_domU
 +build_dom0
++cd ..
 +
-+# variant should be either pv or pvh
-+variant=$1
++cat >> binaries/pxelinux.0 << EOF
++#!ipxe
 +
-+case $variant in
-+    pvh) extra="dom0-iommu=none dom0=pvh" ;;
-+    pv)  extra= ;;
-+    *)   echo "Unknown test variant!" >&2; exit 2;;
-+esac
-+
-+mkdir -p boot-esp/EFI/BOOT
-+
-+cat > xen.cfg <<EOF
-+[global]
-+default=test
-+
-+[test]
-+options=loglvl=all console=com1 noreboot console_timestamps=boot $extra
-+kernel=kernel console=hvc0
++kernel xen console=com1 console_timestamps=boot dom0_mem=1024M
++module bzImage console=hvc0 oops=panic
++module dom0-rootfs.cpio.gz
++boot
 +EOF
 +
-+vma=$(objdump -h xen.efi \
-+    | perl -ane 'if (/\..*/) { $vma=hex($F[2]) + hex($F[3]) }
-+    END { printf "0x%016x\n", ($vma + 0xfff) & ~0xfff }')
-+
-+objcopy \
-+    --add-section .config=xen.cfg \
-+    --change-section-vma .config=$vma \
-+    --add-section .kernel=bzImage \
-+    --change-section-vma .kernel=$(( $vma + 0x100000 )) \
-+    --add-section .ramdisk=dom0-rootfs.cpio.gz \
-+    --change-section-vma .ramdisk=$(( $vma + 0x2000000 )) \
-+    xen.efi \
-+    boot-esp/EFI/BOOT/BOOTX64.EFI
-+
-+cp /usr/share/OVMF/OVMF_CODE_4M.fd OVMF_CODE.fd
-+cp /usr/share/OVMF/OVMF_VARS_4M.fd OVMF_VARS.fd
-+
++# Run the test
 +rm -f smoke.serial
-+export TEST_CMD="qemu-system-x86_64 -nographic -M q35,kernel-irqchip=split \
-+        -drive if=pflash,format=raw,readonly=on,file=OVMF_CODE.fd \
-+        -drive if=pflash,format=raw,file=OVMF_VARS.fd \
-+        -device virtio-net-pci,netdev=n0 \
-+        -netdev user,id=n0 \
-+        -drive file=fat:rw:boot-esp,media=disk,index=0,format=raw \
-+        -m 1024 -monitor none -serial stdio"
++export TEST_CMD="qemu-system-x86_64 \
++    -cpu qemu64,+svm \
++    -m 2G -smp 2 \
++    -monitor none -serial stdio \
++    -nographic \
++    -device virtio-net-pci,netdev=n0 \
++    -netdev user,id=n0,tftp=binaries,bootfile=/pxelinux.0"
 +
 +export TEST_LOG="smoke.serial"
 +export BOOT_MSG="Latest ChangeSet: "
-+export PASSED="Welcome to Alpine"
++export LOG_MSG="Welcome to Alpine"
++export PASSED="Test result: 0"
++export TEST_TIMEOUT="180"
 +
-+../automation/scripts/console.exp | sed 's/\r\+$//'
-+
++./automation/scripts/console.exp |& sed 's/\r\+$//'
 -- 
 git-series 0.9.1
 
