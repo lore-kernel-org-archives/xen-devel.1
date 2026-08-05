@@ -4,44 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0686FC55822
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 07:06:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1382798.1626153 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDB28C55822
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 07:06:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1382805.1626159 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrVhl-00050V-8K; Wed, 05 Aug 2026 07:06:21 +0000
+	id 1wrVhl-00053m-Jy; Wed, 05 Aug 2026 07:06:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1382798.1626153; Wed, 05 Aug 2026 07:06:21 +0000
+Received: by outflank-mailman (output) from mailman id 1382805.1626159; Wed, 05 Aug 2026 07:06:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrVhl-00050O-5Q; Wed, 05 Aug 2026 07:06:21 +0000
-Received: by outflank-mailman (input) for mailman id 1382798;
- Wed, 05 Aug 2026 04:46:18 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wrVhl-000528-DN; Wed, 05 Aug 2026 07:06:21 +0000
+Received: by outflank-mailman (input) for mailman id 1382805;
+ Wed, 05 Aug 2026 05:27:36 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <matthias.goergens@gmail.com>) id 1wrTWE-0006vT-0K
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 04:46:18 +0000
+ (envelope-from <neal.frager@amd.com>) id 1wrUAB-0005Uw-Tc
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 05:27:36 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrTWB-00H8EK-T5
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 06:46:15 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wrUAA-008Ny1-CD
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 07:27:34 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <matthias.goergens@gmail.com>)
- id 6a72c000-bab6-0a2a0a5309dd-0a2a450ca66e-26
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 06:46:15 +0200
-Received: from [209.85.210.181] (helo=mail-pf1-f181.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <matthias.goergens@gmail.com>)
- id 6a72c016-f479-0a2a450c0019-d155d2b5d47c-3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 06:46:15 +0200
-Received: by mail-pf1-f181.google.com with SMTP id
- d2e1a72fcca58-84e3007a2b7so519790b3a.0
- for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 21:46:15 -0700 (PDT)
-Received: from spider.bream-herring.ts.net ([103.252.203.158])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-cbe707e577bsm617891a12.9.2026.08.04.21.46.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Aug 2026 21:46:13 -0700 (PDT)
+ (envelope-from <neal.frager@amd.com>)
+ id 6a72c9c0-5cb7-0a2a0a5109dd-0a2a4503deda-14
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 07:27:33 +0200
+Received: from [52.101.56.16]
+ (helo=BN1PR04CU002.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <neal.frager@amd.com>)
+ id 6a72c9c4-fae8-0a2a45030019-346538106acf-3
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 07:27:33 +0200
+Received: from MW4PR03CA0089.namprd03.prod.outlook.com (2603:10b6:303:b6::34)
+ by PH7PR12MB6635.namprd12.prod.outlook.com (2603:10b6:510:210::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.15; Wed, 5 Aug
+ 2026 05:27:28 +0000
+Received: from MWH0EPF000A672F.namprd04.prod.outlook.com
+ (2603:10b6:303:b6:cafe::5f) by MW4PR03CA0089.outlook.office365.com
+ (2603:10b6:303:b6::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.292.16 via Frontend Transport; Wed, 5
+ Aug 2026 05:27:28 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ MWH0EPF000A672F.mail.protection.outlook.com (10.167.249.21) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.292.8 via Frontend Transport; Wed, 5 Aug 2026 05:27:27 +0000
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 5 Aug
+ 2026 00:27:26 -0500
+Received: from xirengwts12.xilinx.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.41 via Frontend
+ Transport; Wed, 5 Aug 2026 00:27:25 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,103 +67,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785905174; x=1786509974; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=pf+KaQef3aLdqIRGS+SN0ScWkjmFB+xo03zP2W7SUl4=;
-        b=UwlqUyxkiwWEUbPlhU7mBvpwcUGFC3Ix7CSD44RFzIG2r5HAssgZHVACbxb3Y0qH6s
-         qTbReqGpiCrKTOHm+aXomcZ1pgRHERXiIe3u9CGzCJ+Qc5rg+e8CupHirOfCVrO3j1kO
-         mI+ieQIvboXDwkJdaQf/WlmnAKSP3xyaYDG07HEwVTRLxDBYq2/uDc/O3ZA7iuk12d+P
-         TSABsu/hGvQ5kipKmp5j0/cp6H+aXQL/Lb4vAxgdm2HX+zkqqhvqFXZJI49b2i78p4/5
-         UmzDni4hTsAuK8W34PMORTms7+lqYiLKzT81hKMUpWhyWbIUcL0+uIg5qC/izidDl3U6
-         Ut9A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785905174; x=1786509974;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=pf+KaQef3aLdqIRGS+SN0ScWkjmFB+xo03zP2W7SUl4=;
-        b=gJLeh5laBebO9TVi2LXAdx23ulY0ZeuyhcNL/CdmRp1Q19Qi6aNRf+TwBOS5UaVIkj
-         Uki24OY9xlUPMX32DNLWWU1FC0z+ZKd5KXtdOgP7G9egaFoEx63N3d2wJeAMR2hLkJMy
-         UwpK3QbXl5xKYhv4BdvN7pIwMR6MPJTBWLepoiJ4KiGKdsR4iyIKnWcywstg6C/IxkCE
-         cZjro3Y9hfELv/Mmc4ugPzlE3Lj4x1VwPieLxiOledrQmlkmo8QbgGnVf3yc5YVqNrtT
-         hYZysBZOmDofnVvtMgh0Qp8BF2W33iqMyUO1sg5Ex9AselcyR2edy5KmvwCvAKqutjfF
-         Fc+g==
-X-Forwarded-Encrypted: i=1; AHgh+RrouvLHK44syrD8y2FN2eQ3pc4qfH3G3xWjrVkCWgnev4tz9ay4MtQZso276O4dOqnCwuDdwwZAj7s=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwNwgOyqOSV4lCq1sAPbsDDKf1+n1d6zidLscJSLp5FB3cjiBtq
-	BqloZ3gHUZWwBZ70m/MaSK4HlMpTsrBjZuIGRNHnF5u/+gIkqV+d5fFN
-X-Gm-Gg: AR+sD10QgB+vRNvQGxsVX6jCnH6RmnQSGD4pMMvR/2dCNVDl5LWvsmtzw7D/lo94Fsg
-	Y3vtkCdLOvfyfumSrV4lFfUSsEZQqEwiXJrEFfyPxqlByHgPiHifVOZWIeNgAWe0rB27lGpFm0K
-	DeP+VmU2BBrrTJ17HRPoW8Hrn30bjsRw24PRmFh4Uqf2ryu5Pln2nC5G82CyaB88lAUthBRU16q
-	07xMBzATqYBac/k2RPpUqx7XTY109oXNylZrgzkQqpYYji79qwwCWEn4Byujat9jgK83PJZu5RR
-	ilaqxhBqo+mLUL+nNVTN98WYZWMzm6phdsAy4RcdQtNhIEtY+W18OVr0q/0BzuZi5JkDUKeE+zO
-	PhIv6Nc/8xjRxtKRnI+SXoWKb6lrWDF6VPJ4r6pb4cM9kSCQUGyShmYGTjznrLdEfxmgoXZedkX
-	wRpGva/pzh0dNPZujtnM18nqQM8Uao3qZLRp6juJN4O+GkDXx9mOs1KBgDbWs72L7bbxI/hx5eN
-	CFg7neFr7aecAcehJKoTNKFB2XQa48Whji9KFf/RSnf8k/frcY7O/V0b9J9iTj52Y/6YBriEiu3
-	bkO4bXzC4Z7Jeslir7LgDMZRGBOJvh7vqRFDVRkWJaQ0CUNmSLZB
-X-Received: by 2002:a05:6a00:2d8b:b0:848:3e74:85eb with SMTP id d2e1a72fcca58-84f2e014749mr4032775b3a.1.1785905173552;
-        Tue, 04 Aug 2026 21:46:13 -0700 (PDT)
-From: Matthias Goergens <matthias.goergens@gmail.com>
-To: Roger Pau Monne <roger@xenproject.org>
-Cc: Matthias Goergens <matthias.goergens@gmail.com>,
-	Juergen Gross <jgross@suse.com>,
-	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org,
-	Yannick Martin <yannick.martin@okazoo.eu>,
-	Thorsten Leemhuis <regressions@leemhuis.info>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Subject: Re: [PATCH] x86/xen: fix init of balloon stats for PV guests with memory != maxmem
-Date: Wed,  5 Aug 2026 12:46:07 +0800
-Message-ID: <20260805044607.2564210-1-matthias.goergens@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260730143548.39320-1-roger@xenproject.org>
-References: <20260730143548.39320-1-roger@xenproject.org>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=vUIhDr0P2zEH7KJpJf3ZDHyc2k84JFqZ6awhZo/Er3VKiNWN1IGJMqTOwyklesbA8bbIKxY5ADhgr9qG3VadNK3ud0DR+o5AqRVt9qxNjbY6a+rEViEgQAhFWHFu2WQVFAoxMvw6uA6KPfXwh7CmdkWPeyb+mliseOaJ5rLmdH70347nNHQ74INjWQpYNuaYZP1vDDnK5rxaWr7gFnyUWH2BPWDiJvshSZ+bmKIDQQcvfsVD0h2W6Xud6IZbiu5cN0vuESC4vQwIm353myIsfapYX5m7XiWvFEy0E3nDJrDlK/gUn2Z10Ib47YN5FlGkeeI3Rz97B22dZ/Zs0PIHhA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=E/X3j+vLBycBqra0d59r8vxbnNUi3Klkubhz67O4PTY=;
+ b=XyEWQaRVR1u68A3e5OviNXFkEtg402ACHSm64CVNrAnI07E01ncctTrzQto/6XL1YnysXR2rWs+XeOxf9qqWVEErC8hmxasJ+lw1j6JCezNz/vlmt/QC/xGbaRbca94nvBrnMX1aNPUrL3Q7NFt6ew9dDSx65JHQY9vl7C8WorR3aoVTmA3X6hcbDL/FlK8k4TlWv6AeXub8EjZCbly85XJTMgzYDl9CEYjMxhBn9vnPPgmmy+8ruvEiw6vfOlExl7uV17xYnlN0FvULI82BaxtTxJuu/3J4lU5EYqHthBahthrmUQ5lMLUGmU7mkWvNxXrXMTH52xJIk6GQlb6Ctw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=nongnu.org smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=E/X3j+vLBycBqra0d59r8vxbnNUi3Klkubhz67O4PTY=;
+ b=je5PJT27QMl0w0JKoAr8eAL8tjMi3WUAe3uWVX3fDK7RqD4GADAXyURUZAfWbesCZRsQJUnbczsKBlJjevkDuwgG3VFjV6yQxTJ31732joPkMtgw34xGyCt0wusLraEmU7GGPQMk+Fx40swkxWByS6GfFk4cvy3naWl4zsDj5K0=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+From: Neal Frager <neal.frager@amd.com>
+To: <qemu-devel@nongnu.org>
+CC: <sstabellini@kernel.org>, <anthony@xenproject.org>,
+	<edgar.iglesias@gmail.com>, <xen-devel@lists.xenproject.org>,
+	<stefano.stabellini@amd.com>, <micheal.saleab@amd.com>,
+	<stewart.hildebrand@amd.com>, <john.ernberg@actia.se>,
+	<matthew.l.weber3@boeing.com>, <vincent.stehle@arm.com>, Neal Frager
+	<neal.frager@amd.com>
+Subject: [PATCH v1 1/1] include/hw/xen/xen_native.h: downgrade include-order assertion to warning
+Date: Wed, 5 Aug 2026 06:27:22 +0100
+Message-ID: <20260805052723.2823538-1-neal.frager@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1785905175-006CEA5B-EF30FEE9/0/0
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000A672F:EE_|PH7PR12MB6635:EE_
+X-MS-Office365-Filtering-Correlation-Id: 94bc0f2d-cca2-446a-818b-08def2b23d1e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|1800799024|82310400026|36860700016|23010399003|18002099003|11063799006|13003099007|6133799003|10067099003|56012099006;
+X-Microsoft-Antispam-Message-Info:
+	/Z3P7akN7im+GzxTWp5kAYnL6QyZsZVIz+otKjWhGN4R2w16LIhEReH5uNR9ylFsaJk0eFYoUByBaCShjyv0N9KzbJdjKC6AR2dLUPoocgBLJv7ULlc9e4NBpZ9jqxcZDJH0H9MUP0las13iP0fPvri+lf70uFfvvkESeLTN0JAVMCQmG5R5HoN45tOe2PChyULr2dQ0224CkDWrGqDVt/FSM5g/xjSQw5stAZqb64Z2MxS6KEbqmk2ErtHUYNbUwhxqoHduYxd6fMIhxRmOkqUuKusp2tkkUihpTc5zOGu8219LGathe24rifqnM/MDaUGtFH12VplOmJDvuoApTGQl6esVRP6ecuoJue18CSlWLrsT/YFrM7LgzntQPYCeu9dJo9B3WM6FJKFWXHDeWWVAf/nEOJzSQX2scX7MnrLSsxge4Q2PS5KX2CU6q5l/WytV8OhTTvb13UhzjHHoYfuScmZJQu6SupNHsZAOVdlYgy8wl0Ctdit69pGHD/G7i39c833OGt5IKEkaqyjMKrZL7eBF6mL6d8ePdntEbAExgaKVx+zdkX1i6VWyCo2VSKbOzZBfbse1f2SFPVArYnbw1Ju/yr+vTQhHSTallgldsZB4LNfseGGnlmA2JBE1Ep8RRBrwoACRx2eMpJontEpPkEkeZNOhZiCbFhiVbfDzgYiSWUayxwFrIlaRTEcLGnv8o5U4xgh/oP2GcEXyxw==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(82310400026)(36860700016)(23010399003)(18002099003)(11063799006)(13003099007)(6133799003)(10067099003)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	1K/A2tkKp6+CpEoquoBIHfxeiKXkfVqGeCjGN/vbUqV5HAKBcHh3k2Y7FPCZZ3yHyOwpCKuoaEoI7IH3HzJb9op9h9gllhpnznz9x6hz6nb1OOJ0anUmCqKrR/cCcJc9GG2hpW8PsrLaRMBiWbXUnUwvzOE0/pqjhcg0nPurWcfr4efk39Doo8d/N3rxV0krmeqEpEzABSXGf6sF26+rS5gtME3mKjJXA+aiUnXQ41aGPj6EUNOE1qhRrLdGpGw6T7qO621E6vA9ZdFsvqcfgV93OjaaXL4QTRPjTsIDqTHYBmtaB894WongnuDCThZo3W9oN59ayNV/FiPZDX28zR6x/CghuvgJv3nSVzY42Cv1XDCfPOKMNxrmB2D0gpg+4OgIFfEiHjZ9uWMHrMJAUe56FGlFxiN9H33K0ufe+I6gTdzo0BVLzOestAF0cJQA
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Aug 2026 05:27:27.5347
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 94bc0f2d-cca2-446a-818b-08def2b23d1e
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	MWH0EPF000A672F.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6635
+X-purgate-ID: tlsNG-33051d/1785907653-76EF74E9-4D521809/0/0
 X-purgate-type: clean
-X-purgate-size: 2111
+X-purgate-size: 962
 
-Hi Roger,
+The -I$(XEN_ROOT)/tools/include added to QEMU's extra-cflags causes
+__XEN_INTERFACE_VERSION__ to be defined before xen_native.h is included,
+triggering an include-order assertion. Downgrade to a warning since the
+version is consistent in cross-compile.
+Ref: https://github.com/qemu/qemu/commit/e2abfe5ec6
 
-thanks for picking this up, and Juergen, thanks for the quick review.  Two
-things I believe are still worth addressing; the Fixes: tag can of course
-also be fixed up on application.
+Signed-off-by: Neal Frager <neal.frager@amd.com>
+Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
+---
+ include/hw/xen/xen_native.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I think the Fixes: tag should point to 0949c646d646 ("Partial revert
-\"x86/xen: fix balloon target initialization for PVH dom0\"").  Commit
-87af633689ce changed the initial-page calculation and the extra-region
-subtraction together, so those two operations were coherent: the PV initial
-count then came from get_num_physpages(), which includes the extra regions.
-0949c646d646 restored the PV start_info->nr_pages calculation, which
-excludes the extra regions, but retained the subtraction.  Its 6.12.y
-backport is also the reporter's identified regression, first seen in
-6.12.75.  Applying this patch in a tree that has 87af633689ce but not
-0949c646d646 (for example a 6.17-based distro tree) would double-account
-the extra region.  This likely also wants Cc: stable@vger.kernel.org, since
-both 6.12.y and 6.18.y carry the 0949c646d646 regression.
+diff --git a/include/hw/xen/xen_native.h b/include/hw/xen/xen_native.h
+index 5caf91a616..3e1137efc1 100644
+--- a/include/hw/xen/xen_native.h
++++ b/include/hw/xen/xen_native.h
+@@ -2,7 +2,7 @@
+ #define QEMU_HW_XEN_NATIVE_H
+ 
+ #ifdef __XEN_INTERFACE_VERSION__
+-#error In Xen native files, include xen_native.h before other Xen headers
++#warning In Xen native files, include xen_native.h before other Xen headers
+ #endif
+ 
+ /*
+-- 
+2.43.0
 
-Separately, and not something this patch introduces: PVH dom0 has the same
-shape of problem on mainline since b13cd24c15d7.  A successful
-XENMEM_current_reservation supplies current_pages for both PV and PVH dom0,
-and that count excludes the unpopulated xen_extra_mem, so the
-xen_pv_domain()-only branch leaves PVH dom0 subtracting those pages again
-(-ERANGE, or a silently wrong target, when CONFIG_XEN_UNPOPULATED_ALLOC=n
-leaves the regions for the balloon driver).  I am happy to pursue that as
-its own thread once this one lands.
-
-Would it be safer to pass balloon_add_regions() an explicit indication of
-whether the chosen initial-page count includes the extra physmap regions?
-That would cover PV, PVH dom0, and the XENMEM_current_reservation fallback
-without deriving the accounting rule solely from the domain type.  On
-hypercall failure PVH dom0 falls back to get_num_physpages(), which
-includes the extra regions, so keying the accounting on the source of the
-count keeps the fallback correct as well.
-
-Thanks,
-Matthias
 
