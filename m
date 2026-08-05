@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57293C55174
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 13:50:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1383512.1626788 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BF4BC55174
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 13:53:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1383519.1626796 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrc0N-0003q5-4i; Wed, 05 Aug 2026 13:49:59 +0000
+	id 1wrc3J-0005Nc-G9; Wed, 05 Aug 2026 13:53:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1383512.1626788; Wed, 05 Aug 2026 13:49:59 +0000
+Received: by outflank-mailman (output) from mailman id 1383519.1626796; Wed, 05 Aug 2026 13:53:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrc0M-0003px-W6; Wed, 05 Aug 2026 13:49:58 +0000
-Received: by outflank-mailman (input) for mailman id 1383512;
- Wed, 05 Aug 2026 13:49:58 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wrc3J-0005NV-DD; Wed, 05 Aug 2026 13:53:01 +0000
+Received: by outflank-mailman (input) for mailman id 1383519;
+ Wed, 05 Aug 2026 13:53:00 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wrc0M-0003pp-0W
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 13:49:58 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wrc3I-0005NO-HV
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 13:53:00 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrc0L-000mCf-De
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 15:49:57 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wrc3H-004o6f-Cu
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 15:52:59 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a733f76-5cb7-0a2a0a5109dd-0a2a4503dc02-42
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 15:49:57 +0200
-Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a734010-2eae-0a2a0a5409dd-0a2a45098992-40
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 15:52:59 +0200
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a733f85-fae8-0a2a45030019-d1558030ed8a-3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 15:49:57 +0200
-Received: by mail-wm1-f48.google.com with SMTP id
- 5b1f17b1804b1-49553515a8bso14793265e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 06:49:57 -0700 (PDT)
+ id 6a73403b-be1a-0a2a45090019-d155802fb4e8-3
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 15:52:59 +0200
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-495635a85d2so8997825e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 06:52:59 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4994e041b4bsm92452265e9.12.2026.08.05.06.49.56
+ 5b1f17b1804b1-49949fc2da2sm202715925e9.3.2026.08.05.06.52.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Aug 2026 06:49:56 -0700 (PDT)
+ Wed, 05 Aug 2026 06:52:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,54 +55,55 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785937797; x=1786542597; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785937979; x=1786542779; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=TvL2rOspMd85SySpoKUosK/j3GMuZB8mHcX/K39i1Kk=;
-        b=MjjZ9+7m9htjO5pBkii5jLrAnSYf1JwGjv4L9vv61VnzT1t/vI3CcF4BU1GSfYhfUP
-         Ko/Mn4664bFNLFlzfPyld042u+6zny8rmi4UgVrpZlGIDDoQ6ekBha4QuVBOgGMX2UBc
-         EbgjwACcR1HjduwrY1KErOTD+r7rXzCRQDoSaXN+2xujZ4jcc03/9JyeUSQIlCLiTXCL
-         MHc/3ntoJjP2qn98beAmZct9oTE+ggRe92raKgzr9wFPY0xOwVLiokIHI4bW1s1IoIO2
-         pN1sMtgypdrj56CGWXEcJFnz1jZylF7u3Pu9bgxxhsHnDWfwbLOMtLB4tGqVNiKYrOs2
-         X/PQ==
+        bh=yHYw2W3qf29n9rzSQDKJYEq1mbdZ//fm9YT20zpV35c=;
+        b=GwAIAcdDKLNoKqP1HyjYvHRObLiCL2VaLm8NEuxniOu9J0oo3LY5otJUjdk+WXNtwc
+         9KvAOdsdM6G+Ud64MNqV26vw0Apb+pm5CxH9TVwTpytIeazvbpmYFB7uS/8W35+dvM8C
+         yJHCK6doo1pexFjGL7EJkszvQWR8aeZOg0fuqRC/RmyU4nJ1Ora5EW4C8DnoFDLoeQpm
+         JwEjBk77ojm0Oj+IZn+U1zO2KthOkyEbxqrwlBL/eAcxRgZmzyMg5i0fNxgZFLCZJkjs
+         +0mzLBcJ3m4WvoAtO1tYcc7SB5n0bNGNqVFbZVND4GKJvmll1GVfsW+VH2DHMmx3wDaK
+         CucA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785937797; x=1786542597;
+        d=1e100.net; s=20251104; t=1785937979; x=1786542779;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=TvL2rOspMd85SySpoKUosK/j3GMuZB8mHcX/K39i1Kk=;
-        b=s3amUSQF2wslXzQNLK2gJolJiIlZd1c/+sOS2efcguNy4W3Gn2VZYlPEluL8lHBkvD
-         oP0biA68qU+7sXiOpTfQLDcZS8zL5MkKMbfwGfnY6pBTgm4gjujcJ+4Ib1p/j4wwXSHu
-         sZYQ6xDlJaGTM9vqdGVSTiEuud/iW7dvA20O7zzl4msCu2vW/QmLB5Yg688kcXXBQT1c
-         4DOnNsGloskc3QfwUS/39gRprDglV65XLYqmRoJTl6rtabzZ0s1OC6omrTOUtNpkVLeF
-         jUQ/cOkzNG264/UTGTUrzGgYXHTNV/02BWesaPA/WcKMVdFEZ2R8kbmA5Q0H0X5/Jrdw
-         MJTw==
-X-Forwarded-Encrypted: i=1; AHgh+RqHkp5jttNb2Piwg37dJfYYt8VOKs7Qn6Of1aYukVOaSPXZQrgPffEEP01xULXK+PmqOC+ijflRxFU=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxJQVB7d11FTJIywxjwbcKRSj4mSIH70BnN125sAqExaFeJ0xVA
-	nq46dcb62Mr8l89IAi+MwNaoKdn8HCgioVUxLYHCKN666HT6eXiBX6PQhEnCOuTuag==
-X-Gm-Gg: AR+sD10MZ99UJxhWUURZ8hT5rnvSg+GDBAJSxonZT0zOG8ED79PMcjD+zeCMLcotKFq
-	qBR7JLpuhjEK859/CkYBpfc8t2i6N3koAbfNrjoiLGlpwv2l74OFwTqEoTXP9T0PN65nPzz/M56
-	CMsbpW+dLYfAPWHrlmTUe0vs+RjtpxztqlnP8M5w6LYnD4xFYRiR3Vd8R24Uv1VWSTlXIbwbepN
-	d6NK9h8t8JiBzHLDJXkpP4shZIOvCED9ABvUkOTC+6/5DbOMC5BwNBdeUaHmf1P3h7D7tQV++7e
-	sNXrB4VF+10I7yTIIxKig9NIvJzv8Zg93X+Qf0H/3B6luD2qzhaFzD49XpbESDnSi0PbT6z7Npu
-	Tftm92B48jCsS72DjafHl4DRPaYGPr776+ZQ3/puCTx/Ft4EvQBL3EAHZ91m6QJIu4ofmzuG2EM
-	R4D7zKlb6c7mLtZwhyCuQAsoEIcjWQgX8yeT4NqnxP8BObuSEolm7BEPZiP5XoVk1ft6ag4577T
-	cvYLILDSZxPpIklNQHLTrYw+4cue1RPIXAD3/qkntVh9ZtYgJj+
-X-Received: by 2002:a05:600c:8b35:b0:499:518d:ebd6 with SMTP id 5b1f17b1804b1-499518decc7mr29528305e9.17.1785937796784;
-        Wed, 05 Aug 2026 06:49:56 -0700 (PDT)
-Message-ID: <243ac905-6949-414d-823c-f6e183637bda@suse.com>
-Date: Wed, 5 Aug 2026 15:49:55 +0200
+        bh=yHYw2W3qf29n9rzSQDKJYEq1mbdZ//fm9YT20zpV35c=;
+        b=Ae9P19rUgt1LEurz7LanP9ouWeEcLULdDXOKP01UEp9mT9XSFWHi3zPaG+XCNPEPHo
+         Zytsj5bmuk7Dn84fy/yM+B+jOPZH84qyYxNMIgAp97p5y67E9r7LYKs0xnQZYmuvgKEj
+         NlqSf7UCT/qYNOD385GW+KLRXkUB690OpIRRdClVNK22r3KOEFqTePxAqGYtjx/gYjnf
+         OjuFUirX25QXWy//r1lINtaCJbbG0nsn/3538BC+poG6svD3gR8896ONY3jclfN6C9j2
+         eOLx+VK5EMhFwf0yYnI/2e7uM6lBfvaR9tJ6vTY6qjzWrGKHPkTSD3cT+sJoFHVciOES
+         vtUg==
+X-Forwarded-Encrypted: i=1; AHgh+RpKJS1Cd7ZjZBbF9KGlOFLRwJsf9YHADDvPZrXXI98j6BWC/ZwnahM7Mpg29YCufOOgWEXONf3xrYw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxUt/a5mlIOxDHJjpQB5xNzvV6LnJTo3eHn+zK32bNB6cO2chsE
+	Ec5qL0y2L0bwK3F0GC+mNC+Oo2RwoK4s51S/CMMAVQ5h/AAqD5drhWmslb25ykRvVhZWkN0mvmi
+	nQJuBZw==
+X-Gm-Gg: AR+sD12O14tAEQm9n6aYRUqfbc8NnP9Z2/VAZoX2Zs6Jp8yq1kFqyMSxIQI0PJzKoC5
+	BuKBLPiOBiLS6Rg6rGvCXFfn+xetVmm5wC3Z2dOTuo+4pEM0jramIK3iU6HmXGpysRcumzQoD5a
+	DQl3x6bmDZ8KoOXvV4LP99WhYvplamK9+8PT6wxoZdXfMxUy8YO9jlM7xaJF03bGN5hfFdF5KCK
+	dSe/qM/IFdnwVohHm9d9tFAcXefNk6S5pN1y/UJLRyB0qPTTh8TmbpGR/2bZLvAOq7Xz9kVREuE
+	aS9D4bzgzEs25+lhOXvqo3ftpK1nksz6ayPT5d9vq2drEHJ9zb6jOJW1QIx6do6ORBtHECPFC6J
+	MyufSguWrY77rgiirPuPcJ7E9mxCPD/Kz/80GrKGSnQRmqH9w8+I8ewmDfEjq8oIaF0myQGnCPN
+	hIHiKKZq/Kix+IZnXtry836zUvGraNU83q5yqgSVzAie8NzlvFQB9Ph+tszHw5zkU5SWKbL01JU
+	NMis2VrOCE3JKI8hOOE6fb5vIiEKVdnQ4rM5Bg0q/+RQcKRwHkK
+X-Received: by 2002:a05:600c:1553:b0:495:5045:39e6 with SMTP id 5b1f17b1804b1-4994e7d3080mr65359155e9.17.1785937978687;
+        Wed, 05 Aug 2026 06:52:58 -0700 (PDT)
+Message-ID: <3e414c79-26cd-4fe4-a48e-73d80b02b4e2@suse.com>
+Date: Wed, 5 Aug 2026 15:52:57 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/5] x86/nmi: Drop K7_NMI_EVENT
+Subject: Re: [PATCH 3/5] x86/nmi: Misc style fixes
 To: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
 References: <20260805124525.105457-1-andrew.cooper3@citrix.com>
- <20260805124525.105457-3-andrew.cooper3@citrix.com>
+ <20260805124525.105457-4-andrew.cooper3@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -128,26 +129,48 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260805124525.105457-3-andrew.cooper3@citrix.com>
+In-Reply-To: <20260805124525.105457-4-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1785937797-758824E9-CC757DF9/0/0
+X-purgate-ID: tlsNG-bad1c0/1785937979-3BED6034-15F8B057/0/0
 X-purgate-type: clean
-X-purgate-size: 516
+X-purgate-size: 1220
 
 On 05.08.2026 14:45, Andrew Cooper wrote:
-> This name is misleading.
-> 
-> It's not possible to configure NMI or not from the event select register; that
-> comes from the APIC configuration for performance events.
-> 
-> This name is "the thing we want to count for the NMI watchdog", but that's
-> clearer to follow when it simply names the event.  Drop the indirection.
+>  * Drop trailing whitespace
+>  * Sort includes, dropping asm/mc146818rtc.h and asm/div64.h as unused
+>  * Brace position, and types
 > 
 > No functional change.
 > 
 > Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
 Acked-by: Jan Beulich <jbeulich@suse.com>
+albeit I would have suggested ...
 
+> @@ -310,15 +308,18 @@ static void setup_p4_watchdog(void)
+>      if ( boot_cpu_data.x86_num_siblings == 2 )
+>          nmi_p4_cccr_val |= P4_CCCR_OVF_PMI1;
+>  
+> -    if (!(misc_enable & MSR_IA32_MISC_ENABLE_PEBS_UNAVAIL))
+> +    if ( !(misc_enable & MSR_IA32_MISC_ENABLE_PEBS_UNAVAIL) )
+>          clear_msr_range(0x3F1, 2);
+>      /* MSR 0x3F0 seems to have a default value of 0xFC00, but current
+>         docs doesn't fully define it, so leave it alone for now. */
+> -    if (boot_cpu_data.model >= 0x3) {
+> +    if ( boot_cpu_data.model >= 0x3 )
+> +    {
+>          /* MSR_P4_IQ_ESCR0/1 (0x3ba/0x3bb) removed */
+>          clear_msr_range(0x3A0, 26);
+>          clear_msr_range(0x3BC, 3);
+> -    } else {
+> +    }
+> +    else
+> +    {
+>          clear_msr_range(0x3A0, 31);
+>      }
+
+... to instead drop the figure braces here.
+
+Jan
 
