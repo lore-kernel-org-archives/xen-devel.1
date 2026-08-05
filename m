@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DA44C55822
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 09:25:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1383163.1626423 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 105D8C55174
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 09:32:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1383176.1626432 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrXrs-0007Mi-Ji; Wed, 05 Aug 2026 09:24:56 +0000
+	id 1wrXyb-00018u-9H; Wed, 05 Aug 2026 09:31:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1383163.1626423; Wed, 05 Aug 2026 09:24:56 +0000
+Received: by outflank-mailman (output) from mailman id 1383176.1626432; Wed, 05 Aug 2026 09:31:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrXrs-0007Ma-Gd; Wed, 05 Aug 2026 09:24:56 +0000
-Received: by outflank-mailman (input) for mailman id 1383163;
- Wed, 05 Aug 2026 09:24:55 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wrXyb-00018n-5z; Wed, 05 Aug 2026 09:31:53 +0000
+Received: by outflank-mailman (input) for mailman id 1383176;
+ Wed, 05 Aug 2026 09:31:51 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wrXrq-0007Kl-Um
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 09:24:55 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wrXyZ-00018h-NR
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 09:31:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrXrq-006ZxT-BP
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 11:24:54 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wrXyZ-003zSv-3w
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 11:31:51 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a73015e-2eae-0a2a0a5409dd-0a2a450ca81c-14
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 11:24:54 +0200
-Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a7302fe-bab6-0a2a0a5309dd-0a2a4505ead8-36
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 11:31:50 +0200
+Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a730166-f479-0a2a450c0019-d155dd35a468-3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 11:24:54 +0200
-Received: by mail-wr1-f53.google.com with SMTP id
- ffacd0b85a97d-47fde295992so609364f8f.0
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 02:24:54 -0700 (PDT)
+ id 6a730306-4cb1-0a2a45050019-d155dd33d4c9-3
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 11:31:50 +0200
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-47f93b2fe4cso501931f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 02:31:50 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47febfda0bfsm7238538f8f.5.2026.08.05.02.24.53
+ ffacd0b85a97d-47febfda6afsm6884988f8f.3.2026.08.05.02.31.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Aug 2026 02:24:53 -0700 (PDT)
+ Wed, 05 Aug 2026 02:31:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,58 +53,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785921894; x=1786526694; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=0P8KtrMj33FZR9rXeuoR9W9HprP82JFkO8XpOVKL9W4=;
-        b=WPTDfsHNT8Z/EIrSOINwOfKJpAGhXfcA0SpipIh8GZfrLtsW/etJkbFroeZJ8dBDvW
-         h/Vj2fztfzLh5RXJOg0MwsR+OGNp2EwwWrAWOZvpUPNGGYMQws2yRfnA48I7eHtb8NmJ
-         8IKiZboOeVqKIUNq0K9WqCcfTN+ExCvwjkp5qfg/ZzPlrj5l/LayeeG/llHg6uo/ibH8
-         Tw0EY3r/wTea3Hyxf9zb498JktsDFq17f2InIPpCU32AhcDoGUJUCjueZf6ziCPq5bHH
-         JJNsDlXH7PAvi5r5nNAau+eu28qkRzLPx58a9UhZN4DYvgjAEykx6+/YBDQQWE1D46M2
-         BO+A==
+        d=suse.com; s=google; t=1785922310; x=1786527110; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=m5ZVt/TEvWa5Y4pw8CpVX3kraK6kJ4ZA2MBNk4yY93o=;
+        b=bsIggRdbkHqfEY7/rucbcqg/z9p3SuUyitrX2+KkbyADEAfK/mXrNgdaMhXunZ7rI6
+         BgPLlGmtpRC/bSJa070F1aoIGiXRK8hUNun2c97QD1UMPV2SV+UM++6jYC+V+dSwBqZO
+         UKd3Yz8JeBJgDG7H4+2+Ue4h3eUn8vrtV0f9txyfATuAYgObmatLcK/bGPIHgiwP8NFO
+         KYiY/yO3eBIhNhHDWNVEbgCdMBgP7KiowmFB+qr6Bw65df209wniSGBWgq9JS/cYGV3g
+         b07UruCv0sZAUhA9nr4hl0gzgDdUxxKOUucYTrB0xTOhaY6/5q7wXJSioKRDmnil1GC4
+         Os0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785921894; x=1786526694;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=0P8KtrMj33FZR9rXeuoR9W9HprP82JFkO8XpOVKL9W4=;
-        b=MfyVl3XqwW4Q3mjlkWd0OCcL328Owe8ziRlhx14eTe/18kC8YQL8N9cJyB849k0VLz
-         RF4qzBTmh3LU7bsS1Qo1klyvCUAlPbnXX5QR1THyg83IFukXiXlk/vTCyUKdOfqBFz7c
-         qfdOZs//ECBUKmsZ6s9d+F7ZxeAuly6U5Qa2bMpMFYSYgdmGa2LzPwtyr4aNzXxdbIKQ
-         zhphKMxq9jxvZxylDQwUd4BpqrMeHgLt0wRo+B2CY//i7Rc7kMndt/6zNguvBpDSXTz4
-         iJu6MTyA9LEup1uV7uzD28BgEuCbvY14ZqcM/2gU9INkw3N9leqG5pfJ6sC9CSQ89P7g
-         f1kQ==
-X-Gm-Message-State: AOJu0Yw2o3zguHjSGs9XvlrTFq21LRczrE64u8x4UklDSSg+vVKTO8LQ
-	tgE/UHtcdPwTfB6dumXUklLq3YjUIMxKd6R6DKDBHRVhvh8jWNb6rO5ex7w7/z2ui4FupVDD7sF
-	PO/nlOA==
-X-Gm-Gg: AR+sD11+z7NlHEjhl3rIYHAZd9Xbv/i2Z+xNnw6cwUhEd3JZCX7znl6Mn/EVz3MuUDm
-	9IvocjZo9DeS5c4D9WlssYUDaFVhwDm3hmrB3OVoSd25mkMbH6mqoLsvl7omOeGYfCYGRxNl26f
-	JK3zl+yrhTQl0yMi4amjSYGuUQdyqOR7t09LS1mHnWM3EYAmCMey+lk9mXK8LhON4Hof0OeM8+r
-	gbGmXaQhns829JGLhj5yeiTicikf3Y45lGQLeHqgo2dlSONOeQEcCOJ4CfBmf+gA5cRrL9Y1Qxb
-	1OESrqMohTikynF2Jr0Ql1uHnbKOyEGB5PgGxL9gFv/oFOydniId40HQmcezsy54yvBco2KnGuG
-	quKcIMPUT4u0C+IooT1vTSNRSbcWc0LOnfmLNWK0Cjn+mlMeaviE8Iw8Ftk+ZGqKEMtRJkKe2xg
-	YYRXjKRMNR1EHJfV8oP+Ks+b8fCOvVuPcyKcB5njM1ADIsmlgGPjY9Tt1D9pJd+7aAntjkpYeei
-	1JigzF/0m7UbXNQzFWUVH8AobWMvwGN+o3Z/Zsb4toOWqNu9rSA
-X-Received: by 2002:a05:6000:480f:b0:47f:8554:a341 with SMTP id ffacd0b85a97d-47fe81d131emr23983559f8f.13.1785921893765;
-        Wed, 05 Aug 2026 02:24:53 -0700 (PDT)
-Message-ID: <2ccead84-eaa4-428a-8684-da26874c05e9@suse.com>
-Date: Wed, 5 Aug 2026 11:24:52 +0200
+        d=1e100.net; s=20251104; t=1785922310; x=1786527110;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=m5ZVt/TEvWa5Y4pw8CpVX3kraK6kJ4ZA2MBNk4yY93o=;
+        b=lyyvmcDGLIDDJ9FpWCbTLoBAFZFQbTFO3b+zgASt3rV5tnsHsGpxMcndsZut74yvsw
+         IGDqDEEv0yAQgZF5yV0PqqTTSzLfqX2Gc1dTLPaVtLGYcfgtZbVjZmjdKevkXMsAmhJU
+         EkV+CM9U0cpCYz6sqPZpD5l7F/Dqdg6dX3iK52ucbvuhVcEsTEjbS5rUdPY5x/gmjj53
+         /dRqUspa3tCg/pK1gxinT3abLjzC/ljOx+WkboWWtc5uobglIhJ+VgXpx6YrowGGm36i
+         TvsCILCk7V5aGH6attf9ShWFWY+GBRl7hg68jqUReEe/WSFWksiRLXowl90ru0Nrx/j7
+         Snng==
+X-Forwarded-Encrypted: i=1; AHgh+Rp86nBZTpxIiAoJxGl+9eH4PfxKnWjM5psMP4mBZ/PdZ/w90HbspgoIYheRy+UFoJin/TbTwI0KVNw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwMjpZh2EMCAKk5Z/XQv14cOPd/oaHdxtcs5h3CUYZbD41E8ZUp
+	2kmxY88liA3D8wxgEHFQxrC+c1oBlo6SjMqtiQ8B9LQ0GmXGaIpVl4ED27+CYJvKrw==
+X-Gm-Gg: AR+sD10uLH+HJodJ2qjosv4Sp25+3DZ8sNqWSyreTc0FdoYexYr6srswZPN2aEkyTW+
+	wF0ZdyZ0AJHo3KjjyjF+QzoYl9VYc1yQ3FM4WmwMa1lbvixOpq/iGEkHXW9O6d5xCeJU98iXO4s
+	Eb4wv4tfM49jnN2YiSX+xsTdW5Y7M0Tb+9wmz3gp4iFAkjYSk6wYgvBQNFyjkD0tRl4H9CzIH7n
+	HwIO1obJTYoZSuTUwkjoYGZ8+0UpnyziidsrSWw1nhhLjbKo+MvevPePAO3TMocyrrDAa49O6t2
+	PXzJBxeDzQv/U6A+zgZj+OUkwC2jjTvX2aq7cNMf4jHY2lqqGW95b+H3Y3XUDWQrBFsOsvf+oGG
+	k10uUnYLN1kAP2suHparb8AajycR+C/OcWtM1+qtc3t5OjmkDVecpf5Iaeo3Qwb6yGEj8jUB14n
+	d9KiZta7n5mz1gD8w4NzZXrkhoUwFcGWdOUP9gAPHE149hlCO8i/tcbheom5NusAaCcfz31/VGt
+	BKgX7nUVYEpFjiU5eG9w5iFdQ51JlaGqFPoZW9M3n5WXK1ZmMwB
+X-Received: by 2002:a05:6000:1842:b0:47f:8d71:210a with SMTP id ffacd0b85a97d-47fec634b38mr8662442f8f.15.1785922310377;
+        Wed, 05 Aug 2026 02:31:50 -0700 (PDT)
+Message-ID: <07e4cde9-cbbe-4ca3-878b-1c72038e4530@suse.com>
+Date: Wed, 5 Aug 2026 11:31:49 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v10 6/6] VMX: support MSR-IMM
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH 3/5] vtd: Print originating iommu on faults
+To: Teddy Astie <teddy.astie@vates.tech>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
-References: <81a2c636-5a74-41c3-81a2-3f49ed717744@suse.com>
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ xen-devel@lists.xenproject.org
+References: <1785319236.8631fc262581453bbf619ec5b2062170.19fad51a4be000e099@vates.tech>
+ <1785319342.8631fc262581453bbf619ec5b2062170.19fad533fa5000e099@vates.tech>
 Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -128,133 +129,26 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <81a2c636-5a74-41c3-81a2-3f49ed717744@suse.com>
+In-Reply-To: <1785319342.8631fc262581453bbf619ec5b2062170.19fad533fa5000e099@vates.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d25034/1785921894-00ACCA5B-A4C27296/0/0
+X-purgate-ID: tlsNG-c201ff/1785922310-F7EB92A1-14438234/0/0
 X-purgate-type: clean
-X-purgate-size: 4687
+X-purgate-size: 650
 
-Hook up the new VM exit codes and handle guest uses of the insns.
+On 29.07.2026 11:59, Teddy Astie wrote:
+> When a fault occurs on a IOMMU, print the IOMMU the fault is coming from.
+> 
+> Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-v10: Check feature bit in exit handler.
-v9: New.
----
-The lack of an enable bit is concerning; at least for the nested case
-that's a security issue afaict (when L0 isn't aware of the insns, or more
-specifically the exit codes).
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
---- a/xen/arch/x86/cpu-policy.c
-+++ b/xen/arch/x86/cpu-policy.c
-@@ -834,10 +834,11 @@ static void __init calculate_hvm_max_pol
-         __clear_bit(X86_FEATURE_PKS, fs);
- 
-         /*
--         * Don't expose USER-MSR until it is known how (if at all) it is
--         * virtualized on SVM.
-+         * Don't expose USER-MSR and MSR-IMM until it is known how (if at all)
-+         * they are virtualized on SVM.
-          */
-         __clear_bit(X86_FEATURE_USER_MSR, fs);
-+        __clear_bit(X86_FEATURE_MSR_IMM, fs);
-     }
- 
-     if ( !cpu_has_vmx_msrlist )
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -453,7 +453,7 @@ void domain_cpu_policy_changed(struct do
-     }
- 
-     /* Nested doesn't have the necessary processing, yet. */
--    if ( nestedhvm_enabled(d) && p->feat.user_msr )
-+    if ( nestedhvm_enabled(d) && (p->feat.user_msr || p->feat.msr_imm) )
-         return /* -EINVAL */;
- 
-     for_each_vcpu ( d, v )
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -4712,6 +4712,14 @@ void asmlinkage vmx_vmexit_handler(struc
-             hvm_inject_hw_exception(X86_EXC_GP, 0);
-         break;
- 
-+    case EXIT_REASON_RDMSR_IMM:
-+        /* Check the feature bit in lieu of an enable one. */
-+        if ( !currd->arch.cpuid->feat.msr_imm )
-+        {
-+            hvm_inject_hw_exception(X86_EXC_UD, X86_EVENT_NO_EC);
-+            break;
-+        }
-+        fallthrough;
-     case EXIT_REASON_URDMSR: /* NB: User-MSR bitmap was checked by the CPU. */
-     {
-         uint64_t msr_content = 0;
-@@ -4721,7 +4729,7 @@ void asmlinkage vmx_vmexit_handler(struc
-         {
-         case X86EMUL_OKAY:
-             *decode_gpr(regs, msr_imm_gpr()) = msr_content;
--            update_guest_eip(); /* Safe: URDMSR */
-+            update_guest_eip(); /* Safe: URDMSR / RDMSR <imm> */
-             break;
- 
-         case X86EMUL_EXCEPTION:
-@@ -4731,6 +4739,14 @@ void asmlinkage vmx_vmexit_handler(struc
-         break;
-     }
- 
-+    case EXIT_REASON_WRMSRNS_IMM:
-+        /* Check the feature bit in lieu of an enable one. */
-+        if ( !currd->arch.cpuid->feat.msr_imm )
-+        {
-+            hvm_inject_hw_exception(X86_EXC_UD, X86_EVENT_NO_EC);
-+            break;
-+        }
-+        fallthrough;
-     case EXIT_REASON_UWRMSR: /* NB: User-MSR bitmap was checked by the CPU. */
-         exit_qualification = vmread(EXIT_QUALIFICATION);
-         switch ( hvm_msr_write_intercept(exit_qualification,
-@@ -4738,7 +4754,7 @@ void asmlinkage vmx_vmexit_handler(struc
-                                          true) )
-         {
-         case X86EMUL_OKAY:
--            update_guest_eip(); /* Safe: UWRMSR */
-+            update_guest_eip(); /* Safe: UWRMSR / WRMSRNS <imm> */
-             break;
- 
-         case X86EMUL_EXCEPTION:
---- a/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-+++ b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-@@ -205,6 +205,8 @@ static inline void pi_clear_sn(struct pi
- #define EXIT_REASON_WRMSRLIST           79
- #define EXIT_REASON_URDMSR              80
- #define EXIT_REASON_UWRMSR              81
-+#define EXIT_REASON_RDMSR_IMM           84
-+#define EXIT_REASON_WRMSRNS_IMM         85
- /* Remember to also update VMX_PERF_EXIT_REASON_SIZE! */
- 
- /*
---- a/xen/arch/x86/include/asm/perfc_defn.h
-+++ b/xen/arch/x86/include/asm/perfc_defn.h
-@@ -6,7 +6,7 @@ PERFCOUNTER_ARRAY(exceptions,
- 
- #ifdef CONFIG_HVM
- 
--#define VMX_PERF_EXIT_REASON_SIZE 82
-+#define VMX_PERF_EXIT_REASON_SIZE 86
- #define VMEXIT_NPF_PERFC 166
- #define SVM_PERF_EXIT_REASON_SIZE (VMEXIT_NPF_PERFC + 1)
- PERFCOUNTER_ARRAY(vmexits,              "vmexits",
---- a/xen/include/public/arch-x86/cpufeatureset.h
-+++ b/xen/include/public/arch-x86/cpufeatureset.h
-@@ -354,7 +354,7 @@ XEN_CPUFEATURE(MCDT_NO,            13*32
- XEN_CPUFEATURE(UC_LOCK_DIS,        13*32+ 6) /*   UC-lock disable */
- 
- /* Intel-defined CPU features, CPUID level 0x00000007:1.ecx, word 14 */
--XEN_CPUFEATURE(MSR_IMM,            14*32+ 5) /*   RDMSR/WRMSRNS with immediate operand */
-+XEN_CPUFEATURE(MSR_IMM,            14*32+ 5) /*s  RDMSR/WRMSRNS with immediate operand */
- 
- /* Intel-defined CPU features, CPUID level 0x00000007:1.edx, word 15 */
- XEN_CPUFEATURE(AVX_VNNI_INT8,      15*32+ 4) /*A  AVX-VNNI-INT8 Instructions */
+Nevertheless I think this doesn't go quite far enough - this internal index,
+to be helpful, would need associating back to the respective firmware data.
+What iommu_alloc() logs is not only limited to verbose mode, but also doesn't
+include the index. I think something need doing there, and then we need to be
+more consistent throughout to include the IOMMU index in log messages
+pertaining to a particular IOMMU.
 
+Jan
 
