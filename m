@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9491C55174
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 09:24:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1383150.1626404 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9946DC55822
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 09:24:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1383155.1626414 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrXrB-0006Mj-0z; Wed, 05 Aug 2026 09:24:13 +0000
+	id 1wrXrW-0006ou-90; Wed, 05 Aug 2026 09:24:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1383150.1626404; Wed, 05 Aug 2026 09:24:12 +0000
+Received: by outflank-mailman (output) from mailman id 1383155.1626414; Wed, 05 Aug 2026 09:24:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrXrA-0006Mc-UX; Wed, 05 Aug 2026 09:24:12 +0000
-Received: by outflank-mailman (input) for mailman id 1383150;
- Wed, 05 Aug 2026 09:24:12 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wrXrW-0006on-69; Wed, 05 Aug 2026 09:24:34 +0000
+Received: by outflank-mailman (input) for mailman id 1383155;
+ Wed, 05 Aug 2026 09:24:33 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wrXr9-0006MK-RU
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 09:24:11 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wrXrV-0006oU-HA
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 09:24:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrXr9-00Bfeu-4Y
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 11:24:11 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wrXrU-00HWng-U1
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 11:24:32 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a730139-5cb7-0a2a0a5109dd-0a2a4502e53e-6
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 11:24:11 +0200
-Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a730150-e002-0a2a0a5209dd-0a2a450ccecc-2
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 11:24:32 +0200
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a73013a-6ca4-0a2a45020019-d155dd30e1ba-3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 11:24:11 +0200
-Received: by mail-wr1-f48.google.com with SMTP id
- ffacd0b85a97d-47de0093c42so541686f8f.3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 02:24:11 -0700 (PDT)
+ id 6a730150-f479-0a2a450c0019-d155dd31e523-3
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 11:24:32 +0200
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-47fdd674e17so433959f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 02:24:32 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47febfd9f74sm7517005f8f.4.2026.08.05.02.24.09
+ ffacd0b85a97d-47febfe5d7csm7756543f8f.15.2026.08.05.02.24.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Aug 2026 02:24:10 -0700 (PDT)
+ Wed, 05 Aug 2026 02:24:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,49 +55,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785921850; x=1786526650; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785921872; x=1786526672; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=/Igknh5+Nb88vcTcf1O5GexgYDuFGQ/RpiAXNqKISPo=;
-        b=edu+C/cPcctMr8EOIquuOT/3qc4Dm9rn7aFRGcQNgaMwrohxGGr7LycEakeq6CypCe
-         Jg2OzyGJh8z1TyQCNcur7/chqzwKKamffuEgShV3zb38tUAclh6Ea6PYs+yroI6AjYOO
-         YkYuszLvWcVJm8cbY1LzgBWUhrQ6Oiz41jcV3nTCtowIxOKjjd3sc8DKybxgdcQ6YoH+
-         CfCpa6tklkQZf9ZORP2sq3/53APyHji0hINyAHMx48Sm+gDpKKRGhx52+JprADoLEc8C
-         hmzxz6ArSuCv/FUR+f6x1xGUI0dkX+jOaxWPznuC/AmMRFd1X53x/0pphIzA8r5SShfh
-         aOPw==
+        bh=Yh5sgqmpsiDgmmWKbLvnKvsyVo9fXTHQYMZ46x1tb84=;
+        b=S13YAMA4Sq3UqVAGo2NUs01F4Db/yaayCQ0DugXLpk+haMa9504+qCWsIghznJgp4M
+         FujhkJ3xfviyKy303eOU/AKomKe9M4dOTTwEyAhAKiNPHD2PY8vgQIEJi0HiRAZ33IHL
+         UWIdhE9JGICCJ0yTzVUBHKc2lYJPPv6ZUZYc2wya/Bo/aUXhKpv6ktJWXsoyoiyoXeuh
+         Ts+XHVGCYUbSLIaddn3qoQCZEe6RqRUoq/7l7qOEgNLw1p4ZYw54riv1HbTh/7FwE8eY
+         fZBddbzRQKYGDXNTiridvoEmLi2oFvn0auYTlU6n3epIOdHpksZol6xWIZ6awTcPNfMh
+         z2YQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785921850; x=1786526650;
+        d=1e100.net; s=20251104; t=1785921872; x=1786526672;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=/Igknh5+Nb88vcTcf1O5GexgYDuFGQ/RpiAXNqKISPo=;
-        b=sFHVGdM4uuODDwwvQbuyjv6tdIpW8qsohanIeQLcIWCCT5AaOCycaO6MMZ9ED9b6Bb
-         r9aLdgBBnprlUE3zhZSNVThBe7NvQuzyG6eN8xgeCDGSja5J/oswMeHoAttd5TY3Avp8
-         +EMk9HZzUvUl2nL0u7tr1DKcb+6n8pC4cjdylm2SA76LwuSdAd2w0JW4hs6fhgCICGVJ
-         5k+UvWSUDvWZ3Vgjw8rGXo7ao53onhw/w86xAq6WEwAWeYgGbhaujet44cWoY+BMzpnx
-         yjyTaT0HlxyV02XBzx6oonvfL2xLBHFjmxtKumw4gumD+5Mab6kxO4tX8YrXUc+uLwyM
-         WRkQ==
-X-Gm-Message-State: AOJu0YyN79vTOlKqpMnWM9P1Uihhni1rnwYW6XEwCi4EzY5+Dj6CptyL
-	2yoQrOZkjISZ3tpwODDOwyzzc6LSMOKX2ARvbAsgXMKtBGGPNnOixAizsWJk0GP1anQL3qJFcEG
-	i0jJ8kA==
-X-Gm-Gg: AR+sD12V+PZaXNWX1xZY1NdZc9cAn972CCcTJYd6WJAh5izrJYVbHvOlFfrBmfrvjop
-	OZNLPAKS38ozasf+0ouSV7oDk3nkzVTvl0nJkr18vEbyfHhJ+UyfB4VhSkQE5wclFv+DAauoXi7
-	VY8N4x6Zzv7gBw70KRHDJGUUoi9ksG83HtAx+9Dw4dqSaysW9E1uItRUtR7UW1hO1wkskIHy4yl
-	YW6RfjUvI+bYcIg1aLEMBgG9bAOmeVxyNgKxZ9VXQyDvUdwt6xcRJ/tPlaSOAjGrqj/8sP+jHSf
-	8AIhivHJgELWv3mbD5YY969tDe0r6WHIIkAyfcGALyXf62Q7+aFxZIGfQSyYtYP8vCd0QCLJAnP
-	Ff98efXVOoDmCz0NQcymf5ydT4bfHBxwOUwTGWVHeAzkEX7qO0DbGACHJpMnIic5tiSTkWRqkBF
-	vyZG2k0Fpoyezk+FEQQ6rUB6qKDXw86VO0td4Emaf4zaCsQzWtjfjSY6ujJ7UeIBQyhTWpNydW/
-	aSzRZzZUIar/1TCCDWNtKM9mBv+OIekCvPzE+5Lk1NbdDTMx5XgdL1ZlJtgWds=
-X-Received: by 2002:adf:e992:0:b0:47f:c648:e280 with SMTP id ffacd0b85a97d-47fec519539mr7084576f8f.18.1785921850450;
-        Wed, 05 Aug 2026 02:24:10 -0700 (PDT)
-Message-ID: <87a7505c-4883-48b7-9bc0-60444b9b6b05@suse.com>
-Date: Wed, 5 Aug 2026 11:24:09 +0200
+        bh=Yh5sgqmpsiDgmmWKbLvnKvsyVo9fXTHQYMZ46x1tb84=;
+        b=AN6kakfyv4KtavxfME1wy4dGWQfRc4GZpNr79pCPCVaMabpubb985eIKPILf1cJMgj
+         f+uKW3ajxPFSy46ErJy3wGC9xxXem8Du6lQaHAQFDGOZG40b8o66er31T4pTtlJJVyEj
+         VrlDrg/M0rDp2RfpoiYgdfrvFUwuEyqklGKUk6rgP6ZWzCKETkcnK9KAhv7Ds/Z5H51n
+         a7GIdMt/Z4QzV18nAwe7fMWH8MIbYreKonrW8X1sIZ0p31vs30t5LLmfWBJzYpi+AfXa
+         yWxJPmDvHlU55GROOvI17VuUG6rjcbDC/EIVYP8H9MihjnZ6ArMO92de0YPHgYrg1ZhG
+         1vmA==
+X-Gm-Message-State: AOJu0YxCbM6Rzh1lAmfyJ0K0SB73t2rHuUFD1iX0mDfXPdurrdcbwSEc
+	FTRq7Um+4PUlytHEm0TmJQaGlTAWF+uvmiSEVmavNGbQP0u72efhIzHLH5D/2p2VLPaKvKjxL7r
+	nmX+QIw==
+X-Gm-Gg: AR+sD13XywLOfX4kjMkV5F7lUZdZWZ9n8bOZeJwpcDOkFhdhLdM5y/d3/GQJzy3Vsb2
+	9yNgQE9Kx4JH901VzU/wlQWBgsHR0JT4eNomWAUciiUUk+fFdJf9vgq/3nHDhaIFNSKJFWVahTa
+	naCxex2RvtdeQOUX6MVPj5nI/LYkwWaQTvse/ygwAOoYpnva7lkKxynY4gbVizUQmK101rQW/H9
+	N5j6dPVTCwfJGN09erUhQgHvEhsIu+WhmhdIX4VGbBpwgRMweRTsTPGg5UK+RELRTv1DNEYEqTD
+	2OnuD7tAokHrX8bsBoNK0EhLpWMOeV4v0kLZ2I3DTBQQihLMLxsqU6txwazjroCeChBY9qVYGOx
+	eVFB1ETxZCD68UYas6G2QYc+NtUuhP0eXSt7h6DpxaVHGUGU8gIIW3OaAlTZAnv4yo/X5fceq5X
+	/AjIw4pvpee/JnEhYl++/Td7qojwCjAndz6jJLuw3RnWk86PzWIB5XUGDBLaWlTjAPl6qzfA64H
+	lRkmLByXaxST9yBUTc0FW/teIjEVqsYtntJ/RpF6+p5U8QG9uB/
+X-Received: by 2002:a05:6000:29d5:b0:47f:c648:e27b with SMTP id ffacd0b85a97d-47fec4e6fbcmr6793319f8f.2.1785921872105;
+        Wed, 05 Aug 2026 02:24:32 -0700 (PDT)
+Message-ID: <818b1fd4-ade7-4702-9dc6-f75fb0cfc575@suse.com>
+Date: Wed, 5 Aug 2026 11:24:30 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v10 4/6] VMX: support USER-MSR
+Subject: [PATCH v10 5/6] x86emul: support MSR-IMM instructions
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -131,302 +131,156 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <81a2c636-5a74-41c3-81a2-3f49ed717744@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1785921851-674BE2AC-85FAD874/0/0
+X-purgate-ID: tlsNG-d25034/1785921872-022C0A5B-BC100AB1/0/0
 X-purgate-type: clean
-X-purgate-size: 10566
+X-purgate-size: 6509
 
-Hook up the new VM exit codes and handle guest accesses, context switch,
-and save/restore. At least for now don't allow the guest direct access
-to the control MSR; this may need changing if guests were to frequently
-access it (e.g. on their own context switch path).
-
-While there also correct a one-off in union ldt_or_tr_instr_info's
-comment.
+Encoding-wise these are very similar to URDMSR/UWRMSR, so existing logic
+is easy to extend.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-Needing to change two places in hvm.c continues to be unhelpful; I
-recall I already did forget to also adjust hvm_load_cpu_msrs() for XFD.
-Considering that MSRs typically arrive in the order the table has it,
-couldn't we incrementally look up the incoming MSR index there, falling
-back to a full lookup only when the incremental lookup failed (and thus
-not normally re-iterating through the initial part of the array)?
+v10: Drop vex.opcx part of #UD check (wrongly copied from USER-MSR code).
+     Re-base.
+v8: Don't mark the feature 's' just yet. Re-base.
+v7: New.
 
-Said comment in union ldt_or_tr_instr_info is further odd (same for
-union gdt_or_idt_instr_info's) in that Instruction Information is only a
-32-bit field. Hence bits 32-63 aren't undefined, but simply don't exist.
-
-RFC: The wee attempt to "deal" with nested is likely wrong, but I'm
-     afraid I simply don't know where such enforcement would be done
-     properly. Returning an error there is also commented out, for
-     domain_cpu_policy_changed() returning void without "x86/xstate:
-     re-size save area when CPUID policy changes" in place.
----
-v10: Replace __vmread() by vmread(). Add commentsto case labels in
-     vmx_vmexit_handler(). Re-base.
-v9: Use wrmsrns(). Do renames where bits are also going to be used for
-    MSR-IMM. Re-base.
-v8: Re-base.
-v5: Introduce user_msr_gpr().
-v4: New.
-
---- a/xen/arch/x86/cpu-policy.c
-+++ b/xen/arch/x86/cpu-policy.c
-@@ -832,6 +832,12 @@ static void __init calculate_hvm_max_pol
-          * situations until someone has cross-checked the behaviour for safety.
-          */
-         __clear_bit(X86_FEATURE_PKS, fs);
+--- a/tools/tests/x86_emulator/predicates.c
++++ b/tools/tests/x86_emulator/predicates.c
+@@ -1522,6 +1522,8 @@ static const struct vex {
+     { { 0xdf }, 3, T, R, pfx_66, WIG, Ln }, /* vaeskeygenassist */
+     { { 0xf0 }, 3, T, R, pfx_f2, Wn, L0 }, /* rorx */
+ }, vex_map7[] = {
++    { { 0xf6, 0xc0 }, 6, F, N, pfx_f3, W0, L0 }, /* wrmsrns */
++    { { 0xf6, 0xc0 }, 6, F, N, pfx_f2, W0, L0 }, /* rdmsr */
+     { { 0xf8, 0xc0 }, 6, F, N, pfx_f3, W0, L0 }, /* uwrmsr */
+     { { 0xf8, 0xc0 }, 6, F, N, pfx_f2, W0, L0 }, /* urdmsr */
+ };
+--- a/tools/tests/x86_emulator/test_x86_emulator.c
++++ b/tools/tests/x86_emulator/test_x86_emulator.c
+@@ -1571,6 +1571,30 @@ int main(int argc, char **argv)
+     if ( (rc != X86EMUL_EXCEPTION) ||
+          (regs.rip != (unsigned long)&instr[0]) )
+         goto fail;
++    printf("okay\n");
 +
-+        /*
-+         * Don't expose USER-MSR until it is known how (if at all) it is
-+         * virtualized on SVM.
-+         */
-+        __clear_bit(X86_FEATURE_USER_MSR, fs);
-     }
- 
-     if ( !cpu_has_vmx_msrlist )
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -452,6 +452,10 @@ void domain_cpu_policy_changed(struct do
-         }
-     }
- 
-+    /* Nested doesn't have the necessary processing, yet. */
-+    if ( nestedhvm_enabled(d) && p->feat.user_msr )
-+        return /* -EINVAL */;
++    printf("%-40s", "Testing rdmsr $MSR_GS_BASE,%rdx...");
++    instr[0] = 0xc4; instr[1] = 0xe7; instr[2] = 0x7b; instr[3] = 0xf6; instr[4] = 0xc2;
++    *(uint32_t *)&instr[5] = MSR_GS_BASE;
++    regs.rip = (unsigned long)&instr[0];
++    regs.rdx = ~gs_base;
++    rc = x86_emulate(&ctxt, &emulops);
++    if ( (rc != X86EMUL_OKAY) ||
++         (regs.rip != (unsigned long)&instr[9]) ||
++         (regs.rdx != gs_base) )
++        goto fail;
++    printf("okay\n");
 +
-     for_each_vcpu ( d, v )
-     {
-         cpu_policy_updated(v);
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -1393,6 +1393,7 @@ static int cf_check hvm_load_cpu_xsave_s
++    printf("%-40s", "Testing wrmsrns %rsi,$MSR_SHADOW_GS_BASE...");
++    instr[0] = 0xc4; instr[1] = 0xe7; instr[2] = 0x7a; instr[3] = 0xf6; instr[4] = 0xc6;
++    *(uint32_t *)&instr[5] = MSR_SHADOW_GS_BASE;
++    regs.rip = (unsigned long)&instr[0];
++    regs.rsi = 0x665544332211UL;
++    rc = x86_emulate(&ctxt, &emulops);
++    if ( (rc != X86EMUL_OKAY) ||
++         (regs.rip != (unsigned long)&instr[9]) ||
++         (gs_base_shadow != 0x665544332211UL) )
++        goto fail;
  
- #define HVM_CPU_MSR_SIZE(cnt) offsetof(struct hvm_msr, msr[cnt])
- static const uint32_t msrs_to_send[] = {
-+    MSR_USER_MSR_CTL,
-     MSR_SPEC_CTRL,
-     MSR_INTEL_MISC_FEATURES_ENABLES,
-     MSR_PKRS,
-@@ -1547,6 +1548,7 @@ static int cf_check hvm_load_cpu_msrs(st
-         {
-             int rc;
+     emulops.write_msr     = NULL;
+ #endif
+--- a/tools/tests/x86_emulator/x86-emulate.c
++++ b/tools/tests/x86_emulator/x86-emulate.c
+@@ -67,6 +67,7 @@ bool emul_test_init(void)
+     cpu_policy.feat.lkgs = true;
+     cpu_policy.feat.wrmsrns = true;
+     cpu_policy.feat.msrlist = true;
++    cpu_policy.feat.msr_imm = true;
+     cpu_policy.feat.user_msr = true;
+     cpu_policy.extd.clzero = true;
  
-+        case MSR_USER_MSR_CTL:
-         case MSR_SPEC_CTRL:
-         case MSR_INTEL_MISC_FEATURES_ENABLES:
-         case MSR_PKRS:
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -696,13 +696,18 @@ static void cf_check vmx_vcpu_destroy(st
- }
- 
- /*
-- * To avoid MSR save/restore at every VM exit/entry time, we restore
-- * the x86_64 specific MSRs at domain switch time. Since these MSRs
-- * are not modified once set for para domains, we don't save them,
-- * but simply reset them to values set in percpu_traps_init().
-+ * To avoid MSR save/restore at every VM exit/entry time, we restore the
-+ * x86_64 specific MSRs at vcpu switch time. Since these MSRs are not
-+ * modified once set for para domains, we don't save them, but simply clear
-+ * them or reset them to values set in percpu_traps_init().
-  */
--static void vmx_restore_host_msrs(void)
-+static void vmx_restore_host_msrs(const struct vcpu *v)
- {
-+    const struct vcpu_msrs *msrs = v->arch.msrs;
-+
-+    if ( msrs->user_msr_ctl.enable )
-+        wrmsrns(MSR_USER_MSR_CTL, 0);
-+
-     /* No PV guests?  No need to restore host SYSCALL infrastructure. */
-     if ( !IS_ENABLED(CONFIG_PV) )
-         return;
-@@ -760,6 +765,9 @@ static void vmx_restore_guest_msrs(struc
- 
-     if ( cp->feat.pks )
-         wrpkrs(msrs->pkrs);
-+
-+    if ( msrs->user_msr_ctl.enable )
-+        wrmsrns(MSR_USER_MSR_CTL, msrs->user_msr_ctl.raw);
- }
- 
- void vmx_update_cpu_exec_control(struct vcpu *v)
-@@ -1165,7 +1173,7 @@ static void cf_check vmx_ctxt_switch_fro
-     }
- 
-     vmx_save_guest_msrs(v);
--    vmx_restore_host_msrs();
-+    vmx_restore_host_msrs(v);
-     vmx_save_dr(v);
- 
-     if ( v->domain->arch.hvm.pi_ops.flags & PI_CSW_FROM )
-@@ -4194,6 +4202,13 @@ static int vmx_handle_apic_write(void)
-     return vlapic_apicv_write(current, exit_qualification & 0xfff);
- }
- 
-+static unsigned int msr_imm_gpr(void)
-+{
-+    msr_imm_instr_info_t info = { .raw = vmread(VMX_INSTRUCTION_INFO) };
-+
-+    return info.gpr;
-+}
-+
- static void undo_nmis_unblocked_by_iret(void)
- {
-     unsigned long guest_info;
-@@ -4697,6 +4712,41 @@ void asmlinkage vmx_vmexit_handler(struc
-             hvm_inject_hw_exception(X86_EXC_GP, 0);
+--- a/xen/arch/x86/x86_emulate/decode.c
++++ b/xen/arch/x86/x86_emulate/decode.c
+@@ -1271,8 +1271,9 @@ int x86emul_decode(struct x86_emulate_st
+                     case vex_map7:
+                         opcode |= MASK_INSR(7, X86EMUL_OPC_EXT_MASK);
+                         /*
+-                         * No table lookup here for now, as there's only a single
+-                         * opcode point (0xf8) populated in map 7.
++                         * No table lookup here for now, as there are only two
++                         * (very similar) opcode points (0xf6, 0xf8) populated
++                         * in map 7.
+                          */
+                         d = DstMem | SrcImm | ModRM | Mov;
+                         s->op_bytes = 8;
+--- a/xen/arch/x86/x86_emulate/private.h
++++ b/xen/arch/x86/x86_emulate/private.h
+@@ -616,6 +616,7 @@ amd_like(const struct x86_emulate_ctxt *
+ #define vcpu_has_avx_ifma()    (ctxt->cpuid->feat.avx_ifma)
+ #define vcpu_has_msrlist()     (ctxt->cpuid->feat.msrlist)
+ #define vcpu_has_movrs()       (ctxt->cpuid->feat.movrs)
++#define vcpu_has_msr_imm()     (ctxt->cpuid->feat.msr_imm)
+ #define vcpu_has_avx_vnni_int8() (ctxt->cpuid->feat.avx_vnni_int8)
+ #define vcpu_has_avx_ne_convert() (ctxt->cpuid->feat.avx_ne_convert)
+ #define vcpu_has_avx_vnni_int16() (ctxt->cpuid->feat.avx_vnni_int16)
+--- a/xen/arch/x86/x86_emulate/x86_emulate.c
++++ b/xen/arch/x86/x86_emulate/x86_emulate.c
+@@ -7086,6 +7086,35 @@ x86_emulate(
+         state->simd_size = simd_none;
          break;
  
-+    case EXIT_REASON_URDMSR: /* NB: User-MSR bitmap was checked by the CPU. */
-+    {
-+        uint64_t msr_content = 0;
-+
-+        switch ( hvm_msr_read_intercept(vmread(EXIT_QUALIFICATION),
-+                                        &msr_content) )
++    case X86EMUL_OPC_VEX_F3(7, 0xf6): /* wrmsrns r64,imm32 */
++    case X86EMUL_OPC_VEX_F2(7, 0xf6): /* rdmsr imm32,r64 */
++        generate_exception_if((!mode_64bit() || ea.type != OP_REG ||
++                               (modrm_reg & 7) ||
++                               vex.l || vex.w || vex.reg != 0xf),
++                              X86_EXC_UD);
++        vcpu_must_have(msr_imm);
++        generate_exception_if(!mode_ring0(), X86_EXC_GP, 0);
++        if ( vex.pfx == vex_f2 )
 +        {
-+        case X86EMUL_OKAY:
-+            *decode_gpr(regs, msr_imm_gpr()) = msr_content;
-+            update_guest_eip(); /* Safe: URDMSR */
-+            break;
-+
-+        case X86EMUL_EXCEPTION:
-+            hvm_inject_hw_exception(X86_EXC_GP, 0);
-+            break;
++            /* urdmsr */
++            fail_if(!ops->read_msr);
++            if ( (rc = ops->read_msr(imm1, &msr_val, ctxt)) != X86EMUL_OKAY )
++                goto done;
++            dst.val = msr_val;
++            ASSERT(dst.type == OP_REG);
++            dst.bytes = 8;
 +        }
-+        break;
-+    }
-+
-+    case EXIT_REASON_UWRMSR: /* NB: User-MSR bitmap was checked by the CPU. */
-+        exit_qualification = vmread(EXIT_QUALIFICATION);
-+        switch ( hvm_msr_write_intercept(exit_qualification,
-+                                         *decode_gpr(regs, msr_imm_gpr()),
-+                                         true) )
++        else
 +        {
-+        case X86EMUL_OKAY:
-+            update_guest_eip(); /* Safe: UWRMSR */
-+            break;
-+
-+        case X86EMUL_EXCEPTION:
-+            hvm_inject_hw_exception(X86_EXC_GP, 0);
-+            break;
++            /* wrmsrns */
++            fail_if(!ops->write_msr);
++            if ( (rc = ops->write_msr(imm1, dst.val, ctxt,
++                                      true)) != X86EMUL_OKAY )
++                goto done;
++            dst.type = OP_NONE;
 +        }
 +        break;
 +
-     case EXIT_REASON_VMXOFF:
-     case EXIT_REASON_VMXON:
-     case EXIT_REASON_VMCLEAR:
---- a/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-+++ b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-@@ -203,6 +203,8 @@ static inline void pi_clear_sn(struct pi
- #define EXIT_REASON_NOTIFY              75
- #define EXIT_REASON_RDMSRLIST           78
- #define EXIT_REASON_WRMSRLIST           79
-+#define EXIT_REASON_URDMSR              80
-+#define EXIT_REASON_UWRMSR              81
- /* Remember to also update VMX_PERF_EXIT_REASON_SIZE! */
- 
- /*
-@@ -578,8 +580,18 @@ typedef union ldt_or_tr_instr_info {
-         base_reg_invalid        :1,  /* bit 27 - Base register invalid */
-         instr_identity          :1,  /* bit 28 - 0:LDT, 1:TR */
-         instr_write             :1,  /* bit 29 - 0:store, 1:load */
--                                :34; /* bits 31:63 - Undefined */
-+                                :34; /* bits 30:63 - Undefined */
-     };
- } ldt_or_tr_instr_info_t;
- 
-+/* VM-Exit instruction info for URDMSR and UWRMSR */
-+typedef union msr_imm_instr_info {
-+    unsigned long raw;
-+    struct {
-+        unsigned int            :3,  /* Bits 0:2 - Undefined */
-+        gpr                     :4,  /* Bits 3:6 - Source/Destination register */
-+                                :25; /* bits 7:31 - Undefined */
-+    };
-+} msr_imm_instr_info_t;
-+
- #endif /* __ASM_X86_HVM_VMX_VMX_H__ */
---- a/xen/arch/x86/include/asm/guest-msr.h
-+++ b/xen/arch/x86/include/asm/guest-msr.h
-@@ -8,6 +8,20 @@
- struct vcpu_msrs
- {
-     /*
-+     * 0x0000001c - MSR_USER_MSR_CTL
-+     *
-+     * Value is guest chosen, and always loaded in vcpu context.
-+     */
-+    union {
-+        uint64_t raw;
-+        struct {
-+            bool enable:1;
-+            unsigned int :11;
-+            unsigned long bitmap:52;
-+        };
-+    } user_msr_ctl;
-+
-+    /*
-      * 0x00000048 - MSR_SPEC_CTRL
-      * 0xc001011f - MSR_VIRT_SPEC_CTRL (if X86_FEATURE_AMD_SSBD)
-      *
---- a/xen/arch/x86/include/asm/perfc_defn.h
-+++ b/xen/arch/x86/include/asm/perfc_defn.h
-@@ -6,7 +6,7 @@ PERFCOUNTER_ARRAY(exceptions,
- 
- #ifdef CONFIG_HVM
- 
--#define VMX_PERF_EXIT_REASON_SIZE 80
-+#define VMX_PERF_EXIT_REASON_SIZE 82
- #define VMEXIT_NPF_PERFC 166
- #define SVM_PERF_EXIT_REASON_SIZE (VMEXIT_NPF_PERFC + 1)
- PERFCOUNTER_ARRAY(vmexits,              "vmexits",
---- a/xen/arch/x86/msr.c
-+++ b/xen/arch/x86/msr.c
-@@ -278,6 +278,12 @@ int guest_rdmsr(struct vcpu *v, uint32_t
-         *val = msrs->xss.raw;
-         break;
- 
-+    case MSR_USER_MSR_CTL:
-+        if ( !cp->feat.user_msr )
-+            goto gp_fault;
-+        *val = msrs->user_msr_ctl.raw;
-+        break;
-+
-     case 0x40000000 ... 0x400001ff:
-         if ( is_viridian_domain(d) )
-         {
-@@ -616,6 +622,19 @@ int guest_wrmsr(struct vcpu *v, uint32_t
-         msrs->xss.raw = val;
-         break;
- 
-+    case MSR_USER_MSR_CTL:
-+        if ( !cp->feat.user_msr )
-+            goto gp_fault;
-+
-+        if ( (val & ~(USER_MSR_ENABLE | USER_MSR_ADDR_MASK)) ||
-+             !is_canonical_address(val) )
-+            goto gp_fault;
-+
-+        msrs->user_msr_ctl.raw = val;
-+        if ( v == curr )
-+            wrmsrns(MSR_USER_MSR_CTL, val);
-+        break;
-+
-     case 0x40000000 ... 0x400001ff:
-         if ( is_viridian_domain(d) )
-         {
+     case X86EMUL_OPC_F3(0x0f38, 0xf8): /* enqcmds r,m512 / uwrmsr r64,r32 */
+     case X86EMUL_OPC_F2(0x0f38, 0xf8): /* enqcmd r,m512 / urdmsr r32,r64 */
+         if ( ea.type == OP_MEM )
 --- a/xen/include/public/arch-x86/cpufeatureset.h
 +++ b/xen/include/public/arch-x86/cpufeatureset.h
-@@ -362,7 +362,7 @@ XEN_CPUFEATURE(AMX_COMPLEX,        15*32
- XEN_CPUFEATURE(AVX_VNNI_INT16,     15*32+10) /*A  AVX-VNNI-INT16 Instructions */
- XEN_CPUFEATURE(UTMR,               15*32+13) /*   User Timer */
- XEN_CPUFEATURE(PREFETCHI,          15*32+14) /*A  PREFETCHIT{0,1} Instructions */
--XEN_CPUFEATURE(USER_MSR,           15*32+15) /*   U{RD,WR}MSR Instructions */
-+XEN_CPUFEATURE(USER_MSR,           15*32+15) /*s  U{RD,WR}MSR Instructions */
- XEN_CPUFEATURE(UIRET_UIF,          15*32+17) /*   UIRET updates UIF */
- XEN_CPUFEATURE(CET_SSS,            15*32+18) /*   CET Supervisor Shadow Stacks safe to use */
- XEN_CPUFEATURE(SLSM,               15*32+24) /*   Static Lockstep Mode */
+@@ -354,6 +354,7 @@ XEN_CPUFEATURE(MCDT_NO,            13*32
+ XEN_CPUFEATURE(UC_LOCK_DIS,        13*32+ 6) /*   UC-lock disable */
+ 
+ /* Intel-defined CPU features, CPUID level 0x00000007:1.ecx, word 14 */
++XEN_CPUFEATURE(MSR_IMM,            14*32+ 5) /*   RDMSR/WRMSRNS with immediate operand */
+ 
+ /* Intel-defined CPU features, CPUID level 0x00000007:1.edx, word 15 */
+ XEN_CPUFEATURE(AVX_VNNI_INT8,      15*32+ 4) /*A  AVX-VNNI-INT8 Instructions */
+--- a/xen/tools/gen-cpuid.py
++++ b/xen/tools/gen-cpuid.py
+@@ -283,7 +283,7 @@ def crunch_numbers(state):
+         # NO_LMSL indicates the absense of Long Mode Segment Limits, which
+         # have been dropped in hardware.
+         LM: [CX16, PCID, LAHF_LM, PAGE1GB, PKU, NO_LMSL, AMX_TILE, CMPCCXADD,
+-             LKGS, MOVRS, MSRLIST, USER_MSR],
++             LKGS, MOVRS, MSRLIST, USER_MSR, MSR_IMM],
+ 
+         # AMD K6-2+ and K6-III processors shipped with 3DNow+, beyond the
+         # standard 3DNow in the earlier K6 processors.
 
 
