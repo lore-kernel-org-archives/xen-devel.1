@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32E7EC55822
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 09:22:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1383125.1626377 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1505CC55174
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 09:23:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1383132.1626388 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrXpd-0004od-2o; Wed, 05 Aug 2026 09:22:37 +0000
+	id 1wrXqC-0005JD-F4; Wed, 05 Aug 2026 09:23:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1383125.1626377; Wed, 05 Aug 2026 09:22:37 +0000
+Received: by outflank-mailman (output) from mailman id 1383132.1626388; Wed, 05 Aug 2026 09:23:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrXpc-0004oW-WF; Wed, 05 Aug 2026 09:22:37 +0000
-Received: by outflank-mailman (input) for mailman id 1383125;
- Wed, 05 Aug 2026 09:22:36 +0000
+	id 1wrXqC-0005J6-Ay; Wed, 05 Aug 2026 09:23:12 +0000
+Received: by outflank-mailman (input) for mailman id 1383132;
+ Wed, 05 Aug 2026 09:23:10 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wrXpb-0004oM-SA
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 09:22:36 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wrXqA-0005Im-LL
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 09:23:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrXpb-003xUi-5I
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 11:22:35 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wrXqA-003xnS-29
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 11:23:10 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7300d3-2eae-0a2a0a5409dd-0a2a4505b946-36
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 11:22:35 +0200
-Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a7300fc-e002-0a2a0a5209dd-0a2a4504c0fc-20
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 11:23:10 +0200
+Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7300da-4cb1-0a2a45050019-d155802ba8ba-3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 11:22:35 +0200
-Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-4980fe6b3beso13701115e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 02:22:35 -0700 (PDT)
+ id 6a7300fd-b57f-0a2a45040019-d155dd2dacf7-3
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 11:23:09 +0200
+Received: by mail-wr1-f45.google.com with SMTP id
+ ffacd0b85a97d-47f703a9e5dso360398f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 02:23:09 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47fec23ec2fsm7161507f8f.29.2026.08.05.02.22.33
+ ffacd0b85a97d-47febfd9f74sm7511626f8f.4.2026.08.05.02.23.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Aug 2026 02:22:34 -0700 (PDT)
+ Wed, 05 Aug 2026 02:23:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,49 +55,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785921754; x=1786526554; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785921789; x=1786526589; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=fjs9sHGquZQF/L9bQ2CBvHTyahS9kvnKV++jSks/hjg=;
-        b=aTi2DlL5iPdfdH0pnVUgeZHz5PewJmSA5XIEdpeqAEhwAH0eGoQq+mgM7ADhEZWE94
-         8ESS91/JXM2YYrxa8fsSJPN9uDJ7Mirs1UREg7AoTDm6rBqjSU6CKdJt3lbmQJVMK0FC
-         /YSVX2Wy877OHcqmkOAdMjOPYpC5r/XyEINzwMVE+Pi/MQGI+WLQZI8wLcc4dDvLIlWU
-         AjbnKxCGr5LQ4W2mOfTILLcj4BRIoy1NOptTxQ8oNyBNUDowe2wWeziNCSwWPm2HQki1
-         v3glK+QxdvB/1WqmYeaCz+Ssr2CDss7nNryhh8HBSk+lyYUEUtdDIIVN4dLpV3ipKF30
-         FXZQ==
+        bh=2SIGc7gedCikC6tD+F90xKM08ODZSCL6uvs5Cbn5Yv0=;
+        b=HozyeeAAj38rSAgoH2Q+CArAhkYnlBpXgnTXYF63KSiYVy8xQevs6KQ3XlJPyxPj5s
+         mWBkRqLeacdR/tL/3u234Ux/3q8f0+zqbXEYJnTCCwM7RDCwEKdOI+Ybr4UvXA8qCwNC
+         OK9XsTkH06Sk969ZuJG6xbwiK3k7HDZQB2Q8jRwvt+TOWyHCJLHW8KrNVGr5oZLsqLu/
+         BoWATxHYCOZgj5APo90dYhKXbfcorvJdpcZiPvRK/kgJHwO3qWDDmLODshl6Qn9DYtea
+         FsDBHJS1llqLrv9ASiYv8l6kKu5XHJVugzm9d79cU+Dbhg0o4U7z0HI1snK2yKZpTVCl
+         fxrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785921754; x=1786526554;
+        d=1e100.net; s=20251104; t=1785921789; x=1786526589;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=fjs9sHGquZQF/L9bQ2CBvHTyahS9kvnKV++jSks/hjg=;
-        b=e5vSWvOkY2SQ+XjIJqh5R8i5M+vWHUdUAM/zl37Zd644JlGlc+++TRGWr59jvuOLea
-         jocPsDe57g7gJHXb6Hh3d5HLay+bzasIoQ4w00/GRfiLnDPKzlygIrwpv790jKmS8r1v
-         GosAAyiVVTQhrAsr1G0bsxIXUuW8ULMDI/RCOiH5fykqz0RcugE0e2LSIGl5wHZ8WbAW
-         JJnD4fMJbZW0fRet8e0vXxoKa2O7Mur5Hdb8lxMZVQx/IrpP3mB9/niypW12j9nT56ol
-         ZuQ0AaJy2lKjTzirPLBbg/PHaVvSVTpcrP4seKwom30dgBgEaAxZnyUjPIaej1sMTqQI
-         q1Zw==
-X-Gm-Message-State: AOJu0YwR+OxwVKaOXgbe0FrW2ffvKeMhn3KR6teodYYlCpU/od51cKoV
-	t/HfPvfFvtaxIxXGSOdTF4P77ROMWAWgSCgk2i/LRQRgZud5NQyG2x1ZZJ370UhafG0ZzoFEOFL
-	ESOLD8Q==
-X-Gm-Gg: AR+sD104OH90ORHdPj8+mbUZL21z+Z2r4m0u4LB2cwZdbUU812Hj0GD136B8/SLjjlI
-	GuFTKRB8qfG2xnDiicUA5ziMAjD4fpL7oEnufImhhQ09H6zYDxbEZCWRDM2aRDt0UXOTSupXvan
-	+r2bBjHZTM7TUHj2JWIMidawKAw89cOt5eJ/osawx29FWQHJF2cUeycJLelGceFN/Vvg8N8XXSY
-	YpTxKth3euRdiNhLbhH3orjvmuP27VfNwbEUsK2xfcCoECEx1fa3wgU7BAz8+sAKdHLr5T1wqIZ
-	orj9HiPYFr/J71NAmYtqAK7mRjQMVwXXiNo/Or1E2YUV2rWF3IIdREe/1k+uZMYRtnAcSJjloJo
-	iucqm2o7QY2WKHI+WSSr4sOqtQb7RDTKdCKV1ZDef9SradVihzwnLEoF28hSSoc62lFpiBu/SW7
-	GxbAXhaUrxSfNb5ob8CQn5HlXyfM/0ZJ9BdfA3sz7GNiyh1i3p2s9zLTkZNwN8205kKnlLv2NCs
-	SeAt0GMh8/o+8TiLdhh2CrMcMWSG4OJjEXQHhjrNhH4SXQGWYEW
-X-Received: by 2002:a05:600c:c042:b0:495:4f89:8117 with SMTP id 5b1f17b1804b1-49949fd9848mr140595665e9.1.1785921754483;
-        Wed, 05 Aug 2026 02:22:34 -0700 (PDT)
-Message-ID: <28b5b379-0577-4244-b660-d03cfb5ccc93@suse.com>
-Date: Wed, 5 Aug 2026 11:22:33 +0200
+        bh=2SIGc7gedCikC6tD+F90xKM08ODZSCL6uvs5Cbn5Yv0=;
+        b=DWj6Jjyxq0r7sOYQU+X3+WtkA9PNrsxP7K9DNTAJmXwnh4OMQrAeJ2hSxpqQS39cEm
+         jM0ncbRX/UqR7iTLQx6EFa9h+BNXh3oNFberTn86croXhslBFIgSqxCcyWxFzlriCwth
+         w00HGIe9aKIbhtwqjhfA/PDbFeoCNeNvmd5Z69p2N5nZcYmjiGT79sB6fL2D8HAZq7nk
+         tTHOucCvkvqWXEcOw563hnIa+FPvvEJn1q4TnMPP5bK3ODvijMsHKjWgXdWmy12kYbnS
+         IBVwo4225j1eyb1Vwg5dJb+aLA6SPAsdv28jhCKt/iqQ86L/eQD8CFn4uD4Q4xUbPNEL
+         sGsQ==
+X-Gm-Message-State: AOJu0Yy9f1490YIJu76FdnO5SaQzXzK57CyQFafu7kNhZiMIIgq8Yrvq
+	0TgCTXNY100JvgnQDxIYp2Kgt9Xp81Fp/XrJc2AiRlZ93KJRHCzV6jljv9jVsT8mmxJH/MmDa/q
+	SnEQpKA==
+X-Gm-Gg: AR+sD10kJ7/wYwb10cNq4Vd5rD0sgM7dGiT6KOL4o4okU6ufvdGEPoOtztQ2TIdz+oW
+	Gj0CqWm1L1c1qhphT6UOSVUpjfPlNu6zswYPpmTBmew6fp9iKtW3u659FrJDF74RWzKeFX1DSP4
+	zB4duh15ZTVaH3Wce4tLvjb7t2tXKtt8ej1NpFDeD/PIXrfIUAuLKSdd6vlWl/rRfeH2wCcPpPM
+	VzM9LmiAT42uOE+uLTnXxmZOuking0Z7OVPNCOPqGaIGLnPjVejIrDAYibIRdhSgpXVZSNnP+n5
+	lrSYwMj9lc8/zqYdukP1KiGchCBJ7HfcfB1bi4eOq0T02BDiicqpFoX2fdqI3EHvyRzgUbC2WNc
+	+reKCnndBYtjQ4S2JISIqFOQbfuW9NPM5ydWCS8InP/+CkByx1XLpL6UrTeDStrShOrdN3p0iPo
+	CsNu6Ri8DmSbQVBByfRGY+VT9iXWOplVuCFGK5GGduV0u+lrPg37PgSEYJgpBrtvHTHupKGRLgO
+	eGZD7bcEBsLa7Evh0aW7bQpmsl0yezuPcsvdDzLMa1cyvJeIDQk
+X-Received: by 2002:a5d:5541:0:b0:47a:b86f:3ed1 with SMTP id ffacd0b85a97d-47fec62bacamr6533357f8f.21.1785921788871;
+        Wed, 05 Aug 2026 02:23:08 -0700 (PDT)
+Message-ID: <5cd53809-9762-4187-85e5-56a6a6d37a94@suse.com>
+Date: Wed, 5 Aug 2026 11:23:07 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v10 1/6] x86emul+VMX: support {RD,WR}MSRLIST
+Subject: [PATCH v10 2/6] x86emul: support USER-MSR instructions
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -131,473 +131,474 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <81a2c636-5a74-41c3-81a2-3f49ed717744@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1785921755-F7CB82A1-C1C4B105/0/0
+X-purgate-ID: tlsNG-ebf023/1785921789-C3AC0B50-3A53D68A/0/0
 X-purgate-type: clean
-X-purgate-size: 18832
+X-purgate-size: 18726
 
-These are "compound" instructions to issue a series of RDMSR / WRMSR
-respectively. In the emulator we can therefore implement them by using
-the existing msr_{read,write}() hooks. The memory accesses utilize that
-the HVM ->read() / ->write() hooks are already linear-address
-(x86_seg_none) aware (by way of hvmemul_virtual_to_linear() handling
-this case).
+While UWRMSR probably isn't of much use as long as we don't support
+UINTR, URDMSR may well be useful to guests even without that (depending
+on what OSes are willing to permit access to).
 
-Preemption is being checked for in WRMSRLIST handling only, as only MSR
-writes are expected to possibly take long.
+Since the two VEX encodings introduce a lonely opcode point in map 7,
+for now don't bother introducing a full 256-entry table.
+
+In the test harness use the UINTR_TIMER MSR despite the UINTR and UTMR
+features being removed from the architecture. Using UARCH_MISC_CTL would
+constrain usable values overly much.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-RFC: In vmx_vmexit_handler() handling is forwarded to the emulator
-     blindly. Alternatively we could consult the exit qualification and
-     process just a single MSR at a time (without involving the
-     emulator), exiting back to the guest after every iteration. (I
-     don't think a mix of both models makes a lot of sense.)
+The retaining of (possible) #PF from the bitmap access is "speculative"
+(the spec doesn't mention #PF as a possible exception; conceivably this
+might also need converting to #GP).
 
-The precise behavior of MSR_BARRIER is still not spelled out in ISE 050,
-so the (minimal) implementation continues to be a guess for now.
+I'm a little wary of the "MSRs Writeable by UWRMSR" table that the spec
+has, and that our code thus also enforces: As new MSRs are added to that
+table, we'll need piecemeal updates to that switch() statement.
 
-Wouldn't calculate_hvm_max_policy() for MPX better behave the same way
-as done here, at least from an abstract perspective (assuming that AMD
-won't add such functionality now that Intel have deprecated it)?
+The forced setting of cpu_policy.feat.utmr could likely be done
+globally, i.e. early in main(). Limiting its scope is merely "just in
+case". Thoughts?
 ---
-v10: fuzz_{read,write}() adjustment. Non-default-expose the feature.
-     Re-base.
-v8: Re-base.
-v6: Use MSR constants in test harness. Re-base.
-v5: Add missing vmx_init_vmcs_config() and construct_vmcs() adjustments.
-    Avoid unnecessary uses of r(). Re-base.
-v3: Add dependency on LM. Limit exposure to HVM. Utilize new info from
-    ISE 050. Re-base.
-v2: Use X86_EXC_*. Add preemption checking to WRMSRLIST handling. Remove
-    the feature from "max" when the VMX counterpart isn't available.
+v10: Use msr-index.h constants also in x86_emulate(). Re-base.
+v8: Switch to using fallthrough pseudo-keyword. Re-base.
+v7.1: Add MSR-specific feature checks for UWRMSR (incl the UTMR feature
+      bit and its overriding in the test harness).
+v7: Add missing vcpu_must_have() and override in emul_test_init(). Use
+    MSR constants even more.
+v6: Add MSR_UINTR_TIMER to header. Use MSR constants in test harness.
+    Re-base.
+v5: Correct ModR/M.reg check for VEX-encoded forms. Cosmetic test
+    harness adjustment. Re-base.
+v4: MSR index input regs are 64-bit (albeit only the APX spec has it
+    this way for now).
+v3: New.
 
---- a/tools/fuzz/x86_instruction_emulator/fuzz-emul.c
-+++ b/tools/fuzz/x86_instruction_emulator/fuzz-emul.c
-@@ -171,7 +171,7 @@ static int fuzz_read(
-     struct x86_emulate_ctxt *ctxt)
- {
-     /* Reads expected for all user and system segments. */
--    if ( is_x86_user_segment(seg) )
-+    if ( is_x86_user_segment(seg) || seg == x86_seg_none )
-         assert(ctxt->addr_size == 64 || !(offset >> 32));
-     else if ( seg == x86_seg_tr )
-         /*
-@@ -340,7 +340,7 @@ static int fuzz_write(
-     struct x86_emulate_ctxt *ctxt)
- {
-     /* Writes not expected for any system segments. */
--    assert(is_x86_user_segment(seg));
-+    assert(is_x86_user_segment(seg) || seg == x86_seg_none);
-     assert(ctxt->addr_size == 64 || !(offset >> 32));
- 
-     return maybe_fail(ctxt, "write", true);
 --- a/tools/tests/x86_emulator/predicates.c
 +++ b/tools/tests/x86_emulator/predicates.c
-@@ -342,6 +342,8 @@ static const struct {
-     { { 0x01, 0xc4 }, { 2, 2 }, F, N }, /* vmxoff */
-     { { 0x01, 0xc5 }, { 2, 2 }, F, N }, /* pconfig */
-     { { 0x01, 0xc6 }, { 2, 2 }, F, N }, /* wrmsrns */
-+    { { 0x01, 0xc6 }, { 0, 2 }, F, W, pfx_f2 }, /* rdmsrlist */
-+    { { 0x01, 0xc6 }, { 0, 2 }, F, R, pfx_f3 }, /* wrmsrlist */
-     { { 0x01, 0xc8 }, { 2, 2 }, F, N }, /* monitor */
-     { { 0x01, 0xc9 }, { 2, 2 }, F, N }, /* mwait */
-     { { 0x01, 0xca }, { 2, 2 }, F, N }, /* clac */
+@@ -867,7 +867,9 @@ static const struct {
+     { { 0xf6 }, { 2, 2 }, T, R, pfx_66 }, /* adcx */
+     { { 0xf6 }, { 2, 2 }, T, R, pfx_f3 }, /* adox */
+     { { 0xf8 }, { 2, 2 }, F, W, pfx_66 }, /* movdir64b */
++    { { 0xf8, 0xc0 }, { 0, 2 }, F, N, pfx_f3 }, /* uwrmsr */
+     { { 0xf8 }, { 2, 2 }, F, W, pfx_f3 }, /* enqcmds */
++    { { 0xf8, 0xc0 }, { 0, 2 }, F, N, pfx_f2 }, /* urdmsr */
+     { { 0xf8 }, { 2, 2 }, F, W, pfx_f2 }, /* enqcmd */
+     { { 0xf9 }, { 2, 2 }, F, W }, /* movdiri */
+ };
+@@ -1519,6 +1521,9 @@ static const struct vex {
+     { { 0xde }, 3, T, R, pfx_66, W0, L0 }, /* vsm3rnds2 */
+     { { 0xdf }, 3, T, R, pfx_66, WIG, Ln }, /* vaeskeygenassist */
+     { { 0xf0 }, 3, T, R, pfx_f2, Wn, L0 }, /* rorx */
++}, vex_map7[] = {
++    { { 0xf8, 0xc0 }, 6, F, N, pfx_f3, W0, L0 }, /* uwrmsr */
++    { { 0xf8, 0xc0 }, 6, F, N, pfx_f2, W0, L0 }, /* urdmsr */
+ };
+ 
+ static const struct {
+@@ -1528,6 +1533,10 @@ static const struct {
+     { vex_0f,   ARRAY_SIZE(vex_0f) },
+     { vex_0f38, ARRAY_SIZE(vex_0f38) },
+     { vex_0f3a, ARRAY_SIZE(vex_0f3a) },
++    { NULL,     0 }, /* map 4 */
++    { NULL,     0 }, /* map 5 */
++    { NULL,     0 }, /* map 6 */
++    { vex_map7, ARRAY_SIZE(vex_map7) },
+ };
+ 
+ static const struct xop {
+@@ -2426,7 +2435,8 @@ void predicates_test(void *instr, struct
+ 
+                 if ( vex[x].tbl[t].w == WIG || (vex[x].tbl[t].w & W0) )
+                 {
+-                    memcpy(ptr, vex[x].tbl[t].opc, vex[x].tbl[t].len);
++                    memcpy(ptr, vex[x].tbl[t].opc,
++                           MIN(vex[x].tbl[t].len, ARRAY_SIZE(vex->tbl->opc)));
+ 
+                     if ( vex[x].tbl[t].l == LIG || (vex[x].tbl[t].l & L0) )
+                         do_test(instr, vex[x].tbl[t].len + ((void *)ptr - instr),
+@@ -2436,7 +2446,8 @@ void predicates_test(void *instr, struct
+                     if ( vex[x].tbl[t].l == LIG || (vex[x].tbl[t].l & L1) )
+                     {
+                         ptr[-1] |= 4;
+-                        memcpy(ptr, vex[x].tbl[t].opc, vex[x].tbl[t].len);
++                        memcpy(ptr, vex[x].tbl[t].opc,
++                               MIN(vex[x].tbl[t].len, ARRAY_SIZE(vex->tbl->opc)));
+ 
+                         do_test(instr, vex[x].tbl[t].len + ((void *)ptr - instr),
+                                 vex[x].tbl[t].modrm ? (void *)ptr - instr + 1 : 0,
+@@ -2447,7 +2458,8 @@ void predicates_test(void *instr, struct
+                 if ( vex[x].tbl[t].w == WIG || (vex[x].tbl[t].w & W1) )
+                 {
+                     ptr[-1] = 0xf8 | vex[x].tbl[t].pfx;
+-                    memcpy(ptr, vex[x].tbl[t].opc, vex[x].tbl[t].len);
++                    memcpy(ptr, vex[x].tbl[t].opc,
++                           MIN(vex[x].tbl[t].len, ARRAY_SIZE(vex->tbl->opc)));
+ 
+                     if ( vex[x].tbl[t].l == LIG || (vex[x].tbl[t].l & L0) )
+                         do_test(instr, vex[x].tbl[t].len + ((void *)ptr - instr),
+@@ -2457,7 +2469,8 @@ void predicates_test(void *instr, struct
+                     if ( vex[x].tbl[t].l == LIG || (vex[x].tbl[t].l & L1) )
+                     {
+                         ptr[-1] |= 4;
+-                        memcpy(ptr, vex[x].tbl[t].opc, vex[x].tbl[t].len);
++                        memcpy(ptr, vex[x].tbl[t].opc,
++                               MIN(vex[x].tbl[t].len, ARRAY_SIZE(vex->tbl->opc)));
+ 
+                         do_test(instr, vex[x].tbl[t].len + ((void *)ptr - instr),
+                                 vex[x].tbl[t].modrm ? (void *)ptr - instr + 1 : 0,
 --- a/tools/tests/x86_emulator/test_x86_emulator.c
 +++ b/tools/tests/x86_emulator/test_x86_emulator.c
-@@ -626,7 +626,7 @@ static int write(
-     if ( verbose )
-         printf("** %s(%u, %p,, %u,)\n", __func__, seg, (void *)offset, bytes);
+@@ -675,6 +675,7 @@ static int blk(
  
--    if ( !is_x86_user_segment(seg) )
-+    if ( !is_x86_user_segment(seg) && seg != x86_seg_none )
-         return X86EMUL_UNHANDLEABLE;
-     memcpy((void *)offset, p_data, bytes);
+ #ifdef __x86_64__
+ static unsigned long gs_base, gs_base_shadow;
++static unsigned long uintr_timer;
+ #endif
+ 
+ static int read_segment(
+@@ -704,6 +705,15 @@ static int write_segment(
+ 
      return X86EMUL_OKAY;
-@@ -713,6 +713,10 @@ static int read_msr(
+ }
++
++static const uint8_t __attribute__((aligned(0x1000))) umsr_bitmap[0x1000] = {
++#define RD(msr) [(msr) >> 3] = 1 << ((msr) & 7)
++#define WR(msr) [0x800 + ((msr) >> 3)] = 1 << ((msr) & 7)
++    RD(MSR_IA32_APERF),
++    WR(MSR_UINTR_TIMER),
++#undef WR
++#undef RD
++};
+ #endif
+ 
+ static int read_msr(
+@@ -713,10 +723,22 @@ static int read_msr(
  {
      switch ( reg )
      {
-+    case MSR_BARRIER:
-+        *val = 0;
++#ifdef __x86_64__
++    case MSR_USER_MSR_CTL:
++        *val = (unsigned long)umsr_bitmap | 1;
++        return X86EMUL_OKAY;
++#endif
++
+     case MSR_BARRIER:
+         *val = 0;
+         return X86EMUL_OKAY;
+ 
++    case MSR_IA32_APERF:
++#define APERF_LO_VALUE 0xAEAEAEAE
++#define APERF_HI_VALUE 0xEAEAEAEA
++        *val = ((uint64_t)APERF_HI_VALUE << 32) | APERF_LO_VALUE;
 +        return X86EMUL_OKAY;
 +
      case MSR_EFER:
          *val = ctxt->addr_size > 32 ? EFER_LME | EFER_LMA : 0;
          return X86EMUL_OKAY;
-@@ -1431,9 +1435,53 @@ int main(int argc, char **argv)
-          (gs_base != 0x0000111122224444UL) ||
-          gs_base_shadow )
+@@ -753,6 +775,12 @@ static int write_msr(
+ {
+     switch ( reg )
+     {
++    case MSR_UINTR_TIMER:
++        if ( ctxt->addr_size < 64 )
++            break;
++        uintr_timer = val;
++        return X86EMUL_OKAY;
++
+     case MSR_GS_BASE:
+         if ( ctxt->addr_size < 64 || !is_canonical_address(val) )
+             break;
+@@ -1481,6 +1509,68 @@ int main(int argc, char **argv)
+          (gs_base != 0x0000222244446666UL) ||
+          (gs_base_shadow != 0x0000111122224444UL) )
          goto fail;
 +    printf("okay\n");
- 
-     cpu_policy.extd.nscb = i;
-     emulops.write_segment = NULL;
 +
-+    printf("%-40s", "Testing rdmsrlist...");
-+    instr[0] = 0xf2; instr[1] = 0x0f; instr[2] = 0x01; instr[3] = 0xc6;
++    printf("%-40s", "Testing urdmsr %rdx,%rcx...");
++    instr[0] = 0xf2; instr[1] = 0x0f; instr[2] = 0x38; instr[3] = 0xf8; instr[4] = 0xd1;
 +    regs.rip = (unsigned long)&instr[0];
-+    regs.rsi = (unsigned long)(res + 0x80);
-+    regs.rdi = (unsigned long)(res + 0x80 + 0x40 * 2);
-+    regs.rcx = 0x0002000100008000UL;
-+    gs_base_shadow = 0x0000222244446666UL;
-+    memset(res + 0x80, ~0, 0x40 * 8 * 2);
-+    res[0x80 + 0x0f * 2] = MSR_GS_BASE;
-+    res[0x80 + 0x0f * 2 + 1] = 0;
-+    res[0x80 + 0x20 * 2] = MSR_SHADOW_GS_BASE;
-+    res[0x80 + 0x20 * 2 + 1] = 0;
-+    res[0x80 + 0x31 * 2] = MSR_BARRIER;
-+    res[0x80 + 0x31 * 2 + 1] = 0;
++    regs.rdx = MSR_IA32_APERF;
 +    rc = x86_emulate(&ctxt, &emulops);
 +    if ( (rc != X86EMUL_OKAY) ||
-+         (regs.rip != (unsigned long)&instr[4]) ||
-+         regs.rcx ||
-+         (res[0x80 + (0x40 + 0x0f) * 2] != (unsigned int)gs_base) ||
-+         (res[0x80 + (0x40 + 0x0f) * 2 + 1] != (gs_base >> (8 * sizeof(int)))) ||
-+         (res[0x80 + (0x40 + 0x20) * 2] != (unsigned int)gs_base_shadow) ||
-+         (res[0x80 + (0x40 + 0x20) * 2 + 1] != (gs_base_shadow >> (8 * sizeof(int)))) ||
-+         res[0x80 + (0x40 + 0x31) * 2] || res[0x80 + (0x40 + 0x31) * 2 + 1] )
++         (regs.rip != (unsigned long)&instr[5]) ||
++         (regs.rcx != (((uint64_t)APERF_HI_VALUE << 32) | APERF_LO_VALUE)) )
 +        goto fail;
 +    printf("okay\n");
 +
-+    printf("%-40s", "Testing wrmsrlist...");
-+    instr[0] = 0xf3; instr[1] = 0x0f; instr[2] = 0x01; instr[3] = 0xc6;
-+    regs.eip = (unsigned long)&instr[0];
-+    regs.rsi -= 0x11 * 8;
-+    regs.rdi -= 0x11 * 8;
-+    regs.rcx = 0x0002000100000000UL;
-+    res[0x80 + 0x0f * 2] = MSR_SHADOW_GS_BASE;
-+    res[0x80 + 0x20 * 2] = MSR_GS_BASE;
++    printf("%-40s", "Testing urdmsr $MSR_IA32_APERF,%rdx...");
++    instr[0] = 0xc4; instr[1] = 0xe7; instr[2] = 0x7b; instr[3] = 0xf8; instr[4] = 0xc2;
++    *(uint32_t *)&instr[5] = MSR_IA32_APERF;
++    regs.rip = (unsigned long)&instr[0];
 +    rc = x86_emulate(&ctxt, &emulops);
 +    if ( (rc != X86EMUL_OKAY) ||
-+         (regs.rip != (unsigned long)&instr[4]) ||
-+         regs.rcx ||
-+         (gs_base != 0x0000222244446666UL) ||
-+         (gs_base_shadow != 0x0000111122224444UL) )
++         (regs.rip != (unsigned long)&instr[9]) ||
++         (regs.rdx != (((uint64_t)APERF_HI_VALUE << 32) | APERF_LO_VALUE)) )
 +        goto fail;
++    printf("okay\n");
 +
++    /* Our write_msr() knows of MSR_UINTR_TIMER. */
++    i = cpu_policy.feat.utmr;
++    cpu_policy.feat.utmr = true;
++
++    printf("%-40s", "Testing uwrmsr %rdi,%rsi...");
++    instr[0] = 0xf3; instr[1] = 0x0f; instr[2] = 0x38; instr[3] = 0xf8; instr[4] = 0xf7;
++    regs.rip = (unsigned long)&instr[0];
++    regs.rsi = MSR_UINTR_TIMER;
++    regs.rdi = 0x0011223344556677UL;
++    rc = x86_emulate(&ctxt, &emulops);
++    if ( (rc != X86EMUL_OKAY) ||
++         (regs.rip != (unsigned long)&instr[5]) ||
++         (uintr_timer != 0x0011223344556677UL) )
++        goto fail;
++    printf("okay\n");
++
++    printf("%-40s", "Testing uwrmsr %rsi,$MSR_UINTR_TIMER...");
++    instr[0] = 0xc4; instr[1] = 0xe7; instr[2] = 0x7a; instr[3] = 0xf8; instr[4] = 0xc6;
++    *(uint32_t *)&instr[5] = MSR_UINTR_TIMER;
++    regs.rip = (unsigned long)&instr[0];
++    regs.rsi = 0x8877665544332211UL;
++    rc = x86_emulate(&ctxt, &emulops);
++    if ( (rc != X86EMUL_OKAY) ||
++         (regs.rip != (unsigned long)&instr[9]) ||
++         (uintr_timer != 0x8877665544332211UL) )
++        goto fail;
++    printf("okay\n");
++
++    cpu_policy.feat.utmr = i;
++
++    printf("%-40s", "Testing uwrmsr %rsi,$MSR_UARCH_MISC_CTRL...");
++    *(uint32_t *)&instr[5] = MSR_UARCH_MISC_CTRL;
++    regs.rip = (unsigned long)&instr[0];
++    regs.rsi = 0;
++    rc = x86_emulate(&ctxt, &emulops);
++    if ( (rc != X86EMUL_EXCEPTION) ||
++         (regs.rip != (unsigned long)&instr[0]) )
++        goto fail;
+ 
      emulops.write_msr     = NULL;
  #endif
-     printf("okay\n");
 --- a/tools/tests/x86_emulator/x86-emulate.c
 +++ b/tools/tests/x86_emulator/x86-emulate.c
-@@ -66,6 +66,7 @@ bool emul_test_init(void)
-     cpu_policy.feat.rdpid = true;
+@@ -67,6 +67,7 @@ bool emul_test_init(void)
      cpu_policy.feat.lkgs = true;
      cpu_policy.feat.wrmsrns = true;
-+    cpu_policy.feat.msrlist = true;
+     cpu_policy.feat.msrlist = true;
++    cpu_policy.feat.user_msr = true;
      cpu_policy.extd.clzero = true;
  
      if ( cpu_has_xsave )
---- a/xen/arch/x86/cpu-policy.c
-+++ b/xen/arch/x86/cpu-policy.c
-@@ -824,6 +824,9 @@ static void __init calculate_hvm_max_pol
-             __clear_bit(X86_FEATURE_XSAVES, fs);
-     }
- 
-+    if ( !cpu_has_vmx_msrlist )
-+        __clear_bit(X86_FEATURE_MSRLIST, fs);
-+
-     /*
-      * Xen doesn't use PKS, so the guest support for it has opted to not use
-      * the VMCS load/save controls for efficiency reasons.  This depends on
---- a/xen/arch/x86/hvm/vmx/vmcs.c
-+++ b/xen/arch/x86/hvm/vmx/vmcs.c
-@@ -363,8 +363,9 @@ static int vmx_init_vmcs_config(bool bsp
- 
-     if ( caps.cpu_based_exec_control & CPU_BASED_ACTIVATE_TERTIARY_CONTROLS )
-     {
--        uint64_t opt = (TERTIARY_EXEC_VIRT_SPEC_CTRL |
--                        TERTIARY_EXEC_EPT_PAGING_WRITE);
-+        uint64_t opt = TERTIARY_EXEC_EPT_PAGING_WRITE |
-+                       TERTIARY_EXEC_ENABLE_MSRLIST |
-+                       TERTIARY_EXEC_VIRT_SPEC_CTRL;
- 
-         caps.tertiary_exec_control = adjust_vmx_controls2(
-             "Tertiary Exec Control", 0, opt,
-@@ -1121,7 +1122,8 @@ static int construct_vmcs(struct vcpu *v
-         v->arch.hvm.vmx.exec_control |= CPU_BASED_RDTSC_EXITING;
- 
-     v->arch.hvm.vmx.secondary_exec_control = vmx_caps.secondary_exec_control;
--    v->arch.hvm.vmx.tertiary_exec_control  = vmx_caps.tertiary_exec_control;
-+    v->arch.hvm.vmx.tertiary_exec_control  = vmx_caps.tertiary_exec_control &
-+                                             ~TERTIARY_EXEC_ENABLE_MSRLIST;
- 
-     /*
-      * Disable features which we don't want active by default:
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -894,6 +894,20 @@ static void cf_check vmx_cpuid_policy_ch
-     else
-         vmx_set_msr_intercept(v, MSR_PKRS, VMX_MSR_RW);
- 
-+    if ( cp->feat.msrlist )
-+    {
-+        vmx_clear_msr_intercept(v, MSR_BARRIER, VMX_MSR_RW);
-+        v->arch.hvm.vmx.tertiary_exec_control |= TERTIARY_EXEC_ENABLE_MSRLIST;
-+        vmx_update_tertiary_exec_control(v);
-+    }
-+    else if ( v->arch.hvm.vmx.tertiary_exec_control &
-+              TERTIARY_EXEC_ENABLE_MSRLIST )
-+    {
-+        vmx_set_msr_intercept(v, MSR_BARRIER, VMX_MSR_RW);
-+        v->arch.hvm.vmx.tertiary_exec_control &= ~TERTIARY_EXEC_ENABLE_MSRLIST;
-+        vmx_update_tertiary_exec_control(v);
-+    }
-+
-  out:
-     vmx_vmcs_exit(v);
- 
-@@ -3846,6 +3860,22 @@ gp_fault:
-     return X86EMUL_EXCEPTION;
- }
- 
-+static bool cf_check is_msrlist(
-+    const struct x86_emulate_state *state, const struct x86_emulate_ctxt *ctxt)
-+{
-+
-+    if ( ctxt->opcode == X86EMUL_OPC(0x0f, 0x01) )
-+    {
-+        unsigned int rm, reg;
-+        int mode = x86_insn_modrm(state, &rm, &reg);
-+
-+        /* This also includes WRMSRNS; should be okay. */
-+        return mode == 3 && rm == 6 && !reg;
-+    }
-+
-+    return false;
-+}
-+
- static void vmx_do_extint(struct cpu_user_regs *regs)
- {
-     unsigned long vector;
-@@ -4656,6 +4686,17 @@ void asmlinkage vmx_vmexit_handler(struc
-         }
-         break;
- 
-+    case EXIT_REASON_RDMSRLIST:
-+    case EXIT_REASON_WRMSRLIST:
-+        if ( vmx_guest_x86_mode(v) != 8 || !currd->arch.cpuid->feat.msrlist )
-+        {
-+            ASSERT_UNREACHABLE();
-+            hvm_inject_hw_exception(X86_EXC_UD, X86_EVENT_NO_EC);
-+        }
-+        else if ( !hvm_emulate_one_insn(is_msrlist, "MSR list") )
-+            hvm_inject_hw_exception(X86_EXC_GP, 0);
-+        break;
-+
-     case EXIT_REASON_VMXOFF:
-     case EXIT_REASON_VMXON:
-     case EXIT_REASON_VMCLEAR:
---- a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-+++ b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-@@ -275,8 +275,13 @@ void vmx_vmcs_reload(struct vcpu *v);
- #define TERTIARY_EXEC_EPT_PAGING_WRITE          BIT(2, UL)
- #define TERTIARY_EXEC_GUEST_PAGING_VERIFY       BIT(3, UL)
- #define TERTIARY_EXEC_IPI_VIRT                  BIT(4, UL)
-+#define TERTIARY_EXEC_ENABLE_MSRLIST            BIT(6, UL)
- #define TERTIARY_EXEC_VIRT_SPEC_CTRL            BIT(7, UL)
- 
-+#define cpu_has_vmx_msrlist \
-+    (IS_ENABLED(CONFIG_INTEL_VMX) && \
-+     (vmx_caps.tertiary_exec_control & TERTIARY_EXEC_ENABLE_MSRLIST))
-+
- #define cpu_has_vmx_virt_spec_ctrl \
-      (vmx_caps.tertiary_exec_control & TERTIARY_EXEC_VIRT_SPEC_CTRL)
- 
---- a/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-+++ b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-@@ -201,6 +201,8 @@ static inline void pi_clear_sn(struct pi
- #define EXIT_REASON_XRSTORS             64
- #define EXIT_REASON_BUS_LOCK            74
- #define EXIT_REASON_NOTIFY              75
-+#define EXIT_REASON_RDMSRLIST           78
-+#define EXIT_REASON_WRMSRLIST           79
- /* Remember to also update VMX_PERF_EXIT_REASON_SIZE! */
- 
- /*
 --- a/xen/arch/x86/include/asm/msr-index.h
 +++ b/xen/arch/x86/include/asm/msr-index.h
-@@ -24,6 +24,8 @@
+@@ -24,6 +24,10 @@
  #define  APIC_BASE_ENABLE                   (_AC(1, ULL) << 11)
  #define  APIC_BASE_ADDR_MASK                _AC(0x000ffffffffff000, ULL)
  
-+#define MSR_BARRIER                         0x0000002f
++#define MSR_USER_MSR_CTL                    0x0000001c
++#define  USER_MSR_ENABLE                    (_AC(1, ULL) <<  0)
++#define  USER_MSR_ADDR_MASK                 0xfffffffffffff000ULL
 +
+ #define MSR_BARRIER                         0x0000002f
+ 
  #define MSR_TEST_CTRL                       0x00000033
- #define  TEST_CTRL_SPLITLOCK_DETECT         (_AC(1, ULL) << 29)
- #define  TEST_CTRL_SPLITLOCK_DISABLE        (_AC(1, ULL) << 31)
---- a/xen/arch/x86/include/asm/perfc_defn.h
-+++ b/xen/arch/x86/include/asm/perfc_defn.h
-@@ -6,7 +6,7 @@ PERFCOUNTER_ARRAY(exceptions,
+@@ -209,6 +213,8 @@
+ #define  MCU_CONTROL_DIS_MCU_LOAD           (_AC(1, ULL) <<  1)
+ #define  MCU_CONTROL_EN_SMM_BYPASS          (_AC(1, ULL) <<  2)
  
- #ifdef CONFIG_HVM
- 
--#define VMX_PERF_EXIT_REASON_SIZE 76
-+#define VMX_PERF_EXIT_REASON_SIZE 80
- #define VMEXIT_NPF_PERFC 166
- #define SVM_PERF_EXIT_REASON_SIZE (VMEXIT_NPF_PERFC + 1)
- PERFCOUNTER_ARRAY(vmexits,              "vmexits",
---- a/xen/arch/x86/msr.c
-+++ b/xen/arch/x86/msr.c
-@@ -148,6 +148,12 @@ int guest_rdmsr(struct vcpu *v, uint32_t
-     case MSR_AMD_PPIN:
-         goto gp_fault;
- 
-+    case MSR_BARRIER:
-+        if ( !cp->feat.msrlist )
-+            goto gp_fault;
-+        *val = 0;
-+        break;
++#define MSR_UINTR_TIMER                     0x00001b00
 +
-     case MSR_IA32_FEATURE_CONTROL:
-         /*
-          * Architecturally, availability of this MSR is enumerated by the
-@@ -427,6 +433,7 @@ int guest_wrmsr(struct vcpu *v, uint32_t
-         uint64_t rsvd;
+ #define MSR_UARCH_MISC_CTRL                 0x00001b01
+ #define  UARCH_CTRL_DOITM                   (_AC(1, ULL) <<  0)
  
-         /* Read-only */
-+    case MSR_BARRIER:
-     case MSR_IA32_PLATFORM_ID:
-     case MSR_CORE_CAPABILITIES:
-     case MSR_INTEL_CORE_THREAD_COUNT:
---- a/xen/arch/x86/x86_emulate/0f01.c
-+++ b/xen/arch/x86/x86_emulate/0f01.c
-@@ -11,6 +11,7 @@
- #include "private.h"
- 
- #ifdef __XEN__
-+#include <xen/event.h>
- #include <asm/prot-key.h>
- #endif
- 
-@@ -28,6 +29,7 @@ int x86emul_0f01(struct x86_emulate_stat
-     switch ( s->modrm )
-     {
-         unsigned long base, limit, cr0, cr0w, cr4;
-+        unsigned int n;
-         struct segment_register sreg;
-         uint64_t msr_val;
- 
-@@ -42,6 +44,65 @@ int x86emul_0f01(struct x86_emulate_stat
-                                 ((uint64_t)regs->r(dx) << 32) | regs->eax,
-                                 ctxt, true);
-             goto done;
-+
-+        case vex_f3: /* wrmsrlist */
-+            vcpu_must_have(msrlist);
-+            generate_exception_if(!mode_64bit(), X86_EXC_UD);
-+            generate_exception_if(!mode_ring0() || (regs->esi & 7) ||
-+                                  (regs->edi & 7),
-+                                  X86_EXC_GP, 0);
-+            fail_if(!ops->write_msr);
-+            while ( regs->r(cx) )
-+            {
-+                n = __builtin_ffsl(regs->r(cx)) - 1;
-+                if ( (rc = ops->read(x86_seg_none, regs->r(si) + n * 8,
-+                                     &msr_val, 8, ctxt)) != X86EMUL_OKAY )
-+                    break;
-+                generate_exception_if(msr_val != (uint32_t)msr_val,
-+                                      X86_EXC_GP, 0);
-+                base = msr_val;
-+                if ( (rc = ops->read(x86_seg_none, regs->r(di) + n * 8,
-+                                     &msr_val, 8, ctxt)) != X86EMUL_OKAY ||
-+                     (rc = ops->write_msr(base, msr_val, ctxt,
-+                                          true)) != X86EMUL_OKAY )
-+                    break;
-+                regs->r(cx) &= ~(1UL << n);
-+
-+#ifdef __XEN__
-+                if ( regs->r(cx) && local_events_need_delivery() )
-+                {
-+                    rc = X86EMUL_RETRY;
-+                    break;
-+                }
-+#endif
-+            }
-+            goto done;
-+
-+        case vex_f2: /* rdmsrlist */
-+            vcpu_must_have(msrlist);
-+            generate_exception_if(!mode_64bit(), X86_EXC_UD);
-+            generate_exception_if(!mode_ring0() || (regs->esi & 7) ||
-+                                  (regs->edi & 7),
-+                                  X86_EXC_GP, 0);
-+            fail_if(!ops->read_msr || !ops->write);
-+            while ( regs->r(cx) )
-+            {
-+                n = __builtin_ffsl(regs->r(cx)) - 1;
-+                if ( (rc = ops->read(x86_seg_none, regs->r(si) + n * 8,
-+                                     &msr_val, 8, ctxt)) != X86EMUL_OKAY )
-+                    break;
-+                generate_exception_if(msr_val != (uint32_t)msr_val,
-+                                      X86_EXC_GP, 0);
-+                if ( (rc = ops->read_msr(msr_val, &msr_val,
-+                                         ctxt)) != X86EMUL_OKAY ||
-+                     (rc = ops->write(x86_seg_none, regs->r(di) + n * 8,
-+                                      &msr_val, 8, ctxt)) != X86EMUL_OKAY )
-+                    break;
-+                regs->r(cx) &= ~(1UL << n);
-+            }
-+            if ( rc != X86EMUL_OKAY )
-+                ctxt->regs->r(cx) = regs->r(cx);
-+            goto done;
-         }
-         generate_exception(X86_EXC_UD);
- 
---- a/xen/arch/x86/x86_emulate/private.h
-+++ b/xen/arch/x86/x86_emulate/private.h
-@@ -612,6 +612,7 @@ amd_like(const struct x86_emulate_ctxt *
- #define vcpu_has_lkgs()        (ctxt->cpuid->feat.lkgs)
- #define vcpu_has_wrmsrns()     (ctxt->cpuid->feat.wrmsrns)
- #define vcpu_has_avx_ifma()    (ctxt->cpuid->feat.avx_ifma)
-+#define vcpu_has_msrlist()     (ctxt->cpuid->feat.msrlist)
- #define vcpu_has_movrs()       (ctxt->cpuid->feat.movrs)
- #define vcpu_has_avx_vnni_int8() (ctxt->cpuid->feat.avx_vnni_int8)
- #define vcpu_has_avx_ne_convert() (ctxt->cpuid->feat.avx_ne_convert)
---- a/xen/arch/x86/x86_emulate/util.c
-+++ b/xen/arch/x86/x86_emulate/util.c
-@@ -100,6 +100,9 @@ bool cf_check x86_insn_is_mem_access(con
+--- a/xen/arch/x86/x86_emulate/decode.c
++++ b/xen/arch/x86/x86_emulate/decode.c
+@@ -905,7 +905,7 @@ decode_0f38(struct x86_emulate_state *s,
+     case 0x00 ... 0x89:
+     case 0x8c ... 0xef:
+     case 0xf2 ... 0xf5:
+-    case 0xf7 ... 0xf8:
++    case 0xf7:
+     case 0xfa ... 0xff:
+         s->op_bytes = 0;
+         /* fall through */
+@@ -957,6 +957,18 @@ decode_0f38(struct x86_emulate_state *s,
+     case X86EMUL_OPC_VEX_F2(0, 0xf7): /* shrx */
          break;
  
-     case X86EMUL_OPC(0x0f, 0x01):
-+        /* {RD,WR}MSRLIST */
-+        if ( mode_64bit() && s->modrm == 0xc6 )
-+            return s->vex.pfx >= vex_f3;
-         /* Cover CLZERO. */
-         return (s->modrm_rm & 7) == 4 && (s->modrm_reg & 7) == 7;
-     }
-@@ -160,7 +163,11 @@ bool cf_check x86_insn_is_mem_write(cons
-         case 0xff: /* Grp5 */
++    case 0xf8:
++        if ( s->modrm_mod == 3 ) /* u{rd,wr}msr */
++        {
++            s->desc = DstMem | SrcReg | Mov;
++            s->op_bytes = 8;
++            s->simd_size = simd_none;
++        }
++        else /* movdir64b / enqcmd{,s} */
++            s->op_bytes = 0;
++        ctxt->opcode |= MASK_INSR(s->vex.pfx, X86EMUL_OPC_PFX_MASK);
++        break;
++
+     default:
+         s->op_bytes = 0;
+         break;
+@@ -1255,6 +1267,16 @@ int x86emul_decode(struct x86_emulate_st
+                          */
+                         d = twobyte_table[0x38].desc;
+                         break;
++
++                    case vex_map7:
++                        opcode |= MASK_INSR(7, X86EMUL_OPC_EXT_MASK);
++                        /*
++                         * No table lookup here for now, as there's only a single
++                         * opcode point (0xf8) populated in map 7.
++                         */
++                        d = DstMem | SrcImm | ModRM | Mov;
++                        s->op_bytes = 8;
++                        break;
+                     }
+                 }
+                 else if ( s->ext < ext_8f08 + ARRAY_SIZE(xop_table) )
+@@ -1611,6 +1633,7 @@ int x86emul_decode(struct x86_emulate_st
+             s->simd_size = ext8f09_table[b].simd_size;
              break;
  
--        case X86EMUL_OPC(0x0f, 0x01): /* CLZERO is the odd one. */
-+        case X86EMUL_OPC(0x0f, 0x01):
-+            /* RDMSRLIST */
-+            if ( mode_64bit() && s->modrm == 0xc6 )
-+                return s->vex.pfx == vex_f2;
-+            /* CLZERO is another odd one. */
-             return (s->modrm_rm & 7) == 4 && (s->modrm_reg & 7) == 7;
++        case ext_map7:
+         case ext_8f08:
+         case ext_8f0a:
+             /*
+@@ -1825,6 +1848,7 @@ int x86emul_decode(struct x86_emulate_st
  
-         default:
+     case ext_map5:
+     case ext_map6:
++    case ext_map7:
+     case ext_8f09:
+     case ext_8f0a:
+         break;
+--- a/xen/arch/x86/x86_emulate/private.h
++++ b/xen/arch/x86/x86_emulate/private.h
+@@ -202,6 +202,7 @@ enum vex_opcx {
+     vex_0f3a,
+     evex_map5 = 5,
+     evex_map6,
++    vex_map7,
+ };
+ 
+ enum vex_pfx {
+@@ -259,6 +260,7 @@ struct x86_emulate_state {
+         ext_0f3a = vex_0f3a,
+         ext_map5 = evex_map5,
+         ext_map6 = evex_map6,
++        ext_map7 = vex_map7,
+         /*
+          * For XOP use values such that the respective instruction field
+          * can be used without adjustment.
+@@ -617,6 +619,7 @@ amd_like(const struct x86_emulate_ctxt *
+ #define vcpu_has_avx_vnni_int8() (ctxt->cpuid->feat.avx_vnni_int8)
+ #define vcpu_has_avx_ne_convert() (ctxt->cpuid->feat.avx_ne_convert)
+ #define vcpu_has_avx_vnni_int16() (ctxt->cpuid->feat.avx_vnni_int16)
++#define vcpu_has_user_msr()    (ctxt->cpuid->feat.user_msr)
+ 
+ #define vcpu_must_have(feat) \
+     generate_exception_if(!vcpu_has_##feat(), X86_EXC_UD)
+--- a/xen/arch/x86/x86_emulate/x86_emulate.c
++++ b/xen/arch/x86/x86_emulate/x86_emulate.c
+@@ -7086,10 +7086,74 @@ x86_emulate(
+         state->simd_size = simd_none;
+         break;
+ 
+-    case X86EMUL_OPC_F2(0x0f38, 0xf8): /* enqcmd r,m512 */
+-    case X86EMUL_OPC_F3(0x0f38, 0xf8): /* enqcmds r,m512 */
++    case X86EMUL_OPC_F3(0x0f38, 0xf8): /* enqcmds r,m512 / uwrmsr r64,r32 */
++    case X86EMUL_OPC_F2(0x0f38, 0xf8): /* enqcmd r,m512 / urdmsr r32,r64 */
++        if ( ea.type == OP_MEM )
++            goto enqcmd;
++        imm1 = src.val;
++        fallthrough;
++    case X86EMUL_OPC_VEX_F3(7, 0xf8): /* uwrmsr r64,imm32 */
++    case X86EMUL_OPC_VEX_F2(7, 0xf8): /* urdmsr imm32,r64 */
++        generate_exception_if(!mode_64bit() || ea.type != OP_REG, X86_EXC_UD);
++        generate_exception_if(vex.l || vex.w, X86_EXC_UD);
++        generate_exception_if(vex.opcx && ((modrm_reg & 7) || vex.reg != 0xf),
++                              X86_EXC_UD);
++        vcpu_must_have(user_msr);
++        fail_if(!ops->read_msr);
++        if ( ops->read_msr(MSR_USER_MSR_CTL, &msr_val, ctxt) != X86EMUL_OKAY )
++        {
++            x86_emul_reset_event(ctxt);
++            msr_val = 0;
++        }
++        generate_exception_if(!(msr_val & USER_MSR_ENABLE), X86_EXC_UD);
++        generate_exception_if(imm1 & ~0x3fff, X86_EXC_GP, 0);
++
++        /* Check the corresponding bitmap. */
++        ea.mem.off = msr_val & ~0xfff;
++        if ( vex.pfx != vex_f2 )
++            ea.mem.off += 0x800;
++        ea.mem.off += imm1 >> 3;
++        if ( (rc = ops->read(x86_seg_sys, ea.mem.off, &b, 1,
++                             ctxt)) != X86EMUL_OKAY )
++            goto done;
++        generate_exception_if(!(b & (1 << (imm1 & 7))), X86_EXC_GP, 0);
++
++        /* Carry out the actual MSR access. */
++        if ( vex.pfx == vex_f2 )
++        {
++            /* urdmsr */
++            if ( (rc = ops->read_msr(imm1, &msr_val, ctxt)) != X86EMUL_OKAY )
++                goto done;
++            dst.val = msr_val;
++            ASSERT(dst.type == OP_REG);
++            dst.bytes = 8;
++        }
++        else
++        {
++            /* uwrmsr */
++            switch ( imm1 )
++            {
++            case MSR_UINTR_TIMER:
++                generate_exception_if(!cp->feat.utmr, X86_EXC_GP, 0);
++                break;
++
++            case MSR_UARCH_MISC_CTRL:
++                generate_exception_if(!cp->arch_caps.doitm, X86_EXC_GP, 0);
++                break;
++
++            default:
++                generate_exception(X86_EXC_GP, 0);
++            }
++            fail_if(!ops->write_msr);
++            if ( (rc = ops->write_msr(imm1, dst.val, ctxt,
++                                      true)) != X86EMUL_OKAY )
++                goto done;
++            dst.type = OP_NONE;
++        }
++        break;
++
++    enqcmd:
+         vcpu_must_have(enqcmd);
+-        generate_exception_if(ea.type != OP_MEM, X86_EXC_UD);
+         generate_exception_if(vex.pfx != vex_f2 && !mode_ring0(), X86_EXC_GP, 0);
+         src.val = truncate_ea(*dst.reg);
+         generate_exception_if(!is_aligned(x86_seg_es, src.val, 64, ctxt, ops),
 --- a/xen/include/public/arch-x86/cpufeatureset.h
 +++ b/xen/include/public/arch-x86/cpufeatureset.h
-@@ -317,7 +317,7 @@ XEN_CPUFEATURE(NMI_SRC,      10*32+20) /
- XEN_CPUFEATURE(AMX_FP16,     10*32+21) /*   AMX FP16 instruction */
- XEN_CPUFEATURE(AVX_IFMA,     10*32+23) /*A  AVX-IFMA Instructions */
- XEN_CPUFEATURE(LAM,          10*32+26) /*   Linear Address Masking */
--XEN_CPUFEATURE(MSRLIST,      10*32+27) /*   {RD,WR}MSRLIST instructions */
-+XEN_CPUFEATURE(MSRLIST,      10*32+27) /*s  {RD,WR}MSRLIST instructions */
- XEN_CPUFEATURE(NO_INVD,      10*32+30) /*   INVD instruction unusable */
- XEN_CPUFEATURE(MOVRS,        10*32+31) /*a  MOV-read-shared instructions */
- 
+@@ -360,7 +360,9 @@ XEN_CPUFEATURE(AVX_VNNI_INT8,      15*32
+ XEN_CPUFEATURE(AVX_NE_CONVERT,     15*32+ 5) /*A  AVX-NE-CONVERT Instructions */
+ XEN_CPUFEATURE(AMX_COMPLEX,        15*32+ 8) /*   AMX Complex Instructions */
+ XEN_CPUFEATURE(AVX_VNNI_INT16,     15*32+10) /*A  AVX-VNNI-INT16 Instructions */
++XEN_CPUFEATURE(UTMR,               15*32+13) /*   User Timer */
+ XEN_CPUFEATURE(PREFETCHI,          15*32+14) /*A  PREFETCHIT{0,1} Instructions */
++XEN_CPUFEATURE(USER_MSR,           15*32+15) /*   U{RD,WR}MSR Instructions */
+ XEN_CPUFEATURE(UIRET_UIF,          15*32+17) /*   UIRET updates UIF */
+ XEN_CPUFEATURE(CET_SSS,            15*32+18) /*   CET Supervisor Shadow Stacks safe to use */
+ XEN_CPUFEATURE(SLSM,               15*32+24) /*   Static Lockstep Mode */
 --- a/xen/tools/gen-cpuid.py
 +++ b/xen/tools/gen-cpuid.py
 @@ -283,7 +283,7 @@ def crunch_numbers(state):
          # NO_LMSL indicates the absense of Long Mode Segment Limits, which
          # have been dropped in hardware.
          LM: [CX16, PCID, LAHF_LM, PAGE1GB, PKU, NO_LMSL, AMX_TILE, CMPCCXADD,
--             LKGS, MOVRS],
-+             LKGS, MOVRS, MSRLIST],
+-             LKGS, MOVRS, MSRLIST],
++             LKGS, MOVRS, MSRLIST, USER_MSR],
  
          # AMD K6-2+ and K6-III processors shipped with 3DNow+, beyond the
          # standard 3DNow in the earlier K6 processors.
