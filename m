@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C97CC55822
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 06:45:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1382851.1626125 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B951BC55822
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Aug 2026 06:49:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1382860.1626134 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrVNe-0000yE-4o; Wed, 05 Aug 2026 06:45:34 +0000
+	id 1wrVRO-0001fj-Lx; Wed, 05 Aug 2026 06:49:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1382851.1626125; Wed, 05 Aug 2026 06:45:34 +0000
+Received: by outflank-mailman (output) from mailman id 1382860.1626134; Wed, 05 Aug 2026 06:49:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrVNe-0000y7-2C; Wed, 05 Aug 2026 06:45:34 +0000
-Received: by outflank-mailman (input) for mailman id 1382851;
- Wed, 05 Aug 2026 06:45:32 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wrVRO-0001fc-JN; Wed, 05 Aug 2026 06:49:26 +0000
+Received: by outflank-mailman (input) for mailman id 1382860;
+ Wed, 05 Aug 2026 06:49:25 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wrVNc-0000y1-8o
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 06:45:32 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wrVRN-0001fW-Gh
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 06:49:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrVNb-00B8I4-1D
- for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 08:45:31 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wrVRM-0063uC-BP
+ for xen-devel@lists.xenproject.org; Wed, 05 Aug 2026 08:49:24 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a72dc07-5cb7-0a2a0a5109dd-0a2a450bed12-14
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 08:45:30 +0200
-Received: from [209.85.221.50] (helo=mail-wr1-f50.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a72dce3-bab6-0a2a0a5309dd-0a2a450cbd62-46
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 08:49:24 +0200
+Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a72dc0a-b7e8-0a2a450b0019-d155dd32f15f-3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 08:45:30 +0200
-Received: by mail-wr1-f50.google.com with SMTP id
- ffacd0b85a97d-47f7872abb6so275049f8f.3
- for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 23:45:30 -0700 (PDT)
+ id 6a72dcf4-f479-0a2a450c0019-d1558036b104-3
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 08:49:24 +0200
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-49545ba3d4eso2926475e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2026 23:49:24 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47febfda0d7sm5935370f8f.2.2026.08.04.23.45.29
+ 5b1f17b1804b1-4994e9ad922sm24994565e9.4.2026.08.04.23.49.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 04 Aug 2026 23:45:29 -0700 (PDT)
+ Tue, 04 Aug 2026 23:49:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,59 +55,58 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785912330; x=1786517130; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785912564; x=1786517364; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=LdT17TjKaxzE87YoDYMRL848nK49edta2evd9yGu/dI=;
-        b=YZpqR9qDSxMDRClRcahcKvJSkgQTLv+4UM7S+rCunLQGcVzdaOHlBHpy6gfWJLNB7M
-         6m2DSEgBCBYfJYVpIdUOnV95yDIVIMvf9JHmm3eKBPCChabzLAK3Uc3CHuee27bB2fJF
-         tM4Fyw+VKSAays2G9cHIWAtw7ddZHIxNzHfdwg6ABk0NEDUowl+uabGAQD5P6ikxrNur
-         afb0UwKycuLneVGvyqQaiih1ZWaszGt6LsagXPsuI5F+u+RFHN3Tmnms67OfLVAO0vrt
-         PW0uLcH/wjdldv2I6VGgG7X1arMgv8fSpbPWCRJVw7l/8JSlS/b5IFrviUBEaiilbZaJ
-         G6yA==
+        bh=5Jhv8pkezYCrgt9JiHXX1n8n4He1/X32jhyGT/X0o+E=;
+        b=Sfd40lHvtRhfDwYrXlZw0jnPuVYono3VgNH5zStwyWBfDHbkVX7ht/rlWQ5kyTgwoT
+         oJKDPaoBWKgwGAm7qNeLNjYZzN4/qg0gLQYA5ImNWFdgAL5T9td8N48tG5YK8moGvTNH
+         uGVQ7DJVSvi/WxXK1VKuf/k7DqQ7G5uI8eEC5mIZtSK2LyUzxYYr5Ma0wostFDjPJoDu
+         BUsQgVxekE5xzc7YgZLQigjcnHeVNByLcHEc9Dfzqp0UZ679Kusy64osNT8uraTSJSvl
+         WsKyPpiBGhBjm0LBGzQmBS7a8mG1cxtnu9XX7EH5wzMMNN4LETanT3aW85YykRRu/LCI
+         e4bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785912330; x=1786517130;
+        d=1e100.net; s=20251104; t=1785912564; x=1786517364;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=LdT17TjKaxzE87YoDYMRL848nK49edta2evd9yGu/dI=;
-        b=XpoSoBmFKB/wMHgSk4x5QIKma6f7Vle0NdE9eH2k7ww2p1MAeWZYra0+AKzZzE2872
-         FgEe2v13JBYr2PNZsXkoQaalL9efNE0YHT4g8W+cycwuwwhAjZdGuzRusL3TfPm+2Qj0
-         LmYPHJzNVTxu0qYySiNNJLhqn/iJFDNnGqw+YC20bcnrtJP7IDSleuFTYERjpxglZCMK
-         tcFxbsfJ2LIlMxnGiwuyhkosd1wSjBi178YLOGXiVmcVoDFpFx+uBe6lvhmWqfHAAjSh
-         iBExTm2eT7igz8XePkiD8on5LzCpduQWSppwWr7Dq8jVsFE9dnkOAtqWJw13BXlxgtKB
-         6jTw==
-X-Forwarded-Encrypted: i=1; AHgh+RpJ/XkPwCOUKOQV+pgXArRgfXfkwrjgzdIt8SZXCS1bOmZoI6gYIsVF+DuhsN8afeStWYAevEVzwqI=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyID3S67iv4nS7YDwHonZjpcXIEvp9nlNTvKw8yJKp9DYoBX2Tu
-	z6/0yfkojW09L+li3VSQ3PbtSzoGTNuCWhWbEx1TXmAygECjKn8LVnJ2BnoTvprYVoGLEEu/tiU
-	5aJGVfg==
-X-Gm-Gg: AR+sD107p/W1NTaZOYaEUU5SogbOtAWzxHDusXVB6/OBfvdXtGa++z5vKh1dvxpzodn
-	vsi+Qc9nXf29ySZszhUmURNNSc67npQsnUWqQY3YvPQLkmy1HtFS6MVgZumV47POuKBX+KEogC6
-	4qjtN4msCX4gPj8/DrB/O4GW4j+DuMeYuoMWOD3i7gFYkygTObi0YDE8fs2UPYxTkx+mclIIeRv
-	Df/aSgSAl2WSoeESlcdJ4vQK+SONtytvY/WSuf3DCBmveWPI1/Zkqp+sNwX4tB75P0kCK2FbhJV
-	eFmKxuZEEywwoUcD3PvPWXSJ4n2l7Irj9/4oHIIr54jQS/25zr4VlcPMSGUURh/QfTFE+k0UmIV
-	mM1iWH995ZvIhEzsjCUe2hlznBDwmtKvM4j2ab8PVwgN3OaWrMHzYfiGNa6NhPROZzrYB6m+dv0
-	YJ+m8lARog3pHYNPTxOXQBVSPlN7lkiQVKxVqKyARiccJGn2PhwU8/1PlKq5kFWu3unA4Ha8Pcj
-	exEfbu4QvroZJ6xaolUQQF2D64CcYXdsjLy5s/yhAOMb9GhE4pd
-X-Received: by 2002:a05:6000:601:b0:47f:81c4:36b4 with SMTP id ffacd0b85a97d-47fec52172amr6515452f8f.14.1785912330171;
-        Tue, 04 Aug 2026 23:45:30 -0700 (PDT)
-Message-ID: <b76b3fa9-cac9-401f-adc7-88f6881a64f6@suse.com>
-Date: Wed, 5 Aug 2026 08:45:28 +0200
+        bh=5Jhv8pkezYCrgt9JiHXX1n8n4He1/X32jhyGT/X0o+E=;
+        b=cQXSFmelzG/qLPifqvUEys/cg4WU7TY+RpXO3xqzohRyk3ecxtF8iiIx5uzicNLqjf
+         FElksV5sqxsFpHAULmuukvkOupBN235u0npUmv/xNTsmVX2xh11wxn1HCEBOtpLGoduA
+         5Hs5pbFmQ2xwUpv5K7Vug07HpHC+N04YvHVi9bykiJgtTgo/HvTyd1k+zbjZSXUnapQO
+         kExMElS3Jk0IhkoD6rxQAFQ6iecsLr+8julcWCzt9Jn1EHYDELzwLenZxMMng/ZtPlXv
+         xB73PhwhjBVFBb0VwusDZEsoAtfaVbnFq/5k/1aBhZJZ49cSajnHqsW4/nxOKk+/pDJC
+         PsdA==
+X-Forwarded-Encrypted: i=1; AHgh+RokGE/voe6uD6z8Hc2RQbMpJMUuW7DC56/e7/EqCtO1b7pxpgz3Sn9+GB6OqjUy0mPabkxeb3n5ac0=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwR/aCY0zZ9BgghIwFDrQ5wpw9a0x8ECksHVzKXxTuItdw1k2tK
+	lko5SQuIzDjhU3EG+oZ5/spMXZirXnL9oDPMrbKrNzezWrpncKk/G4dCDQ9aF37hhA==
+X-Gm-Gg: AR+sD108WU3JhUscCWr6153TphdVGQat9eWNmPy69AGa79jFdHT8k/UGZyDUYDExOO9
+	7ZXJPpTLnRtFsHzASjRlfDMxrHbEowNQCYRLhQ+j07b8N8a+4l5DmEkysX3A/mM4APk/6httlxE
+	GrFOXAS/QHFuhGuO1uMmHwtaglUPTmt+BcYXaUI0iPbagk1aq34tBfuJf6CpgTiAPsaC8n3X5AC
+	nqIucmeZyp+6YANIaobiz3Vzz2vJhcdJ7JUwIoAbLQ7ANwMtNmRxUg8iiNKiOgn4TBCynGL2F3e
+	wYmbwbEaxIhfVW01EKqua3TucltCptvcEB4GdYWwo/MB2W/F6OTbvU5GQ/DyahONYmFOBq2CLAt
+	nuKhKVmednotkw7y261chhirXYKuwr6vetHtMszM48pr6X0nHq1QEYHcqmuxMjMvrb5vQ6xmPp6
+	sgzpn5trVKpfnCIV3AMKoryWl3C4IMCB6HKz9JOFAEiwGDt5BxQTFYzN8027DeDIkFwO2z7htXB
+	9Fd8/NoeCdHR5+dgw9PfIwy/Y3kdCw0WJvazkd7GfX6VhPUkcGu3X/901w+QD0=
+X-Received: by 2002:a05:600c:1d10:b0:495:7a23:1eee with SMTP id 5b1f17b1804b1-4994e7ba86amr37703665e9.12.1785912563813;
+        Tue, 04 Aug 2026 23:49:23 -0700 (PDT)
+Message-ID: <3ff21b60-fc6a-46f9-94b7-89393cd77933@suse.com>
+Date: Wed, 5 Aug 2026 08:49:22 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/5] tests/x86: Introduce a userspace test harness for
- x86_decode_lite()
+Subject: Re: [PATCH 2/3] x86/alternatives: Rework get_ideal_nops()
 To: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>,
  Xen-devel <xen-devel@lists.xenproject.org>
-References: <20260803072006.9678-1-andrew.cooper3@citrix.com>
- <20260803072006.9678-3-andrew.cooper3@citrix.com>
- <dd065a33-0105-4527-92f5-f3f127422ee6@suse.com>
- <21d3fae8-e9b0-4c8a-a7b9-483a0257e44e@citrix.com>
+References: <20250522150015.555492-1-andrew.cooper3@citrix.com>
+ <20250522150015.555492-3-andrew.cooper3@citrix.com>
+ <99a39800-dbba-4d37-afcb-ae041af648f4@suse.com>
+ <f15222a9-1d61-4d9c-b923-8e6ad4994af3@citrix.com>
+ <cd877869-3d53-41e4-88b3-df629e4dcbbd@suse.com>
+ <5d62cfe6-3d97-44f4-9a5f-94b77514b6a3@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -133,376 +132,47 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <21d3fae8-e9b0-4c8a-a7b9-483a0257e44e@citrix.com>
+In-Reply-To: <5d62cfe6-3d97-44f4-9a5f-94b77514b6a3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1785912330-A9EC69EA-AD3522B9/0/0
+X-purgate-ID: tlsNG-d25034/1785912564-01CC3A5B-E8FA380B/0/0
 X-purgate-type: clean
-X-purgate-size: 13130
+X-purgate-size: 1469
 
-On 04.08.2026 21:37, Andrew Cooper wrote:
-> On 03/08/2026 5:03 pm, Jan Beulich wrote:
->> On 03.08.2026 09:20, Andrew Cooper wrote:
->>> --- /dev/null
->>> +++ b/tools/tests/x86-decode-lite/insns.S
->>> @@ -0,0 +1,703 @@
->>> +#include "macro-magic.h"
->>> +
->>> +        .code64
->>> +
->>> +        .allow_index_reg
->>> +
->>> +        .text
->>> +
->>> +DECL(tests_rel0)
->>> +modrm:
->>> +        /* Mod=0, Reg=0, RM {0..f} */
->>> +        _ add %al, (%rax)
->>> +        _ add %al, (%rcx)
->>> +        _ add %al, (%rdx)
->>> +        _ add %al, (%rbx)
->>> +        _ add %al, (%rsp) /* SIB */
->>> +        /*add %al, (%rbp)    RIP --> tests_rel4 */
->>> +        _ add %al, (%rsi)
->>> +        _ add %al, (%rdi)
->>> +        _ add %al, (%r8)
->>> +        _ add %al, (%r9)
->>> +        _ add %al, (%r10)
->>> +        _ add %al, (%r11)
->>> +        _ add %al, (%r12) /* SIB */
->>> +        /*add %al, (%r13)    RIP --> tests_rel4 */
->>> +        _ add %al, (%r14)
->>> +        _ add %al, (%r15)
->>> +
->>> +        /* Mod=1, Reg=0, RM {0..f} */
->>> +        _ add %al, 0x01(%rax)
->>> +        _ add %al, 0x01(%rcx)
->>> +        _ add %al, 0x01(%rdx)
->>> +        _ add %al, 0x01(%rbx)
->>> +        _ add %al, 0x01(%rsp) /* SIB */
->>> +        _ add %al, 0x01(%rbp)
->>> +        _ add %al, 0x01(%rsi)
->>> +        _ add %al, 0x01(%rdi)
->>> +        _ add %al, 0x01(%r8)
->>> +        _ add %al, 0x01(%r9)
->>> +        _ add %al, 0x01(%r10)
->>> +        _ add %al, 0x01(%r11)
->>> +        _ add %al, 0x01(%r12) /* SIB */
->>> +        _ add %al, 0x01(%r13)
->>> +        _ add %al, 0x01(%r14)
->>> +        _ add %al, 0x01(%r15)
->>> +
->>> +        /* Mod=2, Reg=0, RM {0..f} */
->>> +        _ add %al, 0x7f000001(%rax)
->>> +        _ add %al, 0x7f000001(%rcx)
->>> +        _ add %al, 0x7f000001(%rdx)
->>> +        _ add %al, 0x7f000001(%rbx)
->>> +        _ add %al, 0x7f000001(%rsp) /* SIB */
->>> +        _ add %al, 0x7f000001(%rbp)
->>> +        _ add %al, 0x7f000001(%rsi)
->>> +        _ add %al, 0x7f000001(%rdi)
->>> +        _ add %al, 0x7f000001(%r8)
->>> +        _ add %al, 0x7f000001(%r9)
->>> +        _ add %al, 0x7f000001(%r10)
->>> +        _ add %al, 0x7f000001(%r11)
->>> +        _ add %al, 0x7f000001(%r12) /* SIB */
->>> +        _ add %al, 0x7f000001(%r13)
->>> +        _ add %al, 0x7f000001(%r14)
->>> +        _ add %al, 0x7f000001(%r15)
->>> +
->>> +        /* Mod=3, Reg=0, RM {0..f} */
->>> +        _ add %al, %al
->>> +        _ add %al, %cl
->>> +        _ add %al, %dl
->>> +        _ add %al, %bl
->>> +        _ add %al, %ah
->>> +        _ add %al, %ch
->>> +        _ add %al, %dh
->>> +        _ add %al, %dl
->> Perhaps also include %bpl, %sil, and %dil?
+On 05.08.2026 08:34, Andrew Cooper wrote:
+> On 05/08/2026 7:04 am, Jan Beulich wrote:
+>> On 04.08.2026 19:13, Andrew Cooper wrote:
+>>> On 02/06/2025 10:57 am, Jan Beulich wrote:
+>>>> On 22.05.2025 17:00, Andrew Cooper wrote:
+>>>>> --- a/xen/arch/x86/alternative.c
+>>>>> +++ b/xen/arch/x86/alternative.c
+>>>>> @@ -20,7 +20,7 @@
+>>>>>  #define MAX_PATCH_LEN (255-1)
+>>>>>  
+>>>>>  #ifdef K8_NOP1
+>>>>> -static const unsigned char k8nops[] init_or_livepatch_const = {
+>>>>> +static const unsigned char k8_nops[] init_or_livepatch_const = {
+>>>>>      K8_NOP1,
+>>>>>      K8_NOP2,
+>>>>>      K8_NOP3,
+>>>>> @@ -31,22 +31,10 @@ static const unsigned char k8nops[] init_or_livepatch_const = {
+>>>>>      K8_NOP8,
+>>>>>      K8_NOP9,
+>>>>>  };
+>>>>> -static const unsigned char * const k8_nops[ASM_NOP_MAX+1] init_or_livepatch_constrel = {
+>>>> ... the (at least visual) connection to ASM_NOP_MAX. Could I talk you into
+>>>> adding build time array-size checks for both arrays, to restore the
+>>>> connection?
+>>> Sorry, but I have no idea what you're asking for here.
+>>     BUILD_BUG_ON(ARRAY_SIZE(k8_nops) != ASM_NOP_MAX);
+>>     BUILD_BUG_ON(ARRAY_SIZE(p6_nops) != ASM_NOP_MAX);
 > 
-> They're not relevant to this test, and interfere with the intentional
-> pattern set up.
+> The arrays are 45 bytes (and elements) long.  ASM_NOP_MAX is 9.
 
-Hmm, how does a particular pattern matter here? I don't think you test those
-cases (or more generally an empty REX prefix) anywhere else.
+Oh, right, sorry:
 
->>> +DECL(tests_rel1)
->>> +disp8:
->>> +1:
->>> +        _ jo   1b
->>> +        _ jno  1b
->>> +        _ jb   1b
->>> +        _ jae  1b
->>> +        _ je   1b
->>> +        _ jne  1b
->>> +        _ jbe  1b
->>> +        _ ja   1b
->>> +        _ js   1b
->>> +        _ jns  1b
->>> +        _ jp   1b
->>> +        _ jnp  1b
->>> +        _ jl   1b
->>> +        _ jge  1b
->>> +        _ jle  1b
->>> +        _ jg   1b
->>> +        _ jmp  1b
->>> +
->>> +disp8_rex:
->>> +        _ rex.w jo   1b
->>> +        _ rex.w jno  1b
->>> +        _ rex.w jb   1b
->>> +        _ rex.w jae  1b
->>> +        _ rex.w je   1b
->>> +        _ rex.w jne  1b
->>> +        _ rex.w jbe  1b
->>> +        _ rex.w ja   1b
->>> +        _ rex.w js   1b
->>> +        _ rex.w jns  1b
->>> +        _ rex.w jp   1b
->>> +        _ rex.w jnp  1b
->>> +        _ rex.w jl   1b
->>> +        _ rex.w jge  1b
->>> +        _ rex.w jle  1b
->>> +        _ rex.w jg   1b
->>> +        _ rex.w jmp  1b
->>> +END(tests_rel1)
->> What's the idea behind the separate REX.W testing?
-> 
-> Testing osize handling vs Imm8/Imm.
-
-I see, albeit I very much hope osize would never, ever have an effect on Imm8
-encodings, as far as the size of the immediate goes.
-
->>  It almost suggests that
->> tests with an operand size prefix also may want adding. Except that's
->> difficult, because of ...
->>
->>> +DECL(tests_rel4)
->>> +disp32:
->>> +        _ call   other_section
->>> +        _ jmp    other_section
->>> +        _ jo     other_section
->>> +        _ jno    other_section
->>> +        _ jb     other_section
->>> +        _ jae    other_section
->>> +        _ je     other_section
->>> +        _ jne    other_section
->>> +        _ jbe    other_section
->>> +        _ ja     other_section
->>> +        _ js     other_section
->>> +        _ jns    other_section
->>> +        _ jp     other_section
->>> +        _ jnp    other_section
->>> +        _ jl     other_section
->>> +        _ jge    other_section
->>> +        _ jle    other_section
->>> +        _ jg     other_section
->>> +        _ xbegin other_section
->>> +
->>> +disp32_rex:
->>> +        _ rex.w call   other_section
->>> +        _ rex.w jmp    other_section
->>> +        _ rex.w jo     other_section
->>> +        _ rex.w jno    other_section
->>> +        _ rex.w jb     other_section
->>> +        _ rex.w jae    other_section
->>> +        _ rex.w je     other_section
->>> +        _ rex.w jne    other_section
->>> +        _ rex.w jbe    other_section
->>> +        _ rex.w ja     other_section
->>> +        _ rex.w js     other_section
->>> +        _ rex.w jns    other_section
->>> +        _ rex.w jp     other_section
->>> +        _ rex.w jnp    other_section
->>> +        _ rex.w jl     other_section
->>> +        _ rex.w jge    other_section
->>> +        _ rex.w jle    other_section
->>> +        _ rex.w jg     other_section
->>> +        _ rex.w xbegin other_section
->> ... vendor differences here. Perhaps the decoder itself would better
->> reject handling of operand-size-prefixed branches.
-> 
-> Excluding 66-prefix is easy, but excluding rex.w on jumps is hard and
-> would require extra logic.
-
-To exclude 66 is all I was suggesting. REX.W isn't treated differently by
-the vendors, afaik, likely simply because it's meaningless altogether for
-these insns.
-
->>> +opsize_branch: /* 66-prefixed branches are decoded differently by vendors */
->>> +        _ data16 call   other_section
->>> +        _ data16 jmp    other_section
->>> +        _ data16 jo     other_section
->>> +        _ data16 jno    other_section
->>> +        _ data16 jb     other_section
->>> +        _ data16 jae    other_section
->>> +        _ data16 je     other_section
->>> +        _ data16 jne    other_section
->>> +        _ data16 jbe    other_section
->>> +        _ data16 ja     other_section
->>> +        _ data16 js     other_section
->>> +        _ data16 jns    other_section
->>> +        _ data16 jp     other_section
->>> +        _ data16 jnp    other_section
->>> +        _ data16 jl     other_section
->>> +        _ data16 jge    other_section
->>> +        _ data16 jle    other_section
->>> +        _ data16 jg     other_section
->>> +        _ data16 xbegin other_section
->> Oh, you even cover the case here. For XBEGIN, however, this can only be pure
->> guesswork as to AMD behavior, I suppose.
-> 
-> Remember that RTM is available on Zen2 if you know which chickenbits to
-> clobber.
-> 
-> I've not tried.  I expect it's more likely that they behave consistently
-> than differently.
-> 
->> I also don't see how you force which form you want.
-> 
-> Binutils always produces AMD behaviour.  (As far as I can see.)
-
-By default, yes. Quite some time ago CALL and JMP were covered more
-correctly, via the -mamd64 / -mintel64 cmdline options. Not very long ago
-I realized we had never extended that to Jcc.
-
-> This is in the negative-tests section, which confirms that
-> x86_decode_lite() rejects the byte pattern.
-> 
-> If Binutils changes behaviour, the test will start failing.
-
-Changing the default behavior seems extremely unlikely to me. Changing
-the non default behavior, otoh, has happened (and if need be could
-happen again).
-
-Anyway, all of this is becoming moot if 66 was rejected on branches.
-
->>> --- /dev/null
->>> +++ b/tools/tests/x86-decode-lite/main.c
->>> @@ -0,0 +1,111 @@
->>> +/*
->>> + * Userspace test harness for x86_decode_lite().
->>> + */
->>> +#include <stdio.h>
->>> +
->>> +#include "x86-emulate.h"
->>> +
->>> +static unsigned int nr_failures;
->>> +#define fail(t, fmt, ...)                                       \
->>> +({                                                              \
->>> +    const unsigned char *insn = (t)->ip;                        \
->>> +                                                                \
->>> +    nr_failures++;                                              \
->>> +                                                                \
->>> +    (void)printf("  Fail '%s' [%02x", (t)->name, *insn);        \
->>> +    for ( unsigned int i = 1; i < (t)->len; i++ )               \
->>> +        printf(" %02x", insn[i]);                               \
->>> +    printf("]\n");                                              \
->>> +                                                                \
->>> +    (void)printf(fmt, ##__VA_ARGS__);                           \
->>> +})
->>> +
->>> +struct test {
->>> +    const char *name;
->>> +    void *ip;
->>> +    unsigned long len;
->>> +};
->>> +
->>> +extern const struct test
->>> +/* Defined in insns.S, ends with sentinel */
->>> +    tests_rel0[], /* No relocatable entry */
->>> +    tests_rel1[], /* disp8 */
->>> +    tests_rel4[], /* disp32 or RIP-relative */
->>> +    tests_unsup[]; /* Unsupported instructions */
->>> +
->>> +static inline void run_tests(const struct test *tests, unsigned int rel_sz)
->>> +{
->>> +    printf("Test rel%u\n", rel_sz);
->>> +
->>> +    for ( unsigned int i = 0; tests[i].name; ++i )
->>> +    {
->>> +        const struct test *t = &tests[i];
->>> +        x86_decode_lite_t r;
->>> +
->>> +        /*
->>> +         * Don't end strictly at t->len.  This provides better diagnostics if
->>> +         * too many bytes end up getting consumed.
->>> +         */
->>> +        r = x86_decode_lite(t->ip, t->ip + /* t->len */ 20);
->> For the excess bytes to at least be legitimate to access (not causing UB),
->> shouldn't finish_arr emit enough filler bytes?
-> 
-> finish_arr is the wrong place, but I've folded in:
-> 
-> diff --git a/tools/tests/x86-decode-lite/insns.S b/tools/tests/x86-decode-lite/insns.S
-> index e52c2934c8d8..dc017016b2d2 100644
-> --- a/tools/tests/x86-decode-lite/insns.S
-> +++ b/tools/tests/x86-decode-lite/insns.S
-> @@ -695,6 +695,13 @@ unsup_insn: /* Instructions that would complicated decode, or shouldn't be used
->  
->  END(tests_unsup)
->  
-> +        /*
-> +         * For improved diagnostics, we allow some overreading of the
-> +         * instruction under test.  Ensure there are good bytes to read.
-> +         */
-> +overread_padding:
-> +        .skip 20
-> +
->          /* This is here to cause jmps to use their disp32 form. */
->          .section .text.other_section, "ax", @progbits
->  other_section:
-
-How would this help? run_tests() is never invoked with tests_unsup[] as
-argument. And run_tests_unsup() wants to only fetch up to t->len.
-
->>> --- /dev/null
->>> +++ b/tools/tests/x86-decode-lite/x86-emulate.h
->>> @@ -0,0 +1,27 @@
->>> +#ifndef X86_EMULATE_H
->>> +#define X86_EMULATE_H
->>> +
->>> +#include <assert.h>
->>> +#include <stdbool.h>
->>> +#include <stdint.h>
->>> +#include <stdlib.h>
->>> +#include <string.h>
->>> +
->>> +#include <xen/asm/x86-defns.h>
->>> +#include <xen/asm/x86-vendors.h>
->>> +
->>> +#include <xen-tools/common-macros.h>
->>> +
->>> +#define ASSERT assert
->>> +
->>> +#define printk(...)
->>> +
->>> +#define likely
->>> +#define unlikely
->>> +#define cf_check
->>> +#define init_or_livepatch
->>> +#define init_or_livepatch_const
->>> +
->>> +#include "x86_emulate/x86_emulate.h"
->> Why does this end up being needed?
-> 
-> Well, this for starters:
-> 
-> main.c: In function ‘run_tests’:
-> main.c:43:9: error: unknown type name ‘x86_decode_lite_t’
->    43 |         x86_decode_lite_t r;
->       |         ^~~~~~~~~~~~~~~~~
-> main.c:49:13: error: implicit declaration of function ‘x86_decode_lite’ [-Werror=implicit-function-declaration]
->    49 |         r = x86_decode_lite(t->ip, t->ip + /* t->len */ 20);
->       |             ^~~~~~~~~~~~~~~
-
-Hmm, yes, that should have been obvious, if only I didn't expect decode-lite
-to be largely (up to entirely) independent of the core emulator, irrespective
-of its placement in the same dir. x86_emulate/x86_emulate.h is a pretty
-involved header, which I think would be nice to avoid growing more
-dependencies on. Then again it looks as if about every object file already
-depends on it (which imo is bad).
+     BUILD_BUG_ON(ARRAY_SIZE(k8_nops) != (ASM_NOP_MAX * (ASM_NOP_MAX + 1)) / 2);
+     BUILD_BUG_ON(ARRAY_SIZE(p6_nops) != (ASM_NOP_MAX * (ASM_NOP_MAX + 1)) / 2);
 
 Jan
 
