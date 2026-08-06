@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3026AC5AC67
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2026 22:18:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1385234.1627674 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FA30C5AC7A
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2026 23:36:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1385269.1627715 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ws6Pi-0006qM-I3; Thu, 06 Aug 2026 22:18:10 +0000
+	id 1ws7dY-0007Em-49; Thu, 06 Aug 2026 23:36:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1385234.1627674; Thu, 06 Aug 2026 22:18:10 +0000
+Received: by outflank-mailman (output) from mailman id 1385269.1627715; Thu, 06 Aug 2026 23:36:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ws6Pi-0006qE-Er; Thu, 06 Aug 2026 22:18:10 +0000
-Received: by outflank-mailman (input) for mailman id 1385234;
- Thu, 06 Aug 2026 22:18:08 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1ws7dX-0007E0-TO; Thu, 06 Aug 2026 23:36:31 +0000
+Received: by outflank-mailman (input) for mailman id 1385269;
+ Thu, 06 Aug 2026 23:36:31 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3HQh1agYKCVwM84HD6AIIAF8.6IGR8H-78P8FFCMNM.R8HJLID86N.ILA@flex--seanjc.bounces.google.com>)
- id 1ws6Pg-0006q7-QR
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 22:18:08 +0000
+ <3fBp1agYKCd8TFBOKDHPPHMF.DPNYFO-EFWFMMJTUT.YFOQSPKFDU.PSH@flex--seanjc.bounces.google.com>)
+ id 1ws7dX-000791-D8
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 23:36:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1ws6Pg-00Bhhc-79
- for xen-devel@lists.xenproject.org; Fri, 07 Aug 2026 00:18:08 +0200
+ id 1ws7dW-00GcaU-QT
+ for xen-devel@lists.xenproject.org; Fri, 07 Aug 2026 01:36:30 +0200
 Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3HQh1agYKCVwM84HD6AIIAF8.6IGR8H-78P8FFCMNM.R8HJLID86N.ILA@flex--seanjc.bounces.google.com>)
- id 6a7507d5-e002-0a2a0a5209dd-0a2a450181b4-42
- for <xen-devel@lists.xenproject.org>; Fri, 07 Aug 2026 00:18:08 +0200
-Received: from [209.85.210.197] (helo=mail-pf1-f197.google.com)
+ <3fBp1agYKCd8TFBOKDHPPHMF.DPNYFO-EFWFMMJTUT.YFOQSPKFDU.PSH@flex--seanjc.bounces.google.com>)
+ id 6a751a49-bab6-0a2a0a5309dd-0a2a4501d568-32
+ for <xen-devel@lists.xenproject.org>; Fri, 07 Aug 2026 01:36:30 +0200
+Received: from [209.85.214.200] (helo=mail-pl1-f200.google.com)
  by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <3HQh1agYKCVwM84HD6AIIAF8.6IGR8H-78P8FFCMNM.R8HJLID86N.ILA@flex--seanjc.bounces.google.com>)
- id 6a75081e-5984-0a2a45010019-d155d2c5c0cd-3
- for <xen-devel@lists.xenproject.org>; Fri, 07 Aug 2026 00:18:07 +0200
-Received: by mail-pf1-f197.google.com with SMTP id
- d2e1a72fcca58-84eccf9d899so3597352b3a.2
- for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 15:18:07 -0700 (PDT)
+ <3fBp1agYKCd8TFBOKDHPPHMF.DPNYFO-EFWFMMJTUT.YFOQSPKFDU.PSH@flex--seanjc.bounces.google.com>)
+ id 6a751a7d-5984-0a2a45010019-d155d6c8f1f5-3
+ for <xen-devel@lists.xenproject.org>; Fri, 07 Aug 2026 01:36:30 +0200
+Received: by mail-pl1-f200.google.com with SMTP id
+ d9443c01a7336-2cfc52ddc55so34439545ad.3
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 16:36:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,119 +50,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date:Reply-To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1786054686; x=1786659486; darn=lists.xenproject.org;
+        d=google.com; s=20251104; t=1786059389; x=1786664189; darn=lists.xenproject.org;
         h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=/BEVvi4/7i6XDSu/QYDIwcuZoEPs9pbAb29S0DeOBes=;
-        b=MyQHE4rFqyN3m4oFV5xa7RNhfCtFhVjlKYGIK0a6ZRDBcuC2ZO0BIsmG0Wloe8j4st
-         ejAUwT6Y5q/EoIbebz/BZ4gjgBhQAzR6EuyWkuN9Tazjzo2uANonA30vIU0BNZoY4OzT
-         9h3ohjJMbN9xkIgJOUrN3NfKP+HRBFAtmkel30D9O0wFRVKjjdsrq7b4uAjYvT6fKmJm
-         M/116vDGMLT7gzo89YXWdn93m0oshXZe5onSQJjnlhCW2JLGK5FKSTn5ZxhC+CSU4s1u
-         nxlYe5GyRwVXUb18JFd5srq+QUIXCtoArfBLw3M4+XuUYWYW1dwH4r71fuafxTNR0m5o
-         M43Q==
+         :in-reply-to:date:reply-to:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=Bl6f0kmYO+QvCHyY9ZYfUQzYrQcYJLjL3x7Z6ExdFrE=;
+        b=Z+aQxQiE+OE1I3dn5dzeeW95DU07hYNTCDlCxjhYO+Aq6aPRS2RNr/2klJwuC+E4/x
+         ftWoVyu/tz0Lb5p5trYqxrefnuqxmAPLuys0tsQNmUc8O9TEM4uQ2kqDWdXTJjIGpWeZ
+         in5zUOHqVdgEBr56INMLsc79On8vJWHIGiI1yBfh+D/5A729uwtac9xfMdhtJsFofvys
+         kjWroSa9NWPmsvak+Mm+bnXpbGt3Iq2j4PQwu0nA21rYUDWMV2zyw+B+mcCjgIVahJl9
+         tKVwvrZARasr9fVInvqmhj3+0e1/EZEJ3T/aczJDP4zCxVK2fvk7e/zgWMdGcEbOqP4d
+         +R1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786054686; x=1786659486;
+        d=1e100.net; s=20251104; t=1786059389; x=1786664189;
         h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=/BEVvi4/7i6XDSu/QYDIwcuZoEPs9pbAb29S0DeOBes=;
-        b=sejdI5255W3AWBybJU0QBV9Ucv1hcANohmmto+YT7s5P4dVfjRb5F5yG5wW5jBZeIZ
-         tExJVbO5/akNw/mJrPByzAgIbsA08VpEfx+DNm4ghbGE2RBLgnO6QcgxoxVmJgY83jIE
-         yxKHnzJqW1hZr567yQqTmsZ3sPJlTsNYaizrs3j7XD0StFgAlGS32B41HOEQJ8sj6xbT
-         3TnC3yLgc0NYpgM1uNZbVuFC89xJQdSjPqFdzDeK5lEJda/O68Fi6AaGRJpoTHkH1/Gw
-         +2PwoulwVgPeXdtDAB2ARnHdgeYXcJVAqy6eKyiCrP+js9P1gg71rxblnbQYPUKFUCIt
-         c9ng==
-X-Forwarded-Encrypted: i=1; AHgh+RrFnw5PHqidxRYUsrHDoF5OcfDQVW6SqieHSjuS7oLcSX0ZY3UocY6YR+40UeHUs36NWNPkZ7CniqY=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yw3TuYDJIzb/xjyVmnIkJqGRrAjgqdoJumMgVabgI+FoaQ7TiYl
-	roT6YyB8Kv8c5tRYY46bBl/30qJoEU6jkIbKXUY0ZUYU8bYPxj2Me0H3OHztTs2wj2SkPVWoDSP
-	Vvv03ww==
-X-Received: from pfbln15.prod.google.com ([2002:a05:6a00:3ccf:b0:848:5415:1869])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a00:3a0f:b0:848:3f07:c5a2
- with SMTP id d2e1a72fcca58-84f2dfd0a06mr18297213b3a.4.1786054685697; Thu, 06
- Aug 2026 15:18:05 -0700 (PDT)
-Date: Thu, 6 Aug 2026 15:18:05 -0700
-In-Reply-To: <SN6PR02MB4157453D405AB80859B12DF9D4F52@SN6PR02MB4157.namprd02.prod.outlook.com>
+         :in-reply-to:date:reply-to:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Bl6f0kmYO+QvCHyY9ZYfUQzYrQcYJLjL3x7Z6ExdFrE=;
+        b=rrfebHGB4boAlvbqG3TrCdJj6XBNdiWhphIGVZwILC02WTPUNts2T6ARI/n4i62AdH
+         wLlwjXhN3oyhDPdSBeTkfLDrrXunRj07HjHvMIBpOSfB1vJI9BKEtWdZs8CPKJL/2rRR
+         VzaKY3KVjL/FO8hpWctDoVZBx+vHPcbtpgjMOh2MxYukUPd1WjWu+DCaruZ+IFmE9Ugt
+         5DVhtuTxdPUixHADkQXQP5p7C3MfJMQNJEafpCepR97MCvapIQa6DFtDtXnFvkGsonQz
+         XMSe/7aL6TeW3h/1quRu2sFC2qZ3a+X4iDw8GdqdkgLu1JN4tLkBsP7gqczxfmzO+01F
+         1ZRg==
+X-Forwarded-Encrypted: i=1; AHgh+RrtFcl/L/ifj9/+w2Wdu35WGtEEKCvO69d6wRHt52dGO1j9cZERVjZFE4zMJSCgK+I+t32JZtw3Hrg=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzoK51m8zmU8itLWqjEfP5u7DJdKiwdt2Ze543xRr6TO7SUlETY
+	lzJPsKh4v2ruDxIpUKyBsfeMHjlc2FM953+P3THHKbnk+CGLWQFf/2QGpyKSJOgOy3sCU0EnoX5
+	z80ihaA==
+X-Received: from pgav2.prod.google.com ([2002:a05:6a02:2dc2:b0:c85:9dd2:d11e])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a20:7349:b0:3c6:3c5b:f2e1
+ with SMTP id adf61e73a8af0-3cbadcfcacfmr5222309637.32.1786059388428; Thu, 06
+ Aug 2026 16:36:28 -0700 (PDT)
+Reply-To: Sean Christopherson <seanjc@google.com>
+Date: Thu,  6 Aug 2026 16:35:21 -0700
+In-Reply-To: <20260806233609.212337-1-seanjc@google.com>
 Mime-Version: 1.0
-References: <20260701193212.749551-1-seanjc@google.com> <20260701193212.749551-48-seanjc@google.com>
- <SN6PR02MB4157453D405AB80859B12DF9D4F52@SN6PR02MB4157.namprd02.prod.outlook.com>
-Message-ID: <anUIHY-1_q3oVFPf@google.com>
-Subject: Re: [PATCH v5 47/51] x86/paravirt: Don't use a PV sched_clock in CoCo
- guests with trusted TSC
+References: <20260806233609.212337-1-seanjc@google.com>
+X-Mailer: git-send-email 2.55.0.679.g6767b8d81c-goog
+Message-ID: <20260806233609.212337-5-seanjc@google.com>
+Subject: [PATCH v6 04/51] x86/tsc: Restrict recalibrate_cpu_khz() export to
+ p4-clockmod and powernow-k7
 From: Sean Christopherson <seanjc@google.com>
-To: Michael Kelley <mhklinux@outlook.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, Paolo Bonzini <pbonzini@redhat.com>, 
-	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, "x86@kernel.org" <x86@kernel.org>, 
-	Kiryl Shutsemau <kas@kernel.org>, Rick Edgecombe <rick.p.edgecombe@intel.com>, 
+To: Kiryl Shutsemau <kas@kernel.org>, Rick Edgecombe <rick.p.edgecombe@intel.com>, 
+	Sean Christopherson <seanjc@google.com>, Paolo Bonzini <pbonzini@redhat.com>, 
 	"K. Y. Srinivasan" <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
 	Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>, 
 	Ajay Kaher <ajay.kaher@broadcom.com>, Alexey Makhalov <alexey.makhalov@broadcom.com>, 
-	Jan Kiszka <jan.kiszka@siemens.com>, Andy Lutomirski <luto@kernel.org>, 
-	Peter Zijlstra <peterz@infradead.org>, Juergen Gross <jgross@suse.com>, 
-	Daniel Lezcano <daniel.lezcano@kernel.org>, John Stultz <jstultz@google.com>, 
-	Shuah Khan <skhan@linuxfoundation.org>, "H. Peter Anvin" <hpa@zytor.com>, 
-	Vitaly Kuznetsov <vkuznets@redhat.com>, 
+	Jan Kiszka <jan.kiszka@siemens.com>, Dave Hansen <dave.hansen@linux.intel.com>, 
+	Andy Lutomirski <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>, Juergen Gross <jgross@suse.com>, 
+	Daniel Lezcano <daniel.lezcano@kernel.org>, Thomas Gleixner <tglx@kernel.org>, 
+	John Stultz <jstultz@google.com>
+Cc: Vitaly Kuznetsov <vkuznets@redhat.com>, 
 	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>, Stephen Boyd <sboyd@kernel.org>, 
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, "kvm@vger.kernel.org" <kvm@vger.kernel.org>, 
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
-	"linux-coco@lists.linux.dev" <linux-coco@lists.linux.dev>, 
-	"linux-hyperv@vger.kernel.org" <linux-hyperv@vger.kernel.org>, 
-	"virtualization@lists.linux.dev" <virtualization@lists.linux.dev>, 
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Tom Lendacky <thomas.lendacky@amd.com>, 
-	Nikunj A Dadhania <nikunj@amd.com>, David Woodhouse <dwmw@amazon.co.uk>, 
-	David Woodhouse <dwmw2@infradead.org>, Thomas Gleixner <tglx@linutronix.de>
-Content-Type: text/plain; charset="us-ascii"
-X-purgate-ID: tlsNG-d62444/1786054688-C5146757-6D791EC4/0/0
+	Miroslav Lichvar <mlichvar@redhat.com>, x86@kernel.org, linux-coco@lists.linux.dev, 
+	kvm@vger.kernel.org, linux-hyperv@vger.kernel.org, 
+	virtualization@lists.linux.dev, linux-kernel@vger.kernel.org, 
+	xen-devel@lists.xenproject.org, Michael Kelley <mhklinux@outlook.com>, 
+	Tom Lendacky <thomas.lendacky@amd.com>, Nikunj A Dadhania <nikunj@amd.com>, 
+	David Woodhouse <dwmw@amazon.co.uk>, David Woodhouse <dwmw2@infradead.org>, 
+	Thomas Gleixner <tglx@linutronix.de>
+Content-Type: text/plain; charset="UTF-8"
+X-purgate-ID: tlsNG-d62444/1786059390-BCB45757-AB75D175/0/0
 X-purgate-type: clean
-X-purgate-size: 2223
+X-purgate-size: 833
 
-On Thu, Jul 02, 2026, Michael Kelley wrote:
-> From: Sean Christopherson <seanjc@google.com> Sent: Wednesday, July 1, 2026 12:32 PM
-> > 
-> > Silently ignore attempts to switch to a paravirt sched_clock when running
-> > as a CoCo guest with trusted TSC.  In hand-wavy theory, a misbehaving
-> > hypervisor could attack the guest by manipulating the PV clock to affect
-> > guest scheduling in some weird and/or predictable way.  More importantly,
-> > reading TSC on such platforms is faster than any PV clock, and sched_clock
-> > is all about speed.
-> > 
-> > Reviewed-by: David Woodhouse <dwmw@amazon.co.uk>
-> > Signed-off-by: Sean Christopherson <seanjc@google.com>
-> > ---
-> >  arch/x86/kernel/tsc.c | 9 +++++++++
-> >  1 file changed, 9 insertions(+)
-> > 
-> > diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
-> > index 012321fed5e5..a146fc7b5e74 100644
-> > --- a/arch/x86/kernel/tsc.c
-> > +++ b/arch/x86/kernel/tsc.c
-> > @@ -283,6 +283,15 @@ bool using_native_sched_clock(void)
-> >  int __init __paravirt_set_sched_clock(u64 (*func)(void), bool stable,
-> >  				      void (*save)(void), void (*restore)(void))
-> >  {
-> > +	/*
-> > +	 * Don't replace TSC with a PV clock when running as a CoCo guest and
-> > +	 * the TSC is secure/trusted; PV clocks are emulated by the hypervisor,
-> > +	 * which isn't in the guest's TCB.
-> > +	 */
-> > +	if (cc_platform_has(CC_ATTR_GUEST_SNP_SECURE_TSC) ||
-> > +	    boot_cpu_has(X86_FEATURE_TDX_GUEST))
-> > +		return -EPERM;
-> 
-> Do a pr_warn() in the error case? Your commit message says to do the ignore
-> silently, but I wonder if that's a good idea. At least for Hyper-V, the error
-> case shouldn't happen.
+Export recalibrate_cpu_khz() only for its two users, p4-clockmod.ko and
+powernow-k7.ko, to help document that recalibration is relevant only to
+ancient CPUs.
 
-I agree it's not a great idea, but unfortunately it's pretty much guaranteed to
-fire on KVM-based setups.  The KVM world hasn't been anywhere near as aggressive
-as Hyper-V in terms of killing off PV features when running SNP/TDX guests (which
-is largely how this series came to be in the first place).
+For all intents and purposes, no functional change intended.
 
-So while I'm conceptually not opposed to the idea of printing an error message,
-in practice I'm pretty strong against it because odds are very good I'll end up
-dealing with "bug" reports due to less-than-awesome setups.
+Signed-off-by: Sean Christopherson <seanjc@google.com>
+---
+ arch/x86/kernel/tsc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
+index bc4348585194..09bf10f322ba 100644
+--- a/arch/x86/kernel/tsc.c
++++ b/arch/x86/kernel/tsc.c
+@@ -943,7 +943,7 @@ void recalibrate_cpu_khz(void)
+ 						    cpu_khz_old, cpu_khz);
+ #endif
+ }
+-EXPORT_SYMBOL_GPL(recalibrate_cpu_khz);
++EXPORT_SYMBOL_FOR_MODULES(recalibrate_cpu_khz, "p4-clockmod,powernow-k7");
+ 
+ 
+ static unsigned long long cyc2ns_suspend;
+-- 
+2.55.0.679.g6767b8d81c-goog
+
 
