@@ -4,41 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEBCAC56205
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2026 01:05:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1384041.1627152 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC068C55174
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2026 01:10:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1384090.1627173 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrmY3-00057n-Ms; Thu, 06 Aug 2026 01:05:27 +0000
+	id 1wrmck-0001CR-JY; Thu, 06 Aug 2026 01:10:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1384041.1627152; Thu, 06 Aug 2026 01:05:27 +0000
+Received: by outflank-mailman (output) from mailman id 1384090.1627173; Thu, 06 Aug 2026 01:10:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrmY3-00057d-FH; Thu, 06 Aug 2026 01:05:27 +0000
-Received: by outflank-mailman (input) for mailman id 1384041;
- Thu, 06 Aug 2026 01:05:25 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wrmck-0001CK-Gs; Thu, 06 Aug 2026 01:10:18 +0000
+Received: by outflank-mailman (input) for mailman id 1384090;
+ Thu, 06 Aug 2026 01:10:17 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brchuckz@aol.com>) id 1wrmY1-0004gH-FC
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 01:05:25 +0000
+ (envelope-from <dpsmith@apertussolutions.com>) id 1wrmcj-0001CE-BP
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 01:10:17 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrmY0-00Dmq5-SR
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 03:05:24 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wrmci-008fJr-OZ
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 03:10:16 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <brchuckz@aol.com>)
- id 6a73ddb4-e002-0a2a0a5209dd-0a2a4504b9fe-22
- for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 03:05:24 +0200
-Received: from [66.163.188.206] (helo=sonic311-25.consmr.mail.ne1.yahoo.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <brchuckz@aol.com>)
- id 6a73ddd3-b57f-0a2a45040019-42a3bcce86d4-3
- for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 03:05:24 +0200
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic311.consmr.mail.ne1.yahoo.com with HTTP; Thu, 6 Aug 2026 01:05:22 +0000
-Received: by hermes--production-bf1-54b5569bdc-xjdx5 (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID 734f0c8329adecc00a98ec91cc943adb; 
- Thu, 06 Aug 2026 01:05:16 +0000 (UTC)
+ (envelope-from <dpsmith@apertussolutions.com>)
+ id 6a73dee9-5cb7-0a2a0a5109dd-0a2a45068b46-6
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 03:10:16 +0200
+Received: from [136.143.188.51] (helo=sender4-of-o51.zoho.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <dpsmith@apertussolutions.com>)
+ id 6a73def6-195a-0a2a45060019-888fbc3352a0-3
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 03:10:16 +0200
+Received: by mx.zohomail.com with SMTPS id 17859786036791003.8173726789206;
+ Wed, 5 Aug 2026 18:10:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,174 +47,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1785978322; bh=G3VmkipyMhZjj38uG/j4xipQ/TGQEWVZ1kywsdVeHas=; h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To; b=sYh2bdc5USWGn/sFhSPBJe1EnhxZwUUrqvj6+oB/+JhLjRbMnVh3ubZYOYS5WoeKzb47Ne6IdsUr+VjRfAq1jQOMuqLmQDN5nDLtrS3DO/eKwtYyXyibDTdDvisZ0WRb8Xyyv7mON2D3Li4ATYkY5IfbFjubGkG5Q8wRdJ43aS7qp5mSvnjFRY+KskoQomSsIri5FNhgQghUnIYROeMM2Mp+/ugQzt/TlGlBgsHiTQW0emGg6+aqLt3B6JbGnfgVGTkmju/re4cvJSWOpM0gHj0RWDutE1O6iyiKsebTnLghagbWhAl7QvVLmwTJvQ9v7VbPNlDQAw5kkJhscqLP2w==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1785978323; bh=DZ9DSj/zpZJ3CsUxLDF6vIBJyRg0So43YHTPMQfuJzl=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=TAKI7iHY46DjDMy++WItmCEFlDeyjlPs21SUXO0aljNq/2YyX2/COoN7d0+2e2YIPHsw2g5FFMEDH8l75xCjHJgb9Z/zCGVy68wfROiuG3/OXveUYSM2rTBn6QuJbBvfbfUGrqG/CPsY/BTXWtGw9fLZo8E6jkplPHW0FQ/7IGtkun1/1F0v8dNNjgyaSbctYhseiz6/Ym9cvSgDT07oW+3x8V6fYm1QZgw3PE819oS91wLUcqMna8rCyrTiFd9ffPRd/rxP2ZVNE89g0NsWE+Dz1EPjkuSABRrLzTR2j1h+x9qoKRa6m+igpzNJ+TdBYfG/Wm7zvXUfNQbATfBUtQ==
-X-YMail-OSG: MK2xyiEVM1mskLxz7Nzv39526zcsIPBExeYJkJ6wwg4Pj7cCurKbGeeUSjkNAg5
- Wg6SU9axyUHI.gGoWPw3yN.J9PfmYE42REwRg6sBTQzgu2NEa1PkSI71xSyPnmk6Nvx738HTf9w7
- dUyDx9ZvQoqjsEhkQomCM9xunTW5RshlOICtH3y.dhV4Icz39Vgt4uuFdX4jbd2dnDqGj0vnxw31
- TlDQbsVjdc2uC33HzYzumdCjHf0BFoMC3sqsIhMd8mXqY5Iwr6GWQ33QJRYFGCc_ClN2CK2e.FO5
- CBNNHWiMSqA5X5lO5VbgbAP8WZJtuUgkDgULDS6VHqraDXhM.4F_Qq8OlcRGxUnGIiQB.RwIgR.m
- giAgfnSysr4GZdMwxhE4Sy.ylDeCtvO.Bxnjg_1KhYzUZLw53HJ4wEV.Xd4h.uulOl40wQFyugU7
- TA4ye7aYvWJW3ybt4ACGEwzfLYTu6vIJJar1ABuktyaKu0YFlRQ3VNExJYRHwSfC8jER.KlXP2kK
- ehmQ0zkxeXl7FIjPY0KhhGRsAVDaLTFzu_w9iGLENNk.rSHaxJy92adtBp1DmMwXKC9vVe4BpTAw
- Pp.Ms2_WnYXp8G39Aio1cKvP4IZR7Nk3BlHkDfJ28sBOP1s4if.p3jmhLjnVQCh3htfQyhxtm56d
- EdLjfVqkyF3DyhD1K_KctZjXYVF_3Roq5AuxNkmJSEmoC.lVZnIm9GH_pMhF5tJSPMmqHLpyKcEs
- 30oX.OITe50tYOLvnf5Cd8rEf3tcoJCDeAYRUq80rinoSaaChYs1qZg6wCUxTqVQAQ_JRg6vBkq8
- ghRpDSLtjLhRGvpV2Rr9GukwbQPjMJ2OzC2Vc5REMRcMAA8GjRazto24P0c6SBoJ.TGhTPeHW.ze
- .hB1FKxmTyyuesnANSBe2UFg3gi0gwgfho5OssocFgr2cHUdbsumdUsdvYoKvvWqltnG7yz3WBXM
- s5sgutRVx5S0pJdQ8NlhgkUnaR1JEmCXdd6xE20WSvfrs5xGjX9oX1GxQT60AU6exo2b_C4Lg.x3
- oVo7No7MTuw2RM2oJYxuVxgqMa7i2FMmyuzFsA4CtFERiA.zmByC4ZNaPtwPibn9jttakKgmaymn
- CNhlbogFnNY7GNAulF_Mp0InKzXoTjVGPXLbjmSpoSn3R7pgowzThrHRLCVw3AArpKrZDxqbDk6p
- ULrXqTil2x5RJOOeeSqElUxMu.LX.Egf05mDG3yvnAT5eaD.pWpwkJIYELMQBQQ_TPY2TWGcPUzh
- Y0owemd.IPVo4aJ0kHg4gck8C.C1sXfOMYRpbzjYK3dQhv_Mam7aHTY.33orh6PSva82D1gbGr6X
- Ptw9wpn4IpM.H64I5A5G9jbVNkqzMcMSAkGOGGhHcY39hXJgxOt8MqLEbQZMF_QgJaaFiEZhvyMi
- bgBc.mnDx.2tz6LljKKrtvV.qDI1haWPf.9MD7gIwQu94tctzGm6QvJVgLl4CvVy4wtMwhC7OK46
- y.9JsBpMNRxKaPFthdfwct_.pUYD0pNkk1jvObfQdPaelAVPthSq1d9DKeJlgQ8LQwQEOXAnOcaU
- 7ojhZAWihDIOhA1vEiTV3n9T4WYQBaTQPwT26YSYt4ocgp78AJOIhDgkJ3r_fEVZKPNwf1tHOHnC
- cTWqil54q1DiY36AFrqJed90uIiIK.TkwxCX9Ev91irKlcWsfLwH6iBCPPCVr4we99H1kHToEqeW
- MzO5pDyfaeNd83lNStHKneUBbBfFt5.c1N_h7CLeL26Q44apRYC5jk14fsryUIDrHO5Cnh6B9pvd
- jImYKbY2z3bPvVD3ZzHG5sj.616szDR88RkZ2jTgt_mtuCSu8mg07WC1gXAYIZARQvCpwbknHhUS
- MKMLYBKKDJU0U5zEoKPoOxtGF_dGkQD4gAF_5CjAp8K8Ptqhlnb4YTdsX.lxxHigF1LUD3p8L07R
- r6E6R_iUr5NBpacyKSJzYKXkoeeLfKbyMpCw4OJ0_4Fy.v3R1ADimO4uKo1ilUhtUTOcZ.WkRJV7
- e4xuC9RwBAevbyvJM_8sESWSDgN4lRqcxBRwA3jjmqzUuod1onTzjLMlyh73OKpUJcSsYd8FiVMd
- yACclYtGNxBqeZWcHaMs80lwpWaE2QPMLnwEw4GhR.Rj_aKyatY2CLiyL.kpGePTCcT4yO8YGG0m
- 34C17PuwEmDDyXCxekBzXUchFB_QTyam7SK68sYCbjOmeoqJ2ZDwJg7aJmHV5
-X-Sonic-MF: <brchuckz@aol.com>
-X-Sonic-ID: af215a46-7fce-4258-a2a7-e4fc20b5d1e5
-From: Chuck Zmudzinski <brchuckz@aol.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-stable@nongnu.org,
-	xen-devel@lists.xenproject.org,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony PERARD <anthony@xenproject.org>,
-	"Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Tomita Moeko <tomitamoeko@gmail.com>
-Subject: [PATCH v5 4/6] xen/igd: enable guest creation when ROM read fails
-Date: Wed,  5 Aug 2026 21:04:54 -0400
-Message-ID: <20260806010506.492490-5-brchuckz@aol.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260806010506.492490-1-brchuckz@aol.com>
-References: <20260806010506.492490-1-brchuckz@aol.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=zoho header.d=apertussolutions.com header.i="dpsmith@apertussolutions.com" header.h="Message-ID:Date:MIME-Version:Subject:To:Cc:From:In-Reply-To:Content-Type:Content-Transfer-Encoding"
+ARC-Seal: i=1; a=rsa-sha256; t=1785978606; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=BYDW82AB/c6PR6jHqfSPrXv/7tEAm9cd12rZVgegiYkRmLIT0aBa1eO7gHXtLY35eMuIwVkcGWTnQI9h6/c4lt8RGqEYxIROGdnNy7uzaXrw6iOO6SQY7rv2NZx2BKLDZuA4Nx+ajjZ19MFyWdsxeehjiegCV4dFRBYG3rwOpy0=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1785978606; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=WOVbCK6Sw64aXSe6a9720k6wPznzFto4aLH7lBPPGaE=; 
+	b=G1h2+wvyuBFGDSqU3NFu70bhzWaA3apVhXiJy6s+IK8aW1Dg/4Xd0sNFfbDX4nDJ8DNWDMX8FB6OKefUVh4IXYTIL74r6S/7tgFKdLt+9uqf6KZoatjMNox32KjlBFM2szcG1OjlZTJ6JnUI8BeqAWxafHqgPflBFxtRHFi2MOA=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=apertussolutions.com;
+	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
+	dmarc=pass header.from=<dpsmith@apertussolutions.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1785978606;
+	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
+	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=WOVbCK6Sw64aXSe6a9720k6wPznzFto4aLH7lBPPGaE=;
+	b=kU8l+lv9qZwRtUSAnywyH4J+Xja9pVCid2XnELAjlt055ur/UI7lL/rhTDUOy1Yw
+	WuZVN5Idu77RjDNusz56yCmiy2UKyP+jBudAd6wy2BLGAwxTd2oIW34jmuo85dY2yAJ
+	DQov7Dxr71EfGc+jOcy6wheAWcqkNJsDGi66idAw=
+Message-ID: <f99a285e-bd3d-4d8d-94ef-997c238c7f85@apertussolutions.com>
+Date: Wed, 5 Aug 2026 21:10:07 -0400
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1785978324-C04DBB50-D6FC651B/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 20/24] XSM: fold xsm_{,un}map_domain_pirq() hooks
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>
+References: <758c8410-a18e-45dc-8944-5913e5832397@suse.com>
+ <c973c612-153d-413b-a6c8-aeacd25f28a8@suse.com>
+Content-Language: en-US
+From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+In-Reply-To: <c973c612-153d-413b-a6c8-aeacd25f28a8@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ZohoMailClient: External
+X-purgate-ID: tlsNG-16d1c6/1785978616-F520877B-2D071E36/0/0
 X-purgate-type: clean
-X-purgate-size: 4998
+X-purgate-size: 3101
 
-For newer IGD devices, the host option ROM is not readable from sysfs
-and this results in a call to error_fail() that causes Qemu to
-exit(1) so guest creation fails with the current implementation for
-many newer IGD devices. But this read failure need not be a fatal
-error causing guest creation to fail because the guest does not need
-the option ROM to successfully boot and run. The guest only needs the
-option ROM for getting graphics output from the guest during early
-boot before the guest OS loads the Intel IGD graphics drivers.
+On 7/28/26 9:23 AM, Jan Beulich wrote:
+> Like other resource management hooks they are different in just "add
+> resource" vs "remove resource". Hence like in other cases a single hook
+> can easily serve both purposes.
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> 
+> --- a/xen/arch/x86/physdev.c
+> +++ b/xen/arch/x86/physdev.c
+> @@ -109,7 +109,7 @@ int physdev_map_pirq(struct domain *d, i
+>           return physdev_hvm_map_pirq(d, type, index, pirq_p);
+>       }
+>   
+> -    ret = xsm_map_domain_pirq(XSM_DM_PRIV, d);
+> +    ret = xsm_map_domain_pirq(XSM_DM_PRIV, d, true);
+>       if ( ret )
+>           return ret;
+>   
+> @@ -142,7 +142,7 @@ int physdev_unmap_pirq(struct domain *d,
+>       int ret = 0;
+>   
+>       if ( d != current->domain || !is_hvm_domain(d) || !has_pirq(d) )
+> -        ret = xsm_unmap_domain_pirq(XSM_DM_PRIV, d);
+> +        ret = xsm_map_domain_pirq(XSM_DM_PRIV, d, false);
+>       if ( ret )
+>           return ret;
+>   
+> --- a/xen/include/xsm/dummy.h
+> +++ b/xen/include/xsm/dummy.h
+> @@ -461,14 +461,7 @@ static XSM_INLINE char *xsm_show_irq_sid
+>   #ifdef CONFIG_HAS_PIRQ   
+>   static XSM_INLINE int xsm_map_domain_pirq(
+> -    XSM_DEFAULT_ARG struct domain *d)
+> -{
+> -    XSM_ASSERT_ACTION(XSM_DM_PRIV);
+> -    return xsm_default_action(action, current->domain, d);
+> -}
+> -
+> -static XSM_INLINE int xsm_unmap_domain_pirq(
+> -    XSM_DEFAULT_ARG struct domain *d)
+> +    XSM_DEFAULT_ARG struct domain *d, bool allow)
+>   {
+>       XSM_ASSERT_ACTION(XSM_DM_PRIV);
+>       return xsm_default_action(action, current->domain, d);
+> --- a/xen/include/xsm/hooks.h
+> +++ b/xen/include/xsm/hooks.h
+> @@ -68,8 +68,7 @@ XSM_HOOK(int, kexec)
+>   XSM_HOOK(int, schedop_shutdown, struct domain *, struct domain *)
+>   
+>   #ifdef CONFIG_HAS_PIRQ
+> -XSM_HOOK(int, map_domain_pirq, struct domain *)
+> -XSM_HOOK(int, unmap_domain_pirq, struct domain *)
+> +XSM_HOOK(int, map_domain_pirq, struct domain *, bool)
+>   #endif
+>   
+>   XSM_HOOK(int, map_domain_irq, struct domain *, int, const void *)
+> --- a/xen/xsm/flask/hooks.c
+> +++ b/xen/xsm/flask/hooks.c
+> @@ -1022,14 +1022,9 @@ static char *cf_check flask_show_irq_sid
+>   
+>   #ifdef CONFIG_HAS_PIRQ
+>   
+> -static int cf_check flask_map_domain_pirq(struct domain *d)
+> +static int cf_check flask_map_domain_pirq(struct domain *d, bool access)
+>   {
+> -    return current_has_perm(d, SECCLASS_RESOURCE, RESOURCE__ADD);
+> -}
+> -
+> -static int cf_check flask_unmap_domain_pirq(struct domain *d)
+> -{
+> -    return current_has_perm(d, SECCLASS_RESOURCE, RESOURCE__REMOVE);
+> +    return current_has_perm(d, SECCLASS_RESOURCE, resource_to_perm(access));
+>   }
+>   
+>   #endif /* CONFIG_HAS_PIRQ */
+> 
 
-To fix this, allow guest creation to continue by avoiding setting errp
-if the attempt to read the host ROM file from sysfs fails. In this case,
-the memory for the guest option ROM has been allocated so free that
-memory by calling object_unparent(OBJECT(&s->dev.rom)) before
-continuing.
+I am not opposed to collapsing the calls as long as the semantic is not 
+lost, which I feel the reuse of the xsm_map_domain_pirq does looses it 
+much less provides an opportunity for confusion. Something like 
+xsm_domain_pirq(..., access) makes more semantic sense to me, as it 
+would read, grant domain pirq access T/F.
 
-Replace the error_report() and error_printf() messages for this case
-when the option ROM cannot be read via sysfs with a suitable
-info_report() message.
+v/r,
+dps
 
-In the case when the host option ROM cannot be read via the sysfs
-interface, xen_pt_register_regions() will attempt to setup the option
-ROM for the guest the same way it would for any other Xen passthrough
-PCI device that has an option ROM.
-
-Signed-off-by: Chuck Zmudzinski <brchuckz@aol.com>
----
-Changes in v4:
-  - v4 is the first version of the series that has this patch
-
-Changes in v5:
-  - Shorten info_report message to resolve checkpatch line length warning
-
-This patch provides initial support for many newer Intel IGD devices
-so, at least, guest creation will not fail if such newer Intel
-IGD devices are passed through to a Xen HVM guest. But this patch
-alone is not sufficient for proper operation of the Intel IGD
-for many, if not all, of the newer Intel IGD devices when passed
-through to a Xen HVM guest.
-
-There are two main problems with more recent, modern devices:
-
-1. The newer divices might require patches to the Intel OpRegion
-   and also an extended video bios table (VBT). Without support
-   for these aspects of the newer devices, the experience will
-   not be great and in many cases the Intel IGD still will not
-   function properly in the guest.
-
-2. The newer devices only work with UEFI AFAICT, and the Ovmf*
-   platforms provided by the upsream edk2 project do not provide
-   support for the Intel IGD. It appears the problem is that the
-   ekd2 project deems the fact that the hardware manufacturer does
-   not provide the necessary firmware, the EFI graphics output
-   protocol (GOP) driver, in the ordinary way by making the EFI
-   GOP driver accessible in virtual environments via the option
-   ROM of the real PCI device, to be a reason to reject patches
-   that add support for the Intel IGD. This, however, is not a
-   fatal problem since it only affects the guest during early boot
-   when OVMF or the bootloader is running and the guest OS
-   graphics drivers have not yet been loaded. Lack of support
-   for the Intel IGD in OVMF does not seem to affect the experience
-   negatively once the guest OS graphics drivers have been loaded.
-   So efforts to address this problem are only important in cases
-   when it is necessary to get graphics output from OVMF and/or
-   the guest bootloader.
-
-The next two patches in this patchset address these two problems.
-Of those two patches, the first one is more necessary, and the
-second of those two patches is only needed to provide graphics output
-from the guest during early boot.
-
- hw/xen/xen_pt_graphics.c | 7 +++++++
- hw/xen/xen_pt_load_rom.c | 5 +----
- 2 files changed, 8 insertions(+), 4 deletions(-)
-
-diff --git a/hw/xen/xen_pt_graphics.c b/hw/xen/xen_pt_graphics.c
-index 0ae95cc..a124233 100644
---- a/hw/xen/xen_pt_graphics.c
-+++ b/hw/xen/xen_pt_graphics.c
-@@ -187,6 +187,13 @@ void xen_pt_setup_vga(XenPCIPassthroughState *s, XenHostPCIDevice *dev,
-         return;
-     }
- 
-+    /* Case when the host ROM file from sysfs could not be read */
-+    if (!bios_size) {
-+        object_unparent(OBJECT(&s->dev.rom));
-+        bios = NULL;
-+        return;
-+    }
-+
-     if (bios_size < sizeof(struct rom_header)) {
-         error_setg(errp, "VGA: VBIOS image corrupt (too small)");
-         return;
-diff --git a/hw/xen/xen_pt_load_rom.c b/hw/xen/xen_pt_load_rom.c
-index 407b630..eaf0ae1 100644
---- a/hw/xen/xen_pt_load_rom.c
-+++ b/hw/xen/xen_pt_load_rom.c
-@@ -77,10 +77,7 @@ void *pci_assign_dev_load_option_rom(PCIDevice *dev,
-     memset(ptr, 0xff, dev->romsize);
- 
-     if (!fread(ptr, 1, st.st_size, fp)) {
--        error_report("pci-assign: Cannot read from host %s", rom_file);
--        error_printf("Device option ROM contents are probably invalid "
--                     "(check dmesg).\nSkip option ROM probe with rombar=0, "
--                     "or load from file with romfile=\n");
-+        info_report("pci-assign: Can't read Option ROM %s from host", rom_file);
-         goto close_rom;
-     }
- 
--- 
-2.52.0
 
 
