@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21E86C55ABF
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2026 13:59:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1384813.1627584 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67C42C56208
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2026 14:10:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1384826.1627592 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrycQ-0001ws-Qa; Thu, 06 Aug 2026 13:58:46 +0000
+	id 1wrymz-0004zs-PG; Thu, 06 Aug 2026 14:09:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1384813.1627584; Thu, 06 Aug 2026 13:58:46 +0000
+Received: by outflank-mailman (output) from mailman id 1384826.1627592; Thu, 06 Aug 2026 14:09:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrycQ-0001wl-Ni; Thu, 06 Aug 2026 13:58:46 +0000
-Received: by outflank-mailman (input) for mailman id 1384813;
- Thu, 06 Aug 2026 13:58:45 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wrymz-0004zl-Lt; Thu, 06 Aug 2026 14:09:41 +0000
+Received: by outflank-mailman (input) for mailman id 1384826;
+ Thu, 06 Aug 2026 14:09:40 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Jason.Andryuk@amd.com>) id 1wrycP-0001wf-90
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 13:58:45 +0000
+ (envelope-from <Jason.Andryuk@amd.com>) id 1wrymy-0004zb-01
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 14:09:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrycO-004Qcb-8j
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 15:58:44 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wrymx-0045I7-9h
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 16:09:39 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Jason.Andryuk@amd.com>)
- id 6a749302-bab6-0a2a0a5309dd-0a2a450cd4ce-34
- for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 15:58:43 +0200
-Received: from [52.101.48.35]
- (helo=MW6PR02CU001.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a74959f-2eae-0a2a0a5409dd-0a2a4502ddec-10
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 16:09:38 +0200
+Received: from [52.101.43.6]
+ (helo=SJ2PR03CU001.outbound.protection.outlook.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Jason.Andryuk@amd.com>)
- id 6a749310-f479-0a2a450c0019-346530230f97-3
- for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 15:58:43 +0200
-Received: from BN9PR03CA0424.namprd03.prod.outlook.com (2603:10b6:408:113::9)
- by SJ2PR12MB8881.namprd12.prod.outlook.com (2603:10b6:a03:546::13)
+ id 6a7495a0-6ca4-0a2a45020019-34652b06de94-4
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 16:09:38 +0200
+Received: from SJ0PR03CA0045.namprd03.prod.outlook.com (2603:10b6:a03:33e::20)
+ by CH3PR12MB7593.namprd12.prod.outlook.com (2603:10b6:610:141::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.19; Thu, 6 Aug
- 2026 13:58:35 +0000
-Received: from BN3PEPF0000B076.namprd04.prod.outlook.com
- (2603:10b6:408:113:cafe::11) by BN9PR03CA0424.outlook.office365.com
- (2603:10b6:408:113::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.292.21 via Frontend Transport; Thu, 6
- Aug 2026 13:58:35 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BN3PEPF0000B076.mail.protection.outlook.com (10.167.243.121) with Microsoft
+ 2026 14:09:25 +0000
+Received: from CO1PEPF00012E63.namprd05.prod.outlook.com
+ (2603:10b6:a03:33e:cafe::73) by SJ0PR03CA0045.outlook.office365.com
+ (2603:10b6:a03:33e::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.292.20 via Frontend Transport; Thu, 6
+ Aug 2026 14:09:25 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ CO1PEPF00012E63.mail.protection.outlook.com (10.167.249.72) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.315.6 via Frontend Transport; Thu, 6 Aug 2026 13:58:35 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.315.6 via Frontend Transport; Thu, 6 Aug 2026 14:09:24 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Thu, 6 Aug
- 2026 08:58:34 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
+ 2026 09:09:24 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
  (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Thu, 6 Aug
- 2026 08:58:34 -0500
-Received: from [172.19.79.34] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.41 via Frontend
- Transport; Thu, 6 Aug 2026 08:58:33 -0500
+ 2026 09:09:24 -0500
+Received: from [172.19.79.34] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.41 via Frontend
+ Transport; Thu, 6 Aug 2026 09:09:24 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -73,146 +73,113 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QNyqNc4cNXJqFGmKKpucAn7dxtzWQR8l6bC4Y3MPmh0hmf7bcYwKK667TyeY/j7z/ZdICMnkFKUFhpo6om4DDdiCZ0nHatHfzNVaD03tU5ZqEIlRY9JZWUX1zSLIIxZvPKvAkuFvu4LQpzkG62hy99hNu8m+FIB/a9VdCpuQwDBBgO2enaaU/HilQE6XkY06pzPEN0XUofCNIRVqLc7btYW3LKo+24LgUGl+YoTvT3m/MhVor4JlwqPG8tYag7M/xuH8p6bx4ioWxWI64ruYLkPnJ0TjDHP3QkxyTGQkv4xWnzbwD9VU4DU9dkA5sXnFolFtC6xGkIuzxqmZI819Cg==
+ b=Fhipckk14ODah3M+iu7gSTZr3+Ig0ZIvkTY0vt94EUexvA9iVdvc4/wU/XNd4P0T7F60KXOfz/fL7rLTGQgwMa7QrvF35TZELIYZAEC0UxPPH6+YlhQTX8B4/C/xcdZz4IEh4Ne+/A/3e5ecz7f1l29HV3tBcuWqufMsCDZ2G/+TbqJV+LJk6LYGvOSA18P3ZK48rqHu1xe3WjpbQcSsCSdDM3sp5ijhctazKv55bx9c3VlWweLMi0wFEUqrzdFDKDoyy7fbM6GtjGhJWCN9Uv3mG+L8lFsKnRJp45Ps/tVlLfJ5ReT26Mt8+DlzgdSvX7aBa/KhappmaRD+XCU+wQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Ps0ZJGdu/nNFySK1kD7HgjTQDo++3/DWtEi+//fDIvA=;
- b=y45vNvRTpJTLmAyxbxs1GOR64tC3WT1RCLBufVbf9Z2ZZJ5BkOaq95vfF5bztfDuuR1oqigzQ+R1vkA6HCORlsnv2rVSZ0MxgvROqJpaI/JY+veZa0E7TUgz3RIQJp55IjDynhHP4EqtGHtbwaY2w+5pQvUH42tArG1GrI0Q1wZoEBW8vFZLZYIMcPGDb3s3vuI+OE80H+IVVWg1O7tpl+K/QaH7zsHo+6XRyIZino2X7IiChn9hrqdPouBzfIe/prFMMqZTbaRi5vUtAGyEyEA2ff/u5DxPA04sDEZeE+SG0h0Tpoh3JLwy+Mp1WGYZe1HnTBROVwU4GgtpKY8zrg==
+ bh=HTnl1ehLlzrWHapilZ0dYORgkBNrPt2rSXy3za9bZWQ=;
+ b=xCmKOP8vnqehGKTrcRLz9Hzz+OpQ7iF2H4wCKHn1/9qS94l4osWOG0RqouEATG2EQmiARUNoCnYlJi627OhQFkW/C++XZbeDzFIyEsI78V+GpwQH5CEjZlVTna5s3yaQTYdi13HaSl3FBFeshEwSbn77DgUpKxfAi89xHzQbh3qaVglmSqdS8FfpWdcVxDH6cpZGuuLKS1Ztk7vRameYhm6a7GBxbF+ngxFikjs8xOLXALcfUdcpcLTHRJo+/vF7/a056zQRsww4PO2x5NXISaxWF0wrB6PGIgrEJIoX5URjQ81zDPf8IAl9zYjvVrdULYwRtzqWSvK0lnaIV/QtoA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
  (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Ps0ZJGdu/nNFySK1kD7HgjTQDo++3/DWtEi+//fDIvA=;
- b=Upl9+7iGl29zwCjUP5s0SPMrBRyKu4T/wFl8XgW6K+USwxpWSmQ91M19G6Nru8l6rsddT/KAVcJnFAHr9UYS3tNxgF+5/+J3GuWDOKDjJqLt8A93WjZ509l3MubTI8SrnNvY+0Bj1fG0eUCtylzSUKEZrsqY/bXkHN8NEKArrXA=
+ bh=HTnl1ehLlzrWHapilZ0dYORgkBNrPt2rSXy3za9bZWQ=;
+ b=AXzJ2L9BESrjHHLc8H1jmMT5u7t324uyHtXMWrQmnE1Wg/0aPI7RM43CcJM/sF9eoldLyrqY5MESySZuFDhaudHrFIcMWieN5PoanMi5b1ctYaPMNIaNHbUH3oSaJW9HeN1FPFCq/QELhkA3tjJ/6PCIGWOtIr6d30Nay6FnUxo=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <9f2588a1-b585-47dc-b825-993c31ab3fd6@amd.com>
-Date: Thu, 6 Aug 2026 09:58:32 -0400
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Message-ID: <29546ca9-1875-4c20-b42b-39c886f3d41c@amd.com>
+Date: Thu, 6 Aug 2026 10:09:23 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] xen: Fix PV-only build
-To: Juergen Gross <jgross@suse.com>, Jan Beulich <jbeulich@suse.com>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>,
-	<xen-devel@lists.xenproject.org>, <linux-kernel@vger.kernel.org>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Oleksandr Tyshchenko
-	<oleksandr_tyshchenko@epam.com>, Boris Ostrovsky
-	<boris.ostrovsky@oracle.com>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar
-	<mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, Dave Hansen
-	<dave.hansen@linux.intel.com>, <x86@kernel.org>, "H. Peter Anvin"
-	<hpa@zytor.com>
-References: <20260806015233.202486-1-jason.andryuk@amd.com>
- <083db883-558a-4000-b404-bf170c8309ee@suse.com>
- <62b5117f-928d-4908-9217-cc16d9cf15f9@suse.com>
- <967208c9-8d51-4380-8cb4-298f5c313d35@suse.com>
- <a6c55f20-c5cf-45fa-beb8-532fe3b95270@amd.com>
- <3206813c-33fc-476f-a553-4d3f319459aa@suse.com>
+Subject: Re: [PATCH 17/24] XSM: make Argo hooks well-formed ones
+To: Jan Beulich <jbeulich@suse.com>, "Daniel P. Smith"
+	<dpsmith@apertussolutions.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <758c8410-a18e-45dc-8944-5913e5832397@suse.com>
+ <4bd4e7f7-e005-45b4-a543-98597a9de707@suse.com>
+ <6991badc-dcc4-44b9-a048-29eb67c46d2e@apertussolutions.com>
+ <7762513c-0d3a-465a-abd9-73e3ba586556@suse.com>
 Content-Language: en-US
 From: Jason Andryuk <jason.andryuk@amd.com>
-In-Reply-To: <3206813c-33fc-476f-a553-4d3f319459aa@suse.com>
+In-Reply-To: <7762513c-0d3a-465a-abd9-73e3ba586556@suse.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B076:EE_|SJ2PR12MB8881:EE_
-X-MS-Office365-Filtering-Correlation-Id: f3c6461b-1d28-43cc-22d0-08def3c2cebb
+X-MS-TrafficTypeDiagnostic: CO1PEPF00012E63:EE_|CH3PR12MB7593:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9101fe5a-ffa0-47c3-15e9-08def3c45222
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|7416014|36860700016|82310400026|376014|23010399003|1800799024|10067099003|56012099006|11063799006|4143699003|22082099003|18002099003;
+	BCL:0;ARA:13230040|36860700016|1800799024|23010399003|376014|82310400026|18002099003|22082099003|13003099007|6133799003|11063799006|56012099006|4143699003|10067099003;
 X-Microsoft-Antispam-Message-Info:
-	1CP4srme/UHBIZGwwigWh27iMkxSgnH8KnZR+Z6lRwdzyEmO3jDsL7g11H20DH0zJsmSrYWXu87oRXUtKsqf0dLK2KR4gMaxOCUyR59I6RiZKVfIcnaPouPCIfx+dVY5w+qyO2mNmpXKQ2UVJys+szvD82NptQxc05IhBzjErmRQqCUsU2zDe5yekVHNIu0S/QWpiPV/eOA0sZwC16Jb3RZ60EShNLZLsqCWcV+i3mhw5NBYkU/c9lKl5Xf6yAcovk4kughjseetQK7qNZC42xNLWr5rf1iPsmKYrMC2qGrpKEOZ9iOV7JzLJm7+/+OFlyDTa8+OeJfljZMdUzyhxVqo1is2D/sZC108QL1/zqqn/3b/zLPpf0nMXAsTB4khuGGh8TaE2zTdXlUO9hdrONtg+789oTPnXO67opkquXHqcI/HmUZ18Z94p4Ukmh1ivtGHope3p4qD8+8C/XxCHx4KkrPIuxDxumNpr/5IqWZ8afzjjuL0jm+BkF+nfVuhQXfOHA7HF99hHTkh6X9QqnPFmiTdhx4GkITiUTG6hIfkEJKr4BsNsI3RJNZ9rDB/JM7dicyuuEO6UGdPCGJFKrhFH92AiTKbbrFp3vH0SxsgnLbe2A6xmxxyC6vINFIftzGRFC0cIlXOaE7L59YoU5/94uRAb/xYi4AY5UHLp9Od+JMYTUK7JHasP+9AO3AQ
+	hKBiHbgit6k4kFJ097hW7JSzVb3zwUdux7kATasSulqR6VowylzBdYQkrZp4huXes8ZdiStaJnfvwosrmJpnbbgq/cTaew1ECHht7i25Ihc3ieFUVKlD9UTLq9f2sWGj2LD10RTXNqujUmaZpJ7cIFitLB75rzB7cxWIhGZQ6SXlSWW72n2rKmYhoKB9HPskQ2vwGZxaf9j9dIugCtVJIS52LmIfhbH9gJ0omFSA8My/gYUZmA6GYc9eXRN8WNexqiHix7VFUODshdfuLqWA1bj6YN3seVKob6VjObKAIJqoPNWAFzWCHMVOJ9uU7aHbZfl8Bg5ik9ic92IwKnNysPhGxEyj2isU6+uzqgrWKRjkCYabDZmktYqZQFUdTwMSgBs4pv+DQnATIZf7pNvtweL+/me5MUUPR+RX/gv0/+PM5+AS6YDv6sQ42aXUDC2d+bDqQj5b6HX00SdX7CadTczIqUKFCwNmeB53egNQYfAtMsNeDQ/DuQIo/4nqtdUJDaiz3GMYdpuudb5q5W46vBDcL/+sHH/89OFIo3au8/ErewqawoFPz7ATHtap+nntVlk41QBkuPHgEMrOyexHzaQYbnI0dzAv2tVu/fXePJwzrrbYNL2cjacrzeS140KSmXi8UGcNY4EfeU9a2IP3yE6DaHS0xFjEO1oTmd3USO8cM/g2qTgzs4s/dO4m4uzMBT4xjrbPh6Ivs4dQpdO3og==
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(7416014)(36860700016)(82310400026)(376014)(23010399003)(1800799024)(10067099003)(56012099006)(11063799006)(4143699003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(1800799024)(23010399003)(376014)(82310400026)(18002099003)(22082099003)(13003099007)(6133799003)(11063799006)(56012099006)(4143699003)(10067099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	k1G1CMbkAWeDRKUcpL9U6a5ZkMlBqQ0lfIdWEzQs9SEm4hCMYmfZRAbhdBN5Pl8WilMkQ6vJKypVT69PSFkwm4Deex68hAFC2yALUMJ5HAZQdKZd5WrbSSUb1QsIrFeOMHcHbOKoGJoHAaRZ2oFdHf+8B20MzpP1Tl7EEP5VCxm5u1eNSQ62JfIQeSQaiRYIW5NAKAYZJ1rHFdgprnkNvVmoLI3g9QlKVtIRsjV2wfNKIeQB/+nevp+IuP51sIeJMA+UplboLDt4dytCv0vPoVLKhRraMEUXFegGXKT5yhs6KkqH6guTrjP99MdQUIfm7isrpITGGdolc+jdKHHMbrVB/lMkNUwUcuhjOcpOD8IgLHdZZs6ZZkF9hsT22EOvswAFal71mTlsZitArm6k7VfKBZsBkbGU46pvPVqUHG0KowWrKJJuH0+29JKLEuQS
+	BpZliNvyeF/EbtP3QEncxDe//U4smaiwL6D0lijgMAA5V22EtZIsDmjn9p/z4AJx3qDolcLxoHD6h3DbzjZ0OyJo8hbsSoFQF+n9yPYjfQBJ9lnAAvThJt78sDF/OSOWquYUIzVt3Z3713nL6WvQ/aDcKQWH93hNvlQ2rAIBUK9SmeGdZolbZXircbo17L97bXcbeL0uOVWFSCndPOlku0nse5QKJul/B+wvKY/iNZQZteMEeyQpey160QGQHiivWalOOC5Py2G2Vx2HM83WjD0XiGzpbZaFgVH4PONB2AKFwutwA0P2GOS0JH4CHwXHvOpbiom+bO5rKvGoEIcJ/pQTwPtw8Pn2FQnY+NDJwDXQO76hgzZ+wbGTShL/km0PHcRWawiTuimUQlLn24GEn9MjOw5n4iRr9Mb+mnFYdwVVxXgbhp5UhI1tXcPc2USP
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Aug 2026 13:58:35.0349
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Aug 2026 14:09:24.9445
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f3c6461b-1d28-43cc-22d0-08def3c2cebb
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9101fe5a-ffa0-47c3-15e9-08def3c45222
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN3PEPF0000B076.namprd04.prod.outlook.com
+	CO1PEPF00012E63.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8881
-X-purgate-ID: tlsNG-d25034/1786024723-77ED2A5B-765E4CD0/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB7593
+X-purgate-ID: tlsNG-720697/1786025378-F38BC2AC-692CF31A/0/0
 X-purgate-type: clean
-X-purgate-size: 2175
+X-purgate-size: 2036
 
-On 2026-08-06 09:31, Juergen Gross wrote:
-> On 06.08.26 15:24, Jason Andryuk wrote:
->> On 2026-08-06 08:00, Jürgen Groß wrote:
->>> On 06.08.26 13:31, Jan Beulich wrote:
->>>> On 06.08.2026 12:55, Juergen Gross wrote:
->>>>> On 06.08.26 03:52, Jason Andryuk wrote:
->>>>>> Allow disabling XEN_PVHVM for a PV-only.  A stub in the event channel
->>>>>> code needs to be fixed first.
->>>>>>
->>>>>> Jason Andryuk (2):
->>>>>>     xen/events: Fix xen_set_upcall_vector stub
->>>>>>     xen/Kconfig: select XEN_PVHVM
->>>>>>
->>>>>>    arch/x86/xen/Kconfig             | 8 +++++---
->>>>>>    drivers/xen/events/events_base.c | 2 +-
->>>>>>    2 files changed, 6 insertions(+), 4 deletions(-)
->>>>>>
->>>>>
->>>>> I did a comparison of a kernel built with your patches disabling 
->>>>> XEN_PVHVM
->>>>> and my patches with XEN_PVHVM_GUEST disabled.
->>>>>
->>>>> The kernel built with my patches is 6 bytes smaller than the one 
->>>>> with your
->>>>> patches.
->>>>
->>>> Isn't this a sign of something else needing tweaking, somewhere?
->>>
->>> This is a sign that there are probably only very few really HVM 
->>> specific paths
->>> (in the sense of: explicitly not marked as irrelevant for PV) in the 
->>> kernel.
->>> Yes, I'm sure you can find some more, but I'm really not sure this is 
->>> relevant
->>> for more than a handful of users.
+On 2026-08-06 03:16, Jan Beulich wrote:
+> On 06.08.2026 01:02, Daniel P. Smith wrote:
+>> On 7/28/26 9:22 AM, Jan Beulich wrote:
+>>> @@ -2307,7 +2308,7 @@ argo_init(struct domain *d)
+>>>    {
+>>>        struct argo_domain *argo;
+>>>    
+>>> -    if ( !opt_argo || xsm_argo_enable(d) )
+>>> +    if ( !opt_argo || xsm_argo_enable(XSM_HOOK, d) )
 >>
->> I see more reduction:
->> 15029248 - arch/x86/boot/bzImage
->> 15021056 - arch/x86/boot/bzImage.after
->>
->> ~8k
->>
->> 52542480 - vmlinux
->> 52523184 - vmlinux.after
->>
->> ~18k
->>
->> $ ../linux/scripts/bloat-o-meter vmlinux vmlinux.after
->> add/remove: 1/136 grow/shrink: 14/48 up/down: 15902/-22430 (-6528)
-> 
-> Did you disable CONFIG_XEN_PVHVM_GUEST in the before kernel, too?
+>> This question came up on another thread, so thought I might point it out
+>> that when FLASK is in use this can return a nubmer of error codes beyond
+>> an access deny. While I know it's the existing behavior, but if the
+>> error code is anything other than -EPERM, then it's not that the policy
+>> denied the access but something cause a fault in the security server. In
+>> that case the domain is still being allowed to construct with the
+>> assumption that it was a policy deny. At a minimum should the error code
+>> at least get reported, and perhaps it should be passed up to domain
+>> construction to allowing it to make an informed decision on construction?
+>
+> Sounds plausible, but definitely wants doing in a separate patch.
 
-Yes
+I think this is a mis-use of xsm_argo_enable().  As I wrote in [1], this 
+isn't an access decision, but an ~optimization to skip initializing argo 
+data structures when a domain is not allowed to use argo.
 
-$ grep PVHVM config-before config-after config-pvh-before:CONFIG_XEN_PVHVM=y
-config-pvh-before:CONFIG_XEN_PVHVM_SMP=y
-config-pvh-before:# CONFIG_XEN_PVHVM_GUEST is not set
-config-pvh-after:# CONFIG_XEN_PVHVM_GUEST is not set
+With Flask, this prints an AVC denial during domain construction when 
+the domain doesn't have argo enabled.  That is misleading as it isn't 
+the domain's action causing the access.  In OpenXT, I wrote a patch to 
+add a noaudit variant to hide the denial.  I didn't upstream it because 
+I didn't really like it.
 
-These three options change:
-$ diff -u config-before config-after
--CONFIG_XEN_PVHVM=y
--CONFIG_XEN_PVHVM_SMP=y
--CONFIG_XEN_AUTO_XLATE=y
+The issue is really the conditional initialization of d->argo.  It seems 
+like it would be simpler to always initialized argo for all domains. 
+xsm_argo_enable() would still prevent using it, but internal checking of 
+d->argo could be removed.
 
 Regards,
 Jason
+
+[1] 
+https://lore.kernel.org/xen-devel/758c8410-a18e-45dc-8944-5913e5832397@suse.com/T/#m149e1571b819a0cf481eea558c6220a5a24d5285
 
