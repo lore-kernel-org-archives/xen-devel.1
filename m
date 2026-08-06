@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06256C55838
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2026 06:20:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1384227.1627246 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EE08C55838
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2026 06:44:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1384241.1627255 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrrSj-0003fk-1W; Thu, 06 Aug 2026 06:20:17 +0000
+	id 1wrrpo-0000pZ-U4; Thu, 06 Aug 2026 06:44:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1384227.1627246; Thu, 06 Aug 2026 06:20:17 +0000
+Received: by outflank-mailman (output) from mailman id 1384241.1627255; Thu, 06 Aug 2026 06:44:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrrSi-0003fd-Uu; Thu, 06 Aug 2026 06:20:16 +0000
-Received: by outflank-mailman (input) for mailman id 1384227;
- Thu, 06 Aug 2026 06:20:16 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wrrpo-0000pS-QT; Thu, 06 Aug 2026 06:44:08 +0000
+Received: by outflank-mailman (input) for mailman id 1384241;
+ Thu, 06 Aug 2026 06:44:07 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wrrSi-0003fX-6O
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 06:20:16 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wrrpn-0000pM-93
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 06:44:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrrSh-005tz5-FX
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 08:20:15 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wrrpl-0034mA-V4
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 08:44:05 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a742799-bab6-0a2a0a5309dd-0a2a450bcf9c-24
- for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 08:20:15 +0200
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a742d1d-2eae-0a2a0a5409dd-0a2a4509bb38-42
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 08:44:05 +0200
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a74279f-b7e8-0a2a450b0019-d1558034dc48-3
- for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 08:20:15 +0200
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-4954afac04bso19210135e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 23:20:15 -0700 (PDT)
+ id 6a742d35-be1a-0a2a45090019-d155dd31ed9b-3
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 08:44:05 +0200
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-47ddf7b09e5so1646017f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Aug 2026 23:44:05 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499542241c4sm34174345e9.11.2026.08.05.23.20.13
+ ffacd0b85a97d-47ff79b529fsm4174563f8f.12.2026.08.05.23.44.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Aug 2026 23:20:14 -0700 (PDT)
+ Wed, 05 Aug 2026 23:44:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,60 +55,55 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1785997215; x=1786602015; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1785998645; x=1786603445; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=aAuvnCD1uphQa04NcpaDiUaJGfs6oUj2xypwAwI1W/U=;
-        b=I1Ph6eM/eflyoE1aHXqNYUHcR5iIod4dWqnCgDPjB9O+RjB2ua6LzmHe5NLebxj/gz
-         5UKQQx9JtSkZHW8VrctFuh1g9aSjf64ClvxXihNQbhU9CXhVli7plCCmRqJE7qysKGIy
-         FznPAPhnMqSZeEzHFvYcR2T8BYvxlNfCvRAQRLXVGcOZpJKp/uDpTqlMQ3UW0//s46Jv
-         XwPD/tPWyISPne+/nI+W1JUYP6SNIA5YtdUbzkQJGakr7SGqmqzZ1j1cqWtD4jmzFh2R
-         yRzQC21C+d3K332mVcrMqcXcZtkawYo2i0q4oBFZg+e9GIQh7uocBc10TkgePecWYzc8
-         EoBg==
+        bh=EfQIuo25alYydqJl7CsWTFV1Lp4Og1ZUqJTTMZut3GU=;
+        b=gJ1wps/A3muG8mBgg2W9yZWuF8IBc9LS1Mz4NYPCB4CeuuVAHm9TR18VjR/mh2cdpX
+         iT+sqXCAt45zr0yRIOWpyR7KbwNKMWquE7I4+bg0dZpkq6osnsCxSD2ffoIGr+RPpqxm
+         Lif+mqhXkeML7HGAkRA3klGZ3Nfg1HzYsKBWG9jVK+w4jY1ybykRbR5Hkpq7TjLZZqp8
+         WWa9bv5iASBxv1PKcr5RSAaWYv7NvkW1FA1bQy5o1qWpv8NA0+VbOUKjgSAQDCUFGkWC
+         YOwvGFP0AyCnMds3xUvnWgc+k5+6JPykgKjQ2EO682p86AIcxbTCfQtrGrRXjiRgGjLM
+         f82Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785997215; x=1786602015;
+        d=1e100.net; s=20251104; t=1785998645; x=1786603445;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=aAuvnCD1uphQa04NcpaDiUaJGfs6oUj2xypwAwI1W/U=;
-        b=mKHxcnVaWrTb5eZdn3OusZ2Ny8uZsFPhaela7NqmSwNg/PYdAP7RaR8NmTuq9WH31r
-         Y/yEnx6HWBb4cxQXf/EV17mgar47X90hjrODXG2mqMaqz4i2Sk3Z9UON60/AN5DWJTKy
-         aTes6av6fiU83ycrLaiQLVasVpeKrVOSRkFK1p0rEKVZ8+mjOBRVmffxHvsE3/lRhbGy
-         NF4PjuS73Wnb3g9ka7HBSg7js49tG0bl60EmsIt6sx8oyMxLBTGweHe8mVlFl1Jtyc18
-         J0eOcOtI4MWjLpkIm3KyAcOiLY4lgY0xK9htfSy1VJBFa9YZsaLkK4u42sGZXONMlyj2
-         vXTA==
-X-Forwarded-Encrypted: i=1; AHgh+Rpti235/SPfveZpjzhE9SrGFiYiRZJRVdRQqcGjyEPhcwhvFTVUtNIidL18s9K2ByESvtvwuPpNL+Q=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx/r8z05yVyYHrCUdLUg6SLGl8HG2b8hvPsISXrDPE2Zs8BL6A7
-	b/0h8M4BFSBqGsc5UZ6k0/w90zNLTYBDoKcA4eJQ4dl4VJuYDGFuNxScxwsIY19vYw==
-X-Gm-Gg: AR+sD10phROJdTqYNFevz/H9ChSDGMefSgtQwFz/GqpnT4qHLDkyjEWta8K33RWtN2F
-	vZ1/X+YSsfo8hasN8zGaHezfiCSy2Sif7/eVzpF6WViFWE0eGQ2CjHxyzLuc5eb/oATquKSzunP
-	4oljWRvgSnEp1EYgu9VKd3qiiu0s+gIhohzRvar26Df0X8mM4bJM2c10SCq4S8zz6unfj/uFzd2
-	nn51/P3hIWmfFL17rkMklFJG/+ovqWVU8rHp/T7DeTDqWCAwegeScyc0JtqLfnJML+Zh18qYHHZ
-	YENH9e0mOwgfqqGqA0uozFbRYGErDQMvXi9tLkbHn//zdu3Z2i9veI+mbw2b+nXRrIYcKcb2c1P
-	Gcw+LtDInuIv76xRMv5jKYU1/ssYFfkHSBJ8sNrTe5XKuW2VAGKmZ4Tsop4TPsypirZlWt5aWB5
-	V3DCwTNgZ7eBq3UEzIru6XiTMisPnGrvnmxCAEKdWZU9w+ekx/DpaEH39rKcdeNfWZ8DrXTjm25
-	iBnOY9dKZEBKpf4vOooj6nEiAfBqCIKXjg6v9hjOIyD9qoUfdje
-X-Received: by 2002:a05:600c:35c4:b0:499:4dca:aa4 with SMTP id 5b1f17b1804b1-4994e70ed73mr161340535e9.4.1785997214876;
-        Wed, 05 Aug 2026 23:20:14 -0700 (PDT)
-Message-ID: <d44f3abc-8b64-4542-bb10-936626c418a2@suse.com>
-Date: Thu, 6 Aug 2026 08:20:13 +0200
+        bh=EfQIuo25alYydqJl7CsWTFV1Lp4Og1ZUqJTTMZut3GU=;
+        b=Ie1ti86TZGrglMP3nT+kRuYl78/qBdkn42tZOCOy+j4xkMxHeluFN3NsBBIJveeAvg
+         iN+Rn7rPPwvYU760HaHh4y2SHxsR1h8ofGC7fTxoN+DY4WurDTp3y75hbT/gGmSNRz9u
+         mMGhdSLNOd+SvsUrp+cbR8Q3U9myusSC9HPwKHqUPEJHC8uBp/GgbC+2oNPH9grtm2LM
+         Kq+Oq6Z8ZRKdKQXjO7na0RQy1xXJVPS+KDAieiEmPHcHmE4fgCv9BS7M5JX/l4xmxmvq
+         La4OLZwuFc07CRnxzNnARBtVGueTLbF+AfTIexkbxvrE4JA9ki0clTydG79e6hbHGgFZ
+         m+Dg==
+X-Forwarded-Encrypted: i=1; AHgh+RpdiDEdH3nnSIPMpCYy7mGON2Wt5v1QRRvFi3WHIQniTraH5t/wESUE1TAW2iipZsxdp9RhPAlDnpI=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxH6JWiU5wxlS68I1aKnkZ+JigukOZ1mo/Q72XNtVVnS2lPMXRW
+	o823srUMcdSPU+lFx3KzWsIxjW/b/bz/YEFA1uqDDWUjtqFoNe06UdbhS3evRDs33w==
+X-Gm-Gg: AR+sD13hWvLZcam+bqJ5uEJtQnIdCqRYM3R48RQmZ7bHTb3EmdoSIae+tG2d0x5++eH
+	uFe1wuuWy5fw1zLO2hrjM922a8sJxYjiX9C9n2DArRDxnhbc6RkHa22eCOL1KIZcA8X24CcOtES
+	wRbJ8Ebx7f8nMxVZjWHh8g+uEnf9r1IRPhOSLug9armU+kUawcbHQPf7xg57xpp7Do6/+7So8gu
+	QwB9W6BZyZ+Yv8umkhHHxXmtgBErBtCuj4FFLKSf1zHLOCL4nJlBabL4iLQ7EbQ8AhKZSKVlZWO
+	nDGC9st8avQRUkVQtDJhQv4+eLLnEUE7EPJBM8D8Y+lBodOHzdTRaOh8iy3C9c0F7HWUNFQ1R8Y
+	oZs9XRgxOMdktNsgIDljkkfznbU5ubrpKwH4zWr5yRaPKUjSNriO/rWZFboZ3JtiwUhS3OpdPep
+	Vi0z3EVTm2zkMw1RdO599dPyMJm+w8wA2wUHsizO2zvHvYzdnwtomNvBIs9TKv+GZfSyABE01Yx
+	oTPm/++JounCi8uR9C7RURo4ZnRGDDClIDo/ZXl24yrsylYLRtm
+X-Received: by 2002:a05:6000:18c:b0:47f:7c50:2222 with SMTP id ffacd0b85a97d-47fec53259emr17005053f8f.24.1785998645277;
+        Wed, 05 Aug 2026 23:44:05 -0700 (PDT)
+Message-ID: <8c2e2d27-2802-4ba5-9b91-cb6cf8a5fa1a@suse.com>
+Date: Thu, 6 Aug 2026 08:44:03 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] xen/Kconfig: select XEN_PVHVM
-To: Jason Andryuk <jason.andryuk@amd.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
- Stefano Stabellini <sstabellini@kernel.org>, Juergen Gross
- <jgross@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
- x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
- Jason Andryuk <jandryuk@gmail.com>
-References: <20260806015233.202486-1-jason.andryuk@amd.com>
- <20260806015233.202486-3-jason.andryuk@amd.com>
+Subject: Re: [PATCH 0/5] x86/nmi: Watchdog fixes/improvement Part 1
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20260805124525.105457-1-andrew.cooper3@citrix.com>
+ <e1e873d9-6dc0-4e08-90f5-e99ff42802a0@suse.com>
+ <49738195-ad6f-4889-984d-b1eeb5372708@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -134,50 +129,95 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260806015233.202486-3-jason.andryuk@amd.com>
+In-Reply-To: <49738195-ad6f-4889-984d-b1eeb5372708@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1785997215-1A0C59EA-8F1AA1F4/0/0
+X-purgate-ID: tlsNG-bad1c0/1785998645-FC212034-CF05F789/0/0
 X-purgate-type: clean
-X-purgate-size: 1161
+X-purgate-size: 4238
 
-On 06.08.2026 03:52, Jason Andryuk wrote:
-> --- a/arch/x86/xen/Kconfig
-> +++ b/arch/x86/xen/Kconfig
-> @@ -51,7 +51,7 @@ config XEN_PV_DOM0
->  	depends on XEN_PV && XEN_DOM0
->  
->  config XEN_PVHVM
-> -	def_bool y
-> +	bool
->  	depends on XEN && X86_LOCAL_APIC
+On 05.08.2026 19:56, Andrew Cooper wrote:
+> On 05/08/2026 2:42 pm, Jan Beulich wrote:
+>> On 05.08.2026 14:45, Andrew Cooper wrote:
+>>> This is the start of a very long rabbit hole to address the
+>>> mis-classification of some watchdog NMIs as non-watchdog NMIs.  For
+>>> now, just some simple and hopefully non-controvertial changes.
+>>>
+>>> https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/2733861049
+>>>
+>>> Andrew Cooper (5):
+>>>   x86/nmi: Drop {reserve,release}_lapic_nmi()
+>>>   x86/nmi: Drop K7_NMI_EVENT
+>>>   x86/nmi: Misc style fixes
+>>>   x86/nmi: Check MSR_MISC_ENABLE for all Intel platforms
+>>>   x86/nmi: Don't configure EvtSel repeatedly
+>>>
+>>>  xen/arch/x86/include/asm/apic.h |   2 -
+>>>  xen/arch/x86/nmi.c              | 153 ++++++++++----------------------
+>>>  2 files changed, 47 insertions(+), 108 deletions(-)
+>> This series, once again, is putting me in a difficult position: Should I look
+>> at it, or should I let it sit for two years or more, just like my earlier
+>> fixes in this area [1], [2] are? (Of course, as always so far, I will look at
+>> the patches, and I will likely also accept them going in ahead of mine. But I
+>> cannot exclude that at some point I might actually stop doing so, seeing how
+>> many of my patches are in that state. While at the same time none of yours
+>> are, afaict, i.e. as per the track record that I keep of what still needs
+>> responding to.)
+>>
+>> Yes, you did respond to [1], but is not being comfortable with a change really
+>> a reason to block it, when it _is_ an improvement, and when the alternative
+>> hasn't materialized in all the time?
+>>
+>> Jan
+>>
+>> [1] https://lists.xen.org/archives/html/xen-devel/2024-01/msg01365.html
+>> [2] https://lists.xen.org/archives/html/xen-devel/2024-04/msg00194.html
+> 
+> I'd forgotten about these.
+> 
+> Patch 1, I'm (still) distinctly uneasy about, but I dispute your claim
+> that it is an improvement.  You are adding complexity and not fixing
+> anything AFAICT.
+> 
+> The watchdog counts NMIs (and counts incorrectly; this is the root issue
+> I'm needing to fix).  A timeout is declared when a fixed number of NMIs
+> (10, in default configuration) pass without the timer softirq having run.
+> 
+> The rate of NMIs varies with P states, including lower than cpu_khz, and
+> differs between cores.  In some but not all hardware, we could switch
+> from Unhalted Cycles to Unhalted Reference Cycles, but even that has a
+> bit caveat saying that the definition changed in 12th Generation.
+> 
+> You are making the rate of the timer softirq dynamic, but it is an
+> arbitrary fixed rate still unconnected to the rate of NMIs.
 
-Imo "depends on" on prompt-less, default-off options are at best unhelpful
-in the common case. (Aiui it can be helpful when "imply" is used instead of
-"select".) Hence I think this dependency wants dropping right in this patch,
-justified further by ...
+And I'm not claiming to address that (independent) issue. What the patch
+does fix is a watchdog timeout occurring too early when a CPU runs in
+turbo mode for perhaps an extended period of time.
 
-> @@ -61,13 +61,15 @@ config XEN_PVHVM_SMP
->  config XEN_PVHVM_GUEST
->  	bool "Xen PVHVM guest support"
->  	default y
-> -	depends on XEN_PVHVM && PCI
-> +	depends on XEN && PCI
-> +	select XEN_PVHVM
->  	help
->  	  Support running as a Xen PVHVM guest.
->  
->  config XEN_PVH
->  	bool "Xen PVH guest support"
-> -	depends on XEN && XEN_PVHVM && ACPI
-> +	depends on XEN && ACPI
-> +	select XEN_PVHVM
->  	select PVH
->  	help
->  	  Support for running as a Xen PVH guest.
+> The only fix is to make it safe for the NMI handler to read real time. 
+> Until that time, in a choice between your patch and saying "well don't
+> set watchdog_timeout=1 then", I'd firmly favour the latter because at
+> least it means there's less to revert when a real fix does come along.
 
-... the XEN dependency being in both of the options selecting XEN_PVHVM and,
-as per Jürgen's patch, X86_LOCAL_APIC being redundant anyway.
+As said in the description, if the ratio between max and normal is high
+enough, even the default of 5 could be a problem.
+
+> For patch 2, I had figured that bug out independently though inspection,
+> and yes I do agree it's an issue.  I was debating removing
+> watchdog_timeout=, and agree with that aspect of the patch.  However,
+> watchdog_force needs deleting to fix the incorrect counting, and with
+> your /* reset to defaults */ you're breaking the incremental property we
+> have of command line parsing elsewhere; specifically "watchdog=force
+> watchdog=10s" now sets force to false.
+> 
+> I will make sure to address this bug in my series, but I think it will
+> be a fairly different patch when the other dust has settled.
+
+Okay, we'll see if and when that arrives. With your intent to address
+this differently, I don't see a reason then to try and adjust the cmdline
+behavior. FTR, with watchdog= in particular I'm rather uncertain whether
+the common (but unwritten) "incremental" policy is appropriate.
 
 Jan
 
