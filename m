@@ -4,32 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E17AC56205
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2026 15:49:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1384955.1627656 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29973C5AC7C
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2026 17:27:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1385047.1627665 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ws0Le-000588-98; Thu, 06 Aug 2026 15:49:34 +0000
+	id 1ws1rn-0002g5-21; Thu, 06 Aug 2026 17:26:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1384955.1627656; Thu, 06 Aug 2026 15:49:34 +0000
+Received: by outflank-mailman (output) from mailman id 1385047.1627665; Thu, 06 Aug 2026 17:26:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ws0Le-000580-4X; Thu, 06 Aug 2026 15:49:34 +0000
-Received: by outflank-mailman (input) for mailman id 1384955;
- Thu, 06 Aug 2026 15:49:32 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1ws1rm-0002fy-Vf; Thu, 06 Aug 2026 17:26:50 +0000
+Received: by outflank-mailman (input) for mailman id 1385047;
+ Thu, 06 Aug 2026 17:26:49 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <roger@xenproject.org>) id 1ws0Lc-000579-S3
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 15:49:32 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <roger@xenproject.org>) id 1ws0Lc-00834V-28;
- Thu, 06 Aug 2026 15:49:32 +0000
-Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
- helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <roger@xenproject.org>) id 1ws0Lc-009r6I-0L;
- Thu, 06 Aug 2026 15:49:32 +0000
+ (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
+ id 1ws1rl-0002fs-Cc
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 17:26:49 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1ws1rk-00Dhsu-Lm
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 19:26:48 +0200
+Received: from [10.42.69.2] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
+ id 6a74c3ba-e002-0a2a0a5209dd-0a2a4502ca6a-18
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 19:26:48 +0200
+Received: from [160.101.131.8] (helo=na1pdmzitismtp01.tibco.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
+ id 6a74c3d7-6ca4-0a2a45020019-a06583088ea4-3
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 19:26:48 +0200
+Received: from fedora.eng.citrite.net (unknown [10.113.40.46])
+ by na1pdmzitismtp01.tibco.com (Postfix) with ESMTP id A6381444E917;
+ Thu,  6 Aug 2026 13:25:08 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,133 +49,167 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=v8h1wppUhC/u/nkKEBQJ22KAaFfqUX8DZenk5l0qwSs=; b=E3djs5jXPwiXuhHLhTg9/Zkj/V
-	BUEnWf+1Uz1xhEse4IKMmlZxHISKW5NFHqUzbijq8DDScnvR9y0sEWsKLv8kojb/QLURb9HkRHnSy
-	rnEfu87ivdlfZDUnuXA9O+B1qTT17bpzIEnCU0sJrQuMFPphb0CdfikQg+O24mSr+w2s=;
-From: Roger Pau Monne <roger@xenproject.org>
+Authentication-Results: eu.smtp.expurgate.cloud; none
+From: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
 To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger@xenproject.org>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Stewart Hildebrand <stewart.hildebrand@amd.com>,
-	Jason Andryuk <jason.andryuk@amd.com>
-Subject: [PATCH v2 2/2] xen/vpci: allow unaligned accesses by the hardware domain
-Date: Thu,  6 Aug 2026 17:26:19 +0200
-Message-ID: <20260806152619.23881-3-roger@xenproject.org>
+Cc: jbeulich@suse.com,
+	andrew.cooper3@citrix.com,
+	roger.pau@citrix.com,
+	jason.andryuk@amd.com,
+	teddy.astie@vates.tech,
+	Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+Subject: [PATCH v3] x86/nSVM: Check injected event consistency
+Date: Thu,  6 Aug 2026 18:23:32 +0100
+Message-ID: <95abc420acac6eefc1b97c3c98753d510930ce8a.1785933566.git.abdelkareem.abdelsaamad@citrix.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260806152619.23881-1-roger@xenproject.org>
-References: <20260806152619.23881-1-roger@xenproject.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-720697/1786037208-317CA2AC-6869F7CD/0/0
+X-purgate-type: clean
+X-purgate-size: 6067
 
-It's possible for domains to generate unaligned PCI config space accesses
-when using ECAM, and hence vPCI should support those at least for the
-hardware domain.  Such unaligned accesses to the PCI config space have been
-reported to come from ACPI logic.
+On the AMD platforms, allowing a VMRUN instruction with a malformed VMCB has
+debugging complications, security and performance implications. The APM
+volume #2 15.20 (40332-Rev. 4.10-July 2026) states the two possibilities that
+result in a VMRUN exit with VMEXIT_INVALID due to the injected event. These are
+• Reserved values of TYPE have been specified.
+• TYPE = 3 (exception) has been specified with a vector that does not
+  correspond to an exception (this includes vector 2, which is an NMI, not
+  an exception).
 
-Relax the checking in vpci_access_allowed() to allow such accesses for the
-hardware domain, and fix the handling in pci_conf_{read,write}{16,32}() to
-fulfill them using MMCFG.
+Extend the VMCB validation to check for such inconsistency.
 
-MMCFG regions are identity exposed to the hardware domain, and hence such
-unaligned accesses can only come as a result of the host having MMCFG in the
-first place, as otherwise MMCFG won't be exposed to the hardware domain
-either.
+The collection of the invalid exception vectors are ported from the upstream
+KVM commit
+("7e79f71bca5c" KVM: nSVM: Add missing consistency check for EVENTINJ). Adjust
+the checks from the commit to align with the APM Volume #2 and Volume #3
+(40332—Rev. 4.40—July 2026) for the X86_EXC_OF and X86_EXC_BR vectors which
+should not be valid on the x86 64-bit (long mode) platforms. The adjustment is
+posted to the KVM mailing commit patch thread
+https://lore.kernel.org/all/20260803225402.2324595-1-abdelkareem.abdelsaamad@citrix.com/
 
-Note that vpci_ecam_{read,write}() already refuse accesses that cross a
-device boundary unconditionally.
-
-Reported-by: Jason Andryuk <jason.andryuk@amd.com>
-Signed-off-by: Roger Pau Monné <roger@xenproject.org>
+Signed-off-by: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
 ---
- tools/include/xen-tools/common-macros.h | 2 ++
- xen/arch/x86/x86_64/pci.c               | 8 ++++----
- xen/drivers/vpci/vpci.c                 | 6 ++++--
- 3 files changed, 10 insertions(+), 6 deletions(-)
+Changes in v3:
+- Restricted X86_EXC_OF (4) and X86_EXC_BR (5) vector injections to 
+  non-64-bit guests to prevent impossible guest-mode state injections
+  per AMD APM Volumes 2 & 3.
+- Refactored exception vector validation from if-conditions to a switch
+  statement to improve readability and extensibility.
+- Restricted X86_EXC_CP (21) vector injection to hosts with enabled CET
+  to prevent VMRUN failures on hardware without CET support.
 
-diff --git a/tools/include/xen-tools/common-macros.h b/tools/include/xen-tools/common-macros.h
-index 88b4a0e5a693..1f9146b23b0e 100644
---- a/tools/include/xen-tools/common-macros.h
-+++ b/tools/include/xen-tools/common-macros.h
-@@ -68,6 +68,8 @@
-     })
- #endif
+Changes in v2:
+- Remove the redundant SVM_EVENT_INJ_TYPE_MASK and SVM_EVENT_INJ_VEC_MASK
+  constants.
+- Correct the Injected Event Type consistency check to disallow the injection
+  of reserved type 1 events.
+---
+Testing:
+ - Using a locally developed XTF nested virt setup, I manually tested VMRUN
+   instruction handling with a malformed VMCB:
+   1) Inject event with the type (7).
+      The hypervisor logs show the message
+      (XEN) [  645.155609] d2v0[nsvm_vmcb_prepare4vmrun]: eventinj: Invalid
+            Injected Event Type: (0x7)
+   2) Inject event with the exception value (3) and the vector value (2) for 
+      NMI. The hypervisor logs show the message
+      (XEN) [  645.157277] d2v0[nsvm_vmcb_prepare4vmrun]: eventinj: Invalid
+            Injected Event. Exception type: (0x3), with a vector: (0x2) does
+            not belong to an exception on the platform.
+   3) Inject event with the exception value (3) and the vector value (21) for
+      the X86_EXC_CP (Control-Flow Protection).
+      Without the changes included:
+          On the Naples host, where the vector was not yet known to the
+          hardware. VMRUN immediately triggers VMEXIT_INVALID.
+          On the Genoa host, VMRUN immediately triggers VMEXIT_VMMCALL.
+      With the changes included:
+          On the Naples host and the Genoa host, VMEXIT_INVALID is reported back
+          without VMRUN execution.
+
+ - CI tests:
+https://gitlab.com/xen-project/people/aabdelsa/xen/-/pipelines/2734283788
+---
+ xen/arch/x86/hvm/svm/vmcb.c | 51 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 51 insertions(+)
+
+diff --git a/xen/arch/x86/hvm/svm/vmcb.c b/xen/arch/x86/hvm/svm/vmcb.c
+index 975a1eaef8..4379bbef09 100644
+--- a/xen/arch/x86/hvm/svm/vmcb.c
++++ b/xen/arch/x86/hvm/svm/vmcb.c
+@@ -320,6 +320,41 @@ void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb)
+     svm_dump_sel("  TR", &vmcb->tr);
+ }
  
-+#define IS_ALIGNED(val, align) (!((val) & ((align) - 1)))
++static bool is_valid_svm_vmcb_injected_exception_vector(
++    const struct vmcb_struct *vmcb, uint8_t vmcb_injected_vector)
++{
++    switch ( vmcb_injected_vector )
++    {
++    case X86_EXC_DE:
++    case X86_EXC_DB:
++    case X86_EXC_BP:
++    case X86_EXC_UD:
++    case X86_EXC_NM:
++    case X86_EXC_DF:
++    case X86_EXC_TS:
++    case X86_EXC_NP:
++    case X86_EXC_SS:
++    case X86_EXC_GP:
++    case X86_EXC_PF:
++    case X86_EXC_MF:
++    case X86_EXC_AC:
++    case X86_EXC_MC:
++    case X86_EXC_XM:
++    case X86_EXC_HV:
++    case X86_EXC_SX:
++        return true;
++    case X86_EXC_OF:
++    case X86_EXC_BR:
++        return !(vmcb_get_efer(vmcb) & EFER_LMA) || !(vmcb->cs.l);
++    case X86_EXC_VC:
++        return vmcb_get_sev_es(vmcb);
++    case X86_EXC_CP:
++        return !!(vmcb_get_cr4(vmcb) & X86_CR4_CET);
++    default:
++        return false;
++    }
++}
 +
- #define ROUNDUP(x, a) (((x) + (a) - 1) & ~((a) - 1))
- #define ROUNDDOWN(x, a) ((x) & ~((a) - 1))
+ bool svm_vmcb_isvalid(
+     const char *from, const struct vmcb_struct *vmcb, const struct vcpu *v,
+     bool verbose)
+@@ -330,6 +365,12 @@ bool svm_vmcb_isvalid(
+     unsigned long cr4 = vmcb_get_cr4(vmcb);
+     unsigned long valid;
+     uint64_t efer = vmcb_get_efer(vmcb);
++    uint8_t vmcb_injected_type = vmcb->event_inj.type;
++    uint8_t vmcb_injected_vector = vmcb->event_inj.vector;
++    uint8_t vmcb_valid_event_inj_types_mask = (1 << X86_ET_EXT_INTR) |
++                                              (1 << X86_ET_NMI) |
++                                              (1 << X86_ET_HW_EXC) |
++                                              (1 << X86_ET_SW_INT);
  
-diff --git a/xen/arch/x86/x86_64/pci.c b/xen/arch/x86/x86_64/pci.c
-index 8d33429103b9..6298141c3ca7 100644
---- a/xen/arch/x86/x86_64/pci.c
-+++ b/xen/arch/x86/x86_64/pci.c
-@@ -26,7 +26,7 @@ uint8_t pci_conf_read8(pci_sbdf_t sbdf, unsigned int reg)
+ #define PRINTF(fmt, args...) do { \
+     if ( !verbose ) return true; \
+@@ -392,6 +433,16 @@ bool svm_vmcb_isvalid(
+         PRINTF("eventinj: MBZ bits are set (%#"PRIx64")\n",
+                vmcb->event_inj.raw);
  
- uint16_t pci_conf_read16(pci_sbdf_t sbdf, unsigned int reg)
- {
--    if ( sbdf.seg || reg > 255 )
-+    if ( sbdf.seg || reg > 255 || !IS_ALIGNED(reg, 2) )
-     {
-         uint32_t value;
- 
-@@ -39,7 +39,7 @@ uint16_t pci_conf_read16(pci_sbdf_t sbdf, unsigned int reg)
- 
- uint32_t pci_conf_read32(pci_sbdf_t sbdf, unsigned int reg)
- {
--    if ( sbdf.seg || reg > 255 )
-+    if ( sbdf.seg || reg > 255 || !IS_ALIGNED(reg, 4) )
-     {
-         uint32_t value;
- 
-@@ -60,7 +60,7 @@ void pci_conf_write8(pci_sbdf_t sbdf, unsigned int reg, uint8_t data)
- 
- void pci_conf_write16(pci_sbdf_t sbdf, unsigned int reg, uint16_t data)
- {
--    if ( sbdf.seg || reg > 255 )
-+    if ( sbdf.seg || reg > 255 || !IS_ALIGNED(reg, 2) )
-         pci_mmcfg_write(sbdf.seg, sbdf.bus, sbdf.devfn, reg, 2, data);
-     else
-         pci_conf_write(PCI_CONF_ADDRESS(sbdf, reg), reg & 2, 2, data);
-@@ -68,7 +68,7 @@ void pci_conf_write16(pci_sbdf_t sbdf, unsigned int reg, uint16_t data)
- 
- void pci_conf_write32(pci_sbdf_t sbdf, unsigned int reg, uint32_t data)
- {
--    if ( sbdf.seg || reg > 255 )
-+    if ( sbdf.seg || reg > 255 || !IS_ALIGNED(reg, 4) )
-         pci_mmcfg_write(sbdf.seg, sbdf.bus, sbdf.devfn, reg, 4, data);
-     else
-         pci_conf_write(PCI_CONF_ADDRESS(sbdf, reg), 0, 4, data);
-diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
-index 0ac9ec8b0475..9e2c27e3a300 100644
---- a/xen/drivers/vpci/vpci.c
-+++ b/xen/drivers/vpci/vpci.c
-@@ -685,6 +685,8 @@ void vpci_write(pci_sbdf_t sbdf, unsigned int reg, unsigned int size,
- /* Helper function to check an access size and alignment on vpci space. */
- bool vpci_access_allowed(unsigned int reg, unsigned int len)
- {
-+    const struct domain *currd = current->domain;
++    if ( !((1 << vmcb_injected_type) & vmcb_valid_event_inj_types_mask) )
++        PRINTF("eventinj: Invalid Injected Event Type: (%#"PRIx8")\n",
++               vmcb_injected_type);
 +
-     /* Check access size. */
-     if ( len != 1 && len != 2 && len != 4 && len != 8 )
-         return false;
-@@ -695,8 +697,8 @@ bool vpci_access_allowed(unsigned int reg, unsigned int len)
-         return false;
- #endif
- 
--    /* Check that access is size aligned. */
--    if ( (reg & (len - 1)) )
-+    /* Refuse unaligned accesses for non-hardware domains. */
-+    if ( !is_hardware_domain(currd) && !IS_ALIGNED(reg, len) )
-         return false;
- 
-     return true;
++    if ( (vmcb_injected_type == X86_ET_HW_EXC) &&
++         !is_valid_svm_vmcb_injected_exception_vector(
++             vmcb, vmcb_injected_vector) )
++        PRINTF("eventinj: Invalid Injected Event. Exception type: (%#"PRIx8"),"
++               " with a vector: (%#"PRIx8") does not belong to an exception on"
++               " the platform \n", vmcb_injected_type, vmcb_injected_vector);
+ #undef PRINTF
+     return ret;
+ }
 -- 
 2.53.0
 
