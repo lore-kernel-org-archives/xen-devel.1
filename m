@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EA65C55838
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2026 07:23:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1384272.1627285 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7627C55ABF
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2026 07:37:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1384286.1627294 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrsRS-0003Uh-48; Thu, 06 Aug 2026 07:23:02 +0000
+	id 1wrsf0-0006bx-BB; Thu, 06 Aug 2026 07:37:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1384272.1627285; Thu, 06 Aug 2026 07:23:02 +0000
+Received: by outflank-mailman (output) from mailman id 1384286.1627294; Thu, 06 Aug 2026 07:37:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wrsRS-0003Ua-1S; Thu, 06 Aug 2026 07:23:02 +0000
-Received: by outflank-mailman (input) for mailman id 1384272;
- Thu, 06 Aug 2026 07:23:01 +0000
+	id 1wrsf0-0006bq-8Y; Thu, 06 Aug 2026 07:37:02 +0000
+Received: by outflank-mailman (input) for mailman id 1384286;
+ Thu, 06 Aug 2026 07:37:01 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wrsRR-0003UU-6P
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 07:23:01 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wrsez-0006bk-8e
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 07:37:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wrsRQ-003CiB-Fs
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 09:23:00 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wrsey-00EejD-LT
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 09:37:00 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a74364f-5cb7-0a2a0a5109dd-0a2a450be154-10
- for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 09:23:00 +0200
-Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a743997-e002-0a2a0a5209dd-0a2a45079c08-10
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 09:37:00 +0200
+Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a743654-b7e8-0a2a450b0019-d1558030ad3c-3
- for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 09:23:00 +0200
-Received: by mail-wm1-f48.google.com with SMTP id
- 5b1f17b1804b1-49558ce01afso12892895e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 00:23:00 -0700 (PDT)
+ id 6a74399c-b4ea-0a2a45070019-d1558036f1ef-3
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 09:37:00 +0200
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-49800c6a846so14946355e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 00:37:00 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4995421b1e2sm48667145e9.8.2026.08.06.00.22.59
+ 5b1f17b1804b1-499542135cesm42363935e9.4.2026.08.06.00.36.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 06 Aug 2026 00:22:59 -0700 (PDT)
+ Thu, 06 Aug 2026 00:36:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,57 +53,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Cc:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786000980; x=1786605780; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1786001820; x=1786606620; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ckcvMovW0LtLyQPM832KezdfHJgVxcVYWAXZjbEPPA0=;
-        b=Jspyi1LwmoRHKL3zEurc8Dyv0ohM3Ariqo2FkRhpPJNepLuU4Eedy94ewrJcxeAnOe
-         5vuT/UFBA/Bk874BNB3MwMLFxpyqsvNuKjsKjm7wuueKWIn4NjC/5Jt40hNTA9U8Jzdd
-         eQwyMZEOvkck6KqgN7vE4yFztQNl/sYi2DJAc7+FkHPNhSsLV4fvnsDPjGeK4sz5bSou
-         KPETM99CeYqHcFClqsGAwLenjnTZho8n/Cp9vUNYhzyKs8U+8tfJ3EH0ycnweaBZD+kT
-         m3ZTrL68AmIt5EYl0BKb4zOnDLj2O6MMpjTarFDSX3GLoe69wHLHakp8p8tqXbRjS/ix
-         oO6g==
+        bh=ViL4VHVHnGZCDBTWYy/BbLFUaSoqso542Mz4ZuHRR0k=;
+        b=KIuLmYYbHUfxRC/XsvUjm/KXzPIi4iHsP3Cr4muM2r6JdqGhVUuwfGuUF7QFGxbRTN
+         NzlMaNHlHoOmeXYyZLZXdiPuIAEXgQsUwuRo4VmAsozwzniSkCP7S/1ur8H/Y8Zyv4lj
+         ziaI+RDRYg4doUGW43qcOIIdh5rrsUbwKGgCxym8BngX78CV/UyGtyZNPQ9rdOW+Gmk/
+         Yf0Y9oT0mBB3kvFclG8VQrSjiEe/gYXxjKGdd71U3fqJV/D+4Vb7ow5CWEGX/LkgfRs6
+         aJj4caaZbqha9Kv8Gmp5wqUpJWhYwLzNKdEYV77vu98k1MOLXsSSRomyni3PpfB61zFq
+         ATIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786000980; x=1786605780;
+        d=1e100.net; s=20251104; t=1786001820; x=1786606620;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ckcvMovW0LtLyQPM832KezdfHJgVxcVYWAXZjbEPPA0=;
-        b=sPGFb2QqykmUgmW2WAEahINmmSdeR7Hfqj2jSru0/+/RSbJLn4s9oxVwtIajv89ZVN
-         5mJZcNXMNsS4m+tDs9q0bQoAGhAuzqDpkNghcRz2JQxttJ8brrI0p3UxzHZlUuO6Dw4G
-         6x6OjfR7YTy4KADX8GRjOBvzoCc1fNyeojHuJYq3TTXcfRJDBh2rYRZnNU/UtJa1Gl4U
-         i5eb1ui08EPUtEk0WOALIhMHje9c9l81BOABuHvtEvZwgdJeM0rvbFx1AcCi0kPIbd3X
-         7h8rmoiVQY91TIfzgSoMd6w+kUx1JpoDl36oZHWUdZzkiqbV4/7fj09l3yxvjdILuMdb
-         yQnA==
-X-Gm-Message-State: AOJu0YwkLtT0zLEUd8nA8INyAP/cXOxO06kB9+oK90FedZY/vtLSum+1
-	ZF/BC/yemwZcMNlAqhaZrUpRxNr3QDOxmskWzBD0Sx3RP+PyRCU0CDzIdz988bdbEn6RWLLjh4u
-	mtS9K7A==
-X-Gm-Gg: AR+sD13mfRBaC/FeWVivKELSCl4n264IcYLj/2gx797yg9v4d89whdB/1Qy9pwCuwLx
-	zwihPteap9c0eubv90YhFmyu0EZ74F7bidCqN3asR51afQKYFdyT2Y6CzYU6KfiJQIM9j3YZz2j
-	hhdE/VipGBQ3jndruAbdngExDE4VdOeZ0ij6710z42AvzxEqvxLwvBuIUkxWpY3I+XOJvrJZb53
-	+BD45SJ+OC01s43YBkdjt2jLwcpvynJbx0/GJyvA2TuzkRC2GEdirTY77korG8KjrmIehUL6R3e
-	xvz4uz/QjKLzUCxcsMdrd+AFyeJDPc5nqpaikjAXQcDGGP5lJafZG4tYTOow5//koxwPrVYo1w9
-	uf+XwC8YB7/x7woEVbtY6okq85yTbPMRC927pFpxkfxB+kGs/yhh4kzbd5TEUP1fl7LdTRkGM0s
-	vMC4hiSnXM0a/J4OmtrpuWJhNaWazbKL1XSLB3iJvTSh9xDnqDdiGOfbdsdQtD9qr2MHBFFgmvJ
-	QGuWczWZU9zKCY8tCvODsSI2eeAfU72s/QO8wgPkw76mnpx3dFeUMIT6mPcMGs=
-X-Received: by 2002:a05:600c:c043:b0:495:7a5a:d96c with SMTP id 5b1f17b1804b1-4994e7d89cfmr131608205e9.18.1786000979800;
-        Thu, 06 Aug 2026 00:22:59 -0700 (PDT)
-Message-ID: <d2207507-d15a-4e3b-a057-77bea7621efa@suse.com>
-Date: Thu, 6 Aug 2026 09:22:58 +0200
+        bh=ViL4VHVHnGZCDBTWYy/BbLFUaSoqso542Mz4ZuHRR0k=;
+        b=qy2eFLRbhnBhG0e+J5VU91Ho0VjmBo0y+0zZZuZmBpxSeClP1C/B/jr4O76ueT02kU
+         GP3vVgOdSktseRHhpvHFhJKeNcXS0BDavmWv7p3gzD6D9Zb4i5kEKs+DoITv1G3zDfPj
+         lJARkDCG+PSlMqxZYjdV19WvHb95LcpDp1PGrmbRT/wkVe36IeSzQS3oVgo8FPBgQLp7
+         ObdrVv/uYGtFN/EMjStBQ6kVxx7cdOmbfom5x0LU1OLlEhBCn80RSQYoNiiT82RDglyU
+         IXpHOjgswhrHhJRsj5HbhU2gMYyiuov3mfh8RI2E66wX/SAnucqViNiEmcv5gqmMOdJJ
+         fP3w==
+X-Forwarded-Encrypted: i=1; AHgh+RrgKAr37uK9ZkkTekM/wnXV6E2Ck1jLnI3DqAFGjQ/crIUZxTYxpet9sKBCBBXN/JWT3R822eKT0AU=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwUs7VXkNHbyg6PJ0Qkfp7kINbSuJ2qMwAqvO3++gFaAmmAoVnA
+	xOXyargz/McvILT1f8iMTiBV9XIGV1yrKn6IB+7Gu8A3K4J+dOtQh3WE0Rc/OzCxgg==
+X-Gm-Gg: AR+sD131UxgVKAMm6L2AD5mtK0pFXYa+lfr1F4ekMWRO3bPMw4diJOp14RBMolKmqtn
+	j/frcYDQ94QW9JQPIXpRvbg4UBFvxbrRXD8Kl1DGxdD8uG+Dn1S8Rq7dZp9EOzIVsTeQPT4yvy2
+	y09tlFhGfsbuF/aMME6MnaLuLyA2bl3I93E/wWBwSxPvqdslGINQtrGcV8qVHehYyy7obPmUkA0
+	D+vq2OLXXjfti5n6yVm5k5WgghVrE4rplU/YYSwjSNnIi1E19jSZGhxZXPD5yzmmibW6VWlfVWU
+	+0vJSo8cE65FjxzIb9+kr2cB4goZPPczMY9+6gVYLwAcaYoom/UZLxqQhWe29B30HzMzb8a46hK
+	WYE8lH7588ryTSvc00ZEZoJ1prbm++o3h9R8k4qhF2n9u9l1VDs0SX1NcbMMSWl4UtIfdWHwNpE
+	wQq6NqG7B8Vl5yiACTUS7Tx0wzDqlUDe4AbiVtOYZ4yn2ZkgDPfiOf0kspBnMYR7+58RYM3Myg7
+	6uzY6xW14IqU+8/XyRdWwNSOyowzSTXapoiTgCIWJYcemNLnB9f
+X-Received: by 2002:a05:600c:348a:b0:490:c6c2:52 with SMTP id 5b1f17b1804b1-4994e79b9c0mr185355295e9.3.1786001819346;
+        Thu, 06 Aug 2026 00:36:59 -0700 (PDT)
+Message-ID: <274a27cb-13f0-47c3-aa73-1534925dc350@suse.com>
+Date: Thu, 6 Aug 2026 09:36:57 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 18/24] XSM: make XSM hooks well-formed ones
+Subject: Re: [PATCH 20/24] XSM: fold xsm_{,un}map_domain_pirq() hooks
 To: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <758c8410-a18e-45dc-8944-5913e5832397@suse.com>
- <2c108d3c-eef1-4d4b-9874-b0721fd7560f@suse.com>
- <fc08fe79-cdb5-4ee3-9efc-78b02d00db15@apertussolutions.com>
+ <c973c612-153d-413b-a6c8-aeacd25f28a8@suse.com>
+ <f99a285e-bd3d-4d8d-94ef-997c238c7f85@apertussolutions.com>
 Content-Language: en-US
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -128,68 +131,52 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <fc08fe79-cdb5-4ee3-9efc-78b02d00db15@apertussolutions.com>
+In-Reply-To: <f99a285e-bd3d-4d8d-94ef-997c238c7f85@apertussolutions.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1786000980-AACDF9EA-89DFB1E8/0/0
+X-purgate-ID: tlsNG-ef75cf/1786001820-A6CDFAE4-CE4363B4/0/0
 X-purgate-type: clean
-X-purgate-size: 2406
+X-purgate-size: 1869
 
-On 06.08.2026 02:53, Daniel P. Smith wrote:
-> On 7/28/26 9:22 AM, Jan Beulich wrote:
->> For whatever reason they didn't have an xsm_default_t first argument (to
->> cope with XSM=n mode), making it impossible to (easily) cover them in
->> xsm/hooks.h.
->>
->> flask_do_xsm_op() is also changed to return int, as all the function ever
->> returns is an int. This way no new machinery needs adding to xsm/hooks.h.
->> Instead one piece of compat machinery can then be dropped from
->> xsm/flask/flask_op.c.
->>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->> ---
->> Instead of XSM_HOOK, using XSM_OTHER may also be a sensible option here.
-> 
-> I would say XSM_HOOK is sufficient since at this point it doesn't matter 
-> what op is passed the dummy policy is just going to return the same 
-> value. If the dummy policy is extended to support an op, then at that 
-> point the implementer can switch it to XSM_OTHER.
-
-Good.
-
->> Question is whether some/all of the other hooks still declared explicitly
->> in struct xsm_ops should follow suit.
-> 
-> I would say either comment these are exceptions or make them consistent, 
-> though I haven't studied if there would be any consequences (doubtful) 
-> changing the others.
-
-As I've now added patches to convert the remaining hooks, this remark is
-gone anyway. Hence comments there aren't going to be needed (unless those
-extra patches would be rejected, once posted).
-
->> --- a/xen/include/xsm/dummy.h
->> +++ b/xen/include/xsm/dummy.h
->> @@ -439,7 +439,7 @@ static XSM_INLINE int xsm_hypfs_op(XSM_D
+On 06.08.2026 03:10, Daniel P. Smith wrote:
+> On 7/28/26 9:23 AM, Jan Beulich wrote:
+>> --- a/xen/xsm/flask/hooks.c
+>> +++ b/xen/xsm/flask/hooks.c
+>> @@ -1022,14 +1022,9 @@ static char *cf_check flask_show_irq_sid
 >>   
->>   #ifdef CONFIG_XSM
+>>   #ifdef CONFIG_HAS_PIRQ
 >>   
->> -static XSM_INLINE long xsm_do_xsm_op(XEN_GUEST_HANDLE_PARAM(void) op)
->> +static XSM_INLINE int xsm_do_xsm_op(XEN_GUEST_HANDLE_PARAM(void) op)
+>> -static int cf_check flask_map_domain_pirq(struct domain *d)
+>> +static int cf_check flask_map_domain_pirq(struct domain *d, bool access)
+>>   {
+>> -    return current_has_perm(d, SECCLASS_RESOURCE, RESOURCE__ADD);
+>> -}
+>> -
+>> -static int cf_check flask_unmap_domain_pirq(struct domain *d)
+>> -{
+>> -    return current_has_perm(d, SECCLASS_RESOURCE, RESOURCE__REMOVE);
+>> +    return current_has_perm(d, SECCLASS_RESOURCE, resource_to_perm(access));
+>>   }
+>>   
+>>   #endif /* CONFIG_HAS_PIRQ */
+>>
 > 
-> With this change, should there be a comment that the int is going to get 
-> cast to long before return?
+> I am not opposed to collapsing the calls as long as the semantic is not 
+> lost, which I feel the reuse of the xsm_map_domain_pirq does looses it 
+> much less provides an opportunity for confusion. Something like 
+> xsm_domain_pirq(..., access) makes more semantic sense to me, as it 
+> would read, grant domain pirq access T/F.
 
-Not in my opinion, but if you strictly think such is needed, I can certainly
-add a comment.
-
-> Acked-by: Daniel P. Smith <dpsmith@apertussolutions.com>
-
-Thanks, including (again) for all the others. Nevertheless a request here:
-Especially when an ack is the only part of a reply, could you please trim
-reply context much like (most) others do? Without that, every reader has to
-scroll through the entire reply context, just to find the single line at
-the bottom. That can be a lot of scrolling with larger patches.
+In fact I was as well wondering about naming (and a possible name change)
+here. I decided against it because of the other hooks (touched by patch
+19), which all follow a similar model of their names really more expressing
+the "positive" form than the "negative" one. Further, entirely losing "map"
+from the name also doesn't look quite right, as physdev_{,un}map_pirq() is
+where they're called from. To follow the naming of some of the other hook,
+maybe xsm_domain_pirq_mapping(..., bool map)? Possibly even with "domain"
+dropped from the name, fully fitting xsm_io{mem,port}_mapping()? Which
+would then further raise the question whether patch 19 should maybe rename
+the parameters of those two hooks to "map" at the same time.
 
 Jan
 
