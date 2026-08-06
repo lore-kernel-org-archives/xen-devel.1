@@ -4,40 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29973C5AC7C
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2026 17:27:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1385047.1627665 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3026AC5AC67
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2026 22:18:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1385234.1627674 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ws1rn-0002g5-21; Thu, 06 Aug 2026 17:26:51 +0000
+	id 1ws6Pi-0006qM-I3; Thu, 06 Aug 2026 22:18:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1385047.1627665; Thu, 06 Aug 2026 17:26:51 +0000
+Received: by outflank-mailman (output) from mailman id 1385234.1627674; Thu, 06 Aug 2026 22:18:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ws1rm-0002fy-Vf; Thu, 06 Aug 2026 17:26:50 +0000
-Received: by outflank-mailman (input) for mailman id 1385047;
- Thu, 06 Aug 2026 17:26:49 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 1ws1rl-0002fs-Cc
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 17:26:49 +0000
+	id 1ws6Pi-0006qE-Er; Thu, 06 Aug 2026 22:18:10 +0000
+Received: by outflank-mailman (input) for mailman id 1385234;
+ Thu, 06 Aug 2026 22:18:08 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <3HQh1agYKCVwM84HD6AIIAF8.6IGR8H-78P8FFCMNM.R8HJLID86N.ILA@flex--seanjc.bounces.google.com>)
+ id 1ws6Pg-0006q7-QR
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 22:18:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1ws1rk-00Dhsu-Lm
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2026 19:26:48 +0200
-Received: from [10.42.69.2] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 6a74c3ba-e002-0a2a0a5209dd-0a2a4502ca6a-18
- for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 19:26:48 +0200
-Received: from [160.101.131.8] (helo=na1pdmzitismtp01.tibco.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 6a74c3d7-6ca4-0a2a45020019-a06583088ea4-3
- for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 19:26:48 +0200
-Received: from fedora.eng.citrite.net (unknown [10.113.40.46])
- by na1pdmzitismtp01.tibco.com (Postfix) with ESMTP id A6381444E917;
- Thu,  6 Aug 2026 13:25:08 -0400 (EDT)
+ id 1ws6Pg-00Bhhc-79
+ for xen-devel@lists.xenproject.org; Fri, 07 Aug 2026 00:18:08 +0200
+Received: from [10.42.69.1] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <3HQh1agYKCVwM84HD6AIIAF8.6IGR8H-78P8FFCMNM.R8HJLID86N.ILA@flex--seanjc.bounces.google.com>)
+ id 6a7507d5-e002-0a2a0a5209dd-0a2a450181b4-42
+ for <xen-devel@lists.xenproject.org>; Fri, 07 Aug 2026 00:18:08 +0200
+Received: from [209.85.210.197] (helo=mail-pf1-f197.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <3HQh1agYKCVwM84HD6AIIAF8.6IGR8H-78P8FFCMNM.R8HJLID86N.ILA@flex--seanjc.bounces.google.com>)
+ id 6a75081e-5984-0a2a45010019-d155d2c5c0cd-3
+ for <xen-devel@lists.xenproject.org>; Fri, 07 Aug 2026 00:18:07 +0200
+Received: by mail-pf1-f197.google.com with SMTP id
+ d2e1a72fcca58-84eccf9d899so3597352b3a.2
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 15:18:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,168 +50,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-From: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: jbeulich@suse.com,
-	andrew.cooper3@citrix.com,
-	roger.pau@citrix.com,
-	jason.andryuk@amd.com,
-	teddy.astie@vates.tech,
-	Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
-Subject: [PATCH v3] x86/nSVM: Check injected event consistency
-Date: Thu,  6 Aug 2026 18:23:32 +0100
-Message-ID: <95abc420acac6eefc1b97c3c98753d510930ce8a.1785933566.git.abdelkareem.abdelsaamad@citrix.com>
-X-Mailer: git-send-email 2.53.0
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1786037208-317CA2AC-6869F7CD/0/0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20251104; t=1786054686; x=1786659486; darn=lists.xenproject.org;
+        h=content-type:cc:to:from:subject:message-id:references:mime-version
+         :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=/BEVvi4/7i6XDSu/QYDIwcuZoEPs9pbAb29S0DeOBes=;
+        b=MyQHE4rFqyN3m4oFV5xa7RNhfCtFhVjlKYGIK0a6ZRDBcuC2ZO0BIsmG0Wloe8j4st
+         ejAUwT6Y5q/EoIbebz/BZ4gjgBhQAzR6EuyWkuN9Tazjzo2uANonA30vIU0BNZoY4OzT
+         9h3ohjJMbN9xkIgJOUrN3NfKP+HRBFAtmkel30D9O0wFRVKjjdsrq7b4uAjYvT6fKmJm
+         M/116vDGMLT7gzo89YXWdn93m0oshXZe5onSQJjnlhCW2JLGK5FKSTn5ZxhC+CSU4s1u
+         nxlYe5GyRwVXUb18JFd5srq+QUIXCtoArfBLw3M4+XuUYWYW1dwH4r71fuafxTNR0m5o
+         M43Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786054686; x=1786659486;
+        h=content-type:cc:to:from:subject:message-id:references:mime-version
+         :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=/BEVvi4/7i6XDSu/QYDIwcuZoEPs9pbAb29S0DeOBes=;
+        b=sejdI5255W3AWBybJU0QBV9Ucv1hcANohmmto+YT7s5P4dVfjRb5F5yG5wW5jBZeIZ
+         tExJVbO5/akNw/mJrPByzAgIbsA08VpEfx+DNm4ghbGE2RBLgnO6QcgxoxVmJgY83jIE
+         yxKHnzJqW1hZr567yQqTmsZ3sPJlTsNYaizrs3j7XD0StFgAlGS32B41HOEQJ8sj6xbT
+         3TnC3yLgc0NYpgM1uNZbVuFC89xJQdSjPqFdzDeK5lEJda/O68Fi6AaGRJpoTHkH1/Gw
+         +2PwoulwVgPeXdtDAB2ARnHdgeYXcJVAqy6eKyiCrP+js9P1gg71rxblnbQYPUKFUCIt
+         c9ng==
+X-Forwarded-Encrypted: i=1; AHgh+RrFnw5PHqidxRYUsrHDoF5OcfDQVW6SqieHSjuS7oLcSX0ZY3UocY6YR+40UeHUs36NWNPkZ7CniqY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw3TuYDJIzb/xjyVmnIkJqGRrAjgqdoJumMgVabgI+FoaQ7TiYl
+	roT6YyB8Kv8c5tRYY46bBl/30qJoEU6jkIbKXUY0ZUYU8bYPxj2Me0H3OHztTs2wj2SkPVWoDSP
+	Vvv03ww==
+X-Received: from pfbln15.prod.google.com ([2002:a05:6a00:3ccf:b0:848:5415:1869])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a00:3a0f:b0:848:3f07:c5a2
+ with SMTP id d2e1a72fcca58-84f2dfd0a06mr18297213b3a.4.1786054685697; Thu, 06
+ Aug 2026 15:18:05 -0700 (PDT)
+Date: Thu, 6 Aug 2026 15:18:05 -0700
+In-Reply-To: <SN6PR02MB4157453D405AB80859B12DF9D4F52@SN6PR02MB4157.namprd02.prod.outlook.com>
+Mime-Version: 1.0
+References: <20260701193212.749551-1-seanjc@google.com> <20260701193212.749551-48-seanjc@google.com>
+ <SN6PR02MB4157453D405AB80859B12DF9D4F52@SN6PR02MB4157.namprd02.prod.outlook.com>
+Message-ID: <anUIHY-1_q3oVFPf@google.com>
+Subject: Re: [PATCH v5 47/51] x86/paravirt: Don't use a PV sched_clock in CoCo
+ guests with trusted TSC
+From: Sean Christopherson <seanjc@google.com>
+To: Michael Kelley <mhklinux@outlook.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, Paolo Bonzini <pbonzini@redhat.com>, 
+	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, "x86@kernel.org" <x86@kernel.org>, 
+	Kiryl Shutsemau <kas@kernel.org>, Rick Edgecombe <rick.p.edgecombe@intel.com>, 
+	"K. Y. Srinivasan" <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
+	Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>, 
+	Ajay Kaher <ajay.kaher@broadcom.com>, Alexey Makhalov <alexey.makhalov@broadcom.com>, 
+	Jan Kiszka <jan.kiszka@siemens.com>, Andy Lutomirski <luto@kernel.org>, 
+	Peter Zijlstra <peterz@infradead.org>, Juergen Gross <jgross@suse.com>, 
+	Daniel Lezcano <daniel.lezcano@kernel.org>, John Stultz <jstultz@google.com>, 
+	Shuah Khan <skhan@linuxfoundation.org>, "H. Peter Anvin" <hpa@zytor.com>, 
+	Vitaly Kuznetsov <vkuznets@redhat.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>, Stephen Boyd <sboyd@kernel.org>, 
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, "kvm@vger.kernel.org" <kvm@vger.kernel.org>, 
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
+	"linux-coco@lists.linux.dev" <linux-coco@lists.linux.dev>, 
+	"linux-hyperv@vger.kernel.org" <linux-hyperv@vger.kernel.org>, 
+	"virtualization@lists.linux.dev" <virtualization@lists.linux.dev>, 
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Tom Lendacky <thomas.lendacky@amd.com>, 
+	Nikunj A Dadhania <nikunj@amd.com>, David Woodhouse <dwmw@amazon.co.uk>, 
+	David Woodhouse <dwmw2@infradead.org>, Thomas Gleixner <tglx@linutronix.de>
+Content-Type: text/plain; charset="us-ascii"
+X-purgate-ID: tlsNG-d62444/1786054688-C5146757-6D791EC4/0/0
 X-purgate-type: clean
-X-purgate-size: 6067
+X-purgate-size: 2223
 
-On the AMD platforms, allowing a VMRUN instruction with a malformed VMCB has
-debugging complications, security and performance implications. The APM
-volume #2 15.20 (40332-Rev. 4.10-July 2026) states the two possibilities that
-result in a VMRUN exit with VMEXIT_INVALID due to the injected event. These are
-• Reserved values of TYPE have been specified.
-• TYPE = 3 (exception) has been specified with a vector that does not
-  correspond to an exception (this includes vector 2, which is an NMI, not
-  an exception).
+On Thu, Jul 02, 2026, Michael Kelley wrote:
+> From: Sean Christopherson <seanjc@google.com> Sent: Wednesday, July 1, 2026 12:32 PM
+> > 
+> > Silently ignore attempts to switch to a paravirt sched_clock when running
+> > as a CoCo guest with trusted TSC.  In hand-wavy theory, a misbehaving
+> > hypervisor could attack the guest by manipulating the PV clock to affect
+> > guest scheduling in some weird and/or predictable way.  More importantly,
+> > reading TSC on such platforms is faster than any PV clock, and sched_clock
+> > is all about speed.
+> > 
+> > Reviewed-by: David Woodhouse <dwmw@amazon.co.uk>
+> > Signed-off-by: Sean Christopherson <seanjc@google.com>
+> > ---
+> >  arch/x86/kernel/tsc.c | 9 +++++++++
+> >  1 file changed, 9 insertions(+)
+> > 
+> > diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
+> > index 012321fed5e5..a146fc7b5e74 100644
+> > --- a/arch/x86/kernel/tsc.c
+> > +++ b/arch/x86/kernel/tsc.c
+> > @@ -283,6 +283,15 @@ bool using_native_sched_clock(void)
+> >  int __init __paravirt_set_sched_clock(u64 (*func)(void), bool stable,
+> >  				      void (*save)(void), void (*restore)(void))
+> >  {
+> > +	/*
+> > +	 * Don't replace TSC with a PV clock when running as a CoCo guest and
+> > +	 * the TSC is secure/trusted; PV clocks are emulated by the hypervisor,
+> > +	 * which isn't in the guest's TCB.
+> > +	 */
+> > +	if (cc_platform_has(CC_ATTR_GUEST_SNP_SECURE_TSC) ||
+> > +	    boot_cpu_has(X86_FEATURE_TDX_GUEST))
+> > +		return -EPERM;
+> 
+> Do a pr_warn() in the error case? Your commit message says to do the ignore
+> silently, but I wonder if that's a good idea. At least for Hyper-V, the error
+> case shouldn't happen.
 
-Extend the VMCB validation to check for such inconsistency.
+I agree it's not a great idea, but unfortunately it's pretty much guaranteed to
+fire on KVM-based setups.  The KVM world hasn't been anywhere near as aggressive
+as Hyper-V in terms of killing off PV features when running SNP/TDX guests (which
+is largely how this series came to be in the first place).
 
-The collection of the invalid exception vectors are ported from the upstream
-KVM commit
-("7e79f71bca5c" KVM: nSVM: Add missing consistency check for EVENTINJ). Adjust
-the checks from the commit to align with the APM Volume #2 and Volume #3
-(40332—Rev. 4.40—July 2026) for the X86_EXC_OF and X86_EXC_BR vectors which
-should not be valid on the x86 64-bit (long mode) platforms. The adjustment is
-posted to the KVM mailing commit patch thread
-https://lore.kernel.org/all/20260803225402.2324595-1-abdelkareem.abdelsaamad@citrix.com/
-
-Signed-off-by: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
----
-Changes in v3:
-- Restricted X86_EXC_OF (4) and X86_EXC_BR (5) vector injections to 
-  non-64-bit guests to prevent impossible guest-mode state injections
-  per AMD APM Volumes 2 & 3.
-- Refactored exception vector validation from if-conditions to a switch
-  statement to improve readability and extensibility.
-- Restricted X86_EXC_CP (21) vector injection to hosts with enabled CET
-  to prevent VMRUN failures on hardware without CET support.
-
-Changes in v2:
-- Remove the redundant SVM_EVENT_INJ_TYPE_MASK and SVM_EVENT_INJ_VEC_MASK
-  constants.
-- Correct the Injected Event Type consistency check to disallow the injection
-  of reserved type 1 events.
----
-Testing:
- - Using a locally developed XTF nested virt setup, I manually tested VMRUN
-   instruction handling with a malformed VMCB:
-   1) Inject event with the type (7).
-      The hypervisor logs show the message
-      (XEN) [  645.155609] d2v0[nsvm_vmcb_prepare4vmrun]: eventinj: Invalid
-            Injected Event Type: (0x7)
-   2) Inject event with the exception value (3) and the vector value (2) for 
-      NMI. The hypervisor logs show the message
-      (XEN) [  645.157277] d2v0[nsvm_vmcb_prepare4vmrun]: eventinj: Invalid
-            Injected Event. Exception type: (0x3), with a vector: (0x2) does
-            not belong to an exception on the platform.
-   3) Inject event with the exception value (3) and the vector value (21) for
-      the X86_EXC_CP (Control-Flow Protection).
-      Without the changes included:
-          On the Naples host, where the vector was not yet known to the
-          hardware. VMRUN immediately triggers VMEXIT_INVALID.
-          On the Genoa host, VMRUN immediately triggers VMEXIT_VMMCALL.
-      With the changes included:
-          On the Naples host and the Genoa host, VMEXIT_INVALID is reported back
-          without VMRUN execution.
-
- - CI tests:
-https://gitlab.com/xen-project/people/aabdelsa/xen/-/pipelines/2734283788
----
- xen/arch/x86/hvm/svm/vmcb.c | 51 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 51 insertions(+)
-
-diff --git a/xen/arch/x86/hvm/svm/vmcb.c b/xen/arch/x86/hvm/svm/vmcb.c
-index 975a1eaef8..4379bbef09 100644
---- a/xen/arch/x86/hvm/svm/vmcb.c
-+++ b/xen/arch/x86/hvm/svm/vmcb.c
-@@ -320,6 +320,41 @@ void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb)
-     svm_dump_sel("  TR", &vmcb->tr);
- }
- 
-+static bool is_valid_svm_vmcb_injected_exception_vector(
-+    const struct vmcb_struct *vmcb, uint8_t vmcb_injected_vector)
-+{
-+    switch ( vmcb_injected_vector )
-+    {
-+    case X86_EXC_DE:
-+    case X86_EXC_DB:
-+    case X86_EXC_BP:
-+    case X86_EXC_UD:
-+    case X86_EXC_NM:
-+    case X86_EXC_DF:
-+    case X86_EXC_TS:
-+    case X86_EXC_NP:
-+    case X86_EXC_SS:
-+    case X86_EXC_GP:
-+    case X86_EXC_PF:
-+    case X86_EXC_MF:
-+    case X86_EXC_AC:
-+    case X86_EXC_MC:
-+    case X86_EXC_XM:
-+    case X86_EXC_HV:
-+    case X86_EXC_SX:
-+        return true;
-+    case X86_EXC_OF:
-+    case X86_EXC_BR:
-+        return !(vmcb_get_efer(vmcb) & EFER_LMA) || !(vmcb->cs.l);
-+    case X86_EXC_VC:
-+        return vmcb_get_sev_es(vmcb);
-+    case X86_EXC_CP:
-+        return !!(vmcb_get_cr4(vmcb) & X86_CR4_CET);
-+    default:
-+        return false;
-+    }
-+}
-+
- bool svm_vmcb_isvalid(
-     const char *from, const struct vmcb_struct *vmcb, const struct vcpu *v,
-     bool verbose)
-@@ -330,6 +365,12 @@ bool svm_vmcb_isvalid(
-     unsigned long cr4 = vmcb_get_cr4(vmcb);
-     unsigned long valid;
-     uint64_t efer = vmcb_get_efer(vmcb);
-+    uint8_t vmcb_injected_type = vmcb->event_inj.type;
-+    uint8_t vmcb_injected_vector = vmcb->event_inj.vector;
-+    uint8_t vmcb_valid_event_inj_types_mask = (1 << X86_ET_EXT_INTR) |
-+                                              (1 << X86_ET_NMI) |
-+                                              (1 << X86_ET_HW_EXC) |
-+                                              (1 << X86_ET_SW_INT);
- 
- #define PRINTF(fmt, args...) do { \
-     if ( !verbose ) return true; \
-@@ -392,6 +433,16 @@ bool svm_vmcb_isvalid(
-         PRINTF("eventinj: MBZ bits are set (%#"PRIx64")\n",
-                vmcb->event_inj.raw);
- 
-+    if ( !((1 << vmcb_injected_type) & vmcb_valid_event_inj_types_mask) )
-+        PRINTF("eventinj: Invalid Injected Event Type: (%#"PRIx8")\n",
-+               vmcb_injected_type);
-+
-+    if ( (vmcb_injected_type == X86_ET_HW_EXC) &&
-+         !is_valid_svm_vmcb_injected_exception_vector(
-+             vmcb, vmcb_injected_vector) )
-+        PRINTF("eventinj: Invalid Injected Event. Exception type: (%#"PRIx8"),"
-+               " with a vector: (%#"PRIx8") does not belong to an exception on"
-+               " the platform \n", vmcb_injected_type, vmcb_injected_vector);
- #undef PRINTF
-     return ret;
- }
--- 
-2.53.0
-
+So while I'm conceptually not opposed to the idea of printing an error message,
+in practice I'm pretty strong against it because odds are very good I'll end up
+dealing with "bug" reports due to less-than-awesome setups.
 
