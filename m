@@ -4,46 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E82CC5AC7C
-	for <xen-devel@archiver.kernel.org>; Fri,  7 Aug 2026 06:40:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1385772.1628170 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80891C5AC7C
+	for <xen-devel@archiver.kernel.org>; Fri,  7 Aug 2026 06:59:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1385781.1628178 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wsEFS-0001uN-J8; Fri, 07 Aug 2026 06:40:06 +0000
+	id 1wsEXz-0005Cn-1d; Fri, 07 Aug 2026 06:59:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1385772.1628170; Fri, 07 Aug 2026 06:40:06 +0000
+Received: by outflank-mailman (output) from mailman id 1385781.1628178; Fri, 07 Aug 2026 06:59:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wsEFS-0001uF-EY; Fri, 07 Aug 2026 06:40:06 +0000
-Received: by outflank-mailman (input) for mailman id 1385772;
- Fri, 07 Aug 2026 06:40:05 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wsEXy-0005Cg-V8; Fri, 07 Aug 2026 06:59:14 +0000
+Received: by outflank-mailman (input) for mailman id 1385781;
+ Fri, 07 Aug 2026 06:59:14 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wsEFR-0001g4-5m
- for xen-devel@lists.xenproject.org; Fri, 07 Aug 2026 06:40:05 +0000
+ (envelope-from <agordeev@linux.ibm.com>) id 1wsEXx-0005Ca-T6
+ for xen-devel@lists.xenproject.org; Fri, 07 Aug 2026 06:59:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wsEFQ-002pOb-HF
- for xen-devel@lists.xenproject.org; Fri, 07 Aug 2026 08:40:04 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wsEXx-00A4qv-9T
+ for xen-devel@lists.xenproject.org; Fri, 07 Aug 2026 08:59:13 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a757dbc-bab6-0a2a0a5309dd-0a2a4508c8e0-8
- for <xen-devel@lists.xenproject.org>; Fri, 07 Aug 2026 08:40:00 +0200
-Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a757dc0-f659-0a2a45080019-d1558032b01a-3
- for <xen-devel@lists.xenproject.org>; Fri, 07 Aug 2026 08:40:00 +0200
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-4954d29264cso15562365e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2026 23:40:00 -0700 (PDT)
-Received: from ?IPV6:2003:ca:b70d:300d:c60:b520:be19:f863?
- (p200300cab70d300d0c60b520be19f863.dip0.t-ipconnect.de.
- [2003:ca:b70d:300d:c60:b520:be19:f863])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48002206effsm2648301f8f.32.2026.08.06.23.39.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 06 Aug 2026 23:39:59 -0700 (PDT)
+ (envelope-from <agordeev@linux.ibm.com>)
+ id 6a758240-2eae-0a2a0a5409dd-0a2a4509baf2-2
+ for <xen-devel@lists.xenproject.org>; Fri, 07 Aug 2026 08:59:13 +0200
+Received: from [148.163.158.5] (helo=mx0b-001b2d01.pphosted.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <agordeev@linux.ibm.com>)
+ id 6a75823f-be1a-0a2a45090019-94a39e05d40c-3
+ for <xen-devel@lists.xenproject.org>; Fri, 07 Aug 2026 08:59:12 +0200
+Received: from pps.filterd (m0360072.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6770Huoo016275; Fri, 7 Aug 2026 06:58:32 GMT
+Received: from ppma12.dal12v.mail.ibm.com
+ (dc.9e.1632.ip4.static.sl-reverse.com [50.22.158.220])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4fvy00am7a-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 07 Aug 2026 06:58:32 +0000 (GMT)
+Received: from pps.filterd (ppma12.dal12v.mail.ibm.com [127.0.0.1])
+ by ppma12.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 6776uLDe003221;
+ Fri, 7 Aug 2026 06:58:31 GMT
+Received: from smtprelay06.fra02v.mail.ibm.com ([9.218.2.230])
+ by ppma12.dal12v.mail.ibm.com (PPS) with ESMTPS id 4fsu4qxspg-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 07 Aug 2026 06:58:31 +0000 (GMT)
+Received: from smtpav02.fra02v.mail.ibm.com (smtpav02.fra02v.mail.ibm.com
+ [10.20.54.101])
+ by smtprelay06.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 6776wSir33882500
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 7 Aug 2026 06:58:29 GMT
+Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id D3B0620040;
+ Fri,  7 Aug 2026 06:58:28 +0000 (GMT)
+Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 4351E20043;
+ Fri,  7 Aug 2026 06:58:26 +0000 (GMT)
+Received: from li-008a6a4c-3549-11b2-a85c-c5cc2836eea2.ibm.com (unknown
+ [9.111.55.180])
+ by smtpav02.fra02v.mail.ibm.com (Postfix) with ESMTPS;
+ Fri,  7 Aug 2026 06:58:26 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,117 +76,152 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786084800; x=1786689600; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Zpl041G9bgvH6HkJ+ZJLgBdw/y0qwr5ssc4m7Dc70ag=;
-        b=JSXapQwAvzEr+zCvkg+nhPdobWfH2z8yDn26/yF1oucTxa4JJB4FST943JdTvkkxqf
-         cOVHJAlu+BaYoDwZYeOPIskwWHfwvob6+QGWZg2cn/75z7NAKtUI8KQqZ69sP9iOXEZr
-         WjAWuZEw47Bip+yNzUSokwJXyKu/c/S+/4av4l2XKjwVfjyOYMlwTUCUo6zViTI/2FOP
-         KJwMCXm+NMgLmI5Tdv+lzccZmLMrW0TWr5GbWuXWxoHFLzOg5jAH/yd6vtNJhJZ1TokX
-         1c9LPipJN7N1gjHQsGnzoyQws18kuDryRWIJElp5A8H4Qf33rAdrgTKTgCT4H2Oz0DUf
-         GUPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786084800; x=1786689600;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Zpl041G9bgvH6HkJ+ZJLgBdw/y0qwr5ssc4m7Dc70ag=;
-        b=OODCyslZq/pNhEptAOxmSx2Nk/UXSp/IZQnlm877sMqZOhsDSejgwTYHnNiLIOEnzs
-         yQEqk2Z6F6wXmDtaEXu/B1AH2zlt7p1ieLm8TBa/IAKGVORA00LxHNqTIn5OVr14PzW6
-         8stV1eVf+ypHPRY6P73pWP5QEf7h62Ilo6HKTaZOLRFbxKEmpCCt/rDwq+UdD6eX6w5z
-         SpxdC2Bgrs3PBEcBPWEsAGw+3UgjVbJRmhXNh/5HllTOd2Om16RTfpwk3qY7StaWBFyt
-         8zzYplzdI7RzwXxWpfG0KNh8pKWOojKaNUkTU5WYZIv3+dXtlQn6vvUai5618PWu2vPR
-         w6AQ==
-X-Forwarded-Encrypted: i=1; AHgh+RqKVCoOw5v/sp+t6oD1bEAHyncz7n8E0WH4gAUKAEynaikXjols3+nO8VGfsFbmPtsc7GdJACgUrtE=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yyy874pry3Ga4Ci7lVw6fSxWEinokM7QINzuyJgV/Qy8QCXM1j+
-	Ld7qvSI8p34BgRh3jx1fTkMtXxUTCo8Z7/mQ5IsS45RYF04Ypva470fC5CGYxcv43w==
-X-Gm-Gg: AR+sD10ixeQLUe1SsAgT7LR5ICDMAuTSolgvJbVM7JNkXv1lat4B7xV328xfPsKcoe1
-	VEr+y0Sj6Su5tYxjlSQRGFWcJ9NBf/n+s7SJQXszXgfeWgqXlKasHBtFb2kLjT9tq1UaBFL92vU
-	1KhNFoqOu8rHJHfAYapOagM8gd0BSK93Tue8IseaX9GSv6fpw++2hxgVmblyQ8wpUx9r1RSNUnG
-	euU0sAgNd71fThCx1jBy8IZrIyZUL1RBQeDdlKAm0Y96AjrHLeBWxd71T8mGVVnAdbJK/bIYViQ
-	Q0/pv6cen1V9xVBvW1kQuLffjMQDa8YqGhLcxFU9hohd6Yj4CrJLpRtUAnP55vkAVe0w7nzdVrc
-	zOAsXZKZyneiJiqbMtUdaI9T2qb+AK6JSBacLbmd+2kED8f04XULuPluLvP7hcoskoWC1P/SIv8
-	t6Ze37J9cCMS+KU41lRvH9SlUvjWj4gvvHGBRu0jDmGbBn4nfKy5Ri4X+Ew1rLFYtWMoKCpEc5I
-	qyJvgGPY0kKRj3DT0/buG0g8yDnFog2SixsfQrGLkPpBX/pRCR+SfYLgS/3fsVs3rMi3OnLzynL
-	E+gynpTah4IaM8egViw=
-X-Received: by 2002:a05:600c:5246:b0:495:52dc:73a9 with SMTP id 5b1f17b1804b1-4994e7ba79dmr240349585e9.11.1786084799851;
-        Thu, 06 Aug 2026 23:39:59 -0700 (PDT)
-Message-ID: <62a2d0ec-648c-4b2b-b456-077d3967771f@suse.com>
-Date: Fri, 7 Aug 2026 08:39:58 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=pp1 header.d=ibm.com header.i="@ibm.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=pp1; bh=Ra4H8CAbtiN9wPr1aKFBAag6HNf0qB
+	uveAYY5O5upyA=; b=b6abVgzghGiyJP2Wlz0QxQ4Xlm4EEGD9Kpi/bbrlqUSFBE
+	peaClBZE7a6uUDxpMzlqxLdBYmzJ2Zv0Gov1Z/ABs95zQALrNBxETA0/pEucil/j
+	W+YyJwlwpe3OK1MAOCII7fcp3YeD9G589urjh/7H6praJpDu3PDyifCYlbxg55Wq
+	kegIhHrXFaKgEStmSWQn7LYsur2nUZn/xPNaUh2EUQxX/E75LETTqXwjtCkcIvTM
+	6z2V+hipWhFW5E/1SdFcNJm3hHGg12nD12POK8woGUy/Cd3cVuoSGV0jyJiT1nQe
+	XgoPgNhStcc1pjBG2Dfbs0hQJW5cw8oy/wETB5bQ==
+Date: Fri, 7 Aug 2026 08:58:24 +0200
+From: Alexander Gordeev <agordeev@linux.ibm.com>
+To: Muhammad Usama Anjum <usama.anjum@arm.com>
+Cc: Jani Nikula <jani.nikula@linux.intel.com>,
+        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        Tvrtko Ursulin <tursulin@ursulin.net>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Dimitri Sivanich <dimitri.sivanich@hpe.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+        Helge Deller <deller@gmx.de>, Juergen Gross <jgross@suse.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Muchun Song <muchun.song@linux.dev>,
+        Oscar Salvador <osalvador@suse.de>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        "Liam R. Howlett" <liam@infradead.org>,
+        Lorenzo Stoakes <ljs@kernel.org>, Will Deacon <will@kernel.org>,
+        "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
+        Nick Piggin <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
+        Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+        David Hildenbrand <david@kernel.org>,
+        Pasha Tatashin <pasha.tatashin@soleen.com>,
+        Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
+        Uladzislau Rezki <urezki@gmail.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Andrii Nakryiko <andrii@kernel.org>,
+        Eduard Zingerman <eddyz87@gmail.com>,
+        Kumar Kartikeya Dwivedi <memxor@gmail.com>,
+        Ingo Molnar <mingo@redhat.com>,
+        Arnaldo Carvalho de Melo <acme@kernel.org>,
+        Namhyung Kim <namhyung@kernel.org>, SJ Park <sj@kernel.org>,
+        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+        Jan Kara <jack@suse.cz>, Jason Gunthorpe <jgg@ziepe.ca>,
+        Leon Romanovsky <leon@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>,
+        Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>,
+        Christoph Lameter <cl@gentwo.org>, Mike Rapoport <rppt@kernel.org>,
+        Johannes Weiner <hannes@cmpxchg.org>, ziy@nvidia.com, pfalcato@suse.de,
+        ryan.roberts@arm.com, linux-kernel@vger.kernel.org,
+        intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+        linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org,
+        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
+        linux-arch@vger.kernel.org, kasan-dev@googlegroups.com,
+        linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
+        linux-perf-users@vger.kernel.org, damon@lists.linux.dev
+Subject: Re: [PATCH 6/9] mm: convert PTE table entry to pte
+Message-ID: <fab9fc78-1e1d-4d5b-a9ca-92f3ebd04108-agordeev@linux.ibm.com>
+References: <20260806083926.1807279-1-usama.anjum@arm.com>
+ <20260806083926.1807279-7-usama.anjum@arm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] xen/vpci: allow unaligned accesses by the hardware
- domain
-To: Roger Pau Monne <roger@xenproject.org>
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>,
- Stewart Hildebrand <stewart.hildebrand@amd.com>,
- Jason Andryuk <jason.andryuk@amd.com>, xen-devel@lists.xenproject.org
-References: <20260806152619.23881-1-roger@xenproject.org>
- <20260806152619.23881-3-roger@xenproject.org>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260806152619.23881-3-roger@xenproject.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1786084800-CE34587B-00B02BB7/0/0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260806083926.1807279-7-usama.anjum@arm.com>
+X-TM-AS-GCONF: 00
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA3MDA0OSBTYWx0ZWRfX3Npn1dSDlp+R
+ fqhR9MpXZOAAKnyVJ8e3VxdJ3uPpsfM7vsZzpddpvCei+hGCUgHlBFVERXxX+W23gcpS04A1TAu
+ ZsTRXf6ZMD17BVZmsTCM0lUCa3PumjU=
+X-Authority-Analysis: v=2.4 cv=VPTtWdPX c=1 sm=1 tr=0 ts=6a758218 cx=c_pps
+ a=bLidbwmWQ0KltjZqbj+ezA==:117 a=bLidbwmWQ0KltjZqbj+ezA==:17
+ a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=RzCfie-kr_QcCd8fBx8p:22 a=VwQbUJbxAAAA:8
+ a=7CQSdrXTAAAA:8 a=VnNF1IyMAAAA:8 a=MkxDnzPc83ckttyupOUA:9 a=CjuIK1q_8ugA:10
+ a=a-qgeE7W1pNrGK8U0ZQC:22
+X-Proofpoint-ORIG-GUID: 9g22-5Yiq-VIyR9utDe_g8M8U8wsuEOd
+X-Proofpoint-GUID: 9g22-5Yiq-VIyR9utDe_g8M8U8wsuEOd
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA3MDA0OSBTYWx0ZWRfX4qeGdjjX3Iob
+ oR2d/W90tNYt47jYoawp2wnB7y1FcZkNxxg7/PT57hDZR5feFluugIlRZ22mBQ/td/U5spNK5Sw
+ r8fBBZDJMOMHDyBDHn28hS5vFD1IBzJcw9uh6xxZ9XoecZCsQnhJUSSf9noMzRB2RMvDZxhPIkf
+ XMKQ1X4w4JsUHL/vsYXt9nxlaz1I/q7ljQgCtXwMvAVt1kijbs35mMQ7c76oGi39I1XSIpxXjmb
+ kIMcLde1EyTpmQmaPbN+E3LbUk4M/lkkgjjjvsZIBgTXWy3e0GMD7NaUrStoYwo4ESb8Z4Wsdqh
+ +581CUAUBwBVUa2TokmdsZzGbrL67tdrfft71SfQsy0ZlWFNR+iL1PR2Oez6zshpb+e7rynA9dG
+ f8FbSxO38FmGhTq0nvrdQcjHK2fKXR2vKx64CE0UHGLhgbh7cUWWpBSkiNUoiKjHZV0BphvCO4H
+ jlupay2/A2mIbK8uZUQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-07_01,2026-08-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 malwarescore=0 bulkscore=0 spamscore=0 clxscore=1015
+ priorityscore=1501 phishscore=0 impostorscore=0 adultscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608070049
+X-purgate-ID: tlsNG-bad1c0/1786085953-BC6CA034-5FC34A1E/0/0
 X-purgate-type: clean
-X-purgate-size: 1115
+X-purgate-size: 1822
 
-On 06.08.2026 17:26, Roger Pau Monne wrote:
-> It's possible for domains to generate unaligned PCI config space accesses
-> when using ECAM, and hence vPCI should support those at least for the
-> hardware domain.  Such unaligned accesses to the PCI config space have been
-> reported to come from ACPI logic.
+On Thu, Aug 06, 2026 at 09:38:44AM +0100, Muhammad Usama Anjum wrote:
+> The non-MMU stub receives hw_pte_t but returns a logical pte_t
+> value. Convert the stored entry through __pte_from_hw() before
+> returning.
 > 
-> Relax the checking in vpci_access_allowed() to allow such accesses for the
-> hardware domain, and fix the handling in pci_conf_{read,write}{16,32}() to
-> fulfill them using MMCFG.
+> Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
+> ---
+>  include/linux/hugetlb.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> MMCFG regions are identity exposed to the hardware domain, and hence such
-> unaligned accesses can only come as a result of the host having MMCFG in the
-> first place, as otherwise MMCFG won't be exposed to the hardware domain
-> either.
-> 
-> Note that vpci_ecam_{read,write}() already refuse accesses that cross a
-> device boundary unconditionally.
-> 
-> Reported-by: Jason Andryuk <jason.andryuk@amd.com>
-> Signed-off-by: Roger Pau Monné <roger@xenproject.org>
+> diff --git a/include/linux/hugetlb.h b/include/linux/hugetlb.h
+> index bc0b9c65aa1d0..9e8b391aa4bc9 100644
+> --- a/include/linux/hugetlb.h
+> +++ b/include/linux/hugetlb.h
+> @@ -1283,7 +1283,7 @@ static inline pte_t huge_ptep_clear_flush(struct vm_area_struct *vma,
+>  #ifdef CONFIG_MMU
+>  	return ptep_get(ptep);
+>  #else
+> -	return *ptep;
+> +	return __pte_from_hw(*ptep);
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+But this is a direct dereferencing, which breaks the whole point, isn't it?
 
-Albeit without the intent to override possible remaining objections by Andrew.
+What about introducing something like pte_t ptep_get_sw(hw_pte_t *ptep)
+to be used in exactly situations like this? With that the semantics of
+hw_pte_t pointers becomes straightforward and closes the still ongoing
+"storage vs lifetime" discussion:
 
-Jan
+hw_pte_t*     points to HW-formatted page table entries
+
+ptep_get()    is used to obtain HW-linked/attached entries, and may wire
+              extra code like [1] or [2]
+
+ptep_get_sw() is used to obtain HW-unlinked/unattached entries and in
+              most cases is just a direct dereference
+
+The caller should always know whether the entry is attached or not, so
+confusions like [3] are avoided.
+
+1. https://lore.kernel.org/linux-mm/20260526-kpkeys-v8-21-eaaacdacc67c@arm.com/
+2. https://lore.kernel.org/linux-s390/650903a4-0dd9-4e6b-9d4b-3c32c5657236-agordeev@linux.ibm.com/
+3. https://lore.kernel.org/linux-s390/b44e071d-7c9d-4e7e-a84d-4af3499a5a05@arm.com/
+
+>  #endif
+>  }
+>  
+> -- 
+> 2.47.3
+> 
 
