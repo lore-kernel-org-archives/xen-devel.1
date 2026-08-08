@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F420C55174
-	for <xen-devel@archiver.kernel.org>; Sat,  8 Aug 2026 14:54:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1386688.1628375 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB793C55174
+	for <xen-devel@archiver.kernel.org>; Sat,  8 Aug 2026 14:55:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1386695.1628384 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wsiR6-0002HY-EU; Sat, 08 Aug 2026 14:54:08 +0000
+	id 1wsiSX-0002qR-NL; Sat, 08 Aug 2026 14:55:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1386688.1628375; Sat, 08 Aug 2026 14:54:08 +0000
+Received: by outflank-mailman (output) from mailman id 1386695.1628384; Sat, 08 Aug 2026 14:55:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wsiR6-0002HR-B0; Sat, 08 Aug 2026 14:54:08 +0000
-Received: by outflank-mailman (input) for mailman id 1386688;
- Sat, 08 Aug 2026 14:54:07 +0000
+	id 1wsiSX-0002qJ-K5; Sat, 08 Aug 2026 14:55:37 +0000
+Received: by outflank-mailman (input) for mailman id 1386695;
+ Sat, 08 Aug 2026 14:55:37 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+fdab5150087f7d84ce52+8385+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1wsiR4-0002HL-Vt
- for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 14:54:07 +0000
+ id 1wsiSX-0002qB-2I
+ for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 14:55:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wsiR4-009mCq-6P
- for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 16:54:06 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wsiSW-003ngs-Bw
+ for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 16:55:36 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+fdab5150087f7d84ce52+8385+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a7742c0-8faa-0a2a0a5109dd-0a2a4504a59a-38
- for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 16:54:05 +0200
+ id 6a77430e-bab6-0a2a0a5309dd-0a2a450cd2ac-24
+ for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 16:55:35 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+fdab5150087f7d84ce52+8385+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a77430d-b57f-0a2a45040019-5a9b3222e7c0-3
- for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 16:54:05 +0200
+ id 6a774367-f479-0a2a450c0019-5a9b3222a388-3
+ for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 16:55:35 +0200
 Received: from [54.239.6.187] (helo=u09cd745991455d.ant.amazon.com)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wsiQw-00000006YJq-463R; Sat, 08 Aug 2026 14:53:59 +0000
+ id 1wsiSN-00000006YVa-3vur; Sat, 08 Aug 2026 14:55:28 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,15 +55,15 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:In-Reply-To:
 	Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
 	Content-ID:Content-Description:References;
-	bh=Cuh+2guypgME3E5tPAMft+l41S7Z051cLycWAT64MZc=; b=KvnfyU3Kg+Hyujh2eKk8oY/xbS
-	AWycnumVzq2JvmDw3H2xzJa7LvtAG2SLujPf8ebnAmlYv/VsGtvSs3wpeNL7ayKVAxPPqElMyIJko
-	U44CufxlA0UUnsperbJHSupH+gpofgP1UCW9i2OBfzSOa5NrLm4WS6Ax0O4fPYn2+th94CJfDbuPs
-	3wl4u5tKMYlIHHqSB1dKSjrrVK/jYFzrqIUAT8f/OjvqjTrqH2iH3kFRpWZkTsNc5CYyQMuEj6/13
-	Xyv1qVAulf5sk3wfXHTi6gQV83zct5cCkUVVefEKGJ6/B4xRIH8dApgUX9dVLLdHsKv+5AX+HoLje
-	AhoVhZzg==;
-Message-ID: <b8c0e3537904e29f233cbb03f4d3ddb5247e2af7.camel@infradead.org>
-Subject: Re: [PATCH v6 10/51] x86/tdx: Force TSC frequency with CPUID-based
- info provided by the TDX-Module
+	bh=9ZmoEJU8Nj3R7GEBPZuKKQOrDJ9kwjJLRhMvX9eg2b0=; b=qJnOvhH/oom5NnirTM1L3sqRet
+	zFy6+LaUk6eYcTvcX776vouIX3Nf3O+yd9Q4oxOXRrt3y7NfCMk4gArdnMLxdVZTpnP68AWbUF5DB
+	zc7NOWZS42fketVNwBjHe6GRIGAIv/JxbK38FwAK9iu15FChMR+PBll/RDaQidTWi2LKz7z7iUD0e
+	3IrdyOVumQ6UC8zb0+WKukb+yb3wM+eY3DZboLvHuvSJfw9KWQo/swQCBB7uW35Rnvy2fDG0wcPOO
+	v7DzUoGoCgbe3/quqnGwJ6G1W3fTY6gObp0ieJ81dufGHnoXcU4yhekVl3jsLTp2sfPosHVYctUvV
+	xv8gXpuQ==;
+Message-ID: <91341b40020a6c12c380651f2658897d3e4c6345.camel@infradead.org>
+Subject: Re: [PATCH v6 11/51] x86/tsc: Add dedicated hypervisor hooks for
+ getting known TSC/CPU frequencies
 From: David Woodhouse <dwmw2@infradead.org>
 To: seanjc@google.com
 Cc: kas@kernel.org, rick.p.edgecombe@intel.com, pbonzini@redhat.com, 
@@ -72,81 +72,53 @@ Cc: kas@kernel.org, rick.p.edgecombe@intel.com, pbonzini@redhat.com,
  alexey.makhalov@broadcom.com, 	jan.kiszka@siemens.com,
  dave.hansen@linux.intel.com, luto@kernel.org, 	peterz@infradead.org,
  jgross@suse.com, daniel.lezcano@kernel.org, tglx@kernel.org, 
-	jstultz@google.com, x86@kernel.org, linux-coco@lists.linux.dev, 
-	kvm@vger.kernel.org, linux-hyperv@vger.kernel.org, 
-	virtualization@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	xen-devel@lists.xenproject.org
-Date: Sat, 08 Aug 2026 15:53:57 +0100
-In-Reply-To: <20260806233609.212337-11-seanjc@google.com>
+	jstultz@google.com, mhklinux@outlook.com, x86@kernel.org, 
+	linux-coco@lists.linux.dev, kvm@vger.kernel.org,
+ linux-hyperv@vger.kernel.org, 	virtualization@lists.linux.dev,
+ linux-kernel@vger.kernel.org, 	xen-devel@lists.xenproject.org
+Date: Sat, 08 Aug 2026 15:55:26 +0100
+In-Reply-To: <20260806233609.212337-12-seanjc@google.com>
 Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-t9ptKw29GmA8+P6aeY7O"
+	boundary="=-rqA7MqJn6IlGbHYL5W9W"
 User-Agent: Evolution 3.60.3-0ubuntu1~ppa9~24.04 
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-ebf023/1786200845-50EDEB50-A5B25CBE/0/0
+X-purgate-ID: tlsNG-d25034/1786200935-034D7A5B-5809F31A/0/0
 X-purgate-type: clean
-X-purgate-size: 11230
+X-purgate-size: 9971
 
 
---=-t9ptKw29GmA8+P6aeY7O
+--=-rqA7MqJn6IlGbHYL5W9W
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 On Thu, 2026-08-06 at 16:35 -0700, Sean Christopherson wrote:
-> When running as a TDX guest, explicitly set the TSC frequency to a known
-> value, using CPUID-based information, instead of potentially relying on a
-> hypervisor-controlled PV routine.  For TDX guests, CPUID.0x15 is always
-> emulated by the TDX-Module, i.e. the information from CPUID is more
-> trustworthy than the information provided by the hypervisor.
->
-> To maintain backwards compatibility with TDX guest kernels that use nativ=
+> Add dedicated hypervisor hooks for getting known TSC/CPU frequencies
+> instead of overriding seemingly generic platform hooks, and explicitly
+> prioritize hypervisor-provided frequencies over native methods, but do NO=
+T
+> clobber the frequency obtained from trusted firmware.  While shuffling th=
 e
-> calibration, and because it's the least awful option, retain
-> native_calibrate_tsc()'s stuffing of the local APIC bus period using the
-> core crystal frequency.  While it's entirely possible for the hypervisor
-> to emulate the APIC timer at a different frequency than the core crystal
-> frequency, the commonly accepted interpretation of Intel's SDM is that AP=
-IC
-> timer runs at the core crystal frequency when that latter is enumerated v=
-ia
-> CPUID:
+> hooks around is arguably "six of one, half dozen of the other", scoping
+> them to x86_hyper_init makes their purpose more obvious, and allows for
+> explicitly defining the priority of sources (as is done here).
 >
->   The APIC timer frequency will be the processor's bus clock or core
->   crystal clock frequency (when TSC/core crystal clock ratio is enumerate=
-d
->   in CPUID leaf 0x15).
+> As is already done when trusted firmware provides the TSC frequency, igno=
+re
+> tsc_early_khz if the exact TSC frequency was obtained from the hypervisor=
+,
+> as attempting to refine the TSC frequency when running in a VM is all but
+> guaranteed to cause problems sooner or later due to the calibration sourc=
+es
+> being emulated devices in the vast majority of setups.
 >
-> If the hypervisor is malicious and deliberately runs the APIC timer at th=
-e
-> wrong frequency, nothing would stop the hypervisor from modifying the
-> frequency at any time, i.e. attempting to manually calibrate the frequenc=
-y
-> out of paranoia would be futile.
->
-> Deliberately leave CPU frequency calibration as is, since the TDX-Module
-> doesn't provide any guarantees with respect to CPUID.0x16.
->
-> Expose and use cpuid_get_tsc_info() instead of providing a wrapper to
-> get the TSC and core crystal frequency, as TDX is the only anticipated
-> user outside of the TSC code, i.e. adding a helper to dedup the math won'=
-t
-> actually dedup anything.  Having TDX use "struct cpuid_tsc_info" also
-> avoids the temptation of declaring a local "tsc_khz" variable and thus
-> unintentionally creating a shadow of the global "tsc_khz".
->
-> Cc: Kiryl Shutsemau (Meta) <kas@kernel.org>
+> Cc: David Woodhouse <dwmw2@infradead.org>
+> Reviewed-by: Michael Kelley <mhklinux@outlook.com>
 > Signed-off-by: Sean Christopherson <seanjc@google.com>
-
-I don't know if we should set X86_FEATURE_TSC_RELIABLE before bailing
-out in the case where cpuid_get_tsc_info() fails, or just not care
-about that because it Can Never Happen=E2=84=A2? Previously it was set
-unconditionally from tdx_early_init().
-
-Whatever...
 
 Reviewed-by: David Woodhouse <dwmw@amazon.co.uk>
 
---=-t9ptKw29GmA8+P6aeY7O
+--=-rqA7MqJn6IlGbHYL5W9W
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Disposition: attachment; filename="smime.p7s"
 Content-Transfer-Encoding: base64
@@ -244,23 +216,23 @@ vFEOOmuaq7VamuLEPFQtJM4olmipOW6CzrLcFz6J/6yAecEG3P1ZDoy08eSHvM40MAUgpwGa/w6o
 MAkGA1UEBhMCVVMxFzAVBgNVBAoTDkRpZ2lDZXJ0LCBJbmMuMTowOAYDVQQDEzFEaWdpQ2VydCBB
 c3N1cmVkIEcyIFNNSU1FIFJTQTQwOTYgU0hBMzg0IDIwMjQgQ0ExAhADNSi2uzJskfEdOMo4hV0g
 MA0GCWCGSAFlAwQCAQUAoIIBezAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJ
-BTEPFw0yNjA4MDgxNDUzNTdaMC8GCSqGSIb3DQEJBDEiBCB128CVBJN8xuT3FiKKePSSmD1dGYDR
-PbTRvv3V0qPdhzCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGln
+BTEPFw0yNjA4MDgxNDU1MjZaMC8GCSqGSIb3DQEJBDEiBCBXj2pOn7w99V9/APxOjyywOoy1tNze
+sBNaxAitVZEENTCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGln
 aUNlcnQsIEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFzc3VyZWQgRzIgU01JTUUgUlNBNDA5NiBT
 SEEzODQgMjAyNCBDQTECEAM1KLa7MmyR8R04yjiFXSAwgYcGCyqGSIb3DQEJEAILMXigdjBiMQsw
 CQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQsIEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFz
 c3VyZWQgRzIgU01JTUUgUlNBNDA5NiBTSEEzODQgMjAyNCBDQTECEAM1KLa7MmyR8R04yjiFXSAw
-DQYJKoZIhvcNAQEBBQAEggIAONQVsVqcQyHMNv3ndBzrZgpCILyQP+t1HaHjvmV8XwFE+1n+c6wZ
-5kxata2TXbey92bUtsTg6WpP4/A56MFfNWaTRjFxxOS0ZeWWsryymaD1XDpdHdhWpOZPUfdq7VWm
-ctAXsM8mdlD2tMk/L7KYvgx1WsdEGiE+ZKtTlMmZjuxCkOGMh07ZbhY+dzm7VJk6ybiw+D8R57hu
-BLcjmDEhLbxIs/MWasr6lY9NXe4qyMmRcT4L9f+ppQ+t2QhcZ/MktdHhop+YXdl2K1oRzvUU7SHf
-Vpf7t3taxR2mrqscOxwmu4E2s5Qi9CQGJ7kvEuE+FqKfTjjcusg3jZ0VMItrxNR5lLoAx8MZ9PTD
-xUMNUJzhDE2Crh55kbSkkEkfxz1mILKWBNhK7+tQ+7mXIi/8fJ+qzUE0hW4kLV4A7iU1PS8pAF8p
-pjYPlVws/cqXhoj2iEaT8SAT5aICcXZ+LWq3lmZKSPhTvls4l5oKfsD2Sx3Jy5OtTshtwV8HRsU3
-tXmsaZxeq2vYQVIvDGy6IoNvUSfK67W23VCWaVINNRgRok7Qd0paFBZz2OTwgU5fEm/LAUlQe+1s
-3SOg6XMHVDD61w/MDzNmbysf9L6bH795bXTEalXqwhR4qd51LhACF09ku60FvSWPbgUdTE+f/rvE
-Exg5EaO7qp5P7n9DQ5PyO44AAAAAAAA=
+DQYJKoZIhvcNAQEBBQAEggIAkLLvuDi2xErhAXmhGRxhKl29cHidfsYNi+OvY8o/YUo20MCbwkOf
+Y0Wldj9/dOacpxTtEp218iwxL3Y/45pYGTaBXv+PjgVn+Epet+g8T7t78DhaX+FZ/13VpB30The7
+f+v/V+mvS49kI/4EG7NDd3B1LSVgxH1eYRXvakdAP0o7R7lAz9eEln5j6lKi4s/33yK3iwRo+dmc
+Fsm9oGVP7Jyom1aZ6gkm0Tuf1ZFmDjoPdemkXQblVXahYM8JiR4PXUkC75ANioqfF3G6u/qpbaxc
+U/g8hhJMlcnjhZaBgxkZby2K0i094zvRrcZhbJaMtM2VWU6FODUTS0z0chxbpkFAT2eUaNRipZcM
+KsJYWe6SHfIXoa+TGeBd3gvBfEaPJFzFl0WNb0G8xeMjvVg0LqhVaLg2DVMPCSZbB7nqZf62+t1Y
+eHyS+QGunPqYXkWgYGrULorsiz0AhgiARJr7Z6DMc8YD/Ecy1LX2F0eSQ0v0AiDZ9kYYQIBFbpHZ
+LGPBPXjGFhisUoNW+RYzOsFuiZKtSpzb+zpEp2gYDR8nioFjd4zih3xmXLQ7/xNvfhcbyibGNbPC
+XVK4j6hKT53M+636FeKveRHYpFQon4cUH9qAbrOzdZg6AzV08g1Q7cOgD+WsYxNm5DQm4W4TTJJ8
+mPEnWr/Iz/Fi0iFJQu669ckAAAAAAAA=
 
 
---=-t9ptKw29GmA8+P6aeY7O--
+--=-rqA7MqJn6IlGbHYL5W9W--
 
