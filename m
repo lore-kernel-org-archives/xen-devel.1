@@ -4,41 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06DB5C55174
-	for <xen-devel@archiver.kernel.org>; Sat,  8 Aug 2026 15:02:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1386723.1628411 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39D29C5AC67
+	for <xen-devel@archiver.kernel.org>; Sat,  8 Aug 2026 15:03:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1386732.1628420 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wsiYc-0005gQ-Qt; Sat, 08 Aug 2026 15:01:54 +0000
+	id 1wsiZb-0006B6-37; Sat, 08 Aug 2026 15:02:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1386723.1628411; Sat, 08 Aug 2026 15:01:54 +0000
+Received: by outflank-mailman (output) from mailman id 1386732.1628420; Sat, 08 Aug 2026 15:02:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wsiYc-0005gJ-O9; Sat, 08 Aug 2026 15:01:54 +0000
-Received: by outflank-mailman (input) for mailman id 1386723;
- Sat, 08 Aug 2026 15:01:53 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+fdab5150087f7d84ce52+8385+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1wsiYb-0005g3-9h
- for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 15:01:53 +0000
+	id 1wsiZb-0006Az-0D; Sat, 08 Aug 2026 15:02:55 +0000
+Received: by outflank-mailman (input) for mailman id 1386732;
+ Sat, 08 Aug 2026 15:02:53 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wsiZZ-0006Ap-CG
+ for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 15:02:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wsiYa-0019rA-Mn
- for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 17:01:52 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wsiZY-00CiCT-An
+ for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 17:02:52 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+fdab5150087f7d84ce52+8385+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a7744c0-e002-0a2a0a5209dd-0a2a4501b2d8-24
- for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 17:01:52 +0200
+ id 6a7744fd-bab6-0a2a0a5309dd-0a2a4505913a-22
+ for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 17:02:51 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+fdab5150087f7d84ce52+8385+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a7744df-5984-0a2a45010019-5a9b3222d77a-3
- for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 17:01:52 +0200
+ id 6a774467-4cb1-0a2a45050019-5a9b3222b638-3
+ for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 16:59:51 +0200
 Received: from [54.239.6.187] (helo=u09cd745991455d.ant.amazon.com)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wsiYV-00000006YxH-0R1J; Sat, 08 Aug 2026 15:01:47 +0000
+ id 1wsiWX-00000006YkS-3zRH; Sat, 08 Aug 2026 14:59:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,15 +53,15 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:In-Reply-To:
 	Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
 	Content-ID:Content-Description:References;
-	bh=cHemq+R8kBm2N1D7zG41iiZY974/e28EH+HY3NEkjlY=; b=RQl6FO1TyeVj01qXv3h/XfhhJx
-	dAHGFabC35mI/v7f6ZF5yH+HKPBOeuP/bWSBVFV5as4PSm1Bv8io5zjFliFY0HcIylgKGiHaC748n
-	zu9G33Xwug60AG3WOjt2XjSME+LG4diie634BCniVnH1TVMNv2fbzCzsFf8oNNZDe6AwxB6pBZ/1R
-	p24TokgsZ2p0tkHnytpq5r6cCg+Q/byy6DfZuj8jh3RxuE5Q3IIJz5ucstMPbT1hyxOfCnCMH+1W6
-	dLkKOEN7clgBbyoNP5OHrVenrk6iCo/mr+l9IkUlE1t5n2u1m6JWn9JvaL1ZfHw/7VSutADt9Rpqn
-	n2jjdCVQ==;
-Message-ID: <8cdb54e0c25494e9574559d858a81916cc461863.camel@infradead.org>
-Subject: Re: [PATCH v6 15/51] x86/tsc: Kill off
- x86_platform_ops.calibrate_{cpu,tsc}() hooks
+	bh=cjqV/irGmZd8w6lcxaSK+6WNSve4cl+1LpivEBexyMQ=; b=hJpYeLKwSuZ8Qt4awuG8YSOdQo
+	xVSJPwo++/8O48Hidkh6qkd4vfwndvt5tv3FsleZzl/6+hsZ9miZQNetemQqNScue7dAL0AePNPk2
+	G5b1VSuOTXNHIdHIB9DCctSB5NyYM97seEvg1RZ0Z2DTElK97RQXOhYfeIxxa+oAxBSk2zHLkSq56
+	1iN0lU8zLe/+6oKFdHzMMO58Of+Nfcy2Ek466haCQ97dxvgd6ch6EwMBfCi5JIUlVt88T1follGIr
+	si/DBu0pJpIh10OdJlEfXZzm9YBO9v7aQpUwIm0IEA6B7lY05B3UmAL1QhYnkvSncyNu2BFhf5AjY
+	JL50e9mw==;
+Message-ID: <d0ee3cf97854b904323db3799e05117d065a6ba0.camel@infradead.org>
+Subject: Re: [PATCH v6 13/51] x86/acrn: Mark TSC frequency as known when
+ using ACRN for calibration
 From: David Woodhouse <dwmw2@infradead.org>
 To: seanjc@google.com
 Cc: kas@kernel.org, rick.p.edgecombe@intel.com, pbonzini@redhat.com, 
@@ -76,38 +74,38 @@ Cc: kas@kernel.org, rick.p.edgecombe@intel.com, pbonzini@redhat.com,
 	kvm@vger.kernel.org, linux-hyperv@vger.kernel.org, 
 	virtualization@lists.linux.dev, linux-kernel@vger.kernel.org, 
 	xen-devel@lists.xenproject.org
-Date: Sat, 08 Aug 2026 16:01:45 +0100
-In-Reply-To: <20260806233609.212337-16-seanjc@google.com>
+Date: Sat, 08 Aug 2026 15:59:44 +0100
+In-Reply-To: <20260806233609.212337-14-seanjc@google.com>
 Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-pJV6LuA8JirWt+CeIJA2"
+	boundary="=-swfj4Wc+2w/NxQrUPIhf"
 User-Agent: Evolution 3.60.3-0ubuntu1~ppa9~24.04 
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-d62444/1786201312-1E27A757-3F0C0830/0/0
-X-purgate-type: clean
-X-purgate-size: 9423
+X-purgate-ID: tlsNG-c201ff/1786201191-F44A42A1-38606B23/13/0
+X-purgate-type: clean.bounce
+X-purgate-size: 9335
 
 
---=-pJV6LuA8JirWt+CeIJA2
+--=-swfj4Wc+2w/NxQrUPIhf
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 On Thu, 2026-08-06 at 16:35 -0700, Sean Christopherson wrote:
-> Now that getting the CPU and/or TSC frequencies from the hypervisor uses
-> dedicated hooks, drop x86_platform_ops.calibrate_{cpu,tsc}() and instead
-> directly invoke the correct helper at each phase of (re)calibration.  In
-> addition to eliminating unnecessary code, this makes it a bit more obviou=
-s
-> when the "late" path invokes pit_hpet_ptimer_calibrate_cpu() instead of
-> x86_platform_ops.calibrate_cpu().
->
-> No functional change intended.
+> Mark the TSC frequency as known when using ACRN's PV CPUID information.
+> Per commit 81a71f51b89e ("x86/acrn: Set up timekeeping") and common sense=
+,
+> the TSC freq is explicitly provided by the hypervisor.
 >
 > Signed-off-by: Sean Christopherson <seanjc@google.com>
 
+Huh... does this literally get reverted completely in the very *next*
+patch in the series? Kind of weird, but I guess in some ways it makes
+sense...
+
+
 Reviewed-by: David Woodhouse <dwmw@amazon.co.uk>
 
---=-pJV6LuA8JirWt+CeIJA2
+--=-swfj4Wc+2w/NxQrUPIhf
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Disposition: attachment; filename="smime.p7s"
 Content-Transfer-Encoding: base64
@@ -205,23 +203,23 @@ vFEOOmuaq7VamuLEPFQtJM4olmipOW6CzrLcFz6J/6yAecEG3P1ZDoy08eSHvM40MAUgpwGa/w6o
 MAkGA1UEBhMCVVMxFzAVBgNVBAoTDkRpZ2lDZXJ0LCBJbmMuMTowOAYDVQQDEzFEaWdpQ2VydCBB
 c3N1cmVkIEcyIFNNSU1FIFJTQTQwOTYgU0hBMzg0IDIwMjQgQ0ExAhADNSi2uzJskfEdOMo4hV0g
 MA0GCWCGSAFlAwQCAQUAoIIBezAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJ
-BTEPFw0yNjA4MDgxNTAxNDVaMC8GCSqGSIb3DQEJBDEiBCD6U2t+qvpPAReeHMywFnP+Wc79R2Uj
-KxqBjf4L3+z40DCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGln
+BTEPFw0yNjA4MDgxNDU5NDRaMC8GCSqGSIb3DQEJBDEiBCCLHDsVEr47QLniCvl1BHh7jULcWyP1
+JFbCuD+qwvoPNzCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGln
 aUNlcnQsIEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFzc3VyZWQgRzIgU01JTUUgUlNBNDA5NiBT
 SEEzODQgMjAyNCBDQTECEAM1KLa7MmyR8R04yjiFXSAwgYcGCyqGSIb3DQEJEAILMXigdjBiMQsw
 CQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQsIEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFz
 c3VyZWQgRzIgU01JTUUgUlNBNDA5NiBTSEEzODQgMjAyNCBDQTECEAM1KLa7MmyR8R04yjiFXSAw
-DQYJKoZIhvcNAQEBBQAEggIAAy3K89cKEOtHZsOjH0NMIQUudmikHtnnYwiYb4UJ2XjXJt1UOcWy
-bt9n7ZC4GFpOjb8SbQ8pcL2H7+QL2SvmrOnzxk/+k4Q1gf1xTAk/veIK31v1K74zzsM7vxBue7lg
-4K01P7Dqei6rlTkS+tX4E/C95L9bC2SGgk8E72GWfeAKvywnIc8MtJXhIk7l958gY/PFPIzcUOj8
-TMWGz2CKMdvMGlCUD4d0sJAjxZKHfHunykJDVzJsyjB/NH5oTXndyvmqZt/S9Cuk1Pxl3PR0ipGX
-nAC1ieRnd9rFGgMkmSuNo+S76vaNTNsYXx5ubha1gSfBOLAIbNFc3wrksW0oriE/U7cJeec0ePXr
-9BlD26Q56z/grlOSwUCP3hMmGUiymPZbj2rI626kexeCleFFszCQnJQJ57YQujNY4HGEInWpwGGc
-Bk1C8zMunpNRKBshfQKM5hJ78yg5PwiMQED8jwqfN0YZ+Xi20GcjUSeS/vnhAa4ICp+n+B35P/IS
-RQzo3I47LKoHzGhLSqtrLaehP5pzoxsVlz/Gvbxj0lWZ1WKcVu9ZI/VhbQacslUKk0x/Pkti0NkU
-tyJKN+pgCpBZyet6g+e7ERgeqAJzJ6/BSve5aa4+wF/K4rEEJRt+7/bcG4bUdCpqTMfOJtrzTnm6
-SnNxS0tHcFCE4mXozVOfHnMAAAAAAAA=
+DQYJKoZIhvcNAQEBBQAEggIAR8KWcORVTZQasIgxPzemsBTyXMobtaBuoDyuKdNegOlt6B+9r/34
+lQPmQzpYXE2c+M0nMbA1C0t8XTSPGRQ6pbu3enjsm6Etlto/EFiyfkZDZok4WFauDbalheV1+gRj
+p8HmX8Nfp5sv5Ou7dwCk7Lh8mJcuH+4z4jyIKyNKJOVMuQVG26Pc0r6eoQP1c49xGbSzuJ4ntzl8
+ZSwSUQKulQtOhOYo7qtctV2sdsb9c4cuhUGZLtIJy2nO7qflZKDQ7+9HEZR5t8KesfGpykHuHweU
+kYqIbShxhI14dCTVeVey+ijIatUBBghH0irBc50ML5mxiH0z0T4tsFIITE5Pocpd7oNa7KmKEgVs
+RjDfd4sggGjWXRM33apHgvLK4Y1PjlhqnkgaIas3Q4GrCyOiuMsI8yAoRIHmyS3jN3d4UqULiYLh
+6RRnFiazWuzuEMwjo9qdJabZ5A/4FCcFFsborS0n8Tqlo6/54ohHwSMmDIp4ZctOH+SofAokgqZM
+Usz5v+HDUnM5pnF89Q3YiWIcAj45mVI8fhxqsfcsv0VLQ82ljqkOa0X7nh1CIOWcsoHtI9VlRbZt
+pp45qlJKWW2wO706FStcVF+doACf1LiRgmI8KuOZdZhXDV1lFfdkBq+8ENFdyUTh87arS/jLshbP
+L9KEvoOBTrQ3mDfQa9VMYCoAAAAAAAA=
 
 
---=-pJV6LuA8JirWt+CeIJA2--
+--=-swfj4Wc+2w/NxQrUPIhf--
 
