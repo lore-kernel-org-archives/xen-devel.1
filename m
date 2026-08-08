@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D39F4C55174
-	for <xen-devel@archiver.kernel.org>; Sat,  8 Aug 2026 14:40:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1386662.1628348 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1B67C5AC67
+	for <xen-devel@archiver.kernel.org>; Sat,  8 Aug 2026 14:48:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1386671.1628357 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wsiD9-0006Wn-Py; Sat, 08 Aug 2026 14:39:43 +0000
+	id 1wsiLk-00005H-Hk; Sat, 08 Aug 2026 14:48:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1386662.1628348; Sat, 08 Aug 2026 14:39:43 +0000
+Received: by outflank-mailman (output) from mailman id 1386671.1628357; Sat, 08 Aug 2026 14:48:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wsiD9-0006Wf-LL; Sat, 08 Aug 2026 14:39:43 +0000
-Received: by outflank-mailman (input) for mailman id 1386662;
- Sat, 08 Aug 2026 14:39:43 +0000
+	id 1wsiLk-000054-EA; Sat, 08 Aug 2026 14:48:36 +0000
+Received: by outflank-mailman (input) for mailman id 1386671;
+ Sat, 08 Aug 2026 14:48:35 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+fdab5150087f7d84ce52+8385+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1wsiD7-0006WV-5h
- for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 14:39:43 +0000
+ id 1wsiLj-00004x-2Q
+ for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 14:48:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wsiD6-009kza-1B
- for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 16:39:40 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wsiLi-009le7-8Y
+ for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 16:48:34 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+fdab5150087f7d84ce52+8385+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a773fab-e002-0a2a0a5209dd-0a2a4506b280-0
- for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 16:39:39 +0200
+ id 6a7741bf-bab6-0a2a0a5309dd-0a2a45038ac8-2
+ for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 16:48:34 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+fdab5150087f7d84ce52+8385+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a773faa-195a-0a2a45060019-5a9b3222a42e-3
- for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 16:39:38 +0200
+ id 6a7741c1-fae8-0a2a45030019-5a9b3222a534-3
+ for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 16:48:34 +0200
 Received: from [54.239.6.187] (helo=u09cd745991455d.ant.amazon.com)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wsiCt-00000006XD2-20no; Sat, 08 Aug 2026 14:39:27 +0000
+ id 1wsiLa-00000006Xtt-3R8T; Sat, 08 Aug 2026 14:48:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,15 +55,15 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:In-Reply-To:
 	Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
 	Content-ID:Content-Description:References;
-	bh=zcSx2XSdEAVzm2aLWJJxByNSKo4VAVjMXcHmClS1zuA=; b=Opz4fZKQr5mQdoa8mNtwrphERm
-	UZxNV7GFNsZh6vj3rokfMu6jtiLmubRDSITaBu8i2vMFC4BdxWrHUGnKFVKsSNOJQFB12LYt0vfMq
-	dCibvfzWu9c73U4QJ3LdLjdmZ1lcxgSFnbGlX1nK3+KVAwYhldPl4TvCe3UT4aVTUFMzkjNvjN6Cr
-	ZF3n0ORlBUF19jlI7BqM1Vf7pzx+rHebNIfh3nrnYOZIFE5JTfh23ZcMzB2YGkolb68Obj4BtlK8t
-	fjMNEebsqkNEwhbtKuudD1/ZatUZXMZUJcJR1HqBfYhmBZEmlmLqUzeGzdHh/nPVyJ6j+n4VyoKBw
-	cJC26uNA==;
-Message-ID: <1309dea94c39c3eeaa09cb394abd8bf2d9b3d8af.camel@infradead.org>
-Subject: Re: [PATCH v6 04/51] x86/tsc: Restrict recalibrate_cpu_khz() export
- to p4-clockmod and powernow-k7
+	bh=xY4a+9HON7tEJc6vDtf+k5V2duOaIaUpGsGxjtTbvEs=; b=rBOnKBSIfNIiJWrONCIgb0BG7F
+	ylD/TZimAGdzgAEI5IcIkgHTwd38AKwrBjjDHK8RPKNMPRaT9gi1rOQtAp05FECP4gcBXxbNwzcSZ
+	9K27YZmoAcmeXzFZbU20BTS3wuazn5qthvl0pxWs4WDw/ylYlQ2xWJAbT4yeFH5q1J6dotOsWD9zv
+	Gw2YN5cSgII8IIvzUEpcFxm3DuG52OAn33VXMWJ3hERGDovRuCgWlAPGLJEZdsGJpRpaPO5YFDLS9
+	DRRdXewcmsvVBmteeZFBT4Cgu1Y+bg5IWGwaCxnEw4fvEWMHCdYIM/mH9CPBQhK2PprWvfr/4eohc
+	0wwE4hEA==;
+Message-ID: <58d4607c93e72094d0394c09c976142e7e179cb5.camel@infradead.org>
+Subject: Re: [PATCH v6 06/51] x86/sev: Don't override CPU frequency
+ calibration for SNP's Secure TSC
 From: David Woodhouse <dwmw2@infradead.org>
 To: seanjc@google.com
 Cc: kas@kernel.org, rick.p.edgecombe@intel.com, pbonzini@redhat.com, 
@@ -72,38 +72,56 @@ Cc: kas@kernel.org, rick.p.edgecombe@intel.com, pbonzini@redhat.com,
  alexey.makhalov@broadcom.com, 	jan.kiszka@siemens.com,
  dave.hansen@linux.intel.com, luto@kernel.org, 	peterz@infradead.org,
  jgross@suse.com, daniel.lezcano@kernel.org, tglx@kernel.org, 
-	jstultz@google.com, x86@kernel.org, linux-coco@lists.linux.dev, 
-	kvm@vger.kernel.org, linux-hyperv@vger.kernel.org, 
-	virtualization@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	xen-devel@lists.xenproject.org
-Date: Sat, 08 Aug 2026 15:39:26 +0100
-In-Reply-To: <20260806233609.212337-5-seanjc@google.com>
+	jstultz@google.com, nikunj@amd.com, thomas.lendacky@amd.com,
+ x86@kernel.org, 	linux-coco@lists.linux.dev, kvm@vger.kernel.org,
+ linux-hyperv@vger.kernel.org, 	virtualization@lists.linux.dev,
+ linux-kernel@vger.kernel.org, 	xen-devel@lists.xenproject.org
+Date: Sat, 08 Aug 2026 15:48:25 +0100
+In-Reply-To: <20260806233609.212337-7-seanjc@google.com>
 Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-+ggM4Pf5WdSfLKU8iKJa"
+	boundary="=-2WHVA9tRtaaaro8+TEvx"
 User-Agent: Evolution 3.60.3-0ubuntu1~ppa9~24.04 
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-16d1c6/1786199979-F7CCD77B-E05B8D16/0/0
+X-purgate-ID: tlsNG-33051d/1786200514-75A814E9-A0852725/0/0
 X-purgate-type: clean
-X-purgate-size: 9199
+X-purgate-size: 10036
 
 
---=-+ggM4Pf5WdSfLKU8iKJa
+--=-2WHVA9tRtaaaro8+TEvx
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 On Thu, 2026-08-06 at 16:35 -0700, Sean Christopherson wrote:
-> Export recalibrate_cpu_khz() only for its two users, p4-clockmod.ko and
-> powernow-k7.ko, to help document that recalibration is relevant only to
-> ancient CPUs.
+> Don't override the kernel's CPU frequency calibration routine when
+> registering SNP's Secure TSC calibration routine.  SNP (the architecture)
+> provides zero guarantees that the CPU runs at the same frequency as the
+> TSC.  The justification for clobbering the CPU routine was:
 >
-> For all intents and purposes, no functional change intended.
+>   Since the difference between CPU base and TSC frequency does not apply
+>   in this case, the same callback is being used.
 >
+> but that's simply not true.  E.g. if APERF/MPERF is exposed to the VM, th=
+en
+> the CPU frequency absolutely does matter.
+>
+> While relying on heuristics and/or the untrusted hypervisor to provide th=
+e
+> CPU frequency isn't ideal, it's at least not outright wrong.
+>
+> Fixes: 73bbf3b0fbba ("x86/tsc: Init the TSC for Secure TSC guests")
+> Cc: Nikunj A Dadhania <nikunj@amd.com>
+> Cc: Tom Lendacky <thomas.lendacky@amd.com>
+> Reviewed-by: Nikunj A Dadhania <nikunj@amd.com>
 > Signed-off-by: Sean Christopherson <seanjc@google.com>
 
 Reviewed-by: David Woodhouse <dwmw@amazon.co.uk>
 
---=-+ggM4Pf5WdSfLKU8iKJa
+I don't think I care about Sashiko's complaint. Even if we still clamp
+it in generic code, I think that's better than having those in the
+platform-specific code.
+
+--=-2WHVA9tRtaaaro8+TEvx
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Disposition: attachment; filename="smime.p7s"
 Content-Transfer-Encoding: base64
@@ -201,23 +219,23 @@ vFEOOmuaq7VamuLEPFQtJM4olmipOW6CzrLcFz6J/6yAecEG3P1ZDoy08eSHvM40MAUgpwGa/w6o
 MAkGA1UEBhMCVVMxFzAVBgNVBAoTDkRpZ2lDZXJ0LCBJbmMuMTowOAYDVQQDEzFEaWdpQ2VydCBB
 c3N1cmVkIEcyIFNNSU1FIFJTQTQwOTYgU0hBMzg0IDIwMjQgQ0ExAhADNSi2uzJskfEdOMo4hV0g
 MA0GCWCGSAFlAwQCAQUAoIIBezAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJ
-BTEPFw0yNjA4MDgxNDM5MjZaMC8GCSqGSIb3DQEJBDEiBCBBdQiKFmqXnTh3gQJ7xEHfosgUxTx5
-vAPUivWkWYWhQjCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGln
+BTEPFw0yNjA4MDgxNDQ4MjVaMC8GCSqGSIb3DQEJBDEiBCCQubn/jFA3eSBfXv3QWaqzwBRRhkIm
+IOwbMGknJhY/TjCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGln
 aUNlcnQsIEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFzc3VyZWQgRzIgU01JTUUgUlNBNDA5NiBT
 SEEzODQgMjAyNCBDQTECEAM1KLa7MmyR8R04yjiFXSAwgYcGCyqGSIb3DQEJEAILMXigdjBiMQsw
 CQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQsIEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFz
 c3VyZWQgRzIgU01JTUUgUlNBNDA5NiBTSEEzODQgMjAyNCBDQTECEAM1KLa7MmyR8R04yjiFXSAw
-DQYJKoZIhvcNAQEBBQAEggIAII6kynXVCZ++SWypAd2Klh0RLvXDGvSVylQVsLJInxyXi4zN214F
-69potnIz6FJoY3TtvszmTmZHsq7eX9jR1gYLV0QvI5JXeFOjqqG8B04Hge3GF6bJjPvDFVzdcokQ
-UI47DP+qc4C6Cuy+dkCvpIV0ZmEIgGfiJZyTN/Xfs++hwoAZrySxDcnxtxp6KovtQwB7xtCqqOj0
-KUEWgJaLNhdb9ThuW3bn8QfeRS9cAK8WbnR/QLUNv56WR8FJjY9Ko0MVojQxcK595bSAohvHrh1d
-fgnfRGA3WwlNDaE70oq4NpxQUkUwDry7dD+BaT3OPRtHV8x+lR968zhpEqvrMH+nRbVEW3mlfXoN
-+XHI7iKz+8zfzU6gFD+t7H2PZSFMufuNNQeMF7D1aR85XpJEkqbXOdbwH7cuEb1xIzDjAGxJPBf2
-pbuwIOh9gT14amUq0rVfvqbbCXkyWpV1mecBcgjEsM0kbVfPRC01IEY/qychxc5U08v0Ew0OTkXJ
-dtL1vVzGz9w8vneB1Ny6hXPFgktpfa0HwL3CQZof7Rvoh0xJ/LBG/xBicRuuS96EPhKfDaMuB3IA
-Fx42/Oe5ByXBhgdYcFcfG60qdllOIV5GB0tzjmqv4/9m9lKDoB7WVeFpenhuI3NMoftMcc2MsuYo
-iNGNcSU68Vx0IK8E98Y/kYoAAAAAAAA=
+DQYJKoZIhvcNAQEBBQAEggIAffxk/dqrhP4HMbv3HB1zGSpyStJ1EN+hO7+2zJd431JlQJq9VWW4
+3vGaA3GFtSotn2ZYoZAGBd54XyqIbzafd0AV3MzDJGn1GU1rbYPIHEjnuF0pysFI+gSl4aRiHrOI
+GubT6zS8vJxttEIOXf1QRzl5NK/OMXiAik6SSimZo+c0e/dRM9wYO77QSGx53XW5NVKPIB8u1r6H
+xNHW+CA5qDIRam5Q+xk0juc0RZxaCnMJbWdmB9rDk3iVY+dv5gv28S2CQtOhfXIZx2i6q6C38bKd
+jmxZ6TtEWOgvqpQkwT0uH+r/AaB88xVUK0ywNaj1lRSx861QTwNsyyC2HmexOL5ON2jVN8nm5tXL
+l7xDZ4vWogvwguJ1sp8pnW85snUD0ngU5ANvdIZoUqi6rvgDrLWSZgOuc6i/Ka0cPdd+mhp4wJYd
+IHSOY564LDqmU1t3MoBbWxchW/UvYUOM4uU4uvaIZwsK1gFG/LTA9CnOoyIrvCawEPaxuFZsVMxS
+hDl1qqxQt9XtJJBiFN8gfcR1oUStsWwFxKX4g2hESwRn+pY+5mLYPTbezB5ZyH05xXlbzYMVfpdA
+gtSY8/ATfqNHJGFtt6UqvfuSRe/8gMoc6WwJlQb5d8TsTO+Oz7V548z2X3fFOkVtfiaU0IQ0480b
+ebvE1iHCFgXC+N29aIfPgLEAAAAAAAA=
 
 
---=-+ggM4Pf5WdSfLKU8iKJa--
+--=-2WHVA9tRtaaaro8+TEvx--
 
