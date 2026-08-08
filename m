@@ -4,41 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1904C55174
-	for <xen-devel@archiver.kernel.org>; Sat,  8 Aug 2026 15:06:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1386752.1628438 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89B82C55174
+	for <xen-devel@archiver.kernel.org>; Sat,  8 Aug 2026 15:10:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1386759.1628447 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wsidG-0007R9-RW; Sat, 08 Aug 2026 15:06:42 +0000
+	id 1wsigY-0000dO-BE; Sat, 08 Aug 2026 15:10:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1386752.1628438; Sat, 08 Aug 2026 15:06:42 +0000
+Received: by outflank-mailman (output) from mailman id 1386759.1628447; Sat, 08 Aug 2026 15:10:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wsidG-0007R2-O8; Sat, 08 Aug 2026 15:06:42 +0000
-Received: by outflank-mailman (input) for mailman id 1386752;
- Sat, 08 Aug 2026 15:06:42 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+fdab5150087f7d84ce52+8385+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1wsidG-0007Qs-4W
- for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 15:06:42 +0000
+	id 1wsigY-0000dG-62; Sat, 08 Aug 2026 15:10:06 +0000
+Received: by outflank-mailman (input) for mailman id 1386759;
+ Sat, 08 Aug 2026 15:10:05 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wsigW-0000Md-Vs
+ for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 15:10:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wsidF-003ojO-Hl
- for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 17:06:41 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wsigW-00Cip4-8D
+ for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 17:10:04 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+fdab5150087f7d84ce52+8385+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a7745f0-e002-0a2a0a5209dd-0a2a4509ab24-6
- for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 17:06:40 +0200
+ id 6a774658-8faa-0a2a0a5109dd-0a2a45038e70-18
+ for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 17:10:03 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+fdab5150087f7d84ce52+8385+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a7745c4-be1a-0a2a45090019-5a9b3222ed76-3
- for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 17:05:40 +0200
+ id 6a774617-fae8-0a2a45030019-5a9b3222aae4-3
+ for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 17:07:03 +0200
 Received: from [54.239.6.187] (helo=u09cd745991455d.ant.amazon.com)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wsicA-00000006ZIm-2rcE; Sat, 08 Aug 2026 15:05:34 +0000
+ id 1wsidV-00000006ZMH-1xgd; Sat, 08 Aug 2026 15:06:57 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,15 +53,15 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:In-Reply-To:
 	Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
 	Content-ID:Content-Description:References;
-	bh=k+OamkYrv2Q/1Mc6CsMtTvPptfqZvc3HFc+EwxszCfc=; b=hlYPBpotHaB95aCGdAYb8rWrKG
-	KNI9+ZVShJ4Ay6zxwsOUpNJWjPvdGkEG9NwAn5zoMv/eGYSvR8AsXsfffEJnoQQKlLgd8Qnqa+OuU
-	mNBgEL6qPs8Sy5mGvzbmNMGWGa5UTCuk+md58+H01r5jM5AK1pWT0DaOtuNRDOHr73p7f1P0IZ0M+
-	o7WyiBkfKf5TLyq50c7Vf+G/sgGEej2IoI5tPmWAxAiqI0RBo5N6/54mpQLYJZRAVwIPTw6oNahu9
-	5zcqtF1+uci6tRLFYlZNAc25hy+I4btFu/um7mbNPifcJ2HzQC9bkx4VrQuxV6KOmh0d9aHxfdQv7
-	GcrajjZA==;
-Message-ID: <91c9ca8c1ab7f3facc12fd7a033d79254d4a181d.camel@infradead.org>
-Subject: Re: [PATCH v6 19/51] x86/kvmclock: Drop dead check on TSC being
- unstable during kvmclock_init()
+	bh=5/jyAha6D+U5zzU3W+cCpJ3j4Z4I6ySL2lxtV4bdMdQ=; b=YoP6gRksn/p59tVjUCAEqmph19
+	weP9rQo8AlW5WV2KQS0n5f4YHgiz2Pl+8aPdOGfzFhagy5y5Ssii1oWx+2ScxbgznxW9qpWhhA/0A
+	ajwu5drZGj+3XNpCbCT46fXxUbrOlkD2uJ83sZVbE1SzC7/Di1WJW6k7VapxZ+2HdMQAaQlznVIEV
+	+UQAWE1PdzjUoASLyv+2+mTRbnshLC2mqyc36EQJN0F4qjxxBpnPX2O1viAXFperEWI4HRTjeTjR6
+	xIeK1PAAwGivwf9G5AboB23MahXCwnXhFTAhLz7GC1wb64934IM9q5kZI67h4UKuWxz1s50LqEWAp
+	oaelbJ3g==;
+Message-ID: <908a4fd0ec4498c907decfd105e1662fb4ce19eb.camel@infradead.org>
+Subject: Re: [PATCH v6 24/51] x86/kvm: Get CPU base frequency from CPUID
+ when it's available
 From: David Woodhouse <dwmw2@infradead.org>
 To: seanjc@google.com
 Cc: kas@kernel.org, rick.p.edgecombe@intel.com, pbonzini@redhat.com, 
@@ -76,52 +74,37 @@ Cc: kas@kernel.org, rick.p.edgecombe@intel.com, pbonzini@redhat.com,
 	kvm@vger.kernel.org, linux-hyperv@vger.kernel.org, 
 	virtualization@lists.linux.dev, linux-kernel@vger.kernel.org, 
 	xen-devel@lists.xenproject.org
-Date: Sat, 08 Aug 2026 16:05:33 +0100
-In-Reply-To: <20260806233609.212337-20-seanjc@google.com>
+Date: Sat, 08 Aug 2026 16:06:56 +0100
+In-Reply-To: <20260806233609.212337-25-seanjc@google.com>
 Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-jL4BIGsiNKeXF0OKBwg7"
+	boundary="=-5qVG4UC9E8Q5nQrvV8Pq"
 User-Agent: Evolution 3.60.3-0ubuntu1~ppa9~24.04 
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-bad1c0/1786201540-FD86F034-C11D5310/0/0
-X-purgate-type: clean
-X-purgate-size: 10053
+X-purgate-ID: tlsNG-33051d/1786201623-6E2D04E9-01568F36/13/0
+X-purgate-type: clean.bounce
+X-purgate-size: 9427
 
 
---=-jL4BIGsiNKeXF0OKBwg7
+--=-5qVG4UC9E8Q5nQrvV8Pq
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 On Thu, 2026-08-06 at 16:35 -0700, Sean Christopherson wrote:
-> As pointed out by Sashiko[*], kvmclock_init() runs before __setup() and
-> thus before notsc_setup() or tsc_setup() can mark the TSC unstable.
-> kvmclock_init() also runs well before tsc_init(), and even before
-> tsc_early_init().  Simply delete the check, as it's been dead code since
-> it was introduced.
+> If CPUID.0x16 is present and valid, use the CPU frequency provided by
+> CPUID instead of assuming that the virtual CPU runs at the same
+> frequency as TSC and/or kvmclock.  Back before constant TSCs were a
+> thing, treating the TSC and CPU frequencies as one and the same was
+> somewhat reasonable, but now it's nonsensical, especially if the
+> hypervisor explicitly enumerates the CPU frequency.
 >
-> Note, odds are good the check_tsc_unstable() call was copied from Xen's
-> xen_time_init()+xen_tsc_safe_clocksource() logic (as so much of KVM's PV
-> code was).  However, xen_time_init() runs via x86_init.timers.timer_init(=
-),
-> which is invoke from x86_late_time_init(), and thus after params have bee=
-n
-> parsed.
->
-> Alternatively, kvmclock could register itself later on, or tsc_setup()
-> could be parsed as an early param.  Given that there's zero evidence ther=
-e
-> was any meaningful intent or need to actually check for an unstable TSC,
-> go with the simplest option.
->
-> Fixes: 7539b174aef4 ("x86: kvmguest: use TSC clocksource if invariant TSC=
- is exposed")
-> Link: https://lore.kernel.org/all/20260529181213.0B27A1F00893@smtp.kernel=
-.org [*]
 > Signed-off-by: Sean Christopherson <seanjc@google.com>
+
+I still don't think I care about Sashiko's complaint.
 
 Reviewed-by: David Woodhouse <dwmw@amazon.co.uk>
 
---=-jL4BIGsiNKeXF0OKBwg7
+--=-5qVG4UC9E8Q5nQrvV8Pq
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Disposition: attachment; filename="smime.p7s"
 Content-Transfer-Encoding: base64
@@ -219,23 +202,23 @@ vFEOOmuaq7VamuLEPFQtJM4olmipOW6CzrLcFz6J/6yAecEG3P1ZDoy08eSHvM40MAUgpwGa/w6o
 MAkGA1UEBhMCVVMxFzAVBgNVBAoTDkRpZ2lDZXJ0LCBJbmMuMTowOAYDVQQDEzFEaWdpQ2VydCBB
 c3N1cmVkIEcyIFNNSU1FIFJTQTQwOTYgU0hBMzg0IDIwMjQgQ0ExAhADNSi2uzJskfEdOMo4hV0g
 MA0GCWCGSAFlAwQCAQUAoIIBezAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJ
-BTEPFw0yNjA4MDgxNTA1MzNaMC8GCSqGSIb3DQEJBDEiBCBPg/28/nMAA7kD8KB7YWidZV5ltXud
-WC5ifsuEkfezqjCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGln
+BTEPFw0yNjA4MDgxNTA2NTZaMC8GCSqGSIb3DQEJBDEiBCAkPGP3r5uT4tS4OGDg5LaRCyG2yz/P
+/Lwudtzg4ZoebTCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGln
 aUNlcnQsIEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFzc3VyZWQgRzIgU01JTUUgUlNBNDA5NiBT
 SEEzODQgMjAyNCBDQTECEAM1KLa7MmyR8R04yjiFXSAwgYcGCyqGSIb3DQEJEAILMXigdjBiMQsw
 CQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQsIEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFz
 c3VyZWQgRzIgU01JTUUgUlNBNDA5NiBTSEEzODQgMjAyNCBDQTECEAM1KLa7MmyR8R04yjiFXSAw
-DQYJKoZIhvcNAQEBBQAEggIA0VHY3rUJsG/wBPTSPREp9yqeyqejmyR/heT+mqB8BWh225fhd04z
-ioB0PkU7vEaPfZcTY/8jq/iJWAkLqQrFJrkPoZOdQ0ahcn5xe8H+dPFK8qaZ93V2rKJ1wIl9/Uxi
-bsJs3B2GFpvGnsppMORG5oYNiqz1VZcT6o40tKq5Z5UyehSaMmb5ZBRdq4EMo7dgF2WpAlLllQsm
-aM5GYWUhFjUMD0MGY5HWWLwL08otRfdVO+QrMGgxV6Kq3I4VknD5cVHj9AWbWFWoQMfurpoL53Ua
-ggqemoRyZCctjEMwcGa0mldjBFzt7O44GEqcrQj/sulmDwZT4r7vsB2aR+RdgeMqODtpUSFrfCKN
-y1FGIIY4ya0vyUZ7wnNj9Om5iTKEa/mCTvWUEzA/blotqYzgXQTEPekqB7y/fDgzvFW/Y3AnU+v5
-srizsBxsxt9SBKLre1D3DFheyAM0hqwMONtqf+udkfLTYx46gveIE9diCSUlNWXMb8AQb8e/4OU1
-81mzeXpMe4DHVsd0veZZ+/DQNa6gnh7qnDzvWln7ZE4OPUDxIt6/ZPWFoUUDVHwdAl0fQAgM5E3Y
-v+BY9BVoViYVBRC69H0YKScpNOOF00/QgKLRpGafit9TWGdrVcJ5YS9V3YXkiahKAAyi4aNV4Eqb
-ArTRJFANS1EAwPtGmF7Q3zUAAAAAAAA=
+DQYJKoZIhvcNAQEBBQAEggIAuRtAu48d3cDEH8Yyruawqxjo+2bBjXqiN17kaxj+u6IcLAW0Nrdo
+nzxRSU7g63188lVFEYlyVH1mR8e/jnhuLNbISNodetQLsVn48QsKDnvjTf03Qg8EfWMW2Q9XPflg
+ujjMSLOjY+oy5TCeXl1MiYwiYhOnWAMOikQybdXiN4yKyu8d7Gkydo8xr8ru8/a0TF2KKhfu3I1d
+2xkI268NxH6+Cv9y5+bGCHzpe9uLgPsEbl59gRqxfxGFniNgDb1s9nmrA0sHNkZ8USM/MDh/KsrM
+qWJWvxLIurJ+Xn7Y9irqlMbA+JP7v6yMYDH2QAHMvxVpw4iaIo0L7UCAFb37/HI6YK7Trdk1GJgF
+HAshq0ZDzPYkkNFl3HBbQldIf4Jy3Eu8QiizlbiiDOvp4HqKCgS0bnBtcjHtx86Ord4r/mzm04qY
+8HDk7icEUoMyxTMJlntkJCEtLvBfQ0SkEACFQmxcXDqaI/EqUzt4YuNYdo7Tp2GAeCyYIDdDMI4H
+ELDUg1Q+jdabA45cKulihQLMEC/5aOkrJGZaPeSwx1uueapFNBUUHdSwIMeXuUdrjVm9IcLgum3c
+YfU7Cd9T4E0dqkggIiLcvkwBSeKK4Ev3lDN6cNSSNzRRQbWp8aMqd6eIh5r9zVWMgsJwnB0UEjBs
+snTppZI8KQqD0ALD+ClLQUYAAAAAAAA=
 
 
---=-jL4BIGsiNKeXF0OKBwg7--
+--=-5qVG4UC9E8Q5nQrvV8Pq--
 
