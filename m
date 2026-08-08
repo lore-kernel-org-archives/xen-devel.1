@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39D29C5AC67
-	for <xen-devel@archiver.kernel.org>; Sat,  8 Aug 2026 15:03:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1386732.1628420 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34924C55174
+	for <xen-devel@archiver.kernel.org>; Sat,  8 Aug 2026 15:06:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1386743.1628430 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wsiZb-0006B6-37; Sat, 08 Aug 2026 15:02:55 +0000
+	id 1wsico-0006zW-LT; Sat, 08 Aug 2026 15:06:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1386732.1628420; Sat, 08 Aug 2026 15:02:55 +0000
+Received: by outflank-mailman (output) from mailman id 1386743.1628430; Sat, 08 Aug 2026 15:06:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wsiZb-0006Az-0D; Sat, 08 Aug 2026 15:02:55 +0000
-Received: by outflank-mailman (input) for mailman id 1386732;
- Sat, 08 Aug 2026 15:02:53 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wsiZZ-0006Ap-CG
- for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 15:02:53 +0000
+	id 1wsico-0006zP-Gc; Sat, 08 Aug 2026 15:06:14 +0000
+Received: by outflank-mailman (input) for mailman id 1386743;
+ Sat, 08 Aug 2026 15:06:13 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wsicn-0006zJ-9o
+ for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 15:06:13 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wsiZY-00CiCT-An
- for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 17:02:52 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wsicm-001ALT-Mx
+ for xen-devel@lists.xenproject.org; Sat, 08 Aug 2026 17:06:12 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+fdab5150087f7d84ce52+8385+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a7744fd-bab6-0a2a0a5309dd-0a2a4505913a-22
- for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 17:02:51 +0200
+ id 6a774581-bab6-0a2a0a5309dd-0a2a450ac5a4-40
+ for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 17:06:12 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+fdab5150087f7d84ce52+8385+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a774467-4cb1-0a2a45050019-5a9b3222b638-3
- for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 16:59:51 +0200
+ id 6a77452f-f2d2-0a2a450a0019-5a9b3222c3aa-3
+ for <xen-devel@lists.xenproject.org>; Sat, 08 Aug 2026 17:03:12 +0200
 Received: from [54.239.6.187] (helo=u09cd745991455d.ant.amazon.com)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wsiWX-00000006YkS-3zRH; Sat, 08 Aug 2026 14:59:46 +0000
+ id 1wsiZm-00000006Z4O-0oAc; Sat, 08 Aug 2026 15:03:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,15 +53,15 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:In-Reply-To:
 	Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
 	Content-ID:Content-Description:References;
-	bh=cjqV/irGmZd8w6lcxaSK+6WNSve4cl+1LpivEBexyMQ=; b=hJpYeLKwSuZ8Qt4awuG8YSOdQo
-	xVSJPwo++/8O48Hidkh6qkd4vfwndvt5tv3FsleZzl/6+hsZ9miZQNetemQqNScue7dAL0AePNPk2
-	G5b1VSuOTXNHIdHIB9DCctSB5NyYM97seEvg1RZ0Z2DTElK97RQXOhYfeIxxa+oAxBSk2zHLkSq56
-	1iN0lU8zLe/+6oKFdHzMMO58Of+Nfcy2Ek466haCQ97dxvgd6ch6EwMBfCi5JIUlVt88T1follGIr
-	si/DBu0pJpIh10OdJlEfXZzm9YBO9v7aQpUwIm0IEA6B7lY05B3UmAL1QhYnkvSncyNu2BFhf5AjY
-	JL50e9mw==;
-Message-ID: <d0ee3cf97854b904323db3799e05117d065a6ba0.camel@infradead.org>
-Subject: Re: [PATCH v6 13/51] x86/acrn: Mark TSC frequency as known when
- using ACRN for calibration
+	bh=Wa7Hzq2JSx29IaNuU/muzEjzSoG8OuGbp+agE00B49Q=; b=rmnS9mZpeKjdGdBlUegOL51BkB
+	pKn5oJgOcQodQGcg9eGzYS2wFJKM/KZYTLkRAEyutqxfbi+pYDyPRfMgJhLYKI+EuWlRgRoRyYfNc
+	gB9wfCiu9XDZZY5sijChUtaNjzq/Hizp3Xi21sQmf8gP5yzKSs1ZrH+tu0MvunYWQFsBl61TOp7wa
+	1NMeK9CQnYQPVKHz+rLmD0X0f42m9xhYRZt6G1ylOv/6rQBcCOCAiCVJxtjJdOOJjA3rlyb8iempC
+	QZ+0RuqumEp7/7WkG25rcVsZk2rQU1EaGpdE73GctG0VJeeEsQLb+QQ3YykGJVWsaRKaTqcKcQBfY
+	6x4NhTqA==;
+Message-ID: <b3bdd75b8f22b5c10f834c09e0231b9c10ded250.camel@infradead.org>
+Subject: Re: [PATCH v6 17/51] x86/tsc: Fold native_calibrate_cpu() into
+ recalibrate_cpu_khz()
 From: David Woodhouse <dwmw2@infradead.org>
 To: seanjc@google.com
 Cc: kas@kernel.org, rick.p.edgecombe@intel.com, pbonzini@redhat.com, 
@@ -74,38 +74,37 @@ Cc: kas@kernel.org, rick.p.edgecombe@intel.com, pbonzini@redhat.com,
 	kvm@vger.kernel.org, linux-hyperv@vger.kernel.org, 
 	virtualization@lists.linux.dev, linux-kernel@vger.kernel.org, 
 	xen-devel@lists.xenproject.org
-Date: Sat, 08 Aug 2026 15:59:44 +0100
-In-Reply-To: <20260806233609.212337-14-seanjc@google.com>
+Date: Sat, 08 Aug 2026 16:03:04 +0100
+In-Reply-To: <20260806233609.212337-18-seanjc@google.com>
 Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-swfj4Wc+2w/NxQrUPIhf"
+	boundary="=-3h8ypXMqBwC7mZwWnyZO"
 User-Agent: Evolution 3.60.3-0ubuntu1~ppa9~24.04 
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-c201ff/1786201191-F44A42A1-38606B23/13/0
+X-purgate-ID: tlsNG-4011c0/1786201392-591C5CFC-C4802DC2/13/0
 X-purgate-type: clean.bounce
-X-purgate-size: 9335
+X-purgate-size: 9297
 
 
---=-swfj4Wc+2w/NxQrUPIhf
+--=-3h8ypXMqBwC7mZwWnyZO
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 On Thu, 2026-08-06 at 16:35 -0700, Sean Christopherson wrote:
-> Mark the TSC frequency as known when using ACRN's PV CPUID information.
-> Per commit 81a71f51b89e ("x86/acrn: Set up timekeeping") and common sense=
-,
-> the TSC freq is explicitly provided by the hypervisor.
+> Fold the guts of native_calibrate_cpu() into its sole remaining caller,
+> recalibrate_cpu_khz() to eliminate the extra SMP=3Dn #ifdef, and so that =
+it's
+> more obvious that directly invoking the early vs. late calibration routin=
+es
+> in determine_cpu_tsc_frequencies() is intentional.
+>
+> No functional change intended.
 >
 > Signed-off-by: Sean Christopherson <seanjc@google.com>
 
-Huh... does this literally get reverted completely in the very *next*
-patch in the series? Kind of weird, but I guess in some ways it makes
-sense...
-
-
 Reviewed-by: David Woodhouse <dwmw@amazon.co.uk>
 
---=-swfj4Wc+2w/NxQrUPIhf
+--=-3h8ypXMqBwC7mZwWnyZO
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Disposition: attachment; filename="smime.p7s"
 Content-Transfer-Encoding: base64
@@ -203,23 +202,23 @@ vFEOOmuaq7VamuLEPFQtJM4olmipOW6CzrLcFz6J/6yAecEG3P1ZDoy08eSHvM40MAUgpwGa/w6o
 MAkGA1UEBhMCVVMxFzAVBgNVBAoTDkRpZ2lDZXJ0LCBJbmMuMTowOAYDVQQDEzFEaWdpQ2VydCBB
 c3N1cmVkIEcyIFNNSU1FIFJTQTQwOTYgU0hBMzg0IDIwMjQgQ0ExAhADNSi2uzJskfEdOMo4hV0g
 MA0GCWCGSAFlAwQCAQUAoIIBezAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJ
-BTEPFw0yNjA4MDgxNDU5NDRaMC8GCSqGSIb3DQEJBDEiBCCLHDsVEr47QLniCvl1BHh7jULcWyP1
-JFbCuD+qwvoPNzCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGln
+BTEPFw0yNjA4MDgxNTAzMDRaMC8GCSqGSIb3DQEJBDEiBCDwb5m5oE9xtGsjsdRmZNgxK62hdyL4
+WC3aSn2DOLO7iDCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGln
 aUNlcnQsIEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFzc3VyZWQgRzIgU01JTUUgUlNBNDA5NiBT
 SEEzODQgMjAyNCBDQTECEAM1KLa7MmyR8R04yjiFXSAwgYcGCyqGSIb3DQEJEAILMXigdjBiMQsw
 CQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQsIEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFz
 c3VyZWQgRzIgU01JTUUgUlNBNDA5NiBTSEEzODQgMjAyNCBDQTECEAM1KLa7MmyR8R04yjiFXSAw
-DQYJKoZIhvcNAQEBBQAEggIAR8KWcORVTZQasIgxPzemsBTyXMobtaBuoDyuKdNegOlt6B+9r/34
-lQPmQzpYXE2c+M0nMbA1C0t8XTSPGRQ6pbu3enjsm6Etlto/EFiyfkZDZok4WFauDbalheV1+gRj
-p8HmX8Nfp5sv5Ou7dwCk7Lh8mJcuH+4z4jyIKyNKJOVMuQVG26Pc0r6eoQP1c49xGbSzuJ4ntzl8
-ZSwSUQKulQtOhOYo7qtctV2sdsb9c4cuhUGZLtIJy2nO7qflZKDQ7+9HEZR5t8KesfGpykHuHweU
-kYqIbShxhI14dCTVeVey+ijIatUBBghH0irBc50ML5mxiH0z0T4tsFIITE5Pocpd7oNa7KmKEgVs
-RjDfd4sggGjWXRM33apHgvLK4Y1PjlhqnkgaIas3Q4GrCyOiuMsI8yAoRIHmyS3jN3d4UqULiYLh
-6RRnFiazWuzuEMwjo9qdJabZ5A/4FCcFFsborS0n8Tqlo6/54ohHwSMmDIp4ZctOH+SofAokgqZM
-Usz5v+HDUnM5pnF89Q3YiWIcAj45mVI8fhxqsfcsv0VLQ82ljqkOa0X7nh1CIOWcsoHtI9VlRbZt
-pp45qlJKWW2wO706FStcVF+doACf1LiRgmI8KuOZdZhXDV1lFfdkBq+8ENFdyUTh87arS/jLshbP
-L9KEvoOBTrQ3mDfQa9VMYCoAAAAAAAA=
+DQYJKoZIhvcNAQEBBQAEggIACx2XiWqoOsyRHJvHYpRHx2KK8aqyfD7+x4R0BLQ0PVFMU3qilduU
+RfgooqwW+L0+Gv6dMwsC1wlZipXcALB+wp+0tK72qgMitY4A/SYQa02Ycy80m/CldZhFh4ntn6K3
+EzQXz2sg95KiE+0JgNYZJXY+92ur0y8i/3qRPcZWZW7fwiASskS3RX5+o9Pz0u8HeaA8MMHe647A
+wpw1qBKUtlBrUidL7AMOG9kfbBC3g2bOrKdGgmPT59OKny0rnTYjXrSEmlvOBz7YDidbEGSwOTHT
+EUfFzCME58zSPxiGE86zuIfIrs+vOnKqjwbQWZO65IFJYqiAGiqoUWkTOxdS9l8rlfah72m+Y/Lu
+O+XDzCujaGwZ4XpTf5dhM1sojJNDx+syG1ColZz6SkmFroS8UPSGna7qMMtNWyXxU9okHTVcVQgL
+uLdFMNY2+rn9ImFgfsG8eC4c2wDRuBDmvVbSXBsji4kmKfDlnpw43G6dCpuLYv8rbLz5Cct6PcAB
+S005/n00xCdXREcIxwzgkWKhUBw7dWhlvbGRq6B0qxbRZtlqBAuZ+5H2lzppx0tVgUEUw41qKEXy
+tBQMmFNP7HsDhb7B9l8kn96VPVC+xTzU+c2hA9icEM3N/G5nCuTPcLP/kB2rxA31Zt30G3ii9rAJ
+eqD95h+YeobJ1DGZJK81JbAAAAAAAAA=
 
 
---=-swfj4Wc+2w/NxQrUPIhf--
+--=-3h8ypXMqBwC7mZwWnyZO--
 
