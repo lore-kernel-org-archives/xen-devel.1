@@ -4,46 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C1D8C5B567
-	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2026 18:39:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1387760.1629014 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10D5BC5B567
+	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2026 18:55:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1387795.1629023 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtUu7-0004ZL-JX; Mon, 10 Aug 2026 18:39:19 +0000
+	id 1wtV8m-0008Lm-W6; Mon, 10 Aug 2026 18:54:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1387760.1629014; Mon, 10 Aug 2026 18:39:19 +0000
+Received: by outflank-mailman (output) from mailman id 1387795.1629023; Mon, 10 Aug 2026 18:54:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtUu7-0004ZE-GA; Mon, 10 Aug 2026 18:39:19 +0000
-Received: by outflank-mailman (input) for mailman id 1387760;
- Mon, 10 Aug 2026 18:39:17 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Mykola_Kvach@epam.com>) id 1wtUu5-0004Wm-Ay
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 18:39:17 +0000
+	id 1wtV8m-0008Lf-Sp; Mon, 10 Aug 2026 18:54:28 +0000
+Received: by outflank-mailman (input) for mailman id 1387795;
+ Mon, 10 Aug 2026 18:54:28 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <BATV+5396a5851e3b06deef68+8387+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1wtV8j-0008Jz-QT
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 18:54:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wtUu4-009VLW-Ne
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 20:39:16 +0200
+ id 1wtV8i-006mZJ-45; Mon, 10 Aug 2026 20:54:25 +0200
 Received: from [10.42.69.4] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Mykola_Kvach@epam.com>)
- id 6a7a1ab0-e002-0a2a0a5209dd-0a2a4504df76-26
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 20:39:16 +0200
-Received: from [52.101.84.111]
- (helo=DB3PR0202CU003.outbound.protection.outlook.com)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <BATV+5396a5851e3b06deef68+8387+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a7a1e2f-2eae-0a2a0a5409dd-0a2a4504ce24-42
+ for <multiple-recipients>; Mon, 10 Aug 2026 20:54:22 +0200
+Received: from [90.155.50.34] (helo=casper.infradead.org)
  by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Mykola_Kvach@epam.com>)
- id 6a7a1ad4-b57f-0a2a45040019-3465546ff7a9-3
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 20:39:16 +0200
-Received: from AS8PR03MB9746.eurprd03.prod.outlook.com (2603:10a6:20b:61d::18)
- by GVXPR03MB11092.eurprd03.prod.outlook.com (2603:10a6:150:2a9::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Mon, 10 Aug
- 2026 18:39:12 +0000
-Received: from AS8PR03MB9746.eurprd03.prod.outlook.com
- ([fe80::cf11:309:1384:58f7]) by AS8PR03MB9746.eurprd03.prod.outlook.com
- ([fe80::cf11:309:1384:58f7%6]) with mapi id 15.21.0292.024; Mon, 10 Aug 2026
- 18:39:12 +0000
+ (envelope-from
+ <BATV+5396a5851e3b06deef68+8387+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a7a1e5e-b57f-0a2a45040019-5a9b3222d564-3
+ for <multiple-recipients>; Mon, 10 Aug 2026 20:54:22 +0200
+Received: from [2001:8b0:10b:5:9f69:702f:982f:3898]
+ (helo=u09cd745991455d.ant.amazon.com)
+ by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+ id 1wtUc3-0000000HG3k-3AYW; Mon, 10 Aug 2026 18:20:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,289 +50,221 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DkkjgM1zCRqu84KKXeQQrMnc5lhcYnlJ4p3z1131szpuOdKEYi6rkveNK+IlHfSA0hUky+5knXpPgqYVoR292E4YBpcyxyhnb2L8R4zfdvgh2oSKzkN/0XuQ/ir2A/uBXT1h3nDQAMvV0wtOMXAimHssGbQKUPjfMijHho50pYl5zIi7bdFlbRr+OdciNxTuyv4NQwla4FIC6adSJWBtK1gA7QO7ElhfAw6secHtQYMMNpQa+KBZYSQEgWQyFAxzkkt5sN8cza07JxyQ6HU7Iyr1X99fD5jYckPmo8j6d79RkjwOwwsjQj2vfGhRloNn538gdIzDaut6FAOsvPWKww==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rDjLrGD/FUY/UDHLWYqh7U+MOkaV3PZOYHp110xkPAI=;
- b=BpJCzoyNePC0uVUWau9rDGPqsTamiKrVEz5GCFr7hj7irCF3sAc4M0DhGORRK2OElJP4h0LrPaicmLZq2GfFGtXpTO+dAFeQX955eZciAAufl6coL/oiYOA4wfNZmi3kuyQinJGi2D3eZcdoEtb77a/FbrsqjdgXVYtzIfEophgrVDIGk25axuwtCvKRAtGWb2XpToK41woC8ieq/5fl9vsPvUgWfJ4/5ehzrhwWqwYPGc1LRd5RJLo0G6kUxVHpmGp3lRtoUWewEoIPa0XIgtLWormcygeKXMN8gFRdtBqhFopCDyxc1uMWYjW9EctV00Bl/84kdX7FSSJ/v9Xlew==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rDjLrGD/FUY/UDHLWYqh7U+MOkaV3PZOYHp110xkPAI=;
- b=HW+3Ug3RRUhFXjtQp14lc3aASZPPbFsXMhkdvPWZRphZL6sHg4aoSGmqFGz0ek5R4tFLXPcMQpjLfOUah8MBok88SMHaMtGPfVxxRSLdo0eNbXTCaeL7g8W3tdHOB2+4imR6kI+8pPZaVzbEZgJ0E22Hjm1lQAQHGkY+fky3kEAtJjOLIOcDwIQrzn3UrHu3E4hv9qa+SXpZipIBdP1Rf2fGOb+yIAQi0dIJErIMdIsCjBS/6y4xNc8whW1ZLv4n2meEaFS5nJVfT+/AvkKiOUN7LcdEutPt3uzPCEpWJ5h8D4CWvz6gVU4XYUlXiGeTjoNNbATrarIH8UTqW4S7Xw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-From: Mykola Kvach <mykola_kvach@epam.com>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Jens Wiklander <jenswi@kernel.org>
-Subject: [PATCH v2 3/3] xen/arm: handle irq_set_type() failures
-Date: Mon, 10 Aug 2026 21:38:47 +0300
-Message-ID: <d4087afce93cd4bb1779507393ac74c5dd5baea3.1786385827.git.mykola_kvach@epam.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1786385827.git.mykola_kvach@epam.com>
-References: <cover.1786385827.git.mykola_kvach@epam.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: WA2P291CA0003.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1e::7) To AS8PR03MB9746.eurprd03.prod.outlook.com
- (2603:10a6:20b:61d::18)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="MIME-Version:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
+	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=cwmsDUvt8rJ15tvz82X30tj2Exxw0lajDzdZAkLIrAo=; b=eB4pQRc/oCxq/k9xhP6fE1X/5+
+	cgCU26qjDrGKMsdjHFbFx8Y05WqwAnQ9IDdjtT/FFNkzLU1iFmsTDvykvNtHt5nivfyCDCuwbBGX5
+	ru3glCtl65dgFhVpwyB4+LB5CZ8DeCzMrmbnDfivx5Har0wm5brKX039nvd0M65AXty7HLA+wGelj
+	njwFnoI1i3iqlb21T3XV7n6NkiZkE5eggnnUzaji7ktHivc2jgXp4ke3nl3GqkvSeQLivJRUDTtxy
+	0wwUmMFlbVPF3p5gBYCiSKJOeCn8wXbRTpgTfwYnuKtOr3GFGFQ96XSZaV9/DrWwUVK/EZVGKjfkx
+	s7qeRcTA==;
+Message-ID: <acd9b32617f75d188c370a464a922af0d650d4f5.camel@infradead.org>
+Subject: Re: [PATCH v7 17/36] KVM: x86: Allow KVM master clock mode when
+ TSCs are offset from each other
+From: David Woodhouse <dwmw2@infradead.org>
+To: Sean Christopherson <seanjc@google.com>
+Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>, Thomas Gleixner <tglx@kernel.org>,
+ Ingo Molnar <mingo@redhat.com>,  Borislav Petkov	 <bp@alien8.de>, Dave
+ Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin"	
+ <hpa@zytor.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, Juergen Gross	
+ <jgross@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Paul
+ Durrant	 <paul@xen.org>, Jonathan Cameron <jic23@kernel.org>, Sascha
+ Bischoff	 <Sascha.Bischoff@arm.com>, Marc Zyngier <maz@kernel.org>, Joey
+ Gouly	 <joey.gouly@arm.com>, Jack Allister <jalliste@amazon.com>, Dongli
+ Zhang	 <dongli.zhang@oracle.com>, joe.jin@oracle.com, kvm@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	xen-devel@lists.xenproject.org, linux-kselftest@vger.kernel.org
+Date: Mon, 10 Aug 2026 19:20:05 +0100
+In-Reply-To: <anoOz2rZ02KFk1l-@google.com>
+References: <20260728144954.355376-1-dwmw2@infradead.org>
+	 <20260728144954.355376-18-dwmw2@infradead.org>
+	 <anoOz2rZ02KFk1l-@google.com>
+Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
+	boundary="=-7RnCnZ41sxGpJ6+i13Fq"
+User-Agent: Evolution 3.60.3-0ubuntu1~ppa9~24.04 
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR03MB9746:EE_|GVXPR03MB11092:EE_
-X-MS-Office365-Filtering-Correlation-Id: 47e88541-b80d-49b4-e333-08def70eabd7
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|7416014|366016|23010399003|18002099003|22082099003|11063799006|56012099006|6133799003|10067099003;
-X-Microsoft-Antispam-Message-Info:
-	uJMqOoXTb+FbCoY2yiaYePu95xHg/G0UW74CG6WUc2aW7rJuAKw97DeCbap2Zp3GkQK0Wxey1v1o415gRRHs1vshQOSsZy7K1LzdFx8r6GKoV7dEBLDGtiiZEA1g4r3xqbEdcOsMzlB9H1fNdidXC6dnZswPJQWGwDF/pcHr4ISAs9RUuWAUVBXSvENa6i7TwggttRj+ET0sKsWqONhlb2xFR/rkwOj/1GDwvQK3Km6CLpn64SDgYcvbbJpe45SYs/o8K1csG7CEobeCDW/vtCoalZ6WUm8DW61D3G716MaJ4E77lAOzjUgTriG+PiIgn45zSjXWY1wva5fsN2G0XZzkJj3aA3L4GgCkc9C+JELagDRlw6N2r2cNERZSX0qYUrQpjSO8Qm/1EFb04yYeEC2LM3uywDHHX1PBpm6XO2U/1j1QKj+y4TRrYlzw6RK/7TGrv1a4C382BstfTyhl58gz8rglZDuA0hyLsySmT2/EPzCk6wcA2SzG9Fk7wlhUZ6iFmbEsOxYpXaBEG389IJRyyf7hU7McjCfZAY5H8ZsYz/ABil9/C9959vWWQGw34543oje5TxPXl8wXpnO1uCs5FBte+EL4vWDt6L2axi8Vn0SQFyIOxIUSPWxLolDblYqUonJ4vpB8yxmGr7CsxGbxh9VIzW9jOjctb6MPWLI=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9746.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(366016)(23010399003)(18002099003)(22082099003)(11063799006)(56012099006)(6133799003)(10067099003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?l/FuCPR1KArHyj4uVex0HQRtYlHdgo5hmiefPb3gKIEPc2QS0QW+puYjsSkB?=
- =?us-ascii?Q?ZfAcwElNDPaW05kTb3TpVFWbFR8BAWGut/1UZPen6SuQPOy46W8ZPLbqLWFb?=
- =?us-ascii?Q?SncFTf6SdsxpcsqVliPIINfdCrIEMyY955wPdU/84y6U4ohwiNT7VFXQOU+1?=
- =?us-ascii?Q?sK9YS0KhxiBvoK4ROdet2u3PxyyrNitL9OEAJfVHffqTrI4GHYwPZfiHDJ6g?=
- =?us-ascii?Q?0aweKGxq988xOdbXWGRDF2ySQkLxavG1h9N7sxKygRW3vUU60OEWcp6M2o7C?=
- =?us-ascii?Q?JyYoWXb+iWUqj/l02if97He2c2zF7/qRcQphaW8fI/5DWCYXo8zV92OncaSy?=
- =?us-ascii?Q?qjLh40iwPbwOhPBuD6HtsEt/XL5CtjZ0ac54nstsUL1AsMSKwH5mg/lLwj8x?=
- =?us-ascii?Q?iJ9pUKgBgJdokHbtLV13CaRmJVzwxBuDAqiDULgNu/Rqel/mPwNKwNNv1VX5?=
- =?us-ascii?Q?zgw/4ACyZVEUF2JLE/TSVuShVFz3jpINMOJehVkM9OXLlxySjfWF5QtJb9y/?=
- =?us-ascii?Q?WCLx7tIAQbtSyR6aLugVqSejpq2t4pB9B12SsWfoQ4/WBtEnA+Ja4Y2qH+g9?=
- =?us-ascii?Q?uhvYdw7V6pGZYinGBq91Br2h5eXNQ30S43fNbwYxAAXYMsFB79oCuq5YxSYy?=
- =?us-ascii?Q?Mrux61rvSd82V1tdp+1CHkk2YroByItxBfU3bHGOkT8pLsuG2edmw31dxrzl?=
- =?us-ascii?Q?00Th7WwRcbFYsAUtt6YZsAJMzqiFegjj1Va/Rq5+htgc2RIheJIApwf9o7mI?=
- =?us-ascii?Q?S7laDTrgaDOLo3ZS/CTaSWJTchReAE8vhiJHmYFlR4GzHuKAIKgXywY4c1Tb?=
- =?us-ascii?Q?VgWTDxBLJNrhCSPqkOznEf6OAqlBC0qvdAWxKTZ0BBMSP+iGImbazhXgA4Gx?=
- =?us-ascii?Q?p5Zm7bkzPlERzdRf1qkruFb/RCYlTNGWRwqynSKKEKNRva802mvh3BtCHqRC?=
- =?us-ascii?Q?xId/nUhJeWXR5L8NDqQA7cWSaXZ4b1+d30C3byAHlu82+6l8RR2pVmp4TvSp?=
- =?us-ascii?Q?q9c9BXJFPi3GsZhsBlBlPZzd9i7ZHeJBE6DE75nGcMgRunXQW7EPak7cd09P?=
- =?us-ascii?Q?F/tZXdFzMuUiUHfCrARJbkTm0ugAkYdaSvZbmsQq5OLwOangndfavezcrN7v?=
- =?us-ascii?Q?mAzzaGH1ABD9wO52/nSkUhvddHWFK2jmouCU5+NCnSeNpInk49+R/g6A8rDN?=
- =?us-ascii?Q?KShV7qh2b93k+4D6PD78mT0LYsbxTeUaAZCb4D97rdRsVE5eplhGkQRJhm96?=
- =?us-ascii?Q?K6Tw61+pafnqLs9ubEh9t5ZcepqbGWOWs44VzzTyWkyIrwz2OAdxFbVFJnz8?=
- =?us-ascii?Q?ktNJPrCYR8kRV2zotFJbYqMN0nEsQEtXLdtA/rWg554EkuefUOMpnP6W9b9F?=
- =?us-ascii?Q?grxsb/788k7SGgKPmr6YDEf1HQdZyUDQRKIPp7u4cam63Vs9A0ASxQP9+dzQ?=
- =?us-ascii?Q?rdZCJGzaJyDDD41tHKBh/omb/hv0A3fVrX1lBXb65mVj5jEVgtEXbyYs/ilj?=
- =?us-ascii?Q?upsfXqfVUylqfhBBvjPqlF0yGNeL4FAQngiVZBYtNGGij8C9/oIsIYVgQPL7?=
- =?us-ascii?Q?ap/1O7royDgzg/K4aUO4KYHDtAlClhIlzwGG/TI+s2GKVouHp8FcbT1IA+YL?=
- =?us-ascii?Q?Setjv7t4pwTzzg44k/0nrDWNj7JMj95q9pf++fNMl4YpI/k0p0TcrYzaX3OT?=
- =?us-ascii?Q?TUpXase6qo3CYC/LipVPUYHCr+nvYpRjQyw9ikQoWYvKsZEG7UYhNPIVPq6F?=
- =?us-ascii?Q?tej3n00jrQ=3D=3D?=
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 47e88541-b80d-49b4-e333-08def70eabd7
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR03MB9746.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Aug 2026 18:39:11.9409
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cP677HKJHG0aKoTZVTXUorLx2TcQ5bgwgAIZKBZBF5KZeFUk8saS1KugqqeO/mvbcLZP89NaYokt5OgWHFNvQg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR03MB11092
-X-purgate-ID: tlsNG-ebf023/1786387156-502E4B50-C89FB731/0/0
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-ebf023/1786388062-583C0B50-F1049238/0/0
 X-purgate-type: clean
-X-purgate-size: 7395
+X-purgate-size: 10684
 
-Several Arm firmware initialization paths discard irq_set_type()'s return
-value, violating MISRA C Rule 17.7. If trigger configuration fails,
-initialization continues with an IRQ that was not configured as requested.
 
-Check the return value in the GTDT, MADT, SPCR, and FF-A paths. Store
-timer INTIDs only after successful trigger configuration, make GTDT
-parsing failure fatal, and stop UART or notification setup when trigger
-configuration fails.
+--=-7RnCnZ41sxGpJ6+i13Fq
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
----
-Changes in v2:
-- new patch.
----
- xen/arch/arm/gic-v2.c        |  8 ++++++--
- xen/arch/arm/gic-v3.c        |  8 ++++++--
- xen/arch/arm/tee/ffa_notif.c | 11 ++++++++++-
- xen/arch/arm/time.c          | 18 ++++++++++++++----
- xen/drivers/char/ns16550.c   |  5 ++++-
- xen/drivers/char/pl011.c     |  4 +++-
- 6 files changed, 43 insertions(+), 11 deletions(-)
+On Mon, 2026-08-10 at 10:47 -0700, Sean Christopherson wrote:
+> =C2=A0
+> > But when the vCPUs merely have a different TSC *offset*, that's not a
+> > problem. The offset is applied to that vCPU's kvmclock->tsc_timestamp
+> > field, and it all comes out in the wash.
+>=20
+> It's not though?=C2=A0 The value stored in kvmclock->tsc_timestamp is per=
+-VM, not
+> per-vCPU, when using the master clock.=C2=A0 It's a little easier to see =
+once the
+> master clock TSC isn't shoved into host_tsc:
+>=20
+> 	do {
+> 		seq =3D read_seqcount_begin(&ka->pvclock_sc);
+> 		use_master_clock =3D ka->use_master_clock;
+> 		if (!use_master_clock)
+> 			continue;
+>=20
+> 		if (!kvm_get_time_and_clockread(&kernel_ns, &host_tsc)) {
+> 			use_master_clock =3D false;
+> 			continue;
+> 		}
+>=20
+> 		master_tsc =3D ka->master_cycle_now;
+> 		master_ns =3D ka->master_kernel_ns;
+> 	} while (read_seqcount_retry(&ka->pvclock_sc, seq));
+>=20
+> 	...
+>=20
+> 	if (use_master_clock) {
+> 		hv_clock.tsc_timestamp =3D kvm_read_l1_tsc(v, master_tsc);
+> 		hv_clock.system_time =3D master_ns + v->kvm->arch.kvmclock_offset;
+> 	} else {
+> 		hv_clock.tsc_timestamp =3D tsc_timestamp;
+> 		hv_clock.system_time =3D kernel_ns + v->kvm->arch.kvmclock_offset;
+> 	}
 
-diff --git a/xen/arch/arm/gic-v2.c b/xen/arch/arm/gic-v2.c
-index 43a379fdda..b8dcbb0bb4 100644
---- a/xen/arch/arm/gic-v2.c
-+++ b/xen/arch/arm/gic-v2.c
-@@ -1157,6 +1157,7 @@ gic_acpi_parse_madt_cpu(struct acpi_subtable_header *header,
-                         const unsigned long end)
- {
-     static int cpu_base_assigned = 0;
-+    int rc;
-     struct acpi_madt_generic_interrupt *processor =
-                container_of(header, struct acpi_madt_generic_interrupt, header);
- 
-@@ -1173,9 +1174,12 @@ gic_acpi_parse_madt_cpu(struct acpi_subtable_header *header,
-         gicv2_info.maintenance_irq = processor->vgic_interrupt;
- 
-         if ( processor->flags & ACPI_MADT_VGIC_IRQ_MODE )
--            irq_set_type(gicv2_info.maintenance_irq, IRQ_TYPE_EDGE_BOTH);
-+            rc = irq_set_type(gicv2_info.maintenance_irq, IRQ_TYPE_EDGE_BOTH);
-         else
--            irq_set_type(gicv2_info.maintenance_irq, IRQ_TYPE_LEVEL_MASK);
-+            rc = irq_set_type(gicv2_info.maintenance_irq, IRQ_TYPE_LEVEL_MASK);
-+
-+        if ( rc )
-+            return rc;
- 
-         cpu_base_assigned = 1;
-     }
-diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
-index acdac22953..d92d0b9b3c 100644
---- a/xen/arch/arm/gic-v3.c
-+++ b/xen/arch/arm/gic-v3.c
-@@ -1734,6 +1734,7 @@ gic_acpi_parse_madt_cpu(struct acpi_subtable_header *header,
-                         const unsigned long end)
- {
-     static int cpu_base_assigned = 0;
-+    int rc;
-     struct acpi_madt_generic_interrupt *processor =
-                container_of(header, struct acpi_madt_generic_interrupt, header);
- 
-@@ -1748,9 +1749,12 @@ gic_acpi_parse_madt_cpu(struct acpi_subtable_header *header,
-         gicv3_info.maintenance_irq = processor->vgic_interrupt;
- 
-         if ( processor->flags & ACPI_MADT_VGIC_IRQ_MODE )
--            irq_set_type(gicv3_info.maintenance_irq, IRQ_TYPE_EDGE_BOTH);
-+            rc = irq_set_type(gicv3_info.maintenance_irq, IRQ_TYPE_EDGE_BOTH);
-         else
--            irq_set_type(gicv3_info.maintenance_irq, IRQ_TYPE_LEVEL_MASK);
-+            rc = irq_set_type(gicv3_info.maintenance_irq, IRQ_TYPE_LEVEL_MASK);
-+
-+        if ( rc )
-+            return rc;
- 
-         cpu_base_assigned = 1;
-     }
-diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.c
-index 186e726412..d08d0a3366 100644
---- a/xen/arch/arm/tee/ffa_notif.c
-+++ b/xen/arch/arm/tee/ffa_notif.c
-@@ -407,7 +407,16 @@ void ffa_notif_init(void)
-         irq = resp.a2;
-         notif_sri_irq = irq;
-         if ( irq >= NR_GIC_SGI )
--            irq_set_type(irq, IRQ_TYPE_EDGE_RISING);
-+        {
-+            ret = irq_set_type(irq, IRQ_TYPE_EDGE_RISING);
-+            if ( ret )
-+            {
-+                printk(XENLOG_ERR
-+                       "ffa: irq_set_type irq %u failed: error %d\n",
-+                       irq, ret);
-+                return;
-+            }
-+        }
-         ret = request_irq(irq, 0, notif_irq_handler, "FF-A notif", NULL);
-         if ( ret )
-         {
-diff --git a/xen/arch/arm/time.c b/xen/arch/arm/time.c
-index 6955b2788f..39b5eabe7c 100644
---- a/xen/arch/arm/time.c
-+++ b/xen/arch/arm/time.c
-@@ -60,20 +60,27 @@ static int __init arch_timer_acpi_init(struct acpi_table_header *header)
- {
-     u32 irq_type;
-     struct acpi_table_gtdt *gtdt;
-+    int rc;
- 
-     gtdt = container_of(header, struct acpi_table_gtdt, header);
- 
-     /* Initialize all the generic timer IRQ variable from GTDT table */
-     irq_type = acpi_get_timer_irq_type(gtdt->non_secure_el1_flags);
--    irq_set_type(gtdt->non_secure_el1_interrupt, irq_type);
-+    rc = irq_set_type(gtdt->non_secure_el1_interrupt, irq_type);
-+    if ( rc )
-+        return rc;
-     timer_irq[TIMER_PHYS_NONSECURE_PPI] = gtdt->non_secure_el1_interrupt;
- 
-     irq_type = acpi_get_timer_irq_type(gtdt->virtual_timer_flags);
--    irq_set_type(gtdt->virtual_timer_interrupt, irq_type);
-+    rc = irq_set_type(gtdt->virtual_timer_interrupt, irq_type);
-+    if ( rc )
-+        return rc;
-     timer_irq[TIMER_VIRT_PPI] = gtdt->virtual_timer_interrupt;
- 
-     irq_type = acpi_get_timer_irq_type(gtdt->non_secure_el2_flags);
--    irq_set_type(gtdt->non_secure_el2_interrupt, irq_type);
-+    rc = irq_set_type(gtdt->non_secure_el2_interrupt, irq_type);
-+    if ( rc )
-+        return rc;
-     timer_irq[TIMER_HYP_PPI] = gtdt->non_secure_el2_interrupt;
- 
-     return 0;
-@@ -81,7 +88,10 @@ static int __init arch_timer_acpi_init(struct acpi_table_header *header)
- 
- static void __init preinit_acpi_xen_time(void)
- {
--    acpi_table_parse(ACPI_SIG_GTDT, arch_timer_acpi_init);
-+    int rc = acpi_table_parse(ACPI_SIG_GTDT, arch_timer_acpi_init);
-+
-+    if ( rc )
-+        panic("Timer: Failed to configure interrupts from GTDT: %d\n", rc);
- }
- #else
- static void __init preinit_acpi_xen_time(void) { }
-diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
-index 120ac09d23..4bfdcfebd7 100644
---- a/xen/drivers/char/ns16550.c
-+++ b/xen/drivers/char/ns16550.c
-@@ -1928,6 +1928,7 @@ static int __init ns16550_acpi_uart_init(const void *data)
-     struct acpi_table_header *table;
-     struct acpi_table_spcr *spcr;
-     acpi_status status;
-+    int rc;
-     /*
-      * Same as the DT part.
-      * Only support one UART on ARM which happen to be ns16550_com[0].
-@@ -1976,7 +1977,9 @@ static int __init ns16550_acpi_uart_init(const void *data)
-     uart->reg_width = spcr->serial_port.access_width;
- 
-     /* The trigger/polarity information is not available in spcr. */
--    irq_set_type(spcr->interrupt, IRQ_TYPE_LEVEL_HIGH);
-+    rc = irq_set_type(spcr->interrupt, IRQ_TYPE_LEVEL_HIGH);
-+    if ( rc )
-+        return rc;
-     uart->irq = spcr->interrupt;
- 
-     uart->vuart.base_addr = uart->io_base;
-diff --git a/xen/drivers/char/pl011.c b/xen/drivers/char/pl011.c
-index a336241033..97c53c11e0 100644
---- a/xen/drivers/char/pl011.c
-+++ b/xen/drivers/char/pl011.c
-@@ -363,7 +363,9 @@ static int __init pl011_acpi_uart_init(const void *data)
-             spcr->interface_type == ACPI_DBG2_SBSA_32);
- 
-     /* trigger/polarity information is not available in spcr */
--    irq_set_type(spcr->interrupt, IRQ_TYPE_LEVEL_HIGH);
-+    res = irq_set_type(spcr->interrupt, IRQ_TYPE_LEVEL_HIGH);
-+    if ( res )
-+        return res;
- 
-     /* TODO - mmio32 proper handling (for now set to true) */
-     res = pl011_uart_init(spcr->interrupt, spcr->serial_port.address,
--- 
-2.43.0
+Meh. I shall have to build a better test case for that one. Thanks.
 
+> To allow different offsets, KVM would need to track a per-vCPU offset to =
+the
+> master clock and apply that in kvm_guest_time_update() (and maybe other p=
+laces?).
+> Which is doable, but it's not clear to me why we'd want to support that (=
+though
+> I haven't fully processed the back half ot his series, so it's very possi=
+ble I'm
+> missing something obvious).
+
+Because I want to reduce the number of cases where we have to fall back
+to non-masterclock mode. Especially the ones which are driven by
+*guests* rather than weird choices on the VMM's part.
+
+--=-7RnCnZ41sxGpJ6+i13Fq
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Transfer-Encoding: base64
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCE8Ew
+ggWvMIIEl6ADAgECAhANkOKMSmGXhF5eMl0rsRhvMA0GCSqGSIb3DQEBDAUAMGUxCzAJBgNVBAYT
+AlVTMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xJDAi
+BgNVBAMTG0RpZ2lDZXJ0IEFzc3VyZWQgSUQgUm9vdCBHMjAeFw0yNDAzMTMwMDAwMDBaFw0zNDAz
+MTIyMzU5NTlaMGIxCzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UE
+AxMxRGlnaUNlcnQgQXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTCCAiIw
+DQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBAOfSIeC0vv1xPQ+dgSxbIIrkaru6skAWJYaGFzmv
+q4Kq+2wU2jxhcWlJg/JeP5jEkq/LM3pn5aaLao79j+XRmS7J1ZpJKUODJVoM4s9MQJhTMvo4qS5Z
+S64g6QR7Obkz3I1Lr3aWeSBmDDEyzue+NKtuWZ1Cxy3RdXo/w5HgRc3l2AercOM3Gt1XonTzEtTb
+Z/Hwc0Sn9Gz8RmGRK6Ka4hVDl8q/2l110KaV233Kh5etP0csXS8MIMdVRfRu3sc5hp13DG7lCKzK
+72a2GEpI8Wpl26G6I1/LMzz/98T+FqjTqxsdquk7Cj7m2vKGLW1BorpQH7WFGPdJQXJe1hfbfiZA
+CcVdCtl4nAacFacmsiArZBfX7AQGL7isvHUwwYFEtcApyGW4p2Lt+t8nvU0CANA6BHOpOz1xOP8W
+mAESbUriIjyuTUf3fJ9oDNCurVqhASMJCDaWI3lYX/QAoiAzt6akqbbZxo2ujW7mGGqc0KxqE2cs
+h2T79v7pC8aUtHBfwNrTR19GnZVxE0eQ7ViIQhR6mpSaUQFA9sG+cmD2G8TnCgYsLa0q8De6F61a
+CBevQGHNzrbZ3JAMneveYg/Jy1XxQHDRcvrMfWKe0jjcWbdKYlaGVPm5V1ILwYz7Yv5ewo3NUrxI
+GJiywe9qPhuJSDZs7VehTuI0FxGIsgKzVjgbAgMBAAGjggFcMIIBWDASBgNVHRMBAf8ECDAGAQH/
+AgEAMB0GA1UdDgQWBBT3m6JO05fF9DQPQw6Bhc6RkzKv+TAfBgNVHSMEGDAWgBTOw0q5mVXyuNtg
+v6l+vVa1lzan1jAOBgNVHQ8BAf8EBAMCAYYwHQYDVR0lBBYwFAYIKwYBBQUHAwQGCCsGAQUFBwMC
+MHkGCCsGAQUFBwEBBG0wazAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29tMEMG
+CCsGAQUFBzAChjdodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkSURS
+b290RzIuY3J0MEUGA1UdHwQ+MDwwOqA4oDaGNGh0dHA6Ly9jcmwzLmRpZ2ljZXJ0LmNvbS9EaWdp
+Q2VydEFzc3VyZWRJRFJvb3RHMi5jcmwwEQYDVR0gBAowCDAGBgRVHSAAMA0GCSqGSIb3DQEBDAUA
+A4IBAQA+b8Uw53sDspdZgukU+qzLyyHkcjlxGGhHlP+zrmDLKm1wEFvCRS2pili3Hy67i8N4N5NU
+vw5Rg6kv3lxb9S9Rktxk43k+tvm68pl7OxQE55ZjVY87P0lUPGwEqOOwLLyH02ZQcsfq5p5LrOH9
+0JvmvZ1yy73HS+VpDAqOlytE0NSvTIRqFFkKQGQwfjvtql9YflujuNNvJztjBaHKYZsnNSg+J38o
+jYq4TP3pSg3UdVH0PncVjPQyqxC9xef5Xae92Kbkzol3x7Nel3A1bwAkalrDMspvTHvey6LfiBks
+FIqviTnoy7fgjaRAJgHS+RXx/cmuRd3rUAclSVVrYu8RMIIHAzCCBOugAwIBAgIQAzUotrsybJHx
+HTjKOIVdIDANBgkqhkiG9w0BAQsFADBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQs
+IEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFzc3VyZWQgRzIgU01JTUUgUlNBNDA5NiBTSEEzODQg
+MjAyNCBDQTEwHhcNMjYwNzE4MDAwMDAwWhcNMjgwMTA0MjM1OTU5WjAeMRwwGgYDVQQDDBNkd213
+MkBpbmZyYWRlYWQub3JnMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA2pYux73kdbYX
+sWF8f1u6DJP91qcqaZetsyfPkZk0B+MmXmAEv0kVes5n15V2mbDThOnpoPFly0UugQO9JYqLfrtD
+tKD5yL58fgrDB9Dw+LQikgrHafl6YSCds5AvUu/8hw2J6noKrcOLJpKlKn9Fl/4IB9Q3JIdLx5aa
+EtTqMalIPqHFOlgrJ7s+aua8xbB8YQ9ahqYBXWRJNv3P/2b1DYtdrz1oqZPE3CcB8Pc6Gf2a1Tcm
+6TAgtEx7Cf1BFcrsrMz7TWHmGQITieNb2r9UYWSc2Gp+GtYFNJCgT0JJXKUBIauPMKBLteYrL8Fo
+ff/uY44dC/mDWjdCP/5x0qelPQjlBvWdHL5zvBTOj06rJ0m3HNI/hnIcDh0Qu2j9reb9rLVcdym6
+bWmBM4uDEB8Zv9Ph0KTBFSy1IosyakuD1j1Os30EzjGfbi0EUXIvnOcYbTBAbM5UAzrxEHMhBvoX
+Pvnx+OyvjJmc9tWxTX6AcSz+m40esbT17URBeZS18afgieiikm5TynlUYP1LciR3hSgGVzvGXnKO
+02VDFR5itGWdRKZ2W5wIShNfWfhSa0D0K5UdIDt5Qc7sjzwK1Yb1sY5Tu0uA5mhIS82q1ov83uxB
+sFkriNnhGv/M1NCDVLBiOMsHu73qUM+yKmgKLwF9Hfn9WI25glbAMI4S5r3hYzcCAwEAAaOCAfcw
+ggHzMB8GA1UdIwQYMBaAFPebok7Tl8X0NA9DDoGFzpGTMq/5MB0GA1UdDgQWBBRcYhqbcGzn1jrT
+JOZaB8O7qllDpzAwBgNVHREEKTAngRNkd213MkBpbmZyYWRlYWQub3JngRBkYXZpZEB3b29kaG91
+LnNlMBQGA1UdIAQNMAswCQYHZ4EMAQUBAjAOBgNVHQ8BAf8EBAMCBeAwHQYDVR0lBBYwFAYIKwYB
+BQUHAwIGCCsGAQUFBwMEMIGpBgNVHR8EgaEwgZ4wTaBLoEmGR2h0dHA6Ly9jcmwzLmRpZ2ljZXJ0
+LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsME2gS6BJ
+hkdodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZT
+SEEzODQyMDI0Q0ExLmNybDCBjQYIKwYBBQUHAQEEgYAwfjAkBggrBgEFBQcwAYYYaHR0cDovL29j
+c3AuZGlnaWNlcnQuY29tMFYGCCsGAQUFBzAChkpodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20v
+RGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZTSEEzODQyMDI0Q0ExLmNydDANBgkqhkiG9w0B
+AQsFAAOCAgEAocabrh1cPd5s3vY5rnlBVQSTc7zs2ZWs67dAIltR+05WELrYClVzzUhMs/LOJPlr
+EUo45UDDomXq38DxFepaPd9+iNLjXfn33EX/IG44j04lU/oF/Rg9VeQILkYLbCZ/x9wOjNHZc4SN
+ydY7Dhvf/sT5aBz88u7D5+azZJ7Qf1U57wYseCH1Mt0nDrtr5y19IJ8D9xJJ33RFL6vfpHZBBAQ8
++3RqkKNxLoV2aFvQhxdhjNLDqTv3LjUIdicwPraN7JkxEu7CV2Lka7eRqJgkWL7SK0YmBjGpRafs
++icP/ON5RCCKTTb6VlX8eTG2sJJfsFhvJNCCt6xexbWzWtIrfP7NvPBvwBB737AyEGBZkS5aNizT
+McURJGTv9UKvBh1LF/+tNhYtLvPCN7oecGzhCHht9jcwSkygTo3Y6YlK3QgOu+ncmiBbfeuwlLZ1
+LxbYvG6hgNqXv7u6YyADbYajAQJXJ2OQen39pm3Q/AQSyLYG+B8lDglWsM8tYXPlEdrYJcksGK6F
+nqIX6Bumn43rBooLJdiZp4WmfWdL2pxe+LxRDjprmqu1WprixDxULSTOKJZoqTlugs6y3Bc+if+s
+gHnBBtz9WQ6MtPHkh7zONDAFIKcBmv8OqPQCx0F3Wv3OEybwMpXx0OsKgK8wLldaX1pXcMuyDgTL
+Sqs0AV0OHUgwggcDMIIE66ADAgECAhADNSi2uzJskfEdOMo4hV0gMA0GCSqGSIb3DQEBCwUAMGIx
+CzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UEAxMxRGlnaUNlcnQg
+QXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTAeFw0yNjA3MTgwMDAwMDBa
+Fw0yODAxMDQyMzU5NTlaMB4xHDAaBgNVBAMME2R3bXcyQGluZnJhZGVhZC5vcmcwggIiMA0GCSqG
+SIb3DQEBAQUAA4ICDwAwggIKAoICAQDali7HveR1thexYXx/W7oMk/3Wpyppl62zJ8+RmTQH4yZe
+YAS/SRV6zmfXlXaZsNOE6emg8WXLRS6BA70liot+u0O0oPnIvnx+CsMH0PD4tCKSCsdp+XphIJ2z
+kC9S7/yHDYnqegqtw4smkqUqf0WX/ggH1Dckh0vHlpoS1OoxqUg+ocU6WCsnuz5q5rzFsHxhD1qG
+pgFdZEk2/c//ZvUNi12vPWipk8TcJwHw9zoZ/ZrVNybpMCC0THsJ/UEVyuyszPtNYeYZAhOJ41va
+v1RhZJzYan4a1gU0kKBPQklcpQEhq48woEu15isvwWh9/+5jjh0L+YNaN0I//nHSp6U9COUG9Z0c
+vnO8FM6PTqsnSbcc0j+GchwOHRC7aP2t5v2stVx3KbptaYEzi4MQHxm/0+HQpMEVLLUiizJqS4PW
+PU6zfQTOMZ9uLQRRci+c5xhtMEBszlQDOvEQcyEG+hc++fH47K+MmZz21bFNfoBxLP6bjR6xtPXt
+REF5lLXxp+CJ6KKSblPKeVRg/UtyJHeFKAZXO8Zeco7TZUMVHmK0ZZ1EpnZbnAhKE19Z+FJrQPQr
+lR0gO3lBzuyPPArVhvWxjlO7S4DmaEhLzarWi/ze7EGwWSuI2eEa/8zU0INUsGI4ywe7vepQz7Iq
+aAovAX0d+f1YjbmCVsAwjhLmveFjNwIDAQABo4IB9zCCAfMwHwYDVR0jBBgwFoAU95uiTtOXxfQ0
+D0MOgYXOkZMyr/kwHQYDVR0OBBYEFFxiGptwbOfWOtMk5loHw7uqWUOnMDAGA1UdEQQpMCeBE2R3
+bXcyQGluZnJhZGVhZC5vcmeBEGRhdmlkQHdvb2Rob3Uuc2UwFAYDVR0gBA0wCzAJBgdngQwBBQEC
+MA4GA1UdDwEB/wQEAwIF4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwgakGA1UdHwSB
+oTCBnjBNoEugSYZHaHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0QXNzdXJlZEcyU01J
+TUVSU0E0MDk2U0hBMzg0MjAyNENBMS5jcmwwTaBLoEmGR2h0dHA6Ly9jcmw0LmRpZ2ljZXJ0LmNv
+bS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsMIGNBggrBgEF
+BQcBAQSBgDB+MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wVgYIKwYBBQUH
+MAKGSmh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNB
+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
+WaTyt81hdhO+LXuL6aNMz+4AAAAAAAA=
+
+
+--=-7RnCnZ41sxGpJ6+i13Fq--
 
