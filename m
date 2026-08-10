@@ -4,43 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11641C5AD4E
-	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2026 05:16:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1387205.1628483 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4387C5AC82
+	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2026 06:45:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1387220.1628492 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtIMD-0002e3-0o; Mon, 10 Aug 2026 05:15:29 +0000
+	id 1wtJl9-0007sd-Cx; Mon, 10 Aug 2026 06:45:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1387205.1628483; Mon, 10 Aug 2026 05:15:28 +0000
+Received: by outflank-mailman (output) from mailman id 1387220.1628492; Mon, 10 Aug 2026 06:45:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtIMC-0002dv-SM; Mon, 10 Aug 2026 05:15:28 +0000
-Received: by outflank-mailman (input) for mailman id 1387205;
- Mon, 10 Aug 2026 05:15:27 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wtJl9-0007sV-8m; Mon, 10 Aug 2026 06:45:19 +0000
+Received: by outflank-mailman (input) for mailman id 1387220;
+ Mon, 10 Aug 2026 06:45:18 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <frn1furkan10@gmail.com>) id 1wtIMB-0002dp-75
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 05:15:27 +0000
+ (envelope-from <agordeev@linux.ibm.com>) id 1wtJl8-0007sP-Jf
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 06:45:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wtIM9-00Gsoa-PH
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 07:15:25 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wtJl6-002EPF-NU
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 08:45:16 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <frn1furkan10@gmail.com>)
- id 6a795e33-2eae-0a2a0a5409dd-0a2a4502c6b6-40
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 07:15:25 +0200
-Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <frn1furkan10@gmail.com>)
- id 6a795e6d-6ca4-0a2a45020019-d155802eaca2-3
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 07:15:25 +0200
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-495590dde14so17152245e9.0
- for <xen-devel@lists.xenproject.org>; Sun, 09 Aug 2026 22:15:25 -0700 (PDT)
-Received: from notebook.. ([85.107.103.196]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4995c7b2898sm207058025e9.4.2026.08.09.22.15.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Aug 2026 22:15:23 -0700 (PDT)
+ (envelope-from <agordeev@linux.ibm.com>)
+ id 6a79735d-e002-0a2a0a5209dd-0a2a4507af76-44
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 08:45:16 +0200
+Received: from [148.163.156.1] (helo=mx0a-001b2d01.pphosted.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <agordeev@linux.ibm.com>)
+ id 6a79737a-b4ea-0a2a45070019-94a39c01c418-3
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 08:45:16 +0200
+Received: from pps.filterd (m0353729.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 67A5VYZX3085069; Mon, 10 Aug 2026 06:44:38 GMT
+Received: from ppma11.dal12v.mail.ibm.com
+ (db.9e.1632.ip4.static.sl-reverse.com [50.22.158.219])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4fwvjypkqg-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 10 Aug 2026 06:44:37 +0000 (GMT)
+Received: from pps.filterd (ppma11.dal12v.mail.ibm.com [127.0.0.1])
+ by ppma11.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 67A6ffw0026503;
+ Mon, 10 Aug 2026 06:44:36 GMT
+Received: from smtprelay03.fra02v.mail.ibm.com ([9.218.2.224])
+ by ppma11.dal12v.mail.ibm.com (PPS) with ESMTPS id 4fxhfxueyp-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 10 Aug 2026 06:44:36 +0000 (GMT)
+Received: from smtpav02.fra02v.mail.ibm.com (smtpav02.fra02v.mail.ibm.com
+ [10.20.54.101])
+ by smtprelay03.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 67A6iYQG34930976
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 10 Aug 2026 06:44:34 GMT
+Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 17B532004B;
+ Mon, 10 Aug 2026 06:44:34 +0000 (GMT)
+Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 2335D20043;
+ Mon, 10 Aug 2026 06:44:31 +0000 (GMT)
+Received: from li-008a6a4c-3549-11b2-a85c-c5cc2836eea2.ibm.com (unknown
+ [9.87.135.220])
+ by smtpav02.fra02v.mail.ibm.com (Postfix) with ESMTPS;
+ Mon, 10 Aug 2026 06:44:31 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,640 +76,182 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786338925; x=1786943725; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Hm21pwCcSfBBYRAiBMC0UPopMsN4Ck6e6kpf8prhvNs=;
-        b=JcvtXyA0X/GesC39VpBb5fdi4h4EN9cHYNgaWdB0dq4iCe7cxw4ZYEByjvBMvqsI7t
-         2R63aodwNHqP29G/9ZG5Q8HSWOQWqRkQMXwjhHqfC+pNDv6IYyAvQNX8XRnpa9ERwtcR
-         EAa3gsFX/6v1kxtl+S5vsmW4/NvYyDlYRXfI9VntPeeUtcQv6zJqIPmeqnsx5bA5ZzCO
-         klWQuCcMqQrSq4udvnXsivvbAsoe+lil7gmtZPxDf4PWCVH8zZZk++PuqMDCxhSrtRR6
-         9n5CYd+mEgxct755ZaTLsMlTM0swpZniXvh97993Ic4fM/MXrhipac4DH6Qm+tZbcq08
-         rjBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786338925; x=1786943725;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Hm21pwCcSfBBYRAiBMC0UPopMsN4Ck6e6kpf8prhvNs=;
-        b=Wlruec5uU3tVKdJbuVh+6vjDSdOTy1UELV/f8B2VF8dpzRCJF3lQn5VWod/dkJChzd
-         Srq5MK2ifRrHdn6hFXGFne4hn37ZJTQlJB49AWSn2D3pQjNA6ej6cL+dQZxCoKZCAPjI
-         VNr6WB1hgR2zPI5B54KMyo+fWVWlEUtp9ktxghCXD+AI2uNdVMaIvcpKWxpw+1qEMA/4
-         UjLaIolRa1PnGPZaDTOKv5qvfBMmWeSs/BcqNK649dIfUngtVsGfBv2QgLBjqkWnYue0
-         GUfgria91/ZM1E9utoTwSGT3KtumxUso69z07urdHy3bVmpZ3GKfdeQIIrDAH2hk83UF
-         1O9A==
-X-Gm-Message-State: AOJu0YwlLac9RoOrsh5EKncI9InalflfPQXr7RjbrC5jh7/gSg+UqMTC
-	IjnNYcgQZYjeEpaHNONDdLtAy6k3btaAianAiM3V/dlG7Ha7wUYYlmJa3rPEwQ==
-X-Gm-Gg: AR+sD10c7RpZiztVukDTFrzltY3jSSwzBhr0QfXTYWSDPajsH9RtCbyZRbjua0pmcaP
-	jrxbWy8yNuZpllGqszfrrlmxgdYHRr23ODbtfhWjQEx8ERQbcyRrd2GYb92XFi0w+K1CIoRDdAJ
-	VeBIzbplrjS6Snv7ft+SfrKmbhvjX6ZjA//mA7bvxNy908zC6irZS39fWaMRwdQIhjiVn1QIncl
-	JjR8TH5ZT8pdsMA6M/KkmRRFXbKcjVAr5gGPMpFhME7Y7+JnYwCyiSB/sMCrKix95Jy7rnVrvrn
-	Jnz0oUKykcIhQajeC/Z5gu2oBhSzDDqJ78A54MASic50dE6Ryn9saY9UeWjFTzrJZ5hxTpj8mQz
-	Kps4s/BT4zHV2NWc8xAvvEBjY2ydRdkM1LbJQFeU2+psajbexx6ph6Xgvov2QGZ5/jJiI8A1qAD
-	gsrgCCv6sVxBgsZevPNN2PKZSJMFXVxVMyhII2Zb3DX60o2TryhUf/Izc2YaO+Rg==
-X-Received: by 2002:a05:600c:4ed3:b0:493:e983:806e with SMTP id 5b1f17b1804b1-4994e72f795mr544276295e9.3.1786338924899;
-        Sun, 09 Aug 2026 22:15:24 -0700 (PDT)
-From: Furkan Caliskan <frn1furkan10@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: andrew.cooper3@citrix.com,
-	jbeulich@suse.com,
-	jgross@suse.com,
-	gwd@xenproject.org,
-	dfaggioli@suse.com,
-	stewart.hildebrand@amd.com,
-	nathan.studer@dornerworks.com,
-	roger@xenproject.org,
-	anthony.perard@vates.tech,
-	julien@xen.org,
-	sstabellini@kernel.org,
-	michal.orzel@amd.com,
-	bertrand.marquis@arm.com,
-	Volodymyr_Babchuk@epam.com,
-	teddy.astie@vates.tech,
-	Furkan Caliskan <frn1furkan10@gmail.com>
-Subject: [PATCH v3] xen/sched: split scheduler vtable from struct scheduler
-Date: Mon, 10 Aug 2026 08:15:01 +0300
-Message-Id: <20260810051501.6282-1-frn1furkan10@gmail.com>
-X-Mailer: git-send-email 2.34.1
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=pp1 header.d=ibm.com header.i="@ibm.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=pp1; bh=vVPGPVZ23NsreeExE7+jGCM0ud2bcA
+	JA4ypv1DILR34=; b=cP2dX1rqRgJGyJQPsc4KFbE1PC99K1ErC8LoPBcJX/kDVk
+	D9Jo4Iz1SXdFchU8Ko5W4WB9COXrRcti5DpxhwdI5dfEePzz5UmgRzT8EYYyBi07
+	KU36zRJaFsP0Akw7apyJ4SCl4IAb1VRGvP8L0mKhwBZnn0XUkDZ2PW7t9oviZUQq
+	bN2tmVBhSWNgiSiSi7ymdtf6iKh4gNTCCXIweHK0Tg6HF6KYslOZj/J1AEcJVHnf
+	kWNlsq5fwLgQr2DlUZF0whZYM5XqlyiEV4xJgAR6wPkWOH+OEMcVL/bVHH8IYS6D
+	MxDe73qz6EXJrcPmB5P+oxGbZoA1keo68zERDcAg==
+Date: Mon, 10 Aug 2026 08:44:29 +0200
+From: Alexander Gordeev <agordeev@linux.ibm.com>
+To: Muhammad Usama Anjum <usama.anjum@arm.com>
+Cc: Jani Nikula <jani.nikula@linux.intel.com>,
+        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        Tvrtko Ursulin <tursulin@ursulin.net>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Dimitri Sivanich <dimitri.sivanich@hpe.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+        Helge Deller <deller@gmx.de>, Juergen Gross <jgross@suse.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Muchun Song <muchun.song@linux.dev>,
+        Oscar Salvador <osalvador@suse.de>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        "Liam R. Howlett" <liam@infradead.org>,
+        Lorenzo Stoakes <ljs@kernel.org>, Will Deacon <will@kernel.org>,
+        "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
+        Nick Piggin <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
+        Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+        David Hildenbrand <david@kernel.org>,
+        Pasha Tatashin <pasha.tatashin@soleen.com>,
+        Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
+        Uladzislau Rezki <urezki@gmail.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Andrii Nakryiko <andrii@kernel.org>,
+        Eduard Zingerman <eddyz87@gmail.com>,
+        Kumar Kartikeya Dwivedi <memxor@gmail.com>,
+        Ingo Molnar <mingo@redhat.com>,
+        Arnaldo Carvalho de Melo <acme@kernel.org>,
+        Namhyung Kim <namhyung@kernel.org>, SJ Park <sj@kernel.org>,
+        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+        Jan Kara <jack@suse.cz>, Jason Gunthorpe <jgg@ziepe.ca>,
+        Leon Romanovsky <leon@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>,
+        Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>,
+        Christoph Lameter <cl@gentwo.org>, Mike Rapoport <rppt@kernel.org>,
+        Johannes Weiner <hannes@cmpxchg.org>, ziy@nvidia.com, pfalcato@suse.de,
+        ryan.roberts@arm.com, linux-kernel@vger.kernel.org,
+        intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+        linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org,
+        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
+        linux-arch@vger.kernel.org, kasan-dev@googlegroups.com,
+        linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
+        linux-perf-users@vger.kernel.org, damon@lists.linux.dev
+Subject: Re: [PATCH 6/9] mm: convert PTE table entry to pte
+Message-ID: <2599c5b3-e8ac-4865-993b-d41e6f060d52-agordeev@linux.ibm.com>
+References: <20260806083926.1807279-1-usama.anjum@arm.com>
+ <20260806083926.1807279-7-usama.anjum@arm.com>
+ <fab9fc78-1e1d-4d5b-a9ca-92f3ebd04108-agordeev@linux.ibm.com>
+ <5c329236-7761-4e42-a549-b822e43b4358@arm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1786338925-F0AA52AC-51B1DC04/0/0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <5c329236-7761-4e42-a549-b822e43b4358@arm.com>
+X-TM-AS-GCONF: 00
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEwMDA1NCBTYWx0ZWRfXxI/cthX2D0Wc
+ iHPLS8hc2Kj/zk+XaKiAAFgipdFaX6yt5ULiZYFw9cMykKZhsGzYdz8Ozez/WjJFTxNxMxdlY+Z
+ xRKD8hb46fc3eq4T3zk/Ay2gFewaqBQyLERBaqjOrmguPqyfrY4V/sj3PMJQSwHxbC9gQ3JPdGp
+ nwoFQng/LWfi/b2CNXX0ejbyTRbXCpU6ISkPy5ReFIqwletsdYxZQh3JZdOlQrUjBCsND1GblNt
+ G/4DaSrhSqHIA4lB3PliH1JLOCq/gqtakESjF4VI9bapYhuQXt1SuBKOBQMvOtnuq4THGnpYdaA
+ 9DlU8ZKdg0fttjy6cWWMXxwJNMzsJQnfWACC9mQPG3O4x/cS3d0NgAmCjmdVYfXi8XGUV9/5PxJ
+ HdlkuRfRyvN/kE+SQ4EeTy+wa+g6t6URPTCSrkC11WsiBzyO9FuJFEs1QK/7K/rvQyfHrqCYbs4
+ iMEVrVdUzEx5zR0r21A==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODEwMDA1NCBTYWx0ZWRfX9Ko1NY31ilHb
+ y/krrlO5A2ANnAiXusNks5NMrWI4UvS7c1Y7yzgoGS6CxTGjDGRyAu8EHxJ1ITitPdxPjbMc8pe
+ lyb7xPyJDB1SIBriSbnTKYVPxMcf33w=
+X-Authority-Analysis: v=2.4 cv=RqD16imK c=1 sm=1 tr=0 ts=6a797355 cx=c_pps
+ a=aDMHemPKRhS1OARIsFnwRA==:117 a=aDMHemPKRhS1OARIsFnwRA==:17
+ a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=uAbxVGIbfxUO_5tXvNgY:22 a=VwQbUJbxAAAA:8
+ a=7CQSdrXTAAAA:8 a=VnNF1IyMAAAA:8 a=2hzp2EkNZNX3k9pX5ccA:9 a=CjuIK1q_8ugA:10
+ a=a-qgeE7W1pNrGK8U0ZQC:22
+X-Proofpoint-GUID: YbHEwP5JTLZr3QYF8zr2RkJeozrhuIz7
+X-Proofpoint-ORIG-GUID: YbHEwP5JTLZr3QYF8zr2RkJeozrhuIz7
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-10_01,2026-08-07_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 priorityscore=1501 suspectscore=0 lowpriorityscore=0
+ clxscore=1015 adultscore=0 bulkscore=0 malwarescore=0 impostorscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608100054
+X-purgate-ID: tlsNG-ef75cf/1786344316-A50CDAE4-BE82F9CE/0/0
 X-purgate-type: clean
-X-purgate-size: 20320
+X-purgate-size: 3062
 
-struct scheduler currently serves two purposes: it is the static
-vtable a scheduler backend defines (name, opt_name, sched_id, and
-all its function pointers), and it is also the per-cpupool runtime
-object scheduler_alloc() allocates. Being the same type forces
-scheduler_alloc() to memcpy() the whole vtable into a fresh
-allocation per cpupool, duplicating identical function pointers
-across every cpupool using the same scheduler.
+On Fri, Aug 07, 2026 at 05:26:04PM +0100, Muhammad Usama Anjum wrote:
+> On 07/08/2026 7:58 am, Alexander Gordeev wrote:
+> > On Thu, Aug 06, 2026 at 09:38:44AM +0100, Muhammad Usama Anjum wrote:
+> >> The non-MMU stub receives hw_pte_t but returns a logical pte_t
+> >> value. Convert the stored entry through __pte_from_hw() before
+> >> returning.
+> >>
+> >> Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
+> >> ---
+> >>  include/linux/hugetlb.h | 2 +-
+> >>  1 file changed, 1 insertion(+), 1 deletion(-)
+> >>
+> >> diff --git a/include/linux/hugetlb.h b/include/linux/hugetlb.h
+> >> index bc0b9c65aa1d0..9e8b391aa4bc9 100644
+> >> --- a/include/linux/hugetlb.h
+> >> +++ b/include/linux/hugetlb.h
+> >> @@ -1283,7 +1283,7 @@ static inline pte_t huge_ptep_clear_flush(struct vm_area_struct *vma,
+> >>  #ifdef CONFIG_MMU
+> >>  	return ptep_get(ptep);
+> >>  #else
+> >> -	return *ptep;
+> >> +	return __pte_from_hw(*ptep);
+> > 
+> > But this is a direct dereferencing, which breaks the whole point, isn't it?
+> Yes, this is particular line is for non MMU. In this case, CONIFG_ARCH_HAS_HW_PTE
+> would never be defined. Hence hw_pte_t is just pte_t and direct dereference is
+> allowed. I'd thought a lot about it; is better to leave direct dereference here
+> or use some helper. Then used __pte_from_hw() was already being used in generic
+> ptep_get().
 
-Split the vtable out into its own type, struct sched_ops, so it
-can be shared by every cpupool using a given scheduler instead of
-copied per cpupool. struct scheduler is left holding only what is
-actually per-instance: a pointer to the shared sched_ops, plus
-sched_data and cpupool. scheduler_alloc() now stores a pointer to
-the matching sched_ops instance instead of copying its fields and
-uses xzalloc() to zero-initialize the struct. Every accessor in
-private.h is updated from s->field to s->ops->field to match.
+But in case CONIFG_ARCH_HAS_HW_PTE=n __pte_from_hw() is still gets called.
+That looks inconsistent to me. Why not just call ptep_deref() (see below)?
 
-Every in-tree scheduler backend (credit, credit2, rtds, arinc653,
-null) is converted from struct scheduler to struct sched_ops.
-Also drop the generic comment in arinc653.c.
+> There are only two users of __pte_from_hw() at this time. 
+> 
+> > 
+> > What about introducing something like pte_t ptep_get_sw(hw_pte_t *ptep)
+> > to be used in exactly situations like this? With that the semantics of
+> > hw_pte_t pointers becomes straightforward and closes the still ongoing
+> > "storage vs lifetime" discussion:
+> > 
+> > hw_pte_t*     points to HW-formatted page table entries
+> > 
+> > ptep_get()    is used to obtain HW-linked/attached entries, and may wire
+> >               extra code like [1] or [2]
+> > 
+> > ptep_get_sw() is used to obtain HW-unlinked/unattached entries and in
+> >               most cases is just a direct dereference
+> ptep_get_sw() or ptep_get_deref() is better name here?
 
-A handful of call sites elsewhere read a scheduler's name,
-opt_name or sched_id directly and are updated to go through
-->ops as well.
+ptep_deref() would be it.
 
-Signed-off-by: Furkan Caliskan <frn1furkan10@gmail.com>
-Reviewed-by: Juergen Gross <jgross@suse.com>
-Acked-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
----
-v3:
- * fixed whitespace and blank-lines
- * mentioned the xzalloc() change and the arinc653 
-   comment removal
- * fixed the overlong lines.
----
- xen/common/sched/arinc653.c |  9 +---
- xen/common/sched/core.c     | 51 +++++++++++--------
- xen/common/sched/cpupool.c  |  7 +--
- xen/common/sched/credit.c   |  3 +-
- xen/common/sched/credit2.c  |  3 +-
- xen/common/sched/null.c     |  3 +-
- xen/common/sched/private.h  | 98 +++++++++++++++++++------------------
- xen/common/sched/rt.c       |  3 +-
- 8 files changed, 90 insertions(+), 87 deletions(-)
+Do you agree to the suggested API requirements?
 
-diff --git a/xen/common/sched/arinc653.c b/xen/common/sched/arinc653.c
-index 32c596a23c..746963806e 100644
---- a/xen/common/sched/arinc653.c
-+++ b/xen/common/sched/arinc653.c
-@@ -702,17 +702,10 @@ a653sched_adjust_global(const struct scheduler *ops,
- }
- #endif /* CONFIG_SYSCTL */
- 
--/**
-- * This structure defines our scheduler for Xen.
-- * The entries tell Xen where to find our scheduler-specific
-- * callback functions.
-- * The symbol must be visible to the rest of Xen at link time.
-- */
--static const struct scheduler sched_arinc653_def = {
-+static const struct sched_ops sched_arinc653_def = {
-     .name           = "ARINC 653 Scheduler",
-     .opt_name       = "arinc653",
-     .sched_id       = XEN_SCHEDULER_ARINC653,
--    .sched_data     = NULL,
- 
-     .init           = a653sched_init,
-     .deinit         = a653sched_deinit,
-diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
-index 9ccf5811bf..e4e4da95d8 100644
---- a/xen/common/sched/core.c
-+++ b/xen/common/sched/core.c
-@@ -87,7 +87,8 @@ DEFINE_PER_CPU(cpumask_t, cpumask_scratch);
- /* How many urgent vcpus. */
- DEFINE_PER_CPU(atomic_t, sched_urgent_count);
- 
--extern const struct scheduler *__start_schedulers_array[], *__end_schedulers_array[];
-+extern const struct sched_ops *__start_schedulers_array[];
-+extern const struct sched_ops *__end_schedulers_array[];
- #define NUM_SCHEDULERS (__end_schedulers_array - __start_schedulers_array)
- #define schedulers __start_schedulers_array
- 
-@@ -127,10 +128,9 @@ static void cf_check sched_idle_schedule(
-     unit->next_task = sched_idle_unit(cpu);
- }
- 
--static struct scheduler sched_idle_ops = {
-+static struct sched_ops sched_idle_sched_ops = {
-     .name           = "Idle Scheduler",
-     .opt_name       = "idle",
--    .sched_data     = NULL,
- 
-     .pick_resource  = sched_idle_res_pick,
-     .do_schedule    = sched_idle_schedule,
-@@ -139,6 +139,11 @@ static struct scheduler sched_idle_ops = {
-     .free_udata     = sched_idle_free_udata,
- };
- 
-+static struct scheduler sched_idle_ops = {
-+    .ops        = &sched_idle_sched_ops,
-+    .sched_data = NULL,
-+};
-+
- static inline struct vcpu *unit2vcpu_cpu(const struct sched_unit *unit,
-                                          unsigned int cpu)
- {
-@@ -2081,7 +2086,7 @@ long do_set_timer_op(s_time_t timeout)
- /* scheduler_id - fetch ID of current scheduler */
- int scheduler_id(void)
- {
--    return operations.sched_id;
-+    return operations.ops->sched_id;
- }
- #endif
- 
-@@ -2090,7 +2095,7 @@ long sched_adjust(struct domain *d, struct xen_domctl_scheduler_op *op)
- {
-     long ret;
- 
--    if ( op->sched_id != dom_scheduler(d)->sched_id )
-+    if ( op->sched_id != dom_scheduler(d)->ops->sched_id )
-         return -EINVAL;
- 
-     switch ( op->cmd )
-@@ -2132,7 +2137,7 @@ long sched_adjust_global(struct xen_sysctl_scheduler_op *op)
- 
-     rcu_read_lock(&sched_res_rculock);
- 
--    rc = ((op->sched_id == pool->sched->sched_id)
-+    rc = ((op->sched_id == pool->sched->ops->sched_id)
-           ? sched_adjust_cpupool(pool->sched, op) : -EINVAL);
- 
-     rcu_read_unlock(&sched_res_rculock);
-@@ -2299,7 +2304,7 @@ static struct sched_unit *do_schedule(struct sched_unit *prev, s_time_t now,
-     struct sched_unit *next;
- 
-     /* get policy-specific decision on scheduling... */
--    sched->do_schedule(sched, prev, now, sched_tasklet_check(cpu));
-+    sched->ops->do_schedule(sched, prev, now, sched_tasklet_check(cpu));
- 
-     next = prev->next_task;
- 
-@@ -2989,7 +2994,7 @@ void scheduler_enable(void)
- }
- 
- static inline
--const struct scheduler *__init sched_get_by_name(const char *sched_name)
-+const struct sched_ops *__init sched_ops_get_by_name(const char *sched_name)
- {
-     unsigned int i;
- 
-@@ -3002,16 +3007,16 @@ const struct scheduler *__init sched_get_by_name(const char *sched_name)
- 
- int __init sched_get_id_by_name(const char *sched_name)
- {
--    const struct scheduler *scheduler = sched_get_by_name(sched_name);
-+    const struct sched_ops *ops = sched_ops_get_by_name(sched_name);
- 
--    return scheduler ? scheduler->sched_id : -1;
-+    return ops ? ops->sched_id : -1;
- }
- 
- /* Initialise the data structures. */
- void __init scheduler_init(void)
- {
-     struct domain *idle_domain;
--    const struct scheduler *scheduler;
-+    const struct sched_ops *ops;
-     int i;
- 
-     scheduler_enable();
-@@ -3044,21 +3049,23 @@ void __init scheduler_init(void)
-         }
-     }
- 
--    scheduler = sched_get_by_name(opt_sched);
--    if ( !scheduler )
-+    ops = sched_ops_get_by_name(opt_sched);
-+    if ( !ops )
-     {
-         printk("Could not find scheduler: %s\n", opt_sched);
--        scheduler = sched_get_by_name(CONFIG_SCHED_DEFAULT);
--        BUG_ON(!scheduler);
--        printk("Using '%s' (%s)\n", scheduler->name, scheduler->opt_name);
-+        ops = sched_ops_get_by_name(CONFIG_SCHED_DEFAULT);
-+        BUG_ON(!ops);
-+        printk("Using '%s' (%s)\n", ops->name, ops->opt_name);
-     }
--    operations = *scheduler;
-+
-+    operations.ops = ops;
- 
-     if ( cpu_schedule_up(0) )
-         BUG();
-     register_cpu_notifier(&cpu_schedule_nfb);
- 
--    printk("Using scheduler: %s (%s)\n", operations.name, operations.opt_name);
-+    printk("Using scheduler: %s (%s)\n",
-+           operations.ops->name, operations.ops->opt_name);
-     if ( sched_init(&operations) )
-         panic("scheduler returned error on init\n");
- 
-@@ -3411,12 +3418,14 @@ struct scheduler *scheduler_alloc(unsigned int sched_id)
-     for ( i = 0; i < NUM_SCHEDULERS; i++ )
-         if ( schedulers[i] && schedulers[i]->sched_id == sched_id )
-             goto found;
-+
-     return ERR_PTR(-ENOENT);
- 
-  found:
--    if ( (sched = xmalloc(struct scheduler)) == NULL )
-+    if ( (sched = xzalloc(struct scheduler)) == NULL )
-         return ERR_PTR(-ENOMEM);
--    memcpy(sched, schedulers[i], sizeof(*sched));
-+    sched->ops = schedulers[i];
-+
-     if ( (ret = sched_init(sched)) != 0 )
-     {
-         xfree(sched);
-@@ -3447,7 +3456,7 @@ void schedule_dump(struct cpupool *c)
-     {
-         sched = c->sched;
-         cpus = c->res_valid;
--        printk("Scheduler: %s (%s)\n", sched->name, sched->opt_name);
-+        printk("Scheduler: %s (%s)\n", sched->ops->name, sched->ops->opt_name);
-         sched_dump_settings(sched);
-     }
-     else
-diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
-index 081e1053eb..640578201f 100644
---- a/xen/common/sched/cpupool.c
-+++ b/xen/common/sched/cpupool.c
-@@ -338,7 +338,8 @@ static struct cpupool *cpupool_create(unsigned int poolid,
-     spin_unlock(&cpupool_lock);
- 
-     debugtrace_printk("Created cpupool %u with scheduler %s (%s)\n",
--                      c->cpupool_id, c->sched->name, c->sched->opt_name);
-+                      c->cpupool_id, c->sched->ops->name,
-+                      c->sched->ops->opt_name);
- 
-     return c;
- 
-@@ -862,7 +863,7 @@ int cpupool_do_sysctl(struct xen_sysctl_cpupool_op *op)
-         if ( c == NULL )
-             break;
-         op->cpupool_id = c->cpupool_id;
--        op->sched_id = c->sched->sched_id;
-+        op->sched_id = c->sched->ops->sched_id;
-         op->n_dom = c->n_dom;
-         ret = cpumask_to_xenctl_bitmap(&op->cpumap, c->cpu_valid);
-         cpupool_put(c);
-@@ -1294,7 +1295,7 @@ struct cpupool *__init cpupool_create_pool(unsigned int pool_id, int sched_id)
-     struct cpupool *pool;
- 
-     if ( sched_id < 0 )
--        sched_id = scheduler_get_default()->sched_id;
-+        sched_id = scheduler_get_default()->ops->sched_id;
- 
-     pool = cpupool_create(pool_id, sched_id);
- 
-diff --git a/xen/common/sched/credit.c b/xen/common/sched/credit.c
-index 4dde2ede12..8df746bf6b 100644
---- a/xen/common/sched/credit.c
-+++ b/xen/common/sched/credit.c
-@@ -2277,11 +2277,10 @@ csched_deinit(struct scheduler *ops)
-     }
- }
- 
--static const struct scheduler sched_credit_def = {
-+static const struct sched_ops sched_credit_def = {
-     .name           = "SMP Credit Scheduler",
-     .opt_name       = "credit",
-     .sched_id       = XEN_SCHEDULER_CREDIT,
--    .sched_data     = NULL,
- 
-     .global_init    = csched_global_init,
- 
-diff --git a/xen/common/sched/credit2.c b/xen/common/sched/credit2.c
-index 95946634d1..4949606881 100644
---- a/xen/common/sched/credit2.c
-+++ b/xen/common/sched/credit2.c
-@@ -4230,11 +4230,10 @@ csched2_deinit(struct scheduler *ops)
-     xfree(prv);
- }
- 
--static const struct scheduler sched_credit2_def = {
-+static const struct sched_ops sched_credit2_def = {
-     .name           = "SMP Credit Scheduler rev2",
-     .opt_name       = "credit2",
-     .sched_id       = XEN_SCHEDULER_CREDIT2,
--    .sched_data     = NULL,
- 
-     .global_init    = csched2_global_init,
- 
-diff --git a/xen/common/sched/null.c b/xen/common/sched/null.c
-index 952bb47444..b3c6651fb1 100644
---- a/xen/common/sched/null.c
-+++ b/xen/common/sched/null.c
-@@ -1037,11 +1037,10 @@ static void cf_check null_dump(const struct scheduler *ops)
-     spin_unlock_irqrestore(&prv->lock, flags);
- }
- 
--static const struct scheduler sched_null_def = {
-+static const struct sched_ops sched_null_def = {
-     .name           = "null Scheduler",
-     .opt_name       = "null",
-     .sched_id       = XEN_SCHEDULER_NULL,
--    .sched_data     = NULL,
- 
-     .init           = null_init,
-     .deinit         = null_deinit,
-diff --git a/xen/common/sched/private.h b/xen/common/sched/private.h
-index d6884550cd..18ccab183e 100644
---- a/xen/common/sched/private.h
-+++ b/xen/common/sched/private.h
-@@ -294,12 +294,10 @@ static inline spinlock_t *pcpu_schedule_trylock(unsigned int cpu)
-     return NULL;
- }
- 
--struct scheduler {
--    const char *name;       /* full name for this scheduler      */
--    const char *opt_name;   /* option name for this scheduler    */
--    unsigned int sched_id;  /* ID for this scheduler             */
--    void *sched_data;       /* global data pointer               */
--    struct cpupool *cpupool;/* points to this scheduler's pool   */
-+struct sched_ops {
-+    const char *name;       /* full name for this sched_ops      */
-+    const char *opt_name;   /* option name for this sched_ops    */
-+    unsigned int sched_id;  /* ID for this sched_ops             */
- 
-     int          (*global_init)    (void);
- 
-@@ -366,127 +364,133 @@ struct scheduler {
-                                     struct sched_resource *sr);
- };
- 
-+struct scheduler {
-+    const struct sched_ops *ops; /* shared, read-only dispatch table   */
-+    void *sched_data;            /* per-cpupool scheduler-private data */
-+    struct cpupool *cpupool;     /* points to this scheduler's pool    */
-+};
-+
- static inline int sched_init(struct scheduler *s)
- {
--    return s->init(s);
-+    return s->ops->init(s);
- }
- 
- static inline void sched_deinit(struct scheduler *s)
- {
--    s->deinit(s);
-+    s->ops->deinit(s);
- }
- 
- static inline spinlock_t *sched_switch_sched(struct scheduler *s,
-                                              unsigned int cpu,
-                                              void *pdata, void *vdata)
- {
--    return s->switch_sched(s, cpu, pdata, vdata);
-+    return s->ops->switch_sched(s, cpu, pdata, vdata);
- }
- 
- static inline void sched_dump_settings(const struct scheduler *s)
- {
--    if ( s->dump_settings )
--        s->dump_settings(s);
-+    if ( s->ops->dump_settings )
-+        s->ops->dump_settings(s);
- }
- 
- static inline void sched_dump_cpu_state(const struct scheduler *s, int cpu)
- {
--    if ( s->dump_cpu_state )
--        s->dump_cpu_state(s, cpu);
-+    if ( s->ops->dump_cpu_state )
-+        s->ops->dump_cpu_state(s, cpu);
- }
- 
- static inline void *sched_alloc_domdata(const struct scheduler *s,
-                                         struct domain *d)
- {
--    return s->alloc_domdata ? s->alloc_domdata(s, d) : NULL;
-+    return s->ops->alloc_domdata ? s->ops->alloc_domdata(s, d) : NULL;
- }
- 
- static inline void sched_free_domdata(const struct scheduler *s,
-                                       void *data)
- {
--    ASSERT(s->free_domdata || !data);
--    if ( s->free_domdata )
--        s->free_domdata(s, data);
-+    ASSERT(s->ops->free_domdata || !data);
-+    if ( s->ops->free_domdata )
-+        s->ops->free_domdata(s, data);
- }
- 
- static inline void *sched_alloc_pdata(const struct scheduler *s, int cpu)
- {
--    return s->alloc_pdata ? s->alloc_pdata(s, cpu) : NULL;
-+    return s->ops->alloc_pdata ? s->ops->alloc_pdata(s, cpu) : NULL;
- }
- 
- static inline void sched_free_pdata(const struct scheduler *s, void *data,
-                                     int cpu)
- {
--    ASSERT(s->free_pdata || !data);
--    if ( s->free_pdata )
--        s->free_pdata(s, data, cpu);
-+    ASSERT(s->ops->free_pdata || !data);
-+    if ( s->ops->free_pdata )
-+        s->ops->free_pdata(s, data, cpu);
- }
- 
- static inline void sched_deinit_pdata(const struct scheduler *s, void *data,
-                                       int cpu)
- {
--    if ( s->deinit_pdata )
--        s->deinit_pdata(s, data, cpu);
-+    if ( s->ops->deinit_pdata )
-+        s->ops->deinit_pdata(s, data, cpu);
- }
- 
- static inline void *sched_alloc_udata(const struct scheduler *s,
-                                       struct sched_unit *unit, void *dom_data)
- {
--    return s->alloc_udata(s, unit, dom_data);
-+    return s->ops->alloc_udata(s, unit, dom_data);
- }
- 
- static inline void sched_free_udata(const struct scheduler *s, void *data)
- {
--    s->free_udata(s, data);
-+    s->ops->free_udata(s, data);
- }
- 
- static inline void sched_insert_unit(const struct scheduler *s,
-                                      struct sched_unit *unit)
- {
--    if ( s->insert_unit )
--        s->insert_unit(s, unit);
-+    if ( s->ops->insert_unit )
-+        s->ops->insert_unit(s, unit);
- }
- 
- static inline void sched_remove_unit(const struct scheduler *s,
-                                      struct sched_unit *unit)
- {
--    if ( s->remove_unit )
--        s->remove_unit(s, unit);
-+    if ( s->ops->remove_unit )
-+        s->ops->remove_unit(s, unit);
- }
- 
- static inline void sched_sleep(const struct scheduler *s,
-                                struct sched_unit *unit)
- {
--    if ( s->sleep )
--        s->sleep(s, unit);
-+    if ( s->ops->sleep )
-+        s->ops->sleep(s, unit);
- }
- 
- static inline void sched_wake(const struct scheduler *s,
-                               struct sched_unit *unit)
- {
--    if ( s->wake )
--        s->wake(s, unit);
-+    if ( s->ops->wake )
-+        s->ops->wake(s, unit);
- }
- 
- static inline void sched_yield(const struct scheduler *s,
-                                struct sched_unit *unit)
- {
--    if ( s->yield )
--        s->yield(s, unit);
-+    if ( s->ops->yield )
-+        s->ops->yield(s, unit);
- }
- 
- static inline void sched_context_saved(const struct scheduler *s,
-                                        struct sched_unit *unit)
- {
--    if ( s->context_saved )
--        s->context_saved(s, unit);
-+    if ( s->ops->context_saved )
-+        s->ops->context_saved(s, unit);
- }
- 
- static inline void sched_migrate(const struct scheduler *s,
-                                  struct sched_unit *unit, unsigned int cpu)
- {
--    if ( s->migrate )
--        s->migrate(s, unit, cpu);
-+    if ( s->ops->migrate )
-+        s->ops->migrate(s, unit, cpu);
-     else
-         sched_set_res(unit, get_sched_res(cpu));
- }
-@@ -494,7 +498,7 @@ static inline void sched_migrate(const struct scheduler *s,
- static inline struct sched_resource *sched_pick_resource(
-     const struct scheduler *s, const struct sched_unit *unit)
- {
--    return s->pick_resource(s, unit);
-+    return s->ops->pick_resource(s, unit);
- }
- 
- static inline void sched_adjust_affinity(const struct scheduler *s,
-@@ -502,29 +506,29 @@ static inline void sched_adjust_affinity(const struct scheduler *s,
-                                          const cpumask_t *hard,
-                                          const cpumask_t *soft)
- {
--    if ( s->adjust_affinity )
--        s->adjust_affinity(s, unit, hard, soft);
-+    if ( s->ops->adjust_affinity )
-+        s->ops->adjust_affinity(s, unit, hard, soft);
- }
- 
- static inline int sched_adjust_dom(const struct scheduler *s, struct domain *d,
-                                    struct xen_domctl_scheduler_op *op)
- {
--    return s->adjust ? s->adjust(s, d, op) : 0;
-+    return s->ops->adjust ? s->ops->adjust(s, d, op) : 0;
- }
- 
- #ifdef CONFIG_SYSCTL
- static inline int sched_adjust_cpupool(const struct scheduler *s,
-                                        struct xen_sysctl_scheduler_op *op)
- {
--    return s->adjust_global ? s->adjust_global(s, op) : 0;
-+    return s->ops->adjust_global ? s->ops->adjust_global(s, op) : 0;
- }
- #endif
- 
- static inline void sched_move_timers(const struct scheduler *s,
-                                      struct sched_resource *sr)
- {
--    if ( s->move_timers )
--        s->move_timers(s, sr);
-+    if ( s->ops->move_timers )
-+        s->ops->move_timers(s, sr);
- }
- 
- static inline void sched_unit_pause_nosync(const struct sched_unit *unit)
-@@ -543,7 +547,7 @@ static inline void sched_unit_unpause(const struct sched_unit *unit)
-         vcpu_unpause(v);
- }
- 
--#define REGISTER_SCHEDULER(x) static const struct scheduler *x##_entry \
-+#define REGISTER_SCHEDULER(x) static const struct sched_ops *x##_entry \
-   __used_section(".data.schedulers") = &(x)
- 
- struct cpupool
-diff --git a/xen/common/sched/rt.c b/xen/common/sched/rt.c
-index 744f214173..0e9f04ea72 100644
---- a/xen/common/sched/rt.c
-+++ b/xen/common/sched/rt.c
-@@ -1617,11 +1617,10 @@ static void cf_check repl_timer_handler(void *data)
-     spin_unlock_irq(&prv->lock);
- }
- 
--static const struct scheduler sched_rtds_def = {
-+static const struct sched_ops sched_rtds_def = {
-     .name           = "SMP RTDS Scheduler",
-     .opt_name       = "rtds",
-     .sched_id       = XEN_SCHEDULER_RTDS,
--    .sched_data     = NULL,
- 
-     .dump_cpu_state = rt_dump_pcpu,
-     .dump_settings  = rt_dump,
--- 
-2.34.1
+> I thought __pte_from_hw() is ugly enough that if someone tries to use it
+> wrongly, it'll be noticed pretty easily. I'm fine with any other name.
 
+The name may be not perfect, but it is the way it is used above looks
+wrong to me.
+
+> > The caller should always know whether the entry is attached or not, so
+> > confusions like [3] are avoided.
+> > 
+> > 1. https://lore.kernel.org/linux-mm/20260526-kpkeys-v8-21-eaaacdacc67c@arm.com/
+> > 2. https://lore.kernel.org/linux-s390/650903a4-0dd9-4e6b-9d4b-3c32c5657236-agordeev@linux.ibm.com/
+> > 3. https://lore.kernel.org/linux-s390/b44e071d-7c9d-4e7e-a84d-4af3499a5a05@arm.com/
+> > 
+> >>  #endif
+> >>  }
+
+Thanks!
+
+> -- 
+> Thanks,
+> Usama
+> 
 
