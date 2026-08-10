@@ -4,43 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74DF5C5AD4E
-	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2026 10:01:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1387297.1628555 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CF6FC5AC82
+	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2026 10:10:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1387307.1628564 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtMoz-0006De-8U; Mon, 10 Aug 2026 10:01:29 +0000
+	id 1wtMxS-0008Bi-5b; Mon, 10 Aug 2026 10:10:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1387297.1628555; Mon, 10 Aug 2026 10:01:29 +0000
+Received: by outflank-mailman (output) from mailman id 1387307.1628564; Mon, 10 Aug 2026 10:10:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtMoz-0006DX-5Z; Mon, 10 Aug 2026 10:01:29 +0000
-Received: by outflank-mailman (input) for mailman id 1387297;
- Mon, 10 Aug 2026 10:01:27 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wtMox-0006DR-Da
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 10:01:27 +0000
+	id 1wtMxS-0008Bb-26; Mon, 10 Aug 2026 10:10:14 +0000
+Received: by outflank-mailman (input) for mailman id 1387307;
+ Mon, 10 Aug 2026 10:10:13 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Usama.Anjum@arm.com>) id 1wtMxQ-0008BV-P0
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 10:10:13 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wtMow-00Dt4l-0w
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 12:01:26 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wtMxP-00Ah7v-RK
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 12:10:12 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a79a16e-bab6-0a2a0a5309dd-0a2a45018e30-22
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 12:01:25 +0200
-Received: from [209.85.221.44] (helo=mail-wr1-f44.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a79a175-5984-0a2a45010019-d155dd2cb803-3
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 12:01:25 +0200
-Received: by mail-wr1-f44.google.com with SMTP id
- ffacd0b85a97d-47362928f65so1390297f8f.2
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 03:01:25 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
- [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48002145839sm32564405f8f.7.2026.08.10.03.01.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 10 Aug 2026 03:01:11 -0700 (PDT)
+ (envelope-from <Usama.Anjum@arm.com>)
+ id 6a79a382-bab6-0a2a0a5309dd-0a2a4502d82e-4
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 12:10:11 +0200
+Received: from [52.101.65.63]
+ (helo=DU2PR03CU002.outbound.protection.outlook.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Usama.Anjum@arm.com>)
+ id 6a79a382-6ca4-0a2a45020019-3465413fe6fa-3
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 12:10:10 +0200
+Received: from AS4P191CA0001.EURP191.PROD.OUTLOOK.COM (2603:10a6:20b:5d5::14)
+ by AS4PR08MB7831.eurprd08.prod.outlook.com (2603:10a6:20b:51b::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Mon, 10 Aug
+ 2026 10:10:02 +0000
+Received: from DB5PEPF00014B90.eurprd02.prod.outlook.com
+ (2603:10a6:20b:5d5:cafe::71) by AS4P191CA0001.outlook.office365.com
+ (2603:10a6:20b:5d5::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.292.25 via Frontend Transport; Mon,
+ 10 Aug 2026 10:10:02 +0000
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ DB5PEPF00014B90.mail.protection.outlook.com (10.167.8.228) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.6
+ via Frontend Transport; Mon, 10 Aug 2026 10:10:02 +0000
+Received: from AM6PR08MB3414.eurprd08.prod.outlook.com (2603:10a6:20b:49::10)
+ by GV2PR08MB11418.eurprd08.prod.outlook.com (2603:10a6:150:2c9::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Mon, 10 Aug
+ 2026 10:09:26 +0000
+Received: from AM6PR08MB3414.eurprd08.prod.outlook.com
+ ([fe80::dde8:bf0b:1dc:2a2]) by AM6PR08MB3414.eurprd08.prod.outlook.com
+ ([fe80::dde8:bf0b:1dc:2a2%2]) with mapi id 15.21.0292.024; Mon, 10 Aug 2026
+ 10:09:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,196 +69,237 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786356085; x=1786960885; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=KXQIqdRVAv8DGRTLU1MiBZfEi64arVF7ua5/ksd67b4=;
-        b=dVjJaIM2+gdjvKVMk3ahl5PpWQVmT6hiSh6KB7BgVmKXcc86FBCpcsPxToHdi3beFo
-         Iy4GNslUXEEYVo6D+oWvkPUziinCcGDOO1dPmmp/RqprbRRwVwxmP9Jr2Q6DBQV5uk44
-         SiyqBIQHFeuVAnDp071MhFpF1Y89wU1e5jd1Tr8fMt3eAzAONvksis7xmcBfCAESSTI0
-         ZCDXa5yUuNQI+YJZn/+Qzq8gGjY6XnmX1T/bEOlUxi/gaY89czcPI0O7hF6fp0t4/VoT
-         KH3AfYxmxnS0hmug3A55vX16oeGm3d/MXedHQxbfIVeN7G3JqfUqvrI0vJKK0cD7viu9
-         3a7g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786356085; x=1786960885;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=KXQIqdRVAv8DGRTLU1MiBZfEi64arVF7ua5/ksd67b4=;
-        b=W27yEKzeHVfBBJwEJAmql18XO3GmrY4lcEdWQkKpMsi+XmKwHB/gyb7ev8Dd+AUhFp
-         HK63gKaQrjwX1KbpSpArYvH5D04PZ06oB/vsmkRsy3+wb6GkW9ii0VqGzYBronh4UUhu
-         xl0cpocWysQNFBWiH/4qnxkhmO5cWQBHvZlLlxfaib0qqBdMaP/IVRDviOp9OnX8VuGX
-         F0UUZFEFzxmEgRtTb/0IZWqT7CWAjVCsRLiBqL0+oZiXbqihQ/qpERqKGGLblpxGDcpL
-         NEEh+JDXFaI0RFzS9W4pbLCfuaStRFXbA6XVSmhPvywCqxyCmLpTzDopgHbi8+qpV6lb
-         YNyQ==
-X-Forwarded-Encrypted: i=1; AHgh+RqQj6MYV1Kj7W4vr1Lub3a1lU34okqL6O5+Klnk0mJ/hoCXQr7eTbt3dNNHK/jXIkEsqtrOCL9Mpjw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yy4Mr41BDuVmlopKjALyO8j8xZCj81Pa3udt6ah8Dg+R24L1WVo
-	Kv7svPKhjvcqxtFBU5SnLDb/lteZvux/S2WeKrsHaUSRy5fGCPjn95Q3tFMF1Q==
-X-Gm-Gg: AR+sD11VpJq9wwZx0z72s5kcpS7Yl+40F5u81dkbcNsMpyS4FP7/morShGOo4chhPtc
-	fKfRKZ1EtFIMSAhRT0/sfZrOPt3hBdJh9x3Yd3qYcIKdk86JahUq65f/gdwRrEIlpX0ShkQIom2
-	YBj+cuxrNdeL/91E+G+d5whRM9sPMFpS8PGInnHgt9xcp4HCowOHT5FgeoO8KXio7Ixsjn1Aw9e
-	HC8BduPZIW30wd8aFkXA8lr59yIcw/ZTuIfVZkrCzriM6+QM3qM12GV3zRKRvXJLPk186SQQ23/
-	OLDz6+SF0ruLA348OqPCqmdMl7UpkrxdHGoHDR7WXzm7jklsy69OwVLydAxC2+20BavsLoO9xZW
-	3MqoW2nLvGuc1YnuUSCRASyypniRRlWUfDmF52LptMhcdBAPOOLaUpeBOQRj+3U/Vm5NeB26byz
-	22Q855Fb7cgeuV0JZg879TT7WY1tObXeFxquCkrLW5J209aT37Bz9c6ll+qUBfPf6jswN+vLkzf
-	vzapaKo7NDCZ97+W2y7dQ6NZm6ACz4yJbx6NbFfjhM=
-X-Received: by 2002:a05:6000:491e:b0:47d:ee9d:90c8 with SMTP id ffacd0b85a97d-47fec4e2910mr68258764f8f.3.1786356071544;
-        Mon, 10 Aug 2026 03:01:11 -0700 (PDT)
-Message-ID: <55d800f3-6211-4c18-95b6-8682ecfe3330@gmail.com>
-Date: Mon, 10 Aug 2026 12:01:09 +0200
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=S2VIJpv8VwAb5nGpLGZco2CwJBxJrdyYG0R62U+CUHku9g3BmuTtMlMlIalp3nI4J7nE7zlNG9ZnMtfOtlZTFLneApMOEKjlMD7Ql6qnWhXJ5IFseiPtR3Th4DDKJaIdYvVWj+X5pw9qFiTe80e8kNtxtL1olXtIBI3mcZ2ZElrHCmVnqKWUHhryztxnYN0XtDj5KDUStZ/CpJ6yD0+vXzgXcAwh1p1jNY18syNeP+u+6Rf/JgIh83qOelSMLB2jjsipz2iZkbwTgJWDRyaE6sg6dhDLCsQdETz/8GqmSbYDfiWc4ukfs2V7R+KGM1DLVLPyWp1yBhymet1S8Hy/JQ==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=sGHMm995GRpz8U1PURPcj9ORNaGW0JAp4jH7dTCsP5Q=;
+ b=v1zz21/zgnctBGF04WoXuyaVM+n5aAJ7fY9Xa8kNx9OlnPNxnTdtI9JDT7zRBWR/jESJ5pyShmr0RkuG8+nyLXgWakdbtpE2OZVWzZ+eUDTQyRgEFqA3aCf6liib8Hhtfj3vm2AaqDgdCwqXGXm6YlZZ4tAndD3O+JqoGjcLEYi6cXk3oeCc+meBuwwtRzHf6MriVf+TGaj+b1lUnvcmgr69NfqY2+Aar+yk2YHMoJzcW8QcAQnz9B6smEzBJWx9MuUyohXKTF3uwtUk9MHvCgWX99gHiROvfAMFeXf6r9ur7ozd0DQq4BAbt/wBySamT6N9dGd2+/2GoSoA3Hewxg==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=linux.ibm.com smtp.mailfrom=arm.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
+ dkim=pass (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sGHMm995GRpz8U1PURPcj9ORNaGW0JAp4jH7dTCsP5Q=;
+ b=X/TDbJ7ebcrgT+EhFqFMXkZrLW/4YZDc8WqKTw7e75/PXAK8hVBv6C+G4sRbqAlFtYUqJEtd2tPQmUS9T18h/wXtC2aoCPud+bRck2pQq9CYkNqoCovk3ytIAzcRbI1Snb/v7MuNLuEi4ToSBvjeB4IQeWdFklu/yB6MC0uCDmQ=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=lu7ea3NWDFQpIQidj/jgqt5/KcmZz0+/1a76oNtofgRKQtEybTY1fyBCnkJjwDsyW7/qX3L6SuD9Uh5OOHCJZv4AsAKYRa7pqgYV5bpV89zK0ET5xvFNA69JUYBVaBtP0v7tg2VZAyWAiuyhnRXyRJmyI6iJTXkdrK8qzmLAX72W8xQB1C86P44R4flTtnd2wfkhUaNejYRyNyzz7kDmWdH4jUVPDlAovM32wCDcB9FIoKAtzVEOFXG21H0s8vbW8kpr9DkQcw+l1uc4z2ouPB+PKPpQgUkqAgSo7BymZKjTQDr1YQgtlWllUFntTrZaE/f0vUEuw7WNLHE7NfbLKw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=sGHMm995GRpz8U1PURPcj9ORNaGW0JAp4jH7dTCsP5Q=;
+ b=INpxTaXgNxtQiT573C05qSNgM1vbGnG8XOl2r9kZCWWdSH5g6G1tsg4YtDB2RnlUfjNClceUU3wo9Klb9vEyafV39ILI5xqT1mB40WqPtm3NOuPUzwS5rBds59divY4qpTl7kf1EzwOf8HLDVNq5OTM7M6etkjs2xop/w+dMmKowx8ZP6A7DWAFSqY0QuOdrj5QS8eOgAYJv13UTwNieAv7yjfEIN10iM0PeUyIVFvRpY3+skcHmBU15LSyj0evBb/FYsMgrn8p9G/rw5d2z6CVDr0Xv7YlNJpp1GNZQl4fgnkZvyFgrCH78oR/UhFhwGdFC2APICbt2IEP03StPWw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sGHMm995GRpz8U1PURPcj9ORNaGW0JAp4jH7dTCsP5Q=;
+ b=X/TDbJ7ebcrgT+EhFqFMXkZrLW/4YZDc8WqKTw7e75/PXAK8hVBv6C+G4sRbqAlFtYUqJEtd2tPQmUS9T18h/wXtC2aoCPud+bRck2pQq9CYkNqoCovk3ytIAzcRbI1Snb/v7MuNLuEi4ToSBvjeB4IQeWdFklu/yB6MC0uCDmQ=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+Message-ID: <52b5066c-64f6-40bb-9bce-365a18f24265@arm.com>
+Date: Mon, 10 Aug 2026 11:09:24 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 07/17] xen/riscv: introduce vCPU AIA initialization
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
- <b3aca8278dfd70bf6ce888bfcb0a3fbc32bb4971.1784560663.git.oleksii.kurochko@gmail.com>
- <f3e14d18-7732-4a34-9ae4-31cdc89e6495@suse.com>
+Cc: usama.anjum@arm.com, Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin
+ <tursulin@ursulin.net>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Dimitri Sivanich
+ <dimitri.sivanich@hpe.com>, Arnd Bergmann <arnd@arndb.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+ Helge Deller <deller@gmx.de>, Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ "Liam R. Howlett" <liam@infradead.org>, Lorenzo Stoakes <ljs@kernel.org>,
+ Will Deacon <will@kernel.org>, "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
+ Nick Piggin <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
+ Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+ David Hildenbrand <david@kernel.org>,
+ Pasha Tatashin <pasha.tatashin@soleen.com>, Chris Li <chrisl@kernel.org>,
+ Kairui Song <kasong@tencent.com>, Uladzislau Rezki <urezki@gmail.com>,
+ Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu
+ <mhiramat@kernel.org>, Alexei Starovoitov <ast@kernel.org>,
+ Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>,
+ Eduard Zingerman <eddyz87@gmail.com>,
+ Kumar Kartikeya Dwivedi <memxor@gmail.com>, Ingo Molnar <mingo@redhat.com>,
+ Arnaldo Carvalho de Melo <acme@kernel.org>,
+ Namhyung Kim <namhyung@kernel.org>, SJ Park <sj@kernel.org>,
+ "Matthew Wilcox (Oracle)" <willy@infradead.org>, Jan Kara <jack@suse.cz>,
+ Jason Gunthorpe <jgg@ziepe.ca>, Leon Romanovsky <leon@kernel.org>,
+ Miaohe Lin <linmiaohe@huawei.com>, Dennis Zhou <dennis@kernel.org>,
+ Tejun Heo <tj@kernel.org>, Christoph Lameter <cl@gentwo.org>,
+ Mike Rapoport <rppt@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>,
+ ziy@nvidia.com, pfalcato@suse.de, ryan.roberts@arm.com,
+ linux-kernel@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-parisc@vger.kernel.org,
+ xen-devel@lists.xenproject.org, linux-mm@kvack.org,
+ linux-fsdevel@vger.kernel.org, linux-arch@vger.kernel.org,
+ kasan-dev@googlegroups.com, linux-trace-kernel@vger.kernel.org,
+ bpf@vger.kernel.org, linux-perf-users@vger.kernel.org, damon@lists.linux.dev
+Subject: Re: [PATCH 1/9] mm: introduce hw_pte_t for PTE table storage
+To: Alexander Gordeev <agordeev@linux.ibm.com>
+References: <20260806083926.1807279-1-usama.anjum@arm.com>
+ <20260806083926.1807279-2-usama.anjum@arm.com>
+ <3db8233c-3785-444e-b2eb-3e5fc5cb2f17-agordeev@linux.ibm.com>
+ <eef14e97-20cd-4b08-ae22-7636af049b09@arm.com>
+ <4a42c498-58ca-46f4-819f-da14cfba154f-agordeev@linux.ibm.com>
+From: Muhammad Usama Anjum <usama.anjum@arm.com>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <f3e14d18-7732-4a34-9ae4-31cdc89e6495@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+In-Reply-To: <4a42c498-58ca-46f4-819f-da14cfba154f-agordeev@linux.ibm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1786356085-C5540757-6A469E5C/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 4800
+X-ClientProxiedBy: LO4P123CA0541.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:319::12) To AM6PR08MB3414.eurprd08.prod.outlook.com
+ (2603:10a6:20b:49::10)
+MIME-Version: 1.0
+X-MS-TrafficTypeDiagnostic:
+	AM6PR08MB3414:EE_|GV2PR08MB11418:EE_|DB5PEPF00014B90:EE_|AS4PR08MB7831:EE_
+X-MS-Office365-Filtering-Correlation-Id: 96d6ff17-0376-40a1-bf75-08def6c78b22
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted:
+ BCL:0;ARA:13230040|376014|366016|7416014|1800799024|23010399003|6133799003|4143699003|11063799006|56012099006|10067099003|3023799007|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info-Original:
+ mSQv7AaybVdP8lh1lVFlcXP3kGG1cksbK7NhWTSFCBI3T0vZN0VuY2xwLDoDTGWs3W5PpK1u3qICDytNzKUqK9SDvSv7mOhBGz8mCm/T4p9TZ37PTi68WrHC7SBnCBiKxzCJ1ggOVHo04CZfBzLVji6+kBvSiujrzeh5gmb35+T9IoDVoY8YoaoS6y3IVsR/GNlvmGtl5h83qJwaCQGveRteXDi/EkCuqvbd5zatwi9ASQA/qgf3VrS4W7mHxiqhY/nlY5S2wjkycoMVtJy07vAqhKdVMsdnlL25x/Iwz4DXtgLyS6aJ6fYrNzxhQ3+eeZbR9SXZ64cp+5Kn89v3W3otEbkLRadT3SUQngLaRqNN8wIsqyOU8D4Yz99lvY6ZDxbtPq7pRcf3CTk8/Al5XLIF1V5sHok4sc9I5uDs30xNOq+ymqN4IBv9JdPHOaSs/1do4M34tKTFM41rHL/hmWIhHTdx8kq07vwMPgvnN5p7o+qmmoZSROUn3GPPhVdKXZ/LpJhu+sxmyl/Sx++vGNwaHa6REVMYmcFmZNeFvyZ/Y3jMrZuslEQMs0LbQZ2M5AtlfuTDIL4Je4PJTXc6RkGhF6yffaGrIBjR+RmxDHg5eXT2WqHRIQ6DcoTZIfTUIKxMWJPNuZkweSPQ7vN4An9Dr/hNzavgZ0covaVZmjI=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR08MB3414.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(7416014)(1800799024)(23010399003)(6133799003)(4143699003)(11063799006)(56012099006)(10067099003)(3023799007)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-Exchange-RoutingPolicyChecked:
+ opP+uzSVHSCRZK1SnjoVnNSw+fDPOATCeo/EkQ/9TKyIWl0BioAAzSjZhW8oRWRhh0VP/Q1IhuRQUxZSxCsMBYVxG/vcaCq1wzUNu0nQPwwWo+QE2KhmS9+j4egy16LiRS4nTmRLKN+XuBdurSLoP+kaCOoDnMKd3pxwSOThge4lF9ONak39/a4lKk8vojL/Ah1HFZ0d8Go5NuqSGNowzXBjnKGdIXTD/jk32PsEmyqcNbc2TwzdKXhRdNZujBGi+KEGdynA/VP0mrbFbmrciAva+eyNqKFeXEVWYbI8GKT7kDRSysVn0Mgym+JU9ctCXZkrSk7GbR3mC+NkBpOOug==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR08MB11418
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ DB5PEPF00014B90.eurprd02.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	b22ca400-de72-440a-7983-08def6c77506
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|7416014|376014|1800799024|23010399003|82310400026|14060799003|36860700016|35042699022|22082099003|18002099003|56012099006|10067099003|3023799007|11063799006|4143699003|6133799003;
+X-Microsoft-Antispam-Message-Info:
+	cRrjktM/0DgtNP+E1PYP/0TkmX3sW8qhpY9DcxvRfNeCDy8AXNMKLuDb4jtrpgipjzOzFQliODcOOY4RT92OTAXEaRCQ7E8drxYE9301ePLgTjvbj5KSRwz5uxaT8ET0eGm6NCQdUL4MwmspJAR/K/koXYxEQR8PpkShv+2mLpdO/hvV2vVx5phfc7TjVBx1COc/IpRWuf2G9XfZZks0y1EN2Q34OgU0Am9DiPRHRbT6k1rn9/q6qNa5cEuxA1CBtpe3HM/na9j3mE3HhYOgZLW96Ez7DsV+rlaQV0o5bVbUzSqItNRYQhG7ggz04xHaeOzU7WiE1ZHXzQDL9LHzaOccmv9e29M6u4Lu404ORpzuva9lnkueRswUV+7NHztVd2TdweKlYHqyHaQV32baOQHtWWgOCzxPP/i8y2k1EdqfeVivtE+SUotRzWqX4b+wFKf8TE1x6gs3kJEt1vD0O6iQaetLgtFPOD9lcztBFADSza/1D1T64EPGO/iULK9iV+gQ+WcfsG9Xet7UAWNF4verB7aZ71XjTFFAH10J705ZwKAORUbP9qntrVwLy7R5q2qJXHXiMYH28W9O8rJf8X981Y/FdjlFG7a8rlCqezM9+Vx8/f1ahn1fMI1qpujZx87DZcCRqB+fAUZ9biioHBrXp6PqYCzMzAlkIXMokzwZFfsfSA0aonNvmQ21odrDzgb8d/ug7NM2gwuGhDfScw==
+X-Forefront-Antispam-Report:
+	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(7416014)(376014)(1800799024)(23010399003)(82310400026)(14060799003)(36860700016)(35042699022)(22082099003)(18002099003)(56012099006)(10067099003)(3023799007)(11063799006)(4143699003)(6133799003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	RZu5a05QZ2FkwUV+f3u/xNJ5M977oWBQ8C7GFk7ktc47z+21uudAEAHRHlGSo5AXhoiep89PdJZItSNMVMKzhUWkAzOcbK1aDFW/Mi7N4e8tpvPJlry/aLrtdxgCK6kaQFJRAsOgE/+7N3cXDyiQfUZw+1Gee/0CnYC2dvf05U3qAEsjAQfdrCTHKQKH5tBZy+2KPL7OM2eCxrNi9Gz0AbGh/+NomfeCMStvdy//InA+bHcfFAOJZTvNIE6SEqd15SnoxmQPwOC0MKvmF+jgtvEYJ1/QNCoj4vbau8Q6BterG7888HbRyE6pSP2pgILQsPNbTd+Am8BVwld3VFN6zngsr09c3yxKP3xFmqxE/jdbWplTagyu0d+50/ntJpmFUgC5AEPtB0UZ7gK6HWiys18iUs6JwL3+Gige/sROB32Eq1eo0jD5flZ0SUXOiW8/
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Aug 2026 10:10:02.5666
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 96d6ff17-0376-40a1-bf75-08def6c78b22
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DB5PEPF00014B90.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR08MB7831
+X-purgate-ID: tlsNG-720697/1786356610-F04A62AC-69D85AD0/0/0
+X-purgate-type: clean
+X-purgate-size: 3798
 
-
-
-On 8/6/26 4:56 PM, Jan Beulich wrote:
-> On 20.07.2026 18:02, Oleksii Kurochko wrote:
->> Introduce vcpu_aia_init() to initialize the AIA-related state needed
->> for a vCPU to have a working guest interrupt file.
+On 09/08/2026 6:45 pm, Alexander Gordeev wrote:
+> On Fri, Aug 07, 2026 at 04:24:00PM +0100, Muhammad Usama Anjum wrote:
+>> On 07/08/2026 8:09 am, Alexander Gordeev wrote:
+>>> On Thu, Aug 06, 2026 at 09:38:39AM +0100, Muhammad Usama Anjum wrote:
+>>>> pte_t is used both for logical PTE values and for entries stored in a PTE
+>>>> table, so pte_t * does not distinguish a pointer to a copied value from a
+>>>> pointer to table storage.
+>>>>
+>>>> Introduce hw_pte_t as the generic name for a PTE table element. Define it
+>>>> as a macro alias of pte_t by default. When an architecture selects
+>>>> ARCH_HAS_HW_PTE_T, define it as a structure containing a pte_t instead.
+>>>> This preserves the representation while allowing converted architectures
+>>>> to enforce the distinction at compile time.
+>>>>
+>>>> Keep the C type definitions behind an __ASSEMBLY__ check because
+>>>> architecture assembly sources can include this header indirectly. Include
+>>>> asm/page.h so consumers such as linux/vmalloc.h retain the page definitions
+>>>> they previously obtained from that header.
+>>>>
+>>>> Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
+>>>> ---
+>>>> Changes since RFC v1:
+>>>> - Add the ARCH_HAS_HW_PTE_T opt-in and generic wrapper definition.
+>>>> - Exclude the C type definitions from assembly sources.
+>>>> - Update the description for the new opt-in model.
+>>>> ---
+>>>>  MAINTAINERS                   |  1 +
+>>>>  include/linux/pgtable_types.h | 17 +++++++++++++++++
+>>>>  mm/Kconfig                    |  3 +++
+>>>>  3 files changed, 21 insertions(+)
+>>>>  create mode 100644 include/linux/pgtable_types.h
+>>>>
+>>>> diff --git a/MAINTAINERS b/MAINTAINERS
+>>>> index e9c8567308a75..7169bea968cf5 100644
+>>>> --- a/MAINTAINERS
+>>>> +++ b/MAINTAINERS
+>>>> @@ -16982,6 +16982,7 @@ F:	include/linux/mmu_notifier.h
+>>>>  F:	include/linux/pagewalk.h
+>>>>  F:	include/linux/pgalloc.h
+>>>>  F:	include/linux/pgtable.h
+>>>> +F:	include/linux/pgtable_types.h
+>>>>  F:	include/linux/ptdump.h
+>>>>  F:	include/linux/vmpressure.h
+>>>>  F:	include/linux/vmstat.h
+>>>> diff --git a/include/linux/pgtable_types.h b/include/linux/pgtable_types.h
+>>>> new file mode 100644
+>>>> index 0000000000000..70c3edd00a01b
+>>>> --- /dev/null
+>>>> +++ b/include/linux/pgtable_types.h
+>>>> @@ -0,0 +1,17 @@
+>>>> +/* SPDX-License-Identifier: GPL-2.0 */
+>>>> +#ifndef _LINUX_PGTABLE_TYPES_H
+>>>> +#define _LINUX_PGTABLE_TYPES_H
+>>>> +
+>>>> +#include <asm/page.h>
+>>>> +
+>>>> +#ifndef __ASSEMBLY__
+>>>> +
+>>>> +#ifdef CONFIG_ARCH_HAS_HW_PTE_T
+>>>> +typedef struct { pte_t __pte; } hw_pte_t;
+>>>
+>>> On s390 it fails to compile once we do typedef hw_pte_t *pgtable_t
+>>> in asm/page.h. m68k, powerpc and sparc may also have such problem.
+>>>
+>>> The below declaration helps to resolve it using forward declaration
+>>> and without meddling with headers, though I do not like it much:
+>>>
+>>> typedef struct __hw_pte_t { pte_t __pte; } hw_pte_t;
+>> Thank you for testing it out on s390.
 >>
->> A guest (VS) interrupt file must be mapped to one of a pCPU's
->> hardware interrupt files (if they exist), so the pCPU a vCPU will actually
->> run on needs to be known first. arch_vcpu_create() is therefore not a
->> suitable place to call vcpu_aia_init(), since the pCPU assigned to a
->> vCPU can still change before it is first scheduled. To avoid
->> reassigning the VS interrupt file id and remapping it to a different
->> pCPU's hardware interrupt file, vcpu_aia_init() will instead be
->> called from a later point in the scheduling path (e.g.
->> continue_to_new_vcpu()), to be introduced in a follow-up patch. Since
->> it will end up being called from a non-__init context, it is not
->> itself marked __init.
+>> As __hw_pte_t isn't being used yet in this series, would s390 enablement
+>> patches add __hw_pte_t to this definition?
 > 
-> If it's called during scheduling, perhaps vcpu_aia_init() simply isn't
-> an appropriate name, and that issue is then also reflected in a
-> misleading patch subject?z
-I also thought about that while working on the IMSIC interrupt file 
-support, but I was thinking of moving it to imsic.c.
+> I hope there is a better solution. As I noted m68k, powerpc and sparc
+> may also be affected, so I would suggest to look into those as well.
+> I would prefer s390 to use the generic one rather than circumvent a
+> compile error in a custom way.
+I've just checked all of these architectures by doing dirty conversion and
+reached to same conclusion that __hw_pte_t must be defined like:
+ 
+typedef struct __hw_pte_t { pte_t __pte; } hw_pte_t;
 
-Regarding the function name, a better name would be 
-vcpu_imsic_hw_vsfile_attach(). Alternatively, we could use a slightly 
-more architectural term, such as HGEI/VGEIN, and call it 
-vcpu_imsic_hgei_attach(). I think I prefer vcpu_imsic_hw_vsfile_attach().
+I'lll add __hw_pte_t to this series. (Initially on last email I'd thought
+that the first user would add __hw_pte_t. But it seems sensible to add it
+now)
 
-Considering your observation and question, it could also be placed where 
-it will actually be called from continue_new() in the future, so 
-riscv/domain.c might be the right place for it but at the moment I think 
-it will be better to put it in imsic.c closer to other IMSIC functionality.
+-- 
+Thanks,
+Usama
 
-> 
->> @@ -36,6 +37,35 @@ bool aia_usable(void)
->>       return _aia_usable;
->>   }
->>   
->> +void vcpu_aia_init(struct vcpu *v)
->> +{
->> +    unsigned int new_vsfile_id;
->> +    int rc;
->> +
->> +    if ( !aia_usable() )
->> +        return;
->> +
->> +    new_vsfile_id = vgein_assign(v);
-
-I will add here also the check that if new_vsfile_id = 0 then we don't 
-need to map guest file.
-
->> +
->> +    /*
->> +     * vgein_assign() returns 0 when no free h/w guest interrupt file is
->> +     * available (including GEILEN == 0); imsic_map_guest_file() maps nothing
->> +     * in that case.
->> +     */
->> +    rc = imsic_map_guest_file(v, new_vsfile_id);
->> +    if ( rc )
->> +    {
-
-I missed here vgein_release().
-
->> +        /* Can't continue w/o correctly mapped IMSIC interrupt file */
->> +        domain_crash(v->domain);
->> +        return;
->> +    }
->> +
->> +    vcpu_guest_cpu_user_regs(v)->hstatus |=
->> +        MASK_INSR(new_vsfile_id, HSTATUS_VGEIN);
-> 
-> Looks like you're assuming that no other ID was previously stored in that
-> field. That can't be quite right when the function is called after the
-> vCPU moved to a different pCPU.
-
-I don't use it during the migration process as during migration it is a 
-little bit different sequence of how all of that inside the function is 
-called; I use it only jumping to new vCPU (continue_new_cpu()), where I 
-expect ->hstatus.vgein to be zero because of how the area for the vCPU 
-registers is allocated, via vzalloc().
-
-Probably I should consider to rework that and make it re-usable for both 
-creating/jumping_to_new_vcpu and migration process.
-
-> 
->> --- a/xen/arch/riscv/imsic.c
->> +++ b/xen/arch/riscv/imsic.c
->> @@ -83,6 +83,19 @@ unsigned int vcpu_guest_file_id(const struct vcpu *v)
->>       return ACCESS_ONCE(v->arch.vimsic_state->guest_file_id);
->>   }
->>   
->> +void imsic_update_state(struct vcpu *v, unsigned int guest_file_id)
->> +{
->> +    unsigned long flags;
->> +    struct vimsic_state *vimsic_state = v->arch.vimsic_state;
->> +    unsigned long pcpu = ( !guest_file_id ) ?
->> +                         NR_CPUS : cpuid_to_hartid(v->processor);
-> 
-> "pcpu" as a name is misleading when what you store is a hart ID. NR_CPUS
-> then also isn't a suitable sentinel.
-> 
-
-Agree. I will store here v->processor and NR_CPUS if s/w interrupt file 
-is used and then use cpuid_to_hartid() when it will be necessary.
-
-> Also, style nit: The parentheses aren't really needed around the conditional.
-> But what's definitely wrong are the blanks immediately inside them.
-
-I will deal with that.
-
-> 
->> +    write_lock_irqsave(&vimsic_state->vsfile_lock, flags);
->> +    vimsic_state->guest_file_id = guest_file_id;
->> +    vimsic_state->vsfile_pcpu = pcpu;
-> 
-> By implication from the remark above, the field name stored into then also
-> is misnamed.
-
-I think with the suggested changed above here everything will be fine.
-
-Thanks.
-
-~ Oleksii
 
