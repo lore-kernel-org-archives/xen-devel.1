@@ -4,43 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84F35C5AD55
-	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2026 15:37:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1387594.1628853 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A839BC5AD7B
+	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2026 15:40:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1387602.1628860 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtS3g-00040L-1D; Mon, 10 Aug 2026 15:37:00 +0000
+	id 1wtS75-0005l9-G8; Mon, 10 Aug 2026 15:40:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1387594.1628853; Mon, 10 Aug 2026 15:36:59 +0000
+Received: by outflank-mailman (output) from mailman id 1387602.1628860; Mon, 10 Aug 2026 15:40:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtS3f-00040D-TQ; Mon, 10 Aug 2026 15:36:59 +0000
-Received: by outflank-mailman (input) for mailman id 1387594;
- Mon, 10 Aug 2026 15:36:59 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wtS3f-000406-7K
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 15:36:59 +0000
+	id 1wtS75-0005l2-DJ; Mon, 10 Aug 2026 15:40:31 +0000
+Received: by outflank-mailman (input) for mailman id 1387602;
+ Mon, 10 Aug 2026 15:40:30 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Stewart.Hildebrand@amd.com>) id 1wtS74-0005kw-5v
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 15:40:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wtS3e-0008Z4-KM
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 17:36:58 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wtS73-0098Dt-33
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 17:40:29 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a79f00c-8faa-0a2a0a5109dd-0a2a4502d55e-26
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 17:36:58 +0200
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a79f01a-6ca4-0a2a45020019-d1558034e947-3
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 17:36:58 +0200
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-4955de8797cso13750495e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 08:36:58 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
- [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499740c1e65sm1464585e9.4.2026.08.10.08.36.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 10 Aug 2026 08:36:57 -0700 (PDT)
+ (envelope-from <Stewart.Hildebrand@amd.com>)
+ id 6a79f0eb-8faa-0a2a0a5109dd-0a2a4507aa5c-6
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 17:40:28 +0200
+Received: from [52.101.57.56]
+ (helo=BN8PR05CU002.outbound.protection.outlook.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Stewart.Hildebrand@amd.com>)
+ id 6a79f0eb-b4ea-0a2a45070019-34653938efdf-3
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 17:40:28 +0200
+Received: from DM4PR12MB6472.namprd12.prod.outlook.com (2603:10b6:8:bc::7) by
+ LV3PR12MB9439.namprd12.prod.outlook.com (2603:10b6:408:20e::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Mon, 10 Aug
+ 2026 15:40:25 +0000
+Received: from DM4PR12MB6472.namprd12.prod.outlook.com
+ ([fe80::4a4d:4208:3862:fb7a]) by DM4PR12MB6472.namprd12.prod.outlook.com
+ ([fe80::4a4d:4208:3862:fb7a%6]) with mapi id 15.21.0292.024; Mon, 10 Aug 2026
+ 15:40:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,166 +55,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786376218; x=1786981018; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Nt96e5JrhJ37b+v36cltLHlfFI5f1cPCJ8WVk3Ws90Q=;
-        b=ApNhojU0wAfZm7igbZOBXK7zC4xOddYjslB/BTguXJAU4xQpmOcU90sECLaYlXTHCN
-         qzQjJGfUDaFom9zR20PoLTp48pMZml1TvZegtTKEQCObqtK86OoOT/0yE7L02Wti7GjM
-         oIYi5zb1BB/ktdpyrZNjDLykBkFj7NdbVkGvi7TA/cqYt6CorJhmBBPK4AMpJTgSuTkQ
-         ctz+0CVhByWpKbxX+XZ3R/MspZ3Xv/Ot+UK8hQafxV5zy72qNpZNFbxwTYyKw7d4lhBK
-         e92LxYhFozDC1SqBRzLuwe5Yr2vkqQJ5bSNmWx9wiQE+tChOBYjTo2W+bkkqYI5KHD4N
-         9fng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786376218; x=1786981018;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Nt96e5JrhJ37b+v36cltLHlfFI5f1cPCJ8WVk3Ws90Q=;
-        b=nRoHgNcZGldvNCB7f5FPBPLr4vsjes6q0/vDOSvrUOn6kGTR40PbJRA5j3HOt1j/lx
-         pEcqQGj/wKs3lXfSu2uhZ41rZLxQleUtJNgzZvHu6IqjV8Ya5DF+x4yn82B0a8wO20fA
-         0ThXlWaZe051tDpSV7fWxKXwz8gwbAh9gjM2NYD7t1ohMfwkfDlSxWlWEsa3aaz2Q163
-         YttGbYHWgHZnsx077TLJkro8lpFuyacBju1uMz2ZRWz8GzX1bmZ8BYWkvjmEyImEXJcV
-         +0foGGuMVPFpY6Yd0NODK37+NXkrOZjmnK4wsHIGZ+KBo/RNp5V05pgIKTKhFnIoNo6T
-         6WJA==
-X-Gm-Message-State: AOJu0YzzsKdd76Bfz/Zq6QquEh0yfBwFwQxmRTciNGn3YzgG+lRh2+MD
-	r3doU7+5NWnbSre/uwI6l76IfwxxEBaNhTxOcmAe5m7F7I6U50NHei1p
-X-Gm-Gg: AR+sD10VpZDdjufcEkch5j3S9M2/cTnY2Em1HbAQ44vvNnwVgD6GdKWqmZd6C1SDmF3
-	yQ2jMLMz+kH+GozYcx8Mm+X899NXXhQ5u7pAC4c/rIrReBprhqRsdvUGmQhsKlASigQ5V90C252
-	tqWuD/kB5R9VjENCujbEQis9qtVHRZm2tbTz2PEBWZKiG0yC8+MM3Cyn3CvozgtFsoD8OG/jdZC
-	trWWOTNEj5SAAJkL/cML6jA6BVyCruh3f+ol+S7PmKn3zKiVrgvsNveVcQXiaHvGLmCBKya1SNm
-	UdmQPMchWfm6oaBbukCznaMEy/yEPrPFvU+pt7ZzXo9AOhPsSG/UwQGjejbA12qNp8zz8Lra1nt
-	tASZECf3rFnXs9Aqco4MYjLGoUbv3fQQmjPf0jx9on8RorYyJLdPf4YFDOIp+cJrsZ+cbbV4qp+
-	3egs0OXSVBbAunHKpZjVN2UE/EJEpxKI+Adg7XXYRu/jf6fU1biCExD9dGCcLSjZGkGgInaJXA/
-	2AuAq+Mu6gju0Vm6pxCPWebUkaPnNKrxAU9eeFMFEg=
-X-Received: by 2002:a05:600c:c050:b0:493:a613:56b2 with SMTP id 5b1f17b1804b1-4995e08e537mr216929085e9.8.1786376217831;
-        Mon, 10 Aug 2026 08:36:57 -0700 (PDT)
-Message-ID: <05283ea0-de82-4160-a3f9-5fc1292a20a5@gmail.com>
-Date: Mon, 10 Aug 2026 17:36:56 +0200
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=tiipi1qKGKHbHC7MFEX9/lXtkyks5yGkPFq5xazp5UdaqNu+Sj78hKxTLEGmbVYs9XJ9KlbWHA9hZZu8DIW5YLHXfHJiaz8FhKSGAY2XnU9YBbkysZxBdqGA4Z2RM5iKizLXyN3j9r0ijfDHKbGbOTf4NGw+ampk4ZHqc3qI73WTHXQ2adzuPFF0LY5nnQumzlUpFPf2bV/ZLjivgPSa34DwB1UcfBJpz/pRPVxPvaemdMIF0EB4jRK2DZpx4HoiAoZOAxEz00VDedXGpM2ZrThwv4IfACmayqR7D1YcozRWLMS0vDxBNc6BiyVeBtAm2xodSl5fHo9AMGPj/q6CxQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=JLQH6i+1RsBXNMnLQnCymGu9+MWr54FLe3zoM/hw45o=;
+ b=fZy6xoGPH9CD0a3bqTCNdbPARgjA9Htu5NRUzuaSOABpzH2AUMGxFj7gpYTMNCpzUMwzyXHrSwxVhzVDQPs7moh7ZbYiv/QQgIbnDyfqAGJZvS3ehtTHniZZgQn0oBYcX4zY/YqBdRS8Gkg95SL680PsoaZsEOWe+BsmvSSOSHtyn0dTKayI5Ix+QQSYCk/2FAGO8oaasuJfJAEFCC6TKd3QJDsQ9SiU5H+mPK8luEu5aXyG0u7FYVi0UnAkzmp8hL2hahRaDe5dXCB9eqm1sXhQoSm4EljRSMvZn455UhLPS1OCc+CEoqROwKPy7AtnKRANe0ffudUXzVw43GIqzg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JLQH6i+1RsBXNMnLQnCymGu9+MWr54FLe3zoM/hw45o=;
+ b=tfP61KIBOa2spXuLjZipld4ySrKWt2J4KTSCgACDp8ajq47l+tJx6ZmqQc8UwPw6FQrqqbR+7xPvOzMQAUrqbKzsTxIye4dMRj/52xB2Go1NBYOqYE4OCkoFZ1qhunpdr9hdFOzJWtJtUygWgVNCsGqg7pG2lkSoyBBfq3gqJHM=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Message-ID: <3a3267a3-01e9-419c-9d82-dd4867056732@amd.com>
+Date: Mon, 10 Aug 2026 17:40:18 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 04/17] xen/riscv: introduce device-agnostic MMIO
- emulation dispatch
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Cc: xen-devel@lists.xenproject.org,
- Romain Caritey <Romain.Caritey@microchip.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
-References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
- <c12b69710d7b79bfc0c110f3fa043d871d8b8394.1784560663.git.oleksii.kurochko@gmail.com>
- <1786373377.8631fc262581453bbf619ec5b2062170.19fec268e07000e099@vates.tech>
+Subject: Re: [PATCH v2 1/2] x86/pci: prevent cross-device accesses in
+ pci_mmcfg_{read,write}()
+To: Roger Pau Monne <roger@xenproject.org>, xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
+ <andrew.cooper3@citrix.com>, Teddy Astie <teddy.astie@vates.tech>
+References: <20260806152619.23881-1-roger@xenproject.org>
+ <20260806152619.23881-2-roger@xenproject.org>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <1786373377.8631fc262581453bbf619ec5b2062170.19fec268e07000e099@vates.tech>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Stewart Hildebrand <stewart.hildebrand@amd.com>
+In-Reply-To: <20260806152619.23881-2-roger@xenproject.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1786376218-666B72AC-03B528EE/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 2760
+X-ClientProxiedBy: CPCP307CA0007.DNKP307.PROD.OUTLOOK.COM (2603:10a6:380::7)
+ To DM4PR12MB6472.namprd12.prod.outlook.com (2603:10b6:8:bc::7)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR12MB6472:EE_|LV3PR12MB9439:EE_
+X-MS-Office365-Filtering-Correlation-Id: b4a66409-c7e4-45ba-42c5-08def6f5b0d2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|376014|366016|23010399003|18002099003|22082099003|11063799006|56012099006|3023799007|4143699003|10067099003;
+X-Microsoft-Antispam-Message-Info:
+	D5oSoCxy9edBa7t7iaUrgk6Zm0+ljEXAMMsEAhSWFio7GSTq/DNkrN9g26ibwGicrkuf/iK7FzqocPPDtOJq6NizMAxlHP+lPFgf6cSZE2kpIm6JYBorfGNYRt3T/s9fpX7CmmFIjQRTo/KpXHYUgYVwc7s9S2i+pu/ngHekS6bNgI7eekVZAaZrLBSoNmdxaTCwNnv714pmG3yia+pr6sxvVWNINiXnePs1ZQ9R9K5wxgiP/HZ/BjG4Lys+rEEpZzINgKW8H7PRci4elopOvO77RgJ8LSLKX6hHMkZ70zmmTQuQmilcoK3OkrTDghrI/Bh8J4UfqyFgmGTxVhSf4xxKNg657JGUmfrl4lTVhpJ00QSb+l907TLYpgHCR6myekamvlpJ75ZLcrusBVar2mzv51CQ1pGVyr0Ue3l8ADZlvTmXed09H6V1wcqc4b64Nwq3ssKL5f8UIyBUpEeNiBsGiN6ZpyZYY1CDPZSsAci6l3XfNNLGl6OTNsVatx3pE0OO0XIyFSNbiXj40OFld4jw/cpakBLqW6XcxDyCy7g8Vtnj5vgAgLVFcCEhiNf1ghW+vaBhQstTD5vEPGxv0QL0UK0b31dhmLkk6RagbUCgIBlbcgjrYMnizYsrE+bI6x8q7ZbOmbU+jxxbC26SfSaX0h3STOyd4nKC+jv2uVk=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR12MB6472.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(23010399003)(18002099003)(22082099003)(11063799006)(56012099006)(3023799007)(4143699003)(10067099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?VFhnSUtTaVFnMU5EeFhNUzMzbklsSDBJOHBVcHpNQVBNOElCSWtaM0wzb2Vw?=
+ =?utf-8?B?VVVoVlliL0lRckxnbnlPTTBnbThrV053bWQrbmhPSi9KQzI1K2lsVU9rRU9Y?=
+ =?utf-8?B?dkNKTTRwVlAvQ202dUVUR1ozZU5GNU1rVExYY0FrRjdObGk2K3lwa0tSK1Fv?=
+ =?utf-8?B?RzZVYnpNdFhPT1F1bUZmakdFODdqM2xMd000S1U2c2dGODdCb3VEbVpUUU1Q?=
+ =?utf-8?B?UkZtYkM0dVRpKzRoUE5EbDQvTkp3MVBoUk84MVVaOGNwT1UyMU9DRWZxY1NT?=
+ =?utf-8?B?YmZZa2ZIUzVUOTNCbVVoM1AxejJReEc5NzFnOUVENFIwdlpGMXRDS3FTTHJp?=
+ =?utf-8?B?c3hJZlc1bWE4cmdOWDh4ZnRUbDM2d2lLZ1lIeFpjR0FleVdEb28wdU96dzJu?=
+ =?utf-8?B?eWJocFBJV2xFSHErWkM1Q2h0emZ3UnVkR2JyWWF0VTZTTDF6UHBqN1Z3Zmpz?=
+ =?utf-8?B?ZGFUWjlhQ3FyV0I5cWUxeVpEcEZ4Z0N6Ykdnay9oQ2xFb1ZtSmp0NHYwVVBV?=
+ =?utf-8?B?MExtUHFWVnNNQk8zc2kvUENOV0dxMHVnNVJncXRDd1ZjbnJyRlZhWXNBYUUv?=
+ =?utf-8?B?cFEzZUYveHJGbWFvLzNPR0l5VVhvTnphcmdQd2ZqNFN2Z2p4cTBoNm5IWE9D?=
+ =?utf-8?B?S1lpSG9WTXRzNDBQekpDd090MXBCeXU5S2gzejk0YmdNWjZoNXBoTWNYU1d3?=
+ =?utf-8?B?Qis0SnFySThZakdITkZ0NzVoT3VHbE1WdFcxTkVPdURpNlN4MEZPb3gvMGhY?=
+ =?utf-8?B?aHF4dFMwNmlSTmh5Yk91RjlMRzE2NkdGMFNCWWZNTzF3dUU3RFBBdk5QQTBt?=
+ =?utf-8?B?THJHbXZWL3paMjBRWGo3VW1KN2xvRlArY2VhSmZRQzZLeUpUSjJJQmRuWXBk?=
+ =?utf-8?B?TGNMbGF3SVdsRDhnWkRLVWtRVmRQaWNoN25XYU1LQ0dDM096SkNsb1pQQTA0?=
+ =?utf-8?B?bjlkb0dyQmJ0eDluRnF5WDF3S2FKcE9rZzB2SC9Gcmk2RkhOWVlZb0E2VVg2?=
+ =?utf-8?B?TTdqbmwyY29tUjNJeVh1RThjRzNaa3FVaVZ1bWVpcWh3VDRRWXVvSnI1azdj?=
+ =?utf-8?B?em0wK0hlTUhDYlp0TkRDL3lvbXZjY2ZodlpUZUlBSDNTc2d5dUhGaUlIZVdn?=
+ =?utf-8?B?cDJxZGRic1F2M1FEWUZDK3pDR3QvVmsydTFveEg2RmVTTVlNdHpQQWpVcldH?=
+ =?utf-8?B?dGVleWZIRHkzNVJ2YmphMEdiTFV2cWdTNWQyVDM4SEY3eUpObm0rWWJySnpm?=
+ =?utf-8?B?WGZ5OElMQkhNbW52azVXbUVvSmpTSGJSR0pRSzNZUnN2a3U5TlhqOHpDU1Nu?=
+ =?utf-8?B?M29RZlk3aVZ2Wkc5eUxlTWFwMDl6RFYwbjFKQmFiMlJtRXJORkFvd2pDbzUz?=
+ =?utf-8?B?ZnlISW1scHhmVGFNVzE5L2JkZUVMalJTdkdMVzI3WFFOdFhJWVRoWm9WbCt1?=
+ =?utf-8?B?UTl4R3lYMVJpeVBuNU1rNi81bDFDTWVhZTdQL3F1YUJMK0xiYlVJeUNOOXVX?=
+ =?utf-8?B?ckhXQjBoMU93bC9mdmpSeUg3YkJJOERnaTE5SXhCTHdsMkdlWVBBREtwQkR3?=
+ =?utf-8?B?UVZwKzRCQXRpSUsxMXRXR01iQlpQVXdXbkRCM3UyRjc4RC9GaXV5Z2RqU1N1?=
+ =?utf-8?B?Y2tMa055T0hPZk5ZZUdFczdaOVJxVWlNUFFkYTFaUk1IYlZvOExrOXUzc0ZX?=
+ =?utf-8?B?Rzh4SzJ5TDZRQVREcEJjNzZRT3YraDhOb0xuekc4QzJNMUtqdnJzUU9wcC8w?=
+ =?utf-8?B?cEFlNExVQ0xNRFphRER3SGMydGZBYzIzOHZYK0FadktrcTM5YlNLdEZHc0Vh?=
+ =?utf-8?B?TGVobGRQelduWW1RSUpMVStoWGZGc1ZJT0REVWtWZFFGajRoditUNmoyL1Jj?=
+ =?utf-8?B?cXY3Y3kydDAvSVNNWno3S3ptWmswYzNLbFg4OTF3T2o4b2xDdXV6eUhvSlE1?=
+ =?utf-8?B?TTJsN3JVMlkwRHdNcDI0NmVyb0RxS2I4ZUNzeGlWdmRGdXZUbEhKeTZqSTQ5?=
+ =?utf-8?B?M3kwL2dUeWVwRzhwaFhndGlMQWVsNWJHZmJEbm41M0FTem80TmJvRVhzNi9j?=
+ =?utf-8?B?QzRnK1U3L0tBNjVPbUJiWHlhS2xXQ2t1aE5wb3dTeHNXMEQ1MnEvUm9XdFNY?=
+ =?utf-8?B?cmtKWFFrUkdXUnpYNHBXTWdGWlRnSDR3UWt3YWNuNWlSazU2cjVrVWNpNXA0?=
+ =?utf-8?B?dU1jWlNPZU9YZFV6T0swQlhJRCtDKzF3bHZEalNPSjNZVlAvVThnQWIvZ0Jh?=
+ =?utf-8?B?cUlrRExXakMrM3lOYnBXOEJYRVZGbVV3TVVrWnpTdENFekloanp4aHEwQnND?=
+ =?utf-8?B?dHFFNXVKOHdXZ2diL1NiYzA5Y2Y4T3lrc0NLQ0Y1YkhBSFh5cy9XQT09?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b4a66409-c7e4-45ba-42c5-08def6f5b0d2
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR12MB6472.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Aug 2026 15:40:22.8949
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 71eXWvjvt/PAnXEWqY6KapE6yQbpSABIRRX1lnoQRmYcL6PSz/31uLp0C6hKVEQFvw/LxPEDjL7F6so/sF8Sew==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR12MB9439
+X-purgate-ID: tlsNG-ef75cf/1786376428-350CDAE4-5AD3C65B/0/0
+X-purgate-type: clean
+X-purgate-size: 258
 
-
-
-On 8/10/26 4:49 PM, Baptiste Le Duc wrote:
->> diff --git a/xen/arch/riscv/include/asm/mmio.h b/xen/arch/riscv/include/asm/mmio.h
->> new file mode 100644
->> index 0000000000..18df1133e6
->> --- /dev/null
->> +++ b/xen/arch/riscv/include/asm/mmio.h
->> @@ -0,0 +1,63 @@
->> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+On 8/6/26 17:26, Roger Pau Monne wrote:
+> Introduce a specific check that prevents an accesses from spilling across
+> two devices.
 > 
-> According to coding style, it should be GPL-2.0-only.
-
-Could you please point me to the line in the coding style document where 
-this is mentioned?
-
-If you are referring to:
-   New files should start with a single-line SPDX comment to express the
-   license, e.g.:
-
-   /* SPDX-License-Identifier: GPL-2.0-only */
-
-   See LICENSES/ for a list of licenses and SPDX tags currently used.
-
-Then my understanding is that /* SPDX-License-Identifier: GPL-2.0-only 
-*/ is used only as an example, and I can choose any license from 
-LICENSES/. There, it is mentioned:
-   Valid-License-Identifier: LGPL-2.0-only
-   Valid-License-Identifier: LGPL-2.0-or-later
-
-I am pretty sure that I am free to choose any license that does not 
-conflict with the other licenses used in the project.
-
->> +#ifndef RISCV_MMIO_H
->> +#define RISCV_MMIO_H
->> +
->> +#include <xen/lib.h>
->> +#include <xen/rwlock.h>
->> +
->> +#define MAX_IO_HANDLER  16
->> +
->> +typedef struct {
->> +    paddr_t gpa;
->> +    unsigned int len;  /* access width in bytes (1, 2, 4, 8) */
->> +    bool is_write;
->> +    register_t data;   /* store: value to write; load: value read (set by handler) */
-> 
-> Nit: line too long (85)
-
-I will apply that. Actually I've already fixed that by putting the 
-comment above:
-   /* store: value to write; load: value read (set by handler) */
-   register_t data;
-
-
->> diff --git a/xen/arch/riscv/mmio.c b/xen/arch/riscv/mmio.c
->> new file mode 100644
->> index 0000000000..7d56bc8b27
->> --- /dev/null
->> +++ b/xen/arch/riscv/mmio.c
->> @@ -0,0 +1,145 @@
->> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> Should be GPL-2.0-only.
-
-Regarding license I've wrote a comment above so lets continue discussion 
-there.
-
->> +/*
->> + * Copyright (C) Vates
->> + */
-> Why have you included a copyright notice here, but not in the other
-> files? 
-
-So I just decided to do that for new files as I am not using corporate 
-e-mail.
-
-I don’t know if you can keep it,
-
-Good point, I have to ask then someone from our legal department...
-
-  but I just wanted to point out
-> that there are other files where this type of copyright notice includes
-> the year.
-> 
-
-Before, I used to include the year, but someone pointed out (or perhaps 
-I misunderstood) that there isn’t much point in including it and that it 
-is enough to have just (c) <company name>.
-
-Thanks.
-
-~ Oleksii
-
-
-
+> Signed-off-by: Roger Pau Monné <roger@xenproject.org>
+Reviewed-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
 
