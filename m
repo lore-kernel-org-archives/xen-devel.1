@@ -4,41 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A552C5AD55
-	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2026 13:56:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1387509.1628771 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C63FBC5AD55
+	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2026 14:24:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1387521.1628779 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtQUX-0002Ey-CC; Mon, 10 Aug 2026 13:56:37 +0000
+	id 1wtQvE-0007KW-Cn; Mon, 10 Aug 2026 14:24:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1387509.1628771; Mon, 10 Aug 2026 13:56:37 +0000
+Received: by outflank-mailman (output) from mailman id 1387521.1628779; Mon, 10 Aug 2026 14:24:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtQUX-0002Er-9f; Mon, 10 Aug 2026 13:56:37 +0000
-Received: by outflank-mailman (input) for mailman id 1387509;
- Mon, 10 Aug 2026 13:56:35 +0000
+	id 1wtQvE-0007KP-9h; Mon, 10 Aug 2026 14:24:12 +0000
+Received: by outflank-mailman (input) for mailman id 1387521;
+ Mon, 10 Aug 2026 14:24:11 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3j9h5agYKCYIykgtpimuumrk.ius3kt-jk1krroyzy.3ktvxupkiz.uxm@flex--seanjc.bounces.google.com>)
- id 1wtQUV-0002Eh-SL
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 13:56:35 +0000
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fec0f24d6000e099@swg.vates.tech>)
+ id 1wtQvC-0007JE-Sz
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 14:24:11 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wtQUT-00EaMq-TR
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 15:56:33 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wtQvB-008vgD-Rc
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 16:24:09 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3j9h5agYKCYIykgtpimuumrk.ius3kt-jk1krroyzy.3ktvxupkiz.uxm@flex--seanjc.bounces.google.com>)
- id 6a79d889-e002-0a2a0a5209dd-0a2a4505e71e-30
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 15:56:33 +0200
-Received: from [209.85.214.200] (helo=mail-pl1-f200.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fec0f24d6000e099@swg.vates.tech>)
+ id 6a79df00-2eae-0a2a0a5409dd-0a2a4508b484-30
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 16:24:09 +0200
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <3j9h5agYKCYIykgtpimuumrk.ius3kt-jk1krroyzy.3ktvxupkiz.uxm@flex--seanjc.bounces.google.com>)
- id 6a79d890-4cb1-0a2a45050019-d155d6c8ccb9-3
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 15:56:33 +0200
-Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-2cacd6d37edso31874985ad.0
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 06:56:33 -0700 (PDT)
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fec0f24d6000e099@swg.vates.tech>)
+ id 6a79df09-f659-0a2a45080019-b9ff1c128abf-3
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 16:24:09 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 19fec0f24d6000e099.004 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Mon, 10 Aug 2026 14:24:03 +0000
+Received: from l14 (areims-651-1-80-194.w90-18.abo.wanadoo.fr [90.18.187.194])
+ (Authenticated sender: anthony.perard)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 9079F83723;
+ Mon, 10 Aug 2026 16:24:02 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,77 +58,86 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1786370192; x=1786974992; darn=lists.xenproject.org;
-        h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=scUOSvWK83pq1cJ9Y23cB7+1ZF4+W+kSdr2X3LP0fns=;
-        b=Btw3EVE0HPrzXezXN8OZpzVtRs6G+8xuttQe0mJUOu8hc7KcFEPRSWnd9WSxLNRWBI
-         9GspDDOsCJIVD8dB23HSAAQ9H+lNeiS3VZA1ZyMWb5HbCLO028zIBj1Dp4bP6KPWRC1l
-         koUk3Gvbruyp8VLAdTBXD7CCCnahk4Jtx15NgK4l+UqA9j1omZvwuQ+kJxSh+trEWi/D
-         19AXPFpY+NFf+BAQq4NLPb2q14O/Qzkpu526C/dhHfcD7k+fygUDAYwpjG7utyzXEzHO
-         4XYUtp6A2vse944RP/FePCNa2BVO/cv8svX1JoWM+L1mJo5mGuvqdsZq9HLSw8EuKdvs
-         2Xlw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786370192; x=1786974992;
-        h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=scUOSvWK83pq1cJ9Y23cB7+1ZF4+W+kSdr2X3LP0fns=;
-        b=mLoGQjaVMaOsxvOskj9X2QA7B0bRnpT0h2vtmXlDVlRSSrY1tPKJwB4tHv3PHb4EWg
-         Z59/NkwFBEtra78lmL586nOd2zBl326tGpHw2rCSfIh/jgxtVDCkAIrt1fOjxmoiBG5+
-         pueIA84/o2Coi9MR0ZfBi5S18rCfPQlS8x45J5JY1L0Hn5+6gfcoJUFG/0h1YzV0T5GA
-         4+pDCBC84uRBTVNm38VMvZDUJ6AsmS+bZPpoJETzZU+e4UpI8aYld1WI5gfsZ4Zy+26s
-         DMQetZvQ1A5MH/VARXwnnh4e55rRQD2V8el8EKKsW5zDgF0RmaZhfyLGjZ0oDvBic9rp
-         3esw==
-X-Forwarded-Encrypted: i=1; AHgh+RpJcUuNE3bLAl8wev9Gc+9Yj1OnPmn1AwV0kMcNhQNF/A566RI+HigjuMOIFpT1LODTR469GuPCtmc=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxceE7SkJdcEp0Hr2dHBZzgrO9NtPTqW9FJgrDe5UZiNmLhdzkB
-	TIYK0MMJhI90sypr+fR4T2Ng4pGwSoiRjgiRqcvj5fWKJGF/bACWxPu+bhII8TxoZ7bQIlOsr7d
-	gTZg6nA==
-X-Received: from plml3.prod.google.com ([2002:a17:903:1843:b0:2cc:7ef7:ea41])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:903:13c7:b0:2ce:9c48:22d3
- with SMTP id d9443c01a7336-2d30033718fmr21913835ad.11.1786370191619; Mon, 10
- Aug 2026 06:56:31 -0700 (PDT)
-Date: Mon, 10 Aug 2026 06:56:31 -0700
-In-Reply-To: <d0ee3cf97854b904323db3799e05117d065a6ba0.camel@infradead.org>
-Mime-Version: 1.0
-References: <20260806233609.212337-14-seanjc@google.com> <d0ee3cf97854b904323db3799e05117d065a6ba0.camel@infradead.org>
-Message-ID: <annYj0zj68hH8zIu@google.com>
-Subject: Re: [PATCH v6 13/51] x86/acrn: Mark TSC frequency as known when using
- ACRN for calibration
-From: Sean Christopherson <seanjc@google.com>
-To: David Woodhouse <dwmw2@infradead.org>
-Cc: kas@kernel.org, rick.p.edgecombe@intel.com, pbonzini@redhat.com, 
-	kys@microsoft.com, haiyangz@microsoft.com, wei.liu@kernel.org, 
-	decui@microsoft.com, longli@microsoft.com, ajay.kaher@broadcom.com, 
-	alexey.makhalov@broadcom.com, jan.kiszka@siemens.com, 
-	dave.hansen@linux.intel.com, luto@kernel.org, peterz@infradead.org, 
-	jgross@suse.com, daniel.lezcano@kernel.org, tglx@kernel.org, 
-	jstultz@google.com, x86@kernel.org, linux-coco@lists.linux.dev, 
-	kvm@vger.kernel.org, linux-hyperv@vger.kernel.org, 
-	virtualization@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="us-ascii"
-X-purgate-ID: tlsNG-c201ff/1786370193-716AD2A1-C2E3E16F/0/0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=w3Us9nesQGAMRB6+hb7KVElnxo3+BAlMCfqBlWxluIU=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=sLomAFoEh0VD9jNswyxRCc0EHebV2qsMrWrQ23ZSKUDgeF/ZDPCpz0rWQJ/Q9On0T7kKhBt1D
+ Itnn9mYI509sRMhynAWL8uLqM8WNcTONiWh898tDmGmduMou2m3Gmd38vzOUU9wTdJVa6JZ7yeh
+ kJL6LmJK9SqUEBtWaTxQ4CyT9T7EYpwGEypSya+wlbv+0ClTbBHOfYfl1imNxYknNgF2GE4hx/3
+ xgqFcfdTa6rve3EFQihoVQ34fyroWtSlMjyNjdOKnuNVzNoRrNWzgvKT+CjusVn5tgszCOiUFra
+ p/VI9XzeFA7e18OKxcAffnHRia4vFx2imhkEDzm2wWBQ==
+X-Zone-Loop: 64e6ac7acbbe1721415925217bf7e9260646a46776ea
+x-campaign-type: default
+x-transaction-id: 0942e2cc-63eb-4493-9f70-8b571d7cadb0
+x-swg-uid: 01-816107dc-484d-40c0-bc0a-0c1d64c0ec7e
+X-Mailer: Sweego
+Message-ID:
+ <1786371843.8631fc262581453bbf619ec5b2062170.19fec0f24d6000e099@vates.tech>
+x-swg-bid: 1786371843.8631fc262581453bbf619ec5b2062170.19fec0f24d6000e099
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+Date: Mon, 10 Aug 2026 16:24:02 +0200
+From: Anthony PERARD <anthony.perard@vates.tech>
+To: George Dunlap <gwd@xenproject.org>
+Cc: xen-devel@lists.xenproject.org,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger@xenproject.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v2 1/3] xen/scripts: import gen_compile_commands.py from
+ Linux
+References: <20260810095056.29884-1-gwd@xenproject.org>
+ <20260810095056.29884-2-gwd@xenproject.org>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20260810095056.29884-2-gwd@xenproject.org>
+X-BM-Disclaimer: Yes
+Content-Type: multipart/alternative; boundary="-=Part.2029.9152c53835ec1e0f.19fec0f22a8.f9e5d48b8774318a=-"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1786371842728
+X-purgate-ID: tlsNG-c1860d/1786371849-CF15E87B-9B6DBEA1/0/0
 X-purgate-type: clean
-X-purgate-size: 876
+X-purgate-size: 1319
 
-On Sat, Aug 08, 2026, David Woodhouse wrote:
-> On Thu, 2026-08-06 at 16:35 -0700, Sean Christopherson wrote:
-> > Mark the TSC frequency as known when using ACRN's PV CPUID information.
-> > Per commit 81a71f51b89e ("x86/acrn: Set up timekeeping") and common sense,
-> > the TSC freq is explicitly provided by the hypervisor.
-> >
-> > Signed-off-by: Sean Christopherson <seanjc@google.com>
-> 
-> Huh... does this literally get reverted completely in the very *next*
-> patch in the series? Kind of weird, but I guess in some ways it makes
-> sense...
+---=Part.2029.9152c53835ec1e0f.19fec0f22a8.f9e5d48b8774318a=-
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-The literal code gets reverted, but the functional change does not.  Before this
-change, ACRN is the only guest-side PV code that doesn't set X86_FEATURE_TSC_KNOWN_FREQ
-when the hypervisor provides the exact frequency.  I.e. this patch allows for
-making the "No functional change intended" claim in the next patch.
+On Mon, Aug 10, 2026 at 10:49:43AM +0100, George Dunlap wrote:
+> Xen's Kbuild-derived build system records the exact command line used
+> to compile each object in =2E<target>=2Eo=2Ecmd files=2E  That is everyt=
+hing
+> needed to produce a compile_commands=2Ejson compilation database, the
+> format clangd and other tooling consume to provide accurate
+> cross-referencing (go to definition, find references, call hierarchy)
+> in LSP-capable editors=2E
+>=20
+> Import scripts/clang-tools/gen_compile_commands=2Epy from the Linux
+> kernel, unmodified, so that the provenance of the code is easy to
+> verify (commit 90efe2b9119f, Linux v6=2E16)=2E
+>=20
+> As-is the script produces an empty database on a Xen tree, since
+> Xen's compile command lines differ slightly from Linux's; the
+> following patch adapts it=2E
+>=20
+> Assisted-by: LLM
+> Signed-off-by: George Dunlap <gwd@xenproject=2Eorg>
+
+Acked-by: Anthony PERARD <anthony=2Eperard@vates=2Etech>
+
+Thanks,
+
+
+-- 
+Anthony Perard | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vate=
+s solutions
+
+web: https://vates=2Etech
+---=Part.2029.9152c53835ec1e0f.19fec0f22a8.f9e5d48b8774318a=---
 
