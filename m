@@ -4,49 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5759C5AC82
-	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2026 10:20:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1387316.1628572 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 231AFC5AC82
+	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2026 10:30:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1387327.1628609 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtN7F-0001on-0t; Mon, 10 Aug 2026 10:20:21 +0000
+	id 1wtNHI-0004eP-LO; Mon, 10 Aug 2026 10:30:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1387316.1628572; Mon, 10 Aug 2026 10:20:20 +0000
+Received: by outflank-mailman (output) from mailman id 1387327.1628609; Mon, 10 Aug 2026 10:30:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtN7E-0001og-UP; Mon, 10 Aug 2026 10:20:20 +0000
-Received: by outflank-mailman (input) for mailman id 1387316;
- Mon, 10 Aug 2026 10:20:19 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19feb2ff2f9000e099@swg.vates.tech>)
- id 1wtN7D-0001oZ-6v
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 10:20:19 +0000
+	id 1wtNHI-0004eF-H9; Mon, 10 Aug 2026 10:30:44 +0000
+Received: by outflank-mailman (input) for mailman id 1387327;
+ Mon, 10 Aug 2026 10:30:43 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <freddy77@gmail.com>) id 1wtNHH-0004Qx-Cx
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 10:30:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wtN7C-00Dzem-De
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 12:20:18 +0200
-Received: from [10.42.69.4] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19feb2ff2f9000e099@swg.vates.tech>)
- id 6a79a5cb-8faa-0a2a0a5109dd-0a2a45048b74-34
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 12:20:18 +0200
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19feb2ff2f9000e099@swg.vates.tech>)
- id 6a79a5e1-b57f-0a2a45040019-b9ff1c2396d3-3
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 12:20:18 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19feb2ff2f9000e099.002 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 10 Aug 2026 10:20:15 +0000
-Received: from [192.168.1.61] (155.223.66.37.rev.sfr.net [37.66.223.155])
- (Authenticated sender: ngoc-tu.dinh@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id 60F3B81C5E;
- Mon, 10 Aug 2026 12:20:15 +0200 (CEST)
+ id 1wtNHG-000B9X-Pv
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 12:30:42 +0200
+Received: from [10.42.69.12] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <freddy77@gmail.com>)
+ id 6a79a84d-2eae-0a2a0a5409dd-0a2a450ce5b4-16
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 12:30:42 +0200
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <freddy77@gmail.com>)
+ id 6a79a852-f479-0a2a450c0019-d155802fe454-3
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 12:30:42 +0200
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-4953de5be0aso12486915e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 03:30:42 -0700 (PDT)
+Received: from localhost.localdomain ([31.111.172.30])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4995bb8b668sm218478455e9.0.2026.08.10.03.30.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Aug 2026 03:30:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,85 +53,207 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=dwh4fyIqqBY7gZ43AJfLXV5jUYa61S3uFDhcudB0Tfk=;
- h=from:subject:date:message-id:to:mime-version:content-type:in-reply-to:references:feedback-id;
- b=YGu7j7qiGvDn7d/nUlypyg4U69Pen65i0Y9F1mJzQjg0Igl8Syhv2Y1oYdEicqoWkGVx4uKUt
- lRTgzYrTwlz7swJRNJTTKQMfDYKBJoHQM0y8HOV+CNtgb/FLGfFLbesI2QREHPwsx3u3gC3/FAa
- oX5xj+diAH7Gyb7DCH6FSLAGtiXLEqIM7hR4mNFsixDvyQtoMIpLnfi3ZID3JiMeXGKE6qbeRP0
- 6H1ewuIX8ZfSqp4tNGYvnvx/mGjOdIv38km7p5C9JmMNRIo/eEG8ndciRt8Rltl5WHI0NVwfW6A
- Zl9hcPcQd+waNuNlhaoaCnjCYmypLsvm0JAQjaAf6RDw==
-X-Zone-Loop: 3e4d87dda4f87756c6df8b0e14db86ef75f8ee700b9e
-x-campaign-type: default
-x-transaction-id: 1d10f385-683d-41bf-a44c-f7a4b66d3af9
-x-swg-uid: 01-b4e90962-d767-4f93-96db-19a98ff1c15a
-X-Mailer: Sweego
-Message-ID:
- <1786357216.8631fc262581453bbf619ec5b2062170.19feb2ff2f9000e099@vates.tech>
-x-swg-bid: 1786357216.8631fc262581453bbf619ec5b2062170.19feb2ff2f9000e099
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-Date: Mon, 10 Aug 2026 12:20:15 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1786357842; x=1786962642; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=2NxxLpvMxvCVNIhMLzqk93Yy2TTgs6s75lOWPEK4aL8=;
+        b=WWMY34C84Gr2gIQEaxu6lLq5DNlTNwYhWCjGo99tLHoTTAvvrEBhKdpXVAbhAER/dI
+         xShAcUzSH6rwIcYm8/jy0ws8yXx3PHzxsdqcnLu9p6Rb0sJl9/ZlsXwRzaKKOKdODe/4
+         J9uRIaqeGCwJM8sbY+y7+si3q4684NniBbD+rI5k567JdZnhd3bEkF7Xa6ghzFaLtKCQ
+         tT8WhcB1XQlMhrssCb9KlpBt6P/u9vm3nYM1M7e5wpiSZcZaA4KfkceT1D0cUwKUBsQX
+         81rDHFTEYpQ5FXn2siLlCQUWryUYDOpzVtczDUlX70JZsJFUW0HTuq10BSELoc7RQsdS
+         8cuw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786357842; x=1786962642;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=2NxxLpvMxvCVNIhMLzqk93Yy2TTgs6s75lOWPEK4aL8=;
+        b=U7Ob54e4udQPEf4hbQRTlSHgq9WxFYvsq03m0qBkGVFVETVl4Ivo/8qhTQOA6/iVNn
+         NXsuhZD9lxC4+mojFx+Ex/s+nsuYPMBSK2cIYtSWQfEwJN7ZG0V974NK0HIhQzqev7HI
+         nzQ4AtzUAuHYamubwQiBHJZ5M32zL30vy8ADHht9NxRM5l8M5Jb1ghr1YWbSK4e7xkjL
+         CyFqYVIAMIk+wwomy3235oUGmUQKKU9+XZSwTtHx6yjis9MdHFc8/g/4SBosJG0HE4/K
+         2OG0/PfZjjfr0b7y5DX1ptWw0WJqBPpMw0a0iEttFYkzDDu1YnkPBljW9hXi2EMRr/+k
+         3MPQ==
+X-Gm-Message-State: AOJu0YzhzZyR7f75N2MndHdI5Ud08seJEGcnNv9H1zjFOj4tqTPU5QR/
+	4b3juZr/SJiP6s/I8wP2KYGCXshnWLGKPbmhIHBddunDTr6ripkibmUxaNtPtC5RRwg=
+X-Gm-Gg: AR+sD13xEAgsLrqQ2r8yol4nTt/olGWo8B0mM7KXqF5WR1W9ONmPHWLJSS/8lMXVmlF
+	Ptae/Ae/9/Dn2P/t/hIwydTf0VCpyq/PZCF2wPRVMA9x6es2bVLSv1n5mQtIa2yp8bXM2nfzCSG
+	LKmkrIjEJ/b0y+0qWnnT+A3xtrnc5loBoeUHOOhIrj+Mp8SUpHNHjvfC8Dqh+SnkVoOXCCOXLjO
+	XE2/qbTHDt3g8u9oJm42wqzV4oU/rP0AN14GWC2XzNY9OiUwSSVONBEDSo1neeOGK3HioC/odcx
+	1RCHpCsVLkTbOspK+EHsIF+Q4ViSdVGYhfr9YF53cmIEVCOsCwLbF0f21vxn1vuzwMGFgs6eVMA
+	FnJDinlqHbKshAYE2j5Xo5WKB01LxSV2/+SBPfK1wscaGbQmJqgx2Jv8ep/0na14bWRcU8AogS3
+	GpKFk6mFUZ7IOIRoqNLuk2HrB482qESPoXKaaFd2wt+CsViwCHMhM1ZcR5jF+iBUWgtHJr5e9zK
+	bLzcwvdlDH6l/ICD0H5jNKheqV97FpGEM+P0aPd
+X-Received: by 2002:a05:600c:4fcb:b0:495:5890:8f6c with SMTP id 5b1f17b1804b1-4995e084875mr253273375e9.7.1786357841888;
+        Mon, 10 Aug 2026 03:30:41 -0700 (PDT)
+From: Frediano Ziglio <freddy77@gmail.com>
+X-Google-Original-From: Frediano Ziglio <frediano.ziglio@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Juergen Gross <jgross@suse.com>,
+	Frediano Ziglio <frediano.ziglio@citrix.com>
+Subject: [PATCH v10 3/10] libs/guest: allocate various migration arrays just once
+Date: Mon, 10 Aug 2026 11:30:06 +0100
+Message-ID: <20260810103018.54564-4-frediano.ziglio@citrix.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260810103018.54564-1-frediano.ziglio@citrix.com>
+References: <20260810103018.54564-1-frediano.ziglio@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: help Windows PV Drivers and Windows Server 2025
-To: "H. Bakker - Hunenet B.V." <h.bakker@hunenet.nl>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <AM9PR05MB7665DF8E88357A35E50C1CA6EDD12@AM9PR05MB7665.eurprd05.prod.outlook.com>
-Content-Language: en-US
-From: Tu Dinh <ngoc-tu.dinh@vates.tech>
-In-Reply-To: <AM9PR05MB7665DF8E88357A35E50C1CA6EDD12@AM9PR05MB7665.eurprd05.prod.outlook.com>
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.1fe4.78f79b667744f805.19feb2ff0d7.9ad1b47bc5e7f8fb=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1786357215448
-X-purgate-ID: tlsNG-ebf023/1786357218-52ECEB50-8C6F1673/0/0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d25034/1786357842-034D7A5B-FE0536AF/0/0
 X-purgate-type: clean
-X-purgate-size: 1312
+X-purgate-size: 4898
 
----=Part.1fe4.78f79b667744f805.19feb2ff0d7.9ad1b47bc5e7f8fb=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+From: Edwin Török <edwin.torok@citrix.com>
 
-On 07/08/2026 11:59, H=2E Bakker - Hunenet B=2EV=2E wrote:
-> This concerns the installation of the Windows PV Drivers on Windows=20
-> Server 2025=2E
->=20
-> When running *"dpinst=2Eexe"*, the installation fails with the message=
-=20
-> *"Install failed"*=2E
->=20
-> The affected driver version is:
-> *DriverVer=3D07/13/2023,9=2E1=2E0=2E1*
->=20
-> I am currently using an older version that works correctly:
-> *DriverVer=3D12/05/2019,9=2E0=2E0=2E2*
->=20
-> Kind regards, Henry Bakker=2E
->=20
+Allocate these array just once at the start of migration,
+using the maximum batch size, and free them at the end.
 
-Hello,
+Signed-off-by: Edwin Török <edwin.torok@citrix.com>
+Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
+Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
+---
+Changes since v2:
+- change prefix in subject.
 
-Looks like you're trying to install the downloads from the Xen Project=20
-website (xenbus=2Etar and related)=2E These downloads are not digitally=20
-signed, nor are they kept up-to-date with upstream development=2E You can=
-=20
-rebuild the drivers from source repos [1] (requires enabling testsigned=20
-mode), or download a signed build from downstream distributions=2E
+Changes since v3:
+- fix comment style
 
-[1] https://xenbits=2Exen=2Eorg/gitweb/?a=3Dproject_list;pf=3Dpvdrivers/wi=
-n
+Changes since v4:
+- change order of fields in structure.
 
+Changes since v6:
+- split preparation commit.
 
+Changes since v8:
+- remove useless memset;
+- initialize variables while declaring them.
+
+Changes since v9:
+- added Reviewed-by.
+---
+ tools/libs/guest/xg_sr_common.h |  6 +++++
+ tools/libs/guest/xg_sr_save.c   | 45 ++++++++++++---------------------
+ 2 files changed, 22 insertions(+), 29 deletions(-)
+
+diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
+index 7574c9f5b6..c07c6db59e 100644
+--- a/tools/libs/guest/xg_sr_common.h
++++ b/tools/libs/guest/xg_sr_common.h
+@@ -246,6 +246,12 @@ struct xc_sr_context
+             struct xc_sr_context_save_buffers
+             {
+                 xen_pfn_t batch_pfns[MAX_BATCH_SIZE];
++                xen_pfn_t mfns[MAX_BATCH_SIZE];
++                xen_pfn_t types[MAX_BATCH_SIZE];
++                void *local_pages[MAX_BATCH_SIZE];
++                struct iovec iov[MAX_BATCH_SIZE + 2]; /* Headers + data. */
++                uint64_t rec_pfns[MAX_BATCH_SIZE];
++                int errors[MAX_BATCH_SIZE];
+             } *buffers;
+         } save;
+ 
+diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
+index 22348db445..6a77e33a47 100644
+--- a/tools/libs/guest/xg_sr_save.c
++++ b/tools/libs/guest/xg_sr_save.c
+@@ -86,15 +86,12 @@ static int write_checkpoint_record(struct xc_sr_context *ctx)
+ static int write_batch(struct xc_sr_context *ctx)
+ {
+     xc_interface *xch = ctx->xch;
+-    xen_pfn_t *mfns = NULL, *types = NULL;
+     void *guest_mapping = NULL;
+-    void **local_pages = NULL;
+-    int *errors = NULL, rc = -1;
++    int rc = -1;
+     unsigned int i, p, nr_pages = 0, nr_pages_mapped = 0;
+     unsigned int nr_pfns = ctx->save.nr_batch_pfns;
+     void *page, *orig_page;
+-    uint64_t *rec_pfns = NULL;
+-    struct iovec *iov = NULL; int iovcnt = 0;
++    int iovcnt = 0;
+     xen_pfn_t *const batch_pfns = ctx->save.buffers->batch_pfns;
+     struct {
+         struct xc_sr_rhdr rec;
+@@ -110,28 +107,21 @@ static int write_batch(struct xc_sr_context *ctx)
+         },
+     };
+ 
+-    assert(nr_pfns != 0);
+-    assert(nr_pfns <= MAX_BATCH_SIZE);
+-
+     /* Mfns of the batch pfns. */
+-    mfns = malloc(nr_pfns * sizeof(*mfns));
++    xen_pfn_t *const mfns = ctx->save.buffers->mfns;
+     /* Types of the batch pfns. */
+-    types = malloc(nr_pfns * sizeof(*types));
++    xen_pfn_t *const types = ctx->save.buffers->types;
+     /* Errors from attempting to map the gfns. */
+-    errors = malloc(nr_pfns * sizeof(*errors));
++    int *const errors = ctx->save.buffers->errors;
+     /* Pointers to locally allocated pages.  Need freeing. */
+-    local_pages = calloc(nr_pfns, sizeof(*local_pages));
++    void **const local_pages = ctx->save.buffers->local_pages;
+     /* iovec[] for writev(). */
+-    iov = malloc((nr_pfns + 2) * sizeof(*iov));
++    struct iovec *const iov = ctx->save.buffers->iov;
+     /* page_data record PFNs list */
+-    rec_pfns = malloc(nr_pfns * sizeof(*rec_pfns));
++    uint64_t *const rec_pfns = ctx->save.buffers->rec_pfns;
+ 
+-    if ( !mfns || !types || !errors || !local_pages || !iov || !rec_pfns )
+-    {
+-        ERROR("Unable to allocate arrays for a batch of %u pages",
+-              nr_pfns);
+-        goto err;
+-    }
++    assert(nr_pfns != 0);
++    assert(nr_pfns <= MAX_BATCH_SIZE);
+ 
+     iov[0].iov_base = &hdrs;
+     iov[0].iov_len = sizeof(hdrs);
+@@ -249,14 +239,11 @@ static int write_batch(struct xc_sr_context *ctx)
+  err:
+     if ( guest_mapping )
+         xenforeignmemory_unmap(xch->fmem, guest_mapping, nr_pages_mapped);
+-    for ( i = 0; local_pages && i < nr_pfns; ++i )
++    for ( i = 0; i < nr_pfns; ++i )
++    {
+         free(local_pages[i]);
+-    free(rec_pfns);
+-    free(iov);
+-    free(local_pages);
+-    free(errors);
+-    free(types);
+-    free(mfns);
++        local_pages[i] = NULL;
++    }
+ 
+     return rc;
+ }
+@@ -790,8 +777,8 @@ static int setup(struct xc_sr_context *ctx)
+ 
+     if ( !ctx->save.buffers || !dirty_bitmap || !ctx->save.deferred_pages )
+     {
+-        ERROR("Unable to allocate memory for dirty bitmaps, batch pfns and"
+-              " deferred pages");
++        ERROR("Unable to allocate memory for dirty bitmaps, deferred pages"
++              " and various batch buffers");
+         rc = -1;
+         errno = ENOMEM;
+         goto err;
 -- 
-Ngoc Tu Dinh | Vates XCP-ng Developer
+2.43.0
 
-XCP-ng & Xen Orchestra - Vates =
-solutions
-
-web: https://vates=2Etech
----=Part.1fe4.78f79b667744f805.19feb2ff0d7.9ad1b47bc5e7f8fb=---
 
