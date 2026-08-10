@@ -4,46 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6BB3C5AD7B
-	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2026 15:42:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1387609.1628871 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 040C7C5AD7B
+	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2026 16:02:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1387623.1628880 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtS8O-0006ER-RW; Mon, 10 Aug 2026 15:41:52 +0000
+	id 1wtSRn-0001XO-E3; Mon, 10 Aug 2026 16:01:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1387609.1628871; Mon, 10 Aug 2026 15:41:52 +0000
+Received: by outflank-mailman (output) from mailman id 1387623.1628880; Mon, 10 Aug 2026 16:01:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtS8O-0006EK-NT; Mon, 10 Aug 2026 15:41:52 +0000
-Received: by outflank-mailman (input) for mailman id 1387609;
- Mon, 10 Aug 2026 15:41:52 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Stewart.Hildebrand@amd.com>) id 1wtS8N-0006EE-Tt
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 15:41:52 +0000
+	id 1wtSRn-0001XH-A9; Mon, 10 Aug 2026 16:01:55 +0000
+Received: by outflank-mailman (input) for mailman id 1387623;
+ Mon, 10 Aug 2026 16:01:53 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fec689f7e000e099@swg.vates.tech>)
+ id 1wtSRl-0001XB-I1
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 16:01:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wtS8N-00ErSm-Ah
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 17:41:51 +0200
-Received: from [10.42.69.9] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Stewart.Hildebrand@amd.com>)
- id 6a79f12b-bab6-0a2a0a5309dd-0a2a4509aaea-34
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 17:41:50 +0200
-Received: from [52.101.201.14]
- (helo=PH7PR06CU001.outbound.protection.outlook.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Stewart.Hildebrand@amd.com>)
- id 6a79f13d-be1a-0a2a45090019-3465c90e8ff0-3
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 17:41:50 +0200
-Received: from DM4PR12MB6472.namprd12.prod.outlook.com (2603:10b6:8:bc::7) by
- MN0PR12MB6054.namprd12.prod.outlook.com (2603:10b6:208:3ce::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Mon, 10 Aug
- 2026 15:41:45 +0000
-Received: from DM4PR12MB6472.namprd12.prod.outlook.com
- ([fe80::4a4d:4208:3862:fb7a]) by DM4PR12MB6472.namprd12.prod.outlook.com
- ([fe80::4a4d:4208:3862:fb7a%6]) with mapi id 15.21.0292.024; Mon, 10 Aug 2026
- 15:41:45 +0000
+ id 1wtSRk-003yAp-KY
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 18:01:52 +0200
+Received: from [10.42.69.1] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fec689f7e000e099@swg.vates.tech>)
+ id 6a79f5e1-2eae-0a2a0a5409dd-0a2a45018502-42
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 18:01:52 +0200
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19fec689f7e000e099@swg.vates.tech>)
+ id 6a79f5f0-5984-0a2a45010019-b9ff1c1283ff-3
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 18:01:52 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 19fec689f7e000e099.002 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Mon, 10 Aug 2026 16:01:47 +0000
+Received: from leducb (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id CDEB880143;
+ Mon, 10 Aug 2026 18:01:45 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,128 +58,212 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jOeRiICe3BP3G+FrsYmqCglQP6oUN+t03VhmnVtkiuGhojVrOktgPumNCUyHT/u4XVJV+JSY4fQ8/I7LHCgPL6Koj4H3VEa617THlF3I53CTZZX3QkBMChBWNUqHRmPuKJ8bM9lyOjJh24Zua2Cfvyu63mKEL4ZWPE9zNrAFJbYAcHkahdgY9FyW39JGnVTGnJmKcEtWWDhYJsdt8p5vlCb9l/ACKMXuqbF7bhHq2Gt3ZuGwTY5V5JuMLqTrIEFEXh9h/yCrplRcQwqlhJM/wcW/eAmZQBiCgSK43RXrdaBIocXecHN0ObXq5ZDv10Q48Xg0HL7ssZthl0hXwTXJMQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=eycNA89dKo9QWALjfwVpOmoCniYD7R5v+ovAdxRCMFU=;
- b=FwZ56anSXG4WUDD0EEJo0H2+KgxjfZXd/QpyVNz6JCK/8ArR5DRL1ctvtBwkKJihW9rsMz604Ae3DYwacH058AChQATVVly57aotmmX1LJKlnlhrL+I9EfLVWgyvoaz1WBVmAAh8pdy04HIRt/QiXhvAMXw+xTMsg6UHp6w2Og3eJ1aE8NPuzVy5lhqcAfMJxNXFa5eIKkRjK1IHntD/P7fwRCML3mcEICa+yBi9Grx7mA909epBXxCa/vM/ss4fSnEsr+yAOODfOmoLlLMp7ZdXh5YhVsNqEp35m1rAgVxmhZyBwRaIboMuDTpTT6tMFEyGJABKGjGNIfN/9Y3WuA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eycNA89dKo9QWALjfwVpOmoCniYD7R5v+ovAdxRCMFU=;
- b=qIhpT0Dyz3Vs0vgAPMAlZVmg0+s9p9aJDnplOVSKxkp8AlA5KS0AXgRabJUagJVcqg5EifhSCsaa5zRdF+9IKgxfF7z2S42k2t/JU3JDwVS1DG1e+Kty5oGn/V9x1GnnRPqQ1Sw3uvZn4aapUwjVeAzF42Ta3zpKtrRWINXIUO0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Message-ID: <9191c840-5d9f-4780-a9f9-918459454cff@amd.com>
-Date: Mon, 10 Aug 2026 17:41:40 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] xen/vpci: allow unaligned accesses by the hardware
- domain
-To: Roger Pau Monne <roger@xenproject.org>, xen-devel@lists.xenproject.org
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
- Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, Jason Andryuk <jason.andryuk@amd.com>
-References: <20260806152619.23881-1-roger@xenproject.org>
- <20260806152619.23881-3-roger@xenproject.org>
-Content-Language: en-US
-From: Stewart Hildebrand <stewart.hildebrand@amd.com>
-In-Reply-To: <20260806152619.23881-3-roger@xenproject.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: CPCP307CA0002.DNKP307.PROD.OUTLOOK.COM (2603:10a6:380::15)
- To DM4PR12MB6472.namprd12.prod.outlook.com (2603:10b6:8:bc::7)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=mDWDY8uCcNpOoWchPUgPLSC3AhEIumSbEE6oZEH4OMs=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:feedback-id;
+ b=orkGOrmvBqXcC5/yo/UFmyKqN0YxWs3qMjSf7eltUIA3lif439MB9sezVO9uvIMpUWf/yNLG4
+ tb1vU3/5FovEcCh5MiACrbkZkzzopSKOHbusdvkAPjfk/0H3OguhFuwuC1Vu2q7USAnHrEuuSNE
+ iz6jocWQQsI5QE16Y8UQ/R5Tk5Z/Wu7pUyHIWoyDsCDOujwDYWvM2+KNBXnZZD2/rcoFmakZuZL
+ AT7KDZtI91esKRgkJ7wqdA36vx8vJC4xCireKx+L8xpca1x7kAQPiPrGnVt1nNXC6WTgu3b/+Kg
+ IdFihvX3tXavbvQw0tTVsKmcYVLkqi/ti0OlU7ep3llQ==
+X-Zone-Loop: c8e3ca4d7798ec05392c0dd2ef91c4d0587d2a8872c6
+x-campaign-type: default
+x-transaction-id: ab6c9570-46a5-487a-a4d1-af9b08c5d184
+x-swg-uid: 01-3221a14d-cc91-447f-964c-cd7f08f435e1
+X-Mailer: Sweego
+Message-ID:
+ <1786377707.8631fc262581453bbf619ec5b2062170.19fec689f7e000e099@vates.tech>
+x-swg-bid: 1786377707.8631fc262581453bbf619ec5b2062170.19fec689f7e000e099
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: xen-devel@lists.xenproject.org
+Cc: Doug Goldstein <cardoe@cardoe.com>,
+	Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Subject: [PATCH 0/6] automation: add QTB test framework for riscv64 smoke tests
+Date: Mon, 10 Aug 2026 18:01:13 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR12MB6472:EE_|MN0PR12MB6054:EE_
-X-MS-Office365-Filtering-Correlation-Id: 32963758-a488-47f3-e55b-08def6f5e1ce
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|366016|23010399003|18002099003|22082099003|11063799006|56012099006|6133799003|4143699003|10067099003;
-X-Microsoft-Antispam-Message-Info:
-	Tt8DrEBwWDHaZbiLNkaTcMtEK6yUQP+Xi5hV+hIXN+oBnTU0huTLQjrxbNv+P4d/ZlJdXPMyw4+LYFuckoIjnOvsSgu/AlynrkJxs/3dGBzBcpARpV13WQuUYI3Uoyz4E2iYyPRV441AKoJK4BEv9TAfB1HHvOYOeEoQ8h3JiK2OnIiqPf5j8LR6fKYZuv4Z308QBmQ3KJRwrZsqVUNIX72nad7G5KKdP2DVOWGXrbh3Y40mHgDRralNKAgB1vNFy+u7bmqnOBfedgpPiRMCssVYjw/vowgLmR3V0v3OP/AYXx5SonKTTKlDnfCIa653ownU87qQUpGk0vhzCVKGrYUU/V2NwVyWF9BiVDKkHL6CNn8kb5Pd97mOJ8FV+36mMTWL0FJLP55IKqyMwoLU2fs1wDrrhRR7e19S/TtCzmJ40tFl906rO/TbFa9rPHKzjKQSXqstLgYScbZSINII7tSug/CRbpyM89xx2OsRBAS7BTuMn5TS2MX/h4lKY6sk32j8Hz31Y1XPRBw+RrvicxWzCYQJfvCQSmE/6MTlU5l1gK5A1EHx6q5gZ4jQS5ZFD12qgl3FXVVlABy6+j+8sXiM/qr3QPRZd8Mv1Q631IQIWYjSJUCcNgULI0j+5UkCvgEZWZ4ttA/51XZzmF/QNPvou6Q8WVG2cvVW9/Nwy1k=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR12MB6472.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(23010399003)(18002099003)(22082099003)(11063799006)(56012099006)(6133799003)(4143699003)(10067099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?Tlg0ejJjbjA5eXhQYW1UT0JRK290TlJJK2RhaVUra2s2dUF1UzJVL3k1ZFpO?=
- =?utf-8?B?dThFMHVnSmVWblVId2E2NCtlNTRoV1U4bEEzdFpJT1JaQ0RLRlp2UlFPMUxk?=
- =?utf-8?B?UjJ1WkdSOWFENzdrSHZYdWdRTmJJTUlwV3JjTTdsNllEcVQ0QzhxWDBkRVNH?=
- =?utf-8?B?b0V6dzJjSXBNNEtPdzdoMHlrM0djRFZLMTJZSWdmdVVVWVh3d3pqRjdmU1l1?=
- =?utf-8?B?UE9KVlM2amNab0JmbzZGa2o1b2RFcS9SN0ZGRWJnYVNzdXA0NDVHeHBhVTJw?=
- =?utf-8?B?SWJOUzdzcDN0R2REOVg0U0tpRTI0a2N0TEtHc3o1bS9BYjkwdGdXR2lpSkVJ?=
- =?utf-8?B?MUlhcGtZZFhsSXRvZzEzSTJHVmw5R3F0QnpkN0hkS1hsZi9RNzUzMER6SDEv?=
- =?utf-8?B?cDdGVWh3UW1yeEhSS3R2RHFTdFVzWEhRdDF0aU45aDJnbjhucE8wdnZhVVc5?=
- =?utf-8?B?N2RJMkxPWHNtWHpxUlNEdGJ2UE54MktSaFNNbmdQRkx5cjRaNkEwUlluSWp4?=
- =?utf-8?B?MnY4S1R1TmEvTmRwZWxKZ1Y0ZHloOHYxOWNmUXNObTI5ZVUzQkJrWHBMUGEx?=
- =?utf-8?B?clozNjhKNmdjNS9ZaCsvY1p3bWZDOFRDQ3B6ZThvMFhOKzJjd2ErTUgvbnNx?=
- =?utf-8?B?N0d3MHJ0QWJJNDFqMGhGOGFHcTdEVTA5M2ttT3N4bk5WR2tRcU0xNDZVREZK?=
- =?utf-8?B?SFNqS3BrZFZTMnpPN0FRalZJMHNzUFFLdEFOMWI4OExDNXUzU1ZkVmFnbkRh?=
- =?utf-8?B?UWtFTGpzOFVFMFR3OUxsVEJxN1F2bFJlbDlmRFNVdFV6YzNwejRNb2tvWXZS?=
- =?utf-8?B?ZnZ5bGVNVnJaNDRsRnBYZ0VEM2xrYzdOd1FZaStFeE84R2pQOU1NV3M5Q1J5?=
- =?utf-8?B?L3hMRzkwL1VEMTdXV0l3TUhBRWtXVWl6NWxQWVA5eVRyNHZPZFRxYUNkZ21F?=
- =?utf-8?B?WEpmZG81MVFNYjlEUHlUalJDNmFPSzZxK3hhQnVQR2tDSXAzMTdrNnpydFdE?=
- =?utf-8?B?cFZXTjZRaHJJblJKamc4OXJleEpGU3Q3L2xtNFpBZUExWTFOaHBJRTdoYW4x?=
- =?utf-8?B?blpNaXhoc25sUWV6R1IvKzVtcVR4Z0dMRHFKTG9UMEdkR2lCM0w0a0xiWFhX?=
- =?utf-8?B?UHNXMkNWRjMrMFIzblJXZmhWRnNUdW90aGNrNlI5alBFb3hOSHNFYytZOUJx?=
- =?utf-8?B?NXBrUjJMcGRGRWV6WU9QN2ZFTDlrN09wci9EaGFyYUFVVURQa2xuWXJZTW4z?=
- =?utf-8?B?VjdieFBhSDNBSHhoRzROaWM0Z3BnVVBQWXcvMkFXaURoYXBJdndPaWlzTVg1?=
- =?utf-8?B?U2w2dnZESlhCclV3YjMzeEVic1hYL1ZyNFBDSFVLdHRmT1NXbUZqc2pQU2Za?=
- =?utf-8?B?MTFjS3o4allHS2prRlQ1VmhIYmN3SS95SU1XSkgrbFlkNW84dCtzcm5RcklB?=
- =?utf-8?B?T0hRcENHNTRBMldPQkpGTmRLZVczd3JCcUhPMXNzUXlYTmJ4d3dTRVhWY1V6?=
- =?utf-8?B?b0o4SUtYN0o1NDVNZTR2MExUcU16WUFtdVdtbC9sRzhLYU1vM3IzVFByQk94?=
- =?utf-8?B?anNKRnRtNHFFb1Ercm5WSi9wZVpQbWQ1eUlBd25VcmY2dGNJQWdWQkNDb3BP?=
- =?utf-8?B?OGY5cXBEOUlxcG1tZ2dTUllscWc5a283amx4aGNaNE45bEJORVBGc1ZhRFNw?=
- =?utf-8?B?L3RrSnhiYzZ1SUJuRTVwNDdmQ0wyRU8vYjRaN2hJclY3a2twNWFzSDJPamE4?=
- =?utf-8?B?dlN0b0pCS3BGTU1JRTVnZERnODRaSGpNM0gvWkppTmdDb0dnNWIrMjNWTUpt?=
- =?utf-8?B?ZWVrbU4wYUFPN251Tzl0QzRtYUtXcmNOYnZhU2tMMzVlcW9QVUtFd2lvWFIz?=
- =?utf-8?B?WXcwTVJkdmJzK05lekdIT3RPeWJTcndwQlJ6ZkRFL1RCNmFYYlRVWWpxWW5O?=
- =?utf-8?B?UUVEUnA0TzRLdTlSbGVlaERocWoxRjNPWmgzVVhxQnFmM2Vydm5LMGVvK1V3?=
- =?utf-8?B?TFhpc3dpalZmd0tkeFRpSk41dng0TEw2dEpYQ01iUnc4TDcxdUhhRHRrdUNi?=
- =?utf-8?B?cFE1aVF0Q1JlN2tLeGJYbGppUXlFNTNtY1lYM0J4UmNBUjhDd3ZEdFlyWE0y?=
- =?utf-8?B?c3gxamxPWlhJbm9BRE5ieU1tWGRMRFlKS1RxSGgwZzZ1K0FtNUExNkFhNytN?=
- =?utf-8?B?Qkl2QnMyY0NKRlZsNzhnOE9CZUdCTm5ISklNU1JaY0doSnJqZVVUdXFkYkVs?=
- =?utf-8?B?T1dkbmVsU01LdUxiN3ErRGpEZExOdW5NcUQwblJKcTY5b0lFNHBnYW1JUWlI?=
- =?utf-8?B?Uks0a29lQ3FJMWlPTEtHa0JDMEtpZDM2aUoreUtkSGt6cnh6T1pEUT09?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 32963758-a488-47f3-e55b-08def6f5e1ce
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR12MB6472.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Aug 2026 15:41:45.1002
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ge29tHxVBQ4Qk6I50SD//CgDemzT3X0tzCwpDeeB5o2REGw36PoV9itEl0OhPMZMGC6P5gWbr3hemTQYmxRmUg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6054
-X-purgate-ID: tlsNG-bad1c0/1786376510-BC2F4034-DB415B39/0/0
+X-BM-Disclaimer: Yes
+Content-Type: multipart/alternative; boundary="-=Part.2047.9748927987cc8332.19fec6899c0.104ee129b456d5ba=-"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1786377705920
+X-purgate-ID: tlsNG-d62444/1786377712-1E07B757-9824E1D3/0/0
 X-purgate-type: clean
-X-purgate-size: 1036
+X-purgate-size: 8391
 
-On 8/6/26 17:26, Roger Pau Monne wrote:
-> It's possible for domains to generate unaligned PCI config space accesses
-> when using ECAM, and hence vPCI should support those at least for the
-> hardware domain.  Such unaligned accesses to the PCI config space have been
-> reported to come from ACPI logic.
-> 
-> Relax the checking in vpci_access_allowed() to allow such accesses for the
-> hardware domain, and fix the handling in pci_conf_{read,write}{16,32}() to
-> fulfill them using MMCFG.
-> 
-> MMCFG regions are identity exposed to the hardware domain, and hence such
-> unaligned accesses can only come as a result of the host having MMCFG in the
-> first place, as otherwise MMCFG won't be exposed to the hardware domain
-> either.
-> 
-> Note that vpci_ecam_{read,write}() already refuse accesses that cross a
-> device boundary unconditionally.
-> 
-> Reported-by: Jason Andryuk <jason.andryuk@amd.com>
-> Signed-off-by: Roger Pau Monné <roger@xenproject.org>
-Reviewed-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
+---=Part.2047.9748927987cc8332.19fec6899c0.104ee129b456d5ba=-
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Xen is being made safety certifiable to IEC 61508 SIL 3 and ISO 26262 ASIL
+D, with Arm and x86 as the current targets [1]=2E Evidence at those levels=
+ is
+requirements based testing plus structural coverage, produced automaticall=
+y
+and repeatably in CI=2E
+
+QTB (QEMU Test Bench) [2] is the framework AMD wrote for it as part of the
+Xen safety initiative=2E It drives a live QEMU instance over qtest, QMP an=
+d
+GDB, so a test has full access to the machine while emulation runs: read
+and write the consoles, inspect registers and memory, inject interrupts an=
+d
+faults, all from Python and all reproducible in a pipeline=2E QTB is not
+upstream in QEMU yet, but is planned to be=2E
+
+RISC-V is not in the certification scope today=2E It is also the youngest
+port, so it has close to no test infrastructure to undo, which makes it th=
+e
+cheapest place to adopt QTB=2E Starting the riscv64 tests on the framework
+now means the port grows its tests in the shape certification asks for as
+the port itself grows, instead of a pile of expect scripts to convert late=
+r
+if riscv64 ever becomes a certification target=2E It also puts a second
+architecture on QTB, which is useful to the framework itself before it is
+proposed to QEMU upstream=2E
+
+Concretely, the riscv64 CI coverage today is one expect script,
+automation/scripts/qemu-smoke-riscv64=2Esh, which boots Xen alone under QE=
+MU
+and greps a single string out of one serial console=2E The machine it boot=
+s
+is hardcoded, so a second configuration means a second script, and a test
+with a DomU in it means growing guest handling from scratch=2E
+
+This series replaces that script with a data-driven framework using QTB=2E=
+ A
+machine is a YAML entry (pcpus, scheduler, interrupt controller, boot
+arguments), a test type is a small Python class saying what to do with a
+booted machine, and a test binds a machine to that type's expectations=2E
+Adding a configuration to CI is then a config change and a job stanza=2E
+
+Patch 1 goes to test-artifacts [3] and must land first, since patches 2-6
+run inside the container it adds=2E Patches 2-6 go to xen=2Egit=2E
+qemu-smoke-riscv64-gcc also pulls the riscv64 QEMU and OpenSBI binaries
+from the qemu-9=2E0=2E0-riscv64 job in test-artifacts, which is not in
+test-artifacts master yet and has to land there too=2E
+
+test-artifacts [3]:
+- Add a QTB container to run the Xen riscv64 tests
+    debian:13-qtb-riscv64, carrying qemu=2Eqtb from AMD's QEMU fork and th=
+e
+    dtc/fdt dependencies the framework needs at run time=2E
+
+xen=2Egit:
+- automation/qtb: add jinja2 device trees for riscv64 smoke tests
+    The host tree varies with hart count, MMU type and device set, so it i=
+s
+    rendered per machine from a template rather than shipping one static
+    =2Edts per configuration=2E
+- automation/qtb: add Python QTB framework with the console-test type
+    The base layer every test type builds on (machine catalog lookup, host
+    DT generation, QEMU invocation, per-console log capture) plus the firs=
+t
+    test type, which asserts every string listed in console-test=2Eyaml is
+    printed on the expected console=2E
+- automation/qtb: add unit tests for the QTB framework
+    pytest coverage of the QEMU-agnostic parts, for developers only=2E
+- automation/qtb: add QTB framework README
+    How to add a machine, add a test type and run one locally=2E
+- CI: run the riscv64 smoke test via QTB framework console-test
+    Repoints qemu-smoke-riscv64-gcc at the framework and drops
+    qemu-smoke-riscv64=2Esh, which then has no caller left=2E
+
+Testing: QEMU only, as the existing riscv64 CI does=2E
+qemu-smoke-riscv64-gcc runs the same check as before=2E
+
+The catalog ships a single Xen-only machine, since Xen cannot boot a DomU
+on RISC-V yet=2E DomU machines plus an irq-test type using QTest interrupt
+injection follow once DomU support lands=2E
+
+[1] https://elisa=2Etech/blog/2026/07/22/the-final-phase-of-xen-safety-sol=
+ving-coverage-and-residual-gaps-stefano-stabellini-amd/
+[2] https://gitlab=2Ecom/xen-project/people/amd/qemu/-/tree/safety
+[3] https://gitlab=2Ecom/xen-project/hardware/test-artifacts
+
+CI test:
+https://gitlab=2Ecom/xen-project/people/baptleduc/xen/-/pipelines/27408369=
+46
+
+Baptiste Le Duc (5):
+  automation/qtb: add jinja2 device trees for riscv64 smoke tests
+  automation/qtb: add Python QTB framework with the console-test type
+  automation/qtb: add unit tests for the QTB framework
+  automation/qtb: add QTB framework README
+  CI: run the riscv64 smoke test via QTB framework console-test
+
+ =2Egitlab-ci=2Eyml                                |   3 +
+ automation/gitlab-ci/test=2Eyaml                |  26 ++-
+ automation/scripts/qemu-smoke-riscv64=2Esh      |  19 --
+ automation/scripts/qemu_smoke_riscv64=2Epy      | 122 ++++++++++
+ automation/scripts/qtb/__init__=2Epy            |   2 +
+ automation/scripts/qtb/riscv/README=2Emd        | 182 +++++++++++++++
+ automation/scripts/qtb/riscv/__init__=2Epy      |   9 +
+ automation/scripts/qtb/riscv/config=2Epy        | 125 ++++++++++
+ automation/scripts/qtb/riscv/config=2Eyaml      |  19 ++
+ =2E=2E=2E/qtb/riscv/console_test/__init__=2Epy        |   4 +
+ =2E=2E=2E/qtb/riscv/console_test/console-test=2Eyaml  |  18 ++
+ =2E=2E=2E/qtb/riscv/console_test/console_test=2Epy    | 145 ++++++++++++
+ automation/scripts/qtb/riscv/dt=2Epy            |  57 +++++
+ =2E=2E=2E/scripts/qtb/riscv/dts/qemu-host=2Edts=2Ej2    | 160 +++++++++++=
+++
+ automation/scripts/qtb/riscv/machine=2Epy       |  56 +++++
+ automation/scripts/qtb/riscv/paths=2Epy         |  51 ++++
+ automation/scripts/qtb/riscv/qtb_test=2Epy      |  53 +++++
+ automation/scripts/qtb/riscv/unit/__init__=2Epy |   2 +
+ automation/scripts/qtb/riscv/unit/conftest=2Epy |  42 ++++
+ =2E=2E=2E/scripts/qtb/riscv/unit/test_config=2Epy     | 128 +++++++++++
+ =2E=2E=2E/qtb/riscv/unit/test_console_test=2Epy       | 217 +++++++++++++=
++++++
+ automation/scripts/qtb/riscv/unit/test_dt=2Epy  |  99 ++++++++
+ =2E=2E=2E/scripts/qtb/riscv/unit/test_machine=2Epy    |  58 +++++
+ =2E=2E=2E/scripts/qtb/riscv/unit/test_temp_dir=2Epy   |  42 ++++
+ =2E=2E=2E/scripts/qtb/riscv/unit/test_xen_dt=2Epy     |  46 ++++
+ automation/scripts/qtb/riscv/xen_dt=2Epy        |  58 +++++
+ 26 files changed, 1718 insertions(+), 25 deletions(-)
+ delete mode 100755 automation/scripts/qemu-smoke-riscv64=2Esh
+ create mode 100755 automation/scripts/qemu_smoke_riscv64=2Epy
+ create mode 100644 automation/scripts/qtb/__init__=2Epy
+ create mode 100644 automation/scripts/qtb/riscv/README=2Emd
+ create mode 100644 automation/scripts/qtb/riscv/__init__=2Epy
+ create mode 100644 automation/scripts/qtb/riscv/config=2Epy
+ create mode 100644 automation/scripts/qtb/riscv/config=2Eyaml
+ create mode 100644 automation/scripts/qtb/riscv/console_test/__init__=2Ep=
+y
+ create mode 100644 automation/scripts/qtb/riscv/console_test/console-test=
+=2Eyaml
+ create mode 100644 automation/scripts/qtb/riscv/console_test/console_test=
+=2Epy
+ create mode 100644 automation/scripts/qtb/riscv/dt=2Epy
+ create mode 100644 automation/scripts/qtb/riscv/dts/qemu-host=2Edts=2Ej2
+ create mode 100644 automation/scripts/qtb/riscv/machine=2Epy
+ create mode 100644 automation/scripts/qtb/riscv/paths=2Epy
+ create mode 100644 automation/scripts/qtb/riscv/qtb_test=2Epy
+ create mode 100644 automation/scripts/qtb/riscv/unit/__init__=2Epy
+ create mode 100644 automation/scripts/qtb/riscv/unit/conftest=2Epy
+ create mode 100644 automation/scripts/qtb/riscv/unit/test_config=2Epy
+ create mode 100644 automation/scripts/qtb/riscv/unit/test_console_test=2E=
+py
+ create mode 100644 automation/scripts/qtb/riscv/unit/test_dt=2Epy
+ create mode 100644 automation/scripts/qtb/riscv/unit/test_machine=2Epy
+ create mode 100644 automation/scripts/qtb/riscv/unit/test_temp_dir=2Epy
+ create mode 100644 automation/scripts/qtb/riscv/unit/test_xen_dt=2Epy
+ create mode 100644 automation/scripts/qtb/riscv/xen_dt=2Epy
+
+--=20
+2=2E55=2E0
+
+
+
+-- 
+Baptiste Le Duc | Vates Hypervisor & Kernel Engineer
+
+XCP-ng & Xen Orc=
+hestra - Vates solutions
+
+web: https://vates=2Etech
+---=Part.2047.9748927987cc8332.19fec6899c0.104ee129b456d5ba=---
 
