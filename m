@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8A49C5B561
-	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2026 10:30:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1387329.1628627 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8B42C5AC82
+	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2026 10:30:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1387326.1628600 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtNHL-00058Z-CE; Mon, 10 Aug 2026 10:30:47 +0000
+	id 1wtNHH-0004R7-E0; Mon, 10 Aug 2026 10:30:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1387329.1628627; Mon, 10 Aug 2026 10:30:47 +0000
+Received: by outflank-mailman (output) from mailman id 1387326.1628600; Mon, 10 Aug 2026 10:30:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtNHL-00058O-8P; Mon, 10 Aug 2026 10:30:47 +0000
-Received: by outflank-mailman (input) for mailman id 1387329;
- Mon, 10 Aug 2026 10:30:46 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wtNHH-0004R0-AT; Mon, 10 Aug 2026 10:30:43 +0000
+Received: by outflank-mailman (input) for mailman id 1387326;
+ Mon, 10 Aug 2026 10:30:42 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wtNHJ-0004t8-UU
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 10:30:46 +0000
+ (envelope-from <freddy77@gmail.com>) id 1wtNHF-0004A8-UM
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 10:30:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wtNHJ-000B9X-Ay
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 12:30:45 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wtNHE-00AlTW-T7
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 12:30:40 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a79a854-2eae-0a2a0a5409dd-0a2a4509bf7e-10
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 12:30:45 +0200
-Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a79a84a-e002-0a2a0a5209dd-0a2a450bb4c2-14
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 12:30:40 +0200
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a79a855-be1a-0a2a45090019-d155802ec06a-3
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 12:30:45 +0200
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-4996f1ee4a4so6106325e9.2
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 03:30:45 -0700 (PDT)
+ id 6a79a850-b7e8-0a2a450b0019-d1558031dcd9-3
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 12:30:40 +0200
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-4954afac04bso18664995e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 03:30:40 -0700 (PDT)
 Received: from localhost.localdomain ([31.111.172.30])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4995bb8b668sm218478455e9.0.2026.08.10.03.30.43
+ 5b1f17b1804b1-4995bb8b668sm218478455e9.0.2026.08.10.03.30.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Aug 2026 03:30:44 -0700 (PDT)
+ Mon, 10 Aug 2026 03:30:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,41 +55,41 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786357845; x=1786962645; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1786357840; x=1786962640; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=DkECl6LDMDGOPn0+PvCj6l9ySrP1BztPa+S0NKPl8lo=;
-        b=XK4ZZmLdPIeRTaxO29DQeKvE5Yq9F2kKDoE/51xEgGvfJCOhc3VQTU2SsUf693ssh3
-         LWKzwQ5/ARqHDrv/6JIt2VFglMMitk6P6GACT3nmFz/NHxrI0UWpWTmJm9uxF9d7TfqQ
-         H+7EvhagApP6OKFXWJNOP0dxpmXNU8Y6XP09b/6QkKzfI5eks1x+2MQxJCJLpJCIFygF
-         saU1GAgFTaq9QBfcL202wcg6/4Vf85nXDw/zcr7OnmMFHnz/lyazsqyUs5mQlAJTq400
-         BQP1lz8bjADlFNOsIJ9rfBAhLa8csd3VFRpNrzbyEi09/7+dSBMfH4q5wXFoRImD9rni
-         jXwA==
+        bh=GVzljfbFKFoNV9C92LIEgW8vPbCFaLYksP7zU4eJtPg=;
+        b=mAuUos2CXlYTXPWJltByqIPNA33B+CgqhMp2167Xx6dyFfepDXvO40fF5An+0q0o+E
+         uz5ssDPs9wHWyjOEuw0W47iT063PE9BajXSY4saCCbn67KO0or2rvSbQJQ0/nmWvEtYu
+         29x5+3XxesexNMqS1Hlhrw6ivLT41PTv/ZYWqquuyz3xXN3ZyLfkkQCWmXHeqI+kOTuG
+         UoUZB09yML3HC5v0LcswG8hslDVMAhhja4J9qEsXImnRQhvRN3U9c2gCCC/D6MpowiG3
+         3cVxCL2ngY/gBz5rlntqxpmxVJnQBOO9uPTrIbSIegc4g80J0B0oJPzZHdt6nsLYRAmy
+         r1FQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786357845; x=1786962645;
+        d=1e100.net; s=20251104; t=1786357840; x=1786962640;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=DkECl6LDMDGOPn0+PvCj6l9ySrP1BztPa+S0NKPl8lo=;
-        b=smh4Dds/2tE2EFxDV9SxuowfUvow7zxwImZh+/EEkEpEhKggFxYPysMUsvcBWWHMy1
-         APpvwp8LiGE10ECBlM+9l9S4LctnaoUCuVN4EYyYP4zHnTbRbOEV0T44MWPnd1bSMrNp
-         B11GDHqss8FeIY4Gtgh/CVyQy7cVob8yez0c+a4MYMhreCi1ly5eiYdNXxwkZgND691k
-         pIaHahjd/VbKXUgGw6DJKaoF87p1W816zotfn2oTSjKr+y8IqpLLg+h909P76lFiF8rA
-         UOiFXPHcqWwfQt/Tyn26CAr7S2IzdH39cw6TZe6BW1ErIfOR3r73swobpHOAxRoytvVn
-         srwA==
-X-Gm-Message-State: AOJu0YyIRu+n3IiHtAB6wzM5Q4OsziYbEoM14VLijSYUw5PZMO3tGsLJ
-	v3zEJLFalBn05ZluDnb2LK6lDXM9GxzcWIVJoWz8S/sQ2ezrj4K+w4FiDcSC0RpWqXk=
-X-Gm-Gg: AR+sD10bp/jD1AEj8oWHDVxrLEyn8C8E7QjgnZcAP/Qlxg/UwaInUKk+ekX4r9emFuK
-	s9awuR06gsyyAeTg2Frm/Nkkr9GU32ZaLlimqDyGmtDMnsfkGRhdmvdY8oWkutBz0tMvG9GtAsH
-	W0GLsc8kNf4tuXGYfriZjU0/ivXLrIia48zfz7gMvlu6lcns9Ha1pWB3QJPRDZbZWd887ZWk1IB
-	0UI1tpVBuvqR6MUeCuCn7GlN63N9q/7AO995krbgT1ufC8yRo4dB9w8uVk1Phd5QQcEMkDSNmN4
-	KiR3fcXXRF4R9o0kjTjLy5Qgqv1dp02q0Sb2BhXUi6IRE7n3yvVL+CpPdcCymVl4UWpekCskFEA
-	RFq58/cP4ZDfn5GZgwhrIxNTZkzLfKz1zHsBtyCqtUgIJGXTZBPVHAl5UC1t2UsQRUpDDTBZYrY
-	Nuvuj7u+W69lFUfl76NGsxV+ZRVEHM8qzGcoLZsZG4zCoOQ1uU5bbiiyiAKFD8ahscBTph07FMe
-	1UaYkytL4EG3EMv+koplDndrTaMPMpfxfYXqmRm
-X-Received: by 2002:a05:600c:3b93:b0:495:6a50:3fb8 with SMTP id 5b1f17b1804b1-499727417c7mr9643525e9.1.1786357844497;
-        Mon, 10 Aug 2026 03:30:44 -0700 (PDT)
+        bh=GVzljfbFKFoNV9C92LIEgW8vPbCFaLYksP7zU4eJtPg=;
+        b=nKglD52EDNS4oY59KtjyIiwDFYVjuHitrDfoS/imn8nWV6O6V1+nMEhU/EDEEj7ALm
+         ZK0VAcOW/gq48pCS1ier5vzBWxBsPSctZp37ru4C4iPCS3O2VxCp8H8CtELny4Q9qleq
+         cW2fC30yQfS1J9dpS7jw+g7QRlohlW85zU99FqrZdbRHrq5VJawzZHgueXg+h7KsvRN0
+         aqK7qGI3teKPN/IfGJDpLlnh5kwRe0EAJGr82jVvsh3WtBGhZku0YMwdRhHY6b3v1heq
+         JCkZ3EUutgrlRbfTT6tLWIYDDGJlFf2hM7W1Adhtg3FUzQVkdXqP6dBJUMXcwORgomvY
+         pTZQ==
+X-Gm-Message-State: AOJu0YyWDgjO99Ob7zCEhPbbyI3Pes52LgD7lnsGJYz6G+4rsiGGgHhQ
+	MgM/74PG6m9z5E75hMKZgWdwDreLOwP0/DHa/ePEOlmG6JH4F971mVAVRpCgK6etzQg=
+X-Gm-Gg: AR+sD13RNGobMQJo3WwOBOMTB3HvYO7+pHv1fR3QB0TyrK6n6qDh+3UtqbSE4Jah4e5
+	qniKf7rnb248cqvTB8k7Bi2BvZseXROq/iDzLqEHfATrAKu4CQpLWJnAHcwLv6VWFR/WoWJThu9
+	/7uFcnYmjZ8k7fQKjpC43PJDXIDAvTK+1sjQPPS8JyFEjpSgR32+AD0E9uAetJxGXIxSnQIEcNj
+	wvmnO1/aQ3CkTO6z/5r2mCB+RBvPskwF6fO4+hgRPxEV7dobfyVIIOWik9jfbDksyjKxM6RAXhO
+	PaXFHoPz8Lhe69ZMN2z33uqoCr1p5db9OLp10A0d0+EXi8w+Ratoql/mdljKo8ubhIxZcZrR1GG
+	/7fKfDYCKuAhr6nppLbjqdSQFZsVP4MoE7n2QyC+VFHckCwWKVw0cetiEm1Cv7Djagi714MigSy
+	OCnC7hX7hQ/gJseYZ3U1mkp6akij6ahAibWoXFwPyLaX7l12WzXEfOEjVEEZ10bD4GI6zeTZh+k
+	ZItuQPBeIcBz5mDVUrNkLD4c/9kfAfV2DHvkdIp
+X-Received: by 2002:a05:600c:3555:b0:499:521d:bff1 with SMTP id 5b1f17b1804b1-4996194e53emr251879455e9.2.1786357840167;
+        Mon, 10 Aug 2026 03:30:40 -0700 (PDT)
 From: Frediano Ziglio <freddy77@gmail.com>
 X-Google-Original-From: Frediano Ziglio <frediano.ziglio@citrix.com>
 To: xen-devel@lists.xenproject.org
@@ -100,131 +100,174 @@ Cc: Frediano Ziglio <frediano.ziglio@citrix.com>,
 	Teddy Astie <teddy.astie@vates.tech>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v10 5/10] libs/guest: add xg_foreignmemory_copy_{from,to}
-Date: Mon, 10 Aug 2026 11:30:08 +0100
-Message-ID: <20260810103018.54564-6-frediano.ziglio@citrix.com>
+Subject: [PATCH v10 2/10] libs/guest: move batch_pfns into a separate structure
+Date: Mon, 10 Aug 2026 11:30:05 +0100
+Message-ID: <20260810103018.54564-3-frediano.ziglio@citrix.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260810103018.54564-1-frediano.ziglio@citrix.com>
 References: <20260810103018.54564-1-frediano.ziglio@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1786357845-3A8D9034-D08973B3/0/0
+X-purgate-ID: tlsNG-42698a/1786357840-AB0DD9EA-63863286/0/0
 X-purgate-type: clean
-X-purgate-size: 4001
+X-purgate-size: 6125
 
-This change prepare code to use a new "foreign copy" hypercall.
-The new hypercall will copy memory from/to a foreign domain.
-The new hypercall can be emulated with a sequence of:
-- map foreign memory;
-- copy memory;
-- unmap foreign memory.
-
-The reason to introduce the emulation first is that you can refactor on the
-emulation without having to introduce the new hypercall.  Introducing the
-hypercall first would make testing more complicated as bugs on the hypercall
-have to be taken into account and considered.  Also it is easier that way to
-enable or disable new code. For instance you want to test for performance
-regression (in this case the code emulated should not perform worse).
+Preparation for a followup patch "libs/guest: allocate various migration
+arrays just once".
 
 Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
+Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
 ---
-Changes since v5:
-- Do not overwrite errno if xenforeignmemory_map fails.
-
 Changes since v6:
-- improve commit message, explain order and changes.
----
- tools/libs/guest/xg_sr_common.c | 57 +++++++++++++++++++++++++++++++++
- tools/libs/guest/xg_sr_common.h |  8 +++++
- 2 files changed, 65 insertions(+)
+- split from "libs/guest: allocate various migration arrays just once".
 
-diff --git a/tools/libs/guest/xg_sr_common.c b/tools/libs/guest/xg_sr_common.c
-index 9b2782b5cf..90da21c35f 100644
---- a/tools/libs/guest/xg_sr_common.c
-+++ b/tools/libs/guest/xg_sr_common.c
-@@ -156,6 +156,63 @@ static void __attribute__((unused)) build_assertions(void)
-     BUILD_BUG_ON(sizeof(struct xc_sr_rec_hvm_params)        != 8);
- }
- 
-+enum {
-+    foreigncopy_from,
-+    foreigncopy_to
-+};
-+
-+static int xg_foreignmemory_copy(xc_interface *xch, domid_t domid,
-+                                 int dir, size_t nr_pages, void *buffer,
-+                                 const xen_pfn_t foreign_pfns[nr_pages])
-+{
-+    if ( nr_pages == 0 )
-+        return 0;
-+
-+    if ( !buffer || !foreign_pfns )
-+    {
-+        errno = EINVAL;
-+        return -1;
-+    }
-+
-+    int err[nr_pages];
-+    const int prot = (dir == foreigncopy_from) ? PROT_READ : PROT_READ|PROT_WRITE;
-+
-+    void *p = xenforeignmemory_map(xch->fmem, domid, prot, nr_pages, foreign_pfns, err);
-+    if ( !p )
-+        return -1;
-+
-+    for ( size_t n = 0; n < nr_pages; ++n )
-+        if ( err[n] )
-+        {
-+            xenforeignmemory_unmap(xch->fmem, p, nr_pages);
-+            errno = -err[n];
-+            return -1;
-+        }
-+
-+    if ( dir == foreigncopy_from )
-+        memcpy(buffer, p, nr_pages * XC_PAGE_SIZE);
-+    else
-+        memcpy(p, buffer, nr_pages * XC_PAGE_SIZE);
-+
-+    return xenforeignmemory_unmap(xch->fmem, p, nr_pages);
-+}
-+
-+int xg_foreignmemory_copy_from(xc_interface *xch, domid_t dom,
-+                               size_t nr_pages, void *dest,
-+                               const xen_pfn_t source[nr_pages])
-+{
-+    return xg_foreignmemory_copy(xch, dom, foreigncopy_from,
-+                                 nr_pages, dest, source);
-+}
-+
-+int xg_foreignmemory_copy_to(xc_interface *xch, domid_t dom,
-+                             size_t nr_pages, const xen_pfn_t dest[nr_pages],
-+                             const void *source)
-+{
-+    return xg_foreignmemory_copy(xch, dom, foreigncopy_to,
-+                                 nr_pages, (void *) source, dest);
-+}
-+
- /*
-  * Local variables:
-  * mode: C
+Changes since v7:
+- initialize "batch_pfns" on declaration.
+
+Changes since v8:
+- remove useless check;
+- added Reviewed-by.
+---
+ tools/libs/guest/xg_sr_common.h |  5 ++++-
+ tools/libs/guest/xg_sr_save.c   | 28 ++++++++++++++--------------
+ 2 files changed, 18 insertions(+), 15 deletions(-)
+
 diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index 020b1a5272..50f235ba87 100644
+index f1573aefcb..7574c9f5b6 100644
 --- a/tools/libs/guest/xg_sr_common.h
 +++ b/tools/libs/guest/xg_sr_common.h
-@@ -556,6 +556,14 @@ static inline bool page_type_has_stream_data(uint32_t type)
+@@ -239,11 +239,14 @@ struct xc_sr_context
+ 
+             struct precopy_stats stats;
+ 
+-            xen_pfn_t *batch_pfns;
+             unsigned int nr_batch_pfns;
+             unsigned long *deferred_pages;
+             unsigned long nr_deferred_pages;
+             xc_hypercall_buffer_t dirty_bitmap_hbuf;
++            struct xc_sr_context_save_buffers
++            {
++                xen_pfn_t batch_pfns[MAX_BATCH_SIZE];
++            } *buffers;
+         } save;
+ 
+         struct /* Restore data. */
+diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
+index 84fdbe4140..22348db445 100644
+--- a/tools/libs/guest/xg_sr_save.c
++++ b/tools/libs/guest/xg_sr_save.c
+@@ -75,7 +75,7 @@ static int write_checkpoint_record(struct xc_sr_context *ctx)
+ 
+ /*
+  * Writes a batch of memory as a PAGE_DATA record into the stream.  The batch
+- * is constructed in ctx->save.batch_pfns.
++ * is constructed in ctx->save.buffers->batch_pfns.
+  *
+  * This function:
+  * - gets the types for each pfn in the batch.
+@@ -95,6 +95,7 @@ static int write_batch(struct xc_sr_context *ctx)
+     void *page, *orig_page;
+     uint64_t *rec_pfns = NULL;
+     struct iovec *iov = NULL; int iovcnt = 0;
++    xen_pfn_t *const batch_pfns = ctx->save.buffers->batch_pfns;
+     struct {
+         struct xc_sr_rhdr rec;
+         struct xc_sr_rec_page_data_header page_data;
+@@ -110,6 +111,7 @@ static int write_batch(struct xc_sr_context *ctx)
+     };
+ 
+     assert(nr_pfns != 0);
++    assert(nr_pfns <= MAX_BATCH_SIZE);
+ 
+     /* Mfns of the batch pfns. */
+     mfns = malloc(nr_pfns * sizeof(*mfns));
+@@ -141,13 +143,12 @@ static int write_batch(struct xc_sr_context *ctx)
+ 
+     for ( i = 0; i < nr_pfns; ++i )
+     {
+-        types[i] = mfns[i] = ctx->save.ops.pfn_to_gfn(ctx,
+-                                                      ctx->save.batch_pfns[i]);
++        types[i] = mfns[i] = ctx->save.ops.pfn_to_gfn(ctx, batch_pfns[i]);
+ 
+         /* Likely a ballooned page. */
+         if ( mfns[i] == INVALID_MFN )
+         {
+-            set_bit(ctx->save.batch_pfns[i], ctx->save.deferred_pages);
++            set_bit(batch_pfns[i], ctx->save.deferred_pages);
+             ++ctx->save.nr_deferred_pages;
+         }
      }
+@@ -193,7 +194,7 @@ static int write_batch(struct xc_sr_context *ctx)
+             if ( errors[p] )
+             {
+                 ERROR("Mapping of pfn %#"PRIpfn" (mfn %#"PRIpfn") failed %d",
+-                      ctx->save.batch_pfns[i], mfns[p], errors[p]);
++                      batch_pfns[i], mfns[p], errors[p]);
+                 goto err;
+             }
+ 
+@@ -207,7 +208,7 @@ static int write_batch(struct xc_sr_context *ctx)
+             {
+                 if ( rc == -1 && errno == EAGAIN )
+                 {
+-                    set_bit(ctx->save.batch_pfns[i], ctx->save.deferred_pages);
++                    set_bit(batch_pfns[i], ctx->save.deferred_pages);
+                     ++ctx->save.nr_deferred_pages;
+                     types[i] = XEN_DOMCTL_PFINFO_XTAB;
+                     --nr_pages;
+@@ -235,7 +236,7 @@ static int write_batch(struct xc_sr_context *ctx)
+     hdrs.rec.length += nr_pages * PAGE_SIZE;
+ 
+     for ( i = 0; i < nr_pfns; ++i )
+-        rec_pfns[i] = ((uint64_t)(types[i]) << 32) | ctx->save.batch_pfns[i];
++        rec_pfns[i] = ((uint64_t)(types[i]) << 32) | batch_pfns[i];
+ 
+     if ( writev_exact(ctx->fd, iov, iovcnt) )
+     {
+@@ -274,9 +275,9 @@ static int flush_batch(struct xc_sr_context *ctx)
+ 
+     if ( !rc )
+     {
+-        VALGRIND_MAKE_MEM_UNDEFINED(ctx->save.batch_pfns,
++        VALGRIND_MAKE_MEM_UNDEFINED(ctx->save.buffers->batch_pfns,
+                                     MAX_BATCH_SIZE *
+-                                    sizeof(*ctx->save.batch_pfns));
++                                    sizeof(*ctx->save.buffers->batch_pfns));
+     }
+ 
+     return rc;
+@@ -293,7 +294,7 @@ static int add_to_batch(struct xc_sr_context *ctx, xen_pfn_t pfn)
+         rc = flush_batch(ctx);
+ 
+     if ( rc == 0 )
+-        ctx->save.batch_pfns[ctx->save.nr_batch_pfns++] = pfn;
++        ctx->save.buffers->batch_pfns[ctx->save.nr_batch_pfns++] = pfn;
+ 
+     return rc;
+ }
+@@ -784,11 +785,10 @@ static int setup(struct xc_sr_context *ctx)
+ 
+     dirty_bitmap = xc_hypercall_buffer_alloc_pages(
+         xch, dirty_bitmap, NRPAGES(bitmap_size(ctx->save.p2m_size)));
+-    ctx->save.batch_pfns = malloc(MAX_BATCH_SIZE *
+-                                  sizeof(*ctx->save.batch_pfns));
+     ctx->save.deferred_pages = bitmap_alloc(ctx->save.p2m_size);
++    ctx->save.buffers = calloc(1, sizeof(*ctx->save.buffers));
+ 
+-    if ( !ctx->save.batch_pfns || !dirty_bitmap || !ctx->save.deferred_pages )
++    if ( !ctx->save.buffers || !dirty_bitmap || !ctx->save.deferred_pages )
+     {
+         ERROR("Unable to allocate memory for dirty bitmaps, batch pfns and"
+               " deferred pages");
+@@ -819,7 +819,7 @@ static void cleanup(struct xc_sr_context *ctx)
+     xc_hypercall_buffer_free_pages(xch, dirty_bitmap,
+                                    NRPAGES(bitmap_size(ctx->save.p2m_size)));
+     free(ctx->save.deferred_pages);
+-    free(ctx->save.batch_pfns);
++    free(ctx->save.buffers);
  }
  
-+int xg_foreignmemory_copy_from(xc_interface *xch, domid_t dom,
-+                               size_t nr_pages, void *dest,
-+                               const xen_pfn_t source[nr_pages]);
-+
-+int xg_foreignmemory_copy_to(xc_interface *xch, domid_t dom,
-+                             size_t nr_pages, const xen_pfn_t dest[nr_pages],
-+                             const void *source);
-+
- #endif
  /*
-  * Local variables:
 -- 
 2.43.0
 
