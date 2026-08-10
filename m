@@ -4,67 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4387C5AC82
-	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2026 06:45:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1387220.1628492 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6328C5AD4E
+	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2026 08:50:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1387244.1628501 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtJl9-0007sd-Cx; Mon, 10 Aug 2026 06:45:19 +0000
+	id 1wtLiH-0000iM-8s; Mon, 10 Aug 2026 08:50:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1387220.1628492; Mon, 10 Aug 2026 06:45:19 +0000
+Received: by outflank-mailman (output) from mailman id 1387244.1628501; Mon, 10 Aug 2026 08:50:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtJl9-0007sV-8m; Mon, 10 Aug 2026 06:45:19 +0000
-Received: by outflank-mailman (input) for mailman id 1387220;
- Mon, 10 Aug 2026 06:45:18 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <agordeev@linux.ibm.com>) id 1wtJl8-0007sP-Jf
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 06:45:18 +0000
+	id 1wtLiH-0000iF-5g; Mon, 10 Aug 2026 08:50:29 +0000
+Received: by outflank-mailman (input) for mailman id 1387244;
+ Mon, 10 Aug 2026 08:50:27 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wtLiF-0000i9-3R
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 08:50:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wtJl6-002EPF-NU
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 08:45:16 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wtLiE-007vGO-19
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2026 10:50:26 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <agordeev@linux.ibm.com>)
- id 6a79735d-e002-0a2a0a5209dd-0a2a4507af76-44
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 08:45:16 +0200
-Received: from [148.163.156.1] (helo=mx0a-001b2d01.pphosted.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <agordeev@linux.ibm.com>)
- id 6a79737a-b4ea-0a2a45070019-94a39c01c418-3
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 08:45:16 +0200
-Received: from pps.filterd (m0353729.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67A5VYZX3085069; Mon, 10 Aug 2026 06:44:38 GMT
-Received: from ppma11.dal12v.mail.ibm.com
- (db.9e.1632.ip4.static.sl-reverse.com [50.22.158.219])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4fwvjypkqg-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 10 Aug 2026 06:44:37 +0000 (GMT)
-Received: from pps.filterd (ppma11.dal12v.mail.ibm.com [127.0.0.1])
- by ppma11.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 67A6ffw0026503;
- Mon, 10 Aug 2026 06:44:36 GMT
-Received: from smtprelay03.fra02v.mail.ibm.com ([9.218.2.224])
- by ppma11.dal12v.mail.ibm.com (PPS) with ESMTPS id 4fxhfxueyp-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 10 Aug 2026 06:44:36 +0000 (GMT)
-Received: from smtpav02.fra02v.mail.ibm.com (smtpav02.fra02v.mail.ibm.com
- [10.20.54.101])
- by smtprelay03.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 67A6iYQG34930976
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 10 Aug 2026 06:44:34 GMT
-Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 17B532004B;
- Mon, 10 Aug 2026 06:44:34 +0000 (GMT)
-Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 2335D20043;
- Mon, 10 Aug 2026 06:44:31 +0000 (GMT)
-Received: from li-008a6a4c-3549-11b2-a85c-c5cc2836eea2.ibm.com (unknown
- [9.87.135.220])
- by smtpav02.fra02v.mail.ibm.com (Postfix) with ESMTPS;
- Mon, 10 Aug 2026 06:44:31 +0000 (GMT)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a7990cb-8faa-0a2a0a5109dd-0a2a4509b816-12
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 10:50:25 +0200
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a7990d1-be1a-0a2a45090019-d155802adc97-3
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 10:50:25 +0200
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-4954afac04bso17657615e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2026 01:50:25 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
+ [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4995e9ea92csm278572485e9.4.2026.08.10.01.50.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 10 Aug 2026 01:50:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -76,182 +52,217 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=pp1 header.d=ibm.com header.i="@ibm.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=pp1; bh=vVPGPVZ23NsreeExE7+jGCM0ud2bcA
-	JA4ypv1DILR34=; b=cP2dX1rqRgJGyJQPsc4KFbE1PC99K1ErC8LoPBcJX/kDVk
-	D9Jo4Iz1SXdFchU8Ko5W4WB9COXrRcti5DpxhwdI5dfEePzz5UmgRzT8EYYyBi07
-	KU36zRJaFsP0Akw7apyJ4SCl4IAb1VRGvP8L0mKhwBZnn0XUkDZ2PW7t9oviZUQq
-	bN2tmVBhSWNgiSiSi7ymdtf6iKh4gNTCCXIweHK0Tg6HF6KYslOZj/J1AEcJVHnf
-	kWNlsq5fwLgQr2DlUZF0whZYM5XqlyiEV4xJgAR6wPkWOH+OEMcVL/bVHH8IYS6D
-	MxDe73qz6EXJrcPmB5P+oxGbZoA1keo68zERDcAg==
-Date: Mon, 10 Aug 2026 08:44:29 +0200
-From: Alexander Gordeev <agordeev@linux.ibm.com>
-To: Muhammad Usama Anjum <usama.anjum@arm.com>
-Cc: Jani Nikula <jani.nikula@linux.intel.com>,
-        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-        Rodrigo Vivi <rodrigo.vivi@intel.com>,
-        Tvrtko Ursulin <tursulin@ursulin.net>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Dimitri Sivanich <dimitri.sivanich@hpe.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
-        Helge Deller <deller@gmx.de>, Juergen Gross <jgross@suse.com>,
-        Stefano Stabellini <sstabellini@kernel.org>,
-        Muchun Song <muchun.song@linux.dev>,
-        Oscar Salvador <osalvador@suse.de>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        "Liam R. Howlett" <liam@infradead.org>,
-        Lorenzo Stoakes <ljs@kernel.org>, Will Deacon <will@kernel.org>,
-        "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
-        Nick Piggin <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
-        Andrey Ryabinin <ryabinin.a.a@gmail.com>,
-        David Hildenbrand <david@kernel.org>,
-        Pasha Tatashin <pasha.tatashin@soleen.com>,
-        Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
-        Uladzislau Rezki <urezki@gmail.com>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Masami Hiramatsu <mhiramat@kernel.org>,
-        Alexei Starovoitov <ast@kernel.org>,
-        Daniel Borkmann <daniel@iogearbox.net>,
-        Andrii Nakryiko <andrii@kernel.org>,
-        Eduard Zingerman <eddyz87@gmail.com>,
-        Kumar Kartikeya Dwivedi <memxor@gmail.com>,
-        Ingo Molnar <mingo@redhat.com>,
-        Arnaldo Carvalho de Melo <acme@kernel.org>,
-        Namhyung Kim <namhyung@kernel.org>, SJ Park <sj@kernel.org>,
-        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
-        Jan Kara <jack@suse.cz>, Jason Gunthorpe <jgg@ziepe.ca>,
-        Leon Romanovsky <leon@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>,
-        Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>,
-        Christoph Lameter <cl@gentwo.org>, Mike Rapoport <rppt@kernel.org>,
-        Johannes Weiner <hannes@cmpxchg.org>, ziy@nvidia.com, pfalcato@suse.de,
-        ryan.roberts@arm.com, linux-kernel@vger.kernel.org,
-        intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
-        linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org,
-        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
-        linux-arch@vger.kernel.org, kasan-dev@googlegroups.com,
-        linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
-        linux-perf-users@vger.kernel.org, damon@lists.linux.dev
-Subject: Re: [PATCH 6/9] mm: convert PTE table entry to pte
-Message-ID: <2599c5b3-e8ac-4865-993b-d41e6f060d52-agordeev@linux.ibm.com>
-References: <20260806083926.1807279-1-usama.anjum@arm.com>
- <20260806083926.1807279-7-usama.anjum@arm.com>
- <fab9fc78-1e1d-4d5b-a9ca-92f3ebd04108-agordeev@linux.ibm.com>
- <5c329236-7761-4e42-a549-b822e43b4358@arm.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1786351825; x=1786956625; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=v7DOr//1UMzxx+qvWjE8pgs9kDMNMgbOq3Hi6M6TC7U=;
+        b=PIkVWlyC5Z2NveOk3zRh6zl9TAajdIZVGZs9uadB0jOK+g+SGkVwgf8x1bEty0N37U
+         qBSmAw2VakRIsNyoGDiTg+cDxBT5NOwJs7I94hu66wWbcCB02/JQU1bRP0z/7IfikzEc
+         kSP+MbAXk74dYmQJuJ9PWE8jFb3p0SJ4DD947DrfhtrOjEqK5161v7dKu1neQMFhQ9AB
+         IRJVntugLJEhSeqSjuD7l3VeNTMiJ6O3f9ZdWj6AFAo/wdDSIW1BEvf0GslEZTMP1tkE
+         IFl9AK1aCC8BVO7oZ/Rdncn6falRo1ZF3o/79xquL6Vv+wpGngIJsDgyU7yuMN/jVOKc
+         vmeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786351825; x=1786956625;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=v7DOr//1UMzxx+qvWjE8pgs9kDMNMgbOq3Hi6M6TC7U=;
+        b=DliCiWilLdvx6BO+2Q03j2ybSnsVR+sEj95jm7hhpjj44wGY6UvG1D6fGAv3kGi5Wb
+         ZHtHZYXSlzh8tYIaOqyZYgxfnlhvX7Q/UW+6e5B3kXGE3rLycMNokoSoXQeMjZK4ITAn
+         tv1UexvcWtKV4aAJ8lCCwplEFhLnsOSXau9f/q2PuSkUaB/i5SqhWUsT73jaomOn/s41
+         gUEMwV4mJujI4VKSHXj86vPdKqAhcY+47lY+ydtA/itt+RHwE0fxZcBe0shgVgStNQjo
+         GURpPZy2Xw611IKYV8KBzhLmhuDpioPOzUQ64Oc3BdITh3JPJL6BxOU82+s0ijijkGEE
+         JE0A==
+X-Forwarded-Encrypted: i=1; AHgh+RoslYNr19aqX6Ln3VER5AA0NArTUts/InTHZz0oJgTeIVeVIvoQmeVsJfeTI2uZj6YhnZQfjMwafwo=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwEuUiUVDxQ9n2UnINSLqv2HanOeWo7TyMi/MAoXnh6DrUdTNha
+	LrOQZWblkTAc7A4V5PffwLtV5geCOfT7HViRROwbZKFzosxIUcdt8vC+
+X-Gm-Gg: AR+sD13uygAh7FUrjSMepfj8zKQTc1Hqb590JV6oZFzQISAB7l2DNMg/WqAHeZB7Noo
+	GB5cW8LeZ09RUFLWcATnXZiUOGDXwlspkJM/2XZ6goUkD8IaH4UHnvon1cG2BpAp46cvGjSA8Mf
+	8ca80g0LD5tObO6NKugpml6MK9QRkIjTRNiNRaoUFvSp7ZHnQwkRhUTzPbAw0cFCJAU/IOy3/TU
+	F4C9EkrLSFMxddLyVzjYRt/z2oB6OR3B0Kzl12jXw2X45uWT2wn0tRn5tK1tnAdB4cL87/lSnVZ
+	5wL0RvzqV/VGyXwCyA1SOaFccoimhN/aIhdK/4JIxOODEji2lLf9Ho2oCcTXRL1PC6jpoHGLAtH
+	IXfiCRi6DCaGoXjon9v/XKlwt+iqjkZuheGs3w/TKJAFEo5ypvYGTFUIG1lN664GFbOfvx6FZRz
+	A7KZG4hJx2vSEvPD8vcb7oOy8tsvbwvhG6l5wHxoN0pJ6ENFqxx8BHBiFVDyLWImXuKIG/PdJLC
+	qPjE6Gkub/JWHuN9ScBtvwLrTskeU0sD6SB9PmswV1UtqJhNExwvzA=
+X-Received: by 2002:a05:600c:4e88:b0:495:4491:b8c2 with SMTP id 5b1f17b1804b1-4996194e257mr217755905e9.3.1786351824681;
+        Mon, 10 Aug 2026 01:50:24 -0700 (PDT)
+Message-ID: <2071e8f2-4994-4b8f-affb-999376250e35@gmail.com>
+Date: Mon, 10 Aug 2026 10:50:23 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <5c329236-7761-4e42-a549-b822e43b4358@arm.com>
-X-TM-AS-GCONF: 00
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEwMDA1NCBTYWx0ZWRfXxI/cthX2D0Wc
- iHPLS8hc2Kj/zk+XaKiAAFgipdFaX6yt5ULiZYFw9cMykKZhsGzYdz8Ozez/WjJFTxNxMxdlY+Z
- xRKD8hb46fc3eq4T3zk/Ay2gFewaqBQyLERBaqjOrmguPqyfrY4V/sj3PMJQSwHxbC9gQ3JPdGp
- nwoFQng/LWfi/b2CNXX0ejbyTRbXCpU6ISkPy5ReFIqwletsdYxZQh3JZdOlQrUjBCsND1GblNt
- G/4DaSrhSqHIA4lB3PliH1JLOCq/gqtakESjF4VI9bapYhuQXt1SuBKOBQMvOtnuq4THGnpYdaA
- 9DlU8ZKdg0fttjy6cWWMXxwJNMzsJQnfWACC9mQPG3O4x/cS3d0NgAmCjmdVYfXi8XGUV9/5PxJ
- HdlkuRfRyvN/kE+SQ4EeTy+wa+g6t6URPTCSrkC11WsiBzyO9FuJFEs1QK/7K/rvQyfHrqCYbs4
- iMEVrVdUzEx5zR0r21A==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODEwMDA1NCBTYWx0ZWRfX9Ko1NY31ilHb
- y/krrlO5A2ANnAiXusNks5NMrWI4UvS7c1Y7yzgoGS6CxTGjDGRyAu8EHxJ1ITitPdxPjbMc8pe
- lyb7xPyJDB1SIBriSbnTKYVPxMcf33w=
-X-Authority-Analysis: v=2.4 cv=RqD16imK c=1 sm=1 tr=0 ts=6a797355 cx=c_pps
- a=aDMHemPKRhS1OARIsFnwRA==:117 a=aDMHemPKRhS1OARIsFnwRA==:17
- a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=uAbxVGIbfxUO_5tXvNgY:22 a=VwQbUJbxAAAA:8
- a=7CQSdrXTAAAA:8 a=VnNF1IyMAAAA:8 a=2hzp2EkNZNX3k9pX5ccA:9 a=CjuIK1q_8ugA:10
- a=a-qgeE7W1pNrGK8U0ZQC:22
-X-Proofpoint-GUID: YbHEwP5JTLZr3QYF8zr2RkJeozrhuIz7
-X-Proofpoint-ORIG-GUID: YbHEwP5JTLZr3QYF8zr2RkJeozrhuIz7
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-10_01,2026-08-07_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 priorityscore=1501 suspectscore=0 lowpriorityscore=0
- clxscore=1015 adultscore=0 bulkscore=0 malwarescore=0 impostorscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608100054
-X-purgate-ID: tlsNG-ef75cf/1786344316-A50CDAE4-BE82F9CE/0/0
-X-purgate-type: clean
-X-purgate-size: 3062
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 06/17] xen/riscv: map IMSIC interrupt file for vCPUs
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
+ <254f470ae2e2b2a4affa7c405be8c07a7d8b300e.1784560663.git.oleksii.kurochko@gmail.com>
+ <dda2f05b-2965-4fff-92d9-326619be313b@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <dda2f05b-2965-4fff-92d9-326619be313b@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-bad1c0/1786351825-3A2C4034-AA4EDBFB/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 6384
 
-On Fri, Aug 07, 2026 at 05:26:04PM +0100, Muhammad Usama Anjum wrote:
-> On 07/08/2026 7:58 am, Alexander Gordeev wrote:
-> > On Thu, Aug 06, 2026 at 09:38:44AM +0100, Muhammad Usama Anjum wrote:
-> >> The non-MMU stub receives hw_pte_t but returns a logical pte_t
-> >> value. Convert the stored entry through __pte_from_hw() before
-> >> returning.
-> >>
-> >> Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
-> >> ---
-> >>  include/linux/hugetlb.h | 2 +-
-> >>  1 file changed, 1 insertion(+), 1 deletion(-)
-> >>
-> >> diff --git a/include/linux/hugetlb.h b/include/linux/hugetlb.h
-> >> index bc0b9c65aa1d0..9e8b391aa4bc9 100644
-> >> --- a/include/linux/hugetlb.h
-> >> +++ b/include/linux/hugetlb.h
-> >> @@ -1283,7 +1283,7 @@ static inline pte_t huge_ptep_clear_flush(struct vm_area_struct *vma,
-> >>  #ifdef CONFIG_MMU
-> >>  	return ptep_get(ptep);
-> >>  #else
-> >> -	return *ptep;
-> >> +	return __pte_from_hw(*ptep);
-> > 
-> > But this is a direct dereferencing, which breaks the whole point, isn't it?
-> Yes, this is particular line is for non MMU. In this case, CONIFG_ARCH_HAS_HW_PTE
-> would never be defined. Hence hw_pte_t is just pte_t and direct dereference is
-> allowed. I'd thought a lot about it; is better to leave direct dereference here
-> or use some helper. Then used __pte_from_hw() was already being used in generic
-> ptep_get().
 
-But in case CONIFG_ARCH_HAS_HW_PTE=n __pte_from_hw() is still gets called.
-That looks inconsistent to me. Why not just call ptep_deref() (see below)?
 
-> There are only two users of __pte_from_hw() at this time. 
+On 8/6/26 4:48 PM, Jan Beulich wrote:
+> On 20.07.2026 18:02, Oleksii Kurochko wrote:
+>> A guest running in VS-mode expects its own IMSIC S-file at offset 0 of its
+>> guest-physical IMSIC block. Physically, the guest-file (G-file) assigned to
+>> this vCPU lives at a hart-relative offset given by guest_file_id (assigned
+>> via the vGEIN allocator). Therefore, imsic_map_guest_file() uses stage-2
+>> translation to redirect the guest's fixed per-vCPU GPA page (offset 0) to
+>> the specific physical guest-file page.
+>>
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>> ---
+>> The corresponding unmap of the IMSIC interrupt file will be introduced
+>> separately when the need arises.
 > 
-> > 
-> > What about introducing something like pte_t ptep_get_sw(hw_pte_t *ptep)
-> > to be used in exactly situations like this? With that the semantics of
-> > hw_pte_t pointers becomes straightforward and closes the still ongoing
-> > "storage vs lifetime" discussion:
-> > 
-> > hw_pte_t*     points to HW-formatted page table entries
-> > 
-> > ptep_get()    is used to obtain HW-linked/attached entries, and may wire
-> >               extra code like [1] or [2]
-> > 
-> > ptep_get_sw() is used to obtain HW-unlinked/unattached entries and in
-> >               most cases is just a direct dereference
-> ptep_get_sw() or ptep_get_deref() is better name here?
+> Doesn't the need exist right away? There is ...
+> 
+>> @@ -342,6 +344,67 @@ static int __init imsic_parse_node(const struct dt_device_node *node,
+>>       return 0;
+>>   }
+>>   
+>> +/*
+>> + * Map the physical IMSIC guest interrupt file (G-file) assigned to vCPU v
+>> + * into the domain's stage-2 guest-physical address space.
+>> + *
+>> + * In the machine's physical address space (SPA), each hart's IMSIC
+>> + * supervisor-level file (S-file) is located at offset 0 of its address block,
+>> + * followed contiguously by GEILEN guest files at offsets of 1, 2, ..., N pages.
+>> + *
+>> + * Because a guest OS running in VS-mode expects its own supervisor-level
+>> + * interrupt file to be at offset 0 of its guest-physical IMSIC block, the
+>> + * hypervisor must use stage-2 address translation to map the vCPU's
+>> + * guest-physical "supervisor" page (GPA offset 0) to the specific
+>> + * physical guest file page (SPA offset guest_file_id) on the physical hart.
+>> + *
+>> + * Xen pins each vCPU to a pCPU (v->processor) and assigns it a physical
+> 
+> ... an apparently wrong assumption here: Xen doesn't normally pin vCPU-s.
+> When a vCPU migrates between pCPU-s, clearly the mapping referencing the
+> page associated with the old hart needs tearing down again.
 
-ptep_deref() would be it.
+The word “pin” was incorrect to use here. What I meant is that a vCPU is 
+assigned to a pCPU by scheduler and of course it could be re-scheduled 
+by a scheduler to another pCPU (maybe for NULL scheduler such 
+re-scheduling don't happen...), and after this assignment happens, the 
+IMSIC interrupt file mapping needs to be recalculated.
 
-Do you agree to the suggested API requirements?
+> 
+> That said, since the new mapping will appear at the same GFN, the original
+> mapping may simply end up being replaced. If such direct replacement is
+> legitimate to do, maybe this could actually be mentioned here?
 
-> I thought __pte_from_hw() is ugly enough that if someone tries to use it
-> wrongly, it'll be noticed pretty easily. I'm fine with any other name.
+Yes, the GFN isn’t changed for a vCPU. The plan was for 
+map_regions_p2mt() to simply replace the corresponding PTE for the GFN, 
+which is why imsic_unmap_guest_file() isn’t really needed now.
 
-The name may be not perfect, but it is the way it is used above looks
-wrong to me.
+I will re-phrase this paragraph to:
+  * A vCPU runs on the pCPU the scheduler picked for it (v->processor), and
+  * the guest file it is given (guest_file_id, from the vGEIN allocator)
+  * belongs to that very pCPU's IMSIC. A guest_file_id of 0 indicates 
+that no
+  * hardware guest file is selected (matching the architectural behavior 
+where
+  * vGEIN = 0 in the hstatus CSR selects no guest external interrupt 
+source),
+  * requiring the VS-file to be emulated in software.
+  *
+  * Consequently the mapping installed here is only valid as long as the 
+vCPU
+  * stays on that pCPU. When it migrates, a VS-file is acquired on the new
+  * pCPU and mapped at the very same GFN, so the stale mapping needs no
+  * explicit tear-down: it is simply replaced.
 
-> > The caller should always know whether the entry is attached or not, so
-> > confusions like [3] are avoided.
-> > 
-> > 1. https://lore.kernel.org/linux-mm/20260526-kpkeys-v8-21-eaaacdacc67c@arm.com/
-> > 2. https://lore.kernel.org/linux-s390/650903a4-0dd9-4e6b-9d4b-3c32c5657236-agordeev@linux.ibm.com/
-> > 3. https://lore.kernel.org/linux-s390/b44e071d-7c9d-4e7e-a84d-4af3499a5a05@arm.com/
-> > 
-> >>  #endif
-> >>  }
+> 
+>> + * guest file index (guest_file_id) from the vGEIN allocator. A guest_file_id
+>> + * of 0 indicates that no hardware guest file is selected (matching the
+>> + * architectural behavior where vGEIN = 0 in the hstatus CSR selects no
+>> + * guest external interrupt source), requiring the VS-file to be emulated
+>> + * in software.
+>> + *
+>> + * The base guest-physical address advertised to the guest in the device
+>> + * tree matches offset 0 of the vCPU's virtual IMSIC block. Stage-2
+>> + * translation ensures that guest supervisor accesses to this page are
+>> + * transparently routed to the real hardware VS-file granted to it on
+>> + * the current pCPU.
+>> + */
+>> +int imsic_map_guest_file(struct vcpu *v, unsigned int vsfile_id)
+>> +{
+>> +    int res = 0;
+>> +    struct domain *d = v->domain;
+>> +    unsigned int cpu = v->processor;
+>> +    vaddr_t gaddr = imsic_cfg.base_addr + (IMSIC_MMIO_PAGE_SZ * v->vcpu_id);
+
+I just noticed that imsic_cfg.base_addr isn't really good to use here. 
+It should be GUEST_IMSIC_S_BASE instead.
+
+>> +    paddr_t paddr;
+>> +    unsigned long guest_stride;
+>> +
+>> +    /* Nothing to map in the case of sw interrupt file. */
+>> +    if ( !vsfile_id )
+>> +        return res;
+>> +
+>> +    guest_stride = vsfile_id * IMSIC_MMIO_PAGE_SZ;
+> 
+> To me "stride" feels the wrong term here, as there's nothing that repeats.
+> "offset" likely would be better, assuming the use of this local variable is
+> really deemed worth it, as it's used ...
+> 
+>> +    paddr = imsic_cfg.msi[cpu].base_addr + imsic_cfg.msi[cpu].offset +
+>> +            guest_stride;
+> 
+> ... only here.
+
+I will apply your suggestion.
+
+> 
+>> +#ifdef IMSIC_DEBUG
+>> +    printk("%s: %pv: ga(%#lx) -> pa(%#lx), cpu(%#x), guest_file_id(%d) "
+>> +           "base_addr(%#lx) offset(%#lx)\n", __func__, v, gaddr, paddr, cpu,
+>> +           vsfile_id, imsic_cfg.msi[cpu].base_addr, imsic_cfg.msi[cpu].offset);
+>> +#endif
+>> +
+>> +    res = map_regions_p2mt(d, gaddr_to_gfn(gaddr),
+>> +                           PFN_DOWN(IMSIC_MMIO_PAGE_SZ), maddr_to_mfn(paddr),
+>> +                           arch_dt_passthrough_p2m_type());
+>> +    if ( res )
+>> +        printk("%s: Failed to map %#lx to the guest at %#lx\n",
+>> +               __func__, paddr, gaddr);
+> 
+> I think you mean to use PRIpaddr with paddr_t (oddly enough there's no
+> PRIgaddr).
+
+I’m wondering if it wouldn’t be better to use paddr_t for gaddr as well, 
+since technically it is a guest *physical address*. In that case, 
+PRIpaddr could be used to print both paddr and gaddr variables.
+
+Also, could this be the reason why PRIgaddr doesn’t exist? Basically, a 
+GPA could be considered a physical address, while for a GVA there is 
+already PRIvaddr.
 
 Thanks!
 
-> -- 
-> Thanks,
-> Usama
-> 
+Best regards,
+  Oleksii
 
