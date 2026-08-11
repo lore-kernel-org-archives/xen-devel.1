@@ -4,70 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2140BC5AC67
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Aug 2026 21:12:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1388600.1629605 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7517C5AC67
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Aug 2026 21:46:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1388623.1629613 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wttld-0006rT-Nl; Tue, 11 Aug 2026 21:12:13 +0000
+	id 1wtuIu-0003Nv-Af; Tue, 11 Aug 2026 21:46:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1388600.1629605; Tue, 11 Aug 2026 21:12:13 +0000
+Received: by outflank-mailman (output) from mailman id 1388623.1629613; Tue, 11 Aug 2026 21:46:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wttld-0006rM-Ju; Tue, 11 Aug 2026 21:12:13 +0000
-Received: by outflank-mailman (input) for mailman id 1388600;
- Tue, 11 Aug 2026 21:12:11 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmukhin@ford.com>) id 1wttlb-0006rG-FP
- for xen-devel@lists.xenproject.org; Tue, 11 Aug 2026 21:12:11 +0000
+	id 1wtuIu-0003No-7Q; Tue, 11 Aug 2026 21:46:36 +0000
+Received: by outflank-mailman (input) for mailman id 1388623;
+ Tue, 11 Aug 2026 21:46:35 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <3OJh7agYKCbEjVReaTXffXcV.TfdoVe-UVmVccZjkj.oVegifaVTk.fiX@flex--seanjc.bounces.google.com>)
+ id 1wtuIt-0003Ng-9G
+ for xen-devel@lists.xenproject.org; Tue, 11 Aug 2026 21:46:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wttlZ-00FYLW-K1
- for xen-devel@lists.xenproject.org; Tue, 11 Aug 2026 23:12:10 +0200
-Received: from [10.42.69.7] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <dmukhin@ford.com>)
- id 6a7b9027-2eae-0a2a0a5409dd-0a2a4507802e-8
- for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 23:12:09 +0200
-Received: from [148.163.143.241] (helo=mx0b-00498f03.pphosted.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <dmukhin@ford.com>)
- id 6a7b9027-b4ea-0a2a45070019-94a38ff14a50-3
- for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 23:12:08 +0200
-Received: from pps.filterd (m0482515.ppops.net [127.0.0.1])
- by m0482515.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 67BJJpMs1749946
- for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 14:12:06 -0700
-Received: from sn4pr2101cu001.outbound.protection.outlook.com
- (mail-southcentralusazon11012061.outbound.protection.outlook.com
- [40.93.195.61])
- by m0482515.ppops.net (PPS) with ESMTPS id 4g08tysxgj-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 14:12:06 -0700 (PDT)
-Received: from CYZPR10CA0022.namprd10.prod.outlook.com (2603:10b6:930:8a::26)
- by PH0PR16MB4261.namprd16.prod.outlook.com (2603:10b6:510:4d::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Tue, 11 Aug
- 2026 21:12:03 +0000
-Received: from CY4PEPF0000EE36.namprd05.prod.outlook.com
- (2603:10b6:930:8a:cafe::55) by CYZPR10CA0022.outlook.office365.com
- (2603:10b6:930:8a::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.11 via Frontend Transport; Tue,
- 11 Aug 2026 21:12:02 +0000
-Received: from mx0a-00498f04.pphosted.com (205.220.161.53) by
- CY4PEPF0000EE36.mail.protection.outlook.com (10.167.242.42) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.6
- via Frontend Transport; Tue, 11 Aug 2026 21:12:02 +0000
-Received: from pps.filterd (m0426318.ppops.net [127.0.0.1])
- by mx0a-00498f04.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67BJLfHQ3908633
- for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 17:12:02 -0400
-Received: from smtp-us.ser.proofpoint.com (pmta-usw.ser.proofpoint.com
- [50.112.124.217])
- by mx0a-00498f04.pphosted.com (PPS) with ESMTPS id 4fxjw5bh9m-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 17:12:01 -0400 (EDT)
-Received: from localhost ([19.12.76.221]) by cmsmtp with ESMTPSA
- id ttlPwg8Phl3RSttlPwBqxz; Tue, 11 Aug 2026 21:12:01 +0000
+ id 1wtuIs-00DCOd-ME
+ for xen-devel@lists.xenproject.org; Tue, 11 Aug 2026 23:46:34 +0200
+Received: from [10.42.69.10] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <3OJh7agYKCbEjVReaTXffXcV.TfdoVe-UVmVccZjkj.oVegifaVTk.fiX@flex--seanjc.bounces.google.com>)
+ id 6a7b9832-bab6-0a2a0a5309dd-0a2a450ab5d0-2
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 23:46:34 +0200
+Received: from [209.85.215.197] (helo=mail-pg1-f197.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <3OJh7agYKCbEjVReaTXffXcV.TfdoVe-UVmVccZjkj.oVegifaVTk.fiX@flex--seanjc.bounces.google.com>)
+ id 6a7b9839-f2d2-0a2a450a0019-d155d7c5b50f-3
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 23:46:34 +0200
+Received: by mail-pg1-f197.google.com with SMTP id
+ 41be03b00d2f7-cbb467e56aaso223346a12.1
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 14:46:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -79,218 +50,191 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=ppford header.d=ford.com header.i="@ford.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:Message-ID:MIME-Version:Subject:To"; dkim=pass header.s=selector2-azureford-onmicrosoft-com header.d=azureford.onmicrosoft.com header.i="@azureford.onmicrosoft.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=ppserprodsaar header.d=saarlouis.ford.com header.i="@saarlouis.ford.com" header.h="Cc:Content-Transfer-Encoding:Date:From:Message-ID:MIME-Version:Subject:To"; dkim=pass header.s=ppfserpocford header.d=ford.com header.i="@ford.com" header.h="Cc:Content-Transfer-Encoding:Date:From:Message-ID:MIME-Version:Subject:To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
-	:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=ppford; bh=E/B4OGTUik0qpSe4TEgfrHllO
-	vR0TgzZpKxl3Uotu7Q=; b=Z7Mjxiy80ympdAtELdUAmpQwzBF0LrLogn08fp/Rm
-	nmJ9nTcqXezcGw4vIIbD2tpIt2bxIPWHFQ4vja4y6i164gF5friTB6Nv4M4kavTc
-	QM5ezmjIyULsUkaZLtf1fTCWgBCIgCRumMZski8JyO6J1EjoZJlpMsb3dF0VjWBw
-	VZm7rvega0WhbH4Z3eYT2+VpgJqD4DIGL5pEz8EeI+sTTKFKaPsVactGK7KLBrFV
-	J2GsDlAUSsNOMSFwsz1WODLSe/TOzkfEESr/hmPano/ZwCQJD4e1vLIW7TKaGG/T
-	7DxbmuLPkJs7po+6U82i1xQy/LDVwnaCKqAQYY456iqrw==
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cPPNLwU25epAzkQlrV1gaNgLnpQ3G6R2xgC1KKWAluI/86av5Otw34UDpfdRpbGaLk4vqzwNYOJsqefRj/dDerOMrgjbGAk01sirHIbuVNOtriUjKwILPOcTBp34mCcXrRa+DhmX7KT4qxI4MniB3BacATbm3LUn4pUi4TDTFCeW0kjB0yvGLsn+xBoXd50ZctCcLhAhu+jBFChGoXWPxuFSp37QNUFtUaVEcJJXG4CkVHRqPMlAMhKHpDcvjTAF0u4Ux4VSkCemDc3HPihzlok/8w0i9VSUa7EsUsZPxdHCUIvlfWL0zUoAcPuRuD2At9FwkTdMrI2SoeHe70nH2A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=E/B4OGTUik0qpSe4TEgfrHllOvR0TgzZpKxl3Uotu7Q=;
- b=VxmeU3vtNiFQICwmBEzc+55i9grq6nwezNswWlkfwUywfBKLl/skHzCNmmaitbGmXl7MNylx/GJsOGguaE3szLIgUx/3UlyvY1bb+E+HQFusdueDVq6SoLA7jRK6RXX13KG0JIBclhzpP/UY3ZEA9Y7Ae6D1sFBPOuKvl17nEEe0Nb3KzcPHwKeWRNP9NXBH8VVi+RJKyFBrIwqYhJN1OIteS+buZwP/FaEfOR764vF9m8d0jCvj65zczKKfd4F1kfYYSf16Nw3mafLww2Gr8+LALpPw2GW/Dw5P3MG3LvvJaLuJCDktNZ39K8CHfxdg0m80hAHTu0I+niZIUEFHYg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 205.220.161.53) smtp.rcpttodomain=lists.xenproject.org
- smtp.mailfrom=ford.com; dmarc=pass (p=reject sp=reject pct=100) action=none
- header.from=ford.com; dkim=pass (signature was verified)
- header.d=saarlouis.ford.com; dkim=pass (signature was verified)
- header.d=ford.com; arc=none (0)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=azureford.onmicrosoft.com; s=selector2-azureford-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=E/B4OGTUik0qpSe4TEgfrHllOvR0TgzZpKxl3Uotu7Q=;
- b=RKXapbPqO5HpaM7Ds7r5AXrTmT7yEJzPI1/4nSY75VqL3jWOnrGQOlUh3ocKDmgFU+dkrlfBQFwomnmluxZ8vXgDxKsdnnINMgB0qdgyNOm0zCZ9B3qVLrglVxByO+cv8HxFecEY0D9xb02DHZSXQT5WCcDICerCO0GXHwmM3Yw=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 205.220.161.53)
- smtp.mailfrom=ford.com; dkim=pass (signature was verified)
- header.d=saarlouis.ford.com;dkim=pass (signature was verified)
- header.d=ford.com;dmarc=pass action=none header.from=ford.com;
-Received-SPF: Pass (protection.outlook.com: domain of ford.com designates
- 205.220.161.53 as permitted sender) receiver=protection.outlook.com;
- client-ip=205.220.161.53; helo=mx0a-00498f04.pphosted.com; pr=C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	saarlouis.ford.com; h=cc:content-transfer-encoding:date:from
-	:message-id:mime-version:subject:to; s=ppserprodsaar; bh=E/B4OGT
-	Uik0qpSe4TEgfrHllOvR0TgzZpKxl3Uotu7Q=; b=oiaaopXWFSqrQIxLdQ9kZrU
-	m2WCbEBxShB82fo8DondNbvUfEnb6+POXBjK2zitos+NIGEnrv9DKz7gCiZR7ZAd
-	BksqrG9l8i/0UUic1dwrXHr3+aW3sb/f3J7AVm/AKGa7q6KsRWVu02ph7BgSsE/8
-	n/8PDVGbRREhmT7k31vwZ688nX5ViwDlJ5bdv4OfuvHuLJrtwgnfZHH5LV40RVWM
-	Adzgzw597Ti/Q96Z7RRIlxYtLbA4fkB6j7+pcojKwi2fxF+rvSHWbilc7yD5ryKs
-	AQ4PqMGo0ogyw0w0uX2UvUWkwYnr0f9zBHRq1ZuD1LQEcjO7D4hh6SGKrS0BcqQ=
-	=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
-	:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=ppfserpocford; bh=E/B4OGTUik0qpSe4TEgfrHllOvR0Tgz
-	ZpKxl3Uotu7Q=; b=i7Zx1Ud9EewzzUW0KR/51TO1gNvV9xBHWg0+hkH55MlKE6f
-	oly2KQn0uoEuDeyhouRpBS3MjOQe7yQn15xWgOCaZbi0yZwI+8q/nYXDsmytl9Hk
-	UUVvMElBPxNV0KI1ogQPzpwP854v1AN7Mp4KaX2Z8AG9jnJwbKQg+3VGjqF/MGoQ
-	g3EgFqoHT5nBBSzx92XVycR6i0NO42bD7/rDT9rsRJrCrfJGHGLrwDfvdNf+x9gf
-	YErLCyhZWvidj46RyNtifeXGY6RwHZ1Xqz9g69yx7/64LILCaZGjE5sv7RFX/LMD
-	dEwzesSOF3MA4n3YAbPq+uYjm+fREGhzIu9JjXw==
-X-Mailer: SER-76bead168636dc6ed1c9e51ce4dea80dbdd4163750742b614a4d871e565792b7
-X-Cloudmark-MID: ttlPwg8Phl3RSttlPwBqxz
-X-Proofpoint-CID: eb09f7eb-2dc2-34ab-a188-7b293c1db1fe
-From: dmukhin@ford.com
-To: xen-devel@lists.xenproject.org
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com,
-        julien@xen.org, michal.orzel@amd.com, roger@xenproject.org,
-        sstabellini@kernel.org, dmukhin@ford.com
-Subject: [PATCH v4] xen/common: add keyhandler to show Xen command line
-Date: Tue, 11 Aug 2026 14:09:57 -0700
-Message-ID: <20260811210956.3806559-2-dmukhin@ford.com>
-X-Mailer: git-send-email 2.54.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-PSER-M365-App: SER-APP
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-11_05,2026-08-10_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
- suspectscore=0 lowpriorityscore=0 malwarescore=0 adultscore=0 phishscore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608110178
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE36:EE_|PH0PR16MB4261:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: e2853b1c-9538-4571-03ec-08def7ed30a7
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|1800799024|82310400026|23010399003|376014|56012099006|11063799006|10067099003|3023799007|18002099003|13003099007;
-X-Microsoft-Antispam-Message-Info:
-	XnyxGH9V+37T88cz9tZi6piA45r3oCR1om1mYQPIFlyvl6LLuI7atQcUKbutZNn9nq8BAOLdtO8eQjovBlyv6/mQNAnkLwVZAo0HpoIYVZ2zOeyLg4QjTODbHmYBSYmWl3baR6+dRnXLWIXPMxtQMO5sdL8zTPuLBvm5I5CU9/+e5impkyUlq436sTl7hFmxxO8dGYDb6/rvsP0evpnoEHr9I69rG8nO79vjfNXQ2oEDI3fWNzVBsvHOYx6aaDSCD7opPvO8+d4eFaXlko9LbZbUp2ZMS/DsUC0VZ0TLtvoqwAFBLC01XKF/69dScLGhZjtFSZAHVveoRtl7pQZuOOETiLC7ZzGs/9HcSq6yWZXOuOMnBDy0mVfQ06T+XVz8UoenwzzQQueToIFmpA62eMFAXfcW3VleJkMwasJB9C/wvYo0j4cUeAVkpsw2fHz4Mj/V+JOohaV+fAKaI/0P4I9B3AFR5XThNc1DSMTe0l/Qq48V7YgzESlvu6mkk6xEcGl8NxVP8WgnjPUGUJAcFqIOYx438CnmcEapQ5GtoJMfIAxMFps2Wrmgmt44asSubUJyTj2ibCvIbqKnzN79bUMOTqmNrBB4t8w1C10GtEDqBM6cUAuNrE9FOKcMRdp40FYnM7gwuV12UvrpQEqrXdQnjhO4DooakKtNe0TIg8+47Q1E1mCL8xR5+WCPKtZF2UKf3Ny/eVekpUz1jitsLw==
-X-Forefront-Antispam-Report:
-	CIP:205.220.161.53;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mx0a-00498f04.pphosted.com;PTR:mx0a-00498f04.pphosted.com;CAT:NONE;SFS:(13230040)(36860700016)(1800799024)(82310400026)(23010399003)(376014)(56012099006)(11063799006)(10067099003)(3023799007)(18002099003)(13003099007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	aHQUKJlMOyGTwsqNERfRyJMzdcEhSul8DjLnb2hPIDJWg1ncGVnykZYoBZfkVVmsSy0xPThJ9fTQBOARzNrwglZwyONKtv/Wr7Xhso/HdDuNsoXGSVfktL3TLmsxHQJ0OsiBgW0U1hrH/RyTyrUK1kMsyuqeFbon6NInbsKieKAn4zg3Laej6LGePpI2IL+jaM6BoHQ9AopvkFTyVjbY+uToG8j/Pp4aJTfDTjrdFcWeKQn6TXjIaoG6comoMtM/WZNjRw1OzDcyMdNIVhAKuTp1JVy5C0IOjZlpsXcXHrWSC4masmg3nzAhiepfjr/u5uK6fAw/LLIR1qR2UI7lUrl6ZIgAI+RWgEdoMTGjxEdhPu9uApzVFwaJL8g/vxlDA8/FTvIiijpyv7cBI3ZTQe5N5wRyepHZ/nkWJh+UqODqmFUyC11KIVEoH5no0Jya
-X-Exchange-RoutingPolicyChecked:
-	e7fKk1dTjGUi6pzE5nVHye/+jWMNBpEtUJAYblFAodu5W7AtYXrLMsi7DMJR6vG2psoBxmBsWXlMvdvrGxALrW45XsfmR0/UTC0F2rx0mC8Ead3Ml3DitSJHxLo2PjsvzI/aKUAntL/kPUFnqtGwg99aHMNiBZoYsfCJsvEbRDzEJfi0Qh1BQaUMqUGac1+Tp/FjUcMrgWkykeOoJnDAUrj5+98vYoHMiq+rqRkknksHCpo9ZieMF/bTfEz+PZ9yM9jIFQ8aYzKl9lcc+WGxywWo0zFq7BdHLtec3bEilbBSAfshW0DF/kQuB6tRvzS+9BuwGU3M35mH/CyKIYfe+A==
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
-	pAME+JoQ3SZIjdtBQpLmQMJOlNql0iH09gv5BtJCNwQfAvlSMlAIz9lSGK8PO7jl8X1D8UJ87qli7P4vfspH1Xctg6DPo4vzokrHcQHV3vlXyo9vOzEVzmCYISRgMQ6lf+QLGsJlfGve/tyf6hq+cWEeOSe8WQwV4RIAvTF5Ud3zUxra6zIuk5F7GMwp/Ig5Qh4PBJztb4rbZTz7Y0TmS1UMpxixyqFbgW5ER66y0uMz9QTHRXrA7nATGOto6Ao91aos29jOX4XHw+/eYhazIJDB8C/og/JpCkNy4dUw6H04nDznkELByF/ZU2ZmvMlUtKJuEt78V2vD/3lJggJfTMYTrLfpOZUUAiT/LeVAamFCGtbCK4h1r46RXzKKaPxbH4rH6jCDI/dCUsQ4gw4u26vnSU6FT+QdPbyYG390pURbWWY/T1+2znDdIzYkGTNxY0Lq6+/Q61KZ4J4FZ3kMJid6zHnDRV5BNjFO4H7wbpJDKeiDBsMNJxuWUn1AnAqoQgPAdCGEh12qu0sJXUcps8gEmv8HpOJIJQMHpF9gf5QkFuYEW917rJF1lOUaC53wPCnqIU5eWOJZB3tcy6qKgca5IlawaSXPVsKhPV89UWi2O3MUCn+t3OZ5Pse4PEvRZyi+JM/cJtMdGjZQOEpShA==
-X-OriginatorOrg: ford.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2026 21:12:02.7276
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e2853b1c-9538-4571-03ec-08def7ed30a7
-X-MS-Exchange-CrossTenant-Id: c990bb7a-51f4-439b-bd36-9c07fb1041c0
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c990bb7a-51f4-439b-bd36-9c07fb1041c0;Ip=[205.220.161.53];Helo=[mx0a-00498f04.pphosted.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CY4PEPF0000EE36.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR16MB4261
-X-Proofpoint-GUID: OYJVD7ZUROFawxw-ZzSUDwsTH0ChL51R
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDE3OCBTYWx0ZWRfX2bR0dVe0KFZx
- tRoCzPd5CTusFMFMhlcARzWfAwszE3NNchyZOBdnj8M3MlTA+F4m0mqz8isn8whoRrVw+J3OpR+
- eMAjE/cQdTeYCuMFfiiSjvy58NRlPikjGmj3GkhD4tByvzH/UBdT
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDE3OCBTYWx0ZWRfX9os3kZHwzzry
- Cq50Z4YHzFfE8H3OWYqMyJaT4b2mPcb4A4/IkkV+zYQI+8NSdfnpZm0NxlJIVmE3VVMWjMQ876B
- hS7p00ub2KUql2uEhikoKWgHtmzMSqUFqvGKhJ07McImDulHfp0/tXdkGXH1Ex6jcLcno9vwxu7
- 8rhUmHSW9+S2cp0jChQAq1esbUvQ+TCY+DpEc+QVanosvLFAOLJP3qSIrhessTMqbZdDj/VbFbW
- wRw9ohiiVFCN+JptBVdVON1n8+B7Xry6imfrQBMDXlLjxQWOfaQ3NRpijXLn1vxbIM0i49iWNO7
- QBkklg1DfZ/qBYd2+KCLV0lt+WPzvrA9fs6O5OqY8lEmEAxikSEpu0Oblb0duP7ZQMEFzhAT8my
- ROaC1mvnCyC4fTYvAumftLNzJ2oDvh0zPzUpVZyJ/59GIuLUnyDE31889dHN2S1oFXn9qmnHOF5
- gX7PXBJawIkLVe5D7ug==
-X-Proofpoint-ORIG-GUID: OYJVD7ZUROFawxw-ZzSUDwsTH0ChL51R
-X-Authority-Analysis: v=2.4 cv=aKfAb79m c=1 sm=1 tr=0 ts=6a7b9026 cx=c_pps
- a=N7UEZcGu6nKKiVkixTDHSg==:117 a=lOEMawUel/sSvQipkIvNbg==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=Sv0fKeRqtYgA:10 a=3PXLN80vpJUA:10
- a=6NUGLSImWEsA:10 a=w9pew1qAHqMA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=P_n1zlmtWsCQbjROFjcg:22 a=0GA0A_IKJoUHBEAzNTkD:22 a=VwQbUJbxAAAA:8
- a=cbNQJ9GKAAAA:8 a=p0WdMEafAAAA:8 a=IgJ0wlFFhhnA7GDi3u4A:9
- a=DqJYxgmhk6moR-_7_KoZ:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-11_05,2026-08-10_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 clxscore=1015
- spamscore=0 phishscore=0 suspectscore=0 adultscore=0 bulkscore=0
- priorityscore=1501 impostorscore=0 malwarescore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608110178
-X-purgate-ID: tlsNG-ef75cf/1786482729-A58C1AE4-C9FFB066/0/0
+        d=google.com; s=20251104; t=1786484792; x=1787089592; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:cc:to:from:subject
+         :message-id:references:mime-version:in-reply-to:date:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=GNP84U5NVANNewsvSEzbCgg+MDCqvRSKiMtE5jPKweo=;
+        b=Micf/Ccj7OCe7RGEQxYVcALcLKQzeHnbXv+sqv2hh5TAmfVo52vHpYTyRCnBbT1jV1
+         8osw8bMFN58yaoXUbkb8E9PTcleA+hY8l3lwns9b4MBGKS9KkszAXum2ACun78nczwmV
+         5D9SBi1cD5vQ503qqHo1Zf6gCTrQDLiJYaTJMrOSi5uytzu1z2UQcmhpduPKH9bDknmE
+         yrYww2zsFisNCW01uGBwHOKwUniSd5qEcmxaki5D9t/z27Pz6BLaYhoIHxw5yLb8nDGh
+         c/xZV+pPrbYCmEU4wkkc0wDd0pcKGYgdc6qI14LUxOl2E+SPjPVuXLdHsrxolSD3lt14
+         +a7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786484792; x=1787089592;
+        h=content-transfer-encoding:content-type:cc:to:from:subject
+         :message-id:references:mime-version:in-reply-to:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=GNP84U5NVANNewsvSEzbCgg+MDCqvRSKiMtE5jPKweo=;
+        b=TT/sxcxwV7E91gUPhymwCPSHeIwBbXUzUnvc5zoNsT0iiiDd9v4Ngt0Yqo/JyVVDQ8
+         GgwHtsMjRaCt1m6VpT7Ymhqmg46UK4aBWfnx778YMHs1/oHQWdZwKemA3HyytNgRQ233
+         M3bwkTI/Z1JupN9gdV8BkjCUMcEqg5jawMkRMcbiHNICLI9LLeCRQnHU4FTuzg3F942I
+         X27BjcMvaUFZBH9MVCRKp4Fg0C6Ncvh+GpJT1DyxrvJTb1TK4AkR2bn0kqQOLhR5nVTo
+         AqIZmfHgeKiBfhBDFM0qFTf2HKUhpZ8n0VdrRf0z5t18L1hoRyF6JDgcRi837Y7ZrbK3
+         1Gbg==
+X-Forwarded-Encrypted: i=1; AHgh+Rq0n2jO0h7aK2HxU6mRiVtOQj0BrxeYxjFLuViObc5ACRx6SbSgzHoKKQTADRZO9OK3ndCJUUpv71o=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwQLFzasOmAFfhU5Nspx+uNk95/3yq0eo4H44PBhfLof5S9VTXN
+	lQEocrgINc5c6zrxIaFrxUzpQo5oM1cJ5vuxB2qlAot+mJrltB0vmMhyZI9zqypv/WHWyohcilf
+	o4ULuNw==
+X-Received: from pfbgp12.prod.google.com ([2002:a05:6a00:3b8c:b0:84b:4480:8b65])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a00:2ea8:b0:847:98ff:4af5
+ with SMTP id d2e1a72fcca58-84fb54c5d00mr290195b3a.26.1786484792108; Tue, 11
+ Aug 2026 14:46:32 -0700 (PDT)
+Date: Tue, 11 Aug 2026 14:46:31 -0700
+In-Reply-To: <3dc73f745b6abfd1eb53e7d3fce2067eaa3b3c92.camel@infradead.org>
+Mime-Version: 1.0
+References: <bb9a12cc663130eb2caa8e839d0f6ca53d722d1c.camel@infradead.org>
+ <ansuqrD2KwFuLWbV@google.com> <ansywxh0VX5rtfWc@google.com>
+ <e256fa4af96e916ba30019cbba501fa896025fb0.camel@infradead.org>
+ <antQYJvRxJxOjtut@google.com> <f5dc701cf3319a7b3c8fd1497f26d051aa9fa3ba.camel@infradead.org>
+ <antb01WqOrs-tztm@google.com> <6ab49538675d97f1f4bf01574b1b066aae0bc05c.camel@infradead.org>
+ <ants4VjfAiblaWsl@google.com> <3dc73f745b6abfd1eb53e7d3fce2067eaa3b3c92.camel@infradead.org>
+Message-ID: <anuYNxD81OE3MrQw@google.com>
+Subject: Re: [PATCH v7 17/36] KVM: x86: Allow KVM master clock mode when TSCs
+ are offset from each other
+From: Sean Christopherson <seanjc@google.com>
+To: David Woodhouse <dwmw2@infradead.org>
+Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, Thomas Gleixner <tglx@kernel.org>, 
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
+	"H. Peter Anvin" <hpa@zytor.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, Juergen Gross <jgross@suse.com>, 
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>, Paul Durrant <paul@xen.org>, 
+	Jonathan Cameron <jic23@kernel.org>, Sascha Bischoff <Sascha.Bischoff@arm.com>, 
+	Marc Zyngier <maz@kernel.org>, Joey Gouly <joey.gouly@arm.com>, Jack Allister <jalliste@amazon.com>, 
+	Dongli Zhang <dongli.zhang@oracle.com>, joe.jin@oracle.com, kvm@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	xen-devel@lists.xenproject.org, linux-kselftest@vger.kernel.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-4011c0/1786484794-58DC7CFC-57CBBD08/0/0
 X-purgate-type: clean
-X-purgate-size: 2003
+X-purgate-size: 5174
 
-Currently there's no way to print Xen command line on the emergency
-console for debugging purposes when 'xl' is not unavailable.
+On Tue, Aug 11, 2026, David Woodhouse wrote:
+> On Tue, 2026-08-11 at 11:41 -0700, Sean Christopherson wrote:
+> > OMG, I hate this code.=C2=A0 After literally hours of staring at this, =
+and even typing
+> > up a lengthy example of why guest time would go off the rails, I finall=
+y spotted
+> > that l1_tsc_offset is accounted for by the call to kvm_read_l1_tsc().=
+=C2=A0 FML.
+> >=20
+> > Thanks for being patient and not flaming me too much :-)
+>=20
+> Haha, no judgement. We *all* hate this code. That's why I threw my toys
+> out of the pram and went on this crusade to clean it up a bit.
+>=20
+> > > > > And your variant just added a dependency on wallclock time back i=
+nto it
+> > > >=20
+> > > > Can you elaborate?=C2=A0 I'm guessing I don't entirely understand w=
+hat you mean by
+> > > > wallclock time.
+> > >=20
+> > > The system_time field? The unspecified might-be-UTC-might-have-leap-s=
+econds one :)
+> >=20
+> > Ok, I think I finally understand the goal.=C2=A0 I got turned around by=
+ the combination
+> > of the name SET_CLOCK_GUEST and the full pvclock structure being passed=
+ to the
+> > guest.=C2=A0 I was expecting SET_CLOCK_GUEST to literally set the entir=
+e clock, e.g.
+> > mul+shift, timestamp, etc.
+>=20
+> That's an implementation detail.=C2=A0
 
-Add new keyhander 'X' to do command line printout.
+Yes and no.  If the payload didn't literally have all the assets needed to =
+set
+the kvmclock fields, then I wouldn't care.  But I don't think I'd be the on=
+ly
+person to see a GET+SET pair and expect GET to return exactly what was writ=
+ten
+via SET.
 
-Signed-off-by: Denis Mukhin <dmukhin@ford.com>
----
-Changes since v3:
-- print built-in command line too
-- change handler to print command line only
+> It is literally getting the clock as the guest sees it, and setting it
+> again on the destination from the same guest-ABI pvclock structure.
+> From the userspace point of view those actions *are* symmetrical.
 
-Changes since v2:
-- account for CONFIG_CMDLINE_OVERRIDE case
+Only if userspace holds it just so.
 
-v3: https://lore.kernel.org/xen-devel/20260810230359.671587-3-dmukhin@ford.com/
-CI: https://gitlab.com/xen-project/people/dmukhin/xen/-/pipelines/2751523722
----
- xen/common/kernel.c | 32 ++++++++++++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
+> I'd actually *like* it to just be a memcpy at both ends, even on the
+> SET side, just copying what userspace provides into what we offer to
+> the guest as its pvclock.
+>=20
+> But as well as wanting to do some sanity checking, we also live in a
+> world where we might have to switch to the non-masterclock mode at any
+> time, and we have to ingest the information into the per-VM kvmclock
+> setup in a way that the kernel "understands", and that's why it ends up
+> implemented the way it is.
+>=20
+> I looked at rewriting the masterclock base information from what
+> userspace is providing, but there are *host* TSC values in there, and
+> it ended up in some cases wanting to set ka->master_cycle_now to a
+> value which is *negative* on the new host, and I didn't want to
+> exercise that wrap-around path. So instead we just adjust
+> ka->kvmclock_offset to give appropriate results based on the existing
+> masterclock base.
+>=20
+> Each vCPU's pvclock is then *regenerated* from the VM-side kvmclock
+> data, giving rise to that annoying =C2=B11ns discrepancy that I whined ab=
+out
+> a while back, but didn't give in to my perfectionism and eliminate...
+> yet.
+>=20
+> As far as userspace is concerned, KVM_SET_CLOCK_GUEST *does* set the
+> entire clock (at least the relationship between guest TSC and kvmclock
+> nanoseconds, which is what it's for). It's just that the kernel then
+> "tweaks" it a little bit to give a slightly different y=3Dm(x-x')+c
+> equation which is still within the noise of the original.
 
-diff --git a/xen/common/kernel.c b/xen/common/kernel.c
-index d1bef9ac2b2b..8a43e4421002 100644
---- a/xen/common/kernel.c
-+++ b/xen/common/kernel.c
-@@ -5,6 +5,7 @@
-  */
- 
- #include <xen/init.h>
-+#include <xen/keyhandler.h>
- #include <xen/lib.h>
- #include <xen/errno.h>
- #include <xen/param.h>
-@@ -505,6 +506,37 @@ static int __init cf_check param_init(void)
- __initcall(param_init);
- #endif
- 
-+static void cf_check show_cmdline(unsigned char key)
-+{
-+    const char *builtin_cmdline = CONFIG_CMDLINE;
-+    const char *cmdline;
-+
-+    printk("'%c' pressed -> showing hypervisor command line\n", key);
-+
-+    if ( builtin_cmdline[0] )
-+        cmdline = builtin_cmdline;
-+    else
-+        cmdline = "<NULL>";
-+
-+    printk("Built-in command line: %s\n", cmdline);
-+
-+    if ( IS_ENABLED(CONFIG_CMDLINE_OVERRIDE) )
-+        cmdline = "<NULL> (CONFIG_CMDLINE_OVERRIDE=y)";
-+    else
-+        cmdline = saved_cmdline;
-+
-+    printk("Command line: %s\n", cmdline);
-+}
-+
-+static int __init cf_check misc_init(void)
-+{
-+    register_keyhandler('X', show_cmdline,
-+                        "show hypervisor command line", 0);
-+
-+    return 0;
-+}
-+__initcall(misc_init);
-+
- static long xenver_varbuf_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
- {
-     struct xen_varbuf user_str;
--- 
-2.54.0
+Again, if and only if the fields match what has been written previoiusly.  =
+To
+me, that's not a SET operation given the full inputs.
 
+I completely agree that conceptually this is intended to SET the entire clo=
+ck,
+but as you note above, reality doesn't allow for that.
+
+> And the kernel actually does that kind of 'tweak' all the time.
+> Although we're working on narrowing them down because "within the
+> noise" is in the eye of the beholder; Dongli had some patches for that
+> which I think I rounded up and included?
+>=20
+> > But all of that metadata is just a means to an end: the one and only go=
+al is to
+> > calculate the per-VM kvmclock_offset for the "new" host's TSC+time snap=
+shot, by
+> > computing the nanoseconds delta for the new snapshot as if it the guest=
+ observed
+> > the TSC while running on the old host.
+>=20
+> That is currently how it is implemented. It isn't the API contract.
+>=20
+> > And that is done in the kernel instead of in userspace to minimize the =
+amount of
+> > slop introduced due to delay between taking the snapshot and computing =
+the offset.
+>=20
+> Huh? There should be no delays here. If *anything* in this new code is
+> done with something other than a *simultaneous* reading of TSC and
+> ktime that I sweated blood and tears and got shouted at by Thomas for,
+> then that *is* something I care about...
+
+Sorry, I didn't mean to imply there would be delay on the SET side.  What I=
+ was
+trying to say is that if this were punted to userspace, then there _would_ =
+be a
+ton of slop because it would be practically impossible for userspace to pro=
+vide
+the correct offset. (I was walking myself through why KVM needed to provide=
+ uAPI
+to compute the offset, as opposed to provide uAPI to let userspace jam in w=
+hatever
+value it wanted).
 
