@@ -4,41 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1376CC5B56A
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Aug 2026 12:12:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1388177.1629390 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D546C5B56A
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Aug 2026 13:02:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1388195.1629407 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtlKl-0004SL-LO; Tue, 11 Aug 2026 12:11:55 +0000
+	id 1wtm6w-0003A0-7K; Tue, 11 Aug 2026 13:01:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1388177.1629390; Tue, 11 Aug 2026 12:11:55 +0000
+Received: by outflank-mailman (output) from mailman id 1388195.1629407; Tue, 11 Aug 2026 13:01:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtlKl-0004SE-Ig; Tue, 11 Aug 2026 12:11:55 +0000
-Received: by outflank-mailman (input) for mailman id 1388177;
- Tue, 11 Aug 2026 12:11:53 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wtm6w-00039t-4L; Tue, 11 Aug 2026 13:01:42 +0000
+Received: by outflank-mailman (input) for mailman id 1388195;
+ Tue, 11 Aug 2026 13:01:40 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <david@kernel.org>) id 1wtlKj-0004QX-BH
- for xen-devel@lists.xenproject.org; Tue, 11 Aug 2026 12:11:53 +0000
+ (envelope-from <andrew.cooper@citrix.com>) id 1wtm6u-00039g-G7
+ for xen-devel@lists.xenproject.org; Tue, 11 Aug 2026 13:01:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wtlKi-00BxPI-Eh
- for xen-devel@lists.xenproject.org; Tue, 11 Aug 2026 14:11:52 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wtm6r-009LCC-Fz
+ for xen-devel@lists.xenproject.org; Tue, 11 Aug 2026 15:01:38 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <david@kernel.org>)
- id 6a7b117e-2eae-0a2a0a5409dd-0a2a450586ae-26
- for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 14:11:52 +0200
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <david@kernel.org>)
- id 6a7b1186-4cb1-0a2a45050019-aceafc1fb6d2-3
- for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 14:11:52 +0200
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id AD2A843649;
- Tue, 11 Aug 2026 12:11:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E88261F000E9;
- Tue, 11 Aug 2026 12:11:33 +0000 (UTC)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6a7b1cec-2eae-0a2a0a5409dd-0a2a4509e918-18
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 15:01:30 +0200
+Received: from [52.101.193.24]
+ (helo=CH1PR05CU001.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6a7b1d25-be1a-0a2a45090019-3465c11832eb-3
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 15:01:27 +0200
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
+ by SJ0PR03MB989491.namprd03.prod.outlook.com (2603:10b6:a03:407::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.12; Tue, 11 Aug
+ 2026 13:01:22 +0000
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37%7]) with mapi id 15.21.0292.024; Tue, 11 Aug 2026
+ 13:01:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,193 +55,214 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786450309;
-	bh=/fTG1Cghw/RG7+KE3x88oxH8TI74VawrjBf3qjRRniY=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=oMzFJcn9VOzkFaKMEx9vCYCdx1Pq7igNm3SDyOEjzrOpDudIApIUK8tbQWGyhMTA2
-	 t05Mkqhok9RLYIMUol0cpCiu3QthaSWyzaAoYQ2iTd1AckujJZDZf2+JmOHRJ0KvP7
-	 mcsYLS8a7sO8YaLXbyWEeOK99DFlaVD5L55J3MTekojG6h3FMWYgpjeoMH//X24lZs
-	 5lfWAxjxOdrK+/s8jDuKs0rLQeM8RFflAxNY1JPwZF3i/yhkf94kLkVqbTR4mmJWjo
-	 hK2SQwlx7kI/9C/spjKPKM5IkvDG9SLQ6RAQ5o7kkbgcPTchuBQb5gh+4ZPvUgW8mp
-	 IkyibBYe3lp/w==
-Message-ID: <e9de4158-b829-471b-980c-1999959bbc48@kernel.org>
-Date: Tue, 11 Aug 2026 14:11:31 +0200
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=tukdJ7h+jvWFTWG/Rs5CNwcYyKka9m9B7ujc0Gjs6WqZpi+jAbWUT3kN4en1i8m/YLvvlgGVpebo/UvnwZGUJ4u2fIQD3EQk8BYZq2lEzFXQZy1l3WXC4NuWvDbdJQJAtdmnykrOba8Ql80EyQQh7ysnlsEvSrFAowTSITkSYZVihckPqk8t4Jv5O8tr2BXXMBMmuG8pT0KalQ3IzbOFXkGq2/OFDv2KhFZE2EL9vLRTTxiLpZn+VcU7QUCFCFrh1qVyFiIBY/TabVTqRBECTC/wDfhFNp26Y/HfD0scIZzdMqqGzlPB5oZcjQuNBG9IPr0Ts1XRljnO0kR08LaK/Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=IZ+jG5N07na9TTaIn652mOqplbTmcBrD7nwVlzdekfM=;
+ b=MQGN/QJeV7UGBQxCFA3PO5ry+h4x7Q08/eNs03VO3TgtA6G/5yAtIVepCD71/gGECHLRElHZQv8dXE9eewhgMXxxSK+KtumZHuunqwIdWwVz1WgeKTViMSyZJh8H8ikE1ja9+r4Uq3/u+k8QupuqIMnUNv4lL11HcwVl1ernoLv4xCdkgQ1RLjeRPh18AiMmBVl+PY5HPlK9uaJkaudnwIZjZtJUcD4LwQPXxgWwd5q8rTHK/eUwM19ouJ3bYlBZU1066xbuaK7ILKpdZyzVW6UZhOvsXdg/V1Hd5+T+uIQDacOcHrUgEVkkz3l/RH4e8UX+NgxCR5W8XdD4p0noXQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=IZ+jG5N07na9TTaIn652mOqplbTmcBrD7nwVlzdekfM=;
+ b=DZT6Z7wwZt2L2URLA4htGJKPxxMsqj759/mgzu6lkPZJvpMNIbaQaUWyK5RzaU1oSLnlzsfAPMWFGHyQjTcCDP7d7jKpNCi0+/i3vY2s3vdGTApIQ+U3aFHjOT/8hkJVKLbixGuB0WYh8daWIHDopKSc8SinKwgBwLRz3Ky8px0=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <7b2d0e8f-5c6c-4002-a123-d96c90030e54@citrix.com>
+Date: Tue, 11 Aug 2026 14:01:17 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 6/9] mm: convert PTE table entry to pte
-To: Muhammad Usama Anjum <usama.anjum@arm.com>,
- Alexander Gordeev <agordeev@linux.ibm.com>
-Cc: Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin
- <tursulin@ursulin.net>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Dimitri Sivanich
- <dimitri.sivanich@hpe.com>, Arnd Bergmann <arnd@arndb.de>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
- Helge Deller <deller@gmx.de>, Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>,
- Andrew Morton <akpm@linux-foundation.org>,
- "Liam R. Howlett" <liam@infradead.org>, Lorenzo Stoakes <ljs@kernel.org>,
- Will Deacon <will@kernel.org>, "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
- Nick Piggin <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
- Andrey Ryabinin <ryabinin.a.a@gmail.com>,
- Pasha Tatashin <pasha.tatashin@soleen.com>, Chris Li <chrisl@kernel.org>,
- Kairui Song <kasong@tencent.com>, Uladzislau Rezki <urezki@gmail.com>,
- Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu
- <mhiramat@kernel.org>, Alexei Starovoitov <ast@kernel.org>,
- Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>,
- Eduard Zingerman <eddyz87@gmail.com>,
- Kumar Kartikeya Dwivedi <memxor@gmail.com>, Ingo Molnar <mingo@redhat.com>,
- Arnaldo Carvalho de Melo <acme@kernel.org>,
- Namhyung Kim <namhyung@kernel.org>, SJ Park <sj@kernel.org>,
- "Matthew Wilcox (Oracle)" <willy@infradead.org>, Jan Kara <jack@suse.cz>,
- Jason Gunthorpe <jgg@ziepe.ca>, Leon Romanovsky <leon@kernel.org>,
- Miaohe Lin <linmiaohe@huawei.com>, Dennis Zhou <dennis@kernel.org>,
- Tejun Heo <tj@kernel.org>, Christoph Lameter <cl@gentwo.org>,
- Mike Rapoport <rppt@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>,
- ziy@nvidia.com, pfalcato@suse.de, ryan.roberts@arm.com,
- linux-kernel@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-parisc@vger.kernel.org,
- xen-devel@lists.xenproject.org, linux-mm@kvack.org,
- linux-fsdevel@vger.kernel.org, linux-arch@vger.kernel.org,
- kasan-dev@googlegroups.com, linux-trace-kernel@vger.kernel.org,
- bpf@vger.kernel.org, linux-perf-users@vger.kernel.org, damon@lists.linux.dev
-References: <20260806083926.1807279-1-usama.anjum@arm.com>
- <20260806083926.1807279-7-usama.anjum@arm.com>
- <fab9fc78-1e1d-4d5b-a9ca-92f3ebd04108-agordeev@linux.ibm.com>
- <5c329236-7761-4e42-a549-b822e43b4358@arm.com>
- <2599c5b3-e8ac-4865-993b-d41e6f060d52-agordeev@linux.ibm.com>
- <f0b0dacb-fb83-4402-b0ea-30072727dfd7@arm.com>
-From: "David Hildenbrand (Arm)" <david@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=david@kernel.org; keydata=
- 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
- qIws/H2t
-In-Reply-To: <f0b0dacb-fb83-4402-b0ea-30072727dfd7@arm.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Anthony PERARD <anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Jens Wiklander <jenswi@kernel.org>
+Subject: Re: [PATCH v2 3/3] xen/arm: handle irq_set_type() failures
+To: Mykola Kvach <mykola_kvach@epam.com>, xen-devel@lists.xenproject.org
+References: <cover.1786385827.git.mykola_kvach@epam.com>
+ <d4087afce93cd4bb1779507393ac74c5dd5baea3.1786385827.git.mykola_kvach@epam.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <d4087afce93cd4bb1779507393ac74c5dd5baea3.1786385827.git.mykola_kvach@epam.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1786450312-253192A1-2F56CCD4/0/0
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: LO4P302CA0018.GBRP302.PROD.OUTLOOK.COM
+ (2603:10a6:600:2c1::14) To CH8PR03MB8275.namprd03.prod.outlook.com
+ (2603:10b6:610:2b9::7)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|SJ0PR03MB989491:EE_
+X-MS-Office365-Filtering-Correlation-Id: 32266a46-e3ca-4b64-a19f-08def7a8a43d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|366016|376014|7416014|23010399003|18002099003|22082099003|6133799003|10067099003|4143699003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info:
+	uP40TFpYN+NtvjONtLsfW2by/sdA2/7fOrahfVWxjVqGLVwfMtqMIKhPAMlN8Nh/rXX+6PZMMWBTr8+MRXejj2tVWS/6xwkrPX4IVPR0wD7HTttYHihOQSl4NfINmBWVDUeZCyQkMzlMW98jcVxrXXG5XFAZ7GAD1/jQa4pwKeSnl2PkGjITQ4Y/hwAl6j+OtXCgw2rBHj8Ib5YYJEp1r9mDuleytlmOsRAk18DVZcoXJFhWSdiVzaXGRt8ysf964YlR3O8kT9G9KNNudd/FHzJHU7nS4eydesvaEZ3lDvDhKwj2dH5yNrez7jCk/+8NdqvmzxM2qs3NqLChu2U+NFbtTeEq/fS3unX/7ovoj4bdQyRy+ISkOAcwYGmb1Zkljldj86m9S7e/35VajXw6eJlwBO3HT9MkZvddM8GrsFA4DMK7oGk86JfSERrkaQpFr+L08efXtLPcWcyiaP78ySmJi/N7Sr33S2fWK+wynXtR601bCkOVziFWEAATvZMvMxEDsO8Cblhn8fWFD37sbKyTrvrhT/QkyDiALgo7pF6J3MzqPX84i77tCVoXFh9Kvl6+hqTKVUOdP05Lv/K7MJl5cIJYH1ibhe3p8hNLJ2KZxwOXZgrfwThINSEEURT7r13i22qI4zC31a2ETLNwa6D+Vionk/2rYufLThKKlU4=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(7416014)(23010399003)(18002099003)(22082099003)(6133799003)(10067099003)(4143699003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?SG5FMkdPMEVrenRwRG9xdGdTdWt6aVp2N0hKeWVydDhjQzYyUWRBSUdVamVE?=
+ =?utf-8?B?Yk5QVFl1NTRDNlBGZkNVRlFMK3llQmtsVlVnM0IwSStoVEJ6aGUzVVNkZ2hF?=
+ =?utf-8?B?MHRReG1mU3oycS9BeG52WTRXcVVLUWl2Tk1WNFNNTE9OWGgzTFZDQytHcGhP?=
+ =?utf-8?B?WDVGVW80Z2IzM3JIUytPaTNtQUtrY2VrcGljWlZ6WXJWVlZXWUVBRFdPczVF?=
+ =?utf-8?B?YVpTNkdhZU1mM2lBR1lCYXRHR0U1Uk9KUGJqUEJoVEZld3JjaHI5UmVPNXpD?=
+ =?utf-8?B?OWNJaW9wMW5EYnYxaWNEZ1IwU2NUalYxV2ZXTFF4VHhSaHhHL1RnMk5TVS9M?=
+ =?utf-8?B?Tm43YlZhKzI0UHd4SW9HM3F0SWRLSjMzNzU5NGJ4YzhScUtUWXhHcEYzTnRu?=
+ =?utf-8?B?WUdITGorR0NRVDVVRkJSR2VEMkdua0ttTjB1bDFOdUxnVE9FYzJiUTdQNjZv?=
+ =?utf-8?B?OTJWQ2dLSnhlS1IwNWNjdDhIV2VOeGhHSUdnQ040NG9XUnRuTFdnQ0gzd0hZ?=
+ =?utf-8?B?UFY3aUUrZDc4T21VVzlxM2NFREN1MWlobFRUM0pYM3JXUDlsaXlzNS9Jbldp?=
+ =?utf-8?B?R2Z6TE4wR3ZpcTB2MUhiNkFUaWJsSU4vMEI4eEhRUVR4T3poMm9mek1DMW5h?=
+ =?utf-8?B?dWllbWlkNlFCWlFsTUNDQ05XcS9vbDJtWlFPazBWUmFtZ2F0U2E2M21zVnY3?=
+ =?utf-8?B?YlFQVWJscytxKzZMYkNmSVFKSGpIM1lGYzB5TElZQTl6MGpCSUVOeWk0UlpO?=
+ =?utf-8?B?cTRSdFZNMjZVaUtqbm5acVhrREV6K2dBa0dINFNZdWJTWGxUamVwRDJQeWZR?=
+ =?utf-8?B?L2ZFcGNOeGhscFBvanR5NUtjTUIrVmdnQk9MenI0YmtpT3YrelR4SU94ZmV2?=
+ =?utf-8?B?QStSTWN4YkVHSmNTKzNpVExVS1FqamhMcUtRMkRZZ2FQQm9FQ09yUUxPc01n?=
+ =?utf-8?B?TDZnR0t0N21xSUxrSU1sbnB4bTZ1VFVxUDg0TXdjaDJpdzlNOFRXdUpwaTk2?=
+ =?utf-8?B?TzlPK3hPNHlqR2VrSDJCVWNTRTdNOWRBd1F2Z1o3SEoxQStjMGRaZndzVGJs?=
+ =?utf-8?B?UlMrdjI5ck9BWEZoN1V3TTQ1bHorTjVjMlpOVXBVWjNnZDZZSnF3S0RjLzUv?=
+ =?utf-8?B?cTV1NzVwalR2Uk4zNytPZDNaM0V2MG50Z1FUYUNWN2FhalJRd2lhdU9IaFE1?=
+ =?utf-8?B?djEvMWpvNWIrVGhYWnNTTm9aMHRMRDhEYTlOSVNGZDJGTkx3SXhuUVhHYWxW?=
+ =?utf-8?B?N1lVditzQjNUbkcxbTlRZ0hDMGdFcE52UVBxY2tFeGZveWlFejRxdGhoRkNP?=
+ =?utf-8?B?ajVGYWM0VUpQTWRFWTgvYVhKMEwvSkZWRzZHNlh2OVhFSms3RTAyQThxOUxP?=
+ =?utf-8?B?aTRrbm43ZjdRQnV5SndNWU9JRjcwRTV6ODN0T3A3dEFSM0ZGVk0reDU4cU9s?=
+ =?utf-8?B?eWlYbklyUklWVGV6dUlZTlpEcjk3S2xUZFlud1U2cWY4T3NJc0MxeDQyUFZo?=
+ =?utf-8?B?QkVkSXpScU9BbVQ0eldpeiszSjlSbEh2aHZIY0JLTzZGVjk0cVlRVElHR0Vv?=
+ =?utf-8?B?dXU0MTVUSWhiSXBleGF0TU11cFNBcjZEcDc4UkpYVk1NZko3SGM3V1BZYUVy?=
+ =?utf-8?B?NEt3VTMxaGlHSGJvdEE0TTB1c3JrRlRIWnN2TzR6M2JBNWEwZXhYL2U1czdK?=
+ =?utf-8?B?dzl3SmVOellUQWlFYnd4bDM2OGs1cjdTTGFlOGxhbldYa2RFY0RUYytGVEV2?=
+ =?utf-8?B?U29SWkViaW5uNDhEYzJKR0xqY1h4NXpjVnJXdHBrdktrbnF5UGpocGljZXpI?=
+ =?utf-8?B?RldwdjJPV1did0tZRzdjOEJER3NzT0JtUkJ2VCtUWkhHU3VuU2pJS3BwWVVJ?=
+ =?utf-8?B?eDhmSXpnRWlRa00vK3U3YVNmL0xEaHNyb2EwUGk0R1hJNXhyNkF0UnN2OER3?=
+ =?utf-8?B?L3hFSVFndkV1aFB5eThUdGUrbUg1QWtrQjdjTVhheFZLYkVUWWZkeExyWC9F?=
+ =?utf-8?B?STZ3bHc5dWJ0QnRlSEpQbXFjMnNpcW5BN1pmL25KdGU0OGRJeGVZTGd6dHFl?=
+ =?utf-8?B?SWpWWHBkWWFkZTVkd3p2L0l5UXFlVFJZa0w4YzkxUGRtNVpyTDFoZ0ZnbzZq?=
+ =?utf-8?B?eGZTZVpCd29hTUg0UE91WDUyODluWS83cS9jN2hnWkI4cUlPUzlGS0ZEMkdZ?=
+ =?utf-8?B?SXpUbTFNbnI5Zjg1SCtibXlXRk1RRjZQZWhnc0xiQnJsRzZ4ZlVTY2doQWt0?=
+ =?utf-8?B?aHJMOXdIa25aZWJrTEM5Znp5SmR6V0QvOUkxTWE5QWtyYjJITmVMM3loTWFr?=
+ =?utf-8?B?TTZHVzhJR1FnQloxbXBJWFBnejRBZVNUMzhuMjdHbHB1bHdTMGhpcVJ0NjQ5?=
+ =?utf-8?Q?X9SwcXxnqRg2XP2k=3D?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 32266a46-e3ca-4b64-a19f-08def7a8a43d
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2026 13:01:21.7526
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: K5ED69T5U97wCvbk8mDsugpolr53SiV1Iqs9GBlg6RWVX3oQY2lDWfTytUMQpr6eHI+TZc8lK9KRb8rrLc5Tpjh67zvb4fL3l/Rl4nQr2N4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB989491
+X-purgate-ID: tlsNG-bad1c0/1786453287-BC2F4034-51456E6A/0/0
 X-purgate-type: clean
-X-purgate-size: 2594
+X-purgate-size: 2434
 
-On 8/10/26 13:06, Muhammad Usama Anjum wrote:
-> On 10/08/2026 7:44 am, Alexander Gordeev wrote:
->> On Fri, Aug 07, 2026 at 05:26:04PM +0100, Muhammad Usama Anjum wrote:
->>> Yes, this is particular line is for non MMU. In this case, CONIFG_ARCH_HAS_HW_PTE
->>> would never be defined. Hence hw_pte_t is just pte_t and direct dereference is
->>> allowed. I'd thought a lot about it; is better to leave direct dereference here
->>> or use some helper. Then used __pte_from_hw() was already being used in generic
->>> ptep_get().
->>
->> But in case CONIFG_ARCH_HAS_HW_PTE=n __pte_from_hw() is still gets called.
->> That looks inconsistent to me. Why not just call ptep_deref() (see below)?
-> 
-> Agreed. Calling __pte_from_hw() directly exposes the representation
-> conversion at the call site. I will introduce ptep_deref() and use it
-> here.
-> 
->>
->>> There are only two users of __pte_from_hw() at this time. 
->>>
->>> ptep_get_sw() or ptep_get_deref() is better name here?
->>
->> ptep_deref() would be it.
->>
->> Do you agree to the suggested API requirements?
-> 
-> Yes. hw_pte_t * identifies storage containing hardware-formatted PTEs,
-> regardless of whether it is attached. ptep_get() is used for attached
-> entries and may provide additional architecture-specific handling.
-> ptep_deref() is used for unattached entries and performs only the raw
-> storage-to-value conversion.
-> 
-> For review, this patch would become:
-> 
-> diff --git a/include/linux/hugetlb.h b/include/linux/hugetlb.h
-> index bc0b9c65aa1d0..ce900d2652d91 100644
-> --- a/include/linux/hugetlb.h
-> +++ b/include/linux/hugetlb.h
-> @@ -1283,7 +1283,7 @@ static inline pte_t huge_ptep_clear_flush(struct vm_area_struct *vma,
->  #ifdef CONFIG_MMU
->  	return ptep_get(ptep);
->  #else
-> -	return *ptep;
-> +	return ptep_deref(ptep);
->  #endif
->  }
->  
-> diff --git a/include/linux/pgtable.h b/include/linux/pgtable.h
-> index 1768421755a9c..08613593f3320 100644
-> --- a/include/linux/pgtable.h
-> +++ b/include/linux/pgtable.h
-> @@ -490,6 +490,13 @@ static inline int pudp_set_access_flags(struct vm_area_struct *vma,
->  #endif /* CONFIG_TRANSPARENT_HUGEPAGE */
->  #endif
->  
-> +#ifndef ptep_deref
-> +static inline pte_t ptep_deref(hw_pte_t *ptep)
-> +{
-> +	return __pte_from_hw(*ptep);
-> +}
-> +#endif
-> +
->  #ifndef ptep_get
->  static inline pte_t ptep_get(hw_pte_t *ptep)
+On 10/08/2026 7:38 pm, Mykola Kvach wrote:
+> Several Arm firmware initialization paths discard irq_set_type()'s return
+> value, violating MISRA C Rule 17.7. If trigger configuration fails,
+> initialization continues with an IRQ that was not configured as requested.
+>
+> Check the return value in the GTDT, MADT, SPCR, and FF-A paths. Store
+> timer INTIDs only after successful trigger configuration, make GTDT
+> parsing failure fatal, and stop UART or notification setup when trigger
+> configuration fails.
+>
+> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+> ---
+> Changes in v2:
+> - new patch.
+> ---
+>  xen/arch/arm/gic-v2.c        |  8 ++++++--
+>  xen/arch/arm/gic-v3.c        |  8 ++++++--
+>  xen/arch/arm/tee/ffa_notif.c | 11 ++++++++++-
+>  xen/arch/arm/time.c          | 18 ++++++++++++++----
+>  xen/drivers/char/ns16550.c   |  5 ++++-
+>  xen/drivers/char/pl011.c     |  4 +++-
+>  6 files changed, 43 insertions(+), 11 deletions(-)
+>
+> diff --git a/xen/arch/arm/gic-v2.c b/xen/arch/arm/gic-v2.c
+> index 43a379fdda..b8dcbb0bb4 100644
+> --- a/xen/arch/arm/gic-v2.c
+> +++ b/xen/arch/arm/gic-v2.c
+> @@ -1157,6 +1157,7 @@ gic_acpi_parse_madt_cpu(struct acpi_subtable_header *header,
+>                          const unsigned long end)
 >  {
-> 
+>      static int cpu_base_assigned = 0;
+> +    int rc;
+>      struct acpi_madt_generic_interrupt *processor =
+>                 container_of(header, struct acpi_madt_generic_interrupt, header);
+>  
+> @@ -1173,9 +1174,12 @@ gic_acpi_parse_madt_cpu(struct acpi_subtable_header *header,
+>          gicv2_info.maintenance_irq = processor->vgic_interrupt;
+>  
+>          if ( processor->flags & ACPI_MADT_VGIC_IRQ_MODE )
+> -            irq_set_type(gicv2_info.maintenance_irq, IRQ_TYPE_EDGE_BOTH);
+> +            rc = irq_set_type(gicv2_info.maintenance_irq, IRQ_TYPE_EDGE_BOTH);
+>          else
+> -            irq_set_type(gicv2_info.maintenance_irq, IRQ_TYPE_LEVEL_MASK);
+> +            rc = irq_set_type(gicv2_info.maintenance_irq, IRQ_TYPE_LEVEL_MASK);
 
-I mean, how many such users do we expect? 1? :)
+I know it was pre-existing, but this is an overly verbose way of writing:
 
-Why have a helper for that then, that seems to encourage it's use, when really
-people should be using ptep_get() ?
+rc = irq_set_type(gicv2_info.maintenance_irq,
+          (processor->flags & ACPI_MADT_VGIC_IRQ_MODE)
+          ? IRQ_TYPE_EDGE_BOTH
+          : IRQ_TYPE_LEVEL_MASK);
 
--- 
-Cheers,
+I expect the optimiser can transform behind the scenes, but it's better
+to make the C simpler for humans too.
 
-David
+~Andrew
+
 
