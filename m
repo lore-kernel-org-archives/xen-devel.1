@@ -4,62 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04126C5AC67
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Aug 2026 08:53:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1388042.1629253 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B2E3C5CFC1
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Aug 2026 09:22:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1388052.1629262 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtiE1-0006FM-IZ; Tue, 11 Aug 2026 08:52:45 +0000
+	id 1wtig7-0002FK-Oo; Tue, 11 Aug 2026 09:21:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1388042.1629253; Tue, 11 Aug 2026 08:52:45 +0000
+Received: by outflank-mailman (output) from mailman id 1388052.1629262; Tue, 11 Aug 2026 09:21:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtiE1-0006FF-Fn; Tue, 11 Aug 2026 08:52:45 +0000
-Received: by outflank-mailman (input) for mailman id 1388042;
- Tue, 11 Aug 2026 08:52:44 +0000
+	id 1wtig7-0002FB-M5; Tue, 11 Aug 2026 09:21:47 +0000
+Received: by outflank-mailman (input) for mailman id 1388052;
+ Tue, 11 Aug 2026 09:21:46 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1wtiE0-0006F8-Bg
- for xen-devel@lists.xenproject.org; Tue, 11 Aug 2026 08:52:44 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19ff020b5cf000c4f3@swg.vates.tech>)
+ id 1wtig6-0002F4-Ba
+ for xen-devel@lists.xenproject.org; Tue, 11 Aug 2026 09:21:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wtiDy-0069x2-8I
- for xen-devel@lists.xenproject.org; Tue, 11 Aug 2026 10:52:42 +0200
-Received: from [10.42.69.6] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a7ae2c9-bab6-0a2a0a5309dd-0a2a4506a378-42
- for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 10:52:41 +0200
-Received: from [52.101.56.42]
- (helo=BN1PR04CU002.outbound.protection.outlook.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a7ae2d8-195a-0a2a45060019-3465382a85d2-4
- for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 10:52:41 +0200
-Received: from BL1PR13CA0142.namprd13.prod.outlook.com (2603:10b6:208:2bb::27)
- by PH8PR12MB8432.namprd12.prod.outlook.com (2603:10b6:510:25b::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Tue, 11 Aug
- 2026 08:51:50 +0000
-Received: from MN1PEPF0000F0E4.namprd04.prod.outlook.com
- (2603:10b6:208:2bb:cafe::66) by BL1PR13CA0142.outlook.office365.com
- (2603:10b6:208:2bb::27) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.12 via Frontend Transport; Tue,
- 11 Aug 2026 08:51:49 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- MN1PEPF0000F0E4.mail.protection.outlook.com (10.167.242.42) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.315.6 via Frontend Transport; Tue, 11 Aug 2026 08:51:49 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 11 Aug
- 2026 03:51:49 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 11 Aug
- 2026 03:51:49 -0500
-Received: from [10.252.145.116] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.45 via Frontend
- Transport; Tue, 11 Aug 2026 03:51:47 -0500
+ id 1wtig5-006FrG-0I
+ for xen-devel@lists.xenproject.org; Tue, 11 Aug 2026 11:21:45 +0200
+Received: from [10.42.69.9] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19ff020b5cf000c4f3@swg.vates.tech>)
+ id 6a7ae99c-bab6-0a2a0a5309dd-0a2a4509c4bc-48
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 11:21:44 +0200
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19ff020b5cf000c4f3@swg.vates.tech>)
+ id 6a7ae9a8-be1a-0a2a45090019-b9ff1c12b6f9-3
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 11:21:44 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 19ff020b5cf000c4f3.006 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Tue, 11 Aug 2026 09:21:43 +0000
+Received: from [192.168.1.46] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id A6098836B8;
+ Tue, 11 Aug 2026 11:21:42 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,196 +58,337 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nNBBgTGp1mcTONcPsH8fZGY0lZc28HdvKg8hQ9pk8FMObh3sUYei1sQfG+6Y5Mn9TgjecWnizJwokiYGs3lZRY1LH30k43BR5SxFmmCNQXfkSbKF4Fkva6v2AOfjd9o8gHzsT/VfFEkdJw8N0xEVcFKr1QuwMVwYFjMKyHS4K/yi6lge0ASPvdjbxjQ3F9WVC69BPdv4u7VuarTlx8JpCQQ2yPPFSk6+qSfS0MzSP9CFge8/Ad+zVW1/dPc3bR12ZSPZrIqr1aAMqwhGB3gNE3S7A8NKvw/X9Yj/uXkNxSuX2tA/Z9DpYyhY3SXKAuP9M4C8X+MsNxlkPKDhI/Qdvg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ex96CI+X4Y5wRRjVWwfYGvAcs68jgARCp19WLcvYZsI=;
- b=T4ttE2cHsq2wcW3DZaEWf3xy1+MiBeYuUXIPu6L1oUXkmNYALt+3mLwMUrylPEVVktpxLfzsDlRVN4JR1qQkAC+fHChbb7XeJ8nmYWnNkH/B6K9WtjiK4Zyu8AbHLjxvBSWoH4cBgFRiNs5ZNnxbDsZ32RP65P7dXa1eQjEqToj2WsY609PuSpP2/z+xVpq/w1bbbeVfHqNHsXcq58Uiw8IRrEIwKZYV1rwPFicXxDndwWNG/4TB4Ne7QAdLYxzGh6RFFMqDqDQzhNRKLmDOKgml+hmBZyTt1DZdIICvlPq6OVMBOoqN79dKTH5/23UNSIKRclTxeaG7iYl4mNWjYA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=epam.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ex96CI+X4Y5wRRjVWwfYGvAcs68jgARCp19WLcvYZsI=;
- b=ejc10Io9S2dEo6jWOgQIAI4f/GLdn9wQLo3o2DiGG9vRip5qloWzigc86ykklBQJ4BIL+NjlQqVXqgJK1EpgKxkOTr+1E4uQXHVPKcoHRx4T73hNS1adufXUE0G8YimWJf07XVbjJ7DcuUh2FTwBg/3OYsX5E4aWMk7ncmTdiC0=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <272a8622-47c2-4cbb-a98c-8242561cbdb8@amd.com>
-Date: Tue, 11 Aug 2026 10:51:47 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=BsDOru5B/HOalntMeTera7gCiEHVoXXf0RUzISNa0hQ=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=p4ZTfclmQMN1CNnwb43L1fye72gokU+LmNGukYDH8eOe8IS0FHFU9By/CpNppc1gEsu1Qg9uN
+ DOSl+mwEIFDfgLHvxgH3cM9L9Oy2UscnL7arsNtHTPKWJ6Gtbt8QbYMK9W5Se68sW87hV7mcDgH
+ khRbYYHnc5+fgPzzjaueYKEg2YITCxSntW/8ZIlNbjtEx84520af/rrLpz52U0ygNZXJ7j9c5H+
+ 0/4cswQTTFwtFLvuG6nsr2Swboqr4c2Q05zWdEX70iugdr4qFGs/0WiCycuLtfPOunVep1jiHOJ
+ 2Z33IMo4l1qpWXV4sdQYPGAkpvfjLUHPGWsemgXJ0t4w==
+X-Zone-Loop: 227c7d1a10f88bfa010aaddba4f1d9070cff629807f4
+x-campaign-type: default
+x-transaction-id: 13ba7e45-6832-423a-80cb-23f843b7583c
+x-swg-uid: 01-314b3b3d-7f60-47e3-9ec5-06fad97b9657
+X-Mailer: Sweego
+Message-ID:
+ <1786440103.8631fc262581453bbf619ec5b2062170.19ff020b5cf000c4f3@vates.tech>
+x-swg-bid: 1786440103.8631fc262581453bbf619ec5b2062170.19ff020b5cf000c4f3
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] xen/arm: validate IRQs before descriptor lookup
-To: Mykola Kvach <mykola_kvach@epam.com>, <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>
-References: <cover.1786385827.git.mykola_kvach@epam.com>
- <271952244ae71ade885b3619fe161ed4f47777fa.1786385827.git.mykola_kvach@epam.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
-Content-Language: en-US
-In-Reply-To: <271952244ae71ade885b3619fe161ed4f47777fa.1786385827.git.mykola_kvach@epam.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0E4:EE_|PH8PR12MB8432:EE_
-X-MS-Office365-Filtering-Correlation-Id: d3bff8db-055d-47a9-6ec2-08def785c860
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|36860700016|376014|82310400026|23010399003|10067099003|4143699003|56012099006|11063799006|5023799004|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	Tbba8HwoA0WfeC27HSxYENdPHKCYYIwh3Q7l9kRkKHTo4Tbd/Py8FEdc5lG20SKzXh6zMRPNDs+G1XiAIxZ3VzkiUnigjwLpXEDvzD0QHPebot6Wcma22V1RlHGU0bmPL05pNgW0hT4d8hJfAiAv6PqP0wRuh4WwGLaoqjtVV4dGA3yPoWDnxkavdp/FmXXevyF1Zw4YW95xdQMOSEI5bmDvkcYeWYt07pf/1PyRuA0nPxmtFHwVbl9lseNDwPLkG91vSqv+LcxuFieNmjIl+MMiW+WCCRr2rolJEA/QvwyBLtMw10FQskaFvsrOxZngEulkjQCsOvutEd5R7RXe0VZgHTj1gFCB1YxoxUPvupDZ3wRdjIE0qlTzs8aUNmdS9p+oeYnVxQSmdx25NRJ6M7l/dSYgfcJMjw6K2pGJKK7Mayb7fGFto7KR3zq9/Am0AFd0TV2UesSW59YTDoatGWOgu7GYtw0AIxeCJ0ac3R5PP65RsWFq37ng64QxRGG3hbkjvpzs2Cremh3BeQt+g6b7qdIb5m7Kha9GK6ydhZeTKjbH0+2po3wU1jaAc6pKClG/gb0379oPtNIu7ph1ps0y2lfZhHxMyEgrv+AMkWNsu7isXy6GNbAmuRLmefF03tKnN455yziJPloW9JVBTp8t+3eXxn5dAuGmy294FCcyFZ4HpO+7HKptkIYmc/ADGNN7h8OrpCV1FBcKxBp5vg==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700016)(376014)(82310400026)(23010399003)(10067099003)(4143699003)(56012099006)(11063799006)(5023799004)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	JBlRjzLmERNHwd09iJQtWJbs8nk/lwIkGLyv4ozflVOL8aLxvvsXhuvir4ByH7AD+j9Ma5hstHzVkQOOt8qg2qUv4N0NB6OfC+4LcwAE04fV+4BtUmd1OGuowOSe0coFPjI8dkzXlLCrBbrTKGImLCduZJPtVxEBuMfGAbKyUpEX2b5wdcwb9pVnnPkxo8gbro9b2MurK6rr2PeovHRsynNxdOemzH3N8feVuvzLIUKl1U/LgpJixjlbzvrTR3POduKDyJqurjCXgpRT4tc6VoGxWLqDKcdE3RQaVkCSdvNREa/3mYomun1xV4MAmAoGjXpJfrVnXacFngwAt7Sks1/TEhIjIGXZH308C3G+05y2wT85vHw2BfiJEWp0TPLkt1ng9Ts87xr8LsqKpG3uTqeD+/guxBRCCCyP+T5tsptt/mbqi8ZHpoymvGJyVx+Y
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2026 08:51:49.7233
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d3bff8db-055d-47a9-6ec2-08def785c860
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	MN1PEPF0000F0E4.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB8432
-X-purgate-ID: tlsNG-16d1c6/1786438361-FD00977B-548B2A2C/0/0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v1 05/17] xen/riscv: implement virtual APLIC MMIO
+ emulation
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Jan Beulich <jbeulich@suse.com>, 
+ Romain Caritey <Romain.Caritey@microchip.com>, 
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+In-Reply-To: <4c62661a-f944-4806-824a-e74bcbaea3df@gmail.com>
+References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
+ <5571644f1d3a4277dc95fe85099563a145d1d935.1784560663.git.oleksii.kurochko@gmail.com>
+ <57793423-aadd-4786-90fd-2923925b766d@suse.com>
+ <4c62661a-f944-4806-824a-e74bcbaea3df@gmail.com>
+Date: Tue, 11 Aug 2026 11:21:37 +0200
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786440102; l=10687;
+ i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
+ bh=gOjMgTrY5afWsvGwKc48ZSHzxOd0PUqzW8ObetQiJ0Q=;
+ b=pdma3NXfM4Gv4vvmHCu9so0Xn6DhD6yjAUScqDpL2Yfr/B2KRIQvlKvZRNsNNLg8xpJy+rqQP
+ Otj8RljM2++A+xoxgKSueM4FF1Z/Hz4oRJRQgmhuxgkts2LSkQklwQ8
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
+ pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1786440102868
+X-purgate-ID: tlsNG-bad1c0/1786440104-3A4DB034-B032E409/0/0
 X-purgate-type: clean
-X-purgate-size: 4762
+X-purgate-size: 10689
 
-
-
-On 10-Aug-26 20:38, Mykola Kvach wrote:
-> GICv3 eSPI support makes nr_irqs span the architectural INTID namespace
-> through ESPI_MAX_INTID, but descriptor storage is sparse. local_irq_desc[]
-> and irq_desc[] cover INTIDs below NR_IRQS, while espi_desc[] covers eSPIs.
-> INTIDs 1024 through 4095 have no backing descriptors.
+On 2026-08-07 18:08:21+02:00, Oleksii Kurochko wrote:
+> On 8/6/26 4:28 PM, Jan Beulich wrote:
 > 
-> Validation based only on nr_irqs accepts an INTID in this gap.
-> __irq_to_desc() then indexes beyond irq_desc[], and callers may lock or
-> update unrelated Xen memory.
+> > On 20.07.2026 18:02, Oleksii Kurochko wrote:
+> > 
+> > For this tag to have any meaning, it should move ahead of the --- above;
+> > the explanations ...
+> > 
+> > 
+> > ... here rather explain the restriction on the R-b, not its odd placement.
+> > 
+> > 
+> > As this looks to be recurring - please get versioning of your series right.
+> > The series is supposedly v1, but here you give the impression of it being
+> > v3. If there really was an earlier v2 posting, why isn't the entire series
+> > here v3?
 > 
-> Reject INTIDs that the GIC reports as unimplemented in setup_irq() before
-> looking up a descriptor. irq_set_spi_type() can run before the implemented
-> GIC line counts are available, so validate descriptor-backed ranges there
-> before looking up a descriptor.
+> It is v3 before before it was a part of another patch series connected 
+> to dom0less config enablement.
 > 
-> Call is_espi() unconditionally in __irq_to_desc() and provide an
-> espi_to_desc() stub when eSPI support is disabled. This preserves the
-> is_espi() debug check for eSPI-range INTIDs when support is disabled.
+> Would it be better to just write in "Change in v3" that it is moved from 
+> another patch series + link to that patch series? Or it will be enough 
+> just to drop "Changes in v2 and v1" and just start from v1?
 > 
-> Fixes: 98f7060b9ed5 ("xen/arm/irq: add handling for IRQs in the eSPI range")
-> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-> ---
-> Changes in v2:
-> - Validate descriptor-backed ranges in irq_set_spi_type().
-> - Validate implemented GIC lines in setup_irq().
-> - Preserve is_espi() validation with CONFIG_GICV3_ESPI disabled.
-> ---
->  xen/arch/arm/irq.c | 29 ++++++++++++++++++++++++-----
->  1 file changed, 24 insertions(+), 5 deletions(-)
+> > PLease can you, before submitting, self-review your patches? I'm really
+> > getting tired of having to repeatedly point out basic style issues, like
+> > the overlong line here.
 > 
-> diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
-> index 73e58a5108..0f5d3496bf 100644
-> --- a/xen/arch/arm/irq.c
-> +++ b/xen/arch/arm/irq.c
-> @@ -23,6 +23,12 @@ const unsigned int nr_irqs = IS_ENABLED(CONFIG_GICV3_ESPI) ?
->                                          (ESPI_MAX_INTID + 1) :
->                                          NR_IRQS;
->  
-> +static bool irq_has_desc(unsigned int irq)
-> +{
-> +    return irq < NR_IRQS ||
-> +           (IS_ENABLED(CONFIG_GICV3_ESPI) && is_espi(irq));
-This IS_ENABLED reads redundant because is_espi() contains #ifdef
-CONFIG_GICV3_ESPI inside. AFAICT you added it here to prevent the !ESPI build
-from reaching ASSERT inside is_espi() when the irq is in ESPI range. I don't
-like the ASSERT inside is_espi(). I think it does not make much sense in a
-helper that should really just tell us whether the IRQ is in ESPI range or not.
-It should be up to the caller to decide what to do based on whether ESPI is
-compiled in or not. I think this cleanup would be best to be done first. If you
-don't want to do that, at least document this in the commit msg because others
-may be tempted to drop this IS_ENABLED.
+> Sorry for that, I will write an extra checker for such cases to not miss 
+> them.
+> 
+> > It extends to the other local variables here, but I'll use these two to
+> > try to make my point: I'm struggling to associate the names with the
+> > values they are set to. Likely "hxw" is an abbreviation of hart index
+> > width, but (a) what's the leading 'l' then and (b) why is there no 'g'
+> > in "hhxw"? By using hard to grasp names, you make it hard to actually
+> > understand the subsequent expressions, in particular ...
+> 
+> The names it taken directly from AIA spec:
+> 
+> The use of this value and fields HHXS (High Hart Index Shift), LHXS (Low 
+> Hart Index Shift), HHXW (High Hart Index Width), and LHXW (Low Hart 
+> Index Width) for determining target addresses for MSIs is described 
+> later, in Section 4.9.1.
+> 
+> The AIA specification interprets the machine-level hart index as a 
+> combination of the **group index** (`g`) and the **hart index within the 
+> group** (`h`), according to the following formulas:
+> 
+> ```
+> (1) g = (machine-level hart index >> LHXW) & (2^HHXW − 1)
+> (2) h = machine-level hart index & (2^LHXW − 1)
+> ```
+> 
+> (In our case, the machine-level hart index is equal to `mhartid`, i.e. 
+> the hart index.)
+Therefore, if I understand correclty, if we take the Hart Index as
+defined in the AIA spec, we should have:
+Hart Index = (g << LHXW) | h
+Is it correct?
+> 
+> For systems that use IMSIC groups, the IMSIC address layout is defined 
+> by the following parameters:
+> 
+> * `lhxw` (Low Hart Index Width, or *k*): the number of bits used for the 
+> hart number within a group.
+> * `hhxw` (High Hart Index Width, or *j*): the number of bits used for 
+> the group number.
+Is group number appelation equivalent to group index?
 
-> +}
-> +
->  static unsigned int local_irqs_type[NR_LOCAL_IRQS];
->  static DEFINE_SPINLOCK(local_irqs_type_lock);
->  
-> @@ -77,6 +83,12 @@ static int __init init_espi_data(void)
->  }
->  #else
->  
-> +static struct irq_desc *espi_to_desc(unsigned int irq)
-> +{
-> +    ASSERT_UNREACHABLE();
-> +    return NULL;
-> +}
-> +
->  static int __init init_espi_data(void)
->  {
->      return 0;
-> @@ -90,10 +102,8 @@ struct irq_desc *__irq_to_desc(unsigned int irq)
->      if ( irq < NR_LOCAL_IRQS )
->          return &this_cpu(local_irq_desc)[irq];
->  
-> -#ifdef CONFIG_GICV3_ESPI
->      if ( is_espi(irq) )
->          return espi_to_desc(irq);
-> -#endif
->  
->      return &irq_desc[irq-NR_LOCAL_IRQS];
-Nothing here covers 1024..4095. I think we should add at least:
-ASSERT(irq < NR_IRQS) like we discussed some time ago.
+I think with if what I wrote above is correct, the proper definition for
+`hhxw` and `hhxs` should be:
+* `hhxw` (High Hart Index Width, or *j*): the number of bits used for
+the `Hart Index` field within the physical address.
+> * `hhxs` (High Hart Index Shift): the bit offset of the combined 
+> hart/group index field within the physical address.
+* `hhxs` (High Hart Index Shift): the bit offset of the `Hart Index`
+field within the physical address.
+> To extract the group index, we first shift the address by `hhxs` so that 
+> the group index bits are aligned, and then apply a mask derived from 
+> `hhxw` to isolate those bits.
+> 
+> The hardware performs the same operation to extract the hart index from 
+> the MSI address. However, in our case we already know which hart should 
+> receive the interrupt (`hartid`), so there is no need to extract the 
+> hart index from the base address. We only need to recover the group 
+> index and combine it with `hartid` to construct the value expected by 
+> the `target` register.
 
->  }
-> @@ -416,6 +426,9 @@ int setup_irq(unsigned int irq, unsigned int irqflags, struct irqaction *new)
->      struct irq_desc *desc;
->      bool disabled;
->  
-> +    if ( !gic_is_valid_line(irq) )
-> +        return -EINVAL;
-> +
->      desc = irq_to_desc(irq);
->  
->      spin_lock_irqsave(&desc->lock, flags);
-> @@ -647,13 +660,19 @@ static bool irq_validate_new_type(unsigned int curr, unsigned int new)
->  int irq_set_spi_type(unsigned int spi, unsigned int type)
->  {
->      unsigned long flags;
-> -    struct irq_desc *desc = irq_to_desc(spi);
-> +    struct irq_desc *desc;
->      int ret = -EBUSY;
->  
-> -    /* This function should not be used for other than SPIs */
-This is an important line that you should keep.
+Why don't we direclty extract the Hart Index as target directly needs it
+as explained in the 4.5.16.2 point of the AIA spec:
+target[31:18] = Hart Index
+target[17:12] = Guest Index
+target[10:0] = EEID
+It'd be easier as we just have to do shift from HHXS and apply HHXW.
+> 
+> > ... these last two. As it stands, they may be easier to understand if
+> > you didn't have the local variables at all, despite them then getting
+> > textually longer.
+> 
+> With the explanation above, do the variable names make sense?
+> 
+> To be closer to AIA spec I think it would be better to rename 
+> group_index to g and hart_id to h. Does it make sense to you?
+> 
+> >> +
+> > 
+> > Wouldn't this applying of a mask better be done in those callers which
+> > actually need it? It's not the least the asymmetry with ...
+> 
+> Agree, that to be in sync, I will drop mask argument and apply it on 
+> caller side.
+> 
+> > ... this which I consider unhelpful.
+> > 
+> > 
+> > As to the comment - this indeed looks to be a field, but ...
+> > 
+> > 
+> > ... these look to be values of some other field which isn't described. Please
+> > may I (again) ask that definitions are their commentary at the very least not
+> > misguide readers?
+> 
+> Thanks for pointing this out. You're right, the comment is misleading as 
+> written. APLIC_SOURCECFG_D is a field, whereas the APLIC_SOURCECFG_SM_* 
+> definitions are values for the source mode (SM) field, and the comment 
+> doesn't make that distinction.
+> 
+> I'll update the comments to describe the fields more accurately:
+> 
+> #define APLIC_SOURCECFG_BASE            0x0004
+> #define APLIC_SOURCECFG_LAST            0x0ffc
+> /*
+>   * sourcecfg[] register fields:
+>   *  - bit 10 (D) selects the layout of the remaining bits;
+>   *  - D = 1: bits [9:0] hold the Child Index, i.e. the source is delegated
+>   *           to a child domain (unsupported by Xen);
+Just to know, what is a child domain?
+>   *  - D = 0: bits [2:0] hold the source mode SM (WARL).
+>   */
+> #define  APLIC_SOURCECFG_D              BIT(10, U)
+> /* SM field values (0x2 and 0x3 are reserved): */
+> #define   APLIC_SOURCECFG_SM_INACTIVE   0x0
+> #define   APLIC_SOURCECFG_SM_DETACH     0x1
+> #define   APLIC_SOURCECFG_SM_EDGE_RISE  0x4
+> #define   APLIC_SOURCECFG_SM_EDGE_FALL  0x5
+> #define   APLIC_SOURCECFG_SM_LEVEL_HIGH 0x6
+> #define   APLIC_SOURCECFG_SM_LEVEL_LOW  0x7
+> 
+> Does it look better? Probably there is not sense for two extra spaces 
+> for APLIC_SOURCECFG_SM_*. I want to show by such identation that it is 
+> values for SM field of APLIC_SOURCECFG.
+> 
+> > And the xxx-es in here mean what exactly? Don't care? Some other, unrelated
+> > values? Yet something else?
+> 
+> The `x` bits denote address bits that are constant across all IMSIC 
+> interrupt files. They are not used to encode the group, HART, or guest 
+> index; instead, they correspond to the fixed portion of the IMSIC 
+> address determined by the platform's memory map.
+> 
+> For example, consider the IMSIC DT binding:
+> 
+>      interrupt-controller@28000000 {
+>        compatible = "qemu,imsics", "riscv,imsics";
+>        interrupts-extended = <&cpu1_intc 9>,
+>                              <&cpu2_intc 9>,
+>                              <&cpu3_intc 9>,
+>                              <&cpu4_intc 9>;
+>        reg = <0x28000000 0x2000>, /* Group0 IMSICs */
+>              <0x29000000 0x2000>; /* Group1 IMSICs */
+>        interrupt-controller;
+>        #interrupt-cells = <0>;
+>        msi-controller;
+>        #msi-cells = <0>;
+>        riscv,num-ids = <127>;
+>        riscv,group-index-bits = <1>;
+>        riscv,group-index-shift = <24>;
+>      };
+> 
+> 
+> Here, `hart_index_bits = 2` (4 CPUs) and `guest_index_bits = 0`, so the 
+> address layout becomes:
+> 
+> 31          25 24 23         14 13 12 11          0
+> +-------------+-+-------------+-----+-------------+
+> | constant    |G|  constant   |HART |    zeros    |
+> +-------------+-+-------------+-----+-------------+
+> 
+> 
+> I can update the comment to say:
+> "x denotes bits that are constant across all interrupt file addresses."
+> 
+> or, if you think it's clearer: "x denotes bits whose values are 
+> platform-defined and common to all interrupt file addresses."
+> 
+> Does it make sense any of suggested options?
+> 
+> > Nit: Indentation.
+> 
+> I will use the following indentation:
+> 
+> ... (((irqn) < (d)->arch.vintc->nr_virqs) && \
+>       test_bit(irqn, (d)->arch.vintc->used_irqs))
+> 
+> > Is this really meant to stay?
+> 
+> For debug purpose it could be useful, so I prefer to have it with 
+> changing it to gprintk(XENLOG_DEBUG, ...) to understand which domain is 
+> trying to access something wrong.
+> 
+> > The U suffix is mainly (even if only slightly) obfuscating things, I think.
+> 
+> Agree, I will drop U.
+> 
+> > I don't quite understand the need for the cast.
+> 
+> Functionally it isn't need but it documents that it is expected that 
+> translation from unsinged long  to uint32_t will happen. I will drop the 
+> cast.
+> 
+> > Why the cf_check (also for the store counterpart)?
+> 
+> Missed to drop. Before vaplic_emulate_load() was used to initialize 
+> vints_ops. It should be dropped here.
+> 
+> > You have d as a local variable.
+> > 
+> > 
+> > Use domain_vcpu()?
+> 
+> It will be better, thanks.
+> 
+> > Instead of this goto, I think you simply want to move the label here.
+> > That'll also make the function more similar to its load counterpart.
+> 
+> Good point. I am curious how fail label should be aligned:
+> 
+>      default:
+>   fail:
+>          gdprintk(XENLOG_WARNING,
+>                   "Unhandled APLIC write at offset %#x (value %#x)\n", 
+> offset,
+>                   value);
+> 
+>          return rc;
+>      }
+> 
+> or default:
+>      fail:
+> 
+> ?
+> 
+> > You have v passed in here, but you'd log current. If passing in v is
+> > necessary (i.e. here or elsewhere it may be other than current), then you
+> > need to either ASSERT(v == current) at the top of the funciton or otherwise
+> > handle v != current correctly.
+> 
+> It makes sense. I will add ASSERT(v == current) here and for 
+> vaplic_mmio_write().
+> 
+> > If all you care about is a boolean result, why not make the function return
+> > bool?
+> 
+> Agree, bool will be enough for vaplic_emulate_load() and 
+> vaplic_emulate_save().
+> 
+> Thanks!
+> 
+> ~ Oleksii
 
-> -    if ( spi < NR_LOCAL_IRQS )
-> +    /*
-> +     * The implemented GIC line counts are not available when early
-> +     * callers configure IRQ types. Check descriptor storage here; setup_irq()
-> +     * validates the implemented line before the interrupt is used.
-> +     */
-> +    if ( spi < NR_LOCAL_IRQS || !irq_has_desc(spi) )
->          return -EINVAL;
->  
-> +    desc = irq_to_desc(spi);
-> +
->      spin_lock_irqsave(&desc->lock, flags);
->  
->      if ( !irq_validate_new_type(desc->arch.type, type) )
-
-~Michal
+I will try to draw some schema to make the AIA spec more explicit. Maybe
+it could be part of this series, I don't know what is the xen policy
+about diagram and stuff like that. Do you know more about that? In order
+to not do a job with no needed at all.
 
 
