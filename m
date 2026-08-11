@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEF60C5B56A
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Aug 2026 16:40:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1388372.1629542 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F6DCC5B572
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Aug 2026 17:18:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1388385.1629551 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtpWH-0007ps-8W; Tue, 11 Aug 2026 16:40:05 +0000
+	id 1wtq7N-0004qx-Sj; Tue, 11 Aug 2026 17:18:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1388372.1629542; Tue, 11 Aug 2026 16:40:05 +0000
+Received: by outflank-mailman (output) from mailman id 1388385.1629551; Tue, 11 Aug 2026 17:18:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wtpWH-0007pF-4b; Tue, 11 Aug 2026 16:40:05 +0000
-Received: by outflank-mailman (input) for mailman id 1388372;
- Tue, 11 Aug 2026 16:40:04 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wtq7N-0004qq-Pb; Tue, 11 Aug 2026 17:18:25 +0000
+Received: by outflank-mailman (input) for mailman id 1388385;
+ Tue, 11 Aug 2026 17:18:24 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3YVB7agYKCUo4qmzvos00sxq.o0y9qz-pq7qxxu454.9qz130vqo5.03s@flex--seanjc.bounces.google.com>)
- id 1wtpWG-0007bM-6T
- for xen-devel@lists.xenproject.org; Tue, 11 Aug 2026 16:40:04 +0000
+ <BATV+b6a5eba76e218a018a6a+8388+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1wtq7L-0004qi-9Y
+ for xen-devel@lists.xenproject.org; Tue, 11 Aug 2026 17:18:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wtpWF-00CfYX-Iy
- for xen-devel@lists.xenproject.org; Tue, 11 Aug 2026 18:40:03 +0200
+ id 1wtq7H-000vrt-9B; Tue, 11 Aug 2026 19:18:19 +0200
 Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3YVB7agYKCUo4qmzvos00sxq.o0y9qz-pq7qxxu454.9qz130vqo5.03s@flex--seanjc.bounces.google.com>)
- id 6a7b504c-8faa-0a2a0a5109dd-0a2a45039cf6-24
- for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 18:40:03 +0200
-Received: from [209.85.210.197] (helo=mail-pf1-f197.google.com)
+ <BATV+b6a5eba76e218a018a6a+8388+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a7b5949-2eae-0a2a0a5409dd-0a2a4503b2b0-16
+ for <multiple-recipients>; Tue, 11 Aug 2026 19:18:19 +0200
+Received: from [90.155.50.34] (helo=casper.infradead.org)
  by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <3YVB7agYKCUo4qmzvos00sxq.o0y9qz-pq7qxxu454.9qz130vqo5.03s@flex--seanjc.bounces.google.com>)
- id 6a7b5062-fae8-0a2a45030019-d155d2c5ec51-3
- for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 18:40:03 +0200
-Received: by mail-pf1-f197.google.com with SMTP id
- d2e1a72fcca58-848544a8496so79316b3a.0
- for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 09:40:02 -0700 (PDT)
+ <BATV+b6a5eba76e218a018a6a+8388+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a7b5959-fae8-0a2a45030019-5a9b32229468-3
+ for <multiple-recipients>; Tue, 11 Aug 2026 19:18:18 +0200
+Received: from 54-240-197-235.amazon.com ([54.240.197.235]
+ helo=u09cd745991455d.ant.amazon.com)
+ by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+ id 1wtq75-00000000l9e-1Ota; Tue, 11 Aug 2026 17:18:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,228 +50,193 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1786466401; x=1787071201; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:cc:to:from:subject
-         :message-id:references:mime-version:in-reply-to:date:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=1rxRzhkW3E+GRLBK4lU1PGGkM/l3GS9nXng7CK7oPdQ=;
-        b=iFb4TgM0doope1zjZ1ISSZoZb5Yj7YA9tgnIZUAoBZ36QvDkrR+WqvKud5etyN6Ecu
-         S3Xrfpxcya7dh2bUgN4juNYHqyEPzNTmFiwG+VQl6S4bWmR9nSOX++ChiHSnBKvW+lJu
-         VWdDDhaFoyAF+dukZFzdAKqtY/IJQPUi82g//gwvp0HYg6yUNrNzHLipiI8AXj5xhIkf
-         1HJN9k6qRHyAjfW7i8pjx9ZGmFBBVFgfoTwSMgeQunBFYQoyUa3K1zaH0Lk17wvT5zwn
-         W7kJX0ns2eHnFph7Ht2uZujDeJ5Pacsb7dp5vaFLWiLJU/+8VPcfxJLUKtUhHvOfwdDU
-         j/ow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786466401; x=1787071201;
-        h=content-transfer-encoding:content-type:cc:to:from:subject
-         :message-id:references:mime-version:in-reply-to:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=1rxRzhkW3E+GRLBK4lU1PGGkM/l3GS9nXng7CK7oPdQ=;
-        b=PIkKPY8n0YnIWFl4djRbFLwzy1qtgU/Vy+vE2kR9WWEGezBpxpi5MZlqd0H4arwcNa
-         J6e+mhWUZk0rbJiOZHP4OPlo56rS8SV/JLOnGlcYHCt80+K3Fd4gTzKXGXGErtRSwHQ8
-         VX3YAWQguANaeX0QHTkOxa0eSTYn9TgTXnK0LsQMEzttWL0987eE5YUjNIUlWEH3NYTl
-         1BprqRXi76DgFv23tmxan6V6iORZaGqaYxJKfiAekYzNSHDSFU6WSZGMg+7UjDXEsKbx
-         hTSa7JxfsG8ODvtYwPLUds7ZK8S0quhMdJsmcTTa+Mq2VM5ev3eVFXPyH2hVKVvGlvdO
-         /R0Q==
-X-Forwarded-Encrypted: i=1; AHgh+RqhuNBFvdfM6Si5v8n+EPmNJ3jiedLjldhKKHwq/YPkAZYSN9Z+YAvMeVvznxO1bJVGZ/EsZ3mYfjw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzXOgosu4KiVeqJE19E0lPzX/7aPVs0qDAzhsAuEdnH/lSum+z/
-	HCmOnifV6wR8CGqKz550PYSicoEGbeUBL837hJMsMKbkAajO1M44k/2uc4TBfEMMv4tCf0MFLCO
-	Eln+/AA==
-X-Received: from pfst18.prod.google.com ([2002:aa7:8f92:0:b0:848:8d8a:9463])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a00:b42:b0:848:30c3:45dd
- with SMTP id d2e1a72fcca58-84fa86e1489mr4667146b3a.11.1786466401012; Tue, 11
- Aug 2026 09:40:01 -0700 (PDT)
-Date: Tue, 11 Aug 2026 09:40:00 -0700
-In-Reply-To: <e256fa4af96e916ba30019cbba501fa896025fb0.camel@infradead.org>
-Mime-Version: 1.0
-References: <20260728144954.355376-1-dwmw2@infradead.org> <20260728144954.355376-18-dwmw2@infradead.org>
- <anoOz2rZ02KFk1l-@google.com> <acd9b32617f75d188c370a464a922af0d650d4f5.camel@infradead.org>
- <ano6-gIZtqMfipiD@google.com> <bb9a12cc663130eb2caa8e839d0f6ca53d722d1c.camel@infradead.org>
- <ansuqrD2KwFuLWbV@google.com> <ansywxh0VX5rtfWc@google.com> <e256fa4af96e916ba30019cbba501fa896025fb0.camel@infradead.org>
-Message-ID: <antQYJvRxJxOjtut@google.com>
-Subject: Re: [PATCH v7 17/36] KVM: x86: Allow KVM master clock mode when TSCs
- are offset from each other
-From: Sean Christopherson <seanjc@google.com>
-To: David Woodhouse <dwmw2@infradead.org>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="MIME-Version:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
+	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=yabOVscRtLsJ60EcC+RTYQeed7LX9IVuCx/CQSf7Yo4=; b=ZDXi7rQNBsLe/Fy7S1rXTgOeNK
+	TNdcKg8GGTMPvy3ojzbCTsDah366jjbrqurq6/0hPOVAU23O4xaT8uwSJ32yhKGit+t4ckFJtaw6t
+	pSZL94DFi8foAJdSsFrbjvKqR0ZTgHShBWuw43ro/MnKpBUOuryTfXEGMZWfaDQ62VBDVFk+aJivU
+	yAKYjRa9BXShODtL1rRMqRojXeZNjQcf1QxtnswodmRH0cYME/oSG374xjx5UWdnkQrRVGKs2PteF
+	G69jYW9xZfNfNaSsuaG/HpZaWJkV6MbqU/wTiqLxBNgNCBQFZVYFPTbGc7QSvvzqpCLht4rLiFIci
+	OTFTKCwg==;
+Message-ID: <f5dc701cf3319a7b3c8fd1497f26d051aa9fa3ba.camel@infradead.org>
+Subject: Re: [PATCH v7 17/36] KVM: x86: Allow KVM master clock mode when
+ TSCs are offset from each other
+From: David Woodhouse <dwmw2@infradead.org>
+To: Sean Christopherson <seanjc@google.com>
 Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Thomas Gleixner <tglx@kernel.org>, 
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, Juergen Gross <jgross@suse.com>, 
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>, Paul Durrant <paul@xen.org>, 
-	Jonathan Cameron <jic23@kernel.org>, Sascha Bischoff <Sascha.Bischoff@arm.com>, 
-	Marc Zyngier <maz@kernel.org>, Joey Gouly <joey.gouly@arm.com>, Jack Allister <jalliste@amazon.com>, 
-	Dongli Zhang <dongli.zhang@oracle.com>, joe.jin@oracle.com, kvm@vger.kernel.org, 
+ Shuah Khan <skhan@linuxfoundation.org>, Thomas Gleixner <tglx@kernel.org>,
+ Ingo Molnar <mingo@redhat.com>,  Borislav Petkov	 <bp@alien8.de>, Dave
+ Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin"	
+ <hpa@zytor.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, Juergen Gross	
+ <jgross@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Paul
+ Durrant	 <paul@xen.org>, Jonathan Cameron <jic23@kernel.org>, Sascha
+ Bischoff	 <Sascha.Bischoff@arm.com>, Marc Zyngier <maz@kernel.org>, Joey
+ Gouly	 <joey.gouly@arm.com>, Jack Allister <jalliste@amazon.com>, Dongli
+ Zhang	 <dongli.zhang@oracle.com>, joe.jin@oracle.com, kvm@vger.kernel.org, 
 	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
 	xen-devel@lists.xenproject.org, linux-kselftest@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-33051d/1786466403-6CEDA4E9-E8CA63EC/0/0
+Date: Tue, 11 Aug 2026 18:18:01 +0100
+In-Reply-To: <antQYJvRxJxOjtut@google.com>
+References: <20260728144954.355376-1-dwmw2@infradead.org>
+	 <20260728144954.355376-18-dwmw2@infradead.org>
+	 <anoOz2rZ02KFk1l-@google.com>
+	 <acd9b32617f75d188c370a464a922af0d650d4f5.camel@infradead.org>
+	 <ano6-gIZtqMfipiD@google.com>
+	 <bb9a12cc663130eb2caa8e839d0f6ca53d722d1c.camel@infradead.org>
+	 <ansuqrD2KwFuLWbV@google.com> <ansywxh0VX5rtfWc@google.com>
+	 <e256fa4af96e916ba30019cbba501fa896025fb0.camel@infradead.org>
+	 <antQYJvRxJxOjtut@google.com>
+Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
+	boundary="=-UW2XW6iDoT/p3pb+WhA8"
+User-Agent: Evolution 3.60.3-0ubuntu1~ppa9~24.04 
+MIME-Version: 1.0
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-33051d/1786468698-6CCDB4E9-E1900AB7/0/0
 X-purgate-type: clean
-X-purgate-size: 5347
+X-purgate-size: 9661
 
-On Tue, Aug 11, 2026, David Woodhouse wrote:
-> On Tue, 2026-08-11 at 07:33 -0700, Sean Christopherson wrote:
+
+--=-UW2XW6iDoT/p3pb+WhA8
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, 2026-08-11 at 09:40 -0700, Sean Christopherson wrote:
+>=20
 > >=20
-> > Actually, why are KVM_{G,S}ET_CLOCK_GUEST vCPU-scoped?=C2=A0 Per the do=
-cumentation,
-> > the API "Sets the KVM clock (for the whole VM) in terms of the vCPU TSC=
-".=C2=A0 If
-> > the APIs are VM-scoped instead of vCPU-scoped, then KVM can simply save=
-/restore
-> > what's in the per-VM masterclock state, no?
+> > FWIW in my local tree I've just extended the pvclock_migration_test to
+> > test precisely the thing you were concerned about: three vCPUs with
+> > divergent TSC offsets, migrated by setting each vCPU's TSC and then
+> > invoking KVM_SET_CLOCK_GUEST once, through vCPU0.=20
 >=20
-> They're vCPU-scoped because they need to be tied to a guest TSC (on
-> live migration, neither ka->master_cycle_now nor ka->master_kernel_ns
-> are useful =E2=80=94 those are the "per-VM masterclock state").
+> I wasn't actually concerned about migration, I was concerned about time g=
+oing
+> backwards from the guest's perspective.
 
-But master clock is also tied to guest TSC.
+But KVM_[SG]ET_CLOCK_GUEST is *purely* for migration. And your variant
+just added a dependency on wallclock time back into it again, where
+wallclock should *only* be used for setting the TSC, and even then
+*only* for a live *migration* to a different host, not a live *update*
+via kexec/KHO on the same host, where the TSC should be restored as an
+offset from the host TSC.
 
-> Theoretically, guest TSCs can be different on each vCPU (different
-> offset, different *rate* even. Not that we allow KVM_[GS]ET_CLOCK_GUEST
-> at different rates, I concede).
+--=-UW2XW6iDoT/p3pb+WhA8
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Transfer-Encoding: base64
 
-Sure, but not masterclock, and if we're saying that KVM_[GS]ET_CLOCK_GUEST =
-is
-for migrating masterclock state, then as you concede, vCPUs with TSCs at di=
-fferent
-frequencies is completely out of scope.
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCE8Ew
+ggWvMIIEl6ADAgECAhANkOKMSmGXhF5eMl0rsRhvMA0GCSqGSIb3DQEBDAUAMGUxCzAJBgNVBAYT
+AlVTMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xJDAi
+BgNVBAMTG0RpZ2lDZXJ0IEFzc3VyZWQgSUQgUm9vdCBHMjAeFw0yNDAzMTMwMDAwMDBaFw0zNDAz
+MTIyMzU5NTlaMGIxCzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UE
+AxMxRGlnaUNlcnQgQXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTCCAiIw
+DQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBAOfSIeC0vv1xPQ+dgSxbIIrkaru6skAWJYaGFzmv
+q4Kq+2wU2jxhcWlJg/JeP5jEkq/LM3pn5aaLao79j+XRmS7J1ZpJKUODJVoM4s9MQJhTMvo4qS5Z
+S64g6QR7Obkz3I1Lr3aWeSBmDDEyzue+NKtuWZ1Cxy3RdXo/w5HgRc3l2AercOM3Gt1XonTzEtTb
+Z/Hwc0Sn9Gz8RmGRK6Ka4hVDl8q/2l110KaV233Kh5etP0csXS8MIMdVRfRu3sc5hp13DG7lCKzK
+72a2GEpI8Wpl26G6I1/LMzz/98T+FqjTqxsdquk7Cj7m2vKGLW1BorpQH7WFGPdJQXJe1hfbfiZA
+CcVdCtl4nAacFacmsiArZBfX7AQGL7isvHUwwYFEtcApyGW4p2Lt+t8nvU0CANA6BHOpOz1xOP8W
+mAESbUriIjyuTUf3fJ9oDNCurVqhASMJCDaWI3lYX/QAoiAzt6akqbbZxo2ujW7mGGqc0KxqE2cs
+h2T79v7pC8aUtHBfwNrTR19GnZVxE0eQ7ViIQhR6mpSaUQFA9sG+cmD2G8TnCgYsLa0q8De6F61a
+CBevQGHNzrbZ3JAMneveYg/Jy1XxQHDRcvrMfWKe0jjcWbdKYlaGVPm5V1ILwYz7Yv5ewo3NUrxI
+GJiywe9qPhuJSDZs7VehTuI0FxGIsgKzVjgbAgMBAAGjggFcMIIBWDASBgNVHRMBAf8ECDAGAQH/
+AgEAMB0GA1UdDgQWBBT3m6JO05fF9DQPQw6Bhc6RkzKv+TAfBgNVHSMEGDAWgBTOw0q5mVXyuNtg
+v6l+vVa1lzan1jAOBgNVHQ8BAf8EBAMCAYYwHQYDVR0lBBYwFAYIKwYBBQUHAwQGCCsGAQUFBwMC
+MHkGCCsGAQUFBwEBBG0wazAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29tMEMG
+CCsGAQUFBzAChjdodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkSURS
+b290RzIuY3J0MEUGA1UdHwQ+MDwwOqA4oDaGNGh0dHA6Ly9jcmwzLmRpZ2ljZXJ0LmNvbS9EaWdp
+Q2VydEFzc3VyZWRJRFJvb3RHMi5jcmwwEQYDVR0gBAowCDAGBgRVHSAAMA0GCSqGSIb3DQEBDAUA
+A4IBAQA+b8Uw53sDspdZgukU+qzLyyHkcjlxGGhHlP+zrmDLKm1wEFvCRS2pili3Hy67i8N4N5NU
+vw5Rg6kv3lxb9S9Rktxk43k+tvm68pl7OxQE55ZjVY87P0lUPGwEqOOwLLyH02ZQcsfq5p5LrOH9
+0JvmvZ1yy73HS+VpDAqOlytE0NSvTIRqFFkKQGQwfjvtql9YflujuNNvJztjBaHKYZsnNSg+J38o
+jYq4TP3pSg3UdVH0PncVjPQyqxC9xef5Xae92Kbkzol3x7Nel3A1bwAkalrDMspvTHvey6LfiBks
+FIqviTnoy7fgjaRAJgHS+RXx/cmuRd3rUAclSVVrYu8RMIIHAzCCBOugAwIBAgIQAzUotrsybJHx
+HTjKOIVdIDANBgkqhkiG9w0BAQsFADBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQs
+IEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFzc3VyZWQgRzIgU01JTUUgUlNBNDA5NiBTSEEzODQg
+MjAyNCBDQTEwHhcNMjYwNzE4MDAwMDAwWhcNMjgwMTA0MjM1OTU5WjAeMRwwGgYDVQQDDBNkd213
+MkBpbmZyYWRlYWQub3JnMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA2pYux73kdbYX
+sWF8f1u6DJP91qcqaZetsyfPkZk0B+MmXmAEv0kVes5n15V2mbDThOnpoPFly0UugQO9JYqLfrtD
+tKD5yL58fgrDB9Dw+LQikgrHafl6YSCds5AvUu/8hw2J6noKrcOLJpKlKn9Fl/4IB9Q3JIdLx5aa
+EtTqMalIPqHFOlgrJ7s+aua8xbB8YQ9ahqYBXWRJNv3P/2b1DYtdrz1oqZPE3CcB8Pc6Gf2a1Tcm
+6TAgtEx7Cf1BFcrsrMz7TWHmGQITieNb2r9UYWSc2Gp+GtYFNJCgT0JJXKUBIauPMKBLteYrL8Fo
+ff/uY44dC/mDWjdCP/5x0qelPQjlBvWdHL5zvBTOj06rJ0m3HNI/hnIcDh0Qu2j9reb9rLVcdym6
+bWmBM4uDEB8Zv9Ph0KTBFSy1IosyakuD1j1Os30EzjGfbi0EUXIvnOcYbTBAbM5UAzrxEHMhBvoX
+Pvnx+OyvjJmc9tWxTX6AcSz+m40esbT17URBeZS18afgieiikm5TynlUYP1LciR3hSgGVzvGXnKO
+02VDFR5itGWdRKZ2W5wIShNfWfhSa0D0K5UdIDt5Qc7sjzwK1Yb1sY5Tu0uA5mhIS82q1ov83uxB
+sFkriNnhGv/M1NCDVLBiOMsHu73qUM+yKmgKLwF9Hfn9WI25glbAMI4S5r3hYzcCAwEAAaOCAfcw
+ggHzMB8GA1UdIwQYMBaAFPebok7Tl8X0NA9DDoGFzpGTMq/5MB0GA1UdDgQWBBRcYhqbcGzn1jrT
+JOZaB8O7qllDpzAwBgNVHREEKTAngRNkd213MkBpbmZyYWRlYWQub3JngRBkYXZpZEB3b29kaG91
+LnNlMBQGA1UdIAQNMAswCQYHZ4EMAQUBAjAOBgNVHQ8BAf8EBAMCBeAwHQYDVR0lBBYwFAYIKwYB
+BQUHAwIGCCsGAQUFBwMEMIGpBgNVHR8EgaEwgZ4wTaBLoEmGR2h0dHA6Ly9jcmwzLmRpZ2ljZXJ0
+LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsME2gS6BJ
+hkdodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZT
+SEEzODQyMDI0Q0ExLmNybDCBjQYIKwYBBQUHAQEEgYAwfjAkBggrBgEFBQcwAYYYaHR0cDovL29j
+c3AuZGlnaWNlcnQuY29tMFYGCCsGAQUFBzAChkpodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20v
+RGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZTSEEzODQyMDI0Q0ExLmNydDANBgkqhkiG9w0B
+AQsFAAOCAgEAocabrh1cPd5s3vY5rnlBVQSTc7zs2ZWs67dAIltR+05WELrYClVzzUhMs/LOJPlr
+EUo45UDDomXq38DxFepaPd9+iNLjXfn33EX/IG44j04lU/oF/Rg9VeQILkYLbCZ/x9wOjNHZc4SN
+ydY7Dhvf/sT5aBz88u7D5+azZJ7Qf1U57wYseCH1Mt0nDrtr5y19IJ8D9xJJ33RFL6vfpHZBBAQ8
++3RqkKNxLoV2aFvQhxdhjNLDqTv3LjUIdicwPraN7JkxEu7CV2Lka7eRqJgkWL7SK0YmBjGpRafs
++icP/ON5RCCKTTb6VlX8eTG2sJJfsFhvJNCCt6xexbWzWtIrfP7NvPBvwBB737AyEGBZkS5aNizT
+McURJGTv9UKvBh1LF/+tNhYtLvPCN7oecGzhCHht9jcwSkygTo3Y6YlK3QgOu+ncmiBbfeuwlLZ1
+LxbYvG6hgNqXv7u6YyADbYajAQJXJ2OQen39pm3Q/AQSyLYG+B8lDglWsM8tYXPlEdrYJcksGK6F
+nqIX6Bumn43rBooLJdiZp4WmfWdL2pxe+LxRDjprmqu1WprixDxULSTOKJZoqTlugs6y3Bc+if+s
+gHnBBtz9WQ6MtPHkh7zONDAFIKcBmv8OqPQCx0F3Wv3OEybwMpXx0OsKgK8wLldaX1pXcMuyDgTL
+Sqs0AV0OHUgwggcDMIIE66ADAgECAhADNSi2uzJskfEdOMo4hV0gMA0GCSqGSIb3DQEBCwUAMGIx
+CzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UEAxMxRGlnaUNlcnQg
+QXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTAeFw0yNjA3MTgwMDAwMDBa
+Fw0yODAxMDQyMzU5NTlaMB4xHDAaBgNVBAMME2R3bXcyQGluZnJhZGVhZC5vcmcwggIiMA0GCSqG
+SIb3DQEBAQUAA4ICDwAwggIKAoICAQDali7HveR1thexYXx/W7oMk/3Wpyppl62zJ8+RmTQH4yZe
+YAS/SRV6zmfXlXaZsNOE6emg8WXLRS6BA70liot+u0O0oPnIvnx+CsMH0PD4tCKSCsdp+XphIJ2z
+kC9S7/yHDYnqegqtw4smkqUqf0WX/ggH1Dckh0vHlpoS1OoxqUg+ocU6WCsnuz5q5rzFsHxhD1qG
+pgFdZEk2/c//ZvUNi12vPWipk8TcJwHw9zoZ/ZrVNybpMCC0THsJ/UEVyuyszPtNYeYZAhOJ41va
+v1RhZJzYan4a1gU0kKBPQklcpQEhq48woEu15isvwWh9/+5jjh0L+YNaN0I//nHSp6U9COUG9Z0c
+vnO8FM6PTqsnSbcc0j+GchwOHRC7aP2t5v2stVx3KbptaYEzi4MQHxm/0+HQpMEVLLUiizJqS4PW
+PU6zfQTOMZ9uLQRRci+c5xhtMEBszlQDOvEQcyEG+hc++fH47K+MmZz21bFNfoBxLP6bjR6xtPXt
+REF5lLXxp+CJ6KKSblPKeVRg/UtyJHeFKAZXO8Zeco7TZUMVHmK0ZZ1EpnZbnAhKE19Z+FJrQPQr
+lR0gO3lBzuyPPArVhvWxjlO7S4DmaEhLzarWi/ze7EGwWSuI2eEa/8zU0INUsGI4ywe7vepQz7Iq
+aAovAX0d+f1YjbmCVsAwjhLmveFjNwIDAQABo4IB9zCCAfMwHwYDVR0jBBgwFoAU95uiTtOXxfQ0
+D0MOgYXOkZMyr/kwHQYDVR0OBBYEFFxiGptwbOfWOtMk5loHw7uqWUOnMDAGA1UdEQQpMCeBE2R3
+bXcyQGluZnJhZGVhZC5vcmeBEGRhdmlkQHdvb2Rob3Uuc2UwFAYDVR0gBA0wCzAJBgdngQwBBQEC
+MA4GA1UdDwEB/wQEAwIF4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwgakGA1UdHwSB
+oTCBnjBNoEugSYZHaHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0QXNzdXJlZEcyU01J
+TUVSU0E0MDk2U0hBMzg0MjAyNENBMS5jcmwwTaBLoEmGR2h0dHA6Ly9jcmw0LmRpZ2ljZXJ0LmNv
+bS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsMIGNBggrBgEF
+BQcBAQSBgDB+MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wVgYIKwYBBQUH
+MAKGSmh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNB
+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
+3jt9KdG+cqxHq/ln6zoRp+IAAAAAAAA=
 
-> So they operate in the context of a given vCPU, and *its* TSC.
 
-Yes, but KVM_[GS]ET_CLOCK_GUEST aren't saving/restoring vCPU state, they're
-saving/restoring masterclock state, which is VM-scoped.  What I don't like =
-about
-the proposed uAPI is that it implicitly consumes state, from an arbitrary v=
-CPU,
-that KVM very explicitly tracks in masterclock.  And AFAICT, there's zero r=
-eason
-to do so.
-
-E.g. as a strawman, I would expect something like this to migrate masterclo=
-ck
-state (deliberately avoiding "master" in the uAPI, because checkpatch is al=
-ready
-screaming too much).  I didn't try too hard to get the math right, I just w=
-anted
-to highlight that all the state needed to restore the masterclock is availa=
-ble
-in the masterclock (which seems comically obvious when I type it out).
-
-struct kvm_pvclock {
-	__u64 tsc_timestamp;
-	__u64 tsc_scaling_ratio;
-	__u64 tsc_offset;
-	__u64 system_time;
-	__u32 tsc_to_system_mul;
-	__s8  tsc_shift;
-	__u8  pad0;
-	__u16 pad1;
-	__u32 pad2;
-};
-
-#define KVM_SET_PVCLOCK		_IOW(KVMIO, 0xd6, struct kvm_pvclock)
-#define KVM_GET_PVCLOCK		_IOR(KVMIO, 0xd7, struct kvm_pvclock)
-
-static int kvm_vcpu_ioctl_set_pvclock(struct kvm *kvm, void __user *argp)
-{
-	struct kvm_pvclock user_hv_clock;
-	struct kvm_arch *ka =3D &kvm->arch;
-	u64 curr_tsc_hz, user_tsc_hz;
-	u64 user_clk_ns;
-	u64 guest_tsc;
-	int rc =3D 0;
-
-	if (copy_from_user(&user_hv_clock, argp, sizeof(user_hv_clock)))
-		return -EFAULT;
-
-	if (user_hv_clock.pad0 || user_hv_clock.pad1 || user_hv_clock.pad2)
-		return -EINVAL;
-
-	if (!user_hv_clock.tsc_scaling_ratio || !user_hv_clock.tsc_to_system_mul)
-		return -EINVAL;
-
-	if (user_hv_clock.tsc_shift < -31 || user_hv_clock.tsc_shift > 31)
-		return -EINVAL;
-
-	user_tsc_hz =3D hvclock_to_hz(user_hv_clock.tsc_to_system_mul,
-				    user_hv_clock.tsc_shift);
-
-	kvm_hv_request_tsc_page_update(kvm);
-
-	/*
-	 * kvm_start_pvclock_update() takes tsc_write_lock and opens
-	 * the pvclock seqcount; kvm_end_pvclock_update() closes both.
-	 * All clock state modifications between them are atomic with
-	 * respect to readers in kvm_guest_time_update().
-	 */
-	kvm_start_pvclock_update(kvm);
-	pvclock_update_vm_gtod_copy(kvm);
-
-	if (!ka->use_master_clock) {
-		rc =3D -ENODATA;
-		goto out;
-	}
-
-	curr_tsc_hz =3D (u64)get_cpu_tsc_khz() * HZ_PER_KHZ;
-	if (unlikely(curr_tsc_hz =3D=3D 0)) {
-		rc =3D -EBUSY;
-		goto out;
-	}
-
-	if (kvm_caps.has_tsc_control)
-		curr_tsc_hz =3D kvm_scale_tsc(curr_tsc_hz,
-					    user_hv_clock.tsc_scaling_ratio);
-
-	/*
-	 * The mul/shift in the provided pvclock structure encode the guest TSC
-	 * frequency at which it was generated. Sanity-check that it is
-	 * consistent with the existing pvclock information, and by extension
-	 * all vCPUs' effective TSC frequenies.  Allow a discrepancy of 1 kHz
-	 * either way since independently calibrated hosts will not measure
-	 * precisely the same value even for the same nominal frequency.
-	 */
-	if (user_tsc_hz < curr_tsc_hz - 1000 ||
-	    user_tsc_hz > curr_tsc_hz + 1000) {
-		rc =3D -ERANGE;
-		goto out;
-	}
-
-	/*
-	 * Calculate the guest TSC at the new reference point, and the
-	 * corresponding KVM clock value according to user_hv_clock.
-	 * Adjust kvmclock_offset so both definitions agree.
-	 */
-	guest_tsc =3D user_hv_clock.tsc_offset +
-		    kvm_scale_tsc(user_hv_clock.system_time,
-				  user_hv_clock.tsc_scaling_ratio);
-
-	if (guest_tsc !=3D user_hv_clock.tsc_timestamp +- ???) {
-		rc =3D -EINVAL;
-		goto out;
-	}
-
-	<fill in masterclock>
-
-out:
-	kvm_end_pvclock_update(kvm);
-	return rc;
-}
-
-> And I think I'm going to defend that 'theoretical they can be
-> different', because I *would* like to eliminate the ways that a *guest*
-> can force non-masterclock mode, and that does mean allowing the offset-
-> TSC case.
->=20
-> FWIW in my local tree I've just extended the pvclock_migration_test to
-> test precisely the thing you were concerned about: three vCPUs with
-> divergent TSC offsets, migrated by setting each vCPU's TSC and then
-> invoking KVM_SET_CLOCK_GUEST once, through vCPU0.=20
-
-I wasn't actually concerned about migration, I was concerned about time goi=
-ng
-backwards from the guest's perspective.
+--=-UW2XW6iDoT/p3pb+WhA8--
 
