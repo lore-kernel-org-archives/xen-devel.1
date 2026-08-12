@@ -4,42 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0161C5B567
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2026 04:06:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1388739.1629722 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4125C5B567
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2026 06:29:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1388750.1629732 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wu0EO-0001UR-9A; Wed, 12 Aug 2026 04:06:20 +0000
+	id 1wu2SN-0003v2-Uk; Wed, 12 Aug 2026 06:28:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1388739.1629722; Wed, 12 Aug 2026 04:06:20 +0000
+Received: by outflank-mailman (output) from mailman id 1388750.1629732; Wed, 12 Aug 2026 06:28:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wu0EO-0001UK-6Z; Wed, 12 Aug 2026 04:06:20 +0000
-Received: by outflank-mailman (input) for mailman id 1388739;
- Wed, 12 Aug 2026 04:06:18 +0000
+	id 1wu2SN-0003uv-QQ; Wed, 12 Aug 2026 06:28:55 +0000
+Received: by outflank-mailman (input) for mailman id 1388750;
+ Wed, 12 Aug 2026 06:28:55 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <anshuman.khandual@arm.com>) id 1wu0EM-0001UC-AN
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 04:06:18 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wu2SN-0003uo-20
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 06:28:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wu0EK-00Dmsa-KK
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 06:06:16 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wu2SL-005txm-5b
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 08:28:53 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <anshuman.khandual@arm.com>)
- id 6a7bf10c-8faa-0a2a0a5109dd-0a2a45078e38-46
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 06:06:16 +0200
-Received: from [217.140.110.172] (helo=foss.arm.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
- (envelope-from <anshuman.khandual@arm.com>)
- id 6a7bf137-b4ea-0a2a45070019-d98c6eace702-1
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 06:06:15 +0200
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B399D1596;
- Tue, 11 Aug 2026 21:06:10 -0700 (PDT)
-Received: from localhost (a085714.arm.com [10.164.19.28])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 018DD3F86F;
- Tue, 11 Aug 2026 21:06:14 -0700 (PDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a7c129d-bab6-0a2a0a5309dd-0a2a450aea1c-14
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 08:28:52 +0200
+Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a7c12a4-f2d2-0a2a450a0019-d155802ed1b9-3
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 08:28:52 +0200
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-4995b0343c1so4851695e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 23:28:52 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4997abf94c1sm44841725e9.14.2026.08.11.23.28.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 11 Aug 2026 23:28:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,207 +53,143 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1786507574; bh=IHjypAHsNKjpNGDu8aCRCeoUOQ9LFF7rYITg0sTzbDM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Rg9GEe8ORnIQSzAFzPE9Q3CsOniFeZz3B5DAx1vSbU2ayamMlqi+pdI/abA/SWthR
-	 JHd2kD7S7LWpcNIoT65928j5y1fwj3S00eMdlQR9LYSfVNqmGWvx2Jo8nRyP2/XrUC
-	 occW+1n2ku+jahULG28ttJSOr0S4qPMQj+wCR/cQ=
-Date: Wed, 12 Aug 2026 09:36:11 +0530
-From: Anshuman Khandual <anshuman.khandual@arm.com>
-To: Muhammad Usama Anjum <usama.anjum@arm.com>
-Cc: Jani Nikula <jani.nikula@linux.intel.com>, 
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, 
-	Tvrtko Ursulin <tursulin@ursulin.net>, David Airlie <airlied@gmail.com>, 
-	Simona Vetter <simona@ffwll.ch>, Dimitri Sivanich <dimitri.sivanich@hpe.com>, 
-	Arnd Bergmann <arnd@arndb.de>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>, Helge Deller <deller@gmx.de>, Juergen Gross <jgross@suse.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Muchun Song <muchun.song@linux.dev>, 
-	Oscar Salvador <osalvador@suse.de>, Andrew Morton <akpm@linux-foundation.org>, 
-	"Liam R. Howlett" <liam@infradead.org>, Lorenzo Stoakes <ljs@kernel.org>, Will Deacon <will@kernel.org>, 
-	"Aneesh Kumar K.V" <aneesh.kumar@kernel.org>, Nick Piggin <npiggin@gmail.com>, 
-	Peter Zijlstra <peterz@infradead.org>, Andrey Ryabinin <ryabinin.a.a@gmail.com>, 
-	David Hildenbrand <david@kernel.org>, Pasha Tatashin <pasha.tatashin@soleen.com>, 
-	Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>, 
-	Uladzislau Rezki <urezki@gmail.com>, Steven Rostedt <rostedt@goodmis.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Alexei Starovoitov <ast@kernel.org>, 
-	Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>, 
-	Eduard Zingerman <eddyz87@gmail.com>, Kumar Kartikeya Dwivedi <memxor@gmail.com>, 
-	Ingo Molnar <mingo@redhat.com>, Arnaldo Carvalho de Melo <acme@kernel.org>, 
-	Namhyung Kim <namhyung@kernel.org>, SJ Park <sj@kernel.org>, 
-	"Matthew Wilcox (Oracle)" <willy@infradead.org>, Jan Kara <jack@suse.cz>, Jason Gunthorpe <jgg@ziepe.ca>, 
-	Leon Romanovsky <leon@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>, 
-	Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>, Christoph Lameter <cl@gentwo.org>, 
-	Mike Rapoport <rppt@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>, ziy@nvidia.com, 
-	pfalcato@suse.de, agordeev@linux.ibm.com, ryan.roberts@arm.com, 
-	linux-kernel@vger.kernel.org, intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
-	linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org, linux-mm@kvack.org, 
-	linux-fsdevel@vger.kernel.org, linux-arch@vger.kernel.org, kasan-dev@googlegroups.com, 
-	linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org, linux-perf-users@vger.kernel.org, 
-	damon@lists.linux.dev
-Subject: Re: [PATCH 3/9] mm: name pointers to copied PTE values ptentp
-Message-ID: <hwkurkpobxysltkid5523qxndufebqqmat4qjaq6zhwno2drmh@efwoegm2huo6>
-References: <20260806083926.1807279-1-usama.anjum@arm.com>
- <20260806083926.1807279-4-usama.anjum@arm.com>
- <e7osakog3yvdewhdlrk3bsp27pwt2nnhroeb7zihlfxyjotarb@rwxkcb25crh3>
- <b21c4cc9-84a3-429e-8156-0b9967b2f133@arm.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1786516132; x=1787120932; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=YVg90yFmwII+LbLwDw+Exz3K4H1Lnit4dmi2Gn6xOFs=;
+        b=StvGAcyxr+zINClrFGYw6VKq/YEzFdF1z7/m1GzHqmYYq11ONRIxPSOYW6vxs/aYb6
+         ARoe+bVow7NP4d+HPU3r+pWn5uu4uETvFKETNCdtH14KnUDto1wwMTx9GGtRc0jyFhu8
+         4lj5hXzQ59BzCk5GYSrdOAfln57LgSzuGIT/Lb8tHYDVpNTcIDuk9kQlc4C26YHjlBDN
+         yp1pSJZlnJF1xR7jll6IeG2kBthUXCVnWlYIF+T/ng7Yz6tiFaCyrliEzOjvL/8/ClI4
+         CKZhuuUQ/JtId7xbVZHG0+JDr4MkxvKsZ7SQhaSNh/DfLqikGQ0kgLfpqTKEVO/KREIu
+         ffHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786516132; x=1787120932;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=YVg90yFmwII+LbLwDw+Exz3K4H1Lnit4dmi2Gn6xOFs=;
+        b=IJ79q4B7KnizOZK+lsToIcjnYXbDsKpToWkOQDM52palz808hHU0/Ym3og+bkjgpsm
+         yQaMQEojaxHfY8umpyIN8ZuEBRes2PhJeOUhzgQZPbMZC191Su6nCxT23op//8Zzas2c
+         Pta9aAkXFqWkZA7WUALa7tJFmyzDg8PVlkvPHqSwczhCzfXnQWrqOEFa2xMKHFR+33Ht
+         rVbdQNaPNr8otboNkcY3KmuxQjVrEWectr6ro12kcqJdgUlqCHfNkisXv13t4UEK3aDY
+         VgoTCN1fzi2ioAyP9QBdi33G2Wd3LygQeLAenZEWrQT5aJBco+EEDR+7U6tL9JPPEnzH
+         RxdA==
+X-Forwarded-Encrypted: i=1; AHgh+Rq1ESl3C//GnyTHyrah5cVaK6pfDW8bBESgkJKb/2PdjuF0iFP1JFTKVRcKv07XiroqAVup56fcmm0=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw/pFnR+IWYH30KZTNa2tr3xMkLoqAkO6UIL/LzJgcsmvdAAQhZ
+	rOeCcCzo4LnJ+8osnDByieeAMJ4d7hv/d0osbhdnWcPLo/s8imPzz+KCENjak7Lh8A==
+X-Gm-Gg: AR+sD13n0w+osOqW03GWNQ/coTOWC72ppR80QB5jFNX2kJt+gPl4IC23320BYzIjL0G
+	4nh23fjNA5LAYz7WwFNNGPDulDiA4aoSDCAFhGXgdq8oBU/EwlCZt/d6eGOjrYqjOgqA1NMYD20
+	Ab8yPVQD11pF5wRfKvLLRZ9HSyymTUJEvkJFo/bstlGJNopaQ1L1Q4ZZCxA+0SevbnlOt8fkmPj
+	jTV73zZWC/b4MY/0D9IzyeOYx1FYmBhCE19wQ6uluRisdBH+hbdjLNtQYt+d8Lo07d9kpo8oxtD
+	dXG/CiCRvUCiPGFfANCXOJWFDNkS3MTin/nBIzXLgC56Jh0/KeQAv/8xiz2Fx7E9wC5DJTQxjAG
+	Xw3nfwRKi3aOrJROwYVN7mzLHRZ0oBigRU6mHMo9ASDSMnzV+avbPJAzf6vEnsqlJfqiaeD6iyr
+	4QMh2Oshr2XFyxPxOklthKOg2W8oJwlv6+rZpwx2juN5ap0K/aLXLHfrACvpm2IMspcZG93dGnB
+	/g/SqN4Byr5WKCj5dGQHMROelQ4hszGgSh62OBCDfyvdpcWdWALyJeJtmDBu+c=
+X-Received: by 2002:a05:600c:524c:b0:499:7219:122f with SMTP id 5b1f17b1804b1-4997c39ca1emr25119805e9.4.1786516132439;
+        Tue, 11 Aug 2026 23:28:52 -0700 (PDT)
+Message-ID: <a711a0d1-dbf0-44fb-a419-38abc62480ad@suse.com>
+Date: Wed, 12 Aug 2026 08:28:50 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <b21c4cc9-84a3-429e-8156-0b9967b2f133@arm.com>
-X-purgate-ID: tlsNG-ef75cf/1786507576-350CDAE4-4482937D/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] x86/pci: prevent cross-device accesses in
+ pci_mmcfg_{read,write}()
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20260806152619.23881-1-roger@xenproject.org>
+ <20260806152619.23881-2-roger@xenproject.org>
+ <c818745e-6f61-4b32-b7f5-ee5b7ff82981@suse.com>
+ <anWQ15K8vi3t1sgF@macbook.local>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <anWQ15K8vi3t1sgF@macbook.local>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-4011c0/1786516132-506CECFC-9F9328DC/0/0
 X-purgate-type: clean
-X-purgate-size: 5338
+X-purgate-size: 2296
 
-On Tue, Aug 11, 2026 at 03:09:07PM +0100, Muhammad Usama Anjum wrote:
-> On 11/08/2026 11:58 am, Anshuman Khandual wrote:
-> > Subject line is very confusing. Perhaps something like the following.
-> > 
-> > mm: Rename pointers to copied PTE values as ptentp
-> > 
-> > But even 'copied PTE values' is not very clear as well.
+On 07.08.2026 10:01, Roger Pau Monné wrote:
+> On Fri, Aug 07, 2026 at 08:22:44AM +0200, Jan Beulich wrote:
+>> On 06.08.2026 17:26, Roger Pau Monne wrote:
+>>> Introduce a specific check that prevents an accesses from spilling across
+>>> two devices.
+>>>
+>>> Signed-off-by: Roger Pau Monné <roger@xenproject.org>
+>>
+>> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+>> albeit with a remark:
+>>
+>>> --- a/xen/arch/x86/x86_64/mmconfig_64.c
+>>> +++ b/xen/arch/x86/x86_64/mmconfig_64.c
+>>> @@ -61,7 +61,8 @@ int pci_mmcfg_read(unsigned int seg, unsigned int bus,
+>>>      char __iomem *addr;
+>>>  
+>>>      /* Why do we have this when nobody checks it. How about a BUG()!? -AK */
+>>> -    if (unlikely((bus > 255) || (devfn > 255) || (reg > 4095))) {
+>>> +    if (unlikely((bus > 255) || (devfn > 255) ||
+>>> +                 (reg + len > PCI_CFG_SPACE_EXP_SIZE))) {
+>>>  err:        *value = -1;
+>>>          return -EINVAL;
+>>>      }
+>>> @@ -91,7 +92,8 @@ int pci_mmcfg_write(unsigned int seg, unsigned int bus,
+>>>      char __iomem *addr;
+>>>  
+>>>      /* Why do we have this when nobody checks it. How about a BUG()!? -AK */
+>>> -    if (unlikely((bus > 255) || (devfn > 255) || (reg > 4095)))
+>>> +    if (unlikely((bus > 255) || (devfn > 255) ||
+>>> +                 (reg + len > PCI_CFG_SPACE_EXP_SIZE)))
+>>>          return -EINVAL;
+>>>  
+>>>      addr = pci_dev_base(seg, bus, devfn);
+>>
+>> In both cases the unlikely() uses won't have the intended effect, from all I
+>> know. They would help as used here only if the compiler managed to fold all
+>> three parts of the ||-expression into a single conditional branch, which I
+>> don't think it would end up doing.
 > 
-> Something like:
-> 
-> mm: rename pointers to logical PTE values as ptentp
-> 
-> or
-> 
-> mm: rename pointers to software PTE values as ptentp
+> I don't mind dropping the unlikely() while changing the line.  I tend
+> to leave those alone if present, even when I'm not sure they are
+> actually helpful.
 
-Yeah but we need to get these nomenclature right at the very beginning
-and also probably get it documented some where.
+I think unlikely() is actually reasonable to have here, yet it would need to
+be four of them, not just one. Unless reachable from a DomU-accessible path,
+converting to BUG_ON() (or ASSERT_UNREACHABLE()) instead would also be an
+option.
 
-> 
-> > 
-> > On Thu, Aug 06, 2026 at 09:38:41AM +0100, Muhammad Usama Anjum wrote:
-> >> The hw_pte_t conversion must retain pte_t * for pointers to standalone PTE
-> > 
-> > We need to explain what is `standalone PTE values` first.
-> > 
-> >> values. Name the value parameters ptentp in the install_pte callback,
-> >> write_protect_page(), and guard_install_set_pte() so the later mechanical
-> >> conversion can distinguish them from pointers to PTE table storage.
-> >>
-> >> Some functions already use the ptentp name, including:
-> >> - madvise_folio_pte_batch()
-> >> - folio_pte_batch_flags()
-> >> No need to convert them.
-> >>
-> >> This is a naming-only change.
-> > 
-> > Small nit - s/naming-only/rename
-> 
-> I'll fix it.
-> 
-> > 
-> > The commit message needs rewrite clearly explaining the following details
-> > 
-> > - What are standalone PTE values
-> Logical/software PTE is correct and better name here.
+>  The comment ahead of the check is also not very
+> useful IMO, but I've decided to leave it alone.
 
-Right but we need to define these early on and then be consistent in their usage
-afterwards in the entire series.
+Indeed, that's an odd thing to survive over 20 years (I think).
 
-> 
-> > - How these are different from HW pgtable pointers
-> > - Change is just a rename for pointers into such 'standalone PTE'
-> > - These renamed 'ptentp' here would be used for skip or replaced during
-> >   upcoming mechanical change via a script
-> > - No functional changes intended
-> I'll update message in more elaborate way.
-> 
-> > 
-> >>
-> >> Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
-> >> ---
-> >> Changes since RFC v1:
-> >> - Update the description for the architecture opt-in conversion.
-> >> ---
-> >>  include/linux/pagewalk.h | 2 +-
-> >>  mm/ksm.c                 | 4 ++--
-> >>  mm/madvise.c             | 4 ++--
-> >>  3 files changed, 5 insertions(+), 5 deletions(-)
-> >>
-> >> diff --git a/include/linux/pagewalk.h b/include/linux/pagewalk.h
-> >> index b41d7265c01bc..c34d826c5e4a2 100644
-> >> --- a/include/linux/pagewalk.h
-> >> +++ b/include/linux/pagewalk.h
-> >> @@ -89,7 +89,7 @@ struct mm_walk_ops {
-> >>  		       struct mm_walk *walk);
-> >>  	void (*post_vma)(struct mm_walk *walk);
-> >>  	int (*install_pte)(unsigned long addr, unsigned long next,
-> >> -			   pte_t *ptep, struct mm_walk *walk);
-> >> +			   pte_t *ptentp, struct mm_walk *walk);
-> >>  	enum page_walk_lock walk_lock;
-> >>  };
-> >>  
-> >> diff --git a/mm/ksm.c b/mm/ksm.c
-> >> index ad05d7791307e..11d50518d02e9 100644
-> >> --- a/mm/ksm.c
-> >> +++ b/mm/ksm.c
-> >> @@ -1292,7 +1292,7 @@ static u32 calc_checksum(struct page *page)
-> >>  }
-> >>  
-> >>  static int write_protect_page(struct vm_area_struct *vma, struct folio *folio,
-> >> -			      pte_t *orig_pte)
-> >> +			      pte_t *ptentp)
-> >>  {
-> >>  	struct mm_struct *mm = vma->vm_mm;
-> >>  	DEFINE_FOLIO_VMA_WALK(pvmw, folio, vma, 0, 0);
-> >> @@ -1371,7 +1371,7 @@ static int write_protect_page(struct vm_area_struct *vma, struct folio *folio,
-> >>  
-> >>  		set_pte_at(mm, pvmw.address, pvmw.pte, entry);
-> >>  	}
-> >> -	*orig_pte = entry;
-> >> +	*ptentp = entry;
-> >>  	err = 0;
-> >>  
-> >>  out_unlock:
-> >> diff --git a/mm/madvise.c b/mm/madvise.c
-> >> index 07a21ca31bad4..c324cc991f841 100644
-> >> --- a/mm/madvise.c
-> >> +++ b/mm/madvise.c
-> >> @@ -1101,12 +1101,12 @@ static int guard_install_pte_entry(pte_t *pte, unsigned long addr,
-> >>  }
-> >>  
-> >>  static int guard_install_set_pte(unsigned long addr, unsigned long next,
-> >> -				 pte_t *ptep, struct mm_walk *walk)
-> >> +				 pte_t *ptentp, struct mm_walk *walk)
-> >>  {
-> >>  	unsigned long *nr_pages = (unsigned long *)walk->private;
-> >>  
-> >>  	/* Simply install a PTE marker, this causes segfault on access. */
-> >> -	*ptep = make_pte_marker(PTE_MARKER_GUARD);
-> >> +	*ptentp = make_pte_marker(PTE_MARKER_GUARD);
-> >>  	(*nr_pages)++;
-> >>  
-> >>  	return 0;
-> >> -- 
-> >> 2.47.3
-> >>
-> > 
-> > How did we ensure that the above changes are comprehensive and nothing
-> > else got left in here ?
-> 
-> The order of patches and even the code was found out after adding hw_pte_t
-> structure. Then everything was converted, until some pte_t pointers were left
-> which didn't require conversion.
-> 
-> If something is left, we'll get build errors when we build a converted architecture.
-> So the branch mentioned in the cover letter when built, would produce build errors.
-> (Those patches would be sent separately, after finalization of this series).
-> 
-> Whenever I'm rebasing (on mm-new), I'm rerunning Coccinelle script to see if new code
-> has arrived which requires conversion or renaming.
-
-But in the early patch where the manual renaming was done for the script to
-pick up 'ptentp' patterns needs to be audited again.
-
-> 
-> -- 
-> Thanks,
-> Usama
-> 
+Jan
 
