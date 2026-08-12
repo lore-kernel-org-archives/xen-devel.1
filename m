@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 973D2C5B56A
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2026 14:19:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1389134.1630057 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F23F2C5B572
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2026 14:37:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1389147.1630067 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wu9np-0008Cv-2S; Wed, 12 Aug 2026 14:19:33 +0000
+	id 1wuA5C-0002tP-GS; Wed, 12 Aug 2026 14:37:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1389134.1630057; Wed, 12 Aug 2026 14:19:33 +0000
+Received: by outflank-mailman (output) from mailman id 1389147.1630067; Wed, 12 Aug 2026 14:37:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wu9no-0008Co-Vu; Wed, 12 Aug 2026 14:19:32 +0000
-Received: by outflank-mailman (input) for mailman id 1389134;
- Wed, 12 Aug 2026 14:19:31 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wuA5C-0002tI-DL; Wed, 12 Aug 2026 14:37:30 +0000
+Received: by outflank-mailman (input) for mailman id 1389147;
+ Wed, 12 Aug 2026 14:37:29 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wu9nn-0008Ci-KJ
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 14:19:31 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wuA5B-0002tC-7Q
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 14:37:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wu9nm-006RH2-Aj
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 16:19:30 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wuA59-007Om6-Ut
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 16:37:27 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7c80f1-8faa-0a2a0a5109dd-0a2a4501d118-4
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 16:19:30 +0200
-Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a7c851f-8faa-0a2a0a5109dd-0a2a450b8c12-16
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 16:37:27 +0200
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7c80f1-5984-0a2a45010019-d155dd36c5cd-3
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 16:19:29 +0200
-Received: by mail-wr1-f54.google.com with SMTP id
- ffacd0b85a97d-47fe2d179e2so584746f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 07:19:29 -0700 (PDT)
+ id 6a7c8527-b7e8-0a2a450b0019-d155802af12d-3
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 16:37:27 +0200
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-49800c6a846so10648335e9.3
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 07:37:27 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48150bf5c13sm7520310f8f.7.2026.08.12.07.19.28
+ ffacd0b85a97d-48150c08dd7sm7363418f8f.16.2026.08.12.07.37.25
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Aug 2026 07:19:28 -0700 (PDT)
+ Wed, 12 Aug 2026 07:37:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,49 +55,50 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786544369; x=1787149169; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1786545447; x=1787150247; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=UYIvVHFALMhhhABLu01nMlsX5hc7W0tduk2QlSjUgYE=;
-        b=JSDoOsBgKxyEfzHmO4TuOXUzsjNYnB+BhxkzQlSuAzLkDrQUEvPzmO7ylvM2JRlHpA
-         MPzxj6yJZKtId4ziqpx442llKAflYJswbM/GWarBjo9z9rZDEFCaOiRxnDMuUw+ThP6U
-         n6VTH3CR/f5ixLCMgTS1zmVSDAo7JYkK8RBt8LahDuVBFo4K3nJKkrn+LV1UZUYkt/wj
-         KyL2ZvwmZjojLSlLAn5th9ZZyPQ+ZUOh5F0GCNoUq/vcFDyXVq8lyXiGk/dhISyZfNRG
-         YrOG2gYBlCmuyfs2+Qv1tyc4aOqjbjDphqMAGzcpFQGW5qPUPbwkrpZkiw4NtOYxgqd0
-         RhPw==
+        bh=KoMFEZzeboMnsiJyElZO3eCGf2lVPNl1wbVF7BLiQ+I=;
+        b=G2EXAdO+zzb5vFIScqAOGowh+lUtk7A2tqh1tNtg1OsVh4EM+BAcz1DGUoaJ920+LQ
+         /qp1ON2S6nVB62yNRIU4gbCLCCgmjRYPpIEaNiNG3sup7czOKhN5ZXIocYqnJip4tyeX
+         WpDJFdhc25saawHZb09bHV0X+PuyK0ZBmnUJZzYpKDuVYMrLhaUqLAzzDgtJRxF3eZL9
+         C+aqZ6u4IPx96m3XZVKc/2BD+H6w45J2MYPPPkQsEXZjJYCd5+Cdo3oLUyXEN20KKPqc
+         CeFYH2W7jExuK8N3BR9IJi14aAzMc2QLUQH5S1/P/gVJsexpY9+n105kx3ItuAYyYcDt
+         igVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786544369; x=1787149169;
+        d=1e100.net; s=20251104; t=1786545447; x=1787150247;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=UYIvVHFALMhhhABLu01nMlsX5hc7W0tduk2QlSjUgYE=;
-        b=OeklTL4phc6NJzc4txPL8x78VmES/KM/HLCc9LAOm/kFp4dMf4nOzQgXNAZ9gxKb1H
-         acjlUAp74zv/f6cqr/xL4pCJx1YvqNeiT4s6CXjuc2n6ih23gnZN3y1ZgIrcojNL0Hzs
-         jcvnJG01pSRj5dCtPexqcXluG2nUkCeveDGTJbXUCgpA0ukXRwez/YzYicjMdQ4iD2qn
-         DlB+dTst/VpBOIUeGl/dktGoqY2aMl4+RYnYP2iG81SPCxnUkH4UgdLzjv7HF8CBoUh7
-         PM7ClaYD2N3I1HpTIlZgt7FXknPsYRhZP5ZlA2/Re/28YWwcIs0DWJogTUOUCdLwyQT0
-         NKRA==
-X-Forwarded-Encrypted: i=1; AHgh+RpmQAQQDkMUyAskKW7rHZRnbcv7Oka8br6OobGn1chIJkSS1SzaVpmTfcKOlbrVys3SvtN6qxgLfxo=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzyrmVChaLx4tkQdePrP5QnfDTIDixiNyNf56M+1L6oV9JWSTsH
-	bbaA04QHwe/OfJsySDWkSdrXkJshGXC5tJIMq35Ao8QUZ3TvefD71Nl1rxM3HOlbnQ==
-X-Gm-Gg: AR+sD10rJKMfUUUWPD/Ob0jnsaBGHIGukHUNdYtD4i6d5LDx/IHvz0bUMy6ykNfsLJy
-	kShUw5wGU1EUBnq+MCwMaTXsK7Ugejlqbk5O915KzXTcejZoHOB/OnXFpn3twRLxghMyLTpiszN
-	bShOZ3LWCVcU2rj59JNAl8Dq+3Icp7pTKXqlzR6x9djyCZ5JRfApBUpvdsji0hMO1uL/8QiPx0n
-	WLmorpcie/zdWFX/ZepUVJL8KcAYiPFddz/ZWAerEjHKaWpr/rcBP1+fe+6s8miHP+aVNSiKoTg
-	J4JTMyhNnenswUsZ/qVgNkpeQrI1DedQ+kS6dn5NT0D4oyJ5E6+G3NlNzprTxj2R4b24/KtIqDE
-	K69IzN0+IcCNmnqmyzMPqawTL9Q4QO0/+Ky+PyHlbYTpOM44A185jcvnRCIFlSbmdjZa9dzU1zn
-	e/dyW4SjN3PniMUj8WCWYLKNE/GH6p08HmLHTjUuNTylxzTulR5QDa4hF5goQQyTsBexV7IW3L6
-	DRRzbvTM9300p3J3rk3ldSuG4iDhXoj+Lg1iGZVVG+Fx7zmgHkfipFYaZgy6TWK
-X-Received: by 2002:a5d:64e4:0:b0:475:3a97:8e3c with SMTP id ffacd0b85a97d-48152913c57mr7138948f8f.18.1786544369391;
-        Wed, 12 Aug 2026 07:19:29 -0700 (PDT)
-Message-ID: <675c8106-a515-4567-ba30-09f2b0631634@suse.com>
-Date: Wed, 12 Aug 2026 16:19:27 +0200
+        bh=KoMFEZzeboMnsiJyElZO3eCGf2lVPNl1wbVF7BLiQ+I=;
+        b=nw8J36yTTRVgGAaDsEot3bl7zIwvEciu0Cnc61kZeAckdLqb/TS92vNIiweSHVWHWM
+         l4my5m9qk1PvxEt009L/IiAuJaoHRzQ83hIrhpb6nw/ESf8lCazaunsB8O92Eocp06W8
+         dMds/2iDgo4sFuE6zOFufcREfK/DcYk6AiLBLIm6SM3/XhxWRvYBpahvMFeK9dR/SQuC
+         cvXWlTLcslAWyWGZm76IAb1T3SsQ5UQPRb7R8dsPRq9bLiQXZSGJFheUHF8M7YIsY0K1
+         RuqSLvIRBbj2pY96p+YmodK2zSXLeSA1Y7JD26Az8fzKurjRKua9LEofYNCeosfqZcC8
+         KuYQ==
+X-Forwarded-Encrypted: i=1; AHgh+Ro3NtK5p8UHkXDRTJFfE3S/H03ilaAp2jlNGrYR7vwkhlqA/tT+EyRFzn6zjy8PGOhQV/PQPQiK+ag=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxWz14fvfo7LxNG8zxXCixoQVtWa8oWxdlxFZL9W6yEEvn8PEWR
+	2YG8s2h0p52SgU1LBZ5JTmj+BTYzInvv4cwu3HkA+Ai0z9wAACx9NOM4nZsHBS8tQw==
+X-Gm-Gg: AR+sD1262BqfSAhWVlc/i6bTLxnpjiJyD0q0AWzJtMEl4CJTaTRIlWGD+u9r2jfhptK
+	m3POlPNS0WfuohEE/6piv3ECWm05CJprndUGqbRZq++paoB6kBxcNoVREOMmiZrrS6YL/722PNu
+	erfXljqrnPOkRAx+fgR47O7KghDCZNZq22rGyKp+FJbDvb5yLlMFxtrclUdQF6zAVBOX0mB2CZD
+	XPLF+45kh+TppzMwpKf956LtKhEbQY6ibiWM0NZgjQNRhKPo98QxFotmbXgVd+KNApjFa+tAsID
+	EVEY54N0L3jy9RmA8z5dt79Pel1LfC22y6fBb8dsTj+aTmcQ1jgkTgATP4aOQgX8ESPAeSPldpU
+	3TQtxCrfKMpEewmIDRlIypTIGSvVdqfGgvxABljVEAm8vb0JrT06WNX/4x8HESAskl9mcAeaSNb
+	jWTsblKdkh4aP7TMcFMOpddEfSzjLW52Te8DM/Sg5SBer7JeWmo9Fx27r+A5C8bnV7qCvYBeMOZ
+	pRQKC1gBZChiyxSs/NTc0NStaE/iDPrjwFhC8pmPSg39o7u2IKZV7ATqpRjenw=
+X-Received: by 2002:a05:600c:1990:b0:499:48bb:417e with SMTP id 5b1f17b1804b1-4997c0fe4ebmr62491525e9.2.1786545447330;
+        Wed, 12 Aug 2026 07:37:27 -0700 (PDT)
+Message-ID: <be932384-6661-4c92-9137-8f6a9cd54057@suse.com>
+Date: Wed, 12 Aug 2026 16:37:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 11/17] xen/riscv: add vAPLIC state save/restore hooks
+Subject: Re: [PATCH v1 12/17] xen/riscv: extend exception tables with type and
+ data fields
 To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  Baptiste Le Duc <baptiste.le-duc@vates.tech>,
@@ -105,11 +106,11 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  Connor Davis <connojdavis@gmail.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+ Michal Orzel <michal.orzel@amd.com>, xen-devel@lists.xenproject.org,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
 References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
- <b8aad28481520eb241a1f7519336d3e4bc9aff9f.1784560663.git.oleksii.kurochko@gmail.com>
+ <1eb9050ff6632f91682151471440990bd718ed90.1784560663.git.oleksii.kurochko@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -135,60 +136,132 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <b8aad28481520eb241a1f7519336d3e4bc9aff9f.1784560663.git.oleksii.kurochko@gmail.com>
+In-Reply-To: <1eb9050ff6632f91682151471440990bd718ed90.1784560663.git.oleksii.kurochko@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1786544369-C5146757-CEC5108F/0/0
+X-purgate-ID: tlsNG-42698a/1786545447-A88C99EA-53675707/0/0
 X-purgate-type: clean
-X-purgate-size: 1419
+X-purgate-size: 4227
 
 On 20.07.2026 18:02, Oleksii Kurochko wrote:
-> --- a/xen/arch/riscv/include/asm/vaplic.h
-> +++ b/xen/arch/riscv/include/asm/vaplic.h
-> @@ -34,4 +34,7 @@ struct vaplic {
->  int domain_vaplic_init(struct domain *d);
->  void domain_vaplic_deinit(struct domain *d);
+> @@ -60,6 +68,40 @@ static void ex_handler_fixup(const struct exception_table_entry *ex,
+>      regs->sepc = ex_fixup(ex);
+>  }
 >  
-> +void vaplic_state_save(struct vcpu *v);
-> +void vaplic_state_restore(struct vcpu *v);
-
-Why would these be needed? Can't ...
-
-> --- a/xen/arch/riscv/vaplic.c
-> +++ b/xen/arch/riscv/vaplic.c
-> @@ -400,9 +400,27 @@ static const struct mmio_handler_ops vaplic_mmio_ops = {
->      .write = vaplic_mmio_write,
->  };
->  
-> +void vaplic_state_save(struct vcpu *v)
-
-... both be static? And don't they want to be cf_check?
-
+> +static inline unsigned long regs_get_gpr(struct cpu_user_regs *regs,
+> +                                         unsigned int offset)
 > +{
-> +    if ( has_msi_support() )
-> +        imsic_state_save(v);
-> +    else
-> +        BUG_ON("unimplemented");
+> +    /*
+> +     * The GPR number -> offset arithmetic below relies on x0..x31 being
+> +     * laid out at the start of struct cpu_user_regs in architectural
+> +     * order.
+> +     */
+> +    BUILD_BUG_ON(offsetof(struct cpu_user_regs, ra) !=
+> +                 sizeof(unsigned long));
+> +    BUILD_BUG_ON(offsetof(struct cpu_user_regs, t6) !=
+> +                 31 * sizeof(unsigned long));
+> +
+> +    if ( unlikely(!offset || (offset > MAX_REG_OFFSET)) )
+> +        return 0;
+
+And an offset not divisible by sizeof(unsigned long) is okay?
+
+Returning 0 as error indicator also feels fragile.
+
+> +    return *(unsigned long *)((unsigned long)regs + offset);
 > +}
 > +
-> +void vaplic_state_restore(struct vcpu *v)
+> +static void ex_handler_trap_info(const struct exception_table_entry *ex,
+> +                                 struct cpu_user_regs *regs)
 > +{
-> +    if ( has_msi_support() )
-> +        imsic_state_restore(v);
-> +    else
-> +        BUG_ON("unimplemented");
-> +}
+> +    struct trap_info *trap_info =
+> +        (struct trap_info *)regs_get_gpr(regs, ex->data * sizeof(unsigned long));
 
-If you're merely forwarding the calls, why can't ...
+Related to the earlier comment: Simply pass just ex->data here, leaving the
+multiplication to regs_get_gpr()?
 
->  static const struct vintc_ops vintc_ops = {
->      .vcpu_init = vaplic_init,
->      .vcpu_deinit = vaplic_deinit,
-> +    .store_state = vaplic_state_save,
-> +    .restore_state = vaplic_state_restore,
+> +    BUG_ON(!trap_info);
+> +
+> +    trap_info->sepc = csr_read(CSR_SEPC);
+> +    trap_info->scause = csr_read(CSR_SCAUSE);
+> +    trap_info->stval = csr_read(CSR_STVAL);
 
-... imsic_state_{save,restore}() be used directly here? And whatever other
-pair of handlers for the case when it's not IMSIC?
+Do you really need to re-read all three registers here? Didn't you read at least
+scause already, in order to make it here in the first place?
+
+> --- a/xen/arch/riscv/include/asm/extable.h
+> +++ b/xen/arch/riscv/include/asm/extable.h
+> @@ -3,17 +3,24 @@
+>  #ifndef ASM__RISCV__ASM_EXTABLE_H
+>  #define ASM__RISCV__ASM_EXTABLE_H
+>  
+> +#include <asm/gpr-num.h>
+> +
+> +#define EX_TYPE_FIXUP 0
+> +#define EX_TYPE_TRAP_INFO 1
+> +
+>  #ifdef __ASSEMBLER__
+>  
+> -#define ASM_EXTABLE(insn, fixup) \
+> -    .pushsection .ex_table, "a"; \
+> -    .balign     4;               \
+> -    .word       (insn) - .;      \
+> -    .word       (fixup) - .;     \
+> -    .popsection
+> +#define ASM_EXTABLE_RAW(insn, fixup, type, data)    \
+> +    .pushsection .ex_table, "a";                    \
+> +    .balign     4;                                  \
+> +    .long       ((insn) - .);                       \
+> +    .long       ((fixup) - .);                      \
+
+Why the change from .word to .long? And why the extra pairs of parens?
+
+> +    .short      (type);                             \
+> +    .short      (data);                             \
+
+Alongside .word, these then likely want to be .half.
+
+> @@ -23,20 +30,36 @@
+>  
+>  struct cpu_user_regs;
+>  
+> -#define ASM_EXTABLE(insn, fixup)      \
+> -    ".pushsection .ex_table, \"a\"\n" \
+> -    ".balign    4\n"                  \
+> -    ".word      (" #insn " - .)\n"    \
+> -    ".word      (" #fixup " - .)\n"   \
+> +#define ASM_EXTABLE_RAW(insn, fixup, type, data)    \
+> +    ".pushsection .ex_table, \"a\"\n"               \
+> +    ".balign    4\n"                                \
+> +    ".long      ((" insn ") - .)\n"                 \
+> +    ".long      ((" fixup ") - .)\n"                \
+
+Same questions here then.
+
+> --- /dev/null
+> +++ b/xen/arch/riscv/include/asm/gpr-num.h
+> @@ -0,0 +1,33 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +#ifndef RISCV_GPR_NUM_H
+> +#define RISCV_GPR_NUM_H
+> +
+> +/* GPR ABI names, in register-number order (x0 .. x31). */
+> +#define GPR_ABI_NAMES                   \
+> +    zero, ra, sp, gp, tp, t0, t1, t2,   \
+> +    s0, s1, a0, a1, a2, a3, a4, a5,     \
+> +    a6, a7, s2, s3, s4, s5, s6, s7,     \
+> +    s8, s9, s10, s11, t3, t4, t5, t6
+> +
+> +#ifdef __ASSEMBLER__
+> +
+> +    .equ    .L_gpr_num, 0
+> +    .irp    name, GPR_ABI_NAMES
+> +    .equ    .L_gpr_num_\name, .L_gpr_num
+> +    .equ    .L_gpr_num, .L_gpr_num + 1
+> +    .endr
+
+So this is emitted no matter whether a .S file actually uses any of the constants.
+Perhaps okayish, but somewhat wasteful.
 
 Jan
 
