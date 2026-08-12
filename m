@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4125C5B567
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2026 06:29:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1388750.1629732 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 886E7C5B567
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2026 07:22:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1388760.1629741 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wu2SN-0003v2-Uk; Wed, 12 Aug 2026 06:28:55 +0000
+	id 1wu3HZ-000386-Ix; Wed, 12 Aug 2026 07:21:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1388750.1629732; Wed, 12 Aug 2026 06:28:55 +0000
+Received: by outflank-mailman (output) from mailman id 1388760.1629741; Wed, 12 Aug 2026 07:21:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wu2SN-0003uv-QQ; Wed, 12 Aug 2026 06:28:55 +0000
-Received: by outflank-mailman (input) for mailman id 1388750;
- Wed, 12 Aug 2026 06:28:55 +0000
+	id 1wu3HZ-00037z-E6; Wed, 12 Aug 2026 07:21:49 +0000
+Received: by outflank-mailman (input) for mailman id 1388760;
+ Wed, 12 Aug 2026 07:21:48 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wu2SN-0003uo-20
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 06:28:55 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wu3HY-00037t-D8
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 07:21:48 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wu2SL-005txm-5b
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 08:28:53 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wu3HX-0064TF-1E
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 09:21:47 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7c129d-bab6-0a2a0a5309dd-0a2a450aea1c-14
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 08:28:52 +0200
-Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a7c1f07-2eae-0a2a0a5409dd-0a2a4503d8a2-8
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 09:21:46 +0200
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7c12a4-f2d2-0a2a450a0019-d155802ed1b9-3
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 08:28:52 +0200
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-4995b0343c1so4851695e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 11 Aug 2026 23:28:52 -0700 (PDT)
+ id 6a7c1f0a-fae8-0a2a45030019-d155dd31c440-3
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 09:21:46 +0200
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-47fecbbafdaso152514f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 00:21:46 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4997abf94c1sm44841725e9.14.2026.08.11.23.28.51
+ ffacd0b85a97d-48150d702c9sm4852995f8f.34.2026.08.12.00.21.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Aug 2026 23:28:52 -0700 (PDT)
+ Wed, 12 Aug 2026 00:21:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,57 +55,66 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786516132; x=1787120932; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1786519306; x=1787124106; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=YVg90yFmwII+LbLwDw+Exz3K4H1Lnit4dmi2Gn6xOFs=;
-        b=StvGAcyxr+zINClrFGYw6VKq/YEzFdF1z7/m1GzHqmYYq11ONRIxPSOYW6vxs/aYb6
-         ARoe+bVow7NP4d+HPU3r+pWn5uu4uETvFKETNCdtH14KnUDto1wwMTx9GGtRc0jyFhu8
-         4lj5hXzQ59BzCk5GYSrdOAfln57LgSzuGIT/Lb8tHYDVpNTcIDuk9kQlc4C26YHjlBDN
-         yp1pSJZlnJF1xR7jll6IeG2kBthUXCVnWlYIF+T/ng7Yz6tiFaCyrliEzOjvL/8/ClI4
-         CKZhuuUQ/JtId7xbVZHG0+JDr4MkxvKsZ7SQhaSNh/DfLqikGQ0kgLfpqTKEVO/KREIu
-         ffHw==
+        bh=L5vpURs3yad1Td8RhRxntoH7HJSvYuQccNB1curUvwc=;
+        b=EuL5wCFg5Md3TKLvlN8yd8FgARGYyHTQCQcBTG7dKBtEo+xoJJqOixpqIHEBCb+5YZ
+         oJZZV738rd+hzgKX2njLPL7KAiqt/GEOtLK6AtainfP2D2HiT/Grfz/asPUzKW2pLnH7
+         AeDKvu+ghcuIUHiFeQPCjvDBTa3rSaKY3oiEM5bLdWIflOs2WlRIaVd0Eycq+5wP2apW
+         OcGE0MCU3rrmrpZwCP0/sST0esa+jjXztnLxR/d7mYMFFl5VIjbersMqLJGP7GgVU/OB
+         OSHKGtdblcQoU2sZsCDh5ctk0jddcRvfJQqMzxfOrWiDrX7JKkrXxA0995sBD50S+oBp
+         TMJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786516132; x=1787120932;
+        d=1e100.net; s=20251104; t=1786519306; x=1787124106;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=YVg90yFmwII+LbLwDw+Exz3K4H1Lnit4dmi2Gn6xOFs=;
-        b=IJ79q4B7KnizOZK+lsToIcjnYXbDsKpToWkOQDM52palz808hHU0/Ym3og+bkjgpsm
-         yQaMQEojaxHfY8umpyIN8ZuEBRes2PhJeOUhzgQZPbMZC191Su6nCxT23op//8Zzas2c
-         Pta9aAkXFqWkZA7WUALa7tJFmyzDg8PVlkvPHqSwczhCzfXnQWrqOEFa2xMKHFR+33Ht
-         rVbdQNaPNr8otboNkcY3KmuxQjVrEWectr6ro12kcqJdgUlqCHfNkisXv13t4UEK3aDY
-         VgoTCN1fzi2ioAyP9QBdi33G2Wd3LygQeLAenZEWrQT5aJBco+EEDR+7U6tL9JPPEnzH
-         RxdA==
-X-Forwarded-Encrypted: i=1; AHgh+Rq1ESl3C//GnyTHyrah5cVaK6pfDW8bBESgkJKb/2PdjuF0iFP1JFTKVRcKv07XiroqAVup56fcmm0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yw/pFnR+IWYH30KZTNa2tr3xMkLoqAkO6UIL/LzJgcsmvdAAQhZ
-	rOeCcCzo4LnJ+8osnDByieeAMJ4d7hv/d0osbhdnWcPLo/s8imPzz+KCENjak7Lh8A==
-X-Gm-Gg: AR+sD13n0w+osOqW03GWNQ/coTOWC72ppR80QB5jFNX2kJt+gPl4IC23320BYzIjL0G
-	4nh23fjNA5LAYz7WwFNNGPDulDiA4aoSDCAFhGXgdq8oBU/EwlCZt/d6eGOjrYqjOgqA1NMYD20
-	Ab8yPVQD11pF5wRfKvLLRZ9HSyymTUJEvkJFo/bstlGJNopaQ1L1Q4ZZCxA+0SevbnlOt8fkmPj
-	jTV73zZWC/b4MY/0D9IzyeOYx1FYmBhCE19wQ6uluRisdBH+hbdjLNtQYt+d8Lo07d9kpo8oxtD
-	dXG/CiCRvUCiPGFfANCXOJWFDNkS3MTin/nBIzXLgC56Jh0/KeQAv/8xiz2Fx7E9wC5DJTQxjAG
-	Xw3nfwRKi3aOrJROwYVN7mzLHRZ0oBigRU6mHMo9ASDSMnzV+avbPJAzf6vEnsqlJfqiaeD6iyr
-	4QMh2Oshr2XFyxPxOklthKOg2W8oJwlv6+rZpwx2juN5ap0K/aLXLHfrACvpm2IMspcZG93dGnB
-	/g/SqN4Byr5WKCj5dGQHMROelQ4hszGgSh62OBCDfyvdpcWdWALyJeJtmDBu+c=
-X-Received: by 2002:a05:600c:524c:b0:499:7219:122f with SMTP id 5b1f17b1804b1-4997c39ca1emr25119805e9.4.1786516132439;
-        Tue, 11 Aug 2026 23:28:52 -0700 (PDT)
-Message-ID: <a711a0d1-dbf0-44fb-a419-38abc62480ad@suse.com>
-Date: Wed, 12 Aug 2026 08:28:50 +0200
+        bh=L5vpURs3yad1Td8RhRxntoH7HJSvYuQccNB1curUvwc=;
+        b=jCv6mvKE8HOgX3VHlu35tjVvLyAsUEo5XNMLiNBEJXeRjimk3s7RFelD4euMuj/5P3
+         a5cc3O1CATENHiTyei+ZIwyFTbMJR2buc5V27h31HVXu5oaVfccA0wYyi9vK1JPl4WS+
+         WRAgd01dyZh4M69UcHnXegwPHWbwXnN4m5mLpO+FYwLFVjf6RqeKWJKSgrZBItMYcDy1
+         qsk4p5DtHh74aNgRFU+hjgctsjrfsDSMw5L+yT6thLSSkyAFbb4NBk65bcrv9Cv6cH7X
+         oWdhfAQhIxPiWFyLsDSESD0lC9YID+upS4axPZka9XL1tWwC63x8c6/pgG03L4MihF7Q
+         DiyA==
+X-Gm-Message-State: AOJu0YwbfA7C6t4aEf8+70riw3NRO92VT6uo3aWQtddFXcrES5xKdmnT
+	dzhI8nIFTbOLlPhEMup+SnFshCxgOUSeq/brCdnFwcPLOi/TjgHlwcpOvz9yeZlqog==
+X-Gm-Gg: AR+sD11E3niUzq+66z3NIwnf/mgsRMqsSX/oc7wnDzcH2A1P9+OlopG7eKS9LfNuZmp
+	7lCjIQ5eqvPmQuivnS91xw/AZG040kGp4hbGxQ4Z2LYzFvcZIMJIvlgOcBn9CjAL/V6tfQH5YrM
+	74X1KdoeSwhE6iV0kpWIlFXgo0ZQONtdXYT29KNoLwj/ZQhguZwrJ4ZNmvwc8ehHfAaLvt5+6e8
+	kSdKGbaqFoAPiYrAW9Ys6Obk3Tnittxqh5ZjLDspqfHpssGRfTAsEC3dsXXxX0QmQTK075I5n0Z
+	nJgkj6TIVIsal5iuHduiim3dBpnc4a3sziydLKg8YLyO2uxvNONOZMk9mUjlrURFRpA/rTwAuDL
+	RKpXN/B2Mh1ivJao8asMzG6vrVFLNn/faf86M76NLSnGu6fZO8/FZ8qWMB5LcZU0EgASyo6Xezt
+	twVGUswMYUtNg2GReaRupMR+S6aWv/72p13Ofv9MGkQqA0BCm+pjjA8lpJhIsM6zeZsg46N3Ixa
+	+WE9dhCxf42VRgJGN6w0VQSx7cpx33BjzeMGThwMmSLkSsgLMWY
+X-Received: by 2002:a05:6000:26c9:b0:47f:91e3:3cbf with SMTP id ffacd0b85a97d-48152b03a57mr3521512f8f.19.1786519306253;
+        Wed, 12 Aug 2026 00:21:46 -0700 (PDT)
+Message-ID: <b7754a86-4602-4b41-a07e-3e6389dac78d@suse.com>
+Date: Wed, 12 Aug 2026 09:21:44 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] x86/pci: prevent cross-device accesses in
- pci_mmcfg_{read,write}()
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <20260806152619.23881-1-roger@xenproject.org>
- <20260806152619.23881-2-roger@xenproject.org>
- <c818745e-6f61-4b32-b7f5-ee5b7ff82981@suse.com>
- <anWQ15K8vi3t1sgF@macbook.local>
+Subject: Re: [PATCH v1 04/17] xen/riscv: introduce device-agnostic MMIO
+ emulation dispatch
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: xen-devel@lists.xenproject.org,
+ Romain Caritey <Romain.Caritey@microchip.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>
+References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
+ <c12b69710d7b79bfc0c110f3fa043d871d8b8394.1784560663.git.oleksii.kurochko@gmail.com>
+ <1786373377.8631fc262581453bbf619ec5b2062170.19fec268e07000e099@vates.tech>
+ <05283ea0-de82-4160-a3f9-5fc1292a20a5@gmail.com>
+ <1786436246.8631fc262581453bbf619ec5b2062170.19fefe5dbbc000c4f3@vates.tech>
+ <a58af12e-13f0-48a3-b39d-bff92991ccd1@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,65 +140,31 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <anWQ15K8vi3t1sgF@macbook.local>
+In-Reply-To: <a58af12e-13f0-48a3-b39d-bff92991ccd1@gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1786516132-506CECFC-9F9328DC/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-33051d/1786519306-6F8C54E9-3A3F27F8/0/0
 X-purgate-type: clean
-X-purgate-size: 2296
+X-purgate-size: 822
 
-On 07.08.2026 10:01, Roger Pau Monné wrote:
-> On Fri, Aug 07, 2026 at 08:22:44AM +0200, Jan Beulich wrote:
->> On 06.08.2026 17:26, Roger Pau Monne wrote:
->>> Introduce a specific check that prevents an accesses from spilling across
->>> two devices.
+On 11.08.2026 13:49, Oleksii Kurochko wrote:
+> On 8/11/26 10:17 AM, Baptiste Le Duc wrote:
+>> On 2026-08-10 17:36:56+02:00, Oleksii Kurochko wrote:
+>>> On 8/10/26 4:49 PM, Baptiste Le Duc wrote:
+>>>>> +/*
+>>>> Why have you included a copyright notice here, but not in the other
+>>>> files?
 >>>
->>> Signed-off-by: Roger Pau Monné <roger@xenproject.org>
->>
->> Reviewed-by: Jan Beulich <jbeulich@suse.com>
->> albeit with a remark:
->>
->>> --- a/xen/arch/x86/x86_64/mmconfig_64.c
->>> +++ b/xen/arch/x86/x86_64/mmconfig_64.c
->>> @@ -61,7 +61,8 @@ int pci_mmcfg_read(unsigned int seg, unsigned int bus,
->>>      char __iomem *addr;
->>>  
->>>      /* Why do we have this when nobody checks it. How about a BUG()!? -AK */
->>> -    if (unlikely((bus > 255) || (devfn > 255) || (reg > 4095))) {
->>> +    if (unlikely((bus > 255) || (devfn > 255) ||
->>> +                 (reg + len > PCI_CFG_SPACE_EXP_SIZE))) {
->>>  err:        *value = -1;
->>>          return -EINVAL;
->>>      }
->>> @@ -91,7 +92,8 @@ int pci_mmcfg_write(unsigned int seg, unsigned int bus,
->>>      char __iomem *addr;
->>>  
->>>      /* Why do we have this when nobody checks it. How about a BUG()!? -AK */
->>> -    if (unlikely((bus > 255) || (devfn > 255) || (reg > 4095)))
->>> +    if (unlikely((bus > 255) || (devfn > 255) ||
->>> +                 (reg + len > PCI_CFG_SPACE_EXP_SIZE)))
->>>          return -EINVAL;
->>>  
->>>      addr = pci_dev_base(seg, bus, devfn);
->>
->> In both cases the unlikely() uses won't have the intended effect, from all I
->> know. They would help as used here only if the compiler managed to fold all
->> three parts of the ||-expression into a single conditional branch, which I
->> don't think it would end up doing.
-> 
-> I don't mind dropping the unlikely() while changing the line.  I tend
-> to leave those alone if present, even when I'm not sure they are
-> actually helpful.
+>>> So I just decided to do that for new files as I am not using corporate
+>>> e-mail.
+>> But why didn't you do it for all new files of this series?
+> If there are such cases then I just missed to add it. I will double 
+> check during preparation of v2.
 
-I think unlikely() is actually reasonable to have here, yet it would need to
-be four of them, not just one. Unless reachable from a DomU-accessible path,
-converting to BUG_ON() (or ASSERT_UNREACHABLE()) instead would also be an
-option.
-
->  The comment ahead of the check is also not very
-> useful IMO, but I've decided to leave it alone.
-
-Indeed, that's an odd thing to survive over 20 years (I think).
+Hmm, I'm a little irritated by "missed to add". In past discussions (plural)
+the usefulness of such copyright notices in comments was put under question.
+They go stale anyway as code moves around. And likely there were other
+aspects that I forgot.
 
 Jan
 
