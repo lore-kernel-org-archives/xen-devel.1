@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 266EDC5B56A
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2026 13:44:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1389085.1630012 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 421A0C5B56A
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2026 13:58:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1389094.1630021 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wu9FF-0000w3-Ip; Wed, 12 Aug 2026 13:43:49 +0000
+	id 1wu9Sj-0002zV-My; Wed, 12 Aug 2026 13:57:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1389085.1630012; Wed, 12 Aug 2026 13:43:49 +0000
+Received: by outflank-mailman (output) from mailman id 1389094.1630021; Wed, 12 Aug 2026 13:57:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wu9FF-0000vw-GA; Wed, 12 Aug 2026 13:43:49 +0000
-Received: by outflank-mailman (input) for mailman id 1389085;
- Wed, 12 Aug 2026 13:43:48 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wu9Sj-0002zO-K7; Wed, 12 Aug 2026 13:57:45 +0000
+Received: by outflank-mailman (input) for mailman id 1389094;
+ Wed, 12 Aug 2026 13:57:44 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wu9FD-0000vq-Rx
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 13:43:47 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wu9Si-0002yT-5E
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 13:57:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wu9FD-006LHw-8p
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 15:43:47 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wu9Sf-00Ciex-Eu
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 15:57:41 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7c788c-2eae-0a2a0a5409dd-0a2a4504bc7a-8
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 15:43:47 +0200
-Received: from [209.85.221.50] (helo=mail-wr1-f50.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a7c7bca-bab6-0a2a0a5309dd-0a2a450ad2e4-30
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 15:57:41 +0200
+Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7c7892-b57f-0a2a45040019-d155dd32c515-3
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 15:43:47 +0200
-Received: by mail-wr1-f50.google.com with SMTP id
- ffacd0b85a97d-47fe2d179e2so552589f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 06:43:47 -0700 (PDT)
+ id 6a7c7bd5-f2d2-0a2a450a0019-d1558032e50c-3
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 15:57:41 +0200
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-4957eefd361so7480865e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 06:57:41 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48150bf5f27sm7281740f8f.1.2026.08.12.06.43.45
+ 5b1f17b1804b1-4997c946ce1sm48434765e9.5.2026.08.12.06.57.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Aug 2026 06:43:46 -0700 (PDT)
+ Wed, 12 Aug 2026 06:57:40 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,55 +55,61 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786542226; x=1787147026; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1786543061; x=1787147861; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=M+i8+ViEsC5vpwz0JKveI/HXy+OJAib0U0kJsEmdazc=;
-        b=HWnuaQ5NHk3l+zMkl1NybQxuchlBrlgCNEi1EqzWSpEDF4as6tnc86LbuxX9gL5M6U
-         i6cjhZYs6XU5Jcb+EVqrKeaHQIBozT1Ce5kod/7fGxzJm9zXaEyjGI2H3G5EK0ycX8oh
-         URB45ZapAEUs/m1DqJn/N4vXk76Bl2q3AsN9o9SfSx4Yf1CcKtuKElUNR8yDWbKIHwxp
-         A9J7Yc2X8gL0qS7yAnMAGvhhlGdzO6G1U5CMpwfbSjBev1iH2ltJppvjLQNpmvhVLPPm
-         jb8jEzXjGyFZjjWWObPKA7i+5Mc3A5dVFLlwBQ403wdlrHXIiPs0rE7DND0TXrVYLelx
-         BjXg==
+        bh=KLVVAA1PM5afo/V1q2fX765yKgxPYKydsPta32vbjmY=;
+        b=Tf1AUQCju5aqFW+8CakslmVhAYQh1K0/l7N1Wb1mgKucXMoslqQ+kq+pw+kB7M7PS/
+         veqJNaHzwxIYkJaqi1KA1feHLZ/iNLlUZdOhtcd5OtDiZ4MhDypNSsym7anifLmh8pGx
+         z5057rCcWLRjk/xPziR+4o8N/2O9M5qaTr47UmnCYx82clHCapCWrozp5++crNT0vF9Q
+         oXpcaldinMURnukB7hpDSCW4unI3sKpl10w0LwV//UPcMSJywNdkHvBGpJKI74cIfXel
+         u+Y3Kgl+c8eR0SjVwAD6lxv4YzYcw8+j4dO01QIWCmZbsz892N/Qo/VUH+BrvzSrPcGz
+         MHFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786542226; x=1787147026;
+        d=1e100.net; s=20251104; t=1786543061; x=1787147861;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=M+i8+ViEsC5vpwz0JKveI/HXy+OJAib0U0kJsEmdazc=;
-        b=POIDKvqQuORTzfkM7Q0pFCm+NWa9jX1+vmxay0UbF9gQEB4qZHflYsFbYeC90N9Q0Q
-         xo1P1SLQn/rnOnIAwRpUz4E2p1E5M4MmwcG/45a3MbvTuplews3OeUF3G20r9nQ83zJv
-         DuOiNE880hAMyg4Q1/hE0Q03TXsJt2Kfvu2kcrV/liY13Pq0LShP4RZ/oxrOy91Hc5Ii
-         yhQUaPdya2onuTmWnGHQzIftCOcF/fGjFliMRxLI+ZX4aQmTsTVbznZFClylaNaNaikQ
-         IKYAajITNH2oKWodQYYGQ5u6+w/7J57zgvj7KEia1UxTI518IjEu++FH4KtwMDVgH5UQ
-         FgVw==
-X-Forwarded-Encrypted: i=1; AHgh+RqGj58DjeEP5uoQSf+82h9oYyploxxZVkgWRlsDr34OC4XfZHHsprpZcApbaJgv0op6IRJThZcDSgI=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxeDcqsqi8xLT9sN5pidPBoaqooLdgAN8h+InhsZV5vVp2r1i2t
-	pAqI7Rly4CMixAbEo9Iaughca7+aZ8sBOKr4b5PmKMW1UeOVNN7mb7ZcPafv7INcRw==
-X-Gm-Gg: AR+sD13Q/1hF7NRwP+USiwK2siudfvKlsl7383Z9ZQbwUqyKEBRYiG9gEfPYIsSk1xd
-	byXYeEhuoRLu64sSD3vNZJfmFgjEQRBsKwqHYBAizp0Di1lvhrbXsI/xuucBBtbE2JRCod5FmvH
-	JBtzwhCbX5zHiuO78SRBxcAmn2CDwbDiklDn+DrRlWrRUpp53eryf26upMzLnpw6f3Lj7zg707j
-	5X8xAq6jE6zvwTEYVYnZMGUxEYLyW8pxQaQOnOYnEAuegis04Hh3/Fz3NAHFlqMpWv6YGP48Z3g
-	k00MFHywmYMF1docBdIYMLt0cdJGOUWbX852yLhed58TfGjV0UiSKhmTER8MvpYGsgKNqxWUzkf
-	Q2KwZYDx3PlSFhMlIIx2y+PmJlb9xxrPLbVhrg7B+jcosEP61Abbt7d+JDS+SprtK3LsMEflDRo
-	NKV7bqCBJl361V7uxLetpZqo789zeoVB13Ny8Bgf3O9XMsdedhs0NbEhRoTWyG7jVG3o7KKc8Rv
-	6atYV/fHO5WOwiFx+kXDY0t+EVAxnytja4VKoaH9gVk0yl5K0JB
-X-Received: by 2002:a05:6000:40cb:b0:45e:e1a4:c4c3 with SMTP id ffacd0b85a97d-48152913c78mr7454500f8f.15.1786542226601;
-        Wed, 12 Aug 2026 06:43:46 -0700 (PDT)
-Message-ID: <81cdb854-54ac-440b-9459-68f5b61cfe41@suse.com>
-Date: Wed, 12 Aug 2026 15:43:45 +0200
+        bh=KLVVAA1PM5afo/V1q2fX765yKgxPYKydsPta32vbjmY=;
+        b=c51ukYieTC46INBZmHEIBdmiYar97J7v45ij4KsqPmIVY2h4sjr6j7I1/TlhddvXvf
+         u5dvXAO75tbEVMjUjzrb+vmJt1V+6PaOu+Cb7+CreToaHdomNkGwToplkK8buBY5jI9G
+         zm5EubevDyNUho0gh9eSoXVE1EQ8+SfDzuqbxbOZx44+egTn4GdXQoXp3NesIuF17/cX
+         LaWsGDH21r9mVjSh1nOKUHMdeeLkbm+7zuyCvAIjK+vmyiZjcNqaMrS0ewDZF8JoNgQn
+         6PdPzpLLgDZdYx/dhXESIxh5OnRSxNb4c43i/c0mkNhr1LvtzhDF/NnwQ/yd749hlMqs
+         eQkw==
+X-Forwarded-Encrypted: i=1; AHgh+Rosymsu3t+1f7rVLGohwJmMqTVflJ6vJ0IZos2GlNIDLY5DNH+c7kNQJ7cu7Zb2pTMHKOeP3B0I0lk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yy1ehxpkaEw3zC4gQEkxKszglJt9XYskK9cTRNOirJRjeq3Lcr3
+	G41PK4fB/sAiiIjNDsfWins5rUQxADVS5IGgAY4gvPEtB25m/3RTS2Yee5UI2T74dA==
+X-Gm-Gg: AR+sD12RLQVYPP8P36yJuo7Pq4udSR9Nyb0jXIdVKZEhRUOc73PLszzgEMR6sTI7D9Q
+	9pBz6Zc9vmhbbldy7UtoStcNRdsM4kshTGsa/VLstgpgb0izl4l9PWQeJe8DVmQjWdGl2zEIsLd
+	hEnQZ3y0FpwD9Zv+so0nt2fdGFiYQYeF80eeajm2CGlb/+hsIgPPi/xfgTnee588nyNeUzKSwSv
+	0dO+SPHWm5+bHjE0G9P8uza0XDaC69y1ffBdzJO0nSbVtdfTb4yi/36YJfWNxwoICu5DsRbWy/p
+	qaAXB3VTGX88Lmm1HGeN6PLdK5ye7GUcvOCzFBsiLRqE/ux1sFRzHA8Ms70vnGo6kGI8gP8zFxd
+	UE+kFexRKc1728X/4SgF7/s+w6SD0cnyj95AgBOgWPwpsXzWOfHsyIlFwn4sVGznKvQiQeVS56R
+	7+C/tBrHq9tn7L6bdNAe/uKiLFbEm7y+2IBXFzJzRy/WbYma0H/1xN1G+MR1SGKP+ZPM2cnQzyf
+	wddQWPIVk66IYTerLUAvAf6VxoELFxRLoB1yr3v2/l2sRHG8Z73
+X-Received: by 2002:a05:600c:620b:b0:499:80d0:8b73 with SMTP id 5b1f17b1804b1-49980d08bbdmr19865025e9.4.1786543060836;
+        Wed, 12 Aug 2026 06:57:40 -0700 (PDT)
+Message-ID: <698b5cf4-b383-452b-b6b8-fd5c09e41f51@suse.com>
+Date: Wed, 12 Aug 2026 15:57:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] x86: reduce dependencies on x86_emulate/x86_emulate.h
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Teddy Astie <teddy.astie@vates.tech>,
+Subject: Re: [PATCH v1 08/17] xen/riscv: add IMSIC state save/restore
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <f6f7eded-b6a3-49b4-8c68-38d263c3b58e@suse.com>
- <652379aa-dce2-4891-96c6-f9785cb19318@citrix.com>
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
+ <5e3df9ea4bafc5666d1885dfd40f534f8349879e.1784560663.git.oleksii.kurochko@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,67 +135,53 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <652379aa-dce2-4891-96c6-f9785cb19318@citrix.com>
+In-Reply-To: <5e3df9ea4bafc5666d1885dfd40f534f8349879e.1784560663.git.oleksii.kurochko@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1786542227-52AC8B50-175D19D0/0/0
+X-purgate-ID: tlsNG-4011c0/1786543061-58FC6CFC-84BF39E3/0/0
 X-purgate-type: clean
-X-purgate-size: 1934
+X-purgate-size: 1358
 
-On 12.08.2026 15:39, Andrew Cooper wrote:
-> On 12/08/2026 2:24 pm, Jan Beulich wrote:
->> Split out struct x86_event to an entirely separate header, and move a few
->> other items describing the architecture to a new x86-types.h. With a few
->> forward decls of structures and with a fair number of new #include-s in
->> .c files, the inclusion of x86_emulate.h (and hence
->> x86_emulate/x86_emulate.h) can be dropped from all header files except
->> hvm/emulate.h; it needs additionally adding to hvm/ioreq.h though.
->>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> 
-> Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+On 20.07.2026 18:02, Oleksii Kurochko wrote:
+> @@ -418,6 +419,28 @@ int imsic_map_guest_file(struct vcpu *v, unsigned int vsfile_id)
+>      return res;
+>  }
+>  
+> +void imsic_state_save(struct vcpu *v)
+> +{
+> +    struct vimsic_state *imsic_state = v->arch.vimsic_state;
+> +    unsigned long flags;
+> +
+> +    /*
+> +     * SW interrupt file always has ->vsfile_pcpu = NR_CPUS so nothing specific
+> +     * should be done in this case.
+> +     */
+> +    if ( !vcpu_guest_file_id(v) )
+> +        return;
 
-Thanks.
+How does the ->vsfile_pcpu sentinel value matter here, when you're checking
+->guest_file_id?
 
->> --- /dev/null
->> +++ b/xen/arch/x86/include/asm/x86-event.h
->> @@ -0,0 +1,31 @@
->> +/* SPDX-License-Identifier: GPL-2.0-or-later */
->> +/*
->> + * x86-event.h
->> + *
->> + * Helper definitions for event handling, which aren't prescribed by the
->> + * architecture itself.
->> + */
->> +
->> +#ifndef X86_X86_EVENT_H
->> +#define X86_X86_EVENT_H
->> +
->> +#ifdef __XEN__
->> +# include <xen/types.h>
->> +#else
->> +# include <stdint.h>
->> +#endif
->> +
->> +#define X86_EVENT_NO_EC (-1)        /* No error code. */
->> +
->> +struct x86_event {
->> +    int16_t       vector;
->> +    uint8_t       type;         /* X86_ET_* */
->> +    uint8_t       insn_len;     /* Instruction length */
->> +    int32_t       error_code;   /* X86_EVENT_NO_EC if n/a */
->> +    union {
->> +        unsigned long cr2;         /* #PF */
->> +        unsigned long pending_dbg; /* #DB (new DR6 bits, positive polarity) */
-> 
-> With the advent of FRED, this probably wants to become event_data (or
-> just data) and drop the union.
-> 
-> It's also the XFD_ERR mask for #NM, and the NMI Source Bitmap (on
-> capable hardware), and I think we're better off pointing to the FRED
-> spec than keeping an out-of-date list of what's in it.
+And anyway, there being dependencies like this one on the other big series
+makes it rather hard to review things.
 
-Yes, perhaps that's going to be better.
+> +    write_lock_irqsave(&imsic_state->vsfile_lock, flags);
+> +    imsic_state->vsfile_pcpu = cpuid_to_hartid(v->processor);
+
+As discussed for another patch in this series, this will need to change then
+as well.
+
+> +    write_unlock_irqrestore(&imsic_state->vsfile_lock, flags);
+> +}
+> +
+> +void imsic_state_restore(struct vcpu *v)
+> +{
+> +    /* Nothing to do */
+> +}
+
+"save" and "restore" have meaning other than what you intend here, aiui. Once
+again without call sites it remains unclear when exactly these functions would
+be called. Which makes it close to impossible to suggest better names.
 
 Jan
 
