@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5E4EC5AD5A
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2026 07:40:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1388778.1629758 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45FBFC5B56A
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2026 07:42:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1388794.1629777 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wu3ZC-0005wv-8U; Wed, 12 Aug 2026 07:40:02 +0000
+	id 1wu3b3-0007eT-QK; Wed, 12 Aug 2026 07:41:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1388778.1629758; Wed, 12 Aug 2026 07:40:02 +0000
+Received: by outflank-mailman (output) from mailman id 1388794.1629777; Wed, 12 Aug 2026 07:41:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wu3ZC-0005wP-51; Wed, 12 Aug 2026 07:40:02 +0000
-Received: by outflank-mailman (input) for mailman id 1388778;
- Wed, 12 Aug 2026 07:40:00 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wu3b3-0007eM-MG; Wed, 12 Aug 2026 07:41:57 +0000
+Received: by outflank-mailman (input) for mailman id 1388794;
+ Wed, 12 Aug 2026 07:41:56 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wu3ZA-0005i2-QT
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 07:40:00 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wu3b2-0007eB-MR
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 07:41:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wu3Z7-00GhUG-KN
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 09:39:57 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wu3b2-002NrJ-2X
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 09:41:56 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7c233a-bab6-0a2a0a5309dd-0a2a450acd24-46
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 09:39:57 +0200
-Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a7c23bf-2eae-0a2a0a5409dd-0a2a4507cc34-20
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 09:41:56 +0200
+Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7c234d-f2d2-0a2a450a0019-d155dd33e81c-3
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 09:39:57 +0200
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-47f6609c657so265669f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 00:39:57 -0700 (PDT)
+ id 6a7c23c3-b4ea-0a2a45070019-d1558032bc11-3
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 09:41:55 +0200
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-4921eed3fa2so4707415e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 00:41:55 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48150c088c9sm5099265f8f.13.2026.08.12.00.39.55
+ 5b1f17b1804b1-4997b33e038sm27710045e9.4.2026.08.12.00.41.54
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Aug 2026 00:39:56 -0700 (PDT)
+ Wed, 12 Aug 2026 00:41:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,60 +55,55 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786520397; x=1787125197; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1786520515; x=1787125315; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=7kvlaIyT3C4mq2SKhDRTcCFghu+creUAQezA8qqNSTM=;
-        b=JUITOViiR50TQrStdGe1ZwpRkcRRPkQ1dOqR1T+MRGH8LlOFm2mTxe0gJw3VTe8B+q
-         LVEEVSdTkGJEeXPZnYfUULg5/h0lXKmTI4snrWIYotZFcULGwzbMF5HO9HxLNDo7DZaF
-         Um7/slFTyhJ5FBt/DIcSTjLm/wIbooglEjjesw8LWX6AU3WiFE1QYM4kTWHXM9+H8vd0
-         Sx/XC2FD4SWMsEj4Px77enBsmZhidTD3JSt3VpLUva2mjjI45jU02TMHcj0X7yP2W2Mo
-         bol3evaupLe3lhBtPEgt/wkCv70TgpXWg9UDBfSOibCxLfa/rrgMdyUbtxjyNwXwfYv2
-         ZwgQ==
+        bh=3UBX0ogQdkSoMnSPy/v+GaVoz34I1SPSZX5Aqejg1Bw=;
+        b=FhxKcMnkcXWCEvApssjt6rJIJfezYbrP5fqFT5NAw+2v/UgB9yVvs5Y3IpngfUH6qp
+         MbDkgJQQVIF3/LmOxy7mxOIeEZs4qi8R30++AwXgFM5FdiTc/AHV2M9kmV3zHgqRg2Dy
+         ay6Isr9shVZJhNEWIn7LNCO9EHg42sElVUynX7ekkv0tl8jP2Wr58hmnDSo52v28n+Q5
+         bdyccVRvMx1LgfMl1KOzyzhza+roxR7oR3GtGK4dT0SahDz4BQLkjh/ljqEBqsYRYtll
+         6masjiEtb72MKpyqyH5Tn5ruGKdj99dgomcSTORMy9YzlGopPAc97Zlc7q3QquxFpUvA
+         9ULA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786520397; x=1787125197;
+        d=1e100.net; s=20251104; t=1786520515; x=1787125315;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=7kvlaIyT3C4mq2SKhDRTcCFghu+creUAQezA8qqNSTM=;
-        b=FiU6n9axb0RPx8yPX15M3npcBzVnxmR1jC0AxWckegLOoolcpAbqFemsb5BKsL7N9l
-         iSclfhCQngkW+cNa0LoHElrFQNJ0yYHnjaTusjlGsaeRyK7AmC3FQ/unlKrvhCLLt5pQ
-         Fw073+AyYWT4snGI3tZmT7ZUAl5Mmcl1pfRiUxcqPuzOPyDAxlkbKWtGaDB4gSIgL/8J
-         bpQL4OSqnZqXhvfguQiKMQ0bcdC8hp0rSQYPKnHeh9lrvfv+AZzcSWexL36nRYSBiJ8P
-         fOnPDtxPbfTc2AafipWFn83uKX77J8HHvQJTPPbW+pvXt6HGgZId0+vPY8JaQxrBUh9A
-         bIKg==
-X-Forwarded-Encrypted: i=1; AHgh+Rqz2/RJVa6HrNqDhHsjyIvacO7VQMWEULBK4ekj1ugrAe3GO2lymRc05lyQ17F+esABeEVHUXFltLw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxukcEAzqXkD3t41EqI4+clTaSPETrUzM2Og8hPYqZdSWhHifTg
-	tjQQA8+MXCqoMdaoMI70GbEQcc0HUUvsedAmoXTt8DMWLO5mFEoLp10fNnU3dkH27Q==
-X-Gm-Gg: AR+sD12rZfeKM2fcwm48GYQaqA1RqMirQIUFTvpsqUJHMyO6qyKWZlySIdk1pTL9LnL
-	P335M7AP9JsZpyV5mu+Zwy2CYXukzKwLFM2t6N5+HoILYKjRIxQVqupRpryk7wo13tMlVyKc8fB
-	BqO/b0Iz7BLC1RV+OwgINWRbDEABm0TvrPTGaObpbtsqhsSfL3XRFDmEmB7AJbuxg9fPr/zXHUg
-	zPrhZ1igjlmquiYwXNGspL1aEA+y/5AlIve+wREJBrwa9iDO+SRHCEZLMtdMX5id7iVSbVS0HNi
-	HWlkNcksA9kzPdwjM/yHRCg0/jfS+6PRiNrVymVnY2N+fekSrk02vXnY6MKuSHpt3l4ja0TOAfc
-	2egAqAWdbplY4Tfq8QRQ00qSZjy+JWdlAOCrWhKG5icDcBBmF+aqbbijWH21ljUabXYJlG3vsi3
-	3c5VH4Yd1zEmlyoOEhLG/Hxlll9qv/4Bc90nGHZNH8wIp4e7FZAmaWt8ifnXKQs1LaKDSIxrzJE
-	g3r/Ah9nkLsoGKNnpDmbLry8HEuH1pkNJu0FQJSuLriY9BxytIx
-X-Received: by 2002:a5d:5986:0:b0:47f:f4b9:88b7 with SMTP id ffacd0b85a97d-48152c3f68amr3570335f8f.1.1786520396920;
-        Wed, 12 Aug 2026 00:39:56 -0700 (PDT)
-Message-ID: <68b346b5-e4fe-455c-9f7f-f4c9d2b3ed73@suse.com>
-Date: Wed, 12 Aug 2026 09:39:55 +0200
+        bh=3UBX0ogQdkSoMnSPy/v+GaVoz34I1SPSZX5Aqejg1Bw=;
+        b=Xxzj8P1b6jXqlfzaVf+RWQMTcGraE1IAjyhkh+ExtpGIu+qMUbmKERj6CGXHCOqZFa
+         80u02EpbFL0nB0/wugMPuwZFpWb353i2/Nv9RGtKAunHQJx5q6cB0O4FeNCpQN1vVVME
+         p5K9ANFaOJQxP5V7Ea6YyPWbKQsNX0gtAtA9N3tySbKZQZIqiLOZkVmsUqTxqpicxJ9S
+         6W5G09HNv9fGaXoCbhHSv9hssZDoRSxP4N2SPLguviSvavA0B1XHrd9fVJKhTH9QPQtO
+         I2GEWsVejj/k/gEbmmFLsm8oBuXpVpPI1hLALdUxuY6YLdGvRhVe0YU97a79y+B5NRyh
+         s2dQ==
+X-Forwarded-Encrypted: i=1; AHgh+RqGcZZu1b0gpSBBzPmyhd7FV0qIkwpgbyESW79GWEvJ9u3qyoOlcnGMyWnLptppZuLclOUfR8BDv2w=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw5Cq65qxAQUqpDBrjzqfmoP8nDvjkyE4VCN5xTcyu/iopywdDb
+	87ttp7O5LDSdW98EHTxjEYWkIj2mtaYXdnj/m8Svi0EU2qlgpZLxoeuW184KuJzauw==
+X-Gm-Gg: AR+sD10DemBbfd5Mx5L/o4UfNs15hNCi+setKFmP0v5CPdiaBwIsFPnUP6Mu2kvI2BG
+	uP7elR8YdP1PDyc+60EOlxQR9EOR9opqWMiiG8LoAY1KHrv0W/lH2sVab3DBicUL51JisRA07yG
+	9rh2KhCkls+4kAf3qSO8oi7kRLQSTttKI7xjDKADzXX1H/+FOsobBAPXpzul+cTVj14LpwqA5T+
+	WCnrFeo1aCeZ6m9SyBf7tZgAKsLBgjSQaYAPfi3jTg/9jfftF8wAbULVx9YEdEYyeMY0Mw17vbG
+	WR+4lSr+McwhtXDE8288e66X89+hi48C2ZVMTMq0kz+IVvYoollHp5apBy9I6IK23uZymTykzpV
+	SfS4V+NJTq8sDkju5FFNenzM2TUsDJ8XW0Niff3eOldMqn1VrIyROPDy+m4MjKfMnhyLtUr3ogc
+	ShlBpcexI40A6w4ZYwOoDjq+3H/Jfnlcqv9vVX2UEKFeGfzAkbsRbfelk/DfPfPOILajz4NcV0P
+	my1panyY59cEf64YQwkojU2wSdVg4hPEdB4PuIk3pKbjIWIKo4l
+X-Received: by 2002:a05:600c:4e90:b0:495:6a50:3fb8 with SMTP id 5b1f17b1804b1-4997c0e3721mr28543855e9.1.1786520515072;
+        Wed, 12 Aug 2026 00:41:55 -0700 (PDT)
+Message-ID: <0189f567-7dbc-4450-b247-371b8de0c874@suse.com>
+Date: Wed, 12 Aug 2026 09:41:53 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] xen/arm: handle irq_set_type() failures
-To: Mykola Kvach <mykola_kvach@epam.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
- <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
+Subject: Re: [PATCH] x86/domctl: Fix unitialized copyback in
+ XEN_DOMCTL_PSR_GET_*
+To: =?UTF-8?Q?Johann_H=C3=B6pfner?= <hoepf@cit.tum.de>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Jens Wiklander <jenswi@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1786385827.git.mykola_kvach@epam.com>
- <d4087afce93cd4bb1779507393ac74c5dd5baea3.1786385827.git.mykola_kvach@epam.com>
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <anWrDspbnvRYCwGZ@cit.tum.de>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -134,35 +129,27 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <d4087afce93cd4bb1779507393ac74c5dd5baea3.1786385827.git.mykola_kvach@epam.com>
+In-Reply-To: <anWrDspbnvRYCwGZ@cit.tum.de>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1786520397-4BED2CFC-266AAA42/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ef75cf/1786520515-A58C1AE4-A11205F8/0/0
 X-purgate-type: clean
-X-purgate-size: 963
+X-purgate-size: 632
 
-On 10.08.2026 20:38, Mykola Kvach wrote:
-> --- a/xen/drivers/char/ns16550.c
-> +++ b/xen/drivers/char/ns16550.c
-> @@ -1928,6 +1928,7 @@ static int __init ns16550_acpi_uart_init(const void *data)
->      struct acpi_table_header *table;
->      struct acpi_table_spcr *spcr;
->      acpi_status status;
-> +    int rc;
->      /*
->       * Same as the DT part.
->       * Only support one UART on ARM which happen to be ns16550_com[0].
-> @@ -1976,7 +1977,9 @@ static int __init ns16550_acpi_uart_init(const void *data)
->      uart->reg_width = spcr->serial_port.access_width;
->  
->      /* The trigger/polarity information is not available in spcr. */
-> -    irq_set_type(spcr->interrupt, IRQ_TYPE_LEVEL_HIGH);
-> +    rc = irq_set_type(spcr->interrupt, IRQ_TYPE_LEVEL_HIGH);
-> +    if ( rc )
-> +        return rc;
+On 10.08.2026 00:38, Johann Höpfner wrote:
+> domctl_psr_get_val() copies unitialized stack space back if psr_get_val
+> fails. Fix by zero-initializing v_.
+> 
+> Fixes: 03f30dc193c8 ("x86: refactor psr: L3 CAT: implement get value flow.")
+> Signed-off-by: Johann Höpfner <hoepf@cit.tum.de>
 
-Is erroring out still appropriate when part of ns16550_com[] was already
-modified? I.e. doesn't the call need to move up then?
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+> Consider instead removing the local variable indirection introduced by
+> 03f30dc193c8 and passing &(domctl)->u.psr_alloc.data to psr_get_val
+> instead or only conditionally setting copyback true.
+
+Well - the way you've done it is clearly easiest / most obviously correct.
 
 Jan
 
