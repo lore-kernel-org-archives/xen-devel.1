@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 767B7C5B56A
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2026 07:29:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1388770.1629750 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B57BC5B56A
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2026 07:40:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1388780.1629767 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wu3ON-0003s2-A8; Wed, 12 Aug 2026 07:28:51 +0000
+	id 1wu3ZQ-0006x0-Dj; Wed, 12 Aug 2026 07:40:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1388770.1629750; Wed, 12 Aug 2026 07:28:51 +0000
+Received: by outflank-mailman (output) from mailman id 1388780.1629767; Wed, 12 Aug 2026 07:40:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wu3ON-0003rv-6c; Wed, 12 Aug 2026 07:28:51 +0000
-Received: by outflank-mailman (input) for mailman id 1388770;
- Wed, 12 Aug 2026 07:28:49 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wu3ZQ-0006wr-B4; Wed, 12 Aug 2026 07:40:16 +0000
+Received: by outflank-mailman (input) for mailman id 1388780;
+ Wed, 12 Aug 2026 07:40:14 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wu3OL-0003rp-DM
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 07:28:49 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wu3ZO-0006vw-AJ
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 07:40:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wu3OK-00BWVC-0v
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 09:28:48 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wu3VF-00DIx1-R9
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 09:35:57 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7c20af-8faa-0a2a0a5109dd-0a2a450289ee-4
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 09:28:47 +0200
-Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a7c225a-2eae-0a2a0a5409dd-0a2a4504e6fc-14
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 09:35:57 +0200
+Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7c20af-6ca4-0a2a45020019-d155dd2ac885-3
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 09:28:47 +0200
-Received: by mail-wr1-f42.google.com with SMTP id
- ffacd0b85a97d-480033bdcf4so303683f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 00:28:47 -0700 (PDT)
+ id 6a7c225d-b57f-0a2a45040019-d1558032e07f-3
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 09:35:57 +0200
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-4956242332dso5506435e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 00:35:57 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48150c08982sm4569641f8f.14.2026.08.12.00.28.46
+ 5b1f17b1804b1-4997ad79e5csm27165225e9.3.2026.08.12.00.35.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Aug 2026 00:28:47 -0700 (PDT)
+ Wed, 12 Aug 2026 00:35:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,55 +55,54 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786519727; x=1787124527; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1786520157; x=1787124957; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=xwB9N5vVJbxMsrg6ZAAsJzD0IEYTQdn0hmUXkK9isnE=;
-        b=MkyGCAlwwbSn8qQ2ZiD6wu2bJcIxoXKWLZzKUhJ95ateth9/NQyt+Tsjhep4C98Dn+
-         BhQpZVtCJJezRZ+plS0xdtjeQElfYg+RdumzRBVRLw6rDaYE4RytgF+TD0IqrPYAy1mb
-         8kvVL7hZdy4VpGh5oK1I7J8bE8SXygq2TYQ35KEV+DH1Cm8OcjLCFUyIFBS3Z+T2zzHk
-         S+Tkdxr7t0bCOu8TpFiiMSg6hxJMQk5P/PPGCpfjMG2olvRJfiWOhFU1hRvhpscmUHP7
-         u2thMbd09oRFIUWcs4KeSzMKYpByVy2Jk0qA5ceMAUnOnM8hOk+vLrQuCSNzAfTULuWC
-         X1sA==
+        bh=Z1bRtFRY89P4xtwcddqUbTl5+L6bmLdItlBwZdRvoBo=;
+        b=fSUVisZYPfgYr81QACXvMPuCsiYVPGYPM3MDSpuYSh0BJsLpOAg97X39HdVeLcvCx0
+         1ZewzIUV1g92V39ifFY9YujuthYGNQcjLPdHY4coqEblSZ6h2zCS5GCNPbxCilJrP6Rz
+         MxmUD2N3/X9+dckB51Z0onQXzzFNmxUsbivAmOp63LWEZxBTyfRd9Rzx6wmjhw/F9OLU
+         vAPRjvCQUSizSP5lnUeqKqs5l6j51jSDKBztjPnNCBzGlxOBdZ10DkH0QCLVgg9dggNc
+         0ldocKty8QCH8MNRqScCttuxU6/9iUCwvGLueny6sJyf+nOybTBDvBLeD5M0ivJ1iCoL
+         RAEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786519727; x=1787124527;
+        d=1e100.net; s=20251104; t=1786520157; x=1787124957;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=xwB9N5vVJbxMsrg6ZAAsJzD0IEYTQdn0hmUXkK9isnE=;
-        b=SMeyUFuPxEqcytqusGWk/CRz4IOhBazmaH2IRXwR3rABpzsICV0/nwonJoZwYV66Wt
-         fuWgN+YZzzUN4r/2LotqGFnoe18vFJl8ynNRUTCXL/71NnOjF7EGsXWQ+/ndxRXiHgNn
-         Ob3h8H+AjM16UTxxN+PpTiYcfvFZ4ii81dZPDs2d3mGFaFE4F+M1FxS8Olgz1XArRfsL
-         o4ATEK/FHYFyiRlwYLQ6MjkMevgTkv39TnrcPXhJlAg2aEm/kM4RdCrPoyTZoDAEUwww
-         guBjfH7OWkZVlRx4pDY9teyD8s5wsZ6IVvyZbJxkZ8H41i/b3WBRkDaRDmqmtpltNVWV
-         GAAg==
-X-Gm-Message-State: AOJu0YxjsK0y6eH3o/9PUaaZLjUTVIrDBVwEN6Ya/R+IoTOePijQFhE0
-	nIrbjn/oiUgGzqtUt/KHKYK+ZqqMuNXfqnsViMRWMTH+T4qBuSkY+czmcxL6EhlmCQ==
-X-Gm-Gg: AR+sD11YXmJ5QaekoA/P3YWvLxYN35lHvNalfD/r2Y+pX1VQiNilWfvVpc9OB7+Z2XV
-	itHBplGyAKxBq6OwM1xLVqb16T627pcy6C7lYijXjZeuMfamqlttZX94B0n7mVpOuD8CK+s6S/5
-	JNv+7QRDkp/reeO+hAHtdq69trEyeqW5dfXh+nw1JVRtK2jkOcivkt06xCBJDLmqloqrYtkW5Jr
-	WJzLt37hPxOH/wP5PxC6CtuT8jyAQC0aD9fpx3rDwbDHL0sVReQao/Mmo4lvvN5bwDAwD0NQyQE
-	wM+a81QrH6JmYjyu01UlluZ6UM/ZtBuGT1g3ynhbSuAR9rGL+Ojc3kPRp7kYySrQkOytmZl7HAT
-	0laCKDY15lRabNa2ChgmR7a5IQWTVkuMKp3LIhYxKW3EyDK9g/NfGTxU6Yhk6/J0Qt66+Ws3lAT
-	zD6SDN0zpo5TLXwv+J128IH39v+BvOCsbj6wwom/36fq3FEyswFA7KNJ9gqute69QLwE4j2o6Wd
-	CYq1WS3GsBkApOZSDcyxRd2/hNQNIJHtnU/CFn+UCCSsFQOtbyPzFMf5FUc+Qw=
-X-Received: by 2002:a05:6000:46cc:b0:481:511c:8d3a with SMTP id ffacd0b85a97d-481528bfe55mr2689738f8f.2.1786519727440;
-        Wed, 12 Aug 2026 00:28:47 -0700 (PDT)
-Message-ID: <ba78a8a1-6862-41b0-a6a5-cae7eada3627@suse.com>
-Date: Wed, 12 Aug 2026 09:28:46 +0200
+        bh=Z1bRtFRY89P4xtwcddqUbTl5+L6bmLdItlBwZdRvoBo=;
+        b=FgHss2ilVPSV7nHzqUDJ+yUNckyPzA/EqjWwryYNLAMz8OHx/NmG5Fr0MLr6IzUei2
+         ylqoRdfdVn9m61oVnXqUWINSTSOXzF24F+4SwLFeqb3XSSzCcbugA7P8xnLDvVR363hf
+         uT3tIFcpuG7Fvrx7lrOBAfJaC38OkI+jucFDmoiQ7M5W+GzJsuOtqtUcuvmW4MyXuBrW
+         3ak8b9D6z+7i5u1h5AJgJ5dvtdWGI/mBG3/YhHA5bFnDNlWGjN0oSe8iiaPPth9GBWil
+         s/pzb2Ek/f4RqHJhzH7E+K4+FwMiSehzYj6mqvixaTNCCbKfOcqNsDkrKnKACdcywKIy
+         KoVQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rqyl5DYl/gZ3hmjvGeE3MmOoQ8YFp7SqBGOjlEyqnnooxFj/4IDtznCxZJ2VF/F/2tAHoCHZvYgmso=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzfXg6w1PMykI1vymW6ValDRrRey3CxzJg0HSHBtIv+lupziT5E
+	1l9lkon3PWPTFL7diQBWicuLjlLI3cAJkbJPcfEaQLc/xMY7z33+vvE1Q2QnNBDANg==
+X-Gm-Gg: AR+sD121NgG7kMs2AGojWQdjDCl7tEogkmnOnVt3p733zCGtAEzNH/6c5XpOhxn1pAq
+	FbmghpucD4ZsCTUdwB912A8dQJg/8FFUVK4DqHt8pUn5oAQJ4YFnkST70f76tTJMimxtNcmgIl0
+	BFYrRw71g3W4kLQ7d6cxv7nyOdy13sfELB+pNWnv2Qry0d3hoRAZhsbPZ4zaLdmG9ibbDGaA+JO
+	jlCjGgCxGnaCrcNUa2GlnOvJZ1khpG4kDwucdC0ZAIG+18h3LVrWI0slPe5nBb2beYbtGOXC4OC
+	GUOXHm1VoaRKhAxhtWgXC1QnSBQL8RKGb+JRi6vc4hahfPYSvxjmmh/5lKuR1HDsI7YwGbdKUHD
+	Uj1VH3dozM5/u3/OvdjFLM+heKavtHVdZ0LShYvjeP8U4k8XLixCJFzYsMGMzXDdyEMg3KAoEIN
+	D8Pe8OX1gBMF+U/U18rZ/Uq+EWXhhbmkD3ez7r56MlLCY8p0qFCwHwFV0o3INJWNaTnqNpGk2hO
+	WeS3JkrVZLu//me4dz2Bt4ssqp7ZWmMaLwDP5hB6p2iFgWv+H386A==
+X-Received: by 2002:a05:600c:8209:b0:495:4d88:e630 with SMTP id 5b1f17b1804b1-4997c12b341mr42019485e9.10.1786520156055;
+        Wed, 12 Aug 2026 00:35:56 -0700 (PDT)
+Message-ID: <3e4526e9-0ce6-4620-820a-c670a3c01201@suse.com>
+Date: Wed, 12 Aug 2026 09:35:54 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] xen/common: add keyhandler to show Xen command line
+Subject: Re: [PATCH v4] xen/common: add keyhandler to show Xen command line
 To: dmukhin@ford.com
-Cc: xen-devel@lists.xenproject.org, andrew.cooper3@citrix.com,
- anthony.perard@vates.tech, julien@xen.org, michal.orzel@amd.com,
- sstabellini@kernel.org, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
-References: <20260810230359.671587-3-dmukhin@ford.com>
- <anrXvTfBls4flBqK@macbook.local> <anuMfq/lDjxbR8Om@kraken>
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, julien@xen.org,
+ michal.orzel@amd.com, roger@xenproject.org, sstabellini@kernel.org,
+ xen-devel@lists.xenproject.org
+References: <20260811210956.3806559-2-dmukhin@ford.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,37 +128,44 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <anuMfq/lDjxbR8Om@kraken>
+In-Reply-To: <20260811210956.3806559-2-dmukhin@ford.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1786519727-F1CAA2AC-B1F63E74/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ebf023/1786520157-508D9B50-01B8C419/0/0
 X-purgate-type: clean
-X-purgate-size: 1297
+X-purgate-size: 1026
 
-On 11.08.2026 22:56, dmukhin@ford.com wrote:
-> On Tue, Aug 11, 2026 at 10:05:17AM +0200, Roger Pau Monné wrote:
->> On Mon, Aug 10, 2026 at 04:04:01PM -0700, dmukhin@ford.com wrote:
->>> +static int __init cf_check misc_init(void)
->>> +{
->>> +    register_keyhandler('X', show_hypervisor_info,
->>> +                        "show hypervisor information", 0);
->>
->> "show hypervisor information" seems too generic to me, almost all
->> debug keys could be defined by this sentence TBH.  I think this needs
->> to be more specific, but I'm not sure what's the plan regarding this
->> key.  Is there an intention to print more stuff here, or just the
->> command line?  Knowing the full set of information to be printed might
->> help come up with a better name.
-> 
-> I will update to "show_cmdline" since I originally planed to expose Xen
-> command line only so it is possible to better debug a system when dom0
-> becomes almost unresponsive.
+On 11.08.2026 23:09, dmukhin@ford.com wrote:
+> @@ -505,6 +506,37 @@ static int __init cf_check param_init(void)
+>  __initcall(param_init);
+>  #endif
+>  
+> +static void cf_check show_cmdline(unsigned char key)
+> +{
+> +    const char *builtin_cmdline = CONFIG_CMDLINE;
 
-Yet as indicated already on v1 (I think) - a precious debug key character
-for just the command line seems rather wasteful to me. If it's only the
-command line, and if that _really_ needs exposing via a debug key (i.e.
-if there are reasonable scenarios where "xl info" cannot be used), perhaps
-attach it to e.g. the 'h' key output?
+Maybe compilers manage to optimize this to the equivalent of
+
+    static const char builtin_cmdline[] = CONFIG_CMDLINE;
+
+yet even then I see no reason why it wouldn't want spelling that way anyway.
+
+Plus this raises the question: Why would we need two instances of the string
+in the Xen image? If you need the literal at runtime, re-use
+opt_builtin_cmdline[] by dropping __initconst from it.
+
+> +    const char *cmdline;
+> +
+> +    printk("'%c' pressed -> showing hypervisor command line\n", key);
+> +
+> +    if ( builtin_cmdline[0] )
+> +        cmdline = builtin_cmdline;
+> +    else
+> +        cmdline = "<NULL>";
+> +
+> +    printk("Built-in command line: %s\n", cmdline);
+
+What use is this line when <NULL> is shown?
 
 Jan
 
