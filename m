@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5080EC5AD5A
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2026 08:28:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1388898.1629866 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98FB9C5B56A
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2026 08:46:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1388909.1629875 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wu4JO-00029q-8k; Wed, 12 Aug 2026 08:27:46 +0000
+	id 1wu4aS-0005J3-QB; Wed, 12 Aug 2026 08:45:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1388898.1629866; Wed, 12 Aug 2026 08:27:46 +0000
+Received: by outflank-mailman (output) from mailman id 1388909.1629875; Wed, 12 Aug 2026 08:45:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wu4JO-00029j-5t; Wed, 12 Aug 2026 08:27:46 +0000
-Received: by outflank-mailman (input) for mailman id 1388898;
- Wed, 12 Aug 2026 08:27:44 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wu4aS-0005Iv-Mm; Wed, 12 Aug 2026 08:45:24 +0000
+Received: by outflank-mailman (input) for mailman id 1388909;
+ Wed, 12 Aug 2026 08:45:23 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wu4JM-00029d-PH
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 08:27:44 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wu4aR-0005Ip-77
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 08:45:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wu4JM-00BjbY-4v
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 10:27:44 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wu4aP-00DYEO-29
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 10:45:21 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7c2e70-e002-0a2a0a5209dd-0a2a450ae3b4-46
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 10:27:43 +0200
-Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a7c3297-bab6-0a2a0a5309dd-0a2a45039c18-18
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 10:45:20 +0200
+Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7c2e7f-f2d2-0a2a450a0019-d155dd2fd8a1-3
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 10:27:43 +0200
-Received: by mail-wr1-f47.google.com with SMTP id
- ffacd0b85a97d-47fecbb7000so314311f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 01:27:43 -0700 (PDT)
+ id 6a7c32a0-fae8-0a2a45030019-d1558034c116-3
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 10:45:20 +0200
+Received: by mail-wm1-f52.google.com with SMTP id
+ 5b1f17b1804b1-4954aff6088so4138665e9.3
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 01:45:20 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48150d72232sm5450024f8f.37.2026.08.12.01.27.42
+ 5b1f17b1804b1-4997c94f4c0sm29465275e9.8.2026.08.12.01.45.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Aug 2026 01:27:43 -0700 (PDT)
+ Wed, 12 Aug 2026 01:45:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,58 +55,54 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786523263; x=1787128063; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1786524320; x=1787129120; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=AxF9ThbimReP54YPIpZA2L6bkAmldFc0bCkBEL+nZTQ=;
-        b=DD+D081h0YNG82rE04uvwGqlGajzG9ODHFMltyjzNctNyaPbbjadtmhgsS0yBbbejf
-         1e2y7zlZMierJksm5X1x1LbMml8OFYwa0UxHWzww74h/TeftGc+xWzi2NbdOjZGULhvR
-         qGEBpBuhZItidg1lHzaQMi0wsp9QsOjBFsZbC7E9aiptDAToSASp2ArJBDVvDH/U9P++
-         Ejc38qzuPS8GBbUwaGgLT1qimHXGD0vA6ghj2ogS71TSNrtRYDqLI5CYn39XrE8as0Pb
-         EVokQSCen28p35fl+n5knQW/BhxRVSPul+18MrBarwlpA5s6EdeFYnbX+CTyOwFw/6Sn
-         jdHg==
+        bh=9kv5repWIREELK5z++PzLzQV26AoA6Wk+m6y/goKMkM=;
+        b=Jpd/E1k1arWfpHwRNGM4xqRIRXyzh/oYAO5gOStk4GUoHG6rw3t/nbAx3ecFckdWfI
+         /Hv4TlsBsJ5+pKZlSadJDt5TwJldrqjK7cU9y5xyJiHrdN3s2I3TfKLnxOVDXMlu4Tb4
+         N+DFEIzj0GoDVreual2uZHhtBXmG6c/3LoeVgK9+tiNmf0kuHufohMP5OW2EcBlOYLo2
+         NaIz5x9/X8w1LoO8lkHOA6KFJdS1okR0mkgviTT1okedqVZNtwKhI0XZnZcbi5Y6kbnV
+         eTajusqxoQT+CRVRvJDYfB54An5SfGLgrP1WuEsvAGBOulDHest71YfA0fYJ3Kto3lgP
+         2N3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786523263; x=1787128063;
+        d=1e100.net; s=20251104; t=1786524320; x=1787129120;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=AxF9ThbimReP54YPIpZA2L6bkAmldFc0bCkBEL+nZTQ=;
-        b=p0bBGxOt4937alsafKe7KO+XrwOKDknayJnrfKYLEFFvYtNI3aF6uoI0MpHOycpOVD
-         QEoIC0r1yrJph03Uh3SdLW1zPzEeLrdO1rehQ5kMGAXd6vo/EsUpBTy22eFS5IyUH8EU
-         AcIHRkMUgI803gPzXaJWdss4oCoz6PKYpYHyXOYho73RS8oNb5kfFhkNBCqVMkRsZxT4
-         LYSkQ/0X+61s48cYz7QxpSm5fiIMRbb20NfghEe5vnU0+7JZmi4GQcPSGUdG8qvutJ2j
-         k8rl2qSfSUGhNoSh9d81MabbbAD4YqvWYL4NFoKvs9OfrUaExcBJRMnCsx+DOtc0dn8s
-         0bVw==
-X-Forwarded-Encrypted: i=1; AHgh+RrjMEUHG/K5YY9E+unpohy6NXoVL81ijmCf3hmh7GqULTWSAC6XLEujaRp/85MwuARnIV4TeG4z3Ec=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yxj7myzt9xk7y2ScxIcxsSTSYuiI76bOKWPgKx7bumyB74OnlY9
-	SRD3KzC84dnw3akr/PAsRZW6+su9gecCh/uj5DnIfqtXHHyd/ek0mwUGnzIe7nTR0w==
-X-Gm-Gg: AR+sD12+s50mEIr96ZlfrhHw50wo37FYtIxeoZgkQX5r+s+5kAeTdkbevu1K1eHVrta
-	LwlhFnmNYb/JU5Gs5wo134VkELPSBCprVF7peWkJlfLi205CxXhg5wCGGoj5K9re0yvxGk2ojx3
-	II10uF0NoUCGlK9Np53Npzm6cMwGf1D1y1hgaIIuH1QncSBATuMYrS1XgWzbTh02pl/QiSNOzUr
-	tq4exnG/gCM8jrrvmn5RZMcjw8Ybb9DR1eE5cWdAfsHYRZ0qAGOVXZ05BmAId4mWdzLFDgApZ30
-	1LbBgEmji/5nMPy7ltlvBeHXxSrgLYZw8Ot6fkFnwRZLRoBE1TPQXGVR1a2Rrnx2gNLghAo0Xud
-	IpgRIU9iSNkCPi8Ya8JORQsCsmGhNBjuwSBpNU6fl8hfgS8gzeEgX47oAHz1JCnEuKwtXPH2fr2
-	RQLZT9Wh9J5HTmXpeu+YxeCU2+SaqxggOz7VgZ/Efu6sVqsgZN8l7u8n7HYsQwaJG81rtunOjs0
-	XWV2lkHMlBJPuTMRau6unCvxjG30ZbwYSPqE6cybC3JT1Xvz9mf
-X-Received: by 2002:a05:6000:4022:b0:47f:d0fb:ea33 with SMTP id ffacd0b85a97d-48152c75ef4mr4014071f8f.20.1786523263332;
-        Wed, 12 Aug 2026 01:27:43 -0700 (PDT)
-Message-ID: <193c0981-f5dc-4598-abc6-58ccbbe1a372@suse.com>
-Date: Wed, 12 Aug 2026 10:27:41 +0200
+        bh=9kv5repWIREELK5z++PzLzQV26AoA6Wk+m6y/goKMkM=;
+        b=BhaYwLyLSymNCEil0Ib5pmmjhTKSMTvklmiWmt0gmpyZRXUPoJcJj/pCPvuuCqNN9H
+         hd5zd4f6rKOtXDi72i9CXNMHAdekTTLWzKeB/Dm2sYUyL3wrzJXnyEYsDD+IC0DDKsCF
+         LUA6TB7m4EL7yRNGQ+4D7XgGFTrl380oZffVRkK8mo7eFOkvdJxbVnO1ValJp26CW6+n
+         kGsWNeX4DJPcsXdLK9rkHsNU15J4b0E420Gb/tGKVqOha96yg3GmgYO0VVjPJyLTTMnH
+         jR6DSiMCstp0vQ6GvmHV2Vr6IKnebcwkc6vmsIFKU/FqtnNc/8ipEWwmxdahgbK610o8
+         P1uQ==
+X-Gm-Message-State: AOJu0YzWcF7EuYFUF5xuma1arw2X+q7TCpeg5Kv/TPOI6FydI/UW+Mew
+	0SY+NPVRLTgsjEgJBaYgKHWtrCedoYeG49X1j2jKWFR29K1Nff1a+uyJbopXQQ8SAg==
+X-Gm-Gg: AR+sD11ZoOdrE7AKSs6NmqMbdeCn7jOII9fUN5G+Ge+wWp6BFUEsoJ2woYYrBmWzcYS
+	MC/4gare+ttExwKZxb/ur0ZkxHbA9F+1JlDFO4KpSm2M7E3A8QlSOY5lnDxrTWKt9M9Uzb8VbJV
+	RZAZqKRt4WJe/h04xjU0yzokjC8W98JDyuvhAF7W2Zlstxfb39n2ng3QE1AVTbVHcXje2obUFDR
+	POJODSpjsvRAiIy+Tkvwrafr0iA4zgZ5p/FL35vxAasaDVulgB9+htTJ3xti+E+KrnvCOdF0L21
+	tPno1gCZHr2Xyc3Or2oZdKJD6ron3F1lqSwqVptmayNHVnjdXE2dV0SewMbMkBCP1ZC50RU4G9N
+	5J2syzLvI/nFQrQe7QdKNxNKw3u279hGfZ73/GwNRy8GG15id1EwTamLXp6EMN/EY4eLOV3YwI0
+	gtegDhwBbR2t61QJVYq/001gApamZ0/mMciswGC33mIToeVKqRbYmQdpvTcS7CWT+Hja5BqJcsl
+	cezT0zPZrJ2kwLhEz8XorRvqRZSLT5ELTb5LwY7w/MgJqe0UmVt
+X-Received: by 2002:a7b:c7d1:0:b0:493:c634:952 with SMTP id 5b1f17b1804b1-4997c1192c0mr28620185e9.7.1786524320350;
+        Wed, 12 Aug 2026 01:45:20 -0700 (PDT)
+Message-ID: <023ffc4e-ac21-4220-996a-1b7eaa9f2467@suse.com>
+Date: Wed, 12 Aug 2026 10:45:19 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] public/xen.h: Update comment on mmu_update sub-command
- size and PTE alignment
-To: Teddy Astie <teddy.astie@vates.tech>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Kevin Lampis <kevin.lampis@citrix.com>, xen-devel@lists.xenproject.org
-References: <1786138121.8631fc262581453bbf619ec5b2062170.19fde20d3e4000e099@vates.tech>
+Subject: Re: [PATCH] vvmx: Fix uninitialised writeback to vmcs12
+To: =?UTF-8?Q?Johann_H=C3=B6pfner?= <hoepf@cit.tum.de>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Cc: xen-devel@lists.xenproject.org, Teddy Astie <teddy.astie@vates.tech>
+References: <alfcosYs35pOCslN@cit.tum.de>
+ <af5dfcaa-8da8-4bd2-ac30-24bc65e65a6e@suse.com> <anWa8ExGlrqsoxfN@cit.tum.de>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -132,91 +128,45 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1786138121.8631fc262581453bbf619ec5b2062170.19fde20d3e4000e099@vates.tech>
+In-Reply-To: <anWa8ExGlrqsoxfN@cit.tum.de>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1786523263-506CECFC-B2E5C686/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-33051d/1786524320-6C4DF4E9-3DF89E4D/0/0
 X-purgate-type: clean
-X-purgate-size: 3859
+X-purgate-size: 1574
 
-On 07.08.2026 23:28, Teddy Astie wrote:
-> HYPERVISOR_mmu_update passes a set of request, where each request has a pointer
-> to the PTE along with a sub-command.
+On 07.08.2026 11:32, Johann Höpfner wrote:
+> nvmx_handle_vmwrite leaves local eight byte variable 'operand'
+> uninitialised to be written as an out-parameter by decode_vmx_inst. In
+> cases where the operand to vmwrite is a 32 bit memory operand, the
+> invokation of  hvm_copy_from_guest_linear leaves the upper half of
+> *poperandS uninitialised. The resulting eight byte value is consequently
+> written to the vmcs12 leaking the four uninitialised bytes into guest
+> physical memory.
 > 
-> The PTE alignment padding is used to transport the sub-command while the rest
-> is used as a address to a PTE entry. The current documentation state that the
-> 2 first bits are used for sub-command, hence the other ones for PTE which
-> imply here a 4-bytes alignment on PTEs.
+> Initialize the stack-space passed to decode_vmx_inst to avoid this
+> issue.
 > 
-> On PV64 and PV32-PAE guests, all pagetable PTEs are 8-bytes aligned, hence
-> off-by-4 PTEs addresses are always incorrect. Non-PAE PV32 guests used
-> "legacy pagetables" which had 4-byte aligned PTEs. However, support had
-> been completely removed since Xen 4.0, and were only available when Xen was
-> built in 32-bits non-PAE mode [1].
-> 
-> Current Xen logic behave as if 3 bits are used as sub-command, thus all
-> off-by-4 PTEs are actually rejected as being unknown sub-commands.
-> 
-> Adjust the documentation to match the current logic implemented in Xen,
-> also expanding the documented sub-command parameter to 3 bits.
-> 
-> [1] 84d54d5d8b31 ("i386: Remove non-PAE hypervisor build target.")
-> 
-> Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
+> Fixes: 2b2793d3ae44 ("nEPT: handle invept instruction from L1 VMM")
+> Fixes: d4c5b9db5a85 ("Nested VMX: Emulation of guest VMWRITE")
+> Fixes: 9ccf55307868 ("nVMX: virutalize VPID capability to nested VMM")
+> Signed-off-by: Johann Höpfner <hoepf@cit.tum.de>
 > ---
-> This happens to be a complete rewording of [2]. I'm not sure what to do exactly
-> regarding the signed-off.
+> 
+>> In any event - why don't you make your proposed change into a proper patch
+>> (primary piece missing is your S-o-b, and perhaps we also would want a
+>> suitable Fixes: tag)?
+> 
+> Sorry to have kept you waiting. Here is the formatted patch. I included
+> the invvpid case still, though I believe only vmwrite remains after the
+> patch you linked is merged, right?
 
-I think the patch here nevertheless should have been v2, with original authorship
-retained. It looks largely okay to me (with Frediano's nits addressed). I think,
-though that ...
-
-> --- a/xen/include/public/xen.h
-> +++ b/xen/include/public/xen.h
-> @@ -218,16 +218,16 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
->   *                     x == 0 => PFD == DOMID_SELF
->   *                     x != 0 => PFD == x - 1
->   *
-> - * Sub-commands: ptr[1:0] specifies the appropriate MMU_* command.
-> + * Sub-commands: ptr[2:0] specifies the appropriate MMU_* command.
->   * -------------
-> - * ptr[1:0] == MMU_NORMAL_PT_UPDATE:
-> + * ptr[2:0] == MMU_NORMAL_PT_UPDATE:
->   * Updates an entry in a page table belonging to PFD. If updating an L1 table,
->   * and the new table entry is valid/present, the mapped frame must belong to
->   * FD. If attempting to map an I/O page then the caller assumes the privilege
->   * of the FD.
->   * FD == DOMID_IO: Permit /only/ I/O mappings, at the priv level of the caller.
->   * FD == DOMID_XEN: Map restricted areas of Xen's heap space.
-> - * ptr[:2]  -- Machine address of the page-table entry to modify.
-> + * ptr[:3]  -- Machine address of the page-table entry to modify.
->   * val      -- Value to write.
->   *
->   * There also certain implicit requirements when using this hypercall. The
-> @@ -264,17 +264,17 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
->   * mentioned above. The argument is MMUEXT_UNPIN_TABLE for all levels and the
->   * pagetable MUST not be in use (meaning that the cr3 is not set to it).
->   *
-> - * ptr[1:0] == MMU_MACHPHYS_UPDATE:
-> + * ptr[2:0] == MMU_MACHPHYS_UPDATE:
->   * Updates an entry in the machine->pseudo-physical mapping table.
-> - * ptr[:2]  -- Machine address within the frame whose mapping to modify.
-> + * ptr[:3]  -- Machine address within the frame whose mapping to modify.
->   *             The frame must belong to the FD, if one is specified.
->   * val      -- Value to write into the mapping entry.
->   *
-> - * ptr[1:0] == MMU_PT_UPDATE_PRESERVE_AD:
-> + * ptr[2:0] == MMU_PT_UPDATE_PRESERVE_AD:
->   * As MMU_NORMAL_PT_UPDATE above, but A/D bits currently in the PTE are ORed
->   * with those in @val.
->   *
-> - * ptr[1:0] == MMU_PT_UPDATE_NO_TRANSLATE:
-> + * ptr[2:0] == MMU_PT_UPDATE_NO_TRANSLATE:
->   * As MMU_NORMAL_PT_UPDATE above, but @val is not translated though FD
->   * page tables.
->   *
-
-... at least retaining some reference to the non-PAE situation would be helpful.
+I think so, yes. Andrew, Roger - any chance of coming to a conclusion on that
+much earlier work [1]? Imo that wants to go in first, with the patch here then
+shrunk to what's actually still needed (at which point only a single Fixes:
+would be left as well).
 
 Jan
+
+[1] https://lists.xen.org/archives/html/xen-devel/2025-06/msg01208.html
 
