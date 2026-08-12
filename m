@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45FBFC5B56A
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2026 07:42:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1388794.1629777 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3CDDC5B56A
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2026 07:44:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1388804.1629784 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wu3b3-0007eT-QK; Wed, 12 Aug 2026 07:41:57 +0000
+	id 1wu3dS-0008E8-6i; Wed, 12 Aug 2026 07:44:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1388794.1629777; Wed, 12 Aug 2026 07:41:57 +0000
+Received: by outflank-mailman (output) from mailman id 1388804.1629784; Wed, 12 Aug 2026 07:44:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wu3b3-0007eM-MG; Wed, 12 Aug 2026 07:41:57 +0000
-Received: by outflank-mailman (input) for mailman id 1388794;
- Wed, 12 Aug 2026 07:41:56 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wu3b2-0007eB-MR
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 07:41:56 +0000
+	id 1wu3dS-0008E1-47; Wed, 12 Aug 2026 07:44:26 +0000
+Received: by outflank-mailman (input) for mailman id 1388804;
+ Wed, 12 Aug 2026 07:44:25 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wu3dR-0008Dv-Et
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 07:44:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wu3b2-002NrJ-2X
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 09:41:56 +0200
+ id 1wu3dQ-00DL5A-R6
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2026 09:44:24 +0200
 Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a7c23bf-2eae-0a2a0a5409dd-0a2a4507cc34-20
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 09:41:56 +0200
-Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a7c2451-bab6-0a2a0a5309dd-0a2a45078eee-18
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 09:44:24 +0200
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
  by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a7c23c3-b4ea-0a2a45070019-d1558032bc11-3
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 09:41:55 +0200
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-4921eed3fa2so4707415e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 00:41:55 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4997b33e038sm27710045e9.4.2026.08.12.00.41.54
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a7c2458-b4ea-0a2a45070019-d155802aecba-3
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 09:44:24 +0200
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-4954dff6536so4883135e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 00:44:24 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
+ [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48150d709dfsm5027638f8f.35.2026.08.12.00.44.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Aug 2026 00:41:54 -0700 (PDT)
+ Wed, 12 Aug 2026 00:44:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,103 +52,152 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786520515; x=1787125315; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+        d=gmail.com; s=20251104; t=1786520664; x=1787125464; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=3UBX0ogQdkSoMnSPy/v+GaVoz34I1SPSZX5Aqejg1Bw=;
-        b=FhxKcMnkcXWCEvApssjt6rJIJfezYbrP5fqFT5NAw+2v/UgB9yVvs5Y3IpngfUH6qp
-         MbDkgJQQVIF3/LmOxy7mxOIeEZs4qi8R30++AwXgFM5FdiTc/AHV2M9kmV3zHgqRg2Dy
-         ay6Isr9shVZJhNEWIn7LNCO9EHg42sElVUynX7ekkv0tl8jP2Wr58hmnDSo52v28n+Q5
-         bdyccVRvMx1LgfMl1KOzyzhza+roxR7oR3GtGK4dT0SahDz4BQLkjh/ljqEBqsYRYtll
-         6masjiEtb72MKpyqyH5Tn5ruGKdj99dgomcSTORMy9YzlGopPAc97Zlc7q3QquxFpUvA
-         9ULA==
+        bh=Lm/f+ccEM3XgjBsvgUdE+M8tHbe5ngMBnR2I6CsCIeE=;
+        b=UUS7FTk34DPzwwyVqiLPDNoWNsaYDfudSb7kx7ZcxzbKCDzpq7W8I7r8oBKkFXvaEv
+         8MWY6v0QtAEGkhXmiVuLrdAWCPEKmYXGHITAQFZfYJ/2ckdoU77mL2iXEqzgQRdf/Vo9
+         /fP9+Q2kzFzxFYbBLMSfbhdld0mVuke/Qgo7Ojasy6f325sqWmsAUXt0DgzSsH+tZcDP
+         k3yBUYJoWlVH/mGSZW+2fWTxeK8LSyckbqDHiwMQkDr41pj0Y6xSr7E3e+cV1pLL3m/X
+         V/SjuCFdS57rN8IlCxmT9RPJBQWdH325WBK0xXpqzUC20fU6vHS4GqAZSKs8DBJm0orv
+         Jm+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786520515; x=1787125315;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+        d=1e100.net; s=20251104; t=1786520664; x=1787125464;
+        h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=3UBX0ogQdkSoMnSPy/v+GaVoz34I1SPSZX5Aqejg1Bw=;
-        b=Xxzj8P1b6jXqlfzaVf+RWQMTcGraE1IAjyhkh+ExtpGIu+qMUbmKERj6CGXHCOqZFa
-         80u02EpbFL0nB0/wugMPuwZFpWb353i2/Nv9RGtKAunHQJx5q6cB0O4FeNCpQN1vVVME
-         p5K9ANFaOJQxP5V7Ea6YyPWbKQsNX0gtAtA9N3tySbKZQZIqiLOZkVmsUqTxqpicxJ9S
-         6W5G09HNv9fGaXoCbhHSv9hssZDoRSxP4N2SPLguviSvavA0B1XHrd9fVJKhTH9QPQtO
-         I2GEWsVejj/k/gEbmmFLsm8oBuXpVpPI1hLALdUxuY6YLdGvRhVe0YU97a79y+B5NRyh
-         s2dQ==
-X-Forwarded-Encrypted: i=1; AHgh+RqGcZZu1b0gpSBBzPmyhd7FV0qIkwpgbyESW79GWEvJ9u3qyoOlcnGMyWnLptppZuLclOUfR8BDv2w=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yw5Cq65qxAQUqpDBrjzqfmoP8nDvjkyE4VCN5xTcyu/iopywdDb
-	87ttp7O5LDSdW98EHTxjEYWkIj2mtaYXdnj/m8Svi0EU2qlgpZLxoeuW184KuJzauw==
-X-Gm-Gg: AR+sD10DemBbfd5Mx5L/o4UfNs15hNCi+setKFmP0v5CPdiaBwIsFPnUP6Mu2kvI2BG
-	uP7elR8YdP1PDyc+60EOlxQR9EOR9opqWMiiG8LoAY1KHrv0W/lH2sVab3DBicUL51JisRA07yG
-	9rh2KhCkls+4kAf3qSO8oi7kRLQSTttKI7xjDKADzXX1H/+FOsobBAPXpzul+cTVj14LpwqA5T+
-	WCnrFeo1aCeZ6m9SyBf7tZgAKsLBgjSQaYAPfi3jTg/9jfftF8wAbULVx9YEdEYyeMY0Mw17vbG
-	WR+4lSr+McwhtXDE8288e66X89+hi48C2ZVMTMq0kz+IVvYoollHp5apBy9I6IK23uZymTykzpV
-	SfS4V+NJTq8sDkju5FFNenzM2TUsDJ8XW0Niff3eOldMqn1VrIyROPDy+m4MjKfMnhyLtUr3ogc
-	ShlBpcexI40A6w4ZYwOoDjq+3H/Jfnlcqv9vVX2UEKFeGfzAkbsRbfelk/DfPfPOILajz4NcV0P
-	my1panyY59cEf64YQwkojU2wSdVg4hPEdB4PuIk3pKbjIWIKo4l
-X-Received: by 2002:a05:600c:4e90:b0:495:6a50:3fb8 with SMTP id 5b1f17b1804b1-4997c0e3721mr28543855e9.1.1786520515072;
-        Wed, 12 Aug 2026 00:41:55 -0700 (PDT)
-Message-ID: <0189f567-7dbc-4450-b247-371b8de0c874@suse.com>
-Date: Wed, 12 Aug 2026 09:41:53 +0200
+        bh=Lm/f+ccEM3XgjBsvgUdE+M8tHbe5ngMBnR2I6CsCIeE=;
+        b=PbBCmw6iCQHwE9S6QcU3MMh8FqZfuqMegT/6aWeXiE+gHTtEImqYkBi8dvVdOmUK4U
+         VqgdW3vuNRxqIAQ35dbntwJL+fcVSEUoBACc1HBUAPyRudNO3I1/Qcs5puiPcKyzdsm1
+         rR8RFZwkIHdChS6hAcpyALcC65gJCvEJcJxalV4HTqica7+eaHUGVy9wy6rsmvnJOda0
+         L2oZ5dFCYuFkArz6lUuNk8Vk2FKRCzh3WgGpbW0kOTiWWkyS5ixvzznah15KP13jkMCq
+         HGebTO19V2NdUduyvknrvWcH7y6b6Ip2bWXMQJzTj8zW5XYSoPVEcKQ3BNaOguuIEGYR
+         ZBiw==
+X-Forwarded-Encrypted: i=1; AHgh+Rorcx/iZU7fwh5xVJ5STeU2be1rMN/a5l1HKhRTuMrOw/3BhqQxsHfXArFI51LM0q26rrMN/3fDbfY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzuuyiTt0So8xwvGY0Mh2bdVQ6mx6uwrmJDEB+NiNOUm+T2DBIH
+	GlpsudsnDJeeTMFP+ci6PAHisNjaHuiIgX12T1QUBRFIsXOdPF3NjASH
+X-Gm-Gg: AR+sD122HTIm3iaCYCaNxuJnT6VqqZwFZrRlxx3kgixkDRxysciDv01Lp2RtN5CX2G5
+	+6iRWTCVrHQNFjIzROT5RE0ysKK4sVMh+QbAtZzSRTc3lctBu6ybQpXGt6+LkmpuzDwaanFp3GD
+	JTRwCDJMjvSfV+hrpihU7sKFTW1Wj5e4AzW1OMVknmfYHXY1jkMu3Loy1giADi91ECAxxpbfvJT
+	NoIjDdZm54glAKHL0RAMrLk0n5wCJiXAWU8/7ZxU2refqoEro7usOJfNhmXWtKrrItdfDj3qVu6
+	rZ2HKWzeKZiLjzSHpxmHSZ9Nv1MFqPiNWhE14cqx0fpy9+eyfuOogVUPyiSpADkuuq2v+KlnB2f
+	GdQeNTorMt5u6TZ8g03taaLYhZO6V/QBIVIK2xYX9HqRBHD4b3iZk5hjTo7bNh5xl2OBY0TJkOT
+	PXfSWu62dtKY2j+HqNqrlovmsdFgA7UyLc56kVzsD0x/y5A5YOs3tKhhCZjHrU6hR5ycQwPvO0L
+	5DOrRT/0rlRhnavrSFf0dBQxDygqbAdgHjSyR4A2OE=
+X-Received: by 2002:a05:6000:2405:b0:480:d9:ee6d with SMTP id ffacd0b85a97d-48152c62f17mr3427743f8f.19.1786520663929;
+        Wed, 12 Aug 2026 00:44:23 -0700 (PDT)
+Message-ID: <befa85b4-818d-44f9-af43-0c14f0549154@gmail.com>
+Date: Wed, 12 Aug 2026 09:44:22 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/domctl: Fix unitialized copyback in
- XEN_DOMCTL_PSR_GET_*
-To: =?UTF-8?Q?Johann_H=C3=B6pfner?= <hoepf@cit.tum.de>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <anWrDspbnvRYCwGZ@cit.tum.de>
+Subject: Re: [PATCH v4] xen/common: add keyhandler to show Xen command line
+To: dmukhin@ford.com, xen-devel@lists.xenproject.org
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com,
+ julien@xen.org, michal.orzel@amd.com, roger@xenproject.org,
+ sstabellini@kernel.org
+References: <20260811210956.3806559-2-dmukhin@ford.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <anWrDspbnvRYCwGZ@cit.tum.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1786520515-A58C1AE4-A11205F8/0/0
-X-purgate-type: clean
-X-purgate-size: 632
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <20260811210956.3806559-2-dmukhin@ford.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ef75cf/1786520664-36EDEAE4-47C38C69/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 2705
 
-On 10.08.2026 00:38, Johann Höpfner wrote:
-> domctl_psr_get_val() copies unitialized stack space back if psr_get_val
-> fails. Fix by zero-initializing v_.
+
+
+On 8/11/26 11:09 PM, dmukhin@ford.com wrote:
+> Currently there's no way to print Xen command line on the emergency
+> console for debugging purposes when 'xl' is not unavailable.
+
+It looks like 'not' should be dropped. 'unavailable' covers 'not' itself.
+
 > 
-> Fixes: 03f30dc193c8 ("x86: refactor psr: L3 CAT: implement get value flow.")
-> Signed-off-by: Johann Höpfner <hoepf@cit.tum.de>
+> Add new keyhander 'X' to do command line printout.
+> 
+> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+> ---
+> Changes since v3:
+> - print built-in command line too
+> - change handler to print command line only
+> 
+> Changes since v2:
+> - account for CONFIG_CMDLINE_OVERRIDE case
+> 
+> v3: https://lore.kernel.org/xen-devel/20260810230359.671587-3-dmukhin@ford.com/
+> CI: https://gitlab.com/xen-project/people/dmukhin/xen/-/pipelines/2751523722
+> ---
+>   xen/common/kernel.c | 32 ++++++++++++++++++++++++++++++++
+>   1 file changed, 32 insertions(+)
+> 
+> diff --git a/xen/common/kernel.c b/xen/common/kernel.c
+> index d1bef9ac2b2b..8a43e4421002 100644
+> --- a/xen/common/kernel.c
+> +++ b/xen/common/kernel.c
+> @@ -5,6 +5,7 @@
+>    */
+>   
+>   #include <xen/init.h>
+> +#include <xen/keyhandler.h>
+>   #include <xen/lib.h>
+>   #include <xen/errno.h>
+>   #include <xen/param.h>
+> @@ -505,6 +506,37 @@ static int __init cf_check param_init(void)
+>   __initcall(param_init);
+>   #endif
+>   
+> +static void cf_check show_cmdline(unsigned char key)
+> +{
+> +    const char *builtin_cmdline = CONFIG_CMDLINE;
+> +    const char *cmdline;
+> +
+> +    printk("'%c' pressed -> showing hypervisor command line\n", key);
+> +
+> +    if ( builtin_cmdline[0] )
+> +        cmdline = builtin_cmdline;
+> +    else
+> +        cmdline = "<NULL>";
+> +
+> +    printk("Built-in command line: %s\n", cmdline);
+> +
+> +    if ( IS_ENABLED(CONFIG_CMDLINE_OVERRIDE) )
+> +        cmdline = "<NULL> (CONFIG_CMDLINE_OVERRIDE=y)";
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Won't be better to use <ignored> instead of <NULL>? Also it reflects the 
+comment (But if CONFIG_CMDLINE_OVERRIDE is set to y, @cmdline will be 
+ignored.) above cmdline_parse() function better.
 
-> Consider instead removing the local variable indirection introduced by
-> 03f30dc193c8 and passing &(domctl)->u.psr_alloc.data to psr_get_val
-> instead or only conditionally setting copyback true.
+> +    else
+> +        cmdline = saved_cmdline;
 
-Well - the way you've done it is clearly easiest / most obviously correct.
+IIUC, saved_cmdline could be empty and I think we should take that into 
+account too:
 
-Jan
+     if ( IS_ENABLED(CONFIG_CMDLINE_OVERRIDE) )
+         cmdline = "<ignored> (CONFIG_CMDLINE_OVERRIDE=y)";
+     else if ( saved_cmdline[0] )
+         cmdline = saved_cmdline;
+     else
+         cmdline = "<NULL>";
+
+> +
+> +    printk("Command line: %s\n", cmdline);
+> +}
+> +
+> +static int __init cf_check misc_init(void)
+> +{
+> +    register_keyhandler('X', show_cmdline,
+> +                        "show hypervisor command line", 0);
+
+Last argument is declared as bool so I think it will be better to use 
+false here.
+
+~ Oleksii
 
