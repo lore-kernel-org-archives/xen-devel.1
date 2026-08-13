@@ -4,39 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91319C5B572
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 12:56:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1389996.1630570 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89706C5CFEB
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 13:00:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1390007.1630579 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuUzA-0004c5-Gv; Thu, 13 Aug 2026 12:56:40 +0000
+	id 1wuV2g-0006Wy-VU; Thu, 13 Aug 2026 13:00:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1389996.1630570; Thu, 13 Aug 2026 12:56:40 +0000
+Received: by outflank-mailman (output) from mailman id 1390007.1630579; Thu, 13 Aug 2026 13:00:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuUzA-0004by-Ct; Thu, 13 Aug 2026 12:56:40 +0000
-Received: by outflank-mailman (input) for mailman id 1389996;
- Thu, 13 Aug 2026 12:56:38 +0000
+	id 1wuV2g-0006Wr-RU; Thu, 13 Aug 2026 13:00:18 +0000
+Received: by outflank-mailman (input) for mailman id 1390007;
+ Thu, 13 Aug 2026 13:00:17 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wuUz8-0004bf-IA
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 12:56:38 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=MYTl=GG=ens-lyon.org=samuel.thibault@bounce.ens-lyon.org>)
+ id 1wuV2f-0006Wl-4r
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 13:00:17 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wuUz7-00AKGB-QH
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 14:56:37 +0200
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a7dbef6-bab6-0a2a0a5309dd-0a2a450a998a-20
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 14:56:37 +0200
-Received: from [209.85.128.181] (helo=mail-yw1-f181.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a7dbf04-f2d2-0a2a450a0019-d15580b5cdba-3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 14:56:37 +0200
-Received: by mail-yw1-f181.google.com with SMTP id
- 00721157ae682-824af9535c8so12438057b3.1
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 05:56:37 -0700 (PDT)
+ id 1wuV2e-00ALGa-Hn
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 15:00:16 +0200
+Received: from [10.42.69.8] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <SRS0=MYTl=GG=ens-lyon.org=samuel.thibault@bounce.ens-lyon.org>)
+ id 6a7dbfd9-bab6-0a2a0a5309dd-0a2a4508e752-46
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 15:00:16 +0200
+Received: from [140.77.166.138] (helo=sonata.ens-lyon.org)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <SRS0=MYTl=GG=ens-lyon.org=samuel.thibault@bounce.ens-lyon.org>)
+ id 6a7dbfe0-f659-0a2a45080019-8c4da68ad59c-3
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 15:00:16 +0200
+Received: from localhost (localhost [127.0.0.1])
+ by sonata.ens-lyon.org (Postfix) with ESMTP id CDF19A017F;
+ Thu, 13 Aug 2026 15:00:15 +0200 (CEST)
+Received: from sonata.ens-lyon.org ([127.0.0.1])
+ by localhost (sonata.ens-lyon.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id cOvAuh6-fCEF; Thu, 13 Aug 2026 15:00:15 +0200 (CEST)
+Received: from end (144.105.204.77.rev.sfr.net [77.204.105.144])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by sonata.ens-lyon.org (Postfix) with ESMTPSA id 6F159A017E;
+ Thu, 13 Aug 2026 15:00:15 +0200 (CEST)
+Received: from samy by end with local (Exim 4.99.4)
+ (envelope-from <samuel.thibault@ens-lyon.org>)
+ id 1wuV2c-00000003c1A-0bBL; Thu, 13 Aug 2026 15:00:14 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,136 +62,177 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1786625796; cv=none;
-        d=google.com; s=arc-20260327;
-        b=ks2xryQh1+UQUU4XEQawZAy72cfItU+PUrJKKOYQO7rH4QHFudzTsPyKJnTDuBEKwF
-         hGK9PisWM7D0kLLaNxlYYR1A66AP+NaenmcdVosMG25sAcT+ZrNFPIp4FxykkMrYdI4r
-         3aXVst4KHnU+UsD0VvrsDne+7Qwdi/g3ajKP5L7a55J6mPW4qIINZSJPygWsPkIs0r1V
-         ZB3noKfvxMIoyPMjPVVGKcSmI15qCeaDuhsKYvo+f8F+I16ml+/3wPSeROM8L9MTiFl0
-         MI/d5zm4rM+zs/RS95PhO2LFgzptexlTifIM7Mz3/iAL9Z8eSO5hb7L+zm+JKOhXujwY
-         83EQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=wBkVfFa3I1a4xw0FRjxrPE/2JG7Xw2hq+rikZWfqA0M=;
-        fh=9Qi9GuP6RaIdUPqcByINS4Lh6Dqx/46KOIm9RXXqrVw=;
-        b=dzQM58jv1Pi55+cz4rAoFrm4Z48D07SpHcN3eHw568/GYUbt47gspWuFZuQBdJuRgt
-         0ROJnQP05JziYKdVLjr4a3BWRbSvUPaRBAEdrsxw+TpPGDE2xac1jMrIV+8yDNr0CJp5
-         M1DgjOP2J8YohePFTRWLwouua4MuTPxMXfauoCCvM707ewPC3WgCajbozgEmfWldDqwv
-         rVfMPu45frH9jIMK5mPwm387yXCJFVhUVFOn/kcMtQkgy8ZEWGVVqGSps9icTK3QEX5j
-         jBb9bdKQRj4mmKHoQFaaaup9ibwTB8SzsWMDtxQ6iILF8zxV0gfnBRYl4fFSQR30kyo8
-         Sq6g==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786625796; x=1787230596; darn=lists.xenproject.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=wBkVfFa3I1a4xw0FRjxrPE/2JG7Xw2hq+rikZWfqA0M=;
-        b=pwXFiYmDo2s5oBzs9+tSNRqelhrYv2fvYM2FdD+hGu9smhTrvuEGUNboNQZbM08Biz
-         XbRV6abeRKQhoQUpbQ+1QrRp86m9moO/BkjMPaO8LA4X+iVNF7zUnJ/td+rY52oLpFtk
-         mPHqBMSz0eo+J/lr+RkWslkD6BV2vaAC9F2qyA6MDFB+O1Qznn9Grv1fD8wVqhoWuavv
-         /evn0HiuyDW/rmd/7YtYaiCuoKcZmsxu7Vu1sxb63/oZwWxMbMttSnHAgCBBl95q0e5M
-         fQph7SBReNP+QfMdMOpZXCMvkcRSZKNQ4eYaWOH9RlfqmrNHuzY8PDJKMVxyLvt2uk8Q
-         oNFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786625796; x=1787230596;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=wBkVfFa3I1a4xw0FRjxrPE/2JG7Xw2hq+rikZWfqA0M=;
-        b=XPmhhVfnLd0ND/2jWU6UKZcXzwEknFfU9TlkRNM+EANlGaldz87uOS7cR3q7rBe7o7
-         GxvUdhjRjUgoqZUssXltaJoxQqwU+kz5763wVjc20uecZj7Un+1/a9LknNA8Jwbp+U71
-         9AiGYOYz2oFQoh5NEvLFmpDE7p8QsMSkg/zcMvh0//2V7e7Uouf7ztwcE2vjIIE5JyDG
-         Taxhdj2lNEelY6d4BKDEsL3z15UXDexO3QSFtd3wDmjRP6YDySf2YH0O9fTQ+t3jmjBi
-         udXZn4wNPUNc0pHBO/73kTUHii6j3ebGd9FEuC1n4gbH7JxRcl4Mb7Iw22+1VLvy4PK4
-         huaw==
-X-Forwarded-Encrypted: i=1; AHgh+RoKa3JCvGcO+89bgqDSsryztfz2Bc3grzpg9q0JeFSJOwXb6HzvxwZ8BQ078BN7M0l5Vvgz6r6JPZ8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxNU2cZ575Dl+blaZPtum78L1Xak8baldLJdjFcjBzBGjlXlTzG
-	U3AYRXpDvFfyFrfCvRKAikBjNZPD7Na235mG1+1TscfGAuTH+r0VgrBWrq7LVY9QG1+g3N3qP1H
-	RBxwaB/pivE4wVtjRgnYDAyI1SxUlOzg=
-X-Gm-Gg: AR+sD11PX8MGxRwR8QWKxEKMGHsT9sst3jixTpnGMN7YP7mQuq2rwSoc04WoFSP7BtJ
-	MsURc2VaCA6wYAcGTAAzIInkiXanuQImFKswK1UiiEsTd57yXNnn6zAb4Hi/VxDX8Wmnlt83a0n
-	5SbheMM7qpTp6P7kOv5StgAzPX28vrcI0mf87EMBMERWvBm0jd7jZ4FSIWULv8eEqmYv1HnJmNY
-	sFWC9+EYCTAqXNBmJAnItHZLps7BfEepZnf36Z7rxHlXG14nGY0P5E4TXrjy1TyuS82WFpzzMwl
-	GeO8MWHWt2KM418wWxeeDT6BAnw1dLnfEF2kXEej0L/7e49QZRIbBiC8f5XSE3jkVxldxoVqnse
-	Y
-X-Received: by 2002:a05:690c:7482:b0:80b:de9c:8a2c with SMTP id
- 00721157ae682-83471fe4b47mr31617347b3.8.1786625796241; Thu, 13 Aug 2026
- 05:56:36 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=dkim header.d=ens-lyon.org header.i="@ens-lyon.org" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"; dkim=pass header.s=dkim header.d=ens-lyon.org header.i="@ens-lyon.org" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ens-lyon.org; s=dkim;
+	t=1786626015; bh=kzaD9UzPodCXgkww/e8Ygm7kqHXy/jA1wRppLTsEiQM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Hm7j4elDc4QEEssDYs1zmeKzsqMPUsl/nfJhtYndlt7PCb7W1I0rLP9XxMFp+MvKx
+	 6oeFvNvtwuMbjbCQXE7BqGoQCN4hxc0VneXygKwkKhlrFdROafbb0xVN3hFsOG2CXK
+	 7er4BQGHxrmxrfAlhp6k/abxJjoRVOwf6UAd8TZWZ8f8EDtvsdBCJlqRGYHjNMePGa
+	 QZiPNLVN75DKyq9jzaHi1xeYnh4ij/D4GUV272pf7lAQa0QEJ2aef+KNy//i4DFpJ3
+	 bX7gC8/lGKk68pK0YVE2OVAM6vV8/n0hQHzMmtY+5qVtYMpBqjbAc7LaBaek3SWe2+
+	 Ju1VriP1uSE9g==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ens-lyon.org; s=dkim;
+	t=1786626015; bh=kzaD9UzPodCXgkww/e8Ygm7kqHXy/jA1wRppLTsEiQM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Hm7j4elDc4QEEssDYs1zmeKzsqMPUsl/nfJhtYndlt7PCb7W1I0rLP9XxMFp+MvKx
+	 6oeFvNvtwuMbjbCQXE7BqGoQCN4hxc0VneXygKwkKhlrFdROafbb0xVN3hFsOG2CXK
+	 7er4BQGHxrmxrfAlhp6k/abxJjoRVOwf6UAd8TZWZ8f8EDtvsdBCJlqRGYHjNMePGa
+	 QZiPNLVN75DKyq9jzaHi1xeYnh4ij/D4GUV272pf7lAQa0QEJ2aef+KNy//i4DFpJ3
+	 bX7gC8/lGKk68pK0YVE2OVAM6vV8/n0hQHzMmtY+5qVtYMpBqjbAc7LaBaek3SWe2+
+	 Ju1VriP1uSE9g==
+Date: Thu, 13 Aug 2026 15:00:14 +0200
+From: Samuel Thibault <samuel.thibault@ens-lyon.org>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: xen-devel@lists.xenproject.org, Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v2 0/5] stubdom: remove grub-pv
+Message-ID: <an2_3vPMvBFFtMW-@end>
+Mail-Followup-To: Samuel Thibault <samuel.thibault@ens-lyon.org>,
+	Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org,
+	Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+References: <20260720081833.4122182-1-jgross@suse.com>
+ <f8481120-00c5-411e-ad66-38ff550bdd47@suse.com>
+ <anz6XwsWjoNeHBxY@end>
+ <2f2cc724-92d8-476d-bd85-5529fb365389@suse.com>
 MIME-Version: 1.0
-References: <20260810103018.54564-1-frediano.ziglio@citrix.com>
- <20260810103018.54564-3-frediano.ziglio@citrix.com> <d41d0fa2-7273-4723-a5e0-6424d030cf0a@citrix.com>
- <1101df6e-bb36-4766-9b11-365d1043342b@suse.com> <c76d69db-f976-4c7a-b653-ab1f13854db3@citrix.com>
-In-Reply-To: <c76d69db-f976-4c7a-b653-ab1f13854db3@citrix.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Thu, 13 Aug 2026 13:56:25 +0100
-X-Gm-Features: AUfX_myvkcqCRqFABV5n8e6MqkECT5YiSTPHktqS8DcTG2KFnh2SXs156X5LrsY
-Message-ID: <CAHt6W4dBBKDeSTQnDzjmngU7An_ncJri_oBoTpChz_xQcfsrfQ@mail.gmail.com>
-Subject: Re: [PATCH v10 2/10] libs/guest: move batch_pfns into a separate structure
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Jan Beulich <jbeulich@suse.com>, Frediano Ziglio <frediano.ziglio@citrix.com>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
-	Teddy Astie <teddy.astie@vates.tech>, Anthony PERARD <anthony.perard@vates.tech>, 
-	Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-4011c0/1786625797-4B0D9CFC-1B8CCA08/0/0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <2f2cc724-92d8-476d-bd85-5529fb365389@suse.com>
+Organization: I am not organized
+X-purgate-ID: tlsNG-c1860d/1786626016-CFED287B-A28234F0/0/0
 X-purgate-type: clean
-X-purgate-size: 2333
+X-purgate-size: 5999
 
-On Thu, 13 Aug 2026 at 12:48, Andrew Cooper <andrew.cooper3@citrix.com> wrote:
->
-> On 13/08/2026 12:27 pm, Jan Beulich wrote:
-> > On 13.08.2026 13:08, Andrew Cooper wrote:
-> >> On 10/08/2026 11:30 am, Frediano Ziglio wrote:
-> >>> Preparation for a followup patch "libs/guest: allocate various migration
-> >>> arrays just once".
+Jan Beulich, le jeu. 13 août 2026 07:54:39 +0200, a ecrit:
+> On 13.08.2026 00:57, Samuel Thibault wrote:
+> > Juergen Gross, le mer. 12 août 2026 10:16:58 +0200, a ecrit:
+> >> Any feedback?
+> > 
+> > I'm fine with it: grub0.9x is really old, grub2 works alright in my use
+> > cases and is maintained.
+> 
+> Was this perhaps meant to be / include an Acked-by: ?
+
+Yes, it is an
+
+Acked-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
+
+Thanks
+
+> Jan
+> 
+> >> On 20.07.26 10:18, Juergen Gross wrote:
+> >>> The grub-pv stubdoms (32- and 64-bit) are disabled by default since
+> >>> several years now.
 > >>>
-> >>> Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
-> >>> Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
-> >> Coverity thinks this change has memory corruption.  I have to admit that
-> >> I'm not completely sure why it's noticed now; possibly because now it
-> >> can see the size of batch_pfns[] where previously it couldn't
-> > I had looked into that too, and I'm puzzled that ...
-> >
-> >> ** CID 1700057:       Memory - corruptions  (OVERRUN)
-> >> /tools/libs/guest/xg_sr_save.c: 284           in add_to_batch()
-> >> _____________________________________________________________________________________________
-> >> *** CID 1700057:         Memory - corruptions  (OVERRUN)
-> >> /tools/libs/guest/xg_sr_save.c: 284             in add_to_batch()
-> >> 278         int rc = 0;
-> >> 279
-> >> 280         if ( ctx->save.nr_batch_pfns == MAX_BATCH_SIZE )
-> >> 281             rc = flush_batch(ctx);
-> > ... the tool can't spot that flush_batch() resets ctx->save.nr_batch_pfns
-> > to 0 in the success case. And ...
-> >
-> >> 283         if ( rc == 0 )
-> > ... only the success case is what matters.
->
-> Hmm.  Both flush_batch() and write_batch() are static, so fully visible
-> to Coverity.
->
-> I guess this means that Coverity failed to figure out the properties of
-> write_batch(); it is a complicated function, even if it has become less
-> complicated recently.
->
-> I'm still advocating to remove the Valgrind logic rather than extend it
-> in patch 3, and that will remove flush_batch() which might simplify things.
->
-> ~Andrew
+> >>> Remove them in order to enable removing quite some more code from Xen.
+> >>> In case someone is really depending on grub-pv, they can easily take it
+> >>> from an older Xen build, as there is no Xen version dependency in
+> >>> grub-pv (a version built 3 years ago has been tested to still work
+> >>> with current 4.23 staging Xen).
+> >>>
+> >>> Note that after this series has been committed, some additional
+> >>> cleanup is possible by removing stubdom libpci and zlib support, but
+> >>> this will require a modification of Mini-OS depending on these patches.
+> >>>
+> >>> Changes in V2:
+> >>> - moved one hunk from patch 2 to patch 1
+> >>>
+> >>> Juergen Gross (5):
+> >>>    stubdom: remove support for grub-pv
+> >>>    stubdom: remove support for building in 32-bit mode
+> >>>    stubdom: remove building of libxenguest and libxenctrl
+> >>>    docs: remove stale stubdom entries from stubdom.txt
+> >>>    tools/libxenguest: remove Mini-OS specific parts
+> >>>
+> >>>   Makefile                                      |    6 -
+> >>>   config/Stubdom.mk.in                          |    3 -
+> >>>   docs/misc/stubdom.txt                         |   69 -
+> >>>   stubdom/.gitignore                            |    1 -
+> >>>   stubdom/Makefile                              |   69 +-
+> >>>   stubdom/configure                             |   65 -
+> >>>   stubdom/configure.ac                          |    2 -
+> >>>   stubdom/grub.patches/00cvs                    | 1022 -----
+> >>>   stubdom/grub.patches/10graphics.diff          | 2297 -----------
+> >>>   stubdom/grub.patches/11graphics-keyboard.diff |   13 -
+> >>>   stubdom/grub.patches/20print_func.diff        |   52 -
+> >>>   stubdom/grub.patches/30savedefault.diff       |  186 -
+> >>>   .../grub.patches/40ext3_256byte_inode.diff    |  114 -
+> >>>   stubdom/grub.patches/50fs_fulldisk.diff       |   72 -
+> >>>   stubdom/grub.patches/60ext4.diff              |  474 ---
+> >>>   stubdom/grub.patches/61btrfs.diff             | 3499 -----------------
+> >>>   stubdom/grub.patches/70compiler_warnings.diff |   45 -
+> >>>   stubdom/grub.patches/99minios                 | 1570 --------
+> >>>   stubdom/grub/Makefile                         |   88 -
+> >>>   stubdom/grub/boot-x86_32.S                    |  112 -
+> >>>   stubdom/grub/boot-x86_64.S                    |  108 -
+> >>>   stubdom/grub/config.h                         |   12 -
+> >>>   stubdom/grub/kexec.c                          |  434 --
+> >>>   stubdom/grub/mini-os.c                        |  771 ----
+> >>>   stubdom/grub/mini-os.h                        |    7 -
+> >>>   stubdom/grub/minios.cfg                       |    4 -
+> >>>   stubdom/grub/osdep.h                          |   30 -
+> >>>   tools/libs/guest/Makefile.common              |   15 -
+> >>>   tools/libs/guest/xg_dom_decompress_unsafe.c   |   48 -
+> >>>   tools/libs/guest/xg_dom_decompress_unsafe.h   |   28 -
+> >>>   .../guest/xg_dom_decompress_unsafe_bzip2.c    |   14 -
+> >>>   .../libs/guest/xg_dom_decompress_unsafe_lz4.c |   39 -
+> >>>   .../guest/xg_dom_decompress_unsafe_lzma.c     |   14 -
+> >>>   .../guest/xg_dom_decompress_unsafe_lzo1x.c    |   44 -
+> >>>   .../libs/guest/xg_dom_decompress_unsafe_xz.c  |   46 -
+> >>>   .../guest/xg_dom_decompress_unsafe_zstd.c     |   44 -
+> >>>   36 files changed, 1 insertion(+), 11416 deletions(-)
+> >>>   delete mode 100644 stubdom/grub.patches/00cvs
+> >>>   delete mode 100644 stubdom/grub.patches/10graphics.diff
+> >>>   delete mode 100644 stubdom/grub.patches/11graphics-keyboard.diff
+> >>>   delete mode 100644 stubdom/grub.patches/20print_func.diff
+> >>>   delete mode 100644 stubdom/grub.patches/30savedefault.diff
+> >>>   delete mode 100644 stubdom/grub.patches/40ext3_256byte_inode.diff
+> >>>   delete mode 100644 stubdom/grub.patches/50fs_fulldisk.diff
+> >>>   delete mode 100644 stubdom/grub.patches/60ext4.diff
+> >>>   delete mode 100644 stubdom/grub.patches/61btrfs.diff
+> >>>   delete mode 100644 stubdom/grub.patches/70compiler_warnings.diff
+> >>>   delete mode 100644 stubdom/grub.patches/99minios
+> >>>   delete mode 100644 stubdom/grub/Makefile
+> >>>   delete mode 100644 stubdom/grub/boot-x86_32.S
+> >>>   delete mode 100644 stubdom/grub/boot-x86_64.S
+> >>>   delete mode 100644 stubdom/grub/config.h
+> >>>   delete mode 100644 stubdom/grub/kexec.c
+> >>>   delete mode 100644 stubdom/grub/mini-os.c
+> >>>   delete mode 100644 stubdom/grub/mini-os.h
+> >>>   delete mode 100644 stubdom/grub/minios.cfg
+> >>>   delete mode 100644 stubdom/grub/osdep.h
+> >>>   delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe.c
+> >>>   delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe.h
+> >>>   delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe_bzip2.c
+> >>>   delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe_lz4.c
+> >>>   delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe_lzma.c
+> >>>   delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe_lzo1x.c
+> >>>   delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe_xz.c
+> >>>   delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe_zstd.c
+> >>>
+> >>
+> > 
+> > 
+> > 
+> > 
+> > 
+> > 
+> 
 
-Hi,
-   as said by Jan this is a false positive from Coverity.
-
-It's not guaranteed that Coverity will detect that it's not an issue
-if either valgrind macro is not called and/or flush_batch calling
-write_batch, I would either test the change or simply add an explicit
-Coverity comment.
-If we decide to remove support for valgrind then what about the
-valgrind patch on the series (4/10) ?
-
-Frediano
+-- 
+Samuel
+Fatal Error: Found [MS-Windows] System -> Repartitioning Disk for Linux...
+(By cbbrown@io.org, Christopher Browne)
 
