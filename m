@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3927C5CFDB
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 09:07:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1389553.1630229 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 148EDC5CFDB
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 09:25:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1389604.1630255 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuROj-0007Xh-Ad; Thu, 13 Aug 2026 09:06:49 +0000
+	id 1wuRgH-0003F1-3t; Thu, 13 Aug 2026 09:24:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1389553.1630229; Thu, 13 Aug 2026 09:06:49 +0000
+Received: by outflank-mailman (output) from mailman id 1389604.1630255; Thu, 13 Aug 2026 09:24:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuROj-0007Xa-7h; Thu, 13 Aug 2026 09:06:49 +0000
-Received: by outflank-mailman (input) for mailman id 1389553;
- Thu, 13 Aug 2026 09:06:48 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wuROh-0007XU-UT
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 09:06:48 +0000
+	id 1wuRgH-0003Eu-0M; Thu, 13 Aug 2026 09:24:57 +0000
+Received: by outflank-mailman (input) for mailman id 1389604;
+ Thu, 13 Aug 2026 09:24:56 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wuRgG-0003Eo-6X
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 09:24:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wuROh-00F57j-5L
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 11:06:47 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wuRgF-008t9D-JX
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 11:24:55 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19ffa5fb46a000c4f3@swg.vates.tech>)
- id 6a7d891d-8faa-0a2a0a5109dd-0a2a4501a408-42
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 11:06:46 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19ffa7047d4000c4f3@swg.vates.tech>)
+ id 6a7d8d62-8faa-0a2a0a5109dd-0a2a45089db0-14
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 11:24:55 +0200
 Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19ffa5fb46a000c4f3@swg.vates.tech>)
- id 6a7d8926-5984-0a2a45010019-b9ff1c2383fb-3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 11:06:46 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19ffa7047d4000c4f3@swg.vates.tech>)
+ id 6a7d8d67-f659-0a2a45080019-b9ff1c23a7c3-3
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 11:24:55 +0200
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
  by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19ffa5fb46a000c4f3.007 for <xen-devel@lists.xenproject.org>
+ 19ffa7047d4000c4f3.007 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 13 Aug 2026 09:06:43 +0000
+ Thu, 13 Aug 2026 09:24:50 +0000
 Received: from [192.168.1.46] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
  [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id 284178337E;
- Thu, 13 Aug 2026 11:06:43 +0200 (CEST)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 82038820C4;
+ Thu, 13 Aug 2026 11:24:49 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,21 +58,21 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=mb3aF9fsNapQk9bhHnsbQAzh0C1Cb0F9INHpu5k1y+8=;
+ q=dns/txt; s=selector1; bh=qb0xSwzsCVyssFu1XzN4sx3kGU/TAgxBEQvr3YS1vxk=;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=ISOzIdlsriY96lBqx+dop/NlaZvXiVQXRCxlpfXDpdci9FEju4P0UlrsTsnlxPQY6x5V4FjFy
- bS0WIp0JUzCgHDzMyRAzknJ2wSbpEyhRI6/F7FBeq5oWSdtXDyLrAdnvF8CRwcFn+QkvllDdxRb
- 23b6nEJQ9kO+ARAKKKHp+fc7lM32SHkPB7NptwCv3AWuzH9ZzSWHscvfL8OHaXPaOu3txFTmuXj
- I0ROuMXYhLxK2AbutmSRZs2FcCIkO5BW0GFDmoqNHbyjepQg+aAjA3RyBrZIfREIL5rpU2qNNpi
- R0rIzbIsZrOJK6yJmi5wWtGpFS04jsY5W9QCQFovI5ug==
-X-Zone-Loop: 1e03d96a5c2fdae23f3e2529dbb670ce0e95b4a1190c
+ b=mkMDaOe3/GpHPXgjxZdJ/VBEsfptyU/xWq3jysmz1t48GjXb/5C0mKmyqda8J/3yqj9Aa3kNS
+ e2iYbYMheKmm/i1GLFnSJmxSpWMoIDjw/Zy8pUfHk4xy4s7W0oOOZven30aSqbrE5j/+9bDRcDh
+ WRcpsH/N/5YTISRcgCk176hypc2JcgTadgdeWk2iXJojwlt5aVjDpwsM9+rKRtWITQvxxXlgo8o
+ eqTr+SPqKLeEWNMjrw7T/AenWxGWjl3tTCvVIpC/41ojiX9/E9eHoaUlBKnUZPnY6EG1FlgZjXN
+ 02Nh4uFZ2EOJTHfUs7FcwjjEwmvoIhfUf7GrnZAmGJeA==
+X-Zone-Loop: 22d62b376a1622a04d04648e5511686d44d1911a9985
 x-campaign-type: default
-x-transaction-id: d34a51b2-cb96-4f74-b62a-867821cf71aa
-x-swg-uid: 01-303e70d8-1554-45bc-95df-076fd19a18e0
+x-transaction-id: 87e009f2-676b-43b5-be56-f2f9ac5d7ef7
+x-swg-uid: 01-a8324a37-b3ae-498b-9797-df6497246a0e
 X-Mailer: Sweego
 Message-ID:
- <1786612004.8631fc262581453bbf619ec5b2062170.19ffa5fb46a000c4f3@vates.tech>
-x-swg-bid: 1786612004.8631fc262581453bbf619ec5b2062170.19ffa5fb46a000c4f3
+ <1786613090.8631fc262581453bbf619ec5b2062170.19ffa7047d4000c4f3@vates.tech>
+x-swg-bid: 1786613090.8631fc262581453bbf619ec5b2062170.19ffa7047d4000c4f3
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
@@ -80,7 +80,7 @@ X-Originating-IP: [37.26.189.201]
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v1 06/17] xen/riscv: map IMSIC interrupt file for vCPUs
+Subject: Re: [PATCH v1 07/17] xen/riscv: introduce vCPU AIA initialization
 From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: xen-devel@lists.xenproject.org, 
@@ -94,128 +94,90 @@ Cc: xen-devel@lists.xenproject.org,
  Julien Grall <julien@xen.org>, 
  =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
  Stefano Stabellini <sstabellini@kernel.org>
-In-Reply-To: <254f470ae2e2b2a4affa7c405be8c07a7d8b300e.1784560663.git.oleksii.kurochko@gmail.com>
+In-Reply-To: <b3aca8278dfd70bf6ce888bfcb0a3fbc32bb4971.1784560663.git.oleksii.kurochko@gmail.com>
 References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
- <254f470ae2e2b2a4affa7c405be8c07a7d8b300e.1784560663.git.oleksii.kurochko@gmail.com>
-Date: Thu, 13 Aug 2026 11:06:35 +0200
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1786612003; l=4328;
+ <b3aca8278dfd70bf6ce888bfcb0a3fbc32bb4971.1784560663.git.oleksii.kurochko@gmail.com>
+Date: Thu, 13 Aug 2026 11:24:43 +0200
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786613089; l=2700;
  i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
- bh=Apr05Wrtqcj294z4XLIqFbDmQ7hgfz39PF8WMsRa88o=;
- b=gTTGGPQIu/adbxjVaQ+MtX4l4HndJjq02GrfWB2cj3pJsuAcD8dtlJZ+UbCpsIud5lxxTPLqq
- Waup7+2kJJBD/djfI9cE0HrfCd5pvOa/eW6XeWqLj2+1qI6yYU0Ssfp
+ bh=ODzn7JwdxQAl0iItLtBLmdVGm38Bg1JjHeQObX6i2pk=;
+ b=aC1FrFTxPzQn0vf7KVlfEAN0jWA+pwJ/nDRItUpuDuFausReGFrGS4SptF19+S88RiIvEcD0L
+ KAyfR6EDUapCz1/fUCat7zf6mj2gMAnWteDoOuEi5WEBTKWWDM4d3hW
 X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
  pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1786612003356
-X-purgate-ID: tlsNG-d62444/1786612006-1E664757-52F39B0D/10/73395122804
+X-Bm-Transport-Timestamp: 1786613089840
+X-purgate-ID: tlsNG-c1860d/1786613095-D634587B-27D0D98D/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 4328
+X-purgate-size: 2700
 
-> A guest running in VS-mode expects its own IMSIC S-file at offset 0 of its
-> guest-physical IMSIC block. Physically, the guest-file (G-file) assigned to
-> this vCPU lives at a hart-relative offset given by guest_file_id (assigned
-> via the vGEIN allocator). Therefore, imsic_map_guest_file() uses stage-2
-> translation to redirect the guest's fixed per-vCPU GPA page (offset 0) to
-> the specific physical guest-file page.
+> Introduce vcpu_aia_init() to initialize the AIA-related state needed
+> for a vCPU to have a working guest interrupt file.
+> 
+> A guest (VS) interrupt file must be mapped to one of a pCPU's
+> hardware interrupt files (if they exist), so the pCPU a vCPU will actually
+> run on needs to be known first. arch_vcpu_create() is therefore not a
+> suitable place to call vcpu_aia_init(), since the pCPU assigned to a
+> vCPU can still change before it is first scheduled. To avoid
+> reassigning the VS interrupt file id and remapping it to a different
+> pCPU's hardware interrupt file, vcpu_aia_init() will instead be
+> called from a later point in the scheduling path (e.g.
+> continue_to_new_vcpu()), to be introduced in a follow-up patch. Since
+> it will end up being called from a non-__init context, it is not
+> itself marked __init.
+
+
+> 
+> Introduce imsic_update_state() to update a vCPU's guest IMSIC state
+> (the guest interrupt file id and the pCPU whose hardware interrupt
+> file it is mapped to) as a single consistent unit. This state can be
+> read concurrently, e.g. by a future helper that checks whether a
+> vCPU has a pending IMSIC interrupt, though no such consumer exists
+> yet at this stage - so it is protected by a lock.
 > 
 > Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-
-
 >
-> diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
-> index ffce77209c..c5ae74e456 100644
-> --- a/xen/arch/riscv/imsic.c
-> +++ b/xen/arch/riscv/imsic.c
-> @@ -25,7 +25,9 @@
->  #include <xen/spinlock.h>
->  #include <xen/xvmalloc.h>
+> diff --git a/xen/arch/riscv/aia.c b/xen/arch/riscv/aia.c
+> index 4f7f46f58f..ed19600d46 100644
+> --- a/xen/arch/riscv/aia.c
+> +++ b/xen/arch/riscv/aia.c
+> @@ -14,6 +14,7 @@
+>  #include <asm/cpufeature.h>
+>  #include <asm/csr.h>
+>  #include <asm/current.h>
+> +#include <asm/imsic.h>
 >  
-> +#include <asm/aia.h>
->  #include <asm/imsic.h>
-> +#include <asm/p2m.h>
->  
->  #define IMSIC_HART_SIZE(guest_bits) (BIT(guest_bits, U) * IMSIC_MMIO_PAGE_SZ)
->  
-> @@ -342,6 +344,67 @@ static int __init imsic_parse_node(const struct dt_device_node *node,
->      return 0;
+>  struct vgein_ctrl {
+>      unsigned long bmp;
+> @@ -36,6 +37,35 @@ bool aia_usable(void)
+>      return _aia_usable;
 >  }
 >  
-> +/*
-> + * Map the physical IMSIC guest interrupt file (G-file) assigned to vCPU v
-Nit: What is this `v`?
-> + * into the domain's stage-2 guest-physical address space.
-> + *
-> + * In the machine's physical address space (SPA), each hart's IMSIC
-> + * supervisor-level file (S-file) is located at offset 0 of its address block,
-> + * followed contiguously by GEILEN guest files at offsets of 1, 2, ..., N pages.
-> + *
-> + * Because a guest OS running in VS-mode expects its own supervisor-level
-> + * interrupt file to be at offset 0 of its guest-physical IMSIC block, the
-> + * hypervisor must use stage-2 address translation to map the vCPU's
-> + * guest-physical "supervisor" page (GPA offset 0) to the specific
-> + * physical guest file page (SPA offset guest_file_id) on the physical hart.
-> + *
-> + * Xen pins each vCPU to a pCPU (v->processor) and assigns it a physical
-
-
-> + * guest file index (guest_file_id) from the vGEIN allocator. A guest_file_id
-> + * of 0 indicates that no hardware guest file is selected (matching the
-> + * architectural behavior where vGEIN = 0 in the hstatus CSR selects no
-> + * guest external interrupt source), requiring the VS-file to be emulated
-> + * in software.
-> + *
-> + * The base guest-physical address advertised to the guest in the device
-> + * tree matches offset 0 of the vCPU's virtual IMSIC block. Stage-2
-> + * translation ensures that guest supervisor accesses to this page are
-> + * transparently routed to the real hardware VS-file granted to it on
-> + * the current pCPU.
-> + */
-> +int imsic_map_guest_file(struct vcpu *v, unsigned int vsfile_id)
+> +void vcpu_aia_init(struct vcpu *v)
 > +{
-> +    int res = 0;
-> +    struct domain *d = v->domain;
-> +    unsigned int cpu = v->processor;
-> +    vaddr_t gaddr = imsic_cfg.base_addr + (IMSIC_MMIO_PAGE_SZ * v->vcpu_id);
-
-The variable holds a guest-physical address, so vaddr_t is the wrong
-type should be either paddr_t or gaddr_t.
-
-> +    paddr_t paddr;
-> +    unsigned long guest_stride;
+> +    unsigned int new_vsfile_id;
+> +    int rc;
 > +
-> +    /* Nothing to map in the case of sw interrupt file. */
-
-There is no software interrupt file implementation in this series, patch 11
-turns the non-MSI path into a BUG_ON(). So "vsfile_id == 0" today means "this
-vCPU gets no external interrupts at all and nothing tells anybody". Worth
-saying so plainly here rather than implying a fallback exists.
-
-> +    if ( !vsfile_id )
-> +        return res;
+> +    if ( !aia_usable() )
+> +        return;
 > +
-> +    guest_stride = vsfile_id * IMSIC_MMIO_PAGE_SZ;
-
-
+> +    new_vsfile_id = vgein_assign(v);
 > +
-> +    paddr = imsic_cfg.msi[cpu].base_addr + imsic_cfg.msi[cpu].offset +
-> +            guest_stride;
+> +    /*
+> +     * vgein_assign() returns 0 when no free h/w guest interrupt file is
+> +     * available (including GEILEN == 0); imsic_map_guest_file() maps nothing
+> +     * in that case.
+> +     */
+> +    rc = imsic_map_guest_file(v, new_vsfile_id);
+> +    if ( rc )
+> +    {
+> +        /* Can't continue w/o correctly mapped IMSIC interrupt file */
+> +        domain_crash(v->domain);
 
-
-> +
-> +#ifdef IMSIC_DEBUG
-
-> +    printk("%s: %pv: ga(%#lx) -> pa(%#lx), cpu(%#x), guest_file_id(%d) "
-> +           "base_addr(%#lx) offset(%#lx)\n", __func__, v, gaddr, paddr, cpu,
-> +           vsfile_id, imsic_cfg.msi[cpu].base_addr, imsic_cfg.msi[cpu].offset);
-> +#endif
-> +
-> +    res = map_regions_p2mt(d, gaddr_to_gfn(gaddr),
-> +                           PFN_DOWN(IMSIC_MMIO_PAGE_SZ), maddr_to_mfn(paddr),
-> +                           arch_dt_passthrough_p2m_type());
-> +    if ( res )
-> +        printk("%s: Failed to map %#lx to the guest at %#lx\n",
-
-Maybe a use of dprintk() would be more appropriate?
+The vgein id assigned a few lines up is not released here. The domain is dying
+anyway, but the guest interrupt file stays marked in use on that pCPU forever,
+since nothing else ever calls vgein_release(). A vgein_release(v,
+new_vsfile_id) before the domain_crash() would fix it.
 
 -- 
 Baptiste Le Duc <baptiste.le-duc@vates.tech>
