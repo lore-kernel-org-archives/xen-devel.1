@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B617C5CFEB
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 15:07:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1390182.1630711 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 298F8C5B572
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 15:29:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1390210.1630721 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuX1q-0001Sd-Bx; Thu, 13 Aug 2026 15:07:34 +0000
+	id 1wuXMx-00062t-02; Thu, 13 Aug 2026 15:29:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1390182.1630711; Thu, 13 Aug 2026 15:07:34 +0000
+Received: by outflank-mailman (output) from mailman id 1390210.1630721; Thu, 13 Aug 2026 15:29:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuX1q-0001SW-96; Thu, 13 Aug 2026 15:07:34 +0000
-Received: by outflank-mailman (input) for mailman id 1390182;
- Thu, 13 Aug 2026 15:07:32 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wuXMw-00062m-SG; Thu, 13 Aug 2026 15:29:22 +0000
+Received: by outflank-mailman (input) for mailman id 1390210;
+ Thu, 13 Aug 2026 15:29:21 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wuX1o-0001SP-Ra
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 15:07:32 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wuXMv-00062g-Iv
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 15:29:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wuX1o-003Z4Q-7t
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 17:07:32 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wuXMu-0072YA-SQ
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 17:29:20 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7ddda2-bab6-0a2a0a5309dd-0a2a450bcfb4-46
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 17:07:32 +0200
-Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a7de2b1-bab6-0a2a0a5309dd-0a2a4504ca34-42
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 17:29:20 +0200
+Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7dddb3-b7e8-0a2a450b0019-d155802bb5d1-3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 17:07:32 +0200
-Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-49557167508so205735e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 08:07:32 -0700 (PDT)
+ id 6a7de2d0-b57f-0a2a45040019-d155dd2be4a6-3
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 17:29:20 +0200
+Received: by mail-wr1-f43.google.com with SMTP id
+ ffacd0b85a97d-47f703a9d05so1574920f8f.0
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 08:29:20 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499820c2897sm134876285e9.0.2026.08.13.08.07.30
+ ffacd0b85a97d-4815f20051esm165872f8f.7.2026.08.13.08.29.18
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Aug 2026 08:07:30 -0700 (PDT)
+ Thu, 13 Aug 2026 08:29:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,54 +55,55 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786633651; x=1787238451; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1786634960; x=1787239760; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=wR38hHyS68/61PMDdPsBtmYQNagF/8h/0Ls5CFsUM7g=;
-        b=e/mTLoVRqpHcJo1GLkqB7serJHh7EQgQLF8N2Z9qekyug4SItBJFXykS5kHOJ5Cm/t
-         rlXqgNFuIQHGdrK+aXBwXodrgJSLP37Q7mjHUCD8Rfpw7Q7VPbRn3tnE/WhXv1EyIxKV
-         sy8YjvKV3yu+kPRiT7ZWnqkA5RmCqxZ7FFHb2rtVgw5uN1fj5/uSZGHojeJusLkGfHYo
-         dfTpqTx9eys5DCIVCyy32C8hhD7GVbTlDALwQVjTWZTRrz0MKR4PbqO01DXNWhqg8kLw
-         5P3XAsOSb4A0z17OBNva7tR/LKmWMLl660bcpJsDMoKF9SC21rxzVmbmOPUfi3bGYHZA
-         DqLg==
+        bh=hCHZX0GXymXgC2X3W51AHc2x34jZNDZpsT8/tP8znWs=;
+        b=KQlHCoe4rC8dNFX3zxfj7AwMEcYaQ05/z7qTbg5pVfaXN1xiV+BFIy2WbOm5zbYNU2
+         ResNKCm2ZcEZYydzL7rxeL2FMkSU0zpmdV7ZYV125u3QLjBb8hq18kQ3ulSl7VVhvKGX
+         N+dH+uaF1a54AixbyUwoh11G8lUYafplLE5gxLjTf696wdzQ8aX5mYaIZIz7nRShzSkd
+         4XgHfsmI2bSxDa+9Ixg6aaacloC7ahAfb0eMUOx7bHA2t/d7jkCTk7cSahNM0+Y59N/S
+         3AZl0kTvTO5nyTC83rfYCJU165stPNIAZ3iwLoxrqjNPsGAzji3iXLjD/rtF24Na0NJJ
+         zRyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786633651; x=1787238451;
+        d=1e100.net; s=20251104; t=1786634960; x=1787239760;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=wR38hHyS68/61PMDdPsBtmYQNagF/8h/0Ls5CFsUM7g=;
-        b=Y7j23ZXcNH5BvSIDVljiT1hswQJwYfyCrrZXnCFF2g+ckxHtsb4vuVSAC2JCgfHKlX
-         xuv7gVCah0YoWyHYyclGz8ZeVxNR/qJnyaOF6ZW6+DJao8DUkIdRWjYBOFNZB4UxeqcK
-         aU62QtkJnSj8kNIqBbAMdvpqGEcUdHYbocJuIjiGcRuFGGwHTd1duSuUsbHjP/DlbLYP
-         KJX5svgMA2FmCH1SZ/Q4j1ZIN7j2JwRSbPJvcNlXAHhFMk/9gaSF55NehrWdkG/qhZ1O
-         l2gphrYPIrFqxl8cwYWWNUvM1vNyVQEjaZHkDRjLWAIBUmrPKeCsIbMDHhHCpoBKnGDZ
-         EXGQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrsyfA6Pd53B5mvmAbnFbEFF2DOjQj3Cme0cNmAqdYq3Scf5sw89v5Lpc0JKf00KhkX8E7/sqHmH18=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx010yliwkdoaRYV2/CZnRI7NMetnqZx3tkC+jFKJei0LF1BpFo
-	nZuTT5uI5s+x7R+HgKJCLMWJsXo75XrjZ7F2bofUsprgLcBzQB0LV4xgxW9jjIBV+g==
-X-Gm-Gg: AR+sD10VhXXxoUM9Rti5KaUf96d8JlRA3HQI7T8VniW6l/gnOXkjIOy2VgsT2MchvIe
-	BNzPZ6b9Xm73HxVnQtNyhqyzixVnobYs4j1sFevwh0/OOlAFkWelGAi2q3+7iJSUhmZhm1KYbHJ
-	pNr/ePJQ3zdO9bl9Dbice6bul0oxHPoxwJSFX73AeqfqB2hT+jmT3OVGJMSZiWNjdQl1Dcw2Qlv
-	fmt+TxPAzPXs76v5Jde+ZUTJbltnJQYqaYpJ3JIa+aDtl4RxJ4iTkQi1yEVR+UoPi9Oq+GgdyJV
-	8quzXtYSR+QiYZRLzDf0PkB3CQ/UkhczVnaW1OlycTdknpj1CbtHnTKiJNvT/sZNL7wAYSMgKmj
-	JZcs1YdoquUrQxFjrp/27yR8ajgRBc1+trgTM6fHpEO8Qg+LGDzR+h4Ai+OeOpjFohsqK/DJlfD
-	kqTnNwTkUZawMyJrXCK7+Xorr4VLd0g43OSlNeH7LDwY2e6LHtYhZKHVH3vu8hLYR6QVgmwIJ6w
-	KaGJvMI+GxU4NKHXqcmPF3hqvc3tUypIVJyv4NteCpVEV80YiZcpK6phg==
-X-Received: by 2002:a05:600c:1f91:b0:496:bbce:fc with SMTP id 5b1f17b1804b1-499821f0030mr67756155e9.12.1786633651506;
-        Thu, 13 Aug 2026 08:07:31 -0700 (PDT)
-Message-ID: <90c76782-c44f-4f0e-a187-0625373c8d2a@suse.com>
-Date: Thu, 13 Aug 2026 17:07:30 +0200
+        bh=hCHZX0GXymXgC2X3W51AHc2x34jZNDZpsT8/tP8znWs=;
+        b=TOWCFRo6IpeiBY5gqHDFq2H59CKW/crnr+DDgA6tQbc0FOEJcWQ67GlD6KddLl0qsb
+         5axXLJNNIIfUwj3YfUR/b2cKfyy6z0M58+HraKWsHA2YFVDC0x8BdWCFJe+FAg+6gxnM
+         u50fLPzh7FXVb135qQwjHFONEFXWaGr1/mpPQ6AEvljjoEbXi6OJZOgqhFSFp9NT77tD
+         gYmkwnaqGML9TAsM56XVmQb+JXhsvc7gSBXvullHSnIi83LlVCeatGhUejiqA/1XyxZG
+         TprAhBBMTec/mBxuqb1j0sJ+w+o7lwFpDYL+ao76sphVVuFXoTwbRHdMmggAlWBrPKvv
+         bYTQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rqb+5pmBSYmffv9ZuqYFm39IWZY6uvYnCQjq/4sNJGSp0Qvg0WzGnmWMTL19Lgp3yMQOHBb3t+48rM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxfgJaFso9ZDVNqqwp1VCdo3SXkCxLdLN8LjsqotUkLPmqaeaId
+	i6VZJXGCsq7IPkxU7GmY+YrN3uxv+/xakxkrxND1Z7IHYf2sqT4F9XdNxbAclfPJ8g==
+X-Gm-Gg: AR+sD11EYYblMaVEjQdl+5ItKtAYkNoOs599unpmnAavCQx6E94LuxSeFWbwfTAQtWv
+	8F2aKMEkVhLFZ8TmhDpGH/ZJN6DZdqpCaDPnofAXQRqMjKQrhXDMBA3D/XRnK5JlBHsFBh+QIk3
+	AXFyS7+CB6Sa9ivAJRtzn9tfVfErCFJmfPHFhfSYgA5H79aFyIjOWeRmg7iYKWvYQ6wfmQt7DEZ
+	DEb58PIXrzZzCAmCxs2YlSHicsVjpq9uxhGbsZI4iNNWFYSu1Sby0W9sm4UiLjjruu80qvAUfSv
+	o5jq9vB50Pk5/8Rlt/CrxmnOa+aArmyRrP5/WZ8JbS5ctVvyT39Mz+U152U8uiT5bPOsbSGEYGx
+	hVEeWyzOjqiteg+2xqIsKhU0AycYwMWMEAPq6sz4bqMQ9HHiB/y4PcCCEP3TAVSK1Ub0n3BHBxO
+	0GlruE8jDyP7huTHXJFOoCMFBJqvllCGUn6s6qjB4Uiw4qBVzVftIxCoTQ+4ZTcSq8F4Doplwxh
+	nlltQkaVnVsZnLcGaca1iNuzBrNJbR1Nntah/3NAQSCe+mV6D/Y
+X-Received: by 2002:a05:6000:1363:b0:47f:8fc8:a8b1 with SMTP id ffacd0b85a97d-4815a0223c2mr8378512f8f.14.1786634960237;
+        Thu, 13 Aug 2026 08:29:20 -0700 (PDT)
+Message-ID: <73e2a6fd-8cd9-4dc1-9a83-e48baec6c13e@suse.com>
+Date: Thu, 13 Aug 2026 17:29:18 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/cpu: Rewrite initialize_cpu_data() for clarity
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20260813145349.1656699-1-andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v1] x86/nSVM: Expose the FlushByASID CPU Capability to L1
+ guests
+To: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+Cc: andrew.cooper3@citrix.com, jason.andryuk@amd.com, teddy.astie@vates.tech,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ xen-devel@lists.xenproject.org
+References: <05107cae0af8ea9cd66c133200296d3f667c8295.1786630293.git.abdelkareem.abdelsaamad@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -128,28 +129,46 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260813145349.1656699-1-andrew.cooper3@citrix.com>
+In-Reply-To: <05107cae0af8ea9cd66c133200296d3f667c8295.1786630293.git.abdelkareem.abdelsaamad@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1786633652-1BED69EA-52BF1EB4/0/0
+X-purgate-ID: tlsNG-ebf023/1786634960-C38C1B50-09A1CA75/0/0
 X-purgate-type: clean
-X-purgate-size: 638
+X-purgate-size: 1676
 
-On 13.08.2026 16:53, Andrew Cooper wrote:
-> Without passing opinion on the behaviour of this function, it is deceptive to
-> read (I've twice now mistaken it for resetting boot_cpu_data), and
-> inefficient.
-> 
-> Instead of having a 256 byte object on the stack and a double copy, copy
-> boot_cpu_data directly, then reset parts of cpu_data[cpu] in place.  Leave
-> some comments behind explaining what's happening.
-> 
-> No functional change.
-> 
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+On 13.08.2026 16:56, Abdelkareem Abdelsaamad wrote:
+> On the AMD platforms, the Xen hypervisor requires the FlushByASID CPU
+> capability to support HVM nested virtualization (see start_nested_svm).
+> Consequently, the L1 hypervisor must report FlushByASID CPU capability support
+> when intercepting CPUID instruction for the CPU feature from the L2 guest to
+> support nested virtualization levels beyond L1. Extend the exposed HVM CPU
+> policy to surface this CPU feature support for the guests.
 
-While I think it was good enough before, I also don't mind the change:
-Acked-by: Jan Beulich <jbeulich@suse.com>
+While the change makes sense, I have to admit that I consider it a stretch
+to justify changes by multi-level nesting, when a single level of nesting
+is in need of a lot of work to actually behave sensibly. Further, "to
+support nested virtualization levels beyond L1" looks pretty Xen-centric:
+Other hypervisors may permit this without the feature.
+
+> While at it remove the dangling `exitinfo1 = ns_vmcb->exitinfo1;` assignment
+> inside the nested exit handling of svm_vmexit_handler().
+
+Unrelated adjustments to somewhat nearby or related code are generally
+okay, but here you're touching a different file and entirely unrelated
+code. I think the two changes want splitting.
+
+> Signed-off-by: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+> ---
+> Testing:
+>  - Using a locally developed XTF test to call cpuid_edx(0x8000000aU);
+>    - without the change, EDX returns 0x4AB (the FlushByASID 6th bit is not
+>      set).
+>    - with the change, EDX returns 0x4EB (the FlushByASID 6th bit set).
+
+And the CPUID test that XTF has wasn't suitable?
+
+Finally: Can you please drop Roger's old email address that you still
+had on Cc?
 
 Jan
 
