@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B797C5AC67
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 08:13:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1389510.1630202 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BC5EC5CFDB
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 08:40:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1389524.1630212 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuQYU-0007X9-2j; Thu, 13 Aug 2026 08:12:50 +0000
+	id 1wuQz6-0003Vf-4a; Thu, 13 Aug 2026 08:40:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1389510.1630202; Thu, 13 Aug 2026 08:12:50 +0000
+Received: by outflank-mailman (output) from mailman id 1389524.1630212; Thu, 13 Aug 2026 08:40:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuQYT-0007X2-W6; Thu, 13 Aug 2026 08:12:49 +0000
-Received: by outflank-mailman (input) for mailman id 1389510;
- Thu, 13 Aug 2026 08:12:49 +0000
+	id 1wuQz6-0003VY-12; Thu, 13 Aug 2026 08:40:20 +0000
+Received: by outflank-mailman (input) for mailman id 1389524;
+ Thu, 13 Aug 2026 08:40:18 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wuQYT-0007Wv-6U
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 08:12:49 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wuQz4-0003VP-EP
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 08:40:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wuQYS-0006ec-4s
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 10:12:48 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wuQz3-005fwJ-RS
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 10:40:17 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7d7c6c-2eae-0a2a0a5409dd-0a2a450c93f0-46
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 10:12:47 +0200
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a7d82ef-e002-0a2a0a5209dd-0a2a4506a920-6
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 10:40:17 +0200
+Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7d7c7f-f479-0a2a450c0019-d1558035d1bb-3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 10:12:47 +0200
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-4995b0343c1so4111025e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 01:12:47 -0700 (PDT)
+ id 6a7d82f1-195a-0a2a45060019-d155802cb8eb-3
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 10:40:17 +0200
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-496bb7cdf51so22040855e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 01:40:17 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49982130365sm45347505e9.7.2026.08.13.01.12.46
+ ffacd0b85a97d-4815a5612b8sm3760695f8f.1.2026.08.13.01.40.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Aug 2026 01:12:46 -0700 (PDT)
+ Thu, 13 Aug 2026 01:40:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,54 +55,55 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786608767; x=1787213567; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1786610417; x=1787215217; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=3QPl/G8phE1E3cAg+rCD1JXfC2gmx306uakT5JXiUhQ=;
-        b=YZBavGGw3fUjw/A1RpdYHuYlbIfQQe5TJlY5037ldI57LfOYhHdaX7krRp+YgborvK
-         jE9D23Katmtn/c4gv64Zo4F/ovJ1UIGL7TVlM+zaxCzvLs2p5r3QWlBIOJww4eSpVCh/
-         WsV7LkpbLIpigNCJzDnNM68zFJTM+Ws7/x53OnEhlTHFl9wdy5PM/9XhokIuffa/J0VY
-         YfV/oEEoy21apWeXz9sl6tKIRqElIeP4OANwIn16yOTdyn9D0IMZNJUTbBk1+4MM99tF
-         Lxwfr0QUD04iLal7+INX3evD0E9fvj7klkf03Sb8TNRcOAMFl7C+kMkd1vZS691yD1WD
-         tTJA==
+        bh=ioN0GcUgDupZWMnqex7h46Dzd0XGzkRzLaOePnGqE5k=;
+        b=XdO5w/QmFHtWZ9Pk171nEx9FVdIEvaJd4NkZW+Pic3DnfXiRuPPO85Tp754s7s2brq
+         r4a4DEskDJ9W7035HiqVDjiCySU4yEMLXY/MRg24MyucG2iHD4Z2/skG5hvGD7P/DK2+
+         d9r00iOv5pSh/fVD/wfjV15yBoj4QnNytogHrKPU+KrsEFUqzMzwJk5NXcA9aQ8rNIE4
+         cgUGARzSMT0MXtQfoQsTkQigU0a2Z6wihi9cBlveOq4xh+rR/EC+meLfCxJhNkjV/U6B
+         oNtQMZW49sUBwVbANgjSszX3kiu6ibYPeFGM3pkpkcg+/xnqmNVjs8IVI4hyTx5QVT4J
+         DaZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786608767; x=1787213567;
+        d=1e100.net; s=20251104; t=1786610417; x=1787215217;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=3QPl/G8phE1E3cAg+rCD1JXfC2gmx306uakT5JXiUhQ=;
-        b=bua1G+WYUZ4RPBwx4WwU12hi9XL69lJU469LXN2Dm3EDq7KP2vmisBbFsI/uiyRFf0
-         OQG+GLswYZG0fnIpRrGFHyjTz7lsJ+jTUnVA9hXgAGAePDodAnWZlzLIAKdtxGFwtRCk
-         6xqFvUQ1LAVtqp9urNNEUHBi6/naR3LHrzGrw3ou/oG27c+8HggRGHlZyWhiIIxHDZ0g
-         aQCJNqFw2dwin9rX52ODRt309wd70Glndml3IPZKz3J1/lsht928E/TmRXD1DG74BD/n
-         8UjVixXVJ25uAbuJcHAcU83eBDAmIC3HhmnbcuuR0ZJUo476bhillNYPplmrRbauyoKT
-         Ro0w==
-X-Forwarded-Encrypted: i=1; AHgh+RrgVhfSCdoszXLMqMA6000Xr+fPpCUvcWxtT52hEV7K0F5ei8zSwvsYABJ6FxEsJBoJH4D1V/OMpRo=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyWc6eiGk5Di0+2rhfu9Ko3MSSJnMf/JDx3TVGYpwk1dV34QCHL
-	h/Zcp1tk1oggmRxgXsmZq93znF4pYV8Cj1Z7/aRBN+8hI3d/HI3EPRh9Yu2w7cqp+g==
-X-Gm-Gg: AR+sD11J7XlRLeeu9Db9I9G2UsclHCBjHbHihLYXe04YDzYHwHIpqEMiqroGE03Fgde
-	NVGHvKf4dGSSquioaf2w6Y+cs7AI8Hf8tdzeZLIAERHYklsQjHPbOmo1xn0zt7u01Ma/qOo7cdb
-	L3V5PQa+LRrSLOIkfwnnf0hpFmEzFtUHcwYEnpwLtOvnD+LIGOekxCNMz+fHu/a/bR7p9n/U/Lg
-	FzPxZ63iTwRyhZODfIKHkkBZAuRWJ/uh0E5kUxWsMfa7LBjFral/kUnOxLXrzm0PAOYqjo6mH7a
-	5b22cp3KPpdqWRiohhkaT0exubNijMC81hy2q8MkrEqUbzrH6ZloJwGd4bvslNZfpYeRnuozCTZ
-	GxUYNunuf6KFRfOREdr++RchZtsYuPprWkE3P+/KCu4sqvmHKl2kRI94PgFVCem14Y3YwIN4QWs
-	y41irueDTXSx9ogeKnWHnkkdBghdwaHv0s5OPjIsINVWIgOrRyPhbc3lPIGPu4QOBHHT5agf17H
-	2ZFZgLh4v28BHJ1mYJLMBJYpC5MMYLjxKv2fk5WRm9l35lqDfoL
-X-Received: by 2002:a05:600c:8284:b0:499:6a92:fff1 with SMTP id 5b1f17b1804b1-499821989abmr48826045e9.18.1786608766987;
-        Thu, 13 Aug 2026 01:12:46 -0700 (PDT)
-Message-ID: <affe36be-1638-4ff1-bbc1-d970f3547abe@suse.com>
-Date: Thu, 13 Aug 2026 10:12:45 +0200
+        bh=ioN0GcUgDupZWMnqex7h46Dzd0XGzkRzLaOePnGqE5k=;
+        b=eLBkW31yQZki/apVTa2gQscBpuZ4FCwuealOKTNkEGmjFQ3zr16bf8UfN712tsIBZF
+         WqSuZBIcua0n5LfIelHUnRvbbwgI79dReXerQMQnGxH9qyXMf29uKHxJCe/mfK00O8XN
+         TtQoVBiP/jv9LkbItCnDsHpsLwj1G2scE/r7Dxh2EdVStsMMUCsWdfmTyeeWOFF5Yp8M
+         Lyg2AhBpOJm/K00h+Cgi+kDrT+ulVYJFnWon2ntAKMIlCUkXIc9MT4tWaJvx7RpgCnS7
+         9gJ7a7MgpgCEv2aB+YknU4DjT8P+0bkrR8o+2Xgwpl9lSSr7C6rfR0mrxaCIj9nUbPo9
+         G1yw==
+X-Forwarded-Encrypted: i=1; AHgh+RqeZsMP1j/pmTMNeV+yTsXOJ3k1VSrNGcADHQUCJYl/JmFvRVe8bmZISH0so7iijV1yMeJ2tstn67M=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzfRVTp577SJ6LVIaCNcszc7ad/jUP2bQN/c800f1N64qGmqq8C
+	8XllJ4tPu8+y352X69XfeKPLDJsDM5uiTvETjNCvWjoG/E0RsCGHee2mMabusO1Tng==
+X-Gm-Gg: AR+sD11YfPIR202S2KLm0quRz8Q1an+fDf2V6lVdUHb0yxxyBooAP8xrqJfkbc0kJvq
+	kCsLN30SD89PfsIqNpoSqKzdUi3XXCzbIuFAU6MXlRGmw0AHUP8ZvSsyQrZUnXEChv4Zwaoo2fn
+	dBmYt5kQn07f00N+iTTG1s6vcQWitpjZIV6vjPxMMgtFKyVqgjTRFy2NcoXS7FqqRen8cfDKls4
+	V3+v9KolGH+FWNnkB0p7dgsQS5X84uQrepz8D77+v2+TPRtHGpHFupHhTFoWWxRTwWZFdekXIBW
+	ZMsHfLHSDLkIzMjYAnPFue7OqZVKarK0ySKlqyPgnZQIS7m0RfvaOrwHGzzKsvr2RdATLLOpgqU
+	I8EhBqpwLfA9lXFuqvAvY4IeCm6b7++IpP6zBEZC9gdLmIiivzgl2Aaoy3HLb3tQjGAv+/qIKQp
+	5dY1VxMMSZqqF22sJV1lJWNzNps4qM49TIFnj7x6rYwyyQ78SxB27wRlvzbKkpBYhWWfYzBRpfV
+	Rhj+8v9vH+4x6uyDQBGDENTVazXD7PyV3DSvRCySXuCTVZc7dB1
+X-Received: by 2002:a05:600c:e48a:b0:495:5045:39e6 with SMTP id 5b1f17b1804b1-499821fefb3mr30044825e9.17.1786610417106;
+        Thu, 13 Aug 2026 01:40:17 -0700 (PDT)
+Message-ID: <0cec914c-e52f-41ee-873b-6bdbc1d1ed82@suse.com>
+Date: Thu, 13 Aug 2026 10:40:15 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] x86/nSVM: Check injected event consistency
+Subject: Re: [PATCH v3] x86/nSVM: Check the L1 IOPM_BASE assigned physical
+ address
 To: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
 Cc: andrew.cooper3@citrix.com, jason.andryuk@amd.com, teddy.astie@vates.tech,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  xen-devel@lists.xenproject.org
-References: <95abc420acac6eefc1b97c3c98753d510930ce8a.1785933566.git.abdelkareem.abdelsaamad@citrix.com>
+References: <f97fdc50622e4db559ce059091d0ebf2028e2f2e.1786114518.git.abdelkareem.abdelsaamad@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -128,131 +129,71 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <95abc420acac6eefc1b97c3c98753d510930ce8a.1785933566.git.abdelkareem.abdelsaamad@citrix.com>
+In-Reply-To: <f97fdc50622e4db559ce059091d0ebf2028e2f2e.1786114518.git.abdelkareem.abdelsaamad@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1786608767-76EDAA5B-C1727113/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-16d1c6/1786610417-F420077B-8B32B6B8/0/0
 X-purgate-type: clean
-X-purgate-size: 4616
+X-purgate-size: 2360
 
-On 06.08.2026 19:23, Abdelkareem Abdelsaamad wrote:
-> On the AMD platforms, allowing a VMRUN instruction with a malformed VMCB has
-> debugging complications, security and performance implications. The APM
-> volume #2 15.20 (40332-Rev. 4.10-July 2026) states the two possibilities that
-> result in a VMRUN exit with VMEXIT_INVALID due to the injected event. These are
-> • Reserved values of TYPE have been specified.
-> • TYPE = 3 (exception) has been specified with a vector that does not
->   correspond to an exception (this includes vector 2, which is an NMI, not
->   an exception).
-> 
-> Extend the VMCB validation to check for such inconsistency.
-> 
-> The collection of the invalid exception vectors are ported from the upstream
-> KVM commit
-> ("7e79f71bca5c" KVM: nSVM: Add missing consistency check for EVENTINJ). Adjust
-> the checks from the commit to align with the APM Volume #2 and Volume #3
-> (40332—Rev. 4.40—July 2026) for the X86_EXC_OF and X86_EXC_BR vectors which
-
-Isn't this 4.10, just like you have it further up?
-
-> should not be valid on the x86 64-bit (long mode) platforms. The adjustment is
-> posted to the KVM mailing commit patch thread
-> https://lore.kernel.org/all/20260803225402.2324595-1-abdelkareem.abdelsaamad@citrix.com/
-> 
-> Signed-off-by: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
-> ---
-> Changes in v3:
-> - Restricted X86_EXC_OF (4) and X86_EXC_BR (5) vector injections to 
->   non-64-bit guests to prevent impossible guest-mode state injections
->   per AMD APM Volumes 2 & 3.
-> - Refactored exception vector validation from if-conditions to a switch
->   statement to improve readability and extensibility.
-> - Restricted X86_EXC_CP (21) vector injection to hosts with enabled CET
->   to prevent VMRUN failures on hardware without CET support.
-
-When reading this, I was puzzled, but the code below is correct: It's not
-the host you check, but the guest's CR4.
-
-> --- a/xen/arch/x86/hvm/svm/vmcb.c
-> +++ b/xen/arch/x86/hvm/svm/vmcb.c
-> @@ -320,6 +320,41 @@ void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb)
->      svm_dump_sel("  TR", &vmcb->tr);
->  }
+On 07.08.2026 17:58, Abdelkareem Abdelsaamad wrote:
+> --- a/xen/arch/x86/hvm/svm/nestedsvm.c
+> +++ b/xen/arch/x86/hvm/svm/nestedsvm.c
+> @@ -18,6 +18,7 @@
 >  
-> +static bool is_valid_svm_vmcb_injected_exception_vector(
+>  #define NSVM_ERROR_VVMCB        1
+>  #define NSVM_ERROR_VMENTRY      2
+> +#define IOPM_PAGES_COUNT        3
 
-Is in particular "svm" but perhaps also "vmcb" really relevant in the name
-here (which is a static helper)?
+This new item is separate from the NSVM_ERROR_* values and hence wants separating
+by a blank line. Especially with the three numbers being in sequence, not doing
+so could end up being confusing.
 
-> +    const struct vmcb_struct *vmcb, uint8_t vmcb_injected_vector)
-> +{
-> +    switch ( vmcb_injected_vector )
+Considering the constant is used exactly once - do we actually need a constant?
+Can't we ...
+
+> @@ -294,6 +295,15 @@ static int nsvm_vmrun_permissionmap(struct vcpu *v, bool viopm)
+>      enum hvm_translation_result ret;
+>      unsigned long *ns_viomap;
+>      bool ioport_80 = true, ioport_ed = true;
+> +    gfn_t ns_iopm_end =
+> +        gfn_add(gaddr_to_gfn(ns_vmcb->_iopm_base_pa), IOPM_PAGES_COUNT - 1);
+
+... use a suitable expression here, e.g. PFN_DOWN((0xffff + 3) / 8)?
+
+> +    if ( !gfn_valid(v->domain, ns_iopm_end) )
 > +    {
-> +    case X86_EXC_DE:
-> +    case X86_EXC_DB:
-> +    case X86_EXC_BP:
-> +    case X86_EXC_UD:
-> +    case X86_EXC_NM:
-> +    case X86_EXC_DF:
-> +    case X86_EXC_TS:
-> +    case X86_EXC_NP:
-> +    case X86_EXC_SS:
-> +    case X86_EXC_GP:
-> +    case X86_EXC_PF:
-> +    case X86_EXC_MF:
-> +    case X86_EXC_AC:
-> +    case X86_EXC_MC:
-> +    case X86_EXC_XM:
-
-Doesn't #XM (AMD: #XF) require CR4.OSXMMEXCPT to be set?
-
-> +    case X86_EXC_HV:
-> +    case X86_EXC_SX:
-
-Are #HV and #SX really permitted without any constraints?
-
-> +        return true;
-> +    case X86_EXC_OF:
-> +    case X86_EXC_BR:
-> +        return !(vmcb_get_efer(vmcb) & EFER_LMA) || !(vmcb->cs.l);
-
-Nit: No need for parentheses on the rhs of the ||.
-
-> +    case X86_EXC_VC:
-> +        return vmcb_get_sev_es(vmcb);
-> +    case X86_EXC_CP:
-> +        return !!(vmcb_get_cr4(vmcb) & X86_CR4_CET);
-
-No need for !! when converting to bool.
-
-> +    default:
-> +        return false;
+> +        gdprintk(XENLOG_ERR, "%s invalid _iopm_base_pa address (%#"PRIx64")\n",
+> +                 __func__, ns_vmcb->_iopm_base_pa);
+> +        return NSVM_ERROR_VVMCB;
 > +    }
-
-Throughout: Blank lines please between non-fall-through case blocks.
-
-> @@ -392,6 +433,16 @@ bool svm_vmcb_isvalid(
->          PRINTF("eventinj: MBZ bits are set (%#"PRIx64")\n",
->                 vmcb->event_inj.raw);
 >  
-> +    if ( !((1 << vmcb_injected_type) & vmcb_valid_event_inj_types_mask) )
-> +        PRINTF("eventinj: Invalid Injected Event Type: (%#"PRIx8")\n",
-> +               vmcb_injected_type);
-> +
-> +    if ( (vmcb_injected_type == X86_ET_HW_EXC) &&
-> +         !is_valid_svm_vmcb_injected_exception_vector(
-> +             vmcb, vmcb_injected_vector) )
+>      ns_msrpm_ptr = (unsigned long *)svm->ns_cached_msrpm;
+>  
+> @@ -302,13 +312,12 @@ static int nsvm_vmrun_permissionmap(struct vcpu *v, bool viopm)
+>      if ( ret != HVMTRANS_okay )
+>      {
+>          gdprintk(XENLOG_ERR, "hvm_copy_from_guest_phys msrpm %u\n", ret);
+> -        return 1;
+> +        return NSVM_ERROR_VVMCB;
+>      }
+>  
+>      /* Check l1 guest io permission map and get a shadow one based on
+>       * if l1 guest intercepts io ports 0x80 and/or 0xED.
+>       */
+> -    svm->ns_oiomap_pa = svm->ns_iomap_pa;
+>      svm->ns_iomap_pa = ns_vmcb->_iopm_base_pa;
+>  
+>      ns_viomap = hvm_map_guest_frame_ro(svm->ns_iomap_pa >> PAGE_SHIFT, 0);
 
-Nit: Indentation is off by one here. The anchor on the earlier line isn't the
-'!' but the 'i'.
+In the description you say "without any sanity checks", yet
+hvm_map_guest_frame_ro() -> _hvm_map_guest_frame() ->
+check_get_page_from_gfn() won't allow unsuitable GFNs to be mapped. Since
+here only the first page is mapped, some extra checking may indeed be
+warranted, but the description then wants updating.
 
-> +        PRINTF("eventinj: Invalid Injected Event. Exception type: (%#"PRIx8"),"
-> +               " with a vector: (%#"PRIx8") does not belong to an exception on"
-> +               " the platform \n", vmcb_injected_type, vmcb_injected_vector);
-
-This message is quite a bit too long. There's also a stray blank ahead of the
-\n. And further arguments after one that was already wrapped across lines want
-to start on a separate line.
+As to that part of the description, "directly to valid host address" also
+doesn't look to adequately describe what's going on.
 
 Jan
 
