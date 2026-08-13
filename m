@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ACE0C5CFDB
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 09:50:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1389692.1630334 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C179C5B572
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 09:51:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1389695.1630344 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuS5H-0003gq-Vz; Thu, 13 Aug 2026 09:50:47 +0000
+	id 1wuS5Z-00042C-6X; Thu, 13 Aug 2026 09:51:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1389692.1630334; Thu, 13 Aug 2026 09:50:47 +0000
+Received: by outflank-mailman (output) from mailman id 1389695.1630344; Thu, 13 Aug 2026 09:51:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuS5H-0003gj-TU; Thu, 13 Aug 2026 09:50:47 +0000
-Received: by outflank-mailman (input) for mailman id 1389692;
- Thu, 13 Aug 2026 09:50:46 +0000
+	id 1wuS5Z-000422-3R; Thu, 13 Aug 2026 09:51:05 +0000
+Received: by outflank-mailman (input) for mailman id 1389695;
+ Thu, 13 Aug 2026 09:51:03 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wuS5G-0003gX-Lh
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 09:50:46 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1wuS5X-00040I-ME
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 09:51:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wuS5G-009muO-1r
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 11:50:46 +0200
+ id 1wuS5X-009n1K-2r
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 11:51:03 +0200
 Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7d9369-8faa-0a2a0a5109dd-0a2a4501db02-38
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 11:50:45 +0200
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
+ id 6a7d9378-8faa-0a2a0a5109dd-0a2a4501e90a-28
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 11:51:03 +0200
+Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
  by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7d92c1-5984-0a2a45010019-d1558034d1b0-3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 11:47:45 +0200
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-4995b0343c1so4956365e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 02:47:45 -0700 (PDT)
+ id 6a7d9386-5984-0a2a45010019-d155802cd48d-3
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 11:51:02 +0200
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-49954b88fffso5731485e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 02:51:02 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49981b1bd61sm49932925e9.8.2026.08.13.02.47.43
+ 5b1f17b1804b1-4998216d082sm50735065e9.13.2026.08.13.02.51.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Aug 2026 02:47:44 -0700 (PDT)
+ Thu, 13 Aug 2026 02:51:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,49 +55,50 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786614465; x=1787219265; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1786614662; x=1787219462; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=rnYMFDlAdA0MjjYhLDJNo9oUGcqFZKY+VX+ctoUp8Gc=;
-        b=RupJz0muy4NktoqsnsQ60P3rGSLrpd3UiqFihAsA51YpMwQNzaXTQQ6O2mYwKnxeDH
-         YkoPq3MJCQI9CC+FspgXZCC2wxq3FLCmvGf2Kpzn0Km+UBThPTEGc1YEgmpkFrrTyXPt
-         fmFPhTu/kFH0iScopkz+XU5UT2mLycUEjexTdTpcMk+0NJxmSQi2OoxGcxiQEhohMAER
-         eiO22xMPxUH01OgR1F/ClqnWQ68f8XyxTBgVROMk/QlIXL8mvj8pWro9DUYhLs1PlL+T
-         0Pz3HKzgYC9ErDXr01gN+KeBESkjdXxpysDwGoJUuhqNK19dxtr8p4hxSMmH9RXJmom/
-         i9BQ==
+        bh=M5OfhvD3pYYO8/RQB3SMAqSpCVkJqg0fNsO1T2bjuhk=;
+        b=eIeisjF/ABKHV/XMkDkyc3o5UYndmvLeRILFG+lrWY2s91PPxjxrJuBYdUizj7TaLU
+         cQvqkHV/XGn0PvllLa1NfBZbdYEcbwI9ekoYHBMf6bQjITIgZVieC2ZmDQtzv08AtTIV
+         Qei48RIFAzIj7Ag84pOKXoKWIGO/0JRCmQ1Ch4/gspBmDUSYKUgS+YumD8hFAO6biceb
+         SQm97RMSj99TCq5zLCnLr7KkIRzH0fLAvHOeTveThBsl+VYPJgYs+2NsuMJhN9dnRnVp
+         Mm6uvjAnIWL29w50q8/po0v4QqGo3OcEFWfHHwkcbD2JDMCLkMJioR0uc6OSNQZ1b9wU
+         t0/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786614465; x=1787219265;
+        d=1e100.net; s=20251104; t=1786614662; x=1787219462;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=rnYMFDlAdA0MjjYhLDJNo9oUGcqFZKY+VX+ctoUp8Gc=;
-        b=aiBQt7jYxW/3mJYpb4EHxs9aJ3fHMPiyowX/Stm2T/bw6SEcIuLkBbJMO32/xHGW7s
-         OmsqlF5ceB5LE/RzvTTQSgqtwz+RmV2IMS4UNIUZ7Vy8xVJvk+iTSl22my3mxK9mqkq/
-         DEDQJdGsweVrlKhJkRe2vthhkKr3bTEOCTbOpAuC2Itz0MzqkurdbKhG5U0NiXiVT0q4
-         mU9XejZlCGzi3qxSaR2sHjJsBmjDnqoqnasyeYhm1zROokPkmVmnxjtFUuvXmNvWCLPq
-         7H+1to2zF7tBtxCNJF+rMosiQQUSdK3Y6oAaISrMPVb4A8KiJ2OsEUG95Odcc5ls/lU/
-         fNKg==
-X-Gm-Message-State: AOJu0Yw4ut0XVRNDVMIcVF8imKAOoDarcu/MZcmu8jEl6cPilZDNLvmi
-	nhierW+gih6h2pSuThnIYwZHkyKWaM3fV7pf4J9VLlgHFGzOQQthHCdW0fkcuhX4IQ==
-X-Gm-Gg: AR+sD133YnMbx2Jcm+KVx35qPdJovSMKfG4QHh8KLFk/xS8ycU3BZzTnFJQZFIhDus2
-	g54oNNFZi7vWoIaZ2SycjLGn9u1pjlhxZVjTp+Rkw75S+llzGzYLQb8qUyq7/GWN8ZlVe5N0bdA
-	+FzVbsGX4pvUxQyI1YP5baVoV6541Wg3i0H01HE835UGhEpJ7TNQ/AGAM55skoCeaGxXDPE/K12
-	ry16SdDmaZlxph8KWiiQrmEerEDCVUR0crfjsFrEnHtav/acBXQBtCItGOy0BzZHWvQTrShKuaC
-	rtTZl77PDGak89zR1oEyM5/Y6aGzaYFFgI2kLB3Wm6WrENE9CeGBc73oYqqbN7Bvjsa9rR073Nn
-	vKukICUm38VPXC3Lh2AulgHAXny852WXCJEBWidaTty9go/kaZKh7O0eThZ8OupUMLJnPlsBJCe
-	VSieUmTGv1NAD6a4bHD/laQL8wVbOv+en3UI7kiuVoJLYvYTyreOpBhvwi9gKyg3sr5uh2i3cGb
-	h/koE+7MG6h/+82O4W4mCV+NsQAy0tITRfcwI7RNobJ3a+EmOyK
-X-Received: by 2002:a05:600c:8706:b0:499:5f7a:7ea2 with SMTP id 5b1f17b1804b1-49982185170mr60983185e9.12.1786614464862;
-        Thu, 13 Aug 2026 02:47:44 -0700 (PDT)
-Message-ID: <8273fde5-98b5-4b23-9f3b-9a7cc3749716@suse.com>
-Date: Thu, 13 Aug 2026 11:47:42 +0200
+        bh=M5OfhvD3pYYO8/RQB3SMAqSpCVkJqg0fNsO1T2bjuhk=;
+        b=dT07BGjOmHB2x1iBkQ3gOU0MjChM5bEeYyChyOgrO/wzctINKc41J9gLMhNO6AZWRD
+         QkXNPVBVuSEBkW5ZaXSnkvkk1zu7DMWdaUCM+ILnGBsC3vjatud/uIw9XSQX/eZ8FQo5
+         m/RqsJe4TiooOkjZAXFa+wwBu9UG58WZxAGhPKKhfHSqjJ/zw8VWg7DT5AFye8y3iRc9
+         BUrjW8v0WUae0JmY4IFwRHJM7b2oA1sJKxZ7oiFih0GWMNIJw6yZ+xBCGMV0tD2EPAnx
+         uhfS89XMRVgJa4uG92YywZCDvaLX6hJMNhEufLIyviXiaHGgvF+OiFtVbU3sv0dRb01p
+         1FvQ==
+X-Gm-Message-State: AOJu0YyHRdOhfmP5uHDJUUty0LNOSaQ7562x82XG7OOw/j9H4Z522iZX
+	9Rf7af9SC24h/EPMMK6VY/wjrB9SQ8kGpsrG2/nljFV7Jy/xW0fOvtiFbd643q+OOA==
+X-Gm-Gg: AR+sD13uty3reGMJ0ejCuzCWvm427HP4VLx8Wr82MlGd9WkKxqAwE6WoQIacnBxt9ly
+	KNPXqoLWXNOHjsrsbUpsjSe+tLe7n6l8/2qXhKVsNXNB7w3Tc0OlONbJM9pp2Kvo2QiLRjvZZG1
+	CTgsezdeR1rtc8oqNZ1atOXx/ONDRSC1WZbXkfGOMQ2o/szeDj14ghl6wB4TtLckL9EDRw2H/c2
+	WvXIJvVYWqomNVnUGWW4+XQN0BRSf+ZKje+I0X/FrhGh3kblPZ3RABCuhf0CMN2MMhD/6+zdEOE
+	vKeiU2tB4k333GiAGuhLyi14DIQG11pCCMMD0mmruhjD77TZdhfT/JatkR1XDA6hlWBaoyRrBY1
+	AGdxWvSBwU6PLbtyfCeDrJJKoQVNavZ0LU31JJboBHA7+iE85nC7sF1ehHq4hW8cPDzNE2jyvuU
+	lJOHyEFecbqhkLC2M/oY1j8OHVKU7UQzNY+3lIsVkFXL593qsjNQN5CAxlngID2jRv6ZAQfnIfo
+	EpZFLzKDvshVZ/5EGe8N1B+PMKrVxYQK8v6aemAfDkTPiHfMPn5
+X-Received: by 2002:a05:600c:1f8b:b0:499:81ae:1020 with SMTP id 5b1f17b1804b1-499821e7fa8mr49580415e9.11.1786614662417;
+        Thu, 13 Aug 2026 02:51:02 -0700 (PDT)
+Message-ID: <82011389-489e-4076-9d3a-8c393e4a8e76@suse.com>
+Date: Thu, 13 Aug 2026 11:51:00 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 07/17] xen/riscv: introduce vCPU AIA initialization
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Subject: Re: [PATCH v1 08/17] xen/riscv: add IMSIC state save/restore
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>
 Cc: xen-devel@lists.xenproject.org,
  Romain Caritey <Romain.Caritey@microchip.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -105,11 +107,11 @@ Cc: xen-devel@lists.xenproject.org,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>
+ Stefano Stabellini <sstabellini@kernel.org>
 References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
- <b3aca8278dfd70bf6ce888bfcb0a3fbc32bb4971.1784560663.git.oleksii.kurochko@gmail.com>
- <1786613090.8631fc262581453bbf619ec5b2062170.19ffa7047d4000c4f3@vates.tech>
+ <5e3df9ea4bafc5666d1885dfd40f534f8349879e.1784560663.git.oleksii.kurochko@gmail.com>
+ <1786613430.8631fc262581453bbf619ec5b2062170.19ffa7577c9000c4f3@vates.tech>
+ <9724c838-6713-4f29-89ab-54f50ec4fe8e@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -135,59 +137,59 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1786613090.8631fc262581453bbf619ec5b2062170.19ffa7047d4000c4f3@vates.tech>
+In-Reply-To: <9724c838-6713-4f29-89ab-54f50ec4fe8e@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1786614465-1F063757-D877F4E3/13/0
-X-purgate-type: spam
-X-purgate-size: 1649
+X-purgate-ID: tlsNG-d62444/1786614662-BE27A757-E041E5D1/0/0
+X-purgate-type: clean
+X-purgate-size: 1688
 
-On 13.08.2026 11:24, Baptiste Le Duc wrote:
->> --- a/xen/arch/riscv/aia.c
->> +++ b/xen/arch/riscv/aia.c
->> @@ -14,6 +14,7 @@
->>  #include <asm/cpufeature.h>
->>  #include <asm/csr.h>
->>  #include <asm/current.h>
->> +#include <asm/imsic.h>
->>  
->>  struct vgein_ctrl {
->>      unsigned long bmp;
->> @@ -36,6 +37,35 @@ bool aia_usable(void)
->>      return _aia_usable;
->>  }
->>  
->> +void vcpu_aia_init(struct vcpu *v)
->> +{
->> +    unsigned int new_vsfile_id;
->> +    int rc;
->> +
->> +    if ( !aia_usable() )
->> +        return;
->> +
->> +    new_vsfile_id = vgein_assign(v);
->> +
->> +    /*
->> +     * vgein_assign() returns 0 when no free h/w guest interrupt file is
->> +     * available (including GEILEN == 0); imsic_map_guest_file() maps nothing
->> +     * in that case.
->> +     */
->> +    rc = imsic_map_guest_file(v, new_vsfile_id);
->> +    if ( rc )
->> +    {
->> +        /* Can't continue w/o correctly mapped IMSIC interrupt file */
->> +        domain_crash(v->domain);
+On 13.08.2026 11:34, Oleksii Kurochko wrote:
+> On 8/13/26 11:30 AM, Baptiste Le Duc wrote:
+>>> --- a/xen/arch/riscv/imsic.c
+>>> +++ b/xen/arch/riscv/imsic.c
+>>> @@ -20,6 +20,7 @@
+>>>   #include <xen/init.h>
+>>>   #include <xen/libfdt/libfdt.h>
+>>>   #include <xen/macros.h>
+>>> +#include <xen/rwlock.h>
+>>>   #include <xen/sched.h>
+>>>   #include <xen/smp.h>
+>>>   #include <xen/spinlock.h>
+>>> @@ -418,6 +419,28 @@ int imsic_map_guest_file(struct vcpu *v, unsigned int vsfile_id)
+>>>       return res;
+>>>   }
+>>>   
+>>> +void imsic_state_save(struct vcpu *v)
+>>> +{
+>>> +    struct vimsic_state *imsic_state = v->arch.vimsic_state;
+>>> +    unsigned long flags;
+>>> +
+>>> +    /*
+>>> +     * SW interrupt file always has ->vsfile_pcpu = NR_CPUS so nothing specific
+>>> +     * should be done in this case.
+>>> +     */
+>>> +    if ( !vcpu_guest_file_id(v) )
+>>> +        return;
+>>
+>>
+>>> +
+>>> +    write_lock_irqsave(&imsic_state->vsfile_lock, flags);
+>>> +    imsic_state->vsfile_pcpu = cpuid_to_hartid(v->processor);
+>>
+>> How will you detect a migration is needed? Don't you need to first know
+>> if ->vsfile_pcpu is different to cpuid_to_hartid(v->processor)? (I
+>> didn't take a look to other patchs for the moment, so the
+>> explanations might be later.)
 > 
-> The vgein id assigned a few lines up is not released here. The domain is dying
-> anyway, but the guest interrupt file stays marked in use on that pCPU forever,
-> since nothing else ever calls vgein_release(). A vgein_release(v,
-> new_vsfile_id) before the domain_crash() would fix it.
+> Migration (if you are speaking about migration of vCPU from one pCPU to 
+> another) is completely different path. Look at sched_move_irqs().
 
-Instead of (or in addition to) doing that here, wouldn't releasing better be part
-of the normal cleanup path? Whether "instead of" or "in addition to" depends on
-the implications of deferring the release. But to guarantee no leak, domain
-cleanup will want to either do the release, or have an explicit check that is was
-done.
+See how terminology is important. As said elsewhere, "save state" and
+"restore state" don't make clear at all in which situation they're to be
+used.
+
+Also, can both of you please adjust Roger's email address when replying?
 
 Jan
 
