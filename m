@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C179C5B572
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 09:51:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1389695.1630344 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 472D8C5B572
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 09:57:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1389708.1630353 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuS5Z-00042C-6X; Thu, 13 Aug 2026 09:51:05 +0000
+	id 1wuSBD-0004uY-Qy; Thu, 13 Aug 2026 09:56:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1389695.1630344; Thu, 13 Aug 2026 09:51:05 +0000
+Received: by outflank-mailman (output) from mailman id 1389708.1630353; Thu, 13 Aug 2026 09:56:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuS5Z-000422-3R; Thu, 13 Aug 2026 09:51:05 +0000
-Received: by outflank-mailman (input) for mailman id 1389695;
- Thu, 13 Aug 2026 09:51:03 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wuS5X-00040I-ME
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 09:51:03 +0000
+	id 1wuSBD-0004uQ-NA; Thu, 13 Aug 2026 09:56:55 +0000
+Received: by outflank-mailman (input) for mailman id 1389708;
+ Thu, 13 Aug 2026 09:56:54 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wuSBB-0004uK-VT
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 09:56:54 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wuS5X-009n1K-2r
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 11:51:03 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wuSBB-00Ccdy-Bh
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 11:56:53 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a7d9378-8faa-0a2a0a5109dd-0a2a4501e90a-28
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 11:51:03 +0200
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a7d94df-bab6-0a2a0a5309dd-0a2a45059082-18
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 11:56:53 +0200
 Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a7d9386-5984-0a2a45010019-d155802cd48d-3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 11:51:02 +0200
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a7d94e5-4cb1-0a2a45050019-d155802ca445-3
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 11:56:53 +0200
 Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-49954b88fffso5731485e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 02:51:02 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4998216d082sm50735065e9.13.2026.08.13.02.51.01
+ 5b1f17b1804b1-4994c49f588so7355035e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 02:56:53 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
+ [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4815a5af191sm5155864f8f.19.2026.08.13.02.56.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Aug 2026 02:51:02 -0700 (PDT)
+ Thu, 13 Aug 2026 02:56:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,143 +52,173 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786614662; x=1787219462; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+        d=gmail.com; s=20251104; t=1786615013; x=1787219813; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=M5OfhvD3pYYO8/RQB3SMAqSpCVkJqg0fNsO1T2bjuhk=;
-        b=eIeisjF/ABKHV/XMkDkyc3o5UYndmvLeRILFG+lrWY2s91PPxjxrJuBYdUizj7TaLU
-         cQvqkHV/XGn0PvllLa1NfBZbdYEcbwI9ekoYHBMf6bQjITIgZVieC2ZmDQtzv08AtTIV
-         Qei48RIFAzIj7Ag84pOKXoKWIGO/0JRCmQ1Ch4/gspBmDUSYKUgS+YumD8hFAO6biceb
-         SQm97RMSj99TCq5zLCnLr7KkIRzH0fLAvHOeTveThBsl+VYPJgYs+2NsuMJhN9dnRnVp
-         Mm6uvjAnIWL29w50q8/po0v4QqGo3OcEFWfHHwkcbD2JDMCLkMJioR0uc6OSNQZ1b9wU
-         t0/Q==
+        bh=cwdb1JYdUGUcACicI7KC+FpkcuYvtYj8h89cYh8zen4=;
+        b=IItf/1ltCqkvtqR4OPCwpBD3Iq3lhj2H9le8twDPphgfNcblk35Krp6vMe200nEe5q
+         nTaxOfRtxR1xD+SVBEzqNA+3EMTyOw5Eu0ADIo93k6gW8SkfpyPP4up9uwc8I2zd9Yj3
+         MeluqaBkuGUHPp6iEbiTQRF6G4t4e6yJ01cbY6AsvhbMUZVyZTTd+MwDkcnw4nyRJNIt
+         teVimsRvegPYdmAP5PozpPuTvpeUjmvXnOi0llteQnWlAxERdvLcM/GMiNU2+vat69wX
+         Cd0whK7DAA2xQ/fgepNM323pns0BwXS9G1uPCem7a0+VNM+Pb9E6LMpJvTOFV+A8Lp6e
+         D8Hw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786614662; x=1787219462;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+        d=1e100.net; s=20251104; t=1786615013; x=1787219813;
+        h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=M5OfhvD3pYYO8/RQB3SMAqSpCVkJqg0fNsO1T2bjuhk=;
-        b=dT07BGjOmHB2x1iBkQ3gOU0MjChM5bEeYyChyOgrO/wzctINKc41J9gLMhNO6AZWRD
-         QkXNPVBVuSEBkW5ZaXSnkvkk1zu7DMWdaUCM+ILnGBsC3vjatud/uIw9XSQX/eZ8FQo5
-         m/RqsJe4TiooOkjZAXFa+wwBu9UG58WZxAGhPKKhfHSqjJ/zw8VWg7DT5AFye8y3iRc9
-         BUrjW8v0WUae0JmY4IFwRHJM7b2oA1sJKxZ7oiFih0GWMNIJw6yZ+xBCGMV0tD2EPAnx
-         uhfS89XMRVgJa4uG92YywZCDvaLX6hJMNhEufLIyviXiaHGgvF+OiFtVbU3sv0dRb01p
-         1FvQ==
-X-Gm-Message-State: AOJu0YyHRdOhfmP5uHDJUUty0LNOSaQ7562x82XG7OOw/j9H4Z522iZX
-	9Rf7af9SC24h/EPMMK6VY/wjrB9SQ8kGpsrG2/nljFV7Jy/xW0fOvtiFbd643q+OOA==
-X-Gm-Gg: AR+sD13uty3reGMJ0ejCuzCWvm427HP4VLx8Wr82MlGd9WkKxqAwE6WoQIacnBxt9ly
-	KNPXqoLWXNOHjsrsbUpsjSe+tLe7n6l8/2qXhKVsNXNB7w3Tc0OlONbJM9pp2Kvo2QiLRjvZZG1
-	CTgsezdeR1rtc8oqNZ1atOXx/ONDRSC1WZbXkfGOMQ2o/szeDj14ghl6wB4TtLckL9EDRw2H/c2
-	WvXIJvVYWqomNVnUGWW4+XQN0BRSf+ZKje+I0X/FrhGh3kblPZ3RABCuhf0CMN2MMhD/6+zdEOE
-	vKeiU2tB4k333GiAGuhLyi14DIQG11pCCMMD0mmruhjD77TZdhfT/JatkR1XDA6hlWBaoyRrBY1
-	AGdxWvSBwU6PLbtyfCeDrJJKoQVNavZ0LU31JJboBHA7+iE85nC7sF1ehHq4hW8cPDzNE2jyvuU
-	lJOHyEFecbqhkLC2M/oY1j8OHVKU7UQzNY+3lIsVkFXL593qsjNQN5CAxlngID2jRv6ZAQfnIfo
-	EpZFLzKDvshVZ/5EGe8N1B+PMKrVxYQK8v6aemAfDkTPiHfMPn5
-X-Received: by 2002:a05:600c:1f8b:b0:499:81ae:1020 with SMTP id 5b1f17b1804b1-499821e7fa8mr49580415e9.11.1786614662417;
-        Thu, 13 Aug 2026 02:51:02 -0700 (PDT)
-Message-ID: <82011389-489e-4076-9d3a-8c393e4a8e76@suse.com>
-Date: Thu, 13 Aug 2026 11:51:00 +0200
+        bh=cwdb1JYdUGUcACicI7KC+FpkcuYvtYj8h89cYh8zen4=;
+        b=PQtU7V5Snydeig2MBqQN9iVjaNFNAw23j+f6vr0W3sgURWoA3JrEwrL7fifrcg2pUQ
+         5w4zxtTpOQYPv5gw3hlG2lNpr+poI5xHZQUI6RoIOkirXQfUQ5j0pvFwckYZpN7ANo1s
+         zTD9t0Go85wHCaSkglqE7HCFKh8yn4veu31ZXM4qkfbOrNYAcu+zdsCoBczUbTo3bNpM
+         CKVJgHYBrCi2ksqJIhuCL7TEV1errs4R9oleLthhNrx3N/pfEEpv+ziz0MgwPO07Caih
+         w2IhKHayeLE/niXK+z/79zzjmOMEVLZG1P5+wHTC3373R2ZH25RzOQ4zR/j/nhq48ZbF
+         aSqQ==
+X-Gm-Message-State: AOJu0YxlxBpVn+e83yY1LtjbtoGeSjTrIeqAGMEtPst9Bv0D6695b/CG
+	N89c7Tt/Jf9noFbcibkCurEtm0WjUQge8Ki+hPEl9IfJnm8TdIucFH+7
+X-Gm-Gg: AR+sD10WUCcJWBckqYVtvTPGF0KHGye+dyBsGplc+2TDxU/7MnjaeSujevNGZUreX0J
+	02G4ZsCBo+1wLFXXSWGHQqrMJ3ZyhVW2Q+In8HMJ2XhkgnLG6zL9vY1o3oALuf4v64bJB0Hqev4
+	MFEuRidHrWevBk2vp9aL+kWZkT1dHlVY9b/kH/Gi7yvZMKTGJLQR1YyRqQhY6UjamjzzPIfOEXB
+	MlKtTmUr/N5Ij1LEl/TC7graNasrZMitty2TAwTfOnzAAnxVm97aouRJARhHlbqXQXRVUnCgIZy
+	dnxLyEakzbFv1sC54HWFffbYGYb9qPfVydNcC4P/SJdlmFlcGM+puov019hVkJxo4nI+oS6oXvd
+	wAbdiiGXql/VRMl4zKB/rlv+3yXmWKYIR+aJ5MPEGeaFJieFmgcKz4QufHTHfpCq+aFP0HAN0XX
+	2UNc88Jfh67AOF2xDHBGkI9xOjauDcVHQTE+XvouZ9ptqDR6V8B4KNmfe2cQohEUQ0JJk+0ZMqw
+	CJThFtyYL9JMXUoXAD7m96FvhjAeTPD2XNmoJbs9/0=
+X-Received: by 2002:a05:600c:231a:b0:495:58fe:88e5 with SMTP id 5b1f17b1804b1-4998215464cmr42086965e9.2.1786615012684;
+        Thu, 13 Aug 2026 02:56:52 -0700 (PDT)
+Message-ID: <fb31ba29-14a3-434e-a3e8-ba4f5057b45c@gmail.com>
+Date: Thu, 13 Aug 2026 11:56:51 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 08/17] xen/riscv: add IMSIC state save/restore
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Subject: Re: [PATCH v1 06/17] xen/riscv: map IMSIC interrupt file for vCPUs
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 Cc: xen-devel@lists.xenproject.org,
  Romain Caritey <Romain.Caritey@microchip.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Connor Davis <connojdavis@gmail.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
 References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
- <5e3df9ea4bafc5666d1885dfd40f534f8349879e.1784560663.git.oleksii.kurochko@gmail.com>
- <1786613430.8631fc262581453bbf619ec5b2062170.19ffa7577c9000c4f3@vates.tech>
- <9724c838-6713-4f29-89ab-54f50ec4fe8e@gmail.com>
+ <254f470ae2e2b2a4affa7c405be8c07a7d8b300e.1784560663.git.oleksii.kurochko@gmail.com>
+ <1786612004.8631fc262581453bbf619ec5b2062170.19ffa5fb46a000c4f3@vates.tech>
+ <5ea1202d-7635-46f7-8238-e3d54b588afd@gmail.com>
+ <1786614598.8631fc262581453bbf619ec5b2062170.19ffa87495f000c4f3@vates.tech>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <9724c838-6713-4f29-89ab-54f50ec4fe8e@gmail.com>
-Content-Type: text/plain; charset=UTF-8
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <1786614598.8631fc262581453bbf619ec5b2062170.19ffa87495f000c4f3@vates.tech>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1786614662-BE27A757-E041E5D1/0/0
-X-purgate-type: clean
-X-purgate-size: 1688
+X-purgate-ID: tlsNG-c201ff/1786615013-F7EB92A1-2DDF0C1C/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 4164
 
-On 13.08.2026 11:34, Oleksii Kurochko wrote:
-> On 8/13/26 11:30 AM, Baptiste Le Duc wrote:
->>> --- a/xen/arch/riscv/imsic.c
->>> +++ b/xen/arch/riscv/imsic.c
->>> @@ -20,6 +20,7 @@
->>>   #include <xen/init.h>
->>>   #include <xen/libfdt/libfdt.h>
->>>   #include <xen/macros.h>
->>> +#include <xen/rwlock.h>
->>>   #include <xen/sched.h>
->>>   #include <xen/smp.h>
->>>   #include <xen/spinlock.h>
->>> @@ -418,6 +419,28 @@ int imsic_map_guest_file(struct vcpu *v, unsigned int vsfile_id)
->>>       return res;
->>>   }
->>>   
->>> +void imsic_state_save(struct vcpu *v)
->>> +{
->>> +    struct vimsic_state *imsic_state = v->arch.vimsic_state;
->>> +    unsigned long flags;
->>> +
->>> +    /*
->>> +     * SW interrupt file always has ->vsfile_pcpu = NR_CPUS so nothing specific
->>> +     * should be done in this case.
->>> +     */
->>> +    if ( !vcpu_guest_file_id(v) )
->>> +        return;
+
+
+On 8/13/26 11:49 AM, Baptiste Le Duc wrote:
+> On 2026-08-13 11:42 +0200, Oleksii Kurochko wrote:
+>>>> +/*
+>>>> + * Map the physical IMSIC guest interrupt file (G-file) assigned to vCPU v
+>>> Nit: What is this `v`?
 >>
+>> A function argument. But I will just drop v from the comment.
 >>
->>> +
->>> +    write_lock_irqsave(&imsic_state->vsfile_lock, flags);
->>> +    imsic_state->vsfile_pcpu = cpuid_to_hartid(v->processor);
+>>>> + * into the domain's stage-2 guest-physical address space.
+>>>> + *
+>>>> + * In the machine's physical address space (SPA), each hart's IMSIC
+>>>> + * supervisor-level file (S-file) is located at offset 0 of its address block,
+>>>> + * followed contiguously by GEILEN guest files at offsets of 1, 2, ..., N pages.
+>>>> + *
+>>>> + * Because a guest OS running in VS-mode expects its own supervisor-level
+>>>> + * interrupt file to be at offset 0 of its guest-physical IMSIC block, the
+>>>> + * hypervisor must use stage-2 address translation to map the vCPU's
+>>>> + * guest-physical "supervisor" page (GPA offset 0) to the specific
+>>>> + * physical guest file page (SPA offset guest_file_id) on the physical hart.
+>>>> + *
+>>>> + * Xen pins each vCPU to a pCPU (v->processor) and assigns it a physical
+>>>
+>>>
+>>>> + * guest file index (guest_file_id) from the vGEIN allocator. A guest_file_id
+>>>> + * of 0 indicates that no hardware guest file is selected (matching the
+>>>> + * architectural behavior where vGEIN = 0 in the hstatus CSR selects no
+>>>> + * guest external interrupt source), requiring the VS-file to be emulated
+>>>> + * in software.
+>>>> + *
+>>>> + * The base guest-physical address advertised to the guest in the device
+>>>> + * tree matches offset 0 of the vCPU's virtual IMSIC block. Stage-2
+>>>> + * translation ensures that guest supervisor accesses to this page are
+>>>> + * transparently routed to the real hardware VS-file granted to it on
+>>>> + * the current pCPU.
+>>>> + */
+>>>> +int imsic_map_guest_file(struct vcpu *v, unsigned int vsfile_id)
+>>>> +{
+>>>> +    int res = 0;
+>>>> +    struct domain *d = v->domain;
+>>>> +    unsigned int cpu = v->processor;
+>>>> +    vaddr_t gaddr = imsic_cfg.base_addr + (IMSIC_MMIO_PAGE_SZ * v->vcpu_id);
+>>>
+>>> The variable holds a guest-physical address, so vaddr_t is the wrong
+>>> type should be either paddr_t or gaddr_t.
 >>
->> How will you detect a migration is needed? Don't you need to first know
->> if ->vsfile_pcpu is different to cpuid_to_hartid(v->processor)? (I
->> didn't take a look to other patchs for the moment, so the
->> explanations might be later.)
-> 
-> Migration (if you are speaking about migration of vCPU from one pCPU to 
-> another) is completely different path. Look at sched_move_irqs().
+>> Agree, paddr_t will be better what was mentioned in thread with Jan B.
+>>
+>>>
+>>>> +    paddr_t paddr;
+>>>> +    unsigned long guest_stride;
+>>>> +
+>>>> +    /* Nothing to map in the case of sw interrupt file. */
+>>>
+>>> There is no software interrupt file implementation in this series, patch 11
+>>> turns the non-MSI path into a BUG_ON(). So "vsfile_id == 0" today means "this
+>>> vCPU gets no external interrupts at all and nothing tells anybody". Worth
+>>> saying so plainly here rather than implying a fallback exists.
+>>
+>> I would ask then different question will this function change when IMSIC
+>> interrupt file support will be added? I think - no as in the case of
+> Did you forget s/w word? If not it's weird as IMSIC interrupt file is
+> the current topic of this patch series.
+>> IMSIC interrupt file we don't need any stage-2 mapping. So here it is
+> here too.
 
-See how terminology is important. As said elsewhere, "save state" and
-"restore state" don't make clear at all in which situation they're to be
-used.
+Yes, sorry, I missed s/w word.
 
-Also, can both of you please adjust Roger's email address when replying?
+>> just a check that nothing should be mapped for non-hw-assisted interrupt
+>> files.
+>>
+>>>
+>>>> +    if ( !vsfile_id )
+>>>> +        return res;
+>>>> +
+>>>> +    guest_stride = vsfile_id * IMSIC_MMIO_PAGE_SZ;
+>>>
+>>>
+>>>> +
+>>>> +    paddr = imsic_cfg.msi[cpu].base_addr + imsic_cfg.msi[cpu].offset +
+>>>> +            guest_stride;
+>>>
+>>>
+>>>> +
+>>>> +#ifdef IMSIC_DEBUG
+>>>
+>>>> +    printk("%s: %pv: ga(%#lx) -> pa(%#lx), cpu(%#x), guest_file_id(%d) "
+>>>> +           "base_addr(%#lx) offset(%#lx)\n", __func__, v, gaddr, paddr, cpu,
+>>>> +           vsfile_id, imsic_cfg.msi[cpu].base_addr, imsic_cfg.msi[cpu].offset);
+>>>> +#endif
+>>>> +
+>>>> +    res = map_regions_p2mt(d, gaddr_to_gfn(gaddr),
+>>>> +                           PFN_DOWN(IMSIC_MMIO_PAGE_SZ), maddr_to_mfn(paddr),
+>>>> +                           arch_dt_passthrough_p2m_type());
+>>>> +    if ( res )
+>>>> +        printk("%s: Failed to map %#lx to the guest at %#lx\n",
+>>>
 
-Jan
+~ Oleksii
+
 
