@@ -4,44 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C6ECC5CFEB
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 13:02:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1390016.1630586 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF3D1C5B572
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 13:03:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1390025.1630596 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuV4V-00072V-9H; Thu, 13 Aug 2026 13:02:11 +0000
+	id 1wuV5C-0007bO-KR; Thu, 13 Aug 2026 13:02:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1390016.1630586; Thu, 13 Aug 2026 13:02:11 +0000
+Received: by outflank-mailman (output) from mailman id 1390025.1630596; Thu, 13 Aug 2026 13:02:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuV4V-00072O-6X; Thu, 13 Aug 2026 13:02:11 +0000
-Received: by outflank-mailman (input) for mailman id 1390016;
- Thu, 13 Aug 2026 13:02:10 +0000
+	id 1wuV5C-0007bG-HQ; Thu, 13 Aug 2026 13:02:54 +0000
+Received: by outflank-mailman (input) for mailman id 1390025;
+ Thu, 13 Aug 2026 13:02:54 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wuV4U-00072G-8X
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 13:02:10 +0000
+ (envelope-from <dpsmith@apertussolutions.com>) id 1wuV5B-0007b5-Uo
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 13:02:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wuV4T-00HOjM-0K
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 15:02:09 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wuV5B-00HOxz-BY
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 15:02:53 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a7dc044-e002-0a2a0a5209dd-0a2a4509ae9e-14
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 15:02:08 +0200
-Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a7dc050-be1a-0a2a45090019-d1558029a90b-3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 15:02:08 +0200
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-4954a9e8490so5544525e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 06:02:08 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49981b03d07sm73221975e9.2.2026.08.13.06.02.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Aug 2026 06:02:06 -0700 (PDT)
+ (envelope-from <dpsmith@apertussolutions.com>)
+ id 6a7dc072-e002-0a2a0a5209dd-0a2a450899ee-40
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 15:02:53 +0200
+Received: from [136.143.188.51] (helo=sender4-of-o51.zoho.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <dpsmith@apertussolutions.com>)
+ id 6a7dc078-f659-0a2a45080019-888fbc3352b8-3
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 15:02:50 +0200
+Received: by mx.zohomail.com with SMTPS id 1786626154505860.584720482219;
+ Thu, 13 Aug 2026 06:02:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,148 +47,134 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786626128; x=1787230928; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=oM3Rke40yRt7mpEL6FbNRO3FcRJa7m4vqYv1zr9ftyM=;
-        b=FvT/E+2NeYtaPMDwQ3SZVXVw4Ubcv4ijrObAMhx0bdti4TcF9FpWM11bHsDFNJ7h6s
-         PXsZnnpuUCNBX+gUQwpT1ElO6aDz0+alYfi36WU9Kd2QvIApOrUhEZWEewAa8QuOGfkR
-         9U843KqUrD4Huml/9+XCUrtR2VwBtuOUacf3RKDMLmHBRBWpyKDb0OI1N5Tg52nDsPmR
-         3bsuPdVW/7kTq9IOtVf/kTZMAUh29EZ8BSZohRJHQj6IGlLgYmf5yot3YVxs1p3FHMhx
-         cS69ccO2kkzQ0j0FzREPGB31dU/7NJGyDHhgsMNkBnXNvUyZ9z4BlUhI7OoYaZCEEpvm
-         gqgA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786626128; x=1787230928;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=oM3Rke40yRt7mpEL6FbNRO3FcRJa7m4vqYv1zr9ftyM=;
-        b=MF6CsZC92+nachMR518X7mnRBMR2SU9UNzwOjSElVBDVXmKLwonhtombj7nTqz9LRg
-         bIHwYiwUlEwJLDIaJ2e6oUxKw2igUcweqmHy9FFLXN4TLMT3FGfjB0FUVSHuZXHVQWn1
-         QtrGRt7ZrfvtK9+BS0fZv2PTuD4+Fvj5Og31bhj/KKa4NokyPp7fJ2JY1bu2oMJQutF7
-         Zb2UROO4Uuq3ywlblPhrq3kCuo5C/kjMhmoVfVtWOCH6qjBJfW21BPew3Pzueb4c5b1a
-         /vdLfdPqJOb6aoiG4ImS7iFzLgsWytNX9qRCDHT75pJFd7VrZV4iE4d/ePimVz0GGbZQ
-         T9GA==
-X-Forwarded-Encrypted: i=1; AHgh+RpjhkdWgrVws4aoWVYPnrBhRp+Eihg45dLn/eAd6HS1ZJrZag4d2SxOzSzmYRrnYGr2L1ZueIf+Tg0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzzLHNkq9CD1poP/33P4si+S+lekjMfpej2Lm0o8aSQ3danH/lV
-	Go5b2/0hI/IkgFOEyyzaBOJTvcxTxiEWyL8xOhPBdPQlw1efqyGSMY4MdelkXen3zQTwnIls+D7
-	mJZ6XIA==
-X-Gm-Gg: AR+sD10IWRNdkC06FEGgUOngJMi3cscYZBwYsynffTwodSpRds0b5TvzWp8BCebjVM0
-	cWNRtkG/DSiWA5eFZOfjnzR26GVFdvQ3d1QRA8uBS+RjkYpHDmRNHzjnTN/6xGjDbsPZ2phkZVv
-	bRIqtfl4C0NaNtoXs27qx6DnkqDD+NzWvSCNwHze2G8zs+tV3zt3kcaIvub56lRTlD1Vu+ydlqo
-	QqIwNt0jjOGyoSc3ydtLE8fjlCuYbukgfuuqxjhzqS56deVDteP03qW8jr/SZaZYjrpfYblt3Ky
-	fW+SI9jmLRpMIPCyfiRCayEnzHLnJ8d9SJnBv4Tf127eXjmLXZGXZxWB4UsjrsGJU9BnTMnZ/9X
-	idtfBqlf4lUkEfYUASbGSGvrIDsNHqvJuCwVL0t6bIly/oxjPYLala2rdYJ3aRTuQbVSjC9x3yE
-	Q/7rLbTfC7bsWa0IgadLqyqka6gDXEIihKIsEp1TnaqATVzTVuD3TO05h8JM1hfEvSV12I/GIe7
-	JmZdZCT4Wv0Bqqu0nX/yfs+6fTWpIJPb08gjEmd3c60GbD49Tbi
-X-Received: by 2002:a05:600c:4708:b0:499:596b:2e91 with SMTP id 5b1f17b1804b1-49982200a77mr54607905e9.3.1786626127708;
-        Thu, 13 Aug 2026 06:02:07 -0700 (PDT)
-Message-ID: <9e1a3252-c126-4c09-8425-feee14a1237b@suse.com>
-Date: Thu, 13 Aug 2026 15:02:03 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=zoho header.d=apertussolutions.com header.i="dpsmith@apertussolutions.com" header.h="Message-ID:Date:MIME-Version:Subject:To:Cc:From:In-Reply-To:Content-Type:Content-Transfer-Encoding"
+ARC-Seal: i=1; a=rsa-sha256; t=1786626157; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=LO7naBJAVJPHMMZ+jEBMpA11LsMd5Zn4ZHhMxVSvaKfCPH7zeUFwy56eAsrxkq6tGbAU1K84mm30DrJSD3IiNSJtDb0w3Khil9+7ZotTWyASeMz1i49oz2B8JgEUZ0uj4L1Z7687incXCQ8fJHXf/TOb7iYx9wk+kS4ThH6YUsU=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1786626157; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=jaBbrgXVN92ZqCMwNK561lgwvvP8N+6PwEbaM1sPxAk=; 
+	b=fpTkP1W0GYeySeJ9NvvN/D/H24x5tGn0Eq4FQikFraO5iwy7sRsXdyUcZXop+JxiTEgyvgSG0DGGcAXEjdcFWy46mn2mrqqzqOwNL8KvaJvLMkpnZasgV3M5HJrYqe2v8E6950b1KslU9GuhNG1/lSWU9uIYn8DvM5fLSeh62f8=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=apertussolutions.com;
+	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
+	dmarc=pass header.from=<dpsmith@apertussolutions.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1786626157;
+	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
+	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=jaBbrgXVN92ZqCMwNK561lgwvvP8N+6PwEbaM1sPxAk=;
+	b=U+ZJq57lSVSTtOLBiiSxdP5H3RDAZg0ge9TFwaGIe1qvnuCFf/0K6/IoFbk6kC6G
+	gcpuMTf7dv7UlVm/E92go77x/MbsB44kqA9BHODIAnAKI8NSCvCfpN9FxJSbDJk6usI
+	1UDSJMnFRDvVZkOXYuyoSXxm39iD3duicaZWuezg=
+Message-ID: <f7ff827b-fb15-432c-8a5b-d5e73531a526@apertussolutions.com>
+Date: Thu, 13 Aug 2026 09:02:35 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 20/24] XSM: fold xsm_{,un}map_domain_pirq() hooks
-To: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+Subject: Re: [PATCH 12/24] x86/mm: get_page_from_l1e() is PV-or-shadow-only
+To: Jan Beulich <jbeulich@suse.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
  <roger@xenproject.org>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <758c8410-a18e-45dc-8944-5913e5832397@suse.com>
- <c973c612-153d-413b-a6c8-aeacd25f28a8@suse.com>
- <f99a285e-bd3d-4d8d-94ef-997c238c7f85@apertussolutions.com>
- <274a27cb-13f0-47c3-aa73-1534925dc350@suse.com>
- <7828588f-38d7-4039-95c3-8ffd386a8509@apertussolutions.com>
+ <07e90200-95b5-413f-9259-7f0481d36521@suse.com>
+ <4531d02a-3a37-4c57-ba17-32034ba08cf9@apertussolutions.com>
+ <b742fec6-730a-4138-b5f5-7197f24df247@suse.com>
+ <e5799ee9-6a97-4ad8-b1c4-6b54e43b7a4d@apertussolutions.com>
+ <a83cf90c-142a-41ee-a80b-4e849cc804f3@suse.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <7828588f-38d7-4039-95c3-8ffd386a8509@apertussolutions.com>
-Content-Type: text/plain; charset=UTF-8
+From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+In-Reply-To: <a83cf90c-142a-41ee-a80b-4e849cc804f3@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1786626128-BF4D3034-82BADE70/0/0
+X-ZohoMailClient: External
+X-purgate-ID: tlsNG-c1860d/1786626170-CED4087B-732F5D25/0/0
 X-purgate-type: clean
-X-purgate-size: 2770
+X-purgate-size: 3852
 
-On 13.08.2026 14:42, Daniel P. Smith wrote:
-> On 8/6/26 3:36 AM, Jan Beulich wrote:
->> On 06.08.2026 03:10, Daniel P. Smith wrote:
->>> On 7/28/26 9:23 AM, Jan Beulich wrote:
->>>> --- a/xen/xsm/flask/hooks.c
->>>> +++ b/xen/xsm/flask/hooks.c
->>>> @@ -1022,14 +1022,9 @@ static char *cf_check flask_show_irq_sid
->>>>    
->>>>    #ifdef CONFIG_HAS_PIRQ
->>>>    
->>>> -static int cf_check flask_map_domain_pirq(struct domain *d)
->>>> +static int cf_check flask_map_domain_pirq(struct domain *d, bool access)
->>>>    {
->>>> -    return current_has_perm(d, SECCLASS_RESOURCE, RESOURCE__ADD);
->>>> -}
->>>> -
->>>> -static int cf_check flask_unmap_domain_pirq(struct domain *d)
->>>> -{
->>>> -    return current_has_perm(d, SECCLASS_RESOURCE, RESOURCE__REMOVE);
->>>> +    return current_has_perm(d, SECCLASS_RESOURCE, resource_to_perm(access));
->>>>    }
->>>>    
->>>>    #endif /* CONFIG_HAS_PIRQ */
+
+
+On 8/13/26 8:14 AM, Jan Beulich wrote:
+> On 13.08.2026 13:51, Daniel P. Smith wrote:
+>> On 8/3/26 6:11 AM, Jan Beulich wrote:
+>>> On 02.08.2026 17:55, Daniel P. Smith wrote:
+>>>> On 7/28/26 9:18 AM, Jan Beulich wrote:
+>>>>> Otherwise the function is unreachable, violating MISRA C:2012 rule 2.1.
+>>>>> With the function compiled out, its dedicated XSM hook also becomes
+>>>>> unreachable, so it is similarly guarded.
+>>>>>
+>>>>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>>>>> ---
+>>>>> It feels suspicious that the .priv_mapping() check is used for HVM guests
+>>>>> in shadow mode, but not for ones in HAP mode.
 >>>>
+>>>> I believe a hint to it is laying in the comment,
+>>>>
+>>>>     /*
+>>>>      * Let privileged domains transfer the right to map their target
+>>>>      * domain's pages. This is used to allow stub-domain pvfb export to
+>>>>      * dom0, until pvfb supports granted mappings. At that time this
+>>>>      * minor hack can go away.
+>>>>      */
+>>>>
+>>>> Correct me if I am wrong, but get_page_from_l1e() is only used by PV and
+>>>> HVM + Shadow. When in HVM + HAP is mapping a guest page, it is done
+>>>> through p2m_get_foreign() which will then be covered by
+>>>> xsm_map_gmfn_foreign(). So only HVM + Shadow can hit TARGET_HACK check.
 >>>
->>> I am not opposed to collapsing the calls as long as the semantic is not
->>> lost, which I feel the reuse of the xsm_map_domain_pirq does looses it
->>> much less provides an opportunity for confusion. Something like
->>> xsm_domain_pirq(..., access) makes more semantic sense to me, as it
->>> would read, grant domain pirq access T/F.
+>>> Yes, sure; that wasn't the point of my comment. The point was that I'd
+>>> expect _the same_ hook to be used by the other path. Aiui if you make a
+>>> policy, you want same situations dealt with the same. Hence there shouldn't
+>>> be a need to express the same thing two ways.
 >>
->> In fact I was as well wondering about naming (and a possible name change)
->> here. I decided against it because of the other hooks (touched by patch
->> 19), which all follow a similar model of their names really more expressing
->> the "positive" form than the "negative" one. Further, entirely losing "map"
->> from the name also doesn't look quite right, as physdev_{,un}map_pirq() is
->> where they're called from. To follow the naming of some of the other hook,
->> maybe xsm_domain_pirq_mapping(..., bool map)? Possibly even with "domain"
->> dropped from the name, fully fitting xsm_io{mem,port}_mapping()? Which
->> would then further raise the question whether patch 19 should maybe rename
->> the parameters of those two hooks to "map" at the same time.
+>> But it's not the same, the enforcement mechanism is different. FLASK is
+>> an evaluation of Subject/Object/Predicate. In this case the mechanism
+>> (software enforced access) that provides the Predicate has enough risk
+>> that it warranted itself a separate check to allow fine grained
+>> assignment of the operation to a specific domain which was driven by a
+>> specific use case.
 > 
-> Sound like you and I were running through the same argument with 
-> ourselves, except you went right and I went left.
+> I don't understand this. What mode a guest is run in (HAP vs shadow)
+> shouldn't affect what permissions it has. Two distinct hooks means the
+> guest might change behavior when flipped between hap=0 and hap=1. Which
+> absolutely shouldn't happen, imo.
 > 
-> For me, I find the false case of xsm_map_domain_pirq(..., access) reads 
-> a bit weird, "Can the target map domain pirq access=false?" I do like 
-> your mapping suggestion along with the parameter rename to map. It 
-> changes the reading to "Is target allowed map(true)/unmap(false) for the 
-> domain pirq mapping?" This could be carried through to the other cases.
 
-Will do. As to patch 19: I'm inclined to leave the parameters as "allow"
-in dummy.h, but change at least the flask_io{mem,port}_mapping() ones to
-"map". Will that be okay with you? Else what scheme would you prefer?
+Oh, it most certainly does affect how a security policy wants to be 
+written. Certain mechanisms have properties that provide certain 
+assurances and the security architect/policy writer may not want to 
+allow the access via mechanisms deemed to have an unacceptable risk.
 
-Jan
+>>>> I think the question is how to address the TARGET_HACK situation.
+>>>
+>>> I fear I don't really know what exactly you mean here.
+>>
+>> Is this path still needed for the pvfb or is it now in use by other use
+>> cases. If the former, then close the ability otherwise TARGET_HACK
+>> should be renamed to something sensible for general case. Some code
+>> documentation might be necessary to help understand why/
+> 
+> Only after grep-ing it has become apparent that TARGET_HACK is something
+> in Flask. It's entirely invisible outside of Flask, e.g. at the call site
+> of the hook.
+> 
+
+Correct.
+
+> I think the comment is stale in referencing only pvfb, but I'm not really
+> sure. It is too long ago that I last saw the log message issued there,
+> and hence I don't recall under what (buggy guest?) conditions it could
+> surface.
+> 
+
+Agreed, that's why I was trying to say that it appears to have been 
+created based on that specific situation. My question is, did this 
+situation evolve to no longer be a one-off or can we close the ability 
+to map memory this way. The comment alludes that it was a temporary 
+method of access, but I haven't studied the path to this check or what 
+situations could follow that path today. I have a suspicion that it's no 
+longer a one-off situation.
+
+v/r,
+dps
 
