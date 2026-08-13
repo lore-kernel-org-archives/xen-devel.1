@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57563C5CFEB
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 07:19:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1389477.1630184 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AC39C5CFEB
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 07:29:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1389489.1630194 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuPig-0006h0-LV; Thu, 13 Aug 2026 07:19:18 +0000
+	id 1wuPrx-00004x-LT; Thu, 13 Aug 2026 07:28:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1389477.1630184; Thu, 13 Aug 2026 07:19:18 +0000
+Received: by outflank-mailman (output) from mailman id 1389489.1630194; Thu, 13 Aug 2026 07:28:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuPig-0006gt-IP; Thu, 13 Aug 2026 07:19:18 +0000
-Received: by outflank-mailman (input) for mailman id 1389477;
- Thu, 13 Aug 2026 07:19:16 +0000
+	id 1wuPrx-00004q-GW; Thu, 13 Aug 2026 07:28:53 +0000
+Received: by outflank-mailman (input) for mailman id 1389489;
+ Thu, 13 Aug 2026 07:28:51 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wuPie-0006gn-NI
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 07:19:16 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wuPrv-0008WQ-N9
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 07:28:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wuPid-00C8e1-WE
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 09:19:16 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wuPru-00CAmA-Hd
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 09:28:50 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7d6fed-bab6-0a2a0a5309dd-0a2a4504d4c8-24
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 09:19:15 +0200
-Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a7d7227-8faa-0a2a0a5109dd-0a2a4506e366-46
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 09:28:50 +0200
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7d6ff2-b57f-0a2a45040019-d155dd2ba916-3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 09:19:14 +0200
-Received: by mail-wr1-f43.google.com with SMTP id
- ffacd0b85a97d-4813ea321cdso379999f8f.1
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 00:19:14 -0700 (PDT)
+ id 6a7d7232-195a-0a2a45060019-d1558030c9dc-3
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 09:28:50 +0200
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-493b966dd74so2472815e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 00:28:50 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49981e37525sm39494875e9.3.2026.08.13.00.19.13
+ ffacd0b85a97d-4815a5af45fsm4173392f8f.18.2026.08.13.00.28.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Aug 2026 00:19:13 -0700 (PDT)
+ Thu, 13 Aug 2026 00:28:49 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,51 +53,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786605554; x=1787210354; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Tg1x7LxiP1yJoKuSPAYkuKrDaCunc0z5kTYlqCAXgVA=;
-        b=AaYMH7R1ZctJaa6/XjBMKijtUEFKZXinYTO5GbHuJ75yO+Hzn3Xb8ozU8ZkwV+FzgY
-         tY53bqRu3JIgbfAP6JDuv4oIGPURVIiGQkplm89RRMJSinYtGNmLKPdxyv8lsQLNkuMO
-         AdXcxNVTLqmSLczzPaGVIvfVViw0I5ZLqV5fc5PULIgwerzcltr5cj5e0LlfH/rhiik4
-         e0rzBGyYv1aetUFzh3N/Xo+xujaYDb3JgcEBb6JlZkPIpl/XrQEJkwZW4g9J3dmln+y4
-         rImAQKaTeQ74cQdPiMV9q84PdfRHcSzQ55c4O79Lsb63F9aA3b4ygWr804RRoME1/7po
-         NhKw==
+        d=suse.com; s=google; t=1786606130; x=1787210930; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=WnKfuhOpN9cEpBpCnJX7qk1wPx4868zb1MjUnE+BZe8=;
+        b=CIGqrYt+p6L5/ZyHbekR9B9B7klv2r2Fqp45fMrrofpM4v9ZoH19qDgikekwl/Glm3
+         guDnvWxc1VUDNYjXoqge7ebqCBZaIcvV0fkxORR/f9LAJFVmhtfNN1dmUEWYKlVbD8M5
+         p6KjP0tTdEFGFN9u6OGb3Le3LYpq5EPYmbLURl7i/4ZdqC0cK2Y3lWa7r7vc38m14t1h
+         9ULUOG50q+0+1wuUMhyFeU9BlJOxu+dgpux0VOKhng6/J0/r8x7FehQxcrw097GTQcMC
+         Q/STE7e1TuSTmsIK/u4VrkXGjLrF/sMAksF870oPG7l99ZJ7u5X59wdJ//zyN+DlEbW8
+         jNmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786605554; x=1787210354;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Tg1x7LxiP1yJoKuSPAYkuKrDaCunc0z5kTYlqCAXgVA=;
-        b=H+jxs0teEpEQFfYiHIecM7hWV43DlyZcxwF5cTkgWDr4CeanqX+YlEdTVARVE7aphv
-         6CvdIO4GoET6trPxmnnAuWQHMwtlIfTbQhqzEq0k8fn6g5K8Dj+xHsQR0KTsjfj7aMW/
-         vyESkIgnwvNOvIE6jtWnZ+c0BLWfWulkWl6OspAsY+DRpNQh8T0WVkOBSfNyeW2gHNeu
-         xbJRFSAaAhPo4Uwe7FT1Ij0HfzsvCu6Vo36iy74AuNnvqN1vrQs/vK+kXatLqRs2bR0I
-         5GesAAbBm9isEf2CO3xtk19PPdToZM2pVglh6ZNGYuA2BtakhaQLJ0s49MbGLk0xR1hw
-         XI+Q==
-X-Forwarded-Encrypted: i=1; AHgh+Rp40HMMSgSKQjzXq4E6KNEhPu3j5YuY6g3PKLAiCRol/qzuSU30bprKYYSdRSnX7mpI/hyncQ583Dg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yxzk/5zGH8a6vkVAU6iSdZ1v5tn4N0A5Ij2qbPXbKCtt6j6hnZU
-	U4XR/udPLINCFEiBBY+XTmpHXY+y7MzK2y0MpreZp/guAg26g++LEcX9kaY7zHM5Sw==
-X-Gm-Gg: AR+sD12LVECGqbGeD59z8zUh9Ae21ABUTKro+VmVm9Ar7MmDmrgg4AVxl5wjfGSd7Yn
-	nWMkv1Agh2jlaB2prLQ7hgPFgcADxuHOu8OuD5oIiOWL9QJUlzcx+nt9p0JQN9d1iWSshJ3YDG+
-	aTmFGBztOHyfcKA3RXXeAgiwdjBj0RPu+atMhVQ+VzG6qOFsFu2Y8wQh2aHJVMHdWRWwyplaR1h
-	2e2XyvAIb7SDn70klMqH9tlBJOInTMmYb5+pOuu+Oe7/vyyTG8SfHegMazV+GWUnWQCcuH6+hEJ
-	yaHlfnhrTOyiQJAJLlTftv07MrvD/SL25IlShVRT0P1dbSZj3UUlgobcw5sc2cCedsWtx3lG+mY
-	ITe/BrdElypNWtoYFsqQ7CJh/lL+RzJBUFJQUYyzQ2V6eLOY+sevsl23stQMwDBozFQLPlo4BiP
-	GTRJBvNRvpFRCjj33XfYrfhGCZUt7JBWOewlpeUyov7mBNHOUlB9la5LEcG9tA71XtRK90yzB+r
-	+PPegNogJc3R12wOfVFRBV5Xd2isLmwONU9+jp2yW2aLmyzCi7k
-X-Received: by 2002:a05:600c:1546:b0:499:5f80:83ac with SMTP id 5b1f17b1804b1-4998220bc5fmr27088225e9.7.1786605554432;
-        Thu, 13 Aug 2026 00:19:14 -0700 (PDT)
-Message-ID: <3bb59f64-7ff1-4bdc-b951-cfb78671e8f9@suse.com>
-Date: Thu, 13 Aug 2026 09:19:12 +0200
+        d=1e100.net; s=20251104; t=1786606130; x=1787210930;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=WnKfuhOpN9cEpBpCnJX7qk1wPx4868zb1MjUnE+BZe8=;
+        b=tJMvpSm2pVAKUIHZ/4SPNzgOLx3IiXDgFE1n3QYqdF5xokrvNsj88fpMPK/PB2c2tT
+         QuzELt7lC3QwXab3cmGBRqfqidemq5rZMmb39q4hmQ43ZGsUz2LhpzpSrenzZbanVCyj
+         jk12/YGWYlMu462Y+/FphdrF5vxgA/YrbPq3PPit/VkFt2YRrfAs31/Ob1ir+bZ5OnBx
+         ktc8OO0Cl0EawaVJQoYQih62D21H3yla1eIuViM0vq2rONIYkKfeyPgleRXbXZAutOQR
+         gGZaVCHevLXAqMqWXseR83CF9i1GNRNEcFB3n7LHa61Ntkg/2IGm8bUkiY9hltOubMfe
+         B/3Q==
+X-Forwarded-Encrypted: i=1; AHgh+RpziUi2b07/KxePtr9lg+qRpHdgI1KBG9hbJyHgQbNZJcAw8sdS2igJE+dwUqYi6pXNjQg/0wMKvpY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyLE8uvB5jaUzLdrEqzfHjFoRCsbnBqodCd5vkk7yUwVATaRFWL
+	lVz2wml6O8eslGvrf0xMUEPNA7x2MqcITwI1h7XaZOI9I3xRCY2OKiRNJ8QS7Y1zdw==
+X-Gm-Gg: AR+sD112IKdW2oBSp8VO97I3I9W4mG9cnx376irgbZyzfNQEZ6KPN3xHNUeNPRHcAvE
+	GvtEfd5jUGe/lBulkCMrmFkuyctlwaPudvH0OfDuAAYRWsLViwues/ihDB2c+jI6I9v000Iz9BP
+	nrntRzjZqjROe48eHFgmLyyPEKdduiYYLBU49o9p3tvVXexDDSa5iEaU0PxWeQmWzhsWKx/97FF
+	wLGHI5EFbciMuPRS3/YARfe6JcvlawDDhCvx6rmX9ZLfbTCq3rzh0TgQ6GGzZD+ft+Kjrc+7SCN
+	jzUNyH5I7PS4j928mPY8Wi7WlIdzxl6bAx3d7d/UuBawSoBPMkOhIAOp7dc1If+hnX+7iXvtsf4
+	2MppzKWgdAF9dcHBuqfXywet2ShsMBcKJPb+8YBo00l7gSMMBNBnWxTqsC5V6JXTb8+0wo3QpBw
+	0XwbeFItPXcyr6DHEi2iJHOe3QkPyPone+Vlle0uLAEXwHaJztqIL2QgPrS8ZSgLGT2s0ud3nwM
+	IEdeRE+loRBSMM+omWHXH1brB6uGmsoOajuVsy8eNDHO/XZIIZD
+X-Received: by 2002:a05:600c:1c24:b0:496:bbcb:b0bb with SMTP id 5b1f17b1804b1-49982206f28mr44422525e9.18.1786606129910;
+        Thu, 13 Aug 2026 00:28:49 -0700 (PDT)
+Message-ID: <20a4599a-f14e-4c7f-a765-52c1ab667516@suse.com>
+Date: Thu, 13 Aug 2026 09:28:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 04/20] xen/riscv: introduce guest riscv,isa string
+Subject: Re: [PATCH v1 16/17] xen/riscv: add guest load emulation for trapped
+ MMIO accesses
+From: Jan Beulich <jbeulich@suse.com>
 To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  Baptiste Le Duc <baptiste.le-duc@vates.tech>,
@@ -108,10 +110,10 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1785836421.git.oleksii.kurochko@gmail.com>
- <59b5b69f53ef81d68fd279d9ee0c03f5ffbbc2ae.1785836421.git.oleksii.kurochko@gmail.com>
+References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
+ <9b18a20367754605efd6a6b5bf09d4483d9c3ab2.1784560663.git.oleksii.kurochko@gmail.com>
+ <7a2e46da-5b1f-448e-aba3-7eefe0a61950@suse.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -135,71 +137,62 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <59b5b69f53ef81d68fd279d9ee0c03f5ffbbc2ae.1785836421.git.oleksii.kurochko@gmail.com>
+In-Reply-To: <7a2e46da-5b1f-448e-aba3-7eefe0a61950@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1786605554-538C1B50-04E74C1E/0/0
+X-purgate-ID: tlsNG-16d1c6/1786606130-F460277B-6FD9AA58/0/0
 X-purgate-type: clean
-X-purgate-size: 2621
+X-purgate-size: 2032
 
-On 04.08.2026 17:47, Oleksii Kurochko wrote:
-> @@ -120,29 +148,30 @@ static int __init dt_get_cpuid_from_node(const struct dt_device_node *cpu,
->   * and strncmp() is used in match_isa_ext() to compare extension names instead
->   * of strncasecmp().
->   */
-> -const struct riscv_isa_ext_data __initconst riscv_isa_ext[] = {
-> -    RISCV_ISA_EXT_DATA(i),
-> -    RISCV_ISA_EXT_DATA(m),
-> -    RISCV_ISA_EXT_DATA(a),
-> -    RISCV_ISA_EXT_DATA(f),
-> -    RISCV_ISA_EXT_DATA(d),
-> -    RISCV_ISA_EXT_DATA(q),
-> -    RISCV_ISA_EXT_DATA(c),
-> -    RISCV_ISA_EXT_DATA(h),
-> -    RISCV_ISA_EXT_DATA(zicntr),
-> -    RISCV_ISA_EXT_DATA(zicsr),
-> -    RISCV_ISA_EXT_DATA(zifencei),
-> -    RISCV_ISA_EXT_DATA(zihintpause),
-> -    RISCV_ISA_EXT_DATA(zihpm),
-> -    RISCV_ISA_EXT_DATA(zba),
-> -    RISCV_ISA_EXT_DATA(zbb),
-> -    RISCV_ISA_EXT_DATA(zbs),
-> -    RISCV_ISA_EXT_DATA(smaia),
-> -    RISCV_ISA_EXT_DATA(smstateen),
-> -    RISCV_ISA_EXT_DATA(ssaia),
-> -    RISCV_ISA_EXT_DATA(sstc),
-> -    RISCV_ISA_EXT_DATA(svade),
-> -    RISCV_ISA_EXT_DATA(svpbmt),
-> +static const struct riscv_isa_ext_entry __initconstrel riscv_isa_ext[] = {
-> +    RISCV_ISA_EXT_ENTRY(i,            true),
-> +    RISCV_ISA_EXT_ENTRY(m,            true),
-> +    RISCV_ISA_EXT_ENTRY(a,            true),
-> +    RISCV_ISA_EXT_ENTRY(f,            false),
-> +    RISCV_ISA_EXT_ENTRY(d,            false),
-> +    RISCV_ISA_EXT_ENTRY(q,            false),
-> +    RISCV_ISA_EXT_ENTRY(c,            true),
-> +    RISCV_ISA_EXT_ENTRY(v,            false),
-> +    RISCV_ISA_EXT_ENTRY(h,            false),
-> +    RISCV_ISA_EXT_ENTRY(zicntr,       true),
-> +    RISCV_ISA_EXT_ENTRY(zicsr,        true),
-> +    RISCV_ISA_EXT_ENTRY(zifencei,     true),
-> +    RISCV_ISA_EXT_ENTRY(zihintpause,  true),
-> +    RISCV_ISA_EXT_ENTRY(zihpm,        true),
-> +    RISCV_ISA_EXT_ENTRY(zba,          true),
-> +    RISCV_ISA_EXT_ENTRY(zbb,          true),
-> +    RISCV_ISA_EXT_ENTRY(zbs,          true),
-> +    RISCV_ISA_EXT_ENTRY(smaia,        true),
-> +    RISCV_ISA_EXT_ENTRY(smstateen,    true),
-> +    RISCV_ISA_EXT_ENTRY(ssaia,        true),
-> +    RISCV_ISA_EXT_ENTRY(sstc,         false),
-> +    RISCV_ISA_EXT_ENTRY(svade,        false),
-> +    RISCV_ISA_EXT_ENTRY(svpbmt,       false),
->  };
+On 13.08.2026 09:15, Jan Beulich wrote:
+> On 29.07.2026 15:40, Oleksii Kurochko wrote:
+>>  static int emulate_load(unsigned long fault_addr, unsigned long htinst)
+>>  {
+>> -    return -EOPNOTSUPP;
+>> +    struct cpu_user_regs *regs = vcpu_guest_cpu_user_regs(current);
+>> +    mmio_info_t info = { .is_write = false };
+>> +    unsigned long insn;
+>> +    unsigned int shift = 0, len, insn_len;
+>> +    bool is_unsigned = false;
+>> +    int rc;
+>> +
+>> +    if ( decode_trapped_insn(htinst, &insn, &insn_len) )
+>> +        return 0;
+>> +
+>> +    /* Decode length of MMIO and whether it is a sign- or zero-extending load */
+>> +    if ( (insn & INSN_MASK_LB) == INSN_MATCH_LB )
+>> +        len = 1;
+>> +    else if ( (insn & INSN_MASK_LBU) == INSN_MATCH_LBU )
+>> +    {
+>> +        len = 1;
+>> +        is_unsigned = true;
+>> +    }
+>> +    else if ( (insn & INSN_MASK_LH) == INSN_MATCH_LH )
+>> +        len = 2;
+>> +    else if ( (insn & INSN_MASK_LHU) == INSN_MATCH_LHU )
+>> +    {
+>> +        len = 2;
+>> +        is_unsigned = true;
+>> +    }
+>> +    else if ( (insn & INSN_MASK_LW) == INSN_MATCH_LW )
+>> +        len = 4;
+> 
+> Already up to here this demonstrates a weakness of the INSN_MASK_*
+> set of #define-s (which I similarly observe in binutils, and I expect it
+> all has the same questionable origin). All INSN_MASK_L* and INSN_MASK_FL*
+> (also INSN_MASK_S* and INSN_MASK_FS*) are identical, allowing for a nice
+> switch() to be used here in principle. That said, with access width
+> nicely encoded in FUNCT3, it's not even clear whether a switch() would
+> end up being needed / efficient.
+> 
+> Otoh none of these masks cover the pseudoinsns that htinst may supply.
+> 
+> Further, what about A-extension insns? Some (if not all) of them can
+> plausibly be used on MMIO, I think.
 
-Just as an independent, up front remark after having looked at patch 16/17 of
-the other series: Is a mere boolean going to suffice in the longer run? I could
-see some extensions wanting exposing to only RV32 or only RV64 guests. E.g.
-Zilsd is RV32-only, while Zqinx quite likely would want restricting to RV64.
+Because of the further additions that are going to be needed, may I also
+suggest to consider putting emulation code in its own file (emulate.c
+perhaps), rather than directly in traps.c?
 
 Jan
 
