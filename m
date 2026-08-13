@@ -4,44 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CDB9C5CFCF
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 17:43:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1390372.1630811 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D79FAC5CFCF
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 18:05:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1390219.1630819 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuZSg-000616-7H; Thu, 13 Aug 2026 17:43:26 +0000
+	id 1wuZnW-00029Z-Tf; Thu, 13 Aug 2026 18:04:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1390372.1630811; Thu, 13 Aug 2026 17:43:26 +0000
+Received: by outflank-mailman (output) from mailman id 1390219.1630819; Thu, 13 Aug 2026 18:04:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuZSg-00060z-4E; Thu, 13 Aug 2026 17:43:26 +0000
-Received: by outflank-mailman (input) for mailman id 1390372;
- Thu, 13 Aug 2026 17:43:25 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wuZnW-00029S-Qm; Thu, 13 Aug 2026 18:04:58 +0000
+Received: by outflank-mailman (input) for mailman id 1390219;
+ Thu, 13 Aug 2026 15:31:46 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper3@citrix.com>) id 1wuZSe-00060t-VI
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 17:43:25 +0000
+ (envelope-from <ruoyuw560@gmail.com>) id 1wuXPG-0007Wt-K9
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 15:31:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wuZSd-0076Yx-P2
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 19:43:23 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wuXPF-009x93-KM
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 17:31:45 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a7e0213-2eae-0a2a0a5409dd-0a2a4505a17e-44
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 19:43:23 +0200
-Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a7e023b-4cb1-0a2a45050019-d155802aacdb-3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 19:43:23 +0200
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-495590dde14so2725585e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 10:43:23 -0700 (PDT)
-Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
- [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49987779a11sm3878065e9.2.2026.08.13.10.43.22
+ (envelope-from <ruoyuw560@gmail.com>)
+ id 6a7de349-bab6-0a2a0a5309dd-0a2a450bc1c0-48
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 17:31:45 +0200
+Received: from [209.85.214.169] (helo=mail-pl1-f169.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <ruoyuw560@gmail.com>)
+ id 6a7de360-b7e8-0a2a450b0019-d155d6a9cdb0-3
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 17:31:45 +0200
+Received: by mail-pl1-f169.google.com with SMTP id
+ d9443c01a7336-2cc97653887so1076835ad.1
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 08:31:45 -0700 (PDT)
+Received: from haichao.tail057a43.ts.net
+ ([2001:da8:e000:1206:3b7:6da1:c188:d14f])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2d37c4e8098sm11911405ad.84.2026.08.13.08.31.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Aug 2026 10:43:22 -0700 (PDT)
+ Thu, 13 Aug 2026 08:31:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,136 +54,126 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1786643003; x=1787247803; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=7YMFuJMms+V3nzbvUzla9kD+AeHM+vlytqXfkk0/IRs=;
-        b=Zdfm+8MQF0VEja0J3JPBRLP8vf1Qj30g76YIFjvgGsFpxI5moMUB+g3gfBpscY7hmN
-         CBppsr+F77WAo9Z3uCHVjpBbtweomRBFPBwYt6s6CGPi4Dyw3P/sLjsXfdbkGDF+cKVY
-         haWlMpSVyUZJRpHwKJVw3j+HlCyRU8flHbZKs=
+        d=gmail.com; s=20251104; t=1786635103; x=1787239903; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=5PO43KtK1vinlhveejSpb/w0mOz3aVvtFpKxNKIjn3Q=;
+        b=SZtONlbgC7aXywlk40MDcZG3OJDcYKUoLLxnE6mleBj0KH5TjvBhfNp2c/3Kl16iW4
+         nUvcR21mgpXUcOZdkepV82hNg3Ypzh/gSPuiGdVISnYjZ+qfVOM25T6xumLaBujDS4pK
+         IcVakOSmE40DkP/ii4ZZW27fINI1oO109eqIhBOeWcffRq16DhLP8pvapI0XDALEv7vz
+         eyT4R2Tfr0OSpOCE6w3NEPxTjn9vYTMI07lYS/yfrPH2K+BEVk3gOxZIVxzyAYodTwPk
+         SIfk3wEDGMGKOLySVDXVSlV3O1NFJSRT4ZNgwTaquad0Msu4j+KE+1UUVmCi7pkjLjF/
+         Eaig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786643003; x=1787247803;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=7YMFuJMms+V3nzbvUzla9kD+AeHM+vlytqXfkk0/IRs=;
-        b=k4Bpycur29aBBnrpns/kcAU+csF+YQ95LUPP5wDKhpK4Z+oZdz0i62GLeHKGQjYp3B
-         xoSch1lx5EhmWMdKyRdPGLXJgfL17pRId1vHNApgGvmXCi6CPTi1XwVyEFiGNxuVi8mb
-         /Mc1kE4FnHN3+8WTvuTItjMJWv5xAIrhjVrm+nWES/njDwC7PvWhhokTniElHu41v7p6
-         oGpxfTEjfVg9S3WIQlgaxn080bZcHqPovsCejfXkvMYrT0zoFxt2cTn7nBXHh0u6ExIL
-         5eNaEyKPFqHUmeGB3bcODZRY0/Ro6MhUr0Y9kt4ylGZykHFfSMdXAofSlH2oguw8jEAn
-         FJLw==
-X-Gm-Message-State: AOJu0YyD39PthZlPNWyXq3v/uwLw5tBqH+1yWYagAxqd3coOsY5X4DPR
-	oqpvDc72QHh8Q7YkMovQc5y+/bBSLFwPVrtrZ9xjjfH1IK1FjPYjEnpyPBhjeUH59yFT5VasLZu
-	/bAIE/94=
-X-Gm-Gg: AR+sD1128hn85A26n/QkOMAkbBsEvO4wJMtJn/w2ZMkffDFkaF/MAKloMXraMVAT5bC
-	sMlsztVGXWmSiBYzwy88pCbBySOLUAdDueQWrWrV9RBfzi03VlG+61lV6ciSbbwJ7tz67Yw7fYv
-	FvqyjZzluIBEZvYSEz6sCCROpoLb2ZEi4mEZwQlfivwZZOYjT9rYjAnAztRAlTwEhnMnbmu3BPP
-	JuMvBde8JiYFr4hGAd4GAGC+hoev1/siit6hPQA0QvBOYLzFrXDCvVfpgKJ39z+vxHzSNltNfXD
-	CCTtoLrlhCHsMbNPsyiM3WAPe5IZi4yl9qR2pMLZnjRw1dAYue8nKJRHIz5JvNRtgSv1C+buqB0
-	gNPIeufu+lb6Na7KxPnjO/sUB1mgsw4XsgQrpDrHTa6ULxRnNPKHjmKlD4NG+73WkdUaMrEj+p7
-	6z5d0ECS3qrDrtypMpVcR0fuzh6isLYH6WDPKPnE429h4MGWoIIeO2BLQyo+kP18dhEy5isXWdX
-	deWIcERsAMMVWfqtIyy6wINkdkrKyZSdXSTWmU=
-X-Received: by 2002:a05:600c:1d89:b0:499:726a:117c with SMTP id 5b1f17b1804b1-499879bf7d0mr780895e9.19.1786643002850;
-        Thu, 13 Aug 2026 10:43:22 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH] x86/nmi: Fix mis-classification of watchdog NMIs
-Date: Thu, 13 Aug 2026 18:43:19 +0100
-Message-Id: <20260813174319.1682009-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
+        d=1e100.net; s=20251104; t=1786635103; x=1787239903;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=5PO43KtK1vinlhveejSpb/w0mOz3aVvtFpKxNKIjn3Q=;
+        b=cdNYPuwy5ecECcAg9i35V99or2NuoCuiPg6Euc9GTK9blPAJsYL9cJSTySzYpH1nlK
+         fhnno7wEkfVNTa5JC6FyaoQTs+jr5HeybIdyaH40ge/IeLCMmY3rNDa07BOc/4moyqr9
+         St4rwPic6DtKHxfNLnVmgcwMV2gIRznGfQ52PAg8mR3IxDey5nhu17HzSZiX75cSfVeR
+         KTKIWa03/v8aBruP4JvwCqgi0YQ7mGA71UrV6ZJiWfMzhM3gh+XuKqkBQBGSC01xZX5d
+         SRtVrPLnMa7PVzMVkJ4sKNOj8QQUuY/tICjxtmfh2rg1TmQyXNQ72Ivqkaj1tveWHmlT
+         2w0w==
+X-Gm-Message-State: AOJu0YxnjNQQiSpuPiDPWW49+bOPJX7zjVi9lbJjNLhhls/J1IVEZxsW
+	z1CQdWizj5OYxwU/VTJUwZzR1w5QdsT4fPy+5cU2ebz0iSdCjSTgD1G05D4oJAYjztA=
+X-Gm-Gg: AR+sD10JFGJLPuW/kV6bkr/rfGUdJCtIskiJfAbz9tek6gabZKnVc1PIvRi8Gfgr4/0
+	Aletpk03/071Q3foeU2ideg0rpMDSu647yKBSrda5FVn/uR6flYGh6knnOVKkmKoTo1QSWI7LM7
+	vSjxNzF8MUkaKPGJu/KmlG9WEdiy9AoYtBEmePv9dDY/dYc4YYj02LsY0wkULwzWDY6iHpHVDl8
+	0iJ1dwzcxsARC10ERqBVWWjgCtqFXHn1IypjO4LH0EeGObVch8Nek4Ec4wXnwCAD6vf10eFdvg8
+	pUDmzrznNzsz2CQBbd2T8+T2toAavdoOZWQ2gZtlTzEFeh0nzyYJn0mVWjXU5Mr7Gv7F1omjOay
+	oJP3EJ/0621/tTfRuI6c/LTiwo+9MfD4Y/mrgnqOvbGY9bbmOhwTqoblDBe1Lrn17CA3VkhaQ9y
+	S1uTJ7WGhBraCD8P7lYIVuFONmrThvpf9g9F1XRgp07CxQMJtIk9zKYRegq0sgEYhmtByMxMoZl
+	ce8iFcV
+X-Received: by 2002:a17:902:ea0b:b0:2c9:9a19:df with SMTP id d9443c01a7336-2d37ebb174cmr71789975ad.18.1786635103360;
+        Thu, 13 Aug 2026 08:31:43 -0700 (PDT)
+From: Ruoyu Wang <ruoyuw560@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: jgross@suse.com,
+	sstabellini@kernel.org,
+	oleksandr_tyshchenko@epam.com,
+	bhelgaas@google.com,
+	linux-pci@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Ruoyu Wang <ruoyuw560@gmail.com>
+Subject: [PATCH] xen/pcifront: Fix PCI device reference leak in AER handling
+Date: Thu, 13 Aug 2026 23:31:38 +0800
+Message-ID: <20260813153138.3953222-1-ruoyuw560@gmail.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1786643003-F70B22A1-D099A82B/0/0
+X-purgate-ID: tlsNG-42698a/1786635105-18CCF9EA-38E32766/0/0
 X-purgate-type: clean
-X-purgate-size: 3211
+X-purgate-size: 2422
 
-It used to be the case that cpu_data[] inherited the BSP's cpuid_level until
-the AP had calculated it itself.  Following the rework, cpuid_level has a
-placeholder 1 until it is caluclated propely.
+pci_get_domain_bus_and_slot() increments the reference count of the
+returned PCI device. pcifront_common_process() drops that reference only
+when the device or its driver is missing. All paths for a bound device
+either return directly after invoking an error recovery callback or fall
+through without calling pci_dev_put(). Consequently, each AER request for
+a bound device leaks a reference and can keep the device allocated after
+removal.
 
-setup_apic_nmi_watchdog() happens to be called on the BSP after SMP bringup,
-meaning that the first call is on CPU1.  It is also positioned in the window
-where cpu_data[] is garbage.
+Store the callback result, release the reference after callback dispatch,
+and then return the result. This keeps the device alive while its callback
+runs and balances the lookup on every successful path.
 
-As a result, setup_p6_watchdog()'s one-time calculation of the performance
-counter width falls back into Pentium compatibility mode assuming 32bit
-counters.  This causes a watchdog NMI which is delayed a little (e.g. from an
-SMI), to appear as if it hadn't overflowed, and therefore be (mis)classifed as
-not a watchdog NMI.  On systems where unknown NMIs are treated as fatal, this
-results in a spurious crash.
+This issue was found by a static analysis checker and confirmed by manual
+source review.
 
-Switch setup_p6_watchdog() to use boot_cpu_data.cpuid_level, which is how this
-is checked almost everywhere else.
-
-core2_vpmu_init() used the same pattern to look at leaf 0xa.  Despite being
-init code and only running on the BSP, {boot,current}_cpu_data are different
-objects, so switch it over to checking boot_cpu_data.cpuid_level too.
-
-Fixes: 7126b7f806d5 ("x86/CPU: re-work populating of cpu_data[]")
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Fixes: 956a9202cd12 ("xen-pcifront: Xen PCI frontend driver.")
+Signed-off-by: Ruoyu Wang <ruoyuw560@gmail.com>
 ---
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Roger Pau Monné <roger@xenproject.org>
-CC: Teddy Astie <teddy.astie@vates.tech>
+ drivers/pci/xen-pcifront.c | 15 ++++++++++-----
+ 1 file changed, 10 insertions(+), 5 deletions(-)
 
-Found on a system where:
-
-   [root@box ~]# time xen-ucode ./blob
-
-   real    0m9.166s
-   user    0m0.001s
-   sys     0m9.165s
-
-is changing several expectations, and spurious crashes from mis-classified
-watchdog NMIs is just one part of the problem.
-
-I hate this fix, but it's the only thing which I consider remotely safe to
-backport.  Recent attempts to alter CPUID ordering have 0 success at being
-bug-free.
-
-I have not investigated what else was broken by the cpu_data[] change, owing
-to a lack of time on my part.  I would be amazed if this is the only thing.
----
- xen/arch/x86/cpu/vpmu_intel.c | 2 +-
- xen/arch/x86/nmi.c            | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/xen/arch/x86/cpu/vpmu_intel.c b/xen/arch/x86/cpu/vpmu_intel.c
-index ed9f62b9366d..af6cb0a85cdd 100644
---- a/xen/arch/x86/cpu/vpmu_intel.c
-+++ b/xen/arch/x86/cpu/vpmu_intel.c
-@@ -896,7 +896,7 @@ const struct arch_vpmu_ops *__init core2_vpmu_init(void)
-     unsigned int version = 0;
-     unsigned int i;
- 
--    if ( current_cpu_data.cpuid_level >= 0xa )
-+    if ( bsp_cpu_data.cpuid_level >= 0xa )
-         version = MASK_EXTR(cpuid_eax(0xa), PMU_VERSION_MASK);
- 
-     switch ( version )
-diff --git a/xen/arch/x86/nmi.c b/xen/arch/x86/nmi.c
-index 91f95fe6d080..ec85516609b0 100644
---- a/xen/arch/x86/nmi.c
-+++ b/xen/arch/x86/nmi.c
-@@ -321,7 +321,7 @@ static void setup_p6_watchdog(unsigned counter)
+diff --git a/drivers/pci/xen-pcifront.c b/drivers/pci/xen-pcifront.c
+index cffc32d6603277..07263dfe22d538 100644
+--- a/drivers/pci/xen-pcifront.c
++++ b/drivers/pci/xen-pcifront.c
+@@ -575,6 +575,7 @@ static pci_ers_result_t pcifront_common_process(int cmd,
+ 						struct pcifront_device *pdev,
+ 						pci_channel_state_t state)
  {
-     unsigned int evntsel;
++	pci_ers_result_t result = PCI_ERS_RESULT_NONE;
+ 	struct pci_driver *pdrv;
+ 	int bus = pdev->sh_info->aer_op.bus;
+ 	int devfn = pdev->sh_info->aer_op.devfn;
+@@ -597,21 +598,25 @@ static pci_ers_result_t pcifront_common_process(int cmd,
+ 		pci_dbg(pcidev, "trying to call AER service\n");
+ 		switch (cmd) {
+ 		case XEN_PCI_OP_aer_detected:
+-			return pdrv->err_handler->error_detected(pcidev, state);
++			result = pdrv->err_handler->error_detected(pcidev, state);
++			break;
+ 		case XEN_PCI_OP_aer_mmio:
+-			return pdrv->err_handler->mmio_enabled(pcidev);
++			result = pdrv->err_handler->mmio_enabled(pcidev);
++			break;
+ 		case XEN_PCI_OP_aer_slotreset:
+-			return pdrv->err_handler->slot_reset(pcidev);
++			result = pdrv->err_handler->slot_reset(pcidev);
++			break;
+ 		case XEN_PCI_OP_aer_resume:
+ 			pdrv->err_handler->resume(pcidev);
+-			return PCI_ERS_RESULT_NONE;
++			break;
+ 		default:
+ 			dev_err(&pdev->xdev->dev,
+ 				"bad request in aer recovery operation!\n");
+ 		}
+ 	}
  
--    if ( !nmi_p6_event_width && current_cpu_data.cpuid_level >= 0xa )
-+    if ( !nmi_p6_event_width && boot_cpu_data.cpuid_level >= 0xa )
-         nmi_p6_event_width = MASK_EXTR(cpuid_eax(0xa), P6_EVENT_WIDTH_MASK);
-     if ( !nmi_p6_event_width )
-         nmi_p6_event_width = P6_EVENT_WIDTH_MIN;
+-	return PCI_ERS_RESULT_NONE;
++	pci_dev_put(pcidev);
++	return result;
+ }
+ 
+ 
 -- 
-2.39.5
+2.51.0
 
 
