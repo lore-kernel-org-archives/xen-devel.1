@@ -4,51 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3821BC5CFEB
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 14:36:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1390108.1630656 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A78A0C5B572
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 14:54:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1390132.1630665 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuWXA-0001lM-3Y; Thu, 13 Aug 2026 14:35:52 +0000
+	id 1wuWoe-0005zL-GW; Thu, 13 Aug 2026 14:53:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1390108.1630656; Thu, 13 Aug 2026 14:35:52 +0000
+Received: by outflank-mailman (output) from mailman id 1390132.1630665; Thu, 13 Aug 2026 14:53:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuWXA-0001l0-0H; Thu, 13 Aug 2026 14:35:52 +0000
-Received: by outflank-mailman (input) for mailman id 1390108;
- Thu, 13 Aug 2026 14:35:50 +0000
+	id 1wuWoe-0005zE-DB; Thu, 13 Aug 2026 14:53:56 +0000
+Received: by outflank-mailman (input) for mailman id 1390132;
+ Thu, 13 Aug 2026 14:53:55 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>)
- id 1wuWX8-0001kZ-NE; Thu, 13 Aug 2026 14:35:50 +0000
+ (envelope-from <andrew.cooper3@citrix.com>) id 1wuWod-0005z8-EX
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 14:53:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wuWX7-0004VE-NA; Thu, 13 Aug 2026 16:35:49 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wuWoa-0007rv-LJ
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 16:53:52 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jgross@suse.com>)
- id 6a7dd633-2eae-0a2a0a5409dd-0a2a4502d682-18
- for <multiple-recipients>; Thu, 13 Aug 2026 16:35:49 +0200
-Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jgross@suse.com>)
- id 6a7dd645-6ca4-0a2a45020019-c387df838a24-3
- for <multiple-recipients>; Thu, 13 Aug 2026 16:35:49 +0200
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 9B1273E9E;
- Thu, 13 Aug 2026 14:35:40 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 7930477E7A;
- Thu, 13 Aug 2026 14:35:40 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id Ha1uHDzWfWrJSQAAD6G6ig
- (envelope-from <jgross@suse.com>); Thu, 13 Aug 2026 14:35:40 +0000
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6a7dda7f-e002-0a2a0a5209dd-0a2a450cbb48-8
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 16:53:52 +0200
+Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6a7dda80-f479-0a2a450c0019-d155802dd801-3
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 16:53:52 +0200
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-496b7622a83so5826545e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 07:53:52 -0700 (PDT)
+Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
+ [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4815a569325sm7522217f8f.14.2026.08.13.07.53.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 13 Aug 2026 07:53:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,92 +53,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1786631744; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=XHifLB69AMRTLIpKxXHstN48NDghgiv9aUOhYqCq+fI=;
-	b=XvZZDZKtQSkSBkCyGAFOdT+lQquq2J7JWAb5ZaYobwN/3qpM+JmPKLjHG+k1FDuYyWOvvZ
-	EvIV0RsgeP20GJQXJbzGVBVC2yiScSIuG1EiislZmHmozHTx4IU8Y4MucdFEvjc+NF3juI
-	eO7r7/L+pMMGFNvJ1Idrm7Z+K1fkV3I=
-Authentication-Results: smtp-out2.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=bSiAhVrY
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1786631740; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=XHifLB69AMRTLIpKxXHstN48NDghgiv9aUOhYqCq+fI=;
-	b=bSiAhVrYX0JnOkA7W2YJHCtO3XGqJj6cAQ3a3TbbKJoyUax5QoJG6k4myiWTH33cNOCqpU
-	EERQ3jJGU5Zf9tVfy2t0svItXdAh9xqtJ2od4vIOxg+J2gDag234gS+oHgDP12nM5jtUT9
-	0m8E1pCS0I/esvtn2GehGJlFW88ptjI=
-From: Juergen Gross <jgross@suse.com>
-To: minios-devel@lists.xenproject.org,
-	xen-devel@lists.xenproject.org
-Cc: samuel.thibault@ens-lyon.org,
-	Juergen Gross <jgross@suse.com>
-Subject: [MINI-OS PATCH] build: don't add -lm -lpci -lz to APP_LDLIBS
-Date: Thu, 13 Aug 2026 16:35:36 +0200
-Message-ID: <20260813143536.3607406-1-jgross@suse.com>
-X-Mailer: git-send-email 2.55.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1786632832; x=1787237632; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=qP1IXauP7ML7c9SNkCfOyG0xRsXsVlbjOA1DSnkJNLo=;
+        b=WWJ6F3+lFLH4jMVvKn4KYKM0nhbvFKgQ6+DDay66JIi/OPJqJMMupuk5hOIxEMZsPI
+         /8RFdWEVZlcIu2i2yY8+2GSNYJ5ASuHdy74eN8b6tC+2wRqD/g0KEKuO23Legd0hANaj
+         +QZoqG3aEOWDUG4gpeOjXxYz2E8gAEX4BoKNE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786632832; x=1787237632;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=qP1IXauP7ML7c9SNkCfOyG0xRsXsVlbjOA1DSnkJNLo=;
+        b=QRA/61yYvmqkg6QJPpmECd00cnDuoTtHrZXuwQPuITs9FzMSxFijnYkj16GdBGNx9+
+         Ee0/vr/vZ+t5DHf18RMm2MIi+cKYp5S9Bkp0GwkSE2Vu/WyAYgSY7gFchBk6mlXwnQ4G
+         Z/ab9QtF+trBzpKnbKu182QtUOYLssYGOe8JFm/JVjkvTP9E6StvnpmzVjNB4n75e50l
+         umOE7xCcUvnMHwYD4TSlSIQzZ2rX0Pfu2KButq+DRTwxx8SAVIjNV1S+j9cwUzE8WVcM
+         XpLM+5OOI1O3uXr27YceOKgbOA8CWlCfi6NjO14OAOWeEddxN3hShkulG1vbGqME8Lg5
+         B8Sw==
+X-Gm-Message-State: AOJu0YzW3Gpj5RfTFQtkpGzT2G6jGAenE7rXjrHZUUdTgJzdC2wAA9iE
+	vt1a70nW4s5DX3IBGX8uz4O4qn74KaSO6mf5WCYRKsMEw6rAP42Xxj0OHA8Q0/aCHlS9MiNziH7
+	9p+8d
+X-Gm-Gg: AR+sD12MC8SteyNrNz6H9B9ZUUmLHRh8G1t3ZhSbVG2HDsxAaRY4mFKFXBk1rZ65ou9
+	61yofQot4A0P6Vl28qNkHI0BXj1nXYvtYwoSUkVV1aWHDVdQESjZ1qEgoVmKdSMpr7bETtSFupr
+	kk5lPBTL8inb5k70sOLCCyv6apy/YSl36LorvVM80QquA3rXy5znFsdQXVuDl7by2WPIoew8gWr
+	fymZkpsyXFdLwBxhRPqAm6vnGBXsfcI0b2YmtrIk+MR5AhxTXIvrwXjVB9mCP5y4yoFct+K0A88
+	R9D5W5Ts/sXeo69pOyPzWs4QRwOww9RoekPzI4Hv0lhve/+gyZqNmt24xOcqgrdBYmSHvQ8YZE7
+	vdTRNhp8FABuIlMYx7JBslVrxqRzSpSsF+AvWChj63NSz1tklMhxU+dVKv/D9w1x6nuyL20nyA9
+	d5UZDlrZlzeyETKzoBnOG/TLbFPQ3uXDy8yeOdEr6nz/FEslaJ75syMMG8Pnzvl+DBchvkf+aph
+	PU+Ffd84tLGfFwp9Q+YoSWazEVUcoONRNwCSIg=
+X-Received: by 2002:a05:600c:3e15:b0:495:503f:cf9a with SMTP id 5b1f17b1804b1-499821e8021mr78723355e9.9.1786632831501;
+        Thu, 13 Aug 2026 07:53:51 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Teddy Astie <teddy.astie@vates.tech>
+Subject: [PATCH] x86/cpu: Rewrite initialize_cpu_data() for clarity
+Date: Thu, 13 Aug 2026 15:53:49 +0100
+Message-Id: <20260813145349.1656699-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-3.01 / 50.00];
-	BAYES_HAM(-3.00)[99.99%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,suse.com:mid,suse.com:dkim,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo];
-	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	TO_DN_SOME(0.00)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	RCPT_COUNT_THREE(0.00)[4];
-	DKIM_TRACE(0.00)[suse.com:+]
-X-Rspamd-Queue-Id: 9B1273E9E
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Action: no action
-X-purgate-ID: tlsNG-720697/1786631749-303C42AC-4F976244/0/0
+X-purgate-ID: tlsNG-d25034/1786632832-012C8A5B-FB4CCADB/0/0
 X-purgate-type: clean
-X-purgate-size: 768
+X-purgate-size: 1501
 
-libm, libpci and libz are not always needed, so don't add them to
-APP_LDLIBS just because libc is selected.
+Without passing opinion on the behaviour of this function, it is deceptive to
+read (I've twice now mistaken it for resetting boot_cpu_data), and
+inefficient.
 
-In case they will be needed by someone, they should be added via a
-dedicated CONFIG option.
+Instead of having a 256 byte object on the stack and a double copy, copy
+boot_cpu_data directly, then reset parts of cpu_data[cpu] in place.  Leave
+some comments behind explaining what's happening.
 
-Note that none of the currently supported Xen stubdoms is using them.
+No functional change.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
- Makefile | 3 ---
- 1 file changed, 3 deletions(-)
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Roger Pau Monné <roger@xenproject.org>
+CC: Teddy Astie <teddy.astie@vates.tech>
 
-diff --git a/Makefile b/Makefile
-index a64913a..7510d5d 100644
---- a/Makefile
-+++ b/Makefile
-@@ -164,9 +164,6 @@ ifeq ($(CONFIG_LIBXENMANAGE),y)
- APP_LDLIBS += -L$(MANAGE_PATH) -whole-archive -lxenmanage -no-whole-archive
- LIBS += $(MANAGE_PATH)/libxenmanage.a
- endif
--APP_LDLIBS += -lpci
--APP_LDLIBS += -lz
--APP_LDLIBS += -lm
- LDLIBS += -lc
- endif
+Pulled out of separate series.
+---
+ xen/arch/x86/smpboot.c | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index 84e9e4beed60..cede2b886f33 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -94,12 +94,14 @@ void *stack_base[NR_CPUS];
  
+ void initialize_cpu_data(unsigned int cpu)
+ {
+-    struct cpuinfo_x86 c = boot_cpu_data;
++    struct cpuinfo_x86 *c = &cpu_data[cpu];
+ 
+-    /* Must not partially clear the BSP's collected data. */
++    /* First, inherit from boot_cpu_data */
++    *c = boot_cpu_data;
++
++    /* Second, reset most of it, except if we're the BSP at early boot. */
+     if ( cpu || system_state > SYS_STATE_smp_boot )
+-        reset_cpuinfo(&c, true);
+-    cpu_data[cpu] = c;
++        reset_cpuinfo(c, true);
+ }
+ 
+ static bool smp_store_cpu_info(unsigned int id)
 -- 
-2.55.0
+2.39.5
 
 
