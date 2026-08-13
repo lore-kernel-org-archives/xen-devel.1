@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AC39C5CFEB
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 07:29:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1389489.1630194 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B797C5AC67
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 08:13:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1389510.1630202 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuPrx-00004x-LT; Thu, 13 Aug 2026 07:28:53 +0000
+	id 1wuQYU-0007X9-2j; Thu, 13 Aug 2026 08:12:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1389489.1630194; Thu, 13 Aug 2026 07:28:53 +0000
+Received: by outflank-mailman (output) from mailman id 1389510.1630202; Thu, 13 Aug 2026 08:12:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuPrx-00004q-GW; Thu, 13 Aug 2026 07:28:53 +0000
-Received: by outflank-mailman (input) for mailman id 1389489;
- Thu, 13 Aug 2026 07:28:51 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wuQYT-0007X2-W6; Thu, 13 Aug 2026 08:12:49 +0000
+Received: by outflank-mailman (input) for mailman id 1389510;
+ Thu, 13 Aug 2026 08:12:49 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wuPrv-0008WQ-N9
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 07:28:51 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wuQYT-0007Wv-6U
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 08:12:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wuPru-00CAmA-Hd
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 09:28:50 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wuQYS-0006ec-4s
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 10:12:48 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7d7227-8faa-0a2a0a5109dd-0a2a4506e366-46
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 09:28:50 +0200
-Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a7d7c6c-2eae-0a2a0a5409dd-0a2a450c93f0-46
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 10:12:47 +0200
+Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7d7232-195a-0a2a45060019-d1558030c9dc-3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 09:28:50 +0200
-Received: by mail-wm1-f48.google.com with SMTP id
- 5b1f17b1804b1-493b966dd74so2472815e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 00:28:50 -0700 (PDT)
+ id 6a7d7c7f-f479-0a2a450c0019-d1558035d1bb-3
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 10:12:47 +0200
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-4995b0343c1so4111025e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 01:12:47 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4815a5af45fsm4173392f8f.18.2026.08.13.00.28.48
+ 5b1f17b1804b1-49982130365sm45347505e9.7.2026.08.13.01.12.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Aug 2026 00:28:49 -0700 (PDT)
+ Thu, 13 Aug 2026 01:12:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,67 +53,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786606130; x=1787210930; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=WnKfuhOpN9cEpBpCnJX7qk1wPx4868zb1MjUnE+BZe8=;
-        b=CIGqrYt+p6L5/ZyHbekR9B9B7klv2r2Fqp45fMrrofpM4v9ZoH19qDgikekwl/Glm3
-         guDnvWxc1VUDNYjXoqge7ebqCBZaIcvV0fkxORR/f9LAJFVmhtfNN1dmUEWYKlVbD8M5
-         p6KjP0tTdEFGFN9u6OGb3Le3LYpq5EPYmbLURl7i/4ZdqC0cK2Y3lWa7r7vc38m14t1h
-         9ULUOG50q+0+1wuUMhyFeU9BlJOxu+dgpux0VOKhng6/J0/r8x7FehQxcrw097GTQcMC
-         Q/STE7e1TuSTmsIK/u4VrkXGjLrF/sMAksF870oPG7l99ZJ7u5X59wdJ//zyN+DlEbW8
-         jNmw==
+        d=suse.com; s=google; t=1786608767; x=1787213567; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=3QPl/G8phE1E3cAg+rCD1JXfC2gmx306uakT5JXiUhQ=;
+        b=YZBavGGw3fUjw/A1RpdYHuYlbIfQQe5TJlY5037ldI57LfOYhHdaX7krRp+YgborvK
+         jE9D23Katmtn/c4gv64Zo4F/ovJ1UIGL7TVlM+zaxCzvLs2p5r3QWlBIOJww4eSpVCh/
+         WsV7LkpbLIpigNCJzDnNM68zFJTM+Ws7/x53OnEhlTHFl9wdy5PM/9XhokIuffa/J0VY
+         YfV/oEEoy21apWeXz9sl6tKIRqElIeP4OANwIn16yOTdyn9D0IMZNJUTbBk1+4MM99tF
+         Lxwfr0QUD04iLal7+INX3evD0E9fvj7klkf03Sb8TNRcOAMFl7C+kMkd1vZS691yD1WD
+         tTJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786606130; x=1787210930;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=WnKfuhOpN9cEpBpCnJX7qk1wPx4868zb1MjUnE+BZe8=;
-        b=tJMvpSm2pVAKUIHZ/4SPNzgOLx3IiXDgFE1n3QYqdF5xokrvNsj88fpMPK/PB2c2tT
-         QuzELt7lC3QwXab3cmGBRqfqidemq5rZMmb39q4hmQ43ZGsUz2LhpzpSrenzZbanVCyj
-         jk12/YGWYlMu462Y+/FphdrF5vxgA/YrbPq3PPit/VkFt2YRrfAs31/Ob1ir+bZ5OnBx
-         ktc8OO0Cl0EawaVJQoYQih62D21H3yla1eIuViM0vq2rONIYkKfeyPgleRXbXZAutOQR
-         gGZaVCHevLXAqMqWXseR83CF9i1GNRNEcFB3n7LHa61Ntkg/2IGm8bUkiY9hltOubMfe
-         B/3Q==
-X-Forwarded-Encrypted: i=1; AHgh+RpziUi2b07/KxePtr9lg+qRpHdgI1KBG9hbJyHgQbNZJcAw8sdS2igJE+dwUqYi6pXNjQg/0wMKvpY=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyLE8uvB5jaUzLdrEqzfHjFoRCsbnBqodCd5vkk7yUwVATaRFWL
-	lVz2wml6O8eslGvrf0xMUEPNA7x2MqcITwI1h7XaZOI9I3xRCY2OKiRNJ8QS7Y1zdw==
-X-Gm-Gg: AR+sD112IKdW2oBSp8VO97I3I9W4mG9cnx376irgbZyzfNQEZ6KPN3xHNUeNPRHcAvE
-	GvtEfd5jUGe/lBulkCMrmFkuyctlwaPudvH0OfDuAAYRWsLViwues/ihDB2c+jI6I9v000Iz9BP
-	nrntRzjZqjROe48eHFgmLyyPEKdduiYYLBU49o9p3tvVXexDDSa5iEaU0PxWeQmWzhsWKx/97FF
-	wLGHI5EFbciMuPRS3/YARfe6JcvlawDDhCvx6rmX9ZLfbTCq3rzh0TgQ6GGzZD+ft+Kjrc+7SCN
-	jzUNyH5I7PS4j928mPY8Wi7WlIdzxl6bAx3d7d/UuBawSoBPMkOhIAOp7dc1If+hnX+7iXvtsf4
-	2MppzKWgdAF9dcHBuqfXywet2ShsMBcKJPb+8YBo00l7gSMMBNBnWxTqsC5V6JXTb8+0wo3QpBw
-	0XwbeFItPXcyr6DHEi2iJHOe3QkPyPone+Vlle0uLAEXwHaJztqIL2QgPrS8ZSgLGT2s0ud3nwM
-	IEdeRE+loRBSMM+omWHXH1brB6uGmsoOajuVsy8eNDHO/XZIIZD
-X-Received: by 2002:a05:600c:1c24:b0:496:bbcb:b0bb with SMTP id 5b1f17b1804b1-49982206f28mr44422525e9.18.1786606129910;
-        Thu, 13 Aug 2026 00:28:49 -0700 (PDT)
-Message-ID: <20a4599a-f14e-4c7f-a765-52c1ab667516@suse.com>
-Date: Thu, 13 Aug 2026 09:28:47 +0200
+        d=1e100.net; s=20251104; t=1786608767; x=1787213567;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=3QPl/G8phE1E3cAg+rCD1JXfC2gmx306uakT5JXiUhQ=;
+        b=bua1G+WYUZ4RPBwx4WwU12hi9XL69lJU469LXN2Dm3EDq7KP2vmisBbFsI/uiyRFf0
+         OQG+GLswYZG0fnIpRrGFHyjTz7lsJ+jTUnVA9hXgAGAePDodAnWZlzLIAKdtxGFwtRCk
+         6xqFvUQ1LAVtqp9urNNEUHBi6/naR3LHrzGrw3ou/oG27c+8HggRGHlZyWhiIIxHDZ0g
+         aQCJNqFw2dwin9rX52ODRt309wd70Glndml3IPZKz3J1/lsht928E/TmRXD1DG74BD/n
+         8UjVixXVJ25uAbuJcHAcU83eBDAmIC3HhmnbcuuR0ZJUo476bhillNYPplmrRbauyoKT
+         Ro0w==
+X-Forwarded-Encrypted: i=1; AHgh+RrgVhfSCdoszXLMqMA6000Xr+fPpCUvcWxtT52hEV7K0F5ei8zSwvsYABJ6FxEsJBoJH4D1V/OMpRo=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyWc6eiGk5Di0+2rhfu9Ko3MSSJnMf/JDx3TVGYpwk1dV34QCHL
+	h/Zcp1tk1oggmRxgXsmZq93znF4pYV8Cj1Z7/aRBN+8hI3d/HI3EPRh9Yu2w7cqp+g==
+X-Gm-Gg: AR+sD11J7XlRLeeu9Db9I9G2UsclHCBjHbHihLYXe04YDzYHwHIpqEMiqroGE03Fgde
+	NVGHvKf4dGSSquioaf2w6Y+cs7AI8Hf8tdzeZLIAERHYklsQjHPbOmo1xn0zt7u01Ma/qOo7cdb
+	L3V5PQa+LRrSLOIkfwnnf0hpFmEzFtUHcwYEnpwLtOvnD+LIGOekxCNMz+fHu/a/bR7p9n/U/Lg
+	FzPxZ63iTwRyhZODfIKHkkBZAuRWJ/uh0E5kUxWsMfa7LBjFral/kUnOxLXrzm0PAOYqjo6mH7a
+	5b22cp3KPpdqWRiohhkaT0exubNijMC81hy2q8MkrEqUbzrH6ZloJwGd4bvslNZfpYeRnuozCTZ
+	GxUYNunuf6KFRfOREdr++RchZtsYuPprWkE3P+/KCu4sqvmHKl2kRI94PgFVCem14Y3YwIN4QWs
+	y41irueDTXSx9ogeKnWHnkkdBghdwaHv0s5OPjIsINVWIgOrRyPhbc3lPIGPu4QOBHHT5agf17H
+	2ZFZgLh4v28BHJ1mYJLMBJYpC5MMYLjxKv2fk5WRm9l35lqDfoL
+X-Received: by 2002:a05:600c:8284:b0:499:6a92:fff1 with SMTP id 5b1f17b1804b1-499821989abmr48826045e9.18.1786608766987;
+        Thu, 13 Aug 2026 01:12:46 -0700 (PDT)
+Message-ID: <affe36be-1638-4ff1-bbc1-d970f3547abe@suse.com>
+Date: Thu, 13 Aug 2026 10:12:45 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 16/17] xen/riscv: add guest load emulation for trapped
- MMIO accesses
-From: Jan Beulich <jbeulich@suse.com>
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+Subject: Re: [PATCH v3] x86/nSVM: Check injected event consistency
+To: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+Cc: andrew.cooper3@citrix.com, jason.andryuk@amd.com, teddy.astie@vates.tech,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
- <9b18a20367754605efd6a6b5bf09d4483d9c3ab2.1784560663.git.oleksii.kurochko@gmail.com>
- <7a2e46da-5b1f-448e-aba3-7eefe0a61950@suse.com>
+ xen-devel@lists.xenproject.org
+References: <95abc420acac6eefc1b97c3c98753d510930ce8a.1785933566.git.abdelkareem.abdelsaamad@citrix.com>
 Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -137,62 +128,131 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <7a2e46da-5b1f-448e-aba3-7eefe0a61950@suse.com>
+In-Reply-To: <95abc420acac6eefc1b97c3c98753d510930ce8a.1785933566.git.abdelkareem.abdelsaamad@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1786606130-F460277B-6FD9AA58/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d25034/1786608767-76EDAA5B-C1727113/0/0
 X-purgate-type: clean
-X-purgate-size: 2032
+X-purgate-size: 4616
 
-On 13.08.2026 09:15, Jan Beulich wrote:
-> On 29.07.2026 15:40, Oleksii Kurochko wrote:
->>  static int emulate_load(unsigned long fault_addr, unsigned long htinst)
->>  {
->> -    return -EOPNOTSUPP;
->> +    struct cpu_user_regs *regs = vcpu_guest_cpu_user_regs(current);
->> +    mmio_info_t info = { .is_write = false };
->> +    unsigned long insn;
->> +    unsigned int shift = 0, len, insn_len;
->> +    bool is_unsigned = false;
->> +    int rc;
->> +
->> +    if ( decode_trapped_insn(htinst, &insn, &insn_len) )
->> +        return 0;
->> +
->> +    /* Decode length of MMIO and whether it is a sign- or zero-extending load */
->> +    if ( (insn & INSN_MASK_LB) == INSN_MATCH_LB )
->> +        len = 1;
->> +    else if ( (insn & INSN_MASK_LBU) == INSN_MATCH_LBU )
->> +    {
->> +        len = 1;
->> +        is_unsigned = true;
->> +    }
->> +    else if ( (insn & INSN_MASK_LH) == INSN_MATCH_LH )
->> +        len = 2;
->> +    else if ( (insn & INSN_MASK_LHU) == INSN_MATCH_LHU )
->> +    {
->> +        len = 2;
->> +        is_unsigned = true;
->> +    }
->> +    else if ( (insn & INSN_MASK_LW) == INSN_MATCH_LW )
->> +        len = 4;
+On 06.08.2026 19:23, Abdelkareem Abdelsaamad wrote:
+> On the AMD platforms, allowing a VMRUN instruction with a malformed VMCB has
+> debugging complications, security and performance implications. The APM
+> volume #2 15.20 (40332-Rev. 4.10-July 2026) states the two possibilities that
+> result in a VMRUN exit with VMEXIT_INVALID due to the injected event. These are
+> • Reserved values of TYPE have been specified.
+> • TYPE = 3 (exception) has been specified with a vector that does not
+>   correspond to an exception (this includes vector 2, which is an NMI, not
+>   an exception).
 > 
-> Already up to here this demonstrates a weakness of the INSN_MASK_*
-> set of #define-s (which I similarly observe in binutils, and I expect it
-> all has the same questionable origin). All INSN_MASK_L* and INSN_MASK_FL*
-> (also INSN_MASK_S* and INSN_MASK_FS*) are identical, allowing for a nice
-> switch() to be used here in principle. That said, with access width
-> nicely encoded in FUNCT3, it's not even clear whether a switch() would
-> end up being needed / efficient.
+> Extend the VMCB validation to check for such inconsistency.
 > 
-> Otoh none of these masks cover the pseudoinsns that htinst may supply.
-> 
-> Further, what about A-extension insns? Some (if not all) of them can
-> plausibly be used on MMIO, I think.
+> The collection of the invalid exception vectors are ported from the upstream
+> KVM commit
+> ("7e79f71bca5c" KVM: nSVM: Add missing consistency check for EVENTINJ). Adjust
+> the checks from the commit to align with the APM Volume #2 and Volume #3
+> (40332—Rev. 4.40—July 2026) for the X86_EXC_OF and X86_EXC_BR vectors which
 
-Because of the further additions that are going to be needed, may I also
-suggest to consider putting emulation code in its own file (emulate.c
-perhaps), rather than directly in traps.c?
+Isn't this 4.10, just like you have it further up?
+
+> should not be valid on the x86 64-bit (long mode) platforms. The adjustment is
+> posted to the KVM mailing commit patch thread
+> https://lore.kernel.org/all/20260803225402.2324595-1-abdelkareem.abdelsaamad@citrix.com/
+> 
+> Signed-off-by: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+> ---
+> Changes in v3:
+> - Restricted X86_EXC_OF (4) and X86_EXC_BR (5) vector injections to 
+>   non-64-bit guests to prevent impossible guest-mode state injections
+>   per AMD APM Volumes 2 & 3.
+> - Refactored exception vector validation from if-conditions to a switch
+>   statement to improve readability and extensibility.
+> - Restricted X86_EXC_CP (21) vector injection to hosts with enabled CET
+>   to prevent VMRUN failures on hardware without CET support.
+
+When reading this, I was puzzled, but the code below is correct: It's not
+the host you check, but the guest's CR4.
+
+> --- a/xen/arch/x86/hvm/svm/vmcb.c
+> +++ b/xen/arch/x86/hvm/svm/vmcb.c
+> @@ -320,6 +320,41 @@ void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb)
+>      svm_dump_sel("  TR", &vmcb->tr);
+>  }
+>  
+> +static bool is_valid_svm_vmcb_injected_exception_vector(
+
+Is in particular "svm" but perhaps also "vmcb" really relevant in the name
+here (which is a static helper)?
+
+> +    const struct vmcb_struct *vmcb, uint8_t vmcb_injected_vector)
+> +{
+> +    switch ( vmcb_injected_vector )
+> +    {
+> +    case X86_EXC_DE:
+> +    case X86_EXC_DB:
+> +    case X86_EXC_BP:
+> +    case X86_EXC_UD:
+> +    case X86_EXC_NM:
+> +    case X86_EXC_DF:
+> +    case X86_EXC_TS:
+> +    case X86_EXC_NP:
+> +    case X86_EXC_SS:
+> +    case X86_EXC_GP:
+> +    case X86_EXC_PF:
+> +    case X86_EXC_MF:
+> +    case X86_EXC_AC:
+> +    case X86_EXC_MC:
+> +    case X86_EXC_XM:
+
+Doesn't #XM (AMD: #XF) require CR4.OSXMMEXCPT to be set?
+
+> +    case X86_EXC_HV:
+> +    case X86_EXC_SX:
+
+Are #HV and #SX really permitted without any constraints?
+
+> +        return true;
+> +    case X86_EXC_OF:
+> +    case X86_EXC_BR:
+> +        return !(vmcb_get_efer(vmcb) & EFER_LMA) || !(vmcb->cs.l);
+
+Nit: No need for parentheses on the rhs of the ||.
+
+> +    case X86_EXC_VC:
+> +        return vmcb_get_sev_es(vmcb);
+> +    case X86_EXC_CP:
+> +        return !!(vmcb_get_cr4(vmcb) & X86_CR4_CET);
+
+No need for !! when converting to bool.
+
+> +    default:
+> +        return false;
+> +    }
+
+Throughout: Blank lines please between non-fall-through case blocks.
+
+> @@ -392,6 +433,16 @@ bool svm_vmcb_isvalid(
+>          PRINTF("eventinj: MBZ bits are set (%#"PRIx64")\n",
+>                 vmcb->event_inj.raw);
+>  
+> +    if ( !((1 << vmcb_injected_type) & vmcb_valid_event_inj_types_mask) )
+> +        PRINTF("eventinj: Invalid Injected Event Type: (%#"PRIx8")\n",
+> +               vmcb_injected_type);
+> +
+> +    if ( (vmcb_injected_type == X86_ET_HW_EXC) &&
+> +         !is_valid_svm_vmcb_injected_exception_vector(
+> +             vmcb, vmcb_injected_vector) )
+
+Nit: Indentation is off by one here. The anchor on the earlier line isn't the
+'!' but the 'i'.
+
+> +        PRINTF("eventinj: Invalid Injected Event. Exception type: (%#"PRIx8"),"
+> +               " with a vector: (%#"PRIx8") does not belong to an exception on"
+> +               " the platform \n", vmcb_injected_type, vmcb_injected_vector);
+
+This message is quite a bit too long. There's also a stray blank ahead of the
+\n. And further arguments after one that was already wrapped across lines want
+to start on a separate line.
 
 Jan
 
