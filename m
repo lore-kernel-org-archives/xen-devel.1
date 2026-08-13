@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49FEEC5B572
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 05:55:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1389448.1630158 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29501C5B572
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2026 06:00:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1389458.1630166 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuOOq-00012Q-HO; Thu, 13 Aug 2026 05:54:44 +0000
+	id 1wuOUD-00038D-4m; Thu, 13 Aug 2026 06:00:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1389448.1630158; Thu, 13 Aug 2026 05:54:44 +0000
+Received: by outflank-mailman (output) from mailman id 1389458.1630166; Thu, 13 Aug 2026 06:00:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuOOq-00012J-DS; Thu, 13 Aug 2026 05:54:44 +0000
-Received: by outflank-mailman (input) for mailman id 1389448;
- Thu, 13 Aug 2026 05:54:43 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wuOUD-000386-2I; Thu, 13 Aug 2026 06:00:17 +0000
+Received: by outflank-mailman (input) for mailman id 1389458;
+ Thu, 13 Aug 2026 06:00:16 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wuOOp-00012D-It
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 05:54:43 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wuOUC-000380-9q
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 06:00:16 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wuOOn-00BuFp-Nf
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 07:54:41 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wuOUA-00HHpz-IJ
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2026 08:00:14 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7d5c16-e002-0a2a0a5209dd-0a2a4506cd4c-10
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 07:54:41 +0200
-Received: from [209.85.221.44] (helo=mail-wr1-f44.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a7d5d6e-8faa-0a2a0a5109dd-0a2a450ab96a-0
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 08:00:14 +0200
+Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7d5c21-195a-0a2a45060019-d155dd2ca808-3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 07:54:41 +0200
-Received: by mail-wr1-f44.google.com with SMTP id
- ffacd0b85a97d-47db714766aso302100f8f.0
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 22:54:41 -0700 (PDT)
+ id 6a7d5d6d-f2d2-0a2a450a0019-d155dd2da95f-3
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2026 08:00:13 +0200
+Received: by mail-wr1-f45.google.com with SMTP id
+ ffacd0b85a97d-4813ea321cdso335782f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2026 23:00:13 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4815a5613e2sm4222287f8f.6.2026.08.12.22.54.40
+ ffacd0b85a97d-4815a5af453sm3538680f8f.23.2026.08.12.23.00.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Aug 2026 22:54:40 -0700 (PDT)
+ Wed, 12 Aug 2026 23:00:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,60 +53,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Cc:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786600481; x=1787205281; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1786600813; x=1787205613; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=pOb5i/C6y9XsFnyr2iObH380nZD0yDVY14kfNgsUQdY=;
-        b=LlT2rbQC2VCk+qYXEc+o1rNNjkPcsFAjfz50i6C5uWIAih9myULD3zMlpcCmMM3ymh
-         m299W3lA3t8cxroYc8/E1jWAei2U62Y7R18a1Yz1yGtg+BmUyYm9jpdvOL3a0lSmLY66
-         8JeUb62E+3po5scpg6aToYjkmRL61onaf9eKxGlYs5ECpkDFGyash8aT8ba4zukprJmH
-         vp8T1RRCtkaaI0Z4r0fS/Q12Ss5dcQaB5eHE7rd2Ys/BqwmBwQT4M59M80wibBqEco/z
-         Ls8KCi0Ud/1ap0cFnrRTZYppGiyxU3D9uyQmbxBnfWounicQ1Y0TEUpjdqST3D/oPEb9
-         Ju3A==
+        bh=0tddkDMvtOF7kURPiW+G9b+uW98uVQMk/Chv5QXRQOY=;
+        b=eexl5Sr875ZZh0DtFp+CeSorWs1M6RvOt6GUoZSpDaKbRWA8ndF9T/VRg/7Za8EEVR
+         sHtKj/50OgNsu7CY0Ck3tUW6W+WsubLc37ZdCEzWmllj/ecGNFlxtf+nd/3mzpiVI7/c
+         8t66vEcBEhuWpAhXbRRiLCTalDHa5W2vGifXh6Jjyh7ijA4f08ved6j5en3+PIj4b837
+         yxujYq/2ZVGn1GpCRcCUgEonVtS3/NkptDT2wbPleEQzzSUdCn/HEKEbFR1ljHnJDJaS
+         eYRzixanHoKFHMTMgI0ltQ5uSNoNb+zSdJpj78EwSW3iNYYN0lyIDCojip+IiJVHui4h
+         zZrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786600481; x=1787205281;
+        d=1e100.net; s=20251104; t=1786600813; x=1787205613;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=pOb5i/C6y9XsFnyr2iObH380nZD0yDVY14kfNgsUQdY=;
-        b=U6NGDtFehtiLaT+ShUhNPizIi28GyhY0AJMv6Vl0n/N5hEAdOTRsxG8kDDxVLoN2ii
-         JO8lvbnRrnyNJ89bQOlD21hWgL5F9GHLfnxJ8yFTSqvQrjoHPI5ukmB/ss7yoUOgUgqP
-         oC4lFX33H1BljHQYvqkY4pV91Cbwa6gv3z2UNwYUXnPW+pZ6GPZWUmyjw4zICVzkKsGj
-         bhgvNvcgVUKzPy3THDKh6RBxCdls4bwi38A0pEi7v0LkOivmjmTKIyE1xAc6Qd+QgabB
-         6HtP3y3PHUhj6Q/E16JaMrQMl+rLoYTHQhFLArGbxGZonKOM+W2IqI1BPov9u9jSIDyY
-         dr3Q==
-X-Gm-Message-State: AOJu0Ywu2mL6DJ92u0jRQTeH3P3O0r6WNdQiL9UQ/CsZ9tBKfAJnilCp
-	ODF8ibZ6Il3KyOKRbiIfL9s6CnZy9qu7Va7gmbLQm2ECH+rgK8CntQorjJgmTMY4pA==
-X-Gm-Gg: AR+sD13HcIf6RnZVd2Vftugt1mH/xEt+o+JbFrYNSntfFx0PYrIAxHwCaQXS8oZ+2dS
-	xH+T8HoXRzTotOCgpqesAQtjg7b48Tq/dDFcXi8iX6HkyY4KF9/L4nzIrKg7PKHhoV9e5rY9nE7
-	kUcau+d+DlTwXAm9fJzGigfvf+vMDua9COElvzt+VqzQIvNU58b+sZ1mZEwzBE9sjv1okt/2pYC
-	c/00PRbhV4RLTVoJLUAYvRSMlXA5P3AzqKwQu4ktC3Qo4x5rSa+Ysjbizus9d+12OTSIpO8gouO
-	0eq56uyJBepfSk3MHKMNAvyBpqHgT2Ggy0QqsNxNze7sqBnfuuCD4z+w344aqKUhKZmlDqE9fKq
-	WVp0mAN/z3izA7nKhxcvwi+8PyQM4v002li6NEevQgqvegwikKMvs5+JVg5XVTjtzx9MK/PtG6j
-	Co/Wc3At1BRMt5Oi5nF77elkJztkGSrMjxctkJw8xJ50IV26Z6+92oIwuWcthhb1DQYh6ZDj38c
-	AZXzQmMTYNrU4yp4DxC0TIScFosfWSoy97xli1SIzLxjP4IWYjf
-X-Received: by 2002:a5d:584e:0:b0:481:57de:df20 with SMTP id ffacd0b85a97d-4815a5436ffmr3193230f8f.15.1786600481054;
-        Wed, 12 Aug 2026 22:54:41 -0700 (PDT)
-Message-ID: <2f2cc724-92d8-476d-bd85-5529fb365389@suse.com>
-Date: Thu, 13 Aug 2026 07:54:39 +0200
+        bh=0tddkDMvtOF7kURPiW+G9b+uW98uVQMk/Chv5QXRQOY=;
+        b=a780vvIwEyx7Tv/Zj7wdbajbThCqD2p6IWoqzq1AUHfth2xg5v6q09wtPLk0KDUgfN
+         WHnDNy6AuA/Py1b4cxJNBsZtG0Y0ng2bUqq82V9gVpqwQ/HfkSjS8zHPCQulQqg39wti
+         r92T+DaSvr5EjwCtoGKXZzlg1XJtDcQIFqXaXNmakmq9dscYtQ10zSH/jnvbwzsUvy/c
+         37luPkh6sjT18UR1jTPD3AqHAhY6Et1qfwMQG1gke0LesyCvAumuY+xRy+dZh4PDk6Nk
+         hsHIBVBG5mFTcOmlFZCDnHQlhnn+otFzK/8FdNxlj9LcD/c6PMelYo6a025YdzdLiWUM
+         bm9Q==
+X-Forwarded-Encrypted: i=1; AHgh+Rpi4saKsjZBwEAISogTx+DM1cZmv25QpS21+gwz+FJk4mPdrdyfXyagFGX6AK04KctBwbymeIM6k0I=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yyi7pUqtArsJenm4TOgVH6faEgoP30bJQbF73QcTM7eTeTZFfMl
+	4A3ZKEKmp03XM/hAqDJtw2ZEni9lAxlTb8j84lqaOVeTlSEKrKDyknQ2fo2e6gnYeg==
+X-Gm-Gg: AR+sD12t9coK6S00hXxrC244f5T1m5H6AFIFmqsKTwO/ov6zJHqugQtIUk3uwqk3iDZ
+	WW7wIzX7kl4cmnz6/YnouRpeMYRYdaqyULSOFgXa2uxPPXDW8tMeommOE+CtVMk5DBoAJPb8CCp
+	KjDTKN+ajN2xdLhPbRYRm6i6KYgFDKUUxVAQPHfaCFNAThWxTogIeCPc66+Czqwys4NcxeGiS0X
+	Hj5y33cgmltwqntizYfAfvYXQnplDnmetj4VC3F3ygcD+iEKyBPzxPanF7TGOAZ2PKHEDaFwYGz
+	RXBYbP6vgghXMbv9kmkJ5cSN/ZhU5GCv6VGFL8Cj5nx71DQZUImw3gBH8LSt+zliKjDwX6bh6IL
+	ohLFsAmM2TADBVLxw3KUyQaG5FYI4zJdLfRGPPd6T990+AWDBJNZA9yijxg3DGZRTBTU9NOlv83
+	WGMDxVBB60WXa7Y4uKXx3+5jzIM6j6MgdDTejEbyl1F5COd7qdQ3z0HQMulrNhI+kiWzJjh7n8w
+	y6RrqGMOTDpRmD0EZ7J1VzeBmb50Uih1oyCop2nv2pX4FpNm0S2
+X-Received: by 2002:a05:6000:41ea:b0:481:2fff:2a09 with SMTP id ffacd0b85a97d-4815a540db2mr3593771f8f.14.1786600813140;
+        Wed, 12 Aug 2026 23:00:13 -0700 (PDT)
+Message-ID: <04442bf7-7a19-4eb6-be86-8332da2a5958@suse.com>
+Date: Thu, 13 Aug 2026 08:00:11 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/5] stubdom: remove grub-pv
-To: Samuel Thibault <samuel.thibault@ens-lyon.org>
-References: <20260720081833.4122182-1-jgross@suse.com>
- <f8481120-00c5-411e-ad66-38ff550bdd47@suse.com> <anz6XwsWjoNeHBxY@end>
+Subject: Re: [PATCH v5] xen/common: add keyhandler to show Xen command line
+To: dmukhin@ford.com
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, julien@xen.org,
+ michal.orzel@amd.com, roger@xenproject.org, sstabellini@kernel.org,
+ xen-devel@lists.xenproject.org
+References: <20260813035139.915536-2-dmukhin@ford.com>
 Content-Language: en-US
-Cc: xen-devel@lists.xenproject.org, Juergen Gross <jgross@suse.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -131,120 +128,40 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <anz6XwsWjoNeHBxY@end>
+In-Reply-To: <20260813035139.915536-2-dmukhin@ford.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1786600481-FEC7777B-7A41D998/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-4011c0/1786600813-532D8CFC-328428B0/0/0
 X-purgate-type: clean
-X-purgate-size: 5503
+X-purgate-size: 1178
 
-On 13.08.2026 00:57, Samuel Thibault wrote:
-> Juergen Gross, le mer. 12 août 2026 10:16:58 +0200, a ecrit:
->> Any feedback?
+On 13.08.2026 05:51, dmukhin@ford.com wrote:
+> From: Denis Mukhin <dmukhin@ford.com> 
 > 
-> I'm fine with it: grub0.9x is really old, grub2 works alright in my use
-> cases and is maintained.
+> Currently there's no way to print Xen command line on the emergency
+> console for debugging purposes when 'xl' is unavailable.
+> 
+> Add new keyhander '?' to do command line printout.
+> 
+> To allow built-in command printout, drop __initconst in
+> 'opt_builtin_cmdline' declaration.
+> 
+> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+> ---
+> Changes since v4:
+> - promote opt_builtin_cmdline to __ro_after_init and use it for
+>   built-in command line reporting
+> - account for empty saved_cmdline
+> - adjust register_keyhandler() call - use '?'
 
-Was this perhaps meant to be / include an Acked-by: ?
+This isn't quite what I was expecting, following the feedback you got on
+v4. My expectation was that we'd see a 2-patch series, first patch moving
+non-help stuff out of the 'h' handler, second patch adding the dumping of
+the command line. Naturally the new handler then wouldn't be named
+show_cmdline(). I'd then further expect tat no new use of
+register_keyhandler() would be necessary: The handler itself would live
+in keyhandler.c, and print_version() would then be accompanied by a new
+print_cmdline().
 
 Jan
-
->> On 20.07.26 10:18, Juergen Gross wrote:
->>> The grub-pv stubdoms (32- and 64-bit) are disabled by default since
->>> several years now.
->>>
->>> Remove them in order to enable removing quite some more code from Xen.
->>> In case someone is really depending on grub-pv, they can easily take it
->>> from an older Xen build, as there is no Xen version dependency in
->>> grub-pv (a version built 3 years ago has been tested to still work
->>> with current 4.23 staging Xen).
->>>
->>> Note that after this series has been committed, some additional
->>> cleanup is possible by removing stubdom libpci and zlib support, but
->>> this will require a modification of Mini-OS depending on these patches.
->>>
->>> Changes in V2:
->>> - moved one hunk from patch 2 to patch 1
->>>
->>> Juergen Gross (5):
->>>    stubdom: remove support for grub-pv
->>>    stubdom: remove support for building in 32-bit mode
->>>    stubdom: remove building of libxenguest and libxenctrl
->>>    docs: remove stale stubdom entries from stubdom.txt
->>>    tools/libxenguest: remove Mini-OS specific parts
->>>
->>>   Makefile                                      |    6 -
->>>   config/Stubdom.mk.in                          |    3 -
->>>   docs/misc/stubdom.txt                         |   69 -
->>>   stubdom/.gitignore                            |    1 -
->>>   stubdom/Makefile                              |   69 +-
->>>   stubdom/configure                             |   65 -
->>>   stubdom/configure.ac                          |    2 -
->>>   stubdom/grub.patches/00cvs                    | 1022 -----
->>>   stubdom/grub.patches/10graphics.diff          | 2297 -----------
->>>   stubdom/grub.patches/11graphics-keyboard.diff |   13 -
->>>   stubdom/grub.patches/20print_func.diff        |   52 -
->>>   stubdom/grub.patches/30savedefault.diff       |  186 -
->>>   .../grub.patches/40ext3_256byte_inode.diff    |  114 -
->>>   stubdom/grub.patches/50fs_fulldisk.diff       |   72 -
->>>   stubdom/grub.patches/60ext4.diff              |  474 ---
->>>   stubdom/grub.patches/61btrfs.diff             | 3499 -----------------
->>>   stubdom/grub.patches/70compiler_warnings.diff |   45 -
->>>   stubdom/grub.patches/99minios                 | 1570 --------
->>>   stubdom/grub/Makefile                         |   88 -
->>>   stubdom/grub/boot-x86_32.S                    |  112 -
->>>   stubdom/grub/boot-x86_64.S                    |  108 -
->>>   stubdom/grub/config.h                         |   12 -
->>>   stubdom/grub/kexec.c                          |  434 --
->>>   stubdom/grub/mini-os.c                        |  771 ----
->>>   stubdom/grub/mini-os.h                        |    7 -
->>>   stubdom/grub/minios.cfg                       |    4 -
->>>   stubdom/grub/osdep.h                          |   30 -
->>>   tools/libs/guest/Makefile.common              |   15 -
->>>   tools/libs/guest/xg_dom_decompress_unsafe.c   |   48 -
->>>   tools/libs/guest/xg_dom_decompress_unsafe.h   |   28 -
->>>   .../guest/xg_dom_decompress_unsafe_bzip2.c    |   14 -
->>>   .../libs/guest/xg_dom_decompress_unsafe_lz4.c |   39 -
->>>   .../guest/xg_dom_decompress_unsafe_lzma.c     |   14 -
->>>   .../guest/xg_dom_decompress_unsafe_lzo1x.c    |   44 -
->>>   .../libs/guest/xg_dom_decompress_unsafe_xz.c  |   46 -
->>>   .../guest/xg_dom_decompress_unsafe_zstd.c     |   44 -
->>>   36 files changed, 1 insertion(+), 11416 deletions(-)
->>>   delete mode 100644 stubdom/grub.patches/00cvs
->>>   delete mode 100644 stubdom/grub.patches/10graphics.diff
->>>   delete mode 100644 stubdom/grub.patches/11graphics-keyboard.diff
->>>   delete mode 100644 stubdom/grub.patches/20print_func.diff
->>>   delete mode 100644 stubdom/grub.patches/30savedefault.diff
->>>   delete mode 100644 stubdom/grub.patches/40ext3_256byte_inode.diff
->>>   delete mode 100644 stubdom/grub.patches/50fs_fulldisk.diff
->>>   delete mode 100644 stubdom/grub.patches/60ext4.diff
->>>   delete mode 100644 stubdom/grub.patches/61btrfs.diff
->>>   delete mode 100644 stubdom/grub.patches/70compiler_warnings.diff
->>>   delete mode 100644 stubdom/grub.patches/99minios
->>>   delete mode 100644 stubdom/grub/Makefile
->>>   delete mode 100644 stubdom/grub/boot-x86_32.S
->>>   delete mode 100644 stubdom/grub/boot-x86_64.S
->>>   delete mode 100644 stubdom/grub/config.h
->>>   delete mode 100644 stubdom/grub/kexec.c
->>>   delete mode 100644 stubdom/grub/mini-os.c
->>>   delete mode 100644 stubdom/grub/mini-os.h
->>>   delete mode 100644 stubdom/grub/minios.cfg
->>>   delete mode 100644 stubdom/grub/osdep.h
->>>   delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe.c
->>>   delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe.h
->>>   delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe_bzip2.c
->>>   delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe_lz4.c
->>>   delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe_lzma.c
->>>   delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe_lzo1x.c
->>>   delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe_xz.c
->>>   delete mode 100644 tools/libs/guest/xg_dom_decompress_unsafe_zstd.c
->>>
->>
-> 
-> 
-> 
-> 
-> 
-> 
-
 
