@@ -4,44 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B340C5CFC1
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2026 18:59:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1391432.1631265 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAE20C5CFC1
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2026 19:13:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1391465.1631277 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wux7O-0005R2-2v; Fri, 14 Aug 2026 18:59:02 +0000
+	id 1wuxLS-00012r-8U; Fri, 14 Aug 2026 19:13:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1391432.1631265; Fri, 14 Aug 2026 18:59:02 +0000
+Received: by outflank-mailman (output) from mailman id 1391465.1631277; Fri, 14 Aug 2026 19:13:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wux7N-0005QI-Qq; Fri, 14 Aug 2026 18:59:01 +0000
-Received: by outflank-mailman (input) for mailman id 1391432;
- Fri, 14 Aug 2026 18:59:00 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wuxLS-00012k-5c; Fri, 14 Aug 2026 19:13:34 +0000
+Received: by outflank-mailman (input) for mailman id 1391465;
+ Fri, 14 Aug 2026 19:13:32 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper3@citrix.com>) id 1wux7M-0005JE-7R
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 18:59:00 +0000
+ (envelope-from <brchuckz@aol.com>) id 1wuxLP-00012e-RB
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 19:13:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wux7L-001zlG-KO
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 20:58:59 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wuxLO-004soJ-T6
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 21:13:30 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a7f6542-8faa-0a2a0a5109dd-0a2a450b959a-34
- for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 20:58:59 +0200
-Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a7f6573-b7e8-0a2a450b0019-d155dd33b5c7-3
- for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 20:58:59 +0200
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-47f904e80eeso1316615f8f.1
- for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 11:58:59 -0700 (PDT)
-Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
- [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4815f229681sm8682153f8f.16.2026.08.14.11.58.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Aug 2026 11:58:58 -0700 (PDT)
+ (envelope-from <brchuckz@aol.com>)
+ id 6a7f68aa-8faa-0a2a0a5109dd-0a2a4505cad0-36
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 21:13:30 +0200
+Received: from [98.137.65.205] (helo=sonic311-24.consmr.mail.gq1.yahoo.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <brchuckz@aol.com>)
+ id 6a7f68d8-4cb1-0a2a45050019-628941cd8711-3
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 21:13:30 +0200
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic311.consmr.mail.gq1.yahoo.com with HTTP; Fri, 14 Aug 2026 19:13:28 +0000
+Received: by hermes--production-bf1-54b5569bdc-bl9f6 (Yahoo Inc. Hermes SMTP
+ Server) with ESMTPA ID 1ccd2e992eb17031340ef65d0eddba97; 
+ Fri, 14 Aug 2026 19:13:25 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,306 +50,225 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1786733939; x=1787338739; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=xCFz+bswAcxSZNQCcoi1kMR/ZsUCGcovta9jkJRC0lc=;
-        b=idJWDXTDSbwVnlimw9JFwOJHt5UAxqh1/l4noCVyO/bnK3XDJxWlyXooDAmCR8HUvw
-         u5lBMZA18KG47RDT8vxbCUe4sCNoBKH9iNz8LCP1i3aV5uvjGKJD3f/FSLj4JjkWgQLd
-         TAe3CzZNebx1E2R0Iw/S5Owgkf9HE/+3aZlxk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786733939; x=1787338739;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=xCFz+bswAcxSZNQCcoi1kMR/ZsUCGcovta9jkJRC0lc=;
-        b=KVvQex1wzKvWFZmq/Z3kv7nprzq5g3B0tKBo7XG/XafgzxudVf90wbs2gvXIOfq+6z
-         I/AeZDFzyJX9sw6jWQoxwzqOJdgAe5Bq3kA4mgw7ePelSMuAk/5KYUgWmraRZ5BAjuAq
-         1M9A8sDN1+yv7qjxqJ0h4pG409n/46XNPMyph8ZA2bucWAS+hziDotlJhRR+g4kbgAJO
-         DQQpV3Ulk5E5Kylp7Yg2PVO9Lxzobx2UktYyPj++VYOpcpKd/eH47hUB+QiCJ2NxB/eE
-         BghkTjpjqm0vtyBXOYF2IO1oD74JQzdy/yJzYV2iogi/QzfjAkZtvMEW5BB1b3RCuHbS
-         eByA==
-X-Gm-Message-State: AOJu0Yx58P491ygX7qhqvjzq9lqEufKqBNBtvRpU0mmQP0Yo21qmTQIH
-	ev8tcXRuBYKcIE5lHUF6OSIry3hhNrCu787zeE9V6ySxF+U51VA9uT+hfd3p0cBgBD9QL6E2zT8
-	6LXVYlpY=
-X-Gm-Gg: AR+sD12rzfexMEtCDWKCBLRCR7ksGBV1gUTzl/dnAK0gwNQyIhh47/EuYqOhO7ud1Cv
-	z93AYPzWcQrM0EOqVbupCnbbhgS0fNGWyQdNFuPFTjKkTyTWwqS2TFK4BMfWqUa2OW1jRvPHuVF
-	k9pon2e7x7blhAV46hmGj0IP7BMGLgVe83WRkb0SWybCO6Umcj7q8qJjR/i2opumPcm6vb8v+qx
-	fk8atoxVaNqdaGiBAXFCmsNCXCU2qY2cKyg4tfQxdI3G4/3ZhHErpoquU2sC+S+vOUfaGF3j9D+
-	776YAXaE8jntNkmAmHG3CmkBDc3SHjpgDkoLkl3r+r+cZ3VQq+R4sP2KCYW+MfScFB2grCz/NEN
-	AcQPUTb85cc8GYxBVD90jzUNo7OWEWeBGo40Thq4zLQtOWzRLNzcVzisr4qpCSFrT6KXgAxNhlJ
-	Pnvf45HlZcOOair6LBsiVw8yEhBK5aBT+1Z6NMDp9/Ofu4qSTTZuucqPjH5HoWVTK7NIe7udojx
-	j0acbX0zGiUNLvaoJFKnui+5woydnJuIQzYF2E=
-X-Received: by 2002:a05:6000:2c09:b0:47f:9760:4d2e with SMTP id ffacd0b85a97d-481607618e8mr10222640f8f.24.1786733938786;
-        Fri, 14 Aug 2026 11:58:58 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH 3/3] x86/emul: Drop the union in x86_event had have a single data field
-Date: Fri, 14 Aug 2026 19:58:41 +0100
-Message-Id: <20260814185841.1757421-4-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20260814185841.1757421-1-andrew.cooper3@citrix.com>
-References: <20260814185841.1757421-1-andrew.cooper3@citrix.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="Date:Subject:From:To:Cc:References:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1786734808; bh=N5mOhM3pcLYxdtmPCBlPtPi8tMcEy9IQ0eVheW8E5UU=; h=Date:Subject:From:To:Cc:References:In-Reply-To:From:Subject:Reply-To; b=XIKpz409dKAEE+vxWMLVrkmW42Rwnqb3TSUSAiPkcb8WQgFZQkwqfwrWJMJoUX0El3l+ebga7DKEf/jfuNqAfgYLM4jaSseGWP8/NMscfzdqq06qbgsrVA0uXg9byp14njB7JBHbupGSXz8Gn17IpZBXi1xrEOr8vbmelmZcyCGVxL8IW8Uqw1eYKPQo2b7XirvgS/ePl95iKHk2eh9IrdoiUMNlQ/XYS321R+ofmb2gURNTBONbzUH+N465Mpd0nnL8ZwgKVtCaA2z1Vl+KeJ62Eun1fRpau+VNMn/w2OBqWY0UtcZvTf4kWg3/wWQz1Xd35JUp5HQAiw6FQcBJ7A==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1786734808; bh=W2GOJvWm0oO20Hcw38oTUdca3Leq4Wzq6VMhVFb8EY5=; h=X-Sonic-MF:Date:Subject:From:To:From:Subject; b=kbpn/uOAcFJG5q7w6zEIGJElWZ7r87ql24PIq/BCNqyoSNRvWKuslz2CWHPZotKZLSxjqcmNOskCLpapdFmnRjPInhXxnxe9nGdM+sPg4PgvCLhVKctpxMq3t4jsNE8riLckWCIa+/Sn3RIl5rpBHmlbyFLVPR8m590QPm/deQFAFf4pg3I90ZSNBnLGiHvARkDkmgyCqKyDuCqGD6amPKJJNa42De2c6F7C3NdCgU8eGRJxguXAXfSfB0VeAhLgq1K0N1TWlSW250/wBEb/HR3iy9QRi8GBJECH6BW7VU9yeYkacU4MbhFtjC13+oWwwqY+uhugRy3cZ2KAKi7Abg==
+X-YMail-OSG: odNvy4wVM1nwqvG_z1AEeE6RgFZbu0hYKl3eOTRJrKUNm2lZOFmXGVFN0yha3Cj
+ 4FSwEKb2iYImKMO8eBnus6aNOQSRVdeveieDG_lpAK7TmZ5Y2d0Wlzwgc7DS79wj.0zaB0pTZ2cU
+ ve20aJ3cRIaFaduambdkkG_kA5xoubaNRv8mA9aQNc0G_SSUWNTeIyxxx4x.nipY3NlxTMsVbffq
+ e0fM3UnOQpQLyKV4MbTMcrUIYPb_6frE5jBVplUa_FN2ai.1qFHAp0SJbmHQPgPqdoLgfl.1di3Y
+ KkRQWTOVZWhe6C.SV_JFGde30EwsH2v_gXJW05U9XfQJ6pomfLSSnuXof7bSQSDdpk9jsd40LxSl
+ WtI1PhpJYLwgCbdfnXpR9W9NRF3wmc6H.85uJx1pqwbIMR87bs8Nr49f11CGGNuQVnw6ZSU1z_mQ
+ hyOxZDRfKDTdpdduIq8Q5BuNBsJLse3yB3D5lnhsDdt8HEA4idOzWw_T9AIbYwqEoUsm_Nrlxb5o
+ 2julYMdgTrEG5SulcDKlm8GwzsNTcxaw8R5UQ1sRQj8DIFYK3nG0KvSKfJVslqBiWOwIs4w90Pp4
+ KpBV8IH6FR_bBAUCvW1_j9E0xcAizcZ_ZmU6xG1UdqFnjG.VUXMlqmEnoleni86NaAB5bnKSeY5r
+ GfL2Jul0VvRCnJwoqHqCtkPiKE384hKWsWk.wWVLwZFR5DKVTT.TS.CiXRpuQ.tNXB7NCpNGBr9W
+ pXQng6SRqUE4NUeMZM.hH3mwAk3xid4pWOyIm_oN.B9jFt4gIDHzhaqbP8k5YBsFCWBaMwjykGGB
+ SU80gI4fVT6DOOB7THvylvTnEqoWjF_Oi2IIBRU6MCYz3M0hXMb3V9hhl06ASfSNfygm2LVBCZpA
+ ildzE3RpKYbgKnrponecBmtHeYM7YIzH6pTjIIUEB_Nc3_pzQ28PuoEm13hPMwEB9xNBoBme4toO
+ 607CBneSf3ratd._AeiOba4x_cDLHFpRKxnzP2ClfUd2ZmjnJ6XxwZbvTAOEr51h70wsJXEPLnTa
+ C_p_mrnKy6Z7PTbib6NVEhB1xhdshMt.fAFThQ7cSGLimVf3_ARWY7R1SWVoZGzPuHUVt_2b.DaS
+ WMfbdiSkBs0DcOIzA6F6bty7Pie77dLG1VpS87hEw4hZJqfK0IHlacWJTTK5WYR_sSjgUUlOdmy6
+ erllfM5w7GiLsQhjRUS7pOZ8.6JP7blhtqGdAQhXMjy9D7wtjaqzqVf2aZC0eWEr47wjYS9i6w1j
+ SwgqTrS87._ZEaR6sCy8fS4ZIpQbSB_eV.3jpK7FSeR6N6Hwl0sT0cqekG1g71CA7L43x2sM8L2F
+ 1PE3jWPx5PtSerYnKurNx5p0_AOoyP_p9ttPKk.6RVshhH_G51GDRNsNYT4cRlax1C.cHCRJjXNK
+ PO3kV5flrL1OfKWEPDsVn6PxpVZj2.4iGOcqwuaHlZ7.vHiJn6xMZ4SzPXU9_cip3kSCjsGhNEWF
+ SriNnGWvWd0niC8qBGI0jkCwzRN6Ikpr3uTBsLyYG.Rw_djkpY.qSKg4bgYQKPRlCvEqCNjttuL4
+ 9S5ZzHgU5X_bMdlxk4Ty7eJGb4R5RRPNEdBQTtYqB6DKTYydFrrCO2VJ0kZaSSLcPAI_rwVGZUfV
+ pmgT0gCYYhSeN3VbrP2Ko94GQGgKvauNE39npwZ1Bzqhz2ATSCBihYQfrAXPeVadN4TUi0U3zczV
+ YHU3CVV7AWgqyGqq08j3q75nyVcLpm1UIRUtumGDwk.mFmzNJ9yM6fP_rOzvdF9Dlx2Oi_IP2m39
+ oyfaSKUKE1DnVmEjXKVY_56aXkkstUabd7yyLTn71qeR61laFmZ33SEcX3KrvsjDU.yfeewV1iub
+ vSUL58409BDv2AOUEr1RumQ1B2JDYZVnhqRl.UV6HFMyUS6Gh8G4nUZTgsEIZktkpDKrbnKfW0Gc
+ _Xf7Om2B2QNJvm.ndk.8_Uimhe3ksVvDyxtV6GYZDn84Pxjfvu9z2dM2Rd6.OXtxViJqFEAhWv.D
+ K_RwhRpOFKTW_67Ty0.OzJYgvY5VqLQmLrUBQaNAXdD6q2eKmuS9natcopC7mlEjAJ4JWVoJG39N
+ NYUNOqU_z7GV8KbRycs.HpC302RXsqe7RfmhLxmziJLM3WbOpZVc5.9DU18Lcib7oWBi8ICqSs3U
+ LySoSojXkESmXM.XyL46HoGxLWvaasAkD2hAaK5LwyXm4k6Dg5PJgM1497iiBOS3BYCu3hDtf5GS
+ qZT98tFsOEe1LVZDp_XBMBfwJwZ3VYGPde7uGK_Xb4so-
+X-Sonic-MF: <brchuckz@aol.com>
+X-Sonic-ID: eb36d364-e082-4610-afec-7ad2f07bf6fe
+Message-ID: <7a3b86dc-2036-47ac-a696-bfb15b648b73@aol.com>
+Date: Fri, 14 Aug 2026 15:13:24 -0400
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] tools/hvmloader: implement Intel IGD extended VBT
+ support
+From: Chuck Zmudzinski <brchuckz@aol.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: qemu-devel@nongnu.org, Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>,
+ xen-devel <xen-devel@lists.xenproject.org>,
+ Anthony PERARD <anthony.perard@vates.tech>
+References: <20260802050824.10554-1-brchuckz.ref@aol.com>
+ <20260802050824.10554-1-brchuckz@aol.com>
+ <2110d4b7-ae37-47aa-99be-ab59e16f6167@suse.com>
+ <67579eba-e222-41dd-84bf-8440d2eaf2a9@netscape.net>
+ <da2200cd-def7-4cce-a6c2-9f9ac9e202ce@suse.com>
+ <de56c8bd-f0e8-4fe9-8cf5-f6807698176c@aol.com>
+ <02a7dc18-4184-4e86-84cb-121769187f71@suse.com>
+ <1858e8e6-73fa-4017-93e2-c733fbf0ec8d@aol.com>
+ <1522d7a3-eb9d-40df-9a34-7b1cfeb3680e@aol.com>
+Content-Language: en-US
+In-Reply-To: <1522d7a3-eb9d-40df-9a34-7b1cfeb3680e@aol.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1786733939-A9EC69EA-3C395450/0/0
+Content-Transfer-Encoding: 7bit
+X-Mailer: WebService/1.1.26254 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
+X-purgate-ID: tlsNG-c201ff/1786734810-F66B52A1-82A47CBE/0/0
 X-purgate-type: clean
-X-purgate-size: 9111
+X-purgate-size: 8055
 
-FRED has formalised the event_data field.  It already has more uses than
-given (e.g. the NMI Source Bitmap), and further uses are expected in the
-future.
+On 8/14/2026 12:18 PM, Chuck Zmudzinski wrote:
+> On 8/14/2026 11:23 AM, Chuck Zmudzinski wrote:
+>> On 8/14/2026 9:46 AM, Jan Beulich wrote:
+>>> On 14.08.2026 15:18, Chuck Zmudzinski wrote:
+>>>> On 8/14/2026 3:35 AM, Jan Beulich wrote:
+>>>>> On 14.08.2026 02:45, Chuck Zmudzinski wrote:
+>>>>>> On 8/13/2026 6:35 AM, Jan Beulich wrote:
+>>>>>>> On 02.08.2026 07:08, Chuck Zmudzinski wrote:
+>>>>>>>> -- snip --
+>>>>>
+>>>>> I don't follow this: Anything the guest can access should also be accessible
+>>>>> by its DM.
+>>>> 
+>>>> I think the host OpRegion is not currently accessible by the DM.
+>>> 
+>>> Can you explain to me how the region becomes accessible to the guest?
+>>> That would then (hopefully) help me understand why the DM would not have
+>>> access. Fundamentally any MMIO and any I/O ports that are assigned to a
+>>> guest are also assigned to its DM.
+>> 
+>> Currently, in the device model (Qemu) we have:
+>> 
+>>     ret = xc_domain_memory_mapping(xen_xc, xen_domid,
+>>             (unsigned long)(igd_guest_opregion >> XC_PAGE_SHIFT),
+>>             (unsigned long)(igd_host_opregion >> XC_PAGE_SHIFT),
+>>             XEN_PCI_INTEL_OPREGION_PAGES,
+>>             DPCI_ADD_MAPPING);
+>> 
+>> That statement is in the igd_write_opregion(...) function in the
+>> hw/xen/xen_pt_graphics.c file of the upstream Qemu source.
+> 
+> I forgot to mention: In our current implementation, this statement is
+> executed in the DM when hvmloader executes this statement, currently in
+> hvmloader/pci:
+> 
+>                     pci_writel(vga_devfn, PCI_INTEL_OPREGION,
+>                                igd_opregion_pgbase << PAGE_SHIFT);
+> 
+> 
+> 
+>> 
+>> If I understand our current implementation correctly, this statement
+>> is what gives the guest access to the host OpRegion (3 pages as defined
+>> by XEN_PCI_INTEL_OPREGION_PAGES, and in agreement with IGD_OPREGION_PAGES
+>> in hvmloader code). I don't think this statement makes the host OpRegion
+>> accessible to the device model, though, so I think, if I understand your
+>> comment in an earlier about my patch resulting in what you called a "layering
+>> violation" correctly, that our current implementation is also guilty of this
+>> same kind of "layering violation."
+>> 
+>> So, how do you suggest we fix that?
 
-Collapse the union into a single field called 'data' as the struct has event
-in it's name, as well as 'event' being the common name for the variable.
-Refer to the FRED spec rather than keeping an out-of-date list of uses.
+Well, that is a difficult question to answer, and if no one gives an answer
+then I ask, what is the harm in making the unorthodox mapping of the OpRegion
+from the host to the guest temporary for the purpose of allowing hvmloader
+to setup the OpRegion properly for newer devices with new and updated specs
+for the OpRegion and VBT when our current implementation permanently maps
+the host OpRegion into the guest in the same unorthodox way also, that is,
+without following the normal PCI MMIO interfaces?
 
-Adjust all users of the old names.
+I think the fundamental problem is the fact that the Intel IGD is an
+unorthodox PCI device that does not follow the normal PCI specs and
+requires adherence to Intel's proprietary specs instead.
 
-No functional change.
+Would that be a fair description of your problem with this patch? Are
+the unorthodox requirements of the Intel IGD at the root of your issue
+with this patch?
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Roger Pau Monné <roger@xenproject.org>
-CC: Teddy Astie <teddy.astie@vates.tech>
----
- xen/arch/x86/hvm/dm.c                  |  2 +-
- xen/arch/x86/hvm/hvm.c                 |  4 ++--
- xen/arch/x86/hvm/svm/nestedsvm.c       |  2 +-
- xen/arch/x86/hvm/svm/svm.c             |  8 ++++----
- xen/arch/x86/hvm/vmx/vmx.c             |  2 +-
- xen/arch/x86/include/asm/domain.h      |  6 ++----
- xen/arch/x86/include/asm/hvm/hvm.h     |  3 +--
- xen/arch/x86/include/asm/x86-event.h   | 14 ++++++++++----
- xen/arch/x86/pv/traps.c                | 10 +++++-----
- xen/arch/x86/x86_emulate/x86_emulate.h |  2 +-
- 10 files changed, 28 insertions(+), 25 deletions(-)
+I think the reason this was allowed in the Xen codebase many years ago, I think
+over 10 years ago now, is simply because the Intel IGD is such an ubiquitous
+device that an exception for it was allowed.
 
-diff --git a/xen/arch/x86/hvm/dm.c b/xen/arch/x86/hvm/dm.c
-index 1f44fff12a21..91f6ca669b2b 100644
---- a/xen/arch/x86/hvm/dm.c
-+++ b/xen/arch/x86/hvm/dm.c
-@@ -315,7 +315,7 @@ static int inject_event(struct domain *d,
-     v->arch.hvm.inject_event.type = data->type;
-     v->arch.hvm.inject_event.insn_len = data->insn_len;
-     v->arch.hvm.inject_event.error_code = data->error_code;
--    v->arch.hvm.inject_event.cr2 = data->cr2;
-+    v->arch.hvm.inject_event.data = data->cr2;
-     smp_wmb();
-     v->arch.hvm.inject_event.vector = data->vector;
- 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index b7d5ba126b1e..64845e210b6c 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -513,7 +513,7 @@ void hvm_migrate_pirqs(struct vcpu *v)
- 
- static bool hvm_get_pending_event(struct vcpu *v, struct x86_event *info)
- {
--    info->cr2 = v->arch.hvm.guest_cr[2];
-+    info->data = v->arch.hvm.guest_cr[2];
- 
-     return alternative_call(hvm_funcs.get_pending_event, v, info);
- }
-@@ -555,7 +555,7 @@ void hvm_do_resume(struct vcpu *v)
-         if ( hvm_get_pending_event(v, &info) )
-         {
-             hvm_monitor_interrupt(info.vector, info.type, info.error_code,
--                                  info.cr2);
-+                                  info.data);
-             v->arch.monitor.next_interrupt_enabled = false;
-         }
-     }
-diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
-index 91c906072001..0845e9f77879 100644
---- a/xen/arch/x86/hvm/svm/nestedsvm.c
-+++ b/xen/arch/x86/hvm/svm/nestedsvm.c
-@@ -775,7 +775,7 @@ int cf_check nsvm_vcpu_vmexit_event(
-     ASSERT(vcpu_nestedhvm(v).nv_vvmcx != NULL);
- 
-     nestedsvm_vmexit_defer(v, VMEXIT_EXCEPTION_DE + event->vector,
--                           event->error_code, event->cr2);
-+                           event->error_code, event->data);
-     return NESTEDHVM_VMEXIT_DONE;
- }
- 
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index eab8c735cf25..2219f9c4911e 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -1177,7 +1177,7 @@ static void svm_emul_swint_injection(struct x86_event *event)
-         {
-             fault = X86_EXC_PF;
-             ec = pfinfo.ec;
--            event->cr2 = pfinfo.linear;
-+            event->data = pfinfo.linear;
-         }
- 
-         goto raise_exception;
-@@ -1270,8 +1270,8 @@ static void cf_check svm_inject_event(const struct x86_event *event)
- 
-     case X86_EXC_PF:
-         ASSERT(_event.type == X86_ET_HW_EXC);
--        curr->arch.hvm.guest_cr[2] = _event.cr2;
--        vmcb_set_cr2(vmcb, _event.cr2);
-+        curr->arch.hvm.guest_cr[2] = _event.data;
-+        vmcb_set_cr2(vmcb, _event.data);
-         break;
-     }
- 
-@@ -1354,7 +1354,7 @@ static void cf_check svm_inject_event(const struct x86_event *event)
- 
-     if ( _event.vector == X86_EXC_PF && _event.type == X86_ET_HW_EXC )
-         TRACE(TRC_HVM_PF_INJECT64, _event.error_code,
--              _event.cr2, _event.cr2 >> 32);
-+              _event.data, _event.data >> 32);
-     else
-         TRACE(TRC_HVM_INJ_EXC, _event.vector, _event.error_code);
- }
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index b0d5ad6981b3..6ff4aeb70d41 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -2106,7 +2106,7 @@ static void cf_check vmx_inject_event(const struct x86_event *event)
- 
-     case X86_EXC_PF:
-         ASSERT(_event.type == X86_ET_HW_EXC);
--        curr->arch.hvm.guest_cr[2] = _event.cr2;
-+        curr->arch.hvm.guest_cr[2] = _event.data;
-         break;
-     }
- 
-diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
-index 50c048adb5ad..2d0a91541034 100644
---- a/xen/arch/x86/include/asm/domain.h
-+++ b/xen/arch/x86/include/asm/domain.h
-@@ -747,10 +747,9 @@ static inline void pv_inject_DB(unsigned long pending_dbg)
-         .vector      = X86_EXC_DB,
-         .type        = X86_ET_HW_EXC,
-         .error_code  = X86_EVENT_NO_EC,
-+        .data        = pending_dbg,
-     };
- 
--    event.pending_dbg = pending_dbg;
--
-     pv_inject_event(&event);
- }
- 
-@@ -760,10 +759,9 @@ static inline void pv_inject_page_fault(int errcode, unsigned long cr2)
-         .vector = X86_EXC_PF,
-         .type = X86_ET_HW_EXC,
-         .error_code = errcode,
-+        .data = cr2,
-     };
- 
--    event.cr2 = cr2;
--
-     pv_inject_event(&event);
- }
- 
-diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
-index 0ce7d5d78350..16383e1084ee 100644
---- a/xen/arch/x86/include/asm/hvm/hvm.h
-+++ b/xen/arch/x86/include/asm/hvm/hvm.h
-@@ -569,10 +569,9 @@ static inline void hvm_inject_page_fault(int errcode, unsigned long cr2)
-         .vector = X86_EXC_PF,
-         .type = X86_ET_HW_EXC,
-         .error_code = errcode,
-+        .data = cr2,
-     };
- 
--    event.cr2 = cr2;
--
-     hvm_inject_event(&event);
- }
- 
-diff --git a/xen/arch/x86/include/asm/x86-event.h b/xen/arch/x86/include/asm/x86-event.h
-index a8823c7cfc31..b0543c9e3715 100644
---- a/xen/arch/x86/include/asm/x86-event.h
-+++ b/xen/arch/x86/include/asm/x86-event.h
-@@ -22,10 +22,16 @@ struct x86_event {
-     uint8_t       type;         /* X86_ET_* */
-     uint8_t       insn_len;     /* Instruction length */
-     int32_t       error_code;   /* X86_EVENT_NO_EC if n/a */
--    union {
--        unsigned long cr2;         /* #PF */
--        unsigned long pending_dbg; /* #DB (new DR6 bits, positive polarity) */
--    };
-+
-+    /*
-+     * As per the FRED spec.
-+     *
-+     * A subset of uses occur in IDT mode as well:
-+     * - #PF: CR2
-+     * - #DB: PENDING_DBG (DR6 with positive polarity)
-+     * - #NM: XFD_ERR (AMX)
-+     */
-+    unsigned long data;
- };
- 
- #endif /* X86_X86_EVENT_H */
-diff --git a/xen/arch/x86/pv/traps.c b/xen/arch/x86/pv/traps.c
-index c863ab9d372a..21a1f4b7174a 100644
---- a/xen/arch/x86/pv/traps.c
-+++ b/xen/arch/x86/pv/traps.c
-@@ -58,20 +58,20 @@ void pv_inject_event(const struct x86_event *event)
-     switch ( vector | -(event->type == X86_ET_SW_INT) )
-     {
-     case X86_EXC_PF:
--        curr->arch.pv.ctrlreg[2] = event->cr2;
--        arch_set_cr2(curr, event->cr2);
-+        curr->arch.pv.ctrlreg[2] = event->data;
-+        arch_set_cr2(curr, event->data);
- 
-         /* Re-set error_code.user flag appropriately for the guest. */
-         error_code &= ~PFEC_user_mode;
-         if ( !guest_kernel_mode(curr, regs) )
-             error_code |= PFEC_user_mode;
- 
--        trace_pv_page_fault(event->cr2, error_code);
-+        trace_pv_page_fault(event->data, error_code);
-         break;
- 
-     case X86_EXC_DB:
-         curr->arch.dr6 = x86_merge_dr6(curr->domain->arch.cpu_policy,
--                                       curr->arch.dr6, event->pending_dbg);
-+                                       curr->arch.dr6, event->data);
-         fallthrough;
-     default:
-         trace_pv_trap(vector, regs->rip, use_error_code, error_code);
-@@ -94,7 +94,7 @@ void pv_inject_event(const struct x86_event *event)
-                 vector, vector_name(vector), error_code);
- 
-         if ( vector == X86_EXC_PF )
--            show_page_walk(event->cr2);
-+            show_page_walk(event->data);
-     }
- }
- 
-diff --git a/xen/arch/x86/x86_emulate/x86_emulate.h b/xen/arch/x86/x86_emulate/x86_emulate.h
-index 534b1c46fad3..da1051a0f9e7 100644
---- a/xen/arch/x86/x86_emulate/x86_emulate.h
-+++ b/xen/arch/x86/x86_emulate/x86_emulate.h
-@@ -758,7 +758,7 @@ static inline void x86_emul_pagefault(
-     ctxt->event.vector = X86_EXC_PF;
-     ctxt->event.type = X86_ET_HW_EXC;
-     ctxt->event.error_code = error_code;
--    ctxt->event.cr2 = cr2;
-+    ctxt->event.data = cr2;
- 
-     ctxt->event_pending = true;
- }
--- 
-2.39.5
+So, to summarize what I am being asked to do in this thread, I propose the
+next version of this patch should:
 
+1. Fix style problems in this version.
+2. provide a public header to define two protocols for providing
+   Intel IGD support via interaction between the DM and hvmloader.
+   The first protocol is the legacy protocol version, and it
+   is the version that our current implementation follows. The second
+   version is the new proposed protocol that is able to allow
+   support for an extended VBT, which is required for newer Intel
+   IGD devices.
+
+3. For now, since only hvmloader currently has access to the host
+   OpRegion in both our current implementation and the proposed new
+   protocol, hvmloader will drive the decision about which protocol
+   version to use for setting up the guest OpRegion. First, if the
+   device model lacks support for the new protocol proposed here that
+   supports the extended VBT, then hvmloader has no choice but to
+   implement the current legacy protocol. Even in that case, instead
+   of just printing a scary or confusing message about lack of support
+   for extended VBT and continuing, which is what this version of this
+   patch does, we can read the OpRegion and then print an error message
+   and BUG() (or just a WARN?) only in the case when extended VBT
+   support is needed for this hardware but such support is not available
+   in the device model. The message could say something like:
+
+   IGD: error: This device requires extended VBT support in the device model.
+   Please upgrade the device model to a version with extended VBT support
+   and try again.
+
+   If the device does not require extended VBT support, we silently continue
+   and can expect the guest will operate correctly if all else is also good.
+
+   Now for the case when the device model does support extended VBT but the
+   device is a legacy device that does not need an extended VBT. In that
+   case, I think it is better to, instead of implementing the current
+   legacy protocol which unconditionally maps 3 host pages into the guest
+   when only 2 pages are actually needed, so an extra page from the host
+   of unknown content is being exposed to the guest, we implement the new
+   protocol proposed here that will reserve only two pages for the OpRegion
+   in the E820 map and use a copy of the two-page OpRegion in the guest instead.
+   This will be a change from this v2 of this patch which just uses the three-page
+   mapped region in this case.
+
+   Then there is the fourth case when the device model supports extended VBT
+   and the device needs such support.
+
+   To understand the approach to this problem that I have implemented in this
+   patch and plan to implement in future versions until a better alternative
+   is proposed, please refer to these Linux kernel commits which added support
+   for extended VBT for KVM/vfio guests and which explain why this patch is
+   needed for the newer Intel IGD devices that need an extended VBT:
+
+   git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git bab2c1990b78 ("vfio/pci: Add support for opregion v2.1+")
+   git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git 49ba1a2976c8 ("vfio/pci: Add OpRegion 2.0+ Extended VBT support.")
+
+   So, in this case, we have to implement some means for exposing both the
+   OpRegion and the VBT to the guest, and we may need to also modify the
+   OpRegion in some cases. Specifically, the value of the rvda field in the
+   OpRegion needs to be modified in at least two cases:
+
+   A) Host OpRegion version is 2.0. In this case, rvda is the absolute address
+      of the VBT and will need to have a different value in the guest than its
+      value in the host.
+
+   B) OpRegion version is 2.1 or higher. In this case, rvda is the VBT address
+      relative to the OpRegion base but if our memory map does not allow us to
+      maintain the same relative offset of the VBT from the OpRegion base on the
+      host, rvda will need to have a different value in the guest than its value
+      in the host.
+     
+   For now, until a better way is proposed to expose the OpRegion and VBT to the
+   guest in a way that allows the guest OpRegion to be modified as described above,
+   I plan to propose the same approach of temporarily mapping the host IGD OpRegion
+   and VBT so that hvmloader can obtain a copy of each region and configure the
+   OpRegion and VBT appropriately for the guest that I have use in this patch,
+   despite Jan's objections which, as far as I can tell, also apply to our current
+   implementation.
+
+Thanks,
+
+Chuck
 
