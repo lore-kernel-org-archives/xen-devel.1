@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89A18C5B572
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2026 07:02:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1390773.1630933 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1287DC5CFC1
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2026 07:28:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1390785.1630941 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wulvu-0000cu-Jn; Fri, 14 Aug 2026 07:02:26 +0000
+	id 1wumKN-0004Zi-AU; Fri, 14 Aug 2026 07:27:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1390773.1630933; Fri, 14 Aug 2026 07:02:26 +0000
+Received: by outflank-mailman (output) from mailman id 1390785.1630941; Fri, 14 Aug 2026 07:27:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wulvu-0000cn-Fj; Fri, 14 Aug 2026 07:02:26 +0000
-Received: by outflank-mailman (input) for mailman id 1390773;
- Fri, 14 Aug 2026 07:02:25 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wumKN-0004Zb-79; Fri, 14 Aug 2026 07:27:43 +0000
+Received: by outflank-mailman (input) for mailman id 1390785;
+ Fri, 14 Aug 2026 07:27:42 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+04c67277bee7a825e0be+8391+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1wulvs-0000ch-0i
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 07:02:25 +0000
+ id 1wumKL-0004ZV-9H
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 07:27:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wulvp-00BeEA-Q7; Fri, 14 Aug 2026 09:02:21 +0200
+ id 1wumKJ-0038bI-OT; Fri, 14 Aug 2026 09:27:39 +0200
 Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+04c67277bee7a825e0be+8391+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a7ebd74-8faa-0a2a0a5109dd-0a2a450abc4e-48
- for <multiple-recipients>; Fri, 14 Aug 2026 09:02:21 +0200
+ id 6a7ec354-2eae-0a2a0a5409dd-0a2a450ae13a-26
+ for <multiple-recipients>; Fri, 14 Aug 2026 09:27:39 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
  by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+04c67277bee7a825e0be+8391+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a7ebd7c-f2d2-0a2a450a0019-5a9b32229a3a-3
- for <multiple-recipients>; Fri, 14 Aug 2026 09:02:21 +0200
+ id 6a7ec36b-f2d2-0a2a450a0019-5a9b32228eee-3
+ for <multiple-recipients>; Fri, 14 Aug 2026 09:27:39 +0200
 Received: from [2001:8b0:10b:5:84af:4c52:575c:6551]
  (helo=u09cd745991455d.ant.amazon.com)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wulva-00000004mKe-3eC2; Fri, 14 Aug 2026 07:02:07 +0000
+ id 1wumK8-00000004oGV-1zYP; Fri, 14 Aug 2026 07:27:28 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,15 +55,15 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
 	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
 	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=GALK1RxRiXQgyLss6FcjsjjkccYATFPtuqlET9PD8TY=; b=YFu7T01jc4h7HwAPbbwrSDM0bc
-	WcNQUwOsz0TxVSfzXGiQ2qZy4zksUd5M4j/juh5rqGI7A0dRFzJmBBo9Th4Q1yZ6+Mx5ksBuITnfs
-	NlBh6PqgWyhtjZvWEt2f6fi+xWQZIgJ47N4Vku1sYoaxoVX8x1Fyy2bs9HyCPD2b7C75HoHiw18jG
-	Ez38xozW6aHUO79EFj0kI9L4jeTsjUirMP/Hei6Mse7y9374JhEKZyAxP+wDmRbHaJkr/CJjvPrO+
-	1RUkdqLrz2Rv0MssrWlQ7VYfrMMRIIgwBi0sAZROHJ0tND7pOEVyWmr+LD7hFGA6lb9WzIY6SoWLa
-	W+h6tJWw==;
-Message-ID: <c5c532e01309c8c73de2b0f393539b608c495f1f.camel@infradead.org>
-Subject: Re: [PATCH v7 17/36] KVM: x86: Allow KVM master clock mode when
- TSCs are offset from each other
+	bh=XgbACiF0VbZQ3qTHeTv3h3pqeu4o7TCVK0pEMR7P+5Q=; b=n9M+1nUZlJt8tJ67mjvev4cQFd
+	sYq7ADrcn5SliAXKKRtIA97idnKt8ci6mvXXyN8bTgh5qfyRpQU5AGTkiVfN+PaA6iXJiMBJpKgtp
+	FLhBo8ORKw9nrU0IbeS7hyyAcGRmfl42TqhbAU3b++ilVruvKF7kaH7eJUmcSe1UTcGBl//vZeV4K
+	iitnGvLVzwy6sMQO7msIbZWSFBS3t+3mO3wgyjvXCTBkbMPlAVsgcCyl4kkd1DqQmn4M9MBJQjxlY
+	DbMRHQunsmo5E4hyR/GnixqWJcJP32keo2WGJgQthe3KV8IJuZpu20wk7N14HkUfciJhnk9YyhPYA
+	DY5INBig==;
+Message-ID: <4420099fedce20021d6cc5aeb1aa270c7951c552.camel@infradead.org>
+Subject: Re: [PATCH v7 31/36] KVM: x86: Add KVM_[GS]ET_CLOCK_GUEST for
+ accurate KVM clock migration
 From: David Woodhouse <dwmw2@infradead.org>
 To: Sean Christopherson <seanjc@google.com>
 Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
@@ -78,42 +78,178 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
  Zhang	 <dongli.zhang@oracle.com>, joe.jin@oracle.com, kvm@vger.kernel.org, 
 	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
 	xen-devel@lists.xenproject.org, linux-kselftest@vger.kernel.org
-Date: Fri, 14 Aug 2026 08:01:57 +0100
-In-Reply-To: <anusv0DloFhLMMoW@google.com>
-References: <ansywxh0VX5rtfWc@google.com>
-	 <e256fa4af96e916ba30019cbba501fa896025fb0.camel@infradead.org>
-	 <antQYJvRxJxOjtut@google.com>
-	 <f5dc701cf3319a7b3c8fd1497f26d051aa9fa3ba.camel@infradead.org>
-	 <antb01WqOrs-tztm@google.com>
-	 <6ab49538675d97f1f4bf01574b1b066aae0bc05c.camel@infradead.org>
-	 <ants4VjfAiblaWsl@google.com>
-	 <3dc73f745b6abfd1eb53e7d3fce2067eaa3b3c92.camel@infradead.org>
-	 <anuYNxD81OE3MrQw@google.com>
-	 <5efe7a3914a3610ee00a487379caff84af6aa731.camel@infradead.org>
-	 <anusv0DloFhLMMoW@google.com>
+Date: Fri, 14 Aug 2026 08:27:19 +0100
+In-Reply-To: <anuy6QxUVLcSSVCn@google.com>
+References: <20260728144954.355376-1-dwmw2@infradead.org>
+	 <20260728144954.355376-32-dwmw2@infradead.org>
+	 <anuy6QxUVLcSSVCn@google.com>
 Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-B3TdkSrYLCzPBl0c8lic"
+	boundary="=-i/xjFyj0sIBrhyIUdgpg"
 User-Agent: Evolution 3.60.3-0ubuntu1~ppa9~24.04 
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-4011c0/1786690941-506CECFC-2F5F2CD2/0/0
+X-purgate-ID: tlsNG-4011c0/1786692459-4B2D8CFC-C7B73550/0/0
 X-purgate-type: clean
-X-purgate-size: 9074
+X-purgate-size: 15349
 
 
---=-B3TdkSrYLCzPBl0c8lic
+--=-i/xjFyj0sIBrhyIUdgpg
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, 2026-08-11 at 16:14 -0700, Sean Christopherson wrote
-> I'm not totally opposed to a broader GET, but we should definitely get Pa=
-olo's
-> eyes on this sooner than later.
+On Tue, 2026-08-11 at 16:40 -0700, Sean Christopherson wrote:
+>=20
+> Invoking kvm_guest_time_update() here is probably a deal-breaker.=C2=A0 U=
+pdating the
+> master clock and other internal state is far from ideal, but should be ok=
+.
+>=20
+> However, writing guest memory is not.=C2=A0 Specifically, dirtying memory=
+ after the
+> last KVM_RUN is a non-starter for many usecases, as is modifying state th=
+at is
+> visible via other GET uAPI (though I don't think that applies here?).=C2=
+=A0 E.g. see
+> commits:
 
-We've been saying that for two years. Shall I bring a net and a whip to
-KVM Forum? Or Plumbers? :)
+Ack. Calling kvm_guest_time_update() is also *entirely* pointless. We
+are in masterclock mode, by definition, as this ioctl only works in
+masterclock mode. So kvm_guest_time_update() isn't actually creating
+any new information; it just calculates the same per-VM tsc_shift/mul.
+And kvm_vcpu_ioctl_get_clock_guest() could just use those directly.
+Even better, it can do so *inside* the seqcount loop.
 
---=-B3TdkSrYLCzPBl0c8lic
+Fixup below (not amending commits while you're co-opting the tree, as
+we'd both go insane). I'll push it to the top of=20
+https://git.infradead.org/?p=3Dusers/dwmw2/linux.git;a=3Dshortlog;h=3Drefs/=
+heads/kvmclock9-part2
+on top of with the offset test which is already there.
+
+>  And we'd probably want to build on my idea to report that
+> KVM_RUN needs completion[*], but that'd be a good thing overall.
+>=20
+> https://lore.kernel.org/all/20250111012450.1262638-1-seanjc@google.com=C2=
+=A0
+
+Aha... *that* is why I found that lore thread open in my browser
+yesterday; I was confused about how I'd got there. It's missing
+KVM_EXIT_XEN btw. (Of which, KVM_EXIT_XEN_HYPERCALL is the only
+subtype. I suspect Jo=C3=A3o originally expected that there would be more).
+
+=46rom d2e54f439f0a5c0f2bddeaead916b23daedb2b2f Mon Sep 17 00:00:00 2001
+From: David Woodhouse <dwmw@amazon.co.uk>
+Date: Fri, 14 Aug 2026 07:56:58 +0100
+Subject: [PATCH] fixup! KVM: x86: Add KVM_[GS]ET_CLOCK_GUEST for accurate K=
+VM
+ clock migration
+
+Make KVM_GET_CLOCK_GUEST stateless, never writing guest memory.
+
+Invoking kvm_guest_time_update() from the GET ioctl writes the guest's
+pvclock pages, and dirtying guest memory after the final KVM_RUN breaks
+migration flows which have already completed their last dirty-log pass.
+
+There is no need for it. The only outputs previously taken from the
+vCPU's shadow pvclock were tsc_shift and tsc_to_system_mul, and in
+master clock mode (which this ioctl requires; it returns -ENODATA
+otherwise) those are identical to the master clock's own mul/shift:
+both are computed by kvm_get_time_scale() from the same guest TSC
+frequency, which all vCPUs share. Use ka->master_tsc_{shift,mul}
+directly, which pvclock_update_vm_gtod_copy() precomputed for exactly
+this kind of vCPU-less consumer.
+
+The only remaining per-vCPU input is kvm_read_l1_tsc(), which is a pure
+read, translating the master clock snapshot into the vCPU's own TSC
+domain.
+
+This also removes the -EBUSY case and the special handling of a vCPU
+which has never run: the master clock state exists from VM creation,
+so the pvclock can always be constructed. And it moves the reads of
+tsc_shift, tsc_to_system_mul and flags inside the seqcount loop, where
+they should have been all along: previously they could tear against a
+concurrent master clock update.
+
+A KVM_REQ_CLOCK_UPDATE pending on the vCPU is now left pending rather
+than being consumed: the pvclock returned here is anchored to the
+current master clock snapshot and describes the same linear function
+of the guest TSC as the guest-visible copy, so there is nothing to
+refresh. The guest's own pages are updated, as ever, only from KVM_RUN.
+
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+---
+ arch/x86/kvm/x86.c | 37 ++++++++++++++++---------------------
+ 1 file changed, 16 insertions(+), 21 deletions(-)
+
+diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+index 8eb73e3ada66..4de98cc16751 100644
+--- a/arch/x86/kvm/x86.c
++++ b/arch/x86/kvm/x86.c
+@@ -3460,27 +3460,22 @@ static int kvm_vcpu_ioctl_enable_cap(struct kvm_vcp=
+u *vcpu,
+ static int kvm_vcpu_ioctl_get_clock_guest(struct kvm_vcpu *v, void __user =
+*argp)
+ {
+ 	struct pvclock_vcpu_time_info hv_clock =3D {};
+-	struct kvm_vcpu_arch *vcpu =3D &v->arch;
+ 	struct kvm_arch *ka =3D &v->kvm->arch;
+ 	unsigned int seq;
+=20
+ 	/*
+-	 * If KVM_REQ_CLOCK_UPDATE is already pending, or if the pvclock
+-	 * has never been generated at all, call kvm_guest_time_update().
+-	 * Its only failure mode is transient (the TSC frequency of the
+-	 * current CPU is momentarily unknown), so return -EBUSY to tell
+-	 * userspace to try again.
+-	 */
+-	if (kvm_check_request(KVM_REQ_CLOCK_UPDATE, v) || !vcpu->hw_tsc_hz) {
+-		guard(srcu)(&v->kvm->srcu);
+-
+-		if (kvm_guest_time_update(v))
+-			return -EBUSY;
+-	}
+-
+-	/*
+-	 * Reconstruct the pvclock from the master clock state, matching
+-	 * exactly what kvm_guest_time_update() writes to the guest.
++	 * Construct the pvclock purely from the master clock state. The
++	 * master mul/shift are computed for the guest TSC frequency, which
++	 * in master clock mode is the frequency of every vCPU; only the
++	 * tsc_timestamp is per-vCPU, translating the master snapshot into
++	 * this vCPU's TSC domain via its scaling ratio and offset.
++	 *
++	 * Note, this deliberately does NOT invoke kvm_guest_time_update(),
++	 * which would write the guest's pvclock pages: dirtying guest
++	 * memory after the final KVM_RUN would break post-copy migration
++	 * flows. The pvclock returned here describes the same clock as the
++	 * guest-visible copy (the same linear function of the guest TSC),
++	 * anchored at the current master clock snapshot.
+ 	 */
+ 	do {
+ 		seq =3D read_seqcount_begin(&ka->pvclock_sc);
+@@ -3490,12 +3485,12 @@ static int kvm_vcpu_ioctl_get_clock_guest(struct kv=
+m_vcpu *v, void __user *argp)
+=20
+ 		hv_clock.tsc_timestamp =3D kvm_read_l1_tsc(v, ka->master_cycle_now);
+ 		hv_clock.system_time =3D ka->master_kernel_ns + ka->kvmclock_offset;
++		hv_clock.tsc_shift =3D ka->master_tsc_shift;
++		hv_clock.tsc_to_system_mul =3D ka->master_tsc_mul;
++		hv_clock.flags =3D ka->all_vcpus_matched_tsc ?
++				 PVCLOCK_TSC_STABLE_BIT : 0;
+ 	} while (read_seqcount_retry(&ka->pvclock_sc, seq));
+=20
+-	hv_clock.tsc_shift =3D vcpu->pvclock_tsc_shift;
+-	hv_clock.tsc_to_system_mul =3D vcpu->pvclock_tsc_mul;
+-	hv_clock.flags =3D ka->all_vcpus_matched_tsc ? PVCLOCK_TSC_STABLE_BIT : 0=
+;
+-
+ 	if (copy_to_user(argp, &hv_clock, sizeof(hv_clock)))
+ 		return -EFAULT;
+=20
+--=20
+2.43.0
+
+
+--=-i/xjFyj0sIBrhyIUdgpg
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Disposition: attachment; filename="smime.p7s"
 Content-Transfer-Encoding: base64
@@ -211,23 +347,23 @@ vFEOOmuaq7VamuLEPFQtJM4olmipOW6CzrLcFz6J/6yAecEG3P1ZDoy08eSHvM40MAUgpwGa/w6o
 MAkGA1UEBhMCVVMxFzAVBgNVBAoTDkRpZ2lDZXJ0LCBJbmMuMTowOAYDVQQDEzFEaWdpQ2VydCBB
 c3N1cmVkIEcyIFNNSU1FIFJTQTQwOTYgU0hBMzg0IDIwMjQgQ0ExAhADNSi2uzJskfEdOMo4hV0g
 MA0GCWCGSAFlAwQCAQUAoIIBezAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJ
-BTEPFw0yNjA4MTQwNzAxNTdaMC8GCSqGSIb3DQEJBDEiBCDY4/ERSUTpTLyeS7nE9KdwXTjFRTBd
-qp3APQTen0bgxTCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGln
+BTEPFw0yNjA4MTQwNzI3MTlaMC8GCSqGSIb3DQEJBDEiBCD9/V0PYjtIsN8hkvnIw00hfzTt7k0s
+lNNxMG1uhXHS4zCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGln
 aUNlcnQsIEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFzc3VyZWQgRzIgU01JTUUgUlNBNDA5NiBT
 SEEzODQgMjAyNCBDQTECEAM1KLa7MmyR8R04yjiFXSAwgYcGCyqGSIb3DQEJEAILMXigdjBiMQsw
 CQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQsIEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFz
 c3VyZWQgRzIgU01JTUUgUlNBNDA5NiBTSEEzODQgMjAyNCBDQTECEAM1KLa7MmyR8R04yjiFXSAw
-DQYJKoZIhvcNAQEBBQAEggIAdtYfp6vz+Wp2i6L11jBiKHSOuC0jJGuae5eEUZCzyQoIfc6ebgPZ
-DyQhxlkyKKrlKuUITksUbBbW2i0RHXRW0pxTub5+Zsv4jDRUFGiFBN6PFGJ5ybA+WRdTElV6jBHJ
-X+0bopeQqgFqE4L4HILDbEiP9EF5phPOQEmrLy8SekTz1/TxhyR06WSmV0p8KqMwYfvf/SM8ccZl
-bb1Jq0Ik7FcJvRNUXP27/SixzDMcpeEEfgLQPcp3YyVKS8FNftTfWidvpCVSerEYP2l1NyhEza1I
-pBjMOzfTg++qug0vSa9yIdYKZnQ6Rpdy//ajHk7LX5M/tnRRND8CwUTPpkMiIispfZQDp7h1B42y
-Cu5/xxOai0aMRXhATsJxl+FHQxmGxWbhMv1SX6IIN/CmU2UQtpqvp/JZX0w6zY2bSla0n8DbzqG1
-nTHnHRTwwtSSUdgINxHxExZtVRoSM1E2mQj5WE62RneD9oIMA+hkuj/E7foXjJ+klbUEct1vGdt0
-ct7qFiBj/gnxzY//JW4LCRSOtoO42kWYVzNOlhXmS0Qq13fsNH13Ni0wxtRQTigv1oMLKGpXWYkF
-k7+TeAteGbmMhT9rEMKnWjYD4RQQ/BzVPzUjbshLgv1LRtennC4JL+J+jVaWSFqIa3QMj+jBDtAC
-tbgUZzrtp6FWHVrGjSnQPMcAAAAAAAA=
+DQYJKoZIhvcNAQEBBQAEggIAORes4VKcEBpHFpPKAayLdwwGcY9XJ7wh++CNMHtMuzPgbGwitPo8
+2k3wRPfhhhdaVTJOLDz76c6e0JObweBrnSqc01SFBMvoW3Kp7f6NSUXqM6xAf8Vopuhp1HQXVXas
+JoWZRF+hAORBrLtceADeVfqLN9+eytiTdZJ/7UTZm2W/7AuMEuYDPKywVhOyElb4/1Nj6IUXmKl3
+izAKQ6YGUzU9brH4QOeKEkPgas/GwkYh1o1qs1Nvz2GzAKTVEMGXc2SATaAjzkKhdnBv0aIqueGD
+tKnzzJUMjWy1wbXR1yQgwa6JRAXg6OpiEwPkyJnPHBcD0aFcHYRrtfWfzbJHWDqhXe5yiRCsx6BS
+8/9lWwN/TK+kzof+Muij13Mf5sngjz0eIDiG5HsrRGodG7DXHhpVoWQ0v+i1iFjuFvJKedX3s6je
+UKrEx59toY3Tpm15BaMEaesOEyYVkm4uub6EKk7PvcHjgPCuq0Imo1ZXRrPQNdDTfQ85kA8kBTzG
+mNAjHPAj+ifKAXDxfptBCdFy5aVkzZHw46RJkc97H6WXjOYU4wAz7qFs4XfNm64aOa0enPSL6qUr
+Nhou3rterPV7zZhHNVU2acZNb7zE95FkT9cBmEvD6zsLd8FrFb5VSSsin3a8Kbgb4WDAc/mNup1a
+b3A3X/0eYkDc0iK6F8STZroAAAAAAAA=
 
 
---=-B3TdkSrYLCzPBl0c8lic--
+--=-i/xjFyj0sIBrhyIUdgpg--
 
