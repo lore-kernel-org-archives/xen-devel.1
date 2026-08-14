@@ -4,41 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1656C5CFC1
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2026 17:54:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1391383.1631233 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B497FC5CFCF
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2026 18:59:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1391430.1631250 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuw6z-0005JI-Ng; Fri, 14 Aug 2026 17:54:33 +0000
+	id 1wux7L-0005Bl-Hh; Fri, 14 Aug 2026 18:58:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1391383.1631233; Fri, 14 Aug 2026 17:54:33 +0000
+Received: by outflank-mailman (output) from mailman id 1391430.1631250; Fri, 14 Aug 2026 18:58:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuw6z-0005JB-K8; Fri, 14 Aug 2026 17:54:33 +0000
-Received: by outflank-mailman (input) for mailman id 1391383;
- Fri, 14 Aug 2026 17:54:32 +0000
+	id 1wux7L-0005Be-EP; Fri, 14 Aug 2026 18:58:59 +0000
+Received: by outflank-mailman (input) for mailman id 1391430;
+ Fri, 14 Aug 2026 18:58:58 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3VVZ_agYKCVoK62FB48GG8D6.4GEP6F-56N6DDAKLK.P6FHJGB64L.GJ8@flex--seanjc.bounces.google.com>)
- id 1wuw6y-0005J5-Ep
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 17:54:32 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <andrew.cooper3@citrix.com>) id 1wux7K-00051t-Mp
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 18:58:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wuw6x-003QFF-Gc
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 19:54:31 +0200
-Received: from [10.42.69.11] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3VVZ_agYKCVoK62FB48GG8D6.4GEP6F-56N6DDAKLK.P6FHJGB64L.GJ8@flex--seanjc.bounces.google.com>)
- id 6a7f562c-e002-0a2a0a5209dd-0a2a450bc922-28
- for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 19:54:31 +0200
-Received: from [209.85.210.198] (helo=mail-pf1-f198.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <3VVZ_agYKCVoK62FB48GG8D6.4GEP6F-56N6DDAKLK.P6FHJGB64L.GJ8@flex--seanjc.bounces.google.com>)
- id 6a7f5655-b7e8-0a2a450b0019-d155d2c6b4e0-3
- for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 19:54:31 +0200
-Received: by mail-pf1-f198.google.com with SMTP id
- d2e1a72fcca58-848568a6f62so1366672b3a.0
- for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 10:54:30 -0700 (PDT)
+ id 1wux7K-003WkB-3h
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 20:58:58 +0200
+Received: from [10.42.69.12] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6a7f6541-e002-0a2a0a5209dd-0a2a450ca5e2-30
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 20:58:58 +0200
+Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6a7f6571-f479-0a2a450c0019-d155dd2fb89c-3
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 20:58:58 +0200
+Received: by mail-wr1-f47.google.com with SMTP id
+ ffacd0b85a97d-47362928f65so1275884f8f.2
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 11:58:58 -0700 (PDT)
+Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
+ [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4815f229681sm8682153f8f.16.2026.08.14.11.58.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Aug 2026 11:58:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,83 +53,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1786730069; x=1787334869; darn=lists.xenproject.org;
-        h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=LfaLWAErtycI8626dIr9iK18/ZV1rhd51zLN5VGW8CI=;
-        b=c7kdra7Qck2cMP+Rs7XLWwxDNaODFcGhMm7v69w2bQac/EseFbMDosYDJBKAnfGokF
-         4QDJiRdp/0HctWr7MP8NPPDcCZxn30aDYkAHkDSiDwfyyr4lLVW1XD82dkgWZAeqZZcc
-         Zrw7mNH8aB1P5DC8dZQFi8We6NlpfOBREEiCPLxZRH3XWMA9e0x0Fe8VDlUpDI9gcbXd
-         x2eM8hqq5/VW8u6Sukhby+TNmtXwLNpNn95AnAa2iWuNZ9bekqTQb7MYtiiKnK6r4J0C
-         QDA687+ojQcsaYaFXYk1RmMXQEOsOkhRWm/zfcC88z6Sxe+fJQ2ivcnFqfACcN2p9ikb
-         Y6Kg==
+        d=citrix.com; s=google; t=1786733937; x=1787338737; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=H8CEnLypOeiEHj/KssqxJXig/KwJTFmcmbXdDvWWB3I=;
+        b=nfjLlvjMPuTRzIM01KfrmBgOE0M8n/L1O81Bgaf2ZorNW5mttMVyie3OQ0yuVKAoOo
+         8rBe2zaqTsT90uNJ8yyi1BiAnziQJuDMDNqFFQecvM2LWBy9gRBA6BTDm5i2Os3nA5sW
+         xVna6jZNu7S9LMQrScKz0YDupj84h0ygmvJUM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786730069; x=1787334869;
-        h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=LfaLWAErtycI8626dIr9iK18/ZV1rhd51zLN5VGW8CI=;
-        b=Yntk64VHh/YyrVqCUmLHpvMa2dPwrVZGQLCjOzYJHmlt+Uq4BQ3Ifd4ic/Nw4zuSA9
-         hkqTY+yTveialGb2EbWVEbLOrXqOIPq5vR7g2OwgLIXB9CgZ1Ca/l97J/w699vH+2YqX
-         oAtmLUzNAwqDPe6Z/0JG3lT1OeN3aPJFlopAZ5TJpBqRpG92O8VkPRj094VxhMmOVFr1
-         oh2d7vsaHO4n40ePnlo7S5c7IQJiwuHMhyX2a6Qe/RrELNEUOrPqEfDjGcewgUoHd/mY
-         V9bNRgdFGHJZhRiwnon+KhUYhWCONbXp2yeylAoI595Qh73RftN6fv98MQd/zCybi68N
-         JUVg==
-X-Forwarded-Encrypted: i=1; AHgh+Rr2LRfmKjf8wttWoeAz1/OTTvxDPngxnnqSO3icJfZ2bwt9WmhLHJq9TYqp74jxPrzC9FKncv7wVqg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yyo3dYijjzCXfZefjRb+kEwCy/Iw8OBtI6J40Cya9XtGFa5hE/S
-	pNgAquUCyy+jrZhgrxggLIyd8btgSp9Iuw87iZmaSWoPbF3m3hSM07qLRPHESktGnz66i9/rhs5
-	EdzpSYw==
-X-Received: from pge22.prod.google.com ([2002:a05:6a02:2d16:b0:cbe:e919:f4bc])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:aa7:88c3:0:b0:848:4d1a:9554
- with SMTP id d2e1a72fcca58-84fde32cb70mr7530427b3a.38.1786730069038; Fri, 14
- Aug 2026 10:54:29 -0700 (PDT)
-Date: Fri, 14 Aug 2026 10:54:28 -0700
-In-Reply-To: <c5c532e01309c8c73de2b0f393539b608c495f1f.camel@infradead.org>
-Mime-Version: 1.0
-References: <antQYJvRxJxOjtut@google.com> <f5dc701cf3319a7b3c8fd1497f26d051aa9fa3ba.camel@infradead.org>
- <antb01WqOrs-tztm@google.com> <6ab49538675d97f1f4bf01574b1b066aae0bc05c.camel@infradead.org>
- <ants4VjfAiblaWsl@google.com> <3dc73f745b6abfd1eb53e7d3fce2067eaa3b3c92.camel@infradead.org>
- <anuYNxD81OE3MrQw@google.com> <5efe7a3914a3610ee00a487379caff84af6aa731.camel@infradead.org>
- <anusv0DloFhLMMoW@google.com> <c5c532e01309c8c73de2b0f393539b608c495f1f.camel@infradead.org>
-Message-ID: <an9WVBHSsy5W0PUk@google.com>
-Subject: Re: [PATCH v7 17/36] KVM: x86: Allow KVM master clock mode when TSCs
- are offset from each other
-From: Sean Christopherson <seanjc@google.com>
-To: David Woodhouse <dwmw2@infradead.org>
-Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Thomas Gleixner <tglx@kernel.org>, 
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, Juergen Gross <jgross@suse.com>, 
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>, Paul Durrant <paul@xen.org>, 
-	Jonathan Cameron <jic23@kernel.org>, Sascha Bischoff <Sascha.Bischoff@arm.com>, 
-	Marc Zyngier <maz@kernel.org>, Joey Gouly <joey.gouly@arm.com>, Jack Allister <jalliste@amazon.com>, 
-	Dongli Zhang <dongli.zhang@oracle.com>, joe.jin@oracle.com, kvm@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	xen-devel@lists.xenproject.org, linux-kselftest@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
-X-purgate-ID: tlsNG-42698a/1786730071-190CD9EA-958C6DEE/0/0
+        d=1e100.net; s=20251104; t=1786733937; x=1787338737;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=H8CEnLypOeiEHj/KssqxJXig/KwJTFmcmbXdDvWWB3I=;
+        b=nn/GXuZGoR5M2tBF9y9sdaPu3lLjzdEMPckRPyqE6kEupZxOMIi7k3f9rxg8xURXfr
+         t41TApX5lQW6WseH4jKYOKeGnc5sTrw3iCcqk8rp8VX+DkWcbEbyYOhL6R4uuXwO/WpY
+         AG2fz37OOpN5T8cpNuFaVoY/+JJWOdJPf82sVqmYqm0Tvb+7nNyw34ftL5S0rAohJ5al
+         x6BUnSZhxLMH3Xf8M36eJe/+pVmbS20TN/doC0foN2glMG5OJ5Gx9VW/gdxq0gPJ1qME
+         MINvbks0Iee8YCOWb3kkc/1NZE9vCLP8YrLTD9nJXAsieM0b/0rcpvvz6U3ffvryI13A
+         aXdg==
+X-Gm-Message-State: AOJu0YyaTsJbMD0FeBkJJyVyHzW9uFWitvuta2ybIXLcu9OY3gFFtdoV
+	vDFjmnR6mOM4YXmA29tveun457xyudhBL0hJF5QXa7Mwm1Ihm4o1kv3qeqanY7ZOAQ6Y9Dq7CDD
+	hyV7r
+X-Gm-Gg: AR+sD11v2B5kb1PfPDtKcjJ0kEazO9P9e0tryz2otk6aVz2hC3qTUTy5fMK4nxlq81C
+	nzYDHlkKtxf/qhN/ZKRTfwG1d5eea1kL2hwASoGEuNQ35uuM4X+SK0toEdZZRNgzagQhvPKvCis
+	yzQFSc7uz21z/cvk3U1mYuBBALm1MVTB83ciYi/hnvyUhEulD2t1WPGkfXNXVRRDbDQJTu+Oi/x
+	bzeqNqLinOHB8FvgNnHMEU5SNAokuMZOBSmrefyMCurxJ9CLgUhGU2ExDTGHgBWhzrVkKY/djNu
+	zR2np/5h5iAjBCV5oWpp9HaWhlUEWzUv8Lwp6mi09ccs/T1KRwIvjBn9upeuOS/8U0mHkkVY3oO
+	knBRBO3NdEK+od4lXrpJ7Y03dI9+vU8RwKhynemA0bCBTPG6QPYDEE++zPIwcOIxzvBhmnJH7iN
+	3gnAHruZt2nO8jyqmLGNAfVdNf1Fft198Aljgpymj2350KQUaFHKKinj8uLaK3G6T4CSLqqn0oz
+	1kjsfrN8o/9FsiaqnYF6h9cQPQ7u5bxIlG8Qect
+X-Received: by 2002:a05:6000:2206:b0:47f:7aee:ed3c with SMTP id ffacd0b85a97d-481606fbddamr13030909f8f.5.1786733937018;
+        Fri, 14 Aug 2026 11:58:57 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Teddy Astie <teddy.astie@vates.tech>
+Subject: [PATCH 1/3] x86/emul: Adjust comments in x86-types.h
+Date: Fri, 14 Aug 2026 19:58:39 +0100
+Message-Id: <20260814185841.1757421-2-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20260814185841.1757421-1-andrew.cooper3@citrix.com>
+References: <20260814185841.1757421-1-andrew.cooper3@citrix.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d25034/1786733938-024DFA5B-D205CDE3/0/0
 X-purgate-type: clean
-X-purgate-size: 820
+X-purgate-size: 1295
 
-On Fri, Aug 14, 2026, David Woodhouse wrote:
-> On Tue, 2026-08-11 at 16:14 -0700, Sean Christopherson wrote
-> > I'm not totally opposed to a broader GET, but we should definitely get Paolo's
-> > eyes on this sooner than later.
-> 
-> We've been saying that for two years. Shall I bring a net and a whip to
-> KVM Forum? Or Plumbers? :)
+x86_segment enumerates segments, not segment registers.  Adjust the comment to
+make this clearer.
 
-I pointed at this thread in the "clocks" pull request, so then should be now,
-soon.  And if that doesn't work, I'll just rename the getter to
-KVM_GET_PAOLO_PAOLO_PAOLO and send a pull request.  Either that will get his
-attention, or we'll have a source of amusement for years to come :-)
+Fix a stray tab with the closing #endif.
 
-Joking aside, this would be a good PUCK topic if we need/want a synchronous
-session to sort things out.
+No functional change.
 
-[*] https://lore.kernel.org/all/20260812213206.1564354-2-seanjc@google.com
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Roger Pau Monné <roger@xenproject.org>
+CC: Teddy Astie <teddy.astie@vates.tech>
+---
+ xen/arch/x86/include/asm/x86-types.h | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/xen/arch/x86/include/asm/x86-types.h b/xen/arch/x86/include/asm/x86-types.h
+index 1c43421885f7..26b06aeac380 100644
+--- a/xen/arch/x86/include/asm/x86-types.h
++++ b/xen/arch/x86/include/asm/x86-types.h
+@@ -16,9 +16,10 @@
+ #endif
+ 
+ /*
+- * Comprehensive enumeration of x86 segment registers.  Various bits of code
+- * rely on this order (general purpose before system, tr at the beginning of
+- * system).
++ * x86 Segments.
++ *
++ * Various areas of code rely on this order (general purpose before system, tr
++ * at the beginning of system).
+  */
+ enum x86_segment {
+     /* General purpose.  Matches the SReg3 encoding in opcode/ModRM bytes. */
+@@ -73,4 +74,4 @@ struct segment_register {
+     uint64_t   base;
+ };
+ 
+-#endif	/* X86_X86_TYPES_H */
++#endif /* X86_X86_TYPES_H */
+-- 
+2.39.5
+
 
