@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED613C5CFC1
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2026 07:48:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1390889.1631004 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BB0EC5CFCF
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2026 07:52:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1390898.1631014 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wumeJ-00018g-Qm; Fri, 14 Aug 2026 07:48:19 +0000
+	id 1wumiA-0002rA-Ax; Fri, 14 Aug 2026 07:52:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1390889.1631004; Fri, 14 Aug 2026 07:48:19 +0000
+Received: by outflank-mailman (output) from mailman id 1390898.1631014; Fri, 14 Aug 2026 07:52:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wumeJ-00018Z-Nm; Fri, 14 Aug 2026 07:48:19 +0000
-Received: by outflank-mailman (input) for mailman id 1390889;
- Fri, 14 Aug 2026 07:48:18 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wumiA-0002r3-6K; Fri, 14 Aug 2026 07:52:18 +0000
+Received: by outflank-mailman (input) for mailman id 1390898;
+ Fri, 14 Aug 2026 07:52:16 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wumeI-00013c-J2
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 07:48:18 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wumi8-0002qx-FE
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 07:52:16 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wumeH-00Blrz-8F
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 09:48:17 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wumi7-008mGh-S4
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 09:52:15 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7ec82a-e002-0a2a0a5209dd-0a2a4501c954-44
- for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 09:48:17 +0200
-Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a7ec91a-bab6-0a2a0a5309dd-0a2a4506e2b8-48
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 09:52:15 +0200
+Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a7ec83f-5984-0a2a45010019-d155802af1a7-3
- for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 09:48:17 +0200
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-49800c6a846so7557645e9.3
- for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 00:48:15 -0700 (PDT)
+ id 6a7ec92f-195a-0a2a45060019-d155dd2ee4e3-3
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 09:52:15 +0200
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-47f703a9d05so466336f8f.0
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 00:52:15 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49987b2e6b6sm31853825e9.3.2026.08.14.00.48.14
+ ffacd0b85a97d-4815f21a24esm6871979f8f.11.2026.08.14.00.52.14
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 14 Aug 2026 00:48:15 -0700 (PDT)
+ Fri, 14 Aug 2026 00:52:14 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,53 +55,54 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786693695; x=1787298495; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1786693935; x=1787298735; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=u8USBfCyP2EQaBisKnXCIX7wTTLpE4ngLpwbAIM3xM8=;
-        b=Vo2h456eU1SElh+dCcGGVqAKzwCizgjk4h1kwi+HFAe849pvdzSNwOX5zQOevRjOjL
-         Nfr3+ci6UDmQux/IXs1mXr4Hv0zRGXh91ceANR+RyA9Otqu91pX6zU0VrZYljMSIsS6y
-         VAcW6WWgbyYNfli1RPIl+C39jdIv1Vs5xH9X/enCSzmjeuPXmflxS05Sr3NF/QSVQnAK
-         HrH6QKd/2YfUQy3j+kjUhydUTKSALv1/IwWnaVGaOPzI1xTywgxSbAGDdOQ5DQDorjRN
-         4Az+NwitN0e54lc5xhzlF23ard4OO5LjNErrkRgnq3KJDHNKFjn+5FlJMn1fIAnIx2Ss
-         D8bQ==
+        bh=ZFLNgY0JxYKIiTRaUMoV3Afc2p0SQXaOzr8uKvrRO8o=;
+        b=VuoYyh+7er/xjfGuNx8MCFfVJl33JV4MmlPeC1rtGVfPB0q8jQ3NjFWtfTA0TBC/e8
+         DSpFr/K0EagkY0lUOjzQAwPkudJqXfS4g/oSXIUvrFw9/Bnpr5vRofol/UD+5V3gfnio
+         eyTeVfvYD7UPnYem5rJ58NHL5lhHxPBM7q7NSTRSye6IBnBEnYQrtACjlzTF87Ywmti8
+         Y4ppJu2Y9G+An7YoxiRMp3qAioPPRePIB4URydYgFTUx9dTz312lmL/Oo+FpvYrOom/h
+         Sp8wTqr9Rbp0e/16XQ9oOU3j0XSQGy8tl5IaTX7fOLgZeCoj6QSH7xJQteULzzNTGdFC
+         i8dA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786693695; x=1787298495;
+        d=1e100.net; s=20251104; t=1786693935; x=1787298735;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=u8USBfCyP2EQaBisKnXCIX7wTTLpE4ngLpwbAIM3xM8=;
-        b=SKWgVHY1skT4PL5UViUdGiuXxsnkMIHZNKig2zCKY1JJGt3nq5VkOVREqVn4yln+8+
-         IGrJNcXbJIdX+vSvTv3H7vlS3hmPy2cpoKz+uEpeiMlo/p3ymeAQ9dcgu2oAUOTO6+DK
-         yAovWESti2fmuxnt5in75VePg3M2NGNGRPEbCp3JPatCwhFBpiSbY7pogsVhYd7Q12FO
-         GaOn3hNJcJKN2pxaDDp1earP2AFAU9ieDOHwS0Y9YQOOFNMyR5nqI7LZ+CYlG14yfcRC
-         M1JY3E+/oirTnPGqBVdYxsW+Z53UW50mXMD9rF8pFC6Su9oa3m4w5Jp61VOmq+fxAfwU
-         WywQ==
-X-Forwarded-Encrypted: i=1; AHgh+RqWiQzEbW3bpY5nNAWUfgOG7Ehep8YIpoKa8PfKr8z50mv1Gl+92zQe1ULwk6+2585/gnAuOJCI3us=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwcqAlD+4QMaH7nK7ssmEihbzqPeTDsz4LJsCQ/HffhwmKa7+5M
-	nZd9+GbmRbk8K+I1xyfyn38A+lHRL4ZHBAj9pun7x6aRJVyPrhzZBkMmluveJoA691pBK6jAkdU
-	2d5NdAw==
-X-Gm-Gg: AR+sD12hW1U8jzvVbxT8C1LITWMrK10cI+wHshOZxsIqmCu6tIbgd8GFviKCxSw46SQ
-	9fvh2OKO3JzoI+TMWCVh0AiOP7kMbWWXgWXVBpoUEWA6I/qjflrLe5dl6kMQXjcsz7ys9W2HAgs
-	QCiQ0dYAwm1oLb4i5UuZcjWKF10EbmVeHeQl1kD9mrvffyM5JypNnLBzf3XWs0azHDkANgiWB7O
-	zDl1PkIlOHuf1rkVRAK2OpUYCFCIZKJ0J8es9qyzsk7DUzIC06O9TiWlJo3myaPJgZ+Gtefy6Z3
-	xxYIC0Xp+FjCL2wvVAFktBu0lCjQDW0ocSL5Q1p8LLYLpdh8dZnX4AqXaitzZGNyApXx0Ej+nZU
-	rXAU+NdR6MzgysXFYKZApyWaHKzyhnaDz5cp+e6dfOpDCr72WaiAI0CQiLBxwiugVXc1R0eTy/M
-	YPD3mLaKdWUsA6lvtsudtyolj1itJ8VDx7yzML8hUVDxAxFtHRHoqQQHG20XHPClj5cptjvSfDu
-	hBfzoU9o41Ud4Zi5quDFnliqPzh8i6qDVm0pIHcQbYvgo5cK1vp
-X-Received: by 2002:a05:600c:8714:b0:499:8704:242c with SMTP id 5b1f17b1804b1-499878ca13bmr61276965e9.0.1786693695466;
-        Fri, 14 Aug 2026 00:48:15 -0700 (PDT)
-Message-ID: <50553714-94be-42f7-b8db-f176cb328059@suse.com>
-Date: Fri, 14 Aug 2026 09:48:14 +0200
+        bh=ZFLNgY0JxYKIiTRaUMoV3Afc2p0SQXaOzr8uKvrRO8o=;
+        b=J5PMXMfzF0m3dbrYKczNRQ9RJ9HINXRlOlgOA2WG+F3W8X3Y2FOMfH+nnmVd8bWXYV
+         NLFuuEBCxTe22HxaLRocX9CkY/ubeMZEITC5clcz9NFfHtFZfEWVqd5zB0vM0mdo5lKq
+         Ml36OCk8YccuqSvoIzAE4IIrD2Tn7CaqLv7SKZdb7Eqcv08ErDFEu+sC1RtL4HKFVxGf
+         anwkis9qR1aoTV5Jx3nHuyfZlPVbjAtFcWIiiM/3F0cRXtk7NDsx1Xh9cnlvxcCUo2uf
+         5ApfactHnRD3g6imioxCFiPjEbOJ5mcWuVq3vmpoy9kDo6tC4fxzqmqEuxhCsMJxZpMN
+         57kg==
+X-Forwarded-Encrypted: i=1; AHgh+RrLNPL4xsfHIFKsA0+oI2pzWg/k3s/KVYxLB/t21ij637YP/jnARdaHeyIWBHvS31iiKLd1q6AOoQw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw+Gs0uv763OqOv6QL+g467nTHFzy9b87+FM2ZVMHdVg1BWbtFG
+	z3mDkC2TI5xS7Sh2FFE3FhO9mdG6vraTEIGEWjy3I79bxZs49swniWmAFOwdF63rez9WOqlLRE+
+	LxezxFw==
+X-Gm-Gg: AR+sD101ZVyRq8PkvFUUyiZ1M7GzaE233x8VIwmSnkapIvIdLnFD1Ebok6HrBCPUKH6
+	yq6Aq3ELs0nVxfZFLuHBgd1cZiakcab+uKFquv4huP4P+s1RJD69AUBofNv+ADSLzVUjpUhl97e
+	6beXSYjE/FG+Cj6gb32gs/78VW00aLA9PLEXsDI1wzDLwPwKkxRBAJXd1OsxDXrHEEqzf6F71C4
+	WwzJ4IICG4TOzSGd/mSDFvAmk0zK76trS7RQKXwzeT3py8kzvPXs3hVq20DvfGVtDcdo5Put/op
+	C4kgXgjFg3mLCG2Yx8mRTGoyR08ESTlYTZDn1mhlShKKwWB06QoCrsoBvFmakU+3Qm8a7obI84m
+	MlZasQ/JKvdjx8hCfSOoPxlNZ7hvtccOOHVk5TXEvYnGH+/5V0No9AIJt8Pb+YssnPLJZ6B+kXm
+	bLP2X+Rf2E1xspeQlIlkhNkZjTMJPq6gvNzUuh+Vd1xIx5iwdSr3dEHKiu8ng7ikmiXKHCIerqF
+	a42MyIHPEQANb1xojVnTkmTNm+1UCh8LKSNGFY14Clco6WXMfs+
+X-Received: by 2002:a05:600c:4f56:b0:499:7312:2d5f with SMTP id 5b1f17b1804b1-4998799eb7dmr51887875e9.19.1786693935258;
+        Fri, 14 Aug 2026 00:52:15 -0700 (PDT)
+Message-ID: <a34ad4ec-28dc-4494-8798-f2a6b0fe7bae@suse.com>
+Date: Fri, 14 Aug 2026 09:52:14 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: tools/hotplug: fix invalid frontend path for set_mtu
-To: James Dingwall <james-xen@dingwall.me.uk>
-Cc: Anthony PERARD <anthony.perard@vates.tech>, xen-devel@lists.xenproject.org
-References: <20260814060441.923061-1-james-xen@dingwall.me.uk>
+Subject: Re: [XEN PATCH] tools/console/daemon: fix log_dir memory leak in
+ xenconsoled
+To: Andrew Mbugua <andrewprecious388@gmail.com>
+Cc: anthony.perard@vates.tech, xen-devel@lists.xenproject.org
+References: <20260813212724.2607832-1-andrewprecious388@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -127,25 +128,61 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260814060441.923061-1-james-xen@dingwall.me.uk>
+In-Reply-To: <20260813212724.2607832-1-andrewprecious388@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1786693697-1EC61757-CB8A7AE3/0/0
+X-purgate-ID: tlsNG-16d1c6/1786693935-F560A77B-02A071B9/0/0
 X-purgate-type: clean
-X-purgate-size: 563
+X-purgate-size: 1809
 
-On 14.08.2026 08:03, James Dingwall wrote:
-> This is a resubmission of patches previously discussed in this thread:
+On 13.08.2026 23:27, Andrew Mbugua wrote:
+> Valgrind reports that 21 bytes are "still reachable" from the (XEN_LOG_DIR "/console") allocation:
 > 
-> https://lists.xen.org/archives/html/xen-devel/2022-04/msg02209.html
+> HEAP SUMMARY:
+>     in use at exit: 21 bytes in 1 blocks
+>     total heap usage: 9 allocs, 8 frees, 4,799 bytes allocated
 > 
-> It appears they fell down a crack after review and never made it to git.
+> Since the dynamic memory allocation for the default log directory path happens before the process
+> forks into the background, the parent and intermediate processes exit during daemonize()
+> with the memory still reachable.
+> 
+> Move the strdup() allocation down below the daemonize() block. This ensures only the final
+> background daemon allocates the default path, matching the lifetime of the free(log_dir)
+> cleanup loop at the exit of main().
+> 
+> With this change, Valgrind reports a clean heap summary
+> 
+> HEAP SUMMARY:
+>     in use at exit: 0 bytes in 0 blocks
+>     total heap usage: 8 allocs, 8 frees, 4,778 bytes allocated
+> 
+> Signed-off-by: Andrew Mbugua <andrewprecious388@gmail.com>
 
-Indeed, and I think you could validly have retained Anthony's R-b on patch 1.
-Now that you've re-sent without it, I think it's better for him to re-supply
-the tag. He's now also in the position to actually commit the change.
+Looks all plausible (albeit a little unnecessary, as memory is freed at
+program exit anyway), except that ...
 
-I can't spot any earlier R-b for patch 2, though.
+> --- a/tools/console/daemon/main.c
+> +++ b/tools/console/daemon/main.c
+> @@ -181,10 +181,6 @@ int main(int argc, char **argv)
+>  		}
+>  	}
+>  
+> -	if (!log_dir) {
+> -		log_dir = strdup(XEN_LOG_DIR "/console");
+> -	}
+> -
+>  	if (geteuid() != 0) {
+>  		fprintf(stderr, "%s requires root to run.\n", argv[0]);
+>  		exit(EPERM);
+> @@ -201,6 +197,10 @@ int main(int argc, char **argv)
+>  		daemonize(pidfile ? pidfile : XEN_RUN_DIR "/xenconsoled.pid");
+>  	}
+>  
+> +	if (!log_dir) {
+> +                log_dir = strdup(XEN_LOG_DIR "/console");
+> +        }
+... can you please not screw up indentation? All you want is to move the
+code, without converting tabs to blanks.
 
 Jan
 
