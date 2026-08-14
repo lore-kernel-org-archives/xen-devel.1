@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 477F6C5CFDB
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2026 13:25:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1391136.1631120 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3957C5CFDB
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2026 13:46:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1391163.1631129 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuruj-0006Dv-JE; Fri, 14 Aug 2026 13:25:37 +0000
+	id 1wusEe-0000vJ-8J; Fri, 14 Aug 2026 13:46:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1391136.1631120; Fri, 14 Aug 2026 13:25:37 +0000
+Received: by outflank-mailman (output) from mailman id 1391163.1631129; Fri, 14 Aug 2026 13:46:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuruj-0006Do-Fg; Fri, 14 Aug 2026 13:25:37 +0000
-Received: by outflank-mailman (input) for mailman id 1391136;
- Fri, 14 Aug 2026 13:25:35 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wusEe-0000vB-5I; Fri, 14 Aug 2026 13:46:12 +0000
+Received: by outflank-mailman (input) for mailman id 1391163;
+ Fri, 14 Aug 2026 13:46:10 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1wuruh-0006Df-Ik
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 13:25:35 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wusEc-0000v5-QU
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 13:46:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wurug-00CihR-VS
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 15:25:34 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wusEc-00Dbhl-78
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 15:46:10 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jgross@suse.com>)
- id 6a7f1730-e002-0a2a0a5209dd-0a2a45079726-36
- for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 15:25:34 +0200
-Received: from [209.85.218.47] (helo=mail-ej1-f47.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jgross@suse.com>)
- id 6a7f174e-b4ea-0a2a45070019-d155da2fdd51-3
- for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 15:25:34 +0200
-Received: by mail-ej1-f47.google.com with SMTP id
- a640c23a62f3a-c15b1da6b82so122782866b.1
- for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 06:25:34 -0700 (PDT)
-Received: from ?IPV6:2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112?
- (2a00-12d0-af5d-ad01-5d3f-14e6-9bcb-5112.ip.tng.de.
- [2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c212339636fsm104236366b.2.2026.08.14.06.25.33
+ (envelope-from <jbeulich@suse.com>)
+ id 6a7f1c1b-2eae-0a2a0a5409dd-0a2a4504aee6-12
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 15:46:10 +0200
+Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a7f1c21-b57f-0a2a45040019-d155dd33bc63-3
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 15:46:10 +0200
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-47f96c5b722so648093f8f.0
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 06:46:10 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49989ae1ef2sm27190105e9.9.2026.08.14.06.46.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 14 Aug 2026 06:25:34 -0700 (PDT)
+ Fri, 14 Aug 2026 06:46:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,215 +53,270 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786713934; x=1787318734; darn=lists.xenproject.org;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=wMEaVxlhuns8hkig2UsUJQAIUbQ2e1I1Zup33AB/514=;
-        b=gX1Yk6MrJZ0YSD1Ryseb7B0cu/KZBQaZJJG+p8ww+shEHU5xna81L8IxWTsIqsUYDE
-         TdIbCGkhXuYKUsu4nvdvGYf7jxwspM1g3pUvSU6EgO2mPdMfneAg1vip6nNAPzKj9mwF
-         DI1AnmQYA0dspvFFcAv82Z5tMrtqLfaD/ArTkFzJwfYwR2evRHyd4QYsT+0re8bnzruA
-         bZ3eGuujVfnbcnINwg40zmFmeFyjOuCx9mKM62UbzGcdqfUD9L5YohOgelqUOrzr4HNF
-         yGSwMMXiJUu1VPDxsSCZ2p8+T994I12rniP6klbGcqrR/DzzggrzXg/uba+rLcvvNLHF
-         3lHQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786713934; x=1787318734;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=suse.com; s=google; t=1786715169; x=1787319969; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=wMEaVxlhuns8hkig2UsUJQAIUbQ2e1I1Zup33AB/514=;
-        b=rp2nRiPLT+gjJh95C23cSojjoctIaRZ1Vd23JFpCmLDuIzbW7vl97Ol4s0d+Ke/z/F
-         Qy7/YQ53bSD/wh8XAhRQU3b8e6QQIAZWB+840DBvvht5BaA0fx+AVtGiKFpMTrPumM3R
-         v0VU3XFL3HFRNI8EbyEQmbOW5a5Ry+eeqEN/+km0igCvGde1Vu8ru52q7V+JprFTFGD1
-         k57g0vtC5h5UUcF+fGKxcO1a+hf92DL0L1suwqzPPl+1VpVnBhzOgW1fPZfKchMamjGe
-         t4EOAF+WyB6+JSGEtCWAJELb0SWAB8IJ5Gik78yqvG4dyDmPonYGm8kj8hQ1INdl3jtI
-         mC4g==
-X-Forwarded-Encrypted: i=1; AHgh+RqLxjucAgOPeh+/7OxQvnKNr+EXfqx/qUxs/u2LQm7HiWW0oKvtX4u/FPifqwtR54NcPqITdcBoLPo=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxSQmyZsYSp4VT24LCin2oUzCp+JCHsO7/gC7ia00cRSJYCZdAP
-	kFDyefvB5Ah10YTo/Xomsc7PdPyWhPlAoaVkIafJQ9gihYmh+9ZCyACoi8HJw2SqmZQ=
-X-Gm-Gg: AR+sD12ugDA2DEKHS9nOkSU/LDCQglRpwujYHptoPIKUG2OaPySwN0kebBsQTTAaTTV
-	kUQVo9kMH+jlxkknA9dnZ79aJH9jx0VUnjsqQ6aKyLarHr1n4TD8qMmzcqfhSrxjfnOTDOXilUC
-	CxJw2Xlgoa/l8ugzZeF6lDWOhoxl3hToVLfbAZ5TbdK87Qgl6VbPwWqZmx5FzpuYuzl3bTFjd8W
-	MJm9mL/Qz5iYzHmKZawl1trdCGyi6K+QCFxrOYaN2lJJZr1FyLhw3xxyUKvZrxLCeapSpYQ1aCR
-	bqD32iUoaIY5x6Z6npyn8VSlyXquCyn2xomp0NoBwKgfCFwynBSYZQdm34p+HlxIuFAdWlFoAM0
-	+wZH33v+VFLUFjw3AwmVnW7swje87/UCKtOCPu70e92bWGb19fsX6IfWy3h+dff0pCemsUks/m9
-	ZZBDVBiwtrPolgVKv7tFo4aJAQUbXDzLr9wB0T0OA3RbCmBqxMMHx+9JDFjVtPn+08wi3o6KvUx
-	9rIirDCn5oNOR+nBpGcSYxEAuljRmWA48LCO9dnkCNx5I4hYgtLEYAp4ExKoaBQrTC/kYDuhDq2
-	AKvsdC9jfgycjA==
-X-Received: by 2002:a17:906:fe43:b0:c1c:5c90:1bad with SMTP id a640c23a62f3a-c212a154559mr268829266b.14.1786713934359;
-        Fri, 14 Aug 2026 06:25:34 -0700 (PDT)
-Message-ID: <4b7ee4e9-7a38-401d-9b9e-371173e8165c@suse.com>
-Date: Fri, 14 Aug 2026 15:25:33 +0200
+        bh=0YsDTahv4URfKLt37kOy8jHhvTySEzNjHEH99JLGqhY=;
+        b=XPTdU5exn4vHdhLUxCbbpSVc3Vyc4lylfaGU/1BfyG343TUXUvLIsOZFIwyWRujQIN
+         oJsYzhLI/yYGXgNt3/6vzGHVnw7XZ11M1x7I2ctMma9ePNpepBNlFVWPGU9dNzGTh+CS
+         SODS3dEqJZQm+wfjiSb39JnWGbZC8bMNuXIbNyWKQbBdc9Y07gdPWonRicQLH/f53R5e
+         1h1IYlmFHOdj3uplhG9GSlcUIdJtdfj3PkE03iwcJt6RiRhTw24mhjG/hg/c7zL4oB1c
+         D9lG71OMtUmNDQapkP/RLOaOylzUrG7DdIObZWHpRDRzBD572ZGe0aau2C5BLcs25XQJ
+         UdMA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786715169; x=1787319969;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=0YsDTahv4URfKLt37kOy8jHhvTySEzNjHEH99JLGqhY=;
+        b=DtJRI+rleNP5IRmqlODsaOMYiZrTy603IkYsp/keaEiIstfkzHR/3MftVvzG/KvbJ9
+         qF7SMQYBWi4p4BVO6fBcLgQ3uN6q7s2hEPk+AJGqKoqqzNoXjU9Dz5IvfYG6PrCdWjw6
+         sd3zewoorxIvY9k79Bw+/yal2/uxdVD8/ORpnDpoc7VZJXtRGo4ukY2Btpcq9vaiBsWe
+         9pN+9AVmVkqmGepuPlkwFaP20RZOHjnCnq/5V5J66GVr92pGseiM1FFjQtZ9LWpIMpl0
+         Dij4FYBB38Jusx9JSfg5STIhWVpt+mOIpw7awq2kCa1NMmiB5VOgN6tE+5MghF0RvPhj
+         OG0w==
+X-Forwarded-Encrypted: i=1; AHgh+RovVH5s9x2t6AnEceLGJLmR8dzHQJIEgwvYKHQFAD6Zucbyz2i3SmpAu+/5PzSIB0TnB5GM+p1L8TU=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw2oBmhuh0bdPe7D48TshTTSgr8QlxETY7DlSLy6sYfCJEwuWoK
+	E4Y5d2ocmL8DO9BqOk5ajqmNiHhfBMK4/EL8UyNL961wUd2INyEhaG9PTZVEfmpGAQ==
+X-Gm-Gg: AR+sD12FBCz5N+ILirf8rhY5EKnewtHjfFz1qKRPNIb0MQjMcxBvMXXDQXe2BJqFs2E
+	x3MY4Dh5HEeaMdtmKTXZKA1k02L89GcctPEbdwKe3Q6lkqW70FodjzWjlzS6wuwstRTw7otcv3b
+	NXvSkKoyWAR7Nw2SME8i/UCXDi04iREQEXN8m3q67V88nMEDTSwxvhoYA1HCtuZ/XM9RViUIS5e
+	oXzIGrYHAbwHQGaVnQNLRowbCcXCWSD5lUvgbC0j+4KuR515i0UFHFbhUn8zPbzOhmkkbXVaBwC
+	SPg6SBh3KmlD0dqBrDxddflk6cF6+XqUt3sXaf7TB/g8KclOUnxAd7+yc+K+Di57BsAori6Vx7S
+	rb6PZZOiftBn5soE6KLumEt5Pr41ykxuyb8+ZnlJe5QkTkisFRv1Az+xlYIUfidwlx7TiUUi/2B
+	OQaMIB/kA5Of9wK455CqzPWYJcJjH332lGWjOh+D+fNqA6INP7htx199/ATX4+B5egC3BxQR9o8
+	m9aNhHQgl3MLvv8vs19Fh4U40FPVz5wct0Xkuthv2hAFBhsjVy6
+X-Received: by 2002:a05:600c:620a:b0:495:6bc9:62b0 with SMTP id 5b1f17b1804b1-499879b9c2fmr88881595e9.17.1786715169438;
+        Fri, 14 Aug 2026 06:46:09 -0700 (PDT)
+Message-ID: <02a7dc18-4184-4e86-84cb-121769187f71@suse.com>
+Date: Fri, 14 Aug 2026 15:46:07 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/pcifront: Fix PCI device reference leak in AER
- handling
-To: Ruoyu Wang <ruoyuw560@gmail.com>, xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org, oleksandr_tyshchenko@epam.com,
- bhelgaas@google.com, linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260813153138.3953222-1-ruoyuw560@gmail.com>
+Subject: Re: [PATCH v2] tools/hvmloader: implement Intel IGD extended VBT
+ support
+To: Chuck Zmudzinski <brchuckz@aol.com>,
+ Anthony PERARD <anthony.perard@vates.tech>
+Cc: qemu-devel@nongnu.org, Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>,
+ xen-devel@lists.xenproject.org, Chuck Zmudzinski <brchuckz@netscape.net>
+References: <20260802050824.10554-1-brchuckz.ref@aol.com>
+ <20260802050824.10554-1-brchuckz@aol.com>
+ <2110d4b7-ae37-47aa-99be-ab59e16f6167@suse.com>
+ <67579eba-e222-41dd-84bf-8440d2eaf2a9@netscape.net>
+ <da2200cd-def7-4cce-a6c2-9f9ac9e202ce@suse.com>
+ <de56c8bd-f0e8-4fe9-8cf5-f6807698176c@aol.com>
 Content-Language: en-US
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Autocrypt: addr=jgross@suse.com; keydata=
- xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
- ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
- dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
- NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
- XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
- AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
- CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
- mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
- G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
- kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
- Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
- RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
- vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
- sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
- aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
- w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
- auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
- 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
- fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
- HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
- QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
- ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <20260813153138.3953222-1-ruoyuw560@gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------QkHGccM4PCCVbRXCFyU4NGNi"
-X-purgate-ID: tlsNG-ef75cf/1786713934-A68D9AE4-E15D3077/0/0
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <de56c8bd-f0e8-4fe9-8cf5-f6807698176c@aol.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ebf023/1786715170-C14D3B50-1E78E41C/0/0
 X-purgate-type: clean
-X-purgate-size: 7259
+X-purgate-size: 7894
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------QkHGccM4PCCVbRXCFyU4NGNi
-Content-Type: multipart/mixed; boundary="------------IAEm0KX69fq5JmryQhnoqDqx";
- protected-headers="v1"
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-To: Ruoyu Wang <ruoyuw560@gmail.com>, xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org, oleksandr_tyshchenko@epam.com,
- bhelgaas@google.com, linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org
-Message-ID: <4b7ee4e9-7a38-401d-9b9e-371173e8165c@suse.com>
-Subject: Re: [PATCH] xen/pcifront: Fix PCI device reference leak in AER
- handling
-References: <20260813153138.3953222-1-ruoyuw560@gmail.com>
-In-Reply-To: <20260813153138.3953222-1-ruoyuw560@gmail.com>
+On 14.08.2026 15:18, Chuck Zmudzinski wrote:
+> On 8/14/2026 3:35 AM, Jan Beulich wrote:
+>> On 14.08.2026 02:45, Chuck Zmudzinski wrote:
+>>> On 8/13/2026 6:35 AM, Jan Beulich wrote:
+>>>> On 02.08.2026 07:08, Chuck Zmudzinski wrote:
+>>>>> -- snip --
+>>>>> To address this problem, this patch implements support for
+>>>>> Intel IGD devices with an extended VBT and OpRegion version 2
+>>>>> and higher which is required for most modern Intel IGD devices.
+>>>>
+>>>> First of all: Where's the spec of all of this?
+>>>
+>>> Well, your first question is quite provocative. Certainly more
+>>> social/legal than technical.
+>>
+>> Well, it was very much meant to be technical. I've had a hard time following
+>> what your new code does, and having a spec to hand would likely have helped.
+> 
+> I agree that having the spec at hand would be better. To be more precise, I
+> can say that what this patch essentially does is port the support for
+> the extended VBT with OpRegion 2+ for the Intel IGD passthrough that exists
+> in KVM/vfio to Xen. Should I explicitly say in the title of the commit
+> message that this is a port of KVM/vfio support for extended VBT to Xen?
 
---------------IAEm0KX69fq5JmryQhnoqDqx
-Content-Type: multipart/mixed; boundary="------------e6EjXp9l0KI8S0BNgoOoL0MO"
+Not in the title, as that would likely make it too long, but perhaps in the
+description.
 
---------------e6EjXp9l0KI8S0BNgoOoL0MO
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+>>> So my answer is as follows:
+>>>
+>>> I do not have access to the official spec that defines "all this" but
+>>> I do have access, as does the general public, to the Linux kernel's
+>>> implementation of support for the Intel IGD from many sources such as
+>>> git.kernel.org. The Linux kernel has enough accurate information about
+>>> the spec of "all this" to provide very good support for the Intel IGD
+>>> on bare metal.
+>>>
+>>> To elaborate a bit more, the spec of "all this" can be derived from the
+>>> Linux kernel code that supports the Intel IGD.
+>>
+>> So you expect every reader to locate and decipher the underlying information
+>> from a (afaik) pretty large piece of code in the Linux kernel? If the Linux
+>> kernel sources are the reference, please can you at least provide pointers
+>> into there?
+> 
+> No, I do not expect every reader to decipher the underlying information...
+> 
+> That is why I provided these two links at the bottom of the commit message.
+> Perhaps you did not notice them:
+> 
+> Link: https://lore.kernel.org/kvm/20211012124855.52463-1-colin.xu@gmail.com/
+> Link: https://lore.kernel.org/kvm/20210325170953.24549-1-fred.gao@intel.com/
+> 
+> They are the patches to the vfio kernel driver that added support for the
+> extended VBT for KVM/vfio guests.
 
-T24gMTMuMDguMjYgMTc6MzEsIFJ1b3l1IFdhbmcgd3JvdGU6DQo+IHBjaV9nZXRfZG9tYWlu
-X2J1c19hbmRfc2xvdCgpIGluY3JlbWVudHMgdGhlIHJlZmVyZW5jZSBjb3VudCBvZiB0aGUN
-Cj4gcmV0dXJuZWQgUENJIGRldmljZS4gcGNpZnJvbnRfY29tbW9uX3Byb2Nlc3MoKSBkcm9w
-cyB0aGF0IHJlZmVyZW5jZSBvbmx5DQo+IHdoZW4gdGhlIGRldmljZSBvciBpdHMgZHJpdmVy
-IGlzIG1pc3NpbmcuIEFsbCBwYXRocyBmb3IgYSBib3VuZCBkZXZpY2UNCj4gZWl0aGVyIHJl
-dHVybiBkaXJlY3RseSBhZnRlciBpbnZva2luZyBhbiBlcnJvciByZWNvdmVyeSBjYWxsYmFj
-ayBvciBmYWxsDQo+IHRocm91Z2ggd2l0aG91dCBjYWxsaW5nIHBjaV9kZXZfcHV0KCkuIENv
-bnNlcXVlbnRseSwgZWFjaCBBRVIgcmVxdWVzdCBmb3INCj4gYSBib3VuZCBkZXZpY2UgbGVh
-a3MgYSByZWZlcmVuY2UgYW5kIGNhbiBrZWVwIHRoZSBkZXZpY2UgYWxsb2NhdGVkIGFmdGVy
-DQo+IHJlbW92YWwuDQo+IA0KPiBTdG9yZSB0aGUgY2FsbGJhY2sgcmVzdWx0LCByZWxlYXNl
-IHRoZSByZWZlcmVuY2UgYWZ0ZXIgY2FsbGJhY2sgZGlzcGF0Y2gsDQo+IGFuZCB0aGVuIHJl
-dHVybiB0aGUgcmVzdWx0LiBUaGlzIGtlZXBzIHRoZSBkZXZpY2UgYWxpdmUgd2hpbGUgaXRz
-IGNhbGxiYWNrDQo+IHJ1bnMgYW5kIGJhbGFuY2VzIHRoZSBsb29rdXAgb24gZXZlcnkgc3Vj
-Y2Vzc2Z1bCBwYXRoLg0KPiANCj4gVGhpcyBpc3N1ZSB3YXMgZm91bmQgYnkgYSBzdGF0aWMg
-YW5hbHlzaXMgY2hlY2tlciBhbmQgY29uZmlybWVkIGJ5IG1hbnVhbA0KPiBzb3VyY2UgcmV2
-aWV3Lg0KPiANCj4gRml4ZXM6IDk1NmE5MjAyY2QxMiAoInhlbi1wY2lmcm9udDogWGVuIFBD
-SSBmcm9udGVuZCBkcml2ZXIuIikNCj4gU2lnbmVkLW9mZi1ieTogUnVveXUgV2FuZyA8cnVv
-eXV3NTYwQGdtYWlsLmNvbT4NCg0KUmV2aWV3ZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9z
-c0BzdXNlLmNvbT4NCg0KDQpKdWVyZ2VuDQo=
---------------e6EjXp9l0KI8S0BNgoOoL0MO
-Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+Patches can still be in flight, so provide only limited help. Would it be a
+problem to instead reference commits, or the actual localtion in Linux
+sources?
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+>>>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
+>>>>> +               (igd_opregion_pgbase << PAGE_SHIFT) |
+>>>>> +                IGD_OPREGION2_SUPPORT_MASK);
+>>>>
+>>>> This looks to imply qemu is the only possible device model.
+>>>
+>>> Yeah, this is an issue. Other device models that intend to support
+>>> the Intel IGD with hvmloader will also have to be compatible with this.
+>>> It would be easier if we did not have to worry about backward
+>>> compatibility and supporting what we had in the codebase for many years
+>>> in both hvmloader and Qemu and we would not need IGD_OPREGION2_SUPPORT_MASK
+>>> in that case. Instead, we would just completely deprecate all previous
+>>> implementations of the Intel IGD passthrough feature in both hvmloader and
+>>> the Qemu DM as unsupported. So my previous comments about backward
+>>> compatibility apply here again.
+>>
+>> As said, I don't think backward compatibility can be dropped. My comment
+>> also didn't really mean to hint in that direction. Instead I was wondering
+>> in how far, even if perhaps by only a few #define-s, the necessary
+>> interfacing couldn't be put down in a public header, for any DM to consume.
+> 
+> Ok. Perhaps the IGD_* defines could be moved to a public header to define the
+> interface to be used to support the Intel IGD. Would it be OK to move those
+> to a separate igd.h header
 
-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
-kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
-=3DeeAB
------END PGP PUBLIC KEY BLOCK-----
+This may require input by others, as in the given situation I'm not quite
+sure what is best. Anthony - do you possibly have any suggestion here?
 
---------------e6EjXp9l0KI8S0BNgoOoL0MO--
+> and include it in hvmloader/config.h?
 
---------------IAEm0KX69fq5JmryQhnoqDqx--
+I don't see why that would be needed. The few files which need the #define-s
+can include that new public header, without impacting anything else.
 
---------------QkHGccM4PCCVbRXCFyU4NGNi
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+>>>>> +    printf("guest OpRegion tentative "
+>>>>> +           "address: 0x%x\n", igd_guest_opregion);
+>>>>> +
+>>>>> +    if ( !verify_opregion(igd_guest_opregion) ) {
+>>>>> +        printf("error: IGD OpRegion signature "
+>>>>> +               "not found.\n");
+>>>>
+>>>> No full stop in messages please.
+>>>
+>>> Would it be OK to just get rid of the error message here?
+>>
+>> That would then leave ...
+>>
+>>>>> +        BUG();
+>>
+>> ... an un-annotated BUG(), which generally isn't very nice.
+> 
+> I don't think I understand what you mean by "No full stop in messages..."
 
------BEGIN PGP SIGNATURE-----
+That's the period at the end of a sentence (when in log messages the term
+"sentence" is of questionable nature).
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmp/F00FAwAAAAAACgkQsN6d1ii/Ey9I
-yQgAju8yaOfqsyi6C4ahXULTuTk5AvglXAwL3z2+BD8jSyFkX5+zN4N4izExwQt85obHCcFRbKzL
-jWuvSaIC5NR4v1YJDydGZeDdiR2wP4C0XTHEafps/quX58OkLOqVCnz61J7KPpaZAKWicUmtdTUX
-3QDbVRjsiz4qpUe31kxlN8nNi33KZ7WM1BNHcg4wDVjTnIErTjQ3Nw8+X3/ErTexNcBxPO3Ed8JP
-ErYudznnqO8oCXz5jRhA5YK/r6OsKu7kj8z7Vh/SqumIVzxGN5EoNVe4D2PPa5wsW7WBYSZJrbe/
-YtGFT5Q4mYvLHSby4wBM2CGl1aSDTNkcdhiGZ2j5Ag==
-=sLha
------END PGP SIGNATURE-----
+> We have code like this in hvmloader/e820.c:
+> 
+>     if ( rc || !nr_entries )
+>     {
+>         printf("Get guest memory maps[%d] failed. (%d)\n", nr_entries, rc);
+>         BUG();
+>     }
 
---------------QkHGccM4PCCVbRXCFyU4NGNi--
+Well, you'll almost always be able to find bad pre-existing examples.
+
+>>>>> +    printf("VBT size: 0x%x\n", rvds);
+>>>>> +
+>>>>> +    if ( !rvds || !rvda_host ) {
+>>>>> +        printf("guest OpRegion address: 0x%x\n", igd_guest_opregion);
+>>>>> +        rvda_host = 0;
+>>>>> +    }
+>>>>> +    /*
+>>>>> +     * Write rvda_host as 2 successive 32-bit values
+>>>>> +     * to communicate location of the VBT to the device
+>>>>> +     * model. If rvda_host is not 0, The device model
+>>>>> +     * unmaps the OpRegion and eventually maps the VBT
+>>>>> +     * after we also write the guest address where the
+>>>>> +     * VBT will be mapped.
+>>>>> +     *
+>>>>> +     * If we send rvda_host = 0 to the device model, it
+>>>>> +     * will assume we do not need OpRegion 2 support and
+>>>>> +     * it will not unmap the OpRegion.
+>>>>> +     */
+>>>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
+>>>>> +               (uint32_t)(rvda_host & 0xfffffffful));
+>>>>> +    unsigned long rvda_host_upper_32 = (uint64_t)rvda_host >> 32;
+>>>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
+>>>>> +               (uint32_t)rvda_host_upper_32);
+>>>>
+>>>> Why would you need to communicate a host property to the DM?
+>>>
+>>> The DM cannot access the host rvda value because it is only accessible
+>>> from the host kernel, and the DM is only a user-space process on the host.
+>>
+>> I don't follow this: Anything the guest can access should also be accessible
+>> by its DM.
+> 
+> I think the host OpRegion is not currently accessible by the DM.
+
+Can you explain to me how the region becomes accessible to the guest?
+That would then (hopefully) help me understand why the DM would not have
+access. Fundamentally any MMIO and any I/O ports that are assigned to a
+guest are also assigned to its DM.
+
+> On the KVM
+> platform, this is made possible via the kernel vfio driver and then Qemu exposes
+> the OpRegion to the guest using the Qemu FwCfg device interface. How should we make
+> the OpRegion and VBT accessible to the device model and then, to the guest, on Xen?
+> I think it could be done via the xen-pciback kernel driver. Should we do that
+> instead? I think to do that we would have to convince the kernel developers that
+> the Intel OpRegion, as you say, "should" be accessible by the Xen device model.
+> I can imagine them saying, why not use the vfio driver?
+
+I can't answer this; all I can say is that it feels wrong to involve e.g.
+xen-pciback here.
+
+Jan
 
