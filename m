@@ -4,39 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFF2BC5CFCF
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2026 14:51:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1391229.1631159 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 947CEC5CFCF
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2026 15:24:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1391253.1631169 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wutFE-00030l-C3; Fri, 14 Aug 2026 14:50:52 +0000
+	id 1wutlA-0007ds-P5; Fri, 14 Aug 2026 15:23:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1391229.1631159; Fri, 14 Aug 2026 14:50:52 +0000
+Received: by outflank-mailman (output) from mailman id 1391253.1631169; Fri, 14 Aug 2026 15:23:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wutFE-00030e-9V; Fri, 14 Aug 2026 14:50:52 +0000
-Received: by outflank-mailman (input) for mailman id 1391229;
- Fri, 14 Aug 2026 14:50:50 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wutlA-0007dl-MF; Fri, 14 Aug 2026 15:23:52 +0000
+Received: by outflank-mailman (input) for mailman id 1391253;
+ Fri, 14 Aug 2026 15:23:51 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wutFC-00030X-GB
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 14:50:50 +0000
+ (envelope-from <brchuckz@aol.com>) id 1wutl8-0007df-Re
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 15:23:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wutFB-00Cvij-Hn
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 16:50:49 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wutl8-009zeZ-1H
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 17:23:50 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a7f2b29-2eae-0a2a0a5409dd-0a2a450990d8-34
- for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 16:50:49 +0200
-Received: from [209.85.128.182] (helo=mail-yw1-f182.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a7f2b48-be1a-0a2a45090019-d15580b6c125-3
- for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 16:50:49 +0200
-Received: by mail-yw1-f182.google.com with SMTP id
- 00721157ae682-80c5cb9a888so11315017b3.3
- for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 07:50:49 -0700 (PDT)
+ (envelope-from <brchuckz@aol.com>)
+ id 6a7f3305-8faa-0a2a0a5109dd-0a2a4502ac6a-0
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 17:23:49 +0200
+Received: from [98.137.68.31] (helo=sonic308-55.consmr.mail.gq1.yahoo.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <brchuckz@aol.com>)
+ id 6a7f3303-6ca4-0a2a45020019-6289441fabb9-3
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 17:23:49 +0200
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic308.consmr.mail.gq1.yahoo.com with HTTP; Fri, 14 Aug 2026 15:23:47 +0000
+Received: by hermes--production-ne1-6dbcb84f44-xtsvv (Yahoo Inc. Hermes SMTP
+ Server) with ESMTPA ID d1d2b98acc5c03388ed30a9ee0960e39; 
+ Fri, 14 Aug 2026 15:23:45 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,298 +50,305 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1786719048; cv=none;
-        d=google.com; s=arc-20260327;
-        b=FzH0G1BT+VXYGPqXKuAjUb0hvlaqowE6qxKV7goMjxqHOqjyHSWvjYk0+c2Qu4s3CT
-         6hF4Ag5hII9YCEkCFCrisiCoOATfFGRZR9rPjf9HSN340VQrk8/v7h6YN44p/X7fdzDS
-         tSaRgfw1R3yebrigma6SY86UbJK6z0AuoT+D7XKWMskw8W1GxIFc9cpyC/KWgo9VltER
-         k+uXSCZPYiqP+ildSi4lkiaLZD3CO1o6515zM9o8qIZjzh2lFHc4dBn/Ku1RYqbHWnr/
-         sPoK4wiBMd5LLtioTs0ZAO4EZH+OzvyU/UXT7Fe/eVqLIIXgvRy5wtXhlg300L7f8ts+
-         yWvg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=E/4yGc1GO/4xhyAkR/ReVly2tZXCtuDF0va2XZ3XnU0=;
-        fh=+8uuvvAtGuYzkIe1S/eNSmuGQdVeF4D76F90SYKR0TE=;
-        b=FPVB6n95kQL1X6UqQYu1sQjxA8ew7/qzZa7MmtqqFPz3AZcuucqxjaRvGTPslmj2RD
-         RwYDHWsMKPdxXJM3ZlOlBvY89MjbwgaSnRRZp/gThXxjCeVBF/P8rpnQEPNKFurcmomm
-         2FbMIOoPYF2dNyeTFIyEdb+LOrsdoR3SNrzbL3g9HiFCHUiTQ2XjpcMTtsE8qFpkZ+Vi
-         hOqbWOu1xxjXqi+fTJAGUYfpUfTEQk6K/k0Timnze/CVl+n8JaniO4Nsmj+V23o5XsSy
-         w7CHYJzj2116pTJIrhydS0hqm+3BSDI6a55NH8u6bwxZ6MC2BEhIEf6z3BdW06XPOCCI
-         YxeA==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786719048; x=1787323848; darn=lists.xenproject.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=E/4yGc1GO/4xhyAkR/ReVly2tZXCtuDF0va2XZ3XnU0=;
-        b=WsuJSwClN6yrCDxQa8IYxmmuIt1gZNBqR6WEYLfbWdrRoPJEqO7CB71DgFbldnAcqf
-         gH7EdhOqKjf0RTusEMndEaaKm3+xL2KgOqo4Hz2710dAFLF3gJFeBL8lfjt/JEJD1af/
-         tGRMQ4PrRul8GzbqyVxHv/B/TfXvdKHl8a9rIoFFHfAnNmO1IqcNEnYrp/onKffIoMrg
-         ak8rl7iz4sWzDwJQC3gnO+nwn7UZy4N/Z1elNeMZ4z84ANtCFZ1Bh7SJv79SYeKlLqah
-         FCv2NFWUGdPAGYZFASgitETIpB6kY3KAq/eHpsUBloZtKc2aVnZSSzbIFPtgSq8PKYiw
-         j/xQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786719048; x=1787323848;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=E/4yGc1GO/4xhyAkR/ReVly2tZXCtuDF0va2XZ3XnU0=;
-        b=VgoURGPmadBacIikXbGfEd+DdYMgoOOQJRFNJ/s1k5ga1tJpyiWXWXu8UftM0OxBRC
-         zropicdKseJA/ba6KwqaH/u04bbzhrOy0BvaIyca6XKhZ8k7zluO0OhAgBQRnhB3ghOz
-         +ttq3hSdW8OUCkwsD/eJg9+bh8ze/SGhzpVGagoWDk6zPuQf+GuziK8XR9PbU0sd6km7
-         bS90ePCVlPwOngZIJq9Abea1CeVqKiBaH4bY/kKPfjRAXGsciKx3LBAX1/2sZcGl+0/D
-         qgwd/cbMrKPuZtdhSdMRBnRBhU44moR2thVv51oGWWcXtfpOQYcRqoH/DWgjwEIA3b4N
-         YFIQ==
-X-Forwarded-Encrypted: i=1; AHgh+RpFVjPbP+E/L7BuoAlvvlQs/klWfxrPf0I89XIP2LrNANCj8DV1ZNww4fyfJYBeJuttnIS+P3KXRzM=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzZNdt7XEmPDk+DXZqbN+wwvx/5bMnR/nubeFyGVEoKoslB9cSO
-	QpDOxtj+R4gBLviY5iQsJJNADofw1FMytlKrpDLs9R9ji+aUj8Mso2VqVpURxRoHBGKoraRphe+
-	KDC5poZNsm40gL+dxZ5etG77S0CcGfJ4=
-X-Gm-Gg: AR+sD10Xn7SAOP134Cwb4jQStWAsigOnAcY1CEFOmLeP+aE7AYJA0CrVKf7gdSxK3UT
-	LzebLgXsITmEWuxrAJW+crbg7O7MBmGboe10A/TATb6sHibnyJOM7LLmscaaL11k0/xdFcR7xwR
-	/KkWWuLhQ1OeQPCMM/o08DLKocyLBjMlevozlFJwro1s9+Fo/9iK6InmwNG6zFwq7+nVLJDLqkl
-	augoxvZiMLdw6wNmxIRBJwLFGZ0zrhiO+e1Xa869ey9LurwjwU3tBpFc+k+ZcUdxqJdSDz0ZLFo
-	VkLERXU975FHSUuquENzvw6nfb/3JmF9+UCjeQ+HCqMpDKh67YX08YzWnxoYjkTe589Vw6VF4Go
-	G
-X-Received: by 2002:a05:690c:6f07:b0:81e:98d3:cac7 with SMTP id
- 00721157ae682-8370e1a4f82mr30979037b3.12.1786719047751; Fri, 14 Aug 2026
- 07:50:47 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="Date:Subject:To:References:From:Cc:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1786721027; bh=kWABo+M8UTCM8OR7VjnLl19mzMxfmSiG8dC6uCq4Ie8=; h=Date:Subject:To:References:From:Cc:In-Reply-To:From:Subject:Reply-To; b=JTKBpC7w61n4lwWyzhlzKW32T8K134hxvSqWhYyki1r8MRXmzLy1NKl/m9W1twN0e0XI9jNX5Slq59xOFtaCaoL2GhoTJ1HRYVPM90vSLQtS0E35U1hkGpMmydKsqFEIprObkHKo2dxQ1wTF4zHm1u+rHQu7GLeMfS++nzGkC8jtexa7fR20ezLijgwS/oGFQ7pVO+hJCYKDCAbJg6tfoMJ04IFEqLRY4bo8tEUh+Ez9O1UrLM5EqqH9jVfTheRO9MaARO9yzpwr8xrbnR0+uVoLSb0Ba0/ijfH4eSMOZmJRk64G6W6xGMmjP3dZ4Z2RlwdU9AfhEe6EBtWAmv/1nA==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1786721027; bh=9X576LiXnRvQdmdVNRAnjKREUeBFxrVd8qV7sjoPk19=; h=X-Sonic-MF:Date:Subject:To:From:From:Subject; b=JA2HV5PZ71fw1ssYa2s/Z7gTJbaQvlQ6OTL5k01ibEV65vcMWQJhGGWOhAAtJGqC5AMx9kT3suHS4J3holqhc106c4AT8JMS+x0lfR+FsYlygHd5QqbfvGCCv/0SY0S/I8zyS9PjW/4Oc1xpBBcjXX8LuUifZkt+TxohpTc6B4AOWb1fe3p7FViBK/hUWMP4pEnS3Cv+vNuthshbeuf37rtmhNZUso2n7w9leBXW4T8m7mRJ7/hmVFYOZ1hAfa74x0S/9S//izxL5qWWwGsd4P3z6mVlJRxO8Bj/pqGZsJDp2rxAkyqC7egss1khSv3ilDM1sPrZr5do9mQCspbjNg==
+X-YMail-OSG: X7iH8.8VM1mJ7dS_Szv82CuzafYlwVhKwEQPARIG6Tc6VtCAWIeA1KjV1nTTHYe
+ bp50W0shTvTdVysfXAn0cUKJo7aejrmPH2rPaCcY9efNeQAHj2pwzV0rkYJHAwYU36Ra00BpAMFh
+ eR1I6Zu5eWgX5ZjM3nnIKAW8hnFfuGgl2CHTVEwygrXuvl1Y6NfGRnZ4ubxAdTyQ6m9ZxNIt.GvU
+ kY3FgXoAswASuaTN3zl0osIlohYhhxqvabnUaz.bzhfOiPukOu9f8X0ACHCKOXyFP.3C2r3q07pk
+ oj3WPboPoQ0aQMRX.6S9oUO0qOfkr_VHgdgxLTK3zsVpZxx2FM0ehrxRuhS5CN45t1.Z4REJWnVU
+ 71DL8FCMnfIlfjZIafVFwuE6NOtBrLLddr0af80v5MMgl3Fb910s.d__StrrExrsH25xHUUPwd19
+ 4l7lXcuNQLJwzBcOYpeGCLHrCUI5Aa1YzY476TTGnid4fK7X0lLfcRmMQMX9m39iQY6baCSngMPl
+ IsTW7psujJ6mIjaUMN1qn9U2_E501ctzbqU9s4yXYjSG45jlph11qjkRUW4W8KtEBYA751_wLSZ_
+ 8u21K23o1GbVcFzhRtLBBajkvzJIV3u.EJ7fE1CSDVmldbFbs0rk_Cx77vs0mCuAa4V0_xFFvwKi
+ DHh.MBs8BXLPOucckixi5nRGN9642Pha5eEt9H51rTOx7w82Oy3Zk9C2iF9N62EnwWPJfla7eM.o
+ SSlmotKbte2VQknzQFGEPoEGCjvS1n7LFzozoO.KDvDotugKrqVGhIwugs9NkJxXnrIgJ0XZvpBB
+ .dwkBnNi8JO2ZTcZUpj0GXbn794u.nzpN969xiBXjoG.iiEGUdM7FC0ADR9zOtdLJU0t3iDe0mkm
+ wtQouroEIIv.gwjCojqapksHlPqOKkWkh_bYp7Lwz62HLNghbFAgrMuVf_jbjnQtil8GOP132l0F
+ BZcWF.jqxKGlo.zuXuGb4.xV84CYeFjXdWrwvs5Syzrt6B5Jj9OQeIIk5oIRquBHN6cwUXQEBYX3
+ Mdd7p2hnOG7ltmhBTarHeiy8rLUvI5PSY1NN9dO2RJfJ2Tg2dxDi0QraiNqElkLDNMbMEn6sCfNJ
+ IFrnCs.xGPkS72.xGmt8OLjxHi3hAasxFJe3TBI6vQZovr_iAg8AkOT9kOhde8165zsh14W.LqR1
+ 6yDTn8ypFCHekZYJVReWyKSHTQhB9pMd6ZAXQgHChsWu31mBieUTv4B0asjApLMWGEAgNRLzeO6i
+ aSPLeZ0tzEaKSz2w1UlA4_t_iaXgmYAR7dA2BjZ6AVcVuz_B7wQBdbkeZITqozJdIBgl5PdKxPOT
+ Y64vUlT4TIKQD4.wsahLGfQDtEIeYLCVSo8iRs5sFddSar.E3wfB46dg6QH5lhQy7.woFwsC1gW5
+ NROxQnYHi.B_EpizyGivp0Fn7HT6S45lgf7mwL.Rhl1ggB3tA5TeW5_EjbNqzjSdcP_WPHJvjJF0
+ idKIgvJQcgLFh4zNupeJn2g7XQ3JJys8IQ6Be1LrxlDbTyB3bis.Zmy3y3MalT7BpEZ1ZZWMVxEt
+ fcAuLXZN_ja.9v4PcDywO79fli1jy7ppd5ylKTMvNhDKStM2WIhO5FHqCSNtPZxNmixTOur4L6Fm
+ vUSGwTaAEp1s2eYg3EWFeia0iWprnmS1o5n7a1LZtv6jK_V6n4JsRXIXgKXW_9i4eI2D9bN5fldc
+ v.AGtsHSp6yjsNr6nwu98oso4JI7xfY4I5E5j5pPDb5va_FAnGrd8fFmZ1y1xSsk9MtY_MW8M2Pa
+ l1TuXX8Kz1w1D5gP55_cFyfrc52J23chrX2WD1.iqmGjFQEg.LVVNgdc3N7pgFR5Y_y3q5UXpHsw
+ Si29mdyH42FmHEYSO.sy2PrNfytZAcZYBdEgGBmdpOHo19DAjHKTFu_NRzr1.kSsHBgQJ5k1338J
+ HH9Wvn0kVxlc3XCbBUSv8gdeEMMK4JScnE0QyZxB5Bf67A3ttF3nnm8pnu2NuwViMSL5PBiYbw8q
+ q7kpdW_zWFllX_xxvH66QDpfssrtwbi3jR3XtZtWWxjKoYbp8UihwybpvSPyUreANS2AWpsyp_pu
+ fyjXKdF9pbpWhTMsR4INNLLRtHQoQRJtCB0YivNT3SpYU7ByWQnBySQ9nOchDkX.bep9RT2IJBdc
+ 24qCTzxc1W8xbvMu9N6CnnnljwfV36lep6XG95P74UdqtSCrEeJAnZQc4mzUbGjoy34O3SLn7IRm
+ IUsADlNmE7tFp81zdhAgA8bNY8PrL8QouPBL8l9ldtYo7_SU-
+X-Sonic-MF: <brchuckz@aol.com>
+X-Sonic-ID: 3bcd5e70-24d2-4964-8f13-551d301ac199
+Message-ID: <1858e8e6-73fa-4017-93e2-c733fbf0ec8d@aol.com>
+Date: Fri, 14 Aug 2026 11:23:44 -0400
 MIME-Version: 1.0
-References: <20260810103018.54564-1-frediano.ziglio@citrix.com>
- <20260810103018.54564-8-frediano.ziglio@citrix.com> <43d1ce4a-3a49-42c9-b277-47a89698513f@suse.com>
- <CAHt6W4enamC9rVMK98+q=pWCuXQL1DPgNTCGWMVR-Q2NvX8uTw@mail.gmail.com>
- <b10dbef6-a467-49d0-858e-d88f268e2dfd@suse.com> <CAHt6W4dWQvSg1_XtkKowTcznUWs=-ApbvatV4YrQSKR8zJTA0A@mail.gmail.com>
- <e3d4f0a8-e95a-4dc3-8ca0-df857725d60d@suse.com>
-In-Reply-To: <e3d4f0a8-e95a-4dc3-8ca0-df857725d60d@suse.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Fri, 14 Aug 2026 15:50:36 +0100
-X-Gm-Features: AUfX_mxvtpWf_8OU8VEG4jSe6KsYbHmTadYhbDzZVsnYQd6VOrBl-wQLjkmnRnk
-Message-ID: <CAHt6W4ftLMsk41zdwYUXEwN_JzzXHQG01vhSqutkgk8PO6xAQw@mail.gmail.com>
-Subject: Re: [PATCH v10 7/10] xen: implement new foreign copy hypercall
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] tools/hvmloader: implement Intel IGD extended VBT
+ support
 To: Jan Beulich <jbeulich@suse.com>
-Cc: "Daniel P . Smith" <dpsmith@apertussolutions.com>, 
-	Frediano Ziglio <frediano.ziglio@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
-	Teddy Astie <teddy.astie@vates.tech>, Anthony PERARD <anthony.perard@vates.tech>, 
-	Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-bad1c0/1786719049-FC212034-A753EA0D/0/0
+References: <20260802050824.10554-1-brchuckz.ref@aol.com>
+ <20260802050824.10554-1-brchuckz@aol.com>
+ <2110d4b7-ae37-47aa-99be-ab59e16f6167@suse.com>
+ <67579eba-e222-41dd-84bf-8440d2eaf2a9@netscape.net>
+ <da2200cd-def7-4cce-a6c2-9f9ac9e202ce@suse.com>
+ <de56c8bd-f0e8-4fe9-8cf5-f6807698176c@aol.com>
+ <02a7dc18-4184-4e86-84cb-121769187f71@suse.com>
+Content-Language: en-US
+From: Chuck Zmudzinski <brchuckz@aol.com>
+Cc: qemu-devel@nongnu.org, Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>,
+ xen-devel <xen-devel@lists.xenproject.org>
+In-Reply-To: <02a7dc18-4184-4e86-84cb-121769187f71@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailer: WebService/1.1.26254 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
+X-purgate-ID: tlsNG-720697/1786721029-F10A02AC-9DECB10D/0/0
 X-purgate-type: clean
-X-purgate-size: 8768
+X-purgate-size: 10689
 
-On Fri, 14 Aug 2026 at 15:13, Jan Beulich <jbeulich@suse.com> wrote:
->
-> On 14.08.2026 15:47, Frediano Ziglio wrote:
-> > On Thu, 13 Aug 2026 at 15:22, Jan Beulich <jbeulich@suse.com> wrote:
-> >> On 13.08.2026 16:03, Frediano Ziglio wrote:
-> >>> On Thu, 13 Aug 2026 at 10:41, Jan Beulich <jbeulich@suse.com> wrote:
-> >>>> On 10.08.2026 12:30, Frediano Ziglio wrote:
-> >>>>> ---
-> >>>>>  xen/common/memory.c         | 149 ++++++++++++++++++++++++++++++++++++
-> >>>>>  xen/include/public/memory.h |  45 ++++++++++-
-> >>>>>  xen/include/xsm/dummy.h     |  14 ++++
-> >>>>>  xen/include/xsm/hooks.h     |   2 +
-> >>>>>  xen/xsm/flask/hooks.c       |  10 +++
-> >>>>>  5 files changed, 219 insertions(+), 1 deletion(-)
-> >>>>
-> >>>> As before: If you insist on not implementing the compat case, that decision
-> >>>> wants justifying in the description. Without that it'll look like an
-> >>>> oversight.
-> >>>>
-> >>>
-> >>> Yes, I was just going to reply.
-> >>> I spent multiple days trying to implement the compat case or simply
-> >>> HVM support with an issue after the other:
-> >>> - multiple distributions removed the 32 bit support so it was hard to
-> >>> have a setup;
-> >>> - the original hypercall this PR is trying to optimise is supported
-> >>> only in PV (so no HVM or compat guests);
-> >>> - migration and other operations can work only on PV (like dm_op
-> >>> operation) due to the usage of userspace handles used.
-> >>
-> >> I don't understand how use of guest (not userspace) handles would get in
-> >> the way of anything.
-> >
-> > In this case userspace is not a typo. For HVM
-> > copy_from_user_hvm/copy_to_user_hvm are used and these functions
-> > accept only kernel space pointers.
->
-> I fear you've now completely lost me.
->
+On 8/14/2026 9:46 AM, Jan Beulich wrote:
+> On 14.08.2026 15:18, Chuck Zmudzinski wrote:
+>> On 8/14/2026 3:35 AM, Jan Beulich wrote:
+>>> On 14.08.2026 02:45, Chuck Zmudzinski wrote:
+>>>> On 8/13/2026 6:35 AM, Jan Beulich wrote:
+>>>>> On 02.08.2026 07:08, Chuck Zmudzinski wrote:
+>>>>>> -- snip --
+>>>>>> To address this problem, this patch implements support for
+>>>>>> Intel IGD devices with an extended VBT and OpRegion version 2
+>>>>>> and higher which is required for most modern Intel IGD devices.
+>>>>>
+>>>>> First of all: Where's the spec of all of this?
+>>>>
+>>>> Well, your first question is quite provocative. Certainly more
+>>>> social/legal than technical.
+>>>
+>>> Well, it was very much meant to be technical. I've had a hard time following
+>>> what your new code does, and having a spec to hand would likely have helped.
+>> 
+>> I agree that having the spec at hand would be better. To be more precise, I
+>> can say that what this patch essentially does is port the support for
+>> the extended VBT with OpRegion 2+ for the Intel IGD passthrough that exists
+>> in KVM/vfio to Xen. Should I explicitly say in the title of the commit
+>> message that this is a port of KVM/vfio support for extended VBT to Xen?
+> 
+> Not in the title, as that would likely make it too long, but perhaps in the
+> description.
 
-Try to pass a handle to a userspace page and the functions above will
-fail because they won't accept userspace pages.
+Ok.
 
-In guest_walk_tables you have:
+> 
+>>>> So my answer is as follows:
+>>>>
+>>>> I do not have access to the official spec that defines "all this" but
+>>>> I do have access, as does the general public, to the Linux kernel's
+>>>> implementation of support for the Intel IGD from many sources such as
+>>>> git.kernel.org. The Linux kernel has enough accurate information about
+>>>> the spec of "all this" to provide very good support for the Intel IGD
+>>>> on bare metal.
+>>>>
+>>>> To elaborate a bit more, the spec of "all this" can be derived from the
+>>>> Linux kernel code that supports the Intel IGD.
+>>>
+>>> So you expect every reader to locate and decipher the underlying information
+>>> from a (afaik) pretty large piece of code in the Linux kernel? If the Linux
+>>> kernel sources are the reference, please can you at least provide pointers
+>>> into there?
+>> 
+>> No, I do not expect every reader to decipher the underlying information...
+>> 
+>> That is why I provided these two links at the bottom of the commit message.
+>> Perhaps you did not notice them:
+>> 
+>> Link: https://lore.kernel.org/kvm/20211012124855.52463-1-colin.xu@gmail.com/
+>> Link: https://lore.kernel.org/kvm/20210325170953.24549-1-fred.gao@intel.com/
+>> 
+>> They are the patches to the vfio kernel driver that added support for the
+>> extended VBT for KVM/vfio guests.
+> 
+> Patches can still be in flight, so provide only limited help. Would it be a
+> problem to instead reference commits, or the actual localtion in Linux
+> sources?
 
-    if ( walk & PFEC_user_mode ) /* Requested a user access. */
-    {
-        if ( !(ar & _PAGE_USER) )
-            /* Got a supervisor walk?  Unconditional fail. */
-            goto out;
+No problem. I will format references to kernel commits the way it was done in
+this commit message of commit 99794c8a8ff8 in the Xen tree that references
+some Linux kernel commits unless you suggest a better way to reference Linux
+kernel commits:
 
-        if ( (walk & PFEC_write_access) && !(ar & _PAGE_RW) )
-            /* Requested a write and only got a read? Fail. */
-            goto out;
-    }
-    else /* Requested a supervisor access. */
-    {
-        if ( ar & _PAGE_USER ) /* Got a user walk. */
-        {
-            if ( (walk & PFEC_insn_fetch) && guest_smep_enabled(v) )
-                /* User insn fetch and smep? Fail. */
-                goto out;
+ xen/acpi: Import PPTT definitions from Linux
 
-            if ( !(walk & PFEC_insn_fetch) && guest_smap_enabled(v) &&
-                 ((walk & PFEC_implicit) ||
-                  !(guest_cpu_user_regs()->eflags & X86_EFLAGS_AC)) )
-                /* User data access and smap? Fail. */
-                goto out;
-        }
+Import the Processor Properties Topology Table (PPTT) definitions
+from the Linux kernel header (include/acpi/actbl2.h) into Xen.
 
-        if ( (walk & PFEC_write_access) && !(ar & _PAGE_RW) &&
-             guest_wp_enabled(v) )
-            /* Requested a write, got a read, and CR0.WP is set? Fail. */
-            goto out;
-    }
+Signed-off-by: Hirokazu Takahashi <taka@valinux.co.jp>
+Origin: git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git b8355bcac253
+Origin: git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git e62f8227851d
+Origin: git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git 091c4af3562d
 
-and we don't have a PFEC_user_mode set.
 
-> >>>>> --- a/xen/common/memory.c
-> >>>>> +++ b/xen/common/memory.c
-> >>>>> @@ -1548,6 +1548,141 @@ static int acquire_resource(
-> >>>>>      return rc;
-> >>>>>  }
-> >>>>>
-> >>>>> +/*
-> >>>>> + * The "noinline" qualifier avoids the compiler to create a large function
-> >>>>> + * consuming quite a lot of stack.
-> >>>>> + */
-> >>>>> +static int noinline mem_foreigncopy(
-> >>>>
-> >>>> I'm wondering: Is the "mem" prefix really meaningful for a static function in
-> >>>> a file named memory.c?
-> >>>>
-> >>>
-> >>> Changed
-> >>>
-> >>>>> +    XEN_GUEST_HANDLE_PARAM(xen_foreigncopy_t) arg)
-> >>>>> +{
-> >>>>> +    struct domain *d, *const currd = current->domain;
-> >>>>
-> >>>> With the comment on the new XSM hooks (below) in mind: currd wants to be
-> >>>> pointer-to-const.
-> >>>>
-> >>>
-> >>> Just rebased on master, all XSM hooks accept no-const pointers to domains.
-> >>> So the suggested change would create warnings.
-> >>
-> >> Well, as per below, I pointed you at a particular pending patch, a single
-> >> hunk of which could be broken out.
-> >
-> > Yes, but my changes would have to have casts from const pointers to
-> > no-const pointers to avoid warnings and the patch you are pointing to
-> > would have to remove these casts. I find this less clean than having
-> > one patch using the current code style (that is no-const pointers) and
-> > another that changes the style entirely.
-> > But obviously this is just my opinion.
->
-> Such casts would be unacceptable. What instead I have been trying to convey:
-> Your patch wants to gain a dependency on my patch. And if my patch would
-> take too long to make it in, that one hunk could be broken out into a
-> separate, easy to get in patch.
->
+> 
+>>>>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
+>>>>>> +               (igd_opregion_pgbase << PAGE_SHIFT) |
+>>>>>> +                IGD_OPREGION2_SUPPORT_MASK);
+>>>>>
+>>>>> This looks to imply qemu is the only possible device model.
+>>>>
+>>>> Yeah, this is an issue. Other device models that intend to support
+>>>> the Intel IGD with hvmloader will also have to be compatible with this.
+>>>> It would be easier if we did not have to worry about backward
+>>>> compatibility and supporting what we had in the codebase for many years
+>>>> in both hvmloader and Qemu and we would not need IGD_OPREGION2_SUPPORT_MASK
+>>>> in that case. Instead, we would just completely deprecate all previous
+>>>> implementations of the Intel IGD passthrough feature in both hvmloader and
+>>>> the Qemu DM as unsupported. So my previous comments about backward
+>>>> compatibility apply here again.
+>>>
+>>> As said, I don't think backward compatibility can be dropped. My comment
+>>> also didn't really mean to hint in that direction. Instead I was wondering
+>>> in how far, even if perhaps by only a few #define-s, the necessary
+>>> interfacing couldn't be put down in a public header, for any DM to consume.
+>> 
+>> Ok. Perhaps the IGD_* defines could be moved to a public header to define the
+>> interface to be used to support the Intel IGD. Would it be OK to move those
+>> to a separate igd.h header
+> 
+> This may require input by others, as in the given situation I'm not quite
+> sure what is best. Anthony - do you possibly have any suggestion here?
+> 
+>> and include it in hvmloader/config.h?
+> 
+> I don't see why that would be needed. The few files which need the #define-s
+> can include that new public header, without impacting anything else.
 
-Okay, then the only choice that's left is the code producing warnings
-as const pointers are passed to functions requiring no-const pointers.
-Is this acceptable? Apparently as you are suggesting it it is.
+So I would just include it in the new intel-opregion.c file. Also, maybe igd-related
+declarations should be moved there too, such as the currently existing extern variable
+igd_opregion_pgbase and my newly proposed extern variable igd_opregion_e820_pages,
+which would mean the new header would also need to be included in hvmloader/e820.c.
 
-> >>>>> +            foreign = map_domain_page(foreign_mfn);
-> >>>>> +            if ( direction == XENMEM_foreigncopy_from )
-> >>>>> +                rc = copy_to_guest(copy.buffer, foreign, PAGE_SIZE);
-> >>>>> +            else
-> >>>>> +                rc = copy_from_guest(foreign, copy.buffer, PAGE_SIZE);
-> >>>>
-> >>>> What I continue to be missing prior to this is the obtaining of a writable
-> >>>> page ref. That's, as previously said, imperative for PV guests and at the
-> >>>> very least advisable for HVM ones. (I really wonder how many more times I
-> >>>> need to comment on this.)
-> >>>
-> >>> Unfortunately that does not work.
-> >>> The code is coherent with MMU_UPDATE.
-> >>
-> >> How's that relevant? That's operating on page tables, when here we want to
-> >> _prevent_ to copy into page tables (or descriptor ones, for that matter).
-> >
-> > This new ABI is to better support migration.
-> > We are migrating all the VM status including page tables... how can we
-> > not be able to write them but migrate them from one  host to another ?
-> > You are basically explaining why changing the check the migration fails.
->
-> No, what I'm trying to explain is that without such a check, you introduce
-> a security issue (of privilege escalation kind). I hope you agree that we
-> cannot knowingly allow such code to be committed.
->
+> 
+>>>>>> +    printf("guest OpRegion tentative "
+>>>>>> +           "address: 0x%x\n", igd_guest_opregion);
+>>>>>> +
+>>>>>> +    if ( !verify_opregion(igd_guest_opregion) ) {
+>>>>>> +        printf("error: IGD OpRegion signature "
+>>>>>> +               "not found.\n");
+>>>>>
+>>>>> No full stop in messages please.
+>>>>
+>>>> Would it be OK to just get rid of the error message here?
+>>>
+>>> That would then leave ...
+>>>
+>>>>>> +        BUG();
+>>>
+>>> ... an un-annotated BUG(), which generally isn't very nice.
+>> 
+>> I don't think I understand what you mean by "No full stop in messages..."
+> 
+> That's the period at the end of a sentence (when in log messages the term
+> "sentence" is of questionable nature).
 
-Then the security issue is already present in the code without my changes.
+Ok. I thought you were referring to the BUG() statement which fully stops
+the guest.
 
-> To migrate-in page tables, you'd need to copy their contents before they
-> obtain their PGT_l<N>_page_table type, so that upon being converted to page
-> tables, they can be properly audited by the mm.c functions we have for that
-> exact purpose.
->
+> 
+>> We have code like this in hvmloader/e820.c:
+>> 
+>>     if ( rc || !nr_entries )
+>>     {
+>>         printf("Get guest memory maps[%d] failed. (%d)\n", nr_entries, rc);
+>>         BUG();
+>>     }
+> 
+> Well, you'll almost always be able to find bad pre-existing examples.
+> 
+>>>>>> +    printf("VBT size: 0x%x\n", rvds);
+>>>>>> +
+>>>>>> +    if ( !rvds || !rvda_host ) {
+>>>>>> +        printf("guest OpRegion address: 0x%x\n", igd_guest_opregion);
+>>>>>> +        rvda_host = 0;
+>>>>>> +    }
+>>>>>> +    /*
+>>>>>> +     * Write rvda_host as 2 successive 32-bit values
+>>>>>> +     * to communicate location of the VBT to the device
+>>>>>> +     * model. If rvda_host is not 0, The device model
+>>>>>> +     * unmaps the OpRegion and eventually maps the VBT
+>>>>>> +     * after we also write the guest address where the
+>>>>>> +     * VBT will be mapped.
+>>>>>> +     *
+>>>>>> +     * If we send rvda_host = 0 to the device model, it
+>>>>>> +     * will assume we do not need OpRegion 2 support and
+>>>>>> +     * it will not unmap the OpRegion.
+>>>>>> +     */
+>>>>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
+>>>>>> +               (uint32_t)(rvda_host & 0xfffffffful));
+>>>>>> +    unsigned long rvda_host_upper_32 = (uint64_t)rvda_host >> 32;
+>>>>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
+>>>>>> +               (uint32_t)rvda_host_upper_32);
+>>>>>
+>>>>> Why would you need to communicate a host property to the DM?
+>>>>
+>>>> The DM cannot access the host rvda value because it is only accessible
+>>>> from the host kernel, and the DM is only a user-space process on the host.
+>>>
+>>> I don't follow this: Anything the guest can access should also be accessible
+>>> by its DM.
+>> 
+>> I think the host OpRegion is not currently accessible by the DM.
+> 
+> Can you explain to me how the region becomes accessible to the guest?
+> That would then (hopefully) help me understand why the DM would not have
+> access. Fundamentally any MMIO and any I/O ports that are assigned to a
+> guest are also assigned to its DM.
 
-That makes sense.
+Currently, in the device model (Qemu) we have:
 
-> >>>>> --- a/xen/include/public/memory.h
-> >>>>> +++ b/xen/include/public/memory.h
-> >>>>> @@ -740,7 +740,50 @@ struct xen_vnuma_topology_info {
-> >>>>>  typedef struct xen_vnuma_topology_info xen_vnuma_topology_info_t;
-> >>>>>  DEFINE_XEN_GUEST_HANDLE(xen_vnuma_topology_info_t);
-> >>>>>
-> >>>>> -/* Next available subop number is 29 */
-> >>>>> +/*
-> >>>>> + * Copy memory from/to a given domain.
-> >>>>> + * This calls is meant to replace expensive operations during migration which
-> >>>>
-> >>>> Nit: "This call is ..." However, is ...
-> >>>>
-> >>>>> + * are only supported for PV guests.
-> >>>>
-> >>>> ... this entire sentence really worth to have here (it looks more like
-> >>>> something to have in the description)? For it to be possible to find if
-> >>>> someone considered using those "expensive operations", I think it would need
-> >>>> to be less vague and name those operations. Furthermore, if those other
-> >>>> operations were supported only for PV guests, how would migration work for
-> >>>> non-PV ones?
-> >>>>
-> >>>
-> >>> Maybe:
-> >>>     This call is meant to replace expensive operations (mmap/copy/munmap) during
-> >>>     migration which can only be issued from PV guests.
-> >>>
-> >>> You can migrate any domain. Just from a PV guest (this is not a regression).
-> >>
-> >> Both Andrew and Roger confirm that this is supposed to work also from PVH
-> >> Dom0 (not sure why you keep saying "guest"), and also used to work. If it
-> >> doesn't, it would be a regression, and it would help if you supplied more
-> >> detail on the observed failure.
-> >
-> > Indeed I tested the migration of various domains (PV, HVM, PV-in-PVH),
-> > but only access to added hypercall from PV and HVM. I should add a
-> > test from a PVH guest.
-> > I say guest because to test HVM I used a hack to allow all guests (not
-> > only dom0).
->
-> And why would testing from PVH Dom0 not do?
->
+    ret = xc_domain_memory_mapping(xen_xc, xen_domid,
+            (unsigned long)(igd_guest_opregion >> XC_PAGE_SHIFT),
+            (unsigned long)(igd_host_opregion >> XC_PAGE_SHIFT),
+            XEN_PCI_INTEL_OPREGION_PAGES,
+            DPCI_ADD_MAPPING);
 
-Just that it's easier for me testing from a different guest.
+That statement is in the igd_write_opregion(...) function in the
+hw/xen/xen_pt_graphics.c file of the upstream Qemu source.
 
+If I understand our current implementation correctly, this statement
+is what gives the guest access to the host OpRegion (3 pages as defined
+by XEN_PCI_INTEL_OPREGION_PAGES, and in agreement with IGD_OPREGION_PAGES
+in hvmloader code). I don't think this statement makes the host OpRegion
+accessible to the device model, though, so I think, if I understand your
+comment in an earlier about my patch resulting in what you called a "layering
+violation" correctly, that our current implementation is also guilty of this
+same kind of "layering violation."
+
+So, how do you suggest we fix that?
+
+> 
+>> On the KVM
+>> platform, this is made possible via the kernel vfio driver and then Qemu exposes
+>> the OpRegion to the guest using the Qemu FwCfg device interface. How should we make
+>> the OpRegion and VBT accessible to the device model and then, to the guest, on Xen?
+>> I think it could be done via the xen-pciback kernel driver. Should we do that
+>> instead? I think to do that we would have to convince the kernel developers that
+>> the Intel OpRegion, as you say, "should" be accessible by the Xen device model.
+>> I can imagine them saying, why not use the vfio driver?
+> 
+> I can't answer this; all I can say is that it feels wrong to involve e.g.
+> xen-pciback here.
+
+Ok. I guess we need to wait for other experts to weigh in here. I have never looked
+carefully at what xen-pciback does. I suppose one of it's jobs is to hide access to
+the resources of the passed through device from the dom0 kernel but I am just
+guessing about that.
+
+> 
 > Jan
 
-Frediano
 
