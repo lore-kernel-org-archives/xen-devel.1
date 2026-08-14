@@ -4,41 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42B6EC5CFCF
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2026 16:19:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1391282.1631177 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF56AC5CFC1
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2026 17:04:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1391298.1631187 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuuc8-0006ez-Jt; Fri, 14 Aug 2026 16:18:36 +0000
+	id 1wuvKM-0004hb-3p; Fri, 14 Aug 2026 17:04:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1391282.1631177; Fri, 14 Aug 2026 16:18:36 +0000
+Received: by outflank-mailman (output) from mailman id 1391298.1631187; Fri, 14 Aug 2026 17:04:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuuc8-0006es-HN; Fri, 14 Aug 2026 16:18:36 +0000
-Received: by outflank-mailman (input) for mailman id 1391282;
- Fri, 14 Aug 2026 16:18:36 +0000
+	id 1wuvKM-0004hU-1B; Fri, 14 Aug 2026 17:04:18 +0000
+Received: by outflank-mailman (input) for mailman id 1391298;
+ Fri, 14 Aug 2026 16:25:48 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brchuckz@aol.com>) id 1wuuc7-0006em-ON
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 16:18:35 +0000
+ (envelope-from <onlywig@gmail.com>) id 1wuuj6-0008G1-C7
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 16:25:48 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wuuc6-00GbkN-Ey
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 18:18:34 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wuuj5-006hns-PA
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 18:25:47 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <brchuckz@aol.com>)
- id 6a7f3fc6-bab6-0a2a0a5309dd-0a2a4503c846-24
- for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 18:18:33 +0200
-Received: from [98.137.64.148] (helo=sonic301-22.consmr.mail.gq1.yahoo.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <brchuckz@aol.com>)
- id 6a7f3fd8-fae8-0a2a45030019-6289409497e9-3
- for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 18:18:33 +0200
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic301.consmr.mail.gq1.yahoo.com with HTTP; Fri, 14 Aug 2026 16:18:31 +0000
-Received: by hermes--production-bf1-54b5569bdc-z2x8g (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID 4cc625440026d205cb1396754a1ab4df; 
- Fri, 14 Aug 2026 16:18:27 +0000 (UTC)
+ (envelope-from <onlywig@gmail.com>)
+ id 6a7f416c-8faa-0a2a0a5109dd-0a2a45018f30-42
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 18:25:47 +0200
+Received: from [209.85.214.181] (helo=mail-pl1-f181.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <onlywig@gmail.com>)
+ id 6a7f418a-5984-0a2a45010019-d155d6b5d95a-3
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 18:25:47 +0200
+Received: by mail-pl1-f181.google.com with SMTP id
+ d9443c01a7336-2cab973140bso20226625ad.3
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 09:25:47 -0700 (PDT)
+Received: from wig-Precision-3660.. (125-227-154-99.hinet-ip.hinet.net.
+ [125.227.154.99]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2d3aeb29f62sm12585735ad.38.2026.08.14.09.25.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Aug 2026 09:25:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,122 +53,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="Date:Subject:From:To:Cc:References:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1786724311; bh=sZ2U0ZHbr1dOUcGv8Quuw66Z7ftlvoQtcvfayzdgWQw=; h=Date:Subject:From:To:Cc:References:In-Reply-To:From:Subject:Reply-To; b=Jvgo/H+jlQPsdqphZXsdSX/FlYIHbhT9JUyxuNlQKMwfWNZVEGe7Fct/xnz8DOycCW2YEK5+Sz45GuW7S3kLrMcS7qe5GJd/nLcYUndtdHcrxhRuAKqPh8ljlCWq/8KbGiT5aNryFmbF736Z84OFeZcQV9kUQgEwdm/373OpvQZwB5OSNex6HaofmaRqry7Jtr9cP318bIGIGXxVz30v0RCiqD5BcadjKyuN456XuKVUv5mXF3RY5drMC1zkIooDmXv5+q47pZlvvGI4L+TUvNViPPsII0bC879AwauILGDtfagbFPL+anJwo6C6pXfBp/XXvW/zD1Yw1F+VMIDRuA==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1786724311; bh=UTWYcY0Ukx5zq3PjBqv7g7E/uZqyleHthvEJnpNUFcc=; h=X-Sonic-MF:Date:Subject:From:To:From:Subject; b=Qw1NJVsUJmr4wc7AioDXdMRjq747ZgtNgLWXYTvgehC0vWLaMSmJzmRKdDMq1zeEJzYIa20rVbXpydF+hmIz6G7QxI0glBS3tKPjBBzHSQz/GNcWF6+m8fJ5TCTad9U4rAgKePI5ih+ng27EBmEtK7RswjVRwi9H80/7FXUn92P6LY4P8rCW7H3q5zQ9BrYYzkSC+FKUvc8oHnefWxBSvPzMHhZs10+jep8MD7+yFJonzV/ea9QjbKNVOQ7+s6kaggOLBW1+5eF5I0GtUWknn3hX55QnAubI887G7Jz25TzyAl202pn5C0ZzJER8oZU0fAm2OVP/4ppVJ1M1fUnIjQ==
-X-YMail-OSG: Os7DNC8VM1kKN70GE6kcUT8_Oq835oQDRm_ae4i03DweMwSJspxFt_NrIvUblkT
- EMXlDa.wrDjdnLIKFWYNZeQXQDLHQvGl7pR892Y2Sqewz18pDgakFbVKOODOaZCCjazNpF_eJ0QN
- kTt0A6iRAtIVkh9RtRV0Raj_Vr0jG_7EZL7g0P2AXWfVKnh.PW1vyuUDYG_nM0WFlWNu2igwMexg
- n.JhxGqdkNVxVaF9y7_KMnRbvIto84__vw60j2xr51Ni.qZxh2UKK4taUOqRS45R_lgSbQHR5ec8
- m5HUFT2n6pOdKqJDqwCWxI6uMYqZHnKt1Tnb1pbJkwpqpO1_a5CIZUYI68FUffeNmfKj88oC96VZ
- aR5K1qn5IIsYqjPaMfloaW329SkLm2M0clML_DNhQU18AhRd4wJqLumbsD.ZkW5kf0.FVHmWobgt
- e47yl.vuhfa1e0yWk1x5nozpe2FZbD2mUqx9R_h0_6dgdXc68PhM20UUgCOayepGecsb2_d2eLLZ
- ZCTZqSkT_Kp.KeM4aUHxl1zIEfwaemyRjmPsF78h91HnLZtSci7U.jrM.5T41JG6hVHIu_vMit_C
- mliiFlfjniU9QuSphtkWnFEWJCbuwFKQDqtb3x50vCg9EuONEDy7ltQfuFBmXT2tJr3hOP2wpcLR
- eZewrDphCWDukD5lxYiUEnMPVATSRZQyQ1JCkO_nNGvDZCwQ4r9CYWH6STwh0MA4d0YU7vGBs_Vv
- yWscYisX_mdcp2VcB0J8rqVJuv3T1QQV.pnjIoa8LmTsgjjt.BErlNWCk5wmNfc6dcX5bT4ux0ec
- YFMo740wnDzuSbxuoTXLjPjrdVKAXsaISnD22q1gDnwiLu4NUI0JWzs253UG6NUYMm6XLVSzcsXG
- kQV5Qz_87t1LpmXW2VgsNO82hMsqoCUd9wL6racK8mAUEomXvhq1Accx8KTjrIk_Bc3lwnf_CfMs
- K9YgQw9CuKYwhIzgHADP7EuIaHZsdXKRPPm5lcHSR_2yvhrD3ebo0zCdtQvrAjfbe_E.FQk2xIlK
- gAvNh2Uihs1.0KlwKE0zKHuYyJcbajU7ix9ijTAcdb3NcwV5R6VKpI.g6kQ06ERTmjCF3BHyZa1e
- 22DqvsxhtVnlh5deI6SWmestCKzSDFBcWLJCUH9rRcxzDcCRZEvnXA3DPtPnkfUQ02T2dKZqErN.
- nRC4kHraHIkjeCgKOgs9Nmk7Qy50r6vlmqoKwFv9GmwjvMbfZkqYF5vaK_Sxsir3nPTD72aF7U6D
- X3YSGzKatVc.ttXU77aEp5CSv_24MyfAUlcQF8DPUR3spzfZBdV2ROoIdtXaI2J_O_NgnajqRWZ4
- Z7Wt9HOI7kq4f4zgm_IGnuPiD78yBjBIgpTn8I0x_tI865ZJgh3UnwA3FHOceXt9vna9Liov.3V3
- .ZZNUoF9_iaJg.NSukllRKMPAsA34dElIHxUpYAeOAS3bB2MMV1ngfmnfhPk7gDjGgBbnJeyFELe
- 9gt8rhGJMdSPohKnYdeCI7tyY5.52ldpoBtOQz7_8TFy4A14g6P.DLKeoqYT5jxkmH4T2olmOIwa
- SwdB33U41SL7XX8wb2v85g.dgdxW5TUXYBDeLf1LQCSEqe8F3A6gMMuICCgHJMFpg4gtjTSW6fxB
- FEORjJkuhXmPBBQ3tHfMRd9x0UCHByKcou.zsirOzocOGqU8kP2zQFIlSsdzTqqjq7zX_kC1Njs.
- BVgOyYXeG353j1tVisCXvbcKN4.FvXKnWLO93apxLqjJr7lC83rF7LGwv0dLctXl.YeOrjufru2Z
- aUc3fyahR3mMfn_TloHA.YySi34EA14R3oIYtvPY.52VT4HsIoBT4P4jRH16Kwt0LCr2DKQnJaMs
- n68HxaxiTBPCKJB9reZvcE3P02hGbfztlRLTbeajagXH8UF4ESU0vNYOezLWPQGmwCyGOX.EfEMy
- NN.lRZRyHtAZQCPak5BEEp4Gq5gg1DMfDtJLZ.Rl_HnnxeREkasSWQDg4rttWrlBvKS3o8FjWqkq
- Lpb89l8bE5IVDYYTyz3ULMrGmaY6RsHAOa3rQepAJ7fwjMXZffCNBARD3d3hSxnckohu0n1VvOvI
- 5aDUHnQ9nVVmmqHatNAvmhbdnz3YhUq7aRukyWtW7aLyYVoJAZ_xQQ1b.qmLVoUjXam1l2ee4hJd
- dHpnL3MWXDAL4KFJmJClOeSl_JPTB0xb3OGqkcRrA.yOg8swos.UbYOr91vbgYQ8ZmzVLpQWuw.Z
- Ajh5WwouIBj2lwD8oXKCgRZJkC.HL_B_GjRzO_W2fuA--
-X-Sonic-MF: <brchuckz@aol.com>
-X-Sonic-ID: b8452a40-21fd-4249-b0e5-ba6658385c4b
-Message-ID: <1522d7a3-eb9d-40df-9a34-7b1cfeb3680e@aol.com>
-Date: Fri, 14 Aug 2026 12:18:26 -0400
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1786724745; x=1787329545; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=hewASw0YES1004X+TmHWipBlBUBhlbOj1JEjiurEJeU=;
+        b=ZzMyywEv0yOKF6G638s4nkMvRSO817PuQkiCV2BPsjqmGrB1dqBRhFYLtX8HUdCZ9c
+         0jxInmAQ61f03FlrbTByPAgqSFyItPl8jVmT5Tt151Dkc+v3zsYN8tuaiM7gFVZKVPxM
+         BCVL2Hk6+YFXoo7byl2/96rcNrdQoVGBhHE9Qo0KmvW1CNCiTMhoSDDAKoM08tZItt5I
+         vHVPall/HHrCqGXuPJYN/xndCYOjsOTucQ1iknpz8RQq2crxMYREp2fuDlxVU9eOWpGx
+         QD43Zfu9DF4Oa+WMOLWZ25xrLwKxYUVi4fDdBmKphtceoG0XYG+gwVSEUUYhoevUzZ+o
+         q6yw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786724745; x=1787329545;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=hewASw0YES1004X+TmHWipBlBUBhlbOj1JEjiurEJeU=;
+        b=NUGjEAgSumW+smhmtuZdunG3SZqjh3/EKX/YwNh33c70pW3lZs78YmX5plU60yFEEp
+         7BKDw1x9kcbR8MItmlQlc/B9DxUH3l0aq30bORqarKukfbmYlP+BWeErCI/hzQ4uhRL5
+         j75kgVqGyNlan5T/wlGhk74PP+qWZeyo5GqUl+rD4eJcTCnW42dfYvjmN5HWey/uhsnE
+         w0iYouydcUkmawa/1VpkfdHC/Lj7g60KEyodot+khZ354cKDrsO5XC1KXT5Nl+wu0/ny
+         SmSqcH9dkVbRYINT5ZAjPSTHjUr1xIYqWzJJy/YRIHfIUu0c1WI9ENDvwoNKuW6STabu
+         mkWw==
+X-Gm-Message-State: AOJu0Yyk1aEDZkLkou1JCgakowFYhgarsS1duBwL9VStBSKzj5nR/Mfg
+	M/qIUc+/HD0WjwEWPSQZgAyDAJlkdn1iI81fU2iLaw3vTO4B/fYmw2AkQbDr2poQ
+X-Gm-Gg: AR+sD12hsVvCrjVUHZ7uDo8IxM/i0ttGEwvSuI5GvSSjRIBTvI4u9CWgiUiktOCe/QZ
+	R+N8N8a5BaR+K+lwytKxChlTabUiJPyij+L2R2Mrp9HTrOmRdsr2LhDwEKhk8ckHqZxNfxvz6d9
+	iIxCFV029pqzq5y94svgV9WS40Njha4FdSj203gUTWaIYNqysZbp4sdc92xH0E8lCJCaUxrhTwM
+	skGF+VzxAWw+OIWB74I1fwVJxV75pMxZhYCjgPJi34OrvYTyh3OzO6EUw/rPNNuLmwjZyZQAB8/
+	maujVYLCoAFepHzjr+j66ET+yBNWRWhm96AUMZoKp86TodToOBuZSqy/f42txNDVii0OAGy/WE4
+	fnSNrkFWmOB8V8qKlm/vn8N4HoQgF9yO1eR4U1gJ0waMX3su8g4+x8tZXVBPo0cAbBQ/RjR4/Lh
+	xfPoago+Y1dQBV2tWRYtdTa5EJ+c5SKHyyktPVb6IKf5na2YLa/4X0PgNshKQOelJVF6GvzsC6t
+	6mpUt7K1Lh3NlUBnsQqgdVnuDdusPp/
+X-Received: by 2002:a17:902:d549:b0:2cc:6018:f030 with SMTP id d9443c01a7336-2d3b0c6832dmr87106425ad.14.1786724745458;
+        Fri, 14 Aug 2026 09:25:45 -0700 (PDT)
+From: Wig Cheng <onlywig@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	John Ernberg <john.ernberg@actia.se>,
+	Peng Fan <peng.fan@nxp.com>,
+	Wig Cheng <onlywig@gmail.com>
+Subject: [PATCH 0/3] xen/arm: add i.MX8M platform and UART support
+Date: Sat, 15 Aug 2026 00:25:32 +0800
+Message-ID: <20260814162535.331459-1-onlywig@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] tools/hvmloader: implement Intel IGD extended VBT
- support
-From: Chuck Zmudzinski <brchuckz@aol.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: qemu-devel@nongnu.org, Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>,
- xen-devel <xen-devel@lists.xenproject.org>,
- Anthony PERARD <anthony.perard@citrix.com>
-References: <20260802050824.10554-1-brchuckz.ref@aol.com>
- <20260802050824.10554-1-brchuckz@aol.com>
- <2110d4b7-ae37-47aa-99be-ab59e16f6167@suse.com>
- <67579eba-e222-41dd-84bf-8440d2eaf2a9@netscape.net>
- <da2200cd-def7-4cce-a6c2-9f9ac9e202ce@suse.com>
- <de56c8bd-f0e8-4fe9-8cf5-f6807698176c@aol.com>
- <02a7dc18-4184-4e86-84cb-121769187f71@suse.com>
- <1858e8e6-73fa-4017-93e2-c733fbf0ec8d@aol.com>
-Content-Language: en-US
-In-Reply-To: <1858e8e6-73fa-4017-93e2-c733fbf0ec8d@aol.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailer: WebService/1.1.26254 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
-X-purgate-ID: tlsNG-33051d/1786724313-7428D4E9-007C5BBF/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d62444/1786724747-1DC79757-D3965F9C/0/0
 X-purgate-type: clean
-X-purgate-size: 2209
+X-purgate-size: 1901
 
-On 8/14/2026 11:23 AM, Chuck Zmudzinski wrote:
-> On 8/14/2026 9:46 AM, Jan Beulich wrote:
->> On 14.08.2026 15:18, Chuck Zmudzinski wrote:
->>> On 8/14/2026 3:35 AM, Jan Beulich wrote:
->>>> On 14.08.2026 02:45, Chuck Zmudzinski wrote:
->>>>> On 8/13/2026 6:35 AM, Jan Beulich wrote:
->>>>>> On 02.08.2026 07:08, Chuck Zmudzinski wrote:
->>>>>>> -- snip --
->>>>
->>>> I don't follow this: Anything the guest can access should also be accessible
->>>> by its DM.
->>> 
->>> I think the host OpRegion is not currently accessible by the DM.
->> 
->> Can you explain to me how the region becomes accessible to the guest?
->> That would then (hopefully) help me understand why the DM would not have
->> access. Fundamentally any MMIO and any I/O ports that are assigned to a
->> guest are also assigned to its DM.
-> 
-> Currently, in the device model (Qemu) we have:
-> 
->     ret = xc_domain_memory_mapping(xen_xc, xen_domid,
->             (unsigned long)(igd_guest_opregion >> XC_PAGE_SHIFT),
->             (unsigned long)(igd_host_opregion >> XC_PAGE_SHIFT),
->             XEN_PCI_INTEL_OPREGION_PAGES,
->             DPCI_ADD_MAPPING);
-> 
-> That statement is in the igd_write_opregion(...) function in the
-> hw/xen/xen_pt_graphics.c file of the upstream Qemu source.
+This series adds Xen support for the NXP i.MX8M family (i.MX8MP / MQ /
+MM / MN).  It provides the console UART driver, its early printk, and
+the platform glue (SiP SMC whitelist for the calls the dom0 kernel
+issues to TF-A).
 
-I forgot to mention: In our current implementation, this statement is
-executed in the DM when hvmloader executes this statement, currently in
-hvmloader/pci:
+Tested on i.MX8MP (4x Cortex-A53, GICv3): dom0 boots to login on the
+hypervisor console, and a domU starts with a PV disk and virtio
+devices running a full Wayland distro.  This addresses the concern
+raised on the 2019 i.MX8MQ RFC that only a ramfs dom0 had been shown.
 
-                    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
-                               igd_opregion_pgbase << PAGE_SHIFT);
+Notes for reviewers:
+
+- Unlike i.MX8MQ, the i.MX8MP device tree uses the GIC as the root
+  interrupt controller (interrupt-parent = <&gic>), so no device-tree
+  workaround is needed and power domains keep working.
+
+- The i.MX8M family has no SMMU, so device passthrough relies on the
+  1:1 direct-mapped hardware domain.
+
+- The SiP SMC whitelist forwards only the function IDs the dom0 kernel
+  actually issues (extracted from the upstream and vendor kernels);
+  no call outside the whitelist was observed at runtime.
 
 
+Wig Cheng (3):
+  xen/char: add classic i.MX UART driver
+  xen/arm64: add early printk for the classic i.MX UART
+  xen/arm: add i.MX8M platform support
 
-> 
-> If I understand our current implementation correctly, this statement
-> is what gives the guest access to the host OpRegion (3 pages as defined
-> by XEN_PCI_INTEL_OPREGION_PAGES, and in agreement with IGD_OPREGION_PAGES
-> in hvmloader code). I don't think this statement makes the host OpRegion
-> accessible to the device model, though, so I think, if I understand your
-> comment in an earlier about my patch resulting in what you called a "layering
-> violation" correctly, that our current implementation is also guilty of this
-> same kind of "layering violation."
-> 
-> So, how do you suggest we fix that?
-> 
-...
+ xen/arch/arm/Kconfig.debug            |  12 ++
+ xen/arch/arm/arm64/debug-imx-uart.inc |  39 +++++
+ xen/arch/arm/include/asm/imx-uart.h   |  62 +++++++
+ xen/arch/arm/platforms/Makefile       |   1 +
+ xen/arch/arm/platforms/imx8m.c        | 116 +++++++++++++
+ xen/drivers/char/Kconfig              |   8 +
+ xen/drivers/char/Makefile             |   1 +
+ xen/drivers/char/imx-uart.c           | 227 ++++++++++++++++++++++++++
+ 8 files changed, 466 insertions(+)
+ create mode 100644 xen/arch/arm/arm64/debug-imx-uart.inc
+ create mode 100644 xen/arch/arm/include/asm/imx-uart.h
+ create mode 100644 xen/arch/arm/platforms/imx8m.c
+ create mode 100644 xen/drivers/char/imx-uart.c
+
+-- 
+2.43.0
+
 
