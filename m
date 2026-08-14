@@ -4,41 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1287DC5CFC1
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2026 07:28:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1390785.1630941 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58730C5B572
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2026 07:36:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1390866.1630985 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wumKN-0004Zi-AU; Fri, 14 Aug 2026 07:27:43 +0000
+	id 1wumSL-0006q2-Gi; Fri, 14 Aug 2026 07:35:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1390785.1630941; Fri, 14 Aug 2026 07:27:43 +0000
+Received: by outflank-mailman (output) from mailman id 1390866.1630985; Fri, 14 Aug 2026 07:35:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wumKN-0004Zb-79; Fri, 14 Aug 2026 07:27:43 +0000
-Received: by outflank-mailman (input) for mailman id 1390785;
- Fri, 14 Aug 2026 07:27:42 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+04c67277bee7a825e0be+8391+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1wumKL-0004ZV-9H
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 07:27:42 +0000
+	id 1wumSL-0006pv-Du; Fri, 14 Aug 2026 07:35:57 +0000
+Received: by outflank-mailman (input) for mailman id 1390866;
+ Fri, 14 Aug 2026 07:35:55 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1wumSJ-0006pi-K5
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 07:35:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wumKJ-0038bI-OT; Fri, 14 Aug 2026 09:27:39 +0200
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <BATV+04c67277bee7a825e0be+8391+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a7ec354-2eae-0a2a0a5409dd-0a2a450ae13a-26
- for <multiple-recipients>; Fri, 14 Aug 2026 09:27:39 +0200
-Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <BATV+04c67277bee7a825e0be+8391+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a7ec36b-f2d2-0a2a450a0019-5a9b32228eee-3
- for <multiple-recipients>; Fri, 14 Aug 2026 09:27:39 +0200
-Received: from [2001:8b0:10b:5:84af:4c52:575c:6551]
- (helo=u09cd745991455d.ant.amazon.com)
- by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wumK8-00000004oGV-1zYP; Fri, 14 Aug 2026 07:27:28 +0000
+ id 1wumSJ-00Bjgv-0n
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 09:35:55 +0200
+Received: from [10.42.69.5] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a7ec54d-2eae-0a2a0a5409dd-0a2a4505c0ee-40
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 09:35:54 +0200
+Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a7ec55a-4cb1-0a2a45050019-d155dd36dd93-3
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 09:35:54 +0200
+Received: by mail-wr1-f54.google.com with SMTP id
+ ffacd0b85a97d-47f7854678cso540045f8f.1
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 00:35:54 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49988ae8b62sm30359785e9.5.2026.08.14.00.35.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 14 Aug 2026 00:35:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,320 +53,480 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="MIME-Version:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
-	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=XgbACiF0VbZQ3qTHeTv3h3pqeu4o7TCVK0pEMR7P+5Q=; b=n9M+1nUZlJt8tJ67mjvev4cQFd
-	sYq7ADrcn5SliAXKKRtIA97idnKt8ci6mvXXyN8bTgh5qfyRpQU5AGTkiVfN+PaA6iXJiMBJpKgtp
-	FLhBo8ORKw9nrU0IbeS7hyyAcGRmfl42TqhbAU3b++ilVruvKF7kaH7eJUmcSe1UTcGBl//vZeV4K
-	iitnGvLVzwy6sMQO7msIbZWSFBS3t+3mO3wgyjvXCTBkbMPlAVsgcCyl4kkd1DqQmn4M9MBJQjxlY
-	DbMRHQunsmo5E4hyR/GnixqWJcJP32keo2WGJgQthe3KV8IJuZpu20wk7N14HkUfciJhnk9YyhPYA
-	DY5INBig==;
-Message-ID: <4420099fedce20021d6cc5aeb1aa270c7951c552.camel@infradead.org>
-Subject: Re: [PATCH v7 31/36] KVM: x86: Add KVM_[GS]ET_CLOCK_GUEST for
- accurate KVM clock migration
-From: David Woodhouse <dwmw2@infradead.org>
-To: Sean Christopherson <seanjc@google.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <skhan@linuxfoundation.org>, Thomas Gleixner <tglx@kernel.org>,
- Ingo Molnar <mingo@redhat.com>,  Borislav Petkov	 <bp@alien8.de>, Dave
- Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin"	
- <hpa@zytor.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, Juergen Gross	
- <jgross@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Paul
- Durrant	 <paul@xen.org>, Jonathan Cameron <jic23@kernel.org>, Sascha
- Bischoff	 <Sascha.Bischoff@arm.com>, Marc Zyngier <maz@kernel.org>, Joey
- Gouly	 <joey.gouly@arm.com>, Jack Allister <jalliste@amazon.com>, Dongli
- Zhang	 <dongli.zhang@oracle.com>, joe.jin@oracle.com, kvm@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	xen-devel@lists.xenproject.org, linux-kselftest@vger.kernel.org
-Date: Fri, 14 Aug 2026 08:27:19 +0100
-In-Reply-To: <anuy6QxUVLcSSVCn@google.com>
-References: <20260728144954.355376-1-dwmw2@infradead.org>
-	 <20260728144954.355376-32-dwmw2@infradead.org>
-	 <anuy6QxUVLcSSVCn@google.com>
-Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-i/xjFyj0sIBrhyIUdgpg"
-User-Agent: Evolution 3.60.3-0ubuntu1~ppa9~24.04 
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1786692954; x=1787297754; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=//W0xE+KXcv0hvKuNpwMOS45XeEjTCRExbM8a2HcfqM=;
+        b=fYk0vl/cVeLZ3/aFFwBsHtPiXs5JlC8afGRVBeTPzv1uQ/weixAD2WYzT/SsrWZcTR
+         yVor+4NVxQe7xSY/cDuaAKAxR/wmHlphU0+1v/hq4YfKjX9HLpIbLYh6XJ8o7VQ0Dbc2
+         wLqIMIcEg657YLp3dcWjWgmsDMk0ZcDNKNcJzlM5UB6PgMPhkcYz8roNqaub8hBLZ3D4
+         393Yyz6GBLG0byidkq/34XSOjz6Fa8UkH4GRimqdfl6NpJLvjjN7woIZugq4tXh65AkO
+         rX9j2dzmEdfxKRPi399BJ52lduvXgSL9tsVva9WIBe67iTfDiGHg03uBAwDWi3eEc7Gw
+         bbSw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786692954; x=1787297754;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=//W0xE+KXcv0hvKuNpwMOS45XeEjTCRExbM8a2HcfqM=;
+        b=Sc39tGwvRGb5qXC2buT1JQZL5y7pHRgKY6WmXgk7uF/WPjSJUdNpi+4hYFkY10MEIj
+         9CawFFZyNFPgNAKlK85vE3JAJ/bDgBLV39k98CJfnbyyMoFJWTxVCN9NKeDZCJptc9SF
+         Xr6/Fi/G87dCqlPzqIhf42n2SBE/zfSAU7keqUVTRbDaWZYdiIsS5PlBzDyMYy/fhiXB
+         vIXIh5AWQr83uQiLRZO4nyAEnYpBy33ESdavjyIqRIPvl9zx2caZfE4mLh4AKVrrblyF
+         18BqEuxx0sYxhI+hG5+as6ZnwCvFt0XMMkY7mYKKsAcnfJBDn1xykxTm2CKrStrj5S1B
+         Q9lw==
+X-Forwarded-Encrypted: i=1; AHgh+RqEIwL6Wj7q8wgurYYAWtqh1nf8Z/SiYKKPcQZgs0GvTSUzPpxjY4Kb2VTy9S5aE3lSzZeGENu/fyM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxRmoBF/OynrKWthd80GcAtK+iNyJUeE5cBqfT2nYEwU8KbvbNE
+	9tpX0Ap4/wgUWUcknliE5y82AE7t8+SJC+q08LobEta87hmnDvHShAOYEONzxSVSIQ==
+X-Gm-Gg: AR+sD11S2PUYuGHMaOQJpcjNFS/lNx8uDA8umXZ89HATHr5M4jBGVHjZ9Y6npux6/zQ
+	DCAfWzRYauo3fc2vCLEsHHra/yFfIb4aej8WVAeV7ns0FhSpQNhwbYp0ZaolOe/Uf0rcNLlIgyd
+	L9OJ2S1bSoAXaRSRIeXnnfFWqqbOGd44S2p2JkC0V3+iTsLlBSFbIkX47uVnK6r9x6zdP6ZU7Ma
+	GY2yyD0zfoezS86+0m7tiagrtvE8L6HnJ/ultBuU4Hx2wgQUicdEDshkWX5kMfnhyw/uU3Hurmc
+	aRcHnPcQZhqFdmLteubDH4SeK8AmohwLtNmwQUJq0qpQPs75MEPbSGebTOSJnxeEB6/5AM8ajcJ
+	TlpEyoRc8KXeMB5dC7yh+igV4KztDFeBwLKHZO1MutWL4pBSZ/QZ/vKvcGjlI83VJ3MCbr+cmga
+	LndQ1F5blIaD77afRa5c12CGaEyg/XXVYpCjmKMFSazrBSn1TlWIUef19i0KjH9VJBW5Zigj3Wm
+	1sW1Kw/L2Wtk3FOqAaVFbDaUf8zFtaKDb2Rl5BTC40ZuFpgdmLm
+X-Received: by 2002:a05:600c:6089:b0:499:86ce:465e with SMTP id 5b1f17b1804b1-49987941e38mr58172775e9.4.1786692953973;
+        Fri, 14 Aug 2026 00:35:53 -0700 (PDT)
+Message-ID: <da2200cd-def7-4cce-a6c2-9f9ac9e202ce@suse.com>
+Date: Fri, 14 Aug 2026 09:35:52 +0200
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-4011c0/1786692459-4B2D8CFC-C7B73550/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] tools/hvmloader: implement Intel IGD extended VBT
+ support
+To: Chuck Zmudzinski <brchuckz@netscape.net>
+Cc: qemu-devel@nongnu.org, Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>,
+ xen-devel@lists.xenproject.org
+References: <20260802050824.10554-1-brchuckz.ref@aol.com>
+ <20260802050824.10554-1-brchuckz@aol.com>
+ <2110d4b7-ae37-47aa-99be-ab59e16f6167@suse.com>
+ <67579eba-e222-41dd-84bf-8440d2eaf2a9@netscape.net>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <67579eba-e222-41dd-84bf-8440d2eaf2a9@netscape.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c201ff/1786692954-F68B62A1-71866F53/0/0
 X-purgate-type: clean
-X-purgate-size: 15349
+X-purgate-size: 17648
+
+On 14.08.2026 02:45, Chuck Zmudzinski wrote:
+> On 8/13/2026 6:35 AM, Jan Beulich wrote:
+>> On 02.08.2026 07:08, Chuck Zmudzinski wrote:
+>>> -- snip --
+>>> To address this problem, this patch implements support for
+>>> Intel IGD devices with an extended VBT and OpRegion version 2
+>>> and higher which is required for most modern Intel IGD devices.
+>>
+>> First of all: Where's the spec of all of this?
+> 
+> Well, your first question is quite provocative. Certainly more
+> social/legal than technical.
+
+Well, it was very much meant to be technical. I've had a hard time following
+what your new code does, and having a spec to hand would likely have helped.
+
+> I presume by "all this" you mean code in this patch such as:
+> 
+> #define IGD_OPREGION_RVDA 0x3ba
+> #define IGD_OPREGION_RVDS 0x3c2
+> #define IGD_OPREGION_VERSION 0x16
+> 
+> which defines the offsets of the rvda, rvds, and version fields from
+> the base address of the Intel OpRegion.
+> 
+> Also, I presume that "all this" includes the meaning of the 8-byte
+> rvda value, the meaning of the 4-byte rvds value, and the meaning of
+> the 2-byte version value.
+
+"All this" certainly goes beyond this, i.e. also covering the intended
+interactions.
+
+> So my answer is as follows:
+> 
+> I do not have access to the official spec that defines "all this" but
+> I do have access, as does the general public, to the Linux kernel's
+> implementation of support for the Intel IGD from many sources such as
+> git.kernel.org. The Linux kernel has enough accurate information about
+> the spec of "all this" to provide very good support for the Intel IGD
+> on bare metal.
+> 
+> To elaborate a bit more, the spec of "all this" can be derived from the
+> Linux kernel code that supports the Intel IGD.
+
+So you expect every reader to locate and decipher the underlying information
+from a (afaik) pretty large piece of code in the Linux kernel? If the Linux
+kernel sources are the reference, please can you at least provide pointers
+into there?
+
+>>> --- a/tools/firmware/hvmloader/config.h
+>>> +++ b/tools/firmware/hvmloader/config.h
+>>> -- snip -- 
+>>>  #define PAGE_SHIFT 12
+>>>  #define PAGE_SIZE  (1ul << PAGE_SHIFT)
+>>> +#define tools/hvmloader/pci.c3
+>>> +#define IGD_OPREGION_SIZE ((IGD_OPREGION_PAGES - 1) << PAGE_SHIFT)
+>>
+>> This is odd, and hence wants a comment.
+> 
+> Yes, I could add a comment, probably a long one, to explain this
+> oddity. It is a problem of backward compatibility where we have a
+> definition, IGD_OPREGION_PAGES, that is currently set to 3 both here
+> in hvmloader and in the Qemu DM, but should be 2 because the OpRegion
+> size is really exactly two pages but the current implementation set it
+> to 3 because the host OpRegion is not always aligned on a 4k page
+> boundary so three pages are needed to map the entire host OpRegion to
+> the guest. I could re-write the patch setting IGD_OPREGION_PAGES to 2
+> and avoid a comment here, but that would complicate the logic of how
+> igd_opregion_e820_pages is calculated and probably introduce the need
+> for comments in other places. 
+> 
+> I am open to suggestions about how best to handle the backward compatibility
+> problem and the problem of ensuring compatibility between hvmloader support
+> for Intel IGD passthrough and DM support for that same feature. For now,
+> however, I am trying to keep what is applicable to the current implementation,
+> and this odd value of 3 for IGD_OPREGION_PAGES is one of those things
+> I am keeping for backward compatibility.
+
+Personally I don't view breaking backward compatibility as an option. Hence
+a comment is going to be needed, and preferably not an overly long one.
+
+>>> +#define IGD_OPREGION_RVDA 0x3ba
+>>> +#define IGD_OPREGION_RVDS 0x3c2
+>>> +#define IGD_OPREGION_VERSION 0x16
+>>> +#define IGD_OPREGION_MASK 0xfff
+>>> +#define IGD_OPREGION2_SUPPORT_MASK 0x1
+>>> +#define IGD_OPREGION_SIGNATURE "IntelGraphicsMem"
+>>> +#define IGD_VBT_SIGNATURE "$VBT"
+>>> +extern unsigned long igd_opregion_pgbase;
+>>> +extern uint32_t igd_opregion_e820_pages;
+>>> +void intel_opregion_setup(uint32_t vga_devfn);
+>>
+>> Blank lines please ahead of the new #define-s you add and between those new
+>> #define-s and the new decls.
+>>
+>> For igd_opregion_e820_pages I further cannot spot any use which would justify
+>> the use of a fixed-width type; unsigned int will do, and will then be in line
+>> with ./CODING_STYLE.
+> 
+> Ok I will pay more attention to CODING_STYLE. I know that libxl
+> has a specific CODING_STYLE document. Is there a specific one
+> for hvmloader? I do not see one in the tools/firmware/hvmloader
+> directory. I assume the one that matters for hvmloader is the
+> one at the top level of the Xen code source tree, not the libxl one.
+
+Yes, hvmloader follows (better: ought to follow) hypervisor style.
 
 
---=-i/xjFyj0sIBrhyIUdgpg
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+>>> --- /dev/null
+>>> +++ b/tools/firmware/hvmloader/intel_opregion.c
+>>> @@ -0,0 +1,297 @@
+>>> +/*
+>>> + * intel_opregion.c: HVM Intel OpRegion setup.
+>>> + *
+>>> + * Leendert van Doorn, leendert@watson.ibm.com
+>>> + * Copyright (c) 2005, International Business Machines Corporation.
+>>> + *
+>>> + * Copyright (c) 2006, Keir Fraser, XenSource Inc.
+>>
+>> What do these cover?
+> 
+> I am considering this new file to be a modified/derived version of
+> tools/hvmloader/pci.c, so if I understand correctly this file needs
+> to retain the copyright information of tools/hvmloader/pci.c. At the
+> very least, the #include statements at the top of this new file which
+> are from tools/hvmloader/pci.c are covered by these copyrights. I also
+> consider the statements that are moved from tools/hvmloader/pci.c to
+> this new file to be covered by these copyrights. IANAL, so to be safe,
+> I include these copyrights even though the covered code is relatively
+> small compared to the rest of the file.
 
-On Tue, 2026-08-11 at 16:40 -0700, Sean Christopherson wrote:
->=20
-> Invoking kvm_guest_time_update() here is probably a deal-breaker.=C2=A0 U=
-pdating the
-> master clock and other internal state is far from ideal, but should be ok=
-.
->=20
-> However, writing guest memory is not.=C2=A0 Specifically, dirtying memory=
- after the
-> last KVM_RUN is a non-starter for many usecases, as is modifying state th=
-at is
-> visible via other GET uAPI (though I don't think that applies here?).=C2=
-=A0 E.g. see
-> commits:
+Nowadays our preferred option is to omit such copyright statements
+altogether, but we wouldn't insist on the omission. I further don't think
+#include-s are copyrightable. 
 
-Ack. Calling kvm_guest_time_update() is also *entirely* pointless. We
-are in masterclock mode, by definition, as this ioctl only works in
-masterclock mode. So kvm_guest_time_update() isn't actually creating
-any new information; it just calculates the same per-VM tsc_shift/mul.
-And kvm_vcpu_ioctl_get_clock_guest() could just use those directly.
-Even better, it can do so *inside* the seqcount loop.
+>>> +    static unsigned long rvda_host;
+>>> +    static unsigned long rvda_guest;
+>>
+>> Why static? The function can't be called more than once, if I'm not mistaken.
+> 
+> I think you are right that we only do the setup once so I will
+> drop static here. I still think if I drop static I will want to
+> initialize these to zero later, because (correct me if I am wrong)
+> only static variables are initialized to zero if not explicitly
+> initialized, and without either static or an initialized value,
+> these would be initialized to some undetermined random value
+> until explicitly set to the desired initial value. Of the two,
+> I think that the more important one to intitialize to zero is
+> rvda_host, because I use an initial value of zero for that variable
+> to test for the case when we do not need extended VBT support.
 
-Fixup below (not amending commits while you're co-opting the tree, as
-we'd both go insane). I'll push it to the top of=20
-https://git.infradead.org/?p=3Dusers/dwmw2/linux.git;a=3Dshortlog;h=3Drefs/=
-heads/kvmclock9-part2
-on top of with the offset test which is already there.
+Well, like all variables, these ones also will need to be sensibly
+initialized. That's entirely unrelated to the use of static; all
+static gets you in this regard is that there's implicit default
+initialization. Yet that alone is no reason to use static.
 
->  And we'd probably want to build on my idea to report that
-> KVM_RUN needs completion[*], but that'd be a good thing overall.
->=20
-> https://lore.kernel.org/all/20250111012450.1262638-1-seanjc@google.com=C2=
-=A0
+>>> +    igd_opregion_pgbase = mem_hole_alloc(IGD_OPREGION_PAGES);
+>>> +    /*
+>>> +     * Tentative value for the number of pages to reserve
+>>> +     * in the E820 map for the OpRegion and VBT.
+>>> +     *
+>>> +     * This will be the final value for the E820 map if
+>>> +     * the device model lacks support for OpRegion 2 or
+>>> +     * if the host OpRegion version is < 2 or if we never
+>>> +     * allocate more pages in the E820 map for the VBT.
+>>> +     */
+>>> +    igd_opregion_e820_pages = IGD_OPREGION_PAGES;
+>>> +
+>>> +    /*
+>>> +     * Read the value the device model is initialized with.
+>>> +     * If the device model supports OpRegion 2, it will
+>>> +     * return the host IGD OpRegion address. If not, it
+>>> +     * will return 0. If the device model does not support
+>>> +     * OpRegion 2, the device model expects us to give it
+>>> +     * the address to which it will map the OpRegion in the
+>>> +     * guest and then expects us to do nothing more to setup
+>>> +     * the OpRegion, so that is all we will do in that case.
+>>> +     */
+>>
+>> Hmm, exposing the host opregion to a guest certainly feels like an issue.
+> 
+> Well, that is how it is now. I am only retaining it to maintain backward
+> compatiblily with DM versions that do not support the extended VBT and
+> OpRegion 2+. My previous comment about backward compatibilty and DM
+> compatibility also applies here. If we don't worry about that, we can do
+> away with any cases where we are permanently mapping the host opregion to
+> the guest and implement this new approach of always exposing a copy of
+> the OpRegion and VBT to the guest instead.
 
-Aha... *that* is why I found that lore thread open in my browser
-yesterday; I was confused about how I'd got there. It's missing
-KVM_EXIT_XEN btw. (Of which, KVM_EXIT_XEN_HYPERCALL is the only
-subtype. I suspect Jo=C3=A3o originally expected that there would be more).
+How does "permanently mapping" matter? hvmloader runs inside the guest, so
+exposure just to copy the data isn't any better in terms of this being a
+layering violation. The more correct thing to do might be for the DM to
+put in place a copy before the guest (i.e. hvmloader) even gains control.
+(How in turn the DM would learn of the contents of the opregion is a
+separate question then.)
 
-=46rom d2e54f439f0a5c0f2bddeaead916b23daedb2b2f Mon Sep 17 00:00:00 2001
-From: David Woodhouse <dwmw@amazon.co.uk>
-Date: Fri, 14 Aug 2026 07:56:58 +0100
-Subject: [PATCH] fixup! KVM: x86: Add KVM_[GS]ET_CLOCK_GUEST for accurate K=
-VM
- clock migration
+>>> +    const uint32_t igd_host_opregion = pci_readl(vga_devfn,
+>>> +                                                 PCI_INTEL_OPREGION);
+>>> +    if ( !igd_host_opregion ) {
+>>
+>> Nit (style) Brace placement (throughout).
+> 
+> Ok. I see this is not the proper coding style.
+> 
+>>
+>>> +        printf("device model lacks extended VBT "
+>>> +               "support. Continuing with legacy support only\n");
+>>
+>> This message can easily confuse / worry people. (If it was to be kept, it
+>> would also need style adjustment.)
+> 
+> I think some message is needed here to indicate the incompatibility of
+> versions of the DM that do not support the extended VBT with versions
+> of hvmloader that do, especially if we are not going to worry as much
+> about the backward compatibility / DM compatibility problem I mentioned
+> multiple times in previous comments above.
+> 
+> This message could encourage upgrading the DM to a version that supports
+> the extended VBT instead of just giving this scary notification.
 
-Make KVM_GET_CLOCK_GUEST stateless, never writing guest memory.
+But someone expecting legacy behavior could be misguided by the message
+(e.g. into wondering whether there's something wrong.)
 
-Invoking kvm_guest_time_update() from the GET ioctl writes the guest's
-pvclock pages, and dirtying guest memory after the final KVM_RUN breaks
-migration flows which have already completed their last dirty-log pass.
+>>> +    const uint32_t igd_host_opregion_page_offset =
+>>> +                   igd_host_opregion & IGD_OPREGION_MASK;
+>>
+>> I think like in the hypervisor we don't want to mix declarations and
+>> statements just yet.
+> 
+> The only way I could separate the declaration from the statement would be
+> to drop the const modifier because if I do:
+> 
+>     const uint32_t igd_host_opregion_page_offset;
+> ...
+>     igd_host_opregion_page_offset = igd_host_opregion &
+>                                     IGD_OPREGION_MASK;
+> 
+> The compiler will report an error. If I drop the const modifier from
+> the declaration, the compiler will not report an error but I lose the
+> protection the compiler gives me from making mistakes by modifying a
+> variable's value that should be constant.
+> 
+> I am not a C guru but some research indicates that while it is legal in
+> C to declare a variable with the const modifier without also assigning
+> it a value at the same time with a statement, it is not recommended to
+> do this because the variable will be initialized with some undefined
+> random value that cannot be changed because we used the const modifier
+> in the declaration. This implies strict enforcemnt of the rule "we
+> don't mix declarations and statements" results also in the corollary
+> rule "we never use the const modifier for variables in C."
 
-There is no need for it. The only outputs previously taken from the
-vCPU's shadow pvclock were tsc_shift and tsc_to_system_mul, and in
-master clock mode (which this ioctl requires; it returns -ENODATA
-otherwise) those are identical to the master clock's own mul/shift:
-both are computed by kvm_get_time_scale() from the same guest TSC
-frequency, which all vCPUs share. Use ka->master_tsc_{shift,mul}
-directly, which pvclock_update_vm_gtod_copy() precomputed for exactly
-this kind of vCPU-less consumer.
+Indeed we rarely use const on variables (or parameters) themselves. It's
+primary use is on pointed-to types.
 
-The only remaining per-vCPU input is kvm_read_l1_tsc(), which is a pure
-read, translating the master clock snapshot into the vCPU's own TSC
-domain.
+>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
+>>> +               (igd_opregion_pgbase << PAGE_SHIFT) |
+>>> +                IGD_OPREGION2_SUPPORT_MASK);
+>>
+>> This looks to imply qemu is the only possible device model.
+> 
+> Yeah, this is an issue. Other device models that intend to support
+> the Intel IGD with hvmloader will also have to be compatible with this.
+> It would be easier if we did not have to worry about backward
+> compatibility and supporting what we had in the codebase for many years
+> in both hvmloader and Qemu and we would not need IGD_OPREGION2_SUPPORT_MASK
+> in that case. Instead, we would just completely deprecate all previous
+> implementations of the Intel IGD passthrough feature in both hvmloader and
+> the Qemu DM as unsupported. So my previous comments about backward
+> compatibility apply here again.
 
-This also removes the -EBUSY case and the special handling of a vCPU
-which has never run: the master clock state exists from VM creation,
-so the pvclock can always be constructed. And it moves the reads of
-tsc_shift, tsc_to_system_mul and flags inside the seqcount loop, where
-they should have been all along: previously they could tear against a
-concurrent master clock update.
+As said, I don't think backward compatibility can be dropped. My comment
+also didn't really mean to hint in that direction. Instead I was wondering
+in how far, even if perhaps by only a few #define-s, the necessary
+interfacing couldn't be put down in a public header, for any DM to consume.
 
-A KVM_REQ_CLOCK_UPDATE pending on the vCPU is now left pending rather
-than being consumed: the pvclock returned here is anchored to the
-current master clock snapshot and describes the same linear function
-of the guest TSC as the guest-visible copy, so there is nothing to
-refresh. The guest's own pages are updated, as ever, only from KVM_RUN.
+>>> +    printf("guest OpRegion tentative "
+>>> +           "address: 0x%x\n", igd_guest_opregion);
+>>> +
+>>> +    if ( !verify_opregion(igd_guest_opregion) ) {
+>>> +        printf("error: IGD OpRegion signature "
+>>> +               "not found.\n");
+>>
+>> No full stop in messages please.
+> 
+> Would it be OK to just get rid of the error message here?
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
----
- arch/x86/kvm/x86.c | 37 ++++++++++++++++---------------------
- 1 file changed, 16 insertions(+), 21 deletions(-)
+That would then leave ...
 
-diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 8eb73e3ada66..4de98cc16751 100644
---- a/arch/x86/kvm/x86.c
-+++ b/arch/x86/kvm/x86.c
-@@ -3460,27 +3460,22 @@ static int kvm_vcpu_ioctl_enable_cap(struct kvm_vcp=
-u *vcpu,
- static int kvm_vcpu_ioctl_get_clock_guest(struct kvm_vcpu *v, void __user =
-*argp)
- {
- 	struct pvclock_vcpu_time_info hv_clock =3D {};
--	struct kvm_vcpu_arch *vcpu =3D &v->arch;
- 	struct kvm_arch *ka =3D &v->kvm->arch;
- 	unsigned int seq;
-=20
- 	/*
--	 * If KVM_REQ_CLOCK_UPDATE is already pending, or if the pvclock
--	 * has never been generated at all, call kvm_guest_time_update().
--	 * Its only failure mode is transient (the TSC frequency of the
--	 * current CPU is momentarily unknown), so return -EBUSY to tell
--	 * userspace to try again.
--	 */
--	if (kvm_check_request(KVM_REQ_CLOCK_UPDATE, v) || !vcpu->hw_tsc_hz) {
--		guard(srcu)(&v->kvm->srcu);
--
--		if (kvm_guest_time_update(v))
--			return -EBUSY;
--	}
--
--	/*
--	 * Reconstruct the pvclock from the master clock state, matching
--	 * exactly what kvm_guest_time_update() writes to the guest.
-+	 * Construct the pvclock purely from the master clock state. The
-+	 * master mul/shift are computed for the guest TSC frequency, which
-+	 * in master clock mode is the frequency of every vCPU; only the
-+	 * tsc_timestamp is per-vCPU, translating the master snapshot into
-+	 * this vCPU's TSC domain via its scaling ratio and offset.
-+	 *
-+	 * Note, this deliberately does NOT invoke kvm_guest_time_update(),
-+	 * which would write the guest's pvclock pages: dirtying guest
-+	 * memory after the final KVM_RUN would break post-copy migration
-+	 * flows. The pvclock returned here describes the same clock as the
-+	 * guest-visible copy (the same linear function of the guest TSC),
-+	 * anchored at the current master clock snapshot.
- 	 */
- 	do {
- 		seq =3D read_seqcount_begin(&ka->pvclock_sc);
-@@ -3490,12 +3485,12 @@ static int kvm_vcpu_ioctl_get_clock_guest(struct kv=
-m_vcpu *v, void __user *argp)
-=20
- 		hv_clock.tsc_timestamp =3D kvm_read_l1_tsc(v, ka->master_cycle_now);
- 		hv_clock.system_time =3D ka->master_kernel_ns + ka->kvmclock_offset;
-+		hv_clock.tsc_shift =3D ka->master_tsc_shift;
-+		hv_clock.tsc_to_system_mul =3D ka->master_tsc_mul;
-+		hv_clock.flags =3D ka->all_vcpus_matched_tsc ?
-+				 PVCLOCK_TSC_STABLE_BIT : 0;
- 	} while (read_seqcount_retry(&ka->pvclock_sc, seq));
-=20
--	hv_clock.tsc_shift =3D vcpu->pvclock_tsc_shift;
--	hv_clock.tsc_to_system_mul =3D vcpu->pvclock_tsc_mul;
--	hv_clock.flags =3D ka->all_vcpus_matched_tsc ? PVCLOCK_TSC_STABLE_BIT : 0=
-;
--
- 	if (copy_to_user(argp, &hv_clock, sizeof(hv_clock)))
- 		return -EFAULT;
-=20
---=20
-2.43.0
+>>> +        BUG();
 
+... an un-annotated BUG(), which generally isn't very nice.
 
---=-i/xjFyj0sIBrhyIUdgpg
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Transfer-Encoding: base64
+>>> +    }
+>>> +   --snip --
+>>> +        rvda_host = 0;
+>>> +    }
+>>> +    const uint32_t rvda_host_page_offset = rvda_host &
+>>> +                                           IGD_OPREGION_MASK;
+>>
+>> Why host_page_offset here when ...
+>>
+>>> +    const uint32_t rvds = *(uint32_t *)(opregion_scratch +
+>>> +                                        IGD_OPREGION_RVDS);
+>>> +    const uint32_t rvds_page_offset = rvds & IGD_OPREGION_MASK;
+>>
+>> ... it's just page_offset here, and when further you use it below to set
+>> rvda_guest?
+> 
+> The size of the VBT, rvds, is the same on both host and guest, so we do not
+> need to specify host or guest, but the base address of the VBT, rvda, is
+> not the same on the guest as it is on the host, so we need to specify which
+> one for rvda. I can change this to rvds_host_page_offset because it is
+> not wrong, but it might be confusing because I use that value later on
+> for computations involving the guest also.
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCE8Ew
-ggWvMIIEl6ADAgECAhANkOKMSmGXhF5eMl0rsRhvMA0GCSqGSIb3DQEBDAUAMGUxCzAJBgNVBAYT
-AlVTMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xJDAi
-BgNVBAMTG0RpZ2lDZXJ0IEFzc3VyZWQgSUQgUm9vdCBHMjAeFw0yNDAzMTMwMDAwMDBaFw0zNDAz
-MTIyMzU5NTlaMGIxCzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UE
-AxMxRGlnaUNlcnQgQXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTCCAiIw
-DQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBAOfSIeC0vv1xPQ+dgSxbIIrkaru6skAWJYaGFzmv
-q4Kq+2wU2jxhcWlJg/JeP5jEkq/LM3pn5aaLao79j+XRmS7J1ZpJKUODJVoM4s9MQJhTMvo4qS5Z
-S64g6QR7Obkz3I1Lr3aWeSBmDDEyzue+NKtuWZ1Cxy3RdXo/w5HgRc3l2AercOM3Gt1XonTzEtTb
-Z/Hwc0Sn9Gz8RmGRK6Ka4hVDl8q/2l110KaV233Kh5etP0csXS8MIMdVRfRu3sc5hp13DG7lCKzK
-72a2GEpI8Wpl26G6I1/LMzz/98T+FqjTqxsdquk7Cj7m2vKGLW1BorpQH7WFGPdJQXJe1hfbfiZA
-CcVdCtl4nAacFacmsiArZBfX7AQGL7isvHUwwYFEtcApyGW4p2Lt+t8nvU0CANA6BHOpOz1xOP8W
-mAESbUriIjyuTUf3fJ9oDNCurVqhASMJCDaWI3lYX/QAoiAzt6akqbbZxo2ujW7mGGqc0KxqE2cs
-h2T79v7pC8aUtHBfwNrTR19GnZVxE0eQ7ViIQhR6mpSaUQFA9sG+cmD2G8TnCgYsLa0q8De6F61a
-CBevQGHNzrbZ3JAMneveYg/Jy1XxQHDRcvrMfWKe0jjcWbdKYlaGVPm5V1ILwYz7Yv5ewo3NUrxI
-GJiywe9qPhuJSDZs7VehTuI0FxGIsgKzVjgbAgMBAAGjggFcMIIBWDASBgNVHRMBAf8ECDAGAQH/
-AgEAMB0GA1UdDgQWBBT3m6JO05fF9DQPQw6Bhc6RkzKv+TAfBgNVHSMEGDAWgBTOw0q5mVXyuNtg
-v6l+vVa1lzan1jAOBgNVHQ8BAf8EBAMCAYYwHQYDVR0lBBYwFAYIKwYBBQUHAwQGCCsGAQUFBwMC
-MHkGCCsGAQUFBwEBBG0wazAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29tMEMG
-CCsGAQUFBzAChjdodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkSURS
-b290RzIuY3J0MEUGA1UdHwQ+MDwwOqA4oDaGNGh0dHA6Ly9jcmwzLmRpZ2ljZXJ0LmNvbS9EaWdp
-Q2VydEFzc3VyZWRJRFJvb3RHMi5jcmwwEQYDVR0gBAowCDAGBgRVHSAAMA0GCSqGSIb3DQEBDAUA
-A4IBAQA+b8Uw53sDspdZgukU+qzLyyHkcjlxGGhHlP+zrmDLKm1wEFvCRS2pili3Hy67i8N4N5NU
-vw5Rg6kv3lxb9S9Rktxk43k+tvm68pl7OxQE55ZjVY87P0lUPGwEqOOwLLyH02ZQcsfq5p5LrOH9
-0JvmvZ1yy73HS+VpDAqOlytE0NSvTIRqFFkKQGQwfjvtql9YflujuNNvJztjBaHKYZsnNSg+J38o
-jYq4TP3pSg3UdVH0PncVjPQyqxC9xef5Xae92Kbkzol3x7Nel3A1bwAkalrDMspvTHvey6LfiBks
-FIqviTnoy7fgjaRAJgHS+RXx/cmuRd3rUAclSVVrYu8RMIIHAzCCBOugAwIBAgIQAzUotrsybJHx
-HTjKOIVdIDANBgkqhkiG9w0BAQsFADBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQs
-IEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFzc3VyZWQgRzIgU01JTUUgUlNBNDA5NiBTSEEzODQg
-MjAyNCBDQTEwHhcNMjYwNzE4MDAwMDAwWhcNMjgwMTA0MjM1OTU5WjAeMRwwGgYDVQQDDBNkd213
-MkBpbmZyYWRlYWQub3JnMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA2pYux73kdbYX
-sWF8f1u6DJP91qcqaZetsyfPkZk0B+MmXmAEv0kVes5n15V2mbDThOnpoPFly0UugQO9JYqLfrtD
-tKD5yL58fgrDB9Dw+LQikgrHafl6YSCds5AvUu/8hw2J6noKrcOLJpKlKn9Fl/4IB9Q3JIdLx5aa
-EtTqMalIPqHFOlgrJ7s+aua8xbB8YQ9ahqYBXWRJNv3P/2b1DYtdrz1oqZPE3CcB8Pc6Gf2a1Tcm
-6TAgtEx7Cf1BFcrsrMz7TWHmGQITieNb2r9UYWSc2Gp+GtYFNJCgT0JJXKUBIauPMKBLteYrL8Fo
-ff/uY44dC/mDWjdCP/5x0qelPQjlBvWdHL5zvBTOj06rJ0m3HNI/hnIcDh0Qu2j9reb9rLVcdym6
-bWmBM4uDEB8Zv9Ph0KTBFSy1IosyakuD1j1Os30EzjGfbi0EUXIvnOcYbTBAbM5UAzrxEHMhBvoX
-Pvnx+OyvjJmc9tWxTX6AcSz+m40esbT17URBeZS18afgieiikm5TynlUYP1LciR3hSgGVzvGXnKO
-02VDFR5itGWdRKZ2W5wIShNfWfhSa0D0K5UdIDt5Qc7sjzwK1Yb1sY5Tu0uA5mhIS82q1ov83uxB
-sFkriNnhGv/M1NCDVLBiOMsHu73qUM+yKmgKLwF9Hfn9WI25glbAMI4S5r3hYzcCAwEAAaOCAfcw
-ggHzMB8GA1UdIwQYMBaAFPebok7Tl8X0NA9DDoGFzpGTMq/5MB0GA1UdDgQWBBRcYhqbcGzn1jrT
-JOZaB8O7qllDpzAwBgNVHREEKTAngRNkd213MkBpbmZyYWRlYWQub3JngRBkYXZpZEB3b29kaG91
-LnNlMBQGA1UdIAQNMAswCQYHZ4EMAQUBAjAOBgNVHQ8BAf8EBAMCBeAwHQYDVR0lBBYwFAYIKwYB
-BQUHAwIGCCsGAQUFBwMEMIGpBgNVHR8EgaEwgZ4wTaBLoEmGR2h0dHA6Ly9jcmwzLmRpZ2ljZXJ0
-LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsME2gS6BJ
-hkdodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZT
-SEEzODQyMDI0Q0ExLmNybDCBjQYIKwYBBQUHAQEEgYAwfjAkBggrBgEFBQcwAYYYaHR0cDovL29j
-c3AuZGlnaWNlcnQuY29tMFYGCCsGAQUFBzAChkpodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20v
-RGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZTSEEzODQyMDI0Q0ExLmNydDANBgkqhkiG9w0B
-AQsFAAOCAgEAocabrh1cPd5s3vY5rnlBVQSTc7zs2ZWs67dAIltR+05WELrYClVzzUhMs/LOJPlr
-EUo45UDDomXq38DxFepaPd9+iNLjXfn33EX/IG44j04lU/oF/Rg9VeQILkYLbCZ/x9wOjNHZc4SN
-ydY7Dhvf/sT5aBz88u7D5+azZJ7Qf1U57wYseCH1Mt0nDrtr5y19IJ8D9xJJ33RFL6vfpHZBBAQ8
-+3RqkKNxLoV2aFvQhxdhjNLDqTv3LjUIdicwPraN7JkxEu7CV2Lka7eRqJgkWL7SK0YmBjGpRafs
-+icP/ON5RCCKTTb6VlX8eTG2sJJfsFhvJNCCt6xexbWzWtIrfP7NvPBvwBB737AyEGBZkS5aNizT
-McURJGTv9UKvBh1LF/+tNhYtLvPCN7oecGzhCHht9jcwSkygTo3Y6YlK3QgOu+ncmiBbfeuwlLZ1
-LxbYvG6hgNqXv7u6YyADbYajAQJXJ2OQen39pm3Q/AQSyLYG+B8lDglWsM8tYXPlEdrYJcksGK6F
-nqIX6Bumn43rBooLJdiZp4WmfWdL2pxe+LxRDjprmqu1WprixDxULSTOKJZoqTlugs6y3Bc+if+s
-gHnBBtz9WQ6MtPHkh7zONDAFIKcBmv8OqPQCx0F3Wv3OEybwMpXx0OsKgK8wLldaX1pXcMuyDgTL
-Sqs0AV0OHUgwggcDMIIE66ADAgECAhADNSi2uzJskfEdOMo4hV0gMA0GCSqGSIb3DQEBCwUAMGIx
-CzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UEAxMxRGlnaUNlcnQg
-QXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTAeFw0yNjA3MTgwMDAwMDBa
-Fw0yODAxMDQyMzU5NTlaMB4xHDAaBgNVBAMME2R3bXcyQGluZnJhZGVhZC5vcmcwggIiMA0GCSqG
-SIb3DQEBAQUAA4ICDwAwggIKAoICAQDali7HveR1thexYXx/W7oMk/3Wpyppl62zJ8+RmTQH4yZe
-YAS/SRV6zmfXlXaZsNOE6emg8WXLRS6BA70liot+u0O0oPnIvnx+CsMH0PD4tCKSCsdp+XphIJ2z
-kC9S7/yHDYnqegqtw4smkqUqf0WX/ggH1Dckh0vHlpoS1OoxqUg+ocU6WCsnuz5q5rzFsHxhD1qG
-pgFdZEk2/c//ZvUNi12vPWipk8TcJwHw9zoZ/ZrVNybpMCC0THsJ/UEVyuyszPtNYeYZAhOJ41va
-v1RhZJzYan4a1gU0kKBPQklcpQEhq48woEu15isvwWh9/+5jjh0L+YNaN0I//nHSp6U9COUG9Z0c
-vnO8FM6PTqsnSbcc0j+GchwOHRC7aP2t5v2stVx3KbptaYEzi4MQHxm/0+HQpMEVLLUiizJqS4PW
-PU6zfQTOMZ9uLQRRci+c5xhtMEBszlQDOvEQcyEG+hc++fH47K+MmZz21bFNfoBxLP6bjR6xtPXt
-REF5lLXxp+CJ6KKSblPKeVRg/UtyJHeFKAZXO8Zeco7TZUMVHmK0ZZ1EpnZbnAhKE19Z+FJrQPQr
-lR0gO3lBzuyPPArVhvWxjlO7S4DmaEhLzarWi/ze7EGwWSuI2eEa/8zU0INUsGI4ywe7vepQz7Iq
-aAovAX0d+f1YjbmCVsAwjhLmveFjNwIDAQABo4IB9zCCAfMwHwYDVR0jBBgwFoAU95uiTtOXxfQ0
-D0MOgYXOkZMyr/kwHQYDVR0OBBYEFFxiGptwbOfWOtMk5loHw7uqWUOnMDAGA1UdEQQpMCeBE2R3
-bXcyQGluZnJhZGVhZC5vcmeBEGRhdmlkQHdvb2Rob3Uuc2UwFAYDVR0gBA0wCzAJBgdngQwBBQEC
-MA4GA1UdDwEB/wQEAwIF4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwgakGA1UdHwSB
-oTCBnjBNoEugSYZHaHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0QXNzdXJlZEcyU01J
-TUVSU0E0MDk2U0hBMzg0MjAyNENBMS5jcmwwTaBLoEmGR2h0dHA6Ly9jcmw0LmRpZ2ljZXJ0LmNv
-bS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsMIGNBggrBgEF
-BQcBAQSBgDB+MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wVgYIKwYBBQUH
-MAKGSmh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNB
-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
-b3A3X/0eYkDc0iK6F8STZroAAAAAAAA=
+Why not simply drop the "host" infix, when it's not relevant?
 
+>>> +    printf("VBT size: 0x%x\n", rvds);
+>>> +
+>>> +    if ( !rvds || !rvda_host ) {
+>>> +        printf("guest OpRegion address: 0x%x\n", igd_guest_opregion);
+>>> +        rvda_host = 0;
+>>> +    }
+>>> +    /*
+>>> +     * Write rvda_host as 2 successive 32-bit values
+>>> +     * to communicate location of the VBT to the device
+>>> +     * model. If rvda_host is not 0, The device model
+>>> +     * unmaps the OpRegion and eventually maps the VBT
+>>> +     * after we also write the guest address where the
+>>> +     * VBT will be mapped.
+>>> +     *
+>>> +     * If we send rvda_host = 0 to the device model, it
+>>> +     * will assume we do not need OpRegion 2 support and
+>>> +     * it will not unmap the OpRegion.
+>>> +     */
+>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
+>>> +               (uint32_t)(rvda_host & 0xfffffffful));
+>>> +    unsigned long rvda_host_upper_32 = (uint64_t)rvda_host >> 32;
+>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
+>>> +               (uint32_t)rvda_host_upper_32);
+>>
+>> Why would you need to communicate a host property to the DM?
+> 
+> The DM cannot access the host rvda value because it is only accessible
+> from the host kernel, and the DM is only a user-space process on the host.
 
---=-i/xjFyj0sIBrhyIUdgpg--
+I don't follow this: Anything the guest can access should also be accessible
+by its DM.
+
+>>> +    /*
+>>> +     * Update the number of pages the device model
+>>> +     * needs to map for us to get a copy of the VBT.
+>>> +     *
+>>> +     * N.B.: Here, igd_opregion_pgbase is really the page
+>>> +     * base of the location where the device model will
+>>> +     * map the VBT.
+>>> +     */
+>>> +    uint32_t vbt_pages_needed = rvds >> PAGE_SHIFT;
+>>> +    if ( rvds & IGD_OPREGION_MASK )
+>>> +        vbt_pages_needed++;
+>>> +    if ( vbt_pages_needed > igd_opregion_e820_pages ) {
+>>> +        igd_opregion_pgbase = mem_hole_alloc
+>>> +                              (vbt_pages_needed - igd_opregion_e820_pages);
+>>
+>> Nit: Indentation.
+> 
+> Ok. It should always be a multiple of four spaces, I presume. I admit I did
+> not check that.
+
+Not quite. Within a wrapped expression, you need to determine what I like
+to call the "anchor point". In a function call that's the start of the
+function name. The wrapped part of the expression would then start one
+extra level (4 spaces) deeper than the anchor point. Things are different
+when there are pending open parentheses: There the wrapped part of an
+expression starts with as many extra spaces as there are pending open
+parentheses, with the outermost pending open parenthesis being the anchor
+point. E.g. (taking the example above and adding extra wrapping in the
+function argument expression just for demonstration purposes):
+
+        igd_opregion_pgbase = mem_hole_alloc
+                                  (vbt_pages_needed -
+                                   igd_opregion_e820_pages);
+
+Or alternatively
+
+        igd_opregion_pgbase =
+            mem_hole_alloc(vbt_pages_needed - igd_opregion_e820_pages);
+
+Jan
 
