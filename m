@@ -4,41 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAE20C5CFC1
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2026 19:13:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1391465.1631277 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2D86C5B572
+	for <xen-devel@archiver.kernel.org>; Sat, 15 Aug 2026 01:13:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1391558.1631287 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuxLS-00012r-8U; Fri, 14 Aug 2026 19:13:34 +0000
+	id 1wv2xR-0003mk-Kp; Sat, 15 Aug 2026 01:13:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1391465.1631277; Fri, 14 Aug 2026 19:13:34 +0000
+Received: by outflank-mailman (output) from mailman id 1391558.1631287; Sat, 15 Aug 2026 01:13:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wuxLS-00012k-5c; Fri, 14 Aug 2026 19:13:34 +0000
-Received: by outflank-mailman (input) for mailman id 1391465;
- Fri, 14 Aug 2026 19:13:32 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wv2xR-0003mV-Fb; Sat, 15 Aug 2026 01:13:09 +0000
+Received: by outflank-mailman (input) for mailman id 1391558;
+ Sat, 15 Aug 2026 01:13:07 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brchuckz@aol.com>) id 1wuxLP-00012e-RB
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 19:13:32 +0000
+ (envelope-from <Jason.Andryuk@amd.com>) id 1wv2xP-0003mP-3s
+ for xen-devel@lists.xenproject.org; Sat, 15 Aug 2026 01:13:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wuxLO-004soJ-T6
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2026 21:13:30 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wv2xO-0043rO-Gw
+ for xen-devel@lists.xenproject.org; Sat, 15 Aug 2026 03:13:06 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <brchuckz@aol.com>)
- id 6a7f68aa-8faa-0a2a0a5109dd-0a2a4505cad0-36
- for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 21:13:30 +0200
-Received: from [98.137.65.205] (helo=sonic311-24.consmr.mail.gq1.yahoo.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <brchuckz@aol.com>)
- id 6a7f68d8-4cb1-0a2a45050019-628941cd8711-3
- for <xen-devel@lists.xenproject.org>; Fri, 14 Aug 2026 21:13:30 +0200
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic311.consmr.mail.gq1.yahoo.com with HTTP; Fri, 14 Aug 2026 19:13:28 +0000
-Received: by hermes--production-bf1-54b5569bdc-bl9f6 (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID 1ccd2e992eb17031340ef65d0eddba97; 
- Fri, 14 Aug 2026 19:13:25 +0000 (UTC)
+ (envelope-from <Jason.Andryuk@amd.com>)
+ id 6a7fbd1a-bab6-0a2a0a5309dd-0a2a450ac54c-2
+ for <xen-devel@lists.xenproject.org>; Sat, 15 Aug 2026 03:13:06 +0200
+Received: from [40.107.209.11]
+ (helo=PH8PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Jason.Andryuk@amd.com>)
+ id 6a7fbd1e-f2d2-0a2a450a0019-286bd10b1fd3-4
+ for <xen-devel@lists.xenproject.org>; Sat, 15 Aug 2026 03:13:04 +0200
+Received: from CH5PR05CA0020.namprd05.prod.outlook.com (2603:10b6:610:1f0::13)
+ by DS0PR12MB8245.namprd12.prod.outlook.com (2603:10b6:8:f2::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.14; Sat, 15 Aug
+ 2026 01:12:58 +0000
+Received: from CH3PEPF0000000A.namprd04.prod.outlook.com
+ (2603:10b6:610:1f0:cafe::96) by CH5PR05CA0020.outlook.office365.com
+ (2603:10b6:610:1f0::13) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.6 via Frontend Transport; Sat, 15
+ Aug 2026 01:12:58 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ CH3PEPF0000000A.mail.protection.outlook.com (10.167.244.37) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.339.3 via Frontend Transport; Sat, 15 Aug 2026 01:12:58 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Fri, 14 Aug
+ 2026 20:12:58 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Fri, 14 Aug
+ 2026 20:12:58 -0500
+Received: from [172.20.244.139] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.45 via Frontend
+ Transport; Fri, 14 Aug 2026 20:12:56 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,225 +71,141 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="Date:Subject:From:To:Cc:References:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1786734808; bh=N5mOhM3pcLYxdtmPCBlPtPi8tMcEy9IQ0eVheW8E5UU=; h=Date:Subject:From:To:Cc:References:In-Reply-To:From:Subject:Reply-To; b=XIKpz409dKAEE+vxWMLVrkmW42Rwnqb3TSUSAiPkcb8WQgFZQkwqfwrWJMJoUX0El3l+ebga7DKEf/jfuNqAfgYLM4jaSseGWP8/NMscfzdqq06qbgsrVA0uXg9byp14njB7JBHbupGSXz8Gn17IpZBXi1xrEOr8vbmelmZcyCGVxL8IW8Uqw1eYKPQo2b7XirvgS/ePl95iKHk2eh9IrdoiUMNlQ/XYS321R+ofmb2gURNTBONbzUH+N465Mpd0nnL8ZwgKVtCaA2z1Vl+KeJ62Eun1fRpau+VNMn/w2OBqWY0UtcZvTf4kWg3/wWQz1Xd35JUp5HQAiw6FQcBJ7A==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1786734808; bh=W2GOJvWm0oO20Hcw38oTUdca3Leq4Wzq6VMhVFb8EY5=; h=X-Sonic-MF:Date:Subject:From:To:From:Subject; b=kbpn/uOAcFJG5q7w6zEIGJElWZ7r87ql24PIq/BCNqyoSNRvWKuslz2CWHPZotKZLSxjqcmNOskCLpapdFmnRjPInhXxnxe9nGdM+sPg4PgvCLhVKctpxMq3t4jsNE8riLckWCIa+/Sn3RIl5rpBHmlbyFLVPR8m590QPm/deQFAFf4pg3I90ZSNBnLGiHvARkDkmgyCqKyDuCqGD6amPKJJNa42De2c6F7C3NdCgU8eGRJxguXAXfSfB0VeAhLgq1K0N1TWlSW250/wBEb/HR3iy9QRi8GBJECH6BW7VU9yeYkacU4MbhFtjC13+oWwwqY+uhugRy3cZ2KAKi7Abg==
-X-YMail-OSG: odNvy4wVM1nwqvG_z1AEeE6RgFZbu0hYKl3eOTRJrKUNm2lZOFmXGVFN0yha3Cj
- 4FSwEKb2iYImKMO8eBnus6aNOQSRVdeveieDG_lpAK7TmZ5Y2d0Wlzwgc7DS79wj.0zaB0pTZ2cU
- ve20aJ3cRIaFaduambdkkG_kA5xoubaNRv8mA9aQNc0G_SSUWNTeIyxxx4x.nipY3NlxTMsVbffq
- e0fM3UnOQpQLyKV4MbTMcrUIYPb_6frE5jBVplUa_FN2ai.1qFHAp0SJbmHQPgPqdoLgfl.1di3Y
- KkRQWTOVZWhe6C.SV_JFGde30EwsH2v_gXJW05U9XfQJ6pomfLSSnuXof7bSQSDdpk9jsd40LxSl
- WtI1PhpJYLwgCbdfnXpR9W9NRF3wmc6H.85uJx1pqwbIMR87bs8Nr49f11CGGNuQVnw6ZSU1z_mQ
- hyOxZDRfKDTdpdduIq8Q5BuNBsJLse3yB3D5lnhsDdt8HEA4idOzWw_T9AIbYwqEoUsm_Nrlxb5o
- 2julYMdgTrEG5SulcDKlm8GwzsNTcxaw8R5UQ1sRQj8DIFYK3nG0KvSKfJVslqBiWOwIs4w90Pp4
- KpBV8IH6FR_bBAUCvW1_j9E0xcAizcZ_ZmU6xG1UdqFnjG.VUXMlqmEnoleni86NaAB5bnKSeY5r
- GfL2Jul0VvRCnJwoqHqCtkPiKE384hKWsWk.wWVLwZFR5DKVTT.TS.CiXRpuQ.tNXB7NCpNGBr9W
- pXQng6SRqUE4NUeMZM.hH3mwAk3xid4pWOyIm_oN.B9jFt4gIDHzhaqbP8k5YBsFCWBaMwjykGGB
- SU80gI4fVT6DOOB7THvylvTnEqoWjF_Oi2IIBRU6MCYz3M0hXMb3V9hhl06ASfSNfygm2LVBCZpA
- ildzE3RpKYbgKnrponecBmtHeYM7YIzH6pTjIIUEB_Nc3_pzQ28PuoEm13hPMwEB9xNBoBme4toO
- 607CBneSf3ratd._AeiOba4x_cDLHFpRKxnzP2ClfUd2ZmjnJ6XxwZbvTAOEr51h70wsJXEPLnTa
- C_p_mrnKy6Z7PTbib6NVEhB1xhdshMt.fAFThQ7cSGLimVf3_ARWY7R1SWVoZGzPuHUVt_2b.DaS
- WMfbdiSkBs0DcOIzA6F6bty7Pie77dLG1VpS87hEw4hZJqfK0IHlacWJTTK5WYR_sSjgUUlOdmy6
- erllfM5w7GiLsQhjRUS7pOZ8.6JP7blhtqGdAQhXMjy9D7wtjaqzqVf2aZC0eWEr47wjYS9i6w1j
- SwgqTrS87._ZEaR6sCy8fS4ZIpQbSB_eV.3jpK7FSeR6N6Hwl0sT0cqekG1g71CA7L43x2sM8L2F
- 1PE3jWPx5PtSerYnKurNx5p0_AOoyP_p9ttPKk.6RVshhH_G51GDRNsNYT4cRlax1C.cHCRJjXNK
- PO3kV5flrL1OfKWEPDsVn6PxpVZj2.4iGOcqwuaHlZ7.vHiJn6xMZ4SzPXU9_cip3kSCjsGhNEWF
- SriNnGWvWd0niC8qBGI0jkCwzRN6Ikpr3uTBsLyYG.Rw_djkpY.qSKg4bgYQKPRlCvEqCNjttuL4
- 9S5ZzHgU5X_bMdlxk4Ty7eJGb4R5RRPNEdBQTtYqB6DKTYydFrrCO2VJ0kZaSSLcPAI_rwVGZUfV
- pmgT0gCYYhSeN3VbrP2Ko94GQGgKvauNE39npwZ1Bzqhz2ATSCBihYQfrAXPeVadN4TUi0U3zczV
- YHU3CVV7AWgqyGqq08j3q75nyVcLpm1UIRUtumGDwk.mFmzNJ9yM6fP_rOzvdF9Dlx2Oi_IP2m39
- oyfaSKUKE1DnVmEjXKVY_56aXkkstUabd7yyLTn71qeR61laFmZ33SEcX3KrvsjDU.yfeewV1iub
- vSUL58409BDv2AOUEr1RumQ1B2JDYZVnhqRl.UV6HFMyUS6Gh8G4nUZTgsEIZktkpDKrbnKfW0Gc
- _Xf7Om2B2QNJvm.ndk.8_Uimhe3ksVvDyxtV6GYZDn84Pxjfvu9z2dM2Rd6.OXtxViJqFEAhWv.D
- K_RwhRpOFKTW_67Ty0.OzJYgvY5VqLQmLrUBQaNAXdD6q2eKmuS9natcopC7mlEjAJ4JWVoJG39N
- NYUNOqU_z7GV8KbRycs.HpC302RXsqe7RfmhLxmziJLM3WbOpZVc5.9DU18Lcib7oWBi8ICqSs3U
- LySoSojXkESmXM.XyL46HoGxLWvaasAkD2hAaK5LwyXm4k6Dg5PJgM1497iiBOS3BYCu3hDtf5GS
- qZT98tFsOEe1LVZDp_XBMBfwJwZ3VYGPde7uGK_Xb4so-
-X-Sonic-MF: <brchuckz@aol.com>
-X-Sonic-ID: eb36d364-e082-4610-afec-7ad2f07bf6fe
-Message-ID: <7a3b86dc-2036-47ac-a696-bfb15b648b73@aol.com>
-Date: Fri, 14 Aug 2026 15:13:24 -0400
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FdMlHHQdYy3OaTXVlMtl4RXnWaPP250VmbGuzjQ0JMtYWu9SggbQf+T5HCYtyHfL3PkCQTLBtdyNHAADBl+oobqUo8gkti4vP3JMk8UBTSPVg1IYcO3ZouCmys+C6SMT+D5wrdB4O5rAERj+p7DujD6hQOEngxVnhmzkEG9TKzszG9pLQf5ppgXwW67OA/PPCRfpbb0zeov9sVrSBT4zJPsqftYBQNYxA7h+SP7f2QkfaLMGejfOMmly9R6djYtvUQqx0ckbFKEydzWL7nNfjvMYMOSv2rvI9WuxnYJuYgE3WObPJxIseLjO4Yavq33VuCRVlawPJbabMFLIEQBvrQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=E+kegObjj3WTG9wSOOgkd8oQrCwJzZV6VEpn0ATfgCM=;
+ b=VPpj5/PZXrwJiWjMQ/B1D+7IjDxQeZpdPIZk5nVVz8DVCrNKFIQxai79CpTRn/0f0B6HTFJbwqfygDyoZNFPjjldJeP2ZasFGFPva0JFNeRivJUQMTsXK+5iPLEhg2jQTeAIJDTgerhnkTaEP1YZsJMl70UqRbhRRLqLmpL9TJUKKX7p9t7X0lltBeDV6E2k/WHUG5WXi6IDBJ/N+ikmT1S+pn2aRsVpbm1ccs4FtlRLzZPsPO2XNphoCu45/0rDArkLt8CALV2vQDUV63C1QiDQjVqgzg89CaJejZthfDDglnGAgp3gFZhj3jNFShVZJzZYFlujG4i3yXHHRIC87A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=apertussolutions.com smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=E+kegObjj3WTG9wSOOgkd8oQrCwJzZV6VEpn0ATfgCM=;
+ b=xoh/RXenN6qULyc3S8NiwLGPFJprwmv/gGC5GUIvQFI8d/GcIUbSsH2RflNzNLmXC4Z0fQdMAwbRtSejRutTaxwRadvCJnIev6VQdSbB++KaAb9ShGUAgEEOi21hQqw3zSPOpx4Xf1DDYLcNIiZPW9QZgl+8b4uUuhjrvMGA/NA=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Message-ID: <9e940641-ce6b-4e8b-b731-34e87f824d9b@amd.com>
+Date: Fri, 14 Aug 2026 21:12:55 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] tools/hvmloader: implement Intel IGD extended VBT
- support
-From: Chuck Zmudzinski <brchuckz@aol.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: qemu-devel@nongnu.org, Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>,
- xen-devel <xen-devel@lists.xenproject.org>,
- Anthony PERARD <anthony.perard@vates.tech>
-References: <20260802050824.10554-1-brchuckz.ref@aol.com>
- <20260802050824.10554-1-brchuckz@aol.com>
- <2110d4b7-ae37-47aa-99be-ab59e16f6167@suse.com>
- <67579eba-e222-41dd-84bf-8440d2eaf2a9@netscape.net>
- <da2200cd-def7-4cce-a6c2-9f9ac9e202ce@suse.com>
- <de56c8bd-f0e8-4fe9-8cf5-f6807698176c@aol.com>
- <02a7dc18-4184-4e86-84cb-121769187f71@suse.com>
- <1858e8e6-73fa-4017-93e2-c733fbf0ec8d@aol.com>
- <1522d7a3-eb9d-40df-9a34-7b1cfeb3680e@aol.com>
+Subject: Re: [PATCH 17/24] XSM: make Argo hooks well-formed ones
+To: "Daniel P. Smith" <dpsmith@apertussolutions.com>, Jan Beulich
+	<jbeulich@suse.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <758c8410-a18e-45dc-8944-5913e5832397@suse.com>
+ <4bd4e7f7-e005-45b4-a543-98597a9de707@suse.com>
+ <6991badc-dcc4-44b9-a048-29eb67c46d2e@apertussolutions.com>
+ <7762513c-0d3a-465a-abd9-73e3ba586556@suse.com>
+ <29546ca9-1875-4c20-b42b-39c886f3d41c@amd.com>
+ <684d46e1-4f10-4034-93c1-d0bbb495e5ab@apertussolutions.com>
 Content-Language: en-US
-In-Reply-To: <1522d7a3-eb9d-40df-9a34-7b1cfeb3680e@aol.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailer: WebService/1.1.26254 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
-X-purgate-ID: tlsNG-c201ff/1786734810-F66B52A1-82A47CBE/0/0
+From: Jason Andryuk <jason.andryuk@amd.com>
+In-Reply-To: <684d46e1-4f10-4034-93c1-d0bbb495e5ab@apertussolutions.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH3PEPF0000000A:EE_|DS0PR12MB8245:EE_
+X-MS-Office365-Filtering-Correlation-Id: f6c4f26e-ec79-414d-8e12-08defa6a5828
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|36860700016|376014|23010399003|82310400026|4143699003|6133799003|10067099003|56012099006|11063799006|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	tvKEQ/7jxg182tDQASUXUi5dj1yR3U8QZwPJz0nDdiZhpW+0IsV+o+ZKbYQWtgp7h5QyHScVNsMB7ldhBxJV9+pac5deH6e9dh7vdlJacQcRwItcjjGOqiEFcvRUI1LoYc7AOU2DcTakkmztLf41emXeqeehaiilkv1UzVyRi532WhEBzh/I2fBOVxIH2WwNKtunVQuMszWXpROxWkRdYeWN2HvZ6dOoL1QEu4YInbIwKzLh+ofAWx2HajDqXVt1QpSL1FRJNUVncv3cp1Nynk6hkp/9kLNawEBH74YBm8M55p/TItTM3UVmGw5UJKm+YCSs/GcKTZ/V+pj1bnBtPZkF53qWFrraV0zixCAWltQESTC9Ai3ZYWczx/Z+ekS0Uizuc2NzSxiQtEoGMHLcU1a9bIG6fPk/T/zPbtab5dwqa/OiQBs242sMTQmhwcPpe4dZjug0UfNb5OSr+z98jOdVsF+S1PwHf6ZgNg/OeUsmuSYmlMCgbYMkVXO6QoD4A4H2KBHIMKCpCpl4YA5JGA1MO2O6qjwTEVsFEBYTT1NEg05XpdNj6CHOhznLzQV7EzLfSUnDSHylHyc1QqlWZmxP6rWcZapgPuK3T7ujN7wXx0/uj3uBafnlOag5NiftN0+hPL5Bw/CQ1s0DM49B13T09NEbxehjIQP1x19NZaAZAS2NIveRg20NQZ2HiUr4h8eYzRKv7xB+7qtH8BTxMg==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700016)(376014)(23010399003)(82310400026)(4143699003)(6133799003)(10067099003)(56012099006)(11063799006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	JrNFdewOGFhOd+AEUTfdZxsF2EWniiahPlW63OSgS83wYxb9/EEJU0nhFe3+fzjIoA1AOP1OwnuTJfN/NrPRifN2lPwPPkqETSjBXqwCj/S3kjo+YPhpuIE3jxs0Qlxrs9pNMEGaDsLZ3dsO93dosGJRxRrSJ00Y53IekCYLbCBG386vLJ8i6BQ6pCUFwz7N90JpQ079miopClQUWUi74x53joFIjNwWBTthi+Gxf4Bt2qdzN2ClsTeqG6s+niyPVtctkG6BX746wgJgx0nxCeO2HDeVQ0TZ0ntchv8dtZhCiVvEgQs4xlhBJ/fUUUIpc3loea88Mwe16nbeduPZnO7+YMx1AueMdAe3S8+/2/ILcE8rbGG2gdw3jjoDoJa4Yn/ZWFfEMITqDT8ArqOnsvKHndZOGHC/89ERoPfX9GK5zwyBiZrrKlTqHPtfjlHN
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Aug 2026 01:12:58.5169
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f6c4f26e-ec79-414d-8e12-08defa6a5828
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CH3PEPF0000000A.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8245
+X-purgate-ID: tlsNG-4011c0/1786756384-599C1CFC-0CA981B8/0/0
 X-purgate-type: clean
-X-purgate-size: 8055
+X-purgate-size: 3031
 
-On 8/14/2026 12:18 PM, Chuck Zmudzinski wrote:
-> On 8/14/2026 11:23 AM, Chuck Zmudzinski wrote:
->> On 8/14/2026 9:46 AM, Jan Beulich wrote:
->>> On 14.08.2026 15:18, Chuck Zmudzinski wrote:
->>>> On 8/14/2026 3:35 AM, Jan Beulich wrote:
->>>>> On 14.08.2026 02:45, Chuck Zmudzinski wrote:
->>>>>> On 8/13/2026 6:35 AM, Jan Beulich wrote:
->>>>>>> On 02.08.2026 07:08, Chuck Zmudzinski wrote:
->>>>>>>> -- snip --
->>>>>
->>>>> I don't follow this: Anything the guest can access should also be accessible
->>>>> by its DM.
->>>> 
->>>> I think the host OpRegion is not currently accessible by the DM.
->>> 
->>> Can you explain to me how the region becomes accessible to the guest?
->>> That would then (hopefully) help me understand why the DM would not have
->>> access. Fundamentally any MMIO and any I/O ports that are assigned to a
->>> guest are also assigned to its DM.
->> 
->> Currently, in the device model (Qemu) we have:
->> 
->>     ret = xc_domain_memory_mapping(xen_xc, xen_domid,
->>             (unsigned long)(igd_guest_opregion >> XC_PAGE_SHIFT),
->>             (unsigned long)(igd_host_opregion >> XC_PAGE_SHIFT),
->>             XEN_PCI_INTEL_OPREGION_PAGES,
->>             DPCI_ADD_MAPPING);
->> 
->> That statement is in the igd_write_opregion(...) function in the
->> hw/xen/xen_pt_graphics.c file of the upstream Qemu source.
+On 2026-08-13 08:09, Daniel P. Smith wrote:
+> On 8/6/26 10:09 AM, Jason Andryuk wrote:
+>> On 2026-08-06 03:16, Jan Beulich wrote:
+>>> On 06.08.2026 01:02, Daniel P. Smith wrote:
+>>>> On 7/28/26 9:22 AM, Jan Beulich wrote:
+>>>>> @@ -2307,7 +2308,7 @@ argo_init(struct domain *d)
+>>>>>    {
+>>>>>        struct argo_domain *argo;
+>>>>> -    if ( !opt_argo || xsm_argo_enable(d) )
+>>>>> +    if ( !opt_argo || xsm_argo_enable(XSM_HOOK, d) )
+>>>>
+>>>> This question came up on another thread, so thought I might point it 
+>>>> out
+>>>> that when FLASK is in use this can return a nubmer of error codes 
+>>>> beyond
+>>>> an access deny. While I know it's the existing behavior, but if the
+>>>> error code is anything other than -EPERM, then it's not that the policy
+>>>> denied the access but something cause a fault in the security 
+>>>> server. In
+>>>> that case the domain is still being allowed to construct with the
+>>>> assumption that it was a policy deny. At a minimum should the error 
+>>>> code
+>>>> at least get reported, and perhaps it should be passed up to domain
+>>>> construction to allowing it to make an informed decision on 
+>>>> construction?
+>>>
+>>> Sounds plausible, but definitely wants doing in a separate patch.
+>>
+>> I think this is a mis-use of xsm_argo_enable().  As I wrote in [1], 
+>> this isn't an access decision, but an ~optimization to skip 
+>> initializing argo data structures when a domain is not allowed to use 
+>> argo.
+>>
 > 
-> I forgot to mention: In our current implementation, this statement is
-> executed in the DM when hvmloader executes this statement, currently in
-> hvmloader/pci:
+> I would have to respectfully disagree. The operation is to initialize 
+> the domain for argo usage and the access check says do not allow 
+> initialization if the domain does not have the privilege. This basic 
+> defense in depth, do not initialize for some thing you should not have 
+> access to, and thus not just relying on the later checks.
+
+I was thinking of it as robustness.  If you always initialize argo, then 
+you don't have to check ->argo for NULL for each domain.  Though, if you 
+want to selectively allow argo for individual domains, you have to check 
+something anyway.
+
+>> With Flask, this prints an AVC denial during domain construction when 
+>> the domain doesn't have argo enabled.  That is misleading as it isn't 
+>> the domain's action causing the access.  In OpenXT, I wrote a patch to 
+>> add a noaudit variant to hide the denial.  I didn't upstream it 
+>> because I didn't really like it.
+>>
 > 
->                     pci_writel(vga_devfn, PCI_INTEL_OPREGION,
->                                igd_opregion_pgbase << PAGE_SHIFT);
-> 
-> 
-> 
->> 
->> If I understand our current implementation correctly, this statement
->> is what gives the guest access to the host OpRegion (3 pages as defined
->> by XEN_PCI_INTEL_OPREGION_PAGES, and in agreement with IGD_OPREGION_PAGES
->> in hvmloader code). I don't think this statement makes the host OpRegion
->> accessible to the device model, though, so I think, if I understand your
->> comment in an earlier about my patch resulting in what you called a "layering
->> violation" correctly, that our current implementation is also guilty of this
->> same kind of "layering violation."
->> 
->> So, how do you suggest we fix that?
+> The customer has ran OpenXT through the code evaluation models that they 
+> have access to and your patch was flagged. Not for being technically 
+> incorrect, but raised policy questions on whether is was desirable to 
+> silence the event.
+Again, xsm_argo_enable(d) is used for two purposes:
+  - Access to the argo_op hypercall: current == d
+  - This argo_init(d) call: current != d
 
-Well, that is a difficult question to answer, and if no one gives an answer
-then I ask, what is the harm in making the unorthodox mapping of the OpRegion
-from the host to the guest temporary for the purpose of allowing hvmloader
-to setup the OpRegion properly for newer devices with new and updated specs
-for the OpRegion and VBT when our current implementation permanently maps
-the host OpRegion into the guest in the same unorthodox way also, that is,
-without following the normal PCI MMIO interfaces?
+Domain create always goes through argo_init().  current triggers the 
+denial, but it is logged against d.  This is misleading as d did not 
+perform any operation.
 
-I think the fundamental problem is the fact that the Intel IGD is an
-unorthodox PCI device that does not follow the normal PCI specs and
-requires adherence to Intel's proprietary specs instead.
-
-Would that be a fair description of your problem with this patch? Are
-the unorthodox requirements of the Intel IGD at the root of your issue
-with this patch?
-
-I think the reason this was allowed in the Xen codebase many years ago, I think
-over 10 years ago now, is simply because the Intel IGD is such an ubiquitous
-device that an exception for it was allowed.
-
-So, to summarize what I am being asked to do in this thread, I propose the
-next version of this patch should:
-
-1. Fix style problems in this version.
-2. provide a public header to define two protocols for providing
-   Intel IGD support via interaction between the DM and hvmloader.
-   The first protocol is the legacy protocol version, and it
-   is the version that our current implementation follows. The second
-   version is the new proposed protocol that is able to allow
-   support for an extended VBT, which is required for newer Intel
-   IGD devices.
-
-3. For now, since only hvmloader currently has access to the host
-   OpRegion in both our current implementation and the proposed new
-   protocol, hvmloader will drive the decision about which protocol
-   version to use for setting up the guest OpRegion. First, if the
-   device model lacks support for the new protocol proposed here that
-   supports the extended VBT, then hvmloader has no choice but to
-   implement the current legacy protocol. Even in that case, instead
-   of just printing a scary or confusing message about lack of support
-   for extended VBT and continuing, which is what this version of this
-   patch does, we can read the OpRegion and then print an error message
-   and BUG() (or just a WARN?) only in the case when extended VBT
-   support is needed for this hardware but such support is not available
-   in the device model. The message could say something like:
-
-   IGD: error: This device requires extended VBT support in the device model.
-   Please upgrade the device model to a version with extended VBT support
-   and try again.
-
-   If the device does not require extended VBT support, we silently continue
-   and can expect the guest will operate correctly if all else is also good.
-
-   Now for the case when the device model does support extended VBT but the
-   device is a legacy device that does not need an extended VBT. In that
-   case, I think it is better to, instead of implementing the current
-   legacy protocol which unconditionally maps 3 host pages into the guest
-   when only 2 pages are actually needed, so an extra page from the host
-   of unknown content is being exposed to the guest, we implement the new
-   protocol proposed here that will reserve only two pages for the OpRegion
-   in the E820 map and use a copy of the two-page OpRegion in the guest instead.
-   This will be a change from this v2 of this patch which just uses the three-page
-   mapped region in this case.
-
-   Then there is the fourth case when the device model supports extended VBT
-   and the device needs such support.
-
-   To understand the approach to this problem that I have implemented in this
-   patch and plan to implement in future versions until a better alternative
-   is proposed, please refer to these Linux kernel commits which added support
-   for extended VBT for KVM/vfio guests and which explain why this patch is
-   needed for the newer Intel IGD devices that need an extended VBT:
-
-   git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git bab2c1990b78 ("vfio/pci: Add support for opregion v2.1+")
-   git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git 49ba1a2976c8 ("vfio/pci: Add OpRegion 2.0+ Extended VBT support.")
-
-   So, in this case, we have to implement some means for exposing both the
-   OpRegion and the VBT to the guest, and we may need to also modify the
-   OpRegion in some cases. Specifically, the value of the rvda field in the
-   OpRegion needs to be modified in at least two cases:
-
-   A) Host OpRegion version is 2.0. In this case, rvda is the absolute address
-      of the VBT and will need to have a different value in the guest than its
-      value in the host.
-
-   B) OpRegion version is 2.1 or higher. In this case, rvda is the VBT address
-      relative to the OpRegion base but if our memory map does not allow us to
-      maintain the same relative offset of the VBT from the OpRegion base on the
-      host, rvda will need to have a different value in the guest than its value
-      in the host.
-     
-   For now, until a better way is proposed to expose the OpRegion and VBT to the
-   guest in a way that allows the guest OpRegion to be modified as described above,
-   I plan to propose the same approach of temporarily mapping the host IGD OpRegion
-   and VBT so that hvmloader can obtain a copy of each region and configure the
-   OpRegion and VBT appropriately for the guest that I have use in this patch,
-   despite Jan's objections which, as far as I can tell, also apply to our current
-   implementation.
-
-Thanks,
-
-Chuck
+Regards,
+Jason
 
