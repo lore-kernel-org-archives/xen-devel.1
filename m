@@ -4,41 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C40AC5DF6D
-	for <xen-devel@archiver.kernel.org>; Sun, 16 Aug 2026 16:39:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1392289.1631331 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 868C0C5B572
+	for <xen-devel@archiver.kernel.org>; Sun, 16 Aug 2026 19:15:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1392343.1631339 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvdsu-0006pS-E8; Sun, 16 Aug 2026 16:38:56 +0000
+	id 1wvgJu-00023M-SI; Sun, 16 Aug 2026 19:14:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1392289.1631331; Sun, 16 Aug 2026 16:38:56 +0000
+Received: by outflank-mailman (output) from mailman id 1392343.1631339; Sun, 16 Aug 2026 19:14:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvdsu-0006pK-9f; Sun, 16 Aug 2026 16:38:56 +0000
-Received: by outflank-mailman (input) for mailman id 1392289;
- Sun, 16 Aug 2026 16:38:55 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wvgJu-00023F-PQ; Sun, 16 Aug 2026 19:14:58 +0000
+Received: by outflank-mailman (input) for mailman id 1392343;
+ Sun, 16 Aug 2026 19:14:56 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brchuckz@aol.com>) id 1wvdst-0006pE-AT
- for xen-devel@lists.xenproject.org; Sun, 16 Aug 2026 16:38:55 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1wvgJs-000239-KM
+ for xen-devel@lists.xenproject.org; Sun, 16 Aug 2026 19:14:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wvdss-003RFk-1H
- for xen-devel@lists.xenproject.org; Sun, 16 Aug 2026 18:38:54 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wvgJr-00Emcq-5d
+ for xen-devel@lists.xenproject.org; Sun, 16 Aug 2026 21:14:55 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <brchuckz@aol.com>)
- id 6a81e71f-bab6-0a2a0a5309dd-0a2a4507c4c6-42
- for <xen-devel@lists.xenproject.org>; Sun, 16 Aug 2026 18:38:53 +0200
-Received: from [98.137.65.205] (helo=sonic311-24.consmr.mail.gq1.yahoo.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <brchuckz@aol.com>)
- id 6a81e79b-b4ea-0a2a45070019-628941cdad21-3
- for <xen-devel@lists.xenproject.org>; Sun, 16 Aug 2026 18:38:53 +0200
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic311.consmr.mail.gq1.yahoo.com with HTTP; Sun, 16 Aug 2026 16:38:51 +0000
-Received: by hermes--production-ne1-6dbcb84f44-59qmb (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID a7c0d4753902ab36fdd683af5fb0813d; 
- Sun, 16 Aug 2026 16:38:48 +0000 (UTC)
+ (envelope-from <marcandre.lureau@redhat.com>)
+ id 6a820c12-8faa-0a2a0a5109dd-0a2a450cc58a-6
+ for <xen-devel@lists.xenproject.org>; Sun, 16 Aug 2026 21:14:54 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <marcandre.lureau@redhat.com>)
+ id 6a820c2d-f479-0a2a450c0019-aa0a817cbed1-3
+ for <xen-devel@lists.xenproject.org>; Sun, 16 Aug 2026 21:14:54 +0200
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-331-z92NXEkZMoqJj0Kwrh29Ng-1; Sun,
+ 16 Aug 2026 15:14:49 -0400
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 4C310180086F; Sun, 16 Aug 2026 19:14:47 +0000 (UTC)
+Received: from localhost (headnet05.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.117])
+ by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 9326B1956041; Sun, 16 Aug 2026 19:14:45 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,169 +61,532 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1786898331; bh=C0sJATbIEzCXBKFkvm1mIxHiLUKgF5Nx8A6WCamwvOU=; h=Date:Subject:To:Cc:References:From:In-Reply-To:From:Subject:Reply-To; b=geP8y+qxiQc/Q0qWRmkbHjDVdDzIrnSKmPMfpuycf1VUquHTRmK/6MssLQL2aGjYE/wBwApclK+/y3J53Ff6woow3lLy4KWEsgMUuBudjiGfvzXwLhzsD+FMd8gbWWfLwhe2boXLFAZPYzRIOX4MwBhuIhU6uks7dGR5sqFc3fdhu2yZV4DLvbJuduflqk5Kl+dY6HWPk3NbPp/WVMmtyWpLaM+GSnf4enYPs8Rm/46/D84uwNRgUr0QQrnj/akQ1D3fo7U/TnJ4WRyovX+rigdbZ6YjK51PLtIquGo7SfSqbIxrqzeJ4stppps0ZJYBjdPNzPxNZKUTJDOPoQMIOA==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1786898331; bh=LigkW4p4Zw3dbQlrMjr+JkyCTSTy9CFpcs3vR5j07M4=; h=X-Sonic-MF:Date:Subject:To:From:From:Subject; b=DJq1pGZe3+7u9AMsvWnZs69Gkrtj5nD4882/rdNnI22PsIb89xUFwOaYAKrfcSgeG4MYCp+WIAF/bIv+naxE1rKiDYzCGXHe51ciSjtacB5gt2KmwZhveAJRZ2IDT6heJr70DsXHxRbKbxiwOVs4SweO2AfLdAPNoW+c/cmIa7IBI+FDLcskRqC24RGekiStNLgVE3KbS23J0LDYBf+6w7IPrnN6IzgN7VQ9a+dKumZQvDudpsvB22KfOSXl79SjdGuU163/BkK4D9DgS3QyFqeP0QkMDOrnTc7Vt/8BjKetBSLH/vc0cW9B4sH9Do7e/XJS5J9/rMbpkezRYcKo9g==
-X-YMail-OSG: mi1Fjr4VM1mKXdfSGDTmPLedmUrd3u9GsxEXg7sL4hkdA0ZlPYLC0qSwancAxiq
- 8dRCAOqzD7xesGAddhnGczRWcjdinVI0k3oW5ZQyJu_m.FvQUVsVnfKHgadsx77tWQuQVIxkWsdu
- 6p94pMZp.Hvx07jZ6CSO__VgAaACRRMDa1AYy5fnMsDoYV7nrN_B6DZPbKAWrqFBwahjPMLY.T59
- cqVTk4gMEzDiH.Z2HMQIOfDnsTph_GnMS1UZgJB2yi.MJa_XIPnPZemRcbWEJX6VkE800vZ4RXaS
- 078qFWZj8A_xSYjdlfn2MeM7u1HnaYrEREwfHYdC8DlX4GBF3rnCXA8TLtELu6mY9hOJ0Q01rO0z
- AJKaqDlAWckp7Z7TkB4_0eBbRsGblisdt0kpOjXKzyWl0G1c71bnlSM5Pv5SI33dYqJCiaC10moq
- B.oGAAhyyV6s9XFaWYKA4sipGiOp0DTimcP5TVyURxPzVvvCbbxqQYDQVwAVbk7Wws0CfOGdgSCv
- odb5NbWUwvvOnBbXylUjtcloESzMHl3Wy4yTwGE860GBkFWCsd4gr1tn3t3Y6TqgNOxh6cvhXxrG
- 2.YW1z9.uT5I_mEhKd7EfSZMhSLmPOiC2xPyuecRLYZkIcqBsYO2TRs.gZus3EMOQmFOcF0VZCIG
- eo1DLEVaKmHUrpk62Ys0UvPeqcWSs75UKIwkmQF0V6Oev5hABWu3KmPk4VjfTOiPYk8i5OJ1X3NI
- SlI3r4X.8Cp.D_k2DAbOR_ZSVubXLVOXfRtWXTiyzrpkbl0xBoYPDABfmfHHTd.TTKTXWtHR7e6C
- tvh1mrzWBywe3c1kEXpgkcNDPfltkwKsfQ6CJxJwTcIvEoXap5iHvtwh7RH9OEUoQrG4Ca3y6WOz
- INtwJdvbIo4VQ.NhbWHXdEumpsn.6wdKBnwU4YPuQnI7sk_mqChAjgoWNZa3k.aUYuDPXDzyTPCh
- 9njwCn7qJhsPYgLE3ajeja5guu2YSTIqUerRqC.rAfFcdX8BbVxCgz.GBo_4IyG8Rl7RBRLripGX
- _j25y5h03jf2F0qLRan1qXChl33zVqT8mu_Thuic9VN1tR9wx7OuMe8YcxkAO.YK9qLqT5iNyDYg
- XkFA8ojOsN6OOXa10SwawfTftaX3yQqPqzbgZJ7UFDRnup8zScG0vlkPQgzQAy72PB1k2Ok9wZZe
- GeCUWCahlW2G0SzvHL3SG17geuJbfrGpJmxpkquqN0d5ca2kGb_Cuz4deaKpwhLN4H.HYiqKRrvt
- CjSIhWZEPRZ7ZTHzIgz33hsDMjdzsu1vnqIshXkYv.xaNR73mzSSUiavZAuK36sk1g7wb25Xh1Q2
- CK8kxYnIo3UAxrqeY_9NUGFqwwbvW8hoNQBqe1wAvUVdpKimInzAiwJQHdy04dfNLexsuSBe3.3X
- o9qv8Z5Kok_FE4OeFIowMxWNOPY199iDi7upMEvCVDnNPL7PjGTH6dwwZVZeheMPa.0hUyl7FBzt
- yHP2WnWmmE8pE8o8ObmdutkqeXWxdyl4_MZXjrk5RFWkwHXjnmFxaxnQUnkGT8YzAciI.WIXTJg5
- 1Y.eLbslrwJgnYMV9jyX7E2inpR4LVZIqfeBvSTh7tf75KRsPcZKaDPHcF4m9n.6mamAPtymigDz
- Fzi3q1cNFXnfSnexrRMogce6tr8H9tVa2lr_CM6.axTfsohbJl.MbvstlH_msya4HiwgJvjhZL58
- kTFrlKuVBy86Wt9XHtaktGGYWapWRDa7CHjH8d_gjr.FhZ9C3mJwLA93rNkow5_fDegzoa3w70Um
- _8j4Kpnm9iWHICOiTr0Y5aCr41BXy8Afdg_8Hgnnop1wBX7rtI.BYiU4ULpW95oZcwVGxO4LXrYO
- bzq_FUKviEPtmlAOeySnBQ19mLzO3qWrypLAc4jnPdpISCzVtFbA3lcDPUuXOfgjJszh5m.0Kp2W
- SX8_MKcf_Lq28ge6mZbCecrePap9nJEpgDDj86.V8jR76mGqDqy.TI_ACpr60BWIu8l5BUUT4kCF
- mzwuvz6MorPmHogNz9_deBRqAq_J5Mbx5k99W2JpDfmGaXTDKu__pOnUHgAJ_UgjOh0cu6ZF4q6F
- MOEnFyIto7jLW3.lmLo9DZQnIHX_YqHNKBlPF2vtIBNj2IddNeOW5kPBHMylUWzG5RFceHfZhzpe
- elm0NqsT7GzOKQuQjIar1VsLMzrFgV3uaRllqCCXfkPcTb63ln2ZfxT98znlSQZ9iDRdnPSaQTzr
- d_jlfj4Ls0OUTFi2oq5lx0YOMUW0jHOkqaqlw.WJO
-X-Sonic-MF: <brchuckz@aol.com>
-X-Sonic-ID: 28290891-21d0-464f-b5ba-54585c5604a9
-Message-ID: <a98b7e5f-240b-4642-b488-fac69846b3f8@aol.com>
-Date: Sun, 16 Aug 2026 12:38:47 -0400
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1786907693;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=29Cd1MkKHFXGJOIFN77UUpfOSmWLs5aRZxGgmBwR2hM=;
+	b=aPFq7JJEBN/ZcHDKwfQQEtU+lFSA+QLHg6N/OxLWsTZE+LwLRW/V70LzkH6XhzYKIyixG+
+	M8vKhjBb91nxwVkfsZXqeIEA3mYwQngv0Nhcfwid/VbdjtR2kXI0NAFUtXKTlMBvpzfftO
+	3l3TN/QcVZJzYA/1Wrf4JHJsL1a55q8=
+X-MC-Unique: z92NXEkZMoqJj0Kwrh29Ng-1
+X-Mimecast-MFC-AGG-ID: z92NXEkZMoqJj0Kwrh29Ng_1786907687
+From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+Date: Sun, 16 Aug 2026 23:12:57 +0400
+Subject: [PATCH v3 30/49] monitor: isolate HMP declarations in hmp.h
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] tools/hvmloader: implement Intel IGD extended VBT
- support
-To: Jan Beulich <jbeulich@suse.com>
-Cc: qemu-devel@nongnu.org, Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>,
- xen-devel@lists.xenproject.org, Anthony PERARD <anthony.perard@vates.tech>
-References: <20260802050824.10554-1-brchuckz.ref@aol.com>
- <20260802050824.10554-1-brchuckz@aol.com>
- <2110d4b7-ae37-47aa-99be-ab59e16f6167@suse.com>
- <67579eba-e222-41dd-84bf-8440d2eaf2a9@netscape.net>
- <da2200cd-def7-4cce-a6c2-9f9ac9e202ce@suse.com>
-Content-Language: en-US
-From: Chuck Zmudzinski <brchuckz@aol.com>
-In-Reply-To: <da2200cd-def7-4cce-a6c2-9f9ac9e202ce@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailer: WebService/1.1.26254 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
-X-purgate-ID: tlsNG-ef75cf/1786898333-A54C3AE4-753FB63F/0/0
+Message-Id: <20260816-qemu-no-hmp-v3-30-e53fc35bc550@redhat.com>
+References: <20260816-qemu-no-hmp-v3-0-e53fc35bc550@redhat.com>
+In-Reply-To: <20260816-qemu-no-hmp-v3-0-e53fc35bc550@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>, 
+ =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ Markus Armbruster <armbru@redhat.com>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ =?utf-8?q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, 
+ Laurent Vivier <lvivier@redhat.com>, Amit Shah <amit@kernel.org>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, 
+ Brian Cain <brian.cain@oss.qualcomm.com>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Anthony PERARD <anthony@xenproject.org>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ "Dr. David Alan Gilbert" <dave@treblig.org>, 
+ Samuel Thibault <samuel.thibault@ens-lyon.org>, 
+ Jason Wang <jasowangio@gmail.com>, 
+ Yoshinori Sato <yoshinori.sato@nifty.com>, 
+ Stefan Hajnoczi <stefanha@redhat.com>, xen-devel@lists.xenproject.org
+X-Developer-Signature: v=1; a=openpgp-sha256; l=15760;
+ i=marcandre.lureau@redhat.com; h=from:subject:message-id;
+ bh=lsf9mg6WFQhbEoyc7nCPI/4kkgRjXQJY5QWnI4e34zM=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqgguz2JplENevptot8NnAkDfYIJ5h+RL3Jgc2M
+ 7gQ64J6GOeJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCaoILswAKCRDa6OEJdZac
+ 5cdsEACjja4Rml6Moi8e/UgJOf2s68LY0fob2xDJm7Lh6z8hgQ6vKXpzgmzaWBpSw4bUYcZqrAu
+ LS1cxllZ2BuYJkEWD68GKmUeCA/pB51MIiAFEAkRssMEMsoYKLZ1MsEN5y5k7LPagYcokAdF3gp
+ rLwu2wl8o1711y1P+WhkqHbn5Rv4pi06EU/5RBZ9IHl+S1IMQBINPuKTbyqaH8aJIeLl1PApFPY
+ k7UNK5WSE5/qUoRROq1TupbMt6otu6aYtMP62SQmjHnFtaa5g31q7XR6ZL5ZjwJsKZWN5G4VAnc
+ TkcWJ+0MqPpqCncxDAzCGpqcHn3+TnP8JG9vGN8GPQqPzbDSGldaL+lAuIj9gDuMMeEN7QlRGsZ
+ q+v5c3Uug5MRQLlkagEdq5Ekt8qLDWQmHdHSKmcutwGIUcKjnTTmBMNvca/UDSemaJn9Ur8Ophj
+ cLIGa++6Fm2ADk1fuphMBjTrONMRFNTTZemGe/wXu+rVr0JLcTrE6f4xDaudfBnrnUq3JnQt83E
+ qLWEX648V6xZF5YgYxYZAzBJRrbgSF2EZUE8srBQc91JV0FXmC3vG2woStTIBPx5F7XME9yExgC
+ QJR0I72lI/dh1By0oy6zQPIf24Vhp9bFsTwbFh3Q7ckgj07VyX3mGT2xNEuBGmJ7ezO0gCWnzp+
+ G6mKU1/x24h7BxA==
+X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
+ fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+X-Mimecast-MFC-PROC-ID: ZcCo5DK1sa0gNTKXm8xymQNgIAZtDhydKmHE9S8ykFM_1786907687
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d25034/1786907694-51538A5B-942D3E6B/0/0
 X-purgate-type: clean
-X-purgate-size: 5209
+X-purgate-size: 15762
 
-On 8/14/2026 3:35 AM, Jan Beulich wrote:
-> On 14.08.2026 02:45, Chuck Zmudzinski wrote:
->> On 8/13/2026 6:35 AM, Jan Beulich wrote:
->>> On 02.08.2026 07:08, Chuck Zmudzinski wrote:
->>>> -- snip --
->>>> +    /*
->>>> +     * Read the value the device model is initialized with.
->>>> +     * If the device model supports OpRegion 2, it will
->>>> +     * return the host IGD OpRegion address. If not, it
->>>> +     * will return 0. If the device model does not support
->>>> +     * OpRegion 2, the device model expects us to give it
->>>> +     * the address to which it will map the OpRegion in the
->>>> +     * guest and then expects us to do nothing more to setup
->>>> +     * the OpRegion, so that is all we will do in that case.
->>>> +     */
->>>
->>> Hmm, exposing the host opregion to a guest certainly feels like an issue.
->> 
->> Well, that is how it is now. I am only retaining it to maintain backward
->> compatiblily with DM versions that do not support the extended VBT and
->> OpRegion 2+. My previous comment about backward compatibilty and DM
->> compatibility also applies here. If we don't worry about that, we can do
->> away with any cases where we are permanently mapping the host opregion to
->> the guest and implement this new approach of always exposing a copy of
->> the OpRegion and VBT to the guest instead.
-> 
-> How does "permanently mapping" matter? hvmloader runs inside the guest, so
-> exposure just to copy the data isn't any better in terms of this being a
-> layering violation. The more correct thing to do might be for the DM to
-> put in place a copy before the guest (i.e. hvmloader) even gains control.
-> (How in turn the DM would learn of the contents of the opregion is a
-> separate question then.)
+Also rename password & commands with hmp in the name, while at it.
+Other functions need larger changes which we will take care of next.
 
-Hi Jan,
+Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+---
+ accel/accel-system.c           |  1 +
+ accel/tcg/monitor.c            |  1 +
+ chardev/char.c                 |  2 +-
+ disas/disas-mon.c              |  1 +
+ gdbstub/system.c               |  2 +-
+ hw/char/virtio-serial-bus.c    |  1 +
+ hw/core/machine-hmp-cmds.c     |  1 -
+ hw/core/sysbus.c               |  1 +
+ hw/hexagon/hexagon_tlb.c       |  1 +
+ hw/misc/auxbus.c               |  1 +
+ hw/usb/bus.c                   |  1 +
+ hw/usb/host-libusb.c           |  1 +
+ hw/xen/xen-bus.c               |  1 +
+ include/monitor/hmp.h          | 21 +++++++++++++++++++++
+ include/monitor/monitor.h      | 18 ------------------
+ monitor/hmp.c                  |  8 ++++----
+ monitor/monitor-internal.h     |  1 +
+ net/slirp.c                    |  1 +
+ stubs/monitor-core.c           |  1 +
+ stubs/monitor-internal.c       |  2 +-
+ target/rx/disas.c              |  1 +
+ tests/unit/test-util-sockets.c |  1 +
+ tools/qemu-vnc/stubs.c         |  1 +
+ trace/trace-hmp-cmds.c         |  1 -
+ ui/ui-hmp-cmds.c               |  4 ++--
+ util/error-report.c            |  2 +-
+ util/qemu-print.c              |  1 +
+ 27 files changed, 48 insertions(+), 30 deletions(-)
 
-I am working on v3 of this patch and I want v3 to address this problem of a
-"layering violation" that you mentioned here, but I do not understand exactly
-what you mean. Do you mean to say that the current code we have in place and
-have had in place for over the past 10 years [1] in the Qemu DM that traps and
-maps the OpRegion into the guest is a "layering violation?"
+diff --git a/accel/accel-system.c b/accel/accel-system.c
+index 9176665202d2..977804c4048a 100644
+--- a/accel/accel-system.c
++++ b/accel/accel-system.c
+@@ -28,6 +28,7 @@
+ #include "qom/compat-properties.h"
+ #include "qapi/qapi-commands-accelerator.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "hw/core/boards.h"
+ #include "hw/core/cpu.h"
+ #include "accel/accel-ops.h"
+diff --git a/accel/tcg/monitor.c b/accel/tcg/monitor.c
+index be5c1950177c..74170ddef708 100644
+--- a/accel/tcg/monitor.c
++++ b/accel/tcg/monitor.c
+@@ -11,6 +11,7 @@
+ #include "qapi/type-helpers.h"
+ #include "qapi/qapi-commands-machine.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "system/tcg.h"
+ #include "tcg/tcg.h"
+ #include "internal-common.h"
+diff --git a/chardev/char.c b/chardev/char.c
+index c6c8133f5c1d..9da0911e503c 100644
+--- a/chardev/char.c
++++ b/chardev/char.c
+@@ -24,7 +24,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "qemu/cutils.h"
+-#include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "monitor/qmp-helpers.h"
+ #include "qemu/config-file.h"
+ #include "qemu/error-report.h"
+diff --git a/disas/disas-mon.c b/disas/disas-mon.c
+index 9c693618c277..bc9dec3a7761 100644
+--- a/disas/disas-mon.c
++++ b/disas/disas-mon.c
+@@ -10,6 +10,7 @@
+ #include "system/memory.h"
+ #include "hw/core/cpu.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ 
+ /*
+  * Get LENGTH bytes from info's buffer, at target address memaddr.
+diff --git a/gdbstub/system.c b/gdbstub/system.c
+index 070bc26f416c..8a1cdb11db36 100644
+--- a/gdbstub/system.c
++++ b/gdbstub/system.c
+@@ -29,7 +29,7 @@
+ #include "hw/core/boards.h"
+ #include "chardev/char.h"
+ #include "chardev/char-fe.h"
+-#include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "trace.h"
+ #include "internals.h"
+ 
+diff --git a/hw/char/virtio-serial-bus.c b/hw/char/virtio-serial-bus.c
+index c1973f0248fc..02604740f86a 100644
+--- a/hw/char/virtio-serial-bus.c
++++ b/hw/char/virtio-serial-bus.c
+@@ -25,6 +25,7 @@
+ #include "qemu/module.h"
+ #include "migration/qemu-file-types.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qemu/error-report.h"
+ #include "qemu/queue.h"
+ #include "hw/core/qdev-properties.h"
+diff --git a/hw/core/machine-hmp-cmds.c b/hw/core/machine-hmp-cmds.c
+index 686304bafab5..1c700aad3587 100644
+--- a/hw/core/machine-hmp-cmds.c
++++ b/hw/core/machine-hmp-cmds.c
+@@ -15,7 +15,6 @@
+ 
+ #include "qemu/osdep.h"
+ #include "monitor/hmp.h"
+-#include "monitor/monitor.h"
+ #include "qapi/error.h"
+ #include "qapi/qapi-builtin-visit.h"
+ #include "qapi/qapi-commands-accelerator.h"
+diff --git a/hw/core/sysbus.c b/hw/core/sysbus.c
+index 3e1160ee921d..13df7cbafe10 100644
+--- a/hw/core/sysbus.c
++++ b/hw/core/sysbus.c
+@@ -21,6 +21,7 @@
+ #include "qapi/error.h"
+ #include "hw/core/sysbus.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "system/address-spaces.h"
+ 
+ static void sysbus_dev_print(Monitor *mon, DeviceState *dev, int indent);
+diff --git a/hw/hexagon/hexagon_tlb.c b/hw/hexagon/hexagon_tlb.c
+index b6d4aff389e5..2d878cee736d 100644
+--- a/hw/hexagon/hexagon_tlb.c
++++ b/hw/hexagon/hexagon_tlb.c
+@@ -12,6 +12,7 @@
+ #include "hw/core/resettable.h"
+ #include "migration/vmstate.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qapi/error.h"
+ #include "exec/page-protection.h"
+ #include "exec/target_page.h"
+diff --git a/hw/misc/auxbus.c b/hw/misc/auxbus.c
+index 877f34560626..ac2525b90fec 100644
+--- a/hw/misc/auxbus.c
++++ b/hw/misc/auxbus.c
+@@ -33,6 +33,7 @@
+ #include "hw/misc/auxbus.h"
+ #include "hw/i2c/i2c.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qapi/error.h"
+ 
+ #ifndef DEBUG_AUX
+diff --git a/hw/usb/bus.c b/hw/usb/bus.c
+index 3b6fbd46ac3f..9b9b2e7c2f8f 100644
+--- a/hw/usb/bus.c
++++ b/hw/usb/bus.c
+@@ -9,6 +9,7 @@
+ #include "system/system.h"
+ #include "migration/vmstate.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "trace.h"
+ #include "qemu/cutils.h"
+ 
+diff --git a/hw/usb/host-libusb.c b/hw/usb/host-libusb.c
+index b9f3ad3f66dd..af67d5dfeb10 100644
+--- a/hw/usb/host-libusb.c
++++ b/hw/usb/host-libusb.c
+@@ -48,6 +48,7 @@
+ #include "qapi/error.h"
+ #include "migration/vmstate.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qemu/error-report.h"
+ #include "qemu/main-loop.h"
+ #include "qemu/module.h"
+diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
+index dfad2bc5085f..a563f6066bb4 100644
+--- a/hw/xen/xen-bus.c
++++ b/hw/xen/xen-bus.c
+@@ -17,6 +17,7 @@
+ #include "hw/xen/xen-bus.h"
+ #include "hw/xen/xen-bus-helper.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qapi/error.h"
+ #include "qobject/qdict.h"
+ #include "system/system.h"
+diff --git a/include/monitor/hmp.h b/include/monitor/hmp.h
+index 9258a049bffb..166cd4100c63 100644
+--- a/include/monitor/hmp.h
++++ b/include/monitor/hmp.h
+@@ -18,6 +18,9 @@
+ #include "qapi/qapi-types-common.h"
+ #include "monitor/monitor.h"
+ 
++#define TYPE_MONITOR_HMP "monitor-hmp"
++OBJECT_DECLARE_TYPE(MonitorHMP, MonitorHMPClass, MONITOR_HMP);
++
+ #define HMP_STUB(cmd) \
+     void hmp_##cmd(Monitor *mon, const QDict *qdict) \
+     { \
+@@ -30,6 +33,24 @@ struct MonitorDef {
+     int64_t (*get_value)(Monitor *mon, const MonitorDef *md, int offset);
+ };
+ 
++void monitor_new_hmp(const char *id, const char *chardev_id,
++                     bool use_readline, Error **errp);
++
++int monitor_vprintf(Monitor *mon, const char *fmt, va_list ap)
++    G_GNUC_PRINTF(2, 0);
++int monitor_printf(Monitor *mon, const char *fmt, ...) G_GNUC_PRINTF(2, 3);
++void monitor_printc(Monitor *mon, int ch);
++
++void monitor_hmp_read_command(MonitorHMP *hmp, int show_prompt);
++int monitor_hmp_read_password(MonitorHMP *hmp, ReadLineFunc *readline_func,
++                              void *opaque);
++
++void monitor_register_hmp(const char *name, bool info,
++                          void (*cmd)(Monitor *mon, const QDict *qdict));
++void monitor_register_hmp_info_hrt(const char *name,
++                                   HumanReadableText *(*handler)(Error **errp));
++
++
+ CPUArchState *mon_get_cpu_env(Monitor *mon);
+ CPUState *mon_get_cpu(Monitor *mon);
+ 
+diff --git a/include/monitor/monitor.h b/include/monitor/monitor.h
+index 9f048ba103b5..72a8f6ea5b4f 100644
+--- a/include/monitor/monitor.h
++++ b/include/monitor/monitor.h
+@@ -10,9 +10,6 @@
+ #define TYPE_MONITOR "monitor"
+ OBJECT_DECLARE_TYPE(Monitor, MonitorClass, MONITOR);
+ 
+-#define TYPE_MONITOR_HMP "monitor-hmp"
+-OBJECT_DECLARE_TYPE(MonitorHMP, MonitorHMPClass, MONITOR_HMP);
+-
+ #define TYPE_MONITOR_QMP "monitor-qmp"
+ OBJECT_DECLARE_TYPE(MonitorQMP, MonitorQMPClass, MONITOR_QMP);
+ 
+@@ -30,8 +27,6 @@ void monitor_init_globals_core(void);
+ char *monitor_compat_id(void);
+ void monitor_new_qmp(const char *id, const char *chardev_id,
+                      bool pretty, Error **errp);
+-void monitor_new_hmp(const char *id, const char *chardev_id,
+-                     bool use_readline, Error **errp);
+ int monitor_new(MonitorOptions *opts, bool allow_hmp, Error **errp);
+ int monitor_new_opts(QemuOpts *opts, Error **errp);
+ void monitor_cleanup(void);
+@@ -43,28 +38,15 @@ int monitor_get_fd(Monitor *mon, const char *fdname, Error **errp);
+ int monitor_fd_param(Monitor *mon, const char *fdname, Error **errp);
+ 
+ int monitor_puts(Monitor *mon, const char *str);
+-int monitor_vprintf(Monitor *mon, const char *fmt, va_list ap)
+-    G_GNUC_PRINTF(2, 0);
+-int monitor_printf(Monitor *mon, const char *fmt, ...) G_GNUC_PRINTF(2, 3);
+-void monitor_printc(Monitor *mon, int ch);
+ void monitor_flush(Monitor *mon);
+ int monitor_get_cpu_index(Monitor *mon);
+ 
+ int monitor_puts_locked(Monitor *mon, const char *str);
+ void monitor_flush_locked(Monitor *mon);
+ 
+-void monitor_read_command(MonitorHMP *hmp, int show_prompt);
+-int monitor_read_password(MonitorHMP *hmp, ReadLineFunc *readline_func,
+-                          void *opaque);
+-
+ AddfdInfo *monitor_fdset_add_fd(int fd, bool has_fdset_id, int64_t fdset_id,
+                                 const char *opaque, Error **errp);
+ int monitor_fdset_dup_fd_add(int64_t fdset_id, int flags, Error **errp);
+ void monitor_fdset_dup_fd_remove(int dup_fd);
+ 
+-void monitor_register_hmp(const char *name, bool info,
+-                          void (*cmd)(Monitor *mon, const QDict *qdict));
+-void monitor_register_hmp_info_hrt(const char *name,
+-                                   HumanReadableText *(*handler)(Error **errp));
+-
+ #endif /* MONITOR_H */
+diff --git a/monitor/hmp.c b/monitor/hmp.c
+index 8134dfaad4bb..b4d05d47c4bf 100644
+--- a/monitor/hmp.c
++++ b/monitor/hmp.c
+@@ -136,7 +136,7 @@ static void monitor_command_cb(void *opaque, const char *cmdline,
+     monitor_resume(&hmp->parent_obj);
+ }
+ 
+-void monitor_read_command(MonitorHMP *hmp, int show_prompt)
++void monitor_hmp_read_command(MonitorHMP *hmp, int show_prompt)
+ {
+     if (!hmp->rs) {
+         return;
+@@ -148,8 +148,8 @@ void monitor_read_command(MonitorHMP *hmp, int show_prompt)
+     }
+ }
+ 
+-int monitor_read_password(MonitorHMP *hmp, ReadLineFunc *readline_func,
+-                          void *opaque)
++int monitor_hmp_read_password(MonitorHMP *hmp, ReadLineFunc *readline_func,
++                              void *opaque)
+ {
+     if (hmp->rs) {
+         readline_start(hmp->rs, "Password: ", 1, readline_func, opaque);
+@@ -1647,7 +1647,7 @@ static void monitor_hmp_complete(UserCreatable *uc, Error **errp)
+                                     monitor_readline_flush,
+                                     hmp,
+                                     monitor_find_completion);
+-            monitor_read_command(hmp, 0);
++            monitor_hmp_read_command(hmp, 0);
+         }
+ 
+         qemu_chr_fe_set_handlers(&hmp->parent_obj.chr,
+diff --git a/monitor/monitor-internal.h b/monitor/monitor-internal.h
+index fdeeeb853636..ee9ba0c8231e 100644
+--- a/monitor/monitor-internal.h
++++ b/monitor/monitor-internal.h
+@@ -27,6 +27,7 @@
+ 
+ #include "chardev/char-fe.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qapi/qapi-emit-events.h"
+ #include "qapi/qapi-types-control.h"
+ #include "qapi/qapi-types-qom.h"
+diff --git a/net/slirp.c b/net/slirp.c
+index 517dd23be14b..9bf09a2c8bc9 100644
+--- a/net/slirp.c
++++ b/net/slirp.c
+@@ -36,6 +36,7 @@
+ #include "clients.h"
+ #include "hub.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qemu/error-report.h"
+ #include "qemu/sockets.h"
+ #include <libslirp.h>
+diff --git a/stubs/monitor-core.c b/stubs/monitor-core.c
+index a7c32297c90a..b0c7002bd406 100644
+--- a/stubs/monitor-core.c
++++ b/stubs/monitor-core.c
+@@ -1,5 +1,6 @@
+ #include "qemu/osdep.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qapi/qapi-emit-events.h"
+ 
+ Monitor *monitor_cur(void)
+diff --git a/stubs/monitor-internal.c b/stubs/monitor-internal.c
+index 731fad221ecc..6f69f1f14ae4 100644
+--- a/stubs/monitor-internal.c
++++ b/stubs/monitor-internal.c
+@@ -1,6 +1,6 @@
+ #include "qemu/osdep.h"
+ #include "qapi/error.h"
+-#include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ 
+ int monitor_get_fd(Monitor *mon, const char *name, Error **errp)
+ {
+diff --git a/target/rx/disas.c b/target/rx/disas.c
+index 67b932882914..0eb2ee6f4507 100644
+--- a/target/rx/disas.c
++++ b/target/rx/disas.c
+@@ -19,6 +19,7 @@
+ #include "qemu/osdep.h"
+ #include "disas/dis-asm.h"
+ #include "qemu/bitops.h"
++#include "monitor/hmp.h"
+ #include "cpu.h"
+ 
+ typedef struct DisasContext {
+diff --git a/tests/unit/test-util-sockets.c b/tests/unit/test-util-sockets.c
+index ab3f39c3efb5..b2a884529598 100644
+--- a/tests/unit/test-util-sockets.c
++++ b/tests/unit/test-util-sockets.c
+@@ -24,6 +24,7 @@
+ #include "qapi/error.h"
+ #include "socket-helpers.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ 
+ static void test_fd_is_socket_bad(void)
+ {
+diff --git a/tools/qemu-vnc/stubs.c b/tools/qemu-vnc/stubs.c
+index 1c82d8cff430..26597fefaa99 100644
+--- a/tools/qemu-vnc/stubs.c
++++ b/tools/qemu-vnc/stubs.c
+@@ -9,6 +9,7 @@
+ #include "system/runstate.h"
+ #include "hw/core/qdev.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "migration/vmstate.h"
+ 
+ bool runstate_is_running(void)
+diff --git a/trace/trace-hmp-cmds.c b/trace/trace-hmp-cmds.c
+index 390173095cff..c8f0133abecf 100644
+--- a/trace/trace-hmp-cmds.c
++++ b/trace/trace-hmp-cmds.c
+@@ -25,7 +25,6 @@
+ #include "qemu/osdep.h"
+ #include "monitor/hmp.h"
+ #include "monitor/hmp-completion.h"
+-#include "monitor/monitor.h"
+ #include "qapi/error.h"
+ #include "qapi/qapi-commands-trace.h"
+ #include "qobject/qdict.h"
+diff --git a/ui/ui-hmp-cmds.c b/ui/ui-hmp-cmds.c
+index 806a7bece7cb..4ef459490ba2 100644
+--- a/ui/ui-hmp-cmds.c
++++ b/ui/ui-hmp-cmds.c
+@@ -327,7 +327,7 @@ static void hmp_change_read_arg(void *opaque, const char *password,
+                                 void *readline_opaque)
+ {
+     qmp_change_vnc_password(password, NULL);
+-    monitor_read_command(opaque, 1);
++    monitor_hmp_read_command(opaque, 1);
+ }
+ 
+ void hmp_change_vnc(Monitor *mon, const char *device, const char *target,
+@@ -344,7 +344,7 @@ void hmp_change_vnc(Monitor *mon, const char *device, const char *target,
+     }
+     if (!arg) {
+         MonitorHMP *hmp = MONITOR_HMP(mon);
+-        monitor_read_password(hmp, hmp_change_read_arg, NULL);
++        monitor_hmp_read_password(hmp, hmp_change_read_arg, NULL);
+     } else {
+         qmp_change_vnc_password(arg, errp);
+     }
+diff --git a/util/error-report.c b/util/error-report.c
+index f333af9249b9..aaa15bc79827 100644
+--- a/util/error-report.c
++++ b/util/error-report.c
+@@ -11,7 +11,7 @@
+  */
+ 
+ #include "qemu/osdep.h"
+-#include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qemu/error-report.h"
+ 
+ /*
+diff --git a/util/qemu-print.c b/util/qemu-print.c
+index 7b9591035e57..a2d1f0244168 100644
+--- a/util/qemu-print.c
++++ b/util/qemu-print.c
+@@ -12,6 +12,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qemu/qemu-print.h"
+ 
+ /*
 
-[1] https://xenbits.xen.org/gitweb/?p=qemu-xen.git;a=commitdiff;h=5cec8aa38cc
-("xen, gfx passthrough: add opregion mapping")
+-- 
+2.55.0.543.g5ebe2ebe4ea8
 
->>>> +    /*
->>>> +     * Write rvda_host as 2 successive 32-bit values
->>>> +     * to communicate location of the VBT to the device
->>>> +     * model. If rvda_host is not 0, The device model
->>>> +     * unmaps the OpRegion and eventually maps the VBT
->>>> +     * after we also write the guest address where the
->>>> +     * VBT will be mapped.
->>>> +     *
->>>> +     * If we send rvda_host = 0 to the device model, it
->>>> +     * will assume we do not need OpRegion 2 support and
->>>> +     * it will not unmap the OpRegion.
->>>> +     */
->>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
->>>> +               (uint32_t)(rvda_host & 0xfffffffful));
->>>> +    unsigned long rvda_host_upper_32 = (uint64_t)rvda_host >> 32;
->>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
->>>> +               (uint32_t)rvda_host_upper_32);
->>>
->>> Why would you need to communicate a host property to the DM?
->> 
->> The DM cannot access the host rvda value because it is only accessible
->> from the host kernel, and the DM is only a user-space process on the host.
-> 
-> I don't follow this: Anything the guest can access should also be accessible
-> by its DM.
-
-I also don't follow your comment here so permit me to comment and ask some
-questions for clarification.
-
-I was thinking it is enough for the domain the DM is running in to have
-access to the resource for it to be legitimate for the DM to map the resource
-into the guest. So I also think that whether or not the DM itself can access
-the resource is irrelevant to the question. But you seem to be saying, no,
-that is not enough, the DM itself should be able to access the resource
-before it can be allowed to map the resource to its guest. Is that what you
-are saying?
-
-Perhaps your comment here is related to the concept of a "layering violation"
-mentioned above. Are you saying it is a layering violation for the DM to
-map an MMIO resource to its guest unless it actually has access to that
-resource? If so, what kind of access to those device resources should the
-DM have? Read access? Read/Write access?
-
-If the specs only say the DM "should" have access to the resources it maps
-into its guest, then I would think it would not be a layering violation.
-But if the specs say the DM "must" have access before it asks the hypervisor
-to map the resource to the guest, then I would admit that yes, we have a
-layering violation because the DM is mapping the OpRegion to the guest
-even though it does not have access to the OpRegion.
-
-So, where are the specs for what the DM can and cannot do? Are they publicly
-available, or are they proprietary or only available to members of the Linux
-Foundation and/or the Xen Project? If the specs are publicly available, then
-if possible, please show me the specific place in the specs where the Qemu DM
-is violating the specs when it maps the OpRegion to its guest.
-
-Thanks,
-
-Chuck
 
