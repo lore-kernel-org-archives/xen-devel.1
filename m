@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36B5DC5B572
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 07:56:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1392552.1631514 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEB6BC5B572
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 08:04:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1392572.1631523 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvsCT-0004tb-Gb; Mon, 17 Aug 2026 07:56:05 +0000
+	id 1wvsKR-0007Gx-Qf; Mon, 17 Aug 2026 08:04:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1392552.1631514; Mon, 17 Aug 2026 07:56:05 +0000
+Received: by outflank-mailman (output) from mailman id 1392572.1631523; Mon, 17 Aug 2026 08:04:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvsCT-0004tU-Dr; Mon, 17 Aug 2026 07:56:05 +0000
-Received: by outflank-mailman (input) for mailman id 1392552;
- Mon, 17 Aug 2026 07:56:03 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wvsKR-0007Gq-NL; Mon, 17 Aug 2026 08:04:19 +0000
+Received: by outflank-mailman (input) for mailman id 1392572;
+ Mon, 17 Aug 2026 08:04:18 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wvsCR-0004tJ-JE
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 07:56:03 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wvsKQ-0007Gk-0I
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 08:04:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wvsCQ-007gmq-DJ
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 09:56:02 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wvsKO-00B0S6-Ut
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 10:04:16 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a82be81-e002-0a2a0a5209dd-0a2a4507af8e-48
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 09:56:02 +0200
-Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a82c07e-e002-0a2a0a5209dd-0a2a4501e0cc-10
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 10:04:16 +0200
+Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a82be92-b4ea-0a2a45070019-d155dd35f16d-3
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 09:56:02 +0200
-Received: by mail-wr1-f53.google.com with SMTP id
- ffacd0b85a97d-47f7872abb6so1683202f8f.3
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 00:56:02 -0700 (PDT)
+ id 6a82c080-5984-0a2a45010019-d1558035e911-3
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 10:04:16 +0200
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-499840a2575so22781665e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 01:04:16 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482a5a3b51asm1816281f8f.11.2026.08.17.00.56.01
+ 5b1f17b1804b1-4998777a4bdsm194504845e9.0.2026.08.17.01.04.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Aug 2026 00:56:01 -0700 (PDT)
+ Mon, 17 Aug 2026 01:04:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,57 +55,65 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786953362; x=1787558162; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1786953856; x=1787558656; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=sFCUkMv3GpQ40PwNsMuGVFNvWtlkQzWO5EkN+a9wFOQ=;
-        b=Wv+MVVJ5RCkrY2N4humStusJh3VvX85uuLxGGPogvFz9bzYnatM7iPXUzaIHk18IBA
-         LM9/ZF3/pi+FoRCpPftwRbP/uGMtbnL0NKfysdb65rMm1/wtoCW0gk/amtTryZ0TC3Q3
-         4FIzN81Uger6XRgfNVuch5E+axs58QqYs0zU64lWJ36QQcGn1pYGzNQjKRUC6mSzWaKJ
-         r+cqkWLE3AoNHAta+hMj/lrwy2TG/aTpelxGQaPbU/213/jP69XQyUIu9bD/Ek1ENCxM
-         pUpHB9njaAXSiqmUWOIg/RyEJ5xI3wHBpvwoLv2COTgcMp0M5Cb/gveApEAQfOyquuV7
-         6lXQ==
+        bh=ZwA+s9SCvQuxMCv5Ld0oS/Efv+CDqAxMJOLLQr5GkoE=;
+        b=cwLn2t5Cn9VZGJTZ+2TzKnea00elVqPGPSdihcUmgcfDEeb6cZ8qlzJ2Vd/BB6297s
+         sJFC7dj7f/Qtf6uOOyLm3Eo8XklSLwHprSLjXNZAi89VraRpBBJ5hOCzkymIt38hSjYL
+         pRhIeEMe2vNVHE0sEsConDocx5wiOXkAnRVzj+doZcqbCY3G/UjsLSdUONwLVgZdUgJs
+         uiQpXJnF+5nKS7qvbiT0crpXRsSjR3K3J5WsGkijqRssf5VwkNXLVOg88EFp4RvTbhHc
+         nBLMB8M8LBO0hA6T4SD486AQmVCG6IV+hXYRwGEJ7rUkE6aZbWZIc4lTRvCiHz0g+BB8
+         8bVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786953362; x=1787558162;
+        d=1e100.net; s=20251104; t=1786953856; x=1787558656;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=sFCUkMv3GpQ40PwNsMuGVFNvWtlkQzWO5EkN+a9wFOQ=;
-        b=dIBrjZN9Gfjhbq8dSSHWbt7ObbAgFlK0scZYnLHsE5qfdYVCgyBBfATaPOH5o3oLL5
-         W2uXSxE7Ef5OF+8tHLL1MWpEPsMdrzCsFXbGp66RM+ApphWGuP/7/GZoOvwiSHRiN0pR
-         eiiyZYQlnUHPX8untZi4TO+UH2riM6zlQxAw1B4M2V3ZARr50fdCL1Jhl6MA1Q0NWiS1
-         GfgEsd+crTvVC1EKJfg6hgp48AR1YMAfKo90qTnojK4mYlRhGsT77BU0Lt3D4g+B2ETG
-         NYWYsIRB+69Qat6vfbVyrqU+QZgiUVeIKCGoi0iIegSp6IHx20pK8IMkQRCc9+XQPfeB
-         jTqA==
-X-Forwarded-Encrypted: i=1; AHgh+RopiTAOyPHCU8oin1ua0nloZv62BEFQk26+nu7meXXVAUMe8qS63ub6cA6he7RHt5BVfE/rzjyncX0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwdR+4mxAw8W335iXeHBQBbAe9u2ZikYOug8aeufsO6/NMtJDf/
-	46w73ywKxB7viZODMRCGLCrDwJUcVT9fwKA35QYoVHtycFEpAPUI8blaEKjDnmN02Q==
-X-Gm-Gg: AR+sD12oSVqLfN9rBPlwmTadOMJXFJIyUak7ViasNeqaZC5Vs0aq2nIT075JpEqQadF
-	zLAUFuzMpm0uJ075A8EbTXUkDIICOoulKPdNweLLtD5LQYmzfUfs0E65V8K4bs1aDgC5oDHkTnD
-	0QDYM8azxXaQASCD88kX0K3ZFdbsiXkzFU6u68qi1iF1jfqwo+EtUobOMpLVeQBrPNsYhsbyJFS
-	e5idyliUhGyfa+Ru7rCe8Ha2LZErVLfbVz0KWe5NCKTj03oACDX8pnxgOX2Rrr5YEKqSxrRsCUy
-	1jE2Rn1tJmD8zLmsZaV2LBgK/DQ7pbHnD5czK8ILDv5d7DQV/ZxbyjfXrpDFVcK5VjMud8dkLrJ
-	L1mcExKSEk4U6DYHlt5tlD8ZYpCVTkzcZArs5wdBhw1CIvZzXYShtYxlVn6RtE2gbJSrMxA7cX+
-	6XID9o0j83AaXCHfZ/MEoqHay8NgxAsz5FMYjJgsdaiVnbevr5MfreX0fby0obABBJmL00/gRlO
-	4pnnfo88OiVpVFYZY9PfxEBKrGk3s92D1ZFSbpTFwqqCDaxhV63
-X-Received: by 2002:a05:6000:401e:b0:47f:34ba:2d0d with SMTP id ffacd0b85a97d-48160705173mr32034788f8f.8.1786953361727;
-        Mon, 17 Aug 2026 00:56:01 -0700 (PDT)
-Message-ID: <aab2b1da-afc0-45fc-bffd-769993e6808e@suse.com>
-Date: Mon, 17 Aug 2026 09:56:03 +0200
+        bh=ZwA+s9SCvQuxMCv5Ld0oS/Efv+CDqAxMJOLLQr5GkoE=;
+        b=S1ZqYjmb9QENCDOqid7XEGUo4IV1YXYPxOhKoXcNOi0XgVgYx0KUVAtVKsASf0mxKr
+         4A9sD1bWkmkhB8RSLqiZoSoMi4pvgApUiLNFceYrbomc6SulKnyRWFs3A+ZlI+uvNqwc
+         yljkfwp5CQnUHrdJEyy4KzJf/Y2dnf/Uzq+RVRoEk/VVWPJlouOkGk+qoIXiwKPjxgnG
+         hM9evRoMXo8XXEtI6D1uM1PONZaT6jFXSAupN43yiJxVSBfM2Rg6zuVmmVjS7tJz2KXc
+         8LI+9YTmbJm5rH4XAWrZR/4kn9u5T7oXbSXXJU2aeo4ZP4bbe7LhivpYuR6ULSiUDjRS
+         eQkQ==
+X-Forwarded-Encrypted: i=1; AHgh+Ro5cDgu6OXSBJst3suUlnezNfU7engu8QIqRN7b48OWkUwe8zWIFZ2zZiLZk7oekL149wP8+y77gIc=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Ywmgs4b0p/IgM2pRvb7G6iceuG8hjuO88qijTO+5aLwuaUUGDHJ
+	/8eu37gCUolDx07WS65A9gj8EhOaDOWaPSFxEO9XY6cujOA6pTlHo1mduKoy734HYg==
+X-Gm-Gg: AR+sD11NVo0oKjHefKrvqBCx/MFlsp66zHgKgUzyhpHDHblKDzPpOkXfj3iIz3ZBZJy
+	AimKTHieeqFGRzGre7KXlmT7QMeNYxXqB0eXGO5Brpxe1huafciDNl4BaNw4mzDRdqJ45LdUngp
+	0wK7+jedIDTxsAIRfscAEf3QkM/FoRWI9xabV2tC1ZS750oVWNkn/MacCyz3/5PoH/xyQUi+vSO
+	ixo3OPaSrZzh+vJXamF2LVSV6uj2NnwZ3cDosf9GlFkhT8YMWgyHI679hvASIDpNG+Y0WPBlgpr
+	RanonG5sz//GCu+QJwzDn7OqvOkqD72WAyi9rwihW7dGp14CeDsrFJ0eGbigDWthvRNOo1oOEBD
+	Xglov/kdxPY4LJPwrR9yneh4bFBH2iKeY6eYC6OQ9nhhXuySc8YyO8ZdUzJxkc5LBJAIBklM7ME
+	m1BJLPsYMgiVMZxU8xpn3MdpGz1/P4ijzibyEkS3nqIwBZFlxsigWRF/Uk+5Rfm72QnbHmEB4tt
+	Wsgk84d/mAMV4lTY1my90kUnue4dPukbNYkIn2JzoLD5lHIapZPAU/ZUCpGpWAX+VvobX5pM2s=
+X-Received: by 2002:a05:600c:4e04:b0:499:9069:c2c9 with SMTP id 5b1f17b1804b1-4999069cf2bmr290885915e9.11.1786953856189;
+        Mon, 17 Aug 2026 01:04:16 -0700 (PDT)
+Message-ID: <e697b132-8c6a-411b-b91d-2fedba02a9ae@suse.com>
+Date: Mon, 17 Aug 2026 10:04:17 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] Config: update Mini-OS commit id
-To: Juergen Gross <jgross@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+Subject: Re: [PATCH v10 7/10] xen: implement new foreign copy hypercall
+To: Frediano Ziglio <freddy77@gmail.com>
+Cc: "Daniel P . Smith" <dpsmith@apertussolutions.com>,
+ Frediano Ziglio <frediano.ziglio@citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20260817071843.114898-1-jgross@suse.com>
- <20260817071843.114898-2-jgross@suse.com>
+ Teddy Astie <teddy.astie@vates.tech>,
+ Anthony PERARD <anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>,
+ xen-devel@lists.xenproject.org
+References: <20260810103018.54564-1-frediano.ziglio@citrix.com>
+ <20260810103018.54564-8-frediano.ziglio@citrix.com>
+ <43d1ce4a-3a49-42c9-b277-47a89698513f@suse.com>
+ <CAHt6W4enamC9rVMK98+q=pWCuXQL1DPgNTCGWMVR-Q2NvX8uTw@mail.gmail.com>
+ <b10dbef6-a467-49d0-858e-d88f268e2dfd@suse.com>
+ <CAHt6W4dWQvSg1_XtkKowTcznUWs=-ApbvatV4YrQSKR8zJTA0A@mail.gmail.com>
+ <e3d4f0a8-e95a-4dc3-8ca0-df857725d60d@suse.com>
+ <CAHt6W4ftLMsk41zdwYUXEwN_JzzXHQG01vhSqutkgk8PO6xAQw@mail.gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,18 +139,76 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260817071843.114898-2-jgross@suse.com>
+In-Reply-To: <CAHt6W4ftLMsk41zdwYUXEwN_JzzXHQG01vhSqutkgk8PO6xAQw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ef75cf/1786953362-A46CAAE4-87FD5C9D/0/0
+X-purgate-ID: tlsNG-d62444/1786953856-1D87F757-F9A4BB25/0/0
 X-purgate-type: clean
-X-purgate-size: 171
+X-purgate-size: 2858
 
-On 17.08.2026 09:18, Juergen Gross wrote:
-> Use the newest Mini-OS.
+On 14.08.2026 16:50, Frediano Ziglio wrote:
+> On Fri, 14 Aug 2026 at 15:13, Jan Beulich <jbeulich@suse.com> wrote:
+>> On 14.08.2026 15:47, Frediano Ziglio wrote:
+>>> On Thu, 13 Aug 2026 at 15:22, Jan Beulich <jbeulich@suse.com> wrote:
+>>>> On 13.08.2026 16:03, Frediano Ziglio wrote:
+>>>>> On Thu, 13 Aug 2026 at 10:41, Jan Beulich <jbeulich@suse.com> wrote:
+>>>>>> On 10.08.2026 12:30, Frediano Ziglio wrote:
+>>>>>>> --- a/xen/common/memory.c
+>>>>>>> +++ b/xen/common/memory.c
+>>>>>>> @@ -1548,6 +1548,141 @@ static int acquire_resource(
+>>>>>>>      return rc;
+>>>>>>>  }
+>>>>>>>
+>>>>>>> +/*
+>>>>>>> + * The "noinline" qualifier avoids the compiler to create a large function
+>>>>>>> + * consuming quite a lot of stack.
+>>>>>>> + */
+>>>>>>> +static int noinline mem_foreigncopy(
+>>>>>>
+>>>>>> I'm wondering: Is the "mem" prefix really meaningful for a static function in
+>>>>>> a file named memory.c?
+>>>>>>
+>>>>>
+>>>>> Changed
+>>>>>
+>>>>>>> +    XEN_GUEST_HANDLE_PARAM(xen_foreigncopy_t) arg)
+>>>>>>> +{
+>>>>>>> +    struct domain *d, *const currd = current->domain;
+>>>>>>
+>>>>>> With the comment on the new XSM hooks (below) in mind: currd wants to be
+>>>>>> pointer-to-const.
+>>>>>>
+>>>>>
+>>>>> Just rebased on master, all XSM hooks accept no-const pointers to domains.
+>>>>> So the suggested change would create warnings.
+>>>>
+>>>> Well, as per below, I pointed you at a particular pending patch, a single
+>>>> hunk of which could be broken out.
+>>>
+>>> Yes, but my changes would have to have casts from const pointers to
+>>> no-const pointers to avoid warnings and the patch you are pointing to
+>>> would have to remove these casts. I find this less clean than having
+>>> one patch using the current code style (that is no-const pointers) and
+>>> another that changes the style entirely.
+>>> But obviously this is just my opinion.
+>>
+>> Such casts would be unacceptable. What instead I have been trying to convey:
+>> Your patch wants to gain a dependency on my patch. And if my patch would
+>> take too long to make it in, that one hunk could be broken out into a
+>> separate, easy to get in patch.
 > 
-> Signed-off-by: Juergen Gross <jgross@suse.com>
+> Okay, then the only choice that's left is the code producing warnings
+> as const pointers are passed to functions requiring no-const pointers.
+> Is this acceptable? Apparently as you are suggesting it it is.
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+That's not acceptable, the more that due to -Werror this would break the
+build. But that's also not what I said, and I'm having a hard time seeing
+how what I said can be mis-interpreted. What exactly is not clear in "Your
+patch wants to gain a dependency on my patch"?
 
+Btw, I'm about to submit v2 of that XSM series, where I've broken out that
+hunk (for the change to then hopefully go in quickly, allowing you to
+simply re-base rather than carrying a prereq patch).
+
+Jan
 
