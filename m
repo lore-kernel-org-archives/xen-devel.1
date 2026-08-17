@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C8FCC5B572
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 08:57:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1392717.1631708 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89D30C5B572
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 08:58:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1392726.1631718 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvt9h-0006Bg-P2; Mon, 17 Aug 2026 08:57:17 +0000
+	id 1wvtAT-0006z3-4D; Mon, 17 Aug 2026 08:58:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1392717.1631708; Mon, 17 Aug 2026 08:57:17 +0000
+Received: by outflank-mailman (output) from mailman id 1392726.1631718; Mon, 17 Aug 2026 08:58:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvt9h-0006BZ-LZ; Mon, 17 Aug 2026 08:57:17 +0000
-Received: by outflank-mailman (input) for mailman id 1392717;
- Mon, 17 Aug 2026 08:57:16 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wvtAT-0006yw-1Q; Mon, 17 Aug 2026 08:58:05 +0000
+Received: by outflank-mailman (input) for mailman id 1392726;
+ Mon, 17 Aug 2026 08:58:03 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wvt9g-0006BP-F0
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 08:57:16 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wvtAR-0006xn-Ol
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 08:58:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wvt9f-005GNP-Rx
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 10:57:15 +0200
+ id 1wvtAR-009RUc-5R
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 10:58:03 +0200
 Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a82cce5-8faa-0a2a0a5109dd-0a2a450b8f80-24
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 10:57:15 +0200
-Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ id 6a82cd1b-2eae-0a2a0a5409dd-0a2a450baa0e-0
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 10:58:03 +0200
+Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
  by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a82cceb-b7e8-0a2a450b0019-d155802fa4c7-3
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 10:57:15 +0200
-Received: by mail-wm1-f47.google.com with SMTP id
- 5b1f17b1804b1-4994c49f588so27566865e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 01:57:15 -0700 (PDT)
+ id 6a82cd1a-b7e8-0a2a450b0019-d155dd2ae830-3
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 10:58:02 +0200
+Received: by mail-wr1-f42.google.com with SMTP id
+ ffacd0b85a97d-47f6609c657so1474512f8f.2
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 01:58:02 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4999d0fb872sm34010115e9.9.2026.08.17.01.57.13
+ ffacd0b85a97d-482a5a31396sm2279394f8f.2.2026.08.17.01.58.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Aug 2026 01:57:14 -0700 (PDT)
+ Mon, 17 Aug 2026 01:58:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,56 +55,58 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786957035; x=1787561835; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1786957082; x=1787561882; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=o8SOdb+AsZMjG0+VwY3YOWVBWdSQ5EYwU96aNxkx4tc=;
-        b=AnQxLYS6hTUir/nPEnrqBvrblfqVkMZgcSl8h41ugMg/mXZRwbyEO9gtQoXSTWbbLx
-         eJZUC8+ecMlgVhpQfRSMh6Fnrt3euv0LbStNDPqnrDbxvHiponymJR9rkr8h1x5L48WN
-         CXzSoL8i0RCFYNcUFHY/WwUe7sHoR3Gq+MCZl42BWCL+WoW9l+MjlaVlN6SjFk74cQzu
-         bd44/WD6WdeQbbiMR5OUgsPHh5hkSKOYzTUpqbNaP61BO34sP0I5/S3ew95wfnywVzSI
-         psnrWZYGc6dv6cy9gXjqVMlkPjgkA/etLpLQjzE1P6L6bYHrcKUuirJbkyoQEjkYTzjh
-         ng2w==
+        bh=8QVewtRw+TwFKfjqe5upIsoN/acNO1D5x9ht9JMPqQM=;
+        b=EPu+UbRKbFFBoDP2pn29coHY9xhdEERQ3jCxcAru/9iN+sQusNc4vAn5hnalitVMI0
+         JuRTcdqHqf6sK/hKqJ0KEJV5MV1XxSST3UwLOfsJ7QjatahiC5fcj0KQ79/TFcAqliwj
+         CF5deqzKxRb57cQ4XFtvB5iyn7giOXpSPX5jQspwyDaI/vlcXYN1UgQxvemcvEePP02i
+         PS6yUb1cY9UMNUTs8LHnQO8cBzrDVBLdPQHlFUT5W+Fgpa6Ldx9FvM29RX4JoOt6mKzh
+         cdDSBthLJ80oAxPok3srArHX911JRyPwMMGmrQo8PhikH8mwE7g+YovS5JV5rdZkcOZJ
+         AwUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786957035; x=1787561835;
+        d=1e100.net; s=20251104; t=1786957082; x=1787561882;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=o8SOdb+AsZMjG0+VwY3YOWVBWdSQ5EYwU96aNxkx4tc=;
-        b=Ke1298nwxwO/RtWvWkGGGvdViY0ShrMHx/+1t+Vwgu4ctjH7/wPFIG1kuONhqpU0i3
-         6vgn9yAeUIO8NN6TJqDU3FBlY4s9JPJ3nipP0Xhzfi9QpTiLprlDW5XjXnLKoBhAS5+3
-         DmdCgKQryUJ0UO7ybUPq3/lL3wZ60sz0BIrdymtTMV7CGNQtB5AOdxObSzArh4/TMEkr
-         jQNN5Kgcz1cvCY0OO0yHXQ6vnoWoqdr+7FqR7zIpCC+60DD+g1ifEsTSKmMkH5X56Oz5
-         SpLCU20gwZ+HIYTuZsstiM1J0Obnj3/dUFVAJJ3Y+LI5fDf1v9gqUZpoOA1HI6pjuQF2
-         LxgA==
-X-Gm-Message-State: AOJu0YzrgyKF9iPZbYqvfLkvqy9FQj7fmOQC58LCxnS6jsVCajGrkuHU
-	fSM8g5b+01wbCi4RwryvEcxmFIkvzhNEofzudK2dctj1cAzIUryU4ZdrJQ7j8Bg+lkBYLtr10Cz
-	AJagZog==
-X-Gm-Gg: AR+sD103jpAJ8WuHUVEb0DAUZjmvaIv4XaMN5niA2f1BjWXF8au/XN78v9sCIM8IMXQ
-	JeN6Svq8bxzT9xk1m2chymCVH0kQWriMgzJit6iJREhMbGF4w+htiwrL/S2YYJZ1hZyR5Q7EaZY
-	scP0Erahhp4sXnHkq1uTi1n5+sGmqpbMXemCJXEOajzVnWni8p1GuYE/UYa5r8PvasTRO+4nZLb
-	kKyLKIThhiDPRdnfx366n0x3urk/mCXkhblFAf5U8947Cn1KK3Q32tQOrF9JCqjADrw6LVbCdfQ
-	u12gILfo5UwcmFPlSADrMa9zzZ/CRnyOni037tJch/UGyk508nlFaQ5uvbJnzIIdh77LeZESbui
-	dj75ceWn1+bGe/dSmlmc++iq8hjeZDV2Gp/aD380fLf19wEV74iWJ9HxrjSeM58u5CpxtaYdS4o
-	yWtTVsV1cG0EoFtvE1lEOUq54v9TBkHD1lp78F2EfWMzU6KZ9AVmnPYHrQ7+j3hqeJcJgOYR6dS
-	qwZSKOMyU+JSjjJXuxW95Nv9b5yhJhWQI3i3rOvB0YQB7YhPXk8
-X-Received: by 2002:a05:600d:117:b0:499:5f80:83ac with SMTP id 5b1f17b1804b1-49987ab4e1bmr230477815e9.7.1786957035231;
-        Mon, 17 Aug 2026 01:57:15 -0700 (PDT)
-Message-ID: <d8d26338-810c-473d-91c5-0202b6dcac76@suse.com>
-Date: Mon, 17 Aug 2026 10:57:15 +0200
+        bh=8QVewtRw+TwFKfjqe5upIsoN/acNO1D5x9ht9JMPqQM=;
+        b=hWdbVfdW7ReBDJqJf9ncNwi7n7egR9XY8GwW9y8gXBjX3chdkrijlwE3LsYeVZVXvj
+         FZSIXI9K4mFkcwAdCPbRFs4u/uO37HDtD3SFmOx8Wj/X8ZIrYyuwuyUYz8ZibyPOSelH
+         k0RTsBEaaLVpJvNFuCwDo+y1aI5QxSWP2lxAGFf4PlnEWj+tuAqzlBpeh4ZnRoj9sKlP
+         Ljj0/3Jg68b/5uaQA2kQS4UENyInjeKyAi4WWWHSQNX6ZJo8WGeTr9LBsESKzUQPAnaN
+         mUKFza/7IjeZU0NtmopDlIoCKUxLZQ3q1FcXRM53LBqubocjCwaw5a8ghTX6PM0iiDZU
+         fl8A==
+X-Gm-Message-State: AOJu0YyWGECmjmRigHK6ytFqhU8ZEKlG7LQ/Wc7/IDWW3TLIy7VV+5AW
+	+R3C263GhEpcMwR6gS4u8Z3aX2bbHjEKWjXgfe7BBLCZ6Ao/iHtcP7Ov3DEW+ISPhxhYMiUVrNc
+	HHGHykA==
+X-Gm-Gg: AR+sD10SmzfaX+8DV2IoQaEHbHx/QSw+9rPfyR0xuyFYZ5GS5SeIgC4pwTeZDRAC3P1
+	pYtFMOdX/wUrjs4Vd9yvT8v5wsN+AK+PrmWqYW5chZ/+WqB+WihZXOHY2lPmsmzcp8kVWiVnN8J
+	ItuvZblqtD7vSMhVSkSnscBL62bfG2af3sqYj5TRg76F6JACo21HmcG+adnKveApak/NNKxK3Nb
+	aMwvDh4pa36OW3vQCVCUeuzY3XC2GASsQc918iU3ffcvTTDCGP4xPlirXmijYIsjM2HhmUTrchF
+	chUQJVa+mU3pjjDFIgDpjA+3HA63qrffZ6m6Rl2SO6WfR8EuGcDDh08WhDyObzr2Fi/uruWTSiQ
+	Q9eWBEc3dEWlkv0HdPwoWOKxxMKjIF4sRQx7CG5tiJBjZdAD3fliEoBCduE1cBcN8gEROY8kRxh
+	ynIJrzhNPq1lifcRv89rhjqkjGeinkIs6vJm0tRRfb5Eu8KI4epEY15xUFip8uUO8A6mQai7lN+
+	ChV2IfR8hMjq9sPygmqY9Lg397ccWnI6sDzL09tjZ5H9IglvD6E
+X-Received: by 2002:a05:6000:240c:b0:47f:e9fd:80d8 with SMTP id ffacd0b85a97d-481607947e2mr34071751f8f.21.1786957082432;
+        Mon, 17 Aug 2026 01:58:02 -0700 (PDT)
+Message-ID: <aac7d8fa-ef0d-4146-883f-deb9ec04a519@suse.com>
+Date: Mon, 17 Aug 2026 10:58:03 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2 12/14] XSM: convert remaining domain-related hooks
+Subject: [PATCH v2 13/14] XSM: convert remaining miscellaneous hooks
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Daniel Smith <dpsmith@apertussolutions.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+Cc: Daniel Smith <dpsmith@apertussolutions.com>, Julien Grall
+ <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
  <roger@xenproject.org>
 References: <ef09b072-c935-459e-bf8b-81c96ff9cc46@suse.com>
 Content-Language: en-US
@@ -134,222 +136,179 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <ef09b072-c935-459e-bf8b-81c96ff9cc46@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1786957035-A8AC89EA-D7B6E5A8/0/0
+X-purgate-ID: tlsNG-42698a/1786957082-A8ECE9EA-746152B0/0/0
 X-purgate-type: clean
-X-purgate-size: 6831
+X-purgate-size: 5160
 
-Make them follow the standard scheme, i.e. taking xsm_default_t as first
-argument at call sites. This way they can be covered by the recently
-introduced hook machinery.
-
-While there,
-- rename flask_domain_{alloc,free}_security() to fit the corresponding
-  hook names,
-- add const to .security_domaininfo()'s first parameter.
+Make the ones left also follow the standard scheme, i.e. taking
+xsm_default_t as first argument at call sites. This way they can be
+covered by the recently introduced hook machinery.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
+Interestingly .show_irq_sid() is unused on Arm. Oddly there's no use of
+register_keyhandler() there at all. (IOW I think it would be wrong to make
+the hook x86-only.)
+---
 v2: New.
 
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -760,7 +760,7 @@ static void _domain_destroy(struct domai
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -497,7 +497,7 @@ void asmlinkage __init noreturn start_xe
+     /* Hide UART from DOM0 if we're using it */
+     serial_endboot();
  
-     free_cpumask_var(d->dirty_cpumask);
+-    if ( (rc = xsm_set_system_active()) != 0 )
++    if ( (rc = xsm_set_system_active(XSM_HOOK)) != 0 )
+         panic("xsm: unable to switch to SYSTEM_ACTIVE privilege: %d\n", rc);
  
--    xsm_free_security_domain(d);
-+    xsm_free_security_domain(XSM_HOOK, d);
+     system_state = SYS_STATE_active;
+--- a/xen/arch/x86/irq.c
++++ b/xen/arch/x86/irq.c
+@@ -2549,7 +2549,7 @@ static void cf_check dump_irqs(unsigned
+         if ( !irq_desc_initialized(desc) || desc->handler == &no_irq_type )
+             continue;
  
-     lock_profile_deregister_struct(LOCKPROF_TYPE_PERDOM, d);
+-        ssid = in_irq() ? NULL : xsm_show_irq_sid(irq);
++        ssid = in_irq() ? NULL : xsm_show_irq_sid(XSM_HOOK, irq);
  
-@@ -987,7 +987,7 @@ struct domain *domain_create(domid_t dom
-         d->max_vcpus = config->max_vcpus;
-     }
+         spin_lock_irqsave(&desc->lock, flags);
  
--    if ( (err = xsm_alloc_security_domain(d)) != 0 )
-+    if ( (err = xsm_alloc_security_domain(XSM_HOOK, d)) != 0 )
-         goto fail;
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -835,7 +835,7 @@ static void noreturn init_done(void)
+     unsigned long start, end;
+     int err;
  
-     err = -ENOMEM;
---- a/xen/common/domctl.c
-+++ b/xen/common/domctl.c
-@@ -91,7 +91,7 @@ void getdomaininfo(struct domain *d, str
-         (is_hvm_domain(d)               ? XEN_DOMINF_hvm_guest : 0) |
-         d->shutdown_code << XEN_DOMINF_shutdownshift;
+-    if ( (err = xsm_set_system_active()) != 0 )
++    if ( (err = xsm_set_system_active(XSM_HOOK)) != 0 )
+         panic("xsm: unable to switch to SYSTEM_ACTIVE privilege: %d\n", err);
  
--    xsm_security_domaininfo(d, info);
-+    xsm_security_domaininfo(XSM_HOOK, d, info);
- 
-     info->tot_pages         = domain_tot_pages(d);
-     info->max_pages         = d->max_pages;
+     system_state = SYS_STATE_active;
 --- a/xen/include/xsm/dummy.h
 +++ b/xen/include/xsm/dummy.h
-@@ -122,8 +122,11 @@ static XSM_INLINE int xsm_set_system_act
+@@ -104,10 +104,12 @@ static always_inline int xsm_default_act
+     }
  }
  
- static XSM_INLINE void xsm_security_domaininfo(
--    struct domain *d, struct xen_domctl_getdomaininfo *info)
--{}
-+    XSM_DEFAULT_ARG const struct domain *d,
-+    struct xen_domctl_getdomaininfo *info)
-+{
+-static XSM_INLINE int xsm_set_system_active(void)
++static XSM_INLINE int xsm_set_system_active(XSM_DEFAULT_VOID)
+ {
+     struct domain *d = current->domain;
+ 
 +    XSM_ASSERT_ACTION(XSM_HOOK);
-+}
++
+     ASSERT(d->is_privileged);
  
- static XSM_INLINE int xsm_domain_create(
-     XSM_DEFAULT_ARG struct domain *d, uint32_t ssidref)
-@@ -179,13 +182,18 @@ static XSM_INLINE int xsm_sysctl(
-     return xsm_default_action(action, current->domain, NULL);
- }
+     if ( d->domain_id != DOMID_IDLE )
+@@ -467,8 +469,9 @@ static XSM_INLINE int xsm_do_compat_op(X
  
--static XSM_INLINE int xsm_alloc_security_domain(struct domain *d)
-+static XSM_INLINE int xsm_alloc_security_domain(
-+    XSM_DEFAULT_ARG struct domain *d)
+ #endif /* CONFIG_XSM */
+ 
+-static XSM_INLINE char *xsm_show_irq_sid(int irq)
++static XSM_INLINE char *xsm_show_irq_sid(XSM_DEFAULT_ARG int irq)
  {
 +    XSM_ASSERT_ACTION(XSM_HOOK);
-     return 0;
+     return NULL;
  }
- 
--static XSM_INLINE void xsm_free_security_domain(struct domain *d)
--{}
-+static XSM_INLINE void xsm_free_security_domain(
-+    XSM_DEFAULT_ARG struct domain *d)
-+{
-+    XSM_ASSERT_ACTION(XSM_HOOK);
-+}
- 
- #ifdef CONFIG_GRANT_TABLE
  
 --- a/xen/include/xsm/hooks.h
 +++ b/xen/include/xsm/hooks.h
-@@ -20,6 +20,10 @@
+@@ -17,6 +17,8 @@
+ 
+ #endif /* XSM_HOOK */
+ 
++XSM_HOOK(int, set_system_active)
++
  XSM_HOOK(int, domain_create, struct domain *, uint32_t)
  XSM_HOOK(int, getdomaininfo, struct domain *)
  XSM_HOOK(int, get_domain_state, struct domain *)
-+XSM_HOOK(void, security_domaininfo, const struct domain *,
-+                                    struct xen_domctl_getdomaininfo *)
-+XSM_HOOK(int, alloc_security_domain, struct domain *)
-+XSM_HOOK(void, free_security_domain, struct domain *)
+@@ -84,6 +86,8 @@ XSM_HOOK(int, irq_mapping, struct domain
+ XSM_HOOK(int, pt_irq_binding, struct domain *, struct xen_domctl_bind_pt_irq *,
+                               bool)
  
- #ifdef CONFIG_SYSCTL
- XSM_HOOK(int, sysctl, const struct xen_sysctl *)
++XSM_HOOK(pchar_t, show_irq_sid, int)
++
+ XSM_HOOK(int, irq_permission, struct domain *, int, bool)
+ XSM_HOOK(int, iomem_permission, struct domain *, uint64_t, uint64_t, bool)
+ 
 --- a/xen/include/xsm/xsm.h
 +++ b/xen/include/xsm/xsm.h
-@@ -62,8 +62,6 @@ typedef enum xsm_default xsm_default_t;
+@@ -61,7 +61,6 @@ typedef enum xsm_default xsm_default_t;
+  * !!! WARNING !!!
   */
  struct xsm_ops {
-     int (*set_system_active)(void);
--    void (*security_domaininfo)(struct domain *d,
--                                struct xen_domctl_getdomaininfo *info);
+-    int (*set_system_active)(void);
  
  #define XSM_HOOK0(rtype, name) rtype (*name)(void);
  #define XSM_HOOK1(rtype, name, type1) \
-@@ -79,9 +77,6 @@ struct xsm_ops {
+@@ -77,7 +76,6 @@ struct xsm_ops {
  
  #include "hooks.h"
  
--    int (*alloc_security_domain)(struct domain *d);
--    void (*free_security_domain)(struct domain *d);
--
-     char *(*show_irq_sid)(int irq);
+-    char *(*show_irq_sid)(int irq);
  };
  
-@@ -96,12 +91,6 @@ static inline int xsm_set_system_active(
-     return alternative_call(xsm_ops.set_system_active);
- }
+ #ifdef CONFIG_XSM
+@@ -86,11 +84,6 @@ extern struct xsm_ops xsm_ops;
  
--static inline void xsm_security_domaininfo(
--    struct domain *d, struct xen_domctl_getdomaininfo *info)
+ #ifndef XSM_NO_WRAPPERS
+ 
+-static inline int xsm_set_system_active(void)
 -{
--    alternative_vcall(xsm_ops.security_domaininfo, d, info);
+-    return alternative_call(xsm_ops.set_system_active);
 -}
 -
  #define XSM_ALT_void      alternative_vcall
  #define XSM_ALT_int       return alternative_call
  #define XSM_ALT_pchar_t   return alternative_call
-@@ -149,16 +138,6 @@ static inline rtype xsm_ ## name( \
+@@ -138,11 +131,6 @@ static inline rtype xsm_ ## name( \
  
  #include "hooks.h"
  
--static inline int xsm_alloc_security_domain(struct domain *d)
+-static inline char *xsm_show_irq_sid(int irq)
 -{
--    return alternative_call(xsm_ops.alloc_security_domain, d);
+-    return alternative_call(xsm_ops.show_irq_sid, irq);
 -}
 -
--static inline void xsm_free_security_domain(struct domain *d)
--{
--    alternative_vcall(xsm_ops.free_security_domain, d);
--}
--
- static inline char *xsm_show_irq_sid(int irq)
- {
-     return alternative_call(xsm_ops.show_irq_sid, irq);
+ #endif /* XSM_NO_WRAPPERS */
+ 
+ #ifdef CONFIG_MULTIBOOT
 --- a/xen/xsm/dummy.c
 +++ b/xen/xsm/dummy.c
-@@ -15,7 +15,6 @@
+@@ -14,7 +14,6 @@
+ #include <xsm/dummy.h>
  
  static const struct xsm_ops __initconst_cf_clobber dummy_ops = {
-     .set_system_active             = xsm_set_system_active,
--    .security_domaininfo           = xsm_security_domaininfo,
+-    .set_system_active             = xsm_set_system_active,
  
  #define XSM_HOOK0(rtype, name) .name = xsm_ ## name,
  #define XSM_HOOK1(rtype, name, ...) XSM_HOOK0(rtype, name)
-@@ -26,9 +25,6 @@ static const struct xsm_ops __initconst_
+@@ -25,7 +24,6 @@ static const struct xsm_ops __initconst_
  
  #include <xsm/hooks.h>
  
--    .alloc_security_domain         = xsm_alloc_security_domain,
--    .free_security_domain          = xsm_free_security_domain,
--
-     .show_irq_sid                  = xsm_show_irq_sid,
+-    .show_irq_sid                  = xsm_show_irq_sid,
  };
  
+ void __init xsm_fixup_ops(struct xsm_ops *ops)
 --- a/xen/xsm/flask/hooks.c
 +++ b/xen/xsm/flask/hooks.c
-@@ -188,7 +188,7 @@ static int avc_unknown_permission(const
-     return rc;
+@@ -1903,7 +1903,6 @@ static int cf_check flask_get_domain_sta
  }
- 
--static int cf_check flask_domain_alloc_security(struct domain *d)
-+static int cf_check flask_alloc_security_domain(struct domain *d)
- {
-     struct domain_security_struct *dsec;
- 
-@@ -256,7 +256,7 @@ static int cf_check flask_set_system_act
-     return 0;
- }
- 
--static void cf_check flask_domain_free_security(struct domain *d)
-+static void cf_check flask_free_security_domain(struct domain *d)
- {
-     struct domain_security_struct *dsec = d->ssid;
- 
-@@ -549,7 +549,7 @@ static int cf_check flask_schedop_shutdo
- }
- 
- static void cf_check flask_security_domaininfo(
--    struct domain *d, struct xen_domctl_getdomaininfo *info)
-+    const struct domain *d, struct xen_domctl_getdomaininfo *info)
- {
-     info->ssidref = domain_sid(d);
- }
-@@ -1904,7 +1904,6 @@ static int cf_check flask_get_domain_sta
  
  static const struct xsm_ops __initconst_cf_clobber flask_ops = {
-     .set_system_active = flask_set_system_active,
--    .security_domaininfo = flask_security_domaininfo,
+-    .set_system_active = flask_set_system_active,
  
  #define XSM_HOOK0(rtype, name) .name = flask_ ## name,
  #define XSM_HOOK1(rtype, name, ...) XSM_HOOK0(rtype, name)
-@@ -1915,9 +1914,6 @@ static const struct xsm_ops __initconst_
+@@ -1914,7 +1913,6 @@ static const struct xsm_ops __initconst_
  
  #include <xsm/hooks.h>
  
--    .alloc_security_domain = flask_domain_alloc_security,
--    .free_security_domain = flask_domain_free_security,
--
-     .show_irq_sid = flask_show_irq_sid,
+-    .show_irq_sid = flask_show_irq_sid,
  };
  
+ const struct xsm_ops *__init flask_init(
 
 
