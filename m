@@ -4,41 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67B73C5DF66
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 14:08:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1393036.1631941 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7988C5B572
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 14:37:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1393046.1631949 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvy0g-00071i-1q; Mon, 17 Aug 2026 14:08:18 +0000
+	id 1wvySf-0002lq-84; Mon, 17 Aug 2026 14:37:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1393036.1631941; Mon, 17 Aug 2026 14:08:18 +0000
+Received: by outflank-mailman (output) from mailman id 1393046.1631949; Mon, 17 Aug 2026 14:37:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvy0f-00071b-UR; Mon, 17 Aug 2026 14:08:17 +0000
-Received: by outflank-mailman (input) for mailman id 1393036;
- Mon, 17 Aug 2026 14:08:17 +0000
+	id 1wvySf-0002lj-52; Mon, 17 Aug 2026 14:37:13 +0000
+Received: by outflank-mailman (input) for mailman id 1393046;
+ Mon, 17 Aug 2026 14:37:12 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3zBWDagYKCV8PB7KG9DLLDIB.9LJUBK-ABSBIIFPQP.UBKMOLGB9Q.LOD@flex--seanjc.bounces.google.com>)
- id 1wvy0f-00071V-AI
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 14:08:17 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Michal.Orzel@amd.com>) id 1wvySe-0002ld-7i
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 14:37:12 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wvy0d-00HJwc-4d
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 16:08:15 +0200
-Received: from [10.42.69.11] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3zBWDagYKCV8PB7KG9DLLDIB.9LJUBK-ABSBIIFPQP.UBKMOLGB9Q.LOD@flex--seanjc.bounces.google.com>)
- id 6a8315cf-8faa-0a2a0a5109dd-0a2a450b8562-0
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 16:08:15 +0200
-Received: from [209.85.215.198] (helo=mail-pg1-f198.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <3zBWDagYKCV8PB7KG9DLLDIB.9LJUBK-ABSBIIFPQP.UBKMOLGB9Q.LOD@flex--seanjc.bounces.google.com>)
- id 6a8315cd-b7e8-0a2a450b0019-d155d7c6ed57-3
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 16:08:14 +0200
-Received: by mail-pg1-f198.google.com with SMTP id
- 41be03b00d2f7-cbef1d25500so3633759a12.1
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 07:08:14 -0700 (PDT)
+ id 1wvySc-008sg9-F2
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 16:37:10 +0200
+Received: from [10.42.69.6] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a831c76-bab6-0a2a0a5309dd-0a2a4506d440-48
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 16:37:09 +0200
+Received: from [52.101.62.64]
+ (helo=DM5PR21CU001.outbound.protection.outlook.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a831c94-195a-0a2a45060019-34653e40437a-3
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 16:37:09 +0200
+Received: from CH0PR03CA0367.namprd03.prod.outlook.com (2603:10b6:610:119::24)
+ by CH2PR12MB9459.namprd12.prod.outlook.com (2603:10b6:610:27d::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.16; Mon, 17 Aug
+ 2026 14:37:00 +0000
+Received: from DS2PEPF000061C2.namprd02.prod.outlook.com
+ (2603:10b6:610:119:cafe::36) by CH0PR03CA0367.outlook.office365.com
+ (2603:10b6:610:119::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.17 via Frontend Transport; Mon,
+ 17 Aug 2026 14:37:00 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ DS2PEPF000061C2.mail.protection.outlook.com (10.167.23.69) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.339.3 via Frontend Transport; Mon, 17 Aug 2026 14:37:00 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 17 Aug
+ 2026 09:37:00 -0500
+Received: from [10.252.145.116] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.45 via Frontend
+ Transport; Mon, 17 Aug 2026 09:36:56 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,139 +67,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1786975693; x=1787580493; darn=lists.xenproject.org;
-        h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=K+H/tJA5lC7k+sRi7jSoRnwTUnMixNT0suJnv/pAfq4=;
-        b=iPMx71jhH1nU/w+KcwU6+8eXzO2/L7L3kx1bJNrZd52+FAibsIIlDK2vLlwecqN08Y
-         sQyx7ot/5dSxUZMtWG9QjpQ+fQVupC7ClPV7WHKaudKh7JuvaR8NmZ2pyriN7CMV2RgQ
-         9P0A3AI1oNZPtGjbVXBuVkJoXZbYYDN+1Pil/Ii5akjAFl8LPmOPcDLagtiwMcW2PKQi
-         X18T61FOxwzXG5MZbukYdE6K06TMOarkhQBBHrXYjDEZKgPHH6qk9D5ZowUjal9UMk5a
-         rJigCu14ykyPjIIcHM95eZgsg52Qakx5321tBfX8fI0LjhkfIYXIUmT0BMPH3PGt+Cqr
-         FVAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786975693; x=1787580493;
-        h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=K+H/tJA5lC7k+sRi7jSoRnwTUnMixNT0suJnv/pAfq4=;
-        b=K0nIOfHRXRWLwDsmFD8/aEUNLSkvtYzSrKHwpFtfcqXWDZx6H1aCD0ebYtsIn3BKym
-         KXrziNs3I7b2MJ7gcieH4l5DJRQ1YQIrTrFJwabmWREcRi7OatmmgblBxAH+1ZkMqQjl
-         WdE9oqmf8SG03J/B4V7LbrEs9JimxxqAF2Qy7d4r/9jqdCPOgcDtcx+v6HO+7yyWJPHP
-         J1CyMjfsJ1Vs3z+qc7E+ABb1vls0PQClBX/xAN1qskgSL0nfGxDlwjmeqyqJ+GLsSZ7j
-         xgDoX1UISomEsampy1FzF9G7vFtDX6yt+vnEcf13M/T1NUv3roa+FYkUHj1CZDeRc//8
-         /FDA==
-X-Forwarded-Encrypted: i=1; AHgh+Rro+szerAKrBIFwLl7VAeuucTGOc9xoB09aShGlA/a0YmApNPj86baqLq3ll54D/eJl9JlQT7PEWYw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yxm255XA/5fFX9WZH7mSamVslfUVqAMViTR0mp3eVeGF2SOTK4L
-	B10TSyB5ioHvaLav5LnOTAdmAnwiJXOsi51B6aOzshcuxCwIy55wHzk/6s1MFL1EJu2R17yG2q8
-	btp9zFA==
-X-Received: from pgcz4.prod.google.com ([2002:a63:7e04:0:b0:c92:29d5:1f29])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a20:12d2:b0:3c3:9746:1fcb
- with SMTP id adf61e73a8af0-3cc71dc524bmr27787783637.35.1786975692489; Mon, 17
- Aug 2026 07:08:12 -0700 (PDT)
-Date: Mon, 17 Aug 2026 07:08:11 -0700
-In-Reply-To: <ef3b56bf-8df0-4a40-82c7-bd2d65eec71e@yandex-team.ru>
-Mime-Version: 1.0
-References: <20260806233609.212337-1-seanjc@google.com> <20260806233609.212337-22-seanjc@google.com>
- <ef3b56bf-8df0-4a40-82c7-bd2d65eec71e@yandex-team.ru>
-Message-ID: <aoMVy4VB1sq4T-ys@google.com>
-Subject: Re: [PATCH v6 21/51] x86/kvm: Obtain TSC frequency from PV CPUID if present
-From: Sean Christopherson <seanjc@google.com>
-To: Maksim Davydov <davydov-max@yandex-team.ru>
-Cc: Kiryl Shutsemau <kas@kernel.org>, Rick Edgecombe <rick.p.edgecombe@intel.com>, 
-	Paolo Bonzini <pbonzini@redhat.com>, "K. Y. Srinivasan" <kys@microsoft.com>, 
-	Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
-	Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>, 
-	Ajay Kaher <ajay.kaher@broadcom.com>, Alexey Makhalov <alexey.makhalov@broadcom.com>, 
-	Jan Kiszka <jan.kiszka@siemens.com>, Dave Hansen <dave.hansen@linux.intel.com>, 
-	Andy Lutomirski <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>, Juergen Gross <jgross@suse.com>, 
-	Daniel Lezcano <daniel.lezcano@kernel.org>, Thomas Gleixner <tglx@kernel.org>, 
-	John Stultz <jstultz@google.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>, Stephen Boyd <sboyd@kernel.org>, 
-	Miroslav Lichvar <mlichvar@redhat.com>, x86@kernel.org, linux-coco@lists.linux.dev, 
-	kvm@vger.kernel.org, linux-hyperv@vger.kernel.org, 
-	virtualization@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	xen-devel@lists.xenproject.org, Michael Kelley <mhklinux@outlook.com>, 
-	Tom Lendacky <thomas.lendacky@amd.com>, Nikunj A Dadhania <nikunj@amd.com>, 
-	David Woodhouse <dwmw@amazon.co.uk>, David Woodhouse <dwmw2@infradead.org>, 
-	Thomas Gleixner <tglx@linutronix.de>
-Content-Type: text/plain; charset="us-ascii"
-X-purgate-ID: tlsNG-42698a/1786975695-2C59A9EA-EF93815E/0/0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=tDHxkP/w+AyrmXX2AOBdAaSox41Yc893yH2OCzjyvlf9el+QdeMHAYNCZx83+20zJJNpZSg2Wi//bwtp6+KX4O63NZYJ84efa4I/m4q8yM8hCnZtTBWJH2/uqBMCGgGx01ZoGXQ6NhSydZDqlXOMgpZaVva7T+wHHEYsDJHRcPEfPwOym9dKrVf5qN5DR0HAWNrd73gTug2PZ7K4MiANDR/AveCDSpy2uJ711Fh2B2598hrmpLq3C7C1vD21CgfcFudzCUlx4Lq7l8nf3YJfHFTI0p1jH1HVJSaqYpk+OX4KxwteWCUfkdhl/lmbg6AepxJw5+QzZzBuybET1z+ZGA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=NV2lAk3hJ3iJJZP8403qZOXtIotAkZzFnoFFkwdRvRY=;
+ b=tQBDELk22V0u6hS4paVsU+/8lI1suVyfqIyb6OxeOV9y6vYgoaQfgVpesnTIHqx9pc/ikMD4ipJ7yG9dKTGXoKH5JPVLGwDsl5RbkZl1cF1RgdYjVZfghJqolaNN2roFvLXJR8BX/aimLqA05UAgr9/S99HYOoMQhgQla7Fv2VTAt2LuvjLMKYT10kfUxJeLv/Hlo9SdIHXo9k1OWzelczfm1C65q/S4Vh54yHawLecpm2sbiruj55sxqhL/sgan0aHdheEs3MoBoIk+4Xw3XUlag5vJ1yidPAH18uO2OrulhLDqxt2Tn6P6eARvj8YSYC+BMxGDXW6x/3F7OpeBkw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=citrix.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NV2lAk3hJ3iJJZP8403qZOXtIotAkZzFnoFFkwdRvRY=;
+ b=R0rTYGIkR5q/QIioyWR3QOsyZ1iEioYw8XOAgObwHSaEMd/u0LRUuYvptSaRVrUgUZV5GPdjBLp5BiK8UrdrCSFGtdeacsPUMU2oStfODPeJrs9fTQYdFOLd1WVlKu4xvSX4+a7LcbQOpZGiisog/06hpTykcq10Kx5quoXq0Zk=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Message-ID: <1e53ea73-0f9e-48ca-978c-d22fb04c4d45@amd.com>
+Date: Mon, 17 Aug 2026 16:36:56 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/6] ARM/sysctl: Expose the supported guest GIC modes
+ in physinfo
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Julian Vetter
+	<julian.vetter@vates.tech>, <xen-devel@lists.xenproject.org>
+CC: Anthony PERARD <anthony.perard@vates.tech>, Jan Beulich
+	<jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Juergen Gross <jgross@suse.com>, Andrii Sultanov
+	<andriy.sultanov@vates.tech>, Guillaume Thouvenin
+	<guillaume.thouvenin@vates.tech>, =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+	<marmarek@invisiblethingslab.com>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Oleksii Moisieiev <oleksii_moisieiev@epam.com>, Timothy Pearson
+	<tpearson@raptorengineering.com>, Alistair Francis
+	<alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>, Oleksii
+ Kurochko <oleksii.kurochko@gmail.com>, Teddy Astie <teddy.astie@vates.tech>
+References: <1784210820.8631fc262581453bbf619ec5b2062170.19f6b408bba000edb5@vates.tech>
+ <20260716141138.88265-1-julian.vetter@vates.tech>
+ <1784211104.8631fc262581453bbf619ec5b2062170.19f6b44e427000edb5@vates.tech>
+ <ee383990-f688-4244-b817-5df4c2f8decc@amd.com>
+ <732ee2f6-0091-45d3-bf98-e8f21b70ca0d@citrix.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
+Content-Language: en-US
+In-Reply-To: <732ee2f6-0091-45d3-bf98-e8f21b70ca0d@citrix.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS2PEPF000061C2:EE_|CH2PR12MB9459:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5ecc2694-eeaf-4c03-3200-08defc6cff72
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|82310400026|36860700016|23010399003|1800799024|7416014|376014|6133799003|10067099003|56012099006|4143699003|11063799006|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	DPmMVHgP6ZY9h7+/TvQyXXoNe561MYqx0zYohWBurWIo1DdtxQ40iXqx+aVUKf33kGQWdDC1egu3AMYVJDDJaRbB++1mx42iZ0v8fGiBIbGUBKIsMLV85WsICHPGoTxqYZ7EkTDtAidKt6sGh+eBx15XpyBlFXTcsD3fKxep5aDiYZprhmY5baHNgcgqV5FwdhGZcuASrQW1Df5tJh450DRHQ22uvBptUoT+TPGtYbOHh8SE1wv+fPJGZa4YtgSBuSiH+3WAZLatHn0QagdkOWeyPyy/BRnxIFmbhYv56pOiIoZylbchSj6w8MnJrtZpGOHYqE+biBR2kOcpPR0fYlANhG1eRKxWPEC8fy7JcDLqbOsZnIZDg7GZhOL4T5zqaq2VTzOyfFZTZrJlEyKJXpWmb3IH/LTeJXg8Jl4d1jnpqPMaEBonc60Tm/vq42eW5LftK/L3wSys5HMZlIiqEJ3nUQjvZ/lnsdf92UkZaljz7RrzVxowwynElNfVm0aBrntKjK5rSC2pkQVi2ViHoHfmGFi1uIVKbfEWA77mFu+jAn6ueYBha4P8KTIHf6W4uvefagJLgUiE4BQocnts9lqGneWrnTfdtI0BlIf0r8fZ/7kbD9dI39UlRApAvxk9rNLcduqeQcDdTC9xFsUHMprM/EogTN1jypv5HVl264vjGSilLdd3p+96dtHS5HdICJCxfiVNUY8NtMZteyFPKw==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(23010399003)(1800799024)(7416014)(376014)(6133799003)(10067099003)(56012099006)(4143699003)(11063799006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	G25AiOwmshJhW4lU2KrnVEXOwGNU+NfaGZEA4ek/oGgDfNLEd+1JcDriBhF0OaDsu9qDG+8LVw/+dHmHjdR7QZocNiApzBjpkNL5m935UDmQkvi1ZpC49AhzNEqsWkz75O5yyLd32Ywqou+Es6VdeOI2nxAKprx71kj0cmrbLtdH0gLWdbWe5dlg9t4M8TWXV2tV/LJ6neXrWIEReVN4FY0b6boNBeqI0gUf34tEhJMzwySMYrXUdFTQ44+XXzsDQHsRy8q2R4YygP3RuHX9hMfRhQjZ9mnoC3VDv2jTtfBNmP7zsFqJvjQ4Db4sSRR3SQgAcKcg2x7O/ZgJ72HPymD9wiphjNAw+ZNcNzedRsRdgWZPYM8AxsUFEeD3k+4nWjgWvQPqCDNg+Ne4b7JVIfAPAU0lc2ikk20QjNaIkf0cCHSFkx0eJ1300n6rBIzp
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Aug 2026 14:37:00.4732
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5ecc2694-eeaf-4c03-3200-08defc6cff72
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DS2PEPF000061C2.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB9459
+X-purgate-ID: tlsNG-16d1c6/1786977429-F4A0477B-71B31ABA/0/0
 X-purgate-type: clean
-X-purgate-size: 3137
+X-purgate-size: 1844
 
-On Mon, Aug 17, 2026, Maksim Davydov wrote:
-> On 8/7/26 02:35, Sean Christopherson wrote:
-> > diff --git a/arch/x86/kernel/kvmclock.c b/arch/x86/kernel/kvmclock.c
-> > index 29ca37e9a3bc..f55d0305d1f3 100644
-> > --- a/arch/x86/kernel/kvmclock.c
-> > +++ b/arch/x86/kernel/kvmclock.c
-> > @@ -342,8 +342,10 @@ void __init kvmclock_init(void)
-> >  	flags = pvclock_read_flags(&hv_clock_boot[0].pvti);
-> >  	kvm_sched_clock_init(flags & PVCLOCK_TSC_STABLE_BIT);
-> >  
-> > -	x86_init.hyper.get_tsc_khz = kvmclock_get_tsc_khz;
-> > -	x86_init.hyper.get_cpu_khz = kvmclock_get_tsc_khz;
-> > +	if (!x86_init.hyper.get_tsc_khz)
-> > +		x86_init.hyper.get_tsc_khz = kvmclock_get_tsc_khz;
-> > +	if (!x86_init.hyper.get_cpu_khz)
-> > +		x86_init.hyper.get_cpu_khz = kvmclock_get_tsc_khz;
-> >  	x86_platform.get_wallclock = kvm_get_wallclock;
-> >  	x86_platform.set_wallclock = kvm_set_wallclock;
-> >  #ifdef CONFIG_X86_LOCAL_APIC
+
+
+On 17-Aug-26 15:08, Andrew Cooper wrote:
+> On 17/08/2026 1:39 pm, Orzel, Michal wrote:
+>> On 16-Jul-26 16:11, Julian Vetter wrote:
+>>> diff --git a/xen/arch/arm/sysctl.c b/xen/arch/arm/sysctl.c
+>>> index 32cab4feff..3b0edf4cec 100644
+>>> --- a/xen/arch/arm/sysctl.c
+>>> +++ b/xen/arch/arm/sysctl.c
+>>> @@ -21,6 +24,29 @@ void arch_do_physinfo(struct xen_sysctl_physinfo *pi)
+>>>  
+>>>      pi->arch_capabilities |= MASK_INSR(sve_encode_vl(get_sys_vl_len()),
+>>>                                         XEN_SYSCTL_PHYSCAP_ARM_SVE_MASK);
+>>> +
+>>> +    /*
+>>> +     * The GIC version(s) we're happy creating guests with.  Right now for
+>>> +     * simplicity it is tied to the active hardware version, but this will
+>>> +     * cease to be the case if/when the compatbility modes are enabled.
+>> s/compatbility/compatibility/
+>>
+>> GICv3 may support GICv2 and we support libxl guest requesting GICv2 on a GICv3
+>> host. Why are we not exposing this information here?
+> 
+> Hmm.  That wasn't my reading of the logic at the time I wrote this.
+> 
+> Looking at it again, we probably should be advertising the result of
+> vgic_v2_hw.enabled alongside the main GIC version.  (Plus whatever
+> ifdefary is required to make this build.)
+Yes.
+
+~Michal
+
 > 
 > 
-> I cannot test this right now as I lack two servers with different CPU
-> base frequencies, but it seems that this patch might break something in
-> guests:
-> After migrating a VM (QEMU + KVM) from a host with one base frequency to
-> another host with a different base frequency, the value in CPUID leaf
-> 0x40000010 EAX changes and becomes the same as the destination host base
-> frequency instead of remaining the source base frequency.
-
-That's a bug in whatever is orchestrating the migration, and/or QEMU if QEMU is
-handing the upper layers a loaded footgun.
-
-> The main reason for this behaviour is that setting the TSC frequency via
-> ioctl(KVM_SET_TSC_KHZ) doesn't change the value in CPUID leaf 0x40000010
-> EAX and these two entities are still not connected.
-
-And they never will be.  It's userspace's responsibility to fill the correct
-values for 0x40000010.
-
-But AFAICT, QEMU does the right thing.  env->tsc_khz is used for both the CPUID
-leaf and for KVM_SET_TSC_KHZ.
-
-kvm_arch_init_vcpu():
-
-        c = &cpuid_data.entries[cpuid_i++];
-        c->function = KVM_CPUID_SIGNATURE | 0x10;
-        c->eax = env->tsc_khz;
-        c->ebx = env->apic_bus_freq / 1000; /* Hz to KHz */
-        c->ecx = c->edx = 0;
-
-kvm_arch_set_tsc_khz():
-
-    r = set_ioctl ?
-        kvm_vcpu_ioctl(cs, KVM_SET_TSC_KHZ, env->tsc_khz) :
-        -ENOTSUP;
-
-> I saw this behaviour with QEMU 7, but I've checked the code of the
-> latest version and it seems that the described behaviour still exists.
-> So, in that case, it's possible that with these changes a VM will use
-> the wrong TSC frequency from CPUID leaf 0x40000010 EAX if it's migrated
-> and then rebooted.
+> The domain create side is even more wonky. 
+> arch_sanitise_domain_config() takes the toolstack choice of vGIC
+> versions and asks whether the number of CPUs is compatible, but it's
+> midway through arch_domain_create() which first notices if the requested
+> vGIC version isn't compatible with hardware.
 > 
-> Putting it all together, after the previous patch ("KVM: x86: Officially
-> define CPUID 0x40000010 as PV Timing Info (TSC and Bus)") a new way to
-> show the guest that CPUID leaf 0x40000010 is valid should be implemented
-> and only then this leaf can be used to get the TSC frequency.
+> There really wants to be an __ro_after_init supported_vgic_versions
+> (name subject to improvement) which is filled in by the various GIC
+> initialisation routines, rather than a set of backbacks into disjoint
+> drivers.
+> 
+> ~Andrew
 
-No, there are already non-Linux kernels that consume 0x40000010, e.g. FreeBSD.
-In my very strong opinion, if this problematic for a deployment, then that
-deployment needs to urgently fix their broken setup.
 
