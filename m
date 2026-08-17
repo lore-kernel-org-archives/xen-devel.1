@@ -4,40 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55297C5B572
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 17:58:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1393224.1632072 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AA58C5B572
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 20:34:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1393290.1632104 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ww1as-0001Zw-Gc; Mon, 17 Aug 2026 17:57:54 +0000
+	id 1ww420-00056I-Uj; Mon, 17 Aug 2026 20:34:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1393224.1632072; Mon, 17 Aug 2026 17:57:54 +0000
+Received: by outflank-mailman (output) from mailman id 1393290.1632104; Mon, 17 Aug 2026 20:34:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ww1as-0001Zp-Dk; Mon, 17 Aug 2026 17:57:54 +0000
-Received: by outflank-mailman (input) for mailman id 1393224;
- Mon, 17 Aug 2026 17:57:53 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1ww420-00056B-S7; Mon, 17 Aug 2026 20:34:04 +0000
+Received: by outflank-mailman (input) for mailman id 1393290;
+ Mon, 17 Aug 2026 20:34:03 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 1ww1ar-0001Zj-6Z
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 17:57:53 +0000
+ (envelope-from <andrew.cooper3@citrix.com>) id 1ww41z-000565-Is
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 20:34:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1ww1aq-00EUdc-05
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 19:57:52 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1ww41y-009Yc6-SM
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 22:34:02 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 6a834b87-bab6-0a2a0a5309dd-0a2a450b83c4-14
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 19:57:51 +0200
-Received: from [160.101.131.8] (helo=na1pdmzitismtp01.tibco.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 6a834b9e-b7e8-0a2a450b0019-a0658308d0d0-3
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 19:57:51 +0200
-Received: from fedora.eng.citrite.net (unknown [10.113.40.46])
- by na1pdmzitismtp01.tibco.com (Postfix) with ESMTP id 9EE1D4459EAC;
- Mon, 17 Aug 2026 13:56:06 -0400 (EDT)
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6a836ff4-e002-0a2a0a5209dd-0a2a450685c4-46
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 22:34:02 +0200
+Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6a83703a-195a-0a2a45060019-d1558034ed93-3
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 22:34:02 +0200
+Received: by mail-wm1-f52.google.com with SMTP id
+ 5b1f17b1804b1-4998b5a63e2so31927075e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 13:34:02 -0700 (PDT)
+Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
+ [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-482a5a7c55bsm6213951f8f.20.2026.08.17.13.34.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Aug 2026 13:34:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,79 +53,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-From: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
-To: xen-devel@lists.xenproject.org,
-	jbeulich@suse.com
-Cc: andrew.cooper3@citrix.com,
-	roger@xenproject.org,
-	jason.andryuk@amd.com,
-	teddy.astie@vates.tech
-Subject: Re: Re: [PATCH v3] x86/nSVM: Check the L1 IOPM_BASE assigned physical address
-Date: Mon, 17 Aug 2026 18:53:56 +0100
-Message-ID: <20260817175356.2744006-1-abdelkareem.abdelsaamad@citrix.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <0cec914c-e52f-41ee-873b-6bdbc1d1ed82@suse.com>
-References: <0cec914c-e52f-41ee-873b-6bdbc1d1ed82@suse.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1786998842; x=1787603642; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=NdcOM830pkGFrMyGyV5CVvecsj2tsUbGgnES/OJNsnQ=;
+        b=XKF5fR+IUHRdfxY0yai0uUU8TXbksQgiF5N0Kk5UpCkFZMz6Sw+Fj9VnvM4BAG9EWV
+         iT1qsCRrI6smcrb1LSwf2y7qy/zlwT65m42ctkFet7zaox96YhzW15Ejq2SRRYH2qMQ1
+         +PKtXJkaDd+32Nie+znzh4ahUfmvI/QZtJNsk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786998842; x=1787603642;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=NdcOM830pkGFrMyGyV5CVvecsj2tsUbGgnES/OJNsnQ=;
+        b=Q4YTkJw2+QX37qfbNLIHOFHRKk+AhP9PrQtER6oky7M2CV6NpQaSUcbtdHjTLdCJ8s
+         GKSqF9j7Ooj+gFVPMxMV6GMBenFK7RYSXVra0Yfxb00MBIg0RULtOwdtgBvRkQGnoRoY
+         gumMITBS5R0QOSaD043dHKh2M0njJpUiQpzJH3Ltf7PorpUab5dwspD9YkJegAsiIJks
+         piL2JuGWJp2Zq0obEdXSt9dtRr673e0rvSH6CC1jF0xawbeZQXcUXuMIRMlbKGBTyAYN
+         nf+IKmChhzmYYVi8yfJevH2SGgSrg0hj6hE6Jpm8ZjxQI2tNDFQzlnfZxd1Sh9c1wKGY
+         Ipsg==
+X-Gm-Message-State: AOJu0YxvT8j+GMe1XQifwkzI4rr1HASKIgUW+VJ6M58eJWBKMUgPjCnm
+	AlLbHVNOj8m8QnZ7jcse5PmvZDcLSocRsFwcdzZKYRlEnTCEKtLSXztMz1Wq9g89f0M+A1ai4N9
+	ru7k01qU=
+X-Gm-Gg: AR+sD13DHzxJnWW0YaGvxAxAE5DZzx8bKKCP0/dDPmx0SRD0t0SHIqzhOnbTp8uE0kH
+	rQRdubxBizxtBf2hmhPGkrYM0GoHMDRenREU87rCYYVlQrjKKCfvDvGfZz5fq9Jm4FE7UGDq9sP
+	tN/WOZraCUAOjvR1aWplHJXdgPQPox7eG0KOpiHl/q/pRzLFK/AHr0jksvW19Jh+ap/GUJA3GRK
+	WrWmzzntJZg5+Z8D5F2YJyQ5basEdVTHBpOM4xaACf2WX1GKiAqaR2spMdKJnAh8Wi0IQYKOQ0X
+	kIMoT9QfD+aB77zV6jOET2aS6ykydm/vyEY9HMSreaCPROS4zZIQm/FdZ4HQw8JeLGui2clr9Vf
+	GSsJKuClyPdmnDRRW0IWISl6V9W8HhFjc+LY+0LYiLh4sVgfJ3tVdV7b9VEg6SRR2Av2dOxqtNP
+	cjGm6fHS9WvV0LsuO2FiwWTCoyKZjf58e3+BoS0hQvgKod4mj+5iHXcMmIQ3/BYDO9Lmivl6Emo
+	rBDK+sevohIKgDMCMJnAKeDjZ0mO4hH5Vs/GKA=
+X-Received: by 2002:a05:600c:8714:b0:499:8704:242c with SMTP id 5b1f17b1804b1-499878ca13bmr498099745e9.0.1786998841777;
+        Mon, 17 Aug 2026 13:34:01 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>
+Subject: [PATCH] ARM/vgic: Clean up vgic_v2_setup_hw()
+Date: Mon, 17 Aug 2026 21:33:59 +0100
+Message-Id: <20260817203359.1881963-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1786989471-AB2DC9EA-35F9E115/0/0
+X-purgate-ID: tlsNG-16d1c6/1786998842-FC20077B-D0A61DE3/0/0
 X-purgate-type: clean
-X-purgate-size: 2452
+X-purgate-size: 1726
 
-On ,13.08.2026  10:40 Jan Beulich wrote:
->On 07.08.2026 17:58, Abdelkareem Abdelsaamad wrote:
->> --- a/xen/arch/x86/hvm/svm/nestedsvm.c
->> +++ b/xen/arch/x86/hvm/svm/nestedsvm.c
->> @@ -18,6 +18,7 @@
->>  
->>  #define NSVM_ERROR_VVMCB        1
->>  #define NSVM_ERROR_VMENTRY      2
->> +#define IOPM_PAGES_COUNT        3
->
->This new item is separate from the NSVM_ERROR_* values and hence wants separating
->by a blank line. Especially with the three numbers being in sequence, not doing
->so could end up being confusing.
->
->Considering the constant is used exactly once - do we actually need a constant?
->Can't we ...
->
->> @@ -294,6 +295,15 @@ static int nsvm_vmrun_permissionmap(struct vcpu *v, bool viopm)
->>      enum hvm_translation_result ret;
->>      unsigned long *ns_viomap;
->>      bool ioport_80 = true, ioport_ed = true;
->> +    gfn_t ns_iopm_end =
->> +        gfn_add(gaddr_to_gfn(ns_vmcb->_iopm_base_pa), IOPM_PAGES_COUNT - 1);
->
->... use a suitable expression here, e.g. PFN_DOWN((0xffff + 3) / 8)?
-OK. I will change it like that in V4.
->> @@ -302,13 +312,12 @@ static int nsvm_vmrun_permissionmap(struct vcpu *v, bool viopm)
->>      if ( ret != HVMTRANS_okay )
->>      {
->>          gdprintk(XENLOG_ERR, "hvm_copy_from_guest_phys msrpm %u\n", ret);
->> -        return 1;
->> +        return NSVM_ERROR_VVMCB;
->>      }
->>  
->>      /* Check l1 guest io permission map and get a shadow one based on
->>       * if l1 guest intercepts io ports 0x80 and/or 0xED.
->>       */
->> -    svm->ns_oiomap_pa = svm->ns_iomap_pa;
->>      svm->ns_iomap_pa = ns_vmcb->_iopm_base_pa;
->>  
->>      ns_viomap = hvm_map_guest_frame_ro(svm->ns_iomap_pa >> PAGE_SHIFT, 0);
->
->In the description you say "without any sanity checks", yet
->hvm_map_guest_frame_ro() -> _hvm_map_guest_frame() ->
->check_get_page_from_gfn() won't allow unsuitable GFNs to be mapped. Since
->here only the first page is mapped, some extra checking may indeed be
->warranted, but the description then wants updating.
-It (the first page) is actually not mapped. It properly fails. However, the Xen
-code continues without any issues. The code continues with an internal Xen
-allocated memory shadow_io_bitmap in nestedhvm_vcpu_iomap_get.
->
->As to that part of the description, "directly to valid host address" also
->doesn't look to adequately describe what's going on.
-I will rephrase the commit message for better clarity in v4.
->--Jan
+vgic_v2_setup_hw()'s callers are __init, so it should be too.  vgic_v2_hw is
+written once during init and unmodified thereafter, so make it
+__ro_after_init.  Reposition 'bool enabled' to fit in the tail padding,
+removing 8 bytes from the structure.
+
+No functional change.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Julien Grall <julien@xen.org>
+CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+CC: Bertrand Marquis <bertrand.marquis@arm.com>
+CC: Michal Orzel <michal.orzel@amd.com>
+
+Found when looking at the code while reviewing something else.  Only compile
+tested.
+---
+ xen/arch/arm/vgic-v2.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/xen/arch/arm/vgic-v2.c b/xen/arch/arm/vgic-v2.c
+index 642407fd5b05..3446d521de2d 100644
+--- a/xen/arch/arm/vgic-v2.c
++++ b/xen/arch/arm/vgic-v2.c
+@@ -25,7 +25,6 @@
+ #include <asm/vreg.h>
+ 
+ static struct {
+-    bool enabled;
+     /* Distributor interface address */
+     paddr_t dbase;
+     /* CPU interface address & size */
+@@ -36,10 +35,12 @@ static struct {
+ 
+     /* Offset to add to get an 8kB contiguous region if GIC is aliased */
+     uint32_t aliased_offset;
+-} vgic_v2_hw;
++    bool enabled;
++} vgic_v2_hw __ro_after_init;
+ 
+-void vgic_v2_setup_hw(paddr_t dbase, paddr_t cbase, paddr_t csize,
+-                      paddr_t vbase, uint32_t aliased_offset)
++void __init vgic_v2_setup_hw(
++    paddr_t dbase, paddr_t cbase, paddr_t csize, paddr_t vbase,
++    uint32_t aliased_offset)
+ {
+     vgic_v2_hw.enabled = true;
+     vgic_v2_hw.dbase = dbase;
+
+base-commit: ebc00c30c65023bd1498ae20dc511c4e39f6c0f7
+-- 
+2.39.5
+
 
