@@ -4,51 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D79DFC5DF70
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 07:19:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1392495.1631460 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1308C5B572
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 07:19:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1392496.1631469 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvrcd-00055a-Ma; Mon, 17 Aug 2026 07:19:03 +0000
+	id 1wvrce-0005IU-Ri; Mon, 17 Aug 2026 07:19:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1392495.1631460; Mon, 17 Aug 2026 07:19:03 +0000
+Received: by outflank-mailman (output) from mailman id 1392496.1631469; Mon, 17 Aug 2026 07:19:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvrcd-00055R-JS; Mon, 17 Aug 2026 07:19:03 +0000
-Received: by outflank-mailman (input) for mailman id 1392495;
- Mon, 17 Aug 2026 07:19:01 +0000
+	id 1wvrce-0005IN-Ov; Mon, 17 Aug 2026 07:19:04 +0000
+Received: by outflank-mailman (input) for mailman id 1392496;
+ Mon, 17 Aug 2026 07:19:02 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1wvrcb-00054j-UB
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 07:19:01 +0000
+ (envelope-from <jgross@suse.com>) id 1wvrcc-00055D-Sd
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 07:19:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wvrca-00Fq1S-6m
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 09:19:00 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wvrcc-002YtT-9e
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 09:19:02 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jgross@suse.com>)
- id 6a82b5cf-2eae-0a2a0a5409dd-0a2a4504abe0-44
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 09:19:00 +0200
+ id 6a82b5e2-2eae-0a2a0a5409dd-0a2a4509ad96-6
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 09:19:02 +0200
 Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jgross@suse.com>)
- id 6a82b5e3-b57f-0a2a45040019-c387df83eb62-3
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 09:18:59 +0200
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ id 6a82b5e6-be1a-0a2a45090019-c387df83b234-3
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 09:19:02 +0200
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 1EF993E22;
- Mon, 17 Aug 2026 07:18:51 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id F2D763E0F;
+ Mon, 17 Aug 2026 07:19:01 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id CEB7B79340;
- Mon, 17 Aug 2026 07:18:50 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D2BC179340;
+ Mon, 17 Aug 2026 07:19:01 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id cuJHMdq1gmqpPwAAD6G6ig
- (envelope-from <jgross@suse.com>); Mon, 17 Aug 2026 07:18:50 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id c9ViMuW1gmq3PwAAD6G6ig
+ (envelope-from <jgross@suse.com>); Mon, 17 Aug 2026 07:19:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,89 +61,188 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1786951135; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=JQLgiM06Stpg2JnRvBMMMCddiNu89pqkhfZS0XLLlhI=;
-	b=eYtCD6w29p5Toq6OdpSu1bNkb3pycSUEp9ESdbQm/5OvBOiW9GMlbWRWk0KbMrNX0rLl/e
-	JFS2aoGNqVvCZvL6Fhn1+EppQs9MeeDhNE5eQTBALDO3WX1t04oyFlLwFv7jdYQsm0H0Ua
-	8M2DyqTgXqI01IPQjKjTKYnusHQJZLc=
+Authentication-Results: eu.smtp.expurgate.cloud; none
 Authentication-Results: smtp-out2.suse.de;
 	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1786951131; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=JQLgiM06Stpg2JnRvBMMMCddiNu89pqkhfZS0XLLlhI=;
-	b=opWbS6WChP8WlcHZ53S+OcK58DqgfJ+phMCKDibhjjAkoyDj2cK6wULFdth02DW0OXPDcN
-	iV6PA/qc9jhkZ+hnOCXYN3VWu2N0LiDvq5dHS8MYblRMW9dv7iBf8pqIufhDNIQ3GGijVq
-	uUhpTLUnyBgC+W5aZHcX5sT3mp3gbD0=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH 1/4] Config: update Mini-OS commit id
-Date: Mon, 17 Aug 2026 09:18:40 +0200
-Message-ID: <20260817071843.114898-2-jgross@suse.com>
+	Samuel Thibault <samuel.thibault@ens-lyon.org>,
+	Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH 3/4] stubdom: remove build of zlib
+Date: Mon, 17 Aug 2026 09:18:42 +0200
+Message-ID: <20260817071843.114898-4-jgross@suse.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260817071843.114898-1-jgross@suse.com>
 References: <20260817071843.114898-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-6.80 / 50.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[99.99%];
-	MID_CONTAINS_FROM(1.00)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.20)[-0.998];
-	MIME_GOOD(-0.10)[text/plain];
-	RCVD_COUNT_TWO(0.00)[2];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,config.mk:url,suse.com:email,suse.com:mid];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	TO_DN_SOME(0.00)[];
-	RCVD_TLS_ALL(0.00)[]
-X-purgate-ID: tlsNG-ebf023/1786951139-50EDEB50-B3304850/0/0
+X-Rspamd-Pre-Result: action=no action;
+	module=replies;
+	Message is reply to one we originated
+X-Spamd-Result: default: False [-4.00 / 50.00];
+	REPLY(-4.00)[]
+X-Rspamd-Queue-Id: F2D763E0F
+X-Rspamd-Pre-Result: action=no action;
+	module=replies;
+	Message is reply to one we originated
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Rspamd-Action: no action
+X-purgate-ID: tlsNG-bad1c0/1786951142-BC8C9034-5E764E0C/0/0
 X-purgate-type: clean
-X-purgate-size: 725
+X-purgate-size: 4435
 
-Use the newest Mini-OS.
+The last users of zlib for stubdoms have been removed.
+
+Remove zlib from the stubdom build system, too.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- Config.mk | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ config/Stubdom.mk.in |  3 ---
+ stubdom/.gitignore   |  1 -
+ stubdom/Makefile     | 24 +-----------------------
+ stubdom/configure    | 15 ---------------
+ stubdom/configure.ac |  1 -
+ 5 files changed, 1 insertion(+), 43 deletions(-)
 
-diff --git a/Config.mk b/Config.mk
-index b3d48e49c7..b2dcc729f3 100644
---- a/Config.mk
-+++ b/Config.mk
-@@ -217,7 +217,7 @@ QEMU_UPSTREAM_URL ?= https://xenbits.xen.org/git-http/qemu-xen.git
- QEMU_UPSTREAM_REVISION ?= master
+diff --git a/config/Stubdom.mk.in b/config/Stubdom.mk.in
+index b90eaee75a..dc0a3b54b3 100644
+--- a/config/Stubdom.mk.in
++++ b/config/Stubdom.mk.in
+@@ -11,9 +11,6 @@ STUBDOM_TARGETS     := @STUBDOM_TARGETS@
+ STUBDOM_BUILD       := @STUBDOM_BUILD@
+ STUBDOM_INSTALL     := @STUBDOM_INSTALL@
  
- MINIOS_UPSTREAM_URL ?= https://xenbits.xen.org/git-http/mini-os.git
--MINIOS_UPSTREAM_REVISION ?= b6f79f5f44cf69044079c042b88fe9d75367642e
-+MINIOS_UPSTREAM_REVISION ?= 26ceb2daf95dd9e7fed9c83d36be3aaf1a0fa8a1
+-ZLIB_VERSION        := @ZLIB_VERSION@
+-ZLIB_URL            := @ZLIB_URL@
+-
+ NEWLIB_VERSION      := @NEWLIB_VERSION@
+ NEWLIB_URL          := @NEWLIB_URL@
  
- SEABIOS_UPSTREAM_URL ?= https://xenbits.xen.org/git-http/seabios.git
- SEABIOS_UPSTREAM_REVISION ?= rel-1.17.0
+diff --git a/stubdom/.gitignore b/stubdom/.gitignore
+index 8c6dc00f83..e5d5744361 100644
+--- a/stubdom/.gitignore
++++ b/stubdom/.gitignore
+@@ -29,4 +29,3 @@
+ /vtpm/vtpm_manager.h
+ /xenstore
+ /xenstorepvh
+-/zlib-*
+diff --git a/stubdom/Makefile b/stubdom/Makefile
+index f542a4295a..8830deebce 100644
+--- a/stubdom/Makefile
++++ b/stubdom/Makefile
+@@ -102,26 +102,6 @@ $(NEWLIB_STAMPFILE): mk-headers-$(XEN_TARGET_ARCH) newlib-$(NEWLIB_VERSION)
+ 	  $(MAKE) DESTDIR= && \
+ 	  $(MAKE) DESTDIR= install )
+ 
+-############
+-# Cross-zlib
+-############
+-
+-zlib-$(ZLIB_VERSION).tar.gz:
+-	$(FETCHER) $@ $(ZLIB_URL)/$@
+-
+-zlib-$(XEN_TARGET_ARCH): zlib-$(ZLIB_VERSION).tar.gz 
+-	tar xzf $<
+-	mv zlib-$(ZLIB_VERSION) $@
+-
+-ZLIB_STAMPFILE=$(CROSS_ROOT)/$(GNU_TARGET_ARCH)-xen-elf/lib/libz.a
+-.PHONY: cross-zlib
+-cross-zlib: $(ZLIB_STAMPFILE)
+-$(ZLIB_STAMPFILE): zlib-$(XEN_TARGET_ARCH) $(NEWLIB_STAMPFILE)
+-	( cd $< && \
+-	  CFLAGS="$(TARGET_CPPFLAGS) $(TARGET_CFLAGS)" CC=$(CC) ./configure --prefix=$(CROSS_PREFIX)/$(GNU_TARGET_ARCH)-xen-elf && \
+-	  $(MAKE) DESTDIR= libz.a && \
+-	  $(MAKE) DESTDIR= install )
+-
+ ######
+ # lwIP
+ ######
+@@ -222,7 +202,7 @@ cross-tpmemu: $(TPMEMU_STAMPFILE)
+ #######
+ 
+ .PHONY: $(CROSS_ROOT)
+-$(CROSS_ROOT): cross-newlib cross-zlib
++$(CROSS_ROOT): cross-newlib
+ 
+ #######
+ # libraries under tools/libs
+@@ -449,7 +429,6 @@ clean:
+ crossclean: clean
+ 	rm -fr $(CROSS_ROOT)
+ 	rm -fr newlib-$(XEN_TARGET_ARCH)
+-	rm -fr zlib-$(XEN_TARGET_ARCH)
+ 	rm -fr libs-$(XEN_TARGET_ARCH)
+ 	rm -fr xenstore xenstorepvh
+ 	rm -fr gmp-$(XEN_TARGET_ARCH)
+@@ -471,7 +450,6 @@ patchclean: crossclean
+ .PHONY: downloadclean
+ downloadclean: patchclean
+ 	rm -f newlib-$(NEWLIB_VERSION).tar.gz
+-	rm -f zlib-$(ZLIB_VERSION).tar.gz
+ 	rm -f gmp-$(GMP_VERSION).tar.bz2
+ 	rm -f tpm_emulator-$(TPMEMU_VERSION).tar.gz
+ 	rm -f lwip-$(LWIP_VERSION).tar.gz
+diff --git a/stubdom/configure b/stubdom/configure
+index f3d63dceff..1a5687d32b 100755
+--- a/stubdom/configure
++++ b/stubdom/configure
+@@ -634,8 +634,6 @@ LWIP_VERSION
+ LWIP_URL
+ NEWLIB_VERSION
+ NEWLIB_URL
+-ZLIB_VERSION
+-ZLIB_URL
+ INSTALL_DATA
+ INSTALL_SCRIPT
+ INSTALL_PROGRAM
+@@ -722,7 +720,6 @@ CFLAGS
+ LDFLAGS
+ LIBS
+ CPPFLAGS
+-ZLIB_URL
+ NEWLIB_URL
+ LWIP_URL
+ GMP_URL
+@@ -1372,7 +1369,6 @@ Some influential environment variables:
+   LIBS        libraries to pass to the linker, e.g. -l<library>
+   CPPFLAGS    (Objective) C/C++ preprocessor flags, e.g. -I<include dir> if
+               you have headers in a nonstandard directory <include dir>
+-  ZLIB_URL    Download url for zlib
+   NEWLIB_URL  Download url for newlib
+   LWIP_URL    Download url for lwip
+   GMP_URL     Download url for libgmp
+@@ -4023,17 +4019,6 @@ fi
+ # Stubdom libraries version and url setup
+ 
+ 
+-if test "x$ZLIB_URL" = "x"
+-then :
+-
+-	ZLIB_URL=\$\(XEN_EXTFILES_URL\)
+-fi
+-ZLIB_VERSION="1.2.3"
+-
+-
+-
+-
+-
+ if test "x$NEWLIB_URL" = "x"
+ then :
+ 
+diff --git a/stubdom/configure.ac b/stubdom/configure.ac
+index d3d2a840d3..34a47c95e1 100644
+--- a/stubdom/configure.ac
++++ b/stubdom/configure.ac
+@@ -38,7 +38,6 @@ AC_PROG_INSTALL
+ AX_DEPENDS_PATH_PROG([vtpm], [CMAKE], [cmake])
+ 
+ # Stubdom libraries version and url setup
+-AX_STUBDOM_LIB([ZLIB], [zlib], [1.2.3])
+ AX_STUBDOM_LIB([NEWLIB], [newlib], [1.16.0], [https://sourceware.org/ftp/newlib])
+ AX_STUBDOM_LIB([LWIP], [lwip], [1.3.0], [https://download.savannah.gnu.org/releases/lwip])
+ AX_STUBDOM_LIB([GMP], [libgmp], [4.3.2], [https://gmplib.org/download/gmp/archive])
 -- 
 2.55.0
 
