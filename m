@@ -4,54 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11366C5DF66
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 16:37:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1393131.1632027 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45F48C5B572
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 17:04:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1393142.1632036 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ww0Kq-0005Wv-5h; Mon, 17 Aug 2026 16:37:16 +0000
+	id 1ww0ke-0001GI-3k; Mon, 17 Aug 2026 17:03:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1393131.1632027; Mon, 17 Aug 2026 16:37:16 +0000
+Received: by outflank-mailman (output) from mailman id 1393142.1632036; Mon, 17 Aug 2026 17:03:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ww0Kq-0005Wo-2G; Mon, 17 Aug 2026 16:37:16 +0000
-Received: by outflank-mailman (input) for mailman id 1393131;
- Mon, 17 Aug 2026 16:37:15 +0000
+	id 1ww0ke-0001GB-0g; Mon, 17 Aug 2026 17:03:56 +0000
+Received: by outflank-mailman (input) for mailman id 1393142;
+ Mon, 17 Aug 2026 17:03:54 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=MkDe=GK=ens-lyon.org=samuel.thibault@bounce.ens-lyon.org>)
- id 1ww0Kp-0005Wi-O5
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 16:37:15 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
+ id 1ww0kc-0001G5-S6
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 17:03:54 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1ww0Ko-0099ew-Cb
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 18:37:14 +0200
-Received: from [10.42.69.12] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <SRS0=MkDe=GK=ens-lyon.org=samuel.thibault@bounce.ens-lyon.org>)
- id 6a833885-bab6-0a2a0a5309dd-0a2a450c8b8a-34
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 18:37:14 +0200
-Received: from [140.77.166.138] (helo=sonata.ens-lyon.org)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <SRS0=MkDe=GK=ens-lyon.org=samuel.thibault@bounce.ens-lyon.org>)
- id 6a8338b9-f479-0a2a450c0019-8c4da68ab6b6-3
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 18:37:14 +0200
-Received: from localhost (localhost [127.0.0.1])
- by sonata.ens-lyon.org (Postfix) with ESMTP id B9E60A1AB6;
- Mon, 17 Aug 2026 18:37:13 +0200 (CEST)
-Received: from sonata.ens-lyon.org ([127.0.0.1])
- by localhost (sonata.ens-lyon.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id O95i-BvYQ_GZ; Mon, 17 Aug 2026 18:37:13 +0200 (CEST)
-Received: from end (lfbn-orl-1-1611-126.w90-107.abo.wanadoo.fr
- [90.107.165.126])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by sonata.ens-lyon.org (Postfix) with ESMTPSA id 856E8A1A90;
- Mon, 17 Aug 2026 18:37:13 +0200 (CEST)
-Received: from samy by end with local (Exim 4.99.4)
- (envelope-from <samuel.thibault@ens-lyon.org>)
- id 1ww0Kn-0000000Crmt-0NVk; Mon, 17 Aug 2026 18:37:13 +0200
+ id 1ww0kb-009Cj2-Nl
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 19:03:53 +0200
+Received: from [10.42.69.10] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
+ id 6a833ed9-e002-0a2a0a5209dd-0a2a450ae7b6-42
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 19:03:53 +0200
+Received: from [160.101.131.9] (helo=na1pdmzitismtp02.tibco.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
+ id 6a833ef8-f2d2-0a2a450a0019-a0658309d3f2-3
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 19:03:53 +0200
+Received: from fedora.eng.citrite.net (unknown [10.113.40.46])
+ by na1pdmzitismtp02.tibco.com (Postfix) with ESMTP id B578A82E3127;
+ Mon, 17 Aug 2026 13:01:57 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -63,73 +49,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=dkim header.d=ens-lyon.org header.i="@ens-lyon.org" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"; dkim=pass header.s=dkim header.d=ens-lyon.org header.i="@ens-lyon.org" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ens-lyon.org; s=dkim;
-	t=1786984633; bh=ZWx2q5QHX8DeCiM3ATZX3m7E39EtQ/oytXNyWT0yTKs=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=gJ80pqWHW8AOgE6jhXEMsLjSDqkwouFYkH3ww7O3BshFBKr+04plfmXrTsydBQLAa
-	 iXUP+Z73QDzfh8upufYwQ3yKRmdO8uJc38pgaYc8HWidTUGatXDlweN/O+mlciPW1B
-	 9Y44qHXty9pNlKnzxeZaIy5xJ0ZfOvAW/o/mAh0ArpVsgp7QvOVGB3bUKdax8/DI8e
-	 RHuGDIyqfJi1v+iLDLOseA66wdSAxCywbbN2QPXdPCDXnhAnj115nyRleyf8bHBsbS
-	 dvJOdhDfCcfPBwhEI8EIvjci+5n/+iP03D1aNMsxyB29Nmbswpz23zrW4DymaIMmqa
-	 0XOuorsTHV5hQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ens-lyon.org; s=dkim;
-	t=1786984633; bh=ZWx2q5QHX8DeCiM3ATZX3m7E39EtQ/oytXNyWT0yTKs=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=gJ80pqWHW8AOgE6jhXEMsLjSDqkwouFYkH3ww7O3BshFBKr+04plfmXrTsydBQLAa
-	 iXUP+Z73QDzfh8upufYwQ3yKRmdO8uJc38pgaYc8HWidTUGatXDlweN/O+mlciPW1B
-	 9Y44qHXty9pNlKnzxeZaIy5xJ0ZfOvAW/o/mAh0ArpVsgp7QvOVGB3bUKdax8/DI8e
-	 RHuGDIyqfJi1v+iLDLOseA66wdSAxCywbbN2QPXdPCDXnhAnj115nyRleyf8bHBsbS
-	 dvJOdhDfCcfPBwhEI8EIvjci+5n/+iP03D1aNMsxyB29Nmbswpz23zrW4DymaIMmqa
-	 0XOuorsTHV5hQ==
-Date: Mon, 17 Aug 2026 18:37:13 +0200
-From: Samuel Thibault <samuel.thibault@ens-lyon.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: xen-devel@lists.xenproject.org,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: Re: [PATCH 2/4] stubdom: remove pciutils
-Message-ID: <aoM4ufGg8QO51XB9@end>
-Mail-Followup-To: Samuel Thibault <samuel.thibault@ens-lyon.org>,
-	Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org,
-	Anthony PERARD <anthony.perard@vates.tech>
-References: <20260817071843.114898-1-jgross@suse.com>
- <20260817071843.114898-3-jgross@suse.com>
- <aoK8zVAP0C0ksD_0@end>
- <2e8b1f56-6447-44c9-9555-4f1b3f0a00e8@suse.com>
+Authentication-Results: eu.smtp.expurgate.cloud; none
+From: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: jbeulich@suse.com,
+	andrew.cooper3@citrix.com,
+	roger@xenproject.org,
+	jason.andryuk@amd.com,
+	teddy.astie@vates.tech,
+	Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+Subject: [PATCH v4] x86/nSVM: Validate the L1 IOPM physical address range
+Date: Mon, 17 Aug 2026 17:59:56 +0100
+Message-ID: <8302fc9800d6d5ffe8341ccf1a5f8cc0ee19540c.1786984508.git.abdelkareem.abdelsaamad@citrix.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <2e8b1f56-6447-44c9-9555-4f1b3f0a00e8@suse.com>
-Organization: I am not organized
-X-purgate-ID: tlsNG-d25034/1786984634-5290EA5B-8FA1C616/0/0
+X-purgate-ID: tlsNG-4011c0/1786986233-536D6CFC-77FDC0BC/0/0
 X-purgate-type: clean
-X-purgate-size: 936
+X-purgate-size: 5216
 
-Juergen Gross, le lun. 17 août 2026 10:24:02 +0200, a ecrit:
-> On 17.08.26 09:48, Samuel Thibault wrote:
-> > Juergen Gross, le lun. 17 août 2026 09:18:41 +0200, a ecrit:
-> > > There is no user of libpci left in stubdoms.
-> > > 
-> > > Remove libpci from the stubdom build system.
-> > 
-> > Wouldn't it be useful to keep this for anybody who would want to drive a
-> > PCI card from a stubdomain?
-> > 
-> > I mean, in the zlib case, it's really a mere question of build & link,
-> > so we don't need to ship it, people can do it themselves easily like for
-> > any other library.
-> > 
-> > But here there is actual porting work, that we'd better not lose but
-> > keep shipping.
-> 
-> This is all still available via git.
+The Xen nested virtualization code does not validate that the physical address
+range assigned by the L1 guest, for IOPM, resides within the valid guest
+physical memory. Add a sanity check to properly validate the IOPM is in the
+valid L1 guest address range. This check also makes the behaviour compliant
+with the hardware handling of the assigned address. The hardware is expected to
+trigger VMEXIT_INVALID if the address of the last byte in the IOPM is greater
+than or equal to the maximum supported physical address, see the APM
+volume #2 (40332—Rev. 4.40—July 2026).
 
-No, it is not really.
+While at it, clean up the code. Remove the unused bool viopm and the
+svm_vcpu::ns_oiomap_pa. Change nsvm_vmrun_permissionmap return error from
+literal 1 to NSVM_ERROR_VVMCB.
 
-I keep reading this argument, but people will not know that something
-exists in the git history, and will just assume that it does not exist
-and has to be written.
+Signed-off-by: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+---
+Changes in V4:
+- Replace the IOPM_PAGES_COUNT constant with an expression calculating the
+  actual page span of the IO permission map.
+- Rephrase the commit message to better describe the changes.
+Changes in V3:
+- Switch to using gfn_valid() instead of domain_get_maximum_gpfn() to align
+  with what is told to the guest in the CPUID.
+- Drop MSRPM validation as it is already validated.
+- Change nsvm_vmrun_permissionmap return error from literal 1 to
+  NSVM_ERROR_VVMCB.
+- Remove parentheses (IOPM_PAGES_COUNT - 1).
+Changes in V2:
+- Rename IOPM_MAX_PAGES_DIFF and MSRPM_MAX_PAGES_DIFF constants to
+  IOPM_PAGES_COUNT and MSRPM_PAGES_COUNT.
+- Drop the 2-pages for domain check.
+- Change the IOPM and MSRPM boundary checks.
+- Use gaddr_to_gfn instead of open-coding >> PAGE_SHIFT.
+- Use __func__ instead of hardcoding raw function names.
+---
+Testing:
+ - Using a locally developed XTF nested virt setup, I manually tested VMRUN
+   instruction handling with the address value (0xffffffffffffffffUL) assigned
+   to VMCB::iopm_base_pa:
+   - Without the changes the address is mapped by the Xen code to the address
+     0x604b634000 and it completes the execution without any reported errors.
+   - With the changes, the VMRUN execution fails and VMEXIT_INVALID is reported
+     back in the ns_vmexit.exitcode.
+ - CI tests:
+https://gitlab.com/xen-project/people/aabdelsa/xen/-/pipelines/2766682638
+---
+ xen/arch/x86/hvm/svm/nestedsvm.c         | 18 ++++++++++++++----
+ xen/arch/x86/include/asm/hvm/svm-types.h |  2 +-
+ 2 files changed, 15 insertions(+), 5 deletions(-)
 
-Samuel
+diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
+index b06124c2c9..b176e6000a 100644
+--- a/xen/arch/x86/hvm/svm/nestedsvm.c
++++ b/xen/arch/x86/hvm/svm/nestedsvm.c
+@@ -282,7 +282,7 @@ static int nsvm_vcpu_hostrestore(struct vcpu *v, struct cpu_user_regs *regs)
+     return 0;
+ }
+ 
+-static int nsvm_vmrun_permissionmap(struct vcpu *v, bool viopm)
++static int nsvm_vmrun_permissionmap(struct vcpu *v)
+ {
+     struct svm_vcpu *arch_svm = &v->arch.hvm.svm;
+     struct nestedsvm *svm = &vcpu_nestedsvm(v);
+@@ -294,6 +294,17 @@ static int nsvm_vmrun_permissionmap(struct vcpu *v, bool viopm)
+     enum hvm_translation_result ret;
+     unsigned long *ns_viomap;
+     bool ioport_80 = true, ioport_ed = true;
++    /* IOPM is structured as a linear array of 64K+3 bits. */
++    const unsigned long nr_iopm_additional_pages = PFN_DOWN((0x10000 + 8) / 8 - 1);
++    gfn_t ns_iopm_end =
++        gfn_add(gaddr_to_gfn(ns_vmcb->_iopm_base_pa), nr_iopm_additional_pages);
++
++    if ( !gfn_valid(v->domain, ns_iopm_end) )
++    {
++        gdprintk(XENLOG_ERR, "%s invalid _iopm_base_pa address (%#"PRIx64")\n",
++                 __func__, ns_vmcb->_iopm_base_pa);
++        return NSVM_ERROR_VVMCB;
++    }
+ 
+     ns_msrpm_ptr = (unsigned long *)svm->ns_cached_msrpm;
+ 
+@@ -302,13 +313,12 @@ static int nsvm_vmrun_permissionmap(struct vcpu *v, bool viopm)
+     if ( ret != HVMTRANS_okay )
+     {
+         gdprintk(XENLOG_ERR, "hvm_copy_from_guest_phys msrpm %u\n", ret);
+-        return 1;
++        return NSVM_ERROR_VVMCB;
+     }
+ 
+     /* Check l1 guest io permission map and get a shadow one based on
+      * if l1 guest intercepts io ports 0x80 and/or 0xED.
+      */
+-    svm->ns_oiomap_pa = svm->ns_iomap_pa;
+     svm->ns_iomap_pa = ns_vmcb->_iopm_base_pa;
+ 
+     ns_viomap = hvm_map_guest_frame_ro(svm->ns_iomap_pa >> PAGE_SHIFT, 0);
+@@ -418,7 +428,7 @@ static int nsvm_vmcb_prepare4vmrun(struct vcpu *v, struct cpu_user_regs *regs)
+     n2vmcb->_tsc_offset = n1vmcb->_tsc_offset + ns_vmcb->_tsc_offset;
+ 
+     /* Nested IO permission bitmaps */
+-    rc = nsvm_vmrun_permissionmap(v, clean.iopm);
++    rc = nsvm_vmrun_permissionmap(v);
+     if ( rc )
+         return rc;
+ 
+diff --git a/xen/arch/x86/include/asm/hvm/svm-types.h b/xen/arch/x86/include/asm/hvm/svm-types.h
+index 8acadb9dcc..beab9a3af2 100644
+--- a/xen/arch/x86/include/asm/hvm/svm-types.h
++++ b/xen/arch/x86/include/asm/hvm/svm-types.h
+@@ -51,7 +51,7 @@ struct nestedsvm {
+     unsigned long *ns_merged_msrpm;
+ 
+     /* guest physical address of virtual io permission map */
+-    paddr_t ns_iomap_pa, ns_oiomap_pa;
++    paddr_t ns_iomap_pa;
+     /* Shadow io permission map */
+     unsigned long *ns_iomap;
+ 
+-- 
+2.53.0
+
 
