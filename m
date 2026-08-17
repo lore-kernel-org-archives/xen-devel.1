@@ -4,41 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCC29C5B572
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 16:05:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1393096.1631992 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F228C5DF66
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 16:10:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1393103.1632000 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvzpR-0007xJ-5a; Mon, 17 Aug 2026 16:04:49 +0000
+	id 1wvzv9-0001IX-O4; Mon, 17 Aug 2026 16:10:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1393096.1631992; Mon, 17 Aug 2026 16:04:49 +0000
+Received: by outflank-mailman (output) from mailman id 1393103.1632000; Mon, 17 Aug 2026 16:10:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvzpR-0007xB-1z; Mon, 17 Aug 2026 16:04:49 +0000
-Received: by outflank-mailman (input) for mailman id 1393096;
- Mon, 17 Aug 2026 16:04:48 +0000
+	id 1wvzv9-0001IP-Ki; Mon, 17 Aug 2026 16:10:43 +0000
+Received: by outflank-mailman (input) for mailman id 1393103;
+ Mon, 17 Aug 2026 16:10:42 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brchuckz@aol.com>) id 1wvzpQ-0007x5-0b
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 16:04:48 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wvzv8-0001IJ-2Y
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 16:10:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wvzpO-0046wv-Go
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 18:04:46 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wvzv7-0047pO-86
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 18:10:41 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <brchuckz@aol.com>)
- id 6a8330fc-e002-0a2a0a5209dd-0a2a450abe00-46
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 18:04:45 +0200
-Received: from [98.137.65.147] (helo=sonic309-21.consmr.mail.gq1.yahoo.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <brchuckz@aol.com>)
- id 6a833115-f2d2-0a2a450a0019-62894193b44c-3
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 18:04:38 +0200
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic309.consmr.mail.gq1.yahoo.com with HTTP; Mon, 17 Aug 2026 16:04:36 +0000
-Received: by hermes--production-ne1-6dbcb84f44-46rwf (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID 98ae4e748b194883b83f02ba26d804c6; 
- Mon, 17 Aug 2026 16:04:34 +0000 (UTC)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a833276-2eae-0a2a0a5409dd-0a2a450294e2-18
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 18:10:41 +0200
+Received: from [209.85.221.44] (helo=mail-wr1-f44.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a833281-6ca4-0a2a45020019-d155dd2cd181-3
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 18:10:41 +0200
+Received: by mail-wr1-f44.google.com with SMTP id
+ ffacd0b85a97d-471eeac43bfso3155889f8f.3
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 09:10:41 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
+ [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-482a6c449dbsm4118368f8f.8.2026.08.17.09.10.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 17 Aug 2026 09:10:40 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,175 +52,176 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1786982676; bh=kW5c3iq1F6UiN1+G4AWz6LGpAojyDpS6Xdqm9qTL/OM=; h=Date:Subject:To:Cc:References:From:In-Reply-To:From:Subject:Reply-To; b=hpAxfWv6Gb2a8QcO+Dte9x4fOxzG5Pr6Fdd024s/I/OEywi4AUJh8ee2qNIOX4Vyt7ba95h7ZooSZ9oj42o4ZjCdhmpQAEJtEVRNJGN3EsRd28lgttmNT9ES9nyP/GQlfZ8sXW6FVwPvHwDxpV63bSJleeMkaSI5Np1rfHs3v9M13Ir1ABlg2X8cozpnfeKHHIERZMuOIM1PO58KKjV5ywL9Aqwm/jyPtS5kC5GoORzf2XRw+yiYj3+QGADZ9LmiTS7RIK3c2yRebDe4ezzWGs12cCxc496qLBSW8tYl6qMYyi3jjboBhG7O/+A/90WZV9le5AolpooakRHU3blKPw==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1786982676; bh=NsuSy2jgaze1RNyCPmJ/TICjkp37hf9r0mtC19/DrcU=; h=X-Sonic-MF:Date:Subject:To:From:From:Subject; b=FctgtNKRR6HKWoLV9khJk2Xy29ZVlR1klnaG0sAWnPeO4HSgFMBS8MF6vMyIz5mxZm/69tYKiv9ulYqv0rhHZcCAJV/5dQDz9G3yD2oquOgxpvfS06J0hM8aP7Tqxl9GU5Uh9ITP4XG7oIPUypePyonwe98zaTN7ka9OuyGg8GYGNJRl7gTcUIXmqn+Z/0APlQYdq0tJMeJveoppbiO0Zlp02eBV908wI+8Cco9wyk98w93eLdbweJLH8C85ygjp8a99rKQzp1/4ecfq7bMKfgCL6phMPB+t1Pp8X49PkbGLd5uwCmulmIgR/1AfLIn4bkLPfustdow+CzredzAjIg==
-X-YMail-OSG: nsFWtHQVM1maVCM_WIfpU.FdUWH6_7poqfjBjmtUjJ2ahZXT3SB_cCwkxZM1Kt1
- wtvgbJomoUQRNV5VfGii5S95KNhfu96JiB7mxBWYfjqIpgUwy.6O9iZCwrKcASSYVGJbBU9fcSBW
- eawx4vQKgAnn31bRI3vQuG3ES8iPqbpCJWCho3sqwmLWe6LpONtke59cMYlfSXAD.K.BReNsucwF
- iYTZk4uSep3mWkW.E0PWNWI_mJptAgLjID1dMdncOmxDwaDSjIF.qBsZcb_be5AaPhxcmyRQkwb5
- QkXmbGK9W6dYf0nz18EzlQJjU.cOhoYCVN7l._DOw9i0n1KN.YBIo.qBPy6RuNsBtiuvSaNNXsxx
- DqWZmYyq6rDsqKVlIQpKnXGMQULsO2QYh1nN8dGBVQ_c4YyLCcbE7RDe5yh.SSBikDU_b0TglDGH
- 1ksIXUz5dnWwsvSmzzl2C2ZT5bKB13aysIo9n0b1I5Yysc.KKoAe85jy7_lKXgPy9rZmpJkj80cN
- jrKZo_gTp0xu9SMRlYlHF4lRjH9tb4sS1g1xxSoeAPDEC6Gh7n9TVwOXVZsxb04vdcySNZ57QyoP
- FQHw86V9PFxgjSPY1mGeyRJCmwxtkMBHos.m41_AIi_swP_apTuFF2KjKryO2benBSh.EVI3hHzL
- NoP2zUPYn8r1APrC6FapsWIH_SQiP6W4T7MDbKqAKY9e8IV4.YX4NpjSv9nFyecg.52m.FNXM2tr
- ol.lWOexVwkV1Ym.tIM4syT3x0BcVwfEdyJhxXM08.r0.dW_fn3aPGIoz0j7C32uEVCbnHbO.TdA
- 27DIJNowBUNfhgQOgQ2Y3Tvc5.75yMAMz0MPIdmolfmzftjQh4jqRcKtH8X3zRZMM7i7Q5mRp_Ml
- eyQ3t9b4kFn1FyyTPWKniqGi7LpSL60u7ZGBhOrPQWoPjYYjpwNyud94Ka4EEq.UjkjigaLS_yjm
- pZ2W0bND50gO10mMbcE1KYIXGzqcLRpPMrZSYSwBgiImtKhbpawYq1wXk2OWhd_bKsVpWjFR1S7Z
- EZdqbh7rfxISnCrsxRMJHUJYDYBvGPUMmG8pUrdVb9meoI1C1pN_Z2Gry2_Kq9lUhRMgjhvxRxmq
- iggm8j8FoIRxrAvHVb7uBOAcu76g_I5vIJoIJFi5aEDm3DN6gA9QdIdQXUgfY1jFxEWTQubtpZxC
- p_sOyf4ICjlwio45.Njcn9gzVYSLOgQeXo4z0czae2Liq.wDcTowWSe6Q5BHNZrIqAVupyzPYgBM
- MViQTPDxNu6PIcY8bGUJ3rspCef054DI82gk0inGuiT2T1IXoJqci587ymIjuGEJLz3QEyUflk6r
- 4WZ3ebEoMtaiouOrglzqetR.HuhwuWhTHSyo3gm5_BuBqRuRlkqBOEh2nyvjFiMEUxrEgFWHtAlv
- 1c4BcHduZqEgcG5BKyzTErGE0lJKq4QRSdiMdaab57iV9aFs2G1VXXpvmgDQ8svEV7C5a_5xNYJp
- FslFWjyl9LqDgO0bPrKxfTcZT1vQV.OZDhNt4HnuQTFOXpMpsNtHjORZh_jlmp7vXXOC8s_i6ODR
- g7cLRX0cdoiuYctPaAGIS153rM5Z4lpSjy_hFJFgGr322J_wRqa8Q6lzL4Stk5HwVQmzjuiPAVO.
- _OfjRSMJtRCwn.ByPM9YNCy..Zwo1qul7XemewH2wt7IEEtPeX1qdG8zESxSB_TayGIbxV3aj4Be
- 7swS_R.pfWZHTFb_SZsb1XDrvBE958BNeZsSZ3FjHaJdGrFbEXTGhxRk7hWigBnqNCYNn8klWMdV
- mReNf.nzN0dE2RfIN5t.MExj4InVnHZAuRLkLNUPb2UIO8k_mPPD0uaR0m1GQmSpw5fR58jAkbHC
- E_5OCfB1zA5fVIogAERWK2VwUxq.26uWMikobRvpoR28QuBdrBBeEtfgJcJr47A3tWCNgGk7eVXX
- j2HYk6.bAE2Us98mjPjTKlyMTICJiDzMfx8Lf98bQPcYxkwaLiRnQCw1tAwAeiyu1JRs4RnQrx71
- ZgMGFYS_QJKA0pdyXwkVZNDfa7hfhE_sPQ8_PafKsvkW6hjk8UFhX9GXfeRDZVvedpcdoYr4Mdz2
- GK4AH9xDWNwyFI5ZrNBTj74pGuOXmFOjC3vPv6RF1x7LhNbmXVyfJGPgaIOs4s4d7tOpGS5cZXjg
- MhjQ.XTVAR8FOWhO7F_wNQpRWI407GM7zWS6qgseeTxnKjOs1AedIcvtS.lrPUlUooOpgqIFQoHH
- BXsHEwZM09egMih1R.jCd92ovEqXw3JamRf96KIpTKbE-
-X-Sonic-MF: <brchuckz@aol.com>
-X-Sonic-ID: 9e1a9e8c-efa5-495a-a07f-bf24d83300bf
-Message-ID: <fdec0b6b-eddf-4a36-a755-c67963daa9ea@aol.com>
-Date: Mon, 17 Aug 2026 12:04:33 -0400
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1786983041; x=1787587841; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=S5Lu+q0GTBbHqPkp+c6So3t9yaUIszgkEcgQDMo0x/M=;
+        b=Sd5Sod+io4Gir8N7fyWs0P8CZkpWoemqWVD0oondLxrBtlER7l0+vvvP+0TJbBgg+0
+         CdbWrCoCPgMZA98AtFoIBMWd9lwbzNQbHsSvdIa52SFpfrQq3B/UpxyG7MszQwwOiNfd
+         6rqDWiFJpQsA8sW7dj4JfucZKSnKThWDNYjnwnMvqeDImCCRJ+AOMMiiA2ilOuu1wk6f
+         er2HOXeolu+O8da6+XTisMi6+3LsKj1MH5B2VkUIzTFcl3pB98xBblMDLsF4if9oeRMl
+         lwjGMtO9uDLs9lNi75umiG3zTz5X/4QmQPQJxNvU8W4CIfVvGmZXZ16Yw5nqBvYTl2oW
+         nz9w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786983041; x=1787587841;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=S5Lu+q0GTBbHqPkp+c6So3t9yaUIszgkEcgQDMo0x/M=;
+        b=fKYt//STtvz33AIkc1+WAw1x59ZMhkBWxBl8IV+3iHbLwvBGYPndEfGP+qAtpiezSY
+         hmwDiX25NGR7QsY64F6OTidB6r9bXlxiLl4NL2gNaB6ZA+TiSXRjS3kvhhDhrG2NscK8
+         rZUH8VWmJitVX9S0WS+X6X6sVcCxmEcEbJrP/h6kCACP93IzC34iKGrjEJqrdUmQqFHw
+         cGQ1saqXXb19H7yyKkT2tqhuCjZpk5w4S4ywJ7Ft8MuUlS2SkVbbl6mDdZQ5su9BxXDo
+         P0d6N2Z9btIWPSwiz0YGy5Mo22/JzS3ClQ/h6wIarviMHWe7p+VKfB3nixyznpHm6Sci
+         A7Ug==
+X-Forwarded-Encrypted: i=1; AHgh+RpAaN0Jkn60IJLI8qFnplmQNeWlYuOGadCpjF31T5Ikam1yJTh4RJsgjpFlvOLUWnPyzVUNREBTZC4=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxHS1Jcr/i1lUUxXFcx7l+lct+eQ+LxOu2+DFOKtxxPh5vlAKyQ
+	1Z7HQB9AHefLPJ4CtIlEXlLLA1dgzhaiBCsDELdbGq+ShgDx0p7S391d
+X-Gm-Gg: AR+sD12Eck+EvRttNjWc6pY0de899AyCSq5lb3OXn8aXYY+4BaulAVLTTUCuGuxGWtr
+	9wx6ZSuGqdxNvzJgfnILVhQrhnC2a3Y89oBdwPMgFeseTjc4zLHM+Ws8jQcayg7L4gqnmK8epD6
+	ntfUpLgC9qUEXxhDpD8jjP6hi/y+kyUv3v0L2vcz2Oawy0LXWh+ib8HrKI1HjkByjqgkw6tZQm0
+	gLYDPBc+w5xRgOG817Bs5fb+JaOSIqisjrt/hf41BKybokqttuIlSazWvUU0o7qr5vWux6dj+c0
+	5ROkfISPnb6S6xKdpBbJSkdaZd1ssrg5u9AEQStWU/P+gAvIP5xY+EE9GPsOS1ho/hJWMqcL7jT
+	y08g6Gw+Kzu/tZegkYQFApZ01RTgPl+drmfZWsZ6dPhaKQMYLZVhcL72dIbsTjh8O+wY8QflQMv
+	keFp1NQyNA9jhrQmTx2OBk4lNBrWbfNHiMwZZcZjvI4Uqnk/PkuNGFNBNSl1CqV+OekT4Ld9hpG
+	Dzfc97aqEFt20Nj/ncwdcUTv8wLRkNeSwvRL9Zw11w=
+X-Received: by 2002:a05:6000:65b:b0:47f:943a:45fa with SMTP id ffacd0b85a97d-481607c0725mr42091138f8f.29.1786983040513;
+        Mon, 17 Aug 2026 09:10:40 -0700 (PDT)
+Message-ID: <61b9f565-7193-4192-9f57-1b4bd258fc11@gmail.com>
+Date: Mon, 17 Aug 2026 18:10:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] tools/hvmloader: implement Intel IGD extended VBT
- support
+Subject: Re: [PATCH v1 14/17] xen/riscv: add guest page fault handling stub
 To: Jan Beulich <jbeulich@suse.com>
-Cc: qemu-devel@nongnu.org, Andrew Cooper <andrew.cooper3@citrix.com>,
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>,
- xen-devel <xen-devel@lists.xenproject.org>
-References: <20260802050824.10554-1-brchuckz.ref@aol.com>
- <20260802050824.10554-1-brchuckz@aol.com>
- <2110d4b7-ae37-47aa-99be-ab59e16f6167@suse.com>
- <67579eba-e222-41dd-84bf-8440d2eaf2a9@netscape.net>
- <da2200cd-def7-4cce-a6c2-9f9ac9e202ce@suse.com>
- <de56c8bd-f0e8-4fe9-8cf5-f6807698176c@aol.com>
- <02a7dc18-4184-4e86-84cb-121769187f71@suse.com>
- <1858e8e6-73fa-4017-93e2-c733fbf0ec8d@aol.com>
- <d6e603bf-8dc5-4ac7-842f-ff9d1f67b98f@suse.com>
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
+ <7ef8919f12c269d180a2b56a83218cc54e0e357c.1784560663.git.oleksii.kurochko@gmail.com>
+ <ab3eb1be-ec62-42ae-8966-e2801752ce4f@suse.com>
 Content-Language: en-US
-From: Chuck Zmudzinski <brchuckz@aol.com>
-In-Reply-To: <d6e603bf-8dc5-4ac7-842f-ff9d1f67b98f@suse.com>
-Content-Type: text/plain; charset=UTF-8
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <ab3eb1be-ec62-42ae-8966-e2801752ce4f@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: WebService/1.1.26254 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
-X-purgate-ID: tlsNG-4011c0/1786982678-4A9D9CFC-D28EC325/0/0
-X-purgate-type: clean
-X-purgate-size: 4525
+X-purgate-ID: tlsNG-720697/1786983041-666B72AC-4AA59E4B/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 3693
 
-On 8/17/2026 4:42 AM, Jan Beulich wrote:
-> On 14.08.2026 17:23, Chuck Zmudzinski wrote:
->> On 8/14/2026 9:46 AM, Jan Beulich wrote:
->>> On 14.08.2026 15:18, Chuck Zmudzinski wrote:
->>>> On 8/14/2026 3:35 AM, Jan Beulich wrote:
->>>>> On 14.08.2026 02:45, Chuck Zmudzinski wrote:
->>>>>> On 8/13/2026 6:35 AM, Jan Beulich wrote:
->>>>>>> On 02.08.2026 07:08, Chuck Zmudzinski wrote:
->>>>>>>> -- snip --
->>>>>>>> +    /*
->>>>>>>> +     * Write rvda_host as 2 successive 32-bit values
->>>>>>>> +     * to communicate location of the VBT to the device
->>>>>>>> +     * model. If rvda_host is not 0, The device model
->>>>>>>> +     * unmaps the OpRegion and eventually maps the VBT
->>>>>>>> +     * after we also write the guest address where the
->>>>>>>> +     * VBT will be mapped.
->>>>>>>> +     *
->>>>>>>> +     * If we send rvda_host = 0 to the device model, it
->>>>>>>> +     * will assume we do not need OpRegion 2 support and
->>>>>>>> +     * it will not unmap the OpRegion.
->>>>>>>> +     */
->>>>>>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
->>>>>>>> +               (uint32_t)(rvda_host & 0xfffffffful));
->>>>>>>> +    unsigned long rvda_host_upper_32 = (uint64_t)rvda_host >> 32;
->>>>>>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
->>>>>>>> +               (uint32_t)rvda_host_upper_32);
->>>>>>>
->>>>>>> Why would you need to communicate a host property to the DM?
->>>>>>
->>>>>> The DM cannot access the host rvda value because it is only accessible
->>>>>> from the host kernel, and the DM is only a user-space process on the host.
->>>>>
->>>>> I don't follow this: Anything the guest can access should also be accessible
->>>>> by its DM.
->>>>
->>>> I think the host OpRegion is not currently accessible by the DM.
->>>
->>> Can you explain to me how the region becomes accessible to the guest?
->>> That would then (hopefully) help me understand why the DM would not have
->>> access. Fundamentally any MMIO and any I/O ports that are assigned to a
->>> guest are also assigned to its DM.
->> 
->> Currently, in the device model (Qemu) we have:
->> 
->>     ret = xc_domain_memory_mapping(xen_xc, xen_domid,
->>             (unsigned long)(igd_guest_opregion >> XC_PAGE_SHIFT),
->>             (unsigned long)(igd_host_opregion >> XC_PAGE_SHIFT),
->>             XEN_PCI_INTEL_OPREGION_PAGES,
->>             DPCI_ADD_MAPPING);
->> 
->> That statement is in the igd_write_opregion(...) function in the
->> hw/xen/xen_pt_graphics.c file of the upstream Qemu source.
->> 
->> If I understand our current implementation correctly, this statement
->> is what gives the guest access to the host OpRegion (3 pages as defined
->> by XEN_PCI_INTEL_OPREGION_PAGES, and in agreement with IGD_OPREGION_PAGES
->> in hvmloader code).
+
+
+On 8/12/26 5:48 PM, Jan Beulich wrote:
+> On 20.07.2026 18:02, Oleksii Kurochko wrote:
+>> --- a/xen/arch/riscv/traps.c
+>> +++ b/xen/arch/riscv/traps.c
+>> @@ -191,6 +191,67 @@ static void timer_interrupt(void)
+>>       raise_softirq(TIMER_SOFTIRQ);
+>>   }
+>>   
+>> +static always_inline unsigned long get_faulting_gpa(void)
 > 
-> No, it introduces mappings of those pages into the guest's P2M.
-> 
->> I don't think this statement makes the host OpRegion
->> accessible to the device model, though, so I think, if I understand your
->> comment in an earlier about my patch resulting in what you called a "layering
->> violation" correctly, that our current implementation is also guilty of this
->> same kind of "layering violation."
-> 
-> That code, if it can be successfully executed, indeed doesn't grant any
-> permissions (to the DM or the guest). Instead it proves that the DM has the
-> needed permissions to access the pages itself.
+> May I suggest to use always_inline only when inlining is _functionally_
+> required?
 
-So, are you saying it should be possible, without any patches to either Xen or
-the Linux kernel, for Qemu to get a pointer to the OpRegion? If so, how?
-
-I think I could implement what you proposed in an earlier message and do
-all (or most) of this in the DM instead of here in hvmloader:
-
-> The more correct thing to do might be for the DM to
-> put in place a copy before the guest (i.e. hvmloader) even gains control.
-> (How in turn the DM would learn of the contents of the opregion is a
-> separate question then.)
-
-Actually, when I was developing this patch, I tried first to do it that
-way, but the problem was, I could not find a way to get a pointer to the
-host OpRegion in Qemu.
-
-So, how can I get a pointer to the host OpRegion in Qemu?
-
-This is what the handling of
-> XEN_DOMCTL_memory_mapping has in this regard:
-> 
->         ret = -EPERM;
->         if ( !iomem_access_permitted(current->domain, mfn, mfn_end) )
->             /* Nothing. */;
-> 
-> Subsequently we check that the guest is also permitted access:
-> 
->         else if ( iomem_access_permitted(d, mfn, mfn_end) )
-
-
-
-
+Sure. But it ins't clear to me why it isn't a case here? Is it connected 
+to that function is static and too simple so a compiler will do by itself?
 
 > 
-> Jan
+>> +{
+>> +    /*
+>> +     * According to RISC-V spec:
+>> +     *  18.2.8. Hypervisor Trap Value Register (htval)
+>> +     *   ...
+>> +     *   A guest physical address written to htval is shifted right by 2 bits
+>> +     *   to accommodate addresses wider than the current XLEN.
+>> +     *   ...
+>> +     *   If the least-significant two bits of a faulting guest physical address
+>> +     *   are needed, these bits are ordinarily the same as the
+>> +     *   least-significant two bits of the faulting virtual address in stval.
+>> +     *   For faults due to implicit memory accesses for VS-stage address
+>> +     *   translation, the least-significant two bits are instead zeros. These
+>> +     *   cases can be distinguished using the value provided in register htinst.
+>> +     */
+>> +    return (csr_read(CSR_HTVAL) << 2) | (csr_read(CSR_STVAL) & 0x3);
+> 
+> Well, okay, but instead of not losing the bottom two bits you're now losing
+> the top two ones.
 
+Oh, right, I will add a cast ((uint64_t)csr_read(CSR_HTVAL) << 2) | ...
+
+It will cover all the cases RV32 which has 34-bit guest address and it 
+will be enough for RV64 where GPA is 59bit (the highest possible for Sv59).
+
+> 
+> Also the spec reads as if htval only _may_ hold the original address of the
+> faulting access. What if htval ends up 0?
+
+good point. then we have to emulate fault instruction and get an address 
+from an instruction. I think that for now it will be enough just to 
+support platforms which always write GPA to HTVAL.
+
+If I understand correctly if htval is supported by platform then htval 
+will be always filled for guest page fault. To verify if HTVAL is 
+supported we could do:
+
+'Unless it has reason to assume otherwise (such as a platform standard), 
+software that writes a value to htval should read back from htval to 
+confirm the stored value.'
+
+And is it true because:
+```
+A value of zero in mtval signifies either that the feature is not 
+supported, or an illegal zero instruction was fetched.
+```
+(yes, it is about mtval but I asssume that htval has the same behaviour').
+
+Otherwise if it won't work then we can't distinguish if it is zero 
+because h/w doesn't update htval or it zero because faulty GPA is zero.
+
+So we could add this check under #ifdef CONFIG_DEBUG here and if HTVAL 
+isn't supported then we can't work on this platform.
+
+> 
+> Further, nit: There's (once again) no real value in the 0x prefix, I don't
+> think.
+
+Sure I will drop then.
+
+> 
+>> +static int emulate_load(unsigned long fault_addr, unsigned long htinst)
+>> +{
+>> +    return -EOPNOTSUPP;
+>> +}
+>> +
+>> +static int emulate_store(unsigned long fault_addr, unsigned long htinst)
+>> +{
+>> +    return -EOPNOTSUPP;
+>> +}
+>> +
+>> +static void handle_guest_page_fault(unsigned long cause,
+>> +                                    struct cpu_user_regs *regs)
+>> +{
+>> +    unsigned long addr;
+>> +    int rc;
+>> +
+>> +    addr = get_faulting_gpa();
+> 
+> Can't this become the initializer of the variable?
+
+Sure, it can. I will do that.
+
+Thanks.
+
+~ Oleksii
 
