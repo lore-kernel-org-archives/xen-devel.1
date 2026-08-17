@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7ED8C5DF70
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 09:15:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1392753.1631745 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6816C5DF70
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 09:18:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1392760.1631753 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvtR4-0003EY-Um; Mon, 17 Aug 2026 09:15:14 +0000
+	id 1wvtUI-0003ys-Bj; Mon, 17 Aug 2026 09:18:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1392753.1631745; Mon, 17 Aug 2026 09:15:14 +0000
+Received: by outflank-mailman (output) from mailman id 1392760.1631753; Mon, 17 Aug 2026 09:18:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvtR4-0003ER-Rv; Mon, 17 Aug 2026 09:15:14 +0000
-Received: by outflank-mailman (input) for mailman id 1392753;
- Mon, 17 Aug 2026 09:15:14 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wvtUI-0003yl-94; Mon, 17 Aug 2026 09:18:34 +0000
+Received: by outflank-mailman (input) for mailman id 1392760;
+ Mon, 17 Aug 2026 09:18:33 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wvtR4-0003EJ-Aj
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 09:15:14 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wvtUG-0003yc-So
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 09:18:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wvtR3-007wvY-3J
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 11:15:13 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wvtUG-009WZX-0o
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 11:18:32 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a82d11b-bab6-0a2a0a5309dd-0a2a450581b6-16
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 11:15:13 +0200
-Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a82d1c7-e002-0a2a0a5209dd-0a2a45018378-44
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 11:18:31 +0200
+Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a82ccab-4cb1-0a2a45050019-d1558029d47f-3
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 10:56:12 +0200
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-49954b88fffso35273405e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 01:56:11 -0700 (PDT)
+ id 6a82d1e7-5984-0a2a45010019-d155802ed089-3
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 11:18:31 +0200
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-495757ccbc1so28326695e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 02:18:31 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4999d078523sm26288775e9.6.2026.08.17.01.56.10
+ 5b1f17b1804b1-4999d0876b8sm33985065e9.8.2026.08.17.02.18.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Aug 2026 01:56:10 -0700 (PDT)
+ Mon, 17 Aug 2026 02:18:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,63 +53,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786956971; x=1787561771; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=AEdc8GQ0X7pW91c3IJ6VKmtma1QrK/AiK+09OB1ma3I=;
-        b=DoBInu21q/5nILPbRnbDGqbwzxbg5Vsv5E05GQacq+UUcTO1sepRNwOa5HzSht9Nqt
-         WOVrNG6Pm3EfssQgremI3YuinivuMxGGtumUe16eKxBRmcQ2PrQLqWOLDZ0s5+nei0ts
-         IME+iYmdKV8os1nqVg6in8AdXOqDFxK74fMwImH8QRv+rHnP0spOuP71AGTYg9JYCtPb
-         17Ue0yV/GvK5xDQ+dekpdmCZkhrERMpEqt0y4SVsrXPl5NyR9IOaX9DS7fQt2FrgfkEu
-         YOHea3H7q6Oq9lPXphFUa0lA1nl9JMghQ7Mn2oNUqtpTCu0SwdiuO9cdQbkNB66xxvbE
-         WQWQ==
+        d=suse.com; s=google; t=1786958311; x=1787563111; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=hbkYtSJwMzBKBO/qIaZ9S5VqcBP390ZyMFSdmF8cAK0=;
+        b=HZW+lrLUP8XfqZMrufWIQqXczD6KQ8tZKte70SBoVZ04aFfa3GcmlmQBUFwn+B+FtS
+         oANGw9VguK2yLWG3X9LmFOeGI+6iryx+2SemZ6ImQVCrM53IW0gfGBZ01FmoblJOT4PE
+         MeHgyHJ98JvvciO0EJHb4SHEfTf2eUMH74OWrhDtk3P8AjjjPtWttO1Kbt4ffUV/rQ5G
+         1WjHjiTu2qCRIWyocDgiGKG/q0EsLtC34yR4fDNPz7/BPANa4ll081apyWril4eq6flC
+         SJ/PfYF8X5lSL20Qap0v1x2aRR/rzPANIleDFytblyaLYFnoDTPIumzOq4K/2IpYJr5L
+         sj2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786956971; x=1787561771;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=AEdc8GQ0X7pW91c3IJ6VKmtma1QrK/AiK+09OB1ma3I=;
-        b=TH1yijPr8KwZb1aW1YeewoOc0b3/0FI2miai4j0FLCX3Rahi4Wy47W5UTwQVgz/tAy
-         IwgJ5w0N99Tm5xwnpoTS62yxGHwXv+gCyg9YGZL+b4a4Ha3tT3h4Gvx5VRv30pHjde5x
-         SbtyuVXLs/yJWN/h5Up5VAf7AMgmJsYo80NIUtMxwWXsCndtHyk0xRSkQiKigENhQVA7
-         EuJqs24xM0Y4RUBOUqToE8n7q/po6k5YWQ5z8XRDkF2aGizik9cizTrTLIMkz3dtIVd2
-         C+zBW6/jsSspmB7+yam0VIsI0u9qy4/zN3FM3cUhzneFF0tH1gvwNrXu0ozCEFR3zf5H
-         L7ZQ==
-X-Gm-Message-State: AOJu0Ywxdajk2TmpH1/7OvSo9Bp2hB0a05kIQ6D6+uCRrn2uyUgavT8O
-	JPSnmoXVwIHUySf2JW9ynd8HDLJfqbd/M5NBEOJ9Bw1e/l3us9fq0CESaqMyvrkmOmlNMHRxhvS
-	h7wDExg==
-X-Gm-Gg: AR+sD13APOL4AYPBDqc9NCjuKwyfxxzevkZUZipzYmir9NjGa1tV4RGYg0KlhkGypVB
-	BcHHNoU4lOrCKp3VsuYbejs4Btny9CStm5GqbIMxjbaUzUwYWsPbyM655aQSnZNsbai4C3iAW4Q
-	tbjk91SwGbIxfT01wsGJhh9UPwMCgDFo+sgpiQ6n2wTHkGcEmOBaZz5zTwhjNC8SvfDNeEtiKyN
-	hhbqz+Szx9kYcKIJNL8fEzFwZhf8tAfK8jEgIxYbBXhc8/pw/QcR1RHQv5TiZQJfbdVkIvhSeTJ
-	g6nsTW80Nbo72f3X2cO+XmrjauAfLHVaF498RUj0hCqCu22n+m8R70ElXKMZIZkO08DR63KJ82p
-	K0NgZVGJYfwuA2EKxggrt46Rjtc0vQ/8QGpcwG/hLHBP0Yob1MMk2U/TyGSxqR0kSn9BeijxKfp
-	giZIWnR2yiG71/VheJO0L5rWLwZpedmSz6aGcn2GiXFE1GdjLATAet1UkMSsnubjbPMMqTU92Zu
-	CSSAXpWSyP6Bc9BH/JzpwuwNzGUnYOxcYSMaPriL/+FQLxz5mxL
-X-Received: by 2002:a05:600c:3114:b0:495:63e4:7f78 with SMTP id 5b1f17b1804b1-49987971986mr337054185e9.10.1786956971404;
-        Mon, 17 Aug 2026 01:56:11 -0700 (PDT)
-Message-ID: <51370c2d-89dd-4c82-9cc6-53a560d1c9ac@suse.com>
-Date: Mon, 17 Aug 2026 10:56:12 +0200
+        d=1e100.net; s=20251104; t=1786958311; x=1787563111;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=hbkYtSJwMzBKBO/qIaZ9S5VqcBP390ZyMFSdmF8cAK0=;
+        b=jM1J7KT3Q2vmdwX1CpwtnPwgyu9ke8vHGVyBlyAFbSKKU2fqKNJfva4pXKJJvhRQtQ
+         t87g/lXfT3ZjKjnSDvYn/ooU9CA2Rw2X5533FTx2RGZrQiA7XSTKXraXmtZZ4m0Zc6uR
+         gM7ylr5P3NsJL68tcRlT0yHWHTcZ47JnUlduuZx66gGpORgx5YMpQne2JlTbi8M7hE4e
+         9805zvJ+kg0EJQ7NWeaBvmdOPg5PtFU9LlmiBYNK+YAdEcabzcYZ4mvJzFNac0NoJ3aQ
+         HC6DWCvsolLhrLA8AgfLExLe1cbIrq8NjZRoWvMizPl8/htmoBapOWrH4EDJnFkyc6zk
+         7lxA==
+X-Forwarded-Encrypted: i=1; AHgh+RpYEhsdNsidaQoJIYdmdYmux+E+pSZTcM1l+CIo/MhkQwUIPX7m0twEiuO1t7LEkGuqrCnZGPSpkgQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw9R0zEbIXKmmGxyRAOv4APT1QH9l//v79PGUZmMhUjTXYvXDyD
+	o39gwiKo+yBt7SKNbwr/1wCLnyN5VARBVAD5EYHhDS8+iKCXd+29eI4RoPfIlwpGpw==
+X-Gm-Gg: AR+sD12lttRieYdQsPTrFvcjVH+9CYDjS7wkFk3ZqVtmTM6RbXzgHo9G/w2e/ICMn8Q
+	kzqBDXHhV0MJVvVAgnwzCHs9FAbXJ53ZdJEfyGOEH4oFOW6fEJWVo1a5t2yJhG+VP5wQDXNVmmO
+	8jyozbpsgicHFcW1ScHzKC1LvcWXI1QahauCEdlgPYjkWYGUrXWFjOHzSAJdEk7LscmIG2gOyfi
+	bI/uLQ47GFdTcUGK40V9kMAdp0BN3vpsswLX4QiNThcbDPp3+I3RGpo4kn1m2cpjtmre3wiINqQ
+	MOHaZd6OoRhu1fN2/wAXLb2//aEKORgobhDp2iPy+9y3WxdRmU0DmSucQTroju1Lwv+JjIkWCyF
+	7V6v8vUKUcvdK1aoDe0fJ0mLZ4qNCfEcSbDPczUEU6bPeRaHgfnMmux1Dhtdp7o+BLIk/snui4f
+	HbrvkI6yA4tn3oo7S5Uh1y6LYEE8J+yWmp7dgo/Gz6OBPorOszY4d94OZIIJsrYhSMI4ZYSZLO5
+	YkO71XY4V+QhVFDqEogqNpq0BZAKXk6CHzw36gqPeKnTuDYU8G4AyJY226PNhQ=
+X-Received: by 2002:a05:600c:871b:b0:499:8b00:5261 with SMTP id 5b1f17b1804b1-4998b0052cdmr336753065e9.8.1786958311160;
+        Mon, 17 Aug 2026 02:18:31 -0700 (PDT)
+Message-ID: <0086d141-f434-41ef-8048-078882bf3818@suse.com>
+Date: Mon, 17 Aug 2026 11:18:32 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2 10/14] XSM: fold xsm_{,un}bind_pt_irq() hooks
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Daniel Smith <dpsmith@apertussolutions.com>, Julien Grall
- <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
-References: <ef09b072-c935-459e-bf8b-81c96ff9cc46@suse.com>
+Subject: Re: [PATCH v2] tools/hvmloader: implement Intel IGD extended VBT
+ support
+To: Chuck Zmudzinski <brchuckz@aol.com>
+Cc: qemu-devel@nongnu.org, Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>,
+ xen-devel@lists.xenproject.org, Anthony PERARD <anthony.perard@vates.tech>
+References: <20260802050824.10554-1-brchuckz.ref@aol.com>
+ <20260802050824.10554-1-brchuckz@aol.com>
+ <2110d4b7-ae37-47aa-99be-ab59e16f6167@suse.com>
+ <67579eba-e222-41dd-84bf-8440d2eaf2a9@netscape.net>
+ <da2200cd-def7-4cce-a6c2-9f9ac9e202ce@suse.com>
+ <a98b7e5f-240b-4642-b488-fac69846b3f8@aol.com>
 Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -133,140 +135,125 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <ef09b072-c935-459e-bf8b-81c96ff9cc46@suse.com>
+In-Reply-To: <a98b7e5f-240b-4642-b488-fac69846b3f8@aol.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1786956972-714AC2A1-26582E4F/19/8833835083
+X-purgate-ID: tlsNG-d62444/1786958311-1E465757-1433EE64/0/0
 X-purgate-type: clean
-X-purgate-size: 4607
+X-purgate-size: 6056
 
-Like other resource management hooks they are mainly different in "add
-resource" vs "remove resource". Hence like in other cases a single hook
-can easily serve both purposes, with minor tweaking of
-flask_bind_pt_irq(). While adjusting that function, also defer the setting
-of "dperm", which is only needed in the "map" case.
+On 16.08.2026 18:38, Chuck Zmudzinski wrote:
+> On 8/14/2026 3:35 AM, Jan Beulich wrote:
+>> On 14.08.2026 02:45, Chuck Zmudzinski wrote:
+>>> On 8/13/2026 6:35 AM, Jan Beulich wrote:
+>>>> On 02.08.2026 07:08, Chuck Zmudzinski wrote:
+>>>>> -- snip --
+>>>>> +    /*
+>>>>> +     * Read the value the device model is initialized with.
+>>>>> +     * If the device model supports OpRegion 2, it will
+>>>>> +     * return the host IGD OpRegion address. If not, it
+>>>>> +     * will return 0. If the device model does not support
+>>>>> +     * OpRegion 2, the device model expects us to give it
+>>>>> +     * the address to which it will map the OpRegion in the
+>>>>> +     * guest and then expects us to do nothing more to setup
+>>>>> +     * the OpRegion, so that is all we will do in that case.
+>>>>> +     */
+>>>>
+>>>> Hmm, exposing the host opregion to a guest certainly feels like an issue.
+>>>
+>>> Well, that is how it is now. I am only retaining it to maintain backward
+>>> compatiblily with DM versions that do not support the extended VBT and
+>>> OpRegion 2+. My previous comment about backward compatibilty and DM
+>>> compatibility also applies here. If we don't worry about that, we can do
+>>> away with any cases where we are permanently mapping the host opregion to
+>>> the guest and implement this new approach of always exposing a copy of
+>>> the OpRegion and VBT to the guest instead.
+>>
+>> How does "permanently mapping" matter? hvmloader runs inside the guest, so
+>> exposure just to copy the data isn't any better in terms of this being a
+>> layering violation. The more correct thing to do might be for the DM to
+>> put in place a copy before the guest (i.e. hvmloader) even gains control.
+>> (How in turn the DM would learn of the contents of the opregion is a
+>> separate question then.)
+> 
+> I am working on v3 of this patch and I want v3 to address this problem of a
+> "layering violation" that you mentioned here, but I do not understand exactly
+> what you mean. Do you mean to say that the current code we have in place and
+> have had in place for over the past 10 years [1] in the Qemu DM that traps and
+> maps the OpRegion into the guest is a "layering violation?"
+> 
+> [1] https://xenbits.xen.org/gitweb/?p=qemu-xen.git;a=commitdiff;h=5cec8aa38cc
+> ("xen, gfx passthrough: add opregion mapping")
 
-Rename hook and functions to fit xsm_{io{mem,port},{p,}irq}_mapping().
+All I can say is that this at least smells like a layering violation. It maybe
+wouldn't have if, in your patch, you didn't demonstrate that the machine page
+range doesn't really need mapping, as copying the data and providing that to
+the guest is sufficient. In such a case, the machine range should (imo) never
+have been exposed. After all the guest then can fiddle with it, potentially
+breaking later guests that are to also use the region.
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-v2: Fix inverted part of conditional in flask_bind_pt_irq(). Rename hook,
-    functions, and new parameter.
+>>>>> +    /*
+>>>>> +     * Write rvda_host as 2 successive 32-bit values
+>>>>> +     * to communicate location of the VBT to the device
+>>>>> +     * model. If rvda_host is not 0, The device model
+>>>>> +     * unmaps the OpRegion and eventually maps the VBT
+>>>>> +     * after we also write the guest address where the
+>>>>> +     * VBT will be mapped.
+>>>>> +     *
+>>>>> +     * If we send rvda_host = 0 to the device model, it
+>>>>> +     * will assume we do not need OpRegion 2 support and
+>>>>> +     * it will not unmap the OpRegion.
+>>>>> +     */
+>>>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
+>>>>> +               (uint32_t)(rvda_host & 0xfffffffful));
+>>>>> +    unsigned long rvda_host_upper_32 = (uint64_t)rvda_host >> 32;
+>>>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
+>>>>> +               (uint32_t)rvda_host_upper_32);
+>>>>
+>>>> Why would you need to communicate a host property to the DM?
+>>>
+>>> The DM cannot access the host rvda value because it is only accessible
+>>> from the host kernel, and the DM is only a user-space process on the host.
+>>
+>> I don't follow this: Anything the guest can access should also be accessible
+>> by its DM.
+> 
+> I also don't follow your comment here so permit me to comment and ask some
+> questions for clarification.
+> 
+> I was thinking it is enough for the domain the DM is running in to have
+> access to the resource for it to be legitimate for the DM to map the resource
+> into the guest. So I also think that whether or not the DM itself can access
+> the resource is irrelevant to the question. But you seem to be saying, no,
+> that is not enough, the DM itself should be able to access the resource
+> before it can be allowed to map the resource to its guest. Is that what you
+> are saying?
 
---- a/xen/arch/arm/domctl.c
-+++ b/xen/arch/arm/domctl.c
-@@ -104,7 +104,7 @@ long arch_do_domctl(struct xen_domctl *d
-         if ( rc )
-             return rc;
- 
--        rc = xsm_bind_pt_irq(XSM_DM_PRIV, d, bind);
-+        rc = xsm_pt_irq_binding(XSM_DM_PRIV, d, bind, true);
-         if ( rc )
-             return rc;
- 
-@@ -140,7 +140,7 @@ long arch_do_domctl(struct xen_domctl *d
-         if ( irq != virq )
-             return -EINVAL;
- 
--        rc = xsm_unbind_pt_irq(XSM_DM_PRIV, d, bind);
-+        rc = xsm_pt_irq_binding(XSM_DM_PRIV, d, bind, false);
-         if ( rc )
-             return rc;
- 
---- a/xen/arch/x86/domctl.c
-+++ b/xen/arch/x86/domctl.c
-@@ -622,7 +622,7 @@ long arch_do_domctl(
-         if ( !is_hvm_domain(d) )
-             break;
- 
--        ret = xsm_bind_pt_irq(XSM_DM_PRIV, d, bind);
-+        ret = xsm_pt_irq_binding(XSM_DM_PRIV, d, bind, true);
-         if ( ret )
-             break;
- 
-@@ -660,7 +660,7 @@ long arch_do_domctl(
-         if ( !is_hvm_domain(d) )
-             break;
- 
--        ret = xsm_unbind_pt_irq(XSM_DM_PRIV, d, bind);
-+        ret = xsm_pt_irq_binding(XSM_DM_PRIV, d, bind, false);
-         if ( ret )
-             break;
- 
---- a/xen/include/xsm/dummy.h
-+++ b/xen/include/xsm/dummy.h
-@@ -477,15 +477,9 @@ static XSM_INLINE int xsm_irq_mapping(
-     return xsm_default_action(action, current->domain, d);
- }
- 
--static XSM_INLINE int xsm_bind_pt_irq(
--    XSM_DEFAULT_ARG struct domain *d, struct xen_domctl_bind_pt_irq *bind)
--{
--    XSM_ASSERT_ACTION(XSM_DM_PRIV);
--    return xsm_default_action(action, current->domain, d);
--}
--
--static XSM_INLINE int xsm_unbind_pt_irq(
--    XSM_DEFAULT_ARG struct domain *d, struct xen_domctl_bind_pt_irq *bind)
-+static XSM_INLINE int xsm_pt_irq_binding(
-+    XSM_DEFAULT_ARG struct domain *d, struct xen_domctl_bind_pt_irq *bind,
-+    bool map)
- {
-     XSM_ASSERT_ACTION(XSM_DM_PRIV);
-     return xsm_default_action(action, current->domain, d);
---- a/xen/include/xsm/hooks.h
-+++ b/xen/include/xsm/hooks.h
-@@ -72,8 +72,8 @@ XSM_HOOK(int, pirq_mapping, struct domai
- #endif
- 
- XSM_HOOK(int, irq_mapping, struct domain *, int, const pci_sbdf_t *, bool)
--XSM_HOOK(int, bind_pt_irq, struct domain *, struct xen_domctl_bind_pt_irq *)
--XSM_HOOK(int, unbind_pt_irq, struct domain *, struct xen_domctl_bind_pt_irq *)
-+XSM_HOOK(int, pt_irq_binding, struct domain *, struct xen_domctl_bind_pt_irq *,
-+                              bool)
- 
- XSM_HOOK(int, irq_permission, struct domain *, int, bool)
- XSM_HOOK(int, iomem_permission, struct domain *, uint64_t, uint64_t, bool)
---- a/xen/xsm/flask/hooks.c
-+++ b/xen/xsm/flask/hooks.c
-@@ -1089,17 +1089,16 @@ static int cf_check flask_irq_mapping(
-     return avc_has_perm(dsid, sid, SECCLASS_RESOURCE, dperm, &ad);
- }
- 
--static int cf_check flask_bind_pt_irq(
--    struct domain *d, struct xen_domctl_bind_pt_irq *bind)
-+static int cf_check flask_pt_irq_binding(
-+    struct domain *d, struct xen_domctl_bind_pt_irq *bind, bool map)
- {
--    uint32_t dsid, rsid;
-+    uint32_t dsid, rsid, dperm;
-     int rc = -EPERM;
-     int irq;
-     struct avc_audit_data ad;
--    uint32_t dperm = flask_iommu_resource_use_perm(d);
- 
--    rc = current_has_perm(d, SECCLASS_RESOURCE, RESOURCE__ADD);
--    if ( rc )
-+    rc = current_has_perm(d, SECCLASS_RESOURCE, resource_to_perm(map));
-+    if ( rc || !map )
-         return rc;
- 
-     irq = domain_pirq_to_irq(d, bind->machine_irq);
-@@ -1113,13 +1112,9 @@ static int cf_check flask_bind_pt_irq(
-         return rc;
- 
-     dsid = domain_sid(d);
--    return avc_has_perm(dsid, rsid, SECCLASS_RESOURCE, dperm, &ad);
--}
-+    dperm = flask_iommu_resource_use_perm(d);
- 
--static int cf_check flask_unbind_pt_irq(
--    struct domain *d, struct xen_domctl_bind_pt_irq *bind)
--{
--    return current_has_perm(d, SECCLASS_RESOURCE, RESOURCE__REMOVE);
-+    return avc_has_perm(dsid, rsid, SECCLASS_RESOURCE, dperm, &ad);
- }
- 
- static int cf_check flask_irq_permission(
+That depends on what you mean by "access": The prereq is that the DM have
+permission to access the pages. It may not have an active mapping thereof.
 
+> Perhaps your comment here is related to the concept of a "layering violation"
+> mentioned above. Are you saying it is a layering violation for the DM to
+> map an MMIO resource to its guest unless it actually has access to that
+> resource? If so, what kind of access to those device resources should the
+> DM have? Read access? Read/Write access?
+
+No, I'm trying to bring across that (as said above) access to machine pages
+should not be granted when that isn't necessary. As in here: A copy of the
+pages looks to suffice, so simply give the guest access to a copy.
+
+> If the specs only say the DM "should" have access to the resources it maps
+> into its guest, then I would think it would not be a layering violation.
+> But if the specs say the DM "must" have access before it asks the hypervisor
+> to map the resource to the guest, then I would admit that yes, we have a
+> layering violation because the DM is mapping the OpRegion to the guest
+> even though it does not have access to the OpRegion.
+> 
+> So, where are the specs for what the DM can and cannot do? Are they publicly
+> available, or are they proprietary or only available to members of the Linux
+> Foundation and/or the Xen Project?
+
+Sadly the source code (of Xen and/or qemu) is the spec.
+
+Jan
 
