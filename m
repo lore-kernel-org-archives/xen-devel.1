@@ -4,45 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECE90C5CFC1
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 05:03:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1392403.1631394 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF330C5B572
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 06:11:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1392459.1631403 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvpUb-0003A5-8O; Mon, 17 Aug 2026 05:02:37 +0000
+	id 1wvqZB-0003Ve-TL; Mon, 17 Aug 2026 06:11:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1392403.1631394; Mon, 17 Aug 2026 05:02:37 +0000
+Received: by outflank-mailman (output) from mailman id 1392459.1631403; Mon, 17 Aug 2026 06:11:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvpUb-00039x-3Q; Mon, 17 Aug 2026 05:02:37 +0000
-Received: by outflank-mailman (input) for mailman id 1392403;
- Sun, 16 Aug 2026 21:38:47 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wvqZB-0003VW-Pa; Mon, 17 Aug 2026 06:11:25 +0000
+Received: by outflank-mailman (input) for mailman id 1392459;
+ Mon, 17 Aug 2026 06:11:25 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <davydov-max@yandex-team.ru>) id 1wviZ4-0005ah-Fv
- for xen-devel@lists.xenproject.org; Sun, 16 Aug 2026 21:38:47 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wvqZA-0003V7-Su
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 06:11:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wviZ3-00ElU8-Kq
- for xen-devel@lists.xenproject.org; Sun, 16 Aug 2026 23:38:45 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wvqZ9-007O62-6l
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 08:11:23 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <davydov-max@yandex-team.ru>)
- id 6a822d00-e002-0a2a0a5209dd-0a2a450cd670-22
- for <xen-devel@lists.xenproject.org>; Sun, 16 Aug 2026 23:38:44 +0200
-Received: from [178.154.239.72] (helo=forwardcorp1a.mail.yandex.net)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <davydov-max@yandex-team.ru>)
- id 6a822de3-f479-0a2a450c0019-b29aef48902e-3
- for <xen-devel@lists.xenproject.org>; Sun, 16 Aug 2026 23:38:44 +0200
-Received: from mail-nwsmtp-smtp-corp-main-69.vla.yp-c.yandex.net
- (mail-nwsmtp-smtp-corp-main-69.vla.yp-c.yandex.net
- [IPv6:2a02:6b8:c1f:3a87:0:640:845c:0])
- by forwardcorp1a.mail.yandex.net (postfix) with ESMTPS id 4843FC04B1;
- Mon, 17 Aug 2026 00:38:43 +0300 (MSK)
-Received: from [IPV6:2a02:6bf:8080:d7d::1:36] (unknown
- [2a02:6bf:8080:d7d::1:36])
- by mail-nwsmtp-smtp-corp-main-69.vla.yp-c.yandex.net (smtpcorp) with ESMTPSA
- id dcbpcP7WMGk0-PuYxShe7; Mon, 17 Aug 2026 00:38:42 +0300
+ (envelope-from <jbeulich@suse.com>)
+ id 6a82a608-bab6-0a2a0a5309dd-0a2a4506a842-4
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 08:11:22 +0200
+Received: from [209.85.221.44] (helo=mail-wr1-f44.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a82a60a-195a-0a2a45060019-d155dd2ce5b0-3
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 08:11:22 +0200
+Received: by mail-wr1-f44.google.com with SMTP id
+ ffacd0b85a97d-4815bce4652so1820259f8f.1
+ for <xen-devel@lists.xenproject.org>; Sun, 16 Aug 2026 23:11:22 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-482a5a3b487sm1232263f8f.10.2026.08.16.23.11.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 16 Aug 2026 23:11:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,218 +53,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=default header.d=yandex-team.ru header.i="@yandex-team.ru" header.h="From:In-Reply-To:Cc:Date:References:To:Subject:Message-ID"
-X-Yandex-Fwd: 1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
-	s=default; t=1786916322;
-	bh=s7HcjQ73f1ZgIcnWaPQZHhDiaXl1DsseYtimaK/ef9o=;
-	h=From:In-Reply-To:Cc:Date:References:To:Subject:Message-ID;
-	b=1EmW++UpFleYRX06kyKiftI59lLPaM4PFEKfv9Jmm9rhNokSq1pNou5tw0+HPmPfO
-	 qmQ8e3vRCmSD5lH56597DsCXvtLegbox74YhTR3svKed+E/U4G5GxLG1Ac/Cl3q7RB
-	 SK6n7VHiAjNBdT+15kEWI/E3qFJUcj3T2QcUTjRI=
-Authentication-Results: mail-nwsmtp-smtp-corp-main-69.vla.yp-c.yandex.net; dkim=pass header.i=@yandex-team.ru
-Message-ID: <ef3b56bf-8df0-4a40-82c7-bd2d65eec71e@yandex-team.ru>
-Date: Mon, 17 Aug 2026 00:38:39 +0300
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1786947082; x=1787551882; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=e3u9tF4r2QuCHyVAtgu30y4b/QROcSH9MWoc0U1I/88=;
+        b=DtzU91DL4x+IrVQqLPVCpW8xILRGNOaDJuYQntSvP/unG3CBUwxBXnKPGDlVKS6wbb
+         osQInDGlz1C0hQedYok72bp/EsWJS8G0Cgy8GS83/VGjbAMbMzOnhVJBn7LirfNn3L5g
+         mRg3sOp3f14yIMN6xsrlHU2/2M9ML8+tlfQ79nJfoeO1SYwfaoE4l5l6Wy35gItupCPH
+         sz55fYMLHmshgq6EbTfOEGhsOdyCoikPT/7oixwDCHGgumPD91clTU/c1ybbTLGVEldE
+         K59QN4j5cqaYAhT3HklW7GWxEf7dJZ0QcvCnKPLJ5r+4db6Jajn7DgVueNHeiS35yZXx
+         nIjA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786947082; x=1787551882;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=e3u9tF4r2QuCHyVAtgu30y4b/QROcSH9MWoc0U1I/88=;
+        b=Sy/yl99AozDbxXDxAbVDGcbhf6HnbyQss5zQyB/7txj9HLNMv41eXiIHIA/Pr/I73u
+         awaWpMrR97mw17MMQEIKUEEAkyTB0XpKuVckI7jZ5BI15ZuMAvIVgL/dBKn7/bLi0bLK
+         iWZ1ycdwOg3Wfh6GqME1YzblYj9Ci/AbEGBm8ucGQ2oGIV+sXLft3pamn+ff1xD3L8nB
+         XSM9y7rR2/EtvrfErepu/DIENdiAxG2YTA2x5/hNAR9DxnkCPMHrKkzBRcLfwc8THNxo
+         trHrMaHoR9W5+AOOw8gkgrdVOG93jAzQLnGt7V7Efw/1xK7lAZmoDNj9ipMOP5/PggeO
+         GDJw==
+X-Forwarded-Encrypted: i=1; AHgh+Rrgq6tZWrAHCYbD6U/2S2VMNV9GSsZIFr6LDR4/VYXPeeKKkbuuo2J/pRnBblNkcrbOzRaiijxMjdk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwWdi80915JPqe8+WtyPd4D2afa/ZdQrUjCXtd3BEanUp4ipv+S
+	bJ8y2TDHudxm8chcxrBKHLBTyfeRQu3d6RiUS8RKJpwJaYfSLEaZeUMQslyrB8Jx1w==
+X-Gm-Gg: AR+sD11wOAqOmVAqkS+SEnqVMQkB8Ad0ppdCkaBtiE+r9OhA/p/sCge7qfLqmjoSdIB
+	VbHltMZIhjIwQByo8lTXfghfc5sHFTcRlxdm/hmB5ALBlqxtIvMj5G/KqJKaowtwOzn1Sdtug4l
+	lhVvaQlgAEnwwstesYYaAK0BuxRVnWCCsv81iS/CxxKbc00R7GJ0R/ExEuzaSGOzPiwrdfOL1ab
+	4HKfWRDVl4NOrXDYP4Bebme29T815dC9e5fCYjCcozl6FPTdv5FNCga0ApHLGYa4Mu3616FfB/j
+	Id0QJfq8D3rwK/HiTvbTCvftWq6yiQUOx1VuaVmqeU8MOAJAME0eP8wrZI7F3pErjy/QSpU5Fzu
+	aIXxnStuTcZY8BgOk75pwFafQG42Xj8yGOdbVTS0CJRBjmx4mEkUFADqJlwAK46eI2R+yN/em+z
+	0FOUG8v2fzLLf1BH30Kd6th9RqUZ4qpIYbav8LD3BmitNenkWT0CWtbRq68VF6zt4C6CiemtLpO
+	rirP15BjGvDqhFzU/pGQC37kqMgxOzf7BotfOureTaaqk/L2f5M
+X-Received: by 2002:a05:6000:4024:b0:481:5829:3f28 with SMTP id ffacd0b85a97d-48160723c18mr35113110f8f.5.1786947082436;
+        Sun, 16 Aug 2026 23:11:22 -0700 (PDT)
+Message-ID: <cf1eb6ef-763c-44d3-ab86-d9dd431cf606@suse.com>
+Date: Mon, 17 Aug 2026 08:11:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 21/51] x86/kvm: Obtain TSC frequency from PV CPUID if
- present
-To: Sean Christopherson <seanjc@google.com>, Kiryl Shutsemau
- <kas@kernel.org>, Rick Edgecombe <rick.p.edgecombe@intel.com>,
- Paolo Bonzini <pbonzini@redhat.com>, "K. Y. Srinivasan" <kys@microsoft.com>,
- Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
- Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>,
- Ajay Kaher <ajay.kaher@broadcom.com>,
- Alexey Makhalov <alexey.makhalov@broadcom.com>,
- Jan Kiszka <jan.kiszka@siemens.com>,
- Dave Hansen <dave.hansen@linux.intel.com>, Andy Lutomirski
- <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>,
- Juergen Gross <jgross@suse.com>, Daniel Lezcano <daniel.lezcano@kernel.org>,
- Thomas Gleixner <tglx@kernel.org>, John Stultz <jstultz@google.com>
-Cc: Vitaly Kuznetsov <vkuznets@redhat.com>,
- Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>, Stephen Boyd
- <sboyd@kernel.org>, Miroslav Lichvar <mlichvar@redhat.com>, x86@kernel.org,
- linux-coco@lists.linux.dev, kvm@vger.kernel.org,
- linux-hyperv@vger.kernel.org, virtualization@lists.linux.dev,
- linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org,
- Michael Kelley <mhklinux@outlook.com>, Tom Lendacky
- <thomas.lendacky@amd.com>, Nikunj A Dadhania <nikunj@amd.com>,
- David Woodhouse <dwmw@amazon.co.uk>, David Woodhouse <dwmw2@infradead.org>,
- Thomas Gleixner <tglx@linutronix.de>
-References: <20260806233609.212337-1-seanjc@google.com>
- <20260806233609.212337-22-seanjc@google.com>
+Subject: Re: [PATCH 1/3] x86/emul: Adjust comments in x86-types.h
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20260814185841.1757421-1-andrew.cooper3@citrix.com>
+ <20260814185841.1757421-2-andrew.cooper3@citrix.com>
 Content-Language: en-US
-From: Maksim Davydov <davydov-max@yandex-team.ru>
-In-Reply-To: <20260806233609.212337-22-seanjc@google.com>
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260814185841.1757421-2-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1786916324-52132A5B-95AB9657/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-16d1c6/1786947082-1ECC577B-C7552A37/0/0
 X-purgate-type: clean
-X-purgate-size: 6520
+X-purgate-size: 894
 
+On 14.08.2026 20:58, Andrew Cooper wrote:
+> x86_segment enumerates segments, not segment registers.  Adjust the comment to
+> make this clearer.
+> 
+> Fix a stray tab with the closing #endif.
+> 
+> No functional change.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
-On 8/7/26 02:35, Sean Christopherson wrote:
-> From: David Woodhouse <dwmw@amazon.co.uk>
-> 
-> In https://lkml.org/lkml/2008/10/1/246 a proposal was made for generic
-> CPUID conventions across hypervisors. It was mostly shot down in flames,
-> but the leaf at 0x40000010 containing timing information didn't die.
-> 
-> It's used by XNU and FreeBSD guests under all hypervisors¹² to determine
-> the TSC frequency, and also exposed by the EC2 Nitro hypervisor (as
-> well as, presumably, VMware). FreeBSD's Bhyve is probably just about
-> to start exposing it too.
-> 
-> Use it under KVM to obtain the TSC frequency more accurately, instead of
-> reverse-calculating the frequency from the mul/shift values in the KVM
-> clock.  Use the information to get the CPU frequency as well (kvmclock
-> feeds in kvm_get_tsc_khz() for both TSC and CPU calibration), as the info
-> from CPUID is superior in every way; whether or not kvmclock should be
-> overriding CPU calibration in the first place is an entirely different
-> question.
-> 
-> Use the info from CPUID even if the user explicitly disables kvmclock, or
-> if it's unsupported.  The PV CPUID leaf has no dependency on kvmclock, and
-> is in fact more useful if kvmclock is disabled since the kernel won't be
-> able to use kvmclock to derive a derive the TSC frequency.
-> 
-> Before:
-> [    0.000020] tsc: Detected 2900.014 MHz processor
-> 
-> After:
-> [    0.000020] tsc: Detected 2900.015 MHz processor
-> 
-> $ cpuid -1 -l 0x40000010
-> CPU:
->    hypervisor generic timing information (0x40000010):
->       TSC frequency (Hz) = 2900015
->       bus frequency (Hz) = 1000000
-> 
-> Note!  *Independently* query for non-null get_{cpu,tsc}_khz() overrides so
-> that kvmclock doesn't clobber x86_init.hyper.get_cpu_khz() if/when KVM adds
-> support for getting the CPU frequency separately from the TSC frequency.
-> 
-> ¹ https://github.com/apple/darwin-xnu/blob/main/osfmk/i386/cpuid.c
-> ² https://github.com/freebsd/freebsd-src/commit/4a432614f68
-> 
-> Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-> Co-developed-by: Sean Christopherson <seanjc@google.com>
-> Signed-off-by: Sean Christopherson <seanjc@google.com>
-> ---
->  arch/x86/kernel/kvm.c      | 33 +++++++++++++++++++++++++++++++++
->  arch/x86/kernel/kvmclock.c |  6 ++++--
->  2 files changed, 37 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
-> index 5b554e480c0e..8ed02f4f5775 100644
-> --- a/arch/x86/kernel/kvm.c
-> +++ b/arch/x86/kernel/kvm.c
-> @@ -49,6 +49,8 @@
->  #include <asm/svm.h>
->  #include <asm/e820/api.h>
+I wonder though if we wouldn't better ...
+
+> --- a/xen/arch/x86/include/asm/x86-types.h
+> +++ b/xen/arch/x86/include/asm/x86-types.h
+> @@ -16,9 +16,10 @@
+>  #endif
 >  
-> +static unsigned int kvm_tsc_khz_cpuid __initdata;
-> +
->  DEFINE_STATIC_KEY_FALSE_RO(kvm_async_pf_enabled);
->  
->  static int kvmapf = 1;
-> @@ -913,6 +915,21 @@ bool kvm_para_available(void)
->  }
->  EXPORT_SYMBOL_GPL(kvm_para_available);
->  
-> +static u32 __init kvm_cpuid_timing_info_leaf(void)
-> +{
-> +	u32 base = kvm_cpuid_base();
-> +
-> +	if (!base || cpuid_eax(base) < (base | KVM_CPUID_TIMING_INFO))
-> +		return 0;
-> +
-> +	return base | KVM_CPUID_TIMING_INFO;
-> +}
-> +
-> +static unsigned int __init kvm_get_tsc_khz(void)
-> +{
-> +	return kvm_tsc_khz_cpuid;
-> +}
-> +
->  unsigned int kvm_arch_para_features(void)
->  {
->  	return cpuid_eax(kvm_cpuid_base() | KVM_CPUID_FEATURES);
-> @@ -962,6 +979,7 @@ static void __init kvm_init_platform(void)
->  		.mask_lo = (u32)(~(SZ_4G - tolud - 1)) | MTRR_PHYSMASK_V,
->  		.mask_hi = (BIT_ULL(boot_cpu_data.x86_phys_bits) - 1) >> 32,
->  	};
-> +	u32 timing_info_leaf;
->  
->  	if (cc_platform_has(CC_ATTR_GUEST_MEM_ENCRYPT) &&
->  	    kvm_para_has_feature(KVM_FEATURE_MIGRATION_CONTROL)) {
-> @@ -1009,6 +1027,21 @@ static void __init kvm_init_platform(void)
->  			wrmsrq(MSR_KVM_MIGRATION_CONTROL,
->  			       KVM_MIGRATION_READY);
->  	}
-> +
-> +	/*
-> +	 * If KVM advertises the frequency directly in CPUID, use that instead
-> +	 * of reverse-calculating it from the KVM clock data, or worse, trying
-> +	 * to calibratate the TSC using an emulated device.
-> +	 */
-> +	timing_info_leaf = kvm_cpuid_timing_info_leaf();
-> +	if (timing_info_leaf) {
-> +		kvm_tsc_khz_cpuid = cpuid_eax(timing_info_leaf);
-> +		if (kvm_tsc_khz_cpuid) {
-> +			x86_init.hyper.get_tsc_khz = kvm_get_tsc_khz;
-> +			x86_init.hyper.get_cpu_khz = kvm_get_tsc_khz;
-> +		}
-> +	}
-> +
->  	kvmclock_init();
->  	x86_platform.apic_post_init = kvm_apic_init;
->  
-> diff --git a/arch/x86/kernel/kvmclock.c b/arch/x86/kernel/kvmclock.c
-> index 29ca37e9a3bc..f55d0305d1f3 100644
-> --- a/arch/x86/kernel/kvmclock.c
-> +++ b/arch/x86/kernel/kvmclock.c
-> @@ -342,8 +342,10 @@ void __init kvmclock_init(void)
->  	flags = pvclock_read_flags(&hv_clock_boot[0].pvti);
->  	kvm_sched_clock_init(flags & PVCLOCK_TSC_STABLE_BIT);
->  
-> -	x86_init.hyper.get_tsc_khz = kvmclock_get_tsc_khz;
-> -	x86_init.hyper.get_cpu_khz = kvmclock_get_tsc_khz;
-> +	if (!x86_init.hyper.get_tsc_khz)
-> +		x86_init.hyper.get_tsc_khz = kvmclock_get_tsc_khz;
-> +	if (!x86_init.hyper.get_cpu_khz)
-> +		x86_init.hyper.get_cpu_khz = kvmclock_get_tsc_khz;
->  	x86_platform.get_wallclock = kvm_get_wallclock;
->  	x86_platform.set_wallclock = kvm_set_wallclock;
->  #ifdef CONFIG_X86_LOCAL_APIC
+>  /*
+> - * Comprehensive enumeration of x86 segment registers.  Various bits of code
+> - * rely on this order (general purpose before system, tr at the beginning of
+> - * system).
+> + * x86 Segments.
 
+... insert "(kind of)" here: "sys" and "none" aren't really "segments", and
+iirc we said we may need to gain one more such pseudo-segment here to deal
+with WR{,U}SS.
 
-I cannot test this right now as I lack two servers with different CPU
-base frequencies, but it seems that this patch might break something in
-guests:
-After migrating a VM (QEMU + KVM) from a host with one base frequency to
-another host with a different base frequency, the value in CPUID leaf
-0x40000010 EAX changes and becomes the same as the destination host base
-frequency instead of remaining the source base frequency.
-The main reason for this behaviour is that setting the TSC frequency via
-ioctl(KVM_SET_TSC_KHZ) doesn't change the value in CPUID leaf 0x40000010
-EAX and these two entities are still not connected.
-I saw this behaviour with QEMU 7, but I've checked the code of the
-latest version and it seems that the described behaviour still exists.
-So, in that case, it's possible that with these changes a VM will use
-the wrong TSC frequency from CPUID leaf 0x40000010 EAX if it's migrated
-and then rebooted.
-
-Putting it all together, after the previous patch ("KVM: x86: Officially
-define CPUID 0x40000010 as PV Timing Info (TSC and Bus)") a new way to
-show the guest that CPUID leaf 0x40000010 is valid should be implemented
-and only then this leaf can be used to get the TSC frequency.
-
--- 
-Best regards,
-Maksim Davydov
-
+Jan
 
