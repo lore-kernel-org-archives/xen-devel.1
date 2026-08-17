@@ -4,44 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AA58C5B572
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 20:34:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1393290.1632104 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ED27C5B572
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 22:16:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1393313.1632113 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ww420-00056I-Uj; Mon, 17 Aug 2026 20:34:04 +0000
+	id 1ww5cx-0000qO-SB; Mon, 17 Aug 2026 22:16:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1393290.1632104; Mon, 17 Aug 2026 20:34:04 +0000
+Received: by outflank-mailman (output) from mailman id 1393313.1632113; Mon, 17 Aug 2026 22:16:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ww420-00056B-S7; Mon, 17 Aug 2026 20:34:04 +0000
-Received: by outflank-mailman (input) for mailman id 1393290;
- Mon, 17 Aug 2026 20:34:03 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1ww5cx-0000qH-P9; Mon, 17 Aug 2026 22:16:19 +0000
+Received: by outflank-mailman (input) for mailman id 1393313;
+ Mon, 17 Aug 2026 22:16:18 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper3@citrix.com>) id 1ww41z-000565-Is
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 20:34:03 +0000
+ (envelope-from <davydov-max@yandex-team.ru>) id 1ww5cw-0000p6-0S
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 22:16:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1ww41y-009Yc6-SM
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 22:34:02 +0200
+ id 1ww5cu-000Sw6-Kx
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 00:16:16 +0200
 Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a836ff4-e002-0a2a0a5209dd-0a2a450685c4-46
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 22:34:02 +0200
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
+ (envelope-from <davydov-max@yandex-team.ru>)
+ id 6a8387dd-8faa-0a2a0a5109dd-0a2a4506c7d0-40
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 00:16:16 +0200
+Received: from [178.154.239.72] (helo=forwardcorp1a.mail.yandex.net)
  by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a83703a-195a-0a2a45060019-d1558034ed93-3
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 22:34:02 +0200
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-4998b5a63e2so31927075e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 13:34:02 -0700 (PDT)
-Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
- [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482a5a7c55bsm6213951f8f.20.2026.08.17.13.34.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Aug 2026 13:34:01 -0700 (PDT)
+ (envelope-from <davydov-max@yandex-team.ru>)
+ id 6a83882f-195a-0a2a45060019-b29aef48d734-3
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 00:16:15 +0200
+Received: from mail-nwsmtp-smtp-corp-main-83.vla.yp-c.yandex.net
+ (mail-nwsmtp-smtp-corp-main-83.vla.yp-c.yandex.net
+ [IPv6:2a02:6b8:c2d:3530:0:640:eca4:0])
+ by forwardcorp1a.mail.yandex.net (postfix) with ESMTPS id DB311C0A13;
+ Tue, 18 Aug 2026 01:16:14 +0300 (MSK)
+Received: from [IPV6:2a02:6bf:8080:636::1:14] (unknown
+ [2a02:6bf:8080:636::1:14])
+ by mail-nwsmtp-smtp-corp-main-83.vla.yp-c.yandex.net (smtpcorp) with ESMTPSA
+ id AGdauh9aNOs0-b6cs1GW7; Tue, 18 Aug 2026 01:16:14 +0300
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,110 +54,147 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1786998842; x=1787603642; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=NdcOM830pkGFrMyGyV5CVvecsj2tsUbGgnES/OJNsnQ=;
-        b=XKF5fR+IUHRdfxY0yai0uUU8TXbksQgiF5N0Kk5UpCkFZMz6Sw+Fj9VnvM4BAG9EWV
-         iT1qsCRrI6smcrb1LSwf2y7qy/zlwT65m42ctkFet7zaox96YhzW15Ejq2SRRYH2qMQ1
-         +PKtXJkaDd+32Nie+znzh4ahUfmvI/QZtJNsk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786998842; x=1787603642;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=NdcOM830pkGFrMyGyV5CVvecsj2tsUbGgnES/OJNsnQ=;
-        b=Q4YTkJw2+QX37qfbNLIHOFHRKk+AhP9PrQtER6oky7M2CV6NpQaSUcbtdHjTLdCJ8s
-         GKSqF9j7Ooj+gFVPMxMV6GMBenFK7RYSXVra0Yfxb00MBIg0RULtOwdtgBvRkQGnoRoY
-         gumMITBS5R0QOSaD043dHKh2M0njJpUiQpzJH3Ltf7PorpUab5dwspD9YkJegAsiIJks
-         piL2JuGWJp2Zq0obEdXSt9dtRr673e0rvSH6CC1jF0xawbeZQXcUXuMIRMlbKGBTyAYN
-         nf+IKmChhzmYYVi8yfJevH2SGgSrg0hj6hE6Jpm8ZjxQI2tNDFQzlnfZxd1Sh9c1wKGY
-         Ipsg==
-X-Gm-Message-State: AOJu0YxvT8j+GMe1XQifwkzI4rr1HASKIgUW+VJ6M58eJWBKMUgPjCnm
-	AlLbHVNOj8m8QnZ7jcse5PmvZDcLSocRsFwcdzZKYRlEnTCEKtLSXztMz1Wq9g89f0M+A1ai4N9
-	ru7k01qU=
-X-Gm-Gg: AR+sD13DHzxJnWW0YaGvxAxAE5DZzx8bKKCP0/dDPmx0SRD0t0SHIqzhOnbTp8uE0kH
-	rQRdubxBizxtBf2hmhPGkrYM0GoHMDRenREU87rCYYVlQrjKKCfvDvGfZz5fq9Jm4FE7UGDq9sP
-	tN/WOZraCUAOjvR1aWplHJXdgPQPox7eG0KOpiHl/q/pRzLFK/AHr0jksvW19Jh+ap/GUJA3GRK
-	WrWmzzntJZg5+Z8D5F2YJyQ5basEdVTHBpOM4xaACf2WX1GKiAqaR2spMdKJnAh8Wi0IQYKOQ0X
-	kIMoT9QfD+aB77zV6jOET2aS6ykydm/vyEY9HMSreaCPROS4zZIQm/FdZ4HQw8JeLGui2clr9Vf
-	GSsJKuClyPdmnDRRW0IWISl6V9W8HhFjc+LY+0LYiLh4sVgfJ3tVdV7b9VEg6SRR2Av2dOxqtNP
-	cjGm6fHS9WvV0LsuO2FiwWTCoyKZjf58e3+BoS0hQvgKod4mj+5iHXcMmIQ3/BYDO9Lmivl6Emo
-	rBDK+sevohIKgDMCMJnAKeDjZ0mO4hH5Vs/GKA=
-X-Received: by 2002:a05:600c:8714:b0:499:8704:242c with SMTP id 5b1f17b1804b1-499878ca13bmr498099745e9.0.1786998841777;
-        Mon, 17 Aug 2026 13:34:01 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH] ARM/vgic: Clean up vgic_v2_setup_hw()
-Date: Mon, 17 Aug 2026 21:33:59 +0100
-Message-Id: <20260817203359.1881963-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=default header.d=yandex-team.ru header.i="@yandex-team.ru" header.h="From:In-Reply-To:Cc:Date:References:To:Subject:Message-ID"
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
+	s=default; t=1787004974;
+	bh=b0Z0/tXuCNUd1fMwZ+IpDj+Wo0HtUhiZ0PxFs9YzGJE=;
+	h=From:In-Reply-To:Cc:Date:References:To:Subject:Message-ID;
+	b=Bqo7B2+OcvbL6jkoeu5ZtQ58ESgMa5yx1X9ZY/km3cBov6qCeQ5SDsgsZ0U86Rt5d
+	 uYvDSlYKTy4SV0n31y+JkkPZM+aJbk85EmEmmi+5ZG2KRLadsxdZofEw9k/LGvaPc2
+	 rA3R7E8/1y06BWknqf88/HkaFxTe9jLnAMqszcpg=
+Authentication-Results: mail-nwsmtp-smtp-corp-main-83.vla.yp-c.yandex.net; dkim=pass header.i=@yandex-team.ru
+Message-ID: <0d1f0afe-74f0-4adb-a7cf-2d4efd001de3@yandex-team.ru>
+Date: Tue, 18 Aug 2026 01:16:10 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1786998842-FC20077B-D0A61DE3/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 21/51] x86/kvm: Obtain TSC frequency from PV CPUID if
+ present
+To: Sean Christopherson <seanjc@google.com>
+Cc: Kiryl Shutsemau <kas@kernel.org>,
+ Rick Edgecombe <rick.p.edgecombe@intel.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, "K. Y. Srinivasan" <kys@microsoft.com>,
+ Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
+ Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>,
+ Ajay Kaher <ajay.kaher@broadcom.com>,
+ Alexey Makhalov <alexey.makhalov@broadcom.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>,
+ Dave Hansen <dave.hansen@linux.intel.com>, Andy Lutomirski
+ <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>,
+ Juergen Gross <jgross@suse.com>, Daniel Lezcano <daniel.lezcano@kernel.org>,
+ Thomas Gleixner <tglx@kernel.org>, John Stultz <jstultz@google.com>,
+ Vitaly Kuznetsov <vkuznets@redhat.com>,
+ Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>, Stephen Boyd
+ <sboyd@kernel.org>, Miroslav Lichvar <mlichvar@redhat.com>, x86@kernel.org,
+ linux-coco@lists.linux.dev, kvm@vger.kernel.org,
+ linux-hyperv@vger.kernel.org, virtualization@lists.linux.dev,
+ linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org,
+ Michael Kelley <mhklinux@outlook.com>, Tom Lendacky
+ <thomas.lendacky@amd.com>, Nikunj A Dadhania <nikunj@amd.com>,
+ David Woodhouse <dwmw@amazon.co.uk>, David Woodhouse <dwmw2@infradead.org>,
+ Thomas Gleixner <tglx@linutronix.de>
+References: <20260806233609.212337-1-seanjc@google.com>
+ <20260806233609.212337-22-seanjc@google.com>
+ <ef3b56bf-8df0-4a40-82c7-bd2d65eec71e@yandex-team.ru>
+ <aoMVy4VB1sq4T-ys@google.com>
+Content-Language: en-US
+From: Maksim Davydov <davydov-max@yandex-team.ru>
+In-Reply-To: <aoMVy4VB1sq4T-ys@google.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-16d1c6/1787004976-F687577B-414A5A40/0/0
 X-purgate-type: clean
-X-purgate-size: 1726
+X-purgate-size: 3812
 
-vgic_v2_setup_hw()'s callers are __init, so it should be too.  vgic_v2_hw is
-written once during init and unmodified thereafter, so make it
-__ro_after_init.  Reposition 'bool enabled' to fit in the tail padding,
-removing 8 bytes from the structure.
 
-No functional change.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-CC: Bertrand Marquis <bertrand.marquis@arm.com>
-CC: Michal Orzel <michal.orzel@amd.com>
+On 8/17/26 17:08, Sean Christopherson wrote:
+> On Mon, Aug 17, 2026, Maksim Davydov wrote:
+>> On 8/7/26 02:35, Sean Christopherson wrote:
+>>> diff --git a/arch/x86/kernel/kvmclock.c b/arch/x86/kernel/kvmclock.c
+>>> index 29ca37e9a3bc..f55d0305d1f3 100644
+>>> --- a/arch/x86/kernel/kvmclock.c
+>>> +++ b/arch/x86/kernel/kvmclock.c
+>>> @@ -342,8 +342,10 @@ void __init kvmclock_init(void)
+>>>  	flags = pvclock_read_flags(&hv_clock_boot[0].pvti);
+>>>  	kvm_sched_clock_init(flags & PVCLOCK_TSC_STABLE_BIT);
+>>>  
+>>> -	x86_init.hyper.get_tsc_khz = kvmclock_get_tsc_khz;
+>>> -	x86_init.hyper.get_cpu_khz = kvmclock_get_tsc_khz;
+>>> +	if (!x86_init.hyper.get_tsc_khz)
+>>> +		x86_init.hyper.get_tsc_khz = kvmclock_get_tsc_khz;
+>>> +	if (!x86_init.hyper.get_cpu_khz)
+>>> +		x86_init.hyper.get_cpu_khz = kvmclock_get_tsc_khz;
+>>>  	x86_platform.get_wallclock = kvm_get_wallclock;
+>>>  	x86_platform.set_wallclock = kvm_set_wallclock;
+>>>  #ifdef CONFIG_X86_LOCAL_APIC
+>>
+>>
+>> I cannot test this right now as I lack two servers with different CPU
+>> base frequencies, but it seems that this patch might break something in
+>> guests:
+>> After migrating a VM (QEMU + KVM) from a host with one base frequency to
+>> another host with a different base frequency, the value in CPUID leaf
+>> 0x40000010 EAX changes and becomes the same as the destination host base
+>> frequency instead of remaining the source base frequency.
+> 
+> That's a bug in whatever is orchestrating the migration, and/or QEMU if QEMU is
+> handing the upper layers a loaded footgun.
+> 
+>> The main reason for this behaviour is that setting the TSC frequency via
+>> ioctl(KVM_SET_TSC_KHZ) doesn't change the value in CPUID leaf 0x40000010
+>> EAX and these two entities are still not connected.
+> 
+> And they never will be.  It's userspace's responsibility to fill the correct
+> values for 0x40000010.
+> 
+> But AFAICT, QEMU does the right thing.  env->tsc_khz is used for both the CPUID
+> leaf and for KVM_SET_TSC_KHZ.
+> 
+> kvm_arch_init_vcpu():
+> 
+>         c = &cpuid_data.entries[cpuid_i++];
+>         c->function = KVM_CPUID_SIGNATURE | 0x10;
+>         c->eax = env->tsc_khz;
+>         c->ebx = env->apic_bus_freq / 1000; /* Hz to KHz */
+>         c->ecx = c->edx = 0;
+> 
+> kvm_arch_set_tsc_khz():
+> 
+>     r = set_ioctl ?
+>         kvm_vcpu_ioctl(cs, KVM_SET_TSC_KHZ, env->tsc_khz) :
+>         -ENOTSUP;
+> 
 
-Found when looking at the code while reviewing something else.  Only compile
-tested.
----
- xen/arch/arm/vgic-v2.c | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+Agreed.
+However, kvm_arch_set_tsc_khz() is also used at the end of migration
+(qemu_loadvm_state -> cpu_synchronize_post_init).
+So, the new value of env->tsc_khz from the source host can be loaded
+during migration via KVM_SET_TSC_KHZ. However, the frequency in CPUID
+leaf 0x40000010 remains the same as on the destination host (the TSC
+frequency can differ from the source host's frequency). Thus, it's
+possible to have unsynchronized CPUID leaf 0x40000010 when using default
+QEMU parameters.
 
-diff --git a/xen/arch/arm/vgic-v2.c b/xen/arch/arm/vgic-v2.c
-index 642407fd5b05..3446d521de2d 100644
---- a/xen/arch/arm/vgic-v2.c
-+++ b/xen/arch/arm/vgic-v2.c
-@@ -25,7 +25,6 @@
- #include <asm/vreg.h>
- 
- static struct {
--    bool enabled;
-     /* Distributor interface address */
-     paddr_t dbase;
-     /* CPU interface address & size */
-@@ -36,10 +35,12 @@ static struct {
- 
-     /* Offset to add to get an 8kB contiguous region if GIC is aliased */
-     uint32_t aliased_offset;
--} vgic_v2_hw;
-+    bool enabled;
-+} vgic_v2_hw __ro_after_init;
- 
--void vgic_v2_setup_hw(paddr_t dbase, paddr_t cbase, paddr_t csize,
--                      paddr_t vbase, uint32_t aliased_offset)
-+void __init vgic_v2_setup_hw(
-+    paddr_t dbase, paddr_t cbase, paddr_t csize, paddr_t vbase,
-+    uint32_t aliased_offset)
- {
-     vgic_v2_hw.enabled = true;
-     vgic_v2_hw.dbase = dbase;
+>> I saw this behaviour with QEMU 7, but I've checked the code of the
+>> latest version and it seems that the described behaviour still exists.
+>> So, in that case, it's possible that with these changes a VM will use
+>> the wrong TSC frequency from CPUID leaf 0x40000010 EAX if it's migrated
+>> and then rebooted.
+>>
+>> Putting it all together, after the previous patch ("KVM: x86: Officially
+>> define CPUID 0x40000010 as PV Timing Info (TSC and Bus)") a new way to
+>> show the guest that CPUID leaf 0x40000010 is valid should be implemented
+>> and only then this leaf can be used to get the TSC frequency.
+> 
+> No, there are already non-Linux kernels that consume 0x40000010, e.g. FreeBSD.
+> In my very strong opinion, if this problematic for a deployment, then that
+> deployment needs to urgently fix their broken setup.
 
-base-commit: ebc00c30c65023bd1498ae20dc511c4e39f6c0f7
 -- 
-2.39.5
+Best regards,
+Maksim Davydov
 
 
