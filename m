@@ -4,62 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AB36C5B572
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 12:40:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1392906.1631864 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E844C5DF66
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 12:40:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1392912.1631873 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvwd3-0002AW-M7; Mon, 17 Aug 2026 12:39:49 +0000
+	id 1wvwds-0003aX-UZ; Mon, 17 Aug 2026 12:40:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1392906.1631864; Mon, 17 Aug 2026 12:39:49 +0000
+Received: by outflank-mailman (output) from mailman id 1392912.1631873; Mon, 17 Aug 2026 12:40:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvwd3-0002AO-IJ; Mon, 17 Aug 2026 12:39:49 +0000
-Received: by outflank-mailman (input) for mailman id 1392906;
- Mon, 17 Aug 2026 12:39:48 +0000
+	id 1wvwds-0003aQ-Re; Mon, 17 Aug 2026 12:40:40 +0000
+Received: by outflank-mailman (input) for mailman id 1392912;
+ Mon, 17 Aug 2026 12:40:39 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1wvwd2-0002AI-6p
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 12:39:48 +0000
+ (envelope-from <andrew.cooper@citrix.com>) id 1wvwdr-0003aJ-DP
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 12:40:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wvwd1-00Bt6H-Jj
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 14:39:47 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wvwdq-00BtKZ-LT
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 14:40:38 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a83010c-8faa-0a2a0a5109dd-0a2a4506df86-12
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 14:39:47 +0200
-Received: from [52.101.46.52]
- (helo=CO1PR03CU002.outbound.protection.outlook.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a83010c-195a-0a2a45060019-34652e34fc3a-3
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 14:39:42 +0200
-Received: from BN9PR03CA0353.namprd03.prod.outlook.com (2603:10b6:408:f6::28)
- by CHXPR12MB999221.namprd12.prod.outlook.com (2603:10b6:610:2fa::7)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6a830143-8faa-0a2a0a5109dd-0a2a450485d0-6
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 14:40:38 +0200
+Received: from [40.93.201.43]
+ (helo=CY3PR05CU001.outbound.protection.outlook.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6a830144-b57f-0a2a45040019-285dc92b5d79-3
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 14:40:38 +0200
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
+ by CH2PR03MB5302.namprd03.prod.outlook.com (2603:10b6:610:9f::15)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.11; Mon, 17 Aug
- 2026 12:39:33 +0000
-Received: from BN3PEPF0000B36D.namprd21.prod.outlook.com
- (2603:10b6:408:f6:cafe::5e) by BN9PR03CA0353.outlook.office365.com
- (2603:10b6:408:f6::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.17 via Frontend Transport; Mon,
- 17 Aug 2026 12:39:33 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BN3PEPF0000B36D.mail.protection.outlook.com (10.167.243.164) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.360.0 via Frontend Transport; Mon, 17 Aug 2026 12:39:33 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 17 Aug
- 2026 07:39:33 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 17 Aug
- 2026 07:39:33 -0500
-Received: from [10.252.145.116] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.45 via Frontend
- Transport; Mon, 17 Aug 2026 07:39:29 -0500
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.17; Mon, 17 Aug
+ 2026 12:40:34 +0000
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37%7]) with mapi id 15.21.0315.016; Mon, 17 Aug 2026
+ 12:40:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,165 +55,332 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PAg/ZIM6eL665tU4oTPAjrVkgAkeQMNEImPfHp1lAaIwQYkPRVt1YkEUUd5rvBKrUejBA0qFKGhv5YhVe4IxbjC+XPfOFKBjS/QbjWxi7jbtiLZKAUdv/rcCln4SwSJW1CUKPQS6OtxJtHPVaSAU6Bv/Vsyra/j5ZBe9bWs+PlfwfNXWPxzKbshjW2EVbmCwlClMNRVaMYZ0R0aoVDyk4LXXejTip7uCLxgtT7amyyS2SyI0Z8AuSXnyilebdvMVZ4u/AgfFxERldRGebzDyPsjBDtPo3N6bjo7rUszl25VKWUCaDPNOZqSWIzfBINyX0sK+36hbkk2L062DsvTIPA==
+ b=og7kMu/QaAwbC6m/sySy/N1YIqyaQwmfTjQcoJCpIbBpB9VQeR8q05IeUY+EyePBInjX0goYwy7ymon3pf+zrTxKkiTsb8AkW4WXH7Fqqm+oHfaxK0KAHHhvl18WLgF6vGVEcGgETfTPBggVOW8GXpHa27fxSgEu/nYTTTdXXy75fQud1JWj4wT8KjGEsQXdlQ9DbtydqiuStxcC4BPTu5vWOfeHlx69K5oz/ZQWQ7jB9fDJ1FMfZzd2yRfA7wdGji/TRaTiVRDnTscqz9nAm/GCIkjJZKv7qAnC4CGel532fVZ/0H8Hw1peVugZaO5YHsmZyUR6IgW4Lc3qlsB+Zg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=y3u6Db12QY4PhKMFWPD5Y/+VusXMFIdi/b0QbYsJf84=;
- b=xo/O1VWvyi189LtXzd0ydExjjW56S9ywgb+WTtDsydlivGHDeh5vLP1DR7mBasRSw+x7R5ckCVwcW0j4aaDBeN7kjWKnYjZYqKCs+dZzgh3D6flC38jgNxJvhUXV98BLmK8iHU8oI4crQKQjuFOHhRi3hpcPZa2qNFfbfeOFjRvA1wslT/cS1MP3mlXRHshumyF26I9L2o0fzk8KDrifxO+f3Y1vyQQFkyqq5zTxj7kLJbrnG4W2ME72ZI9tvCBMzOo3i1Cqs+C7j6jv/RHCp+FOd2KHj8EcLcw0VHkdZkUrq3VglvjG/hq7pDzT31c2IDhCaD+2ImS/13T5wmQmew==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=vates.tech smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ bh=CCVDK/pH+N6pkNmAz4FOIbG+CD4VwbAdBV3xJJbNKIc=;
+ b=EGhqakFCO5djhchzvPxllMjjzMVW/q68l2GLkY2ohCXfXD8JUpdTWi3H9rPtu9ijRq9l8HAo3+k99J0xGJV0ERCacIZJ01xicbD4sJaAjpE3O8H1QqsZsKitLqpiZMa3PAu/qR6I0qm5E3baQZwCmtczOyWXxUGGup8riLLsKU9gzVyFrY1NTJX4XGHygXnTgxkJJtGTaOXasTTDBA0+vUS7lBEeQ2ZeP+S84pjLTb2jgJ7cGchjv1iBOITHNNUleOfxKCZC2ow/MV+8JLR9qxYvZCohnMoIlM5TCvZ2uxJyGW/A7jYvVQho8sChxG/febvi0n4eD9MRdOnYFOFyGg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=y3u6Db12QY4PhKMFWPD5Y/+VusXMFIdi/b0QbYsJf84=;
- b=OsX5e8YF4RtMMjb7E3s9zn6pci4izW5W3Fop5GoXsHz8PXkJKsV3UtpXCx0VbvMrAfHfrvCfbNwsd/UXU3UW2HZa0ghZYIEdIvZmt88RlczGOZMIGmqymndH2jd0zv0bACqQJXUp+nmxSNTMT7se4rqmsY5RSOt+/hGo77kdMzk=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <ee383990-f688-4244-b817-5df4c2f8decc@amd.com>
-Date: Mon, 17 Aug 2026 14:39:29 +0200
-MIME-Version: 1.0
+ bh=CCVDK/pH+N6pkNmAz4FOIbG+CD4VwbAdBV3xJJbNKIc=;
+ b=qSMfrf2V6L8pEMfTpxEvrQiGOuiDr2lJJTDvL5PK1mWtiqt9hmaztb1fuMjuLaji5dpJzHh/UO4pCaHvCtHxa1nBtPH8IK5IbdyDukJIOFZRPR+WS0te1bulSnbKn45HrlAkDvgsQk6cpTkQxzmd9AwlODbFespW/YEuaHl30Sg=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <5b358558-1b17-49b2-af5e-37981d11094f@citrix.com>
+Date: Mon, 17 Aug 2026 13:40:31 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/6] ARM/sysctl: Expose the supported guest GIC modes
- in physinfo
-To: Julian Vetter <julian.vetter@vates.tech>, <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@vates.tech>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>, Julien Grall
-	<julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>, Juergen Gross <jgross@suse.com>,
-	Andrii Sultanov <andriy.sultanov@vates.tech>, Guillaume Thouvenin
-	<guillaume.thouvenin@vates.tech>, =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
-	<marmarek@invisiblethingslab.com>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Oleksii Moisieiev <oleksii_moisieiev@epam.com>, Timothy Pearson
-	<tpearson@raptorengineering.com>, Alistair Francis
-	<alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>, "Oleksii
- Kurochko" <oleksii.kurochko@gmail.com>, Teddy Astie <teddy.astie@vates.tech>
-References: <1784210820.8631fc262581453bbf619ec5b2062170.19f6b408bba000edb5@vates.tech>
- <20260716141138.88265-1-julian.vetter@vates.tech>
- <1784211104.8631fc262581453bbf619ec5b2062170.19f6b44e427000edb5@vates.tech>
-From: "Orzel, Michal" <michal.orzel@amd.com>
-Content-Language: en-US
-In-Reply-To: <1784211104.8631fc262581453bbf619ec5b2062170.19f6b44e427000edb5@vates.tech>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH v3 2/5] tests/x86: Introduce a userspace test harness for
+ x86_decode_lite()
+To: Jan Beulich <jbeulich@suse.com>
+References: <20260803072006.9678-1-andrew.cooper3@citrix.com>
+ <20260803072006.9678-3-andrew.cooper3@citrix.com>
+ <dd065a33-0105-4527-92f5-f3f127422ee6@suse.com>
+ <21d3fae8-e9b0-4c8a-a7b9-483a0257e44e@citrix.com>
+ <b76b3fa9-cac9-401f-adc7-88f6881a64f6@suse.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <b76b3fa9-cac9-401f-adc7-88f6881a64f6@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: LO4P302CA0007.GBRP302.PROD.OUTLOOK.COM
+ (2603:10a6:600:2c2::14) To CH8PR03MB8275.namprd03.prod.outlook.com
+ (2603:10b6:610:2b9::7)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B36D:EE_|CHXPR12MB999221:EE_
-X-MS-Office365-Filtering-Correlation-Id: 33411fc7-3661-4350-f83a-08defc5c9720
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|CH2PR03MB5302:EE_
+X-MS-Office365-Filtering-Correlation-Id: b27bee48-6340-4106-06a2-08defc5cbb5d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|36860700016|7416014|376014|1800799024|23010399003|56012099006|4143699003|5023799004|11063799006|10067099003|18002099003|6133799003|22082099003;
+	BCL:0;ARA:13230040|23010399003|1800799024|376014|366016|6133799003|10067099003|4143699003|11063799006|5023799004|56012099006|22082099003|18002099003|3023799007;
 X-Microsoft-Antispam-Message-Info:
-	CAMrLQV7BkdhyZHblKvmwpItkkKBIc+J3kQZGNzHp/REjvqFp5X91EE50fAGdOniJt5hsyjhdw9u6mhWqXz0tAIKW6WsOTV8t5zAeQE+rteNgOixyyK6rCYE/vZXoS3O5jxkoddSkfliCUwHUT51uvfW5CIM+hImscbdarpYk1hTk4zFqkMF52IaJzdCxzX98uaujhR+1ktMLoZ4FGXQ5EXc/HqWBgelsnLCslLHbXEixoWPupPiq3RF0WQwh+pwP+ZvIF2TKbvIvIXSdjLWnvlYy2j0v65LpEDYWjyw18NcPKvo1T4nVpCtXLX2b63WPYnU+i+pTvWJM36BjOlzvRZIOoTXoW3OhGF7yGVa7MwgZCRQep2lu4x/GUmTaOw0bO3d9GtJbiCaKr/k+8YdGqueAbkS9Ob21saM1yZfkZlbT44e69KuSIY8cJ/P80NUMhiHqN240Cq58rixmOeqEQCWnm808A0xbFY9SgWfphrCtmdk1gcIY7pv91e4NWZ3F0kKIwVp2PO5aLRylU2QSqxX25OXzlS29++Ra8j9P1hS+aRKwGLn7ZjE9VaCs8XKaTUgFfStzkiExdBE7StgbJXCKgryvBpiYmwm9cjuot763pWpSq8ahsjOtKms+G3n4IEmL3ixDc3erHsrTvRkAaBAarZaOAbaQeE6qhWUTZ2VEnk3YGQkqmkIoswHNPANGbkrZDmX42LuUNtp/lU8tQ==
+	5BJQQJLxExrJx/yuOriO0PgdctSqJG7KVVpJaifGBBrc70j2yGpSsKALqCyNsSXuLllB3nkEs1cTZu98V854EUnGGpLlxHsG+cDseGet8cErcT+888F0eO/weltIgTroi6G8QaJ63+F1OQlA/UsqA1fUoGuoiYkyfKGkALrH+QaFxjX1uuW/3G+aX5EyHMMT91avtdZz6wNIFiA5NS3vE+7hVa+2HfeycDWyhnK1fIBiBym3khGgC6Uo1bhFO4MbDdWqQb6Z3Njj8OtdFRDZn4K5pKzoxZJNtV78VZZoFZEKPTa6B9c97Wi7ybL0r5TJkHXr9363WPj+fFrNoS1pTvBYhaj5GjPFuYJG5dciUcYu8MlON37/7S0dpmUkWkP8uiSDa3jVrl2gSdNZGA5fZpEUyUZC1hnPGzf+uX4aAlxGp2rWFGteav1q+JDs15qHm74hTVYBErgZUUu8QC6gwPYgT5zxB1cg39xaB15qSGFFOCU2/sWGFDTEf7UcmRkmBKxhsQ1yZCCwAUKmPpAdVBO6oMs8NLXcc1oDU5m8rrJWj2x39qeniZ2ZnGNbidTGsK6KfQyTuFe+Or6pQmxidCAdf4uT3i5CwzQnXHn4i7nFmQpbnnOxcA027sPThxh1kQtyhUawGIXaqV8IjSgImq0ZRLGu5NugjCaHkd2OoKo=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(7416014)(376014)(1800799024)(23010399003)(56012099006)(4143699003)(5023799004)(11063799006)(10067099003)(18002099003)(6133799003)(22082099003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(6133799003)(10067099003)(4143699003)(11063799006)(5023799004)(56012099006)(22082099003)(18002099003)(3023799007);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	SyuUwcO9XRBSTMm8WGXjOFbKxP/se0P42etSVs4B1W+bRq7LPtWr8//sjJSouLV1utwH9151vF0tvK3yJKZ1yX1xA00eAIYQ8ojakcvjognFaHAcQJUBmyRtQ7q/CiiB2EiIPxFTzpouFujhzvUUDGArz0T+Kva2U3JwzYngRRzwdRy3rKHYbXO1rhuMRxRkSH2bAwKwX44/cOvW7XPJdsdGbt3lvyWOOQT9G0c7NqWiL7xYoU7F4oAhGH+0kAwRuBCI6nQKe36iz/XZprP6AjBMdEYZkCwb0OFy0HtKeW8HAymAtR/PWHNjgn4W/wlrzfwzAng00awZfKNttvmh5FltEEraIGOyUR+wnzN4m/jEwuTEAQHr4TtftV+RWE9eigBTnGmDnQu08xXJSJhKEjecHV/8N0CfCdh7Pg6t5DyS9JnHb7YzYuFjZ/8ahO16
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Aug 2026 12:39:33.5455
+	=?utf-8?B?UGh4bS9rZW5VTitIQU9kVXhzQTVNRmhDNGFnT2EvOGk4SWlTbzVXWWFjVG5F?=
+ =?utf-8?B?NnFUYU11WnZpRGhHZDl6WDJHeWhieStuNjZSZjVpUVFpVjBha05qK2NKT0xL?=
+ =?utf-8?B?aTRKald2TmtJcDJ4dUp6Q2VlOXlwYkJPSGRjQnpWUmF1QloxdVFQTHdmcWc5?=
+ =?utf-8?B?TVU4Q1o0OXl4NUFrZ3VxVjFRYjBzMVFRUFZETzl6KzAxMVBqcTFqU05CU0hE?=
+ =?utf-8?B?aHZ6cDRwNzFjMTZNRzRGdTlqREtOcStBNS9aVitzQStENnpQVk82Wk1CaVpD?=
+ =?utf-8?B?YzR1NzczT1NZdjhHYnp1Z05UME9DWWZ6cWpHS1I2NEprYnFJY0VGMmNrZTEx?=
+ =?utf-8?B?NjNlNXR1L1VpdTg5cWFUbGp5d2FRVEpQVU1LMit4TE52N0FIWHlXSVFXYlNR?=
+ =?utf-8?B?L2RrNHd5UlN5RVdFdUx6U2hydU5jWGhZcE9vdkFNeGtURkxMc0FpR3pXY2tw?=
+ =?utf-8?B?VVBNQXpQeElJTmlidmF2WlZqcGM0RVhPMjFCbHgwRFYzNWNydDlHRm1Gd3g5?=
+ =?utf-8?B?SC8reWtIMTlVR3dPamZvMXFXUXl0YVRXNHBRRXFxdXdyZnhzUU8zMkNMK1I0?=
+ =?utf-8?B?WDR4WTJoa2tJazF4WlVEajNPUEg3dlJRcjdQZzAxYjZNVW1NZ2x4WmtsTWQw?=
+ =?utf-8?B?OG94U1pqamljTGNISTdPM2RKMXlUbkJQeTljZmVkUFJNZm9sYUFhUCtENXBv?=
+ =?utf-8?B?WFd2b2pYQStwbWc1cWJGVldubW83NUNPSk5NRlo1Tk5Hdnp6VDNJTko2cTBW?=
+ =?utf-8?B?dWlOaUZTaGV6MnlXWkNJRUFZS01FTlhxL2NBOGlmUDd3VEZOc1EyS1NsSTZ2?=
+ =?utf-8?B?cUdEYUFYVnY5RjBsemgyaG15Q3NHR0RSaUZ5NDIvVVo1MFgzNXFFdkFINkZv?=
+ =?utf-8?B?TWkrS2N6UGJTZFlmTFZrZ1BYeVU3Y25wTGJRMTFOOG1Bb2pBK1FWSFJLWEh1?=
+ =?utf-8?B?dFlGVElZQmNEQXNWZEw4Zk9VQVc5b0RsRU9IKzFScXcwZC8zNEdVNFUrSzBO?=
+ =?utf-8?B?dTJJajYwWnFEUmE3blZBRmN5RTlWeGhTOGlyaTFDaVlRVFlBMy9TT2pyb2E4?=
+ =?utf-8?B?QmpSblNCWlhQYUNqeURYRU1LRW5tNXBPeTBrM25WTnRTeUU3akRZZGhDWHNa?=
+ =?utf-8?B?aUZqTkR0Yk5uNDhhWU5oTHJVSFZveWRtNWF0RFBJQTlYTGVZbFU1Q0RMWHB0?=
+ =?utf-8?B?MWlncGRSdXlRblBVakQ2WWRwa2I3VGswSWZOL2laU2tWanNjK0FjZUtrSko4?=
+ =?utf-8?B?cStPT1dCekIvVmtSQi9PdXhqSlREVkM2cGhGTUZIK3dyMHB4U25yZ3F3RnVL?=
+ =?utf-8?B?VnJXejhtbjEvQ0pYN2lOZkl4WjJTREswR0ZlSkZEL3ZqM2RGNTU3ZGNZOC9j?=
+ =?utf-8?B?N0xFWFNPNGg2akR4MTl5MzRFLzJESlFnbXJFOGl0YlgvSGNZdzI2Y0Q5ZStK?=
+ =?utf-8?B?Wk9EUHNpNTJtZzlzcWlibGptdDRhYkJzYitRSkpidTgxNGNKSktxWjFlRGV1?=
+ =?utf-8?B?TTJITlpOTmdWWUdMT09aSE9xaFhrcTBXa3Z2SXJYZG5nUldBQzJzRGUrcDdV?=
+ =?utf-8?B?dzlqMlE5YlEvN1lhQi9uM2s0ZGZXNXFPL3RzRGhSenJDQ0tWcFZydDBuOVQ1?=
+ =?utf-8?B?SzViZDJuUjFxNzBTNDJDNmZwTGpKRkFFMXBFRVlyendsRW5XckthYVpXb29F?=
+ =?utf-8?B?aUt1djdWNllVU0RZSDdiZCt6c0h1NVhqQ1hSTko1OCtpM0NlKzFqQmxCUlJJ?=
+ =?utf-8?B?MVEzMTZOS2oxeFBDUFBOdXFteEdURW00Skc3a2l0d0xWZ0NyWS9neDJaVDM5?=
+ =?utf-8?B?ejAvakZQbkRvaERrTDRudS9Da1JwbmVuc2xacXhncGlxUURUaTdWeENUMjUz?=
+ =?utf-8?B?c2JQUXo3QnM0aW5idHUvdE0zVlduSmhKZzR1M2w2ZVFmTkpoSVpXYjRqTXhM?=
+ =?utf-8?B?b1N1cCtiMU5XRUhldGZjQWlJWWczekhtK2RzWlczK2Z4bVJpTVhxN04vKzNO?=
+ =?utf-8?B?a3hNWHhqZXk2M3hFRE9RbmdBbWgzMm5wZE1UYjJyVnEyeVdTeG80ZWEvdUQy?=
+ =?utf-8?B?Q2dFVnZ2WkV2NXhFSTQ1QlorMVNBcEgvK216VTJ6Mm44NlVkZ3BaSHpXSlFN?=
+ =?utf-8?B?Sm9mY3FFVVNheXpRMWY2aDZsd1RVdW5CNnhRTGZLbTcrL2hwdWdhc2phRE10?=
+ =?utf-8?B?bU9lZTYwRkovbnFITUhJTXptUUFuSTJBT2wzcHhnc3I4Umw5NDd1YW5VbFFh?=
+ =?utf-8?B?RTV0Wk9TYjdJZVZvNjRDaGZWUlJSQ21TVm5rRDd0STNsL3pFc1QvSGljVjht?=
+ =?utf-8?B?dU43SjdNeERSb2hEMWxxYjhKSExrc1VIckQrNyt3c2V0R04xczhYeUxDZ1dJ?=
+ =?utf-8?Q?ve/+AVkSJ8gaL/SU=3D?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b27bee48-6340-4106-06a2-08defc5cbb5d
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Aug 2026 12:40:34.4889
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 33411fc7-3661-4350-f83a-08defc5c9720
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BN3PEPF0000B36D.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CHXPR12MB999221
-X-purgate-ID: tlsNG-16d1c6/1786970387-FCA0477B-1DFCFFD5/0/0
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7xLHUuUMpoLzYjMWSqxsWNRRC+3GpRGA5FeRCcLSZeGe8GZgn6q9qr8pQF3gl+nFqflW8+4leZYL/y+JH/lnsFSdGtwl/AdHgR9Un7/2ObU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR03MB5302
+X-purgate-ID: tlsNG-ebf023/1786970438-C3EC6B50-036035FB/0/0
 X-purgate-type: clean
-X-purgate-size: 2579
+X-purgate-size: 6861
 
+On 05/08/2026 7:45 am, Jan Beulich wrote:
+> On 04.08.2026 21:37, Andrew Cooper wrote:
+>> On 03/08/2026 5:03 pm, Jan Beulich wrote:
+>>> On 03.08.2026 09:20, Andrew Cooper wrote:
+>>>> --- /dev/null
+>>>> +++ b/tools/tests/x86-decode-lite/insns.S
+>>>> @@ -0,0 +1,703 @@
+>>>> +#include "macro-magic.h"
+>>>> +
+>>>> +        .code64
+>>>> +
+>>>> +        .allow_index_reg
+>>>> +
+>>>> +        .text
+>>>> +
+>>>> +DECL(tests_rel0)
+>>>> +modrm:
+>>>> +        /* Mod=0, Reg=0, RM {0..f} */
+>>>> +        _ add %al, (%rax)
+>>>> +        _ add %al, (%rcx)
+>>>> +        _ add %al, (%rdx)
+>>>> +        _ add %al, (%rbx)
+>>>> +        _ add %al, (%rsp) /* SIB */
+>>>> +        /*add %al, (%rbp)    RIP --> tests_rel4 */
+>>>> +        _ add %al, (%rsi)
+>>>> +        _ add %al, (%rdi)
+>>>> +        _ add %al, (%r8)
+>>>> +        _ add %al, (%r9)
+>>>> +        _ add %al, (%r10)
+>>>> +        _ add %al, (%r11)
+>>>> +        _ add %al, (%r12) /* SIB */
+>>>> +        /*add %al, (%r13)    RIP --> tests_rel4 */
+>>>> +        _ add %al, (%r14)
+>>>> +        _ add %al, (%r15)
+>>>> +
+>>>> +        /* Mod=1, Reg=0, RM {0..f} */
+>>>> +        _ add %al, 0x01(%rax)
+>>>> +        _ add %al, 0x01(%rcx)
+>>>> +        _ add %al, 0x01(%rdx)
+>>>> +        _ add %al, 0x01(%rbx)
+>>>> +        _ add %al, 0x01(%rsp) /* SIB */
+>>>> +        _ add %al, 0x01(%rbp)
+>>>> +        _ add %al, 0x01(%rsi)
+>>>> +        _ add %al, 0x01(%rdi)
+>>>> +        _ add %al, 0x01(%r8)
+>>>> +        _ add %al, 0x01(%r9)
+>>>> +        _ add %al, 0x01(%r10)
+>>>> +        _ add %al, 0x01(%r11)
+>>>> +        _ add %al, 0x01(%r12) /* SIB */
+>>>> +        _ add %al, 0x01(%r13)
+>>>> +        _ add %al, 0x01(%r14)
+>>>> +        _ add %al, 0x01(%r15)
+>>>> +
+>>>> +        /* Mod=2, Reg=0, RM {0..f} */
+>>>> +        _ add %al, 0x7f000001(%rax)
+>>>> +        _ add %al, 0x7f000001(%rcx)
+>>>> +        _ add %al, 0x7f000001(%rdx)
+>>>> +        _ add %al, 0x7f000001(%rbx)
+>>>> +        _ add %al, 0x7f000001(%rsp) /* SIB */
+>>>> +        _ add %al, 0x7f000001(%rbp)
+>>>> +        _ add %al, 0x7f000001(%rsi)
+>>>> +        _ add %al, 0x7f000001(%rdi)
+>>>> +        _ add %al, 0x7f000001(%r8)
+>>>> +        _ add %al, 0x7f000001(%r9)
+>>>> +        _ add %al, 0x7f000001(%r10)
+>>>> +        _ add %al, 0x7f000001(%r11)
+>>>> +        _ add %al, 0x7f000001(%r12) /* SIB */
+>>>> +        _ add %al, 0x7f000001(%r13)
+>>>> +        _ add %al, 0x7f000001(%r14)
+>>>> +        _ add %al, 0x7f000001(%r15)
+>>>> +
+>>>> +        /* Mod=3, Reg=0, RM {0..f} */
+>>>> +        _ add %al, %al
+>>>> +        _ add %al, %cl
+>>>> +        _ add %al, %dl
+>>>> +        _ add %al, %bl
+>>>> +        _ add %al, %ah
+>>>> +        _ add %al, %ch
+>>>> +        _ add %al, %dh
+>>>> +        _ add %al, %dl
+>>> Perhaps also include %bpl, %sil, and %dil?
+>> They're not relevant to this test, and interfere with the intentional
+>> pattern set up.
+> Hmm, how does a particular pattern matter here? I don't think you test those
+> cases (or more generally an empty REX prefix) anywhere else.
 
+There's nothing structurally interesting about those; I'm not testing
+the assembler, and x86_decode_lite() doesn't decode registers.
 
-On 16-Jul-26 16:11, Julian Vetter wrote:
-> From: Andrew Cooper <andrew.cooper3@citrix.com>
-> 
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> ---
-> Changes in v3:
-> - No changes
-> ---
->  xen/arch/arm/sysctl.c       | 26 ++++++++++++++++++++++++++
->  xen/include/public/sysctl.h |  2 ++
->  2 files changed, 28 insertions(+)
-> 
-> diff --git a/xen/arch/arm/sysctl.c b/xen/arch/arm/sysctl.c
-> index 32cab4feff..3b0edf4cec 100644
-> --- a/xen/arch/arm/sysctl.c
-> +++ b/xen/arch/arm/sysctl.c
-> @@ -12,7 +12,10 @@
->  #include <xen/dt-overlay.h>
->  #include <xen/errno.h>
->  #include <xen/hypercall.h>
-> +
->  #include <asm/arm64/sve.h>
-> +#include <asm/gic.h>
-> +
->  #include <public/sysctl.h>
->  
->  void arch_do_physinfo(struct xen_sysctl_physinfo *pi)
-> @@ -21,6 +24,29 @@ void arch_do_physinfo(struct xen_sysctl_physinfo *pi)
->  
->      pi->arch_capabilities |= MASK_INSR(sve_encode_vl(get_sys_vl_len()),
->                                         XEN_SYSCTL_PHYSCAP_ARM_SVE_MASK);
-> +
-> +    /*
-> +     * The GIC version(s) we're happy creating guests with.  Right now for
-> +     * simplicity it is tied to the active hardware version, but this will
-> +     * cease to be the case if/when the compatbility modes are enabled.
-s/compatbility/compatibility/
+The ModRM byte has multiple structurally interesting interactions with
+REX prefixes, hence the coverage of Mod and RM value.
 
-GICv3 may support GICv2 and we support libxl guest requesting GICv2 on a GICv3
-host. Why are we not exposing this information here?
+The patten makes it trivial to look at the disassembled result and check
+the coverage.  (And spot the bug that's hiding in plain sight above.)
 
-> +     */
-> +    switch ( gic_hw_version() )
-> +    {
-> +    case GIC_V2:
-> +        pi->arch_capabilities |= XEN_SYSCTL_PHYSCAP_ARM_GIC_V2;
-> +        break;
-> +
-> +    case GIC_V3:
-> +        pi->arch_capabilities |= XEN_SYSCTL_PHYSCAP_ARM_GIC_V3;
-> +        break;
-> +
-> +    case GIC_INVALID:
-> +        /*
-> +         * Running a control domain without having the GIC sorted yet?
-> +         * Something's broken, but there's nothing we can do about it here.
-> +         */
-Add ASSERT_UNREACHABLE here.
+>>>> --- /dev/null
+>>>> +++ b/tools/tests/x86-decode-lite/main.c
+>>>> @@ -0,0 +1,111 @@
+>>>> +/*
+>>>> + * Userspace test harness for x86_decode_lite().
+>>>> + */
+>>>> +#include <stdio.h>
+>>>> +
+>>>> +#include "x86-emulate.h"
+>>>> +
+>>>> +static unsigned int nr_failures;
+>>>> +#define fail(t, fmt, ...)                                       \
+>>>> +({                                                              \
+>>>> +    const unsigned char *insn = (t)->ip;                        \
+>>>> +                                                                \
+>>>> +    nr_failures++;                                              \
+>>>> +                                                                \
+>>>> +    (void)printf("  Fail '%s' [%02x", (t)->name, *insn);        \
+>>>> +    for ( unsigned int i = 1; i < (t)->len; i++ )               \
+>>>> +        printf(" %02x", insn[i]);                               \
+>>>> +    printf("]\n");                                              \
+>>>> +                                                                \
+>>>> +    (void)printf(fmt, ##__VA_ARGS__);                           \
+>>>> +})
+>>>> +
+>>>> +struct test {
+>>>> +    const char *name;
+>>>> +    void *ip;
+>>>> +    unsigned long len;
+>>>> +};
+>>>> +
+>>>> +extern const struct test
+>>>> +/* Defined in insns.S, ends with sentinel */
+>>>> +    tests_rel0[], /* No relocatable entry */
+>>>> +    tests_rel1[], /* disp8 */
+>>>> +    tests_rel4[], /* disp32 or RIP-relative */
+>>>> +    tests_unsup[]; /* Unsupported instructions */
+>>>> +
+>>>> +static inline void run_tests(const struct test *tests, unsigned int rel_sz)
+>>>> +{
+>>>> +    printf("Test rel%u\n", rel_sz);
+>>>> +
+>>>> +    for ( unsigned int i = 0; tests[i].name; ++i )
+>>>> +    {
+>>>> +        const struct test *t = &tests[i];
+>>>> +        x86_decode_lite_t r;
+>>>> +
+>>>> +        /*
+>>>> +         * Don't end strictly at t->len.  This provides better diagnostics if
+>>>> +         * too many bytes end up getting consumed.
+>>>> +         */
+>>>> +        r = x86_decode_lite(t->ip, t->ip + /* t->len */ 20);
+>>> For the excess bytes to at least be legitimate to access (not causing UB),
+>>> shouldn't finish_arr emit enough filler bytes?
+>> finish_arr is the wrong place, but I've folded in:
+>>
+>> diff --git a/tools/tests/x86-decode-lite/insns.S b/tools/tests/x86-decode-lite/insns.S
+>> index e52c2934c8d8..dc017016b2d2 100644
+>> --- a/tools/tests/x86-decode-lite/insns.S
+>> +++ b/tools/tests/x86-decode-lite/insns.S
+>> @@ -695,6 +695,13 @@ unsup_insn: /* Instructions that would complicated decode, or shouldn't be used
+>>  
+>>  END(tests_unsup)
+>>  
+>> +        /*
+>> +         * For improved diagnostics, we allow some overreading of the
+>> +         * instruction under test.  Ensure there are good bytes to read.
+>> +         */
+>> +overread_padding:
+>> +        .skip 20
+>> +
+>>          /* This is here to cause jmps to use their disp32 form. */
+>>          .section .text.other_section, "ax", @progbits
+>>  other_section:
+> How would this help? run_tests() is never invoked with tests_unsup[] as
+> argument. And run_tests_unsup() wants to only fetch up to t->len.
 
-> +        break;
-> +    }
->  }
->  
->  long arch_do_sysctl(struct xen_sysctl *sysctl,
-> diff --git a/xen/include/public/sysctl.h b/xen/include/public/sysctl.h
-> index c7cd9b4eb0..d20ebf3644 100644
-> --- a/xen/include/public/sysctl.h
-> +++ b/xen/include/public/sysctl.h
-> @@ -106,6 +106,8 @@ struct xen_sysctl_tbuf_op {
->  
->  #if defined(__arm__) || defined(__aarch64__)
->  #define XEN_SYSCTL_PHYSCAP_ARM_SVE_MASK  (0x1FU)
-> +#define XEN_SYSCTL_PHYSCAP_ARM_GIC_V2    (1U << 5)
-> +#define XEN_SYSCTL_PHYSCAP_ARM_GIC_V3    (1U << 6)
->  #endif
->  
->  struct xen_sysctl_physinfo {
+Oh, in which case nothing is needed at all.  I'll take it back out.
 
-~Michal
-
+~Andrew
 
