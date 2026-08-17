@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89D30C5B572
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 08:58:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1392726.1631718 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46B04C5B572
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 08:58:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1392733.1631728 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvtAT-0006z3-4D; Mon, 17 Aug 2026 08:58:05 +0000
+	id 1wvtBB-0007gq-D1; Mon, 17 Aug 2026 08:58:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1392726.1631718; Mon, 17 Aug 2026 08:58:05 +0000
+Received: by outflank-mailman (output) from mailman id 1392733.1631728; Mon, 17 Aug 2026 08:58:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvtAT-0006yw-1Q; Mon, 17 Aug 2026 08:58:05 +0000
-Received: by outflank-mailman (input) for mailman id 1392726;
- Mon, 17 Aug 2026 08:58:03 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wvtBB-0007gj-9U; Mon, 17 Aug 2026 08:58:49 +0000
+Received: by outflank-mailman (input) for mailman id 1392733;
+ Mon, 17 Aug 2026 08:58:48 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wvtAR-0006xn-Ol
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 08:58:03 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wvtB9-0007gT-Vn
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 08:58:48 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wvtAR-009RUc-5R
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 10:58:03 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wvtB8-005H11-Jl
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 10:58:46 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a82cd1b-2eae-0a2a0a5409dd-0a2a450baa0e-0
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 10:58:03 +0200
-Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a82cd38-8faa-0a2a0a5109dd-0a2a4509baf2-32
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 10:58:46 +0200
+Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a82cd1a-b7e8-0a2a450b0019-d155dd2ae830-3
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 10:58:02 +0200
-Received: by mail-wr1-f42.google.com with SMTP id
- ffacd0b85a97d-47f6609c657so1474512f8f.2
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 01:58:02 -0700 (PDT)
+ id 6a82cd46-be1a-0a2a45090019-d155dd2eb887-3
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 10:58:46 +0200
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-47362928f65so3040073f8f.2
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 01:58:46 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482a5a31396sm2279394f8f.2.2026.08.17.01.58.01
+ 5b1f17b1804b1-4999d11f073sm28466565e9.15.2026.08.17.01.58.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Aug 2026 01:58:02 -0700 (PDT)
+ Mon, 17 Aug 2026 01:58:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,59 +55,54 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786957082; x=1787561882; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1786957126; x=1787561926; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=8QVewtRw+TwFKfjqe5upIsoN/acNO1D5x9ht9JMPqQM=;
-        b=EPu+UbRKbFFBoDP2pn29coHY9xhdEERQ3jCxcAru/9iN+sQusNc4vAn5hnalitVMI0
-         JuRTcdqHqf6sK/hKqJ0KEJV5MV1XxSST3UwLOfsJ7QjatahiC5fcj0KQ79/TFcAqliwj
-         CF5deqzKxRb57cQ4XFtvB5iyn7giOXpSPX5jQspwyDaI/vlcXYN1UgQxvemcvEePP02i
-         PS6yUb1cY9UMNUTs8LHnQO8cBzrDVBLdPQHlFUT5W+Fgpa6Ldx9FvM29RX4JoOt6mKzh
-         cdDSBthLJ80oAxPok3srArHX911JRyPwMMGmrQo8PhikH8mwE7g+YovS5JV5rdZkcOZJ
-         AwUw==
+        bh=JTfzh5nMGjglXFSQtaFq+GPWNKgrY8T3kAqW5LSmjgc=;
+        b=cgTUpKGY5VsugGAI0/KhXS+MYDhS3vL+p82T7JjpaUifAttT7566OfO8qkG6IQzOL3
+         Y8TZXRVZxYlN8+FYh2s4IoKBZfBwdnpg2S9l3xxkk8hgMKaGUfYLg45Js2KJHLVZ2+V7
+         upp/VLkU1gjq7oJJt9riTI+RMCSKbWsMsTcr8h1duU3vbtecOYEsFnM4O5vUUBnON8Sr
+         ScWypRu9zkaVl6RyMCrJDXP9WnZPcV7a3w+ZrvqYktfN9t443M+5U2h0U2z8Z2+pl3zc
+         QonP3/pTmBwmLgzAmW1X+CBVxbIsidTeCptk8hZoRSBS3YovcY/k67ePniNHvVFd+5ig
+         UJgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786957082; x=1787561882;
+        d=1e100.net; s=20251104; t=1786957126; x=1787561926;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=8QVewtRw+TwFKfjqe5upIsoN/acNO1D5x9ht9JMPqQM=;
-        b=hWdbVfdW7ReBDJqJf9ncNwi7n7egR9XY8GwW9y8gXBjX3chdkrijlwE3LsYeVZVXvj
-         FZSIXI9K4mFkcwAdCPbRFs4u/uO37HDtD3SFmOx8Wj/X8ZIrYyuwuyUYz8ZibyPOSelH
-         k0RTsBEaaLVpJvNFuCwDo+y1aI5QxSWP2lxAGFf4PlnEWj+tuAqzlBpeh4ZnRoj9sKlP
-         Ljj0/3Jg68b/5uaQA2kQS4UENyInjeKyAi4WWWHSQNX6ZJo8WGeTr9LBsESKzUQPAnaN
-         mUKFza/7IjeZU0NtmopDlIoCKUxLZQ3q1FcXRM53LBqubocjCwaw5a8ghTX6PM0iiDZU
-         fl8A==
-X-Gm-Message-State: AOJu0YyWGECmjmRigHK6ytFqhU8ZEKlG7LQ/Wc7/IDWW3TLIy7VV+5AW
-	+R3C263GhEpcMwR6gS4u8Z3aX2bbHjEKWjXgfe7BBLCZ6Ao/iHtcP7Ov3DEW+ISPhxhYMiUVrNc
-	HHGHykA==
-X-Gm-Gg: AR+sD10SmzfaX+8DV2IoQaEHbHx/QSw+9rPfyR0xuyFYZ5GS5SeIgC4pwTeZDRAC3P1
-	pYtFMOdX/wUrjs4Vd9yvT8v5wsN+AK+PrmWqYW5chZ/+WqB+WihZXOHY2lPmsmzcp8kVWiVnN8J
-	ItuvZblqtD7vSMhVSkSnscBL62bfG2af3sqYj5TRg76F6JACo21HmcG+adnKveApak/NNKxK3Nb
-	aMwvDh4pa36OW3vQCVCUeuzY3XC2GASsQc918iU3ffcvTTDCGP4xPlirXmijYIsjM2HhmUTrchF
-	chUQJVa+mU3pjjDFIgDpjA+3HA63qrffZ6m6Rl2SO6WfR8EuGcDDh08WhDyObzr2Fi/uruWTSiQ
-	Q9eWBEc3dEWlkv0HdPwoWOKxxMKjIF4sRQx7CG5tiJBjZdAD3fliEoBCduE1cBcN8gEROY8kRxh
-	ynIJrzhNPq1lifcRv89rhjqkjGeinkIs6vJm0tRRfb5Eu8KI4epEY15xUFip8uUO8A6mQai7lN+
-	ChV2IfR8hMjq9sPygmqY9Lg397ccWnI6sDzL09tjZ5H9IglvD6E
-X-Received: by 2002:a05:6000:240c:b0:47f:e9fd:80d8 with SMTP id ffacd0b85a97d-481607947e2mr34071751f8f.21.1786957082432;
-        Mon, 17 Aug 2026 01:58:02 -0700 (PDT)
-Message-ID: <aac7d8fa-ef0d-4146-883f-deb9ec04a519@suse.com>
-Date: Mon, 17 Aug 2026 10:58:03 +0200
+        bh=JTfzh5nMGjglXFSQtaFq+GPWNKgrY8T3kAqW5LSmjgc=;
+        b=UQy0Vbzgtyy10xhWxak45rrLZQJ4JD4vN64Hs44i6BoZuxi6d2UYitjIKF3ZLhrrtD
+         LbEUVAE8PxSRE+Gwj02lCJ8xMvBvuvo2MEe4bzg8ZxWuHxebpsWu7lh28B+cZ29LXTPW
+         +7EXIey5pJVlTgMu71Iu5cUxKqR5IenJ3MpNkVESHNVZ1x6l9Mc9clD1n15Rf4Io5pVH
+         +9NY4Opi22zC17r6DlP+EjTV05V6VqdEIy6B+g4yQw+dJpJsAqcxRzR0FTv8jvL9GZwe
+         NEnOaAxAo1jhqn+RCZUa+kaG2C4u4wrt2dRJ2BnOoUH70p6SO4FkqVJjDoj/814X/5gq
+         y2pA==
+X-Gm-Message-State: AOJu0Yxr/P/cbAsVomNKzPdL4GKKxjePChedHtC8q36Ty/no8aCPYx7F
+	3Fp0rTfnGZc6f2+Qy/q8Kv0Ot98/1XIOJAL+LDu149NjSHY7hpXRMO8IDTD0YQ0BntvAlcdz47c
+	nC956yQ==
+X-Gm-Gg: AR+sD12ZTIq4dlEFOmbqG1NCISa0NI5ISajzaxl59jnk1Mf0EfOE78Vlc6E5dpHMSaj
+	2OzsdAiwPp9hycKRNXOJWD43z+82owUEAZlRHvQJz3h1BAEBK5sjbLQ1t7/sNPY498V+PGWNns+
+	BnOn/nVJv1CkY19i3E6ActiEqXvBqH4/v5uo8aoUz9IPbgEKhx8JhQ7RjoYqBeidmnD8+4eNt7j
+	ikWpyZvA+B7JhyowntHw2kHEijqK4gk3KJ7ANt4B+0GAdh3tK/LXUtw0codBWAVoDUJw4jCD1hP
+	tnEoJwhEtRwAoSt2CXFNl895yvveUaU+OOnANViNBpmnYZs8FxixVSamO3A8FKiXVO4pDrj8zvC
+	7mwyNwAYKpnH/AFs1RjUYy8h6jGd1M7CsMgxsIW7DAYBrmD0t0BVC5Lze0HDUR8XCW4pdmc/1+H
+	cj6+TzztS8SJtMKOlkfxBoqXNxrZBNLszIdhd9wasxrDIbL+3H8RTH2bSM7OVw7JekMuaS9RT+z
+	lFRVmfDRSjxaYd3K7by8qYmAhn+iPwMkps+PMlCltns2u5tNvTbzQ==
+X-Received: by 2002:a05:600c:3585:b0:499:9eb7:4558 with SMTP id 5b1f17b1804b1-4999eb7462amr4762655e9.10.1786957126079;
+        Mon, 17 Aug 2026 01:58:46 -0700 (PDT)
+Message-ID: <0511f8a7-7790-44c3-addd-67a969f4f5c1@suse.com>
+Date: Mon, 17 Aug 2026 10:58:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2 13/14] XSM: convert remaining miscellaneous hooks
+Subject: [PATCH RFC v2 14/14] XSM: avoid fragile assumptions in
+ xsm_fixup_ops()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Daniel Smith <dpsmith@apertussolutions.com>, Julien Grall
- <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
+Cc: Daniel Smith <dpsmith@apertussolutions.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>
 References: <ef09b072-c935-459e-bf8b-81c96ff9cc46@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -136,179 +131,105 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <ef09b072-c935-459e-bf8b-81c96ff9cc46@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1786957082-A8ECE9EA-746152B0/0/0
+X-purgate-ID: tlsNG-bad1c0/1786957126-BD8C1034-97BB62B4/0/0
 X-purgate-type: clean
-X-purgate-size: 5160
+X-purgate-size: 3645
 
-Make the ones left also follow the standard scheme, i.e. taking
-xsm_default_t as first argument at call sites. This way they can be
-covered by the recently introduced hook machinery.
+Using the recently introduced hook machinery, the assumptions made can be
+avoided, at the expense of a significant code size increase.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-Interestingly .show_irq_sid() is unused on Arm. Oddly there's no use of
-register_keyhandler() there at all. (IOW I think it would be wrong to make
-the hook x86-only.)
+RFC: Of course the significantly increased code size isn't nice. Yet then
+     it's all .init.text bloat only.
+
+RFC: The asm() is somewhat like RELOC_HIDE(), with an offset of 0. It
+     didn't feel quite right to use that macro here, though.
+
+The generated code I've looked at (both for x86 and Arm64) it is clear
+that a similar weakness in codegen exists for the recurring accesses to
+_{s,e}text[] by is_kernel_text(): A register variable each would shrink
+code size significantly, yet that doesn't appear to happen at -O1. Yet
+open-coding isn't an option, imo.
 ---
 v2: New.
 
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -497,7 +497,7 @@ void asmlinkage __init noreturn start_xe
-     /* Hide UART from DOM0 if we're using it */
-     serial_endboot();
- 
--    if ( (rc = xsm_set_system_active()) != 0 )
-+    if ( (rc = xsm_set_system_active(XSM_HOOK)) != 0 )
-         panic("xsm: unable to switch to SYSTEM_ACTIVE privilege: %d\n", rc);
- 
-     system_state = SYS_STATE_active;
---- a/xen/arch/x86/irq.c
-+++ b/xen/arch/x86/irq.c
-@@ -2549,7 +2549,7 @@ static void cf_check dump_irqs(unsigned
-         if ( !irq_desc_initialized(desc) || desc->handler == &no_irq_type )
-             continue;
- 
--        ssid = in_irq() ? NULL : xsm_show_irq_sid(irq);
-+        ssid = in_irq() ? NULL : xsm_show_irq_sid(XSM_HOOK, irq);
- 
-         spin_lock_irqsave(&desc->lock, flags);
- 
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -835,7 +835,7 @@ static void noreturn init_done(void)
-     unsigned long start, end;
-     int err;
- 
--    if ( (err = xsm_set_system_active()) != 0 )
-+    if ( (err = xsm_set_system_active(XSM_HOOK)) != 0 )
-         panic("xsm: unable to switch to SYSTEM_ACTIVE privilege: %d\n", err);
- 
-     system_state = SYS_STATE_active;
---- a/xen/include/xsm/dummy.h
-+++ b/xen/include/xsm/dummy.h
-@@ -104,10 +104,12 @@ static always_inline int xsm_default_act
-     }
- }
- 
--static XSM_INLINE int xsm_set_system_active(void)
-+static XSM_INLINE int xsm_set_system_active(XSM_DEFAULT_VOID)
- {
-     struct domain *d = current->domain;
- 
-+    XSM_ASSERT_ACTION(XSM_HOOK);
-+
-     ASSERT(d->is_privileged);
- 
-     if ( d->domain_id != DOMID_IDLE )
-@@ -467,8 +469,9 @@ static XSM_INLINE int xsm_do_compat_op(X
- 
- #endif /* CONFIG_XSM */
- 
--static XSM_INLINE char *xsm_show_irq_sid(int irq)
-+static XSM_INLINE char *xsm_show_irq_sid(XSM_DEFAULT_ARG int irq)
- {
-+    XSM_ASSERT_ACTION(XSM_HOOK);
-     return NULL;
- }
- 
---- a/xen/include/xsm/hooks.h
-+++ b/xen/include/xsm/hooks.h
-@@ -17,6 +17,8 @@
- 
- #endif /* XSM_HOOK */
- 
-+XSM_HOOK(int, set_system_active)
-+
- XSM_HOOK(int, domain_create, struct domain *, uint32_t)
- XSM_HOOK(int, getdomaininfo, struct domain *)
- XSM_HOOK(int, get_domain_state, struct domain *)
-@@ -84,6 +86,8 @@ XSM_HOOK(int, irq_mapping, struct domain
- XSM_HOOK(int, pt_irq_binding, struct domain *, struct xen_domctl_bind_pt_irq *,
-                               bool)
- 
-+XSM_HOOK(pchar_t, show_irq_sid, int)
-+
- XSM_HOOK(int, irq_permission, struct domain *, int, bool)
- XSM_HOOK(int, iomem_permission, struct domain *, uint64_t, uint64_t, bool)
- 
 --- a/xen/include/xsm/xsm.h
 +++ b/xen/include/xsm/xsm.h
-@@ -61,7 +61,6 @@ typedef enum xsm_default xsm_default_t;
-  * !!! WARNING !!!
-  */
+@@ -51,15 +51,6 @@ typedef enum xsm_default xsm_default_t;
+ #define XSM_MMU_MACHPHYS_UPDATE  8
+ #endif /* CONFIG_X86 */
+ 
+-/*
+- * !!! WARNING !!!
+- *
+- * For simplicity, xsm_fixup_ops() expects that this structure is made
+- * exclusively of function pointers to non-init functions.  Think carefully
+- * before deviating from the pattern.
+- *
+- * !!! WARNING !!!
+- */
  struct xsm_ops {
--    int (*set_system_active)(void);
  
  #define XSM_HOOK0(rtype, name) rtype (*name)(void);
- #define XSM_HOOK1(rtype, name, type1) \
-@@ -77,7 +76,6 @@ struct xsm_ops {
- 
- #include "hooks.h"
- 
--    char *(*show_irq_sid)(int irq);
- };
- 
- #ifdef CONFIG_XSM
-@@ -86,11 +84,6 @@ extern struct xsm_ops xsm_ops;
- 
- #ifndef XSM_NO_WRAPPERS
- 
--static inline int xsm_set_system_active(void)
--{
--    return alternative_call(xsm_ops.set_system_active);
--}
--
- #define XSM_ALT_void      alternative_vcall
- #define XSM_ALT_int       return alternative_call
- #define XSM_ALT_pchar_t   return alternative_call
-@@ -138,11 +131,6 @@ static inline rtype xsm_ ## name( \
- 
- #include "hooks.h"
- 
--static inline char *xsm_show_irq_sid(int irq)
--{
--    return alternative_call(xsm_ops.show_irq_sid, irq);
--}
--
- #endif /* XSM_NO_WRAPPERS */
- 
- #ifdef CONFIG_MULTIBOOT
 --- a/xen/xsm/dummy.c
 +++ b/xen/xsm/dummy.c
-@@ -14,7 +14,6 @@
- #include <xsm/dummy.h>
- 
- static const struct xsm_ops __initconst_cf_clobber dummy_ops = {
--    .set_system_active             = xsm_set_system_active,
- 
- #define XSM_HOOK0(rtype, name) .name = xsm_ ## name,
- #define XSM_HOOK1(rtype, name, ...) XSM_HOOK0(rtype, name)
-@@ -25,7 +24,6 @@ static const struct xsm_ops __initconst_
- 
- #include <xsm/hooks.h>
- 
--    .show_irq_sid                  = xsm_show_irq_sid,
- };
+@@ -28,29 +28,35 @@ static const struct xsm_ops __initconst_
  
  void __init xsm_fixup_ops(struct xsm_ops *ops)
---- a/xen/xsm/flask/hooks.c
-+++ b/xen/xsm/flask/hooks.c
-@@ -1903,7 +1903,6 @@ static int cf_check flask_get_domain_sta
+ {
++    const struct xsm_ops *dops = &dummy_ops;
++
+     /*
+-     * We make some simplifying assumptions about struct xsm_ops; that it is
+-     * made exclusively of function pointers to non-init text.
+-     *
+-     * This allows us to walk over struct xsm_ops as if it were an array of
+-     * unsigned longs.
++     * To limit the size of generated code (by avoiding the compiler using
++     * dummy_ops directly for every access), hide the relationship between
++     * dops and dummy_ops.
+      */
+-    unsigned long *dst = _p(ops);
+-    const unsigned long *src = _p(&dummy_ops);
++    asm ( "" : "+r" (dops) );
+ 
+-    for ( ; dst < (unsigned long *)(ops + 1); src++, dst++ )
+-    {
+-        /*
+-         * If you encounter this BUG(), then you've most likely added a new
+-         * XSM hook but failed to provide the default implementation in
+-         * dummy_ops.
+-         *
+-         * If not, then perhaps a function pointer to an init function, or
+-         * something which isn't a function pointer at all.
+-         */
+-        BUG_ON(!is_kernel_text(*src));
++    /*
++     * If you encounter the BUG() below, then you've most likely added a
++     * new XSM hook but failed to provide the default implementation in
++     * dummy_ops.
++     *
++     * If not, then perhaps a function pointer to an init function, or
++     * (less likely) something which isn't a function pointer at all.
++     */
++#define XSM_HOOK0(rtype, name)                    \
++    do {                                          \
++        typeof(xsm_ ## name) *dummy = dops->name; \
++        BUG_ON(!is_kernel_text(dummy));           \
++        if ( !ops->name )                         \
++            ops->name = dummy;                    \
++    } while ( false );
++#define XSM_HOOK1(rtype, name, ...) XSM_HOOK0(rtype, name)
++#define XSM_HOOK2(rtype, name, ...) XSM_HOOK0(rtype, name)
++#define XSM_HOOK3(rtype, name, ...) XSM_HOOK0(rtype, name)
++#define XSM_HOOK4(rtype, name, ...) XSM_HOOK0(rtype, name)
++#define XSM_HOOK5(rtype, name, ...) XSM_HOOK0(rtype, name)
+ 
+-        if ( !*dst )
+-            *dst = *src;
+-    }
++#include <xsm/hooks.h>
  }
- 
- static const struct xsm_ops __initconst_cf_clobber flask_ops = {
--    .set_system_active = flask_set_system_active,
- 
- #define XSM_HOOK0(rtype, name) .name = flask_ ## name,
- #define XSM_HOOK1(rtype, name, ...) XSM_HOOK0(rtype, name)
-@@ -1914,7 +1913,6 @@ static const struct xsm_ops __initconst_
- 
- #include <xsm/hooks.h>
- 
--    .show_irq_sid = flask_show_irq_sid,
- };
- 
- const struct xsm_ops *__init flask_init(
 
 
