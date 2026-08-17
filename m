@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DDB4C5B572
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 08:53:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1392668.1631640 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5FC1C5DF70
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 08:53:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1392677.1631649 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvt5g-00032y-S8; Mon, 17 Aug 2026 08:53:08 +0000
+	id 1wvt6E-0003ZJ-7g; Mon, 17 Aug 2026 08:53:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1392668.1631640; Mon, 17 Aug 2026 08:53:08 +0000
+Received: by outflank-mailman (output) from mailman id 1392677.1631649; Mon, 17 Aug 2026 08:53:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wvt5g-00032q-OA; Mon, 17 Aug 2026 08:53:08 +0000
-Received: by outflank-mailman (input) for mailman id 1392668;
- Mon, 17 Aug 2026 08:53:07 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wvt6E-0003ZC-41; Mon, 17 Aug 2026 08:53:42 +0000
+Received: by outflank-mailman (input) for mailman id 1392677;
+ Mon, 17 Aug 2026 08:53:41 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wvt5f-00032Y-1Q
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 08:53:07 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wvt6D-0003Z0-0w
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 08:53:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wvt5e-00D2zY-EY
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 10:53:06 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wvt6B-002rjM-Ox
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 10:53:39 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a82cbed-2eae-0a2a0a5409dd-0a2a450bdbc8-28
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 10:53:06 +0200
+ id 6a82cc03-bab6-0a2a0a5309dd-0a2a45018c1e-36
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 10:53:39 +0200
 Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a82cbf2-b7e8-0a2a450b0019-d155802bac30-3
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 10:53:06 +0200
+ id 6a82cc13-5984-0a2a45010019-d155802bf15e-3
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 10:53:39 +0200
 Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-495590dde14so38912005e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 01:53:06 -0700 (PDT)
+ 5b1f17b1804b1-49800c6a846so36449895e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 01:53:39 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49996183b89sm157259195e9.12.2026.08.17.01.53.04
+ 5b1f17b1804b1-4999d063a68sm21461775e9.2.2026.08.17.01.53.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Aug 2026 01:53:05 -0700 (PDT)
+ Mon, 17 Aug 2026 01:53:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,57 +55,54 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1786956786; x=1787561586; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1786956819; x=1787561619; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=yG72bC7P9bK/t0BCXT48RBUcpJmBlidVDBFgV61UuIM=;
-        b=SA8/kGTH9IlTOzeDdqpJrhKbFKgq5u/9PG9qe2xOLx+CbJeSO2mpVU6pX9eWnN8UAb
-         b/6FRvs8woGtHUrzGeuSyscxzbr82ecLhYM2AwPgpJUmf72n2pQY0KmDn4t4IdNiFvcM
-         9Hiei/njh6UVNjnKJzGLu4rlaLQWV8Y6jl94odPDiRgbtVsGp9T8pEcFUjfGsOupFCJK
-         SDEYOkLMAuEAZXfX2WhtSlyFZV9QhSMY3CSoRhhbakQUgv5DOy4WDV4eZdHDT5ytowJp
-         G/mcUBcukc/v29F2uDM55C7ke0IkbdLifBmY3Qnj/OiFzOyibkmXWT8gVt1+KzZm3NvG
-         iVfg==
+        bh=tEmpas18PFX7DYvL8q0Gls2b5mj4VJSxRmZe4a/2YYU=;
+        b=g5lNjz8PGPpAkSmHydPPNTtB8oBTtVUukxo1pAfiFXldLSHeK1NBIxg2WuPTJNdaOB
+         4AMgaNiHAFHuMUEW+j9EAmqyBFJHtx5CoJ3HnR2aMuH0d53iLz1TLtWh++JMpix2EOG/
+         SYoUp69KCZe6j7hyiY3fcx+nvf7F2gQWTqJiEedVIvr8Vg6np6kdkIs+UtQ50G98SeHl
+         mJJBpnAaCQSZss+we5NXwCOVm1Pne58VJMlcI45d50SfMwwJ4HKj750Ho5tccOjj1ReZ
+         8B1HA9ZPN/KChkDC2i4EwKTwwWfQlwLH10weRtpdn3BOpaI0/2lAAKGGhHA4jLcacosk
+         bdCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786956786; x=1787561586;
+        d=1e100.net; s=20251104; t=1786956819; x=1787561619;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=yG72bC7P9bK/t0BCXT48RBUcpJmBlidVDBFgV61UuIM=;
-        b=eeOm372wa/2/OdYWzCUk7EsrsWrBQ5PHwshdQbEAoHp6ZZcBxooUwsnOlYc76B3VEQ
-         h0uJGP5+Zi5bcK/0iQ6mhKmSZ/9X+xk+mzhH4yYTSplmmy8Auij2qv8JMILvUO+Bgevk
-         jZ2nBW1mSdWq3UKh6WVoCD/818RX0VmAYtaW2v/s1HZ6aGgEHZhTMcPZlOHUt4Vgo98h
-         Gof1gCbvVUmdht6hGdxDg2O/LzmZQPhRr48FGndVeK5OEtenqZ7639qkJyX59TKZF77i
-         q9brxTS/qArY2f3J4vO9tfCD5JJRLpV8VoGkzM9fRplqSg/rqeYTpAr60pD+l3ZRe2/C
-         AwpQ==
-X-Gm-Message-State: AOJu0YwRcriih+R6oa2gKVmEOoCwcBJIkDUDk34hDY0ieAmklTlOKzv6
-	MTAtcwjZyb6MhMLk44EjrPUzvwczWjWgQi+N8XUBXZ3AFYtkFIKMmWUc6UwkJkxYl3giFU26Cak
-	rITcfVg==
-X-Gm-Gg: AR+sD131ZZx6FCzSmVn/3P5czIjlF3UQslISQlwUITqw3WqUg92YtiusnC22d/508yf
-	Iysld0eS7soNcDlhbPJyaXH39gbAWPeRvEFAa6C/VDENa/Qu6DxJj4zcwzrABD7pxG4XvXkfiK0
-	orYZBxsqXdshYihRfOHBuYdvrNkwTGweaMet7Zm+/joq+n5VuJutFcedeUS0RhB9BS38UylyRw2
-	kt6rtnYhWHxtTJqwhofHObWN4LID2ZyyjDKr/5xY7wfrVa7WocuG9x3sgoSQ6MEp0Zl6XxMoEr1
-	DEd5tNZ3OYyx4K+IPtpUysTGrLw/S2NbKbnKG5kTVaZ+KXZ6ChhmtZrBCoG+7sjaDOayi6+H4R/
-	lb8C07zF4NrsifPsAz/ytaH+5e2VFjmQQtOm7qYwGZ9Ky1xn/HVLmrmYORmW3VEI8sUUfvW39f6
-	xvHRlIyWgHMPou/0QUJi0K+6SoBzo6w+eE7xsjmStriluIhW2L9wSu2+kb3jyGhpWA5paxNMTnn
-	QorCn2eNaoGeZ6+lvVqvFHxPSo3Nq9o5ZMlOaUZE2WT6/VXvLj+
-X-Received: by 2002:a05:600c:4754:b0:499:7e2b:8e5 with SMTP id 5b1f17b1804b1-4999a2f9ec3mr69341345e9.5.1786956785706;
-        Mon, 17 Aug 2026 01:53:05 -0700 (PDT)
-Message-ID: <e73894ff-7ef7-4db0-9d91-45870b0d3c83@suse.com>
-Date: Mon, 17 Aug 2026 10:53:06 +0200
+        bh=tEmpas18PFX7DYvL8q0Gls2b5mj4VJSxRmZe4a/2YYU=;
+        b=sdwHc2uLNoZ97EdMxHCcquj8Xa/xaGpkPd53bAi1AzgSBnHybeXtVB2cXlOnIy14Td
+         bkjvrXvxYUl70DJhwOnqPF4o0NojOXI1Pmq7a8doRBCegQKXjGjvnphL/kW6DEviZ7ae
+         IGSEhUXm8uLxR75h76MGeb+7wUA8Kwf5smSFJwsb7dlLsDSz086/dmkmkspdjpvdkF57
+         HX3DEboXor/UEuO8701AprwZtizyLGOIeyVpXcoGab8T96sRgkNmVnKRp0j/FbAUBv0j
+         UDq+hZNYGepmS2+pEqq7hJWVhAG33oXFRAenjA0q8mQSMnyDFw01sJOCDEd/inrr3YNT
+         DItw==
+X-Gm-Message-State: AOJu0YyNHMTFEQtPP1eMwveZa4teJHj2NQA1G+vuy54ceWP7fnbxhlR5
+	YDRWB5gnRCsW6MXY6VruDRbQ6fD6bSuY61ygfniKVZy5yhfnltpg1PBKDK41Ir7/fF+wycF6XPG
+	0QNO0dg==
+X-Gm-Gg: AR+sD1250wEwWtHkY8vv+xv2riaSycMNEy0DCo+qju/6dqKgH3fNUfm8pXzwNJp6KGn
+	l5zfuhMapKWcsFXX5Rtf6PmydKDtZRBjP8mYGTiEHqSrTLQqZDpZFA7N7QNP/lgFNMfxFp3lbW+
+	ykiTGGOrWcF1j7JLKIYk1d9DroE8NM5dF/vo2z+qkChjOizreKEFeXJ996d9kK4AxbM8OOqpwOX
+	RQn6l9/AMshUqgv+55JXAKxZYj/58yvhRplsq0Ftky+V8kyiH+T6xRrJYjV7YDmPQtizyxoDUzJ
+	h6KTfzlSqsUjBFs1lHyG988Tf+1lnHsNBD9mDbs3V010iU3esVE6aYgB3M1Ae472SgQK7SzziOT
+	8Qc63p6hfkRdOv92MC5GMiGEns4jE8aynhvEaRb4GTxQNwnNB1+Ddoc1KFqrWtsMYiC/ZvdvhBl
+	bybuHJJ27C3iXoyBwOLYp/Mk7MSEs26mpBYG9LtSYjqgIopX0geSYAZBW67VvRbdB2JqChzVSEw
+	x0T7EgM4OMzZVhepOKybfI3rkklnk9XM9MPC5f7lY3sHgggryl2
+X-Received: by 2002:a05:600c:3b23:b0:499:8ae1:b900 with SMTP id 5b1f17b1804b1-4998ae1bb69mr276680605e9.12.1786956819212;
+        Mon, 17 Aug 2026 01:53:39 -0700 (PDT)
+Message-ID: <236a8612-d431-4972-92b3-4d62e8f10bb4@suse.com>
+Date: Mon, 17 Aug 2026 10:53:40 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2 05/14] XSM: make Argo hooks well-formed ones
+Subject: [PATCH v2 06/14] XSM: fold xsm_{,un}map_domain_pirq() hooks
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Daniel Smith <dpsmith@apertussolutions.com>,
- Jason Andryuk <jason.andryuk@amd.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
  <roger@xenproject.org>
 References: <ef09b072-c935-459e-bf8b-81c96ff9cc46@suse.com>
 Content-Language: en-US
@@ -135,239 +132,89 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <ef09b072-c935-459e-bf8b-81c96ff9cc46@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1786956786-A88C99EA-BF76762A/0/0
+X-purgate-ID: tlsNG-d62444/1786956819-1F66C757-D5D940F0/0/0
 X-purgate-type: clean
-X-purgate-size: 7573
+X-purgate-size: 2676
 
-For whatever reason they didn't have an xsm_default_t first argument (to
-cope with XSM=n mode), making it impossible to (easily) cover them in
-xsm/hooks.h.
+Like other resource management hooks they are different in just "add
+resource" vs "remove resource". Hence like in other cases a single hook
+can easily serve both purposes. Rename hook and functions to fit
+xsm_io{mem,port}_mapping().
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
-Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 ---
-v2: Drop uses of current->domain from dummy handlers. Move const-ification
-    in xsm_default_action() to a separate patch. Re-base over re-ordering
-    of series.
+v2: Rename hook, functions, and new parameter.
 
---- a/xen/common/argo.c
-+++ b/xen/common/argo.c
-@@ -1341,7 +1341,7 @@ fill_ring_data(const struct domain *curr
-      * Don't supply information about rings that a guest is not
-      * allowed to send to.
-      */
--    ret = xsm_argo_send(currd, dst_d);
-+    ret = xsm_argo_send(XSM_HOOK, currd, dst_d);
-     if ( ret )
-         goto out;
- 
-@@ -1666,8 +1666,9 @@ register_ring(struct domain *currd,
- 
-     if ( reg.partner_id == XEN_ARGO_DOMID_ANY )
-     {
--        ret = opt_argo_mac_permissive ? xsm_argo_register_any_source(currd) :
--                                        -EPERM;
-+        ret = opt_argo_mac_permissive
-+              ? xsm_argo_register_any_source(XSM_HOOK, currd)
-+              : -EPERM;
-         if ( ret )
-             return ret;
+--- a/xen/arch/x86/physdev.c
++++ b/xen/arch/x86/physdev.c
+@@ -109,7 +109,7 @@ int physdev_map_pirq(struct domain *d, i
+         return physdev_hvm_map_pirq(d, type, index, pirq_p);
      }
-@@ -1680,7 +1681,7 @@ register_ring(struct domain *currd,
-             return -ESRCH;
-         }
  
--        ret = xsm_argo_register_single_source(currd, dst_d);
-+        ret = xsm_argo_register_single_source(XSM_HOOK, currd, dst_d);
-         if ( ret )
-             goto out;
- 
-@@ -2002,7 +2003,7 @@ sendv(struct domain *src_d, xen_argo_add
-     if ( !dst_d )
-         return -ESRCH;
- 
--    ret = xsm_argo_send(src_d, dst_d);
-+    ret = xsm_argo_send(XSM_HOOK, src_d, dst_d);
+-    ret = xsm_map_domain_pirq(XSM_DM_PRIV, d);
++    ret = xsm_pirq_mapping(XSM_DM_PRIV, d, true);
      if ( ret )
-     {
-         gprintk(XENLOG_ERR, "argo: XSM REJECTED %i -> %i\n",
-@@ -2100,7 +2101,7 @@ do_argo_op(unsigned int cmd, XEN_GUEST_H
-     if ( unlikely(!opt_argo) )
-         return -EOPNOTSUPP;
+         return ret;
  
--    rc = xsm_argo_enable(currd);
-+    rc = xsm_argo_enable(XSM_HOOK, currd);
-     if ( rc )
-         return rc;
+@@ -142,7 +142,7 @@ int physdev_unmap_pirq(struct domain *d,
+     int ret = 0;
  
-@@ -2242,7 +2243,7 @@ compat_argo_op(unsigned int cmd, XEN_GUE
-     if ( unlikely(!opt_argo) )
-         return -EOPNOTSUPP;
+     if ( d != current->domain || !is_hvm_domain(d) || !has_pirq(d) )
+-        ret = xsm_unmap_domain_pirq(XSM_DM_PRIV, d);
++        ret = xsm_pirq_mapping(XSM_DM_PRIV, d, false);
+     if ( ret )
+         return ret;
  
--    rc = xsm_argo_enable(currd);
-+    rc = xsm_argo_enable(XSM_HOOK, currd);
-     if ( rc )
-         return rc;
- 
-@@ -2307,7 +2308,7 @@ argo_init(struct domain *d)
- {
-     struct argo_domain *argo;
- 
--    if ( !opt_argo || xsm_argo_enable(d) )
-+    if ( !opt_argo || xsm_argo_enable(XSM_HOOK, d) )
-     {
-         argo_dprintk("argo disabled, domid: %u\n", d->domain_id);
-         return 0;
-@@ -2365,8 +2366,8 @@ argo_soft_reset(struct domain *d)
-         wildcard_rings_pending_remove(d);
- 
-         /*
--         * Since neither opt_argo or xsm_argo_enable(d) can change at runtime,
--         * if d->argo is true then both opt_argo and xsm_argo_enable(d) must be
-+         * Since neither opt_argo nor xsm_argo_enable() can change at runtime,
-+         * if d->argo is true then both opt_argo and xsm_argo_enable() must be
-          * true, and we can assume that init is allowed to proceed again here.
-          */
-         argo_domain_init(d->argo);
 --- a/xen/include/xsm/dummy.h
 +++ b/xen/include/xsm/dummy.h
-@@ -751,27 +751,32 @@ static XSM_INLINE int xsm_dm_op(XSM_DEFA
- #endif
+@@ -460,15 +460,8 @@ static XSM_INLINE char *xsm_show_irq_sid
  
- #ifdef CONFIG_ARGO
--static XSM_INLINE int xsm_argo_enable(const struct domain *d)
-+
-+static XSM_INLINE int xsm_argo_enable(XSM_DEFAULT_ARG const struct domain *d)
+ #ifdef CONFIG_HAS_PIRQ
+ 
+-static XSM_INLINE int xsm_map_domain_pirq(
+-    XSM_DEFAULT_ARG struct domain *d)
+-{
+-    XSM_ASSERT_ACTION(XSM_DM_PRIV);
+-    return xsm_default_action(action, current->domain, d);
+-}
+-
+-static XSM_INLINE int xsm_unmap_domain_pirq(
+-    XSM_DEFAULT_ARG struct domain *d)
++static XSM_INLINE int xsm_pirq_mapping(
++    XSM_DEFAULT_ARG struct domain *d, bool map)
  {
--    return 0;
-+    XSM_ASSERT_ACTION(XSM_HOOK);
-+    return xsm_default_action(action, d, NULL);
- }
- 
- static XSM_INLINE int xsm_argo_register_single_source(
--    const struct domain *d, const struct domain *t)
-+    XSM_DEFAULT_ARG const struct domain *d, const struct domain *t)
- {
--    return 0;
-+    XSM_ASSERT_ACTION(XSM_HOOK);
-+    return xsm_default_action(action, d, t);
- }
- 
- static XSM_INLINE int xsm_argo_register_any_source(
--    const struct domain *d)
-+    XSM_DEFAULT_ARG const struct domain *d)
- {
--    return 0;
-+    XSM_ASSERT_ACTION(XSM_HOOK);
-+    return xsm_default_action(action, d, NULL);
- }
- 
- static XSM_INLINE int xsm_argo_send(
--    const struct domain *d, const struct domain *t)
-+    XSM_DEFAULT_ARG const struct domain *d, const struct domain *t)
- {
--    return 0;
-+    XSM_ASSERT_ACTION(XSM_HOOK);
-+    return xsm_default_action(action, d, t);
- }
- 
- #endif /* CONFIG_ARGO */
+     XSM_ASSERT_ACTION(XSM_DM_PRIV);
+     return xsm_default_action(action, current->domain, d);
 --- a/xen/include/xsm/hooks.h
 +++ b/xen/include/xsm/hooks.h
-@@ -161,6 +161,14 @@ XSM_HOOK(int, do_xsm_op, XEN_GUEST_HANDL
- XSM_HOOK(int, do_compat_op, XEN_GUEST_HANDLE_PARAM(void))
+@@ -68,8 +68,7 @@ XSM_HOOK(int, kexec)
+ XSM_HOOK(int, schedop_shutdown, struct domain *, struct domain *)
+ 
+ #ifdef CONFIG_HAS_PIRQ
+-XSM_HOOK(int, map_domain_pirq, struct domain *)
+-XSM_HOOK(int, unmap_domain_pirq, struct domain *)
++XSM_HOOK(int, pirq_mapping, struct domain *, bool)
  #endif
  
-+#ifdef CONFIG_ARGO
-+XSM_HOOK(int, argo_enable, const struct domain *)
-+XSM_HOOK(int, argo_register_single_source, const struct domain *,
-+                                           const struct domain *)
-+XSM_HOOK(int, argo_register_any_source, const struct domain *)
-+XSM_HOOK(int, argo_send, const struct domain *, const struct domain *)
-+#endif
-+
- #undef XSM_HOOK0
- #undef XSM_HOOK1
- #undef XSM_HOOK2
---- a/xen/include/xsm/xsm.h
-+++ b/xen/include/xsm/xsm.h
-@@ -85,14 +85,6 @@ struct xsm_ops {
-     char *(*show_security_evtchn)(struct domain *d, const struct evtchn *chn);
- 
-     char *(*show_irq_sid)(int irq);
--
--#ifdef CONFIG_ARGO
--    int (*argo_enable)(const struct domain *d);
--    int (*argo_register_single_source)(const struct domain *d,
--                                       const struct domain *t);
--    int (*argo_register_any_source)(const struct domain *d);
--    int (*argo_send)(const struct domain *d, const struct domain *t);
--#endif
- };
- 
- #ifdef CONFIG_XSM
-@@ -196,30 +188,6 @@ static inline char *xsm_show_irq_sid(int
-     return alternative_call(xsm_ops.show_irq_sid, irq);
- }
- 
--#ifdef CONFIG_ARGO
--static inline int xsm_argo_enable(const struct domain *d)
--{
--    return alternative_call(xsm_ops.argo_enable, d);
--}
--
--static inline int xsm_argo_register_single_source(
--    const struct domain *d, const struct domain *t)
--{
--    return alternative_call(xsm_ops.argo_register_single_source, d, t);
--}
--
--static inline int xsm_argo_register_any_source(const struct domain *d)
--{
--    return alternative_call(xsm_ops.argo_register_any_source, d);
--}
--
--static inline int xsm_argo_send(const struct domain *d, const struct domain *t)
--{
--    return alternative_call(xsm_ops.argo_send, d, t);
--}
--
--#endif /* CONFIG_ARGO */
--
- #endif /* XSM_NO_WRAPPERS */
- 
- #ifdef CONFIG_MULTIBOOT
---- a/xen/xsm/dummy.c
-+++ b/xen/xsm/dummy.c
-@@ -35,13 +35,6 @@ static const struct xsm_ops __initconst_
-     .show_security_evtchn          = xsm_show_security_evtchn,
- 
-     .show_irq_sid                  = xsm_show_irq_sid,
--
--#ifdef CONFIG_ARGO
--    .argo_enable                   = xsm_argo_enable,
--    .argo_register_single_source   = xsm_argo_register_single_source,
--    .argo_register_any_source      = xsm_argo_register_any_source,
--    .argo_send                     = xsm_argo_send,
--#endif
- };
- 
- void __init xsm_fixup_ops(struct xsm_ops *ops)
+ XSM_HOOK(int, map_domain_irq, struct domain *, int, const void *)
 --- a/xen/xsm/flask/hooks.c
 +++ b/xen/xsm/flask/hooks.c
-@@ -1972,13 +1972,6 @@ static const struct xsm_ops __initconst_
-     .show_security_evtchn = flask_show_security_evtchn,
+@@ -1022,14 +1022,9 @@ static char *cf_check flask_show_irq_sid
  
-     .show_irq_sid = flask_show_irq_sid,
+ #ifdef CONFIG_HAS_PIRQ
+ 
+-static int cf_check flask_map_domain_pirq(struct domain *d)
++static int cf_check flask_pirq_mapping(struct domain *d, bool map)
+ {
+-    return current_has_perm(d, SECCLASS_RESOURCE, RESOURCE__ADD);
+-}
 -
--#ifdef CONFIG_ARGO
--    .argo_enable = flask_argo_enable,
--    .argo_register_single_source = flask_argo_register_single_source,
--    .argo_register_any_source = flask_argo_register_any_source,
--    .argo_send = flask_argo_send,
--#endif
- };
+-static int cf_check flask_unmap_domain_pirq(struct domain *d)
+-{
+-    return current_has_perm(d, SECCLASS_RESOURCE, RESOURCE__REMOVE);
++    return current_has_perm(d, SECCLASS_RESOURCE, resource_to_perm(map));
+ }
  
- const struct xsm_ops *__init flask_init(
+ #endif /* CONFIG_HAS_PIRQ */
 
 
