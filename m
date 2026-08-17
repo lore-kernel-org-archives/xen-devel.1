@@ -4,41 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56A69C5DF7D
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 12:30:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1394109.1632925 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AC34C5DF7D
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 12:37:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1394117.1632932 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwIxC-00049b-Cc; Tue, 18 Aug 2026 12:30:06 +0000
+	id 1wwJ4I-0004oE-1N; Tue, 18 Aug 2026 12:37:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1394109.1632925; Tue, 18 Aug 2026 12:30:06 +0000
+Received: by outflank-mailman (output) from mailman id 1394117.1632932; Tue, 18 Aug 2026 12:37:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwIxC-00049S-78; Tue, 18 Aug 2026 12:30:06 +0000
-Received: by outflank-mailman (input) for mailman id 1394109;
- Tue, 18 Aug 2026 12:30:05 +0000
+	id 1wwJ4H-0004o7-Uj; Tue, 18 Aug 2026 12:37:25 +0000
+Received: by outflank-mailman (input) for mailman id 1394117;
+ Tue, 18 Aug 2026 12:36:55 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brchuckz@aol.com>) id 1wwIxA-0003or-RK
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 12:30:05 +0000
+ (envelope-from <jjherne@linux.ibm.com>) id 1wwJ3n-0004nR-Oq
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 12:36:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwIx9-002fJJ-Sa
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 14:30:03 +0200
+ id 1wwJ3n-002gny-1Z
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 14:36:55 +0200
 Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <brchuckz@aol.com>)
- id 6a845042-bab6-0a2a0a5309dd-0a2a450ad80c-20
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 14:30:03 +0200
-Received: from [98.137.65.146] (helo=sonic309-20.consmr.mail.gq1.yahoo.com)
+ (envelope-from <jjherne@linux.ibm.com>)
+ id 6a8451e4-8faa-0a2a0a5109dd-0a2a450aa5e6-6
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 14:36:55 +0200
+Received: from [148.163.156.1] (helo=mx0a-001b2d01.pphosted.com)
  by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <brchuckz@aol.com>)
- id 6a845049-f2d2-0a2a450a0019-62894192876d-3
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 14:30:03 +0200
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic309.consmr.mail.gq1.yahoo.com with HTTP; Tue, 18 Aug 2026 12:30:01 +0000
-Received: by hermes--production-ne1-6dbcb84f44-9jslv (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID e5dc29c1a1be5ea329f6254e372ba29b; 
- Tue, 18 Aug 2026 12:29:58 +0000 (UTC)
+ (envelope-from <jjherne@linux.ibm.com>)
+ id 6a8451e5-f2d2-0a2a450a0019-94a39c01ea74-3
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 14:36:54 +0200
+Received: from pps.filterd (m0353729.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 67IAVWUM2355685; Tue, 18 Aug 2026 12:31:31 GMT
+Received: from ppma21.wdc07v.mail.ibm.com
+ (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4g2fsqr3va-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 18 Aug 2026 12:31:30 +0000 (GMT)
+Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma21.wdc07v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 67ICQKHI005403;
+ Tue, 18 Aug 2026 12:31:29 GMT
+Received: from smtprelay05.dal12v.mail.ibm.com ([172.16.1.7])
+ by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4g33ek35sp-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 18 Aug 2026 12:31:29 +0000 (GMT)
+Received: from smtpav02.wdc07v.mail.ibm.com (smtpav02.wdc07v.mail.ibm.com
+ [10.39.53.229])
+ by smtprelay05.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 67ICVRIC20578988
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 18 Aug 2026 12:31:27 GMT
+Received: from smtpav02.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 6B03A5805D;
+ Tue, 18 Aug 2026 12:31:27 +0000 (GMT)
+Received: from smtpav02.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 974735805B;
+ Tue, 18 Aug 2026 12:31:21 +0000 (GMT)
+Received: from [9.61.88.99] (unknown [9.61.88.99])
+ by smtpav02.wdc07v.mail.ibm.com (Postfix) with ESMTP;
+ Tue, 18 Aug 2026 12:31:21 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,211 +75,130 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1787056201; bh=jz0lsF7UaR5cFtfwz1uDrwFu8gHUr1wVACs9npDuP/I=; h=Date:Subject:To:Cc:References:From:In-Reply-To:From:Subject:Reply-To; b=uL2qU2pLXjrDAW5zX4VClWEZ0aiLaXI/yO/XM4bHVUvsRJDmtfH5xQtYQPMN1ehzyMjQ5+wMDYe+KA9vww5fL9Ano0H5iDroljAe5pSpdxX+a/pDdx0Ti8lbsCyGyoueJ59hk5+W+ePqwuIsZbuYh67HPQy1YTSALsz08h3K1Gxb94VTbEen49f691UIjWKaZVdUSwscCsJd0dz20+aIG+9g1Cqy2R1hHxl73n0cOAGG462RgyOFMw89xH3jNBx9idtZgcoo3nixKPX2t4/oQSYDifID1RNPBalOyMZDBoNinbWPMez3nHGGFRuMR0CrS7wgSy/dQmOFqyROTXSoQg==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1787056201; bh=DdppHNbovwvCrHmNHrOUpcghqG/ObVCcXyDuVFT/Mb0=; h=X-Sonic-MF:Date:Subject:To:From:From:Subject; b=GwOcGaT8YLWUmlvX0c6iR7IsCTDfnyL59TWHqpEiuZamceYZU4zCOYzH5MGBcb7oqbQxy9znU5KlshcwJQWpSB0U0O5R5AXzgzaaHVMopxzUzwRiHHr117KTYhPeFHjRGcdlmx8Hb/YYR11JJf1dtZZ40b0K5mHeYs24Bql2Z02CrxWh/lXBPzfd/GPCvaxCmeDwEisabSsgms9wtNHiSvbFMR0Lw4oBkFiDKJ/adrutDYuTqu9ZMquKtgqX+QME5O+T8ROx2MyQTlmGyR7BfBha/8/4kIlL/9onyibAdJoWzbVJk9yhvH/SoNapjJJqN0OMAvbT7IP0d+BwRgnv6g==
-X-YMail-OSG: _RgedzsVM1lCNngddMq0FFkG2OfsZ9VNbhI.CmnFjYpNxp47JVb9_CZs9bNI3mw
- 27LwFJWq77gMSgfTqDeURmQv.tTupW88MwtG2QVMeEayxoBl7oe3ZJ8Sk6N.jfCmLRQFOuVs.4n6
- idJeV9ByJiiEaVU8QXhuW.V.rd6DFJ4JM8ysVSVAoh.xSymCJ5sqh7ODlOb5yWi6IzAZEkhG2Djx
- MWdyMe9QNggu6zKmITmk9ezCB057wyyZBIME96r_nA1rX5jwcw_nqhLooPWHysV2k.cocJJz4qVf
- gXDdvbo.4kP4VjNJxBWC.DFaXhb9jdsf7xKhgcDoPozUfDC.pg.yWtKROyLOEQkqYD3Th8jmeNMM
- vqTuWRKWfRYBNhHvwUXMTUD.Ps2UgSZiIWrPtrgnmoHpfWUHJEFmWEKGrSQV5Y1TBeIEfzp6ylvi
- sPAl6dSNcvjI2WiC2f0ZtJQQhUKfmTrkzTEhJJWTnBO2HT7b9yCRt6A1D9OqTUYRIEkhxcPLSCDq
- viZPcQWeoZI3WxN.c_PS7ExCQsleEDJzVvlzvZSOmsG6cQ_qByCcLRUu8l7d5cPq21OUBzzr2Lyh
- V23bquTnBvWuGquWw9oqIBEJp1wsrFzAsk_JfJaDBAPrPoMBCi.W37isi9xQUai5JZZHlAGfSGeZ
- mczWFgp5ioFvDoG79Fq3lrMvQNl1dfk_O8EBzrpjh2hE6SXhy.NjElHq6GL86vbjP5XshcmpwGGq
- 6DT1dCabxtYuTyYGVslPMXqOg69KTF7XaK8afp0OYtMZK6y03us.32PsCTZwFcMnDCTVxAyg8FEg
- mxxOAZYVp1JqzePFISiDpoWtMTRwynl04YIMV2.1UQYjuhzMsl2U9q6oHXx6Q.ohYpVPk1vfRC1f
- 6aQYV4cM1rE3NleN.9LN3p5ZzkKKE3ogRxh6xklvvVFR.uBdHYdPQxYMguyMnmqPjTveuW7MFTCb
- WCpycdw35m_PhN1L876m60ALNGVktD8bhwFAwEe3dxw0zFJDixvRyFkGPrnf_eNGo2AbKRxOBTsq
- hT.2C3jTKVkJBiPoUdfUWfhJLrP0JFWnIIVNKmSwBv5Xy_eiWcFBG8mDPR7d5CjtlRpZAUMts7h5
- PFnWf83IqoAQl9i9Zb093NsOzWbycsdsqQusdnM4ny8r6a.HqzAJrJ6wLD9YXIbSSSS3vyn9pI41
- n.Ep.G7Cv1U1S4fBLR8cVodyTmwy2zh0Ih1Cvng.KGs1bXrilwg.c2tg_JdK15cYBXOlO4y1P0Fl
- bOyI8VFXWHM0ziKnShysmRZBQ8Jr28X4vOUZmRw1091Yzs0VU3CrOxObbOWNDjLPKD3XHuckNqo.
- _9fGJK.GI1rI7XEsL2Mkvz7bFQ82kj8E8bq8VFdelxDB5OczLkDTbL_gI09NhO2u3bBJExGV7ogo
- qkRGrMeKSbRYxcEh73h25iRvMqD8tKB.XzYsaPU97zG_U8R91xF5OOdGKnYdF7nf2qUXMpGfEtOl
- cIuZeXvQd1hvZT0IvpkKULakrgS3z939dhlvvN4nGXK7PMajY8pZH7BU7EudVQbF07cwQTe5iY0y
- EPZooGHDFejw8kBFgb_e.gI8O_avQT46l1dHlDy2GWuyT3WH8RzPK3n.sxnRjbAVao1EwFbPdd.I
- mQsqAdon8.Hn7QqXobT4lqLVcd0cchRMJAwqxFMz7ctWeLXBElKYo2lCilejE7V8.Ys8ZrEghPmz
- GpKApktwuAkNYZVDjuYhx6tsa3jed48DFfE3siACv.TzU7JAPM0xhFbJTWokEgLJyACaP8QviFyZ
- QAE.f8.tMAiWo3EZX10IQiy2G95dKZnA2nvuJycW74jdt4aEG.mb4EuQ_FToJObQcPRuooT.JWNG
- hwo5Eglarp9s6_MLIdFK9uG1r9Bvdk.j_cdOMg2C1Czv3J8ZhpgzwWlm6WNHH1LtuQ2OKiAzEN1O
- 16CJBgroC84WXR5USkvEcTEydb6xr1uZNIPvH2EvGBxX4qMw7e5xonVOUqVkVQAIdmI6Ah1TeoqF
- S6d3Po1TjZuKiYX0s9MfLlVwEMAGY9wkB14RJf1hMvzgSLwA3yyK22OGEM3YTgAWdBXWiinu5aNv
- 8VNYZnap0U5prYHd6v.ww3SPeu8W5lgYjCUnNTSrlKqMqhPFcT_YIcgBsXTVTASEX_O9TLVJiMnf
- QE7O4C1gGvgjP9pAWugQHb.6iSsWj52uyV2QXX7BF__WzdaxqCrKxD98buMRnd096kXEO3sqwplx
- oFHayQxcPsQ9fuyOKN40Hk9xPIH3rp4MWM5X.ABHSZTuS
-X-Sonic-MF: <brchuckz@aol.com>
-X-Sonic-ID: c47e0327-5137-42a7-963d-da8cd16b4b6f
-Message-ID: <31a5870f-2a4d-4dc0-af9c-f0567e0f6fb3@aol.com>
-Date: Tue, 18 Aug 2026 08:29:59 -0400
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=pp1 header.d=ibm.com header.i="@ibm.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=pp1; bh=UL9IFO
+	BfaU/clKhXme8sOAazBEUtsscNml+GIhZ/mjc=; b=oMT8bJEReh0EmAFaP7G9HP
+	e/pj+gHlxR7TUff7uWpiXYx3U+zLTQr2uKoCAAwLfYUP5qXZpXFZXv8X+VOm3MSv
+	IjbE7NjT2UWR52QmJbviFARKyiB+G76mRaH9Kv6JlYOTVYZUKOArW4VolOjz//2P
+	H8D6Xb6Gw7OBcF1N/579Dw0t+u1lkl0DMDr9KzEbnhQIb+UM0zQlgbGDScoRNQ6c
+	c5KsKxoyv4OCZ+tEOmdgW1ynYWz67IUK7ogWIQ/S2j/IuC+zpj0amqTkLTKq03T7
+	LbZchkE1MoH1hl788YRP4ZywydVPfEjpFVhDOIhTSqRB3VneJIT4R7XAunnUqJAg
+	==
+Message-ID: <77e4a58e-269f-4c90-8a1d-bbf89a889c35@linux.ibm.com>
+Date: Mon, 17 Aug 2026 14:09:33 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] tools/hvmloader: implement Intel IGD extended VBT
- support
-To: Jan Beulich <jbeulich@suse.com>
-Cc: qemu-devel@nongnu.org, Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>,
- xen-devel <xen-devel@lists.xenproject.org>
-References: <20260802050824.10554-1-brchuckz.ref@aol.com>
- <20260802050824.10554-1-brchuckz@aol.com>
- <2110d4b7-ae37-47aa-99be-ab59e16f6167@suse.com>
- <67579eba-e222-41dd-84bf-8440d2eaf2a9@netscape.net>
- <da2200cd-def7-4cce-a6c2-9f9ac9e202ce@suse.com>
- <de56c8bd-f0e8-4fe9-8cf5-f6807698176c@aol.com>
- <02a7dc18-4184-4e86-84cb-121769187f71@suse.com>
- <1858e8e6-73fa-4017-93e2-c733fbf0ec8d@aol.com>
- <d6e603bf-8dc5-4ac7-842f-ff9d1f67b98f@suse.com>
- <fdec0b6b-eddf-4a36-a755-c67963daa9ea@aol.com>
- <6ecf80ef-2f0e-44fb-beab-dbcf065a4431@suse.com>
- <bb44067c-6739-4e83-a0fd-cc7ea797048f@aol.com>
- <4c58bda6-e9ed-438d-b96e-feda74a6c4c7@suse.com>
+Subject: Re: [PATCH v3 37/49] monitor: tighten monitor_printf*()
+To: =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+        qemu-devel@nongnu.org
+Cc: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
+        =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+        Markus Armbruster <armbru@redhat.com>,
+        Gerd Hoffmann <kraxel@redhat.com>,
+        "Gonglei (Arei)" <arei.gonglei@huawei.com>,
+        zhenwei pi
+ <zhenwei.pi@linux.dev>, Kevin Wolf <kwolf@redhat.com>,
+        Hanna Reitz <hreitz@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+        =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+        Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+        Ani Sinha <anisinha@redhat.com>, Laurent Vivier <lvivier@redhat.com>,
+        Amit Shah <amit@kernel.org>, "Michael S. Tsirkin" <mst@redhat.com>,
+        Brian Cain <brian.cain@oss.qualcomm.com>,
+        David Woodhouse <dwmw2@infradead.org>, Paul Durrant <paul@xen.org>,
+        Richard Henderson <richard.henderson@linaro.org>,
+        Marcelo Tosatti <mtosatti@redhat.com>,
+        Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+        Jiri Pirko <jiri@resnulli.us>, Jason Wang <jasowangio@gmail.com>,
+        Halil Pasic <pasic@linux.ibm.com>,
+        Christian Borntraeger <borntraeger@linux.ibm.com>,
+        Cornelia Huck <cohuck@redhat.com>, Eric Farman <farman@linux.ibm.com>,
+        Matthew Rosato <mjrosato@linux.ibm.com>,
+        Ilya Leoshkevich
+ <iii@linux.ibm.com>,
+        David Hildenbrand <david@kernel.org>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Anthony PERARD <anthony@xenproject.org>,
+        "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+        "Dr. David Alan Gilbert" <dave@treblig.org>,
+        Hyman Huang <infra.ai.cloud@bitdeer.com>, Peter Xu <peterx@redhat.com>,
+        Fabiano Rosas <farosas@suse.de>,
+        Samuel Thibault <samuel.thibault@ens-lyon.org>,
+        Stefan Berger <stefanb@linux.vnet.ibm.com>,
+        Zhao Liu <zhao1.liu@intel.com>, Nicholas Piggin <npiggin@gmail.com>,
+        Chinmay Rath <rathc@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>,
+        Harsh Prateek Bora <harshpb@linux.ibm.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Alistair Francis <alistair.francis@wdc.com>,
+        Weiwei Li
+ <liwei1518@gmail.com>,
+        Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+        Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+        Chao Liu <chao.liu@processmission.com>,
+        Yoshinori Sato <yoshinori.sato@nifty.com>,
+        Artyom Tarasenko <atar4qemu@gmail.com>,
+        Max Filippov <jcmvbkbc@gmail.com>,
+        Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org,
+        kvm@vger.kernel.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
+        xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org
+References: <20260816-qemu-no-hmp-v3-0-e53fc35bc550@redhat.com>
+ <20260816-qemu-no-hmp-v3-37-e53fc35bc550@redhat.com>
 Content-Language: en-US
-From: Chuck Zmudzinski <brchuckz@aol.com>
-In-Reply-To: <4c58bda6-e9ed-438d-b96e-feda74a6c4c7@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailer: WebService/1.1.26254 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
-X-purgate-ID: tlsNG-4011c0/1787056203-4ABD8CFC-80B861D4/0/0
+From: "Jason J. Herne" <jjherne@linux.ibm.com>
+In-Reply-To: <20260816-qemu-no-hmp-v3-37-e53fc35bc550@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE4MDA5MiBTYWx0ZWRfXxeP10mi5nXk+
+ 42JuJ8FBRrSfAYCu/Q4o7d7+QjXR0y0YhLBXkgd3jS+DNmCgivbuDm/ZDSs3n8sSKCYwwSS9DVv
+ NgWoNA0BwgCQpVOd0YlV1AgDl+Yi6+o2mDjLiNhVnCu3Iau7D1S8g+hCEDt2R0SHK58wtGi1/5s
+ RsoSkQaqsfxgejgt67fHbonxC2nqio0fdE54/b3h309WKFkCPv8jczyyFYUmhEuBrox4FrFb7wC
+ PggyxsIl4jVNptZqWdfEykgaHsd7pCNOyBiZc63Zi4tyERkBaOFbTYD+VvrDqVjy3rsEtC+ZxFV
+ syR9AFCpfomtfiYbRemhA1VR8Zb4KVxISW6kyI+L2CNsRt3eFSzkaEXWyNO+sowDrmMC7kBgTR2
+ 5tD9HUyfomfLDqaSHLjYIq6swzt3Ep8j+EJa7WICWbXLEoglP6kNvklJYaBlu+zXSSDds8nl6md
+ PTudAuUQifZz7GHw46A==
+X-Proofpoint-ORIG-GUID: G5eJ90vsRCcNC-bXB9XjB1i4CkNoQiux
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE4MDA5MiBTYWx0ZWRfX/l7XvQu5FXvY
+ 757EDCutzJiMhhtpUOg8veUoUv7xm8vDn4iZni2l2SWZhtMOzb10+wUB8ZZ4Fm+mPM+dyZPA8iu
+ wv2noNska5/BZi3NZrq0a2WXPePTskc=
+X-Authority-Analysis: v=2.4 cv=DJe/JSNb c=1 sm=1 tr=0 ts=6a8450a3 cx=c_pps
+ a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=uAbxVGIbfxUO_5tXvNgY:22 a=20KFwNOVAAAA:8
+ a=VnNF1IyMAAAA:8 a=mY-fmJR8b8s-Z9VvxFgA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+X-Proofpoint-GUID: WJt7z1CXoN-0E-GSYEQWlRq5_XUQN17s
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-18_01,2026-08-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 impostorscore=0 spamscore=0 clxscore=1011 bulkscore=0
+ suspectscore=0 malwarescore=0 phishscore=0 adultscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608180092
+X-purgate-ID: tlsNG-4011c0/1787056615-59DDFCFC-04EBC6B5/0/0
 X-purgate-type: clean
-X-purgate-size: 6915
+X-purgate-size: 864
 
-On 8/18/2026 8:18 AM, Jan Beulich wrote:
-> On 18.08.2026 13:52, Chuck Zmudzinski wrote:
->> On 8/18/2026 3:17 AM, Jan Beulich wrote:
->>> On 17.08.2026 18:04, Chuck Zmudzinski wrote:
->>>> On 8/17/2026 4:42 AM, Jan Beulich wrote:
->>>>> On 14.08.2026 17:23, Chuck Zmudzinski wrote:
->>>>>> On 8/14/2026 9:46 AM, Jan Beulich wrote:
->>>>>>> On 14.08.2026 15:18, Chuck Zmudzinski wrote:
->>>>>>>> On 8/14/2026 3:35 AM, Jan Beulich wrote:
->>>>>>>>> On 14.08.2026 02:45, Chuck Zmudzinski wrote:
->>>>>>>>>> On 8/13/2026 6:35 AM, Jan Beulich wrote:
->>>>>>>>>>> On 02.08.2026 07:08, Chuck Zmudzinski wrote:
->>>>>>>>>>>> -- snip --
->>>>>>>>>>>> +    /*
->>>>>>>>>>>> +     * Write rvda_host as 2 successive 32-bit values
->>>>>>>>>>>> +     * to communicate location of the VBT to the device
->>>>>>>>>>>> +     * model. If rvda_host is not 0, The device model
->>>>>>>>>>>> +     * unmaps the OpRegion and eventually maps the VBT
->>>>>>>>>>>> +     * after we also write the guest address where the
->>>>>>>>>>>> +     * VBT will be mapped.
->>>>>>>>>>>> +     *
->>>>>>>>>>>> +     * If we send rvda_host = 0 to the device model, it
->>>>>>>>>>>> +     * will assume we do not need OpRegion 2 support and
->>>>>>>>>>>> +     * it will not unmap the OpRegion.
->>>>>>>>>>>> +     */
->>>>>>>>>>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
->>>>>>>>>>>> +               (uint32_t)(rvda_host & 0xfffffffful));
->>>>>>>>>>>> +    unsigned long rvda_host_upper_32 = (uint64_t)rvda_host >> 32;
->>>>>>>>>>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
->>>>>>>>>>>> +               (uint32_t)rvda_host_upper_32);
->>>>>>>>>>>
->>>>>>>>>>> Why would you need to communicate a host property to the DM?
->>>>>>>>>>
->>>>>>>>>> The DM cannot access the host rvda value because it is only accessible
->>>>>>>>>> from the host kernel, and the DM is only a user-space process on the host.
->>>>>>>>>
->>>>>>>>> I don't follow this: Anything the guest can access should also be accessible
->>>>>>>>> by its DM.
->>>>>>>>
->>>>>>>> I think the host OpRegion is not currently accessible by the DM.
->>>>>>>
->>>>>>> Can you explain to me how the region becomes accessible to the guest?
->>>>>>> That would then (hopefully) help me understand why the DM would not have
->>>>>>> access. Fundamentally any MMIO and any I/O ports that are assigned to a
->>>>>>> guest are also assigned to its DM.
->>>>>>
->>>>>> Currently, in the device model (Qemu) we have:
->>>>>>
->>>>>>     ret = xc_domain_memory_mapping(xen_xc, xen_domid,
->>>>>>             (unsigned long)(igd_guest_opregion >> XC_PAGE_SHIFT),
->>>>>>             (unsigned long)(igd_host_opregion >> XC_PAGE_SHIFT),
->>>>>>             XEN_PCI_INTEL_OPREGION_PAGES,
->>>>>>             DPCI_ADD_MAPPING);
->>>>>>
->>>>>> That statement is in the igd_write_opregion(...) function in the
->>>>>> hw/xen/xen_pt_graphics.c file of the upstream Qemu source.
->>>>>>
->>>>>> If I understand our current implementation correctly, this statement
->>>>>> is what gives the guest access to the host OpRegion (3 pages as defined
->>>>>> by XEN_PCI_INTEL_OPREGION_PAGES, and in agreement with IGD_OPREGION_PAGES
->>>>>> in hvmloader code).
->>>>>
->>>>> No, it introduces mappings of those pages into the guest's P2M.
->>>>>
->>>>>> I don't think this statement makes the host OpRegion
->>>>>> accessible to the device model, though, so I think, if I understand your
->>>>>> comment in an earlier about my patch resulting in what you called a "layering
->>>>>> violation" correctly, that our current implementation is also guilty of this
->>>>>> same kind of "layering violation."
->>>>>
->>>>> That code, if it can be successfully executed, indeed doesn't grant any
->>>>> permissions (to the DM or the guest). Instead it proves that the DM has the
->>>>> needed permissions to access the pages itself.
->>>>
->>>> So, are you saying it should be possible, without any patches to either Xen or
->>>> the Linux kernel, for Qemu to get a pointer to the OpRegion? If so, how?
->>>>
->>>> I think I could implement what you proposed in an earlier message and do
->>>> all (or most) of this in the DM instead of here in hvmloader:
->>>>
->>>>> The more correct thing to do might be for the DM to
->>>>> put in place a copy before the guest (i.e. hvmloader) even gains control.
->>>>> (How in turn the DM would learn of the contents of the opregion is a
->>>>> separate question then.)
->>>>
->>>> Actually, when I was developing this patch, I tried first to do it that
->>>> way, but the problem was, I could not find a way to get a pointer to the
->>>> host OpRegion in Qemu.
->>>>
->>>> So, how can I get a pointer to the host OpRegion in Qemu?
->>>
->>> You don't ask me this question, do you?
->> 
->> Are you offended I asked this question? If so, I am sorry. You make me
->> afraid to ask it again so I will not do so unless you permit to do so
->> again.
-> 
-> "Offended" is the wrong word; "very puzzled" may better get it. I'm not a
-> qemu person, and I never have been. I can't really help much there.
-> 
->> All I can say is that surely qemu
->>> has an existing way to map (host) physical memory; see e.g. how
->>> xen_pt_msix_init() (imo bogusly) maps the physical MSI-X table of a
->>> device. "Bogusly" there because that's another layering violation. Plus
->>> (independently) there and here there's the issue of how to accomplish
->>> things when not running in Dom0, or when running de-privileged in Dom0.
->> 
->> Well, that only proves Qemu *might* be able to access the MSI-X table of
->> a device, that is, if the calls to open /dev/mem and mmap it succeed.
->> Why is the MSI-X table all of the sudden relevant? Even if Qemu
->> can access the MSI-X table of some device, that does not prove that
->> Qemu can access the host OpRegion of an Intel IGD. So I think my point
->> still stands: I still don't see proof that it is possible for Qemu
->> to get a pointer to the host OpRegion without any patches to the current
->> implementations of Xen and the Linux kernel.
-> 
-> The MSI-X table (and it being accessible to qemu) is the best analogy I
-> could come up with, as that's one tiny area of qemu that I know at least
-> a little.
-> 
-> From a Xen perspective, this analogy should be sufficient: All you need
-> from Xen is for it to permit to establish mappings of the underlying page.
-> As I've pointed out when commenting on a code fragment you presented, the
-> DM (domain) looks to have permission. Everything else is a matter of
-> establishing such a mapping. There the MSI-X table code may also guide
-> you. (Sadly it may also misguide you, since (a) I don't know whether it's
-> appropriate to do things this way in qemu, and since (b) it is, as said,
-> imo a layering violation.)
 
-I agree that accessing the host /dev/mem directly is cringy. I would not
-really want to do it that way for the host OpRegion.
 
-Chuck
-
+On 8/16/26 3:13 PM, Marc-André Lureau wrote:
+> Rename monitor_printf->monitor_hmp_printf, monitor_vprintf->
+> monitor_hmp_vprintf, and monitor_printc->monitor_hmp_printc, changing
+> the first parameter from Monitor * to MonitorHMP * to enforce type
+> safety. The implementation is also simplified: monitor_hmp_vprintf now
+> directly calls g_strdup_vprintf + monitor_puts, removing the virtual
+> dispatch via moncls->vprintf.
 > 
-> Jan
-
+> The dev_print() callbacks are temporarily using the MONITOR_HMP(mon)
+> cast, they are fixed in the following commits.
+> 
+> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+> ---
+> ...
+>   hw/pci/pci-stub.c                       |   3 +-
+>   hw/s390x/s390-skeys.c                   |   9 +-
+>   hw/s390x/s390-stattrib.c                |  20 +--
+Reviewed-by: Jason J. Herne <jjherne@linux.ibm.com>
 
