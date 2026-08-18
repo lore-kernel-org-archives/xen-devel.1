@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD4AFC5DF7E
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 12:18:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1394092.1632907 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FE08C5DF7E
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 12:20:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1394101.1632915 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwIlu-0000qA-21; Tue, 18 Aug 2026 12:18:26 +0000
+	id 1wwInP-0001PC-Et; Tue, 18 Aug 2026 12:19:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1394092.1632907; Tue, 18 Aug 2026 12:18:26 +0000
+Received: by outflank-mailman (output) from mailman id 1394101.1632915; Tue, 18 Aug 2026 12:19:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwIlt-0000q3-UJ; Tue, 18 Aug 2026 12:18:25 +0000
-Received: by outflank-mailman (input) for mailman id 1394092;
- Tue, 18 Aug 2026 12:18:25 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wwInP-0001P5-BI; Tue, 18 Aug 2026 12:19:59 +0000
+Received: by outflank-mailman (input) for mailman id 1394101;
+ Tue, 18 Aug 2026 12:19:58 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wwIls-0000px-Sf
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 12:18:24 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wwInN-0001Ox-Ul
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 12:19:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwIlr-00F6cK-Uc
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 14:18:23 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wwInM-006As8-N3
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 14:19:56 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a844d7a-2eae-0a2a0a5409dd-0a2a450388ce-34
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 14:18:23 +0200
-Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a844dea-2eae-0a2a0a5409dd-0a2a4509e932-14
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 14:19:56 +0200
+Received: from [209.85.221.44] (helo=mail-wr1-f44.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a844d8f-fae8-0a2a45030019-d155dd29b98d-3
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 14:18:23 +0200
-Received: by mail-wr1-f41.google.com with SMTP id
- ffacd0b85a97d-47f84023916so4330637f8f.3
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 05:18:23 -0700 (PDT)
+ id 6a844dec-be1a-0a2a45090019-d155dd2cf0df-3
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 14:19:56 +0200
+Received: by mail-wr1-f44.google.com with SMTP id
+ ffacd0b85a97d-47f59f25ec4so1947135f8f.2
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 05:19:56 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482a5b783c6sm12282438f8f.31.2026.08.18.05.18.22
+ ffacd0b85a97d-482a6c449dbsm11037872f8f.8.2026.08.18.05.19.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Aug 2026 05:18:22 -0700 (PDT)
+ Tue, 18 Aug 2026 05:19:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,67 +55,64 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787055503; x=1787660303; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1787055596; x=1787660396; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=oI/+2/4qb6DsLorRhnoBURW6T2nMbZwNewNOhb3O8qk=;
-        b=K+bqkzpZRhbnC8fDeB7f+WAomNvSBET7ADJecEIcFiigApwo1L1m145IqW+nDdV837
-         SDCJgRphql+Zib6Kkzmi2bQ0UMQgezoMaqUJ4DsBIvSogE8FZSs3FlNANKY/HoALM42U
-         DqXjKvGUTIN07PhTSy3jwxqbuFPD6o9+aKgd1QUUBLJwjEBp8/dNd6eC/od9aBXjMRKB
-         KbG4dhQEBiVUHrIRDNM1bhDcqPiJR5yZXupB23g6VWRRCcAE5oMk/gZR3UhT2QtFp6Q4
-         XZJUQMZAyHqffwUPkcpleFLm8rdX/Ug60hWSV1EZyiZlFlZi/r0gt1ipkZnqQjaf+Ur3
-         9SlQ==
+        bh=647W8yleiNXsvO+eqQLwTgxj/0ySZYHUKiwnSDmJC74=;
+        b=ZHM09KS+VzEcHaizkgxlsb4MuqEZiuhrptewxrpi7zA3v5nzYPbvzhPMhV+eF0l3sI
+         OwWuTZGtNRJ3dXgZXePPPqisbHNscQouBLPyBX17/InRBR5VLJoPN+O/WjTDATaPzv6m
+         MDjc7gox/ZOFBpLrJXF+1H+H/o6hMUjXUsWk2/bJ8XtZh5yxZhI3lYv6F9ufN4KAtrQA
+         qIUw11obg8IHOmzdLjz4PTjT6W9RHV5VwpShV9HgDD1cSL6u09uvgWOsoDLvsje3hIvv
+         rQI+xBOaB9EN+rEV4VcqQ2n4ueAkFE02y1CJuHwHp3Cysoh8ZIE7gfDnj2eKFJj0rmhf
+         HqUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787055503; x=1787660303;
+        d=1e100.net; s=20251104; t=1787055596; x=1787660396;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=oI/+2/4qb6DsLorRhnoBURW6T2nMbZwNewNOhb3O8qk=;
-        b=Vs8KQ0GZ3YV3q7ZzldnORFni4grOqSFPvbRf83hrvodzP9bSRikgWRaZA2P8obaNS0
-         5SqFFDEz9rE6a8z7ceA5Ky9QnQSpyauT/GvPoVZOfQywOIFxbixTmUqr4ycR7MnUyl4k
-         plmvSbK2oedyWjST+TW+LJ7+otS/IG6Ba7Uuu3UVFkpL1ZJQqy2Z9Ek+zkTyVuRBhVOj
-         GN1/v35ShQlkRvO3fydEyIjZvG8dgAQRxnt4CU8r3pm/8vzTktTgbPQ8wpKBeLj/M1m4
-         u+maANjLi0Xt7C/8cY3qW2teOpQuGS2GM7Kts5w4EMEDB4Pl3foqEJU7Fc9wFtrin/fo
-         Pu0g==
-X-Forwarded-Encrypted: i=1; AHgh+Ro6UIONwkbUO/E50gPQIct/OCwCrj90otgiFGoEuibIk8/Zeh2uVi6HOZK2wvk/JQcWfcfSZrDYF5Y=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzfN0QNEvyttHI+xfvbO9ovgyxBbO6tQJ7rYz0ixK69lJ5/YMVx
-	i9L1OWi/nlfH63TW5W3KzUy1K+OU3XkD987rxNwbhIvUaKC5XqG51X5swGpSOE3Cdg==
-X-Gm-Gg: AR+sD134ryPsTKhAjfA6Bnv3S2BjT+Z1s3xKD8Cqc3YbGSbZA0t4Hdvz4iw4ab1Te/t
-	2XF6OaCk3a8RqkcLzbQIftscvpUif1i3MW3ehgeEpeSThBaMxK4/VL6COratVvnZyQiiEselnru
-	oPxaWvsrp0iwt3ODozClAE33k8UCYiAZkw9EaeokNsHobW2exIU+G+yTFCXwd2xHjh9TVDP1zPO
-	fIwjswZ5JqRfeToQVs3pspaTK+ULVw0Tol1rwX6GweB43LgHrxp9NbMIdITY6Z9iDs6YOuRzieT
-	4zck4fOBzjXSareSx93+TaPsvf0v9sj3mSFG6ZgYR1yJL+Cc5ikFAh8RDLwoojXH+NPn7j1qTuK
-	RUzvlcXKPAJbWMwbm9XFZq7VL9kW0sKg166LLOyj6ixZzhwJYhl7KHlVXIECn4vbsEYpSPq9eZ7
-	FZvqhfYgfjt4qYlkWH5w2oYiXhvGbb02MpEkmvRbEYX7N6qLH5o7zOPa6E9cA+5pkZaQXxvsaMQ
-	bfdhyVYXuSLIsWDihnMmgJffDlEpzICVgQ3Hm2NJhX2MTyHwRoVzv7zkdNIaJg=
-X-Received: by 2002:adf:ee06:0:b0:47f:9760:4d2e with SMTP id ffacd0b85a97d-482a90f493cmr11769620f8f.24.1787055503210;
-        Tue, 18 Aug 2026 05:18:23 -0700 (PDT)
-Message-ID: <4c58bda6-e9ed-438d-b96e-feda74a6c4c7@suse.com>
-Date: Tue, 18 Aug 2026 14:18:21 +0200
+        bh=647W8yleiNXsvO+eqQLwTgxj/0ySZYHUKiwnSDmJC74=;
+        b=PPrcg+pvDlML53MKto2LqSjaOqRupgiEiEzksLDDJUmfhEwAL1b0zo7pjn+qS7EJ2s
+         yUb1DPvLsZtijRfHPFCOf5niM4u6j8WIpc42DGTcYhBVvIAQJRnyNbF2LL+JC7mTN+id
+         /K7NjN/kgVW3WrANfr+HYFHTFjMxZEbF/Yli6eHHTdxcrEIflhZJ57NctJ3/OHeFaUk1
+         oSbHQ9huQh/0tdkUJAhTVTpZb0m62/cRQFw/uqUPdMRW2FFUVxfgkp2nLLjzPB4t30VQ
+         ne08Q9mW6aOKm+2CLCSgRg+zF8n782tN5dNEqc2WwZmLZ5K4MSdCK7SkexMDExVSo7Gp
+         p4UA==
+X-Forwarded-Encrypted: i=1; AHgh+RrF9/8d94RctHMDnAe0RLz9xtlEmd4WwYcVLrMJ6PqDjHiRw3UcTmtkmqkvlfpq/OlQ6vsFv7eHqFk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yy6kWsUb8QUwMDcfFv1M4Q214xgZA+SQSAGqbdv3ZKc6xQLIkLS
+	OxhgoebTtT3DAhuQlg9lqtUcsU+CNV5jBZAs8SDayzgyJ66hWXhi5UmS+wh5u390QTYNV7UYWZL
+	ARDbNhA==
+X-Gm-Gg: AR+sD12KlhwzDueQ5+r6H2DHc65N91kyManvD7VaafdIiC+A7pnUEp4mKt1l0T7Hp3O
+	lMcIjFvPYyqHvNsqkXHnjbZV+D0GEirAlKWSImYi/0xfHOT8DEL7qHVfK+yabAkyak4z2F/57nX
+	EXITNi+h85T/kNUpyhG0AS8kLYp9k7HmOczrnz63xYJ8w8wTox+YNg5Bt2OP8VzyOTM3iAksy73
+	1beZCrirFQ3KO7O2e4XBCH+upL+s38HqA7Fj6d9dutYfBEF56oDIhpjjCpoi8Ls3A+KlKTdC2KX
+	7Vg9Wz5Bq01NpMqZ2lX45/vuvYKFsjJilxb02PtYmsvz0VV9VhnkEf5N64Zf+k6y/qYKF18unmo
+	mSWpx/XxP7NASbmvUZyz/ah67SDFKpN6IX0t1+zfLeaKazdVG2uqd4HYLD/TtITYFSLwVo+3c00
+	UYDwWn/YCdXnl6vooRv1pSEcGzuWpDHpDiAJn2P17dsdnZtepZbfQteAvsAoYPuvW+Nfv05mTC4
+	hqTiOByeJvVfm0T/obyeVdsQ2d+nA7K2SFoPM5AOjJDQdtLitff
+X-Received: by 2002:a5d:5e90:0:b0:47f:8183:e9b8 with SMTP id ffacd0b85a97d-481607656b7mr52199325f8f.22.1787055596032;
+        Tue, 18 Aug 2026 05:19:56 -0700 (PDT)
+Message-ID: <7faa6208-1b72-49bf-b4b0-c509a6572ceb@suse.com>
+Date: Tue, 18 Aug 2026 14:19:54 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] tools/hvmloader: implement Intel IGD extended VBT
- support
-To: Chuck Zmudzinski <brchuckz@aol.com>
-Cc: qemu-devel@nongnu.org, Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>,
- xen-devel <xen-devel@lists.xenproject.org>
-References: <20260802050824.10554-1-brchuckz.ref@aol.com>
- <20260802050824.10554-1-brchuckz@aol.com>
- <2110d4b7-ae37-47aa-99be-ab59e16f6167@suse.com>
- <67579eba-e222-41dd-84bf-8440d2eaf2a9@netscape.net>
- <da2200cd-def7-4cce-a6c2-9f9ac9e202ce@suse.com>
- <de56c8bd-f0e8-4fe9-8cf5-f6807698176c@aol.com>
- <02a7dc18-4184-4e86-84cb-121769187f71@suse.com>
- <1858e8e6-73fa-4017-93e2-c733fbf0ec8d@aol.com>
- <d6e603bf-8dc5-4ac7-842f-ff9d1f67b98f@suse.com>
- <fdec0b6b-eddf-4a36-a755-c67963daa9ea@aol.com>
- <6ecf80ef-2f0e-44fb-beab-dbcf065a4431@suse.com>
- <bb44067c-6739-4e83-a0fd-cc7ea797048f@aol.com>
+Subject: Re: [PATCH 1/2] xen/sched: core: skip missing vcpu slots in
+ sched_move_domain()
+To: =?UTF-8?B?RnVya2FuIMOHYWzEscWfa2Fu?= <frn1furkan10@gmail.com>
+Cc: dfaggioli@suse.com, gwd@xenproject.org, =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?=
+ <jgross@suse.com>, xen-devel@lists.xenproject.org,
+ Andrew Cooper <andrew.cooper3@citrix.com>
+References: <20260818063259.18733-1-frn1furkan10@gmail.com>
+ <20260818063259.18733-2-frn1furkan10@gmail.com>
+ <030c7756-c959-465d-9d14-9bb3523e8c31@suse.com>
+ <1d50520d-68bf-4765-8a13-c7c047580f2e@gmail.com>
+ <887cce18-5a67-4177-bdaf-7ef9bc192bea@citrix.com>
+ <1b281dff-d43c-4ab6-9429-e30765a93be3@suse.com>
+ <cf0fe335-a45b-4721-b5cd-ac1fd293553a@citrix.com>
+ <48825846-fd82-423c-9133-9221a629aa10@suse.com>
+ <9cf716f2-cde6-484f-b371-1d4cc95e9479@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -141,140 +138,128 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <bb44067c-6739-4e83-a0fd-cc7ea797048f@aol.com>
+In-Reply-To: <9cf716f2-cde6-484f-b371-1d4cc95e9479@gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1787055503-6FEC24E9-8B19F3E0/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-bad1c0/1787055596-BCCCF034-6A834623/0/0
 X-purgate-type: clean
-X-purgate-size: 6581
+X-purgate-size: 5262
 
-On 18.08.2026 13:52, Chuck Zmudzinski wrote:
-> On 8/18/2026 3:17 AM, Jan Beulich wrote:
->> On 17.08.2026 18:04, Chuck Zmudzinski wrote:
->>> On 8/17/2026 4:42 AM, Jan Beulich wrote:
->>>> On 14.08.2026 17:23, Chuck Zmudzinski wrote:
->>>>> On 8/14/2026 9:46 AM, Jan Beulich wrote:
->>>>>> On 14.08.2026 15:18, Chuck Zmudzinski wrote:
->>>>>>> On 8/14/2026 3:35 AM, Jan Beulich wrote:
->>>>>>>> On 14.08.2026 02:45, Chuck Zmudzinski wrote:
->>>>>>>>> On 8/13/2026 6:35 AM, Jan Beulich wrote:
->>>>>>>>>> On 02.08.2026 07:08, Chuck Zmudzinski wrote:
->>>>>>>>>>> -- snip --
->>>>>>>>>>> +    /*
->>>>>>>>>>> +     * Write rvda_host as 2 successive 32-bit values
->>>>>>>>>>> +     * to communicate location of the VBT to the device
->>>>>>>>>>> +     * model. If rvda_host is not 0, The device model
->>>>>>>>>>> +     * unmaps the OpRegion and eventually maps the VBT
->>>>>>>>>>> +     * after we also write the guest address where the
->>>>>>>>>>> +     * VBT will be mapped.
->>>>>>>>>>> +     *
->>>>>>>>>>> +     * If we send rvda_host = 0 to the device model, it
->>>>>>>>>>> +     * will assume we do not need OpRegion 2 support and
->>>>>>>>>>> +     * it will not unmap the OpRegion.
->>>>>>>>>>> +     */
->>>>>>>>>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
->>>>>>>>>>> +               (uint32_t)(rvda_host & 0xfffffffful));
->>>>>>>>>>> +    unsigned long rvda_host_upper_32 = (uint64_t)rvda_host >> 32;
->>>>>>>>>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
->>>>>>>>>>> +               (uint32_t)rvda_host_upper_32);
->>>>>>>>>>
->>>>>>>>>> Why would you need to communicate a host property to the DM?
->>>>>>>>>
->>>>>>>>> The DM cannot access the host rvda value because it is only accessible
->>>>>>>>> from the host kernel, and the DM is only a user-space process on the host.
+On 18.08.2026 14:12, Furkan Çalışkan wrote:
+> 
+> 
+> On 8/18/26 13:53, Jan Beulich wrote:
+>> On 18.08.2026 12:35, Andrew Cooper wrote:
+>>> On 18/08/2026 11:13 am, Jürgen Groß wrote:
+>>>> On 18.08.26 12:04, Andrew Cooper wrote:
+>>>>> On 18/08/2026 8:53 am, Furkan Çalışkan wrote:
+>>>>>> On 8/18/26 10:11, Jürgen Groß wrote:
+>>>>>>> On 18.08.26 08:32, Furkan Caliskan wrote:
+>>>>>>>> sched_move_domain() derives the number of units to rebuild from
+>>>>>>>> d->max_vcpus, which is fixed at domain creation and never rolled
+>>>>>>>> back if vcpu_create() fails partway through building a domain. So
+>>>>>>>> d->vcpu[i] can be NULL for some i even though max_vcpus still
+>>>>>>>> counts it - this happens if sched_alloc_udata() returns NULL.
 >>>>>>>>
->>>>>>>> I don't follow this: Anything the guest can access should also be accessible
->>>>>>>> by its DM.
+>>>>>>>> The per-unit loop doesn't check for this: it sets
+>>>>>>>> unit->vcpu_list = d->vcpu[unit_id] (NULL) and hands that broken
+>>>>>>>> unit straight to the destination scheduler's alloc_udata(),
+>>>>>>>> which assumes vcpu_list is always valid and crashes Xen when
+>>>>>>>> it is not.
+>>>>>>>>
+>>>>>>>> Reproduced by building a domain in a non-default cpupool where
+>>>>>>>> vcpu creation fails partway through, then destroying it.
+>>>>>>>> domain_kill() moves the domain back to the default cpupool via
+>>>>>>>> sched_move_domain() before actually destroying it, crashing
+>>>>>>>> inside the destination scheduler's alloc_udata() (seen in
+>>>>>>>> Credit2's csched2_alloc_udata() -> is_idle_unit() -> NULL deref).
+>>>>>>>>
+>>>>>>>> Before building a unit in sched_move_domain(), check that all of
+>>>>>>>> its vcpu slots are populated, and skip it if any are missing. The
+>>>>>>>> rest of the function walks the vcpus that actually exist, via
+>>>>>>>> for_each_vcpu() rather than n_units, so skipping a unit here
+>>>>>>>> does not leave anything else out of sync.
+>>>>>>>>
+>>>>>>>> Signed-off-by: Furkan Caliskan <frn1furkan10@gmail.com>
+>>>>>>>> ---
+>>>>>>>>    xen/common/sched/core.c | 19 +++++++++++++++++++
+>>>>>>>>    1 file changed, 19 insertions(+)
+>>>>>>>>
+>>>>>>>> diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
+>>>>>>>> index d3a0a97e1d..d542c76543 100644
+>>>>>>>> --- a/xen/common/sched/core.c
+>>>>>>>> +++ b/xen/common/sched/core.c
+>>>>>>>> @@ -745,6 +745,25 @@ int sched_move_domain(struct domain *d,
+>>>>>>>> struct cpupool *c)
+>>>>>>>>          for ( unit_idx = 0; unit_idx < n_units; unit_idx++ )
+>>>>>>>>        {
+>>>>>>>> +        /*
+>>>>>>>> +         * Skip this unit if any of its vcpus is missing. Bounded by
+>>>>>>>> +         * max_vcpus.
+>>>>>>>> +         */
+>>>>>>>> +        bool vcpu_failed = false;
+>>>>>>>> +
+>>>>>>>> +        for ( unsigned int i = 0;
+>>>>>>>> +              i < gran && unit_idx * gran + i < d->max_vcpus; i++ )
+>>>>>>>> +        {
+>>>>>>>> +            if ( !d->vcpu[unit_idx * gran + i] )
+>>>>>>>> +            {
+>>>>>>>> +                vcpu_failed = true;
+>>>>>>>> +                break;
+>>>>>>>> +            }
+>>>>>>>> +        }
+>>>>>>>> +
+>>>>>>>> +        if ( vcpu_failed )
+>>>>>>>> +            continue;
+>>>>>>> I don't think this is correct.
 >>>>>>>
->>>>>>> I think the host OpRegion is not currently accessible by the DM.
+>>>>>>> If there are some vcpus in the unit you will loose them (i.e. make
+>>>>>>> them no
+>>>>>>> longer be able to be scheduled), right?
+>>>>>>>
+>>>>>>> For a dying domain this might be okay, but not for one still
+>>>>>>> active. So I think
+>>>>>>> you should at least verify the domain is dying, otherwise
+>>>>>>> sched_move_domain()
+>>>>>>> should just fail.
+>>>>>>>
+>>>>>>> An alternative might be to fix the NULL dereferencing where needed,
+>>>>>>> but this
+>>>>>>> could become tedious.
+>>>>>>>
+>>>>>>>
+>>>>>>> Juergen
+>>>>>> Right. My initial attempt only checked 'd->vcpu[unit_idx*gran]'
+>>>>>> for the head vCPU. The crash happens when unit->vcpu_list is set
+>>>>>> to d->vcpu[unit_idx*gran] (which is NULL) and passed to
+>>>>>> 'alloc_udata()',
+>>>>>> causing a NULL dereference.
 >>>>>>
->>>>>> Can you explain to me how the region becomes accessible to the guest?
->>>>>> That would then (hopefully) help me understand why the DM would not have
->>>>>> access. Fundamentally any MMIO and any I/O ports that are assigned to a
->>>>>> guest are also assigned to its DM.
+>>>>>> I expanded the loop over 'gran' to handle core-scheduling cases where a
+>>>>>> subsequent vCPU fails mid-unit, but as you pointed out, that drops the
+>>>>>> whole unit for active domain.
+>>>>>>
+>>>>>> I'll update the patch to check d->is_dying to skip incomplete units
+>>>>>> only for dying domains, and have sched_move_domain() fail if an active
+>>>>>> domain has missing vCPUs
 >>>>>
->>>>> Currently, in the device model (Qemu) we have:
->>>>>
->>>>>     ret = xc_domain_memory_mapping(xen_xc, xen_domid,
->>>>>             (unsigned long)(igd_guest_opregion >> XC_PAGE_SHIFT),
->>>>>             (unsigned long)(igd_host_opregion >> XC_PAGE_SHIFT),
->>>>>             XEN_PCI_INTEL_OPREGION_PAGES,
->>>>>             DPCI_ADD_MAPPING);
->>>>>
->>>>> That statement is in the igd_write_opregion(...) function in the
->>>>> hw/xen/xen_pt_graphics.c file of the upstream Qemu source.
->>>>>
->>>>> If I understand our current implementation correctly, this statement
->>>>> is what gives the guest access to the host OpRegion (3 pages as defined
->>>>> by XEN_PCI_INTEL_OPREGION_PAGES, and in agreement with IGD_OPREGION_PAGES
->>>>> in hvmloader code).
+>>>>> I'm afraid that wont fix everything.
 >>>>
->>>> No, it introduces mappings of those pages into the guest's P2M.
->>>>
->>>>> I don't think this statement makes the host OpRegion
->>>>> accessible to the device model, though, so I think, if I understand your
->>>>> comment in an earlier about my patch resulting in what you called a "layering
->>>>> violation" correctly, that our current implementation is also guilty of this
->>>>> same kind of "layering violation."
->>>>
->>>> That code, if it can be successfully executed, indeed doesn't grant any
->>>> permissions (to the DM or the guest). Instead it proves that the DM has the
->>>> needed permissions to access the pages itself.
+>>>> Why not?
 >>>
->>> So, are you saying it should be possible, without any patches to either Xen or
->>> the Linux kernel, for Qemu to get a pointer to the OpRegion? If so, how?
->>>
->>> I think I could implement what you proposed in an earlier message and do
->>> all (or most) of this in the DM instead of here in hvmloader:
->>>
->>>> The more correct thing to do might be for the DM to
->>>> put in place a copy before the guest (i.e. hvmloader) even gains control.
->>>> (How in turn the DM would learn of the contents of the opregion is a
->>>> separate question then.)
->>>
->>> Actually, when I was developing this patch, I tried first to do it that
->>> way, but the problem was, I could not find a way to get a pointer to the
->>> host OpRegion in Qemu.
->>>
->>> So, how can I get a pointer to the host OpRegion in Qemu?
+>>> domU's in this situation do not have is_dying set.
 >>
->> You don't ask me this question, do you?
+>> Yet isn't the (separate) bug then that we allow a DomU to be launched when
+>> XEN_DOMCTL_max_vcpus didn't finish setting up all vCPU-s? Or is that what
+>> you were alluding to? Since you did say "..., and we may even want to
+>> schedule in this scenario" - perhaps not.
 > 
-> Are you offended I asked this question? If so, I am sorry. You make me
-> afraid to ask it again so I will not do so unless you permit to do so
-> again.
+> When vcpu_create() returns NULL, XEN_DOMCTL_max_vcpus returns an
+> error. Once the toolstack sees that, it immediately issues the 
+> kill hypercall.
 
-"Offended" is the wrong word; "very puzzled" may better get it. I'm not a
-qemu person, and I never have been. I can't really help much there.
-
-> All I can say is that surely qemu
->> has an existing way to map (host) physical memory; see e.g. how
->> xen_pt_msix_init() (imo bogusly) maps the physical MSI-X table of a
->> device. "Bogusly" there because that's another layering violation. Plus
->> (independently) there and here there's the issue of how to accomplish
->> things when not running in Dom0, or when running de-privileged in Dom0.
-> 
-> Well, that only proves Qemu *might* be able to access the MSI-X table of
-> a device, that is, if the calls to open /dev/mem and mmap it succeed.
-> Why is the MSI-X table all of the sudden relevant? Even if Qemu
-> can access the MSI-X table of some device, that does not prove that
-> Qemu can access the host OpRegion of an Intel IGD. So I think my point
-> still stands: I still don't see proof that it is possible for Qemu
-> to get a pointer to the host OpRegion without any patches to the current
-> implementations of Xen and the Linux kernel.
-
-The MSI-X table (and it being accessible to qemu) is the best analogy I
-could come up with, as that's one tiny area of qemu that I know at least
-a little.
-
-From a Xen perspective, this analogy should be sufficient: All you need
-from Xen is for it to permit to establish mappings of the underlying page.
-As I've pointed out when commenting on a code fragment you presented, the
-DM (domain) looks to have permission. Everything else is a matter of
-establishing such a mapping. There the MSI-X table code may also guide
-you. (Sadly it may also misguide you, since (a) I don't know whether it's
-appropriate to do things this way in qemu, and since (b) it is, as said,
-imo a layering violation.)
+That's what the one toolstack you look at does. At the hypervisor level, what
+a toolstack may do after a failure is entirely unknown.
 
 Jan
 
