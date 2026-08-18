@@ -4,52 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D3A1C5DF7D
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 13:36:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1394183.1633019 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D138AC5DF74
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 13:38:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1394192.1633027 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwJyc-0007lG-Px; Tue, 18 Aug 2026 13:35:38 +0000
+	id 1wwK1D-0008S6-7D; Tue, 18 Aug 2026 13:38:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1394183.1633019; Tue, 18 Aug 2026 13:35:38 +0000
+Received: by outflank-mailman (output) from mailman id 1394192.1633027; Tue, 18 Aug 2026 13:38:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwJyc-0007l9-Lc; Tue, 18 Aug 2026 13:35:38 +0000
-Received: by outflank-mailman (input) for mailman id 1394183;
- Tue, 18 Aug 2026 13:35:37 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1wwJyb-0007l3-Hx
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 13:35:37 +0000
+	id 1wwK1D-0008Rx-40; Tue, 18 Aug 2026 13:38:19 +0000
+Received: by outflank-mailman (input) for mailman id 1394192;
+ Tue, 18 Aug 2026 13:38:17 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wwK1B-0008Rr-L3
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 13:38:17 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwJya-00Bppu-Uh
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 15:35:36 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wwK1B-002cb0-1d
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 15:38:17 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <marcandre.lureau@redhat.com>)
- id 6a845fa8-e002-0a2a0a5209dd-0a2a45058bcc-0
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 15:35:36 +0200
-Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <marcandre.lureau@redhat.com>)
- id 6a845fa7-4cb1-0a2a45050019-aa0a817cdb97-3
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 15:35:36 +0200
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-655-0LsnsvebM_iuqnqKt0D47w-1; Tue,
- 18 Aug 2026 09:35:21 -0400
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 2A1FC18011C5; Tue, 18 Aug 2026 13:35:14 +0000 (UTC)
-Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.116])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id D3927180034F; Tue, 18 Aug 2026 13:35:10 +0000 (UTC)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a846040-8faa-0a2a0a5109dd-0a2a45048e0e-36
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 15:38:17 +0200
+Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a846048-b57f-0a2a45040019-d1558036b431-3
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 15:38:16 +0200
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-4998590d392so48394415e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 06:38:16 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
+ [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-482a5a7c568sm12198942f8f.18.2026.08.18.06.38.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 18 Aug 2026 06:38:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,341 +52,221 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1787060135;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=NcMcfYcJnP5pSepZPUlbKT/IGaqv3YNUpR9si4mBH+Q=;
-	b=UsgJ3vcDg/jEc6Kj6D4UGh+sCDOXeYpgxSAkwBmWKQ41ToaP8lJgQ9Xhd1vo46Jk+sCc0t
-	hZ7kLwxdH2NlhQgVerTB6lQ1hXJXUnHGw7aQqTjYOHh1YsHtva/Z2S7y2ricPgCZDHlXan
-	ZolPkL8MhmOaKx2IocDUemZgQvh/yYQ=
-X-MC-Unique: 0LsnsvebM_iuqnqKt0D47w-1
-X-Mimecast-MFC-AGG-ID: 0LsnsvebM_iuqnqKt0D47w_1787060115
-From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 18 Aug 2026 17:29:29 +0400
-Subject: [PATCH v3 63/74] hw: convert device-local PropertyInfo definitions
- to use qapi_type
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1787060296; x=1787665096; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=zhlxW4qiePznAo5gSWosjOTmBT5D8uBehTWpiIJV8lY=;
+        b=QmMM9ri0vxatAeFkgKC7fIJw/7DdFWAQLIphrjY9YeAdXG6jFlGxXMgi0bVdgxwL9S
+         wWYPuX2TMNP/WzbbzI3p3c5fXVsS/tX6P2om4Eg3Ept7SzcSsBFM4jO0t6comdJcCQbm
+         vP/YdgTHIKhfAkuJD8Ncx8TZFQqUtngO7fdSG8YKv1taBCVIb1mANIWWIyvxe55EOV1k
+         5DRiKUQMeG7VdW1xwUjss0Uz0yjlfWUE1QFFyz4dB+rrNuWxXvWc/Wv2fh24lcaKOTix
+         Uw3yya7F6QPVilm+uAPK6CIhp8tKprw6Hcj1XhAYF4134h/xozK2UgMqibrAlw1+M4vh
+         nG4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787060296; x=1787665096;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=zhlxW4qiePznAo5gSWosjOTmBT5D8uBehTWpiIJV8lY=;
+        b=pZiXYjRrmlnCpjzCBEuygTLPGIvXfoHGAz+Fz05qCMHI/7DYHAGuaOCtZoOYW3Qmpw
+         bwztZlCMORM9ygcN7tg5QA4kWPXIIEa4nA3Xhh6ek2VdKvtxNUw/RjVzmAP6FN4aSuVN
+         8bzDBkYiLyb/mDMAkRYTHU7owckLAGcGtm3JCI5T6GRVz8l7ZpBb1JBTplRVutE9lhRt
+         ih+3z2K3Dm4aALeuFRASlQAB3o+HeeBumBBuDdn1Pl+JWjKb0bSfk9BJYcQhy+lW+2DG
+         ZjJHMB1NZt2LzHsJxfVlTnF6XquxrJmQ+U4mqQzMX1ranmHN8N8XzZhJ5YSU+QJ96fBM
+         tPPA==
+X-Forwarded-Encrypted: i=1; AHgh+RqiFnFMFQ+kwywVPZlb1gpckFZj3TqsV2KMpLgHfH+OrF4YA3ya2TMkEybPN9M0W6qlHnoG8CTNUPg=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxpyXemqRmCUS46aVpk4MAotOhwmDvTPvqiFOR0oP+icqAN9K97
+	FQJ6QicghSRqa/QN9gnwlPjv2JSOvWE/2wTTedzR/H6z5utUosRn4kVL
+X-Gm-Gg: AR+sD12/8GJSmpsgpVUyjBR5lKbeuHXYFeMT3NxXVgSLp+1+L8KYFL+f5YJOQH5jGPz
+	KCk0HmD6l3D/UoGLlXL+ndZgdPeKDO8SngznfIk1UNRuZTeadm/gePAi4YjtS06FTHgOSROf+1f
+	hDJTGjFpA8mxD09gyv/ZPfPCIUYJLM60g5iBlmzOVi/nze9ji/J5B5WfUJz0u1+VqWuZZZLU+Sj
+	W94Qdu5UZhp8VwZl+XSFhNshe7VeTP84s7oVSImLymvWvn73V0/9U79/yifNxXIottyckXIaOXx
+	MtA9vB0iMeRdiEijbfy80I3BcnFXDlVYqZIWXODAQ/PM89hptDAYCfsyn8QxbLfcwdwQkhUsdCU
+	GoCFwB3Lzp12lK6hXxdWKCtzMW9e1TMCHyXRftxAY6oqAxIw+9CKGN1QsjII8paUhXPY4SOlCnX
+	l3YA0ybO6WKXOSkP5JyzOfPDuFea1ZpNPdrmi3fitzv2OgmtJFIdTLG6pN85YUNZszPoKPDYxJ8
+	9IDshuTh70JV8HnWEBI3qwPpZVzlrEUpR0jvnFfOWA=
+X-Received: by 2002:a05:600c:848e:b0:499:8156:cd3f with SMTP id 5b1f17b1804b1-4999fb3f78bmr153120185e9.8.1787060296169;
+        Tue, 18 Aug 2026 06:38:16 -0700 (PDT)
+Message-ID: <6959b0e1-3059-4d3b-baa1-28dc0d761f9e@gmail.com>
+Date: Tue, 18 Aug 2026 15:38:14 +0200
 MIME-Version: 1.0
-Message-Id: <20260818-qom-qapi-v3-63-24b8bbbe3d86@redhat.com>
-References: <20260818-qom-qapi-v3-0-24b8bbbe3d86@redhat.com>
-In-Reply-To: <20260818-qom-qapi-v3-0-24b8bbbe3d86@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Markus Armbruster <armbru@redhat.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, 
- =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>, 
- Michael Roth <michael.roth@amd.com>, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
- =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>, 
- Stefano Stabellini <sstabellini@kernel.org>, 
- Anthony PERARD <anthony@xenproject.org>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>, 
- Phil Dennis-Jordan <phil@philjordan.eu>, 
- Alistair Francis <alistair@alistair23.me>, 
- Peter Maydell <peter.maydell@linaro.org>, Keith Busch <kbusch@kernel.org>, 
- Klaus Jensen <its@irrelevant.dk>, Jesper Devantier <foss@defmacro.it>, 
- "Michael S. Tsirkin" <mst@redhat.com>, Halil Pasic <pasic@linux.ibm.com>, 
- Christian Borntraeger <borntraeger@linux.ibm.com>, 
- Eric Farman <farman@linux.ibm.com>, Farhan Ali <alifm@linux.ibm.com>, 
- Matthew Rosato <mjrosato@linux.ibm.com>, Cornelia Huck <cohuck@redhat.com>, 
- Richard Henderson <richard.henderson@linaro.org>, 
- Ilya Leoshkevich <iii@linux.ibm.com>, David Hildenbrand <david@kernel.org>, 
- Alex Williamson <alex@shazbot.org>, 
- =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@redhat.com>, 
- xen-devel@lists.xenproject.org, qemu-block@nongnu.org, qemu-arm@nongnu.org, 
- qemu-s390x@nongnu.org
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8761;
- i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=M1ZK58SCDRwPvhT0ecKJ8jMYH52yLNqHGDUugt8emrA=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqhF9z4CkZw2HKM6dzp+UwaFJyFhTU2u5rvrSYf
- BXDoaKYjlqJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCaoRfcwAKCRDa6OEJdZac
- 5TOdD/0Q9eYTxC1cXJssQBTteyZwUW7EKCWsS/xXRovKEx+Kktno7QRX7UT2fLJQQIvHlkwM+LH
- lTxEFpG1pm45KOEQgHwxUP2e7clXlV5ri74lCFTIsYgXuM0wWqJ9FUXZNpM03icIJeVql1Bev9w
- VcgWpRv8aeBjn0jRvYSyA1qY+nRfUd8KT9SR/9elfGTCFA2LWnu1iFDi2pm42I6+PGmdUrDIn9L
- eBxdg5XNFKSYJ6iuNNFyc+wn4CAgXD6t4SF1c7YbZPUMEahGoXHtNN7Dyh55F1kmPAPJXlU60Ly
- QNs7ECUtW+o7mOC+7c07FYFgZGwAtXzgZRP1qrYFaBq3rkNvWTDHz4YIE6HN8n3WzLm0HjJJaLJ
- /xG/hOfgKpwiEYKhsyZnaWRAugrzFMy3HuAjXNzenokQYpPZbEbbEkcX7ThHth5w/+BBs/53IF1
- oMoicdK6lxhlpRpcARnNOH2vgZhUcgQj914/RpTsKKBceYwvG3/w5JRf3nBRlDrsXahjo9BenyA
- Q+theYaAaOmLZ9BBDU9bKh6U5pOZOaWGiQiDEIO+hc0dQXibHwJmO/NvuUDtDO2VwR8GWGaym9B
- 2tiD5+1HFd7vv5FAdTQR3sdBm0q2neoHk9GwmWJARYpW9nEOxJUx180AQ9xYvW0vr+PRvMknpHD
- 0URkHEcRSEyYjmQ==
-X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
- fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: whWz0eEuS4WCv6OXIQ8Vz9HeXyeCINJahOT99l2Qw-M_1787060115
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1787060136-F48A62A1-FCE76BB9/0/0
-X-purgate-type: clean
-X-purgate-size: 8763
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 13/17] xen/riscv: add unprivileged guest memory read
+ helper
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
+ <79cfa875e9dfc14bbcad948c20f4008b03d11f72.1784560663.git.oleksii.kurochko@gmail.com>
+ <71a226b9-dc03-4a69-beb2-5c4c03b8d09b@suse.com>
+ <3c0d33bd-ebab-48df-9ddf-a508e5bed5fe@gmail.com>
+ <2ca3f802-bf93-4714-8a9b-e33ab0c89300@suse.com>
+ <d94bd15a-bf99-4df5-9dac-1fe0fcb77cfc@gmail.com>
+ <5ee55d9c-d0f8-41cc-8d4e-3ba6c08d7506@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <5ee55d9c-d0f8-41cc-8d4e-3ba6c08d7506@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ebf023/1787060296-528C9B50-16DCEEF0/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 5639
 
-Mechanical conversion of PropertyInfo definitions in device-specific
-files, replacing .type string with .qapi_type pointer to the
-corresponding QAPITypeInfo. Except "display_mode" for apple-gfx, which
-is a string of a specific format.
 
-Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
----
- hw/block/xen-block.c       | 3 ++-
- hw/display/apple-gfx.m     | 3 ++-
- hw/misc/xlnx-versal-trng.c | 3 ++-
- hw/nvme/nguid.c            | 3 ++-
- hw/nvram/xlnx-bbram.c      | 3 ++-
- hw/nvram/xlnx-efuse.c      | 3 ++-
- hw/pci/pci.c               | 3 ++-
- hw/s390x/ccw-device.c      | 3 ++-
- hw/s390x/css.c             | 5 +++--
- hw/s390x/s390-pci-bus.c    | 3 ++-
- hw/vfio/pci-quirks.c       | 3 ++-
- 11 files changed, 23 insertions(+), 12 deletions(-)
 
-diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
-index 474c12fe4ac8..d9721c565c5f 100644
---- a/hw/block/xen-block.c
-+++ b/hw/block/xen-block.c
-@@ -29,6 +29,7 @@
- #include "dataplane/xen-block.h"
- #include "hw/xen/interface/io/xs_wire.h"
- #include "trace.h"
-+#include "qapi/qapi-builtin-type-infos.h"
- 
- #define XVDA_MAJOR 202
- #define XVDQ_MAJOR (1 << 20)
-@@ -663,7 +664,7 @@ invalid:
-  * https://xenbits.xen.org/docs/unstable/man/xen-vbd-interface.7.html
-  */
- static const PropertyInfo xen_block_prop_vdev = {
--    .type  = "str",
-+    .qapi_type = &str_type_info,
-     .description = "Virtual Disk specifier (d*p*/xvd*/hd*/sd*)",
-     .get = xen_block_get_vdev,
-     .set = xen_block_set_vdev,
-diff --git a/hw/display/apple-gfx.m b/hw/display/apple-gfx.m
-index be0061b9db25..77c420b30006 100644
---- a/hw/display/apple-gfx.m
-+++ b/hw/display/apple-gfx.m
-@@ -15,6 +15,7 @@
- #include "qemu/lockable.h"
- #include "qemu/cutils.h"
- #include "qemu/log.h"
-+#include "qapi/qapi-builtin-type-infos.h"
- #include "qapi/visitor.h"
- #include "qapi/error.h"
- #include "qemu/aio-wait.h"
-@@ -871,7 +872,7 @@ static void apple_gfx_set_display_mode(Object *obj, Visitor *v,
- }
- 
- const PropertyInfo qdev_prop_apple_gfx_display_mode = {
--    .type  = "display_mode",
-+    .qapi_type = &str_type_info,
-     .description =
-         "Display mode in pixels and Hertz, as <width>x<height>@<refresh-rate> "
-         "Example: 3840x2160@60",
-diff --git a/hw/misc/xlnx-versal-trng.c b/hw/misc/xlnx-versal-trng.c
-index 0584ee089e3c..97bd3c3f8475 100644
---- a/hw/misc/xlnx-versal-trng.c
-+++ b/hw/misc/xlnx-versal-trng.c
-@@ -36,6 +36,7 @@
- #include "qapi/visitor.h"
- #include "migration/vmstate.h"
- #include "hw/core/qdev-properties.h"
-+#include "qapi/qapi-builtin-type-infos.h"
- 
- #ifndef XLNX_VERSAL_TRNG_ERR_DEBUG
- #define XLNX_VERSAL_TRNG_ERR_DEBUG 0
-@@ -662,7 +663,7 @@ static void trng_prop_fault_event_get(Object *obj, Visitor *v,
- }
- 
- static const PropertyInfo trng_prop_fault_events = {
--    .type = "uint32",
-+    .qapi_type = &uint32_type_info,
-     .description = "Set to trigger TRNG fault events",
-     .set = trng_prop_fault_event_set,
-     .get = trng_prop_fault_event_get,
-diff --git a/hw/nvme/nguid.c b/hw/nvme/nguid.c
-index 4cd6fad6ac9b..6eaf90fca88e 100644
---- a/hw/nvme/nguid.c
-+++ b/hw/nvme/nguid.c
-@@ -18,6 +18,7 @@
- #include "qapi/visitor.h"
- #include "qemu/ctype.h"
- #include "nvme.h"
-+#include "qapi/qapi-builtin-type-infos.h"
- 
- #define NGUID_SEPARATOR '-'
- 
-@@ -179,7 +180,7 @@ static void set_nguid(Object *obj, Visitor *v, const char *name, void *opaque,
- }
- 
- const PropertyInfo qdev_prop_nguid = {
--    .type  = "str",
-+    .qapi_type = &str_type_info,
-     .description =
-         "NGUID or \"" NGUID_VALUE_AUTO "\" for random value",
-     .get   = get_nguid,
-diff --git a/hw/nvram/xlnx-bbram.c b/hw/nvram/xlnx-bbram.c
-index e336874bdef4..eb032ab8b9c8 100644
---- a/hw/nvram/xlnx-bbram.c
-+++ b/hw/nvram/xlnx-bbram.c
-@@ -34,6 +34,7 @@
- #include "hw/core/qdev-properties.h"
- #include "hw/core/qdev-properties-system.h"
- #include "hw/nvram/xlnx-efuse.h"
-+#include "qapi/qapi-builtin-type-infos.h"
- 
- #ifndef XLNX_BBRAM_ERR_DEBUG
- #define XLNX_BBRAM_ERR_DEBUG 0
-@@ -486,7 +487,7 @@ static void bbram_prop_release_drive(Object *obj, const char *name,
- }
- 
- static const PropertyInfo bbram_prop_drive = {
--    .type  = "str",
-+    .qapi_type = &str_type_info,
-     .description = "Node name or ID of a block device to use as BBRAM backend",
-     .realized_set_allowed = true,
-     .get = bbram_prop_get_drive,
-diff --git a/hw/nvram/xlnx-efuse.c b/hw/nvram/xlnx-efuse.c
-index 03c9fbc0d076..b1c9ee4980a0 100644
---- a/hw/nvram/xlnx-efuse.c
-+++ b/hw/nvram/xlnx-efuse.c
-@@ -34,6 +34,7 @@
- #include "system/blockdev.h"
- #include "hw/core/qdev-properties.h"
- #include "hw/core/qdev-properties-system.h"
-+#include "qapi/qapi-builtin-type-infos.h"
- 
- #define TBIT0_OFFSET     28
- #define TBIT1_OFFSET     29
-@@ -251,7 +252,7 @@ static void efuse_prop_release_drive(Object *obj, const char *name,
- }
- 
- static const PropertyInfo efuse_prop_drive = {
--    .type  = "str",
-+    .qapi_type = &str_type_info,
-     .description = "Node name or ID of a block device to use as eFUSE backend",
-     .realized_set_allowed = true,
-     .get = efuse_prop_get_drive,
-diff --git a/hw/pci/pci.c b/hw/pci/pci.c
-index be6145a90a9f..7cfe6032b915 100644
---- a/hw/pci/pci.c
-+++ b/hw/pci/pci.c
-@@ -52,6 +52,7 @@
- #include "qapi/error.h"
- #include "qemu/cutils.h"
- #include "pci-internal.h"
-+#include "qapi/qapi-builtin-type-infos.h"
- 
- #include "hw/xen/xen.h"
- #include "hw/i386/kvm/xen_evtchn.h"
-@@ -79,7 +80,7 @@ static void prop_pci_busnr_get(Object *obj, Visitor *v, const char *name,
- }
- 
- static const PropertyInfo prop_pci_busnr = {
--    .type = "uint8",
-+    .qapi_type = &uint8_type_info,
-     .get = prop_pci_busnr_get,
- };
- 
-diff --git a/hw/s390x/ccw-device.c b/hw/s390x/ccw-device.c
-index 25c427327957..fd21a4346522 100644
---- a/hw/s390x/ccw-device.c
-+++ b/hw/s390x/ccw-device.c
-@@ -17,6 +17,7 @@
- #include "qapi/visitor.h"
- #include "qemu/ctype.h"
- #include "qapi/error.h"
-+#include "qapi/qapi-builtin-type-infos.h"
- 
- static void ccw_device_refill_ids(CcwDevice *dev)
- {
-@@ -74,7 +75,7 @@ static void ccw_device_set_loadparm(Object *obj, Visitor *v,
- }
- 
- const PropertyInfo ccw_loadparm = {
--    .type  = "str",
-+    .qapi_type = &str_type_info,
-     .description = "Up to 8 chars in set of [A-Za-z0-9. ] to select"
-             " a guest kernel",
-     .get = ccw_device_get_loadparm,
-diff --git a/hw/s390x/css.c b/hw/s390x/css.c
-index 3a67b6705319..152687da7820 100644
---- a/hw/s390x/css.c
-+++ b/hw/s390x/css.c
-@@ -24,6 +24,7 @@
- #include "hw/s390x/s390-virtio-ccw.h"
- #include "hw/s390x/s390-ccw.h"
- #include "exec/cpu-common.h"
-+#include "qapi/qapi-builtin-type-infos.h"
- 
- typedef struct CrwContainer {
-     CRW crw;
-@@ -2519,7 +2520,7 @@ out:
- }
- 
- const PropertyInfo css_devid_propinfo = {
--    .type = "str",
-+    .qapi_type = &str_type_info,
-     .description = "Identifier of an I/O device in the channel "
-                    "subsystem, example: fe.1.23ab",
-     .get = get_css_devid,
-@@ -2527,7 +2528,7 @@ const PropertyInfo css_devid_propinfo = {
- };
- 
- const PropertyInfo css_devid_ro_propinfo = {
--    .type = "str",
-+    .qapi_type = &str_type_info,
-     .description = "Read-only identifier of an I/O device in the channel "
-                    "subsystem, example: fe.1.23ab",
-     .get = get_css_devid,
-diff --git a/hw/s390x/s390-pci-bus.c b/hw/s390x/s390-pci-bus.c
-index eff980fdfe92..f77632810b76 100644
---- a/hw/s390x/s390-pci-bus.c
-+++ b/hw/s390x/s390-pci-bus.c
-@@ -33,6 +33,7 @@
- #include "system/runstate.h"
- 
- #include "trace.h"
-+#include "qapi/qapi-builtin-type-infos.h"
- 
- S390pciState *s390_get_phb(void)
- {
-@@ -1541,7 +1542,7 @@ static void s390_pci_set_fid(Object *obj, Visitor *v, const char *name,
- }
- 
- static const PropertyInfo s390_pci_fid_propinfo = {
--    .type = "uint32",
-+    .qapi_type = &uint32_type_info,
-     .description = "zpci_fid",
-     .get = s390_pci_get_fid,
-     .set = s390_pci_set_fid,
-diff --git a/hw/vfio/pci-quirks.c b/hw/vfio/pci-quirks.c
-index c5b4f9091d49..4a3fd374a211 100644
---- a/hw/vfio/pci-quirks.c
-+++ b/hw/vfio/pci-quirks.c
-@@ -26,6 +26,7 @@
- #include "pci.h"
- #include "pci-quirks.h"
- #include "trace.h"
-+#include "qapi/qapi-builtin-type-infos.h"
- 
- /*
-  * List of device ids/vendor ids for which to disable
-@@ -1436,7 +1437,7 @@ static void set_nv_gpudirect_clique_id(Object *obj, Visitor *v,
- }
- 
- const PropertyInfo qdev_prop_nv_gpudirect_clique = {
--    .type = "uint8",
-+    .qapi_type = &uint8_type_info,
-     .description = "NVIDIA GPUDirect Clique ID (0 - 15)",
-     .get = get_nv_gpudirect_clique_id,
-     .set = set_nv_gpudirect_clique_id,
+On 8/18/26 12:43 PM, Jan Beulich wrote:
+> On 18.08.2026 12:27, Oleksii Kurochko wrote:
+>> On 8/18/26 10:17 AM, Jan Beulich wrote:
+>>> On 17.08.2026 17:36, Oleksii Kurochko wrote:
+>>>> On 8/12/26 5:30 PM, Jan Beulich wrote:
+>>>>> On 20.07.2026 18:02, Oleksii Kurochko wrote:
+>>>>>> +    if ( read_insn )
+>>>>>> +    {
+>>>>>> +        asm volatile ( "\n"
+>>>>>> +            "1:\n"
+>>>>>> +            "   hlvx.hu %[val], (%[addr])\n"
+>>>>>> +            ASM_EXTABLE_TRAP_INFO(1b, 3f, %[ti])
+>>>>>> +            "   andi %[tmp], %[val], 3\n"
+>>>>>> +            "   addi %[tmp], %[tmp], -3\n"
+>>>>>> +            "   bne %[tmp], zero, 3f\n"
+>>>>>> +            "   addi %[addr], %[addr], 2\n"
+>>>>>> +            "\n"
+>>>>>> +            "2:\n"
+>>>>>> +            "   hlvx.hu %[tmp], (%[addr])\n"
+>>>>>> +            ASM_EXTABLE_TRAP_INFO(2b, 3f, %[ti])
+>>>>>> +            "   sll %[tmp], %[tmp], 16\n"
+>>>>>> +            "   add %[val], %[val], %[tmp]\n"
+>>>>>> +            "3:\n"
+>>>>>> +        : [val] "=&r" (val), [tmp] "=&r" (tmp), [addr] "+&r" (guest_addr)
+>>>>>> +        : [ti] "r" (trap) : "memory" );
+>>>>>
+>>>>> You want to tell the compiler that *trap is written. Instead I don't see
+>>>>> why a memory clobber would be needed: You access a different address space,
+>>>>> i.e. nothing the compiler can make any assumptions about.
+>>>>
+>>>> memory clobber tells the compiler that the assembly code performs memory
+>>>> reads or writes to items other than those listed in the input and output
+>>>> operands and so I don't tell here that *trap will be changed.
+>>>>
+>>>> Why this understanding is wrong?
+>>>
+>>> You can (ab)use "memory" for that purpose, but why would you when you can
+>>> properly express the operand? All that achieves is the compiler possibly
+>>> having to emit less efficient code.
+>>
+>> Then I will use the option mentioned ...
+>>
+>>>
+>>>> Alternative, I think, could be:
+>>>>            : [val] "+r" (val), "+m" (*trap)
+>>>>            : [addr] "r" (guest_addr), [ti] "r" (trap) );
+>>>> And then memory clobber could be dropped.
+>>
+>> ... here.
+>>
+>> Probably I have to return '[addr] "r" (guest_addr)' to output and use
+>> +&r constraint.
+>>
+>>>>> You also need to take precautions for not returning an uninitialized "val".
+>>>>> I think the variable wants initializing (perhaps to ~0) and "+r" wants
+>>>>> using as constraint. (Afaik & isn't necessary to use together with +.)
+>>>>
+>>>> I agree with '+' if we will initialize val with some value.
+>>>>
+>>>> Regarding, '&' my understanding is that I have to use it always when
+>>>
+>>> When what exactly? If an operand is both input and output, how could the
+>>> compiler re-use the (generally) register for any further purpose? '&'
+>>> indicates to the compiler that it may not use the register used for an
+>>> output to hold some input's value, as that value may be lost by the time
+>>> the input is actually consumed.
+>>
+>> But what is written in the gcc doc:
+>>
+>> & - Means (in a particular alternative) that this operand is an
+>> earlyclobber operand, which is written before the instruction is
+>> finished using the input operands.
+>>
+>> What sounds like if an operand (val) in our case is written before the
+>> instruction which using the input operands (and after the write
+>> instuction which writes val there are instructions which are using input
+>> operands) it is needed to have &.
+> 
+> And that's indeed relevant, just not here. My crucial earlier question was:
+> "If an operand is both input and output, how could the compiler re-use the
+> (generally) register for any further purpose?" There is a case where the
+> answer to this is not "it can't". In your case all inputs are distinct; in
+> e.g. (using x86 assembly, sorry):
+> 
+> int test(int i, int j) {
+> 	asm("nop %0; nop %1" : "+r" (i) : "r" (i));
+> 	asm("cmc; nop %0; nop %1" : "+&r" (j) : "r" (j));
+> 
+> 	return i + j;
+> }
+> 
+> using "+&r" indeed makes a difference.
 
--- 
-2.55.0.543.g5ebe2ebe4ea8
+I think it is clear when operands are equal. but what about the case 
+when they are different in  first  case:
+...
+   asm("nop %0; nop %1" : "+r" (i) : "r" (j));
+...
+
+What guarantees that i and j will be in different registers?
+
+We have the similar situation in RISC-V code of riscv_vcpu_unpriv_read():
+
+         : [val] "+r" (val), [tmp] "=&r" (tmp), [addr] "+r" (guest_addr),
+           "+m" (*trap)
+         : [ti] "r" (trap) );
+
+With having & for val and guest_addr & guarantees that the same 
+registers won't be re-used for ti (and so ti won't be corrupted) but 
+without it?
+
+~ Oleksii
+
+> 
+>> t1:  hlvx.hu %[val], (%[addr])   W:val R:addr + can trap -> read register ti
+>>
+>> t2:  andi    %[tmp], %[val], 3   W:tmp   R:val
+>> t3:  addi    %[tmp], %[tmp], -3
+>> t4:  bnez    %[tmp], 3f
+>> t5:  addi    %[addr], %[addr], 2 W:addr  R:addr
+>> t6:  hlvx.hu %[tmp], (%[addr])   W:tmp   R:addr + can trap -> read
+>> register ti
+>>
+>> t7:  slli    %[tmp], %[tmp], 16
+>> t8:  or      %[val], %[val], %[tmp] W:val
+>>
+>> So val is written on t1 before t6 where addr and ti still alive.
+>>
+>> The similar is for [addr] "+&r" (guest_addr):
+>>
+>> addr is written on t5 and input ti is alive till t6. So if allocator
+>> will allocate the same register for addr and ti then addi %[addr],
+>> %[addr], 2 will break a pointer and handler will get something wrong.
+>>
+>> Am I missing something?
+>>
+>> If I am still wrong then in both cases should be just "+r"?
+> 
+> As per above, if you want to play absolutely by the rules, use "+&r",
+> even if that's unnecessary here.
+> 
+> Jan
 
 
