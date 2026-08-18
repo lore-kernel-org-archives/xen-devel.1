@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45EEEC5DF7E
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 11:33:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1393999.1632804 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60263C5DF7D
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 11:44:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1394043.1632849 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwI4F-0006Vq-CA; Tue, 18 Aug 2026 11:33:19 +0000
+	id 1wwIEj-0001wc-Jo; Tue, 18 Aug 2026 11:44:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1393999.1632804; Tue, 18 Aug 2026 11:33:19 +0000
+Received: by outflank-mailman (output) from mailman id 1394043.1632849; Tue, 18 Aug 2026 11:44:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwI4F-0006Vi-96; Tue, 18 Aug 2026 11:33:19 +0000
-Received: by outflank-mailman (input) for mailman id 1393999;
- Tue, 18 Aug 2026 11:33:18 +0000
+	id 1wwIEj-0001wU-GM; Tue, 18 Aug 2026 11:44:09 +0000
+Received: by outflank-mailman (input) for mailman id 1394043;
+ Tue, 18 Aug 2026 11:44:08 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Mykola_Kvach@epam.com>) id 1wwI4E-0006VW-P1
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 11:33:18 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wwIEi-0001wO-0z
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 11:44:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwI4E-00BTlp-5j
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 13:33:18 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wwIEh-002WhO-AJ
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 13:44:07 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Mykola_Kvach@epam.com>)
- id 6a8442f4-2eae-0a2a0a5409dd-0a2a4503e17c-28
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 13:33:18 +0200
-Received: from [40.107.130.130]
- (helo=MRWPR03CU001.outbound.protection.outlook.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Mykola_Kvach@epam.com>)
- id 6a8442fd-fae8-0a2a45030019-286b8282bd98-3
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 13:33:17 +0200
-Received: from AS8PR03MB9746.eurprd03.prod.outlook.com (2603:10a6:20b:61d::18)
- by PAVPR03MB9598.eurprd03.prod.outlook.com (2603:10a6:102:301::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.17; Tue, 18 Aug
- 2026 11:33:12 +0000
-Received: from AS8PR03MB9746.eurprd03.prod.outlook.com
- ([fe80::cf11:309:1384:58f7]) by AS8PR03MB9746.eurprd03.prod.outlook.com
- ([fe80::cf11:309:1384:58f7%6]) with mapi id 15.21.0315.012; Tue, 18 Aug 2026
- 11:33:12 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6a844585-2eae-0a2a0a5409dd-0a2a450cc15e-6
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 13:44:07 +0200
+Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a844586-f479-0a2a450c0019-d155dd33e148-3
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 13:44:07 +0200
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-47de0093c42so3943001f8f.3
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 04:44:07 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49996100073sm288638625e9.3.2026.08.18.04.44.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 18 Aug 2026 04:44:06 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,170 +53,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TWaTj36pJ4WdZZW1g/zPgznk+Ex/RrdlyfmDg8HKdtu4JYRyOyWZnrf7nxRhVsKNoav3YaG2J43DZctUMGJLsFhi0yCq5bhYTT4Mi0zrRT7SBZisUjXBiCCPO5G7GOpTwyKxGohOLr3C3hvSWwUNFtp7K80bhOxIi84HjDUUuEbayObecVLxZaex59WrJQeEMY4AtH/jTT2h2MAZvPcjNjRGg1aadlVgMJBlkMTW69thjD02RuOS/xC74xXomJuv4ozm4KHTf2sJvJcijI4UDU+SOW503TrA2MqLhg4PfFJXJC8ZH35UfdTEss1NeYwua1Om7O682CSehFzzYZXoMg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hbPdzC7WpK/2tg/s9h3Y3KTdD8QT9vS/xIsoEwcoJ4c=;
- b=TzqmxZNmrr0bYIN70vxeiaGvzzXEBcetL9FrdFSf50zFXioptKetCUpUYW71zoBIMFynJ3uD9YNfzFZgbUxMq8GbGQi6rT3IDeaI1bsFf5alowPCWmLhDOogPcSre6Ul/b9PtTYJQMgrpQ73rYwb6qN7tOVTli7qj7kFPgew20+0ADFEmyEJQiES5RGy92SKb7NHgdbxX4Fn0PDa0t/266N2IMLFSPe00SF5MGsHw8ZG4Vwbg/Pm7lTu4xqOQKPkRGC4zwYIRJ+pYw6ElpAis+wMn4bn12G/edT0peLtd+YlCt89nZZnDMr2OEPmnGcbBPNGf05j5kKR994ciH7+yQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hbPdzC7WpK/2tg/s9h3Y3KTdD8QT9vS/xIsoEwcoJ4c=;
- b=lx+7VhOwO2dZPvODrJqmT1Qp37qWEvFA/m0uyk4CStB4eYh6+qQ2oHyKN9voZFwohz3gcRFc/+WBpV3R/gzG0iw/Y17BPabG59gI9F7cMTksKRbHQH/cfKHjKy/ExYcT6RsTgn+vAIYFWbYBvRlwj+H3XCTF8oz6/3NydUEBv7KpWY2gxZAx1JLP/UyO0vDgGqnbqXxV3nQzORvgqGYqsPO7sPALRQFyXmfaeGm3HUvL0+rEVxH8Y7P80U/ftkQhnmgWD9EM8Gl7dgCSWarngy9KLB6Z5qSBiHg3VgRO5y6zifLi+uGIAfzvkApxlKeJjlscvadB5jZKjxIxErDIKQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-From: Mykola Kvach <mykola_kvach@epam.com>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Jens Wiklander <jenswi@kernel.org>
-Subject: [PATCH v3 0/4] xen/arm: Fix eSPI IRQ handling
-Date: Tue, 18 Aug 2026 14:32:58 +0300
-Message-ID: <cover.1787050437.git.mykola_kvach@epam.com>
-X-Mailer: git-send-email 2.43.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: WA1PEPF00005B92.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d8::63a) To AS8PR03MB9746.eurprd03.prod.outlook.com
- (2603:10a6:20b:61d::18)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1787053446; x=1787658246; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=H7XzeYR+7zhcH+bahORub+d00BZMv3iO0s/OTh8B8NA=;
+        b=I88b2ZNAmm19uRrxD1tbLHMYzeyTIvIF2r+vv7E+Ms7BoHzGQVxg6pd74/JOzb32A/
+         f2DtOl5bjFjljCqg5lDGkxW5AOYcwX9/n4SSIoQhUAY9FfhFwVC4G1bgFFYriTbAF2p0
+         xViljL085cd/CbY83uHehUJJ44R9El9rNB2Ej6cGZ1YfiPxx+szMurAGnSt5iayAaazx
+         rXvo0+YFYjUSyI2318skWlS4uB/Bz4I67h3j4WEGNlMoUhiY1bxAOYwrlOub0FTezsdK
+         Ggb1Ruk7sc4avxRoMST2n6MxRQ5qsXCi7suWVgngFaLveTjKqUnCL3Et3u6aVCSVQDAh
+         57oA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787053446; x=1787658246;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=H7XzeYR+7zhcH+bahORub+d00BZMv3iO0s/OTh8B8NA=;
+        b=a8IxrOXp0OMzxCYIIkdUMrKh6eYlJJ2usQsXsuMwIoak/KsvFu+OmrrnRlPs63O7aT
+         +V43r/Z1knuGabYXzJgiaJf0gYFwfGNS7TJRksbF2f06VuZR4PD3KHQXDlnra3xtSDO6
+         YpVz43XGtvvri91ByQ6BUhx7VRrTu0E+ie8s2+dnIdCoZVpWf7tsNwE37nsGQc3ojiSx
+         HQ0fl+JhFJYwbEdyerXMxUh7OC+uBzstXVu0vupGEzHn/EOHp9BftKza8ZXfugzwjvn3
+         pcHHiw9cT3yQUipuFliS07Bw4tWg3aAWbonJwHaTMJ+Y32HruzLWgWq5BFs9k/Ll6RKt
+         Tamg==
+X-Forwarded-Encrypted: i=1; AHgh+Rrfvqv0DHgzNv7d/wWQUqtCF93uQKkCuYLz1om64FKTAO8r5IcPrIe0tjRFeVdNphVCfv0Lfb3xjDg=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxkENaqcSNMaNx7QKUxtD59Re/QR5u8pwJqRUVRpryrBI5gx3Vw
+	Y96ZB/31zeAdfBS4MOceQvh2yiMMtX05dF4YBxFLc5e0TLfVINNI41/HEpijzZQhJw==
+X-Gm-Gg: AR+sD1049zxlmQhl3JWno9MUTHP+6YPB4JdcHtSieaSIOO6CEPqaTKxyU8xqlhsHXPk
+	9hw/PYDNN+7Pb3k6zGXk/N4aAHD8jYPG1ftrDME8xWgJDN4wtM4Ty6mPDZyrXiZl+G83YNQskbW
+	Iwa1dZ9zvykWJ6bAFJHpSw1drLMj02f7knW8ldf5ukY1RU/T0RipI1lJ4K4woEP3zOvNlJ9+bO5
+	Qg3isjvLVOA5xzHxkDJCadlIteqKx1lXh5Jc3mW4oDLFeflfxtwYPzwfLrpXv3SgzvXRCskfr0A
+	QLopjUyXZURAYd/yeUiK50eXitdJ7HkHnRXXTAId7AhNchBizyf6fQ2IovRRhyqTueP083YvYCy
+	G8yVkag4zSZoCNg1RbzdOh/CwGvZ0iXZRTUrytdh1SxwSBs1h9Hi4n2u+LafL1GuO2AzP2VPqS3
+	zUOQV1BOYypKhAifNTOwFNNIxlq3TQwtMvByex1RYdg/qRESVYXdsesLBlDTW1jAAecRtEbnzdy
+	SC6pRpaLhS9EjhkWk3UtqLQl/nKxiXPGA6DjNTNOON7IvopPDFy
+X-Received: by 2002:a7b:cbd3:0:b0:493:cefc:d113 with SMTP id 5b1f17b1804b1-4998794c02emr341063815e9.5.1787053446606;
+        Tue, 18 Aug 2026 04:44:06 -0700 (PDT)
+Message-ID: <403cc4a0-9b26-413d-bab8-03034e349c39@suse.com>
+Date: Tue, 18 Aug 2026 13:44:05 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR03MB9746:EE_|PAVPR03MB9598:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5a28dd87-6f4f-4b26-67d3-08defd1c7c54
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|366016|1800799024|7416014|376014|10067099003|56012099006|6133799003|11063799006|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	5sDXSX7sHK+pO5kIDCyVQ7xm9XUcJ/QxTFewR0SyWmbxJKkPYbSz6XNlqbJIBNCten15OhIzDWAlOJJeoCtnh1t1kBvbDMX5Lh/tWFmLBUq3tvRIu3wAO62pmbyoKEavIp+MlCQXWap5SswSXYT9vx1tAsko/tiVM93UGuk6LWFhr4S8s1W8nY62gHk2XeI+HXHRMaV+9RAJ8NRZWAf5z9VM31YRQJTjJNQGpeCy1BGcobucoNXKKDEh+BI1Ye4PvANMmAEIzFStLSlapaVRqFePuSBAuer/rWdlodm9RCk77GOoUFtsyaBvM11B8YY1w6Y8MCzmf/3n5B8hcWoHLOdMrnneZIf2odQrobKdFcc+CC3+v7hreXzYnVP7SOoFMLU20QIh4tzR2a8A0keYaEZnLSP6095r8LipxUeS+5Z+E/7kkAtYFOn8VZ+YgwYZam2Re+LZPJWqmT+EeMIx1U5NQAHpYlQSKNMyza2gnwG6d3NLaoEBaHy4EihgK4ad8ENsddS7Az6xBo92LOzVhCnSyP8DYLFKnjAC1LrzpisqMaynAGO2P1W1hQa+r0MkDd8l48MZ0qy2hNnT8ZqpaJrw7cubNiu6o8xmpf+aEORnO6wsgmWsDpbnBsXK16t5
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9746.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(7416014)(376014)(10067099003)(56012099006)(6133799003)(11063799006)(18002099003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?JwbJgBo36aBhgkExis4RjaGY/Dm1es6jCJug2DiCuHP3isNxN4Mk7T8VaCOr?=
- =?us-ascii?Q?xwGsGqa328YXs7ow4IK95etmh8IwFlXGR3JObpk+LloF27CeZ+Fj2b21Lnoa?=
- =?us-ascii?Q?UPNxsQEbJwQbP7hzjkIe+56LR6sVBhF1pR7wYJrQkp7Nth5AMEYGldL8M8qD?=
- =?us-ascii?Q?PSd4S3Tx+nyor8U6vekJ63oClxlm8WQqKtiXS1PgnTuL7IatBE7ZpT+ORYri?=
- =?us-ascii?Q?5lEtz3GynFZO6dvJZ9YU5EYBNkr+GU4yglI4bSdf0XHENWs3Jn+++3judC1q?=
- =?us-ascii?Q?gm98swlm9JFjOGG0+UsQDTuxVXcpr4djggZXwrzCXL2NFIvwEdzO3mI8AS9D?=
- =?us-ascii?Q?MWpMfj/8E7bp0GgWOFrcaqIHxpb+Eves34BAACJh6QvJWgXMiUIrQH95jD4Z?=
- =?us-ascii?Q?VUZWFJVVRX3s6i5QeQCxPD9389KSAMwuB+Zyfc3vRAh/AV6Jd2nPjnh+KUac?=
- =?us-ascii?Q?FCczBXGJFtUpkYgJn90ujjyiDQxIRlMKJY1P/tXRimlFHj/CD5wLSAEV3NJ3?=
- =?us-ascii?Q?sAEOcr/0JxSpQltdYQxkTrgFUnChrMJLeI3oa6RM5ThN4t8cES+HWpVvu0e1?=
- =?us-ascii?Q?MJtmIeF/kd9MOUQHaEuXeVDb6fSCpaaaEBigbkDnv+a1MXPJG9ERzztp/+Xl?=
- =?us-ascii?Q?NrMxiWgE4Chm+Co6l5HHXHrCoUlhrhIGot6iDSRqhR67be9pB5rQM79rfDvj?=
- =?us-ascii?Q?o6orlzsmNCZlDFhj5wtJ6MuDOJwYWNlNjM7c9j3b5FP7/uCoQZLPOd0vONfU?=
- =?us-ascii?Q?Y8Sn6AgOC4mbpu6vdfIhGBTV95GP2U6vkWHG26CYWq8qp9l96Xn4CvjTsqqn?=
- =?us-ascii?Q?x1hqSeRjJ/1+LXsww+rlbLhbirC99p/NKHAmr0ksQOuN+p7OsCytOdQZEBn/?=
- =?us-ascii?Q?KsxfC6egGA4vEtYEMJQsTVVC5wwB+RfFtShTXwL1AMi8Df9v18ax83GDg8He?=
- =?us-ascii?Q?2TJ8Cm2yaAARdxds0ZV6EEIPw0VrsL107tnDB23QxLWiglL8MFTOW9O0IOZP?=
- =?us-ascii?Q?NDtu960DkH1W12fp4JmCK7ctDqcpIjE4DuSWK/OYl1+kj/jOABqX7JsDqif9?=
- =?us-ascii?Q?MAstWmog2XKb9Nw7SevkghbNrUQehTqv2GbJeYMe1MkyEaPHsEa2kAyC/nYd?=
- =?us-ascii?Q?EfUu1ZffnwEaTX8wv3PTmPVaPbmdPaNoNXwjzbZpsKKmAKXX9+myToG97il8?=
- =?us-ascii?Q?/l1dcw29AwDG7E8jBOZ6jOpWkhj4cbboNVmu8LaPytymFSTJ5FGHawCPk2tQ?=
- =?us-ascii?Q?qXEqr9uMmuotrP8FK6KuRMNvJM8wWjrkWHhiNG/F6FbaJJjfBitCzEIKj8ra?=
- =?us-ascii?Q?lL14dXJg7TAihCbhQ3OteY0gz84DqfK12OrzvLYV959oD64eyug8Zww3cE6r?=
- =?us-ascii?Q?0M4YBhMmrpnufpxUJ9A3jgVfYkdF28duKTDjaNR1W/GAMNB/CzwcSMtg7047?=
- =?us-ascii?Q?1vOr++9nCMEcNJoUY6Nwj2X7NOljWEbdRm2h2e/0aYQyTHBGG+FtkRnACagL?=
- =?us-ascii?Q?fQeW8iio6na3Jblj2LoEdFU4DoQyQRWeEJT2n4s9McaCFzBYyP9Yn2BkOVvR?=
- =?us-ascii?Q?jFzbtXvw4RfR9vd4IEb+nCW7r+lvi13h3pRK7E/UQuKieDmnLNucRh826ROI?=
- =?us-ascii?Q?PNJC3Doy1DHTnNELa9hfLc6AIzjYSnG6DEO5+ddLboDWLGLmtcf8BzrNFCIi?=
- =?us-ascii?Q?yXZd25JPhOGbDx3PXITbNoM2b6NdDwtPlUX51Fr8EdjA1Z4KK0sXtZC4phoh?=
- =?us-ascii?Q?JABrVSg9uQ=3D=3D?=
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5a28dd87-6f4f-4b26-67d3-08defd1c7c54
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR03MB9746.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2026 11:33:12.1780
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: uYm2Fq7Ug/wXv8RHPbI4E6CMeaRd+lugECTO8BT7CVBM8mAQpy97yGItrMjMC0euekD/SIpnSbrI6p0P2AqGRg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR03MB9598
-X-purgate-ID: tlsNG-33051d/1787052798-74E874E9-32FE4DE7/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 01/23] x86/mtrr: get rid of a static variable on
+ pause/restore
+To: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Cc: Teddy Astie <teddy.astie@vates.tech>, trenchboot-devel@googlegroups.com,
+ xen-devel@lists.xenproject.org
+References: <cover.1785668458.git.sergii.dmytruk@3mdeb.com>
+ <b36573fda71fdceb3d6049493faf3daff9f64de8.1785668458.git.sergii.dmytruk@3mdeb.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <b36573fda71fdceb3d6049493faf3daff9f64de8.1785668458.git.sergii.dmytruk@3mdeb.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d25034/1787053447-01EC2A5B-7F994608/0/0
 X-purgate-type: clean
-X-purgate-size: 3112
+X-purgate-size: 1467
 
-This series fixes sparse eSPI INTID handling and checks errors returned by
-irq_set_type().
+On 02.08.2026 15:09, Sergii Dmytruk wrote:
+> In addition to keeping the state in one place instead of on stack and in
+> a static variable, this enables exposing this functionality to other
+> units in the future.
+> 
+> Signed-off-by: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
+> ---
+> 
+> Notes:
+>     v4: was called "x86/mtrr: expose functions for pausing caching"
+>     v4: no longer makes anything public, just updates implementation
+>     v4: the state structure is now an output parameter instead of a return value
 
-Patch 1 makes is_espi() a configuration-neutral architectural range
-predicate. Configuration policy and debug checks for unsupported eSPIs are
-now explicit at call sites.
+I don't mind it to stay as you have it now, but recently we discussed this
+aspect in another context, and I've changed my position: When the struct
+can be returned in registers, it's okay to return by value.
 
-Xen has IRQ descriptors for INTIDs below NR_IRQS and for eSPIs starting at
-4096. It has no descriptors for INTIDs 1024 through 4095. Patch 2 checks
-INTIDs in setup_irq() and irq_set_spi_type() before these functions look up
-a descriptor. irq_set_spi_type() checks descriptor ranges because the GIC
-line counts are not known yet. setup_irq() uses the line counts once they
-are available.
+> @@ -439,7 +440,7 @@ static DEFINE_SPINLOCK(set_atomicity_lock);
+>   * has been called.
+>   */
+>  
+> -static bool prepare_set(void)
+> +static void mtrr_pause_caching(struct mtrr_pausing_state *state)
+>  {
+>  	unsigned long cr4;
 
-Patch 3 fixes the vGIC allocation bitmap. Reserving an eSPI used a compact
-bitmap index, but freeing it used the raw virtual INTID. This could write
-past the bitmap and leave the eSPI reserved.
+Considering the conditional ...
 
-Patch 4, introduced in v2, checks errors from irq_set_type() in the GTDT,
-MADT, SPCR, and FF-A paths. GTDT and MADT could keep a rejected timer or
-maintenance INTID and later use it in a direct descriptor lookup. This
-patch also fixes MISRA C Rule 17.7 violations.
+> @@ -461,7 +462,9 @@ static bool prepare_set(void)
+>  	alternative("wbinvd", "", X86_FEATURE_XEN_SELFSNOOP);
 
-Tested with:
-- Arm64 debug builds with CONFIG_ACPI=y and CONFIG_FFA=y, both with and
-  without CONFIG_GICV3_ESPI
-- FVP Device Tree boot with 64 eSPIs; Linux dom0 started
-- QEMU virt UEFI/ACPI boot to a dom0 initramfs shell; this covered the GTDT,
-  GICv3 MADT, and PL011 SPCR paths
+... cache flush that's done (and the comment just out of context also
+correctly saying "no-fill cache mode"), we're not really pausing caching
+in all cases. I'm therefore worried of the new names of the two involved
+functions. Andrew, Roger - thoughts? (My inclination would be to suggest
+mtrr_{pause,resume}_cache_fill().)
 
-Changes in v3:
-- Add a preparatory patch making is_espi() a pure range predicate and move
-  configuration policy and debug checks to callers.
-- Add the requested assertion before regular descriptor lookup.
-- Avoid partial MADT and UART state updates after irq_set_type() failures.
-- Apply cosmetic cleanups from review.
-
-Changes in v2:
-- Check descriptor ranges in irq_set_spi_type() and implemented GIC lines
-  in setup_irq().
-- Keep the is_espi() debug check when CONFIG_GICV3_ESPI is disabled.
-- Remove a redundant CONFIG_GICV3_ESPI guard from the vGIC code.
-- Add patch 3 to check irq_set_type() errors in the GTDT, MADT, SPCR, and
-  FF-A paths.
-- Target master instead of the 4.22 release.
-
-v2: https://patchew.org/Xen/cover.1786385827.git.mykola._5Fkvach@epam.com/
-v1: https://patchew.org/Xen/cover.1783671887.git.mykola._5Fkvach@epam.com/
-
-Mykola Kvach (4):
-  xen/arm: make is_espi() a pure range predicate
-  xen/arm: validate IRQs before descriptor lookup
-  xen/arm: vgic: free eSPIs using the bitmap index
-  xen/arm: handle irq_set_type() failures
-
- xen/arch/arm/gic-v2.c          | 15 +++++++++------
- xen/arch/arm/gic-v3.c          | 15 +++++++++------
- xen/arch/arm/gic.c             |  5 ++++-
- xen/arch/arm/include/asm/irq.h | 11 -----------
- xen/arch/arm/irq.c             | 26 ++++++++++++++++++++++----
- xen/arch/arm/tee/ffa_notif.c   | 11 ++++++++++-
- xen/arch/arm/time.c            | 18 ++++++++++++++----
- xen/arch/arm/vgic.c            | 31 ++++++++++++++++++-------------
- xen/drivers/char/ns16550.c     |  8 ++++++--
- xen/drivers/char/pl011.c       |  4 +++-
- 10 files changed, 95 insertions(+), 49 deletions(-)
-
--- 
-2.43.0
+Jan
 
