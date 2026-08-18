@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0F28C5DF7E
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 15:16:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1394283.1633117 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C151FC5DF7E
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 15:40:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1394295.1633126 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwLXf-00010h-2L; Tue, 18 Aug 2026 15:15:55 +0000
+	id 1wwLuv-0003xp-TV; Tue, 18 Aug 2026 15:39:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1394283.1633117; Tue, 18 Aug 2026 15:15:55 +0000
+Received: by outflank-mailman (output) from mailman id 1394295.1633126; Tue, 18 Aug 2026 15:39:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwLXe-00010a-Vp; Tue, 18 Aug 2026 15:15:54 +0000
-Received: by outflank-mailman (input) for mailman id 1394283;
- Tue, 18 Aug 2026 15:15:53 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wwLuv-0003xi-Ph; Tue, 18 Aug 2026 15:39:57 +0000
+Received: by outflank-mailman (input) for mailman id 1394295;
+ Tue, 18 Aug 2026 15:39:57 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wwLXd-00010U-BB
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 15:15:53 +0000
+ (envelope-from <onlywig@gmail.com>) id 1wwLuv-0003xc-CX
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 15:39:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwLXc-00DkoA-KO
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 17:15:52 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wwLuu-00HSrn-5e
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 17:39:56 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a847728-e002-0a2a0a5209dd-0a2a4506abb6-2
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 17:15:52 +0200
-Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a847728-195a-0a2a45060019-d155dd2fe195-3
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 17:15:52 +0200
-Received: by mail-wr1-f47.google.com with SMTP id
- ffacd0b85a97d-47de0093c42so4169308f8f.3
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 08:15:52 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482a5b7834dsm12710927f8f.28.2026.08.18.08.15.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Aug 2026 08:15:51 -0700 (PDT)
+ (envelope-from <onlywig@gmail.com>)
+ id 6a847cc0-e002-0a2a0a5209dd-0a2a4509d81a-18
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 17:39:56 +0200
+Received: from [209.85.214.182] (helo=mail-pl1-f182.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <onlywig@gmail.com>)
+ id 6a847cca-be1a-0a2a45090019-d155d6b6cd7a-3
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 17:39:55 +0200
+Received: by mail-pl1-f182.google.com with SMTP id
+ d9443c01a7336-2d58efc7356so29588125ad.1
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 08:39:55 -0700 (PDT)
+Received: from wig-Precision-3660.. (125-227-154-99.hinet-ip.hinet.net.
+ [125.227.154.99]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3954d2de41dsm6247737a91.5.2026.08.18.08.39.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Aug 2026 08:39:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,117 +53,138 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787066152; x=1787670952; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=AZMOSjPuvvS5I2CGyKk4ioLNHh1L8JHs+oyJLDw0keM=;
-        b=GS9uz/QMI+/jvMCT7B3QAx+FG/lFhiDDzG6lR0A9vKpHycJBfx0ApNqP/VoXQJHBZr
-         O7Y7tiBXHumNpJSRQv9q4DoGX/wI26eVHTyvBZj6wauPmSm3JMbcvwM4Tvbr4sCtnxnj
-         2rX4U2mKVEY+GDfZjyTzmRV4pY2BF8GFp0CV6/wgz0Tpr5j0nQjgNLGXWnN7NmDAasoX
-         LjPh7BtYz4HkMadGuWBNq4ovVJTujmYiejiJqv7iHDSD2UprWlDc/n583aa/TzxhE8ey
-         CLJCWtbm/XBlszMh3SLmvxuD2PeWhV4YHyJKplU8n87gfChtFmIbfM84j+QkpA9mR4Dy
-         GzWg==
+        d=gmail.com; s=20251104; t=1787067594; x=1787672394; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=llSGcMbfo3K/AzLAPUD4hx170m1T96Ika40zCHvxGzw=;
+        b=LUKXlw+B2PmKLjEmxuxFAY06appfoyqc+iY9lmHzhSLPVLhoMbZOrcy8xeJiTGGECE
+         x2p8V8CLnAKgBV8D5SXuTkmyGsr7a78S6XOmvpO1uqXa2XNefyCmPGcYUYP4R8lpLr2R
+         NQ/HUYP4pW+DczZJpREdQTXUYnTXxBb13aXfTw1/ppMYjW8gMTkOMvWXw9OatVEInWfb
+         9EDxZXfDUuxxJlOrO7yhV1aVcxVSeF8IzQwYhcQFYHyGWBT1m7j49LeAbAUaDc7Z89y4
+         BIrrQLlQqoTXjDx//alxhQTCo2NoYGhMImf7bnGmVi1weJEyyR1wzvxLAfYV4rCZ8D61
+         jIrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787066152; x=1787670952;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1787067594; x=1787672394;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=AZMOSjPuvvS5I2CGyKk4ioLNHh1L8JHs+oyJLDw0keM=;
-        b=m2bcjCIGmC/rUNgjUsrVVe2cWleDTiFR2gqgNosVcwwtAYX7J5dtQujdkvACpJ2FpL
-         R91Kb9Bx0X6Z6jcqDKnwJlM2kXd94VXqac1jvqDyIzj4KWqR11pmZV5HCNX2X/G6NZiL
-         vmlsryVZtIUT1tSYD2Stq92ONImvlfpkqgBJHEAIaB6Tfv4/6dLS1dgR2V4v2KXPm1/v
-         DJR1YpO46QZGiAMOU2bPe7wp5xDXvD35httcKEvlsQBSazLv/iFmugnwqxausBeFJvTo
-         UWW05vPOt2SjmHquAecSakIP4ln82oBpnUdQQSCRvnetwdJ0EsO1UPjFwrRYpv5ajHAI
-         KeLw==
-X-Forwarded-Encrypted: i=1; AHgh+RqXugAC1NJKHournM+iBpW0X5aMFGPuH3VkkXJqKf1SbyMkf6amWhEsaUEVR8Yrx046dqlPFK3h2Mc=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzX5gAl4dhC06OadjCpv4juPSqwR+FfIlz7zaVLD3T4YaDw6wBx
-	KblS+JJNxSOlTyErroFFlyzlc480HgDsJ145l5NW/R5NN7v5r0ISzm9PAqTmFr/B/w==
-X-Gm-Gg: AR+sD10NpuHAZ/BQ3aVl3smSiXiR2wUOWOgIfXQeLasqr4LrYwOZdbxsxo2HxI9Ce5N
-	it1QQjSO0s+IhBjn4vt6ipEjqkoQ/GoDiELfxnO+EzS4ulOYqz4NYj54zsn+eWWEYwr1lCW2VXA
-	jw3HIr2+zkiAp2DrsKmgsFwIxF3w/3WPLqwXvE9it9SeEBAVP87YaE3RHu3DY7b9zizVk8hCyoK
-	og9QELnO9dq0U0T6aDxdnlM8mUTzzdGJ0UuRYRrmYuHUiKHM4Nf7abW8QEU8q3RQp4ayx0n0P6H
-	MosZjWi7qbsTWoawxqGpiSC2rXNLeK9MPqKUkhy3493kjhPe9yLDYXONdvuYnIrpKdts0FgwJW1
-	cVIzbcqRHKkZA1D5N0/7vkeSe2DmzMAF5ZvevOgduAAPilPWSD2qVlhqddNzGZQAQ25u/dfZnu6
-	Pv9QZJTfVksWJaGaAqHWtVL5cOy/+k7DvXX3ZXHJWvHnJ3fQkHKfmep+vkqJFiG6R6ygoN7k5el
-	Kt7oZ9ON0EPVf+a+pMayX9nlFEAUajretA4pPgv07IoGSfvck+X
-X-Received: by 2002:a05:6000:2089:b0:481:573d:9d29 with SMTP id ffacd0b85a97d-481607574fbmr54157382f8f.14.1787066152042;
-        Tue, 18 Aug 2026 08:15:52 -0700 (PDT)
-Message-ID: <0a257dd8-86ee-4be2-9d7a-cfd90250a522@suse.com>
-Date: Tue, 18 Aug 2026 17:15:50 +0200
+        bh=llSGcMbfo3K/AzLAPUD4hx170m1T96Ika40zCHvxGzw=;
+        b=WpClA4YwesruFTy/WYi0GQDUXuRBI5bbzWq4GUVVVCdpfVRWSLL29ER5LjOCn+Qsoj
+         TriZGK6c2sWQoU/zg2y9joQfrrkowmEBFWLNmVNskTn2ptYDaLpKGQ0YfBpFmle+Bb2H
+         XkCCyjaT0BG9WNCYV9GE6Dwx8kNpLz2U2gsrbSLA2xovkKjjAlu0ZtzhiP8vL+eQHexR
+         NHzO0oDP0G9850yilm5SJgquRH2/HwZfVYB72u6BFlBmmGMU8f65IQWlAFukWELqxciX
+         29b0fC5ucCJrr2+aEHn70tb5H1sv1EguwVd6Xy/zL2pZD08JSWzNX2ElpqrUiN8SUmzC
+         4SkQ==
+X-Gm-Message-State: AOJu0YwBmrsFyw4v4nP/5Hz9GiCSgYjNjsQjPjcd9TolVJp4GmyZXsjd
+	nGgimm5LiywPzs6se57q7ERKEEsGSbF1tEHrMzkzUFcp09EplZ4CzKWZKuKxt671
+X-Gm-Gg: AR+sD13sLuqAi7gn5rc321Hf8yFMccOMW29waCNA0lRXP77xP9pNlviTNHEHd0gnPOO
+	iyjY+6yJ5kzxsldXgY8x2vGkSkwlhHHQmMSUFlT0YZOPBKOKxsBBKtARVUJpufzNkTODs8AX1J5
+	D4JhyajwgBhSMRjXvvEW90qugc+IIST3s1Wt4ubD2RM1qp2RxUDnw80WHPZKZjA8Nq2oCBrb1tD
+	UJszEx9qwLn/3o5eCdmHCFtBuTh3FDJaSEeNoVcp+q8yDNvDzE+yQctW/kyFJJiGCvHWi+tq5/c
+	v86ruL4+Y1rsomnfCOjsuEufjp/dRuxjdHvCJhGY8qHn/chLEKRB1j7+/iOjy+mpLDNzpz/H4df
+	1jpdQFAI1luJRL0uURT29VBxf196YSG3/M6FnMnANZSQ4uYc5YhLtrJOek3+6k3YbJwQ/MT2lQS
+	5V7YFfE4kURDXs1lavS2tbhO0Fg3gITbefNq30HDu9qkQM3Ai76QXYnbT+kKLASrtkG/dqN7WQq
+	ER/ndbXGyRFYCpyilHTiIqTR20Rrylm8meIXOQB2ZY=
+X-Received: by 2002:a17:90b:17d2:b0:381:9028:5945 with SMTP id 98e67ed59e1d1-3933e60c1damr34155541a91.14.1787067593849;
+        Tue, 18 Aug 2026 08:39:53 -0700 (PDT)
+From: Wig Cheng <onlywig@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Michal Orzel <michal.orzel@amd.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	John Ernberg <john.ernberg@actia.se>,
+	Peng Fan <peng.fan@nxp.com>,
+	Wig Cheng <onlywig@gmail.com>
+Subject: [PATCH v3 0/4] xen/arm: add i.MX8M platform and UART support
+Date: Tue, 18 Aug 2026 23:39:42 +0800
+Message-ID: <20260818153946.1635464-1-onlywig@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/3] time: add "NOW() good" indicator
-To: "Orzel, Michal" <michal.orzel@amd.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <f5040939-b166-4050-9a27-117b772547d4@suse.com>
- <b7513795-9e4b-4358-9d46-6c7036d64b81@suse.com>
- <7ef46d06-7674-40bf-816c-71f6935394fb@amd.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <7ef46d06-7674-40bf-816c-71f6935394fb@amd.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1787066152-F7ECC77B-AA46F12A/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-bad1c0/1787067596-FDC6D034-2C5F9CEF/0/0
 X-purgate-type: clean
-X-purgate-size: 878
+X-purgate-size: 3303
 
-On 18.08.2026 17:10, Orzel, Michal wrote:
-> On 30-Jun-26 16:06, Jan Beulich wrote:
->> printk_start_of_line() checks for a value of 0 right now. In order to be
->> able to have NOW() return at least monotonically increasing values, that
->> needs replacing by an explicit indicator.
->>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+Following Michal Orzel's review of v2, this series adds Xen support for
+the NXP i.MX8M family (i.MX8MP / MQ / MM / MN).  It provides the console
+UART driver, its early printk, the platform glue (SiP SMC whitelist for
+the calls the dom0 kernel issues to TF-A), and a MAINTAINERS entry.
 
-Thanks.
+Tested on i.MX8MP (4x Cortex-A53, GICv3) with the vendor kernel 6.18:
+dom0 boots to login on the hypervisor console, and a domU starts with a
+PV disk and virtio devices running a full Wayland distro.
 
->> ---
->> Arm and RISC-V may want to consider whether their initial get_cycles()
->> can't be moved yet earlier, such that the indicator also can be set
->> yet earlier.
-> On Arm, get_cycles() just reads a system register and it could be moved earlier.
-> That said, is there any rule as to what should actually be considered a start of
-> time (i.e. the boot_count value)?
+Notes for reviewers:
 
-Whatever NOW() uses as the "bias", I think. That looks to be boot_count on
-Arm, yes.
+- Unlike i.MX8MQ, the i.MX8MP device tree uses the GIC as the root
+  interrupt controller (interrupt-parent = <&gic>), so no device-tree
+  workaround is needed and power domains keep working.
 
-Jan
+- The i.MX8M family has no SMMU, so device passthrough relies on the
+  1:1 direct-mapped hardware domain.
+
+- The SiP SMC whitelist forwards only the specific subfunctions the
+  dom0 kernel issues, extracted from the vendor kernel call sites.
+  Following the v2 review, CPU and DRAM frequency scaling are now both
+  denied: the hardware domain cannot make an informed decision about
+  resources it shares with the other domains.  dom0's i.MX8M DDRC
+  devfreq driver issues the DDR DVFS call at boot; with it denied that
+  driver just skips DRAM frequency scaling (the DRAM stays at the
+  frequency set by firmware) and dom0 boots normally.
+
+Changes since v2:
+
+Patch 1 (UART driver):
+- Add imx-uart.c to the Arm MAINTAINERS section so it falls under Arm
+  maintainership.
+- Gate serial_tx_interrupt() on TRDYEN; USR1_TRDY is a raw status bit,
+  set independently of whether the TX interrupt is enabled.
+- Print the IRQ number with %u.
+
+Patch 2 (early printk):
+- No code changes; picked up Michal's Reviewed-by.
+
+Patch 3 (platform):
+- Include <asm/regs.h> for get/set_user_reg().
+- Add a description for the CPUFREQ function id.
+- Drop the unused SRC M4_START and NoC LCDIF subfunction macros.
+- Order the switch cases by function id.
+- Deny DDR DVFS as well as CPU frequency scaling (same reasoning),
+  rather than forwarding it.
+- Return false directly on a denied subfunction instead of goto plus a
+  redundant printk.
+
+Patch 4 (MAINTAINERS):
+- No changes; picked up Michal's Reviewed-by.
+
+v2: https://lore.kernel.org/xen-devel/20260818025224.4165503-1-onlywig@gmail.com/
+
+Wig Cheng (4):
+  xen/char: add classic i.MX UART driver
+  xen/arm64: add early printk for the classic i.MX UART
+  xen/arm: add i.MX8M platform support
+  MAINTAINERS: add myself as reviewer of i.MX8M related patches
+
+ MAINTAINERS                           |   8 +
+ xen/arch/arm/Kconfig.debug            |  12 ++
+ xen/arch/arm/arm64/debug-imx-uart.inc |  37 ++++
+ xen/arch/arm/include/asm/imx-uart.h   |  57 +++++++
+ xen/arch/arm/platforms/Makefile       |   1 +
+ xen/arch/arm/platforms/imx8m.c        | 139 +++++++++++++++
+ xen/drivers/char/Kconfig              |   8 +
+ xen/drivers/char/Makefile             |   1 +
+ xen/drivers/char/imx-uart.c           | 233 ++++++++++++++++++++++++++
+ 9 files changed, 496 insertions(+)
+ create mode 100644 xen/arch/arm/arm64/debug-imx-uart.inc
+ create mode 100644 xen/arch/arm/include/asm/imx-uart.h
+ create mode 100644 xen/arch/arm/platforms/imx8m.c
+ create mode 100644 xen/drivers/char/imx-uart.c
+
+-- 
+2.43.0
+
 
