@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B17FC5DF7E
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 14:16:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1394225.1633054 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75708C5DF74
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 14:32:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1394233.1633063 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwKbu-0006f7-CR; Tue, 18 Aug 2026 14:16:14 +0000
+	id 1wwKr2-00017F-J8; Tue, 18 Aug 2026 14:31:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1394225.1633054; Tue, 18 Aug 2026 14:16:14 +0000
+Received: by outflank-mailman (output) from mailman id 1394233.1633063; Tue, 18 Aug 2026 14:31:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwKbu-0006f0-9e; Tue, 18 Aug 2026 14:16:14 +0000
-Received: by outflank-mailman (input) for mailman id 1394225;
- Tue, 18 Aug 2026 14:16:13 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wwKr2-000178-GM; Tue, 18 Aug 2026 14:31:52 +0000
+Received: by outflank-mailman (input) for mailman id 1394233;
+ Tue, 18 Aug 2026 14:31:51 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wwKbt-0006eu-He
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 14:16:13 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wwKr1-000172-GI
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 14:31:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwKbs-00Da6f-7B
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 16:16:12 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wwKr0-00FXA9-5R
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 16:31:50 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a84691a-bab6-0a2a0a5309dd-0a2a4503d1c0-30
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 16:16:08 +0200
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a846cd3-2eae-0a2a0a5409dd-0a2a4502ae38-6
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 16:31:50 +0200
+Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a846928-fae8-0a2a45030019-d1558034e43a-3
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 16:16:08 +0200
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-4953de5be0aso37714655e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 07:16:08 -0700 (PDT)
+ id 6a846cd5-6ca4-0a2a45020019-d155dd2aa893-3
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 16:31:50 +0200
+Received: by mail-wr1-f42.google.com with SMTP id
+ ffacd0b85a97d-47db714766aso705136f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 07:31:49 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482a5a31572sm12796383f8f.5.2026.08.18.07.16.05
+ ffacd0b85a97d-482a5a7c55bsm12043664f8f.20.2026.08.18.07.31.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Aug 2026 07:16:06 -0700 (PDT)
+ Tue, 18 Aug 2026 07:31:49 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,68 +55,55 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787062568; x=1787667368; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1787063509; x=1787668309; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=wBF9nUt5CrcYIqX2i8K8X50NNea0WojETI06s9K0YQ0=;
-        b=F5jE1fhM8wrGi6i+uwg+1lx3lW3iXQNTll4GwByNG7eZvUEAnKgVwp8MyrLhc7QzvI
-         QxfiLAzgt+C1suQacz9HfDDAaRx0mpr2aHz2lhcffgzJJdEKHM0BgKwVWgrO5XWkvzGF
-         MIZ79qFQyCcEVHiB0zo5mUWrUEPnLWSf55B0SHMaIIZynVVgLJyD38Hi+Nb1Eb0Divg3
-         ByeZr6cMAuTJZAWRROfh0rnAvCVppFdF32ii/bm9OOR+4U+V+KbF1DuT4VvfQcQoppOH
-         zuThglmxabdXYHlQhKaZUSI5n/IL1ZQ1dZ9pruL4F6I9MBFkjYt/FNU6TWVRD5mvc0Uh
-         hsLQ==
+        bh=CfCofe3KyBoJCN3PFQ3H3q6o9j9MJAxwTJdM1Z5zqAY=;
+        b=RUNLFEdQD0PVo+RAL4Ty7IKpnZbx+xdWXEct7/iR3dWNxDO27PxyQ30sGpLFMWGKnD
+         S+nLQHNKZcsjMl00gKYqSw9+OFQAJPak8jZLAIs2SZvACkEL9H9tMpaybzmrHLXzOjNj
+         ClPVqtZLi22B+ID3x0dpQ5O8oIeVFxQf/OA92rmgNaAYnGPsYa0J5iTd3Q7Av3loxybW
+         ngTFrkY1xBVDscdLbzhugy3px4+EqsVs7akTgAvwWmZ6GVOcXDc7OIFgWXvbaHII+Hxl
+         efdI0ziCRSffNkim/qVrFqf0gzlYGQzhghjDayGOOr99120kD+SsFWLEfPIpI0AtkaCh
+         JS6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787062568; x=1787667368;
+        d=1e100.net; s=20251104; t=1787063509; x=1787668309;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=wBF9nUt5CrcYIqX2i8K8X50NNea0WojETI06s9K0YQ0=;
-        b=DNSio/DUy+D1yz130M7FGcpi733bPoIdzUzINNiaVAal4EHtscALB3bzu4EhzIAY0G
-         6K0u0UJtcPZwHP+I+W9JLNRRSJyKYwOYCvDnRBX+94Ye0LfXebF5icHP3SXuF3Df5DkG
-         MyHDZM05sEZwQzBd8TUgnovl4qQN6fMxyfV7zZNiLwj+blLZ7UVvaPs4PHLbXVuXSg3O
-         uoFn4bmcRiQ7piPI093ItX08h3cooPDUvF4awn2vAVA47gOASUUVWpb/7hZgiimyTrv5
-         iHkN0RWQJI/sicUN2TH+2hrRwOR8eX2GvZ6Zu8CtAR8mHGIi1bki7+EvBENUUa6nlzwC
-         /Nzw==
-X-Forwarded-Encrypted: i=1; AHgh+Rq30f6TVdlA152RMR57rc0gfWPgzIAA34TlKlkTQ5xXV4Xy7/Xktufe/5qc4R+cHdGOJM+tHK6wPq4=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwsC1A1lsaD2AGrb0knp9JbNxiRA6P4JPL0ICIUHHK5WxczXjiB
-	DHCYm0oxgXNtO56qmVrcLtTeMpqYGOFZgYN+VkrvASTsejLpcf6fc6tLTqVB30Mr0A==
-X-Gm-Gg: AR+sD10T30CZRYolZywhXr4YFBrMSfRvuwEhiknDUVk3Dm1v3qGtkeqzXnfLGpWzTDQ
-	GYJL9vhAIGoc3fG1coQjYu8cUWfPr0q+/tmAqVFOeskx8A7F5P9uC3wj7G1wQw0wRo3lPhx2WQY
-	SuYhwoVPJn+6tTsCT0KJK8KghIOq2XUUaxlAHsumAXzJ3ghDWpFeXyuelRgZRT/BxW6a/Nemcqm
-	8n1XJWc4csYtmx+h69zjRoVxtTgQOD/3DPtO7RtlrWPaRmQm6SRHNpuWjCUB2KelzS08ekDPYYD
-	kzb1lSagvSpwN5Un4uWe2arkxg6appEBLzkTgIu1XyT/aLSNaUvQVuLz0wYTNx/pIqQKjtumfOd
-	uJyeKW6MP02qafgaGhaixjhDId6kLQRvNDJ1bE2g2zOjMtFN0J8/hKfG/jLTQ8YHWog3xK6t4LL
-	tYZbV0wRX0ygFwaxonip7rNBxyiXVFWkq3h6TblWaOfB9fuvhnLQFeqscJ2Vk3Y4YjQkLlfHWIm
-	fG7znh7lF+fIYogsqWUP5RGGNsCtCvUXpud1UZge72LgFhGy45K
-X-Received: by 2002:a05:600c:8509:b0:496:c9cd:e7ab with SMTP id 5b1f17b1804b1-499879337acmr611677535e9.5.1787062567283;
-        Tue, 18 Aug 2026 07:16:07 -0700 (PDT)
-Message-ID: <35b8afb4-dec6-4110-892f-c2202c9066b8@suse.com>
-Date: Tue, 18 Aug 2026 16:16:05 +0200
+        bh=CfCofe3KyBoJCN3PFQ3H3q6o9j9MJAxwTJdM1Z5zqAY=;
+        b=tEISC+cUhmB3QFMmWsd4xHvxq6WUBdVvm1QzPiSd6CYPznfj2rJGgkLjMS/SArY6RW
+         8p4TM8kbnr8ZU3ljacfqlatkJ00wjx8qhErOsnSx/ZW/C6zTohm3sM0DEu+IzaIn1Ph6
+         VUIJPbNDWtifXvZxcoIluYN6PBupiM/wCmyGWP8iWnKr4qcu3ZuMoTpqBreSgBmklcdf
+         z/JuMFskZWYXr0F7a/oxjjqjRDl8b8L0B24bYxd2b9n1so6DCRCjE2mDJqYJwjyU+f47
+         7kI6D0hVFDy/HyR2tsM7sT/WPP5gVX8D7xeWc56FZaflMfnaED4qatbjOsfR+oLoCwwh
+         AS5w==
+X-Forwarded-Encrypted: i=1; AHgh+RoV2Pw0QRGLSJ/NN/rQ0aT7vOsav5lE20IopBatbNudIFBY6iQdIeXprZSaizwoRIXPNYwxL8UJOSk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzSqRjfqjUklvfO6iIHpWONKUhV+LWhLc7ijWvP9zp9IpLi2bmP
+	V0kUrh7hdQzyqj8Jug/VxIGpB9zecNrSk0VAPW+WCk9E9SiXqyNN+SVCsFeTvqbIiA==
+X-Gm-Gg: AR+sD10oZ+KJT95P3UZdqhbyjznmukvpQ+/LzltF+Cpro2lNlRxFg+1VQQVk6sAck+I
+	Mlq+NG6NNZte6YlknCCmYlI7RwjiJ6cD815tUClu0yxa5rRGpriBZKHRI60fI4FJ22iBBV00PFG
+	Ny9UbN/n+T6hgObCmRt3A5Ff3m6Ugz1UzMBc675M5S7I7prI5KInI8xkI2sb++RCVQg1GWtDaNN
+	dP06rbIN8bQUuCztW9NWraWSmOX3s2v///eCLl2z5Wj/fi+ic6wcFcRrFTN+4wonRrZnw5W/oTM
+	jFHxTkY58/2hicgFDFfhKR/Jd+0NqYLt8y2QzJ22K7bhbbQIOKEmBOgLu+EP10W8c5y9teyOQml
+	GllqmQ/3MJwVJYun+0uVZ2YAJyYzhcbNA+42TWn4c2T3PH4+pBEaXsksMcnbCka45oIUiPovRhB
+	hZGM8OYV63U3jQeC7s1uowIMa04J36QdPIwf+egghMZIdc+mmrKafV+M2kOHnnCnvywL9s3Rw4b
+	It1/KCRrLFjdRAAVWn5O524ITMJGYTDVZO2LOzxxj065D3sRBVJ
+X-Received: by 2002:a05:6000:2881:b0:47f:7fe0:a287 with SMTP id ffacd0b85a97d-482aaa5fe04mr10184190f8f.2.1787063509508;
+        Tue, 18 Aug 2026 07:31:49 -0700 (PDT)
+Message-ID: <5fa222d8-af04-4b1a-a457-ee5004ace484@suse.com>
+Date: Tue, 18 Aug 2026 16:31:48 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 13/17] xen/riscv: add unprivileged guest memory read
- helper
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
- <79cfa875e9dfc14bbcad948c20f4008b03d11f72.1784560663.git.oleksii.kurochko@gmail.com>
- <71a226b9-dc03-4a69-beb2-5c4c03b8d09b@suse.com>
- <3c0d33bd-ebab-48df-9ddf-a508e5bed5fe@gmail.com>
- <2ca3f802-bf93-4714-8a9b-e33ab0c89300@suse.com>
- <d94bd15a-bf99-4df5-9dac-1fe0fcb77cfc@gmail.com>
- <5ee55d9c-d0f8-41cc-8d4e-3ba6c08d7506@suse.com>
- <6959b0e1-3059-4d3b-baa1-28dc0d761f9e@gmail.com>
+Subject: Re: [PATCH] x86/ucode: Remove MICROCODE_UPDATE_TIMEOUT and associated
+ panic()
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20260818130738.1911850-1-andrew.cooper3@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -142,136 +129,43 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <6959b0e1-3059-4d3b-baa1-28dc0d761f9e@gmail.com>
+In-Reply-To: <20260818130738.1911850-1-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1787062568-6D4D74E9-EB8E14E3/0/0
+X-purgate-ID: tlsNG-720697/1787063510-F34BE2AC-BDC93B56/0/0
 X-purgate-type: clean
-X-purgate-size: 5223
+X-purgate-size: 1557
 
-On 18.08.2026 15:38, Oleksii Kurochko wrote:
-> 
-> 
-> On 8/18/26 12:43 PM, Jan Beulich wrote:
->> On 18.08.2026 12:27, Oleksii Kurochko wrote:
->>> On 8/18/26 10:17 AM, Jan Beulich wrote:
->>>> On 17.08.2026 17:36, Oleksii Kurochko wrote:
->>>>> On 8/12/26 5:30 PM, Jan Beulich wrote:
->>>>>> On 20.07.2026 18:02, Oleksii Kurochko wrote:
->>>>>>> +    if ( read_insn )
->>>>>>> +    {
->>>>>>> +        asm volatile ( "\n"
->>>>>>> +            "1:\n"
->>>>>>> +            "   hlvx.hu %[val], (%[addr])\n"
->>>>>>> +            ASM_EXTABLE_TRAP_INFO(1b, 3f, %[ti])
->>>>>>> +            "   andi %[tmp], %[val], 3\n"
->>>>>>> +            "   addi %[tmp], %[tmp], -3\n"
->>>>>>> +            "   bne %[tmp], zero, 3f\n"
->>>>>>> +            "   addi %[addr], %[addr], 2\n"
->>>>>>> +            "\n"
->>>>>>> +            "2:\n"
->>>>>>> +            "   hlvx.hu %[tmp], (%[addr])\n"
->>>>>>> +            ASM_EXTABLE_TRAP_INFO(2b, 3f, %[ti])
->>>>>>> +            "   sll %[tmp], %[tmp], 16\n"
->>>>>>> +            "   add %[val], %[val], %[tmp]\n"
->>>>>>> +            "3:\n"
->>>>>>> +        : [val] "=&r" (val), [tmp] "=&r" (tmp), [addr] "+&r" (guest_addr)
->>>>>>> +        : [ti] "r" (trap) : "memory" );
->>>>>>
->>>>>> You want to tell the compiler that *trap is written. Instead I don't see
->>>>>> why a memory clobber would be needed: You access a different address space,
->>>>>> i.e. nothing the compiler can make any assumptions about.
->>>>>
->>>>> memory clobber tells the compiler that the assembly code performs memory
->>>>> reads or writes to items other than those listed in the input and output
->>>>> operands and so I don't tell here that *trap will be changed.
->>>>>
->>>>> Why this understanding is wrong?
->>>>
->>>> You can (ab)use "memory" for that purpose, but why would you when you can
->>>> properly express the operand? All that achieves is the compiler possibly
->>>> having to emit less efficient code.
->>>
->>> Then I will use the option mentioned ...
->>>
->>>>
->>>>> Alternative, I think, could be:
->>>>>            : [val] "+r" (val), "+m" (*trap)
->>>>>            : [addr] "r" (guest_addr), [ti] "r" (trap) );
->>>>> And then memory clobber could be dropped.
->>>
->>> ... here.
->>>
->>> Probably I have to return '[addr] "r" (guest_addr)' to output and use
->>> +&r constraint.
->>>
->>>>>> You also need to take precautions for not returning an uninitialized "val".
->>>>>> I think the variable wants initializing (perhaps to ~0) and "+r" wants
->>>>>> using as constraint. (Afaik & isn't necessary to use together with +.)
->>>>>
->>>>> I agree with '+' if we will initialize val with some value.
->>>>>
->>>>> Regarding, '&' my understanding is that I have to use it always when
->>>>
->>>> When what exactly? If an operand is both input and output, how could the
->>>> compiler re-use the (generally) register for any further purpose? '&'
->>>> indicates to the compiler that it may not use the register used for an
->>>> output to hold some input's value, as that value may be lost by the time
->>>> the input is actually consumed.
->>>
->>> But what is written in the gcc doc:
->>>
->>> & - Means (in a particular alternative) that this operand is an
->>> earlyclobber operand, which is written before the instruction is
->>> finished using the input operands.
->>>
->>> What sounds like if an operand (val) in our case is written before the
->>> instruction which using the input operands (and after the write
->>> instuction which writes val there are instructions which are using input
->>> operands) it is needed to have &.
->>
->> And that's indeed relevant, just not here. My crucial earlier question was:
->> "If an operand is both input and output, how could the compiler re-use the
->> (generally) register for any further purpose?" There is a case where the
->> answer to this is not "it can't". In your case all inputs are distinct; in
->> e.g. (using x86 assembly, sorry):
->>
->> int test(int i, int j) {
->> 	asm("nop %0; nop %1" : "+r" (i) : "r" (i));
->> 	asm("cmc; nop %0; nop %1" : "+&r" (j) : "r" (j));
->>
->> 	return i + j;
->> }
->>
->> using "+&r" indeed makes a difference.
-> 
-> I think it is clear when operands are equal. but what about the case 
-> when they are different in  first  case:
-> ...
->    asm("nop %0; nop %1" : "+r" (i) : "r" (j));
-> ...
-> 
-> What guarantees that i and j will be in different registers?
+On 18.08.2026 15:07, Andrew Cooper wrote:
+> Panicing in the case of a timeout turns out to be about the worst possible
+> action Xen can take.  It leaves all other APs waiting on the condition
+> variable, some in NMI context.  As a result, they fail to be shot down and
+> dump state for kexec crash analysis.
 
-They can both be in the same register only if the compiler sees respective
-call sites, and can determine that the same value is passed for i and j.
-This ...
+At the same time there likely isn't much to be learned from a kexec dump, as
+the source of the issue is in the CPU, not in Xen.
 
-> We have the similar situation in RISC-V code of riscv_vcpu_unpriv_read():
-> 
->          : [val] "+r" (val), [tmp] "=&r" (tmp), [addr] "+r" (guest_addr),
->            "+m" (*trap)
->          : [ti] "r" (trap) );
-> 
-> With having & for val and guest_addr & guarantees that the same 
-> registers won't be re-used for ti (and so ti won't be corrupted) but 
-> without it?
+Further, this code runs with the watchdog disabled. If there's truly no
+progress anymore, how would one know from the outside whether the system is
+dead altogether vs the control CPU still kicking around?
 
-... pretty clearly is impossible in your case: val and guest_addr can't
-possibly have the same origin as trap.
+> Microcode Loading on Granite Rapids takes about 4.5s of wallclock time, far in
+> excess of the of the arbitrary 1s Xen allows.  This time is spent in the WRMSR
+> to load the blob, and there's nothing the system can do but to sit and wait.
+> Despite the delay, the system as a whole does survive.
 
-Yet to repeat what I said before, and to not needlessly continue this
-discussion, just go and use "+&r", despite that being unnecessary here.
+For this I wonder whether the log message issues after 1 sec is adequate. If
+we know things can take this long, wouldn't we better issue the log message
+no earlier than, say, 5s * nr_sockets?
+
+> Microcode loading occures through admin operation only, so get rid of the
+> timeout completely.  It does nothing but make a bad sitaution worse.
+
+Worse when taking one perspective, yes, yet a silent hang also is worse than
+a panic() telling you what was wrong.
+
+This is a tough one, with - likely - no really good options. And establishing
+what's "least bad" may also be difficult.
 
 Jan
 
