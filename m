@@ -4,60 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42AA9C5DF74
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 13:30:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1394175.1633009 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D3A1C5DF7D
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 13:36:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1394183.1633019 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwJsx-00069S-4J; Tue, 18 Aug 2026 13:29:47 +0000
+	id 1wwJyc-0007lG-Px; Tue, 18 Aug 2026 13:35:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1394175.1633009; Tue, 18 Aug 2026 13:29:47 +0000
+Received: by outflank-mailman (output) from mailman id 1394183.1633019; Tue, 18 Aug 2026 13:35:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwJsx-00069L-1E; Tue, 18 Aug 2026 13:29:47 +0000
-Received: by outflank-mailman (input) for mailman id 1394175;
- Tue, 18 Aug 2026 13:29:46 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wwJyc-0007l9-Lc; Tue, 18 Aug 2026 13:35:38 +0000
+Received: by outflank-mailman (input) for mailman id 1394183;
+ Tue, 18 Aug 2026 13:35:37 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Bertrand.Marquis@arm.com>) id 1wwJsw-00069F-1s
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 13:29:46 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1wwJyb-0007l3-Hx
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 13:35:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwJsu-009BaM-OX
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 15:29:44 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wwJya-00Bppu-Uh
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 15:35:36 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Bertrand.Marquis@arm.com>)
- id 6a845e3a-bab6-0a2a0a5309dd-0a2a45069ab2-18
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 15:29:44 +0200
-Received: from [52.101.72.8]
- (helo=AM0PR02CU008.outbound.protection.outlook.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Bertrand.Marquis@arm.com>)
- id 6a845e47-195a-0a2a45060019-3465480879a1-3
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 15:29:44 +0200
-Received: from AM0PR10CA0008.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:208:17c::18)
- by PAVPR08MB9331.eurprd08.prod.outlook.com (2603:10a6:102:303::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.17; Tue, 18 Aug
- 2026 13:29:30 +0000
-Received: from AM2PEPF0001C716.eurprd05.prod.outlook.com
- (2603:10a6:208:17c:cafe::a5) by AM0PR10CA0008.outlook.office365.com
- (2603:10a6:208:17c::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.8 via Frontend Transport; Tue, 18
- Aug 2026 13:29:30 +0000
-Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- AM2PEPF0001C716.mail.protection.outlook.com (10.167.16.186) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.3
- via Frontend Transport; Tue, 18 Aug 2026 13:29:30 +0000
-Received: from PR3PR08MB5593.eurprd08.prod.outlook.com (2603:10a6:102:84::13)
- by PAWPR08MB10946.eurprd08.prod.outlook.com (2603:10a6:102:46d::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.17; Tue, 18 Aug
- 2026 13:28:56 +0000
-Received: from PR3PR08MB5593.eurprd08.prod.outlook.com
- ([fe80::aae1:6871:afc4:620e]) by PR3PR08MB5593.eurprd08.prod.outlook.com
- ([fe80::aae1:6871:afc4:620e%6]) with mapi id 15.21.0339.007; Tue, 18 Aug 2026
- 13:28:56 +0000
+ (envelope-from <marcandre.lureau@redhat.com>)
+ id 6a845fa8-e002-0a2a0a5209dd-0a2a45058bcc-0
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 15:35:36 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <marcandre.lureau@redhat.com>)
+ id 6a845fa7-4cb1-0a2a45050019-aa0a817cdb97-3
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 15:35:36 +0200
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-655-0LsnsvebM_iuqnqKt0D47w-1; Tue,
+ 18 Aug 2026 09:35:21 -0400
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 2A1FC18011C5; Tue, 18 Aug 2026 13:35:14 +0000 (UTC)
+Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.116])
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id D3927180034F; Tue, 18 Aug 2026 13:35:10 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -69,191 +61,341 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=OjYYVHB8OBpR5dlVXVQFy7QOSvVZ7ZhRLMXmAWJ1WbYoEAjRFRmzKrBdHV3HYMSbu+z1EE5JAehFUYwIRRrpyODN5LQt37XuFqvKWeINeweSs+3kT87mAt31VDJX6OwivL27CT1gQ32UCuCRnguK3Utu6wM9fOyl8O6czz4sPPFHneloJ6X025oyvsPV2jATmFjXNb7EBPsxzAYLrHLeo9HpN5kgzoWrKlwUg5pbdV6IqX5l4+TYc6/Yzbvr4t75+u3Su1Xon5tsc+hnUQY5y6CGCJyr3f7gDAS2UDrTLRcttkIBj/7yXpgDPk895zrDNSQMuOSBaGQF7vhqAsybrw==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vs3t465oTgOJ/gmIgHwch4LThzCGUM61rplAOjWbpkI=;
- b=ZINnH2K6N2eDitB6czqg/6kGGZ+Dv96v8IRg7KYOTxtlQzx2NDlqBCi61RDeWv6WcRhjOD465HLGhp60cot2BucF5nHyWZJmW2hysCpnmshFzVTtTWR6lbxSf5Rsy43pjBFUSoKfUKiWZ56NzS4sFdT0f8yubz3VqZiIMJGbTfe2k4uVdzSuVGBhFpmk8TH3RFHSWE54rzngTcQ6get0ePWDjCo7oUr6LbxsQ6ICaBCuf807I1vhe1yr+21q1Zr3ASxAwGLKtC58Xb+TPWhVL5MRx5sfNWUGDZFzwKyiR+hZolhkZk9AinGopWpHhKlKQxvF1ZR8Jjbi+Upf7UIWog==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 4.158.2.129) smtp.rcpttodomain=citrix.com smtp.mailfrom=arm.com; dmarc=pass
- (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
- (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vs3t465oTgOJ/gmIgHwch4LThzCGUM61rplAOjWbpkI=;
- b=FxeAeNjF5+QwQgdjD2VD/qU0UUi12kmY7gKd5xwxsitwGuQqIhvm213St6HQIdWCeZ982zh87Dv+R39SowVIcYx9t4HsYcz4k0YQnJfFel9zhQLnCaojHHwDR8b/LayVOkkjVZLXR+lO/TzCKPBiBxbGzioE/dU6gfYpYbfiqSY=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
- client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eeViMAdKINJPIeHAZD/vXuTjqFcas8JGILz87WGERhDmdqg6nbGgwj/u6BQ86ZnbjKDFseUhPlhQQWjTMaFdfp4ShbQVaMZmcZjlaCJx+rNpqQa12uYf3fRfn1hl37Lvg8RsXyOHENlUqnmhQTR1cAWaPifxan8zyfA+UCH/O647J4ms6OromY/oQEjZFYHzJ1ITbVUrh5p188W8iMU1A0fQJ5el7HxZwWdOEs2sshMqeGAWPg5OyCmMOZtMxdSxeobvVQvtNB48qJHKgw9E6adNmL/f4/PkvGmQetIlJoDxG9iqYznrbA7ivzvhHuMCSCYyM465aRqUWvA2SykmQQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vs3t465oTgOJ/gmIgHwch4LThzCGUM61rplAOjWbpkI=;
- b=pBPqRsXoHpX+ZkWVrx6unGGQczctAYkiM7jbPCJ1Prwp9+0/EtESsBt7lIIrJ5ABZghmR6eiUM/r9yAq5B6eX3ZSRL8zFxQf2r2wgJRYpAj2qJPU+PhmFYtmnF43DRJr1JIsw7Fk3nTCRvScPBGGzmlt5aCSORHKmcv9gYtudtVg1/0pbR2l6dm7QmhBnKk5sBmE2k6AjKK2QiJ3hjONZ2hvBxq7NPGKV4IVddg1EZlpGTbjibTY8NZZOyNcntGFhgbQWbcgm2c40tBijFDB4cj7ZtHXeE+QHo4zGLexTMVdqoktSui3rGuZc7mhTxl/wnSzfAon3QAjK8qqTyYbnA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vs3t465oTgOJ/gmIgHwch4LThzCGUM61rplAOjWbpkI=;
- b=FxeAeNjF5+QwQgdjD2VD/qU0UUi12kmY7gKd5xwxsitwGuQqIhvm213St6HQIdWCeZ982zh87Dv+R39SowVIcYx9t4HsYcz4k0YQnJfFel9zhQLnCaojHHwDR8b/LayVOkkjVZLXR+lO/TzCKPBiBxbGzioE/dU6gfYpYbfiqSY=
-From: Bertrand Marquis <Bertrand.Marquis@arm.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Jens Wiklander
-	<jenswi@kernel.org>, Stefano Stabellini <sstabellini@kernel.org>, Julien
- Grall <julien@xen.org>, Michal Orzel <michal.orzel@amd.com>
-Subject: Re: [PATCH] xen/arm: ffa: Harden SEND2 against invented loads
-Thread-Topic: [PATCH] xen/arm: ffa: Harden SEND2 against invented loads
-Thread-Index: AQHdLwt9ezGusG27iE6LBf89mJZswbajv3sAgAANaoA=
-Date: Tue, 18 Aug 2026 13:28:55 +0000
-Message-ID: <7F03E2BE-44A0-41E9-850C-8480CA0C8F0D@arm.com>
-References:
- <1b483ce633bfa7d304cb78458ce029370691f00c.1787055320.git.bertrand.marquis@arm.com>
- <d739485a-72cc-4518-afa9-8d2692a225ae@citrix.com>
-In-Reply-To: <d739485a-72cc-4518-afa9-8d2692a225ae@citrix.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: Apple Mail (2.3864.600.51.1.1)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic:
-	PR3PR08MB5593:EE_|PAWPR08MB10946:EE_|AM2PEPF0001C716:EE_|PAVPR08MB9331:EE_
-X-MS-Office365-Filtering-Correlation-Id: d2c55618-033e-4496-d50c-08defd2cbbf7
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted:
- BCL:0;ARA:13230040|23010399003|1800799024|376014|366016|38070700021|10067099003|4143699003|11063799006|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info-Original:
- JMeLCeNJoiZH1Q0WUZ57p02tL/+tDvCd1VcL/z87qcX/OfR141BfCCu6abULGcBzA+BtSdGI3dsHHmIEvVhLif02hI+HIN5Aovf8Fq8vjy8lq46j552c2TorT+c9Md3jZwZbZwrYEqSPWFSb6QRoZORBDf4+/Q+JfThULc7UXJFv67uK6kBSQBg0+MH0kujHT6v9ppScHGPV62AceIFq5qqd3yAQarxJ9aUcrsjmzqrBVXG/IoLISAV5ppVO3xwQeSXTZaum49BBIXozpKDelVhjMrCj2Q7T1cJ3AqatkPO55AMmxzfHomd2mmzr6lCgcts8RM/JKEGdEIBrFYTpYfG3xEnxyenNjksNQPTrEOqdlVAWgFIHEKGQfsB6Rz6alSxYSsWex6rj91eJgGDMi5FhwW75CD6ZQrLBw7fR3BCIx/5Vs9NdEdCyboW12kzqSxVUxFqWJr8sNAq9+9DmpRwWgmwX7GWeTX0d7IZTmtDNiT8FnQkJaMctUHSkm2F2FsKVfO/avKPYPsipoauubU27WRIACQm9CovYSrxmLBKH9zxMYkOgz4PsdsDzSG5dE7jAfcZB0Hscq7dC2Zc00ZYjn2Oq/sMzROW9tgzh+VCJdrS/GDsN2i54VHOG8khP3MMvQcuZlmubR1KjOIXz1rHs+FpQvW3bSDesvrmDVn4wo8u1uMtp1xi964Z12G/W9jetxiLDFFp+Wa01C2NIwzPs5x33ZWAt8LmWfPxq61Q=
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PR3PR08MB5593.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(38070700021)(10067099003)(4143699003)(11063799006)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <21552626E6253245B95B7B2D0DA10A9C@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1787060135;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=NcMcfYcJnP5pSepZPUlbKT/IGaqv3YNUpR9si4mBH+Q=;
+	b=UsgJ3vcDg/jEc6Kj6D4UGh+sCDOXeYpgxSAkwBmWKQ41ToaP8lJgQ9Xhd1vo46Jk+sCc0t
+	hZ7kLwxdH2NlhQgVerTB6lQ1hXJXUnHGw7aQqTjYOHh1YsHtva/Z2S7y2ricPgCZDHlXan
+	ZolPkL8MhmOaKx2IocDUemZgQvh/yYQ=
+X-MC-Unique: 0LsnsvebM_iuqnqKt0D47w-1
+X-Mimecast-MFC-AGG-ID: 0LsnsvebM_iuqnqKt0D47w_1787060115
+From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+Date: Tue, 18 Aug 2026 17:29:29 +0400
+Subject: [PATCH v3 63/74] hw: convert device-local PropertyInfo definitions
+ to use qapi_type
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked:
- o5zc88oRZQNectCg2jznTnOn3veyJTT2PnQeGejvhRwIpOp20xDDtbzCbqX0UUVMa1Xhf6nerEg6Pl9Sgl6MOReK9bcCGKifiDY3YiNfDp34QsvSo4wJ/WCzPvoh18VTb31ITU94QGXvMhY9FBnPpk+cGfv4RP1aez9Ndcw4WkxpXH758bJMNVcpsh0lekLeMm5hvIjZfF7Y4ni7BjpFDEChRGB2wuhB/sondVHReLKrPNomQ+ZUrxwNkEwMDUrEIFRlL7FaEmsUEUT747a2oCMns2ICEdS1MLIAPYkXGerGacAzlcADl1tmOYgfR9SOaOV1qRwr6IjLBk4quYM1ig==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR08MB10946
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- AM2PEPF0001C716.eurprd05.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	acf944ce-c3c9-4b3d-8978-08defd2ca749
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|82310400026|36860700016|35042699022|1800799024|23010399003|14060799003|22082099003|18002099003|11063799006|56012099006|4143699003|10067099003;
-X-Microsoft-Antispam-Message-Info:
-	jsA8c0KtAZdOw07RgJSJ3WMx+Th1Yfg/cm9T335+xQN1TB3nTnTORNe53Vf10W0eDJkM7qNStelxj2JzDJfb+iPvBmDZtA5dLJy34zaDk+mnfo+q9Af41Hw5tadZGaDsHrUfZPntPOFa5cTMVXQJfk9E12fcSRSm8YuovHqNX6P/kvRHOumfFa6PIeCJRSfcSrtLQDOFhsc27ywbzLayCJ8VQAKCYp7Wu6L+7Uvi90G1BILHVoDQbEFvr3JvOv8bSRt0oJ4sxQJ7obeLAY2R78VPRchn4//PghLFnnHAQPQgLoEbX66tiMldFuD34HbhO8kHBwom302RL68TwVbq0R72VfUg04j5De8EpO7fffxtd1/u/w/sA7UTzjUB+OiFUFsZtO0G5LpOxRTkYM0rZa0EOZMSSnJZAVAV58H83x0UVq/FlN8/MtPcbgQNqBaFVbpsZEDhBGbFkOCXDl4sKJ1MMcdXPZjQUVHeQhV87Ck9XvXqQtVkWoiDaH2YYw5+LuXXklw0hQKgICVrOkhgWnTF7bttCJEthZtYtbKekEoiKvziJ1bl68K/LhQ1jrNIDYhM6kmeXksscYZGHv/lBlg3sea6z2pRH6MrHOjkTa3zM7jCrdAStqGtl94KljXfHTIriGdCFvgrpPpK5FrKbqq9K+9PlxxUKY3WFJrotq2fudCPRGKrbJctzWCKdQ0/WzrX5b6npnnjOkFtzwf3Nw==
-X-Forefront-Antispam-Report:
-	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700016)(35042699022)(1800799024)(23010399003)(14060799003)(22082099003)(18002099003)(11063799006)(56012099006)(4143699003)(10067099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	9iHGGkLIVmAlRk3JVq3dGypE7bXoQpv7G5emIzh7wShh0eWp/h7O7+x012VGZXhKyT+A2Hv1UGMtkGMzt7QrYOeBcd0tDAdn70VxdrmQodLNb6ZFTw9nNEYCEbsKQZ/sBW+TMFMp3HIoiXgWjJKROmvoiILIRJg5J/STEQXqTlpc8bhkXataWFYFQn3QD+Qhi/A5qhjRToLK1NBk8SburSYfl5+8ymLMwALyGKT7rM1MdCHob9CnNO2PpiwVqAAHft0imO9Kgtxs3nwQxPVOE74Uz7Q9095DCeYPpwmthD+Yk2vM7WPVdmM3eT50WbUxfT4knHiX3L0Hh5n1MUJsEm53cmQWnSSd7rytjfRWRVI6hQQOi7ZD3ZfXHNXcT9C71DB52YA6KqdViLheJIl2kOxfGdttLnuqTmNbbjz2HoKR9X97oPPaprDtYVrCYLLd
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2026 13:29:30.6206
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d2c55618-033e-4496-d50c-08defd2cbbf7
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	AM2PEPF0001C716.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR08MB9331
-X-purgate-ID: tlsNG-16d1c6/1787059784-FE67277B-8B2B9373/0/0
+Message-Id: <20260818-qom-qapi-v3-63-24b8bbbe3d86@redhat.com>
+References: <20260818-qom-qapi-v3-0-24b8bbbe3d86@redhat.com>
+In-Reply-To: <20260818-qom-qapi-v3-0-24b8bbbe3d86@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Markus Armbruster <armbru@redhat.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>, 
+ Michael Roth <michael.roth@amd.com>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Anthony PERARD <anthony@xenproject.org>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>, 
+ Phil Dennis-Jordan <phil@philjordan.eu>, 
+ Alistair Francis <alistair@alistair23.me>, 
+ Peter Maydell <peter.maydell@linaro.org>, Keith Busch <kbusch@kernel.org>, 
+ Klaus Jensen <its@irrelevant.dk>, Jesper Devantier <foss@defmacro.it>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Halil Pasic <pasic@linux.ibm.com>, 
+ Christian Borntraeger <borntraeger@linux.ibm.com>, 
+ Eric Farman <farman@linux.ibm.com>, Farhan Ali <alifm@linux.ibm.com>, 
+ Matthew Rosato <mjrosato@linux.ibm.com>, Cornelia Huck <cohuck@redhat.com>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Ilya Leoshkevich <iii@linux.ibm.com>, David Hildenbrand <david@kernel.org>, 
+ Alex Williamson <alex@shazbot.org>, 
+ =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@redhat.com>, 
+ xen-devel@lists.xenproject.org, qemu-block@nongnu.org, qemu-arm@nongnu.org, 
+ qemu-s390x@nongnu.org
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8761;
+ i=marcandre.lureau@redhat.com; h=from:subject:message-id;
+ bh=M1ZK58SCDRwPvhT0ecKJ8jMYH52yLNqHGDUugt8emrA=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqhF9z4CkZw2HKM6dzp+UwaFJyFhTU2u5rvrSYf
+ BXDoaKYjlqJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCaoRfcwAKCRDa6OEJdZac
+ 5TOdD/0Q9eYTxC1cXJssQBTteyZwUW7EKCWsS/xXRovKEx+Kktno7QRX7UT2fLJQQIvHlkwM+LH
+ lTxEFpG1pm45KOEQgHwxUP2e7clXlV5ri74lCFTIsYgXuM0wWqJ9FUXZNpM03icIJeVql1Bev9w
+ VcgWpRv8aeBjn0jRvYSyA1qY+nRfUd8KT9SR/9elfGTCFA2LWnu1iFDi2pm42I6+PGmdUrDIn9L
+ eBxdg5XNFKSYJ6iuNNFyc+wn4CAgXD6t4SF1c7YbZPUMEahGoXHtNN7Dyh55F1kmPAPJXlU60Ly
+ QNs7ECUtW+o7mOC+7c07FYFgZGwAtXzgZRP1qrYFaBq3rkNvWTDHz4YIE6HN8n3WzLm0HjJJaLJ
+ /xG/hOfgKpwiEYKhsyZnaWRAugrzFMy3HuAjXNzenokQYpPZbEbbEkcX7ThHth5w/+BBs/53IF1
+ oMoicdK6lxhlpRpcARnNOH2vgZhUcgQj914/RpTsKKBceYwvG3/w5JRf3nBRlDrsXahjo9BenyA
+ Q+theYaAaOmLZ9BBDU9bKh6U5pOZOaWGiQiDEIO+hc0dQXibHwJmO/NvuUDtDO2VwR8GWGaym9B
+ 2tiD5+1HFd7vv5FAdTQR3sdBm0q2neoHk9GwmWJARYpW9nEOxJUx180AQ9xYvW0vr+PRvMknpHD
+ 0URkHEcRSEyYjmQ==
+X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
+ fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: whWz0eEuS4WCv6OXIQ8Vz9HeXyeCINJahOT99l2Qw-M_1787060115
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c201ff/1787060136-F48A62A1-FCE76BB9/0/0
 X-purgate-type: clean
-X-purgate-size: 2993
+X-purgate-size: 8763
 
-Hi Andrew,
+Mechanical conversion of PropertyInfo definitions in device-specific
+files, replacing .type string with .qapi_type pointer to the
+corresponding QAPITypeInfo. Except "display_mode" for apple-gfx, which
+is a string of a specific format.
 
-> On 18 Aug 2026, at 14:40, Andrew Cooper <andrew.cooper3@citrix.com> wrote=
-:
->=20
-> On 18/08/2026 1:16 pm, Bertrand Marquis wrote:
->> Research into compiler-invented loads has flagged FFA_MSG_SEND2 as a
->> possible vulnerability.
->>=20
->> ffa_handle_msg_send2() copies the message header from the guest-writable
->> TX buffer before validating and using its fields. A plain structure copy
->> does not prevent the compiler from re-deriving later field accesses from
->> the live TX mapping.
->>=20
->> For VM-to-VM messages, msg_offset and msg_size are validated against the
->> source and destination buffers, then used to copy the payload. If a
->> sibling vCPU changes the header and the compiler reloads either field,
->> the checked and used values can differ. This can cause an out-of-bounds
->> read from the sender's TX buffer or an out-of-bounds write into the
->> receiver's RX buffer.
->>=20
->> The cross-VM path is gated by CONFIG_FFA_VM_TO_VM, which is disabled by
->> default. The audit ranks the likelihood of such a reload as low, but the
->> C semantics do not guarantee that later accesses use the stack copy.
->>=20
->> Add a compiler barrier immediately after copying the header so that
->> validation and use consume the same snapshot.
->>=20
->> Link: https://github.com/xoreaxeaxeax/schrodingers-toctou/blob/main/obse=
-rver-effect/audits/audit-xen-tee-mediator-RELEASE-4.21.1.md#tm-2--ff-a-txrx=
--buffers-ffa_shmc-ffa_msgc
->> Fixes: 98af565b1e61 ("xen/arm: ffa: Add indirect message between VM")
->> Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
->> ---
->> xen/arch/arm/tee/ffa_msg.c | 5 +++++
->> 1 file changed, 5 insertions(+)
->>=20
->> diff --git a/xen/arch/arm/tee/ffa_msg.c b/xen/arch/arm/tee/ffa_msg.c
->> index 1eadc62870f2..39f561c8237f 100644
->> --- a/xen/arch/arm/tee/ffa_msg.c
->> +++ b/xen/arch/arm/tee/ffa_msg.c
->> @@ -257,6 +257,11 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs *=
-regs)
->>=20
->>     /* create a copy of the message header */
->>     memcpy(&src_msg, tx_buf, sizeof(src_msg));
->> +    /*
->> +     * Make sure that "tx_buf" which is shared with the guest isn't acc=
-essed
->> +     * again after this point.
->> +     */
->> +    barrier();
->>=20
->>     src_id =3D src_msg.send_recv_id >> 16;
->>     dst_id =3D src_msg.send_recv_id & GENMASK(15,0);
->=20
-> This does look to be adequate to fix the potential issue, but you should
-> drop the ACCESS_ONCE(src_ctx->guest_vers) a little lower down.
->=20
-> With a safe copy on the stack, there's no need to further inhibit
-> optimisations around it.  In fact, it's unclear why e040b94d0fff added
-> the ACCESS_ONCE() in the first place, seeing as it was already an
-> on-stack object at the time.
+Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+---
+ hw/block/xen-block.c       | 3 ++-
+ hw/display/apple-gfx.m     | 3 ++-
+ hw/misc/xlnx-versal-trng.c | 3 ++-
+ hw/nvme/nguid.c            | 3 ++-
+ hw/nvram/xlnx-bbram.c      | 3 ++-
+ hw/nvram/xlnx-efuse.c      | 3 ++-
+ hw/pci/pci.c               | 3 ++-
+ hw/s390x/ccw-device.c      | 3 ++-
+ hw/s390x/css.c             | 5 +++--
+ hw/s390x/s390-pci-bus.c    | 3 ++-
+ hw/vfio/pci-quirks.c       | 3 ++-
+ 11 files changed, 23 insertions(+), 12 deletions(-)
 
-the ACCESS_ONCE is protecting the access to guest_vers which is not on the =
-stack
-but a value on an internal context accessed by all VMs.
+diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
+index 474c12fe4ac8..d9721c565c5f 100644
+--- a/hw/block/xen-block.c
++++ b/hw/block/xen-block.c
+@@ -29,6 +29,7 @@
+ #include "dataplane/xen-block.h"
+ #include "hw/xen/interface/io/xs_wire.h"
+ #include "trace.h"
++#include "qapi/qapi-builtin-type-infos.h"
+ 
+ #define XVDA_MAJOR 202
+ #define XVDQ_MAJOR (1 << 20)
+@@ -663,7 +664,7 @@ invalid:
+  * https://xenbits.xen.org/docs/unstable/man/xen-vbd-interface.7.html
+  */
+ static const PropertyInfo xen_block_prop_vdev = {
+-    .type  = "str",
++    .qapi_type = &str_type_info,
+     .description = "Virtual Disk specifier (d*p*/xvd*/hd*/sd*)",
+     .get = xen_block_get_vdev,
+     .set = xen_block_set_vdev,
+diff --git a/hw/display/apple-gfx.m b/hw/display/apple-gfx.m
+index be0061b9db25..77c420b30006 100644
+--- a/hw/display/apple-gfx.m
++++ b/hw/display/apple-gfx.m
+@@ -15,6 +15,7 @@
+ #include "qemu/lockable.h"
+ #include "qemu/cutils.h"
+ #include "qemu/log.h"
++#include "qapi/qapi-builtin-type-infos.h"
+ #include "qapi/visitor.h"
+ #include "qapi/error.h"
+ #include "qemu/aio-wait.h"
+@@ -871,7 +872,7 @@ static void apple_gfx_set_display_mode(Object *obj, Visitor *v,
+ }
+ 
+ const PropertyInfo qdev_prop_apple_gfx_display_mode = {
+-    .type  = "display_mode",
++    .qapi_type = &str_type_info,
+     .description =
+         "Display mode in pixels and Hertz, as <width>x<height>@<refresh-rate> "
+         "Example: 3840x2160@60",
+diff --git a/hw/misc/xlnx-versal-trng.c b/hw/misc/xlnx-versal-trng.c
+index 0584ee089e3c..97bd3c3f8475 100644
+--- a/hw/misc/xlnx-versal-trng.c
++++ b/hw/misc/xlnx-versal-trng.c
+@@ -36,6 +36,7 @@
+ #include "qapi/visitor.h"
+ #include "migration/vmstate.h"
+ #include "hw/core/qdev-properties.h"
++#include "qapi/qapi-builtin-type-infos.h"
+ 
+ #ifndef XLNX_VERSAL_TRNG_ERR_DEBUG
+ #define XLNX_VERSAL_TRNG_ERR_DEBUG 0
+@@ -662,7 +663,7 @@ static void trng_prop_fault_event_get(Object *obj, Visitor *v,
+ }
+ 
+ static const PropertyInfo trng_prop_fault_events = {
+-    .type = "uint32",
++    .qapi_type = &uint32_type_info,
+     .description = "Set to trigger TRNG fault events",
+     .set = trng_prop_fault_event_set,
+     .get = trng_prop_fault_event_get,
+diff --git a/hw/nvme/nguid.c b/hw/nvme/nguid.c
+index 4cd6fad6ac9b..6eaf90fca88e 100644
+--- a/hw/nvme/nguid.c
++++ b/hw/nvme/nguid.c
+@@ -18,6 +18,7 @@
+ #include "qapi/visitor.h"
+ #include "qemu/ctype.h"
+ #include "nvme.h"
++#include "qapi/qapi-builtin-type-infos.h"
+ 
+ #define NGUID_SEPARATOR '-'
+ 
+@@ -179,7 +180,7 @@ static void set_nguid(Object *obj, Visitor *v, const char *name, void *opaque,
+ }
+ 
+ const PropertyInfo qdev_prop_nguid = {
+-    .type  = "str",
++    .qapi_type = &str_type_info,
+     .description =
+         "NGUID or \"" NGUID_VALUE_AUTO "\" for random value",
+     .get   = get_nguid,
+diff --git a/hw/nvram/xlnx-bbram.c b/hw/nvram/xlnx-bbram.c
+index e336874bdef4..eb032ab8b9c8 100644
+--- a/hw/nvram/xlnx-bbram.c
++++ b/hw/nvram/xlnx-bbram.c
+@@ -34,6 +34,7 @@
+ #include "hw/core/qdev-properties.h"
+ #include "hw/core/qdev-properties-system.h"
+ #include "hw/nvram/xlnx-efuse.h"
++#include "qapi/qapi-builtin-type-infos.h"
+ 
+ #ifndef XLNX_BBRAM_ERR_DEBUG
+ #define XLNX_BBRAM_ERR_DEBUG 0
+@@ -486,7 +487,7 @@ static void bbram_prop_release_drive(Object *obj, const char *name,
+ }
+ 
+ static const PropertyInfo bbram_prop_drive = {
+-    .type  = "str",
++    .qapi_type = &str_type_info,
+     .description = "Node name or ID of a block device to use as BBRAM backend",
+     .realized_set_allowed = true,
+     .get = bbram_prop_get_drive,
+diff --git a/hw/nvram/xlnx-efuse.c b/hw/nvram/xlnx-efuse.c
+index 03c9fbc0d076..b1c9ee4980a0 100644
+--- a/hw/nvram/xlnx-efuse.c
++++ b/hw/nvram/xlnx-efuse.c
+@@ -34,6 +34,7 @@
+ #include "system/blockdev.h"
+ #include "hw/core/qdev-properties.h"
+ #include "hw/core/qdev-properties-system.h"
++#include "qapi/qapi-builtin-type-infos.h"
+ 
+ #define TBIT0_OFFSET     28
+ #define TBIT1_OFFSET     29
+@@ -251,7 +252,7 @@ static void efuse_prop_release_drive(Object *obj, const char *name,
+ }
+ 
+ static const PropertyInfo efuse_prop_drive = {
+-    .type  = "str",
++    .qapi_type = &str_type_info,
+     .description = "Node name or ID of a block device to use as eFUSE backend",
+     .realized_set_allowed = true,
+     .get = efuse_prop_get_drive,
+diff --git a/hw/pci/pci.c b/hw/pci/pci.c
+index be6145a90a9f..7cfe6032b915 100644
+--- a/hw/pci/pci.c
++++ b/hw/pci/pci.c
+@@ -52,6 +52,7 @@
+ #include "qapi/error.h"
+ #include "qemu/cutils.h"
+ #include "pci-internal.h"
++#include "qapi/qapi-builtin-type-infos.h"
+ 
+ #include "hw/xen/xen.h"
+ #include "hw/i386/kvm/xen_evtchn.h"
+@@ -79,7 +80,7 @@ static void prop_pci_busnr_get(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ static const PropertyInfo prop_pci_busnr = {
+-    .type = "uint8",
++    .qapi_type = &uint8_type_info,
+     .get = prop_pci_busnr_get,
+ };
+ 
+diff --git a/hw/s390x/ccw-device.c b/hw/s390x/ccw-device.c
+index 25c427327957..fd21a4346522 100644
+--- a/hw/s390x/ccw-device.c
++++ b/hw/s390x/ccw-device.c
+@@ -17,6 +17,7 @@
+ #include "qapi/visitor.h"
+ #include "qemu/ctype.h"
+ #include "qapi/error.h"
++#include "qapi/qapi-builtin-type-infos.h"
+ 
+ static void ccw_device_refill_ids(CcwDevice *dev)
+ {
+@@ -74,7 +75,7 @@ static void ccw_device_set_loadparm(Object *obj, Visitor *v,
+ }
+ 
+ const PropertyInfo ccw_loadparm = {
+-    .type  = "str",
++    .qapi_type = &str_type_info,
+     .description = "Up to 8 chars in set of [A-Za-z0-9. ] to select"
+             " a guest kernel",
+     .get = ccw_device_get_loadparm,
+diff --git a/hw/s390x/css.c b/hw/s390x/css.c
+index 3a67b6705319..152687da7820 100644
+--- a/hw/s390x/css.c
++++ b/hw/s390x/css.c
+@@ -24,6 +24,7 @@
+ #include "hw/s390x/s390-virtio-ccw.h"
+ #include "hw/s390x/s390-ccw.h"
+ #include "exec/cpu-common.h"
++#include "qapi/qapi-builtin-type-infos.h"
+ 
+ typedef struct CrwContainer {
+     CRW crw;
+@@ -2519,7 +2520,7 @@ out:
+ }
+ 
+ const PropertyInfo css_devid_propinfo = {
+-    .type = "str",
++    .qapi_type = &str_type_info,
+     .description = "Identifier of an I/O device in the channel "
+                    "subsystem, example: fe.1.23ab",
+     .get = get_css_devid,
+@@ -2527,7 +2528,7 @@ const PropertyInfo css_devid_propinfo = {
+ };
+ 
+ const PropertyInfo css_devid_ro_propinfo = {
+-    .type = "str",
++    .qapi_type = &str_type_info,
+     .description = "Read-only identifier of an I/O device in the channel "
+                    "subsystem, example: fe.1.23ab",
+     .get = get_css_devid,
+diff --git a/hw/s390x/s390-pci-bus.c b/hw/s390x/s390-pci-bus.c
+index eff980fdfe92..f77632810b76 100644
+--- a/hw/s390x/s390-pci-bus.c
++++ b/hw/s390x/s390-pci-bus.c
+@@ -33,6 +33,7 @@
+ #include "system/runstate.h"
+ 
+ #include "trace.h"
++#include "qapi/qapi-builtin-type-infos.h"
+ 
+ S390pciState *s390_get_phb(void)
+ {
+@@ -1541,7 +1542,7 @@ static void s390_pci_set_fid(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ static const PropertyInfo s390_pci_fid_propinfo = {
+-    .type = "uint32",
++    .qapi_type = &uint32_type_info,
+     .description = "zpci_fid",
+     .get = s390_pci_get_fid,
+     .set = s390_pci_set_fid,
+diff --git a/hw/vfio/pci-quirks.c b/hw/vfio/pci-quirks.c
+index c5b4f9091d49..4a3fd374a211 100644
+--- a/hw/vfio/pci-quirks.c
++++ b/hw/vfio/pci-quirks.c
+@@ -26,6 +26,7 @@
+ #include "pci.h"
+ #include "pci-quirks.h"
+ #include "trace.h"
++#include "qapi/qapi-builtin-type-infos.h"
+ 
+ /*
+  * List of device ids/vendor ids for which to disable
+@@ -1436,7 +1437,7 @@ static void set_nv_gpudirect_clique_id(Object *obj, Visitor *v,
+ }
+ 
+ const PropertyInfo qdev_prop_nv_gpudirect_clique = {
+-    .type = "uint8",
++    .qapi_type = &uint8_type_info,
+     .description = "NVIDIA GPUDirect Clique ID (0 - 15)",
+     .get = get_nv_gpudirect_clique_id,
+     .set = set_nv_gpudirect_clique_id,
 
-You probably mixed src_MSG with src_CTX ?
-
-Cheers
-Bertrand
-
->=20
-> ~Andrew
-
+-- 
+2.55.0.543.g5ebe2ebe4ea8
 
 
