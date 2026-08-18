@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D138AC5DF74
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 13:38:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1394192.1633027 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2FFEC5DF7D
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 13:58:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1394209.1633036 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwK1D-0008S6-7D; Tue, 18 Aug 2026 13:38:19 +0000
+	id 1wwKK2-0002yr-My; Tue, 18 Aug 2026 13:57:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1394192.1633027; Tue, 18 Aug 2026 13:38:19 +0000
+Received: by outflank-mailman (output) from mailman id 1394209.1633036; Tue, 18 Aug 2026 13:57:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwK1D-0008Rx-40; Tue, 18 Aug 2026 13:38:19 +0000
-Received: by outflank-mailman (input) for mailman id 1394192;
- Tue, 18 Aug 2026 13:38:17 +0000
+	id 1wwKK2-0002yk-KB; Tue, 18 Aug 2026 13:57:46 +0000
+Received: by outflank-mailman (input) for mailman id 1394209;
+ Tue, 18 Aug 2026 13:57:45 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wwK1B-0008Rr-L3
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 13:38:17 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1wwKK1-0002xA-0a
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 13:57:45 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwK1B-002cb0-1d
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 15:38:17 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wwKK0-0075pT-DY
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 15:57:44 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a846040-8faa-0a2a0a5109dd-0a2a45048e0e-36
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 15:38:17 +0200
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a846048-b57f-0a2a45040019-d1558036b431-3
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 15:38:16 +0200
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-4998590d392so48394415e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 06:38:16 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
- [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482a5a7c568sm12198942f8f.18.2026.08.18.06.38.15
+ (envelope-from <jbeulich@suse.com>)
+ id 6a8464bc-e002-0a2a0a5209dd-0a2a45019a34-46
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 15:57:40 +0200
+Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a8464d4-5984-0a2a45010019-d155802da4cf-3
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 15:57:40 +0200
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-4994c49f588so12346315e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 06:57:40 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4999d10b7f6sm131626285e9.12.2026.08.18.06.57.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Aug 2026 06:38:15 -0700 (PDT)
+ Tue, 18 Aug 2026 06:57:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,221 +53,310 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787060296; x=1787665096; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
+        d=suse.com; s=google; t=1787061460; x=1787666260; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=zhlxW4qiePznAo5gSWosjOTmBT5D8uBehTWpiIJV8lY=;
-        b=QmMM9ri0vxatAeFkgKC7fIJw/7DdFWAQLIphrjY9YeAdXG6jFlGxXMgi0bVdgxwL9S
-         wWYPuX2TMNP/WzbbzI3p3c5fXVsS/tX6P2om4Eg3Ept7SzcSsBFM4jO0t6comdJcCQbm
-         vP/YdgTHIKhfAkuJD8Ncx8TZFQqUtngO7fdSG8YKv1taBCVIb1mANIWWIyvxe55EOV1k
-         5DRiKUQMeG7VdW1xwUjss0Uz0yjlfWUE1QFFyz4dB+rrNuWxXvWc/Wv2fh24lcaKOTix
-         Uw3yya7F6QPVilm+uAPK6CIhp8tKprw6Hcj1XhAYF4134h/xozK2UgMqibrAlw1+M4vh
-         nG4g==
+        bh=cN/JhVLMabK6UpBzze+2jfLaJR/nelh/I66BaRpCVK0=;
+        b=ZFstpW0UCFNyW+DKoigJVpIycYVWMuTi1D5pKnimzcyAL5nwWji39bSx+gVGD+EdsZ
+         cP1fljsIGbVTkIyheJTjdQMv5KwSL6h90ouQWjqdRUY4f9pv/1cOuRAzzGgkZps1SPmi
+         t4CSqLSaPzeaFBdZn8qXOtucO3jzWjJxc8gKuHMt49TklFa6z9HdacnSmW0zbaNkZ4UO
+         8NHZb/11aKjTFXHpYdq9oaMDp3HhsgjZBycBL62+Z+cpWXmeQLo7V2hd86cH9r/1RRwd
+         hpSnrbfdX6mS2AVJQzIscZEz3lgqAKqS68XgiQCjV55qe5zd3LeD/pDeQ++1v06WvmJV
+         pnIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787060296; x=1787665096;
-        h=content-transfer-encoding:content-type:in-reply-to:from
+        d=1e100.net; s=20251104; t=1787061460; x=1787666260;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=zhlxW4qiePznAo5gSWosjOTmBT5D8uBehTWpiIJV8lY=;
-        b=pZiXYjRrmlnCpjzCBEuygTLPGIvXfoHGAz+Fz05qCMHI/7DYHAGuaOCtZoOYW3Qmpw
-         bwztZlCMORM9ygcN7tg5QA4kWPXIIEa4nA3Xhh6ek2VdKvtxNUw/RjVzmAP6FN4aSuVN
-         8bzDBkYiLyb/mDMAkRYTHU7owckLAGcGtm3JCI5T6GRVz8l7ZpBb1JBTplRVutE9lhRt
-         ih+3z2K3Dm4aALeuFRASlQAB3o+HeeBumBBuDdn1Pl+JWjKb0bSfk9BJYcQhy+lW+2DG
-         ZjJHMB1NZt2LzHsJxfVlTnF6XquxrJmQ+U4mqQzMX1ranmHN8N8XzZhJ5YSU+QJ96fBM
-         tPPA==
-X-Forwarded-Encrypted: i=1; AHgh+RqiFnFMFQ+kwywVPZlb1gpckFZj3TqsV2KMpLgHfH+OrF4YA3ya2TMkEybPN9M0W6qlHnoG8CTNUPg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxpyXemqRmCUS46aVpk4MAotOhwmDvTPvqiFOR0oP+icqAN9K97
-	FQJ6QicghSRqa/QN9gnwlPjv2JSOvWE/2wTTedzR/H6z5utUosRn4kVL
-X-Gm-Gg: AR+sD12/8GJSmpsgpVUyjBR5lKbeuHXYFeMT3NxXVgSLp+1+L8KYFL+f5YJOQH5jGPz
-	KCk0HmD6l3D/UoGLlXL+ndZgdPeKDO8SngznfIk1UNRuZTeadm/gePAi4YjtS06FTHgOSROf+1f
-	hDJTGjFpA8mxD09gyv/ZPfPCIUYJLM60g5iBlmzOVi/nze9ji/J5B5WfUJz0u1+VqWuZZZLU+Sj
-	W94Qdu5UZhp8VwZl+XSFhNshe7VeTP84s7oVSImLymvWvn73V0/9U79/yifNxXIottyckXIaOXx
-	MtA9vB0iMeRdiEijbfy80I3BcnFXDlVYqZIWXODAQ/PM89hptDAYCfsyn8QxbLfcwdwQkhUsdCU
-	GoCFwB3Lzp12lK6hXxdWKCtzMW9e1TMCHyXRftxAY6oqAxIw+9CKGN1QsjII8paUhXPY4SOlCnX
-	l3YA0ybO6WKXOSkP5JyzOfPDuFea1ZpNPdrmi3fitzv2OgmtJFIdTLG6pN85YUNZszPoKPDYxJ8
-	9IDshuTh70JV8HnWEBI3qwPpZVzlrEUpR0jvnFfOWA=
-X-Received: by 2002:a05:600c:848e:b0:499:8156:cd3f with SMTP id 5b1f17b1804b1-4999fb3f78bmr153120185e9.8.1787060296169;
-        Tue, 18 Aug 2026 06:38:16 -0700 (PDT)
-Message-ID: <6959b0e1-3059-4d3b-baa1-28dc0d761f9e@gmail.com>
-Date: Tue, 18 Aug 2026 15:38:14 +0200
+        bh=cN/JhVLMabK6UpBzze+2jfLaJR/nelh/I66BaRpCVK0=;
+        b=hfHD3rigbr4R7KSJFMZFZbYfxMnuWhGzOgr4VoAfz6aWkxsP6kniKIa29wEKmXh3vI
+         Gqx+zJB4o//YuJCRGcnlDnyK5lkWG9OcEsMacIhYRPyh16sM6BrJ/0YksXvcEGvHeS82
+         /KZm3e0rc3FsNyNNORenKC9SAUQ49pHMilnUX2pCJChwQOBjLCY0JdnV/wQ/SSDoQ9Cp
+         CFyfnJjjEM4xK4gxtFQJiKFiLGrI8wMV99F1ZAzFiD0let/gkKLuvtDsuygdah830uaO
+         guVc3SboRNT1w6oBipCkyqkdgUinHtISO/+lfV16kFQlZqHYy91is5mM7zrP4x8nwrMB
+         ANbg==
+X-Forwarded-Encrypted: i=1; AHgh+RqnvTr6NapJasmAIjkwQU3qIVl1bX1Zlsf9rRKvldC4Ypq15qV9ZoPO/RNvdbHQeqJjJ3owIwENo6A=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yy1hHOpQZc+KSvmDGmkiKvOOyR7V7v2l75thldrzxaocBDMHINv
+	ilm2WIbvnOp8NmlZWntLEghUiquINLKyOXJ8zGS3dZTvDbWinzMzisZpicySTNOphw==
+X-Gm-Gg: AR+sD11OPLj63PAEQjLPevnHG/BDOCZutXK/8kW+dd9LIEiuCztqHVIiTdt9GRMmPp5
+	OlwcznhWvg4uQHHfKN1z2ydzTY7DR9KNRYski9U5rwrh6XL2VEy6hM1Xlqm4HglwfwhaP6no03w
+	hnDH7GUI76nIgSrLcPqfKFBEFBjQBMxAWuNw17NS1HBYkjRglHPMY6HbnGKSgVpOQLemzXC/WdX
+	ViXjKzrpqRfPjwNt2LjZLxxkO9ynktvkiygL1HxM/6OzNT3HZJd/iOVJrUkYDk/7Fw01EU+81M7
+	gufexg9BGnB/J30yfhOUcvQDtjtbjXB2322AhOuGSowKlV5sj6EtjLGui/SXvbHbVauehsHYmGE
+	TEye4geQ+gTkmypZ3+ARNNAvIhNx/74rTAu/mD2z4ET8W2cGnjgbKWgBjZormFyw74rGUh9ci6J
+	Jl+LyUHY6kc3lOSIeQiZN18cG5cMG+2s4rFiIhw1G3MyXAlxuzYkP2gFk2E3FE3Lk99qIQDbV0x
+	T0CyYOvbIkWPrnRp4cKzuDzox9tkeJQ5qenS7Y5UvY9HMiooVvO
+X-Received: by 2002:a05:600c:35d1:b0:499:a0a5:e13f with SMTP id 5b1f17b1804b1-499a2040313mr94987795e9.2.1787061459685;
+        Tue, 18 Aug 2026 06:57:39 -0700 (PDT)
+Message-ID: <f72b77f0-155e-4c13-bc36-5376daeb5959@suse.com>
+Date: Tue, 18 Aug 2026 15:57:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 13/17] xen/riscv: add unprivileged guest memory read
- helper
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
+Subject: Re: [PATCH v6 3/3] x86/ioreq: Extend ioreq server to support multiple
+ ioreq pages
+To: Julian Vetter <julian.vetter@vates.tech>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
- <79cfa875e9dfc14bbcad948c20f4008b03d11f72.1784560663.git.oleksii.kurochko@gmail.com>
- <71a226b9-dc03-4a69-beb2-5c4c03b8d09b@suse.com>
- <3c0d33bd-ebab-48df-9ddf-a508e5bed5fe@gmail.com>
- <2ca3f802-bf93-4714-8a9b-e33ab0c89300@suse.com>
- <d94bd15a-bf99-4df5-9dac-1fe0fcb77cfc@gmail.com>
- <5ee55d9c-d0f8-41cc-8d4e-3ba6c08d7506@suse.com>
+References: <20260420093820.825969-1-julian.vetter@vates.tech>
+ <20260420093820.825969-4-julian.vetter@vates.tech>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <5ee55d9c-d0f8-41cc-8d4e-3ba6c08d7506@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260420093820.825969-4-julian.vetter@vates.tech>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1787060296-528C9B50-16DCEEF0/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 5639
+X-purgate-ID: tlsNG-d62444/1787061460-BF66C757-A544A0F4/0/0
+X-purgate-type: clean
+X-purgate-size: 7887
 
-
-
-On 8/18/26 12:43 PM, Jan Beulich wrote:
-> On 18.08.2026 12:27, Oleksii Kurochko wrote:
->> On 8/18/26 10:17 AM, Jan Beulich wrote:
->>> On 17.08.2026 17:36, Oleksii Kurochko wrote:
->>>> On 8/12/26 5:30 PM, Jan Beulich wrote:
->>>>> On 20.07.2026 18:02, Oleksii Kurochko wrote:
->>>>>> +    if ( read_insn )
->>>>>> +    {
->>>>>> +        asm volatile ( "\n"
->>>>>> +            "1:\n"
->>>>>> +            "   hlvx.hu %[val], (%[addr])\n"
->>>>>> +            ASM_EXTABLE_TRAP_INFO(1b, 3f, %[ti])
->>>>>> +            "   andi %[tmp], %[val], 3\n"
->>>>>> +            "   addi %[tmp], %[tmp], -3\n"
->>>>>> +            "   bne %[tmp], zero, 3f\n"
->>>>>> +            "   addi %[addr], %[addr], 2\n"
->>>>>> +            "\n"
->>>>>> +            "2:\n"
->>>>>> +            "   hlvx.hu %[tmp], (%[addr])\n"
->>>>>> +            ASM_EXTABLE_TRAP_INFO(2b, 3f, %[ti])
->>>>>> +            "   sll %[tmp], %[tmp], 16\n"
->>>>>> +            "   add %[val], %[val], %[tmp]\n"
->>>>>> +            "3:\n"
->>>>>> +        : [val] "=&r" (val), [tmp] "=&r" (tmp), [addr] "+&r" (guest_addr)
->>>>>> +        : [ti] "r" (trap) : "memory" );
->>>>>
->>>>> You want to tell the compiler that *trap is written. Instead I don't see
->>>>> why a memory clobber would be needed: You access a different address space,
->>>>> i.e. nothing the compiler can make any assumptions about.
->>>>
->>>> memory clobber tells the compiler that the assembly code performs memory
->>>> reads or writes to items other than those listed in the input and output
->>>> operands and so I don't tell here that *trap will be changed.
->>>>
->>>> Why this understanding is wrong?
->>>
->>> You can (ab)use "memory" for that purpose, but why would you when you can
->>> properly express the operand? All that achieves is the compiler possibly
->>> having to emit less efficient code.
->>
->> Then I will use the option mentioned ...
->>
->>>
->>>> Alternative, I think, could be:
->>>>            : [val] "+r" (val), "+m" (*trap)
->>>>            : [addr] "r" (guest_addr), [ti] "r" (trap) );
->>>> And then memory clobber could be dropped.
->>
->> ... here.
->>
->> Probably I have to return '[addr] "r" (guest_addr)' to output and use
->> +&r constraint.
->>
->>>>> You also need to take precautions for not returning an uninitialized "val".
->>>>> I think the variable wants initializing (perhaps to ~0) and "+r" wants
->>>>> using as constraint. (Afaik & isn't necessary to use together with +.)
->>>>
->>>> I agree with '+' if we will initialize val with some value.
->>>>
->>>> Regarding, '&' my understanding is that I have to use it always when
->>>
->>> When what exactly? If an operand is both input and output, how could the
->>> compiler re-use the (generally) register for any further purpose? '&'
->>> indicates to the compiler that it may not use the register used for an
->>> output to hold some input's value, as that value may be lost by the time
->>> the input is actually consumed.
->>
->> But what is written in the gcc doc:
->>
->> & - Means (in a particular alternative) that this operand is an
->> earlyclobber operand, which is written before the instruction is
->> finished using the input operands.
->>
->> What sounds like if an operand (val) in our case is written before the
->> instruction which using the input operands (and after the write
->> instuction which writes val there are instructions which are using input
->> operands) it is needed to have &.
+On 20.04.2026 11:38, Julian Vetter wrote:
+> As the number of vCPUs grows, a single ioreq page of 128 slots may not
+> be sufficient. Add support for allocating and mapping multiple ioreq
+> pages so that the ioreq region can scale with d->max_vcpus.
 > 
-> And that's indeed relevant, just not here. My crucial earlier question was:
-> "If an operand is both input and output, how could the compiler re-use the
-> (generally) register for any further purpose?" There is a case where the
-> answer to this is not "it can't". In your case all inputs are distinct; in
-> e.g. (using x86 assembly, sorry):
+> Introduce nr_ioreq_pages() to compute the number of pages required for
+> a given domain, and IOREQ_NR_PAGES_MAX as a compile-time upper bound
+> (based on HVM_MAX_VCPUS).
 > 
-> int test(int i, int j) {
-> 	asm("nop %0; nop %1" : "+r" (i) : "r" (i));
-> 	asm("cmc; nop %0; nop %1" : "+&r" (j) : "r" (j));
+> ioreq_server_alloc_mfn() is updated to allocate nr_ioreq_pages() pages
+> and map them contiguously via vmap().
 > 
-> 	return i + j;
-> }
+> is_ioreq_server_page() iterates over all ioreq pages when checking
+> page ownership. ioreq_server_get_frame() allows callers to retrieve any
+> ioreq page by index via the XENMEM_acquire_resource interface.
 > 
-> using "+&r" indeed makes a difference.
-
-I think it is clear when operands are equal. but what about the case 
-when they are different in  first  case:
-...
-   asm("nop %0; nop %1" : "+r" (i) : "r" (j));
-...
-
-What guarantees that i and j will be in different registers?
-
-We have the similar situation in RISC-V code of riscv_vcpu_unpriv_read():
-
-         : [val] "+r" (val), [tmp] "=&r" (tmp), [addr] "+r" (guest_addr),
-           "+m" (*trap)
-         : [ti] "r" (trap) );
-
-With having & for val and guest_addr & guarantees that the same 
-registers won't be re-used for ti (and so ti won't be corrupted) but 
-without it?
-
-~ Oleksii
-
+> On x86, the legacy GFN mapping path (hvm_map_ioreq_gfn) is limited to
+> a single ioreq page; device models requiring more ioreq slots must use
+> the resource mapping interface (XENMEM_acquire_resource).
 > 
->> t1:  hlvx.hu %[val], (%[addr])   W:val R:addr + can trap -> read register ti
->>
->> t2:  andi    %[tmp], %[val], 3   W:tmp   R:val
->> t3:  addi    %[tmp], %[tmp], -3
->> t4:  bnez    %[tmp], 3f
->> t5:  addi    %[addr], %[addr], 2 W:addr  R:addr
->> t6:  hlvx.hu %[tmp], (%[addr])   W:tmp   R:addr + can trap -> read
->> register ti
->>
->> t7:  slli    %[tmp], %[tmp], 16
->> t8:  or      %[val], %[val], %[tmp] W:val
->>
->> So val is written on t1 before t6 where addr and ti still alive.
->>
->> The similar is for [addr] "+&r" (guest_addr):
->>
->> addr is written on t5 and input ti is alive till t6. So if allocator
->> will allocate the same register for addr and ti then addi %[addr],
->> %[addr], 2 will break a pointer and handler will get something wrong.
->>
->> Am I missing something?
->>
->> If I am still wrong then in both cases should be just "+r"?
+> Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
+> ---
+> Changes in v6:
+> - Adapted the comment to not mention the guest, but the device model
+> - Replaced the dynamic allocation for the mfns array by a static array
+> - Fixed error handling in ioreq_server_alloc_mfn, using an extra
+>   nr_alloc variable to track the already allocated pages
+> - Dropped unnecessary void casts
+> ---
+>  xen/arch/x86/hvm/ioreq.c |  8 ++++
+>  xen/common/ioreq.c       | 93 ++++++++++++++++++++++++++++------------
+>  xen/include/xen/ioreq.h  | 12 ++++++
+>  3 files changed, 86 insertions(+), 27 deletions(-)
 > 
-> As per above, if you want to play absolutely by the rules, use "+&r",
-> even if that's unnecessary here.
-> 
-> Jan
+> diff --git a/xen/arch/x86/hvm/ioreq.c b/xen/arch/x86/hvm/ioreq.c
+> index 3cabec141c..ee679bdf5a 100644
+> --- a/xen/arch/x86/hvm/ioreq.c
+> +++ b/xen/arch/x86/hvm/ioreq.c
+> @@ -166,6 +166,14 @@ static int hvm_map_ioreq_gfn(struct ioreq_server *s, bool buf)
+>      if ( d->is_dying )
+>          return -EINVAL;
+>  
+> +    /*
+> +     * The legacy GFN path supports only a single ioreq page. Device models
+> +     * requiring more ioreq slots must use the resource mapping interface
+> +     * (XENMEM_acquire_resource).
+> +     */
+> +    if ( !buf && nr_ioreq_pages(d) > 1 )
+> +        return -EOPNOTSUPP;
+> +
+>      iorp->gfn = hvm_alloc_ioreq_gfn(s);
+>  
+>      if ( gfn_eq(iorp->gfn, INVALID_GFN) )
+> diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
+> index bae9b99c99..3a08e77597 100644
+> --- a/xen/common/ioreq.c
+> +++ b/xen/common/ioreq.c
+> @@ -261,8 +261,11 @@ bool vcpu_ioreq_handle_completion(struct vcpu *v)
+>  static int ioreq_server_alloc_mfn(struct ioreq_server *s, bool buf)
+>  {
+>      struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
+> -    struct page_info *page;
+> -    mfn_t mfn;
+> +    unsigned int i, nr_alloc = 0, nr_pages = buf ? 1 : nr_ioreq_pages(s->target);
+> +    mfn_t mfns[IOREQ_NR_PAGES_MAX] = {};
 
+This is okay to have with the present HVM_MAX_VCPUS, but we need to put in
+place something to bound stack usage here. Once the upper bound on the
+number of vCPU-s has grown enough, some other mechanism will need to be put
+in place, preferably still without runtime allocation. (And no, this isn't
+a static array, i.e. the revlog entry isn't quite correct.)
+
+For the moment I'd suggest BUILD_BUG_ON(ARRAY_SIZE(mfns) > 32), with a
+clarifying comment.
+
+> +    int rc;
+> +
+> +    ASSERT(nr_pages <= IOREQ_NR_PAGES_MAX);
+
+Why would this be relevant to check (only) here? Imo this either wants
+dropping, or moving into nr_ioreq_pages().
+
+> @@ -277,11 +280,16 @@ static int ioreq_server_alloc_mfn(struct ioreq_server *s, bool buf)
+>          return 0;
+>      }
+>  
+> +    for ( i = 0; i < nr_pages; i++ )
+>      {
+> -        page = alloc_domheap_page(s->target, MEMF_no_refcount);
+> +        struct page_info *page = alloc_domheap_page(s->target,
+> +                                                    MEMF_no_refcount);
+
+This movement of the decl would better also be part of patch 2.
+
+> @@ -290,41 +298,59 @@ static int ioreq_server_alloc_mfn(struct ioreq_server *s, bool buf)
+>               * here is a clear indication of something fishy going on.
+>               */
+>              domain_crash(s->emulator);
+> -            return -ENODATA;
+> +            rc = -ENODATA;
+> +            goto fail;
+>          }
+>  
+> -        mfn = page_to_mfn(page);
+> +        mfns[nr_alloc++] = page_to_mfn(page);
+>      }
+> -    iorp->va = vmap(&mfn, 1);
+> +
+> +    iorp->va = vmap(mfns, nr_pages);
+>      if ( !iorp->va )
+> +    {
+> +        rc = -ENOMEM;
+>          goto fail;
+> +    }
+>  
+> -    clear_page(iorp->va);
+> +    memset(iorp->va, 0, nr_pages * PAGE_SIZE);
+
+clear_page() is a bit more efficient, so I wonder whether - especially for
+small nr_pages - we aren't needlessly losing performance here. Question is
+whether there's a reasonable to establish boundary at which memset()
+(largely) catches up.
+
+> @@ -337,12 +363,25 @@ bool is_ioreq_server_page(struct domain *d, const struct page_info *page)
+>  
+>      FOR_EACH_IOREQ_SERVER(d, id, s)
+>      {
+> -        if ( (s->ioreq.va && vmap_to_page(s->ioreq.va) == page) ||
+> -             (s->bufioreq.va && vmap_to_page(s->bufioreq.va) == page) )
+> +        unsigned int i;
+> +
+> +        if ( s->bufioreq.va && vmap_to_page(s->bufioreq.va) == page )
+>          {
+>              found = true;
+>              break;
+>          }
+> +
+> +        for ( i = 0; i < nr_ioreq_pages(d) && s->ioreq.va; i++ )
+
+s->ioreq.va is loop invariant, without the compiler being in the position
+to know. The condition therefore wants moving out, preferably as
+
+        if ( !s->ioreq.va )
+            continue;
+
+to avoid indentation growing too much.
+
+> +        {
+> +            if ( vmap_to_page(s->ioreq.va + i * PAGE_SIZE) == page )
+> +            {
+> +                found = true;
+> +                break;
+> +            }
+> +        }
+
+It may help readability here if for()'s curly braces were dropped.
+
+> +        if ( found )
+> +            break;
+>      }
+>  
+>      rspin_unlock(&d->ioreq_server.lock);
+> @@ -816,26 +855,26 @@ int ioreq_server_get_frame(struct domain *d, ioservid_t id,
+>      if ( rc )
+>          goto out;
+>  
+> -    switch ( idx )
+> +    if ( idx == XENMEM_resource_ioreq_server_frame_bufioreq )
+>      {
+> -    case XENMEM_resource_ioreq_server_frame_bufioreq:
+>          rc = -ENOENT;
+>          if ( !HANDLE_BUFIOREQ(s) )
+>              goto out;
+>  
+>          *mfn = vmap_to_mfn(s->bufioreq.va);
+>          rc = 0;
+> -        break;
+> +    }
+> +    else if ( idx >= XENMEM_resource_ioreq_server_frame_ioreq(0) &&
+> +              idx < XENMEM_resource_ioreq_server_frame_ioreq(nr_ioreq_pages(d)) )
+> +    {
+> +        unsigned int page_idx = idx - XENMEM_resource_ioreq_server_frame_ioreq(0);
+>  
+> -    case XENMEM_resource_ioreq_server_frame_ioreq(0):
+> -        *mfn = vmap_to_mfn(s->ioreq.va);
+> +        ASSERT(page_idx < nr_ioreq_pages(d));
+
+Isn't this redundant with the range check on idx?
+
+> --- a/xen/include/xen/ioreq.h
+> +++ b/xen/include/xen/ioreq.h
+> @@ -35,6 +35,18 @@ struct ioreq_vcpu {
+>      bool             pending;
+>  };
+>  
+> +/*
+> + * Maximum number of ioreq pages, based on the maximum number
+> + * of vCPUs and the number of ioreq slots per page.
+> + */
+> +#define IOREQ_NR_PAGES_MAX \
+> +    DIV_ROUND_UP(HVM_MAX_VCPUS, PAGE_SIZE / sizeof(ioreq_t))
+> +
+> +static inline unsigned int nr_ioreq_pages(const struct domain *d)
+> +{
+> +    return DIV_ROUND_UP(d->max_vcpus, PAGE_SIZE / sizeof(ioreq_t));
+> +}
+
+To reduce redundancy, how about
+
+static inline unsigned int nr_ioreq_pages(const struct domain *d)
+{
+    return DIV_ROUND_UP(d ? d->max_vcpus : HVM_MAX_VCPUS,
+                        PAGE_SIZE / sizeof(ioreq_t));
+}
+
+#define IOREQ_NR_PAGES_MAX nr_ioreq_pages(NULL)
+
+?
+
+Jan
 
