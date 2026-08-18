@@ -4,39 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B49E7C5B572
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2026 22:26:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1393320.1632123 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 410B3C5DF74
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 02:53:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1393346.1632162 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ww5mP-0002T8-IS; Mon, 17 Aug 2026 22:26:05 +0000
+	id 1ww9wb-0001kB-Dc; Tue, 18 Aug 2026 02:52:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1393320.1632123; Mon, 17 Aug 2026 22:26:05 +0000
+Received: by outflank-mailman (output) from mailman id 1393346.1632162; Tue, 18 Aug 2026 02:52:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ww5mP-0002T1-Ev; Mon, 17 Aug 2026 22:26:05 +0000
-Received: by outflank-mailman (input) for mailman id 1393320;
- Mon, 17 Aug 2026 22:26:04 +0000
+	id 1ww9wb-0001k3-9Z; Tue, 18 Aug 2026 02:52:53 +0000
+Received: by outflank-mailman (input) for mailman id 1393346;
+ Tue, 18 Aug 2026 02:52:51 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jmattson@google.com>) id 1ww5mN-0002Sq-SR
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2026 22:26:04 +0000
+ (envelope-from <onlywig@gmail.com>) id 1ww9wZ-0001jC-SF
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 02:52:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1ww5mN-000Tg6-1i
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 00:26:03 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1ww9wZ-005CSk-96
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 04:52:51 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jmattson@google.com>)
- id 6a838a6f-2eae-0a2a0a5409dd-0a2a4509ea6e-8
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 00:26:02 +0200
-Received: from [209.85.208.43] (helo=mail-ed1-f43.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jmattson@google.com>)
- id 6a838a7a-be1a-0a2a45090019-d155d02b8cbb-3
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 00:26:02 +0200
-Received: by mail-ed1-f43.google.com with SMTP id
- 4fb4d7f45d1cf-69fec8b4638so3712a12.0
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 15:26:02 -0700 (PDT)
+ (envelope-from <onlywig@gmail.com>)
+ id 6a83c8da-8faa-0a2a0a5109dd-0a2a4501ccf4-10
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 04:52:51 +0200
+Received: from [209.85.216.52] (helo=mail-pj1-f52.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <onlywig@gmail.com>)
+ id 6a83c901-5984-0a2a45010019-d155d834bcb4-3
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 04:52:51 +0200
+Received: by mail-pj1-f52.google.com with SMTP id
+ 98e67ed59e1d1-38dc4553f62so5373900a91.0
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 19:52:50 -0700 (PDT)
+Received: from wig-Precision-3660.. (125-227-154-99.hinet-ip.hinet.net.
+ [125.227.154.99]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3954d3b40basm4333605a91.14.2026.08.17.19.52.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Aug 2026 19:52:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,181 +53,157 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1787005562; cv=none;
-        d=google.com; s=arc-20260327;
-        b=sWCiS0tcUQEsHgjIjWOzoFvGbU/8RD2FC/S9ExUrG2MnDlp8OIg5CsMYTSrqMd2V4P
-         CvoX49AfHI6V9rrR4HcPnjctBhOwaFdJQnY+qG8pwxU0wgQD5nvP3Y4Vhw/b7FXbA15x
-         IPoLj229hU5HQj1zHtGVSUu1GNuLenXOU06H8Pvzznf/AkpjCHgmsip3JVV/c6ZbFCac
-         LZHGJ/ZeVJJjTcEcTgXS1C8JX5ydIQ94vSdaBPqqY8i3bvqKrjksItsCYNbBxk3tq/Jt
-         7siwoFZKWioPrHQGQ+T3s1BLRHYDR00GzIWxlj1n7eI8ohaCJtElQa9quoRPIfaba26P
-         Af+w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=hENxuN5mzaES0wxF2BepwjZBV79XeYKjjyJElzU8XaI=;
-        fh=XDdWa2L7dmoQEvgDRagQwfUFhzYUD8dnu++QNaWdEII=;
-        b=OVKfBaeDWrGekKD9yVXganr5n+yIevG7ukFLnjMGqBp5KxicK9fGPIjGz3EaJmKEHa
-         1v76+3P1FKZZphMnR9ALVrs9qceqZZ3MohCzS52c43+iBif63xsyJoyZr+ZjQwgoxrFW
-         HYam3F/tonA+GgNm4t+cjkw7MdtF722ih8m8w2eaGOzArYYOkJAM0D+zfP0ceW/11UIT
-         A6COhcH74IkMrQXzNyyUlQVP7uONk52AJjyZF4TJWDVRsL3fqPP2hlUagnM75M7xvTku
-         6/883nsV1Itiza4XLsqk/W1f+nMbZuLTSzwc9FzthMovw1Y8soegwKzT1aLEHgOSJGxb
-         ubJA==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1787005562; x=1787610362; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=hENxuN5mzaES0wxF2BepwjZBV79XeYKjjyJElzU8XaI=;
-        b=MHQaMFjs3yO4SRttpWxSDtJn0Mq349MPn9KtGePNc9tAiD7p2p6zsCLaaayTPjloTd
-         hLfOEiGrX6i9hhSkYwL5bqKi7+2R1YF/+OV8IaJKUeApsmwPoG17+diB6duSraUGlBj9
-         Ng8kwozapcA+z+yWMduPS8cSbSjl38v4cYzUmzY0vQSqpj32W3NwMcL/rDh1CoswrQvU
-         Q/dI5Fv0Iyl9AJ2uoW3HVIvq41X0sO9XSaoaB2ker2ztaSHzyR02ahgIfNKuJzfQguDl
-         Fy4zGcaViItwYPnfmIFJ/hTsMPFIXK1IWgUY4W2Pe/jymoI1uz8711pKEy0q62swpOIU
-         c4/Q==
+        d=gmail.com; s=20251104; t=1787021569; x=1787626369; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=/ebcWQVd73jtJSn4IlaXws2VNwFd+9+DtXjs8Yvf8FE=;
+        b=XUt3quO4ReRqKk5Rd6VJr7lbbb1Zmf0121O/2DPz+RlOJoeOx9pdq42z/Sk0bmkelZ
+         uNSB5jS5QO8pRsY+XXjI9T4AE3vapReJQU/AuwjfdLwM9e4sHeywM/WgWg8GOPJHbaYF
+         jSVzGQejCbF9liDSwWDe5hZb3NwzJKpX8DTQvwUnF3K/93wEOMKM8OQ5zkW7Zll1u1cP
+         MKnTdZHnf+nNmQxNB8TfVYYGvigs77NRN7BmYJaj1JwhbFbbIAjP6s6dzDt9LSl6PBXj
+         CLXwS8YNQhlPbI0gRNwLeDXKREEtvO1R9HTYR1OLX26Qw+773mPNMnhadbDgFkS4cMHn
+         tjbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787005562; x=1787610362;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=hENxuN5mzaES0wxF2BepwjZBV79XeYKjjyJElzU8XaI=;
-        b=smrl3pxwUai6PVbiRka47mFaZGsSoLW5+5etdX+Nn69mOpcUR8L0LquXGRvtufzcDd
-         CDkfIVGT+jsOcrHhH++C1/NCDmkyn3gSP6CEZqDqXSfX/kh+zpGCzzVBP5SrhMTCHWgG
-         YP8bwrakcAkjxXM27vrm23yIQGN6MIRHI0J56Bzt86wDQTu71wham01+2mfp3oJlDlYw
-         PXyUtWms+XKiRA2vkxxO3h6r6PFqTlY67BEO8EuMZKlHY5wwiSVwnqYasKNZFCNP+WLq
-         MuxD0UkeLNPhAJosT7ffwPJYiOmqGnuw7GgzGmvrNdj287dL8XQOxPY5yBgfMsMBb2QI
-         KEng==
-X-Forwarded-Encrypted: i=1; AHgh+RrGwwqAf2Wu+P1ZRmFswQ9IfWtTFnj4PvpYukmgTnNsR1Er+mQstTmAocV5y2gu7aeiHT+lrNzkuxg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yw1ROXtWUar3ampynbw5lZD8cpTcVzfhDwtjrDcZz2FfqCGO0P1
-	wNXFsWHf2910wxx9reN6UoLw/xV63yB3yss6m8Um2cvtb+fVfIXhi03koJWksQP+Uyyinm6vSUS
-	Jh+lSSlfHut1ZFOxe8xtqUxLeOLCTZ17V8NieZrUk
-X-Gm-Gg: AR+sD12/apxM/nUVFTmr1IaKUlPCoE/D/A1ZrK33tI/JTuUbmI3QlRfLqxgdatQ8zNk
-	FAF5Zd/97ZppTzR0m4U0UXyLFeITBJgKdSGwkzaYzVwb8WKHYwJwQl687fjHcXdYiO53o0aJna6
-	EgEf7gVM+voOegmKF2PJzvDWa3Ho4MRtdtoKxI7MKazkOi4Uvb0/9SHusH62oDnFygbi+bYW1aJ
-	UEW2CkXSNq47OGcRdFoRfGXdK4QIdj0eNY0nsukJIdfIqDLdp5mcSIX8m/nyN4zEpZNqONXedGo
-	+opKLl7xWU6IDa8msR15al1Tp5Uc5PXnSHtF5tNY8bs/
-X-Received: by 2002:aa7:db55:0:b0:698:ac70:31b9 with SMTP id
- 4fb4d7f45d1cf-6a3eb34835bmr2896a12.5.1787005561938; Mon, 17 Aug 2026 15:26:01
- -0700 (PDT)
+        d=1e100.net; s=20251104; t=1787021569; x=1787626369;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=/ebcWQVd73jtJSn4IlaXws2VNwFd+9+DtXjs8Yvf8FE=;
+        b=HFSsI5CQdY5iTnnqinZdCRNRyNns8wugYhV+kdvPKuAeFL9MSx7vIx8fwCGwYEk9v2
+         1Pj5RNF1Gc/0zZDe9qkHtJT9NTezhZmcZeAo48iiZ4g1XlA24wC+POmUZTfgvi3ytpfc
+         fiWsajVpE39wfgGgAZszYIY0L/FAokcfM924/Wza/6gdzCHUuJ+dHO4Pd5d0SPkH8arQ
+         q2X1687fsREGMWKqPn0XO3p7k0IXn7OlmfvXcfAGy9WqIMNRFVnZbY8+FblPwTpyyDlk
+         h4TupoVGQBC5Af6bt0vBx1NywqmMy27CF2LaI/Q0z02Ae6XOWS5WEAri86RXxpmY8RW2
+         TQsA==
+X-Gm-Message-State: AOJu0YxJ40MNK+vGgFcf+H6CeUWTZB+TUxnhkkLoLTLuTVZuVC9ImdOE
+	te2zdFJClj5CREyPhjjd3NpQNG4uiBpwzp+FWHEcN0in513rWVGomW1ABMHQO+fU
+X-Gm-Gg: AR+sD12vwfE3YjSQc6gDEDiyL017rM5Ykrs8+b33V+M4C1XshI8MKnyAgintMx7unLA
+	is+8ZzNhlpZkB/eNGfh9R4Tas2eJXwACwkme6S+ebqt3skpt/yig2ZTeKxNsEAWaeEBzmWOoLmr
+	v4nTKXUBocNYj7cgJAj0ZLEfZjmmiHdzuEGKnht4juZvxJJXN4Io48LTDj8vW6bXqOPjNb4KQnb
+	L81mPdvHglv1nXFDTTO9aOlJmAkv0KLQyEsFwRrKyk7Rh/mDwPVf7aPc4ocb2eACz5PwtOAm6CJ
+	WSIuCOhrfjJOrruz2OV78ZPlCSiLnaOnMqX7LZW47QngppGIGL3p44c/B62ZSOhkSXD/Ly2NwHR
+	clU1C3nrrpxfn2BuNg87sH9CrSvQsQ/F8TU0eBZuR6t8jO/dErKV8bx1PkyxsIUk7oOyX9FMyNM
+	f97JefwVnzSwZi/n8nwR/eiQ7h3Rutkkc+uiSU4+euwCjzhHLc7fbjj1FcM4wF8CvHABFUsEyW8
+	g32bmfv7V1zEc/Ep9RiM4jdo8mFBMXc
+X-Received: by 2002:a17:90b:52cf:b0:37f:ed7e:7e42 with SMTP id 98e67ed59e1d1-3955a7d1a16mr5076420a91.14.1787021569081;
+        Mon, 17 Aug 2026 19:52:49 -0700 (PDT)
+From: Wig Cheng <onlywig@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Michal Orzel <michal.orzel@amd.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	John Ernberg <john.ernberg@actia.se>,
+	Peng Fan <peng.fan@nxp.com>,
+	Wig Cheng <onlywig@gmail.com>
+Subject: [PATCH v2 2/4] xen/arm64: add early printk for the classic i.MX UART
+Date: Tue, 18 Aug 2026 10:52:22 +0800
+Message-ID: <20260818025224.4165503-3-onlywig@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260818025224.4165503-1-onlywig@gmail.com>
+References: <20260818025224.4165503-1-onlywig@gmail.com>
 MIME-Version: 1.0
-References: <20260806233609.212337-1-seanjc@google.com> <20260806233609.212337-22-seanjc@google.com>
- <ef3b56bf-8df0-4a40-82c7-bd2d65eec71e@yandex-team.ru> <aoMVy4VB1sq4T-ys@google.com>
- <0d1f0afe-74f0-4adb-a7cf-2d4efd001de3@yandex-team.ru>
-In-Reply-To: <0d1f0afe-74f0-4adb-a7cf-2d4efd001de3@yandex-team.ru>
-From: Jim Mattson <jmattson@google.com>
-Date: Mon, 17 Aug 2026 15:25:50 -0700
-X-Gm-Features: AcwNN1WdnB6ezAOkUjWvrMa9sQkEiE5NQZNmLUZ6exeGRBIrQHFr5mGJRwWtIb4
-Message-ID: <CALMp9eQRW22S6zSrhkxc+8PgSuOJJOB-jh_W1iyr7c0j5SBLow@mail.gmail.com>
-Subject: Re: [PATCH v6 21/51] x86/kvm: Obtain TSC frequency from PV CPUID if present
-To: Maksim Davydov <davydov-max@yandex-team.ru>
-Cc: Sean Christopherson <seanjc@google.com>, Kiryl Shutsemau <kas@kernel.org>, 
-	Rick Edgecombe <rick.p.edgecombe@intel.com>, Paolo Bonzini <pbonzini@redhat.com>, 
-	"K. Y. Srinivasan" <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
-	Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>, 
-	Ajay Kaher <ajay.kaher@broadcom.com>, Alexey Makhalov <alexey.makhalov@broadcom.com>, 
-	Jan Kiszka <jan.kiszka@siemens.com>, Dave Hansen <dave.hansen@linux.intel.com>, 
-	Andy Lutomirski <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>, Juergen Gross <jgross@suse.com>, 
-	Daniel Lezcano <daniel.lezcano@kernel.org>, Thomas Gleixner <tglx@kernel.org>, 
-	John Stultz <jstultz@google.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>, Stephen Boyd <sboyd@kernel.org>, 
-	Miroslav Lichvar <mlichvar@redhat.com>, x86@kernel.org, linux-coco@lists.linux.dev, 
-	kvm@vger.kernel.org, linux-hyperv@vger.kernel.org, 
-	virtualization@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	xen-devel@lists.xenproject.org, Michael Kelley <mhklinux@outlook.com>, 
-	Tom Lendacky <thomas.lendacky@amd.com>, Nikunj A Dadhania <nikunj@amd.com>, 
-	David Woodhouse <dwmw@amazon.co.uk>, David Woodhouse <dwmw2@infradead.org>, 
-	Thomas Gleixner <tglx@linutronix.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-bad1c0/1787005562-BD6C2034-38BF12EF/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d62444/1787021571-1F66C757-A423DD34/0/0
 X-purgate-type: clean
-X-purgate-size: 3357
+X-purgate-size: 3008
 
-On Mon, Aug 17, 2026 at 3:20=E2=80=AFPM Maksim Davydov
-<davydov-max@yandex-team.ru> wrote:
->
->
->
-> On 8/17/26 17:08, Sean Christopherson wrote:
-> > On Mon, Aug 17, 2026, Maksim Davydov wrote:
-> >> On 8/7/26 02:35, Sean Christopherson wrote:
-> >>> diff --git a/arch/x86/kernel/kvmclock.c b/arch/x86/kernel/kvmclock.c
-> >>> index 29ca37e9a3bc..f55d0305d1f3 100644
-> >>> --- a/arch/x86/kernel/kvmclock.c
-> >>> +++ b/arch/x86/kernel/kvmclock.c
-> >>> @@ -342,8 +342,10 @@ void __init kvmclock_init(void)
-> >>>     flags =3D pvclock_read_flags(&hv_clock_boot[0].pvti);
-> >>>     kvm_sched_clock_init(flags & PVCLOCK_TSC_STABLE_BIT);
-> >>>
-> >>> -   x86_init.hyper.get_tsc_khz =3D kvmclock_get_tsc_khz;
-> >>> -   x86_init.hyper.get_cpu_khz =3D kvmclock_get_tsc_khz;
-> >>> +   if (!x86_init.hyper.get_tsc_khz)
-> >>> +           x86_init.hyper.get_tsc_khz =3D kvmclock_get_tsc_khz;
-> >>> +   if (!x86_init.hyper.get_cpu_khz)
-> >>> +           x86_init.hyper.get_cpu_khz =3D kvmclock_get_tsc_khz;
-> >>>     x86_platform.get_wallclock =3D kvm_get_wallclock;
-> >>>     x86_platform.set_wallclock =3D kvm_set_wallclock;
-> >>>  #ifdef CONFIG_X86_LOCAL_APIC
-> >>
-> >>
-> >> I cannot test this right now as I lack two servers with different CPU
-> >> base frequencies, but it seems that this patch might break something i=
-n
-> >> guests:
-> >> After migrating a VM (QEMU + KVM) from a host with one base frequency =
-to
-> >> another host with a different base frequency, the value in CPUID leaf
-> >> 0x40000010 EAX changes and becomes the same as the destination host ba=
-se
-> >> frequency instead of remaining the source base frequency.
-> >
-> > That's a bug in whatever is orchestrating the migration, and/or QEMU if=
- QEMU is
-> > handing the upper layers a loaded footgun.
-> >
-> >> The main reason for this behaviour is that setting the TSC frequency v=
-ia
-> >> ioctl(KVM_SET_TSC_KHZ) doesn't change the value in CPUID leaf 0x400000=
-10
-> >> EAX and these two entities are still not connected.
-> >
-> > And they never will be.  It's userspace's responsibility to fill the co=
-rrect
-> > values for 0x40000010.
-> >
-> > But AFAICT, QEMU does the right thing.  env->tsc_khz is used for both t=
-he CPUID
-> > leaf and for KVM_SET_TSC_KHZ.
-> >
-> > kvm_arch_init_vcpu():
-> >
-> >         c =3D &cpuid_data.entries[cpuid_i++];
-> >         c->function =3D KVM_CPUID_SIGNATURE | 0x10;
-> >         c->eax =3D env->tsc_khz;
-> >         c->ebx =3D env->apic_bus_freq / 1000; /* Hz to KHz */
-> >         c->ecx =3D c->edx =3D 0;
-> >
-> > kvm_arch_set_tsc_khz():
-> >
-> >     r =3D set_ioctl ?
-> >         kvm_vcpu_ioctl(cs, KVM_SET_TSC_KHZ, env->tsc_khz) :
-> >         -ENOTSUP;
-> >
->
-> Agreed.
-> However, kvm_arch_set_tsc_khz() is also used at the end of migration
-> (qemu_loadvm_state -> cpu_synchronize_post_init).
-> So, the new value of env->tsc_khz from the source host can be loaded
-> during migration via KVM_SET_TSC_KHZ. However, the frequency in CPUID
-> leaf 0x40000010 remains the same as on the destination host (the TSC
-> frequency can differ from the source host's frequency). Thus, it's
-> possible to have unsynchronized CPUID leaf 0x40000010 when using default
-> QEMU parameters.
+Add an early printk implementation for the classic i.MX UART IP,
+selectable via EARLY_UART_CHOICE_IMX_UART.  The UART is expected to be
+fully initialized by the bootloader.
 
-I don't use qemu, but isn't the qemu solution for this general
-situation to mark leaf 40000010H as 'unmigratable'?
+Signed-off-by: Wig Cheng <onlywig@gmail.com>
+---
+ xen/arch/arm/Kconfig.debug            | 12 +++++++++
+ xen/arch/arm/arm64/debug-imx-uart.inc | 37 +++++++++++++++++++++++++++
+ 2 files changed, 49 insertions(+)
+ create mode 100644 xen/arch/arm/arm64/debug-imx-uart.inc
+
+diff --git a/xen/arch/arm/Kconfig.debug b/xen/arch/arm/Kconfig.debug
+index 5a03b220ac..63a34b813a 100644
+--- a/xen/arch/arm/Kconfig.debug
++++ b/xen/arch/arm/Kconfig.debug
+@@ -44,6 +44,14 @@ choice
+ 		  Say Y here if you wish the early printk to direct their
+ 		  output to a i.MX LPUART.
+ 
++	config EARLY_UART_CHOICE_IMX_UART
++		select EARLY_UART_IMX_UART
++		depends on ARM_64
++		bool "Early printk via i.MX UART"
++		help
++		  Say Y here if you wish the early printk to direct their
++		  output to the classic i.MX UART (i.MX8M family).
++
+ 	config EARLY_UART_CHOICE_LINFLEX
+ 		select EARLY_UART_LINFLEX
+ 		depends on ARM_64
+@@ -97,6 +105,9 @@ config EARLY_UART_EXYNOS4210
+ config EARLY_UART_IMX_LPUART
+ 	select EARLY_PRINTK
+ 	bool
++config EARLY_UART_IMX_UART
++	select EARLY_PRINTK
++	bool
+ config EARLY_UART_LINFLEX
+ 	select EARLY_PRINTK
+ 	bool
+@@ -185,6 +196,7 @@ config EARLY_PRINTK_INC
+ 	default "debug-cadence.inc" if EARLY_UART_CADENCE
+ 	default "debug-exynos4210.inc" if EARLY_UART_EXYNOS4210
+ 	default "debug-imx-lpuart.inc" if EARLY_UART_IMX_LPUART
++	default "debug-imx-uart.inc" if EARLY_UART_IMX_UART
+ 	default "debug-linflex.inc" if EARLY_UART_LINFLEX
+ 	default "debug-meson.inc" if EARLY_UART_MESON
+ 	default "debug-mvebu.inc" if EARLY_UART_MVEBU
+diff --git a/xen/arch/arm/arm64/debug-imx-uart.inc b/xen/arch/arm/arm64/debug-imx-uart.inc
+new file mode 100644
+index 0000000000..19b1679020
+--- /dev/null
++++ b/xen/arch/arm/arm64/debug-imx-uart.inc
+@@ -0,0 +1,37 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Early printk for the classic i.MX UART IP (i.MX8M family).
++ * The UART is expected to be fully initialized by the bootloader.
++ *
++ * Copyright 2026 Open-EP (E-Paper) Community
++ */
++
++#include <asm/imx-uart.h>
++
++/*
++ * Wait for the UART to be ready to transmit
++ * xb: register which contains the UART base address
++ * c: scratch register
++ */
++.macro early_uart_ready xb, c
++1:
++        ldr   w\c, [\xb, #UTS]        /* <- Test register */
++        tst   w\c, #UTS_TXFULL        /* Check TX FIFO full bit */
++        b.ne  1b                      /* Wait until there is room */
++.endm
++
++/*
++ * UART transmit character
++ * xb: register which contains the UART base address
++ * wt: register which contains the character to transmit
++ */
++.macro early_uart_transmit xb, wt
++        str   \wt, [\xb, #URTX0]      /* -> Transmitter register */
++.endm
++
++/*
++ * Local variables:
++ * mode: ASM
++ * indent-tabs-mode: nil
++ * End:
++ */
+-- 
+2.43.0
+
 
