@@ -4,62 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 102A6C5DF70
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 07:22:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1393539.1632360 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59932C5DF70
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 07:24:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1393549.1632368 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwE9o-0004So-4Z; Tue, 18 Aug 2026 07:22:48 +0000
+	id 1wwEB0-0004zi-HO; Tue, 18 Aug 2026 07:24:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1393539.1632360; Tue, 18 Aug 2026 07:22:48 +0000
+Received: by outflank-mailman (output) from mailman id 1393549.1632368; Tue, 18 Aug 2026 07:24:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwE9o-0004Sh-1l; Tue, 18 Aug 2026 07:22:48 +0000
-Received: by outflank-mailman (input) for mailman id 1393539;
- Tue, 18 Aug 2026 07:22:47 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wwEB0-0004zb-ED; Tue, 18 Aug 2026 07:24:02 +0000
+Received: by outflank-mailman (input) for mailman id 1393549;
+ Tue, 18 Aug 2026 07:24:01 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1wwE9n-0004Sb-AT
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 07:22:47 +0000
+ (envelope-from <jgross@suse.com>) id 1wwEAz-0004zV-Cn
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 07:24:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwE9m-00EC46-NY
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 09:22:46 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wwEAy-001ht8-Pf
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 09:24:00 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a840838-bab6-0a2a0a5309dd-0a2a45078428-30
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 09:22:46 +0200
-Received: from [40.93.195.26]
- (helo=SN4PR2101CU001.outbound.protection.outlook.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a840844-b4ea-0a2a45070019-285dc31a88ac-3
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 09:22:46 +0200
-Received: from SJ0PR05CA0067.namprd05.prod.outlook.com (2603:10b6:a03:332::12)
- by LV0PR12MB999068.namprd12.prod.outlook.com (2603:10b6:408:32d::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.8; Tue, 18 Aug
- 2026 07:22:39 +0000
-Received: from SJ5PEPF00000204.namprd05.prod.outlook.com
- (2603:10b6:a03:332:cafe::2b) by SJ0PR05CA0067.outlook.office365.com
- (2603:10b6:a03:332::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.8 via Frontend Transport; Tue, 18
- Aug 2026 07:22:39 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SJ5PEPF00000204.mail.protection.outlook.com (10.167.244.37) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.339.3 via Frontend Transport; Tue, 18 Aug 2026 07:22:39 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 18 Aug
- 2026 02:22:34 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 18 Aug
- 2026 02:06:39 -0500
-Received: from [10.71.196.80] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.45 via Frontend
- Transport; Tue, 18 Aug 2026 02:06:37 -0500
+ (envelope-from <jgross@suse.com>)
+ id 6a84088b-2eae-0a2a0a5409dd-0a2a450688fc-20
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 09:24:00 +0200
+Received: from [209.85.208.53] (helo=mail-ed1-f53.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jgross@suse.com>)
+ id 6a840890-195a-0a2a45060019-d155d035e11d-3
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 09:24:00 +0200
+Received: by mail-ed1-f53.google.com with SMTP id
+ 4fb4d7f45d1cf-6a157f90752so6246682a12.3
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 00:24:00 -0700 (PDT)
+Received: from ?IPV6:2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112?
+ (2a00-12d0-af5d-ad01-5d3f-14e6-9bcb-5112.ip.tng.de.
+ [2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6a3d85319b1sm1607716a12.13.2026.08.18.00.23.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 18 Aug 2026 00:23:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,280 +55,248 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=F8VAH8b78BACGFFuGUl3yTzNZYpNGJc0se3Dw5/rMM/Y34LbGQNE8oTpX0AtRXLrA46xdGGvYRlWYWppsFq3UB1zLAZKHBbzm2M7U8MY8kahk062wdMIQPiYuZzCeiQ9fWPRZgfG+fq7A25fLEpi1s4qnOemrOmO4miMvCvH8TqfWXGDh38IawJOQGJ97dbLYDBEWYfto1MWNK46jYA/aPXGYSxKLOvTbtBBFq56m+DJZGgneuUzaq1OTM+JW4FyE5Xs/YsojCk64quLHmKzOZA/HbOhW6HHVpXO8ksnyRyWQr/udt1r/Kfrx+Ndnw7kHpleGXVsMSGdRQi297Yctg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2VKtktAghtvAyfShnMl7Gov2iTCHFu/RnL+YdTnPlnU=;
- b=r+vPhsp75d0EgAc2k1liItec8V8BRrVx23rZSxKclPVAfH2ZMxKQnc4ies2V9ACjDYT9xN1Wl2nU68dawLBgcaXbxFOPJe7z9evqNCcvNmj+gIRSGWjCh/Viwoq6X11BrUq7hBBaLYs2wVwJMV1TDyHEWBsB2LjCMIRawIp6v0Zse+SCf/oT2Lf6CgF6YRlwOBsG89TrCpBOdy0ZLgUGv+yx3M+daPIgVVFUB5VT7RDDCIxdHtzytz2lIW/4MnmT2KtQlRzISRylEiw8BSaD3xuRfRxiDo9DOFmY3YhR9mOkVw6abSML9pFCoorYEJOxW7taTFblcN9r9PF7nNhwPw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2VKtktAghtvAyfShnMl7Gov2iTCHFu/RnL+YdTnPlnU=;
- b=f6kKi52jlJGQ9EsIJ2Dm4AmwieGvkMg+cTfwpeW7bdwFbXjLQnmubB7fjSnR42igE4m66G0ke/Z4qNLgRf6RPBMhkalm2fqZlMV6MKTgQRQZ/HYVA6FVJdGQSjp0ZYWlLZC93lr5Na/r2ueu/mA/Q/bJHtOmK8EXbN/vQVZ7/78=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <9acefe1c-5325-4de3-9dbc-d8c4adf4182c@amd.com>
-Date: Tue, 18 Aug 2026 09:06:37 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1787037840; x=1787642640; darn=lists.xenproject.org;
+        h=content-type:in-reply-to:autocrypt:from:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=v6Ect+BVV2rp46H08828Mnkf1AjJmDKjQgbbV67/FTI=;
+        b=Ut9LaYxfh03YDcbtaJTiSubF1Todv+n6fgsh3J/5o1lcq1PBDBqd89w0gP5EA077z5
+         Dm9iPwvE28B8JtD4QZFlmcQnPqQEWidCDBhb39QsOGlB3zvEvSFhJuhoV/pj6MB6zKop
+         CsdKThK3lgxKGr8f2WizQ1IcWUEytOqU/hWgAkknyDVdmpFSs29thNpTlpet8Sh+5CZV
+         m94Uf8ke0KrTiRYmALmuvUQ12KPJ3pQqD7FkLMxTjA4McUGE2yuS5qINvFwxj6RWLbCs
+         MPuwZxPGpGxQo1SwaU5DOjvv9yw5Itfj3Le18g+HiRjmpOTlB/G97Sl+SPzVcNn//5t1
+         0ocQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787037840; x=1787642640;
+        h=content-type:in-reply-to:autocrypt:from:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=v6Ect+BVV2rp46H08828Mnkf1AjJmDKjQgbbV67/FTI=;
+        b=IbBhNubSAI3Rgn603NnJ+ByOnH0isbqGdu9rKSBNhR9pi2iCyEbCqqFhBVJrsau24P
+         xsJLbZKS/m22E+wbm9cYzqcJnFFgI+Z+6aFQsqvjc7MQvSeG6uI3OiNeFH9adEVbiDq9
+         MUJgacqU95wiHE8N9fmsAVcUY9PgxnzblIGSKr90r+cZu7gQ/hzA0JDIzNAXvDJi8d6F
+         1SV0mHd6tetDYJ3BEFyZ5KP5DnxX3b13PcycyDOOfrZuagB4jGz+aFCsNNYZlr8etABJ
+         95z2y75dSkhurn1y3iuYrqN8obrALcGfHYrQZSBGFz9sHf9Y6ehp6/k4o7qEI0dsW/F1
+         LQBA==
+X-Forwarded-Encrypted: i=1; AHgh+RobPa06e+hC0ahyGhGCaF2t/1ZS4fEmgeNYgZ9pC/QCvYlKQGBxLG+FlsMf4215TS+AFQlXlSu4wO8=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxNdVX3fyJOns9uu+3GddEZ8fqkBEJhCwMHqImXxSXUz5wFAtvI
+	BtC2t5BTShyVS5/Db3pZowHlilOhw+r3HjbAlLUxUyqwkkvXgiQmDo7Ur4cjUnoZ8Wo=
+X-Gm-Gg: AR+sD10pFCe5g5LjuR+z3sy5niGDonhEjANvPTYIYt6LYfu37UxEiRHpy7PKhLOC8wg
+	+k15hnHMCpO4f1iHzUkmOW0kxJlIrVf9LryI5019hY5jcuuQPDcDR/VmTgTNzTSr6PvbGzeNGsU
+	cc5QDQBcJaz0eB0sbxhirFZHf3G0ufRl7VZyaQmoYaAyZhduyYXvvkl5eIzBEGpX0QJx2MzxpjH
+	n45nliJpq7aWCUj8fMLgtB4W33Xnp8ZYuXElbolaoR6O4w4zWSQisBjHJ6p6fMW9s+Ho24Pe15d
+	uVh3QqVzvV2qvTj8DosG514SKVFFs6DCJl5srPBBTqpN9ZjiO14TtDwrRXr9aut1nwSwE3mUNiK
+	QEQwRcDTyNh+T/vob8L33GuX2ky9Zl9TMzTQJXOsJblhUEnrJg92FnzTpNrFNV/5PJwMBPK7i6w
+	18tg3lFssVFkTTiLgBA0cZ7SFVIfGomjeCD8HZeX0WkSLW0dUsrhFkwWs5khAMUDWUxRPYUSRvw
+	liMpHNLYVrILJwT0CV3xned2b1jTqzwtzl2Z2MjcT5OGbE4DQDoAFoYrWck34+pHIUJkacv3MYq
+	2tlR3KpYvQKgog==
+X-Received: by 2002:a05:6402:20d1:10b0:6a3:8525:b9da with SMTP id 4fb4d7f45d1cf-6a3d1f2c5d1mr4361648a12.4.1787037840095;
+        Tue, 18 Aug 2026 00:24:00 -0700 (PDT)
+Message-ID: <d4fc3ae9-e048-4e66-bd18-d4a7a2024dd6@suse.com>
+Date: Tue, 18 Aug 2026 09:23:59 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/4] xen/char: add classic i.MX UART driver
-To: Wig Cheng <onlywig@gmail.com>, <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>, John Ernberg <john.ernberg@actia.se>,
-	Peng Fan <peng.fan@nxp.com>
-References: <20260818025224.4165503-1-onlywig@gmail.com>
- <20260818025224.4165503-2-onlywig@gmail.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
+Subject: Re: [PATCH 2/2] xen/sched: core: kill unarmed timers on
+ sched_init_vcpu() failure
+To: Furkan Caliskan <frn1furkan10@gmail.com>, xen-devel@lists.xenproject.org
+Cc: jbeulich@suse.com, andrew.cooper3@citrix.com, dfaggioli@suse.com,
+ gwd@xenproject.org
+References: <20260818063259.18733-1-frn1furkan10@gmail.com>
+ <20260818063259.18733-3-frn1furkan10@gmail.com>
 Content-Language: en-US
-In-Reply-To: <20260818025224.4165503-2-onlywig@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF00000204:EE_|LV0PR12MB999068:EE_
-X-MS-Office365-Filtering-Correlation-Id: f3d7d243-f8f0-47eb-a926-08defcf97c2f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|23010399003|376014|1800799024|36860700016|6133799003|56012099006|10067099003|4143699003|11063799006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	Px64mKvGFRhrl4JmiOJ11LcNWDToFm91xjOOEYG24GujsrnuuZb6NoKGYgQMj7bShuZBU3TYWmNkvD7047xXWCojzh4HP9gOiaOKGf2Uxo6+FopIpYKJdfXdw8BoaU9Ge4okASVy95twRb2XzUNhlW8fjNEQEX6w196QRE0JhC6Oh2mNdsJfjHlNolz6yNmre6HbmVLUFRVnhSno9u2X7+BJ5yfJeTSfDcvY3VcH2sGEMkrjH8CtHmNGD5EwaVT7r0uvsTKIHTEnYc5bUKV8l6eeJLi6XjFYp9igKoMEBp1gU43JWy0DjZJkDWLrTwzQkU1nUYH97befxwPe81KR8GNbbjsLj2aZryIlHw/lMH3Osk2AG8DHrRVPRwKnOIhBRCbC1u5SVmpgTVBaoni4JVB9YwqRWCZIZE3TuKGLrtPDRXyCgc5ky7dWErZZ7pmxuHouaZV16U98cV2+Ov0wKna7FIShjyRbonoahrwl9jQ4k5UL2nHr2UanD7kaJ3ox1C7Cb5cSNV6vxYYLOIV5epwXt49tmVb6PEgDX26ZN9XHK7jdgifJ0PZsdf/1yh3NlV+E6JjY5IT0Br0BnDiRB3mjg0Y/WNGN003tn5FTfRRLjrC0/Yxzg9AOpPuWmFHakD8EnU5i+cKt0AyeiHBDSZeF+uYkDBdmhRiJtIArIDyrFndIzcf/TmXh6yXjK6EVAfG3efGrqTmhH8rND9BREQ==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(23010399003)(376014)(1800799024)(36860700016)(6133799003)(56012099006)(10067099003)(4143699003)(11063799006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	ti4q8gxE/8TjlyvILGY+Sz+4BpYhgdOe2tTP2z3O5zSzM1rqTDxA4dh35Yff5p5wjqg5RWxnFgo3LqSsOS+VZWjEOdsD4RNPg/4QtatEoOgXv/rKYIfMNtj79p1RUG9LxcVWF33l4zr7lgGNbp/nbMVnKNFhiuvk4c1jej0F7smI9A9g/ejomyeFBtShTJYcRf6K3SnsU67Q6M3KUI4UknvU7qiFb1UNf6JPROPrHhAPeE8tO/jH6F9ukju2djnMPaGFh+0gwK4hGr9MXgufhCos9DdM9IUwJGVD8ZmWcW6ftPvRml48LKPI/cwNod9DLrMrd94XRWTHQxoRAazciyo/G8sHZcWNfvziD7hblAzqWW6HDjqfyfsuZDlUM8MgOYAdKw4KvxizejrYHayxF2dmHbKrgEwFUokd3klwGCCsHNY+hsfi+8gOMdkDWzCL
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2026 07:22:39.2398
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f3d7d243-f8f0-47eb-a926-08defcf97c2f
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SJ5PEPF00000204.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV0PR12MB999068
-X-purgate-ID: tlsNG-ef75cf/1787037766-360C5AE4-D2FBA5FF/0/0
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <20260818063259.18733-3-frn1furkan10@gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------in5zL4sb5tT0i26bidN0O2OD"
+X-purgate-ID: tlsNG-16d1c6/1787037840-F4A0477B-E750C1C6/0/0
 X-purgate-type: clean
-X-purgate-size: 7568
+X-purgate-size: 9528
 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------in5zL4sb5tT0i26bidN0O2OD
+Content-Type: multipart/mixed; boundary="------------hy22a6UXLvCxK10ANgSLlwHt";
+ protected-headers="v1"
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+To: Furkan Caliskan <frn1furkan10@gmail.com>, xen-devel@lists.xenproject.org
+Cc: jbeulich@suse.com, andrew.cooper3@citrix.com, dfaggioli@suse.com,
+ gwd@xenproject.org
+Message-ID: <d4fc3ae9-e048-4e66-bd18-d4a7a2024dd6@suse.com>
+Subject: Re: [PATCH 2/2] xen/sched: core: kill unarmed timers on
+ sched_init_vcpu() failure
+References: <20260818063259.18733-1-frn1furkan10@gmail.com>
+ <20260818063259.18733-3-frn1furkan10@gmail.com>
+In-Reply-To: <20260818063259.18733-3-frn1furkan10@gmail.com>
+Autocrypt-Gossip: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJ3BBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AAIQkQoDSui/t3IH4WIQQ+pJkfkcoLMCa4X6CgNK6L+3cgfgn7AJ9DmMd0SMJE
+ ePbc7/m22D2v04iu7ACffXTdZQhNl557tJuDXZSBxDmW/tLOwU0EWTecRBAIAIK5OMKMU5R2
+ Lk2bbjgX7vyQuCFFyKf9rC/4itNwhYWFSlKzVj3WJBDsoi2KvPm7AI+XB6NIkNAkshL5C0kd
+ pcNd5Xo0jRR5/WE/bT7LyrJ0OJWS/qUit5eNNvsO+SxGAk28KRa1ieVLeZi9D03NL0+HIAtZ
+ tecfqwgl3Y72UpLUyt+r7LQhcI/XR5IUUaD4C/chB4Vq2QkDKO7Q8+2HJOrFIjiVli4lU+Sf
+ OBp64m//Y1xys++Z4ODoKh7tkh5DxiO3QBHG7bHK0CSQsJ6XUvPVYubAuy1XfSDzSeSBl//C
+ v78Fclb+gi9GWidSTG/4hsEzd1fY5XwCZG/XJJY9M/sAAwUH/09Ar9W2U1Qm+DwZeP2ii3Ou
+ 14Z9VlVVPhcEmR/AFykL9dw/OV2O/7cdi52+l00reUu6Nd4Dl8s4f5n8b1YFzmkVVIyhwjvU
+ jxtPyUgDOt6DRa+RaDlXZZmxQyWcMv2anAgYWGVszeB8Myzsw8y7xhBEVV1S+1KloCzw4V8Z
+ DSJrcsZlyMDoiTb7FyqxwQnM0f6qHxWbmOOnbzJmBqpNpFuDcz/4xNsymJylm6oXiucHQBAP
+ Xb/cE1YNHpuaH4SRhIxwQilCYEznWowQphNAbJtEKOmcocY7EbSt8VjXTzmYENkIfkrHRyXQ
+ dUm5AoL51XZljkCqNwrADGkTvkwsWSvCSQQYEQIACQUCWTecRAIbDAAKCRCgNK6L+3cgfuef
+ AJ9wlZQNQUp0KwEf8Tl37RmcxCL4bQCcC5alCSMzUBJ5DBIcR4BY+CyQFAs=
 
+--------------hy22a6UXLvCxK10ANgSLlwHt
+Content-Type: multipart/mixed; boundary="------------2oZQmAeItHC3huexOgzquQki"
 
-On 18-Aug-26 04:52, Wig Cheng wrote:
-> Add a console driver for the classic i.MX UART IP ("fsl,imx6q-uart"
-> compatible), used as the console UART on the i.MX8M family.  Baudrate
-> and pin configuration are inherited from the bootloader; the driver
-> only enables the transmitter/receiver and wires up the RX/TX
-> interrupts, mirroring the existing imx-lpuart driver.
-> 
-> The i.MX8M family's UART IP differs from the LPUART used on
-> i.MX8QM/8QXP, so a separate driver is needed.
-> 
-> Signed-off-by: Wig Cheng <onlywig@gmail.com>
-> ---
->  xen/arch/arm/include/asm/imx-uart.h |  57 +++++++
->  xen/drivers/char/Kconfig            |   8 +
->  xen/drivers/char/Makefile           |   1 +
->  xen/drivers/char/imx-uart.c         | 226 ++++++++++++++++++++++++++++
-You should add an entry to the MAINTAINERS file for imx-uart.c so that it falls
-down under ARM maintainership. Your last patch makes you a reviewer but we still
-need to be maintainers of it. See how it was done for IMX8QM.
+--------------2oZQmAeItHC3huexOgzquQki
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
->  4 files changed, 292 insertions(+)
->  create mode 100644 xen/arch/arm/include/asm/imx-uart.h
->  create mode 100644 xen/drivers/char/imx-uart.c
-> 
-> diff --git a/xen/arch/arm/include/asm/imx-uart.h b/xen/arch/arm/include/asm/imx-uart.h
-> new file mode 100644
-> index 0000000000..a3892020e6
-> --- /dev/null
-> +++ b/xen/arch/arm/include/asm/imx-uart.h
-> @@ -0,0 +1,57 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +/*
-> + * Register definitions for the classic i.MX UART IP
-> + * ("fsl,imx6q-uart" compatible), used as the console UART on the
-> + * i.MX8M family.
-> + *
-> + * Register layout taken from Linux drivers/tty/serial/imx.c.
-> + *
-> + * Copyright 2026 Open-EP (E-Paper) Community
-> + */
-> +
-> +#ifndef ASM_IMX_UART_H
-> +#define ASM_IMX_UART_H
-> +
-> +#include <xen/const.h>
-> +
-> +#define URXD0           0x00   /* Receiver Register */
-> +#define URTX0           0x40   /* Transmitter Register */
-> +#define UCR1            0x80   /* Control Register 1 */
-> +#define UCR2            0x84   /* Control Register 2 */
-> +#define USR1            0x94   /* Status Register 1 */
-> +#define USR2            0x98   /* Status Register 2 */
-> +#define UTS             0xb4   /* Test Register */
-> +
-> +#define URXD_RX_DATA    0xff
-> +
-> +#define UCR1_UARTEN     BIT(0, U)   /* UART enable */
-> +#define UCR1_ATDMAEN    BIT(2, U)   /* Aging DMA timer enable */
-> +#define UCR1_TXDMAEN    BIT(3, U)   /* Transmitter ready DMA enable */
-> +#define UCR1_TXMPTYEN   BIT(6, U)   /* Transmitter empty interrupt enable */
-> +#define UCR1_RXDMAEN    BIT(8, U)   /* Receiver ready DMA enable */
-> +#define UCR1_RRDYEN     BIT(9, U)   /* Receiver ready interrupt enable */
-> +#define UCR1_TRDYEN     BIT(13, U)  /* Transmitter ready interrupt enable */
-> +
-> +#define UCR2_SRST       BIT(0, U)   /* 0 = issue software reset */
-> +#define UCR2_RXEN       BIT(1, U)   /* Receiver enable */
-> +#define UCR2_TXEN       BIT(2, U)   /* Transmitter enable */
-> +
-> +#define USR1_TRDY       BIT(13, U)  /* Transmitter ready */
-> +
-> +#define USR2_RDR        BIT(0, U)   /* Receive data ready */
-> +#define USR2_ORE        BIT(1, U)   /* Overrun error */
-> +
-> +#define UTS_TXFULL      BIT(4, U)   /* TX FIFO full */
-> +#define UTS_RXEMPTY     BIT(5, U)   /* RX FIFO empty */
-> +#define UTS_TXEMPTY     BIT(6, U)   /* TX FIFO empty */
-> +
-> +#endif /* ASM_IMX_UART_H */
-> +
-> +/*
-> + * Local variables:
-> + * mode: C
-> + * c-file-style: "BSD"
-> + * c-basic-offset: 4
-> + * indent-tabs-mode: nil
-> + * End:
-> + */
-> diff --git a/xen/drivers/char/Kconfig b/xen/drivers/char/Kconfig
-> index 8e49a52c73..f237c0220d 100644
-> --- a/xen/drivers/char/Kconfig
-> +++ b/xen/drivers/char/Kconfig
-> @@ -30,6 +30,14 @@ config HAS_IMX_LPUART
->  	help
->  	  This selects the i.MX LPUART. If you have i.MX8QM based board, say Y.
->  
-> +config HAS_IMX_UART
-> +	bool "i.MX UART driver"
-> +	default y
-> +	depends on ARM_64
-> +	help
-> +	  This selects the classic i.MX UART. If you have an i.MX8M family
-> +	  based board, say Y.
-> +
->  config HAS_MVEBU
->  	bool "Marvell MVEBU UART driver"
->  	default y
-> diff --git a/xen/drivers/char/Makefile b/xen/drivers/char/Makefile
-> index 8cbbffdca8..039f566926 100644
-> --- a/xen/drivers/char/Makefile
-> +++ b/xen/drivers/char/Makefile
-> @@ -10,6 +10,7 @@ obj-$(CONFIG_HAS_SCIF) += scif-uart.o
->  obj-$(CONFIG_HAS_EHCI) += ehci-dbgp.o
->  obj-$(CONFIG_XHCI) += xhci-dbc.o
->  obj-$(CONFIG_HAS_IMX_LPUART) += imx-lpuart.o
-> +obj-$(CONFIG_HAS_IMX_UART) += imx-uart.o
->  obj-$(CONFIG_HAS_LINFLEX) += linflex-uart.o
->  obj-$(CONFIG_GENERIC_UART_INIT) += uart-init.o
->  obj-y += serial.o
-> diff --git a/xen/drivers/char/imx-uart.c b/xen/drivers/char/imx-uart.c
-> new file mode 100644
-> index 0000000000..fd34b0cd11
-> --- /dev/null
-> +++ b/xen/drivers/char/imx-uart.c
-> @@ -0,0 +1,226 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +/*
-> + * Driver for the classic i.MX UART IP ("fsl,imx6q-uart"), used as the
-> + * console UART on the i.MX8M family (e.g. i.MX8MP).
-> + *
-> + * Baudrate and pin configuration are inherited from the bootloader.
-> + *
-> + * Copyright 2026 Open-EP (E-Paper) Community
-> + */
-> +
-> +#include <xen/errno.h>
-> +#include <xen/init.h>
-> +#include <xen/irq.h>
-> +#include <xen/mm.h>
-> +#include <xen/serial.h>
-> +#include <asm/device.h>
-> +#include <asm/imx-uart.h>
-> +#include <asm/io.h>
-> +
-> +#define imx_uart_read(uart, off)       readl((uart)->regs + (off))
-> +#define imx_uart_write(uart, off, val) writel((val), (uart)->regs + (off))
-> +
-> +static struct imx_uart {
-> +    uint32_t irq;
-> +    char __iomem *regs;
-> +    struct irqaction irqaction;
-> +    struct vuart_info vuart;
-> +} imx8m_com;
-> +
-> +static void imx_uart_interrupt(int irq, void *data)
-> +{
-> +    struct serial_port *port = data;
-> +    struct imx_uart *uart = port->uart;
-> +
-> +    if ( imx_uart_read(uart, USR2) & USR2_RDR )
-> +        serial_rx_interrupt(port);
-> +
-> +    if ( imx_uart_read(uart, USR1) & USR1_TRDY )
-Looking at Linux's imx.c you should clear TRDY if TRDEN is not enabled to
-prevent RX interrupt entering serial_tx_interrupt as TRDY is a raw status register.
+T24gMTguMDguMjYgMDg6MzIsIEZ1cmthbiBDYWxpc2thbiB3cm90ZToNCj4gc2NoZWRfaW5p
+dF92Y3B1KCkgY2FsbHMgaW5pdF90aW1lcigpIGZvciBhIHZjcHUncyBwZXJpb2RpY190aW1l
+ciwNCj4gc2luZ2xlc2hvdF90aW1lciBhbmQgcG9sbF90aW1lciBiZWZvcmUgaXQgY2FuIGZh
+aWwgLS0gdGhlc2UNCj4gYmVjb21lIGxpdmUsIGxpbmtlZCBpbnRvIHRoZWlyIHRhcmdldCBw
+Q1BVJ3MgcGVyLWNwdSB0aW1lciBsaXN0DQo+IHJlZ2FyZGxlc3Mgb2Ygd2hhdCBoYXBwZW5z
+IG5leHQuIElmIHRoZSBzY2hlZF9hbGxvY191ZGF0YSgpIGNhbGwNCj4gZnVydGhlciBkb3du
+IHRoZW4gZmFpbHMsIHRoZSBmdW5jdGlvbiBmcmVlcyB0aGUgc2NoZWRfdW5pdCB2aWENCj4g
+c2NoZWRfZnJlZV91bml0KCkgYW5kIHJldHVybnMgMSwgYnV0IG5ldmVyIHVubGlua3MgdGhl
+c2UgdGhyZWUNCj4gdGltZXJzLg0KPiANCj4gVGhlIGNhbGxlciwgdmNwdV9jcmVhdGUoKSwg
+ZG9lcyB3b3JzZTogb24gc2NoZWRfaW5pdF92Y3B1KCkNCj4gcmV0dXJuaW5nIG5vbnplcm8g
+aXQganVtcHMgdG8gZmFpbF93cSwgc2tpcHBpbmcgZmFpbF9zY2hlZCBhbmQNCj4gdGh1cyBz
+Y2hlZF9kZXN0cm95X3ZjcHUoKSAtLSB0aGUgb25seSBmdW5jdGlvbiBvbiB0aGlzIHBhdGgg
+dGhhdA0KPiBjYWxscyBraWxsX3RpbWVyKCkgb24gdGhlbS4gdmNwdV9kZXN0cm95KCkgdGhl
+biBmcmVlcyB0aGUgdmNwdSwNCj4gYW5kIHRoZSB0aHJlZSB0aW1lcnMgZW1iZWRkZWQgaW4g
+aXQsIHdoaWxlIHRoZXkgYXJlIHN0aWxsIGxpbmtlZA0KPiBpbnRvIHRoYXQgc2hhcmVkIGxp
+c3QuDQo+IA0KPiBUaGlzIHNpbGVudGx5IGNvcnJ1cHRzIHRoYXQgbGlzdC4gSXQgb25seSBz
+aG93cyB1cCBsYXRlciwgd2hlbg0KPiBzb21ldGhpbmcgZWxzZSB0b3VjaGVzIGEgbmVpZ2hi
+b3JpbmcgdGltZXI6IHNjaGVkX21vdmVfZG9tYWluKCkNCj4gY3Jhc2hlZCB3aXRoICJBc3Nl
+cnRpb24gJ2VudHJ5LT5wcmV2LT5uZXh0ID09IGVudHJ5JyBmYWlsZWQiIG9uIGENCj4gY29t
+cGxldGVseSB1bnJlbGF0ZWQsIHZhbGlkIHZjcHVzJ3MgdGltZXIuDQo+IA0KPiBLaWxsIGFs
+bCB0aHJlZSB0aW1lcnMgaW4gc2NoZWRfaW5pdF92Y3B1KCkncyBvd24gZmFpbHVyZSBicmFu
+Y2gsDQo+IHNvIGl0IGRvZXNuJ3QgZGVwZW5kIG9uIHRoZSBjYWxsZXIgcmVhY2hpbmcgc2No
+ZWRfZGVzdHJveV92Y3B1KCkNCj4gdG8gdW5kbyB3aGF0IGl0IHNldCB1cCBpdHNlbGYuDQo+
+IA0KPiBTaWduZWQtb2ZmLWJ5OiBGdXJrYW4gQ2FsaXNrYW4gPGZybjFmdXJrYW4xMEBnbWFp
+bC5jb20+DQoNCkFwYXJ0IGZyb20gdGhlIG1pc3NpbmcgRml4ZXM6IHRhZzoNCg0KUmV2aWV3
+ZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4NCg0KDQpKdWVyZ2VuDQo=
 
-> +        serial_tx_interrupt(port);
-> +}
-> +
-> +static void __init imx_uart_init_preirq(struct serial_port *port)
-> +{
-> +    struct imx_uart *uart = port->uart;
-> +    uint32_t ucr1, ucr2;
-> +
-> +    /*
-> +     * Reuse the bootloader settings; only enable the UART and both
-> +     * directions.  The console uses UCR1 interrupts (RRDYEN/TRDYEN)
-> +     * exclusively, so just clear UCR1's interrupt and DMA enables.
-> +     */
-> +    ucr1 = imx_uart_read(uart, UCR1);
-> +    ucr1 &= ~(UCR1_RRDYEN | UCR1_TRDYEN | UCR1_TXMPTYEN | UCR1_RXDMAEN |
-> +              UCR1_TXDMAEN | UCR1_ATDMAEN);
-> +    ucr1 |= UCR1_UARTEN;
-> +    imx_uart_write(uart, UCR1, ucr1);
-> +
-> +    ucr2 = imx_uart_read(uart, UCR2);
-> +    ucr2 |= UCR2_SRST | UCR2_RXEN | UCR2_TXEN;
-> +    imx_uart_write(uart, UCR2, ucr2);
-> +}
-> +
-> +static void __init imx_uart_init_postirq(struct serial_port *port)
-> +{
-> +    struct imx_uart *uart = port->uart;
-> +    uint32_t ucr1;
-> +
-> +    uart->irqaction.handler = imx_uart_interrupt;
-> +    uart->irqaction.name = "imx_uart";
-> +    uart->irqaction.dev_id = port;
-> +
-> +    if ( setup_irq(uart->irq, 0, &uart->irqaction) != 0 )
-> +    {
-> +        dprintk(XENLOG_ERR, "Failed to allocate imx_uart IRQ %d\n", uart->irq);
-uart->irq is unsigned, so s/%d/%u.
+--------------2oZQmAeItHC3huexOgzquQki
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-~Michal
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
+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
+kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
+=3DeeAB
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------2oZQmAeItHC3huexOgzquQki--
+
+--------------hy22a6UXLvCxK10ANgSLlwHt--
+
+--------------in5zL4sb5tT0i26bidN0O2OD
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmqECI8FAwAAAAAACgkQsN6d1ii/Ey9q
+Rwf+L2k3awXc3UT0xayKlNJypmTwgpurZd+e/oogZbePtjmYOLhhd3Lc1tvsWGNUiV+tuft0OFFg
+7RSZ/0mT7hG1dZ9GCSAHnWoKVh73ePdEzuwYenY7D8lyu4mwk8UndihQPOEksGVAbfiq7AqdLATW
+9oHEkjn5xIE7SllJQVCYUrqg4gZ8yqUJL5TBeg5+cLYqZC80eBM61OAWB8Fw9SiLGoRX9BgYbuh8
+tRhvJy0wEpf66CfC27GW/TYG/yeJfQYs5j2nuQdwhS7f0LRkXkE8joklty2ZIKs+u+oAZbEkUa7y
+BF2e4qTjM0O33uRU1hjzH/gbV1lMu1OhHPrqMMQK4w==
+=e9ze
+-----END PGP SIGNATURE-----
+
+--------------in5zL4sb5tT0i26bidN0O2OD--
 
