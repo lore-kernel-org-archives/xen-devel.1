@@ -4,44 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75708C5DF74
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 14:32:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1394233.1633063 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86960C5DF74
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 14:41:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1394240.1633071 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwKr2-00017F-J8; Tue, 18 Aug 2026 14:31:52 +0000
+	id 1wwKzs-0002oJ-DC; Tue, 18 Aug 2026 14:41:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1394233.1633063; Tue, 18 Aug 2026 14:31:52 +0000
+Received: by outflank-mailman (output) from mailman id 1394240.1633071; Tue, 18 Aug 2026 14:41:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwKr2-000178-GM; Tue, 18 Aug 2026 14:31:52 +0000
-Received: by outflank-mailman (input) for mailman id 1394233;
- Tue, 18 Aug 2026 14:31:51 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wwKzs-0002oC-Ad; Tue, 18 Aug 2026 14:41:00 +0000
+Received: by outflank-mailman (input) for mailman id 1394240;
+ Tue, 18 Aug 2026 14:40:58 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wwKr1-000172-GI
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 14:31:51 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1wwKzq-0002o6-JY
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 14:40:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwKr0-00FXA9-5R
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 16:31:50 +0200
+ id 1wwKzp-00C0P2-JW
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 16:40:57 +0200
 Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a846cd3-2eae-0a2a0a5409dd-0a2a4502ae38-6
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 16:31:50 +0200
-Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a846ee8-8faa-0a2a0a5109dd-0a2a4502a830-30
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 16:40:57 +0200
+Received: from [40.93.198.19]
+ (helo=CY7PR03CU001.outbound.protection.outlook.com)
  by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a846cd5-6ca4-0a2a45020019-d155dd2aa893-3
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 16:31:50 +0200
-Received: by mail-wr1-f42.google.com with SMTP id
- ffacd0b85a97d-47db714766aso705136f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 07:31:49 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482a5a7c55bsm12043664f8f.20.2026.08.18.07.31.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Aug 2026 07:31:49 -0700 (PDT)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a846ef7-6ca4-0a2a45020019-285dc6133339-3
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 16:40:57 +0200
+Received: from BN1PR13CA0020.namprd13.prod.outlook.com (2603:10b6:408:e2::25)
+ by DM6PR12MB4330.namprd12.prod.outlook.com (2603:10b6:5:21d::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.8; Tue, 18 Aug
+ 2026 14:40:52 +0000
+Received: from BN1PEPF0000468E.namprd05.prod.outlook.com
+ (2603:10b6:408:e2:cafe::9b) by BN1PR13CA0020.outlook.office365.com
+ (2603:10b6:408:e2::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.8 via Frontend Transport; Tue, 18
+ Aug 2026 14:40:52 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ BN1PEPF0000468E.mail.protection.outlook.com (10.167.243.139) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.339.3 via Frontend Transport; Tue, 18 Aug 2026 14:40:52 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 18 Aug
+ 2026 09:40:52 -0500
+Received: from [10.71.196.80] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.45 via Frontend
+ Transport; Tue, 18 Aug 2026 09:40:51 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,119 +67,231 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787063509; x=1787668309; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=CfCofe3KyBoJCN3PFQ3H3q6o9j9MJAxwTJdM1Z5zqAY=;
-        b=RUNLFEdQD0PVo+RAL4Ty7IKpnZbx+xdWXEct7/iR3dWNxDO27PxyQ30sGpLFMWGKnD
-         S+nLQHNKZcsjMl00gKYqSw9+OFQAJPak8jZLAIs2SZvACkEL9H9tMpaybzmrHLXzOjNj
-         ClPVqtZLi22B+ID3x0dpQ5O8oIeVFxQf/OA92rmgNaAYnGPsYa0J5iTd3Q7Av3loxybW
-         ngTFrkY1xBVDscdLbzhugy3px4+EqsVs7akTgAvwWmZ6GVOcXDc7OIFgWXvbaHII+Hxl
-         efdI0ziCRSffNkim/qVrFqf0gzlYGQzhghjDayGOOr99120kD+SsFWLEfPIpI0AtkaCh
-         JS6g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787063509; x=1787668309;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=CfCofe3KyBoJCN3PFQ3H3q6o9j9MJAxwTJdM1Z5zqAY=;
-        b=tEISC+cUhmB3QFMmWsd4xHvxq6WUBdVvm1QzPiSd6CYPznfj2rJGgkLjMS/SArY6RW
-         8p4TM8kbnr8ZU3ljacfqlatkJ00wjx8qhErOsnSx/ZW/C6zTohm3sM0DEu+IzaIn1Ph6
-         VUIJPbNDWtifXvZxcoIluYN6PBupiM/wCmyGWP8iWnKr4qcu3ZuMoTpqBreSgBmklcdf
-         z/JuMFskZWYXr0F7a/oxjjqjRDl8b8L0B24bYxd2b9n1so6DCRCjE2mDJqYJwjyU+f47
-         7kI6D0hVFDy/HyR2tsM7sT/WPP5gVX8D7xeWc56FZaflMfnaED4qatbjOsfR+oLoCwwh
-         AS5w==
-X-Forwarded-Encrypted: i=1; AHgh+RoV2Pw0QRGLSJ/NN/rQ0aT7vOsav5lE20IopBatbNudIFBY6iQdIeXprZSaizwoRIXPNYwxL8UJOSk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzSqRjfqjUklvfO6iIHpWONKUhV+LWhLc7ijWvP9zp9IpLi2bmP
-	V0kUrh7hdQzyqj8Jug/VxIGpB9zecNrSk0VAPW+WCk9E9SiXqyNN+SVCsFeTvqbIiA==
-X-Gm-Gg: AR+sD10oZ+KJT95P3UZdqhbyjznmukvpQ+/LzltF+Cpro2lNlRxFg+1VQQVk6sAck+I
-	Mlq+NG6NNZte6YlknCCmYlI7RwjiJ6cD815tUClu0yxa5rRGpriBZKHRI60fI4FJ22iBBV00PFG
-	Ny9UbN/n+T6hgObCmRt3A5Ff3m6Ugz1UzMBc675M5S7I7prI5KInI8xkI2sb++RCVQg1GWtDaNN
-	dP06rbIN8bQUuCztW9NWraWSmOX3s2v///eCLl2z5Wj/fi+ic6wcFcRrFTN+4wonRrZnw5W/oTM
-	jFHxTkY58/2hicgFDFfhKR/Jd+0NqYLt8y2QzJ22K7bhbbQIOKEmBOgLu+EP10W8c5y9teyOQml
-	GllqmQ/3MJwVJYun+0uVZ2YAJyYzhcbNA+42TWn4c2T3PH4+pBEaXsksMcnbCka45oIUiPovRhB
-	hZGM8OYV63U3jQeC7s1uowIMa04J36QdPIwf+egghMZIdc+mmrKafV+M2kOHnnCnvywL9s3Rw4b
-	It1/KCRrLFjdRAAVWn5O524ITMJGYTDVZO2LOzxxj065D3sRBVJ
-X-Received: by 2002:a05:6000:2881:b0:47f:7fe0:a287 with SMTP id ffacd0b85a97d-482aaa5fe04mr10184190f8f.2.1787063509508;
-        Tue, 18 Aug 2026 07:31:49 -0700 (PDT)
-Message-ID: <5fa222d8-af04-4b1a-a457-ee5004ace484@suse.com>
-Date: Tue, 18 Aug 2026 16:31:48 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=I0AjZs0LNxrB1lC5lhIEO6r46r8jSYPYOfb08bFJOHrUx1+gchthtVvVYSnermaDDvgvQ/v+n1aGAyGuMR0pHRQ4fRiYk8ABDlPu+TESpggkIIz4mEeQ9JBPbFmd8/q6UTmAu1sukwq4c8YXyb3qkfdzghaDN228k3tzW/5wOaEp40J0qMq/rD9S3uC3HEIe5glHZC6b9K73B+yJvrwo5lfR+rmB7xXpddn1jLx/GY/Vl99QS7qLPwPGgCfv6m6fNtrRjF0KZTOAqfi2U/DmU0f7XKeej/ywWWmFLJxXhe69s1/nJqwrp0LPn4GoK31tiFxhtvZZy/J4+b+ykoLyPg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qBoiOGtufWp+jsiy8lRgE3KmXZlt92Xy9zli4/jVRT4=;
+ b=cCUXQfMvfOplxAUGbjbes9ByM1VVodrcvXTDehHy64HOdiFLqD+A/4u23AXyhfHQWrOMoreJ1ALlk8RcDTUZgUy5zaPxp1eNv1O6plCUnICEYW4Abi9QLJrszawXFDvF5GRT/2aM532fWSk9EhBQXbSNPLzl0WnqFs0PvMnD4bg4Y2JUp9sVARiEQ3hhqbKsXHSE4fA2Y8gQOD9BmuTDrjd/Szfwy4m8rjp68NXke7JR8ULDyzsllJ7VSAB7C83Z+WXNHUbmNHl/uEyBEmarg8Em2Pmpn5+pKbjWcOhAYItd0+lcjefJnna14cjPNAMnKjB4bFYbOs+1OSsO/pYweA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=epam.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qBoiOGtufWp+jsiy8lRgE3KmXZlt92Xy9zli4/jVRT4=;
+ b=2tdjREW0sduhMnTKM07Ex/Hu4MDVfPeJCwVJ8Gz50T9ITIJwg8tCJpywABFujT4QKBLN3X2Cy6hFCpRH+rLzvDDvxBvRDgDqOs0AuJS/2o1gtBNV2ucryxsnDCWxN9PheeHi2qPszSYUftQIKr3j0RQAkGxE321uyGhoxPS5JT4=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Message-ID: <ec0800b0-cb65-4b75-b13b-69a90cec75ca@amd.com>
+Date: Tue, 18 Aug 2026 16:40:50 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/ucode: Remove MICROCODE_UPDATE_TIMEOUT and associated
- panic()
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20260818130738.1911850-1-andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v3] xen/arm: derive GIC CPU interface ID fields from the
+ vGIC
+To: Mykola Kvach <mykola_kvach@epam.com>, <xen-devel@lists.xenproject.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>
+References: <e8841a943eb7f6a64348b7316032084fb848bc2b.1787040666.git.mykola_kvach@epam.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260818130738.1911850-1-andrew.cooper3@citrix.com>
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <e8841a943eb7f6a64348b7316032084fb848bc2b.1787040666.git.mykola_kvach@epam.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1787063510-F34BE2AC-BDC93B56/0/0
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF0000468E:EE_|DM6PR12MB4330:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5c314a54-cb64-40d1-775b-08defd36b42b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700016|82310400026|1800799024|23010399003|376014|5023799004|11063799006|10067099003|56012099006|6133799003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	CO0CXD+WdCDo768J2Rcm8Zvz0TgUezvvdMeHY6+gR5AdK6iA51UfzVIHgILFoqHqmX15PMmgWyCSj8A33xYvT3JbhR25om8crQhkUiMueYnLUtD+XgMKhhC16xY9/nnqdW83jTHGg7K2Uju3Rbl2Fr4BXLrV/HoYPNtOLNuv6XGu1ziLH4dmAqwt6Txi8gHwm2sBijHSOx4Lig9lfD0o8GP11Eccd8klv8XI6opZns0VEdM0KBUoUeNX5OrlHYqLmNH95vkGLiSUwta6BqlWsI3vK2QdjqwKHym7kFsaPvSD90FifdmBFoeyV+aW27qaS6Wa7jsDO3m22hrxS19HMb7Xrz05XTPHbUxMtlsjVmvb69DIBlGsKNIcLJJGCjX/lDG2qDO+RMh1J6pK9kjGdhnSg9R+1TS5pUCVp6yMRyNj6pE1TplEKdogT1yq8aVeupXek6azmwd/G00Kuk7sBzqhokctzhDdL3ijpcVJhvrSVBoVlfHz3zBFtf4pXLCWvjK51nHQpk4aZKnasGo88U+MnXI85J81LDbrKvL2G3JMpzHOYcad+GzFnY9Rd8+wUVMfM4rUrKPnyhTvTuK7D1MyKQER9kEaeClD2UT8sYaLEK1Wb5+d0A4YgsNKNzwnvLVq1QT2JYcVpgUwJQ66Ew==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(82310400026)(1800799024)(23010399003)(376014)(5023799004)(11063799006)(10067099003)(56012099006)(6133799003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	HbGON6NkIlmc9m46ZBFbENqvFuZCZ+uTSaxBwPr2enA0O00qh4C24ZhblBExd50wnrg0BA4FlqU3mMHIri5/SMn3p1GH6x7xmliN0z0qLt7Drg3QyUN2c4x0SWV/h5BHrB6d+gfKH29a9F2dSGoL5uigihPwUtySJoULS11zC3+V/9tTSx8u6x0+g0b4GYLGJyCYwWTzXl/cO/2tR721571wuj0Dthz3+lC4/AnM9j84JJ+Hs6+PNXVD7bB4UHrOp0Lc/HHr/7DQRNlMpDaKMy0KUkiwvVRkOfidXPVzMPh3IMYbHkMsGNtevrOF/MI1zOdOfbYiGcT+oWCKOPrPJbFKryOgsh1fqTUmyW9HYhae/jZk/6Kkff5FstrraFFhmxu3p9ssaHwiVEx9/M02qiIzcwSsisP80ZpN3llPEbVToMxDNYugQj56qsuywNM+
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2026 14:40:52.5577
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5c314a54-cb64-40d1-775b-08defd36b42b
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN1PEPF0000468E.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4330
+X-purgate-ID: tlsNG-720697/1787064057-30FCE2AC-DD9EEE3E/0/0
 X-purgate-type: clean
-X-purgate-size: 1557
+X-purgate-size: 6885
 
-On 18.08.2026 15:07, Andrew Cooper wrote:
-> Panicing in the case of a timeout turns out to be about the worst possible
-> action Xen can take.  It leaves all other APs waiting on the condition
-> variable, some in NMI context.  As a result, they fail to be shot down and
-> dump state for kexec crash analysis.
 
-At the same time there likely isn't much to be learned from a kexec dump, as
-the source of the issue is in the CPU, not in Xen.
 
-Further, this code runs with the watchdog disabled. If there's truly no
-progress anymore, how would one know from the outside whether the system is
-dead altogether vs the control CPU still kicking around?
+On 18-Aug-26 11:19, Mykola Kvach wrote:
+> Xen exposes ID_AA64PFR0_EL1.GIC and ID_PFR1.GIC from domain_cpuinfo,
+> which is initialized from the sanitized host CPU feature state. This
+> does not necessarily match the virtual interrupt controller configured
+> for a domain.
+> 
+> A vGICv2 domain can therefore observe a nonzero GIC field when the host
+> supports the GIC system register interface, even though Xen disables that
+> interface for the domain. On a GICv4.1-capable host, a vGICv3 domain can
+> observe encoding 0b0011, although Xen exposes only its vGICv3 model.
+> 
+> Derive the fields from the domain's vGIC version instead. Expose 0b0000
+> for vGICv2 and 0b0001 for vGICv3. This covers ID_AA64PFR0_EL1 and the
+> ID_PFR1_EL1 alias in AArch64 state, as well as ID_PFR1 accessed through
+> CP15 in AArch32 state. Leave the alias unchanged when AArch32 is
+> unavailable.
+> 
+> Fixes: 07b9acea116e ("xen/arm: Add handler for ID registers on arm64")
+> Fixes: 8f81064a07c6 ("xen/arm: Add handler for cp15 ID registers")
+> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+> ---
+> Changes in v3:
+> - Add direct dependencies for the shared ID register helpers.
+> - Move ID_PFR1_GIC_SHIFT to the common CP15 register header.
+> - Apply cosmetic fixes from review.
+> 
+> Changes in v2:
+> - Share the GIC ID field helpers between the AArch64 and AArch32 paths.
+> - Parenthesize the individual ASSERT conditions.
+> - Preserve ID_PFR1_EL1.GIC when AArch32 is unavailable.
+> - Target master instead of the 4.22 release.
+> 
+> v1: https://patchew.org/Xen/ba4f779d68c54efc80c4a566dca38ac2e6f9a073.1783675708.git.mykola._5Fkvach@epam.com/
+> ---
+>  xen/arch/arm/arm64/cpufeature.c          |  1 +
+>  xen/arch/arm/arm64/vsysreg.c             | 18 +++++++++++++++-
+>  xen/arch/arm/include/asm/arm64/sysregs.h |  1 -
+>  xen/arch/arm/include/asm/cpregs.h        |  1 +
+>  xen/arch/arm/include/asm/vreg.h          | 26 ++++++++++++++++++++++++
+>  xen/arch/arm/vcpreg.c                    | 12 ++++++++++-
+>  6 files changed, 56 insertions(+), 3 deletions(-)
+> 
+> diff --git a/xen/arch/arm/arm64/cpufeature.c b/xen/arch/arm/arm64/cpufeature.c
+> index 6fb8974ade..8bae8915e8 100644
+> --- a/xen/arch/arm/arm64/cpufeature.c
+> +++ b/xen/arch/arm/arm64/cpufeature.c
+> @@ -72,6 +72,7 @@
+>  #include <xen/bug.h>
+>  #include <xen/types.h>
+>  #include <xen/kernel.h>
+> +#include <asm/cpregs.h>
+>  #include <asm/sysregs.h>
+>  #include <asm/cpufeature.h>
+>  #include <asm/arm64/cpufeature.h>
+> diff --git a/xen/arch/arm/arm64/vsysreg.c b/xen/arch/arm/arm64/vsysreg.c
+> index d9e3619dfb..4fb50b6972 100644
+> --- a/xen/arch/arm/arm64/vsysreg.c
+> +++ b/xen/arch/arm/arm64/vsysreg.c
+> @@ -20,6 +20,7 @@
+>  
+>  #include <asm/arm64/cpufeature.h>
+>  #include <asm/arm64/sve.h>
+> +#include <asm/cpregs.h>
+>  #include <asm/current.h>
+>  #include <asm/regs.h>
+>  #include <asm/traps.h>
+> @@ -298,7 +299,18 @@ void do_sysreg(struct cpu_user_regs *regs,
+>       * to identify the processor features
+>       */
+>      GENERATE_TID3_INFO(ID_PFR0_EL1, pfr32, 0)
+> -    GENERATE_TID3_INFO(ID_PFR1_EL1, pfr32, 1)
+> +    case HSR_SYSREG_ID_PFR1_EL1:
+> +    {
+> +        register_t guest_reg_value = domain_cpuinfo.pfr32.bits[1];
+> +
+> +        if ( cpu_feature64_has_el0_32(&domain_cpuinfo) )
+This check deserves a comment.
+> +            guest_reg_value = id_reg_set_gic_field(guest_reg_value,
+> +                                                   ID_PFR1_GIC_SHIFT,
+> +                                                   v->domain);
+> +
+> +        return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
+> +                                  guest_reg_value);
+> +    }
+>      GENERATE_TID3_INFO(ID_PFR2_EL1, pfr32, 2)
+>      GENERATE_TID3_INFO(ID_DFR0_EL1, dbg32, 0)
+>      GENERATE_TID3_INFO(ID_DFR1_EL1, dbg32, 1)
+> @@ -337,6 +349,10 @@ void do_sysreg(struct cpu_user_regs *regs,
+>              guest_reg_value |= (sysval << ID_AA64PFR0_SVE_SHIFT) & mask;
+>          }
+>  
+> +        guest_reg_value = id_reg_set_gic_field(guest_reg_value,
+> +                                               ID_AA64PFR0_GIC_SHIFT,
+> +                                               v->domain);
+> +
+>          return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
+>                                    guest_reg_value);
+>      }
+> diff --git a/xen/arch/arm/include/asm/arm64/sysregs.h b/xen/arch/arm/include/asm/arm64/sysregs.h
+> index f3c11d871e..c0a6827b08 100644
+> --- a/xen/arch/arm/include/asm/arm64/sysregs.h
+> +++ b/xen/arch/arm/include/asm/arm64/sysregs.h
+> @@ -438,7 +438,6 @@
+>  #define MVFR1_FPDNAN_SHIFT           4
+>  #define MVFR1_FPFTZ_SHIFT            0
+>  
+> -#define ID_PFR1_GIC_SHIFT            28
+>  #define ID_PFR1_VIRT_FRAC_SHIFT      24
+>  #define ID_PFR1_SEC_FRAC_SHIFT       20
+>  #define ID_PFR1_GENTIMER_SHIFT       16
+> diff --git a/xen/arch/arm/include/asm/cpregs.h b/xen/arch/arm/include/asm/cpregs.h
+> index a7503a190f..79203324fa 100644
+> --- a/xen/arch/arm/include/asm/cpregs.h
+> +++ b/xen/arch/arm/include/asm/cpregs.h
+> @@ -114,6 +114,7 @@
+>  #define MPIDR           p15,0,c0,c0,5   /* Multiprocessor Affinity Register */
+>  #define ID_PFR0         p15,0,c0,c1,0   /* Processor Feature Register 0 */
+>  #define ID_PFR1         p15,0,c0,c1,1   /* Processor Feature Register 1 */
+> +#define ID_PFR1_GIC_SHIFT 28
+It does not look nice to split CP15 encoding list with this macro. Furthermore,
+it looks a bit odd to move just GIC and not the other fields. Also, how about
+moving the block to asm/sysregs.h? You would not need to include cpregs.h then.
 
-> Microcode Loading on Granite Rapids takes about 4.5s of wallclock time, far in
-> excess of the of the arbitrary 1s Xen allows.  This time is spent in the WRMSR
-> to load the blob, and there's nothing the system can do but to sit and wait.
-> Despite the delay, the system as a whole does survive.
+>  #define ID_PFR2         p15,0,c0,c3,4   /* Processor Feature Register 2 */
+>  #define ID_DFR0         p15,0,c0,c1,2   /* Debug Feature Register 0 */
+>  #define ID_DFR1         p15,0,c0,c3,5   /* Debug Feature Register 1 */
+> diff --git a/xen/arch/arm/include/asm/vreg.h b/xen/arch/arm/include/asm/vreg.h
+> index 387ce76e7e..bb6c904f2e 100644
+> --- a/xen/arch/arm/include/asm/vreg.h
+> +++ b/xen/arch/arm/include/asm/vreg.h
+> @@ -4,11 +4,37 @@
+>  #ifndef __ASM_ARM_VREG__
+>  #define __ASM_ARM_VREG__
+>  
+> +#include <xen/bitops.h>
+> +#include <xen/bug.h>
+> +#include <xen/sched.h>
+> +
+> +#include <asm/gic.h>
+> +
+>  typedef bool (*vreg_reg64_fn_t)(struct cpu_user_regs *regs, uint64_t *r,
+>                                     bool read);
+>  typedef bool (*vreg_reg_fn_t)(struct cpu_user_regs *regs, register_t *r,
+>                                     bool read);
+>  
+> +#define ID_REG_GIC_WIDTH 4
+> +
+> +static inline unsigned int vgic_id_gic_field(const struct domain *d)
+> +{
+> +    ASSERT((d->arch.vgic.version == GIC_V2) ||
+> +           (d->arch.vgic.version == GIC_V3));
+> +
+> +    return d->arch.vgic.version == GIC_V3;
+Wouldn't this be a violation of MISRA C R10.3?
 
-For this I wonder whether the log message issues after 1 sec is adequate. If
-we know things can take this long, wouldn't we better issue the log message
-no earlier than, say, 5s * nr_sockets?
+~Michal
 
-> Microcode loading occures through admin operation only, so get rid of the
-> timeout completely.  It does nothing but make a bad sitaution worse.
-
-Worse when taking one perspective, yes, yet a silent hang also is worse than
-a panic() telling you what was wrong.
-
-This is a tough one, with - likely - no really good options. And establishing
-what's "least bad" may also be difficult.
-
-Jan
 
