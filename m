@@ -4,66 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AC34C5DF7D
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 12:37:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1394117.1632932 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA321C5DF7E
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 12:41:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1394128.1632942 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwJ4I-0004oE-1N; Tue, 18 Aug 2026 12:37:26 +0000
+	id 1wwJ7d-0006bK-Jc; Tue, 18 Aug 2026 12:40:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1394117.1632932; Tue, 18 Aug 2026 12:37:26 +0000
+Received: by outflank-mailman (output) from mailman id 1394128.1632942; Tue, 18 Aug 2026 12:40:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwJ4H-0004o7-Uj; Tue, 18 Aug 2026 12:37:25 +0000
-Received: by outflank-mailman (input) for mailman id 1394117;
- Tue, 18 Aug 2026 12:36:55 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wwJ7d-0006bD-Go; Tue, 18 Aug 2026 12:40:53 +0000
+Received: by outflank-mailman (input) for mailman id 1394128;
+ Tue, 18 Aug 2026 12:40:52 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jjherne@linux.ibm.com>) id 1wwJ3n-0004nR-Oq
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 12:36:55 +0000
+ (envelope-from <andrew.cooper@citrix.com>) id 1wwJ7c-0006b7-Lu
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 12:40:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwJ3n-002gny-1Z
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 14:36:55 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wwJ7b-0091Nc-TZ
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 14:40:51 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jjherne@linux.ibm.com>)
- id 6a8451e4-8faa-0a2a0a5109dd-0a2a450aa5e6-6
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 14:36:55 +0200
-Received: from [148.163.156.1] (helo=mx0a-001b2d01.pphosted.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jjherne@linux.ibm.com>)
- id 6a8451e5-f2d2-0a2a450a0019-94a39c01ea74-3
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 14:36:54 +0200
-Received: from pps.filterd (m0353729.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67IAVWUM2355685; Tue, 18 Aug 2026 12:31:31 GMT
-Received: from ppma21.wdc07v.mail.ibm.com
- (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4g2fsqr3va-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 18 Aug 2026 12:31:30 +0000 (GMT)
-Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
- by ppma21.wdc07v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 67ICQKHI005403;
- Tue, 18 Aug 2026 12:31:29 GMT
-Received: from smtprelay05.dal12v.mail.ibm.com ([172.16.1.7])
- by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4g33ek35sp-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 18 Aug 2026 12:31:29 +0000 (GMT)
-Received: from smtpav02.wdc07v.mail.ibm.com (smtpav02.wdc07v.mail.ibm.com
- [10.39.53.229])
- by smtprelay05.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 67ICVRIC20578988
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 18 Aug 2026 12:31:27 GMT
-Received: from smtpav02.wdc07v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 6B03A5805D;
- Tue, 18 Aug 2026 12:31:27 +0000 (GMT)
-Received: from smtpav02.wdc07v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 974735805B;
- Tue, 18 Aug 2026 12:31:21 +0000 (GMT)
-Received: from [9.61.88.99] (unknown [9.61.88.99])
- by smtpav02.wdc07v.mail.ibm.com (Postfix) with ESMTP;
- Tue, 18 Aug 2026 12:31:21 +0000 (GMT)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6a8452c1-e002-0a2a0a5209dd-0a2a4507e0fe-34
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 14:40:51 +0200
+Received: from [40.93.196.63]
+ (helo=SA9PR02CU001.outbound.protection.outlook.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6a8452d2-b4ea-0a2a45070019-285dc43f991b-3
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 14:40:51 +0200
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
+ by DSVPR03MB327264.namprd03.prod.outlook.com (2603:10b6:8:37c::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.8; Tue, 18 Aug
+ 2026 12:40:48 +0000
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37%7]) with mapi id 15.21.0339.007; Tue, 18 Aug 2026
+ 12:40:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -75,130 +55,210 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=pp1 header.d=ibm.com header.i="@ibm.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=pp1; bh=UL9IFO
-	BfaU/clKhXme8sOAazBEUtsscNml+GIhZ/mjc=; b=oMT8bJEReh0EmAFaP7G9HP
-	e/pj+gHlxR7TUff7uWpiXYx3U+zLTQr2uKoCAAwLfYUP5qXZpXFZXv8X+VOm3MSv
-	IjbE7NjT2UWR52QmJbviFARKyiB+G76mRaH9Kv6JlYOTVYZUKOArW4VolOjz//2P
-	H8D6Xb6Gw7OBcF1N/579Dw0t+u1lkl0DMDr9KzEbnhQIb+UM0zQlgbGDScoRNQ6c
-	c5KsKxoyv4OCZ+tEOmdgW1ynYWz67IUK7ogWIQ/S2j/IuC+zpj0amqTkLTKq03T7
-	LbZchkE1MoH1hl788YRP4ZywydVPfEjpFVhDOIhTSqRB3VneJIT4R7XAunnUqJAg
-	==
-Message-ID: <77e4a58e-269f-4c90-8a1d-bbf89a889c35@linux.ibm.com>
-Date: Mon, 17 Aug 2026 14:09:33 -0400
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=boSSxvf8iN0RMRR9sI2ePDev6KEZBDrAHs4R+JHTboOCmSFS719AMj4s/L9uWOTQ4QLuj6NVJ6VMwc7gJCJLbhQ5LbuD/nNdqRixQTXLXeHyQdlJORllr9p1ZZv2CS4sz4xlFgYHIq+Tzpz0TZRGH0chxUSTA9gUpTOgx2XccXjb4dvaCKvpEAX2UxDMVJM3dRoiRoCIqlTIg9Q5gSc/rSIIxOSjBKIQB4JSyveIOVPzXgaliEyUm3YuIA6HByMNzBs3UBFex3zjDJbzLHGl+po4CHaBXuaz8QHkNcfQua33p4pZVHs0qmps+kPqnycWaGWXdTnryDNdcnio9qL9Rw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Se8YLnfgXv2gKpjSg3NRrAj06ixFg9Xs0ND2aASdIWM=;
+ b=f0W3EOkMtHzjmbnDQ1h74Ooh3gsEKLqJqaHVYcXSO0mchWOgOkZqND6iQhSMM+rrO1elUTeX77pCq2Ef7Obbj8cQuvb5fwIkQmtY6TKpQo508Dfo7HPh23FnFtHmdmZV8LT0xE3zSYk6qRJsc0wluYF34akoSViN5VITyxQy8lTZ0sNdricwERuoBufZsa8MZzVog/Bkv77xQ60JmYbzFBHHpoXD9CX/iZ9si1i8F7elRuTcNcSiGMihdm9vsFLQHN67Nq4NFToI0Hc/Fhrxn5zhR8+Dwn0/iF/c+9u1WF5URcB6Edg+aNodu4rLXcu8SrNaJNq5oC+GyvFfq1OgPA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Se8YLnfgXv2gKpjSg3NRrAj06ixFg9Xs0ND2aASdIWM=;
+ b=VxAI/G/KUi6JV/oGM6kmASjB8Kd3dQ35lcZIsx29u2EXAGkVpiLONcCTxFfuliZA0LzYQ+pAqfIwI08U6Z2EhMZcKQgugqCX3D90BTYzg2tLTFCNSfNrU5XS9qtNF0wpHe8PLryk8xuwvewLdOr1/bLVD5nmv9NwpEI+P8nlg4M=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <d739485a-72cc-4518-afa9-8d2692a225ae@citrix.com>
+Date: Tue, 18 Aug 2026 13:40:44 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 37/49] monitor: tighten monitor_printf*()
-To: =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
-        qemu-devel@nongnu.org
-Cc: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
-        =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
-        Markus Armbruster <armbru@redhat.com>,
-        Gerd Hoffmann <kraxel@redhat.com>,
-        "Gonglei (Arei)" <arei.gonglei@huawei.com>,
-        zhenwei pi
- <zhenwei.pi@linux.dev>, Kevin Wolf <kwolf@redhat.com>,
-        Hanna Reitz <hreitz@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
-        =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
-        Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
-        Ani Sinha <anisinha@redhat.com>, Laurent Vivier <lvivier@redhat.com>,
-        Amit Shah <amit@kernel.org>, "Michael S. Tsirkin" <mst@redhat.com>,
-        Brian Cain <brian.cain@oss.qualcomm.com>,
-        David Woodhouse <dwmw2@infradead.org>, Paul Durrant <paul@xen.org>,
-        Richard Henderson <richard.henderson@linaro.org>,
-        Marcelo Tosatti <mtosatti@redhat.com>,
-        Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
-        Jiri Pirko <jiri@resnulli.us>, Jason Wang <jasowangio@gmail.com>,
-        Halil Pasic <pasic@linux.ibm.com>,
-        Christian Borntraeger <borntraeger@linux.ibm.com>,
-        Cornelia Huck <cohuck@redhat.com>, Eric Farman <farman@linux.ibm.com>,
-        Matthew Rosato <mjrosato@linux.ibm.com>,
-        Ilya Leoshkevich
- <iii@linux.ibm.com>,
-        David Hildenbrand <david@kernel.org>,
-        Stefano Stabellini <sstabellini@kernel.org>,
-        Anthony PERARD <anthony@xenproject.org>,
-        "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
-        "Dr. David Alan Gilbert" <dave@treblig.org>,
-        Hyman Huang <infra.ai.cloud@bitdeer.com>, Peter Xu <peterx@redhat.com>,
-        Fabiano Rosas <farosas@suse.de>,
-        Samuel Thibault <samuel.thibault@ens-lyon.org>,
-        Stefan Berger <stefanb@linux.vnet.ibm.com>,
-        Zhao Liu <zhao1.liu@intel.com>, Nicholas Piggin <npiggin@gmail.com>,
-        Chinmay Rath <rathc@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>,
-        Harsh Prateek Bora <harshpb@linux.ibm.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>,
-        Alistair Francis <alistair.francis@wdc.com>,
-        Weiwei Li
- <liwei1518@gmail.com>,
-        Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
-        Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
-        Chao Liu <chao.liu@processmission.com>,
-        Yoshinori Sato <yoshinori.sato@nifty.com>,
-        Artyom Tarasenko <atar4qemu@gmail.com>,
-        Max Filippov <jcmvbkbc@gmail.com>,
-        Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org,
-        kvm@vger.kernel.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
-        xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org
-References: <20260816-qemu-no-hmp-v3-0-e53fc35bc550@redhat.com>
- <20260816-qemu-no-hmp-v3-37-e53fc35bc550@redhat.com>
-Content-Language: en-US
-From: "Jason J. Herne" <jjherne@linux.ibm.com>
-In-Reply-To: <20260816-qemu-no-hmp-v3-37-e53fc35bc550@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ Jens Wiklander <jenswi@kernel.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Michal Orzel <michal.orzel@amd.com>
+Subject: Re: [PATCH] xen/arm: ffa: Harden SEND2 against invented loads
+To: Bertrand Marquis <bertrand.marquis@arm.com>,
+ xen-devel@lists.xenproject.org
+References: <1b483ce633bfa7d304cb78458ce029370691f00c.1787055320.git.bertrand.marquis@arm.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <1b483ce633bfa7d304cb78458ce029370691f00c.1787055320.git.bertrand.marquis@arm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE4MDA5MiBTYWx0ZWRfXxeP10mi5nXk+
- 42JuJ8FBRrSfAYCu/Q4o7d7+QjXR0y0YhLBXkgd3jS+DNmCgivbuDm/ZDSs3n8sSKCYwwSS9DVv
- NgWoNA0BwgCQpVOd0YlV1AgDl+Yi6+o2mDjLiNhVnCu3Iau7D1S8g+hCEDt2R0SHK58wtGi1/5s
- RsoSkQaqsfxgejgt67fHbonxC2nqio0fdE54/b3h309WKFkCPv8jczyyFYUmhEuBrox4FrFb7wC
- PggyxsIl4jVNptZqWdfEykgaHsd7pCNOyBiZc63Zi4tyERkBaOFbTYD+VvrDqVjy3rsEtC+ZxFV
- syR9AFCpfomtfiYbRemhA1VR8Zb4KVxISW6kyI+L2CNsRt3eFSzkaEXWyNO+sowDrmMC7kBgTR2
- 5tD9HUyfomfLDqaSHLjYIq6swzt3Ep8j+EJa7WICWbXLEoglP6kNvklJYaBlu+zXSSDds8nl6md
- PTudAuUQifZz7GHw46A==
-X-Proofpoint-ORIG-GUID: G5eJ90vsRCcNC-bXB9XjB1i4CkNoQiux
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE4MDA5MiBTYWx0ZWRfX/l7XvQu5FXvY
- 757EDCutzJiMhhtpUOg8veUoUv7xm8vDn4iZni2l2SWZhtMOzb10+wUB8ZZ4Fm+mPM+dyZPA8iu
- wv2noNska5/BZi3NZrq0a2WXPePTskc=
-X-Authority-Analysis: v=2.4 cv=DJe/JSNb c=1 sm=1 tr=0 ts=6a8450a3 cx=c_pps
- a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=uAbxVGIbfxUO_5tXvNgY:22 a=20KFwNOVAAAA:8
- a=VnNF1IyMAAAA:8 a=mY-fmJR8b8s-Z9VvxFgA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
-X-Proofpoint-GUID: WJt7z1CXoN-0E-GSYEQWlRq5_XUQN17s
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-18_01,2026-08-12_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 impostorscore=0 spamscore=0 clxscore=1011 bulkscore=0
- suspectscore=0 malwarescore=0 phishscore=0 adultscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608180092
-X-purgate-ID: tlsNG-4011c0/1787056615-59DDFCFC-04EBC6B5/0/0
+X-ClientProxiedBy: LO4P123CA0314.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:197::13) To CH8PR03MB8275.namprd03.prod.outlook.com
+ (2603:10b6:610:2b9::7)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|DSVPR03MB327264:EE_
+X-MS-Office365-Filtering-Correlation-Id: df2ed854-2ac1-44a0-fe3d-08defd25ee02
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|1800799024|23010399003|376014|56012099006|10067099003|22082099003|18002099003|11063799006;
+X-Microsoft-Antispam-Message-Info:
+	607nC/FyyIv65khyPwvoTg981PNygNbaMnd6zaA3HMBLzzHVezgoGYErj+Xibz6dm5YMA5yzib4PQyWNDiKeeDjkO3AuMqjBqLkkMOmPRoTyH/0GTSok/ZyLuE0F5YoZFZU6YaWpUB8uB3xR3R+qP621a+DuPKRtWRQ3wdJa7eOaEcARtMM3y4rtjblgOfKR2MQW0+H1CN7QB/L2wTpP8dTNetcSo+OJKgiImlZ/6W6HBIurwF5jnsQW2LsZh+H1lLle0bvoq0B8NoNlgbUcX01WiaY96CcQDwfGOfBOd9Glx5hQUl/2rRYlRQFuKY7+1fPyr3Bh4F6Kja893GwpQ5N6LqJIpwnua2Y9fia9KbKCs3JJ+nw5681h2E7GoZRHS7yZqTGEojGkQzEM9Nl3LS5JDoe5KTCwFJmx5KZgXjBGD2zKowiAhqsq1NcRiP2AIqqF59h8eY7IPTB2FPq+0GCrNGpj45+A66bx9XgU/Miy+pw6qF2dBiTNWyBMH2Z3dbTWf1LqPOBzsjWrYpiGU2o9oKCd0MPBo8TywKsFc3YXmrbzah9fkQh+ucJL7/Hcd7fOcCzrXA/RJ/qN7cVk+hOtXYwgqGAjyVzDY04lQdUR7JHYYbXazpm33I8jC60tx0/bugPoJqxE1GoRLOBjW7x+VzsnO/Qe7tBDnL8YOWI=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(56012099006)(10067099003)(22082099003)(18002099003)(11063799006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?U3FUMG5GYnB4dk9MSkc5c1VzSEpzUXJiOEFjdjd2Sk1id0N1MXFQaXlBbW1t?=
+ =?utf-8?B?b3VidUIyZ3dSZ1R4TUdxenAxZUZSSlNvaFFDaWd1dzlXcnBPS1l4ZDBOUWlL?=
+ =?utf-8?B?Q1dlckVXTnRVUW1pbEtNaTJlNHhZTlphN291aXVKbE5wNzFYdGFaK01JOFlp?=
+ =?utf-8?B?b2Z0S3gvN0N6M0VEYjkzWUhTNWZYQmwvR01McUNiaUhzTUhrT0NiZ2ppQlhI?=
+ =?utf-8?B?YkNWNm1lZkhkTEx4cnZHRU1XUWVJdUFlSWNIS0ZUb1pvbm50NEExUFZ3SDVx?=
+ =?utf-8?B?cVQ0RmxEbHFiUVRBWTM4V3hjVU5VRmpoc0xxeG5jNlZOS2xpUUF4Zkg4UG5k?=
+ =?utf-8?B?ZVhUc0hJWG9oVHo1NEtKekZGRE90ZXZkeUh0dmhLZWpGbnJSbWtRNngvM2FC?=
+ =?utf-8?B?N1ZPR3FmMFdYbSszK1JnamMwMHlPTXFubFJFT1FUbmRJcEhUSm53ZUtqZzd2?=
+ =?utf-8?B?RUZzZHZveHRYR3NQM1EwdnVWUXpjU296NXplcHhMREFVUExQUlQ0WThLeDNr?=
+ =?utf-8?B?YUFxRTBmNUVJNytHYkhkYlJ4TlNnNUJnVmp3VEQrV0ZKYmRaMEpSTXhnaDZL?=
+ =?utf-8?B?dWZGRGQ1eHQ3OWFkaG5OcEcwOXRjNXdtK2NTblFvTmlId3ArWmgzVThrOXRr?=
+ =?utf-8?B?UksreFIyRFoyT2pNbDJwVU00MWF3OXZEbWxSbVFhZE9XTVhhUHljTlZ6MUxa?=
+ =?utf-8?B?ZlA4cFgzOG9Ycm1HTGk4VXhBM1pGd2s3RkxWb0tTbDdMeFZ3UHh0c2pQdnNt?=
+ =?utf-8?B?MkU4Y1BwK2FvZzZ3cnZJWHpJNU95R1VLRHNLTVd0SUZ3MDdvVXBEbXdtcDFm?=
+ =?utf-8?B?cktIMXpYMnNpNmhaOWUwcmxXbXduZ3pkL0dobmlPdlc2c3pBS0JxR2tmekFw?=
+ =?utf-8?B?SlRSbmdFdDAyWVl6VFdRaGpRNi9yRlRPbjVTdlN4bUREaHRjSm5BOXJUWFp6?=
+ =?utf-8?B?R3N4Uzh3UmJycytPejY3dHVMOFFwYXR2aUdYVUpmL2hsWEJlYnpzUnZNQmJK?=
+ =?utf-8?B?eE5kMCt5VnFEbGdmNzhJcjh5TWJ6TDdrYnBTcTVYVC9EK2ZLOWR2Uklablhx?=
+ =?utf-8?B?NUwrM2hIaWR4YjFPcGNWMXJOcmtEVW82UjFaTG1mSGE4RFJPU09qOVFqUjE5?=
+ =?utf-8?B?OFRaYWYwWC9Ec01rd1F2NVdMMmMvM0JCdGZMdWY5SW1iTytxMXhuaHNEL3Vx?=
+ =?utf-8?B?OGg3MFdxSElNdDAzazJ5QlVkdVBPMjNMQnBjTmhwd2NRWG9OMU1JQ0c1bks3?=
+ =?utf-8?B?bHNsdk8vSHYvQUhDdWhhZ1NMY2p5YjFqOWdiVHRoLzF2bUpuMlNldVpCLzZB?=
+ =?utf-8?B?bThZZUxDYjFKOTJEeUVnOWZjYjBtdk9MSEtabk1WT2RKZXFvTU55R293cFJE?=
+ =?utf-8?B?ZlBpSXRWSEdOL0g2VE9KUm1QRW9SUlVWWndSSlJTNE02czNoVTMxYXNkZ3R6?=
+ =?utf-8?B?ejdmQ3lpdW9BWVdFTUR0WXBnY1UxOTFJOVNWZkczTmhIZ0NyQStFQ3dkOFJT?=
+ =?utf-8?B?SktTVHhLUEdDYzl2MEY4Z1NpcEVFcmU3QTE3RElRdVFZbVFDakNZcnhwSzlw?=
+ =?utf-8?B?MlpUcnlONnlYVXR3WmJ5MFdHZW9Xa1Q4a1ZrL0hOR3JuYjhxNm5abmg0M0xS?=
+ =?utf-8?B?Uk1lejB4bkswb2twMjFZcmFXTW9YL1NiVFRlMU8vcDJCWXpTdENldXVOcWZ4?=
+ =?utf-8?B?ZGVnRmhkbWRuaGVmWTI3YUlCQXhNMTRxRjBuR0RneUlEaTA1NWIyQzAvVzZj?=
+ =?utf-8?B?SDVVeFZ0NmhnaE5CdWF6RW8vYnJDeU85VzU1NWZnTEN3NjlERE11R2RlV0pU?=
+ =?utf-8?B?QUtHRkRJUGZpQXBtellUa0RublFiMEZLYWhIRnVFeW9Vb0U0MllNQkxiS1pE?=
+ =?utf-8?B?T1RxcnJBNldyNkh1VXpSNUpYdS93VkVwaUFDM0kvNkcwT1QzZ0trWVVRU29n?=
+ =?utf-8?B?V3IwcCtjREErYmlaRkNtWjJLbHhLYUw5YXNuQnBQTCthUE9GODZoM2FQRFlN?=
+ =?utf-8?B?bm81L0hCWFpRN3M4eG8rTWt4TkVBQzlIeGkzZUtnM1o0SzdveENKQ1EzZnEz?=
+ =?utf-8?B?TTgvS2U5STdveUZrdXg1by9yc28vbHAzZ1dXTi9JR1BERG5kZG0rb1k0a1dW?=
+ =?utf-8?B?YzFnQnN6OUY1cEptUDVsOGJsNHJ5UE9haVQ4Ylg5dW0zNUcraDgvZVdLbkZu?=
+ =?utf-8?B?L1NlN1oxN3QxMzB3UlNCOHJ1ekFMOFVkUUtBU3ZMeG8zWS9wVEJOd1RxbW5p?=
+ =?utf-8?B?SkllRWlQT0s2VnM4MTlzVzlWVjVFcUNJMUQ1ZDlZSFQ0cTh3YldablZ1Qkpi?=
+ =?utf-8?B?bXh0S0ttUUR5MjdodVliWUFlSnphcmFpTGwxRERuYy8vZmhIY3JTQT09?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: df2ed854-2ac1-44a0-fe3d-08defd25ee02
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2026 12:40:48.2792
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 0iHw9vPJkPbyRQIvOBwv1QQqOYuLz1pQaI0d5nhD90+qUbYOb+ZFhtdDucojtbsH0LqcUJrEROpchqSNphZQy0JAFdQTnjvHaRj8iequsto=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSVPR03MB327264
+X-purgate-ID: tlsNG-ef75cf/1787056851-A6AD8AE4-8C3EAAD4/0/0
 X-purgate-type: clean
-X-purgate-size: 864
+X-purgate-size: 2577
 
-
-
-On 8/16/26 3:13 PM, Marc-André Lureau wrote:
-> Rename monitor_printf->monitor_hmp_printf, monitor_vprintf->
-> monitor_hmp_vprintf, and monitor_printc->monitor_hmp_printc, changing
-> the first parameter from Monitor * to MonitorHMP * to enforce type
-> safety. The implementation is also simplified: monitor_hmp_vprintf now
-> directly calls g_strdup_vprintf + monitor_puts, removing the virtual
-> dispatch via moncls->vprintf.
-> 
-> The dev_print() callbacks are temporarily using the MONITOR_HMP(mon)
-> cast, they are fixed in the following commits.
-> 
-> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+On 18/08/2026 1:16 pm, Bertrand Marquis wrote:
+> Research into compiler-invented loads has flagged FFA_MSG_SEND2 as a
+> possible vulnerability.
+>
+> ffa_handle_msg_send2() copies the message header from the guest-writable
+> TX buffer before validating and using its fields. A plain structure copy
+> does not prevent the compiler from re-deriving later field accesses from
+> the live TX mapping.
+>
+> For VM-to-VM messages, msg_offset and msg_size are validated against the
+> source and destination buffers, then used to copy the payload. If a
+> sibling vCPU changes the header and the compiler reloads either field,
+> the checked and used values can differ. This can cause an out-of-bounds
+> read from the sender's TX buffer or an out-of-bounds write into the
+> receiver's RX buffer.
+>
+> The cross-VM path is gated by CONFIG_FFA_VM_TO_VM, which is disabled by
+> default. The audit ranks the likelihood of such a reload as low, but the
+> C semantics do not guarantee that later accesses use the stack copy.
+>
+> Add a compiler barrier immediately after copying the header so that
+> validation and use consume the same snapshot.
+>
+> Link: https://github.com/xoreaxeaxeax/schrodingers-toctou/blob/main/observer-effect/audits/audit-xen-tee-mediator-RELEASE-4.21.1.md#tm-2--ff-a-txrx-buffers-ffa_shmc-ffa_msgc
+> Fixes: 98af565b1e61 ("xen/arm: ffa: Add indirect message between VM")
+> Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
 > ---
-> ...
->   hw/pci/pci-stub.c                       |   3 +-
->   hw/s390x/s390-skeys.c                   |   9 +-
->   hw/s390x/s390-stattrib.c                |  20 +--
-Reviewed-by: Jason J. Herne <jjherne@linux.ibm.com>
+>  xen/arch/arm/tee/ffa_msg.c | 5 +++++
+>  1 file changed, 5 insertions(+)
+>
+> diff --git a/xen/arch/arm/tee/ffa_msg.c b/xen/arch/arm/tee/ffa_msg.c
+> index 1eadc62870f2..39f561c8237f 100644
+> --- a/xen/arch/arm/tee/ffa_msg.c
+> +++ b/xen/arch/arm/tee/ffa_msg.c
+> @@ -257,6 +257,11 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs *regs)
+>  
+>      /* create a copy of the message header */
+>      memcpy(&src_msg, tx_buf, sizeof(src_msg));
+> +    /*
+> +     * Make sure that "tx_buf" which is shared with the guest isn't accessed
+> +     * again after this point.
+> +     */
+> +    barrier();
+>  
+>      src_id = src_msg.send_recv_id >> 16;
+>      dst_id = src_msg.send_recv_id & GENMASK(15,0);
+
+This does look to be adequate to fix the potential issue, but you should
+drop the ACCESS_ONCE(src_ctx->guest_vers) a little lower down.
+
+With a safe copy on the stack, there's no need to further inhibit
+optimisations around it.  In fact, it's unclear why e040b94d0fff added
+the ACCESS_ONCE() in the first place, seeing as it was already an
+on-stack object at the time.
+
+~Andrew
+
 
