@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4552C5DF7D
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 16:05:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1394342.1633171 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E7D1C5DF7D
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 16:05:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1394349.1633180 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwMIv-0002ao-O5; Tue, 18 Aug 2026 16:04:45 +0000
+	id 1wwMJc-00035D-3Q; Tue, 18 Aug 2026 16:05:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1394342.1633171; Tue, 18 Aug 2026 16:04:45 +0000
+Received: by outflank-mailman (output) from mailman id 1394349.1633180; Tue, 18 Aug 2026 16:05:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwMIv-0002ah-LO; Tue, 18 Aug 2026 16:04:45 +0000
-Received: by outflank-mailman (input) for mailman id 1394342;
- Tue, 18 Aug 2026 16:04:44 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wwMIu-0002ab-MG
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 16:04:44 +0000
+	id 1wwMJc-000356-0G; Tue, 18 Aug 2026 16:05:28 +0000
+Received: by outflank-mailman (input) for mailman id 1394349;
+ Tue, 18 Aug 2026 16:05:26 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1wwMJa-00034w-HO
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 16:05:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwMIu-00FkPm-2w
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 18:04:44 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wwMJZ-00HWf2-Ua
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 18:05:25 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a848287-8faa-0a2a0a5109dd-0a2a450a9638-46
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 18:04:44 +0200
-Received: from [209.85.221.50] (helo=mail-wr1-f50.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a84829b-f2d2-0a2a450a0019-d155dd32acef-3
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 18:04:43 +0200
-Received: by mail-wr1-f50.google.com with SMTP id
- ffacd0b85a97d-47f703a9e5dso2251976f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 09:04:43 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
- [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4999d0fb85csm188392425e9.11.2026.08.18.09.04.42
+ (envelope-from <jbeulich@suse.com>)
+ id 6a8482be-2eae-0a2a0a5409dd-0a2a4508803e-14
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 18:05:25 +0200
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a8482c5-f659-0a2a45080019-d155802fb8f3-3
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 18:05:25 +0200
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-496bb7cdf51so1105e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 09:05:25 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4999d078523sm143035125e9.6.2026.08.18.09.05.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Aug 2026 09:04:42 -0700 (PDT)
+ Tue, 18 Aug 2026 09:05:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,195 +53,335 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787069083; x=1787673883; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
+        d=suse.com; s=google; t=1787069125; x=1787673925; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=R7E3RhGjcMrQEACWget1/Qhjbhr69AQstIrEKp2WYwM=;
-        b=L1YkYX0wjVFThOMWbEJ1g0Rl1Zsuxn8TPql9pCR1r/sM8gI9ZXccB2MdvSYYhNjLCS
-         A04bxSA+i/l+JsXFEg+jQn1fz2jZi8jCrF/MA2k9M8UEPp/imYgWqeGlGuqG8LNyOmhd
-         z5F4d3yR8H8csUWO3pIku4I2zteGLyIuzGYgqEhcijMtEMDlNl7EJLFH48xpURaAMP7I
-         VwY739/vW0I56oneaa4OOPS0BCol8SLNndEaKBY9/VdPuF7O1cA8g9esLFwcpS9GvD3l
-         mJLmRmJKCWbv9Qe+XWOq7gwO7dR99VZDnqzA6qLh9dfGuc8G98FOs0WHRDLHyfMPVa8l
-         vqWw==
+        bh=InfOa6qUmClzKj3WxgBIReQM4wfkrqswb3Yp/gAlkqY=;
+        b=PWSalbjmxeSzlRR/aYcgJh1OhuZeOntMMtbNO9EhEhpuHBm8/Fc8Y1K16kZa9y1zh5
+         5ENdhrEzxeWuG7pyWTdEaqJjSFaqxvNV/3Hnor70Dcu2PcpImtE5E8DZN/bPkWIJxJFw
+         /GhSa8RtCG0P3TwgB43JBugIwNwWf+qDr7rDrxWAH+R/IzlZGwq6Fyv9cLWOfdJw7GwR
+         mzXfXFdDhM2E6XoiFli0fFhgPtqEtgRMvnyTNsCWqNcJp9H2aVImBZizTL9AdXniw/mx
+         XRBj45iCxBF6ikWwN7/oVA8vk+6DMjB/m3jmPzBcwR5j0Hq1fNrkWAyLwSP78UHc4xoy
+         jIQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787069083; x=1787673883;
-        h=content-transfer-encoding:content-type:in-reply-to:from
+        d=1e100.net; s=20251104; t=1787069125; x=1787673925;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=R7E3RhGjcMrQEACWget1/Qhjbhr69AQstIrEKp2WYwM=;
-        b=Oty4D7PtWv+qa/3fH/K5OnrYbPRYznFsJ394f9ChW0BGXklFOxsAl1qhX+Cl3PCNAO
-         hbpnFqtF3+11xYfiwj+Tk1ZmdlCH/crlpAtcaRIi4lg+VVNdElFg9Z+LGiXfNqqzGYOp
-         LWUBWKl7JSDF3ygohbOV5EbDwMpKgmkCMUyOaFvzFYAeveXpbU0MBzbgNhTz91MXbCRS
-         d/tP2oyLkTpdfU3Cey+BgRe3+yJAHZihoW75QwO6Vgu7lbOSey9LhQFnxXGn4BrohpDe
-         uASYzEn6srFVa1lcowcj3GGzAjFj05gAER1VqA0CL4BUeF/43lvtqjnZ4VMrXBWw3KLB
-         Sf/Q==
-X-Forwarded-Encrypted: i=1; AHgh+Rr90q9yDRo5v2MvD6Shz911r/S3gbhlkGWzZhSIc5UteND5vfD3oJ5qKUmNhXeyq0vBE195nBU8pR0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yyxc4QDdap7dxWXXaY1H3xppUSJ8++lvncY/Ge2NpKcbvVAufOr
-	O9yjSusgQFEhEMGtLr+BfzBodg4G7oIPnc7/nQvtOWkqKG6kaoC1P0YX
-X-Gm-Gg: AR+sD13ovL2pcc8UW03D+x1BRKmbGAbxc7NlWOYb9ob+e5TYuAAvvH4IDclDz0vtboP
-	4OveKDBoDDNsoSDiL707tXKw7gNs7lKlwffH5fa/Ea+xQPL81eWXrVLG/t6VYWDS7iPkBcKTgEO
-	Wz/xDaTVvd9rP8l4IIj0BvDA3NZ2O+DoYFsKrIvL7GU7ylTpvSBvRC7q3pT2zjdB333Uc+jt0gV
-	7VIIl2ZY7E438zm8LfVn8GR/u3VD1B+WzA1rQWKRbKVoRRRhMnoQ0kN+RzgpNYxGVE9ZFxzCl0e
-	dZrempi7AZ+W0Wjvs1dFh7CpkqWWtJ7yhX9SRaXJQHyZUL78wgTZoFnEudKxtbv3ACoM7criXcZ
-	AmOpt5EYr8Bj9tHyC7bMXd3Ig8WfdruIb4HLuNRCxcyKks9D0HH1Trrz5vMngc6sr+pWUBTEWYi
-	R3LX/dPeNdWe/bC/MWpMzjtG9FHcGtF1PdycLDhHYBnZ/Je7VA3v2YhgL9euf0VzF7eWUJSrDqw
-	9LBAsISa0pyGnuW3YuXTQas7y/B52rr1X+gPpeWP5U=
-X-Received: by 2002:a05:600d:16:b0:499:a5c8:c6f3 with SMTP id 5b1f17b1804b1-499a5c8c74fmr84239055e9.3.1787069083162;
-        Tue, 18 Aug 2026 09:04:43 -0700 (PDT)
-Message-ID: <fa2924e9-139c-4cdc-9dd4-4b3a26a21fa2@gmail.com>
-Date: Tue, 18 Aug 2026 18:04:41 +0200
+        bh=InfOa6qUmClzKj3WxgBIReQM4wfkrqswb3Yp/gAlkqY=;
+        b=LFWH9+15VGXtap/V3w9FUWSBV/bzQpr1SGv17P4FAYPOzR9S0jVWP4PRTZ31MciDah
+         VxKqmgoMi53Sp9wQ1GpxSgTMmuYdtubHQeoSZRE6S+krxcY/IOFfxDeDBQYXDOxeVlzr
+         f3CLz9ALkrQKy1F1+48Dq3/UVRlVklnMql3Vbi/K/jMHj7IpWuWGUFT4M5wmJGRp77RW
+         WY2WFrVbEGNMWfBEVGlhCPQZ2IAzWUDQhWp3nc81+JhB2sAKPF9qWwTxaG3/IeGbdMCw
+         v81pFucmbh20c/k6VqYshgFcKqu2r5oXWNZ8uQ6PD7f2fSv+/PPJirluQC4+F2v9i8JY
+         aCHg==
+X-Forwarded-Encrypted: i=1; AHgh+RraD/GGA18Fg1v3nLQ1vrFLg3nv4FIRYUFb3p3ZNOwKFVt2ttqOQfsM22wxHzlvjOWNUYe4PATgZow=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyeKMjRvq9sGSlN47vhYdE9JzBAGYisWdjK7j/eprpolxK/i1vA
+	uaL/+OP8Dh/yC5BTQFGiJuamWFhT4LDnbYIeoG96KPO97DTzffvM7b8k0t46ZICHVA==
+X-Gm-Gg: AR+sD12KbSiRK/mbLgijE1xK5xbHArrThcBV0bOTIzEO+cT0XvZ9GIdPk+E013ChEiQ
+	0IjLmiy7Dx8zxtJ+cl/wy0YXVKWcvSjvudbJsV1RwfXNMtP5hqN6FnODaLkbZzMoSsG0s3GaR0h
+	jvnBJxNSdIMopRYs1iOn1MdW3h2g+6qWpBfi3yZ9y4eRvbDRFR6pEzPCRDpcT7kKgaj0dPydabc
+	TBOHl3jXBzyR+0IxgZ/YxeUCJhtwcHuea60FhcneSN9D03BmEPatVLvA/T1HkCL7Rx7m5mKwmZA
+	4ZsqD7rre5osb2FhDL5vSROWjEMJz213g9/Rxp6MiqrTFDRMyKtqMaEVtZLNaJYwJyYMXYDHkIF
+	Hu9+FPRM4KhN2XvCYzENNiRMVtg/z5m9l5HDJMGp6WFUaEPv9rv3bUzmfo+Y1aZ/ZRgXA1qPDUj
+	pAMNA4svEBhrXh5205bkw0lQt2qgW7HvZjsnmUFMeLhHsYKs1w4rxiDI0FWMm64k2f1G7/SYhBr
+	msRVHPGRwdfLoew4U32v9wXRxm0VxNRMF5xmMrAdLmDHOhHM2Va
+X-Received: by 2002:a05:600c:848e:b0:499:8156:cd3f with SMTP id 5b1f17b1804b1-4999fb3f78bmr175917645e9.8.1787069124968;
+        Tue, 18 Aug 2026 09:05:24 -0700 (PDT)
+Message-ID: <35f997cb-e143-41bd-9360-fafff3c9bfc7@suse.com>
+Date: Tue, 18 Aug 2026 18:05:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 14/17] xen/riscv: add guest page fault handling stub
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
+Subject: Re: [PATCH v4 5/9] x86/passthrough: Introduce pt_irq_bind_msi() as
+ canonical MSI bind path
+To: Julian Vetter <julian.vetter@vates.tech>
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+ Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
- <7ef8919f12c269d180a2b56a83218cc54e0e357c.1784560663.git.oleksii.kurochko@gmail.com>
- <ab3eb1be-ec62-42ae-8966-e2801752ce4f@suse.com>
- <61b9f565-7193-4192-9f57-1b4bd258fc11@gmail.com>
- <f6e12465-dcd0-4f04-bdd4-8e1943e1ade7@suse.com>
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20260427135406.1281424-1-julian.vetter@vates.tech>
+ <1777298080.8631fc262581453bbf619ec5b2062170.19dcf3882f5000f373@vates.tech>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <f6e12465-dcd0-4f04-bdd4-8e1943e1ade7@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <1777298080.8631fc262581453bbf619ec5b2062170.19dcf3882f5000f373@vates.tech>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1787069084-504CFCFC-7FD3143D/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 5466
+X-purgate-ID: tlsNG-c1860d/1787069125-D674387B-8B044975/0/0
+X-purgate-type: clean
+X-purgate-size: 10305
 
-
-
-On 8/18/26 10:29 AM, Jan Beulich wrote:
-> On 17.08.2026 18:10, Oleksii Kurochko wrote:
->> On 8/12/26 5:48 PM, Jan Beulich wrote:
->>> On 20.07.2026 18:02, Oleksii Kurochko wrote:
->>>> --- a/xen/arch/riscv/traps.c
->>>> +++ b/xen/arch/riscv/traps.c
->>>> @@ -191,6 +191,67 @@ static void timer_interrupt(void)
->>>>        raise_softirq(TIMER_SOFTIRQ);
->>>>    }
->>>>    
->>>> +static always_inline unsigned long get_faulting_gpa(void)
->>>
->>> May I suggest to use always_inline only when inlining is _functionally_
->>> required?
->>
->> Sure. But it ins't clear to me why it isn't a case here? Is it connected
->> to that function is static and too simple so a compiler will do by itself?
+On 27.04.2026 15:54, Julian Vetter wrote:
+> Change pt_irq_bind_msi() to accept raw MSI address and data values instead
+> of pre-decoded gvec/gflags. Add msi_addr_to_gflags() to decode the
+> destination ID and delivery attributes, including the Extended Destination
+> ID bits from address[11:5] per Intel convention.
 > 
-> Counter question: What is it that would functionally break if the function
-> ended up not being inlined? (This is the question you generally need to
-> answer to justify use of always_inline. Of course there's the additional
-> case of performance being affected, but I don't view that as applicable
-> here; I'm open to be proven wrong, though.)
-
-Now it is clear how to identrify if function should be always_inline.
-
-I put it only for the purpose to be sure that this function won't be 
-called with prologue/epilogue but I agree that compiler will do that by 
-itself.
-
+> Update pt_irq_create_bind() to call pt_irq_bind_msi() via the existing
+> gvec/gflags interface so domctl-based callers continue to work.
 > 
->>>> +{
->>>> +    /*
->>>> +     * According to RISC-V spec:
->>>> +     *  18.2.8. Hypervisor Trap Value Register (htval)
->>>> +     *   ...
->>>> +     *   A guest physical address written to htval is shifted right by 2 bits
->>>> +     *   to accommodate addresses wider than the current XLEN.
->>>> +     *   ...
->>>> +     *   If the least-significant two bits of a faulting guest physical address
->>>> +     *   are needed, these bits are ordinarily the same as the
->>>> +     *   least-significant two bits of the faulting virtual address in stval.
->>>> +     *   For faults due to implicit memory accesses for VS-stage address
->>>> +     *   translation, the least-significant two bits are instead zeros. These
->>>> +     *   cases can be distinguished using the value provided in register htinst.
->>>> +     */
->>>> +    return (csr_read(CSR_HTVAL) << 2) | (csr_read(CSR_STVAL) & 0x3);
->>>
->>> Well, okay, but instead of not losing the bottom two bits you're now losing
->>> the top two ones.
->>
->> Oh, right, I will add a cast ((uint64_t)csr_read(CSR_HTVAL) << 2) | ...
->>
->> It will cover all the cases RV32 which has 34-bit guest address and it
->> will be enough for RV64 where GPA is 59bit (the highest possible for Sv59).
-> 
-> Only if the function return type then also changes.
-> 
->>> Also the spec reads as if htval only _may_ hold the original address of the
->>> faulting access. What if htval ends up 0?
->>
->> good point. then we have to emulate fault instruction and get an address
->> from an instruction. I think that for now it will be enough just to
->> support platforms which always write GPA to HTVAL.
->>
->> If I understand correctly if htval is supported by platform then htval
->> will be always filled for guest page fault. To verify if HTVAL is
->> supported we could do:
->>
->> 'Unless it has reason to assume otherwise (such as a platform standard),
->> software that writes a value to htval should read back from htval to
->> confirm the stored value.'
-> 
-> How does this matter here? It's one thing for htval to be capable of
-> holding (all?) non-zero values, and another that it would always be
-> written. If the platform doesn't indicate the behavior, I fear you have
-> to assume that you may (perhaps even randomly) observe 0.
+> Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
+> ---
+> Changes in v4:
+> - As suggested by Roger replace the v3 approach (v3 patches 2+4) of
+>   extending the gflags ABI with XEN_DOMCTL_VMSI_X86_EXT_DEST_ID_MASK and
+>   XEN_DOMCTL_VMSI_X86_FULL_DEST() so callers could pass extended bits
+>   through XEN_DOMCTL_bind_pt_irq. pt_irq_bind_msi() now accepts raw MSI
+>   address + data and decodes the destination internally via
+>   msi_addr_to_gflags()
+> - Replace the gmsi.gvec + gmsi.gflags fields in struct hvm_pirq_dpci
+>   with gmsi.addr + gmsi.data
+> - Replace msi_gflags() (v3 vmsi.c helper that packed the extended
+>   destination bits into gflags) with msi_addr_to_gflags() which decodes
+>   the raw MSI address directly
+> - pt_irq_create_bind() now rejects PT_IRQ_TYPE_MSI with -EOPNOTSUPP and
+>   all callers are redirected through the DM op path in patch 7
 
-So to be very sure we could check for two extensions: Sstval and Shtval.
-They will guarantee that under any circumstances it will be filled.
+This does not look to match what the patch here does. Peeking ahead, patch
+7 doesn't look to convert to -EOPNOTSUPP either.
 
-Also, as an option we could check that htinst value isn't zero as 
-according to the spec:
+> --- a/xen/arch/x86/hvm/vmsi.c
+> +++ b/xen/arch/x86/hvm/vmsi.c
+> @@ -43,6 +43,7 @@
+>  #include <asm/current.h>
+>  #include <asm/event.h>
+>  #include <asm/io_apic.h>
+> +#include <asm/msi.h>
+>  
+>  static void vmsi_inj_irq(
+>      struct vlapic *target,
+> @@ -107,12 +108,12 @@ int vmsi_deliver(
+>  
+>  void vmsi_deliver_pirq(struct domain *d, const struct hvm_pirq_dpci *pirq_dpci)
+>  {
+> -    uint32_t flags = pirq_dpci->gmsi.gflags;
+> -    int vector = pirq_dpci->gmsi.gvec;
+> -    uint8_t dest = (uint8_t)flags;
+> -    bool dest_mode = flags & XEN_DOMCTL_VMSI_X86_DM_MASK;
+> -    uint8_t delivery_mode = MASK_EXTR(flags, XEN_DOMCTL_VMSI_X86_DELIV_MASK);
+> -    bool trig_mode = flags & XEN_DOMCTL_VMSI_X86_TRIG_MASK;
+> +    uint32_t dest = MSI_ADDR_DEST(pirq_dpci->gmsi.addr);
+> +    bool dest_mode = pirq_dpci->gmsi.addr & MSI_ADDR_DESTMODE_MASK;
+> +    uint8_t delivery_mode = MASK_EXTR(pirq_dpci->gmsi.data,
+> +                                      MSI_DATA_DELIVERY_MODE_MASK);
+> +    bool trig_mode = pirq_dpci->gmsi.data & MSI_DATA_TRIGGER_MASK;
+> +    int vector = pirq_dpci->gmsi.data & MSI_DATA_VECTOR_MASK;
 
-For guest-page faults, the trap instruction register is written with a 
-special pseudoinstruction value if:
-(a) the fault is caused by an implicit memory access for VS-stage 
-address translation, and (b) a nonzero
-value (the faulting guest physical address) is written to mtval2 or htval.
+Please consider types used, as indicated elsewhere before. I don't see how
+"vector" could go negative, and I don't see how delivery_mode can sensibly
+be uint8_t. Just to name the two most obvious issues; others may be on the
+edge.
 
-So if htinst != 0 then htval is filled with GPA and a nonzero guest 
-physical address written to mtval2/htval shall correspond to the exact 
-virtual address written to mtval/stval.
+> @@ -850,17 +830,17 @@ static int vpci_msi_update(const struct pci_dev *pdev, uint32_t data,
+>      {
+>          uint8_t vector = MASK_EXTR(data, MSI_DATA_VECTOR_MASK);
+>          uint8_t vector_mask = 0xff >> (8 - fls(vectors) + 1);
+> -        struct xen_domctl_bind_pt_irq bind = {
+> -            .machine_irq = pirq + i,
+> -            .irq_type = PT_IRQ_TYPE_MSI,
+> -            .u.msi.gvec = (vector & ~vector_mask) |
+> -                          ((vector + i) & vector_mask),
+> -            .u.msi.gflags = msi_gflags(data, address, (mask >> i) & 1),
+> -        };
+> -        int rc = pt_irq_create_bind(pdev->domain, &bind);
+> +        uint8_t gvec = (vector & ~vector_mask) | ((vector + i) & vector_mask);
+> +        uint32_t msi_data = (data & ~MSI_DATA_VECTOR_MASK) | gvec;
 
-But if htinst is 0 then we have to do VS-stage software pagewalk to get 
-GPA and also we will need to decode instruction to get GVA.
+Please be consistent throughout with the use of MASK_INSR(): Here you're
+open-coding MSI_DATA_VECTOR_SHIFT / MSI_DATA_VECTOR_MASK (of which only
+the latter should really exist).
 
-I am thinking if it will be okay for now to cover the case htinst != 0 
-and have BUG_ON(!htinst) to not miss that the possible future case when 
-VS-stage s/w page walks and parsing of GVA from an instruction are 
-needed. I think it is fine as all real boards on which I was able to 
-test Xen has htval and stval properly filled and of course QEMU code 
-guarantees that htval and stval will be properly filled in the case of QEMU.
-Also, KVM is based also only htval and stval and I assume that they 
-tested it on real hardware too so it seems like it is okay to go with 
-solution that for now we are using htval + stval to get faulty address.
+> +        int rc = pt_irq_bind_msi(pdev->domain, pirq + i,
+> +                                 address, msi_data, 0, !((mask >> i) & 1));
 
-> 
->> And is it true because:
->> ```
->> A value of zero in mtval signifies either that the feature is not
->> supported, or an illegal zero instruction was fetched.
->> ```
->> (yes, it is about mtval but I asssume that htval has the same behaviour').
-> 
-> Right, but what you quote is specific to illegal instruction exceptions.
+The literal 0 here could do with a /* gtable */ comment.
 
-Oh, right.
+>          if ( rc )
+>          {
+> +            struct xen_domctl_bind_pt_irq bind = {
+> +                .irq_type = PT_IRQ_TYPE_MSI,
+> +                .machine_irq = pirq + i,
+> +            };
+>              gdprintk(XENLOG_ERR, "%pp: failed to bind PIRQ %u: %d\n",
 
-~ Oleksii
+Blank line please between declaration(s) and statement(s).
+
+> --- a/xen/arch/x86/include/asm/hvm/irq.h
+> +++ b/xen/arch/x86/include/asm/hvm/irq.h
+> @@ -120,8 +120,8 @@ struct dev_intx_gsi_link {
+>  #define HVM_IRQ_DPCI_TRANSLATE       (1u << _HVM_IRQ_DPCI_TRANSLATE_SHIFT)
+>  
+>  struct hvm_gmsi_info {
+> -    uint32_t gvec;
+> -    uint32_t gflags;
+> +    uint64_t addr;    /* raw MSI address (0xfeexxxxx, includes ext dest ID) */
+
+Is "includes" true? You need to cope with existing code passing rubbish there
+(and I think we have said so before). E.g. in vpci_msi_update().
+
+> --- a/xen/arch/x86/include/asm/msi.h
+> +++ b/xen/arch/x86/include/asm/msi.h
+> @@ -51,8 +51,22 @@
+>  #define MSI_ADDR_REDIRECTION_MASK   (1 << MSI_ADDR_REDIRECTION_SHIFT)
+>  
+>  #define MSI_ADDR_DEST_ID_SHIFT		12
+> -#define	 MSI_ADDR_DEST_ID_MASK		0x00ff000
+> -#define  MSI_ADDR_DEST_ID(dest)		(((dest) << MSI_ADDR_DEST_ID_SHIFT) & MSI_ADDR_DEST_ID_MASK)
+> +#define MSI_ADDR_DEST_ID_UPPER_BITS	8
+
+The name doesn't make clear whether the constant describes a number of
+bits, or a bit position, or yet something else. From the use below it
+looks to instead describe the number of the _lower_ bits, or
+(equivalently) the number of bits to shift left the raw value of the
+(seven) upper bits. (In the end I think this value would want deriving
+anyway, to make crystal clear where it is coming from.)
+
+> +#define MSI_ADDR_DEST_ID_MASK		0x00ff000
+> +#define MSI_ADDR_DEST_ID(dest)		(((dest) << MSI_ADDR_DEST_ID_SHIFT) & MSI_ADDR_DEST_ID_MASK)
+
+I understand there's cleanup potential here, but please leave this alone
+when you don't need to touch the lines anyway, and when the patch is
+already pretty involved. Plus you don't even finish tidying - the too
+long like is left there.
+
+> +/*
+> + * Intel convention: in physical destination mode bits 11:5 of the MSI
+> + * address carry APIC ID bits [14:8] (the "Extended Destination ID"),
+> + * extending the addressable range from 8 to 15 bits.
+> + */
+> +#define MSI_ADDR_EXT_DEST_ID_MASK	0x0000fe0
+
+What reference is "Intel convention" based upon?
+
+> --- a/xen/drivers/passthrough/x86/hvm.c
+> +++ b/xen/drivers/passthrough/x86/hvm.c
+> @@ -21,6 +21,7 @@
+>  #include <xen/event.h>
+>  #include <xen/iommu.h>
+>  #include <xen/cpu.h>
+> +#include <xen/ioreq.h>
+>  #include <xen/irq.h>
+>  #include <asm/hvm/irq.h>
+>  #include <asm/io_apic.h>
+
+Why is this? (And didn't I see patch 7 remove it again, when I peeked there?)
+
+> @@ -367,20 +369,22 @@ static int pt_irq_bind_msi(struct domain *d, uint32_t machine_irq,
+>          }
+>  
+>          /* If pirq is already mapped as vmsi, update guest data/addr. */
+> -        if ( pirq_dpci->gmsi.gvec != gvec || pirq_dpci->gmsi.gflags != gflags )
+> +        if ( pirq_dpci->gmsi.addr != msi_addr ||
+> +             pirq_dpci->gmsi.data != msi_data )
+
+You suddenly compare much more here. To prove correctness of this imo requires
+a sentence or two in the description.
+
+>          {
+>              /* Directly clear pending EOIs before enabling new MSI info. */
+>              pirq_guest_eoi(info);
+>  
+> -            pirq_dpci->gmsi.gvec = gvec;
+> -            pirq_dpci->gmsi.gflags = gflags;
+> +            pirq_dpci->gmsi.addr = msi_addr;
+> +            pirq_dpci->gmsi.data = msi_data;
+>          }
+>      }
+> +
+>      /* Calculate dest_vcpu_id for MSI-type pirq migration. */
+
+Such a blank line would best be inserted when the function is being split out
+(or as per the eralier suggesting, maybe when its body is re-indented).
+
+> @@ -448,13 +451,29 @@ int pt_irq_create_bind(
+>      switch ( pt_irq_bind->irq_type )
+>      {
+>      case PT_IRQ_TYPE_MSI:
+> -        return pt_irq_bind_msi(d, pirq,
+> -                               pt_irq_bind->u.msi.gvec,
+> -                               pt_irq_bind->u.msi.gflags &
+> -                                   ~XEN_DOMCTL_VMSI_X86_UNMASKED,
+> +    {
+> +        uint32_t gflags = pt_irq_bind->u.msi.gflags;
+> +        uint64_t msi_addr;
+> +        uint32_t msi_data;
+> +
+> +        msi_addr = MSI_ADDR_HEADER |
+> +                   MASK_INSR(MASK_EXTR(gflags, XEN_DOMCTL_VMSI_X86_DEST_ID_MASK),
+> +                             MSI_ADDR_DEST_ID_MASK) |
+> +                   (gflags & XEN_DOMCTL_VMSI_X86_RH_MASK ?
+> +                    MSI_ADDR_REDIRECTION_LOWPRI : MSI_ADDR_REDIRECTION_CPU) |
+> +                   (gflags & XEN_DOMCTL_VMSI_X86_DM_MASK ?
+> +                    MSI_ADDR_DESTMODE_LOGIC : MSI_ADDR_DESTMODE_PHYS);
+
+We prefer to treat the ?: operator a little special, to help readbility:
+
+                   (gflags & XEN_DOMCTL_VMSI_X86_RH_MASK
+                    ? MSI_ADDR_REDIRECTION_LOWPRI
+                    : MSI_ADDR_REDIRECTION_CPU) |
+                   (gflags & XEN_DOMCTL_VMSI_X86_DM_MASK ?
+                    ? MSI_ADDR_DESTMODE_LOGIC
+                    : MSI_ADDR_DESTMODE_PHYS);
+
+> @@ -617,7 +636,6 @@ int pt_irq_create_bind(
+>      }
+>  
+>      default:
+> -        write_unlock(&d->event_lock);
+>          return -EOPNOTSUPP;
+>      }
+
+Seeing no other locking change here - how is this hunk to be explained?
+
+> @@ -858,11 +876,10 @@ static int cf_check _hvm_dpci_msi_eoi(
+>      int vector = (long)arg;
+>  
+>      if ( (pirq_dpci->flags & HVM_IRQ_DPCI_MACH_MSI) &&
+> -         (pirq_dpci->gmsi.gvec == vector) )
+> +         ((pirq_dpci->gmsi.data & MSI_DATA_VECTOR_MASK) == vector) )
+
+MASK_EXTR()
+
+>      {
+> -        unsigned int dest = MASK_EXTR(pirq_dpci->gmsi.gflags,
+> -                                      XEN_DOMCTL_VMSI_X86_DEST_ID_MASK);
+> -        bool dest_mode = pirq_dpci->gmsi.gflags & XEN_DOMCTL_VMSI_X86_DM_MASK;
+> +        unsigned int dest = MSI_ADDR_DEST(pirq_dpci->gmsi.addr);
+> +        bool dest_mode = pirq_dpci->gmsi.addr & XEN_DOMCTL_VMSI_X86_DM_MASK;
+
+If this is now the raw address, how come XEN_DOMCTL_VMSI_X86_DM_MASK can
+be used on it?
+
+Jan
 
