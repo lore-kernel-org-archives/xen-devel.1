@@ -4,44 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ED67C5DF7E
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 15:10:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1394267.1633099 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D215C5DF7D
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 15:11:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1394269.1633108 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwLSZ-0008Jw-69; Tue, 18 Aug 2026 15:10:39 +0000
+	id 1wwLSv-0000Cj-IN; Tue, 18 Aug 2026 15:11:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1394267.1633099; Tue, 18 Aug 2026 15:10:39 +0000
+Received: by outflank-mailman (output) from mailman id 1394269.1633108; Tue, 18 Aug 2026 15:11:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwLSZ-0008Jp-3E; Tue, 18 Aug 2026 15:10:39 +0000
-Received: by outflank-mailman (input) for mailman id 1394267;
- Tue, 18 Aug 2026 15:10:38 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wwLSv-0000Cc-Eb; Tue, 18 Aug 2026 15:11:01 +0000
+Received: by outflank-mailman (input) for mailman id 1394269;
+ Tue, 18 Aug 2026 15:10:59 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wwLSY-0008Jj-D3
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 15:10:38 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1wwLSt-0000Ac-I9
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 15:10:59 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwLSW-0039Az-IH
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 17:10:36 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wwLSs-00Fcyx-Fx
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 17:10:58 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a8475d8-8faa-0a2a0a5109dd-0a2a45059f86-30
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 17:10:36 +0200
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a8475ec-4cb1-0a2a45050019-d155802dc943-3
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 17:10:36 +0200
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-493b966dd74so32187055e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 08:10:36 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49996100184sm305073375e9.1.2026.08.18.08.10.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Aug 2026 08:10:35 -0700 (PDT)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a8475ed-2eae-0a2a0a5409dd-0a2a450ac3c4-44
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 17:10:58 +0200
+Received: from [52.101.201.40]
+ (helo=PH7PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a8475fd-f2d2-0a2a450a0019-3465c9280b7f-4
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 17:10:55 +0200
+Received: from BN9PR03CA0382.namprd03.prod.outlook.com (2603:10b6:408:f7::27)
+ by CH3PR12MB8401.namprd12.prod.outlook.com (2603:10b6:610:130::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.8; Tue, 18 Aug
+ 2026 15:10:49 +0000
+Received: from BN1PEPF00004681.namprd03.prod.outlook.com
+ (2603:10b6:408:f7:cafe::7b) by BN9PR03CA0382.outlook.office365.com
+ (2603:10b6:408:f7::27) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.17 via Frontend Transport; Tue,
+ 18 Aug 2026 15:10:49 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ BN1PEPF00004681.mail.protection.outlook.com (10.167.243.87) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.339.3 via Frontend Transport; Tue, 18 Aug 2026 15:10:49 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 18 Aug
+ 2026 10:10:48 -0500
+Received: from [10.71.196.80] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.45 via Frontend
+ Transport; Tue, 18 Aug 2026 10:10:46 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,406 +67,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787065836; x=1787670636; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=kG7Zaffwl0mxSN4K5nDR/1mjY7t5FTHW4GrkGQ7+s74=;
-        b=KzQ6SXdycJE0W+Eox4NFTl7aAtmnyorqsO5lNN86CPTjrfuBY/Vpbsy/hp64hEczbZ
-         owLsXTiIrVaZLi51bqoA2/FnnXUv42A7tdW3T0999AZZ2MDoAkOhaH4s0IoxRlXwAwIC
-         rfUZVMVolenOFZz6the14ilpHnksCI/Wg7MxlDHSWNqlQzerrcYDvKyKVpZnV6aJ80/Z
-         cOAOQPKcGd/UEjtiGE/ZT77b39483F96tPgA78g5RXj/VCtdrDSqqSLQkMzw/2Gn8gOr
-         gPhTupZXRnSUHzU+W5xEZBA7DgMzWJ/wDNB8Yt472XJ6B6uDKBLVu2b3wFE82NLkkHPc
-         TWuw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787065836; x=1787670636;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=kG7Zaffwl0mxSN4K5nDR/1mjY7t5FTHW4GrkGQ7+s74=;
-        b=AS6oTqHJ5bfzHdVX4JLgn+W/75R6LgtfXEjslpE5CF7jw3N26od17ND9cRR0ASs92o
-         1cHzJ9mYVtddTzVdCZEkm0Se4yh+2HSBKAM9GFLqqIBqLd53zEu897jJr/7f9IptFIew
-         x7kwnAg5tvGAnC3B+nMjKG2QWpmH5sv/EN2Sr4RGi60C8+GGHfWAB3t9Gbcee2QvFjMh
-         a41VPkuPIXBYzHBpouruvn8elgAqgJWk0oPgOrXQHVQiZwpDfUEJmVi4WPIoCc7z2jzk
-         jYV3rfRhIYLwmCLFu6wMg4QToXVBjcysFppAHKvgFcKcSiIZEWRA6yXAk4ixKAflUcF7
-         ls6w==
-X-Forwarded-Encrypted: i=1; AHgh+RqiPtBZriFpzJ95A0jNB0sDkHS9j+e6nit+jo/vtj4nLWfiP8GTQUvApLZ8Ov5ZaVzr38pycyEtUEs=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxBbmQqlQHT9pQCwTQSriZUjAqnSnjhtHJtVvdeQ6/Vm7Ku2PVP
-	bwdsBNuueb1qIcdx/v+J+jsZzJtPMpx4GzeUIyo6pZPscNMGKxaIuXZ0r2xoywzw2A==
-X-Gm-Gg: AR+sD13ayxU0wpCQ1XID4UURentQBeVlzyn7f0LKIOVBqQTBF/w+YNgwlJXSXes3ITN
-	haDxQIzl9XBIRTxRyJ54j4WJujQ9yXjL8Skzcglux/lHYGUCICRReb15T5dMvoTRPMJymXxbvIf
-	ffo3DTLMVDmOM6UqfW+BQcqxVIRO0Q5dmKOlW7lePua80C3MPlhnAjiHDSEd76/uaeMYa560TEB
-	wxOPFfFRD/4dMS1ztEM+0da9Amucq/NTa+F8PBgnpnx5TnmUgRot0SPYVRPuuIjPcu0UoSYC6eP
-	A5bBuwLUXmbn6UeKC+lPUW5/5BFG+uoY9B4roIWhGdICqMkYAOsK8qim0XiNzcaHG3EatXEjJOw
-	MkWASztKBEPslxzmYG9lDNxfFbzyPN2+aavNlfMMYK9PCkPz3IRyDr4mBtU51jxLmNIczhA/0tu
-	dpfD4L6g5bYpXIWDSdokyDaEIyULyLyDskgjTapNhtkLJ0dwPkPFfcaxb9WG+cuuQ5vGIAyQDDn
-	KbpVGRUiCjCIzNK70raAFgBLGTc2mQbs2r0QiQWFz/XyPZbZbgk
-X-Received: by 2002:a05:600c:2114:b0:499:5210:c537 with SMTP id 5b1f17b1804b1-4998792e462mr385780165e9.1.1787065835734;
-        Tue, 18 Aug 2026 08:10:35 -0700 (PDT)
-Message-ID: <47f3e8ea-ecb2-46b5-841d-a0234e0d536f@suse.com>
-Date: Tue, 18 Aug 2026 17:10:34 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=pX/E7YfH9pfwNT6Vx0Ve+WZqiqlf3ryA/A8vHIh95mvDGGwJ9dRz+PRB42ZBfjL9rC16IjEXRc20oJ244hdwphjPZEhPbYVyEZUxd4qnNlvzspDoXasC1MUnD0zTNII3lg+6WLDh64xApucJY8RojQYhKVQqKFOQHafq1PZTt2qFGbpriEXMRQuiono5BBsFP9XZVUzHvhaL7VVTpQ8tmjcXd5qsGJBx2BOw+UOzxv00j9WHFVOsQpH3to9I0qeJXNrW4VTRk4y53ywadakqTassyi7OR3PsQdYgtCPLix/QdhE8Iy/AeEU0ni32E6d7O+EBA7mM++ra3S+ZUkA2Tg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YBknbZWDj/0htpZZ+qXSXeosH6Y9ULnrkqGxMw4M1Nk=;
+ b=b7OL86NN/O/iK6JxfDFY13ck7B/4zC/38XsDCw8g8bfPPnyJ3d1wAHU0nMv/g5svyk9wxH/TFACNZRNwQBb4MtcHu8IhhYbgtXeCLX/a1FTpAGJhn6S3U28JI3dF8hH5tKN+eCOLsyCkWn+s0+6BCJ38wFMaXGi1OKe797xDV3G8DSwKVIXf37ZRXA/kZkcL4o6q8uLqn44wo0xIP9p+pzo0er/mH9TcEwXFRMGWWCo/KhmI8AtlAa1Lsb+e5d9Ab1yp4B2WAOy6yZLlHJtV89WwDgbyW4k9zKuFRpwfb2nPw9WEuTCPjbY627YTrnpj8Vha1T8D3ypvVUSLn2aWPg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YBknbZWDj/0htpZZ+qXSXeosH6Y9ULnrkqGxMw4M1Nk=;
+ b=yimgmC2r6SkhWVV6ISXCK+WQaE+GU1korqMrInekTDH7HxZvfXS0lM5sJh7ZclX9+KvHBSN3obI3od5m7PIxvVhmn1soWQrTWyI+Jh64Dvxgbs/9hUPRRY6jaZrYYF3zjCSZVATH7sEEclBxG6n54Z69yfCk9giWtkhxi+i63dA=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Message-ID: <7ef46d06-7674-40bf-816c-71f6935394fb@amd.com>
+Date: Tue, 18 Aug 2026 17:10:46 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 4/9] x86/passthrough: Extract PT_IRQ_TYPE_MSI body into
- pt_irq_bind_msi()
-To: Julian Vetter <julian.vetter@vates.tech>
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
- Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <20260427135406.1281424-1-julian.vetter@vates.tech>
- <1777298079.8631fc262581453bbf619ec5b2062170.19dcf3880b0000f373@vates.tech>
+Subject: Re: [PATCH v4 1/3] time: add "NOW() good" indicator
+To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>, Anthony PERARD
+	<anthony.perard@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+	<roger.pau@citrix.com>, Teddy Astie <teddy.astie@vates.tech>, Bertrand
+ Marquis <bertrand.marquis@arm.com>, Volodymyr Babchuk
+	<volodymyr_babchuk@epam.com>, Oleksii Kurochko <oleksii.kurochko@gmail.com>
+References: <f5040939-b166-4050-9a27-117b772547d4@suse.com>
+ <b7513795-9e4b-4358-9d46-6c7036d64b81@suse.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1777298079.8631fc262581453bbf619ec5b2062170.19dcf3880b0000f373@vates.tech>
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <b7513795-9e4b-4358-9d46-6c7036d64b81@suse.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1787065836-F5AAF2A1-9A3C87F0/0/0
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF00004681:EE_|CH3PR12MB8401:EE_
+X-MS-Office365-Filtering-Correlation-Id: bb0ff625-63fd-4900-f442-08defd3ae31d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700016|1800799024|376014|82310400026|7416014|23010399003|10067099003|56012099006|11063799006|4143699003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	qBeDGkHxIATQy22qfK8B8Wq0USnh7PZOpGNpYO2PhZ6UI4EAzz9ZLGhb5VNpIUqrlIeR328RP00fM935Gjas9ps5ZOko59P92nExkjCU5cWYBpaGga0/k8cyN4RAJjV/riXF+lOa/43JvSo3wNArooAryV/JWiPM8q98X9vSRTw1zLCIZCMaVHG9kffygK2ZN05M9hkh7hyx3pSEhzdn0TxRxgpAjxxWlGEyIV5RgCUSYpZ5mtBILZ5oZ0JpvNq21lFKyDeKoHqBdf0s1ixK9xTJKdId+d1f3ar1sSX3hP+kDLeiLuly9Y/c33iCZnDGlicLCSHichOlUtiRvjJmQ4JgHMGKknRMJMa9oyuSDg6j++8w9EwoTlHECiUd3nr7/9nZ6EJbIKSlMnBRGMNc1ZcnltJKO7Tz0psdhSrk/UEk7rCQC9oi6VZcwYbDIvcac//88+u7UIOkkOgFzG6ub5tEN6UqQin/m1c1q8xJWcoRUdqK6xHZkcaoYZ9BeaBxqHh9Al4pPdPI+n5XxuqL1PWUOeUHYyFqF+tIraEWxjQhYQpq2a6iYVKlW3eE0LsWG3p4kr3x61UTe4fGGqtHHteQZ55EAdyFjbniBm/IP9XP5e202iowmK/a1872c9g/NW6xRd+c4Whcpg1jtZrp8ZOLW/4wOzEg+LzOxdADvcL/GiCv+K4LEbxHdTTTZqmuywBEiwVwhgIPjQx3PYe9IQ==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(1800799024)(376014)(82310400026)(7416014)(23010399003)(10067099003)(56012099006)(11063799006)(4143699003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	pKDtnnffxLHO5nDFbb8Xcee0PaNUXf8diLRVbNMAJVjbd4lPfn9iiut/eWfrxfTjwdMQ7G4sPOypzuHCys8Ua2jCGLLuEsDYUaky893XEhf/sAF3N4t6JmlpOPTmRENKRp5XQtP5/74hQ+kXO4BAVHs0gn1JmKkIcapGHyq8wuzEA+yYiU71dbG91qXMzjCPO/TKx7WcV5SOZSvIfjoZcY+upO/v6T4KWovUAETrYQKq1xSci/Qt2u1l2KBbPPDzKsJFWbt8JD5zXN/CLgwunWKCjRKuWnGdNngOdECqy/z621zTyMzkvl+zTXmD1tE5sQ4SrMqzI9tCcDZ7116XOsr3yHflgTJV9txZkq2M5mT6ZXa8SBk3lmGO0FsNdTuSICnW8G1WEQIxflo8fPhRiFUdhiA070PPGDNjo61tEFKG9/6qlX7r5a37RWJB1VBm
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2026 15:10:49.3032
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: bb0ff625-63fd-4900-f442-08defd3ae31d
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN1PEPF00004681.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8401
+X-purgate-ID: tlsNG-4011c0/1787065855-520C1CFC-597ADFBD/0/0
 X-purgate-type: clean
-X-purgate-size: 12956
+X-purgate-size: 853
 
-On 27.04.2026 15:54, Julian Vetter wrote:
-> --- a/xen/drivers/passthrough/x86/hvm.c
-> +++ b/xen/drivers/passthrough/x86/hvm.c
-> @@ -290,161 +290,186 @@ static int pt_irq_dpci_setup(struct domain *d, unsigned int pirq,
->      } while ( true );
->  }
->  
-> -int pt_irq_create_bind(
-> -    struct domain *d, const struct xen_domctl_bind_pt_irq *pt_irq_bind)
-> +static int pt_irq_bind_msi(struct domain *d, uint32_t machine_irq,
-> +                            uint8_t gvec, uint32_t gflags, uint64_t gtable,
 
-Please see ./CODING_STYLE for the use of fixed-width types. With relaxed
-interpretation of them, at least machine_irq and gflags should be simply
-unsigned int. (gvec and gtable I think are tolerable as you have them.)
 
-> +                            bool unmasked)
+On 30-Jun-26 16:06, Jan Beulich wrote:
+> printk_start_of_line() checks for a value of 0 right now. In order to be
+> able to have NOW() return at least monotonically increasing values, that
+> needs replacing by an explicit indicator.
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 
-Nit (for both wrapped lines): Indentation.
+> ---
+> Arm and RISC-V may want to consider whether their initial get_cycles()
+> can't be moved yet earlier, such that the indicator also can be set
+> yet earlier.
+On Arm, get_cycles() just reads a system register and it could be moved earlier.
+That said, is there any rule as to what should actually be considered a start of
+time (i.e. the boot_count value)? At the moment, this denotes the moment where
+the time driver is set up in preinit_xen_time() after validating the frequency.
 
->  {
->      struct hvm_irq_dpci *hvm_irq_dpci;
->      struct hvm_pirq_dpci *pirq_dpci;
->      struct pirq *info;
-> -    int rc, pirq = pt_irq_bind->machine_irq;
-> +    uint8_t dest, delivery_mode;
-> +    bool dest_mode;
-> +    int dest_vcpu_id, rc;
-> +    const struct vcpu *vcpu;
->  
-> -    if ( pirq < 0 || pirq >= d->nr_pirqs )
-> +    if ( machine_irq >= (unsigned int)d->nr_pirqs )
->          return -EINVAL;
+~Michal
 
-Rather than merely asking on the cast: What use is this check, when the
-caller has done it already?
-
-> -    rc = pt_irq_dpci_setup(d, pirq, &hvm_irq_dpci, &pirq_dpci, &info);
-> +    rc = pt_irq_dpci_setup(d, machine_irq, &hvm_irq_dpci, &pirq_dpci, &info);
->      if ( rc )
->          return rc;
->  
-> -    switch ( pt_irq_bind->irq_type )
-> +    if ( !(pirq_dpci->flags & HVM_IRQ_DPCI_MAPPED) )
->      {
-> -    case PT_IRQ_TYPE_MSI:
-> -    {
-> -        uint8_t dest, delivery_mode;
-> -        bool dest_mode;
-> -        int dest_vcpu_id;
-> -        const struct vcpu *vcpu;
-> -        uint32_t gflags = pt_irq_bind->u.msi.gflags &
-> -                          ~XEN_DOMCTL_VMSI_X86_UNMASKED;
-> -
-> -        if ( !(pirq_dpci->flags & HVM_IRQ_DPCI_MAPPED) )
-> +        pirq_dpci->flags = HVM_IRQ_DPCI_MAPPED | HVM_IRQ_DPCI_MACH_MSI |
-> +                           HVM_IRQ_DPCI_GUEST_MSI;
-> +        pirq_dpci->gmsi.gvec = gvec;
-> +        pirq_dpci->gmsi.gflags = gflags;
-> +        /*
-> +         * 'pt_irq_bind_msi' can be called after 'pt_irq_destroy_bind'.
-> +         * The 'pirq_cleanup_check' which would free the structure is only
-> +         * called if the event channel for the PIRQ is active. However
-> +         * OS-es that use event channels usually bind PIRQs to eventds
-> +         * and unbind them before calling 'pt_irq_destroy_bind' - with the
-> +         * result that we re-use the 'dpci' structure. This can be
-> +         * reproduced with unloading and loading the driver for a device.
-> +         *
-> +         * As such on every 'pt_irq_bind_msi' call we MUST set it.
-> +         */
-> +        pirq_dpci->dom = d;
-> +        /* bind after hvm_irq_dpci is setup to avoid race with irq handler */
-
-Much like you add the missing blank at the end, please also correct the start
-of this comment (to use a capital 'B').
-
-> +        rc = pirq_guest_bind(d->vcpu[0], info, 0);
-> +        if ( rc == 0 && gtable )
->          {
-> -            pirq_dpci->flags = HVM_IRQ_DPCI_MAPPED | HVM_IRQ_DPCI_MACH_MSI |
-> -                               HVM_IRQ_DPCI_GUEST_MSI;
-> -            pirq_dpci->gmsi.gvec = pt_irq_bind->u.msi.gvec;
-> -            pirq_dpci->gmsi.gflags = gflags;
-> -            /*
-> -             * 'pt_irq_create_bind' can be called after 'pt_irq_destroy_bind'.
-> -             * The 'pirq_cleanup_check' which would free the structure is only
-> -             * called if the event channel for the PIRQ is active. However
-> -             * OS-es that use event channels usually bind PIRQs to eventds
-> -             * and unbind them before calling 'pt_irq_destroy_bind' - with the
-> -             * result that we re-use the 'dpci' structure. This can be
-> -             * reproduced with unloading and loading the driver for a device.
-> -             *
-> -             * As such on every 'pt_irq_create_bind' call we MUST set it.
-> -             */
-> -            pirq_dpci->dom = d;
-> -            /* bind after hvm_irq_dpci is setup to avoid race with irq handler*/
-> -            rc = pirq_guest_bind(d->vcpu[0], info, 0);
-> -            if ( rc == 0 && pt_irq_bind->u.msi.gtable )
-> -            {
-> -                rc = msixtbl_pt_register(d, info, pt_irq_bind->u.msi.gtable);
-> -                if ( unlikely(rc) )
-> -                {
-> -                    pirq_guest_unbind(d, info);
-> -                    /*
-> -                     * Between 'pirq_guest_bind' and before 'pirq_guest_unbind'
-> -                     * an interrupt can be scheduled. No more of them are going
-> -                     * to be scheduled but we must deal with the one that may be
-> -                     * in the queue.
-> -                     */
-> -                    pt_pirq_softirq_reset(pirq_dpci);
-> -                }
-> -            }
-> +            rc = msixtbl_pt_register(d, info, gtable);
->              if ( unlikely(rc) )
->              {
-> -                pirq_dpci->gmsi.gflags = 0;
-> -                pirq_dpci->gmsi.gvec = 0;
-> -                pirq_dpci->dom = NULL;
-> -                pirq_dpci->flags = 0;
-> -                if ( !info->evtchn )
-> -                    pirq_cleanup_check(info, d);
-> -                write_unlock(&d->event_lock);
-> -                return rc;
-> +                pirq_guest_unbind(d, info);
-> +                /*
-> +                 * Between 'pirq_guest_bind' and before 'pirq_guest_unbind'
-> +                 * an interrupt can be scheduled. No more of them are going
-> +                 * to be scheduled but we must deal with the one that may be
-> +                 * in the queue.
-> +                 */
-> +                pt_pirq_softirq_reset(pirq_dpci);
->              }
->          }
-> -        else
-> +        if ( unlikely(rc) )
->          {
-> -            uint32_t mask = HVM_IRQ_DPCI_MACH_MSI | HVM_IRQ_DPCI_GUEST_MSI;
-> -
-> -            if ( (pirq_dpci->flags & mask) != mask )
-> -            {
-> -                write_unlock(&d->event_lock);
-> -                return -EBUSY;
-> -            }
-> -
-> -            /* If pirq is already mapped as vmsi, update guest data/addr. */
-> -            if ( pirq_dpci->gmsi.gvec != pt_irq_bind->u.msi.gvec ||
-> -                 pirq_dpci->gmsi.gflags != gflags )
-> -            {
-> -                /* Directly clear pending EOIs before enabling new MSI info. */
-> -                pirq_guest_eoi(info);
-> -
-> -                pirq_dpci->gmsi.gvec = pt_irq_bind->u.msi.gvec;
-> -                pirq_dpci->gmsi.gflags = gflags;
-> -            }
-> +            pirq_dpci->gmsi.gflags = 0;
-> +            pirq_dpci->gmsi.gvec = 0;
-> +            pirq_dpci->dom = NULL;
-> +            pirq_dpci->flags = 0;
-> +            if ( !info->evtchn )
-> +                pirq_cleanup_check(info, d);
-> +            write_unlock(&d->event_lock);
-> +            return rc;
->          }
-> -        /* Calculate dest_vcpu_id for MSI-type pirq migration. */
-> -        dest = MASK_EXTR(pirq_dpci->gmsi.gflags,
-> -                         XEN_DOMCTL_VMSI_X86_DEST_ID_MASK);
-> -        dest_mode = pirq_dpci->gmsi.gflags & XEN_DOMCTL_VMSI_X86_DM_MASK;
-> -        delivery_mode = MASK_EXTR(pirq_dpci->gmsi.gflags,
-> -                                  XEN_DOMCTL_VMSI_X86_DELIV_MASK);
-> -
-> -        dest_vcpu_id = hvm_girq_dest_2_vcpu_id(d, dest, dest_mode);
-> -        pirq_dpci->gmsi.dest_vcpu_id = dest_vcpu_id;
-> -        write_unlock(&d->event_lock);
-> +    }
-> +    else
-> +    {
-> +        uint32_t mask = HVM_IRQ_DPCI_MACH_MSI | HVM_IRQ_DPCI_GUEST_MSI;
->  
-> -        pirq_dpci->gmsi.posted = false;
-> -        vcpu = (dest_vcpu_id >= 0) ? d->vcpu[dest_vcpu_id] : NULL;
-> -        if ( iommu_intpost )
-> +        if ( (pirq_dpci->flags & mask) != mask )
->          {
-> -            if ( delivery_mode == dest_LowestPrio )
-> -                vcpu = vector_hashing_dest(d, dest, dest_mode,
-> -                                           pirq_dpci->gmsi.gvec);
-> -            if ( vcpu )
-> -                pirq_dpci->gmsi.posted = true;
-> +            write_unlock(&d->event_lock);
-> +            return -EBUSY;
->          }
-> -        if ( vcpu && is_iommu_enabled(d) )
-> -            hvm_migrate_pirq(pirq_dpci, vcpu);
->  
-> -        /* Use interrupt posting if it is supported. */
-> -        if ( iommu_intpost )
-> +        /* If pirq is already mapped as vmsi, update guest data/addr. */
-> +        if ( pirq_dpci->gmsi.gvec != gvec || pirq_dpci->gmsi.gflags != gflags )
->          {
-> -            rc = hvm_pi_update_irte(vcpu, info, pirq_dpci->gmsi.gvec);
-> +            /* Directly clear pending EOIs before enabling new MSI info. */
-> +            pirq_guest_eoi(info);
->  
-> -            if ( rc )
-> -            {
-> -                pt_irq_destroy_bind(d, pt_irq_bind);
-> -                return rc;
-> -            }
-> +            pirq_dpci->gmsi.gvec = gvec;
-> +            pirq_dpci->gmsi.gflags = gflags;
->          }
-> +    }
-> +    /* Calculate dest_vcpu_id for MSI-type pirq migration. */
-> +    dest = MASK_EXTR(pirq_dpci->gmsi.gflags, XEN_DOMCTL_VMSI_X86_DEST_ID_MASK);
-> +    dest_mode = pirq_dpci->gmsi.gflags & XEN_DOMCTL_VMSI_X86_DM_MASK;
-> +    delivery_mode = MASK_EXTR(pirq_dpci->gmsi.gflags,
-> +                               XEN_DOMCTL_VMSI_X86_DELIV_MASK);
-> +
-> +    dest_vcpu_id = hvm_girq_dest_2_vcpu_id(d, dest, dest_mode);
-> +    pirq_dpci->gmsi.dest_vcpu_id = dest_vcpu_id;
-> +    write_unlock(&d->event_lock);
->  
-> -        if ( pt_irq_bind->u.msi.gflags & XEN_DOMCTL_VMSI_X86_UNMASKED )
-> +    pirq_dpci->gmsi.posted = false;
-> +    vcpu = (dest_vcpu_id >= 0) ? d->vcpu[dest_vcpu_id] : NULL;
-> +    if ( iommu_intpost )
-> +    {
-> +        if ( delivery_mode == dest_LowestPrio )
-> +            vcpu = vector_hashing_dest(d, dest, dest_mode,
-> +                                       pirq_dpci->gmsi.gvec);
-> +        if ( vcpu )
-> +            pirq_dpci->gmsi.posted = true;
-> +    }
-> +    if ( vcpu && is_iommu_enabled(d) )
-> +        hvm_migrate_pirq(pirq_dpci, vcpu);
-> +
-> +    /* Use interrupt posting if it is supported. */
-> +    if ( iommu_intpost )
-> +    {
-> +        struct xen_domctl_bind_pt_irq bind = {
-> +            .machine_irq = machine_irq,
-> +            .irq_type = PT_IRQ_TYPE_MSI,
-> +        };
-> +
-> +        rc = hvm_pi_update_irte(vcpu, info, pirq_dpci->gmsi.gvec);
-> +        if ( rc )
->          {
-> -            unsigned long flags;
-> -            struct irq_desc *desc = pirq_spin_lock_irq_desc(info, &flags);
-> +            pt_irq_destroy_bind(d, &bind);
-> +            return rc;
-> +        }
-> +    }
->  
-> -            if ( !desc )
-> -            {
-> -                pt_irq_destroy_bind(d, pt_irq_bind);
-> -                return -EINVAL;
-> -            }
-> +    if ( unmasked )
-> +    {
-> +        struct xen_domctl_bind_pt_irq bind = {
-> +            .machine_irq = machine_irq,
-> +            .irq_type = PT_IRQ_TYPE_MSI,
-> +        };
-> +        unsigned long flags;
-> +        struct irq_desc *desc = pirq_spin_lock_irq_desc(info, &flags);
->  
-> -            guest_mask_msi_irq(desc, false);
-> -            spin_unlock_irqrestore(&desc->lock, flags);
-> +        if ( !desc )
-> +        {
-> +            pt_irq_destroy_bind(d, &bind);
-> +            return -EINVAL;
->          }
->  
-> -        break;
-> +        guest_mask_msi_irq(desc, false);
-> +        spin_unlock_irqrestore(&desc->lock, flags);
->      }
->  
-> +    return 0;
-> +}
-
-For all of the above, going in two steps would again help review quite a
-bit: First introduce the new function, but leave excess indentation alone.
-Then have a purely mechanical patch removing one indentation level (and
-the associated leftover figure braces).
-
-> +int pt_irq_create_bind(
-> +    struct domain *d, const struct xen_domctl_bind_pt_irq *pt_irq_bind)
-> +{
-> +    int rc, pirq = pt_irq_bind->machine_irq;
-
-rc, afaict, is now only used in the more narrow scope below.
-
-> +    if ( pirq < 0 || pirq >= d->nr_pirqs )
-> +        return -EINVAL;
-> +
-> +    switch ( pt_irq_bind->irq_type )
-> +    {
-> +    case PT_IRQ_TYPE_MSI:
-> +        return pt_irq_bind_msi(d, pirq,
-> +                               pt_irq_bind->u.msi.gvec,
-> +                               pt_irq_bind->u.msi.gflags &
-> +                                   ~XEN_DOMCTL_VMSI_X86_UNMASKED,
-> +                               pt_irq_bind->u.msi.gtable,
-> +                               !!(pt_irq_bind->u.msi.gflags &
-> +                                  XEN_DOMCTL_VMSI_X86_UNMASKED));
-
-No need for !!.
-
-Jan
 
