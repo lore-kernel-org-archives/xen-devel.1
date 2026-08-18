@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C57B6C5DF70
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 05:54:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1393400.1632197 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2978CC5DF70
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2026 06:01:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1393407.1632207 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwCm4-0000aQ-0i; Tue, 18 Aug 2026 05:54:12 +0000
+	id 1wwCtA-0002JS-MB; Tue, 18 Aug 2026 06:01:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1393400.1632197; Tue, 18 Aug 2026 05:54:11 +0000
+Received: by outflank-mailman (output) from mailman id 1393407.1632207; Tue, 18 Aug 2026 06:01:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwCm3-0000aJ-UE; Tue, 18 Aug 2026 05:54:11 +0000
-Received: by outflank-mailman (input) for mailman id 1393400;
- Tue, 18 Aug 2026 05:54:10 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wwCtA-0002JL-Jb; Tue, 18 Aug 2026 06:01:32 +0000
+Received: by outflank-mailman (input) for mailman id 1393407;
+ Tue, 18 Aug 2026 06:01:31 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wwCm2-0000aC-6w
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 05:54:10 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wwCt9-0002JF-Ih
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 06:01:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwCm0-001CzV-Pn
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 07:54:08 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wwCt8-00Fgci-JJ
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2026 08:01:30 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a83f364-8faa-0a2a0a5109dd-0a2a4502985e-26
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 07:54:08 +0200
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a83f53a-bab6-0a2a0a5309dd-0a2a45088aa2-0
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 08:01:30 +0200
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a83f380-6ca4-0a2a45020019-d1558035b556-3
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 07:54:08 +0200
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-49557167508so42514895e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 22:54:08 -0700 (PDT)
+ id 6a83f534-f659-0a2a45080019-d1558029d87c-3
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 08:01:24 +0200
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-4998e0916faso23063665e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Aug 2026 23:01:24 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499a5684e06sm6300675e9.1.2026.08.17.22.54.07
+ 5b1f17b1804b1-4999d10ba73sm105465885e9.13.2026.08.17.23.01.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Aug 2026 22:54:07 -0700 (PDT)
+ Mon, 17 Aug 2026 23:01:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,56 +55,60 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787032448; x=1787637248; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1787032884; x=1787637684; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=td5FVs7/u7fTQ6+B+MfIwHKV96K7nJhHdTi0XeTAmzA=;
-        b=WFiA+cCZWPijBxCl6rFc7G6LyOlXkUx7I5aq/EgezFT636sRvcmCZffBVD+hsUeIu5
-         lD7Nxil+HMoqunBLcrXtaUxY6kX1cAaJa7aM2FXkPizIohspBc2ep83L52/C7rsAiSkZ
-         ATvwFpulJyXMwt/zx9fYmvvT4+1i0HDKItoVATmMIsKFwEB5lBVHRz24Qzwfy/KSG/6o
-         h0sEOgoHlPHb3RaQ7DNgNEZ7W7CmENXO/1deg393KytbkFORNFh6XIALNvaTw6hMVL7j
-         0NVd+2QTE6ll9lUsjQjHJfAnRjfEF2h+slCiquAyMIZ76WAp+WbxfNW4afeyWH6y8I2R
-         JwaA==
+        bh=NOp3YRdEs0Br3Bo1DJ4Emf3CGg1rsxA93QX7Vcmweq0=;
+        b=gM8imaItgNuuoVDfAJGx0qPuDFvytYxvXBc2d/ZGVfcBUUhCHs2kJDqLuQiucWfjzf
+         hUlNVajWimJqYWQxgzQVGuoA5wuds/4ZUQ/jPvn4lZnhEGHl1/Uum2oLde3fceudEQTN
+         oWrhwl2cqkPzMpzf1tbskcdoEaMk3Xu5IiomoNSbE3aAIpXU3F7vpxjYoROwQrZq8QEf
+         ySEfQ9lUEVLMD6+XzLBm+im3QgaU+tsP8Qphxx6AbbJgPweY3cwVEEwS6zcvipQ7OITT
+         /zsl8FETowhXpXEsRMS/8bPG0z4HMyogbfZbg8tu000MBSKpxrcPQwYECEMoJXrTgBmZ
+         msTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787032448; x=1787637248;
+        d=1e100.net; s=20251104; t=1787032884; x=1787637684;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=td5FVs7/u7fTQ6+B+MfIwHKV96K7nJhHdTi0XeTAmzA=;
-        b=hiaQ6eIIoaGco40jENPg5oHdvu8RCW3isUqV2Y593Os175ztDtG4XOg941T7TyeFP9
-         D8ELuUGSSe8cI7+XW4w/bZt41BKPOo3jFuDVla7mfh5oGInu/UGdiRWp45N1sUWMckiX
-         L7jOhuwRub9iS5HRev1seqZuW2dT1oVKaBIxrBeOIqOwBBRiw2jn+9SS0oA93ted83Kz
-         9H8qJYTeiY8GlIAiov2T8o7+II3JBZIT4lqWaCfcN0CgMqfvcx5OoGfijFA+kBhUY+Ij
-         UYKeuOP6kOQz7fZSaMY/7A+ZT1qZgOEpG+MJqL7bD3wv7JN0u8ghI0q8iBm5pKSof+8H
-         o6YQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrpK+4Z9770PFIFBUYdm25+oWpTXUChRur6tqdfk8yAqj434oIwTTOPTlJpV6KRkY+0sIjSGmpcVmY=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyNUAO9r8bfbMx2o8cSrNo4idQY6xzngOOeJIP7LwQnsaz26mTY
-	gKuD+0CosFrz483feKxVaj0ZAA+yOwaWhDsFvOpOoQINVjRd/+eAO0aWIzAQAYt3/w==
-X-Gm-Gg: AR+sD10Q0Iry79MKuOjaEETBa2CNcyrf/2pcIXzNo8W7WRVPiH9aMe48jUCs+Bs0AdY
-	804P5UH4FQ9zQyspUGX3RKYEkPx2xJUNHlbJtXab/CHhwaSCQ4DxR7nx9HM7+qIb9R8j+PtloQw
-	ZHHFNxCrAevjS0nZlhanpvZ6FV1vTU/ird21cgw5yLQUJSh/uJNRzY6L7pnt4/8xrmLEWaSkP3e
-	hKx+yyymE4KIgv+Iow7eiqCscr1JYVTUFK/BokpK7c/LhmlZeh/DHr5Zxfhi1qK54lmmOJzNijF
-	fvgNm437MYDiemvVbCKj4wOz4EiMJpC7iKl2T8N0dhq/lIO20lF8IoyHnAsm07DITPQEvZQsj7J
-	Ex3zurK+5UsGwdJR2LnvtoRDyI3KN51U5Ydb3rs8xw3fJxJvTIPCdHLudyBvtZVffuEFvgqJ1OC
-	2ZgFRTrKOl1zsk3KTCjwgyG+QqdwkZbAciJaYHJaJSncPgnR0lqSOCeHIrJ7lgNccJXZa/GFXe6
-	kp9AsMYRAIucECCfP+J3yL1mLknEDpXCNJtYa852DQk1wTJuu2y
-X-Received: by 2002:a05:600c:358a:b0:496:c06b:9fb4 with SMTP id 5b1f17b1804b1-4999fb940c5mr88707925e9.14.1787032448167;
-        Mon, 17 Aug 2026 22:54:08 -0700 (PDT)
-Message-ID: <d51362ab-e004-43b7-8825-d315c1cb41f9@suse.com>
-Date: Tue, 18 Aug 2026 07:54:06 +0200
+        bh=NOp3YRdEs0Br3Bo1DJ4Emf3CGg1rsxA93QX7Vcmweq0=;
+        b=JIlPZZPKx0B4KpzZm0g0dlzVDAodXa+Vm7V+ZE4akc60vNyYEU/taBDjjOWrR7STYh
+         c3Fdqg9zylYm5RNZI4uEGs/Be9uP8wU0MJ25TWcnFt6oErWaJp5IwUKq7hxYDxoMO0jJ
+         CPA7zf3aEjHhc/qTy5x/RzR5UJf8j4SxCoyavT9llEd8aaHGJUyc2irOXGmiTiYcbjOr
+         Vd2hBPrAE444Y5AX8kuNdkQoJEVdTVQX7pno2SqKASFYZWf5fUsLvx+EqMIS62IRHI21
+         k5Z/Z2n1UIqTdyOqCA7Mb/hy7o6503+K6nBpJQUCez8XBP7cmYlXd/dMQT8SkaHExIE2
+         vHRA==
+X-Forwarded-Encrypted: i=1; AHgh+Rq7bF1xf5W5a7KUBeUjuQBFZ7nYFj16AKL7UG0d7nCUHT9Gq+YYmSdrKoSsmWL+/PeU1LeDIvb7gUM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxF5vZstmnVSKQ+JSoefqNw+/k6G1w4h2EOfdZdD3Mc0uiayE0y
+	IbRLJJWkIzAY1N4onK9W3tPZ/rgA3rafL69rg5Ownu6fF6Yi/jQlYOU/swHPOPUMsw==
+X-Gm-Gg: AR+sD10RE7rD70B1stvqM70S/smZtTasP6+9tmCuAJlexkz7cgDYPJU4l/ksua1ibDp
+	/OeASKpLfmksHqwRgKdKATdFvVa+rdlZNuVpdZ46leKbaSwJ8bDNre0P8MAn6+sg3ooLS0JEBzp
+	DoNSXBKEZV6IN6pClmOHab9bD6EUSUrUlUUvpB1awCBrNy/8+J5a44VLtN9ga+SjnMqdl8rAyis
+	dRO9qRrWfX8vHwnLO+Oo72B7yc5J+IL0FHLlqZ3en7Yk54Vw1UzcOprQhPsIZX5jR4qSYLbc+KQ
+	X2+A2Pu14fkrF4B47UIOQz46sj42kIFSE7G2szg4jy0E/DkoaFW9RA4aJEUL4Umq2OmBsZNN2Vn
+	CpF2aT6pKYdBmmV+r2cpORCi4rf2yhRnU3AwB5IVMkYhVhpFs/rANZ2KDLxZDRAAsEoNb+iCYqh
+	hlSQGtNgDhsKD0zOoY5peRW7hQHDz+0YdnYpir0ytL7SWyCMdWupjYMQHRYRkw7OsnwHrnAgsnG
+	F8aaQgRyQI6JfGxLl+OkokQ1XiV11qTLl3BtZWTLyxkbDDnf3Vv
+X-Received: by 2002:a05:600c:820d:b0:499:7a36:88b with SMTP id 5b1f17b1804b1-4998794402emr532729175e9.5.1787032884143;
+        Mon, 17 Aug 2026 23:01:24 -0700 (PDT)
+Message-ID: <f40229a5-6108-4d92-b612-a9daa2c83474@suse.com>
+Date: Tue, 18 Aug 2026 08:01:22 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/nmi: Fix mis-classification of watchdog NMIs
+Subject: Re: [PATCH v3 2/5] tests/x86: Introduce a userspace test harness for
+ x86_decode_lite()
 To: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Teddy Astie <teddy.astie@vates.tech>,
  Xen-devel <xen-devel@lists.xenproject.org>
-References: <20260813174319.1682009-1-andrew.cooper3@citrix.com>
- <4f58e236-c40b-4fcc-82e8-5b6f3eafe656@suse.com>
- <33aab2bd-db13-43f6-9616-5e75fd79b81d@citrix.com>
+References: <20260803072006.9678-1-andrew.cooper3@citrix.com>
+ <20260803072006.9678-3-andrew.cooper3@citrix.com>
+ <dd065a33-0105-4527-92f5-f3f127422ee6@suse.com>
+ <21d3fae8-e9b0-4c8a-a7b9-483a0257e44e@citrix.com>
+ <b76b3fa9-cac9-401f-adc7-88f6881a64f6@suse.com>
+ <5b358558-1b17-49b2-af5e-37981d11094f@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -130,78 +134,195 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <33aab2bd-db13-43f6-9616-5e75fd79b81d@citrix.com>
+In-Reply-To: <5b358558-1b17-49b2-af5e-37981d11094f@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1787032448-F2EB32AC-24742BF9/0/0
+X-purgate-ID: tlsNG-c1860d/1787032889-D477387B-7D8B61CE/0/0
 X-purgate-type: clean
-X-purgate-size: 3335
+X-purgate-size: 7307
 
-On 17.08.2026 17:55, Andrew Cooper wrote:
-> On 17/08/2026 9:30 am, Jan Beulich wrote:
->> On 13.08.2026 19:43, Andrew Cooper wrote:
->>> It used to be the case that cpu_data[] inherited the BSP's cpuid_level until
->>> the AP had calculated it itself.  Following the rework, cpuid_level has a
->>> placeholder 1 until it is caluclated propely.
->>>
->>> setup_apic_nmi_watchdog() happens to be called on the BSP after SMP bringup,
->>> meaning that the first call is on CPU1.  It is also positioned in the window
->>> where cpu_data[] is garbage.
->>>
->>> As a result, setup_p6_watchdog()'s one-time calculation of the performance
->>> counter width falls back into Pentium compatibility mode assuming 32bit
->>> counters.  This causes a watchdog NMI which is delayed a little (e.g. from an
->>> SMI), to appear as if it hadn't overflowed, and therefore be (mis)classifed as
->>> not a watchdog NMI.  On systems where unknown NMIs are treated as fatal, this
->>> results in a spurious crash.
->>>
->>> Switch setup_p6_watchdog() to use boot_cpu_data.cpuid_level, which is how this
->>> is checked almost everywhere else.
->>>
->>> core2_vpmu_init() used the same pattern to look at leaf 0xa.  Despite being
->>> init code and only running on the BSP, {boot,current}_cpu_data are different
->>> objects, so switch it over to checking boot_cpu_data.cpuid_level too.
->>>
->>> Fixes: 7126b7f806d5 ("x86/CPU: re-work populating of cpu_data[]")
->>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
->> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+On 17.08.2026 14:40, Andrew Cooper wrote:
+> On 05/08/2026 7:45 am, Jan Beulich wrote:
+>> On 04.08.2026 21:37, Andrew Cooper wrote:
+>>> On 03/08/2026 5:03 pm, Jan Beulich wrote:
+>>>> On 03.08.2026 09:20, Andrew Cooper wrote:
+>>>>> --- /dev/null
+>>>>> +++ b/tools/tests/x86-decode-lite/insns.S
+>>>>> @@ -0,0 +1,703 @@
+>>>>> +#include "macro-magic.h"
+>>>>> +
+>>>>> +        .code64
+>>>>> +
+>>>>> +        .allow_index_reg
+>>>>> +
+>>>>> +        .text
+>>>>> +
+>>>>> +DECL(tests_rel0)
+>>>>> +modrm:
+>>>>> +        /* Mod=0, Reg=0, RM {0..f} */
+>>>>> +        _ add %al, (%rax)
+>>>>> +        _ add %al, (%rcx)
+>>>>> +        _ add %al, (%rdx)
+>>>>> +        _ add %al, (%rbx)
+>>>>> +        _ add %al, (%rsp) /* SIB */
+>>>>> +        /*add %al, (%rbp)    RIP --> tests_rel4 */
+>>>>> +        _ add %al, (%rsi)
+>>>>> +        _ add %al, (%rdi)
+>>>>> +        _ add %al, (%r8)
+>>>>> +        _ add %al, (%r9)
+>>>>> +        _ add %al, (%r10)
+>>>>> +        _ add %al, (%r11)
+>>>>> +        _ add %al, (%r12) /* SIB */
+>>>>> +        /*add %al, (%r13)    RIP --> tests_rel4 */
+>>>>> +        _ add %al, (%r14)
+>>>>> +        _ add %al, (%r15)
+>>>>> +
+>>>>> +        /* Mod=1, Reg=0, RM {0..f} */
+>>>>> +        _ add %al, 0x01(%rax)
+>>>>> +        _ add %al, 0x01(%rcx)
+>>>>> +        _ add %al, 0x01(%rdx)
+>>>>> +        _ add %al, 0x01(%rbx)
+>>>>> +        _ add %al, 0x01(%rsp) /* SIB */
+>>>>> +        _ add %al, 0x01(%rbp)
+>>>>> +        _ add %al, 0x01(%rsi)
+>>>>> +        _ add %al, 0x01(%rdi)
+>>>>> +        _ add %al, 0x01(%r8)
+>>>>> +        _ add %al, 0x01(%r9)
+>>>>> +        _ add %al, 0x01(%r10)
+>>>>> +        _ add %al, 0x01(%r11)
+>>>>> +        _ add %al, 0x01(%r12) /* SIB */
+>>>>> +        _ add %al, 0x01(%r13)
+>>>>> +        _ add %al, 0x01(%r14)
+>>>>> +        _ add %al, 0x01(%r15)
+>>>>> +
+>>>>> +        /* Mod=2, Reg=0, RM {0..f} */
+>>>>> +        _ add %al, 0x7f000001(%rax)
+>>>>> +        _ add %al, 0x7f000001(%rcx)
+>>>>> +        _ add %al, 0x7f000001(%rdx)
+>>>>> +        _ add %al, 0x7f000001(%rbx)
+>>>>> +        _ add %al, 0x7f000001(%rsp) /* SIB */
+>>>>> +        _ add %al, 0x7f000001(%rbp)
+>>>>> +        _ add %al, 0x7f000001(%rsi)
+>>>>> +        _ add %al, 0x7f000001(%rdi)
+>>>>> +        _ add %al, 0x7f000001(%r8)
+>>>>> +        _ add %al, 0x7f000001(%r9)
+>>>>> +        _ add %al, 0x7f000001(%r10)
+>>>>> +        _ add %al, 0x7f000001(%r11)
+>>>>> +        _ add %al, 0x7f000001(%r12) /* SIB */
+>>>>> +        _ add %al, 0x7f000001(%r13)
+>>>>> +        _ add %al, 0x7f000001(%r14)
+>>>>> +        _ add %al, 0x7f000001(%r15)
+>>>>> +
+>>>>> +        /* Mod=3, Reg=0, RM {0..f} */
+>>>>> +        _ add %al, %al
+>>>>> +        _ add %al, %cl
+>>>>> +        _ add %al, %dl
+>>>>> +        _ add %al, %bl
+>>>>> +        _ add %al, %ah
+>>>>> +        _ add %al, %ch
+>>>>> +        _ add %al, %dh
+>>>>> +        _ add %al, %dl
+>>>> Perhaps also include %bpl, %sil, and %dil?
+>>> They're not relevant to this test, and interfere with the intentional
+>>> pattern set up.
+>> Hmm, how does a particular pattern matter here? I don't think you test those
+>> cases (or more generally an empty REX prefix) anywhere else.
 > 
-> Thanks.
+> There's nothing structurally interesting about those; I'm not testing
+> the assembler, and x86_decode_lite() doesn't decode registers.
 > 
->>
->>> I hate this fix, but it's the only thing which I consider remotely safe to
->>> backport.  Recent attempts to alter CPUID ordering have 0 success at being
->>> bug-free.
->> How that? Collecting CPUID output should be doable almost first thing. There
->> are no (or in case of doubt: there should not be any) dependencies on about
->> anything else. Of course re-collecting may still be necessary after ucode
->> loading. Yet from what you say I must be missing something crucial.
-> 
-> I was referring to commits in Xen rearranging the boot sequence with
-> respect to feature handling.  There have been many failures recently.
-> 
->> With that in mind, I'm also questioning the Fixes: tag (without this being a
->> request to drop or change it): Using another CPU's data isn't much better
->> than using partially unset data. Unless we assumed full symmetry, at which
->> point re-obtaining of most data on the APs would be entirely useless. Hence
->> the issue was pre-existing, with one bug there hiding the issue addressed
->> here.
-> 
-> Copying the BSP is less bad than the current behaviour.  It's not
-> necessarily ideal, but it's a damsight better default than the arbitrary
-> 1 that this patch puts in place.
-> 
-> Even with the very old 64bit systems where mixing steppings was
-> commonplace, I'm not aware of a vendor supported combination where
-> max_leaf was different.
-> 
-> 
-> The issue was not prexisting.  Prior to your rearrangement, the NMI
-> watchdog setup found the counter width in CPUID and used it, without
-> falling back into original Pentium compatibility mode.
+> The ModRM byte has multiple structurally interesting interactions with
+> REX prefixes, hence the coverage of Mod and RM value.
 
-FTAOD - with "pre-existing" I meant the using of the (possibly) wrong data,
-not the particular issue of the NMI watchdog being affected.
+If covering _every_ bit pattern of ModR/M.rm is of interest, I simply find
+I hard to see why also covering them empty-REX case should be of no
+interest at all.
+
+> The patten makes it trivial to look at the disassembled result and check
+> the coverage.  (And spot the bug that's hiding in plain sight above.)
+
+Oh, I see (now).
+
+>>>>> --- /dev/null
+>>>>> +++ b/tools/tests/x86-decode-lite/main.c
+>>>>> @@ -0,0 +1,111 @@
+>>>>> +/*
+>>>>> + * Userspace test harness for x86_decode_lite().
+>>>>> + */
+>>>>> +#include <stdio.h>
+>>>>> +
+>>>>> +#include "x86-emulate.h"
+>>>>> +
+>>>>> +static unsigned int nr_failures;
+>>>>> +#define fail(t, fmt, ...)                                       \
+>>>>> +({                                                              \
+>>>>> +    const unsigned char *insn = (t)->ip;                        \
+>>>>> +                                                                \
+>>>>> +    nr_failures++;                                              \
+>>>>> +                                                                \
+>>>>> +    (void)printf("  Fail '%s' [%02x", (t)->name, *insn);        \
+>>>>> +    for ( unsigned int i = 1; i < (t)->len; i++ )               \
+>>>>> +        printf(" %02x", insn[i]);                               \
+>>>>> +    printf("]\n");                                              \
+>>>>> +                                                                \
+>>>>> +    (void)printf(fmt, ##__VA_ARGS__);                           \
+>>>>> +})
+>>>>> +
+>>>>> +struct test {
+>>>>> +    const char *name;
+>>>>> +    void *ip;
+>>>>> +    unsigned long len;
+>>>>> +};
+>>>>> +
+>>>>> +extern const struct test
+>>>>> +/* Defined in insns.S, ends with sentinel */
+>>>>> +    tests_rel0[], /* No relocatable entry */
+>>>>> +    tests_rel1[], /* disp8 */
+>>>>> +    tests_rel4[], /* disp32 or RIP-relative */
+>>>>> +    tests_unsup[]; /* Unsupported instructions */
+>>>>> +
+>>>>> +static inline void run_tests(const struct test *tests, unsigned int rel_sz)
+>>>>> +{
+>>>>> +    printf("Test rel%u\n", rel_sz);
+>>>>> +
+>>>>> +    for ( unsigned int i = 0; tests[i].name; ++i )
+>>>>> +    {
+>>>>> +        const struct test *t = &tests[i];
+>>>>> +        x86_decode_lite_t r;
+>>>>> +
+>>>>> +        /*
+>>>>> +         * Don't end strictly at t->len.  This provides better diagnostics if
+>>>>> +         * too many bytes end up getting consumed.
+>>>>> +         */
+>>>>> +        r = x86_decode_lite(t->ip, t->ip + /* t->len */ 20);
+>>>> For the excess bytes to at least be legitimate to access (not causing UB),
+>>>> shouldn't finish_arr emit enough filler bytes?
+>>> finish_arr is the wrong place, but I've folded in:
+>>>
+>>> --- a/tools/tests/x86-decode-lite/insns.S
+>>> +++ b/tools/tests/x86-decode-lite/insns.S
+>>> @@ -695,6 +695,13 @@ unsup_insn: /* Instructions that would complicated decode, or shouldn't be used
+>>>  
+>>>  END(tests_unsup)
+>>>  
+>>> +        /*
+>>> +         * For improved diagnostics, we allow some overreading of the
+>>> +         * instruction under test.  Ensure there are good bytes to read.
+>>> +         */
+>>> +overread_padding:
+>>> +        .skip 20
+>>> +
+>>>          /* This is here to cause jmps to use their disp32 form. */
+>>>          .section .text.other_section, "ax", @progbits
+>>>  other_section:
+>> How would this help? run_tests() is never invoked with tests_unsup[] as
+>> argument. And run_tests_unsup() wants to only fetch up to t->len.
+> 
+> Oh, in which case nothing is needed at all.  I'll take it back out.
+
+Yet then, as previously indicated, the possible overrun in run_tests()'
+fetching will want covering. Hence why I suggested the particular other
+place to put extra padding.
 
 Jan
 
