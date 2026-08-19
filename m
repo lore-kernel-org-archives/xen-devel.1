@@ -4,58 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C85CDC5B572
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2026 07:14:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1394721.1633387 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B25A4C5DF6D
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2026 07:23:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1394731.1633395 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwaUj-0005pa-Tg; Wed, 19 Aug 2026 07:13:53 +0000
+	id 1wwadL-0007kf-Oa; Wed, 19 Aug 2026 07:22:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1394721.1633387; Wed, 19 Aug 2026 07:13:53 +0000
+Received: by outflank-mailman (output) from mailman id 1394731.1633395; Wed, 19 Aug 2026 07:22:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwaUj-0005pT-QL; Wed, 19 Aug 2026 07:13:53 +0000
-Received: by outflank-mailman (input) for mailman id 1394721;
- Wed, 19 Aug 2026 07:13:52 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wwadL-0007kY-L2; Wed, 19 Aug 2026 07:22:47 +0000
+Received: by outflank-mailman (input) for mailman id 1394731;
+ Wed, 19 Aug 2026 07:22:45 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1wwaUi-0005pM-LP
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 07:13:52 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wwadJ-0007kS-Ld
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 07:22:45 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwaUh-001apn-R8
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 09:13:51 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wwadJ-0096X5-28
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 09:22:45 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a8557aa-2eae-0a2a0a5409dd-0a2a450ab568-8
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 09:13:47 +0200
-Received: from [40.93.201.16]
- (helo=CY3PR05CU001.outbound.protection.outlook.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a8557a9-f2d2-0a2a450a0019-285dc9102ce9-3
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 09:13:47 +0200
-Received: from BY3PR10CA0001.namprd10.prod.outlook.com (2603:10b6:a03:255::6)
- by CH1PPF6B6BCC42C.namprd12.prod.outlook.com
- (2603:10b6:61f:fc00::612) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.8; Wed, 19 Aug
- 2026 07:13:42 +0000
-Received: from SJ1PEPF00002312.namprd03.prod.outlook.com
- (2603:10b6:a03:255:cafe::28) by BY3PR10CA0001.outlook.office365.com
- (2603:10b6:a03:255::6) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.8 via Frontend Transport; Wed, 19
- Aug 2026 07:13:42 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- SJ1PEPF00002312.mail.protection.outlook.com (10.167.242.166) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.339.3 via Frontend Transport; Wed, 19 Aug 2026 07:13:42 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Wed, 19 Aug
- 2026 02:13:41 -0500
-Received: from [10.252.145.116] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.45 via Frontend
- Transport; Wed, 19 Aug 2026 02:13:40 -0500
+ (envelope-from <jbeulich@suse.com>)
+ id 6a8559ba-2eae-0a2a0a5409dd-0a2a4506a83c-16
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 09:22:44 +0200
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a8559c4-195a-0a2a45060019-d155802ad4cc-3
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 09:22:44 +0200
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-49954b88fffso6590875e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 00:22:44 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-482b14514d5sm3950500f8f.10.2026.08.19.00.22.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 19 Aug 2026 00:22:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -67,245 +53,141 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=tVFI1l8qxajGAeGL4IhIl6kQUrN0UIfTEsrV95dunJGvvXWeWNrN9n9qOCSOfqYC4Da/5mTSiF0vea820LL2HjWWGnPVvHG4kcm1coJYPkFTQwCfblaxzcRrHtptnWPSTdEDZPHZJGHfpczByfoPVxZkaTNH1IeU8xmRpRFeR7wGL/dJ8FQnBk0pDehRWSSDNTrM7B6MUQXKX7ydGKre5caY+Bzv2HKOuQZs75/MnZQrCCNsdhUe9GX7cTvpw9BUccYfj0BPKz+Zn3eYaGk1qmc5WjmfL3rhJv2zhilaNomqKTzpRbxNSQwzfO28GCOcCC3BxPKdFp6qnXKuX91R1w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0G+z6egPFygd4uGSiCW0yHP4QZ4BC6yuLAT+y3M+77Y=;
- b=qeKXnL86O/WHHRNyYYDr2+ChiVSJh8QedUMZund8/qvL/2l8+D6rk41a453hMBQ/xhJ97TCQedY3s1EebIrHx/zoKhE2vMIG1FFRmNZy3dOhGAlItgo8hHORUD6z1AMt+R1kEsmTGWhhD40ZK9WiTPBbWi8K7OV1brNqY1gzsZwxsRU4w2MP5Jq0zvtIqQNmdFzltv9NnKL7DMeqhBsnLBf8jt06X9RzAMlwyKsYMXwdz4F9tsrE7yAnKT9f4R5ChyHjagW46gmTEfw0dSA3Hhlmfa6QzT3xw7Yezz2eulrX9bSAS5Z99PYAT5YK/pPqFyYc4Pipt3WxGQ6q2XOqng==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0G+z6egPFygd4uGSiCW0yHP4QZ4BC6yuLAT+y3M+77Y=;
- b=yAc9Voz+7Dra62HjmoAOxblfXvDPl/xeljqQ6NGbvFJDBRXoTnMJyUdvCDBhmIWhjRxD48/Be8qZrO9vOT7BgtHy5L07y0JUZIz3NrtWVTKSCVSZxSUbUlPOcFv5Vxuwg9Fi+FviuBQiUQM4MFW1O0PXEl1gbDMV5doMjgOSdWo=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <a36894b1-2104-4df4-a82a-6d1b7d1cd21a@amd.com>
-Date: Wed, 19 Aug 2026 09:13:38 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1787124164; x=1787728964; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=2NZoBcFqMNoc7iCqfHSRU1JgiQhuz7rRtU331DbrzT0=;
+        b=VEQcWSGX4GeK5QkZE/WEn6ze3wqWEVsq0ahedcipUmx3UAk049P7bMHKlhq8P5g+V7
+         WcneJJ6b+yfbCa0JbwMhBIf1FrX08cHpGG6Lbakk8MK/qqSNJkGARpIqMETwkgvQDMCf
+         r6MDSzGn0F4iTl51n7tMyxIUpD8dlMzs4Ozb3X+lKRVbSmoYr4vOPgisDjuULsslDGWe
+         y7pyfU/md0UHk7MdFZmL0WfKsckOhuQ0mFYDV7QyRKW1hfvuydVepf9ppp6cZaYbtoJC
+         GbCssrtCWuLNYXzVt+V5iHz2rh6JhJYzafSRantSRR6vOrHY2E9zxSzpKyHppz9dsAT6
+         GwJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787124164; x=1787728964;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=2NZoBcFqMNoc7iCqfHSRU1JgiQhuz7rRtU331DbrzT0=;
+        b=DwkeKMSCj7Y1u9VC3k/+eI5TUBDCneWfBS5b3yJXUyp6XL1z9EBLk7LQthmrTYcq81
+         Q+k8E0cTuixRHn/NZCISgynj/tACAyvszMclAG0w9qqCvXAmWRVDgGkUByVxEPTnRrUk
+         J518rjZLpV5YKj8CaU4Sye5IUTt0kN+8B6klMxnH/7iwum49AcHb0s4KnDZ/wfaLNOQC
+         tXgklL65algJd0SC7ZMtucavP4Ua3rC9wsla76ry89uf7/7H66xluFdjUcKA8nI4tDHm
+         xwKUbFAdt9LfCbyf0GuESaNscZehXgyTq2AgRjEhwRqzlatWksrqaSxoNNY/oQmthnZ6
+         XcuQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rq8QzTBkKQGGZQPpAfkXyqxykjG41/3Xk6PTj9WRjp2qJinHr6iP+o1CfFfSOHgwxW7qyFjfMbgx3U=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwsqY4/4/6BixT4fUHqfA3M3y1f5o2xlcoBcrC3NmpMnun/IKTF
+	C9n4bHe7juD5TOPGlNaa91dU1szB9GQ5yrob0EMOEJmLp/+i6xEQsu5t+/VDv47YSw==
+X-Gm-Gg: AR+sD13OU+mqESWdsMSci4L+zXYsB3WvhE0wAEHjVWUkdk/sG2KCVrQuiAE10zH8neb
+	oGK+gwwlgwSg6HslCt4ckyB1EFgzvtGLMKtRvNzYC6reNB5u9vE8AlP+cdzqUEvsyoYhujpijbE
+	tNPdN6VQUvMBb8n74qc0tErw6uOZ5ZZaErAZmVGiPwhc/Z6rCgQOmOFpXUurI/VHIBqICKWxQjl
+	LU96pv/GSCvXvTn4S4S0AWVhxc89dbf38d0CIPFmxMitkQcKRm67VHyg3iPYb9Yick7edEKQshl
+	kruZK1WsJhz1SwYn0Y62eK0FtsWh7hcvtQ9GhV3yOxshxeTSFXKV25H48HSfvZW9Z4ybnxXxIoU
+	3jX5UMuFPWUfZhAGpOqdyWg6dE4ct/wyWS1QyUQdrXFGNJmcrzu1OJ5eoFTfMBD1XDLeJZ4ohLV
+	M2pXlqBT6cINZl76SP/kRv7b1C1OL8iNkNU5dmSNplrIJzHDmeE56UWv7kaYAcZA3HHzqe9HIeI
+	C8QyLf/l5x3EfviPS0FEa24G02JhxTRpkSsE1cCkgW5Jaui0p9ZGP0EnG2wSeM=
+X-Received: by 2002:a05:600c:37c6:b0:499:87f3:a2a3 with SMTP id 5b1f17b1804b1-499aa1c7bafmr45212215e9.15.1787124164412;
+        Wed, 19 Aug 2026 00:22:44 -0700 (PDT)
+Message-ID: <f9471a2b-6306-41fb-af52-2336af77dfc9@suse.com>
+Date: Wed, 19 Aug 2026 09:22:43 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/4] xen/arm: add i.MX8M platform support
-To: Wig Cheng <onlywig@gmail.com>, <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>, John Ernberg <john.ernberg@actia.se>,
-	Peng Fan <peng.fan@nxp.com>
-References: <20260818153946.1635464-1-onlywig@gmail.com>
- <20260818153946.1635464-4-onlywig@gmail.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
+Subject: Re: [PATCH v2 2/2] xen/sched: core: kill unarmed timers on
+ sched_init_vcpu() failure
+To: Furkan Caliskan <frn1furkan10@gmail.com>
+Cc: jgross@suse.com, andrew.cooper3@citrix.com, dfaggioli@suse.com,
+ gwd@xenproject.org, xen-devel@lists.xenproject.org
+References: <20260819051532.9197-1-frn1furkan10@gmail.com>
+ <20260819051532.9197-3-frn1furkan10@gmail.com>
 Content-Language: en-US
-In-Reply-To: <20260818153946.1635464-4-onlywig@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260819051532.9197-3-frn1furkan10@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00002312:EE_|CH1PPF6B6BCC42C:EE_
-X-MS-Office365-Filtering-Correlation-Id: 953ea6af-76de-4ade-0349-08defdc16690
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|36860700016|1800799024|82310400026|23010399003|56012099006|4143699003|11063799006|10067099003|6133799003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	gGOZJDHt62jK7JpUQhKq3ioY/nDto5c8nC9vGNE1L6VUfkmLEAVIp3zVJV2Op4dLaobQz1RUmElVJwnDxbzLf22WXLD7/jRMNtPID9eYqNLTedvVPY2bWpr2x6B14vZ5OUZ69dwJO7eUGNRSkTjQzaeXhAWOGtNyEWOVeTnuhiz+jWFJte3oIcAXwOej9jJ6y5Trvf9II5Ij2tTG2+I079aThWPFdm+hj8wtaVHHd9iT0bvoMBMvI5DjSqdZKcK/4P1qs+Om619JVZtjC0iAeuhQh/4AWIA96dnMkyrbSSi9RXr0otooa9noQefEhMnxtYySALzgcK3qTiYXmtXFO/d9AlvnNj7xbELVm08mahnEY+Hlz5+Ehi/zswK4RAzgsk6aAQyQTsm8UYUT4gJ95+dkWnNMTZifCG9us+G6cSFJltsCWMVIgFJAXgSWvI5iQ/PBpNB5/HP0fGUrQd/rEAKbbrEpq5RMp0su3M5H2u2DLEWorGWQsYdjen/vtv0uWRdG4M0lleMOi6RdAXaQlo7e+T3m65V7AX3B0CHiph6KzfCp8tMh6ORTCccoCpMuJQPwvSKTRpP0dVXC/zs/uyZUMg/ZBUVsxL53mk5ypPGJFgd4qe/oyEaIxHsUPnIzWnID8VgZLlm92QbMbkSAALkWvVJbnEUIk7TKUHbFgEh2gEOP9OR/U/HEw9+M+nvpt3612UFRkQv9WbLf/5eb4A==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700016)(1800799024)(82310400026)(23010399003)(56012099006)(4143699003)(11063799006)(10067099003)(6133799003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	qzHHNT4M3KG19+3baKGZKwinN5wrIZ2+rDIJOJoChsmNgvRFCxLSR1tDJQfkaXJ3Yyg2yVExVtFdtGD0bFXzaPNBpihTJ1OsMOCxG3I0dz5phUrVSUnYIB7DGzjFK/cZkmTqr7W1uj6Ks+kCL59epVWorMO7pq8/Twu1cq/1Ugfjw9OYCib10VdM2VldBA8NC1IfEgEBb5XwPt1tJRx2iSlYLz3a9/moJWHRfGMkchLTD9b98r2pdDTK9Xq5quvYybHzI9zpcz1E9tjR8cGEga8jncSNe8ffdoP9RVVHcVBXrw5GsDLVC+QEU2kmN6KAWUhhR8Uze0vsttl2smGJ9QS722MKreg5uo4atasid6/ZG6JhC3s6LHL/NzqxWSvMCG0ArcyRRvEwQafrOYDA7VmeyFWctvIcH8wPCOArTzXdTWtcp/J0IaqW0/Uv+zn0
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Aug 2026 07:13:42.3033
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 953ea6af-76de-4ade-0349-08defdc16690
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SJ1PEPF00002312.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH1PPF6B6BCC42C
-X-purgate-ID: tlsNG-4011c0/1787123627-599C1CFC-9743402E/0/0
+X-purgate-ID: tlsNG-16d1c6/1787124164-FDE0E77B-F564CE00/0/0
 X-purgate-type: clean
-X-purgate-size: 6466
+X-purgate-size: 2596
 
-
-
-On 18-Aug-26 17:39, Wig Cheng wrote:
-> Add platform glue for the NXP i.MX8M family (i.MX8MP/MQ/MM/MN).
+On 19.08.2026 07:15, Furkan Caliskan wrote:
+> sched_init_vcpu() calls init_timer() for a vcpu's periodic_timer,
+> singleshot_timer and poll_timer before it can fail -- these
+> become live, linked into their target pCPU's per-cpu timer list
+> regardless of what happens next. If the sched_alloc_udata() call
+> further down then fails, the function frees the sched_unit via
+> sched_free_unit() and returns 1, but never unlinks these three
+> timers.
 > 
-> When Linux is used as dom0 a number of drivers make SiP SMC calls into
-> TF-A to manage hardware: GPC power domains, SRC (M-core remoteproc),
-> SoC info and NoC QoS.  There is no public specification for these
-> calls; the function IDs and their subfunctions are taken from the
-> vendor kernel call sites.
+> The caller, vcpu_create(), makes this worse: on sched_init_vcpu()
+> returning nonzero it jumps to fail_wq, skipping fail_sched and
+> thus sched_destroy_vcpu() -- the only function on this path that
+> calls kill_timer() on them. vcpu_destroy() then frees the vcpu,
+> and the three timers embedded in it, while they are still linked
+> into that shared list.
 > 
-> Forward only the specific subfunctions the hardware domain issues,
-> following the whitelist model of the i.MX8QM platform.  Where a service
-> has a fixed set of subfunctions (GPC, SRC, NoC) they are filtered, and
-> the SoC info call is a read-only query.  CPU and DRAM frequency scaling
-> are denied because the hardware domain cannot make an informed decision
-> about resources shared with the other domains, and any unknown function
-> ID is rejected.
+> This silently corrupts that list. It only shows up later, when
+> something else touches a neighboring timer: sched_move_domain()
+> crashed with "Assertion 'entry->prev->next == entry' failed" on a
+> completely unrelated, valid vcpu's timer.
 > 
-> Signed-off-by: Wig Cheng <onlywig@gmail.com>
-> ---
-> Changes in v3:
-> - Include <asm/regs.h> for get/set_user_reg().
-> - Add a description for the CPUFREQ function id.
-> - Drop the unused SRC M4_START and NoC LCDIF subfunction macros.
-> - Order the switch cases by function id.
-> - Deny DDR DVFS as well, for the same reason CPU frequency scaling is
->   denied: the hardware domain cannot make an informed decision about
->   DRAM shared with the other domains.  Previously it was forwarded.
-> - Return false directly on a denied subfunction instead of goto plus a
->   redundant printk (vsmccc_handle_call() already logs the rejection).
+> Kill all three timers in sched_init_vcpu()'s own failure branch,
+> so it doesn't depend on the caller reaching sched_destroy_vcpu()
+> to undo what it set up itself.
 > 
->  xen/arch/arm/platforms/Makefile |   1 +
->  xen/arch/arm/platforms/imx8m.c  | 139 ++++++++++++++++++++++++++++++++
->  2 files changed, 140 insertions(+)
->  create mode 100644 xen/arch/arm/platforms/imx8m.c
-> 
-> diff --git a/xen/arch/arm/platforms/Makefile b/xen/arch/arm/platforms/Makefile
-> index bec6e55d1f..cdf936c50d 100644
-> --- a/xen/arch/arm/platforms/Makefile
-> +++ b/xen/arch/arm/platforms/Makefile
-> @@ -9,6 +9,7 @@ obj-$(CONFIG_ALL_PLAT)   += sunxi.o
->  obj-$(CONFIG_ALL64_PLAT) += thunderx.o
->  obj-$(CONFIG_ALL64_PLAT) += xgene-storm.o
->  obj-$(CONFIG_ALL64_PLAT) += brcm-raspberry-pi.o
-> +obj-$(CONFIG_ALL64_PLAT) += imx8m.o
->  obj-$(CONFIG_ALL64_PLAT) += imx8qm.o
->  obj-$(CONFIG_MPSOC_PLATFORM)  += xilinx-zynqmp.o
->  obj-$(CONFIG_MPSOC_PLATFORM)  += xilinx-zynqmp-eemi.o
-> diff --git a/xen/arch/arm/platforms/imx8m.c b/xen/arch/arm/platforms/imx8m.c
-> new file mode 100644
-> index 0000000000..0aceed9d43
-> --- /dev/null
-> +++ b/xen/arch/arm/platforms/imx8m.c
-> @@ -0,0 +1,139 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +/*
-> + * i.MX 8M family setup
-> + *
-> + * Copyright 2026 Open-EP (E-Paper) Community
-> + */
-> +
-> +#include <xen/sched.h>
-> +#include <asm/platform.h>
-> +#include <asm/regs.h>
-> +#include <asm/smccc.h>
-> +
-> +static const char * const imx8m_dt_compat[] __initconst =
-> +{
-> +    "fsl,imx8mp",
-> +    "fsl,imx8mq",
-> +    "fsl,imx8mm",
-> +    "fsl,imx8mn",
-> +    NULL
-> +};
-> +
-> +#define IMX_SIP_FID(fid) \
-> +    ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL, \
-> +                       ARM_SMCCC_CONV_64, \
-> +                       ARM_SMCCC_OWNER_SIP, \
-> +                       (fid))
-> +
-> +/*
-> + * SiP SMC function IDs used by the i.MX8M Linux drivers.  There is no
-> + * public specification for these; the IDs and their subfunctions are
-> + * extracted from the vendor kernel call sites (see drivers/soc/imx,
-> + * drivers/devfreq, drivers/remoteproc).
-> + */
-> +#define IMX_SIP_F_GPC       0x0   /* GPC power-domain control */
-> +#define IMX_SIP_F_CPUFREQ   0x1   /* CPU frequency scaling */
-> +#define IMX_SIP_F_DDR_DVFS  0x4   /* DRAM frequency scaling */
-> +#define IMX_SIP_F_SRC       0x5   /* SRC: M-core remoteproc start/stop */
-> +#define IMX_SIP_F_SOC_INFO  0x6   /* read-only SoC info query */
-> +#define IMX_SIP_F_NOC       0x8   /* NoC QoS priority setup */
-> +
-> +#define IMX_SIP_GPC_SF_PM_DOMAIN    0x03
-> +
-> +#define IMX_SIP_SRC_SF_M4_STOP      0x02
-> +
-> +#define IMX_SIP_NOC_SF_PRIORITY     0x01
-> +
-> +static bool imx8m_smc(struct cpu_user_regs *regs)
-> +{
-> +    uint32_t function_id = get_user_reg(regs, 0);
-> +    uint32_t subfunction_id = get_user_reg(regs, 1);
-> +    struct arm_smccc_res res;
-> +
-> +    if ( !cpus_have_const_cap(ARM_SMCCC_1_1) )
-> +    {
-> +        printk_once(XENLOG_WARNING
-> +                    "imx8m: smc: no SMCCC 1.1 support. Disabling firmware calls\n");
-> +
-> +        return false;
-> +    }
-> +
-> +    /* Only the hardware domain may use the SiP calls */
-> +    if ( !is_hardware_domain(current->domain) )
-> +    {
-> +        gprintk(XENLOG_WARNING, "imx8m: smc: No access\n");
-> +        return false;
-> +    }
-> +
-> +    /*
-> +     * Forward only the subfunctions the dom0 kernel actually issues.  All
-> +     * of these manage hardware that belongs to the hardware domain (power
-> +     * domains, M-core, NoC) or are read-only queries.
-> +     */
-> +    switch ( function_id )
-> +    {
-> +    case IMX_SIP_FID(IMX_SIP_F_GPC):
-> +        if ( subfunction_id != IMX_SIP_GPC_SF_PM_DOMAIN )
-> +            return false;
-> +        break;
-> +
-> +    /*
-> +     * CPU and DRAM frequency scaling: the hardware domain does not see the
-> +     * whole system and cannot make an informed decision about resources
-> +     * shared with the other domains, so deny both (CPU frequency scaling
-> +     * is denied on the i.MX8QM platform for the same reason).
-> +     */
-> +    case IMX_SIP_FID(IMX_SIP_F_CPUFREQ):
-> +    case IMX_SIP_FID(IMX_SIP_F_DDR_DVFS):
-> +        return false;
-> +
-> +    case IMX_SIP_FID(IMX_SIP_F_SRC):
-> +        if ( subfunction_id > IMX_SIP_SRC_SF_M4_STOP )
-This is a range check rather than a white list. I think it's very important to
-be able to see what exact subfunctions are allowed i.e. switch ( subfunction_id )
+> Fixes: 1ad5dad74cde ("[XEN] Re-jig VCPU initialisation -- VMX init requires generic VCPU")
 
-> +            return false;
-> +        break;
-> +
-> +    case IMX_SIP_FID(IMX_SIP_F_SOC_INFO):
-> +        break;
-> +
-> +    case IMX_SIP_FID(IMX_SIP_F_NOC):
-> +        if ( subfunction_id > IMX_SIP_NOC_SF_PRIORITY )
-Same here.
+How did you arrive at this commit? It doesn't even touch sched_init_vcpu().
+All it does is move kill_timer() invocations around. I think it's
+d884b1077817, as that's where the "return SCHED_OP(init_vcpu, v)" was
+introduced (i.e. where kill_timer() would have been necessary to call in
+the error case). (I can't exclude the issue was pre-existing already at
+that time, but that would require more analysis than I think is worth to
+invest.)
 
-> +            return false;
-> +        break;
-> +
-> +    default:
-> +        gprintk(XENLOG_WARNING, "imx8m: smc: Unknown function id %x\n",
-> +                function_id);
-Worth printing also subfunction_id.
+> --- a/xen/common/sched/core.c
+> +++ b/xen/common/sched/core.c
+> @@ -589,6 +589,9 @@ int sched_init_vcpu(struct vcpu *v)
+>      unit->priv = sched_alloc_udata(dom_scheduler(d), unit, d->sched_priv);
+>      if ( unit->priv == NULL )
+>      {
+> +        kill_timer(&v->periodic_timer);
+> +        kill_timer(&v->singleshot_timer);
+> +        kill_timer(&v->poll_timer);
+>          sched_free_unit(unit, v);
+>          rcu_read_unlock(&sched_res_rculock);
+>          return 1;
 
-With the remarks addressed:
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+This almost, but not quite open-codes sched_destroy_vcpu(). Would be nice
+if the cleanup logic was shared. The sched_free_unit() call there could be
+leveraged here as well; what would need skipping are the sched_free_udata()
+and sched_remove_unit(). And of course the RCU-locking would need sorting.
 
-~Michal
-
+Jan
 
