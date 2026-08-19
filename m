@@ -4,44 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA13DC5DF81
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2026 15:28:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1395591.1633947 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C696C5B572
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2026 15:34:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1395627.1633957 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwiDa-0004qH-36; Wed, 19 Aug 2026 15:28:42 +0000
+	id 1wwiIY-0007Qf-NM; Wed, 19 Aug 2026 15:33:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1395591.1633947; Wed, 19 Aug 2026 15:28:42 +0000
+Received: by outflank-mailman (output) from mailman id 1395627.1633957; Wed, 19 Aug 2026 15:33:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwiDa-0004q5-03; Wed, 19 Aug 2026 15:28:42 +0000
-Received: by outflank-mailman (input) for mailman id 1395591;
- Wed, 19 Aug 2026 15:28:40 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <onlywig@gmail.com>) id 1wwiDY-0004nj-G6
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 15:28:40 +0000
+	id 1wwiIY-0007QY-JN; Wed, 19 Aug 2026 15:33:50 +0000
+Received: by outflank-mailman (input) for mailman id 1395627;
+ Wed, 19 Aug 2026 15:33:50 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <32syFagYKCeUZLHUQJNVVNSL.JVTeLU-KLcLSSPZaZ.eLUWYVQLJa.VYN@flex--seanjc.bounces.google.com>)
+ id 1wwiIX-0007QS-Rp
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 15:33:50 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwiDX-00H1ec-T1
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 17:28:39 +0200
-Received: from [10.42.69.8] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <onlywig@gmail.com>)
- id 6a85cb8f-8faa-0a2a0a5109dd-0a2a4508bc0c-44
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 17:28:39 +0200
-Received: from [209.85.210.175] (helo=mail-pf1-f175.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <onlywig@gmail.com>)
- id 6a85cba6-f659-0a2a45080019-d155d2afd55e-3
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 17:28:39 +0200
-Received: by mail-pf1-f175.google.com with SMTP id
- d2e1a72fcca58-84a4d8fd6ecso1218101b3a.1
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 08:28:39 -0700 (PDT)
-Received: from wig-Precision-3660.. (125-227-154-99.hinet-ip.hinet.net.
- [125.227.154.99]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-851d3617434sm787575b3a.29.2026.08.19.08.28.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Aug 2026 08:28:37 -0700 (PDT)
+ id 1wwiIX-0037Ib-8u
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 17:33:49 +0200
+Received: from [10.42.69.6] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <32syFagYKCeUZLHUQJNVVNSL.JVTeLU-KLcLSSPZaZ.eLUWYVQLJa.VYN@flex--seanjc.bounces.google.com>)
+ id 6a85ccd9-8faa-0a2a0a5109dd-0a2a4506b77c-8
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 17:33:49 +0200
+Received: from [209.85.210.197] (helo=mail-pf1-f197.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <32syFagYKCeUZLHUQJNVVNSL.JVTeLU-KLcLSSPZaZ.eLUWYVQLJa.VYN@flex--seanjc.bounces.google.com>)
+ id 6a85ccdb-195a-0a2a45060019-d155d2c5a884-3
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 17:33:49 +0200
+Received: by mail-pf1-f197.google.com with SMTP id
+ d2e1a72fcca58-84c4cd31b51so15826b3a.0
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 08:33:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,95 +50,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787153318; x=1787758118; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=qexHZlqSFqOa+wu3jRbx9Js4zQ/0pHMbVWziLO2Koe8=;
-        b=fvjeIXfqWr7lemEYCDFilUOYi0yQOdInrpXfqrQiShNPfmmQ0nMmlUapUqKye7H4aJ
-         hUfD2EqmNb4r3lSBYTzDI8HBoxL4HuO3ngqhPnYwwqYvTxJJRKrq5r7yVf5P+Tm3l+b0
-         bFNriKoAq05PvxExmuYrx9NscTe0j3KKtGVWGYfXMozJz/BJ3kkprPeeAIzOec5XVHUL
-         Dkp/LGgTxnSEglAqUUoJMv5ie94P40V9Dag8fx35u2K46CBradPHQ8PPAX6PPbnWUXl4
-         t8Oe7YpPrCjEwHRkRw+gFN6RuxT1QtNMCTumu6BZfpAVKV2gOLBol+ZJ4S82qO+fiqS5
-         M4Mw==
+        d=google.com; s=20251104; t=1787153627; x=1787758427; darn=lists.xenproject.org;
+        h=content-type:cc:to:from:subject:message-id:references:mime-version
+         :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=c2FvzDQHxVaueg4hvKJpjDuB27Njlxwegg3SIxYd2Fg=;
+        b=UXFZaNX5rOqMYok4fpR3qSSJw6eZWTnbNxi1TUxrOSS42cM0yCiaVyBBCIyKhOaF++
+         3mipzWrRqBm6wY+7nHdoHP79oV5zf7TYrw3JGcveS9a1UVzalbuDzRSrasKMGJs6+QyE
+         ljT0ceGZUJkFjsUWBq+cUqkvCz4esBDZPukH6h1JTPaY6e4eXFaIQCXZzbpoV9/d5W30
+         JIwLo+5qK8WF//9h8Fhp0C4lI/5++qAT2vgOD5rpTjJz5dcCS1okPQou3mqEJ00YYAEe
+         9zSAy6U8iVc6656vMtylFdVRVq2j+LqBjrWzKTvU9iB1DIZN0tlDhxU2XgRkL95ZIT1a
+         zgiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787153318; x=1787758118;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=qexHZlqSFqOa+wu3jRbx9Js4zQ/0pHMbVWziLO2Koe8=;
-        b=AIGD12ByyomQi+ZQB6tpdaKPPHNmHdN9ruPcjW5FtwQ8BExZvFuCXyzhKHGKgxgML3
-         2oVQdSM2B5ghDmTe6BQLWlWAILLP09ij54WpJ9EypAAltW6zTOTN3PZlThr3Mj7aV1mD
-         KqFNxqal6BvDL2I0QeeJQHJwXjs7T3xoxLh6LgaClSRQvLDEBbONJy5zvZb+5TiTJxsx
-         T1enbubVErZp3LCQKWiB9al9s1o+Atx4Ddb5OtKWM6YGxtqhwXyTBLw2TEbecpy9PA60
-         SMvNQ9OBhVfQSnkmRXY3b02IoIr0ZLJi2ZtHKXL8OnkIeXm+skMCXfzW0EIJbopgh5oM
-         /Iqw==
-X-Gm-Message-State: AOJu0Yw//TKlln6NmyB01mNH+lZKBjhdnZ2KQDgoCgaHDU0sF62UGvwp
-	lzyOJOCqZwrjGKVcWXxD7jVoQ55e5OUDAD04kwZ0eO40RdBZnyUErES3KT2hHAJM
-X-Gm-Gg: AR+sD13F+DJYckygfntXMNV+cRFI/fQeHgeqrI95cCRsoaMnlDck6KCwLcTFhnSX/lG
-	n5FJX98om1sZ2H7r5xrOwB+BqpV8ri9kS32BjoagV/t9A8Jw+JsGwi3FItXMNAnrUouEIGM2IHH
-	s4YfrCS6A5qcwind/j7xyWlxk8VyT6dIVPB9OzlJUeFVtfT9mUlYcgU/vt3cHE+4hgle4Nbw9WG
-	HqLUGzbFNKuup8A+8iSrcixlfFG5iMQ6OQq3ZKL8uI/hyq1Ug7s5K4PMVMulqDOeRZhGdpnURQz
-	8mVyFfBZYkelKGa6C2GvtA3i70xYy1pqv3j5+ZitjEN6X+hux3Mn7sgz9GIAIji7n2ZyC2aABaA
-	etD/rpS9bYU/kh4yq2WOKjZ1wPFaC1uU9GTSEbRO/vRIENPFjPachjSg1LIf6MbeVQ1SbJss6T3
-	pBVujYd0WADp8AatjWCH0S9/ga7q0sGHZOXS3aHenWz2zvmKjOLy7ifDKbt3NjKzqx50kW7fFsa
-	yAijTfxFWdKGfHqvPcNdzfC9U9UkveRkeNZYPY3ltk=
-X-Received: by 2002:a05:6a00:f05:b0:845:e9e8:645c with SMTP id d2e1a72fcca58-851d3847482mr9283456b3a.6.1787153317737;
-        Wed, 19 Aug 2026 08:28:37 -0700 (PDT)
-From: Wig Cheng <onlywig@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Michal Orzel <michal.orzel@amd.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	John Ernberg <john.ernberg@actia.se>,
-	Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH v4 4/4] MAINTAINERS: add myself as reviewer of i.MX8M related patches
-Date: Wed, 19 Aug 2026 23:28:21 +0800
-Message-ID: <20260819152821.3361898-5-onlywig@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260819152821.3361898-1-onlywig@gmail.com>
-References: <20260819152821.3361898-1-onlywig@gmail.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1787153319-D4D7087B-AB079D30/0/0
+        d=1e100.net; s=20251104; t=1787153627; x=1787758427;
+        h=content-type:cc:to:from:subject:message-id:references:mime-version
+         :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=c2FvzDQHxVaueg4hvKJpjDuB27Njlxwegg3SIxYd2Fg=;
+        b=SR4kJX4uXIeZgbfSCtsZebyzJH9uazrTbB1M8CdMczSzZMI6jSLrCT3MiZhIQeUgYS
+         LNBUUM6wbNMJYk21elaon/XNqYcb52E1ErpjkQf+E4/JiKdq2JzAyWZ7yBB0YSyZAY+Z
+         u/4FtfJKvO5keWb3rALt0PlveET5rAOdSPS0V3pNArNwOsOgVdHSPf3aniKCHm3tpqoc
+         7294fM7uFf7Arwfhc3UNwVj4RnSm6hHpwTLbaLNrafYL6xLYktMgtz2f0t6G0L9W509H
+         eYnt/oaqG8oAbI/NzEFunMDazDiA5kQLT0YSeGduSYJCUogs7cYlI7vOoUir+Sf2dJab
+         U5jw==
+X-Forwarded-Encrypted: i=1; AHgh+RqTZQhBuLP4yt1aQClzKwp5lmxxXXtSUDp803Yj05gqNTqUeJoxSwquNkZejE7eF9C6OjQvFN2LIz8=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyBK3SrJYS4rmPpC6sdj1pFMySskLQvJHStInemgoQP+wHX2JSD
+	K5TnAdgKA6WZ7L5hXSZgMDvzhvDtmwk6UUe+1fmfeRvMIcf5S+a3pFqaq1iUC8HmhwKMqIaF1Ur
+	fFA6CBg==
+X-Received: from pfoo3.prod.google.com ([2002:a05:6a00:1a03:b0:84f:df8f:5a90])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a00:2913:b0:84b:9a69:156d
+ with SMTP id d2e1a72fcca58-851df6dc419mr109732b3a.0.1787153626373; Wed, 19
+ Aug 2026 08:33:46 -0700 (PDT)
+Date: Wed, 19 Aug 2026 08:33:45 -0700
+In-Reply-To: <bd9e5b6e-07f2-459d-bca6-e290585060aa@intel.com>
+Mime-Version: 1.0
+References: <20260819102314.1499258-1-jgross@suse.com> <bd9e5b6e-07f2-459d-bca6-e290585060aa@intel.com>
+Message-ID: <aoXM2f1YTwgVj8KL@google.com>
+Subject: Re: [PATCH v2 00/13] x86/msr: Drop 32-bit MSR interfaces
+From: Sean Christopherson <seanjc@google.com>
+To: Dave Hansen <dave.hansen@intel.com>
+Cc: Juergen Gross <jgross@suse.com>, linux-kernel@vger.kernel.org, x86@kernel.org, 
+	virtualization@lists.linux.dev, linux-ide@vger.kernel.org, 
+	dri-devel@lists.freedesktop.org, linux-fbdev@vger.kernel.org, 
+	linux-crypto@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org, 
+	kvm@vger.kernel.org, linux-edac@vger.kernel.org, linux-pci@vger.kernel.org, 
+	linux-pm@vger.kernel.org, linux-coco@lists.linux.dev, 
+	linux-acpi@vger.kernel.org, linux-hwmon@vger.kernel.org, 
+	linux-mtd@lists.infradead.org, platform-driver-x86@vger.kernel.org, 
+	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, "H. Peter Anvin" <hpa@zytor.com>, 
+	Ajay Kaher <ajay.kaher@broadcom.com>, Alexey Makhalov <alexey.makhalov@broadcom.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Damien Le Moal <dlemoal@kernel.org>, 
+	Niklas Cassel <cassel@kernel.org>, David Airlie <airlied@redhat.com>, Helge Deller <deller@gmx.de>, 
+	linux-geode@lists.infradead.org, Olivia Mackall <olivia@selenic.com>, 
+	Herbert Xu <herbert@gondor.apana.org.au>, Linus Walleij <linusw@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Peter Zijlstra <peterz@infradead.org>, 
+	Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, 
+	Mark Rutland <mark.rutland@arm.com>, 
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>, Jiri Olsa <jolsa@kernel.org>, 
+	Ian Rogers <irogers@google.com>, Adrian Hunter <adrian.hunter@intel.com>, 
+	James Clark <james.clark@linaro.org>, "K. Y. Srinivasan" <kys@microsoft.com>, 
+	Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
+	Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>, 
+	Paolo Bonzini <pbonzini@redhat.com>, Josh Poimboeuf <jpoimboe@kernel.org>, 
+	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>, Pu Wen <puwen@hygon.cn>, 
+	Tony Luck <tony.luck@intel.com>, Reinette Chatre <reinette.chatre@intel.com>, 
+	Dave Martin <Dave.Martin@arm.com>, James Morse <james.morse@arm.com>, 
+	Babu Moger <babu.moger@amd.com>, Tony W Wang-oc <TonyWWang-oc@zhaoxin.com>, 
+	Vitaly Kuznetsov <vkuznets@redhat.com>, Andy Lutomirski <luto@kernel.org>, 
+	Bjorn Helgaas <bhelgaas@google.com>, "Rafael J. Wysocki" <rafael@kernel.org>, Pavel Machek <pavel@kernel.org>, 
+	Kiryl Shutsemau <kas@kernel.org>, Rick Edgecombe <rick.p.edgecombe@intel.com>, 
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>, Len Brown <lenb@kernel.org>, 
+	Viresh Kumar <viresh.kumar@linaro.org>, Huang Rui <ray.huang@amd.com>, 
+	Mario Limonciello <mario.limonciello@amd.com>, Perry Yuan <perry.yuan@amd.com>, 
+	K Prateek Nayak <kprateek.nayak@amd.com>, 
+	Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>, Yazen Ghannam <yazen.ghannam@amd.com>, 
+	Guenter Roeck <linux@roeck-us.net>, Artem Bityutskiy <artem.bityutskiy@linux.intel.com>, 
+	Artem Bityutskiy <dedekind1@gmail.com>, Miquel Raynal <miquel.raynal@bootlin.com>, 
+	Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>, Ashok Raj <ashok.raj.linux@gmail.com>, 
+	Hans de Goede <hansg@kernel.org>, 
+	"Ilpo =?utf-8?B?SsOkcnZpbmVu?=" <ilpo.jarvinen@linux.intel.com>, 
+	Rajneesh Bhardwaj <irenic.rajneesh@gmail.com>, David E Box <david.e.box@intel.com>, 
+	Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
+	Lukasz Luba <lukasz.luba@arm.com>, xen-devel@lists.xenproject.org
+Content-Type: text/plain; charset="us-ascii"
+X-purgate-ID: tlsNG-16d1c6/1787153629-F687577B-967E702C/0/0
 X-purgate-type: clean
-X-purgate-size: 835
+X-purgate-size: 1172
 
-I wrote the i.MX8M platform and UART support and can help review
-patches touching these areas.
+On Wed, Aug 19, 2026, Dave Hansen wrote:
+> Hey Juergen,
+> 
+> These look great. Thanks for doing it!
+> 
+> The only wonky thing is how we're going to actually merge it. We
+> obviously can't do patches 10-11 until all the "stop using" patches have
+> been applied.
+> 
+> I obviously 100% realize that it's during the merge window, but any acks
+> that the maintainers of 5-9 provide in the next few weeks would be super
+> helpful. Or, if any of those maintainers want to cherry pick their
+> subsystem's stuff out of this series and apply it, that would be great too.
+> 
+> But, the last time we did some MSR function munging, the tip tree
+> carried most of the patches. I would expect we'll have a repeat of that
+> here too. I'll pencil in the idea of just merging the lot around -rc1 time.
 
-Signed-off-by: Wig Cheng <onlywig@gmail.com>
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
----
-Changes in v4:
-- No changes.
-
- MAINTAINERS | 7 +++++++
- 1 file changed, 7 insertions(+)
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 4dd97ffcad..c60afc93a5 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -365,6 +365,13 @@ F:	tools/misc/xenhypfs.c
- F:	xen/common/hypfs.c
- F:	xen/include/xen/hypfs.h
- 
-+IMX8M SUPPORT
-+R:	Wig Cheng <onlywig@gmail.com>
-+F:	xen/arch/arm/arm64/debug-imx-uart.inc
-+F:	xen/arch/arm/include/asm/imx-uart.h
-+F:	xen/arch/arm/platforms/imx8m.c
-+F:	xen/drivers/char/imx-uart.c
-+
- IMX8QM/QXP SUPPORT
- R:	John Ernberg <john.ernberg@actia.se>
- F:	xen/arch/arm/platforms/imx8qm.c
--- 
-2.43.0
-
+Note, patch 12 "treewide: convert rdmsrq() from a macro to an inline function"
+is going to conflict with the KVM changes for 7.3; kvm_access_xstate_msr() is
+getting moved from x86.c to msrs.c.  Somewhat surprisingly, AFAICT that's the
+only conflict with KVM's code movement, so it's probably not strictly required
+to send a new version after the KVM pull request?
 
