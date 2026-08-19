@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52D68C5DF81
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2026 15:22:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1395564.1633894 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CE04C5B572
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2026 15:26:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1395576.1633902 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwi75-0002M5-1c; Wed, 19 Aug 2026 15:21:59 +0000
+	id 1wwiBg-000321-Ib; Wed, 19 Aug 2026 15:26:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1395564.1633894; Wed, 19 Aug 2026 15:21:59 +0000
+Received: by outflank-mailman (output) from mailman id 1395576.1633902; Wed, 19 Aug 2026 15:26:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwi74-0002Ly-UQ; Wed, 19 Aug 2026 15:21:58 +0000
-Received: by outflank-mailman (input) for mailman id 1395564;
- Wed, 19 Aug 2026 15:21:57 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wwiBg-00031u-Ed; Wed, 19 Aug 2026 15:26:44 +0000
+Received: by outflank-mailman (input) for mailman id 1395576;
+ Wed, 19 Aug 2026 15:26:43 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wwi73-0002Ln-G6
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 15:21:57 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wwiBf-00031o-0q
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 15:26:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwi72-0035n1-T3
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 17:21:56 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wwiBe-009wG1-92
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 17:26:42 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a85ca03-e002-0a2a0a5209dd-0a2a45028e46-36
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 17:21:56 +0200
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a85cb15-bab6-0a2a0a5309dd-0a2a4504aeb2-42
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 17:26:42 +0200
+Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a85ca14-6ca4-0a2a45020019-d1558036e105-3
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 17:21:56 +0200
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-49554ebb87dso12114215e9.3
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 08:21:56 -0700 (PDT)
+ id 6a85cb31-b57f-0a2a45040019-d155dd35b866-3
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 17:26:41 +0200
+Received: by mail-wr1-f53.google.com with SMTP id
+ ffacd0b85a97d-47362928f65so1062539f8f.2
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 08:26:41 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499aa17fc80sm72889305e9.14.2026.08.19.08.21.55
+ ffacd0b85a97d-482b14514d5sm6511823f8f.10.2026.08.19.08.26.40
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Aug 2026 08:21:55 -0700 (PDT)
+ Wed, 19 Aug 2026 08:26:40 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,55 +55,56 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787152916; x=1787757716; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1787153201; x=1787758001; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=4knUFfMmt2eXsg6zvk2plIhzZPfzCn/JZd/OrHbzN8I=;
-        b=abbBGHvCVfbXZcTT0xx0Pvyp2D9h3xWEGQde1up0LiouVyr/q4jA3MIHzo0M6VEZcV
-         sTt7jE3RdvqK+v+5HoAS4NhVQjvUIWIdFnQseIoCn2JhxXlSAPwB43aTvsnh/wXu1v5d
-         RIbKLPcooM02AtbRhT7eE3zT3hy4jW7uYSXaFzLmOIQyfCCP9kLWYviq46GPmeKV5HKY
-         TKv1jNX2QYzdWMD59J2a5qsCz/roFf+cfl3MGzqLgCs7QnEVJDbMrUQ8ZDi5kZNak/ad
-         cW+/vK3ufnT4WFHIZY3uq1LART+NG/lzZGOVF1b0j5wlUjcoFgck2uHBup54ACe21/Be
-         /rqg==
+        bh=NAjSeqGo8bCvuUajX1CJPX/BVd8Amvrb66bC1ViYuAY=;
+        b=f4Lhrw5XdL5+o8j6F8G6wKFzhYTEHyPbEnuiK53AGYI0xLCbOY31uo5iVGxynmAa4g
+         zj2bs3nX1nsOMD0GEhcjgoLjsXPZ943PMqCX3fpM1NPDHcnfv0sD0VLp6zqvEytu2O9j
+         a78GJlJEILVvhoLpUJsKe7OhfViXrjInagxMcxVX42ozna53nhxbHBCs1wV6pK8Hv3sp
+         Wm64ix4OvqbpqKTDLbwxnHniYWYUGxcbdwm0YyWVYk0mazKPkDePMNx9ANNXUshDm/iG
+         9V9HOY4QqWMEp+EvNtnzA7l7OkA84HkiQNyxeArd2lWdSU5h/FvrwqY//Za4dTqoQbU2
+         E0RA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787152916; x=1787757716;
+        d=1e100.net; s=20251104; t=1787153201; x=1787758001;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=4knUFfMmt2eXsg6zvk2plIhzZPfzCn/JZd/OrHbzN8I=;
-        b=G4o8J/ctTCzSEyBfztnxT5SloEPd5OcYHmwYdsRrN4PUV1Df7C0N+ybu3jPq6Ji64U
-         ut6vbABQYp9/aJamy8PRO9sufmcFIvtlh8n86vsTulqhGZTgSeBo1RhOI9/wjkGHsDk6
-         PEHalds9Ul6cAIeRMlDMUq0jECovEAifLy7afUbVk+DLNrn24/vaF6k2sP1X4r1p8Sta
-         d6Gkr7th4Rct/3whiwHNjDN/+XlxRNlSWdAQPGJYp3M7+tJhZnrGjvN1Vh/+XT9jbFUE
-         w5xhLSycBAw3RTf+28NCeki3z2xvURG5WBzRvmo+jZceKGX4+43dvUAVMCVrcSscvQrz
-         OOSg==
-X-Forwarded-Encrypted: i=1; AHgh+Rojt+FUc/VU4TAw+ioP6QEjtQjt+S3TbsrZyEfdMgQHmGnLVZnJ7a4HAPuPJPGB/QsdDS0wAXUx7N0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yxia1AcJ0uY1aw6RDrmcUkUS8VPleKCupdz13gsM33Mp9jPd6iU
-	dlZagtBeDWoNIjd26bdx0uUIzBzrRg/3k7ZtqvkK7MOz9SE5M9AZrJ5ALc0Ru81Bcw==
-X-Gm-Gg: AR+sD11hToXxIK29GE1r1QkQ7JM5XOi2v0nWXmr5GYgCn8wlItjskCYlJhU7hz2WdPH
-	BLs1Q/GRBCUWTSrIQXBs9yjPUp79Scj43CfeFl7C7BYWOkKnoVBy1++b7vsP6frv8gFrropp0QI
-	jN4B8Tesbkxcy1ully2lR2NwW6R/a13z40fvLmaCxVfLDoL5PkY12wfaYH4GK+RMxK0ai+2wQu5
-	jRtMXE6oE0kxV3kO19IcG1nW62DO7cGbNEYbG885msvwRIHmrLSC9SQJ8F8NQaDo/Z/QTGdfuhK
-	9iEnEbBvcwr7uV8HuWruKtZ2VcSjJiX2og8vmWj/8PH1dgg/Jh/7Bbnms/J9WZhqzQ5V2I3NECC
-	Mq11DzeV3DA/acmZpsvPIsyhm2LT8Hpd2Gnt98bkWYFYbyh5ERFZH9LIvcCfMu1CDjGPYxtbrEs
-	YuvFF8A3/Y/JNaiIonSSoLrXruJ/OmwTCF1KMew32ZqMsOgGW+R6eIgAjSKJ3DFbgbGy7lLzLFR
-	RYZVmfIx9e7/fJfnPpJrZJ/5zamoNhEPbY+cZ/E5eAB8ZKBen/E
-X-Received: by 2002:a05:600c:37c6:b0:499:8f9f:e9ee with SMTP id 5b1f17b1804b1-499aa173a16mr109156325e9.7.1787152916266;
-        Wed, 19 Aug 2026 08:21:56 -0700 (PDT)
-Message-ID: <1e6aa092-778f-4826-8013-aa527a4858eb@suse.com>
-Date: Wed, 19 Aug 2026 17:21:54 +0200
+        bh=NAjSeqGo8bCvuUajX1CJPX/BVd8Amvrb66bC1ViYuAY=;
+        b=bPFsqmzYeoZelUt/C/SE44qFsiHw5sgnQ4nDhY6iUVaOg5aOM5Rv12Rxu9UnUY+xFn
+         YnDsD67PGMQ5+mC1csBnmAE7BCu09kVSPVCIbUp3AbOttr4BlfsOx3e3KRkYpplVc02v
+         xyYQPbSNFlgWq5SfsrtmApwjEVK/V8WADovLbEXbo0+maZSTSJ/pZ7RXpVIfIgRTd7X7
+         t1DmSuXphkgnhkbkFMJodei7DxSKL9Be4NyQZZvshoFrWmrZeMufOQ2zv0ffkk3Dj0xo
+         jmUD36VK/0CoUZ3gI+850bB1Zpa6LgIwDNLZvQiztZ1/eiK2p20GTGNT4rl7xhBFjXCu
+         WqLQ==
+X-Forwarded-Encrypted: i=1; AHgh+RouqenZxE5eqV/rMTUvn8WuBxvkgWjE5Y6PtChQblIVu0e2Jp0xxUeo3dwBa4q84Z2NFfNZKL2V+qc=@lists.xenproject.org
+X-Gm-Message-State: AFuF++kGR75plL4JgyT/dyO/Iij9Q22SMoxZWV11Cfmtl7PoRHGvNq55
+	v38H+mmqHaa9y/7sLbD5HgnzOu5UsGfLSdUHousMBoepRRBrO0bRsaICb1rpcl/h0w==
+X-Gm-Gg: AR+sD13mYvdaQJxXDcpu2WAIJliiSC4kFx5SkqlsbL/JPRQN6h7XIpR/Xmu3iGKUOSr
+	uGxlYMCTKvf8ag2iazS5fucqaOvdd3EGMHfHHbXjuCFl0CtMpg72CTd1Ez1rF8Nlnub8Kpcr25b
+	Q6QTCBhVMSYRvb+wCIf0yhkqT3Fjy6eVxOMgAqmkke+5VMj/JMvpOs7Bjycjpdtl0m+mCO4JMst
+	HWwZcc0Yth/MNz8ehLAsnTYOTsI2RNAGBVrmafMI/FBsqmNjPzvrKpV1QCAsQtVB01mD8jIaA+7
+	KFheL1QLtku8p1a2E1pAe3eWaU4OArNPDzu8+48w3b2+dd6TNSAivR6kIqPhx0b9sKj064Hnobo
+	kDsvCvISTomofd8fY3skAwvNOu60HdVWwtEissHoj2iKORuEtvQiFyU6mCKyIeUV34j+FXUmtTx
+	LgWHrWP5reqLW4biN8pXBdeGAOQosVEy6js4BHU7IjeLF0orFZd8VOelvGsVrDHZtwZXkDZQ+aj
+	6T5qKzzD2JoJpiNRht4DN7NhhaIkx6sI0i5YuwqvJFLyjnmJWAJ
+X-Received: by 2002:a5d:5e8c:0:b0:47f:9283:1fbe with SMTP id ffacd0b85a97d-482b1e22ed5mr10476645f8f.0.1787153201393;
+        Wed, 19 Aug 2026 08:26:41 -0700 (PDT)
+Message-ID: <8fc44fb5-9541-4039-ab01-9db9fc327fb9@suse.com>
+Date: Wed, 19 Aug 2026 17:26:39 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v7 05/14] iommu: Simplify quarantine logic
+Subject: Re: [RFC PATCH v7 06/14] vtd: Remove MAP_ERROR_RECOVERY code path in
+ domain_context_mapping_one
 To: Teddy Astie <teddy.astie@vates.tech>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Jason Andryuk <jason.andryuk@amd.com>, xen-devel@lists.xenproject.org
+ xen-devel@lists.xenproject.org
 References: <cover.1763569135.git.teddy.astie@vates.tech>
- <31b2ede1eab92048b69fe4999a35eb7d4a4617ba.1763569135.git.teddy.astie@vates.tech>
+ <149e3a765a5a55792be7af0a4d9c0ca9fb5098c6.1763569135.git.teddy.astie@vates.tech>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,29 +130,31 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <31b2ede1eab92048b69fe4999a35eb7d4a4617ba.1763569135.git.teddy.astie@vates.tech>
+In-Reply-To: <149e3a765a5a55792be7af0a4d9c0ca9fb5098c6.1763569135.git.teddy.astie@vates.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1787152916-676BF2AC-69426B25/0/0
+X-purgate-ID: tlsNG-ebf023/1787153201-520D5B50-5B79DAB5/0/0
 X-purgate-type: clean
-X-purgate-size: 680
+X-purgate-size: 918
 
 On 20.11.2025 12:09, Teddy Astie wrote:
-> Current quarantine code is very hard to change and is very
-> complicated, remove most bits of it and replace it with direct
-> reassignement to dom_io domain instead.
+> This logic is basically never called as the only possible failures are
+> - no memory to allocate the pagetable (if it isn't already allocated)
+>   this is fixed in this patch serie by ensuring that the pagetable is allocated
+>   when entering this function
+> - EILSEQ when there is a race condtion with hardware, which should not happen under
+>   normal circonstances
+> 
+> Remove this logic to simplify the error management of the function.
 
-Well, again far too little of a description, even when taking ...
+But this code was added for a reason, yet you (again) don't make clear why
+the change you make is correct. Putting in place something else _later_ in
+the series isn't really an option. Things need to work at every patch
+boundary.
 
-> Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
-> ---
-> A idea would be to rework this feature using the new reworked
-> IOMMU subsystem.
-
-... this sentence into account: As I can't spot replacement of present logic
-(fill_qpt() being a prime example) - how is existing behavior retained? I
-can't help the impression that you simply lose functionality, which is not
-an option.
+Considering that (long ago) you indicated anyway that you'd work towards
+better splitting up some of the large patches here, I think I'll stop here,
+waiting for a re-submission.
 
 Jan
 
