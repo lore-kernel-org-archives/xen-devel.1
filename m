@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B09BC5DF6D
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2026 11:44:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1395222.1633704 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2616C5DF86
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2026 11:45:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1395229.1633712 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wweii-00062T-L4; Wed, 19 Aug 2026 11:44:36 +0000
+	id 1wweje-0006Tf-TB; Wed, 19 Aug 2026 11:45:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1395222.1633704; Wed, 19 Aug 2026 11:44:36 +0000
+Received: by outflank-mailman (output) from mailman id 1395229.1633712; Wed, 19 Aug 2026 11:45:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wweii-00062M-IP; Wed, 19 Aug 2026 11:44:36 +0000
-Received: by outflank-mailman (input) for mailman id 1395222;
- Wed, 19 Aug 2026 11:44:35 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wweje-0006TY-Qc; Wed, 19 Aug 2026 11:45:34 +0000
+Received: by outflank-mailman (input) for mailman id 1395229;
+ Wed, 19 Aug 2026 11:45:33 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wweih-00062G-T2
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 11:44:35 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wwejd-0006TS-MZ
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 11:45:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wweih-00GLJk-9p
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 13:44:35 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wwejc-00Ec6G-SQ
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 13:45:32 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a85970f-8faa-0a2a0a5109dd-0a2a450b9318-42
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 13:44:35 +0200
+ id 6a85974a-bab6-0a2a0a5309dd-0a2a4508d7fc-38
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 13:45:32 +0200
 Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a859723-b7e8-0a2a450b0019-d155dd2de550-3
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 13:44:35 +0200
+ id 6a85975c-f659-0a2a45080019-d155dd2dac21-3
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 13:45:32 +0200
 Received: by mail-wr1-f45.google.com with SMTP id
- ffacd0b85a97d-4815bce4652so568479f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 04:44:35 -0700 (PDT)
+ ffacd0b85a97d-47f703a9e5dso383641f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 04:45:32 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499aa0dd5fcsm62584705e9.14.2026.08.19.04.44.33
+ ffacd0b85a97d-482b1441753sm5796968f8f.5.2026.08.19.04.45.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Aug 2026 04:44:34 -0700 (PDT)
+ Wed, 19 Aug 2026 04:45:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,55 +53,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Content-Language:Cc:To:Subject:From:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787139875; x=1787744675; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:autocrypt:content-language
-         :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=vm6DXDcPqsw9MwhiDhO8QXyISmCCCmZBdpzKByqLy8A=;
-        b=MWZQtEV0PvkwM9iSVUGwUtxAb/CFi2G4SwrHjX1B4th89g8jhewSGjYNEfyK1BzElZ
-         Ln1AtJpSP7q1ss325R1S1V3rL4J3VCrfysafLdjcDeLjQLvGBrxiDocBb1YncSWtg/mM
-         Ari63btv9X0BarJCoD5hQk/mK6pv/IPgseCklvHGeOi8B6x4axmnuTNnTLjkP6S80OAP
-         ndtW2iCmXnZA97ayMWeDOB+BaVlhnuTw+qeA1Ts3tmfl5ARDl9ikWmSRXmkLQlJ4sBTv
-         +aZb4pRUBy6eWav+hh5YxYM/gh/8slxOofAu4kDdA6Y4XLdLFEfAozr6EFQr1TIkMNoF
-         JC/A==
+        d=suse.com; s=google; t=1787139932; x=1787744732; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=JT+63WG7AsG4THCMk4W0hetRuXYQfuHtvo0ezhlRu24=;
+        b=OMIdv778QTHooAUND2yaz7kc6GaWhgswLfE0VxjyGzDzI7kjRTZF4mD6VSudZap6UO
+         CaG54t5Bj50QpnuI6HVOgERBShHIByGKHDvG1lEcru2sh7R+Nodblj697n7WtkaEimUw
+         etvZlcttZ55bNfn3fNjHmBMFEsdxZXkzQPH/sXs0h3wm2KvqOHBPc+wqJQMP1gim90CT
+         8TTKfAwGkzs3tzpspKKGerytDgkvNbJ4QuyGB+ajKbpoKxbUjO4kDcxqHDieA+Nd3zXU
+         PrBQ1g9JJcO8XG812zc2UtB2o9ptACrz1VWDOUJF5oveTbqd0ZfG1GglYC41D8AIyyQe
+         ezsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787139875; x=1787744675;
-        h=content-transfer-encoding:content-type:autocrypt:content-language
-         :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=vm6DXDcPqsw9MwhiDhO8QXyISmCCCmZBdpzKByqLy8A=;
-        b=RQ6oYhgceXtCVUywCnnDI0iLfKi40jmz8n1bMd3o5N27iWJk3jxpSyn2m036fCkT83
-         EGf2dVE0cIzGtqtywR1+aD4gLChOO5m6cT9dYwENcZvb5sCJTIdvUpZTidjCMVv5NjAY
-         zXgZcL9SKbPaIDExIjbHlw3c3aW8cNMH6GIsrlZ+2UUQYRykFOnlFRONRLPLbaliFMww
-         AvXAbnpq2cnq+NIk2pLTZfKjWR45BVwFFQHYFxvHetBVz/OPZf9XIvUNSdNa5I+0wiHG
-         50FTkUWfVziNbiTHMi5z1e9nrJ2f+Tir+bFFRNzpY5XEhdCFkWwu0gFaMiowwPy6mUR7
-         r9qQ==
-X-Gm-Message-State: AOJu0YxZKjlpjTwbLOl0eEYl2h3YGvsGDZYKGk4rB1+5TAobqeP85Guv
-	w495Sk2/mnffkrC+10PDKmBObnnvbE5/g30yjvBTUnU6AlPlhYgsKk6MHmuj/P/TiCkFiMwYP39
-	WYzIOpg==
-X-Gm-Gg: AR+sD13xm6UOYlyRlnl2r3IWNquLRa1SscNSSPdAKEk4P21B3v1E31gfykEg3cPTW8Q
-	aVz5C4W5wDHxoKThr7K81no+XrFD1VpFNPgRxW8uihKXACy31ixM5hcVE3Xq/QBK47s+jw4tOc6
-	eOe8XOvvhpBhyPKkLs1sFZiMl71Cp3cguTyXxR4iX46ljkde5u4IAioIufGe9rl+WL4iJ2ZWty3
-	ccrcQNpdkv4oGcIlSOFXMe4LYW9ZmAKck2OE9HSBqRFBNu8k6dYzSkHRGM07rMmdELAzHuYCYcY
-	RO1h3GDWS/9qCooN/VqxuNYo0Dx6Lrumkebpbxo7n7/jDNkxMQjqtfLgKugFsPLqUlAjKo5wkmf
-	mDh68wTCt/nfaMky4g020MCLyj3D2xKGELWloQRMFVUAMKsa1tAjo66NblZzJFA66H/I0cQiTIn
-	zfrrdJyLgasQwzvp/0XwG/0OcHktsL/hAae0VizNQV4fQiNFEcalslilqOCUmbokk9cL2/ghN6a
-	ljRzh7ORev2c9h13ZG52IM4mSZ72fffqSMxsd7nm77dSrZJp9eC4vDaJt/Qq7NXeBLvZoubUVY=
-X-Received: by 2002:a05:600c:a00f:b0:499:9069:c2c9 with SMTP id 5b1f17b1804b1-499aa1b6c8dmr77659275e9.11.1787139874719;
-        Wed, 19 Aug 2026 04:44:34 -0700 (PDT)
-Message-ID: <ec25e838-6bf6-496c-abbe-0fd71e2fb0d9@suse.com>
-Date: Wed, 19 Aug 2026 13:44:33 +0200
+        d=1e100.net; s=20251104; t=1787139932; x=1787744732;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=JT+63WG7AsG4THCMk4W0hetRuXYQfuHtvo0ezhlRu24=;
+        b=JPb/W3+jWlRiXEpGoU5WZ6G0n2P0fJsE6DlPJZtu9oZM4UQl2rdThPrz8Y2CVH4iws
+         Tq1QAql4TuTyazW5ApcYNwjp8CkBvI34Y4hIHrErigxDezGp4sVQVIdl8ndiKeNWUbpC
+         WHl1owciPD70cDCd7I2diuF65q1Ch/UlotGaq3Kwo1AiytUYVuM43HKHXMAN89viyIrI
+         rGxV4xWDVsC1X+OeOnJTFfyUKzkGgaaTm9qCuBuxuou1wJ0MkrHHAgop0Jug6swoOKes
+         4pShwat1InR35TctJFde7ENByw6IJs0hAl/uBxDnsTpbb4ZRhHJ28dNVTq8mGrau7kW1
+         gdww==
+X-Gm-Message-State: AFuF++mdTAC07om5/H8iyf4Y+3UoZhNQWjRR1qsBsrT2JplfcQMbM1ZR
+	bQBmMq2yFa72Ujee2TZWZdAmvCzz4yDuuz8kMfVO+OKHciNO//HEjVlYrla69tFvloiUP0osyZL
+	2Obbk8Q==
+X-Gm-Gg: AR+sD111XPJKMWdKyuaOIph+FK6XdQmHYu5KcUnijZm08AM/YnoZzQM91fFPhK/e1IB
+	WMay/E8ytvBBZbhGppVwfYpLZ23MOgalSPjb9SbcCQN20rErpDUw5DYWNXQ06M7wLb3J4esSula
+	PcDbb2G0sygvR2ynUtiSv25xhSh093nyMBkamzxnvy3+fJzrTPkzTjAz6jmTeoC8uC075POqOvF
+	xHUqv4SBzV9hg69dyZ+ZO7mMFTp/Wy3EkcHmKQefaj3wpxQMdj2s+mOPzdZhuy6qFHZQ4LSs7WL
+	4Eu2U6QtF/dcddlA1DgUNxlG9iB56d2HjwXTbxTfsPeGtzllOaqgyuQnJ7Y2zk1sfY4VxB86lPq
+	MUhBawRnh8A03lstUHfoKE6Ba26TIhKIRgzlviW4tN+/jIFjfAj3F3iIA+3Gu5jvQCDpMxoLjIK
+	F/xhHFa9+Z1z17vvore7wmjpsXGqH0ZFnROvEKcF5i55NNpLk9UzaiO+wAQX2mr0pQm8g86LsJf
+	5WiwR/OD1NhfxCgOSKXaCQjQ41iPbFJWK1OKTUYQgbQfnt27OJD
+X-Received: by 2002:a05:6000:2582:b0:47f:9022:8531 with SMTP id ffacd0b85a97d-482b1ffd7ebmr2141182f8f.22.1787139932128;
+        Wed, 19 Aug 2026 04:45:32 -0700 (PDT)
+Message-ID: <347cd6bc-e10e-4696-a1d2-1aaa84811370@suse.com>
+Date: Wed, 19 Aug 2026 13:45:31 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: [PATCH v5 1/2] x86/CPU: re-arrange tail of early_cpu_init()
 From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v5 0/2] x86/time: avoid early uses of NOW() to return zero
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Teddy Astie <teddy.astie@vates.tech>
+References: <ec25e838-6bf6-496c-abbe-0fd71e2fb0d9@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -126,14 +128,50 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <ec25e838-6bf6-496c-abbe-0fd71e2fb0d9@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1787139875-1ACDF9EA-EBDD1847/0/0
+X-purgate-ID: tlsNG-c1860d/1787139932-D554C87B-7C7C47AA/0/0
 X-purgate-type: clean
-X-purgate-size: 103
+X-purgate-size: 1141
 
-1: CPU: re-arrange tail of early_cpu_init()
-2: time: avoid early uses of NOW() to return zero
+Some early setup doesn't need re-doing after ucode load. Move the call to
+initialize_cpu_data() slightly up and add a conditional return point.
 
-Jan
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+The parameter being named "verbose" may be a little irritating for this
+use, yet renaming would incur extra churn.
+
+Clearly an alternative would be to split the function. I can't, however,
+seem to be able to think of a good name for the part that would be invoked
+post-ucode-loading. Maybe early_cpu_reinit(), except that calling that
+from early_cpu_init() then still feel somewhat odd.
+---
+v5: New.
+
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -432,10 +432,18 @@ void __init early_cpu_init(bool verbose)
+ 		paddr_bits -= (ebx >> 6) & 0x3f;
+ 	}
+ 
++	initialize_cpu_data(0);
++
++	if (!verbose)
++		return;
++
++	/*
++	 * Work which doesn't need repeating after microcode load goes below
++	 * here.
++	 */
++
+ 	if (!(c->vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)))
+ 		park_offline_cpus = opt_mce;
+-
+-	initialize_cpu_data(0);
+ }
+ 
+ void reset_cpuinfo(struct cpuinfo_x86 *c, bool keep_basic)
+
 
