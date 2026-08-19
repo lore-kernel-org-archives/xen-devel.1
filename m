@@ -4,44 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4639C5DF6D
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2026 12:22:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1395315.1633767 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 259C1C5DF86
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2026 12:37:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1395335.1633775 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwfIn-0006JC-M3; Wed, 19 Aug 2026 12:21:53 +0000
+	id 1wwfXV-0008B9-Tv; Wed, 19 Aug 2026 12:37:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1395315.1633767; Wed, 19 Aug 2026 12:21:53 +0000
+Received: by outflank-mailman (output) from mailman id 1395335.1633775; Wed, 19 Aug 2026 12:37:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwfIn-0006J5-JY; Wed, 19 Aug 2026 12:21:53 +0000
-Received: by outflank-mailman (input) for mailman id 1395315;
- Wed, 19 Aug 2026 12:21:53 +0000
+	id 1wwfXV-0008B2-R5; Wed, 19 Aug 2026 12:37:05 +0000
+Received: by outflank-mailman (input) for mailman id 1395335;
+ Wed, 19 Aug 2026 12:37:04 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wwfIm-0006Iy-TA
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 12:21:53 +0000
+ (envelope-from <brchuckz@aol.com>) id 1wwfXU-0008Aw-Gv
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 12:37:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwfIm-005r8u-9t
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 14:21:52 +0200
+ id 1wwfXT-005u0z-Mf
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 14:37:03 +0200
 Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a859fbc-2eae-0a2a0a5409dd-0a2a450bad14-48
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 14:21:52 +0200
-Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
+ (envelope-from <brchuckz@aol.com>)
+ id 6a85a356-2eae-0a2a0a5409dd-0a2a450bcb3c-44
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 14:37:03 +0200
+Received: from [98.137.64.147] (helo=sonic301-21.consmr.mail.gq1.yahoo.com)
  by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a859fe0-b7e8-0a2a450b0019-d155dd35e0da-3
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 14:21:52 +0200
-Received: by mail-wr1-f53.google.com with SMTP id
- ffacd0b85a97d-47f3b39f2a1so779442f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 05:21:52 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482b144173csm5656496f8f.6.2026.08.19.05.21.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Aug 2026 05:21:51 -0700 (PDT)
+ (envelope-from <brchuckz@aol.com>)
+ id 6a85a36d-b7e8-0a2a450b0019-628940939de3-3
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 14:37:02 +0200
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic301.consmr.mail.gq1.yahoo.com with HTTP; Wed, 19 Aug 2026 12:37:00 +0000
+Received: by hermes--production-ne1-6dbcb84f44-dmnws (Yahoo Inc. Hermes SMTP
+ Server) with ESMTPA ID 50442b8dd76f8214298a192fce311db5; 
+ Wed, 19 Aug 2026 12:36:58 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,175 +50,263 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787142112; x=1787746912; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=7ymdwcq3ZzdgRlLof7/7lfEkobjba6OLnUYf9Fg42gA=;
-        b=G5giJRQXID4z6kOkVh0P2h0e/P+mMT8og7jNjzWtuY2cwvENaWVvwMzL1Ps2b2DXn9
-         XNU9CeKuzXG/BNW69/CGcJtRcorcRDVCzx0iCAhNkU1SHTKXVGXJi7+fRN39qteTC9ZY
-         hDOiPPCoLces7+01gc7PUzVuO6nL9FVYt1Ieqxu+m8BUoCv/muzhkgQHOrn9880q4862
-         kpoRuDoRbafa+jVSkAqkbTALZgrpKC68dZY5Po1Mvep5xQLASFopyaiqH4KpuBmDVS0k
-         UH93o+jlmcaCX9G3N39Cee8DJR7EE5rnSICvlhg1v/fBMJi8HJfpiqCkav9iOnBxT3wX
-         Xc+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787142112; x=1787746912;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=7ymdwcq3ZzdgRlLof7/7lfEkobjba6OLnUYf9Fg42gA=;
-        b=qp/u6u2tW6u+4/gFm0ORHsfDbpp0lJKSwpzEagDqxAUFab5Tr0EuHJpzGaHgbeZwGR
-         D7GJesgszmLsDKC2h7VehKDAkrdPjdaDx26X7KbIowXBGnKAt4iNulqV08Ih3RYHjpfN
-         Lq28qubHewxVMSXDwQalkahQsJxa8NA7iQ1vsrxSETP2s3le3CPGqqvsLPQaxbySjIWl
-         93p2stwjCfDi2zNGteLic8fU2aepNl6Qa44zvXFDC0fzWWu1XwfqBLp+GmZN3XnI8LD+
-         mvs203kCq98MmgOHYGk25h6acUhj5wiowwP0QRkKYXlspv9ntdrDtyuOqNRkQWq0VWkF
-         gTyg==
-X-Forwarded-Encrypted: i=1; AHgh+Ro8UwYfLwQH0Tg4vVVvoNEbiO4dCjiZS93+JZ/+VVBCU6Y9G/3F9zT9VLJOV5iofKy3kWs38hGScRA=@lists.xenproject.org
-X-Gm-Message-State: AFuF++mpo/ePwFSIY1gsVI2dY9t5fvpC1OEhByD/zPQHWiQH9x46OLXG
-	2ELsMo4xfjXLN4dqPDiMCWbS5+ooPO3XKJec73MW75PX2nYLSybg/+f4YczVq1Rfpg==
-X-Gm-Gg: AR+sD1354jBRvEnxrQj9DxDjGx/9jTZj2Pt6S0feLjpvXvLF+Bug5CKq/V6GS/fGmJl
-	498eH7vBjpD+vvW1Nc3fedOSmJCZrQZVozYCE10UaPHe2w4ySE3vETVB6o1uLHgGRGY4MNMkMIG
-	k3HWjDkxVS+ee3xj1i33TWN1io1GMaKG6R1dTKLEjUijR27HU/Me+1IFYH0bnmk6WrD01s3YK2H
-	Kwb13egiKdW4DhNwI2rYmc5WKqCb+F+6C6UdEalwg8FG+pt+RcA6ZnCbR5xwf4Fm290mQ9Jj5hj
-	D6vK3hOPGTJIufkNQPvynp/njWiKVfEQBjohSjFUN8CAHmsyi5MMTa6WTlvIBkZQK7IpmPvD9EH
-	DjiEFpK7Qxb64Kd/grJUIW6SuRtCm+cM9OvEKiS+XUnqJV9D0uAst0cHpOsVBhS/cF2Ior0gbrJ
-	sPkSFS7UlAp80OqofYjHEY4aTiRYL5bYkXpDKC13msUTtzhfowpIcnCFMYOi6b9nZUptUmcv+OB
-	GRmpi0Pzs656dt7fzxDXB6jMID9JdvsF5XGj4qqI5r8pbsWf1vr
-X-Received: by 2002:a05:6000:2f84:b0:47f:c648:e265 with SMTP id ffacd0b85a97d-482b1feb260mr6928494f8f.17.1787142111697;
-        Wed, 19 Aug 2026 05:21:51 -0700 (PDT)
-Message-ID: <d4ef5689-4197-499e-97e4-642a6b3bc6b9@suse.com>
-Date: Wed, 19 Aug 2026 14:21:49 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="Date:Subject:From:To:Cc:References:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1787143020; bh=aQMJaWrBE/UDIgSTKcnwI0kKyEcWtqyD5o/eXF4SQZY=; h=Date:Subject:From:To:Cc:References:In-Reply-To:From:Subject:Reply-To; b=S/KUGWlwLxiuTsJv9Xawxm1uFPyHtstQYTAuhiZ7kINHfcZ0/idfIcBoNKP31gJKiV1f40lyNaclhr68gIAMVwXusqcapQhtAbSuToP2yyNzxmlYYESHHbalyGt+oJ7oauFRINDrZhLRxiJFDh93bjyo3T1k+Wy9Fn+hQXbjzLlYY0oRDEc4Z9aHNFW7pKbMWLy0u9cGP67gV6UHBShiBXe+fiqjdkgEXZLpQx9OOzDjrbdRMCFqWnQoskVBrwt7VI/vXqmbphJ1h0uazL7/27GBrAA+hMqxyHUzzQjdGI+ne+KmuXIl4R45veMOo9USRU6AgRy67/zZp2fUITz4Zg==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1787143020; bh=3rUIrosknPXJgf2KIJ7zgMrdZ5x2aqxv9+baVEKKqH1=; h=X-Sonic-MF:Date:Subject:From:To:From:Subject; b=g2YCPbHX6vzEG5t05jOyO6OEWs2UUfJ4dqHUAmPU+W9m8W34dvEPXJmMKrgqlhAGQamcpw8+zmMaqw8+/W7MMEkDph0Uc/QYxv7tSJumCQO5zdqOmcrR5V+slrT8dBD9hordzvYpbs914xm+8hUdKhEwQSKlRhGGWC0M8nqHJaiwV0KZ1LuOP7VsqWhVJ4dODE01pu0d4TbtV/sNsh9M8/Hs5dzsuZm/99kvzmOMSrxmOZdby1V4lOZX6Ljeu5yz+Q9VBdvcigAz2eaUDNXlyE/cPatmB+SfCyo3T0i040XU7wscgdKryIUFHgZrNe58DjAjP0lQgk/R5cg1Sfw4WQ==
+X-YMail-OSG: xPWzEPwVM1mtGePVdgn3cg1Z.kjN7ZFGIXPv1byaQ9chaO2V2rRZdSybUH9R_MA
+ yEIakh8jX6Yz0.ylc12zIhoY0YIAFStonCSCCv3yup7t7_jp_64ocrWcpVIZrWiyWpKAKc5BwBJg
+ G5OyE_sEW9MinqB9rXdGeupgZMpSK5t_Nru.0Yig2K4KV8sig9jRi66zswPNzt7RgEtDM8DZftA_
+ cBNmgz3DwsmSoa6OXfdYSFbo3cSWexY1HfeUICIodDSwcfum9xvj0CExcUUjU93rkuWqY0UxtP1m
+ NPLN66imAdNb9WabKnXnZLVjJr.tuHTzbIe9SFtdGaRfp3SoE7uOFawmmpydTpsfftGpBKNUlWrS
+ qV6ywFoi4J49ByMyD6fqfuusE2oeQk6CQkAH3Gzr1j6ZOVck2qePyfOwzW9IbaswGjB5E85qFDVS
+ KYYB3pr4ME8.CWEsP5xHU7ZS0dyLtk.CS71OxmE3NMjQYE4FETrj47i0IlKkweZvaJzLKJL7beUM
+ HBbco.8xKBIJvJHYTXCY2uO5X9Mp31kPUR7k6ELS1tCgwc.uR2dj6O8gAwdlQ6atpJpPuhkSIyFt
+ z_IKTpVOk4vwnEZVm2B4doIq9f.pvTRn_1z_geo6Z3hDBKmoAT9ppu_KjyEwOw6vq.X_MM0n8pWM
+ EvnoShVLS55iwxhog18VMNH9BuhdTxqIs3hSHVghNRn1d1X8zHABY2fzoz5R6HmF57eXoliWOw5Y
+ EmakxoPJdheEM6BLWpX_UK1IbS9ifJGJ_.JNZYs2rN7w8sk3mxJBZIc1_tf3_dURUCz_xmSe3iEx
+ LKv9fzCfAQQqBOu8i2kEZ_akzBrtn_Cj7mO7xaOtaEu3eGN6LK5l7NSRuyw7IFA6a_u2DTxb97PY
+ EtfFGu9nh7wa7hddpRyXboTFvmlSdufPM0oftBhOZbsBkUhXbfsCpu1etX.YaLzF1mm9dFfu7HpV
+ GUyWfzySQcS3quJV_UhpFipcf_HMeJfzFjFVLIl.DifRX.qo_GySJgsRlfuatnqGdd5o8lz2vVls
+ 0CSQ0x_DuZFeVLBqTprltBq4Ys.x3H7IE5C826RkIYbR74ZcdBWCtUrzuFn4yv4SzHJZCdd970yt
+ 92riYm3XRyw10L8qFXMaK3sdCeGatrQjNlW7V_DvIHOdbaeys9j7EG8RyxlEZUhHz3w2WQn_EvcT
+ ihvPZ0Hheh0Ts.SypD6zRr.mtRobu3kSlCsYKG3O.6hrReCx8SfsUDI1wFhCNwUc.SadOgk5pMCA
+ bpD3cKprFNy9xpdbuzNKDnn6ShYFQit_aW00D2Qs1PS4GdgF1NMrxXHCxbRoRSjdzvqE8faBnkfq
+ ZiUFt9Rq03W2EiEgvTKjUQJnNHMkNpm3rSMbYSgmtLDgHoCjoJXEiw3CPymxbj3CfjH7Gaq4_FoW
+ b_6QPgBrZkC76jSdrDZ6cpG1tSJfhWjlLs75IteWnUTTL9HyfSIyU4zmmKq0kmUsq3NwMu4APJc3
+ nkF6hm6CxTAfwyQ3LTrVs4fr2noJfdKYBhQj_sWr9kfKTwvo33ZBeYxtym86pBJR33GqfDWfBRDB
+ 2SSXH9YQkNMsBwcDpTSs6CJ3AuS4gH48mtdphsWrgzXoKESZGNtuYCmFOIsc.o1k00V2hNhZ8XL7
+ 6szzk3.HknOA4dmOBvGwQDDQb9eFXpo.emJ_hwId44pUTjanShlk3jM8GBfUEySRpG9nm_iJA2pm
+ L5XnxufqHBSbqPjG1Wl1AAhMl8PozDoWI2oH_..uBOlJMBfEBGtPExpA548YSr3BY0MjRwJm8fFL
+ AK4BEogjOZn0H8C1BxHpzmLPbKSP03.jj1QswqIfLPC4dwWi_lKpGwaYMMyLVD1ztABcoNGmPH1N
+ caH7jpRlliK_qGPM19SA6AI_z.jyYUDs948htYAM3A1II2Wld.agTD1zD05qWgju4S2HzCi53reU
+ ItzdHfUkmuK_9CdY1V0r98hF5sGC4GKsIfbvGfy52twrkgJzhQJNenOcOI2aMHpzeFzFqSroilsP
+ q5wUyxufcEQDQOz2ouEAE_APkSPtrlgAibyiLyZqeYVWn7OsDfsojGztHH95BZuhvoy7aJ6ee9DJ
+ CEY3Crv_w2gPXbGcWVdkm03dnU7N6ojjkGvWricDREpaaanr4OlNZ9o8SfGl.ZoJqBaqXlhfdysL
+ wwB2nHFuKcJD4JVgFthwknX3ToA9UovoF08q_aUV3T5ZCzKTub2.0kiCwMa6I_9WgtCwyN1.eMuY
+ elMl4fi_dBma9Vzolqgc5VCKrMjdn8r1mSyCs.QtKlWRcWshjmQ--
+X-Sonic-MF: <brchuckz@aol.com>
+X-Sonic-ID: 61385cdc-0033-4694-b92a-75ff42d11af2
+Message-ID: <10cd9f6b-678b-407b-a51e-70e9ed7a35fd@aol.com>
+Date: Wed, 19 Aug 2026 08:36:59 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 7/9] x86/dmop: Add XEN_DMOP_{bind,unbind}_pt_msi_irq DM
- ops
-To: Teddy Astie <teddy.astie@vates.tech>,
- Julian Vetter <julian.vetter@vates.tech>
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
- Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+Subject: Re: [PATCH v2] tools/hvmloader: implement Intel IGD extended VBT
+ support
+From: Chuck Zmudzinski <brchuckz@aol.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: qemu-devel@nongnu.org, Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- xen-devel@lists.xenproject.org
-References: <20260427135406.1281424-1-julian.vetter@vates.tech>
- <1777298081.8631fc262581453bbf619ec5b2062170.19dcf388597000f373@vates.tech>
- <1777392179.8631fc262581453bbf619ec5b2062170.19dd4d45724000f373@vates.tech>
+ Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>,
+ xen-devel <xen-devel@lists.xenproject.org>
+References: <20260802050824.10554-1-brchuckz.ref@aol.com>
+ <20260802050824.10554-1-brchuckz@aol.com>
+ <2110d4b7-ae37-47aa-99be-ab59e16f6167@suse.com>
+ <67579eba-e222-41dd-84bf-8440d2eaf2a9@netscape.net>
+ <da2200cd-def7-4cce-a6c2-9f9ac9e202ce@suse.com>
+ <de56c8bd-f0e8-4fe9-8cf5-f6807698176c@aol.com>
+ <02a7dc18-4184-4e86-84cb-121769187f71@suse.com>
+ <1858e8e6-73fa-4017-93e2-c733fbf0ec8d@aol.com>
+ <d6e603bf-8dc5-4ac7-842f-ff9d1f67b98f@suse.com>
+ <fdec0b6b-eddf-4a36-a755-c67963daa9ea@aol.com>
+ <6ecf80ef-2f0e-44fb-beab-dbcf065a4431@suse.com>
+ <bb44067c-6739-4e83-a0fd-cc7ea797048f@aol.com>
+ <4c58bda6-e9ed-438d-b96e-feda74a6c4c7@suse.com>
+ <31a5870f-2a4d-4dc0-af9c-f0567e0f6fb3@aol.com>
+ <db8fd04d-bbc7-41c7-8473-b821d7f77d5f@aol.com>
+ <302ed12f-40ca-405c-80ca-ac4f2785d754@suse.com>
+ <cdae1785-4d9a-4aab-929e-de55c26b7b94@aol.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1777392179.8631fc262581453bbf619ec5b2062170.19dd4d45724000f373@vates.tech>
+In-Reply-To: <cdae1785-4d9a-4aab-929e-de55c26b7b94@aol.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1787142112-18CCF9EA-9C4EC526/0/0
+Content-Transfer-Encoding: 7bit
+X-Mailer: WebService/1.1.26254 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
+X-purgate-ID: tlsNG-42698a/1787143023-18ECE9EA-74B393D8/0/0
 X-purgate-type: clean
-X-purgate-size: 3049
+X-purgate-size: 10415
 
-On 28.04.2026 18:02, Teddy Astie wrote:
-> Le 27/04/2026 à 15:57, Julian Vetter a écrit :
->> Add two DM ops for MSI passthrough IRQs. These new DM ops take the raw
->> MSI address and data fields rather than pre-decoded gflags values. Xen
->> decodes the destination ID via msi_addr_to_gflags(), including any
->> extended destination bits in address[11:5]. This means the device model
->> does not need to understand the extended destination ID encoding, and
->> simply forwards the MSI address it observes from the guest.
->>
->> With these DM ops in place, redirect xc_domain_update_msi_irq() and
->> xc_domain_unbind_msi_irq() in libxenctrl to use
->> xendevicemodel_bind_pt_msi_irq() / xendevicemodel_unbind_pt_msi_irq()
->> via xch->dmod. The gflags/gvec arguments are translated to the raw MSI
->> address and data words at the libxc level using the standard x86 MSI
->> address format.
->>
->> Reject the PT_IRQ_TYPE_MSI sub-case in XEN_DOMCTL_bind_pt_irq and
->> XEN_DOMCTL_unbind_pt_irq: all callers now go through the DM op path, so
->> the domctl sub-case is fully obsolete.
+On 8/19/2026 8:16 AM, Chuck Zmudzinski wrote:
+> On 8/19/2026 3:30 AM, Jan Beulich wrote:
+>> On 18.08.2026 19:15, Chuck Zmudzinski wrote:
+>>> On 8/18/2026 8:29 AM, Chuck Zmudzinski wrote:
+>>>> On 8/18/2026 8:18 AM, Jan Beulich wrote:
+>>>>> On 18.08.2026 13:52, Chuck Zmudzinski wrote:
+>>>>>> On 8/18/2026 3:17 AM, Jan Beulich wrote:
+>>>>>>> On 17.08.2026 18:04, Chuck Zmudzinski wrote:
+>>>>>>>> On 8/17/2026 4:42 AM, Jan Beulich wrote:
+>>>>>>>>> On 14.08.2026 17:23, Chuck Zmudzinski wrote:
+>>>>>>>>>> On 8/14/2026 9:46 AM, Jan Beulich wrote:
+>>>>>>>>>>> On 14.08.2026 15:18, Chuck Zmudzinski wrote:
+>>>>>>>>>>>> On 8/14/2026 3:35 AM, Jan Beulich wrote:
+>>>>>>>>>>>>> On 14.08.2026 02:45, Chuck Zmudzinski wrote:
+>>>>>>>>>>>>>> On 8/13/2026 6:35 AM, Jan Beulich wrote:
+>>>>>>>>>>>>>>> On 02.08.2026 07:08, Chuck Zmudzinski wrote:
+>>>>>>>>>>>>>>>> -- snip --
+>>>>>>>>>>>>>>>> +    /*
+>>>>>>>>>>>>>>>> +     * Write rvda_host as 2 successive 32-bit values
+>>>>>>>>>>>>>>>> +     * to communicate location of the VBT to the device
+>>>>>>>>>>>>>>>> +     * model. If rvda_host is not 0, The device model
+>>>>>>>>>>>>>>>> +     * unmaps the OpRegion and eventually maps the VBT
+>>>>>>>>>>>>>>>> +     * after we also write the guest address where the
+>>>>>>>>>>>>>>>> +     * VBT will be mapped.
+>>>>>>>>>>>>>>>> +     *
+>>>>>>>>>>>>>>>> +     * If we send rvda_host = 0 to the device model, it
+>>>>>>>>>>>>>>>> +     * will assume we do not need OpRegion 2 support and
+>>>>>>>>>>>>>>>> +     * it will not unmap the OpRegion.
+>>>>>>>>>>>>>>>> +     */
+>>>>>>>>>>>>>>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
+>>>>>>>>>>>>>>>> +               (uint32_t)(rvda_host & 0xfffffffful));
+>>>>>>>>>>>>>>>> +    unsigned long rvda_host_upper_32 = (uint64_t)rvda_host >> 32;
+>>>>>>>>>>>>>>>> +    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
+>>>>>>>>>>>>>>>> +               (uint32_t)rvda_host_upper_32);
+>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>> Why would you need to communicate a host property to the DM?
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> The DM cannot access the host rvda value because it is only accessible
+>>>>>>>>>>>>>> from the host kernel, and the DM is only a user-space process on the host.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> I don't follow this: Anything the guest can access should also be accessible
+>>>>>>>>>>>>> by its DM.
+>>>>>>>>>>>>
+>>>>>>>>>>>> I think the host OpRegion is not currently accessible by the DM.
+>>>>>>>>>>>
+>>>>>>>>>>> Can you explain to me how the region becomes accessible to the guest?
+>>>>>>>>>>> That would then (hopefully) help me understand why the DM would not have
+>>>>>>>>>>> access. Fundamentally any MMIO and any I/O ports that are assigned to a
+>>>>>>>>>>> guest are also assigned to its DM.
+>>>>>>>>>>
+>>>>>>>>>> Currently, in the device model (Qemu) we have:
+>>>>>>>>>>
+>>>>>>>>>>     ret = xc_domain_memory_mapping(xen_xc, xen_domid,
+>>>>>>>>>>             (unsigned long)(igd_guest_opregion >> XC_PAGE_SHIFT),
+>>>>>>>>>>             (unsigned long)(igd_host_opregion >> XC_PAGE_SHIFT),
+>>>>>>>>>>             XEN_PCI_INTEL_OPREGION_PAGES,
+>>>>>>>>>>             DPCI_ADD_MAPPING);
+>>>>>>>>>>
+>>>>>>>>>> That statement is in the igd_write_opregion(...) function in the
+>>>>>>>>>> hw/xen/xen_pt_graphics.c file of the upstream Qemu source.
+>>>>>>>>>>
+>>>>>>>>>> If I understand our current implementation correctly, this statement
+>>>>>>>>>> is what gives the guest access to the host OpRegion (3 pages as defined
+>>>>>>>>>> by XEN_PCI_INTEL_OPREGION_PAGES, and in agreement with IGD_OPREGION_PAGES
+>>>>>>>>>> in hvmloader code).
+>>>>>>>>>
+>>>>>>>>> No, it introduces mappings of those pages into the guest's P2M.
+>>>>>>>>>
+>>>>>>>>>> I don't think this statement makes the host OpRegion
+>>>>>>>>>> accessible to the device model, though, so I think, if I understand your
+>>>>>>>>>> comment in an earlier about my patch resulting in what you called a "layering
+>>>>>>>>>> violation" correctly, that our current implementation is also guilty of this
+>>>>>>>>>> same kind of "layering violation."
+>>>>>>>>>
+>>>>>>>>> That code, if it can be successfully executed, indeed doesn't grant any
+>>>>>>>>> permissions (to the DM or the guest). Instead it proves that the DM has the
+>>>>>>>>> needed permissions to access the pages itself.
+>>>>>>>>
+>>>>>>>> So, are you saying it should be possible, without any patches to either Xen or
+>>>>>>>> the Linux kernel, for Qemu to get a pointer to the OpRegion? If so, how?
+>>>>>>>>
+>>>>>>>> I think I could implement what you proposed in an earlier message and do
+>>>>>>>> all (or most) of this in the DM instead of here in hvmloader:
+>>>>>>>>
+>>>>>>>>> The more correct thing to do might be for the DM to
+>>>>>>>>> put in place a copy before the guest (i.e. hvmloader) even gains control.
+>>>>>>>>> (How in turn the DM would learn of the contents of the opregion is a
+>>>>>>>>> separate question then.)
+>>>>>>>>
+>>>>>>>> Actually, when I was developing this patch, I tried first to do it that
+>>>>>>>> way, but the problem was, I could not find a way to get a pointer to the
+>>>>>>>> host OpRegion in Qemu.
+>>>>>>>>
+>>>>>>>> So, how can I get a pointer to the host OpRegion in Qemu?
+>>>>>>>
+>>>>>>> You don't ask me this question, do you?
+>>>>>>
+>>>>>> Are you offended I asked this question? If so, I am sorry. You make me
+>>>>>> afraid to ask it again so I will not do so unless you permit to do so
+>>>>>> again.
+>>>>>
+>>>>> "Offended" is the wrong word; "very puzzled" may better get it. I'm not a
+>>>>> qemu person, and I never have been. I can't really help much there.
+>>>>>
+>>>>>> All I can say is that surely qemu
+>>>>>>> has an existing way to map (host) physical memory; see e.g. how
+>>>>>>> xen_pt_msix_init() (imo bogusly) maps the physical MSI-X table of a
+>>>>>>> device. "Bogusly" there because that's another layering violation. Plus
+>>>>>>> (independently) there and here there's the issue of how to accomplish
+>>>>>>> things when not running in Dom0, or when running de-privileged in Dom0.
+>>>>>>
+>>>>>> Well, that only proves Qemu *might* be able to access the MSI-X table of
+>>>>>> a device, that is, if the calls to open /dev/mem and mmap it succeed.
+>>>>>> Why is the MSI-X table all of the sudden relevant? Even if Qemu
+>>>>>> can access the MSI-X table of some device, that does not prove that
+>>>>>> Qemu can access the host OpRegion of an Intel IGD. So I think my point
+>>>>>> still stands: I still don't see proof that it is possible for Qemu
+>>>>>> to get a pointer to the host OpRegion without any patches to the current
+>>>>>> implementations of Xen and the Linux kernel.
+>>>>>
+>>>>> The MSI-X table (and it being accessible to qemu) is the best analogy I
+>>>>> could come up with, as that's one tiny area of qemu that I know at least
+>>>>> a little.
+>>>>>
+>>>>> From a Xen perspective, this analogy should be sufficient: All you need
+>>>>> from Xen is for it to permit to establish mappings of the underlying page.
+>>>>> As I've pointed out when commenting on a code fragment you presented, the
+>>>>> DM (domain) looks to have permission. Everything else is a matter of
+>>>>> establishing such a mapping. There the MSI-X table code may also guide
+>>>>> you. (Sadly it may also misguide you, since (a) I don't know whether it's
+>>>>> appropriate to do things this way in qemu, and since (b) it is, as said,
+>>>>> imo a layering violation.)
+>>>>
+>>>> I agree that accessing the host /dev/mem directly is cringy. I would not
+>>>> really want to do it that way for the host OpRegion.
+>>> 
+>>> I looked at the current mainline Linux kernel code about access to memory using
+>>> /dev/mem and modern distros set CONFIG_STRICT_DEVMEM which forbids access to
+>>> ordinary system RAM but allows access to what the kernel developers call
+>>> non-kernel memory. Here is a quote from a comment in arch/x86/mm/init.c file
+>>> in the Linux source code:
+>>> 
+>>>>  * On x86, access has to be given to the first megabyte of RAM because that
+>>>>  * area traditionally contains BIOS code and data regions used by X, dosemu,
+>>>>  * and similar apps. Since they map the entire memory range, the whole range
+>>>>  * must be allowed (for mapping), but any areas that would otherwise be
+>>>>  * disallowed are flagged as being "zero filled" instead of rejected.
+>>>>  * Access has to be given to non-kernel-ram areas as well, these contain the
+>>>>  * PCI mmio resources as well as potential bios/acpi data regions.
+>>> 
+>>> So I think things like the MSI-X table and the OpRegion would qualify for
+>>> /dev/men access even with CONFIG_STRICT_DEVMEM set, so after seeing this
+>>> I expect I could get a pointer to the OpRegion running in Qemu using
+>>> /dev/mem and mmap, as long as it is running in dom0 with root privileges.
+>>> But as I said earlier, I agree that /dev/mem and mmap does not feel like
+>>> the right way to do it.
+>>> 
+>>> So I would like to come back to something else you said in an earlier message:
+>>> 
+>>>> (How in turn the DM would learn of the contents of the opregion is a separate
+>>>>  question then.)
+>>> 
+>>> Let me phrase the question like this: How could the DM gain access to the contents
+>>> of the OpRegion, and for that matter, also the contents of the MSI-X table, without
+>>> also committing a layering violation?
+>> 
+>> As said previously, I'm not a qemu person at all. Yet it's entirely a qemu
+>> question you raise. From Xen's perspective, as also said previously, the
+>> one prereq is there - the DM domain is permitted to access the page(s) in
+>> question.
 > 
-> We probably want to reflect that on XEN_DOMCTL_{un}bind_pt_irq interface 
-> in domctl.h (e.g through a note saying that PT_IRQ_TYPE_MSI type is now 
-> deprecated and unsupported).
+> Yes, I agree that v3 of the patch to hvmloader should presume that the DM can get
+> a copy of the OpRegion and read its contents so most of this can be done in the
+> DM instead of in hvmloader. So from hvmloader's perspective, the patch will be more
+> about avoiding the layering violation than anything else.
 
-Which may further want mentioning in ./CHANGELOG.md.
+However, there is one advantage, from the viewpoint of the Xen virtualization platform
+as a whole, to do the patching of the OpRegion in hvmloader instead of in the DM.
 
->> --- a/tools/libs/devicemodel/core.c
->> +++ b/tools/libs/devicemodel/core.c
->> @@ -645,6 +645,44 @@ int xendevicemodel_nr_vcpus(
->>       return 0;
->>   }
->>   
->> +int xendevicemodel_bind_pt_msi_irq(
->> +    xendevicemodel_handle *dmod, domid_t domid, uint32_t machine_irq,
->> +    uint64_t msi_addr, uint32_t msi_data, uint64_t gtable, int unmasked)
->> +{
->> +    struct xen_dm_op op;
->> +    struct xen_dm_op_bind_pt_msi_irq *data;
->> +
->> +    memset(&op, 0, sizeof(op));
->> +
->> +    op.op = XEN_DMOP_bind_pt_msi_irq;
->> +    data = &op.u.bind_pt_msi_irq;
->> +
->> +    data->machine_irq = machine_irq;
->> +    data->data = msi_data;
->> +    data->addr = msi_addr;
->> +    data->gtable = gtable;
->> +    if ( unmasked )
->> +        data->flags |= XEN_DMOP_MSI_FLAG_UNMASKED;
->> +
->> +    return xendevicemodel_op(dmod, domid, 1, &op, sizeof(op));
->> +}
->> +
->> +int xendevicemodel_unbind_pt_msi_irq(
->> +    xendevicemodel_handle *dmod, domid_t domid, uint32_t machine_irq)
->> +{
->> +    struct xen_dm_op op;
->> +    struct xen_dm_op_unbind_pt_msi_irq *data;
->> +
->> +    memset(&op, 0, sizeof(op));
->> +
->> +    op.op = XEN_DMOP_unbind_pt_msi_irq;
->> +    data = &op.u.unbind_pt_msi_irq;
->> +
->> +    data->machine_irq = machine_irq;
->> +
->> +    return xendevicemodel_op(dmod, domid, 1, &op, sizeof(op));
->> +}
->> +
-> 
-> I think we want to mark 
-> xc_domain_update_msi_irq/xc_domain_unbind_msi_irq as deprecated since we 
-> implemented a newer (better) version of it in xendevicemodel; and the 
-> old one is now a wrapper.
+If we patch the OpRegion in hvmloader as v2 of this patch does, we provide a common
+solution for extended VBT support for Intel IGD devices that would be compatible with
+all DM implementations, not just with Qemu. So why not do the patching of the OpRegion
+in hvmloader?
 
-Why mark it deprecated? It can be removed right away when there are no callers
-left. libxc doesn't offer a stable API.
-
-Jan
+Chuck
 
