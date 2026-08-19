@@ -4,39 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA69DC5B572
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2026 07:10:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1394698.1633368 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84048C5B572
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2026 07:12:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1394709.1633377 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwaR5-0004mm-Vt; Wed, 19 Aug 2026 07:10:07 +0000
+	id 1wwaSy-0005Hu-Ay; Wed, 19 Aug 2026 07:12:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1394698.1633368; Wed, 19 Aug 2026 07:10:07 +0000
+Received: by outflank-mailman (output) from mailman id 1394709.1633377; Wed, 19 Aug 2026 07:12:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwaR5-0004mf-TQ; Wed, 19 Aug 2026 07:10:07 +0000
-Received: by outflank-mailman (input) for mailman id 1394698;
- Wed, 19 Aug 2026 07:10:05 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wwaSy-0005Hn-8P; Wed, 19 Aug 2026 07:12:04 +0000
+Received: by outflank-mailman (input) for mailman id 1394709;
+ Wed, 19 Aug 2026 07:12:02 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <arthurborsboom@gmail.com>) id 1wwaR3-0004Vv-Is
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 07:10:05 +0000
+ (envelope-from <jgross@suse.com>) id 1wwaSw-0005Hf-Qw
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 07:12:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwaR2-00947D-Vl
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 09:10:04 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wwaSw-001aGL-7W
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 09:12:02 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <arthurborsboom@gmail.com>)
- id 6a8556c3-8faa-0a2a0a5109dd-0a2a4502daba-48
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 09:10:04 +0200
-Received: from [209.85.161.52] (helo=mail-oo1-f52.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <arthurborsboom@gmail.com>)
- id 6a8556cb-6ca4-0a2a45020019-d155a134ec12-3
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 09:10:04 +0200
-Received: by mail-oo1-f52.google.com with SMTP id
- 006d021491bc7-6aa9606ddadso612700eaf.0
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 00:10:04 -0700 (PDT)
+ (envelope-from <jgross@suse.com>)
+ id 6a85572c-bab6-0a2a0a5309dd-0a2a4503aeec-30
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 09:12:02 +0200
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jgross@suse.com>)
+ id 6a855741-fae8-0a2a45030019-d1558031dcbc-3
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 09:12:02 +0200
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-49978908b35so4620295e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 00:12:02 -0700 (PDT)
+Received: from ?IPV6:2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112?
+ (2a00-12d0-af5d-ad01-5d3f-14e6-9bcb-5112.ip.tng.de.
+ [2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-499aaef1665sm35726875e9.5.2026.08.19.00.12.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 19 Aug 2026 00:12:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,192 +55,235 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1787123403; cv=none;
-        d=google.com; s=arc-20260327;
-        b=BJeRTzjW+DqvOqq4O35VR38hVsl0RYbQ+U+dwW4eX6w1CeNpTDrsQX0XQCO9nGm/Ti
-         oMoanFFW//pEu9jz3j3YTpP7xRo3Kc0tBF2FwUrBxGK7ETXOuWCYZK5hRfbql5xc6zQ7
-         AU+b9h4P9CgzjAEKQKf05im1HEPsBz2Oeux0wcU9CZ+1DCwHLtmmfqJy6s9z200p7YZ7
-         vFL7tP8MplWu1jzzKpM5u54h11C6A0BNIhXm/ltTzHqs5+7PSvc+w6Pk+JjJu9ng3IF5
-         1clqOx2UOvLx6W5R8mpku8KAXTQ59p87aDWgBbAh/B8Yw0Buc9U2gENA/MnNQEQcvu+w
-         w1AQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=H0UQa7SJVLlMpEKFF4UaRWDyvNxTtVVlXym54BMWUlA=;
-        fh=7sFv6QZAJlpg3YTCZX0B+j1POgKz6Tmh3lBntxDYpAE=;
-        b=HYM97RI3Cx8fHzHQjP0ERB2LkEMLiuQapE2CDC46X6CtwVlnCrzXy2W5ApvPfIYuF5
-         Hyxr6f8O4c2raTQzawJiFrGpMNBex1NQnW6v5vuSEOIQYAZD5+WaU0lJwr3O29PBEYoP
-         SwP6j/XIv+1+uXk8hxnuKMLdTIPY2/N49HBRyV7wFpBrC6Z5vR8PrP+kaehg09d1itON
-         t46tQVE/E9nksDzEXiC1KsKT7+llkQdFdr/ft3ELfTi6DZj+ZdbsMpUGA0vFGPqHjs3b
-         UFe12rAYzE3zGTy8+rsk/gPY0BELbkwfY4WC52V4z7/HQUYy30OL63lSoFnxcAz6mOUN
-         YVOA==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787123403; x=1787728203; darn=lists.xenproject.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=H0UQa7SJVLlMpEKFF4UaRWDyvNxTtVVlXym54BMWUlA=;
-        b=dRCaU1CSLNahCvanGcO+dU3eO4Ad7L0L8CZNyJ28+H7a/tHpf52nV9M96A0fu/OnV6
-         VXwdEn2R4JwGKtuppQwO5l8JR2JyAr7qyFehZDy5yJ6WkR6b+1NTmPL0jX1lfH+NOY8q
-         f0ZhAeEfP2X1eLpXBpn42sCBRbM23YZsM3XufgWnGz4heuXDjjwxfyfA2l/m56ygoAhY
-         LLInrgp8bmFCZYetAmPOOQIe/fCYeBUojrJu7KYoFQlwARpvc8Uqmivn16vy04niAi2f
-         vDYfbWo9UsB097tk21VCdU+FIOFuMdsmfBROyhwRth/XJ6lAdMtC7QyYzdc70Xh1Ut1O
-         bdqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787123403; x=1787728203;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+        d=suse.com; s=google; t=1787123521; x=1787728321; darn=lists.xenproject.org;
+        h=content-type:in-reply-to:autocrypt:from:content-language:references
+         :to:subject:user-agent:mime-version:date:message-id:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=H0UQa7SJVLlMpEKFF4UaRWDyvNxTtVVlXym54BMWUlA=;
-        b=BUkQFz+AJH2zo04vu+Gyl+sPWgq4L6RrM1K6rnnaPi7VhgrI+r5abLMLl31CW+dEGh
-         +FstVEPU8Lh/KKas+efOetvDvw6cPil4DWkP782kf8uVpV1grCTQ2v5zp+Bo4qM9vHog
-         CAUpJIsh6EHRSi4yZGOcgDACTDK2lyKRY20W1oN3mGJEGH1mT3qH5qLrWQYPJSIlWk3/
-         /s8p/ADKpckoKHnSCCHU0m54krI61GnIC70sn9ndFnJgWCGq8VYG2RpkDBUfejU2BiMc
-         BIHeM2m7l7x83Q+tWUdSL9trFp+eAHbr6iialF91FDSd579FAGi2MP2xrl1euYZG36fK
-         ry9Q==
-X-Gm-Message-State: AOJu0YxlfXOmc4U5IeO8zAkEIRj/aAZstten2CpGF7SIB9lb46jVLR0I
-	+C0yLGuNpwpLRohu4mOcRCNu1N7C4j8Ku8h87BXw6iiJMwImI30/9JlMa3I8d0bZTZPwAxpSe+C
-	6qcu686goIlYoCZRy/vSLc8bT3ehYqa2M7CXPfTiZCWJm
-X-Gm-Gg: AR+sD10WCDU60ACYUoXC2iJsdTs3ak8smJRTyoBYPZ3Uj675XfoY+pSov/0GTF+UygA
-	mzSvdUEJyyl2Q5IXs9D9mK/CzBtXUjO/HlKxR7d8NrvgPHWEovrSaY0XxlOQOUhgN6Vw8rYCnlx
-	MVhXDiFvurA5c/M1FaERkzuxgVkxJ4kLIoFvQRa5Vi4+AzH009yuClebMp/1pzKI6FOAQHAPJGM
-	9EE6aDvahJ5+ppIJUm8oIS/nzjtuIW9YtH6t87yH38OQmvDQ0u/U568Tp+YtDDAO0dQoV3fupi9
-	TxFEz7bD8LL2pGfuUw1umWQN6hGIOZQlD8d+DGGmyzJrBT7mxPZyyW7rJFSp+9UBwLnj0XcD2rN
-	XfdixLqw+4FqVmCqItYxPJdMF2vNtpEmhxe7s5nccyQLTBjSRg4ow+fwJMecRszZ7c9fsmhG82O
-	bXcfNWuIgDdg==
-X-Received: by 2002:a4a:e90d:0:b0:6ae:ab01:91a8 with SMTP id
- 006d021491bc7-6b13c6e1872mr2346910eaf.34.1787123402963; Wed, 19 Aug 2026
- 00:10:02 -0700 (PDT)
+        bh=DEHv+CzXB3/Fiyf4F4VjBjL5OCrtiPJUOpuAMs0AdoE=;
+        b=f8cUW3pChEPCgbWBTQ83j9FPKnF/F93RAi0v/a2jANlB8B0kWsGxKfWnt8g4ZLzGOA
+         03wEQTXXjxeJ1mDPX20ECUzMiWvTFJU7CUHddpFE54TDzVdh73kW9e+UF2rFjLlp3OAa
+         fjRPH9OuauOwZlUUSvXU7IeWdZ9vrkK2vhjq1ohxpwH82my4HEYTv3r7oaI+zq/WNDO7
+         XLRekIBTbWRwbXFW8px+zweJZy12fDRcyU3HVbk85DTdj4mK9qr6F6Rmyj7nAhz6W82L
+         d68oP9n1I8Rcf9ciz4N0x9fAfdrfnyRCTAshfGzgEtIzouFKEkwqr4Q1QGlr/P+2UEH8
+         RiQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787123521; x=1787728321;
+        h=content-type:in-reply-to:autocrypt:from:content-language:references
+         :to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=DEHv+CzXB3/Fiyf4F4VjBjL5OCrtiPJUOpuAMs0AdoE=;
+        b=UmF0SE5en16LwoqdnIzUVHeE+E7HhMfXGTVfdd4yQVqzInkuNCg4ergLO1xAZADTCF
+         rYdBa3HqmU6/LJ5a6P5b+MNGXVXN9Jp23lwUrxFLZLeLDVFyWO5tLEysPADfvkDs7RoQ
+         6GF7QRAIDv/glmuBF9DGK/kk3/u/1gjXANo2FfErP83VkI3LAuwxmC1vFqh5X3+pzdQv
+         wdD40Ahlw5N4j8JbRyKyPXlsgx7QYmHlQZ+DMJSDO0fXEgZljE280i0wgTmG/dl2BfPn
+         9wONzdJd6CiRNyJFFzW8/RXSecCLZmIQzdbKcFy3wQ0gybU6MwaiI0CkHqQBFUZQSldp
+         YY1w==
+X-Forwarded-Encrypted: i=1; AHgh+RqOET8iM9Q8ftwIuRDpzfsZbZtR3jCjibTphKZE3ag/wzwVrh7OZY9rBFv2JJrFekhdfKtK43Kq+r4=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzBJ1hIxJ1lgs9xc2NvJBysjd96XCskiraKVUtZQu1Qls4+zSC0
+	9bxda0bBCA1OkDa0Bj5g327Y2erYjmo/hbrjjzzw+6pOrJgE69mE/bqumg8PUGtUPmqWaeYQTfb
+	oQGLguVM=
+X-Gm-Gg: AR+sD12KT8nk+Id0PRuGYI5aeAE76pqmngkt8c0TxxlSdB6YPfOmQL9BAMzt8Nnl8TJ
+	KYwWA0JT4wubcmke5XlqPSRXnwoYoJRKHewa+i05hQ5ZpUWyhwBVoOHAhZ2u5fcwx1qGDCfUY1z
+	1h6TiqJgy2gKiQW5m43o/jLPBQC8RieF0xX0iA/qHaizgdbxWaolo7YUOcj5SNiHsOmD8EH++PO
+	MtoVrckTcCFvsUkJuwUPT506edhhMKAymIARueYQ/ulctVc8J3LuEFqD9DyGKzitGdNjVfo3FZz
+	NNGHdVEnfH/89/qD+x7YkFSLl28znQ8vPoO3erYoQXfE5QVgEqgENUjeneWHaYcAd+d+Mw4MTqR
+	iG21QqJDOT2DxGfPXA+ekwFnmSXCs21zA/lM9hwvPqT4iPJhHZEJhlgeheXI9o2wfqKyI2BllsT
+	9AXjvYU+ZcgczV2vHhRpfdbJrxZHutvcaPYRtwXff9CLNTVgCNP0X0UARDOea8epN+1tS6siYhJ
+	CncbxdOxcFBczriurX71DCOpY5douoLDcCU8yed/S7LWI2nT4icUkiyRk/tLzPwhUpKEwLdugdX
+	jTmKIxdBa58ftA==
+X-Received: by 2002:a05:600c:8b70:b0:495:4e89:3f30 with SMTP id 5b1f17b1804b1-499aa1ea322mr41505155e9.15.1787123521493;
+        Wed, 19 Aug 2026 00:12:01 -0700 (PDT)
+Message-ID: <ab78351b-6b03-407c-9bcd-74b1566fd853@suse.com>
+Date: Wed, 19 Aug 2026 09:12:00 +0200
 MIME-Version: 1.0
-References: <CALUcmUkm7eL2RtqAn3fJxrMdY4aj8AYzkFZfs7LVwntSLa44Wg@mail.gmail.com>
- <4a1b5392-93b9-4b9e-bf65-3fb280f385fa@suse.com>
-In-Reply-To: <4a1b5392-93b9-4b9e-bf65-3fb280f385fa@suse.com>
-From: Arthur Borsboom <arthurborsboom@gmail.com>
-Date: Wed, 19 Aug 2026 09:09:46 +0200
-X-Gm-Features: AcwNN1U8eFtzbjZUw9Hn3LSM1B1eaw_TN6bVF5EKgDWoLyjIqApTklAIsxl3FOc
-Message-ID: <CALUcmU=QNXA8gs8JYy01tLVOH-y8mjZM-GxKzOCoA_3e2QFVwQ@mail.gmail.com>
-Subject: Re: [BUG] Linux kernel crash in amd_smn_init during PVH Dom0 boot on
- AMD EPYC
-To: Jan Beulich <jbeulich@suse.com>
-Cc: xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-720697/1787123404-F16AF2AC-1ED39421/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/4] stubdom: remove pciutils
+To: Samuel Thibault <samuel.thibault@ens-lyon.org>,
+ xen-devel@lists.xenproject.org, Anthony PERARD <anthony.perard@vates.tech>
+References: <20260817071843.114898-1-jgross@suse.com>
+ <20260817071843.114898-3-jgross@suse.com> <aoK8zVAP0C0ksD_0@end>
+ <2e8b1f56-6447-44c9-9555-4f1b3f0a00e8@suse.com> <aoM4ufGg8QO51XB9@end>
+ <4a9b5ae9-b37b-4a6c-8ee0-7e7571c99fb5@suse.com> <aoTRyxN4gzsEwJa5@end>
+Content-Language: en-US
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <aoTRyxN4gzsEwJa5@end>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------6u4Zdt0q1c61OmVqarKYgq0b"
+X-purgate-ID: tlsNG-33051d/1787123522-6DCD34E9-D4F821D7/0/0
 X-purgate-type: clean
-X-purgate-size: 5602
+X-purgate-size: 8593
 
-> Well, a pretty natural question: What amount of research have you done yourself?
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------6u4Zdt0q1c61OmVqarKYgq0b
+Content-Type: multipart/mixed; boundary="------------2Hkm9I00nWh2bfGBkdpYqawm";
+ protected-headers="v1"
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+To: Samuel Thibault <samuel.thibault@ens-lyon.org>,
+ xen-devel@lists.xenproject.org, Anthony PERARD <anthony.perard@vates.tech>
+Message-ID: <ab78351b-6b03-407c-9bcd-74b1566fd853@suse.com>
+Subject: Re: [PATCH 2/4] stubdom: remove pciutils
+References: <20260817071843.114898-1-jgross@suse.com>
+ <20260817071843.114898-3-jgross@suse.com> <aoK8zVAP0C0ksD_0@end>
+ <2e8b1f56-6447-44c9-9555-4f1b3f0a00e8@suse.com> <aoM4ufGg8QO51XB9@end>
+ <4a9b5ae9-b37b-4a6c-8ee0-7e7571c99fb5@suse.com> <aoTRyxN4gzsEwJa5@end>
+In-Reply-To: <aoTRyxN4gzsEwJa5@end>
 
-Lovely response. You really know how to motivate people and welcome
-them into a community.
+--------------2Hkm9I00nWh2bfGBkdpYqawm
+Content-Type: multipart/mixed; boundary="------------CjbwuI0AhnZvKZgA9rzYxhBL"
 
-It has taken me about 1,5 day of work to find out why the screen
-remained black, to determine where the problem was, how to retrieve
-potential info by a serial-over-LAN console, subscribe to the mailing
-list, and create this bug report to help.
+--------------CjbwuI0AhnZvKZgA9rzYxhBL
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-But don't worry, I won't do any debugging anymore for the Xen project,
-you have made sure of that. No need to respond. I will unsubscribe
-myself from the mailing list after this mail.
+T24gMTguMDguMjYgMjM6NDIsIFNhbXVlbCBUaGliYXVsdCB3cm90ZToNCj4gSsO8cmdlbiBH
+cm/DnywgbGUgbWFyLiAxOCBhb8O7dCAyMDI2IDA3OjQzOjM0ICswMjAwLCBhIGVjcml0Og0K
+Pj4gT24gMTcuMDguMjYgMTg6MzcsIFNhbXVlbCBUaGliYXVsdCB3cm90ZToNCj4+PiBKdWVy
+Z2VuIEdyb3NzLCBsZSBsdW4uIDE3IGFvw7t0IDIwMjYgMTA6MjQ6MDIgKzAyMDAsIGEgZWNy
+aXQ6DQo+Pj4+IE9uIDE3LjA4LjI2IDA5OjQ4LCBTYW11ZWwgVGhpYmF1bHQgd3JvdGU6DQo+
+Pj4+PiBKdWVyZ2VuIEdyb3NzLCBsZSBsdW4uIDE3IGFvw7t0IDIwMjYgMDk6MTg6NDEgKzAy
+MDAsIGEgZWNyaXQ6DQo+Pj4+Pj4gVGhlcmUgaXMgbm8gdXNlciBvZiBsaWJwY2kgbGVmdCBp
+biBzdHViZG9tcy4NCj4+Pj4+Pg0KPj4+Pj4+IFJlbW92ZSBsaWJwY2kgZnJvbSB0aGUgc3R1
+YmRvbSBidWlsZCBzeXN0ZW0uDQo+Pj4+Pg0KPj4+Pj4gV291bGRuJ3QgaXQgYmUgdXNlZnVs
+IHRvIGtlZXAgdGhpcyBmb3IgYW55Ym9keSB3aG8gd291bGQgd2FudCB0byBkcml2ZSBhDQo+
+Pj4+PiBQQ0kgY2FyZCBmcm9tIGEgc3R1YmRvbWFpbj8NCj4+Pj4+DQo+Pj4+PiBJIG1lYW4s
+IGluIHRoZSB6bGliIGNhc2UsIGl0J3MgcmVhbGx5IGEgbWVyZSBxdWVzdGlvbiBvZiBidWls
+ZCAmIGxpbmssDQo+Pj4+PiBzbyB3ZSBkb24ndCBuZWVkIHRvIHNoaXAgaXQsIHBlb3BsZSBj
+YW4gZG8gaXQgdGhlbXNlbHZlcyBlYXNpbHkgbGlrZSBmb3INCj4+Pj4+IGFueSBvdGhlciBs
+aWJyYXJ5Lg0KPj4+Pj4NCj4+Pj4+IEJ1dCBoZXJlIHRoZXJlIGlzIGFjdHVhbCBwb3J0aW5n
+IHdvcmssIHRoYXQgd2UnZCBiZXR0ZXIgbm90IGxvc2UgYnV0DQo+Pj4+PiBrZWVwIHNoaXBw
+aW5nLg0KPj4+Pg0KPj4+PiBUaGlzIGlzIGFsbCBzdGlsbCBhdmFpbGFibGUgdmlhIGdpdC4N
+Cj4+Pg0KPj4+IE5vLCBpdCBpcyBub3QgcmVhbGx5Lg0KPj4+DQo+Pj4gSSBrZWVwIHJlYWRp
+bmcgdGhpcyBhcmd1bWVudCwgYnV0IHBlb3BsZSB3aWxsIG5vdCBrbm93IHRoYXQgc29tZXRo
+aW5nDQo+Pj4gZXhpc3RzIGluIHRoZSBnaXQgaGlzdG9yeSwgYW5kIHdpbGwganVzdCBhc3N1
+bWUgdGhhdCBpdCBkb2VzIG5vdCBleGlzdA0KPj4+IGFuZCBoYXMgdG8gYmUgd3JpdHRlbi4N
+Cj4+DQo+PiBXaGF0IGFib3V0IGFkZGluZyBhIGNvbW1lbnQgdG8gdGhlIHN0dWJkb20gTWFr
+ZWZpbGUgaW4gYSBzZXBhcmF0ZSBwYXRjaCwgbGlrZToNCj4+DQo+PiAjIHBjaXV0aWxzIHN1
+cHBvcnQgaGFzIGJlZW4gcmVtb3ZlZCB3aXRoIGNvbW1pdCA8Y29tbWl0LWlkPiwgcmV2ZXJ0
+IHRoYXQgcGF0Y2gNCj4+ICMgaW4gY2FzZSBpdCBpcyBuZWVkZWQgYWdhaW4uDQo+Pg0KPj4g
+SSB0aGluayB0aGlzIHdvdWxkIGJlIHByZWZlcmFibGUgb3ZlciB1bnVzZWQgYW5kIHByb2Jh
+Ymx5IGJpdC1yb3R0ZW4gY29kZSBpbg0KPj4gdGhlIHJlcG9zaXRvcnkuDQo+IA0KPiBJIGRv
+bid0IHNlZSB3aHkgaXQgd291bGQgYmUgYml0LXJvdHRlbiwgc2luY2UgdGhlIHBjaXV0aWxz
+IHZlcnNpb24gaW4NCj4gdXNlZCBpcyBmaXhlZCwgaXQncyBhIGxpYnJhcnkgdGhhdCBoYXMg
+YSBxdWl0ZSBzdGFibGUgQVBJLCBhbmQgdGhlIHBjaQ0KPiB4ZW4gaW50ZXJmYWNlIGlzIHN1
+cHBvc2VkIHRvIGtlZXAgYmFja3dhcmQgY29tcGF0aWJpbGl0eS4NCg0KVGhlbiBJJ2QgcmF0
+aGVyIGFkZCBpdCB0byBNaW5pLU9TIChwcm9iYWJseSBiZWhpbmQgYW5vdGhlciBDT05GSUcg
+b3B0aW9uKSB0aGFuDQpoYXZpbmcgaXQgaW4gdGhlIFhlbiB0cmVlLg0KDQpUaGlzIHdheSBp
+dCBjb3VsZCBiZSB0ZXN0LWJ1aWx0IG11Y2ggZWFzaWVyIHdpdGggTWluaS1PUywgdGh1cyBh
+dm9pZGluZyBhbnkNCmJyZWFrYWdlIGluIGNhc2UgZS5nLiBhIHBjaWZyb250IGludGVyZmFj
+ZSBpcyBjaGFuZ2VkLg0KDQoNCkp1ZXJnZW4NCg==
+--------------CjbwuI0AhnZvKZgA9rzYxhBL
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-Thanks for the warm welcome.
-Enjoy your day
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-On Wed, 19 Aug 2026 at 08:50, Jan Beulich <jbeulich@suse.com> wrote:
->
-> On 18.08.2026 23:47, Arthur Borsboom wrote:
-> > Hi,
-> >
-> > I am encountering an early Linux kernel crash when booting a PVH
-> > Dom0 on an AMD EPYC system (Family 19h Model 97). PV boot on the
-> > same system works fine. The crash occurs during amd_smn_init due
-> > to a divide-by-zero exception.
-> >
-> > There is a potentially related bug report discussing a Linux patch
-> > addressing AMD SMN initialization under Xen PVH:
-> >
-> > https://patchew.org/linux/20260623211904.3674-1-jason.andryuk@amd.com/
-> >
-> > It seems there was an ongoing discussion between Linux devs who
-> > seem to have the need to align with Xen devs for a proper/future-proof fix.
-> > I am submitting this report to share raw hardware trace data and
-> > help move this forward.
-> >
-> > --- System Details ---
-> > CPU: AMD EPYC 4344P 8-Core Processor (Family 25 / 0x19, Model 97
-> > / 0x61, Stepping 2)
-> > Motherboard: MSI MSIS366/S3661 (BIOS ES366AOC.10P 05/29/2025)
-> > Xen Version: 4.20.0 (Command line: dom0_mem=8192M,max:8192M dom0=pvh
-> > loglvl=all guest_loglvl=all sync_console noreboot console=com1,vga)
-> > Linux Kernel: 7.1.5-arch1-2
-> >
-> > --- Kernel Crash Log ---
-> > [...]
-> > [    0.817348] Oops: divide error: 0000 [#1] SMP NOPTI
-> > [    0.817348] fbcon: Taking over console
-> > [    0.823766] CPU: 3 UID: 0 PID: 1 Comm: swapper/0 Not tainted
-> > 7.1.5-arch1-2 #1 PREEMPT(full)
-> > 33708094282b4038de0f4f0d201b68f6a0b5d9bf
-> > [    0.839766] Hardware name: MSI MSIS366/S3661, BIOS ES366AOC.10P 05/29/2025
-> > [    0.847766] RIP: 0010:amd_smn_init+0x1ed/0x280
-> > [    0.852766] Code: d2 45 31 f6 45 31 ed 66 41 f7 f4 89 c5 48 89 df
-> > e8 c8 c7 1b fd 48 89 c3 48 85 c0 0f 84 48 ff ff ff 44 89 e8 31 d2 45
-> > 8d 7d 01 <66> f7 f5 66 85 d2 75 42 66 90 eb 2c 41 0f b7 ce 48 8d b3 d0
-> > 00 00
-> > [    0.870766] RSP: 0018:ffffc9000004bdc8 EFLAGS: 00010246
-> > [    0.878766] RAX: 0000000000000000 RBX: ffff888102661000 RCX: 0000000000000007
-> > [    0.887766] RDX: 0000000000000000 RSI: ffff888102661000 RDI: 0000000000000000
-> > [    0.895766] RBP: 0000000000000000 R08: 0000000000000282 R09: ffff888100f57680
-> > [    0.903766] R10: ffffea0004044580 R11: ffff888100042700 R12: 0000000000000002
-> > [    0.911766] R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000001
-> > [    0.919766] FS:  0000000000000000(0000) GS:ffff8882b2010000(0000)
-> > knlGS:0000000000000000
-> > [    0.927766] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> > [    0.935766] CR2: 0000000000000000 CR3: 0000000003822000 CR4: 0000000000750ef0
-> > [    0.943766] PKRU: 55555554
-> > [    0.943766] Call Trace:
-> > [    0.948766]  <TASK>
-> > [    0.951766]  ? __pfx_amd_smn_init+0x10/0x10
-> > [    0.956766]  do_one_initcall+0x8e/0x3f0
-> > [    0.959766]  kernel_init_freeable+0x24a/0x2d0
-> > [    0.965766]  ? __pfx_kernel_init+0x10/0x10
-> > [    0.967766]  kernel_init+0x1a/0x140
-> > [    0.973766]  ret_from_fork+0x2a7/0x330
-> > [    0.974766]  ? __pfx_kernel_init+0x10/0x10
-> > [    0.982766]  ret_from_fork_asm+0x1a/0x30
-> > [    0.988766]  </TASK>
-> > [    0.989766] Modules linked in:
-> > [    0.994772] ---[ end trace 0000000000000000 ]---
-> > [    0.999769] RIP: 0010:amd_smn_init+0x1ed/0x280
-> > [    1.004770] Code: d2 45 31 f6 45 31 ed 66 41 f7 f4 89 c5 48 89 df
-> > e8 c8 c7 1b fd 48 89 c3 48 85 c0 0f 84 48 ff ff ff 44 89 e8 31 d2 45
-> > 8d 7d 01 <66> f7 f5 66 85 d2 75 42 66 90 eb 2c 41 0f b7 ce 48 8d b3 d0
-> > 00 00
-> > [    1.004771] RSP: 0018:ffffc9000004bdc8 EFLAGS: 00010246
-> > [    1.004773] RAX: 0000000000000000 RBX: ffff888102661000 RCX: 0000000000000007
-> > [    1.004774] RDX: 0000000000000000 RSI: ffff888102661000 RDI: 0000000000000000
-> > [    1.004775] RBP: 0000000000000000 R08: 0000000000000282 R09: ffff888100f57680
-> > [    1.004776] R10: ffffea0004044580 R11: ffff888100042700 R12: 0000000000000002
-> > [    1.004777] R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000001
-> > [    1.004778] FS:  0000000000000000(0000) GS:ffff8882b2090000(0000)
-> > knlGS:0000000000000000
-> > [    1.004779] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> > [    1.004780] CR2: 0000000000000000 CR3: 0000000003822000 CR4: 0000000000750ef0
-> > [    1.004782] PKRU: 55555554
-> > [    1.004784] Kernel panic - not syncing: Attempted to kill init!
-> > exitcode=0x0000000b
-> > (XEN) Hardware Dom0 crashed: 'noreboot' set - not rebooting.
-> >
-> > Please let me know if any additional info would be helpful.
->
-> Well, a pretty natural question: What amount of research have you done yourself?
-> You really should have found [1], or maybe its v1 counterpart, or the earlier
-> report(s) of what I think is this same issue.
->
-> Jan
->
-> [1] https://patchew.org/linux/20260814214255.83127-1-jason.andryuk@amd.com/20260814214255.83127-2-jason.andryuk@amd.com/
->
+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
+kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
+=3DeeAB
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------CjbwuI0AhnZvKZgA9rzYxhBL--
+
+--------------2Hkm9I00nWh2bfGBkdpYqawm--
+
+--------------6u4Zdt0q1c61OmVqarKYgq0b
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmqFV0AFAwAAAAAACgkQsN6d1ii/Ey8H
+OQf7BlkHTXqrxdOdphZJFu+dVI34Y9OBwMw6BUdUtOmO2cSZtlej59nt6z/O+R+alAAz6dhaH1Dg
+8zuYsdgtFSZubjIv6FVh/UYvvyhyMPajTFdCNUQkmfbdOR6YnLGVjCkIpabU2zcCo3aKJXo/7k/H
+gjC1oCSD9DpoYzUjWgQkjs05gyr/Y0u62CthRFrh5JK8JkqNSxCOeNP2Pm6QvteNEvrv8zTdeBKi
+jjyM514PSltoWGS05xxdAMBVDUuLV07EM0JL49rrg2ccUpzzJkeHU3pHSFCjD7350ALzznqFOOZD
+pkhJ1xPl31K2RKWpcMp37sFYmL8mxcC3y75uD/vpRA==
+=w521
+-----END PGP SIGNATURE-----
+
+--------------6u4Zdt0q1c61OmVqarKYgq0b--
 
