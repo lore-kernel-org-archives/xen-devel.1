@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B25A4C5DF6D
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2026 07:23:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1394731.1633395 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D41EC5DF6D
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2026 07:29:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1394743.1633404 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwadL-0007kf-Oa; Wed, 19 Aug 2026 07:22:47 +0000
+	id 1wwajH-0008UF-8n; Wed, 19 Aug 2026 07:28:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1394731.1633395; Wed, 19 Aug 2026 07:22:47 +0000
+Received: by outflank-mailman (output) from mailman id 1394743.1633404; Wed, 19 Aug 2026 07:28:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwadL-0007kY-L2; Wed, 19 Aug 2026 07:22:47 +0000
-Received: by outflank-mailman (input) for mailman id 1394731;
- Wed, 19 Aug 2026 07:22:45 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wwajH-0008U8-5n; Wed, 19 Aug 2026 07:28:55 +0000
+Received: by outflank-mailman (input) for mailman id 1394743;
+ Wed, 19 Aug 2026 07:28:53 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wwadJ-0007kS-Ld
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 07:22:45 +0000
+ (envelope-from <frn1furkan10@gmail.com>) id 1wwajF-0008U2-A4
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 07:28:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwadJ-0096X5-28
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 09:22:45 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wwajE-00BEzc-GD
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 09:28:52 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a8559ba-2eae-0a2a0a5409dd-0a2a4506a83c-16
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 09:22:44 +0200
-Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a8559c4-195a-0a2a45060019-d155802ad4cc-3
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 09:22:44 +0200
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-49954b88fffso6590875e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 00:22:44 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482b14514d5sm3950500f8f.10.2026.08.19.00.22.43
+ (envelope-from <frn1furkan10@gmail.com>)
+ id 6a855b1e-e002-0a2a0a5209dd-0a2a4502c45a-46
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 09:28:52 +0200
+Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <frn1furkan10@gmail.com>)
+ id 6a855b34-6ca4-0a2a45020019-d1558033b42e-3
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 09:28:52 +0200
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-4998590d392so6227685e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 00:28:52 -0700 (PDT)
+Received: from [192.168.1.109] ([78.173.117.23])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-499aa0fd7a9sm53825755e9.2.2026.08.19.00.28.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Aug 2026 00:22:44 -0700 (PDT)
+ Wed, 19 Aug 2026 00:28:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,141 +53,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787124164; x=1787728964; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+        d=gmail.com; s=20251104; t=1787124532; x=1787729332; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=2NZoBcFqMNoc7iCqfHSRU1JgiQhuz7rRtU331DbrzT0=;
-        b=VEQcWSGX4GeK5QkZE/WEn6ze3wqWEVsq0ahedcipUmx3UAk049P7bMHKlhq8P5g+V7
-         WcneJJ6b+yfbCa0JbwMhBIf1FrX08cHpGG6Lbakk8MK/qqSNJkGARpIqMETwkgvQDMCf
-         r6MDSzGn0F4iTl51n7tMyxIUpD8dlMzs4Ozb3X+lKRVbSmoYr4vOPgisDjuULsslDGWe
-         y7pyfU/md0UHk7MdFZmL0WfKsckOhuQ0mFYDV7QyRKW1hfvuydVepf9ppp6cZaYbtoJC
-         GbCssrtCWuLNYXzVt+V5iHz2rh6JhJYzafSRantSRR6vOrHY2E9zxSzpKyHppz9dsAT6
-         GwJQ==
+        bh=f+BHz/ZvcnQKOTBNafzlJ+C4BLhA+M7gH9JYI18ux3U=;
+        b=lCWAahBF0ks/2p9EAIYoDM3o8teKcyD82XwU4YveSQ4LN5nzgw5l7/hND0xHUF9m7E
+         +J6ozuEVQaNisF3x9jmxaO8Vtg3/oaTi/Fdw05UHDL2UGQatvw+4ZXaqr5zsNlM7qwP9
+         Xk6CRvefbDmSQsi1AFqbB6dVvJE9KsNzajYOcYXkHoawICiau41uPbWeII73FsU3oxSC
+         hQjS9Q3NzXqnHhOTHdZhxd+Te3kkdfjBVIebNTwZPg+KQA7+mAu1KJC46RpryX1A89dg
+         1WtCvZEGRZ0erI/XpcUTTL0lLs6gTicV4RA3ZEh82oOZ9eMYSXOnnb3+8rBio0RRG95C
+         aZQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787124164; x=1787728964;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+        d=1e100.net; s=20251104; t=1787124532; x=1787729332;
+        h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=2NZoBcFqMNoc7iCqfHSRU1JgiQhuz7rRtU331DbrzT0=;
-        b=DwkeKMSCj7Y1u9VC3k/+eI5TUBDCneWfBS5b3yJXUyp6XL1z9EBLk7LQthmrTYcq81
-         Q+k8E0cTuixRHn/NZCISgynj/tACAyvszMclAG0w9qqCvXAmWRVDgGkUByVxEPTnRrUk
-         J518rjZLpV5YKj8CaU4Sye5IUTt0kN+8B6klMxnH/7iwum49AcHb0s4KnDZ/wfaLNOQC
-         tXgklL65algJd0SC7ZMtucavP4Ua3rC9wsla76ry89uf7/7H66xluFdjUcKA8nI4tDHm
-         xwKUbFAdt9LfCbyf0GuESaNscZehXgyTq2AgRjEhwRqzlatWksrqaSxoNNY/oQmthnZ6
-         XcuQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rq8QzTBkKQGGZQPpAfkXyqxykjG41/3Xk6PTj9WRjp2qJinHr6iP+o1CfFfSOHgwxW7qyFjfMbgx3U=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwsqY4/4/6BixT4fUHqfA3M3y1f5o2xlcoBcrC3NmpMnun/IKTF
-	C9n4bHe7juD5TOPGlNaa91dU1szB9GQ5yrob0EMOEJmLp/+i6xEQsu5t+/VDv47YSw==
-X-Gm-Gg: AR+sD13OU+mqESWdsMSci4L+zXYsB3WvhE0wAEHjVWUkdk/sG2KCVrQuiAE10zH8neb
-	oGK+gwwlgwSg6HslCt4ckyB1EFgzvtGLMKtRvNzYC6reNB5u9vE8AlP+cdzqUEvsyoYhujpijbE
-	tNPdN6VQUvMBb8n74qc0tErw6uOZ5ZZaErAZmVGiPwhc/Z6rCgQOmOFpXUurI/VHIBqICKWxQjl
-	LU96pv/GSCvXvTn4S4S0AWVhxc89dbf38d0CIPFmxMitkQcKRm67VHyg3iPYb9Yick7edEKQshl
-	kruZK1WsJhz1SwYn0Y62eK0FtsWh7hcvtQ9GhV3yOxshxeTSFXKV25H48HSfvZW9Z4ybnxXxIoU
-	3jX5UMuFPWUfZhAGpOqdyWg6dE4ct/wyWS1QyUQdrXFGNJmcrzu1OJ5eoFTfMBD1XDLeJZ4ohLV
-	M2pXlqBT6cINZl76SP/kRv7b1C1OL8iNkNU5dmSNplrIJzHDmeE56UWv7kaYAcZA3HHzqe9HIeI
-	C8QyLf/l5x3EfviPS0FEa24G02JhxTRpkSsE1cCkgW5Jaui0p9ZGP0EnG2wSeM=
-X-Received: by 2002:a05:600c:37c6:b0:499:87f3:a2a3 with SMTP id 5b1f17b1804b1-499aa1c7bafmr45212215e9.15.1787124164412;
-        Wed, 19 Aug 2026 00:22:44 -0700 (PDT)
-Message-ID: <f9471a2b-6306-41fb-af52-2336af77dfc9@suse.com>
-Date: Wed, 19 Aug 2026 09:22:43 +0200
+        bh=f+BHz/ZvcnQKOTBNafzlJ+C4BLhA+M7gH9JYI18ux3U=;
+        b=PaB7z9h0ANDsXnjIrV0XBE0StdzEMOJ0XVz+MOP3s2H6oC3ZQuS/UWBhvYaP5vwCdb
+         gFWWg2Ht3dh0yth/kcbFkOFzTWjCy8zvhuvoXilVd5h0xKW9idVYa5eYyXw0Vzchm+nS
+         VTNajUR6dIO88fQmWWihkfsbEW5KuxY9v7tThUEqrrJtd6PDQt/gU+xehg5y5G8L9/b7
+         w0OH9yA9Y/nxo6DJ+HHHyq8/G+A8zVuKuIukBAae7Pk+aw2dOlZD3+a1zucNKqOsNr86
+         sKmLgmsNx/Rt9ot9NoCuK4Z6IM9bywwgPsvnKw6PIZbRoISlpROwYV6ymgJxuu6ir8CY
+         D/sg==
+X-Forwarded-Encrypted: i=1; AHgh+RoP+tuh7HuYj5Evdqo0MSpz7op6sWnvQ03zq7cYHYe6+M9CYcnWCN5Dbs0MKC/SGT0GKpSe8/76d0U=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzgTlG2KXHv03LpDBjFh/yI/wqc6tqZLS8NIxeHNDW6Fj/wCo5j
+	UodMKxiC1E4NoSv3jg8+w23E67LyiaB7EaCd76ZBGHbVk3FweIaxlS4F
+X-Gm-Gg: AR+sD12u6+mw4cQ75jBX2pYuTMR38qMwYhV7P9oFf4memb2eE4IlsG8rL/ORfnpgQ74
+	UD29J21ux5vi51ut4umO/aFr73HUyR3PlAwhG8mfFFa3kUfHFUG3RVUBDFyxUnSiSSa4MnqkeMS
+	AOZGJB+l0PSsMZhQzCsxwpPvH4LeVmbt9XuSq3ag0Go/Z6hS+b3gnx8FLMibxL5n1uBQnadkeQG
+	J0R/hUpXbR7Vu4/sTNh3KcHSK2Mrx0gGXwUCPq/lSaImnrcjpS1zrpNjbameOaMPA8V+0D9jVVy
+	ClGbf7lYTPtDjIfqThNBIR5ju8PShuCC4XlXhkmQXKCgV9Y7jp+oIVGD3y598jf+/afpguyngPM
+	Q5hD+OnN93657QdovWN3HYDaF4BBGS7+gOTOM4bBXoOzwztR0/vt6970uhcXpQuq3m+bTJLfN+c
+	sPuKIChRK3N8x42Ohivx0PHHC/vrHLJtgIhtDiNObKlVZmQm5BpbWMKGtWzKB4RMhROPM=
+X-Received: by 2002:a05:600c:8b32:b0:496:c06b:9fb4 with SMTP id 5b1f17b1804b1-499aa200efcmr44193365e9.14.1787124531545;
+        Wed, 19 Aug 2026 00:28:51 -0700 (PDT)
+Message-ID: <0200ea9a-c1e3-46fc-bb7a-d50c39b38b92@gmail.com>
+Date: Wed, 19 Aug 2026 10:28:36 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] xen/sched: core: kill unarmed timers on
- sched_init_vcpu() failure
-To: Furkan Caliskan <frn1furkan10@gmail.com>
+Subject: Re: [PATCH v2 1/2] xen/sched: core: skip missing vcpu slots in
+ sched_move_domain()
+To: Jan Beulich <jbeulich@suse.com>
 Cc: jgross@suse.com, andrew.cooper3@citrix.com, dfaggioli@suse.com,
  gwd@xenproject.org, xen-devel@lists.xenproject.org
 References: <20260819051532.9197-1-frn1furkan10@gmail.com>
- <20260819051532.9197-3-frn1furkan10@gmail.com>
+ <20260819051532.9197-2-frn1furkan10@gmail.com>
+ <fb107bee-6b6b-4e81-bf2d-846d8b6411b0@suse.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260819051532.9197-3-frn1furkan10@gmail.com>
+From: =?UTF-8?B?RnVya2FuIMOHYWzEscWfa2Fu?= <frn1furkan10@gmail.com>
+In-Reply-To: <fb107bee-6b6b-4e81-bf2d-846d8b6411b0@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1787124164-FDE0E77B-F564CE00/0/0
+X-purgate-ID: tlsNG-720697/1787124532-662A92AC-85241F94/0/0
 X-purgate-type: clean
-X-purgate-size: 2596
+X-purgate-size: 1362
 
-On 19.08.2026 07:15, Furkan Caliskan wrote:
-> sched_init_vcpu() calls init_timer() for a vcpu's periodic_timer,
-> singleshot_timer and poll_timer before it can fail -- these
-> become live, linked into their target pCPU's per-cpu timer list
-> regardless of what happens next. If the sched_alloc_udata() call
-> further down then fails, the function frees the sched_unit via
-> sched_free_unit() and returns 1, but never unlinks these three
-> timers.
+
+
+On 8/19/26 09:53, Jan Beulich wrote:
+> On 19.08.2026 07:15, Furkan Caliskan wrote:
+>> --- a/xen/common/sched/core.c
+>> +++ b/xen/common/sched/core.c
+>> @@ -745,6 +745,38 @@ int sched_move_domain(struct domain *d, struct cpupool *c)
+>>  
+>>      for ( unit_idx = 0; unit_idx < n_units; unit_idx++ )
+>>      {
+>> +        /*
+>> +         * A vcpu slot can be missing if creation failed partway
+>> +         * through. A dying domain is being torn down regardless, so
+>> +         * skip the unit -- but a domain that isn't dying still needs
+>> +         * every vcpu it has schedulable, so fail instead of silently
+>> +         * dropping some of them.
+>> +         */
+>> +        bool vcpu_failed = false;
+>> +
+>> +        for ( unsigned int i = 0;
+>> +              i < gran && unit_idx * gran + i < d->max_vcpus; i++ )
+>> +        {
+>> +            if ( !d->vcpu[unit_idx * gran + i] )
 > 
-> The caller, vcpu_create(), makes this worse: on sched_init_vcpu()
-> returning nonzero it jumps to fail_wq, skipping fail_sched and
-> thus sched_destroy_vcpu() -- the only function on this path that
-> calls kill_timer() on them. vcpu_destroy() then frees the vcpu,
-> and the three timers embedded in it, while they are still linked
-> into that shared list.
+> Is there a particular reason domain_vcpu() cannot be used here?
 > 
-> This silently corrupts that list. It only shows up later, when
-> something else touches a neighboring timer: sched_move_domain()
-> crashed with "Assertion 'entry->prev->next == entry' failed" on a
-> completely unrelated, valid vcpu's timer.
-> 
-> Kill all three timers in sched_init_vcpu()'s own failure branch,
-> so it doesn't depend on the caller reaching sched_destroy_vcpu()
-> to undo what it set up itself.
-> 
-> Fixes: 1ad5dad74cde ("[XEN] Re-jig VCPU initialisation -- VMX init requires generic VCPU")
+> Jan
 
-How did you arrive at this commit? It doesn't even touch sched_init_vcpu().
-All it does is move kill_timer() invocations around. I think it's
-d884b1077817, as that's where the "return SCHED_OP(init_vcpu, v)" was
-introduced (i.e. where kill_timer() would have been necessary to call in
-the error case). (I can't exclude the issue was pre-existing already at
-that time, but that would require more analysis than I think is worth to
-invest.)
+We still need to guard against d->max_vcpus so that out-of-bounds
+indices in a partially filled unit don't get treated as missing 
+vCPUs by domain_vcpu() returning NULL. 
 
-> --- a/xen/common/sched/core.c
-> +++ b/xen/common/sched/core.c
-> @@ -589,6 +589,9 @@ int sched_init_vcpu(struct vcpu *v)
->      unit->priv = sched_alloc_udata(dom_scheduler(d), unit, d->sched_priv);
->      if ( unit->priv == NULL )
->      {
-> +        kill_timer(&v->periodic_timer);
-> +        kill_timer(&v->singleshot_timer);
-> +        kill_timer(&v->poll_timer);
->          sched_free_unit(unit, v);
->          rcu_read_unlock(&sched_res_rculock);
->          return 1;
+However, domain_vcpu(unit_idx * gran + i) can be used here instead of
+d->vcpu[unit_idx * gran + i]. I simply used d->vcpu[] because the rest
+of the function uses it that way.
 
-This almost, but not quite open-codes sched_destroy_vcpu(). Would be nice
-if the cleanup logic was shared. The sched_free_unit() call there could be
-leveraged here as well; what would need skipping are the sched_free_udata()
-and sched_remove_unit(). And of course the RCU-locking would need sorting.
+Furkan
 
-Jan
 
