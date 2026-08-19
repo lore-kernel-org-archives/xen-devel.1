@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75694C5DF6D
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2026 06:40:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1394649.1633323 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54C7BC5B572
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2026 06:50:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1394660.1633332 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwZyb-0006YV-Te; Wed, 19 Aug 2026 06:40:41 +0000
+	id 1wwa7p-0008IN-P6; Wed, 19 Aug 2026 06:50:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1394649.1633323; Wed, 19 Aug 2026 06:40:41 +0000
+Received: by outflank-mailman (output) from mailman id 1394660.1633332; Wed, 19 Aug 2026 06:50:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwZyb-0006YO-R9; Wed, 19 Aug 2026 06:40:41 +0000
-Received: by outflank-mailman (input) for mailman id 1394649;
- Wed, 19 Aug 2026 06:40:40 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wwa7p-0008IG-MD; Wed, 19 Aug 2026 06:50:13 +0000
+Received: by outflank-mailman (input) for mailman id 1394660;
+ Wed, 19 Aug 2026 06:50:12 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wwZya-0006YC-0D
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 06:40:40 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wwa7o-0008I9-7m
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 06:50:12 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwZyZ-008ITr-DI
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 08:40:39 +0200
+ id 1wwa7n-00B86t-KP
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 08:50:11 +0200
 Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a854fd5-e002-0a2a0a5209dd-0a2a4507d166-40
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 08:40:39 +0200
-Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
+ id 6a855220-8faa-0a2a0a5109dd-0a2a4507b018-6
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 08:50:11 +0200
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
  by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a854fe6-b4ea-0a2a45070019-d155dd2ebd45-3
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 08:40:39 +0200
-Received: by mail-wr1-f46.google.com with SMTP id
- ffacd0b85a97d-4798bea72f9so316842f8f.1
- for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 23:40:38 -0700 (PDT)
+ id 6a855223-b4ea-0a2a45070019-d155dd31a51e-3
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 08:50:11 +0200
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-47de008b020so311586f8f.1
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Aug 2026 23:50:11 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482b14d0360sm2994641f8f.33.2026.08.18.23.40.37
+ ffacd0b85a97d-482b14cf0a3sm3377273f8f.32.2026.08.18.23.50.10
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Aug 2026 23:40:38 -0700 (PDT)
+ Tue, 18 Aug 2026 23:50:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,57 +55,54 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Cc:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787121638; x=1787726438; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1787122211; x=1787727011; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :cc:content-language:references:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Bk6nB7NQ9tmfzBrQcoOGA1Uhrr6jhusHNKM5pz/OGpc=;
-        b=NOFJVtEbvzSZCVVwiyBUrJ2MYKmFwOnpnwPQsSNdaNrtQyICKXR31KCFkCqpBii4OJ
-         8drTzSEFsfJ6Ijdl941c3ay2GD/bYAviGlD7BHbbjNS5ppW/P7NMK5RuQb+cLAblwfRA
-         qtEMoGlN3kcSvCfYVW6XTxEe4ynSURZTQ9SOJWuADRq9yRn/39r8Pm+/5euGXra86wra
-         gSARd1nA8q1HvkJvnfRfn03XTLri7Wca1k2ytBmd2PR4p7ye1Pom187hjHJIRG27dKYf
-         UkB2sT3H4gdD+lIRbzgDqFBwwcUGoBEN01tg3vxGX99aENWkN4MQCB/d/gIbnmxjfbL2
-         If7w==
+        bh=T4mMFQvjBgLBZcg/KWm7UdPSfrt3rVlWFkWrDYAKa04=;
+        b=BHw38H9xkfTihg6Pq5J8TW/m4sc0vk2Nk54PacrVLOB4qFsCOoQUE56jT/0bV6aVTf
+         LieAaYRPbxKk41Sxh28upxq3Ini1HJV/uE6xNlh+qofid0+sUKAXWGxfF59C9seav4m1
+         tFKvrpaa6XxIOZR7b48kxznC9mK91EUKEHzhonhwaI1RmGaf/js/KNrAA/0KZdmQ4un4
+         pQTE9dFdR+uCILgMVKPBZmfrr3+jQOxn0i4sZr7KcI4YpJbRd0GlXsMBiM0GDcVNba7m
+         NTL4+RQkuD7g/zUB2e/Qu0wlvf8TUEKPdEdqBFZv06zdiMmmNXMWwZ7ACuAQ98q/pTOL
+         Eykg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787121638; x=1787726438;
+        d=1e100.net; s=20251104; t=1787122211; x=1787727011;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :cc:content-language:references:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Bk6nB7NQ9tmfzBrQcoOGA1Uhrr6jhusHNKM5pz/OGpc=;
-        b=CplGSt1tnycfCDGm9QJ/FYP36FFq4qccIDZM8dZ7/7nNugI/f8JufgyejJe/O/1ISa
-         wJ8HobST1TTzxIr+lGTtVwGZiyDVjSu98Mk449lSWAH+hf7/BEB9UlgaqfYTcHFQuDU9
-         jDyGXSBKPgePa7gqKTyOdMPOwquzKEqE4WFYfzKHcwZq2dLlAhWKbKMfZB4FaNJ9vbI7
-         2cMIs5Y1GR3RyFzqqb3Pp86S1O2h/esi7g6eCLapwuLw0Xo5f0zVdOh4uaL/kTrlkHnD
-         +piOVceuL/I7/vxH8bY7gDvGF4pig1eRAEYPvROz4N9jKms1Q22pp983VPKcLVNXPojA
-         sOvA==
-X-Forwarded-Encrypted: i=1; AHgh+RqoxMYxi3ThWg6zYLCNZQozNi4zNhID/CyFoDfiDIfmnmaJiag9TSwbfupNh05cmx3EYgxzEEeA9y0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyILE4tNoWunG7/tL8wpiZ5Gb+UGJg6UkROPPlTchqAZpMi358r
-	uiuQ0SKG/Gvfxqijv7hYDOYtnpMidOfgf5AcTWPTkaPpAFY8VETabF0x2cOcdrRu5A==
-X-Gm-Gg: AR+sD10MuihLZVJHm/ZEJkJSIdU04ihJeXcSDBsigB1xhI3ptN7Q49ACkL/1kmbe4DU
-	aY8zAA2H2Tiq8M15iNWwrXYntHc8nRhZ8czKTQbIrUO+/jxesu9kBG6ookJfkOXExjNWF7fSVT9
-	HJrLYVevyt+ebBtRfW1/sQKaj90QoS9Wx5PPnHrJ2CpujQUVYTzPIjWrStKCV7ijw/nR6H7vd8B
-	3TBN6OC17SgZNQaZYUyOhWB9Z1f3jFk30d7DivVno9NFNEAlqOvGK+10fLHfN5gHQOJCszrYdqS
-	3X6CzrcCp1zqsuAwfFtcZOPgst6DZ7p+tPPXSl9yB99RU8SyO0uCG6fS0dyFKK7Nb+lEWe7BVk3
-	BbpXDeARsY3i1APkAF9ueOaUm5Djihtn5gEMXee+sGh8C9lFRx/pSR9gGqq1ouU3LWVONkXemnx
-	rJx4he91DRbJQFYiGT+xB/DC8EfsxU5GvqZQevYDkhPAk7uaf+s0LROd7v2TW78v3Z80RvCknmT
-	BQHhev69xvnF/ABiDAkS73Hv1CnzGe2tkET3CuNHt08jtJBpOQCH7fb5mILY3Kz
-X-Received: by 2002:a05:6000:1a85:b0:47f:77dc:b066 with SMTP id ffacd0b85a97d-482b1e84864mr3107006f8f.5.1787121638562;
-        Tue, 18 Aug 2026 23:40:38 -0700 (PDT)
-Message-ID: <dbe4d409-37b9-45b9-ae5e-5bedb5df0bb4@suse.com>
-Date: Wed, 19 Aug 2026 08:40:37 +0200
+        bh=T4mMFQvjBgLBZcg/KWm7UdPSfrt3rVlWFkWrDYAKa04=;
+        b=ApzpT4+JlcTl9Z50OazrvCaG9kzGZlXBF7GurnCUgUPyKNoOZaoP7RMKHyR5R3m3dM
+         9lGZxTIlwPw7GggJBNPH3el5AZoKHqAPOZ3cghJp0OEN2GFV7pPjIuCMGyYx6BNT6Qks
+         YpS8CiR6qxjZ0n2yHPDVtP7QOSseNZ+GvXRzHzL1ftGo5tTun4NJiyTUyLlp5LM+zZ11
+         C58zq9RGmZjzRvMLGvR+MEQomZI+XTn3wPYQ4XBJIjXQlkZp/A2Wo6bgkAwAKXVnHvlK
+         kKzX6hPKslIBgaff/dmhemunYBAGa6fghGfva3ow9M/3XNpha5+VPFOHzurHVr+HNQJz
+         terw==
+X-Gm-Message-State: AOJu0YxikSGYGFnu8JPPRiXOV3TBcj49gW5HkOxx1sU2wLbbCs0wrNd6
+	s4eS9laaNjCcdCgUgZQaZVYBK72Hf8VeBcfSmgyLxv8Tr/DXi3e9qLUJEjVbAsZ8uyMH3UKvbMs
+	PzbnvVw==
+X-Gm-Gg: AR+sD120UokVYegadHPZQKIB2pqd2zzelXkZzw+CXISdNyRlunrZML/0xkK8mr9LzOJ
+	8YLlcvlBsuMtgOQ9J9torRJ+DllxwksLb7w26H+bb3hFGvzUYdLrZrtImtjUpdTWnb6wDJZbicY
+	LeMtflftwMSQm+cbsNzJxigcP1i4t3TXK6smmX78peT4YN0/STai+NWbyOmAexS3UUqvLYXYYTx
+	tnOyaRHsnQ+w8iRI3RlTMFMHJh9M7g0gdMK55DcFkPEpk3hLc+hNCfJ4bZQS4L7q++PyN+pc3s7
+	nYtC61FnMkt+I6udGvb+F7Et2VSFgwSLoqoPXZoUFhX119m6iHu1hYTb76M6wjCKQZK3zrsiqcd
+	0T67MzmcI/xpVSLoaXyUs5nJkGQmanxtRvkp0RvBr9fm+0dZKilMJUxC4Ck5RyC1Ox6DoO0zSRs
+	YNLVcbjG1fZINTy0uLOxl1RIMsIlgiFT4hemtLSy2/NhT2b9vhQlBMLYCphxoET+NIHMWjGdk5o
+	I+Dy15D23p0tAx9kmTTFiehjWd0mVO/YkCanflFAxGq0V09Ix/V
+X-Received: by 2002:a5d:6f19:0:b0:46b:70db:2113 with SMTP id ffacd0b85a97d-482b0ede030mr4438320f8f.0.1787122210954;
+        Tue, 18 Aug 2026 23:50:10 -0700 (PDT)
+Message-ID: <4a1b5392-93b9-4b9e-bf65-3fb280f385fa@suse.com>
+Date: Wed, 19 Aug 2026 08:50:09 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/4] stubdom: remove pciutils
-To: Samuel Thibault <samuel.thibault@ens-lyon.org>
-References: <20260817071843.114898-1-jgross@suse.com>
- <20260817071843.114898-3-jgross@suse.com> <aoK8zVAP0C0ksD_0@end>
- <2e8b1f56-6447-44c9-9555-4f1b3f0a00e8@suse.com> <aoM4ufGg8QO51XB9@end>
- <4a9b5ae9-b37b-4a6c-8ee0-7e7571c99fb5@suse.com> <aoTRyxN4gzsEwJa5@end>
+Subject: Re: [BUG] Linux kernel crash in amd_smn_init during PVH Dom0 boot on
+ AMD EPYC
+To: Arthur Borsboom <arthurborsboom@gmail.com>
+References: <CALUcmUkm7eL2RtqAn3fJxrMdY4aj8AYzkFZfs7LVwntSLa44Wg@mail.gmail.com>
 Content-Language: en-US
-Cc: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
- xen-devel@lists.xenproject.org, Anthony PERARD <anthony.perard@vates.tech>
+Cc: xen-devel@lists.xenproject.org
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -130,61 +127,104 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <aoTRyxN4gzsEwJa5@end>
+In-Reply-To: <CALUcmUkm7eL2RtqAn3fJxrMdY4aj8AYzkFZfs7LVwntSLa44Wg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1787121639-342F4AE4-4239CA7D/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ef75cf/1787122211-A76D2AE4-2A90C0CA/0/0
 X-purgate-type: clean
-X-purgate-size: 1794
+X-purgate-size: 4685
 
-On 18.08.2026 23:42, Samuel Thibault wrote:
-> Jürgen Groß, le mar. 18 août 2026 07:43:34 +0200, a ecrit:
->> On 17.08.26 18:37, Samuel Thibault wrote:
->>> Juergen Gross, le lun. 17 août 2026 10:24:02 +0200, a ecrit:
->>>> On 17.08.26 09:48, Samuel Thibault wrote:
->>>>> Juergen Gross, le lun. 17 août 2026 09:18:41 +0200, a ecrit:
->>>>>> There is no user of libpci left in stubdoms.
->>>>>>
->>>>>> Remove libpci from the stubdom build system.
->>>>>
->>>>> Wouldn't it be useful to keep this for anybody who would want to drive a
->>>>> PCI card from a stubdomain?
->>>>>
->>>>> I mean, in the zlib case, it's really a mere question of build & link,
->>>>> so we don't need to ship it, people can do it themselves easily like for
->>>>> any other library.
->>>>>
->>>>> But here there is actual porting work, that we'd better not lose but
->>>>> keep shipping.
->>>>
->>>> This is all still available via git.
->>>
->>> No, it is not really.
->>>
->>> I keep reading this argument, but people will not know that something
->>> exists in the git history, and will just assume that it does not exist
->>> and has to be written.
->>
->> What about adding a comment to the stubdom Makefile in a separate patch, like:
->>
->> # pciutils support has been removed with commit <commit-id>, revert that patch
->> # in case it is needed again.
->>
->> I think this would be preferable over unused and probably bit-rotten code in
->> the repository.
+On 18.08.2026 23:47, Arthur Borsboom wrote:
+> Hi,
 > 
-> I don't see why it would be bit-rotten, since the pciutils version in
-> used is fixed,
+> I am encountering an early Linux kernel crash when booting a PVH
+> Dom0 on an AMD EPYC system (Family 19h Model 97). PV boot on the
+> same system works fine. The crash occurs during amd_smn_init due
+> to a divide-by-zero exception.
+> 
+> There is a potentially related bug report discussing a Linux patch
+> addressing AMD SMN initialization under Xen PVH:
+> 
+> https://patchew.org/linux/20260623211904.3674-1-jason.andryuk@amd.com/
+> 
+> It seems there was an ongoing discussion between Linux devs who
+> seem to have the need to align with Xen devs for a proper/future-proof fix.
+> I am submitting this report to share raw hardware trace data and
+> help move this forward.
+> 
+> --- System Details ---
+> CPU: AMD EPYC 4344P 8-Core Processor (Family 25 / 0x19, Model 97
+> / 0x61, Stepping 2)
+> Motherboard: MSI MSIS366/S3661 (BIOS ES366AOC.10P 05/29/2025)
+> Xen Version: 4.20.0 (Command line: dom0_mem=8192M,max:8192M dom0=pvh
+> loglvl=all guest_loglvl=all sync_console noreboot console=com1,vga)
+> Linux Kernel: 7.1.5-arch1-2
+> 
+> --- Kernel Crash Log ---
+> [...]
+> [    0.817348] Oops: divide error: 0000 [#1] SMP NOPTI
+> [    0.817348] fbcon: Taking over console
+> [    0.823766] CPU: 3 UID: 0 PID: 1 Comm: swapper/0 Not tainted
+> 7.1.5-arch1-2 #1 PREEMPT(full)
+> 33708094282b4038de0f4f0d201b68f6a0b5d9bf
+> [    0.839766] Hardware name: MSI MSIS366/S3661, BIOS ES366AOC.10P 05/29/2025
+> [    0.847766] RIP: 0010:amd_smn_init+0x1ed/0x280
+> [    0.852766] Code: d2 45 31 f6 45 31 ed 66 41 f7 f4 89 c5 48 89 df
+> e8 c8 c7 1b fd 48 89 c3 48 85 c0 0f 84 48 ff ff ff 44 89 e8 31 d2 45
+> 8d 7d 01 <66> f7 f5 66 85 d2 75 42 66 90 eb 2c 41 0f b7 ce 48 8d b3 d0
+> 00 00
+> [    0.870766] RSP: 0018:ffffc9000004bdc8 EFLAGS: 00010246
+> [    0.878766] RAX: 0000000000000000 RBX: ffff888102661000 RCX: 0000000000000007
+> [    0.887766] RDX: 0000000000000000 RSI: ffff888102661000 RDI: 0000000000000000
+> [    0.895766] RBP: 0000000000000000 R08: 0000000000000282 R09: ffff888100f57680
+> [    0.903766] R10: ffffea0004044580 R11: ffff888100042700 R12: 0000000000000002
+> [    0.911766] R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000001
+> [    0.919766] FS:  0000000000000000(0000) GS:ffff8882b2010000(0000)
+> knlGS:0000000000000000
+> [    0.927766] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> [    0.935766] CR2: 0000000000000000 CR3: 0000000003822000 CR4: 0000000000750ef0
+> [    0.943766] PKRU: 55555554
+> [    0.943766] Call Trace:
+> [    0.948766]  <TASK>
+> [    0.951766]  ? __pfx_amd_smn_init+0x10/0x10
+> [    0.956766]  do_one_initcall+0x8e/0x3f0
+> [    0.959766]  kernel_init_freeable+0x24a/0x2d0
+> [    0.965766]  ? __pfx_kernel_init+0x10/0x10
+> [    0.967766]  kernel_init+0x1a/0x140
+> [    0.973766]  ret_from_fork+0x2a7/0x330
+> [    0.974766]  ? __pfx_kernel_init+0x10/0x10
+> [    0.982766]  ret_from_fork_asm+0x1a/0x30
+> [    0.988766]  </TASK>
+> [    0.989766] Modules linked in:
+> [    0.994772] ---[ end trace 0000000000000000 ]---
+> [    0.999769] RIP: 0010:amd_smn_init+0x1ed/0x280
+> [    1.004770] Code: d2 45 31 f6 45 31 ed 66 41 f7 f4 89 c5 48 89 df
+> e8 c8 c7 1b fd 48 89 c3 48 85 c0 0f 84 48 ff ff ff 44 89 e8 31 d2 45
+> 8d 7d 01 <66> f7 f5 66 85 d2 75 42 66 90 eb 2c 41 0f b7 ce 48 8d b3 d0
+> 00 00
+> [    1.004771] RSP: 0018:ffffc9000004bdc8 EFLAGS: 00010246
+> [    1.004773] RAX: 0000000000000000 RBX: ffff888102661000 RCX: 0000000000000007
+> [    1.004774] RDX: 0000000000000000 RSI: ffff888102661000 RDI: 0000000000000000
+> [    1.004775] RBP: 0000000000000000 R08: 0000000000000282 R09: ffff888100f57680
+> [    1.004776] R10: ffffea0004044580 R11: ffff888100042700 R12: 0000000000000002
+> [    1.004777] R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000001
+> [    1.004778] FS:  0000000000000000(0000) GS:ffff8882b2090000(0000)
+> knlGS:0000000000000000
+> [    1.004779] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> [    1.004780] CR2: 0000000000000000 CR3: 0000000003822000 CR4: 0000000000750ef0
+> [    1.004782] PKRU: 55555554
+> [    1.004784] Kernel panic - not syncing: Attempted to kill init!
+> exitcode=0x0000000b
+> (XEN) Hardware Dom0 crashed: 'noreboot' set - not rebooting.
+> 
+> Please let me know if any additional info would be helpful.
 
-Which is one of the problems with it. Why are we forcing people to use a long
-outdated version?
+Well, a pretty natural question: What amount of research have you done yourself?
+You really should have found [1], or maybe its v1 counterpart, or the earlier
+report(s) of what I think is this same issue.
 
 Jan
 
-> it's a library that has a quite stable API, and the pci
-> xen interface is supposed to keep backward compatibility.
-> 
-> Samuel
-> 
+[1] https://patchew.org/linux/20260814214255.83127-1-jason.andryuk@amd.com/20260814214255.83127-2-jason.andryuk@amd.com/
 
 
