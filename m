@@ -4,43 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D237EC5DF81
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2026 16:06:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1395662.1633974 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A4BDC5DF81
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2026 17:14:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1395707.1633982 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwio1-0004zS-B6; Wed, 19 Aug 2026 16:06:21 +0000
+	id 1wwjrM-00076B-1b; Wed, 19 Aug 2026 17:13:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1395662.1633974; Wed, 19 Aug 2026 16:06:21 +0000
+Received: by outflank-mailman (output) from mailman id 1395707.1633982; Wed, 19 Aug 2026 17:13:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwio1-0004zL-8E; Wed, 19 Aug 2026 16:06:21 +0000
-Received: by outflank-mailman (input) for mailman id 1395662;
- Wed, 19 Aug 2026 16:06:20 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wwio0-0004zF-7P
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 16:06:20 +0000
+	id 1wwjrL-000764-UX; Wed, 19 Aug 2026 17:13:51 +0000
+Received: by outflank-mailman (input) for mailman id 1395707;
+ Wed, 19 Aug 2026 17:13:50 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <brchuckz@aol.com>) id 1wwjrK-00075y-F4
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 17:13:50 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwinz-00A1fF-60
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 18:06:19 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wwjrJ-00Cm3g-Oq
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2026 19:13:49 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a85d46a-bab6-0a2a0a5309dd-0a2a4503bf1a-36
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 18:06:19 +0200
-Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a85d47a-fae8-0a2a45030019-d155dd34a883-3
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 18:06:18 +0200
-Received: by mail-wr1-f52.google.com with SMTP id
- ffacd0b85a97d-47db714766aso41712f8f.0
- for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 09:06:18 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
- [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499a9e784b3sm61369175e9.3.2026.08.19.09.06.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Aug 2026 09:06:17 -0700 (PDT)
+ (envelope-from <brchuckz@aol.com>)
+ id 6a85e426-2eae-0a2a0a5409dd-0a2a450782bc-46
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 19:13:49 +0200
+Received: from [98.137.68.31] (helo=sonic308-55.consmr.mail.gq1.yahoo.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <brchuckz@aol.com>)
+ id 6a85e44b-b4ea-0a2a45070019-6289441fb108-3
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Aug 2026 19:13:49 +0200
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic308.consmr.mail.gq1.yahoo.com with HTTP; Wed, 19 Aug 2026 17:13:47 +0000
+Received: by hermes--production-bf1-54b5569bdc-t2h4f (Yahoo Inc. Hermes SMTP
+ Server) with ESMTPA ID 742b15b49534c807090a38b8b6396e9e; 
+ Wed, 19 Aug 2026 17:13:45 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,651 +50,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Content-Language:References:Cc:To:Subject:From:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787155578; x=1787760378; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:subject:from:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=V3aCry1tuYFSYd1HvBy8Hn801kksHmedceglL/moChE=;
-        b=lRArQjA5sv4nXXOFpMhz5qi4p9OyC1ddSDHNs5Ht1fFrnUU19KEZEUggTpc6FI+1nz
-         Ktpcjj8jqkPBoIzF81R2xchyX4TePR9ri67RAt7moS9Rr/j1R0HZMaSv783uuJAiSyi5
-         odXwbpeAkJKDi/M1rPtRvCFR6Y4+ofOcQ2ppnpP4yIk2Mr6PzkqKP+bxBzgyiQCd+o23
-         QsZGYO2OGVyQZ5TYX54m1qyX/sPjGQ4qA3wGr5ZKE+TacBO241/t/1p++IAuHJQQ9ADC
-         AOVbBbPsypcElb35Fs2Dd1EXhNINhMmzSaUkbMh9gRPqasoyq3shPZsFdX2pUZbgcdAi
-         9Hvg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787155578; x=1787760378;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:subject:from:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=V3aCry1tuYFSYd1HvBy8Hn801kksHmedceglL/moChE=;
-        b=H0MuoiD5I33suu1+beU9KyKLAsJ17Ff5q2LlUAptWqqnALEfdqxS3Gr6+UxZk1gRuZ
-         OL8a7s4S1kBSlUHVIfFPmQTnpNJ7fovkX9BYJG1r/Ba44Eo4FTzvSZcoDbjqYkzGB0xv
-         ruWyzF8qCHvlDIL7d4u0ncu366V1jBc8TtApLXdsGK9+MiyCsN7Q9yPfxkisSIhAtb79
-         BiTCfS/uT4XlpydQo5+OtdyMGZrU9dDWLYJ198mBjUrt6eO558hh+RrqBfe+jrHrbxxy
-         n8ue5dnEhvX4nwvlWRMqFovYPUybDmnok85h3Bcw/qBnZY68BtX0hA/74xKOv4ZDIcX7
-         HI2g==
-X-Forwarded-Encrypted: i=1; AHgh+RrcId/9rRS+dIX3Yy6p+2jHEaxYQKHefjwBz+TTZjhNArBiDX6fyTdNoaMxd5H5r4f8MzOp7xAj1Oo=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzLJwI67mBArOkHfH+I4I5QPNz8rsgCAhEgTwqmd29BRFwzRIoM
-	s2hJ19scd0+v1hvH/zoMcVqIbX5P0y8tZja9gFzBdfatgJHn09IM4T9Q
-X-Gm-Gg: AR+sD128mn63MY5OHUzx+/goW6V+TQ0dP0oXtq+TdMoP5u01S1vlX2Qi9R6Y69KAjya
-	MoX5QCct0bF71eqkQg9NlGiDMWPlK7cyiMlrRHvnPVyaFlN2auMJj025JCyTYs14t7uo45ErgCU
-	LMXDtUZ1zoIO5hbUpONxJoig/SYiDLSBNy+zqjWNjZNozuDS0HEFIjphuAajYh+kaDoPQz25a+S
-	YBVAHUc0q8G2kqfdEEydx6dOj1/cpmuaq5o+UixFIOqre5uxCvqb6+C/yVjaO7848oBZgKsuloo
-	8Hr6WymBmMur5lP+CE1t2rS+dBQP/9w/Emvbl8LWSJysALFUUwsJ0gGx2Pv8wQS6HdwApUxcK0S
-	n9X0fgd3CbR4uXstc7xrTyFLK7SO5J9uhHMzx89NAGPnc7Qz0D8sJW0rdXctWEOMQXEsgugbRmr
-	qZt1GtOpwPXjUPbhbq9ELyfb2qoULVcakpSBs1cVBuqarIiO/6Gphy5GJH82Rcd/vNJGarhpfg2
-	Ph2/eBSq5C6NkZETGEQ8+1s2rRD2D0p9UHTnU7ygqY=
-X-Received: by 2002:a05:600c:1f85:b0:499:90d0:4906 with SMTP id 5b1f17b1804b1-499b06bf1a1mr3549415e9.5.1787155578048;
-        Wed, 19 Aug 2026 09:06:18 -0700 (PDT)
-Message-ID: <aff1f879-48c6-4047-a6c1-237a350e0f35@gmail.com>
-Date: Wed, 19 Aug 2026 18:06:16 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1787159627; bh=BanAkv7rgc8Cm9c0aFLe97SGo72w3NkF9rLVAthNeQQ=; h=Date:Subject:To:Cc:References:From:In-Reply-To:From:Subject:Reply-To; b=HsM/Au0jM8VK870ek+t9k8ep3KXLMNzFohuKoFKvsmRYQiJCqd1ffRRWrncFnhlOUf4c1RwYb2itcnEfvQHv1CWn2zDOaLSjRwGVwjMD650PUwRM/PLvU2lXkIjraM3e6eVXzA32KODVDHmNNU1cXxA9ERatgzFppxkk1xiiaYkNivp1omXHQmXNByZVOGHsPkU6B85xUZ9STMWZkhwV2uU7X+zkIyjXimAuH546EMWctkyWDXcYgn2DqiBIV/LLkn/af/yXz+y3NEaEcZWdvd1c9m3B5FKiklo/HpdygN3zN0c1y/B6O9S3rx/LcRqcf0jz7j8X6bKAfLC5+FZmWw==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1787159627; bh=bOQF6M36pSZCahM7VdwAAR/NtnEHpJ7B+U55I/q8XeI=; h=X-Sonic-MF:Date:Subject:To:From:From:Subject; b=NEM5pY58Myc/T9ZHXKD+bCoPyy+KANjAW+dTokG6rrm6rtPUEXBpYYD8km+jBfrwht5DW09Gc8enknCssXJ0klmLJt83U/47lmmqgWw3v0J6nLGMOd0mphRFzHHBpancTKnpYnl/SBrontXqSpHBYiYkcTuM42vsYPkUvd7B1f4wlGTrwlX5fMQFGLxdmBpZvtTUmOoqW24U1bwa567c2V6wvipTUosMzENxvTI/kfAA68Xv6Cj3uSNqYNRs4ZLbXQlqkDwvzSsv+pFAM3hOoacYctadeZHZcKOvO+tJb824qF7dZp4GxOrZsar/gWQMDmCEgTxUcvzMZS2ZRFcPnQ==
+X-YMail-OSG: I47cM1cVM1kgh0nrQvai66kGGwf.OQnEcPY_KKa6ubPsjpmNb1m.cAe9xxsraL9
+ lR.agm7gh9T5pVLcVdi.lvsQfGO89Sj0Do5FjgW18spVhO4AZkw_qV4aUjyal._JJi4NiBCO9qbl
+ NmKwURDqoGtPYDqEK5JmBnVDJmzlzH73pp2OHo0Xycef9Wg8GY4.M2TiH4342VfyvUyzZBiajTON
+ cPRiRYqSfEtRju3UeoKKnue3vbcV4Uf5wMHivUN18JzHP.sfew3QKbhNgUKxT8OL2y.NiUPFNLM0
+ C59Y2KGmBoaPtHJHd84kAAdskmsFFjOvMfXsb3NS1D5iNaVG4MoMUgW4SjT_VxBbM6PyrRcf5N79
+ FgriVgpZk60SGw.GTw63IzlLLAQQras.bLwowZDY83dIW0q5bo4DGb2qY3DroeQK8XPZ7zAidWqM
+ fwzfav1pMmlbdo_TPccMRXnBiCVxolelSMd6g94VL8RR618u1ehTstEa4bTBwZ0.JheWxplDGFov
+ qmMBjtP0mBEeX.w5rR9PjATdL2KPR5VfVhYc23MwET2LdhS_uCS9ckViTfINclegtLugH6mJJcrm
+ GCksJD4sfekYro7WglZkfcN35G4TXPY6gpOFk1_yd2oluAay4Y3jdzfACKLjvCIwNry6GBo4W0B_
+ 43SK.EYE5cnP6I_Sv8u.1m3gietWkqml5GPE6u5UxhGG24swj3zZ4oOsQzJcCAKr0Ujcjne8qqaK
+ AOH3NDEcsxE.7XyV33mB.dWk8HOyYJ7Kn4UtvqrcLU46h2rhN9kVQ1poHKMh.hQH4DciqrURDmY5
+ AW7gpddl2ebUkqXxk05UP3AA0wPqzcFFyazNwGUY6YMnEh8nOn9..dMWI9BL0vlbik0wd276e7M1
+ 7ceWZfrD9Mln_36kmG7ewXcqEjRBUXmy8xz3NLmvj0mnCJ0jIllSpSrh9s.jXMQ0t.ZRogXZNIr9
+ pA0hN67nFSOaBBdPOoRABGzgQO0dYSaDPZhz8QsK7wdywYD6oFRquo0a2SZ2exu_67EncDq0Qe9P
+ UnFjgvPKtckTz0Yx8RPxJH6oozQ_jdbFzJ9zoChY05hSOla_.ZQgnEMrIqIi1HWWwexfQxdbIMIe
+ aLcEM5fiomtJXrKYVx2Q3Fpkg0nKwjFoPg.XaJvCYZP67yt8YHMmf3heBqyrvPLwyWRi0GMbGBkr
+ IWaJi9lCtjvhJ.B5WNsIPW_8znlYAfbuCicRXtAxRAXs2PTGGBrDEaM_vH1YbK0DTnFdOIm4hWSU
+ P6Q7mlZ_kbTn0hYnniF39NFU02S8EOHpR670ZBDOmMH8ZhH.IU49AAz4zJIujHjkWf_UbT5ILNaN
+ tuWP4I9KbdJJrL6yzUkFu.77VC0bslbi7c25zT2WyyWLNKDm_uTtEC6I02kQU.fYzGtqUFXyrjOL
+ S1Spa3MY2TeKmz28Pk9YQZvSzQw8XgV_gx4gPaCxdzE0P1NPgosg_VrP4zpl3WJwGz8BZMU6.hc5
+ YQs8YfLctMkUEmT0k9_v0p5G20yBNKbdz9Vq6kUh.a3YcaCmj9Xh8qzi6nYhlYfNYjYB2MIGAHwT
+ .jldyJB02PtyFDT.4WJ7RyiqEevt84XK3ufUCOTGkc5CCI.iEWRjpuRhFSG6ZkZnHX8m9J5WFJGi
+ GbFRFZiXl8f0wQUmR3_q3jP7TVPRNIu8AnhZRXyrF_T7r4uXnSktYNXPj7e5vKa90ZikIHzaCemW
+ uB7yic_0CI0.8xLe48RJC29qxsiiANI9h6_mTObTjLYLNbJqO8l_ZIbDuEq.0bb_4WOHvMK1JhyT
+ ndRDqYdlr5Bjs74WnBV50YGg92hxQHnpnA9wtEXgFZLk.SYixbOUKmdcsjMSttTnhscWU4hICMOU
+ zZ2.GrxVBJvdmY9uXGfhSF4jSL9RJjvasM5PAf7Zfm2G2WilzsifsDDHTGwMrA7rfWfQfj6FUkCA
+ wOHE.Ivmpy5BykTKexO_h7JcM3ypWNJAA5e5YvK.vZXwYpwQwonGGjIJR.BtMvh7S3SbOmu40oqG
+ dkeMJ.0Oq5L_.UW5_uMxCB6HXyycf5XZ6kVpRbdyARZ5btFtpw4mLe32RSn63zDQJr5ainQ.lIyF
+ AHKHQaAI4bbMh3lmkNvzBY7xUzcWPPcfHijHpwbs2y28SPxCqG0yK8FVsg40HfBMdA7.HYsy9ria
+ p7Rtqp17YdFWQWcub5KsJfi_ycoiCh2p4iIyk3YKhU_6GVVwMYNm5MK5MQHiyHd3Qh56PuWaKNox
+ PVK7znSjMBroqX79WmjeeW7bsBiVslHKN2yAhR6ZlQtix
+X-Sonic-MF: <brchuckz@aol.com>
+X-Sonic-ID: 7905f90b-7e4e-497a-aa21-e5becffaebf2
+Message-ID: <b14969c8-9676-404e-b7cc-ce13a6d7ff94@aol.com>
+Date: Wed, 19 Aug 2026 13:13:43 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: Re: [PATCH v1 16/17] xen/riscv: add guest load emulation for trapped
- MMIO accesses
+Subject: Re: [PATCH v2] tools/hvmloader: implement Intel IGD extended VBT
+ support
 To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+Cc: qemu-devel@nongnu.org, Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
- <9b18a20367754605efd6a6b5bf09d4483d9c3ab2.1784560663.git.oleksii.kurochko@gmail.com>
- <7a2e46da-5b1f-448e-aba3-7eefe0a61950@suse.com>
+ Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>,
+ xen-devel <xen-devel@lists.xenproject.org>
+References: <20260802050824.10554-1-brchuckz.ref@aol.com>
+ <20260802050824.10554-1-brchuckz@aol.com>
+ <2110d4b7-ae37-47aa-99be-ab59e16f6167@suse.com>
+ <67579eba-e222-41dd-84bf-8440d2eaf2a9@netscape.net>
+ <da2200cd-def7-4cce-a6c2-9f9ac9e202ce@suse.com>
+ <de56c8bd-f0e8-4fe9-8cf5-f6807698176c@aol.com>
+ <02a7dc18-4184-4e86-84cb-121769187f71@suse.com>
+ <1858e8e6-73fa-4017-93e2-c733fbf0ec8d@aol.com>
+ <d6e603bf-8dc5-4ac7-842f-ff9d1f67b98f@suse.com>
+ <fdec0b6b-eddf-4a36-a755-c67963daa9ea@aol.com>
+ <6ecf80ef-2f0e-44fb-beab-dbcf065a4431@suse.com>
+ <bb44067c-6739-4e83-a0fd-cc7ea797048f@aol.com>
+ <4c58bda6-e9ed-438d-b96e-feda74a6c4c7@suse.com>
+ <31a5870f-2a4d-4dc0-af9c-f0567e0f6fb3@aol.com>
+ <db8fd04d-bbc7-41c7-8473-b821d7f77d5f@aol.com>
+ <302ed12f-40ca-405c-80ca-ac4f2785d754@suse.com>
+ <cdae1785-4d9a-4aab-929e-de55c26b7b94@aol.com>
+ <10cd9f6b-678b-407b-a51e-70e9ed7a35fd@aol.com>
+ <131b1252-b108-4b4c-8457-673ff0d20d5e@suse.com>
 Content-Language: en-US
-In-Reply-To: <7a2e46da-5b1f-448e-aba3-7eefe0a61950@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1787155579-768FA4E9-506633C2/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 22051
+From: Chuck Zmudzinski <brchuckz@aol.com>
+In-Reply-To: <131b1252-b108-4b4c-8457-673ff0d20d5e@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailer: WebService/1.1.26254 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
+X-purgate-ID: tlsNG-ef75cf/1787159629-350CDAE4-A89C5524/0/0
+X-purgate-type: clean
+X-purgate-size: 2659
 
-
-
-On 8/13/26 9:15 AM, Jan Beulich wrote:
-> On 29.07.2026 15:40, Oleksii Kurochko wrote:
->> Introduce emulate_load() to decode and emulate guest load instructions
->> that fault due to MMIO accesses. This provides the basic infrastructure
->> required for MMIO emulation on RISC-V.
->>
->> The instruction decode (decode_trapped_insn() and the mask/match chain
->> for standard and compressed load encodings) is adapted from Linux's KVM
->> RISC-V implementation. The completion path differs from KVM's,
->> since Xen dispatches MMIO synchronously to an in-hypervisor handler via
->> try_handle_mmio() and has no userspace exit/return step equivalent to
->> KVM's kvm_io_bus_read() / KVM_EXIT_MMIO / kvm_riscv_vcpu_mmio_return()
->> split.
->>
->> A fault taken while re-reading the trapped instruction is handled
->> depending on the faulting translation stage:
->>   - A VS-stage fault is the guest's own fault (e.g. it modified its page
->>     tables from another vCPU) and, as in KVM, is redirected to the
->>     guest's trap vector, with the cause remapped to
->>     CAUSE_FETCH_PAGE_FAULT since HLVX reports execute-permission failures
->>     as load faults.
->>   - A G-stage fault would mean the P2M mapping of the instruction page
->>     disappeared after the instruction was fetched. KVM must handle this
->>     by resuming the guest and retrying, as Linux MM can invalidate
->>     G-stage mappings at any time. Xen does not remove P2M mappings of a
->>     running domain at the moment, so this case is asserted unreachable with
->>     BUG_ON(); it will need to be revisited once such removal is implemented.
+On 8/19/2026 9:51 AM, Jan Beulich wrote:
+> On 19.08.2026 14:36, Chuck Zmudzinski wrote:
+>> On 8/19/2026 8:16 AM, Chuck Zmudzinski wrote:
+>>> Yes, I agree that v3 of the patch to hvmloader should presume that the DM can get
+>>> a copy of the OpRegion and read its contents so most of this can be done in the
+>>> DM instead of in hvmloader. So from hvmloader's perspective, the patch will be more
+>>> about avoiding the layering violation than anything else.
+>> 
+>> However, there is one advantage, from the viewpoint of the Xen virtualization platform
+>> as a whole, to do the patching of the OpRegion in hvmloader instead of in the DM.
+>> 
+>> If we patch the OpRegion in hvmloader as v2 of this patch does, we provide a common
+>> solution for extended VBT support for Intel IGD devices that would be compatible with
+>> all DM implementations, not just with Qemu. So why not do the patching of the OpRegion
+>> in hvmloader?
 > 
-> I don't see why this cannot be implemented correctly right away. The behavior
-> should be that of an access to unpopulated space on bare hardware, whatever
-> that behavior is on RISC-V.
-
-I wasn't able to find a spec what should be returned in this case but in 
-QEMU source code I founded (unassigned_mem_ops → MEMTX_DECODE_ERROR → 
-io_failed() → riscv_cpu_do_transaction_failed().):
-
-void riscv_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
-                                      vaddr addr, unsigned size,
-                                      MMUAccessType access_type,
-                                      int mmu_idx, MemTxAttrs attrs,
-                                      MemTxResult response, uintptr_t 
-retaddr)
-{
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
-
-     if (access_type == MMU_DATA_STORE) {
-         cs->exception_index = RISCV_EXCP_STORE_AMO_ACCESS_FAULT;
-     } else if (access_type == MMU_DATA_LOAD) {
-         cs->exception_index = RISCV_EXCP_LOAD_ACCESS_FAULT;
-     } else {
-         cs->exception_index = RISCV_EXCP_INST_ACCESS_FAULT;
-     }
-
-So RISCV_EXCP_INST_ACCESS_FAULT (in Xen it is CAUSE_FETCH_ACCESS) will 
-be fine to return.
-
-So do the following:
-
-             if ( is_load_guest_page_fault(utrap.scause) )
-                 utrap.scause = CAUSE_FETCH_ACCESS;
-
-will be fair enough instead of: 
-BUG_ON(is_load_guest_page_fault(utrap.scause)).
-
-Probably, we want to rename CAUSE_FETCH_ACCESS to be closer to RISC-V 
-spec as for value 1 in spec it is used:
-    1 Instruction access fault
-Interesting that all other CAUSE_* defines are aligned with the spec...
-
+> As indicated before: If the OpRegion holds data that is needed to drive the
+> device, and if the OpRegion is exposed writable to guests, then guest can
+> screw up that data such that subsequent guests won't work anymore. Hence
+> exposing to guests (which includes hvmloader) needs to be stopped, or at
+> least be limited to r/o. That, in fact, includes exposing to any privilege-
+> restricted DM as well.
 > 
->> @@ -13,6 +14,11 @@ struct trap_info {
->>       register_t stval;
->>   };
->>   
->> +static inline bool is_load_guest_page_fault(unsigned long scause)
->> +{
->> +    return (scause == CAUSE_LOAD_GUEST_PAGE_FAULT);
->> +}
-> 
-> Is something like this really a useful wrapper to have? It doesn't really
-> shorten anything, nor does (imo) it aid readability.
-> 
->> @@ -191,6 +193,11 @@ static void timer_interrupt(void)
->>       raise_softirq(TIMER_SOFTIRQ);
->>   }
->>   
->> +static always_inline void advance_pc(struct cpu_user_regs *regs, int step)
-> 
-> See my earlier remark regarding always_inline. Also - why plain int? Are
-> there (going to be) cases where PC is moved backwards (in which case
-> "advance" isn't suitable naming)?
+> Exposing r/o may be entirely okay (i.e. may not be a layering violation),
+> depending how exactly an OpRegion surfaces for a device (on the host). Aiui
+> it's not addressed by any of the BARs, yet it looks like it needs similar
+> treatment.
 
-No, it won't. At least, I don't see such use cases now. I'll use 
-unsigned int instead.
+Yes, the OpRegion is not one of the BARs as specified by the PCI specs, but
+it functions more or less like a BAR region with the devices's ASLS register
+at offset 0xfc in the PCI device config space of the device acting like the
+BAR for that region.
 
-> 
->> +{
->> +    regs->sepc += step;
->> +}
->> +
->>   static always_inline unsigned long get_faulting_gpa(void)
->>   {
->>       /*
->> @@ -210,9 +217,162 @@ static always_inline unsigned long get_faulting_gpa(void)
->>       return (csr_read(CSR_HTVAL) << 2) | (csr_read(CSR_STVAL) & 0x3);
->>   }
->>   
->> +/*
->> + * Determine the trapped instruction which caused a guest MMIO trap.
->> + *
->> + * Returns true if the trap was redirected to the guest, in which case
->> + * the caller must stop emulation and return success. Otherwise *insn
->> + * and *insn_len are filled in and the caller should continue decoding.
->> + */
->> +static bool decode_trapped_insn(unsigned long htinst, unsigned long *insn,
->> +                                unsigned int *insn_len)
->> +{
->> +    if ( htinst & 0x1 )
->> +    {
->> +        /*
->> +         * Bit[0] == 1 implies trapped instruction value is
->> +         * transformed instruction or custom instruction.
->> +         */
->> +        *insn = htinst | INSN_16BIT_MASK;
->> +        *insn_len = (htinst & BIT(1, UL)) ? INSN_LEN(*insn) : 2;
-> 
-> In the if() you don't use BIT(), while here you do. Please be consistent.
-> 
-> Why the use of INSN_LEN(), when due to the earlier assignment it'll always
-> yield 4 here?
+Actually, in hvmloader code, this value of 0xfc for the OpRegion ASLS register
+is added to the header file where all the other registers defined by the
+PCI spec live: tools/firmware/hvmloader/pci_regs.h, but in that file it is
+defined by the PCI_INTEL_OPREGION macro.
 
-ld/sd instruction which we are trapping here at the moment here could be 
-2 bit and 4 bit depends on C extension so we need to pass correct 
-instruction length to advance_pc() after it is emulated.
+So this is another cleanup of this I could do along with this patch: Remove
+the define of PCI_INTEL_OPREGION from pci_regs.h (after all, it is not part
+of the PCI spec anyways) and pci.c (or the new intel-opregion.c file if some
+version of it survives until later versions of this patch) can get the value
+for the ASLS register from a header where specs for the IGD OpRegion are
+located instead, or it can just be added to config.h where the other IGD related
+definitions currently are in hvmloader code.
 
-> 
-> Finally, how would the caller know whether it looks at a transformed insn
-> or (as fetched below) a "normal" one?
-
-According to the spec ((part from htinst ... ):
-On a synchronous exception, if a nonzero value is written, one of the 
-following shall be true about the value:
-
-• Bit 0 is 1, and replacing bit 1 with 1 makes the value into a valid 
-encoding of a standard instruction.
-In this case, the instruction that trapped is the same kind as indicated 
-by the register value, and the register value is the transformation of 
-the trapping instruction, as defined later. For example, if bits 1:0 are 
-binary 11 and the register value is the encoding of a standard LW (load 
-word) instruction, then the trapping instruction is LW, and the register 
-value is the transformation of the trapping LW instruction.
-
-• Bit 0 is 1, and replacing bit 1 with 1 makes the value into an 
-instruction encoding that is explicitly designated for a custom 
-instruction (not an unused reserved encoding). This is a custom value. 
-The instruction that trapped is a non-standard instruction. The
-interpretation of a custom value is not otherwise specified by this 
-standard.
-
-• The value is one of the special pseudoinstructions defined later, all 
-of which have bits 1:0 equal to 00.
-
-So setting bit 0 to 1 we will guarantee that it is normal "normal" 
-instruction.
-
-> 
->> +    }
->> +    else
->> +    {
->> +        struct cpu_user_regs *regs = vcpu_guest_cpu_user_regs(current);
-> 
-> Pointer-to-const.
-> 
->> +        struct trap_info utrap = { 0 };
-> 
-> Just {} please.
-> 
->> +        /*
->> +         * Bit[0] == 0 implies trapped instruction value is
->> +         * zero or special value.
->> +         */
-> 
-> How come you get away without dealing with pseudoinsns? The insn pointed at
-> by regs->sepc is of no interest for faults caused by implicit memory accesses
-> originating from VS-stage address translation.
-
-It is really problem but I think it should be resolved much earlier in 
-handle_guest_page_fault(). I will add the following:
-
-/*
-      * A guest page fault taken on an implicit memory access performed for
-      * VS-stage address translation (reading a PTE, or updating its A/D 
-bits)
-      * reports a pseudoinstruction in htinst rather than a transformed
-      * instruction. Such a fault can't be emulated: htval holds the guest
-      * physical address of a VS-stage PTE rather than of any access the 
-guest
-      * itself performed (and its two least significant bits are zero 
-instead
-      * of matching stval), while the instruction at sepc is unrelated 
-to the
-      * access which actually faulted.
-      *
-      * Report an access fault to the guest at the original virtual address,
-      * which is what stval already holds and what hardware would raise 
-for a
-      * page table walk hitting an inaccessible address.
-      */
-     if ( (htinst == INSN_PSEUDO_VS_LOAD) || (htinst == 
-INSN_PSEUDO_VS_STORE) )
-     {
-         struct cpu_user_regs *regs = vcpu_guest_cpu_user_regs(current);
-         struct trap_info utrap = {
-             .scause = (htinst == INSN_PSEUDO_VS_LOAD) ? CAUSE_LOAD_ACCESS
-                                                       : CAUSE_STORE_ACCESS,
-             .sepc = regs->sepc,
-             .stval = csr_read(CSR_STVAL),
-         };
-
-         riscv_trap_redirect(&utrap);
-         return;
-     }
-
-and will update the comment:
-
- >> +        /*
- >> +         * Bit[0] == 0 implies trapped instruction value is
- >> +         * zero or special value. It can't be pseudoinstruction as 
-it is guaranteed by check in handle_guest_page_fault().
- >> +         */
-
-> 
->> +        *insn = riscv_vcpu_unpriv_read(true, regs->sepc, &utrap);
->> +        if ( utrap.scause )
->> +        {
->> +            /*
->> +             * A G-stage fault here would mean the P2M mapping of the page
->> +             * containing the trapped instruction disappeared after it was
->> +             * fetched.
-> 
-> Does it? What about, again, faults from VS-stage address translation while
-> hardware was trying to fetch an insn? That is ...
-> 
->> Nothing removes P2M mappings of a running domain yet,
->> +             * so this cannot happen.
-> 
-> ... the necessary P2M mapping may never have been there.
-
-If VS-stage failed then CAUSE_LOAD_PAGE_FAULT will happen so BUG_ON() 
-won't occur and it will be passed to guest to handle it.
-
-BUG_ON() here catches CAUSE_LOAD_GUEST_PAGE_FAULT (G-stage translation 
-failure).
-
-Also, as I mentioned above I will change BUG_ON() too:
-
-             /*
-              * If during getting of trapped instruction a fault happen in
-              * G-stage translation then CAUSE_LOAD_GUEST_PAGE_FAULT is
-              * generated. Such faults during this operation is 
-considered as
-              * bus
-              */
-             if ( is_load_guest_page_fault(utrap.scause) )
-                 utrap.scause = CAUSE_FETCH_ACCESS;
-
-
-> 
->> +             * TODO: Revisit once P2M mappings can be removed at runtime.
->> +             */
->> +            BUG_ON(is_load_guest_page_fault(utrap.scause));
->> +
->> +            utrap.sepc = regs->sepc;
->> +            utrap.stval = utrap.sepc;
-> 
-> How do you know the fault was at .sepc? A 32-bit insn crossing a page boundary
-> (implying the C extension is available) may well fault only on its higher half.
-
-According to the spec, if stval is written with a nonzero value when an 
-instruction access-fault or page-fault exception occurs on a system with 
-variable-length instructions, then stval will contain the virtual 
-address of the portion of the instruction that caused the fault, while 
-sepc will point to the beginning of the instruction.
-
-So here, we are trying to emulate what real hardware will do in this 
-case. In regs->sepc, we have the start of the instruction that we didn't 
-touch. sepc is filled according to the spec in this case.
-
-Regarding utrap.stval, we know that utrap.sepc points to the correct 
-part of the faulting address, as we are reading the instruction in 
-16-bit chunks:
-
-HLVX_HU(%[val], %[addr])        ; low 16 bits from sepc
-andi %[tmp], %[val], 3
-addi %[tmp], %[tmp], -3
-bne  %[tmp], zero, 2f           ; if not (insn & 3) == 3 -> 16-bit, end
-addi %[addr], %[addr], 2        ; <- addr is now sepc+2
-HLVX_HU(%[tmp], %[addr])        ; high 16 bits, possibly from another page
-
-So, if a trap happens while reading the high 16 bits (which may be 
-located on another page), then utrap.sepc, if the read fails, will point 
-to the high part of the instruction, which is what the spec requires.
-
-Does that make sense?
-
-> 
->> +            riscv_vcpu_trap_redirect(&utrap);
->> +
->> +            return true;
->> +        }
->> +
->> +        *insn_len = INSN_LEN(*insn);
->> +    }
->> +
->> +    return false;
->> +}
->> +
->> +/*
->> + * Check alignment and dispatch a decoded MMIO access to a registered
->> + * handler. On success (0), info->data holds the read value for loads.
->> + */
->> +static int do_mmio(mmio_info_t *info, unsigned long fault_addr,
->> +                   unsigned int len)
->> +{
->> +    /* Fault address should be aligned to length of MMIO */
->> +    if ( fault_addr & (len - 1) )
->> +        return -EIO;
->> +
->> +    info->gpa = fault_addr;
->> +    info->len = len;
->> +
->> +    switch ( try_handle_mmio(info) )
->> +    {
->> +    case IO_HANDLED:
->> +        return 0;
->> +    case IO_ABORT:
->> +        return -EIO;
->> +    default:
->> +        return -EOPNOTSUPP;
->> +    }
->> +}
-> 
-> And there's no indication of "retry needed", e.g. when something changed
-> between find_mmio_handler() and handle_{read,write}()?
-
-I don't have any specific scenario where it is needed now so I don't 
-know what to say.
-And there is no race between find_mmio_handler() and 
-handle_{read,write}() as find_mmio_handler() returns copy of the 
-structure under read_lock():
-/*
-  * Return a copy of the matching handler rather than a pointer into
-  * vmmio->handlers: a concurrent register_mmio_handler() shifts entries
-  * up to keep the array sorted, so an escaped pointer could refer to a
-  * different (or torn) entry once the lock is dropped. The copy stays
-  * valid as the ops structures are never freed.
-  */
-static bool find_mmio_handler(struct domain *d, paddr_t gpa,
-                               struct mmio_handler *out)
-{
-     struct vmmio *vmmio = &d->arch.vmmio;
-     struct mmio_handler key = { .addr = gpa };
-     const struct mmio_handler *handler;
-
-     read_lock(&vmmio->lock);
-     handler = bsearch(&key, vmmio->handlers, vmmio->num_entries,
-                       sizeof(*handler), cmp_mmio_handler);
-     if ( handler )
-         *out = *handler;
-     read_unlock(&vmmio->lock);
-
-     return handler != NULL;
-}
-
-At the moment, use cases are pretty strainghforward, a device from guest 
-trying to read/write into MMIO and so the result logically could be or 
-it is successfully handled or some issue happened and it is just 
-aborted. As a real hardware will do, I think.
-
-> 
-> Also, nit: Blank lines please between non-fall-through case blocks.
-> 
->>   static int emulate_load(unsigned long fault_addr, unsigned long htinst)
->>   {
->> -    return -EOPNOTSUPP;
->> +    struct cpu_user_regs *regs = vcpu_guest_cpu_user_regs(current);
->> +    mmio_info_t info = { .is_write = false };
->> +    unsigned long insn;
->> +    unsigned int shift = 0, len, insn_len;
->> +    bool is_unsigned = false;
->> +    int rc;
->> +
->> +    if ( decode_trapped_insn(htinst, &insn, &insn_len) )
->> +        return 0;
->> +
->> +    /* Decode length of MMIO and whether it is a sign- or zero-extending load */
->> +    if ( (insn & INSN_MASK_LB) == INSN_MATCH_LB )
->> +        len = 1;
->> +    else if ( (insn & INSN_MASK_LBU) == INSN_MATCH_LBU )
->> +    {
->> +        len = 1;
->> +        is_unsigned = true;
->> +    }
->> +    else if ( (insn & INSN_MASK_LH) == INSN_MATCH_LH )
->> +        len = 2;
->> +    else if ( (insn & INSN_MASK_LHU) == INSN_MATCH_LHU )
->> +    {
->> +        len = 2;
->> +        is_unsigned = true;
->> +    }
->> +    else if ( (insn & INSN_MASK_LW) == INSN_MATCH_LW )
->> +        len = 4;
-> 
-> Already up to here this demonstrates a weakness of the INSN_MASK_*
-> set of #define-s (which I similarly observe in binutils, and I expect it
-> all has the same questionable origin). All INSN_MASK_L* and INSN_MASK_FL*
-> (also INSN_MASK_S* and INSN_MASK_FS*) are identical, allowing for a nice
-> switch() to be used here in principle. That said, with access width
-> nicely encoded in FUNCT3, it's not even clear whether a switch() would
-> end up being needed / efficient.
-
-.......
-
-> 
-> Otoh none of these masks cover the pseudoinsns that htinst may supply.
-
-As I answered above we should handle that before this function will call 
-so here we won't deal with htinst at all. Of course, if what I wrote 
-above is correct. I will double check before applying that.
-
-> 
-> Further, what about A-extension insns? Some (if not all) of them can
-> plausibly be used on MMIO, I think.
-
-I’m not really sure that the A-extension is actively used for MMIO. At 
-least, Linux doesn’t do that for now, which is why we don’t handle 
-A-extension instructions here.
-
-I think this is related to the fact that MMIO is usually (if not 
-always?) naturally aligned, and naturally aligned loads and stores are 
-guaranteed by RISC-V to execute atomically.
-
-Anyway, since we don’t have a case for this for now, I think we could go 
-with the current emulation. If this turns out not to be true in the 
-future, A-extension support can be added separately.
-
-> 
->> +#ifndef CONFIG_RISCV_32
->> +    else if ( (insn & INSN_MASK_LWU) == INSN_MATCH_LWU )
-> 
-> First: Better use IS_ENABLED() in favor of #if{,n}def, whenever possible.
-> And then this depends not only on CONFIG_RISCV_32, but also on guest
-> bitness.
-
-Both points taken. The #ifndef will become a condition in the if-chain; 
-the INSN_MATCH_/INSN_MASK_ definitions are unconditional in 
-riscv_encoding.h, so that builds either way.
-
-On guest bitness you're right, and it's worse than the 32-bit-only 
-encodings being reserved in RV32: the compressed RV64 encodings collide 
-with the RV32 single-precision float ones — C.LD and C.FLW are both 
-0x6000 under mask 0xe003, likewise C.SD/C.FSW, C.LDSP/C.FLWSP and 
-C.SDSP/C.FSWSP. A 32-bit guest doing a c.flw to an emulated MMIO region 
-would be decoded as c.ld, i.e.an 8-byte access with the result written 
-to an integer register.
-
-I'll fold both into a helper returning the guest's effective XLEN
-(hstatus.VSXL, or vsstatus.UXL when the trap was taken from VU-mode, and
-unconditionally 32 for a RV32 build) and gate the RV64-only cases on it. 
-As a side note, vcpu hstatus setup currently leaves VSXL alone and thus 
-relies on the WARL behaviour of the field; I think Xen should set it 
-explicitly.
-
-/*
-  * The effective XLEN of the guest at the point of the trap: 
-hstatus.VSXL for a
-  * trap taken from VS-mode, vsstatus.UXL for one taken from VU-mode.
-  *
-  * It is needed to decode a trapped instruction: the encodings which 
-exist only
-  * for XLEN=64 must not be recognized for a 32-bit guest. Besides those 
-simply
-  * being reserved there, the compressed ones are ambiguous: C.LD and C.FLW
-  * share the encoding 0x6000 (mask 0xe003), and likewise C.SD/C.FSW,
-  * C.LDSP/C.FLWSP and C.SDSP/C.FSWSP.
-  *
-  * IS_ENABLED() can't be used here as HSTATUS_VSXL is defined for
-  * __riscv_xlen == 64 only, the field not existing on RV32 in the first 
-place.
-  */
-static unsigned int guest_xlen(const struct cpu_user_regs *regs)
-{
-#ifdef CONFIG_RISCV_32
-     return 32;
-#else
-     unsigned long xl = (regs->sstatus & SSTATUS_SPP)
-                        ? MASK_EXTR(regs->hstatus, HSTATUS_VSXL)
-                        : MASK_EXTR(csr_read(CSR_VSSTATUS), SSTATUS64_UXL);
-
-     /* 1 encodes XLEN=32, 2 encodes XLEN=64. */
-     return (xl == HSTATUS_VSXL_32) ? 32 : 64;
-#endif
-}
-
-and then use it in emulate_store/load():
-
-     unsigned int xlen = guest_xlen(regs);
-     ...
-     else if ( (xlen == 64) && ((insn & INSN_MASK_LWU) == INSN_MATCH_LWU) )
-     {
-         len = 4;
-         is_unsigned = true;
-     }
-     ...
-     else if ( (xlen == 64) && ((insn & INSN_MASK_C_LD) == 
-INSN_MATCH_C_LD) )
-
-
-> 
->> +    {
->> +        len = 4;
->> +        is_unsigned = true;
->> +    }
->> +#endif
->> +    else if ( (insn & INSN_MASK_C_LW) == INSN_MATCH_C_LW )
->> +    {
->> +        len = 4;
->> +        insn = RVC_RS2S(insn) << SH_RD;
->> +    }
->> +    else if ( (insn & INSN_MASK_C_LWSP) == INSN_MATCH_C_LWSP &&
->> +              RV_X(insn, SH_RD, 5) )
->> +        len = 4;
->> +#ifndef CONFIG_RISCV_32
->> +    else if ( (insn & INSN_MASK_LD) == INSN_MATCH_LD )
->> +        len = 8;
->> +    else if ( (insn & INSN_MASK_C_LD) == INSN_MATCH_C_LD )
->> +    {
->> +        len = 8;
->> +        insn = RVC_RS2S(insn) << SH_RD;
->> +    }
->> +    else if ( (insn & INSN_MASK_C_LDSP) == INSN_MATCH_C_LDSP &&
->> +              RV_X(insn, SH_RD, 5) )
->> +        len = 8;
->> +#endif
->> +    else
->> +        return -EOPNOTSUPP;
-> 
-> Because you don't permit F/D/Q for guests (yet), FL* and FS* aren't
-> covered, I expect? 
-
-At the moment, I wrote this function with handling of MMIO instruction 
-in mind, which are at the moment ld and sd.
-
-Even if to permit F/D/Q then do we really need to trap that 
-instructions? Hypervisor could allow access to FPU to guest and then it 
-will be just a question of context switch to properly save and restore FPU.
-
-> I wonder how easy it is going to be to spot the places
-> needing adjustment once support is to be added. Same perhaps for Zilsd in
-> RV32 guests.
-
-There is a message in handle_guest_page_fault():
-
-     if ( rc )
-         domain_crash(current->domain,
-                      "%s: unable to handle faulted guest %s addr %#lx\n",
-                      __func__,
-                      (cause == CAUSE_LOAD_GUEST_PAGE_FAULT) ? "load" : 
-"store",
-                      addr);
-
-Probably, it isn't enough and we could print here instruction (in hex) 
-before return -EOPNOTSUPP.
-
-Thanks.
-
-~ Oleksii
+Chuck
 
