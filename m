@@ -4,45 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF984C5DF81
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 13:56:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1396599.1634385 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEBB8C5DF85
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 14:09:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1396612.1634395 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wx3Fh-0000Wt-Oa; Thu, 20 Aug 2026 13:56:17 +0000
+	id 1wx3S3-0002WD-Vg; Thu, 20 Aug 2026 14:09:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1396599.1634385; Thu, 20 Aug 2026 13:56:17 +0000
+Received: by outflank-mailman (output) from mailman id 1396612.1634395; Thu, 20 Aug 2026 14:09:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wx3Fh-0000Wm-L4; Thu, 20 Aug 2026 13:56:17 +0000
-Received: by outflank-mailman (input) for mailman id 1396599;
- Thu, 20 Aug 2026 13:56:15 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wx3S3-0002W6-Rb; Thu, 20 Aug 2026 14:09:03 +0000
+Received: by outflank-mailman (input) for mailman id 1396612;
+ Thu, 20 Aug 2026 14:09:03 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ruoyuw560@gmail.com>) id 1wx3Ff-0000WN-TQ
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 13:56:15 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wx3S3-0002W0-0i
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 14:09:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wx3Fd-004Cef-1F
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 15:56:13 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wx3S1-00FXxb-VQ
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 16:09:01 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ruoyuw560@gmail.com>)
- id 6a870776-bab6-0a2a0a5309dd-0a2a45079eaa-20
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 15:56:13 +0200
-Received: from [209.85.216.48] (helo=mail-pj1-f48.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ruoyuw560@gmail.com>)
- id 6a87077b-b4ea-0a2a45070019-d155d830e1ea-3
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 15:56:12 +0200
-Received: by mail-pj1-f48.google.com with SMTP id
- 98e67ed59e1d1-38e7109321dso1472780a91.3
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 06:56:12 -0700 (PDT)
-Received: from haichao.tail057a43.ts.net
- ([2001:da8:e000:1206:85a4:b9cf:b578:4307])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3957f9ab4b4sm6653893a91.8.2026.08.20.06.56.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Aug 2026 06:56:10 -0700 (PDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a870a6f-bab6-0a2a0a5309dd-0a2a4502ed04-48
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 16:09:01 +0200
+Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a870a7d-6ca4-0a2a45020019-d155802cb94a-3
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 16:09:01 +0200
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-499b2981a7bso9498185e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 07:09:01 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-499aa0d6721sm189202335e9.11.2026.08.20.07.08.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 20 Aug 2026 07:08:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,116 +53,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787234171; x=1787838971; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=IK7VtHj+yeJrnKBH2mt3PEgztVO6LVM/yM8XqEcV4BY=;
-        b=bYEhHylU7fZzWK3DV+nPQbiZnn4JIfjyrTcQVacBESHQVmqY3T1rwxH0ZMeKnRxuQM
-         +C0N7UqMlheeFwObIIgZWVvASVVBmHLBCSnU9wZSlMNAp2giF3bYXrXe69fkS/GNgwzL
-         WZhbHX2hhhJxLbw43WpSJh6LdMIuD5ecvLxW8n/LsWNfex9KFpTa/EljE0bAKERCNlaM
-         T4XnyrbN78N+lJvYk/TBg4n/TXFYdk19DnN598p2walnwhNnRSj/ohLTe7fPlWfNOqhe
-         YyHCl7LpzzwLn7LmQdlN33ux6e2jusemVQ9GFgn+NW9uuxIGpRsGl72UAyZF78Ayu7u0
-         osTw==
+        d=suse.com; s=google; t=1787234941; x=1787839741; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=iP3exa7q+yUmtHIF2lquYm5BmWxm+URZQXH/m7lx+E4=;
+        b=I0/yJ71OMPb5o+swBxTNulF7I+RCn0bbwoiRHpc+V4qf3tO36CuKjX8yKXh50mGKqV
+         upasSz0rRYJ3w56+YT+zCOSY2j8LoO+7k/Hx+hPvChhG0osAzHpU40lxKwt2b4mUi9GT
+         v6xSYRoQ5qmSH6jHs6YiuDYCjRl8EIY5zwmjtGsfCD4EBnCcUKNCbnv9g+nFnqZeq+W7
+         h49BgfvYM9ONio9oy6z30VsewE3zZBaB3BGD97VhbK1KtrA/s29wyzP6iam6y8Oc7QR0
+         70b4ph17SIc4fRJrMVj8U2Fc9f26PQCcVh6yWn368VRQcKWbA8JU5rXUY4/WU7trzwSl
+         VAeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787234171; x=1787838971;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1787234941; x=1787839741;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=IK7VtHj+yeJrnKBH2mt3PEgztVO6LVM/yM8XqEcV4BY=;
-        b=rk/RHRWtDMd4x/WLTSt+kzFr3dGtO82GFHLIzXXsUgXic4Jvl5l8egjjIcuBJPPXsS
-         qPgrrtzZyg/O0a+xeDql3RzfOlLhiLDmMjz8o27TDnmj1AOM7p+GQZ0WPAX1Tq+2Sz7+
-         QR0XucPE6XYluP8K49hOGnpyvLMgnSxjzDSrHdWUykccUF9QjHrrHEJD+bmXRbfoqmMu
-         4hzst8I4b2gfHG8YHEsGEb4oU3h08JXqOnC6NgtcjCHK5wr0Qn/hdzn1ApJOXbT/Kwyf
-         Wb3+wS6tGYI/gK12ay2ti+bXBzitQm3J2DLivHhgilK25GrjDUF0qKB3M20hWbOFY2U7
-         oUXw==
-X-Gm-Message-State: AFuF++lTA+gTC/Uex/BlW2bs7BnfxN0a+viXwTKhE+dxwqocjdAMAwvZ
-	t0ckZ1Tz0sukWkbKrODilD2+eOXY4yav1B75ZTj4A00HE1CFTgE+1KO9
-X-Gm-Gg: AR+sD12ADH67XCIP4MuPXvD6vkrIxIw7/NLQJl9uCx6jA3pIIivLBB/bVe6Qp3/JkYy
-	S7xNKQCX/Dy8XmjAAU5046O3SwG81udR85UM9fBBNTGNk86tQcEz1LJGJRRBbcNHz/Z64dkGrzf
-	iV0yy9Epz/+G2EBOw0MoQ8D/P51LPBaFP9QKRpfWxyRZNnSOb1nXyL69pauKOEcxuAEdMMdkoee
-	voJ6u9VbqNzLe7WGCmnb1MysS71a6+GCoZqJIEnCX85Aeq2S9kJUwSMPZhkm29QQDBx7grTOnxP
-	ZAi38mEN/NL9vIL/l4ikEx/4mDM1XIzo70bRiIDAQz6HE5f5zIJrngt7ztE06wOhesF/Wl9xg2g
-	eIKH9J/+4VGQ5phTnN4j/oWffY9QKsljexFUZqcLbxlWqklBzzVix7YyWsqrC3CkO55MnAb+6IG
-	DiqEKkUB0Gl76G+kuRVn6xwZP5Euu6zzPbxIipWNW920cI4nlurVpnoYQZT/H2MbNZY5uzGGxqj
-	BFUUsc+
-X-Received: by 2002:a17:90b:2d05:b0:380:21b7:e727 with SMTP id 98e67ed59e1d1-39581470f03mr25148158a91.14.1787234170841;
-        Thu, 20 Aug 2026 06:56:10 -0700 (PDT)
-From: Ruoyu Wang <ruoyuw560@gmail.com>
-To: Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Jan Beulich <JBeulich@novell.com>,
-	Lukas Wunner <lukas@wunner.de>
-Cc: xen-devel@lists.xenproject.org,
-	linux-pci@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Ruoyu Wang <ruoyuw560@gmail.com>
-Subject: [PATCH v2] xen/pcifront: Fix PCI device reference leak in AER handling
-Date: Thu, 20 Aug 2026 21:56:03 +0800
-Message-ID: <20260820135603.3901798-1-ruoyuw560@gmail.com>
-X-Mailer: git-send-email 2.51.0
+        bh=iP3exa7q+yUmtHIF2lquYm5BmWxm+URZQXH/m7lx+E4=;
+        b=F3VkyVJPalTWuthtsOTFr/Qky2ikT8qIXhHmUj54ooV8HsdIpHxlV0HNHShk0Bvhl7
+         JEfLGAewFp62HxmFeVDnQSNhB3B05Sh8AVN0/r4MGtKglnp0LqNKH7A6AQkZR175OFtw
+         rNnPBTFX4Kq2z+1q+CwoQGVicqbpQuRQ7XivRmjSmkrK1wYEWVWSXXhxJG4VOdZxn7CQ
+         6x0zJEkNjsCo/4uyn7xI2/qJdqcfa6MpBx3SqxvGJpdauCSSS70gWuIUjKCa7pAzgwXl
+         ZyUIH6N4UoLeLQOEkJIB5CMoWTRhiUf/58uMz8uaC1TsiTtkWRLsyk05lNpvfOU2BQfX
+         N22g==
+X-Forwarded-Encrypted: i=1; AHgh+RqkDjrLAMToYrjzxa3FqlnkakosoFuE3EkhhLXSNPNTmx8x9GtM3rK2F8GIvWyLFuEv3bDrAGWVF9o=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw/2Z4hRMLeYjSYLkjkrgq6h37wZy4nl+UvKT/5Xz4B45E1Bl3N
+	YF7+t+hT4B8hEiyW/jYTYSFMSQQR5xipTk0f8aNMkK7t26i3t+HGGcRLEd4hR1dg+A==
+X-Gm-Gg: AR+sD13cwye5MOE9dKg1vZEKlYQxgR6dgIucGXWKC0K0dugDZfn1olptlLfSUb0UkW8
+	jQv1MFtPLvSd9bKSEweX6efihxWvGySGZNoZ1+UQRhLdGpjk5saRDFDn8m2fp4tZ9b/u1ft+TmX
+	Eiv+74NV+knSXp19IMi3XBi5tsOKCoqfGRaCaTAvxqgHIP7lSDUSXcgImiMcOKKO20+/k4+8QoA
+	YOOq6yBv2TJ6RCUINHsMEs6MegTAdtuUdBl9Ft7RLnYx4fUMOhDGfqaDy3loF/dwk+JB+IaRssV
+	nExii8XYuO5m2unpHmvXR/xhy4Rz7Y0lSdKsmzgJKHqK/lmN4slyK9dmWiRBU237sHTsao5INqW
+	1G82AdLKiKxZS3t5B3I9Eh+L7VNXSDN8aUirl1pxgEJcQ1oS5gLMKm8bfMXlZMRRHlI3Y2iVXtP
+	KXTVePidRL5XRrpyMpFyYiZl6WYROtItx7SLugE1WXpEt5vswimpCk3FflsN6a9l+Q/aOjWXcSm
+	MQxMsvdF0wWoCD9+NVfMG274X2WC7T0MNHMVkKsJ7hQX8dQvOLBFErpIAtsEzk=
+X-Received: by 2002:a05:600c:c08f:b0:499:afcb:24c1 with SMTP id 5b1f17b1804b1-499afcb24demr138394505e9.5.1787234931745;
+        Thu, 20 Aug 2026 07:08:51 -0700 (PDT)
+Message-ID: <9c006636-cc33-45ae-85cc-800568e6dcf9@suse.com>
+Date: Thu, 20 Aug 2026 16:08:50 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1787234173-35EC6AE4-DEF991CC/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 16/17] xen/riscv: add guest load emulation for trapped
+ MMIO accesses
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
+ <9b18a20367754605efd6a6b5bf09d4483d9c3ab2.1784560663.git.oleksii.kurochko@gmail.com>
+ <7a2e46da-5b1f-448e-aba3-7eefe0a61950@suse.com>
+ <aff1f879-48c6-4047-a6c1-237a350e0f35@gmail.com>
+ <a64d4714-2215-4bff-9dfa-2cbcc36ce3f2@suse.com>
+ <417b2b37-d805-49a4-a23d-46dd8363a751@gmail.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <417b2b37-d805-49a4-a23d-46dd8363a751@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-720697/1787234941-67CBA2AC-800133BF/0/0
 X-purgate-type: clean
-X-purgate-size: 2143
+X-purgate-size: 2611
 
-pci_get_domain_bus_and_slot() increments the reference count of the
-returned PCI device. pcifront_common_process() drops that reference only
-when the device or its driver is missing. All paths for a bound device
-either return directly after invoking an error recovery callback or fall
-through without calling pci_dev_put(). Consequently, each AER request for
-a bound device leaks a reference and can keep the device allocated after
-removal.
+On 20.08.2026 15:38, Oleksii Kurochko wrote:
+> On 8/20/26 9:34 AM, Jan Beulich wrote:
+>> On 19.08.2026 18:06, Oleksii Kurochko wrote:
+>>> On 8/13/26 9:15 AM, Jan Beulich wrote:
+>>>> On 29.07.2026 15:40, Oleksii Kurochko wrote:
+>>>>> +        /*
+>>>>> +         * Bit[0] == 0 implies trapped instruction value is
+>>>>> +         * zero or special value.
+>>>>> +         */
+>>>>
+>>>> How come you get away without dealing with pseudoinsns? The insn pointed at
+>>>> by regs->sepc is of no interest for faults caused by implicit memory accesses
+>>>> originating from VS-stage address translation.
+>>>
+>>> It is really problem but I think it should be resolved much earlier in
+>>> handle_guest_page_fault(). I will add the following:
+>>>
+>>> /*
+>>>        * A guest page fault taken on an implicit memory access performed for
+>>>        * VS-stage address translation (reading a PTE, or updating its A/D
+>>> bits)
+>>>        * reports a pseudoinstruction in htinst rather than a transformed
+>>>        * instruction. Such a fault can't be emulated: htval holds the guest
+>>>        * physical address of a VS-stage PTE rather than of any access the
+>>> guest
+>>>        * itself performed (and its two least significant bits are zero
+>>> instead
+>>>        * of matching stval), while the instruction at sepc is unrelated
+>>> to the
+>>>        * access which actually faulted.
+>>>        *
+>>>        * Report an access fault to the guest at the original virtual address,
+>>>        * which is what stval already holds and what hardware would raise
+>>> for a
+>>>        * page table walk hitting an inaccessible address.
+>>>        */
+>>>       if ( (htinst == INSN_PSEUDO_VS_LOAD) || (htinst ==
+>>> INSN_PSEUDO_VS_STORE) )
+>>>       {
+>>>           struct cpu_user_regs *regs = vcpu_guest_cpu_user_regs(current);
+>>>           struct trap_info utrap = {
+>>>               .scause = (htinst == INSN_PSEUDO_VS_LOAD) ? CAUSE_LOAD_ACCESS
+>>>                                                         : CAUSE_STORE_ACCESS,
+>>>               .sepc = regs->sepc,
+>>>               .stval = csr_read(CSR_STVAL),
+>>>           };
+>>>
+>>>           riscv_trap_redirect(&utrap);
+>>>           return;
+>>>       }
+>>
+>> That's not what would happen on bare hardware though, aiui. At least I don't
+>> think I ever found it being spelled out anywhere what the supposed behavior
+>> is when a page table resides in unpopulated space.
+> 
+> What do you mean here by "unpopulated space"?
 
-Declare the looked-up device with __free(pci_dev_put), so every return
-path releases the reference after callback dispatch. This keeps the
-device alive while its callback runs and balances the lookup without
-restructuring the callback returns.
+A physical address range neither populated by RAM nor used by MMIO of any device.
 
-This issue was found by a static analysis checker and confirmed by manual
-source review.
-
-Fixes: 956a9202cd12 ("xen-pcifront: Xen PCI frontend driver.")
-Suggested-by: Lukas Wunner <lukas@wunner.de>
-Signed-off-by: Ruoyu Wang <ruoyuw560@gmail.com>
----
-Changes in v2:
-- Use __free(pci_dev_put) instead of restructuring the callback returns.
-
-Link: https://lore.kernel.org/r/20260813153138.3953222-1-ruoyuw560@gmail.com/
----
- drivers/pci/xen-pcifront.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/pci/xen-pcifront.c b/drivers/pci/xen-pcifront.c
-index cffc32d660327..0dea8a69fa36c 100644
---- a/drivers/pci/xen-pcifront.c
-+++ b/drivers/pci/xen-pcifront.c
-@@ -579,16 +579,15 @@ static pci_ers_result_t pcifront_common_process(int cmd,
- 	int bus = pdev->sh_info->aer_op.bus;
- 	int devfn = pdev->sh_info->aer_op.devfn;
- 	int domain = pdev->sh_info->aer_op.domain;
--	struct pci_dev *pcidev;
-+	struct pci_dev *pcidev __free(pci_dev_put) =
-+		pci_get_domain_bus_and_slot(domain, bus, devfn);
- 
- 	dev_dbg(&pdev->xdev->dev,
- 		"pcifront AER process: cmd %x (bus:%x, devfn%x)",
- 		cmd, bus, devfn);
- 
--	pcidev = pci_get_domain_bus_and_slot(domain, bus, devfn);
- 	if (!pcidev || !pcidev->dev.driver) {
- 		dev_err(&pdev->xdev->dev, "device or AER driver is NULL\n");
--		pci_dev_put(pcidev);
- 		return PCI_ERS_RESULT_NONE;
- 	}
- 	pdrv = to_pci_driver(pcidev->dev.driver);
--- 
-2.51.0
-
+Jan
 
