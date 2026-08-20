@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF2E9C5DF81
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 12:41:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1396465.1634330 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79674C5DF81
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 13:00:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1396516.1634340 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wx24k-0004Lv-Aq; Thu, 20 Aug 2026 12:40:54 +0000
+	id 1wx2NN-00005d-P1; Thu, 20 Aug 2026 13:00:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1396465.1634330; Thu, 20 Aug 2026 12:40:54 +0000
+Received: by outflank-mailman (output) from mailman id 1396516.1634340; Thu, 20 Aug 2026 13:00:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wx24k-0004Lk-7p; Thu, 20 Aug 2026 12:40:54 +0000
-Received: by outflank-mailman (input) for mailman id 1396465;
- Thu, 20 Aug 2026 12:40:53 +0000
+	id 1wx2NN-00005W-M9; Thu, 20 Aug 2026 13:00:09 +0000
+Received: by outflank-mailman (input) for mailman id 1396516;
+ Thu, 20 Aug 2026 13:00:08 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a01f2fdd85000c4f3@swg.vates.tech>)
- id 1wx24j-0004Jq-Ag
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 12:40:53 +0000
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a01f41ca51000c4f3@swg.vates.tech>)
+ id 1wx2NM-00005Q-1V
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 13:00:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wx24i-0023VV-NS
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 14:40:52 +0200
+ id 1wx2NK-0026Ok-SH
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 15:00:06 +0200
 Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a01f2fdd85000c4f3@swg.vates.tech>)
- id 6a86f5d0-2eae-0a2a0a5409dd-0a2a4502d090-14
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 14:40:52 +0200
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a01f41ca51000c4f3@swg.vates.tech>)
+ id 6a86fa56-2eae-0a2a0a5409dd-0a2a450293da-2
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 15:00:06 +0200
+Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
  by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a01f2fdd85000c4f3@swg.vates.tech>)
- id 6a86f5d4-6ca4-0a2a45020019-b9ff1c239b27-3
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 14:40:52 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a01f41ca51000c4f3@swg.vates.tech>)
+ id 6a86fa56-6ca4-0a2a45020019-b9ff1c2292b9-3
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 15:00:06 +0200
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a01f2fdd85000c4f3.00b for <xen-devel@lists.xenproject.org>
+ by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a01f41ca51000c4f3.004 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 20 Aug 2026 12:40:25 +0000
-Received: from julian.home (areims-651-1-80-194.w90-18.abo.wanadoo.fr
- [90.18.187.194]) (Authenticated sender: julian.vetter@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id E7A4A83989;
- Thu, 20 Aug 2026 14:40:24 +0200 (CEST)
+ Thu, 20 Aug 2026 13:00:00 +0000
+Received: from [192.168.1.18] (88-188-240-210.subs.proxad.net [88.188.240.210])
+ (Authenticated sender: teddy.astie)
+ by mail2.vates.fr (Postfix) with ESMTPSA id A3BAA81FCD;
+ Thu, 20 Aug 2026 14:59:59 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,290 +60,267 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=YtcSxQqS4YFzBpnvn0pxDx3PvCBaPasOhXRJS3dyCSo=;
+ q=dns/txt; s=selector1; bh=LMJ/We7AMBJ6vYMkpXgFRri8ls/9xx3OqrSUFlLzBf8=;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=GVCkzAd3oLzRsafmD67UNnw6ywsYgc62WM13pARht+ZRqoOB6g6RZwfVIx3/o7vZgvYXmXbZP
- uwg+hlNUhpQOw9Fgs4+kzXkR0De1jOxdTndd2XkrUeHTrvXzfmp481eYDAaWoGLoxQ+fC1tCzeI
- xuS9niTYlr42/H5Vrl16nOrtwx22RyAWmOMMc4iV94nsVdTS1yzQN09IkPbXoi6U+0/pn/OH0iO
- mvw/U1UDJF9KuoCp3moNcu54eiFNGMNuBVLBXm714YyF8dLAI3+W/a1jdq5V83X3/GmpAy232XA
- Jy/LWu6wR7zducgbcvw8I3Zqw1A2jITi+hntwMHVddiA==
-X-Zone-Loop: ac3894678a425d9bb9f7558cac2eea210de9df955472
+ b=lcGR9zpeN0ksDovTDDd0nyhaO69fvhB2IsL9ThAVq+ZlI98YA93k+51JgSvHhLx7isAD+bDRw
+ wahCQV/VjLJLuMDeSdeMm6vN7QQC8m9VS46FPsnu1QPno1NBQPNsIN3m3b6xa/vtdVUmxHtSOem
+ aGpFo5ghr3F+v/TyWtBcSqCcmGq8VYO5hSr+upZZ+BlaIGMeemyGIN+oPXOMLfY9IYW2s2+JCZO
+ x72Gnr36ZMLz8spGsImneleJtL9kyHI9NSUT1/CfcgwbXqw87a85LD2PdKkdrsi9ehQ2DwZzPUG
+ onDNU67mP2U9V17NvS+9EKzCmkzjEAnXagKiQSoLjNkA==
+X-Zone-Loop: 24f5647f6d506b4598fdcec18f9eceb7d772106d97ea
 x-campaign-type: default
-x-transaction-id: a83a3e2a-bd6e-470c-8e0d-3ebce06d27e3
-x-swg-uid: 01-7118184d-6c94-4d3d-825f-9c28091b391c
+x-transaction-id: f63094c6-d676-4fee-a266-0c81496eb8dc
+x-swg-uid: 01-e24ecdd6-f74c-45d5-a2c9-5bd044aa3503
 X-Mailer: Sweego
 Message-ID:
- <1787229625.8631fc262581453bbf619ec5b2062170.1a01f2fdd85000c4f3@vates.tech>
-x-swg-bid: 1787229625.8631fc262581453bbf619ec5b2062170.1a01f2fdd85000c4f3
+ <1787230800.8631fc262581453bbf619ec5b2062170.1a01f41ca51000c4f3@vates.tech>
+x-swg-bid: 1787230800.8631fc262581453bbf619ec5b2062170.1a01f41ca51000c4f3
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
 X-Originating-IP: [37.26.189.201]
-From: Julian Vetter <julian.vetter@vates.tech>
-To: xen-devel@lists.xenproject.org
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Juergen Gross <jgross@suse.com>,
-	Andrii Sultanov <andriy.sultanov@vates.tech>,
-	Guillaume Thouvenin <guillaume.thouvenin@vates.tech>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Oleksii Moisieiev <oleksii_moisieiev@epam.com>,
-	Timothy Pearson <tpearson@raptorengineering.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Julian Vetter <julian.vetter@vates.tech>
-Subject: [PATCH v4 6/6] xen: make config argument const
-Date: Thu, 20 Aug 2026 14:40:16 +0200
-In-Reply-To: <20260820124016.2033421-1-julian.vetter@vates.tech>
-References: <20260820123805.2033085-1-julian.vetter@vates.tech>
- <20260820124016.2033421-1-julian.vetter@vates.tech>
+Date: Thu, 20 Aug 2026 14:59:59 +0200
 MIME-Version: 1.0
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.2673.17d84e18c8e413dd.1a01f2fdb97.87e72c8dfe524e6a=-"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 02/23] x86/cpu: report SMX, TXT and SKINIT capabilities
+To: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>, xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
+ <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, trenchboot-devel@googlegroups.com
+References: <cover.1785668458.git.sergii.dmytruk@3mdeb.com>
+ <be993e757550b69a6f94f89476ba71131b434741.1785668458.git.sergii.dmytruk@3mdeb.com>
+Content-Language: en-US
+From: Teddy Astie <teddy.astie@vates.tech>
+Autocrypt: addr=teddy.astie@vates.tech; keydata=
+ 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
+ x9fhaZEsniw8/bYgC3igkk5YJiOa
+In-Reply-To: <be993e757550b69a6f94f89476ba71131b434741.1785668458.git.sergii.dmytruk@3mdeb.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------5Ww4dIUB371KC8I2tJ3z0MDE"
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1787229625239
-X-purgate-ID: tlsNG-720697/1787229652-313CC2AC-BFD0C47B/0/0
+X-Bm-Transport-Timestamp: 1787230799830
+X-purgate-ID: tlsNG-720697/1787230806-319CB2AC-8063F3CF/0/0
 X-purgate-type: clean
-X-purgate-size: 8348
+X-purgate-size: 12636
 
----=Part.2673.17d84e18c8e413dd.1a01f2fdb97.87e72c8dfe524e6a=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------5Ww4dIUB371KC8I2tJ3z0MDE
+Content-Type: multipart/mixed; boundary="------------nYIZYN4huIqDTa0K4qtwXuQG";
+ protected-headers="v1"; hp="clear"
+Message-ID: <692be7a2-9d21-4d6b-a260-f33643063575@vates.tech>
+Date: Thu, 20 Aug 2026 14:59:59 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 02/23] x86/cpu: report SMX, TXT and SKINIT capabilities
+To: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>, xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
+ <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, trenchboot-devel@googlegroups.com
+References: <cover.1785668458.git.sergii.dmytruk@3mdeb.com>
+ <be993e757550b69a6f94f89476ba71131b434741.1785668458.git.sergii.dmytruk@3mdeb.com>
+Content-Language: en-US
+From: Teddy Astie <teddy.astie@vates.tech>
+Autocrypt: addr=teddy.astie@vates.tech; keydata=
+ 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
+ x9fhaZEsniw8/bYgC3igkk5YJiOa
+In-Reply-To: <be993e757550b69a6f94f89476ba71131b434741.1785668458.git.sergii.dmytruk@3mdeb.com>
 
-arch_sanitise_domain_config() validates the configuration requested by
-the toolstack, and should not fill anything in=2E The config struct passed
-to createdomain is supposed to be pure input=2E ARM used to abuse this
-(GIC_NATIVE resolution, now removed) to smuggle output back to the
-toolstack=2E Making the parameter const stops that type of abuse from
-happening on any architecture=2E
+--------------nYIZYN4huIqDTa0K4qtwXuQG
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-The x86 implementation turned out to have its own instance of the same
-issue=2E It set XEN_DOMCTL_CDF_oos_off into config->flags for non-HVM
-guests=2E Since The sanitisation runs before the function domain_create()
-copies config->flags into d->options, this relied on mutating the
-toolstack's config to take effect=2E Move the default onto d->options
-directly in arch_domain_create() (which runs after d->options is
-populated), where all the remaining domain options are resolved=2E This
-has the same effect and no mutation of the input config is required=2E
+TGUgMDIvMDgvMjAyNiDDoCAxNToxNCwgU2VyZ2lpIERteXRydWsgYSDDqWNyaXTCoDoNCj4g
+RnJvbTogTWljaGHFgiDFu3lnb3dza2kgPG1pY2hhbC56eWdvd3NraUAzbWRlYi5jb20+DQo+
+IA0KPiBSZXBvcnQgVFhUIGNhcGFiaWxpdGllcyBzbyB0aGF0IGRvbTAgY2FuIHF1ZXJ5IHRo
+ZSBJbnRlbCBUWFQgb3IgQU1EDQo+IFNLSU5JVCBzdXBwb3J0IGluZm9ybWF0aW9uIHVzaW5n
+IHhsIGRtZXNnLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogTWljaGHFgiDFu3lnb3dza2kgPG1p
+Y2hhbC56eWdvd3NraUAzbWRlYi5jb20+DQo+IFNpZ25lZC1vZmYtYnk6IFNlcmdpaSBEbXl0
+cnVrIDxzZXJnaWkuZG15dHJ1a0AzbWRlYi5jb20+DQo+IC0tLQ0KPiANCj4gTm90ZXM6DQo+
+ICAgICAgdjQ6IGZpeGVkIGNvbmRpdGlvbnMgZm9yIG5vdCByZXBvcnRpbmcgY2FwYWJpbGl0
+aWVzIChtYXRjaCBjb3JyZWN0IGNvbW1lbnRzKQ0KPiAgICAgIHY0OiBkZWZpbmUgR0VUU0VD
+XyogbWFjcm9zIHVzZWQgb25seSBieSB4ZW4vYXJjaC94ODYvY3B1L2ludGVsLmMgaW4gdGhl
+IGZpbGUgaXRzZWxmICh0byBub3QgZGVwZW5kIG9uIFNsYXVuY2gpDQo+ICAgICAgdjQ6IGRv
+bid0IHBvc3Rwb25lIHJlc3RvcmluZyBzdGF0ZSBvZiBYODZfQ1I0X1NNWEUsIGRvIGl0IGJl
+Zm9yZSBwcmludGluZyB0ZXN0IHJlc3VsdHMNCj4gDQo+ICAgeGVuL2FyY2gveDg2L2NwdS9h
+bWQuYyAgIHwgMTYgKysrKysrKysrKysrKw0KPiAgIHhlbi9hcmNoL3g4Ni9jcHUvY3B1Lmgg
+ICB8ICAxICsNCj4gICB4ZW4vYXJjaC94ODYvY3B1L2h5Z29uLmMgfCAgMSArDQo+ICAgeGVu
+L2FyY2gveDg2L2NwdS9pbnRlbC5jIHwgNTAgKysrKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrKw0KPiAgIDQgZmlsZXMgY2hhbmdlZCwgNjggaW5zZXJ0aW9ucygrKQ0K
+PiANCj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9jcHUvYW1kLmMgYi94ZW4vYXJjaC94
+ODYvY3B1L2FtZC5jDQo+IGluZGV4IDcwNzgzYzlhMGEuLjVlYTE2YWQ4YTggMTAwNjQ0DQo+
+IC0tLSBhL3hlbi9hcmNoL3g4Ni9jcHUvYW1kLmMNCj4gKysrIGIveGVuL2FyY2gveDg2L2Nw
+dS9hbWQuYw0KPiBAQCAtNjE3LDYgKzYxNywyMSBAQCB2b2lkIGFtZF9wcm9jZXNzX2ZyZXEo
+Y29uc3Qgc3RydWN0IGNwdWluZm9feDg2ICpjLA0KPiAgIAkJKmxvd19taHogPSBhbWRfcGFy
+c2VfZnJlcShjLT5mYW1pbHksIGxvKTsNCj4gICB9DQo+ICAgDQo+ICt2b2lkIGFtZF9sb2df
+c2tpbml0KGNvbnN0IHN0cnVjdCBjcHVpbmZvX3g4NiAqYykNCj4gK3sNCj4gKyAgICAvKg0K
+PiArICAgICAqIFJ1biBvbmx5IG9uIEJTUCBhbmQgbm90IGR1cmluZyByZXN1bWUgdG8gcmVw
+b3J0IHRoZSBjYXBhYmlsaXR5IG9ubHkgb25jZS4NCj4gKyAgICAgKi8NCj4gKyAgICBpZiAo
+IHN5c3RlbV9zdGF0ZSA9PSBTWVNfU1RBVEVfcmVzdW1lIHx8IHNtcF9wcm9jZXNzb3JfaWQo
+KSApDQo+ICsgICAgICAgIHJldHVybjsNCj4gKw0KPiArICAgIHByaW50aygiQ1BVOiBTS0lO
+SVQgY2FwYWJpbGl0eSAiKTsNCj4gKyAgICBpZiAoICF0ZXN0X2JpdChYODZfRkVBVFVSRV9T
+S0lOSVQsICZib290X2NwdV9kYXRhLng4Nl9jYXBhYmlsaXR5KSApDQo+ICsgICAgICAgIHBy
+aW50aygibm90IHN1cHBvcnRlZFxuIik7DQo+ICsgICAgZWxzZQ0KPiArICAgICAgICBwcmlu
+dGsoInN1cHBvcnRlZFxuIik7DQo+ICt9DQo+ICsNCj4gICB2b2lkIGNmX2NoZWNrIGVhcmx5
+X2luaXRfYW1kKHN0cnVjdCBjcHVpbmZvX3g4NiAqYykNCj4gICB7DQo+ICAgCWlmIChjID09
+ICZib290X2NwdV9kYXRhKQ0KPiBAQCAtMTMyNSw2ICsxMzQwLDcgQEAgc3RhdGljIHZvaWQg
+Y2ZfY2hlY2sgaW5pdF9hbWQoc3RydWN0IGNwdWluZm9feDg2ICpjKQ0KPiAgIAkJc2V0dXBf
+Zm9yY2VfY3B1X2NhcChYODZfRkVBVFVSRV9YRU5fUkVQX01PVlNCKTsNCj4gICANCj4gICAJ
+YW1kX2xvZ19mcmVxKGMpOw0KPiArCWFtZF9sb2dfc2tpbml0KGMpOw0KPiAgIH0NCg0KT24g
+d2hpY2ggWGVuIGJyYW5jaCB0aGlzIHBhdGNoIGlzIGJhc2VkID8NCg0KZWFybHlfaW5pdF9h
+bWQoKSBkb2Vzbid0IHNlZW0gdG8gaGF2ZSBhbWRfbG9nX2ZyZXEgKHdoaWNoIGlzIGluIGlu
+aXRfYW1kIA0KaW5zdGVhZCkuDQoNCj4gICANCj4gICBjb25zdCBzdHJ1Y3QgY3B1X2RldiBf
+X2luaXRjb25zdF9jZl9jbG9iYmVyIGFtZF9jcHVfZGV2ID0gew0KPiBkaWZmIC0tZ2l0IGEv
+eGVuL2FyY2gveDg2L2NwdS9jcHUuaCBiL3hlbi9hcmNoL3g4Ni9jcHUvY3B1LmgNCj4gaW5k
+ZXggYmJlZGU1N2FiMC4uMTc5MzUxOTBiNyAxMDA2NDQNCj4gLS0tIGEveGVuL2FyY2gveDg2
+L2NwdS9jcHUuaA0KPiArKysgYi94ZW4vYXJjaC94ODYvY3B1L2NwdS5oDQo+IEBAIC0yMSw2
+ICsyMSw3IEBAIGV4dGVybiBib29sIGRldGVjdF9leHRlbmRlZF90b3BvbG9neShzdHJ1Y3Qg
+Y3B1aW5mb194ODYgKmMpOw0KPiAgIA0KPiAgIHZvaWQgY2ZfY2hlY2sgZWFybHlfaW5pdF9h
+bWQoc3RydWN0IGNwdWluZm9feDg2ICpjKTsNCj4gICB2b2lkIGFtZF9sb2dfZnJlcShjb25z
+dCBzdHJ1Y3QgY3B1aW5mb194ODYgKmMpOw0KPiArdm9pZCBhbWRfbG9nX3NraW5pdChjb25z
+dCBzdHJ1Y3QgY3B1aW5mb194ODYgKmMpOw0KPiAgIHZvaWQgYW1kX2luaXRfZGVfY2ZnKGNv
+bnN0IHN0cnVjdCBjcHVpbmZvX3g4NiAqYyk7DQo+ICAgdm9pZCBhbWRfaW5pdF9sZmVuY2Vf
+ZGlzcGF0Y2godm9pZCk7DQo+ICAgdm9pZCBhbWRfaW5pdF9zc2JkKGNvbnN0IHN0cnVjdCBj
+cHVpbmZvX3g4NiAqYyk7DQo+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYvY3B1L2h5Z29u
+LmMgYi94ZW4vYXJjaC94ODYvY3B1L2h5Z29uLmMNCj4gaW5kZXggN2E5ZmMyNWQzMS4uNjA4
+YTdjNDMxOSAxMDA2NDQNCj4gLS0tIGEveGVuL2FyY2gveDg2L2NwdS9oeWdvbi5jDQo+ICsr
+KyBiL3hlbi9hcmNoL3g4Ni9jcHUvaHlnb24uYw0KPiBAQCAtOTAsNiArOTAsNyBAQCBzdGF0
+aWMgdm9pZCBjZl9jaGVjayBpbml0X2h5Z29uKHN0cnVjdCBjcHVpbmZvX3g4NiAqYykNCj4g
+ICAJfQ0KPiAgIA0KPiAgIAlhbWRfbG9nX2ZyZXEoYyk7DQo+ICsJYW1kX2xvZ19za2luaXQo
+Yyk7DQo+ICAgfQ0KPiAgIA0KPiAgIGNvbnN0IHN0cnVjdCBjcHVfZGV2IF9faW5pdGNvbnN0
+X2NmX2Nsb2JiZXIgaHlnb25fY3B1X2RldiA9IHsNCj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNo
+L3g4Ni9jcHUvaW50ZWwuYyBiL3hlbi9hcmNoL3g4Ni9jcHUvaW50ZWwuYw0KPiBpbmRleCA5
+MGM5ZDM2MTg2Li5kZGIzNGMwYzAyIDEwMDY0NA0KPiAtLS0gYS94ZW4vYXJjaC94ODYvY3B1
+L2ludGVsLmMNCj4gKysrIGIveGVuL2FyY2gveDg2L2NwdS9pbnRlbC5jDQo+IEBAIC0xNCw2
+ICsxNCwxMSBAQA0KPiAgIA0KPiAgICNpbmNsdWRlICJjcHUuaCINCj4gICANCj4gKy8qIEVB
+WCB2YWx1ZSBmb3IgR0VUU0VDIGxlYWYgZnVuY3Rpb25zLiBJbnRlbCBTRE06IEdFVFNFQ1tD
+QVBBQklMSVRJRVNdICovDQo+ICsjZGVmaW5lIEdFVFNFQ19DQVBBQklMSVRJRVMgICAgICAg
+ICAgICAgMA0KPiArLyogSW50ZWwgU0RNOiBHRVRTRUMgQ2FwYWJpbGl0eSBSZXN1bHQgRW5j
+b2RpbmcgKi8NCj4gKyNkZWZpbmUgR0VUU0VDX0NBUF9UWFRfQ0hJUFNFVCAgICAgICAgICAx
+DQo+ICsNCj4gICAvKg0KPiAgICAqIE1TUl9NQ1VfT1BUX0NUUkwgaXMgYSBjb2xsZWN0aW9u
+IG9mIHVucmVsYXRlZCBmdW5jdGlvbmFsaXR5LCB3aXRoIHNlcGFyYXRlDQo+ICAgICogZW5h
+YmxlbWVudCByZXF1aXJlbWVudHMsIGJ1dCB3aGljaCB3YW50IHRvIGJlIGNvbnNpc3RlbnQg
+YWNyb3NzIHRoZSBzeXN0ZW0uDQo+IEBAIC02MjAsNiArNjI1LDQ5IEBAIHN0YXRpYyB2b2lk
+IGluaXRfaW50ZWxfcGVyZihzdHJ1Y3QgY3B1aW5mb194ODYgKmMpDQo+ICAgICAgIH0NCj4g
+ICB9DQo+ICAgDQo+ICsvKg0KPiArICogUHJpbnQgb3V0IHRoZSBTTVggYW5kIFRYVCBjYXBh
+YmlsdGllcywgc28gdGhhdCBkb20wIGNhbiBkZXRlcm1pbmUgaWYgdGhlDQo+ICsgKiBzeXN0
+ZW0gaXMgRFJUTS1jYXBhYmxlLg0KPiArICovDQo+ICtzdGF0aWMgdm9pZCBpbnRlbF9sb2df
+c214X3R4dCh2b2lkKQ0KPiArew0KPiArICAgIHVuc2lnbmVkIGxvbmcgY3I0X3ZhbCwgZ2V0
+c2VjX2NhcHM7DQo+ICsNCj4gKyAgICAvKg0KPiArICAgICAqIFJ1biBvbmx5IG9uIEJTUCBh
+bmQgbm90IGR1cmluZyByZXN1bWUgdG8gcmVwb3J0IHRoZSBjYXBhYmlsaXR5IG9ubHkgb25j
+ZS4NCj4gKyAgICAgKi8NCj4gKyAgICBpZiAoIHN5c3RlbV9zdGF0ZSA9PSBTWVNfU1RBVEVf
+cmVzdW1lIHx8IHNtcF9wcm9jZXNzb3JfaWQoKSApDQo+ICsgICAgICAgIHJldHVybjsNCj4g
+Kw0KPiArICAgIHByaW50aygiQ1BVOiBTTVggY2FwYWJpbGl0eSAiKTsNCj4gKyAgICBpZiAo
+ICF0ZXN0X2JpdChYODZfRkVBVFVSRV9TTVgsICZib290X2NwdV9kYXRhLng4Nl9jYXBhYmls
+aXR5KSApDQo+ICsgICAgew0KPiArICAgICAgICBwcmludGsoIm5vdCBzdXBwb3J0ZWRcbiIp
+Ow0KPiArICAgICAgICByZXR1cm47DQo+ICsgICAgfQ0KPiArICAgIHByaW50aygic3VwcG9y
+dGVkXG4iKTsNCj4gKw0KPiArICAgIC8qIENhbid0IHJ1biBHRVRTRUMgd2l0aG91dCBWTVgg
+YW5kIFNNWCAqLw0KPiArICAgIGlmICggIXRlc3RfYml0KFg4Nl9GRUFUVVJFX1ZNWCwgJmJv
+b3RfY3B1X2RhdGEueDg2X2NhcGFiaWxpdHkpICkNCj4gKyAgICAgICAgcmV0dXJuOw0KPiAr
+DQo+ICsgICAgY3I0X3ZhbCA9IHJlYWRfY3I0KCk7DQo+ICsgICAgaWYgKCAhKGNyNF92YWwg
+JiBYODZfQ1I0X1NNWEUpICkNCj4gKyAgICAgICAgd3JpdGVfY3I0KGNyNF92YWwgfCBYODZf
+Q1I0X1NNWEUpOw0KPiArDQo+ICsgICAgYXNtIHZvbGF0aWxlICgiZ2V0c2VjXG4iDQo+ICsg
+ICAgICAgIDogIj1hIiAoZ2V0c2VjX2NhcHMpDQo+ICsgICAgICAgIDogImEiIChHRVRTRUNf
+Q0FQQUJJTElUSUVTKSwgImIiICgwKSA6KTsNCj4gKw0KPiArICAgIGlmICggIShjcjRfdmFs
+ICYgWDg2X0NSNF9TTVhFKSApDQo+ICsgICAgICAgIHdyaXRlX2NyNChjcjRfdmFsICYgflg4
+Nl9DUjRfU01YRSk7DQo+ICsNCg0KVGhhdCBsb29rcyB3cm9uZywgdGhlIGxvZ2ljIGlzIHdy
+aXR0ZW4gYXMgOiBpZiBTTVhFIGlzIGNsZWFyZWQsIHlvdSANCmNsZWFyIFNNWEUgYWdhaW4u
+DQpSZWdhcmRsZXNzLCBpZiB3ZSdyZSBsb29raW5nIHRvIHVzZSBUWFQgbGF0ZXIgb24sIHdv
+dWxkbid0IGl0IGJlIA0KcHJlZmVyYWJsZSB0byBrZWVwIFNNWEUgYml0IG9uID8gVGhhdCBt
+ZWFucyB3ZSB3b3VsZCBub3Qgb25seSBkbyANCnJlcG9ydGluZyBidXQgImJhc2ljIiBpbml0
+aWFsaXphdGlvbi4NCg0KPiArICAgIGlmICggZ2V0c2VjX2NhcHMgJiBHRVRTRUNfQ0FQX1RY
+VF9DSElQU0VUICkNCj4gKyAgICAgICAgcHJpbnRrKCJDaGlwc2V0IHN1cHBvcnRzIFRYVFxu
+Iik7DQo+ICsgICAgZWxzZQ0KPiArICAgICAgICBwcmludGsoIkNoaXBzZXQgZG9lcyBub3Qg
+c3VwcG9ydCBUWFRcbiIpOw0KPiArfQ0KPiArDQo+ICAgc3RhdGljIHZvaWQgY2ZfY2hlY2sg
+aW5pdF9pbnRlbChzdHJ1Y3QgY3B1aW5mb194ODYgKmMpDQo+ICAgew0KPiAgIAkvKiBEZXRl
+Y3QgdGhlIGV4dGVuZGVkIHRvcG9sb2d5IGluZm9ybWF0aW9uIGlmIGF2YWlsYWJsZSAqLw0K
+PiBAQCAtNjM0LDYgKzY4Miw4IEBAIHN0YXRpYyB2b2lkIGNmX2NoZWNrIGluaXRfaW50ZWwo
+c3RydWN0IGNwdWluZm9feDg2ICpjKQ0KPiAgIAkJZGV0ZWN0X2h0KGMpOw0KPiAgIAl9DQo+
+ICAgDQo+ICsJaW50ZWxfbG9nX3NteF90eHQoKTsNCj4gKw0KPiAgIAkvKiBXb3JrIGFyb3Vu
+ZCBlcnJhdGEgKi8NCj4gICAJSW50ZWxfZXJyYXRhX3dvcmthcm91bmRzKGMpOw0KPiAgIA0K
+DQpUZWRkeQ0K
 
-ARM, PPC and RISC-V need no equivalent change, Their implementations
-were already read-only=2E
+--------------nYIZYN4huIqDTa0K4qtwXuQG--
 
-Signed-off-by: Julian Vetter <julian=2Evetter@vates=2Etech>
-Reviewed-by: Jan Beulich <jbeulich@suse=2Ecom> # x86
----
-Changes in v4:
-- Simplify arch_sanitise_domain_config() comment
----
- xen/arch/arm/domain=2Ec                   |  2 +-
- xen/arch/arm/firmware/sci=2Ec             |  2 +-
- xen/arch/arm/firmware/scmi-smc=2Ec        |  2 +-
- xen/arch/arm/include/asm/firmware/sci=2Eh |  6 +++---
- xen/arch/ppc/stubs=2Ec                    |  2 +-
- xen/arch/riscv/domain=2Ec                 |  2 +-
- xen/arch/x86/domain=2Ec                   | 16 ++++++++--------
- xen/include/xen/sched=2Eh                 |  5 ++---
- 8 files changed, 18 insertions(+), 19 deletions(-)
+--------------5Ww4dIUB371KC8I2tJ3z0MDE
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-diff --git a/xen/arch/arm/domain=2Ec b/xen/arch/arm/domain=2Ec
-index 96dc65270b=2E=2E71fff7692d 100644
---- a/xen/arch/arm/domain=2Ec
-+++ b/xen/arch/arm/domain=2Ec
-@@ -557,7 +557,7 @@ static bool v8r_el1_msa_domain_sanitise_config(
-     }
- }
-=20
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig)
- {
-     unsigned int max_vcpus;
-     unsigned int flags_required =3D (XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_=
-hap);
-diff --git a/xen/arch/arm/firmware/sci=2Ec b/xen/arch/arm/firmware/sci=2Ec
-index aa93cda7f0=2E=2Ef73ed06092 100644
---- a/xen/arch/arm/firmware/sci=2Ec
-+++ b/xen/arch/arm/firmware/sci=2Ec
-@@ -45,7 +45,7 @@ int sci_domain_init(struct domain *d, struct xen_domctl_=
-createdomain *config)
-     return cur_mediator->domain_init(d, config);
- }
-=20
--int sci_domain_sanitise_config(struct xen_domctl_createdomain *config)
-+int sci_domain_sanitise_config(const struct xen_domctl_createdomain *conf=
-ig)
- {
-     if ( !cur_mediator )
-         return 0;
-diff --git a/xen/arch/arm/firmware/scmi-smc=2Ec b/xen/arch/arm/firmware/sc=
-mi-smc=2Ec
-index 0835ddeeec=2E=2Ea973679eaf 100644
---- a/xen/arch/arm/firmware/scmi-smc=2Ec
-+++ b/xen/arch/arm/firmware/scmi-smc=2Ec
-@@ -82,7 +82,7 @@ static bool scmi_handle_smc(struct cpu_user_regs *regs)
- }
-=20
- static int
--scmi_smc_domain_sanitise_config(struct xen_domctl_createdomain *config)
-+scmi_smc_domain_sanitise_config(const struct xen_domctl_createdomain *con=
-fig)
- {
-     if ( config->arch=2Earm_sci_type !=3D XEN_DOMCTL_CONFIG_ARM_SCI_NONE =
-&&
-          config->arch=2Earm_sci_type !=3D XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_=
-SMC )
-diff --git a/xen/arch/arm/include/asm/firmware/sci=2Eh b/xen/arch/arm/incl=
-ude/asm/firmware/sci=2Eh
-index 485ce211c9=2E=2E1d566be8e2 100644
---- a/xen/arch/arm/include/asm/firmware/sci=2Eh
-+++ b/xen/arch/arm/include/asm/firmware/sci=2Eh
-@@ -32,7 +32,7 @@ struct sci_mediator_ops {
-      * it to sanitize domain SCI configuration parameters=2E
-      * Optional=2E
-      */
--    int (*domain_sanitise_config)(struct xen_domctl_createdomain *config)=
-;
-+    int (*domain_sanitise_config)(const struct xen_domctl_createdomain *c=
-onfig);
-=20
-     /*
-      * Called during domain destruction, releases all resources, that
-@@ -101,7 +101,7 @@ int sci_domain_init(struct domain *d, struct xen_domct=
-l_createdomain *config);
-  * Sanitise domain configuration parameters=2E
-  *
-  */
--int sci_domain_sanitise_config(struct xen_domctl_createdomain *config);
-+int sci_domain_sanitise_config(const struct xen_domctl_createdomain *conf=
-ig);
-=20
- /*
-  * Destroy SCI domain instance=2E
-@@ -162,7 +162,7 @@ static inline int sci_domain_init(struct domain *d,
- }
-=20
- static inline int
--sci_domain_sanitise_config(struct xen_domctl_createdomain *config)
-+sci_domain_sanitise_config(const struct xen_domctl_createdomain *config)
- {
-     if ( config->arch=2Earm_sci_type !=3D XEN_DOMCTL_CONFIG_ARM_SCI_NONE =
-)
-         return -EINVAL;
-diff --git a/xen/arch/ppc/stubs=2Ec b/xen/arch/ppc/stubs=2Ec
-index a333f06119=2E=2E82a289af85 100644
---- a/xen/arch/ppc/stubs=2Ec
-+++ b/xen/arch/ppc/stubs=2Ec
-@@ -162,7 +162,7 @@ void arch_vcpu_destroy(struct vcpu *v)
-     BUG_ON("unimplemented");
- }
-=20
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig)
- {
-     BUG_ON("unimplemented");
- }
-diff --git a/xen/arch/riscv/domain=2Ec b/xen/arch/riscv/domain=2Ec
-index 2819ff4e7c=2E=2Ee096a53cb5 100644
---- a/xen/arch/riscv/domain=2Ec
-+++ b/xen/arch/riscv/domain=2Ec
-@@ -289,7 +289,7 @@ void sync_vcpu_execstate(struct vcpu *v)
-     /* Nothing to do -- no lazy switching */
- }
-=20
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig)
- {
-     return 0;
- }
-diff --git a/xen/arch/x86/domain=2Ec b/xen/arch/x86/domain=2Ec
-index 4252339978=2E=2E35f591ab5d 100644
---- a/xen/arch/x86/domain=2Ec
-+++ b/xen/arch/x86/domain=2Ec
-@@ -590,7 +590,7 @@ void arch_vcpu_destroy(struct vcpu *v)
-         ASSERT_UNREACHABLE();
- }
-=20
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig)
- {
-     bool hvm =3D config->flags & XEN_DOMCTL_CDF_hvm;
-     bool hap =3D config->flags & XEN_DOMCTL_CDF_hap;
-@@ -633,13 +633,6 @@ int arch_sanitise_domain_config(struct xen_domctl_cre=
-atedomain *config)
-         return -EINVAL;
-     }
-=20
--    if ( !hvm )
--        /*
--         * It is only meaningful for XEN_DOMCTL_CDF_oos_off to be clear
--         * for HVM guests=2E
--         */
--        config->flags |=3D XEN_DOMCTL_CDF_oos_off;
--
-     if ( nested_virt && !hvm_nested_virt_supported() )
-     {
-         dprintk(XENLOG_INFO, "Nested virt requested but not available\n")=
-;
-@@ -833,6 +826,13 @@ int arch_domain_create(struct domain *d,
-=20
-     spin_lock_init(&d->arch=2Ee820_lock);
-=20
-+    /*
-+     * It is only meaningful for XEN_DOMCTL_CDF_oos_off to be clear for H=
-VM
-+     * guests=2E
-+     */
-+    if ( !is_hvm_domain(d) )
-+        d->options |=3D XEN_DOMCTL_CDF_oos_off;
-+
-     if ( d->domain_id && cpu_has_amd_erratum(&boot_cpu_data, AMD_ERRATUM_=
-121) )
-     {
-         if ( !opt_allow_unsafe )
-diff --git a/xen/include/xen/sched=2Eh b/xen/include/xen/sched=2Eh
-index 011292e9f7=2E=2E42a6bb545a 100644
---- a/xen/include/xen/sched=2Eh
-+++ b/xen/include/xen/sched=2Eh
-@@ -755,10 +755,9 @@ static inline void domain_update_node_affinity(struct=
- domain *d)
- }
-=20
- /*
-- * To be implemented by each architecture, sanity checking the configurat=
-ion
-- * and filling in any appropriate defaults=2E
-+ * To be implemented by each architecture, sanity checking the configurat=
-ion=2E
-  */
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config);
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig);
-=20
- /*
-  * Create a domain: the configuration is only necessary for real domain
---=20
-2=2E53=2E0
+-----BEGIN PGP SIGNATURE-----
 
+wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmqG+k8FAwAAAAAACgkQZg+p0QLLz9A0
+Jwv9EZF7DPtiJhv4rCFPnm1OI81u/Sb39PR+e0j0TkNiDDTOX94A+WFezBBH/KQD9T4BdWpEA5Xq
+YHhkpojpl7jVQ25wa4MXgboKE/h+u5164WgqNTKwQHKmESQ6APlLrusQFPbqPNKeJe1ej5n1KMsl
++hCZ5Zd0sFcJ9bNRKhHoJFCONi5GurAcMtgF3YQIH+8JfxxX0Rqhi/8tcHYT8OAT0A0T0Pn1Bx3F
+csa+Xu3g5vFt5YSLMrtowZz8rGWHhDSZQAU1a6+XrfQk1g6mPE0SoSBB0K3y8rUvLWKCZ4JHrJdv
+XCHYAisufJVD2x8nuhE9S5ohluNWjqBPCv67coWUgSQJqud8ifj1D7umpBphx1f2g5NSpqr7OKAe
+x2IqURKX5MTQ4mc1rgxAbcxMkvgsGs/ZYtbzOtoPjGOpbdcqrnvhADBmmnI73TmZoMn/pvCce7hD
+DS7jiAGPuwKcg4pKAWuX9Qu+8Jb4s3fYfCbPP4BpBN5hPBJuJpgVboXMkaj7
+=X/A8
+-----END PGP SIGNATURE-----
 
-
--- 
-Julian Vetter | Vates Hypervisor & Kernel Developer
-
-XCP-ng & Xen Orch=
-estra - Vates solutions
-
-web: https://vates=2Etech
----=Part.2673.17d84e18c8e413dd.1a01f2fdb97.87e72c8dfe524e6a=---
+--------------5Ww4dIUB371KC8I2tJ3z0MDE--
 
