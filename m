@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FB1CC5DF81
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 08:52:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1396129.1634179 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79E5EC5DF82
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 09:00:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1396152.1634187 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwyVn-0002zX-7J; Thu, 20 Aug 2026 08:52:35 +0000
+	id 1wwydG-0004pr-V0; Thu, 20 Aug 2026 09:00:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1396129.1634179; Thu, 20 Aug 2026 08:52:35 +0000
+Received: by outflank-mailman (output) from mailman id 1396152.1634187; Thu, 20 Aug 2026 09:00:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwyVn-0002zP-3G; Thu, 20 Aug 2026 08:52:35 +0000
-Received: by outflank-mailman (input) for mailman id 1396129;
- Thu, 20 Aug 2026 08:52:33 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wwydG-0004pk-Rx; Thu, 20 Aug 2026 09:00:18 +0000
+Received: by outflank-mailman (input) for mailman id 1396152;
+ Thu, 20 Aug 2026 09:00:17 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wwyVl-0002xm-DB
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 08:52:33 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wwydF-0004pe-KB
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 09:00:17 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwyVk-00Cfd1-Pu
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 10:52:32 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wwydF-001Qtc-0K
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 11:00:17 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a86c044-bab6-0a2a0a5309dd-0a2a4504e022-28
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 10:52:32 +0200
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a86c21f-bab6-0a2a0a5309dd-0a2a4506df6e-22
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 11:00:16 +0200
+Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a86c050-b57f-0a2a45040019-d1558036f030-3
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 10:52:32 +0200
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-4953e04ef16so21152035e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 01:52:32 -0700 (PDT)
+ id 6a86c220-195a-0a2a45060019-d1558033e82f-3
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 11:00:16 +0200
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-4954f5e8020so11234115e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 02:00:16 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482b14c45f1sm11559893f8f.31.2026.08.20.01.52.31
+ ffacd0b85a97d-482b1441748sm12110014f8f.8.2026.08.20.02.00.14
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Aug 2026 01:52:31 -0700 (PDT)
+ Thu, 20 Aug 2026 02:00:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,55 +55,55 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787215952; x=1787820752; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1787216416; x=1787821216; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=ZPnDSCBKcp/+Hix8hZK5uWZ7zXCAvzvq1TTnQ1h7pDo=;
-        b=O+UKfh5Sr+eYVUsBTgx6WKz8X8+/zgL3fkOqh4C3gYVaAg5eAHaYuNW5/X+U3S0vnJ
-         UP2zKMoTkL3TTk30j4y8ggl6ZcNkVzVNTa19qGclwf9A3kS/15Hps8IRDaFBiUtty27r
-         zrzA51wOY+V0FTDBLHa8zmYzfhzH3q6c4rjkI8Q+5QVjbMEmoCR5L42vwybo0/GtVCQl
-         2SXDrOwrtP+QoJCUTdZ8s+F+V4EhZSd8shVburN0UV/8wcXYCDiH/jiG4oxIWyvnp8zp
-         ErHb1NrqrdB0F0y6Mr7iMw4JWtqLxxsL8lHfojHahmmoU/xu9wmdd1KLPzKy/Rg5otWf
-         UW7Q==
+        bh=Kbk0p0sFdTOXpyHNgmO43sz9czAYt6f+PyD+UeTBAtc=;
+        b=PhuKFt5C8g1ytrjAcOvSHpcgdLeOtKW9lBwVqzLUfgNMPW4UvxK/4oYNo+0nq9zeHU
+         Kn4QxxIpShloOmRGym7KVU/f44jHdWo8BSeW6qUP5mq0qKsjZjWfU8e6uYMmQmUGEcT3
+         VrnaPGzmjghUbXIf97yW/aLt8iNCKKv7IKGkaBK8AcV0MfxjnFkK80XU0TcE9wmvk5di
+         cpXDvT76prEyXzs8pYu0//M2BzeCJv0pl3wAD/0Gj1PZfj/a8O3SuIq9BXvKmbrsu/jA
+         WX1nRhCpDS1DNCkEBi6LB9zSpznu3zftB+ZrSHKZYDw5TgDJ+zKmsWvBWZbG4YQfW3JJ
+         sO0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787215952; x=1787820752;
+        d=1e100.net; s=20251104; t=1787216416; x=1787821216;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=ZPnDSCBKcp/+Hix8hZK5uWZ7zXCAvzvq1TTnQ1h7pDo=;
-        b=dABWsTRTLIT+qCqjXYLI9iZc51fMtxGvyBsB44qqP9VALuq5R+fwxJLSFw36tgclQS
-         /MOrAc0p9rzrN5fYQc96w1wxCgY+7OT5gteH6PVlaiKeSTmagmjfcPCaNALPEYGZfk+a
-         VxmCrXZRk6xIhJBXYTe8G+SX9o1Rjk0F8vQDah7+c4cLutiWyKPlId17LsScllzrZIMi
-         ptLuIQTJcBqOWn53kX3aQNdnQn2rsySrWwjpwLIwgli2dxspgmzWSXZd1Ft9YPP6zdrv
-         TJTt+LcY65NqyRxcQUQmJNbmcFskL3cW693Uu1AWmm4bmYWi4v0WtTAcZuI7oFm+26IP
-         dEQA==
-X-Gm-Message-State: AOJu0YxpOWe/sCZyqtB54845HsFWOoXod++dbU81sbk/r6tQl2UFdC++
-	2dkWjtk4PZGS0syKfFD5DYywfeLQk2K2GknHDPwddsU/QeAu/bjRqNJPF8P5scf11rKjNhOhPrH
-	DvR++sw==
-X-Gm-Gg: AR+sD13SaO/7rR3+FUwoFyWqd/aKWccs8rPR/anbc+Q5OedKLpr2O9b0JITDynUzBkA
-	foFTwoNOSC9mbKMSzsTMpPYDBWOE8KuuTN9aDhENAPq2t1NU14r8BpZHHgX93suRPZHOOonBFIn
-	1ioe0728MZMAatRLBq5mLXIn9SqVHozdfJHTnkt265d7uuU2D6eoAKsoBs4EfHMq0CjVjSViZCB
-	9bmqYChxB2CI7bx3iJXyEdsHlKPY2b1SGGjpR0GZf1XFIL6eAUubLXto8RyUj0gtBk8mtM+kg8h
-	kFs4wLI4Mm3+sOQ+7eT//Ygit+bGKN4//XNEvKKZvWozbHfbmWrAH5stcv2Px+F2regv43egU8L
-	HrdFGeLoHVhmsiARTo1wV9C/YmzD4uFE+s1kSgXK/3mWLGHRpRPkAwjfIspL59WuAH2CBOVe+JH
-	ODOcPNKwNXnJu8TYsdwu9bnDiUvJ0OQWpIiI2RwCl6xb5V4VLf2uVEJMtkccatNuISJoZNWiJcy
-	J1Aa5txk2pFHq5zJ8a2HYXo5eYnxDKYHkCBWvUKHgojn/yaD2y5
-X-Received: by 2002:a05:600c:3b95:b0:495:48d7:f178 with SMTP id 5b1f17b1804b1-499aa1b97ccmr184623225e9.11.1787215952258;
-        Thu, 20 Aug 2026 01:52:32 -0700 (PDT)
-Message-ID: <39a438f2-e54f-4975-952e-cfcd101c8050@suse.com>
-Date: Thu, 20 Aug 2026 10:52:31 +0200
+        bh=Kbk0p0sFdTOXpyHNgmO43sz9czAYt6f+PyD+UeTBAtc=;
+        b=oCJ45odST1EP31+5fnWxnSeTboQCo+d6hsrD6CWxPHehHzX4/PzQI35y5C1ZJpu7j4
+         lZai8BS7YYJMDW9IcPOxUEcjIC/Wwbw1210ORn1B5Dn9bDt1ALVGP+KDOhXg3wty5kWR
+         Gya7SqW88bDptq6rR9CYROV8ppnPTh7/liszZ3GPZuf08ykV1DB9ah3p8+WvpGQrqj5d
+         vUyI6/cKD/i1fuemxD3sM1hjrz8GXqQLOHoK1IM6EOVAmes71mHc/IM6vsoXxeCP+YQz
+         MURnWLS1mY2SOjzlfX18+aQRy2wU27fc5dtKiZKlR0TM0ZJp03G4QQGU3WrrsdRIXwiD
+         TXLw==
+X-Gm-Message-State: AOJu0YzJnitCLjn6ckIYzUV1AWGnOsk9WmRmoeQwY9dteQurh0Ptr2Cl
+	E66hEWb8EVb4bd9poyOkB4qzVZQPMJn109j7cxdagCVMFSCJ592UK+7/NEiYLQT92A==
+X-Gm-Gg: AR+sD132zL84jRG5GZTw8cnKMl9lZB/MV1ZT+yeiPVOKQDuIrTXS8T62LXdYqmuyhQf
+	MWhXNKE7FRnGWW4jHGua2Q36coAAgFRZLExSpS8MBC3TafRLlIWEIc87vKXgRi2pB81p7B82Yje
+	/xluQhzFJSLCPBqDIbMH8SARU91E8kjk33OCJrzLwlgbVQG0eGWV4choe69mqenSboYNYnho0eQ
+	ArA37gFSFWjpG/iQDuOS8moEbct2hBGod1TARYiYSWaIaP8F0P5ZO5ebhVsiy8lejkbzJVjs2xI
+	aAvamPRBOVKeGPmjrP74t9RwuFWClQmRTupEE51AQIsmJMtfQ8SjO8R/Z/LbimDZiMfGNgphd6W
+	9qDzAl9v/1gPvgfDrlZW6MN0gRCLJKNrdrQXzQNBJOGN/VhuCZi/7x20GTWz9FmILIuKnYBVebl
+	QaiuXkGaSOsWEPprAC5UoZgodrFSbyHW55E9DThIgMyfx+bMS2tvAOvBnfttrCy/7En6FxExNe0
+	L2GOHO0T7EQe10C51rR0Rp7u4sx+WLNRh4Ykoc3XFvTazZTDyjhDI7LK+2zxa0=
+X-Received: by 2002:a05:600c:468a:b0:496:c9cd:e7ab with SMTP id 5b1f17b1804b1-499aa172377mr151370065e9.5.1787216415813;
+        Thu, 20 Aug 2026 02:00:15 -0700 (PDT)
+Message-ID: <149d9810-7f8c-487b-aa5e-208de2f4c2ec@suse.com>
+Date: Thu, 20 Aug 2026 11:00:14 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 2/2] x86emul: use latched XCR0 in x86emul_get_fpu()
+Subject: Ping: [PATCH] Xen/gnttab: improve error handling in
+ gnttab_dma_{alloc,free}_pages()
 From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Andrew Mbugua <andrewprecious388@gmail.com>
-References: <0c3cb1ae-4888-4319-a348-263f7913a7f2@suse.com>
+To: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+References: <00493037-e77e-4631-8594-64ad4e46fa40@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -128,106 +128,99 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <0c3cb1ae-4888-4319-a348-263f7913a7f2@suse.com>
+In-Reply-To: <00493037-e77e-4631-8594-64ad4e46fa40@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1787215952-504DBB50-80ADE671/0/0
+X-purgate-ID: tlsNG-16d1c6/1787216416-F7ACA77B-A8DAF98E/0/0
 X-purgate-type: clean
-X-purgate-size: 3770
+X-purgate-size: 3671
 
-Avoid re-reading, and instead pass state into the function. For
-get_fpu() to use "s" as new argument, we need a new local variable in
-x86_emulate() though.
+On 16.02.2026 09:55, Jan Beulich wrote:
+> Both decrease-reservation and populate-physmap can succeed partially. For
+> the former this may be pretty unlikely, but clearly the latter can hit
+> both out-of-memory conditions in the hypervisor or denial because of the
+> allocation exceeding the domain's allowance (there's no interaction with
+> the balloon driver here either).
+> 
+> In gnttab_dma_free_pages() we simply can't give back to the system what
+> hasn't been re-filled with backing memory. For gnttab_dma_alloc_pages()
+> both parts of the overall region need dealing with differently.
+> 
+> While no present caller of gnttab_dma_free_pages() checks its return
+> value, also don't use -EFAULT there: It really is an out-of-memory
+> condition. (In gnttab_dma_alloc_pages() -EFAULT doesn't look quite right
+> either, but I couldn't think of a clearly better error code there.)
+> 
+> Fixes: 9bdc7304f536 ("xen/grant-table: Allow allocating buffers suitable for DMA")
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> ---
+> I'm likely screwing things up, as I can't understand how this is intended
+> to work: args->dev_bus_addr shouldn't really be in pseudo-physical address
+> space, or else the address isn't suitable for handing to a device in order
+> to DMA to/from it. Hence using __phys_to_pfn() on it to then hand the
+> result to pfn_to_page() feels bogus. Was all of this perhaps only ever
+> intended for (tested with) translated domains? With the uses of
+> xenmem_reservation_va_mapping_*() only being masquerade?
+> 
+> Furthermore the allocated buffer ought to have been contiguous in
+> machine / DMA space. Yet the way it's re-populated upon freeing of the
+> area doesn't guarantee that at all.
+> 
+> All of what is done assumes dma_free_{coherent,wc,attr}() is capable of
+> freeing piecemeal. I only checked dma_release_from_dev_coherent() to
+> fulfill this requirement. If this can't be relied upon, please consider
+> this submission as merely a bug report (for someone else to fix).
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-That new local "s" can likely be leveraged to replace explicit uses of
-"state" in the function (past the point where the alias #define is).
-Long term we probably want to aim at consistently using "s" everywhere
-where a struct x86_emulate_state * variable/parameter is needed.
-x86emul_get_fpu() isn't using "s" right away just because that would end
-up inconsistent with adjacent code (put_fpu() first and foremost). I
-could certainly change that.
+Even in case this patch is complete rubbish, something wants doing here. May
+I therefore ask for feedback (perhaps in the form of a completely different
+patch)?
 
---- a/xen/arch/x86/x86_emulate/private.h
-+++ b/xen/arch/x86/x86_emulate/private.h
-@@ -743,12 +743,13 @@ int x86emul_get_cpl(struct x86_emulate_c
-                     const struct x86_emulate_ops *ops);
- 
- int x86emul_get_fpu(enum x86_emulate_fpu_type type,
-+                    const struct x86_emulate_state *state,
-                     struct x86_emulate_ctxt *ctxt,
-                     const struct x86_emulate_ops *ops);
- 
- #define get_fpu(type)                                           \
- do {                                                            \
--    rc = x86emul_get_fpu(fpu_type = (type), ctxt, ops);         \
-+    rc = x86emul_get_fpu(fpu_type = (type), s, ctxt, ops);      \
-     if ( rc ) goto done;                                        \
- } while (0)
- 
---- a/xen/arch/x86/x86_emulate/x86_emulate.c
-+++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-@@ -394,36 +394,30 @@ do {
- 
- int x86emul_get_fpu(
-     enum x86_emulate_fpu_type type,
-+    const struct x86_emulate_state *state,
-     struct x86_emulate_ctxt *ctxt,
-     const struct x86_emulate_ops *ops)
- {
--    uint64_t xcr0;
-     int rc;
- 
-     fail_if(!ops->get_fpu);
-     ASSERT(type != X86EMUL_FPU_none);
- 
--    if ( type < X86EMUL_FPU_ymm || !ops->read_xcr ||
--         ops->read_xcr(0, &xcr0, ctxt) != X86EMUL_OKAY )
--    {
--        ASSERT(!ctxt->event_pending);
--        xcr0 = 0;
--    }
--
-     switch ( type )
-     {
-     case X86EMUL_FPU_zmm:
--        if ( !(xcr0 & X86_XCR0_ZMM) || !(xcr0 & X86_XCR0_HI_ZMM) ||
--             !(xcr0 & X86_XCR0_OPMASK) )
-+        if ( !(state->xcr0 & X86_XCR0_ZMM) ||
-+             !(state->xcr0 & X86_XCR0_HI_ZMM) ||
-+             !(state->xcr0 & X86_XCR0_OPMASK) )
-             return X86EMUL_UNHANDLEABLE;
-         /* fall through */
-     case X86EMUL_FPU_ymm:
--        if ( !(xcr0 & X86_XCR0_SSE) || !(xcr0 & X86_XCR0_YMM) )
-+        if ( !(state->xcr0 & X86_XCR0_SSE) || !(state->xcr0 & X86_XCR0_YMM) )
-             return X86EMUL_UNHANDLEABLE;
-         break;
- 
-     case X86EMUL_FPU_opmask:
--        if ( !(xcr0 & X86_XCR0_SSE) || !(xcr0 & X86_XCR0_OPMASK) )
-+        if ( !(state->xcr0 & X86_XCR0_SSE) || !(state->xcr0 & X86_XCR0_OPMASK) )
-             return X86EMUL_UNHANDLEABLE;
-         break;
- 
-@@ -1310,7 +1304,7 @@ x86_emulate(
-     /* Shadow copy of register state. Committed on successful emulation. */
-     struct cpu_user_regs _regs = *ctxt->regs;
-     const struct cpu_policy *__maybe_unused cp = ctxt->cpu_policy;
--    struct x86_emulate_state state;
-+    struct x86_emulate_state state, *s = &state;
-     int rc;
-     uint8_t b, d, *opc = NULL;
-     unsigned int first_byte = 0, elem_bytes, insn_bytes = 0;
-@@ -1439,7 +1433,7 @@ x86_emulate(
-     /* With a memory operand, fetch the mask register in use (if any). */
-     if ( ea.type == OP_MEM && evex.opmsk &&
-          x86emul_get_fpu(fpu_type = X86EMUL_FPU_opmask,
--                         ctxt, ops) == X86EMUL_OKAY )
-+                         s, ctxt, ops) == X86EMUL_OKAY )
-     {
-         uint8_t *stb = get_stub(stub);
- 
+Jan
+
+> --- a/drivers/xen/grant-table.c
+> +++ b/drivers/xen/grant-table.c
+> @@ -1095,6 +1095,28 @@ int gnttab_dma_alloc_pages(struct gnttab
+>  	ret = xenmem_reservation_decrease(args->nr_pages, args->frames);
+>  	if (ret != args->nr_pages) {
+>  		pr_debug("Failed to decrease reservation for DMA buffer\n");
+> +		if (ret >= 0) {
+> +			/* Free the part where decrease didn't work. */
+> +			size_t done = ret << PAGE_SHIFT;
+> +
+> +			xenmem_reservation_va_mapping_update(args->nr_pages - ret,
+> +							     &args->pages[ret],
+> +							     &args->frames[ret]);
+> +
+> +			if (args->coherent)
+> +				dma_free_coherent(args->dev, size - done,
+> +						  args->vaddr + done,
+> +						  args->dev_bus_addr + done);
+> +			else
+> +				dma_free_wc(args->dev, size - done,
+> +					    args->vaddr + done,
+> +					    args->dev_bus_addr + done);
+> +
+> +			if (!ret) /* Nothing else to do? */
+> +				return -EFAULT;
+> +
+> +			args->nr_pages = ret;
+> +		}
+>  		ret = -EFAULT;
+>  		goto fail;
+>  	}
+> @@ -1128,7 +1150,12 @@ int gnttab_dma_free_pages(struct gnttab_
+>  	ret = xenmem_reservation_increase(args->nr_pages, args->frames);
+>  	if (ret != args->nr_pages) {
+>  		pr_debug("Failed to increase reservation for DMA buffer\n");
+> -		ret = -EFAULT;
+> +		/* Can only free what has been re-filled. */
+> +		if (!ret)
+> +			return -ENOMEM;
+> +		if (ret > 0)
+> +			args->nr_pages = ret;
+> +		ret = -ENOMEM;
+>  	} else {
+>  		ret = 0;
+>  	}
 
 
