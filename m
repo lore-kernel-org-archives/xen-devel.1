@@ -4,49 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79674C5DF81
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 13:00:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1396516.1634340 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2EB3C5DF87
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 13:04:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1396528.1634349 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wx2NN-00005d-P1; Thu, 20 Aug 2026 13:00:09 +0000
+	id 1wx2Qz-0000fN-Br; Thu, 20 Aug 2026 13:03:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1396516.1634340; Thu, 20 Aug 2026 13:00:09 +0000
+Received: by outflank-mailman (output) from mailman id 1396528.1634349; Thu, 20 Aug 2026 13:03:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wx2NN-00005W-M9; Thu, 20 Aug 2026 13:00:09 +0000
-Received: by outflank-mailman (input) for mailman id 1396516;
- Thu, 20 Aug 2026 13:00:08 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a01f41ca51000c4f3@swg.vates.tech>)
- id 1wx2NM-00005Q-1V
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 13:00:08 +0000
+	id 1wx2Qz-0000fF-8A; Thu, 20 Aug 2026 13:03:53 +0000
+Received: by outflank-mailman (input) for mailman id 1396528;
+ Thu, 20 Aug 2026 13:03:51 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <brchuckz@aol.com>) id 1wx2Qx-0000f4-74
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 13:03:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wx2NK-0026Ok-SH
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 15:00:06 +0200
-Received: from [10.42.69.2] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a01f41ca51000c4f3@swg.vates.tech>)
- id 6a86fa56-2eae-0a2a0a5409dd-0a2a450293da-2
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 15:00:06 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a01f41ca51000c4f3@swg.vates.tech>)
- id 6a86fa56-6ca4-0a2a45020019-b9ff1c2292b9-3
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 15:00:06 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a01f41ca51000c4f3.004 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 20 Aug 2026 13:00:00 +0000
-Received: from [192.168.1.18] (88-188-240-210.subs.proxad.net [88.188.240.210])
- (Authenticated sender: teddy.astie)
- by mail2.vates.fr (Postfix) with ESMTPSA id A3BAA81FCD;
- Thu, 20 Aug 2026 14:59:59 +0200 (CEST)
+ id 1wx2Qw-0092QQ-K0
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 15:03:50 +0200
+Received: from [10.42.69.3] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <brchuckz@aol.com>)
+ id 6a86fb33-2eae-0a2a0a5409dd-0a2a4503a1e6-14
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 15:03:50 +0200
+Received: from [98.137.65.146] (helo=sonic309-20.consmr.mail.gq1.yahoo.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <brchuckz@aol.com>)
+ id 6a86fb34-fae8-0a2a45030019-62894192a76a-3
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 15:03:50 +0200
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic309.consmr.mail.gq1.yahoo.com with HTTP; Thu, 20 Aug 2026 13:03:48 +0000
+Received: by hermes--production-ne1-6dbcb84f44-wqnk6 (Yahoo Inc. Hermes SMTP
+ Server) with ESMTPA ID 57e5b9f33273342361b36bf3a60d741b; 
+ Thu, 20 Aug 2026 13:03:46 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,269 +50,185 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=LMJ/We7AMBJ6vYMkpXgFRri8ls/9xx3OqrSUFlLzBf8=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=lcGR9zpeN0ksDovTDDd0nyhaO69fvhB2IsL9ThAVq+ZlI98YA93k+51JgSvHhLx7isAD+bDRw
- wahCQV/VjLJLuMDeSdeMm6vN7QQC8m9VS46FPsnu1QPno1NBQPNsIN3m3b6xa/vtdVUmxHtSOem
- aGpFo5ghr3F+v/TyWtBcSqCcmGq8VYO5hSr+upZZ+BlaIGMeemyGIN+oPXOMLfY9IYW2s2+JCZO
- x72Gnr36ZMLz8spGsImneleJtL9kyHI9NSUT1/CfcgwbXqw87a85LD2PdKkdrsi9ehQ2DwZzPUG
- onDNU67mP2U9V17NvS+9EKzCmkzjEAnXagKiQSoLjNkA==
-X-Zone-Loop: 24f5647f6d506b4598fdcec18f9eceb7d772106d97ea
-x-campaign-type: default
-x-transaction-id: f63094c6-d676-4fee-a266-0c81496eb8dc
-x-swg-uid: 01-e24ecdd6-f74c-45d5-a2c9-5bd044aa3503
-X-Mailer: Sweego
-Message-ID:
- <1787230800.8631fc262581453bbf619ec5b2062170.1a01f41ca51000c4f3@vates.tech>
-x-swg-bid: 1787230800.8631fc262581453bbf619ec5b2062170.1a01f41ca51000c4f3
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-Date: Thu, 20 Aug 2026 14:59:59 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1787231028; bh=dPE99sHCvypQ23EzktncrpJmi6hmAomsenCsxwBOrio=; h=Date:Subject:To:Cc:References:From:In-Reply-To:From:Subject:Reply-To; b=bWVMhEOLOQCP3J+DVEwMfTBDQ7KST/O/8ganoNSXspmHsnA6ZHkZseOlR+KQyXBmZ6TMNWRjwI8o+mqA8iaamNg+46/B70U51EQ7U+TDgxRaHY4XDmWaqwZyTMkIPrQVBb7IJ8G641xtfVGd9omOaDAIeWASsCeNvkdZii2+gauFsxDRG99HWwtby8lWIW5a1LE3I0zDtHcE6HVtmKLdS2WkQw6FW+xFwR8dQ5WRkFwnG4mWVt93l4VY+VaNwVpIMoOrNAg6nvFSCdZ5NrqMy9doum2g3lOlngvDeBMkKTOAnjeMWXHxZ4sGprPv5qlhYx6nIcX4PRUs3xsSjVHuFg==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1787231028; bh=O8SruZh0pIXQ3xaDfux1pefGZ4Ws/Uijrrp8i9Xsots=; h=X-Sonic-MF:Date:Subject:To:From:From:Subject; b=QY8jhTRF72QPwgjA3QylVMl0QrwCgo/QIsveP+YbVlCNmweGkEojgZHGVsKHwAKCBGUEK3QgRU+zc2qQXlSZtye2c7p3ZfwcaK79zzmzfVRgx37wVFZ/iuWskuE9qQDYOCTp9+l1+3PIs1BIok5AVv6zuwFCBW1P/PREwr3YNKLeVGSZlN0En7qO7Lq8tq8PHF0V9G6w5ZrDrpfCBwEVSjygVIohNB80U0UJnGLf2Lz/a+k/cGZ95QZ6lvB3JdwNLGaSRTA3q2kU/T7pKi4qAI5VRJCuCllKg+vF9o47dpWI1vQdvLYH0Tn3RMXn4xSjSBluLK8iXTfgAguI7zUoFA==
+X-YMail-OSG: PbvUjnsVM1mlRT1deoOi1yhsgg9vkToRu0KFJhPE3cSr6BMFqrSSWcnboFmd3w9
+ 2INKpa1.CfEZT50feO4YJeXsw0xYkIXU9nT3VrxOZlN3ptoJSUhzKmeZylnIdxtxlRugodjl_DeR
+ 3WUVGRCo58wOwb768KnTWLrhgiyv6cdfrRtWUFbPofgq56ljDddxCefQGip46Pd6RIqcXtRwcoVv
+ ZYtpT93XIgSOkQYqFZVCtC_JNMxpojkoV_4kNR3YtsSzQrgdCNE.VFkCeEmW6VM4PB4nWbtf5fF6
+ ncv7eQL3NbbhAm5wIcgc4TRKZVBztqE_k3UrC6XxpGw8l84JdP88YJ0_mFxaE8niSihh8oaPYhcq
+ UlGRAdlyiR1NLWdiEr4roKl0uuBQy9wqMUXyl_94I8tkMmGQOh7Fp9KsUF_mX0yXoarZ.jyb9Gci
+ kHCviHEDo6ke_9ne2YtEo9qW0rJJ5LKh3DOes.Ej.PRcc4RR.rsxBKGsJ3Aqtipdgoot0kvZpKdU
+ 3XX1WEIczJi.n12lhlxbj916ceAk.kXpxRh2xSQN9d5OkvTTjGS9c8dSIu9AmyDnE5gDsC7e6FG_
+ XH_T7I5ihVuBNKCL1gfxSkOJUxrRfpMRK5bUx99XCTWF45xb0Lv4eilVUA1qabwtyHwwZKcebN8s
+ 7rnLMidPKCKsu94tjXhnSu3jFCZMvfAVY9oIzh1frzY_Y3tal72M3KCdt7A5P30YeOPjHQ8CqYh8
+ HS7YaTYEnCRSbsyAPqJ7wvNYAJZknlxKMMDWAQsVBRGiXyYXtFzzQcsW7Ob7mgde5Ck3EPd1Nakg
+ e9g4MNPyrn.lz3Ddk8fXv.lJ73XKmxt5k7githmDd9Xb0PyBOF1xJ5nf56SlgoY0jiszrISvv2jV
+ 0GxQaQaCt9EnNRcauxJ21rdTLzCFPLWm5FxYSfO4su4f4KHGWUo5ceBe66loB.mIzdNbr6cMx4RE
+ RmoDhxlww_SML.KfBD6FKWWq2tWbQF_igok_j7mcOI8GSYoKP7kyx5SaaNAs2Z0KTcmEN7vys1mw
+ PlV4wDliM8pUwVYpjHL4QLBLBr_SjFxnCWa9Q37ZCwtPuVLaekYsCQv6wgx7dRWONQrAZAUrlOB4
+ AV0FW_zBwp0FbHUp0_m7sbGxPTid1V6hcy4Mlq4kLGcOfIu_NzWJpiMWMME1v.s5mTR_eyg8LPqD
+ kbGxPAREjV9KZ8qaem9G7lJ.0evDgztlw1xjkYRp5gClFwq_u3SLBFOGk8Ff5wOdIFm.KgaIR6fY
+ WupWAkVvDJpw53XJrfdQZRo4r2Dpyr23wQyIxhIXkn3OVX0rVVhkd9D1sF55CffBryCyBVh2YsTR
+ 8pJPPmZnko27bikv1sYZeKAw6VH48MwIh85ZPNKhjiv4JDhV6eVmjTJkVkNOklfl041YFi2nUG2.
+ tS0i8KXYl9bfunNU8SFhHszDPDmtTVMIJRCmqB3Vge_1vlz1tZpa4455zT8PBxc5Hs9eVQAkGLv7
+ P5Cqu8XT_GGS0.jR6RjHqgBFvlpRnLw7N__cAxoL1xQNLRl961o.dL_31mSY.4wuFm4di6PUEu4o
+ 9JFe9NGQY5FMzPPHbwiq3WMwzYdOonCBVnIHbVWOONgJXEx9F2BuvMDt8MgatP6Wng7RzBRGULjx
+ R_iHZhLY3s4f.GWvtK0QyoBNbSJp7SGjpGILE3SJWAzhVcVf7tpEOG3RysCTv5MRS1PFZ5Guh15f
+ qZcYORo4rtAIre24HJgbEokNeifEHn0uBqPyjvyPn43QtGUkzVBtbO52PuAjLllI2YLHLgrPz5f0
+ QTxplbLrwYDd2CTPOR1jxzsGfBrNcjvjq8l0t19kRDq87nt25TUum5s2zPMPtIvq4knpGEcEuFwr
+ 6pWJ7KX6sU6PvkNKzn62EO8Cx_0PON5wOLnefZyLqvu5RcDDPqF0NL_cTu7GwUw830kBbxyEfem.
+ 4tjuyfJ5yAhlZZY3nhswc8L2lwRBv9HazwJB8FEFVTrCq6Zvm6A_GWHat9m75xoKGNtbpg_B3PK2
+ F0565IeME5yKv7S5I3Buk4BGbO4EYb997x1RmNaE4wQUpE2dXeu.mmUgKoQI6UsGtQiMlK7xHVRz
+ Yi2QtOjb8.enjZc3Laa1ElsQzKRDhbi5y6tj3.57e5FxnyNsrCFJhTCQkRaNqv5pCHFzRQTz67Td
+ PJNeKBgdYFGSeH3mVZwOQK9.mGtD9Cw83mIUfW0mYUmu50pJlkMsjAxmBs5cfJwE0VX6DrpxLXzT
+ SZ1G0fO.8Y33nYygeKO1gp3cnGhgoyLKqAFmcxT9nRcGSbkc-
+X-Sonic-MF: <brchuckz@aol.com>
+X-Sonic-ID: 80061041-86f3-416a-9689-bd491a756f1b
+Message-ID: <0762fb50-01b5-4ae2-8587-7574020082b4@aol.com>
+Date: Thu, 20 Aug 2026 09:03:46 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 02/23] x86/cpu: report SMX, TXT and SKINIT capabilities
-To: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, trenchboot-devel@googlegroups.com
-References: <cover.1785668458.git.sergii.dmytruk@3mdeb.com>
- <be993e757550b69a6f94f89476ba71131b434741.1785668458.git.sergii.dmytruk@3mdeb.com>
+Subject: Re: [PATCH v2] tools/hvmloader: implement Intel IGD extended VBT
+ support
+To: Jan Beulich <jbeulich@suse.com>
+Cc: qemu-devel@nongnu.org, Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>,
+ xen-devel <xen-devel@lists.xenproject.org>
+References: <20260802050824.10554-1-brchuckz.ref@aol.com>
+ <da2200cd-def7-4cce-a6c2-9f9ac9e202ce@suse.com>
+ <de56c8bd-f0e8-4fe9-8cf5-f6807698176c@aol.com>
+ <02a7dc18-4184-4e86-84cb-121769187f71@suse.com>
+ <1858e8e6-73fa-4017-93e2-c733fbf0ec8d@aol.com>
+ <d6e603bf-8dc5-4ac7-842f-ff9d1f67b98f@suse.com>
+ <fdec0b6b-eddf-4a36-a755-c67963daa9ea@aol.com>
+ <6ecf80ef-2f0e-44fb-beab-dbcf065a4431@suse.com>
+ <bb44067c-6739-4e83-a0fd-cc7ea797048f@aol.com>
+ <4c58bda6-e9ed-438d-b96e-feda74a6c4c7@suse.com>
+ <31a5870f-2a4d-4dc0-af9c-f0567e0f6fb3@aol.com>
+ <db8fd04d-bbc7-41c7-8473-b821d7f77d5f@aol.com>
+ <302ed12f-40ca-405c-80ca-ac4f2785d754@suse.com>
+ <cdae1785-4d9a-4aab-929e-de55c26b7b94@aol.com>
+ <10cd9f6b-678b-407b-a51e-70e9ed7a35fd@aol.com>
+ <131b1252-b108-4b4c-8457-673ff0d20d5e@suse.com>
+ <682975cc-4857-42b2-badf-b638869f3268@aol.com>
+ <7ab98288-0c5e-472d-87dd-5586e60027bb@aol.com>
+ <f0ffe015-1bc5-4091-8dbe-2b4eee9cec2d@aol.com>
+ <b05a3553-398d-4ed0-bbf1-6e93cf385fe2@suse.com>
 Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- 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
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <be993e757550b69a6f94f89476ba71131b434741.1785668458.git.sergii.dmytruk@3mdeb.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------5Ww4dIUB371KC8I2tJ3z0MDE"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1787230799830
-X-purgate-ID: tlsNG-720697/1787230806-319CB2AC-8063F3CF/0/0
+From: Chuck Zmudzinski <brchuckz@aol.com>
+In-Reply-To: <b05a3553-398d-4ed0-bbf1-6e93cf385fe2@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailer: WebService/1.1.26254 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
+X-purgate-ID: tlsNG-33051d/1787231030-768FA4E9-A21D3A9B/0/0
 X-purgate-type: clean
-X-purgate-size: 12636
+X-purgate-size: 6406
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------5Ww4dIUB371KC8I2tJ3z0MDE
-Content-Type: multipart/mixed; boundary="------------nYIZYN4huIqDTa0K4qtwXuQG";
- protected-headers="v1"; hp="clear"
-Message-ID: <692be7a2-9d21-4d6b-a260-f33643063575@vates.tech>
-Date: Thu, 20 Aug 2026 14:59:59 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 02/23] x86/cpu: report SMX, TXT and SKINIT capabilities
-To: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, trenchboot-devel@googlegroups.com
-References: <cover.1785668458.git.sergii.dmytruk@3mdeb.com>
- <be993e757550b69a6f94f89476ba71131b434741.1785668458.git.sergii.dmytruk@3mdeb.com>
-Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- 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
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <be993e757550b69a6f94f89476ba71131b434741.1785668458.git.sergii.dmytruk@3mdeb.com>
+On 8/20/2026 3:58 AM, Jan Beulich wrote:
+> On 19.08.2026 21:09, Chuck Zmudzinski wrote:
+>> On 8/19/2026 1:49 PM, Chuck Zmudzinski wrote:
+>>> On 8/19/2026 11:47 AM, Chuck Zmudzinski wrote:
+>>>> On 8/19/2026 9:51 AM, Jan Beulich wrote:
+>>>>> On 19.08.2026 14:36, Chuck Zmudzinski wrote:
+>>>>>> On 8/19/2026 8:16 AM, Chuck Zmudzinski wrote:
+>>>>>>> Yes, I agree that v3 of the patch to hvmloader should presume that the DM can get
+>>>>>>> a copy of the OpRegion and read its contents so most of this can be done in the
+>>>>>>> DM instead of in hvmloader. So from hvmloader's perspective, the patch will be more
+>>>>>>> about avoiding the layering violation than anything else.
+>>>>>>
+>>>>>> However, there is one advantage, from the viewpoint of the Xen virtualization platform
+>>>>>> as a whole, to do the patching of the OpRegion in hvmloader instead of in the DM.
+>>>>>>
+>>>>>> If we patch the OpRegion in hvmloader as v2 of this patch does, we provide a common
+>>>>>> solution for extended VBT support for Intel IGD devices that would be compatible with
+>>>>>> all DM implementations, not just with Qemu. So why not do the patching of the OpRegion
+>>>>>> in hvmloader?
+>>>>>
+>>>>> As indicated before: If the OpRegion holds data that is needed to drive the
+>>>>> device, and if the OpRegion is exposed writable to guests, then guest can
+>>>>> screw up that data such that subsequent guests won't work anymore. Hence
+>>>>> exposing to guests (which includes hvmloader) needs to be stopped, or at
+>>>>> least be limited to r/o. That, in fact, includes exposing to any privilege-
+>>>>> restricted DM as well.
+>>>>>
+>>>>> Exposing r/o may be entirely okay (i.e. may not be a layering violation),
+>>>>> depending how exactly an OpRegion surfaces for a device (on the host). Aiui
+>>>>> it's not addressed by any of the BARs, yet it looks like it needs similar
+>>>>> treatment. Earlier on we also talked about the region not necessarily being
+>>>>> page-aligned. That poses, even with r/o exposure, the question of other
+>>>>> data on the same (leading / trailing) pages. This may imply that the
+>>>>> copying needs to be done strictly in Dom0, for both DM and guest to only
+>>>>> ever act on copies (which may then as well be r/w).
+>>>>
+>>>> Yes, I am thinking the DM should make a copy host OpRegion and never expose
+>>>> the host OpRegion to the guest but only a copy of it.
+>>>>
+>>>> The reason we need a patch like this is that with the introduction of the
+>>>> rvda/rvds fields into the OpRegion, the OpRegion is not always position-independent
+>>>> so its contents might be unsuitable in the guest address space, so in those cases
+>>>> we need to patch the copy of the OpRegion that will be exposed to the guest.
+>>>> If there is an extended VBT the DM will also get a copy of it, make a copy of
+>>>> it, and expose it to the guest by appending it contiguous with the OpRegion.
+>>>> Since in this scenario we are assuming the DM knows the contents of the OpRegion,
+>>>> then it can find the host VBT and make a copy of it without needing hvmloader
+>>>> to send the rvda and rvds values to it.
+>>>>
+>>>> Then, the remaining question is which component (DM or hvmloader) will patch it
+>>>> if it needs to be patched to make the guest's copy of it compatible with the guest
+>>>> address space.
+>>>
+>>> As I noted earlier, it think it would be advantageous for the Xen platform as whole
+>>> for the patching to be done in hvmloader. That way, support for extended VBT is
+>>> automatically added for all implementations of the DM, not just for Qemu. But the
+>>> downside is that for hvmloader to do the patching, it needs to know the host OpRegion
+>>> address, which one could argue it should not need to know. This is the only reason I
+>>> can think of to do the patching of the OpRegion in the DM instead of in hvmloader: to
+>>> avoid disclosing the host OpRegion address to the guest.
+>> 
+>> Correction: Actually, with this new scenario, we need not disclose any confidential
+>> host addresses to hvmloader if the DM removes such information from the copy of
+>> the OpRegion that it exposes to hvmloader. Then, all hvmloader needs to know to
+>> ensure the OpRegion is compatible with the guest's address space is the guest
+>> address of the OpRegion. It need not know either the host OpRegion address or the
+>> host VBT address.
+>> 
+>> So the guidance I need from you to do v3 of the patch is simply to answer these
+>> two questions.
+>> 
+>> 1. Should I write v3 of the patch not only assuming the DM will never expose the
+>> host OpRegion to hvmloader, but also assuming that the DM is responsible for
+>> patching the OpRegion to ensure it is compatible with guest address space?
+>> 
+>> Or
+>> 
+>> 2. Should I write v3 of the patch assuming that hvmloader is responsible for
+>> patching the OpRegion so it is compatible with the guest address space?
+> 
+> My tentative response is to use option 1, not the least because a mid to long term
+> plan is to see about removing hvmloader altogether. However, a more firm response
+> here depends on an answer to the question raised in
+> <92022f85-9a53-4db8-b489-fc91c86b413c@suse.com> (sorry, the list archive hasn't
+> caught up yet).
 
---------------nYIZYN4huIqDTa0K4qtwXuQG
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+I apologize for the tone of my last message which I wrote before I saw this message.
+(Unfortunately some of your messages are going to the spam folder, I will try to fix
+that, but it seems aol.com's spam filters are not all that smart)
 
-TGUgMDIvMDgvMjAyNiDDoCAxNToxNCwgU2VyZ2lpIERteXRydWsgYSDDqWNyaXTCoDoNCj4g
-RnJvbTogTWljaGHFgiDFu3lnb3dza2kgPG1pY2hhbC56eWdvd3NraUAzbWRlYi5jb20+DQo+
-IA0KPiBSZXBvcnQgVFhUIGNhcGFiaWxpdGllcyBzbyB0aGF0IGRvbTAgY2FuIHF1ZXJ5IHRo
-ZSBJbnRlbCBUWFQgb3IgQU1EDQo+IFNLSU5JVCBzdXBwb3J0IGluZm9ybWF0aW9uIHVzaW5n
-IHhsIGRtZXNnLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogTWljaGHFgiDFu3lnb3dza2kgPG1p
-Y2hhbC56eWdvd3NraUAzbWRlYi5jb20+DQo+IFNpZ25lZC1vZmYtYnk6IFNlcmdpaSBEbXl0
-cnVrIDxzZXJnaWkuZG15dHJ1a0AzbWRlYi5jb20+DQo+IC0tLQ0KPiANCj4gTm90ZXM6DQo+
-ICAgICAgdjQ6IGZpeGVkIGNvbmRpdGlvbnMgZm9yIG5vdCByZXBvcnRpbmcgY2FwYWJpbGl0
-aWVzIChtYXRjaCBjb3JyZWN0IGNvbW1lbnRzKQ0KPiAgICAgIHY0OiBkZWZpbmUgR0VUU0VD
-XyogbWFjcm9zIHVzZWQgb25seSBieSB4ZW4vYXJjaC94ODYvY3B1L2ludGVsLmMgaW4gdGhl
-IGZpbGUgaXRzZWxmICh0byBub3QgZGVwZW5kIG9uIFNsYXVuY2gpDQo+ICAgICAgdjQ6IGRv
-bid0IHBvc3Rwb25lIHJlc3RvcmluZyBzdGF0ZSBvZiBYODZfQ1I0X1NNWEUsIGRvIGl0IGJl
-Zm9yZSBwcmludGluZyB0ZXN0IHJlc3VsdHMNCj4gDQo+ICAgeGVuL2FyY2gveDg2L2NwdS9h
-bWQuYyAgIHwgMTYgKysrKysrKysrKysrKw0KPiAgIHhlbi9hcmNoL3g4Ni9jcHUvY3B1Lmgg
-ICB8ICAxICsNCj4gICB4ZW4vYXJjaC94ODYvY3B1L2h5Z29uLmMgfCAgMSArDQo+ICAgeGVu
-L2FyY2gveDg2L2NwdS9pbnRlbC5jIHwgNTAgKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKw0KPiAgIDQgZmlsZXMgY2hhbmdlZCwgNjggaW5zZXJ0aW9ucygrKQ0K
-PiANCj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9jcHUvYW1kLmMgYi94ZW4vYXJjaC94
-ODYvY3B1L2FtZC5jDQo+IGluZGV4IDcwNzgzYzlhMGEuLjVlYTE2YWQ4YTggMTAwNjQ0DQo+
-IC0tLSBhL3hlbi9hcmNoL3g4Ni9jcHUvYW1kLmMNCj4gKysrIGIveGVuL2FyY2gveDg2L2Nw
-dS9hbWQuYw0KPiBAQCAtNjE3LDYgKzYxNywyMSBAQCB2b2lkIGFtZF9wcm9jZXNzX2ZyZXEo
-Y29uc3Qgc3RydWN0IGNwdWluZm9feDg2ICpjLA0KPiAgIAkJKmxvd19taHogPSBhbWRfcGFy
-c2VfZnJlcShjLT5mYW1pbHksIGxvKTsNCj4gICB9DQo+ICAgDQo+ICt2b2lkIGFtZF9sb2df
-c2tpbml0KGNvbnN0IHN0cnVjdCBjcHVpbmZvX3g4NiAqYykNCj4gK3sNCj4gKyAgICAvKg0K
-PiArICAgICAqIFJ1biBvbmx5IG9uIEJTUCBhbmQgbm90IGR1cmluZyByZXN1bWUgdG8gcmVw
-b3J0IHRoZSBjYXBhYmlsaXR5IG9ubHkgb25jZS4NCj4gKyAgICAgKi8NCj4gKyAgICBpZiAo
-IHN5c3RlbV9zdGF0ZSA9PSBTWVNfU1RBVEVfcmVzdW1lIHx8IHNtcF9wcm9jZXNzb3JfaWQo
-KSApDQo+ICsgICAgICAgIHJldHVybjsNCj4gKw0KPiArICAgIHByaW50aygiQ1BVOiBTS0lO
-SVQgY2FwYWJpbGl0eSAiKTsNCj4gKyAgICBpZiAoICF0ZXN0X2JpdChYODZfRkVBVFVSRV9T
-S0lOSVQsICZib290X2NwdV9kYXRhLng4Nl9jYXBhYmlsaXR5KSApDQo+ICsgICAgICAgIHBy
-aW50aygibm90IHN1cHBvcnRlZFxuIik7DQo+ICsgICAgZWxzZQ0KPiArICAgICAgICBwcmlu
-dGsoInN1cHBvcnRlZFxuIik7DQo+ICt9DQo+ICsNCj4gICB2b2lkIGNmX2NoZWNrIGVhcmx5
-X2luaXRfYW1kKHN0cnVjdCBjcHVpbmZvX3g4NiAqYykNCj4gICB7DQo+ICAgCWlmIChjID09
-ICZib290X2NwdV9kYXRhKQ0KPiBAQCAtMTMyNSw2ICsxMzQwLDcgQEAgc3RhdGljIHZvaWQg
-Y2ZfY2hlY2sgaW5pdF9hbWQoc3RydWN0IGNwdWluZm9feDg2ICpjKQ0KPiAgIAkJc2V0dXBf
-Zm9yY2VfY3B1X2NhcChYODZfRkVBVFVSRV9YRU5fUkVQX01PVlNCKTsNCj4gICANCj4gICAJ
-YW1kX2xvZ19mcmVxKGMpOw0KPiArCWFtZF9sb2dfc2tpbml0KGMpOw0KPiAgIH0NCg0KT24g
-d2hpY2ggWGVuIGJyYW5jaCB0aGlzIHBhdGNoIGlzIGJhc2VkID8NCg0KZWFybHlfaW5pdF9h
-bWQoKSBkb2Vzbid0IHNlZW0gdG8gaGF2ZSBhbWRfbG9nX2ZyZXEgKHdoaWNoIGlzIGluIGlu
-aXRfYW1kIA0KaW5zdGVhZCkuDQoNCj4gICANCj4gICBjb25zdCBzdHJ1Y3QgY3B1X2RldiBf
-X2luaXRjb25zdF9jZl9jbG9iYmVyIGFtZF9jcHVfZGV2ID0gew0KPiBkaWZmIC0tZ2l0IGEv
-eGVuL2FyY2gveDg2L2NwdS9jcHUuaCBiL3hlbi9hcmNoL3g4Ni9jcHUvY3B1LmgNCj4gaW5k
-ZXggYmJlZGU1N2FiMC4uMTc5MzUxOTBiNyAxMDA2NDQNCj4gLS0tIGEveGVuL2FyY2gveDg2
-L2NwdS9jcHUuaA0KPiArKysgYi94ZW4vYXJjaC94ODYvY3B1L2NwdS5oDQo+IEBAIC0yMSw2
-ICsyMSw3IEBAIGV4dGVybiBib29sIGRldGVjdF9leHRlbmRlZF90b3BvbG9neShzdHJ1Y3Qg
-Y3B1aW5mb194ODYgKmMpOw0KPiAgIA0KPiAgIHZvaWQgY2ZfY2hlY2sgZWFybHlfaW5pdF9h
-bWQoc3RydWN0IGNwdWluZm9feDg2ICpjKTsNCj4gICB2b2lkIGFtZF9sb2dfZnJlcShjb25z
-dCBzdHJ1Y3QgY3B1aW5mb194ODYgKmMpOw0KPiArdm9pZCBhbWRfbG9nX3NraW5pdChjb25z
-dCBzdHJ1Y3QgY3B1aW5mb194ODYgKmMpOw0KPiAgIHZvaWQgYW1kX2luaXRfZGVfY2ZnKGNv
-bnN0IHN0cnVjdCBjcHVpbmZvX3g4NiAqYyk7DQo+ICAgdm9pZCBhbWRfaW5pdF9sZmVuY2Vf
-ZGlzcGF0Y2godm9pZCk7DQo+ICAgdm9pZCBhbWRfaW5pdF9zc2JkKGNvbnN0IHN0cnVjdCBj
-cHVpbmZvX3g4NiAqYyk7DQo+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYvY3B1L2h5Z29u
-LmMgYi94ZW4vYXJjaC94ODYvY3B1L2h5Z29uLmMNCj4gaW5kZXggN2E5ZmMyNWQzMS4uNjA4
-YTdjNDMxOSAxMDA2NDQNCj4gLS0tIGEveGVuL2FyY2gveDg2L2NwdS9oeWdvbi5jDQo+ICsr
-KyBiL3hlbi9hcmNoL3g4Ni9jcHUvaHlnb24uYw0KPiBAQCAtOTAsNiArOTAsNyBAQCBzdGF0
-aWMgdm9pZCBjZl9jaGVjayBpbml0X2h5Z29uKHN0cnVjdCBjcHVpbmZvX3g4NiAqYykNCj4g
-ICAJfQ0KPiAgIA0KPiAgIAlhbWRfbG9nX2ZyZXEoYyk7DQo+ICsJYW1kX2xvZ19za2luaXQo
-Yyk7DQo+ICAgfQ0KPiAgIA0KPiAgIGNvbnN0IHN0cnVjdCBjcHVfZGV2IF9faW5pdGNvbnN0
-X2NmX2Nsb2JiZXIgaHlnb25fY3B1X2RldiA9IHsNCj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNo
-L3g4Ni9jcHUvaW50ZWwuYyBiL3hlbi9hcmNoL3g4Ni9jcHUvaW50ZWwuYw0KPiBpbmRleCA5
-MGM5ZDM2MTg2Li5kZGIzNGMwYzAyIDEwMDY0NA0KPiAtLS0gYS94ZW4vYXJjaC94ODYvY3B1
-L2ludGVsLmMNCj4gKysrIGIveGVuL2FyY2gveDg2L2NwdS9pbnRlbC5jDQo+IEBAIC0xNCw2
-ICsxNCwxMSBAQA0KPiAgIA0KPiAgICNpbmNsdWRlICJjcHUuaCINCj4gICANCj4gKy8qIEVB
-WCB2YWx1ZSBmb3IgR0VUU0VDIGxlYWYgZnVuY3Rpb25zLiBJbnRlbCBTRE06IEdFVFNFQ1tD
-QVBBQklMSVRJRVNdICovDQo+ICsjZGVmaW5lIEdFVFNFQ19DQVBBQklMSVRJRVMgICAgICAg
-ICAgICAgMA0KPiArLyogSW50ZWwgU0RNOiBHRVRTRUMgQ2FwYWJpbGl0eSBSZXN1bHQgRW5j
-b2RpbmcgKi8NCj4gKyNkZWZpbmUgR0VUU0VDX0NBUF9UWFRfQ0hJUFNFVCAgICAgICAgICAx
-DQo+ICsNCj4gICAvKg0KPiAgICAqIE1TUl9NQ1VfT1BUX0NUUkwgaXMgYSBjb2xsZWN0aW9u
-IG9mIHVucmVsYXRlZCBmdW5jdGlvbmFsaXR5LCB3aXRoIHNlcGFyYXRlDQo+ICAgICogZW5h
-YmxlbWVudCByZXF1aXJlbWVudHMsIGJ1dCB3aGljaCB3YW50IHRvIGJlIGNvbnNpc3RlbnQg
-YWNyb3NzIHRoZSBzeXN0ZW0uDQo+IEBAIC02MjAsNiArNjI1LDQ5IEBAIHN0YXRpYyB2b2lk
-IGluaXRfaW50ZWxfcGVyZihzdHJ1Y3QgY3B1aW5mb194ODYgKmMpDQo+ICAgICAgIH0NCj4g
-ICB9DQo+ICAgDQo+ICsvKg0KPiArICogUHJpbnQgb3V0IHRoZSBTTVggYW5kIFRYVCBjYXBh
-YmlsdGllcywgc28gdGhhdCBkb20wIGNhbiBkZXRlcm1pbmUgaWYgdGhlDQo+ICsgKiBzeXN0
-ZW0gaXMgRFJUTS1jYXBhYmxlLg0KPiArICovDQo+ICtzdGF0aWMgdm9pZCBpbnRlbF9sb2df
-c214X3R4dCh2b2lkKQ0KPiArew0KPiArICAgIHVuc2lnbmVkIGxvbmcgY3I0X3ZhbCwgZ2V0
-c2VjX2NhcHM7DQo+ICsNCj4gKyAgICAvKg0KPiArICAgICAqIFJ1biBvbmx5IG9uIEJTUCBh
-bmQgbm90IGR1cmluZyByZXN1bWUgdG8gcmVwb3J0IHRoZSBjYXBhYmlsaXR5IG9ubHkgb25j
-ZS4NCj4gKyAgICAgKi8NCj4gKyAgICBpZiAoIHN5c3RlbV9zdGF0ZSA9PSBTWVNfU1RBVEVf
-cmVzdW1lIHx8IHNtcF9wcm9jZXNzb3JfaWQoKSApDQo+ICsgICAgICAgIHJldHVybjsNCj4g
-Kw0KPiArICAgIHByaW50aygiQ1BVOiBTTVggY2FwYWJpbGl0eSAiKTsNCj4gKyAgICBpZiAo
-ICF0ZXN0X2JpdChYODZfRkVBVFVSRV9TTVgsICZib290X2NwdV9kYXRhLng4Nl9jYXBhYmls
-aXR5KSApDQo+ICsgICAgew0KPiArICAgICAgICBwcmludGsoIm5vdCBzdXBwb3J0ZWRcbiIp
-Ow0KPiArICAgICAgICByZXR1cm47DQo+ICsgICAgfQ0KPiArICAgIHByaW50aygic3VwcG9y
-dGVkXG4iKTsNCj4gKw0KPiArICAgIC8qIENhbid0IHJ1biBHRVRTRUMgd2l0aG91dCBWTVgg
-YW5kIFNNWCAqLw0KPiArICAgIGlmICggIXRlc3RfYml0KFg4Nl9GRUFUVVJFX1ZNWCwgJmJv
-b3RfY3B1X2RhdGEueDg2X2NhcGFiaWxpdHkpICkNCj4gKyAgICAgICAgcmV0dXJuOw0KPiAr
-DQo+ICsgICAgY3I0X3ZhbCA9IHJlYWRfY3I0KCk7DQo+ICsgICAgaWYgKCAhKGNyNF92YWwg
-JiBYODZfQ1I0X1NNWEUpICkNCj4gKyAgICAgICAgd3JpdGVfY3I0KGNyNF92YWwgfCBYODZf
-Q1I0X1NNWEUpOw0KPiArDQo+ICsgICAgYXNtIHZvbGF0aWxlICgiZ2V0c2VjXG4iDQo+ICsg
-ICAgICAgIDogIj1hIiAoZ2V0c2VjX2NhcHMpDQo+ICsgICAgICAgIDogImEiIChHRVRTRUNf
-Q0FQQUJJTElUSUVTKSwgImIiICgwKSA6KTsNCj4gKw0KPiArICAgIGlmICggIShjcjRfdmFs
-ICYgWDg2X0NSNF9TTVhFKSApDQo+ICsgICAgICAgIHdyaXRlX2NyNChjcjRfdmFsICYgflg4
-Nl9DUjRfU01YRSk7DQo+ICsNCg0KVGhhdCBsb29rcyB3cm9uZywgdGhlIGxvZ2ljIGlzIHdy
-aXR0ZW4gYXMgOiBpZiBTTVhFIGlzIGNsZWFyZWQsIHlvdSANCmNsZWFyIFNNWEUgYWdhaW4u
-DQpSZWdhcmRsZXNzLCBpZiB3ZSdyZSBsb29raW5nIHRvIHVzZSBUWFQgbGF0ZXIgb24sIHdv
-dWxkbid0IGl0IGJlIA0KcHJlZmVyYWJsZSB0byBrZWVwIFNNWEUgYml0IG9uID8gVGhhdCBt
-ZWFucyB3ZSB3b3VsZCBub3Qgb25seSBkbyANCnJlcG9ydGluZyBidXQgImJhc2ljIiBpbml0
-aWFsaXphdGlvbi4NCg0KPiArICAgIGlmICggZ2V0c2VjX2NhcHMgJiBHRVRTRUNfQ0FQX1RY
-VF9DSElQU0VUICkNCj4gKyAgICAgICAgcHJpbnRrKCJDaGlwc2V0IHN1cHBvcnRzIFRYVFxu
-Iik7DQo+ICsgICAgZWxzZQ0KPiArICAgICAgICBwcmludGsoIkNoaXBzZXQgZG9lcyBub3Qg
-c3VwcG9ydCBUWFRcbiIpOw0KPiArfQ0KPiArDQo+ICAgc3RhdGljIHZvaWQgY2ZfY2hlY2sg
-aW5pdF9pbnRlbChzdHJ1Y3QgY3B1aW5mb194ODYgKmMpDQo+ICAgew0KPiAgIAkvKiBEZXRl
-Y3QgdGhlIGV4dGVuZGVkIHRvcG9sb2d5IGluZm9ybWF0aW9uIGlmIGF2YWlsYWJsZSAqLw0K
-PiBAQCAtNjM0LDYgKzY4Miw4IEBAIHN0YXRpYyB2b2lkIGNmX2NoZWNrIGluaXRfaW50ZWwo
-c3RydWN0IGNwdWluZm9feDg2ICpjKQ0KPiAgIAkJZGV0ZWN0X2h0KGMpOw0KPiAgIAl9DQo+
-ICAgDQo+ICsJaW50ZWxfbG9nX3NteF90eHQoKTsNCj4gKw0KPiAgIAkvKiBXb3JrIGFyb3Vu
-ZCBlcnJhdGEgKi8NCj4gICAJSW50ZWxfZXJyYXRhX3dvcmthcm91bmRzKGMpOw0KPiAgIA0K
-DQpUZWRkeQ0K
+I was really hoping you would answer this question and I appreciate that you are
+able to give me a tentative answer favoring option 1. 
 
---------------nYIZYN4huIqDTa0K4qtwXuQG--
+To follow up on what I did say in the last message, I think we have exhausted what
+you and I can agree on and now would be a good time to pause this discussion and
+I will write a new version of the Qemu patches and v3 of this patch assuming what
+I said in option 1, and hopefully the Qemu maintainers will help us out by replying
+to a version of the Qemu patches that does the patching of the OpRegion in Qemu instead
+of in hvmloader. So far none of the Qemu maintainers have replied to my Qemu patches,
+unfortunately, but ultimately, we at some point will need their input to decide how
+best to do this, so until they respond to the Qemu patchsets I posted, I think we
+just have to wait now until they weigh in with their thoughts and opinions.
 
---------------5Ww4dIUB371KC8I2tJ3z0MDE
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmqG+k8FAwAAAAAACgkQZg+p0QLLz9A0
-Jwv9EZF7DPtiJhv4rCFPnm1OI81u/Sb39PR+e0j0TkNiDDTOX94A+WFezBBH/KQD9T4BdWpEA5Xq
-YHhkpojpl7jVQ25wa4MXgboKE/h+u5164WgqNTKwQHKmESQ6APlLrusQFPbqPNKeJe1ej5n1KMsl
-+hCZ5Zd0sFcJ9bNRKhHoJFCONi5GurAcMtgF3YQIH+8JfxxX0Rqhi/8tcHYT8OAT0A0T0Pn1Bx3F
-csa+Xu3g5vFt5YSLMrtowZz8rGWHhDSZQAU1a6+XrfQk1g6mPE0SoSBB0K3y8rUvLWKCZ4JHrJdv
-XCHYAisufJVD2x8nuhE9S5ohluNWjqBPCv67coWUgSQJqud8ifj1D7umpBphx1f2g5NSpqr7OKAe
-x2IqURKX5MTQ4mc1rgxAbcxMkvgsGs/ZYtbzOtoPjGOpbdcqrnvhADBmmnI73TmZoMn/pvCce7hD
-DS7jiAGPuwKcg4pKAWuX9Qu+8Jb4s3fYfCbPP4BpBN5hPBJuJpgVboXMkaj7
-=X/A8
------END PGP SIGNATURE-----
-
---------------5Ww4dIUB371KC8I2tJ3z0MDE--
+Chuck
 
