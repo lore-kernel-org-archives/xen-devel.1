@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D712C5DF81
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 08:46:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1396101.1634150 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 739A8C5DF82
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 08:50:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1396117.1634160 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwyOy-0000YW-08; Thu, 20 Aug 2026 08:45:32 +0000
+	id 1wwyTt-00029J-KH; Thu, 20 Aug 2026 08:50:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1396101.1634150; Thu, 20 Aug 2026 08:45:31 +0000
+Received: by outflank-mailman (output) from mailman id 1396117.1634160; Thu, 20 Aug 2026 08:50:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwyOx-0000YP-To; Thu, 20 Aug 2026 08:45:31 +0000
-Received: by outflank-mailman (input) for mailman id 1396101;
- Thu, 20 Aug 2026 08:45:31 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wwyTt-00029C-HN; Thu, 20 Aug 2026 08:50:37 +0000
+Received: by outflank-mailman (input) for mailman id 1396117;
+ Thu, 20 Aug 2026 08:50:36 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wwyOx-0000YJ-Ar
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 08:45:31 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wwyTs-000296-Bh
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 08:50:36 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwyOw-00EZLK-Ns
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 10:45:30 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wwyTr-001PHQ-DD
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 10:50:35 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a86be9a-2eae-0a2a0a5409dd-0a2a450bbafa-38
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 10:45:30 +0200
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a86bfd6-bab6-0a2a0a5309dd-0a2a4509966c-24
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 10:50:35 +0200
+Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a86beaa-b7e8-0a2a450b0019-d1558035cd84-3
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 10:45:30 +0200
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-498028b3d5eso23183585e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 01:45:30 -0700 (PDT)
+ id 6a86bfdb-be1a-0a2a45090019-d155dd29b989-3
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 10:50:35 +0200
+Received: by mail-wr1-f41.google.com with SMTP id
+ ffacd0b85a97d-47f84023916so1880121f8f.3
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 01:50:35 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499b20bdd75sm34417005e9.2.2026.08.20.01.45.28
+ ffacd0b85a97d-482b14c45f1sm11548299f8f.31.2026.08.20.01.50.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Aug 2026 01:45:29 -0700 (PDT)
+ Thu, 20 Aug 2026 01:50:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,58 +53,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787215530; x=1787820330; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=YHeYPbMObjCR9jPMiWb1yyIm56nHv7GC519kQ3/d948=;
-        b=MgUDWB/6QiVfwQM4Kx7SxNu43JGe34I9pgouacCCvzh8K40CtUGW2fRO+IK9K+tkOm
-         +Ze45Q9j1wUAOhKwJhCKPqpB1R3vAZl7puIb4A8cGl14YrYYOl3+Bx//UvjV47YQptVy
-         00gyFoFKm7XduunYRXyt4YKICpB713HOebUYnomQGtCeotETjROykoCgOnYa49D/goyF
-         shUnYA8gVOuOGFfLuNagsxo/VRYEv6PDDfLBmvNVP3feHB2yTX3hTSm3F35mz3CFPkp2
-         odoAjfRJZiKMvgJ7pxpPXnDWyzZ5E0IjGGYZTh6KZqn69CAivLQzL8L86j+rkocChu0e
-         to6w==
+        d=suse.com; s=google; t=1787215835; x=1787820635; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=oWC0qrg1/ryjfHCPvG8g/18CQ7An+WEUhSShGNRO3z8=;
+        b=P/oOmHFxWygc/TQ3/OvuJ30kJKtr83pIpj8q6teir69fPyNj03zTqxPH4MlbOc6hxr
+         6Kwb0jGG87fPOBwUwDtpF/R4Z9wZ1LEuUI+66DXeMfNcFJuc4vdRvYlfF0ydNnN/EiTb
+         2yBw1Cjw9ywYHFiQ+iwZkwLCtdwEFKZJkS4d8PyUvcB/uMFNGGRzkKfSyR8non524mGQ
+         FSpkk/dOf1rw91RnBPFapnygSguUdBde92VLOAI/YgAgXVzJh8RVsmz4N/usfnojOcV0
+         m9xczbmnGshHZCnWukp6EyU8QM7CPm/K+a+6HKrSh1YwcxyDpFBx1Ltz1T+M4CYrxlT/
+         b3Fw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787215530; x=1787820330;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=YHeYPbMObjCR9jPMiWb1yyIm56nHv7GC519kQ3/d948=;
-        b=UqE3if0yWFBIwvtYWzR/Ix/8BcorRuzMIiO1WpNEaJ5wnJOixUlFLyze5C84mVE+u2
-         Z4jjqgwEoaKYa4WZacFVR/Ht1O6uNLWuZScth4q70QWl4jZvzME74CHk9GcCcykgUlaZ
-         ohuojbTrTUDb6ccIQ88pgzUAoq2w/NTAoQ2kuHNUwLs+Zf+LA0eT4j47Aj6YKyWIiqYe
-         pL2rwYrl+zI2eIaEdiEEPe5HrJprBIUE3lxB+zju1NjIYoq6tH1wVKBWBrpceUn8vjD5
-         Zae2ZPa66X+W68ok6ZL0BM1go93kMQNRAn3o87BKwgc6Gu23E9DVt2Q9Z6lcIf8mv3rH
-         nKwg==
-X-Forwarded-Encrypted: i=1; AHgh+Rqhj2PsGHhdeGagbM/o4bBZ5g7EefsbXlCEKD1OQkkIn0yeVuPLkJaxeXwshFxnx2h82sbUvGj+DL8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwDmv//cKxGrPZzRl24BoMr40QR74E5xEZM9enq26HVX+QLJVo7
-	B4cpNVc8H3gDay2FAenab6uG2W2As5g+x8gzdbrY+9hEB6IYCztZI0M4ZJnAUJOaDA==
-X-Gm-Gg: AR+sD134HxEXnRVWUi7XLfh3kSA5YVtwCgKgzLb+k/IWEV4zc9Bzp6tOCySEQefWoGm
-	gYf/h5ImAFmReYh9wFar6Fj2IwApbKgTcx61JG8OuaZCrsJz4/m2FFKRtCq8E2juJELZEET7whG
-	HRelOUjHhSyfrvvPQBTilROEZTa5gQPfn0Bv/lEs623mliWfDctHDG5sZ2BK+qitkM5H5oD5Qi7
-	JkP/SraY7/Nr7nkr27BeMdpbTZoJEAHcWo1XLqrMydeD/TP1d+hnW/uUYVu5S+1P0N8mdSCS/Vp
-	aqSdBslDAJobJCn1q/RsfUCOOTpzLm40IunynevAahCvKnOk8YqlL7dBM5L6cXrTL4m7pinCSmy
-	AYia+eelJkyMFHr1VfQVGBQk3gSpKxwfUlXfYNFUHok4atOssEmAQbVDOu2wl2AnK0VbdwPc7tG
-	ZnyFXS5sEmpAUwikm/DOfbUVv8gD0e9IR9IXI9Bh/jFfydv6/uEc/1BcIymK85jTpVblCUzGn6P
-	m3DKqS+JFozbYwTuJamtj9wHSsP/BsJ/bmt5f2/EiuF0SEQi/1m
-X-Received: by 2002:a05:600c:a012:b0:499:52dd:c1f0 with SMTP id 5b1f17b1804b1-499aa180132mr216018195e9.1.1787215529950;
-        Thu, 20 Aug 2026 01:45:29 -0700 (PDT)
-Message-ID: <aee239df-0582-4973-82ae-65688a7d6b9a@suse.com>
-Date: Thu, 20 Aug 2026 10:45:28 +0200
+        d=1e100.net; s=20251104; t=1787215835; x=1787820635;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=oWC0qrg1/ryjfHCPvG8g/18CQ7An+WEUhSShGNRO3z8=;
+        b=VPnlXY4wCnobOGL0PJzBFaLXpKkZ8VuwQjngNZV2bX+qhIytZvUlkCpIc7Dg7UfeR4
+         vBS3ufnP3oMstyggxHYVdtzeHoC1iilD3XkAwUhN1wHFhyskCop4uyjXbslKY0VMMkhm
+         bCiwokps3oIdcWMT/tj435ohHYUj1/QFhYQF1HefKdTpg0ZF7KOW70N07qtpQFssrY+X
+         qetp9obcGpaGKx0t6S28MDyj1UlLniqb9TesKI18L3i12fqgQ21/XgHAvADE+kAxbFzf
+         lqUtJnOgdyyLR2mFYWNWnL7EyL3lRtx8AtqKlDjLHJtGZjiYrawCG5Y1mNSxi7a4Sb8F
+         SmVA==
+X-Gm-Message-State: AFuF++kwJJN35mhlYWiorAgg6ILuwreaYoMV2z1OoqfSnLCRfc/YdfiR
+	uxdmsr+2DVG66OjNIMa8CkaORVE8+OPAY3njmCJffUYPpN/9k47UeMTkX+8VcOCtDZD7p3l6VIG
+	b+M6mkQ==
+X-Gm-Gg: AR+sD12Etjg+lBpoSwYAi3VQ+3zgKKmdoWYaawpeYrwsDKicR5vwgqLpW78H55mryff
+	3jZQ1F9pgit+jSqXilc2ovDqLhRVHKLnV19st1bTRL82UEuTPK1azfEbe+hqA9x0ZSALQkcTaDA
+	pZQQXj2R92svq1/JiUoBJkG0t80vkMIQGuHRwOvQs4i5I5QQDvl73nJQPw0nCCRfSdAu+VKLlh6
+	qFYZrbEpdZ1PozbC0hXXnAI51Polq+zogHZOmZogNo505CfIviXDWuYdZfEjYxhfdMgK1tBTflt
+	erNhzlCyHlIezeM4RY0xkG5gsi0UoJmosY15rxH8wxUHdvALpuywtEJWbDNKoTrV73ZbstBPNRo
+	2cchK0R0gC3d6m85PVFY1L6cxuAR0o3eE2TaLj7hGTOph3lCTB0XG3e5Rwl9SJYmXLJRyF1xacs
+	EkQWmKzXlkG2SMYJlFByVKvWGX3p+7Cm8r76ZplnqrU1i+iUixkNSl8Bv6FaaU65NTvX8RuR3DY
+	Rp+cJ3NT93mm7fF3U6L0RtDsFC+zXj1EH+rxKqK+n8i0l+5sxgOrI4GoWGjYCk=
+X-Received: by 2002:a05:6000:1846:b0:47f:7129:6e2d with SMTP id ffacd0b85a97d-482b1fe83d6mr19691556f8f.17.1787215834513;
+        Thu, 20 Aug 2026 01:50:34 -0700 (PDT)
+Message-ID: <0c3cb1ae-4888-4319-a348-263f7913a7f2@suse.com>
+Date: Thu, 20 Aug 2026 10:50:33 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [BUG] x86emul/test: avoid assertion in emul_test_read_xcr() when
- XSAVE is absent
-To: Andrew Mbugua <andrewprecious388@gmail.com>
-Cc: andrew.cooper3@citrix.com, roger@xenproject.org, teddy.astie@vates.tech,
- anthony.perard@vates.tech, xen-devel@lists.xenproject.org
-References: <20260819180735.135911-1-andrewprecious388@gmail.com>
 Content-Language: en-US
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Andrew Mbugua <andrewprecious388@gmail.com>
 From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH 0/2] x86emul: XCR0 handling
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -128,57 +126,21 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260819180735.135911-1-andrewprecious388@gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1787215530-AB6D29EA-36A04AE0/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-bad1c0/1787215835-BD2CC034-FBCCACCE/0/0
 X-purgate-type: clean
-X-purgate-size: 2605
+X-purgate-size: 428
 
-On 19.08.2026 20:07, Andrew Mbugua wrote:
-> While running the x86_instruction_emulator fuzzer via AFL, I encountered an assertion failure in the emul_test_read_xcr() function.
+Prompted by Andrew's report [1] I thought it may help if we accelerated two
+of the patches I have pending as part of the (so far unposted) APX series.
+We previously discussed latching some control register state once early, so
+let's start with doing so for XCR0.
 
-Thanks for the report.
+[1] https://lists.xen.org/archives/html/xen-devel/2026-08/msg01006.html
 
-> The fuzzer is able to generate a CPU state where cpu_has_xsave is false.
-
-I'm having trouble here: cpu_policy isn't populated from fuzzing input, and
-
-/* Intentionally checking OSXSAVE here. */
-#define cpu_has_xsave     (cpu_policy.basic.raw[1].c & (1u << 27))
-
-would mean that upon filling cpu_policy (emul_test_init() ->
-x86_cpu_policy_fill_native()) the OSXSAVE bit would be clear. Are you
-suggesting you did the fuzzing on some really old hardware?
-
-> If the fuzzer then generates & feeds an instruction containing AVX,the emulator
-> attempts to fetch the FPU state via x86emul_get_fpu(), which then calls emul_test_read_xcr() and hits the ASSERT(cpu_has_xsave). This assertion crashes the fuzzer.
-> 
-> The crash:
-> 1. $ ./afl-harness < findings_dir/master01/...
->    afl-harness: ../../tests/x86_emulator/x86-emulate.c:179: emul_test_read_xcr: Assertion `cpu_has_xsave' failed.
->    Aborted
-> 
-> 2. The stacktrace:
-> (gdb) bt
-> data_p=data_p@entry=0x55555604f320 <input> "\244\264\336\346\337\001\254%\247R\216d\204*\234\377\377\224λ\3237/\365ʿX\266?\353\036\227/\0323\351dj\257\v\207\031V֖\235{\036\225|:M\330\336 \314V:&\357\306@\224\331,\301\300\372FW\262.\020\\\276\244\203\242\276\262\022!\337)F&\261\2064\200\200\377I;J\376X41\2061\206\325 \021\017F\026\267\275\340\361\357)\255\343\237n\377\374n\357#ֽ\226\365d",
-> size=size@entry=580) at fuzz-emul.c:934
-
-This can't be the complete stack trace.
-
-> Possible fixes:
-> To prevent the fuzzer from getting stuck on this state,would it be better for emul_test_read_xcr to return X86EMUL_UNHANDLEABLE (or something similar) instead of ASSERT(cpu_has_xsave) ?
-
-No, I think the assertion is legitimate there. After sending this reply, I'll
-post two patches taken off of the (unposted) APX series I have pending, which
-I think get things into better shape (and which, with the minor editing I had
-to do to pull them out of that series, should be fine to move ahead). On top
-of that we then will want to add some sanitization of input state in the
-fuzzing harness: CR4.OSXSAVE set and CPUID.XSAVE clear are clearly
-contradictory. There are other impossible combinations, and I think we may
-want to address some of them at the same time, and we already have
-sanitize_input() there. Please let us know whether you'd be willing /
-interested to make changes there, or whether we (perhaps I) should.
+1: latch XCR0 early during decode
+2: use latched XCR0 in x86emul_get_fpu()
 
 Jan
 
