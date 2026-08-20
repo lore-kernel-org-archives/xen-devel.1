@@ -4,39 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D9D7C5DF82
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 10:35:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1396294.1634232 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EBF5C5DF81
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 11:44:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1396316.1634241 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wx06r-0001A3-BX; Thu, 20 Aug 2026 10:34:57 +0000
+	id 1wx1Bt-0001lI-Ut; Thu, 20 Aug 2026 11:44:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1396294.1634232; Thu, 20 Aug 2026 10:34:57 +0000
+Received: by outflank-mailman (output) from mailman id 1396316.1634241; Thu, 20 Aug 2026 11:44:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wx06r-00019w-8j; Thu, 20 Aug 2026 10:34:57 +0000
-Received: by outflank-mailman (input) for mailman id 1396294;
- Thu, 20 Aug 2026 10:34:56 +0000
+	id 1wx1Bt-0001lB-Rt; Thu, 20 Aug 2026 11:44:13 +0000
+Received: by outflank-mailman (input) for mailman id 1396316;
+ Thu, 20 Aug 2026 10:47:57 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wx06q-00019q-B2
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 10:34:56 +0000
+ (envelope-from <sshegde@linux.ibm.com>) id 1wx0JR-00031J-5x
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 10:47:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wx06o-005WJ9-W5
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 12:34:54 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wx0JQ-00EwfZ-Iy
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 12:47:56 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a86d844-e002-0a2a0a5209dd-0a2a4506892a-18
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 12:34:54 +0200
-Received: from [74.125.224.47] (helo=mail-yx1-f47.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a86d84c-195a-0a2a45060019-4a7de02fd95e-3
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 12:34:53 +0200
-Received: by mail-yx1-f47.google.com with SMTP id
- 956f58d0204a3-66ca4bdccfaso3310435d50.3
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 03:34:53 -0700 (PDT)
+ (envelope-from <sshegde@linux.ibm.com>)
+ id 6a86db51-bab6-0a2a0a5309dd-0a2a4509bdb2-20
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 12:47:56 +0200
+Received: from [148.163.158.5] (helo=mx0b-001b2d01.pphosted.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <sshegde@linux.ibm.com>)
+ id 6a86db5b-be1a-0a2a45090019-94a39e05f278-3
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 12:47:56 +0200
+Received: from pps.filterd (m0360072.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 67K8psXX503930; Thu, 20 Aug 2026 10:46:59 GMT
+Received: from ppma11.dal12v.mail.ibm.com
+ (db.9e.1632.ip4.static.sl-reverse.com [50.22.158.219])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4g4yu49j7t-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 20 Aug 2026 10:46:58 +0000 (GMT)
+Received: from pps.filterd (ppma11.dal12v.mail.ibm.com [127.0.0.1])
+ by ppma11.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 67KAfGvU024130;
+ Thu, 20 Aug 2026 10:46:57 GMT
+Received: from smtprelay02.fra02v.mail.ibm.com ([9.218.2.226])
+ by ppma11.dal12v.mail.ibm.com (PPS) with ESMTPS id 4g354ynsek-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 20 Aug 2026 10:46:57 +0000 (GMT)
+Received: from smtpav02.fra02v.mail.ibm.com (smtpav02.fra02v.mail.ibm.com
+ [10.20.54.101])
+ by smtprelay02.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 67KAktPu46072234
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 20 Aug 2026 10:46:55 GMT
+Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 7A9FA20043;
+ Thu, 20 Aug 2026 10:46:55 +0000 (GMT)
+Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id D8EA120040;
+ Thu, 20 Aug 2026 10:46:41 +0000 (GMT)
+Received: from [9.39.17.85] (unknown [9.39.17.85])
+ by smtpav02.fra02v.mail.ibm.com (Postfix) with ESMTP;
+ Thu, 20 Aug 2026 10:46:41 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,165 +75,314 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1787222092; cv=none;
-        d=google.com; s=arc-20260327;
-        b=TwSiG+yHbfokcF8kPYE4ik5LMM3m9fVdP8SCZGHnPXMlmSVZNrn4rOjeQMpeF/Ehoi
-         v+uXSE+2T/YXmOZM/J+1/qJm6drqIJSIdV4tEhErHzUHr/ob09TUl3aRyMU94lRFUIoE
-         qrq3fzNJ/SA86suRtGx7VC1XJZwXntyrNmcMok3AMQWUuzFvQmIuyCmDcJcd+oEmaKgY
-         yaDcAOnhGYnWUwKjJItLUcty7onBx9H9ZgjDSFz472f/S40YfQ6H4soITjG8ZtzI/7rE
-         qeqRkiY1spxGRmONZfyqjQEN3a0zUMaFZUiLX7ez335oq9G346n00fyLWqKEcJ7Kxc1j
-         QQoQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=An0sPUB5AiII25/KlxNXPAXPhP53SdMwGLmRrNvZ+1A=;
-        fh=3EhnpfHPRgJlkI2QNmIe5wJuq7CmX80ySFM1Q7ZfFu0=;
-        b=JvOVhUMzN2DRWpzvmMSdJiQgzMWyhob8x7TOm0q2T3y7bwkSy1h4r8W/Y39esBzhF5
-         lriaqUAz5nSmfHDEvoXCPolgIaokxUVx1uuSUeBxruEYEREGPA9WO5emddmVWmoKAx9E
-         L0v2y/g29I1QpfwTcTXzgYZ9vfTl1wb3guLhL+v3zQPDymkwTiiBU+wPDvQ4g9kvh17b
-         S9canSxs1+rpw4L5wByEJPt4dtL9VpdcDC7iWJcT+ZY72aBVkloR+mZqx74B58t2svsp
-         XDVn/v2yZJWYvNXQ5oRa+rpwnglpeQcetZC9xYr0QM5hdjQF9QDS0BZi0wbXugfF8/3f
-         XwhQ==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787222092; x=1787826892; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=An0sPUB5AiII25/KlxNXPAXPhP53SdMwGLmRrNvZ+1A=;
-        b=IT3+cvPuPdu3wG17YSG3eU7Kr/7xEM3kUfyW3y2jywfVLhNfNGw1oOdLouVcSbJmcg
-         IBcqEMbdKhJq5cqSxHbwUAs7vZEausrKsytciweoRggdsTaSYIL4Gr28ut+9kRPD+Agc
-         kvMfWBIsR6WfFDMWADcznsA/eU0KJ0IuoOJejOkA+YMK9hv6nZhKKGVzTPCSxQNud3gZ
-         DFgXc5r4sdxER4q5E6Ax5Hh03EPU2sN5WyTbavne72I5w6Z3/wfOHaHEyQG+Mt1hBgN6
-         gGyGUIXFAdQ1DoZy8I+F+0UflBkJgZWieIYZeGVgxtLCV3nJl7pG7rk4ecY0x+Xji15/
-         Jfrw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787222092; x=1787826892;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=An0sPUB5AiII25/KlxNXPAXPhP53SdMwGLmRrNvZ+1A=;
-        b=EZktn90qE+5mfOLkmlUiJKRDd6lbdcvcb6crZv6htjydM4GGHPee6uEC6gfEmadW3d
-         Sg3GT+HqDg6PMDA4v8QqH6shw0khZjp7PdPk0fI2nWt+G6evVsex47Ne4O8TynpaeJo6
-         Ib5ACtONAEigYAvVbCnGYkS8OOf5TFyMmDwIFuzz/BHVHXQcO0LHhq1/VMAglR24FZBD
-         haZVWVbaD/5jYWvBPJUX38QQg0IgiRPnbHrqMvP5V5BsEGQNU6Y3pGBTpI9OMYY38YId
-         cO5ZbWCbL9ugAT5oVjKmBW4SaNihpD5vtR238hiKZ16yLPh8/fEC8xvqEW4jvxpjIU6/
-         Q64Q==
-X-Forwarded-Encrypted: i=1; AHgh+Rq4avPkX7g5eN5rdlHhj5JaNoUf7AWG6Qnnwpb8thnzlAenFakQjlPK/zMSkPaBuoMpWNAcHstOhTc=@lists.xenproject.org
-X-Gm-Message-State: AFuF++mCzEHAvO5uUJvUASdUzzCfUsSHsEp2ufVvQYfuGgpS1Hra+QZj
-	Bm7CaIv84gou2NsQLPZKcP+hLkNVE8oaurt6uaJ14i9iaK2Udy63wSs7ufILfNf4fZYi6sRd02I
-	Or7CsmPFXmkTRi8HjblnBLeJ1UKxiZ5c=
-X-Gm-Gg: AR+sD139i0MeRoivWRRiCcl+rMXATBxM5Nj+pqj9MB4M64law+/E+0rtwnOuYnXxlVO
-	X2kA/t5zItnUZvdio+mce/f/k6MjAU1k1MtZl31tXDXhkYwQO6Of4M2hkrTdxLBW2MfoPultloQ
-	PtnXwfIJoZO5fQO/Jxu4C3HXbG2nCnK+T/+GrvbWDblQx63ByryFFqp23f7OrwKQn97lwm98nDw
-	LJGlGjNo0r3Y3F/TH29mKTBcDx5lrQ1+7hZ3cynJtyzlp5w/XppGww4Z7anQV+cHzOf0YUDSkth
-	08rNXyfrULe/BK8PtwOwYLfQq8EUzA1ZMX3IguY4u28HJ2yQd35KXS3aZZlXY92TKi+/qgnLgxI
-	HOOArb0A8AOY=
-X-Received: by 2002:a05:690e:bcd:b0:66c:df0d:ef0d with SMTP id
- 956f58d0204a3-66cdf0df0cdmr333564d50.28.1787222091588; Thu, 20 Aug 2026
- 03:34:51 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=pp1 header.d=ibm.com header.i="@ibm.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=pp1; bh=czT1Im
+	PU/vWc2M0tWEKBT0LXpRCVrV75Wfn03rEOF2c=; b=VFp46JEphllpw7qtyJNBx1
+	CaVenj+Rdg6kMHAyun/leFK4fPjzBLdY43BTvCm0r20SF8NRJ17NDVEUINVxkX2f
+	dujD0NQz3qQ7m0zO3xs9P02S1kxeSEsGvFiTkyy71sDmPCa47W0q7/Nr0em6wVhf
+	Th7I4886yY9Ww8KFAZ/sulpfpgo8txaPaUjtuFOn/paI7hzL53leG67MGZ8+i0Am
+	LsOim3vbqCPgz/COWWYtl/xy5PayeZbfKOR8IGLm1tbqtfbmwIGP5JExMBBiTmKX
+	i7W3MfpeOJdrbuMa+UQRiYtW19e6zAq56CFWAMf3KMWfswNDkwVI+e5cosZ43Txw
+	==
+Message-ID: <99bdc3e0-0e0f-4cb1-8747-dd7667307492@linux.ibm.com>
+Date: Thu, 20 Aug 2026 16:16:40 +0530
 MIME-Version: 1.0
-References: <20260715062206.328049-1-frediano.ziglio@citrix.com>
- <CAHt6W4cG_-=8MBJ+7dWQrLuC2Lf-fLOHDUyGwWDGQn6=9bO1Lw@mail.gmail.com>
- <CAHt6W4fFYs8fMUFer2oRL67voM_NbwtFbD=fJxFiQ5g0cujsMA@mail.gmail.com> <559e68bb-1689-456b-89a5-0a39d3bb3afd@suse.com>
-In-Reply-To: <559e68bb-1689-456b-89a5-0a39d3bb3afd@suse.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Thu, 20 Aug 2026 11:34:39 +0100
-X-Gm-Features: AcwNN1UIErS0I9ozgaITjWV8kD1BmoKLw4ai2AlF9Gma-dT5IUNXkTII1bh_hY0
-Message-ID: <CAHt6W4f22gHSiWLz-qvWQT33jmM0_mnwKJCyKXqnG05rGBQs2g@mail.gmail.com>
-Subject: Re: [PATCH v8 0/4] Various patches to improve Secure Boot support
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Frediano Ziglio <frediano.ziglio@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
-	Teddy Astie <teddy.astie@vates.tech>, Anthony PERARD <anthony.perard@vates.tech>, 
-	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, 
-	Stefano Stabellini <sstabellini@kernel.org>, "Daniel P. Smith" <dpsmith@apertussolutions.com>, 
-	=?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>, 
-	xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-16d1c6/1787222093-F6A7477B-6662CDE6/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RESEND] sched: Convert paravirt_steal to new static key
+ APIs
+To: Hongyan Xia <hongyan.xia@transsion.com>
+Cc: Jiazi Li <jiazi.li@transsion.com>,
+        "virtualization@lists.linux.dev" <virtualization@lists.linux.dev>,
+        "linux-arm-kernel@lists.infradead.org"
+ <linux-arm-kernel@lists.infradead.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "loongarch@lists.linux.dev" <loongarch@lists.linux.dev>,
+        "linuxppc-dev@lists.ozlabs.org" <linuxppc-dev@lists.ozlabs.org>,
+        "linux-riscv@lists.infradead.org" <linux-riscv@lists.infradead.org>,
+        "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+        "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+        Juergen Gross <jgross@suse.com>, Ajay Kaher <ajay.kaher@broadcom.com>,
+        Alexey Makhalov <alexey.makhalov@broadcom.com>,
+        Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>, Huacai Chen <chenhuacai@kernel.org>,
+        WANG Xuerui <kernel@xen0n.name>,
+        Madhavan Srinivasan <maddy@linux.ibm.com>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+        Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
+        Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        "x86@kernel.org" <x86@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Vincent Guittot <vincent.guittot@linaro.org>,
+        Dietmar Eggemann <dietmar.eggemann@arm.com>,
+        Steven Rostedt <rostedt@goodmis.org>, Ben Segall <bsegall@google.com>,
+        Mel Gorman <mgorman@suse.de>, Valentin Schneider <vschneid@redhat.com>,
+        K Prateek Nayak <kprateek.nayak@amd.com>
+References: <20260819081207.12150-1-hongyan.xia@transsion.com>
+Content-Language: en-US
+From: Shrikanth Hegde <sshegde@linux.ibm.com>
+In-Reply-To: <20260819081207.12150-1-hongyan.xia@transsion.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Authority-Analysis: v=2.4 cv=CpuPtH4D c=1 sm=1 tr=0 ts=6a86db23 cx=c_pps
+ a=aDMHemPKRhS1OARIsFnwRA==:117 a=aDMHemPKRhS1OARIsFnwRA==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=RzCfie-kr_QcCd8fBx8p:22 a=3xJz9W2bAAAA:8
+ a=VnNF1IyMAAAA:8 a=iox4zFpeAAAA:8 a=xzwhdZQ7njCJ2XY4-I0A:9 a=QEXdDO2ut3YA:10
+ a=amiGZ1mxdzcEAW_x1qlF:22 a=WzC6qhA0u3u7Ye7llzcV:22
+X-Proofpoint-ORIG-GUID: 1wZ5c2qM7g5x0jx-qb5t7EiwBQISCVhp
+X-Proofpoint-GUID: itVss8-eLfuaCICc2HK-kMCuGgzSwFvE
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDA3NyBTYWx0ZWRfXy1Knef7euqva
+ B2wMTxAUFMf0GbqrSemw+AgaY+wNIewR8/vNhiPmdrebwSaAtFgbUClfT7lyMMabKF1jdmhCukv
+ nr1v7az3rtSi3DUGh3ib1xdiKCYVnZg=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDA3NyBTYWx0ZWRfX60/6Dl3nOmKx
+ 1lgDs9d2yIy0QyPoRMAQMzaFP01pLEWEulDqKdCZ3F6qDr3NEiEADGM2eMQnstQbmSYnYcBwNjK
+ hYFPSUus//RGGLcarRg+E6axxBj3cxk7gBG2T8OjN97OxqZ9rI5pI4vUVXhXILTmckLXOi9a4I3
+ MoyHW222X4NoFlq4ynf22eXvKMiPfG/Xu4Q7UUfJRau6RKD4izhXUGu12jnr6O8gXDaA3aZRAOx
+ MuuA52c8OIb1esLmNTU4vQce+tqTAWrEo6EbROCul8IF1KNHGDNf/cl8nGs/R4mOfrjSsH3UgUC
+ QEfOV3KYChX2RlYM8p6C+EHa7k7heWKVeKCTp/8zCebWTMfdNHtOjUgI9gRkWPhGSC2OMKPO5sR
+ VflLI0qnlEsop/LaVZCG8Y9aXymFW6vJu2Q1kpkLrY+WSbBzqGsJpBBazuvASI6CZb6TNG/I2Gs
+ KijXc6TfURnVr9wKn/w==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-19_06,2026-08-19_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 adultscore=0 bulkscore=0 malwarescore=0 phishscore=0
+ lowpriorityscore=0 spamscore=0 clxscore=1011 priorityscore=1501
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608200077
+X-purgate-ID: tlsNG-bad1c0/1787222876-39EC6034-9C925B3F/0/0
 X-purgate-type: clean
-X-purgate-size: 2591
+X-purgate-size: 8262
 
-On Wed, 19 Aug 2026 at 11:12, Jan Beulich <jbeulich@suse.com> wrote:
->
-> On 19.08.2026 12:03, Frediano Ziglio wrote:
-> > On Sat, 8 Aug 2026 at 07:41, Frediano Ziglio <freddy77@gmail.com> wrote=
-:
-> >>
-> >> On Wed, 15 Jul 2026 at 07:22, Frediano Ziglio <freddy77@gmail.com> wro=
-te:
-> >>>
-> >>> These patches improve support for Secure boot.
-> >>> UEFI CA memory mitigation requires memory pages to be not executable =
-and
-> >>> writable at the same time. So changing permissions and splitting some=
- section
-> >>> is required.
-> >>> Remove multiboot pieces from EFI executable.
-> >>>
-> >>> Changes since v1:
-> >>> - improved some comments;
-> >>> - merged 2 pacthes removing multiboot support in x86 PE;
-> >>> - removed a patch dealing with SBAT;
-> >>> - other minor changes (see single patches).
-> >>>
-> >>> Changes since v2:
-> >>> - improved some comments.
-> >>>
-> >>> Changes since v3:
-> >>> - Added Acked-by;
-> >>> - Improve commit message.
-> >>>
-> >>> Changes since v4:
-> >>> - Messages updates;
-> >>> - Clean some dependencies cause by code removal;
-> >>> - Add small commit to remove a possibly unused string.
-> >>>
-> >>> Changes since v5:
-> >>> - removed merged commit;
-> >>> - remove more code/data from xen.efi output.
-> >>>
-> >>> Changes since v6:
-> >>> - fix commit message.
-> >>>
-> >>> Changes since v7:
-> >>> - added Acked-by, all commit are now acked.
-> >>>
-> >>> Frediano Ziglio (2):
-> >>>   Align relevant sections to 4KB
-> >>>   x86: Split .init section to satisfy UEFI CA memory mitigation
-> >>>
-> >>> Roger Pau Monn=C3=A9 (2):
-> >>>   x86/efi: discard multiboot and PVH support for PE binary
-> >>>   x86/efi: avoid a relocation in efi_arch_post_exit_boot()
-> >>>
-> >>>  docs/hypervisor-guide/x86/how-xen-boots.rst |  6 -----
-> >>>  xen/arch/x86/boot/head.S                    |  8 +++----
-> >>>  xen/arch/x86/efi/efi-boot.h                 |  7 ++++--
-> >>>  xen/arch/x86/xen.lds.S                      | 25 ++++++++++++-------=
---
-> >>>  xen/tools/combine_two_binaries.py           |  2 +-
-> >>>  5 files changed, 25 insertions(+), 23 deletions(-)
-> >>
-> >> Ping
-> >
-> > Ping
->
-> Andrew had indicated to me (apparently not to you?) that he'd like to
-> massage the descriptions some while committing. Hence why I refrained
-> from putting any of this in.
->
-> Jan
+Hi Hongyan.
 
-I understand maybe we want better comments and explaining what's
-missing/improvable could take more time than updating them directly,
-but how many months does this require?
-Especially after the changes had different acks.
+On 8/19/26 1:42 PM, Hongyan Xia wrote:
+> From: Hongyan Xia <hongyan.xia@transsion.com>
+> 
+> paravirt_steal_rq_enabled and paravirt_steal_enabled use raw static_key
+> APIs which are now deprecated. Use the new API instead.
+> 
+> No functional change.
+> 
 
-Frediano
+FWIW, looks good to me. One minor nit.
+
+Reviewed-by: Shrikanth Hegde <sshegde@linux.ibm.com>
+
+> Signed-off-by: Hongyan Xia <hongyan.xia@transsion.com>
+> Acked-by: Juergen Gross <jgross@suse.com>
+> ---
+> Changed in RESEND:
+> - Separate the original series into individual patches. They aren't easy
+>    to review as a series.
+> 
+>   arch/arm64/kernel/paravirt.c           | 4 ++--
+>   arch/loongarch/kernel/paravirt.c       | 4 ++--
+>   arch/powerpc/platforms/pseries/setup.c | 4 ++--
+>   arch/riscv/kernel/paravirt.c           | 4 ++--
+>   arch/x86/kernel/cpu/vmware.c           | 4 ++--
+>   arch/x86/kernel/kvm.c                  | 4 ++--
+>   drivers/xen/time.c                     | 4 ++--
+>   include/linux/sched/cputime.h          | 6 +++---
+>   kernel/sched/core.c                    | 4 ++--
+>   kernel/sched/cputime.c                 | 4 ++--
+>   10 files changed, 21 insertions(+), 21 deletions(-)
+> 
+> diff --git a/arch/arm64/kernel/paravirt.c b/arch/arm64/kernel/paravirt.c
+> index 572efb96b23f..30bf61d031eb 100644
+> --- a/arch/arm64/kernel/paravirt.c
+> +++ b/arch/arm64/kernel/paravirt.c
+> @@ -157,9 +157,9 @@ int __init pv_time_init(void)
+>   
+>   	static_call_update(pv_steal_clock, para_steal_clock);
+>   
+> -	static_key_slow_inc(&paravirt_steal_enabled);
+> +	static_branch_inc(&paravirt_steal_enabled);
+>   	if (steal_acc)
+> -		static_key_slow_inc(&paravirt_steal_rq_enabled);
+> +		static_branch_inc(&paravirt_steal_rq_enabled);
+>   
+>   	pr_info("using stolen time PV\n");
+>   
+> diff --git a/arch/loongarch/kernel/paravirt.c b/arch/loongarch/kernel/paravirt.c
+> index 10821cce554c..e8965a3f8082 100644
+> --- a/arch/loongarch/kernel/paravirt.c
+> +++ b/arch/loongarch/kernel/paravirt.c
+> @@ -308,10 +308,10 @@ int __init pv_time_init(void)
+>   
+>   	static_call_update(pv_steal_clock, paravt_steal_clock);
+>   
+> -	static_key_slow_inc(&paravirt_steal_enabled);
+> +	static_branch_inc(&paravirt_steal_enabled);
+>   #ifdef CONFIG_PARAVIRT_TIME_ACCOUNTING
+>   	if (steal_acc)
+> -		static_key_slow_inc(&paravirt_steal_rq_enabled);
+> +		static_branch_inc(&paravirt_steal_rq_enabled);
+>   #endif
+>   
+>   	if (static_key_enabled(&virt_preempt_key))
+> diff --git a/arch/powerpc/platforms/pseries/setup.c b/arch/powerpc/platforms/pseries/setup.c
+> index 1223dc961242..8dcbc4bb7025 100644
+> --- a/arch/powerpc/platforms/pseries/setup.c
+> +++ b/arch/powerpc/platforms/pseries/setup.c
+> @@ -852,9 +852,9 @@ static void __init pSeries_setup_arch(void)
+>   			static_branch_enable(&shared_processor);
+>   			pv_spinlocks_init();
+>   #ifdef CONFIG_PARAVIRT_TIME_ACCOUNTING
+> -			static_key_slow_inc(&paravirt_steal_enabled);
+> +			static_branch_inc(&paravirt_steal_enabled);
+>   			if (steal_acc)
+> -				static_key_slow_inc(&paravirt_steal_rq_enabled);
+> +				static_branch_inc(&paravirt_steal_rq_enabled);
+>   #endif
+>   		}
+>   
+> diff --git a/arch/riscv/kernel/paravirt.c b/arch/riscv/kernel/paravirt.c
+> index 5f56be79cd06..9c13a6f1ea2a 100644
+> --- a/arch/riscv/kernel/paravirt.c
+> +++ b/arch/riscv/kernel/paravirt.c
+> @@ -116,9 +116,9 @@ int __init pv_time_init(void)
+>   
+>   	static_call_update(pv_steal_clock, pv_time_steal_clock);
+>   
+> -	static_key_slow_inc(&paravirt_steal_enabled);
+> +	static_branch_inc(&paravirt_steal_enabled);
+>   	if (steal_acc)
+> -		static_key_slow_inc(&paravirt_steal_rq_enabled);
+> +		static_branch_inc(&paravirt_steal_rq_enabled);
+>   
+>   	pr_info("Computing paravirt steal-time\n");
+>   
+> diff --git a/arch/x86/kernel/cpu/vmware.c b/arch/x86/kernel/cpu/vmware.c
+> index 34b73573b108..f7ab9e7902cf 100644
+> --- a/arch/x86/kernel/cpu/vmware.c
+> +++ b/arch/x86/kernel/cpu/vmware.c
+> @@ -328,9 +328,9 @@ static int vmware_cpu_down_prepare(unsigned int cpu)
+>   static __init int activate_jump_labels(void)
+>   {
+>   	if (has_steal_clock) {
+> -		static_key_slow_inc(&paravirt_steal_enabled);
+> +		static_branch_inc(&paravirt_steal_enabled);
+>   		if (steal_acc)
+> -			static_key_slow_inc(&paravirt_steal_rq_enabled);
+> +			static_branch_inc(&paravirt_steal_rq_enabled);
+>   	}
+>   
+>   	return 0;
+> diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
+> index dcef84da304b..d3dcd64f22c2 100644
+> --- a/arch/x86/kernel/kvm.c
+> +++ b/arch/x86/kernel/kvm.c
+> @@ -1052,9 +1052,9 @@ const __initconst struct hypervisor_x86 x86_hyper_kvm = {
+>   static __init int activate_jump_labels(void)
+>   {
+>   	if (has_steal_clock) {
+> -		static_key_slow_inc(&paravirt_steal_enabled);
+> +		static_branch_inc(&paravirt_steal_enabled);
+>   		if (steal_acc)
+> -			static_key_slow_inc(&paravirt_steal_rq_enabled);
+> +			static_branch_inc(&paravirt_steal_rq_enabled);
+>   	}
+>   
+>   	return 0;
+> diff --git a/drivers/xen/time.c b/drivers/xen/time.c
+> index a2be0a4d45b0..a02d48a2aa68 100644
+> --- a/drivers/xen/time.c
+> +++ b/drivers/xen/time.c
+> @@ -169,7 +169,7 @@ void __init xen_time_setup_guest(void)
+>   
+>   	static_call_update(pv_steal_clock, xen_steal_clock);
+>   
+> -	static_key_slow_inc(&paravirt_steal_enabled);
+> +	static_branch_inc(&paravirt_steal_enabled);
+>   	if (xen_runstate_remote)
+> -		static_key_slow_inc(&paravirt_steal_rq_enabled);
+> +		static_branch_inc(&paravirt_steal_rq_enabled);
+>   }
+> diff --git a/include/linux/sched/cputime.h b/include/linux/sched/cputime.h
+> index e90efaf6d26e..694126411dfe 100644
+> --- a/include/linux/sched/cputime.h
+> +++ b/include/linux/sched/cputime.h
+> @@ -182,9 +182,9 @@ extern unsigned long long
+>   task_sched_runtime(struct task_struct *task);
+>   
+>   #ifdef CONFIG_PARAVIRT
+> -struct static_key;
+> -extern struct static_key paravirt_steal_enabled;
+> -extern struct static_key paravirt_steal_rq_enabled;
+> +#include <linux/jump_label.h>
+
+nit:
+
+This looks bit odd to see includes in the middle. I know it is including
+only if necessary.
+maybe worth an unconditional include in the beginning?
+
+> +DECLARE_STATIC_KEY_FALSE(paravirt_steal_enabled);
+> +DECLARE_STATIC_KEY_FALSE(paravirt_steal_rq_enabled);
+>   
+>   #ifdef CONFIG_HAVE_PV_STEAL_CLOCK_GEN
+>   u64 dummy_steal_clock(int cpu);
+> diff --git a/kernel/sched/core.c b/kernel/sched/core.c
+> index 5c07d53e43b5..84d090581a08 100644
+> --- a/kernel/sched/core.c
+> +++ b/kernel/sched/core.c
+> @@ -795,7 +795,7 @@ struct rq *_task_rq_lock(struct task_struct *p, struct rq_flags *rf)
+>   
+>   /* Use CONFIG_PARAVIRT as this will avoid more #ifdef in arch code. */
+>   #ifdef CONFIG_PARAVIRT
+> -struct static_key paravirt_steal_rq_enabled;
+> +DEFINE_STATIC_KEY_FALSE(paravirt_steal_rq_enabled);
+>   #endif
+>   
+>   static void update_rq_clock_task(struct rq *rq, s64 delta)
+> @@ -834,7 +834,7 @@ static void update_rq_clock_task(struct rq *rq, s64 delta)
+>   	}
+>   #endif
+>   #ifdef CONFIG_PARAVIRT_TIME_ACCOUNTING
+> -	if (static_key_false((&paravirt_steal_rq_enabled))) {
+> +	if (static_branch_unlikely(&paravirt_steal_rq_enabled)) {
+>   		u64 prev_steal;
+>   
+>   		steal = prev_steal = paravirt_steal_clock(cpu_of(rq));
+> diff --git a/kernel/sched/cputime.c b/kernel/sched/cputime.c
+> index 06bddaa738e5..f16970ca81d0 100644
+> --- a/kernel/sched/cputime.c
+> +++ b/kernel/sched/cputime.c
+> @@ -255,7 +255,7 @@ void __account_forceidle_time(struct task_struct *p, u64 delta)
+>    * occasion account more time than the calling functions think elapsed.
+>    */
+>   #ifdef CONFIG_PARAVIRT
+> -struct static_key paravirt_steal_enabled;
+> +DEFINE_STATIC_KEY_FALSE(paravirt_steal_enabled);
+>   
+>   #ifdef CONFIG_HAVE_PV_STEAL_CLOCK_GEN
+>   static u64 native_steal_clock(int cpu)
+> @@ -270,7 +270,7 @@ DEFINE_STATIC_CALL(pv_steal_clock, native_steal_clock);
+>   static __always_inline u64 steal_account_process_time(u64 maxtime)
+>   {
+>   #ifdef CONFIG_PARAVIRT
+> -	if (static_key_false(&paravirt_steal_enabled)) {
+> +	if (static_branch_unlikely(&paravirt_steal_enabled)) {
+>   		u64 steal;
+>   
+>   		steal = paravirt_steal_clock(smp_processor_id());
+
 
