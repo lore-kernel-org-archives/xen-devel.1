@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEBB8C5DF85
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 14:09:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1396612.1634395 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32961C5DF81
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 14:13:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1396621.1634404 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wx3S3-0002WD-Vg; Thu, 20 Aug 2026 14:09:03 +0000
+	id 1wx3Vp-00041J-E7; Thu, 20 Aug 2026 14:12:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1396612.1634395; Thu, 20 Aug 2026 14:09:03 +0000
+Received: by outflank-mailman (output) from mailman id 1396621.1634404; Thu, 20 Aug 2026 14:12:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wx3S3-0002W6-Rb; Thu, 20 Aug 2026 14:09:03 +0000
-Received: by outflank-mailman (input) for mailman id 1396612;
- Thu, 20 Aug 2026 14:09:03 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wx3Vp-00041C-AF; Thu, 20 Aug 2026 14:12:57 +0000
+Received: by outflank-mailman (input) for mailman id 1396621;
+ Thu, 20 Aug 2026 14:12:56 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wx3S3-0002W0-0i
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 14:09:03 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wx3Vo-000415-D3
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 14:12:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wx3S1-00FXxb-VQ
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 16:09:01 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wx3Vn-00CwKe-Ep
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 16:12:55 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a870a6f-bab6-0a2a0a5309dd-0a2a4502ed04-48
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 16:09:01 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a870b56-8faa-0a2a0a5109dd-0a2a45069ca6-40
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 16:12:55 +0200
+Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a870a7d-6ca4-0a2a45020019-d155802cb94a-3
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 16:09:01 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-499b2981a7bso9498185e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 07:09:01 -0700 (PDT)
+ id 6a870b67-195a-0a2a45060019-d1558033d95a-3
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 16:12:55 +0200
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-499acf0fb55so13818755e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 07:12:55 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499aa0d6721sm189202335e9.11.2026.08.20.07.08.50
+ 5b1f17b1804b1-499b2b23a00sm37640935e9.3.2026.08.20.07.12.54
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Aug 2026 07:08:51 -0700 (PDT)
+ Thu, 20 Aug 2026 07:12:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,66 +55,56 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787234941; x=1787839741; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1787235175; x=1787839975; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=iP3exa7q+yUmtHIF2lquYm5BmWxm+URZQXH/m7lx+E4=;
-        b=I0/yJ71OMPb5o+swBxTNulF7I+RCn0bbwoiRHpc+V4qf3tO36CuKjX8yKXh50mGKqV
-         upasSz0rRYJ3w56+YT+zCOSY2j8LoO+7k/Hx+hPvChhG0osAzHpU40lxKwt2b4mUi9GT
-         v6xSYRoQ5qmSH6jHs6YiuDYCjRl8EIY5zwmjtGsfCD4EBnCcUKNCbnv9g+nFnqZeq+W7
-         h49BgfvYM9ONio9oy6z30VsewE3zZBaB3BGD97VhbK1KtrA/s29wyzP6iam6y8Oc7QR0
-         70b4ph17SIc4fRJrMVj8U2Fc9f26PQCcVh6yWn368VRQcKWbA8JU5rXUY4/WU7trzwSl
-         VAeA==
+        bh=eLyn7kDgqyTEdRhm0I3BE/eIB4i5+QEwjBk6DsrXcpc=;
+        b=IXv1BqxP04jKWIxU+HTARMpO6IdUMhKdz/YCaLMZet070BmgP9DBlr+FfceikXz8Se
+         ZRaeenl+xB6QJdXXbk0E4G5UwVKm/imNDDyW3JSqs2PMGBiPhPQpsBsap0PBYYgMrC5q
+         T7FwNFxOj1ZdMmQTdaSjb5+j95IXB/rI2LuEC1oKLivmIf6BTUgC9SB4AvL9iygUv+91
+         nc7fl+AV+TO+OdBQ+TzzbxksvqjIN+U22/yXmK6CWYrthnFlLOaGCqFyD1hGRsQ+UgFF
+         KjW2Ph0P2gsyH4ZdE9PF+WIOtKXMY9r9cuPtGADr9mwu0nLFCbhuLdBUlu2YRFfpk36I
+         WD7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787234941; x=1787839741;
+        d=1e100.net; s=20251104; t=1787235175; x=1787839975;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=iP3exa7q+yUmtHIF2lquYm5BmWxm+URZQXH/m7lx+E4=;
-        b=F3VkyVJPalTWuthtsOTFr/Qky2ikT8qIXhHmUj54ooV8HsdIpHxlV0HNHShk0Bvhl7
-         JEfLGAewFp62HxmFeVDnQSNhB3B05Sh8AVN0/r4MGtKglnp0LqNKH7A6AQkZR175OFtw
-         rNnPBTFX4Kq2z+1q+CwoQGVicqbpQuRQ7XivRmjSmkrK1wYEWVWSXXhxJG4VOdZxn7CQ
-         6x0zJEkNjsCo/4uyn7xI2/qJdqcfa6MpBx3SqxvGJpdauCSSS70gWuIUjKCa7pAzgwXl
-         ZyUIH6N4UoLeLQOEkJIB5CMoWTRhiUf/58uMz8uaC1TsiTtkWRLsyk05lNpvfOU2BQfX
-         N22g==
-X-Forwarded-Encrypted: i=1; AHgh+RqkDjrLAMToYrjzxa3FqlnkakosoFuE3EkhhLXSNPNTmx8x9GtM3rK2F8GIvWyLFuEv3bDrAGWVF9o=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yw/2Z4hRMLeYjSYLkjkrgq6h37wZy4nl+UvKT/5Xz4B45E1Bl3N
-	YF7+t+hT4B8hEiyW/jYTYSFMSQQR5xipTk0f8aNMkK7t26i3t+HGGcRLEd4hR1dg+A==
-X-Gm-Gg: AR+sD13cwye5MOE9dKg1vZEKlYQxgR6dgIucGXWKC0K0dugDZfn1olptlLfSUb0UkW8
-	jQv1MFtPLvSd9bKSEweX6efihxWvGySGZNoZ1+UQRhLdGpjk5saRDFDn8m2fp4tZ9b/u1ft+TmX
-	Eiv+74NV+knSXp19IMi3XBi5tsOKCoqfGRaCaTAvxqgHIP7lSDUSXcgImiMcOKKO20+/k4+8QoA
-	YOOq6yBv2TJ6RCUINHsMEs6MegTAdtuUdBl9Ft7RLnYx4fUMOhDGfqaDy3loF/dwk+JB+IaRssV
-	nExii8XYuO5m2unpHmvXR/xhy4Rz7Y0lSdKsmzgJKHqK/lmN4slyK9dmWiRBU237sHTsao5INqW
-	1G82AdLKiKxZS3t5B3I9Eh+L7VNXSDN8aUirl1pxgEJcQ1oS5gLMKm8bfMXlZMRRHlI3Y2iVXtP
-	KXTVePidRL5XRrpyMpFyYiZl6WYROtItx7SLugE1WXpEt5vswimpCk3FflsN6a9l+Q/aOjWXcSm
-	MQxMsvdF0wWoCD9+NVfMG274X2WC7T0MNHMVkKsJ7hQX8dQvOLBFErpIAtsEzk=
-X-Received: by 2002:a05:600c:c08f:b0:499:afcb:24c1 with SMTP id 5b1f17b1804b1-499afcb24demr138394505e9.5.1787234931745;
-        Thu, 20 Aug 2026 07:08:51 -0700 (PDT)
-Message-ID: <9c006636-cc33-45ae-85cc-800568e6dcf9@suse.com>
-Date: Thu, 20 Aug 2026 16:08:50 +0200
+        bh=eLyn7kDgqyTEdRhm0I3BE/eIB4i5+QEwjBk6DsrXcpc=;
+        b=gkAth+s/KJgcdih8lUzm62IaSanuX7XKmLjr4qgYlA3FN0grHxWwkrYWBCeQ8gu8sW
+         M+slRS/kte41DFb/EpQi1I7qac33CqYa4xFFuoPndKPcBpavZUE79MmftBFSwmvB0wlP
+         1StFxKMOTYreU83gEJuaL+tqi7zbvui6rSdmr5LMPy9yRiC/PjNxI4F2rwxSg5b3GXKn
+         /XM0wtYozqc7XgW5NzdVr35AFOv9db/oqUII5I0Ayfh3k2EqScYkYf7aj+8yfc4avy57
+         rXW4P433+tl4L7IUB2Mj9H4HXK6mef0k1isnbH/2OE2Ayn+hSkdNd3APAobbMlKuFeGE
+         BUqg==
+X-Forwarded-Encrypted: i=1; AHgh+RoctLqJQ5n/6HNcirL/QvAr6IfnbGtDTkCgPLCoIwGevLlTafdCNarwyAVKa1tPG5Wb6AjDFMXM4ic=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yz4rM1TUwKUUHAS01EwLONGGI3n2SmmxQY37ff9nkgYVCidqkXH
+	d7Ur7LzlX//JqX0HzlvuxWGaTH3aNIQgyngPqNSwra6NDt9CNg1P2fNxPfC5Qgbcgg==
+X-Gm-Gg: AR+sD11U5RXT1r7+jup7SZe7LEDekEvY3gTqZidX+AHxVShoi7DhQNad2bCfudMxpLW
+	HjmoPO6lkIvKTTxJPPGuomEBca+zygzPIy09fvAMDC+J4OufMvbEl5jsok826csqihJ9xLeb42N
+	5gaZq9yygcov0gToG1x3xSytpJzkpxMKxOfw8Qmi10XTTYRC5EI/cDXx5ennyq9xUPg2YZDSLdJ
+	RRiWkpgfrySeWCppWd632mxJjjwlgh2SHJ4XLtjmZ59dHL+y5kLocgPEekTc1m1GI1wklCE/3Ar
+	+vCrteNr36ZJNKdGD+OdJzSXsEstDhqixEkC8Xs9yARVUmlabjIgth2yGXF43QEDh5+RAaViXXi
+	FOU67LNsvbKVmUoyvc2kWLM7RLH7X4sqorXxQZZfJTqnBeTr7hOSW9Rof20kOfU9RUDQ1eCExyH
+	9b1uNH5Ae/WlT/QLU5HtbIOz3WhKwHsPPs45rg4zUjBXKQJboK0iOW/zeEgoYd43wXSdkcAlD30
+	Am983O31spE8OUmCMMMNjQFpHM8jUiBQoOGAg==
+X-Received: by 2002:a05:600c:6211:b0:499:a760:722f with SMTP id 5b1f17b1804b1-499aa1ba0b7mr239862705e9.13.1787235174844;
+        Thu, 20 Aug 2026 07:12:54 -0700 (PDT)
+Message-ID: <cc9dd2bf-bc0d-48b5-a11b-e1e22e26a3b4@suse.com>
+Date: Thu, 20 Aug 2026 16:12:53 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 16/17] xen/riscv: add guest load emulation for trapped
- MMIO accesses
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
- <9b18a20367754605efd6a6b5bf09d4483d9c3ab2.1784560663.git.oleksii.kurochko@gmail.com>
- <7a2e46da-5b1f-448e-aba3-7eefe0a61950@suse.com>
- <aff1f879-48c6-4047-a6c1-237a350e0f35@gmail.com>
- <a64d4714-2215-4bff-9dfa-2cbcc36ce3f2@suse.com>
- <417b2b37-d805-49a4-a23d-46dd8363a751@gmail.com>
+Subject: Re: [BUG] x86emul/test: avoid assertion in emul_test_read_xcr() when
+ XSAVE is absent
+To: Andrew Precious <andrewprecious388@gmail.com>
+Cc: andrew.cooper3@citrix.com, roger@xenproject.org, teddy.astie@vates.tech,
+ anthony.perard@vates.tech, xen-devel@lists.xenproject.org
+References: <20260819180735.135911-1-andrewprecious388@gmail.com>
+ <aee239df-0582-4973-82ae-65688a7d6b9a@suse.com>
+ <CAF14T9mYViiNQfJ8TG1RU0hqf7m6yUH1-yFCzWXXJdQOhmFkgA@mail.gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -140,71 +130,44 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <417b2b37-d805-49a4-a23d-46dd8363a751@gmail.com>
+In-Reply-To: <CAF14T9mYViiNQfJ8TG1RU0hqf7m6yUH1-yFCzWXXJdQOhmFkgA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1787234941-67CBA2AC-800133BF/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-16d1c6/1787235175-F4C0777B-0AF56D2E/0/0
 X-purgate-type: clean
-X-purgate-size: 2611
+X-purgate-size: 1346
 
-On 20.08.2026 15:38, Oleksii Kurochko wrote:
-> On 8/20/26 9:34 AM, Jan Beulich wrote:
->> On 19.08.2026 18:06, Oleksii Kurochko wrote:
->>> On 8/13/26 9:15 AM, Jan Beulich wrote:
->>>> On 29.07.2026 15:40, Oleksii Kurochko wrote:
->>>>> +        /*
->>>>> +         * Bit[0] == 0 implies trapped instruction value is
->>>>> +         * zero or special value.
->>>>> +         */
->>>>
->>>> How come you get away without dealing with pseudoinsns? The insn pointed at
->>>> by regs->sepc is of no interest for faults caused by implicit memory accesses
->>>> originating from VS-stage address translation.
->>>
->>> It is really problem but I think it should be resolved much earlier in
->>> handle_guest_page_fault(). I will add the following:
->>>
->>> /*
->>>        * A guest page fault taken on an implicit memory access performed for
->>>        * VS-stage address translation (reading a PTE, or updating its A/D
->>> bits)
->>>        * reports a pseudoinstruction in htinst rather than a transformed
->>>        * instruction. Such a fault can't be emulated: htval holds the guest
->>>        * physical address of a VS-stage PTE rather than of any access the
->>> guest
->>>        * itself performed (and its two least significant bits are zero
->>> instead
->>>        * of matching stval), while the instruction at sepc is unrelated
->>> to the
->>>        * access which actually faulted.
->>>        *
->>>        * Report an access fault to the guest at the original virtual address,
->>>        * which is what stval already holds and what hardware would raise
->>> for a
->>>        * page table walk hitting an inaccessible address.
->>>        */
->>>       if ( (htinst == INSN_PSEUDO_VS_LOAD) || (htinst ==
->>> INSN_PSEUDO_VS_STORE) )
->>>       {
->>>           struct cpu_user_regs *regs = vcpu_guest_cpu_user_regs(current);
->>>           struct trap_info utrap = {
->>>               .scause = (htinst == INSN_PSEUDO_VS_LOAD) ? CAUSE_LOAD_ACCESS
->>>                                                         : CAUSE_STORE_ACCESS,
->>>               .sepc = regs->sepc,
->>>               .stval = csr_read(CSR_STVAL),
->>>           };
->>>
->>>           riscv_trap_redirect(&utrap);
->>>           return;
->>>       }
->>
->> That's not what would happen on bare hardware though, aiui. At least I don't
->> think I ever found it being spelled out anywhere what the supposed behavior
->> is when a page table resides in unpopulated space.
+On 20.08.2026 14:30, Andrew Precious wrote:
+> I just realized that I attached the binary result without the fuzzer error.
+> To generate the previous assertion error I would have to rerun the fuzzer
+> again which took many hours(~18hrs). Though that was the only error I found
+> after that long.
 > 
-> What do you mean here by "unpopulated space"?
+> VM machine that I performed the fuzzing on:
+> - A VM running Debian GNU/Linux 13 (trixie)
+> - x86_64,QEMU Virtual CPU version 2.5
 
-A physical address range neither populated by RAM nor used by MMIO of any device.
+What does that mean CPUID-wise, seeing that ...
+
+> On Thu, Aug 20, 2026 at 11:45 AM Jan Beulich <jbeulich@suse.com> wrote:
+>> On 19.08.2026 20:07, Andrew Mbugua wrote:
+>>> While running the x86_instruction_emulator fuzzer via AFL, I encountered
+>> an assertion failure in the emul_test_read_xcr() function.
+>>
+>> Thanks for the report.
+>>
+>>> The fuzzer is able to generate a CPU state where cpu_has_xsave is false.
+>>
+>> I'm having trouble here: cpu_policy isn't populated from fuzzing input, and
+>>
+>> /* Intentionally checking OSXSAVE here. */
+>> #define cpu_has_xsave     (cpu_policy.basic.raw[1].c & (1u << 27))
+>>
+>> would mean that upon filling cpu_policy (emul_test_init() ->
+>> x86_cpu_policy_fill_native()) the OSXSAVE bit would be clear. Are you
+>> suggesting you did the fuzzing on some really old hardware?
+
+... there was this aspect that I couldn't understand?
 
 Jan
 
