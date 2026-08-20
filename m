@@ -4,41 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC7C0C5DF87
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 13:04:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1396532.1634358 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6583FC5DF88
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 13:15:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1396553.1634366 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wx2R9-0000v7-Hd; Thu, 20 Aug 2026 13:04:03 +0000
+	id 1wx2bk-00030m-FE; Thu, 20 Aug 2026 13:15:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1396532.1634358; Thu, 20 Aug 2026 13:04:03 +0000
+Received: by outflank-mailman (output) from mailman id 1396553.1634366; Thu, 20 Aug 2026 13:15:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wx2R9-0000ux-E9; Thu, 20 Aug 2026 13:04:03 +0000
-Received: by outflank-mailman (input) for mailman id 1396532;
- Thu, 20 Aug 2026 13:04:02 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wx2bk-00030f-CO; Thu, 20 Aug 2026 13:15:00 +0000
+Received: by outflank-mailman (input) for mailman id 1396553;
+ Thu, 20 Aug 2026 13:14:59 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brchuckz@aol.com>) id 1wx2R8-0000uH-15
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 13:04:02 +0000
+ (envelope-from <sergii.dmytruk@3mdeb.com>) id 1wx2bi-00030Z-Ol
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 13:14:59 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wx2R7-0092Th-DB
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 15:04:01 +0200
+ id 1wx2bh-0029Sz-9M
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 15:14:57 +0200
 Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <brchuckz@aol.com>)
- id 6a86fb36-2eae-0a2a0a5409dd-0a2a4505902c-46
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 15:04:00 +0200
-Received: from [98.137.65.204] (helo=sonic311-23.consmr.mail.gq1.yahoo.com)
+ (envelope-from <sergii.dmytruk@3mdeb.com>)
+ id 6a86fdd0-8faa-0a2a0a5109dd-0a2a45059ff4-2
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 15:14:56 +0200
+Received: from [46.105.44.175] (helo=3.mo561.mail-out.ovh.net)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <brchuckz@aol.com>)
- id 6a86fb3e-4cb1-0a2a45050019-628941ccaa79-3
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 15:04:00 +0200
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic311.consmr.mail.gq1.yahoo.com with HTTP; Thu, 20 Aug 2026 13:03:58 +0000
-Received: by hermes--production-ne1-6dbcb84f44-46rwf (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID a8e2a332f422a3d65c31f2075610e6e2; 
- Thu, 20 Aug 2026 13:03:54 +0000 (UTC)
+ (envelope-from <sergii.dmytruk@3mdeb.com>)
+ id 6a86fdd0-4cb1-0a2a45050019-2e692cafae9f-3
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 15:14:56 +0200
+Received: from director5.ghost.mail-out.ovh.net (unknown [10.110.0.68])
+ by mo561.mail-out.ovh.net (Postfix) with ESMTP id 4hQkSH5rPKz69wD
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 13:14:55 +0000 (UTC)
+Received: from ghost-submission-c7b579475-vmddb (unknown [10.110.188.21])
+ by director5.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 17BBE1000F3;
+ Thu, 20 Aug 2026 13:14:55 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.98])
+ by ghost-submission-c7b579475-vmddb with ESMTPSA
+ id nh3nN879hmqx5QkABF4ZfQ
+ (envelope-from <sergii.dmytruk@3mdeb.com>); Thu, 20 Aug 2026 13:14:55 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,149 +55,179 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1787231038; bh=i5Eu7usWgUNGH7tQ609dvRBkhY6X77619nihwt8Hxck=; h=Date:Subject:To:Cc:References:From:In-Reply-To:From:Subject:Reply-To; b=L9a2au6QajmBAYpRVifTYsRA9xIrE/C6fhoUacu7q71HnOUzCK9v68r3sGqaf+JKr6f2sMsguAyGVxIr0J+trl5q7zQYSqLAPN/5CRnK9bhiFP0q0mV2jr0sPxpKQMc8WHkiPaFj9tcdB2Wo3HkeSrY2NEs8EdmvHyaO7muMlVlJySiNLXPnUZitg3ADJatsWEG9GN3fClN3DUji4IUBtveaUZnuswYnGWjX8BMb46SoqtzEGACZoL78+L/BwtRO4u8jAtyW3ODBefYD1YhBovYjCBsOHdcWeTMkNbkkRfpEE0LzMQAmwZ8p8u84sV1h4CKJ1pHg31TzavobbMeUeA==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1787231038; bh=9Wap8fShXxd0pgpjiAndfj3Ogrx9UFL9/1kJ2NV0ulk=; h=X-Sonic-MF:Date:Subject:To:From:From:Subject; b=ulVqXCPlZEb7NJOGoGCfOqFyccJkjDZVnXH7HAdoq+zELagISbn23qxEoIsvX4QS/TyyXR7JYf9eLpz+LvYi1cwtFjg0sIKv2MSt8Xg9NU4/uBz8chA+h0q5dYCtt0FZjARJvMyd4jcWCXLPFo3anuLIZ1O2hG9TJS7OA537TOzuhyRjyns4bTaC4heP7sn8AkSz8gzHortWotnwVsjta2okiGs9/8KL8z/t5KAZaiZ562LgBGWa4jfgx/ywd93TyDlrGrQqbH9nOGIYtI5tPvWpzoRcYrXbrYLpIyM2PLDbbRHo80spiNobxUUq9nz7sDPefPFB6Pkw7iAKrm9IDA==
-X-YMail-OSG: _8Jqip0VM1mym9x9D7e3N8UllgSpYO8byynk1hmAkca4Z4RcxhZJIES6LJDP23M
- L5TjHHo0yHBzpbQLYXofs7HpFmbN6LER3dIbAJTXTR9zLYARBc6yUAvWPYwX_E0tkEAAsqrMRHoW
- EsqOjXYAd3E0p6f8CyFQIryfrWm4lCnr2Thg2n40AVkpMTma9r.PjhBT4PtByhRKgLLHs39sFI77
- CzH8Xb6CQKm4Lj8PCoV_8ZLFZefGp0ZXKzBRgPQPZbHAwZyXwerXJ5HSgY2Vgu_Jx8qj82CJR4zj
- xgjNaN4AAx4gWKdePAh5mln8AbYcEENJ3tKXrehSnS6_LdKe4GRAirYuVqpo400NeCp7YiCPvwG0
- ffKM1AQKneX1ydLeG.bnbHtTKplWbLhDOZZRNeNDTUgAAOXnHok9Ve7ab0qMZQsAeMB0nWi_7xgk
- 9PeOmdzdncTDoP3XPc8k_Dd6tMNbhmEhFgC6LzWS1J4cSf_AsGx_PdfDlXXjNbygeN0skFfeTCGj
- dEqlcNonbRB.kTAQp10fTFuIIV39P3BihwARbvae9.v3FU_hb.UYSainf9d1j3kY6r3nHc7Zwz0b
- m3Df4ilLie1th1z5bamtIKCVXEvK64a3TC8xpnD5wD_reqUJ77lJ0ECB7XoXMQA27MnJKUPMEtet
- DfmzR_9ltjPHMw60oDDxeFLN_poDC1QOiKQjtDuqdZOvLlPXKu7bD6qLSAaHGbD96ckVt0fohErM
- 6EF15lXCVUhn3oFWUFk5K9L3nRImzIm4tuLKRoZ9BARbjWOFTyWyDJEFwr4cCJyrxL4WOQf6fUNL
- uhmODDzRHoWu6fFMTJe1NPjxW2XyDbXC5FjoAQfYgctWvkbxmMC0C89wmrD3XmZYwKvebcLf9KoU
- MsgN8GFWlZY_CZhv0XSSyrY00YU57W1sI2nCBQ.lUjrbWRZd6jO_Xa.PozlZUDGMzpF8mrsbKs2L
- v1xKPBNhQoQIFm5IKGlL7z5ZAKliNlD8hy8fz6lx15Ahgt0inxZylIzMqVvfY3P1cxQa95h3CybX
- 2A1aEIM6MJdQcNl4FJvPixwqMdb06a1E3PewQp78SCcRPpu0vKtrY._SvUKt8ZJsEdXkytKzP_.W
- QFcMPPX2.klOk0pO1dofHrSizgxEhmREoq4Z.N9HSEYRoS.MAqN6EgNC.dBPG.JenGf6VsXTblgb
- YAETT6Ci6Pb2Igw9qJixpRib9cznCH3efj6Zn0B7qEcNiXleDpYtpD2X_htJYGzXGk2B21PL9W7g
- 6CWTMbl4vrt52lVQkog.nVP3QQa8.huZgSFwJtqJgQS6g7joAP6qxk6a_zSWQVFozGNIILo60FUi
- FK_j27hwn_plhHQrb60I9vxFqYg0q2goARcwefcNKE6.1YRjDPTtohPol9boyH18BSiMYch0oWeI
- oj3NMhRt7yjf9jwiDMGLdH7QiCVRk5Xb0o6LkAEyA96FF72rF1fcQLVhuZy7Kotk2FMlFW.w26Sr
- Y5UuSfvaETsCQh2U7W8YPgB1OKsIO8uD34.OMUWYArDAuOMDMRm9bCU2f.kQo.g1g26vDdg1mdx3
- slfhHcjs4q4CJ.0XpfoirA9SPnFBztdm3t6O6A9m1tQElCyTQhlx9ifRY9bW7eOSUK7sdDYAmPkc
- 9uRYmJKM2Xe1pPwGgSEZrzV6r8e3zCSxO.l6snXWR1YV1Dw9A17RstfdHnog6NttMTMiE0GtmG_P
- NcwtEHCjUKVcT_XSlLlhmz22RrN_QmQ6G4t2Iz3_LsrutRGOJBUzvDjKu4tf7NEBqJfH8REi_wit
- XJGpeEE1ztepOiHEHPC37_p9ape_IReiWaIjzHZAhRB8rpFkRQXYfwkeCx2hvhB_0q3SqkU60SoE
- LMdRlevYJY_zPTU2AbYrBqU0oEu.kPPq0OziAjfIAL_6dpSi.UvUKpwUa7Xp.3ES6TSUtWHOIWxQ
- cr87xjJBsFhQJ.aUixBRoT0x4Pn_2BtrlEgxdLnSyOJx7YpSWrqFcrPv0g0qpv2jA3x15nlhsZHL
- p8Lgk4VKj2RkvxnmS.yhlZtY1qW9fwa0egN53SQKwDQ1.xfdxgKFhxpg1fCS3WsxvKCisHnnOyod
- mxRF7aySDYo7UjuyI2XPE8UfZXp8bgmf1iD6zDtk413HV2CT6VtbTG5hNg1KUzgat8eyMojBZ6RW
- WyMPVLew6geHpbowXcAed18VEU_tI.M9K42ATR8j8WpOFg3YJ6XbDpYL9UKOmVZTkySAaOZ8cQuG
- wuSFiNBVLupWIpY0YGMycRkoVeyrUD4yXkYIxuWFaL_5J
-X-Sonic-MF: <brchuckz@aol.com>
-X-Sonic-ID: 373cb663-2d27-4eb2-81bf-d41bc8c998ce
-Message-ID: <17066d50-9809-47c4-87b2-7f33bfb528ad@aol.com>
-Date: Thu, 20 Aug 2026 09:03:55 -0400
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] tools/hvmloader: implement Intel IGD extended VBT
- support
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=ovhmo3617313-selector1 header.d=3mdeb.com header.i="@3mdeb.com" header.h=From
+Authentication-Results:garm.ovh; auth=pass (GARM-98R0021f96c00e-7dc3-48e6-9e0d-1216f252883e,
+                    D706B0B4A4E5C2B84ADA60A922A966C43F440F90) smtp.auth=sergii.dmytruk@3mdeb.com
+X-OVh-ClientIp:176.111.181.215
+Date: Thu, 20 Aug 2026 16:14:45 +0300
+From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
 To: Jan Beulich <jbeulich@suse.com>
-Cc: qemu-devel@nongnu.org, Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>,
- xen-devel <xen-devel@lists.xenproject.org>
-References: <20260802050824.10554-1-brchuckz.ref@aol.com>
- <67579eba-e222-41dd-84bf-8440d2eaf2a9@netscape.net>
- <da2200cd-def7-4cce-a6c2-9f9ac9e202ce@suse.com>
- <de56c8bd-f0e8-4fe9-8cf5-f6807698176c@aol.com>
- <02a7dc18-4184-4e86-84cb-121769187f71@suse.com>
- <1858e8e6-73fa-4017-93e2-c733fbf0ec8d@aol.com>
- <d6e603bf-8dc5-4ac7-842f-ff9d1f67b98f@suse.com>
- <fdec0b6b-eddf-4a36-a755-c67963daa9ea@aol.com>
- <6ecf80ef-2f0e-44fb-beab-dbcf065a4431@suse.com>
- <bb44067c-6739-4e83-a0fd-cc7ea797048f@aol.com>
- <4c58bda6-e9ed-438d-b96e-feda74a6c4c7@suse.com>
- <31a5870f-2a4d-4dc0-af9c-f0567e0f6fb3@aol.com>
- <db8fd04d-bbc7-41c7-8473-b821d7f77d5f@aol.com>
- <302ed12f-40ca-405c-80ca-ac4f2785d754@suse.com>
- <cdae1785-4d9a-4aab-929e-de55c26b7b94@aol.com>
- <10cd9f6b-678b-407b-a51e-70e9ed7a35fd@aol.com>
- <131b1252-b108-4b4c-8457-673ff0d20d5e@suse.com>
- <682975cc-4857-42b2-badf-b638869f3268@aol.com>
- <7ab98288-0c5e-472d-87dd-5586e60027bb@aol.com>
- <efd82852-484d-4b59-8d04-887533c13dea@suse.com>
-Content-Language: en-US
-From: Chuck Zmudzinski <brchuckz@aol.com>
-In-Reply-To: <efd82852-484d-4b59-8d04-887533c13dea@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailer: WebService/1.1.26254 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
-X-purgate-ID: tlsNG-c201ff/1787231040-F50A22A1-469DA675/0/0
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger@xenproject.org>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	trenchboot-devel@googlegroups.com, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v4 02/23] x86/cpu: report SMX, TXT and SKINIT capabilities
+Message-ID: <aob9xUZF12IJhLRz@MjU3Nj>
+References: <cover.1785668458.git.sergii.dmytruk@3mdeb.com>
+ <be993e757550b69a6f94f89476ba71131b434741.1785668458.git.sergii.dmytruk@3mdeb.com>
+ <7489d730-6e91-4d6f-a355-4eaa62698c4c@suse.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <7489d730-6e91-4d6f-a355-4eaa62698c4c@suse.com>
+x-ovh-tracer-id: 18288836615552378332
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: dmFkZTEHja+aRFeNV2ixbeGtjyIMzgB3lg12I9m1uVhB0heuMO+Fzr7REfISj4T8fiDELlRrHvjokHQ0bfgn1CgpXbH73b1YFELft3wll7N3F3tumF3FWLMSVWez8FsU+T8NmQv8K/HIN/EEdznaWa3YmKiwCb6wH4pJaMTbozwSb8KojblEQnoIpOI5bY2Cjq9dJm/r+HZn1WnAzGEm36Ctq1gFV/1NETPPz1n8WCsfGYn1D8OerJOYYwMiAQy3YiM+Sk/cSfF03OC+FDq3mBP8r4pVveTU4Wq7oN+9Gohy0BIk/SoKsSNvy0r+zN8XWmPqh/IB1soU5m2ntLlULfq0jgF2QhM4CdN8F4FC3vq8ZDHsM43HTO1l9Zo7L0bOFvHE3181qrRgk2Ili7uG4zcbjP8qbR8gYt5cbX0lxD5wMOyAV9wQMFIiL1Tz8yoZr/Glf2BWg/7Rvb/4rt1geaatcKGBP2Q+eJ10XjhkITryodNP4/QVNG92zY+3JJAgYexDrdJ0+/S0VoUijJDr/8AQvSiZPnphQAF4fWCamoN2s9cIIGo4VVq1sNgiOPh6wFXyQmqZYpOwNRahnebmVjZW7Rzcmk39vxo4r8nqqFIGGlVmTqwEZSZL2IifATIoAo0h10VqnqoReElZktZkjPCzP1dKTTPFXy1khb0sz49gV4IwmA
+DKIM-Signature: a=rsa-sha256; bh=i199ftMT32oqzrbAktF9xI3Y2+Viq/+CBtxR6F9DISQ=;
+ c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
+ t=1787231695; v=1;
+ b=MjQ3d7bdR/RUNl72DSI2OaoetRaIvb7N7VK1KoMPcH16//lxRwC38hfKwL58X8XpaNphe/Cb
+ 43OFemYTMp97sXb50hWF9MJd3wJ6Zy4gRGvkOZB/GOraea6hh0JLa3FteKrAAPI8loQ23N3HpTh
+ ZHwGn9XHttL3WSslmT3vP4ebUG5lZiAvr1WRXWbXQ2zFtPpVXIEr3BZqasKsbiSRSjTLpz8bXTk
+ 4NIwwEPcn/4uj0utgswUk5JEM97xFUqiO1S67B15iKWsHf/0olnJbgI+rY4bydpkzcAn53Mialu
+ VW5DSxMhG3kIjlX0s1aGzO45F9NQrjVgKM+romhkZpQWw==
+X-purgate-ID: tlsNG-c201ff/1787231696-734BC2A1-32F65332/0/0
 X-purgate-type: clean
-X-purgate-size: 4025
+X-purgate-size: 5164
 
-On 8/20/2026 3:53 AM, Jan Beulich wrote:
-> On 19.08.2026 19:49, Chuck Zmudzinski wrote:
->> On 8/19/2026 11:47 AM, Chuck Zmudzinski wrote:
->>> On 8/19/2026 9:51 AM, Jan Beulich wrote:
->>>> On 19.08.2026 14:36, Chuck Zmudzinski wrote:
->>>>> On 8/19/2026 8:16 AM, Chuck Zmudzinski wrote:
->>>>>> Yes, I agree that v3 of the patch to hvmloader should presume that the DM can get
->>>>>> a copy of the OpRegion and read its contents so most of this can be done in the
->>>>>> DM instead of in hvmloader. So from hvmloader's perspective, the patch will be more
->>>>>> about avoiding the layering violation than anything else.
->>>>>
->>>>> However, there is one advantage, from the viewpoint of the Xen virtualization platform
->>>>> as a whole, to do the patching of the OpRegion in hvmloader instead of in the DM.
->>>>>
->>>>> If we patch the OpRegion in hvmloader as v2 of this patch does, we provide a common
->>>>> solution for extended VBT support for Intel IGD devices that would be compatible with
->>>>> all DM implementations, not just with Qemu. So why not do the patching of the OpRegion
->>>>> in hvmloader?
->>>>
->>>> As indicated before: If the OpRegion holds data that is needed to drive the
->>>> device, and if the OpRegion is exposed writable to guests, then guest can
->>>> screw up that data such that subsequent guests won't work anymore. Hence
->>>> exposing to guests (which includes hvmloader) needs to be stopped, or at
->>>> least be limited to r/o. That, in fact, includes exposing to any privilege-
->>>> restricted DM as well.
->>>>
->>>> Exposing r/o may be entirely okay (i.e. may not be a layering violation),
->>>> depending how exactly an OpRegion surfaces for a device (on the host). Aiui
->>>> it's not addressed by any of the BARs, yet it looks like it needs similar
->>>> treatment. Earlier on we also talked about the region not necessarily being
->>>> page-aligned. That poses, even with r/o exposure, the question of other
->>>> data on the same (leading / trailing) pages. This may imply that the
->>>> copying needs to be done strictly in Dom0, for both DM and guest to only
->>>> ever act on copies (which may then as well be r/w).
->>>
->>> Yes, I am thinking the DM should make a copy host OpRegion and never expose
->>> the host OpRegion to the guest but only a copy of it.
->>>
->>> The reason we need a patch like this is that with the introduction of the
->>> rvda/rvds fields into the OpRegion, the OpRegion is not always position-independent
->>> so its contents might be unsuitable in the guest address space, so in those cases
->>> we need to patch the copy of the OpRegion that will be exposed to the guest.
->>> If there is an extended VBT the DM will also get a copy of it, make a copy of
->>> it, and expose it to the guest by appending it contiguous with the OpRegion.
->>> Since in this scenario we are assuming the DM knows the contents of the OpRegion,
->>> then it can find the host VBT and make a copy of it without needing hvmloader
->>> to send the rvda and rvds values to it.
->>>
->>> Then, the remaining question is which component (DM or hvmloader) will patch it
->>> if it needs to be patched to make the guest's copy of it compatible with the guest
->>> address space.
->> 
->> As I noted earlier, it think it would be advantageous for the Xen platform as whole
->> for the patching to be done in hvmloader. That way, support for extended VBT is
->> automatically added for all implementations of the DM, not just for Qemu. But the
->> downside is that for hvmloader to do the patching, it needs to know the host OpRegion
->> address, which one could argue it should not need to know. This is the only reason I
->> can think of to do the patching of the OpRegion in the DM instead of in hvmloader: to
->> avoid disclosing the host OpRegion address to the guest.
->> 
->> But we trust hvmloader, don't we, to not abuse this knowledge of the host's OpRegion
->> address?
-> 
-> No, we cannot (fully) trust hvmloader.
+On Tue, Aug 18, 2026 at 02:08:48PM +0200, Jan Beulich wrote:
+> On 02.08.2026 15:09, Sergii Dmytruk wrote:
+> > From: Michał Żygowski <michal.zygowski@3mdeb.com>
+> >
+> > Report TXT capabilities so that dom0 can query the Intel TXT or AMD
+> > SKINIT support information using xl dmesg.
+>
+> Hmm. I first meant to ask: In how far is this extra logging useful,
+> especially as long as we don't use the features just yet? And only then
+> I noticed that I must have paid too little attention here already in v3.
+> Querying through "xl dmesg" is entirely unreliable. Sooner or later the
+> boot messages will scroll off of the ring buffer. Making this a
+> query-able interface also would mean we can't alter any of the messages,
+> should the want/need arise.
+>
+> For AMD the situation is easy: It's part of the featureset / CPU policy
+> exposed via sysctl. The same is true for SMX on Intel, but the further
+> GETSEC output requires some other means to communicate. I wonder whether
+> making this part of the CPU policy would make sense, or whether to
+> introduce a Dom0-only hypervisor-CPUID bit for it, or whether yet
+> something else would be best here. Likely Andrew will have had thoughts
+> on this long before ...
 
-That is good to know.
+I'm not aware of anything relying on this output.  It's just for making
+this information more accessible to users that may be wondering if DRTM
+has a chance of working (e.g., if hardware supports it and firmware is
+properly configured).  The wording may be unfortunate (and needs a fix
+anyway), I can change it to
 
-Chuck
+    Report DRTM-related capabilities to enable checking for them in dom0
+    using `xl dmesg`.  This targets debug and diagnostic use cases.
+
+if that helps.
+
+> > --- a/xen/arch/x86/cpu/amd.c
+> > +++ b/xen/arch/x86/cpu/amd.c
+> > @@ -617,6 +617,21 @@ void amd_process_freq(const struct cpuinfo_x86 *c,
+> >  		*low_mhz = amd_parse_freq(c->family, lo);
+> >  }
+> >
+> > +void amd_log_skinit(const struct cpuinfo_x86 *c)
+> > +{
+> > +    /*
+> > +     * Run only on BSP and not during resume to report the capability only once.
+> > +     */
+> > +    if ( system_state == SYS_STATE_resume || smp_processor_id() )
+> > +        return;
+>
+> If this is BSP-on-boot only, the function really wants to be __init. For that,
+> ...
+>
+> > +    printk("CPU: SKINIT capability ");
+> > +    if ( !test_bit(X86_FEATURE_SKINIT, &boot_cpu_data.x86_capability) )
+> > +        printk("not supported\n");
+> > +    else
+> > +        printk("supported\n");
+> > +}
+> > +
+> >  void cf_check early_init_amd(struct cpuinfo_x86 *c)
+> >  {
+> >  	if (c == &boot_cpu_data)
+>
+> ... use this condition ...
+>
+> > @@ -1325,6 +1340,7 @@ static void cf_check init_amd(struct cpuinfo_x86 *c)
+> >  		setup_force_cpu_cap(X86_FEATURE_XEN_REP_MOVSB);
+> >
+> >  	amd_log_freq(c);
+> > +	amd_log_skinit(c);
+>
+> ... at the call site (and of course also the other one). Same for the Intel
+> code, obviously.
+
+OK, thanks.
+
+> > @@ -620,6 +625,49 @@ static void init_intel_perf(struct cpuinfo_x86 *c)
+> >      }
+> >  }
+> >
+> > +/*
+> > + * Print out the SMX and TXT capabilties, so that dom0 can determine if the
+> > + * system is DRTM-capable.
+> > + */
+> > +static void intel_log_smx_txt(void)
+> > +{
+> > +    unsigned long cr4_val, getsec_caps;
+> > +
+> > +    /*
+> > +     * Run only on BSP and not during resume to report the capability only once.
+> > +     */
+> > +    if ( system_state == SYS_STATE_resume || smp_processor_id() )
+> > +        return;
+> > +
+> > +    printk("CPU: SMX capability ");
+> > +    if ( !test_bit(X86_FEATURE_SMX, &boot_cpu_data.x86_capability) )
+> > +    {
+> > +        printk("not supported\n");
+> > +        return;
+> > +    }
+> > +    printk("supported\n");
+> > +
+> > +    /* Can't run GETSEC without VMX and SMX */
+> > +    if ( !test_bit(X86_FEATURE_VMX, &boot_cpu_data.x86_capability) )
+> > +        return;
+> > +
+> > +    cr4_val = read_cr4();
+> > +    if ( !(cr4_val & X86_CR4_SMXE) )
+> > +        write_cr4(cr4_val | X86_CR4_SMXE);
+> > +
+> > +    asm volatile ("getsec\n"
+> > +        : "=a" (getsec_caps)
+> > +        : "a" (GETSEC_CAPABILITIES), "b" (0) :);
+>
+> Nit (style): Bad indentation, missing blanks, unnecessary \n, and stray colon.
+> Overall:
+>
+>     asm volatile ( "getsec"
+>                    : "=a" (getsec_caps)
+>                    : "a" (GETSEC_CAPABILITIES), "b" (0) );
+>
+> I further question the need for volatile here. (Like for we have for CPUID, we
+> anyway may want to gain a getsec() wrapper for GETSEC.)
+
+I think `volatile` was added just because it doesn't hurt, rather than
+because it's necessary, so it can be dropped.  Can add a wrapper, but
+there is only one use so far and a generic wrapper will have to use
+64-bit parameters (`GETSEC[EXITAC]` sets RBX).
+
+> > +    if ( !(cr4_val & X86_CR4_SMXE) )
+> > +        write_cr4(cr4_val & ~X86_CR4_SMXE);
+>
+> The clearing of SMXE here is pointless, as the if() already guarantees the bit
+> to be clear.
+
+This statement restores the value stored in `cr4_val` (see above).
+Maybe should name the variable `old_cr4_val` or `orig_cr4_val`.
+
+Regards
 
