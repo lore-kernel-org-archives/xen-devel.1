@@ -4,44 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32961C5DF81
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 14:13:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1396621.1634404 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B7F9C5DF85
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 14:58:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1396657.1634411 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wx3Vp-00041J-E7; Thu, 20 Aug 2026 14:12:57 +0000
+	id 1wx4Du-00012V-JU; Thu, 20 Aug 2026 14:58:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1396621.1634404; Thu, 20 Aug 2026 14:12:57 +0000
+Received: by outflank-mailman (output) from mailman id 1396657.1634411; Thu, 20 Aug 2026 14:58:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wx3Vp-00041C-AF; Thu, 20 Aug 2026 14:12:57 +0000
-Received: by outflank-mailman (input) for mailman id 1396621;
- Thu, 20 Aug 2026 14:12:56 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wx4Du-00012O-GL; Thu, 20 Aug 2026 14:58:30 +0000
+Received: by outflank-mailman (input) for mailman id 1396657;
+ Thu, 20 Aug 2026 14:58:29 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wx3Vo-000415-D3
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 14:12:56 +0000
+ (envelope-from <brchuckz@aol.com>) id 1wx4Dt-00012I-8G
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 14:58:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wx3Vn-00CwKe-Ep
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 16:12:55 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wx4Dq-009Lls-QG
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 16:58:26 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a870b56-8faa-0a2a0a5109dd-0a2a45069ca6-40
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 16:12:55 +0200
-Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a870b67-195a-0a2a45060019-d1558033d95a-3
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 16:12:55 +0200
-Received: by mail-wm1-f51.google.com with SMTP id
- 5b1f17b1804b1-499acf0fb55so13818755e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 07:12:55 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499b2b23a00sm37640935e9.3.2026.08.20.07.12.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Aug 2026 07:12:54 -0700 (PDT)
+ (envelope-from <brchuckz@aol.com>)
+ id 6a87160c-e002-0a2a0a5209dd-0a2a4508a794-2
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 16:58:25 +0200
+Received: from [98.137.65.146] (helo=sonic309-20.consmr.mail.gq1.yahoo.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <brchuckz@aol.com>)
+ id 6a871610-f659-0a2a45080019-62894192a941-3
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 16:58:25 +0200
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic309.consmr.mail.gq1.yahoo.com with HTTP; Thu, 20 Aug 2026 14:58:23 +0000
+Received: by hermes--production-ne1-6dbcb84f44-vcvxd (Yahoo Inc. Hermes SMTP
+ Server) with ESMTPA ID 16eeb344b7bc8d6ce5e46c7023ef40a1; 
+ Thu, 20 Aug 2026 14:58:20 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,121 +50,231 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787235175; x=1787839975; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=eLyn7kDgqyTEdRhm0I3BE/eIB4i5+QEwjBk6DsrXcpc=;
-        b=IXv1BqxP04jKWIxU+HTARMpO6IdUMhKdz/YCaLMZet070BmgP9DBlr+FfceikXz8Se
-         ZRaeenl+xB6QJdXXbk0E4G5UwVKm/imNDDyW3JSqs2PMGBiPhPQpsBsap0PBYYgMrC5q
-         T7FwNFxOj1ZdMmQTdaSjb5+j95IXB/rI2LuEC1oKLivmIf6BTUgC9SB4AvL9iygUv+91
-         nc7fl+AV+TO+OdBQ+TzzbxksvqjIN+U22/yXmK6CWYrthnFlLOaGCqFyD1hGRsQ+UgFF
-         KjW2Ph0P2gsyH4ZdE9PF+WIOtKXMY9r9cuPtGADr9mwu0nLFCbhuLdBUlu2YRFfpk36I
-         WD7Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787235175; x=1787839975;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=eLyn7kDgqyTEdRhm0I3BE/eIB4i5+QEwjBk6DsrXcpc=;
-        b=gkAth+s/KJgcdih8lUzm62IaSanuX7XKmLjr4qgYlA3FN0grHxWwkrYWBCeQ8gu8sW
-         M+slRS/kte41DFb/EpQi1I7qac33CqYa4xFFuoPndKPcBpavZUE79MmftBFSwmvB0wlP
-         1StFxKMOTYreU83gEJuaL+tqi7zbvui6rSdmr5LMPy9yRiC/PjNxI4F2rwxSg5b3GXKn
-         /XM0wtYozqc7XgW5NzdVr35AFOv9db/oqUII5I0Ayfh3k2EqScYkYf7aj+8yfc4avy57
-         rXW4P433+tl4L7IUB2Mj9H4HXK6mef0k1isnbH/2OE2Ayn+hSkdNd3APAobbMlKuFeGE
-         BUqg==
-X-Forwarded-Encrypted: i=1; AHgh+RoctLqJQ5n/6HNcirL/QvAr6IfnbGtDTkCgPLCoIwGevLlTafdCNarwyAVKa1tPG5Wb6AjDFMXM4ic=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yz4rM1TUwKUUHAS01EwLONGGI3n2SmmxQY37ff9nkgYVCidqkXH
-	d7Ur7LzlX//JqX0HzlvuxWGaTH3aNIQgyngPqNSwra6NDt9CNg1P2fNxPfC5Qgbcgg==
-X-Gm-Gg: AR+sD11U5RXT1r7+jup7SZe7LEDekEvY3gTqZidX+AHxVShoi7DhQNad2bCfudMxpLW
-	HjmoPO6lkIvKTTxJPPGuomEBca+zygzPIy09fvAMDC+J4OufMvbEl5jsok826csqihJ9xLeb42N
-	5gaZq9yygcov0gToG1x3xSytpJzkpxMKxOfw8Qmi10XTTYRC5EI/cDXx5ennyq9xUPg2YZDSLdJ
-	RRiWkpgfrySeWCppWd632mxJjjwlgh2SHJ4XLtjmZ59dHL+y5kLocgPEekTc1m1GI1wklCE/3Ar
-	+vCrteNr36ZJNKdGD+OdJzSXsEstDhqixEkC8Xs9yARVUmlabjIgth2yGXF43QEDh5+RAaViXXi
-	FOU67LNsvbKVmUoyvc2kWLM7RLH7X4sqorXxQZZfJTqnBeTr7hOSW9Rof20kOfU9RUDQ1eCExyH
-	9b1uNH5Ae/WlT/QLU5HtbIOz3WhKwHsPPs45rg4zUjBXKQJboK0iOW/zeEgoYd43wXSdkcAlD30
-	Am983O31spE8OUmCMMMNjQFpHM8jUiBQoOGAg==
-X-Received: by 2002:a05:600c:6211:b0:499:a760:722f with SMTP id 5b1f17b1804b1-499aa1ba0b7mr239862705e9.13.1787235174844;
-        Thu, 20 Aug 2026 07:12:54 -0700 (PDT)
-Message-ID: <cc9dd2bf-bc0d-48b5-a11b-e1e22e26a3b4@suse.com>
-Date: Thu, 20 Aug 2026 16:12:53 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="Date:Subject:From:To:Cc:References:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1787237903; bh=p77KaGKTsaeXAG5o+cyXNB9f2yKatwNXCTXLE+YTHAg=; h=Date:Subject:From:To:Cc:References:In-Reply-To:From:Subject:Reply-To; b=NoyC9rOw8RWey/V1PO1SpvZNZ3zEsvyRn74id8qDU9s5/MhzXmXKzMPiU6ymTi2JO/Hjy6azBbH791NRec7SLnzJYqFWvu51toQDqy8cPhRopvUKvxjC5WD0pN7lswKpexRUxY3R8sdKtl6A1Mwe9x9DldHDf0fULrGtZ+JDGiBbjkJkMdYmw0869opX+M98EWCPJoiyFwtI8b/QHsMPIz2SeiZ/vTCBS87s7VIjmLK8vGo5xqdO5ibr8KSJXcfDOFce5JuufNHaHHmIDVaO0jhUKf4D+Vwi3jhz43xQZ6JmiRn502pH6CJFUb2gm1+5W1yn+Dt3ekBIiFuI+KCfkQ==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1787237903; bh=ngpd+xLtVTuYPkIPTLJVC9xtovhuqBfKTw9DyvAO0ov=; h=X-Sonic-MF:Date:Subject:From:To:From:Subject; b=EO2W8p9FNou5eztq8nu0QOg88NTzcLJvA2XCxLMsTPioan1lAOSq9v5LRBs8nsyRKpp/N2CcpGKB9m9Xsl4WJxU77BmZqncdb2zB1QBcB5iRSZb6+PxmmbSeKjIVx66SsC96bCQV3XNs8r6tLHZh3k3zUzjhKRA3jkjPbi8cu389nJ3n8/n13Q4wGa2TEghZ67w8DNjO16AEL6AZpjodwNRlOSbg4FW6WvFroqFeokcNZGL+KBumy7yyOryDcAU3+Lk+zMCeJ4Bgh3VfOuvYKMA3piqL/j9zyIPOHtcryYOGqvjcInNgxdffU2Xbl7ZwgFY6gN72FutfVfgqNa1YNQ==
+X-YMail-OSG: 4m.E8lEVM1lobNUVJSQfmBbsGPNSHtIk7w8KuisfZQNf.TPOO.iJ86AmnWbvhBQ
+ aiGyhOTLAQ6SWmCpumRQZIR9nAFXmH_doE45.snMJWsAOpwJVVhx2hUZjw03_rzHxmsFyqjC.FTs
+ Z4XPKjMlvvIIegazg9BuKyJXu7TR_IO_C5ei6qTx0ryNPHOwfK7SRrBIMk_eu6.mCOjsDaEtD6hF
+ lZAMoweJpB_gUhiJefDyPk1CgN0gM.z0hj4uG74R5xGP1SMekKp3EU27tZT9cXTmh0J3XFRF.hBX
+ rs5PRluGBLw7sTqspVveQ05W.lHPb9C7xZKPol0.Bcc3eLuBKaY9..MPbVU7ZKHtXH_UVb9YfBSK
+ I8kvbktx8NH0aukIyzRX2KdFmPxg7RdqmQqLme65UOTndRc9.xj9d1.aGIyw4Zio2_qv0MJcTl1N
+ k3qM_Hzfx5zJ2zwgLD7c7KIw_QT3GY1q2osDq3veW24E1PWM3E2d9I4jG48JXOMfBARbfs122OtJ
+ nlbpFFvS2R1OnD0UQKIHtpAT4C.7jpS9XlkrMGvjsd5Bfo1jHj9fva4re7v4x3oJdU6f7eMMOnFS
+ sAuVWX4c3M6uDCKOEU1octUs.IMZpM87Y7h5XB9aNL4CIhdsy_evwv9ZV9hKDgRjcH94DbTbkNwX
+ P628gydnPs.Y8w8FctL6_jtljedK47bW9Kd9NmE8dxb_YtXSoQ0MfbZA7Otga9QNYNB6EEiSrbEe
+ K40HMdYJ_FVcDV199I9rhUsPDsNTYia3RW30PHaqvDoxj2gKdP5p7NBQ9X8nie2KPmttYp7ZtSdc
+ c5cQ73ZiXpdEhNhuYHshfB0DC06jKHaiyTdhX8_RQKGqH5zpWAvvtXmvutLa1OTbst1l4p1REoMz
+ RDtdA9HuVpdnx2hNYDQv0H3mxSz31qTcfEg5tUOQvBwRydC_f8avi0FO7zzkj84i29FvqrlXfHVf
+ 0OnkrS9Td9RjZNuaGqq_G9OJWv_lhb67l.UJYBM7.75m42QST7EcFaoExNLJ1MYwNdZKKg5qI67_
+ U4zHKA_88uusMGsFCP55igjWg_Bya8rW4xqyVlsiwmZwBVANtEPB.cM.zZD04onuerhnYQwXWY7Y
+ okBGLvVKdeV5hbPQ1aBw5c3Qai_4FbcsAgpK8VQylkt07.JeXLyjp_epj71azR_TxQXI.2XtrKsT
+ sKAYlmhshOwgJ24xQQqA1Z6iLoLbegVgCqUSyofiMl2yeOjAxLGSE..vdXlcgS_tCz6GYUELEm7H
+ VnyWMoa.FNL0S5.aOYIQRgfMw0zFOGprEyTO8UMPjjedYqe.Te9KQ3PNMcz2uR44TEvgZ1ogEfKr
+ X0OH_pyXZojtTFdWO0J8bTsUEZBFAnSQztYQ5bZCibCNY76r73NgjPTT8PZJussU8UB_8QOKOzYE
+ uluE_XAWWT9MI2zq0_LbMrND2Gw0hpDGE1ejqpg2A.YeBYPFHfub6ST1ONY8tPdNhzTiOa7.D6Dd
+ yL3ns3Ck_9nr7MqYwrXrCtyDtkXzcNpoqNadABPpI4ogRq0x4fiaK5EjEM2FwQ9P2bIVP9MsvM1s
+ hVOdr67mYTk0AOj0kqQRlnOOtti9XaVc9qVESrQP_o_gIW4HNFYBHeWCzpGz0sbz5yLOaNKIRqwe
+ Dpm4DF62yMfL3Bip0OWWr0RBXqZ9t_D4uFcD07k..86V7XCd8bv7pOW5JGN77jfqPiUGaC72of_u
+ 7OzcqBb.10dKxN1qX6v1LieOF0hYW5GIvhoCamI3V0o4LgCRPhSRL2chprnmGqMnDrsq264MQCWB
+ 0v.lBNmyxgHhb8nQ8v0bNZSuuTi_Dd6t6SJE_HUqXvGLsPQ_Vqbrk1g6U3Q7A2NQOtMSV._6ukK0
+ WhRsY326FGk56Epi_IyM0iuE5qjQ.E0q3hCewUhretDV.YCAkLZhUNTuBrmO2ruKfsQDVQiInVNZ
+ LKLUqiHQWZ.qErKNmE6HkguQi1YwXMseeGeu.6qu__MBB8Iux93EU4GNwGFlwuGZIhgRuKvaWV.z
+ Vl_pfUEGF957n9_yGgLVIoODueJIej8IV.WspGygn.AJJuEiarWBVtbm8BVwo7OEV41bm6CnfRo3
+ IpmbafeGzWOdo0PNskx7Lnzcu6kI01NRHK6eS1iezFCbuJNYDRFloDey.GM1vDdm9APp41XhtLK2
+ b1cNNwtZrbt9nIQ7sDH_IVYNodGIQHLNs_.PifD39uKcLHRZotMhrrjAUb9BD8KTTTTEKWtGXY5X
+ ADJzUjb_aCYtCZm5vFjQgW4HxsVJb51I32mfFstzIgNtEyz0A
+X-Sonic-MF: <brchuckz@aol.com>
+X-Sonic-ID: e23b1bdc-5454-427f-903c-24bde30c282a
+Message-ID: <ef5995a3-10c3-40e3-95f6-3bd678aef4c4@aol.com>
+Date: Thu, 20 Aug 2026 10:58:21 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [BUG] x86emul/test: avoid assertion in emul_test_read_xcr() when
- XSAVE is absent
-To: Andrew Precious <andrewprecious388@gmail.com>
-Cc: andrew.cooper3@citrix.com, roger@xenproject.org, teddy.astie@vates.tech,
- anthony.perard@vates.tech, xen-devel@lists.xenproject.org
-References: <20260819180735.135911-1-andrewprecious388@gmail.com>
- <aee239df-0582-4973-82ae-65688a7d6b9a@suse.com>
- <CAF14T9mYViiNQfJ8TG1RU0hqf7m6yUH1-yFCzWXXJdQOhmFkgA@mail.gmail.com>
+Subject: Re: [PATCH v2] tools/hvmloader: implement Intel IGD extended VBT
+ support
+From: Chuck Zmudzinski <brchuckz@aol.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: qemu-devel@nongnu.org, Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>,
+ xen-devel <xen-devel@lists.xenproject.org>
+References: <20260802050824.10554-1-brchuckz.ref@aol.com>
+ <de56c8bd-f0e8-4fe9-8cf5-f6807698176c@aol.com>
+ <02a7dc18-4184-4e86-84cb-121769187f71@suse.com>
+ <1858e8e6-73fa-4017-93e2-c733fbf0ec8d@aol.com>
+ <d6e603bf-8dc5-4ac7-842f-ff9d1f67b98f@suse.com>
+ <fdec0b6b-eddf-4a36-a755-c67963daa9ea@aol.com>
+ <6ecf80ef-2f0e-44fb-beab-dbcf065a4431@suse.com>
+ <bb44067c-6739-4e83-a0fd-cc7ea797048f@aol.com>
+ <4c58bda6-e9ed-438d-b96e-feda74a6c4c7@suse.com>
+ <31a5870f-2a4d-4dc0-af9c-f0567e0f6fb3@aol.com>
+ <db8fd04d-bbc7-41c7-8473-b821d7f77d5f@aol.com>
+ <302ed12f-40ca-405c-80ca-ac4f2785d754@suse.com>
+ <cdae1785-4d9a-4aab-929e-de55c26b7b94@aol.com>
+ <10cd9f6b-678b-407b-a51e-70e9ed7a35fd@aol.com>
+ <131b1252-b108-4b4c-8457-673ff0d20d5e@suse.com>
+ <682975cc-4857-42b2-badf-b638869f3268@aol.com>
+ <7ab98288-0c5e-472d-87dd-5586e60027bb@aol.com>
+ <f0ffe015-1bc5-4091-8dbe-2b4eee9cec2d@aol.com>
+ <b05a3553-398d-4ed0-bbf1-6e93cf385fe2@suse.com>
+ <0762fb50-01b5-4ae2-8587-7574020082b4@aol.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <CAF14T9mYViiNQfJ8TG1RU0hqf7m6yUH1-yFCzWXXJdQOhmFkgA@mail.gmail.com>
+In-Reply-To: <0762fb50-01b5-4ae2-8587-7574020082b4@aol.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1787235175-F4C0777B-0AF56D2E/0/0
+Content-Transfer-Encoding: 7bit
+X-Mailer: WebService/1.1.26254 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
+X-purgate-ID: tlsNG-c1860d/1787237905-CDF4787B-A84B314A/0/0
 X-purgate-type: clean
-X-purgate-size: 1346
+X-purgate-size: 8396
 
-On 20.08.2026 14:30, Andrew Precious wrote:
-> I just realized that I attached the binary result without the fuzzer error.
-> To generate the previous assertion error I would have to rerun the fuzzer
-> again which took many hours(~18hrs). Though that was the only error I found
-> after that long.
-> 
-> VM machine that I performed the fuzzing on:
-> - A VM running Debian GNU/Linux 13 (trixie)
-> - x86_64,QEMU Virtual CPU version 2.5
+On 8/20/2026 9:03 AM, Chuck Zmudzinski wrote:
+> On 8/20/2026 3:58 AM, Jan Beulich wrote:
+>> On 19.08.2026 21:09, Chuck Zmudzinski wrote:
+>>> On 8/19/2026 1:49 PM, Chuck Zmudzinski wrote:
+>>>> On 8/19/2026 11:47 AM, Chuck Zmudzinski wrote:
+>>>>> On 8/19/2026 9:51 AM, Jan Beulich wrote:
+>>>>>> On 19.08.2026 14:36, Chuck Zmudzinski wrote:
+>>>>>>> On 8/19/2026 8:16 AM, Chuck Zmudzinski wrote:
+>>>>>>>> Yes, I agree that v3 of the patch to hvmloader should presume that the DM can get
+>>>>>>>> a copy of the OpRegion and read its contents so most of this can be done in the
+>>>>>>>> DM instead of in hvmloader. So from hvmloader's perspective, the patch will be more
+>>>>>>>> about avoiding the layering violation than anything else.
+>>>>>>>
+>>>>>>> However, there is one advantage, from the viewpoint of the Xen virtualization platform
+>>>>>>> as a whole, to do the patching of the OpRegion in hvmloader instead of in the DM.
+>>>>>>>
+>>>>>>> If we patch the OpRegion in hvmloader as v2 of this patch does, we provide a common
+>>>>>>> solution for extended VBT support for Intel IGD devices that would be compatible with
+>>>>>>> all DM implementations, not just with Qemu. So why not do the patching of the OpRegion
+>>>>>>> in hvmloader?
+>>>>>>
+>>>>>> As indicated before: If the OpRegion holds data that is needed to drive the
+>>>>>> device, and if the OpRegion is exposed writable to guests, then guest can
+>>>>>> screw up that data such that subsequent guests won't work anymore. Hence
+>>>>>> exposing to guests (which includes hvmloader) needs to be stopped, or at
+>>>>>> least be limited to r/o. That, in fact, includes exposing to any privilege-
+>>>>>> restricted DM as well.
+>>>>>>
+>>>>>> Exposing r/o may be entirely okay (i.e. may not be a layering violation),
+>>>>>> depending how exactly an OpRegion surfaces for a device (on the host). Aiui
+>>>>>> it's not addressed by any of the BARs, yet it looks like it needs similar
+>>>>>> treatment. Earlier on we also talked about the region not necessarily being
+>>>>>> page-aligned. That poses, even with r/o exposure, the question of other
+>>>>>> data on the same (leading / trailing) pages. This may imply that the
+>>>>>> copying needs to be done strictly in Dom0, for both DM and guest to only
+>>>>>> ever act on copies (which may then as well be r/w).
+>>>>>
+>>>>> Yes, I am thinking the DM should make a copy host OpRegion and never expose
+>>>>> the host OpRegion to the guest but only a copy of it.
+>>>>>
+>>>>> The reason we need a patch like this is that with the introduction of the
+>>>>> rvda/rvds fields into the OpRegion, the OpRegion is not always position-independent
+>>>>> so its contents might be unsuitable in the guest address space, so in those cases
+>>>>> we need to patch the copy of the OpRegion that will be exposed to the guest.
+>>>>> If there is an extended VBT the DM will also get a copy of it, make a copy of
+>>>>> it, and expose it to the guest by appending it contiguous with the OpRegion.
+>>>>> Since in this scenario we are assuming the DM knows the contents of the OpRegion,
+>>>>> then it can find the host VBT and make a copy of it without needing hvmloader
+>>>>> to send the rvda and rvds values to it.
+>>>>>
+>>>>> Then, the remaining question is which component (DM or hvmloader) will patch it
+>>>>> if it needs to be patched to make the guest's copy of it compatible with the guest
+>>>>> address space.
+>>>>
+>>>> As I noted earlier, it think it would be advantageous for the Xen platform as whole
+>>>> for the patching to be done in hvmloader. That way, support for extended VBT is
+>>>> automatically added for all implementations of the DM, not just for Qemu. But the
+>>>> downside is that for hvmloader to do the patching, it needs to know the host OpRegion
+>>>> address, which one could argue it should not need to know. This is the only reason I
+>>>> can think of to do the patching of the OpRegion in the DM instead of in hvmloader: to
+>>>> avoid disclosing the host OpRegion address to the guest.
+>>> 
+>>> Correction: Actually, with this new scenario, we need not disclose any confidential
+>>> host addresses to hvmloader if the DM removes such information from the copy of
+>>> the OpRegion that it exposes to hvmloader. Then, all hvmloader needs to know to
+>>> ensure the OpRegion is compatible with the guest's address space is the guest
+>>> address of the OpRegion. It need not know either the host OpRegion address or the
+>>> host VBT address.
+>>> 
+>>> So the guidance I need from you to do v3 of the patch is simply to answer these
+>>> two questions.
+>>> 
+>>> 1. Should I write v3 of the patch not only assuming the DM will never expose the
+>>> host OpRegion to hvmloader, but also assuming that the DM is responsible for
+>>> patching the OpRegion to ensure it is compatible with guest address space?
+>>> 
+>>> Or
+>>> 
+>>> 2. Should I write v3 of the patch assuming that hvmloader is responsible for
+>>> patching the OpRegion so it is compatible with the guest address space?
+>> 
+>> My tentative response is to use option 1, not the least because a mid to long term
+>> plan is to see about removing hvmloader altogether. However, a more firm response
+>> here depends on an answer to the question raised in
+>> <92022f85-9a53-4db8-b489-fc91c86b413c@suse.com> (sorry, the list archive hasn't
+>> caught up yet).
 
-What does that mean CPUID-wise, seeing that ...
+Ah, I see this message is the one you sent me earlier today about this patch and now
+the list archive has caught up so for those who might be reading this thread here
+is the link:
 
-> On Thu, Aug 20, 2026 at 11:45 AM Jan Beulich <jbeulich@suse.com> wrote:
->> On 19.08.2026 20:07, Andrew Mbugua wrote:
->>> While running the x86_instruction_emulator fuzzer via AFL, I encountered
->> an assertion failure in the emul_test_read_xcr() function.
->>
->> Thanks for the report.
->>
->>> The fuzzer is able to generate a CPU state where cpu_has_xsave is false.
->>
->> I'm having trouble here: cpu_policy isn't populated from fuzzing input, and
->>
->> /* Intentionally checking OSXSAVE here. */
->> #define cpu_has_xsave     (cpu_policy.basic.raw[1].c & (1u << 27))
->>
->> would mean that upon filling cpu_policy (emul_test_init() ->
->> x86_cpu_policy_fill_native()) the OSXSAVE bit would be clear. Are you
->> suggesting you did the fuzzing on some really old hardware?
+https://lore.kernel.org/xen-devel/92022f85-9a53-4db8-b489-fc91c86b413c@suse.com/
 
-... there was this aspect that I couldn't understand?
+Well, I did try to answer this question here:
 
-Jan
+https://lore.kernel.org/xen-devel/fa497825-c8f0-4caf-94f5-b37108e31952@aol.com/
+
+My answer is based on the fact, as far as I understand it, the ASLS register
+on the real hardware is not touched when the guest writes to it because in our
+case the register is fully emulated and the guest can only access and write to or
+read from the emulated virtual register, not the real register on the hardware.
+
+Also, we have this code in Qemu (hw/xen/xen_pt_config_init.c):
+
+static XenPTRegInfo xen_pt_emu_reg_igd_opregion[] = {
+    /* Intel IGFX OpRegion reg */
+    {
+        .offset     = 0x0,
+        .size       = 4,
+        .init_val   = 0,
+        .emu_mask   = 0xFFFFFFFF,
+        .u.dw.read   = xen_pt_intel_opregion_read,
+        .u.dw.write  = xen_pt_intel_opregion_write,
+    },
+
+Do you see that emu_mask setting of 0xFFFFFFFF? As I understand it, that means
+that all 32 bits of the register are emulated, and none of the bits are passed
+through to the real device.
+
+Also, I can quote from the (admittedly outdated) spec for the OpRegion that is
+available online [1] which says this about the ASLS register of the IGD PCI device
+in section 5.1.2 of that document:
+
+> This register is a software scratch register and is not used by hardware
+> other than to hold the state software has set.
+
+I think this means that even if the real hardware register on the device was exposed
+to the guest and the guest wrote a different address to the register, it would
+*not* "move" the host OpRegion anywhere because, as the spec says, the register is
+not used by hardware but by software (the system BIOS software) to let the graphics
+driver know where it can find the OpRegion. But the guest *cannot* access the real
+ASLS register on the device in our implementation nor in my proposed implementation
+in v2 of this patch or in any of the other ways to solve this problem that we
+have discussed in this thread.
+
+So I don't understand how the question you raise poses a serious problem.
+
+But if you are not an expert on the PCI specification and how the PCI config space
+registers can be programmed with emulated bits and passthrough bits, and if you
+don't trust my understanding of it either, then I think we need to wait for
+experts on the PCI specification to weigh in and answer your question before we
+can move forward.
+
+Chuck
+
+[1] https://www.intel.com/content/www/us/en/docs/graphics-for-linux/developer-reference/1-0/opregion-specification.html
+
+    To actually see the spec, click on the "OpRegion Specification" link in the page
+    shown above and download the pdf file that link points to. It is still live, I
+    checked it today.
 
