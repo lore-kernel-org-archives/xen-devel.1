@@ -4,62 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FAB5C5DF81
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 07:14:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1395977.1634065 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BFD8C5DF81
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2026 07:34:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1395996.1634073 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwwyI-0003FO-3M; Thu, 20 Aug 2026 07:13:54 +0000
+	id 1wwxI7-00066W-Li; Thu, 20 Aug 2026 07:34:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1395977.1634065; Thu, 20 Aug 2026 07:13:54 +0000
+Received: by outflank-mailman (output) from mailman id 1395996.1634073; Thu, 20 Aug 2026 07:34:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wwwyH-0003FH-Ve; Thu, 20 Aug 2026 07:13:53 +0000
-Received: by outflank-mailman (input) for mailman id 1395977;
- Thu, 20 Aug 2026 07:13:53 +0000
+	id 1wwxI7-00066P-Ie; Thu, 20 Aug 2026 07:34:23 +0000
+Received: by outflank-mailman (input) for mailman id 1395996;
+ Thu, 20 Aug 2026 07:34:21 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1wwwyG-0003FB-N5
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 07:13:53 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wwxI5-00066J-N3
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 07:34:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wwwyG-00EEV8-3Z
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 09:13:52 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wwxI5-00EKfo-3G
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2026 09:34:21 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a86a924-e002-0a2a0a5209dd-0a2a4506a402-28
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 09:13:48 +0200
-Received: from [52.101.57.54]
- (helo=BN8PR05CU002.outbound.protection.outlook.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a86a92a-195a-0a2a45060019-34653936c83b-4
- for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 09:13:47 +0200
-Received: from SJ0PR03CA0290.namprd03.prod.outlook.com (2603:10b6:a03:39e::25)
- by CYXPR12MB9280.namprd12.prod.outlook.com (2603:10b6:930:e4::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.9; Thu, 20 Aug
- 2026 07:13:42 +0000
-Received: from CO1PEPF000066E8.namprd05.prod.outlook.com
- (2603:10b6:a03:39e:cafe::1) by SJ0PR03CA0290.outlook.office365.com
- (2603:10b6:a03:39e::25) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.8 via Frontend Transport; Thu, 20
- Aug 2026 07:13:41 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- CO1PEPF000066E8.mail.protection.outlook.com (10.167.249.6) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.339.3 via Frontend Transport; Thu, 20 Aug 2026 07:13:41 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 20 Aug
- 2026 02:13:41 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 20 Aug
- 2026 02:13:40 -0500
-Received: from [10.252.145.116] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.45 via Frontend
- Transport; Thu, 20 Aug 2026 02:13:39 -0500
+ (envelope-from <jbeulich@suse.com>)
+ id 6a86adfc-bab6-0a2a0a5309dd-0a2a450bea4c-6
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 09:34:20 +0200
+Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a86adfc-b7e8-0a2a450b0019-d155dd2bc8aa-3
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 09:34:20 +0200
+Received: by mail-wr1-f43.google.com with SMTP id
+ ffacd0b85a97d-480033bdcf4so1151235f8f.2
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Aug 2026 00:34:20 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-499a9e784b3sm106612955e9.3.2026.08.20.00.34.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 20 Aug 2026 00:34:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,255 +53,463 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=w04bSLi+NvUdYWugna4SPw8PL57pyFb37+KiR7y1+fCXDWjv4ZYRgHKf1GTBF+aXC6lPcS05OJXs1cOxE0QLd4hQBJ2zkixxDGbxz5LfmQDpi3lBMk3vTsPyQ2TTTzAfz9qVd/6MEKaJmjPd7JhedLMGHMOkc+oDDSKrT1dZLRsWWT2V3xcEkYT2S0kEfyJLBdhYedf8FXBE48pHK7g1OTXfpMWaWHb8O2Ixeerm28afDe8nLfkscKCDLzbiWjBHhUCC/f6yU+aEI9e9NQOtUKn+7QQQRUORcWZ8N70wA4svKE+v5wZOAjTVZEtWQ1lFmo1RwM4biei3drTMqOSRsQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=D9h8NqKPbXOk0n+m3x7gD/9twF1D1vVmvxEUaxrs3nQ=;
- b=jAzl3wmqo6d2JH0UgzDq4zCgNbowJsu3LqhwXl7WnX0K9D2l94GLTFmX54TXmf1Uyvx9NxVTEKDijo3OkKREuo0YFgCOudB7lT0Z4/9S9FJD57cxI7SkgcdJDF6IlWZl7+9AHtd1oFmRmXDabPSZiPRQK328YQHFkft3BvFOTK1Wq73Nv5+LJaBa07GV2GXiaOyaJmx2di4TH6OF/8o6ChrWENNVq5EFRX1vc/rY9AvGWToJ3bxGYZX2LywRtcDPZnUvMHew5qoc/8J1H35ND5O+x3RIlYI1YfhXJ7ChHV8tyylMvVVesq9rScTjiy+EDky6r7Re6K2rAX4fJ5Vp/g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=D9h8NqKPbXOk0n+m3x7gD/9twF1D1vVmvxEUaxrs3nQ=;
- b=sQaH65UYdbb1Wken+mPZfvqmijCdpAg1s1mFE+aNs4W8C9Ky0lmNksSCVnDsnZLepZwrWwqZW6gSGSqIDPEFcBInKgPwG73zy4fVrk6m2Y/lZy5NH3LZNopYecU5JHj17z5WzYsRQ8wYGYqrYGxakpVEvyrox6jBLaLUV2yc2p0=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <d9c1df07-ae4e-4fe7-bfbf-09cfbd9ceda9@amd.com>
-Date: Thu, 20 Aug 2026 09:13:39 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1787211260; x=1787816060; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=BrRbmE6A4s++MJpiH/sxkRvu2kym42T2lS4Vq6tq99I=;
+        b=LeJPUD7Wr783Ff+GKYohREXGAYQ+4dSJTBm+zHabNx4weiI2nrH/Wt0Ov0fBOAmsBS
+         Kd2yoWtuARRHggxqfCYS66hKJsdzBwDFeDxqBKA9CnpmRnVIfI6SWGgoCMqkVeb7JS12
+         lMW2iAc/v8AlotVVlf314Tcti1sscKsFKUFNdQ0QkZT7idXtX0tc86uUcEB90+yx2iMi
+         Bp3N22SjqpbDQWwb2NZjTdq+ua+tnoDsqKFl/1s6ZRZaiA94S3VnPEJOnDVKHwFeWkzr
+         KIF5zMRpFFE+BWJPFNJEtivehFNG1X62sT/fmcUZWNzMbULfLGZ2hHBrX/gtrdOUTCaj
+         QBGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787211260; x=1787816060;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=BrRbmE6A4s++MJpiH/sxkRvu2kym42T2lS4Vq6tq99I=;
+        b=sSrgk2mZx//gsmF+2VDD9VqACuiE9p78JDFpJWRIBccPyvHKyDZ4QDAggcfAleE6fA
+         zdh6zVMVqBxAUV28b939hQ5D6hax1psQfeAp1xFD2h+ahfs/7FLpqfhGFxMLSKCBOfFZ
+         sqOi0IBMnZk4CIALk9OGEpUnC7XsuOGfUtTiXMphwnu0s5+qMxgbq8uxQJMk3nuWExjo
+         xAiv+p3322o7Clr11mrW3faLcgX/8zQ6xD5cfXrYfx8hYc5XfZjKXcE+u2H9DalnB4fp
+         T/2JoSi7unQ4HBd8AhaBv6w6oUF+QaX2CyAHH0pEybcuQmn0e7hNxs9CXPqL7oxbSTfF
+         G1gA==
+X-Forwarded-Encrypted: i=1; AHgh+Rof3uIPM7esCosYAuiAwC19aUUY5veB6R4hlPUOEznAmQj89gHmIPwf3UTZxxnkGIfNknmCe6fDBxs=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yy+TidiPhOM/2nV2Yrtna3qErKkTJ5xhfEg+7EiTz4Bu/7n45w6
+	2DB1ZsWmusBqlRd4/RI9nLwpTza27vDQ03TpVUC2ZZFvRmNUXFoXS7aoALylHAxHtQ==
+X-Gm-Gg: AR+sD10OvBSaMYk0xVn+dWQaC6xOu8uV0z6WzoDp+ffddjYuJxz4/1oZFwprOI38Dri
+	BJ8HIEfbOjww0r+ZL57PgyyPSIUap3CyOeaE/BmyazIYvX/b6lf35BAUoWm/YNnHIywoqh5hDzr
+	Rkb/EaVlcF76wjkwA5a4FZmY+EzkcwG5qC6xqR8LQOTBQB2Issf0XWAHGBVoKYFK20znGLuighj
+	cuhQBYfatduLTrvAMhkSD6pXZXYR1pPRU4qN61A8pkQk8URG/DtQkG9zRCMFw7tyzQIKbJVPxYt
+	l1yPHCUNDeEiNatBNDsKjfZrg9EdkVwDD6+8twxEQBpGSQ+l3Y+ZE+QacUWv6OXv3zsmt6GLB0Z
+	MwNCxmE6UV5U3kQdQDEzEQPBvZMT03BXtfU7xoOo/aEAvo5AAIuaJ6VbVCDV/V1he/f+dIdo71+
+	lX9F2+zvwPyn018MTuhJobkm6YvFyvvRFfKB35bAMQ7B8Ratp8RoOqUc2JL3bmeC7gxCmGyIJwL
+	h1NwRHgRbHWhFr9i9lrkpyzuX6/oSGm8BvQ8T/l4jftiVobcm6/
+X-Received: by 2002:a05:600c:1387:b0:493:f5bf:4dc6 with SMTP id 5b1f17b1804b1-499aa1a47cfmr146411295e9.7.1787211259682;
+        Thu, 20 Aug 2026 00:34:19 -0700 (PDT)
+Message-ID: <a64d4714-2215-4bff-9dfa-2cbcc36ce3f2@suse.com>
+Date: Thu, 20 Aug 2026 09:34:17 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 3/4] xen/arm: add i.MX8M platform support
-To: Wig Cheng <onlywig@gmail.com>, <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>, John Ernberg <john.ernberg@actia.se>,
-	Peng Fan <peng.fan@nxp.com>
-References: <20260819152821.3361898-1-onlywig@gmail.com>
- <20260819152821.3361898-4-onlywig@gmail.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
+Subject: Re: [PATCH v1 16/17] xen/riscv: add guest load emulation for trapped
+ MMIO accesses
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1784560663.git.oleksii.kurochko@gmail.com>
+ <9b18a20367754605efd6a6b5bf09d4483d9c3ab2.1784560663.git.oleksii.kurochko@gmail.com>
+ <7a2e46da-5b1f-448e-aba3-7eefe0a61950@suse.com>
+ <aff1f879-48c6-4047-a6c1-237a350e0f35@gmail.com>
 Content-Language: en-US
-In-Reply-To: <20260819152821.3361898-4-onlywig@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000066E8:EE_|CYXPR12MB9280:EE_
-X-MS-Office365-Filtering-Correlation-Id: f870b918-544c-4756-402a-08defe8a9096
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|36860700016|1800799024|23010399003|82310400026|56012099006|4143699003|11063799006|10067099003|18002099003|22082099003|6133799003;
-X-Microsoft-Antispam-Message-Info:
-	wc4wIEuINhdGh+2FOiZH6tlG+7vbRF+VRDtP71BmwdjfJVLGHbkwXJ6p2gP0DjRqEGvP5vhwsSZdE1562VLv1m0DVyU3mx3fAj/1dgFSjopxWscPiJ/XJlmI/KMXy2j1n52w44AKo6wX2Im7kpA5potiiDUtUiJc0nFgCyOiJpMoH3veTTmiTj4V5nE+afmrlGhipheFASWZsaIEnF7i3sVl8TK5CMWG6nNpSbOGAoifuA7kHwZCBbmmf6+eXuBSVlGYwfoEmNTJmHyKa4iVbKXFZv045aS7YnhPioZFJYumsuIsA6nh1U9akg0Akm1fbv8RTxGslPn21Buwr0u2pQ/pNKrsaSwkQVknQyZ/daaHZmSceFxUWE5qkyUoyjwSZyBOtzuKV1is9WEeRRTusTCdtsyWu5ZNpZcQ6xUHwPPuuafyhObETu/9B6eZ8cynkV8PKOKPNqI+c4NVrAz9R3K1ggIhsaTB5o6yYBwp9Q18QnQSpVSDR+Vx07tLU7UJw4g/0GB1SDI0Ofnkh1dE+O4NGDVbY6FiocEYGJbPSl9rgQfaEcD92Y9SPVEdWAaXXIE8+7WX/YUIG/z3+y/NV34lkVfCqt3SDrmXhgeBsX2mbuzyTnG0rIf3V3OHWG3Lw0EGx+qz5GZBAD5G49Nxmj7oGN/up737vLwt3BgCWzNfpDOED8gMEZrooZgb17XTeaFmiuiS/1FVNUrLBnWVAg==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700016)(1800799024)(23010399003)(82310400026)(56012099006)(4143699003)(11063799006)(10067099003)(18002099003)(22082099003)(6133799003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	51odEQQCWbNXyfkWi5vAQ/E4QX8oHvjnanX2i0flbLGoXMY2+g3TnhVi+YxTIt5KyDzm9nVtyri/4I3Ob5GRY41+Dm6K6UoXB1YkKnZaOOYnp8Cu7WywDEiO21SFOMwcSeGFd9Xyvotq++SAdKisbeT2fje76y1DqqtevSyUYM5Nrh5TMG+adxVeBCbPRle0lkg7B6umjkgAGO9hWLeH4y8IwkwkkVlqtW1bR/U0oQJpp51dSC0ANKLMiOiQTaho36nUPgc4YzEL6v1oSqV+9XaIXndggd18SlmU7NBGuYU1F3Yqj1Bvn9N5jjvh7zq4CEiMC2hNfqAgzvP+ns3RwJ24I5Kct2Qf/kGMraXoAdLEG3GJuXBKc2OEO5UVe5SBP4/KwKDJhCObRPy3xeU/c7daXD0QO+UB7iOzI9Kgn/K0woMuNG6vUnhX0OUle/3l
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Aug 2026 07:13:41.6539
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f870b918-544c-4756-402a-08defe8a9096
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CO1PEPF000066E8.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYXPR12MB9280
-X-purgate-ID: tlsNG-16d1c6/1787210028-F7ACA77B-0BBD3E8F/0/0
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <aff1f879-48c6-4047-a6c1-237a350e0f35@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-42698a/1787211260-A90CD9EA-FE193D31/0/0
 X-purgate-type: clean
-X-purgate-size: 6775
+X-purgate-size: 14916
 
-
-
-On 19-Aug-26 17:28, Wig Cheng wrote:
-> Add platform glue for the NXP i.MX8M family (i.MX8MP/MQ/MM/MN).
+On 19.08.2026 18:06, Oleksii Kurochko wrote:
+> On 8/13/26 9:15 AM, Jan Beulich wrote:
+>> On 29.07.2026 15:40, Oleksii Kurochko wrote:
+>>> @@ -210,9 +217,162 @@ static always_inline unsigned long get_faulting_gpa(void)
+>>>       return (csr_read(CSR_HTVAL) << 2) | (csr_read(CSR_STVAL) & 0x3);
+>>>   }
+>>>   
+>>> +/*
+>>> + * Determine the trapped instruction which caused a guest MMIO trap.
+>>> + *
+>>> + * Returns true if the trap was redirected to the guest, in which case
+>>> + * the caller must stop emulation and return success. Otherwise *insn
+>>> + * and *insn_len are filled in and the caller should continue decoding.
+>>> + */
+>>> +static bool decode_trapped_insn(unsigned long htinst, unsigned long *insn,
+>>> +                                unsigned int *insn_len)
+>>> +{
+>>> +    if ( htinst & 0x1 )
+>>> +    {
+>>> +        /*
+>>> +         * Bit[0] == 1 implies trapped instruction value is
+>>> +         * transformed instruction or custom instruction.
+>>> +         */
+>>> +        *insn = htinst | INSN_16BIT_MASK;
+>>> +        *insn_len = (htinst & BIT(1, UL)) ? INSN_LEN(*insn) : 2;
+>>
+>> In the if() you don't use BIT(), while here you do. Please be consistent.
+>>
+>> Why the use of INSN_LEN(), when due to the earlier assignment it'll always
+>> yield 4 here?
 > 
-> When Linux is used as dom0 a number of drivers make SiP SMC calls into
-> TF-A to manage hardware: GPC power domains, SRC (M-core remoteproc),
-> SoC info and NoC QoS.  There is no public specification for these
-> calls; the function IDs and their subfunctions are taken from the
-> vendor kernel call sites.
-> 
-> Forward only the specific subfunctions the hardware domain issues,
-> following the whitelist model of the i.MX8QM platform.  Each service
-> with a fixed set of subfunctions (GPC, SRC, NoC) filters them with an
-> explicit switch on the subfunction id, and the SoC info call is a
-> read-only query.  CPU and DRAM frequency scaling are denied because
-> the hardware domain cannot make an informed decision about resources
-> shared with the other domains, and any unknown function ID is
-> rejected.
-> 
-> Signed-off-by: Wig Cheng <onlywig@gmail.com>
-> Reviewed-by: Michal Orzel <michal.orzel@amd.com>
-> ---
-> Changes in v4:
-> - SRC and NoC: filter the subfunction id with an explicit switch that
->   lists each accepted subfunction, instead of a range check.
-> - NoC: accept only the QoS priority subfunction; the LCDIF subfunction
->   has no caller in the vendor kernel.  Note that i.MX8MP issues no NoC
->   call at boot (only i.MX8MQ does).
-> - Print the subfunction id as well when rejecting an unknown function
->   id.
-> - Picked up Michal's Reviewed-by.
-> 
->  xen/arch/arm/platforms/Makefile |   1 +
->  xen/arch/arm/platforms/imx8m.c  | 161 ++++++++++++++++++++++++++++++++
->  2 files changed, 162 insertions(+)
->  create mode 100644 xen/arch/arm/platforms/imx8m.c
-> 
-> diff --git a/xen/arch/arm/platforms/Makefile b/xen/arch/arm/platforms/Makefile
-> index bec6e55d1f..cdf936c50d 100644
-> --- a/xen/arch/arm/platforms/Makefile
-> +++ b/xen/arch/arm/platforms/Makefile
-> @@ -9,6 +9,7 @@ obj-$(CONFIG_ALL_PLAT)   += sunxi.o
->  obj-$(CONFIG_ALL64_PLAT) += thunderx.o
->  obj-$(CONFIG_ALL64_PLAT) += xgene-storm.o
->  obj-$(CONFIG_ALL64_PLAT) += brcm-raspberry-pi.o
-> +obj-$(CONFIG_ALL64_PLAT) += imx8m.o
->  obj-$(CONFIG_ALL64_PLAT) += imx8qm.o
->  obj-$(CONFIG_MPSOC_PLATFORM)  += xilinx-zynqmp.o
->  obj-$(CONFIG_MPSOC_PLATFORM)  += xilinx-zynqmp-eemi.o
-> diff --git a/xen/arch/arm/platforms/imx8m.c b/xen/arch/arm/platforms/imx8m.c
-> new file mode 100644
-> index 0000000000..ad76935f5d
-> --- /dev/null
-> +++ b/xen/arch/arm/platforms/imx8m.c
-> @@ -0,0 +1,161 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +/*
-> + * i.MX 8M family setup
-> + *
-> + * Copyright 2026 Open-EP (E-Paper) Community
-> + */
-> +
-> +#include <xen/sched.h>
-> +#include <asm/platform.h>
-> +#include <asm/regs.h>
-> +#include <asm/smccc.h>
-> +
-> +static const char * const imx8m_dt_compat[] __initconst =
-> +{
-> +    "fsl,imx8mp",
-> +    "fsl,imx8mq",
-> +    "fsl,imx8mm",
-> +    "fsl,imx8mn",
-> +    NULL
-> +};
-> +
-> +#define IMX_SIP_FID(fid) \
-> +    ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL, \
-> +                       ARM_SMCCC_CONV_64, \
-> +                       ARM_SMCCC_OWNER_SIP, \
-> +                       (fid))
-> +
-> +/*
-> + * SiP SMC function IDs used by the i.MX8M Linux drivers.  There is no
-> + * public specification for these; the IDs and their subfunctions are
-> + * extracted from the vendor kernel call sites (see drivers/soc/imx,
-> + * drivers/devfreq, drivers/remoteproc).
-> + */
-> +#define IMX_SIP_F_GPC       0x0   /* GPC power-domain control */
-> +#define IMX_SIP_F_CPUFREQ   0x1   /* CPU frequency scaling */
-> +#define IMX_SIP_F_DDR_DVFS  0x4   /* DRAM frequency scaling */
-> +#define IMX_SIP_F_SRC       0x5   /* SRC: M-core remoteproc start/stop */
-> +#define IMX_SIP_F_SOC_INFO  0x6   /* read-only SoC info query */
-> +#define IMX_SIP_F_NOC       0x8   /* NoC QoS priority setup */
-> +
-> +#define IMX_SIP_GPC_SF_PM_DOMAIN    0x03
-> +
-> +#define IMX_SIP_SRC_SF_M4_START     0x00
-> +#define IMX_SIP_SRC_SF_M4_STARTED   0x01
-> +#define IMX_SIP_SRC_SF_M4_STOP      0x02
-> +
-> +#define IMX_SIP_NOC_SF_PRIORITY     0x01
-> +
-> +static bool imx8m_smc(struct cpu_user_regs *regs)
-> +{
-> +    uint32_t function_id = get_user_reg(regs, 0);
-> +    uint32_t subfunction_id = get_user_reg(regs, 1);
-> +    struct arm_smccc_res res;
-> +
-> +    if ( !cpus_have_const_cap(ARM_SMCCC_1_1) )
-> +    {
-> +        printk_once(XENLOG_WARNING
-> +                    "imx8m: smc: no SMCCC 1.1 support. Disabling firmware calls\n");
-> +
-> +        return false;
-> +    }
-> +
-> +    /* Only the hardware domain may use the SiP calls */
-> +    if ( !is_hardware_domain(current->domain) )
-> +    {
-> +        gprintk(XENLOG_WARNING, "imx8m: smc: No access\n");
-> +        return false;
-> +    }
-> +
-> +    /*
-> +     * Forward only the subfunctions the dom0 kernel actually issues.  All
-> +     * of these manage hardware that belongs to the hardware domain (power
-> +     * domains, M-core, NoC) or are read-only queries.
-> +     */
-> +    switch ( function_id )
-> +    {
-> +    case IMX_SIP_FID(IMX_SIP_F_GPC):
-> +        if ( subfunction_id != IMX_SIP_GPC_SF_PM_DOMAIN )
-> +            return false;
-> +        break;
-> +
-> +    /*
-> +     * CPU and DRAM frequency scaling: the hardware domain does not see the
-> +     * whole system and cannot make an informed decision about resources
-> +     * shared with the other domains, so deny both (CPU frequency scaling
-> +     * is denied on the i.MX8QM platform for the same reason).
-> +     */
-> +    case IMX_SIP_FID(IMX_SIP_F_CPUFREQ):
-> +    case IMX_SIP_FID(IMX_SIP_F_DDR_DVFS):
-> +        return false;
-> +
-> +    case IMX_SIP_FID(IMX_SIP_F_SRC):
-> +        /* SRC: M-core remoteproc start, poll-started and stop. */
-> +        switch ( subfunction_id )
-> +        {
-> +        case IMX_SIP_SRC_SF_M4_START:
-> +        case IMX_SIP_SRC_SF_M4_STARTED:
-> +        case IMX_SIP_SRC_SF_M4_STOP:
-> +            break;
-> +
-> +        default:
-> +            return false;
-> +        }
-> +        break;
-> +
-> +    case IMX_SIP_FID(IMX_SIP_F_SOC_INFO):
-> +        break;
-> +
-> +    case IMX_SIP_FID(IMX_SIP_F_NOC):
-> +        /*
-> +         * NoC QoS priority setup.  Only i.MX8MQ issues this at boot;
-> +         * i.MX8MP issues no NoC call, but the platform covers both.
-> +         */
-> +        switch ( subfunction_id )
-> +        {
-> +        case IMX_SIP_NOC_SF_PRIORITY:
-No need for a switch for a single case. This can be simplified the same way as
-you did for IMX_SIP_GPC_SF_PM_DOMAIN i.e.:
-if ( subfunction_id != IMX_SIP_NOC_SF_PRIORITY )
-    return false;
-break;
+> ld/sd instruction which we are trapping here at the moment here could be 
+> 2 bit and 4 bit depends on C extension so we need to pass correct 
+> instruction length to advance_pc() after it is emulated.
 
-I'll fix on commit. Thanks for the series. I'll commit it shortly.
+Well, fine, but how does that matter? I pointed you at the preceding
+assignment, which sets bits 0 and 1. With that INSN_LEN() is guaranteed
+to return (at least) 4 (and it's not presently capable of returning
+values larger than 4).
 
-~Michal
+>> Finally, how would the caller know whether it looks at a transformed insn
+>> or (as fetched below) a "normal" one?
+> 
+> According to the spec ((part from htinst ... ):
+> On a synchronous exception, if a nonzero value is written, one of the 
+> following shall be true about the value:
+> 
+> • Bit 0 is 1, and replacing bit 1 with 1 makes the value into a valid 
+> encoding of a standard instruction.
+> In this case, the instruction that trapped is the same kind as indicated 
+> by the register value, and the register value is the transformation of 
+> the trapping instruction, as defined later. For example, if bits 1:0 are 
+> binary 11 and the register value is the encoding of a standard LW (load 
+> word) instruction, then the trapping instruction is LW, and the register 
+> value is the transformation of the trapping LW instruction.
+> 
+> • Bit 0 is 1, and replacing bit 1 with 1 makes the value into an 
+> instruction encoding that is explicitly designated for a custom 
+> instruction (not an unused reserved encoding). This is a custom value. 
+> The instruction that trapped is a non-standard instruction. The
+> interpretation of a custom value is not otherwise specified by this 
+> standard.
+> 
+> • The value is one of the special pseudoinstructions defined later, all 
+> of which have bits 1:0 equal to 00.
+> 
+> So setting bit 0 to 1 we will guarantee that it is normal "normal" 
+> instruction.
 
+Right. Yet my question was how to distinguish the cases. Or are you trying
+to tell me that distinguishing isn't going to be necessary, anywhere?
+
+>>> +    }
+>>> +    else
+>>> +    {
+>>> +        struct cpu_user_regs *regs = vcpu_guest_cpu_user_regs(current);
+>>
+>> Pointer-to-const.
+>>
+>>> +        struct trap_info utrap = { 0 };
+>>
+>> Just {} please.
+>>
+>>> +        /*
+>>> +         * Bit[0] == 0 implies trapped instruction value is
+>>> +         * zero or special value.
+>>> +         */
+>>
+>> How come you get away without dealing with pseudoinsns? The insn pointed at
+>> by regs->sepc is of no interest for faults caused by implicit memory accesses
+>> originating from VS-stage address translation.
+> 
+> It is really problem but I think it should be resolved much earlier in 
+> handle_guest_page_fault(). I will add the following:
+> 
+> /*
+>       * A guest page fault taken on an implicit memory access performed for
+>       * VS-stage address translation (reading a PTE, or updating its A/D 
+> bits)
+>       * reports a pseudoinstruction in htinst rather than a transformed
+>       * instruction. Such a fault can't be emulated: htval holds the guest
+>       * physical address of a VS-stage PTE rather than of any access the 
+> guest
+>       * itself performed (and its two least significant bits are zero 
+> instead
+>       * of matching stval), while the instruction at sepc is unrelated 
+> to the
+>       * access which actually faulted.
+>       *
+>       * Report an access fault to the guest at the original virtual address,
+>       * which is what stval already holds and what hardware would raise 
+> for a
+>       * page table walk hitting an inaccessible address.
+>       */
+>      if ( (htinst == INSN_PSEUDO_VS_LOAD) || (htinst == 
+> INSN_PSEUDO_VS_STORE) )
+>      {
+>          struct cpu_user_regs *regs = vcpu_guest_cpu_user_regs(current);
+>          struct trap_info utrap = {
+>              .scause = (htinst == INSN_PSEUDO_VS_LOAD) ? CAUSE_LOAD_ACCESS
+>                                                        : CAUSE_STORE_ACCESS,
+>              .sepc = regs->sepc,
+>              .stval = csr_read(CSR_STVAL),
+>          };
+> 
+>          riscv_trap_redirect(&utrap);
+>          return;
+>      }
+
+That's not what would happen on bare hardware though, aiui. At least I don't
+think I ever found it being spelled out anywhere what the supposed behavior
+is when a page table resides in unpopulated space.
+
+>>> +        *insn = riscv_vcpu_unpriv_read(true, regs->sepc, &utrap);
+>>> +        if ( utrap.scause )
+>>> +        {
+>>> +            /*
+>>> +             * A G-stage fault here would mean the P2M mapping of the page
+>>> +             * containing the trapped instruction disappeared after it was
+>>> +             * fetched.
+>>
+>> Does it? What about, again, faults from VS-stage address translation while
+>> hardware was trying to fetch an insn? That is ...
+>>
+>>> Nothing removes P2M mappings of a running domain yet,
+>>> +             * so this cannot happen.
+>>
+>> ... the necessary P2M mapping may never have been there.
+> 
+> If VS-stage failed then CAUSE_LOAD_PAGE_FAULT will happen so BUG_ON() 
+> won't occur and it will be passed to guest to handle it.
+
+Are you sure? So far it was my understanding that CAUSE_LOAD_PAGE_FAULT
+would happen when VS-stage translation hits e.g. a non-present leaf
+entry. But got an address translation failure while doing the VS-stage
+page walk (i.e. failure to translate the address found in a VS-stage
+PTE to a host address) would raise CAUSE_LOAD_GUEST_PAGE_FAULT.
+
+> BUG_ON() here catches CAUSE_LOAD_GUEST_PAGE_FAULT (G-stage translation 
+> failure).
+> 
+> Also, as I mentioned above I will change BUG_ON() too:
+> 
+>              /*
+>               * If during getting of trapped instruction a fault happen in
+>               * G-stage translation then CAUSE_LOAD_GUEST_PAGE_FAULT is
+>               * generated. Such faults during this operation is 
+> considered as
+>               * bus
+>               */
+
+What is "bus" here (dym "bug"?), and why is the sentence unfinished?
+
+>>> +             * TODO: Revisit once P2M mappings can be removed at runtime.
+>>> +             */
+>>> +            BUG_ON(is_load_guest_page_fault(utrap.scause));
+>>> +
+>>> +            utrap.sepc = regs->sepc;
+>>> +            utrap.stval = utrap.sepc;
+>>
+>> How do you know the fault was at .sepc? A 32-bit insn crossing a page boundary
+>> (implying the C extension is available) may well fault only on its higher half.
+> 
+> According to the spec, if stval is written with a nonzero value when an 
+> instruction access-fault or page-fault exception occurs on a system with 
+> variable-length instructions, then stval will contain the virtual 
+> address of the portion of the instruction that caused the fault, while 
+> sepc will point to the beginning of the instruction.
+> 
+> So here, we are trying to emulate what real hardware will do in this 
+> case. In regs->sepc, we have the start of the instruction that we didn't 
+> touch. sepc is filled according to the spec in this case.
+
+Right, but utrap.stval is set to the same value, which is explicitly not
+in line with what you say above ("will contain the virtual address of the
+portion of the instruction that caused the fault").
+
+> Regarding utrap.stval, we know that utrap.sepc points to the correct 
+> part of the faulting address, as we are reading the instruction in 
+> 16-bit chunks:
+> 
+> HLVX_HU(%[val], %[addr])        ; low 16 bits from sepc
+> andi %[tmp], %[val], 3
+> addi %[tmp], %[tmp], -3
+> bne  %[tmp], zero, 2f           ; if not (insn & 3) == 3 -> 16-bit, end
+> addi %[addr], %[addr], 2        ; <- addr is now sepc+2
+> HLVX_HU(%[tmp], %[addr])        ; high 16 bits, possibly from another page
+> 
+> So, if a trap happens while reading the high 16 bits (which may be 
+> located on another page), then utrap.sepc, if the read fails, will point 
+> to the high part of the instruction, which is what the spec requires.
+> 
+> Does that make sense?
+
+Not really, no. As said above - the code as written guarantees
+utrap.stval == utrap.sepc, and that cannot always be correct.
+
+>>> +/*
+>>> + * Check alignment and dispatch a decoded MMIO access to a registered
+>>> + * handler. On success (0), info->data holds the read value for loads.
+>>> + */
+>>> +static int do_mmio(mmio_info_t *info, unsigned long fault_addr,
+>>> +                   unsigned int len)
+>>> +{
+>>> +    /* Fault address should be aligned to length of MMIO */
+>>> +    if ( fault_addr & (len - 1) )
+>>> +        return -EIO;
+>>> +
+>>> +    info->gpa = fault_addr;
+>>> +    info->len = len;
+>>> +
+>>> +    switch ( try_handle_mmio(info) )
+>>> +    {
+>>> +    case IO_HANDLED:
+>>> +        return 0;
+>>> +    case IO_ABORT:
+>>> +        return -EIO;
+>>> +    default:
+>>> +        return -EOPNOTSUPP;
+>>> +    }
+>>> +}
+>>
+>> And there's no indication of "retry needed", e.g. when something changed
+>> between find_mmio_handler() and handle_{read,write}()?
+> 
+> I don't have any specific scenario where it is needed now so I don't 
+> know what to say.
+> And there is no race between find_mmio_handler() and 
+> handle_{read,write}() as find_mmio_handler() returns copy of the 
+> structure under read_lock():
+
+Oh, right, but that's not visible here at all and requires going back to
+patch 04 to realize.
+
+>>>   static int emulate_load(unsigned long fault_addr, unsigned long htinst)
+>>>   {
+>>> -    return -EOPNOTSUPP;
+>>> +    struct cpu_user_regs *regs = vcpu_guest_cpu_user_regs(current);
+>>> +    mmio_info_t info = { .is_write = false };
+>>> +    unsigned long insn;
+>>> +    unsigned int shift = 0, len, insn_len;
+>>> +    bool is_unsigned = false;
+>>> +    int rc;
+>>> +
+>>> +    if ( decode_trapped_insn(htinst, &insn, &insn_len) )
+>>> +        return 0;
+>>> +
+>>> +    /* Decode length of MMIO and whether it is a sign- or zero-extending load */
+>>> +    if ( (insn & INSN_MASK_LB) == INSN_MATCH_LB )
+>>> +        len = 1;
+>>> +    else if ( (insn & INSN_MASK_LBU) == INSN_MATCH_LBU )
+>>> +    {
+>>> +        len = 1;
+>>> +        is_unsigned = true;
+>>> +    }
+>>> +    else if ( (insn & INSN_MASK_LH) == INSN_MATCH_LH )
+>>> +        len = 2;
+>>> +    else if ( (insn & INSN_MASK_LHU) == INSN_MATCH_LHU )
+>>> +    {
+>>> +        len = 2;
+>>> +        is_unsigned = true;
+>>> +    }
+>>> +    else if ( (insn & INSN_MASK_LW) == INSN_MATCH_LW )
+>>> +        len = 4;
+>>
+>> Already up to here this demonstrates a weakness of the INSN_MASK_*
+>> set of #define-s (which I similarly observe in binutils, and I expect it
+>> all has the same questionable origin). All INSN_MASK_L* and INSN_MASK_FL*
+>> (also INSN_MASK_S* and INSN_MASK_FS*) are identical, allowing for a nice
+>> switch() to be used here in principle. That said, with access width
+>> nicely encoded in FUNCT3, it's not even clear whether a switch() would
+>> end up being needed / efficient.
+> 
+> .......
+> 
+>>
+>> Otoh none of these masks cover the pseudoinsns that htinst may supply.
+> 
+> As I answered above we should handle that before this function will call 
+> so here we won't deal with htinst at all. Of course, if what I wrote 
+> above is correct. I will double check before applying that.
+> 
+>>
+>> Further, what about A-extension insns? Some (if not all) of them can
+>> plausibly be used on MMIO, I think.
+> 
+> I’m not really sure that the A-extension is actively used for MMIO.
+
+Does the spec preclude their use? I'm unaware of such a restriction.
+
+> At 
+> least, Linux doesn’t do that for now, which is why we don’t handle 
+> A-extension instructions here.
+
+Focusing on what present Linux needs is okay, but then remaining gaps
+should (as said on various other occasions before) be clearly marked.
+
+> I think this is related to the fact that MMIO is usually (if not 
+> always?) naturally aligned, and naturally aligned loads and stores are 
+> guaranteed by RISC-V to execute atomically.
+
+How does this matter, when a bit or field in MMIO may serve the purpose
+of e.g. a semaphore?
+
+>>> +    {
+>>> +        len = 4;
+>>> +        is_unsigned = true;
+>>> +    }
+>>> +#endif
+>>> +    else if ( (insn & INSN_MASK_C_LW) == INSN_MATCH_C_LW )
+>>> +    {
+>>> +        len = 4;
+>>> +        insn = RVC_RS2S(insn) << SH_RD;
+>>> +    }
+>>> +    else if ( (insn & INSN_MASK_C_LWSP) == INSN_MATCH_C_LWSP &&
+>>> +              RV_X(insn, SH_RD, 5) )
+>>> +        len = 4;
+>>> +#ifndef CONFIG_RISCV_32
+>>> +    else if ( (insn & INSN_MASK_LD) == INSN_MATCH_LD )
+>>> +        len = 8;
+>>> +    else if ( (insn & INSN_MASK_C_LD) == INSN_MATCH_C_LD )
+>>> +    {
+>>> +        len = 8;
+>>> +        insn = RVC_RS2S(insn) << SH_RD;
+>>> +    }
+>>> +    else if ( (insn & INSN_MASK_C_LDSP) == INSN_MATCH_C_LDSP &&
+>>> +              RV_X(insn, SH_RD, 5) )
+>>> +        len = 8;
+>>> +#endif
+>>> +    else
+>>> +        return -EOPNOTSUPP;
+>>
+>> Because you don't permit F/D/Q for guests (yet), FL* and FS* aren't
+>> covered, I expect? 
+> 
+> At the moment, I wrote this function with handling of MMIO instruction 
+> in mind, which are at the moment ld and sd.
+> 
+> Even if to permit F/D/Q then do we really need to trap that 
+> instructions? Hypervisor could allow access to FPU to guest and then it 
+> will be just a question of context switch to properly save and restore FPU.
+
+And how would you know FPU loads/stores aren't used against MMIO? Later
+on, once V support is added, even its loads/stores might be used that way.
+Think of video frame buffer accesses, for example.
+
+Jan
 
