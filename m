@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55B69C5DF7D
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2026 08:20:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1397178.1634564 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62DB4C5DF87
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2026 08:42:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1397204.1634574 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wxKTO-0000x0-Cc; Fri, 21 Aug 2026 08:19:34 +0000
+	id 1wxKpQ-0004uc-3d; Fri, 21 Aug 2026 08:42:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1397178.1634564; Fri, 21 Aug 2026 08:19:34 +0000
+Received: by outflank-mailman (output) from mailman id 1397204.1634574; Fri, 21 Aug 2026 08:42:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wxKTO-0000ws-95; Fri, 21 Aug 2026 08:19:34 +0000
-Received: by outflank-mailman (input) for mailman id 1397178;
- Fri, 21 Aug 2026 08:19:33 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wxKpQ-0004uV-0U; Fri, 21 Aug 2026 08:42:20 +0000
+Received: by outflank-mailman (input) for mailman id 1397204;
+ Fri, 21 Aug 2026 08:42:19 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wxKTN-0000wm-64
- for xen-devel@lists.xenproject.org; Fri, 21 Aug 2026 08:19:33 +0000
+ (envelope-from <den@valinux.co.jp>) id 1wxKpO-0004uP-Dj
+ for xen-devel@lists.xenproject.org; Fri, 21 Aug 2026 08:42:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wxKTM-00F3DR-J7
- for xen-devel@lists.xenproject.org; Fri, 21 Aug 2026 10:19:32 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wxKpM-00FwbT-Cm
+ for xen-devel@lists.xenproject.org; Fri, 21 Aug 2026 10:42:16 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a880a08-2eae-0a2a0a5409dd-0a2a450aaf9e-32
- for <xen-devel@lists.xenproject.org>; Fri, 21 Aug 2026 10:19:32 +0200
-Received: from [209.85.218.43] (helo=mail-ej1-f43.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a880a14-f2d2-0a2a450a0019-d155da2bc9e3-3
- for <xen-devel@lists.xenproject.org>; Fri, 21 Aug 2026 10:19:32 +0200
-Received: by mail-ej1-f43.google.com with SMTP id
- a640c23a62f3a-c2020421077so124229466b.3
- for <xen-devel@lists.xenproject.org>; Fri, 21 Aug 2026 01:19:32 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c2459223816sm387149366b.57.2026.08.21.01.19.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 21 Aug 2026 01:19:31 -0700 (PDT)
+ (envelope-from <den@valinux.co.jp>)
+ id 6a880f67-8faa-0a2a0a5109dd-0a2a450cc664-0
+ for <xen-devel@lists.xenproject.org>; Fri, 21 Aug 2026 10:42:15 +0200
+Received: from [52.101.228.89]
+ (helo=OS0P286CU011.outbound.protection.outlook.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <den@valinux.co.jp>)
+ id 6a880f64-f479-0a2a450c0019-3465e459e8f1-3
+ for <xen-devel@lists.xenproject.org>; Fri, 21 Aug 2026 10:42:14 +0200
+Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:38f::10)
+ by TY7P286MB6259.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:32c::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.8; Fri, 21 Aug
+ 2026 08:42:10 +0000
+Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::2305:327c:28ec:9b32]) by TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::2305:327c:28ec:9b32%3]) with mapi id 15.21.0339.007; Fri, 21 Aug 2026
+ 08:42:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,187 +55,198 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787300372; x=1787905172; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=xJgbi0Hxi0iwuDDgvhe2MiVZefgarGN88Is5Ns8OqNQ=;
-        b=CVQrvIrftej8OoXjFYmEQcUlFB+7FrWpYF7H43FQ17CkpjXKc7NNCTodAi1JDg06DJ
-         +RNYTzZm4WsTZO1iLoxwS//Lp429KNDnMwgGTvBeabaFnYUTNuBli28PQinhKGs+W+jq
-         u8REn/DrC4fYpfrHW7N5pKUA/6oY0aFtwZkQWHzD504VnHRaXyghHT2xEPbZcsLw2NjX
-         l70OgVeIaKfwsCOHo2jpVvjxPAGXKCI7wZroJvFhEHIzRrUDWdrmLd3nE+MjvGbAp37W
-         pt8Bon3/RJEcY+ZYnyr8yGVDF9aXR7jAul0b7ACcQ33gi7XDZ5r4fqsm+0cweYEMH7js
-         LNXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787300372; x=1787905172;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=xJgbi0Hxi0iwuDDgvhe2MiVZefgarGN88Is5Ns8OqNQ=;
-        b=jmjoLTSJ99kvNeofzr1JCgPzr7YI+Y4bbJmQcsL1qMwRDYOJgqTo3aQ0o8GX8NYAvW
-         y0f118ZmKM15A0Bp20eO4S+mh//MYVuZlabNfhVdMTEPBzNsbqoluGAAS/wAQqRnUPRx
-         6BJXozkDwuKGIfmoeULBcdSCaWGON20v0hjBHDqaJVrJRJPoQ09eE1j/o0DLQ+SDB8d8
-         0n9dnneCUlIeAs+QI0CV9yYHozPTC6fzbCctqUQM3A6GRDotaclMwN2y9KgegZQS5eOx
-         u2t/UcHxTWSIuWYMWrdRYwwnePLsO7gr6/0xP+S7IR5v5LErjxTSroj3HH02WhS97d57
-         RxpA==
-X-Forwarded-Encrypted: i=1; AHgh+RrgrBWbYqZyWqXkhLmOExLKM7TMKo3x7jJMPVWFDU1ZT+L+vrburTVkk66BWSPnX3qahpCZgFGk5SA=@lists.xenproject.org
-X-Gm-Message-State: AFuF++mkduS5AgvMIjYTfmKnKU9YNIS+2lwdmAvwbZndfpGETYsSKLgn
-	KcBwfNnhfsND92xeUVLp2vNnvSWq2HvIy+kvp4JUwqeEFpkaVdx5suEaFwAzSkf+Zg==
-X-Gm-Gg: AR+sD13nH2jjYKOY0tGWqunt4XCOu8ih7QDlaAx9hhMGMbHdMYsNwtyVA3n5HQ7KgpI
-	2OJCabcy1Kc63RAy9W+XGthqnstGoC8fR7b3vtzpGWzg5BjxETdHc32q5BSTFOuC3j5Y49vnzqx
-	Ubcg5lYnRZZu1yGyGtsCUC2dpZCaE/KpEBKhrnFHhJ7Ey7XU36slBOE0nO6E1Kqb0/wDkTHVs5B
-	gsyKjin+JdsQ9v7K/ghirBtUSrXQMKOXctm7ZVUFEa9QEHn8izCTBUjpr+WY8Q9hbeLQ8EVk+lW
-	jyiDb2MpgP6fpW1zjGQutT8DqQCnm+EZQmEoldtoTzlqGvKeoSIUHb+MlF6m/sddneUhyTpjEtU
-	BI4tYnCthSKIC9nfjZtkhS58CPMkPX92jJm31qfJWSp4twmZSOB0Jzj07/+bfMDI7J3HYRzy8pB
-	9fZrk/Wnn5pinuLsQEiPReu7EZq4THEVKYaK5dn3q1w1KcvkyDquHdB8gsRQa8tG+7XKQh9FF5N
-	M/PY6/WDh4fVtTw3HtMZZ95js5EXX6SDm7jlHqVkGMNnQG+syGT
-X-Received: by 2002:a05:6938:a08f:10b0:c20:f871:1018 with SMTP id a640c23a62f3a-c246b4bc19bmr333973866b.21.1787300371859;
-        Fri, 21 Aug 2026 01:19:31 -0700 (PDT)
-Message-ID: <069cb01d-47b2-41c5-9956-611b338964e9@suse.com>
-Date: Fri, 21 Aug 2026 10:19:30 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Abn3M+ddf18ino3y6o5QP0Ku0WzkoPo3BExkME66jAkpsAfPBJWWu7CADedfIgnFtMi2Krepg42AxlUydOc4gSHSrZ4xVKior6ZqrIaS0yimgRscL+6IHOkQ/hFhEKN6QTMLE9EGTJQeJ35VmCWShPgmkchoLWIS86v22pF7HuP7AqJRzH9InReCM1jlMjPzL5rgDYhm/0bjXDKsXV7UcxruI8MUyofyZPmWEXQmHe8ztivFeDYwFuwLeDhdSHjyeXjTnBfdcY03ug9+LGLT3KZ3pAABvtvigYsmjN9Ej1dLCBwthEdTiGDdzbWD2n7X56FL0nEoK1El1EqbSp+yKA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nSMVGeuaLgvVlkD44jgGyhemh9VA7QAPohCs4cR4/QY=;
+ b=zGE9z1MbcOrzujK4Ant3NeXohCAlUoN+nVFJzuZE01rcUxmwZyElDCJB5yXkK76hfEOJ8Lqk/CAoh5WrwWNp1YCgkvbj1hKtXRuxlwrGBDLrZTnYfKKaFuVb5H1xtMLw1qlCFRh3NIJs5oGcgRlv18zNWTcAe+0cKIh52TNOwVUZByQvmFhiMgjWD3vSGsob2YtZMKwSDjrCEmvHcCPrl928Aac98fU0H/BnrUMxWss9CgTi4UrJL5sDm+FLnhJcz7Z8+Rkfb3cJe7XoyUwcItN132P7qIu/OYMOPO9dw+51qSoE41lEAK5jYm4wou8DfEMatIz06nUpuK9F/Q1HaA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
+ header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=nSMVGeuaLgvVlkD44jgGyhemh9VA7QAPohCs4cR4/QY=;
+ b=FV3kTJ4JN+s3gzqFD1Iz2+8YS9Mldgb+qGYwwuTCTTqBh4ZE2BFkJqbJEAGwoKMBawffEnONpp2jEWuFRdMKsVPC3d7Agai3/suVSKs7tp1TQSbxYYNjSQqJzwXi9fZ+/puOtJtwLglzeFdNKxQNVK5FFYJFYYqn/lCBqDSsutQ=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=valinux.co.jp;
+From: Koichiro Den <den@valinux.co.jp>
+To: Viresh Kumar <viresh.kumar@linaro.org>,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] xen/privcmd: Only claim ioreqs matching an ioeventfd
+Date: Fri, 21 Aug 2026 17:41:12 +0900
+Message-ID: <20260821084112.2374949-1-den@valinux.co.jp>
+X-Mailer: git-send-email 2.51.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TY4PR01CA0116.jpnprd01.prod.outlook.com
+ (2603:1096:405:379::16) To TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:405:38f::10)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] tools/hvmloader: implement Intel IGD extended VBT
- support
-To: Chuck Zmudzinski <brchuckz@aol.com>
-Cc: qemu-devel@nongnu.org, Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>,
- xen-devel <xen-devel@lists.xenproject.org>
-References: <20260802050824.10554-1-brchuckz.ref@aol.com>
- <de56c8bd-f0e8-4fe9-8cf5-f6807698176c@aol.com>
- <02a7dc18-4184-4e86-84cb-121769187f71@suse.com>
- <1858e8e6-73fa-4017-93e2-c733fbf0ec8d@aol.com>
- <d6e603bf-8dc5-4ac7-842f-ff9d1f67b98f@suse.com>
- <fdec0b6b-eddf-4a36-a755-c67963daa9ea@aol.com>
- <6ecf80ef-2f0e-44fb-beab-dbcf065a4431@suse.com>
- <bb44067c-6739-4e83-a0fd-cc7ea797048f@aol.com>
- <4c58bda6-e9ed-438d-b96e-feda74a6c4c7@suse.com>
- <31a5870f-2a4d-4dc0-af9c-f0567e0f6fb3@aol.com>
- <db8fd04d-bbc7-41c7-8473-b821d7f77d5f@aol.com>
- <302ed12f-40ca-405c-80ca-ac4f2785d754@suse.com>
- <cdae1785-4d9a-4aab-929e-de55c26b7b94@aol.com>
- <10cd9f6b-678b-407b-a51e-70e9ed7a35fd@aol.com>
- <131b1252-b108-4b4c-8457-673ff0d20d5e@suse.com>
- <b14969c8-9676-404e-b7cc-ce13a6d7ff94@aol.com>
- <92022f85-9a53-4db8-b489-fc91c86b413c@suse.com>
- <fa497825-c8f0-4caf-94f5-b37108e31952@aol.com>
- <42521391-885c-4b96-96e9-5da2e4b5efa1@suse.com>
- <e86404e8-9966-44ab-86d1-4bd01a551313@aol.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <e86404e8-9966-44ab-86d1-4bd01a551313@aol.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1787300372-512C8CFC-42CC16A0/0/0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TY7P286MB7722:EE_|TY7P286MB6259:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8acddfd7-fb63-4ce1-d87d-08deff6016ce
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|376014|10070799003|1800799024|366016|10067099003|56012099006|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	qpYnDOPNYSEfcqaAzyy7VttNEe/KPKLdwWL8XcCAK9HbQCGdbY9Yowcpp043ZwK8f4HzM/VqTW9WoY4FJguhaBKsOxnCsQWGMRN00lgkvDRdcm73jsWM3hYV/j+3K+55BvQQzLzFxz267cLEfKUV5pUkP0NAbYPJWq2Pj/immWxaccLV5HDncOSGpxwjqRdwKAm+T/5WNqL3Z3T0QLAKa1WEdiHyBPr6GCUrARnRgyp1nOKn63FJHdW+Qri6BXSxyKDWo271hBlfelvXAiYyT37SLedUrIvO0ixdoMBRHys18wKurfyl2ZP/jf3NvEACZ4WD509IoWFI45My+mdfNX5V6688fxaIK4CUDkX3AuId5b1Vq8f6lvDuyLZd2YDLEuV4Q5IyPod1d/FZnYEKCq5DTRcminyTMlvf958meCVZ28pwjwtG0H/G6lMlf+Q7w/1EHx76dwLxY1qVkod86J7Y8rhqi2DkiR8cTG73X7fRMreE+A8iwszWkYaxpSxqJ1UXYOqzS64cxLJboeD8BCMqYTx6GwuCNoCs/EUUo3ZUFdeHlx8KmthrHQwPhB+BFh9XqMoooRjb2wJqLsrmc9iSFaGJPvhsqlG+SAx5ne9x9XlBNCiQSsyvpWeU+LUa9Gw3Z3hDiQdACYineU/lUTM693mPuOgdRJb0jqgmJrg=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(10070799003)(1800799024)(366016)(10067099003)(56012099006)(18002099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?DZgUrxb/u0wk0rl4fe9suhB0PYuVVWmFa3HiOHen+vF0oe5nIGaHCM/RcwED?=
+ =?us-ascii?Q?FMTAGB17Q74yStT0/eqQ+A7493FlvpKex2A7TLWq/SK5XWNl28Bl96bOhZg1?=
+ =?us-ascii?Q?ke4LlEuI+dr9LC7GD+8KkUiwEQgB0EezGfkn/G7TNZvOB0oTe2A3uwwGsmWd?=
+ =?us-ascii?Q?JkX0GN0spfnXUcCiauvI+4zsL5ZKy2cf5cV4iDYuuE3FWRY3cSu1NGn34+UC?=
+ =?us-ascii?Q?dNlt7FXPsEAipMwwWK/ow1sGpAPcw1ZxPqyFexZcOkeoEnKaGlggp9376B1p?=
+ =?us-ascii?Q?MYTWU5MAkoaDHHc7GPxlasgX1pxTNIjwNWbMHe6hxRLacv3V/z1xM/ojhseL?=
+ =?us-ascii?Q?LDMn7fksuNRQyQAv7yYzE79Upgt71/zlOcrv1K237ivgBR671yUAUxTK2lWS?=
+ =?us-ascii?Q?yWXhYI4r3ZX04VjhqIOxCBHSaQ4gyg5S2kUHFkEVUH6w6AdlSC2ZDlFAMLK3?=
+ =?us-ascii?Q?SDlEsMAaXU2xqblKAn7nBcBhC1hU0K7eL1yeYNVQg6aiUEKmbcLTg9cpgs2V?=
+ =?us-ascii?Q?s8Q0D09iLyTm3kH4h1FfuThV64hE64+RSbp/qrm4Iwq2ZmEaTi2VbMxm3qzw?=
+ =?us-ascii?Q?gHm7KDAh5d1Oe0Q2VOrfdF79eYJgkAG/HiZ55aAL8YozYW0jPki8kcjjoQiZ?=
+ =?us-ascii?Q?tReZvub9xqoCuIQLIdrV+4p1vgK+zLP0cy5FTuaY6sFDSI9nnkygZ2R45UU2?=
+ =?us-ascii?Q?yTr6EZV4KQrrZCK8OhQpGs0t+GtgKF/s68LNLurIijjcG93oTpnUdEjnZwh+?=
+ =?us-ascii?Q?XI3uxwR4IZwyXJhhQMieo09X+WsClegdokl0znT3Fs7yr6tMpWvcMF4ySyqw?=
+ =?us-ascii?Q?S/bh4ZtyBRyzNOYGqvbQsyBzXpuGp2bKymtTHARQzdiMcaQx4LIyl9KNLVXe?=
+ =?us-ascii?Q?VKSJME2d7r+3cpl3/cNSmAdIH8s6oT1PDcb3NvLtxQ2iEkNnalwuEKON3FG7?=
+ =?us-ascii?Q?ykfPjGp97wQOtF/5wwVB6Q3T1gd0jAxyjQN6x/obYSHStqmjVpqWNA6VXAjH?=
+ =?us-ascii?Q?/f3ky7sngQ+IO8vfYPOdRi/yMf2nBOb4E1ixuAPvgpMuOvteUR4bOBKf1cjp?=
+ =?us-ascii?Q?+pfHIATAyZRni64i4o8E8t4lMrBvZqCcyPqJjttpbwZ3leyNfu9umhFc0oma?=
+ =?us-ascii?Q?QGpkUjXbNBaHz0lXBLAPWWeQ48VvYsEJHC0fzrgVF9sfSM9DncrljhoaNZ5x?=
+ =?us-ascii?Q?f/9iw+AxCbyP9PC8vGGiXUqnLTY8Q3xtQAJsRY2k7rDM3PkBGBzT5RH/CP8y?=
+ =?us-ascii?Q?Hmi9dCSgczaLirfOUwyx84SH86ePgBeSfoDFto10XKjMUsezMwB6EtMdMxr6?=
+ =?us-ascii?Q?GAyCD9jkLMUcvaSR35frHXURdMUwpdKIG4CrwkuD3Z5eAFP+M8sRB7uB4Eji?=
+ =?us-ascii?Q?BeuItxAIbrh3OJJ5Uircg5X1kclDrqqO1FE0NoJHosDIF+v/+Q/4X8bFoYzS?=
+ =?us-ascii?Q?M7uHQSKEOdef1trOMJuAJIHTWdis2e0bEGLG0ITmJYAQ3Q8zYbRg+T0sgu2X?=
+ =?us-ascii?Q?+j6BpIwcjogEZ7xDQ2gnwJB50SYPjS3Xh6LUTJSD/TFnUqyvpeVR+o6J2onc?=
+ =?us-ascii?Q?k7Wp+H4aVz5fn5ozPTjddTxE8bipWvegLKKftdKR4X9HUH/v7VwKFEg/GRoU?=
+ =?us-ascii?Q?34QQ0rjVQxWw7GTum0QlzhfcJj0tkv2EwMjKbeHhlAHA2JRYQyjtIAOWK76L?=
+ =?us-ascii?Q?up7C8bGGLBdg20fwhp8xUk1gJv7Owybobb39CguCeAsrQgCOrtY3mgugvt9V?=
+ =?us-ascii?Q?WnzyELUd1GDoDXJm0lC593e4XQLoHwuJFax805OMnwgPnFUDKE1h?=
+X-OriginatorOrg: valinux.co.jp
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8acddfd7-fb63-4ce1-d87d-08deff6016ce
+X-MS-Exchange-CrossTenant-AuthSource: TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Aug 2026 08:42:09.8968
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: hssqArvtqZemSTUEFuBM4UqZ7FHcTLApOX/W/xCd6YZMjYKosAYk12qGmT9BZsK/J/YKoDl3mPH2r74WaWuR5Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY7P286MB6259
+X-purgate-ID: tlsNG-d25034/1787301735-50520A5B-E93D9B01/0/0
 X-purgate-type: clean
-X-purgate-size: 4366
+X-purgate-size: 3600
 
-On 20.08.2026 18:53, Chuck Zmudzinski wrote:
-> On 8/20/2026 11:17 AM, Jan Beulich wrote:
->> On 20.08.2026 13:47, Chuck Zmudzinski wrote:
->>> On 8/20/2026 3:51 AM, Jan Beulich wrote:
->>>> On 19.08.2026 19:13, Chuck Zmudzinski wrote:
->>>>> On 8/19/2026 9:51 AM, Jan Beulich wrote:
->>>>>> On 19.08.2026 14:36, Chuck Zmudzinski wrote:
->>>>>>> On 8/19/2026 8:16 AM, Chuck Zmudzinski wrote:
->>>>>>>> Yes, I agree that v3 of the patch to hvmloader should presume that the DM can get
->>>>>>>> a copy of the OpRegion and read its contents so most of this can be done in the
->>>>>>>> DM instead of in hvmloader. So from hvmloader's perspective, the patch will be more
->>>>>>>> about avoiding the layering violation than anything else.
->>>>>>>
->>>>>>> However, there is one advantage, from the viewpoint of the Xen virtualization platform
->>>>>>> as a whole, to do the patching of the OpRegion in hvmloader instead of in the DM.
->>>>>>>
->>>>>>> If we patch the OpRegion in hvmloader as v2 of this patch does, we provide a common
->>>>>>> solution for extended VBT support for Intel IGD devices that would be compatible with
->>>>>>> all DM implementations, not just with Qemu. So why not do the patching of the OpRegion
->>>>>>> in hvmloader?
->>>>>>
->>>>>> As indicated before: If the OpRegion holds data that is needed to drive the
->>>>>> device, and if the OpRegion is exposed writable to guests, then guest can
->>>>>> screw up that data such that subsequent guests won't work anymore. Hence
->>>>>> exposing to guests (which includes hvmloader) needs to be stopped, or at
->>>>>> least be limited to r/o. That, in fact, includes exposing to any privilege-
->>>>>> restricted DM as well.
->>>>>>
->>>>>> Exposing r/o may be entirely okay (i.e. may not be a layering violation),
->>>>>> depending how exactly an OpRegion surfaces for a device (on the host). Aiui
->>>>>> it's not addressed by any of the BARs, yet it looks like it needs similar
->>>>>> treatment.
->>>>>
->>>>> Yes, the OpRegion is not one of the BARs as specified by the PCI specs, but
->>>>> it functions more or less like a BAR region with the devices's ASLS register
->>>>> at offset 0xfc in the PCI device config space of the device acting like the
->>>>> BAR for that region.
->>>>
->>>> That is, on real hardware a write to that register moves the OpRegion? That
->>>> would need following by the DM then, i.e. the DM would need to indicate the
->>>> original position in the register, and the guest (incl hvmloader) would
->>>> then be free to relocate it.
->>>
->>> Why would that "need following by the DM" when the register in the guest is
->>> fully emulated, [1] which means that when the guest (incl hvmloader) writes to the
->>> register, the register on the real hardware is not touched, nor is the OpRegion
->>> in the host address space moved?
->>
->> You said it's BAR-like. If the guest writes to a BAR, the referenced MMIO
->> region moves accordingly.
-> 
-> It's BAR-like, but it is not actually a BAR (and the OpRegion is not exactly
-> an MMIO region either (it is actually and ACPI thing), so that is not relevant
-> to this patch.
-> 
-> Also, it is fully emulated so when the guest writes to it, the real register on the
-> real device is not touched, as I have said multiple times in my responses to your
-> question.
+The ioeventfd handler shares its event channel with the userspace device
+model. It must only claim requests that match a registered ioeventfd.
+Other requests are left for userspace.
 
-No matter how often you said that, I never put that under question. I was asking
-about the behavior of writes (where the behavior on bare hardware would need to
-be reflected in the behavior of the emulated register).
+ioeventfd_interrupt() currently marks every MMIO write INPROCESS before
+looking for a match. For an unmatched request it drops the lock and
+restores READY. Userspace may see INPROCESS and skip it. Restoring READY
+does not send another notification. If userspace handles the request at
+the same time, the READY store may overwrite its state.
 
->>> Here is how I understand how this works in the current implementation and how
->>> this should be done:
->>
->> I'm sorry, but this is getting out of hand, at least as far as I'm concerned.
->> I've been trying to help, but even just reading your replies has already been
->> taking way more time than I would have wanted to spend here.
-> 
-> Fair enough. Thank you for the time you have spent on this patch, and also thank
-> you for clearly stating that you don't want to spend any more time on it. So
-> I consider this patch dead unless and until another maintainer shows some interest
-> in it.
+Find a matching ioeventfd before changing the request state.
 
-I didn't say I would not look at future versions of the patch. However, for me
-to (usefully) do so, things need to be presented in a way that I can understand
-without knowing all the details of IGD.
+The lock now protects only the ioeventfd list. Use explicit virt_*mb()
+barriers for the ioreq shared with Xen.
 
-Jan
+Fixes: f0d7db7b3324 ("xen: privcmd: Add support for ioeventfd")
+Cc: stable@vger.kernel.org
+Signed-off-by: Koichiro Den <den@valinux.co.jp>
+---
+ drivers/xen/privcmd.c | 47 +++++++++++++++++--------------------------
+ 1 file changed, 18 insertions(+), 29 deletions(-)
+
+diff --git a/drivers/xen/privcmd.c b/drivers/xen/privcmd.c
+index 7cfc28f1bb86..c67ec6d282cf 100644
+--- a/drivers/xen/privcmd.c
++++ b/drivers/xen/privcmd.c
+@@ -1169,51 +1169,40 @@ static irqreturn_t ioeventfd_interrupt(int irq, void *dev_id)
+ 	struct privcmd_kernel_ioreq *kioreq = port->kioreq;
+ 	struct ioreq *ioreq = &kioreq->ioreq[port->vcpu];
+ 	struct privcmd_kernel_ioeventfd *kioeventfd;
+-	unsigned int state = STATE_IOREQ_READY;
++	bool matched = false;
+ 
+-	if (ioreq->state != STATE_IOREQ_READY ||
+-	    ioreq->type != IOREQ_TYPE_COPY || ioreq->dir != IOREQ_WRITE)
++	if (ioreq->state != STATE_IOREQ_READY)
+ 		return IRQ_NONE;
+ 
+-	/*
+-	 * We need a barrier, smp_mb(), here to ensure reads are finished before
+-	 * `state` is updated. Since the lock implementation ensures that
+-	 * appropriate barrier will be added anyway, we can avoid adding
+-	 * explicit barrier here.
+-	 *
+-	 * Ideally we don't need to update `state` within the locks, but we do
+-	 * that here to avoid adding explicit barrier.
+-	 */
++	/* Xen publishes the request before changing its state to READY. */
++	virt_rmb();
+ 
+-	spin_lock(&kioreq->lock);
+-	ioreq->state = STATE_IOREQ_INPROCESS;
++	if (ioreq->type != IOREQ_TYPE_COPY || ioreq->dir != IOREQ_WRITE)
++		return IRQ_NONE;
+ 
++	spin_lock(&kioreq->lock);
+ 	list_for_each_entry(kioeventfd, &kioreq->ioeventfds, list) {
+ 		if (ioreq->addr == kioeventfd->addr + VIRTIO_MMIO_QUEUE_NOTIFY &&
+ 		    ioreq->size == kioeventfd->addr_len &&
+ 		    (ioreq->data & QUEUE_NOTIFY_VQ_MASK) == kioeventfd->vq) {
++			/* Finish reading the request before claiming it. */
++			virt_mb();
++			ioreq->state = STATE_IOREQ_INPROCESS;
+ 			eventfd_signal(kioeventfd->eventfd);
+-			state = STATE_IORESP_READY;
++			matched = true;
+ 			break;
+ 		}
+ 	}
+ 	spin_unlock(&kioreq->lock);
+ 
+-	/*
+-	 * We need a barrier, smp_mb(), here to ensure writes are finished
+-	 * before `state` is updated. Since the lock implementation ensures that
+-	 * appropriate barrier will be added anyway, we can avoid adding
+-	 * explicit barrier here.
+-	 */
+-
+-	ioreq->state = state;
+-
+-	if (state == STATE_IORESP_READY) {
+-		notify_remote_via_evtchn(port->port);
+-		return IRQ_HANDLED;
+-	}
++	if (!matched)
++		return IRQ_NONE;
+ 
+-	return IRQ_NONE;
++	/* Publish the response only after signaling the eventfd. */
++	virt_wmb();
++	ioreq->state = STATE_IORESP_READY;
++	notify_remote_via_evtchn(port->port);
++	return IRQ_HANDLED;
+ }
+ 
+ static void ioreq_free(struct privcmd_kernel_ioreq *kioreq)
+
+base-commit: d330fb86a7170f845123ae82d95df440fad9b707
+-- 
+2.51.0
+
 
