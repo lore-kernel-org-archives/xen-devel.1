@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25E54C5DF7D
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2026 08:45:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1397212.1634583 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B0D5C5DF87
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2026 08:51:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1397230.1634591 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wxKsW-0005Qr-Gh; Fri, 21 Aug 2026 08:45:32 +0000
+	id 1wxKyF-00075o-7g; Fri, 21 Aug 2026 08:51:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1397212.1634583; Fri, 21 Aug 2026 08:45:32 +0000
+Received: by outflank-mailman (output) from mailman id 1397230.1634591; Fri, 21 Aug 2026 08:51:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wxKsW-0005Qk-E1; Fri, 21 Aug 2026 08:45:32 +0000
-Received: by outflank-mailman (input) for mailman id 1397212;
- Fri, 21 Aug 2026 08:45:31 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wxKyF-00075h-4l; Fri, 21 Aug 2026 08:51:27 +0000
+Received: by outflank-mailman (input) for mailman id 1397230;
+ Fri, 21 Aug 2026 08:51:26 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wxKsV-0005Qe-2t
- for xen-devel@lists.xenproject.org; Fri, 21 Aug 2026 08:45:31 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wxKyE-00075b-Fs
+ for xen-devel@lists.xenproject.org; Fri, 21 Aug 2026 08:51:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wxKsU-002iPY-5T
- for xen-devel@lists.xenproject.org; Fri, 21 Aug 2026 10:45:30 +0200
+ id 1wxKyD-00BLsr-LR
+ for xen-devel@lists.xenproject.org; Fri, 21 Aug 2026 10:51:25 +0200
 Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a881026-bab6-0a2a0a5309dd-0a2a4508a2c2-8
- for <xen-devel@lists.xenproject.org>; Fri, 21 Aug 2026 10:45:30 +0200
-Received: from [209.85.218.54] (helo=mail-ej1-f54.google.com)
+ id 6a88117a-bab6-0a2a0a5309dd-0a2a4508d552-22
+ for <xen-devel@lists.xenproject.org>; Fri, 21 Aug 2026 10:51:22 +0200
+Received: from [209.85.218.47] (helo=mail-ej1-f47.google.com)
  by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a881029-f659-0a2a45080019-d155da36e17b-3
- for <xen-devel@lists.xenproject.org>; Fri, 21 Aug 2026 10:45:30 +0200
-Received: by mail-ej1-f54.google.com with SMTP id
- a640c23a62f3a-c1c50c1e29bso118717966b.3
- for <xen-devel@lists.xenproject.org>; Fri, 21 Aug 2026 01:45:29 -0700 (PDT)
+ id 6a88118a-f659-0a2a45080019-d155da2fe975-3
+ for <xen-devel@lists.xenproject.org>; Fri, 21 Aug 2026 10:51:22 +0200
+Received: by mail-ej1-f47.google.com with SMTP id
+ a640c23a62f3a-c1670dad7a8so140094366b.3
+ for <xen-devel@lists.xenproject.org>; Fri, 21 Aug 2026 01:51:22 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c246366aa88sm292453366b.38.2026.08.21.01.45.28
+ a640c23a62f3a-c24589e1b22sm335368666b.9.2026.08.21.01.51.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 21 Aug 2026 01:45:29 -0700 (PDT)
+ Fri, 21 Aug 2026 01:51:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,58 +55,54 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787301929; x=1787906729; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1787302282; x=1787907082; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=lBbFK2jV5MuGwqpe35Vzt6pdsmgB9MKRf+D1wVaaeBY=;
-        b=YfQppZeYPZxAPIXcgaTd1yItScaDsbWF2IwQOBoH3HfQflhnjo8a2X0ly3G2SJW89C
-         lVXTWJ3NfpQ/MqvhJIbEn5nn2fkZBYZzqW7Zs0dV7dtMpCP/WRPoJmQqKCkHfnrftdU7
-         ljHhPyQAd9cYrNaF2vQ1x9u2etKlglQnb2ovhJIhuebFREHWcWvjSuvxxTeShN8nusrS
-         TNUHIyHBOw+J/3n3mtYlSwOZK9HqmzwJpGDJjUkqRerPF5yJrn5ycYUWW0vtXKAypsEc
-         bWxgWJQ7j+85ATfv9AmpQUkX5rEFMmoSxrHcYSYP1SvxjOWKMk0Mz8ax7BI1EQ6z5GUa
-         4c6Q==
+        bh=PFT/pHnrSFjXlJZiw9C1ljCMjkuf3hUnHlq7EH6Wz5Y=;
+        b=QXVdJtDU/CTyxXgCjbQHR7J6W2VjpwRMZKynwlIIUq5t3DvgpVe6kATnvPQto78I05
+         J4b+Qq/nY9QRVcNW8Z9enFMuLZNfRy52csaaYEujioGRB4/d6GFV4Ft5Cnb2U3QnFytT
+         QOXobIc6E00My1FT9/orxEFvCR/ChK3BNMkS4InvT4ONfraNoMK7iKju14DKsoHyICy5
+         bnR1clGKZYeL+1/Ntri4WFHhyORkk3+RmxigDSqQFQB/BZGhHSuP7zDUtbIhYXyq2d3w
+         G0n1fFZ6jZWqO8zqyVQZTOxJhb0hz7CPfDXGRfV+x1TV8r3eMe5/eS/p/n7bvYs3q7lA
+         bpyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787301929; x=1787906729;
+        d=1e100.net; s=20251104; t=1787302282; x=1787907082;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=lBbFK2jV5MuGwqpe35Vzt6pdsmgB9MKRf+D1wVaaeBY=;
-        b=VwWF1QFDvWeGUmdQNto2beSBxJteaGBo3Vfndt2Nryejkq+Snblm3WiClgEA5Hu2LV
-         LTt67ncmi61pXHfDGKAvqlzrpbbS5hUPRFpnMxmeUMTuv9XjjIBsvCyMugdr6B4FIAGH
-         AAUFepnzDld4Q5pkJFn2hSmh/E2zW1CUPH3T41bGFrsdp+Zw6KIobIklZ0Zd0/4uC7rB
-         pjYjwPXDQed2IS9VKSYGumM9fZMW7xkGaSMl5IHZHucarELn0oUVDSsClZfsQBfIVcs4
-         6hz6vsdCj9N7lzlKvCJs+DZuCgQJcrR1PysvG5DPyIi1gWG7JiPrB7jet6uo8+cisInu
-         hr/Q==
-X-Forwarded-Encrypted: i=1; AHgh+RrgsrxmeiJ2v5w6o1Z8CK5YSCTn3pI/CK/TFZMHnGQj1k2b/p09e07DeMgdYZqWmHYNi6aW/urxdpU=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kV+FdP5PD0JqvKudy879ma/BqT/9atwY0TGoNTSkKmE+Out5XA
-	pMRVBupdIDxJU3jv9lUQl5kmJR8KpEo8ej3WCEN1VJgviJhOpLule2YB9nuJ4B08dg==
-X-Gm-Gg: AR+sD13gkJnCWH8A3Ee4MdMHCwngfxd7guJ81eCQfbwDu8HcSwPNbGbYjPFEPTtaHKw
-	Nl7Sth8eARZwYljP9XDCww5mFNJIU6FEI8dtL0yJEv93+H5THs4Z8f2qYfNGUZak6TbXoNZoHb3
-	eb24JTE5YaPI21YacPxDlr82nKkGLbjNHOaLvGvYVBXfLOYZVNIOxtPkq6mBbK3Vj7oei3aNQuT
-	BR0X7hAskA8l84UUEQ0JjC8aohVTXaDgi5lS6KrBGMdN1YUI+ci2JQ6gXuVYb/v5Z/G4wFnNbAB
-	5vmvGV973PXIE6QBTvan4WIrBHKe7Ifyoij7l+0sztABBiUkcw4pDYO+ciwRIZRsCd5jlS6sLQY
-	Lj5H4aNR1JO3AGVHCgIUWa4y/q/uF9O7dcWeoL2iPGaOpCSBXbi9WaO4H+FE7DI+dkWX/v24wxH
-	vXMEGXHNwuRZZngD32JT9MNrlKPedsKuHoWB3nmNXoO6HUq4FscA+XNRla6tyKBxaLSmfleqXGj
-	y9SR8fLmENOm8j79NCTLwQw0k4/PeHMZU2n8W/EuqRR3FgmzrFk0nDYKI6mshw=
-X-Received: by 2002:a17:907:3c83:b0:c21:7584:fc58 with SMTP id a640c23a62f3a-c246a60cd41mr503998966b.12.1787301929532;
-        Fri, 21 Aug 2026 01:45:29 -0700 (PDT)
-Message-ID: <ec040560-4377-474d-a929-3080b74bb0af@suse.com>
-Date: Fri, 21 Aug 2026 10:45:28 +0200
+        bh=PFT/pHnrSFjXlJZiw9C1ljCMjkuf3hUnHlq7EH6Wz5Y=;
+        b=WDcJqpF+u8RKPHxXSdmsPeR5We0VS3qNa5e4D0ICJkpw4ojhks5rfFttg3hL96tyKH
+         fhk9iW3q0DdxRxkLGagPvuYzNQN+RWF5yl75Z+7tjDI4UbpJc0BlWeZY0a62GUIVUSV9
+         ZLt8ogOldwPmvqUwWX6VBnSMi4BqHnTyk/kxEmy8SnSwlqJFA6cLwfqnfB55QLI8hbRj
+         ATGpnQMSPGi04ICn8W2HzO+gDlLsfNhFR+rgTNomMv5cVIkpHpJ5xrjCnxCbo8aTSxQQ
+         jUtHPG5b0YTKDPQp0OQ8S6c0OHxsG5BAwA0cJCVdOATluZ2va4QOV/Qs62eRSEO5jLyf
+         iIpA==
+X-Forwarded-Encrypted: i=1; AHgh+RrFx81D+V/qgUhe1k+LdNkOyHfKYseHQs03oLohLriGQJhlaWYZAEohWg5kZ1zgkGB1SEfirHeopfI=@lists.xenproject.org
+X-Gm-Message-State: AFuF++m8SwJbcOLrnlQnrIr2Xt34VkvHEvVqrFXc1lI8rgrPaiA6QgLN
+	xgXONzM6UNmyxTQRX5foeRvTa86oLaInmYZRd/zdm3n0ePIjMtqFBLLNcbnZCaGTHQ==
+X-Gm-Gg: AR+sD13T4hAG+nyCECh/ndNRn7/lVgFrM3KTNdHqMpb5GFL+RV67Xj883QkR01tTnEb
+	6u0xqgM1/S2PTxP0eFER4kDVkiFNCMfqGLpfOID9kHgxV9cSEVOKT94VDea9KIpKovkG2gON/0Q
+	XZUs7ktoTsYiIo/Aar4mrXlPvgj+5sDpBRzF0JnMsYerCtGzweWzfBm4Wzl13MUPVNG3HGdODZ2
+	Luz9L3KbL6Qak8sb6vpy8XJDsaNH1+LC8L53sL75Z7oqMEt+7S8uKvcsXd0y7RcwD1LUqGkuC0w
+	p0iakWn2eT0xdRIEsX2jS9HjcMxtEbpkW0/+VFGjSlusUe9qZ1YbZ/DrJCnr+od7OlWB9lwEYXE
+	h5qgMUieszAdtGPnA64fAfXSnXDBPVb1+uTz26pU/Le1NDxLJkeCAiWNElAveDaQZRzXMGFmRkk
+	ofjTsXZ257hpKjr+UUr5hVkzA92yzxTXRxwunUwmvHXcos+Y19eKSELMJ9Kz/PRV21kSBFcQjEh
+	T8ObVYlw0Pa5rza30wJkXJIvcxH4ykeHlp2EztLCBat9MZkd+8W
+X-Received: by 2002:a17:907:9308:b0:c12:695b:8876 with SMTP id a640c23a62f3a-c246a39efb5mr530633466b.5.1787302282308;
+        Fri, 21 Aug 2026 01:51:22 -0700 (PDT)
+Message-ID: <79a5b821-e2c9-4e64-b2cf-1f839e2037d0@suse.com>
+Date: Fri, 21 Aug 2026 10:51:21 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/7] x86: Address Space Isolation, part 1: per-domain area
- mapping rework
-To: George Dunlap <gwd@xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+Subject: Re: [PATCH] x86/amd: Expand comment about NullSelectorClearsBase
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Teddy Astie <teddy.astie@vates.tech>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20260820-asi-part1-0-f2dbd92b8459@xenproject.org>
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20260820172640.2072049-1-andrew.cooper3@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -132,27 +128,32 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260820-asi-part1-0-f2dbd92b8459@xenproject.org>
+In-Reply-To: <20260820172640.2072049-1-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1787301930-DFAD487B-D099EA2C/0/0
+X-purgate-ID: tlsNG-c1860d/1787302282-D574B87B-A9C1E3F1/0/0
 X-purgate-type: clean
-X-purgate-size: 856
+X-purgate-size: 821
 
-On 20.08.2026 19:43, George Dunlap wrote:
-> One point reviewers may want to look at specifically: patch 1 changes
-> where the per-domain page-tables are allocated from, and its commit
-> message discusses the (minor) NUMA-placement consequence.
+On 20.08.2026 19:26, Andrew Cooper wrote:
+> Rework detect_zen2_null_seg_behaviour() to use the new MSR infrastructure.
+> 
+> Zen2 doesn't have WRMSRNS so don't bother relaxing the write.  All it will do
+> is insert a useless alternative.
+> 
+> No functional change.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-While I don't recall which recent patch (series) it was, I can't very well
-say "no new xenheap allocations please" there without also saying so here.
-I've read over patch 1's description, and while it tries to justify this
-accordingly, I still remain concerned. I think we simply have to accept
-the mapping overhead, to avoid allocating from a pool which - over time -
-is representing a decreasing portion of total memory systems have (on
-average, and not even considering systems with extremely sparse memory
-layouts, and with perhaps PDX compression not doing good enough to
-compensate).
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+> Naming Zen2/3 in init_hygon() isn't ideal, but the early hygons really were
+> not far removed from the AMD microarchitectures.
+
+I wonder what we should do about Hygon. Just recently I saw patches going into
+somewhere (gcc?) to support recent hardware. We haven't seen any contributions
+in many years to keep our support up-to-date. We may want/need to consider
+removing support if that code is effectively unmaintained.
 
 Jan
 
