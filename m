@@ -4,39 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A77CEC5DF7D
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2026 10:44:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1397335.1634610 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A4D2C5DF87
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2026 13:12:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1397486.1634619 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wxMjD-0004qd-4x; Fri, 21 Aug 2026 10:44:03 +0000
+	id 1wxP2c-00071l-95; Fri, 21 Aug 2026 13:12:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1397335.1634610; Fri, 21 Aug 2026 10:44:03 +0000
+Received: by outflank-mailman (output) from mailman id 1397486.1634619; Fri, 21 Aug 2026 13:12:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wxMjD-0004qV-1G; Fri, 21 Aug 2026 10:44:03 +0000
-Received: by outflank-mailman (input) for mailman id 1397335;
- Fri, 21 Aug 2026 10:44:01 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wxP2c-00071e-6Q; Fri, 21 Aug 2026 13:12:14 +0000
+Received: by outflank-mailman (input) for mailman id 1397486;
+ Fri, 21 Aug 2026 13:12:12 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <arthurborsboom@gmail.com>) id 1wxMjB-0004qP-Fg
- for xen-devel@lists.xenproject.org; Fri, 21 Aug 2026 10:44:01 +0000
+ (envelope-from <brchuckz@aol.com>) id 1wxP2a-00071Y-7K
+ for xen-devel@lists.xenproject.org; Fri, 21 Aug 2026 13:12:12 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wxMjA-000UIL-9f
- for xen-devel@lists.xenproject.org; Fri, 21 Aug 2026 12:44:00 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wxP2Z-007Fcl-KP
+ for xen-devel@lists.xenproject.org; Fri, 21 Aug 2026 15:12:11 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <arthurborsboom@gmail.com>)
- id 6a882bd6-8faa-0a2a0a5109dd-0a2a4505bdfc-44
- for <xen-devel@lists.xenproject.org>; Fri, 21 Aug 2026 12:44:00 +0200
-Received: from [209.85.160.49] (helo=mail-oa1-f49.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <arthurborsboom@gmail.com>)
- id 6a882bef-4cb1-0a2a45050019-d155a031c12d-3
- for <xen-devel@lists.xenproject.org>; Fri, 21 Aug 2026 12:44:00 +0200
-Received: by mail-oa1-f49.google.com with SMTP id
- 586e51a60fabf-4560d6f82edso815319fac.3
- for <xen-devel@lists.xenproject.org>; Fri, 21 Aug 2026 03:43:59 -0700 (PDT)
+ (envelope-from <brchuckz@aol.com>)
+ id 6a884ea2-bab6-0a2a0a5309dd-0a2a45019c48-32
+ for <xen-devel@lists.xenproject.org>; Fri, 21 Aug 2026 15:12:11 +0200
+Received: from [98.137.68.147] (helo=sonic302-21.consmr.mail.gq1.yahoo.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <brchuckz@aol.com>)
+ id 6a884ea9-5984-0a2a45010019-628944938efb-3
+ for <xen-devel@lists.xenproject.org>; Fri, 21 Aug 2026 15:12:11 +0200
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic302.consmr.mail.gq1.yahoo.com with HTTP; Fri, 21 Aug 2026 13:12:09 +0000
+Received: by hermes--production-bf1-54b5569bdc-7hp85 (Yahoo Inc. Hermes SMTP
+ Server) with ESMTPA ID be8bd0e2097ea023fd1597134141cdef; 
+ Fri, 21 Aug 2026 13:12:07 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,139 +50,169 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1787309038; cv=none;
-        d=google.com; s=arc-20260327;
-        b=DIXucL+DLyVi2AC6P/fAJz2YvnuBhCeIQYoy/l7RCXbEvVssRWyh7iQpdTB8kwJuWj
-         2MCz3TNxp7jkQZAKgl3IFMTvYi04kGS5fMyj5QGkfRzLoz4qJK1ACLpi08D7qcGLYM+5
-         cO40IP+b6w60ErFp2hzWmASWtW6zIU2JRokg/teAyZmCpRSfDEgHG5MadZNGZGTbgwSS
-         vyl8WfZL8DNLPCiUV5ldijC7nJBWfjkt2B2ZfLjxiE8Oph4pkdaPqpOnptFddwF/hrLu
-         M3tUr4fmbFstYjEZYnYD5UHppitdsqw4oo094xls94oPvP34ABQv4lJws2pAvy4kfeVh
-         N5xA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=ZOWR9w+g70hihMLaUF4mY1ts2YmnaEWXRZ8CiJLICRQ=;
-        fh=7sFv6QZAJlpg3YTCZX0B+j1POgKz6Tmh3lBntxDYpAE=;
-        b=YoS95d+6gg7o56NcdeYSxXBTCFs8ikzbvu+VNAQ/bnYnjqBwHOFwJQ+t417KmzIy6N
-         WktkMTHvUanfAV2ejk5mL0yTdPknhvqaIznQ+TmgzsqnWa9TJ6VjbNsRK8JtKvFbH4Oi
-         QPatsh9/MPz0si0xp0b31IYcmUcMLq2o23GnrzTM7zTRQ81V3tKNwDDbpE6XnTAuSQuv
-         CBoDKGBh8rtEgt/ou2z2qkByhGVroDDJ2LpkXlPikQOZh7juOdN/529gvzMrwYAP6bSr
-         t0Or5LgXE2k8Ip4V1Igy6Ax24Eg+hV72OlGTQZeKZYHQL+i5J8tn88+mvm47vFaQxZ+5
-         Bqqw==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787309038; x=1787913838; darn=lists.xenproject.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ZOWR9w+g70hihMLaUF4mY1ts2YmnaEWXRZ8CiJLICRQ=;
-        b=Lyau5IL7uzE605tWizAtn6HPYvqDxQzC6iM7T04Z42MOb52fvfYayLH/5XNgJ47zNQ
-         A+K/AtNaNJAVzBSuD9i6+BDuYoxzJhpP/W/wIBGfT9nqhy0UGGDWP62f4tIAS03hnrwh
-         2H9lfgHx6fArKVRhjeDPQXY75BvdeC7cMNPSGF+IKoWbWsp9lM1C3TgX2TtEK97aAZJ0
-         /xCuWSfVK2tzeFKFIDeA9NRcn0d1ZnNlYhbhzdKwbMHKfqC1h1TG9km09Hz+EJEH0Tof
-         ELXtC81GkdqA3DWULyaqseQCE+00422tx+MMKmwtve+RHbEFnDE4mrqANL+uOucYcnic
-         IluA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787309038; x=1787913838;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=ZOWR9w+g70hihMLaUF4mY1ts2YmnaEWXRZ8CiJLICRQ=;
-        b=X9uVunLSCYSMh9aOx3FuKNfVP8AyhjPq8Z+l5X+6iukC+Vc9gfws/VH2T7EGNeF+tl
-         RZ892A+HUrk5YAi8rPl5XwJJNnTIRjW9CsGjlH3ZqgkZwqai4MfRUgvHI495XdtdaXyx
-         MK1v2YAsj3lhucwXEtRbC6mv0WIvP/t1IirJbV1eDocvb4QTRc7D8UA5erVuNeV2UAhd
-         2XAmxYAL9VizxG8nhEdRZ+8/ydug40ISknleWCPE7oHL7YgPbNBJpe2opWHfd+IRnQW5
-         rGwN8RKKoFC+zrn0X4EvWcDb+xOvFR4f2UGxqO10WOU/3GLhwhQ1HrDH3KiayXgK3x/g
-         8Rqg==
-X-Gm-Message-State: AOJu0YxAOfYQ2O33qx8ZOm7cDg8slNbbPNlhBIcclhcivQaOAoR0Aenf
-	fxMwpvfrTeBdYa6EVOSBf0aWg3FOVo5qQZg1EcNP+enKw9c/1mRyqzOONEpGssbQiKYhV9zBmYo
-	BYC9s5QTfvcvCJcu0Aix+3J/Oq+v4ZPk=
-X-Gm-Gg: AR+sD12jVGbsr9ZYMOoWDTjtYSQb9FrS8ygmDrxdYNjykJApQS0/BeLnmt1sbERKqSz
-	ZBYGdGOa1qyMTeUQtp9+UwazxZnWa8BAe94Xfblun91/PZCfQAViqpk0RF4t666h+cldHecdvJC
-	jJ95p61EHVRZsmHI6yu3JhRMdqM4dAyhhK82Lwa/Ognro8NYXBwriJinwD24k3pwH+buVR1jHGc
-	iResHbwNBSNwNLYqRJqK52UKnCf/Dk0ljLdjaSOlRe/ITzG7UwwVyrSDnPLK5Gu0RIKT20JlGnJ
-	AlWI8FhkCgkEmKGOGCl95znVs3iWN5pXbGtEMog08O47lfQjxaeOWe6rmYCCTBfRSYrWGSVLx/N
-	3NEOG9HNJ9fwCt+g1YS3TJ2ejmUsm0ChTuPTiAd8KA1mT9E9I2Ud4uw8IhYNxifPR6HBHwTlq/V
-	a21TFFgZP3x0s=
-X-Received: by 2002:a05:6808:6f85:b0:497:d1e7:5e90 with SMTP id
- 5614622812f47-4b2ef484825mr5208862b6e.18.1787309038430; Fri, 21 Aug 2026
- 03:43:58 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1787317929; bh=5zVYd1XG2alULCFSufa2I5v6mNIHhhyo27EKgEpsIMs=; h=Date:Subject:To:Cc:References:From:In-Reply-To:From:Subject:Reply-To; b=D4yB+rRQni0q1CvKdI5RbLiG5JiRHSg6tH38U/lEhlp0kxgtcmAefoweXoxysRFocIT/hF7MPgp12TtYEL7j94ocjsr9xz/d23BSp0LCRCqcGRaQgo4n11rvji3Wk7BmETNCqQWlF3PNlsmjjs2VZuttB/i0dn7ZQBB79XPsgfUQ+E1UA7qfL/c+jxpUQwKhCuSH2rE3QADgAoarCnMWDhxj2PFEk+G9T97CpuKAcu5psWJmRP+vnf8iGafTEB4mEsdkDALRCZLZIO3V7Mpjig1K5O/3lX8cccPhnwS6tiLSCC+vcBn7nONlPziBtRi6CcEs95hUr38VZnNtBYSLsw==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1787317929; bh=sB5lDNfJerqyBHBh0LK6YLb0P4q43K0eOVdEd/EhEyL=; h=X-Sonic-MF:Date:Subject:To:From:From:Subject; b=J1rsFamuBdhDgqC5KOZ2+dz7lpeVl8ltHjDiUD2EgOPZisKwM6YHHslJTKzOSIPstMDccdm+jju6U/3iUXJsuzhS4+n5QbcYjtZtYPJpg0WVash8nVW1subkSGBn/mCqK4Hidki7r34nG3N7cXSN7S6W7pxKRGddLXXUJLuKmLaE4DaXIJEJKfP/xkePBYG9T5bO3PW28kzxtOyTCdANMQQuJIn4L2ZNRqjH3q8Pw7+xalcvfXhnlcfrjTI1gk9+vk3ezt/Oxhq/Ou+vAAiWeZ5wQ7n3hRDO25pQcO5ZBK7gXtjMgum9KXluVHMT06kTkwgQRz97GPuAwuFydqWBNA==
+X-YMail-OSG: 8VWMebkVM1kbktK5MBYZ5yNojDJ_0o4ar9Ck8xZh7LK_MQ38mYB1XlTclm6EdLm
+ IKctxdjrDTQkT39m.niTrAv461Q2kAy.jc_n8LAJWQbrIXOmBUSZQ5Hd7lyTdfFTG_5oWgc.maao
+ sqP0mg6BeqYR7Nsi6PPeubCKk6e.RV4ZKGCMhMU3StzF7nnpStJBPjj8TTtbhTS_Fdn8fi.roZOo
+ 7mZxLk.rXayh_mZioN3hA1_ctvijaqV9CETOZFRE1yzo2qSq8948XG1J1shbt4.TNFnqmUQMjgUb
+ NJ1qdjS5bM3dAKZf7AT_nF9OmgSw7ye1KbC0DCtSmUxgSmWYIpo34AUIIfLRyvk1_0O0HMJnAqLY
+ 9Jdu1KU12SEq9HCPyqBhtQYa.qOI4YGZhZkiS6iONCLUhkbopSfwDriUS1qfp9LpDowT5MLk4Hlv
+ b933D_BZ.dugMBPokxm5yzNsPYIvwJ0OVAOn5Vtg5TRz3M5OtDI2nYEwrBTQLJ6fcGiy.32ucTyn
+ KRmrN8PTuQiO1UQJFwddsKqTgtWuglOJzlzVBCW2RJ3Zvd4EiIyB5a4_F.iRz1oAStl9E1_V.Z9A
+ p2fEbELvyCC0QjyM5Vtl0BFMI_3AnFj6nfeb_QXY5e9QEUrP7U_4uX_O.HOqPTyXVXqPdYyUybtZ
+ 97YIj.Rb7WwkBss0DmNRebwjvSJqXWKDQfVfwduwmx5jVFx13CWv_g4tKVUaDFEQglYFEyKPTKy2
+ 6LZ7hjLcgPbbjHXNhfMyXfVf6JW3UuWOI2f7HvEQbAkfJ2eSHFFEhPAmrHxs.M7A3aYxGWGv_vCK
+ j4CX8HEEC7YRRnZXDcnHjfIYsCJWZyz_8gjmmZHZjVRXEqClkSobOI6zlZv9kCEV83TtcdHOgD9w
+ pRlis9SqokoGiWRu2fAfcfDcZ08Ia7et6_uPTzkNxIbuNig7o24THtbRLpAmYtPhuQpl3uWDp6j2
+ KC_gOlNzkPfToidVY0RbMxYaE666yPf9.IoMexIguIpkjkKXfTFnuDxxFb.thaEG6rxcChRRDiAj
+ rtJIl2uKSealiTjxMP3EjSvW7HBzQpqG0mw9GjbG_EZp7G9ahOHKelmYjtflRYvIFKeQlR5k60eZ
+ _WMloQMa1zHpJXkITjrwBnHqGzi_ryc0hcysfBUSY26qGhHgAanqBCopgRGObhkHGuzY9_2anaaz
+ qFrx0O2fksuHi3exJ5bLJ8hGT8w6h2UjmIm1gmJ6d85DHwYK0DnH7SwF3zx_9rqZCUwfjxRtNMl4
+ NRjpuYTh700oRO3J.2Lmgz6viuKQKZ846c7d0h_93wmMi7K28RlSQNb0NZIbvWOlT7WfO2QWQ2r.
+ 9y6V93_t4fYaIYbHnCHiU0QoGk0IJQnrkUIjJudnXOXjuoTejyU_aBTDSpBlP7ii8gDXm7oVp8bu
+ JS642ZGu8kKZrxOHcwCuPYPZvmtWN5z.EPnm7v2vW_KVNfOYDtMjbL4CsWnBLk_I.93bGFk5zmSE
+ mF3IGOGHt7cU_0N41LUlAr2SQqphMr.gXeaqsc1jZAH.fs5aWQbj4rcBIC5yfLFLXbHhSZshk0lU
+ KOpIAXWfes4NUjEBAOmCN7MKIbMoT.W1i93FPL44kDY0LlCzNRuseTB_lNjqN0aJgNjKkEXsfe3u
+ U.rYpCVdWljIsxyWCTGgLlUkDWBrjvMNHYprpdgvkMoVvbvAk13.MYhUnaOoekjnXMxrpobKpfqn
+ lgBjFziF947cBnNlQzHAXZfBbkMu0x9RIcMUvE8k0.56J0QiBAykGza0GCrB4611.EjVA5KA9bCf
+ Hkc.woZnLHjMJ5Xl0KeVuFxD0V5c5PMXneZNPoDFyUuxt7jv5ltXIkcDGwlhvqv__SIOWBRM5CMX
+ 3nVNWgo5HxvkwrjIQ9pDWXtZZ3pD25EgKdwK6wtI0W7YtJhkOGUysWTWX3RvdRSz3CuQuDG48ex5
+ AgQSlHR__QptP4HoTy1CCLT2KJnHZwef9YGDMF9AkKJVUzZU5Ap5S4ZFf8Yvs54B3ZCMiIviOJLV
+ 5SmyoOU7WP5tpoUS0PSINRmRJ6ZwIwQsG8bd.22JLdGDMUk41my5fbyprYeNIJ2C6XHzBieADxuJ
+ istIyW1ru9p3k.b9Jy6c3_UC.r9bpHI03dcKkB8PxR3QKRSZtdElWHDGI2PPewOURY5hYnUQjLxj
+ isPJZTsGTs7BEGZuHiwfiuz9HLjgsCBJPdXuhd8OOV5ksDlxpjTl2KFRX8WOV8SafZatqK9I1rEd
+ vOZ9AkSW1qgSdzleLEP3U8trYIUOu4jHHExlQoagYqvcXxw--
+X-Sonic-MF: <brchuckz@aol.com>
+X-Sonic-ID: 5c5ac2a8-00ef-4873-a97d-076503ba1328
+Message-ID: <24008713-2516-4a26-ab37-acdfc174a5bd@aol.com>
+Date: Fri, 21 Aug 2026 09:12:05 -0400
 MIME-Version: 1.0
-References: <CALUcmUkm7eL2RtqAn3fJxrMdY4aj8AYzkFZfs7LVwntSLa44Wg@mail.gmail.com>
- <4a1b5392-93b9-4b9e-bf65-3fb280f385fa@suse.com> <CALUcmU=QNXA8gs8JYy01tLVOH-y8mjZM-GxKzOCoA_3e2QFVwQ@mail.gmail.com>
- <83abdfca-70f3-479d-b7ed-929567c4254d@suse.com>
-In-Reply-To: <83abdfca-70f3-479d-b7ed-929567c4254d@suse.com>
-From: Arthur Borsboom <arthurborsboom@gmail.com>
-Date: Fri, 21 Aug 2026 12:43:40 +0200
-X-Gm-Features: AcwNN1Xgl6KFcWGcJH9v3WhpgwhY6UMMbE8UobaFWUGJpE8_HmHns0rOxb3Gnoc
-Message-ID: <CALUcmU=QyfQyPL6U9yc2T-HRL1d6cArp5N5O3ob3TyqxHTabtA@mail.gmail.com>
-Subject: Re: [BUG] Linux kernel crash in amd_smn_init during PVH Dom0 boot on
- AMD EPYC
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] tools/hvmloader: implement Intel IGD extended VBT
+ support
 To: Jan Beulich <jbeulich@suse.com>
-Cc: xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-c201ff/1787309040-24D1E2A1-ED118A07/0/0
+Cc: qemu-devel@nongnu.org, Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, Tomita Moeko <tomitamoeko@gmail.com>,
+ xen-devel <xen-devel@lists.xenproject.org>
+References: <20260802050824.10554-1-brchuckz.ref@aol.com>
+ <02a7dc18-4184-4e86-84cb-121769187f71@suse.com>
+ <1858e8e6-73fa-4017-93e2-c733fbf0ec8d@aol.com>
+ <d6e603bf-8dc5-4ac7-842f-ff9d1f67b98f@suse.com>
+ <fdec0b6b-eddf-4a36-a755-c67963daa9ea@aol.com>
+ <6ecf80ef-2f0e-44fb-beab-dbcf065a4431@suse.com>
+ <bb44067c-6739-4e83-a0fd-cc7ea797048f@aol.com>
+ <4c58bda6-e9ed-438d-b96e-feda74a6c4c7@suse.com>
+ <31a5870f-2a4d-4dc0-af9c-f0567e0f6fb3@aol.com>
+ <db8fd04d-bbc7-41c7-8473-b821d7f77d5f@aol.com>
+ <302ed12f-40ca-405c-80ca-ac4f2785d754@suse.com>
+ <cdae1785-4d9a-4aab-929e-de55c26b7b94@aol.com>
+ <10cd9f6b-678b-407b-a51e-70e9ed7a35fd@aol.com>
+ <131b1252-b108-4b4c-8457-673ff0d20d5e@suse.com>
+ <b14969c8-9676-404e-b7cc-ce13a6d7ff94@aol.com>
+ <92022f85-9a53-4db8-b489-fc91c86b413c@suse.com>
+ <fa497825-c8f0-4caf-94f5-b37108e31952@aol.com>
+ <42521391-885c-4b96-96e9-5da2e4b5efa1@suse.com>
+ <e86404e8-9966-44ab-86d1-4bd01a551313@aol.com>
+ <069cb01d-47b2-41c5-9956-611b338964e9@suse.com>
+Content-Language: en-US
+From: Chuck Zmudzinski <brchuckz@aol.com>
+In-Reply-To: <069cb01d-47b2-41c5-9956-611b338964e9@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailer: WebService/1.1.26254 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
+X-purgate-ID: tlsNG-d62444/1787317931-BDE78757-A8F3A6E9/0/0
 X-purgate-type: clean
-X-purgate-size: 2839
+X-purgate-size: 4875
 
-Hi Jan,
+On 8/21/2026 4:19 AM, Jan Beulich wrote:
+> On 20.08.2026 18:53, Chuck Zmudzinski wrote:
+>> On 8/20/2026 11:17 AM, Jan Beulich wrote:
+>>> On 20.08.2026 13:47, Chuck Zmudzinski wrote:
+>>>> On 8/20/2026 3:51 AM, Jan Beulich wrote:
+>>>>> On 19.08.2026 19:13, Chuck Zmudzinski wrote:
+>>>>>> On 8/19/2026 9:51 AM, Jan Beulich wrote:
+>>>>>>> On 19.08.2026 14:36, Chuck Zmudzinski wrote:
+>>>>>>>> On 8/19/2026 8:16 AM, Chuck Zmudzinski wrote:
+>>>>>>>>> Yes, I agree that v3 of the patch to hvmloader should presume that the DM can get
+>>>>>>>>> a copy of the OpRegion and read its contents so most of this can be done in the
+>>>>>>>>> DM instead of in hvmloader. So from hvmloader's perspective, the patch will be more
+>>>>>>>>> about avoiding the layering violation than anything else.
+>>>>>>>>
+>>>>>>>> However, there is one advantage, from the viewpoint of the Xen virtualization platform
+>>>>>>>> as a whole, to do the patching of the OpRegion in hvmloader instead of in the DM.
+>>>>>>>>
+>>>>>>>> If we patch the OpRegion in hvmloader as v2 of this patch does, we provide a common
+>>>>>>>> solution for extended VBT support for Intel IGD devices that would be compatible with
+>>>>>>>> all DM implementations, not just with Qemu. So why not do the patching of the OpRegion
+>>>>>>>> in hvmloader?
+>>>>>>>
+>>>>>>> As indicated before: If the OpRegion holds data that is needed to drive the
+>>>>>>> device, and if the OpRegion is exposed writable to guests, then guest can
+>>>>>>> screw up that data such that subsequent guests won't work anymore. Hence
+>>>>>>> exposing to guests (which includes hvmloader) needs to be stopped, or at
+>>>>>>> least be limited to r/o. That, in fact, includes exposing to any privilege-
+>>>>>>> restricted DM as well.
+>>>>>>>
+>>>>>>> Exposing r/o may be entirely okay (i.e. may not be a layering violation),
+>>>>>>> depending how exactly an OpRegion surfaces for a device (on the host). Aiui
+>>>>>>> it's not addressed by any of the BARs, yet it looks like it needs similar
+>>>>>>> treatment.
+>>>>>>
+>>>>>> Yes, the OpRegion is not one of the BARs as specified by the PCI specs, but
+>>>>>> it functions more or less like a BAR region with the devices's ASLS register
+>>>>>> at offset 0xfc in the PCI device config space of the device acting like the
+>>>>>> BAR for that region.
+>>>>>
+>>>>> That is, on real hardware a write to that register moves the OpRegion? That
+>>>>> would need following by the DM then, i.e. the DM would need to indicate the
+>>>>> original position in the register, and the guest (incl hvmloader) would
+>>>>> then be free to relocate it.
+>>>>
+>>>> Why would that "need following by the DM" when the register in the guest is
+>>>> fully emulated, [1] which means that when the guest (incl hvmloader) writes to the
+>>>> register, the register on the real hardware is not touched, nor is the OpRegion
+>>>> in the host address space moved?
+>>>
+>>> You said it's BAR-like. If the guest writes to a BAR, the referenced MMIO
+>>> region moves accordingly.
+>> 
+>> It's BAR-like, but it is not actually a BAR (and the OpRegion is not exactly
+>> an MMIO region either (it is actually and ACPI thing), so that is not relevant
+>> to this patch.
+>> 
+>> Also, it is fully emulated so when the guest writes to it, the real register on the
+>> real device is not touched, as I have said multiple times in my responses to your
+>> question.
+> 
+> No matter how often you said that, I never put that under question. I was asking
+> about the behavior of writes (where the behavior on bare hardware would need to
+> be reflected in the behavior of the emulated register).
+> 
+>>>> Here is how I understand how this works in the current implementation and how
+>>>> this should be done:
+>>>
+>>> I'm sorry, but this is getting out of hand, at least as far as I'm concerned.
+>>> I've been trying to help, but even just reading your replies has already been
+>>> taking way more time than I would have wanted to spend here.
+>> 
+>> Fair enough. Thank you for the time you have spent on this patch, and also thank
+>> you for clearly stating that you don't want to spend any more time on it. So
+>> I consider this patch dead unless and until another maintainer shows some interest
+>> in it.
+> 
+> I didn't say I would not look at future versions of the patch. However, for me
+> to (usefully) do so, things need to be presented in a way that I can understand
+> without knowing all the details of IGD.
 
-The fact that you take the time to tell your side of the story, tells
-me you are a different person, than the initial message gave the
-impression to me.
+Thanks for clarifying. If I do v3 I will try to present things in a way that clearly
+answers the questions you have raised here about IGD and provide more information
+about IGD than I did in v1/v2 for those who don't know all the details of it.
 
-I guess we started off on the wrong foot.
-Nevertheless, maybe the open source development world is not my place to be.
+If I do a v3, you will of course be on the Cc list since I expect you will be one of
+the maintainers of the affected code.
 
-Thanks for your answer and indeed being one of the people who actually
-answers mails from strangers/newbees.
-This message won't arrive on the mailing list, because I have
-unsubscribed myself, so it is just for you :-)
-
-Enjoy your day.
-
-On Wed, 19 Aug 2026 at 09:52, Jan Beulich <jbeulich@suse.com> wrote:
->
-> On 19.08.2026 09:09, Arthur Borsboom wrote:
-> >> Well, a pretty natural question: What amount of research have you done yourself?
-> >
-> > Lovely response. You really know how to motivate people and welcome
-> > them into a community.
-> >
-> > It has taken me about 1,5 day of work to find out why the screen
-> > remained black, to determine where the problem was, how to retrieve
-> > potential info by a serial-over-LAN console, subscribe to the mailing
-> > list, and create this bug report to help.
-> >
-> > But don't worry, I won't do any debugging anymore for the Xen project,
-> > you have made sure of that. No need to respond.
->
-> Well, no, I can't really skip responding here. Yes, there was a risk that
-> you may take my reply as "not welcoming". Yet please can you try to see
-> both sides of the medal? From your initial report, which effectively
-> wasn't much more than the dumping of a log with the traces of a crash,
-> how could anyone have concluded how little or much work it was for you to
-> get there. As much as you have felt offended by my reply, I consider such
-> reports as an abuse as well: This is xen-devel@, not xen-users@, and I
-> think it is only fair for us to expect that reporters check whether their
-> problem was reported before, and whether therefore a fix already exists.
->
-> In fact, looking back - you did identify the earlier report. I clearly
-> scrolled down too quickly, and I'm sorry for that. The question then is,
-> though: What did you expect from re-reporting the issue to xen-devel@?
-> A patch for the issue is in flight, yet that patch to be taken is
-> nothing any of the Xen developers really have much control over: It's
-> not Xen interfacing code in Linux which is affected. So I continue to
-> have the feeling that this wasn't helpful at all, and my putting time
-> into finding the (apparently) most recent variant of the pending fix was
-> not valued / pointless, as I ended up offending you be a non-technical
-> aspect of my reply.
->
-> As a result I wonder: Would it have left you with better feelings if
-> your mail was left entirely unresponded to (as would end up reasonably
-> likely, according to my observations over many years)?
->
-> Jan
+Chuck
 
