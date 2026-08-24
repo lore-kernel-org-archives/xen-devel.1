@@ -4,44 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A13BEC5DF81
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2026 07:41:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1398707.1634852 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53F2BC5DF94
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2026 08:32:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1398727.1634862 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wyPJB-0007uv-40; Mon, 24 Aug 2026 07:41:29 +0000
+	id 1wyQ6Y-0006NU-2v; Mon, 24 Aug 2026 08:32:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1398707.1634852; Mon, 24 Aug 2026 07:41:29 +0000
+Received: by outflank-mailman (output) from mailman id 1398727.1634862; Mon, 24 Aug 2026 08:32:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wyPJB-0007uo-1N; Mon, 24 Aug 2026 07:41:29 +0000
-Received: by outflank-mailman (input) for mailman id 1398707;
- Mon, 24 Aug 2026 07:41:28 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wyQ6Y-0006NN-0F; Mon, 24 Aug 2026 08:32:30 +0000
+Received: by outflank-mailman (input) for mailman id 1398727;
+ Mon, 24 Aug 2026 08:32:27 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wyPJA-0007ui-2W
- for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 07:41:28 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1wyQ6V-0006NH-JZ
+ for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 08:32:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wyPJ8-005XZj-Ox
- for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 09:41:26 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wyQ6U-009yh5-I9
+ for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 10:32:26 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a8bf592-e002-0a2a0a5209dd-0a2a4504afb0-38
- for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 09:41:26 +0200
-Received: from [209.85.208.50] (helo=mail-ed1-f50.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a8bf5a6-b57f-0a2a45040019-d155d032c45a-3
- for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 09:41:26 +0200
-Received: by mail-ed1-f50.google.com with SMTP id
- 4fb4d7f45d1cf-6a18840e2abso5436018a12.0
- for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 00:41:26 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a59dd550bcsm7944233a12.0.2026.08.24.00.41.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Aug 2026 00:41:25 -0700 (PDT)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a8c018c-8faa-0a2a0a5109dd-0a2a4503d2e4-40
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 10:32:26 +0200
+Received: from [40.93.195.68]
+ (helo=SN4PR2101CU001.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a8c0197-fae8-0a2a45030019-285dc3446c73-3
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 10:32:25 +0200
+Received: from MW4PR03CA0230.namprd03.prod.outlook.com (2603:10b6:303:b9::25)
+ by PH7PR12MB7116.namprd12.prod.outlook.com (2603:10b6:510:1ef::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Mon, 24 Aug
+ 2026 08:32:15 +0000
+Received: from CO1PEPF000075F0.namprd03.prod.outlook.com
+ (2603:10b6:303:b9:cafe::13) by MW4PR03CA0230.outlook.office365.com
+ (2603:10b6:303:b9::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.12 via Frontend Transport; Mon,
+ 24 Aug 2026 08:32:15 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CO1PEPF000075F0.mail.protection.outlook.com (10.167.249.39) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.360.3 via Frontend Transport; Mon, 24 Aug 2026 08:32:14 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 24 Aug
+ 2026 03:32:13 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 24 Aug
+ 2026 03:32:07 -0500
+Received: from [10.252.145.116] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.45 via Frontend
+ Transport; Mon, 24 Aug 2026 03:32:05 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,250 +71,444 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787557286; x=1788162086; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=6FjKIhLvuDC2eEldBE9utv0h1r0RkC7q9zuRaTDtrKA=;
-        b=NuY+TVbKpa9t11DlzV2khy6j8ZO9QGmS9vnia8+X7VJQzXOaiDlschqoK1/IEzdZNh
-         /2KfUwtF7szoTRQ0b7S+QHPX1P1wFkKyRLvuD2UnFA8DmM5XOSP3n4JwAOW4dYMxrCke
-         ZHYI6fbquyCJTFWy7vm5CFGihpOBrvU6RiiwcaFRALuCtKF7oW+ESnmQF5G5Z++9H1Ef
-         sipEBMWceXZfrvdrka5/Ca1M5Ex/TFxRvRy15kUC9jnUMIOrJWh6V0122YafYWc4OIxU
-         OwSCTI3U5r34j6RI3513I8qpo2EbiGtJAVIkaWiCHwNnWhPAOajkvDuiOvpSkXRLbCg0
-         QyeQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787557286; x=1788162086;
-        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=6FjKIhLvuDC2eEldBE9utv0h1r0RkC7q9zuRaTDtrKA=;
-        b=Yr7Y6A8TBKypbcfmWpyypGbIYZybKOt9h5JOg1raqbvujk1aB7/aapR5Yzov3DlcCY
-         FvAVPnNsaqDFV/XNtBL0kXywE2oRn3BVdzUd5/4QE4y0lKvNxfgqADeEHbgPRWsRyDFg
-         O25WjZ5R0AVy6yrhWsW3nsA5bQ5b9jVfm8H2NEXi8C7N3RXA1q52nr74wSXFzt3fAlcA
-         MJ0A7Ksibr2ZuAD5eypsWUTj1WsolVpkcjKnqPjsUf5YMTz1RCxoCYtoXs8bDOjhWzJ2
-         iAeCI9cBttokRxs0pETHCwwSts1HnOHeoxMjuodREsslUwoCTNYM7bRkq8ahFHCrtiBR
-         mUYg==
-X-Gm-Message-State: AFuF++mwlJj6qFOFDM7cUxWofGwjlAnwhIcO3kYQtPK/ABoRE8uBsyI2
-	Rl3JYJ4qsvzfImdvHgFPQ0fbOu0quLOSYfqZo2hQV4lOnT0iXsDTVklzJD+OPEAoUs9MzTEZd+F
-	UCfiBdA==
-X-Gm-Gg: AR+sD13TGCDg8X5FQp82jooOjTCWMlYRleAy/aR/n++zjao0yWXmL4B24mtjjTSMBix
-	28HdnokgK265wkTFxDyxrjzMBAgzwNIHDKpeFeg6VnlEMQu4CR+QsQ2YPcG8DyzVQvTfSoMHaoc
-	qekRn091RYR0Aye7w9XMBZbMLH8/p+pF2He+ET7WcRf8sQb0WKkro6AwSiaooGpPAU3jyflU4ox
-	eiPYmqW2ZHGd8lkGSXzz6zaJ4F9eUi1EWjVHeMwMM+gffrLFpIGfRo34Gqw7rpndiqKJQ237CPs
-	ifPGigwAYFwExPV+O4uNC8+8HIk9wvYfpehQz+YLZDod4tdrzkygJsrTeKNiAho1boMJr5FKCuJ
-	UyaxzkJQmY9OZ0ajbsjtscEoUxQ1gNlqzPAQ0yPO5OHk2tyUhXuhfrqYHjFGZaHRpBO5sEOZb9I
-	IOB7d+TcqRJFS9CaWmhGEBJCG1gVTf6xz7NBzRgtZAatDcfN52HtLpKcP5CBxI1EW+R+sZuKfaZ
-	ak6dtMawP4kW6+gfX01c2vqyCxwsstd+XTOEaceSEQ8hz4zmKuk
-X-Received: by 2002:a05:6402:4342:b0:6a3:f8ab:19f7 with SMTP id 4fb4d7f45d1cf-6a582b7d8b0mr19827503a12.11.1787557286102;
-        Mon, 24 Aug 2026 00:41:26 -0700 (PDT)
-Message-ID: <d3d188c2-32c5-45ee-9b10-1f4ee1b85c6e@suse.com>
-Date: Mon, 24 Aug 2026 09:41:24 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=RWi1OV5B5b6GMqyGJJUp4MK+pMuLh2kc2lJOnB5iEbDd9lxShiqcWuhtpji9R0t/iVAFXWvk2lgtdHsbxjJHIhve52+PxkfsN0su6VgWGEgZ+uQvmQ3wdpM7pCq0VfIjNfNKW7U/WZcRwUynblnqjoOSLVJxEP7m9th7OPJJxdFYPeAqah/L/8w5j89r7gzHy7CG65+eEv8NMLJYlsesnSjB2fUFM1hy1NEjXirPZaY9+RLryQrMnoQ/VRsRaXOimrHwDTqmEH7066Li7vLzhPunbxt2+0Ka/0ce/HfeuFwbgxpo5TARJdOGCsm/Lxn3gm2yUnufJ/pn/gDr38voDg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rXv1eM1QauodCGZrPbnY9WZ44vQeU7Ima24VUPC+cDQ=;
+ b=NCSVraOmpUcjb3jU2yg0aEktxs+5cbKflEb17yRgWK32ibwMDbe5kSZabi5WCKkLteJ1k4dBEwFztGns+MHuzoN4sxV6LQcCyzYdq3/ZEEMgJXEVjvdr27GxO0HTKRHs+CiBn4mNZv5VLecWBWoXTOPnCBaVQXD32THM7qpTMbVn8CvBHJ9Hts4+RN2FZMANl64i2t9I/oIN6q6zJV7qr7vKmQYtXhp4GyUrrtY6vfF1F5qHwbCTwwejBTk5kVRIGQu8wr9+aGYLLRcg+kLGCD8LYK84NuwL8PndT84CEXO86G0p4yysBaKHS6UsqERItX4beQaUIroS91QQGc5n9Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=valinux.co.jp smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rXv1eM1QauodCGZrPbnY9WZ44vQeU7Ima24VUPC+cDQ=;
+ b=Q5L1X1ou+moqfb/wbhekeADMYSnCbI1QyMwNFvdCMIttIsgvaqz+ZkHe/Fs2KwzNd7XplxDK05r/xzSxmAo706QalMqq2xjkzWTlGgmkenANAU1mmzFSUsinLTrKG2pVEBPVlOn3ns/GCoKbShuisR+f74Co8RgKjwxWFHAevNo=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <e6edf3f8-5085-4b5b-acdb-ac17402e86ee@amd.com>
+Date: Mon, 24 Aug 2026 10:32:04 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] xen/arm: Hide PMU registers from the guest, when the
+ vPMU feature is disabled.
+To: Hirokazu Takahashi <taka@valinux.co.jp>, <xen-devel@lists.xenproject.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, "Jan
+ Beulich" <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+	<roger@xenproject.org>
+References: <20260824044530.301938-1-taka@valinux.co.jp>
+From: "Orzel, Michal" <michal.orzel@amd.com>
 Content-Language: en-US
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Andrew Mbugua <andrewprecious388@gmail.com>
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] x86emul/fuzz: sanitize CR4 values
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <20260824044530.301938-1-taka@valinux.co.jp>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1787557286-C30CDB50-8A834B66/0/0
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000075F0:EE_|PH7PR12MB7116:EE_
+X-MS-Office365-Filtering-Correlation-Id: 00cf9173-cdf8-4dd7-f566-08df01ba3371
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|82310400026|36860700016|23010399003|7416014|376014|56012099006|10067099003|11063799006|6133799003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	oOHUi+jRIadxIEkGqsV1NalaV0rd3I2BcV0iSUptn3y+zkB1dLz+YxwrzouK7QHrjkrDfApquYodGkFvC+MnOUe4s8ER+mqW0gvrpjKxrPWJHMx7NBkESFz2SmUU7wJnOUSBMZxQx+DX8jyrObB0CvHKchBz0qb1tfIJXLrDjKiF8rt/4MTlfUgXcxcdMZjOuWOgb8nQ1ZUrfsY8LoDjFSu9k5PGHC+3g4MbBwl4aB4Samu4Hz7V3jr3ad28A4ovA6DvwxGkjTIGDeCu0/++PtI28mJCiTQHQkd5XVMpZ48j73WAtow63frvANdGBfT7lTRAKeYz+UA7r0reA1fT9XZyBwIVmBHOhujiIJ2bw2y84IO6tzVRXHzkLUzKK/2+SlcLQH2Pq8/ldhyVW8+HAioyPKUmHXD0Zd5jKMCE7bu15i/FT8tGWcZB3COqVwhrMucjulNuHJt+P1VAmSPlJvRzL7pITfxGdLfp50wGGShrJq6E4vhzaukXtggBa8+q4nCcij++IYyzVqlQ+sWb0HOG+t4I5WzZQ2iHH5KNqsD1gvF1hZ8SnnMI27luVDFd9FJe/ISAWYBpwHt5WJ5vaHmy8+AcVaLVP6RD2mdskU/nI0YYQ7QMS6zvXm8IsemXfeLRXouwBB5z4T+OG0URLeK/oetcPGVrYXFvoRQG/wMD45S8pfXRaCqgISngLJqiyVsNj0FR1XrdvECE8hAOYw==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700016)(23010399003)(7416014)(376014)(56012099006)(10067099003)(11063799006)(6133799003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	Tv4C2vpFe1ri8afLd/F85PRdba1vPW2cV34hqnaozsjQBnKBprpVEV5LuQiUQNT9T9cZ7GyUCQWXFutTdvrlFsRPu67DyJdQ5fmK73HGVTrqXEpa3mH+xCrXGU/L2ZXIy4u3tJBrTPbjVG2+Qw77iTZKKkGWEcD1TNSi6D6MhDNnkA9oSf04N2J2depOxh5I4KT8rj7q3STrWAz9H/hhdRQjbO0ng4ul6hVKzjL6OMbd+dDqBkwTBmElp/QZhwkhc/sFhTKpgzfajAQZLp26gCggPpY1D3A1GE0zkovNp8u7AqNdZVeB7nIrklnaQuRakwdmtrRhUFWal9Dpu0g7/BeBVD5FfNmuesoIkgJUmpwD52EdZX7GeuoDBHVqqOKPUffSIXXy2z3EHvvjXp0qTBAIt9du6phtAblXJRAzFGTygTW0gKnoJgeChbR35bmO
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2026 08:32:14.7697
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 00cf9173-cdf8-4dd7-f566-08df01ba3371
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CO1PEPF000075F0.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7116
+X-purgate-ID: tlsNG-33051d/1787560345-772F54E9-02004E2F/0/0
 X-purgate-type: clean
-X-purgate-size: 5663
+X-purgate-size: 14154
 
-While the CPU policy is obtained from hardware, the CRn values to start
-with are taken from fuzzed input. Since most CR4 bits can only be set when
-the respective feature is indicated as available by CPUID, the emulator
-often only checks the CR4 bit. Without sanitization, assertions like the
-one in emul_test_read_xcr() (checking XSAVE support) could therefore
-trigger.
 
-Omit most paging-only bits from sanitization, as the core emulator doesn't
-itself walk page tables. LA57 wants checking for the bit being used by
-CANONICALIZE_MAYBE().
 
-Reported-by: Andrew Mbugua <andrewprecious388@gmail.com>
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-For this to have the overall intended effect, the previously submitted
-https://lists.xen.org/archives/html/xen-devel/2026-08/msg01018.html
-also need including.
+On 24-Aug-26 06:45, Hirokazu Takahashi wrote:
+> On ARMv8.4-A and newer platforms, booting Dom0 Linux with ACPI enabled
+> causes the domain to probe advanced PMU feature based on system ID
+> register ID_AA64DFR0_EL1. During this probe, Linux accesses PMMIR_EL1,
+> which causes unhandled register traps and crashes the domain.
+> 
+> To address this issue, implement the following:
+> 
+> - Add emulation for ID_AA64DFR{0,1}_EL1, ID_DFR{0,1}_EL1 and
+>   ID_DFR{0,1} register accesses for guest domains.
+> - Hide PMU registers from a guest domain when its vPMU feature is
+>   disabled.
+> - Proactively make SPE, TRBE, BRBE, Trace Extensions and ITE
+>   inaccessible to arm64 guest domains and hide TraceFilt, MMapTrc
+>   and CopTrc to arm32 guest domains, as they could potentially cause
+>   similar issues.
+> 
+> Fixes: dbb948110a0e ("xen: Expose the PMU to the guests")
+> Fixes: 07b9acea116e ("xen/arm: Add handler for ID registers on arm64")
+> Fixes: 3669a1cb9598 ("xen/arm: create a cpuinfo structure for guest")
+> Signed-off-by: Hirokazu Takahashi <taka@valinux.co.jp>
+> ---
+> Changes in v3:
+>  * Mask PMU-related fields in ID_AA64DFR1_EL1 and ID_DFR1 when a guest
+>    domain lacks the vPMU feature.
+>  * Add emulation for AArch32 PMMIR register accesses performed by
+>    32-bit guest domains without the vPMU feature.
+>  * Code cleanups.
+> 
+> Note: The combination of AArch32 EL1 and PMUv3 could not be verified,
+>       as no real ARM CPU implements both while the Arm Architecture
+>       Reference Manual for A-profile architecture allows it.
+> 
+> 
+>  xen/arch/arm/arm64/vsysreg.c          | 74 +++++++++++++++++++++++++--
+>  xen/arch/arm/cpufeature.c             | 14 +++++
+>  xen/arch/arm/domain.c                 |  2 +-
+>  xen/arch/arm/include/asm/arm64/hsr.h  |  1 +
+>  xen/arch/arm/include/asm/cpregs.h     |  1 +
+>  xen/arch/arm/include/asm/cpufeature.h | 27 +++++++---
+>  xen/arch/arm/vcpreg.c                 | 33 +++++++++++-
+>  xen/include/xen/sched.h               |  5 ++
+>  8 files changed, 143 insertions(+), 14 deletions(-)
+> 
+> diff --git a/xen/arch/arm/arm64/vsysreg.c b/xen/arch/arm/arm64/vsysreg.c
+> index d9e3619dfb..1d1f7b0631 100644
+> --- a/xen/arch/arm/arm64/vsysreg.c
+> +++ b/xen/arch/arm/arm64/vsysreg.c
+> @@ -227,6 +227,11 @@ void do_sysreg(struct cpu_user_regs *regs,
+>       */
+>      case HSR_SYSREG_PMINTENSET_EL1:
+>      case HSR_SYSREG_PMINTENCLR_EL1:
+> +    case HSR_SYSREG_PMMIR_EL1:
+> +        /*
+> +         * Accessible from EL1 only, but if EL0 trap happens handle as
+> +         * undef.
+> +         */
+This comment was recently removed, so please do not re-introduce it.
 
-UINTR is omitted, as the feature reportedly is about to be deprecated by
-Intel, and hence we may never add support for it to the emulator. (We also
-don't have X86_CR4_UINTR in x86-defns.h.)
+>          return handle_raz_wi(regs, regidx, hsr.sysreg.read, hsr, 1);
+>      case HSR_SYSREG_PMUSERENR_EL0:
+>          /* RO at EL0. RAZ/WI at EL1 */
+> @@ -300,8 +305,36 @@ void do_sysreg(struct cpu_user_regs *regs,
+>      GENERATE_TID3_INFO(ID_PFR0_EL1, pfr32, 0)
+>      GENERATE_TID3_INFO(ID_PFR1_EL1, pfr32, 1)
+>      GENERATE_TID3_INFO(ID_PFR2_EL1, pfr32, 2)
+> -    GENERATE_TID3_INFO(ID_DFR0_EL1, dbg32, 0)
+> -    GENERATE_TID3_INFO(ID_DFR1_EL1, dbg32, 1)
+> +
+> +    case HSR_SYSREG_ID_DFR0_EL1:
+> +    {
+> +        struct domain *d = v->domain;
+There is no need for a separate local variable if it's only used once. In this
+series, please just use `v->domain` for `is_vpmu_domain()`.
 
-Checks like the one for VMXE, SMXE, CET, and FRED are forward-looking, as
-the emulator is yet to gain support for those.
+> +        union cpuinfo_dbg32 info_dbg32 = domain_cpuinfo.dbg32;
+> +
+> +        if ( !is_vpmu_domain(d) )
+> +        {
+Please omit the braces for a single line `if` block.
 
---- a/tools/fuzz/x86_instruction_emulator/fuzz-emul.c
-+++ b/tools/fuzz/x86_instruction_emulator/fuzz-emul.c
-@@ -825,6 +825,58 @@ static void sanitize_input(struct x86_em
-     regs->entry_vector = 0;
- 
-     /*
-+     * Most CR4 bits can only be set when corresponding CPUID bits are set.
-+     * (In such cases the emulator may only check the CR4 bit.)
-+     */
-+    if ( !cpu_policy.basic.vme )
-+        c->cr[4] &= ~(X86_CR4_VME | X86_CR4_PVI);
-+
-+    if ( !cpu_policy.basic.tsc )
-+        c->cr[4] &= ~X86_CR4_TSD;
-+
-+    if ( !cpu_policy.basic.de )
-+        c->cr[4] &= ~X86_CR4_DE;
-+
-+    if ( !cpu_policy.basic.fxsr )
-+        c->cr[4] &= ~X86_CR4_OSFXSR;
-+
-+    if ( !cpu_policy.basic.sse )
-+        c->cr[4] &= ~X86_CR4_OSXMMEXCPT;
-+
-+    if ( !cpu_policy.feat.umip )
-+        c->cr[4] &= ~X86_CR4_UMIP;
-+
-+    if ( !cpu_policy.feat.la57 )
-+        c->cr[4] &= ~X86_CR4_LA57;
-+
-+    if ( !cpu_policy.basic.vmx )
-+        c->cr[4] &= ~X86_CR4_VMXE;
-+
-+    if ( !cpu_policy.basic.smx )
-+        c->cr[4] &= ~X86_CR4_SMXE;
-+
-+    if ( !cpu_policy.feat.fsgsbase )
-+        c->cr[4] &= ~X86_CR4_FSGSBASE;
-+
-+    if ( !cpu_policy.basic.pcid )
-+        c->cr[4] &= ~X86_CR4_PCIDE;
-+
-+    if ( !cpu_policy.basic.xsave || !cpu_has_xsave )
-+        c->cr[4] &= ~X86_CR4_OSXSAVE;
-+
-+    if ( !cpu_policy.feat.pku )
-+        c->cr[4] &= ~X86_CR4_PKE;
-+
-+    if ( !cpu_policy.feat.cet_ss && !cpu_policy.feat.cet_ibt )
-+        c->cr[4] &= ~X86_CR4_CET;
-+
-+    if ( !cpu_policy.feat.pks )
-+        c->cr[4] &= ~X86_CR4_PKS;
-+
-+    if ( !cpu_policy.feat.fred )
-+        c->cr[4] &= ~X86_CR4_FRED;
-+
-+    /*
-      * For both RIP and RSP make sure we test with canonical values in at
-      * least a fair number of cases. As all other registers aren't tied to
-      * special addressing purposes, leave everything else alone.
-@@ -839,10 +891,14 @@ static void sanitize_input(struct x86_em
-     if ( c->cr[0] & X86_CR0_PG )
-         c->cr[0] |= X86_CR0_PE;
- 
--    /* EFLAGS.VM not available in long mode */
-+    /* EFLAGS.VM not available in long mode, but CR4.PAE is required. */
-     if ( long_mode_active(ctxt) )
-+    {
-         regs->rflags &= ~X86_EFLAGS_VM;
- 
-+        c->cr[4] |= X86_CR4_PAE;
-+    }
-+
-     /* EFLAGS.VM implies 16-bit mode */
-     if ( regs->rflags & X86_EFLAGS_VM )
-     {
-@@ -862,12 +918,63 @@ static bool check_state(struct x86_emula
-     const struct fuzz_corpus *c = s->corpus;
-     const struct cpu_user_regs *regs = &c->regs;
- 
--    if ( long_mode_active(ctxt) && !(c->cr[0] & X86_CR0_PG) )
-+    if ( long_mode_active(ctxt) &&
-+         (!(c->cr[0] & X86_CR0_PG) || !(c->cr[4] & X86_CR4_PAE)) )
-         return false;
- 
-     if ( (c->cr[0] & X86_CR0_PG) && !(c->cr[0] & X86_CR0_PE) )
-         return false;
- 
-+    if ( (c->cr[4] & (X86_CR4_VME | X86_CR4_PVI)) && !cpu_policy.basic.vme )
-+        return false;
-+
-+    if ( (c->cr[4] & X86_CR4_TSD) && !cpu_policy.basic.tsc )
-+        return false;
-+
-+    if ( (c->cr[4] & X86_CR4_DE) && !cpu_policy.basic.de )
-+        return false;
-+
-+    if ( (c->cr[4] & X86_CR4_OSFXSR) && !cpu_policy.basic.fxsr )
-+        return false;
-+
-+    if ( (c->cr[4] & X86_CR4_OSXMMEXCPT) && !cpu_policy.basic.sse )
-+        return false;
-+
-+    if ( (c->cr[4] & X86_CR4_UMIP) && !cpu_policy.feat.umip )
-+        return false;
-+
-+    if ( (c->cr[4] & X86_CR4_LA57) && !cpu_policy.feat.la57 )
-+        return false;
-+
-+    if ( (c->cr[4] & X86_CR4_VMXE) && !cpu_policy.basic.vmx )
-+        return false;
-+
-+    if ( (c->cr[4] & X86_CR4_SMXE) && !cpu_policy.basic.smx )
-+        return false;
-+
-+    if ( (c->cr[4] & X86_CR4_FSGSBASE) && !cpu_policy.feat.fsgsbase )
-+        return false;
-+
-+    if ( (c->cr[4] & X86_CR4_PCIDE) && !cpu_policy.basic.pcid )
-+        return false;
-+
-+    if ( (c->cr[4] & X86_CR4_OSXSAVE) &&
-+         (!cpu_policy.basic.xsave || !cpu_has_xsave) )
-+        return false;
-+
-+    if ( (c->cr[4] & X86_CR4_PKE) && !cpu_policy.feat.pku )
-+        return false;
-+
-+    if ( (c->cr[4] & X86_CR4_CET) &&
-+         !cpu_policy.feat.cet_ss && !cpu_policy.feat.cet_ibt )
-+        return false;
-+
-+    if ( (c->cr[4] & X86_CR4_PKS) && !cpu_policy.feat.pks )
-+        return false;
-+
-+    if ( (c->cr[4] & X86_CR4_FRED) && !cpu_policy.feat.fred )
-+        return false;
-+
-     if ( (regs->rflags & X86_EFLAGS_VM) &&
-          (c->segments[x86_seg_cs].db || c->segments[x86_seg_ss].db) )
-         return false;
+> +            info_dbg32.perfmon = 0;
+> +        }
+> +
+> +        return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
+> +                                  info_dbg32.bits[0]);
+> +    }
+> +
+> +    case HSR_SYSREG_ID_DFR1_EL1:
+> +    {
+> +        struct domain *d = v->domain;
+> +        union cpuinfo_dbg32 info_dbg32 = domain_cpuinfo.dbg32;
+> +
+> +        if ( !is_vpmu_domain(d) )
+> +        {
+> +            info_dbg32.mtpmu = 0;
+> +            info_dbg32.hpmn0 = 0;
+> +        }
+> +
+> +        return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
+> +                                  info_dbg32.bits[1]);
+> +    }
+> +
+>      GENERATE_TID3_INFO(ID_AFR0_EL1, aux32, 0)
+>      GENERATE_TID3_INFO(ID_MMFR0_EL1, mm32, 0)
+>      GENERATE_TID3_INFO(ID_MMFR1_EL1, mm32, 1)
+> @@ -342,8 +375,41 @@ void do_sysreg(struct cpu_user_regs *regs,
+>      }
+>  
+>      GENERATE_TID3_INFO(ID_AA64PFR1_EL1, pfr64, 1)
+> -    GENERATE_TID3_INFO(ID_AA64DFR0_EL1, dbg64, 0)
+> -    GENERATE_TID3_INFO(ID_AA64DFR1_EL1, dbg64, 1)
+> +
+> +    case HSR_SYSREG_ID_AA64DFR0_EL1:
+> +    {
+> +        struct domain *d = v->domain;
+> +        union cpuinfo_dbg64 info_dbg64 = domain_cpuinfo.dbg64;
+> +
+> +        if ( !is_vpmu_domain(d) )
+> +        {
+> +            info_dbg64.pmu_ver = 0;
+> +            info_dbg64.pmss = 0;
+> +            info_dbg64.mtpmu = 0;
+Why don't you clear hpmn0?
+
+> +        }
+> +
+> +        return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
+> +                                  info_dbg64.bits[0]);
+> +    }
+> +
+> +    case HSR_SYSREG_ID_AA64DFR1_EL1:
+> +    {
+> +        struct domain *d = v->domain;
+> +        union cpuinfo_dbg64 info_dbg64 = domain_cpuinfo.dbg64;
+> +
+> +        if ( !is_vpmu_domain(d) )
+> +        {
+> +            info_dbg64.syspmuid = 0;
+> +            info_dbg64.spmu = 0;
+System PMU accesses undef for a vPMU-enabled domain too. Clear them together
+with SPE, TRBE, etc.
+
+> +            info_dbg64.pmicntr = 0;
+> +            info_dbg64.ebep = 0;
+FEAT_EBEP is Armv9 just like SEBEP, so you should apply my comments to it as well.
+
+> +            info_dbg64.dpfzs = 0;
+> +        }
+> +
+> +        return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
+> +                                  info_dbg64.bits[1]);
+> +    }
+> +
+>      GENERATE_TID3_INFO(ID_AA64ISAR0_EL1, isa64, 0)
+>      GENERATE_TID3_INFO(ID_AA64ISAR1_EL1, isa64, 1)
+>      GENERATE_TID3_INFO(ID_AA64MMFR0_EL1, mm64, 0)
+> diff --git a/xen/arch/arm/cpufeature.c b/xen/arch/arm/cpufeature.c
+> index 94d14fb6a9..05f4d0f5df 100644
+> --- a/xen/arch/arm/cpufeature.c
+> +++ b/xen/arch/arm/cpufeature.c
+> @@ -219,8 +219,22 @@ static int __init create_domain_cpuinfo(void)
+>      domain_cpuinfo.isa64.api = 0;
+>      domain_cpuinfo.isa64.gpa = 0;
+>      domain_cpuinfo.isa64.gpi = 0;
+> +
+> +    /* Hide SPE, TRBE, BRBE, Trace Extensions and ITE */
+> +    domain_cpuinfo.dbg64.trace_ver = 0;
+> +    domain_cpuinfo.dbg64.pms_ver = 0;
+> +    domain_cpuinfo.dbg64.trace_filt = 0;
+> +    domain_cpuinfo.dbg64.trace_buffer = 0;
+> +    domain_cpuinfo.dbg64.ext_trc_buff = 0;
+> +    domain_cpuinfo.dbg64.brbe = 0;
+> +    domain_cpuinfo.dbg64.ite = 0;
+>  #endif
+>  
+> +    /* Hide Trace Extensions for AArch32 domain */
+> +    domain_cpuinfo.dbg32.coptrc = 0;
+> +    domain_cpuinfo.dbg32.mmaptrc = 0;
+> +    domain_cpuinfo.dbg32.tracefilt = 0;
+> +
+>      /* Hide AMU support */
+>  #ifdef CONFIG_ARM_64
+>      domain_cpuinfo.pfr64.amu = 0;
+> diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+> index baa3a5d708..a739dd157e 100644
+> --- a/xen/arch/arm/domain.c
+> +++ b/xen/arch/arm/domain.c
+> @@ -501,7 +501,7 @@ int arch_vcpu_create(struct vcpu *v)
+>      v->arch.hcr_el2 = get_default_hcr_flags();
+>  
+>      v->arch.mdcr_el2 = HDCR_TDRA | HDCR_TDOSA | HDCR_TDA;
+> -    if ( !(v->domain->options & XEN_DOMCTL_CDF_vpmu) )
+> +    if ( !is_vpmu_domain(v->domain) )
+>          v->arch.mdcr_el2 |= HDCR_TPM | HDCR_TPMCR;
+>  
+>      if ( (rc = vcpu_vgic_init(v)) != 0 )
+> diff --git a/xen/arch/arm/include/asm/arm64/hsr.h b/xen/arch/arm/include/asm/arm64/hsr.h
+> index 1495ccddea..ed18184cc7 100644
+> --- a/xen/arch/arm/include/asm/arm64/hsr.h
+> +++ b/xen/arch/arm/include/asm/arm64/hsr.h
+> @@ -84,6 +84,7 @@
+>  #define HSR_SYSREG_FAR_EL1        HSR_SYSREG(3,0,c6, c0,0)
+>  #define HSR_SYSREG_PMINTENSET_EL1 HSR_SYSREG(3,0,c9,c14,1)
+>  #define HSR_SYSREG_PMINTENCLR_EL1 HSR_SYSREG(3,0,c9,c14,2)
+> +#define HSR_SYSREG_PMMIR_EL1      HSR_SYSREG(3,0,c9,c14,6)
+>  #define HSR_SYSREG_MAIR_EL1       HSR_SYSREG(3,0,c10,c2,0)
+>  #define HSR_SYSREG_AMAIR_EL1      HSR_SYSREG(3,0,c10,c3,0)
+>  #define HSR_SYSREG_ICC_SGI1R_EL1  HSR_SYSREG(3,0,c12,c11,5)
+> diff --git a/xen/arch/arm/include/asm/cpregs.h b/xen/arch/arm/include/asm/cpregs.h
+> index a7503a190f..e03218b51e 100644
+> --- a/xen/arch/arm/include/asm/cpregs.h
+> +++ b/xen/arch/arm/include/asm/cpregs.h
+> @@ -246,6 +246,7 @@
+>  #define PMINTENSET      p15,0,c9,c14,1  /* Perf. Mon. Interrupt Enable Set Register */
+>  #define PMINTENCLR      p15,0,c9,c14,2  /* Perf. Mon. Interrupt Enable Clear Register */
+>  #define PMOVSSET        p15,0,c9,c14,3  /* Perf. Mon. Overflow Flag Status Set register */
+> +#define PMMIR           p15,0,c9,c14,6  /* Perf. Mon. Performance Monitors Machine Identification Register */
+Please drop "Performance Monitors". It's the same as "Perf. Mon".
+
+>  
+>  /* CP15 CR10: */
+>  #define MAIR0           p15,0,c10,c2,0  /* Memory Attribute Indirection Register 0 AKA PRRR */
+> diff --git a/xen/arch/arm/include/asm/cpufeature.h b/xen/arch/arm/include/asm/cpufeature.h
+> index bf902a3970..c554686415 100644
+> --- a/xen/arch/arm/include/asm/cpufeature.h
+> +++ b/xen/arch/arm/include/asm/cpufeature.h
+> @@ -208,7 +208,7 @@ struct cpuinfo_arm {
+>          };
+>      } pfr64;
+>  
+> -    union {
+> +    union cpuinfo_dbg64 {
+>          register_t bits[2];
+>          struct {
+>              /* DFR0 */
+> @@ -216,19 +216,31 @@ struct cpuinfo_arm {
+>              unsigned long trace_ver:4;
+>              unsigned long pmu_ver:4;
+>              unsigned long brps:4;
+> -            unsigned long __res0:4;
+> +            unsigned long pmss:4;
+>              unsigned long wrps:4;
+>              unsigned long __res1:4;
+>              unsigned long ctx_cmps:4;
+>              unsigned long pms_ver:4;
+>              unsigned long double_lock:4;
+>              unsigned long trace_filt:4;
+> -            unsigned long __res2:4;
+> +            unsigned long trace_buffer:4;
+>              unsigned long mtpmu:4;
+> -            unsigned long __res3:12;
+> +            unsigned long brbe:4;
+> +            unsigned long ext_trc_buff:4;
+> +            unsigned long hpmn0:4;
+>  
+>              /* DFR1 */
+> -            unsigned long __res4:64;
+> +            unsigned long syspmuid:8;
+> +            unsigned long brps1:8;
+> +            unsigned long wrps1:8;
+> +            unsigned long ctx_cmps1:8;
+> +            unsigned long spmu:4;
+> +            unsigned long pmicntr:4;
+> +            unsigned long able:4;
+> +            unsigned long ite:4;
+> +            unsigned long ebep:4;
+> +            unsigned long dpfzs:4;
+> +            unsigned long abl_cmps:8;
+>          };
+>      } dbg64;
+>  
+> @@ -408,7 +420,7 @@ struct cpuinfo_arm {
+>          };
+>      } pfr32;
+>  
+> -    union {
+> +    union cpuinfo_dbg32 {
+>          register_t bits[2];
+>          struct {
+>              /* DFR0 */
+> @@ -426,7 +438,8 @@ struct cpuinfo_arm {
+>  
+>              /* DFR1 */
+>              unsigned long mtpmu:4;
+> -            unsigned long __res1:28;
+> +            unsigned long hpmn0:4;
+> +            unsigned long __res1:24;
+>  #ifdef CONFIG_ARM_64
+>              unsigned long __res2:32;
+>  #endif
+> diff --git a/xen/arch/arm/vcpreg.c b/xen/arch/arm/vcpreg.c
+> index 3205c7df46..a660cb0734 100644
+> --- a/xen/arch/arm/vcpreg.c
+> +++ b/xen/arch/arm/vcpreg.c
+> @@ -305,6 +305,7 @@ void do_cp15_32(struct cpu_user_regs *regs, const union hsr hsr)
+>      case HSR_CPREG32(PMXEVTYPER):
+>      case HSR_CPREG32(PMXEVCNTR):
+>      case HSR_CPREG32(PMOVSSET):
+> +    case HSR_CPREG32(PMMIR):
+PMMIR is EL1 only, so it does not belong to this block and this comment. Place
+it next to PMINTENCLR.
+
+>          /*
+>           * Accessible at EL0 only if PMUSERENR_EL0.EN is set. We
+>           * emulate that register as 0 above.
+> @@ -320,8 +321,36 @@ void do_cp15_32(struct cpu_user_regs *regs, const union hsr hsr)
+>      GENERATE_TID3_INFO(ID_PFR0, pfr32, 0)
+>      GENERATE_TID3_INFO(ID_PFR1, pfr32, 1)
+>      GENERATE_TID3_INFO(ID_PFR2, pfr32, 2)
+> -    GENERATE_TID3_INFO(ID_DFR0, dbg32, 0)
+> -    GENERATE_TID3_INFO(ID_DFR1, dbg32, 1)
+> +
+> +    case HSR_CPREG32(ID_DFR0):
+> +    {
+> +        struct domain *d = v->domain;
+> +        union cpuinfo_dbg32 info_dbg32 = domain_cpuinfo.dbg32;
+> +
+> +        if ( !is_vpmu_domain(d) )
+> +        {
+> +            info_dbg32.perfmon = 0;
+> +        }
+> +
+> +        return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
+This breaks the arm32 build (you should always at least build test the patches):
+s/hsr.sysreg.read/cp32.read/
+
+> +                                  info_dbg32.bits[0]);
+> +    }
+> +
+> +    case HSR_CPREG32(ID_DFR1):
+> +    {
+> +        struct domain *d = v->domain;
+> +        union cpuinfo_dbg32 info_dbg32 = domain_cpuinfo.dbg32;
+> +
+> +        if ( !is_vpmu_domain(d) )
+> +        {
+> +            info_dbg32.mtpmu = 0;
+> +            info_dbg32.hpmn0 = 0;
+> +        }
+> +
+> +        return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
+> +                                  info_dbg32.bits[1]);
+> +    }
+> +
+>      GENERATE_TID3_INFO(ID_AFR0, aux32, 0)
+>      GENERATE_TID3_INFO(ID_MMFR0, mm32, 0)
+>      GENERATE_TID3_INFO(ID_MMFR1, mm32, 1)
+> diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+> index eef10c2ea2..e352e2b38e 100644
+> --- a/xen/include/xen/sched.h
+> +++ b/xen/include/xen/sched.h
+> @@ -1269,6 +1269,11 @@ static always_inline bool is_iommu_enabled(const struct domain *d)
+>      return evaluate_nospec(d->options & XEN_DOMCTL_CDF_iommu);
+>  }
+>  
+> +static inline bool is_vpmu_domain(const struct domain *d)
+> +{
+> +    return d->options & XEN_DOMCTL_CDF_vpmu;
+> +}
+> +
+>  #ifdef CONFIG_MEM_PAGING
+>  # define mem_paging_enabled(d) vm_event_check_ring((d)->vm_event_paging)
+>  #else
+
+~Michal
+
 
