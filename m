@@ -4,52 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E973C5DF94
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2026 14:45:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1398898.1635149 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ED35C5DF94
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2026 15:28:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1398908.1635156 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wyVvG-0001z2-CI; Mon, 24 Aug 2026 14:45:14 +0000
+	id 1wyWb4-0008Oq-GW; Mon, 24 Aug 2026 15:28:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1398898.1635149; Mon, 24 Aug 2026 14:45:14 +0000
+Received: by outflank-mailman (output) from mailman id 1398908.1635156; Mon, 24 Aug 2026 15:28:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wyVvG-0001yv-8c; Mon, 24 Aug 2026 14:45:14 +0000
-Received: by outflank-mailman (input) for mailman id 1398898;
- Mon, 24 Aug 2026 14:45:12 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wyWb4-0008Oj-DW; Mon, 24 Aug 2026 15:28:26 +0000
+Received: by outflank-mailman (input) for mailman id 1398908;
+ Mon, 24 Aug 2026 15:28:25 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <berrange@redhat.com>) id 1wyVvE-0001xk-En
- for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 14:45:12 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wyWb3-0008Od-O7
+ for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 15:28:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wyVvD-00CbXe-Dv
- for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 16:45:11 +0200
+ id 1wyWb1-00FByX-IF
+ for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 17:28:23 +0200
 Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <berrange@redhat.com>)
- id 6a8c58f5-8faa-0a2a0a5109dd-0a2a4501a056-10
- for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 16:45:11 +0200
-Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a8c6314-bab6-0a2a0a5309dd-0a2a4501b990-6
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 17:28:23 +0200
+Received: from [209.85.208.41] (helo=mail-ed1-f41.google.com)
  by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <berrange@redhat.com>)
- id 6a8c58f6-5984-0a2a45010019-aa0a857cebe9-3
- for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 16:45:10 +0200
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-634-0lVCBpGIPpa5qIn8mlZKmw-1; Mon,
- 24 Aug 2026 10:45:06 -0400
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 9C75018608D3; Mon, 24 Aug 2026 14:44:59 +0000 (UTC)
-Received: from redhat.com (headnet05.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.117])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 6758230002EF; Mon, 24 Aug 2026 14:44:52 +0000 (UTC)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a8c6317-5984-0a2a45010019-d155d029c8a8-3
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 17:28:23 +0200
+Received: by mail-ed1-f41.google.com with SMTP id
+ 4fb4d7f45d1cf-69f7fa1c548so6630281a12.2
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 08:28:23 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6a59e1ae4efsm8417898a12.21.2026.08.24.08.28.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 24 Aug 2026 08:28:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,161 +53,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1787582709;
-	h=from:from:reply-to:reply-to:subject:subject:date:date:
-	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
-	 content-type:content-type:in-reply-to:in-reply-to:  references:references;
-	bh=EPOW8a1Tm5zdmBXLIQzgCEl2lsjK7trOWqEpSuUEMD8=;
-	b=Q3fqVUoe9mllwv/6i4NVdPhiuN1ACpLFUBe5CuQORE0Yn5TXZeilPzIbZI7FdB8aistIkk
-	7iNY3+h9gn3REznpfI/kCMbJPwbpHCTD5xfgio241vPoUCHyuW0cijMVl1KExBuv+KXKhd
-	mMey5d7wPd33SthgtB6VyWb0SPyStVI=
-X-MC-Unique: 0lVCBpGIPpa5qIn8mlZKmw-1
-X-Mimecast-MFC-AGG-ID: 0lVCBpGIPpa5qIn8mlZKmw_1787582700
-Date: Mon, 24 Aug 2026 15:44:49 +0100
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Dongli Zhang <dongli.zhang@oracle.com>
-Cc: qemu-devel@nongnu.org, qemu-s390x@nongnu.org,
-	xen-devel@lists.xenproject.org, dave@treblig.org, mst@redhat.com,
-	imammedo@redhat.com, anisinha@redhat.com, philmd@mailo.com,
-	aurelien@aurel32.net, mjrosato@linux.ibm.com, alifm@linux.ibm.com,
-	farman@linux.ibm.com, richard.henderson@linaro.org,
-	iii@linux.ibm.com, david@kernel.org, pasic@linux.ibm.com,
-	borntraeger@linux.ibm.com, cohuck@redhat.com, alex@shazbot.org,
-	clg@redhat.com, akrowiak@linux.ibm.com, jjherne@linux.ibm.com,
-	sstabellini@kernel.org, anthony@xenproject.org,
-	edgar.iglesias@gmail.com, pbonzini@redhat.com, eblake@redhat.com,
-	armbru@redhat.com, joe.jin@oracle.com
-Subject: Re: [PATCH 0/8] Force detach PCI devices for ACPI-based and PCIe
- native hot-unplug
-Message-ID: <aoxY4Rxst2qAyn5z@redhat.com>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-References: <20260824011420.752806-1-dongli.zhang@oracle.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1787585303; x=1788190103; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=C0w//u/qJWr+kuDQy+jVRr5v515n51WvczSsO9LbPJw=;
+        b=DHDH3+U7RWNAxFUAgynLd5UgZorxleEdfAfr1T/nL5ANOotDYxlW08E7uyyEj4eKGK
+         Bznigh9IOUz0nLbY3sOKM45gg/iPlOkXiUsH2EqCnjFmSGcGyuTB2gaYS6Y0egrqfBQl
+         YGb+q5uE6j1b84hPqCwmQstX4sEOiuMvBWqocz6y8IxyoOflMihsLZ1CL4/yuUHdK+Uh
+         CPjfrJWYLoZd8Cz0tjkojJeUSl2Bhk9weDXZM0bl327SXZnDJ9v2XtFFIjYYpQMXYoWP
+         GD/ELijr4TyprqfgdUGSYyy4PXDggF4b7BVYZ09AtGOFkmfv9fMbJXZJHxa5/+iC32mt
+         HCYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787585303; x=1788190103;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=C0w//u/qJWr+kuDQy+jVRr5v515n51WvczSsO9LbPJw=;
+        b=IykM546whR43Ad86PPCodw89um/N5uQ/iKE+0TuTQvCWxy+FTOFL2b7Dy3YFTxJLgy
+         Eq5u1yYSSGnU4PVE+ZpxzUWqSBV/fcr466H3E0FLM/QL0VD17WFEd8lVGc6WQmUUJo/r
+         qVkmXoN7gkeN2l/3n8kxTBPvPGN3Etz4FsgXLoRRoNbLDe7jpebehJs5hrat/IMaPCso
+         Km2IdDEVuwzztGpWYMILuWj9knvBZ+XfTeDKZxwKYtrywouag/LMINE2AB0/3N4yy7li
+         1E1hOKknq2Y6jrlxfivkgjkynkPoz3v/Vs4dhi9dnJ6/NQWvDzz6OoEgxVvCyeW2ggpv
+         JZcQ==
+X-Gm-Message-State: AFuF++m/gWByXzE+ta00/speijflwDwZ5u9Hny/FGYVpKOSpjC/sa16l
+	pm52afz0etZGRGkRRHr7im5J8g+oUHQ5puSSAFl2MsdjNT9OlNtIp49pbGbXAOQD2vGoy+gAxuP
+	ZmuhzCg==
+X-Gm-Gg: AR+sD10hryEWSywnvwJxVDmRm93iAQixnHnL4wJlA6Pk8jurbbYkYv548uiet7PrR1j
+	6r+lzn2PW1XWiFQuO2E9p4fe74S9DKkmW/3jVDaY3JJYCEoM/OyEwGgZzCTjEsoehQAvXk2TJCW
+	8pW7JPap5LT7G4IBLFuSGQ91gpYHy5DnvmHBSQ42Ojez080twd05IzsNSJcVu2tdoNgmXyPPynI
+	mALG3O4vzfWozRSCro6Rf6ScVAXMEWg2Q4VLviH36O32M832HwUY1xik7GbzUr8U4FLdt1M44cs
+	8B9D+2bP5v3Lr39Q77SEdQnLcyxRgcIU8rfdYw5f+XOacjXZsh2XHzOzrikuY7mPo5gufNCYa0E
+	TMfF0qZpasLrR6coI6LLNOiVqaQzqdQ8ZY1MfRe3E2He4fk67n2vYvvX+oDh5wKWz8GzE8kxZZu
+	S5iMcAVuztKbRRSwx+C4nXXIW7RjOOjZKKij7eBBtnN5UwCX4N8JZod9k5Hk85l3Xo+blBkYX7f
+	S8+SdsafNkFBmMuE/IJHJvM1w1nmMzn7grrU3wMJDdnttyExjsT
+X-Received: by 2002:a05:6402:1ecb:b0:6a3:f74d:6a47 with SMTP id 4fb4d7f45d1cf-6a582987b8emr19723865a12.0.1787585302987;
+        Mon, 24 Aug 2026 08:28:22 -0700 (PDT)
+Message-ID: <82707437-c95d-43f2-8c3c-f9038288876a@suse.com>
+Date: Mon, 24 Aug 2026 17:28:21 +0200
 MIME-Version: 1.0
-In-Reply-To: <20260824011420.752806-1-dongli.zhang@oracle.com>
-User-Agent: Mutt/2.4.0 (2026-06-19)
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: cl8Le9jqAnXR1Rmnr1zvpPL4DK9sh8MbAMlh2DiJvOo_1787582700
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-X-purgate-ID: tlsNG-d62444/1787582711-BE27A757-B8F3E1D9/0/0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH] symbols: also special-case symbols aliasing _sinittext
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d62444/1787585303-1E07B757-3FEEF735/0/0
 X-purgate-type: clean
-X-purgate-size: 5160
+X-purgate-size: 1247
 
-On Sun, Aug 23, 2026 at 06:13:30PM -0700, Dongli Zhang wrote:
-> Hot-unplugging a PCI device can require cooperation from the guest. For
-> ACPI PCI hotplug, QEMU notifies the guest through ACPI and the guest
-> eventually writes the ACPI PCI eject register. For PCIe native hotplug,
-> QEMU notifies the guest through the PCIe hotplug mechanism and waits for
-> the slot unplug flow to complete. Only after that completion does QEMU
-> unrealize the device and emit DEVICE_DELETED.
-> 
-> This can leave a device stuck in the unplug pending state when the guest
-> does not cooperate. Examples include:
-> 
-> 1. The guest has panicked, or the relevant ACPI/PCI hotplug driver is
-> unavailable.
-> 
-> 2. The guest is stalled and cannot handle the hot-unplug event. For
-> example, stalling the Linux [irq/9-acpi] kernel thread can reproduce this
-> for ACPI-based hot-unplug.
-> 
-> 3. The device was attached to a slot that the guest cannot use. For
-> example, a pcie-root-port only supports slot 0. If a device is added to a
-> non-zero slot below a pcie-root-port, the guest may never discover the
-> device and therefore may never complete the unplug request.
-> 
-> The non-zero slot case has also been discussed in:
-> 
-> hw/pci: warn when PCIe device is plugged into non-zero slot of downstream port
-> https://gitlab.com/qemu-project/qemu/-/commit/ca92eb5defcf9d1c2106341744a73a03cf26e824
-> 
-> hw/pci: add comment to explain checking for available function 0 in pci hotplug
-> https://gitlab.com/qemu-project/qemu/-/commit/67d045a0ef5b9c5f871c3a1d87325a8a42d2b9d5
-> 
-> pci: don't skip function 0 occupancy verification for devfn auto assign
-> https://gitlab.com/qemu-project/qemu/-/commit/e228d62b4af29bca698ec57efdceb46f392f5444
-> 
-> For example, if root-port.1 is a pcie-root-port, the following command adds
-> a vhost-scsi-pci device to an invalid slot:
-> 
-> (qemu) device_add vhost-scsi-pci,id=scsi01,wwpn=naa.5001405324af0985,bus=root-port.1,addr=01.0
-> warning: PCI: slot 1 is not valid for vhost-scsi-pci, parent device only allows plugging into slot 0.
+A recent 4.22 randconfig build job hit a situation where (LIVEPATCH=n,
+i.e. --all-symbols not specified) both __note_gnu_build_id_end and
+_erodata aliased _sinittext on the 1st linking pass, but they didn't on
+the 2nd one. As a result two fewer symbols were emitted on the 2nd pass,
+causing $(call compare-symbol-tables, ...) to fail.
 
-This rather looks like it should be a fatal error, not a mere warning.
+Extend the existing "corner case" by also considering aliases with these
+two symbols (_stext really shouldn't have anything ahead of it), but
+discard only non-text symbols.
 
-If I follow the commit ca92eb5def it links to https://bugzilla.redhat.com/show_bug.cgi?id=2128929
-which states that this configuration is going to lead to a crash in
-QEMU on guest OS shutdown. IMHO that crash is sufficient to justify
-making this a fatal error.
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-If we actually wanted this to remain a warning, then that shutdown
-crash would need to be fixed.
-
-> 
-> In this situation, the device may be impossible to remove through normal
-> guest-cooperative hot-unplug. Production environments also need a host side
-> recovery option when the guest kernel is the reason that unplug does not
-> complete.
-> 
-> This series adds a force option to QMP device_del and HMP device_del. When
-> requested, QEMU asks the selected hotplug controller to complete the unplug
-> through a new force_unplug callback.
-> 
-> This series implements forced unplug for ACPI PCI hotplug and PCIe native
-> hotplug, which cover common pc/q35/virt cases. SHPC is not implemented by
-> this series.
-> 
-> 
-> Dongli Zhang (8):
->   qdev: Add force argument to qdev_unplug
->   qdev: hotplug: Add force_unplug handler callback
->   qdev: Support forced device_del in QMP and HMP
->   hw/acpi/pcihp: acpi/pcihp: Add forced slot unplug helper
->   hw/acpi/piix4: Support forced PCI unplug
->   hw/acpi/ich9: Support forced PCI unplug
->   hw/acpi/ged: Support forced PCI unplug
->   hw/pci/pcie: Support forced PCIe native unplug
-> 
->  hmp-commands.hx                 | 11 ++++++-----
->  hw/acpi/acpi-pci-hotplug-stub.c |  6 ++++++
->  hw/acpi/generic_event_device.c  | 15 +++++++++++++++
->  hw/acpi/ich9.c                  | 15 +++++++++++++++
->  hw/acpi/pcihp.c                 | 17 +++++++++++++++++
->  hw/acpi/piix4.c                 | 15 +++++++++++++++
->  hw/core/hotplug.c               | 11 +++++++++++
->  hw/isa/lpc_ich9.c               |  1 +
->  hw/pci/pcie.c                   | 20 ++++++++++++++++++++
->  hw/pci/pcie_port.c              |  1 +
->  hw/s390x/s390-pci-bus.c         |  4 ++--
->  hw/vfio/ap.c                    |  2 +-
->  hw/vfio/ccw.c                   |  2 +-
->  hw/vfio/pci.c                   |  2 +-
->  hw/xen/xen-legacy-backend.c     |  2 +-
->  hw/xen/xen_pvdev.c              |  2 +-
->  include/hw/acpi/ich9.h          |  2 ++
->  include/hw/acpi/pcihp.h         |  3 +++
->  include/hw/core/hotplug.h       | 12 ++++++++++++
->  include/hw/core/qdev.h          |  2 +-
->  include/hw/pci/pcie.h           |  2 ++
->  qapi/qdev.json                  | 11 +++++++++--
->  system/qdev-monitor.c           | 23 +++++++++++++++++------
->  23 files changed, 160 insertions(+), 21 deletions(-)
-> 
-> base-commit: eea8fe61b8be8f3016e522e6af24924a0266ca95
-> 
-> Thank you very much!
-> 
-> Dongli Zhang
-> 
-
-With regards,
-Daniel
--- 
-|: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
-|: https://libvirt.org          ~~          https://entangle-photo.org :|
-|: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
-
+--- a/xen/tools/symbols.c
++++ b/xen/tools/symbols.c
+@@ -223,6 +223,13 @@ static int symbol_valid(struct sym_entry
+ 		    (s->addr == _einittext && strcmp((char*)s->sym + offset, "_einittext")) ||
+ 		    (s->addr == _eextratext && strcmp((char*)s->sym + offset, "_eextratext")))
+ 			return 0;
++		/* Same for non-text aliases of _sinittext or _sextratext. */
++		if (toupper(*s->sym) != 'T'
++		    && ((s->addr == _sinittext
++		         && strcmp((char *)s->sym + offset, "_sinittext"))
++		        || (s->addr == _sextratext
++		            && strcmp((char *)s->sym + offset, "_sextratext"))))
++			return 0;
+ 	}
+ 
+ 	/* Exclude symbols which vary between passes. */
 
