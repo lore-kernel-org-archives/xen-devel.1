@@ -4,62 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53F2BC5DF94
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2026 08:32:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1398727.1634862 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 676B9C5DF81
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2026 09:02:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1398737.1634870 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wyQ6Y-0006NU-2v; Mon, 24 Aug 2026 08:32:30 +0000
+	id 1wyQZH-000264-9l; Mon, 24 Aug 2026 09:02:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1398727.1634862; Mon, 24 Aug 2026 08:32:30 +0000
+Received: by outflank-mailman (output) from mailman id 1398737.1634870; Mon, 24 Aug 2026 09:02:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wyQ6Y-0006NN-0F; Mon, 24 Aug 2026 08:32:30 +0000
-Received: by outflank-mailman (input) for mailman id 1398727;
- Mon, 24 Aug 2026 08:32:27 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wyQZH-00025x-6t; Mon, 24 Aug 2026 09:02:11 +0000
+Received: by outflank-mailman (input) for mailman id 1398737;
+ Mon, 24 Aug 2026 09:02:10 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1wyQ6V-0006NH-JZ
- for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 08:32:27 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wyQZG-00025r-4L
+ for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 09:02:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wyQ6U-009yh5-I9
- for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 10:32:26 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wyQZD-001Epp-SN
+ for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 11:02:07 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a8c018c-8faa-0a2a0a5109dd-0a2a4503d2e4-40
- for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 10:32:26 +0200
-Received: from [40.93.195.68]
- (helo=SN4PR2101CU001.outbound.protection.outlook.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a8c0197-fae8-0a2a45030019-285dc3446c73-3
- for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 10:32:25 +0200
-Received: from MW4PR03CA0230.namprd03.prod.outlook.com (2603:10b6:303:b9::25)
- by PH7PR12MB7116.namprd12.prod.outlook.com (2603:10b6:510:1ef::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Mon, 24 Aug
- 2026 08:32:15 +0000
-Received: from CO1PEPF000075F0.namprd03.prod.outlook.com
- (2603:10b6:303:b9:cafe::13) by MW4PR03CA0230.outlook.office365.com
- (2603:10b6:303:b9::25) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.12 via Frontend Transport; Mon,
- 24 Aug 2026 08:32:15 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- CO1PEPF000075F0.mail.protection.outlook.com (10.167.249.39) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.360.3 via Frontend Transport; Mon, 24 Aug 2026 08:32:14 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 24 Aug
- 2026 03:32:13 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 24 Aug
- 2026 03:32:07 -0500
-Received: from [10.252.145.116] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.45 via Frontend
- Transport; Mon, 24 Aug 2026 03:32:05 -0500
+ (envelope-from <jbeulich@suse.com>)
+ id 6a8c088e-bab6-0a2a0a5309dd-0a2a4502cf2c-2
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 11:02:07 +0200
+Received: from [209.85.208.53] (helo=mail-ed1-f53.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a8c088f-6ca4-0a2a45020019-d155d035a957-3
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 11:02:07 +0200
+Received: by mail-ed1-f53.google.com with SMTP id
+ 4fb4d7f45d1cf-6a156627e22so7638100a12.1
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 02:02:07 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c249606b5aasm1154638666b.4.2026.08.24.02.02.04
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 24 Aug 2026 02:02:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,444 +53,322 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RWi1OV5B5b6GMqyGJJUp4MK+pMuLh2kc2lJOnB5iEbDd9lxShiqcWuhtpji9R0t/iVAFXWvk2lgtdHsbxjJHIhve52+PxkfsN0su6VgWGEgZ+uQvmQ3wdpM7pCq0VfIjNfNKW7U/WZcRwUynblnqjoOSLVJxEP7m9th7OPJJxdFYPeAqah/L/8w5j89r7gzHy7CG65+eEv8NMLJYlsesnSjB2fUFM1hy1NEjXirPZaY9+RLryQrMnoQ/VRsRaXOimrHwDTqmEH7066Li7vLzhPunbxt2+0Ka/0ce/HfeuFwbgxpo5TARJdOGCsm/Lxn3gm2yUnufJ/pn/gDr38voDg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rXv1eM1QauodCGZrPbnY9WZ44vQeU7Ima24VUPC+cDQ=;
- b=NCSVraOmpUcjb3jU2yg0aEktxs+5cbKflEb17yRgWK32ibwMDbe5kSZabi5WCKkLteJ1k4dBEwFztGns+MHuzoN4sxV6LQcCyzYdq3/ZEEMgJXEVjvdr27GxO0HTKRHs+CiBn4mNZv5VLecWBWoXTOPnCBaVQXD32THM7qpTMbVn8CvBHJ9Hts4+RN2FZMANl64i2t9I/oIN6q6zJV7qr7vKmQYtXhp4GyUrrtY6vfF1F5qHwbCTwwejBTk5kVRIGQu8wr9+aGYLLRcg+kLGCD8LYK84NuwL8PndT84CEXO86G0p4yysBaKHS6UsqERItX4beQaUIroS91QQGc5n9Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=valinux.co.jp smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rXv1eM1QauodCGZrPbnY9WZ44vQeU7Ima24VUPC+cDQ=;
- b=Q5L1X1ou+moqfb/wbhekeADMYSnCbI1QyMwNFvdCMIttIsgvaqz+ZkHe/Fs2KwzNd7XplxDK05r/xzSxmAo706QalMqq2xjkzWTlGgmkenANAU1mmzFSUsinLTrKG2pVEBPVlOn3ns/GCoKbShuisR+f74Co8RgKjwxWFHAevNo=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <e6edf3f8-5085-4b5b-acdb-ac17402e86ee@amd.com>
-Date: Mon, 24 Aug 2026 10:32:04 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1787562127; x=1788166927; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=WsNyoIyXX9pw8H/0gpGeZi5E86BAgz2aWVDaotX6wYs=;
+        b=XarqSKgLfKI26SVijESk7nMQEoEzrYPdIlsS4y5/e8FhDB8Xt6AE18quS66oEz2DP8
+         cTWoZVAb+cABM7Sk2pGPmriEMVfmGeA4xejjLUt9aH6RWf9yqlI5Hn8IIPFFlDKEbXFC
+         4zV5ScxtgkQ6y20UWm9PKPE7S/fA4GiCQdAvhAOlL8V8WhJjT2SU20IYexCyegO+TmA9
+         XBbhFmAXZz56cSkGxxVNcYp4OaeumYY1kWTBT6VGXMT+4PmZKwH1u+ipQUJ6Y/WSI/Ku
+         tz7ifR6SfBP2snMWEhHpxMTV5M+hwBEc4xbIbsgFi2ta5PF95CHi0zxeXsIAnpXf3OIF
+         BzAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787562127; x=1788166927;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=WsNyoIyXX9pw8H/0gpGeZi5E86BAgz2aWVDaotX6wYs=;
+        b=KORmqhf9zMutK1bDTqi4HeibTDDDqkxulvG2tk2GfoGZYJ/ap8jubM8saw6CdBdTas
+         1j1B1yXQ0VoTyJ2jGeaMRugrdHDETFvBiVspdS4GogHqPLaYQdwtIjMLnyALls4N6rTE
+         xPLuVALgLxhdwQE200Z3HFEmzoFBjIvI1s8zsjLPHMx1F3l95IueFMwLgHdnBTSHRPT+
+         +8/jeQIFllIV2yvUMLn+rMSrJ5D2Yzsf3wOeY/K2+cnZriCHagTMYk6+CpWxym8h71fp
+         fLUjiBaEg4HIkwXKxfZOdgOCdH8Z0eVed+VJybb/yKBcyDezymCvz7sUfsLU+8FKy1V0
+         di0Q==
+X-Forwarded-Encrypted: i=1; AHgh+RopF4s8rR4Lqy7NajfCs2O8A/U8UXcq7kLN46MW0X/C5fDrRtpgjLsK+ktZKurk++hB02YAqS5i4vc=@lists.xenproject.org
+X-Gm-Message-State: AFuF++laVkrPXm1yzpmyYZRCmepqJvygWJYQ4mHPkOwQ9sv1+xYVVwHM
+	XWQ6HqwFMLzvGWb5qHx6UsxaVZw1m5RuXjr4yviODzXJcWOJxc1Ge2WKZjprw/GJMg==
+X-Gm-Gg: AR+sD10xiPEwXegl0a93LfeNa5x2GfzgZ4PKKwdYLjNs+QSD/9gEDMrIe5JpZzn3I0o
+	rO0Atr3IPJFsD87adDYH78JMmm4pBB5DwoUoD6zT1ip7VAcEGHaIZMMDaeynvFeBB0c3jGmaUai
+	hZG+kQKOUvajGxRBIEFiknV22wsuPITEVD0Lwk9NfPWv/7Pmp6Qahx/vG614fHHk2+bAoR7T77B
+	SGYAanNLTbAlr3TJFjC+p+f+cql1RWfVaYpTv33fxDyHEBeoVmObdrHOQh3lF+sXYkryRlcJzBN
+	LK4TNneLj7gYHq30B3ZprazfXR+cq++4AnmGLnn5EcURHhDtNMVD0r3rY42y33YU8igFdaJuECS
+	CxVex2ysw4aSsAuz9tUDZcve5Y/ch1dJXXvhUKUrLp9O3wLtEcGrGlie/n7ItgSAPsXw47coMub
+	v/Cku66mxp4CJo/ots3oDsP64SXEAP+WbMUtSSSDx4f/uL7DhaxcKY3wcUuBniArZYNy42tBYxC
+	R/lhAK9Ks6F3L3U4S3/L2nqDYtadNFBSUlWWehzJ4ZR8y+ZiNXn
+X-Received: by 2002:a17:907:e1c6:10b0:c24:d6f0:aa0 with SMTP id a640c23a62f3a-c24d6f07ce6mr137547866b.11.1787562125670;
+        Mon, 24 Aug 2026 02:02:05 -0700 (PDT)
+Message-ID: <044095b7-3c8d-40da-9d21-281c522a49ae@suse.com>
+Date: Mon, 24 Aug 2026 11:02:03 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] xen/arm: Hide PMU registers from the guest, when the
- vPMU feature is disabled.
-To: Hirokazu Takahashi <taka@valinux.co.jp>, <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, "Jan
- Beulich" <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
-	<roger@xenproject.org>
-References: <20260824044530.301938-1-taka@valinux.co.jp>
-From: "Orzel, Michal" <michal.orzel@amd.com>
+Subject: Re: [PATCH 0/7] x86: Address Space Isolation, part 1: per-domain area
+ mapping rework
+To: George Dunlap <gwd@xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20260820-asi-part1-0-f2dbd92b8459@xenproject.org>
+ <ec040560-4377-474d-a929-3080b74bb0af@suse.com>
+ <CAFLBxZbQD7HgdYK3-yzaMOt4P2geO2PSOSDi4-c3KHZ96DDifg@mail.gmail.com>
 Content-Language: en-US
-In-Reply-To: <20260824044530.301938-1-taka@valinux.co.jp>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000075F0:EE_|PH7PR12MB7116:EE_
-X-MS-Office365-Filtering-Correlation-Id: 00cf9173-cdf8-4dd7-f566-08df01ba3371
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|82310400026|36860700016|23010399003|7416014|376014|56012099006|10067099003|11063799006|6133799003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	oOHUi+jRIadxIEkGqsV1NalaV0rd3I2BcV0iSUptn3y+zkB1dLz+YxwrzouK7QHrjkrDfApquYodGkFvC+MnOUe4s8ER+mqW0gvrpjKxrPWJHMx7NBkESFz2SmUU7wJnOUSBMZxQx+DX8jyrObB0CvHKchBz0qb1tfIJXLrDjKiF8rt/4MTlfUgXcxcdMZjOuWOgb8nQ1ZUrfsY8LoDjFSu9k5PGHC+3g4MbBwl4aB4Samu4Hz7V3jr3ad28A4ovA6DvwxGkjTIGDeCu0/++PtI28mJCiTQHQkd5XVMpZ48j73WAtow63frvANdGBfT7lTRAKeYz+UA7r0reA1fT9XZyBwIVmBHOhujiIJ2bw2y84IO6tzVRXHzkLUzKK/2+SlcLQH2Pq8/ldhyVW8+HAioyPKUmHXD0Zd5jKMCE7bu15i/FT8tGWcZB3COqVwhrMucjulNuHJt+P1VAmSPlJvRzL7pITfxGdLfp50wGGShrJq6E4vhzaukXtggBa8+q4nCcij++IYyzVqlQ+sWb0HOG+t4I5WzZQ2iHH5KNqsD1gvF1hZ8SnnMI27luVDFd9FJe/ISAWYBpwHt5WJ5vaHmy8+AcVaLVP6RD2mdskU/nI0YYQ7QMS6zvXm8IsemXfeLRXouwBB5z4T+OG0URLeK/oetcPGVrYXFvoRQG/wMD45S8pfXRaCqgISngLJqiyVsNj0FR1XrdvECE8hAOYw==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700016)(23010399003)(7416014)(376014)(56012099006)(10067099003)(11063799006)(6133799003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	Tv4C2vpFe1ri8afLd/F85PRdba1vPW2cV34hqnaozsjQBnKBprpVEV5LuQiUQNT9T9cZ7GyUCQWXFutTdvrlFsRPu67DyJdQ5fmK73HGVTrqXEpa3mH+xCrXGU/L2ZXIy4u3tJBrTPbjVG2+Qw77iTZKKkGWEcD1TNSi6D6MhDNnkA9oSf04N2J2depOxh5I4KT8rj7q3STrWAz9H/hhdRQjbO0ng4ul6hVKzjL6OMbd+dDqBkwTBmElp/QZhwkhc/sFhTKpgzfajAQZLp26gCggPpY1D3A1GE0zkovNp8u7AqNdZVeB7nIrklnaQuRakwdmtrRhUFWal9Dpu0g7/BeBVD5FfNmuesoIkgJUmpwD52EdZX7GeuoDBHVqqOKPUffSIXXy2z3EHvvjXp0qTBAIt9du6phtAblXJRAzFGTygTW0gKnoJgeChbR35bmO
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2026 08:32:14.7697
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 00cf9173-cdf8-4dd7-f566-08df01ba3371
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CO1PEPF000075F0.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7116
-X-purgate-ID: tlsNG-33051d/1787560345-772F54E9-02004E2F/0/0
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <CAFLBxZbQD7HgdYK3-yzaMOt4P2geO2PSOSDi4-c3KHZ96DDifg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-720697/1787562127-319CB2AC-00DA5CA0/0/0
 X-purgate-type: clean
-X-purgate-size: 14154
+X-purgate-size: 12000
 
-
-
-On 24-Aug-26 06:45, Hirokazu Takahashi wrote:
-> On ARMv8.4-A and newer platforms, booting Dom0 Linux with ACPI enabled
-> causes the domain to probe advanced PMU feature based on system ID
-> register ID_AA64DFR0_EL1. During this probe, Linux accesses PMMIR_EL1,
-> which causes unhandled register traps and crashes the domain.
+On 21.08.2026 17:17, George Dunlap wrote:
+> On Fri, Aug 21, 2026 at 9:45 AM Jan Beulich <jbeulich@suse.com> wrote:
+>> On 20.08.2026 19:43, George Dunlap wrote:
+>>> One point reviewers may want to look at specifically: patch 1 changes
+>>> where the per-domain page-tables are allocated from, and its commit
+>>> message discusses the (minor) NUMA-placement consequence.
+>>
+>> While I don't recall which recent patch (series) it was, I can't very well
+>> say "no new xenheap allocations please" there without also saying so here.
+>> I've read over patch 1's description, and while it tries to justify this
+>> accordingly, I still remain concerned. I think we simply have to accept
+>> the mapping overhead, to avoid allocating from a pool which - over time -
+>> is representing a decreasing portion of total memory systems have (on
+>> average, and not even considering systems with extremely sparse memory
+>> layouts, and with perhaps PDX compression not doing good enough to
+>> compensate).
 > 
-> To address this issue, implement the following:
+> You should certainly have the same resistance to adding new xenheap
+> allocations.  But looking at the numbers, I don't see that we're
+> anywhere near the point where we say, "Absolutely no new xenheap
+> allocations, regardless of the cost."
+
+Well, that depends, and in part on the longer term plans with ASI. It has
+been my (silent) assumption that eventually the directmap would go away
+altogether when ASI is in use, with the VA space freed (almost?) all
+becoming available for vmap(). With the disappearance of directmap, the
+xenheap would naturally disappear as well. Hence putting stuff there in
+new work actually adds to our technical debt.
+
+>  domheap+vmap looks like it was
+> cheap and easy alternative for Teddy, but the alternatives here
+> aren't, compared to the cost of extra xenheap allocations.
 > 
-> - Add emulation for ID_AA64DFR{0,1}_EL1, ID_DFR{0,1}_EL1 and
->   ID_DFR{0,1} register accesses for guest domains.
-> - Hide PMU registers from a guest domain when its vPMU feature is
->   disabled.
-> - Proactively make SPE, TRBE, BRBE, Trace Extensions and ITE
->   inaccessible to arm64 guest domains and hide TraceFilt, MMapTrc
->   and CopTrc to arm32 guest domains, as they could potentially cause
->   similar issues.
+> So let's lay everything out.
 > 
-> Fixes: dbb948110a0e ("xen: Expose the PMU to the guests")
-> Fixes: 07b9acea116e ("xen/arm: Add handler for ID registers on arm64")
-> Fixes: 3669a1cb9598 ("xen/arm: create a cpuinfo structure for guest")
-> Signed-off-by: Hirokazu Takahashi <taka@valinux.co.jp>
-> ---
-> Changes in v3:
->  * Mask PMU-related fields in ID_AA64DFR1_EL1 and ID_DFR1 when a guest
->    domain lacks the vPMU feature.
->  * Add emulation for AArch32 PMMIR register accesses performed by
->    32-bit guest domains without the vPMU feature.
->  * Code cleanups.
+> My understanding is that we have the following two issues allocating
+> things in the xenheap on systems larger than 4T:
 > 
-> Note: The combination of AArch32 EL1 and PMUv3 could not be verified,
->       as no real ARM CPU implements both while the Arm Architecture
->       Reference Manual for A-profile architecture allows it.
+> - The total amount of xenheap space is limited to 4 TiB of virtual
+>   address space.  On some systems, this may correspond to 4 TiB of
+>   actual RAM; but on a machine whose RAM layout is sparser, the
+>   actual RAM addressable in this window may be far less
 > 
+> - It's not symmetric NUMA-wise; so the larger the system, the more of
+>   the xenheap will end up being from the same NUMA node.  This will
+>   limit Xen's ability to have NUMA-local data structures, and its
+>   ability to give NUMA-local data to guests running on node 0.
 > 
->  xen/arch/arm/arm64/vsysreg.c          | 74 +++++++++++++++++++++++++--
->  xen/arch/arm/cpufeature.c             | 14 +++++
->  xen/arch/arm/domain.c                 |  2 +-
->  xen/arch/arm/include/asm/arm64/hsr.h  |  1 +
->  xen/arch/arm/include/asm/cpregs.h     |  1 +
->  xen/arch/arm/include/asm/cpufeature.h | 27 +++++++---
->  xen/arch/arm/vcpreg.c                 | 33 +++++++++++-
->  xen/include/xen/sched.h               |  5 ++
->  8 files changed, 143 insertions(+), 14 deletions(-)
+> Looking at this series as a whole, although the first patch adds pages
+> to the xenheap, the end goal of the rest of the work is to remove
+> pages from the xenheap. Things added in:
 > 
-> diff --git a/xen/arch/arm/arm64/vsysreg.c b/xen/arch/arm/arm64/vsysreg.c
-> index d9e3619dfb..1d1f7b0631 100644
-> --- a/xen/arch/arm/arm64/vsysreg.c
-> +++ b/xen/arch/arm/arm64/vsysreg.c
-> @@ -227,6 +227,11 @@ void do_sysreg(struct cpu_user_regs *regs,
->       */
->      case HSR_SYSREG_PMINTENSET_EL1:
->      case HSR_SYSREG_PMINTENCLR_EL1:
-> +    case HSR_SYSREG_PMMIR_EL1:
-> +        /*
-> +         * Accessible from EL1 only, but if EL0 trap happens handle as
-> +         * undef.
-> +         */
-This comment was recently removed, so please do not re-introduce it.
+> - Making the perdomain area per-vCPU, with its pagetables allocated
+>   from the xenheap, adds a per-vCPU L3 plus an L2+L1 pair for each
+>   slot in use.  This totals 5 pages/vCPU for HVM guests and 8 pages/vCPU
+>   for PV guests.
+> 
+>   (Note that the GDT/LDT L1s are already allocated from the xenheap
+>   today, but per-domain rather than per-vCPU.)
+> 
+> Things removed:
+> 
+> - Per-pCPU stacks -- 8 xenheap pages / pCPU
+> 
+> - AMD VMCB - one xenheap page / vCPU
+> 
+> - VMX guest MSR area: 1 page per vCPU
+> 
+> - sub-page XSAVE areas (~2.7 KiB/vCPU of xmalloc pool today; planned
+>   follow-on work aggregating other miscellaneous xmalloc'd guest state
+>   should take this to about a page per vCPU)
+> 
+> To do some math: current security-supported limits for x86 are 4096
+> pCPUs on a 12TiB system.  Suppose we have an 8:1 vCPU:pCPU ratio, and
+> an average of 8 vcpus per domain.  So 32768 total vCPUs and 4096
+> domains.  On a Full ASI system, vcpu-pt on all domains, per-CPU stacks
+> on, all Intel HVM domains, we get numbers like the following:
+> 
+> Added to xenheap:
+> 
+> - Per-vCPU tables, 5/vCPU (L3; mapcache L2+L1; state-window L2+L1):
+>   5 × 32,768 = 163,840 pages = 640 MiB
+> - Per-pCPU stack tables, 2/pCPU: 2 × 4,096 = 8,192 pages = 32 MiB
+>   (→ 0: these are only written at CPU bring-up and tear-down, so we
+>   have already moved them to the domheap in the working branch --
+>   which also makes them NUMA-local unconditionally)
+> - Per-domain tables: replaced by the per-vCPU sets in vcpu-pt mode → 0
+> - Total added: 172,032 pages = 672 MiB
+> 
+> Removed from xenheap:
+> 
+> - Stacks, 8/pCPU: 8 × 4,096 = 32,768 pages = 128 MiB
+> - XSAVE, ~2.7 KiB/vCPU from the xmalloc pools: 32,768 × 2.7 KiB ≈
+>   21,600 pages ≈ 86 MiB (0 if guests get AMX — those areas are domheap
+>   today)
+> - VMX guest MSR page: lazily allocated, typically absent → 0 (upper
+>   bound 128 MiB if every vCPU used one)
+> - Total removed: ≈ 54,400 pages ≈ 214 MiB
+> 
+> Net: +117,600 pages ~ +458 MiB — against a 4 TiB window (0.011%), on
+> a 12 TiB host (0.0036%).
 
->          return handle_raz_wi(regs, regidx, hsr.sysreg.read, hsr, 1);
->      case HSR_SYSREG_PMUSERENR_EL0:
->          /* RO at EL0. RAZ/WI at EL1 */
-> @@ -300,8 +305,36 @@ void do_sysreg(struct cpu_user_regs *regs,
->      GENERATE_TID3_INFO(ID_PFR0_EL1, pfr32, 0)
->      GENERATE_TID3_INFO(ID_PFR1_EL1, pfr32, 1)
->      GENERATE_TID3_INFO(ID_PFR2_EL1, pfr32, 2)
-> -    GENERATE_TID3_INFO(ID_DFR0_EL1, dbg32, 0)
-> -    GENERATE_TID3_INFO(ID_DFR1_EL1, dbg32, 1)
-> +
-> +    case HSR_SYSREG_ID_DFR0_EL1:
-> +    {
-> +        struct domain *d = v->domain;
-There is no need for a separate local variable if it's only used once. In this
-series, please just use `v->domain` for `is_vpmu_domain()`.
+While these percentiles in particular of course look very tiny, they are
+applicable only on systems having no meaningful gaps in the physical
+address map. And even more generally I find all of these calculations
+only partly convincing, not the least because you start out from numbers
+which look pretty contrived when comparing to actual systems which would
+run the new code. (Using more realistic real-system values may end up
+going in favor of what you want to convey, or it may not.)
 
-> +        union cpuinfo_dbg32 info_dbg32 = domain_cpuinfo.dbg32;
-> +
-> +        if ( !is_vpmu_domain(d) )
-> +        {
-Please omit the braces for a single line `if` block.
+> I have explored a number of other options, to various levels of depth.
+> 
+> One is map_domain_page_irqoff(): If the caller promises to keep
+> interrupts disabled until unmap_domain_page_irqoff(), we can safely
+> perform maps in a context switch without having to worry about
+> sync_lazy_execstate.  (This was actually implemented and almost sent
+> on Tuesday evening, when I noticed your review of Roger's v2 saying,
+> "Question is whether it's a good idea in the first place to start
+> using map_domain_page() from the context switch path.  Surely there
+> are possible alternatives.")  This maps all vcpu pages from the
+> domheap, adding nothing to the xenheap *or* the vmap area.  But it
+> costs 9 map/unmap pairs *per context switch*.
 
-> +            info_dbg32.perfmon = 0;
-> +        }
-> +
-> +        return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
-> +                                  info_dbg32.bits[0]);
-> +    }
-> +
-> +    case HSR_SYSREG_ID_DFR1_EL1:
-> +    {
-> +        struct domain *d = v->domain;
-> +        union cpuinfo_dbg32 info_dbg32 = domain_cpuinfo.dbg32;
-> +
-> +        if ( !is_vpmu_domain(d) )
-> +        {
-> +            info_dbg32.mtpmu = 0;
-> +            info_dbg32.hpmn0 = 0;
-> +        }
-> +
-> +        return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
-> +                                  info_dbg32.bits[1]);
-> +    }
-> +
->      GENERATE_TID3_INFO(ID_AFR0_EL1, aux32, 0)
->      GENERATE_TID3_INFO(ID_MMFR0_EL1, mm32, 0)
->      GENERATE_TID3_INFO(ID_MMFR1_EL1, mm32, 1)
-> @@ -342,8 +375,41 @@ void do_sysreg(struct cpu_user_regs *regs,
->      }
->  
->      GENERATE_TID3_INFO(ID_AA64PFR1_EL1, pfr64, 1)
-> -    GENERATE_TID3_INFO(ID_AA64DFR0_EL1, dbg64, 0)
-> -    GENERATE_TID3_INFO(ID_AA64DFR1_EL1, dbg64, 1)
-> +
-> +    case HSR_SYSREG_ID_AA64DFR0_EL1:
-> +    {
-> +        struct domain *d = v->domain;
-> +        union cpuinfo_dbg64 info_dbg64 = domain_cpuinfo.dbg64;
-> +
-> +        if ( !is_vpmu_domain(d) )
-> +        {
-> +            info_dbg64.pmu_ver = 0;
-> +            info_dbg64.pmss = 0;
-> +            info_dbg64.mtpmu = 0;
-Why don't you clear hpmn0?
+But why would not using vmap() be a necessary conclusion of my initial
+comment? All I'm objecting to are new uses of the xenheap.
 
-> +        }
-> +
-> +        return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
-> +                                  info_dbg64.bits[0]);
-> +    }
-> +
-> +    case HSR_SYSREG_ID_AA64DFR1_EL1:
-> +    {
-> +        struct domain *d = v->domain;
-> +        union cpuinfo_dbg64 info_dbg64 = domain_cpuinfo.dbg64;
-> +
-> +        if ( !is_vpmu_domain(d) )
-> +        {
-> +            info_dbg64.syspmuid = 0;
-> +            info_dbg64.spmu = 0;
-System PMU accesses undef for a vPMU-enabled domain too. Clear them together
-with SPE, TRBE, etc.
+> I absolutely reject the idea that because on a 12TiB system with 32k
+> PV vCPUs, we take up an extra 0.02% of the xenheap area, that a laptop
+> running QubesOS has to do 9 maps and unmaps per context switch.  That
+> is not a valid cost/benefits tradeoff.  In the worst case we could
+> just add a switch to such a system, allowing people who find their
+> xenheap too full to use the mapcache version instead.  (We could even
+> turn this on automatically at boot based on projected xenheap
+> utilization.)
 
-> +            info_dbg64.pmicntr = 0;
-> +            info_dbg64.ebep = 0;
-FEAT_EBEP is Armv9 just like SEBEP, so you should apply my comments to it as well.
+Maybe, yet extra overhead may be a necessary (but hopefully only
+transient) price to pay in the course of the transformation.
 
-> +            info_dbg64.dpfzs = 0;
-> +        }
-> +
-> +        return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
-> +                                  info_dbg64.bits[1]);
-> +    }
-> +
->      GENERATE_TID3_INFO(ID_AA64ISAR0_EL1, isa64, 0)
->      GENERATE_TID3_INFO(ID_AA64ISAR1_EL1, isa64, 1)
->      GENERATE_TID3_INFO(ID_AA64MMFR0_EL1, mm64, 0)
-> diff --git a/xen/arch/arm/cpufeature.c b/xen/arch/arm/cpufeature.c
-> index 94d14fb6a9..05f4d0f5df 100644
-> --- a/xen/arch/arm/cpufeature.c
-> +++ b/xen/arch/arm/cpufeature.c
-> @@ -219,8 +219,22 @@ static int __init create_domain_cpuinfo(void)
->      domain_cpuinfo.isa64.api = 0;
->      domain_cpuinfo.isa64.gpa = 0;
->      domain_cpuinfo.isa64.gpi = 0;
-> +
-> +    /* Hide SPE, TRBE, BRBE, Trace Extensions and ITE */
-> +    domain_cpuinfo.dbg64.trace_ver = 0;
-> +    domain_cpuinfo.dbg64.pms_ver = 0;
-> +    domain_cpuinfo.dbg64.trace_filt = 0;
-> +    domain_cpuinfo.dbg64.trace_buffer = 0;
-> +    domain_cpuinfo.dbg64.ext_trc_buff = 0;
-> +    domain_cpuinfo.dbg64.brbe = 0;
-> +    domain_cpuinfo.dbg64.ite = 0;
->  #endif
->  
-> +    /* Hide Trace Extensions for AArch32 domain */
-> +    domain_cpuinfo.dbg32.coptrc = 0;
-> +    domain_cpuinfo.dbg32.mmaptrc = 0;
-> +    domain_cpuinfo.dbg32.tracefilt = 0;
-> +
->      /* Hide AMU support */
->  #ifdef CONFIG_ARM_64
->      domain_cpuinfo.pfr64.amu = 0;
-> diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-> index baa3a5d708..a739dd157e 100644
-> --- a/xen/arch/arm/domain.c
-> +++ b/xen/arch/arm/domain.c
-> @@ -501,7 +501,7 @@ int arch_vcpu_create(struct vcpu *v)
->      v->arch.hcr_el2 = get_default_hcr_flags();
->  
->      v->arch.mdcr_el2 = HDCR_TDRA | HDCR_TDOSA | HDCR_TDA;
-> -    if ( !(v->domain->options & XEN_DOMCTL_CDF_vpmu) )
-> +    if ( !is_vpmu_domain(v->domain) )
->          v->arch.mdcr_el2 |= HDCR_TPM | HDCR_TPMCR;
->  
->      if ( (rc = vcpu_vgic_init(v)) != 0 )
-> diff --git a/xen/arch/arm/include/asm/arm64/hsr.h b/xen/arch/arm/include/asm/arm64/hsr.h
-> index 1495ccddea..ed18184cc7 100644
-> --- a/xen/arch/arm/include/asm/arm64/hsr.h
-> +++ b/xen/arch/arm/include/asm/arm64/hsr.h
-> @@ -84,6 +84,7 @@
->  #define HSR_SYSREG_FAR_EL1        HSR_SYSREG(3,0,c6, c0,0)
->  #define HSR_SYSREG_PMINTENSET_EL1 HSR_SYSREG(3,0,c9,c14,1)
->  #define HSR_SYSREG_PMINTENCLR_EL1 HSR_SYSREG(3,0,c9,c14,2)
-> +#define HSR_SYSREG_PMMIR_EL1      HSR_SYSREG(3,0,c9,c14,6)
->  #define HSR_SYSREG_MAIR_EL1       HSR_SYSREG(3,0,c10,c2,0)
->  #define HSR_SYSREG_AMAIR_EL1      HSR_SYSREG(3,0,c10,c3,0)
->  #define HSR_SYSREG_ICC_SGI1R_EL1  HSR_SYSREG(3,0,c12,c11,5)
-> diff --git a/xen/arch/arm/include/asm/cpregs.h b/xen/arch/arm/include/asm/cpregs.h
-> index a7503a190f..e03218b51e 100644
-> --- a/xen/arch/arm/include/asm/cpregs.h
-> +++ b/xen/arch/arm/include/asm/cpregs.h
-> @@ -246,6 +246,7 @@
->  #define PMINTENSET      p15,0,c9,c14,1  /* Perf. Mon. Interrupt Enable Set Register */
->  #define PMINTENCLR      p15,0,c9,c14,2  /* Perf. Mon. Interrupt Enable Clear Register */
->  #define PMOVSSET        p15,0,c9,c14,3  /* Perf. Mon. Overflow Flag Status Set register */
-> +#define PMMIR           p15,0,c9,c14,6  /* Perf. Mon. Performance Monitors Machine Identification Register */
-Please drop "Performance Monitors". It's the same as "Perf. Mon".
+> There are other options I've explored:
+> 
+> - domheap + vmap; basically, allocate from domheap, map in the vmap
+>   area.  On paper this sounds like the same thing; the problem is that
+>   we don't have a simple MFN -> VA mapping, as we do in the xenheap
+>   case, so the walk is a lot harder; we start to have to do lookups,
+>   significantly increasing the cost over simple memory reads and math.
+>   (This is the difference from the intremap table on the VT-d thread:
+>   that's a leaf structure reached from a single pointer, so a
+>   permanent vmap costs nothing there.  Pagetable hierarchies are
+>   exactly the case where the MFN -> VA step is critical: each entry
+>   read yields an MFN, which the walk has to turn into the next VA.)
 
->  
->  /* CP15 CR10: */
->  #define MAIR0           p15,0,c10,c2,0  /* Memory Attribute Indirection Register 0 AKA PRRR */
-> diff --git a/xen/arch/arm/include/asm/cpufeature.h b/xen/arch/arm/include/asm/cpufeature.h
-> index bf902a3970..c554686415 100644
-> --- a/xen/arch/arm/include/asm/cpufeature.h
-> +++ b/xen/arch/arm/include/asm/cpufeature.h
-> @@ -208,7 +208,7 @@ struct cpuinfo_arm {
->          };
->      } pfr64;
->  
-> -    union {
-> +    union cpuinfo_dbg64 {
->          register_t bits[2];
->          struct {
->              /* DFR0 */
-> @@ -216,19 +216,31 @@ struct cpuinfo_arm {
->              unsigned long trace_ver:4;
->              unsigned long pmu_ver:4;
->              unsigned long brps:4;
-> -            unsigned long __res0:4;
-> +            unsigned long pmss:4;
->              unsigned long wrps:4;
->              unsigned long __res1:4;
->              unsigned long ctx_cmps:4;
->              unsigned long pms_ver:4;
->              unsigned long double_lock:4;
->              unsigned long trace_filt:4;
-> -            unsigned long __res2:4;
-> +            unsigned long trace_buffer:4;
->              unsigned long mtpmu:4;
-> -            unsigned long __res3:12;
-> +            unsigned long brbe:4;
-> +            unsigned long ext_trc_buff:4;
-> +            unsigned long hpmn0:4;
->  
->              /* DFR1 */
-> -            unsigned long __res4:64;
-> +            unsigned long syspmuid:8;
-> +            unsigned long brps1:8;
-> +            unsigned long wrps1:8;
-> +            unsigned long ctx_cmps1:8;
-> +            unsigned long spmu:4;
-> +            unsigned long pmicntr:4;
-> +            unsigned long able:4;
-> +            unsigned long ite:4;
-> +            unsigned long ebep:4;
-> +            unsigned long dpfzs:4;
-> +            unsigned long abl_cmps:8;
->          };
->      } dbg64;
->  
-> @@ -408,7 +420,7 @@ struct cpuinfo_arm {
->          };
->      } pfr32;
->  
-> -    union {
-> +    union cpuinfo_dbg32 {
->          register_t bits[2];
->          struct {
->              /* DFR0 */
-> @@ -426,7 +438,8 @@ struct cpuinfo_arm {
->  
->              /* DFR1 */
->              unsigned long mtpmu:4;
-> -            unsigned long __res1:28;
-> +            unsigned long hpmn0:4;
-> +            unsigned long __res1:24;
->  #ifdef CONFIG_ARM_64
->              unsigned long __res2:32;
->  #endif
-> diff --git a/xen/arch/arm/vcpreg.c b/xen/arch/arm/vcpreg.c
-> index 3205c7df46..a660cb0734 100644
-> --- a/xen/arch/arm/vcpreg.c
-> +++ b/xen/arch/arm/vcpreg.c
-> @@ -305,6 +305,7 @@ void do_cp15_32(struct cpu_user_regs *regs, const union hsr hsr)
->      case HSR_CPREG32(PMXEVTYPER):
->      case HSR_CPREG32(PMXEVCNTR):
->      case HSR_CPREG32(PMOVSSET):
-> +    case HSR_CPREG32(PMMIR):
-PMMIR is EL1 only, so it does not belong to this block and this comment. Place
-it next to PMINTENCLR.
+The pages used here are entirely private to logic handling those page
+tables. Hence a struct page_info field can very likely be used to stash
+the VA of a permanent mapping. (Feels like similarly I must have
+suggested this somewhere else recently, yet I don't recall the context.)
 
->          /*
->           * Accessible at EL0 only if PMUSERENR_EL0.EN is set. We
->           * emulate that register as 0 above.
-> @@ -320,8 +321,36 @@ void do_cp15_32(struct cpu_user_regs *regs, const union hsr hsr)
->      GENERATE_TID3_INFO(ID_PFR0, pfr32, 0)
->      GENERATE_TID3_INFO(ID_PFR1, pfr32, 1)
->      GENERATE_TID3_INFO(ID_PFR2, pfr32, 2)
-> -    GENERATE_TID3_INFO(ID_DFR0, dbg32, 0)
-> -    GENERATE_TID3_INFO(ID_DFR1, dbg32, 1)
-> +
-> +    case HSR_CPREG32(ID_DFR0):
-> +    {
-> +        struct domain *d = v->domain;
-> +        union cpuinfo_dbg32 info_dbg32 = domain_cpuinfo.dbg32;
-> +
-> +        if ( !is_vpmu_domain(d) )
-> +        {
-> +            info_dbg32.perfmon = 0;
-> +        }
-> +
-> +        return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
-This breaks the arm32 build (you should always at least build test the patches):
-s/hsr.sysreg.read/cp32.read/
+>   And if we're concerned about "xenheap creep", when we have a 4 TiB
+>   ceiling, shouldn't we also be worried about "vmap creep", when we
+>   have a 64 GiB ceiling?
 
-> +                                  info_dbg32.bits[0]);
-> +    }
-> +
-> +    case HSR_CPREG32(ID_DFR1):
-> +    {
-> +        struct domain *d = v->domain;
-> +        union cpuinfo_dbg32 info_dbg32 = domain_cpuinfo.dbg32;
-> +
-> +        if ( !is_vpmu_domain(d) )
-> +        {
-> +            info_dbg32.mtpmu = 0;
-> +            info_dbg32.hpmn0 = 0;
-> +        }
-> +
-> +        return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
-> +                                  info_dbg32.bits[1]);
-> +    }
-> +
->      GENERATE_TID3_INFO(ID_AFR0, aux32, 0)
->      GENERATE_TID3_INFO(ID_MMFR0, mm32, 0)
->      GENERATE_TID3_INFO(ID_MMFR1, mm32, 1)
-> diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-> index eef10c2ea2..e352e2b38e 100644
-> --- a/xen/include/xen/sched.h
-> +++ b/xen/include/xen/sched.h
-> @@ -1269,6 +1269,11 @@ static always_inline bool is_iommu_enabled(const struct domain *d)
->      return evaluate_nospec(d->options & XEN_DOMCTL_CDF_iommu);
->  }
->  
-> +static inline bool is_vpmu_domain(const struct domain *d)
-> +{
-> +    return d->options & XEN_DOMCTL_CDF_vpmu;
-> +}
-> +
->  #ifdef CONFIG_MEM_PAGING
->  # define mem_paging_enabled(d) vm_event_check_ring((d)->vm_event_paging)
->  #else
+Absolutely, and I have been mentioning the need to consider growing this
+area in a number of situations (one iirc again pretty recently).
 
-~Michal
+> - Stash everything we need; basically, an extension of the current
+>   gdt_ldt_l1tab functionality.  Allocate everything from the domheap,
+>   map it in the vmap area (moving gdt_ldt_l1tab there as well), keep
+>   pointers to all the things we need to modify on context switch, so
+>   we don't need to walk the tables.  This would basically be, three
+>   pointers per vCPU: a pointer to its GDT/LDT L1, a pointer to its
+>   per-vCPU L3, and a pointer to the per-vCPU root_pgt.  (This would
+>   put ~384 MiB of mappings into the 64 GiB vmap region -- 0.6%, shared
+>   with ioremap and the fixmap -- to avoid 0.02% of the xenheap
+>   window.)
+> 
+> Both the vmap options have two complications, compared to the posted
+> option.  One thing to worry about here would be the additional stress
+> on the vmap allocator: It's a linear bitmap scan under one global
+> lock, designed for dozens-to-hundreds of ioremaps, not ~100k
+> long-lived single-page mappings (32k vCPUs x 3 pages per vCPU in the
+> "stash everything" case).
 
+Indeed, heavier use of that allocator may require work to be done there.
+
+> The second is that we begin to run into bootstrapping issues.  With
+> the xenheap approach, we can begin building and walking pagetables
+> very early in boot in the same manner in which they'll be walked
+> throughout Xen's lifecycle.  With the vmap approach, we need to deal
+> with the fact that the vmap area itself isn't up until later.
+
+Valid concern, yet surely possible to deal with.
+
+> The final option I looked at was mapping the incoming vcpu's linear
+> map to edit it ("altlinmap").  That still adds a map/unmap per context
+> switch, and requires some additional complication to handle
+> ASI/non-ASI systems.
+> 
+> Xen already consistently allocates its page tables from the xenheap
+> whenever it needs to access them during a context switch:
+> alloc_xen_pagetable() has allocated from the domheap since Hongyan's
+> directmap-removal preparation (those tables are only ever walked in
+> contexts where map_domain_page() works), but XPTI's per-CPU root_pgt
+> is alloc_xenheap_page(), precisely because it has to be written on the
+> context-switch path.  The same for the PV GDT / LDT L1 tables.  The
+> series follows the same rule for the same reason.
+
+"Rule" is a strong word. XPTI at the time needed to be done quickly.
+The inability to map_domain_page() from the context switch path left
+xenheap as the only viable option. Whereas with ASI, as said at the
+top, phasing out directmap (and hence xenheap) as a concept is (imo) a
+mid- to long-term goal.
+
+> Ultimately, I think there's a lot of wisdom in the saying, "Premature
+> optimization is the root of all evil."  As I said, it's certainly
+> right to be on our guard against adding things to xenheap, and look at
+> alternatives; but we're nowhere near the point where we need to say,
+> "Absolutely nothing added, regardless of the cost."  The design here
+> is not locking us into the pages long-term; alternate designs have a
+> significant cost in terms of authoring, reviewing, code complexity and
+> maintenance, and code performance.  At such time as we find systems
+> where the xenheap allocations introduced in this series become a
+> problem, we have a number of potential ways to mitigate the problem,
+> including switching to mapcache *on systems with the problem*, or
+> switching to a number of the other more complicated approaches.
+
+I'm a little puzzled by you talking of "optimization" (premature or
+not) here. In my initial reply I did point out a functional aspect, and
+I made clear that I'm aware that this is going to have a performance
+impact. I.e. quite the opposite of "optimization".
+
+Jan
 
