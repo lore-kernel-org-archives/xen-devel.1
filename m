@@ -4,39 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BCAAC5DF9B
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2026 13:26:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1398857.1635102 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC67FC5DF9B
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2026 13:31:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1398864.1635113 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wyUgu-0005rt-1q; Mon, 24 Aug 2026 13:26:20 +0000
+	id 1wyUla-0007Sd-J2; Mon, 24 Aug 2026 13:31:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1398857.1635102; Mon, 24 Aug 2026 13:26:20 +0000
+Received: by outflank-mailman (output) from mailman id 1398864.1635113; Mon, 24 Aug 2026 13:31:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wyUgt-0005rm-Ue; Mon, 24 Aug 2026 13:26:19 +0000
-Received: by outflank-mailman (input) for mailman id 1398857;
- Mon, 24 Aug 2026 13:26:18 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wyUla-0007SW-F4; Mon, 24 Aug 2026 13:31:10 +0000
+Received: by outflank-mailman (input) for mailman id 1398864;
+ Mon, 24 Aug 2026 13:31:08 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <peter.maydell@linaro.org>) id 1wyUgs-0005rQ-0K
- for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 13:26:18 +0000
+ (envelope-from <neal.frager@amd.com>) id 1wyUlY-0007SP-Gj
+ for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 13:31:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wyUgr-00225T-2H
- for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 15:26:17 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wyUlX-0088b2-G9
+ for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 15:31:07 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <peter.maydell@linaro.org>)
- id 6a8c4677-8faa-0a2a0a5109dd-0a2a4505ca52-8
- for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 15:26:16 +0200
-Received: from [209.85.218.42] (helo=mail-ej1-f42.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <peter.maydell@linaro.org>)
- id 6a8c4678-4cb1-0a2a45050019-d155da2abc48-3
- for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 15:26:16 +0200
-Received: by mail-ej1-f42.google.com with SMTP id
- a640c23a62f3a-c1c26d7e951so517022866b.0
- for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 06:26:16 -0700 (PDT)
+ (envelope-from <neal.frager@amd.com>)
+ id 6a8c4797-e002-0a2a0a5209dd-0a2a4508b06c-10
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 15:31:06 +0200
+Received: from [40.107.200.42]
+ (helo=CH5PR02CU005.outbound.protection.outlook.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <neal.frager@amd.com>)
+ id 6a8c4799-f659-0a2a45080019-286bc82ae274-3
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 15:31:06 +0200
+Received: from BL1PR12MB5032.namprd12.prod.outlook.com (2603:10b6:208:30a::12)
+ by DSVPR12MB999310.namprd12.prod.outlook.com (2603:10b6:8:41e::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Mon, 24 Aug
+ 2026 13:31:02 +0000
+Received: from BL1PR12MB5032.namprd12.prod.outlook.com
+ ([fe80::3c13:eeb6:d9ef:c95d]) by BL1PR12MB5032.namprd12.prod.outlook.com
+ ([fe80::3c13:eeb6:d9ef:c95d%6]) with mapi id 15.21.0339.012; Mon, 24 Aug 2026
+ 13:31:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,122 +55,150 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=linaro.org header.i="@linaro.org" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1787577976; cv=none;
-        d=google.com; s=arc-20260327;
-        b=LmHtVf5ZT84M3Y/rC6fYIaf3ImVMfmgA7GdDLf8Hz2XJhsa6+vizXWK+oZtQOhTuUM
-         BsqHoiI9Fsmj5NKzMeSdIOKwuub0rTFWofZGeyXW53y7i5NxKKBtqoJ34KYZwJQagpMq
-         j1jUfWZ81lAvcb15jmT+A5/YaXwNJ50DJyudGWVk7zrhHegfcDrlDEkAsroT/n9VpuOJ
-         LTbYm4gNGO/dFCZ4eEnOU9dh4teGBhDdIFXbwRu3eXyh148NgMMfOqKFJMeFI+3Gjmo9
-         OTXU2P3uJI3ducJTpMJG2rms83NbSXsgCXTj12eXmZbC0Cdl0AEZY0k3NbOXSquEVFYc
-         EMlw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=WJOQloOIABkgH6V3JAdZSvG6I3xZcRSyyak3uFeJFGk=;
-        fh=Q3MFvgmBVez3lAjgQPyQRycJzUFWQ5jTf8kh/WjsKT4=;
-        b=hujInGLYA7LvUUOqJrRgqnd3N9n8oDMpvV+JZqvgmkbnen6SePgk+AIhsBb6apCiao
-         52vK6He3wYXGcOvBMpslxhH1WVW1nd45lzmUD4vqqoSLBr4R+E+tsK9USMj+9V5HtYP5
-         WMPYEFcVATUUp8o50NODEKtGJ1r2O+UThFklESWQm5l8hsfpK+56Uy0ODraZWIzc1CSf
-         fLiDzZgl7h/h0dAQwy8VdozQ7iHhs25qefb/nzXFUemWkanP5vPOgD1c6kjYxjb2meR0
-         3+SQJcuC8t39+XQdQL4/ElFP2kXAacGpGQv+6Y68vZShZBiFUQjHdYS9xluPs01YwBrE
-         5Kbg==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1787577976; x=1788182776; darn=lists.xenproject.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=WJOQloOIABkgH6V3JAdZSvG6I3xZcRSyyak3uFeJFGk=;
-        b=BZ3l7HwDSqZ2Ogu1Uub4Dx4PbdpnIxGv/Ax8uobXlct4R3WfiYWwqtZVnaq0VvpEXh
-         LhXuTkKbLSuAIMVE7V8FXEL37vndxQ8hadnp7dVg+7SrYoE9oQFm+7btTb7eCq/3EYLw
-         aHFFGFQml0uDiDcPhUp8nSV0nQmZVJV9Vvyu0KxCul7B68G5j8/Pd1wBgcuR9HmXsmxh
-         uzsxkzzANGSwiS8Yu4Uc+/e20CDCIe7qo40PsfG9OliqAkNTS4KCViXD/qYzozy4b3nT
-         a/sKW5QoozW0ZdL5SgppFh3UmU13ArIcrc9zBbRxxnPKTGaXz9tU8cCdLbG/GsLwz+/Q
-         OyaQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787577976; x=1788182776;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=WJOQloOIABkgH6V3JAdZSvG6I3xZcRSyyak3uFeJFGk=;
-        b=pzcrGcLh3U2OBIl6fp/RSG1giD2UpjCLRiBLTkr5Fw82LZvdiYcMJypptpFz/rDeEC
-         jvlOW+523zrYZyDrdnDvgaKvZq1/QP3kED2S0qrq896KDKXT2I4pUwF18KWO8nN3wd99
-         42nAXRRjn6T0zsT6U5itlG7xUTlMFrkUF8vXmPjwm7ctYLR7XkBqtwTraVSrO0UCb+xL
-         XoS4HNtcfZLlJt1mlE0cqb5A75KDgEqJ0Zmu0cNYA+cBJDwuHgG8TdTB2Brpeg6oK4zG
-         r3nvt7H5EdkmknLhzXXDBib+MtPgPvZWRK4Eld5U1FKH/pJoDv/O0OXkPLpniDbyuZR3
-         W3jQ==
-X-Forwarded-Encrypted: i=1; AHgh+RqFOwYZPNsrZAkL9vtaMpBjpc5NnhcLdONvgoIyISUlKX9P4CCyXrXQBs1HT4wu24Qm/ausWqg7wz4=@lists.xenproject.org
-X-Gm-Message-State: AFuF++nseN5TaxWG+7hW6BDbuczAF2rIZ5rr7Ix82gejMUf5o+T70siz
-	pB6NpSXCFVC3VNmwwBMyXF66wz35AXhFt7YLeHv64JQLfh26uTfZHSLieC26KOnbVJJmFX8k/jr
-	RckCoz+v+5UMHSwK2335aChW4/+rhUz06Od585+oSJQ==
-X-Gm-Gg: AR+sD10LX32G5RNI+wgZzYX2ma6DDRk65DVZtsfsdncyFCEzCsZpAp2SNJZIOBP25TR
-	UIolrtkaKq1nZfFjshP4FM5wrfZ5BB5PSJcaZ0ByhewxLsjUhiSd6JRrbk3qz3eMCJOYOwNqXyn
-	LfqfPFgU60/P6XApuVETw5LznNa3plIYirmEDdbQ+Mh5f8hncHgq0fuqyyR36UhljU1e4eiXKfR
-	WbiqCEeJNnMuaKFeyf6KeOi2sWO+tkzGNNWpn9ob91OwAjBB70OCDN/NutnpfWBefxOIf7sPoOG
-	y3ibRyPQmO8sWI9Uv9WnttWdTRxjEwuKoxvvYZkfHKJ0iGpMUPLtffKSLeprykOm3MQ/lCRIFDG
-	q0sFWxr0CQkxFEynJnZEUuk+rLl4G
-X-Received: by 2002:a17:907:7b93:b0:c20:5213:56f1 with SMTP id
- a640c23a62f3a-c246a60348emr2829725766b.13.1787577975945; Mon, 24 Aug 2026
- 06:26:15 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260805052723.2823538-1-neal.frager@amd.com> <2383a98d-d88d-415d-9de1-aa68a5d215fe@amd.com>
- <BL1PR12MB5032F21E0E2A6F17398B6D76F0A02@BL1PR12MB5032.namprd12.prod.outlook.com>
-In-Reply-To: <BL1PR12MB5032F21E0E2A6F17398B6D76F0A02@BL1PR12MB5032.namprd12.prod.outlook.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Mon, 24 Aug 2026 14:26:00 +0100
-X-Gm-Features: AcwNN1VvxlRRRHvnKb0O7rD1SVWHvRL8XBQeDCQKBO42isGO3VyXT47Xz83_lqU
-Message-ID: <CAFEAcA8sWn1vjm+OFYzwA-jko2vYkFcWPwT6g9=0AeO+JQo-JQ@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] include/hw/xen/xen_native.h: downgrade
- include-order assertion to warning
-To: "Frager, Neal" <neal.frager@amd.com>
-Cc: "Hildebrand, Stewart" <Stewart.Hildebrand@amd.com>, 
-	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "sstabellini@kernel.org" <sstabellini@kernel.org>, 
-	"anthony@xenproject.org" <anthony@xenproject.org>, 
-	"edgar.iglesias@gmail.com" <edgar.iglesias@gmail.com>, 
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-	"Stabellini, Stefano" <stefano.stabellini@amd.com>, "Saleab, Micheal" <Micheal.Saleab@amd.com>, 
-	"john.ernberg@actia.se" <john.ernberg@actia.se>, 
-	"matthew.l.weber3@boeing.com" <matthew.l.weber3@boeing.com>, 
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=MGsKRcKZR9hZ+5cgAwV+O1bw5ieNAcHZjCEoBqvSZn3mhHlEFhhYCZ930Xxlu6uQVpfmMEV08Z+tsJ8d9WAVhGJlkWlNo6mtX7H+bcJ81+ax9JIj413nNNfrJE+DuZuk+rg1IaIRdKtgQZJvhBOhx+AXvk5sirj9UIxM8N5/IHFCQ2ubcTnrs66pBMAa7AcVkn84jS9+yn2Wjz55BODqSkp466CoRqIFiQWPn6scJXXSdsR8bgbfMu42eIXxuo0tIwaDzvIZug5Cg5Jw6Kf+eRvQn71VjavJ+S6LPoSKGnRU6qRYOyhv0VmXIUeFMK2Pygjha0AqFuDaLo9trMe/sw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=quEor2gylcZ4dQoDnP21GY4cNRxz+KjlMVJQt7mHae8=;
+ b=P3kpeDz5F8UTo5qYHyjGbPGZz5Q5xmnlOp7LKPAx42ocNsoGzXFSalCBeY5Gp8CBtPucpnWT2vQBOG6eBG0dG4CMimNGMusa9vqT02GQxe3x7+ENedkRdF7mkgwUiUlQl/6eX2Tx1ZhkIuKsh5C12fM9WUzUcRDYO36n01b5OAOgct+o7IQx776bwCsxaRS904jw/8MyK+m8oUuivU16khgwajpjCIBFBmo+jLVKvIMLxsJj9NFasFf+T++KAhtqh3OaRYmCLF7J7VsnQJen5L07ntsqamPktTPRW5xP2lGZGdgn6WD1vp/SpCTvznLebJM3ECVFOwCAqEeSbDcQLA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=quEor2gylcZ4dQoDnP21GY4cNRxz+KjlMVJQt7mHae8=;
+ b=tlyPryuIbkDym5xiLCVq1OEI0Zdza6yGQmQ9mXtcaOjXGNsYI3lVQJbwd7v2yxEE+Z17ehSkRpN/sGN2ogQw+6dO3xFrED6sEG06pyFBTi9zf4sismIJ/aC+c58KL18X7+V1UZhBn0hhHBBNWaUJEiNYasdE7l3zCcDefOkJP+Y=
+From: "Frager, Neal" <neal.frager@amd.com>
+To: Peter Maydell <peter.maydell@linaro.org>
+CC: "Hildebrand, Stewart" <Stewart.Hildebrand@amd.com>,
+	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "sstabellini@kernel.org"
+	<sstabellini@kernel.org>, "anthony@xenproject.org" <anthony@xenproject.org>,
+	"edgar.iglesias@gmail.com" <edgar.iglesias@gmail.com>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	"Stabellini, Stefano" <stefano.stabellini@amd.com>, "Saleab, Micheal"
+	<Micheal.Saleab@amd.com>, "john.ernberg@actia.se" <john.ernberg@actia.se>,
+	"matthew.l.weber3@boeing.com" <matthew.l.weber3@boeing.com>,
 	"vincent.stehle@arm.com" <vincent.stehle@arm.com>
-Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-c201ff/1787577976-F7CB82A1-10C05EE8/0/0
+Subject: RE: [PATCH v1 1/1] include/hw/xen/xen_native.h: downgrade
+ include-order assertion to warning
+Thread-Topic: [PATCH v1 1/1] include/hw/xen/xen_native.h: downgrade
+ include-order assertion to warning
+Thread-Index: AQHdJJsckvnz/cO5N0ySs3v4A11/7LatQ5eAgAAFmcCAAAXOAIAAAMSQ
+Date: Mon, 24 Aug 2026 13:31:01 +0000
+Message-ID:
+ <BL1PR12MB50322B1D97569B5CADEC8E55F0A02@BL1PR12MB5032.namprd12.prod.outlook.com>
+References: <20260805052723.2823538-1-neal.frager@amd.com>
+ <2383a98d-d88d-415d-9de1-aa68a5d215fe@amd.com>
+ <BL1PR12MB5032F21E0E2A6F17398B6D76F0A02@BL1PR12MB5032.namprd12.prod.outlook.com>
+ <CAFEAcA8sWn1vjm+OFYzwA-jko2vYkFcWPwT6g9=0AeO+JQo-JQ@mail.gmail.com>
+In-Reply-To:
+ <CAFEAcA8sWn1vjm+OFYzwA-jko2vYkFcWPwT6g9=0AeO+JQo-JQ@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+msip_labels:
+ MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_Enabled=True;MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_SiteId=3dd8961f-e488-4e60-8e11-a82d994e183d;MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_SetDate=2026-08-24T13:28:44.0000000Z;MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_Name=AMD
+ General
+ v26;MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_ContentBits=3;MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_Method=Standard
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BL1PR12MB5032:EE_|DSVPR12MB999310:EE_
+x-ms-office365-filtering-correlation-id: 27de5415-703e-4129-ff6b-08df01e3f0cc
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|366016|1800799024|23010399003|376014|38070700021|6133799003|10067099003|56012099006|11063799006|4143699003|18002099003|22082099003;
+x-microsoft-antispam-message-info:
+ ftlHy0XSeh/p9lOxehx2+HpXxAvXChDoQNps/6Wz7BHXgPW0WAoTnlH+vzGEzR77XgQ2bbxZGdxK4NSMZ5gxVaq2zOCFajQbtuYXJZ5NTBelRrl/Kp7tfNZm1g76ATw5Ar5BS7xxAdTsBhfkFAVDafUNzYPtRbmZu79b2u659RdZFNYhCTBBKO35Bvq0EVeu01xJ8puVAYy/NQaon0+GBgC5PfOOP6okKpC4uSblkCkrZJcO1ChdmgbTlbTRSVr2lFcJvc1sbGEl4rE8qCnfJkiCkCDATHfSQUub4JeU+y+XLmlpU92vtJhXVVWWwXEK2pBuzCirC/8ChwNi2yXXEw+9wMG+IMKPKlm70OwV4Kx/2nODbf6fN8Jsja7t97ZOEJG4Gyz2HVundOuYQyEi9J/VafaSLMzg2gEl4IfBpMtNZYLtkMRJgtGjBL9RsQH2Vpv1gkGNtTokoPAd7FHhGQEiyBgk34MqvGCwFW5mHUpCCIpHWU6UaJiuTCEIJNo6JMRuJy6uIfCrOGCvgDcuW68L1txga0R379qtiM9Oo4k6tRwYapq7gf//Tg3r6jtoiMTYfnHV0DbWX8IIw/7Q6SOJe0U3m6cDq6x/MBWRX8YTPROVIawKKPjWc39AScEKa0CZseG3+5hruVsBuvKDzYT7r63XSNibiMsNDmsFSoRkHQKLhtHnvnsJcLpucWVzxkhKDAk6xQiOe+XPVmjGSaNVQJTtsOZLmcePFpHKbws=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL1PR12MB5032.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(38070700021)(6133799003)(10067099003)(56012099006)(11063799006)(4143699003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?utf-8?B?MzQrYVp3cTlMRTQ2Nk50TzkrSFdSK3RrbzNPK2s2S3VWTjc1aWNzNWZJOVpK?=
+ =?utf-8?B?cFFOLzdIUWg1TkRmeVlMeVpYUlV2SUV6MXlUeldyc2hLYm1obi9XM0lqcWNt?=
+ =?utf-8?B?aHVtaGhFOEVsTEtMekdVS0lUaG9hYnUxajNEL09BVVJrL1QzVmxWNHRUS1hT?=
+ =?utf-8?B?bnExbFU3MENqSHhhclA5em1EMDFQalJOWjc3aU1pZW9iUm9sQ2g3elRUbG9h?=
+ =?utf-8?B?VHQ0akp3cm5vTGM5bWtMa0QvemZSVVEzY3hPVlJLMnNzNlVoSFVWY3dXbDNa?=
+ =?utf-8?B?ZG5DZVZWd2pTaHlHVk9xUmxjSU1RSUFsOFhGTWdBS2F2b0h2a2dRWkhnWU1W?=
+ =?utf-8?B?K0tBdHJYT09QWVBPV0lldUZPdThtYXFKYzZvQ3MzcUJOMlV2ZDlwL3FoZGhz?=
+ =?utf-8?B?ZVlObG11d3ZuQlg0clFFWlZGb2JaQ3pSSDZ5aFpsRzl6aFo4KzhqU2FlcFJ5?=
+ =?utf-8?B?cFQ1ZjJHbktrZEl6WE5nbzYwN3pZSWZFRHJTYlJkMEZYMjYxNVNlWFVWRDl4?=
+ =?utf-8?B?ZVNwN3h0YlpqNndlbUZ2R3hFMlhTbi9rRUtXcXlwUmU2UXVRbmFOYSthK2kv?=
+ =?utf-8?B?RTRZRlhWMVNiTDg4U2Q0YWZJVmVwQytLZFdlclFwU285U1FUQXVLRlhZeHhq?=
+ =?utf-8?B?MUgrOUM3a2drcGMxYzRuYkhCRGs5VWtYVGtaSEdGK1FnRVhmQUdzMUhhQVFn?=
+ =?utf-8?B?ci9DRHlHb21ibFhNNWYwUzlGYi9va2lXOWN1TnJLU0o0em1YOG1qbWNVVm50?=
+ =?utf-8?B?WTdRNzVlVFROU1h4d2xJMCtVUUdoRjRETTNyWUlOZUpKd3pqMjJpYWNsMTJi?=
+ =?utf-8?B?SkRpYkxOTFUyWGRZc3lUcTg5SEc4andWTHphb0kvTkw5RTM2RGtKL3RhdlBY?=
+ =?utf-8?B?NlE0ZHpWR2k5OG04V1hRTnl5T2FBZStmNjNFRGg1S0F6b1pSWHFOMTRWVXg4?=
+ =?utf-8?B?a1ZqdjFIQjByanJuMXprc2pFeFlCOWhjQmZaWGFYdGlsaWJ4M2Q1WGlZS25D?=
+ =?utf-8?B?RFcyc3BtaVhaaXp2Q2FzdEx5ckowbk5ncWJFYjl0SVBybzBlK1ZmL1BxWSsx?=
+ =?utf-8?B?Q1VKVFVXanlXQXREWGIxZXJaK0tvam01UkhUeWIxcHlpbkhiS3p3eFZ2bktC?=
+ =?utf-8?B?QnhndVJSbFZCZ1pneW1nNFU3b0ZKQnFiRzIxQ1MycWVXblFmZXdUQ1BqRFo4?=
+ =?utf-8?B?MHFYS01aLzV1RGlpQmdxT2tGYnpiZ1RTcVV5VEt1M3lYakQ5VmQxRGtJbzhJ?=
+ =?utf-8?B?bVdUdGk5eUo0QVBZUjNnTUxabkNmcTE4U04xVGhzck9wckZjR09DVlhMdFBq?=
+ =?utf-8?B?dEFiRFFyanQ1TG1DTnVPVE91ajVXK1R2S0U5dG1nb0UzZG1GTTlocjdBajYw?=
+ =?utf-8?B?WW5LRXZYeHFJWTlBdVVPQTFhNG9uVTRZbzZJYllBT0ZTaVIrM3V3V1JsYXhx?=
+ =?utf-8?B?c0p4dkpIb0x6aE80ZGhHM0dvVUhOR252Y2lqRXZvMkhVbG41Rm9tek5CYjha?=
+ =?utf-8?B?RExWS1F6RDhMS2NjbS9zYXJkb3dtU3hpTWxJZ3ZudGM5MHJuZHdmUGlXTlQz?=
+ =?utf-8?B?ZFczbjU0ZGhhWWJxUG15dTIwYzZncjhaL3lkNmo0T0xzTTl5U1ltZ3J0UVBO?=
+ =?utf-8?B?Qmh3TnhjM1IxYnd3ZmNEOVBuRVVMTXA4cWpiSm9qZi9QSUdQZDZQbk1wM1Vt?=
+ =?utf-8?B?MnJjdWZ1eXpuZTVvL3UzazNKL00wL0Z6emRZTk00OTkyTFFZRFlZVmRqNFhj?=
+ =?utf-8?B?K3lzSEUwZDZ4cFFDdUMxQldFSnpyRlRDY0IrUFd3MCtqdjFXWUFSN00rb0xC?=
+ =?utf-8?B?RHlmVUhDbGhhaUdNV0RVZXYyNU0rdmVwOWFPU3NhR3V3MmM5L0RvNUE3OGpX?=
+ =?utf-8?B?MDNKMHpLQmlkZUJSbzZ4Q1VTWXFIaVp0V3lqUkZpUkN5Rmk3dzV5Sk8ydU1h?=
+ =?utf-8?B?UDk4Q1FldWI2blhQK2o0Smd1NGllbDNuNmV5Z0dQbXRmWlJHemczckdCcTY2?=
+ =?utf-8?B?aXFqMGduV1RwZlJZaXFjalptYVpwNU5HZFowenBIL3RNUGM3MnNhRzFpUkhu?=
+ =?utf-8?B?MUZzdm5qM1QremZJM2hncy90ZDFlNEJreTBlcXNram5XOHhlb05UeDFNSDY2?=
+ =?utf-8?B?eHhQMklDdFlpOGlmcTZxV0F2aGtyMGt0LzJuUVY3R0xhMHR2cDdpUjFXN05Y?=
+ =?utf-8?B?OGFtdVRDV3dkbmFoem5GSGl5c0VsM08rTktSajlDMWVUZlg5cDVKalAxdERm?=
+ =?utf-8?B?Qy9CcHJJdWg2dXlmRGNpeTUyMnRmeHdvY0dOMVo1c0VRWFliOXc0L1ZWQk1n?=
+ =?utf-8?Q?e7jMPaW5us8DGAUq9r?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BL1PR12MB5032.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 27de5415-703e-4129-ff6b-08df01e3f0cc
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Aug 2026 13:31:01.8847
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: e6oHlze76a1qQvRn8vjgKaPUShJQVAarM/qQgeVey3AVG/2gk7YA8Rlcvl6uWzwF
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSVPR12MB999310
+X-purgate-ID: tlsNG-c1860d/1787578266-D654487B-6F69CD01/0/0
 X-purgate-type: clean
-X-purgate-size: 1316
+X-purgate-size: 2028
 
-On Mon, 24 Aug 2026 at 14:14, Frager, Neal <neal.frager@amd.com> wrote:
->
-> AMD General
->
-> Hi Stewart,
->
-> > The -I$(XEN_ROOT)/tools/include added to QEMU's extra-cflags causes
-> > __XEN_INTERFACE_VERSION__ to be defined before xen_native.h is included,
-> > triggering an include-order assertion. Downgrade to a warning since the
-> > version is consistent in cross-compile.
-> > Ref: https://github.com/qemu/qemu/commit/e2abfe5ec6
-
-> > This is a buildroot issue, so I don't believe it's necessary to fix from the
-> > qemu side.
->
-> I am not sure I fully agree here. While this is a buildroot identified issue,
-> there could be other use cases for __XEN_INTERFACE_VERSION__ to be defined
-> before xen_native.h is included.
-
-But what, though?
-
-> And what we have found is that if
-> __XEN_INTERFACE_VERSION__ to be defined before xen_native.h is included, it
-> is not a hard error.  For buildroot, the qemu works just fine in spite of
-> this.
-
-I think that just means you got lucky. Either there is a hard requirement
-for one header to be included before the other (in which case it must
-be a #error, and whatever is causing the mis-ordering to happen must be
-fixed), or it's fine for the ordering to be either way (in which case it
-doesn't even need to be a #warning).
-
-thanks
--- PMM
+QU1EIEdlbmVyYWwNCg0KSGkgUGV0ZXIsDQoNCj4NCj4gSGkgU3Rld2FydCwNCj4NCj4gPiBUaGUg
+LUkkKFhFTl9ST09UKS90b29scy9pbmNsdWRlIGFkZGVkIHRvIFFFTVUncyBleHRyYS1jZmxhZ3Mg
+Y2F1c2VzDQo+ID4gX19YRU5fSU5URVJGQUNFX1ZFUlNJT05fXyB0byBiZSBkZWZpbmVkIGJlZm9y
+ZSB4ZW5fbmF0aXZlLmggaXMgaW5jbHVkZWQsDQo+ID4gdHJpZ2dlcmluZyBhbiBpbmNsdWRlLW9y
+ZGVyIGFzc2VydGlvbi4gRG93bmdyYWRlIHRvIGEgd2FybmluZyBzaW5jZSB0aGUNCj4gPiB2ZXJz
+aW9uIGlzIGNvbnNpc3RlbnQgaW4gY3Jvc3MtY29tcGlsZS4NCj4gPiBSZWY6IGh0dHBzOi8vZ2l0
+aHViLmNvbS9xZW11L3FlbXUvY29tbWl0L2UyYWJmZTVlYzYNCg0KPiA+IFRoaXMgaXMgYSBidWls
+ZHJvb3QgaXNzdWUsIHNvIEkgZG9uJ3QgYmVsaWV2ZSBpdCdzIG5lY2Vzc2FyeSB0byBmaXggZnJv
+bSB0aGUNCj4gPiBxZW11IHNpZGUuDQo+DQo+IEkgYW0gbm90IHN1cmUgSSBmdWxseSBhZ3JlZSBo
+ZXJlLiBXaGlsZSB0aGlzIGlzIGEgYnVpbGRyb290IGlkZW50aWZpZWQgaXNzdWUsDQo+IHRoZXJl
+IGNvdWxkIGJlIG90aGVyIHVzZSBjYXNlcyBmb3IgX19YRU5fSU5URVJGQUNFX1ZFUlNJT05fXyB0
+byBiZSBkZWZpbmVkDQo+IGJlZm9yZSB4ZW5fbmF0aXZlLmggaXMgaW5jbHVkZWQuDQoNCj4gQnV0
+IHdoYXQsIHRob3VnaD8NCg0KPiBBbmQgd2hhdCB3ZSBoYXZlIGZvdW5kIGlzIHRoYXQgaWYNCj4g
+X19YRU5fSU5URVJGQUNFX1ZFUlNJT05fXyB0byBiZSBkZWZpbmVkIGJlZm9yZSB4ZW5fbmF0aXZl
+LmggaXMgaW5jbHVkZWQsIGl0DQo+IGlzIG5vdCBhIGhhcmQgZXJyb3IuICBGb3IgYnVpbGRyb290
+LCB0aGUgcWVtdSB3b3JrcyBqdXN0IGZpbmUgaW4gc3BpdGUgb2YNCj4gdGhpcy4NCg0KDQo+IEkg
+dGhpbmsgdGhhdCBqdXN0IG1lYW5zIHlvdSBnb3QgbHVja3kuIEVpdGhlciB0aGVyZSBpcyBhIGhh
+cmQgcmVxdWlyZW1lbnQNCj4gZm9yIG9uZSBoZWFkZXIgdG8gYmUgaW5jbHVkZWQgYmVmb3JlIHRo
+ZSBvdGhlciAoaW4gd2hpY2ggY2FzZSBpdCBtdXN0DQo+IGJlIGEgI2Vycm9yLCBhbmQgd2hhdGV2
+ZXIgaXMgY2F1c2luZyB0aGUgbWlzLW9yZGVyaW5nIHRvIGhhcHBlbiBtdXN0IGJlDQo+IGZpeGVk
+KSwgb3IgaXQncyBmaW5lIGZvciB0aGUgb3JkZXJpbmcgdG8gYmUgZWl0aGVyIHdheSAoaW4gd2hp
+Y2ggY2FzZSBpdA0KPiBkb2Vzbid0IGV2ZW4gbmVlZCB0byBiZSBhICN3YXJuaW5nKS4NCg0KRnJv
+bSBteSB2aWV3LCB0aGUgb3JkZXIgdGhlIGhlYWRlciBmaWxlcyBhcmUgaW5jbHVkZWQgZG9lcyBu
+b3QgbWF0dGVyLCBhbmQNCnRoaXMgc2hvdWxkIG5vdCBiZSBhbiBlcnJvci4gIEkgYWdyZWUgd2l0
+aCByZW1vdmluZyB0aGUgd2FybmluZyBhcyB3ZWxsLCBpZg0KdGhhdCBpcyB3aGF0IHdlIGFsbCBh
+Z3JlZSBvbiBpbiB0aGUgZW5kLg0KDQpCZXN0IHJlZ2FyZHMsDQpOZWFsIEZyYWdlcg0KQU1EDQo=
 
