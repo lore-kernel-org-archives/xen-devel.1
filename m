@@ -4,46 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC67FC5DF9B
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2026 13:31:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1398864.1635113 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFDD9C5DF81
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2026 14:13:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1398875.1635121 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wyUla-0007Sd-J2; Mon, 24 Aug 2026 13:31:10 +0000
+	id 1wyVQP-0004oM-L9; Mon, 24 Aug 2026 14:13:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1398864.1635113; Mon, 24 Aug 2026 13:31:10 +0000
+Received: by outflank-mailman (output) from mailman id 1398875.1635121; Mon, 24 Aug 2026 14:13:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wyUla-0007SW-F4; Mon, 24 Aug 2026 13:31:10 +0000
-Received: by outflank-mailman (input) for mailman id 1398864;
- Mon, 24 Aug 2026 13:31:08 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wyVQP-0004oF-Hm; Mon, 24 Aug 2026 14:13:21 +0000
+Received: by outflank-mailman (input) for mailman id 1398875;
+ Mon, 24 Aug 2026 14:13:20 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <neal.frager@amd.com>) id 1wyUlY-0007SP-Gj
- for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 13:31:08 +0000
+ (envelope-from <peter.maydell@linaro.org>) id 1wyVQO-0004nq-FZ
+ for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 14:13:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wyUlX-0088b2-G9
- for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 15:31:07 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wyVQM-002AhK-Cs
+ for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 16:13:18 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <neal.frager@amd.com>)
- id 6a8c4797-e002-0a2a0a5209dd-0a2a4508b06c-10
- for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 15:31:06 +0200
-Received: from [40.107.200.42]
- (helo=CH5PR02CU005.outbound.protection.outlook.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <neal.frager@amd.com>)
- id 6a8c4799-f659-0a2a45080019-286bc82ae274-3
- for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 15:31:06 +0200
-Received: from BL1PR12MB5032.namprd12.prod.outlook.com (2603:10b6:208:30a::12)
- by DSVPR12MB999310.namprd12.prod.outlook.com (2603:10b6:8:41e::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Mon, 24 Aug
- 2026 13:31:02 +0000
-Received: from BL1PR12MB5032.namprd12.prod.outlook.com
- ([fe80::3c13:eeb6:d9ef:c95d]) by BL1PR12MB5032.namprd12.prod.outlook.com
- ([fe80::3c13:eeb6:d9ef:c95d%6]) with mapi id 15.21.0339.012; Mon, 24 Aug 2026
- 13:31:01 +0000
+ (envelope-from <peter.maydell@linaro.org>)
+ id 6a8c517e-2eae-0a2a0a5409dd-0a2a45069f78-0
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 16:13:18 +0200
+Received: from [74.125.224.44] (helo=mail-yx1-f44.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <peter.maydell@linaro.org>)
+ id 6a8c517d-195a-0a2a45060019-4a7de02cd170-3
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 16:13:18 +0200
+Received: by mail-yx1-f44.google.com with SMTP id
+ 956f58d0204a3-66825847b2cso3690101d50.3
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 07:13:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,150 +48,151 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MGsKRcKZR9hZ+5cgAwV+O1bw5ieNAcHZjCEoBqvSZn3mhHlEFhhYCZ930Xxlu6uQVpfmMEV08Z+tsJ8d9WAVhGJlkWlNo6mtX7H+bcJ81+ax9JIj413nNNfrJE+DuZuk+rg1IaIRdKtgQZJvhBOhx+AXvk5sirj9UIxM8N5/IHFCQ2ubcTnrs66pBMAa7AcVkn84jS9+yn2Wjz55BODqSkp466CoRqIFiQWPn6scJXXSdsR8bgbfMu42eIXxuo0tIwaDzvIZug5Cg5Jw6Kf+eRvQn71VjavJ+S6LPoSKGnRU6qRYOyhv0VmXIUeFMK2Pygjha0AqFuDaLo9trMe/sw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=quEor2gylcZ4dQoDnP21GY4cNRxz+KjlMVJQt7mHae8=;
- b=P3kpeDz5F8UTo5qYHyjGbPGZz5Q5xmnlOp7LKPAx42ocNsoGzXFSalCBeY5Gp8CBtPucpnWT2vQBOG6eBG0dG4CMimNGMusa9vqT02GQxe3x7+ENedkRdF7mkgwUiUlQl/6eX2Tx1ZhkIuKsh5C12fM9WUzUcRDYO36n01b5OAOgct+o7IQx776bwCsxaRS904jw/8MyK+m8oUuivU16khgwajpjCIBFBmo+jLVKvIMLxsJj9NFasFf+T++KAhtqh3OaRYmCLF7J7VsnQJen5L07ntsqamPktTPRW5xP2lGZGdgn6WD1vp/SpCTvznLebJM3ECVFOwCAqEeSbDcQLA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=quEor2gylcZ4dQoDnP21GY4cNRxz+KjlMVJQt7mHae8=;
- b=tlyPryuIbkDym5xiLCVq1OEI0Zdza6yGQmQ9mXtcaOjXGNsYI3lVQJbwd7v2yxEE+Z17ehSkRpN/sGN2ogQw+6dO3xFrED6sEG06pyFBTi9zf4sismIJ/aC+c58KL18X7+V1UZhBn0hhHBBNWaUJEiNYasdE7l3zCcDefOkJP+Y=
-From: "Frager, Neal" <neal.frager@amd.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-CC: "Hildebrand, Stewart" <Stewart.Hildebrand@amd.com>,
-	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "sstabellini@kernel.org"
-	<sstabellini@kernel.org>, "anthony@xenproject.org" <anthony@xenproject.org>,
-	"edgar.iglesias@gmail.com" <edgar.iglesias@gmail.com>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	"Stabellini, Stefano" <stefano.stabellini@amd.com>, "Saleab, Micheal"
-	<Micheal.Saleab@amd.com>, "john.ernberg@actia.se" <john.ernberg@actia.se>,
-	"matthew.l.weber3@boeing.com" <matthew.l.weber3@boeing.com>,
-	"vincent.stehle@arm.com" <vincent.stehle@arm.com>
-Subject: RE: [PATCH v1 1/1] include/hw/xen/xen_native.h: downgrade
- include-order assertion to warning
-Thread-Topic: [PATCH v1 1/1] include/hw/xen/xen_native.h: downgrade
- include-order assertion to warning
-Thread-Index: AQHdJJsckvnz/cO5N0ySs3v4A11/7LatQ5eAgAAFmcCAAAXOAIAAAMSQ
-Date: Mon, 24 Aug 2026 13:31:01 +0000
-Message-ID:
- <BL1PR12MB50322B1D97569B5CADEC8E55F0A02@BL1PR12MB5032.namprd12.prod.outlook.com>
-References: <20260805052723.2823538-1-neal.frager@amd.com>
- <2383a98d-d88d-415d-9de1-aa68a5d215fe@amd.com>
- <BL1PR12MB5032F21E0E2A6F17398B6D76F0A02@BL1PR12MB5032.namprd12.prod.outlook.com>
- <CAFEAcA8sWn1vjm+OFYzwA-jko2vYkFcWPwT6g9=0AeO+JQo-JQ@mail.gmail.com>
-In-Reply-To:
- <CAFEAcA8sWn1vjm+OFYzwA-jko2vYkFcWPwT6g9=0AeO+JQo-JQ@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-msip_labels:
- MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_Enabled=True;MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_SiteId=3dd8961f-e488-4e60-8e11-a82d994e183d;MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_SetDate=2026-08-24T13:28:44.0000000Z;MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_Name=AMD
- General
- v26;MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_ContentBits=3;MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_Method=Standard
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: BL1PR12MB5032:EE_|DSVPR12MB999310:EE_
-x-ms-office365-filtering-correlation-id: 27de5415-703e-4129-ff6b-08df01e3f0cc
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|366016|1800799024|23010399003|376014|38070700021|6133799003|10067099003|56012099006|11063799006|4143699003|18002099003|22082099003;
-x-microsoft-antispam-message-info:
- ftlHy0XSeh/p9lOxehx2+HpXxAvXChDoQNps/6Wz7BHXgPW0WAoTnlH+vzGEzR77XgQ2bbxZGdxK4NSMZ5gxVaq2zOCFajQbtuYXJZ5NTBelRrl/Kp7tfNZm1g76ATw5Ar5BS7xxAdTsBhfkFAVDafUNzYPtRbmZu79b2u659RdZFNYhCTBBKO35Bvq0EVeu01xJ8puVAYy/NQaon0+GBgC5PfOOP6okKpC4uSblkCkrZJcO1ChdmgbTlbTRSVr2lFcJvc1sbGEl4rE8qCnfJkiCkCDATHfSQUub4JeU+y+XLmlpU92vtJhXVVWWwXEK2pBuzCirC/8ChwNi2yXXEw+9wMG+IMKPKlm70OwV4Kx/2nODbf6fN8Jsja7t97ZOEJG4Gyz2HVundOuYQyEi9J/VafaSLMzg2gEl4IfBpMtNZYLtkMRJgtGjBL9RsQH2Vpv1gkGNtTokoPAd7FHhGQEiyBgk34MqvGCwFW5mHUpCCIpHWU6UaJiuTCEIJNo6JMRuJy6uIfCrOGCvgDcuW68L1txga0R379qtiM9Oo4k6tRwYapq7gf//Tg3r6jtoiMTYfnHV0DbWX8IIw/7Q6SOJe0U3m6cDq6x/MBWRX8YTPROVIawKKPjWc39AScEKa0CZseG3+5hruVsBuvKDzYT7r63XSNibiMsNDmsFSoRkHQKLhtHnvnsJcLpucWVzxkhKDAk6xQiOe+XPVmjGSaNVQJTtsOZLmcePFpHKbws=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL1PR12MB5032.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(38070700021)(6133799003)(10067099003)(56012099006)(11063799006)(4143699003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?utf-8?B?MzQrYVp3cTlMRTQ2Nk50TzkrSFdSK3RrbzNPK2s2S3VWTjc1aWNzNWZJOVpK?=
- =?utf-8?B?cFFOLzdIUWg1TkRmeVlMeVpYUlV2SUV6MXlUeldyc2hLYm1obi9XM0lqcWNt?=
- =?utf-8?B?aHVtaGhFOEVsTEtMekdVS0lUaG9hYnUxajNEL09BVVJrL1QzVmxWNHRUS1hT?=
- =?utf-8?B?bnExbFU3MENqSHhhclA5em1EMDFQalJOWjc3aU1pZW9iUm9sQ2g3elRUbG9h?=
- =?utf-8?B?VHQ0akp3cm5vTGM5bWtMa0QvemZSVVEzY3hPVlJLMnNzNlVoSFVWY3dXbDNa?=
- =?utf-8?B?ZG5DZVZWd2pTaHlHVk9xUmxjSU1RSUFsOFhGTWdBS2F2b0h2a2dRWkhnWU1W?=
- =?utf-8?B?K0tBdHJYT09QWVBPV0lldUZPdThtYXFKYzZvQ3MzcUJOMlV2ZDlwL3FoZGhz?=
- =?utf-8?B?ZVlObG11d3ZuQlg0clFFWlZGb2JaQ3pSSDZ5aFpsRzl6aFo4KzhqU2FlcFJ5?=
- =?utf-8?B?cFQ1ZjJHbktrZEl6WE5nbzYwN3pZSWZFRHJTYlJkMEZYMjYxNVNlWFVWRDl4?=
- =?utf-8?B?ZVNwN3h0YlpqNndlbUZ2R3hFMlhTbi9rRUtXcXlwUmU2UXVRbmFOYSthK2kv?=
- =?utf-8?B?RTRZRlhWMVNiTDg4U2Q0YWZJVmVwQytLZFdlclFwU285U1FUQXVLRlhZeHhq?=
- =?utf-8?B?MUgrOUM3a2drcGMxYzRuYkhCRGs5VWtYVGtaSEdGK1FnRVhmQUdzMUhhQVFn?=
- =?utf-8?B?ci9DRHlHb21ibFhNNWYwUzlGYi9va2lXOWN1TnJLU0o0em1YOG1qbWNVVm50?=
- =?utf-8?B?WTdRNzVlVFROU1h4d2xJMCtVUUdoRjRETTNyWUlOZUpKd3pqMjJpYWNsMTJi?=
- =?utf-8?B?SkRpYkxOTFUyWGRZc3lUcTg5SEc4andWTHphb0kvTkw5RTM2RGtKL3RhdlBY?=
- =?utf-8?B?NlE0ZHpWR2k5OG04V1hRTnl5T2FBZStmNjNFRGg1S0F6b1pSWHFOMTRWVXg4?=
- =?utf-8?B?a1ZqdjFIQjByanJuMXprc2pFeFlCOWhjQmZaWGFYdGlsaWJ4M2Q1WGlZS25D?=
- =?utf-8?B?RFcyc3BtaVhaaXp2Q2FzdEx5ckowbk5ncWJFYjl0SVBybzBlK1ZmL1BxWSsx?=
- =?utf-8?B?Q1VKVFVXanlXQXREWGIxZXJaK0tvam01UkhUeWIxcHlpbkhiS3p3eFZ2bktC?=
- =?utf-8?B?QnhndVJSbFZCZ1pneW1nNFU3b0ZKQnFiRzIxQ1MycWVXblFmZXdUQ1BqRFo4?=
- =?utf-8?B?MHFYS01aLzV1RGlpQmdxT2tGYnpiZ1RTcVV5VEt1M3lYakQ5VmQxRGtJbzhJ?=
- =?utf-8?B?bVdUdGk5eUo0QVBZUjNnTUxabkNmcTE4U04xVGhzck9wckZjR09DVlhMdFBq?=
- =?utf-8?B?dEFiRFFyanQ1TG1DTnVPVE91ajVXK1R2S0U5dG1nb0UzZG1GTTlocjdBajYw?=
- =?utf-8?B?WW5LRXZYeHFJWTlBdVVPQTFhNG9uVTRZbzZJYllBT0ZTaVIrM3V3V1JsYXhx?=
- =?utf-8?B?c0p4dkpIb0x6aE80ZGhHM0dvVUhOR252Y2lqRXZvMkhVbG41Rm9tek5CYjha?=
- =?utf-8?B?RExWS1F6RDhMS2NjbS9zYXJkb3dtU3hpTWxJZ3ZudGM5MHJuZHdmUGlXTlQz?=
- =?utf-8?B?ZFczbjU0ZGhhWWJxUG15dTIwYzZncjhaL3lkNmo0T0xzTTl5U1ltZ3J0UVBO?=
- =?utf-8?B?Qmh3TnhjM1IxYnd3ZmNEOVBuRVVMTXA4cWpiSm9qZi9QSUdQZDZQbk1wM1Vt?=
- =?utf-8?B?MnJjdWZ1eXpuZTVvL3UzazNKL00wL0Z6emRZTk00OTkyTFFZRFlZVmRqNFhj?=
- =?utf-8?B?K3lzSEUwZDZ4cFFDdUMxQldFSnpyRlRDY0IrUFd3MCtqdjFXWUFSN00rb0xC?=
- =?utf-8?B?RHlmVUhDbGhhaUdNV0RVZXYyNU0rdmVwOWFPU3NhR3V3MmM5L0RvNUE3OGpX?=
- =?utf-8?B?MDNKMHpLQmlkZUJSbzZ4Q1VTWXFIaVp0V3lqUkZpUkN5Rmk3dzV5Sk8ydU1h?=
- =?utf-8?B?UDk4Q1FldWI2blhQK2o0Smd1NGllbDNuNmV5Z0dQbXRmWlJHemczckdCcTY2?=
- =?utf-8?B?aXFqMGduV1RwZlJZaXFjalptYVpwNU5HZFowenBIL3RNUGM3MnNhRzFpUkhu?=
- =?utf-8?B?MUZzdm5qM1QremZJM2hncy90ZDFlNEJreTBlcXNram5XOHhlb05UeDFNSDY2?=
- =?utf-8?B?eHhQMklDdFlpOGlmcTZxV0F2aGtyMGt0LzJuUVY3R0xhMHR2cDdpUjFXN05Y?=
- =?utf-8?B?OGFtdVRDV3dkbmFoem5GSGl5c0VsM08rTktSajlDMWVUZlg5cDVKalAxdERm?=
- =?utf-8?B?Qy9CcHJJdWg2dXlmRGNpeTUyMnRmeHdvY0dOMVo1c0VRWFliOXc0L1ZWQk1n?=
- =?utf-8?Q?e7jMPaW5us8DGAUq9r?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=linaro.org header.i="@linaro.org" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1787580797; cv=none;
+        d=google.com; s=arc-20260327;
+        b=Qeg06ijEBpORyr9Gl8Ew6ZO5gbWGtAlZl83SwIHJFH8CVT7tNeI7yl/nHpfWuRZNJj
+         0LlSa797EwyMM7VhhTfYNvERVJAg12jSOOMVgRY+OGXy3oxHz2K/ucE0a3X8sWwiIqyK
+         Isk5luHTQLQ8Ae6JrZLBtyL4XMZGhhtdabL9C3760HU9qJ9kbFHj3zoQ6USDP7TzPflS
+         EueXxxg0TP5n3Gi4Sy076mRQKBWwbDCXOXj1l0zh3k7muewvgp8vJjL15q4ySU3XuROi
+         KmfWzZ4pedGyoxpPhhSK7qcghue647vZBskUW5sd67lHDTUgjJ7IVzznu6joJ9wMcJgh
+         QeEQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=i90qMMZqov8wxYQ380J3TeVkiRq0NLJOwuvPuDjyrj0=;
+        fh=sv8mYavBC6Z+YQNb7RBJnfB0wI4gDSvMcgATypxev0M=;
+        b=lqMnEU+1Fmwbs2hulQllQmMWuzlhaqhLkqJ/Szk+Oav9mtPliSf8mGklnuN9HkDBHK
+         HEsHUBsTA8nw4xPfJl/txWswB3xhZmJDZ25o6+8dFYu28bCUkgUYwvHlp/mZ+JlAc4Bm
+         sAIAxQbyCQVYALZ/o8nuz0o/3A87NX/SzNXP+0ykscLoPVh8U75T+b0JtJTrKgV+vqDo
+         UdKKLz75I3MQ7ghgaZJ5k5nVO1gap6mSE/3mZp6Y681jlJZCyBSHCQ84PRDbK8pgtlSd
+         hjyRzMOC7baaIte5sv5SF+4OgmT3xEmzWEAytJHLDAFk6oKO6txhxaynYeKld9NTmKhK
+         R4KA==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1787580797; x=1788185597; darn=lists.xenproject.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=i90qMMZqov8wxYQ380J3TeVkiRq0NLJOwuvPuDjyrj0=;
+        b=pC+SbYFhtQmSazvGjNjDJefjVhlGADMWsgr4i8PNtQR4ErF+l/T7+rvVCwMdREmyuu
+         zJKMnQs/SK8IJDWlBw2fSne2DUilN/MvQDWVDh1Me7i3/2em9L8wZs0NxvznyWwNXWxn
+         7JBujxyoBsKAebiK+hCHGI/kToOi3LYNhmRCgmM62EKf3je0l51DyrS5PwsFrTljnWjp
+         yiKs/PsqiPw8bcu/M6vnHzWV5z8k8t7eJMo78DHGNlFS1k1KiQNYZbkZycKjU5Dp8RjX
+         gn8/4b4u2SNQS7xd7dVaCddO+xL5yC3kq2olwmi2LRVFO6+sjagAOgNyMtvL/g72Nkhh
+         T8ZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787580797; x=1788185597;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=i90qMMZqov8wxYQ380J3TeVkiRq0NLJOwuvPuDjyrj0=;
+        b=FPjSAzGK6JvQsqHhNFT5KxeoFjUSkU7gqwtAkph8TvBUAtAxd+DbzLgSZyagqnfHtZ
+         S0AW1WbVLJOT/rCPKulH2I4PHwSqvqOqBzyix68+ZE78dvPRsnyssEhROvZgoYFrhf4I
+         hURAaSiu9I5ZO2L3XavYVwJVMEe8N0pHtFSNOiqxg+6AOBB/SXOj/E1byfhdxoKjX10y
+         XDtAGle8Wu1KNDTl2euF9S6D8Y1svLYyG+hcpYGFiEGTz2tjxOc/tDQTMlmLmf7VFtsS
+         DxtqTbjl1VGe4tYIzq1/mqM/JRjGPq5uHNOp8Y82Mwd90/j+1r4VsD5Z+DNXzl+q9gT7
+         4v4A==
+X-Forwarded-Encrypted: i=1; AHgh+RqLKKpI6Y8Ivj3Ee5JDUfWlDQ+Gx3YxnWleysyH8Lrzgh0HjWVyMXTO4xly3U38buD1Edpu7peb6Hw=@lists.xenproject.org
+X-Gm-Message-State: AFuF++l0NzkrAhlbpbjQx+VTio4avBxKlF8GKeZUVI5cJpXHqwE3x0EK
+	ORPA6KB3ldunBV1LUxyh0/WJ5YE+sf6tD900U0Ww0WrpO7loWTdJAdVJFOT8otTyZs+CfoCMDHL
+	p9w0MvGCPGuMRcOGCVtvXyGvbTgdKjON3BGMX92VQfQ==
+X-Gm-Gg: AR+sD12wad5vU7Caff6NvH0sIrRgaUpPe3jHiImF7Nye/NHor1K/7W6PU3VsOmKeRjA
+	qcJsFHW3mRl1hBG2sAh5OrE50tbhXkicf1DZcLGJsPQ2mUVHfCgIpz20txoDqjSwPBchGrT2tpM
+	P04Zg3yWe8n5uNFW38/k+PDzDgGZ6lPDNhAxeOcz1g7NjUQ2tqmU4Bjf+mnLXhyWkeqfYLzgz8g
+	yJWDdnZiuPqVg1XygWqHhuGedwR+LL9tgFrmA8lWy18AfgkFSaVU/NH5jR1rf4BhR4BO1vaI11v
+	uoXJFRvKrgjVrvwkiK59YgWi75lr34k8dFlaMCPjPZYA3vlByK9cni3UbfRSKvF/8a8PyUv9IJu
+	t8RTjGq/Pz1XZq1eTME7sVTnWdT1B
+X-Received: by 2002:a53:ac9d:0:b0:66c:9f99:9133 with SMTP id
+ 956f58d0204a3-66cf21bc69cmr6817963d50.29.1787580796530; Mon, 24 Aug 2026
+ 07:13:16 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BL1PR12MB5032.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 27de5415-703e-4129-ff6b-08df01e3f0cc
-X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Aug 2026 13:31:01.8847
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: e6oHlze76a1qQvRn8vjgKaPUShJQVAarM/qQgeVey3AVG/2gk7YA8Rlcvl6uWzwF
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSVPR12MB999310
-X-purgate-ID: tlsNG-c1860d/1787578266-D654487B-6F69CD01/0/0
+References: <20260805052723.2823538-1-neal.frager@amd.com> <2383a98d-d88d-415d-9de1-aa68a5d215fe@amd.com>
+ <BL1PR12MB5032F21E0E2A6F17398B6D76F0A02@BL1PR12MB5032.namprd12.prod.outlook.com>
+ <CAFEAcA8sWn1vjm+OFYzwA-jko2vYkFcWPwT6g9=0AeO+JQo-JQ@mail.gmail.com> <BL1PR12MB50322B1D97569B5CADEC8E55F0A02@BL1PR12MB5032.namprd12.prod.outlook.com>
+In-Reply-To: <BL1PR12MB50322B1D97569B5CADEC8E55F0A02@BL1PR12MB5032.namprd12.prod.outlook.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Mon, 24 Aug 2026 15:13:04 +0100
+X-Gm-Features: AcwNN1VxiYK2jXYCrQnBcioJAtVp2kRV-_L71rBTzoEWsRsEjGV3LGfW0swuAp0
+Message-ID: <CAFEAcA9rWqo92nt1StDuBwUjbV0eqdAA921nozpjQHDF_ARJyg@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] include/hw/xen/xen_native.h: downgrade
+ include-order assertion to warning
+To: "Frager, Neal" <neal.frager@amd.com>
+Cc: "Hildebrand, Stewart" <Stewart.Hildebrand@amd.com>, 
+	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "sstabellini@kernel.org" <sstabellini@kernel.org>, 
+	"anthony@xenproject.org" <anthony@xenproject.org>, 
+	"edgar.iglesias@gmail.com" <edgar.iglesias@gmail.com>, 
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
+	"Stabellini, Stefano" <stefano.stabellini@amd.com>, "Saleab, Micheal" <Micheal.Saleab@amd.com>, 
+	"john.ernberg@actia.se" <john.ernberg@actia.se>, 
+	"matthew.l.weber3@boeing.com" <matthew.l.weber3@boeing.com>, 
+	"vincent.stehle@arm.com" <vincent.stehle@arm.com>
+Content-Type: text/plain; charset="UTF-8"
+X-purgate-ID: tlsNG-16d1c6/1787580798-F627077B-FAC9D719/0/0
 X-purgate-type: clean
-X-purgate-size: 2028
+X-purgate-size: 2517
 
-QU1EIEdlbmVyYWwNCg0KSGkgUGV0ZXIsDQoNCj4NCj4gSGkgU3Rld2FydCwNCj4NCj4gPiBUaGUg
-LUkkKFhFTl9ST09UKS90b29scy9pbmNsdWRlIGFkZGVkIHRvIFFFTVUncyBleHRyYS1jZmxhZ3Mg
-Y2F1c2VzDQo+ID4gX19YRU5fSU5URVJGQUNFX1ZFUlNJT05fXyB0byBiZSBkZWZpbmVkIGJlZm9y
-ZSB4ZW5fbmF0aXZlLmggaXMgaW5jbHVkZWQsDQo+ID4gdHJpZ2dlcmluZyBhbiBpbmNsdWRlLW9y
-ZGVyIGFzc2VydGlvbi4gRG93bmdyYWRlIHRvIGEgd2FybmluZyBzaW5jZSB0aGUNCj4gPiB2ZXJz
-aW9uIGlzIGNvbnNpc3RlbnQgaW4gY3Jvc3MtY29tcGlsZS4NCj4gPiBSZWY6IGh0dHBzOi8vZ2l0
-aHViLmNvbS9xZW11L3FlbXUvY29tbWl0L2UyYWJmZTVlYzYNCg0KPiA+IFRoaXMgaXMgYSBidWls
-ZHJvb3QgaXNzdWUsIHNvIEkgZG9uJ3QgYmVsaWV2ZSBpdCdzIG5lY2Vzc2FyeSB0byBmaXggZnJv
-bSB0aGUNCj4gPiBxZW11IHNpZGUuDQo+DQo+IEkgYW0gbm90IHN1cmUgSSBmdWxseSBhZ3JlZSBo
-ZXJlLiBXaGlsZSB0aGlzIGlzIGEgYnVpbGRyb290IGlkZW50aWZpZWQgaXNzdWUsDQo+IHRoZXJl
-IGNvdWxkIGJlIG90aGVyIHVzZSBjYXNlcyBmb3IgX19YRU5fSU5URVJGQUNFX1ZFUlNJT05fXyB0
-byBiZSBkZWZpbmVkDQo+IGJlZm9yZSB4ZW5fbmF0aXZlLmggaXMgaW5jbHVkZWQuDQoNCj4gQnV0
-IHdoYXQsIHRob3VnaD8NCg0KPiBBbmQgd2hhdCB3ZSBoYXZlIGZvdW5kIGlzIHRoYXQgaWYNCj4g
-X19YRU5fSU5URVJGQUNFX1ZFUlNJT05fXyB0byBiZSBkZWZpbmVkIGJlZm9yZSB4ZW5fbmF0aXZl
-LmggaXMgaW5jbHVkZWQsIGl0DQo+IGlzIG5vdCBhIGhhcmQgZXJyb3IuICBGb3IgYnVpbGRyb290
-LCB0aGUgcWVtdSB3b3JrcyBqdXN0IGZpbmUgaW4gc3BpdGUgb2YNCj4gdGhpcy4NCg0KDQo+IEkg
-dGhpbmsgdGhhdCBqdXN0IG1lYW5zIHlvdSBnb3QgbHVja3kuIEVpdGhlciB0aGVyZSBpcyBhIGhh
-cmQgcmVxdWlyZW1lbnQNCj4gZm9yIG9uZSBoZWFkZXIgdG8gYmUgaW5jbHVkZWQgYmVmb3JlIHRo
-ZSBvdGhlciAoaW4gd2hpY2ggY2FzZSBpdCBtdXN0DQo+IGJlIGEgI2Vycm9yLCBhbmQgd2hhdGV2
-ZXIgaXMgY2F1c2luZyB0aGUgbWlzLW9yZGVyaW5nIHRvIGhhcHBlbiBtdXN0IGJlDQo+IGZpeGVk
-KSwgb3IgaXQncyBmaW5lIGZvciB0aGUgb3JkZXJpbmcgdG8gYmUgZWl0aGVyIHdheSAoaW4gd2hp
-Y2ggY2FzZSBpdA0KPiBkb2Vzbid0IGV2ZW4gbmVlZCB0byBiZSBhICN3YXJuaW5nKS4NCg0KRnJv
-bSBteSB2aWV3LCB0aGUgb3JkZXIgdGhlIGhlYWRlciBmaWxlcyBhcmUgaW5jbHVkZWQgZG9lcyBu
-b3QgbWF0dGVyLCBhbmQNCnRoaXMgc2hvdWxkIG5vdCBiZSBhbiBlcnJvci4gIEkgYWdyZWUgd2l0
-aCByZW1vdmluZyB0aGUgd2FybmluZyBhcyB3ZWxsLCBpZg0KdGhhdCBpcyB3aGF0IHdlIGFsbCBh
-Z3JlZSBvbiBpbiB0aGUgZW5kLg0KDQpCZXN0IHJlZ2FyZHMsDQpOZWFsIEZyYWdlcg0KQU1EDQo=
+On Mon, 24 Aug 2026 at 14:31, Frager, Neal <neal.frager@amd.com> wrote:
+>
+> AMD General
+>
+> Hi Peter,
+>
+> >
+> > Hi Stewart,
+> >
+> > > The -I$(XEN_ROOT)/tools/include added to QEMU's extra-cflags causes
+> > > __XEN_INTERFACE_VERSION__ to be defined before xen_native.h is included,
+> > > triggering an include-order assertion. Downgrade to a warning since the
+> > > version is consistent in cross-compile.
+> > > Ref: https://github.com/qemu/qemu/commit/e2abfe5ec6
+>
+> > > This is a buildroot issue, so I don't believe it's necessary to fix from the
+> > > qemu side.
+> >
+> > I am not sure I fully agree here. While this is a buildroot identified issue,
+> > there could be other use cases for __XEN_INTERFACE_VERSION__ to be defined
+> > before xen_native.h is included.
+>
+> > But what, though?
+>
+> > And what we have found is that if
+> > __XEN_INTERFACE_VERSION__ to be defined before xen_native.h is included, it
+> > is not a hard error.  For buildroot, the qemu works just fine in spite of
+> > this.
+>
+>
+> > I think that just means you got lucky. Either there is a hard requirement
+> > for one header to be included before the other (in which case it must
+> > be a #error, and whatever is causing the mis-ordering to happen must be
+> > fixed), or it's fine for the ordering to be either way (in which case it
+> > doesn't even need to be a #warning).
+>
+> From my view, the order the header files are included does not matter, and
+> this should not be an error.  I agree with removing the warning as well, if
+> that is what we all agree on in the end.
+
+The rationale for the header ordering is in the comment in include/hw/xen/xen.h:
+
+/*
+ * C files using Xen toolstack libraries will have included those headers
+ * already via xen_native.h, and having __XEM_TOOLS__ defined will have
+ * automatically set __XEN_INTERFACE_VERSION__ to the latest supported
+ * by the *system* Xen headers which were transitively included.
+ *
+ * C files which are part of the internal emulation, and which did not
+ * include xen_native.h, may need this defined so that the Xen headers
+ * imported to include/hw/xen/interface/ will expose the appropriate API
+ * version.
+ *
+ * This is why there's a rule that xen_native.h must be included first.
+ */
+
+...basically, if something doesn't include xen_native.h before xen.h
+then __XEN_INTERFACE_VERSION__ can end up defined to the wrong thing.
+(Disclaimer: I'm not a Xen expert, I'm just applying Chesterton's Fence.)
+
+thanks
+-- PMM
 
