@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F406C5DF9B
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2026 12:09:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1398808.1635007 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC564C5DF9B
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2026 12:45:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1398825.1635052 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wyTU2-0002DD-GO; Mon, 24 Aug 2026 12:08:58 +0000
+	id 1wyU3J-0007UT-ER; Mon, 24 Aug 2026 12:45:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1398808.1635007; Mon, 24 Aug 2026 12:08:58 +0000
+Received: by outflank-mailman (output) from mailman id 1398825.1635052; Mon, 24 Aug 2026 12:45:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wyTU2-0002D4-Cm; Mon, 24 Aug 2026 12:08:58 +0000
-Received: by outflank-mailman (input) for mailman id 1398808;
- Mon, 24 Aug 2026 12:08:56 +0000
+	id 1wyU3J-0007UM-B3; Mon, 24 Aug 2026 12:45:25 +0000
+Received: by outflank-mailman (input) for mailman id 1398825;
+ Mon, 24 Aug 2026 12:45:24 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wyTU0-0002Cy-H3
- for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 12:08:56 +0000
+ (envelope-from <Stewart.Hildebrand@amd.com>) id 1wyU3I-0007T3-9m
+ for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 12:45:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wyTTz-00EbC9-B2
- for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 14:08:55 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wyU3H-00EjGy-F1
+ for xen-devel@lists.xenproject.org; Mon, 24 Aug 2026 14:45:23 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a8c344a-2eae-0a2a0a5409dd-0a2a450ac44a-22
- for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 14:08:55 +0200
-Received: from [209.85.218.47] (helo=mail-ej1-f47.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a8c3457-f2d2-0a2a450a0019-d155da2fe0c3-3
- for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 14:08:55 +0200
-Received: by mail-ej1-f47.google.com with SMTP id
- a640c23a62f3a-c1c52d920b8so479739666b.2
- for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 05:08:55 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c2496734bfcsm1318100366b.43.2026.08.24.05.08.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Aug 2026 05:08:54 -0700 (PDT)
+ (envelope-from <Stewart.Hildebrand@amd.com>)
+ id 6a8c3cce-2eae-0a2a0a5409dd-0a2a45048eba-44
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 14:45:22 +0200
+Received: from [40.107.209.2]
+ (helo=PH8PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Stewart.Hildebrand@amd.com>)
+ id 6a8c3ce1-b57f-0a2a45040019-286bd102b3b9-3
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Aug 2026 14:45:22 +0200
+Received: from DM4PR12MB6472.namprd12.prod.outlook.com (2603:10b6:8:bc::7) by
+ IA1PR12MB6019.namprd12.prod.outlook.com (2603:10b6:208:3d5::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.8; Mon, 24 Aug
+ 2026 12:45:15 +0000
+Received: from DM4PR12MB6472.namprd12.prod.outlook.com
+ ([fe80::4a4d:4208:3862:fb7a]) by DM4PR12MB6472.namprd12.prod.outlook.com
+ ([fe80::4a4d:4208:3862:fb7a%6]) with mapi id 15.21.0339.012; Mon, 24 Aug 2026
+ 12:45:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,151 +55,138 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787573335; x=1788178135; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=j2YhoGNkBJjMBx0aA28w01+IZzX50bmCA+2GGcuYGk8=;
-        b=UhI4V6NXtx+nz+j1VJW/JFoirarzU9kosAecdiQXNQXTXJUl6C9kmvwYxnag0A4kye
-         Cj1YYNDJmadUwrhIjkJ1UrjCZzuTaL2MpJ6sVlPJz1HlZkeEk9sxxdoH8RUfewDMI3fV
-         V7+qI94Lij1WeJkGN6gJgm72AmsvugmovUlthdmnaMMmcUzA1cDFWLdknkLzAqyeNe04
-         mOG9vQAics9lvW0Ui3haF9JhR6SOK5mM87p7+vekx8AiEXr0X66jOWCBGHZ7Lo3U2rXL
-         cH6IgtvAQovf63azp1bMCC2YPeND/VCBbR0zk2fVjWAYSDtUsk4HJbK4dxBrkh6QSb+j
-         HvAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787573335; x=1788178135;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=j2YhoGNkBJjMBx0aA28w01+IZzX50bmCA+2GGcuYGk8=;
-        b=VjCc0p1vUlCpi+1ph1o4BOcgEjM23n0buwxDpXD0khQF59cpMOzOgpscn4UkqNAuO5
-         mwI7HJtbemhn11Ab1rCFzpI4nanyqmayPo5JUsCWkKdgpj9eJEIoutcN7Ql9cP4LOH96
-         DQo6C3cxM31SGFUR43dqQQgEgugk4lv1Wxams+kgQCg0xm+NJqqKYiYj1132VEjWH3Sy
-         AmNF9YMlGyCHFd/qzca1QSl//M+8Sluv7RebS2nS2urBP/hbU4osI4mufqcZHgJI+QwA
-         iXcFqR1/CcEErLrpK5aj6nMLynBRIpJtKNA3CGu3qGR2RdD2cj8xFVMNTirYs7Hnf3eN
-         3BZw==
-X-Forwarded-Encrypted: i=1; AHgh+RpMm2Sf4Hfn9ItD5Ll1Yzq4BDREhlkBrFWw7XPyP1pp2ksblWTAVzjZtu30x7YCLa4/LO5ITsVzZ0k=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lS9DCYMNHP4dD31NAxQHaV5rAP/LPWVBNM9Bu2GocKOLQlvlIq
-	f7XVH4mKNQXYXdZ8FyerXDJXce21/yWXPdTV3nATJa75UHdzH/gmFWcGeAkqW5HbZA==
-X-Gm-Gg: AR+sD11omI8broRjdujgebaD8LAPPZjcnnNwdeNzS65bhuEgHmqbb4IMPvzYX/BEYIS
-	sjh0iF4X7gBulStoUU4JYyvJFbTUypXuTrm4Sdg4ynWfJaIL/Hxl3t9pYHJeAGoa0+XPBITXvhp
-	pB0C3F1u/2cDVhlRLRUFFTdG2K7Xzf1E5bO9+LfRJ3mOPcZelYRBTqHeDb5aQx5AZUFZBZ8B3SC
-	sn0Xg1NrBMYakVSTzmbZQBzIyq73Dr8AKGbQNmJJInsdcHjG+QY55zUqWbGree1p2gc6V4aB+uI
-	rsBn1wyaTzEBJ2v6PWVyqXXJbMi+Is6cCRBIE9Umb1srXaj4tgGU8SQRPuHcdS+omxdu7Zpawj2
-	FclmlQuKuKa4uPmGVLOtVsItjnpbHMo5npcDmSakVhL/mKwYsfLYn5ECOUck4ProRCyLTowmalk
-	WXevzFPqjSVcsqYNCQKpk/suKX5GhYyyeRlerCOXX4pKvqR49x0+zvG4rbqDSgiKvj66Ye/LMcS
-	9il35KGGz29MTAVP8/RtCsvg4Apw4L1XhNveZhN4YZGbZmNMRri
-X-Received: by 2002:a17:907:cd07:b0:c24:b11c:6c05 with SMTP id a640c23a62f3a-c24b11c6ce6mr1310025266b.14.1787573334715;
-        Mon, 24 Aug 2026 05:08:54 -0700 (PDT)
-Message-ID: <94e4e14c-11bb-48cf-aced-7ed6be8ad34a@suse.com>
-Date: Mon, 24 Aug 2026 14:08:53 +0200
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=WPdpcIQuygFSxM0G2BiE3bP3Gb3vHj+Dz10tiL+h15DoXHFa0AXEy5k9VIqvwEOoOvFb/eiQDK8Hw95hSuRRRWQf2K1vedFxD6ChuNMqb9rO2SRb6laJeAGIRX+42o/WOUAMVpx4uNxd9lweRoxtUBSKUp/ukL470wINRqXZrevdWKcevNuesnRiVyb/SX0yU5ml3/yiir3yx6zH3I92/JlhimBsvxL07awKExfEZeDlBcu6fA1U80cg3oGohFiFsfdlY6cAmWQwyenOH17QezFXvoLCg/EVMtk/3LtLTf5CTkqY97ZxYiyPIBxHM3X/ZFhHu/FggzXCpHRDDEjLWA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=GqXGEAPZorVAQCgilMyaltjUKRO43w8nx6VC8NlkFSg=;
+ b=bxn3cUBot41OryiqRBFd3aRNpfKxUEMrDEcZarxqHPa6Ef0vfvYzhKCu3zlwZMSpI58jckI4h2M22NKv9CL5kdhO7xbZmTyiOsM+71PcIThzVs/VM0v2TEjARQJtFeTL0jqQN8LplqQPoot6jNYp4LxFGMqRQBqNUQ1cUpvRzNltGR5siNRrMiyJ4qOCf++bx3bZwQug8BisPQIQF7A5LCHIHrxtg1qPk4DCB5apjhz8oTnReHhrl/YBSrT6ymF82WKSOXvRa0KXLlE0FWbnyMbv9Yjn//upGNx+eRIWwuypK43LF9m8DLs6iTrN3UiyinU9jy10fs1EUdS34u+5sg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GqXGEAPZorVAQCgilMyaltjUKRO43w8nx6VC8NlkFSg=;
+ b=mHgIWnz3luXhDIk5GpgFdSmIYNVFChZa7Srqjj/OhNWMrC9OHgSC0oyHa/+aQln2fuwbJk5ed7m+q171ZSvXFTFE9+ZHtsQ5i6c0mLdCaowr1HyMwPx0KtU25g06oS0RVU5Eah6PXpnVxtAno5iGevbXjSZ/+TWxhu92GcXl3ZA=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Message-ID: <2383a98d-d88d-415d-9de1-aa68a5d215fe@amd.com>
+Date: Mon, 24 Aug 2026 14:45:11 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] public/xen.h: Update comment on mmu_update sub-command
- size and PTE alignment
-To: Teddy Astie <teddy.astie@vates.tech>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Frediano Ziglio <frediano.ziglio@citrix.com>, xen-devel@lists.xenproject.org
-References: <1787563949.8631fc262581453bbf619ec5b2062170.1a0331d3dbc000c4f3@vates.tech>
+Subject: Re: [PATCH v1 1/1] include/hw/xen/xen_native.h: downgrade
+ include-order assertion to warning
+To: Neal Frager <neal.frager@amd.com>, qemu-devel@nongnu.org
+Cc: sstabellini@kernel.org, anthony@xenproject.org, edgar.iglesias@gmail.com,
+ xen-devel@lists.xenproject.org, stefano.stabellini@amd.com,
+ micheal.saleab@amd.com, john.ernberg@actia.se, matthew.l.weber3@boeing.com,
+ vincent.stehle@arm.com
+References: <20260805052723.2823538-1-neal.frager@amd.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1787563949.8631fc262581453bbf619ec5b2062170.1a0331d3dbc000c4f3@vates.tech>
+From: Stewart Hildebrand <stewart.hildebrand@amd.com>
+In-Reply-To: <20260805052723.2823538-1-neal.frager@amd.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1787573335-51AC4CFC-1AED0AEF/0/0
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR0P281CA0080.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:1e::14) To DM4PR12MB6472.namprd12.prod.outlook.com
+ (2603:10b6:8:bc::7)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR12MB6472:EE_|IA1PR12MB6019:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8e2cdfb6-db75-4db4-4a71-08df01dd8b6b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|1800799024|23010399003|376014|56012099006|10067099003|6133799003|22082099003|18002099003|11063799006;
+X-Microsoft-Antispam-Message-Info:
+	R6F/Kk4sikH4CKAH488XnS2/cMI03+Cx1ML21gmDpNigllhtMU0Tvo5FqRhERxAZcXKa2H0Wm4PSwxCxn96lC0OXZFjjX/arsacLqLxwCHkzP1CyD07wKPVjCrbaay2kfj3ox/ss2AWm1ZILEpu/FxPB0vfitrUsaLQQNVS9t90rihr7hqJs1Aedj2haySHz5eLw1Vq4IEtpkxZzbHKhm55/5XzMJXXiGaToXrPhbzQc9W8hktKYd355ps2tIq7PbOsC7ec4XqBMBp0coLkZ3/UrtO/UbQwQShw11f5e4lgayNjiUCh5nSlETVdeWch36oS16ZsXvkzmQuU7JGASxSaEsjDENzZxE9f/wIwnEV28STD+WruixkgJdqSa6lYXTg/lj8whV9RxIKZnvVlP4uEsf2WTDjsTkrcbRCn44OOjAQ9b6WNKMDVfXTaiP1r/d/qAIB0SrIPro27J2mCe4WPm69T8Ewrq2OV9n9fDAjkTNBmOy0NR2A8i1WzbykBuZi6FDSAyZA2fSgzm0bgm8rBWdkpSeqv8BQL9ajJ+x3rPoZGWZGbSDpg3kPF+JXShbvOjUbUrAmhxDx3UZq8UrJGDZcAEePFXEUC4/xl4Bbvy9MZ4PjMmVcGA1XrUpmC95T28JoDE8caFxJgAroz4DSaGfcvsU2I+lQebB446NXw=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR12MB6472.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(56012099006)(10067099003)(6133799003)(22082099003)(18002099003)(11063799006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?d3JHd05SRFp0ZGRqVmFVNVhDZWtGbk52ZEFjQmUvY0Z4Uy94eW9Sd1J5Yjl3?=
+ =?utf-8?B?aW5BSWVyR0xQT1BmdFErejhqckk3MHFLRFV1UHd3dzdQaHdIOGpocHB6NEF3?=
+ =?utf-8?B?VnFDSERHU0xYOE1ROXFxb1VUS1JtSGFMbm01TU1Gek1QMERhL2l5NEdvWHJD?=
+ =?utf-8?B?OFBvMUJaWndGMUJkNTczY3NJdlJ6TGJDa0xzNWdHSXl0YzVvZ2lZSmlhRjlq?=
+ =?utf-8?B?WG9VcDYrSFI3Y0xPZTAzZE8wbnBvMFV6UXhDRVJxc1liQWFaTjBVMnMyTklI?=
+ =?utf-8?B?MU5ORjF0R2dQSmVkaFV5TnZ5STdWWnhSWWFTb2cxblY1RGx4T3lsQ2VPeE5V?=
+ =?utf-8?B?Mk05RzlJbS9BWjN5eXBja3FLeTBSaW5VbUZGREJSUWZFN2VYbHUyVUVXTXEv?=
+ =?utf-8?B?cHFiRXhRakZFQmYzSzhBVVFBTm9FbzIra3lCS01YeE5rWXk1bmpYdzdVdDRn?=
+ =?utf-8?B?Vi9RQnZocm56OHlrd0cvQzRSQkdYR2JvcnNTT1NBU0JrWitFbjNueW1lQ1VZ?=
+ =?utf-8?B?NWsvR3RDbEtZMlE4VnJVd294U2FjTlpWQmpBQjNqd0tDKzNRK2NGNWVZTHda?=
+ =?utf-8?B?MzVoc2lHSndxb0lobTQybkk1OEpIb0dNMEphZWZBa3hQRnFSZnV1MllSaVJ0?=
+ =?utf-8?B?dmFQbUJEa281Zk1qRkRkWkk2MDBiZTVLMUtlUUtMWWNCeGdWZW0rbThPM3NH?=
+ =?utf-8?B?K1ZlSHpwWDFUakJjTTJmdmJ5THl5L3pNS05JWFlGOEVwcnUrMVdVbjVSaVlu?=
+ =?utf-8?B?akJBY1J3amQ0UXVsNytWSVY0a3hZRk5lcnFteGVlVnBhVjFMQjRGa3RqWkhV?=
+ =?utf-8?B?aDNTYlJCVzlrVFVEMmFuQndjdEhzakQwK3BOZ3ZCVktuYkpqMGFubGZPV3ZS?=
+ =?utf-8?B?Q0c2Y3BJeE0xdG4vOTVSUDFhQjdSdERjUUZYS2g3dFVIU1dydzQzU2d2dXVZ?=
+ =?utf-8?B?bHArTTJYbkhhS0JKMkJkVnhvS3N6ZkJ0ZURwUHZ4RkVuNVNXc01TZkR6S3ph?=
+ =?utf-8?B?SUlWVzBFbSswSld1VXpnV0QxclFSbjA3dFFpdjhKQkVmRWhVdlg2M3ViN1kz?=
+ =?utf-8?B?MWpuYzdMMGpJUjk5aWlRQ0dSWHgvM3BjVHg2c3VWUkUvOGdMTHBhckUwV3o3?=
+ =?utf-8?B?WEUrRkxkcU1MUlQ3TjF6UktsS2xmM0NVbkFLNkxKKzdiVS9Eb1dnTFZYVU1O?=
+ =?utf-8?B?d05oM3FobVVIYVFkQ1lZU2x1akUwN0kvMnppbWtTN3V6dXJPQ0k3cWJwdEtr?=
+ =?utf-8?B?WWUrSlN1b3dzWFM3eWo1eU8zdm05VFRncklDemVSVTBrSldmUWxUNTlhV1ZC?=
+ =?utf-8?B?WUloeXZxVXo3amxsUmhqSnZic1EyTkhTb09kc0t0eFFQVzlYeENNek1HVCs1?=
+ =?utf-8?B?VjRDdy85VytYc1V3S1E0R3E5ZXVZRHM3VURzQWNvUmFPQVRvUlZzNXBWRXps?=
+ =?utf-8?B?bDhjRlNWZEdLUWRHNGo0Ry9KcDcwd2d4bkZtTnhCUjVRN004MFVWTGhPVStK?=
+ =?utf-8?B?emJuQVR3TzhSR2FSTHBsRFpSVzZGM21FUm04UmJ2a0NWdy9hNXpwcWs5ejJ5?=
+ =?utf-8?B?dVYwSVJCM2ZnaTZiME5rVTgwR3h0d1ZWSDloMnFMTFIxWVMvYVh6WEFpNHFR?=
+ =?utf-8?B?VnVKQ2kzL1hKZ1BhWFUxY29wRVJFZFN5YXJQVGc3bW9XVG1LdE1nckUybzhZ?=
+ =?utf-8?B?WnVnUWtzZ3hjTnZ1cS9lUWJuM0hYakVremdQQU5RNFVaNldhZUtBdy9od29W?=
+ =?utf-8?B?WENtRXcrK2t3N0hnSEZxQWV2VDVkc2tuTVVuT0RhdzFYOTR1djk5UmR3NkZv?=
+ =?utf-8?B?K29vbFB2WDZHUkJKMll4QmoxQkRsRG5nRWFXdEVXZnJQSEhkVC9VdkJFZ0h6?=
+ =?utf-8?B?dnZqUE4wZnRvMWh3cjY4QmFNcVNoUnpCUVF5NHArU3lJYjI3OG9VMDBURzBa?=
+ =?utf-8?B?M212RFJmL0UwN3B5VEM3anhrL3hLcjg2Q1RlRVhjengzcGpJTmhSbXBteGoy?=
+ =?utf-8?B?cER1dldQRm1MaUNqR1BWS2RYVDRXKzd0MmdxeWZDSEtjeWFkaTZzYStkUDkx?=
+ =?utf-8?B?akl2MDQyUFRZazYvQjFqTHlPRTJ3VVJiRUFZcWV3SkI2Z1ZYaXc5MkUwNFha?=
+ =?utf-8?B?dTJwdGZ1cThiNkJIYS9wMTdRVlVOc2NtNUY3MVZIaWI2MFJiUng4U2E1ZU50?=
+ =?utf-8?B?ZTh6NW1yK0hiUDhjT2JTMi9tNGV5NEkrdFMzZlhMVmtSQUNqWnNZd1JJakhv?=
+ =?utf-8?B?NmFIYUh1UHZxc2piTzU1SDFHRVZucC9jUkVaZk9KbjlHejZsSnJOcVQxRkx1?=
+ =?utf-8?Q?GvFtCs6hpLwIjMPzor?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8e2cdfb6-db75-4db4-4a71-08df01dd8b6b
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR12MB6472.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2026 12:45:15.1137
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 0zUykAnEZR3KllfoZ2h8hZN68DD2o2qY2sAbkxB+WVrKpF/nLUHLRAwXzz/ZJKS9GUwqtjZ1oRqJ/npY+2X9mQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6019
+X-purgate-ID: tlsNG-ebf023/1787575522-C18D1B50-C9E0FBE4/0/0
 X-purgate-type: clean
-X-purgate-size: 2493
+X-purgate-size: 1128
 
-On 24.08.2026 11:31, Teddy Astie wrote:
-> HYPERVISOR_mmu_update passes a set of request, where each request has a pointer
-> to the PTE along with a sub-command.
+On 8/5/26 07:27, Neal Frager wrote:
+> The -I$(XEN_ROOT)/tools/include added to QEMU's extra-cflags causes
+> __XEN_INTERFACE_VERSION__ to be defined before xen_native.h is included,
+> triggering an include-order assertion. Downgrade to a warning since the
+> version is consistent in cross-compile.
+> Ref: https://github.com/qemu/qemu/commit/e2abfe5ec6
 > 
-> The PTE alignment padding is used to transport the sub-command while the rest
-
-There's no "alignment padding" here. It's the low bits of a necessarily-aligned
-PTE which are used.
-
-> is used as an address to a PTE entry. The current documentation state that the
-
-Nit: states
-
-> 2 first bits are used for sub-command, hence the other ones for PTE which
-
-Better "2 low its", as "first" is ambiguous.
-
-> imply here a 4-bytes alignment on PTEs.
-
-The part after the comma I'm having trouble parsing. Can this please be re-
-written some?
-
-> On PV64 and PV32-PAE guests, all pagetable PTEs are 8-bytes aligned, hence
-> off-by-4 PTEs addresses are always incorrect. Non-PAE PV32 guests used
-> "legacy pagetables" which had 4-byte aligned PTEs. However, support had
-> been completely removed since Xen 4.0, and was only available when Xen was
-> built in 32-bits non-PAE mode [1].
+> Signed-off-by: Neal Frager <neal.frager@amd.com>
+> Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
+> ---
+>  include/hw/xen/xen_native.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> Current Xen logic behaves as if 3 bits are used as sub-command, thus all
-> off-by-4 PTEs are actually rejected as being unknown sub-commands.
-> 
-> Adjust the documentation to match the current logic implemented in Xen,
-> also expanding the documented sub-command parameter to 3 bits.
-> 
-> [1] 84d54d5d8b31 ("i386: Remove non-PAE hypervisor build target.")
-> 
-> Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
-> Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
+> diff --git a/include/hw/xen/xen_native.h b/include/hw/xen/xen_native.h
+> index 5caf91a616..3e1137efc1 100644
+> --- a/include/hw/xen/xen_native.h
+> +++ b/include/hw/xen/xen_native.h
+> @@ -2,7 +2,7 @@
+>  #define QEMU_HW_XEN_NATIVE_H
+>  
+>  #ifdef __XEN_INTERFACE_VERSION__
+> -#error In Xen native files, include xen_native.h before other Xen headers
+> +#warning In Xen native files, include xen_native.h before other Xen headers
+>  #endif
+>  
+>  /*
 
-Did you forget to also add a From: tag?
 
-> @@ -260,21 +260,26 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
->   * hypercall. Also if so desired the OS can also try to write to the PTE
->   * and be trapped by the hypervisor (as the PTE entry is RO).
->   *
-> + * Note: Historically, Xen had support for non-PAE PV guests with 4-bytes wide
-> + *       PTEs (if Xen was built in non-PAE mode); which support got removed in
-
-A native speaker may correct me, but "which support" reads odd to me. Imo either
-"that support" or "support for which" (and then perhaps with a comma in place of
-the semicolon).
-
-> + *       Xen 4.0. As a result, in current Xen,, all PTE are now always 8-byte
-
-Nit: Double comma (when perhaps none is needed at all in that place).
-
-> + *       aligned which allows expanding sub-commands part (now 3-bits wide).
-
-Whether the part from "which" onwards is really relevant here I'm not quite sure.
-
-Jan
+This is a buildroot issue, so I don't believe it's necessary to fix from the
+qemu side.
 
