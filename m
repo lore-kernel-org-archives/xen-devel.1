@@ -4,35 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C59AC61DBD
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 11:42:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1399183.1635368 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A03B7C61DBE
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 12:01:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1399194.1635377 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wypXv-0005yo-Mk; Tue, 25 Aug 2026 11:42:27 +0000
+	id 1wyppo-0000SW-9b; Tue, 25 Aug 2026 12:00:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1399183.1635368; Tue, 25 Aug 2026 11:42:27 +0000
+Received: by outflank-mailman (output) from mailman id 1399194.1635377; Tue, 25 Aug 2026 12:00:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wypXv-0005yh-Jp; Tue, 25 Aug 2026 11:42:27 +0000
-Received: by outflank-mailman (input) for mailman id 1399183;
- Tue, 25 Aug 2026 11:42:26 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1wyppo-0000SO-6E; Tue, 25 Aug 2026 12:00:56 +0000
+Received: by outflank-mailman (input) for mailman id 1399194;
+ Tue, 25 Aug 2026 12:00:55 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1wypXu-0005yb-Nd
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 11:42:26 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <gwd@xenproject.org>) id 1wypXu-004vzN-1L
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 11:42:26 +0000
-Received: from mail-lf1-f47.google.com ([209.85.167.47])
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
- (envelope-from <gwd@xenproject.org>) id 1wypXt-00HLmH-3B
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 11:42:26 +0000
-Received: by mail-lf1-f47.google.com with SMTP id
- 2adb3069b0e04-5b0148201fbso4191652e87.3
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 04:42:25 -0700 (PDT)
+ (envelope-from <jgross@suse.com>) id 1wyppm-0000SH-N8
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 12:00:55 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1wyppl-00FLtq-G3
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 14:00:53 +0200
+Received: from [10.42.69.6] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jgross@suse.com>)
+ id 6a8d83ef-bab6-0a2a0a5309dd-0a2a4506c396-26
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 14:00:53 +0200
+Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jgross@suse.com>)
+ id 6a8d83f5-195a-0a2a45060019-c387df82a34a-3
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 14:00:53 +0200
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id B611F86CC6;
+ Tue, 25 Aug 2026 12:00:44 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 788B513331;
+ Tue, 25 Aug 2026 12:00:44 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id G+VTHOyDjWrTYAAAD6G6ig
+ (envelope-from <jgross@suse.com>); Tue, 25 Aug 2026 12:00:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,313 +61,296 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Cc
-	:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version;
-	bh=yBQU37hqUoKtbMQ4pVzLFDUBUC8LRb+kRQfwB5YVEgY=; b=n0g9pwH0h50ZRvNAt0qGnWwZpF
-	NW0rCaqaihE0uMyCecyT05eUFgG2LDaTkxbELeAETRezjnmdion68pNHRc+KuA/S+iG0BKb4J3tpH
-	nU8ZOh8HPDziUApbuoKTKIBWaOAjb3uF+Hatm+mHpQXKrqi6bkys3tsAIp7obqb0/U8M=;
-X-Forwarded-Encrypted: i=1; AHgh+RonJcatoAEc2xTqw9v+pHKoUzH753d/znrFLNLhM/aUPNZLJPeOnoy664B8Mye5nH3FvS+SzWQJuqE=@lists.xenproject.org
-X-Gm-Message-State: AFuF++mrNyjv4VQUXvTbParL/2CnRNUPAFvjuLtgu6IeMRz49X61nUz0
-	vWBKmsfN1N73O/4nCZgEZjUNxe3ZcBPFVRlefYYfHlewaT+EWMRclEkexJ1riz9NMdInjXmKc+G
-	ap/xpWFSFZwkmEP9nYKvaoQBAyPf5aLo=
-X-Received: by 2002:a05:6512:691:b0:5b2:e5b7:2419 with SMTP id
- 2adb3069b0e04-5b49cd606b3mr2094380e87.5.1787658144688; Tue, 25 Aug 2026
- 04:42:24 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Autocrypt"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Autocrypt"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1787659248; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=nYI6Tw5TM49GzToIO3x4eefLbl+QFgyn24vAbLiQGGE=;
+	b=MdQBFbphi0aiHvmD8WC9KuO/rIFvwE9TDmqmP2og2jj2ZU1HYsT6MBIbs2dP6mkrD8yonS
+	tf8R8Y8QdA5E8naSmPLQp/si5IFEAAjayL7Ha4sGtb5rYxN6OLdb3OR8EWffkG7jUwmJZB
+	TBTbhVz+u5J6viY9c60z/KVqgQWX388=
+Authentication-Results: smtp-out1.suse.de;
+	dkim=pass header.d=suse.com header.s=susede1 header.b=kgznDe6c
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1787659244; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=nYI6Tw5TM49GzToIO3x4eefLbl+QFgyn24vAbLiQGGE=;
+	b=kgznDe6cAWgOkw54YfiiLkbfWJXOrQZoyk0MvaWAfXemvBSOtBEgwbGyL1MC2ReP88S5V2
+	A8j0FI0vyOl6wcenzFCRgQY40IAgXmF0Y6XKbD47un3MFCta79THr6KocHuQ5xhpMhm7ib
+	TLydZsVO9+KIbILDtSC6G1MeO/fGOcw=
+Message-ID: <c654817b-dc5c-4e3b-be7a-156432af1dbf@suse.com>
+Date: Tue, 25 Aug 2026 14:00:44 +0200
 MIME-Version: 1.0
-References: <20260820-asi-part1-0-f2dbd92b8459@xenproject.org>
- <ec040560-4377-474d-a929-3080b74bb0af@suse.com> <CAFLBxZbQD7HgdYK3-yzaMOt4P2geO2PSOSDi4-c3KHZ96DDifg@mail.gmail.com>
- <044095b7-3c8d-40da-9d21-281c522a49ae@suse.com>
-In-Reply-To: <044095b7-3c8d-40da-9d21-281c522a49ae@suse.com>
-From: George Dunlap <gwd@xenproject.org>
-Date: Tue, 25 Aug 2026 12:42:12 +0100
-X-Gmail-Original-Message-ID: <CAFLBxZa0Fmmic1JLwHOdFCn1=rGP6Un2q1ZxBa1DpsO_AAmD6A@mail.gmail.com>
-X-Gm-Features: AcwNN1WeBD7-ShqIv6056gt7-SMnWmmHi6BxcaYpkhtmayuSEmOLFoM4ZCCyweI
-Message-ID: <CAFLBxZa0Fmmic1JLwHOdFCn1=rGP6Un2q1ZxBa1DpsO_AAmD6A@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 0/7] x86: Address Space Isolation, part 1: per-domain area
  mapping rework
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
-	Teddy Astie <teddy.astie@vates.tech>, Anthony PERARD <anthony.perard@vates.tech>, 
-	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, 
-	Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
+To: George Dunlap <gwd@xenproject.org>, Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20260820-asi-part1-0-f2dbd92b8459@xenproject.org>
+ <ec040560-4377-474d-a929-3080b74bb0af@suse.com>
+ <CAFLBxZbQD7HgdYK3-yzaMOt4P2geO2PSOSDi4-c3KHZ96DDifg@mail.gmail.com>
+ <044095b7-3c8d-40da-9d21-281c522a49ae@suse.com>
+ <CAFLBxZa0Fmmic1JLwHOdFCn1=rGP6Un2q1ZxBa1DpsO_AAmD6A@mail.gmail.com>
+Content-Language: en-US
+From: Juergen Gross <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <CAFLBxZa0Fmmic1JLwHOdFCn1=rGP6Un2q1ZxBa1DpsO_AAmD6A@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------2jktY701EIsqVP6R2djx5EbY"
+X-Spamd-Result: default: False [-6.41 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	SIGNED_PGP(-2.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
+	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_UNKNOWN(0.10)[application/pgp-keys];
+	MIME_BASE64_TEXT(0.10)[];
+	MX_GOOD(-0.01)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	MIME_TRACE(0.00)[0:+,1:+,2:+,3:+,4:~,5:~];
+	TO_DN_SOME(0.00)[];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	ARC_NA(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[suse.com:+];
+	HAS_ATTACHMENT(0.00)[];
+	DNSWL_BLOCKED(0.00)[2a07:de40:b281:106:10:150:64:167:received,2a07:de40:b281:104:10:150:64:97:from];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,suse.com:mid,suse.com:dkim,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo]
+X-Rspamd-Queue-Id: B611F86CC6
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Rspamd-Action: no action
+X-purgate-ID: tlsNG-16d1c6/1787659253-F500977B-3834091A/0/0
+X-purgate-type: clean
+X-purgate-size: 11890
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------2jktY701EIsqVP6R2djx5EbY
+Content-Type: multipart/mixed; boundary="------------rBTJ0QPH0xXRrlonZW0NjZYI";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: George Dunlap <gwd@xenproject.org>, Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+Message-ID: <c654817b-dc5c-4e3b-be7a-156432af1dbf@suse.com>
+Subject: Re: [PATCH 0/7] x86: Address Space Isolation, part 1: per-domain area
+ mapping rework
+References: <20260820-asi-part1-0-f2dbd92b8459@xenproject.org>
+ <ec040560-4377-474d-a929-3080b74bb0af@suse.com>
+ <CAFLBxZbQD7HgdYK3-yzaMOt4P2geO2PSOSDi4-c3KHZ96DDifg@mail.gmail.com>
+ <044095b7-3c8d-40da-9d21-281c522a49ae@suse.com>
+ <CAFLBxZa0Fmmic1JLwHOdFCn1=rGP6Un2q1ZxBa1DpsO_AAmD6A@mail.gmail.com>
+In-Reply-To: <CAFLBxZa0Fmmic1JLwHOdFCn1=rGP6Un2q1ZxBa1DpsO_AAmD6A@mail.gmail.com>
+Autocrypt-Gossip: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJ3BBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AAIQkQoDSui/t3IH4WIQQ+pJkfkcoLMCa4X6CgNK6L+3cgfgn7AJ9DmMd0SMJE
+ ePbc7/m22D2v04iu7ACffXTdZQhNl557tJuDXZSBxDmW/tLOwU0EWTecRBAIAIK5OMKMU5R2
+ Lk2bbjgX7vyQuCFFyKf9rC/4itNwhYWFSlKzVj3WJBDsoi2KvPm7AI+XB6NIkNAkshL5C0kd
+ pcNd5Xo0jRR5/WE/bT7LyrJ0OJWS/qUit5eNNvsO+SxGAk28KRa1ieVLeZi9D03NL0+HIAtZ
+ tecfqwgl3Y72UpLUyt+r7LQhcI/XR5IUUaD4C/chB4Vq2QkDKO7Q8+2HJOrFIjiVli4lU+Sf
+ OBp64m//Y1xys++Z4ODoKh7tkh5DxiO3QBHG7bHK0CSQsJ6XUvPVYubAuy1XfSDzSeSBl//C
+ v78Fclb+gi9GWidSTG/4hsEzd1fY5XwCZG/XJJY9M/sAAwUH/09Ar9W2U1Qm+DwZeP2ii3Ou
+ 14Z9VlVVPhcEmR/AFykL9dw/OV2O/7cdi52+l00reUu6Nd4Dl8s4f5n8b1YFzmkVVIyhwjvU
+ jxtPyUgDOt6DRa+RaDlXZZmxQyWcMv2anAgYWGVszeB8Myzsw8y7xhBEVV1S+1KloCzw4V8Z
+ DSJrcsZlyMDoiTb7FyqxwQnM0f6qHxWbmOOnbzJmBqpNpFuDcz/4xNsymJylm6oXiucHQBAP
+ Xb/cE1YNHpuaH4SRhIxwQilCYEznWowQphNAbJtEKOmcocY7EbSt8VjXTzmYENkIfkrHRyXQ
+ dUm5AoL51XZljkCqNwrADGkTvkwsWSvCSQQYEQIACQUCWTecRAIbDAAKCRCgNK6L+3cgfuef
+ AJ9wlZQNQUp0KwEf8Tl37RmcxCL4bQCcC5alCSMzUBJ5DBIcR4BY+CyQFAs=
+
+--------------rBTJ0QPH0xXRrlonZW0NjZYI
+Content-Type: multipart/mixed; boundary="------------vBSusJ8khJoKDQ6QU4axMhnM"
+
+--------------vBSusJ8khJoKDQ6QU4axMhnM
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
+
+T24gMjUuMDguMjYgMTM6NDIsIEdlb3JnZSBEdW5sYXAgd3JvdGU6DQo+IE9uIE1vbiwgQXVn
+IDI0LCAyMDI2IGF0IDEwOjAy4oCvQU0gSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29t
+PiB3cm90ZToNCj4+IE9uIDIxLjA4LjIwMjYgMTc6MTcsIEdlb3JnZSBEdW5sYXAgd3JvdGU6
+DQo+Pj4gT24gRnJpLCBBdWcgMjEsIDIwMjYgYXQgOTo0NeKAr0FNIEphbiBCZXVsaWNoIDxq
+YmV1bGljaEBzdXNlLmNvbT4gd3JvdGU6DQo+Pj4+IE9uIDIwLjA4LjIwMjYgMTk6NDMsIEdl
+b3JnZSBEdW5sYXAgd3JvdGU6DQo+Pj4+PiBPbmUgcG9pbnQgcmV2aWV3ZXJzIG1heSB3YW50
+IHRvIGxvb2sgYXQgc3BlY2lmaWNhbGx5OiBwYXRjaCAxIGNoYW5nZXMNCj4+Pj4+IHdoZXJl
+IHRoZSBwZXItZG9tYWluIHBhZ2UtdGFibGVzIGFyZSBhbGxvY2F0ZWQgZnJvbSwgYW5kIGl0
+cyBjb21taXQNCj4+Pj4+IG1lc3NhZ2UgZGlzY3Vzc2VzIHRoZSAobWlub3IpIE5VTUEtcGxh
+Y2VtZW50IGNvbnNlcXVlbmNlLg0KPj4+Pg0KPj4+PiBXaGlsZSBJIGRvbid0IHJlY2FsbCB3
+aGljaCByZWNlbnQgcGF0Y2ggKHNlcmllcykgaXQgd2FzLCBJIGNhbid0IHZlcnkgd2VsbA0K
+Pj4+PiBzYXkgIm5vIG5ldyB4ZW5oZWFwIGFsbG9jYXRpb25zIHBsZWFzZSIgdGhlcmUgd2l0
+aG91dCBhbHNvIHNheWluZyBzbyBoZXJlLg0KPj4+PiBJJ3ZlIHJlYWQgb3ZlciBwYXRjaCAx
+J3MgZGVzY3JpcHRpb24sIGFuZCB3aGlsZSBpdCB0cmllcyB0byBqdXN0aWZ5IHRoaXMNCj4+
+Pj4gYWNjb3JkaW5nbHksIEkgc3RpbGwgcmVtYWluIGNvbmNlcm5lZC4gSSB0aGluayB3ZSBz
+aW1wbHkgaGF2ZSB0byBhY2NlcHQNCj4+Pj4gdGhlIG1hcHBpbmcgb3ZlcmhlYWQsIHRvIGF2
+b2lkIGFsbG9jYXRpbmcgZnJvbSBhIHBvb2wgd2hpY2ggLSBvdmVyIHRpbWUgLQ0KPj4+PiBp
+cyByZXByZXNlbnRpbmcgYSBkZWNyZWFzaW5nIHBvcnRpb24gb2YgdG90YWwgbWVtb3J5IHN5
+c3RlbXMgaGF2ZSAob24NCj4+Pj4gYXZlcmFnZSwgYW5kIG5vdCBldmVuIGNvbnNpZGVyaW5n
+IHN5c3RlbXMgd2l0aCBleHRyZW1lbHkgc3BhcnNlIG1lbW9yeQ0KPj4+PiBsYXlvdXRzLCBh
+bmQgd2l0aCBwZXJoYXBzIFBEWCBjb21wcmVzc2lvbiBub3QgZG9pbmcgZ29vZCBlbm91Z2gg
+dG8NCj4+Pj4gY29tcGVuc2F0ZSkuDQo+Pj4NCj4+PiBZb3Ugc2hvdWxkIGNlcnRhaW5seSBo
+YXZlIHRoZSBzYW1lIHJlc2lzdGFuY2UgdG8gYWRkaW5nIG5ldyB4ZW5oZWFwDQo+Pj4gYWxs
+b2NhdGlvbnMuICBCdXQgbG9va2luZyBhdCB0aGUgbnVtYmVycywgSSBkb24ndCBzZWUgdGhh
+dCB3ZSdyZQ0KPj4+IGFueXdoZXJlIG5lYXIgdGhlIHBvaW50IHdoZXJlIHdlIHNheSwgIkFi
+c29sdXRlbHkgbm8gbmV3IHhlbmhlYXANCj4+PiBhbGxvY2F0aW9ucywgcmVnYXJkbGVzcyBv
+ZiB0aGUgY29zdC4iDQo+Pg0KPj4gV2VsbCwgdGhhdCBkZXBlbmRzLCBhbmQgaW4gcGFydCBv
+biB0aGUgbG9uZ2VyIHRlcm0gcGxhbnMgd2l0aCBBU0kuIEl0IGhhcw0KPj4gYmVlbiBteSAo
+c2lsZW50KSBhc3N1bXB0aW9uIHRoYXQgZXZlbnR1YWxseSB0aGUgZGlyZWN0bWFwIHdvdWxk
+IGdvIGF3YXkNCj4+IGFsdG9nZXRoZXIgd2hlbiBBU0kgaXMgaW4gdXNlLCB3aXRoIHRoZSBW
+QSBzcGFjZSBmcmVlZCAoYWxtb3N0PykgYWxsDQo+PiBiZWNvbWluZyBhdmFpbGFibGUgZm9y
+IHZtYXAoKS4gV2l0aCB0aGUgZGlzYXBwZWFyYW5jZSBvZiBkaXJlY3RtYXAsIHRoZQ0KPj4g
+eGVuaGVhcCB3b3VsZCBuYXR1cmFsbHkgZGlzYXBwZWFyIGFzIHdlbGwuIEhlbmNlIHB1dHRp
+bmcgc3R1ZmYgdGhlcmUgaW4NCj4+IG5ldyB3b3JrIGFjdHVhbGx5IGFkZHMgdG8gb3VyIHRl
+Y2huaWNhbCBkZWJ0Lg0KPiANCj4gSSBkbyB0aGluayB0aGF0IG1ha2VzIHNlbnNlIGFzIGEg
+bG9uZy10ZXJtIGdvYWwuICBBY3R1YWxseSwgSSBhc2tlZA0KPiBGYWJsZSB0byBkbyBhbiBh
+dWRpdCBvZiB4ZW5oZWFwIGFsbG9jYXRpb25zLCBhc2tpbmcgaXQgdG8gY2xhc3NpZnkNCj4g
+dGhlbSBhcyB0byB3aGV0aGVyIHRoZXkgbmVlZGVkIHhlbmhlYXAncyBrZXkgcHJvcGVydGll
+cyAoZWFzeSBtZm4gPC0+DQo+IHZhIGNvbnZlcnNpb24sIGF2YWlsYWJsZSBpbiBlYXJseSBi
+b290KSwgYW5kIGl0IHJlY2tvbmVkIG9ubHkgYWJvdXQgNCUNCj4gb2YgdGhlIGFsbG9jYXRp
+b25zIChieSB2b2x1bWUpIGluIHRoZSBleGFtcGxlIHN5c3RlbSBJIGRpZCBudW1iZXJzIGZv
+cg0KPiBuZWVkZWQgeGVuaGVhcC1zcGVjaWZpYyBwcm9wZXJ0aWVzLiAgTG90cyBvZiB0aGlu
+Z3MganVzdCBuZWVkICpzb21lKg0KPiBnbG9iYWwgbWFwcGluZyBzb21ld2hlcmUsIGFuZCB3
+b3VsZCBwcm9iYWJseSBhY3R1YWxseSBvdmVyYWxsIGJlbmVmaXQNCj4gZnJvbSBiZWluZyBt
+b3ZlZCB0byB0aGUgdm1hcCwgc28gdGhleSB3b3VsZG4ndCBiZSByZXN0cmljdGVkIHRvIGEN
+Cj4gc2luZ2xlIE5VTUEgbm9kZS4gIEdyYW50IGZyYW1lcyB3ZXJlIHRoZSBiaWdnZXN0IGNo
+dW5rLg0KDQpQbGVhc2Ugbm90ZSB0aGF0IEknbSBjdXJyZW50bHkgd29ya2luZyBvbiBhIHBh
+dGNoIHNlcmllcyB3aGljaCB3aWxsIG5lZWQNCnRvIGNvbnZlcnQgZ3JhbnQgZnJhbWVzIGFu
+ZCBzb21lIG90aGVyIHhlbmhlYXAgYWxsb2NhdGlvbnMgdG8gdXNlIGRvbWhlYXANCmFuZCB2
+bWFwKCkuDQoNCkN1cnJlbnRseSB0aGlzIGlzIGp1c3QgYSBwcm9vZiBvZiBjb25jZXB0IGZv
+ciBYZW4gc3VtbWl0LCBidXQgSSBleHBlY3QNCnRoaXMgdG8gYmVjb21lIG1hdHVyZSBhZnRl
+ciBzb21lIGZlZWRiYWNrIEkgaG9wZSB0byBnZXQgdGhlcmUuDQoNCg0KSnVlcmdlbg0K
+--------------vBSusJ8khJoKDQ6QU4axMhnM
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 24, 2026 at 10:02=E2=80=AFAM Jan Beulich <jbeulich@suse.com> wr=
-ote:
-> On 21.08.2026 17:17, George Dunlap wrote:
-> > On Fri, Aug 21, 2026 at 9:45=E2=80=AFAM Jan Beulich <jbeulich@suse.com>=
- wrote:
-> >> On 20.08.2026 19:43, George Dunlap wrote:
-> >>> One point reviewers may want to look at specifically: patch 1 changes
-> >>> where the per-domain page-tables are allocated from, and its commit
-> >>> message discusses the (minor) NUMA-placement consequence.
-> >>
-> >> While I don't recall which recent patch (series) it was, I can't very =
-well
-> >> say "no new xenheap allocations please" there without also saying so h=
-ere.
-> >> I've read over patch 1's description, and while it tries to justify th=
-is
-> >> accordingly, I still remain concerned. I think we simply have to accep=
-t
-> >> the mapping overhead, to avoid allocating from a pool which - over tim=
-e -
-> >> is representing a decreasing portion of total memory systems have (on
-> >> average, and not even considering systems with extremely sparse memory
-> >> layouts, and with perhaps PDX compression not doing good enough to
-> >> compensate).
-> >
-> > You should certainly have the same resistance to adding new xenheap
-> > allocations.  But looking at the numbers, I don't see that we're
-> > anywhere near the point where we say, "Absolutely no new xenheap
-> > allocations, regardless of the cost."
->
-> Well, that depends, and in part on the longer term plans with ASI. It has
-> been my (silent) assumption that eventually the directmap would go away
-> altogether when ASI is in use, with the VA space freed (almost?) all
-> becoming available for vmap(). With the disappearance of directmap, the
-> xenheap would naturally disappear as well. Hence putting stuff there in
-> new work actually adds to our technical debt.
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-I do think that makes sense as a long-term goal.  Actually, I asked
-Fable to do an audit of xenheap allocations, asking it to classify
-them as to whether they needed xenheap's key properties (easy mfn <->
-va conversion, available in early boot), and it reckoned only about 4%
-of the allocations (by volume) in the example system I did numbers for
-needed xenheap-specific properties.  Lots of things just need *some*
-global mapping somewhere, and would probably actually overall benefit
-from being moved to the vmap, so they wouldn't be restricted to a
-single NUMA node.  Grant frames were the biggest chunk.
+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
+kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
+=3DeeAB
+-----END PGP PUBLIC KEY BLOCK-----
 
-The xenheap / vmap split is certainly something I would now consider a
-large piece of technical debt; moving towards paying that off is
-certainly something I think worth achieving, provided the rest of the
-maintainers are on board.
+--------------vBSusJ8khJoKDQ6QU4axMhnM--
 
-(Imagine how differently this conversation would have gone, if in the
-first email you had said, "Actually, I thought one of the main goals
-of this series was to get rid of the xenheap altogether, so that we
-could switch to having a single large vmap area instead?")
+--------------rBTJ0QPH0xXRrlonZW0NjZYI--
 
-> While these percentiles in particular of course look very tiny, they are
-> applicable only on systems having no meaningful gaps in the physical
-> address map. And even more generally I find all of these calculations
-> only partly convincing, not the least because you start out from numbers
-> which look pretty contrived when comparing to actual systems which would
-> run the new code. (Using more realistic real-system values may end up
-> going in favor of what you want to convey, or it may not.)
+--------------2jktY701EIsqVP6R2djx5EbY
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-To be honest, I'm inclined to think that they're not very convincing
-because you don't actually have an idea what the problem is.  You
-didn't specify what you were worried about, so I tried to guess a
-scenario that I considered 95th-percentile worse case.  I don't know
-what kinds of sparse memory layout machines you have in mind -- are
-they written down anywhere, so that contributors can read and
-understand what they need to consider *before* implementing?  Even now
-you haven't even said what about my scenario you consider unrealistic,
-much less told me parameters you think are more realistic.
+-----BEGIN PGP SIGNATURE-----
 
-I don't even know exactly what failure mode you're worried about.  Two
-kinds of potential failures I know about:
- - Performance impacted because pages can't be NUMA-local
- - Toolstack operations (including domain creation) fail because
-xenheap has been exhausted.
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmqNg+wFAwAAAAAACgkQsN6d1ii/Ey8z
+eQf6AtamFtk9zos2M2YL5I/mwhqVIMAuRUGs71xGYZLadKjvsEJ10JbUa7x6bREJ621VSen7gzFF
+5M3Yfv8xDG0f/Kpu6LTjVbtRHdbLRt3EYix71F5S/QSX2+4czKq8bbw2KU+tKOfoUXOBFDBQzoyr
+rbMDe2d7rNL3kRtiLtOCq/qIwMwBM75VvThzGAI5NhU70zZH6uD3Xd6+iXDAHCQic1Ur621648AH
+uz85afuv4NLtflMNrG9cOlcYZ2arJ/YqSXuLzUtvf6OQg66E96LgQkWtD1HeyzGAHK49nj5z5BQ5
+PC5J6scClf0tbHvCGvRFzeenDpAP9eHmJgDbkTtm6A==
+=7oOB
+-----END PGP SIGNATURE-----
 
-If you're willing to accept 9 map/unmap operations on *all* systems,
-then NUMA-non-local accesses can't be that big of an issue for you.
-
-On the fairly largish system / load that I tried to estimate, the
-total xenheap usage was less than 3GiB in the worst case.  Let's
-double that just for safety sake: Do there exist systems whose memory
-is so sparse that even with PDX compression, they can't even scrounge
-together 6GiB below the 4TiB limit?  If so, I think a much better
-solution would be to document that such systems may be able to support
-a lower degree of oversubscribing than most systems, and leave it at
-that.
-
-In short: I can't imagine a scenario where a larger xenheap is an
-issue we should be concerned about.
-
-It's not up to me to guess what sorts of numbers would allay your
-concern.  If you want me to consider a large xenheap to be a problem
-on its own, it is now your job to articulate, first, at least one
-target system (hardware and configuration) you think would be
-problematic;  and secondly, exactly what bad thing you're worried
-about happening.  Only then do I have any hope of addressing your
-concerns.  Until that time, I don't consider "the xenheap is getting
-too large" objection to be valid.
-
-Objections I will consider:
-- xenheap has poorer NUMA locality
-- The xenheap/vmap split is a big ugly unnecessary bit of technical
-debt; Xen would be far better if we could get rid of the xenheap
-altogether.  Every additional user of xenheap is another patch in a
-series converting xenheap to vmap.
-
-> > One is map_domain_page_irqoff(): If the caller promises to keep
-> > interrupts disabled until unmap_domain_page_irqoff(), we can safely
-> > perform maps in a context switch without having to worry about
-> > sync_lazy_execstate.  (This was actually implemented and almost sent
-> > on Tuesday evening, when I noticed your review of Roger's v2 saying,
-> > "Question is whether it's a good idea in the first place to start
-> > using map_domain_page() from the context switch path.  Surely there
-> > are possible alternatives.")  This maps all vcpu pages from the
-> > domheap, adding nothing to the xenheap *or* the vmap area.  But it
-> > costs 9 map/unmap pairs *per context switch*.
->
-> But why would not using vmap() be a necessary conclusion of my initial
-> comment? All I'm objecting to are new uses of the xenheap.
-
-I'm trying to list all the advantages and disadvantages of the various
-options I've explored.  You've agreed that growing the vmap region is
-*also* something we need to worry about; and that the vmap allocator
-may not be ready to become a performance-critical part of the system.
-Furthermore, as Roger pointed out privately, regardless of where the
-global mapping lives (vmap or sparsely-mapped xenheap), having a
-global mapping at all means global TLB flushes whenever we destroy a
-vCPU; and in any case, in principle we'd like to avoid exposing any
-data whatsoever.  Using the mapcache avoids all those problems, for a
-different cost.
-
-> > Ultimately, I think there's a lot of wisdom in the saying, "Premature
-> > optimization is the root of all evil."
-> > ...
-> I'm a little puzzled by you talking of "optimization" (premature or
-> not) here. In my initial reply I did point out a functional aspect, and
-> I made clear that I'm aware that this is going to have a performance
-> impact. I.e. quite the opposite of "optimization".
-
-"Optimize" in the terms of "improve", not necessarily in terms of cycle cou=
-nt.
-
-The point of the principle is to say this:  First, build it correctly,
-in a way that is simple, clear, robust, and easy to write, review, and
-maintain.  *Then*, after you've measured that there is a problem,
-where there is a problem, and so on, should you put in extra effort
-and add extra complication, only to areas where you know there will be
-some material benefit.
-
-You've argued that we should avoid using xenheap because it will have
-some negative impacts on large systems with sparse memory layouts; in
-other words, you're asking me to *optimize* for those use cases, at
-the expense of more typical systems.  In isolation, this principle
-would say: take the xenheap option first, as it's clean and fast in
-the common case, and measure it on a target systems (or at least,
-estimate what the impact would be based on modeling).  Once you have
-reason to believe there will be a problem, then introduce code
-complications based on the actual issue you find.
-
-> > There are other options I've explored:
-> >
-> > - domheap + vmap; basically, allocate from domheap, map in the vmap
-> >   area.  On paper this sounds like the same thing; the problem is that
-> >   we don't have a simple MFN -> VA mapping, as we do in the xenheap
-> >   case, so the walk is a lot harder; we start to have to do lookups,
-> >   significantly increasing the cost over simple memory reads and math.
-> >   (This is the difference from the intremap table on the VT-d thread:
-> >   that's a leaf structure reached from a single pointer, so a
-> >   permanent vmap costs nothing there.  Pagetable hierarchies are
-> >   exactly the case where the MFN -> VA step is critical: each entry
-> >   read yields an MFN, which the walk has to turn into the next VA.)
->
-> The pages used here are entirely private to logic handling those page
-> tables. Hence a struct page_info field can very likely be used to stash
-> the VA of a permanent mapping. (Feels like similarly I must have
-> suggested this somewhere else recently, yet I don't recall the context.)
-
-This is an interesting idea, particularly for a full xenheap -> vmap
-change.  Probably too complicated for this series (see below).
-
-> Absolutely, and I have been mentioning the need to consider growing this
-> area in a number of situations (one iirc again pretty recently).
-...
-> Indeed, heavier use of that allocator may require work to be done there.
-...
-> Valid concern, yet surely possible to deal with.
-
-One thing you do need to consider:  There are at least 45 patches to
-get to the most basic form of extra security (no direct-map, FPU/XSAVE
-moved to domheap); and another 13 after that to move to per-cpu
-stacks.  I'm engaged until November to work on this.  If we don't have
-significant progress by then, there may be no ASI at all (at least for
-a long time), and thus no hope of getting rid of the xenheap.  If
-every batch of 7 patches takes a month to get through, we're not going
-to be anywhere close by November.  So you need to be strategic about
-what kinds of additional work you ask me to do: what does a solution
-look like that is both technically acceptable, and achieves measurable
-progress by November?
-
-If we had all the time in the world, we could consider trying to
-convert the entire xenheap to vmap as the first step.  (Even on the
-fairly large system I tried to describe, the xenheap was only around
-3GiB; still plenty of room in the vmap area to get us by until the
-direct map is gone.)  I don't think that's really viable, as there's
-quite a long tail of allocations that would probably end up being
-haggled over before we even began the ASI series itself.
-
-So let's try to take stock.  We can't safely remove the direct-map
-unless we have per-vcpu mapcaches.  We can't really say we've isolated
-the system while all pCPU stacks, with random bits of guest state, are
-visible to all other pCPUs. We can't have per-vcpu mapcaches or
-per-CPU stack maps unless we have per-cpu root pagetables for PV
-guests.  Both require modifying per-pCPU bits of pagetables of the
-incoming vCPU on a context switch.
-
-We have four ways of mapping in general: xenheap, vmap, mapcache, or
-(for the pagetables) the linear map.
-
-For the first three, we have several different ways of arriving at the
-entries.  Both Roger's v2 and my v1 start at the top and walk down the
-pagetables.  For the mapcache, this seems relatively heavy.  I thought
-xenheap would be just simple math, but with PDX on all the time,
-that's more expensive than it looks.  vmap would require looking into
-stashing a pointer into an unused (by xenheap pages) portion of the
-struct page_info.
-
-But the other approach is to stash references to just the page we need
-to modify -- basically, rather than get rid of gdt_ldt_l1tab, add two
-more instances.  For xenheap or vmap, this would be pointers to the
-virtual addresses; but it's also possible to do in the mapcache
-version, by stashing the mfn of the exact table we need to map.  In
-all cases, for the context switch, it's just three references.
-
-Both global-mapping options expose Xen pagetables.  We've agreed these
-are not sensitive, but also in general our posture is that we
-shouldn't reveal anything unless it buys us something.  They also both
-require host-wide TLB shootdowns on vCPU tear-down.
-
-In the spirit of "measure before optimizing", I did some tests of the
-mapcache-walk variant.  On my NUC, at the end of the series, I get:
-
-- baseline: 1480 cycles / context switch
-- xenheap-walk: 2460 cycles / context switch
-- mapcache-walk: 6440 cycles / context switch
-
-By default Xen has a context switch rate limit of 1ms, so the
-difference isn't measurable.  If you disable the ratelimit and do a
-"ping flood" microbenchmark, the mapcache-walk reduces performance by
-a whopping 70% (41k pings per second -> 12k pings per second).
-
-If it weren't for the general intent to move away form xenheap, I'd
-argue more strenuously that we should take the series as I've posted
-it.  As it stands, I think the performance of mapcache-walk is
-acceptable enough for a first cut, particularly given that we have two
-potential optimizations already (caching MFNs rather than walking
-pagetables as an easy option, switching to vmap as a slightly more
-complicated one).
-
-It's annoying that Tuesday evening I didn't know that you hated
-xenheap allocations, and had only a mild distaste for mapping in a
-context switch, or I might have implemented vmap instead.  At any
-rate, I'll move forward with mapcache-walk, which we can later look at
-optimizing by stashing the relevant MFNs so we can avoid the walk.
-
-If anyone doesn't like that, let me know sooner rather than later, so
-we can avoid wasting more time.
-
- -George
-
- -George
+--------------2jktY701EIsqVP6R2djx5EbY--
 
