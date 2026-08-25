@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C7B2C61DB6
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 08:44:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1399131.1635340 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 385E8C5DF94
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 08:45:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1399137.1635349 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wymlQ-0007XV-1u; Tue, 25 Aug 2026 08:44:12 +0000
+	id 1wymmC-00083O-9I; Tue, 25 Aug 2026 08:45:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1399131.1635340; Tue, 25 Aug 2026 08:44:12 +0000
+Received: by outflank-mailman (output) from mailman id 1399137.1635349; Tue, 25 Aug 2026 08:45:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wymlP-0007XO-V1; Tue, 25 Aug 2026 08:44:11 +0000
-Received: by outflank-mailman (input) for mailman id 1399131;
- Tue, 25 Aug 2026 08:44:10 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wymmC-00083H-6b; Tue, 25 Aug 2026 08:45:00 +0000
+Received: by outflank-mailman (input) for mailman id 1399137;
+ Tue, 25 Aug 2026 08:44:59 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wymlO-0007X8-IJ
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 08:44:10 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wymmB-000831-41
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 08:44:59 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wymlN-004RqC-V4
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 10:44:09 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wymmA-00AZJQ-Gs
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 10:44:58 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a8d55b9-e002-0a2a0a5209dd-0a2a45058308-48
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 10:44:09 +0200
-Received: from [209.85.218.54] (helo=mail-ej1-f54.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a8d55fd-2eae-0a2a0a5409dd-0a2a45079e92-40
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 10:44:58 +0200
+Received: from [209.85.208.45] (helo=mail-ed1-f45.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a8d55d9-4cb1-0a2a45050019-d155da36b01e-3
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 10:44:09 +0200
-Received: by mail-ej1-f54.google.com with SMTP id
- a640c23a62f3a-c16794450aeso655651566b.2
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 01:44:09 -0700 (PDT)
+ id 6a8d560a-b4ea-0a2a45070019-d155d02dd4b0-3
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 10:44:58 +0200
+Received: by mail-ed1-f45.google.com with SMTP id
+ 4fb4d7f45d1cf-6a144c8eea2so8105011a12.0
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 01:44:58 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c249606a8edsm1644205166b.6.2026.08.25.01.44.08
+ 4fb4d7f45d1cf-6a59e0126edsm14169067a12.7.2026.08.25.01.44.56
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Aug 2026 01:44:08 -0700 (PDT)
+ Tue, 25 Aug 2026 01:44:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,56 +55,58 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787647449; x=1788252249; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1787647498; x=1788252298; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=FTgctcTu5XvkaEOJLrKjmgwxIb3vR/Qle8yZ7WKT+e4=;
-        b=GBH6AC1jr9SK7HF1WM8zcrX6Zv2oNW+hnyNJ0A1vf7NJw7/G+MFOPJPHmnLUux7/XM
-         168XXkck/E5GuNOmUNytqEZUF+F64QdLyz0dF/u2DF7DyOU1io5UdlXMYePAtJsXc5Gj
-         NZq2Gt0NKWDuZmyXFTIJOMdIMu9n+RHzmHg0mp76Ct4o/435bY9gBeJeo6eEGRqKExyw
-         OMiBXtv7Db7q5+ibnXxrdvCpVc8Jyx+BWLonnBTsFopP8Xhe8J3r1Uqo9UBD/qgjbSVV
-         BD0eTxqwIaSmEI99OmZdkOcHYD3d6jpdSynLYPszHRnqGOnUGicHj4uhwYsvD9uX182e
-         2GEQ==
+        bh=PVJaUDGprniCHOdS15F0kmtFEIvAxLzg9FMvZh5Wvbg=;
+        b=eQVZz19qPywpzlSOp1/6UNuvjsSGVaJVQSC5nlS3Mr7ucnbIeZhao3hA1j1WnLvp/q
+         cn6cY1lLRguJZS9zaG+x/MpcMMROFlpCcq3JWbWxktqPSSk6I/h4j0pVcujQ2CMdv42B
+         5Tsb1NnSR/jmN9hpqZwjK572G5hIH5gGja04gjcNL77Rc6Xjn/LadErRF9pVNCzuGLCF
+         yhrD65A+ualLjLRtMw/V/C363fAu3a89oMMDPGyWfI017GJ1PctCViUohk1ImHTwhy4Y
+         soFBdy6ss42zwMMS0x1KuzgvAk6ygi/kMQe2XLLE6Y6/2LnC6gsJuAjoTbtiftjqD/y9
+         biiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787647449; x=1788252249;
+        d=1e100.net; s=20251104; t=1787647498; x=1788252298;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=FTgctcTu5XvkaEOJLrKjmgwxIb3vR/Qle8yZ7WKT+e4=;
-        b=WEd85EFz9P1Z0hV7OZI1tRYECebIZlpoCuUXCcG/Eu2qTF8JwrNX/6nJRZGPDejBol
-         epaneHFQd4yB8pQlEZU41nzstnqo3j3/aJ6t3MJh1li+cBMDHlO5gBR1NTuDsgx9vqES
-         7BmzrE0HBMfh/eqoyi+gdM7ZaFvUJzqENWVblUrP8bamnvtpj9lx9a24Q7yQiMdfB2yv
-         BEhXRR42upAnNFnV1ra0mnw6hO/0vXVOkRk6xxtfkPdGVZ4Nm6/T6iFmysaAI4UJrfE5
-         qe4BYZRSDS436k5a+1e4IHJRXOcDPI/MMr9nv6huHsBYx4R98oOwS88GqVzrjC3q8MEs
-         2nRA==
-X-Gm-Message-State: AFuF++nCkrSKoduHiRa93opakOLzVd2vVKoq73g8Ruw1u93Bl2BEl2lc
-	akDmsAl/s4GQJnpsy8MRvfDWSYa1OLxxlOGmdYVSUz1ltN6VXLZNDXE8Yvzz0xrPx0lOoH1BtQ6
-	9gb9e6A==
-X-Gm-Gg: AR+sD13wNr0dY6CZSwqvhbjX87ZSae9kCJnQwv67oMytJWDlZPzzGYaOr76J+WaJaqx
-	KdX7s8ThgTZZR21pXdqyksrTWBIsdWzzvmJVOnL/sXv1S/igmL1y7I/UcVHgILFqrX/mtg8N/tB
-	mOUZOyS6veYfE+n761cUiB3652DhqEYiW812aQgtUDCn1jbT2ivvBRHtAMl58WUd3HA8gv3Gion
-	Yq9lQzkjGVErkyNYXQbN2BW7/JCUFKmSczDO2Uk+U25ni5a59zAJg7NUG7B38ZFebjARU127QWk
-	XfartZEZECz3gRH0hpWByLdGxQsH0Ldc3CUuUue7EsBcu6sUlSZ6E+1fLvUL4EoUqW/MSM+7211
-	OgoB72R/Asd7WOVef3p0U3LyxW2PXkHnTcdVgkwntl9/5yjEx8/vtYW7/tRzjjgiySPF6aWQ8gh
-	xf8XiVuj9GV23jCgAiZdhbLTls1UYVp9fgiARAjqe7mEjJMcoGfyA8tWC2mCmIrdWhILrp/v+PC
-	Wo6Ti4gH71OXm+I8SG8ds/WnAIo/T5War71j1WsQln/qDaCESUKcCIr9b0lp7I=
-X-Received: by 2002:a17:906:f049:b0:c16:126b:98b4 with SMTP id a640c23a62f3a-c246a2ef584mr3520987366b.3.1787647449449;
-        Tue, 25 Aug 2026 01:44:09 -0700 (PDT)
-Message-ID: <09e481bc-b2ca-4480-93ad-1a45c7d45073@suse.com>
-Date: Tue, 25 Aug 2026 10:44:07 +0200
+        bh=PVJaUDGprniCHOdS15F0kmtFEIvAxLzg9FMvZh5Wvbg=;
+        b=BtXhF6f4QweUEuQgWhLC4fsr53ElR7eo+CKdq/rh1Kf48Tc2qm2f5Ymzms9v4ZNGe9
+         JWAoR/7TQvFdVw5nxhYQqOAY7p15IbCwEMUjDol51FXHgn/tEsLsuqWAF03L52e/Kpsr
+         oOUUOnSEx8HmjYO4d5er9R5OdYwbYS3g8jW6RVQAVOJQiD6rwpUXni+1IsVgnWyAtjZK
+         PkuJ7HnbqvMdFfbM+T9L2FPqaBDs1INmvwFg3gj+ZE854VHGPVn9Mdzo8qr6LKqgtRWA
+         CoFzGGvBLIC4q8mcoceIPj0Qgsg6VZxatUEGGEtnYgrZ1Bqk0E9O5cgODr7uRlDQiC5c
+         NSGQ==
+X-Gm-Message-State: AFuF++l45sqTlJndtvRtkz9ajfnLCJskj0tsAluBl+xUI2IgKPMf5L+s
+	kYJ9+KLKQXwbdcQU5GEd0GMESWzLsGRVuPAdjjCSL7+leespgPaC8epICknf1o17/W9iTv7J300
+	+8QawUA==
+X-Gm-Gg: AR+sD11Rks5/3spY9TkNeVInOvNaObvv98j2CmqJXOQAqG06u0KOf9cCkFqwgbt1VHN
+	+jFL7IatecU3NPcVDf3PHwjhfPlclhJqDmEkEH4oCLY88Tl+u9iDCBanHqu3PCU+m1sOmnK6n45
+	ridDgJg+KoWbgHA6niscm2pxDw+WfD/vI172c/oVdX3CFn/MoQjEX9AS7FdzUSsp4KgIKY2jGCL
+	QHKq+DnjgddTOyX4kNLsshbYOoRqpuxP9EQfup2zBoTxmwHep4pC8YU2zvOE76H2YEXivvzz9+c
+	aFoHxk6s+s2fXZhndHyTIAgl3EHG6c0NRaIvSJxsAQX3vO3o0zGGhFS9nacYf5X3z0Qio//OcTU
+	uu5r5GOztci0ZEAuaZgAyU/J4BccV/Jqcp5Atsk8e0b1rMIyuBT+8JoK2Bwk3U6oG1sez3QiMtp
+	E0BPHPleVGVb83Rwg4sKI1AjJGy6UGZWaVFFTB0nlr/YG/OO8cTtcX7NVyv+/IbVMFFEZMA5K1Q
+	tgRD7BZALNC72O070JXOubgGD8iK3RBYh4f8t4Jw8GbpF2T8NZY
+X-Received: by 2002:a05:6402:a0cd:b0:6a1:babc:5b9e with SMTP id 4fb4d7f45d1cf-6a582b0b815mr25053651a12.5.1787647498006;
+        Tue, 25 Aug 2026 01:44:58 -0700 (PDT)
+Message-ID: <2c162d3b-a038-44f6-85db-6481e1f36138@suse.com>
+Date: Tue, 25 Aug 2026 10:44:56 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 5/6] build: move $(all-symbols-*)
+Subject: [PATCH 6/6] RISC-V: place .sdata / .srodata / .riscv.attributes
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Teddy Astie <teddy.astie@vates.tech>
+ <roger@xenproject.org>, Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>
 References: <fb75dbda-63a5-4ebd-abf6-5ce6b3b5ba3f@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -133,88 +135,58 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <fb75dbda-63a5-4ebd-abf6-5ce6b3b5ba3f@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1787647449-247132A1-1681B5FC/0/0
+X-purgate-ID: tlsNG-ef75cf/1787647498-374D3AE4-02A0BF6D/0/0
 X-purgate-type: clean
-X-purgate-size: 2850
+X-purgate-size: 1611
 
-With the final linking logic now consolidated in scripts/Makefile.link,
-$(all-symbols-*) also doesn't need setting anymore in (and passing down
-from) the top level Makefile, 
+Of the short-data sections, only .sbss is presently mentioned in the
+linker script. Place them next to, but ahead of their "normal" data
+sections.
+
+.riscv.attributes can go towards the tail of the image, next to (ahead of)
+debug info.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+Seeing where .sbss lives, does positioning really not matter at all? I
+would have expected that short-data sections want to live close together,
+and specifically close to .text / .init.text (seeing that such data is
+accessed using AUIPC). I'm puzzled that the psABI doesn't even mention
+them, hence leaving it open how exactly they are to be used.
 
---- a/xen/Makefile
-+++ b/xen/Makefile
-@@ -465,10 +465,6 @@ ALL_OBJS-$(CONFIG_CRYPTO) += crypto/buil
- ARCH_LIBS-y               :=
- ALL_LIBS-y                := lib/lib.a
+What remains to eliminate orphan section warnings is the placement of
+.note.GNU-stack (which perhaps wants dealing with on all of Arm, PPC, and
+RISC-V together, ideally unifying with x86) and (odd at the first glance,
+but dealt with on x86 as well, i.e. may again want unifying) that of a
+number of .rela.* sections.
+
+--- a/xen/arch/riscv/xen.lds.S
++++ b/xen/arch/riscv/xen.lds.S
+@@ -44,6 +44,8 @@ SECTIONS
  
--all-symbols-y :=
--all-symbols-$(CONFIG_LIVEPATCH) += --all-symbols
--all-symbols-$(CONFIG_FAST_SYMBOL_LOOKUP) += --sort-by-name
--
- include $(srctree)/arch/$(SRCARCH)/arch.mk
+         BUGFRAMES
  
- # define new variables to avoid the ones defined in Config.mk
-@@ -622,8 +618,7 @@ $(TARGET): outputmakefile asm-generic FO
- 	$(Q)$(MAKE) $(build)=arch/$(SRCARCH) include
- 	$(Q)$(MAKE) $(build)=. arch/$(SRCARCH)/include/asm/asm-offsets.h
- 	$(Q)$(MAKE) $(build)=. MKRELOC=$(MKRELOC) 'ALL_OBJS=$(ALL_OBJS-y)' \
--	            'ALL_LIBS=$(ARCH_LIBS-y) $(ALL_LIBS-y)' \
--	            'all_symbols=$(all-symbols-y)' $@
-+	            'ALL_LIBS=$(ARCH_LIBS-y) $(ALL_LIBS-y)' $@
++        *(.srodata)
++        *(.srodata.*)
+         *(.rodata)
+         *(.rodata.*)
+         VPCI_ARRAY
+@@ -92,6 +94,7 @@ SECTIONS
+         SCHEDULER_ARRAY
+         HYPFS_PARAM
  
- SUBDIRS = xsm arch common crypto drivers lib test
- define all_sources
---- a/xen/arch/x86/Makefile
-+++ b/xen/arch/x86/Makefile
-@@ -179,14 +179,14 @@ ifeq ($(XEN_BUILD_PE),y)
- 	$(MKRELOC) $^ > $@
++        *(.sdata .sdata.*)
+         *(.data .data.*)
+         CONSTRUCTORS
+     } :text
+@@ -162,6 +165,8 @@ SECTIONS
+     /* Section for the device tree blob (if any). */
+     .dtb : { *(.dtb) } :text
  
- .$(TARGET).efi.0s.S:
--	$(objtree)/tools/symbols $(all_symbols) --empty > $@
-+	$(objtree)/tools/symbols $(all-symbols-y) --empty > $@
- 
- .$(TARGET).efi.1s.S: .$(TARGET).efi.0
- .$(TARGET).efi.2s.S: .$(TARGET).efi.1
- 
- .$(TARGET).efi.%s.S:
- 	$(NM) -pa --format=sysv $< \
--	  | $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
-+	  | $(objtree)/tools/symbols $(all-symbols-y) --sysv --sort \
-  	    --source-name=$(TARGET).efi.S \
- 	  > $@
- 
---- a/xen/scripts/Makefile.link
-+++ b/xen/scripts/Makefile.link
-@@ -3,6 +3,10 @@
- # Helper rules for linking xen-syms
- # ==========================================================================
- 
-+all-symbols-y :=
-+all-symbols-$(CONFIG_LIVEPATCH) += --all-symbols
-+all-symbols-$(CONFIG_FAST_SYMBOL_LOOKUP) += --sort-by-name
++    .riscv.attributes : { *(.riscv.attributes) } :text
 +
- syms-warn-dup-y := --warn-dup
- syms-warn-dup-$(CONFIG_SUPPRESS_DUPLICATE_SYMBOL_WARNINGS) :=
- syms-warn-dup-$(CONFIG_ENFORCE_UNIQUE_SYMBOLS) := --error-dup
-@@ -15,7 +19,7 @@ final-image-check-y ?= true
- 	$(call if_changed,cc_o_S)
+     DWARF2_DEBUG_SECTIONS
  
- .$(TARGET)-syms.0.S:
--	$(objtree)/tools/symbols $(all_symbols) --empty > $@
-+	$(objtree)/tools/symbols $(all-symbols-y) --empty > $@
- 
- .$(TARGET)-syms.1.S: .$(TARGET)-syms.0
- .$(TARGET)-syms.2.S: .$(TARGET)-syms.1
-@@ -23,7 +27,7 @@ final-image-check-y ?= true
- 
- .$(TARGET)-syms.%.S:
- 	$(NM) -pa --format=sysv $< \
--	  | $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
-+	  | $(objtree)/tools/symbols $(all-symbols-y) --sysv --sort \
- 	    $(if $(filter $(LAST_LINKING_PASS),$*), $(syms-warn-dup-y)) \
- 	  > $@
- 
+     DISCARD_SECTIONS
 
 
