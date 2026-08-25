@@ -4,44 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEF87C61DBE
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 13:28:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1399236.1635395 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81FF0C61DB9
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 14:20:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1399252.1635405 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wyrCg-0002lJ-IO; Tue, 25 Aug 2026 13:28:38 +0000
+	id 1wys0R-0001Bk-75; Tue, 25 Aug 2026 14:20:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1399236.1635395; Tue, 25 Aug 2026 13:28:38 +0000
+Received: by outflank-mailman (output) from mailman id 1399252.1635405; Tue, 25 Aug 2026 14:20:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wyrCg-0002lC-FP; Tue, 25 Aug 2026 13:28:38 +0000
-Received: by outflank-mailman (input) for mailman id 1399236;
- Tue, 25 Aug 2026 13:28:37 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wyrCf-0002l6-PP
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 13:28:37 +0000
+	id 1wys0R-0001BD-1u; Tue, 25 Aug 2026 14:20:03 +0000
+Received: by outflank-mailman (input) for mailman id 1399252;
+ Tue, 25 Aug 2026 14:20:01 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0394ac7f2000c4f3@swg.vates.tech>)
+ id 1wys0O-0000rj-J9
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 14:20:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wyrCe-002jYd-Ei
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 15:28:36 +0200
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a8d987e-bab6-0a2a0a5309dd-0a2a450ae090-8
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 15:28:32 +0200
-Received: from [209.85.218.50] (helo=mail-ej1-f50.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a8d9880-f2d2-0a2a450a0019-d155da32b8ca-3
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 15:28:32 +0200
-Received: by mail-ej1-f50.google.com with SMTP id
- a640c23a62f3a-c20e70a0962so727126866b.2
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 06:28:32 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c249685ab63sm1728728466b.50.2026.08.25.06.28.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Aug 2026 06:28:31 -0700 (PDT)
+ id 1wys0N-0059UO-SZ
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 16:19:59 +0200
+Received: from [10.42.69.11] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0394ac7f2000c4f3@swg.vates.tech>)
+ id 6a8da486-2eae-0a2a0a5409dd-0a2a450bc6c4-10
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 16:19:59 +0200
+Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0394ac7f2000c4f3@swg.vates.tech>)
+ id 6a8da48f-b7e8-0a2a450b0019-b9ff1c22a7c5-3
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 16:19:59 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a0394ac7f2000c4f3.004 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Tue, 25 Aug 2026 14:19:57 +0000
+Received: from [192.168.1.49] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: julian.vetter)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 8CC7C83274;
+ Tue, 25 Aug 2026 16:19:56 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,146 +58,237 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787664512; x=1788269312; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=cJggQA6AcIJyW0vWh0BHsMQ+AEm79IycoXNzRuRXB2k=;
-        b=feXT1K6TnUdqfiuKG2Ce3us8QPjpt6BWNk39ljl+qxH/FUa6WuusO58LQmz03QuTFk
-         r431puLgdRw27VYYHAmIqzgHuTIrEUKlFS8zrHO6GHGie2suBeBpw+973t2MZ9qr7ShB
-         ze7c7otMUkSSiqum8e8ijTTfHzuWb6K+8AyQJldu9aBQdr87Rp5OZI6ACZMhd9lwulOd
-         JOzWg3eDuEqr2+BdddzBL+u23t7f2LNEh0A9hHCYPFrJWATqc4DU/kyu/a7/6XXH/L2N
-         yPLPKKvoY4IapahVOUeWcbipJhZX+upAs4s9yLcBbiqvcrYhoEMSb7gAq0IaudrFMZqk
-         z7BA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787664512; x=1788269312;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=cJggQA6AcIJyW0vWh0BHsMQ+AEm79IycoXNzRuRXB2k=;
-        b=T7mFahIVUN+XC39QzHieljEFtEGFe3paNOR3udDfGT0qU9wwbOWVNNVoVvMe9O1HTX
-         4Ldyy93dnEejSoE3JEDNqTYiIHCQkVUh8hPfjWI57HJ6m2GyQ/m9/uVGhunS9kTxprfn
-         T4zFnZZ/gGh9N7EoofffGsZ25xV9g3WB4auJyR/dnumIjbCbiFW1qVMLI+4lUTngXlEZ
-         K3+hYtKIqsMPM03vwxZrJE+Tt5KLURtQ++JwKqS21Roo1RjAfyWgbWHZ7SCtQUltMRTY
-         FdX9G7WzBMzeurkNsRYuEVOeADR3uHAXcgkuWXw8/6Me8+wRVKh/oIroxy0bNMAHVPMN
-         PrOA==
-X-Forwarded-Encrypted: i=1; AHgh+RoVnREkm3kxyZowXsBvUVd6h6hMtcYv+2doOpWa6cVSgjR3d/6DejUTQIyxQ/JbJoNFmFsjGqgzi3c=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lG4DOsvjO77n3pXE3i3je5sXC3i7c8F5Uk37YiW931ZtTTU98z
-	kQLP8zZG2sewzUjzltSA2nrLZZg0Eq5jVDrjGKgtk6GJwalzTl2r85cxr6/pkN4mOg==
-X-Gm-Gg: AR+sD10vx97GrQmj0TbZ2pcGeKVzl60mLh4d/HDSH4Lno2Ei+YnypqLfwPWA5jMOAVu
-	tuCnDLG144+i20GPXJVFoMQSv8z6wk0x/eK3GTfFIK3/PbkccwFCC69i5dKwLQa7l2LlLy41OmW
-	+ADhXcl8S1NVL4zwwX0Y6iF+8agEir+/KB+VB8YpQe1l+xVzJdOOaxIHZHXhp6Trhz0KAavDPBe
-	V/7mUeFHmoseZ0y6BscZKhaysLaizGfjf4YAktokwSwzYn/0ctfCpp00Ac06WLh6FNmLXg5p1AA
-	CyZuK7NbkzbKLmxyBLc8JbCXeNZJYZ7kPOaoKAfR4rhfJNV3qcKgQSCodT92Bh3VQFbe5hzRp/y
-	x0goVA8aH+xeWNe+W1QK4CQyrG5adUo4GJ+efN/o17Ypsq6diUsfS0YQjkOlO38fCwuaDlEpn2o
-	x4CAd3/JS4Or2qOaAThmVYn9zmqFg5gTUaq0Yrm5BQdq2X7C+R448QwEP9z0Ujr3OrzBLtKYJuG
-	TC2RIRuSXeR4semoHUpUOg86b06WFHo8ID5Q5kGsOiGX72yl5yM
-X-Received: by 2002:a17:907:ea8b:b0:c21:2c32:e2da with SMTP id a640c23a62f3a-c246a5f4515mr4267561966b.8.1787664512080;
-        Tue, 25 Aug 2026 06:28:32 -0700 (PDT)
-Message-ID: <f34b38e3-4f77-49e2-a69f-aea153f53787@suse.com>
-Date: Tue, 25 Aug 2026 15:28:30 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=u97rfPbz3xsGMVtDrfGCIiKOaJT5M7k/QkRGG3lW9Cw=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=Z54AI6zvRbFBmcgsqeJwSntWmfsvCMZOiQlZ6dlSXt8/mKx5hbutCxpkCHw9YYpV1olD8oIf2
+ eVFSp4MewhdAvnSPRFP6no65blD5OvFOnFD7/IpkTykswBkNYyJx7sbBRQMBn31NTo4dGSEvG7i
+ skMuW/UezwzS/Y4pVsap2UxuWC2ufk8C+RE9CAFqJwEJ7hW2hqN2egMqbP+i1dywFBXC/BNfoDe
+ hualPjI/5HJ8zJJfeNQJNk3VndngLIoMUeEez1Rs5/CAwDrUWuUESa1HDBufC6D41BbZvO8vdbE
+ VO/IKU+zeUkZvDFICNFtalap0RlOuDk4YPCGrbaO/2yQ==
+X-Zone-Loop: b659c29a28e08754c13d90a6aa320db24d834af98647
+x-campaign-type: default
+x-transaction-id: 90d8b0ea-8456-4b4e-ba01-6d8445466996
+x-swg-uid: 01-4602cf69-b639-4b74-a7d2-1a27d1b86590
+X-Mailer: Sweego
+Message-ID:
+ <1787667597.8631fc262581453bbf619ec5b2062170.1a0394ac7f2000c4f3@vates.tech>
+x-swg-bid: 1787667597.8631fc262581453bbf619ec5b2062170.1a0394ac7f2000c4f3
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+Date: Tue, 25 Aug 2026 16:19:56 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/7] x86: Address Space Isolation, part 1: per-domain area
- mapping rework
-To: George Dunlap <gwd@xenproject.org>
+Subject: Re: [PATCH v6 1/3] ioreq: switch ioreq page allocation to vmap
+To: Jan Beulich <jbeulich@suse.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20260820-asi-part1-0-f2dbd92b8459@xenproject.org>
- <ec040560-4377-474d-a929-3080b74bb0af@suse.com>
- <CAFLBxZbQD7HgdYK3-yzaMOt4P2geO2PSOSDi4-c3KHZ96DDifg@mail.gmail.com>
- <044095b7-3c8d-40da-9d21-281c522a49ae@suse.com>
- <CAFLBxZa0Fmmic1JLwHOdFCn1=rGP6Un2q1ZxBa1DpsO_AAmD6A@mail.gmail.com>
+References: <20260420093820.825969-1-julian.vetter@vates.tech>
+ <20260420093820.825969-2-julian.vetter@vates.tech>
+ <35a08d22-1e95-4e02-a7e9-7f392ef11722@suse.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <CAFLBxZa0Fmmic1JLwHOdFCn1=rGP6Un2q1ZxBa1DpsO_AAmD6A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1787664512-51EC2CFC-112D4314/0/0
+From: Julian Vetter <julian.vetter@vates.tech>
+In-Reply-To: <35a08d22-1e95-4e02-a7e9-7f392ef11722@suse.com>
+X-BM-Disclaimer: Yes
+Content-Type: multipart/alternative; boundary="-=Part.2b1e.98ce00ae3019bacf.1a0394ac5bb.43e3200d7ca5731=-"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1787667596738
+X-purgate-ID: tlsNG-42698a/1787667599-AB0DD9EA-4E2194C3/0/0
 X-purgate-type: clean
-X-purgate-size: 2899
+X-purgate-size: 6677
 
-On 25.08.2026 13:42, George Dunlap wrote:
-> On Mon, Aug 24, 2026 at 10:02 AM Jan Beulich <jbeulich@suse.com> wrote:
->> While these percentiles in particular of course look very tiny, they are
->> applicable only on systems having no meaningful gaps in the physical
->> address map. And even more generally I find all of these calculations
->> only partly convincing, not the least because you start out from numbers
->> which look pretty contrived when comparing to actual systems which would
->> run the new code. (Using more realistic real-system values may end up
->> going in favor of what you want to convey, or it may not.)
-> 
-> To be honest, I'm inclined to think that they're not very convincing
-> because you don't actually have an idea what the problem is.  You
-> didn't specify what you were worried about, so I tried to guess a
-> scenario that I considered 95th-percentile worse case.  I don't know
-> what kinds of sparse memory layout machines you have in mind -- are
-> they written down anywhere, so that contributors can read and
-> understand what they need to consider *before* implementing?  Even now
-> you haven't even said what about my scenario you consider unrealistic,
-> much less told me parameters you think are more realistic.
+---=Part.2b1e.98ce00ae3019bacf.1a0394ac5bb.43e3200d7ca5731=-
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-What I specifically considered unrealistic is that you use huge pCPU and
-vCPU counts. Yes, you're trying to do a worst case estimate, yet at the
-same time you're assuming huge amounts of memory to be available (which
-doesn't represent a "worst case").
 
-As to sparse layouts - ones which have led to the two forms of PDX
-compression are well known (I think). The need for more recent (offset)
-form is a good example of what could go wrong here: New machines can
-always come with new layouts, potentially requiring new compressions
-approaches. So what I'm concerned about is effectively _any_ sparse
-layout that we may encounter without having a suitable PDX compression
-method readily available.
 
-> I don't even know exactly what failure mode you're worried about.  Two
-> kinds of potential failures I know about:
->  - Performance impacted because pages can't be NUMA-local
->  - Toolstack operations (including domain creation) fail because
-> xenheap has been exhausted.
+On 8/18/26 3:06 PM, Jan Beulich wrote:
+> On 20=2E04=2E2026 11:38, Julian Vetter wrote:
+>> Switch the Xen-side ioreq page mapping from prepare_ring_for_helper() /
+>> map_domain_page_global() to explicit vmap(), to ensure vmap_to_page()
+>> can recover the struct page_info * uniformly during teardown=2E
+>=20
+> What's after the comma isn't really the main reason for this patch, is i=
+t?
+> Describing this aspect =2E=2E=2E
+>=20
+>> This is a prerequisite for multi-page ioreq support: the non-buf ioreq
+>> region will need to span multiple pages for domains with more vCPUs tha=
+n
+>> fit in a single page, and vmap() is the natural interface for contiguou=
+s
+>> multi-page Xen VA mappings=2E
+>>
+>> In non-debug builds map_domain_page_global() uses the directmap for low
+>> MFNs rather than vmap(), so this change has a small overhead in the
+>> common case=2E Debug builds already used vmap() indirectly=2E
+>>
+>> With both paths using vmap(), vmap_to_page() can recover the struct
+>> page_info * uniformly, so drop the 'page' field from struct ioreq_page
+>> and update all callers accordingly=2E
+>=20
+> =2E=2E=2E here (at the bottom) is fully sufficient=2E
+>=20
+>> Signed-off-by: Julian Vetter <julian=2Evetter@vates=2Etech>
+>> ---
+>> Changes in v6:
+>> - Updated commit message to clearly specify why these changes are made
+>> - Added comment to say that this is {prepare,destroy}_ring_for_helper()
+>>    just using vmap_to_page() + v{map,unmap}()
+>> - Kept proper ordering in ioreq_server_free_mfn(), first clearing the v=
+a
+>>    pointer before unmapping
+>=20
+> Yet then you didn't extend the same consideration =2E=2E=2E
+>=20
+>> @@ -128,8 +129,13 @@ static void hvm_unmap_ioreq_gfn(struct ioreq_serve=
+r *s, bool buf)
+>>       if ( gfn_eq(iorp->gfn, INVALID_GFN) )
+>>           return;
+>>  =20
+>> -    destroy_ring_for_helper(&iorp->va, iorp->page);
+>> -    iorp->page =3D NULL;
+>> +    /* Equivalent to destroy_ring_for_helper(), using vmap_to_page()=
+=2E */
+>> +    if ( iorp->va )
+>> +    {
+>> +        put_page_and_type(vmap_to_page(iorp->va));
+>> +        vunmap(iorp->va);
+>> +        iorp->va =3D NULL;
+>> +    }
+>=20
+> =2E=2E=2E to here=2E (Really we should perhaps introduce VUNMAP(), much =
+like we
+> have XFREE(), XVFREE(), etc=2E)
+>=20
+> Further the ordering doesn't match destroy_ring_for_helper(), which unma=
+ps
+> first and only then drops the page refs=2E
+>=20
+>> @@ -162,12 +171,40 @@ static int hvm_map_ioreq_gfn(struct ioreq_server =
+*s, bool buf)
+>>       if ( gfn_eq(iorp->gfn, INVALID_GFN) )
+>>           return -ENOMEM;
+>>  =20
+>> -    rc =3D prepare_ring_for_helper(d, gfn_x(iorp->gfn), &iorp->page,
+>> -                                 &iorp->va);
+>> -
+>> +    /*
+>> +     * Equivalent to prepare_ring_for_helper() using vmap()=2E Using v=
+map()
+>> +     * rather than map_domain_page_global() ensures vmap_to_page() can
+>> +     * recover the struct page_info * uniformly at teardown, which is
+>> +     * needed to support multi-page ioreq mappings (see nr_ioreq_pages=
+())=2E
+>> +     */
+>=20
+> "is needed" is too strong, I think - surely there would be a way to hand=
+le
+> that without vmap_to_page(), by tracking all struct page_info * separate=
+ly=2E
+>=20
+>> @@ -309,15 +310,16 @@ static int ioreq_server_alloc_mfn(struct ioreq_se=
+rver *s, bool buf)
+>>   static void ioreq_server_free_mfn(struct ioreq_server *s, bool buf)
+>>   {
+>>       struct ioreq_page *iorp =3D buf ? &s->bufioreq : &s->ioreq;
+>> -    struct page_info *page =3D iorp->page;
+>> +    struct page_info *page;
+>> +    void *va;
+>>  =20
+>> -    if ( !page )
+>> +    if ( !iorp->va )
+>>           return;
+>>  =20
+>> -    iorp->page =3D NULL;
+>> -
+>> -    unmap_domain_page_global(iorp->va);
+>> +    va =3D iorp->va;
+>=20
+> Please can this be the initializer of the variable, for the if() above t=
+o
+> then use that local var?
+>=20
+>> @@ -333,7 +335,8 @@ bool is_ioreq_server_page(struct domain *d, const s=
+truct page_info *page)
+>>  =20
+>>       FOR_EACH_IOREQ_SERVER(d, id, s)
+>>       {
+>> -        if ( (s->ioreq=2Epage =3D=3D page) || (s->bufioreq=2Epage =3D=
+=3D page) )
+>> +        if ( (s->ioreq=2Eva && vmap_to_page(s->ioreq=2Eva) =3D=3D page=
+) ||
+>> +             (s->bufioreq=2Eva && vmap_to_page(s->bufioreq=2Eva) =3D=
+=3D page) )
+>>           {
+>>               found =3D true;
+>>               break;
+>=20
+> You mention in the description that some extra overhead is introduced=2E=
+ The
+> (generally) two page walks done here are particularly concerning=2E Sinc=
+e we
+> have a valid struct page_info * available here, I wonder if we shouldn't
+> aid this lookup by recording the VA in one of struct page_info's fields=
+=2E
+> Afaics vmap() doesn't use any of the fields, so it should be relatively
+> easy to determine a field to use for this purpose=2E The more involved p=
+art
+> would then be to make sure the field (in other struct page_info instance=
+s)
+> is also properly different from any VA vmap() may return=2E
 
-One thing I can't help thinking you keep overlooking throughout your
-reply: xenheap and domheap aren't separate. There being only a
-relatively small part of it needed for the worst case estimate you did
-means nothing as to exhausting the xenheap in practice: Almost the
-entirety of it (with the DMA reserve being somewhat protected) can be
-used to build domains. Once in that state, allocations would fail no
-matter that large swathes of domheap might (have become) available
-(again).
+Hello Jan,
 
-That said, with what you indicated at the very bottom of your reply,
-it looks like this part of the discussion has become largely moot.
+Thank you again for your feedback! I will wait then for Anthony's=20
+decision regarding whether the multi-page ioreq support and the ioreq_t=20
+growth should be combined into a single effort, before I proceed further=
+=20
+with a v7=2E
 
-Jan
+I just wanted to clarify one thing regarding the overhead I mentioned in=
+=20
+the first patch's commit message ("this change has a small overhead in=20
+the common case")=2E Here, I was referring to vmap()/vunmap() replacing=20
+map_domain_page_global()=2E Where map_domain_page_global() has a directmap=
+=20
+fast path=2E I didn't mean the overhead of the added vmap_to_page()=2E I=
+=20
+should maybe clarify this better in my next iteration's commit message=2E
+
+On your suggestion to cache the VA in struct page_info to speed up the=20
+vmap_to_page() lookups in is_ioreq_server_page(): I looked through the=20
+tree, and that function currently has only one caller=20
+sh_remove_all_mappings() (in xen/arch/x86/mm/shadow/common=2Ec) and is=20
+only reached in a failure case=2E Given that, and given how widely shared=
+=20
+and size-critical struct page_info is, I'm wondering whether it's really=
+=20
+worth touching it for the gain of not having to do the 2 lookups=2E What=
+=20
+do you think?
+
+Thanks,
+Julian
+
+>
+> Jan
+
+
+
+-- 
+ | Vates 
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vate=
+s=2Etech
+---=Part.2b1e.98ce00ae3019bacf.1a0394ac5bb.43e3200d7ca5731=---
 
