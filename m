@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA789C61DBE
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 15:26:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1399317.1635459 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ABE7C61DBC
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 16:06:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1399334.1635467 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wyt2B-0003bA-QR; Tue, 25 Aug 2026 15:25:55 +0000
+	id 1wytfa-000110-KY; Tue, 25 Aug 2026 16:06:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1399317.1635459; Tue, 25 Aug 2026 15:25:55 +0000
+Received: by outflank-mailman (output) from mailman id 1399334.1635467; Tue, 25 Aug 2026 16:06:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wyt2B-0003b3-Mh; Tue, 25 Aug 2026 15:25:55 +0000
-Received: by outflank-mailman (input) for mailman id 1399317;
- Tue, 25 Aug 2026 15:25:53 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marmarek@invisiblethingslab.com>) id 1wyt29-0003aw-NG
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 15:25:53 +0000
+	id 1wytfa-00010t-H8; Tue, 25 Aug 2026 16:06:38 +0000
+Received: by outflank-mailman (input) for mailman id 1399334;
+ Tue, 25 Aug 2026 16:06:37 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wytfZ-00010n-8o
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 16:06:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wyt28-009HRo-5q
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 17:25:52 +0200
+ id 1wytfY-00Brca-Ag
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 18:06:36 +0200
 Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 6a8db3fa-bab6-0a2a0a5309dd-0a2a4502d858-6
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 17:25:52 +0200
-Received: from [202.12.124.154] (helo=fhigh-b3-smtp.messagingengine.com)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a8dbd70-bab6-0a2a0a5309dd-0a2a4502c59a-26
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 18:06:36 +0200
+Received: from [209.85.218.52] (helo=mail-ej1-f52.google.com)
  by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 6a8db3fd-6ca4-0a2a45020019-ca0c7c9ae11b-3
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 17:25:50 +0200
-Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
- by mailfhigh.stl.internal (Postfix) with ESMTP id 9324D7A012F;
- Tue, 25 Aug 2026 11:25:48 -0400 (EDT)
-Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-03.internal (MEProxy); Tue, 25 Aug 2026 11:25:48 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 25 Aug 2026 11:25:47 -0400 (EDT)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a8dbd8c-6ca4-0a2a45020019-d155da34b888-3
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 18:06:36 +0200
+Received: by mail-ej1-f52.google.com with SMTP id
+ a640c23a62f3a-c20e70a0962so764138266b.2
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 09:06:36 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
+ [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c250a88ac5csm19461166b.40.2026.08.25.09.06.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 25 Aug 2026 09:06:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,136 +52,620 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm3 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm3 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm3; t=1787671548;
-	 x=1787757948; bh=UOtbtAmf2ZFQ9HUbrtpF8rOLiDXRmAvIzLZdI5iFIoE=; b=
-	NvFs7YDg/qo0/MeQCDLCS6yfXwv78/rv+XMv8mAt8D6yhji3mqBsUW9L09XSIaN4
-	czeNSaX+R9MWM3IRY0kmINW68qz90KC1MnSADCE576Z6dC5Ix1ZQvj1r+bnyLMcx
-	Tv/P4f4IslhQAG011fH+FHRXqUFU3rKPSHtQ+X2BfSfxmaJ5KVXN+CJhO0WDaDT+
-	l3Tr5FlvC7fWsRzM9NEhKZyazLULlqOrudALEh5JVB+phaAxTMLXmxfsKBjpPA1X
-	93iOdqFKZH5iv++wberNC2+7EQqZKshm8th1c7lKepk5NMRqUhioEp9vFaDwqQ3i
-	vB+sVwxznVMq74rBcuyNmQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
-	1787671548; x=1787757948; bh=UOtbtAmf2ZFQ9HUbrtpF8rOLiDXRmAvIzLZ
-	dI5iFIoE=; b=Pz7Np16GfPANcEZhdyQ2hZe9vUF6sA9vZ0LjpTgG1g6EdPPp91w
-	fn7VAbZqF+dfkvBdoyAHm4uOBV385Kd9eJm/zUWvOWa/OjYBCFZez/YChOfkUgPq
-	PfS+prJwZoy9b0/Cv8k2bj81GpuxkKLRnyl6djUrRDNxdhGpm7my4JFrENGdp0Ju
-	DAmV5RLz8xmQEA+6mwQBzxzJR+ksoMXJnFDqpZcpdwXE3ueOftyJv53+Hf95Go2D
-	9XrHsa1YYvUrd+qYAKuUoK+kmLOmjuLeDGMXz3dGZB7yFUlkOK9bzmK7G/mkLx/b
-	jwrTQVvw8HONx29YYjXRy1k3Gb8OJtjQIaw==
-X-ME-Sender: <xms:_LONapUXU36_GCwyQfo3uZ6RkSwPPuk5AhcgnNRYNSb52uoNL95_ug>
-    <xme:_LONagfPGX8ujXQS4eXujppb4fnKdqFIDVBKfZIeNTI7a2iafMejSTQ0Da0HMp83T
-    C7QG6qDv-nO1EN7x-z1gZRD-LZDT37XsP9Yedm8XxaA0d9pJiE>
-X-ME-Received: <xmr:_LONatsChN3L9uGpMYHd0X0_oya_hVpcCgASfxQs-QT6qMp9a2zBHjkgzrV7-SZ8E7KQ9LZvC0ApDv_eUl_z4eJWNyrGPeZT8YU>
-X-ME-Proxy-Cause: dmFkZTErKQoUc1EFlCkg0FLQ9ECRHHLXJK1mMM3+xTKl7ay4Ew8B4QCWYnsTYAopL5auz2
-    EbMNE6ODnLYI1WtQLfabBhgBM97aEL0zt+m4IsHpOa7bBPeHjZbqROD6ce1PKiXdhlRGwN
-    2l4Hro7jzmMWzv7UHtYTAvkamoM0zAj0TkejklZe4Do7eMunhyuEEMyb282KNlDb05BKZQ
-    T3VY/0ByfdMCLVE8Fnrz3Bp9uHBb4NMUtuH0KTq/tJeCtsQvvlWjxzAqRNStiA5O3XapAa
-    Np/DfRcUaTVKMm0BHb6aG20wBYhkSCElgxh4W4A+nNCNdgQ48I8XTFri389yQin9I6AaSC
-    kl9aYEQ3KF7CBfnMc7SnI0rjWrlPV0kF2hRY/88p9mbtD4prnTGMynJ0IJiWbguQdKe5lL
-    RnLMMwQxzV+cviE7dgEmU+U2S1qW8nbehFlKV2Eo7++QpCG0NcRWIvyckqXRS/DBJbMvc/
-    DUhK2nEKko0M+3RxIEfYUgF5tv50G5Jipkt0nke1GsOHjSxJkC0WTYKs5bmCDDoVemZpyG
-    A3i+YY10fSxNv/pTWqGBnD5wVb9mtHznmdoAdDn270PO1StSG1/BXzSSWqqgS/8scKDIMm
-    kD7n6JQ1Dp5Z9e4RC6Xn5M4lry9AQ7Prb3DlS3tz3HtSr5YOemdcoO7TXhDg
-X-ME-Proxy: <xmx:_LONan8jS_2G8SAKfW6FgBVtdYZeUgoniVg-cJEU56zxl7RxOKwnow>
-    <xmx:_LONag30C2stactqU_aCW_vy34Y6q6XL2tWuWy6bMJWuGqQnS9_xAw>
-    <xmx:_LONakDxUpfE41c_L-2AVMZhUo3Z8crpcCeLpxryrckSadnyVjj2xA>
-    <xmx:_LONakeASTBU3fAH9Pd8kSNsJvMF-kYJuhjrABsKbYE7M_NcssTUxg>
-    <xmx:_LONatRGBVBBwmaAm5fJSX5dR3kTcrZcnXPDMBpg7rQFivPT49tauqwV>
-Feedback-ID: i1568416f:Fastmail
-Date: Tue, 25 Aug 2026 17:25:45 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Stefano Stabellini <sstabellini@kernel.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
-	xen-devel@lists.xenproject.org,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH test-artifacts v4 13/13] Setup ssh access to test systems
-Message-ID: <ao2z-V1K_tDz8u26@mail-itl>
-References: <cover.30e6171ddf1c6a72eadf4af0a77c892d4f18d811.1777898148.git-series.marmarek@invisiblethingslab.com>
- <13f837cd9f394d3b4eddb4849156b8ed5d06d31b.1777898148.git-series.marmarek@invisiblethingslab.com>
- <1779458083.8631fc262581453bbf619ec5b2062170.19e4ff78945000f373@vates.tech>
- <alpine.DEB.2.22.394.2605261201180.182011@ubuntu-linux-20-04-desktop>
- <ah24pfWb_orPRaJG@mail-itl>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1787673996; x=1788278796; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=WDijApkDgns953IQEs3qT974eR4YLNg3THaJQ2Gagys=;
+        b=Pb0LnHTTcA51T2tbNl2LvBGzuUw4Y0+vU2hB9knMotSBpEcELnOlqFpTKT5k0TyD8i
+         nQH/WzQ1q7ccsiwvG//4siWd7VI2b3kFgWs4aCJmGwZxa8kDW09UQ9dB0AeQaXygk9rv
+         Zqpt2IC7yiikEkhCO9+tWfofengc/wX5biQvuBe5DWfky02pJ92T71XTEGSTYW5z7nAx
+         2Rup+xadK46HSZstS0CaoDRRhQnVNKeZTIEE4MCwUu3HyajquAOBnFhG1PAjq4mwer0/
+         q697BRYXcduP2hAaQkb5Keb6VBo6l/bn2Md1shq7lWlyNN4GWRgGW98tVHhVl90TIJ3z
+         +wFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787673996; x=1788278796;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=WDijApkDgns953IQEs3qT974eR4YLNg3THaJQ2Gagys=;
+        b=GBgNx5IX1CHTi/wmtUa8WbHnVtvjn/gKJiNT7yck9s0n3eWIvvLi3vBEVQRc8EuKOt
+         j+VdQSNSuy7EU4F4QzYTYkJeR6eAVjqcLJlBlQccuOacYjNuZ9BTgpZtE36BxSeIh7DW
+         pryy7ZdvD4fWpl+ZiQWNi3NpDQN7EUots3Z5CGhW2HG38IGVIZat7TMqoOAqum/yFm/Q
+         LU639Ex3vhqKTr26AvbWWh4sRRcIOw0ATVifufCv75cCkH7tmB4OD18ItGKbrChktm1i
+         niC0Net7WDE8RlIfDEw9769E8t6Kxed/+g7k9QAmvMJpK/G9B1YWv+nWXo+snU1j1FqD
+         RcwA==
+X-Forwarded-Encrypted: i=1; AHgh+Rqu/PPCmU/LdD8pWZG0FIyhZIMc9ZmKXXT1e2omCE4i9cJ6a1r1Vutm8LuFMFrID6L05V0kNbQKCnk=@lists.xenproject.org
+X-Gm-Message-State: AFuF++nZqpW0EI5Li5ih0qhLhktQFBsiSabTmsFQ8Itx6ZoiGqL4jsZv
+	p1XwMqCoZIVHkg+guGzKEGDuejV/LSs+/cyuIe/UrMAF1/PvXL6yh3nNwIK9FA==
+X-Gm-Gg: AR+sD11RWVrS39kHBSEg3ZodL4wU86FkPw9zW80ZguGn1FDqqoWwIwD1kixNRm8qdOh
+	8Yp15KuS0OOe+QHGxOssaRDVfsXzxONNDlAx0YjkkM1hCGeF3ksm7gchazcQIRU/8pIhrC3hboJ
+	GJdQazwbpRJ2fCBR62xQLyZEqx0eXamJVcA2mXtHZSizqyWL40CulvF/JnLlk4GL43KMhOFQ00Y
+	5ytb+0aE7WX7Sxx2g/kfbcFcG1oIW0aLsOigPJ9pud33BHq3Urm/MBzkuC9zTDnqibxDP8nlECM
+	7+R5KS8bHKLCHFTL/5bmfOumT57ZG1DCtrll2X80cbC5wvHngqZWeqefB29IqqVxCAZ7eA5lJv5
+	04h5EFIDhuRGqeDcpTx3RF92+InCg4iit0vIhTARuFk2X0h/g40udlBFKklZ9XYboFjsEo+snvT
+	DX1purCwy8C7UN7q80lqcZAYyYw4WQx2mBh0BzYM6jlPfCjb5oTOX9WNSOtHJVYG/II6WTt2g5E
+	6FhJUSB6ty3gFYfxXx9Z0yNJ97ou2I4NJe/yozDOfE=
+X-Received: by 2002:a17:906:99c4:b0:c20:af9d:4544 with SMTP id a640c23a62f3a-c246a4e6388mr3653739066b.6.1787673995403;
+        Tue, 25 Aug 2026 09:06:35 -0700 (PDT)
+Message-ID: <4c0f0abd-b036-46fe-a93e-7df4ffcc20ca@gmail.com>
+Date: Tue, 25 Aug 2026 18:06:34 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="s05IUUr9rd2cnQjr"
-Content-Disposition: inline
-In-Reply-To: <ah24pfWb_orPRaJG@mail-itl>
-X-purgate-ID: tlsNG-720697/1787671550-F30B02AC-F7DD6316/0/0
-X-purgate-type: clean
-X-purgate-size: 2538
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 16/20] xen/riscv: implement IRQ routing for device
+ passthrough
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ xen-devel@lists.xenproject.org
+References: <cover.1785836421.git.oleksii.kurochko@gmail.com>
+ <cbbaea00bd461284f6440dbd11653a64f7434b94.1785836421.git.oleksii.kurochko@gmail.com>
+ <0fe5fa72-e10c-41c1-8f4c-749cf241bf29@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <0fe5fa72-e10c-41c1-8f4c-749cf241bf29@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-720697/1787673996-67CBA2AC-89B7494A/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 18342
 
---s05IUUr9rd2cnQjr
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 25 Aug 2026 17:25:45 +0200
-From: Marek =?utf-8?B?PT91dGYtOD9RP01hcmN6eWtvd3NraS1HPUMzPUIzcmVja2k/PQ==?= <marmarek@invisiblethingslab.com>
-To: Stefano Stabellini <sstabellini@kernel.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
-	xen-devel@lists.xenproject.org,
-	Roger Pau =?utf-8?B?PT91dGYtOD9CP1RXOXVic09wPz0=?= <roger.pau@citrix.com>
-Subject: Re: [PATCH test-artifacts v4 13/13] Setup ssh access to test systems
 
-On Mon, Jun 01, 2026 at 06:51:49PM +0200, Marek Marczykowski-G=C3=B3recki w=
-rote:
-> On Tue, May 26, 2026 at 12:02:23PM -0700, Stefano Stabellini wrote:
-> > On Fri, 22 May 2026, Anthony PERARD wrote:
-> > > On Mon, May 04, 2026 at 02:35:52PM +0200, Marek Marczykowski-G=C3=B3r=
-ecki wrote:
-> > > > For this add also bridge package, so xenbr0 can be configured with
-> > > > /etc/network/interfaces.
-> > > > This allows extracting more logs out of the test system.
-> > > >=20
-> > > > Create empty /etc/network/interfaces, so the 'networking' service s=
-tarts
-> > > > cleanly even if no interfaces are configured this way. This is
-> > > > necessary, as dropbear service depends on networking.
-> > > >=20
-> > > > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblet=
-hingslab.com>
-> > >=20
-> > > Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
-> >=20
-> > Since Anthony has reviewed the entire series, on the whole series:
-> >=20
-> > Acked-by: Stefano Stabellini <sstabellini@kernel.org>
->=20
-> Thanks.
->=20
-> I seem to have forgotten the "test-artifacts" subject tag (adding now).
 
-AFAICT this series is fully acked, is there anything preventing
-committing it?
+On 8/18/26 12:18 PM, Jan Beulich wrote:
+> On 04.08.2026 17:48, Oleksii Kurochko wrote:
+>> dom0less device passthrough requires granting guest domains access to
+>> device interrupts. Introduce map_device_irqs_to_domain() to enumerate
+>> a DT node's interrupt properties, skipping those not owned by
+>> the primary interrupt controller (as at the moment I haven't seen usages
+>> of it), and map_irq_to_domain() to grant domain access and configure
+>> Xen's interrupt descriptor accordingly. Sharing IRQ between domains is
+>> rejected.
+>>
+>> Both map_irq_to_domain() and map_device_irqs_to_domain() are marked
+>> __overlay_init, mirroring Arm: without CONFIG_OVERLAY_DTB this expands to
+>> __init, so the functions are init-only and need no XSM check; with
+>> CONFIG_OVERLAY_DTB they become runtime-callable, but the only runtime
+>> entry point is dt_overlay_domctl(), which performs the XSM checks at the
+>> domctl layer.  RISC-V does not wire up DT overlay yet, so today these are
+>> strictly __init; if/when overlay support is added, the domctl-level XSM
+>> gating must be added together with it, as on Arm.
+>>
+>> route_irq_to_guest() and release_irq() manage irq_desc ownership for
+>> guest-assigned interrupts. Each assignment carries a small irq_guest
+>> structure as irqaction::dev_id, recording the owning domain and virtual
+>> IRQ number which is 1:1 mapped to physical IRQ number. A per-domain
+>> vIRQ allocation bitmap (used_irqs in struct vintc), managed by
+>> vintc_reserve_virq(), prevents the same vIRQ being claimed twice.
+>>
+>> Host and guest interrupts may differ in some operations (EOI timing in
+>> particular, possibly others): a host IRQ is completed once Xen's handler
+>> runs, whereas a passthrough IRQ must defer the physical completion until
+>> the guest issues its own EOI, otherwise a still-asserted level line would
+>> immediately retrigger and storm. This affects only the .end callback;
+>> the rest of hw_interrupt_type is shared, hence the separate host and
+>> guest hw_interrupt_type instances.
+>>
+>> With APLIC+IMSIC, guest interrupts are delivered directly by hardware
+>> through the IMSIC, bypassing do_IRQ(). The _IRQ_GUEST branch in
+>> do_IRQ() is therefore left as BUG() until a platform without direct
+>> IMSIC delivery is encountered.
+>>
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
+[...]
 
---s05IUUr9rd2cnQjr
-Content-Type: application/pgp-signature; name=signature.asc
+>> Updates
+>>
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>> Changes in v7:
+>>   - Build device.c as device.init.o: everything it provides is
+>>     __overlay_init, which is plain __init as long as CONFIG_OVERLAY_DTB
+>>     stays Arm-only.  Unlike Arm, which picks device.o/device.init.o based
+>>     on that config, RISC-V cannot enable it, so the choice is
+>>     unconditional for now.
+>>   - Don't have release_irq() free the guest IRQ info anymore: set
+>>     free_on_release = false and free 'info' explicitly in
+>>     release_guest_irq(), i.e. reinstate the xvfree() dropped in v5.  The
+>>     action stays embedded in struct irq_guest, so a single allocation
+>>     still covers both, but it no longer has to be the structure's first
+>>     member: the offsetof() BUILD_BUG_ON and the xvfree() of a pointer
+>>     that merely happened to coincide with the allocation base are gone.
+>>     The ->dev_id concern from v5 doesn't apply: release_irq() clears
+>>     desc->action under desc->lock and waits for in-flight handling before
+>>     returning, so nothing can observe ->dev_id once 'info' is freed.
+>>   - Move 'action' to the end of struct irq_guest and reword its comment
+>>     accordingly.
+>>   - Use xvzalloc() instead of xvmalloc() for struct irq_guest, so that
+>>     the embedded action is fully initialized (action.handler was left
+>>     uninitialized before).
+>>   - route_irq_to_guest(): free 'info' via the common free_info label when
+>>     intc_route_irq_to_guest() fails, now that release_irq() no longer
+>>     frees it.
+>>   - Drop a stray blank line ahead of release_irq().
+>> ---
+>> ---
+> 
+> Why does this appear a 2nd time? All of the above is already long / verbose
+> enough.
 
------BEGIN PGP SIGNATURE-----
+A rebase issue. all these changes were initially in the separate patch 
+and after squashed I missed to remove this part.
 
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmqNs/kACgkQ24/THMrX
-1ywcTwf8Cb+gYk2IHF7OABQV9sKHM2YZnVLL8gg2WbkC4uHI0B3i8gdIvmf4kKXV
-wqfgm2LExzs7TOLMiyMoCbPWHSB5UV42RkNrlUcU5yBf/SSwsZmk9Q4qDSxXsMcS
-2a0DcQE+W6uye1lrDXVgzFUmpoaaGtSwPKJdKdeviz8/4Ya015J3HafCgYjKj54T
-3P/q3/r7xD/xL/uoZDIOvKa4x+WYneG5h718n7mmSsiv8DpWGJnOnllT1wmr8yaC
-lU1uepTe4bVKP9SR0AY+z65yc3zoAGNq/+1SVUfnOch/4FP4z+8ZWrHjqjStT7dA
-kmBdk/qcYd/Or1jZdrdIUcbel44huQ==
-=GOaJ
------END PGP SIGNATURE-----
+I will drop it.
+> 
+>> @@ -101,12 +119,31 @@ int domain_vintc_init(struct domain *d)
+>>           break;
+>>       }
+>>   
+>> +    if ( !ret )
+>> +    {
+>> +        d->arch.vintc->used_irqs =
+>> +            xvzalloc_array(unsigned long,
+>> +                           BITS_TO_LONGS(d->arch.vintc->nr_virqs));
+>> +        if ( !d->arch.vintc->used_irqs )
+>> +            ret = -ENOMEM;
+>> +    }
+>> +
+>>       return ret;
+>>   }
+> 
+> Patch 13 doesn't arrange for domain_vintc_deinit() to be called when
+> domain_vintc_init() fails. Ideally that would change, or else you'd
+> now need to call the function in the error case from here.
 
---s05IUUr9rd2cnQjr--
+
+I will add a call of domain_vintc_deinit() in arch_domain_destroy() in 
+patch 13:
+
+  void arch_domain_destroy(struct domain *d)
+  {
+-    printk(XENLOG_WARNING "%s: unimplemented\n", __func__);
++    printk(XENLOG_WARNING "%s: not fully implemented\n", __func__);
++
++    domain_vintc_deinit(d);
+  }
+
+> In either
+> case ...
+> 
+>>   void domain_vintc_deinit(struct domain *d)
+>>   {
+>>       const enum intc_variant variant = intc_hw_ops->info->hw_variant;
+>> +    unsigned int virq;
+>> +
+>> +    if ( !d->arch.vintc )
+>> +        return;
+>> +
+>> +    for ( virq = 0; virq < d->arch.vintc->nr_virqs; virq++ )
+>> +        if ( test_bit(virq, d->arch.vintc->used_irqs) )
+>> +            release_guest_irq(d, virq);
+>> +
+>> +    XVFREE(d->arch.vintc->used_irqs);
+> 
+> ... this function will then need to become resilient against being
+> called with partially initialized state.
+
+I will update it to:
+
+  void domain_vintc_deinit(struct domain *d)
+  {
+      const enum intc_variant variant = intc_hw_ops->info->hw_variant;
+-    unsigned int virq;
+
+      if ( !d->arch.vintc )
+          return;
+
+-    for ( virq = 0; virq < d->arch.vintc->nr_virqs; virq++ )
+-        if ( test_bit(virq, d->arch.vintc->used_irqs) )
+-            release_guest_irq(d, virq);
++    if ( d->arch.vintc->used_irqs )
++    {
++        unsigned int virq;
++
++        for ( virq = 0; virq < d->arch.vintc->nr_virqs; virq++ )
++            if ( test_bit(virq, d->arch.vintc->used_irqs) )
++                release_guest_irq(d, virq);
+
+-    XVFREE(d->arch.vintc->used_irqs);
++        XVFREE(d->arch.vintc->used_irqs);
++    }
+
+
+> 
+>> @@ -118,3 +155,11 @@ void domain_vintc_deinit(struct domain *d)
+>>           break;
+>>       }
+>>   }
+>> +
+>> +bool vintc_reserve_virq(const struct domain *d, unsigned int virq)
+>> +{
+>> +    if ( virq >= d->arch.vintc->nr_virqs )
+>> +        return false;
+>> +
+>> +    return !test_and_set_bit(virq, d->arch.vintc->used_irqs);
+>> +}
+> 
+> Is the present caller of this going to remain the only one? If so,
+> __overlay_init would want using here as well. If not - will future
+> callers appear on paths which are exposed to guests? If in turn so,
+> speculation safety may need adding here.
+
+I don't see any others calls of it in downstream. So I will add 
+__overlay_init.
+
+> 
+>> @@ -227,3 +250,206 @@ void do_IRQ(struct cpu_user_regs *regs, unsigned int irq)
+>>       spin_unlock(&desc->lock);
+>>       irq_exit();
+>>   }
+>> +
+>> +static struct irq_guest *irq_get_guest_info(struct irq_desc *desc)
+>> +{
+>> +    ASSERT(spin_is_locked(&desc->lock));
+>> +    ASSERT(test_bit(_IRQ_GUEST, &desc->status));
+>> +    ASSERT(desc->action != NULL);
+> 
+> Btw, no need for the " != NULL" part.
+
+I will drop it.
+
+> 
+>> +    return desc->action->dev_id;
+>> +}
+>> +
+>> +void release_irq(unsigned int irq, const void *dev_id)
+>> +{
+>> +    struct irq_desc *desc;
+>> +    unsigned long flags;
+>> +    struct irqaction *action, **action_ptr;
+>> +
+>> +    desc = irq_to_desc(irq);
+> 
+> Can't this (once again) be the initializer of the variable?
+> 
+>> +    spin_lock_irqsave(&desc->lock, flags);
+>> +
+>> +    action_ptr = &desc->action;
+> 
+> Same for this one, which also doesn't require the lock to be held.
+
+I will apply both remarks.
+
+> 
+>> +#ifdef CONFIG_IRQ_HAS_MULTIPLE_ACTION
+>> +    for ( ;; )
+>> +    {
+>> +        action = *action_ptr;
+>> +        if ( !action )
+>> +        {
+>> +            printk(XENLOG_WARNING "Trying to free already-free IRQ %u\n", irq);
+>> +            spin_unlock_irqrestore(&desc->lock, flags);
+>> +            return;
+>> +        }
+>> +
+>> +        if ( action->dev_id == dev_id )
+>> +            break;
+>> +
+>> +        action_ptr = &action->next;
+>> +    }
+>> +
+>> +    /* Found it - remove it from the action list */
+>> +    *action_ptr = action->next;
+>> +#else
+>> +    action = *action_ptr;
+>> +    *action_ptr = NULL;
+>> +#endif
+>> +
+>> +    /* If this was the last action, shut down the IRQ */
+>> +    if ( !desc->action )
+>> +    {
+>> +        desc->handler->shutdown(desc);
+>> +        __clear_bit(_IRQ_GUEST, &desc->status);
+>> +    }
+>> +
+>> +    spin_unlock_irqrestore(&desc->lock, flags);
+>> +
+>> +    /*
+>> +     * Wait to make sure it's not being used on another CPU.
+>> +     *
+>> +     * The read barrier pairs with the spin_unlock() in do_IRQ(): once we
+>> +     * observe _IRQ_INPROGRESS cleared, we are guaranteed to also see the
+>> +     * writes do_IRQ() made to desc (e.g. desc->action) before releasing the
+>> +     * lock, so it is safe to free the action below.
+>> +     */
+>> +    do { smp_rmb(); } while ( test_bit(_IRQ_INPROGRESS, &desc->status) );
+>> +
+>> +    if ( action->free_on_release )
+>> +        xvfree(action);
+>> +}
+>> +
+>> +int release_guest_irq(struct domain *d, unsigned int virq)
+>> +{
+>> +    struct irq_desc *desc = irq_to_desc(virq);
+>> +    struct irq_guest *info;
+>> +    unsigned long flags;
+>> +    int ret = -EINVAL;
+>> +
+>> +    spin_lock_irqsave(&desc->lock, flags);
+>> +
+>> +    if ( !test_bit(_IRQ_GUEST, &desc->status) )
+>> +        goto unlock_err;
+>> +
+>> +    info = irq_get_guest_info(desc);
+>> +    if ( d != info->d )
+>> +        goto unlock_err;
+>> +
+>> +    /*
+>> +     * Live IRQ unrouting from a running domain is not supported: the tear-down
+>> +     * drops desc->lock across release_irq()/xvfree() and relies on no
+>> +     * concurrent route_irq_to_guest() being issued for this domain. Only permit
+>> +     * it for a dying domain, where assignment is frozen and no new routes can
+>> +     * appear.
+>> +     */
+>> +    if ( !d->is_dying )
+>> +    {
+>> +        ret = -EBUSY;
+>> +        goto unlock_err;
+>> +    }
+>> +
+>> +    /*
+>> +     * Clear _IRQ_GUEST while still holding the lock so that a concurrent
+>> +     * release_guest_irq() for the same IRQ observes it and bails out, rather
+>> +     * than capturing the same 'info' and double-freeing it below.
+>> +     */
+>> +    __clear_bit(_IRQ_GUEST, &desc->status);
+>> +
+>> +    spin_unlock_irqrestore(&desc->lock, flags);
+>> +
+>> +    release_irq(desc->irq, info);
+>> +    xvfree(info);
+> 
+> While in the v7 revlog you claim there is no issue here, imo there (still) is.
+> You obtain "info" with the lock held, then drop the lock, for release_irq() to
+> re-acquire. If a similar pattern was used elsewhere (info obtained under lock,
+> lock dropped, then using info), the pointer would go stale the moment you free
+> it here. Imo for this to be safe _and_ not setting a bad precendent, you need
+> a variant of release_irq() which is passed desc with the lock already held.
+> release_irq() itself (if to be called from anywhere else) would then be a thin
+> wrapper around it.
+
+I agree that it will be safer in general.
+
+I will introduce:
+
+static void irq_release_action(const struct irq_desc *desc,
+                                struct irqaction *action)
+{
+     /*
+      * Wait to make sure it's not being used on another CPU.
+      *
+      * The read barrier pairs with the spin_unlock() in do_IRQ(): once we
+      * observe _IRQ_INPROGRESS cleared, we are guaranteed to also see the
+      * writes do_IRQ() made to desc (e.g. desc->action) before 
+releasing the
+      * lock, so it is safe to free the action below.
+      */
+     do { smp_rmb(); } while ( test_bit(_IRQ_INPROGRESS, &desc->status) );
+
+     if ( action->free_on_release )
+         xvfree(action);
+}
+
++void release_irq(unsigned int irq, const void *dev_id)
++{
++    struct irq_desc *desc = irq_to_desc(irq);
++    struct irqaction *action;
++    unsigned long flags;
++
++    spin_lock_irqsave(&desc->lock, flags);
++    action = irq_detach_action(desc, dev_id);
++    spin_unlock_irqrestore(&desc->lock, flags);
++
++    if ( action )
++        irq_release_action(desc, action);
++}
+
+Where irq_detach_action() will be almost what release_irq() was before:
+
++static struct irqaction *irq_detach_action(struct irq_desc *desc,
++                                           const void *dev_id)
+  {
+-    struct irq_desc *desc = irq_to_desc(irq);
+-    unsigned long flags;
+      struct irqaction *action, **action_ptr = &desc->action;
+
+-    spin_lock_irqsave(&desc->lock, flags);
++    ASSERT(spin_is_locked(&desc->lock));
++
+  #ifdef CONFIG_IRQ_HAS_MULTIPLE_ACTION
+      for ( ;; )
+      {
+          action = *action_ptr;
+-        if ( !action )
+-        {
+-            printk(XENLOG_WARNING "Trying to free already-free IRQ 
+%u\n", irq);
+-            spin_unlock_irqrestore(&desc->lock, flags);
+-            return;
+-        }
+-
+-        if ( action->dev_id == dev_id )
++        if ( !action || (action->dev_id == dev_id) )
+              break;
+
+          action_ptr = &action->next;
+      }
++#else
++    action = *action_ptr;
++#endif
++
++    if ( !action )
++    {
++        printk(XENLOG_WARNING "Trying to free already-free IRQ %u\n",
++               desc->irq);
++        return NULL;
++    }
+
+      /* Found it - remove it from the action list */
++#ifdef CONFIG_IRQ_HAS_MULTIPLE_ACTION
+      *action_ptr = action->next;
+  #else
+-    action = *action_ptr;
+      *action_ptr = NULL;
+  #endif
+
+@@ -298,8 +309,22 @@ void release_irq(unsigned int irq, const void *dev_id)
+          __clear_bit(_IRQ_GUEST, &desc->status);
+      }
+
+-    spin_unlock_irqrestore(&desc->lock, flags);
++    return action;
++}
+
+and then release_guest_irq() (the end) will be changed in the following way:
+
+....
+     /*
+      * Detaching the action happens with desc->lock still held, so that a
+      * concurrent release_guest_irq() for the same IRQ sees _IRQ_GUEST 
+already
+      * cleared and bails out, rather than capturing the same 'info' and
+      * double-freeing it below.
+      */
+     action = irq_detach_action(desc, info);
+
+     spin_unlock_irqrestore(&desc->lock, flags);
+
+     if ( action )
+         irq_release_action(desc, action);
+
+     xvfree(info);
+
+     return 0;
+
+> 
+>> +/* Route an IRQ to a specific guest */
+>> +int route_irq_to_guest(struct domain *d, unsigned int virq,
+>> +                       unsigned int irq, const char *devname)
+>> +{
+>> +    struct irq_guest *info;
+>> +    struct irq_desc *desc;
+>> +    unsigned long flags;
+>> +    int retval = 0;
+>> +
+>> +    if ( d->is_dying )
+>> +        return -EINVAL;
+>> +
+>> +    desc = irq_to_desc(irq);
+> 
+> Imo this either wants to be the initializer of the variable, or (perhaps
+> better here) it wants to move immediately ahead of ...
+> 
+>> +    info = xvzalloc(struct irq_guest);
+>> +    if ( !info )
+>> +        return -ENOMEM;
+>> +
+>> +    info->d = d;
+>> +    info->virq = virq;
+>> +
+>> +    info->action.dev_id = info;
+>> +    info->action.name = devname;
+>> +    /* The action is part of 'info', thus it is freed together with it. */
+>> +    info->action.free_on_release = false;
+>> +
+>> +    spin_lock_irqsave(&desc->lock, flags);
+> 
+> ... this.
+
+I will move initialization here.
+
+> 
+>> +    /*
+>> +     * If the IRQ is already used by someone
+>> +     *  - If it's the same domain -> Xen doesn't need to update the IRQ desc.
+>> +     *  For safety check if we are not trying to assign the IRQ to a
+>> +     *  different vIRQ.
+>> +     *  - Otherwise -> For now, don't allow the IRQ to be shared between
+>> +     *  Xen and domains.
+>> +     */
+>> +    if ( desc->action != NULL )
+>> +    {
+>> +        if ( test_bit(_IRQ_GUEST, &desc->status) )
+>> +        {
+>> +            struct domain *ad = irq_get_guest_info(desc)->d;
+>> +
+>> +            if ( d != ad )
+>> +            {
+>> +                printk(XENLOG_G_ERR "IRQ %u is already used by %pd\n",
+>> +                       irq, ad);
+>> +                retval = -EBUSY;
+>> +            }
+>> +            else if ( irq_get_guest_info(desc)->virq != virq )
+>> +            {
+>> +                printk(XENLOG_G_ERR
+>> +                       "%pd: IRQ %u is already assigned to vIRQ %u\n",
+>> +                       d, irq, irq_get_guest_info(desc)->virq);
+>> +                retval = -EBUSY;
+>> +            }
+>> +        }
+>> +        else
+>> +        {
+>> +            printk(XENLOG_G_ERR "IRQ %u is already used by Xen\n", irq);
+>> +            retval = -EBUSY;
+>> +        }
+>> +        goto out;
+>> +    }
+>> +
+>> +    retval = _setup_irq(desc, 0, &info->action);
+>> +    if ( retval )
+>> +        goto out;
+>> +
+>> +    retval = intc_route_irq_to_guest(desc, IRQ_NO_PRIORITY);
+>> +
+>> +    spin_unlock_irqrestore(&desc->lock, flags);
+>> +
+>> +    if ( retval )
+>> +    {
+>> +        release_irq(desc->irq, info);
+> 
+> Like above, I think you want to avoid transiently dropping the lock here.
+
+With suggested above it will look like:
+
+      retval = intc_route_irq_to_guest(desc, IRQ_NO_PRIORITY);
+-
+-    spin_unlock_irqrestore(&desc->lock, flags);
+-
+      if ( retval )
+      {
+-        release_irq(desc->irq, info);
++        struct irqaction *action = irq_detach_action(desc, info);
++
++        spin_unlock_irqrestore(&desc->lock, flags);
++
++        if ( action )
++            irq_release_action(desc, action);
++
+          goto free_info;
+      }
+
++    spin_unlock_irqrestore(&desc->lock, flags);
++
+      return 0;
+
+   out:
+
+Thanks.
+
+~ Oleksii
+
+
 
