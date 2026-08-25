@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00443C61DB9
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 14:43:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1399293.1635448 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA789C61DBE
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 15:26:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1399317.1635459 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wysMk-0006fV-O3; Tue, 25 Aug 2026 14:43:06 +0000
+	id 1wyt2B-0003bA-QR; Tue, 25 Aug 2026 15:25:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1399293.1635448; Tue, 25 Aug 2026 14:43:06 +0000
+Received: by outflank-mailman (output) from mailman id 1399317.1635459; Tue, 25 Aug 2026 15:25:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wysMk-0006fO-LD; Tue, 25 Aug 2026 14:43:06 +0000
-Received: by outflank-mailman (input) for mailman id 1399293;
- Tue, 25 Aug 2026 14:43:05 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wyt2B-0003b3-Mh; Tue, 25 Aug 2026 15:25:55 +0000
+Received: by outflank-mailman (input) for mailman id 1399317;
+ Tue, 25 Aug 2026 15:25:53 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wysMi-0006f8-Vj
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 14:43:05 +0000
+ (envelope-from <marmarek@invisiblethingslab.com>) id 1wyt29-0003aw-NG
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 15:25:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wysMi-000tev-Cc
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 16:43:04 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wyt28-009HRo-5q
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 17:25:52 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a8da9e9-8faa-0a2a0a5109dd-0a2a4501956c-18
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 16:43:04 +0200
-Received: from [209.85.218.43] (helo=mail-ej1-f43.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a8da9f8-5984-0a2a45010019-d155da2bc58b-3
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 16:43:04 +0200
-Received: by mail-ej1-f43.google.com with SMTP id
- a640c23a62f3a-c2074710751so884685866b.1
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 07:43:04 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c2496297189sm1755855566b.22.2026.08.25.07.43.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Aug 2026 07:43:01 -0700 (PDT)
+ (envelope-from <marmarek@invisiblethingslab.com>)
+ id 6a8db3fa-bab6-0a2a0a5309dd-0a2a4502d858-6
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 17:25:52 +0200
+Received: from [202.12.124.154] (helo=fhigh-b3-smtp.messagingengine.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <marmarek@invisiblethingslab.com>)
+ id 6a8db3fd-6ca4-0a2a45020019-ca0c7c9ae11b-3
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 17:25:50 +0200
+Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
+ by mailfhigh.stl.internal (Postfix) with ESMTP id 9324D7A012F;
+ Tue, 25 Aug 2026 11:25:48 -0400 (EDT)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-03.internal (MEProxy); Tue, 25 Aug 2026 11:25:48 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
+ 25 Aug 2026 11:25:47 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,145 +52,136 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787668984; x=1788273784; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=w9ohPoMvB1GBbUcpCPI8mlfQmj/aqTcFkYWbjjT18W8=;
-        b=FUNxraqyS2uNS31ibQaUNmGr32JlG/BJ0z1wxnwXiYuauGzdPuAXL2/daZvVi8ED5Z
-         BfoxuZdDdXk3HTdMjxRoRNgkUdyN5EU3582xvtRlXb7l35Jte6edd/euNK5thrlS/WH6
-         aC80y5B6+p0XSWRx7KeBAsG6YMDyB8NDR4XqSBu7Z6+ghKgq6fXZ9z6bOPN+42lW9MRy
-         HPfg1jaoTUV3ceGEZZGlPRO7Lf1ZvYKwXzBu74j2mJJR8anGRBSZ7x1KkD4SOQQ4wVeK
-         0VOGQ/dN2yuQzUvr2fp6g525j6xNNDGpNTnJ9fD76DNDHs7cAZPht570EDX3U0Juc1xl
-         Orxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787668984; x=1788273784;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=w9ohPoMvB1GBbUcpCPI8mlfQmj/aqTcFkYWbjjT18W8=;
-        b=iNhlOKMsqTZQkHv8D6MXVuI4Tvpi9bz3bPSIehov3LN03yZnlaDgn823099Sxvp1Pi
-         bu0dT/UgQA6bOdsMKbukTFr5RLl2UIFK7YqbW9qF6wOnfK3TnlGNU72XI5r7x+coQG9U
-         ba+qAOaLrMNY9L4XVKtfgFll+FXKWvBPcaJMPrEZ++Qge4AEO97l2HuF1MMLFhRPpDWX
-         tN/ToiX0SPpD5hY07X0T7ToDUkSWuwLfrIndaIWd9aCMajc0zhtGfOOJ0VbxVsbKvmdm
-         wMKaigd9cBTWt7VsYxADNYjJ6chtoxR4ek6ZbVHzx8RotOO8dTzch+t8qZ7jXPYxeUnT
-         nseg==
-X-Forwarded-Encrypted: i=1; AHgh+RptEVSWbzRUcap8+D50XqLsd7wZvSI7uGIRAAvJc3U8U2khvvp7/4uy5bL4XKUnxy2qKwp1P9SOtPk=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lcSpP4uh4dhmr9MdujeUhOBgY7TVcl058YQy5B8rGNu5jOCyZQ
-	1QlXPVcVhnVLz7aoBpvjjB056KM2q/3GfODUIrJXgPMOsaxjK5BIdQfPvIoY/ww3uw==
-X-Gm-Gg: AR+sD10rDBv6ggwZYSRrJExPxK5hwMwLvi1+eIvG2v2OYUzEvkNmy9BnPqh8wSl5ANq
-	mPvtzI7E7ZelLJayZrRvklbNGrlMMNm5rJohkSzagYijLBPSxrsfhbggyB9LC8XSeU5QIh78RgU
-	TyUymsfLwUCoselaVZXQDkT+wbgQUjbSQck2VUvXC+gjE2sbGhR4UqAbySp/F9JYkb3QptLK4vj
-	ucI8kegfprqxWyxzKDOE8Ey5X0XOnh75utdK3ENFwvC/miA2Y0/lBALgfSzbkxIYqRlEElHlvJp
-	FeiUWVqKQFQ+5+sT7RInTk7v+WBco2m/Dq8l76Vadh+GUMYHPG/KIPfxhAo9LHQUyUdljkrhh3d
-	ox7Kw7fI4/USGW9BW95pf8wGwCsvHhkBqNBBqgp1HiBw+DK16YYdWGxuXMZA/EOBboa5xlYEPT6
-	irqPd74zufX7FB4tpfNkackWfP+wW9HokhJjxQCyUscBC3IyZ6gR825eXvrWkxdw5KbJSUVSkFo
-	wrW7zYw+0MnnnHwgPe0ZNO12ST522mmlNbOd7fiOuT1ftMYlbQy
-X-Received: by 2002:a17:907:e009:20b0:c24:e0dc:8b66 with SMTP id a640c23a62f3a-c24e0dcd3d7mr746836466b.6.1787668983779;
-        Tue, 25 Aug 2026 07:43:03 -0700 (PDT)
-Message-ID: <6dff46c2-443f-4b9f-bdd9-de3017becca9@suse.com>
-Date: Tue, 25 Aug 2026 16:43:00 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm3 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm3 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm3; t=1787671548;
+	 x=1787757948; bh=UOtbtAmf2ZFQ9HUbrtpF8rOLiDXRmAvIzLZdI5iFIoE=; b=
+	NvFs7YDg/qo0/MeQCDLCS6yfXwv78/rv+XMv8mAt8D6yhji3mqBsUW9L09XSIaN4
+	czeNSaX+R9MWM3IRY0kmINW68qz90KC1MnSADCE576Z6dC5Ix1ZQvj1r+bnyLMcx
+	Tv/P4f4IslhQAG011fH+FHRXqUFU3rKPSHtQ+X2BfSfxmaJ5KVXN+CJhO0WDaDT+
+	l3Tr5FlvC7fWsRzM9NEhKZyazLULlqOrudALEh5JVB+phaAxTMLXmxfsKBjpPA1X
+	93iOdqFKZH5iv++wberNC2+7EQqZKshm8th1c7lKepk5NMRqUhioEp9vFaDwqQ3i
+	vB+sVwxznVMq74rBcuyNmQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:subject:subject:to
+	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
+	1787671548; x=1787757948; bh=UOtbtAmf2ZFQ9HUbrtpF8rOLiDXRmAvIzLZ
+	dI5iFIoE=; b=Pz7Np16GfPANcEZhdyQ2hZe9vUF6sA9vZ0LjpTgG1g6EdPPp91w
+	fn7VAbZqF+dfkvBdoyAHm4uOBV385Kd9eJm/zUWvOWa/OjYBCFZez/YChOfkUgPq
+	PfS+prJwZoy9b0/Cv8k2bj81GpuxkKLRnyl6djUrRDNxdhGpm7my4JFrENGdp0Ju
+	DAmV5RLz8xmQEA+6mwQBzxzJR+ksoMXJnFDqpZcpdwXE3ueOftyJv53+Hf95Go2D
+	9XrHsa1YYvUrd+qYAKuUoK+kmLOmjuLeDGMXz3dGZB7yFUlkOK9bzmK7G/mkLx/b
+	jwrTQVvw8HONx29YYjXRy1k3Gb8OJtjQIaw==
+X-ME-Sender: <xms:_LONapUXU36_GCwyQfo3uZ6RkSwPPuk5AhcgnNRYNSb52uoNL95_ug>
+    <xme:_LONagfPGX8ujXQS4eXujppb4fnKdqFIDVBKfZIeNTI7a2iafMejSTQ0Da0HMp83T
+    C7QG6qDv-nO1EN7x-z1gZRD-LZDT37XsP9Yedm8XxaA0d9pJiE>
+X-ME-Received: <xmr:_LONatsChN3L9uGpMYHd0X0_oya_hVpcCgASfxQs-QT6qMp9a2zBHjkgzrV7-SZ8E7KQ9LZvC0ApDv_eUl_z4eJWNyrGPeZT8YU>
+X-ME-Proxy-Cause: dmFkZTErKQoUc1EFlCkg0FLQ9ECRHHLXJK1mMM3+xTKl7ay4Ew8B4QCWYnsTYAopL5auz2
+    EbMNE6ODnLYI1WtQLfabBhgBM97aEL0zt+m4IsHpOa7bBPeHjZbqROD6ce1PKiXdhlRGwN
+    2l4Hro7jzmMWzv7UHtYTAvkamoM0zAj0TkejklZe4Do7eMunhyuEEMyb282KNlDb05BKZQ
+    T3VY/0ByfdMCLVE8Fnrz3Bp9uHBb4NMUtuH0KTq/tJeCtsQvvlWjxzAqRNStiA5O3XapAa
+    Np/DfRcUaTVKMm0BHb6aG20wBYhkSCElgxh4W4A+nNCNdgQ48I8XTFri389yQin9I6AaSC
+    kl9aYEQ3KF7CBfnMc7SnI0rjWrlPV0kF2hRY/88p9mbtD4prnTGMynJ0IJiWbguQdKe5lL
+    RnLMMwQxzV+cviE7dgEmU+U2S1qW8nbehFlKV2Eo7++QpCG0NcRWIvyckqXRS/DBJbMvc/
+    DUhK2nEKko0M+3RxIEfYUgF5tv50G5Jipkt0nke1GsOHjSxJkC0WTYKs5bmCDDoVemZpyG
+    A3i+YY10fSxNv/pTWqGBnD5wVb9mtHznmdoAdDn270PO1StSG1/BXzSSWqqgS/8scKDIMm
+    kD7n6JQ1Dp5Z9e4RC6Xn5M4lry9AQ7Prb3DlS3tz3HtSr5YOemdcoO7TXhDg
+X-ME-Proxy: <xmx:_LONan8jS_2G8SAKfW6FgBVtdYZeUgoniVg-cJEU56zxl7RxOKwnow>
+    <xmx:_LONag30C2stactqU_aCW_vy34Y6q6XL2tWuWy6bMJWuGqQnS9_xAw>
+    <xmx:_LONakDxUpfE41c_L-2AVMZhUo3Z8crpcCeLpxryrckSadnyVjj2xA>
+    <xmx:_LONakeASTBU3fAH9Pd8kSNsJvMF-kYJuhjrABsKbYE7M_NcssTUxg>
+    <xmx:_LONatRGBVBBwmaAm5fJSX5dR3kTcrZcnXPDMBpg7rQFivPT49tauqwV>
+Feedback-ID: i1568416f:Fastmail
+Date: Tue, 25 Aug 2026 17:25:45 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Stefano Stabellini <sstabellini@kernel.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+	xen-devel@lists.xenproject.org,
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH test-artifacts v4 13/13] Setup ssh access to test systems
+Message-ID: <ao2z-V1K_tDz8u26@mail-itl>
+References: <cover.30e6171ddf1c6a72eadf4af0a77c892d4f18d811.1777898148.git-series.marmarek@invisiblethingslab.com>
+ <13f837cd9f394d3b4eddb4849156b8ed5d06d31b.1777898148.git-series.marmarek@invisiblethingslab.com>
+ <1779458083.8631fc262581453bbf619ec5b2062170.19e4ff78945000f373@vates.tech>
+ <alpine.DEB.2.22.394.2605261201180.182011@ubuntu-linux-20-04-desktop>
+ <ah24pfWb_orPRaJG@mail-itl>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 1/3] ioreq: switch ioreq page allocation to vmap
-To: Julian Vetter <julian.vetter@vates.tech>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20260420093820.825969-1-julian.vetter@vates.tech>
- <20260420093820.825969-2-julian.vetter@vates.tech>
- <35a08d22-1e95-4e02-a7e9-7f392ef11722@suse.com>
- <1787667597.8631fc262581453bbf619ec5b2062170.1a0394ac7f2000c4f3@vates.tech>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1787667597.8631fc262581453bbf619ec5b2062170.1a0394ac7f2000c4f3@vates.tech>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1787668984-BCB45757-2783207F/0/0
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="s05IUUr9rd2cnQjr"
+Content-Disposition: inline
+In-Reply-To: <ah24pfWb_orPRaJG@mail-itl>
+X-purgate-ID: tlsNG-720697/1787671550-F30B02AC-F7DD6316/0/0
 X-purgate-type: clean
-X-purgate-size: 2812
+X-purgate-size: 2538
 
-On 25.08.2026 16:19, Julian Vetter wrote:
-> On 8/18/26 3:06 PM, Jan Beulich wrote:
->> On 20.04.2026 11:38, Julian Vetter wrote:
->>> @@ -333,7 +335,8 @@ bool is_ioreq_server_page(struct domain *d, const struct page_info *page)
->>>   
->>>       FOR_EACH_IOREQ_SERVER(d, id, s)
->>>       {
->>> -        if ( (s->ioreq.page == page) || (s->bufioreq.page == page) )
->>> +        if ( (s->ioreq.va && vmap_to_page(s->ioreq.va) == page) ||
->>> +             (s->bufioreq.va && vmap_to_page(s->bufioreq.va) == page) )
->>>           {
->>>               found = true;
->>>               break;
->>
->> You mention in the description that some extra overhead is introduced. The
->> (generally) two page walks done here are particularly concerning. Since we
->> have a valid struct page_info * available here, I wonder if we shouldn't
->> aid this lookup by recording the VA in one of struct page_info's fields.
->> Afaics vmap() doesn't use any of the fields, so it should be relatively
->> easy to determine a field to use for this purpose. The more involved part
->> would then be to make sure the field (in other struct page_info instances)
->> is also properly different from any VA vmap() may return.
-> 
-> Hello Jan,
-> 
-> Thank you again for your feedback! I will wait then for Anthony's 
-> decision regarding whether the multi-page ioreq support and the ioreq_t 
-> growth should be combined into a single effort, before I proceed further 
-> with a v7.
-> 
-> I just wanted to clarify one thing regarding the overhead I mentioned in 
-> the first patch's commit message ("this change has a small overhead in 
-> the common case"). Here, I was referring to vmap()/vunmap() replacing 
-> map_domain_page_global(). Where map_domain_page_global() has a directmap 
-> fast path. I didn't mean the overhead of the added vmap_to_page(). I 
-> should maybe clarify this better in my next iteration's commit message.
-> 
-> On your suggestion to cache the VA in struct page_info to speed up the 
-> vmap_to_page() lookups in is_ioreq_server_page(): I looked through the 
-> tree, and that function currently has only one caller 
-> sh_remove_all_mappings() (in xen/arch/x86/mm/shadow/common.c) and is 
-> only reached in a failure case. Given that, and given how widely shared 
-> and size-critical struct page_info is, I'm wondering whether it's really 
-> worth touching it for the gain of not having to do the 2 lookups. What 
-> do you think?
+--s05IUUr9rd2cnQjr
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Date: Tue, 25 Aug 2026 17:25:45 +0200
+From: Marek =?utf-8?B?PT91dGYtOD9RP01hcmN6eWtvd3NraS1HPUMzPUIzcmVja2k/PQ==?= <marmarek@invisiblethingslab.com>
+To: Stefano Stabellini <sstabellini@kernel.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+	xen-devel@lists.xenproject.org,
+	Roger Pau =?utf-8?B?PT91dGYtOD9CP1RXOXVic09wPz0=?= <roger.pau@citrix.com>
+Subject: Re: [PATCH test-artifacts v4 13/13] Setup ssh access to test systems
 
-Hmm, indeed. Yet how would we prevent new uses from being hit? At least
-a comment may want adding somewhere (where it's not too easy to overlook).
+On Mon, Jun 01, 2026 at 06:51:49PM +0200, Marek Marczykowski-G=C3=B3recki w=
+rote:
+> On Tue, May 26, 2026 at 12:02:23PM -0700, Stefano Stabellini wrote:
+> > On Fri, 22 May 2026, Anthony PERARD wrote:
+> > > On Mon, May 04, 2026 at 02:35:52PM +0200, Marek Marczykowski-G=C3=B3r=
+ecki wrote:
+> > > > For this add also bridge package, so xenbr0 can be configured with
+> > > > /etc/network/interfaces.
+> > > > This allows extracting more logs out of the test system.
+> > > >=20
+> > > > Create empty /etc/network/interfaces, so the 'networking' service s=
+tarts
+> > > > cleanly even if no interfaces are configured this way. This is
+> > > > necessary, as dropbear service depends on networking.
+> > > >=20
+> > > > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblet=
+hingslab.com>
+> > >=20
+> > > Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
+> >=20
+> > Since Anthony has reviewed the entire series, on the whole series:
+> >=20
+> > Acked-by: Stefano Stabellini <sstabellini@kernel.org>
+>=20
+> Thanks.
+>=20
+> I seem to have forgotten the "test-artifacts" subject tag (adding now).
 
-That said, why the mention of "size-critical" when I said "determine a
-field", not "add a field"? (Really in different context I've suggested
-the same as a possibility to George, for his ASI work.)
+AFAICT this series is fully acked, is there anything preventing
+committing it?
 
-Jan
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+
+--s05IUUr9rd2cnQjr
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmqNs/kACgkQ24/THMrX
+1ywcTwf8Cb+gYk2IHF7OABQV9sKHM2YZnVLL8gg2WbkC4uHI0B3i8gdIvmf4kKXV
+wqfgm2LExzs7TOLMiyMoCbPWHSB5UV42RkNrlUcU5yBf/SSwsZmk9Q4qDSxXsMcS
+2a0DcQE+W6uye1lrDXVgzFUmpoaaGtSwPKJdKdeviz8/4Ya015J3HafCgYjKj54T
+3P/q3/r7xD/xL/uoZDIOvKa4x+WYneG5h718n7mmSsiv8DpWGJnOnllT1wmr8yaC
+lU1uepTe4bVKP9SR0AY+z65yc3zoAGNq/+1SVUfnOch/4FP4z+8ZWrHjqjStT7dA
+kmBdk/qcYd/Or1jZdrdIUcbel44huQ==
+=GOaJ
+-----END PGP SIGNATURE-----
+
+--s05IUUr9rd2cnQjr--
 
