@@ -4,44 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91E58C61DB6
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 09:21:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1399154.1635360 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C59AC61DBD
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 11:42:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1399183.1635368 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wynLX-0005Qt-3K; Tue, 25 Aug 2026 09:21:31 +0000
+	id 1wypXv-0005yo-Mk; Tue, 25 Aug 2026 11:42:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1399154.1635360; Tue, 25 Aug 2026 09:21:31 +0000
+Received: by outflank-mailman (output) from mailman id 1399183.1635368; Tue, 25 Aug 2026 11:42:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wynLW-0005Qm-UQ; Tue, 25 Aug 2026 09:21:30 +0000
-Received: by outflank-mailman (input) for mailman id 1399154;
- Tue, 25 Aug 2026 09:21:29 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wypXv-0005yh-Jp; Tue, 25 Aug 2026 11:42:27 +0000
+Received: by outflank-mailman (input) for mailman id 1399183;
+ Tue, 25 Aug 2026 11:42:26 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wynLV-0005Qg-Jq
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 09:21:29 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wynLU-001uUQ-2D
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 11:21:28 +0200
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a8d5e8d-bab6-0a2a0a5309dd-0a2a450ad572-34
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 11:21:27 +0200
-Received: from [209.85.208.41] (helo=mail-ed1-f41.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a8d5e97-f2d2-0a2a450a0019-d155d029c5d8-3
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 11:21:27 +0200
-Received: by mail-ed1-f41.google.com with SMTP id
- 4fb4d7f45d1cf-6a422090b14so6037617a12.1
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 02:21:27 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a5d6499c0csm561812a12.25.2026.08.25.02.21.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Aug 2026 02:21:26 -0700 (PDT)
+ (envelope-from <gwd@xenproject.org>) id 1wypXu-0005yb-Nd
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 11:42:26 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <gwd@xenproject.org>) id 1wypXu-004vzN-1L
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 11:42:26 +0000
+Received: from mail-lf1-f47.google.com ([209.85.167.47])
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
+ (envelope-from <gwd@xenproject.org>) id 1wypXt-00HLmH-3B
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 11:42:26 +0000
+Received: by mail-lf1-f47.google.com with SMTP id
+ 2adb3069b0e04-5b0148201fbso4191652e87.3
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 04:42:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,150 +44,313 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787649687; x=1788254487; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=RHw1r7kmsfrd+VJzkoe5mR3jU5Bspag4uDuAfrhECes=;
-        b=G4KOd5sS+0NdwenMgVSoGCY4uPNgmF51xEz7c9nMnANATmezto6nfmNJle16hDLVyU
-         QKTAYjc45e+8xSOU8IhuxjT6c16dgE02GzpB6a8W6ZiaPPjUoGK6Cb23zT5jarqUMw+Q
-         MHaZJAtNiVtAyCbPnasv6m2vRSDttdESOKb4C+ROexKFvZs6i51+kE87eG5FIozIUkbH
-         nhPa5bcF1aTOJuZAnqXeeBVuU7pAhqPyTmYnhaC2/jArJBQUedzebKkSUPRywP8+6ZC/
-         WjfzMH6XHDIPjuYElExJRDU6IiHkOzFmnz17Hp/XocnjJ9oqpClPPUMM9e/nqnHO3dmI
-         ABpA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787649687; x=1788254487;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=RHw1r7kmsfrd+VJzkoe5mR3jU5Bspag4uDuAfrhECes=;
-        b=aINC8vcDH88ni9csjq0aM6JXzinOthGulCbUDrLQR9qhZHS4gaRRWDYPzuT4X/Ri1B
-         OVQPq+PmK3OYE/Xzl3facKoqOhBwAqlXeLXRaZ6WRlMGUhcwHSCdaJ1kX/XgkcuARorb
-         +o6KTYj9eEiQV/Tsjw3zPPwkTEM2n0M08O8ADycrP73uxBQXkOHLM1DZnIm2kD0+h4Cj
-         6iqHN1VCDHGwwq39mDxceXEeIkYR9nYp3Zt27P105iQh5oTxVxJODp6cW0zaSd1lFsl1
-         eLz7rgvQWnWUE8BdExT/IeXsCEwV2jGcYE2MDctTFO0Q3xC0ScLdsAOaAJdDWgalgAoc
-         LVSA==
-X-Gm-Message-State: AFuF++kncimdGJA+OQe4sJ3GLln9nm4h/j7HNDeNn3SRTyWYb8oiXGZk
-	d2+VS6Jz+uCSSAUmTKkWNSpQ1G1ULqjd2CgSOG2OEZChDL26fRrfCmHFft4MEPapDI2i9Q3Ox4Q
-	f6PhuSw==
-X-Gm-Gg: AR+sD13eocD+zenjrszWGk5WrF4+5EF68+A4U4DUpp5xwXZ+7+u6Is47rZN79wDrLw9
-	L7wZQ2QsbZ3ZXCOy1QGDJ/3j6pNmSY8HwDnPNiwOdjVB4R1jhPiaXnrLZIpxMP9WYM7Ip0MpRPc
-	ZCmaXzQ5FI20Y32L1WaI28EJBkjoS7+0MVXbcMupgIAFx1tcC2oeqH3qx38JJmLphS/+LYxMPtY
-	SVBQ/i3FKH4dQjGvs1y+0fr9VmPfi7+L7t5SC1byg0OO6Y9gmRNrQ8XFVjdLATBkk9E0ozlbYKA
-	k4YwWRCL1Mr1+3lDVLVGq6P8DM8j0iHvUiudqtXI9tuCueg1fmxKq4tjaAF4vKKNVzIZKbHBWYx
-	LsSVtaIpk6K77l3SY68i6jVvQ5uWi7Ee7K4k8sRVMb/rJktRmao+Z00FmOsS02eI8BWKpQYoRg1
-	iAK1XtxPtxSesj7OhDqZUOg8cHR2gSDI/HOWpP7OJGxMWQFV9E2G2C//q0CWnLZHgbUgnG03D3k
-	GSQ8cPuMnUMRRW+7zMAG2zy5q7Q+xDh0AlDHpRDM92efK8dLUpsxpuB6b2H/Xo=
-X-Received: by 2002:a05:6402:a0d0:b0:6a3:71fd:4083 with SMTP id 4fb4d7f45d1cf-6a582b7db5amr27205969a12.9.1787649687262;
-        Tue, 25 Aug 2026 02:21:27 -0700 (PDT)
-Message-ID: <27ca9f33-9354-451c-8f17-358511d6ee34@suse.com>
-Date: Tue, 25 Aug 2026 11:21:25 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Cc
+	:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version;
+	bh=yBQU37hqUoKtbMQ4pVzLFDUBUC8LRb+kRQfwB5YVEgY=; b=n0g9pwH0h50ZRvNAt0qGnWwZpF
+	NW0rCaqaihE0uMyCecyT05eUFgG2LDaTkxbELeAETRezjnmdion68pNHRc+KuA/S+iG0BKb4J3tpH
+	nU8ZOh8HPDziUApbuoKTKIBWaOAjb3uF+Hatm+mHpQXKrqi6bkys3tsAIp7obqb0/U8M=;
+X-Forwarded-Encrypted: i=1; AHgh+RonJcatoAEc2xTqw9v+pHKoUzH753d/znrFLNLhM/aUPNZLJPeOnoy664B8Mye5nH3FvS+SzWQJuqE=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mrNyjv4VQUXvTbParL/2CnRNUPAFvjuLtgu6IeMRz49X61nUz0
+	vWBKmsfN1N73O/4nCZgEZjUNxe3ZcBPFVRlefYYfHlewaT+EWMRclEkexJ1riz9NMdInjXmKc+G
+	ap/xpWFSFZwkmEP9nYKvaoQBAyPf5aLo=
+X-Received: by 2002:a05:6512:691:b0:5b2:e5b7:2419 with SMTP id
+ 2adb3069b0e04-5b49cd606b3mr2094380e87.5.1787658144688; Tue, 25 Aug 2026
+ 04:42:24 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/6] x86: split xen-syms/xen.efi linking rules
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Teddy Astie <teddy.astie@vates.tech>
-References: <fb75dbda-63a5-4ebd-abf6-5ce6b3b5ba3f@suse.com>
- <ccccc6f3-c16e-4988-9677-85d9ca6e30ce@suse.com>
-Content-Language: en-US
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <ccccc6f3-c16e-4988-9677-85d9ca6e30ce@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1787649687-585CBCFC-E9173B85/0/0
-X-purgate-type: clean
-X-purgate-size: 2495
+References: <20260820-asi-part1-0-f2dbd92b8459@xenproject.org>
+ <ec040560-4377-474d-a929-3080b74bb0af@suse.com> <CAFLBxZbQD7HgdYK3-yzaMOt4P2geO2PSOSDi4-c3KHZ96DDifg@mail.gmail.com>
+ <044095b7-3c8d-40da-9d21-281c522a49ae@suse.com>
+In-Reply-To: <044095b7-3c8d-40da-9d21-281c522a49ae@suse.com>
+From: George Dunlap <gwd@xenproject.org>
+Date: Tue, 25 Aug 2026 12:42:12 +0100
+X-Gmail-Original-Message-ID: <CAFLBxZa0Fmmic1JLwHOdFCn1=rGP6Un2q1ZxBa1DpsO_AAmD6A@mail.gmail.com>
+X-Gm-Features: AcwNN1WeBD7-ShqIv6056gt7-SMnWmmHi6BxcaYpkhtmayuSEmOLFoM4ZCCyweI
+Message-ID: <CAFLBxZa0Fmmic1JLwHOdFCn1=rGP6Un2q1ZxBa1DpsO_AAmD6A@mail.gmail.com>
+Subject: Re: [PATCH 0/7] x86: Address Space Isolation, part 1: per-domain area
+ mapping rework
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+	Teddy Astie <teddy.astie@vates.tech>, Anthony PERARD <anthony.perard@vates.tech>, 
+	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, 
+	Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 25.08.2026 10:41, Jan Beulich wrote:
-> --- /dev/null
-> +++ b/xen/scripts/Makefile.link
-> @@ -0,0 +1,49 @@
-> +# SPDX-License-Identifier: GPL-2.0
-> +# ==========================================================================
-> +# Helper rules for linking xen-syms
-> +# ==========================================================================
-> +
-> +syms-warn-dup-y := --warn-dup
-> +syms-warn-dup-$(CONFIG_SUPPRESS_DUPLICATE_SYMBOL_WARNINGS) :=
-> +syms-warn-dup-$(CONFIG_ENFORCE_UNIQUE_SYMBOLS) := --error-dup
-> +
-> +orphan-handling-$(call ld-option,--orphan-handling=warn) := --orphan-handling=warn
-> +
-> +final-image-check-y ?= true
-> +
-> +.$(TARGET)-syms.%.o: .$(TARGET)-syms.%.S FORCE
-> +	$(call if_changed,cc_o_S)
-> +
-> +.$(TARGET)-syms.0.S:
-> +	$(objtree)/tools/symbols $(all_symbols) --empty > $@
-> +
-> +.$(TARGET)-syms.1.S: .$(TARGET)-syms.0
-> +.$(TARGET)-syms.2.S: .$(TARGET)-syms.1
-> +.$(TARGET)-syms.3.S: .$(TARGET)-syms.2
-> +
-> +.$(TARGET)-syms.%.S:
-> +	$(NM) -pa --format=sysv $< \
-> +	  | $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
-> +	    $(if $(filter $(LAST_LINKING_PASS),$*), $(syms-warn-dup-y)) \
-> +	  > $@
-> +
-> +.$(TARGET)-syms.%: $(objtree)/prelink.o .$(TARGET)-syms.%.o $(obj)/xen.lds
-> +	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $(filter %.o,$^) \
-> +	      $(build_id_linker) --strip-debug -o $@
-> +
-> +.$(TARGET)-syms.$(LAST_LINKING_PASS): $(objtree)/prelink.o \
-> +                                      .$(TARGET)-syms.$(LAST_LINKING_PASS).o \
-> +                                      $(obj)/xen.lds
-> +	$(call compare-symbol-tables, \
-> +	       .$(TARGET)-syms.$(shell expr $(LAST_LINKING_PASS) - 1).o, \
-> +	       .$(TARGET)-syms.$(LAST_LINKING_PASS).o)
-> +	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $(filter %.o,$^) \
-> +	      $(build_id_linker) $(orphan-handling-y) -o $@
-> +
-> +$(TARGET)-syms: .$(TARGET)-syms.$(LAST_LINKING_PASS)
-> +	$(NM) -pa --format=sysv $< \
-> +	  | $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
-> +	  > $@.map
-> +	$(final-image-check-y)
-> +	mv $< $@
-> +	rm -f $(dot-target).[0-9]* $(@D)/..$(@F).[0-9]*
+On Mon, Aug 24, 2026 at 10:02=E2=80=AFAM Jan Beulich <jbeulich@suse.com> wr=
+ote:
+> On 21.08.2026 17:17, George Dunlap wrote:
+> > On Fri, Aug 21, 2026 at 9:45=E2=80=AFAM Jan Beulich <jbeulich@suse.com>=
+ wrote:
+> >> On 20.08.2026 19:43, George Dunlap wrote:
+> >>> One point reviewers may want to look at specifically: patch 1 changes
+> >>> where the per-domain page-tables are allocated from, and its commit
+> >>> message discusses the (minor) NUMA-placement consequence.
+> >>
+> >> While I don't recall which recent patch (series) it was, I can't very =
+well
+> >> say "no new xenheap allocations please" there without also saying so h=
+ere.
+> >> I've read over patch 1's description, and while it tries to justify th=
+is
+> >> accordingly, I still remain concerned. I think we simply have to accep=
+t
+> >> the mapping overhead, to avoid allocating from a pool which - over tim=
+e -
+> >> is representing a decreasing portion of total memory systems have (on
+> >> average, and not even considering systems with extremely sparse memory
+> >> layouts, and with perhaps PDX compression not doing good enough to
+> >> compensate).
+> >
+> > You should certainly have the same resistance to adding new xenheap
+> > allocations.  But looking at the numbers, I don't see that we're
+> > anywhere near the point where we say, "Absolutely no new xenheap
+> > allocations, regardless of the cost."
+>
+> Well, that depends, and in part on the longer term plans with ASI. It has
+> been my (silent) assumption that eventually the directmap would go away
+> altogether when ASI is in use, with the VA space freed (almost?) all
+> becoming available for vmap(). With the disappearance of directmap, the
+> xenheap would naturally disappear as well. Hence putting stuff there in
+> new work actually adds to our technical debt.
 
-Noticing only after sending: We will need to limit what is removed here. Removing
-all intermediate files means the full linking process will always be redone, even
-during "make install-xen" as root. Alternatively we should consider explicitly
-avoiding any rebuilding in that case, much like e.g. x86 Linux Makefile logic does.
-Thoughts?
+I do think that makes sense as a long-term goal.  Actually, I asked
+Fable to do an audit of xenheap allocations, asking it to classify
+them as to whether they needed xenheap's key properties (easy mfn <->
+va conversion, available in early boot), and it reckoned only about 4%
+of the allocations (by volume) in the example system I did numbers for
+needed xenheap-specific properties.  Lots of things just need *some*
+global mapping somewhere, and would probably actually overall benefit
+from being moved to the vmap, so they wouldn't be restricted to a
+single NUMA node.  Grant frames were the biggest chunk.
 
-Jan
+The xenheap / vmap split is certainly something I would now consider a
+large piece of technical debt; moving towards paying that off is
+certainly something I think worth achieving, provided the rest of the
+maintainers are on board.
+
+(Imagine how differently this conversation would have gone, if in the
+first email you had said, "Actually, I thought one of the main goals
+of this series was to get rid of the xenheap altogether, so that we
+could switch to having a single large vmap area instead?")
+
+> While these percentiles in particular of course look very tiny, they are
+> applicable only on systems having no meaningful gaps in the physical
+> address map. And even more generally I find all of these calculations
+> only partly convincing, not the least because you start out from numbers
+> which look pretty contrived when comparing to actual systems which would
+> run the new code. (Using more realistic real-system values may end up
+> going in favor of what you want to convey, or it may not.)
+
+To be honest, I'm inclined to think that they're not very convincing
+because you don't actually have an idea what the problem is.  You
+didn't specify what you were worried about, so I tried to guess a
+scenario that I considered 95th-percentile worse case.  I don't know
+what kinds of sparse memory layout machines you have in mind -- are
+they written down anywhere, so that contributors can read and
+understand what they need to consider *before* implementing?  Even now
+you haven't even said what about my scenario you consider unrealistic,
+much less told me parameters you think are more realistic.
+
+I don't even know exactly what failure mode you're worried about.  Two
+kinds of potential failures I know about:
+ - Performance impacted because pages can't be NUMA-local
+ - Toolstack operations (including domain creation) fail because
+xenheap has been exhausted.
+
+If you're willing to accept 9 map/unmap operations on *all* systems,
+then NUMA-non-local accesses can't be that big of an issue for you.
+
+On the fairly largish system / load that I tried to estimate, the
+total xenheap usage was less than 3GiB in the worst case.  Let's
+double that just for safety sake: Do there exist systems whose memory
+is so sparse that even with PDX compression, they can't even scrounge
+together 6GiB below the 4TiB limit?  If so, I think a much better
+solution would be to document that such systems may be able to support
+a lower degree of oversubscribing than most systems, and leave it at
+that.
+
+In short: I can't imagine a scenario where a larger xenheap is an
+issue we should be concerned about.
+
+It's not up to me to guess what sorts of numbers would allay your
+concern.  If you want me to consider a large xenheap to be a problem
+on its own, it is now your job to articulate, first, at least one
+target system (hardware and configuration) you think would be
+problematic;  and secondly, exactly what bad thing you're worried
+about happening.  Only then do I have any hope of addressing your
+concerns.  Until that time, I don't consider "the xenheap is getting
+too large" objection to be valid.
+
+Objections I will consider:
+- xenheap has poorer NUMA locality
+- The xenheap/vmap split is a big ugly unnecessary bit of technical
+debt; Xen would be far better if we could get rid of the xenheap
+altogether.  Every additional user of xenheap is another patch in a
+series converting xenheap to vmap.
+
+> > One is map_domain_page_irqoff(): If the caller promises to keep
+> > interrupts disabled until unmap_domain_page_irqoff(), we can safely
+> > perform maps in a context switch without having to worry about
+> > sync_lazy_execstate.  (This was actually implemented and almost sent
+> > on Tuesday evening, when I noticed your review of Roger's v2 saying,
+> > "Question is whether it's a good idea in the first place to start
+> > using map_domain_page() from the context switch path.  Surely there
+> > are possible alternatives.")  This maps all vcpu pages from the
+> > domheap, adding nothing to the xenheap *or* the vmap area.  But it
+> > costs 9 map/unmap pairs *per context switch*.
+>
+> But why would not using vmap() be a necessary conclusion of my initial
+> comment? All I'm objecting to are new uses of the xenheap.
+
+I'm trying to list all the advantages and disadvantages of the various
+options I've explored.  You've agreed that growing the vmap region is
+*also* something we need to worry about; and that the vmap allocator
+may not be ready to become a performance-critical part of the system.
+Furthermore, as Roger pointed out privately, regardless of where the
+global mapping lives (vmap or sparsely-mapped xenheap), having a
+global mapping at all means global TLB flushes whenever we destroy a
+vCPU; and in any case, in principle we'd like to avoid exposing any
+data whatsoever.  Using the mapcache avoids all those problems, for a
+different cost.
+
+> > Ultimately, I think there's a lot of wisdom in the saying, "Premature
+> > optimization is the root of all evil."
+> > ...
+> I'm a little puzzled by you talking of "optimization" (premature or
+> not) here. In my initial reply I did point out a functional aspect, and
+> I made clear that I'm aware that this is going to have a performance
+> impact. I.e. quite the opposite of "optimization".
+
+"Optimize" in the terms of "improve", not necessarily in terms of cycle cou=
+nt.
+
+The point of the principle is to say this:  First, build it correctly,
+in a way that is simple, clear, robust, and easy to write, review, and
+maintain.  *Then*, after you've measured that there is a problem,
+where there is a problem, and so on, should you put in extra effort
+and add extra complication, only to areas where you know there will be
+some material benefit.
+
+You've argued that we should avoid using xenheap because it will have
+some negative impacts on large systems with sparse memory layouts; in
+other words, you're asking me to *optimize* for those use cases, at
+the expense of more typical systems.  In isolation, this principle
+would say: take the xenheap option first, as it's clean and fast in
+the common case, and measure it on a target systems (or at least,
+estimate what the impact would be based on modeling).  Once you have
+reason to believe there will be a problem, then introduce code
+complications based on the actual issue you find.
+
+> > There are other options I've explored:
+> >
+> > - domheap + vmap; basically, allocate from domheap, map in the vmap
+> >   area.  On paper this sounds like the same thing; the problem is that
+> >   we don't have a simple MFN -> VA mapping, as we do in the xenheap
+> >   case, so the walk is a lot harder; we start to have to do lookups,
+> >   significantly increasing the cost over simple memory reads and math.
+> >   (This is the difference from the intremap table on the VT-d thread:
+> >   that's a leaf structure reached from a single pointer, so a
+> >   permanent vmap costs nothing there.  Pagetable hierarchies are
+> >   exactly the case where the MFN -> VA step is critical: each entry
+> >   read yields an MFN, which the walk has to turn into the next VA.)
+>
+> The pages used here are entirely private to logic handling those page
+> tables. Hence a struct page_info field can very likely be used to stash
+> the VA of a permanent mapping. (Feels like similarly I must have
+> suggested this somewhere else recently, yet I don't recall the context.)
+
+This is an interesting idea, particularly for a full xenheap -> vmap
+change.  Probably too complicated for this series (see below).
+
+> Absolutely, and I have been mentioning the need to consider growing this
+> area in a number of situations (one iirc again pretty recently).
+...
+> Indeed, heavier use of that allocator may require work to be done there.
+...
+> Valid concern, yet surely possible to deal with.
+
+One thing you do need to consider:  There are at least 45 patches to
+get to the most basic form of extra security (no direct-map, FPU/XSAVE
+moved to domheap); and another 13 after that to move to per-cpu
+stacks.  I'm engaged until November to work on this.  If we don't have
+significant progress by then, there may be no ASI at all (at least for
+a long time), and thus no hope of getting rid of the xenheap.  If
+every batch of 7 patches takes a month to get through, we're not going
+to be anywhere close by November.  So you need to be strategic about
+what kinds of additional work you ask me to do: what does a solution
+look like that is both technically acceptable, and achieves measurable
+progress by November?
+
+If we had all the time in the world, we could consider trying to
+convert the entire xenheap to vmap as the first step.  (Even on the
+fairly large system I tried to describe, the xenheap was only around
+3GiB; still plenty of room in the vmap area to get us by until the
+direct map is gone.)  I don't think that's really viable, as there's
+quite a long tail of allocations that would probably end up being
+haggled over before we even began the ASI series itself.
+
+So let's try to take stock.  We can't safely remove the direct-map
+unless we have per-vcpu mapcaches.  We can't really say we've isolated
+the system while all pCPU stacks, with random bits of guest state, are
+visible to all other pCPUs. We can't have per-vcpu mapcaches or
+per-CPU stack maps unless we have per-cpu root pagetables for PV
+guests.  Both require modifying per-pCPU bits of pagetables of the
+incoming vCPU on a context switch.
+
+We have four ways of mapping in general: xenheap, vmap, mapcache, or
+(for the pagetables) the linear map.
+
+For the first three, we have several different ways of arriving at the
+entries.  Both Roger's v2 and my v1 start at the top and walk down the
+pagetables.  For the mapcache, this seems relatively heavy.  I thought
+xenheap would be just simple math, but with PDX on all the time,
+that's more expensive than it looks.  vmap would require looking into
+stashing a pointer into an unused (by xenheap pages) portion of the
+struct page_info.
+
+But the other approach is to stash references to just the page we need
+to modify -- basically, rather than get rid of gdt_ldt_l1tab, add two
+more instances.  For xenheap or vmap, this would be pointers to the
+virtual addresses; but it's also possible to do in the mapcache
+version, by stashing the mfn of the exact table we need to map.  In
+all cases, for the context switch, it's just three references.
+
+Both global-mapping options expose Xen pagetables.  We've agreed these
+are not sensitive, but also in general our posture is that we
+shouldn't reveal anything unless it buys us something.  They also both
+require host-wide TLB shootdowns on vCPU tear-down.
+
+In the spirit of "measure before optimizing", I did some tests of the
+mapcache-walk variant.  On my NUC, at the end of the series, I get:
+
+- baseline: 1480 cycles / context switch
+- xenheap-walk: 2460 cycles / context switch
+- mapcache-walk: 6440 cycles / context switch
+
+By default Xen has a context switch rate limit of 1ms, so the
+difference isn't measurable.  If you disable the ratelimit and do a
+"ping flood" microbenchmark, the mapcache-walk reduces performance by
+a whopping 70% (41k pings per second -> 12k pings per second).
+
+If it weren't for the general intent to move away form xenheap, I'd
+argue more strenuously that we should take the series as I've posted
+it.  As it stands, I think the performance of mapcache-walk is
+acceptable enough for a first cut, particularly given that we have two
+potential optimizations already (caching MFNs rather than walking
+pagetables as an easy option, switching to vmap as a slightly more
+complicated one).
+
+It's annoying that Tuesday evening I didn't know that you hated
+xenheap allocations, and had only a mild distaste for mapping in a
+context switch, or I might have implemented vmap instead.  At any
+rate, I'll move forward with mapcache-walk, which we can later look at
+optimizing by stashing the relevant MFNs so we can avoid the walk.
+
+If anyone doesn't like that, let me know sooner rather than later, so
+we can avoid wasting more time.
+
+ -George
+
+ -George
 
