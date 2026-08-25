@@ -4,58 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBD94C5DF94
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 06:24:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1399053.1635265 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5527FC61DB6
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 07:39:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1399075.1635286 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wykZZ-0002Q2-Gs; Tue, 25 Aug 2026 06:23:49 +0000
+	id 1wylke-0004Fx-V4; Tue, 25 Aug 2026 07:39:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1399053.1635265; Tue, 25 Aug 2026 06:23:49 +0000
+Received: by outflank-mailman (output) from mailman id 1399075.1635286; Tue, 25 Aug 2026 07:39:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wykZZ-0002Pa-CR; Tue, 25 Aug 2026 06:23:49 +0000
-Received: by outflank-mailman (input) for mailman id 1399053;
- Tue, 25 Aug 2026 06:23:48 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wylke-0004Fq-S4; Tue, 25 Aug 2026 07:39:20 +0000
+Received: by outflank-mailman (input) for mailman id 1399075;
+ Tue, 25 Aug 2026 07:39:19 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1wykZY-0002Nx-BX
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 06:23:48 +0000
+ (envelope-from <Mykyta_Poturai@epam.com>) id 1wylkc-0004Fi-Qp
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 07:39:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wykZX-001HsD-9q
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 08:23:47 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wylka-00EVdH-2b
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 09:39:16 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a8d34d4-bab6-0a2a0a5309dd-0a2a4509a984-32
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 08:23:46 +0200
-Received: from [40.93.198.43]
- (helo=CY7PR03CU001.outbound.protection.outlook.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a8d34f0-be1a-0a2a45090019-285dc62b6adb-3
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 08:23:46 +0200
-Received: from CH5PR04CA0014.namprd04.prod.outlook.com (2603:10b6:610:1f4::26)
- by CH8PR12MB9742.namprd12.prod.outlook.com (2603:10b6:610:27a::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Tue, 25 Aug
- 2026 06:23:42 +0000
-Received: from CH1PEPF0000AD7C.namprd04.prod.outlook.com
- (2603:10b6:610:1f4:cafe::94) by CH5PR04CA0014.outlook.office365.com
- (2603:10b6:610:1f4::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.6 via Frontend Transport; Tue, 25
- Aug 2026 06:23:42 +0000
-Received: from satlexmb07.amd.com (149.199.90.133) by
- CH1PEPF0000AD7C.mail.protection.outlook.com (10.167.244.84) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.360.3 via Frontend Transport; Tue, 25 Aug 2026 06:23:41 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 25 Aug
- 2026 01:23:41 -0500
-Received: from APPOL-18KY0J4.xilinx.com (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.45 via
- Frontend Transport; Tue, 25 Aug 2026 01:23:39 -0500
+ (envelope-from <Mykyta_Poturai@epam.com>)
+ id 6a8d4697-e002-0a2a0a5209dd-0a2a450387e8-44
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 09:39:16 +0200
+Received: from [52.101.65.96]
+ (helo=DU2PR03CU002.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Mykyta_Poturai@epam.com>)
+ id 6a8d46a3-fae8-0a2a45030019-346541600823-3
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 09:39:15 +0200
+Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
+ (2603:10a6:102:30d::12) by DU4PR03MB10717.eurprd03.prod.outlook.com
+ (2603:10a6:10:580::20) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.6; Tue, 25 Aug
+ 2026 07:39:12 +0000
+Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
+ ([fe80::b8c6:f37a:987a:beb]) by PAVPR03MB10102.eurprd03.prod.outlook.com
+ ([fe80::b8c6:f37a:987a:beb%4]) with mapi id 15.21.0339.012; Tue, 25 Aug 2026
+ 07:39:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -67,138 +55,310 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UlqT/v8uI6IiJbJvn84yXdaH6jVZCpLjMZhqb8KySW4cUzz5SOJCbvPbkmr8KwCH4hxp+cnQAdWFHdxhwI6uwhgTUiVDt4XvkBkxQ8GPgAr3rQOUU9tOY45Nr+JgvRKBDG3b9M0yqZh1pSdqQdki8elzSwUWyrsLTcUlYB5MR+FNinTxBc+5LNrZTJfwu1ahaS7z8IwsPwf8hG5tRlEDBdrDx74Pg10vQisCUevO6B0Q4tHQ9bSkn3jnIrAR5wTuod/+6VaOV3kBWpNC4CSKsqXEcxGaX7ZHdlIe2CLT2BBtGQPzizcpGLvXD/pMllpeyjsD8YIuUxKVtFcwA66mWg==
+ b=Nrw3vmonMJAZojqvURj4wcvelSv6rdXOhR19Pe+nYWfxYwK3a7zJPSm7TX+3q5QG5g/rYmRMeueLkj185eTde2IqOJXJq/3lFFwFSHo1Mn/99Oxq58apeqlEHAfY+4s+HEILwEiXs/6HeYGnVr++A5hDv31mxp6IocaZ20Uty17HTI9zpLx47GpEvJkENh37bQqsXXqsZ43ZyJOq6Zw8lGerk05eUnAt9w/6D2T+IixCGlrQFxcIKyQCNM7IGFadAnIUI7VD1gBoihj1KIwc4E84ed8WNF/kMN6lXrJY8wTAJuWHGJ/FQACKuPOQD/9aLVtg04nPPMGCwgeiYauVRQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=t0tG7LxrvduKAPMs/G1qHGRWDG7gX+0MAt1PYS3j94A=;
- b=YRq52nREsAAJGrsDA3pK1XpmdG2aahRiGvPfPyMJkGzrJyJgnEZnCcCpGdYvEMerer1PFBznK8RKRidxTJi3Dy06Lrpje+sT39EoQ2WTI1fEa2YHKXny0o6nDG5n8AZiiT++iHk5affvWkLraspJeWuLGwLhsjO1eHobgXMCp5aF2DG7XxgqMA6Q86D6Vuno7GL7pywPtXLeGmUf25jIZwZP0mZpGmy9esxRiIF2WossA4an62FDdOPh1wj/28tDVZSrd6MwlAj8BThjJsiH2EOnkVRfxqFEo3Ivhziloo/Kfz+F/OUIuZbOYn5Hbw7Usn6EXto0m+uNqOLR4yk7tw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 149.199.90.133) smtp.rcpttodomain=lists.xenproject.org
- smtp.mailfrom=amd.com; dmarc=fail (p=quarantine sp=quarantine pct=100)
- action=quarantine header.from=amd.com; dkim=none (message not signed);
- arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ bh=+TPth6n2kKy+a6Rmzs5qWLzPCLDtD1Tl3cujxRxaLKo=;
+ b=fQrJELPC7giL30Z63zJqye8uOr77fC687HdllK80RGvtPCXt2N7wDsK96D4FEd/IwYlvmPuCo3VY6koLjaSY0daYdmcbii/VfiDapRSGcts0yLY4txfWCtt6Qk4m858JNioLJpmtGCg2ym3yTWD9KxGBr0atMM2wRp5fhvGy5RMrHq6SITYcCzqVemFCniTXOJtHkNxGP946/z9f1xj1Gei/4C+mhbePMCTRvhE2vazltb5lXyABLdZKbCtZjHZuV2BrcqAahUwmbyva7UPWEhZkaLgYhcpVwpP8BN/RF8I2m6jAhNSg2PkynHMKnMP1yzY7DAn7yqNLG713DL8RZg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=t0tG7LxrvduKAPMs/G1qHGRWDG7gX+0MAt1PYS3j94A=;
- b=LEa3B8/GjREJYJivUoW2hkOG3JSRFGlqUKH8oXkMPsapmitN3jOE6nKVmsXMjNaKZXJzonaYzXY2MyjJ2eClRvSEhYv74Ls6Gv89uLkQ7SKqMfHzTxosKPpCLSCHQNwvnWoSN03LHn7+FpsqqpBteo7tt7zpKDX49Ww72XjBYKA=
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is
- 149.199.90.133) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=amd.com;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- amd.com discourages use of 149.199.90.133 as permitted sender)
-From: Michal Orzel <michal.orzel@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Michal Orzel <michal.orzel@amd.com>, Stefano Stabellini
+ bh=+TPth6n2kKy+a6Rmzs5qWLzPCLDtD1Tl3cujxRxaLKo=;
+ b=Dlrkpa/6DGyRyFEVsLh928o/Ozfv29OjLUqn/L+oBCe+9L8xGSFurgxy7zZtOxf8xqAs78vTPrtn4Mu0DQedV7I7JTSGzHOVAqRbtBVpoYGuOV1eiP1FOMFpdcN1VfYFup1G8dtXM4vigLQA3uqEVfVTuo43c0+P9bQh2aox3KIsn+MoMUe5kI5b6yj1jotKHzCNDcNuV8GCS4wYbOB8NZSH9gp4Lkcy1l1QaSmmmGos3EsB666ds/JWnLFBoXw4UdFB8a+etcxRQkkkTz5gFh4oy/76uXIU8VRUjBDoNGecHO+B2/ONlV+tGc5GDXktxoeuuR/GwznmQerxXjJaTQ==
+From: Mykyta Poturai <Mykyta_Poturai@epam.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Stefano Stabellini
 	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 1/2] xen/arm: traps: report level 0 faults in panic_PAR()
-Date: Tue, 25 Aug 2026 08:23:28 +0200
-Message-ID: <20260825062329.16762-2-michal.orzel@amd.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260825062329.16762-1-michal.orzel@amd.com>
-References: <20260825062329.16762-1-michal.orzel@amd.com>
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>, Rahul Singh <rahul.singh@arm.com>,
+	Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>
+Subject: [PATCH v4] xen/arm: smmuv3: Add support for removing devices
+Thread-Topic: [PATCH v4] xen/arm: smmuv3: Add support for removing devices
+Thread-Index: AQHdNGTRISDv+UsXckyT4/28tjPeAA==
+Date: Tue, 25 Aug 2026 07:39:10 +0000
+Message-ID:
+ <56e7734d60ad8cca4279a71b4beb21ca51250386.1787303836.git.mykyta_poturai@epam.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|DU4PR03MB10717:EE_
+x-ms-office365-filtering-correlation-id: b9266c6c-0ac1-43eb-0ef2-08df027bf451
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|376014|1800799024|23010399003|366016|38070700021|6133799003|56012099006|10067099003|11063799006|18002099003;
+x-microsoft-antispam-message-info:
+ 3eFVAoewuKuIsuwAXizEfBGCU/XRwW5NdjCFqhljGJ6lgsbKmpmnBcXqTHnawjniyaqGCGihcYbaGcgyUYrrVC+b+keF6U/7j31Kgegl20yodbTq4jtJ0x3T0T/KUUVwEXI6/x022azqT004F8WkM7eijwoBFY1HGE1zUqUztPkxnpjZUrEqBgjQkYEItkOAMGgjFf2e79/xGSOZHrTWuQ/FWyTFvluTTR75h6RRQx5VGsvaMe2NvGytBgY5W2sRlvmPSr1IRDSnXcwzJjPAME41a5Jbx1dR4gF15kQ3yV2wjgc6y/2Y4uCiNmvZtxo5XS8jkrb9/JqZpyC+wHOErIc0H1WxZPCcwChtF88x4KK9fujVswkTWmnxuiSI0h2Kh59PPK6aNyUw+2nCNXbdrzRpeR8gu6+mIM56EveH78gIxlJTYP02jm3GMR1ZSVOD+KeO7N3v7C2yY36vOGo/sTsEtYvvcLUT4ig1U40127kKoiqkvuKS2X3z1KitN1NsQ7Y+Ewq9THOUJJhhjTiIN0pIFJTQT98HRJQkUthJE2Sm4OW7QgOdZ0tv1kRHGn1KDydkgeexPj7f/pYUWRKIYuLt32Sc/ZYjHNTsNz0wgtpDFDBS9WWVTU702DoVJmBCzeZOBMN4HsfZX54mQtc2QYwb9UjViW6rmo8a2H0DwOo=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(23010399003)(366016)(38070700021)(6133799003)(56012099006)(10067099003)(11063799006)(18002099003);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?0xgk+Kk0XM0sKz2eowk8+RgwUU45X0LtqDkHtEIslpSCvWDZBha+bz/5iZ?=
+ =?iso-8859-1?Q?MKCBTJkLP/fRhqHgllEq3nbsB6wWwIisfJEEkjsi3ybYq8Zg1sHp9Ydog9?=
+ =?iso-8859-1?Q?ff8QD3kxekQPvnFqM1PePwUhiW2x2Qu96MzjqeU/M76BHgJqZ7dqxARh2V?=
+ =?iso-8859-1?Q?X5DPOJOE9G4HsVstSGEx7f0ZC+rnAGK5lcFsjcz353g7dhzWtje80EqRy1?=
+ =?iso-8859-1?Q?WAV/uMScuQ5meUBExtmPirRyfC5k6WWvPmFbCEoq/Tb8CidmsaC2Y5I6R8?=
+ =?iso-8859-1?Q?i1RBVvh/WPAu1hVhMxm8VJWht4NZudS1JKdSIBWW5qMvNRRJos29HOBevq?=
+ =?iso-8859-1?Q?koSjf622q6Gw58vPZOAxQN7/f1bJU+y/qZbUJPrrkJMeYfohaiwfNCXxA1?=
+ =?iso-8859-1?Q?anLSSz6i783sxGYBS9W2h5CA8Uo1aR1YrzakdSNtli/2q5SgvUyRVYBCCN?=
+ =?iso-8859-1?Q?QlXDInmO32bkpG6iTjxpqydo3BEEIDH4Z4d8TvxS6qcWEQzkr0YBXEpSdg?=
+ =?iso-8859-1?Q?6NaCe+RX18YN/8dSYqgSqpjlfsGYD2qBuaoyAw+cz9IYVVYu0uTGNKyvBr?=
+ =?iso-8859-1?Q?zdYefje76L1XZg6xe18d9DVHn6mA+tytNDgtX6Ljy+3E0Tc+sxctqz4Inq?=
+ =?iso-8859-1?Q?s66aljpyjEAttEobRX0H6TUX+aIGLTcBZqbGNQmfLaZDZIgJE2483ddkh1?=
+ =?iso-8859-1?Q?ZcV/8WKeofdKGKKxd0glGv6K4csaNOpeUNoDPZnnQ7kGG93PabIfWl/vHC?=
+ =?iso-8859-1?Q?SQU8nArO2Hc3eYQtWGAQUFHLpgumdIK+xzutxd8rXnFXeVbOGljfZAtqZ3?=
+ =?iso-8859-1?Q?6HY7oIcFCPZpk4xh8tatPiWXWvjMi1Y1/YdVODX4ZHhF4TDSSL40scvC5E?=
+ =?iso-8859-1?Q?NesVPUlKQAb5IKSc2PDlYhu7lLKK/GvLnaa5dD8O8LlYW/ULJWKCEU3Lxr?=
+ =?iso-8859-1?Q?wBuKHZ3mgn428mWQIccIwIPaum/i9sk5OlJ+CGG/7P9UIbxJ0tzLGd3Qdl?=
+ =?iso-8859-1?Q?4vOTcWCBAC10dJrraBqJTtw0EQ2uwyvWju1l+Hz22B/rOh4sDrB6RHZjQq?=
+ =?iso-8859-1?Q?Q53u9tW/BGcTl6WMT8bxAYx3HT/9oHfhsJpLkeWKXlKMi7d1i3f11SX4dG?=
+ =?iso-8859-1?Q?fCEkA2E0HR5CPZVt10S9lOAVCCwaI6fkbvBtfL6GAR6GZpD71Iyqem3tds?=
+ =?iso-8859-1?Q?CUf3ZIRqwQeT7KaFzqExCZvwq7tvJLcNeb2sBYfzcvit8DHHQwtUMwnOCC?=
+ =?iso-8859-1?Q?uYa+UaLKit6FJR3loJwItOrCsT/T2+ikIRWV34cfdrD19VM1oCboYnLHzn?=
+ =?iso-8859-1?Q?Iz18C8h/WXWQeBWwel6PgaXpsWrbtva1dOs5Rjs1/GlMTjNA6jPwAiimk1?=
+ =?iso-8859-1?Q?xa9y8Vt8u5Kdc8uvC2w6jta7oIvrgqqgQLzh8b0DDDCSiN8Ic60hvtnEh2?=
+ =?iso-8859-1?Q?eURmjoum3fmMNn12kH/gdhHv+MRKvmp2/DskKzTWR5/vol2p7iT03gsAum?=
+ =?iso-8859-1?Q?S4Kg6rrkToLUHplkiqyNF+4t/FTTzkm5SObvOFm5U6SDjrETRpGMXlgCTx?=
+ =?iso-8859-1?Q?H9JQS0tNJoEWMuDGhSeTQGVFpimcrioQD+wv4Z1hUpGBrnRPO9nzlWic8D?=
+ =?iso-8859-1?Q?GVxVat4Hz2wFNIjUSYd0KYMmip5BlWyM/zE0u7fqAmlA4gg9YpCgi9/7lA?=
+ =?iso-8859-1?Q?hXoFbqYBZWI2YHAI8kzHaoRjdsGgWU+pujyMlFG9XB2kixuM7goTyw9m2y?=
+ =?iso-8859-1?Q?kVKle805HdpYqHeRhsUFaUnHS2pnbP4/XdkusV7amPoxtcbS+lIVm008JV?=
+ =?iso-8859-1?Q?ObBKsLfr6WwMJkRgTuWI3Amd+2V1IMc=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7C:EE_|CH8PR12MB9742:EE_
-X-MS-Office365-Filtering-Correlation-Id: 12248c47-8c5b-44de-9ecd-08df027168b0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|82310400026|36860700016|376014|1800799024|18002099003|22082099003|56012099006|11063799006|10067099003|3023799007;
-X-Microsoft-Antispam-Message-Info:
-	cE8d0hOQ85Mn2MzdTgNgdWpwJw+OAIkKyZjgI0qZcs0JLiBQoCEBiJRomUBpgyGqjlqRztMO2JxbOnY+ueQtw54XpImgE4D/jHMn8ZwoTLSRkq+Gv/okw+p4nX6NHDmqytfDtEljyI4y3lBN0PAHVOBwVSB+sT58g2vuT/wrXoo9g1RFx+6mv57UVo7jiZWAleyIanYAIVZXWpSjB5C1k3rnoysjgOlmGvCraVFaAFmexejdeXshjOfyixK0Ylv2ugPGgj5HOH+QuQCvfWG6soQn/MDqCiPuvLAUlRSvmTF/1ZMPhHtArw8VGWG4bs9GxdwwZanEz3N9g0ViMz/huqGFeD6TCX/r1M8EH2daIqITqm9jxeB/VnpmBlupelcYoEz/dhoIWQQo/UcbAzNZFgPbobc33Wz3hVWM4lL6XW1We6o+wHAsZ1uQybhy3MwDgcOmr/m4saClU1YWVikgFhiRwq3E+f2sweayUbGThP3OZb42GDiYZffbx8kgNVGNMmZk6XLXyMtjcQMMOYVq2oWIWOB7q5iePFZHJcLZjJz0GnwEUKtvp8L3BttyQjf69ESgFUrvBHpOXUamtgA0HPP1DT4WzLd1QSdHNfezFgXrxiNxrKZQuYmNmpZVTAFKIt5rhaccGEmwF3SyRy3oinW08vlnRuCMTW6SkK0JtDOfYzolY2Y8TDhXnkh+KQ0jwQeMNK0j348Bar4AVD1ucg==
-X-Forefront-Antispam-Report:
-	CIP:149.199.90.133;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:unknown-90-133.xilinx.com;CAT:NONE;SFS:(13230040)(23010399003)(82310400026)(36860700016)(376014)(1800799024)(18002099003)(22082099003)(56012099006)(11063799006)(10067099003)(3023799007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	kiyoA7XlN1MvYiP/IEErxZ/mNadawhY6HPLOTtCZwo3oXQc+j0xleWmLMtmACKxZ+nq+h/bGHxR9uG2lfjDOXDUOz9nV2pOQziKUX8K+ZVAOVtWXXsSPZgLvCmALPESvGYsMNPkSyyEWwOvrSBvwyWr6QyyqudOzJHH1ECcIDffguWRqoHfMhZ7kRThSdbD90eem3Hk8ZTyYCvZH3OV8M/ROipB3E0RljU1Jty9wHnExH+16HZgrquAhkIrzK2yCJWHrRM2X9weEArQRhGG4gKQFtuTzG1Rkwo6xocUUPyOjw818uWwn9JkIcQIfEkr56/EJ7LcsoSiP7dljbIPo4DjTpj+Fg+fffoXSSrxVRmjidbpn0NMIuiFgitSTB2i8VlD4bCEK1C8+hmJlr7GXy0VbocUsizLY+A1b//sVo2UwNHR7ylntbxQ8HS82/5+e
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2026 06:23:41.9454
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b9266c6c-0ac1-43eb-0ef2-08df027bf451
+X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Aug 2026 07:39:11.2583
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 12248c47-8c5b-44de-9ecd-08df027168b0
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[149.199.90.133];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CH1PEPF0000AD7C.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH8PR12MB9742
-X-purgate-ID: tlsNG-bad1c0/1787639026-FCC15034-4C6AC49A/0/0
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: kflpUuYwVmaoQC/g4ZjSnH/lXh4YZZz1IUavaZ96yl1wsDhNZ6re88jss2SL2a+tJ5bnTWC5mcqB2IRw3U465g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR03MB10717
+X-purgate-ID: tlsNG-33051d/1787643555-778C54E9-7C830563/0/0
 X-purgate-type: clean
-X-purgate-size: 2420
+X-purgate-size: 6393
 
-decode_fsc() derives the fault level from the low two bits of the FSC, so
-level 0 is a valid output: FSC_FLT_TRANS is 0x04, i.e. "translation fault,
-level 0".
+Allow for removing devices from SMMUv3. arm_smmu_deassign_dev handles
+most of the work by disabling ATS and zeroing STEs. Additionally, unset
+the dt_device_is_protected flag and free no longer needed smmu_master.
+Free iommu_fwspec for PCI devices only, for DT devices it is handled by
+generic IOMMU layer.
 
-This is reachable on arm64 because xen_pgtable is the zeroeth-level root,
-but fsc_level_str() has no case for it and prints " (level invalid)"
-instead. At the time the function was created Xen used only three levels.
+Rework dt_device_set_protected to accept a boolean parameter, update
+callsites.
 
-Add the missing case. On arm32 the zeroeth level does not exist, hence
-guard the case by CONFIG_ARM_64.
-
-While at it, make decode_fsc() decode also address size faults.
-
-Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 ---
- xen/arch/arm/include/asm/processor.h | 2 ++
- xen/arch/arm/traps.c                 | 8 ++++++++
- 2 files changed, 10 insertions(+)
 
-diff --git a/xen/arch/arm/include/asm/processor.h b/xen/arch/arm/include/asm/processor.h
-index a3753c317fff..509040a1cdc0 100644
---- a/xen/arch/arm/include/asm/processor.h
-+++ b/xen/arch/arm/include/asm/processor.h
-@@ -521,6 +521,7 @@ extern register_t __cpu_logical_map[];
- /*
-  * 543210 BIT
-  * 00XXLL -- XX Fault Level LL
-+ * ..00LL -- Address Size Fault LL
-  * ..01LL -- Translation Fault LL
-  * ..10LL -- Access Fault LL
-  * ..11LL -- Permission Fault LL
-@@ -534,6 +535,7 @@ extern register_t __cpu_logical_map[];
- #define FSC_TYPE_OTH   (_AC(0x02,U)<<4)
- #define FSC_TYPE_IMPL  (_AC(0x03,U)<<4)
- 
-+#define FSC_FLT_ADDR_SIZE (0x00)
- #define FSC_FLT_TRANS  (0x04)
- #define FSC_FLT_ACCESS (0x08)
- #define FSC_FLT_PERM   (0x0c)
-diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-index 0c01f37ad6b4..dc0ec8a345ed 100644
---- a/xen/arch/arm/traps.c
-+++ b/xen/arch/arm/traps.c
-@@ -307,6 +307,10 @@ static const char *decode_fsc(uint32_t fsc, int *level)
- 
-     switch ( fsc & 0x3f )
-     {
-+    case FSC_FLT_ADDR_SIZE ... FSC_FLT_ADDR_SIZE + 3:
-+        msg = "Address size fault";
-+        *level = fsc & FSC_LL_MASK;
-+        break;
-     case FSC_FLT_TRANS ... FSC_FLT_TRANS + 3:
-         msg = "Translation fault";
-         *level = fsc & FSC_LL_MASK;
-@@ -363,6 +367,10 @@ static const char *fsc_level_str(int level)
-     switch ( level )
-     {
-     case -1: return "";
-+#ifdef CONFIG_ARM_64
-+    /* On arm32 the zeroeth level does not exist */
-+    case 0:  return " at level 0";
+Tested on QEMU with SRIOV series[1] by repeatedly enabling/disabling
+VFs.
+
+[1]: https://patchew.org/Xen/cover.1772806036.git.mykyta._5Fpoturai@epam.co=
+m/
+
+V3->V4:
+* s/u8/uint8_t/
+* assert pcidevs_locked
+* assert deassignment is only reachable by PCI
+* fix build error with HAS_PCI=3Dn
+
+V2->V3:
+* free fwspec for pci devices
+* remove testing note from commit message
+
+V1->V2:
+* check for phantom functions
+* simplify pci/dt device split
+* improve error handling
+* don't try to free master for unprotected devices
+* rework dt_device_set_protected
+---
+ xen/drivers/passthrough/arm/ipmmu-vmsa.c |  2 +-
+ xen/drivers/passthrough/arm/smmu-v3.c    | 77 +++++++++++++++++++++++-
+ xen/drivers/passthrough/arm/smmu.c       |  4 +-
+ xen/include/xen/device_tree.h            |  5 +-
+ 4 files changed, 82 insertions(+), 6 deletions(-)
+
+diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthr=
+ough/arm/ipmmu-vmsa.c
+index fa9ab9cb13..0648f9b407 100644
+--- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
++++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+@@ -1367,7 +1367,7 @@ static int ipmmu_add_device(u8 devfn, struct device *=
+dev)
+         }
+=20
+         /* Let Xen know that the master device is protected by an IOMMU. *=
+/
+-        dt_device_set_protected(dev_to_dt(dev));
++        dt_device_set_protected(dev_to_dt(dev), true);
+     }
+ #ifdef CONFIG_HAS_PCI
+     if ( dev_is_pci(dev) )
+diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthroug=
+h/arm/smmu-v3.c
+index bf153227db..3578f36259 100644
+--- a/xen/drivers/passthrough/arm/smmu-v3.c
++++ b/xen/drivers/passthrough/arm/smmu-v3.c
+@@ -1493,6 +1493,80 @@ static int arm_smmu_assign_dev(struct domain *d, u8 =
+devfn, struct device *dev,
+ static int arm_smmu_deassign_dev(struct domain *d, uint8_t devfn,
+ 				 struct device *dev);
+=20
++static int arm_smmu_remove_device(uint8_t devfn, struct device *dev)
++{
++	struct arm_smmu_master *master;
++	struct iommu_fwspec *fwspec;
++	struct domain *d =3D NULL;
++
++	fwspec =3D dev_iommu_fwspec_get(dev);
++	if ( !fwspec )
++		return -ENODEV;
++
++	master =3D dev_iommu_priv_get(dev);
++	if ( !master )
++		return -ENODEV;
++
++#ifdef CONFIG_HAS_PCI
++	if ( dev_is_pci(dev) )
++	{
++		struct pci_dev *pdev =3D dev_to_pci(dev);
++
++		/* Ignore calls for phantom functions */
++		if ( devfn !=3D pdev->devfn )
++			return 0;
++
++		ASSERT(pcidevs_locked());
++
++		d =3D pdev->domain;
++	}
++	else
 +#endif
-     case 1:  return " at level 1";
-     case 2:  return " at level 2";
-     case 3:  return " at level 3";
--- 
-2.43.0
-
++	{
++		if ( !dt_device_is_protected(dev_to_dt(dev)) )
++		{
++			dev_err(dev, "Not added to SMMUv3\n");
++			return -ENODEV;
++		}
++
++		dt_device_set_protected(dev_to_dt(dev), false);
++		if ( master->domain && master->domain->d )
++			d =3D master->domain->d;
++	}
++
++	if ( d )
++	{
++		int ret;
++
++		/*
++		 * For DT devices, iommu_remove_dt_device() returns -EBUSY if the
++		 * device is still assigned, so d is always NULL on the DT path.
++		 */
++		ASSERT(dev_is_pci(dev));
++
++		ret =3D arm_smmu_deassign_dev(d, devfn, dev);
++		/* This should never fail because we already checked the domain */
++		ASSERT(!ret);
++	}
++
++	arm_smmu_disable_pasid(master);
++
++	dev_info(dev, "Removed master device (SMMUv3 %s StreamIds %u)\n",
++		 dev_name(fwspec->iommu_dev), fwspec->num_ids);
++
++	xfree(master);
++	dev_iommu_priv_set(dev, NULL);
++
++	/*
++	 * For DT devices the fwspec is freed by iommu subsystem, but for PCI
++	 * devices we need to free it here
++	 */
++	if ( IS_ENABLED(CONFIG_HAS_PCI) && dev_is_pci(dev) )
++	    iommu_fwspec_free(dev);
++
++	return 0;
++}
++
+ static int arm_smmu_add_device(u8 devfn, struct device *dev)
+ {
+ 	int i, ret;
+@@ -1571,7 +1645,7 @@ static int arm_smmu_add_device(u8 devfn, struct devic=
+e *dev)
+ 		}
+=20
+ 		/* Let Xen know that the master device is protected by an IOMMU. */
+-		dt_device_set_protected(dev_to_dt(dev));
++		dt_device_set_protected(dev_to_dt(dev), true);
+ 	}
+=20
+ 	dev_info(dev, "Added master device (SMMUv3 %s StreamIds %u)\n",
+@@ -2867,6 +2941,7 @@ static const struct iommu_ops arm_smmu_iommu_ops =3D =
+{
+ 	.unmap_page		=3D arm_iommu_unmap_page,
+ 	.dt_xlate		=3D arm_smmu_dt_xlate,
+ 	.add_device		=3D arm_smmu_add_device,
++	.remove_device		=3D arm_smmu_remove_device,
+ };
+=20
+ static __init int arm_smmu_dt_init(struct dt_device_node *dev,
+diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/a=
+rm/smmu.c
+index d63c901551..4d2f71f152 100644
+--- a/xen/drivers/passthrough/arm/smmu.c
++++ b/xen/drivers/passthrough/arm/smmu.c
+@@ -825,7 +825,7 @@ static int arm_smmu_dt_add_device_legacy(struct arm_smm=
+u_device *smmu,
+ 	if ( !dev_is_pci(dev) )
+ 	{
+ 		/* Xen: Let Xen know that the device is protected by an SMMU */
+-		dt_device_set_protected(dev_node);
++		dt_device_set_protected(dev_node, true);
+ 	}
+=20
+ 	for (i =3D 0; i < fwspec->num_ids; ++i) {
+@@ -862,7 +862,7 @@ static int arm_smmu_dt_remove_device_legacy(struct arm_=
+smmu_device *smmu,
+=20
+ 	if ( !dev_is_pci(dev) )
+ 		/* Protected by dt_host_lock and dtdevs_lock as caller holds these locks=
+. */
+-		dev_node->is_protected =3D false;
++		dt_device_set_protected(dev_node, false);
+=20
+ 	kfree(master);
+ 	return 0;
+diff --git a/xen/include/xen/device_tree.h b/xen/include/xen/device_tree.h
+index 06d7643622..76ae1e674a 100644
+--- a/xen/include/xen/device_tree.h
++++ b/xen/include/xen/device_tree.h
+@@ -300,9 +300,10 @@ static inline domid_t dt_device_used_by(const struct d=
+t_device_node *device)
+     return device->used_by;
+ }
+=20
+-static inline void dt_device_set_protected(struct dt_device_node *device)
++static inline void dt_device_set_protected(struct dt_device_node *device,
++                                           bool protected)
+ {
+-    device->is_protected =3D true;
++    device->is_protected =3D protected;
+ }
+=20
+ static inline bool dt_device_is_protected(const struct dt_device_node *dev=
+ice)
+--=20
+2.55.0
 
