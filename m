@@ -4,35 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2079C61DB9
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 14:41:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1399286.1635440 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00443C61DB9
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 14:43:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1399293.1635448 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wysKm-00069N-CW; Tue, 25 Aug 2026 14:41:04 +0000
+	id 1wysMk-0006fV-O3; Tue, 25 Aug 2026 14:43:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1399286.1635440; Tue, 25 Aug 2026 14:41:04 +0000
+Received: by outflank-mailman (output) from mailman id 1399293.1635448; Tue, 25 Aug 2026 14:43:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wysKm-00069G-9i; Tue, 25 Aug 2026 14:41:04 +0000
-Received: by outflank-mailman (input) for mailman id 1399286;
- Tue, 25 Aug 2026 14:41:03 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1wysMk-0006fO-LD; Tue, 25 Aug 2026 14:43:06 +0000
+Received: by outflank-mailman (input) for mailman id 1399293;
+ Tue, 25 Aug 2026 14:43:05 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1wysKl-00069A-0e
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 14:41:03 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <gwd@xenproject.org>) id 1wysKk-004zYK-37
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 14:41:02 +0000
-Received: from mail-yx1-f41.google.com ([74.125.224.41])
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
- (envelope-from <gwd@xenproject.org>) id 1wysKk-009gMc-21
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 14:41:02 +0000
-Received: by mail-yx1-f41.google.com with SMTP id
- 956f58d0204a3-66d07ddf077so3622624d50.2
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 07:41:02 -0700 (PDT)
+ (envelope-from <jbeulich@suse.com>) id 1wysMi-0006f8-Vj
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 14:43:05 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1wysMi-000tev-Cc
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 16:43:04 +0200
+Received: from [10.42.69.1] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a8da9e9-8faa-0a2a0a5109dd-0a2a4501956c-18
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 16:43:04 +0200
+Received: from [209.85.218.43] (helo=mail-ej1-f43.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a8da9f8-5984-0a2a45010019-d155da2bc58b-3
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 16:43:04 +0200
+Received: by mail-ej1-f43.google.com with SMTP id
+ a640c23a62f3a-c2074710751so884685866b.1
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 07:43:04 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c2496297189sm1755855566b.22.2026.08.25.07.43.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 25 Aug 2026 07:43:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,157 +53,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Cc
-	:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version;
-	bh=zZqurIMiQ8XRcdYQqTxXeKAok7x6pdmHT8SXFDedHMo=; b=ceVLHMHEZUYiykGAZxyClZrtEN
-	8u6NKuRr2xeNVOCm8sNHnN3Dx4Zo9hk9S3zZLqZBSh0e7TEzG2adHDFwhyL1dpr6Dt7tRmI5Pm//X
-	uB+Kiwxyn++xzI+u8J+CeXXCFAawPGzf7ypvlS+5GsQ+cCwDFPwgkwF7cj2lWD5I1vEg=;
-X-Forwarded-Encrypted: i=1; AHgh+RrkelFwstXg97omnpUe/0qQ6KTXrGkAj+LguPer+ag5CwVQO0bmQzyi1nxeARPWl/8im+2UyeHfMDk=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lkyelrxD0BnCIdgAeIByAgY7sHDbUe39pnRvnaxaVMhJZgNiTH
-	NRLm/Ik9oaQWYvvMQ088cgsAUenVOqtqUWHH8Hsbj8VE6UqXsFtPFhsZtNwdEvNkTutCrG4I7WG
-	YcS/0I1N4ZJc/5SwvLruegKOM2uCSL0k=
-X-Received: by 2002:a05:690e:120c:b0:66d:1a5a:1d27 with SMTP id
- 956f58d0204a3-66d1a5a1ecdmr1885941d50.12.1787668862196; Tue, 25 Aug 2026
- 07:41:02 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1787668984; x=1788273784; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=w9ohPoMvB1GBbUcpCPI8mlfQmj/aqTcFkYWbjjT18W8=;
+        b=FUNxraqyS2uNS31ibQaUNmGr32JlG/BJ0z1wxnwXiYuauGzdPuAXL2/daZvVi8ED5Z
+         BfoxuZdDdXk3HTdMjxRoRNgkUdyN5EU3582xvtRlXb7l35Jte6edd/euNK5thrlS/WH6
+         aC80y5B6+p0XSWRx7KeBAsG6YMDyB8NDR4XqSBu7Z6+ghKgq6fXZ9z6bOPN+42lW9MRy
+         HPfg1jaoTUV3ceGEZZGlPRO7Lf1ZvYKwXzBu74j2mJJR8anGRBSZ7x1KkD4SOQQ4wVeK
+         0VOGQ/dN2yuQzUvr2fp6g525j6xNNDGpNTnJ9fD76DNDHs7cAZPht570EDX3U0Juc1xl
+         Orxw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787668984; x=1788273784;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=w9ohPoMvB1GBbUcpCPI8mlfQmj/aqTcFkYWbjjT18W8=;
+        b=iNhlOKMsqTZQkHv8D6MXVuI4Tvpi9bz3bPSIehov3LN03yZnlaDgn823099Sxvp1Pi
+         bu0dT/UgQA6bOdsMKbukTFr5RLl2UIFK7YqbW9qF6wOnfK3TnlGNU72XI5r7x+coQG9U
+         ba+qAOaLrMNY9L4XVKtfgFll+FXKWvBPcaJMPrEZ++Qge4AEO97l2HuF1MMLFhRPpDWX
+         tN/ToiX0SPpD5hY07X0T7ToDUkSWuwLfrIndaIWd9aCMajc0zhtGfOOJ0VbxVsbKvmdm
+         wMKaigd9cBTWt7VsYxADNYjJ6chtoxR4ek6ZbVHzx8RotOO8dTzch+t8qZ7jXPYxeUnT
+         nseg==
+X-Forwarded-Encrypted: i=1; AHgh+RptEVSWbzRUcap8+D50XqLsd7wZvSI7uGIRAAvJc3U8U2khvvp7/4uy5bL4XKUnxy2qKwp1P9SOtPk=@lists.xenproject.org
+X-Gm-Message-State: AFuF++lcSpP4uh4dhmr9MdujeUhOBgY7TVcl058YQy5B8rGNu5jOCyZQ
+	1QlXPVcVhnVLz7aoBpvjjB056KM2q/3GfODUIrJXgPMOsaxjK5BIdQfPvIoY/ww3uw==
+X-Gm-Gg: AR+sD10rDBv6ggwZYSRrJExPxK5hwMwLvi1+eIvG2v2OYUzEvkNmy9BnPqh8wSl5ANq
+	mPvtzI7E7ZelLJayZrRvklbNGrlMMNm5rJohkSzagYijLBPSxrsfhbggyB9LC8XSeU5QIh78RgU
+	TyUymsfLwUCoselaVZXQDkT+wbgQUjbSQck2VUvXC+gjE2sbGhR4UqAbySp/F9JYkb3QptLK4vj
+	ucI8kegfprqxWyxzKDOE8Ey5X0XOnh75utdK3ENFwvC/miA2Y0/lBALgfSzbkxIYqRlEElHlvJp
+	FeiUWVqKQFQ+5+sT7RInTk7v+WBco2m/Dq8l76Vadh+GUMYHPG/KIPfxhAo9LHQUyUdljkrhh3d
+	ox7Kw7fI4/USGW9BW95pf8wGwCsvHhkBqNBBqgp1HiBw+DK16YYdWGxuXMZA/EOBboa5xlYEPT6
+	irqPd74zufX7FB4tpfNkackWfP+wW9HokhJjxQCyUscBC3IyZ6gR825eXvrWkxdw5KbJSUVSkFo
+	wrW7zYw+0MnnnHwgPe0ZNO12ST522mmlNbOd7fiOuT1ftMYlbQy
+X-Received: by 2002:a17:907:e009:20b0:c24:e0dc:8b66 with SMTP id a640c23a62f3a-c24e0dcd3d7mr746836466b.6.1787668983779;
+        Tue, 25 Aug 2026 07:43:03 -0700 (PDT)
+Message-ID: <6dff46c2-443f-4b9f-bdd9-de3017becca9@suse.com>
+Date: Tue, 25 Aug 2026 16:43:00 +0200
 MIME-Version: 1.0
-References: <20260820-asi-part1-0-f2dbd92b8459@xenproject.org>
- <ec040560-4377-474d-a929-3080b74bb0af@suse.com> <CAFLBxZbQD7HgdYK3-yzaMOt4P2geO2PSOSDi4-c3KHZ96DDifg@mail.gmail.com>
- <044095b7-3c8d-40da-9d21-281c522a49ae@suse.com> <CAFLBxZa0Fmmic1JLwHOdFCn1=rGP6Un2q1ZxBa1DpsO_AAmD6A@mail.gmail.com>
- <f34b38e3-4f77-49e2-a69f-aea153f53787@suse.com>
-In-Reply-To: <f34b38e3-4f77-49e2-a69f-aea153f53787@suse.com>
-From: George Dunlap <gwd@xenproject.org>
-Date: Tue, 25 Aug 2026 15:40:48 +0100
-X-Gmail-Original-Message-ID: <CAFLBxZZKyuXc0j08Q9wqsHXVGD1LPSLB=Fxx6XLFsBQgzjrOmw@mail.gmail.com>
-X-Gm-Features: AcwNN1Wc9W-MLBwND-XdCKd5XmrEINpG2L0AcF0qEOn3XZC3C8UxPLggJ6PUilU
-Message-ID: <CAFLBxZZKyuXc0j08Q9wqsHXVGD1LPSLB=Fxx6XLFsBQgzjrOmw@mail.gmail.com>
-Subject: Re: [PATCH 0/7] x86: Address Space Isolation, part 1: per-domain area
- mapping rework
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
-	Teddy Astie <teddy.astie@vates.tech>, Anthony PERARD <anthony.perard@vates.tech>, 
-	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, 
-	Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 1/3] ioreq: switch ioreq page allocation to vmap
+To: Julian Vetter <julian.vetter@vates.tech>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20260420093820.825969-1-julian.vetter@vates.tech>
+ <20260420093820.825969-2-julian.vetter@vates.tech>
+ <35a08d22-1e95-4e02-a7e9-7f392ef11722@suse.com>
+ <1787667597.8631fc262581453bbf619ec5b2062170.1a0394ac7f2000c4f3@vates.tech>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <1787667597.8631fc262581453bbf619ec5b2062170.1a0394ac7f2000c4f3@vates.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d62444/1787668984-BCB45757-2783207F/0/0
+X-purgate-type: clean
+X-purgate-size: 2812
 
-On Tue, Aug 25, 2026 at 2:28=E2=80=AFPM Jan Beulich <jbeulich@suse.com> wro=
-te:
->
-> On 25.08.2026 13:42, George Dunlap wrote:
-> > On Mon, Aug 24, 2026 at 10:02=E2=80=AFAM Jan Beulich <jbeulich@suse.com=
-> wrote:
-> >> While these percentiles in particular of course look very tiny, they a=
-re
-> >> applicable only on systems having no meaningful gaps in the physical
-> >> address map. And even more generally I find all of these calculations
-> >> only partly convincing, not the least because you start out from numbe=
-rs
-> >> which look pretty contrived when comparing to actual systems which wou=
-ld
-> >> run the new code. (Using more realistic real-system values may end up
-> >> going in favor of what you want to convey, or it may not.)
-> >
-> > To be honest, I'm inclined to think that they're not very convincing
-> > because you don't actually have an idea what the problem is.  You
-> > didn't specify what you were worried about, so I tried to guess a
-> > scenario that I considered 95th-percentile worse case.  I don't know
-> > what kinds of sparse memory layout machines you have in mind -- are
-> > they written down anywhere, so that contributors can read and
-> > understand what they need to consider *before* implementing?  Even now
-> > you haven't even said what about my scenario you consider unrealistic,
-> > much less told me parameters you think are more realistic.
->
-> What I specifically considered unrealistic is that you use huge pCPU and
-> vCPU counts. Yes, you're trying to do a worst case estimate, yet at the
-> same time you're assuming huge amounts of memory to be available (which
-> doesn't represent a "worst case").
+On 25.08.2026 16:19, Julian Vetter wrote:
+> On 8/18/26 3:06 PM, Jan Beulich wrote:
+>> On 20.04.2026 11:38, Julian Vetter wrote:
+>>> @@ -333,7 +335,8 @@ bool is_ioreq_server_page(struct domain *d, const struct page_info *page)
+>>>   
+>>>       FOR_EACH_IOREQ_SERVER(d, id, s)
+>>>       {
+>>> -        if ( (s->ioreq.page == page) || (s->bufioreq.page == page) )
+>>> +        if ( (s->ioreq.va && vmap_to_page(s->ioreq.va) == page) ||
+>>> +             (s->bufioreq.va && vmap_to_page(s->bufioreq.va) == page) )
+>>>           {
+>>>               found = true;
+>>>               break;
+>>
+>> You mention in the description that some extra overhead is introduced. The
+>> (generally) two page walks done here are particularly concerning. Since we
+>> have a valid struct page_info * available here, I wonder if we shouldn't
+>> aid this lookup by recording the VA in one of struct page_info's fields.
+>> Afaics vmap() doesn't use any of the fields, so it should be relatively
+>> easy to determine a field to use for this purpose. The more involved part
+>> would then be to make sure the field (in other struct page_info instances)
+>> is also properly different from any VA vmap() may return.
+> 
+> Hello Jan,
+> 
+> Thank you again for your feedback! I will wait then for Anthony's 
+> decision regarding whether the multi-page ioreq support and the ioreq_t 
+> growth should be combined into a single effort, before I proceed further 
+> with a v7.
+> 
+> I just wanted to clarify one thing regarding the overhead I mentioned in 
+> the first patch's commit message ("this change has a small overhead in 
+> the common case"). Here, I was referring to vmap()/vunmap() replacing 
+> map_domain_page_global(). Where map_domain_page_global() has a directmap 
+> fast path. I didn't mean the overhead of the added vmap_to_page(). I 
+> should maybe clarify this better in my next iteration's commit message.
+> 
+> On your suggestion to cache the VA in struct page_info to speed up the 
+> vmap_to_page() lookups in is_ioreq_server_page(): I looked through the 
+> tree, and that function currently has only one caller 
+> sh_remove_all_mappings() (in xen/arch/x86/mm/shadow/common.c) and is 
+> only reached in a failure case. Given that, and given how widely shared 
+> and size-critical struct page_info is, I'm wondering whether it's really 
+> worth touching it for the gain of not having to do the 2 lookups. What 
+> do you think?
 
-Let me point out that you still haven't named exact numbers -- you're
-still offloading that to me to try to guess or imagine.
+Hmm, indeed. Yet how would we prevent new uses from being hit? At least
+a comment may want adding somewhere (where it's not too easy to overlook).
 
-The v1 series I posted adds a few pages per vCPU and a few pages per
-pCPU into the xenheap. The problem is using up too much of the xenheap
-address space.  So obviously to make a reasonable worst-case that
-you're not going to dismiss as contrived, I need to maximize my pCPU
-count and vCPU count.  pCPUs is easy -- we're documented as supporting
-4096.  How many is a reasonable number of domains and vcpus?  Well, in
-general, pCPUs are an effective limit to how many vCPUs you have total
-on the system; an 8:1 vCPU overcommit is high, but not preposterously
-high.
+That said, why the mention of "size-critical" when I said "determine a
+field", not "add a field"? (Really in different context I've suggested
+the same as a possibility to George, for his ASI work.)
 
-I don't understand your point about huge amounts of memory.  If you're
-talking about *total RAM used*, it doesn't matter whether it comes
-from the domheap or the xenheap.  The only possible reason to say
-domheap is OK but xenheap is not is if you're concerned about RAM
-above the 4TiB boundary.  Which can only happen on system with large
-amounts of RAM, or systems with really sparse memory layouts.  Does
-the analysis really change at all whether you're using 12TiB or 6TiB?
-
-> As to sparse layouts - ones which have led to the two forms of PDX
-> compression are well known (I think). The need for more recent (offset)
-> form is a good example of what could go wrong here: New machines can
-> always come with new layouts, potentially requiring new compressions
-> approaches. So what I'm concerned about is effectively _any_ sparse
-> layout that we may encounter without having a suitable PDX compression
-> method readily available.
-
-"There may be some new layout that doesn't compress well" -- it's not
-uncommon for random bits of new hardware not to work well until we
-supply a patch to fix it.  The position you're supporting is
-effectively: "We must absolutely avoid a situation where some unknown
-system is temporarily restricted in how many vCPUs it can create due
-to a sparse address space, even if it means making the context switch
-4x as expensive for every single current user."  I just don't think
-that's a reasonable position in any shape or form.
-
-> > I don't even know exactly what failure mode you're worried about.  Two
-> > kinds of potential failures I know about:
-> >  - Performance impacted because pages can't be NUMA-local
-> >  - Toolstack operations (including domain creation) fail because
-> > xenheap has been exhausted.
->
-> One thing I can't help thinking you keep overlooking throughout your
-> reply: xenheap and domheap aren't separate. There being only a
-> relatively small part of it needed for the worst case estimate you did
-> means nothing as to exhausting the xenheap in practice: Almost the
-> entirety of it (with the DMA reserve being somewhat protected) can be
-> used to build domains. Once in that state, allocations would fail no
-> matter that large swathes of domheap might (have become) available
-> (again).
-
-Right, so if Xen allocates too much domheap from the directmap region,
-the xenheap may be not be able to allocate any more, even if there's
-plenty of memory.
-
-So something like the following:
-
-We have 8TiB of RAM, 4 nodes, 2TiB per node.  The user wants to start
-4 2TiB guests, one pinned to each node; so she starts d1 on node 1, d2
-on node 2, then tries d3 and can't start it because although there's
-still 4TiB of RAM left, all the memory below 4TiB was handed out to
-guests already.
-
-Is that what you had in mind?
-
-If I didn't agree that the xenheap represents technical debt that
-needs to be removed anyway, I'd say a simpler solution would be to do
-do some simple xenheap reservation, based on various factors
-(including number of pCPUs, and the total amount of RAM).  Reserving
-6GiB on an 8TiB system would have very little impact (the first guest
-would either need to be a bit smaller, or have, and would make the
-whole problem go away essentially.  The first guest would either need
-to be less than 0.1% smaller, or have 0.1% of its pages on a different
-node.
-
-> That said, with what you indicated at the very bottom of your reply,
-> it looks like this part of the discussion has become largely moot.
-
-Yes, but I also want to challenge your operating principles -- to get
-you to state more clearly what you're concerned about.  Also, in order
-to either get you to relax a bit about the xenheap growing, or to help
-you articulate more clearly what problems which contributors need to
-address.
-
- -George
+Jan
 
