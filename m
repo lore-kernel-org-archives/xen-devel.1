@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 422A8C61DB6
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 08:42:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1399111.1635315 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8680FC5DF94
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 08:42:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1399116.1635322 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wymjU-000652-8u; Tue, 25 Aug 2026 08:42:12 +0000
+	id 1wymk4-0006WV-Ey; Tue, 25 Aug 2026 08:42:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1399111.1635315; Tue, 25 Aug 2026 08:42:12 +0000
+Received: by outflank-mailman (output) from mailman id 1399116.1635322; Tue, 25 Aug 2026 08:42:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wymjU-00064v-5M; Tue, 25 Aug 2026 08:42:12 +0000
-Received: by outflank-mailman (input) for mailman id 1399111;
- Tue, 25 Aug 2026 08:42:10 +0000
+	id 1wymk4-0006WO-CO; Tue, 25 Aug 2026 08:42:48 +0000
+Received: by outflank-mailman (input) for mailman id 1399116;
+ Tue, 25 Aug 2026 08:42:46 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wymjS-00064i-Fj
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 08:42:10 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wymk2-0006W6-EJ
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 08:42:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wymjR-0042i1-Sf
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 10:42:09 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wymk1-0042qT-RK
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 10:42:45 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a8d555a-e002-0a2a0a5209dd-0a2a4509cd9e-34
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 10:42:09 +0200
-Received: from [209.85.208.48] (helo=mail-ed1-f48.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a8d5582-e002-0a2a0a5209dd-0a2a450bce72-20
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 10:42:45 +0200
+Received: from [209.85.208.47] (helo=mail-ed1-f47.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a8d5561-be1a-0a2a45090019-d155d030b9dc-3
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 10:42:09 +0200
-Received: by mail-ed1-f48.google.com with SMTP id
- 4fb4d7f45d1cf-6a082b3671fso7263860a12.3
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 01:42:09 -0700 (PDT)
+ id 6a8d5585-b7e8-0a2a450b0019-d155d02faca4-3
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 10:42:45 +0200
+Received: by mail-ed1-f47.google.com with SMTP id
+ 4fb4d7f45d1cf-6a10d02ff43so8741943a12.0
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 01:42:45 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a5d3d75550sm853569a12.3.2026.08.25.01.42.08
+ 4fb4d7f45d1cf-6a59e02a8fbsm18170188a12.13.2026.08.25.01.42.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Aug 2026 01:42:09 -0700 (PDT)
+ Tue, 25 Aug 2026 01:42:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,57 +55,58 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787647329; x=1788252129; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1787647365; x=1788252165; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=F1cEm7rJzS56mS2/4sRHBA3+kz3xYZ64wP1egs+rTXc=;
-        b=bk9JaJ2GWQVjNWd/fJzKuaTLxxjnJ6NdzUw+7bdAA1MPdlw7G6iAfSnVPyh3z2CFpI
-         BD3V4p0CL6qNOWT/hcYg3/YIrSjP2iyIK0+d6kvx/vy98/NBCvK7vehuzEt0T+b1dtWt
-         wea7RsLY7JB7wJD5mtsS9cyL3NhY3pttnzMW+hf490gel1gRik7oJyfs7sBQvnKzS8xJ
-         +KZb6E6PdI6tHR7eK0gsOlbbWcJfMWMjwB8v0JiUqqICoINYOeowa7VWtMM9MpmHfCfQ
-         5Y5bjqEAa2nXaopC911xX9kktpYCoeuKzp10vG4HuTkXX89ANNnhQG4LjqqV4hDGZwp8
-         Da6A==
+        bh=JoSzWl9u/xDhO1ZqChlyScExhg2WyeKTzD6iriK6Voc=;
+        b=J1nXtJffqqp0xVvaSg5M45MRqo7cCbuYtDYf/XI91gYJe5hkuYQ3EBwghQNZ3jiGzt
+         OV1/nSMjEJurIaYpaekkdizaCZMaSCOzTYT4s64k7Y0HHSmmg1OK97HjFE5V5yqWiBHz
+         lF5TUeFUF32kmqhTuBOgwvlBcH8vZt8g3R0VZ3jB7H1aeOIt/0UIasnPqmosNYnKv2Wd
+         NtJ9iMD2hk5hGHQFFtPnfJuHZXApwFFJinaASemWMfvk76D/1DQ8dFIl0qN+BOvJDG/H
+         Qgfzm9FAQZCtOeH94q+y/0i+0BBorxHNGrEsIcK3kHId/DQtO0V+gkSS0FUrG9mgLvpM
+         +yUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787647329; x=1788252129;
+        d=1e100.net; s=20251104; t=1787647365; x=1788252165;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=F1cEm7rJzS56mS2/4sRHBA3+kz3xYZ64wP1egs+rTXc=;
-        b=oKR//tYp3tyxAeWc07HP4mBAjkckimfWrw3IP9wUYjdp2tHJzJXlkfphUdwa9xhIXC
-         pr/Z9Hnnpx0fwFLnkBqaW6OEOmd5TB0CP8v7mS7d2UD8PVWSgIY8cR0vFQwdkgczY0SW
-         Yn+4iTAohezDKyrJM/rKzjmROWRaZaGoIIj8jXCfYQI8rWOp4KrybWi6CGbh8CQu6+JW
-         TNfwI06fVHv6KdNz+wdPHrS516kBYvbR9lzrOsnZ5l1GaJuiZO0HEUio1KCEi/5mgM52
-         8p7fjTEm1Hf/Ntcuw3jzeIZWWC4VyvQ7G2oJ/4UweZw0Q4lGDNuoI8DK2jHlDJ5PO7iN
-         8ZNQ==
-X-Gm-Message-State: AFuF++l3noMJwrkc11arb5U1rxHqL3RtXTrIiuJq56kF6hH9omzQmh3u
-	4mc1dZUVWjtVO7iH3WQx6erg5hxxVVS3tKVXnpJ5iRtX4eh6I38kBrLNgsuN3wSHaLnleOf7anw
-	XsOHEmA==
-X-Gm-Gg: AR+sD11won+aOYUebDp2dioqR69ow+wFx0lUL5ou24Ckx61iAzDNyCz9znwS7DkUVGJ
-	+SuwuMZ2H8vSWCvgMOnuDTclOajhTe1Ff6ETfHYXtbF/mPR2BVvU2ox3DwHN8B5+l0VUS9Cq+ZI
-	Qzu5JZOz8RFU0t+1lGk8ZxL0fLY5J5+YHlSIalY2UTSkgAnYTgvKvodf6ArXt87xNzer9pYjVHM
-	tJLiIhLNJnnssgk5UMReuswgrpXvlDWyr0FTREfJyktJcU1iO4TUnzL8K4fFpD5TJf1LTk9FeFg
-	h7d3esUVths9HHBr8hLKCCh3WCzl0llx1OUzg/3PxipXrzK/mPr+rHE8jBEo+vVCWkQ4YR+2Qe5
-	61eERj6M0YVPZT+ujJQ4bqCIIuD2ltIOPYo/NrZHmNx71oqD/I0E+5KkIkz+y0/b4HiubgV/E7k
-	+iKIvR2o40oG9GqcUJQpjKWq0LLM3IuFXzo0Flz6Bcu0/Zh1x6g8hG60JQo4fLQoXa784Zs+zlK
-	zWsk/XVtz6K24csA2VWgiI8MtDX18AGEtTRzLn3MALV9PBlrVOK
-X-Received: by 2002:a05:6402:a214:10b0:6a5:d694:6e9 with SMTP id 4fb4d7f45d1cf-6a5d6940777mr645550a12.2.1787647329386;
-        Tue, 25 Aug 2026 01:42:09 -0700 (PDT)
-Message-ID: <0294ccd6-6a22-4cab-9654-56c18bbe37f8@suse.com>
-Date: Tue, 25 Aug 2026 10:42:07 +0200
+        bh=JoSzWl9u/xDhO1ZqChlyScExhg2WyeKTzD6iriK6Voc=;
+        b=cAclz8jaLQFQuMNz+IjHiYbd1j4Aicez9luV58CGJi4dXtMg4RoBPhLtTeXiFDRIeK
+         GS1GeCpTcbXM8Jm2zP9N5+HztUAX7OTVF2myHHZSCxu4L7aCtbmR7VSvHzVxXFhsJDa1
+         0UJthtu5/4AObBVRxHvQrQQjEfkog0GXuT01wn8/1jsFAlPyh32JzFwlPPReUT08s+hu
+         SQPf4QUcsKfWx1dZlugtJ2rPpJ6D4ofWsuX4GWUhsNyYEmYrp50zpixKGhFGf1WBGWRu
+         2Ehlf1rpBmQQLVuLYdP+zguRAR6hKKbJ/bIGE12gfOzfGPEg+Mi2812F6L3zDPW9iM86
+         5JgA==
+X-Gm-Message-State: AFuF++l5KLyxHHEfFv9q/u1jbC1ACaG9oNZOXwzIAiQ/0OiQWI6ug8tU
+	IjSseu7fEHdGWEEdLj6m0YFRFoRNIiKoG6uBVm0LYrH8RntGaY9O5iou1wTP19L/M1LfGqjWsd3
+	Kvf5gLw==
+X-Gm-Gg: AR+sD12n/rqoJByCq1u7NvTvhP7KuBNaknTzxzL9ZOilpakoyQRBBByNBDiRPL07/dL
+	91cO1vDtsIVcGIsQoIgVMQ7GPA8kpM+f5ClpeyeTquOjFwNrg85A9aWKGoD/3ka7Cs+zzaaXigJ
+	jOwUKUG6lz7lui/F3mSjAH/ogGNL4419SQBQKLTrZGqKWBpUmj93iWkP+/kgEZZy6pNmPjw4ljR
+	EEZyVq1EgsqS/wMwAVyx2xaTD/1VJRm15i3/fYq47vu0lzlpV5gftW9I6W3ct72I/RcZ6mcWDPc
+	dEi+Z24YnWUnjZzyQGHwYQJr8yHscSX7as49hJFJlIixi1Vm2YUX9/XjIFcVb0T5LnKKqTNjJ37
+	5XduCOVA0mv39SQLQNNZojrysSVVlD1N3lQ1TfL+5zdMzAc5Ahve65z+AWgex3x/aei+ry3Jx4x
+	7YREt7H32t3VPeXHfTPccfKEZb1UgElYkhL+/Bmie/H1Q70IknKXxJiU4CcC8jtrGvbwyxIitCG
+	Q6BPdsxQ2FJH5lTzi/W2Z0FQVIHERY8X14poqvztOx8f3yCxzwFe8c3uNKYSiA=
+X-Received: by 2002:a05:6402:428e:b0:6a1:fd14:8835 with SMTP id 4fb4d7f45d1cf-6a42eea5ed7mr36418894a12.0.1787647365372;
+        Tue, 25 Aug 2026 01:42:45 -0700 (PDT)
+Message-ID: <f5ee642c-967f-444f-885a-fbbae6445020@suse.com>
+Date: Tue, 25 Aug 2026 10:42:43 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 2/6] Arm: split xen-syms linking rule
+Subject: [PATCH 3/6] RISC-V: split xen-syms linking rule
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+ <roger@xenproject.org>, Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>
 References: <fb75dbda-63a5-4ebd-abf6-5ce6b3b5ba3f@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -134,9 +135,9 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <fb75dbda-63a5-4ebd-abf6-5ce6b3b5ba3f@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1787647329-FD469034-AAF50E60/0/0
+X-purgate-ID: tlsNG-42698a/1787647365-AB6D29EA-35DFF45C/0/0
 X-purgate-type: clean
-X-purgate-size: 3812
+X-purgate-size: 2927
 
 Doing so, besides (hopefully) adding clarity (not the least by way of
 [re-]using pattern rules where possible), also avoids explicit recursive
@@ -158,15 +159,12 @@ redundant invocation of $(NM) and tools/symbols (plus the assembling of
 the resulting .S file) is hopefully deemed acceptable.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-As for the x86 patch, I'd like to keep the "beautification" part, i.e.
-transforming to $(if_changed ...) machinery, separate.
 
---- a/xen/arch/arm/Makefile
-+++ b/xen/arch/arm/Makefile
-@@ -84,40 +84,12 @@ ifeq ($(CONFIG_ARM_64),y)
- 	ln -sf $(@F) $@.efi
- endif
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -31,40 +31,12 @@ obj-y += vtimer.o
+ $(TARGET): $(TARGET)-syms
+ 	$(OBJCOPY) -O binary -S $< $@
  
 -$(TARGET)-syms: $(objtree)/prelink.o $(obj)/xen.lds
 -	$(objtree)/tools/symbols $(all_symbols) --empty > $(dot-target).0.S
@@ -209,29 +207,7 @@ transforming to $(if_changed ...) machinery, separate.
 +# Suppress orphan section checking for the time being.
 +orphan-handling-y :=
  
- .PHONY: include
- include:
---- a/xen/scripts/Makefile.link
-+++ b/xen/scripts/Makefile.link
-@@ -31,6 +31,19 @@ final-image-check-y ?= true
- 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $(filter %.o,$^) \
- 	      $(build_id_linker) --strip-debug -o $@
- 
-+ifneq ($(LAST_LINKING_PASS),2)
-+
-+.$(TARGET)-syms.2: $(objtree)/prelink.o .$(TARGET)-syms.2.o $(obj)/xen.lds
-+	if ! { $(call compare-symbol-tables, .$(TARGET)-syms.1.o, .$(TARGET)-syms.2.o) >/dev/null; }; \
-+	then \
-+		$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $(filter %.o,$^) \
-+		      $(build_id_linker) --strip-debug -o $@; \
-+	else \
-+		ln -sf .$(TARGET)-syms.1 $@; \
-+	fi
-+
-+endif
-+
- .$(TARGET)-syms.$(LAST_LINKING_PASS): $(objtree)/prelink.o \
-                                       .$(TARGET)-syms.$(LAST_LINKING_PASS).o \
-                                       $(obj)/xen.lds
+ $(obj)/xen.lds: $(src)/xen.lds.S FORCE
+ 	$(call if_changed_dep,cpp_lds_S)
 
 
