@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 607B0C61DB9
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 19:12:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1399387.1635485 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77071C61DC2
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2026 19:12:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1399393.1635494 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wywZ3-000823-DF; Tue, 25 Aug 2026 19:12:05 +0000
+	id 1wywZd-0008RV-Lo; Tue, 25 Aug 2026 19:12:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1399387.1635485; Tue, 25 Aug 2026 19:12:05 +0000
+Received: by outflank-mailman (output) from mailman id 1399393.1635494; Tue, 25 Aug 2026 19:12:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wywZ3-00081w-9t; Tue, 25 Aug 2026 19:12:05 +0000
-Received: by outflank-mailman (input) for mailman id 1399387;
- Tue, 25 Aug 2026 19:12:03 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wywZd-0008RO-IY; Tue, 25 Aug 2026 19:12:41 +0000
+Received: by outflank-mailman (input) for mailman id 1399393;
+ Tue, 25 Aug 2026 19:12:40 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1wywZ1-00081q-KW
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 19:12:03 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1wywZc-0008RC-Cx
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 19:12:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wywZ1-00Ewkz-1I
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 21:12:03 +0200
+ id 1wywZb-0069WB-Q2
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2026 21:12:39 +0200
 Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6a8de8fb-e002-0a2a0a5209dd-0a2a450a89bc-10
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 21:12:02 +0200
-Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
+ id 6a8de91e-e002-0a2a0a5209dd-0a2a450ab4bc-6
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 21:12:39 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
  by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6a8de901-f2d2-0a2a450a0019-aa0a857ce2ff-3
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 21:12:02 +0200
+ id 6a8de926-f2d2-0a2a450a0019-aa0a817cae25-3
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 21:12:39 +0200
 Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-418-9fDIjUJcONS6cFtfvgj5hQ-1; Tue,
- 25 Aug 2026 15:11:55 -0400
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-613-jc1F5kuNMgCFWJ1OoF_V0A-1; Tue,
+ 25 Aug 2026 15:12:34 -0400
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id C513618C104B; Tue, 25 Aug 2026 19:11:51 +0000 (UTC)
+ id 9DB4618C0FEF; Tue, 25 Aug 2026 19:12:32 +0000 (UTC)
 Received: from localhost (headnet03.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.114])
  by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 2869930002F7; Tue, 25 Aug 2026 19:11:49 +0000 (UTC)
+ id 79C8F30002F7; Tue, 25 Aug 2026 19:12:31 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -63,22 +63,23 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1787685121;
+	s=mimecast20190719; t=1787685158;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=UAVq8jQ2W8GQMPKZh9lwo20fWbzMAGBwvQIsMg5/FCI=;
-	b=OFXGD3815PL5Qylt2Do92u8vHpn/89T8Ug3lpFihm6x81QhPt8yDEFMbrWpl2Bw+R/57Bb
-	l88t+IYFBODjiXeLbDIDEXSPqYKu8f4CcEHBKysZ0fzfsLhYcS2a+ekB/bknDjEhgVQIUW
-	W1gqTNM6CP9z6x4AHGIt4JbCpwnM1PM=
-X-MC-Unique: 9fDIjUJcONS6cFtfvgj5hQ-1
-X-Mimecast-MFC-AGG-ID: 9fDIjUJcONS6cFtfvgj5hQ_1787685112
+	bh=57QfcTR5j/zJ5KMJTDu3qOnAc1zj+QlnuAt4vX2DJrQ=;
+	b=SoyWS7eBvrH/fxRhefT2W9N4C1sQozLRobQ9cql0ycx6eBKHV7egvLkeuSCoiBsnlfyftd
+	TE3twQvjiUvsfzH6XC192zjmAIUqqjczm5v55WVmmqbxJEiA5Nio63EtVe7ZcQ5GlpVOyg
+	Zl+TG2MkZJR9Vp9NAcwQAIaCmh8X4TA=
+X-MC-Unique: jc1F5kuNMgCFWJ1OoF_V0A-1
+X-Mimecast-MFC-AGG-ID: jc1F5kuNMgCFWJ1OoF_V0A_1787685152
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 25 Aug 2026 23:09:36 +0400
-Subject: [PATCH v4 29/49] monitor: isolate HMP declarations in hmp.h
+Date: Tue, 25 Aug 2026 23:09:45 +0400
+Subject: [PATCH v4 38/49] qdev-monitor: make print_dev() callback take
+ MonitorHMP
 MIME-Version: 1.0
-Message-Id: <20260825-qemu-no-hmp-v4-29-af60857c2fbe@redhat.com>
+Message-Id: <20260825-qemu-no-hmp-v4-38-af60857c2fbe@redhat.com>
 References: <20260825-qemu-no-hmp-v4-0-af60857c2fbe@redhat.com>
 In-Reply-To: <20260825-qemu-no-hmp-v4-0-af60857c2fbe@redhat.com>
 To: qemu-devel@nongnu.org
@@ -87,504 +88,262 @@ Cc: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>, 
  =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
  Markus Armbruster <armbru@redhat.com>, 
- Richard Henderson <richard.henderson@linaro.org>, 
- Paolo Bonzini <pbonzini@redhat.com>, 
- =?utf-8?q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, 
- "Michael S. Tsirkin" <mst@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
- Amit Shah <amit@kernel.org>, Brian Cain <brian.cain@oss.qualcomm.com>, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ Laurent Vivier <lvivier@redhat.com>, Amit Shah <amit@kernel.org>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
  Stefano Stabellini <sstabellini@kernel.org>, 
  Anthony PERARD <anthony@xenproject.org>, 
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- Samuel Thibault <samuel.thibault@ens-lyon.org>, 
- Jason Wang <jasowangio@gmail.com>, 
- Yoshinori Sato <yoshinori.sato@nifty.com>, 
- Stefan Hajnoczi <stefanha@redhat.com>, xen-devel@lists.xenproject.org
-X-Developer-Signature: v=1; a=openpgp-sha256; l=15816;
+ xen-devel@lists.xenproject.org
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8798;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=n8fT+96oEvudRuUgQ/dnx3uxsW6aOGEO6iYpiyOTIXQ=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqjeiHMbeCsIaocGDO9Y0JrkRvOQPBT9wWDsX/i
- T+t9yX7FG2JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCao3ohwAKCRDa6OEJdZac
- 5SqyD/98pXJ+2rTVWhJDv2+W7vZXwaDhugqM+eSZowAaTap8SXdKf2vpneqGF7szUuSGA0REczp
- MdqmCmM0X1hYudkxOpb26I/4iLgK7fjPhoJw/M0vyX3OAQ7KN1mlSP2Qq0MOyX4jpHPowArR9rb
- h5dM8tLSTanHBXmgVYZhDPgW5dsVyCyYtuqakjaUZ/qBVOpmiC/L3welEVYy8qecIGsnPSsCXr8
- 91aHPwh9ooMgss3EuOtXr87uB8ZmCfZ5meMmTm7+m/6qnldX1FSPvSq8U0Kx59yheL+/YgwtABb
- 5XaLGuEjOmtlqT5OgUn9T+byv783I07iXgX6PUIfx1BE88rpjKDTurL9ELtS+dGgeqAef2ChOBg
- 3E9cJq3bo+YvA0X9TTmZdl1CR0rewG3ZgxuZaJIs5piygPJQt6C5P4hWPCOow3WIT1gSSAIkU8R
- AJmXk9aZhnxKJHpa2m5QD8iZftNQ3WJ3LQhBlqESWFsE7fArMzBQUpd8/iMAJ3IY3FAL1bZJ6HH
- TIPzmE+Y1s4k3mbsntGRAlpEQXTV/P891U6X353m0EVBgj/V/TzjJmsipfyg4Oc537x6NXQENs1
- R4CQjD72G/Exl5kZnNMfYwffMaQTN8D/TXGU0NQEMySYAR4cJDNRTqM8++8HlZ+8kABEhWKOHlA
- XmxijGls1xjmuGA==
+ bh=TnV/ecEwZ8dNWntwBJ1/B+qLywO2KqD7Jgy5xW81cUE=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqjeiI1ORwMVhtLFs/MqLkfYMW91qiIkX2bbWKf
+ zaoUdClu3aJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCao3oiAAKCRDa6OEJdZac
+ 5RPJD/9voh4Ssrd7KFIE0Of1vZrgv5Zzbs1/rJAoLNlOOYasoOJkkCKkLa1JiPZnapucPEmaZgk
+ tJIpDEUZjgDr4MYLEMX1Ef67nCjqNJwWZvZSNzmdPaCqtjfCwtQ0Ssq8pz5nBHaqwn2bw/pPXap
+ yRtz7/QjwE8RGAx8ARfyqqRjiqMFbCAqF0Dy4m2povT+XADWrKkocSmET2f8/6r0yW+AvLzX8Y7
+ mIdXyGQyPOPdtz7Sw5wUs6Oi84opLDTv3E0IqvqXlGgWTwDfFClnuf49OFxYDv7OlLFjtkBtxQf
+ Q9Zohr7W0CcYFy4H1vYfFTSE0EG2On8Ko+M5o0JsLwmXHwsQCxbuAiIgNnVzWbNOR5nokD5489P
+ KwZaItJuo8vmzQ9I24Dw8GQxZ29/qh1ARZFs5ppqgXxIxT992Ll8s3ZknfqZ2MOPNj2zwm62K2I
+ 99ZzagmgL8Q5tdL3yRe2h3qiMjxbm5dFHZEzHtrxELmoV5qjP5HkMkiQ6WN0mquoT0Frsk4k31l
+ HrOA5RjvIhGOF2v3QBPw4pSC4fPyLA3yzimjelERjskqygwttoTQ9z+StNDCsTfqDTmE7f+FvAk
+ swtTMwRUm96FjFpwGc5LQ3aOEWOM1hiKl1vYkgo9DgXXyt7/BldDn4F+MT5ItYID3qGc9eYB3Yc
+ IPsRMZMFKhJfXJA==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: mhsu2O7-F07pEq0JfJftYB-8wD49YFRwAn2bfrL5biI_1787685112
+X-Mimecast-MFC-PROC-ID: KlfHz8KkB4YBx1zGPM7KXSFQ4hVNcIMY9_XSkYL8pF4_1787685152
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1787685122-4BAD4CFC-FE0F3C3E/0/0
+X-purgate-ID: tlsNG-4011c0/1787685159-538D5CFC-31B1F244/0/0
 X-purgate-type: clean
-X-purgate-size: 15818
+X-purgate-size: 8800
 
-Also rename password & commands with hmp in the name, while at it.
-Other functions need larger changes which we will take care of next.
+The callback is specific to HMP context, avoid unsafe MONITOR_HMP()
+cast.
 
-Reviewed-by: Dr. David Alan Gilbert <dave@treblig.org>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- accel/accel-system.c           |  1 +
- accel/tcg/monitor.c            |  1 +
- chardev/char.c                 |  2 +-
- disas/disas-mon.c              |  1 +
- gdbstub/system.c               |  2 +-
- hw/char/virtio-serial-bus.c    |  1 +
- hw/core/machine-hmp-cmds.c     |  1 -
- hw/core/sysbus.c               |  1 +
- hw/hexagon/hexagon_tlb.c       |  1 +
- hw/misc/auxbus.c               |  1 +
- hw/usb/bus.c                   |  1 +
- hw/usb/host-libusb.c           |  1 +
- hw/xen/xen-bus.c               |  1 +
- include/monitor/hmp.h          | 21 +++++++++++++++++++++
- include/monitor/monitor.h      | 18 ------------------
- monitor/hmp.c                  |  8 ++++----
- monitor/monitor-internal.h     |  1 +
- net/slirp.c                    |  1 +
- stubs/monitor-core.c           |  1 +
- stubs/monitor-internal.c       |  2 +-
- target/rx/disas.c              |  1 +
- tests/unit/test-util-sockets.c |  1 +
- tools/qemu-vnc/stubs.c         |  1 +
- trace/trace-hmp-cmds.c         |  1 -
- ui/ui-hmp-cmds.c               |  4 ++--
- util/error-report.c            |  2 +-
- util/qemu-print.c              |  1 +
- 27 files changed, 48 insertions(+), 30 deletions(-)
+ hw/char/virtio-serial-bus.c | 6 +++---
+ hw/core/sysbus.c            | 5 ++---
+ hw/misc/auxbus.c            | 7 +++----
+ hw/pci/pci-hmp-cmds.c       | 3 +--
+ hw/pci/pci-internal.h       | 2 +-
+ hw/usb/bus.c                | 5 ++---
+ hw/xen/xen-bus.c            | 3 +--
+ include/hw/core/qdev.h      | 3 ++-
+ system/qdev-monitor.c       | 7 +++----
+ 9 files changed, 18 insertions(+), 23 deletions(-)
 
-diff --git a/accel/accel-system.c b/accel/accel-system.c
-index 9176665202d2..977804c4048a 100644
---- a/accel/accel-system.c
-+++ b/accel/accel-system.c
-@@ -28,6 +28,7 @@
- #include "qom/compat-properties.h"
- #include "qapi/qapi-commands-accelerator.h"
- #include "monitor/monitor.h"
-+#include "monitor/hmp.h"
- #include "hw/core/boards.h"
- #include "hw/core/cpu.h"
- #include "accel/accel-ops.h"
-diff --git a/accel/tcg/monitor.c b/accel/tcg/monitor.c
-index be5c1950177c..74170ddef708 100644
---- a/accel/tcg/monitor.c
-+++ b/accel/tcg/monitor.c
-@@ -11,6 +11,7 @@
- #include "qapi/type-helpers.h"
- #include "qapi/qapi-commands-machine.h"
- #include "monitor/monitor.h"
-+#include "monitor/hmp.h"
- #include "system/tcg.h"
- #include "tcg/tcg.h"
- #include "internal-common.h"
-diff --git a/chardev/char.c b/chardev/char.c
-index c6c8133f5c1d..9da0911e503c 100644
---- a/chardev/char.c
-+++ b/chardev/char.c
-@@ -24,7 +24,7 @@
- 
- #include "qemu/osdep.h"
- #include "qemu/cutils.h"
--#include "monitor/monitor.h"
-+#include "monitor/hmp.h"
- #include "monitor/qmp-helpers.h"
- #include "qemu/config-file.h"
- #include "qemu/error-report.h"
-diff --git a/disas/disas-mon.c b/disas/disas-mon.c
-index 9c693618c277..bc9dec3a7761 100644
---- a/disas/disas-mon.c
-+++ b/disas/disas-mon.c
-@@ -10,6 +10,7 @@
- #include "system/memory.h"
- #include "hw/core/cpu.h"
- #include "monitor/monitor.h"
-+#include "monitor/hmp.h"
- 
- /*
-  * Get LENGTH bytes from info's buffer, at target address memaddr.
-diff --git a/gdbstub/system.c b/gdbstub/system.c
-index 070bc26f416c..8a1cdb11db36 100644
---- a/gdbstub/system.c
-+++ b/gdbstub/system.c
-@@ -29,7 +29,7 @@
- #include "hw/core/boards.h"
- #include "chardev/char.h"
- #include "chardev/char-fe.h"
--#include "monitor/monitor.h"
-+#include "monitor/hmp.h"
- #include "trace.h"
- #include "internals.h"
- 
 diff --git a/hw/char/virtio-serial-bus.c b/hw/char/virtio-serial-bus.c
-index c1973f0248fc..02604740f86a 100644
+index 33fdc0846ac3..4dcc4516e45e 100644
 --- a/hw/char/virtio-serial-bus.c
 +++ b/hw/char/virtio-serial-bus.c
-@@ -25,6 +25,7 @@
- #include "qemu/module.h"
- #include "migration/qemu-file-types.h"
- #include "monitor/monitor.h"
-+#include "monitor/hmp.h"
- #include "qemu/error-report.h"
- #include "qemu/queue.h"
- #include "hw/core/qdev-properties.h"
-diff --git a/hw/core/machine-hmp-cmds.c b/hw/core/machine-hmp-cmds.c
-index 686304bafab5..1c700aad3587 100644
---- a/hw/core/machine-hmp-cmds.c
-+++ b/hw/core/machine-hmp-cmds.c
-@@ -15,7 +15,6 @@
+@@ -814,7 +814,7 @@ static int virtio_serial_load_device(VirtIODevice *vdev, QEMUFile *f,
+     return 0;
+ }
  
- #include "qemu/osdep.h"
- #include "monitor/hmp.h"
--#include "monitor/monitor.h"
- #include "qapi/error.h"
- #include "qapi/qapi-builtin-visit.h"
- #include "qapi/qapi-commands-accelerator.h"
+-static void virtser_bus_dev_print(Monitor *mon, DeviceState *qdev, int indent);
++static void virtser_bus_dev_print(MonitorHMP *hmp, DeviceState *qdev, int indent);
+ 
+ static const Property virtser_props[] = {
+     DEFINE_PROP_UINT32("nr", VirtIOSerialPort, id, VIRTIO_CONSOLE_BAD_ID),
+@@ -834,11 +834,11 @@ static const TypeInfo virtser_bus_info = {
+     .class_init = virtser_bus_class_init,
+ };
+ 
+-static void virtser_bus_dev_print(Monitor *mon, DeviceState *qdev, int indent)
++static void virtser_bus_dev_print(MonitorHMP *hmp, DeviceState *qdev, int indent)
+ {
+     VirtIOSerialPort *port = VIRTIO_SERIAL_PORT(qdev);
+ 
+-    monitor_hmp_printf(MONITOR_HMP(mon), "%*sport %d, guest %s, host %s, throttle %s\n",
++    monitor_hmp_printf(hmp, "%*sport %d, guest %s, host %s, throttle %s\n",
+                        indent, "", port->id,
+                        port->guest_connected ? "on" : "off",
+                        port->host_connected ? "on" : "off",
 diff --git a/hw/core/sysbus.c b/hw/core/sysbus.c
-index 3e1160ee921d..13df7cbafe10 100644
+index 82130ba04698..31c4fdf79d48 100644
 --- a/hw/core/sysbus.c
 +++ b/hw/core/sysbus.c
-@@ -21,6 +21,7 @@
- #include "qapi/error.h"
- #include "hw/core/sysbus.h"
- #include "monitor/monitor.h"
-+#include "monitor/hmp.h"
+@@ -24,7 +24,7 @@
+ #include "monitor/hmp.h"
  #include "system/address-spaces.h"
  
- static void sysbus_dev_print(Monitor *mon, DeviceState *dev, int indent);
-diff --git a/hw/hexagon/hexagon_tlb.c b/hw/hexagon/hexagon_tlb.c
-index b6d4aff389e5..2d878cee736d 100644
---- a/hw/hexagon/hexagon_tlb.c
-+++ b/hw/hexagon/hexagon_tlb.c
-@@ -12,6 +12,7 @@
- #include "hw/core/resettable.h"
- #include "migration/vmstate.h"
- #include "monitor/monitor.h"
-+#include "monitor/hmp.h"
- #include "qapi/error.h"
- #include "exec/page-protection.h"
- #include "exec/target_page.h"
+-static void sysbus_dev_print(Monitor *mon, DeviceState *dev, int indent);
++static void sysbus_dev_print(MonitorHMP *hmp, DeviceState *dev, int indent);
+ static char *sysbus_get_fw_dev_path(DeviceState *dev);
+ 
+ typedef struct SysBusFind {
+@@ -249,10 +249,9 @@ bool sysbus_realize_and_unref(SysBusDevice *dev, Error **errp)
+     return qdev_realize_and_unref(DEVICE(dev), sysbus_get_default(), errp);
+ }
+ 
+-static void sysbus_dev_print(Monitor *mon, DeviceState *dev, int indent)
++static void sysbus_dev_print(MonitorHMP *hmp, DeviceState *dev, int indent)
+ {
+     SysBusDevice *s = SYS_BUS_DEVICE(dev);
+-    MonitorHMP *hmp = MONITOR_HMP(mon);
+     hwaddr size;
+     int i;
+ 
 diff --git a/hw/misc/auxbus.c b/hw/misc/auxbus.c
-index 877f34560626..ac2525b90fec 100644
+index ffa76f83016b..0bb89c5a60ab 100644
 --- a/hw/misc/auxbus.c
 +++ b/hw/misc/auxbus.c
-@@ -33,6 +33,7 @@
- #include "hw/misc/auxbus.h"
- #include "hw/i2c/i2c.h"
- #include "monitor/monitor.h"
-+#include "monitor/hmp.h"
- #include "qapi/error.h"
+@@ -47,7 +47,7 @@
+ } while (0)
  
- #ifndef DEBUG_AUX
+ 
+-static void aux_slave_dev_print(Monitor *mon, DeviceState *dev, int indent);
++static void aux_slave_dev_print(MonitorHMP *hmp, DeviceState *dev, int indent);
+ static inline I2CBus *aux_bridge_get_i2c_bus(AUXTOI2CState *bridge);
+ 
+ /* aux-bus implementation (internal not public) */
+@@ -288,7 +288,7 @@ static const TypeInfo aux_to_i2c_type_info = {
+ };
+ 
+ /* aux-slave implementation */
+-static void aux_slave_dev_print(Monitor *mon, DeviceState *dev, int indent)
++static void aux_slave_dev_print(MonitorHMP *hmp, DeviceState *dev, int indent)
+ {
+     AUXBus *bus = AUX_BUS(qdev_get_parent_bus(dev));
+     AUXSlave *s;
+@@ -300,8 +300,7 @@ static void aux_slave_dev_print(Monitor *mon, DeviceState *dev, int indent)
+ 
+     s = AUX_SLAVE(dev);
+ 
+-    monitor_hmp_printf(MONITOR_HMP(mon),
+-                       "%*smemory " HWADDR_FMT_plx "/" HWADDR_FMT_plx "\n",
++    monitor_hmp_printf(hmp, "%*smemory " HWADDR_FMT_plx "/" HWADDR_FMT_plx "\n",
+                        indent, "",
+                        object_property_get_uint(OBJECT(s->mmio), "addr", NULL),
+                        memory_region_size(s->mmio));
+diff --git a/hw/pci/pci-hmp-cmds.c b/hw/pci/pci-hmp-cmds.c
+index 500f821246a9..bcccfaf07f4d 100644
+--- a/hw/pci/pci-hmp-cmds.c
++++ b/hw/pci/pci-hmp-cmds.c
+@@ -135,9 +135,8 @@ void hmp_info_pci(MonitorHMP *hmp, const QDict *qdict)
+     qapi_free_PciInfoList(info_list);
+ }
+ 
+-void pcibus_dev_print(Monitor *mon, DeviceState *dev, int indent)
++void pcibus_dev_print(MonitorHMP *hmp, DeviceState *dev, int indent)
+ {
+-    MonitorHMP *hmp = MONITOR_HMP(mon);
+     PCIDevice *d = (PCIDevice *)dev;
+     int class = pci_get_word(d->config + PCI_CLASS_DEVICE);
+     const pci_class_desc *desc = get_class_desc(class);
+diff --git a/hw/pci/pci-internal.h b/hw/pci/pci-internal.h
+index a7d6d8a7324e..b7231fab5dc9 100644
+--- a/hw/pci/pci-internal.h
++++ b/hw/pci/pci-internal.h
+@@ -16,7 +16,7 @@ extern PCIHostStateList pci_host_bridges;
+ 
+ const pci_class_desc *get_class_desc(int class);
+ PCIBus *pci_find_bus_nr(PCIBus *bus, int bus_num);
+-void pcibus_dev_print(Monitor *mon, DeviceState *dev, int indent);
++void pcibus_dev_print(MonitorHMP *mon, DeviceState *dev, int indent);
+ 
+ int pcie_aer_parse_error_string(const char *error_name,
+                                 uint32_t *status, bool *correctable);
 diff --git a/hw/usb/bus.c b/hw/usb/bus.c
-index 3b6fbd46ac3f..9b9b2e7c2f8f 100644
+index fe3dbfa2227c..8bd25a9d872a 100644
 --- a/hw/usb/bus.c
 +++ b/hw/usb/bus.c
-@@ -9,6 +9,7 @@
- #include "system/system.h"
- #include "migration/vmstate.h"
- #include "monitor/monitor.h"
-+#include "monitor/hmp.h"
+@@ -13,7 +13,7 @@
  #include "trace.h"
  #include "qemu/cutils.h"
  
-diff --git a/hw/usb/host-libusb.c b/hw/usb/host-libusb.c
-index b9f3ad3f66dd..af67d5dfeb10 100644
---- a/hw/usb/host-libusb.c
-+++ b/hw/usb/host-libusb.c
-@@ -48,6 +48,7 @@
- #include "qapi/error.h"
- #include "migration/vmstate.h"
- #include "monitor/monitor.h"
-+#include "monitor/hmp.h"
- #include "qemu/error-report.h"
- #include "qemu/main-loop.h"
- #include "qemu/module.h"
+-static void usb_bus_dev_print(Monitor *mon, DeviceState *qdev, int indent);
++static void usb_bus_dev_print(MonitorHMP *hmp, DeviceState *qdev, int indent);
+ 
+ static char *usb_get_dev_path(DeviceState *dev);
+ static char *usb_get_fw_dev_path(DeviceState *qdev);
+@@ -544,9 +544,8 @@ static const char *usb_speed(unsigned int speed)
+     return txt[speed];
+ }
+ 
+-static void usb_bus_dev_print(Monitor *mon, DeviceState *qdev, int indent)
++static void usb_bus_dev_print(MonitorHMP *hmp, DeviceState *qdev, int indent)
+ {
+-    MonitorHMP *hmp = MONITOR_HMP(mon);
+     USBDevice *dev = USB_DEVICE(qdev);
+     USBBus *bus = usb_bus_from_device(dev);
+ 
 diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
-index dfad2bc5085f..a563f6066bb4 100644
+index 4075b5b001ae..b81a067e7753 100644
 --- a/hw/xen/xen-bus.c
 +++ b/hw/xen/xen-bus.c
-@@ -17,6 +17,7 @@
- #include "hw/xen/xen-bus.h"
- #include "hw/xen/xen-bus-helper.h"
- #include "monitor/monitor.h"
-+#include "monitor/hmp.h"
- #include "qapi/error.h"
- #include "qobject/qdict.h"
- #include "system/system.h"
-diff --git a/include/monitor/hmp.h b/include/monitor/hmp.h
-index 9258a049bffb..166cd4100c63 100644
---- a/include/monitor/hmp.h
-+++ b/include/monitor/hmp.h
-@@ -18,6 +18,9 @@
- #include "qapi/qapi-types-common.h"
- #include "monitor/monitor.h"
- 
-+#define TYPE_MONITOR_HMP "monitor-hmp"
-+OBJECT_DECLARE_TYPE(MonitorHMP, MonitorHMPClass, MONITOR_HMP);
-+
- #define HMP_STUB(cmd) \
-     void hmp_##cmd(Monitor *mon, const QDict *qdict) \
-     { \
-@@ -30,6 +33,24 @@ struct MonitorDef {
-     int64_t (*get_value)(Monitor *mon, const MonitorDef *md, int offset);
- };
- 
-+void monitor_new_hmp(const char *id, const char *chardev_id,
-+                     bool use_readline, Error **errp);
-+
-+int monitor_vprintf(Monitor *mon, const char *fmt, va_list ap)
-+    G_GNUC_PRINTF(2, 0);
-+int monitor_printf(Monitor *mon, const char *fmt, ...) G_GNUC_PRINTF(2, 3);
-+void monitor_printc(Monitor *mon, int ch);
-+
-+void monitor_hmp_read_command(MonitorHMP *hmp, int show_prompt);
-+int monitor_hmp_read_password(MonitorHMP *hmp, ReadLineFunc *readline_func,
-+                              void *opaque);
-+
-+void monitor_register_hmp(const char *name, bool info,
-+                          void (*cmd)(Monitor *mon, const QDict *qdict));
-+void monitor_register_hmp_info_hrt(const char *name,
-+                                   HumanReadableText *(*handler)(Error **errp));
-+
-+
- CPUArchState *mon_get_cpu_env(Monitor *mon);
- CPUState *mon_get_cpu(Monitor *mon);
- 
-diff --git a/include/monitor/monitor.h b/include/monitor/monitor.h
-index 9f048ba103b5..72a8f6ea5b4f 100644
---- a/include/monitor/monitor.h
-+++ b/include/monitor/monitor.h
-@@ -10,9 +10,6 @@
- #define TYPE_MONITOR "monitor"
- OBJECT_DECLARE_TYPE(Monitor, MonitorClass, MONITOR);
- 
--#define TYPE_MONITOR_HMP "monitor-hmp"
--OBJECT_DECLARE_TYPE(MonitorHMP, MonitorHMPClass, MONITOR_HMP);
--
- #define TYPE_MONITOR_QMP "monitor-qmp"
- OBJECT_DECLARE_TYPE(MonitorQMP, MonitorQMPClass, MONITOR_QMP);
- 
-@@ -30,8 +27,6 @@ void monitor_init_globals_core(void);
- char *monitor_compat_id(void);
- void monitor_new_qmp(const char *id, const char *chardev_id,
-                      bool pretty, Error **errp);
--void monitor_new_hmp(const char *id, const char *chardev_id,
--                     bool use_readline, Error **errp);
- int monitor_new(MonitorOptions *opts, bool allow_hmp, Error **errp);
- int monitor_new_opts(QemuOpts *opts, Error **errp);
- void monitor_cleanup(void);
-@@ -43,28 +38,15 @@ int monitor_get_fd(Monitor *mon, const char *fdname, Error **errp);
- int monitor_fd_param(Monitor *mon, const char *fdname, Error **errp);
- 
- int monitor_puts(Monitor *mon, const char *str);
--int monitor_vprintf(Monitor *mon, const char *fmt, va_list ap)
--    G_GNUC_PRINTF(2, 0);
--int monitor_printf(Monitor *mon, const char *fmt, ...) G_GNUC_PRINTF(2, 3);
--void monitor_printc(Monitor *mon, int ch);
- void monitor_flush(Monitor *mon);
- int monitor_get_cpu_index(Monitor *mon);
- 
- int monitor_puts_locked(Monitor *mon, const char *str);
- void monitor_flush_locked(Monitor *mon);
- 
--void monitor_read_command(MonitorHMP *hmp, int show_prompt);
--int monitor_read_password(MonitorHMP *hmp, ReadLineFunc *readline_func,
--                          void *opaque);
--
- AddfdInfo *monitor_fdset_add_fd(int fd, bool has_fdset_id, int64_t fdset_id,
-                                 const char *opaque, Error **errp);
- int monitor_fdset_dup_fd_add(int64_t fdset_id, int flags, Error **errp);
- void monitor_fdset_dup_fd_remove(int dup_fd);
- 
--void monitor_register_hmp(const char *name, bool info,
--                          void (*cmd)(Monitor *mon, const QDict *qdict));
--void monitor_register_hmp_info_hrt(const char *name,
--                                   HumanReadableText *(*handler)(Error **errp));
--
- #endif /* MONITOR_H */
-diff --git a/monitor/hmp.c b/monitor/hmp.c
-index 8134dfaad4bb..b4d05d47c4bf 100644
---- a/monitor/hmp.c
-+++ b/monitor/hmp.c
-@@ -136,7 +136,7 @@ static void monitor_command_cb(void *opaque, const char *cmdline,
-     monitor_resume(&hmp->parent_obj);
+@@ -101,9 +101,8 @@ abort:
+     qemu_xen_xs_transaction_end(xenbus->xsh, tid, true);
  }
  
--void monitor_read_command(MonitorHMP *hmp, int show_prompt)
-+void monitor_hmp_read_command(MonitorHMP *hmp, int show_prompt)
+-static void xen_bus_print_dev(Monitor *mon, DeviceState *dev, int indent)
++static void xen_bus_print_dev(MonitorHMP *hmp, DeviceState *dev, int indent)
  {
-     if (!hmp->rs) {
-         return;
-@@ -148,8 +148,8 @@ void monitor_read_command(MonitorHMP *hmp, int show_prompt)
+-    MonitorHMP *hmp = MONITOR_HMP(mon);
+     XenDevice *xendev = XEN_DEVICE(dev);
+ 
+     monitor_hmp_printf(hmp, "%*sname = '%s' frontend_id = %u\n",
+diff --git a/include/hw/core/qdev.h b/include/hw/core/qdev.h
+index 37f7d3355193..1391dc060caf 100644
+--- a/include/hw/core/qdev.h
++++ b/include/hw/core/qdev.h
+@@ -10,6 +10,7 @@
+ #include "qom/object.h"
+ #include "hw/core/hotplug.h"
+ #include "hw/core/resettable.h"
++#include "monitor/hmp.h"
+ 
+ /**
+  * DOC: The QEMU Device API
+@@ -323,7 +324,7 @@ struct BusClass {
+     ObjectClass parent_class;
+ 
+     /* FIXME first arg should be BusState */
+-    void (*print_dev)(Monitor *mon, DeviceState *dev, int indent);
++    void (*print_dev)(MonitorHMP *mon, DeviceState *dev, int indent);
+     /*
+      * Return a newly allocated string containing the path of the
+      * device on this bus.
+diff --git a/system/qdev-monitor.c b/system/qdev-monitor.c
+index 3860ada2a237..13ac9f8f3be1 100644
+--- a/system/qdev-monitor.c
++++ b/system/qdev-monitor.c
+@@ -790,18 +790,17 @@ static void qdev_print_props(MonitorHMP *hmp, DeviceState *dev, DeviceClass *dc,
      }
  }
  
--int monitor_read_password(MonitorHMP *hmp, ReadLineFunc *readline_func,
--                          void *opaque)
-+int monitor_hmp_read_password(MonitorHMP *hmp, ReadLineFunc *readline_func,
-+                              void *opaque)
+-static void bus_print_dev(BusState *bus, Monitor *mon, DeviceState *dev, int indent)
++static void bus_print_dev(BusState *bus, MonitorHMP *hmp, DeviceState *dev, int indent)
  {
-     if (hmp->rs) {
-         readline_start(hmp->rs, "Password: ", 1, readline_func, opaque);
-@@ -1647,7 +1647,7 @@ static void monitor_hmp_complete(UserCreatable *uc, Error **errp)
-                                     monitor_readline_flush,
-                                     hmp,
-                                     monitor_find_completion);
--            monitor_read_command(hmp, 0);
-+            monitor_hmp_read_command(hmp, 0);
-         }
+     BusClass *bc = BUS_GET_CLASS(bus);
  
-         qemu_chr_fe_set_handlers(&hmp->parent_obj.chr,
-diff --git a/monitor/monitor-internal.h b/monitor/monitor-internal.h
-index fdeeeb853636..ee9ba0c8231e 100644
---- a/monitor/monitor-internal.h
-+++ b/monitor/monitor-internal.h
-@@ -27,6 +27,7 @@
- 
- #include "chardev/char-fe.h"
- #include "monitor/monitor.h"
-+#include "monitor/hmp.h"
- #include "qapi/qapi-emit-events.h"
- #include "qapi/qapi-types-control.h"
- #include "qapi/qapi-types-qom.h"
-diff --git a/net/slirp.c b/net/slirp.c
-index 517dd23be14b..9bf09a2c8bc9 100644
---- a/net/slirp.c
-+++ b/net/slirp.c
-@@ -36,6 +36,7 @@
- #include "clients.h"
- #include "hub.h"
- #include "monitor/monitor.h"
-+#include "monitor/hmp.h"
- #include "qemu/error-report.h"
- #include "qemu/sockets.h"
- #include <libslirp.h>
-diff --git a/stubs/monitor-core.c b/stubs/monitor-core.c
-index a7c32297c90a..b0c7002bd406 100644
---- a/stubs/monitor-core.c
-+++ b/stubs/monitor-core.c
-@@ -1,5 +1,6 @@
- #include "qemu/osdep.h"
- #include "monitor/monitor.h"
-+#include "monitor/hmp.h"
- #include "qapi/qapi-emit-events.h"
- 
- Monitor *monitor_cur(void)
-diff --git a/stubs/monitor-internal.c b/stubs/monitor-internal.c
-index 731fad221ecc..6f69f1f14ae4 100644
---- a/stubs/monitor-internal.c
-+++ b/stubs/monitor-internal.c
-@@ -1,6 +1,6 @@
- #include "qemu/osdep.h"
- #include "qapi/error.h"
--#include "monitor/monitor.h"
-+#include "monitor/hmp.h"
- 
- int monitor_get_fd(Monitor *mon, const char *name, Error **errp)
- {
-diff --git a/target/rx/disas.c b/target/rx/disas.c
-index 67b932882914..0eb2ee6f4507 100644
---- a/target/rx/disas.c
-+++ b/target/rx/disas.c
-@@ -19,6 +19,7 @@
- #include "qemu/osdep.h"
- #include "disas/dis-asm.h"
- #include "qemu/bitops.h"
-+#include "monitor/hmp.h"
- #include "cpu.h"
- 
- typedef struct DisasContext {
-diff --git a/tests/unit/test-util-sockets.c b/tests/unit/test-util-sockets.c
-index ab3f39c3efb5..b2a884529598 100644
---- a/tests/unit/test-util-sockets.c
-+++ b/tests/unit/test-util-sockets.c
-@@ -24,6 +24,7 @@
- #include "qapi/error.h"
- #include "socket-helpers.h"
- #include "monitor/monitor.h"
-+#include "monitor/hmp.h"
- 
- static void test_fd_is_socket_bad(void)
- {
-diff --git a/tools/qemu-vnc/stubs.c b/tools/qemu-vnc/stubs.c
-index 1c82d8cff430..26597fefaa99 100644
---- a/tools/qemu-vnc/stubs.c
-+++ b/tools/qemu-vnc/stubs.c
-@@ -9,6 +9,7 @@
- #include "system/runstate.h"
- #include "hw/core/qdev.h"
- #include "monitor/monitor.h"
-+#include "monitor/hmp.h"
- #include "migration/vmstate.h"
- 
- bool runstate_is_running(void)
-diff --git a/trace/trace-hmp-cmds.c b/trace/trace-hmp-cmds.c
-index 390173095cff..c8f0133abecf 100644
---- a/trace/trace-hmp-cmds.c
-+++ b/trace/trace-hmp-cmds.c
-@@ -25,7 +25,6 @@
- #include "qemu/osdep.h"
- #include "monitor/hmp.h"
- #include "monitor/hmp-completion.h"
--#include "monitor/monitor.h"
- #include "qapi/error.h"
- #include "qapi/qapi-commands-trace.h"
- #include "qobject/qdict.h"
-diff --git a/ui/ui-hmp-cmds.c b/ui/ui-hmp-cmds.c
-index 806a7bece7cb..4ef459490ba2 100644
---- a/ui/ui-hmp-cmds.c
-+++ b/ui/ui-hmp-cmds.c
-@@ -327,7 +327,7 @@ static void hmp_change_read_arg(void *opaque, const char *password,
-                                 void *readline_opaque)
- {
-     qmp_change_vnc_password(password, NULL);
--    monitor_read_command(opaque, 1);
-+    monitor_hmp_read_command(opaque, 1);
+     if (bc->print_dev) {
+-        bc->print_dev(mon, dev, indent);
++        bc->print_dev(hmp, dev, indent);
+     }
  }
  
- void hmp_change_vnc(Monitor *mon, const char *device, const char *target,
-@@ -344,7 +344,7 @@ void hmp_change_vnc(Monitor *mon, const char *device, const char *target,
-     }
-     if (!arg) {
-         MonitorHMP *hmp = MONITOR_HMP(mon);
--        monitor_read_password(hmp, hmp_change_read_arg, NULL);
-+        monitor_hmp_read_password(hmp, hmp_change_read_arg, NULL);
-     } else {
-         qmp_change_vnc_password(arg, errp);
-     }
-diff --git a/util/error-report.c b/util/error-report.c
-index f333af9249b9..aaa15bc79827 100644
---- a/util/error-report.c
-+++ b/util/error-report.c
-@@ -11,7 +11,7 @@
-  */
+ static void qdev_print(MonitorHMP *hmp, DeviceState *dev, int indent)
+ {
+-    Monitor *mon = MONITOR(hmp);
+     ObjectClass *class;
+     NamedGPIOList *ngl;
+     NamedClockList *ncl;
+@@ -828,7 +827,7 @@ static void qdev_print(MonitorHMP *hmp, DeviceState *dev, int indent)
+         qdev_print_props(hmp, dev, DEVICE_CLASS(class), indent);
+         class = object_class_get_parent(class);
+     } while (class != object_class_by_name(TYPE_DEVICE));
+-    bus_print_dev(dev->parent_bus, mon, dev, indent);
++    bus_print_dev(dev->parent_bus, hmp, dev, indent);
+ }
  
- #include "qemu/osdep.h"
--#include "monitor/monitor.h"
-+#include "monitor/hmp.h"
- #include "qemu/error-report.h"
- 
- /*
-diff --git a/util/qemu-print.c b/util/qemu-print.c
-index 7b9591035e57..a2d1f0244168 100644
---- a/util/qemu-print.c
-+++ b/util/qemu-print.c
-@@ -12,6 +12,7 @@
- 
- #include "qemu/osdep.h"
- #include "monitor/monitor.h"
-+#include "monitor/hmp.h"
- #include "qemu/qemu-print.h"
- 
- /*
+ static void qbus_print(MonitorHMP *hmp, BusState *bus, int indent, bool details)
 
 -- 
 2.55.0.543.g5ebe2ebe4ea8
