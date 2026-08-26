@@ -4,44 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E92CCC5DF97
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2026 11:49:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1399820.1635788 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1BB1C61DBD
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2026 11:50:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1399829.1635796 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzC8H-0008Ra-3V; Wed, 26 Aug 2026 11:49:29 +0000
+	id 1wzC9A-0001U7-Do; Wed, 26 Aug 2026 11:50:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1399820.1635788; Wed, 26 Aug 2026 11:49:29 +0000
+Received: by outflank-mailman (output) from mailman id 1399829.1635796; Wed, 26 Aug 2026 11:50:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzC8G-0008RT-WE; Wed, 26 Aug 2026 11:49:29 +0000
-Received: by outflank-mailman (input) for mailman id 1399820;
- Wed, 26 Aug 2026 11:49:27 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1wzC9A-0001U0-BC; Wed, 26 Aug 2026 11:50:24 +0000
+Received: by outflank-mailman (input) for mailman id 1399829;
+ Wed, 26 Aug 2026 11:50:24 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wzC8F-0008QJ-QC
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 11:49:27 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1wzC99-0001Tu-PL
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 11:50:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzC8E-00H6sA-E1
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 13:49:26 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wzC99-008Fuj-2T
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 13:50:23 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a8ed2c2-bab6-0a2a0a5309dd-0a2a4509bd18-10
- for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 13:49:26 +0200
-Received: from [209.85.208.43] (helo=mail-ed1-f43.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a8ed2c6-be1a-0a2a45090019-d155d02bd5f6-3
- for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 13:49:26 +0200
-Received: by mail-ed1-f43.google.com with SMTP id
- 4fb4d7f45d1cf-6a18e24ad25so1134635a12.1
- for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 04:49:26 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a5deac24f1sm3779661a12.23.2026.08.26.04.49.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Aug 2026 04:49:24 -0700 (PDT)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a8ed2f9-8faa-0a2a0a5109dd-0a2a450191f4-18
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 13:50:22 +0200
+Received: from [52.101.56.67]
+ (helo=BN1PR04CU002.outbound.protection.outlook.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a8ed2fd-5984-0a2a45010019-346538433dab-3
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 13:50:22 +0200
+Received: from BY1P220CA0015.NAMP220.PROD.OUTLOOK.COM (2603:10b6:a03:5c3::10)
+ by LV3PR12MB9168.namprd12.prod.outlook.com (2603:10b6:408:19a::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.6; Wed, 26 Aug
+ 2026 11:50:18 +0000
+Received: from MWH0EPF000A6730.namprd04.prod.outlook.com
+ (2603:10b6:a03:5c3:cafe::20) by BY1P220CA0015.outlook.office365.com
+ (2603:10b6:a03:5c3::10) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.10 via Frontend Transport; Wed,
+ 26 Aug 2026 11:50:17 +0000
+Received: from satlexmb07.amd.com (149.199.90.133) by
+ MWH0EPF000A6730.mail.protection.outlook.com (10.167.249.22) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.360.3 via Frontend Transport; Wed, 26 Aug 2026 11:50:17 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Wed, 26 Aug
+ 2026 06:50:11 -0500
+Received: from [10.252.145.116] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.45 via Frontend
+ Transport; Wed, 26 Aug 2026 06:50:07 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,297 +67,150 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787744966; x=1788349766; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=Ss+YAR07JAD2fP8Xw057WPMldxuT1tgMd9itna7uDYs=;
-        b=S+nmjldk/NDQYpCuR+yofeIGw0OFY3vZFArRTjUlOgDHVPJHg0UemMmFHPkZfYlrm3
-         O7v/vZfxEXgycXGtlER7daPpPRsyGD9ZzaLOCLLVkKNv1BJsdodn6NaO1Md80OKlraVc
-         OZxBg4ni0YBz79Sd96DunC01D++gy+7nt8NIX140NRzCZNQ2pPJG/HbSuDr0eyTmnZvE
-         ti+bAiz2zpE1tfsYFEKbu6hcOb5l2/sNDbyRlV9LPaD2mJfbVeJtxc33DCcpn7YEi2BF
-         2QZu04ItCzfY0GN1XA6/Qm+LVIExlV92UikmBNRcRkLX5DNCe3F5UuTO9UE44JyOhbv2
-         93TQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787744966; x=1788349766;
-        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Ss+YAR07JAD2fP8Xw057WPMldxuT1tgMd9itna7uDYs=;
-        b=BS1Y1gOfHIRVyC/3zbp9ZkEG152oVVRMoBIRDHioIneBn7NUrLmQW/tu33Z/fdM6HB
-         mF0taakQ3WoEKg36YxbESOG2ilrZbyF5QhnfapvDsRuWNQHh1iteBlVXrNnav1yW2BGs
-         iiWJVRfCZS9LpMQtsHblJwHSL7rswYjOhoe84tRQwvZK2W9yuOlygNzArznw5ld8c1Xb
-         tqXOhgJy6mzskNfjePYregQPy96SmC+BrjirrNHzphNGEQHIeogxxIjmFwXRjI2JfWNl
-         C57bh4ZbgEb6/LgeYpS3VgR1L2O91VkYI7rwwqQrx02XKnpePh22wh3RrxZ/AjXuOKYH
-         cq8A==
-X-Gm-Message-State: AFuF++kMlbqdnd/BNxNuKqGgGp9uA+N4zoSY0OPr7Cjtck2yuesQofh3
-	AJu20vdVwqrYOpghPEyrn9i9A1eF5W/QVKl006usrVz2URbxrNAQDJJIoeUZE1sSOvJj39WG8Ze
-	GEZUGgw==
-X-Gm-Gg: AR+sD12LZIdDR07uFsCeUBUTJFufHi06MZoNiNosjdaXZmsLg/a52fwQrp4sNFb2bSU
-	mejFw4kwlUVGgjb3YIWD/l3js50MngGsCgdxLhoWMAYX8V6Ak2mQHoRcfoZMvNazCE7mKOBjZqg
-	0GhvOTykCF4y7tcj9YPWnbZqPL2gFK9ZeyZPIZ4bGZdDycd5IlCBG7H13RkC33fH3hDFDTiCID9
-	75BG9nibs79mfNRsa93TLoaVmGzYFmdJhYRuNaP2wESUnzOOz+Fjw6qlfzDNo5lrt0G4SE5jmzR
-	danr2kPUUd25RiWzcYTHGE9FZ1gR2u4v6FLOPpmH1/Iw5dkBRKxKnIqE1Iz/kFyvFHS/fqwWGqz
-	VbHOov4SPQz1v4cR06dLz2M6w8xktLrwlPGw8+WIJsOHblJAdwymPwxpcIkOsGgedDyTWnqZ8RS
-	ci620DybebwQWOihzb7hH8kiJCj1gqeDGu3+KsUbA0QL/dx5/0RtaK1Y5zhSwK+U9FelpJtFSVm
-	vhGrbVlr30ZNoZj8Fz5evb+sxb5wexUVQuA3oN/4GQCAD8N4QAKN3HnTziDiBLp
-X-Received: by 2002:a05:6402:210d:b0:6a4:2ee:5c6d with SMTP id 4fb4d7f45d1cf-6a5df5e3966mr8005779a12.6.1787744965646;
-        Wed, 26 Aug 2026 04:49:25 -0700 (PDT)
-Message-ID: <53e4e1d5-ccb6-4400-b440-7ec9a7273ac8@suse.com>
-Date: Wed, 26 Aug 2026 13:49:23 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mNpeF+1UZ+MkdshT+Gl3+QQeY+rjpiGAKu7OF0uv0QoKTyOLTOizgLnVWKjOJgvpqnECPhbe+6ydDGwg19QIB9aAc7uaNAzi/G1lrxlyCoY+WaedFgYTDQ263ZoC5yWxmHJiOLI/ug3mwGzmYy0EKB00uKb/wYb93qke5FxRfgQHhG8skljB+htAnd7QtRl/lQ3RQz7zB82UlBp72SMv89bTvXpLw+xYgvO8J3baDV2yqmbqGvLNz/31DxqJI6NdRMZ5O8uJeOLfCh/Cq/zDYol53GLcis4qcseGC7L6aKmRsbdQWYygFQo97/EY8qoxzQeEOdrSCQhcyMXONQUt/Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=DeAf8T8FMc5gDq2Yy7gMjj4jkKJy6FbTP5bBEtXmlWY=;
+ b=P44Y+rsydO5+01gc5Fy6ArCfa4cucDBWcIsQSTevSJJtVKTTLFZ6eQW5BBBBWDQW6EDxqYpg/7426i/moLQZgInXdrev25zQG5tDQeVYq2Pe7V9JGV+EVv3iluxUYnXw6BL+zP76VBb77LJVlWwh5iBNnmQZ7ProWrWBIrDe8EO2HT8ETEJ7vn6EmoNmiGgKhI1wopdUJvpaaMAf50qgE6nwRZAaHcb2zN0hjTiMv1Xz0T1+Bq5bSrSvKJmKFwQYipsoa6beYQ2hNSI2wYBCzTbxvrIsST+rhGB7vK6IV2pKpSEhD64rSPb+N5wEYGezZPOFJngAds6ktkJ72lzWmg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 149.199.90.133) smtp.rcpttodomain=vates.tech smtp.mailfrom=amd.com;
+ dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DeAf8T8FMc5gDq2Yy7gMjj4jkKJy6FbTP5bBEtXmlWY=;
+ b=chJC0EPnaXFcMGgAasCDVnqdSDtP9G9Jy5B53vIfc5HVB134EThKT0loSp8VooQBy9kbEiK1GuujOgDWVDgkWKinczQaW/t56/bjXlH5D4tSCHgPFJQkj3SPIwi0gZn/FCI2sTa9frJBvuSaoj571hqrnRSr+rLXRNaYsZjNHcw=
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is
+ 149.199.90.133) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=amd.com;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ amd.com discourages use of 149.199.90.133 as permitted sender)
+Message-ID: <850183ed-f297-4be2-9c68-ab8be0080030@amd.com>
+Date: Wed, 26 Aug 2026 13:50:02 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 3/6] tools/arm: choose GIC version explicitly instead
+ of relying on GIC_NATIVE
+To: Julian Vetter <julian.vetter@vates.tech>, <xen-devel@lists.xenproject.org>
+CC: Anthony PERARD <anthony.perard@vates.tech>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>, Julien Grall
+	<julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>, Juergen Gross <jgross@suse.com>,
+	Andrii Sultanov <andriy.sultanov@vates.tech>, Guillaume Thouvenin
+	<guillaume.thouvenin@vates.tech>, =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+	<marmarek@invisiblethingslab.com>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Oleksii Moisieiev <oleksii_moisieiev@epam.com>, Timothy Pearson
+	<tpearson@raptorengineering.com>, Alistair Francis
+	<alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>, Oleksii
+ Kurochko <oleksii.kurochko@gmail.com>, Teddy Astie <teddy.astie@vates.tech>
+References: <20260820123805.2033085-1-julian.vetter@vates.tech>
+ <20260820124016.2033421-1-julian.vetter@vates.tech>
+ <1787229624.8631fc262581453bbf619ec5b2062170.1a01f2fd7e5000c4f3@vates.tech>
+From: "Orzel, Michal" <michal.orzel@amd.com>
 Content-Language: en-US
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] x86: replace a few more is_hvm_*() by is_pv_*()
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <1787229624.8631fc262581453bbf619ec5b2062170.1a01f2fd7e5000c4f3@vates.tech>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1787744966-FD469034-A51DA306/0/0
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000A6730:EE_|LV3PR12MB9168:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7b2fd55e-bcd5-4282-d36e-08df036832de
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700016|23010399003|82310400026|1800799024|7416014|376014|56012099006|10067099003|6133799003|18002099003|22082099003|11063799006|4143699003;
+X-Microsoft-Antispam-Message-Info:
+	tTCDZ+T6+Z86kHfwXGyGTAuuZvmKh1p86sFA8Zu4fwrKXK+U3vwzGHNj/5BGI7T0XrSkj6sOhD1jPfqDrszeVv+kCqiZggLV9ZrlfEmDTiDhhC8iGliGBSLV4xLHSuqZfrfsUZ/gdbH6vCPpAOwsJtraknBcUpvmroEHQ2TC2H2H0gZx8rAhMfkkiLYt+PWUMEkHmRR+yJy00z+pIPvpF2/ORe/k7meXpohaE8PE+whV8TXeY44fgU/dKpb3hfq7bavsbdohCDrmCetAaUx4//77D+7R+Y4kBNAKC8U25WjuHqwWiP0fAs86DJTjs4p7ZNijce5gNgIOwa5Qgk8cka43lyhNe1W7RH7psaND5xvuevrm6cDejTQwrybYPSfooXRR2S+VFLc4NkNyo5QRPioN81oR9XiwigRf9h6rBqKEbMVHz5ZEwvPcuvGrGl6I6lmFHC/deFScjxJBVwUzJQym5FsLWSQtejebj4tKdUCYRJIWzothrezeI0at3s8qkQUKIdsyL4JYzkwcKeSPwUWGCd+WXX/oav8UWmfvSk9tj44K4rM+j2WutswfaiQPLNlEfqp1j4uwxEjtn5C8QxBZee7Tt+1TtB8XcKwdGh7CaEylDeUXm7fgEeDWH2aNr97K/UNHwhYZ4m4OUNQWzjlCaT2v8lzxmF0gGU4AaupZCY8p8gu8Ev2fzRdOsDHDJatr6k6gffWq1/E/utbbgg==
+X-Forefront-Antispam-Report:
+	CIP:149.199.90.133;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:unknown-90-133.xilinx.com;CAT:NONE;SFS:(13230040)(36860700016)(23010399003)(82310400026)(1800799024)(7416014)(376014)(56012099006)(10067099003)(6133799003)(18002099003)(22082099003)(11063799006)(4143699003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	wgQkW+lGr+aSZ2KlX0w5viZFYwm4QNtjzriltWSV+JGLnrb2JP1j49uuDO2FOdddIj5soXt0bJjQnuV69dHLhtypIzlJeOVBOZHEsZwuDsVP6PqVBljGAq0jtBmIEM0Q74dYJW86Zq8fSMjjFPKBjMZXRn79y4xAxETC8IPrqYDD49tGOmhhiAI+nBptycw5XOc+nKjXW6MkX4Ckz0XMv+uksT4ezRzVM/Rs3dJpXnwDSPzj0QC1W6DcLNDlN9FpiWwg9+Yegi3eutUpD35A+TBXqChGwOFGTV2sBkdhPtKXEGN1zsuhEEX90iBOvXMGIpO6EDxut/jdtxFtwZXbzg4waAlGmvdpXBKyH6WKiaR61vup72O5gCDphw1SHNq2uVcCBNOqom7McO/Jxmme2lvbfU1fSsK3OeZuMZd1AME3pTrSLERjhtJroZJyApVr
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2026 11:50:17.3538
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7b2fd55e-bcd5-4282-d36e-08df036832de
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[149.199.90.133];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	MWH0EPF000A6730.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR12MB9168
+X-purgate-ID: tlsNG-d62444/1787745022-1F46D757-1A8A4247/0/0
 X-purgate-type: clean
-X-purgate-size: 7657
+X-purgate-size: 2755
 
-Along the lines of [1]. Both (respectively negated) can be used
-interchangeably when no system domains are (potentially) involved.
 
-For gtime_to_gtsc():
-- with !is_hvm_domain() and HVM=n the conditional but not its body would
-  disappear,
-- with is_pv_domain() and PV=n, the conditional and its body will
-  disappear.
-Then mirror the change to gtsc_to_gtime() for consistency.
 
-For mem_sharing_control() vm_event_toggle_singlestep(), as VM_EVENT /
-MEM_SHARING depend on HVM anyway, the !is_hvm() form can't ever become
-compile-time constant, while the is_pv() form can. Same for PoD code,
-HVM-specific pieces of shadow/{common,multi}.c, and everything in
-shadow/hvm.c.
+On 20-Aug-26 14:40, Julian Vetter wrote:
+> XEN_DOMCTL_CONFIG_GIC_NATIVE lets the toolstack ask Xen to silently
+> resolve the domain's GIC version to whatever the host hardware has. Xen
+> then writes the resolved value back into the same in/out
+> xen_arch_domainconfig the toolstack used as input, which is the kind of
+> API abuse we're trying to get rid of. The struct passed to createdomain
+> should only be an input parameter.
+> 
+> Move the "pick the best available GIC version" decision to the
+> toolstack, using the XEN_SYSCTL_PHYSCAP_ARM_GIC_V2/V3 capability bits
+> already exposed via XEN_SYSCTL_physinfo:
+> 
+>  * libxl__arch_domain_build_info_setdefault() resolves
+>    LIBXL_GIC_VERSION_DEFAULT to v3 if available, else v2, else fails,
+`LIBXL_GIC_VERSION_DEFAULT` should be renamed to `LIBXL_GIC_VERSION_NONE` to
+denote that the user did not set any particular version. With your change there
+is no default and `libxl__arch_domain_build_info_setdefault()` resolves it
+before anything else can see it.
 
-[1] https://lists.xen.org/archives/html/xen-devel/2026-08/msg01156.html
+>    before the config is built.
+>  * The Python xc.domain_create() binding does the same via a call to
+>    xc_physinfo().
+>  * libxl__arch_domain_prepare_config() therefore only ever sees a
+>    concrete v2/v3 request and just validates it. The GIC_NATIVE case is
+>    dropped since setdefault() always resolves it first.
+> 
+> This guarantees no toolstack path can still produce
+> XEN_DOMCTL_CONFIG_GIC_NATIVE, in preparation for removing it from the
+> Xen side and from the ABI entirely.
+> 
+> Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
+> ---
+> Changes in v4:
+> - Fix a missing closing bracket in arch_capabilities_arm_has()
+> ---
+>  .../include/xen-tools/arm-arch-capabilities.h | 17 ++++++++++++++++
+>  tools/libs/light/libxl_arm.c                  | 17 +++++++++++++---
+>  tools/python/xen/lowlevel/xc/xc.c             | 20 ++++++++++++++++++-
+You need to update the documentation (i.e. xl.cfg) too.
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-Pretty likely there are more instances of this pattern that could do with
-using the opposite predicate. However, e.g. further is_{hvm,pv}() uses in
-time.c look to be asking for a little more trickery to benefit both PV=n
-and HVM=n (not at the same time, of course).
+>  3 files changed, 50 insertions(+), 4 deletions(-)
+> 
+> diff --git a/tools/include/xen-tools/arm-arch-capabilities.h b/tools/include/xen-tools/arm-arch-capabilities.h
+> index 4aa4c6c34a..ce1b3bdd71 100644
+> --- a/tools/include/xen-tools/arm-arch-capabilities.h
+> +++ b/tools/include/xen-tools/arm-arch-capabilities.h
+> @@ -6,6 +6,7 @@
+>  #ifndef ARM_ARCH_CAPABILITIES_H
+>  #define ARM_ARCH_CAPABILITIES_H
+>  
+> +#include <stdbool.h>
+>  #include <stdint.h>
+>  #include <xen/sysctl.h>
+>  
+> @@ -25,4 +26,20 @@ unsigned int arch_capabilities_arm_sve(unsigned int arch_capabilities)
+>  #endif
+>  }
+>  
+> +/*
+> + * Generic test for any single-bit XEN_SYSCTL_PHYSCAP_ARM_* capability, e.g.
+What makes the implementation single-bit?
 
-As to system domains, and as previously pointed out: is_pv_domain() is odd
-there for the PV=n case. With PV=y it returns true there, while with PV=n
-it yields false.
+Otherwise, LGTM.
 
---- a/xen/arch/x86/mm/mem_sharing.c
-+++ b/xen/arch/x86/mm/mem_sharing.c
-@@ -1509,7 +1509,7 @@ static inline int mem_sharing_control(st
- {
-     if ( enable )
-     {
--        if ( unlikely(!is_hvm_domain(d) || !cpu_has_vmx) )
-+        if ( unlikely(is_pv_domain(d) || !cpu_has_vmx) )
-             return -EOPNOTSUPP;
- 
-         if ( unlikely(!hap_enabled(d)) )
---- a/xen/arch/x86/mm/p2m-pod.c
-+++ b/xen/arch/x86/mm/p2m-pod.c
-@@ -353,7 +353,7 @@ void p2m_pod_get_mem_target(const struct
- {
-     struct p2m_domain *p2m = p2m_get_hostp2m(d);
- 
--    ASSERT(is_hvm_domain(d));
-+    ASSERT(!is_pv_domain(d));
- 
-     pod_lock(p2m);
-     lock_page_alloc(p2m);
-@@ -1432,7 +1432,7 @@ bool p2m_pod_active(const struct domain
-     struct p2m_domain *p2m;
-     bool res;
- 
--    if ( !is_hvm_domain(d) )
-+    if ( is_pv_domain(d) )
-         return false;
- 
-     p2m = p2m_get_hostp2m(d);
---- a/xen/arch/x86/mm/shadow/common.c
-+++ b/xen/arch/x86/mm/shadow/common.c
-@@ -171,7 +171,7 @@ void shadow_promote(struct domain *d, mf
-     {
-         page->shadow_flags = 0;
- #ifdef CONFIG_HVM
--        if ( is_hvm_domain(d) )
-+        if ( !is_pv_domain(d) )
-             page->pagetable_dying = false;
- #endif
-     }
-@@ -1520,7 +1520,7 @@ int sh_remove_all_mappings(struct domain
-                    mfn_x(gmfn), gfn_x(gfn),
-                    page->count_info, page->u.inuse.type_info,
-                    is_special_page(page),
--                   (is_hvm_domain(d) && is_ioreq_server_page(d, page)));
-+                   (!is_pv_domain(d) && is_ioreq_server_page(d, page)));
-     }
- 
-     paging_unlock(d);
-@@ -2318,7 +2318,7 @@ void shadow_teardown(struct domain *d, b
-     d->arch.paging.mode &= ~PG_log_dirty;
- 
- #ifdef CONFIG_HVM
--    if ( is_hvm_domain(d) && d->arch.hvm.dirty_vram.sh )
-+    if ( !is_pv_domain(d) && d->arch.hvm.dirty_vram.sh )
-     {
-         xfree(d->arch.hvm.dirty_vram.sh->sl1ma);
-         xfree(d->arch.hvm.dirty_vram.sh->dirty_bitmap);
---- a/xen/arch/x86/mm/shadow/hvm.c
-+++ b/xen/arch/x86/mm/shadow/hvm.c
-@@ -315,7 +315,7 @@ const struct x86_emulate_ops *shadow_ini
-     const struct vcpu *curr = current;
-     unsigned long addr;
- 
--    ASSERT(is_hvm_vcpu(curr));
-+    ASSERT(!is_pv_vcpu(curr));
- 
-     memset(sh_ctxt, 0, sizeof(*sh_ctxt));
- 
-@@ -361,7 +361,7 @@ void shadow_continue_emulation(struct sh
- {
-     unsigned long addr, diff;
- 
--    ASSERT(is_hvm_vcpu(current));
-+    ASSERT(!is_pv_vcpu(current));
- 
-     /*
-      * We don't refetch the segment bases, because we don't emulate
-@@ -1217,7 +1217,7 @@ void shadow_vram_get_mfn(mfn_t mfn, unsi
-     unsigned long gfn;
-     struct sh_dirty_vram *dirty_vram = d->arch.hvm.dirty_vram.sh;
- 
--    ASSERT(is_hvm_domain(d));
-+    ASSERT(!is_pv_domain(d));
- 
-     if ( !dirty_vram /* tracking disabled? */ ||
-          !(l1f & _PAGE_RW) /* read-only mapping? */ ||
-@@ -1247,7 +1247,7 @@ void shadow_vram_put_mfn(mfn_t mfn, unsi
-     unsigned long gfn;
-     struct sh_dirty_vram *dirty_vram = d->arch.hvm.dirty_vram.sh;
- 
--    ASSERT(is_hvm_domain(d));
-+    ASSERT(!is_pv_domain(d));
- 
-     if ( !dirty_vram /* tracking disabled? */ ||
-          !(l1f & _PAGE_RW) /* read-only mapping? */ ||
---- a/xen/arch/x86/mm/shadow/multi.c
-+++ b/xen/arch/x86/mm/shadow/multi.c
-@@ -601,7 +601,7 @@ _sh_propagate(struct vcpu *v,
-         sflags &= ~_PAGE_RW;
- 
- #ifdef CONFIG_HVM
--    if ( unlikely(level == 1) && is_hvm_domain(d) )
-+    if ( unlikely(level == 1) && !is_pv_domain(d) )
-     {
-         struct sh_dirty_vram *dirty_vram = d->arch.hvm.dirty_vram.sh;
- 
-@@ -2240,7 +2240,7 @@ static int cf_check sh_page_fault(
- #ifdef CONFIG_HVM
-             /* Magic MMIO marker: extract gfn for MMIO address */
-             ASSERT(sh_l1e_is_mmio(sl1e));
--            ASSERT(is_hvm_vcpu(v));
-+            ASSERT(!is_pv_vcpu(v));
-             gpa = gfn_to_gaddr(sh_l1e_mmio_get_gfn(sl1e)) | (va & ~PAGE_MASK);
-             perfc_incr(shadow_fault_fast_mmio);
-             SHADOW_PRINTK("fast path mmio %#"PRIpaddr"\n", gpa);
-@@ -2562,7 +2562,7 @@ static int cf_check sh_page_fault(
-     /* Need to hand off device-model MMIO to the device model */
-     if ( p2mt == p2m_mmio_dm )
-     {
--        ASSERT(is_hvm_vcpu(v));
-+        ASSERT(!is_pv_vcpu(v));
- 
-         sh_audit_gw(v, &gw);
-         gpa = guest_walk_to_gpa(&gw);
-@@ -2589,7 +2589,7 @@ static int cf_check sh_page_fault(
-      * CR0.WP is clear, we must emulate faulting supervisor writes to
-      * allow the guest to write through read-only PTEs.  Emulate if the
-      * fault was a non-user write to a present page.  */
--    if ( is_hvm_domain(d)
-+    if ( !is_pv_domain(d)
-          && unlikely(!hvm_wp_enabled(v))
-          && regs->error_code == (PFEC_write_access|PFEC_page_present)
-          && mfn_valid(gmfn) )
-@@ -3718,7 +3718,7 @@ static void cf_check sh_pagetable_dying(
-     unsigned long l3gfn;
-     mfn_t l3mfn;
- 
--    ASSERT(is_hvm_domain(d));
-+    ASSERT(!is_pv_domain(d));
- 
-     gcr3 = v->arch.hvm.guest_cr[3];
-     /* fast path: the pagetable belongs to the current context */
-@@ -3794,7 +3794,7 @@ static void cf_check sh_pagetable_dying(
-     mfn_t smfn, gmfn;
-     p2m_type_t p2mt;
- 
--    ASSERT(is_hvm_domain(d));
-+    ASSERT(!is_pv_domain(d));
- 
-     gmfn = get_gfn_query(d, _gfn(gpa >> PAGE_SHIFT), &p2mt);
-     paging_lock(d);
---- a/xen/arch/x86/time.c
-+++ b/xen/arch/x86/time.c
-@@ -2867,7 +2867,7 @@ custom_param("tsc", tsc_parse);
- 
- uint64_t gtime_to_gtsc(const struct domain *d, uint64_t time)
- {
--    if ( !is_hvm_domain(d) )
-+    if ( is_pv_domain(d) )
-     {
-         if ( time < d->arch.vtsc_offset )
-             return -scale_delta(d->arch.vtsc_offset - time,
-@@ -2880,7 +2880,7 @@ uint64_t gtime_to_gtsc(const struct doma
- #ifdef CONFIG_HVM
- uint64_t gtsc_to_gtime(const struct domain *d, uint64_t tsc)
- {
--    ASSERT(is_hvm_domain(d));
-+    ASSERT(!is_pv_domain(d));
-     return scale_delta(tsc, &d->arch.vtsc_to_ns);
- }
- #endif /* CONFIG_HVM */
---- a/xen/arch/x86/vm_event.c
-+++ b/xen/arch/x86/vm_event.c
-@@ -65,7 +65,7 @@ void vm_event_toggle_singlestep(struct d
-                          VM_EVENT_FLAG_FAST_SINGLESTEP)) )
-         return;
- 
--    if ( !is_hvm_domain(d) )
-+    if ( is_pv_domain(d) )
-         return;
- 
-     ASSERT(atomic_read(&v->vm_event_pause_count));
+~Michal
+
 
