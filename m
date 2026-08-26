@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 930EEC5DF97
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2026 06:15:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1399633.1635619 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF109C61DC2
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2026 06:33:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1399647.1635628 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wz6uG-0002Dx-Cd; Wed, 26 Aug 2026 06:14:40 +0000
+	id 1wz7Cc-00051a-PY; Wed, 26 Aug 2026 06:33:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1399633.1635619; Wed, 26 Aug 2026 06:14:40 +0000
+Received: by outflank-mailman (output) from mailman id 1399647.1635628; Wed, 26 Aug 2026 06:33:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wz6uG-0002Dq-9r; Wed, 26 Aug 2026 06:14:40 +0000
-Received: by outflank-mailman (input) for mailman id 1399633;
- Wed, 26 Aug 2026 06:14:39 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wz7Cc-00051S-Lq; Wed, 26 Aug 2026 06:33:38 +0000
+Received: by outflank-mailman (input) for mailman id 1399647;
+ Wed, 26 Aug 2026 06:33:37 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wz6uF-0002Di-5H
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 06:14:39 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wz7Cb-00051M-1M
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 06:33:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wz6uB-00Bxk9-Lc
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 08:14:35 +0200
+ id 1wz7Ca-00G6IR-8x
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 08:33:36 +0200
 Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a8e843b-bab6-0a2a0a5309dd-0a2a4507b616-48
- for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 08:14:35 +0200
-Received: from [209.85.208.42] (helo=mail-ed1-f42.google.com)
+ id 6a8e88b1-bab6-0a2a0a5309dd-0a2a4507c9aa-36
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 08:33:36 +0200
+Received: from [209.85.218.42] (helo=mail-ej1-f42.google.com)
  by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a8e844b-b4ea-0a2a45070019-d155d02ac0da-3
- for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 08:14:35 +0200
-Received: by mail-ed1-f42.google.com with SMTP id
- 4fb4d7f45d1cf-6a17211b9ecso1238691a12.2
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 23:14:35 -0700 (PDT)
+ id 6a8e88c0-b4ea-0a2a45070019-d155da2ad1d2-3
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 08:33:36 +0200
+Received: by mail-ej1-f42.google.com with SMTP id
+ a640c23a62f3a-c2055573c8cso75582466b.3
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 23:33:36 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a5deae9a75sm2448693a12.28.2026.08.25.23.14.33
+ a640c23a62f3a-c250a7303casm431017666b.25.2026.08.25.23.33.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Aug 2026 23:14:34 -0700 (PDT)
+ Tue, 25 Aug 2026 23:33:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,57 +55,54 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787724875; x=1788329675; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1787726016; x=1788330816; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=tiSCojhdiH2JeEvty2kEuMzpDUHyn8pRiRkSiqHcmFg=;
-        b=EYVqTbS7OkQBHT4B1no5eJbjUzGQyy6auRroHybF/OmEL7c2rErJJlluX2wTiTYfEI
-         SKSbWCilnZDcClyq8+i/aRUdFBbe0It4tZ3XrEhvgFd3tScW/1YBCiwFWS5DQKzJWddF
-         1lyKg9dLQyysEINrDOFbRSK0QUNO9FPSDJlWTNsRb1gMO8IvyPMVkWzhlhDmL5jqQHiu
-         0lC/q+Ncz6enS9vyhmH4X4rnC18aGdY6XNDYJz1pmXQSLeRSAPStu/5WrE58LDoMfQ47
-         aSo4vmrH3nUwg0kqTgvLcgspUroTD2WAV5r+WOX11D8iIawHT0fBfYjwLxKa6WYflwqq
-         a9wg==
+        bh=um4yUsDv8cKb/Tn8csIrcU7+wnb9hBIUF0Hp/FAFH7g=;
+        b=eN+VVzLHAXBQ7PwZ/XyNr1cjazx5E/qsEF6Wz3P8UY4JHkPhp7ZRFRyjabQmICzovz
+         QKAvOaDJHr2xrQqk4wWOdeE8bUtirONeFen8A1kWd36W5SRZOY0PHvIVRi+90J3hfwET
+         vDFBYSP4ZBOb70+lJr9n+0T6dPb/T8zao15dq29LlQKjATihW9rj6i1amTrBbNZDkjJK
+         OPgjbICjKnJeXfJgBZeHDA+ncAh9WfqBt5XZ07tPDqFADMOd5C64mWLzAEi3NXFUlsP6
+         1MKoXaFqU94sgk0gliRhM+G3CVgMJTk0c5xM1kEZQOCZasDdTmf/idGLhthdvzwrif6X
+         eiqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787724875; x=1788329675;
+        d=1e100.net; s=20251104; t=1787726016; x=1788330816;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=tiSCojhdiH2JeEvty2kEuMzpDUHyn8pRiRkSiqHcmFg=;
-        b=K7LDgNIsEeKAZhLArls/ocxqvy1PSalj3EjjU0utJLi0gMQtJ496N3bO6h5sOX891o
-         fGKm4e7XAmZRaL1rEq5YyFnO6Utu3eKNvSRdEPE+UXYvtP2gIR/vLAoUYXGT1zp+GlTu
-         8PQNIHymJ7fEuNl2JMaXIVOS7OsZAKqP1qoeGKxeyK0lTryOMK8NIvnYflqXtJai3fSw
-         LkrryZPbwU6Qb0vfDyzT50mO+XzO8Eg7tw6WrLUgnArDnOWjSQIJj2koL4mRbx11myyJ
-         SOy9pc+cB7+d5QsVciu3x228B5dq/bEUtRTwA+Sqzn/a3ieLcnH/10y2m+mr1vDw0Ai0
-         pitw==
-X-Forwarded-Encrypted: i=1; AHgh+RrP59oHLcEa5DttT2NJzv8p4QY383NTezijXP9/IX4pC3MBhWSg/zkJ5Yt1lE1o74IlWWontKKjJK0=@lists.xenproject.org
-X-Gm-Message-State: AFuF++neuzC3J87llZ1AUs9/eu5sUmL95TMDyWWxvMCADz9RVqJFaQxU
-	X7k62esiom2BP4AKu+KknQ9skMvpD2kqrjwrUEqpRjXIWHQwNAAuzp8E9wEakXNbtg==
-X-Gm-Gg: AR+sD11zLaMUDdSsP54m+4hF0wizleomkRGqzNoJ2aDje4eo8UMSrV4xnI8h+NZvBEQ
-	jtwWxdg9XTYdqbWbY18/ZlbNV7OjeMp38NdwgnPR0VXeq7qh1mdR+hRqYNMMXeAMq3cLRiX0fW1
-	sZGq5KdjBeEKOR/9MLO/xsDzHoRjxvlzawI950b4wDxkFTU2/ei/CkKECNRfLpIPkLycW9XcLvC
-	FCtVVH8qAMPjvSXXaf/OupgJibYpDZJXqjK1vA1uhPp+qsq9A6AX8V7LTQRjpzEkLK1Ss6Z+Qf6
-	El7ccF7N06Dne79l2hjLGEM18Bz+EfwR88wVs+3J5IX2MjWi8HQbBQuA/q2CJjaxS7GkwdySJFF
-	O2EqeyMs7f+YdlwpzGNp7TCNbvcX/zW15UgkH7ZnWRCZMXFefPjb3CYo8IptZVxg0cNWact1uNI
-	biH4EgYOOu5E3ojPBraNr0MNmJW54L3YXASiXrW7L+74v7ZgBM20CyscUmy73tfxAR+JgnDyxcU
-	lelTokrbc47VUGJJ9kVTAiHwt2YKJqrxbg0XM1HbfR5buv7Jdfi
-X-Received: by 2002:a05:6402:1586:b0:6a5:d8f0:dc12 with SMTP id 4fb4d7f45d1cf-6a5df64dd40mr5539605a12.14.1787724874966;
-        Tue, 25 Aug 2026 23:14:34 -0700 (PDT)
-Message-ID: <deeae7d9-b37e-4d60-95fe-a87b7ef59859@suse.com>
-Date: Wed, 26 Aug 2026 08:14:33 +0200
+        bh=um4yUsDv8cKb/Tn8csIrcU7+wnb9hBIUF0Hp/FAFH7g=;
+        b=oo4navzLw3Nsegwq9RmYwdRkuHPSHCI1ey0TA9PfIzaZIKuCy2LVp4Q03BgOXpiFj1
+         EdH4LtbhDYeg/ipXYqOvokyQGcEi7hHvMjfj0bzosIFVQCk/OJ8hwU9BKBQFWeQC09D/
+         SP/dC/mFDG9DlDAy0EZTBiAdP9nZDgfTwAaOmoH8NclQ//OJjVu8h15MgJJA39+O0N4x
+         OJMxqlfjAQBCg/D6tAKcGlIksDjC9cKWZGMJvYu1nUievFtSLTegXFOxFQw+kB1+jOim
+         pPXcufekOqxAk2GMnhWj49VrFcAw12ScEez7PVHnO4koOVH3XwC9iaEyrzALdzCUJlbL
+         XdfQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rr7Agp+AZjo/jqyKi4dV6vTHa7idfl4zfLSb6uZZc2TWJT0uvHzr9KZlMCNc2i24sOMZ4oH+QtWdmw=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mwuqjT59XGBBSC37YpzVLse/SCTwO6p7Uzuzp3CHzLsJHgB6CB
+	0ZQlZJu28aT7wkX/GfHHPFm6K/pgWBNFJSuaYy61qcguV7ZM0vGcJ4p26zpRp+Dg/g==
+X-Gm-Gg: AR+sD12fLiPnz6l1P8GUv1z0b0Z9Amk5SaZtHu5j5tsmRBot5nqR06MvdIsA5awp15j
+	b4LznhNDAJcab6H5LJbW9kYstyplai2SDJQwKzreFAzk/4rPtGnwCZlePvWxUHWq/LeTqNmNyRb
+	Bey8+w0D6CpZcT3RDyAtoiNi1Cs/gKXpECDULsKyB31a/p+mBZ0/nyeTG/BlXJP/0vqfINCQ0kW
+	eX+qiCGawdYcF8xMnj0B9gGXgN2QeOAvY012MfdhWjLOV4vCmcR40TJ/kGs1MhRJqT6w0Q3BMcP
+	PyRVdnB/SriZhNGR2Ms6YFJZHLsC7EouPY0FLfAo/ouif++q+6t3jlsBOrGpZOjdnCCJI1P/LCS
+	x6nVzSlMNCtT3wdJbztklN5frftfyAEmL0wtOuC2sgk8KceXaaTKhhgktR6elMs8ol8j+Jim4Ld
+	Ut0vrCY5z+Abs6lX/iNwDXrGYk49gU0BdThaFAULmycAqXJX/jyr+522MAM3YA9INrbgeA3bIv/
+	hVRGLl+gPnSfdX2/HpddB41tdLo8gVCYXTYYKCMuWe/A9zBiXZ8
+X-Received: by 2002:a17:907:c499:b0:c24:6390:decf with SMTP id a640c23a62f3a-c250c329353mr501402566b.16.1787726015706;
+        Tue, 25 Aug 2026 23:33:35 -0700 (PDT)
+Message-ID: <22091019-92ea-4de5-b470-2eb40d819dd1@suse.com>
+Date: Wed, 26 Aug 2026 08:33:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/5] xen/sched: rtds: make admission control cpupool-wide
- toggleable
-To: Furkan Caliskan <frn1furkan10@gmail.com>
-Cc: jgross@suse.com, andrew.cooper3@citrix.com, roger@xenproject.org,
- dfaggioli@suse.com, anthony.perard@vates.tech, julien@xen.org,
- sstabellini@kernel.org, gwd@xenproject.org, enr0n@ubuntu.com,
- michal.orzel@amd.com, xen-devel@lists.xenproject.org
-References: <20260826045720.5779-1-frn1furkan10@gmail.com>
- <20260826045720.5779-5-frn1furkan10@gmail.com>
+Subject: Re: [PATCH] stubdom: Fix GCC 14 -Wmemset-elt-size compiler warnings
+ in PolarSSL
+To: Andrew Mbugua <andrewprecious388@gmail.com>
+Cc: jgross@suse.com, samuel.thibault@ens-lyon.org,
+ xen-devel@lists.xenproject.org
+References: <20260825184605.79318-1-andrewprecious388@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,56 +128,60 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260826045720.5779-5-frn1furkan10@gmail.com>
+In-Reply-To: <20260825184605.79318-1-andrewprecious388@gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ef75cf/1787724875-A5EC6AE4-BD7CA39D/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ef75cf/1787726016-348C9AE4-0DDCE437/0/0
 X-purgate-type: clean
-X-purgate-size: 1471
+X-purgate-size: 2146
 
-On 26.08.2026 06:57, Furkan Caliskan wrote:
-> @@ -1691,6 +1709,33 @@ rt_dom_cntl(
->      return rc;
->  }
->  
-> +#ifdef CONFIG_SYSCTL
-> +static int cf_check
-> +rt_sys_cntl(const struct scheduler *ops,
-> +             struct xen_sysctl_scheduler_op *sc)
-> +{
-> +    struct xen_sysctl_rtds_schedule *params = &sc->u.sched_rtds;
-> +    struct rt_private *prv = rt_priv(ops);
-> +    unsigned long flags;
-> +
-> +    switch ( sc->cmd )
-> +    {
-> +    case XEN_SYSCTL_SCHEDOP_putinfo:
-> +        spin_lock_irqsave(&prv->lock, flags);
-> +        prv->admission_control_enabled = params->admission_control_enabled;
-> +        spin_unlock_irqrestore(&prv->lock, flags);
-> +        break;
-> +    case XEN_SYSCTL_SCHEDOP_getinfo:
-> +        spin_lock_irqsave(&prv->lock, flags);
-> +        params->admission_control_enabled = prv->admission_control_enabled;
-> +        spin_unlock_irqrestore(&prv->lock, flags);
-> +        break;
-> +    }
+On 25.08.2026 20:46, Andrew Mbugua wrote:
+> When compiling Xen with GCC 14, I get a compiler warning originating from the /polarssl-x86_64/library about a memset element size mismatch:
+> 
+> ssl_tls.c: In function ‘ssl_session_reset’:
+> ssl_tls.c:1778:5: warning: ‘memset’ used with length equal to number of elements without multiplication by element size [-Wmemset-elt-size]
+> 1778 |     memset( ssl->ctx_enc, 0, 128 );
+> |     ^~~~~~
+> ssl_tls.c:1779:5: warning: ‘memset’ used with length equal to number of elements without multiplication by element size [-Wmemset-elt-size]
+> 1779 |     memset( ssl->ctx_dec, 0, 128 );
+> |     ^~~~~~
+> 
+> This patch introduces a build-time patch to PolarSSL that replaces the hardcoded 128 byte length with a dynamic sizeof(), thus allowing clean compilation without warnings.
 
-Blank line please between non-fall-through case blocks.
+First a formal note: Commit messages want limiting to 75 characters per
+line (some even say 72).
 
-> --- a/xen/include/public/sysctl.h
-> +++ b/xen/include/public/sysctl.h
-> @@ -814,6 +814,10 @@ struct xen_sysctl_credit2_schedule {
->      uint32_t ratelimit_us;
->  };
->  
-> +struct xen_sysctl_rtds_schedule {
-> +    bool admission_control_enabled;
-> +};
+Then: You introduce a patch which isn't used anywhere. What use is such
+a patch? You also ...
 
-In the public headers only fixed-width types may be used. The width of
-bool is ABI-dependent (no matter that it's exceedingly unlikely to ever
-be other than the same size as char).
+> Signed-off-by: Andrew Mbugua <andrewprecious388@gmail.com>
+> ---
+>  stubdom/patches/polarssl-gcc14-memset.patch | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
+>  create mode 100644 stubdom/patches/polarssl-gcc14-memset.patch
+
+... introduce it in a new patches/ subdir, when all other patches live
+right beneath stubdom/.
+
+> --- /dev/null
+> +++ b/stubdom/patches/polarssl-gcc14-memset.patch
+> @@ -0,0 +1,13 @@
+> +--- a/library/ssl_tls.c
+> ++++ b/library/ssl_tls.c
+> +@@ -1775,8 +1775,8 @@
+> +     memset( ssl->iv_dec, 0, 16 );
+> +     memset( ssl->mac_enc, 0, 32 );
+> +     memset( ssl->mac_dec, 0, 32 );
+> +-    memset( ssl->ctx_enc, 0, 128 );
+> +-    memset( ssl->ctx_dec, 0, 128 );
+> ++    memset( ssl->ctx_enc, 0, sizeof( *ssl->ctx_enc) );
+> ++    memset( ssl->ctx_dec, 0, sizeof( *ssl->ctx_dec) );
+
+Don't you mean sizeof(ssl->ctx_enc) and sizeof(ssl->ctx_dec) respectively?
+Otherwise it looks like you're making a bad situation worse.
+
+Judging from surrounding style, there also looks to be a blank missing each,
+ahead of the new inner closing parenthesis.
 
 Jan
 
