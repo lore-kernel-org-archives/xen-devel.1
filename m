@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C408C61DBE
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2026 10:56:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1399794.1635770 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E92CCC5DF97
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2026 11:49:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1399820.1635788 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzBIy-000160-8E; Wed, 26 Aug 2026 10:56:28 +0000
+	id 1wzC8H-0008Ra-3V; Wed, 26 Aug 2026 11:49:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1399794.1635770; Wed, 26 Aug 2026 10:56:28 +0000
+Received: by outflank-mailman (output) from mailman id 1399820.1635788; Wed, 26 Aug 2026 11:49:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzBIy-00015t-4u; Wed, 26 Aug 2026 10:56:28 +0000
-Received: by outflank-mailman (input) for mailman id 1399794;
- Wed, 26 Aug 2026 10:56:27 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wzC8G-0008RT-WE; Wed, 26 Aug 2026 11:49:29 +0000
+Received: by outflank-mailman (input) for mailman id 1399820;
+ Wed, 26 Aug 2026 11:49:27 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <taka@valinux.co.jp>) id 1wzBIv-00015n-Le
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 10:56:27 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wzC8F-0008QJ-QC
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 11:49:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzBIt-00E9xk-QL
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 12:56:23 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wzC8E-00H6sA-E1
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 13:49:26 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <taka@valinux.co.jp>)
- id 6a8ec656-8faa-0a2a0a5109dd-0a2a4505de3a-6
- for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 12:56:23 +0200
-Received: from [40.107.74.133]
- (helo=OS0P286CU010.outbound.protection.outlook.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <taka@valinux.co.jp>)
- id 6a8ec650-4cb1-0a2a45050019-286b4a85c5f0-3
- for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 12:56:18 +0200
-Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:458::18)
- by OS9P286MB6502.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:416::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.6; Wed, 26 Aug
- 2026 10:56:13 +0000
-Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
- ([fe80::c8c9:25cd:8d13:96d6]) by OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
- ([fe80::c8c9:25cd:8d13:96d6%6]) with mapi id 15.21.0360.006; Wed, 26 Aug 2026
- 10:56:13 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6a8ed2c2-bab6-0a2a0a5309dd-0a2a4509bd18-10
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 13:49:26 +0200
+Received: from [209.85.208.43] (helo=mail-ed1-f43.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a8ed2c6-be1a-0a2a45090019-d155d02bd5f6-3
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 13:49:26 +0200
+Received: by mail-ed1-f43.google.com with SMTP id
+ 4fb4d7f45d1cf-6a18e24ad25so1134635a12.1
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 04:49:26 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6a5deac24f1sm3779661a12.23.2026.08.26.04.49.24
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 26 Aug 2026 04:49:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,428 +53,297 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=d9Ub0eSr9T/nqdh+FlatfnzSA6lEG8w/vWrEZVaZL9RUNOhpCF3D6W3KMe3NH3zo3SnRtpOAp5acTZ2WlpaaBymM2O6IiJ/nX87nNsWmMMac+AuP3ZIOU10123EyqaY/wVYq5vm5egln3554FOkbCEGmSsip9i5aMkt2X9jRj5+OaajMywOhw3WmuFxEyozGy4YSOIyBsoDlKcpFNyPi3i1PDbP6m2rWDB+76LRN3EBMyzZV2RL5DYt0X0g4/4HaBOJInmY31wwwjINP50vxOhpZEmPvcTPrB3oEtdsBmH3HBjYlA1yveorWLpIdy9H1lrV4ojpegKJkCxbKptgdog==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7BV5ymcB0KmD5GHTclbU2cH18oLhvNxYW2OZLODsz5Y=;
- b=czZOjEul0XTDWW6846wQN4eY2gNBJ/soamIMUTSl3VnCFFoAbiLbJ2Ujn+6P4NxWFZrSnm7YVzO/1nCnv4LAnjZ8xWyEgkku/QaEnlX1F3Fl4WRpNxW27IEkEH5FezNipGoQypADfQV2dsB69rkb+pxxcl6/eJ8BwOIo4i3/15nz6Im8E4owc2J0SZiqeB0iAVD3kFWr1/OoXF1L/A+mjTNnKNu/i3IyqFL3DeTtgB2V6+M6mFpaOE61nbC9srnttjkqdcRwwJPqtWQAiAyGcQwTziNiCeiwbQQU1XMCCFKRNwmezPd0CJMTi1XVm+d2uCGArKSu8crTP1S/L0rd6w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
- header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7BV5ymcB0KmD5GHTclbU2cH18oLhvNxYW2OZLODsz5Y=;
- b=shf+YPwBIBLjpex6DDXbbsOcdZezIei9oDnTAPHVCnxSTk91WstCVcDL42AO+ooO9mRDJziB4u3kamwM5xZD2XrAe2R6YlZKivOevJ3kjW51wQ0e/4G1iACXqH8fGpwywRskBs6x8cLN7sh6mIYNAIKq+Opi6q1/+4qVZh9wYzY=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=valinux.co.jp;
-From: Hirokazu Takahashi <taka@valinux.co.jp>
-To: xen-devel@lists.xenproject.org
-Cc: Hirokazu Takahashi <taka@valinux.co.jp>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>
-Subject: [PATCH v4] xen/arm: Hide PMU registers from the guest, when the vPMU feature is disabled.
-Date: Wed, 26 Aug 2026 19:55:28 +0900
-Message-ID: <20260826105529.364192-1-taka@valinux.co.jp>
-X-Mailer: git-send-email 2.43.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: TYCP286CA0344.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:400:38e::16) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:604:458::18)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1787744966; x=1788349766; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=Ss+YAR07JAD2fP8Xw057WPMldxuT1tgMd9itna7uDYs=;
+        b=S+nmjldk/NDQYpCuR+yofeIGw0OFY3vZFArRTjUlOgDHVPJHg0UemMmFHPkZfYlrm3
+         O7v/vZfxEXgycXGtlER7daPpPRsyGD9ZzaLOCLLVkKNv1BJsdodn6NaO1Md80OKlraVc
+         OZxBg4ni0YBz79Sd96DunC01D++gy+7nt8NIX140NRzCZNQ2pPJG/HbSuDr0eyTmnZvE
+         ti+bAiz2zpE1tfsYFEKbu6hcOb5l2/sNDbyRlV9LPaD2mJfbVeJtxc33DCcpn7YEi2BF
+         2QZu04ItCzfY0GN1XA6/Qm+LVIExlV92UikmBNRcRkLX5DNCe3F5UuTO9UE44JyOhbv2
+         93TQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787744966; x=1788349766;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Ss+YAR07JAD2fP8Xw057WPMldxuT1tgMd9itna7uDYs=;
+        b=BS1Y1gOfHIRVyC/3zbp9ZkEG152oVVRMoBIRDHioIneBn7NUrLmQW/tu33Z/fdM6HB
+         mF0taakQ3WoEKg36YxbESOG2ilrZbyF5QhnfapvDsRuWNQHh1iteBlVXrNnav1yW2BGs
+         iiWJVRfCZS9LpMQtsHblJwHSL7rswYjOhoe84tRQwvZK2W9yuOlygNzArznw5ld8c1Xb
+         tqXOhgJy6mzskNfjePYregQPy96SmC+BrjirrNHzphNGEQHIeogxxIjmFwXRjI2JfWNl
+         C57bh4ZbgEb6/LgeYpS3VgR1L2O91VkYI7rwwqQrx02XKnpePh22wh3RrxZ/AjXuOKYH
+         cq8A==
+X-Gm-Message-State: AFuF++kMlbqdnd/BNxNuKqGgGp9uA+N4zoSY0OPr7Cjtck2yuesQofh3
+	AJu20vdVwqrYOpghPEyrn9i9A1eF5W/QVKl006usrVz2URbxrNAQDJJIoeUZE1sSOvJj39WG8Ze
+	GEZUGgw==
+X-Gm-Gg: AR+sD12LZIdDR07uFsCeUBUTJFufHi06MZoNiNosjdaXZmsLg/a52fwQrp4sNFb2bSU
+	mejFw4kwlUVGgjb3YIWD/l3js50MngGsCgdxLhoWMAYX8V6Ak2mQHoRcfoZMvNazCE7mKOBjZqg
+	0GhvOTykCF4y7tcj9YPWnbZqPL2gFK9ZeyZPIZ4bGZdDycd5IlCBG7H13RkC33fH3hDFDTiCID9
+	75BG9nibs79mfNRsa93TLoaVmGzYFmdJhYRuNaP2wESUnzOOz+Fjw6qlfzDNo5lrt0G4SE5jmzR
+	danr2kPUUd25RiWzcYTHGE9FZ1gR2u4v6FLOPpmH1/Iw5dkBRKxKnIqE1Iz/kFyvFHS/fqwWGqz
+	VbHOov4SPQz1v4cR06dLz2M6w8xktLrwlPGw8+WIJsOHblJAdwymPwxpcIkOsGgedDyTWnqZ8RS
+	ci620DybebwQWOihzb7hH8kiJCj1gqeDGu3+KsUbA0QL/dx5/0RtaK1Y5zhSwK+U9FelpJtFSVm
+	vhGrbVlr30ZNoZj8Fz5evb+sxb5wexUVQuA3oN/4GQCAD8N4QAKN3HnTziDiBLp
+X-Received: by 2002:a05:6402:210d:b0:6a4:2ee:5c6d with SMTP id 4fb4d7f45d1cf-6a5df5e3966mr8005779a12.6.1787744965646;
+        Wed, 26 Aug 2026 04:49:25 -0700 (PDT)
+Message-ID: <53e4e1d5-ccb6-4400-b440-7ec9a7273ac8@suse.com>
+Date: Wed, 26 Aug 2026 13:49:23 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: OS9P286MB7222:EE_|OS9P286MB6502:EE_
-X-MS-Office365-Filtering-Correlation-Id: d6fb0f6a-9687-496f-cce7-08df0360a52b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|366016|10070799003|7416014|376014|23010399003|18002099003|10067099003|56012099006|6133799003;
-X-Microsoft-Antispam-Message-Info:
-	tM6OixdhPstTFNaWVggkdKSjwnoc8wXWYqlISjP4qMjqRECw0JVfLm3DoE9DrGWJrO5q/izLRc6j6x2+doDWNpxTUb6uvI0XMmq3yUYdVCZmfqiqvMkXYTYCvLnyVay/3teTl4L4/rIdcrA3PnfEWHnlHv+yxr5sAqqjwRPpHaiYegUPKzRvfiBLJmcLuy91tDTPdCD9DzGNGpffNSnmKzKJAg0+8dlfawCOsPTkudhdHVhpPhOzRlUigb3JXGlFqtiAK5lKOT4dDhbiL7OPP+hThwvi21YygTdFtBXV/ddPSYg/nGptFwx5xNw5GRIrpI7W29z+RhIaBEmtQs24l3dqHUseVIlKgv+7afJVIeQ8hNcE0P7w4pFHkpJmzJltoYKCJKVvyhvKFwxqC4pyYwWIAyn1C6FxMwrCaI+2L2sKYASsTbdOyLFqGhOUD2ZUuEaQTFEjg63RkvyJ1pUKOE6UCTBvCkExOqM85B9LOLGf7z+d8SMbG4rtlUY1RYneXvihQVw6lHlMqM/i7xW7T6LMCXU9Ar9+eZY9nl99Q+R/uYdt6oLYv8ekOqZB8y5yraDa8Cby7wgd/srX5e1emLDVO75d+lKV5jo3zpIJJsbN+uGZWIHF5I9HY1MczsV8SR9StdQtBAA2sVz3oe14QbxSufIIjxa80v3A9PwmKyU=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(10070799003)(7416014)(376014)(23010399003)(18002099003)(10067099003)(56012099006)(6133799003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?JZABnMVykzTke4uSWzutuV6KuP+teO84Oqm7HheqYu5477q9K8bN9YUk9Qwo?=
- =?us-ascii?Q?mTzsMfJIo0SQcQffkLZEU51DAEadrUbnqO2CknBQkPdqiGLhQDLWYF5juptr?=
- =?us-ascii?Q?KkOXIDKIVh2KOPGkQnPNlWc9dAigKZjQr128zihmKO8SP05eyieGwwBCE/ls?=
- =?us-ascii?Q?BY1JVulz7s7EE6RoWJbFB3c9G6yI19bueZFkTvVTNNnLp7x6duhKXyejUL4E?=
- =?us-ascii?Q?lTq6L/WOqQ7eO8h4Wh2/GtdhX+n6XBoVsHfFgd5ouPLs9qcCSNIKUU0QttyT?=
- =?us-ascii?Q?fNySXoDIYvHMh19tv5udsLEMJJpnpE7MqFaIT60MaxrIcU1HT/yN2UYpxXiC?=
- =?us-ascii?Q?myaXznvDlxqWXeWhRBitagPPR0ocgcWN/8kvLjNjaZ2laW7VIyT6YP3sbqXo?=
- =?us-ascii?Q?YWDSUTm12bYopmlr+qkbb+KaYsTVgK5+xL7bboCDlCMX0VX/Sv4d3ETr0UdO?=
- =?us-ascii?Q?Nvv6o/hlHHuVu0YfYWL9gdhhu/zNcOCebK8H9hMrnu1WbXHG1yJmqdm9GZrr?=
- =?us-ascii?Q?SXto8BTm64Hmt7omSO28J3Ko8XNxe5+VyWGhnNKxAqzHGSgwXJT30vN6RcD2?=
- =?us-ascii?Q?0ahOuiCewApuOY6blCI2FCyt0u6BEQL9YYPM3NyIENYDhVTxhVRvu/VqfHVL?=
- =?us-ascii?Q?KUJU+8LGHR2UIF1wvj34Stivs+2HzkAjIgy0yLxLSKpbVjBltNKAOCUVHTWi?=
- =?us-ascii?Q?gbM/ZwDlBn547DsAbEEwSYzxsl5+tv1fW7eep9qnTi0A0/GyBqIaFLu8kLqS?=
- =?us-ascii?Q?thIQlvTcq36IMcfVoB3todkZQknRALIDa7tAHtGa+94mJMtbhyuzbmSkZKtM?=
- =?us-ascii?Q?2PGaY9HRk6LodSqzOYVqLnMMKy6k97JjSnJ8SrBasSIFkHhzSHP5fVD19seH?=
- =?us-ascii?Q?LAnSbD62vqw11KijqxCQ51p4fUa6UOloH7o0r4ncBEF0xic09ZMUdfyhQ43g?=
- =?us-ascii?Q?m8ZTSPhIdlL3DJa81U0b5aJuME6MiOjlytamcL4htIXuxBfyetoTqkoNiuGz?=
- =?us-ascii?Q?8SsItAJ3yYWTEPI4z4xLjZRWK1tl8q1cpA8uXC7d+o33FxvbcZxdAuuIm6Lm?=
- =?us-ascii?Q?qexa4jsUZTgOrKirwrrJFrnEqEydMt2aO9j+5ooYLZmc3A4tIJ+Z3hy+d5M8?=
- =?us-ascii?Q?dH3KBaQFjqv/pNN9g1pjGSUBHkhDMGoQStsCA3mhNqS1pRhUwtu/V+/Ywnrz?=
- =?us-ascii?Q?1F9COy+fXlfGcxOmJft01UXyuhQ2+CijSub41aJ8aGzPsYjhZWeJ/V8pxuAA?=
- =?us-ascii?Q?gCGdGu27IjLpWvl+hID1ION+IBWE+baydIK6R301l2/IqWTwEwLUIsVhZSLr?=
- =?us-ascii?Q?sxDtUTMSNyo3whKw+noAaZNo7Y5xjDIGBA29X4OQoOWM0Gz7mOaK4uGCTTfh?=
- =?us-ascii?Q?hWoXcfg1or2RfHoTjUOLTrQKWY3JWeucThY5/YQ/fg0xMgwO6y/xtqgMH/UV?=
- =?us-ascii?Q?KhiyEziMU82I5FQJPBQaZKZFQbm9HB6JPRMiuHTIHBRZNSlkZTEauRb+4gR3?=
- =?us-ascii?Q?aJrv/7zyvUe2VE+0UwvWvTI6s1Th8/2HkKL7xkMNNh2SfU/dh3yucvoqfGkl?=
- =?us-ascii?Q?j5MLO+9/dh/hX+xEVLorJTfe0FjvFSaTH+9Xk2MRpm3GuRIJEJ+ZW72M4SVc?=
- =?us-ascii?Q?zhsRVozbev3yqX8eu3uXbktPaVXKVZbeapWe/TGbWF/lOrRNCDgl8fwK+ILu?=
- =?us-ascii?Q?PsI3faEt+FboiN/PBA8tZCS4APwi+YmN7/Q4dmJOiFSoz0AOMKXPG41kLDcw?=
- =?us-ascii?Q?asSEskkyQ0+tACA1D5Jnq4wtX1ls2yjh0u/9myQs1TEejvIrrehS973I/LLa?=
-X-MS-Exchange-AntiSpam-MessageData-1: 5bOK/sQ7V2TvvA==
-X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: d6fb0f6a-9687-496f-cce7-08df0360a52b
-X-MS-Exchange-CrossTenant-AuthSource: OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2026 10:56:13.4200
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: l9qJ9UC5UdKYfgwPj5i8xjG2+A43464u5Aim6eZpTCBVuwHGSIargOBV5gbhCVrJCFG9xSiNfhHbYMnTLsWbOA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS9P286MB6502
-X-purgate-ID: tlsNG-c201ff/1787741783-72AB72A1-08187B02/0/0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH] x86: replace a few more is_hvm_*() by is_pv_*()
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-bad1c0/1787744966-FD469034-A51DA306/0/0
 X-purgate-type: clean
-X-purgate-size: 12152
+X-purgate-size: 7657
 
-On ARMv8.4-A and newer platforms, booting Dom0 Linux with ACPI enabled
-causes the domain to probe advanced PMU feature based on system ID
-register ID_AA64DFR0_EL1. During this probe, Linux accesses PMMIR_EL1,
-which causes unhandled register traps and crashes the domain.
+Along the lines of [1]. Both (respectively negated) can be used
+interchangeably when no system domains are (potentially) involved.
 
-To address this issue, implement the following:
+For gtime_to_gtsc():
+- with !is_hvm_domain() and HVM=n the conditional but not its body would
+  disappear,
+- with is_pv_domain() and PV=n, the conditional and its body will
+  disappear.
+Then mirror the change to gtsc_to_gtime() for consistency.
 
-- Add emulation for ID_AA64DFR{0,1}_EL1, ID_DFR{0,1}_EL1 and
-  ID_DFR{0,1} register accesses for guest domains.
-- Hide PMU registers from a guest domain when its vPMU feature is
-  disabled.
-- Proactively make SPE, TRBE, BRBE, Trace Extensions, SPMU, ITE and
-  EBEP inaccessible to arm64 guest domains and hide TraceFilt,
-  MMapTrc and CopTrc to arm32 guest domains, as they could
-  potentially cause similar issues.
+For mem_sharing_control() vm_event_toggle_singlestep(), as VM_EVENT /
+MEM_SHARING depend on HVM anyway, the !is_hvm() form can't ever become
+compile-time constant, while the is_pv() form can. Same for PoD code,
+HVM-specific pieces of shadow/{common,multi}.c, and everything in
+shadow/hvm.c.
 
-Fixes: dbb948110a0e ("xen: Expose the PMU to the guests")
-Fixes: 07b9acea116e ("xen/arm: Add handler for ID registers on arm64")
-Fixes: 3669a1cb9598 ("xen/arm: create a cpuinfo structure for guest")
-Signed-off-by: Hirokazu Takahashi <taka@valinux.co.jp>
+[1] https://lists.xen.org/archives/html/xen-devel/2026-08/msg01156.html
+
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in v4:
- * Hide FEAT_HPMN0 from guests when the vPMU feature is disabled.
- * Unconditionally hide FEAT_SPMU and FEAT_EBEP from guest domains.
- * Fix arm32 build failure in vcpreg.c.
- * Perform code cleanups and address coding style feedback.
+Pretty likely there are more instances of this pattern that could do with
+using the opposite predicate. However, e.g. further is_{hvm,pv}() uses in
+time.c look to be asking for a little more trickery to benefit both PV=n
+and HVM=n (not at the same time, of course).
 
- xen/arch/arm/arm64/vsysreg.c          | 62 +++++++++++++++++++++++++--
- xen/arch/arm/cpufeature.c             | 17 ++++++++
- xen/arch/arm/domain.c                 |  2 +-
- xen/arch/arm/include/asm/arm64/hsr.h  |  1 +
- xen/arch/arm/include/asm/cpregs.h     |  1 +
- xen/arch/arm/include/asm/cpufeature.h | 27 +++++++++---
- xen/arch/arm/vcpreg.c                 | 29 ++++++++++++-
- xen/include/xen/sched.h               |  5 +++
- 8 files changed, 130 insertions(+), 14 deletions(-)
+As to system domains, and as previously pointed out: is_pv_domain() is odd
+there for the PV=n case. With PV=y it returns true there, while with PV=n
+it yields false.
 
-diff --git a/xen/arch/arm/arm64/vsysreg.c b/xen/arch/arm/arm64/vsysreg.c
-index d9e3619dfb..bf612a133d 100644
---- a/xen/arch/arm/arm64/vsysreg.c
-+++ b/xen/arch/arm/arm64/vsysreg.c
-@@ -227,6 +227,7 @@ void do_sysreg(struct cpu_user_regs *regs,
-      */
-     case HSR_SYSREG_PMINTENSET_EL1:
-     case HSR_SYSREG_PMINTENCLR_EL1:
-+    case HSR_SYSREG_PMMIR_EL1:
-         return handle_raz_wi(regs, regidx, hsr.sysreg.read, hsr, 1);
-     case HSR_SYSREG_PMUSERENR_EL0:
-         /* RO at EL0. RAZ/WI at EL1 */
-@@ -300,8 +301,32 @@ void do_sysreg(struct cpu_user_regs *regs,
-     GENERATE_TID3_INFO(ID_PFR0_EL1, pfr32, 0)
-     GENERATE_TID3_INFO(ID_PFR1_EL1, pfr32, 1)
-     GENERATE_TID3_INFO(ID_PFR2_EL1, pfr32, 2)
--    GENERATE_TID3_INFO(ID_DFR0_EL1, dbg32, 0)
--    GENERATE_TID3_INFO(ID_DFR1_EL1, dbg32, 1)
-+
-+    case HSR_SYSREG_ID_DFR0_EL1:
-+    {
-+        union cpuinfo_dbg32 info_dbg32 = domain_cpuinfo.dbg32;
-+
-+        if ( !is_vpmu_domain(v->domain) )
-+            info_dbg32.perfmon = 0;
-+
-+        return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
-+                                  info_dbg32.bits[0]);
-+    }
-+
-+    case HSR_SYSREG_ID_DFR1_EL1:
-+    {
-+        union cpuinfo_dbg32 info_dbg32 = domain_cpuinfo.dbg32;
-+
-+        if ( !is_vpmu_domain(v->domain) )
-+        {
-+            info_dbg32.mtpmu = 0;
-+            info_dbg32.hpmn0 = 0;
-+        }
-+
-+        return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
-+                                  info_dbg32.bits[1]);
-+    }
-+
-     GENERATE_TID3_INFO(ID_AFR0_EL1, aux32, 0)
-     GENERATE_TID3_INFO(ID_MMFR0_EL1, mm32, 0)
-     GENERATE_TID3_INFO(ID_MMFR1_EL1, mm32, 1)
-@@ -342,8 +367,37 @@ void do_sysreg(struct cpu_user_regs *regs,
+--- a/xen/arch/x86/mm/mem_sharing.c
++++ b/xen/arch/x86/mm/mem_sharing.c
+@@ -1509,7 +1509,7 @@ static inline int mem_sharing_control(st
+ {
+     if ( enable )
+     {
+-        if ( unlikely(!is_hvm_domain(d) || !cpu_has_vmx) )
++        if ( unlikely(is_pv_domain(d) || !cpu_has_vmx) )
+             return -EOPNOTSUPP;
+ 
+         if ( unlikely(!hap_enabled(d)) )
+--- a/xen/arch/x86/mm/p2m-pod.c
++++ b/xen/arch/x86/mm/p2m-pod.c
+@@ -353,7 +353,7 @@ void p2m_pod_get_mem_target(const struct
+ {
+     struct p2m_domain *p2m = p2m_get_hostp2m(d);
+ 
+-    ASSERT(is_hvm_domain(d));
++    ASSERT(!is_pv_domain(d));
+ 
+     pod_lock(p2m);
+     lock_page_alloc(p2m);
+@@ -1432,7 +1432,7 @@ bool p2m_pod_active(const struct domain
+     struct p2m_domain *p2m;
+     bool res;
+ 
+-    if ( !is_hvm_domain(d) )
++    if ( is_pv_domain(d) )
+         return false;
+ 
+     p2m = p2m_get_hostp2m(d);
+--- a/xen/arch/x86/mm/shadow/common.c
++++ b/xen/arch/x86/mm/shadow/common.c
+@@ -171,7 +171,7 @@ void shadow_promote(struct domain *d, mf
+     {
+         page->shadow_flags = 0;
+ #ifdef CONFIG_HVM
+-        if ( is_hvm_domain(d) )
++        if ( !is_pv_domain(d) )
+             page->pagetable_dying = false;
+ #endif
+     }
+@@ -1520,7 +1520,7 @@ int sh_remove_all_mappings(struct domain
+                    mfn_x(gmfn), gfn_x(gfn),
+                    page->count_info, page->u.inuse.type_info,
+                    is_special_page(page),
+-                   (is_hvm_domain(d) && is_ioreq_server_page(d, page)));
++                   (!is_pv_domain(d) && is_ioreq_server_page(d, page)));
      }
  
-     GENERATE_TID3_INFO(ID_AA64PFR1_EL1, pfr64, 1)
--    GENERATE_TID3_INFO(ID_AA64DFR0_EL1, dbg64, 0)
--    GENERATE_TID3_INFO(ID_AA64DFR1_EL1, dbg64, 1)
-+
-+    case HSR_SYSREG_ID_AA64DFR0_EL1:
-+    {
-+        union cpuinfo_dbg64 info_dbg64 = domain_cpuinfo.dbg64;
-+
-+        if ( !is_vpmu_domain(v->domain) )
-+        {
-+            info_dbg64.pmu_ver = 0;
-+            info_dbg64.pmss = 0;
-+            info_dbg64.mtpmu = 0;
-+            info_dbg64.hpmn0 = 0;
-+        }
-+
-+        return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
-+                                  info_dbg64.bits[0]);
-+    }
-+
-+    case HSR_SYSREG_ID_AA64DFR1_EL1:
-+    {
-+        union cpuinfo_dbg64 info_dbg64 = domain_cpuinfo.dbg64;
-+
-+        if ( !is_vpmu_domain(v->domain) )
-+        {
-+            info_dbg64.pmicntr = 0;
-+            info_dbg64.dpfzs = 0;
-+        }
-+
-+        return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
-+                                  info_dbg64.bits[1]);
-+    }
-+
-     GENERATE_TID3_INFO(ID_AA64ISAR0_EL1, isa64, 0)
-     GENERATE_TID3_INFO(ID_AA64ISAR1_EL1, isa64, 1)
-     GENERATE_TID3_INFO(ID_AA64MMFR0_EL1, mm64, 0)
-diff --git a/xen/arch/arm/cpufeature.c b/xen/arch/arm/cpufeature.c
-index 94d14fb6a9..88478fea46 100644
---- a/xen/arch/arm/cpufeature.c
-+++ b/xen/arch/arm/cpufeature.c
-@@ -219,8 +219,25 @@ static int __init create_domain_cpuinfo(void)
-     domain_cpuinfo.isa64.api = 0;
-     domain_cpuinfo.isa64.gpa = 0;
-     domain_cpuinfo.isa64.gpi = 0;
-+
-+    /* Hide SPE, TRBE, BRBE, Trace Extensions, SPMU, ITE and EBEP */
-+    domain_cpuinfo.dbg64.trace_ver = 0;
-+    domain_cpuinfo.dbg64.pms_ver = 0;
-+    domain_cpuinfo.dbg64.trace_filt = 0;
-+    domain_cpuinfo.dbg64.trace_buffer = 0;
-+    domain_cpuinfo.dbg64.ext_trc_buff = 0;
-+    domain_cpuinfo.dbg64.brbe = 0;
-+    domain_cpuinfo.dbg64.syspmuid = 0;
-+    domain_cpuinfo.dbg64.spmu = 0;
-+    domain_cpuinfo.dbg64.ite = 0;
-+    domain_cpuinfo.dbg64.ebep = 0;
- #endif
+     paging_unlock(d);
+@@ -2318,7 +2318,7 @@ void shadow_teardown(struct domain *d, b
+     d->arch.paging.mode &= ~PG_log_dirty;
  
-+    /* Hide Trace Extensions for AArch32 domain */
-+    domain_cpuinfo.dbg32.coptrc = 0;
-+    domain_cpuinfo.dbg32.mmaptrc = 0;
-+    domain_cpuinfo.dbg32.tracefilt = 0;
-+
-     /* Hide AMU support */
- #ifdef CONFIG_ARM_64
-     domain_cpuinfo.pfr64.amu = 0;
-diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index baa3a5d708..a739dd157e 100644
---- a/xen/arch/arm/domain.c
-+++ b/xen/arch/arm/domain.c
-@@ -501,7 +501,7 @@ int arch_vcpu_create(struct vcpu *v)
-     v->arch.hcr_el2 = get_default_hcr_flags();
+ #ifdef CONFIG_HVM
+-    if ( is_hvm_domain(d) && d->arch.hvm.dirty_vram.sh )
++    if ( !is_pv_domain(d) && d->arch.hvm.dirty_vram.sh )
+     {
+         xfree(d->arch.hvm.dirty_vram.sh->sl1ma);
+         xfree(d->arch.hvm.dirty_vram.sh->dirty_bitmap);
+--- a/xen/arch/x86/mm/shadow/hvm.c
++++ b/xen/arch/x86/mm/shadow/hvm.c
+@@ -315,7 +315,7 @@ const struct x86_emulate_ops *shadow_ini
+     const struct vcpu *curr = current;
+     unsigned long addr;
  
-     v->arch.mdcr_el2 = HDCR_TDRA | HDCR_TDOSA | HDCR_TDA;
--    if ( !(v->domain->options & XEN_DOMCTL_CDF_vpmu) )
-+    if ( !is_vpmu_domain(v->domain) )
-         v->arch.mdcr_el2 |= HDCR_TPM | HDCR_TPMCR;
+-    ASSERT(is_hvm_vcpu(curr));
++    ASSERT(!is_pv_vcpu(curr));
  
-     if ( (rc = vcpu_vgic_init(v)) != 0 )
-diff --git a/xen/arch/arm/include/asm/arm64/hsr.h b/xen/arch/arm/include/asm/arm64/hsr.h
-index 1495ccddea..ed18184cc7 100644
---- a/xen/arch/arm/include/asm/arm64/hsr.h
-+++ b/xen/arch/arm/include/asm/arm64/hsr.h
-@@ -84,6 +84,7 @@
- #define HSR_SYSREG_FAR_EL1        HSR_SYSREG(3,0,c6, c0,0)
- #define HSR_SYSREG_PMINTENSET_EL1 HSR_SYSREG(3,0,c9,c14,1)
- #define HSR_SYSREG_PMINTENCLR_EL1 HSR_SYSREG(3,0,c9,c14,2)
-+#define HSR_SYSREG_PMMIR_EL1      HSR_SYSREG(3,0,c9,c14,6)
- #define HSR_SYSREG_MAIR_EL1       HSR_SYSREG(3,0,c10,c2,0)
- #define HSR_SYSREG_AMAIR_EL1      HSR_SYSREG(3,0,c10,c3,0)
- #define HSR_SYSREG_ICC_SGI1R_EL1  HSR_SYSREG(3,0,c12,c11,5)
-diff --git a/xen/arch/arm/include/asm/cpregs.h b/xen/arch/arm/include/asm/cpregs.h
-index a7503a190f..3f62b38dc0 100644
---- a/xen/arch/arm/include/asm/cpregs.h
-+++ b/xen/arch/arm/include/asm/cpregs.h
-@@ -246,6 +246,7 @@
- #define PMINTENSET      p15,0,c9,c14,1  /* Perf. Mon. Interrupt Enable Set Register */
- #define PMINTENCLR      p15,0,c9,c14,2  /* Perf. Mon. Interrupt Enable Clear Register */
- #define PMOVSSET        p15,0,c9,c14,3  /* Perf. Mon. Overflow Flag Status Set register */
-+#define PMMIR           p15,0,c9,c14,6  /* Perf. Mon. Machine Identification Register */
+     memset(sh_ctxt, 0, sizeof(*sh_ctxt));
  
- /* CP15 CR10: */
- #define MAIR0           p15,0,c10,c2,0  /* Memory Attribute Indirection Register 0 AKA PRRR */
-diff --git a/xen/arch/arm/include/asm/cpufeature.h b/xen/arch/arm/include/asm/cpufeature.h
-index bf902a3970..c554686415 100644
---- a/xen/arch/arm/include/asm/cpufeature.h
-+++ b/xen/arch/arm/include/asm/cpufeature.h
-@@ -208,7 +208,7 @@ struct cpuinfo_arm {
-         };
-     } pfr64;
+@@ -361,7 +361,7 @@ void shadow_continue_emulation(struct sh
+ {
+     unsigned long addr, diff;
  
--    union {
-+    union cpuinfo_dbg64 {
-         register_t bits[2];
-         struct {
-             /* DFR0 */
-@@ -216,19 +216,31 @@ struct cpuinfo_arm {
-             unsigned long trace_ver:4;
-             unsigned long pmu_ver:4;
-             unsigned long brps:4;
--            unsigned long __res0:4;
-+            unsigned long pmss:4;
-             unsigned long wrps:4;
-             unsigned long __res1:4;
-             unsigned long ctx_cmps:4;
-             unsigned long pms_ver:4;
-             unsigned long double_lock:4;
-             unsigned long trace_filt:4;
--            unsigned long __res2:4;
-+            unsigned long trace_buffer:4;
-             unsigned long mtpmu:4;
--            unsigned long __res3:12;
-+            unsigned long brbe:4;
-+            unsigned long ext_trc_buff:4;
-+            unsigned long hpmn0:4;
+-    ASSERT(is_hvm_vcpu(current));
++    ASSERT(!is_pv_vcpu(current));
  
-             /* DFR1 */
--            unsigned long __res4:64;
-+            unsigned long syspmuid:8;
-+            unsigned long brps1:8;
-+            unsigned long wrps1:8;
-+            unsigned long ctx_cmps1:8;
-+            unsigned long spmu:4;
-+            unsigned long pmicntr:4;
-+            unsigned long able:4;
-+            unsigned long ite:4;
-+            unsigned long ebep:4;
-+            unsigned long dpfzs:4;
-+            unsigned long abl_cmps:8;
-         };
-     } dbg64;
+     /*
+      * We don't refetch the segment bases, because we don't emulate
+@@ -1217,7 +1217,7 @@ void shadow_vram_get_mfn(mfn_t mfn, unsi
+     unsigned long gfn;
+     struct sh_dirty_vram *dirty_vram = d->arch.hvm.dirty_vram.sh;
  
-@@ -408,7 +420,7 @@ struct cpuinfo_arm {
-         };
-     } pfr32;
+-    ASSERT(is_hvm_domain(d));
++    ASSERT(!is_pv_domain(d));
  
--    union {
-+    union cpuinfo_dbg32 {
-         register_t bits[2];
-         struct {
-             /* DFR0 */
-@@ -426,7 +438,8 @@ struct cpuinfo_arm {
+     if ( !dirty_vram /* tracking disabled? */ ||
+          !(l1f & _PAGE_RW) /* read-only mapping? */ ||
+@@ -1247,7 +1247,7 @@ void shadow_vram_put_mfn(mfn_t mfn, unsi
+     unsigned long gfn;
+     struct sh_dirty_vram *dirty_vram = d->arch.hvm.dirty_vram.sh;
  
-             /* DFR1 */
-             unsigned long mtpmu:4;
--            unsigned long __res1:28;
-+            unsigned long hpmn0:4;
-+            unsigned long __res1:24;
- #ifdef CONFIG_ARM_64
-             unsigned long __res2:32;
- #endif
-diff --git a/xen/arch/arm/vcpreg.c b/xen/arch/arm/vcpreg.c
-index 3205c7df46..db8909d96e 100644
---- a/xen/arch/arm/vcpreg.c
-+++ b/xen/arch/arm/vcpreg.c
-@@ -292,6 +292,7 @@ void do_cp15_32(struct cpu_user_regs *regs, const union hsr hsr)
-             return handle_raz_wi(regs, regidx, cp32.read, hsr, 1);
-     case HSR_CPREG32(PMINTENSET):
-     case HSR_CPREG32(PMINTENCLR):
-+    case HSR_CPREG32(PMMIR):
-         return handle_raz_wi(regs, regidx, cp32.read, hsr, 1);
-     case HSR_CPREG32(PMCR):
-     case HSR_CPREG32(PMCNTENSET):
-@@ -320,8 +321,32 @@ void do_cp15_32(struct cpu_user_regs *regs, const union hsr hsr)
-     GENERATE_TID3_INFO(ID_PFR0, pfr32, 0)
-     GENERATE_TID3_INFO(ID_PFR1, pfr32, 1)
-     GENERATE_TID3_INFO(ID_PFR2, pfr32, 2)
--    GENERATE_TID3_INFO(ID_DFR0, dbg32, 0)
--    GENERATE_TID3_INFO(ID_DFR1, dbg32, 1)
-+
-+    case HSR_CPREG32(ID_DFR0):
-+    {
-+        union cpuinfo_dbg32 info_dbg32 = domain_cpuinfo.dbg32;
-+
-+        if ( !is_vpmu_domain(v->domain) )
-+            info_dbg32.perfmon = 0;
-+
-+        return handle_ro_read_val(regs, regidx, cp32.read, hsr, 1,
-+                                  info_dbg32.bits[0]);
-+    }
-+
-+    case HSR_CPREG32(ID_DFR1):
-+    {
-+        union cpuinfo_dbg32 info_dbg32 = domain_cpuinfo.dbg32;
-+
-+        if ( !is_vpmu_domain(v->domain) )
-+        {
-+            info_dbg32.mtpmu = 0;
-+            info_dbg32.hpmn0 = 0;
-+        }
-+
-+        return handle_ro_read_val(regs, regidx, cp32.read, hsr, 1,
-+                                  info_dbg32.bits[1]);
-+    }
-+
-     GENERATE_TID3_INFO(ID_AFR0, aux32, 0)
-     GENERATE_TID3_INFO(ID_MMFR0, mm32, 0)
-     GENERATE_TID3_INFO(ID_MMFR1, mm32, 1)
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index eef10c2ea2..e352e2b38e 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -1269,6 +1269,11 @@ static always_inline bool is_iommu_enabled(const struct domain *d)
-     return evaluate_nospec(d->options & XEN_DOMCTL_CDF_iommu);
+-    ASSERT(is_hvm_domain(d));
++    ASSERT(!is_pv_domain(d));
+ 
+     if ( !dirty_vram /* tracking disabled? */ ||
+          !(l1f & _PAGE_RW) /* read-only mapping? */ ||
+--- a/xen/arch/x86/mm/shadow/multi.c
++++ b/xen/arch/x86/mm/shadow/multi.c
+@@ -601,7 +601,7 @@ _sh_propagate(struct vcpu *v,
+         sflags &= ~_PAGE_RW;
+ 
+ #ifdef CONFIG_HVM
+-    if ( unlikely(level == 1) && is_hvm_domain(d) )
++    if ( unlikely(level == 1) && !is_pv_domain(d) )
+     {
+         struct sh_dirty_vram *dirty_vram = d->arch.hvm.dirty_vram.sh;
+ 
+@@ -2240,7 +2240,7 @@ static int cf_check sh_page_fault(
+ #ifdef CONFIG_HVM
+             /* Magic MMIO marker: extract gfn for MMIO address */
+             ASSERT(sh_l1e_is_mmio(sl1e));
+-            ASSERT(is_hvm_vcpu(v));
++            ASSERT(!is_pv_vcpu(v));
+             gpa = gfn_to_gaddr(sh_l1e_mmio_get_gfn(sl1e)) | (va & ~PAGE_MASK);
+             perfc_incr(shadow_fault_fast_mmio);
+             SHADOW_PRINTK("fast path mmio %#"PRIpaddr"\n", gpa);
+@@ -2562,7 +2562,7 @@ static int cf_check sh_page_fault(
+     /* Need to hand off device-model MMIO to the device model */
+     if ( p2mt == p2m_mmio_dm )
+     {
+-        ASSERT(is_hvm_vcpu(v));
++        ASSERT(!is_pv_vcpu(v));
+ 
+         sh_audit_gw(v, &gw);
+         gpa = guest_walk_to_gpa(&gw);
+@@ -2589,7 +2589,7 @@ static int cf_check sh_page_fault(
+      * CR0.WP is clear, we must emulate faulting supervisor writes to
+      * allow the guest to write through read-only PTEs.  Emulate if the
+      * fault was a non-user write to a present page.  */
+-    if ( is_hvm_domain(d)
++    if ( !is_pv_domain(d)
+          && unlikely(!hvm_wp_enabled(v))
+          && regs->error_code == (PFEC_write_access|PFEC_page_present)
+          && mfn_valid(gmfn) )
+@@ -3718,7 +3718,7 @@ static void cf_check sh_pagetable_dying(
+     unsigned long l3gfn;
+     mfn_t l3mfn;
+ 
+-    ASSERT(is_hvm_domain(d));
++    ASSERT(!is_pv_domain(d));
+ 
+     gcr3 = v->arch.hvm.guest_cr[3];
+     /* fast path: the pagetable belongs to the current context */
+@@ -3794,7 +3794,7 @@ static void cf_check sh_pagetable_dying(
+     mfn_t smfn, gmfn;
+     p2m_type_t p2mt;
+ 
+-    ASSERT(is_hvm_domain(d));
++    ASSERT(!is_pv_domain(d));
+ 
+     gmfn = get_gfn_query(d, _gfn(gpa >> PAGE_SHIFT), &p2mt);
+     paging_lock(d);
+--- a/xen/arch/x86/time.c
++++ b/xen/arch/x86/time.c
+@@ -2867,7 +2867,7 @@ custom_param("tsc", tsc_parse);
+ 
+ uint64_t gtime_to_gtsc(const struct domain *d, uint64_t time)
+ {
+-    if ( !is_hvm_domain(d) )
++    if ( is_pv_domain(d) )
+     {
+         if ( time < d->arch.vtsc_offset )
+             return -scale_delta(d->arch.vtsc_offset - time,
+@@ -2880,7 +2880,7 @@ uint64_t gtime_to_gtsc(const struct doma
+ #ifdef CONFIG_HVM
+ uint64_t gtsc_to_gtime(const struct domain *d, uint64_t tsc)
+ {
+-    ASSERT(is_hvm_domain(d));
++    ASSERT(!is_pv_domain(d));
+     return scale_delta(tsc, &d->arch.vtsc_to_ns);
  }
+ #endif /* CONFIG_HVM */
+--- a/xen/arch/x86/vm_event.c
++++ b/xen/arch/x86/vm_event.c
+@@ -65,7 +65,7 @@ void vm_event_toggle_singlestep(struct d
+                          VM_EVENT_FLAG_FAST_SINGLESTEP)) )
+         return;
  
-+static inline bool is_vpmu_domain(const struct domain *d)
-+{
-+    return d->options & XEN_DOMCTL_CDF_vpmu;
-+}
-+
- #ifdef CONFIG_MEM_PAGING
- # define mem_paging_enabled(d) vm_event_check_ring((d)->vm_event_paging)
- #else
--- 
-2.43.0
-
+-    if ( !is_hvm_domain(d) )
++    if ( is_pv_domain(d) )
+         return;
+ 
+     ASSERT(atomic_read(&v->vm_event_pause_count));
 
