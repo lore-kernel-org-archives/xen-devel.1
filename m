@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D532BC61DBD
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2026 12:03:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1399876.1635851 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C7ABC61DBD
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2026 12:03:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1399880.1635859 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzCLO-0005w9-NM; Wed, 26 Aug 2026 12:03:02 +0000
+	id 1wzCLq-0006Mu-U3; Wed, 26 Aug 2026 12:03:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1399876.1635851; Wed, 26 Aug 2026 12:03:02 +0000
+Received: by outflank-mailman (output) from mailman id 1399880.1635859; Wed, 26 Aug 2026 12:03:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzCLO-0005w2-JO; Wed, 26 Aug 2026 12:03:02 +0000
-Received: by outflank-mailman (input) for mailman id 1399876;
- Wed, 26 Aug 2026 12:03:01 +0000
+	id 1wzCLq-0006Mn-Qw; Wed, 26 Aug 2026 12:03:30 +0000
+Received: by outflank-mailman (input) for mailman id 1399880;
+ Wed, 26 Aug 2026 12:03:30 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wzCLN-0005vl-BE
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 12:03:01 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wzCLp-0006LQ-SV
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 12:03:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzCLM-005gag-O8
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 14:03:00 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wzCLp-005gjq-9H
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 14:03:29 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a8ed5f0-bab6-0a2a0a5309dd-0a2a4505b254-26
- for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 14:03:00 +0200
-Received: from [209.85.218.54] (helo=mail-ej1-f54.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a8ed60a-bab6-0a2a0a5309dd-0a2a4503df2c-16
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 14:03:29 +0200
+Received: from [209.85.208.41] (helo=mail-ed1-f41.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a8ed5f4-4cb1-0a2a45050019-d155da36dd5e-3
- for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 14:03:00 +0200
-Received: by mail-ej1-f54.google.com with SMTP id
- a640c23a62f3a-c15b1da6b82so98913666b.1
- for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 05:03:00 -0700 (PDT)
+ id 6a8ed611-fae8-0a2a45030019-d155d029e8d1-3
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 14:03:29 +0200
+Received: by mail-ed1-f41.google.com with SMTP id
+ 4fb4d7f45d1cf-6a3efa2b38aso1560130a12.2
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 05:03:29 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c250a6fda4fsm525644466b.16.2026.08.26.05.02.57
+ a640c23a62f3a-c250a9ef382sm383284966b.58.2026.08.26.05.03.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Aug 2026 05:02:58 -0700 (PDT)
+ Wed, 26 Aug 2026 05:03:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,56 +55,56 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787745780; x=1788350580; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1787745809; x=1788350609; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=/YkZgeYdj2H9TEbe6ZemxBOWAqqSLB5TfcHMI7phaMk=;
-        b=YMu/bwNAIX72vNbbQg76rUE2gD8L/kMqn1ngtkqKJIvLBhfsWdSSmks3NInit92Clt
-         RkSD4btiaXj+I7UpKPyASy9xdkJ7vJxxxvifBSnj0y27S+RDPOWYW9Vef6R6dmEXQxbe
-         cGM8ydTaxq5F/mbOMfhCouhTpYmtZrr6RTvo+q7YI6XMx+r29rrSptEJlyo148pUkDyW
-         c88hIqXai0TrJAEBkyxAVn9xBytcwODAL/qV/+XzQVUkBR2b1Mc/ULJ4PmKMP+n/q6zY
-         ydmrOgf/iO6Yn2gj9ywe1B+eBVEhbffDSnytREv+gEVRryhPgh3ipv5a7vb3Ov2vSjNn
-         2gyA==
+        bh=eso5Vy60QRY0iW7T/56aNIKLGvEodCAr0Gzsj7Z1ZWc=;
+        b=gNWPHhPOxtKB2VsKod/QIJZGUiOYy6tRBBcyroD8BRBhy/mdqKQKb0FCukZrPo2EiJ
+         DBOIAvBsi6o+xLNRbKUH8pwFE33VFRCRQozyNwiMxGsnuygNOjPaHSGi0hfl7S06KEch
+         WnolD2j49+4S65kWVY6t9/+QHc4TUEd3ISp04lMO4pLDFdnDK3puoqFNtN6k+X145LbW
+         mezmqoax6CxNeSPpObwkKvuR0MLC/gw+hBLVGhARR0pr/8UDaPDaOYRnBTatJAIh/Fe+
+         7lWPD3iPeh4qoiljq4EtT55f1kegi+ZpGmopwhNuLRh4n5NHnuJWBi5KTWdG65N2e0k5
+         0yuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787745780; x=1788350580;
+        d=1e100.net; s=20251104; t=1787745809; x=1788350609;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=/YkZgeYdj2H9TEbe6ZemxBOWAqqSLB5TfcHMI7phaMk=;
-        b=rL/qhNQAMh9MLyT/1rHRQA3QyghumcHrairMWEZYktjZZFA2eGe5gEaShrhFQuSzVY
-         Sq7JmQm/XMfrP+qbhY6ZOGwo2Zt4KFJq4PEj0Z3D068gKAGinrogO2J9WDJ0NLZcbe/P
-         Hi9p7OVtgux7sZtP5/MxeUaQ2HfL5vUeMw6ofNiuDfoCgHYWScn+5tN7jup2RIPcoRUl
-         IjqNDvPyB36Ylh/6LZv8o9iyYO5/LEH7YEPtRcAuuYy/ZhXuQBD2Wk1qtyverEKtHRHP
-         +7HbKwtrIhEE6mxfHWb0s9On+29F13jOiT6fnvAjVQlPY1si9Dy4g8htFtgtFKLx6eXx
-         21wQ==
-X-Gm-Message-State: AFuF++kyaVlcbsKmjbA5BigLTuVFDgTdXgWCPtNaMOXCp8+48mfBz3ef
-	vjBREf4CeeWfZHOZr3nm/W3ztAW2mAXksWHgQiQDyBsakJlnbH6IVl6Nlu/0BuGnJa88PMNlw3a
-	J6bF+hQ==
-X-Gm-Gg: AR+sD11blJ3nwkjBacoi2CU3E6J/zrhBRfOxNRoReW5bIvDz4WjU1k5mPuB+Bj+S+az
-	iuW4bN9HrH5hZZ6XEWUkTkoRaoQZJ+VTYcKd4Dnl7XzqTBAgwnlf05Bp5/dtHIT5mCAzagN7oAW
-	CPWBCY/24zUvkj13fwuwZiEivnf/VV5hEGFh5n8UmMmOabjbkX9rKP7NIR0uF3UUIkp+aTrSmYc
-	r76vWxBbN1QTYgZcpn1XwQA+pyJ1QuzWzybEU28iAucTxrKHrLaBb09Nxf6CzSPmm90ubybfZk3
-	OvDu/oKFxaLxmcG4Ro2pig3ciJfrUlruJx4PGtjUMHQPc5XloZF/0HvWHDyQE4cSOupsHUiwGQ6
-	4FCg858Zrzpg5DO+098KhQzzqR/rgT7ufaZ7OVScorghHDGiLjZj9c8G+D39iSpIukvqYM5e7ql
-	iFaalnWzja3hrnf+AUnqrvaMlvpg/czB78wyfWvGr9c68t4/msSq0S6RDnMPJCeQfyv+bgE49+N
-	CLTQTcOGsZqFQRPtQQ3AmHBGVIKgUQCYbAQ3r+h6hSzO7gwCD7e
-X-Received: by 2002:a17:907:6089:b0:c25:31b4:5f15 with SMTP id a640c23a62f3a-c2531b46428mr72923166b.1.1787745779652;
-        Wed, 26 Aug 2026 05:02:59 -0700 (PDT)
-Message-ID: <af402588-3a7d-4923-96e1-f5761b445889@suse.com>
-Date: Wed, 26 Aug 2026 14:02:57 +0200
+        bh=eso5Vy60QRY0iW7T/56aNIKLGvEodCAr0Gzsj7Z1ZWc=;
+        b=mabWoP1RixgoOXrA9WRU6qEf+7KpW2O9mIEMX+eSPnvXpVWsjiG4JZuUpBCnl0e5Dx
+         Q6B5kanZEbLVpQPLi1Md6on0Ctfy47kM0RmgeEVmdC6dftckLlrckDBdUkoptDzIYhjQ
+         uecI36E0g/uOiz64IhNQ3nPJtzJc7ZET29oQjsSfdVHM934S28h/kXEK4BA+NBEuRD7T
+         T7CNr6wIfsU31/YM8nOO3Mp+5WKUHAbQ1GiXyCUB7rw1qQxJ6s9qPfhC+BiFNQN+KAqf
+         Up6RFOnSI2PdAtpGQq0euSasdRRrl1en2j2Y8TC1ZKC2SN8mSW0YK1TNpII6D3dAHUac
+         y6Hg==
+X-Gm-Message-State: AFuF++kY/OZ0fkmhvI5bJn1C/dRnvtk5y4/U3lrTFrRHIDoY2Q+MY3mg
+	2/PSwxSnDEM3PUlFPJwKwUSUUgAzsF7J8FwJb003LkSa9mEVH369KxN4kaD2JlPvJEi8wVAkryV
+	9syNOZg==
+X-Gm-Gg: AR+sD13TggQZFM41bLP12WyYv9hAwclVjpTF1xbfu5B+OFz1DHt/PtFOsFzMRpuJ9jw
+	hfSCs78bqx+CrO57Iti4mkG5d+ZyaVRZ9wKbBSSFLcr676GYNVEvWnl+Kz1UFXrx58guPN6GG2L
+	MWPzLaU8Fuv8tar7pI0UaTTA1NuPivALEYfb9nwNBTFsHE/20F61dS+HqqDaDPfNqep0R1YxzHv
+	hJhdkdH6rb2UF8c0tGu5M9pmgcVCyhE5FbLZy/8k10utjUyP+ecBwJZBAakFcLDgz7gYwsUhTbX
+	5mvYhH6vCpz/jBRY0fbm8KgvSU6GkWwn0xfTgWPVuQwxdcOC7A2oKeB+Ct9jEhWOxRyFzYlpALG
+	DxWYkLT/yaUxo8iQMiV6fYYPD6KQFuyoDY11oIZh9G23vAOr6MLnIFBrLqfUyVvzS3nBIl7QrH7
+	rNQL/wfccvxomMOsxMsiUIkwF/H2W2En5zxkUQcszNvYyPXkk9ZvH4ap/bgZaEYQJnuoJ7/3SYZ
+	WWwC4aW/Pq8xYrhJN59GFVxyRhoH5A2QzCL3KCXQQ/UxaWMqdO9vw==
+X-Received: by 2002:a17:906:730e:b0:c1f:bda0:a771 with SMTP id a640c23a62f3a-c250c363aa9mr755151166b.13.1787745808567;
+        Wed, 26 Aug 2026 05:03:28 -0700 (PDT)
+Message-ID: <f569f2ea-cf1f-4e28-8097-f81397368e73@suse.com>
+Date: Wed, 26 Aug 2026 14:03:26 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2 5/7] build: move $(all-symbols-*)
+Subject: [PATCH v2 6/7] build: move $(compare-symbol-tables)
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Teddy Astie <teddy.astie@vates.tech>
+ <roger@xenproject.org>
 References: <9a78fdea-08ba-4e04-bfa1-ba09730a300b@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -133,88 +133,60 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <9a78fdea-08ba-4e04-bfa1-ba09730a300b@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1787745780-728B62A1-213CE5E7/0/0
+X-purgate-ID: tlsNG-33051d/1787745809-766FB4E9-64F4D46B/0/0
 X-purgate-type: clean
-X-purgate-size: 2842
+X-purgate-size: 1830
 
 With the final linking logic now consolidated in scripts/Makefile.link,
-$(all-symbols-*) also doesn't need setting anymore in (and passing down
-from) the top level Makefile.
+$(compare-symbol-tables) also doesn't need setting anymore in
+Kbuild.include.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+v2: New.
 
---- a/xen/Makefile
-+++ b/xen/Makefile
-@@ -465,10 +465,6 @@ ALL_OBJS-$(CONFIG_CRYPTO) += crypto/buil
- ARCH_LIBS-y               :=
- ALL_LIBS-y                := lib/lib.a
+--- a/xen/scripts/Kbuild.include
++++ b/xen/scripts/Kbuild.include
+@@ -56,19 +56,6 @@ define filechk
+ 	fi
+ endef
  
--all-symbols-y :=
--all-symbols-$(CONFIG_LIVEPATCH) += --all-symbols
--all-symbols-$(CONFIG_FAST_SYMBOL_LOOKUP) += --sort-by-name
+-###
+-# Compare the symbol tables of two object files.  As diff's -I option isn't
+-# standardized, the name difference of the two object files needs abstracting
+-# out.
+-define compare-symbol-tables
+-    ln -f $(1) $(@D)/.cst.$$$$; \
+-    $(OBJDUMP) -t $(@D)/.cst.$$$$ > $(1).sym; \
+-    ln -f $(2) $(@D)/.cst.$$$$; \
+-    $(OBJDUMP) -t $(@D)/.cst.$$$$ > $(2).sym; \
+-    rm -f $(@D)/.cst.$$$$; \
+-    diff -u $(1).sym $(2).sym
+-endef
 -
- include $(srctree)/arch/$(SRCARCH)/arch.mk
- 
- # define new variables to avoid the ones defined in Config.mk
-@@ -622,8 +618,7 @@ $(TARGET): outputmakefile asm-generic FO
- 	$(Q)$(MAKE) $(build)=arch/$(SRCARCH) include
- 	$(Q)$(MAKE) $(build)=. arch/$(SRCARCH)/include/asm/asm-offsets.h
- 	$(Q)$(MAKE) $(build)=. MKRELOC=$(MKRELOC) 'ALL_OBJS=$(ALL_OBJS-y)' \
--	            'ALL_LIBS=$(ARCH_LIBS-y) $(ALL_LIBS-y)' \
--	            'all_symbols=$(all-symbols-y)' $@
-+	            'ALL_LIBS=$(ARCH_LIBS-y) $(ALL_LIBS-y)' $@
- 
- SUBDIRS = xsm arch common crypto drivers lib test
- define all_sources
---- a/xen/arch/x86/Makefile
-+++ b/xen/arch/x86/Makefile
-@@ -183,14 +183,14 @@ ifeq ($(XEN_BUILD_PE),y)
- 	$(MKRELOC) $^ > $@
- 
- .$(TARGET).efi.0s.S:
--	$(objtree)/tools/symbols $(all_symbols) --empty > $@
-+	$(objtree)/tools/symbols $(all-symbols-y) --empty > $@
- 
- .$(TARGET).efi.1s.S: .$(TARGET).efi.0
- .$(TARGET).efi.2s.S: .$(TARGET).efi.1
- 
- .$(TARGET).efi.%s.S:
- 	$(NM) -pa --format=sysv $< \
--	  | $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
-+	  | $(objtree)/tools/symbols $(all-symbols-y) --sysv --sort \
-  	    --source-name=$(TARGET).efi.S \
- 	  > $@
- 
+ # as-insn: Check whether assembler supports an instruction.
+ # Usage: cflags-y += $(call as-insn,CC FLAGS,"insn",option-yes,option-no)
+ as-insn = $(if $(shell echo 'void _(void) { asm volatile ( $(2) ); }' \
 --- a/xen/scripts/Makefile.link
 +++ b/xen/scripts/Makefile.link
-@@ -3,6 +3,10 @@
- # Helper rules for linking xen-syms
- # ==========================================================================
- 
-+all-symbols-y :=
-+all-symbols-$(CONFIG_LIVEPATCH) += --all-symbols
-+all-symbols-$(CONFIG_FAST_SYMBOL_LOOKUP) += --sort-by-name
-+
- syms-warn-dup-y := --warn-dup
- syms-warn-dup-$(CONFIG_SUPPRESS_DUPLICATE_SYMBOL_WARNINGS) :=
- syms-warn-dup-$(CONFIG_ENFORCE_UNIQUE_SYMBOLS) := --error-dup
-@@ -17,7 +21,7 @@ final-image-check-y ?= true
- 	$(call cmd,cc_o_S)
- 
- .$(TARGET)-syms.0.S:
--	$(objtree)/tools/symbols $(all_symbols) --empty > $@
-+	$(objtree)/tools/symbols $(all-symbols-y) --empty > $@
- 
- .$(TARGET)-syms.1.S: .$(TARGET)-syms.0
- .$(TARGET)-syms.2.S: .$(TARGET)-syms.1
-@@ -25,7 +29,7 @@ final-image-check-y ?= true
- 
- .$(TARGET)-syms.%.S:
- 	$(NM) -pa --format=sysv $< \
--	  | $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
-+	  | $(objtree)/tools/symbols $(all-symbols-y) --sysv --sort \
+@@ -33,6 +33,18 @@ final-image-check-y ?= true
  	    $(if $(filter $(LAST_LINKING_PASS),$*), $(syms-warn-dup-y)) \
  	  > $@
  
++# Compare the symbol tables of two object files.  As diff's -I option isn't
++# standardized, the name difference of the two object files needs abstracting
++# out.
++define compare-symbol-tables
++    ln -f $(1) $(@D)/.cst.$$$$; \
++    $(OBJDUMP) -t $(@D)/.cst.$$$$ > $(1).sym; \
++    ln -f $(2) $(@D)/.cst.$$$$; \
++    $(OBJDUMP) -t $(@D)/.cst.$$$$ > $(2).sym; \
++    rm -f $(@D)/.cst.$$$$; \
++    diff -u $(1).sym $(2).sym
++endef
++
+ .$(TARGET)-syms.%: $(objtree)/prelink.o .$(TARGET)-syms.%.o $(obj)/xen.lds
+ 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $(filter %.o,$^) \
+ 	      $(build_id_linker) --strip-debug -o $@
 
 
