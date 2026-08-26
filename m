@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18CC0C61DBD
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2026 12:04:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1399887.1635867 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2D18C5DF97
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2026 12:36:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1399919.1635892 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzCMc-0006ss-5P; Wed, 26 Aug 2026 12:04:18 +0000
+	id 1wzCrT-0003ca-QU; Wed, 26 Aug 2026 12:36:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1399887.1635867; Wed, 26 Aug 2026 12:04:18 +0000
+Received: by outflank-mailman (output) from mailman id 1399919.1635892; Wed, 26 Aug 2026 12:36:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzCMc-0006sl-2J; Wed, 26 Aug 2026 12:04:18 +0000
-Received: by outflank-mailman (input) for mailman id 1399887;
- Wed, 26 Aug 2026 12:04:16 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wzCrT-0003cT-Nf; Wed, 26 Aug 2026 12:36:11 +0000
+Received: by outflank-mailman (input) for mailman id 1399919;
+ Wed, 26 Aug 2026 12:36:10 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wzCMa-0006sa-8e
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 12:04:16 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wzCrS-0003cN-3A
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 12:36:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzCMZ-00BxmO-LJ
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 14:04:15 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wzCrQ-0085EP-4f
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 14:36:08 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a8ed637-e002-0a2a0a5209dd-0a2a4501ae1e-46
- for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 14:04:15 +0200
-Received: from [209.85.208.49] (helo=mail-ed1-f49.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a8eddae-2eae-0a2a0a5409dd-0a2a4502db4e-16
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 14:36:04 +0200
+Received: from [209.85.208.52] (helo=mail-ed1-f52.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a8ed63f-5984-0a2a45010019-d155d031f188-3
- for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 14:04:15 +0200
-Received: by mail-ed1-f49.google.com with SMTP id
- 4fb4d7f45d1cf-6a3fda88184so1394525a12.3
- for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 05:04:15 -0700 (PDT)
+ id 6a8eddb4-6ca4-0a2a45020019-d155d034dc9c-3
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 14:36:04 +0200
+Received: by mail-ed1-f52.google.com with SMTP id
+ 4fb4d7f45d1cf-69c600f76ccso1406693a12.0
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 05:36:04 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a5de5f7bb8sm4136250a12.0.2026.08.26.05.04.09
+ a640c23a62f3a-c250a9ef4d2sm359613266b.59.2026.08.26.05.36.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Aug 2026 05:04:09 -0700 (PDT)
+ Wed, 26 Aug 2026 05:36:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,62 +53,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787745855; x=1788350655; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=PVJaUDGprniCHOdS15F0kmtFEIvAxLzg9FMvZh5Wvbg=;
-        b=KMdC/QqtF/Y8eVryPDTB3FtPMsr/0rIrycpSjMbG8pcfShOJl0EitJWIoXerHerVwS
-         zvI4gRXylX0o+TeUqqjMRP1Uk4LiGb+9enl3fDciv7WRabYiFRehBlN0Ap3a6j9sK5yL
-         cEi9+no7YdU2cL8HQwUPL2l1W3MwW++DNtji5ssJPxHZj67f/R9re2AiEkJJNr+MZqqa
-         SApyPylbrc/jgl7Aw9NCHwXKga8tfHc/VLjCMGdf2NpIsXFXRGsGjxdzEUK+EzqnZ5Ks
-         tYJL4UycAmxz6HwlP4yqX0f7ghzxCu7tL/Wx0bE//VjDwpsyKbrtbeby7Z9Zh1kazdpT
-         /Q+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787745855; x=1788350655;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+        d=suse.com; s=google; t=1787747764; x=1788352564; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=PVJaUDGprniCHOdS15F0kmtFEIvAxLzg9FMvZh5Wvbg=;
-        b=idlsWV5xeuFn6Vg2qXYSU454l0ZHxptWsJXX1D0ch2qtdVilylR+34oQKhfgBIHsGE
-         lTcvTkB49XMhl9CANskBniun5LBVZkAB7DEomVtK4XSptP0H8DXO+lAiXJoCyzfMenld
-         LxpO9V7RI2JKYEpKPkTtSZX/XJ1tBmeyvaP9LrVsY0nxA92LMtd+gDW0Tq8dfj/cm5eu
-         b+udMjn0KOF3zkPqWzfV7l6ps5Jrycv6OOLM7e1Yolf/UlwLzvkb6m1gY3lKbtspE4FZ
-         tEZHBM1wH+kYtB2nZ0XFjoTtIQ9+lDtFuFBjj4bIK7E96EX1h3DvXYv+g+hvvKavL7kf
-         j0Bg==
-X-Gm-Message-State: AFuF++lG5+VAC6V9Iqa0HHdmxCYyjcv8AVAe732ZZ6CIG5Ds1L1StUQr
-	gkABZNhtWjHi8xulz7O+GDMr2Rg0HcNxrw73nL/ydgJbu31UAoHcz8zf37TENe++4mYPCLMFzwl
-	OArQ7TQ==
-X-Gm-Gg: AR+sD12miPAVgvDgs6DihHvYRqSzDyNIRZHeJtBYd6AcXh/D5qzybz90m5G4F22VeKt
-	c/yvgpvYFeqLizklDiKTzjwvOJK9Ff5arsG7GLNtcx7at+gTteqn8M2vGXk2WurvKWg9UyMx86E
-	3XLzNh425WoiGbO2/R6HwcgpI7st2lVWRA0IfOg9q9OocJJHi6hD9kKttZM4ZRoSutQXCCqRTeR
-	pQE/1yGJ4pdXM+9UPel+uAFd59IsVnqXTlkFM22CEWTIWdDCv3dJYmd1BK9pHfpxAnWyVbd9BVh
-	Xynxdk5WJO37mIC/nKCxDUCraRksRSwzXuqiDuDSvvI4wTjNxh6Srl+pEuXytuycT3jeojcNfCa
-	Ib6/ZReSt0OGr4bX3FuN2VYm8TCYlIJEEluCndRvj6sv1OQ2nLc/WO0YmNLewD9Pkpc4nzwmv5t
-	6nM4/b5MGHALoP04Mvor+kMcRzqnl2Qqnta/fe/SuFXmiMm6GjT8mkhmbIFNLKdUjV0Ouzh3SlD
-	0E9CPR0ZHNTtAJEyuDz4WBNR+j9oMKCBxY83CFcFURpHdRAKz17zpKS4wR+LxU=
-X-Received: by 2002:a05:6402:190c:b0:6a1:29ca:681e with SMTP id 4fb4d7f45d1cf-6a5df5e18c6mr7616941a12.7.1787745850414;
-        Wed, 26 Aug 2026 05:04:10 -0700 (PDT)
-Message-ID: <f26f80e3-0b2d-429a-895c-b8003d1c5a38@suse.com>
-Date: Wed, 26 Aug 2026 14:04:08 +0200
+        bh=rv3V08n1rNWcfH/Wq0wKEeP+mXrRm3kizeLFPwSWLhY=;
+        b=adfZchmCAKiv8NPfyWAXfNBx1SkefDpDM01wpDVZzd9A3I5bxC0tdbYKaHbGBiDNpp
+         ZoQvbXhuhw17vV7xEdAVwy/lv6OxLUUDzdYG06y/UZAcwsNiUAqziFVAKUG18PD7Zfzv
+         xjDKaUOSsFH94SRLn+SipUsS4mWQhk8v2Lps2Uu9QlU18fvHxeI0E1lJyPlu5br32Ic1
+         NxnIZRz1nKT4IMk78ABd1iv3cMD2ocoDNmBbdAQM3Z2nQZkgIrkaOhMd5uqHzG9Ezipj
+         yCXcB7ypGiqPv6w0ivuqQduY0TZkdIRSVU/gOw6R8n8HdtWXX5epV60LsuguQ3ntWRdu
+         ZmGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787747764; x=1788352564;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=rv3V08n1rNWcfH/Wq0wKEeP+mXrRm3kizeLFPwSWLhY=;
+        b=ZZNrJpCAV4U/g+6+7IJE89eM9KveK7Hb67S4+inyRa3xeSkA1pR0gJHXllP7XF781t
+         m/V6VIlNm+jEGgoi8cqYgg0lLyEiPFj3O6IChF8KJS96oirOzl4DRItTQ2ie2+y97Jxi
+         aNuZ8JvG/kJzLHu5nuSBLJjlG08eA75JpFeScR1FHhP8+473/IXZK4E+iWZepLqlsd4c
+         XQVgtHKA0jPoLkjFrD0Imp0glt80ABl+oQlH4ZeurrRt9BTBxYdIuae6828hEA6FsEld
+         Ik9KO4swztgT11eYs9quM3UGdkmMIx9WLpKWzvGhehRO4S23YvvdW5HmH5sLQI4rFc9L
+         oO6Q==
+X-Gm-Message-State: AFuF++nAHNvkrRKpFaXg4OdqxFWg+CtHQx3hui51bnE1HN7vB+xO0FCu
+	vYE9yAFtnuyqVJuBoi6tfKe5TMmEj6HydVeag1i78r94K042hS/3IW4gUPwDru9ray/TG4afpiP
+	vs83ufA==
+X-Gm-Gg: AR+sD12TAIVk7FkdD5SZ+OaSqT7V8tiEaBrefR8YMXbO2MScw2A3JjAFfEETbBzb1mo
+	I2NoBpgYRmMKdDNOCKKoCT1h0KompoQJa0XvX2GDR340K+eNANeljAA0EHg3wnEBXxsK2kxiH+9
+	zA60JuKnqFzZIUiH3BptWsLygjmz5VDfq0wDE0/Utt20ndRtAjuS5/J9QUhLwPnwoaj9pAHah8D
+	+RYrIUPt6w6TJ6ssnGrlVELWokR5LfRjyt6i9hEQd03VN1Zok9QBPDGOQAM9CX1n4wwC+dDVfeF
+	EflrdVOepJddl5Jx9oUc2orq9KghlIE9cq6xd44VZa9hrWwPTN8E3gvXjGrJZ9pnRYv8qubya3a
+	hOBRfUTLA+dQAz35fQXgmrMwDEa/ElsAAx4DggnUVrAxjHgNSWWOexvvLvwdTczgz6e/bq2sfQ8
+	GRP4qP/SsBiCNdzQJEfseJYR6Iz01mILlq7M1Qt5sFHJ/l0lTuHNVQFPMlBvX4F+TwrkAs5Jkcz
+	xDl75bHkThJIuGxCSB7lpxxXiDESmTIvcIy2O33c/94oHw/yJbW
+X-Received: by 2002:a17:907:72c1:b0:c20:1c9d:8d4b with SMTP id a640c23a62f3a-c250bb05c0fmr805557266b.2.1787747764400;
+        Wed, 26 Aug 2026 05:36:04 -0700 (PDT)
+Message-ID: <b9c89c9f-20e1-441c-bf77-7da42eafdae3@suse.com>
+Date: Wed, 26 Aug 2026 14:36:02 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2 7/7] RISC-V: place .sdata / .srodata / .riscv.attributes
-From: Jan Beulich <jbeulich@suse.com>
+Content-Language: en-US
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>
-References: <9a78fdea-08ba-4e04-bfa1-ba09730a300b@suse.com>
-Content-Language: en-US
+ <roger@xenproject.org>, George Dunlap <gwd@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH] x86: always park offline CPUs
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -132,61 +129,203 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <9a78fdea-08ba-4e04-bfa1-ba09730a300b@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1787745855-BD341757-289A1949/0/0
+X-purgate-ID: tlsNG-720697/1787747764-F18AC2AC-7DDEEEF2/0/0
 X-purgate-type: clean
-X-purgate-size: 1611
+X-purgate-size: 6947
 
-Of the short-data sections, only .sbss is presently mentioned in the
-linker script. Place them next to, but ahead of their "normal" data
-sections.
+While on AMD (or Hygon) CPUs the situation isn't as bad wrt broadcasting
+of #MC, some "multicast" can still happen. Therefore the reasoning to park
+CPUs rather than fully offlining them applies everywhere.
 
-.riscv.attributes can go towards the tail of the image, next to (ahead of)
-debug info.
+Don't retain the dependency on the "mce=" cmdline option either: That
+option may best be dropped as well, as not enabling MCE will result in a
+shutdown when #MC would otherwise be raised.
 
+Drop the global variable, using a #define (just like common code does)
+instead. Outside of common code, simplify expressions / code accordingly.
+(In common code we still have to cater for x86 wanting it different from
+everyone else.)
+
+Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-Seeing where .sbss lives, does positioning really not matter at all? I
-would have expected that short-data sections want to live close together,
-and specifically close to .text / .init.text (seeing that such data is
-accessed using AUIPC). I'm puzzled that the psABI doesn't even mention
-them, hence leaving it open how exactly they are to be used.
+As it was never actually used after its introduction, we may want to
+further consider dropping CPU_REMOVE again.
 
-What remains to eliminate orphan section warnings is the placement of
-.note.GNU-stack (which perhaps wants dealing with on all of Arm, PPC, and
-RISC-V together, ideally unifying with x86) and (odd at the first glance,
-but dealt with on x86 as well, i.e. may again want unifying) that of a
-number of .rela.* sections.
+I was almost certain that we would have at least one place (presumably a
+CPU notifier handler) were we assumed no parking for AMD/Hygon. Yet I
+couldn't find anything; did I overlook the crucial bits?
 
---- a/xen/arch/riscv/xen.lds.S
-+++ b/xen/arch/riscv/xen.lds.S
-@@ -44,6 +44,8 @@ SECTIONS
+--- a/xen/arch/x86/acpi/cpu_idle.c
++++ b/xen/arch/x86/acpi/cpu_idle.c
+@@ -436,7 +436,7 @@ static void cf_check dump_cx(unsigned ch
  
-         BUGFRAMES
+         if ( cpu_online(cpu) )
+             print_acpi_power(cpu, power);
+-        else if ( park_offline_cpus )
++        else
+             printk("CPU%u parked in state %u (C%u)\n", cpu,
+                    power->last_state ? power->last_state->idx : 1,
+                    power->last_state ? power->last_state->type : 1);
+@@ -1360,7 +1360,7 @@ long set_cx_pminfo(uint32_t acpi_id, str
+          * If we've just learned of more available C states, wake the CPU if
+          * it's parked, so it can go back to sleep in perhaps a deeper state.
+          */
+-        if ( park_offline_cpus && apic_id != BAD_APICID )
++        if ( apic_id != BAD_APICID )
+         {
+             unsigned long flags;
  
-+        *(.srodata)
-+        *(.srodata.*)
-         *(.rodata)
-         *(.rodata.*)
-         VPCI_ARRAY
-@@ -92,6 +94,7 @@ SECTIONS
-         SCHEDULER_ARRAY
-         HYPFS_PARAM
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -432,9 +432,6 @@ void __init early_cpu_init(bool verbose)
+ 		paddr_bits -= (ebx >> 6) & 0x3f;
+ 	}
  
-+        *(.sdata .sdata.*)
-         *(.data .data.*)
-         CONSTRUCTORS
-     } :text
-@@ -162,6 +165,8 @@ SECTIONS
-     /* Section for the device tree blob (if any). */
-     .dtb : { *(.dtb) } :text
+-	if (!(c->vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)))
+-		park_offline_cpus = opt_mce;
+-
+ 	initialize_cpu_data(0);
+ }
  
-+    .riscv.attributes : { *(.riscv.attributes) } :text
+--- a/xen/arch/x86/cpu/mcheck/mce.c
++++ b/xen/arch/x86/cpu/mcheck/mce.c
+@@ -716,15 +716,8 @@ static int cf_check cpu_callback(
+         rc = cpu_bank_alloc(cpu);
+         break;
+ 
+-    case CPU_UP_CANCELED:
+-    case CPU_DEAD:
+-        if ( !park_offline_cpus )
+-            cpu_bank_free(cpu);
+-        break;
+-
+     case CPU_REMOVE:
+-        if ( park_offline_cpus )
+-            cpu_bank_free(cpu);
++        cpu_bank_free(cpu);
+         break;
+     }
+ 
+--- a/xen/arch/x86/genapic/x2apic.c
++++ b/xen/arch/x86/genapic/x2apic.c
+@@ -181,12 +181,8 @@ static int cf_check update_clusterinfo(
+              !cond_alloc_cpumask_var(&per_cpu(scratch_mask, cpu)) )
+             err = -ENOMEM;
+         break;
+-    case CPU_UP_CANCELED:
+-    case CPU_DEAD:
 +
-     DWARF2_DEBUG_SECTIONS
+     case CPU_REMOVE:
+-        if ( park_offline_cpus == (action != CPU_REMOVE) ||
+-             system_state == SYS_STATE_suspend )
+-            break;
+         if ( per_cpu(cluster_cpus, cpu) )
+         {
+             cpumask_clear_cpu(cpu, per_cpu(cluster_cpus, cpu));
+--- a/xen/arch/x86/include/asm/percpu.h
++++ b/xen/arch/x86/include/asm/percpu.h
+@@ -1,7 +1,7 @@
+ #ifndef __X86_PERCPU_H__
+ #define __X86_PERCPU_H__
  
-     DISCARD_SECTIONS
-
+-#define PARK_OFFLINE_CPUS_VAR
++#define park_offline_cpus true
+ 
+ /*
+  * Force uses of per_cpu() with an invalid area to attempt to access the
+--- a/xen/arch/x86/include/asm/smp.h
++++ b/xen/arch/x86/include/asm/smp.h
+@@ -25,12 +25,6 @@ DECLARE_PER_CPU(cpumask_var_t, scratch_c
+ DECLARE_PER_CPU(cpumask_var_t, hpet_scratch_cpumask);
+ DECLARE_PER_CPU(cpumask_var_t, send_ipi_cpumask);
+ 
+-/*
+- * Do we, for platform reasons, need to actually keep CPUs online when we
+- * would otherwise prefer them to be off?
+- */
+-extern bool park_offline_cpus;
+-
+ void smp_send_nmi_allbutself(void);
+ 
+ void send_IPI_mask(const cpumask_t *mask, int vector);
+--- a/xen/arch/x86/mpparse.c
++++ b/xen/arch/x86/mpparse.c
+@@ -80,16 +80,12 @@ void __init set_nr_cpu_ids(unsigned int
+ 	printk(XENLOG_INFO "SMP: Allowing %u CPUs (%d hotplug CPUs)\n",
+ 	       max_cpus, max_t(int, max_cpus - num_processors, 0));
+ 
+-	if (!park_offline_cpus)
+-		tot_cpus = max_cpus;
+ 	nr_cpu_ids = min(tot_cpus, NR_CPUS + 0u);
+ 	if (nr_cpu_ids < num_processors)
+ 	{
+ 		unaccounted_cpus = true;
+-		if (park_offline_cpus)
+-			printk(XENLOG_WARNING
+-			       "SMP: Cannot bring up %u further CPUs\n",
+-			       num_processors - nr_cpu_ids);
++		printk(XENLOG_WARNING "SMP: Cannot bring up %u further CPUs\n",
++		       num_processors - nr_cpu_ids);
+ 	}
+ 
+ #ifndef nr_cpumask_bits
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -2144,8 +2144,7 @@ void asmlinkage __init noreturn __start_
+             /* Set up node_to_cpumask based on cpu_to_node[]. */
+             numa_add_cpu(i);
+ 
+-            if ( (park_offline_cpus || num_online_cpus() < max_cpus) &&
+-                 !cpu_online(i) )
++            if ( !cpu_online(i) )
+             {
+                 ret = cpu_up(i);
+                 if ( ret != 0 )
+--- a/xen/arch/x86/smp.c
++++ b/xen/arch/x86/smp.c
+@@ -92,9 +92,7 @@ void send_IPI_mask(const cpumask_t *mask
+     if ( system_state > SYS_STATE_smp_boot &&
+          !unaccounted_cpus && !disabled_cpus && !cpu_in_hotplug_context() &&
+          /* NB: get_cpu_maps lock requires enabled interrupts. */
+-         local_irq_is_enabled() && (cpus_locked = get_cpu_maps()) &&
+-         (park_offline_cpus ||
+-          cpumask_equal(&cpu_online_map, &cpu_present_map)) )
++         local_irq_is_enabled() && (cpus_locked = get_cpu_maps()) )
+         cpumask_or(scratch, mask, cpumask_of(smp_processor_id()));
+     else
+     {
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -67,8 +67,6 @@ DEFINE_PER_CPU_READ_MOSTLY(struct stubs,
+ cpumask_t cpu_online_map __read_mostly;
+ EXPORT_SYMBOL(cpu_online_map);
+ 
+-bool __read_mostly park_offline_cpus;
+-
+ unsigned int __read_mostly nr_sockets;
+ cpumask_t **__read_mostly socket_cpumask;
+ static cpumask_t *secondary_socket_cpumask;
+@@ -1149,7 +1147,7 @@ static int cf_check cpu_smpboot_callback
+         break;
+     case CPU_UP_CANCELED:
+     case CPU_DEAD:
+-        cpu_smpboot_free(cpu, !park_offline_cpus);
++        cpu_smpboot_free(cpu, false);
+         break;
+     case CPU_REMOVE:
+         cpu_smpboot_free(cpu, true);
+--- a/xen/include/xen/percpu.h
++++ b/xen/include/xen/percpu.h
+@@ -34,7 +34,7 @@
+ #include <xen/types.h>
+ #include <asm/current.h>
+ 
+-#ifndef PARK_OFFLINE_CPUS_VAR
++#if !defined(PARK_OFFLINE_CPUS_VAR) && !defined(park_offline_cpus)
+ /*
+  * Do we, for platform reasons, need to actually keep CPUs online when we
+  * would otherwise prefer them to be off?
 
