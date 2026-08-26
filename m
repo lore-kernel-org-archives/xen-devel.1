@@ -4,43 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 649FCC61DBD
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2026 04:58:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1399572.1635603 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C368C5DF97
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2026 05:21:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1399612.1635611 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wz5ih-0005fi-Pq; Wed, 26 Aug 2026 04:58:39 +0000
+	id 1wz64R-0003GE-Nn; Wed, 26 Aug 2026 05:21:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1399572.1635603; Wed, 26 Aug 2026 04:58:39 +0000
+Received: by outflank-mailman (output) from mailman id 1399612.1635611; Wed, 26 Aug 2026 05:21:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wz5ih-0005fY-Kt; Wed, 26 Aug 2026 04:58:39 +0000
-Received: by outflank-mailman (input) for mailman id 1399572;
- Wed, 26 Aug 2026 04:58:38 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wz64R-0003G7-KX; Wed, 26 Aug 2026 05:21:07 +0000
+Received: by outflank-mailman (input) for mailman id 1399612;
+ Wed, 26 Aug 2026 05:21:06 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <frn1furkan10@gmail.com>) id 1wz5ig-0005dV-16
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 04:58:38 +0000
+ (envelope-from <neal.frager@amd.com>) id 1wz64Q-0003G1-5t
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 05:21:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wz5if-00758C-EF
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 06:58:37 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wz64P-006jwg-FI
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 07:21:05 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <frn1furkan10@gmail.com>)
- id 6a8e725f-e002-0a2a0a5209dd-0a2a450bdaf6-24
- for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 06:58:37 +0200
-Received: from [209.85.218.47] (helo=mail-ej1-f47.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <frn1furkan10@gmail.com>)
- id 6a8e727d-b7e8-0a2a450b0019-d155da2ff019-3
- for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 06:58:37 +0200
-Received: by mail-ej1-f47.google.com with SMTP id
- a640c23a62f3a-c250a2bc3b3so58361166b.2
- for <xen-devel@lists.xenproject.org>; Tue, 25 Aug 2026 21:58:37 -0700 (PDT)
-Received: from notebook.. ([88.230.44.160]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c250a9b43a0sm278781666b.52.2026.08.25.21.58.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Aug 2026 21:58:36 -0700 (PDT)
+ (envelope-from <neal.frager@amd.com>)
+ id 6a8e77a6-8faa-0a2a0a5109dd-0a2a450987be-28
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 07:21:05 +0200
+Received: from [40.93.196.70]
+ (helo=SA9PR02CU001.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <neal.frager@amd.com>)
+ id 6a8e77bf-be1a-0a2a45090019-285dc4467129-4
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 07:21:04 +0200
+Received: from BL1PR12MB5032.namprd12.prod.outlook.com (2603:10b6:208:30a::12)
+ by CYYPR12MB8654.namprd12.prod.outlook.com (2603:10b6:930:c9::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.6; Wed, 26 Aug
+ 2026 05:21:00 +0000
+Received: from BL1PR12MB5032.namprd12.prod.outlook.com
+ ([fe80::3c13:eeb6:d9ef:c95d]) by BL1PR12MB5032.namprd12.prod.outlook.com
+ ([fe80::3c13:eeb6:d9ef:c95d%6]) with mapi id 15.21.0360.005; Wed, 26 Aug 2026
+ 05:21:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,523 +55,183 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787720317; x=1788325117; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=FHRsXuEnf7BCXLP3eamT1pJU7X7xpT0JlychFCHzOuM=;
-        b=iVPKiUlRX8AAxHG1yp5yA9fUy0Zkw02z6k7Xx6Tf38C3C3DqB+/c/zIp4HkAqSKZC5
-         pLVV7Fnwujmaui/HZ1fNZzGLyox6O1Pj3DcNRSE3ylqBOPGODAwZbiFvDJS+OOelPHUS
-         h7i3JMa2Zz4Zy8o0Z3WsI4BneZB3trsLQCfVNrTMiv6WsA4HS2eN6+84AJuNxOw94WtM
-         yLzNUwd7uQLEbfNIEQA58fBh9ZaOnIUye6WCpxtIjImkB6EJw+F3AeE42xW3eVWg8MH3
-         CKPW7a3SuIAYFBFHXwr0Vs/27J2i4uAbURSMuSHugW/5Zb1aqRqxvKqGMSPrrYmcAXxK
-         azWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787720317; x=1788325117;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=FHRsXuEnf7BCXLP3eamT1pJU7X7xpT0JlychFCHzOuM=;
-        b=MvFQ1EiIL7eAEKaIfiSqJ5rd/GjOFeDW+cZ5+rSiAgd8JFJ8UDWgkcPy2P3bNrbItT
-         UlDDuPtNzJY6LMhy53qcSxOIlr1iQTJgTug9O8S5PTbKR7WMzx9Kjx0btY+iDDSzQ2GW
-         iGeTfiUJR5/qg8Hrt9och1s9AovnM0W8FkzXZS2jUpZk0PhIZV6W+WCZqKjE/16DlmJk
-         +AmH6aaE+R5WDfkG1BFxLumkic3r+tAHx9A2qZPdfUcrn8O6B7wgia5mQSzFS0Wi8X1x
-         c8qJ/xQDtqkBAfGUh6nP8du4KE+ncAHpMFjYJGwFvETLWUk2fU1WDK3Ej4OngEH14eYb
-         q1xw==
-X-Gm-Message-State: AFuF++lLlqPih7HAx6iIRWE6JQNRw2CHry3y2cjqjTjL0UFmlg+uCLEi
-	nO4C5in7KFAEgHw33GIqHeH11NdqfxbGEu+bMKkLoezSO1wyWrhYScgh8eXzGg==
-X-Gm-Gg: AR+sD10ufEkf79cFAnJmafVVlwHGSJKtwwoZ7kVJdxJwSMBXYLzn1GXPqDOQ0UCsWyh
-	QxktJMzcGxo3uUEtam/wvn6k+RoW71rWQ1N0in4MA5Sk8B/79r8An7tIMaNfEU1QSqPkYxrGrq4
-	cbn5l30JGVi7LPpubZAmUb563Huo+YmZFIB//mZw9jNeu5iPQEezA1LGfRa5iTPVO2Luu+f/XZ1
-	3xftOjAgQcu7DuCcHus+PiHmmnjftNnQ3XGEksKgXgGJw4WVZ2CZzwP1jVjxOxB+JoVXCTKAqPr
-	5DofZFurzvVvZLbt3lQk+3SkEyOeXwX4fXN9bu74UVlaFDt6PQT8pBb54ASuWpZPAO8JBPM0SDv
-	F2tx4mvZTUaYxKf7TSn5/AqAFwEnCatAt/9Q9ydrddklVvufMyS5YTMk8jZut8d/me4j2uk5ggp
-	y4s+swAptOyxG85OnLR7WjLFs1iH/7j3ibIXuRW67v0E82Ii6UKQnHF3/nyEPJ
-X-Received: by 2002:a17:906:ba83:b0:c25:544:3aec with SMTP id a640c23a62f3a-c250baf9b5amr516177966b.5.1787720316767;
-        Tue, 25 Aug 2026 21:58:36 -0700 (PDT)
-From: Furkan Caliskan <frn1furkan10@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: jgross@suse.com,
-	jbeulich@suse.com,
-	andrew.cooper3@citrix.com,
-	roger@xenproject.org,
-	dfaggioli@suse.com,
-	anthony.perard@vates.tech,
-	julien@xen.org,
-	sstabellini@kernel.org,
-	gwd@xenproject.org,
-	enr0n@ubuntu.com,
-	michal.orzel@amd.com,
-	Furkan Caliskan <frn1furkan10@gmail.com>
-Subject: [PATCH 5/5] tools: expose admission control toggle via xl sched-rtds
-Date: Wed, 26 Aug 2026 07:57:20 +0300
-Message-Id: <20260826045720.5779-6-frn1furkan10@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260826045720.5779-1-frn1furkan10@gmail.com>
-References: <20260826045720.5779-1-frn1furkan10@gmail.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=uM+teSsEmwMJ3j/lpRMKgxFiy3b6UJH6v5d3SfppwyK779SRzgRKJOEDAKv1FUQKOz1j4XiBmNJusYU9UozvXI3ozLUlCwDY+PFO6WlSQpUxSJ7ckmk0eZUM1HSQCNEusi2bJvfOwpxvBLoH7XKFAYPpndowGX4mDnAB7f8dC0w18ciyMQjUiSyh54+y420bumMf3Xutwa8P3+NNvYYbKxsZegOs03z3hON81BB9LtgRk0H9ZAZY1aIcWup3ZpbF6eubaalz+akGuz0lgG8y1+5SVTynyxFi4DMce054Jp9GjUScmF/t/du2kX9NJghBImLar4T8QEa40C2cXRrUsQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Qeph0ERCuFewIyge3tZoQqMVmcwLOq8YQEGPliQsyaQ=;
+ b=EvFPdjnbFeTNoBULv7ODpBm7dFuUcNyAfOWV2yOvJfsmOFTgFHlnXUTbHmb4/d7WqWL+1WMYqu9pkJf5F+Or5reE8NjnBMuJadcVIzhBzPwKC3Nfv7/Y2NmU9olw3y7DDinXJ7TT4v32UHv38s/sPAkaC6dqdKW3MzgrCIIwxjqtc4BT+MnL7TRfMeVehWsCicQIduR9Ub71ai01utTsZa6/II9zGFrQ2TIpad1pRLT+PUOdSxIf/eOBbduo9jNddIe117byvGYukakGY+vctsUYIUGNVQBv9CfvdYdua4GEzg+SJQbEADzILY+TPJn4fxvZS6OuqTHpl67Oe1C8XA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Qeph0ERCuFewIyge3tZoQqMVmcwLOq8YQEGPliQsyaQ=;
+ b=e7zuJ2N6p1jyyy5VfmQi2QKFSAejiON3n5XmxvAS8Ktgv58jPvF2wwpbzFdllFwU4Ab+1beI8I1X1LVLLNIW91hEwhB8ZBvC71s7wnQk1ORd1gaL4BwIyCotJfbI7flUGs+QJ9UMX361DZMU0jw7DiJeA7riH+sj14RQgcwbHNg=
+From: "Frager, Neal" <neal.frager@amd.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Peter Maydell
+	<peter.maydell@linaro.org>
+CC: "Hildebrand, Stewart" <Stewart.Hildebrand@amd.com>,
+	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "sstabellini@kernel.org"
+	<sstabellini@kernel.org>, "anthony@xenproject.org" <anthony@xenproject.org>,
+	"edgar.iglesias@gmail.com" <edgar.iglesias@gmail.com>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	"Stabellini, Stefano" <stefano.stabellini@amd.com>, "Saleab, Micheal"
+	<Micheal.Saleab@amd.com>, "john.ernberg@actia.se" <john.ernberg@actia.se>,
+	"matthew.l.weber3@boeing.com" <matthew.l.weber3@boeing.com>,
+	"vincent.stehle@arm.com" <vincent.stehle@arm.com>
+Subject: RE: [PATCH v1 1/1] include/hw/xen/xen_native.h: downgrade
+ include-order assertion to warning
+Thread-Topic: [PATCH v1 1/1] include/hw/xen/xen_native.h: downgrade
+ include-order assertion to warning
+Thread-Index:
+ AQHdJJsckvnz/cO5N0ySs3v4A11/7LatQ5eAgAAFmcCAAAXOAIAAAMSQgAAMYwCAAD5WgIACUOOw
+Date: Wed, 26 Aug 2026 05:21:00 +0000
+Message-ID:
+ <BL1PR12MB5032167D2EBD91C753110996F0AE2@BL1PR12MB5032.namprd12.prod.outlook.com>
+References: <20260805052723.2823538-1-neal.frager@amd.com>
+ <2383a98d-d88d-415d-9de1-aa68a5d215fe@amd.com>
+ <BL1PR12MB5032F21E0E2A6F17398B6D76F0A02@BL1PR12MB5032.namprd12.prod.outlook.com>
+ <CAFEAcA8sWn1vjm+OFYzwA-jko2vYkFcWPwT6g9=0AeO+JQo-JQ@mail.gmail.com>
+ <BL1PR12MB50322B1D97569B5CADEC8E55F0A02@BL1PR12MB5032.namprd12.prod.outlook.com>
+ <CAFEAcA9rWqo92nt1StDuBwUjbV0eqdAA921nozpjQHDF_ARJyg@mail.gmail.com>
+ <ea290b1f-5d40-48e3-9a64-1799244c6e64@citrix.com>
+In-Reply-To: <ea290b1f-5d40-48e3-9a64-1799244c6e64@citrix.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+msip_labels:
+ MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_Enabled=True;MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_SiteId=3dd8961f-e488-4e60-8e11-a82d994e183d;MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_SetDate=2026-08-26T05:18:12.0000000Z;MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_Name=AMD
+ General
+ v26;MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_ContentBits=3;MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_Method=Standard
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BL1PR12MB5032:EE_|CYYPR12MB8654:EE_
+x-ms-office365-filtering-correlation-id: aa10cee5-8428-4d9c-c6b0-08df0331d0d3
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|7416014|376014|366016|1800799024|23010399003|38070700021|6133799003|10067099003|11063799006|4143699003|56012099006|22082099003|18002099003;
+x-microsoft-antispam-message-info:
+ WyspDGisBZzsmrrFHlSSS8l5bib9ziBKo4p7yF2DkXrFMIRmatz/gZKY2LqMIJWnK4CJ67jJZu0GzQSxwlu7Iz3texf0KI9uaGCLAp5TOl6veKI0V6ygGK/h42qV0A/oj7+b8ok4PP/EFHJ1SOWEstA80caGrNgTLykKsrfJzEK5GStZQXWYUuxf8hxGPvnOgMpVlGW1+B6MIkYQ71t+BUN+OUsUrGGnL2stC0K7xfjAwDIvnEADFJeJmnSKXwuMSAVNd1uQx/d9oclF4eIKFVwsv7Qfn32vH81+c4wzkKGW1FFnkeHXT+KDcv53MvN5g87DbQDyYncUnLmCsEzOpNHuSTgdz4UhDq5GwbCRh3Xh2fX+rumNTNA6pJCGC8KB11QkXGJtaovsmPEy//ZJCxj6nQTAmQxkoDMDlIOsiAeSEdbBswC2mpmjI/yYHakFq1utmh2Q4QHInmfPtu1g9L1RJ57gtiD/dQH85JpazTObEwMW8ErfmL3BWfpSNYmwlXSb+7EXwK0JYaEl2eM8/SqMVJgthb6SaxMN4Vfc+hnOO/WX2Fi287T/jZj3RhgzOqWYE6X0l82qC35BMaJXcZbt130/Iuo9KMz3fjtDbAap4VOgKIRrPiezEFXc8UsdRVqzQOwybgNCrDXz53rmmiCruDuLXE4ja7ets8QCVx3LlfUBe+i209V6MfpCgVo5fVicUTiVVcNpvxtHNv0qWCehxDfNnrBr6upcB5zhLgk=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL1PR12MB5032.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(366016)(1800799024)(23010399003)(38070700021)(6133799003)(10067099003)(11063799006)(4143699003)(56012099006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?utf-8?B?a2o4enlFUGkrM1cvQzRaOWk1WXFwNmhoa1FYNW5PN0VGdkFYUzRLaUtaaENw?=
+ =?utf-8?B?T25FaVdaUGlpc2F3ZG1tb3FlT3pLMW9zc1NUNFZrM3BUc1NxbmlZS3pJOU5a?=
+ =?utf-8?B?NUFsSzZHQTNkeit6VUJCSktPVE9yR2ZoZDN3Z2VUa3AyQzR1RFpSYVloNHl0?=
+ =?utf-8?B?UHBvR3poZ2xWSk5PTzg1SFo3R082UWZyemZnZTUyUzU4WXdBQXpzOVB1Mndm?=
+ =?utf-8?B?b3cxZ2RTY1dya0Mrd3g3ZEg4TXpRemkxVlNBbTBISnhseE1Sb0VEMUtTMzNi?=
+ =?utf-8?B?eXBxWm5ERFFKZVozMUp5SUUrbjFFVWF6emlaeTFQNHNNbkJSTUorSThmUStk?=
+ =?utf-8?B?UEtjamtZUHFzRjFVaklxekRpQTgvTHBKeW5lbjRBdUhHdTF5WWI1cmQvV1pE?=
+ =?utf-8?B?VWJtQ2p0MVg4K2RTcncvYjdNd2RJMTZSa05waDJHZ2ZQQThndm5nbGdZMzl0?=
+ =?utf-8?B?VTJOS2tta3V0T0tiT0VORXV1c3NhNXpMWndWSm5admJyZzZYRkxkemlOb3B5?=
+ =?utf-8?B?b3hYT2pqRTRJR1doOU14L2JSa2Z1SzZacWRqOXhqcTRua2RSRGowamVXNDRZ?=
+ =?utf-8?B?d3RkUHFGR2t6cG5KdjkxK1ZjcEl5WGc4NUdrZUhkL1JtRm4zamZncGloSkdq?=
+ =?utf-8?B?U3JHeldndHNCdjZ1eUhtRTkxUm52SGRKdUxrd2pwV0orSnIvNW1oUHp3aTRs?=
+ =?utf-8?B?U1Vyd292dDBMTTRnNHFyMlIrWG9oVC96N1lyTTZtR1VVS2pUTEVHaE8yNUVk?=
+ =?utf-8?B?cDh0aTNFV3E2alN5VTN2Uk0yb2VLd0lESmEvYlJzQitZZjRUYjU3TE1iczQ4?=
+ =?utf-8?B?K0F3amlXK0tDRVBKbmZVRnRTYUdySTEwdnZjdTA2dk1WT1RVUXdZWUhFK05M?=
+ =?utf-8?B?VGRha1I4ZnZiaTBIbXFzOEE0VHRmNERDTVQzb0dXTHJ2eVM0VitWNjM1c0dk?=
+ =?utf-8?B?QnlvTENlUE5MR3IzOTlaQ1F6aTZ5ZGxTekUvWWh1ekNGVFNicGJwT3BIbzcx?=
+ =?utf-8?B?N2ZZSmpHckZjREtyRnEzb3NIc1E3WGpCd1c3RWQrM21yU0Q4bEE4MEh2elgz?=
+ =?utf-8?B?dVV4WmVlWlFmK3dIYld0blRBaEZIaFNLYzJXVTczVzdlL2FKSUNneHJ2VTF5?=
+ =?utf-8?B?VmtBSEgrN3o0ODJLYmtLeVZkS1lONUN6Q3dwcnRrQVRMeXk0dGlrWkZkaSt5?=
+ =?utf-8?B?aVdSRUhMVDdNRWN2b1k2ZmdvcUVnZVZIRHNOdkw5UWtzQVd6Q1pXdVptY2F6?=
+ =?utf-8?B?Q2NiSXVSQ09GeFNKWGtNWWkxclROL0IySjJBVC83TDU0RVZXWDZwcXVzN21I?=
+ =?utf-8?B?Z3Z5RndQQlYySjJxSVlqWGxaMEgzdVU0aC9RTWk1V2x0YjJvVmpnTGs4K3hS?=
+ =?utf-8?B?Nk9mU3drOWZvVWIzQWUzMkhUNmRBYVBNWGZ5UVprN1VCMDI1cmhia1VlQ0FF?=
+ =?utf-8?B?RmRkeVpWcXJvMUhKUytJRHZ3SVZydVpodXRYM0s1TDlZL2dLb0JQOWU4Rm96?=
+ =?utf-8?B?WGl5QXVJQ0ltWkliV1BTYnFSK2NBMlpFcjZaNC9YUERjR04xc1UyRUlTQ1cr?=
+ =?utf-8?B?N3hsdTdTY2UvbEttak5ZVGpuN1JEV25MTGlnMFNrT3pMeHRwNzlkRjFCbjNI?=
+ =?utf-8?B?TmswYWxUOCtKam13YXpKYW5Ob09aNCs2c2ZIOE9nbkhxbGNpeVRUdDB4b291?=
+ =?utf-8?B?NHJsMFcyaGkvQWlUbmxhSlhCRkgwSGNqSC9SVzlaNCtrWlRSd0E2S08zSTBL?=
+ =?utf-8?B?eC9peWtCaG1TNDZnVXpyQzRleUFTT29HODJjMVBSMGZ1WER0elFRT2hkWjY2?=
+ =?utf-8?B?bnJKTE5wQWJuUFdhV25yYTQzS29FOFRKaUVNeWtxVHJIS1B5V0p5eGlTamFC?=
+ =?utf-8?B?NFpDeDQxWjlFUXFvdy8vUmdodWhLL2RBOUpBOTNOaHZLaXVPQW1BM1QzUHhZ?=
+ =?utf-8?B?MDdLYnhEWi9VcjhUWjN2YVV5MDdOeHorTXFNQUJUYjl1T3llWExMN1I1RTB5?=
+ =?utf-8?B?VVAyelJuUXE4YW9SNnZKMXNZOGU5WlI5Yk5sZ3h2TlR0SUpJTHgvOUkwb0pQ?=
+ =?utf-8?B?TURCUFpwTmVwd3RiZXpCL25NbS9WOHBrSUxIUjQ3b2lrWEFyeW1hY0dpZ1hi?=
+ =?utf-8?B?SVJFM0JUblJRL1ljZkVmNEQ3eFVHTHd3Z3h2WE5uRXRRaWllZC9JVnZmQVVy?=
+ =?utf-8?B?R003MXZtdlBjaUxmMzdQN0gxOWJhSFRpOHdadzFKLzluWnhHQ01DeVlvL3c3?=
+ =?utf-8?B?MG1IZG1OSzdyY3RzdVpVdjZaR3EzbkZJQllRVTlIZjFmaE1zaFQ2amJoSEFU?=
+ =?utf-8?Q?tOR5fUoUDYmZFFo2XX?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1787720317-1B6D29EA-8C33FBC3/0/0
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BL1PR12MB5032.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: aa10cee5-8428-4d9c-c6b0-08df0331d0d3
+X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Aug 2026 05:21:00.1379
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 0StR98g12Wy1tJ8RZOksFvwRMZoEtfmT3+bwLcBETRoI2XI6SZpHCuQJrXvHlseE
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYYPR12MB8654
+X-purgate-ID: tlsNG-bad1c0/1787721665-BDEC6034-0BD55200/0/0
 X-purgate-type: clean
-X-purgate-size: 16058
+X-purgate-size: 4226
 
-Wire the per-cpupool admission-control switch through libxl
-to xl sched-rtds, and document it.
-
-Add -s/--schedparam to list or set pool-wide RTDS scheduler
-parameters, and -a/--admission to enable or disable admission
-control for a cpupool ("-c pool -s -a 0/1").
-
-Signed-off-by: Furkan Caliskan <frn1furkan10@gmail.com>
----
- docs/man/xl.1.pod.in                 |  20 ++++++
- tools/golang/xenlight/helpers.gen.go |  23 ++++++
- tools/golang/xenlight/types.gen.go   |   4 ++
- tools/include/libxl.h                |   4 ++
- tools/include/xenctrl.h              |   6 ++
- tools/libs/ctrl/xc_rt.c              |  40 +++++++++++
- tools/libs/light/libxl_sched.c       |  46 ++++++++++++
- tools/libs/light/libxl_types.idl     |   5 ++
- tools/xl/xl_cmdtable.c               |   8 ++-
- tools/xl/xl_sched.c                  | 103 +++++++++++++++++++++++++--
- 10 files changed, 254 insertions(+), 5 deletions(-)
-
-diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
-index 88ccf7ad82..51405f4e33 100644
---- a/docs/man/xl.1.pod.in
-+++ b/docs/man/xl.1.pod.in
-@@ -1230,6 +1230,16 @@ the unreserved system resource.
- 
- Restrict output to domains in the specified cpupool.
- 
-+=item B<-s>, B<--schedparam>
-+
-+Specify to list or set pool-wide scheduler parameters.
-+
-+=item B<-a ADMISSION_CONTROL>, B<--admission=ADMISSION_CONTROL>
-+
-+Binary flag to enable or disable admission control for the cpupool.
-+When enabled (the default), a reservation is rejected if admitting
-+it would exceed the cpupool's utilization capacity.
-+
- =back
- 
- B<EXAMPLE>
-@@ -1293,6 +1303,16 @@ e.g., "xl sched-rtds -d vm1 -v 0 -p 100 -b 50 -e 1 -v 3 -p 300 -b 150 -e 0".
- To change the parameters of all the VCPUs of a domain, use B<-v all>,
- e.g., "xl sched-rtds -d vm1 -v all -p 500 -b 250 -e 1".
- 
-+4) Use B<-c CPUPOOL -s> to see whether admission control is enabled
-+for a cpupool, and B<-c CPUPOOL -s -a> to change it:
-+
-+    xl sched-rtds -c pool-rt -s
-+    Cpupool pool-rt: sched=RTDS admission-control=enabled
-+
-+    xl sched-rtds -c pool-rt -s -a 0
-+    xl sched-rtds -c pool-rt -s
-+    Cpupool pool-rt: sched=RTDS admission-control=disabled
-+
- =back
- 
- =back
-diff --git a/tools/golang/xenlight/helpers.gen.go b/tools/golang/xenlight/helpers.gen.go
-index b0c09da910..18ab0731ef 100644
---- a/tools/golang/xenlight/helpers.gen.go
-+++ b/tools/golang/xenlight/helpers.gen.go
-@@ -4192,6 +4192,29 @@ func (x *SchedCredit2Params) toC(xc *C.libxl_sched_credit2_params) (err error){x
-  return nil
-  }
- 
-+// NewSchedRtdsParams returns an instance of SchedRtdsParams initialized with defaults.
-+func NewSchedRtdsParams() (*SchedRtdsParams, error) {
-+var (
-+x SchedRtdsParams
-+xc C.libxl_sched_rtds_params)
-+
-+C.libxl_sched_rtds_params_init(&xc)
-+
-+if err := x.fromC(&xc); err != nil {
-+return nil, err }
-+
-+return &x, nil}
-+
-+func (x *SchedRtdsParams) fromC(xc *C.libxl_sched_rtds_params) error {
-+ x.AdmissionControlEnabled = bool(xc.admission_control_enabled)
-+
-+ return nil}
-+
-+func (x *SchedRtdsParams) toC(xc *C.libxl_sched_rtds_params) (err error){xc.admission_control_enabled = C.bool(x.AdmissionControlEnabled)
-+
-+ return nil
-+ }
-+
- // NewDomainRemusInfo returns an instance of DomainRemusInfo initialized with defaults.
- func NewDomainRemusInfo() (*DomainRemusInfo, error) {
- var (
-diff --git a/tools/golang/xenlight/types.gen.go b/tools/golang/xenlight/types.gen.go
-index e0fd78ec03..897100d9b6 100644
---- a/tools/golang/xenlight/types.gen.go
-+++ b/tools/golang/xenlight/types.gen.go
-@@ -1231,6 +1231,10 @@ type SchedCredit2Params struct {
- RatelimitUs int
- }
- 
-+type SchedRtdsParams struct {
-+AdmissionControlEnabled bool
-+}
-+
- type DomainRemusInfo struct {
- Interval int
- AllowUnsafe Defbool
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index 7c098edab6..ff993c38b7 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -2797,6 +2797,10 @@ int libxl_sched_credit2_params_get(libxl_ctx *ctx, uint32_t poolid,
-                                    libxl_sched_credit2_params *scinfo);
- int libxl_sched_credit2_params_set(libxl_ctx *ctx, uint32_t poolid,
-                                    libxl_sched_credit2_params *scinfo);
-+int libxl_sched_rtds_params_get(libxl_ctx *ctx, uint32_t poolid,
-+                                libxl_sched_rtds_params *scinfo);
-+int libxl_sched_rtds_params_set(libxl_ctx *ctx, uint32_t poolid,
-+                                libxl_sched_rtds_params *scinfo);
- 
- /* Scheduler Per-domain parameters */
- 
-diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
-index 9f00d4a19d..6f4ea7ca62 100644
---- a/tools/include/xenctrl.h
-+++ b/tools/include/xenctrl.h
-@@ -897,6 +897,12 @@ int xc_sched_rtds_vcpu_get(xc_interface *xch,
-                            uint32_t domid,
-                            struct xen_domctl_schedparam_vcpu *vcpus,
-                            uint32_t num_vcpus);
-+int xc_sched_rtds_params_set(xc_interface *xch,
-+                             uint32_t cpupool_id,
-+                             struct xen_sysctl_rtds_schedule *schedule);
-+int xc_sched_rtds_params_get(xc_interface *xch,
-+                             uint32_t cpupool_id,
-+                             struct xen_sysctl_rtds_schedule *schedule);
- 
- int
- xc_sched_arinc653_schedule_set(
-diff --git a/tools/libs/ctrl/xc_rt.c b/tools/libs/ctrl/xc_rt.c
-index 3cb3fbb923..fb3f567d4f 100644
---- a/tools/libs/ctrl/xc_rt.c
-+++ b/tools/libs/ctrl/xc_rt.c
-@@ -130,3 +130,43 @@ int xc_sched_rtds_vcpu_get(xc_interface *xch,
- 
-     return rc;
- }
-+
-+int xc_sched_rtds_params_set(xc_interface *xch,
-+                             uint32_t cpupool_id,
-+                             struct xen_sysctl_rtds_schedule *schedule)
-+{
-+    struct xen_sysctl sysctl = {};
-+
-+    sysctl.cmd = XEN_SYSCTL_scheduler_op;
-+    sysctl.u.scheduler_op.cpupool_id = cpupool_id;
-+    sysctl.u.scheduler_op.sched_id = XEN_SCHEDULER_RTDS;
-+    sysctl.u.scheduler_op.cmd = XEN_SYSCTL_SCHEDOP_putinfo;
-+
-+    sysctl.u.scheduler_op.u.sched_rtds = *schedule;
-+
-+    if ( do_sysctl(xch, &sysctl) )
-+        return -1;
-+
-+    *schedule = sysctl.u.scheduler_op.u.sched_rtds;
-+
-+    return 0;
-+}
-+
-+int xc_sched_rtds_params_get(xc_interface *xch,
-+                             uint32_t cpupool_id,
-+                             struct xen_sysctl_rtds_schedule *schedule)
-+{
-+    struct xen_sysctl sysctl = {};
-+
-+    sysctl.cmd = XEN_SYSCTL_scheduler_op;
-+    sysctl.u.scheduler_op.cpupool_id = cpupool_id;
-+    sysctl.u.scheduler_op.sched_id = XEN_SCHEDULER_RTDS;
-+    sysctl.u.scheduler_op.cmd = XEN_SYSCTL_SCHEDOP_getinfo;
-+
-+    if ( do_sysctl(xch, &sysctl) )
-+        return -1;
-+
-+    *schedule = sysctl.u.scheduler_op.u.sched_rtds;
-+
-+    return 0;
-+}
-diff --git a/tools/libs/light/libxl_sched.c b/tools/libs/light/libxl_sched.c
-index 2d6635dae7..ae4379cf09 100644
---- a/tools/libs/light/libxl_sched.c
-+++ b/tools/libs/light/libxl_sched.c
-@@ -397,6 +397,52 @@ int libxl_sched_credit2_params_set(libxl_ctx *ctx, uint32_t poolid,
-     return rc;
- }
- 
-+int libxl_sched_rtds_params_get(libxl_ctx *ctx, uint32_t poolid,
-+                                libxl_sched_rtds_params *scinfo)
-+{
-+    struct xen_sysctl_rtds_schedule sparam;
-+    int r, rc;
-+    GC_INIT(ctx);
-+
-+    r = xc_sched_rtds_params_get(ctx->xch, poolid, &sparam);
-+    if (r < 0) {
-+        LOGE(ERROR, "getting RTDS scheduler parameters");
-+        rc = ERROR_FAIL;
-+        goto out;
-+    }
-+
-+    scinfo->admission_control_enabled = sparam.admission_control_enabled;
-+
-+    rc = 0;
-+out:
-+    GC_FREE;
-+    return rc;
-+}
-+
-+int libxl_sched_rtds_params_set(libxl_ctx *ctx, uint32_t poolid,
-+                                libxl_sched_rtds_params *scinfo)
-+{
-+    struct xen_sysctl_rtds_schedule sparam;
-+    int r, rc;
-+    GC_INIT(ctx);
-+
-+    sparam.admission_control_enabled = scinfo->admission_control_enabled;
-+
-+    r = xc_sched_rtds_params_set(ctx->xch, poolid, &sparam);
-+    if (r < 0) {
-+        LOGE(ERROR, "Setting RTDS scheduler parameters");
-+        rc = ERROR_FAIL;
-+        goto out;
-+    }
-+
-+    scinfo->admission_control_enabled = sparam.admission_control_enabled;
-+
-+    rc = 0;
-+out:
-+    GC_FREE;
-+    return rc;
-+}
-+
- static int sched_credit2_domain_get(libxl__gc *gc, uint32_t domid,
-                                     libxl_domain_sched_params *scinfo)
- {
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index a7893460f0..d3121ea277 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -1286,6 +1286,11 @@ libxl_sched_credit2_params = Struct("sched_credit2_params", [
-     ("ratelimit_us", integer),
-     ], dispose_fn=None)
- 
-+libxl_sched_rtds_params = Struct("sched_rtds_params", [
-+    ("admission_control_enabled", bool),
-+    ], dispose_fn=None)
-+
-+
- libxl_domain_remus_info = Struct("domain_remus_info",[
-     ("interval",             integer),
-     ("allow_unsafe",         libxl_defbool),
-diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
-index 502244f683..e48d5c5edc 100644
---- a/tools/xl/xl_cmdtable.c
-+++ b/tools/xl/xl_cmdtable.c
-@@ -295,13 +295,19 @@ const struct cmd_spec cmd_table[] = {
-     { "sched-rtds",
-       &main_sched_rtds, 0, 1,
-       "Get/set rtds scheduler parameters",
--      "[-d <Domain> [-v[=VCPUID/all]] [-p[=PERIOD]] [-b[=BUDGET]] [-e[=Extratime]]]",
-+      "[-d <Domain> [-v[=VCPUID/all]] [-p[=PERIOD]] [-b[=BUDGET]] [-e[=Extratime]]]\n"
-+      "                [-c <Cpupool> -s [-a[=ADMISSION_CONTROL]]]",
-       "-d DOMAIN, --domain=DOMAIN     Domain to modify\n"
-       "-v VCPUID/all, --vcpuid=VCPUID/all    VCPU to modify or output;\n"
-       "               Using '-v all' to modify/output all vcpus\n"
-       "-p PERIOD, --period=PERIOD     Period (us)\n"
-       "-b BUDGET, --budget=BUDGET     Budget (us)\n"
-       "-e Extratime, --extratime=Extratime Extratime (1=yes, 0=no)\n"
-+      "-c CPUPOOL, --cpupool=CPUPOOL  Restrict output to domains in CPUPOOL\n"
-+      "-s, --schedparam               List or set pool-wide scheduler parameters\n"
-+      "-a ADMISSION_CONTROL, --admission=ADMISSION_CONTROL\n"
-+      "               Enable or disable admission control for the cpupool\n"
-+      "               (1=enabled, 0=disabled); requires -s\n"
-     },
-     { "domid",
-       &main_domid, 0, 0,
-diff --git a/tools/xl/xl_sched.c b/tools/xl/xl_sched.c
-index 73cd7040cd..7257d1854b 100644
---- a/tools/xl/xl_sched.c
-+++ b/tools/xl/xl_sched.c
-@@ -246,6 +246,28 @@ static int sched_credit2_pool_output(uint32_t poolid)
-     return 0;
- }
- 
-+static int sched_rtds_params_set(int poolid,
-+                                 libxl_sched_rtds_params *scinfo)
-+{
-+    if (libxl_sched_rtds_params_set(ctx, poolid, scinfo)) {
-+        fprintf(stderr, "libxl_sched_rtds_params_set failed.\n");
-+        return 1;
-+    }
-+
-+    return 0;
-+}
-+
-+static int sched_rtds_params_get(int poolid,
-+                                 libxl_sched_rtds_params *scinfo)
-+{
-+    if (libxl_sched_rtds_params_get(ctx, poolid, scinfo)) {
-+        fprintf(stderr, "libxl_sched_rtds_params_get failed.\n");
-+        return 1;
-+    }
-+
-+    return 0;
-+}
-+
- static int sched_rtds_domain_output(
-     int domid)
- {
-@@ -339,10 +361,15 @@ static int sched_rtds_vcpu_output_all(int domid,
- 
- static int sched_rtds_pool_output(uint32_t poolid)
- {
--    char *poolname;
-+    libxl_sched_rtds_params scparam;
-+    char *poolname = libxl_cpupoolid_to_name(ctx, poolid);
- 
--    poolname = libxl_cpupoolid_to_name(ctx, poolid);
--    printf("Cpupool %s: sched=RTDS\n", poolname);
-+    if (sched_rtds_params_get(poolid, &scparam))
-+        printf("Cpupool %s: [sched params unavailable]\n", poolname);
-+    else
-+        printf("Cpupool %s: sched=RTDS admission-control=%s\n",
-+                poolname,
-+                scparam.admission_control_enabled ? "enabled" : "disabled");
- 
-     free(poolname);
-     return 0;
-@@ -715,6 +742,8 @@ int main_sched_credit2(int argc, char **argv)
-  * -d [domid] -v [vcpuid 1] [params] -v [vcpuid 2] [params] ...  :
-  * Set per-VCPU params for domain
-  * -d [domid] -v all [params]  : Set all per-VCPU params for domain
-+ * -c [cpupool] -s  : List pool-wide scheduling parameters for cpupool
-+ * -c [cpupool] -s -a [0|1]  : Set admission control for cpupool
-  */
- int main_sched_rtds(int argc, char **argv)
- {
-@@ -736,7 +765,10 @@ int main_sched_rtds(int argc, char **argv)
-     bool opt_b = false;
-     bool opt_e = false;
-     bool opt_v = false;
-+    bool opt_s = false;
-+    bool opt_a = false;
-     bool opt_all = false; /* output per-dom parameters */
-+    bool admission_control = false;
-     int opt, i, rc, r;
-     static struct option opts[] = {
-         {"domain", 1, 0, 'd'},
-@@ -745,10 +777,12 @@ int main_sched_rtds(int argc, char **argv)
-         {"extratime", 1, 0, 'e'},
-         {"vcpuid",1, 0, 'v'},
-         {"cpupool", 1, 0, 'c'},
-+        {"schedparam", 0, 0, 's'},
-+        {"admission", 1, 0, 'a'},
-         COMMON_LONG_OPTS
-     };
- 
--    SWITCH_FOREACH_OPT(opt, "d:p:b:e:v:c", opts, "sched-rtds", 0) {
-+    SWITCH_FOREACH_OPT(opt, "d:p:b:e:v:c:a:s", opts, "sched-rtds", 0) {
-     case 'd':
-         dom = optarg;
-         break;
-@@ -801,6 +835,19 @@ int main_sched_rtds(int argc, char **argv)
-     case 'c':
-         cpupool = optarg;
-         break;
-+    case 's':
-+        opt_s = true;
-+        break;
-+    case 'a':
-+        if (strcmp(optarg, "0") && strcmp(optarg, "1"))
-+        {
-+            fprintf(stderr, "Invalid admission_control value.\n");
-+            r = EXIT_FAILURE;
-+            goto out;
-+        }
-+        admission_control = strtol(optarg, NULL, 10);
-+        opt_a = true;
-+        break;
-     }
- 
-     if (cpupool && (dom || opt_p || opt_b || opt_e || opt_v || opt_all)) {
-@@ -809,6 +856,11 @@ int main_sched_rtds(int argc, char **argv)
-         r = EXIT_FAILURE;
-         goto out;
-     }
-+    if (opt_s && (dom || opt_p || opt_b || opt_e || opt_v || opt_all)) {
-+        fprintf(stderr, "-s cannot be combined with domain/VCPU options.\n");
-+        r = EXIT_FAILURE;
-+        goto out;
-+    }
-     if (!dom && (opt_p || opt_b || opt_e || opt_v)) {
-         fprintf(stderr, "Missing parameters.\n");
-         r = EXIT_FAILURE;
-@@ -831,6 +883,49 @@ int main_sched_rtds(int argc, char **argv)
-         r = EXIT_FAILURE;
-         goto out;
-     }
-+    if (opt_a && !opt_s) {
-+        fprintf(stderr, "-a/--admission requires -s/--schedparam.\n");
-+        r = EXIT_FAILURE;
-+        goto out;
-+    }
-+
-+    if (opt_s)
-+    {
-+        libxl_sched_rtds_params scparam;
-+        uint32_t poolid = 0;
-+
-+        if (cpupool) {
-+            if (libxl_cpupool_qualifier_to_cpupoolid(ctx, cpupool,
-+                                                      &poolid, NULL) ||
-+                !libxl_cpupoolid_is_valid(ctx, poolid)) {
-+                fprintf(stderr, "Unknown cpupool \'%s\'\n", cpupool);
-+                r = EXIT_FAILURE;
-+                goto out;
-+            }
-+        }
-+
-+        if (!opt_a) { /* output pool-wide scheduling parameters */
-+            if (sched_rtds_pool_output(poolid)) {
-+                r = EXIT_FAILURE;
-+                goto out;
-+            }
-+        } else { /* set pool-wide scheduling parameters */
-+            if (sched_rtds_params_get(poolid, &scparam)) {
-+                r = EXIT_FAILURE;
-+                goto out;
-+            }
-+
-+            scparam.admission_control_enabled = admission_control;
-+
-+            if (sched_rtds_params_set(poolid, &scparam)) {
-+                r = EXIT_FAILURE;
-+                goto out;
-+            }
-+        }
-+
-+        r = EXIT_SUCCESS;
-+        goto out;
-+    }
- 
-     if ((!dom) && opt_all) {
-         /* get all domain's per-vcpu rtds scheduler parameters */
--- 
-2.34.1
-
+QU1EIEdlbmVyYWwNCg0KSGkgQW5kcmV3LCBQZXRlciwNCg0KPiBPbiBNb24sIDI0IEF1ZyAyMDI2
+IGF0IDE0OjMxLCBGcmFnZXIsIE5lYWwgPG5lYWwuZnJhZ2VyQGFtZC5jb20+IHdyb3RlOg0KPj4g
+QU1EIEdlbmVyYWwNCj4+DQo+PiBIaSBQZXRlciwNCj4+DQo+Pj4gSGkgU3Rld2FydCwNCj4+Pg0K
+Pj4+PiBUaGUgLUkkKFhFTl9ST09UKS90b29scy9pbmNsdWRlIGFkZGVkIHRvIFFFTVUncyBleHRy
+YS1jZmxhZ3MgY2F1c2VzDQo+Pj4+IF9fWEVOX0lOVEVSRkFDRV9WRVJTSU9OX18gdG8gYmUgZGVm
+aW5lZCBiZWZvcmUgeGVuX25hdGl2ZS5oIGlzIGluY2x1ZGVkLA0KPj4+PiB0cmlnZ2VyaW5nIGFu
+IGluY2x1ZGUtb3JkZXIgYXNzZXJ0aW9uLiBEb3duZ3JhZGUgdG8gYSB3YXJuaW5nIHNpbmNlIHRo
+ZQ0KPj4+PiB2ZXJzaW9uIGlzIGNvbnNpc3RlbnQgaW4gY3Jvc3MtY29tcGlsZS4NCj4+Pj4gUmVm
+OiBodHRwczovL2dpdGh1Yi5jb20vcWVtdS9xZW11L2NvbW1pdC9lMmFiZmU1ZWM2DQo+Pj4+IFRo
+aXMgaXMgYSBidWlsZHJvb3QgaXNzdWUsIHNvIEkgZG9uJ3QgYmVsaWV2ZSBpdCdzIG5lY2Vzc2Fy
+eSB0byBmaXggZnJvbSB0aGUNCj4+Pj4gcWVtdSBzaWRlLg0KPj4+IEkgYW0gbm90IHN1cmUgSSBm
+dWxseSBhZ3JlZSBoZXJlLiBXaGlsZSB0aGlzIGlzIGEgYnVpbGRyb290IGlkZW50aWZpZWQgaXNz
+dWUsDQo+Pj4gdGhlcmUgY291bGQgYmUgb3RoZXIgdXNlIGNhc2VzIGZvciBfX1hFTl9JTlRFUkZB
+Q0VfVkVSU0lPTl9fIHRvIGJlIGRlZmluZWQNCj4+PiBiZWZvcmUgeGVuX25hdGl2ZS5oIGlzIGlu
+Y2x1ZGVkLg0KPj4+IEJ1dCB3aGF0LCB0aG91Z2g/DQo+Pj4gQW5kIHdoYXQgd2UgaGF2ZSBmb3Vu
+ZCBpcyB0aGF0IGlmDQo+Pj4gX19YRU5fSU5URVJGQUNFX1ZFUlNJT05fXyB0byBiZSBkZWZpbmVk
+IGJlZm9yZSB4ZW5fbmF0aXZlLmggaXMgaW5jbHVkZWQsIGl0DQo+Pj4gaXMgbm90IGEgaGFyZCBl
+cnJvci4gIEZvciBidWlsZHJvb3QsIHRoZSBxZW11IHdvcmtzIGp1c3QgZmluZSBpbiBzcGl0ZSBv
+Zg0KPj4+IHRoaXMuDQo+Pg0KPj4+IEkgdGhpbmsgdGhhdCBqdXN0IG1lYW5zIHlvdSBnb3QgbHVj
+a3kuIEVpdGhlciB0aGVyZSBpcyBhIGhhcmQgcmVxdWlyZW1lbnQNCj4+PiBmb3Igb25lIGhlYWRl
+ciB0byBiZSBpbmNsdWRlZCBiZWZvcmUgdGhlIG90aGVyIChpbiB3aGljaCBjYXNlIGl0IG11c3QN
+Cj4+PiBiZSBhICNlcnJvciwgYW5kIHdoYXRldmVyIGlzIGNhdXNpbmcgdGhlIG1pcy1vcmRlcmlu
+ZyB0byBoYXBwZW4gbXVzdCBiZQ0KPj4+IGZpeGVkKSwgb3IgaXQncyBmaW5lIGZvciB0aGUgb3Jk
+ZXJpbmcgdG8gYmUgZWl0aGVyIHdheSAoaW4gd2hpY2ggY2FzZSBpdA0KPj4+IGRvZXNuJ3QgZXZl
+biBuZWVkIHRvIGJlIGEgI3dhcm5pbmcpLg0KPj4gRnJvbSBteSB2aWV3LCB0aGUgb3JkZXIgdGhl
+IGhlYWRlciBmaWxlcyBhcmUgaW5jbHVkZWQgZG9lcyBub3QgbWF0dGVyLCBhbmQNCj4+IHRoaXMg
+c2hvdWxkIG5vdCBiZSBhbiBlcnJvci4gIEkgYWdyZWUgd2l0aCByZW1vdmluZyB0aGUgd2Fybmlu
+ZyBhcyB3ZWxsLCBpZg0KPj4gdGhhdCBpcyB3aGF0IHdlIGFsbCBhZ3JlZSBvbiBpbiB0aGUgZW5k
+Lg0KPiBUaGUgcmF0aW9uYWxlIGZvciB0aGUgaGVhZGVyIG9yZGVyaW5nIGlzIGluIHRoZSBjb21t
+ZW50IGluIGluY2x1ZGUvaHcveGVuL3hlbi5oOg0KPg0KPiAvKg0KPiAgKiBDIGZpbGVzIHVzaW5n
+IFhlbiB0b29sc3RhY2sgbGlicmFyaWVzIHdpbGwgaGF2ZSBpbmNsdWRlZCB0aG9zZSBoZWFkZXJz
+DQo+ICAqIGFscmVhZHkgdmlhIHhlbl9uYXRpdmUuaCwgYW5kIGhhdmluZyBfX1hFTV9UT09MU19f
+IGRlZmluZWQgd2lsbCBoYXZlDQoNCj4gTG92ZWx5IHR5cG8gdGhlcmUuDQoNCj4gVGhlIGRlZmlu
+ZSBfX1hFTl9UT09MU19fIGlzIHdvZWZ1bGx5IG1pc25hbWVkLiAgVGhpcyBpcyBhbiBlcnJvciBv
+Zg0KPiBYZW4ncywgd2hpY2ggSSd2ZSBub3QgaGFkIHRpbWUgdG8gZml4IHlldC4NCg0KPiBJdCBz
+aG91bGQgYmUgbmFtZWQgX19YRU5fVU5TVEFCTEVfQVBJU19fLCBhbmQgdGhpbmtpbmcgb2YgaXQg
+bGlrZSB0aGlzDQo+IHdpbGwgbWFrZSBpdCdzIHB1cnBvc2UgYSB3aG9sZSBsb3QgY2xlYXJlci4N
+Cg0KPiAgKiBhdXRvbWF0aWNhbGx5IHNldCBfX1hFTl9JTlRFUkZBQ0VfVkVSU0lPTl9fIHRvIHRo
+ZSBsYXRlc3Qgc3VwcG9ydGVkDQo+ICAqIGJ5IHRoZSAqc3lzdGVtKiBYZW4gaGVhZGVycyB3aGlj
+aCB3ZXJlIHRyYW5zaXRpdmVseSBpbmNsdWRlZC4NCj4gICoNCj4gICogQyBmaWxlcyB3aGljaCBh
+cmUgcGFydCBvZiB0aGUgaW50ZXJuYWwgZW11bGF0aW9uLCBhbmQgd2hpY2ggZGlkIG5vdA0KPiAg
+KiBpbmNsdWRlIHhlbl9uYXRpdmUuaCwgbWF5IG5lZWQgdGhpcyBkZWZpbmVkIHNvIHRoYXQgdGhl
+IFhlbiBoZWFkZXJzDQo+ICAqIGltcG9ydGVkIHRvIGluY2x1ZGUvaHcveGVuL2ludGVyZmFjZS8g
+d2lsbCBleHBvc2UgdGhlIGFwcHJvcHJpYXRlIEFQSQ0KPiAgKiB2ZXJzaW9uLg0KPiAgKg0KPiAg
+KiBUaGlzIGlzIHdoeSB0aGVyZSdzIGEgcnVsZSB0aGF0IHhlbl9uYXRpdmUuaCBtdXN0IGJlIGlu
+Y2x1ZGVkIGZpcnN0Lg0KPiAgKi8NCj4NCj4gLi4uYmFzaWNhbGx5LCBpZiBzb21ldGhpbmcgZG9l
+c24ndCBpbmNsdWRlIHhlbl9uYXRpdmUuaCBiZWZvcmUgeGVuLmgNCj4gdGhlbiBfX1hFTl9JTlRF
+UkZBQ0VfVkVSU0lPTl9fIGNhbiBlbmQgdXAgZGVmaW5lZCB0byB0aGUgd3JvbmcgdGhpbmcuDQo+
+IChEaXNjbGFpbWVyOiBJJ20gbm90IGEgWGVuIGV4cGVydCwgSSdtIGp1c3QgYXBwbHlpbmcgQ2hl
+c3RlcnRvbidzIEZlbmNlLikNCg0KPiBfX1hFTl9JTlRFUkZBQ0VfVkVSU0lPTl9fIGRvZXMgYWx0
+ZXIgc3RydWN0dXJlcy4gIEl0IG11c3QgYmUgY29uc2lzdGVudA0KPiBhY3Jvc3MgYSBjb2RlYmFz
+ZS4NCg0KU3Rld2FydCBpZGVudGlmaWVkIGEgYmV0dGVyIHNvbHV0aW9uIGZvciB0aGlzIGJ1aWxk
+cm9vdCBpc3N1ZSwgc28gSSBhbQ0Kd2l0aGRyYXdpbmcgdGhpcyBwYXRjaC4gIFRoaXMgcGF0Y2gg
+aXMgbm90IG5lY2Vzc2FyeS4gIFRoYW5rIHlvdS4NCg0KQmVzdCByZWdhcmRzLA0KTmVhbCBGcmFn
+ZXINCkFNRA0K
 
