@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D5E5C61DBD
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2026 12:00:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1399846.1635814 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E49A3C61DBD
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2026 12:01:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1399854.1635822 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzCIv-00041n-Js; Wed, 26 Aug 2026 12:00:29 +0000
+	id 1wzCJQ-0004Qy-RP; Wed, 26 Aug 2026 12:01:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1399846.1635814; Wed, 26 Aug 2026 12:00:29 +0000
+Received: by outflank-mailman (output) from mailman id 1399854.1635822; Wed, 26 Aug 2026 12:01:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzCIv-00041g-H4; Wed, 26 Aug 2026 12:00:29 +0000
-Received: by outflank-mailman (input) for mailman id 1399846;
- Wed, 26 Aug 2026 12:00:28 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wzCJQ-0004Qr-Ot; Wed, 26 Aug 2026 12:01:00 +0000
+Received: by outflank-mailman (input) for mailman id 1399854;
+ Wed, 26 Aug 2026 12:00:59 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wzCIu-00041V-08
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 12:00:28 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wzCJP-0004Qf-Nw
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 12:00:59 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzCIs-003gjf-9q
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 14:00:26 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wzCJO-007yRD-QD
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2026 14:00:58 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a8ed557-2eae-0a2a0a5409dd-0a2a4504c16a-10
- for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 14:00:26 +0200
-Received: from [209.85.218.41] (helo=mail-ej1-f41.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a8ed573-8faa-0a2a0a5109dd-0a2a450bd9b6-38
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 14:00:58 +0200
+Received: from [209.85.218.54] (helo=mail-ej1-f54.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a8ed55a-b57f-0a2a45040019-d155da29ec46-3
- for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 14:00:26 +0200
-Received: by mail-ej1-f41.google.com with SMTP id
- a640c23a62f3a-c2022323c37so109569966b.0
- for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 05:00:26 -0700 (PDT)
+ id 6a8ed57a-b7e8-0a2a450b0019-d155da36d8fc-3
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 14:00:58 +0200
+Received: by mail-ej1-f54.google.com with SMTP id
+ a640c23a62f3a-c197e7e4e94so126656666b.2
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Aug 2026 05:00:58 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c250a5d62easm471153166b.6.2026.08.26.05.00.23
+ 4fb4d7f45d1cf-6a5de8d1c80sm3194925a12.10.2026.08.26.05.00.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Aug 2026 05:00:24 -0700 (PDT)
+ Wed, 26 Aug 2026 05:00:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,56 +55,57 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787745626; x=1788350426; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1787745658; x=1788350458; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=fpxZNvLH3hGMzLfQMWG/zcRVETLgvOyxelfjtLNifPY=;
-        b=dxbiUKv3Z3mUNZ5Ml3ROYUbSlzFmxBoWSATDmEBRcAn9k6cRjbbulb3U5bZ7jYtYP8
-         +a/Mnti/jjA0NikPcjhu2Mp3oye9E0m3szBLHK6KUdrcqiwG5GSyL6QbCwz864DxxqdO
-         OiW0MTwR5BFNeZeumLJLn5mwYOYG6WUUE22cDXOd2u1qm5+aaxt8Ng21NIgowK7jt4zq
-         qafkHVipI4WnF0vuRa7hQulCdwX1rRxOVZdC7jbkVilH7vld7pAjrsid8JyX7lVgL5Rm
-         luRAYuigGfQIghOEHS1dIF2Npr3IqZ0h5Wa0JexSAGH/6MC/uABurMCMROBtNrU9KSwQ
-         fSug==
+        bh=Q+1gClmmk9yATyoZyczF2GlL3Oy9KQPuz5fqFvtjMX0=;
+        b=dVTuJhhBvxdBGBfYzXJRdhFiAZu0fEEh3y9nDc9LXsyjQHfJtLg66yqFBXzG/As4k6
+         kgc/E7fp5co2uKAfQHdK6O2F4lhuxyxJmQlpPgjEiBYsZT0rXSThSxyECZvkSl5lVbub
+         zxCj6b+7T25RDquguNZiB7F6LZ4FGCEjaSmeUhxxiK24WxHI/97OLnKUdz7qKPfVsWWU
+         ruJoubYG0rOMw9JrlRfMqIwDIEYOX+wl/y9y9yhdG3m8f5pFvf68jHk9l/vxjl6QBaeT
+         8IglTPDVh2jLEf3lEZlFOf8SRuhbdaW5UXX/JKMBDvCorCjIjrpNhwaciN4faWfIQSyS
+         0oIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787745626; x=1788350426;
+        d=1e100.net; s=20251104; t=1787745658; x=1788350458;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=fpxZNvLH3hGMzLfQMWG/zcRVETLgvOyxelfjtLNifPY=;
-        b=CXVQk1m9X3Fxz8vlqdAjjtPCGpGMXtVEKovqGqazGN5dNRt40XXfX+PxSP3EJpexxc
-         W4wR9NqB/mzFC0xUZRTd6l+jKXWaPtrT/82QBn5rRgXy+zwb0vNqoG0XaHoKx5IBL5nW
-         fskJJb+9UcYZQ+khWEaoZWQ9+2i9AFBRg7eMw+EQ2+LK1EaccdAoB7n6loNQtn4eTqVT
-         XRK0AIwx4uRlpiqtKKpHxj07PKHG+EB7D0MzLkauZ1eozUO4KK6saxvd2dexVyORlx6y
-         IWuXO85yNPFQQBLXFs+fORYaiWWv/5/4B2QVLfbF6X2FPEAg0VYxu+qsQji/m1ubU6+1
-         KYPw==
-X-Gm-Message-State: AFuF++m9f4BFn2bPBqb4LSCQAJOoFn02djqiTyVvXtvZGRzUewUIiJih
-	4YnPHL8tSaa0Od7e6kpvqHWwJTzB3HUSO9TztdamEfhk6pyojsBRB+1ArBDYIzcvwPiufpSmdQp
-	uRCKBlA==
-X-Gm-Gg: AR+sD115gH7PSUdwcZR2HtpwAcjiI3jClzC3v55CAxmI92m8VbobDC/UXhbg+mp0mFl
-	gVI2pf+cpwAtfSy6Af9DP9Hl9jIv7JzvpC3ApsSK0wFGKkIidT0MLfDwpis0xD9XT0FxEOXAeVG
-	xbDO4eP80bHXeItj7qelTNk50VUltYxauzCNB5TC61ekKbGY8DyPaKTY6s+YliUBYZViqnTB0Y+
-	yVIIIhUKWMwVdgYHwPaJXoJkXfaEYYvboD0yyj18v6LRP3zh9Yg/02/kI7vgbtzoUDJC07SlVek
-	6xWt4pO1Lg7wWuYp0os577nx7dukgIbZUmxubQXXGdJkXB5ehBixD6TqK3D8CImPH66+AWntEnb
-	5kSvXEe8HcrtfZRA1nD6odkQxnC6UZxy24NRsTFbIZqll/vekoJeFIPeVU1fqZSgZtCzR+ADMLa
-	fNoBH8I3NLt8+bXzlwbSG2khWQGPMkLcfQ198G7iIAoJpRGBzmCNavKTFv4MtiJJWk+aRkq416n
-	SzrxSxDe2QbEfKR7RDQ9FacUXFAtL/Zf7eVRJuUhHLm2Wrs1p4Guw==
-X-Received: by 2002:a17:907:e1d3:20b0:c25:d03:6794 with SMTP id a640c23a62f3a-c250d036dcdmr570529266b.16.1787745625231;
-        Wed, 26 Aug 2026 05:00:25 -0700 (PDT)
-Message-ID: <8e1b4212-ddb6-424a-91cf-ed80d985825c@suse.com>
-Date: Wed, 26 Aug 2026 14:00:22 +0200
+        bh=Q+1gClmmk9yATyoZyczF2GlL3Oy9KQPuz5fqFvtjMX0=;
+        b=lhKc8Gh4bBBimLvmoaQTySiUy49whPabaaOdFHy2klcr02H+pmpIhcr6B4sVbs4iXS
+         OBsAGwBtf/dUPK1B7lTY5hHaLiejf4V4NWfYSmd8fQkG1nhBo0Gp3odDQpPeRZ+VikhR
+         EZEKP8i+/FXQkfnlrC2UBS8a9WzWHNaDLgzR6a+aaE0vYGHyYdze22ttiWuEr6V1gfBc
+         +vLsEy8WcToVaJCNGT/iU0FXMNPq9rTqrrsAnt5Efo0kOfhzYpfejss4BdO5X8RX/JS0
+         /07QPe53KA1o9csdtKgDO6kAVLp+/S1Ele21cNz/wlC4pirO3iNyK3n5saT6q9WYA1nf
+         MF/g==
+X-Gm-Message-State: AFuF++mOXGSeNbVVE+1QvcSuvI6PJFJYKKrZalDga//Y8X9FpqAZYOUo
+	mR9y5pREANk8bAjKmGnjZTlKJr6uRzLGLxNFzjwc/BQlU9EbqzQVq5pgFJ9+USvsdWEz7izCcx2
+	G1R+5dg==
+X-Gm-Gg: AR+sD10XiWGqZBWAlh7kwH121tfJagDTvlbCwuTOvToVMi6+Lc1mCpmeQZgHnOAYRO5
+	djmxDfVBkq/6FSBfk3nvtutaZpae+2ilWjFG1q8mLT5wKaz9MCU8dTU6NV5j+3M9AyLowmPU0kz
+	9cK8zLcZLdBK9bHv54Bdx/UJzkiKzDUF5hsCQlLGLyAbhpRbHciBKb5jIyrBSvOgz87GmGewWSA
+	gFd7Uuf9tF/brxWtIDXWZti2cUnSjjJu2vg3JDHOZTaozXVF2YVTd/fjomjPB3BCl1UdsXhCCXF
+	jBKOrhTNmb9Ar5rRl/7acomMYVF+Yt8bBPy9wZhqUjK1wxRwUgT7Svo7xl6DhT+B7VRH9yzmnrd
+	qOtDtdmJwiBYgLe0AD9C4udomhfC0uk6CBdGYDZIqYOrreLTxJPWoDxi4zFmQ4RekbaIJ2BP//N
+	+/CamZpVH8uP4IPjIL9d0czSy/+0Rzi4N6dNoRj7rbGzEkwprir5/aaKKpgCneOQhJPoR0D9aMV
+	lWfi4Cm5ZLaPfr7Ikk2Bf00jrLqEyqm/K7U+C6/Mr0mUfMg3G9kZA==
+X-Received: by 2002:a17:907:d0e:b0:c1f:c7f0:b433 with SMTP id a640c23a62f3a-c250bc09ef9mr830455966b.9.1787745657993;
+        Wed, 26 Aug 2026 05:00:57 -0700 (PDT)
+Message-ID: <483052d4-b70e-4005-8b10-4ecf509bf40a@suse.com>
+Date: Wed, 26 Aug 2026 14:00:55 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2 1/7] x86: split xen-syms/xen.efi linking rules
+Subject: [PATCH v2 2/7] Arm: split xen-syms linking rule
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Teddy Astie <teddy.astie@vates.tech>
+ <roger@xenproject.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 References: <9a78fdea-08ba-4e04-bfa1-ba09730a300b@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -133,255 +134,104 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <9a78fdea-08ba-4e04-bfa1-ba09730a300b@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1787745626-C2AC8B50-32C3FAAE/0/0
+X-purgate-ID: tlsNG-42698a/1787745658-A9EC69EA-9C085975/0/0
 X-purgate-type: clean
-X-purgate-size: 10503
+X-purgate-size: 3821
 
 Doing so, besides (hopefully) adding clarity (not the least by way of
-using pattern rules where possible), also avoids explicit recursive
-$(MAKE) invocations. For xen-syms move re-usable helper rules to a new
-scripts/Makefile.link.
+[re-]using pattern rules where possible), also avoids explicit recursive
+$(MAKE) invocations.
 
-While doing so, re-order .map file creation (which can in principle fail)
-and check-endbr.sh invocation ahead of putting in place the final image
-(which is now the result of a simple rename).
+By re-using the generic rules introduced when the respective x86 rule was
+split,
+- the .map file now isn't created after the final binary anymore,
+- --strip-debug is passed to $(LD) during early linking passes (for
+  consistency the option is also explicitly added to the optional linking
+  pass rule),
+- CONFIG_{SUPPRESS_DUPLICATE_SYMBOL_WARNINGS,ENFORCE_UNIQUE_SYMBOLS} are
+  now properly respected.
+Orphan section checking, otoh, is getting suppressed for now, until the
+about a dozen warnings which would result have been taken care of.
 
-Also drop --source-name= from the tools/symbols invocation which has
---empty passed, for being meaningless there.
-
-Note that the original "rm" at the end of the rule needs limiting:
-Removing intermediate files (which $(MAKE) doesn't itself remove) would
-cause re-linking even when installing as root (when common/version.o is
-left unaltered, and hence an incremental build should do nothing as long
-as nothing else changed in the source tree).
+While the 4th linking step continues to be avoided when possible, a
+redundant invocation of $(NM) and tools/symbols (plus the assembling of
+the resulting .S file) is hopefully deemed acceptable.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-I'd like to keep the "beautification" part, i.e. transforming to more use
-of Kbuild.include machinery, separate.
+As for the x86 patch, I'd like to keep the "beautification" part, i.e.
+transforming to more use of Kbuild.include machinery, separate.
 
-The check-endbr.sh invocation doesn't fit neatly into this model. I was
-considering to move it into $(TARGET)'s rule, but that's not very nice
-either (both because it'd be odd [strictly speaking: wrong] for xen.efi,
-and because it would reduce parallelism).
----
-v2: Mark intermediate files as such. Don't use $(if_changed ...).
-
---- a/xen/arch/x86/Makefile
-+++ b/xen/arch/x86/Makefile
-@@ -102,12 +102,6 @@ notes_phdrs = --notes
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -84,40 +84,12 @@ ifeq ($(CONFIG_ARM_64),y)
+ 	ln -sf $(@F) $@.efi
  endif
- endif
- 
--syms-warn-dup-y := --warn-dup
--syms-warn-dup-$(CONFIG_SUPPRESS_DUPLICATE_SYMBOL_WARNINGS) :=
--syms-warn-dup-$(CONFIG_ENFORCE_UNIQUE_SYMBOLS) := --error-dup
--
--orphan-handling-$(call ld-option,--orphan-handling=warn) += --orphan-handling=warn
--
- $(TARGET): TMP = $(dot-target).elf32
- $(TARGET): $(TARGET)-syms $(efi-y) $(obj)/boot/mkelf32
- 	$(obj)/boot/mkelf32 $(notes_phdrs) $(TARGET)-syms $(TMP) $(XEN_IMG_OFFSET)
-@@ -119,31 +113,11 @@ $(TARGET): $(TARGET)-syms $(efi-y) $(obj
- 
- CFLAGS-$(XEN_BUILD_EFI) += -DXEN_BUILD_EFI
  
 -$(TARGET)-syms: $(objtree)/prelink.o $(obj)/xen.lds
 -	$(objtree)/tools/symbols $(all_symbols) --empty > $(dot-target).0.S
 -	$(MAKE) $(build)=$(@D) $(dot-target).0.o
--	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $< $(build_id_linker) --strip-debug \
+-	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $< $(build_id_linker) \
 -	      $(dot-target).0.o -o $(dot-target).0
 -	$(NM) -pa --format=sysv $(dot-target).0 \
 -		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
 -		> $(dot-target).1.S
 -	$(MAKE) $(build)=$(@D) $(dot-target).1.o
--	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $< $(build_id_linker) --strip-debug \
+-	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $< $(build_id_linker) \
 -	    $(dot-target).1.o -o $(dot-target).1
 -	$(NM) -pa --format=sysv $(dot-target).1 \
--		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort $(syms-warn-dup-y) \
+-		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
 -		> $(dot-target).2.S
 -	$(MAKE) $(build)=$(@D) $(dot-target).2.o
--	$(call compare-symbol-tables, $(dot-target).1.o, $(dot-target).2.o)
+-	if ! { $(call compare-symbol-tables, $(dot-target).1.o, $(dot-target).2.o) >/dev/null; }; \
+-	then \
+-		set -e; \
+-		$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $< $(build_id_linker) \
+-		    $(dot-target).2.o -o $(dot-target).2; \
+-		$(NM) -pa --format=sysv $(dot-target).2 \
+-			| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
+-			> $(dot-target).3.S; \
+-		$(MAKE) $(build)=$(@D) $(dot-target).3.o; \
+-		$(call compare-symbol-tables, $(dot-target).2.o, $(dot-target).3.o); \
+-	else \
+-		ln -sf $(dot-target).2.o $(dot-target).3.o; \
+-	fi
 -	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $< $(build_id_linker) \
--	    $(orphan-handling-y) $(dot-target).2.o -o $@
+-	    $(dot-target).3.o -o $@
 -	$(NM) -pa --format=sysv $@ \
 -		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
 -		> $@.map
 -	rm -f $(dot-target).[0-9]* $(@D)/..$(@F).[0-9]*
--ifeq ($(CONFIG_XEN_IBT),y)
--	$(SHELL) $(srctree)/tools/check-endbr.sh $@
--endif
-+LAST_LINKING_PASS := 2
-+
-+final-image-check-$(CONFIG_XEN_IBT) = $(SHELL) $(srctree)/tools/check-endbr.sh $<
++LAST_LINKING_PASS := 3
 +
 +include scripts/Makefile.link
++
++# Suppress orphan section checking for the time being.
++orphan-handling-y :=
  
- $(obj)/note.o: $(TARGET)-syms
- 	$(OBJCOPY) -O binary --only-section=.note.gnu.build-id $< $@.bin
-@@ -191,51 +165,69 @@ note_file_option ?= $(note_file)
- 
- extra-$(XEN_BUILD_PE) += efi.lds
- ifeq ($(XEN_BUILD_PE),y)
--$(TARGET).efi: $(obj)/efi/relocs-dummy.o $(obj)/efi/relocs-empty.o $(obj)/efi/mkreloc
--$(TARGET).efi: $(objtree)/prelink.o $(note_file) $(obj)/efi.lds
-+
-+.INTERMEDIATE: $(addprefix .$(TARGET).efi., \
-+                           $(foreach n, 0 1 2, \
-+                                     $(n) alt.$(n) $(n)r.o $(n)s.o $(n)r.S $(n)s.S))
-+
-+.$(TARGET).efi.%.o: .$(TARGET).efi.%.S FORCE
-+	$(call cmd,cc_o_S)
-+
-+.$(TARGET).efi.1r.S: .$(TARGET).efi.0 $(if $(relocs-dummy),.$(TARGET).efi.alt.0)
-+.$(TARGET).efi.2r.S: .$(TARGET).efi.1 $(if $(relocs-dummy),.$(TARGET).efi.alt.1)
-+
-+.$(TARGET).efi.0r.o: $(obj)/efi/relocs-dummy.o $(obj)/efi/mkreloc
-+	ln -sf $< $@
-+
-+.$(TARGET).efi.%r.S:
-+	$(MKRELOC) $^ > $@
-+
-+.$(TARGET).efi.0s.S:
-+	$(objtree)/tools/symbols $(all_symbols) --empty > $@
-+
-+.$(TARGET).efi.1s.S: .$(TARGET).efi.0
-+.$(TARGET).efi.2s.S: .$(TARGET).efi.1
-+
-+.$(TARGET).efi.%s.S:
-+	$(NM) -pa --format=sysv $< \
-+	  | $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
-+ 	    --source-name=$(TARGET).efi.S \
-+	  > $@
-+
-+# See above for why $(note_file) needs removing here.
-+efi-objs = $(filter-out $(note_file),$(filter %.o,$^))
-+
-+.$(TARGET).efi.%: $(objtree)/prelink.o .$(TARGET).efi.%r.o \
-+                  .$(TARGET).efi.%s.o $(note_file) $(obj)/efi.lds
-+	$(LD) $(call EFI_LDFLAGS,$(VIRT_BASE)) -T $(obj)/efi.lds $(efi-objs) \
-+	      --strip-debug $(note_file_option) -o $@
-+
-+.$(TARGET).efi.alt.%: $(objtree)/prelink.o .$(TARGET).efi.%r.o \
-+                      .$(TARGET).efi.%s.o $(note_file) $(obj)/efi.lds
-+	$(LD) $(call EFI_LDFLAGS,$(ALT_BASE)) -T $(obj)/efi.lds $(efi-objs) \
-+	      --strip-debug $(note_file_option) -o $@
-+
-+.$(TARGET).efi.2: $(objtree)/prelink.o $(obj)/efi/relocs-empty.o \
-+                  .$(TARGET).efi.2r.o .$(TARGET).efi.2s.o $(note_file) \
-+                  $(obj)/efi.lds
-+	$(call compare-symbol-tables, .$(TARGET).efi.1r.o, .$(TARGET).efi.2r.o)
-+	$(call compare-symbol-tables, .$(TARGET).efi.1s.o, .$(TARGET).efi.2s.o)
-+	$(LD) $(call EFI_LDFLAGS,$(VIRT_BASE)) -T $(obj)/efi.lds $(efi-objs) \
-+	      $(orphan-handling-y) $(note_file_option) -o $@
-+
-+$(TARGET).efi: .$(TARGET).efi.2
- ifeq ($(CONFIG_DEBUG_INFO),y)
--	$(if $(filter --strip-debug,$(EFI_LDFLAGS)),echo,:) "Will strip debug info from $(@F)"
-+	$(if $(filter --strip-debug,$(EFI_LDFLAGS)),echo,:) "No debug info in $(@F)"
- endif
--	$(objtree)/tools/symbols $(all_symbols) --source-name=$(@F).S --empty \
--		> $(dot-target).0s.S
--	$(MAKE) $(build)=$(@D) .$(@F).0s.o
--	$(foreach base, $(VIRT_BASE) $(ALT_BASE), \
--	          $(LD) $(call EFI_LDFLAGS,$(base)) -T $(obj)/efi.lds $< $(relocs-dummy) \
--	                $(dot-target).0s.o $(note_file_option) --strip-debug \
--	                -o $(dot-target).$(base).0 &&) :
--	$(MKRELOC) $(foreach base,$(VIRT_BASE) $(ALT_BASE),$(dot-target).$(base).0) \
--		> $(dot-target).1r.S
--	$(NM) -pa --format=sysv $(dot-target).$(VIRT_BASE).0 \
--		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
--                  --source-name=$(@F).S \
--		> $(dot-target).1s.S
--	$(MAKE) $(build)=$(@D) .$(@F).1r.o .$(@F).1s.o
--	$(foreach base, $(VIRT_BASE) $(ALT_BASE), \
--	          $(LD) $(call EFI_LDFLAGS,$(base)) -T $(obj)/efi.lds $<  --strip-debug \
--	                $(dot-target).1r.o $(dot-target).1s.o $(note_file_option) \
--	                -o $(dot-target).$(base).1 &&) :
--	$(MKRELOC) $(foreach base,$(VIRT_BASE) $(ALT_BASE),$(dot-target).$(base).1) \
--		> $(dot-target).2r.S
--	$(NM) -pa --format=sysv $(dot-target).$(VIRT_BASE).1 \
--		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
--                  --source-name=$(@F).S \
--		> $(dot-target).2s.S
--	$(MAKE) $(build)=$(@D) .$(@F).2r.o .$(@F).2s.o
--	$(call compare-symbol-tables, $(dot-target).1r.o, $(dot-target).2r.o)
--	$(call compare-symbol-tables, $(dot-target).1s.o, $(dot-target).2s.o)
--	$(LD) $(call EFI_LDFLAGS,$(VIRT_BASE)) -T $(obj)/efi.lds $< $(obj)/efi/relocs-empty.o \
--	      $(dot-target).2r.o $(dot-target).2s.o $(orphan-handling-y) \
--	      $(note_file_option) -o $@
--	$(NM) -pa --format=sysv $@ \
--		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
--		> $@.map
-+	$(NM) -pa --format=sysv $< \
-+	  | $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
-+	  > $@.map
- ifeq ($(CONFIG_DEBUG_INFO),y)
--	$(if $(filter --strip-debug,$(EFI_LDFLAGS)),:$(space))$(OBJCOPY) -O elf64-x86-64 $@ $@.elf
-+	$(if $(filter --strip-debug,$(EFI_LDFLAGS)),:$(space))$(OBJCOPY) -O elf64-x86-64 $< $@.elf
- endif
-+	$(final-image-check-y)
-+	mv $< $@
- 	rm -f $(dot-target).[0-9]* $(@D)/..$(@F).[0-9]*
--ifeq ($(CONFIG_XEN_IBT),y)
--	$(SHELL) $(srctree)/tools/check-endbr.sh $@
--endif
- else
- $(TARGET).efi: FORCE
- 	rm -f $@
---- /dev/null
+ .PHONY: include
+ include:
+--- a/xen/scripts/Makefile.link
 +++ b/xen/scripts/Makefile.link
-@@ -0,0 +1,51 @@
-+# SPDX-License-Identifier: GPL-2.0
-+# ==========================================================================
-+# Helper rules for linking xen-syms
-+# ==========================================================================
+@@ -33,6 +33,19 @@ final-image-check-y ?= true
+ 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $(filter %.o,$^) \
+ 	      $(build_id_linker) --strip-debug -o $@
+ 
++ifneq ($(LAST_LINKING_PASS),2)
 +
-+syms-warn-dup-y := --warn-dup
-+syms-warn-dup-$(CONFIG_SUPPRESS_DUPLICATE_SYMBOL_WARNINGS) :=
-+syms-warn-dup-$(CONFIG_ENFORCE_UNIQUE_SYMBOLS) := --error-dup
++.$(TARGET)-syms.2: $(objtree)/prelink.o .$(TARGET)-syms.2.o $(obj)/xen.lds
++	if ! { $(call compare-symbol-tables, .$(TARGET)-syms.1.o, .$(TARGET)-syms.2.o) >/dev/null; }; \
++	then \
++		$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $(filter %.o,$^) \
++		      $(build_id_linker) --strip-debug -o $@; \
++	else \
++		ln -sf .$(TARGET)-syms.1 $@; \
++	fi
 +
-+orphan-handling-$(call ld-option,--orphan-handling=warn) := --orphan-handling=warn
++endif
 +
-+final-image-check-y ?= true
-+
-+.INTERMEDIATE: $(addprefix .$(TARGET)-syms.,$(foreach n,0 1 2 3,$(n) $(n).o $(n).S))
-+
-+.$(TARGET)-syms.%.o: .$(TARGET)-syms.%.S
-+	$(call cmd,cc_o_S)
-+
-+.$(TARGET)-syms.0.S:
-+	$(objtree)/tools/symbols $(all_symbols) --empty > $@
-+
-+.$(TARGET)-syms.1.S: .$(TARGET)-syms.0
-+.$(TARGET)-syms.2.S: .$(TARGET)-syms.1
-+.$(TARGET)-syms.3.S: .$(TARGET)-syms.2
-+
-+.$(TARGET)-syms.%.S:
-+	$(NM) -pa --format=sysv $< \
-+	  | $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
-+	    $(if $(filter $(LAST_LINKING_PASS),$*), $(syms-warn-dup-y)) \
-+	  > $@
-+
-+.$(TARGET)-syms.%: $(objtree)/prelink.o .$(TARGET)-syms.%.o $(obj)/xen.lds
-+	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $(filter %.o,$^) \
-+	      $(build_id_linker) --strip-debug -o $@
-+
-+.$(TARGET)-syms.$(LAST_LINKING_PASS): $(objtree)/prelink.o \
-+                                      .$(TARGET)-syms.$(LAST_LINKING_PASS).o \
-+                                      $(obj)/xen.lds
-+	$(call compare-symbol-tables, \
-+	       .$(TARGET)-syms.$(shell expr $(LAST_LINKING_PASS) - 1).o, \
-+	       .$(TARGET)-syms.$(LAST_LINKING_PASS).o)
-+	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $(filter %.o,$^) \
-+	      $(build_id_linker) $(orphan-handling-y) -o $@
-+
-+$(TARGET)-syms: .$(TARGET)-syms.$(LAST_LINKING_PASS)
-+	$(NM) -pa --format=sysv $< \
-+	  | $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
-+	  > $@.map
-+	$(final-image-check-y)
-+	mv $< $@
-+	rm -f $(dot-target).[0-9]* $(@D)/..$(@F).[0-9]*
+ .$(TARGET)-syms.$(LAST_LINKING_PASS): $(objtree)/prelink.o \
+                                       .$(TARGET)-syms.$(LAST_LINKING_PASS).o \
+                                       $(obj)/xen.lds
 
 
