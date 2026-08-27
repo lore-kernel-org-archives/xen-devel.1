@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02E75C61DB9
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2026 15:20:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1400844.1636516 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99D54C61DC4
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2026 15:21:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1400919.1636540 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzbtX-00084R-1W; Thu, 27 Aug 2026 15:19:59 +0000
+	id 1wzbvC-00063H-KN; Thu, 27 Aug 2026 15:21:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1400844.1636516; Thu, 27 Aug 2026 15:19:58 +0000
+Received: by outflank-mailman (output) from mailman id 1400919.1636540; Thu, 27 Aug 2026 15:21:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzbtV-0007zw-HZ; Thu, 27 Aug 2026 15:19:57 +0000
-Received: by outflank-mailman (input) for mailman id 1400844;
- Thu, 27 Aug 2026 15:19:54 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wzbtR-0007Ne-Rj
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 15:19:53 +0000
+	id 1wzbvC-00063A-Gw; Thu, 27 Aug 2026 15:21:42 +0000
+Received: by outflank-mailman (input) for mailman id 1400919;
+ Thu, 27 Aug 2026 15:21:41 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wzbvA-00060j-SL
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 15:21:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzbtR-00C6oU-6u
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 17:19:53 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wzbv9-009ksf-OI
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 17:21:39 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a905598-2eae-0a2a0a5409dd-0a2a4502a324-4
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:19:53 +0200
-Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a905601-2eae-0a2a0a5409dd-0a2a4504ba94-8
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:21:39 +0200
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a905599-6ca4-0a2a45020019-d155dd2eed9f-3
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:19:53 +0200
-Received: by mail-wr1-f46.google.com with SMTP id
- ffacd0b85a97d-47ddf7b09e5so1880269f8f.1
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 08:19:53 -0700 (PDT)
+ id 6a905603-b57f-0a2a45040019-d155802ad095-3
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:21:39 +0200
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-49b392ccaacso11898515e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 08:21:39 -0700 (PDT)
 Received: from fedora (user-109-243-144-234.play-internet.pl.
  [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482e28f5d01sm10049148f8f.32.2026.08.27.08.19.51
+ 5b1f17b1804b1-49b4b2d6b30sm57441155e9.14.2026.08.27.08.21.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Aug 2026 08:19:52 -0700 (PDT)
+ Thu, 27 Aug 2026 08:21:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,43 +52,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787843992; x=1788448792; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=fVKdGetffBRubdmjJd38E0ZcnQQRwEaATMIg4OwbtS0=;
-        b=VO0qUWWUuPSk1qaWoG0IuDyUmJ8dMQTjUXCOYhtImrn+shyATsJDyJ33inzEZxCL7w
-         z6RGpqPqhtNrUm/qRjJ+sEirI9eszV21gEeorDk+pb5tiFrLCrO0bk0n58oqvlyzI0Hg
-         /4Q2q1gCyIpXpSOb+CVJZ1pVYLwTNiZr/jW5xUHKHxWTZhH01s/IdEFS3nzwfBl/BV6/
-         aiR4WlWxKgBJPqfqmoSz2azHyrKb4Vb7cSrC7jt7mp1bHA9Av95Ywgm0MYZmnrqHirtR
-         Tj8DqQ1eJHsnUWb9szGJRQQd2ghEL7Ahtto68SIYrb1P9q0yozWDZNU9aNW1p/jW4udm
-         SDwQ==
+        d=gmail.com; s=20251104; t=1787844099; x=1788448899; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=CBrU03USIPoQ/ePxJIOS375Vmn7ZObWJdkc5XcTcpQ8=;
+        b=LieF0W/8qz841+4ydookV3pxrEidoLymCzDn8jN2shMoiVLDzXWaWZMA3P+rtNHoQt
+         ZTstdvUYvvQ6fK5C/XMX7UF9/mAPt08VMb9JgetgWxgFrArWb+YmZard1YaefbtK9it8
+         8+oJmFPac6DT3+PNZtqZkaRamqEujNec9FXvAzQeRm0WA6wMIArPu6xUkaP3gU+4GcuP
+         g5/dYepgl3oima6jGpERVdnzYNwM2Rcmu+Pg7gh2gP15YAClXeU4PchaYQfgSdlUP6+e
+         hQZQ2xbN6+AjO0t29rWQhnDZtr8U3axemh2MQ/NNCKYO9B7nN8zdZiStfJRXWZiadusQ
+         w7Gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787843992; x=1788448792;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=fVKdGetffBRubdmjJd38E0ZcnQQRwEaATMIg4OwbtS0=;
-        b=iC0SEaeKNb9sFDE8OR2JJ3jfVwNjZErsz9JaP4adMJfJeHNTFsb6C6bn+B586agyCm
-         18DybGHuZE2KLwfdKt/dXtLRMt7F4Pn5wI8r6a0+KM6lAJgsIiWs1M+HBUH+xcfeLrjH
-         xfHcEpTRZSn9PpMWzi0YnZQnE3uyh02ezzDlVOg1vQmkLt6TrcUo6U7zjmwIqLZxB3N9
-         PNeuqQdPuDj82HKmsdlu1uhcrjDXxtuaomEyO3stcxTNqxoCWYdK//PYYK8MNpY4GLuX
-         UZ1JuJKHuO/QXLIW3Jn+VhMiE5X62FVRtUjymTb1tf0+mNbx7LZSHkWDuJml+1SQOOa5
-         8skw==
-X-Gm-Message-State: AFuF++mXYXpBHg1ShUTTCTDjOLFUDLfcEhJh9vn/oNBbaEdrohb9qrhr
-	71R6YK7afR0G3CLOZdmhcxtjtQ/TG160T1ekkh8PBDdAVOHX/twMFrvrcpiwbg==
-X-Gm-Gg: AR+sD12UMP8A662X0JPAJrkOIxV8XbAaU4LuoYqraHagzjFPM4xkUNzP4U5viqSb9s1
-	DIuTXDYSXCiiEVE27kfKdBLBF2+MJoHxuOqfUwzj86JprKzSDoEqJEAu+Thoh4HIulPWxQDhr4K
-	qBoNUq7AgcHbhcZSr/K52kuesRNSJ6fp9XYbajqRAWXLu1+/ABSIRuEYvblwPVi55PkXmkoUMlN
-	j18KeHcT1c03XFc6TPVsaaRkHLfh58fWFGspern9Mq7f419g6oIeEWJjkg8Jaa0zxaikRSftcnd
-	hztLkQoKSC0y4xOARi7cLYSW0toUABzY+ktAGxbfSQkNl2B7gOZz5iRldbrLFaBU/S5PIKRURz1
-	Vl7XVOquYDr548FTwWEdCfj10dnahv+qyF0qKea++5ip0hi6lmc7kZFDSBE2qEj2jeER8dtp765
-	5oyGZuXQeWTFXcWIAqAw6qPIq5AHtMdeC+IFjrLsPGgHMHYYhDBlSw1PGf72HYg2hgBj7Lbo33V
-	KfjO6V/MJeROM3FzMY/3FtSMTIavZ8ouQ==
-X-Received: by 2002:a05:6000:29dc:b0:47f:8183:e9b8 with SMTP id ffacd0b85a97d-482e26f2a93mr16922970f8f.22.1787843992513;
-        Thu, 27 Aug 2026 08:19:52 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1787844099; x=1788448899;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=CBrU03USIPoQ/ePxJIOS375Vmn7ZObWJdkc5XcTcpQ8=;
+        b=W79N6gL73aOskMU2qmUts99pQGY1hyQ/hBprugOwv261Ey1DFE8zXpBh35I4DZOSLW
+         7TGDB3Wswyay5RfVRsXrfLz9S0C7E4R3blF83EuYQffhAch7zdwVV+0n0yUWwP/NtbmG
+         CGOR6pu+/V01C1n+zxp6q0cq6Fe7TBHcZO2//rOxmzquIsKhCTS29drl06+fGgEH5fDX
+         3x19f/kirx62J0r1msHiZKJVIPNqji3SQia+0oIOAQtCOWsti7n07OQ50XJj9HeuIpfv
+         xrAKtxyerKAnzXgwj3YoCMgaCpPXDOmHwxCqhoLOIVGac2u2yz1q85LJiWY5zeX/D3RH
+         S+gA==
+X-Gm-Message-State: AFuF++m1tbHOZQRSDQrTru65WOUEGhtGTH8S3mc9cy/8zv1oV+5elQiD
+	s2qiRYUixM9jG3jKff4sp8SJGAa4XbYH6we7lmq0d+VkSj49MHjV0mu6C0gsXg==
+X-Gm-Gg: AR+sD120Y44/n3cixcgtl8VYNSA3WcX3Zn7PkDyJWXnf259rM7gN5fJ+pp84s6RtoCe
+	y+gBcRK+rRSp7j2HMghtsPUS7kiHmnV6uOC1xr86HzYJ103j7TP3lmQNIwbRcRu7kTJ3rDXrAOq
+	us1oq+wxNhZtmxB0wy+Al6RkiDji4qnuTzSe2Tks2JDtMsCmM2ph/27ehib81GtAIUDBa++qFKm
+	4OyNyypziRruiEzKZNTCx418bk8Qu3DDNOn3m6DHzKVwd3LLHtEQMQ/MqFMcPGPGQmVfQsnoPvB
+	COgzis3ql5CYh9ZKRXOlIRMtktypLrC+YNXF21jaAIqsjNAt8i5coZuNHAsa3NT5tJDI72/SbBj
+	D2QkwZYiyZ+Xwm93Mav28CjPK6MitKRz7y91WE0sAN1w8ab0Us3w5W0t3pLSgIaCxLzvVUxLL91
+	qhigR/dj+daBB2ZiKoeZj3en/pHg3Lga/DuXx+XLZb5BwfhvXDN1JLFj/LyUwckzcdtoEV6gEoS
+	1+Ppxb+let2c8RVOylEKd+eOcuYBBSS
+X-Received: by 2002:a05:600c:3f08:b0:499:d513:e507 with SMTP id 5b1f17b1804b1-499dc6efdf9mr218483915e9.2.1787844099025;
+        Thu, 27 Aug 2026 08:21:39 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -104,190 +103,237 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v8 20/20] xen/riscv: add initial dom0less infrastructure support
-Date: Thu, 27 Aug 2026 17:19:13 +0200
-Message-ID: <bf905ec5249be975ee878d4c6002118f09ba4fc1.1787836900.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 00/39] [RISC-V] virtual interrupt controller (vAPLIC/vIMSIC) support
+Date: Thu, 27 Aug 2026 17:20:44 +0200
+Message-ID: <cover.1787838835.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <cover.1787836900.git.oleksii.kurochko@gmail.com>
-References: <cover.1787836900.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1787843993-66AB52AC-C88A6E13/10/73395122804
+X-purgate-ID: tlsNG-ebf023/1787844099-520D5B50-07880D69/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 7397
+X-purgate-size: 12149
 
-Enable dom0less support for RISC-V by selecting HAS_DOM0LESS and
-providing the minimal architecture hooks required by the common
-dom0less infrastructure.
+Hi all,
 
-Add stub implementations for architecture-specific helpers used when
-building domains from the device tree. These allow the generic
-dom0less code to build and let a basic DomU be constructed on RISC-V.
-construct_hwdom() and make_hypervisor_node() are still stubs returning
-an error: Dom0/hwdom construction isn't supported yet, and the
-hypervisor node generation (needed by domains with
-DOM0LESS_ENHANCED_NO_XS set) is not implemented. Both are marked with
-a TODO and are not reached by the currently supported configurations.
+This series adds the initial virtual interrupt controller (vINTC) support
+for RISC-V guests in Xen, based on the Advanced Interrupt Architecture
+(AIA): a virtual APLIC (vAPLIC) in MSI mode backed by a virtual IMSIC
+(vIMSIC) using hardware guest interrupt files.
 
-Provide missing helpers and definitions required by the domain
-construction code, including domain bitness helpers and the
-p2m_set_allocation() prototype.
+Rather than emulating APLIC in direct-delivery mode (which requires
+trap-and-emulate for every interrupt and is costly), the series targets
+IMSIC from the start. AIA lets a hart implement several "guest interrupt
+files" (up to GEILEN), so external interrupts can be delivered to a vCPU
+directly by hardware via the VGEIN field of hstatus, without a hypervisor
+round-trip. Xen only has to emulate the APLIC MMIO programming interface
+and route the guest's intent onto the physical MSI topology; interrupt
+delivery itself stays in hardware.
 
-Additionally define the guest magic memory region (GUEST_MAGIC_BASE /
-GUEST_MAGIC_SIZE) in asm/guest-layout.h. The base is arbitrary; the
-only constraint is that the region must not overlap guest RAM or the
-emulated device regions. It is placed in the unused gap below
-GUEST_RAM0_BASE (0x80000000); the constraints are documented next to
-the #define-s.
+The work breaks down into a few logical blocks:
 
-A separate region for grant tables will be introduced at the same time as
-the introduction of the grant table for RISC-V.
+Preparatory fixes and cleanups (patches 1-6)
+  - Drop the unused pregs field of struct cpu_user_regs and bug.h's
+    duplicate instruction length helpers.
+  - Program hstatus.VSXL explicitly, as decoding a trapped instruction
+    depends on the effective XLEN of the guest.
+  - csr_read64() as the counterpart of csr_write64(), used for CSR_TIME so
+    that get_cycles() no longer truncates the time counter on RV32, and
+    UINT64_MAX rather than ULONG_MAX to disable the VS-timer.
+  - Request a G-stage flush on vmenter where VMIDs are unavailable, so a
+    domain cannot run on the translations left behind by the one which ran
+    on that hart before it.
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
+APLIC groundwork and vAPLIC MMIO emulation (patches 7-11)
+  - Add the missing APLIC register offsets/masks needed by both the
+    physical and virtual APLIC code, rearranging asm/aplic.h in the style
+    of x86's asm/msr-index.h (no functional change).
+  - A per-domain MMIO handler table modelled on Arm's framework, so
+    emulated devices self-register their GPA ranges and the fault path
+    stays agnostic via a single try_handle_mmio() entry point.
+  - vAPLIC MMIO read/write emulation. Writes are gated by the domain's
+    authorised-IRQ bitmap so a guest cannot touch interrupts it does not
+    own, and TARGET writes are translated from virtual to physical
+    hart/guest-file indices. Delegation (SOURCECFG.D) is not yet
+    supported.
+  - Build the physical APLIC's target hart index with aplic_hart_field()
+    as well, dropping the last in-tree duplicate of the AIA hart index
+    formula, and add a helper to test for APLIC MSI mode.
+
+vCPU context switching (patches 12-15)
+  - context_switch() and the helpers it needs: save/restore of H/VS CSRs,
+    the virtual timer and P2M context, and __context_switch() in assembly.
+    The VMID is claimed in p2m_ctxt_switch_to() rather than at the next
+    guest entry, which leaves p2m_handle_vmenter() with nothing to do.
+  - Save and restore the AIA CSRs a guest can change (vsiselect and
+    hviprio{1,2}), gated by hstateen0 where Smstateen is implemented.
+  - vintc_ctxt_switch_{from,to}() wrappers over new ctxt_switch_{from,to}
+    hooks in struct vintc_ops, called from the context switch path, plus
+    the IMSIC implementation of those hooks: it records which pCPU owns a
+    vCPU's guest interrupt file, as the pCPU id is part of the MSI
+    address.
+
+Trap and instruction emulation infrastructure (patches 16-26)
+  - Extend the exception-table format with type/data fields and add
+    EX_TYPE_TRAP_INFO so fixups can capture sepc/scause/stval, and look
+    the table up for any trap taken in Xen context rather than for illegal
+    instructions only, so that the hlv/hlvx sequences reach their fixup.
+  - A guest page-fault handler, and trap_redirect() to forward a
+    synchronous trap back into the guest's VS-mode handler for the faults
+    which can never become an emulated access.
+  - Resolve the faulting guest physical address from htval and stval,
+    which first needs Shtvala to be detected, and define all four
+    INSN_PSEUDO_VS_* values independently of the hypervisor's XLEN, so
+    that a fault taken on an implicit VS-stage access is recognized as one
+    rather than mistaken for an MMIO trap.
+  - riscv_read_guest() (HLV/HLVX) to read guest memory and instructions
+    safely, the decoding helpers shared by both access types, and the load
+    and store emulation which dispatches the access through
+    try_handle_mmio().
+
+vCPU migration between pCPUs (patches 27-34) (introduced here for better context
+of VGEIN fumctions usage)
+  - arch_move_irqs(), dispatching through a new move_irqs hook in
+    struct vintc_ops down to imsic_migrate_vcpu(), and the case where a
+    vCPU has no guest interrupt file to move yet.
+  - The move of a vCPU's IMSIC guest interrupt file itself, following the
+    sequence the AIA spec prescribes: quiesce and save eidelivery/
+    eithreshold of the old file, zero the new one, G-stage remap it,
+    retarget the domain's APLIC interrupts at it
+    (aplic_reconfigure_target()) and fence off straggler MSIs with a
+    genmsi barrier, dump the old file's eip/eie arrays to memory, then
+    restore that state into the new file and update the vCPU's
+    hstatus.VGEIN.
+
+VGEIN allocation and vCPU bring-up (patches 35-39)
+  - Per-pCPU VGEIN (guest interrupt file) allocator: a bitmap of the files
+    a hart implements (up to GEILEN) with helpers to assign and release
+    one, and an owners[] map so a file reported pending in HGEIP can be
+    traced back to the vCPU it belongs to.
+  - Watch a descheduled vCPU's guest interrupt file through HGEIE, so that
+    a guest blocked on an external interrupt is woken up instead of
+    waiting for an unrelated event to schedule it again.
+  - Stage-2 map a vCPU's physical guest interrupt file to the fixed
+    per-vCPU GPA page the guest expects at offset 0.
+  - continue_new_vcpu(): switch to the idle vCPU's own stack for the idle
+    vCPU, and enter the guest through the new return_to_new_vcpu() path in
+    entry.S for a guest one.
+  - imsic_vsfile_attach(), called once the pCPU a vCPU will run on is
+    known: it assigns a VGEIN, maps the guest interrupt file and records
+    the IMSIC state as a consistent unit.
+
+CI tests: https://gitlab.com/xen-project/people/olkur/xen/-/pipelines/2796779115
+
+The series depends on [1].
+
+[1] https://lore.kernel.org/xen-devel/cover.1787836900.git.oleksii.kurochko@gmail.com/T/#t
+
 ---
-Changes in v8:
- - Nothing changed. Only rebase.
----
-Changes in v6-7:
- - Acked-by: Jan Beulich <jbeulich@suse.com>.
----
-Changes in v5:
- - Reword the comment above defintion of GUEST_MAGIC_BASE.
- - Shrunk the size of GUEST_MAGIC_SIZE to 2Mb as looking on the Arm
-   only 4 pages are used and there is no technical reason to have 16Mb for
-   that region. (Maybe in case of Arm it is connected that Arm has these
-   definitions in public header so more space is reserved to not "break"
-   public API in future)
- - Update the commit message with a remark about grant table region
-   in guest-layout.h.
----
-Changes in v4:
-  - Reword the description: the stubs do not let dom0less fully "run"
-    since construct_hwdom() and make_hypervisor_node() return an error;
-    spell out these limitations instead.
-  - Add a TODO comment to construct_hwdom() explaining that Dom0/hwdom
-    construction isn't supported yet.
-  - Add a TODO comment to make_hypervisor_node() explaining that
-    returning an error breaks building of domains with
-    DOM0LESS_ENHANCED_NO_XS set, and why that is harmless for now.
-  - Document the constraints on GUEST_MAGIC_BASE/GUEST_MAGIC_SIZE next
-    to the #define-s and drop the QEMU-based justification (QEMU is not
-    involved); the base is simply an arbitrary non-overlapping address.
-Changes in v3:
-  - Add /* Nothing specific to do for now */ comment to
-    arch_handle_passthrough_prop().
-  - Use _ULL() instead of xen_mk_ullong() for GUEST_MAGIC_BASE and
-    GUEST_MAGIC_SIZE (xen_mk_ullong() is intended for public headers only).
-  - Fix GUEST_MAGIC_BASE from 0x39000000 to 0x79000000 to avoid the
-    QEMU RISC-V virt machine PCIE_ECAM range.
-  - Drop CONFIG_STATIC_MEMORY=n from the CI randconfig; now redundant
-    since STATIC_MEMORY depends on HAS_STATIC_MEMORY which RISC-V does
-    not select.
 Changes in v2:
-  - Move declaration of p2m_set_allocation() to p2m-common.h.
-  - Add __initdata for max_init_domid and drop initalizer for it.
-  - Add CONFIG_STATIC_MEMORY=n to CI's randconfig to avoid
-    compilation error because of guest_physmap_add_pages()
-    isn't provided.
+ - The series has grown from 17 to 39 patches. vCPU context switching, vCPU
+   migration between pCPUs and the vCPU bring-up path (continue_new_vcpu(),
+   attaching an IMSIC h/w interrupt file) are now part of it to have better
+   context of how things are using, together with the trap-side pieces the
+   MMIO emulation depends on (faulting GPA resolution, Shtvala detection,
+   instruction decoding).
+ - vintc_state_{save,restore}() became vintc_ctxt_switch_{from,to}() and
+   vcpu_aia_init() became imsic_vsfile_attach(); "xen/riscv: manage
+   IRQ_DISABLED flag in APLIC irq enable/disable callbacks" is no longer part
+   of this series. The remaining changes are described in the per-patch
+   changelogs.
 ---
- xen/arch/riscv/Kconfig                    |  2 ++
- xen/arch/riscv/dom0less-build.c           |  7 ++++++
- xen/arch/riscv/domain-build.c             | 28 +++++++++++++++++++++++
- xen/arch/riscv/include/asm/guest-layout.h | 12 ++++++++++
- 4 files changed, 49 insertions(+)
 
-diff --git a/xen/arch/riscv/Kconfig b/xen/arch/riscv/Kconfig
-index 48520588fe40..d8a348c0cf07 100644
---- a/xen/arch/riscv/Kconfig
-+++ b/xen/arch/riscv/Kconfig
-@@ -6,6 +6,8 @@ config RISCV
- 	select GENERIC_BUG_FRAME
- 	select GENERIC_UART_INIT
- 	select HAS_DEVICE_TREE_DISCOVERY
-+	select HAS_DOM0LESS
-+	select HAS_DOMAIN_TYPE
- 	select HAS_EX_TABLE
- 	select HAS_PMAP
- 	select HAS_UBSAN
-diff --git a/xen/arch/riscv/dom0less-build.c b/xen/arch/riscv/dom0less-build.c
-index d1a51b92936a..0801d7e25059 100644
---- a/xen/arch/riscv/dom0less-build.c
-+++ b/xen/arch/riscv/dom0less-build.c
-@@ -102,3 +102,10 @@ int __init arch_parse_dom0less_node(struct dt_device_node *node,
- 
-     return 0;
- }
-+
-+int __init arch_handle_passthrough_prop(struct kernel_info *kinfo,
-+                                        struct dt_device_node *node)
-+{
-+    /* Nothing specific to do for now */
-+    return 0;
-+}
-diff --git a/xen/arch/riscv/domain-build.c b/xen/arch/riscv/domain-build.c
-index d7613721db95..1e3abe259ccd 100644
---- a/xen/arch/riscv/domain-build.c
-+++ b/xen/arch/riscv/domain-build.c
-@@ -156,9 +156,37 @@ int __init make_cpus_node(const struct domain *d, struct kernel_info *kinfo)
-     return fdt_end_node(fdt);
- }
- 
-+int __init construct_hwdom(struct kernel_info *kinfo,
-+                           const struct dt_device_node *node)
-+{
-+    /*
-+     * TODO: Dom0/hwdom construction isn't supported on RISC-V yet, so this
-+     * is a stub returning an error. It must be implemented before a hardware
-+     * domain can be built from the device tree.
-+     */
-+
-+    return -EOPNOTSUPP;
-+}
-+
- int __init make_timer_node(const struct kernel_info *kinfo)
- {
-     /* There is no need for timer node for RISC-V. */
- 
-     return 0;
- }
-+
-+int __init make_hypervisor_node(struct domain *d,
-+                                const struct kernel_info *kinfo,
-+                                int addrcells, int sizecells)
-+{
-+    /*
-+     * TODO: Generating the hypervisor node isn't implemented yet. Returning
-+     * an error here breaks building of any domain (DomU included) whose
-+     * dom0less_feature has DOM0LESS_ENHANCED_NO_XS set. This is harmless for
-+     * now because Dom0/hwdom construction isn't supported on RISC-V yet
-+     * either, and no RISC-V DomU sets that flag, so this path is never taken.
-+     * It must be implemented before DOM0LESS_ENHANCED_NO_XS is used.
-+     */
-+
-+    return -EOPNOTSUPP;
-+}
-diff --git a/xen/arch/riscv/include/asm/guest-layout.h b/xen/arch/riscv/include/asm/guest-layout.h
-index 90603f06bb91..ceed9125e7e2 100644
---- a/xen/arch/riscv/include/asm/guest-layout.h
-+++ b/xen/arch/riscv/include/asm/guest-layout.h
-@@ -32,4 +32,16 @@
- #define GUEST_RAM_BANK_BASES   { GUEST_RAM0_BASE, GUEST_RAM1_BASE }
- #define GUEST_RAM_BANK_SIZES   { GUEST_RAM0_SIZE, GUEST_RAM1_SIZE }
- 
-+/*
-+ * The guest magic region holds the Xen-reserved pages mapped into the
-+ * guest's physical address space. The only real constraint on
-+ * GUEST_MAGIC_BASE/SIZE is that the region must not overlap guest RAM
-+ * (the GUEST_RAMx banks) or the emulated device regions defined above;
-+ * the exact base is otherwise arbitrary. Here it is placed in the unused gap
-+ * below GUEST_RAM0_BASE (0x80000000), but a hole after a RAM bank would work
-+ * equally well.
-+ */
-+#define GUEST_MAGIC_BASE  _UL(0x79000000)
-+#define GUEST_MAGIC_SIZE  _UL(0x00200000)
-+
- #endif /* ASM_RISCV_GUEST_LAYOUT_H */
+Oleksii Kurochko (39):
+  xen/riscv: drop pregs from struct cpu_user_regs
+  xen/riscv: drop bug.h's duplicate instruction length helpers
+  xen/riscv: set the guest's XLEN explicitly in hstatus.VSXL
+  xen/riscv: introduce csr_read64()
+  xen/riscv: request a G-stage flush on vmenter when VMIDs are disabled
+  xen/riscv: use UINT64_MAX to disable the VS-timer
+  xen/riscv: add missing APLIC register offsets, masks to asm/aplic.h
+  xen/riscv: introduce device-agnostic MMIO emulation dispatch
+  xen/riscv: implement virtual APLIC MMIO emulation
+  xen/riscv: build the target hart index via aplic_hart_field()
+  xen/riscv: add helper to check APLIC MSI mode
+  xen/riscv: implement vCPU context switching
+  xen/riscv: save and restore AIA state on vCPU context switch
+  xen/riscv: introduce vintc_ctxt_switch_{from,to}()
+  xen/riscv: add IMSIC vCPU context switch handlers
+  xen/riscv: extend exception tables with type and data fields
+  xen/riscv: decouple INSN_PSEUDO_VS_* from the hypervisor's XLEN
+  xen/riscv: add guest page fault handling stub
+  xen/riscv: implement trap redirection to a guest
+  xen/riscv: detect Shtvala
+  xen/riscv: resolve the faulting guest physical address
+  xen/riscv: add guest memory read helper
+  xen/riscv: look up the exception table for any trap taken in Xen
+    context
+  xen/riscv: add helpers for decoding a trapped load or store
+  xen/riscv: add guest load emulation for trapped MMIO accesses
+  xen/riscv: add guest store emulation for trapped MMIO accesses
+  xen/riscv: introduce arch_move_irqs()
+  xen/riscv: handle the case when no vCPU migration is needed
+  xen/riscv: introduce aplic_reconfigure_target()
+  xen/riscv: prepare new IMSIC VS-file
+  xen/riscv: implement APLIC-hart sync barrier for vCPU migration
+  xen/riscv: remap interrupts to new IMSIC VS-file
+  xen/riscv: dump old interrupt file to memory
+  xen/riscv: restore register state in the new IMSIC VS-file
+  xen/riscv: add basic VGEIN management for AIA guests
+  xen/riscv: wake up a descheduled vCPU on a guest external interrupt
+  xen/riscv: map IMSIC interrupt file for vCPUs
+  xen/riscv: implement continue_new_vcpu()
+  xen/riscv: introduce IMSIC h/w interrupt file attaching to vcpu
+
+ xen/arch/riscv/Makefile                     |   2 +
+ xen/arch/riscv/aia.c                        | 193 ++++++
+ xen/arch/riscv/aplic-priv.h                 |   3 +
+ xen/arch/riscv/aplic.c                      | 235 ++++++-
+ xen/arch/riscv/cpufeature.c                 |   1 +
+ xen/arch/riscv/domain.c                     | 271 +++++++-
+ xen/arch/riscv/emulate.c                    | 578 ++++++++++++++++
+ xen/arch/riscv/entry.S                      |  67 ++
+ xen/arch/riscv/extable.c                    |  70 +-
+ xen/arch/riscv/guestcopy.c                  |  87 +++
+ xen/arch/riscv/imsic.c                      | 691 ++++++++++++++++++++
+ xen/arch/riscv/include/asm/aia.h            |   7 +
+ xen/arch/riscv/include/asm/aplic.h          | 130 +++-
+ xen/arch/riscv/include/asm/bug.h            |  19 -
+ xen/arch/riscv/include/asm/cpufeature.h     |   1 +
+ xen/arch/riscv/include/asm/csr.h            |  24 +
+ xen/arch/riscv/include/asm/current.h        |   4 +
+ xen/arch/riscv/include/asm/domain.h         |  23 +-
+ xen/arch/riscv/include/asm/emulate.h        |  10 +
+ xen/arch/riscv/include/asm/extable.h        |  64 +-
+ xen/arch/riscv/include/asm/gpr-num.h        |  37 ++
+ xen/arch/riscv/include/asm/guest_access.h   |   4 +
+ xen/arch/riscv/include/asm/imsic.h          |  31 +
+ xen/arch/riscv/include/asm/intc.h           |  12 +
+ xen/arch/riscv/include/asm/irq.h            |   5 +-
+ xen/arch/riscv/include/asm/mmio.h           |  63 ++
+ xen/arch/riscv/include/asm/p2m.h            |   1 -
+ xen/arch/riscv/include/asm/processor.h      |  16 +-
+ xen/arch/riscv/include/asm/riscv_encoding.h |  34 +-
+ xen/arch/riscv/include/asm/system.h         |   4 +
+ xen/arch/riscv/include/asm/time.h           |   4 +-
+ xen/arch/riscv/include/asm/traps.h          |   9 +
+ xen/arch/riscv/include/asm/vaplic.h         |   5 +
+ xen/arch/riscv/intc.c                       |  22 +
+ xen/arch/riscv/mmio.c                       | 176 +++++
+ xen/arch/riscv/p2m.c                        |  55 +-
+ xen/arch/riscv/riscv64/asm-offsets.c        |  20 +-
+ xen/arch/riscv/stubs.c                      |   5 -
+ xen/arch/riscv/time.c                       |   4 +-
+ xen/arch/riscv/traps.c                      | 110 +++-
+ xen/arch/riscv/vaplic.c                     | 358 +++++++++-
+ xen/arch/riscv/vmid.c                       |   4 +-
+ xen/include/xen/config.h                    |   1 +
+ 43 files changed, 3281 insertions(+), 179 deletions(-)
+ create mode 100644 xen/arch/riscv/emulate.c
+ create mode 100644 xen/arch/riscv/include/asm/emulate.h
+ create mode 100644 xen/arch/riscv/include/asm/gpr-num.h
+ create mode 100644 xen/arch/riscv/include/asm/mmio.h
+ create mode 100644 xen/arch/riscv/mmio.c
+
 -- 
 2.55.0
 
