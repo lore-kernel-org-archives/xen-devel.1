@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21E96C61DB9
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2026 16:02:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1401243.1636999 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6884C61DB9
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2026 16:07:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1401249.1637007 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzcY2-0002FS-Pr; Thu, 27 Aug 2026 16:01:50 +0000
+	id 1wzcdV-0005OV-CU; Thu, 27 Aug 2026 16:07:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1401243.1636999; Thu, 27 Aug 2026 16:01:50 +0000
+Received: by outflank-mailman (output) from mailman id 1401249.1637007; Thu, 27 Aug 2026 16:07:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzcY2-0002FK-Li; Thu, 27 Aug 2026 16:01:50 +0000
-Received: by outflank-mailman (input) for mailman id 1401243;
- Thu, 27 Aug 2026 16:01:50 +0000
+	id 1wzcdV-0005OO-8W; Thu, 27 Aug 2026 16:07:29 +0000
+Received: by outflank-mailman (input) for mailman id 1401249;
+ Thu, 27 Aug 2026 16:07:27 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wzcY1-0002FE-Re
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 16:01:49 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wzcdT-0005JX-Oz
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 16:07:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzcY0-003Tw0-74
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 18:01:48 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wzcdQ-00BwIY-VB
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 18:07:24 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a905f67-8faa-0a2a0a5109dd-0a2a4503ab5e-14
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 18:01:48 +0200
-Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a905f6b-fae8-0a2a45030019-d155dd29d8a3-3
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 18:01:48 +0200
-Received: by mail-wr1-f41.google.com with SMTP id
- ffacd0b85a97d-47fecbb7000so1135944f8f.2
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 09:01:48 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499dd56dfb8sm70974795e9.3.2026.08.27.09.01.45
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a9060b4-8faa-0a2a0a5109dd-0a2a450cba8e-30
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 18:07:24 +0200
+Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a9060bc-f479-0a2a450c0019-d155802db1e9-3
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 18:07:24 +0200
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-499ae1c6471so14884975e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 09:07:24 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
+ [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49b49bd11c3sm60734465e9.7.2026.08.27.09.07.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Aug 2026 09:01:46 -0700 (PDT)
+ Thu, 27 Aug 2026 09:07:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,52 +52,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787846507; x=1788451307; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+        d=gmail.com; s=20251104; t=1787846844; x=1788451644; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=QcLMgCFTN25bO7TW3QA46L5cvl4mDFQlktzMwYj2fMk=;
-        b=XN5ZfWi5nF6fECIuaGBcPlKfp5lVoOE06wqIy2pck7E3J/n1qoNNiWrVGX+RFVm0qj
-         gPUGIvSmuFDF8D27z/awEhq5xgbjBgCKgTNlXnBIVfv0XvcIB6ZBQTrQEy3IQWwTkKOo
-         S5WSdVky3LSrkej+wFzfRKbJ1zC/7j7jxrZpn4NhH83brMBfq1fSHeOyneq2UDmHbiFq
-         cFlYaUAn4tcCUEWLqTce9uBaBQusFfgjZe0xaUupBU3ilh4XJt5GN6f7UCweGsn12zJe
-         BMovZlaurvbs9QQcNlswhxnTXalcl61+aXy0Ed0+FQ6IJgI3e0e9FNp7KAwTCiuct/8+
-         HBOw==
+        bh=FRLim6j/feVuyl8Yxi6V/xN5B6NazHSdqReW1S+GAPo=;
+        b=dwjaqkwhtV96YAqtAXwYJnHsXscMZrQKLyTZx/FnEVWy0ibyaGkADz1QYYPhNmbekl
+         2HtOLNqBIaiNGymdRTwtwnv0va1jdp0BHdm6JfQjEeKCx9l9K+eH9SB5aWOFHap7Dmj5
+         j+ygtj5+Zjize+awNK1wZlg9siilHwJpVZKvw8JHG5nojxwQVJj5OFj1w6xvp1vRrktN
+         IzxZR3A2ccybUHfwDdyGz7D9eIDJJP9+HuW7Wuasvg6XwlJJWzGa0PnEbddodOYUD1SP
+         lG/5Zt4YXym0bXt8IWD1b9BB2rFANSET+RMrFPsQTac7xa79/SrrE+QGr6kRmEoUdTzv
+         021Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787846507; x=1788451307;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+        d=1e100.net; s=20251104; t=1787846844; x=1788451644;
+        h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=QcLMgCFTN25bO7TW3QA46L5cvl4mDFQlktzMwYj2fMk=;
-        b=FSWe8gBbs7lxeWydJAzDyjITtafNHmis1DpVb/bv/cEL8GslYaXjp54Rkdx/dO26nf
-         sXEedUHalJ82MYbufvuq2/lBOBxsBk7Y2BPYcSjNfAkWlQ6wYhneeNqgH6d8mIcs76mW
-         q3hBj8gyGXq5QMRkht3KPqqTZgk7DSObBIm8fPcK5n354+0uEW5PtxUT3APGzrIk3jrY
-         oo0dinAWNLKdDRRN6EL0XqKeYO18SV862y15M/wn8KpxgXL6jFVZvTXkeXJNOhekR9RE
-         WWo97nz9pdkY/SgYijhv7COjGjyMTuZiWhZZr5cBsYHEYyRYjWI3ijLl9N9TwJc593t0
-         VK4A==
-X-Forwarded-Encrypted: i=1; AHgh+RpPcQiWdLaoMcFLXNVUIsMSLs1VlsgRDA5e5PyF6wCAqXeBJpOcjBjjlJnGHxNn3Hyu6XR6O0CibZE=@lists.xenproject.org
-X-Gm-Message-State: AFuF++nAnxV4l7By+wKsp8Jbr9ZDluMVmHRWSErqv0smuUfw5JX9MgJ/
-	a8sAy1BYz5lQ7+GdAPxn3BUWDdwIRj2xyGCPQvOMUQYPGDQz+inH779+bUOKAezKGw==
-X-Gm-Gg: AR+sD11XpYCdoeWvNr6yTlw9Izi9r4RWrwz6QAtTdhSBO/U4OYPc34g9XNtWfLko2RS
-	tK2RxguCa+bt2IUu0aU3wRT3uLIdBteo40uUVpTercyJzoQNRorr83zTAyVbveRUq00Czi29HgI
-	Xv7uIJgAk3Pn64NtMxWsQV/u3Yp9PHtBI5HdDwQ5EjJgA++RXWatMZ5JcTEUJ/GWDc4YcReob9j
-	nOYlQyXt3VQD0mRl5QTeT4/3sWgjO8J+GnQMLJk1zJv7a/dWE0FgBRJcWp9rewoiAxjD4MTv6dy
-	XU0eZM1iJR6kX1XCVpYuQ39ujl6Okdw2p9wXBGijBCwciuY7VmsH186D3SSyvq7zUkkrozZ5Mm9
-	1BbdsL0TDPWk+/JL53l5Gt+7MXBXG8SAuSrfqeBelVRdaWnmcS2JfebjUOrUGW34oCPUsq6CYNX
-	YDZlXoR+8MkCtHX2G5c5UNT2ZCTfDIhW8+JjO7pHbTCPaf/MPLN3bNCNvkag1x8BoeA3eRW60YW
-	shSteXsMBWCQmDEcWzKCNle6oqxs1C+MEWRh5YilJR9yzGfyue6
-X-Received: by 2002:a05:600c:3e0b:b0:499:adb5:e7b2 with SMTP id 5b1f17b1804b1-499dc717dcbmr242919395e9.11.1787846507446;
-        Thu, 27 Aug 2026 09:01:47 -0700 (PDT)
-Message-ID: <15abd61a-045f-47d1-94fb-b5febf28711c@suse.com>
-Date: Thu, 27 Aug 2026 18:01:44 +0200
+        bh=FRLim6j/feVuyl8Yxi6V/xN5B6NazHSdqReW1S+GAPo=;
+        b=dxjWGiKYbTy3awayti3HojxVpPgjbZjZDHs1QS1pwGfH02R7ljwqZj4V/MirnRxqup
+         Tqb2sAHjXC1s3+LQZfYT3YTT0mUIH8AkVjCJgVyYAh4IyXREhzFdb6blpZOFeO7mLBbr
+         /hAn+0Bbw/agQHfJMPz7+HN+w8EUuwztVWuB+IEfwc78ZgyFtlIScpKD/0iNEPuaGQUz
+         8o/OaC2rxuCcfJHb2OCYwkG0NL1VrtTw7LdypNimBcGKwzTj3BqJKfw/XieN9wo9ctUV
+         22112obTcuTJaxRJAoc5vcyogoxyrAUyi3imalLWtRc0QulOpkVz0sIaq2TVT4BR4GU3
+         MOGw==
+X-Forwarded-Encrypted: i=1; AHgh+RrKUgXHy3mlGQfsRZnoLKrBkPyf741TvrjRNoQTgdsCT2kXnLxmzlJlSRyju7De1IIvIxYS7M1XGfw=@lists.xenproject.org
+X-Gm-Message-State: AFuF++nm9kYqB+9igd6Vde4dGVtI7jPpwcyjDA0Bg42pNL0zMHyjaaXD
+	+IQ2hUcPGrFaSbJqOYHl1lye+0rDa/bVqEUrmBOkTK7yAd4Cn+2N0UEg
+X-Gm-Gg: AR+sD11Y0vuxtjuUFk53eVbr+YRXoOL56/IWYJ4fS7AqPIyaKbW6jvsaZF0kPG0iTqw
+	Q3xP9SoQUcbV6Ww7xUnjoDfxi38sW0yI2mwnuL7KL7Vs+33OPodanpIGC9LF52rVIyWOJb4txoJ
+	a/zE/BgD0Phsqr5k+8VkZ4RMH0qP5z2VK2wKk/miWAdk0CmQOQPorbDT/EMBZgQNt2mfh6cSdYs
+	8MFi8TAcpesA++p7kt5Zk9mKiNbuMIKnxnZSr3e4SodgJx2lqdv5SBh2Dbe1X/q1joPnLW0qF6S
+	t6/yqJLuLK9vXiq3PsIFVv4/FwJw/ZaFaR9FLOoTZBJJGiAtznQ3Rox6oterMLzfu1t1pxm7CPD
+	tRO+2RO4z85ZIkhtg2h6X05kkOtgEN3xMte1VTLOg7gNFlsdWTj5kfE7R/v67VUCTHeXANKJ8iy
+	Hp6+RJr0HZgQeVFiTuiw1a8ykFVl94sL/K8XWEzdux0Bz+K30ER42KjlDuRdtTZNokaFyKFAXu/
+	2rAjRvIQ3RiujLXL3kzzeyOYH+APYbYJtf3hF6aJTuIX4akvp4oUg==
+X-Received: by 2002:a05:600c:c4aa:b0:499:dbae:43d3 with SMTP id 5b1f17b1804b1-499dc71f023mr175886705e9.9.1787846844167;
+        Thu, 27 Aug 2026 09:07:24 -0700 (PDT)
+Message-ID: <e4652848-4923-49e1-ad2f-c3c46b8ce5d9@gmail.com>
+Date: Thu, 27 Aug 2026 18:07:22 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/7] RISC-V: split xen-syms linking rule
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: Re: [PATCH v2 7/7] RISC-V: place .sdata / .srodata /
+ .riscv.attributes
+To: Jan Beulich <jbeulich@suse.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Anthony PERARD <anthony.perard@vates.tech>,
@@ -107,141 +107,160 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
  Connor Davis <connojdavis@gmail.com>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <9a78fdea-08ba-4e04-bfa1-ba09730a300b@suse.com>
- <6f4b26ce-2797-4c17-bfdf-8effd2026a6a@suse.com>
- <f0510fd7-32fc-4fbd-834e-68bba14150b9@gmail.com>
+ <f26f80e3-0b2d-429a-895c-b8003d1c5a38@suse.com>
+ <0d0c6a5b-94a5-49c6-a150-3bb6a0dc3b93@gmail.com>
+ <8eebbdd6-d414-49eb-83e6-668f187e6f93@suse.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <f0510fd7-32fc-4fbd-834e-68bba14150b9@gmail.com>
-Content-Type: text/plain; charset=UTF-8
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <8eebbdd6-d414-49eb-83e6-668f187e6f93@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1787846508-750864E9-DACE2AF9/0/0
-X-purgate-type: clean
-X-purgate-size: 4761
+X-purgate-ID: tlsNG-d25034/1787846844-51B35A5B-07008E2C/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 6120
 
-On 27.08.2026 17:56, Oleksii Kurochko wrote:
-> On 8/26/26 2:01 PM, Jan Beulich wrote:
->> Doing so, besides (hopefully) adding clarity (not the least by way of
->> [re-]using pattern rules where possible), also avoids explicit recursive
->> $(MAKE) invocations.
->>
->> By re-using the generic rules introduced when the respective x86 rule was
->> split,
->> - the .map file now isn't created after the final binary anymore,
->> - --strip-debug is passed to $(LD) during early linking passes (for
->>    consistency the option is also explicitly added to the optional linking
->>    pass rule),
->> - CONFIG_{SUPPRESS_DUPLICATE_SYMBOL_WARNINGS,ENFORCE_UNIQUE_SYMBOLS} are
->>    now properly respected.
->> Orphan section checking, otoh, is getting suppressed for now, until the
->> about a dozen warnings which would result have been taken care of.
->>
->> While the 4th linking step continues to be avoided when possible, a
->> redundant invocation of $(NM) and tools/symbols (plus the assembling of
->> the resulting .S file) is hopefully deemed acceptable.
->>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->>
->> --- a/xen/arch/riscv/Makefile
->> +++ b/xen/arch/riscv/Makefile
->> @@ -31,40 +31,12 @@ obj-y += vtimer.o
->>   $(TARGET): $(TARGET)-syms
->>   	$(OBJCOPY) -O binary -S $< $@
->>   
->> -$(TARGET)-syms: $(objtree)/prelink.o $(obj)/xen.lds
->> -	$(objtree)/tools/symbols $(all_symbols) --empty > $(dot-target).0.S
->> -	$(MAKE) $(build)=$(@D) $(dot-target).0.o
->> -	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $< $(build_id_linker) \
->> -	      $(dot-target).0.o -o $(dot-target).0
->> -	$(NM) -pa --format=sysv $(dot-target).0 \
->> -		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
->> -		> $(dot-target).1.S
->> -	$(MAKE) $(build)=$(@D) $(dot-target).1.o
->> -	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $< $(build_id_linker) \
->> -	    $(dot-target).1.o -o $(dot-target).1
->> -	$(NM) -pa --format=sysv $(dot-target).1 \
->> -		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
->> -		> $(dot-target).2.S
->> -	$(MAKE) $(build)=$(@D) $(dot-target).2.o
->> -	if ! { $(call compare-symbol-tables, $(dot-target).1.o, $(dot-target).2.o) >/dev/null; }; \
->> -	then \
->> -		set -e; \
->> -		$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $< $(build_id_linker) \
->> -		    $(dot-target).2.o -o $(dot-target).2; \
->> -		$(NM) -pa --format=sysv $(dot-target).2 \
->> -			| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
->> -			> $(dot-target).3.S; \
->> -		$(MAKE) $(build)=$(@D) $(dot-target).3.o; \
->> -		$(call compare-symbol-tables, $(dot-target).2.o, $(dot-target).3.o); \
->> -	else \
->> -		ln -sf $(dot-target).2.o $(dot-target).3.o; \
->> -	fi
->> -	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $< $(build_id_linker) \
->> -	    $(dot-target).3.o -o $@
->> -	$(NM) -pa --format=sysv $@ \
->> -		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
->> -		> $@.map
->> -	rm -f $(dot-target).[0-9]* $(@D)/..$(@F).[0-9]*
->> +LAST_LINKING_PASS := 3
->> +
->> +include scripts/Makefile.link
->> +
->> +# Suppress orphan section checking for the time being.
->> +orphan-handling-y :=
-> 
-> This works, but I think it's worth reconsidering the shape of it.
-> 
-> It works only by virtue of deferred expansion: $(orphan-handling-y) is
-> referenced solely inside the recipe of the final-pass rule in 
-> Makefile.link, so the value that matters is the one in effect when that
-> recipe is expanded, not when the rule was defined. Nothing states that
-> requirement, and nothing enforces it.
-> 
-> What makes me uneasy is that the ordering is not merely undocumented,
-> it's inverted with respect to the obvious reading. Makefile.link has
-> 
->    orphan-handling-$(call ld-option,--orphan-handling=warn) := 
-> --orphan-handling=warn
-> 
-> i.e. an unconditional := to orphan-handling-y whenever the linker
-> supports the option. So an arch that sets orphan-handling-y *before*
-> the include has its setting silently discarded and ends up with orphan
-> checking enabled after all: no warning, no error, just a dozen new
-> linker diagnostics appearing at some later point. And "before the
-> include" is exactly where one would naturally put it: right next to
-> LAST_LINKING_PASS, which is the one knob the arch Makefile does set up
-> front.
-> 
-> I am not insisting on reworking but probably a small comment (in the 
-> commit mesage at least?) somewhere about that "+orphan-handling-y :=" 
-> should go after include will be useful.
 
-I can add a comment (albeit the ordering looks very obvious to me, and
-not counterintuitive at all), but the better thing would be for all
-arch-es to quickly deal with getting rid of this override again: No
-need for an override, no need for a comment.
 
-Jan
+On 8/27/26 5:56 PM, Jan Beulich wrote:
+> On 27.08.2026 17:40, Oleksii Kurochko wrote:
+>> On 8/26/26 2:04 PM, Jan Beulich wrote:
+>>> Of the short-data sections, only .sbss is presently mentioned in the
+>>> linker script. Place them next to, but ahead of their "normal" data
+>>> sections.
+>>>
+>>> .riscv.attributes can go towards the tail of the image, next to (ahead of)
+>>> debug info.
+>>>
+>>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>>> ---
+>>> Seeing where .sbss lives, does positioning really not matter at all? I
+>>> would have expected that short-data sections want to live close together,
+>>> and specifically close to .text / .init.text (seeing that such data is
+>>> accessed using AUIPC). I'm puzzled that the psABI doesn't even mention
+>>> them, hence leaving it open how exactly they are to be used.
+>>
+>> It doesn't, and the reason is that the relevant proximity isn't to .text
+>> but to __global_pointer$.
+> 
+> Anything like this still should be set forth by the psABI, so I don't
+> quite understand your reply.
+> 
+>> The small-data sections exist to let a linker
+>> script cluster small objects around that anchor so that ld's relaxation
+>> pass can fold an auipc+load pair into a single gp-relative access (-+2
+>> KiB window).
+>>
+>> That pass is keyed purely on the symbol being defined
+>> riscv_global_pointer_value() returns 0 otherwise and the relaxation is
+>> skipped. We define no __global_pointer$ and head.S never loads gp (it
+>> appears only as a cpu_user_regs slot in entry.S), so every access stays
+>> the medany auipc form regardless of section.
+>>
+>> I confirmed this by linking the same object twice (look at the script
+>> below, with and without the symbol: without it, zero gp-relative
+>> accesses; with it, the pairs collapse.
+>>
+>> Worth noting the relaxation is section-agnostic: in the test mentioned
+>> below a 400-byte array in plain .bss got gp-relative too, purely because
+>> it landed in range. So the sections are a clustering hint, not a
+>> mechanism ld keys off.
+> 
+> Okay, fine, but what does this mean for placing the small data sections?
+> I.e. what does this mean for the patch here (which really it shouldn't
+> have been me to write in the first place)?
+
+I just wnated to show that a position of .sbss doesn't really matter 
+based on the example and so true for other .s* and not only .s* 
+sections. What means I am okay with your suggested places in the current 
+patch.
+
+
+> 
+>>> What remains to eliminate orphan section warnings is the placement of
+>>> .note.GNU-stack (which perhaps wants dealing with on all of Arm, PPC, and
+>>> RISC-V together, ideally unifying with x86) and (odd at the first glance,
+>>> but dealt with on x86 as well, i.e. may again want unifying) that of a
+>>> number of .rela.* sections.
+>>>
+>>> --- a/xen/arch/riscv/xen.lds.S
+>>> +++ b/xen/arch/riscv/xen.lds.S
+>>> @@ -44,6 +44,8 @@ SECTIONS
+>>>    
+>>>            BUGFRAMES
+>>>    
+>>> +        *(.srodata)
+>>> +        *(.srodata.*)
+>>>            *(.rodata)
+>>>            *(.rodata.*)
+>>>            VPCI_ARRAY
+>>> @@ -92,6 +94,7 @@ SECTIONS
+>>>            SCHEDULER_ARRAY
+>>>            HYPFS_PARAM
+>>>    
+>>> +        *(.sdata .sdata.*)
+>>>            *(.data .data.*)
+>>>            CONSTRUCTORS
+>>>        } :text
+>>> @@ -162,6 +165,8 @@ SECTIONS
+>>>        /* Section for the device tree blob (if any). */
+>>>        .dtb : { *(.dtb) } :text
+>>>    
+>>> +    .riscv.attributes : { *(.riscv.attributes) } :text
+>>> +
+>>
+>> Nit: .riscv.attributes is SHT_RISCV_ATTRIBUTES, i.e. non-alloc.
+>> :text on it is misleading, and without an explicit address it gets
+>> sh_addr from .(location counter) after .dtb. Could we use matching the
+>> idiom used for every other non-alloc section in xen.lds.h:
+>>     .riscv.attributes 0 : { *(.riscv.attributes) }
+>> No functional difference either way (objcopy -O binary drops it, and I
+>> verified a non-alloc output section doesn't advance dot, so nothing
+>> downstream shifts), so purely consistency.
+> 
+> Well, I compare attributes rather with notes, which we make part of a
+> segment (on x86 at least). I can drop the :text if it's that what's
+> needed to get this in, but I'm not fully convinced. But my knowledge
+> on the purpose and use of attributes also is still somewhat limited.
+
+As I mentioned from functional point of view I don't think that it will 
+be an issue so generally you could keep :text here.
+
+That why I wrote "Nit:".
+
+Reviewed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+
+> 
+>> Is dropping orphan-handling-y := from arch/riscv/Makefile the intended
+>> end of this series?
+> 
+> It is the intended goal, but not by the end of this series.
+> 
+>> As if I understand correctly with such defintion we
+>> will miss warning so everything of that will be missed:
+>>
+>> cd xen
+>> riscv64-linux-gnu-ld -T arch/riscv/xen.lds prelink.o
+>> --orphan-handling=warn -o /tmp/t.elf 2>&1 \
+>>     | grep 'orphan section'
+>> /usr/bin/riscv64-linux-gnu-ld: warning: orphan section `.note.GNU-stack'
+>> from `prelink.o' being placed in section `.note.GNU-stack'
+>> /usr/bin/riscv64-linux-gnu-ld: warning: orphan section `.rela.text' from
+>> `prelink.o' being placed in section `.rela.dyn'
+>> /usr/bin/riscv64-linux-gnu-ld: warning: orphan section `.rela.init.text'
+>> from `prelink.o' being placed in section `.rela.dyn'
+>> /usr/bin/riscv64-linux-gnu-ld: warning: orphan section
+>> `.rela.data.read_mostly' from `prelink.o' being placed in section
+>> `.rela.dyn'
+>> /usr/bin/riscv64-linux-gnu-ld: warning: orphan section `.rela.init.data'
+>> from `prelink.o' being placed in section `.rela.dyn'
+>> /usr/bin/riscv64-linux-gnu-ld: warning: orphan section
+>> `.rela.text.header' from `prelink.o' being placed in section `.rela.dyn'
+> 
+> Yes, if the override was dropped, these warnings would appear on every
+> build. I thought that may not be wanted, hence the override I put in
+> (really everywhere except for x86, where things were already tidied).
+
+Thanks. Got you. It makes sense.
+
+~ Oleksii
 
