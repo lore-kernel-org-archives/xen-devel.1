@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D67BC61DC6
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2026 15:23:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1401032.1636858 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF87CC61DB9
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2026 15:23:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1401034.1636866 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzbwL-0002Xp-Ng; Thu, 27 Aug 2026 15:22:53 +0000
+	id 1wzbwO-0002x1-5p; Thu, 27 Aug 2026 15:22:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1401032.1636858; Thu, 27 Aug 2026 15:22:53 +0000
+Received: by outflank-mailman (output) from mailman id 1401034.1636866; Thu, 27 Aug 2026 15:22:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzbwK-0002Su-Ic; Thu, 27 Aug 2026 15:22:52 +0000
-Received: by outflank-mailman (input) for mailman id 1401032;
- Thu, 27 Aug 2026 15:22:39 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wzbw5-0007lh-Ti
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 15:22:38 +0000
+	id 1wzbwM-0002q2-Nn; Thu, 27 Aug 2026 15:22:54 +0000
+Received: by outflank-mailman (input) for mailman id 1401034;
+ Thu, 27 Aug 2026 15:22:40 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wzbw7-00084E-DC
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 15:22:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzbw5-003O3L-8V
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 17:22:37 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wzbw6-00GwJA-P4
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 17:22:38 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a905626-e002-0a2a0a5209dd-0a2a4501aa5e-32
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:22:37 +0200
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a90563b-bab6-0a2a0a5309dd-0a2a4507d6aa-6
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:22:38 +0200
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a90563d-5984-0a2a45010019-d1558036f024-3
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:22:37 +0200
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-4953e04ef16so22305995e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 08:22:37 -0700 (PDT)
+ id 6a90563e-b4ea-0a2a45070019-d155802fe169-3
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:22:38 +0200
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-49554ebb87dso21865525e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 08:22:38 -0700 (PDT)
 Received: from fedora (user-109-243-144-234.play-internet.pl.
  [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49b4b2d6b30sm57441155e9.14.2026.08.27.08.22.35
+ 5b1f17b1804b1-49b4b2d6b30sm57441155e9.14.2026.08.27.08.22.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Aug 2026 08:22:36 -0700 (PDT)
+ Thu, 27 Aug 2026 08:22:37 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,41 +54,41 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787844157; x=1788448957; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1787844158; x=1788448958; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=6FUxAqwWcnc2Ay1jeD5JiD2529ILkdTEuy10fqJCXM0=;
-        b=YdFjGfQmXz5SJHxaKpa05ARMIRGvgNBHC+UZpLe/KYBqzhahptWwMGm9uM/ZvL2R1f
-         ebiaPVUiVmn08nnpAZOzBJYby1IfhBNXJ+axoqbWtEWPLiKZXYzTmZmKQKHcVRVADmYR
-         XlsUiD3zBmSH726JK5oCJtwEJUEpUHaY4KpswrhOvd4xtJDIMVlsfhNq1wHHeoNS+1Wh
-         dJK4w0a0a0/E3+XxW9hrOTLUxgx3/dYFAP6yebMlkXmOsl0cXsGOJcZT4mSH1qcSRP0E
-         GX2bmiFx6Vp7BVvxqZvyblZvE3KQrVdfsIBlNE3R0kK6T3JKlosNcsxtQmx+GpxS9G8w
-         sz+w==
+        bh=ectEPOeVMacpPQ0PahqNUgVXssdptDzQr1HvL6IKR+M=;
+        b=Ot+G2rScBjlquD70Hjnbz6Whkebbq9oaCxDsmguGYYJCL6cEgWyku9DLlDbep2EbpE
+         kJnvnCuEyh565YoDpyfy7nv78KyT/5d6dRNhGST9Hx5GNG35AlgGJ9EPEFdoynh//DuT
+         MRsnYg9V3+vnpnA/Q0xTMR7sH3loqNQRSv9BCM+6UsTUCgiG/aX1skp7BkNifnVpW8vf
+         PuWmAU/PIDe70YhMILsBQjgy+D4P2WxXFMxcHdzF0r8rXyM+9sVXiwCEwJptVLRH+Utm
+         T7Tsb+PZzLuhHV/4xA/zId5OlAFMQl6/eLt3+YhTzmcgE4NkgNaHbCjrlsQO6prUsj2j
+         Cp7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787844157; x=1788448957;
+        d=1e100.net; s=20251104; t=1787844158; x=1788448958;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=6FUxAqwWcnc2Ay1jeD5JiD2529ILkdTEuy10fqJCXM0=;
-        b=eoporww5xRhKBQE2klxuceTpAFebzhhuEvjflsnyazs73a1OgS9yh70dy8fEvYE3/s
-         qF6h9fnEx6PM3H1l+DuVLBqLzGMBdw0G22tfK9/RkatI+6MmJmOaX4XBkeXFPwLT76pE
-         IR1f/4vhMZ0BAZeJG/h/72lVo/XQfN7yUJzhMRqeDAtM4M3BBSF/+hL5ThrT2t8GtW3Z
-         Frouk8aJ+NjWNr5QRutdPDPBnW9TUTlQIYUXNJ+CwCRcJKJ9540tQXIXmcTce0qxuoW/
-         lqeGhUcp8CpNgRX27c4ceP3AwRiBQStVrfYUlFoZsvGJE+6cUbuxAtFlmuBw2mScOHzI
-         wVXQ==
-X-Gm-Message-State: AFuF++mf/dCu+PaJ9hymzrUW4Ns93cHJhaiy220GAPxlshKJge5gqaPS
-	Y9uMVUnVr7AhZfP6PkKkqbZNvODr+bebcxhNFbRcuEmCXYYWrUU2wwgPtxxHsQ==
-X-Gm-Gg: AR+sD11jqA/TnlvFhTytKlClmoqWn/QFQlphtp9VugXcUexAkJsPfqzz5zQlvIbVhtZ
-	+ax3nXIP3LMJl+aFRilrCt44UMT0N5F+5gwdXnZTOzRIrmDw8crGeu9LHu/lYlxd++pDG3kVqlt
-	4K6JSdxCl2VfL/jHhbxJLKYaFW94R1Hk3n7knZh59BnuSv6dAQLTfeHqyXFW36dWCX/9Oq+F1hO
-	/eyw0+k1db185o3A5qcMz/og2UOCNGGp9g6gFIdecWvgUh111OY6Gn6zDF5mFWosk87e8zOkHyO
-	Tc0XKs2k03BKk9vhA7Oyholr+MSLrAN+PZkX11lbMyFqJv/DHYOE2X7jZ5EAARyYHliA9RCW0L1
-	X/gtyoBnjJN2s2QUR25YCvyyOlDq49DizVRVZpJ0vb8y4lEYuGL0Ugu5GGiIgTfDKQDUGboArOI
-	pydfqUI+7A5Q/p38KITO8wIwRw7tQEwH42Ea08Zc4f+s/vH/lHJgMTVJOi9PC16GkmogAoR8wJA
-	gNSaGPMKhvkiQvNwJVoRJZy4kTSiIfW
-X-Received: by 2002:a05:600c:3144:b0:499:79b9:e220 with SMTP id 5b1f17b1804b1-499dc72548dmr187765125e9.10.1787844156618;
-        Thu, 27 Aug 2026 08:22:36 -0700 (PDT)
+        bh=ectEPOeVMacpPQ0PahqNUgVXssdptDzQr1HvL6IKR+M=;
+        b=Mbe3JlHAjiTrc06wbHE9pw929tOGHBMh3yrrYBf/2+tdLP3MmfclAf5N+OLcuKaKS+
+         3h5YMbl814arkWIsk5ZjhAu19fMr4BzOjvSC+g0+TrETt8+g7ILHZc23OC3c0xOBKm9R
+         YWmkQhhpX90KQ6dWWRq8AlhCrUJea5MzhnmcH8T9HQj5mFCBAa2/jdHb2Wr77cdEgoUf
+         9fI5Nr/2BDSLwXwZ4gy+1ki3EJ+/U0+WFVIJn/0onz5ME/BdxwgDIaQ+JGTtGetS/f8G
+         jd6yCFUBUCe7VA3dHNzSLlDzdekLon7Sam1gZ+xfYvr5nqSCJc+86/oL+nYSMPxxbp/u
+         Wxmg==
+X-Gm-Message-State: AFuF++kExVWEa9e6YEH2PvwPR4V/pOQ+YexwustxeNhEOxS20a6x8xbF
+	uGjasOCWQsSe8nEsMor7SKOrxsSIf1asT45QntH52qngxbDd5JpVlkWrlsUhHg==
+X-Gm-Gg: AR+sD11z1AdFeGUu0Hfv/wdpa/URoQmZR2NiJ8SLbhwMmFkvp3r8xlWKBLrqfvNeG+C
+	MYUe4fRiUV72No1V07GVnTDEQiWY3muDwDZ/V8KylkZhcYcCx99aAo0a5zJ9umW8HR9zqHcpo3Q
+	p12jlQQdXdvnSsiiyYaTHXS3SO1xaGrU8nglysdMfL41C8BL5GEmIDIvwoIc4L43fAXoGJnc4Ub
+	d9054xyK+Qm6pcZYpxpth3AxHsu6iMI7Ykj1t7wvapNOW1e0hxzbJtZTcI9o7SqBQxIj58HTLap
+	tMMWaHKq9p7d4bAzXDswH2higGrkqhvMSfeIKv6Kai6g93MvDZGj9B6yI2D2PmjeW23mxjI/h1R
+	hgcaDOfZyhAL+gGep7ksSCY1Y+zW64Z2IMsQ+X8S5/HfoV5inNFSqEEGDrl/nfj9HIpSQZL14Y5
+	Y0j37L1+KQnAX6aJ/qfbBN0e6ifVtMGm3dB2yWIYdXTfnoro3yCdhPDjblwMTthBoKDOwc0WAMe
+	bFPK8LgGqyg1fAYz1tFrl3ueGUxxlwKZrG0c2e/Y+M=
+X-Received: by 2002:a05:600c:4592:b0:499:b402:6c0 with SMTP id 5b1f17b1804b1-499dc6eac3bmr188356345e9.3.1787844158052;
+        Thu, 27 Aug 2026 08:22:38 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -104,178 +104,281 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 38/39] xen/riscv: implement continue_new_vcpu()
-Date: Thu, 27 Aug 2026 17:21:22 +0200
-Message-ID: <a282887cc08cd9b05f59d46cab9377915e83c61d.1787838835.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 39/39] xen/riscv: introduce IMSIC h/w interrupt file attaching to vcpu
+Date: Thu, 27 Aug 2026 17:21:23 +0200
+Message-ID: <4df9cf63943d0f371c8a25c6c9e84adbd3083a61.1787838835.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <cover.1787838835.git.oleksii.kurochko@gmail.com>
 References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1787844157-BE664757-AFC1CA69/10/73395122804
+X-purgate-ID: tlsNG-ef75cf/1787844158-360C5AE4-AB5AF2C0/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 6071
+X-purgate-size: 9880
 
-continue_new_vcpu() is the arch hook invoked the first time a freshly
-created vCPU is scheduled. Implement both cases it has to cover:
- - for the idle vCPU, switch to its own stack and jump to idle_loop();
- - for a guest vCPU, restore hstatus and enter the guest through the new
-   return_to_new_vcpu() path in entry.S, which loads sepc, passes the
-   hart id in a0 and the DTB address in a1 as expected by the RISC-V
-   boot protocol, sets sstatus.SPP and executes sret.
+Introduce imsic_vsfile_attach() to initialize the AIA-related state needed
+for a vCPU to have a working guest interrupt file.
 
-Interrupts have to stay disabled across the restore. The trap entry
-logic implicitly clears hstatus.SPV, so an interrupt taken between the
-write of hstatus and sret would make sret return to HS-mode instead of
-VS-mode, and restoring SPV afterwards is non-trivial. Instead interrupts
-are simply kept off and sstatus.SPIE is set, so that SIE is restored from
-SPIE once sret has been executed. Also, it follows what hardware will do
-with real CPU which is also started with interrupts disabled.
+A guest (VS) interrupt file must be mapped to one of a pCPU's
+hardware interrupt files (if they exist), so the pCPU a vCPU will actually
+run on needs to be known first. arch_vcpu_create() is therefore not a
+suitable place to call vcpu_aia_init(), since the pCPU assigned to a
+vCPU can still change before it is first scheduled. To avoid
+reassigning the VS interrupt file id and remapping it to a different
+pCPU's hardware interrupt file, imsic_vsfile_attach() is called from a
+later point in the scheduling path (e.g. continue_new_vcpu()). Since
+it will end up being called from a non-__init context, it is not
+itself marked __init.
 
-Introduce get_cpu_info() and reset_stack_and_jump() in asm/current.h,
-needed by the above. get_cpu_info() is a macro rather than a static
-inline because asm/current.h is pulled in by <xen/percpu.h> before
-this_cpu() is defined and before <xen/sched.h> completes struct vcpu.
-
-idle_loop() is added as a stub on purpose; its real implementation will
-come separately later.
+Introduce imsic_update_state() to update a vCPU's guest IMSIC state
+(the guest interrupt file id and the pCPU whose hardware interrupt
+file it is mapped to) as a single consistent unit. This state can be
+read concurrently, e.g. by a future helper that checks whether a
+vCPU has a pending IMSIC interrupt, though no such consumer exists
+yet at this stage, so it is protected by a lock.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in v2:
- - New patch.
+ - Update vcpu_aia_init() to catch sw interrupt file and update some debug
+   messages in it.
+ - Add vgein_release() if IMSIC h/w mapping failed.
+ - imsic_update_state(): store v->processor rather than cpuid_to_hartid(),
+   as ->vsfile_cpu is consumed as a Xen CPU id (aplic_hart_field(),
+   cpumask_of()) and its NR_CPUS sentinel lives in that numbering space.
+ - Drop parantethis aroud guest_file_id ? ... in imsic_update_state().
+ - Rename vcpu_aia_init to imsic_vsfile_attach() and move the code to
+   imsic.c.
 ---
 ---
- xen/arch/riscv/domain.c              | 44 +++++++++++++++++++++++++++-
- xen/arch/riscv/entry.S               | 23 +++++++++++++++
- xen/arch/riscv/include/asm/current.h |  4 +++
- 3 files changed, 70 insertions(+), 1 deletion(-)
+ xen/arch/riscv/domain.c            |   2 +
+ xen/arch/riscv/imsic.c             | 146 +++++++++++++++++++++++------
+ xen/arch/riscv/include/asm/imsic.h |   2 +
+ 3 files changed, 121 insertions(+), 29 deletions(-)
 
 diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
-index 29181968224c..0782148b7207 100644
+index 0782148b7207..15b6bfffa97d 100644
 --- a/xen/arch/riscv/domain.c
 +++ b/xen/arch/riscv/domain.c
-@@ -8,10 +8,13 @@
- #include <xen/smp.h>
- #include <xen/vmap.h>
- 
-+#include <asm/aia.h>
-+#include <asm/aplic.h>
- #include <asm/bitops.h>
- #include <asm/cpufeature.h>
- #include <asm/csr.h>
- #include <asm/current.h>
-+#include <asm/imsic.h>
- #include <asm/intc.h>
- #include <asm/mmio.h>
- #include <asm/riscv_encoding.h>
-@@ -140,9 +143,43 @@ static void vcpu_csr_init(struct vcpu *v)
-     v->arch.hie = MIP_SGEIP;
- }
- 
-+static void schedule_tail(struct vcpu *prev);
-+static void noreturn idle_loop(void);
-+void noreturn return_to_new_vcpu(void);
+@@ -155,6 +155,8 @@ static void continue_new_vcpu(struct vcpu *prev)
+         reset_stack_and_jump(idle_loop);
+     else
+     {
++        imsic_vsfile_attach(current);
 +
- static void continue_new_vcpu(struct vcpu *prev)
+         /*
+          * During a context switch to a new vCPU, interrupts must be disabled
+          * to guarantee that the vCPU's CSR state can be safely restored into
+diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
+index 374a21ace15f..ad638d748517 100644
+--- a/xen/arch/riscv/imsic.c
++++ b/xen/arch/riscv/imsic.c
+@@ -212,7 +212,14 @@ unsigned int vcpu_guest_file_id(const struct vcpu *v)
+ 
+ void imsic_update_state(struct vcpu *v, unsigned int guest_file_id)
  {
 -    BUG_ON("unimplemented\n");
-+    schedule_tail(prev);
++    unsigned long flags;
++    struct vimsic_state *vimsic_state = v->arch.vimsic_state;
++    unsigned int cpu = guest_file_id ? v->processor : NR_CPUS;
 +
-+    if ( is_idle_vcpu(current) )
-+        reset_stack_and_jump(idle_loop);
-+    else
++    write_lock_irqsave(&vimsic_state->vsfile_lock, flags);
++    vimsic_state->guest_file_id = guest_file_id;
++    vimsic_state->vsfile_cpu = cpu;
++    write_unlock_irqrestore(&vimsic_state->vsfile_lock, flags);
+ }
+ 
+ void __init imsic_ids_local_delivery(bool enable)
+@@ -640,6 +647,16 @@ struct imsic_vsfile_data {
+     struct imsic_mrif *mrif;
+ };
+ 
++/*
++ * Number of 64-bit EIx groups needed to cover all the interrupt identities an
++ * IMSIC interrupt file provides, which are 0 (never valid, but it still
++ * occupies a bit) up to and including imsic_cfg.nr_ids.
++ */
++static unsigned int imsic_nr_eix(void)
++{
++    return DIV_ROUND_UP(imsic_cfg.nr_ids + 1, BITS_PER_TYPE(uint64_t));
++}
++
+ /*
+  * Execute func() on the pCPU which owns the IMSIC interrupt file func() is
+  * going to work with.
+@@ -1138,20 +1155,90 @@ static void cf_check imsic_vsfile_local_update(void *data)
+     csr_write(CSR_VSISELECT, old_vsiselect);
+ }
+ 
++/*
++ * Point the vCPU's HSTATUS.VGEIN at the guest interrupt file it has been
++ * given. It is applied to the hart when the vCPU's context is restored.
++ */
++static void vcpu_set_vgein(struct vcpu *v, unsigned int vsfile_id)
++{
++    unsigned long hstatus = vcpu_guest_cpu_user_regs(v)->hstatus;
++
++    hstatus &= ~HSTATUS_VGEIN;
++    hstatus |= MASK_INSR(vsfile_id, HSTATUS_VGEIN);
++
++    vcpu_guest_cpu_user_regs(v)->hstatus = hstatus;
++}
++
++/*
++ * Take a h/w guest interrupt file of 'cpu' for the vCPU: zero the file out,
++ * map it into the domain's G-stage at the vCPU's virtual IMSIC page and
++ * record the new location in the per-vCPU IMSIC state.
++ *
++ * HSTATUS.VGEIN is deliberately left alone: the vCPU may be pointed at the
++ * file only when the file already holds the vCPU's interrupt state, which in
++ * the case of imsic_migrate_vcpu() happens only after the old file has been
++ * moved to the new one. Thereby it is up to the caller to call
++ * vcpu_set_vgein() at the right moment.
++ *
++ * Returns the id of the taken interrupt file, or 0 if none could be taken, in
++ * which case the domain is crashed.
++ */
++static unsigned int imsic_vsfile_acquire(struct vcpu *v, unsigned int cpu)
++{
++    struct imsic_vsfile_data vsfile_data = { .nr_eix = imsic_nr_eix() };
++    unsigned int vsfile_id;
++    int rc;
++
++    vsfile_id = vgein_assign(v);
++    if ( !vsfile_id )
 +    {
 +        /*
-+         * During a context switch to a new vCPU, interrupts must be disabled
-+         * to guarantee that the vCPU's CSR state can be safely restored into
-+         * the hart without being clobbered by an interrupt trap.
-+         *
-+         * For example, when return_to_new_vcpu() finishes, it executes sret.
-+         * At that point, the hart checks hstatus.SPV=1 and sstatus.SPP=1 in
-+         * order to return from HS-mode into VS-mode. If an interrupt were to
-+         * arrive before sret, the trap entry logic would implicitly clear
-+         * hstatus.SPV to 0. Correctly restoring it afterwards is non-trivial,
-+         * and if left as 0, sret would incorrectly return to HS-mode instead
-+         * of VS-mode.
-+         *
-+         * To avoid this, interrupts are kept disabled during the restore.
-+         * Additionally, setting sstatus.SPIE=1 ensures that after sret is
-+         * executed (as sstatus.SIE will be loaded from SPIE), HS-mode will
-+         * continue to receive interrupts normally.
++         * vgein_assign() returns 0 when no free h/w guest interrupt file is
++         * available. s/w guest interrupt files aren't supported yet, so such
++         * a vCPU can't be run.
 +         */
-+        local_irq_disable();
-+        csr_set(CSR_SSTATUS, SSTATUS_SPIE);
-+
-+        csr_write(CSR_HSTATUS, vcpu_guest_cpu_user_regs(current)->hstatus);
-+
-+        reset_stack_and_jump(return_to_new_vcpu);
++        domain_crash(v->domain,
++                     "%pv: no free h/w guest interrupt file on CPU%u\n",
++                     v, cpu);
++        return 0;
 +    }
- }
- 
- int arch_vcpu_create(struct vcpu *v)
-@@ -551,3 +588,8 @@ static void __init __maybe_unused build_assertions(void)
-      */
-     BUILD_BUG_ON(offsetof(struct cpu_info, guest_cpu_user_regs));
- }
 +
-+static void noreturn idle_loop(void)
-+{
-+    BUG_ON("unimplemented");
++    vsfile_data.hgei = vsfile_id;
++
++    /* The file could still hold the state of its previous owner */
++    imsic_call_on_cpu(cpu, imsic_vsfile_local_clear, &vsfile_data);
++
++    rc = imsic_map_guest_file(v, vsfile_id);
++    if ( rc )
++    {
++        vgein_release(v, vsfile_id, cpu);
++
++        /* Can't continue w/o correctly mapped IMSIC interrupt file */
++        domain_crash(v->domain,
++                     "%pv: failed to map h/w guest interrupt file %u: %d\n",
++                     v, vsfile_id, rc);
++        return 0;
++    }
++
++    imsic_update_state(v, vsfile_id);
++
++    return vsfile_id;
 +}
-diff --git a/xen/arch/riscv/entry.S b/xen/arch/riscv/entry.S
-index 331446a238d3..bf1843dcea4f 100644
---- a/xen/arch/riscv/entry.S
-+++ b/xen/arch/riscv/entry.S
-@@ -143,3 +143,26 @@ FUNC(__context_switch)
++
+ void imsic_migrate_vcpu(struct vcpu *v)
+ {
+-    unsigned int new_vsfile_hgei;
++    unsigned int new_vsfile_id;
+     unsigned int new_vsfile_cpu;
+-    unsigned int nr_hw_eix = DIV_ROUND_UP(imsic_cfg.nr_ids + 1,
+-                                          BITS_PER_TYPE(uint64_t));
+-    struct imsic_vsfile_data vsfile_data = {
+-        .nr_eix = nr_hw_eix,
+-    };
++    unsigned int nr_hw_eix = imsic_nr_eix();
+     struct vimsic_state *imsic_state = v->arch.vimsic_state;
+     unsigned long flags;
+     unsigned int old_vsfile_id;
+     unsigned int old_vsfile_cpu;
+     struct imsic_mrif tmrif = { };
++    struct imsic_vsfile_data vsfile_data = {
++        .nr_eix = nr_hw_eix,
++        .mrif = &tmrif,
++    };
  
-         ret
- END(__context_switch)
-+
-+/* t0 is used as a temporary reg and is clobbered to oblivion */
-+FUNC(return_to_new_vcpu)
-+        /* Swap tp with sscratch */
-+        csrrw   tp, CSR_SSCRATCH, tp
-+
-+        /* Set vCPU registers */
-+        REG_L   t0, CPU_USER_REGS_SEPC(sp)
-+        csrw    sepc, t0
-+
-+        /* Hartid goes to a0 */
-+        REG_L   a0, CPU_USER_REGS_A0(sp)
-+
-+        /* DTB goes to a1 */
-+        REG_L   a1, CPU_USER_REGS_A1(sp)
-+
-+        /* Set guest mode to supervisor */
-+        li      t0, SSTATUS_SPP
-+        csrs    CSR_SSTATUS, t0
-+
-+        /* Enter guest */
-+        sret
-+END(return_to_new_vcpu)
-diff --git a/xen/arch/riscv/include/asm/current.h b/xen/arch/riscv/include/asm/current.h
-index 78ec52fd8a35..f8babcc3d926 100644
---- a/xen/arch/riscv/include/asm/current.h
-+++ b/xen/arch/riscv/include/asm/current.h
-@@ -47,6 +47,8 @@ DECLARE_PER_CPU(struct vcpu *, curr_vcpu);
- #define set_current(vcpu)  do { current = (vcpu); } while (0)
- #define get_cpu_current(cpu)  per_cpu(curr_vcpu, cpu)
+     /*
+      * The scheduler can mark a freshly created vCPU's unit as migrated and
+@@ -1189,25 +1276,10 @@ void imsic_migrate_vcpu(struct vcpu *v)
+      */
+     new_vsfile_cpu = v->processor;
  
-+#define get_cpu_info() (current->arch.cpu_info)
-+
- #define guest_cpu_user_regs() ({ BUG_ON("unimplemented"); NULL; })
- #define vcpu_guest_cpu_user_regs(vcpu) \
-     (&(vcpu)->arch.cpu_info->guest_cpu_user_regs)
-@@ -58,6 +60,8 @@ DECLARE_PER_CPU(struct vcpu *, curr_vcpu);
-     unreachable();                                          \
- } while ( false )
+-    new_vsfile_hgei = vgein_assign(v);
+-
+-    /* We don't support SW interrupt files at the moment. */
+-    BUG_ON(!new_vsfile_hgei);
+-
+-    vsfile_data.hgei = new_vsfile_hgei;
+-
+-    /* Zero-out new IMSIC VS-file */
+-    imsic_call_on_cpu(new_vsfile_cpu, imsic_vsfile_local_clear, &vsfile_data);
+-
+-    /* Update G-stage mapping for the new IMSIC VS-file */
+-    if ( imsic_map_guest_file(v, new_vsfile_hgei) )
+-    {
+-        domain_crash(v->domain, "Migration to hw interrupt file failed\n");
+-
++    /* Zero-out, map and start to use the new IMSIC VS-file */
++    new_vsfile_id = imsic_vsfile_acquire(v, new_vsfile_cpu);
++    if ( !new_vsfile_id )
+         return;
+-    }
+-
+-    imsic_update_state(v, new_vsfile_hgei);
  
-+#define reset_stack_and_jump(fn) switch_stack_and_jump(get_cpu_info(), fn)
-+
- #define get_per_cpu_offset() __per_cpu_offset[smp_processor_id()]
+     /*
+      * TODO: Modify the relevant translation tables at all IOMMUs so that MSIs
+@@ -1245,7 +1317,7 @@ void imsic_migrate_vcpu(struct vcpu *v)
+     vgein_release(v, old_vsfile_id, old_vsfile_cpu);
  
- #endif /* __ASSEMBLER__ */
+     /* Restore register state in the new IMSIC VS-file */
+-    vsfile_data.mrif = &tmrif;
++    vsfile_data.hgei = new_vsfile_id;
+     imsic_call_on_cpu(new_vsfile_cpu, imsic_vsfile_local_update, &vsfile_data);
+ 
+     /*
+@@ -1262,7 +1334,23 @@ void imsic_migrate_vcpu(struct vcpu *v)
+         imsic_call_on_cpu(new_vsfile_cpu, imsic_local_hgeie_set, &vsfile_data);
+ 
+     /* Set VCPU HSTATUS.VGEIN to new IMSIC VS-file */
+-    vcpu_guest_cpu_user_regs(v)->hstatus &= ~HSTATUS_VGEIN;
+-    vcpu_guest_cpu_user_regs(v)->hstatus |=
+-            MASK_INSR(new_vsfile_hgei, HSTATUS_VGEIN);
++    vcpu_set_vgein(v, new_vsfile_id);
++}
++
++void imsic_vsfile_attach(struct vcpu *v)
++{
++    unsigned int new_vsfile_id;
++
++    if ( !aia_usable() )
++        return;
++
++    new_vsfile_id = imsic_vsfile_acquire(v, v->processor);
++    if ( !new_vsfile_id )
++        return;
++
++    /*
++     * The vCPU has never run yet, so the just zeroed out file is all the
++     * interrupt state it has and HSTATUS.VGEIN can be pointed at it at once.
++     */
++    vcpu_set_vgein(v, new_vsfile_id);
+ }
+diff --git a/xen/arch/riscv/include/asm/imsic.h b/xen/arch/riscv/include/asm/imsic.h
+index 6395b539c52d..f0edf0bff5d9 100644
+--- a/xen/arch/riscv/include/asm/imsic.h
++++ b/xen/arch/riscv/include/asm/imsic.h
+@@ -125,4 +125,6 @@ int imsic_map_guest_file(struct vcpu *v, unsigned int vsfile_id);
+ 
+ void imsic_migrate_vcpu(struct vcpu *v);
+ 
++void imsic_vsfile_attach(struct vcpu *v);
++
+ #endif /* ASM_RISCV_IMSIC_H */
 -- 
 2.55.0
 
