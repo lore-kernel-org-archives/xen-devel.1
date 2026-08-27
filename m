@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E05A8C61DC6
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2026 15:22:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1400987.1636764 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39BA4C61DC4
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2026 15:22:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1401000.1636789 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzbvy-0006D5-7B; Thu, 27 Aug 2026 15:22:30 +0000
+	id 1wzbw4-0007RM-Qi; Thu, 27 Aug 2026 15:22:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1400987.1636764; Thu, 27 Aug 2026 15:22:29 +0000
+Received: by outflank-mailman (output) from mailman id 1401000.1636789; Thu, 27 Aug 2026 15:22:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzbvx-00068R-6Q; Thu, 27 Aug 2026 15:22:29 +0000
-Received: by outflank-mailman (input) for mailman id 1400987;
- Thu, 27 Aug 2026 15:22:23 +0000
+	id 1wzbw3-0007NH-JT; Thu, 27 Aug 2026 15:22:35 +0000
+Received: by outflank-mailman (input) for mailman id 1401000;
+ Thu, 27 Aug 2026 15:22:28 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wzbvr-000523-7h
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 15:22:23 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wzbvv-0005pb-G6
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 15:22:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzbvq-00C7F4-JT
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 17:22:22 +0200
+ id 1wzbvu-00C7F4-Sj
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 17:22:26 +0200
 Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a90562c-e002-0a2a0a5209dd-0a2a4505e5e4-4
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:22:22 +0200
-Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ id 6a90562c-e002-0a2a0a5209dd-0a2a4505e5e4-12
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:22:26 +0200
+Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a90562e-4cb1-0a2a45050019-d1558033b90c-3
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:22:22 +0200
-Received: by mail-wm1-f51.google.com with SMTP id
- 5b1f17b1804b1-499b2981a7bso9943945e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 08:22:22 -0700 (PDT)
+ id 6a905632-4cb1-0a2a45050019-d1558035e460-3
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:22:26 +0200
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-4953de5be0aso17665605e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 08:22:26 -0700 (PDT)
 Received: from fedora (user-109-243-144-234.play-internet.pl.
  [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49b4b2d6b30sm57441155e9.14.2026.08.27.08.22.20
+ 5b1f17b1804b1-49b4b2d6b30sm57441155e9.14.2026.08.27.08.22.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Aug 2026 08:22:21 -0700 (PDT)
+ Thu, 27 Aug 2026 08:22:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,41 +54,41 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787844142; x=1788448942; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1787844146; x=1788448946; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=NbUDvsGLg78NddOCawoOaUli56hcmNzHbJnJ/eb+qqM=;
-        b=MZ7uBruKJkJV7cwslMDci3jqcDi0ku1svcuUoRtCs08kCJOhBXyHYADQRcr6xeDPoN
-         h9l11Jdrnt8q3SOoQVIBexjLqv2rXNejarY92N6TmdMltwREd02BFqUlY/7M5UP6OGP4
-         IgopEKWZivmSZ/5TAVCUSDqHladNsSPURmiXasB55o2ao1G77Ww1JXd7+hZuP02oay4g
-         wlx1pnoV7vPzk2pvAMUgI/xVxVgAo2oinpahbO9WbuIUqKkEt5u2c2TgunTiZqzrE3C9
-         HZMTMcwNOte3lfKiGdXbp9ZRTEfYfbRELuvs5Dy9EDcSVwb7kJjWl+6j15yf6+jq/psQ
-         jKyQ==
+        bh=pjeR4g3eAicMAUdV6Amf67usumS/lrCxP1G6haAdnIE=;
+        b=axi1JGDG3EF5PNUSuc5s9fUUiLXudV9YdTEwI+9c8r1eiB8drQUem+nKttoc57JTTC
+         UXG7m1lNRaZpDf56X+eBrqnmFGcYMemfp646NEOuttSyPoLYGeT+wOTJbMiyAgAaZVZB
+         /Y+ruXQH8VhBf0mFNB53Rx+Z4pYInSwjGJYa5I6xAgrnQE4M2N8g3WcTweZLcfL6ZsuJ
+         FNJIUE/PmRptDdwDK1puebZxbOxvQMc4I6gde+rw2CSCbeoyrSRWV0QPsMAEbYwvFuZd
+         ETrLnn7+NQ/KDXN9LEE117GLG1jf0ATl1GiP9HixQ3RjY5ym7RjDorn5/FKKqLgNn+OK
+         le8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787844142; x=1788448942;
+        d=1e100.net; s=20251104; t=1787844146; x=1788448946;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=NbUDvsGLg78NddOCawoOaUli56hcmNzHbJnJ/eb+qqM=;
-        b=MwzO4kHOZbEpEAsemTCQjwBbryrSc2ncGhG2mTLyoWRxubwXcCPgb3XcCXGexhu0U1
-         y5EOpn2HqnqhU+DC/nD6H8ruRfXP+4PTHQIujYTSPadSqcqbKG0gOCNi0lD9cIDYewBl
-         VYBdihVbItubjo0Y4p+kQKwWAIqfJfBhbppCOwOnoGVI4s6uyDjQI84+0ezIrI+sLMiB
-         hMDmDuex8y8D7J0iwsJPqViwuCnJYUXmJ/xv1EnTGQnAlYyLprgEZtSG2MuCB34HKfF4
-         PYaYn50202f1zGXmOk5vDqf5Zc2V7VCvoZPNUFLqZZjSdhvgB4GyscD6IjLxHUZAopnp
-         7I0w==
-X-Gm-Message-State: AFuF++lH6AfKYhL+mHmj/j7nN/v0VNca4Yaf1RwvLaRLkMdBDAOKfVXG
-	2MjzmCkabWL0dt8wxHWy1cWcC44qChYJZzJhidMC51hFE7Sf+hIxli89vCzXLw==
-X-Gm-Gg: AR+sD12CHx8e8bHuzS33HJnn7fhvDFHuczigpO/aI6RlYl5oUigK/rgBWoazGViATYY
-	iuvSRvagV1R0O2po4nV9eAuBLP9OYpm27JONX7TnITFmrNzUTEx1hr/3uTm/8bt22CY9ghgfepC
-	tNyVq/okA6eiLUgTZUR1cxas/d6EDeip9maaUDIiVLIjI0uZrNjrWIOL/D7cUh+8yoS5UdCLYrc
-	oFGOu7ZRHLTHpHYvuLtd92ZDmX2f3mSWZMH3OSQJkt0aXhk0Iu7uBLY1x239+VmToZwWs8ZawSP
-	a5ds/7EkIZJ7SRBVeRwqAgyPFc/JZ25jMQJ8siUF5QZufHXKli/Rfjtt+Oanc5Iuq9AqOyY6KlL
-	t5Yrfqt7tyGDkcfIGXKG3ij3nNm+NQfNXe9Koqihtsta00BRdLy6KLP6F1EU5cJZdyd7xDGCO7B
-	hZRbIczDRu3WHLT5wCVQCDhyOE51DMad4/OK3et9+NlR0BwDJISCieVJD8MS4+hCuAu8XZHeTt5
-	SNG4uFWUG1D/4l2aaTjo2rj8JSXLEoQ
-X-Received: by 2002:a05:600c:6088:b0:499:a277:e8b5 with SMTP id 5b1f17b1804b1-499dc6f3248mr202823325e9.3.1787844141903;
-        Thu, 27 Aug 2026 08:22:21 -0700 (PDT)
+        bh=pjeR4g3eAicMAUdV6Amf67usumS/lrCxP1G6haAdnIE=;
+        b=UR3qM/1iSMKDuKumLzzKlpCt/Uqv+B3BVNsMZ5bOV3/jaYp8aXVZMQb6o4QR+ZhFR5
+         RvOD8yUmJng67Sfn2fECPClhTSiS/YcKlO52ZOxw5ACHaSIG9EP95ZX82HiAPwLak7Ih
+         ykMgwmw5bmXOWShoKqsBT9alSqb/3dfg3MdtiMdKKLRF797QGNit/uTTvW6kgJDMci5e
+         QNK7+JgN9fen3Yx2wLaC5oo5Pyl0Esug4pDt1itoWCRJP1CSFClZJQqda9UVOlXAAhd2
+         kX19KTA2TJjagcrSGOEUjmqg+u8EJt9RAQ8zY945h0ltPoy/v3gJ3Y3IQBiqzTL0EftS
+         8Vuw==
+X-Gm-Message-State: AFuF++npbIIXdBjKxwGQGG2PaOqmyfk9Ydx9peqqUQIeT24wFlCVh+el
+	qUhS47yL2TzWfHVIJe/abffMxk+iz55CYxVmrzczrxWkCQoyVqTWNTEdaT8/fg==
+X-Gm-Gg: AR+sD10w/6SNFDhUJZMvzXBPZa9DI6ikKZIkH3xWO34SMUAmIo4NwSAgWYOWsZ3xLXE
+	RmvpuMlHPMo1Ckl/B8Veceqnv448wE5xmTHVXu/jxH9X8/l9Y+JLVhQzrIJnck6qpLMfA6RahPD
+	rjFScpkbgAqWZDP3K8cXlrJdypStvmdz6G08SCdJ4zyJugFfbOKz80AzvFq2Z886Mg9Wn3A14Z4
+	mVMyzjDh4T0pdbyzxdFajjAIUTFoH5HBSvXimxuOnROXnh5BgsZ2f/EnYttVZao5wxY22wEP56t
+	9AglgNWTNTyLpQ2VR5L+yagvIuR5ds69wHutWYpHjyVx+8hpUmd302tBk/C8xi56I7OGNjVNYpu
+	QcIM8F1wOmLtPnwHSEcslKwmVy3z51t+OewAJb03ZNhV0XB6baBtj4XY7AK45tc2iTKHTS+3jDM
+	oc6Z5XZr7JlDSwPWswHRWegSiCy3A88LcwzwC0OoV9OTa4MC9haUcI4cRAPXPf3q1PJjv9Xm8wc
+	BADIw1i7q5zXvVJ/FOPBLQrkVku7y2u
+X-Received: by 2002:a05:600c:34c3:b0:499:afe2:e4d0 with SMTP id 5b1f17b1804b1-499dc70d263mr195585985e9.8.1787844146120;
+        Thu, 27 Aug 2026 08:22:26 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -104,36 +104,33 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 27/39] xen/riscv: introduce arch_move_irqs()
-Date: Thu, 27 Aug 2026 17:21:11 +0200
-Message-ID: <df3d3e1be48d9e46e4884c8573550b242efe26db.1787838835.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 30/39] xen/riscv: prepare new IMSIC VS-file
+Date: Thu, 27 Aug 2026 17:21:14 +0200
+Message-ID: <440bc07dfb72d09da72b49ded6f78dc1f54a3ad5.1787838835.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <cover.1787838835.git.oleksii.kurochko@gmail.com>
 References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1787844142-251182A1-AA301120/10/73395122804
+X-purgate-ID: tlsNG-c201ff/1787844146-F52A32A1-A3BF8177/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 4235
+X-purgate-size: 9361
 
-When migrating a vCPU between pCPUs the hypervisor must also migrate
-the associated virtual interrupt state. arch_move_irqs() is the
-per-arch hook called by generic code to trigger that.
+Implement first steps of migration a vCPU to a different guest interrupt file
+procedure:
+- At the old interrupt file, save to memory the values of registers
+  eidelivery and eithreshold, and set eidelivery = 0.
+- At the new interrupt file, set eidelivery = 0, and zero all
+  implemented interrupt-pending bits (the eip array).
 
-Replace the static inline BUG_ON placeholder in asm/irq.h with a real
-implementation in intc.c dispatching through a new move_irqs vintc_ops
-callback. Wire it up in vAPLIC, which delegates to imsic_migrate_vcpu()
-which itself still a stub to be implemented in follow-up patches.
+The following steps will be introduced in follow-up patches.
 
-Note that technically ASSERT() in arch_move_irqs() could be skipped as
-it will be anyway NULL pointer dereference (and a trap will occur) if
-something isn't properly initialized but sometimes it is harder to
-find place where NULL pointer derefence happened as it isn't
-guaraunted that all necessary registers will be filled with something
-useful.
-As at the moment I don't find any case when ->move_irqs() could be
-skipped, the check that ->move_irq isn't NULL is added to ASSERT()
-instead of adding "if ( ...->move_irq) vitnc->ops->move_irqs(v)".
+Add a BUG_ON("unimplemented") placeholder in imsic_migrate_vcpu() to guard
+against silent incorrect behaviour or unexpected panics in guest VMs until
+the function is fully implemented.
+
+vgein_assign() will be introduced later in a separate patch, for not it is
+only stub.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
@@ -141,96 +138,264 @@ Changes in v2:
  - New patch.
 ---
 ---
- xen/arch/riscv/imsic.c             | 5 +++++
- xen/arch/riscv/include/asm/imsic.h | 2 ++
- xen/arch/riscv/include/asm/intc.h  | 3 +++
- xen/arch/riscv/include/asm/irq.h   | 5 +----
- xen/arch/riscv/intc.c              | 8 ++++++++
- xen/arch/riscv/vaplic.c            | 1 +
- 6 files changed, 20 insertions(+), 4 deletions(-)
+ xen/arch/riscv/aia.c             |   9 ++
+ xen/arch/riscv/imsic.c           | 159 +++++++++++++++++++++++++++++++
+ xen/arch/riscv/include/asm/aia.h |   4 +
+ xen/include/xen/config.h         |   1 +
+ 4 files changed, 173 insertions(+)
 
+diff --git a/xen/arch/riscv/aia.c b/xen/arch/riscv/aia.c
+index e31c9c2d24b6..75c82bcfa1b3 100644
+--- a/xen/arch/riscv/aia.c
++++ b/xen/arch/riscv/aia.c
+@@ -1,8 +1,10 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
++#include <xen/bug.h>
+ #include <xen/errno.h>
+ #include <xen/init.h>
+ #include <xen/sections.h>
++#include <xen/sched.h>
+ #include <xen/types.h>
+ 
+ #include <asm/cpufeature.h>
+@@ -21,3 +23,10 @@ void __init aia_init(void)
+ 
+     _aia_usable = true;
+ }
++
++unsigned int vgein_assign(struct vcpu *v)
++{
++    BUG_ON("unimplemented\n");
++
++    return 0;
++}
 diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
-index 3787f270d8e3..b0c4a9e2d728 100644
+index ad7fbe708bfd..516f0105352a 100644
 --- a/xen/arch/riscv/imsic.c
 +++ b/xen/arch/riscv/imsic.c
-@@ -686,3 +686,8 @@ int __init vimsic_make_domu_dt_node(struct kernel_info *kinfo,
+@@ -26,6 +26,7 @@
+ #include <xen/spinlock.h>
+ #include <xen/xvmalloc.h>
  
-     return fdt_end_node(fdt);
- }
++#include <asm/aia.h>
+ #include <asm/imsic.h>
+ 
+ #define IMSIC_HART_SIZE(guest_bits) (BIT(guest_bits, U) * IMSIC_MMIO_PAGE_SZ)
+@@ -77,6 +78,64 @@ do {                            \
+     csr_clear(CSR_SIREG, v);    \
+ } while (0)
+ 
++#define imsic_vs_csr_write(c, v)    \
++do {                                \
++    csr_write(CSR_VSISELECT, (c));  \
++    csr_write(CSR_VSIREG, (v));     \
++} while ( 0 )
 +
-+void imsic_migrate_vcpu(struct vcpu *v)
++/*
++ * Generic switchcase expansion pyramid.
++ * F is the per-operation leaf macro, ireg is the base register index.
++ * Optional extra args (e.g. an operation and/or a value) are forwarded to F
++ * via __VA_ARGS__.
++ *
++ * imsic_switchcase_break(ireg, op, v) - emit "case ireg: op(ireg,v); break;"
++ * imsic_switchcase_ret(ireg, op, ...) - emit "case ireg: return op(ireg[,v]);"
++ *   The variadic tail is optional so the same leaf works for both read (no v)
++ *   and swap (with v).
++ */
++#define imsic_switchcase_break(ireg, op, v) \
++    case ireg:                              \
++        op(ireg, v);                        \
++        break;
++
++#define imsic_switchcase_ret(ireg, op, ...) \
++    case ireg:                              \
++        return op(ireg, ##__VA_ARGS__);
++
++#define imsic_switchcase_2(F, ireg, ...)    \
++    F(ireg + 0, ##__VA_ARGS__)              \
++    F(ireg + 1, ##__VA_ARGS__)
++#define imsic_switchcase_4(F, ireg, ...)    \
++    imsic_switchcase_2(F, ireg + 0, ##__VA_ARGS__)  \
++    imsic_switchcase_2(F, ireg + 2, ##__VA_ARGS__)
++#define imsic_switchcase_8(F, ireg, ...)    \
++    imsic_switchcase_4(F, ireg + 0, ##__VA_ARGS__)  \
++    imsic_switchcase_4(F, ireg + 4, ##__VA_ARGS__)
++#define imsic_switchcase_16(F, ireg, ...)   \
++    imsic_switchcase_8(F, ireg + 0, ##__VA_ARGS__)  \
++    imsic_switchcase_8(F, ireg + 8, ##__VA_ARGS__)
++#define imsic_switchcase_32(F, ireg, ...)   \
++    imsic_switchcase_16(F, ireg + 0, ##__VA_ARGS__) \
++    imsic_switchcase_16(F, ireg + 16, ##__VA_ARGS__)
++#define imsic_switchcase_64(F, ireg, ...)   \
++    imsic_switchcase_32(F, ireg + 0, ##__VA_ARGS__) \
++    imsic_switchcase_32(F, ireg + 32, ##__VA_ARGS__)
++
++static void imsic_eix_write(unsigned int ireg, unsigned long val)
 +{
-+    BUG_ON("unimplemented");
++    switch ( ireg )
++    {
++    imsic_switchcase_64(imsic_switchcase_break, IMSIC_EIP0,
++                        imsic_vs_csr_write, val)
++    imsic_switchcase_64(imsic_switchcase_break, IMSIC_EIE0,
++                        imsic_vs_csr_write, val)
++    default:
++        ASSERT_UNREACHABLE();
++    }
 +}
-diff --git a/xen/arch/riscv/include/asm/imsic.h b/xen/arch/riscv/include/asm/imsic.h
-index 73129c3c9ea7..57d8c729ac0d 100644
---- a/xen/arch/riscv/include/asm/imsic.h
-+++ b/xen/arch/riscv/include/asm/imsic.h
-@@ -112,4 +112,6 @@ int vimsic_make_domu_dt_node(struct kernel_info *kinfo, unsigned int *phandle);
- void imsic_ctxt_switch_from(struct vcpu *v);
- void imsic_ctxt_switch_to(struct vcpu *v);
- 
-+void imsic_migrate_vcpu(struct vcpu *v);
 +
- #endif /* ASM_RISCV_IMSIC_H */
-diff --git a/xen/arch/riscv/include/asm/intc.h b/xen/arch/riscv/include/asm/intc.h
-index 62e1410156c7..b5ab39aa2b39 100644
---- a/xen/arch/riscv/include/asm/intc.h
-+++ b/xen/arch/riscv/include/asm/intc.h
-@@ -70,6 +70,9 @@ struct vintc_ops {
- 
-     /* Restore vINTC state of the vCPU being switched in */
-     void (*ctxt_switch_to)(struct vcpu *v);
-+
-+    /* Move interrupts of vCPU to a different pCPU */
-+    void (*move_irqs)(struct vcpu *v);
- };
- 
- struct vintc {
-diff --git a/xen/arch/riscv/include/asm/irq.h b/xen/arch/riscv/include/asm/irq.h
-index 66067747dc0f..314b8ee0e00c 100644
---- a/xen/arch/riscv/include/asm/irq.h
-+++ b/xen/arch/riscv/include/asm/irq.h
-@@ -41,10 +41,7 @@ struct irq_desc *irq_to_desc(unsigned int irq);
- struct cpu_user_regs;
- struct dt_device_node;
- 
--static inline void arch_move_irqs(struct vcpu *v)
--{
--    BUG_ON("unimplemented");
--}
-+void arch_move_irqs(struct vcpu *v);
- 
- int platform_get_irq(const struct dt_device_node *device, int index);
- 
-diff --git a/xen/arch/riscv/intc.c b/xen/arch/riscv/intc.c
-index 9fff501b9c25..b3a16ae9be67 100644
---- a/xen/arch/riscv/intc.c
-+++ b/xen/arch/riscv/intc.c
-@@ -192,3 +192,11 @@ void vintc_ctxt_switch_to(struct vcpu *v)
- 
-     ops->ctxt_switch_to(v);
+ unsigned int vcpu_guest_file_id(const struct vcpu *v)
+ {
+     return ACCESS_ONCE(v->arch.vimsic_state->guest_file_id);
+@@ -389,6 +448,76 @@ int cf_check vcpu_imsic_init(struct vcpu *v)
+     return 0;
  }
-+
-+/* Move vCPU's IRQs from one pCPU to another */
-+void arch_move_irqs(struct vcpu *v)
-+{
-+    const struct vintc_ops *ops = v->domain->arch.vintc->ops;
-+
-+    ops->move_irqs(v);
-+}
-diff --git a/xen/arch/riscv/vaplic.c b/xen/arch/riscv/vaplic.c
-index 6c60fe2baf0c..0c75ba2fb2fe 100644
---- a/xen/arch/riscv/vaplic.c
-+++ b/xen/arch/riscv/vaplic.c
-@@ -429,6 +429,7 @@ static const struct vintc_ops vintc_ops = {
-      */
-     .ctxt_switch_from = imsic_ctxt_switch_from,
-     .ctxt_switch_to = imsic_ctxt_switch_to,
-+    .move_irqs = imsic_migrate_vcpu,
- };
  
- int domain_vaplic_init(struct domain *d)
++/*
++ * Arguments of the imsic_vsfile_local_*() helpers, which are executed by the
++ * pCPU owning the interrupt file, thereby through imsic_call_on_cpu().
++ */
++struct imsic_vsfile_data {
++    unsigned int hgei;
++    unsigned int nr_eix;
++    struct imsic_mrif *mrif;
++};
++
++/*
++ * Execute func() on the pCPU which owns the IMSIC interrupt file func() is
++ * going to work with.
++ *
++ * An IMSIC VS-file is reachable only through hstatus.VGEIN of the hart the
++ * file belongs to, and a guest interrupt file index is meaningless on any
++ * other hart, so such work always has to be done by that very hart.
++ *
++ * The local case runs with IRQs disabled to provide func() with the same
++ * environment it is given when it is called from the function call IPI
++ * handler.
++ */
++static void imsic_call_on_cpu(unsigned int cpu, void (*func)(void *),
++                              void *data)
++{
++    if ( cpu == smp_processor_id() )
++    {
++        unsigned long flags;
++
++        local_irq_save(flags);
++        func(data);
++        local_irq_restore(flags);
++    }
++    else
++        on_selected_cpus(cpumask_of(cpu), func, data, 1);
++}
++
++static void cf_check imsic_vsfile_local_clear(void *data)
++{
++    unsigned int i;
++    const struct imsic_vsfile_data *idata = data;
++    unsigned long new_hstatus, old_hstatus, old_vsiselect;
++
++    /* We can only zero-out if we have a IMSIC VS-file */
++    if ( !idata->hgei )
++        return;
++
++    old_vsiselect = csr_read(CSR_VSISELECT);
++    old_hstatus = csr_read(CSR_HSTATUS);
++    new_hstatus = old_hstatus & ~HSTATUS_VGEIN;
++    new_hstatus |= MASK_INSR(idata->hgei, HSTATUS_VGEIN);
++    csr_write(CSR_HSTATUS, new_hstatus);
++
++    imsic_vs_csr_write(IMSIC_EIDELIVERY, 0);
++    imsic_vs_csr_write(IMSIC_EITHRESHOLD, 0);
++
++    for ( i = 0; i < idata->nr_eix; i++ )
++    {
++        imsic_eix_write(IMSIC_EIP0 + i * 2, 0);
++        imsic_eix_write(IMSIC_EIE0 + i * 2, 0);
++#ifdef CONFIG_RISCV_32
++        imsic_eix_write(IMSIC_EIP0 + i * 2 + 1, 0);
++        imsic_eix_write(IMSIC_EIE0 + i * 2 + 1, 0);
++#endif
++    }
++
++    csr_write(CSR_HSTATUS, old_hstatus);
++    csr_write(CSR_VSISELECT, old_vsiselect);
++}
++
+ void cf_check vcpu_imsic_deinit(struct vcpu *v)
+ {
+     XVFREE(v->arch.vimsic_state);
+@@ -689,6 +818,14 @@ int __init vimsic_make_domu_dt_node(struct kernel_info *kinfo,
+ 
+ void imsic_migrate_vcpu(struct vcpu *v)
+ {
++    unsigned int new_vsfile_hgei;
++    unsigned int new_vsfile_cpu;
++    unsigned int nr_hw_eix = DIV_ROUND_UP(imsic_cfg.nr_ids + 1,
++                                          BITS_PER_TYPE(uint64_t));
++    struct imsic_vsfile_data vsfile_data = {
++        .nr_eix = nr_hw_eix,
++    };
++
+     /*
+      * The scheduler can mark a freshly created vCPU's unit as migrated and
+      * invoke this before the vCPU has ever run (see the migrated branch in
+@@ -699,5 +836,27 @@ void imsic_migrate_vcpu(struct vcpu *v)
+     if ( v->arch.last_cpu == NR_CPUS )
+         return;
+ 
++    /*
++     * At this point, all interrupt producers are still using the old IMSIC
++     * VS-file.
++     */
++
++    /*
++     * Latch the pCPU the new interrupt file is taken from: vgein_assign()
++     * allocates it from v->processor's pool of guest interrupt files, and
++     * only that hart can access the file afterwards.
++     */
++    new_vsfile_cpu = v->processor;
++
++    new_vsfile_hgei = vgein_assign(v);
++
++    /* We don't support SW interrupt files at the moment. */
++    BUG_ON(!new_vsfile_hgei);
++
++    vsfile_data.hgei = new_vsfile_hgei;
++
++    /* Zero-out new IMSIC VS-file */
++    imsic_call_on_cpu(new_vsfile_cpu, imsic_vsfile_local_clear, &vsfile_data);
++
+     BUG_ON("unimplemented");
+ }
+diff --git a/xen/arch/riscv/include/asm/aia.h b/xen/arch/riscv/include/asm/aia.h
+index aaa4bf91fc75..53a1efb042f8 100644
+--- a/xen/arch/riscv/include/asm/aia.h
++++ b/xen/arch/riscv/include/asm/aia.h
+@@ -3,8 +3,12 @@
+ #ifndef RISCV_AIA_H
+ #define RISCV_AIA_H
+ 
++struct vcpu;
++
+ bool aia_usable(void);
+ 
+ void aia_init(void);
+ 
++unsigned int vgein_assign(struct vcpu *v);
++
+ #endif /* RISCV_AIA_H */
+diff --git a/xen/include/xen/config.h b/xen/include/xen/config.h
+index dddc8e1920fe..0e29976e8203 100644
+--- a/xen/include/xen/config.h
++++ b/xen/include/xen/config.h
+@@ -100,6 +100,7 @@
+ #define BITS_PER_INT    (BITS_PER_BYTE * __SIZEOF_INT__)
+ #define BITS_PER_LONG   (BITS_PER_BYTE * BYTES_PER_LONG)
+ #define BITS_PER_LLONG  (BITS_PER_BYTE * __SIZEOF_LONG_LONG__)
++#define BITS_PER_TYPE(type) (sizeof(type) * BITS_PER_BYTE)
+ 
+ /* It is assumed that sizeof(void *) == __alignof(void *) */
+ #define POINTER_ALIGN   __SIZEOF_POINTER__
 -- 
 2.55.0
 
