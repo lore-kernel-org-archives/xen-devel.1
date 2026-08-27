@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDC1BC61DD4
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF43AC61DC6
 	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2026 15:19:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1400809.1636350 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1400829.1636472 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzbt1-00031z-EA; Thu, 27 Aug 2026 15:19:27 +0000
+	id 1wzbtM-0006Pk-0i; Thu, 27 Aug 2026 15:19:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1400809.1636350; Thu, 27 Aug 2026 15:19:27 +0000
+Received: by outflank-mailman (output) from mailman id 1400829.1636472; Thu, 27 Aug 2026 15:19:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzbt1-00031s-Aq; Thu, 27 Aug 2026 15:19:27 +0000
-Received: by outflank-mailman (input) for mailman id 1400809;
- Thu, 27 Aug 2026 15:19:26 +0000
+	id 1wzbtL-0006OQ-PY; Thu, 27 Aug 2026 15:19:47 +0000
+Received: by outflank-mailman (input) for mailman id 1400829;
+ Thu, 27 Aug 2026 15:19:46 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wzbt0-000310-3N
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 15:19:26 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wzbtK-0005zJ-1n
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 15:19:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzbsz-00C6fs-2M
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 17:19:25 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wzbtJ-00C6ki-Eb
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 17:19:45 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a905576-2eae-0a2a0a5409dd-0a2a4507be2c-10
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:19:25 +0200
-Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a905584-2eae-0a2a0a5409dd-0a2a4506d496-14
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:19:45 +0200
+Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a90557c-b4ea-0a2a45070019-d155dd35c85a-3
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:19:25 +0200
-Received: by mail-wr1-f53.google.com with SMTP id
- ffacd0b85a97d-482e2fdf5abso1050748f8f.2
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 08:19:24 -0700 (PDT)
+ id 6a905591-195a-0a2a45060019-d155802eb561-3
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:19:45 +0200
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-49557167508so8884265e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 08:19:45 -0700 (PDT)
 Received: from fedora (user-109-243-144-234.play-internet.pl.
  [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482e28f5d01sm10049148f8f.32.2026.08.27.08.19.21
+ ffacd0b85a97d-482e28f5d01sm10049148f8f.32.2026.08.27.08.19.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Aug 2026 08:19:23 -0700 (PDT)
+ Thu, 27 Aug 2026 08:19:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,214 +52,380 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787843964; x=1788448764; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=8aVeolV88DGRfxdvviYuYAivZzXMsmgnBt8LjtmKoFY=;
-        b=fBRD1NbT6MATU3O2lu6mYZ//HHgP7h0sB45VVK46y3WoaPeBy4dllGYks71lIu4EQN
-         VzNDlCyEAssUt6GhklYBGfnNCczA9kN4mecafnaUqp5NkxZqvvzJb/n9NBRntugl+ypj
-         sY8b9SJd0t8iv+iKKe2U/J8xAwLYuqAuyGYGG6Q1OFScvpy6pOqr51Yz+0qpA+QSjc49
-         dG1VOxvuVWOS2LieUTEGmeyRS48GR22BP8zHu9KgVp/CpRDupK9GLCgUUS7/BgTi8AeV
-         PSvUfTt5u4Vp5FQOwZ1g3OVuDZyJTwxqSoCL1xDMJ6djbdXlQV/tiveDYx2Mp+e2LeTi
-         TGsw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787843964; x=1788448764;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+        d=gmail.com; s=20251104; t=1787843985; x=1788448785; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=8aVeolV88DGRfxdvviYuYAivZzXMsmgnBt8LjtmKoFY=;
-        b=MCzo4V8slDcRIt1jxb3/yb1pcjn/9iNZfdPeqhJeSgZrT7zIlxN7NlqqCAnQO1mmTN
-         Vtb5H/UoPqqNi9Ua8LScC1AoP4TJI5eNj6ll1cIYT5gniz3Y2sFjQDePiqX2p1gGYYkK
-         FB5dMku+CmZFDpjcrkUsFhTM/MtBRGRdbzjjT47HwiYUdGrRWYMTUyKsy6i3jF949EOJ
-         uGItcY7G8YHk5g6TRxUM3UZrG5grtL4kRutWQBV3/QFfXa5D2vIs3lRE2Q+zAopaPogN
-         FXL1gxoOHHHE3BkX6O8G59gDfXdM0S0V11DUaV2y73Ff/yDKL/Ot2cLObLIMWHhF5ahD
-         fUyQ==
-X-Gm-Message-State: AFuF++kshSRdx8Wsn+LPmePD5c/7rBEb+5sF9xmFYtGpoHAdVW8G8Z+7
-	yEnZsil7gOp5HjU2ASKFy5oXRzYiSMCwBm4N61Uf6iLYRz9kXJ2jMwQon+vS/A==
-X-Gm-Gg: AR+sD11xiOTgirOdNMSAlzOFJa0VFc33j2WzWsrWN5OwSuDzaJBf/jSUplVFPTaSjxG
-	O1nwkh7tCA2NuPaagWpKpd7M1IaG43UY6rN6+ndyGV4P8qzbfaF0V60+//Om5/A9L1b+veuwYU5
-	MIYbb3JqnE852szx5rzwNXKDcIOVcqQHo2QXWIIAHC4aiU+oEn8hbarXQt9tqlaTMxcQZAuzkfl
-	Dg04k38eoIq+8XpWZhr7+3tqjc8pQPt+sm9KyzPebbx79Y9apFQLg8S08hXMCKcme1tUl5Eul1S
-	kRPvM1jMd2Ic3dwh4ewnqf7utxZNPT1eElY+ZlUHFifScjfMceqdEIYn9Sy2lrKMHUtNWPJyHKH
-	AVSzQ+us5XwFQSQm73ArGgYRjN/iHvcGcO11yJJwrLj0yl1HgmMwqk0Aa6Etnls/w2boFB7Indc
-	IPMUyWtFlwZUNZR56G01pAGER9MBz4oYqJMeIE59Ld8CPpoc63B1JFdurgqU4S8NM9tr/ykqtWF
-	jf3wiJuC+SezsxMlyA131FR4/mcphP0
-X-Received: by 2002:a05:600c:6206:b0:49b:90cc:3c87 with SMTP id 5b1f17b1804b1-49b90cc3d27mr32771485e9.13.1787843964147;
-        Thu, 27 Aug 2026 08:19:24 -0700 (PDT)
+        bh=9qwEd9f+ju7hZ/8uC6ij6YLmcv1QVKWDiXLVpDUqbt0=;
+        b=MZJOISWzi1LAq+vX8ht4aOs1JAacPN8R2d+ocD/onaF3aOrHAYaHG30ZYuD5plX8YF
+         TOFBI5Fl2Yow2ZDO3QxrJregtm2N8UFsIl2N3CBUyFAZr4bjtMd8M+5gpURKjFoxswyQ
+         ci6hVbmh+KIMNrvc2ivosW6ZpVxf1W3y1tyTedu7yBkovyb+YnsJTdihKlq1awn2mNBL
+         M3z41lDdNBc8LvGhju7lKuzr52wVNqDY2qfMGnHyVXY+339ZQc9r1kRIy/Mymvm65wTH
+         cM9ebLvmPYXglNycxeU0NSdSKxyL+U2NoucfqFfGMbq91dsIiBAUbjECcdHkDur6RjCa
+         tWTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787843985; x=1788448785;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=9qwEd9f+ju7hZ/8uC6ij6YLmcv1QVKWDiXLVpDUqbt0=;
+        b=LNNvSmWU8l0sze6/NZF0gNlxohUZ6jMPKTlk9lDxhWPPuTLxB9Ux/1Xw+Ch8fUoC6W
+         axdugWjKOQdkq7oZf7DGVYsCZfpOYZlZ7QyKBGNKfYRDoPECTVZGySQB0otsngvPfNbJ
+         gAdsRr/vfjrkqCBKLme0KefUFY1W2lZGMRJSml1JlKl8ji72JqyWa9Ee8qyoH7le2CD1
+         WUhzXVK6lfvuwRBGk/mfAvMJGwPqcEuNJdbNFsoNm/tom2FOo72No8AH3V791GQDSXEJ
+         sQxWBqHTAR1ifFCzmWyIZ/Tyqg5l0yh5imhPvRtBOIgLK4ZF8ZBRh6keJstk01iCXTym
+         Vwfw==
+X-Gm-Message-State: AFuF++kMMljTeQ2Hnpmulr9+qkQCCOxY2GBzzFI0xMajh+qANqNQDhT/
+	6t/ug+jox3mjqLuZO+9/99Qqafk3PKo2ISfc1pRxuTjjcGYwuuWAcCRKb6KOAg==
+X-Gm-Gg: AR+sD12Qr7QAT2z0rOOslSKCWrtAzMUnK+4Eb2F2mLgHi2B17uQOljDQwCiMHuw2aFm
+	yjPab90NU0peOA1sKfbx2k8jfSyo2KNNv23qTFrCd+0KCEKCZ2udokMsPlvlI9c78gH8gHUSmqA
+	AY2grYmEc2Q225yn6ZxcMb9V7q0/91QjIho06xpn8eal/4Py94ZL7spodRjo5TZ+U/OSN3vE4WU
+	/IGex04tZfgJxzleOn0iXqB3Z+NH/L/VVuROTbhUPVNCIowuaQdQf7Vm1jJClWfC5xJPeul+Nwt
+	iO67R4Sq9aRTnRHIOo8RXIf9dI+X8g6M9XnDTNnOQCPlsrNJ4U7MjhFqzlS0pFW0CthxyA6komw
+	V0Ws3KDeUKXlg8d2RscnofiaBadmnqRDeK+nsLkmzepc2KavtWYhRKzidHRLlkCZZOroTZ5AXee
+	/sssu3iRNZSxtnIGnnd23zfZ8hNZja5gDoqs0mWHPoy9piIVQIgeCOzJtYJtl/glXTZNtoYqnJm
+	0xue1vD33/99e9n5oVTDk5lryHkoC2b
+X-Received: by 2002:a05:600c:1382:b0:493:f140:c3fb with SMTP id 5b1f17b1804b1-499dc70b76dmr175117265e9.7.1787843984684;
+        Thu, 27 Aug 2026 08:19:44 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Baptiste Le Duc <baptiste.le-duc@vates.tech>,
 	Zheng Zhang <zhangzheng@iscas.ac.cn>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Timothy Pearson <tpearson@raptorengineering.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH v8 00/20] Introduce enablemenant of dom0less
-Date: Thu, 27 Aug 2026 17:18:53 +0200
-Message-ID: <cover.1787836900.git.oleksii.kurochko@gmail.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v8 14/20] xen/riscv: generate IMSIC DT node for guest domains
+Date: Thu, 27 Aug 2026 17:19:07 +0200
+Message-ID: <6ab7ba5a0e47bba5f77c919ace4834a775f5a3b0.1787836900.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <cover.1787836900.git.oleksii.kurochko@gmail.com>
+References: <cover.1787836900.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1787843965-A64DBAE4-7D04F02F/10/73395122804
+X-purgate-ID: tlsNG-16d1c6/1787843985-F687577B-888D0FA5/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 6511
+X-purgate-size: 10787
 
-This patch series reprensent a bunch of patches necessary to enable common part
-of Dom0less.
-The stuff necessary to start/launch domains will be introduced separately.
+Guests using the IMSIC interrupt controller require a corresponding
+Device Tree description.
 
-CI tests: https://gitlab.com/xen-project/people/olkur/xen/-/pipelines/2796636402
+Add support for generating an IMSIC node when building the guest DT.
+This allows guests to discover and use the IMSIC interrupt controller.
 
+The value choosen for GUEST_IMSIC_S_BASE is an address which is typically
+used for IMSIC and QEMU.
+
+DT-building functions are marked __init because domain creation happens at
+boot time, before the init sections are freed. In a typical deployment
+libxl creates the interrupt controller node in userspace and hands the
+complete FDT to Xen, so these functions are only called during early
+domain construction.
+
+Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in v8:
- - Address the comments.
- - Rename some variable in [PATCH v8 11/20] xen/riscv: introduce per-vCPU IMSIC state.
- - Drop vaplic_init() and vcpu_aplic_deinit() in
-   [PATCH v8 12/20] xen/riscv: introduce minimal virtual APLIC (vAPLIC) infrastructure.
+ - Nothing changed. Only rebase.
 ---
 Changes in v7:
- - Merged to upstream/staging:
-   - xen/riscv: Implement ARCH_PAGING_MEMPOOL
-   - xen: arm: update p2m_set_allocation() prototype
-   - xen/riscv: do a 4th linking pass if necessary
- - Address the comments from ML.
+ - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
 ---
 Changes in v6:
- - Merged to upstream/staging:
-   - xen: arm: move declaration of map_device_irqs_to_domain() to common header
-   - xen/Kconfig: introduce HAS_STATIC_MEMORY
-   - xen/riscv: rename enum intc_version to intc_variant
-   - xen/riscv: implement prerequisites for domain_create()
- - Move UBSAN fix ("xen: introduce CONFIG_HAS_SHARED_INFO for archs without a shared page")
-   to this patch series as it is connected to "xen/Kconfig: introduce HAS_STATIC_MEMORY".
- - Address the comments from ML.
+ - Simplify initialization of guest_num_msis.
+ - s/sizeof(vimsic_name)/ARRAY_SIZE(...).
+ - Add empty line between declaration(s) and statement(s) in make_domu_dt_node().
+ - define GUEST_IMSIC_MAX_MSIS as 255U to avoid '+0U' when min(...) is used.
 ---
 Changes in v5:
- - Add new patch (xen/riscv: do a 4th linking pass if necessary) which fixes
-   randconfig job issue.
- - Address comments from ML.
+ - s/GUEST_IMSIC_NUM_MSIS/GUEST_IMSIC_MAX_MSIS throughout.
+ - Changed __read_mostly → __ro_after_init on guest_num_msis, since the value
+   is set once during __init and never again.
+ - Made imsic_parse_node() __init.
+ - Moved the min(GUEST_IMSIC_MAX_MSIS, ...) cap into imsic_parse_node() right
+   after guest_num_msis is assigned, so the bound is applied once at init
+   time rather than on every DT node construction call.
+ - Removed the now-unnecessary num_msis local variable from
+   vimsic_make_domu_dt_node(); guest_num_msis is used directly.
+ - s/snprintf(buf, sizeof(buf), ...)/snprintf(buf, ARRAY_SIZE(buf), ...)
+   in guest_imsic_set_interrupt_extended_prop().
+ - Added decl. of vimsic_make_domu_dt_node() in this patch instead of next.
 ---
 Changes in v4:
- - Address comments from ML.
+ - Add a comment for guest_num_msis explaining that it is host-dependent
+   and therefore identical for every domain, which is why a single global
+   is used instead of a per-domain value.
+ - Reduce vimsic_name[] from 128 to 32 bytes, which is enough to hold
+   "/soc/imsic@" plus a 64-bit hex address.
+ - Add a comment before GUEST_IMSIC_S_BASE noting that the value is the
+   address typically used for IMSIC by QEMU.
+ - s/__ULL/_UL for defintion of GUEST_IMSIC_S_BASE.
 ---
 Changes in v3:
- - Drop dependency from other patch series
-   ([1] https://lore.kernel.org/xen-devel/cover.1778140240.git.oleksii.kurochko@gmail.com/T/#t)
-   as it was merged.
- - Reorder patches:
-   - move common patches to the start.
-   - Move some patches to separate patch series (will be introduced later)
- - Address comments from ML.
+ - s/__ro_after_init/__read_mostly for guest_num_msis.
+ - Use IMSIC_MAX_ID as default for guest_num_msis instead of imsic_cfg.nr_ids.
+ - Drop base_addr local variable in guest_imsic_make_reg_property(); use
+   GUEST_IMSIC_S_BASE directly and introduce size to avoid spelling
+   IMSIC_MMIO_PAGE_SZ * d->max_vcpus twice.
+ - Change irq_ext type from uint32_t * to __be32 * in
+   guest_imsic_set_interrupt_extended_prop().
+ - Move phandle declaration into the loop body.
+ - Extend commit message to explain why __init is used for DT-building
+   functions: libxl creates the interrupt controller node before handing
+   the FDT to Xen, so these functions are only invoked during boot-time
+   domain construction.
+ - Re-order patch before APLIC DT node creation patch.
+ - Update commit message.
 ---
 Changes in v2:
- - Move patch "[PATCH v1 04/27] xen/riscv: rework G-stage mode handling" to
-   patch series [1]
- - Address the comments from ML.
- - The following patches were folded into one:
-   # xen/riscv: implement init_intc_phandle()
-   # xen/riscv: call do_initcalls() in start_xen()
-   # xen/riscv: setup system domains
- - The following patch were folded into one:
-   # xen/riscv: add vaplic access check
-   # xen/riscv: emulate guest writes to virtual APLIC MMIO
-   # xen/riscv: emulate guest reads from virtual APLIC MMIO
- - Add new bug fix, not really necessary to this patch series:
-   xen/riscv: manage IRQ_DISABLED flag in APLIC irq enable/disable callbacks
+ - s/imsic_make_reg_property/guest_imsic_make_reg_property.
+ - s/imsic_set_interrupt_extended_prop/guest_imsic_set_interrupt_extended_prop.
+ - Use initalizer for regs[] array in imsic_make_reg_property().
+ - Move buf[] insde the for() loop.
+ - Correct check of returned phandle.
+ - Drop local variable len.
+ - /s/XVFREE/xvfree in imsic_set_interrupt_extended_prop().
+ - Drop initializer for local variable data.
+ - s/uint32_t/unsinged int for pos and cpu in imsic_set_interrupt_extended_prop().
+ - Drop next_phandle as it is now in common code.
+ - Introduce vcpu_imsic_deinit.
+ - Refactor vimsic_make_domu_dt_node() to avoid usage of host IMSIC dt node.
 ---
+---
+ xen/arch/riscv/imsic.c                    | 143 +++++++++++++++++++++-
+ xen/arch/riscv/include/asm/guest-layout.h |   6 +
+ xen/arch/riscv/include/asm/imsic.h        |   3 +
+ 3 files changed, 151 insertions(+), 1 deletion(-)
 
-Oleksii Kurochko (20):
-  xen: introduce CONFIG_HAS_SHARED_INFO for archs without a shared page
-  xen/dom0less: turn max_init_domid into a common variable
-  xen/riscv: Implement construct_domain()
-  xen/riscv: introduce guest riscv,isa string
-  xen/riscv: implement make_cpus_node()
-  xen/riscv: implement make_timer_node()
-  xen/riscv: implement make_arch_nodes()
-  xen/riscv: introduce init interrupt controller operations
-  xen/riscv: implement make_intc_domU_node()
-  xen/riscv: introduce aia_init() and aia_usable()
-  xen/riscv: introduce per-vCPU IMSIC state
-  xen/riscv: introduce minimal virtual APLIC (vAPLIC) infrastructure
-  xen/riscv: introduce (de)initialization helpers for vINTC
-  xen/riscv: generate IMSIC DT node for guest domains
-  xen/riscv: create APLIC DT node for guest domains
-  xen/riscv: implement IRQ routing for device passthrough
-  xen/riscv: implement init_intc_phandle()
-  xen/riscv: initialize RCU, scheduler, and system domains in
-    start_xen()
-  xen/riscv: provide init_vuart()
-  xen/riscv: add initial dom0less infrastructure support
-
- xen/arch/arm/Kconfig                      |   1 +
- xen/arch/arm/include/asm/setup.h          |   2 -
- xen/arch/arm/setup.c                      |   2 -
- xen/arch/ppc/include/asm/setup.h          |   2 -
- xen/arch/riscv/Kconfig                    |   2 +
- xen/arch/riscv/Makefile                   |   4 +
- xen/arch/riscv/aia.c                      |  23 ++
- xen/arch/riscv/aplic-priv.h               |  13 ++
- xen/arch/riscv/aplic.c                    |  14 +-
- xen/arch/riscv/cpufeature.c               | 200 +++++++++++++++--
- xen/arch/riscv/device.c                   | 100 +++++++++
- xen/arch/riscv/dom0less-build.c           |  40 ++++
- xen/arch/riscv/domain-build.c             | 192 ++++++++++++++++
- xen/arch/riscv/domain.c                   |  20 +-
- xen/arch/riscv/imsic.c                    | 178 ++++++++++++++-
- xen/arch/riscv/include/asm/aia.h          |  10 +
- xen/arch/riscv/include/asm/aplic.h        |  15 ++
- xen/arch/riscv/include/asm/cpufeature.h   |   5 +
- xen/arch/riscv/include/asm/domain.h       |   7 +
- xen/arch/riscv/include/asm/guest-layout.h |  24 ++
- xen/arch/riscv/include/asm/imsic.h        |  25 +++
- xen/arch/riscv/include/asm/intc.h         |  44 +++-
- xen/arch/riscv/include/asm/irq.h          |   5 +
- xen/arch/riscv/include/asm/setup.h        |   2 -
- xen/arch/riscv/include/asm/vaplic.h       |  34 +++
- xen/arch/riscv/intc.c                     | 117 +++++++++-
- xen/arch/riscv/irq.c                      | 255 ++++++++++++++++++++++
- xen/arch/riscv/setup.c                    |  12 +
- xen/arch/riscv/vaplic.c                   | 138 ++++++++++++
- xen/arch/x86/Kconfig                      |   1 +
- xen/arch/x86/include/asm/setup.h          |   2 -
- xen/common/Kconfig                        |   3 +
- xen/common/Makefile                       |   2 +-
- xen/common/domain.c                       |   6 +-
- xen/common/domctl.c                       |   4 +
- xen/common/domid.c                        |   5 +
- xen/common/event_channel.c                |  55 ++++-
- xen/common/event_channel.h                |   6 +
- xen/common/event_fifo.c                   |  18 +-
- xen/common/time.c                         |   2 +
- xen/drivers/char/console.c                |   1 +
- xen/include/xen/dom0less-build.h          |   7 +
- xen/include/xen/event.h                   |   2 +-
- xen/include/xen/sched.h                   |   2 +
- xen/include/xen/shared.h                  |   6 +
- xen/include/xen/time.h                    |   5 +
- 46 files changed, 1552 insertions(+), 61 deletions(-)
- create mode 100644 xen/arch/riscv/aia.c
- create mode 100644 xen/arch/riscv/device.c
- create mode 100644 xen/arch/riscv/domain-build.c
- create mode 100644 xen/arch/riscv/include/asm/aia.h
- create mode 100644 xen/arch/riscv/include/asm/vaplic.h
- create mode 100644 xen/arch/riscv/vaplic.c
-
+diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
+index 1e285a68fc4c..ad0a220edac2 100644
+--- a/xen/arch/riscv/imsic.c
++++ b/xen/arch/riscv/imsic.c
+@@ -13,8 +13,12 @@
+ #include <xen/const.h>
+ #include <xen/cpumask.h>
+ #include <xen/device_tree.h>
++#include <xen/domain.h>
+ #include <xen/errno.h>
++#include <xen/fdt-domain-build.h>
++#include <xen/fdt-kernel.h>
+ #include <xen/init.h>
++#include <xen/libfdt/libfdt.h>
+ #include <xen/macros.h>
+ #include <xen/sched.h>
+ #include <xen/smp.h>
+@@ -34,6 +38,21 @@ static struct imsic_config imsic_cfg = {
+     .lock = SPIN_LOCK_UNLOCKED,
+ };
+ 
++/*
++ * Number of MSIs available to a guest. Determined by the host interrupt
++ * controller, so it is identical for every domain -- hence a single global
++ * rather than a per-domain value.
++ */
++static unsigned int __ro_after_init guest_num_msis;
++
++#define GUEST_IMSIC_COMPATIBLE "riscv,imsics"
++
++/*
++ * Value is inspired by what QEMU is using for riscv,num-ids property for IMSIC
++ * node.
++ */
++#define GUEST_IMSIC_MAX_MSIS 255U
++
+ #define IMSIC_DISABLE_EIDELIVERY    0
+ #define IMSIC_ENABLE_EIDELIVERY     1
+ #define IMSIC_DISABLE_EITHRESHOLD   1
+@@ -182,7 +201,7 @@ static int __init imsic_get_parent_hartid(const struct dt_device_node *node,
+  * or IRQ_M_EXT if the IMSIC node corresponds to a machine-mode IMSIC,
+  * which should be ignored by the hypervisor.
+  */
+-static int imsic_parse_node(const struct dt_device_node *node,
++static int __init imsic_parse_node(const struct dt_device_node *node,
+                             unsigned int *nr_parent_irqs,
+                             unsigned int *nr_mmios)
+ {
+@@ -285,6 +304,11 @@ static int imsic_parse_node(const struct dt_device_node *node,
+         return -ENOENT;
+     }
+ 
++    if ( dt_property_read_u32(node, "riscv,num-guest-ids", &tmp) )
++        guest_num_msis = min(GUEST_IMSIC_MAX_MSIS, tmp);
++    else
++        guest_num_msis = GUEST_IMSIC_MAX_MSIS;
++
+     if ( (imsic_cfg.nr_ids < IMSIC_MIN_ID) ||
+          (imsic_cfg.nr_ids > IMSIC_MAX_ID) )
+     {
+@@ -522,3 +546,120 @@ int __init imsic_init(const struct dt_device_node *node)
+ 
+     return rc;
+ }
++
++static int __init guest_imsic_make_reg_property(struct domain *d, void *fdt)
++{
++    paddr_t size = IMSIC_MMIO_PAGE_SZ * d->max_vcpus;
++    __be32 regs[4] = {
++        cpu_to_be32(GUEST_IMSIC_S_BASE >> 32),
++        cpu_to_be32(GUEST_IMSIC_S_BASE),
++        cpu_to_be32(size >> 32),
++        cpu_to_be32(size),
++    };
++
++    return fdt_property(fdt, "reg", regs, sizeof(regs));
++}
++
++static int __init guest_imsic_set_interrupt_extended_prop(struct domain *d,
++                                                          void *fdt)
++{
++    unsigned int cpu, pos = 0;
++    __be32 *irq_ext;
++    int res;
++
++    irq_ext = xvzalloc_array(__be32, d->max_vcpus * 2);
++    if ( !irq_ext )
++        return -ENOMEM;
++
++    for ( cpu = 0; cpu < d->max_vcpus; cpu++ )
++    {
++        char buf[64];
++        uint32_t phandle;
++
++        snprintf(buf, ARRAY_SIZE(buf), "/cpus/cpu@%u/interrupt-controller", cpu);
++        phandle = fdt_get_phandle(fdt, fdt_path_offset(fdt, buf));
++
++        if ( !phandle )
++        {
++            res = -ENODEV;
++            goto out;
++        }
++
++        irq_ext[pos++] = cpu_to_be32(phandle);
++        irq_ext[pos++] = cpu_to_be32(IRQ_S_EXT);
++    }
++
++    res = fdt_property(fdt, "interrupts-extended", irq_ext,
++                       d->max_vcpus * 2 * sizeof(*irq_ext));
++
++ out:
++    xvfree(irq_ext);
++
++    return res;
++}
++
++int __init vimsic_make_domu_dt_node(struct kernel_info *kinfo,
++                                    unsigned int *phandle)
++{
++    int res;
++    void *fdt = kinfo->fdt;
++    char vimsic_name[32];
++    unsigned int vimsic_phandle;
++
++    res = snprintf(vimsic_name, ARRAY_SIZE(vimsic_name), "/soc/imsic@%lx",
++                   GUEST_IMSIC_S_BASE);
++    if ( res >= ARRAY_SIZE(vimsic_name) )
++    {
++        dprintk(XENLOG_DEBUG, "vimsic name is truncated\n");
++        return -ENOBUFS;
++    }
++
++    res = fdt_begin_node(fdt, vimsic_name);
++    if ( res )
++        return res;
++
++    res = fdt_property_string(fdt, "compatible", GUEST_IMSIC_COMPATIBLE);
++    if ( res )
++        return res;
++
++    res = guest_imsic_make_reg_property(kinfo->bd.d, fdt);
++    if ( res )
++        return res;
++
++    res = guest_imsic_set_interrupt_extended_prop(kinfo->bd.d, fdt);
++    if ( res )
++        return res;
++
++    res = fdt_property_u32(fdt, "riscv,num-ids", guest_num_msis);
++    if ( res )
++        return res;
++
++    res = fdt_property(fdt, "msi-controller", NULL, 0);
++    if ( res )
++        return res;
++
++    res = fdt_property_u32(fdt, "#msi-cells", 0);
++    if ( res )
++        return res;
++
++    res = fdt_property(fdt, "interrupt-controller", NULL, 0);
++    if ( res )
++        return res;
++
++    res = fdt_property_u32(fdt, "#interrupt-cells", 0);
++    if ( res )
++        return res;
++
++    vimsic_phandle = alloc_phandle(kinfo);
++    if ( !vimsic_phandle )
++        return -EOVERFLOW;
++
++    res = fdt_property_cell(fdt, "phandle", vimsic_phandle);
++    if ( res )
++        return res;
++
++    if ( phandle )
++        *phandle = vimsic_phandle;
++
++    return fdt_end_node(fdt);
++}
+diff --git a/xen/arch/riscv/include/asm/guest-layout.h b/xen/arch/riscv/include/asm/guest-layout.h
+index 68d95a09394c..5e566450bdfa 100644
+--- a/xen/arch/riscv/include/asm/guest-layout.h
++++ b/xen/arch/riscv/include/asm/guest-layout.h
+@@ -3,6 +3,12 @@
+ 
+ #include <public/xen.h>
+ 
++/*
++ * Base address of the guest's supervisor-mode IMSIC. The value is the address
++ * typically used for IMSIC by QEMU.
++ */
++#define GUEST_IMSIC_S_BASE _UL(0x28000000)
++
+ #define GUEST_RAM_BANKS   2
+ 
+ /*
+diff --git a/xen/arch/riscv/include/asm/imsic.h b/xen/arch/riscv/include/asm/imsic.h
+index 5ee954bbf3ef..2425430ed116 100644
+--- a/xen/arch/riscv/include/asm/imsic.h
++++ b/xen/arch/riscv/include/asm/imsic.h
+@@ -78,6 +78,7 @@ struct vimsic_state {
+ };
+ 
+ struct dt_device_node;
++struct kernel_info;
+ struct vcpu;
+ 
+ int imsic_init(const struct dt_device_node *node);
+@@ -93,4 +94,6 @@ int vcpu_imsic_init(struct vcpu *v);
+ void vcpu_imsic_deinit(struct vcpu *v);
+ unsigned int vcpu_guest_file_id(const struct vcpu *v);
+ 
++int vimsic_make_domu_dt_node(struct kernel_info *kinfo, unsigned int *phandle);
++
+ #endif /* ASM_RISCV_IMSIC_H */
 -- 
 2.55.0
 
