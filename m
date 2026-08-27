@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2429AC61DB9
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2026 16:12:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1401254.1637015 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54C5CC61DB9
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2026 16:54:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1401293.1637026 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzciH-0008QN-00; Thu, 27 Aug 2026 16:12:25 +0000
+	id 1wzdM7-0001FX-Vz; Thu, 27 Aug 2026 16:53:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1401254.1637015; Thu, 27 Aug 2026 16:12:24 +0000
+Received: by outflank-mailman (output) from mailman id 1401293.1637026; Thu, 27 Aug 2026 16:53:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzciG-0008QG-Tf; Thu, 27 Aug 2026 16:12:24 +0000
-Received: by outflank-mailman (input) for mailman id 1401254;
- Thu, 27 Aug 2026 16:12:22 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wzciE-0008QA-R2
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 16:12:22 +0000
+	id 1wzdM7-0001FQ-SW; Thu, 27 Aug 2026 16:53:35 +0000
+Received: by outflank-mailman (input) for mailman id 1401293;
+ Thu, 27 Aug 2026 16:53:35 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wzdM6-0001FK-WC
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 16:53:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzciD-00FoiI-Kl
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 18:12:21 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wzdM6-003agK-9j
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 18:53:34 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a9061da-8faa-0a2a0a5109dd-0a2a4508e412-14
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 18:12:21 +0200
-Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a906b70-bab6-0a2a0a5309dd-0a2a4502a972-28
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 18:53:34 +0200
+Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a9061e5-f659-0a2a45080019-d155dd2ea8c2-3
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 18:12:21 +0200
-Received: by mail-wr1-f46.google.com with SMTP id
- ffacd0b85a97d-47db714766aso894385f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 09:12:21 -0700 (PDT)
+ id 6a906b8e-6ca4-0a2a45020019-d155802ea52a-3
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 18:53:34 +0200
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-495437bb891so10097475e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 09:53:34 -0700 (PDT)
 Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
  [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482e27a9f0esm10798172f8f.10.2026.08.27.09.12.19
+ 5b1f17b1804b1-49b91c57943sm1813135e9.2.2026.08.27.09.53.32
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Aug 2026 09:12:20 -0700 (PDT)
+ Thu, 27 Aug 2026 09:53:33 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,184 +54,155 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787847141; x=1788451941; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1787849614; x=1788454414; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=mh8+DjiPJ8UjXmQzaIp8K5Yjet64NmMupumjqZqHfow=;
-        b=Ofr0W7KMgetaMvohdj5fqj9ci9x3YYleBg0RGTW1ITsJkOv6mZrXCxBgJQifovWlci
-         CnzSKE1FBCHDvv6HT8oU0pQAIh+aw1zJnmdNFpZrXuaE50+BsCb452wDSQIvvC/HAJhM
-         NVBxCP/ZGkIP6sm4q7LmVHoaueqd2eG3ygc6ruijPZKI38YTu6J2xu2o1BzdwHrL1Gqa
-         PAlkUO1vU6PRV1dtSQdOKIBwRrVui+/nxr2IeR8MhMxGF90Ei4wmSEgsbp3Tvz9hZRL/
-         d+F3wBYpfKKnRbV7tsOSiL+zN9uR/CbFybd8AW9DWxvmC6c6g1qJjoH0+zwk4WkF8Vx0
-         0Vvg==
+        bh=uuqSeC9ghPFHhz7Q9l65GkJHNKdcETa7fStrF9vwBX0=;
+        b=ZVetvZP5cvpMnbFGx6vMRbBnGYQy36wZEVsKDa4azXO6goTdDLyomb15z7qIOECGgN
+         5a3gtcxBUiHeQlCLRxyYWAcLDEq7MAQ/B2wVagFcSiRmg07hO+f38LxWV3NEEqw7v25G
+         1qE6Ipm6Vl+KwndGuQS3MLZVYECwFvY35ecYjM4PfS7dFJ0CP8o+hFvEwSZlp2XbX5bi
+         gxux8UoNHqdSKGSHW/M9MOQj4H1TUfkmwfn2FeViltRd7j5VTc/djnC5JgOgT9zOkTQ+
+         0p5czkk4Q3zFIYwUX3MZ54wXcRg86nfAw6NMSY2co4ne5QnYW0RJh7wg5jlOcUErf1ZW
+         /iHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787847141; x=1788451941;
+        d=1e100.net; s=20251104; t=1787849614; x=1788454414;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=mh8+DjiPJ8UjXmQzaIp8K5Yjet64NmMupumjqZqHfow=;
-        b=MQclOgosuIQoBpV83AvWpKz2KDuVLT1J9b+0MdPy5xbzzmYG+tY8z634BGlAQ2pVsL
-         7RayMoP73pde97qyvUGHzH6f0VrzPnaBqPI7r6KoO3J+w1JawNn22z60p6ldFst71bq7
-         d0joofeUXqHWm7tR08JnUclNQ02ZNzGiYk1kZR7wfZNSnCZSUzVn0Xdl3HlJ1U82lCtd
-         S6/yGlhCjSLtM4GOhJifZqd0aPKtbPAUGr/v8oCr6brLpwv02nReSZ6haEJpx+JbcOFR
-         7MwL4QSjUg0PQa97CTT1qhuTv+2PdRUeGfaP34TWusTZ3fBuVF1hhziGZw6EHuPc92fv
-         k+NA==
-X-Forwarded-Encrypted: i=1; AHgh+RrYvCGPgG71p7pLe2GxUwb5wYMWL6zW3wA3fmwvBy8M3tl/JSyoEjHTYwERDnjNoTEHzVbHTQO6ROI=@lists.xenproject.org
-X-Gm-Message-State: AFuF++n/PBGImbmJjt9ITmmGRMzXIwUj65wIDovWwhqyHJSvcZB5PpiF
-	A2DUCQw4/pGBrFY7ziLW41DzeQBWHx539TPGDEfqgN5yYyBNm4zdA56y
-X-Gm-Gg: AR+sD10Z4XZIB1sMn9Vs/OHA4RApdJS89Sfj39yAQ/fV1DiWqaR+ztBEzdunMqn2N8u
-	VYUHHjC5uQrV/ItL0ubCU8tBBion9e0DWeUdOuQQbz9l3xQqos/xQ09GugOS+z0PnZlTnWCNe1t
-	8xxoGsFFSEKexFYy/nuSgAd2iTodGXQMrcpBFbtk9l67MycXCPx8eTGYAyweevbzUlHSNqJgunf
-	Tysx45hv4bcrIt6+OUikk4JYPYc17huhnGX9UdNLgvJ9d/wx7dYXgRB1/5Xz+THAYLv60F7fEPy
-	V3ytupoaP1TmDURdVa0BOW2srknJSF5UY7g6+bQ+MwN9Cy5b6nwUVQunIvfvlh7AEiqg6DQGigP
-	mEWs9GEqC/Zl1ld8SNBO5dyDqt62FhKomcTtXWF79P1IedL06mJEvN1kta404Bhveh85ghPGdKo
-	yzY/+lTOyihRyoYk0oyGjD1fJtB9jKU3wTvZTUYZMiqVNtMFnFSn01s81HL3TG+3DcqWmXtao7k
-	CYAgOYFdSI1zzq8aizAeyi4b9JAii+/kFtB/ovQ5Q==
-X-Received: by 2002:a05:6000:4903:b0:47f:9158:5924 with SMTP id ffacd0b85a97d-482f75d549emr286783f8f.9.1787847140675;
-        Thu, 27 Aug 2026 09:12:20 -0700 (PDT)
-Message-ID: <d4169b03-46aa-4bf3-881c-65ea8d970c27@gmail.com>
-Date: Thu, 27 Aug 2026 18:12:19 +0200
+        bh=uuqSeC9ghPFHhz7Q9l65GkJHNKdcETa7fStrF9vwBX0=;
+        b=CNBHZD4exccn9EAAmMpkZw+wphZ/q5T7N3uvFrvw5/jZMQ5in6CzIl/c58SdXDxrkj
+         nY37Wj1Xntpm0gXuiIMPZsVAPII+m+/f6zr6fEVa45GL9OXg/Baz8GjauJPYumFJksfy
+         vBrKZs8gu5LYmQTgEYdS0c8uTPGvw2H44UPC8d+IWmoBl97kD3+ydXEecJ7z90vHxYxu
+         2mvILmcXTxKadixvFsM/hrm4/XCAh6s3lFoEIFr3Rn+e66wc4vu2ZCejDPrzhe+mEYEx
+         7YBAa/NZHlTJGgsQFexPejYOVxbAs1WRSIPYawoffVFdFAiTNEmfEXQv8BmQxjLrDnt1
+         6Kqw==
+X-Forwarded-Encrypted: i=1; AHgh+Rpn7EkKrWu7+YtERM2Gk+tuRIRPNp+SW/5VA+/f/PifXVuj9KaA/hcGiAo2R1HGz56p6X+6dKGl+kM=@lists.xenproject.org
+X-Gm-Message-State: AFuF++koHtL5p5w5fr4l6uxeT20GXtuAjv7Mu1ZUCHbRGpr+kFdBQCC5
+	D3QGIijgsgAbSuV6r19NKnikx7e4VmQC8JEYj5qJcX3ONTsRNSN91C9O
+X-Gm-Gg: AR+sD10x/v5vT8fSWLMXkYswNbUCjz6et94bRxcVigJF2p4MlyekqX5Yfq1GJHzqBaK
+	MqbSEcbyosb83Dmc6OS/gON31tqCNh6ium6S86WYd/3zp8eqHYrNXbRDV4WM54nO+ycLwUMnX5o
+	OZdlg9X6k3Z2QoKPVUVS/NyNsV7C4fy6s7ET0kO8ehXVazB7Z2gJmVtHf0FfjMJpoTdfO4lXTFr
+	1dSI7Y0oSYffrJ19cgqapI1ebVX+2MkWzysv7qKuv+uDWlu44IwWzp6hpeAHKwHgJ2mp8AueTY4
+	XU1aAw5+PxqPMZHSIFliIuPdmjWDRMACQf9jspLWcrptgP7n5i5RloNochb5Rt2k6M713W7zEhe
+	RD4u3+ckWVEKPxdysTyEsWafYYcEtgwbPp6WdzdVuFs0ctpdSPw0RObcce9KHvIkMZIv8+rpDzR
+	/xYAKRU++JP8V2FbvEhWeuOJxX49S7izvXZqfRDVbuCMF0Ei2d3gUJDmBTobVG8bbeI0AW4eEHY
+	NbbIYWqlMwYT6KLEW8LuvpHZc4rbbfoFzVpd9aYRg==
+X-Received: by 2002:a05:600c:1e24:b0:499:5f80:83ac with SMTP id 5b1f17b1804b1-49b91a6d41emr8112645e9.7.1787849613616;
+        Thu, 27 Aug 2026 09:53:33 -0700 (PDT)
+Message-ID: <9e4778fa-3164-49bc-a921-ce6b251b5db5@gmail.com>
+Date: Thu, 27 Aug 2026 18:53:32 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/7] RISC-V: split xen-syms linking rule
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Alistair Francis <alistair.francis@wdc.com>,
+Subject: Re: [PATCH 5/5] xen/riscv: add SFENCE.VMA after enabling paging
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ xen-devel@lists.xenproject.org
+Cc: zhangzheng@iscas.ac.cn, Alistair Francis <alistair.francis@wdc.com>,
  Connor Davis <connojdavis@gmail.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <9a78fdea-08ba-4e04-bfa1-ba09730a300b@suse.com>
- <6f4b26ce-2797-4c17-bfdf-8effd2026a6a@suse.com>
- <f0510fd7-32fc-4fbd-834e-68bba14150b9@gmail.com>
- <15abd61a-045f-47d1-94fb-b5febf28711c@suse.com>
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <1787844438.8631fc262581453bbf619ec5b2062170.1a043d52a06000c4f3@vates.tech>
+ <1787844810.8631fc262581453bbf619ec5b2062170.1a043dad5be000c4f3@vates.tech>
 Content-Language: en-US
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <15abd61a-045f-47d1-94fb-b5febf28711c@suse.com>
+In-Reply-To: <1787844810.8631fc262581453bbf619ec5b2062170.1a043dad5be000c4f3@vates.tech>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1787847141-D755C87B-FBFB5149/10/73395122804
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-720697/1787849614-670B02AC-9605C51D/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 5036
+X-purgate-size: 3262
 
 
 
-On 8/27/26 6:01 PM, Jan Beulich wrote:
-> On 27.08.2026 17:56, Oleksii Kurochko wrote:
->> On 8/26/26 2:01 PM, Jan Beulich wrote:
->>> Doing so, besides (hopefully) adding clarity (not the least by way of
->>> [re-]using pattern rules where possible), also avoids explicit recursive
->>> $(MAKE) invocations.
->>>
->>> By re-using the generic rules introduced when the respective x86 rule was
->>> split,
->>> - the .map file now isn't created after the final binary anymore,
->>> - --strip-debug is passed to $(LD) during early linking passes (for
->>>     consistency the option is also explicitly added to the optional linking
->>>     pass rule),
->>> - CONFIG_{SUPPRESS_DUPLICATE_SYMBOL_WARNINGS,ENFORCE_UNIQUE_SYMBOLS} are
->>>     now properly respected.
->>> Orphan section checking, otoh, is getting suppressed for now, until the
->>> about a dozen warnings which would result have been taken care of.
->>>
->>> While the 4th linking step continues to be avoided when possible, a
->>> redundant invocation of $(NM) and tools/symbols (plus the assembling of
->>> the resulting .S file) is hopefully deemed acceptable.
->>>
->>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->>>
->>> --- a/xen/arch/riscv/Makefile
->>> +++ b/xen/arch/riscv/Makefile
->>> @@ -31,40 +31,12 @@ obj-y += vtimer.o
->>>    $(TARGET): $(TARGET)-syms
->>>    	$(OBJCOPY) -O binary -S $< $@
->>>    
->>> -$(TARGET)-syms: $(objtree)/prelink.o $(obj)/xen.lds
->>> -	$(objtree)/tools/symbols $(all_symbols) --empty > $(dot-target).0.S
->>> -	$(MAKE) $(build)=$(@D) $(dot-target).0.o
->>> -	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $< $(build_id_linker) \
->>> -	      $(dot-target).0.o -o $(dot-target).0
->>> -	$(NM) -pa --format=sysv $(dot-target).0 \
->>> -		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
->>> -		> $(dot-target).1.S
->>> -	$(MAKE) $(build)=$(@D) $(dot-target).1.o
->>> -	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $< $(build_id_linker) \
->>> -	    $(dot-target).1.o -o $(dot-target).1
->>> -	$(NM) -pa --format=sysv $(dot-target).1 \
->>> -		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
->>> -		> $(dot-target).2.S
->>> -	$(MAKE) $(build)=$(@D) $(dot-target).2.o
->>> -	if ! { $(call compare-symbol-tables, $(dot-target).1.o, $(dot-target).2.o) >/dev/null; }; \
->>> -	then \
->>> -		set -e; \
->>> -		$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $< $(build_id_linker) \
->>> -		    $(dot-target).2.o -o $(dot-target).2; \
->>> -		$(NM) -pa --format=sysv $(dot-target).2 \
->>> -			| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
->>> -			> $(dot-target).3.S; \
->>> -		$(MAKE) $(build)=$(@D) $(dot-target).3.o; \
->>> -		$(call compare-symbol-tables, $(dot-target).2.o, $(dot-target).3.o); \
->>> -	else \
->>> -		ln -sf $(dot-target).2.o $(dot-target).3.o; \
->>> -	fi
->>> -	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $< $(build_id_linker) \
->>> -	    $(dot-target).3.o -o $@
->>> -	$(NM) -pa --format=sysv $@ \
->>> -		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
->>> -		> $@.map
->>> -	rm -f $(dot-target).[0-9]* $(@D)/..$(@F).[0-9]*
->>> +LAST_LINKING_PASS := 3
->>> +
->>> +include scripts/Makefile.link
->>> +
->>> +# Suppress orphan section checking for the time being.
->>> +orphan-handling-y :=
->>
->> This works, but I think it's worth reconsidering the shape of it.
->>
->> It works only by virtue of deferred expansion: $(orphan-handling-y) is
->> referenced solely inside the recipe of the final-pass rule in
->> Makefile.link, so the value that matters is the one in effect when that
->> recipe is expanded, not when the rule was defined. Nothing states that
->> requirement, and nothing enforces it.
->>
->> What makes me uneasy is that the ordering is not merely undocumented,
->> it's inverted with respect to the obvious reading. Makefile.link has
->>
->>     orphan-handling-$(call ld-option,--orphan-handling=warn) :=
->> --orphan-handling=warn
->>
->> i.e. an unconditional := to orphan-handling-y whenever the linker
->> supports the option. So an arch that sets orphan-handling-y *before*
->> the include has its setting silently discarded and ends up with orphan
->> checking enabled after all: no warning, no error, just a dozen new
->> linker diagnostics appearing at some later point. And "before the
->> include" is exactly where one would naturally put it: right next to
->> LAST_LINKING_PASS, which is the one knob the arch Makefile does set up
->> front.
->>
->> I am not insisting on reworking but probably a small comment (in the
->> commit mesage at least?) somewhere about that "+orphan-handling-y :="
->> should go after include will be useful.
+On 8/27/26 5:33 PM, Baptiste Le Duc wrote:
+> turn_on_mmu() writes satp to switch on Sv39 paging but never fences
+> afterwards.
 > 
-> I can add a comment (albeit the ordering looks very obvious to me, and
-> not counterintuitive at all), but the better thing would be for all
-> arch-es to quickly deal with getting rid of this override again: No
-> need for an override, no need for a comment.
+> Xen never allocates a non-zero ASID, so per the Privileged spec, sec.
+> 12.2.1 "Supervisor Memory-Management Fence Instruction":
+> 
+>    "If the implementation does not provide ASIDs, or software chooses
+>    to always use ASID 0, then after every satp write, software should
+>    execute SFENCE.VMA with rs1=x0."
+> 
+> The spec text around this rule hedges with "may be necessary", but
+> RISC-V spec co-author Andrew Waterman confirmed on the ISA manual
+> issue tracker that the fence after a satp write is not optional in
+> this case: "The SFENCE after the SATP write is definitely necessary
+> ... In general, you need to SFENCE after you've recycled an ASID.
+> Since we don't use ASIDs in the Linux kernel yet, every context
+> switch is effectively an ASID reuse, hence the full TLB flush." [1]
+> The same reasoning applies to Xen: with ASID always 0, this satp
+> write is indistinguishable from an ASID reuse to the hart, so the
+> fence is required for correctness.
 
-Agree, then no need for the comment:
+But at the moment of execution of turn_on_mmu() we don't use any ASID, 
+do we? It was used in check_pgtbl_mode_support() but at the end it is done:
 
-Reviewed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+     csr_write(CSR_SATP, 0);
+
+     sfence_vma();
+
+So basically Bare mode + flush all TLBs presented before and then up to
+
+...
+
+> 
+> Add the missing SFENCE.VMA to order those page-table stores before
+> the hart's first translation under the new mapping.
+> 
+> [1] https://github.com/riscv/riscv-isa-manual/issues/226
+> 
+> Fixes: f5035d480f7a ("xen: add files needed for minimal riscv build")
+> Assisted-by: Claude:claude-opus-5
+> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+> ---
+>   xen/arch/riscv/riscv64/head.S | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/xen/arch/riscv/riscv64/head.S b/xen/arch/riscv/riscv64/head.S
+> index 9c40512e61..7f6edc972f 100644
+> --- a/xen/arch/riscv/riscv64/head.S
+> +++ b/xen/arch/riscv/riscv64/head.S
+> @@ -98,6 +98,7 @@ FUNC(turn_on_mmu)
+>           srli    t1, t1, PAGE_SHIFT
+>           or      t1, t1, t0
+>           csrw    CSR_SATP, t1
+
+... ASID isn't used as we are in Bare mode.
+
+What am I missing?
+
+> +        sfence.vma
+
+The one thing which possibly matters here, and could explain why 
+sfence.vma is needed, is:
+```
+Implementations with virtual memory are permitted to perform address 
+translations speculatively and earlier than required by an explicit 
+memory access, and are permitted to cache them in address translation 
+cache structures—including possibly caching the identity mappings from 
+effective address to physical address used in Bare translation modes and 
+M-mode.
+```
+
+So the TLB could potentially be populated with identity mappings, and I 
+agree that it would be better to flush those.
+
+I’m not entirely convinced, though, that the reason here is the ASID 
+itself. Rather, it seems that we want to flush because of potentially 
+cached speculative identity mappings.
+
+If this reasoning looks correct to you, could we update the commit 
+message to reflect this rationale for why sfence.vma is needed here?
+
+Thanks.
 
 ~ Oleksii
-
-
-
-> 
-> Jan
 
 
