@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF9CEC61DC4
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2026 15:22:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1401009.1636810 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D809C61DB9
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2026 15:22:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1401020.1636831 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzbwA-00006p-Qc; Thu, 27 Aug 2026 15:22:42 +0000
+	id 1wzbwG-0001Kk-73; Thu, 27 Aug 2026 15:22:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1401009.1636810; Thu, 27 Aug 2026 15:22:42 +0000
+Received: by outflank-mailman (output) from mailman id 1401020.1636831; Thu, 27 Aug 2026 15:22:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzbw9-0008US-NV; Thu, 27 Aug 2026 15:22:41 +0000
-Received: by outflank-mailman (input) for mailman id 1401009;
- Thu, 27 Aug 2026 15:22:32 +0000
+	id 1wzbwF-0001EF-0S; Thu, 27 Aug 2026 15:22:47 +0000
+Received: by outflank-mailman (input) for mailman id 1401020;
+ Thu, 27 Aug 2026 15:22:35 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wzbvz-0006bU-Pi
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 15:22:31 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wzbw2-00079A-1v
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 15:22:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzbvz-009l5h-32
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 17:22:31 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wzbw1-009l31-C2
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 17:22:33 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a905633-8faa-0a2a0a5109dd-0a2a450293fc-12
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:22:31 +0200
-Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a905628-2eae-0a2a0a5409dd-0a2a4503e5b2-22
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:22:33 +0200
+Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a905636-6ca4-0a2a45020019-d155802ef0da-3
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:22:31 +0200
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-4953e04ef16so22304785e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 08:22:31 -0700 (PDT)
+ id 6a905639-fae8-0a2a45030019-d155dd2dc5a1-3
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:22:33 +0200
+Received: by mail-wr1-f45.google.com with SMTP id
+ ffacd0b85a97d-47fe2d179e2so1401547f8f.1
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 08:22:33 -0700 (PDT)
 Received: from fedora (user-109-243-144-234.play-internet.pl.
  [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49b4b2d6b30sm57441155e9.14.2026.08.27.08.22.28
+ 5b1f17b1804b1-49b4b2d6b30sm57441155e9.14.2026.08.27.08.22.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Aug 2026 08:22:29 -0700 (PDT)
+ Thu, 27 Aug 2026 08:22:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,41 +54,41 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787844150; x=1788448950; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1787844153; x=1788448953; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=0//RHN5teb/aonJ8KehG52cwEFGdViT/ExIm4kCxGVg=;
-        b=m4GNtS/gG8McI8U0ba2BWBe1I2Kq90b6vaUDoTnpsGZ3ki+iagU4zgnzSDf5S8vyxy
-         zvBBtALT45Tw9bPlB38nrHXTToiqqpXECuitygSZCCJLDP1Bdu/2Jn8H4zIAFTp3EIQX
-         ru/yS2AZiu20hofSk1JEYeytZN/J9iECChXqLydSaVkpH6eLA0/Sx2aDs0+Ep0avVC6Y
-         +t/otXS69jYlFjUJs+AoIMJX2QL2tg1zsi1FcreVNugzRnMLJAiIvnEk+QF/UbttEc7W
-         0ebOSsi33j+an1nmV+qutl+HfMErGwKFcUvv4KSD0R941QPhgJksmhOFPF7OOa3BiKtG
-         YPdQ==
+        bh=PgOt6oP0YSRzyLwFjuW3JpsOMyWOpqs2dYdG8JVXlwE=;
+        b=V5DvxfCCtiu1+X6FWUFaCKwfUjwXqqRJklttb9sYXqNz5kMtIna/taIbYvdn3UeVih
+         BuR2U3WwhWdErKPCqnaIwmc/ULEHCEq9s4jChmgd5lhSfVKHHxq/dqv4Ira66kY9/ZlL
+         5CRa4Q9hIA/vv7yAn4E6cTzGclEyr95QYyc/pCi6v6ao42vGb2AbLpf+gBazdegds/b+
+         oPb8EfrDyzkUihECSi+nsJ0DwszIip/fUQwjiFjB5Vj30D6L2qRiMB6lnZZEUc1EQi5a
+         W8HVwejoNgoMMCiaAWPSzJRFWb730JGp0s6KJwiE3FImngFVHwk6+JGx8VyHZ7tP3a6A
+         dzPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787844150; x=1788448950;
+        d=1e100.net; s=20251104; t=1787844153; x=1788448953;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=0//RHN5teb/aonJ8KehG52cwEFGdViT/ExIm4kCxGVg=;
-        b=f+NMX+YHGnoa/iYsT2vWcZfn+6b0FvII0QdZ46/4FVc5ojcp8nHRFSaL4p1+P+Ym0i
-         F8ogLjY6JJIGVl0MLhVYA50lvFO0V/+RvDweduua8AaOEyEAxuOH8DP2NvDvcaYxg7C8
-         9FlrOKmVMcuQfEXLQJAkmzS6NQnLnjSeKMRFX6rYhnkUuYgCgKj6fHn/a+8vPT0oUn7H
-         gEsuhENV+xa4dGliDgXI8F74YJ9IlYHfz1aKyqbDhsJuFjMqMRSUTTEIOTRvcYT+CuYu
-         IGkR0rcx65sQufpekW2adzqGziF186lEC+Goz2B+inQpuvmgjYL2Y0y5f2u7aVXfPucH
-         So2g==
-X-Gm-Message-State: AFuF++k8OAT0QDUaupj04qsnGXFpGlH5ou/CQB/eX/9wvmuEmabFy6wE
-	INa7+aP2j9RYVq6txtgRgSnxN8gAkUbJ6ebcLCrMF9nECS0z1B2lTFyumLIGaw==
-X-Gm-Gg: AR+sD13Wa9dxTErHauqZDiFUC0/u1REB0jo89KylFP4c7Vji7A1oWXrceCYxr0YJrQn
-	edTueF3pB4fHQIaUmKN6ab6NC4EDSP/aiZ+y4LfdR9VpmtP+ADqytBDFF2Fi9s+Nn3RlmbWAWGM
-	jW5h9Gi99Wl3Q6+j7qroJh/JrWC0owmHnXlqoVn94kX7V4Tv4A8jwVbw8OHHiqlBUQ0D0skXZfG
-	T0EEvFy36Zi9sVP7n+AEUfOAEDUeKRTocbSB8sryQMYS+XzucsZreqfqlwhuwJiZiGOS8/DpOVn
-	igK2hOnmNof4QvRGOIWdmE0VWal3Pahk5Pk5I5b/R14968dQq05/d4HJYF95cmZASB/4aT+0tWv
-	XY36N7mabkBqUoxxOcwrCGUEh0VsRK4zcJtOOrls/cqgbNCQq3t1kUcBrkAR62/4lD9GfZ5RfT4
-	pWlbGep6dBv/vwCZchebZc2EVHzBIqJA7lQB+sUIWuH5+fSmcPVyGW1yFHFl06kDHldexaN3Sjb
-	PguJ1tbGajhVAg3aLUxtQhkE/k+BR+5
-X-Received: by 2002:a05:600c:468a:b0:499:726b:7375 with SMTP id 5b1f17b1804b1-499dc8272b1mr170929165e9.14.1787844150273;
-        Thu, 27 Aug 2026 08:22:30 -0700 (PDT)
+        bh=PgOt6oP0YSRzyLwFjuW3JpsOMyWOpqs2dYdG8JVXlwE=;
+        b=Fm0tM2Rj50BCq6xjKzW13+y0N29yiPiqErfrbrliYdVvj00/1xhTEhu9PrB+EgsQHC
+         5blgJq/BMwZ01uUPG4LN4mnLT9uR1qizCtLcw5SfX2IJPNaf1OIwmRl/A9/sxqHmru8r
+         /Ko8de0tB3Pox5Wx404vYc5x+RizbuDzLMfWYT7fFO/8j+tigGSRT8G+63dCdII290F6
+         Jn6+ynd1/+1q0HtQnGAqqCQl5MOl6bgEGWDDYjCqdLF5ipJmS4ajyM0DVM7YhDqZM8yY
+         nUwCZfrVTAGr8MsxaElu7UsqUexqUVSbNCFSM72Q2oPYUyhCLOQDkSUuJnqRxH3howHN
+         sOJg==
+X-Gm-Message-State: AFuF++k+ws6l9iRmDyZKrwedgaBegslydBTtZf6I9CVvhbibtGHRL6QD
+	7TIEotqdQTexMfHEZQOxD88FkyRMzqCxjPaCed4tx9Bm+WN0efnI1Xx6IJBjxw==
+X-Gm-Gg: AR+sD13PAWFpXHiRlBrbGFTkmH/afXbLTKTe2AXjuUjEPriEvGZhakSEOSd2mXqQV1S
+	AOxqwGIyaVY8S93qq3rqMj3YiXuNdQBErIQyGRDh9eOeaAfWOVIlWMqHF69NPbKDkOLLYelkfLJ
+	UTxdZg3eU665qFy+MhMz7EdW6rLsLHjUNoXTVzIfKTTIlmp3cVli4XJaDDCLLPXlkGAIFVX/dkl
+	04ohHQK05qZ3Ry7ykr8FoAXcqqYdCymOru5GNNN7obaShxdhITkemwCvucP4csBNLTASY/opcR5
+	IUobYA3qNmmpD3Tf7vCaHjKvis+XGADlCoK4SIDihtP+XORvk9YQa+GUP6Fpabg5do8axoTrD1k
+	xFCosj3/llUNEdZeBvIRX+gbdJD0ITQPkjZLL5gcnDb/+SI27WsV3yQCdnQVaMh6RjsdNn6QQke
+	opZ9fb02zBl4BcxHlG1FfPM42UyXoDi8dg5w8+HGcPmSeJRi+aEx9nnULLmmoC+o6tm/njjfmfT
+	f+PhU4yyCvULK9j4D8Mu9cDustsy9VJeGw+TDBqli4=
+X-Received: by 2002:a05:600c:4514:b0:499:8777:ccba with SMTP id 5b1f17b1804b1-499dc822557mr185139295e9.12.1787844152732;
+        Thu, 27 Aug 2026 08:22:32 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -104,219 +104,231 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 33/39] xen/riscv: dump old interrupt file to memory
-Date: Thu, 27 Aug 2026 17:21:17 +0200
-Message-ID: <efecffa9cd7c4bb6e9ed51b7fd084328fcd4611e.1787838835.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 35/39] xen/riscv: add basic VGEIN management for AIA guests
+Date: Thu, 27 Aug 2026 17:21:19 +0200
+Message-ID: <b84c2624e2f49e99a5f29439f4f01608eb1e5825.1787838835.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <cover.1787838835.git.oleksii.kurochko@gmail.com>
 References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1787844151-307C22AC-E86F7F90/10/73395122804
+X-purgate-ID: tlsNG-33051d/1787844153-74A894E9-9526A485/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 6857
+X-purgate-size: 6453
 
-At the old interrupt file, dump to memory all the eip and eie arrays).
-After this step is done, the old interrupt file is no longer in use so
-old intrrupt file VGEIN could be released.
+It was decided to add support for IMSIC from the start instead of having APLIC
+operate in direct delivery mode, as it requires a trap-and-emulation approach,
+which is not optimal from a performance standpoint.
 
-Restoring of old interrupt file state will be done in follow-up
-patch.
+AIA provides a hardware-accelerated mechanism for delivering external
+interrupts to domains via "guest interrupt files" located in IMSIC.
+A single physical hart can implement multiple such files (up to GEILEN),
+allowing several virtual harts to receive interrupts directly from hardware.
 
-There are cases where it is needed to specify on which cpu it is
-necessary to VGEIN should be released so update vgein_release() to
-deal with that.
+Introduce per-CPU tracking of guest interrupt file identifiers (VGEIN)
+for systems implementing AIA specification. Each CPU maintains
+a bitmap describing which guest interrupt files are currently in use.
 
-Keep BUG_ON("unimplemented") placeholder in imsic_migrate_vcpu() to guard
-against silent incorrect behaviour or unexpected panics in guest VMs until
-the function is fully implemented.
-
-vgein_release() is stub for now and will be introduced later.
+Implement helpers to initialize the bitmap based on the number of available
+guest interrupt files (GEILEN), assign a VGEIN to a vCPU, and release it
+when no longer needed.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
+Also in the next patch there is other context to understand the usage of
+spinlock introduced here.
+---
 Changes in v2:
- - New patch.
+ - make vgein_init() pCPU agnostic as it is working with CSR which could be
+   read only on local pCPU itself.
+ - Move introduction of vgein_ctrl->owners[] to separate patch.
+ - Add ASSERT() and re-init vgein->bmp with 0.
+ - Update the commit message (drop the last sentence as ->hstatus isn't
+   filled anymore in in vgein_*() functions).
+ - Introduce vgein_deinit().
 ---
 ---
- xen/arch/riscv/aia.c             |   5 ++
- xen/arch/riscv/imsic.c           | 104 +++++++++++++++++++++++++++++++
- xen/arch/riscv/include/asm/aia.h |   1 +
- 3 files changed, 110 insertions(+)
+ xen/arch/riscv/aia.c | 141 +++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 137 insertions(+), 4 deletions(-)
 
 diff --git a/xen/arch/riscv/aia.c b/xen/arch/riscv/aia.c
-index 75c82bcfa1b3..be3901ec0cfa 100644
+index be3901ec0cfa..1aca07c2f70f 100644
 --- a/xen/arch/riscv/aia.c
 +++ b/xen/arch/riscv/aia.c
-@@ -30,3 +30,8 @@ unsigned int vgein_assign(struct vcpu *v)
+@@ -1,13 +1,31 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
  
-     return 0;
- }
+-#include <xen/bug.h>
++#include <xen/bitops.h>
++#include <xen/cpu.h>
+ #include <xen/errno.h>
+ #include <xen/init.h>
+ #include <xen/sections.h>
+ #include <xen/sched.h>
++#include <xen/spinlock.h>
+ #include <xen/types.h>
+ 
++#include <asm/aia.h>
+ #include <asm/cpufeature.h>
++#include <asm/csr.h>
++#include <asm/current.h>
 +
-+void vgein_release(struct vcpu *v, unsigned int vgein_id, unsigned int cpu)
-+{
-+    BUG_ON("unimplemented\n");
-+}
-diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
-index 5e9f6995e443..3cba58e0c1b3 100644
---- a/xen/arch/riscv/imsic.c
-+++ b/xen/arch/riscv/imsic.c
-@@ -56,6 +56,24 @@ static unsigned int __ro_after_init guest_num_msis;
-  */
- #define GUEST_IMSIC_MAX_MSIS 255U
- 
++struct vgein_ctrl {
++    /* The least-significant bits are implemented first, apart from bit 0 */
++    unsigned long bmp;
++    spinlock_t lock;
++    unsigned int geilen;
++};
++
 +/*
-+ * The interrupt identities an IMSIC interrupt file provides are 0 (which is
-+ * never valid, but still occupies a bit) up to IMSIC_MAX_ID inclusive, so
-+ * IMSIC_MAX_ID + 1 bits have to be covered.
++ * VGEIN control structure for each physical CPU to track which VS (guest)
++ * interrupt file IDs are in use.
 + */
-+#define IMSIC_MAX_EIX DIV_ROUND_UP(IMSIC_MAX_ID + 1, BITS_PER_TYPE(uint64_t))
-+
-+struct imsic_mrif_eix {
-+    unsigned long eip[BITS_PER_TYPE(uint64_t) / BITS_PER_LONG];
-+    unsigned long eie[BITS_PER_TYPE(uint64_t) / BITS_PER_LONG];
-+};
-+
-+struct imsic_mrif {
-+    struct imsic_mrif_eix eix[IMSIC_MAX_EIX];
-+    unsigned long eithreshold;
-+    unsigned long eidelivery;
-+};
-+
- #define IMSIC_DISABLE_EIDELIVERY    0
- #define IMSIC_ENABLE_EIDELIVERY     1
- #define IMSIC_DISABLE_EITHRESHOLD   1
-@@ -85,6 +103,15 @@ do {                            \
-     csr_clear(CSR_SIREG, v);    \
- } while (0)
++static DEFINE_PER_CPU(struct vgein_ctrl, vgein);
  
-+#define imsic_vs_csr_swap(c, v)     \
-+({                                  \
-+    unsigned long r_;               \
-+                                    \
-+    csr_write(CSR_VSISELECT, (c));  \
-+    r_ = csr_swap(CSR_VSIREG, (v)); \
-+    r_;                             \
-+})
-+
- #define imsic_vs_csr_write(c, v)    \
- do {                                \
-     csr_write(CSR_VSISELECT, (c));  \
-@@ -130,6 +157,21 @@ do {                                \
-     imsic_switchcase_32(F, ireg + 0, ##__VA_ARGS__) \
-     imsic_switchcase_32(F, ireg + 32, ##__VA_ARGS__)
+ static bool __ro_after_init _aia_usable;
  
-+static unsigned long imsic_eix_swap(unsigned int ireg, unsigned long val)
+@@ -16,22 +34,137 @@ bool aia_usable(void)
+     return _aia_usable;
+ }
+ 
++/* HGEIE is a per-hart CSR, so this has to run on the CPU being initialized. */
++static int vgein_init(void)
 +{
-+    switch ( ireg )
-+    {
-+    imsic_switchcase_64(imsic_switchcase_ret, IMSIC_EIP0,
-+                        imsic_vs_csr_swap, val)
-+    imsic_switchcase_64(imsic_switchcase_ret, IMSIC_EIE0,
-+                        imsic_vs_csr_swap, val)
-+    default:
-+        ASSERT_UNREACHABLE();
-+    }
++    struct vgein_ctrl *vgein = &this_cpu(vgein);
++
++    spin_lock_init(&vgein->lock);
++
++    csr_write(CSR_HGEIE, ~0UL);
++    vgein->geilen = flsl(csr_read(CSR_HGEIE) >> 1);
++    csr_write(CSR_HGEIE, 0);
++
++    vgein->bmp = 0;
++
++    if ( !vgein->geilen )
++        return -EOPNOTSUPP;
 +
 +    return 0;
 +}
 +
- static void imsic_eix_write(unsigned int ireg, unsigned long val)
- {
-     switch ( ireg )
-@@ -577,6 +619,61 @@ static void cf_check imsic_vsfile_local_clear(void *data)
-     csr_write(CSR_VSISELECT, old_vsiselect);
- }
- 
-+static void cf_check imsic_vsfile_local_read_clear(void *data)
++static void vgein_deinit(void)
 +{
-+    unsigned int i;
-+    struct imsic_mrif_eix *eix;
-+    const struct imsic_vsfile_data *idata = data;
-+    struct imsic_mrif *mrif = idata->mrif;
-+    unsigned long new_hstatus, old_hstatus, old_vsiselect;
++    csr_write(CSR_HGEIE, 0);
++}
 +
-+    old_vsiselect = csr_read(CSR_VSISELECT);
-+    old_hstatus = csr_read(CSR_HSTATUS);
-+    new_hstatus = old_hstatus & ~HSTATUS_VGEIN;
-+    new_hstatus |= ((unsigned long)idata->hgei) << HSTATUS_VGEIN_SHIFT;
-+    csr_write(CSR_HSTATUS, new_hstatus);
++static int cf_check cpu_callback(struct notifier_block *nfb,
++                                 unsigned long action, void *hcpu)
++{
++    unsigned int cpu = (unsigned long)hcpu;
++    int rc = 0;
 +
-+    /*
-+     * There is no need to use atomic functions version to store
-+     * values in MRIF because imsic_vsfile_read_clear() is always called
-+     * with pointer to temporary MRIF on stack.
-+     */
-+
-+    mrif->eidelivery = imsic_vs_csr_swap(IMSIC_EIDELIVERY, 0);
-+    mrif->eithreshold = imsic_vs_csr_swap(IMSIC_EITHRESHOLD, 0);
-+    for ( i = 0; i < idata->nr_eix; i++ )
++    switch ( action )
 +    {
-+        eix = &mrif->eix[i];
-+        eix->eip[0] = imsic_eix_swap(IMSIC_EIP0 + i * 2, 0);
-+        eix->eie[0] = imsic_eix_swap(IMSIC_EIE0 + i * 2, 0);
-+#ifdef CONFIG_RISCV_32
-+        eix->eip[1] = imsic_eix_swap(IMSIC_EIP0 + i * 2 + 1, 0);
-+        eix->eie[1] = imsic_eix_swap(IMSIC_EIE0 + i * 2 + 1, 0);
-+#endif
++    case CPU_STARTING:
++        rc = vgein_init();
++        if ( rc )
++            printk(XENLOG_ERR "AIA: failed to init vgein for CPU%u: %d\n",
++                   cpu, rc);
++        break;
++
++    case CPU_DYING:
++        vgein_deinit();
++        break;
 +    }
 +
-+    csr_write(CSR_HSTATUS, old_hstatus);
-+    csr_write(CSR_VSISELECT, old_vsiselect);
++    return notifier_from_errno(rc);
 +}
 +
-+static void imsic_vsfile_read_clear(unsigned int vsfile_id,
-+                                    unsigned int vsfile_cpu,
-+                                    unsigned int nr_eix,
-+                                    struct imsic_mrif *mrif)
-+{
-+    struct imsic_vsfile_data idata = {
-+        .hgei = vsfile_id,
-+        .nr_eix = nr_eix,
-+        .mrif = mrif,
-+    };
++static struct notifier_block cpu_nfb = {
++    .notifier_call = cpu_callback,
++};
 +
-+    /* We can only read clear if we have a IMSIC VS-file */
-+    if ( vsfile_cpu == NR_CPUS || !vsfile_id )
+ void __init aia_init(void)
+ {
++    int rc;
++
+     if ( !riscv_isa_extension_available(NULL, RISCV_ISA_EXT_ssaia) )
++    {
++        dprintk(XENLOG_WARNING, "SSAIA isn't present in riscv,isa\n");
+         return;
++    }
++
++    if ( (rc = vgein_init()) )
++    {
++        dprintk(XENLOG_ERR, "vgein_init() failed: %d\n", rc);
++        return;
++    }
+ 
+     _aia_usable = true;
++
++    register_cpu_notifier(&cpu_nfb);
+ }
+ 
+ unsigned int vgein_assign(struct vcpu *v)
+ {
+-    BUG_ON("unimplemented\n");
++    unsigned int vgein_id;
++    struct vgein_ctrl *vgein = &per_cpu(vgein, v->processor);
++    unsigned long *bmp = &vgein->bmp;
++    unsigned long flags;
+ 
+-    return 0;
++    if ( !vgein->geilen )
++        return 0;
++
++    spin_lock_irqsave(&vgein->lock, flags);
++    /*
++     * The vgein_id shouldn't be zero, as it will indicate that no guest
++     * external interrupt source is selected for VS-level external interrupts
++     * according to RISC-V privileged spec:
++     *   Hypervisor Status Register (hstatus) in RISC-V privileged spec:
++     *
++     *   The VGEIN (Virtual Guest External Interrupt Number) field selects
++     *   a guest external interrupt source for VS-level external interrupts.
++     *   VGEIN is a WLRL field that must be able to hold values between zero
++     *   and the maximum guest external interrupt number (known as GEILEN),
++     *   inclusive.
++     *   When VGEIN=0, no guest external interrupt source is selected for
++     *   VS-level external interrupts.
++     *
++     * So start to search from bit number 1.
++     */
++    vgein_id = find_next_zero_bit(bmp, vgein->geilen + 1, 1);
++
++    if ( vgein_id > vgein->geilen )
++        vgein_id = 0;
++    else
++        __set_bit(vgein_id, bmp);
++
++    spin_unlock_irqrestore(&vgein->lock, flags);
++
++#ifdef VGEIN_DEBUG
++    gprintk(XENLOG_DEBUG, "%s: %pv: vgein_id(%u), xen_cpu%u_bmp=%#lx\n",
++            __func__, v, vgein_id, v->processor, *bmp);
++#endif
++
++    return vgein_id;
+ }
+ 
+ void vgein_release(struct vcpu *v, unsigned int vgein_id, unsigned int cpu)
+ {
+-    BUG_ON("unimplemented\n");
++    unsigned long flags;
++    struct vgein_ctrl *vgein = &per_cpu(vgein, cpu);
++
++    if ( !vgein_id )
 +        return;
 +
-+    imsic_call_on_cpu(vsfile_cpu, imsic_vsfile_local_read_clear, &idata);
-+}
++    spin_lock_irqsave(&vgein->lock, flags);
++    if ( !__test_and_clear_bit(vgein_id, &vgein->bmp) )
++        ASSERT_UNREACHABLE();
++    spin_unlock_irqrestore(&vgein->lock, flags);
 +
- void cf_check vcpu_imsic_deinit(struct vcpu *v)
- {
-     XVFREE(v->arch.vimsic_state);
-@@ -888,6 +985,7 @@ void imsic_migrate_vcpu(struct vcpu *v)
-     unsigned long flags;
-     unsigned int old_vsfile_id;
-     unsigned int old_vsfile_cpu;
-+    struct imsic_mrif tmrif = { };
- 
-     /*
-      * The scheduler can mark a freshly created vCPU's unit as migrated and
-@@ -973,5 +1071,11 @@ void imsic_migrate_vcpu(struct vcpu *v)
-      * to the new IMSIC VS-file.
-      */
- 
-+    /* Read and clear register state from old IMSIC VS-file */
-+    imsic_vsfile_read_clear(old_vsfile_id, old_vsfile_cpu, nr_hw_eix, &tmrif);
-+
-+    /* Free-up old IMSIC VS-file */
-+    vgein_release(v, old_vsfile_id, old_vsfile_cpu);
-+
-     BUG_ON("unimplemented");
++#ifdef VGEIN_DEBUG
++    gprintk(XENLOG_DEBUG, "%s: %pv: vgein_id(%u), xen_cpu%u_bmp=%#lx\n",
++            __func__, v, vgein_id, cpu, vgein->bmp);
++#endif
  }
-diff --git a/xen/arch/riscv/include/asm/aia.h b/xen/arch/riscv/include/asm/aia.h
-index 53a1efb042f8..8e4eb2f6b14e 100644
---- a/xen/arch/riscv/include/asm/aia.h
-+++ b/xen/arch/riscv/include/asm/aia.h
-@@ -10,5 +10,6 @@ bool aia_usable(void);
- void aia_init(void);
- 
- unsigned int vgein_assign(struct vcpu *v);
-+void vgein_release(struct vcpu *v, unsigned int vgein_id, unsigned int cpu);
- 
- #endif /* RISCV_AIA_H */
 -- 
 2.55.0
 
