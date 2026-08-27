@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B814C61DC6
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2026 15:20:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1400810.1636359 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31F65C61DC4
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2026 15:20:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1400826.1636463 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzbt3-0003FW-O3; Thu, 27 Aug 2026 15:19:29 +0000
+	id 1wzbtK-00064R-Ic; Thu, 27 Aug 2026 15:19:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1400810.1636359; Thu, 27 Aug 2026 15:19:29 +0000
+Received: by outflank-mailman (output) from mailman id 1400826.1636463; Thu, 27 Aug 2026 15:19:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzbt3-0003FP-L2; Thu, 27 Aug 2026 15:19:29 +0000
-Received: by outflank-mailman (input) for mailman id 1400810;
- Thu, 27 Aug 2026 15:19:28 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wzbt2-0003Bn-8h
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 15:19:28 +0000
+	id 1wzbtK-000620-4v; Thu, 27 Aug 2026 15:19:46 +0000
+Received: by outflank-mailman (input) for mailman id 1400826;
+ Thu, 27 Aug 2026 15:19:44 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wzbtI-0005kT-Nc
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 15:19:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzbt1-00Fhg7-Li
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 17:19:27 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wzbtI-00C6ki-4E
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 17:19:44 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a90556f-e002-0a2a0a5209dd-0a2a4504aa60-42
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:19:27 +0200
-Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a905589-2eae-0a2a0a5409dd-0a2a4502d400-32
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:19:44 +0200
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a90557f-b57f-0a2a45040019-d155dd2bade2-3
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:19:27 +0200
-Received: by mail-wr1-f43.google.com with SMTP id
- ffacd0b85a97d-482db627cd8so1023923f8f.1
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 08:19:27 -0700 (PDT)
+ id 6a90558f-6ca4-0a2a45020019-d155802adc43-3
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:19:44 +0200
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-49978908b35so17282975e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 08:19:44 -0700 (PDT)
 Received: from fedora (user-109-243-144-234.play-internet.pl.
  [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482e28f5d01sm10049148f8f.32.2026.08.27.08.19.24
+ ffacd0b85a97d-482e28f5d01sm10049148f8f.32.2026.08.27.08.19.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Aug 2026 08:19:25 -0700 (PDT)
+ Thu, 27 Aug 2026 08:19:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,541 +54,200 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787843967; x=1788448767; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1787843983; x=1788448783; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=MSA2XSuQON0U1rePCfP+E/HBswfjDsdSbSkNg0cOA2o=;
-        b=gsViz1e/yMOUknwCO8JNqfXR6+P1FT5WlYtAWYP6ATIXAhUlwfIZbylEXfIhjQrN+Y
-         I3ut/Zq6flJMbFtlhhbg2vevUveu8Aj4gweSqpBOFlMwFHovsw+Oa0IcrweIrYhpScoi
-         QepUUbG+2UNlmq4QZCnto/7IRhmlxNjhO4gQ4qXrmkLYG90UutGsaut3KvmRppKCWM+G
-         qY+uhZX+QF6D3fVvxGsjF+o6e4PWa77QzBUn8a3AwOluixhfFqov9excJbKms0NEyq2f
-         QH458kZkSD7/yPg0ZcCUbf9z+4XAjBIbupstuLlpFIDLh3TyEVrOdvxS0oQBwrByjS6T
-         7udA==
+        bh=UB6QIi9ewt7tM857WFc3rZ8Sx0meiAHCBYlBjEcGVaY=;
+        b=kKkpGy3raDjNXHmo+Jthwx3Dfak2xYw+ypmUuvTW5QV6YO9UHrqvbxzfNjs+UB2/oD
+         o3v9E5OLKO9i5m/r23pOL3mbLCan0x9S/Qdrwc6S0mTPtMs7u/8SqYMfKWcpKtbG4aeO
+         yBuaSn94ybH/PsXt++mHYuH7/vI5Dx0y2kTyrjY3FgT/X697Zv9YOuDeP0/lhw5g9ImB
+         0LoA9x7ImToj85Bc70LUHN8X0zEzbRRoTLWX212EqNymx5f22zggpm80Lhdh03gWh6Ok
+         ksO8wTNJjDFVYxrGkV7Z1M7Vw8XHkeVSKZ2RLB79p/X2pm2lCEaVTwTjoCnR6SbSWyqH
+         4Vaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787843967; x=1788448767;
+        d=1e100.net; s=20251104; t=1787843983; x=1788448783;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=MSA2XSuQON0U1rePCfP+E/HBswfjDsdSbSkNg0cOA2o=;
-        b=APRn8GD2O+WKDOdWG1uYyNF+Ql9xdSogra7PPSs8HdPjMmLL3wUGQTeNjlYcUSWRSv
-         lSXubyrxg+Rl7Qfc1zfa/h7jQFacVq8NGaPmVdE0ZNCLf6Mwc/FOk5CJJBXC+xHGWzB8
-         894TweFson+eCdOMgWJyi6wpfTRMSCK4irmN+XBkqhbbIV/k+Nipx3H45hKK5rVlgHxF
-         LHr2W+xFJRoFYN2EUGJK38fiEf6LLFEwiUNxLYzCCBQ12+5jfSVC8kmT0+ccfd3M1Yr4
-         Zn6HLtbX3pZbleSRmfvgFqvaKrDUFLn9NzvJ4ZsOHLl2/uNhK107yxwO7GaSdTpSINP2
-         fQ5Q==
-X-Gm-Message-State: AFuF++lwF2pawGFbkMkbf23zfEK616wJFF78xg4P8FeWb0UCydDyZbNf
-	7SX5KIISCW7va+0ZD3z8vQZZReYFp2gP3FOhmR4gxe2LFP/EAH+U4UjGdmvx4g==
-X-Gm-Gg: AR+sD12kYhSCFyRM1N5SWv0TQwV8MWnfnKdPnXA36UcWJ07eqDalBuW3SnP94GMzWQH
-	R7S8gwieED0YfvMt9TC6uIt/BrRc6rLH8mjo58obqTWNz2B0Qg/eNinUXPOKqQVNfPPOSARRq8u
-	/u0MR/Yo+Ji7WNUZp213QOEm4HaAaR6IiAczz4K4+Uwjs1TYIsfrrbG7NlnUoJu4wbffqPF9g9z
-	ocQL5ffVxopwI5ZDKt3TqVfvbO+v6PI0BTu2WhXMIVyT0Zl31mL4YMWu4LQl5Xc+ZE06LiG3I1C
-	yxUfK75Ti2pXgdf9AL/oqRgNn30breW4B6R64MeEe30xq3qKeNqIkzUljslP/PIGfhq462LSQwr
-	zoDqfkxJh4yT+XxBVFLWpZNDGi8bIQqJ8PLoD42//Be8QgW/AHrvpeku7TBXvsBb/LiOMGEOORJ
-	AkFVN7qX/sry38bwvp9s0zThFoWPMamAQGJ+hW+DFWcL7Gbb+CA7T+Yx0pxBAEcmyOr7gRo8jTH
-	0qOcxP0cOtv39kajEmzP0hfr/SYlcpcHw==
-X-Received: by 2002:a05:6000:1889:b0:482:f653:395c with SMTP id ffacd0b85a97d-482f6533a6amr944485f8f.16.1787843966521;
-        Thu, 27 Aug 2026 08:19:26 -0700 (PDT)
+        bh=UB6QIi9ewt7tM857WFc3rZ8Sx0meiAHCBYlBjEcGVaY=;
+        b=cPUMgkWWIk6cAMnRCz2/E/wrGt2q0eSao1GpMOKh6e9kcjsNaacf3jm5j9dycjeO6R
+         UAOe8bxZ05rlOpE58EchYOwBhpRQq/XZ/r8qlglKXgHJKD/Uu39teCije2JQU/88gM3Q
+         zQZwwPrwcYMoU5unZ1ahuR6GrKWNVD2h9j0fiJnqdYQZPNbY2nqmWwwNu48Ok/GUOTfF
+         p0v/kFUXlmtmpylT/W3IGXkrRHTthcOUtVHEXzVtKgwYkTZ5gPF0YTA2UipQ7D3A204t
+         PnAYMoPqqzk18NnreHa4lJQGbVxXe36Gzy34GN6S1nxlAciLuUjYVrvz4Oh8D6OnfOVc
+         KEZQ==
+X-Gm-Message-State: AFuF++mjh927HhUHtdEADU77rbsVlPfAv05cW4Hkz4QM9YRnvwH260pf
+	0s7DFigoYWlDzA1Pg2mLSsu0qzrPyOouSZO8HPGTtCj/J2KOY5LFIKETXp2PNg==
+X-Gm-Gg: AR+sD12p94kTC/kacSKvuiRSQ/gu6jrhBuTZt/mx2mlSvVVzLxz+4XP6lCt/h/bQv9f
+	kjA4Bv8NW1BL4SIxKauTBdEfZtstW4usDDaaQkuIVBgspH7V21dTmUM9MWiIBOpCMvASLi7jJMl
+	7uWJkJ0vUMgsgZbqqjSrhW/aqtf19/eZ1YE6ZS+qI2bvJCx1rVNqe5bVE98rx7nvWux0HG3f2VH
+	v5u/ZYDOlnOk5ZXpRNOVolH5AmJ8j1AnAV1Wt6jlaLc3ebwq+Mo0+VPCp4xUAf4jNZZeomN3oTH
+	PS7tuWrlL3KbFjO1j77a02Slb71wduabLPHJb2aygpy/2UjgbfpBhksZfHn/rv1qTzpfV8Y5f6U
+	dSu7J9CEtwj+lBKD/OBprp4sRA1TV3e7E3F8pjtE32vmXampxAYoYpm2ZfYTxOCLffmQ/AXBlJv
+	pL5Bt8ctcBbbr4FD9U44DDKyE8eLJikbbn4E894DLCUftjGuohHMXdJiTGXwHVceKVp0YtM/PvE
+	DwFW2LXqwAgRK/1vvMV0DRqEvs8xqGNA9K7zTN3kLQ=
+X-Received: by 2002:a05:600c:6912:b0:499:cd34:100d with SMTP id 5b1f17b1804b1-499dc703bd3mr211493985e9.7.1787843983291;
+        Thu, 27 Aug 2026 08:19:43 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Baptiste Le Duc <baptiste.le-duc@vates.tech>,
 	Zheng Zhang <zhangzheng@iscas.ac.cn>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v8 01/20] xen: introduce CONFIG_HAS_SHARED_INFO for archs without a shared page
-Date: Thu, 27 Aug 2026 17:18:54 +0200
-Message-ID: <5241d1e3f1f1fcaf0c3655d37a5c2d3ec5594711.1787836900.git.oleksii.kurochko@gmail.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v8 13/20] xen/riscv: introduce (de)initialization helpers for vINTC
+Date: Thu, 27 Aug 2026 17:19:06 +0200
+Message-ID: <688352e340872a50af99a51082966669787b1f72.1787836900.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <cover.1787836900.git.oleksii.kurochko@gmail.com>
 References: <cover.1787836900.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1787843967-C2ECEB50-A727C7A4/10/73395122804
+X-purgate-ID: tlsNG-720697/1787843984-F18AC2AC-9C4DB48E/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 19135
+X-purgate-size: 4102
 
-On architectures that run guests in dom0less mode without the PV ABI
-(currently RISC-V), no shared_info page is allocated and d->shared_info
-remains NULL throughout the domain lifetime.  Several places in common
-code access d->shared_info through the shared_info() macro or directly,
-causing UBSAN null-pointer errors on such architectures.
+Add common helpers domain_vintc_init() and domain_vintc_deinit() to
+allocate and deallocate a virtual interrupt controller (vINTC)
+structure and initialize basic virtual interrupt controller registers.
 
-Rather than adding runtime NULL guards that are logically unreachable
-on x86 and Arm (where shared_info is always allocated), introduce a new
-Kconfig symbol CONFIG_HAS_SHARED_INFO selected by x86 and Arm.
-
-On !HAS_SHARED_INFO the shared_info() macro expands to a dereference
-of shared_info_absent, an extern pointer that is declared but
-intentionally never defined.  Any use of shared_info() that is not
-dead-code-eliminated will therefore cause a link-time failure, making
-missed guards impossible to overlook.
-
-The 2L event-channel ops call shared_info() and must not be compiled on
-architectures without a shared_info page, so event_2l.o is gated on
-CONFIG_HAS_SHARED_INFO.  On such architectures evtchn_init() installs the
-FIFO ops as a placeholder instead, so that a later guest opt-in to the
-FIFO ABI via EVTCHNOP_init_control has no special-casing to do; if FIFO
-support itself is also unavailable (!CONFIG_EVTCHN_FIFO), a dedicated
-no-op evtchn_port_ops_none table is installed instead, so that
-d->evtchn_port_ops is never NULL.  evtchn_fifo_word_from_port() is
-guarded against uninitialised d->evtchn_fifo so the FIFO ops are safe
-before evtchn_fifo_init_control() is called by the guest.
-
-With CONFIG_HAS_SHARED_INFO=n all vCPUs fall back to the global
-dummy_vcpu_info, so writes through vcpu_info() could leak data between
-vCPUs. Reviewing the write paths in common code: the write in
-map_guest_area() stores the constant ~0 so nothing serious would happen
-if it were leaked; the event_2l.c paths are not compiled on
-!HAS_SHARED_INFO, as event_2l.o is gated on CONFIG_HAS_SHARED_INFO; the
-write in vcpu_info_populate() targets the new mapping buffer, not
-dummy_vcpu_info.
-
-Outside common code, the remaining writes are x86 PV-specific, for which
-CONFIG_HAS_SHARED_INFO=y. No code changes are needed.
-
-Finally, struct domain's shared_info field itself is gated on
-CONFIG_HAS_SHARED_INFO, as it would otherwise be a permanently NULL
-pointer: every user of it is either arch code for an architecture that
-selects HAS_SHARED_INFO, or common code already guarded by the same
-Kconfig symbol.
+domain_vintc_deinit() isn't called at the moment as arch_domain_destroy()
+is implemented as stub at the moment.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in v8:
- - Introduce evtchn_preinit().
- - Update some comments in the code.
- - Add Reviewed-by: Jan Beulich <jbeulich@suse.com>.
+ - Add call of domain_vintc_deinit() to arch_domain_destroy().
+ - Update printk message.
+ - Drop Acked-by.
 ---
-Changes in v7:
- - domctl.c: use a plain #ifdef CONFIG_HAS_SHARED_INFO / #else instead of
-   the IS_ENABLED() if/else in getdomaininfo(), and set
-   info->shared_info_frame to ~0 in the !HAS_SHARED_INFO case.
- - sched.h: drop struct domain's shared_info field when !HAS_SHARED_INFO,
-   rather than keeping a field that can only ever be NULL there. All of
-   its users are either in arch code selecting HAS_SHARED_INFO or already
-   guarded by CONFIG_HAS_SHARED_INFO, so no further changes are needed.
-   Update the commit message accordingly.
----
-Changes in v6:
- - s/INVALID_GFN_RAW/gfn_x(INVALID_GFN) as INVALID_GFN_RAW was dropped.
- - event_channel.c: make evtchn_none_init() static, moving the
-   evtchn_port_ops_none table and its definition above evtchn_reset(),
-   their first caller; move the leftover prototype into the #else arm
-   of the same #ifndef guard instead of leaving it as a free-standing
-   non-static declaration.
- - event_channel.c: evtchn_reset() now follows the same
-   IS_ENABLED(CONFIG_HAS_SHARED_INFO) / IS_ENABLED(CONFIG_EVTCHN_FIFO) /
-   else cascade already used by evtchn_init(), rather than assuming the
-   FIFO ABI is unconditionally available whenever d->evtchn_fifo was set.
- - event_channel.c: narrow the evtchn_port_ops_none / evtchn_none_init
-   guard from !CONFIG_HAS_SHARED_INFO to
-   !CONFIG_HAS_SHARED_INFO && !CONFIG_EVTCHN_FIFO, so the placeholder
-   cf_check functions are only built for the one combination that
-   actually needs them.
- - event_channel.c: fix the evtchn_port_ops_none comment, which claimed
-   the ops were never reachable in practice; they are reached whenever
-   an event is delivered to (or queried on) a
-   !HAS_SHARED_INFO && !EVTCHN_FIFO domain, they just have no ABI to
-   record it in and discard it.
- - event_channel.h / event_fifo.c: drop the static inline
-   evtchn_fifo_init_ops() stub for !CONFIG_EVTCHN_FIFO; a plain
-   declaration outside the #ifdef/#else is enough, matching the
-   treatment already given to evtchn_2l_init() and evtchn_none_init().
-   Update the "only call site" comment in event_fifo.c to mention both
-   evtchn_init() and evtchn_reset().
+Changes in v6-7:
+ - Nothing changed. Only rebase.
 ---
 Changes in v5:
- - drop the static inline evtchn_2l_init() stub for !HAS_SHARED_INFO;
-   a plain declaration is enough since the only call sites are guarded by
-   IS_ENABLED(CONFIG_HAS_SHARED_INFO) and the dead call is eliminated
-   before linking.
- - fix a NULL d->evtchn_port_ops dereference when CONFIG_HAS_SHARED_INFO=n
-   and CONFIG_EVTCHN_FIFO=n: evtchn_init() was unconditionally calling
-   evtchn_fifo_init_ops(), whose !EVTCHN_FIFO stub leaves d->evtchn_port_ops
-   unset.  Gate the FIFO branch on IS_ENABLED(CONFIG_EVTCHN_FIFO) and add
-   a dedicated evtchn_port_ops_none table for the remaining case. Stubs
-   are shared where signatures permit: evtchn_none_noop covers both
-   clear_pending and unmask; evtchn_none_false covers both is_pending and
-   is_masked. evtchn_none_init() is called only from event_channel.c, so its
-   declaration is kept there rather than in event_channel.h.
- - gate evtchn_fifo_init_ops() on !CONFIG_HAS_SHARED_INFO;
-   its only call site is in the IS_ENABLED(CONFIG_EVTCHN_FIFO) dead branch
-   of evtchn_init(), which is never reached on HAS_SHARED_INFO=y builds.
+ - s/printk/printk_once().
+ - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
 ---
 Changes in v4:
- - event_channel.c: drop the redundant evtchn_fifo_init_ops() in the
-   else branch of evtchn_reset(); evtchn_fifo_destroy() does not undo the
-   ops installed by evtchn_init(), so only the switch back to 2-level ABI
-   needs an explicit call.
- - shared.h: simplify the !HAS_SHARED_INFO shared_info() definition to use
-   an undefined "extern struct shared_info *shared_info_absent" instead of
-   shared_info_absent() with a typeof cast.
- - Extend the commit description to note that vcpu_info()/__vcpu_info()
-   uses were also audited: on !HAS_SHARED_INFO vcpu_info_area.map points at
-   dummy_vcpu_info, reads are harmless, and writes in common code do not
-   open a cross-domain info-leak side channel, so no code changes are
-   needed on that path.
+ - Drop the comment from domain_vintc_init() about guests receiving a
+   virtual interrupt controller that mirrors the host hardware as there
+   can (and eventually should) be alternatives.
+ - Finish renaming intc_version to intc_variant in domain_vintc_(de)init()
+   (enum intc_variant, info->hw_variant, local variable) started in the
+   prev patch.
 ---
 Changes in v3:
- - Introduce CONFIG_HAS_SHARED_INFO Kconfig symbol selected by x86
-   and Arm; RISC-V does not select it.
- - Gate shared_info() macro on CONFIG_HAS_SHARED_INFO; on
-   !HAS_SHARED_INFO it calls shared_info_absent() (declared, never
-   defined) so any unguarded use produces a link-time error.
- - Replace runtime if (!d->shared_info) guards with IS_ENABLED() at
-   call sites so both branches type-check and dead code is eliminated.
- - Guard shared_info_frame assignment in domctl.c.
- - Gate event_2l.o on CONFIG_HAS_SHARED_INFO; use FIFO ops as
-   placeholder on !HAS_SHARED_INFO archs instead of dedicated stub
-   ops; guard evtchn_fifo_word_from_port() against uninitialised
-   d->evtchn_fifo.
- - Add static inline stubs for evtchn_2l_init() (!HAS_SHARED_INFO)
-   and evtchn_fifo_init_ops() (!EVTCHN_FIFO) so call sites can use
-   IS_ENABLED() without #ifdef.
- - Drop inaccurate changelog entry about "only FIFO ABI" migration.
- - Update the commit message.
- - Drop R-by: Baptiste ... as some extra checks are added.
+ - Drop redundant printk() from domain_vintc_deinit()'s default case to
+   avoid duplicate messages when init fails.
+ - Add a comment to domain_vintc_init() clarifying that guests currently
+   receive a virtual interrupt controller that mirrors the host hardware.
 ---
 Changes in v2:
- - Update commit message + subject.
- - Drop Fixes tag.
+ - Drop __init for domain_vintc_(de)init().
+ - Update the commit message.
 ---
- xen/arch/arm/Kconfig       |  1 +
- xen/arch/x86/Kconfig       |  1 +
- xen/common/Kconfig         |  3 +++
- xen/common/Makefile        |  2 +-
- xen/common/domain.c        |  6 ++---
- xen/common/domctl.c        |  4 +++
- xen/common/event_channel.c | 55 +++++++++++++++++++++++++++++++++++---
- xen/common/event_channel.h |  6 +++++
- xen/common/event_fifo.c    | 18 ++++++++++++-
- xen/common/time.c          |  2 ++
- xen/include/xen/event.h    |  2 +-
- xen/include/xen/sched.h    |  2 ++
- xen/include/xen/shared.h   |  6 +++++
- xen/include/xen/time.h     |  5 ++++
- 14 files changed, 104 insertions(+), 9 deletions(-)
+---
+ xen/arch/riscv/domain.c           |  7 ++++++-
+ xen/arch/riscv/include/asm/intc.h |  3 +++
+ xen/arch/riscv/intc.c             | 35 +++++++++++++++++++++++++++++++
+ 3 files changed, 44 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-index 843a43897e7b..d748404e82da 100644
---- a/xen/arch/arm/Kconfig
-+++ b/xen/arch/arm/Kconfig
-@@ -20,6 +20,7 @@ config ARM
- 	select HAS_DEVICE_TREE_DISCOVERY
- 	select HAS_DOM0LESS
- 	select HAS_GRANT_CACHE_FLUSH if GRANT_TABLE
-+	select HAS_SHARED_INFO
- 	select HAS_STACK_PROTECTOR
- 	select HAS_STATIC_MEMORY
- 	select HAS_UBSAN
-diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
-index 3ce0774b8d76..e5535ac48467 100644
---- a/xen/arch/x86/Kconfig
-+++ b/xen/arch/x86/Kconfig
-@@ -29,6 +29,7 @@ config X86
- 	select HAS_PCI_MSI
- 	select HAS_PIRQ
- 	select HAS_SCHED_GRANULARITY
-+	select HAS_SHARED_INFO
- 	imply HAS_SOFT_RESET
- 	select HAS_UBSAN
- 	select HAS_VMAP
-diff --git a/xen/common/Kconfig b/xen/common/Kconfig
-index da80fdba8469..5b289e444fa5 100644
---- a/xen/common/Kconfig
-+++ b/xen/common/Kconfig
-@@ -158,6 +158,9 @@ config HAS_PMAP
- config HAS_SCHED_GRANULARITY
- 	bool
+diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
+index 45712d305975..d94652809e36 100644
+--- a/xen/arch/riscv/domain.c
++++ b/xen/arch/riscv/domain.c
+@@ -291,7 +291,9 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
  
-+config HAS_SHARED_INFO
-+	bool
+ void arch_domain_destroy(struct domain *d)
+ {
+-    printk(XENLOG_WARNING "%s: unimplemented\n", __func__);
++    printk(XENLOG_WARNING "%s: not fully implemented\n", __func__);
 +
- config HAS_STATIC_MEMORY
- 	bool
- 
-diff --git a/xen/common/Makefile b/xen/common/Makefile
-index 6018e256147f..f69d47d18934 100644
---- a/xen/common/Makefile
-+++ b/xen/common/Makefile
-@@ -12,7 +12,7 @@ obj-$(CONFIG_DEVICE_TREE_PARSE) += device-tree/
- obj-$(CONFIG_IOREQ_SERVER) += dm.o
- obj-y += domain.o
- obj-y += domid.o
--obj-y += event_2l.o
-+obj-$(CONFIG_HAS_SHARED_INFO) += event_2l.o
- obj-y += event_channel.o
- obj-$(CONFIG_EVTCHN_FIFO) += event_fifo.o
- obj-$(CONFIG_GRANT_TABLE) += grant_table.o
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index e16f1ac38396..6b52713518da 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -316,9 +316,9 @@ void vcpu_info_reset(struct vcpu *v)
-     struct domain *d = v->domain;
- 
-     v->vcpu_info_area.map =
--        ((v->vcpu_id < XEN_LEGACY_MAX_VCPUS)
--         ? (vcpu_info_t *)&shared_info(d, vcpu_info[v->vcpu_id])
--         : &dummy_vcpu_info);
-+        IS_ENABLED(CONFIG_HAS_SHARED_INFO) && v->vcpu_id < XEN_LEGACY_MAX_VCPUS
-+        ? (vcpu_info_t *)&shared_info(d, vcpu_info[v->vcpu_id])
-+        : &dummy_vcpu_info;
++    domain_vintc_deinit(d);
  }
  
- static struct domain *alloc_domain_struct(void)
-diff --git a/xen/common/domctl.c b/xen/common/domctl.c
-index a6210db4fb97..83405a766a54 100644
---- a/xen/common/domctl.c
-+++ b/xen/common/domctl.c
-@@ -102,9 +102,13 @@ void getdomaininfo(struct domain *d, struct xen_domctl_getdomaininfo *info)
- #ifdef CONFIG_MEM_PAGING
-     info->paged_pages       = atomic_read(&d->paged_pages);
- #endif
-+#ifdef CONFIG_HAS_SHARED_INFO
-     info->shared_info_frame =
-         gfn_x(mfn_to_gfn(d, _mfn(virt_to_mfn(d->shared_info))));
-     BUG_ON(SHARED_M2P(info->shared_info_frame));
-+#else
-+    info->shared_info_frame = ~0;
-+#endif
+ int arch_domain_create(struct domain *d,
+@@ -308,6 +310,9 @@ int arch_domain_create(struct domain *d,
+     if ( (rc = p2m_init(d, config)) != 0)
+         goto fail;
  
-     info->cpupool = cpupool_get_id(d);
- 
-diff --git a/xen/common/event_channel.c b/xen/common/event_channel.c
-index a7f9cc5fe0ac..bd03e094d096 100644
---- a/xen/common/event_channel.c
-+++ b/xen/common/event_channel.c
-@@ -40,6 +40,54 @@
- 
- #define consumer_is_xen(e) (!!(e)->xen_consumer)
- 
-+#if !defined(CONFIG_HAS_SHARED_INFO) && !defined(CONFIG_EVTCHN_FIFO)
-+/*
-+ * Placeholder ops for domains with neither a shared_info page nor a FIFO
-+ * control block. Such a domain has no ABI to record event state in, so these
-+ * are reachable whenever an event is delivered to (or queried on) one of its
-+ * ports; they just discard/no-op it. They exist to keep d->evtchn_port_ops
-+ * non-NULL.
-+ */
-+static void cf_check evtchn_none_set_pending(
-+    struct vcpu *v, struct evtchn *evtchn) {}
-+static void cf_check evtchn_none_noop(
-+    struct domain *d, struct evtchn *evtchn) {}
-+static bool cf_check evtchn_none_false(
-+    const struct domain *d, const struct evtchn *evtchn) { return false; }
-+static void cf_check evtchn_none_print_state(
-+    struct domain *d, const struct evtchn *evtchn) {}
++    if ( (rc = domain_vintc_init(d)) )
++        goto fail;
 +
-+static const struct evtchn_port_ops evtchn_port_ops_none = {
-+    .set_pending   = evtchn_none_set_pending,
-+    .clear_pending = evtchn_none_noop,
-+    .unmask        = evtchn_none_noop,
-+    .is_pending    = evtchn_none_false,
-+    .is_masked     = evtchn_none_false,
-+    .print_state   = evtchn_none_print_state,
-+};
+     return rc;
+ 
+  fail:
+diff --git a/xen/arch/riscv/include/asm/intc.h b/xen/arch/riscv/include/asm/intc.h
+index 875728885292..6fc0e620e937 100644
+--- a/xen/arch/riscv/include/asm/intc.h
++++ b/xen/arch/riscv/include/asm/intc.h
+@@ -79,4 +79,7 @@ void intc_route_irq_to_xen(struct irq_desc *desc, unsigned int priority);
+ 
+ void intc_handle_external_irqs(struct cpu_user_regs *regs);
+ 
++int domain_vintc_init(struct domain *d);
++void domain_vintc_deinit(struct domain *d);
 +
-+static void evtchn_none_init(struct domain *d)
+ #endif /* ASM__RISCV__INTERRUPT_CONTOLLER_H */
+diff --git a/xen/arch/riscv/intc.c b/xen/arch/riscv/intc.c
+index 2864a896b677..f5c8af6ddea4 100644
+--- a/xen/arch/riscv/intc.c
++++ b/xen/arch/riscv/intc.c
+@@ -11,6 +11,7 @@
+ 
+ #include <asm/aia.h>
+ #include <asm/intc.h>
++#include <asm/vaplic.h>
+ 
+ static const struct intc_hw_operations *__ro_after_init intc_hw_ops;
+ 
+@@ -83,3 +84,37 @@ int __init make_intc_domU_node(struct kernel_info *kinfo)
+ 
+     return vintc->init_ops->make_domu_dt_node(kinfo);
+ }
++
++int domain_vintc_init(struct domain *d)
 +{
-+    d->evtchn_port_ops = &evtchn_port_ops_none;
-+}
-+#else /* CONFIG_HAS_SHARED_INFO || CONFIG_EVTCHN_FIFO */
-+/*
-+ * Declaration only; the call in evtchn_preinit() is DCE'd unless both
-+ * configs are off.
-+ */
-+void evtchn_none_init(struct domain *d);
-+#endif /* !CONFIG_HAS_SHARED_INFO && !CONFIG_EVTCHN_FIFO */
++    int ret = -EOPNOTSUPP;
++    const enum intc_variant variant = intc_hw_ops->info->hw_variant;
 +
-+static void evtchn_preinit(struct domain *d)
-+{
-+    if ( IS_ENABLED(CONFIG_HAS_SHARED_INFO) )
-+        evtchn_2l_init(d);
-+    else if ( IS_ENABLED(CONFIG_EVTCHN_FIFO) )
-+        evtchn_fifo_init_ops(d);
-+    else
-+        evtchn_none_init(d);
++    switch ( variant )
++    {
++    case INTC_APLIC:
++        ret = domain_vaplic_init(d);
++        break;
++
++    default:
++        printk_once("vintc (variant:%d) isn't implemented\n", variant);
++        break;
++    }
++
++    return ret;
 +}
 +
- /*
-  * Lock an event channel exclusively. This is allowed only when the channel is
-  * free or unbound either when taking or when releasing the lock, as any
-@@ -1324,9 +1372,9 @@ int evtchn_reset(struct domain *d, bool resuming)
-         rc = -EAGAIN;
-     else if ( d->evtchn_fifo )
-     {
--        /* Switching back to 2-level ABI. */
-+        /* Switching back to the default ABI. */
-         evtchn_fifo_destroy(d);
--        evtchn_2l_init(d);
-+        evtchn_preinit(d);
-     }
- 
-     write_unlock(&d->event_lock);
-@@ -1625,7 +1673,8 @@ void evtchn_check_pollers(struct domain *d, unsigned int port)
- 
- int evtchn_init(struct domain *d, unsigned int max_port)
- {
--    evtchn_2l_init(d);
-+    evtchn_preinit(d);
-+
-     d->max_evtchn_port = min_t(unsigned int, max_port, INT_MAX);
- 
-     d->evtchn = alloc_evtchn_bucket(d, 0);
-diff --git a/xen/common/event_channel.h b/xen/common/event_channel.h
-index dc94a43cc2dd..423c4ee77bd0 100644
---- a/xen/common/event_channel.h
-+++ b/xen/common/event_channel.h
-@@ -70,6 +70,12 @@ static inline void evtchn_fifo_destroy(struct domain *d)
- }
- #endif /* CONFIG_EVTCHN_FIFO */
- 
-+/*
-+ * Declaration only when !CONFIG_EVTCHN_FIFO; the call in evtchn_preinit() is
-+ * DCE'd in that case.
-+ */
-+void evtchn_fifo_init_ops(struct domain *d);
-+
- #endif /* EVENT_CHANNEL_H */
- 
- /*
-diff --git a/xen/common/event_fifo.c b/xen/common/event_fifo.c
-index 611bf8a78801..e4225b1b668e 100644
---- a/xen/common/event_fifo.c
-+++ b/xen/common/event_fifo.c
-@@ -62,6 +62,9 @@ static inline event_word_t *evtchn_fifo_word_from_port(const struct domain *d,
-      */
-     smp_rmb();
- 
-+    if ( unlikely(!d->evtchn_fifo) )
-+        return NULL;
-+
-     if ( unlikely(port >= d->evtchn_fifo->num_evtchns) )
-         return NULL;
- 
-@@ -419,6 +422,18 @@ static const struct evtchn_port_ops evtchn_port_ops_fifo =
-     .print_state   = evtchn_fifo_print_state,
- };
- 
-+/*
-+ * evtchn_fifo_init_ops()'s only call site is the
-+ * IS_ENABLED(CONFIG_EVTCHN_FIFO) branch of evtchn_preinit(), which is never
-+ * reached on HAS_SHARED_INFO=y builds because of DCE.
-+ */
-+#ifndef CONFIG_HAS_SHARED_INFO
-+void evtchn_fifo_init_ops(struct domain *d)
++void domain_vintc_deinit(struct domain *d)
 +{
-+    d->evtchn_port_ops = &evtchn_port_ops_fifo;
++    const enum intc_variant variant = intc_hw_ops->info->hw_variant;
++
++    switch ( variant )
++    {
++    case INTC_APLIC:
++        domain_vaplic_deinit(d);
++        break;
++
++    default:
++        break;
++    }
 +}
-+#endif
-+
- static int map_guest_page(struct domain *d, uint64_t gfn, void **virt)
- {
-     struct page_info *p;
-@@ -561,7 +576,8 @@ static void setup_ports(struct domain *d, unsigned int prev_evtchns)
- 
-         evtchn = evtchn_from_port(d, port);
- 
--        if ( guest_test_bit(d, port, &shared_info(d, evtchn_pending)) )
-+        if ( IS_ENABLED(CONFIG_HAS_SHARED_INFO) &&
-+             guest_test_bit(d, port, &shared_info(d, evtchn_pending)) )
-             evtchn->pending = true;
- 
-         evtchn_fifo_set_priority(d, evtchn, EVTCHN_FIFO_PRIORITY_DEFAULT);
-diff --git a/xen/common/time.c b/xen/common/time.c
-index 2b8c98e2de76..906fb7c71636 100644
---- a/xen/common/time.c
-+++ b/xen/common/time.c
-@@ -91,6 +91,7 @@ struct tm gmtime(unsigned long t)
-     return tbuf;
- }
- 
-+#ifdef CONFIG_HAS_SHARED_INFO
- void update_domain_wallclock_time(struct domain *d)
- {
-     uint32_t *wc_version;
-@@ -119,6 +120,7 @@ void update_domain_wallclock_time(struct domain *d)
- 
-     spin_unlock(&wc_lock);
- }
-+#endif /* CONFIG_HAS_SHARED_INFO */
- 
- /* Set clock to <secs,usecs> after 00:00:00 UTC, 1 January, 1970. */
- void do_settime(u64 secs, unsigned int nsecs, u64 system_time_base)
-diff --git a/xen/include/xen/event.h b/xen/include/xen/event.h
-index 930190054cf0..595dedf0792c 100644
---- a/xen/include/xen/event.h
-+++ b/xen/include/xen/event.h
-@@ -211,7 +211,7 @@ static bool evtchn_usable(const struct evtchn *evtchn)
- 
- void evtchn_check_pollers(struct domain *d, unsigned int port);
- 
--/* Close all event channels and reset to 2-level ABI. */
-+/* Close all event channels and reset to the default ABI. */
- int evtchn_reset(struct domain *d, bool resuming);
- 
- /*
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index e352e2b38e7d..73c54794ac02 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -404,7 +404,9 @@ struct domain
- 
-     struct vcpu    **vcpu;
- 
-+#ifdef CONFIG_HAS_SHARED_INFO
-     shared_info_t   *shared_info;     /* shared data area */
-+#endif
- 
-     rcu_read_lock_t  rcu_lock;
- 
-diff --git a/xen/include/xen/shared.h b/xen/include/xen/shared.h
-index 5b71342cab32..1589e8793f9d 100644
---- a/xen/include/xen/shared.h
-+++ b/xen/include/xen/shared.h
-@@ -43,7 +43,13 @@ typedef struct vcpu_info vcpu_info_t;
- 
- extern vcpu_info_t dummy_vcpu_info;
- 
-+#ifdef CONFIG_HAS_SHARED_INFO
- #define shared_info(d, field)      __shared_info(d, (d)->shared_info, field)
-+#else
-+extern struct shared_info *shared_info_absent;
-+#define shared_info(d, field) (((void)(d), shared_info_absent)->field)
-+#endif /* CONFIG_HAS_SHARED_INFO */
-+
- #define vcpu_info(v, field)        \
-         __vcpu_info(v, (vcpu_info_t *)(v)->vcpu_info_area.map, field)
- 
-diff --git a/xen/include/xen/time.h b/xen/include/xen/time.h
-index 4db24617a97c..09da150c2a40 100644
---- a/xen/include/xen/time.h
-+++ b/xen/include/xen/time.h
-@@ -72,7 +72,12 @@ extern bool NOW_good;
- #define version_update_begin(v) (((v) + 1) | 1)
- #define version_update_end(v)   ((v) + 1)
- extern void update_vcpu_system_time(struct vcpu *v);
-+
-+#ifdef CONFIG_HAS_SHARED_INFO
- extern void update_domain_wallclock_time(struct domain *d);
-+#else
-+static inline void update_domain_wallclock_time(struct domain *d) {}
-+#endif
- 
- extern void do_settime(
-     u64 secs, unsigned int nsecs, u64 system_time_base);
 -- 
 2.55.0
 
