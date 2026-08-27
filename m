@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FB78C61DB9
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2026 15:23:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1401029.1636853 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D67BC61DC6
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2026 15:23:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1401032.1636858 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzbwK-0002J0-Rd; Thu, 27 Aug 2026 15:22:52 +0000
+	id 1wzbwL-0002Xp-Ng; Thu, 27 Aug 2026 15:22:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1401029.1636853; Thu, 27 Aug 2026 15:22:52 +0000
+Received: by outflank-mailman (output) from mailman id 1401032.1636858; Thu, 27 Aug 2026 15:22:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzbwJ-00025F-30; Thu, 27 Aug 2026 15:22:51 +0000
-Received: by outflank-mailman (input) for mailman id 1401029;
- Thu, 27 Aug 2026 15:22:38 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wzbw4-0007YK-Od
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 15:22:36 +0000
+	id 1wzbwK-0002Su-Ic; Thu, 27 Aug 2026 15:22:52 +0000
+Received: by outflank-mailman (input) for mailman id 1401032;
+ Thu, 27 Aug 2026 15:22:39 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wzbw5-0007lh-Ti
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 15:22:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzbw4-009l5h-3H
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 17:22:36 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wzbw5-003O3L-8V
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 17:22:37 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a905633-8faa-0a2a0a5109dd-0a2a450293fc-26
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:22:36 +0200
+ id 6a905626-e002-0a2a0a5209dd-0a2a4501aa5e-32
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:22:37 +0200
 Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a90563b-6ca4-0a2a45020019-d1558036b975-3
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:22:36 +0200
+ id 6a90563d-5984-0a2a45010019-d1558036f024-3
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 17:22:37 +0200
 Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-499b2981a7bso9947135e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 08:22:36 -0700 (PDT)
+ 5b1f17b1804b1-4953e04ef16so22305995e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 08:22:37 -0700 (PDT)
 Received: from fedora (user-109-243-144-234.play-internet.pl.
  [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49b4b2d6b30sm57441155e9.14.2026.08.27.08.22.34
+ 5b1f17b1804b1-49b4b2d6b30sm57441155e9.14.2026.08.27.08.22.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Aug 2026 08:22:35 -0700 (PDT)
+ Thu, 27 Aug 2026 08:22:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,41 +54,41 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787844155; x=1788448955; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1787844157; x=1788448957; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=DZrX2Pb+r3SHWFYfjsZtgvvx6Uq4NGHBKz3VgjDsiVc=;
-        b=F++B4BFbDxnuzZqTL7Kat9glKzcL7JYnTXve5zLWlFwpjGEVxna4sWBVV7AuR6pXtB
-         3eAiep/cMiMywhUK6hMHjtvuNSIsnGOKHmczHpiK9jWTxJJcVVSWoZ8RSdn5HRQEo0tt
-         cYGpEUeA5rcB1ry8qsn9E+tmoc1J5eNJnVJP8tpKJfZeeWn3/jgNERxGvnl++TsyX72h
-         a0aAHf/RO2zfNRKXgBMLK6QHznPY7ey6wXmaB1V+9TdTRLzFfL6XcLO17TD3TkS4uTDm
-         bk5xmFlhpwqnUdJf7BbKxO5SJw8sISxI8H2K9Bu8nTRGritRuNJki3HswAZ+1EBQAAh9
-         dD5Q==
+        bh=6FUxAqwWcnc2Ay1jeD5JiD2529ILkdTEuy10fqJCXM0=;
+        b=YdFjGfQmXz5SJHxaKpa05ARMIRGvgNBHC+UZpLe/KYBqzhahptWwMGm9uM/ZvL2R1f
+         ebiaPVUiVmn08nnpAZOzBJYby1IfhBNXJ+axoqbWtEWPLiKZXYzTmZmKQKHcVRVADmYR
+         XlsUiD3zBmSH726JK5oCJtwEJUEpUHaY4KpswrhOvd4xtJDIMVlsfhNq1wHHeoNS+1Wh
+         dJK4w0a0a0/E3+XxW9hrOTLUxgx3/dYFAP6yebMlkXmOsl0cXsGOJcZT4mSH1qcSRP0E
+         GX2bmiFx6Vp7BVvxqZvyblZvE3KQrVdfsIBlNE3R0kK6T3JKlosNcsxtQmx+GpxS9G8w
+         sz+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787844155; x=1788448955;
+        d=1e100.net; s=20251104; t=1787844157; x=1788448957;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=DZrX2Pb+r3SHWFYfjsZtgvvx6Uq4NGHBKz3VgjDsiVc=;
-        b=V2AFvDlaNwdPS/4tuZGnVJUE20ePITL+7vuY5s+7eqqmnzuZ0HiWLAxw3EyhDxQ6ZW
-         isw5UF7Ek2OKhImzalqjQu/P3wftzPVBgD1I8uYmFoG5s95vtLoBp65+mtVLdxeazZu8
-         2iUwTohZ2SiuiNkft0DL9CuvF1ISd7BogXxv4OXbso7vYfLlfsz9cw0rSUkbGOvU2b5R
-         Jt8qsv3Uq/VjkE97RGOPQE6j7R/uy9h1FcsTkt5rYKD9E9tXZ8Zo54xVb5XaFHqu5g9I
-         V1XXIU00HdjE+LEkv6xlm0Z1jgg4ypuuYr3DiZVfnmkRzhkf/5EVHxD1C73IqSQQEhT0
-         aziQ==
-X-Gm-Message-State: AFuF++mrcFajZGKK7UOr/RtK2R02m5CJn0CBqTy13wQv6v1b3IV4Yrtm
-	0rknHgpwo/BEytlkp8sd2CmcPQxdaVhkR3fnot0R+Ksmx/x9QkEYUG9ypUdIhg==
-X-Gm-Gg: AR+sD11g3VCs/MIOWBktTR01um4QAFFekocKJao5yKk/AnKs2O8fPCRcvlm4+uh+Wc+
-	REl2TggI/M6mfpD2+I4sdys9yGNl/9JrG7lHOKrXzYiS37BVVXXQDDaGodj2DRz/w43FVSRchrJ
-	6LLwH1sL/a0/98TFtF8UH4D+K9QLZuEhGC+iT8LLGFqdsAu7SvXa+hJQcQ3opEA8T4y1V3cN8N7
-	7CLxhY+PPw9CjaFmqB4qRERnIg/rpDJ4/9Ukc9h4bsqBCQE6nrWsIo9oBFEliKr3vSqggN3ccUe
-	ccFCueytFxqH6L/Nlz9LnFZ55FecxPQS7VfLuXCqEc40KfeLlPDrFKH9zvsaL2U06osJvl4uNeY
-	RJax+yBXNBd8f6bdLGmFnMlHtNYLwHGexNCEc8FCYRNbagH2ySQ5vmnQSEFVOUebemLh1lxPxR1
-	A7P7bhvt6X3YBXdrc72ab4Hyb08qMf50h7vChAswRr5KHSjtdOFuM+LG5hWHEVQkGWt/ospYOZU
-	EhqcpREwLFdjzjCJdgLXJXulB3vk8c3
-X-Received: by 2002:a05:600c:3baa:b0:499:ae94:be05 with SMTP id 5b1f17b1804b1-499dc6a3e86mr223264115e9.0.1787844155307;
-        Thu, 27 Aug 2026 08:22:35 -0700 (PDT)
+        bh=6FUxAqwWcnc2Ay1jeD5JiD2529ILkdTEuy10fqJCXM0=;
+        b=eoporww5xRhKBQE2klxuceTpAFebzhhuEvjflsnyazs73a1OgS9yh70dy8fEvYE3/s
+         qF6h9fnEx6PM3H1l+DuVLBqLzGMBdw0G22tfK9/RkatI+6MmJmOaX4XBkeXFPwLT76pE
+         IR1f/4vhMZ0BAZeJG/h/72lVo/XQfN7yUJzhMRqeDAtM4M3BBSF/+hL5ThrT2t8GtW3Z
+         Frouk8aJ+NjWNr5QRutdPDPBnW9TUTlQIYUXNJ+CwCRcJKJ9540tQXIXmcTce0qxuoW/
+         lqeGhUcp8CpNgRX27c4ceP3AwRiBQStVrfYUlFoZsvGJE+6cUbuxAtFlmuBw2mScOHzI
+         wVXQ==
+X-Gm-Message-State: AFuF++mf/dCu+PaJ9hymzrUW4Ns93cHJhaiy220GAPxlshKJge5gqaPS
+	Y9uMVUnVr7AhZfP6PkKkqbZNvODr+bebcxhNFbRcuEmCXYYWrUU2wwgPtxxHsQ==
+X-Gm-Gg: AR+sD11jqA/TnlvFhTytKlClmoqWn/QFQlphtp9VugXcUexAkJsPfqzz5zQlvIbVhtZ
+	+ax3nXIP3LMJl+aFRilrCt44UMT0N5F+5gwdXnZTOzRIrmDw8crGeu9LHu/lYlxd++pDG3kVqlt
+	4K6JSdxCl2VfL/jHhbxJLKYaFW94R1Hk3n7knZh59BnuSv6dAQLTfeHqyXFW36dWCX/9Oq+F1hO
+	/eyw0+k1db185o3A5qcMz/og2UOCNGGp9g6gFIdecWvgUh111OY6Gn6zDF5mFWosk87e8zOkHyO
+	Tc0XKs2k03BKk9vhA7Oyholr+MSLrAN+PZkX11lbMyFqJv/DHYOE2X7jZ5EAARyYHliA9RCW0L1
+	X/gtyoBnjJN2s2QUR25YCvyyOlDq49DizVRVZpJ0vb8y4lEYuGL0Ugu5GGiIgTfDKQDUGboArOI
+	pydfqUI+7A5Q/p38KITO8wIwRw7tQEwH42Ea08Zc4f+s/vH/lHJgMTVJOi9PC16GkmogAoR8wJA
+	gNSaGPMKhvkiQvNwJVoRJZy4kTSiIfW
+X-Received: by 2002:a05:600c:3144:b0:499:79b9:e220 with SMTP id 5b1f17b1804b1-499dc72548dmr187765125e9.10.1787844156618;
+        Thu, 27 Aug 2026 08:22:36 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -104,131 +104,178 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 37/39] xen/riscv: map IMSIC interrupt file for vCPUs
-Date: Thu, 27 Aug 2026 17:21:21 +0200
-Message-ID: <ae5965ba43eb691b078f4a6bcf8a87a1f7a5aac5.1787838835.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 38/39] xen/riscv: implement continue_new_vcpu()
+Date: Thu, 27 Aug 2026 17:21:22 +0200
+Message-ID: <a282887cc08cd9b05f59d46cab9377915e83c61d.1787838835.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <cover.1787838835.git.oleksii.kurochko@gmail.com>
 References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1787844156-F24B62AC-B68AF592/10/73395122804
+X-purgate-ID: tlsNG-d62444/1787844157-BE664757-AFC1CA69/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 5116
+X-purgate-size: 6071
 
-A guest running in VS-mode expects its own IMSIC S-file at offset 0 of its
-guest-physical IMSIC block. Physically, the guest-file (G-file) assigned to
-this vCPU lives at a hart-relative offset given by guest_file_id (assigned
-via the vGEIN allocator). Therefore, imsic_map_guest_file() uses stage-2
-translation to redirect the guest's fixed per-vCPU GPA page (offset 0) to
-the specific physical guest-file page.
+continue_new_vcpu() is the arch hook invoked the first time a freshly
+created vCPU is scheduled. Implement both cases it has to cover:
+ - for the idle vCPU, switch to its own stack and jump to idle_loop();
+ - for a guest vCPU, restore hstatus and enter the guest through the new
+   return_to_new_vcpu() path in entry.S, which loads sepc, passes the
+   hart id in a0 and the DTB address in a1 as expected by the RISC-V
+   boot protocol, sets sstatus.SPP and executes sret.
+
+Interrupts have to stay disabled across the restore. The trap entry
+logic implicitly clears hstatus.SPV, so an interrupt taken between the
+write of hstatus and sret would make sret return to HS-mode instead of
+VS-mode, and restoring SPV afterwards is non-trivial. Instead interrupts
+are simply kept off and sstatus.SPIE is set, so that SIE is restored from
+SPIE once sret has been executed. Also, it follows what hardware will do
+with real CPU which is also started with interrupts disabled.
+
+Introduce get_cpu_info() and reset_stack_and_jump() in asm/current.h,
+needed by the above. get_cpu_info() is a macro rather than a static
+inline because asm/current.h is pulled in by <xen/percpu.h> before
+this_cpu() is defined and before <xen/sched.h> completes struct vcpu.
+
+idle_loop() is added as a stub on purpose; its real implementation will
+come separately later.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in v2:
- - Use GUEST_IMSIC_S_BASE instead of imsic_cfg.base_addr as the base of the
-   guest address to map to, and change the type of gaddr to paddr_t as it
-   holds a guest physical address.
- - Rename guest_stride to guest_offset: it is an offset of the VS-file inside
-   the pCPU's IMSIC block, not a stride.
- - Use PRIpaddr for physical addresses and %u for unsigned values in the
-   debug/error messages.
- - Switch the mapping failure message from printk() to dprintk(XENLOG_ERR, ...).
- - Update the comment above imsic_map_guest_file(): vCPUs aren't pinned, they
-   run on the pCPU chosen by the scheduler, and mention that on migration a
-   VS-file is acquired on the new pCPU and mapped at the same GFN, so the
-   stale mapping is replaced rather than explicitly torn down.
+ - New patch.
 ---
 ---
- xen/arch/riscv/imsic.c | 66 +++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 65 insertions(+), 1 deletion(-)
+ xen/arch/riscv/domain.c              | 44 +++++++++++++++++++++++++++-
+ xen/arch/riscv/entry.S               | 23 +++++++++++++++
+ xen/arch/riscv/include/asm/current.h |  4 +++
+ 3 files changed, 70 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
-index 07152066116a..374a21ace15f 100644
---- a/xen/arch/riscv/imsic.c
-+++ b/xen/arch/riscv/imsic.c
-@@ -29,6 +29,7 @@
- #include <asm/aia.h>
- #include <asm/aplic.h>
- #include <asm/imsic.h>
-+#include <asm/p2m.h>
+diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
+index 29181968224c..0782148b7207 100644
+--- a/xen/arch/riscv/domain.c
++++ b/xen/arch/riscv/domain.c
+@@ -8,10 +8,13 @@
+ #include <xen/smp.h>
+ #include <xen/vmap.h>
  
- #define IMSIC_HART_SIZE(guest_bits) (BIT(guest_bits, U) * IMSIC_MMIO_PAGE_SZ)
- 
-@@ -537,9 +538,72 @@ void cf_check imsic_ctxt_switch_to(struct vcpu *v)
-     read_unlock_irqrestore(&imsic_state->vsfile_lock, flags);
++#include <asm/aia.h>
++#include <asm/aplic.h>
+ #include <asm/bitops.h>
+ #include <asm/cpufeature.h>
+ #include <asm/csr.h>
+ #include <asm/current.h>
++#include <asm/imsic.h>
+ #include <asm/intc.h>
+ #include <asm/mmio.h>
+ #include <asm/riscv_encoding.h>
+@@ -140,9 +143,43 @@ static void vcpu_csr_init(struct vcpu *v)
+     v->arch.hie = MIP_SGEIP;
  }
  
-+/*
-+ * Map the physical IMSIC guest interrupt file (G-file) assigned to vCPU
-+ * into the domain's stage-2 guest-physical address space.
-+ *
-+ * In the machine's physical address space (SPA), each hart's IMSIC
-+ * supervisor-level file (S-file) is located at offset 0 of its address block,
-+ * followed contiguously by GEILEN guest files at offsets of 1, 2, ..., N pages.
-+ *
-+ * Because a guest OS running in VS-mode expects its own supervisor-level
-+ * interrupt file to be at offset 0 of its guest-physical IMSIC block, the
-+ * hypervisor must use stage-2 address translation to map the vCPU's
-+ * guest-physical "supervisor" page (GPA offset 0) to the specific
-+ * physical guest file page (SPA offset guest_file_id) on the physical hart.
-+ *
-+ * A vCPU runs on the pCPU the scheduler picked for it (v->processor), and
-+ * the guest file it is given (guest_file_id, from the vGEIN allocator)
-+ * belongs to that very pCPU's IMSIC. A guest_file_id of 0 indicates that no
-+ * hardware guest file is selected (matching the architectural behavior where
-+ * vGEIN = 0 in the hstatus CSR selects no guest external interrupt source),
-+ * requiring the VS-file to be emulated in software.
-+ *
-+ * Consequently the mapping installed here is only valid as long as the vCPU
-+ * stays on that pCPU. When it migrates, a VS-file is acquired on the new
-+ * pCPU and mapped at the very same GFN, so the stale mapping needs no
-+ * explicit tear-down: it is simply replaced.
-+ *
-+ * The base guest-physical address advertised to the guest in the device
-+ * tree matches offset 0 of the vCPU's virtual IMSIC block. Stage-2
-+ * translation ensures that guest supervisor accesses to this page are
-+ * transparently routed to the real hardware VS-file granted to it on
-+ * the pCPU it currently runs on.
-+ */
- int imsic_map_guest_file(struct vcpu *v, unsigned int vsfile_id)
++static void schedule_tail(struct vcpu *prev);
++static void noreturn idle_loop(void);
++void noreturn return_to_new_vcpu(void);
++
+ static void continue_new_vcpu(struct vcpu *prev)
  {
--    return -EOPNOTSUPP;
-+    struct domain *d = v->domain;
-+    unsigned int cpu = v->processor;
-+    paddr_t gaddr = GUEST_IMSIC_S_BASE + (IMSIC_MMIO_PAGE_SZ * v->vcpu_id);
-+    paddr_t paddr, guest_offset;
-+    int res;
+-    BUG_ON("unimplemented\n");
++    schedule_tail(prev);
 +
-+    /* Nothing to map in the case of sw interrupt file. */
-+    if ( !vsfile_id )
-+        return 0;
++    if ( is_idle_vcpu(current) )
++        reset_stack_and_jump(idle_loop);
++    else
++    {
++        /*
++         * During a context switch to a new vCPU, interrupts must be disabled
++         * to guarantee that the vCPU's CSR state can be safely restored into
++         * the hart without being clobbered by an interrupt trap.
++         *
++         * For example, when return_to_new_vcpu() finishes, it executes sret.
++         * At that point, the hart checks hstatus.SPV=1 and sstatus.SPP=1 in
++         * order to return from HS-mode into VS-mode. If an interrupt were to
++         * arrive before sret, the trap entry logic would implicitly clear
++         * hstatus.SPV to 0. Correctly restoring it afterwards is non-trivial,
++         * and if left as 0, sret would incorrectly return to HS-mode instead
++         * of VS-mode.
++         *
++         * To avoid this, interrupts are kept disabled during the restore.
++         * Additionally, setting sstatus.SPIE=1 ensures that after sret is
++         * executed (as sstatus.SIE will be loaded from SPIE), HS-mode will
++         * continue to receive interrupts normally.
++         */
++        local_irq_disable();
++        csr_set(CSR_SSTATUS, SSTATUS_SPIE);
 +
-+    guest_offset = vsfile_id * IMSIC_MMIO_PAGE_SZ;
++        csr_write(CSR_HSTATUS, vcpu_guest_cpu_user_regs(current)->hstatus);
 +
-+    paddr = imsic_cfg.msi[cpu].base_addr + imsic_cfg.msi[cpu].offset +
-+            guest_offset;
-+
-+#ifdef IMSIC_DEBUG
-+    printk(XENLOG_DEBUG
-+           "%s: %pv: ga(%#"PRIpaddr") -> pa(%#"PRIpaddr"), cpu(%u), "
-+           "guest_file_id(%u) base_addr(%#"PRIpaddr") offset(%#lx)\n",
-+           __func__, v, gaddr, paddr, cpu, vsfile_id,
-+           imsic_cfg.msi[cpu].base_addr, imsic_cfg.msi[cpu].offset);
-+#endif
-+
-+    res = map_regions_p2mt(d, gaddr_to_gfn(gaddr),
-+                           PFN_DOWN(IMSIC_MMIO_PAGE_SZ), maddr_to_mfn(paddr),
-+                           arch_dt_passthrough_p2m_type());
-+    if ( res )
-+        dprintk(XENLOG_ERR,
-+                "%s: Failed to map %#"PRIpaddr" to the guest at %#"PRIpaddr"\n",
-+                __func__, paddr, gaddr);
-+
-+    return res;
++        reset_stack_and_jump(return_to_new_vcpu);
++    }
  }
  
- int cf_check vcpu_imsic_init(struct vcpu *v)
+ int arch_vcpu_create(struct vcpu *v)
+@@ -551,3 +588,8 @@ static void __init __maybe_unused build_assertions(void)
+      */
+     BUILD_BUG_ON(offsetof(struct cpu_info, guest_cpu_user_regs));
+ }
++
++static void noreturn idle_loop(void)
++{
++    BUG_ON("unimplemented");
++}
+diff --git a/xen/arch/riscv/entry.S b/xen/arch/riscv/entry.S
+index 331446a238d3..bf1843dcea4f 100644
+--- a/xen/arch/riscv/entry.S
++++ b/xen/arch/riscv/entry.S
+@@ -143,3 +143,26 @@ FUNC(__context_switch)
+ 
+         ret
+ END(__context_switch)
++
++/* t0 is used as a temporary reg and is clobbered to oblivion */
++FUNC(return_to_new_vcpu)
++        /* Swap tp with sscratch */
++        csrrw   tp, CSR_SSCRATCH, tp
++
++        /* Set vCPU registers */
++        REG_L   t0, CPU_USER_REGS_SEPC(sp)
++        csrw    sepc, t0
++
++        /* Hartid goes to a0 */
++        REG_L   a0, CPU_USER_REGS_A0(sp)
++
++        /* DTB goes to a1 */
++        REG_L   a1, CPU_USER_REGS_A1(sp)
++
++        /* Set guest mode to supervisor */
++        li      t0, SSTATUS_SPP
++        csrs    CSR_SSTATUS, t0
++
++        /* Enter guest */
++        sret
++END(return_to_new_vcpu)
+diff --git a/xen/arch/riscv/include/asm/current.h b/xen/arch/riscv/include/asm/current.h
+index 78ec52fd8a35..f8babcc3d926 100644
+--- a/xen/arch/riscv/include/asm/current.h
++++ b/xen/arch/riscv/include/asm/current.h
+@@ -47,6 +47,8 @@ DECLARE_PER_CPU(struct vcpu *, curr_vcpu);
+ #define set_current(vcpu)  do { current = (vcpu); } while (0)
+ #define get_cpu_current(cpu)  per_cpu(curr_vcpu, cpu)
+ 
++#define get_cpu_info() (current->arch.cpu_info)
++
+ #define guest_cpu_user_regs() ({ BUG_ON("unimplemented"); NULL; })
+ #define vcpu_guest_cpu_user_regs(vcpu) \
+     (&(vcpu)->arch.cpu_info->guest_cpu_user_regs)
+@@ -58,6 +60,8 @@ DECLARE_PER_CPU(struct vcpu *, curr_vcpu);
+     unreachable();                                          \
+ } while ( false )
+ 
++#define reset_stack_and_jump(fn) switch_stack_and_jump(get_cpu_info(), fn)
++
+ #define get_per_cpu_offset() __per_cpu_offset[smp_processor_id()]
+ 
+ #endif /* __ASSEMBLER__ */
 -- 
 2.55.0
 
