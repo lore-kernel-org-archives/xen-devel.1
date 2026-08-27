@@ -4,58 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91BE1C61DB9
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2026 19:58:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1401421.1637089 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B6FBC61DC4
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2026 22:00:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1401458.1637097 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzgE8-0003Ox-Lw; Thu, 27 Aug 2026 19:57:32 +0000
+	id 1wzi8E-0008Kn-VT; Thu, 27 Aug 2026 21:59:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1401421.1637089; Thu, 27 Aug 2026 19:57:32 +0000
+Received: by outflank-mailman (output) from mailman id 1401458.1637097; Thu, 27 Aug 2026 21:59:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzgE8-0003Oq-Go; Thu, 27 Aug 2026 19:57:32 +0000
-Received: by outflank-mailman (input) for mailman id 1401421;
- Thu, 27 Aug 2026 19:57:31 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wzi8E-0008Kg-SS; Thu, 27 Aug 2026 21:59:34 +0000
+Received: by outflank-mailman (input) for mailman id 1401458;
+ Thu, 27 Aug 2026 21:59:33 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ayan.kumar.halder@amd.com>) id 1wzgE6-0003Ok-MS
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 19:57:31 +0000
+ (envelope-from <Volodymyr_Babchuk@epam.com>) id 1wzi8C-0008KZ-Pk
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 21:59:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzgE5-00GDl4-A7
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 21:57:29 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wzi8A-0006rH-He
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2026 23:59:30 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ayan.kumar.halder@amd.com>)
- id 6a90966e-bab6-0a2a0a5309dd-0a2a4508c178-46
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 21:57:28 +0200
-Received: from [40.107.209.41]
- (helo=PH8PR06CU001.outbound.protection.outlook.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ayan.kumar.halder@amd.com>)
- id 6a9096a5-f659-0a2a45080019-286bd12993bb-3
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 21:57:28 +0200
-Received: from BN9PR03CA0201.namprd03.prod.outlook.com (2603:10b6:408:f9::26)
- by DM4PR12MB6328.namprd12.prod.outlook.com (2603:10b6:8:a0::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.8; Thu, 27 Aug
- 2026 19:57:19 +0000
-Received: from MN1PEPF0000F0DF.namprd04.prod.outlook.com
- (2603:10b6:408:f9:cafe::32) by BN9PR03CA0201.outlook.office365.com
- (2603:10b6:408:f9::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.10 via Frontend Transport; Thu,
- 27 Aug 2026 19:57:18 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- MN1PEPF0000F0DF.mail.protection.outlook.com (10.167.242.37) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.382.8 via Frontend Transport; Thu, 27 Aug 2026 19:57:18 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 27 Aug
- 2026 14:57:18 -0500
-Received: from [10.71.198.170] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.45 via Frontend
- Transport; Thu, 27 Aug 2026 14:57:16 -0500
+ (envelope-from <Volodymyr_Babchuk@epam.com>)
+ id 6a90b29c-bab6-0a2a0a5309dd-0a2a4504e33a-34
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 23:59:30 +0200
+Received: from [52.101.65.78]
+ (helo=DU2PR03CU002.outbound.protection.outlook.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Volodymyr_Babchuk@epam.com>)
+ id 6a90b341-b57f-0a2a45040019-3465414e11f4-3
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 23:59:30 +0200
+Received: from VE1PR03MB6078.eurprd03.prod.outlook.com (2603:10a6:803:113::29)
+ by GV2PR03MB10952.eurprd03.prod.outlook.com (2603:10a6:150:279::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.10; Thu, 27 Aug
+ 2026 21:59:26 +0000
+Received: from VE1PR03MB6078.eurprd03.prod.outlook.com
+ ([fe80::4722:b91:9b24:ee48]) by VE1PR03MB6078.eurprd03.prod.outlook.com
+ ([fe80::4722:b91:9b24:ee48%3]) with mapi id 15.21.0360.006; Thu, 27 Aug 2026
+ 21:59:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -67,643 +55,373 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=taA2ubgi1m/FUN0kY92dFrxnvoP1xJRpEonJV4O9ZE07ltoSw+gF7upA35ZHuAAN/y5ro/000yDdXTDX8loWiLptKG7FaRiZBagoDqm7wpoCUSn1fG/UZcKc6CsO0/lqZSdqMlXzoV6uToM8NVPwewKtoitN0oME60ElTylAsOTO9rO4jz+4FnUzwSgZFQhlnEcWqtDM3UHdmMIURMDodcTYYJ22pQKMHppsicCXYyZ8gKgU9fDn5doWxia2AyxZoEawbsC3HCLShTBdrYXTiAjhKPhEsXwj0CVJcJKFYaR60qAMUwhbm8vASxLuYISvbVoy8W67hK2gHOX+RsymYQ==
+ b=xHcygqwWKbfkf9JLAeB34gpGGkTovtuR+28iDYVTyR6q27Ksu+Ph/Am6RYew0UhvjqmhD8Iczp7PhjXcQQrt9eh0+v4B3y0SXp32ZwAvNV0Yl+VGqQvgFDaFjGuS9loA3GOkuo0rrNbMp3oVzuIruiQYAMyOfEp8zXjmeXDen09g1iyuiu11SzlfDvUIA9NzTSx08dH7mnegf4aKxvEvfVsHARZyCIYjrw4HsL6LkChYwELpVfOdZROJj76MiJv9Vmr1owISWPlnYKZynHRWFl8n4FFpLXkWqrW4pS0W0ANEyHi4Zi/UV7kErFHKf3eFzEW/tjmhH9V2ptob/MdLHg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tMfEbo899TzTcpBwUVQqcC0pOsnV+on/UKm8PTsRT/o=;
- b=y6F6g2jMfUxHmM1btBCz3Ye1sizwzniRgtheqcaAHMCg3hY2Zk2i+U2KdNMjzaPMvvN4qFaE1p3up8DwqbXa+DU1P/VQJn3nn3vNbFR1ArQkITcV/B0rnWfaQZ2tRxVGut7aJnujCwd3cNQkKbWlZcRzkV5KBCUucCKPb+0jzUmhD47kdmZCnQPK4dymIMVoKAMFpa0/VEnRB94GRfoFoZUSQZBLP5Fkv6JI9wEdblHqHrQjFQ+I6lprTlcej72EloSvMxNIq0vb4hqSpo/6x89JsRR4yy+49z+zCl0R3w1YXbrogDQ+rN/xHA6Z9r1BHs66MW/lWB4eB8RvxQolZQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=xen.org smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ bh=ooVH48yqk1bzMn6RH+KuMySCBqlnQ+Fj7jfI64jYRU0=;
+ b=LEIBnHQk+FFFv1lyFoLkqV0qtKs2YG0oCIlTrTHG/PfbKpLJDsqs/+k6G1Ira5C5HHvUVAynjmTasSGMraihS88r4Y/2Hv49Z93G6/K/98kCejwYrdGQgwMF6lbRNDgPDEW9DRIf6765uxMuynmeFzXIkdRnkQtluMXDiBy3oMynvNNyP600+Gv4eRhHQs+OwNPJBDaor9L0It/pG26Gw0Z67TW/1/aQolH4FBBXXo4q6ywlMgR2njpp4AYiFeLE9/wPUSUAvM/t7gnXp7EDCqqMYy3of8h0YFVSuZ3A8Gn/jTIcyPWUC/TVrKQqdsSJ/2uowgPVLXrWx5/HSW4/7Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tMfEbo899TzTcpBwUVQqcC0pOsnV+on/UKm8PTsRT/o=;
- b=F+eVfEDlUzMcRyXe3CPjKlTuS5daYtatQnPX/bZhuXCYzQh0Qf+heAPgTWjpLCRTJ+p7D0Uh0W8bN9IqX2ziCZBHD0yDpOO5m2L7FwFi0ugrnkOuqw6+ZQ0ju39m8oefcZKC2rO1FrrEPWhovAb2b2fh+Du5D4faUOeckXJmSxU=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <5ab7244d-66fb-4f06-a88d-5c64d515e760@amd.com>
-Date: Thu, 27 Aug 2026 20:57:11 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 for 4.23] Add GICv3 SGI boot/self tests in Xen
-To: Julien Grall <julien@xen.org>, Ayan Kumar Halder
-	<ayan.kumar.halder@amd.com>, <xen-devel@lists.xenproject.org>
-CC: Doug Goldstein <cardoe@cardoe.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Andrew Cooper <andrew.cooper3@citrix.com>, "Anthony
- PERARD" <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>,
-	"Jan Beulich" <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
-	<roger.pau@citrix.com>, Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20260529170956.49797-1-ayan.kumar.halder@amd.com>
- <b1e5ec80-a6be-4339-a06e-a47110349cd4@xen.org>
+ bh=ooVH48yqk1bzMn6RH+KuMySCBqlnQ+Fj7jfI64jYRU0=;
+ b=f/0P00PMeEI3kcOh7lJ314gnjrgPaYFpPP0B3yF7SAAtcC27lCwRn1CwpsxZM5MAmVzOoRhYyMsZrkwAFZdb1kJOgb5GrZ2JXXZytw5Xz8ldcygIVFWZ4E7vu+B4Bh6yvXlvFnlfCeOLABp3bvHyEjtPnmXynd12ZVaIlFTyY01n7zTeHqiA3BoWnPeTuV6BM0uYlrLK1STLfP7QkIlIxj5i+ZxOYVtXssdrv4F7e0F03wLxGZdCnJ1dW+cAlk35sOWo7/vhezR8GNvSD44oO/CfEfyLbXL5J+JavCVsbYi9iBOpRPF+z4vhjcALwwFlyU61O0tiajLMhisKB8AL5g==
+From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+To: Mykola Kvach <Mykola_Kvach@epam.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand
+ Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>
+Subject: Re: [PATCH v12 13/13] xen/arm: Add host system suspend backend
+Thread-Topic: [PATCH v12 13/13] xen/arm: Add host system suspend backend
+Thread-Index: AQHdNjDpN5STlrpYfEyx41qjOa3h6Q==
+Date: Thu, 27 Aug 2026 21:59:25 +0000
+Message-ID: <87mru7w7gk.fsf@epam.com>
+References: <cover.1787838455.git.mykola_kvach@epam.com>
+	<9d3cf11530edf478ae7a597f1c0934f4b7b1a270.1787838455.git.mykola_kvach@epam.com>
+In-Reply-To:
+ <9d3cf11530edf478ae7a597f1c0934f4b7b1a270.1787838455.git.mykola_kvach@epam.com>
+	(Mykola Kvach's message of "Thu, 27 Aug 2026 17:32:01 +0300")
+Accept-Language: en-US
 Content-Language: en-US
-From: "Halder, Ayan Kumar" <ayankuma@amd.com>
-In-Reply-To: <b1e5ec80-a6be-4339-a06e-a47110349cd4@xen.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0DF:EE_|DM4PR12MB6328:EE_
-X-MS-Office365-Filtering-Correlation-Id: a8fe74e0-fd7a-45de-1c4b-08df0475667f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|82310400026|1800799024|7416014|376014|36860700016|13003099007|11063799006|6133799003|4143699003|5023799004|10067099003|56012099006|18002099003|22082099003|3023799007|10063799003;
-X-Microsoft-Antispam-Message-Info:
-	oj7urbt/t6W5ct+P6Av998fvRxGZyJvilMRmw5N9G2Iw1Mt4NibKUQleHr9OR5volVOQtJClQUpXJ9UVcy1uRu28atiM/blLQ9o54wybqnnDMK8pYPen4tRccOG0LEKnFFOE17s9ZyxbhdVV32mkDdZPB+2DMN3zRMgqa7lg73AEnUjXvsJJeNJqqaYvI4s6XpBmmITMi/J6sx3y3/UGfvis7eNpCrLN+GEyvWEmsAmORf4GNWhpAF7C7ji4W2ykedpW2mELN1Nyge7Bx7auXkFylUzxyms/VG7pOriWHCC/cIdIa1rZpA86DEykTfo+Q02Kehi21d9ShA4sBQgxODuZFs5uuWNo+kafrcPol0Eh9pzH0t0Waez3wer/4//81iAIGW2EHjjAHvnY8UbvDFhAwl5lJbJdqAU4YmfnkLit7TxZDD/HvJ9FjG1tUbJ4txhCEyvnUOmZJ3n/zq0hqpnI0e0hkxgaPj7rMHLZkM4kQ/VG6niKw2ToFa738nNsbsBUAqZxzgKm/d/5WZAOQ/YU7/kV24J5O23WXjMfjcS3Ibq50VxArjrXbJJrdqdaMXMbuvVEUYo8Thbd/AWr2BjUOX09lYY/zvkIPV97JYJzkkiPPFhwQdWoLO6ZmKH56mUvz5scAuBct1Ek77qk6g==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(82310400026)(1800799024)(7416014)(376014)(36860700016)(13003099007)(11063799006)(6133799003)(4143699003)(5023799004)(10067099003)(56012099006)(18002099003)(22082099003)(3023799007)(10063799003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	Q8vgWheaJ5TASn5fT1e2OWT1lzcJJmW9zIcZ9mDHZgDEDStLSJvcsGmASIBo29d5DWGsXsemTR6/xWIDUzOlH65vfXLC40UUvqj4rwv2if5cQC2HtqKvMpJ+DknD0UTVYBwV80k6TFUEFVqo6rrqTWk8j9eXSkVXxRcpUSLl0yjOmFUomepv6C/mq8c7zaFShgZMtRoH4yxEhKc47LUbXhGSx90XoqPfmrXDPxQJr9C/fXFtXYeEfSI2QOgSfERoKFl5mCmlI5/x8FffFfLR3z0mRJ5GR2Yu3PMApfDr4MD/0sc9Ibq1MuNQTk7zjkpIozsQAOeosJeaJ+i9exGw+2CvmRrdmU+MZXGVJybZI0mQHHER/4WcyrXOVV0igq+ia3IiXuU/S3StseC/aCklRNXYpeyU590opOOwbeDXKUCSJDQ5pgBSkh739na/AgZb
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2026 19:57:18.6758
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+user-agent: mu4e 1.14.3; emacs 30.2
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: VE1PR03MB6078:EE_|GV2PR03MB10952:EE_
+x-ms-office365-filtering-correlation-id: de190417-e6c2-4abb-ca4b-08df0486759e
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|1800799024|23010399003|376014|42112799006|366016|38070700021|3023799007|56012099006|10067099003|6133799003|5023799004|11063799006|4143699003|18002099003|22082099003;
+x-microsoft-antispam-message-info:
+ 31Ulm/vpYSIi6G4tXW/NDQ7zroXa9lb/H3lfSOdWtMevYCVqbonoYJoMUgE7DiSAjHn3H04/HEghzu9RYHfBVDzBCf42s1UP2Xv8XNSVu0utMxv202yk2L4C3JdNXsq7ATocncVG57/3PNhYf50ek4ck+YV10SvDzfJq3gT+3cFpZRIQZ7ogymQ7REp9tqFKwh1i8nxl50N4I5k/zzy5zYZBepWpuNZqOgv934nzWJv3lHMqpktxG9v/SabZS/d8IdniUAc1T39QEsl17SGAHesi0MTEdbGtyWJtcouIVFw+RqSH3JGyfdExRE6bWlJwnlybVcU69NtFQ9Ayb1g+kU/TeWUNnaPFiHJPMisPFymyo4JYqG+fmfLYcJ32QVvR9vhpC6x65DEug9hsB8jcRCK/trT4IHQgP7AQD3GHXDzgbREA5t9cztUC14EUk61gy7qJ797kJCUIvCGBowwd0c7//sdp0/DONSww1bC1pYZ1FmwOF46X2avwgckealNKCmgMDIBSCFKSnTWdeHzvTBFm/GZN1AVZgOZV19nniVx54cEvwLJU+khIiIzc+MXb7ASk3W2UmmDEbY2dKZiwlzwZsUqOUgVgbmEsU9YDr1XYR0aeGix+/jIOybCDfoxvTew28dmB0yRHpXUp623NIYtN6/sAuYTF4xt29vBmxA06cwoUb5AbeygZVXiHErA+kKUg4+gs4kJxGyiTmdD27W0BEZZW8DJ6odh2KSlZRwA=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR03MB6078.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(376014)(42112799006)(366016)(38070700021)(3023799007)(56012099006)(10067099003)(6133799003)(5023799004)(11063799006)(4143699003)(18002099003)(22082099003);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?utf-8?B?R29SL0tLUzNxM0RzZzZIM1NXbUhWSDUvZFdQN21mc2kvaUxNNkxaSW1CS0Ry?=
+ =?utf-8?B?K0ZvUTROcnZjS2NVN25xakJ6UDNrY3MzQjRzb1Z3UFlZdnd2cmVPb21ORzA1?=
+ =?utf-8?B?Q2RJNm9jdTc0VndWSjJlSlhGa3JjV1gxaVUzdVRYRCticEVuWW1qK3U4OVJv?=
+ =?utf-8?B?YkllQmx5cGY0QXFCTXhPaXgvOUN6dU9xa0ZXRE95dmN1RlZ6UXFzR1R1RlR4?=
+ =?utf-8?B?ZzdDR3RVem9UdXUrdXA5QVhaWjVQSU5Cb29KUlVqSTR6NjNwdDVqT283WVBC?=
+ =?utf-8?B?UVlldkpOV3A5dHV2RHNrUyt5Qm1wazYzZWI5T3JrbHlEZG9tK1RqVk5CcUlw?=
+ =?utf-8?B?VkpRZGdvRWhRTW9FRU16ZDZpejUrSUkyZHk5cVluWGVBVmUwMkNJMXRERytm?=
+ =?utf-8?B?MVlTWlpSbjNCNzNPeGU2OFk3WFpudUowOGhGQ1BzRmZmUnNKRS9OVzlGVk51?=
+ =?utf-8?B?VC9vV2dlS2w3UmZReEtWZjBzUGQrYklhbEFadWJ0RnJBRFJnK0ZudVBRc2p6?=
+ =?utf-8?B?UkhySGRWejZmMGxXRStjQzkyNWVHdTBGa2RyVzRTTGEwdUIvMytwNUROMnpI?=
+ =?utf-8?B?bHkwbGdPOUNnRzd5NVB5bVVqUko5WVZvYkxycWtoUkVDVGJhNE5qclRHRWc4?=
+ =?utf-8?B?S3pBQWNKUnB6WVBvcGxBb2V0YUpHQ3ovdjU1Z0RPR3Z4bUROQjdRZCtDTUZm?=
+ =?utf-8?B?R1liS3dwNTZhS0RDb0NYMmhtT2cwSGo3WFFWajQvUy8vMWw0dlRtSUJNNGtm?=
+ =?utf-8?B?cGI2ZnBCNFBxUldpVFZSTTdwRkVpYjVRTGc4TTNwRjl0eHE2T0JRd3lzR09B?=
+ =?utf-8?B?cHp2eW0yU2IwMWJyVVFoQmh0WEprVlVXTEFjN2QxWUNSNTBBeG5aL3lDRVpI?=
+ =?utf-8?B?VWlQRlJhcFY3WEV0RDc4anhHZEs1U0VjU25xLzV0OGdMbURNbDVZeVBQdEkw?=
+ =?utf-8?B?MDFHUFhRNEUrbTB6cW9RakpBc0M0Mno0ZktKUFprdTd2YjJZaC9iZTJmenhk?=
+ =?utf-8?B?a0VBZE11dTZVRVd2TUM0bkdKVXhHek1SR1l6b250cmtLaStIOEhQZUtkVC9m?=
+ =?utf-8?B?SStwOUYvWFFvb1RyNXJWdStRcW1EYWt5dGtraFQzcEtRUkprdCs1ajZBenZw?=
+ =?utf-8?B?ZVR2YkJWL0QyS0YyZGFPTmF5SThHSFBTNnJCUEc5Yy9TRFhTaVlBUmkvUCtV?=
+ =?utf-8?B?UktHUFI2S2t1REV1cG1GWjBkQ2c3SUtoSGxBN2tpa1JmU1Z6WEd3RG5uR242?=
+ =?utf-8?B?OFJRMjhNVGlVdWsvV2FFSVBkUE0yMkIrWWJ1VVc4aUthQzVhSzltOFFiSnlK?=
+ =?utf-8?B?Vkw2aDAxS3ZPazJSai9XeENTNFQ0UEcvU2lFOVVlS1BFWEdnNHV4cWtSK1c2?=
+ =?utf-8?B?NmFzVVB4UmdEQXl4WE93TmN6bm8xRU5wSkpSOFlzelRMNzBWR3RPVnc1cnVa?=
+ =?utf-8?B?aDQyRGZLLzlidDlBUHZXZ1hBYXN1ZXFQRjRRNnEra25iRGFtaWpPQkw5MDUr?=
+ =?utf-8?B?OWY3bVJTV2U4WnBrMTZRZW9WNGhpcjVObnpsamovZDRlVGtzYWdPVXgwV25q?=
+ =?utf-8?B?dVdjMDc5S1E5MGNGaThxQUYydDdvd25qMElEUTNsUlJEMUF2bVNrazNUT052?=
+ =?utf-8?B?b0xld3hHc1VLckZ3OTRRMFl6bFNrYTFMVnliTXdwNElta2hTRk9jTmVReE5R?=
+ =?utf-8?B?MDdUQXBrRkZ1TXdwNmFCS0dVb2ppRDB5dnFJd1M4R2RJRnJkcEZPMnY2REVW?=
+ =?utf-8?B?VDEvZWZZaEpSeTExd1JlOXBvdWsySWJoR003TEdIMnNsRkI4a0JCMmd2R2Zq?=
+ =?utf-8?B?K3FzS1hncDVmSGg1Y09PVFVNQVlUcHllNDBSeUkwdGFaMmtwY3Y4Znozbkxs?=
+ =?utf-8?B?bzVkdFpmT2tPQTdHMGN6eHNOcUNXc0YzdkRIY1ovR2pYODBBMk4zb3A0QWkv?=
+ =?utf-8?B?b1hyYWJ1Q29UOE95b3pKWEZWcjd6RmlzdW5Ja210bng5N0RIWC9TazZVWWpW?=
+ =?utf-8?B?RjlmaGE4T0RKOVpRMld2VnJONUIvb2pyaGF6UnhsSHBXQU9pT0JsUGlPUUE3?=
+ =?utf-8?B?RzFPVm1zSFZyMWhTaHljM0ZXTEhJMGNwQ0RHRDBYeGh1TGNnR0FKNHBGdjJF?=
+ =?utf-8?B?bUR6andzbmpyeEUwRDhHUjVDSU1tczFTOXFYcUtDVDhjSUM1cUtpd3h3dmV6?=
+ =?utf-8?B?bzVWOEFPdlhTNCtJUXhXa2xYUTlhSFR2Nm1yUzdUczZybUdsUVJ3WVkvRzhy?=
+ =?utf-8?B?SURuVUNqb0tsNnVDUHFLSVZVRW9DVTRFd0FOb0NPMVB5dXUvak5vVzhzY1d2?=
+ =?utf-8?B?aFNvdWtIcy9MVU1VSy9jNWd6V2pCK0l0RzZsdUlNZkRWQXJmSmhEMkZFM1pt?=
+ =?utf-8?Q?jVlMu9YEN+459OjA=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: VE1PR03MB6078.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: de190417-e6c2-4abb-ca4b-08df0486759e
+X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Aug 2026 21:59:25.5178
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a8fe74e0-fd7a-45de-1c4b-08df0475667f
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	MN1PEPF0000F0DF.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6328
-X-purgate-ID: tlsNG-c1860d/1787860648-D477387B-B8BA7429/0/0
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: mZ3F2sFp2qaseNjJFmUmGQoH0212BaaErxky5KUe/vF1OnEeZny+Fjt/mz4ZK0r7q0ZfMRc5qiajlPzODlyC9vksu8bAjiEXU/1RvsB0LzA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR03MB10952
+X-purgate-ID: tlsNG-ebf023/1787867970-C1AD0B50-48355DB1/0/0
 X-purgate-type: clean
-X-purgate-size: 22587
+X-purgate-size: 20318
 
-
-On 19/06/2026 22:12, Julien Grall wrote:
-> Hi Ayan,
-Hi Julien,
->
-> On 29/05/2026 18:09, Ayan Kumar Halder wrote:
->> Boot self-tests (also referred to as boot-time tests or power-on
->> self-tests) are intended to validate internal features of Xen during
->> bring-up. They are meant to be run in a debug / validation environment;
->> Xen is not expected to remain functional for production use after the
->> self-tests have executed.
->
-> Looking at the code below, isn't Xen functional even after the self-test?
-
-Yes as discussed on Matrix, I have modified the test so that Xen boots 
-normally after running the self-test.
-
-Xen will panic if the self test fails.
-
->
->> The purpose of these tests is to catch
->> hardware configuration issues early and to confirm that the platform
->> on which Xen has been brought up is sane. The expected flow is:
->> build Xen with the self-tests enabled, boot it, inspect the results,
->> and then reboot into the usual production configuration.
->>
->> Introduce the tests to confirm that:
->> 1. A cpu can send SGI 0 to itself
->> 2. A cpu can send SGI 0 to another specific CPU
->> 3. A cpu can send SGI 0 to all the other CPUs
->> 4. A cpu can send SGI 1 to another CPU
->
-> I am not sure what you meant by SGI 0 and SGI 1? Below you seem to be 
-> use only a SGI (which is neither 0 or 1) except for one specific test: 
-> cpu 0 injecting an SGI to a specific CPU (0).
-Yes, I fixed this in v3.
->
->>
->> These tests aim to test Xen has configured the GIC correctly to use 
->> SGIs.
->> Thus, the tests invoke specific APIs of GIC driver.
->>
->> Also, introduce a config CONFIG_BOOT_SELFTEST which enables these tests.
->> The option defaults to N; it should be disabled for production builds 
->> and
->> is intended for the validation pipeline and coverage measurement. The
->> tests run during Xen boot and validate internal interfaces such as Xen's
->> interface with hardware, firmware and the bootloader.
->>
->> Also, introduce an integer command line parameter "gic-test". By 
->> default, it
->> is set to 0 which means no tests are enabled.
->> For running SGI tests, "gic-test" should be set to 1. In future if we 
->> add
->> tests for distributer, ITS, LPI, etc, then we can use different numbers.
->> Thus, each number denotes a functionality of GICv3 which can be tested
->> independently and within a single boot of Xen.
->>
->> In this way, we ensure that the tests to validate SGIs do not impact 
->> any other
->> tests.
->>
->> In order to keep all the boot-time self-tests together in the binary, we
->> have introduced a separate section "initcallboottest". All the tests are
->> registered using __initcallboottest. During the bootup of each core, Xen
->> invokes do_init_boottests() to run the these tests. All these tests are
->> invoked before Xen creates the domains (in case of primary core) or runs
->> the idle loop (in case of secondary core).
->>
->> Note: it was suggested that, once the boot self-tests have run, Xen
->> should call machine_halt() rather than continue booting (since this
->> build is only intended for validation). This is not wired in here
->> because the SGIs are sent from the primary and secondary CPUs and
->> received asynchronously on the target CPUs. There is no definite point
->> in the boot flow at which Xen can know that every send has been
->> observed by its receiver, so "after the tests have completed" has no
->> well-defined moment at which to insert machine_halt().
->>
->> Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
->> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
->> ---
->> Link to v1 (RFC):
->> https://lists.xenproject.org/archives/html/xen-devel/2025-09/msg00956.html 
->>
->>
->> Upstream CI run (xen-project/people/ayankuma/xen fork, one commit on
->> top of xen-project/xen staging — all Linux builds + tests including
->> qemu-smoke-boot-selftest-arm64-gcc-debug passed; only the macos jobs
->> sit pending because the personal fork has no macos runner):
->> https://gitlab.com/xen-project/people/ayankuma/xen/-/pipelines/2561806695 
->>
->>
->> Changes in v2:
->>   - Renamed the patch from "xen/arm: Introduce GICV3 Self Tests" to
->>     "Add GICv3 SGI boot/self tests in Xen", and rewrote the commit
->>     message to explain the intent of boot self-tests (debug /
->>     validation builds only, Xen not expected to remain functional
->>     afterwards).
->>   - Moved the selftest code out of gic-v3.c into a dedicated file
->>     xen/arch/arm/gic-test.c, gated by CONFIG_BOOT_SELFTEST
->>     (Stefano, Grygorii).
->>   - Introduced a generic boot-self-test framework: new section
->>     "initcallboottest", registration macro __initcallboottest, and
->>     do_init_boottests() invoked once per CPU after
->>     local_irq_enable(), so the test runs on every CPU (boot +
->>     secondaries) and no longer collides with the IRQ-enable timing
->>     in gicv3_init() (Julien #1, Julien #3).
->>   - Added Kconfig option CONFIG_BOOT_SELFTEST in
->>     xen/arch/arm/Kconfig (arm-only for now; arch-specific because
->>     the only registered test is GICv3-specific).
->>   - Reserved a dedicated SGI value GIC_SGI_TEST in enum gic_sgi
->>     (xen/arch/arm/include/asm/gic.h), so the selftest never
->>     reuses a functional SGI (Grygorii #3).
->>   - Added a runtime integer command-line parameter "gic-test" so
->>     the selftest binary can be shipped but its execution selected
->>     at boot (gic-test=0 -> no-op; gic-test=1 -> SGI tests). Future
->>     GICv3 features (distributor, ITS, LPI, ...) can claim further
->>     values (Grygorii #2, partial).
->>   - Documented why machine_halt() is not invoked after the tests:
->>     SGI delivery is asynchronous, so there is no well-defined
->>     point after which every send has been observed by its
->>     receiver (Julien #2).
->>   - Wired the tests into upstream GitLab CI: new build job
->>     alpine-3.18-gcc-debug-arm64-boot-selftest, new test job
->>     qemu-smoke-boot-selftest-arm64-gcc-debug, and the runner
->>     script automation/scripts/qemu-boot-selftest-arm64.sh that
->>     dumps the QEMU virt DTB, injects
->>     "gic-test=1 console=dtuart sync_console" into
->>     /chosen/xen,xen-bootargs via fdtput, boots Xen, and checks
->>     for each "Sending GIC_SGI_TEST ..." followed by the matching
->>     "CPU%u: GIC_SGI_TEST received".
->>
->>   automation/gitlab-ci/build.yaml               |  8 ++
->>   automation/gitlab-ci/test.yaml                |  8 ++
->>   .../scripts/qemu-boot-selftest-arm64.sh       | 81 +++++++++++++++++++
->>   xen/arch/arm/Kconfig                          | 15 ++++
->>   xen/arch/arm/Makefile                         |  1 +
->>   xen/arch/arm/gic-test.c                       | 52 ++++++++++++
->>   xen/arch/arm/gic.c                            |  5 ++
->>   xen/arch/arm/include/asm/gic.h                |  3 +
->>   xen/arch/arm/setup.c                          |  2 +
->>   xen/arch/arm/smpboot.c                        |  2 +
->>   xen/arch/arm/xen.lds.S                        |  4 +
->>   xen/common/kernel.c                           | 11 +++
->>   xen/include/xen/init.h                        |  3 +
->>   13 files changed, 195 insertions(+)
->>   create mode 100755 automation/scripts/qemu-boot-selftest-arm64.sh
->>   create mode 100644 xen/arch/arm/gic-test.c
->>
->> diff --git a/automation/gitlab-ci/build.yaml 
->> b/automation/gitlab-ci/build.yaml
->> index 7f5b5938e8..8df45caa86 100644
->> --- a/automation/gitlab-ci/build.yaml
->> +++ b/automation/gitlab-ci/build.yaml
->> @@ -439,6 +439,14 @@ alpine-3.18-gcc-debug-arm64:
->>         CONFIG_UBSAN=y
->>         CONFIG_UBSAN_FATAL=y
->>   +alpine-3.18-gcc-debug-arm64-boot-selftest:
->> +  extends: .gcc-arm64-build-debug
->> +  <<: *build-test
->> +  variables:
->> +    CONTAINER: alpine:3.18-arm64v8
->> +    EXTRA_XEN_CONFIG: |
->> +      CONFIG_BOOT_SELFTEST=y
->> +
->>   alpine-3.18-gcc-arm64-randconfig:
->>     extends: .gcc-arm64-build
->>     variables:
->> diff --git a/automation/gitlab-ci/test.yaml 
->> b/automation/gitlab-ci/test.yaml
->> index 8770c523e2..2398c6299a 100644
->> --- a/automation/gitlab-ci/test.yaml
->> +++ b/automation/gitlab-ci/test.yaml
->> @@ -524,6 +524,14 @@ qemu-smoke-dom0less-arm64-gcc-debug-gicv3:
->>       - *arm64-test-needs
->>       - alpine-3.18-gcc-debug-arm64
->>   +qemu-smoke-boot-selftest-arm64-gcc-debug:
->> +  extends: .qemu-arm64
->> +  script:
->> +    - ./automation/scripts/qemu-boot-selftest-arm64.sh 2>&1 | tee 
->> ${LOGFILE}
->> +  needs:
->> +    - *arm64-test-needs
->> +    - alpine-3.18-gcc-debug-arm64-boot-selftest
->> +
->>   qemu-smoke-dom0less-arm64-gcc-debug-staticmem:
->>     extends: .qemu-arm64
->>     script:
->> diff --git a/automation/scripts/qemu-boot-selftest-arm64.sh 
->> b/automation/scripts/qemu-boot-selftest-arm64.sh
->> new file mode 100755
->> index 0000000000..a37dba3e07
->> --- /dev/null
->> +++ b/automation/scripts/qemu-boot-selftest-arm64.sh
->> @@ -0,0 +1,81 @@
->> +#!/bin/bash
->> +
->> +set -ex -o pipefail
->> +
->> +# Boot the prebuilt Xen binary under QEMU with 
->> CONFIG_BOOT_SELFTEST=y enabled
->> +# and gic-test=1 in xen,xen-bootargs, then verify the four GICv3 SGI 
->> self-tests
->> +# pass by inspecting the serial log.
->> +
->> +XEN=binaries/xen
->> +QEMU=./binaries/qemu-system-aarch64
->> +DTB_RAW=binaries/virt.dtb
->> +DTB=binaries/virt-bootselftest.dtb
->> +LOG=smoke.serial
->> +
->> +test -x ${QEMU}
->> +test -f ${XEN}
->> +
->> +# Dump the auto-generated DT from the QEMU virt machine, then inject
->> +# /chosen/xen,xen-bootargs.  The selftest infrastructure invokes
->> +# do_init_boottests() during early boot; gic-test=1 selects the 
->> GICv3 SGI
->> +# tests.
->> +# -net none avoids QEMU's default virtio-net-pci, whose efi-virtio.rom
->> +# is not shipped with the qemu-system-aarch64 artifact used in CI.
->> +${QEMU} \
->> +    -machine 
->> virt,virtualization=true,gic-version=3,dumpdtb=${DTB_RAW} \
->> +    -cpu cortex-a57 -m 1024 -smp 2 -display none -net none
->> +
->> +cp ${DTB_RAW} ${DTB}
->> +fdtput -t s ${DTB} /chosen xen,xen-bootargs \
->> +    "gic-test=1 console=dtuart sync_console"
->> +
->> +rm -f ${LOG}
->> +timeout 60 ${QEMU} \
->> +    -machine virt,virtualization=true,gic-version=3 \
->> +    -cpu cortex-a57 -m 1024 -smp 2 \
->
-> This means that there is no much difference between "send an SGI to a 
-> specific CPU" and "send an SGI to others CPU". I think it would be 
-> more meaningful to use 3 or more pCPUs.
-Yes, now I use 4 pCPUs.
->
->> +    -serial file:${LOG} \
->> +    -monitor none -display none -no-reboot -net none \
->> +    -dtb ${DTB} \
->> +    -kernel ${XEN} || true
->> +
->> +# Each "Sending GIC_SGI_TEST ..." line must be followed by the matching
->> +# "CPU%u: GIC_SGI_TEST received".
->> +fail=0
->> +check_pair() {
->> +    local send_pat=$1
->> +    local recv_pat=$2
->> +    local send_line recv_line
->> +
->> +    send_line=$(grep -n -- "${send_pat}" ${LOG} | head -n1 | cut -d: 
->> -f1)
->> +    if [ -z "${send_line}" ]; then
->> +        echo "MISSING: ${send_pat}"
->> +        fail=1
->> +        return
->> +    fi
->> +
->> +    recv_line=$(grep -n -- "${recv_pat}" ${LOG} \
->> +        | awk -v bl="${send_line}" -F: '$1 > bl {print $1; exit}')
->> +    if [ -z "${recv_line}" ]; then
->> +        echo "MISSING (after line ${send_line}): ${recv_pat}"
->> +        fail=1
->> +        return
->> +    fi
->> +
->> +    echo "OK: '${send_pat}' -> '${recv_pat}' (lines ${send_line} -> 
->> ${recv_line})"
->> +}
->> +
->> +# Boot CPU sends SGI to itself
->> +check_pair "Sending GIC_SGI_TEST to self CPU0" "CPU0: GIC_SGI_TEST 
->> received"
->> +# Secondary CPU sends SGI to itself
->> +check_pair "Sending GIC_SGI_TEST to self CPU1" "CPU1: GIC_SGI_TEST 
->> received"
->> +# Secondary CPU sends SGI to primary
->> +check_pair "Sending GIC_SGI_TEST to CPU0 from CPU1" "CPU0: 
->> GIC_SGI_TEST received"
->> +# Send to all-but-self
->> +check_pair "Sending GIC_SGI_TEST to all except CPU1" "CPU0: 
->> GIC_SGI_TEST received"
->> +
->> +if [ ${fail} -ne 0 ]; then
->> +    echo "FAILED"
->> +    exit 1
->> +fi
->> +
->> +echo "PASSED"
->> diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
->> index 79622b46a1..0e23bbf20b 100644
->> --- a/xen/arch/arm/Kconfig
->> +++ b/xen/arch/arm/Kconfig
->> @@ -476,6 +476,21 @@ config ARM64_HARDEN_BRANCH_PREDICTOR
->>   config ARM32_HARDEN_BRANCH_PREDICTOR
->>       def_bool y if ARM_32 && HARDEN_BRANCH_PREDICTOR
->>   +config BOOT_SELFTEST
->> +    bool "Enable boot-time self-tests"
->> +    default n
->
-> Above you said, this is not meant for production. So I was expecting 
-> to see a dependency on CONFIG_DEBUG.
-yes, I have added this
->
-> If the intention is to use it in release build, given the current 
-> behavior (e.g. breaking test), I think this should depend on 
-> UNSUPPORTED so we don't get security report because Xen is broken 
-> after the boot tests.
-No, it is disabled in release build.
->
-> > +    help> +      This option enables boot-time self-tests that 
-> validate Xen's internal
->> +      interfaces with hardware, firmware and the bootloader. The 
->> tests are
->> +      registered with __initcallboottest and executed by 
->> do_init_boottests()
->> +      during early boot, before domains are created.
->> +
->> +      These tests are intended for validation and coverage 
->> measurement, not
->> +      for production builds. With this option enabled, Xen may not be
->> +      functional after the tests have run.
->
-> If we know a test break, I think it is best that Xen doesn't continue. 
-> Otherwise, it is quite confusing for the user to know what's going on.
->
-> My preference is the bootest would act like other self tests and Xen 
-> can continue booting normally. So the tests could also be meaningful 
-> in non-test setups.
-Yes, now Xen is functional even after running the self tests.
->
->> +
->> +      If unsure, say N.
->> +
->>   source "arch/arm/platforms/Kconfig"
->>     source "common/Kconfig"
->> diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
->> index 84c4062b30..0090761682 100644
->> --- a/xen/arch/arm/Makefile
->> +++ b/xen/arch/arm/Makefile
->> @@ -24,6 +24,7 @@ obj-y += domctl.o
->>   obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
->>   obj-y += efi/
->>   obj-y += gic.o
->> +obj-$(CONFIG_BOOT_SELFTEST) += gic-test.init.o
->>   obj-$(CONFIG_GICV2) += gic-v2.o
->>   obj-$(CONFIG_GICV3) += gic-v3.o
->>   obj-$(CONFIG_HAS_ITS) += gic-v3-its.o
->> diff --git a/xen/arch/arm/gic-test.c b/xen/arch/arm/gic-test.c
->> new file mode 100644
->> index 0000000000..ca922e5d2a
->> --- /dev/null
->> +++ b/xen/arch/arm/gic-test.c
->> @@ -0,0 +1,52 @@
->> +/* SPDX-License-Identifier: GPL-2.0-only */
->> +
->> +#include <xen/delay.h>
->> +#include <xen/init.h>
->> +#include <xen/param.h>
->> +#include <xen/shutdown.h>
->
-> Can you clarify why you need this header?
-I have dropped this.
->
->> +#include <asm/gic.h>
->> +
->> +/*
->> + * gic_test: Specifies the gic test to be executed.
->> + * 0 = no tests are executed
->> + * 1 = SGI tests are executed
->> + */
->> +static unsigned int __initdata gic_test = 0;
->> +integer_param("gic-test", gic_test);
->
-> Given this is mean to be 0 or 1, why not using "boolean_param"?
-Yes, I have this as a boolean param
->
-> Also, new command line option should be documented in the docs. That 
-> said, I am not really sure about
-I have documented it.
->
->> +
->> +/*
->> + * CPU0: GIC_SGI_DUMP_STATE to self
->> + * CPU{0-N}: GIC_SGI_TEST to self
->> + * CPU{1-N}: GIC_SGI_TEST to CPU0
->> + * CPU{N}: GIC_SGI_TEST to all but self
->> + */
->> +static int __init gic_self_sgi_test(void)
->> +{
->> +    if ( !gic_test )
->> +        return 0;
->> +
->> +    printk("Sending GIC_SGI_TEST to self CPU%u\n", smp_processor_id());
->> +    send_SGI_self(GIC_SGI_TEST);
->> +
->> +    if ( smp_processor_id() == 0 )
->> +    {
->> +        printk("Sending GIC_SGI_DUMP_STATE to CPU0\n");
->> +        smp_send_state_dump(0);
->
-> OOI, why is this only called for CPU0? You also don't seem to check 
-> that smp_send_state_dump() in the CI test.
-Ah, I have dropped it.
->> +
->> +        return 0;
->> +    }
->> +
->> +    printk("Sending GIC_SGI_TEST to CPU0 from CPU%u\n", 
->> smp_processor_id());
->> +    send_SGI_one(0, GIC_SGI_TEST);
->> +
->> +    /* Execute this test only from the last core */
->> +    if ( smp_processor_id() == (smp_get_max_cpus() - 1) )
->
-> This is relying on how Xen is boot CPUs. Would it be better to check 
-> the number of online CPUs at the time of the check? (You might need to 
-> re-order some code for that)
-yes, I have changed the code. I now check the number of online CPUs.
->
->> +    {
->> +        printk("Sending GIC_SGI_TEST to all except CPU%u\n", 
->> smp_processor_id());
->> +        send_SGI_allbutself(GIC_SGI_TEST);
->> +    }
->> +
->> +    return 0;
->> +
->> +}
->> +__initcallboottest(gic_self_sgi_test);
->> diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
->> index ee75258fc3..9736b0c7df 100644
->> --- a/xen/arch/arm/gic.c
->> +++ b/xen/arch/arm/gic.c
->> @@ -324,6 +324,11 @@ static void do_static_sgi(struct cpu_user_regs 
->> *regs, enum gic_sgi sgi)
->>       case GIC_SGI_CALL_FUNCTION:
->>           smp_call_function_interrupt();
->>           break;
->> +#ifdef CONFIG_BOOT_SELFTEST
->> +    case GIC_SGI_TEST:
->> +        printk("CPU%u: GIC_SGI_TEST received\n", smp_processor_id());
->
-> To confirm, we will solely rely on logging? IOW, there is no plan to 
-> have Xen self-sufficient (e.g. using a global variable).
-yes, I know use a per cpu variable.
->
->
->> +        break;
->> +#endif
->>       default:
->>           panic("Unhandled SGI %d on CPU%d\n", sgi, smp_processor_id());
->>           break;
->> diff --git a/xen/arch/arm/include/asm/gic.h 
->> b/xen/arch/arm/include/asm/gic.h
->> index ff22dea40d..74bdd4ff63 100644
->> --- a/xen/arch/arm/include/asm/gic.h
->> +++ b/xen/arch/arm/include/asm/gic.h
->> @@ -306,6 +306,9 @@ enum gic_sgi {
->>       GIC_SGI_EVENT_CHECK,
->>       GIC_SGI_DUMP_STATE,
->>       GIC_SGI_CALL_FUNCTION,
->> +#ifdef CONFIG_BOOT_SELFTEST
->> +    GIC_SGI_TEST,
->> +#endif
->>       GIC_SGI_STATIC_MAX,
->>   };
->>   diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
->> index 6310a47d68..4e5db93027 100644
->> --- a/xen/arch/arm/setup.c
->> +++ b/xen/arch/arm/setup.c
->> @@ -470,6 +470,8 @@ void asmlinkage __init noreturn 
->> start_xen(unsigned long fdt_paddr)
->>       enable_errata_workarounds();
->>       enable_cpu_features();
->>   +    do_init_boottests();
->> +
->>       /* Create initial domain 0. */
->>       if ( !is_dom0less_mode() )
->>           create_dom0();
->> diff --git a/xen/arch/arm/smpboot.c b/xen/arch/arm/smpboot.c
->> index 7f3cfa812e..a016ff00f5 100644
->> --- a/xen/arch/arm/smpboot.c
->> +++ b/xen/arch/arm/smpboot.c
->> @@ -405,6 +405,8 @@ void asmlinkage noreturn start_secondary(void)
->>         printk(XENLOG_DEBUG "CPU %u booted.\n", smp_processor_id());
->>   +    do_init_boottests();
->> +
->>       startup_cpu_idle_loop();
->>   }
->>   diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S
->> index 2d5f1c516d..14f64a856c 100644
->> --- a/xen/arch/arm/xen.lds.S
->> +++ b/xen/arch/arm/xen.lds.S
->> @@ -146,6 +146,10 @@ SECTIONS
->>          *(.initcall1.init)
->>          __initcall_end = .;
->>   +       __initcall_boot_test_start = .;
->> +       *(.initcallboottest.init)
->> +       __initcall_boot_test_end = .;
->> +
->>          . = ALIGN(4);
->>          __alt_instructions = .;
->>          *(.altinstructions)
->> diff --git a/xen/common/kernel.c b/xen/common/kernel.c
->> index fb45f81399..2047fe2a3f 100644
->> --- a/xen/common/kernel.c
->> +++ b/xen/common/kernel.c
->> @@ -412,6 +412,7 @@ void add_taint(unsigned int taint)
->>     extern const initcall_t __initcall_start[], __presmp_initcall_end[],
->>       __initcall_end[];
->> +extern const initcall_t __initcall_boot_test_start[], 
->> __initcall_boot_test_end[];
->>     void __init do_presmp_initcalls(void)
->>   {
->> @@ -427,6 +428,16 @@ void __init do_initcalls(void)
->>           (*call)();
->>   }
->>   +void __init do_init_boottests(void)
->> +{
->> +#ifdef CONFIG_BOOT_SELFTEST
->
-> I think it would be worth printing before and after to indicate the 
-> begin/end of the selftest.
-yes, I have added the prints in v3.
->
->> +    const initcall_t *call;
->> +    for ( call = __initcall_boot_test_start; call < 
->> __initcall_boot_test_end;
->> +          call++ )
->> +        (*call)();
->> +#endif
->> +}
->> +
->>   #ifdef CONFIG_HYPFS
->>   static unsigned int __read_mostly major_version;
->>   static unsigned int __read_mostly minor_version;
->> diff --git a/xen/include/xen/init.h b/xen/include/xen/init.h
->> index 0c921672c1..bd518bcea9 100644
->> --- a/xen/include/xen/init.h
->> +++ b/xen/include/xen/init.h
->> @@ -66,11 +66,14 @@ typedef void (*exitcall_t)(void);
->>       static const initcall_t __initcall_##fn __init_call("presmp") = 
->> (fn)
->>   #define __initcall(fn) \
->>       static const initcall_t __initcall_##fn __init_call("1") = (fn)
->> +#define __initcallboottest(fn) \
->> +    static const initcall_t __initcall_##fn __init_call("boottest") 
->> = (fn)
->>   #define __exitcall(fn) \
->>       static exitcall_t __exitcall_##fn __exit_call = fn
->>     void do_presmp_initcalls(void);
->>   void do_initcalls(void);
->> +void do_init_boottests(void);
->>     #endif /* __ASSEMBLER__ */
->
-> Cheers,
-
-Thanks
-
-- Ayan
-
->
->
+SGkgTXlrb2xhLA0KDQpNeWtvbGEgS3ZhY2ggPG15a29sYV9rdmFjaEBlcGFtLmNvbT4gd3JpdGVz
+Og0KDQo+IEZyb206IE1pcmVsYSBTaW1vbm92aWMgPG1pcmVsYS5zaW1vbm92aWNAYWdnaW9zLmNv
+bT4NCj4NCj4gQWRkIHRoZSBYZW4td2lkZSBzdXNwZW5kL3Jlc3VtZSBiYWNrZW5kIHVzZWQgYWZ0
+ZXIgYSBjb250cm9sLWRvbWFpbg0KPiB2UFNDSSBTWVNURU1fU1VTUEVORCByZXF1ZXN0IGhhcyBi
+ZWVuIGFjY2VwdGVkLiBUaGUgdlBTQ0kgcG9saWN5LA0KPiBydW50aW1lIGRyaXZlciBibG9ja2Vy
+cyBhbmQgY29udHJvbC1kb21haW4gc2VxdWVuY2luZyBjaGVja3MgYXJlIGhhbmRsZWQNCj4gYnkg
+dGhlIHByZWNlZGluZyBjb21taXQ7IHRoaXMgY2hhbmdlIGFkZHMgdGhlIGNvZGUgdGhhdCBhY3R1
+YWxseSBkcml2ZXMNCj4gdGhlIGhvc3Qgc3VzcGVuZCBhdHRlbXB0Lg0KPg0KPiBUaGUgYmFja2Vu
+ZCBydW5zIGZyb20gYSB0YXNrbGV0IHNjaGVkdWxlZCBvbiBwQ1BVMCwgYmVjYXVzZSBub24tYm9v
+dCBDUFVzDQo+IGFyZSBkaXNhYmxlZCBkdXJpbmcgc3VzcGVuZC4gSXQgZnJlZXplcyBkb21haW5z
+LCBkaXNhYmxlcyB0aGUgc2NoZWR1bGVyDQo+IGFuZCB0aGVuIGRpc2FibGVzIG5vbi1ib290IENQ
+VXMuDQo+DQo+IEhvc3Qtc2lkZSBzdXNwZW5kIHBhcnRpY2lwYW50cyBhcmUgaGFuZGxlZCBpbiBw
+aGFzZXMuIElPTU1VIGFuZCBjb25zb2xlDQo+IHN0YXRlIGFyZSBzdXNwZW5kZWQgZmlyc3QuIExv
+Y2FsIElSUXMgYXJlIHRoZW4gZGlzYWJsZWQgYmVmb3JlIHN1c3BlbmRpbmcNCj4gdGltZXIgYW5k
+IEdJQyBzdGF0ZS4gT24gcmVzdW1lIG9yIGZhaWx1cmUsIHRoZSBjb21wbGV0ZWQgc3VzcGVuZCBw
+aGFzZXMNCj4gYXJlIHVud291bmQgaW4gcmV2ZXJzZTogR0lDIGFuZCB0aW1lciBzdGF0ZSBhcmUg
+cmVzdG9yZWQgd2hpbGUgSVJRcyBhcmUNCj4gc3RpbGwgZGlzYWJsZWQsIGxvY2FsIElSUXMgYXJl
+IHJlc3RvcmVkLCBhbmQgdGhlbiBjb25zb2xlIGFuZCBJT01NVSBzdGF0ZQ0KPiBhcmUgcmVzdG9y
+ZWQuDQo+DQo+IE9uIGJvb3QsIGluaXRfdHRiciBpcyBub3JtYWxseSBpbml0aWFsaXplZCBkdXJp
+bmcgc2Vjb25kYXJ5IENQVSBob3RwbHVnLg0KPiBPbiB1bmlwcm9jZXNzb3Igc3lzdGVtcyB0aGlz
+IGNhbiBsZWF2ZSBpbml0X3R0YnIgdW5pbml0aWFsaXplZCwgc28gc2V0IGl0DQo+IGZyb20gdGhl
+IGJvb3QgQ1BVIGJlZm9yZSBlbnRlcmluZyBzdXNwZW5kLg0KPg0KPiBOb3RlOiB0aGUgY29kZSBp
+cyBiZWhpbmQgQ09ORklHX0hBU19TWVNURU1fU1VTUEVORCwgd2hpY2ggaXMgY3VycmVudGx5DQo+
+IG9ubHkgc2VsZWN0ZWQgd2hlbiBVTlNVUFBPUlRFRCBpcyBzZXQgYW5kIE1QVSBpcyBub3Qgc2V0
+Lg0KPg0KPiBTaWduZWQtb2ZmLWJ5OiBNaXJlbGEgU2ltb25vdmljIDxtaXJlbGEuc2ltb25vdmlj
+QGFnZ2lvcy5jb20+DQo+IFNpZ25lZC1vZmYtYnk6IFNhZWVkIE5vd3NoYWRpIDxzYWVlZC5ub3dz
+aGFkaUB4aWxpbnguY29tPg0KPiBTaWduZWQtb2ZmLWJ5OiBNeWt5dGEgUG90dXJhaSA8bXlreXRh
+X3BvdHVyYWlAZXBhbS5jb20+DQo+IFNpZ25lZC1vZmYtYnk6IE15a29sYSBLdmFjaCA8bXlrb2xh
+X2t2YWNoQGVwYW0uY29tPg0KDQpSZXZpZXdlZC1ieTogVm9sb2R5bXlyIEJhYmNodWsgPHZvbG9k
+eW15cl9iYWJjaHVrQGVwYW0uY29tPg0KDQo+IC0tLQ0KPiBDaGFuZ2VzIGluIFYxMDoNCj4gLSBS
+ZS1hcHBseSBib290IENQVSBsb2NhbCBlcnJhdGEvd29ya2Fyb3VuZCBoYW5kbGluZyBhZnRlciBT
+WVNURU1fU1VTUEVORCwNCj4gICBiZWZvcmUgcmVzdW1pbmcgdGhlIHJlc3Qgb2YgdGhlIGhvc3Qg
+c3VzcGVuZCBwYXRoLg0KPiAtIE1vdmUgc2V0X2luaXRfdHRicigpIGRlY2xhcmF0aW9uIHRvIGFz
+bS9tbXUvbW0uaCwgc2luY2UgaXQgaXMNCj4gICBNTVUtc3BlY2lmaWMuDQo+DQo+IENoYW5nZXMg
+aW4gVjk6DQo+IC0gU3BsaXQgdlBTQ0kgYXZhaWxhYmlsaXR5IHBvbGljeSwgcnVudGltZSBob3N0
+LXN1c3BlbmQgYmxvY2tlcnMgYW5kIHRoZQ0KPiAgIGRvbWFpbi1yZWFkaW5lc3MgcHJlY2hlY2sg
+aW50byB0aGUgcHJlY2VkaW5nIGNvbW1pdC4NCj4gLSBUcmlnZ2VyIHRoZSBob3N0IHN1c3BlbmQg
+YmFja2VuZCBmcm9tIHRoZSBjb250cm9sLWRvbWFpbiBTWVNURU1fU1VTUEVORA0KPiAgIHBhdGgu
+DQo+IC0gUmVvcmRlciB0aGUgaG9zdCBzdXNwZW5kL3Jlc3VtZSBwaGFzZXMgc28gdGhlIHRpbWVy
+IGlzIHN1c3BlbmRlZCB3aXRoDQo+ICAgbG9jYWwgSVJRcyBkaXNhYmxlZCBhbmQgbG9jYWwgSVJR
+cyBhcmUgcmVzdG9yZWQgYWZ0ZXIgdGhlIEdJQyBhbmQgdGltZXINCj4gICByZXN1bWUgcGF0aHMs
+IGJlZm9yZSB0aGUgY29uc29sZSBhbmQgSU9NTVUgcmVzdW1lIHBhdGhzLg0KPiAtIE1vdmUgSEFT
+X0hXRE9NX1NZU1RFTV9TVVNQRU5EIGFuZCByZWxhdGVkIGxvZ2ljIHRvIHBvbGljeSBwYXRjaC4N
+Cj4NCj4gQ2hhbmdlcyBpbiBWODoNCj4gLSBBZGQgYSBwcmUtc3VzcGVuZCBjaGVjayBpbiBzeXN0
+ZW1fc3VzcGVuZCgpIGFmdGVyIHNjaGVkdWxlcl9kaXNhYmxlKCkgdG8NCj4gICByZXF1aXJlIGFs
+bCBkb21haW5zIHRvIGJlIGluIHRoZSBzaHV0IGRvd24gc3RhdGUgd2l0aCBTSFVURE9XTl9zdXNw
+ZW5kDQo+ICAgYmVmb3JlIHByb2NlZWRpbmcgd2l0aCB0aGUgZ2xvYmFsIHN1c3BlbmQgZmxvdy4N
+Cj4gLSBEcm9wIHRoZSBjb21tb24tbGV2ZWwgZGVwZW5kcyBvbiAhQVJNXzY0IHx8ICFTWVNURU1f
+U1VTUEVORCBmcm9tDQo+ICAgQ09ORklHX0hBU19IV0RPTV9TSFVURE9XTl9PTl9TVVNQRU5EIGFu
+ZCBtb2RlbCB0aGUgQVJNNjQgc3VzcGVuZCBjYXNlDQo+ICAgd2l0aCBhbiBhcmNoLXNlbGVjdGVk
+IGNhcGFiaWxpdHkgaW5zdGVhZC4NCj4gLSBSZW5hbWUgQ09ORklHX0hBU19IV0RPTV9TSFVURE9X
+Tl9PTl9TVVNQRU5EIHRvDQo+ICAgQ09ORklHX0hBU19IV0RPTV9TWVNURU1fU1VTUEVORC4NCj4g
+LSBSZW5hbWUgbmVlZF9od2RvbV9zaHV0ZG93bigpIHRvIHdhbnRfaHdkb21fc2h1dGRvd24oKS4N
+Cj4NCj4gQ2hhbmdlcyBpbiBWNzoNCj4gLSBDb250cm9sIGRvbWFpbiBpcyByZXNwb25zaWJsZSBm
+b3IgaG9zdCBzdXNwZW5kLg0KPiAtIEFkZCBhbiBlbXB0eSBpbmxpbmUgaG9zdF9zeXN0ZW1fc3Vz
+cGVuZCgpIGZ1bmN0aW9uIHdoZW4gU1lTVEVNX1NVU1BFTkQNCj4gICBjb25maWcgaXMgZGlzYWJs
+ZWQuDQo+IC0gVXNlIElTX0VOQUJMRUQoKSBmb3IgY29uZmlnIGNoZWNraW5nIGluc3RlYWQgb2Yg
+I2lmZGVmLg0KPiAtIFJlcGxhY2UgI2lmZGVmIGNoZWNrcyBpbiBkb21haW5fc2h1dGRvd24oKSB3
+aXRoIElTX0VOQUJMRUQoKSB0byBzaW1wbGlmeQ0KPiAgIGNvbnRyb2wgZmxvdy4NCj4gLSBGYWN0
+b3IgaGFyZHdhcmUgZG9tYWluIHNodXRkb3duIGNvbmRpdGlvbiBpbnRvIGEgaGVscGVyDQo+ICAg
+KG5lZWRfaHdkb21fc2h1dGRvd24oKSkgdG8gYXZvaWQgcHJlcHJvY2Vzc29yIGRpcmVjdGl2ZXMg
+aW5zaWRlIHRoZQ0KPiAgIGZ1bmN0aW9uLg0KPiAtIFNxdWFzaCB3aXRoIGlvbW11IHN1c3BlbmQv
+cmVzdW1lIGNvbW1pdC4NCj4gLS0tDQo+ICB4ZW4vYXJjaC9hcm0vS2NvbmZpZyAgICAgICAgICAg
+ICAgICAgfCAgIDEgKw0KPiAgeGVuL2FyY2gvYXJtL2NwdWVycmF0YS5jICAgICAgICAgICAgIHwg
+ICA3ICstDQo+ICB4ZW4vYXJjaC9hcm0vaW5jbHVkZS9hc20vY3B1ZXJyYXRhLmggfCAgIDEgKw0K
+PiAgeGVuL2FyY2gvYXJtL2luY2x1ZGUvYXNtL21tdS9tbS5oICAgIHwgICAyICsNCj4gIHhlbi9h
+cmNoL2FybS9pbmNsdWRlL2FzbS9zdXNwZW5kLmggICB8ICAgMiArDQo+ICB4ZW4vYXJjaC9hcm0v
+bW11L3NtcGJvb3QuYyAgICAgICAgICAgfCAgIDIgKy0NCj4gIHhlbi9hcmNoL2FybS9zdXNwZW5k
+LmMgICAgICAgICAgICAgICB8IDE1NiArKysrKysrKysrKysrKysrKysrKysrKysrKysNCj4gIHhl
+bi9hcmNoL2FybS92cHNjaS5jICAgICAgICAgICAgICAgICB8ICAxMCArLQ0KPiAgOCBmaWxlcyBj
+aGFuZ2VkLCAxNzcgaW5zZXJ0aW9ucygrKSwgNCBkZWxldGlvbnMoLSkNCj4NCj4gZGlmZiAtLWdp
+dCBhL3hlbi9hcmNoL2FybS9LY29uZmlnIGIveGVuL2FyY2gvYXJtL0tjb25maWcNCj4gaW5kZXgg
+OTAyN2FhMTdlYi4uZGExNTg1ZWM1MCAxMDA2NDQNCj4gLS0tIGEveGVuL2FyY2gvYXJtL0tjb25m
+aWcNCj4gKysrIGIveGVuL2FyY2gvYXJtL0tjb25maWcNCj4gQEAgLTksNiArOSw3IEBAIGNvbmZp
+ZyBBUk1fNjQNCj4gIAlzZWxlY3QgNjRCSVQNCj4gIAlzZWxlY3QgSEFTX0RPTUFJTl9UWVBFDQo+
+ICAJc2VsZWN0IEhBU19GQVNUX01VTFRJUExZDQo+ICsJc2VsZWN0IEhBU19TWVNURU1fU1VTUEVO
+RCBpZiAhTVBVICYmIFVOU1VQUE9SVEVEDQo+ICAJc2VsZWN0IEhBU19WUENJX0dVRVNUX1NVUFBP
+UlQgaWYgUENJX1BBU1NUSFJPVUdIDQo+ICANCj4gIGNvbmZpZyBBUk0NCj4gZGlmZiAtLWdpdCBh
+L3hlbi9hcmNoL2FybS9jcHVlcnJhdGEuYyBiL3hlbi9hcmNoL2FybS9jcHVlcnJhdGEuYw0KPiBp
+bmRleCAzYTMyMTgzNjE4Li5lNjQ5OWFhYWIzIDEwMDY0NA0KPiAtLS0gYS94ZW4vYXJjaC9hcm0v
+Y3B1ZXJyYXRhLmMNCj4gKysrIGIveGVuL2FyY2gvYXJtL2NwdWVycmF0YS5jDQo+IEBAIC03ODIs
+NiArNzgyLDExIEBAIHZvaWQgY2hlY2tfbG9jYWxfY3B1X2VycmF0YSh2b2lkKQ0KPiAgICAgIHVw
+ZGF0ZV9jcHVfY2FwYWJpbGl0aWVzKGFybV9lcnJhdGEsICJlbmFibGVkIHdvcmthcm91bmQgZm9y
+Iik7DQo+ICB9DQo+ICANCj4gK2ludCBlbmFibGVfbG9jYWxfY3B1X2VycmF0YV93b3JrYXJvdW5k
+cyh2b2lkKQ0KPiArew0KPiArICAgIHJldHVybiBlbmFibGVfbm9uYm9vdF9jcHVfY2Fwcyhhcm1f
+ZXJyYXRhKTsNCj4gK30NCj4gKw0KPiAgdm9pZCBfX2luaXQgZW5hYmxlX2VycmF0YV93b3JrYXJv
+dW5kcyh2b2lkKQ0KPiAgew0KPiAgICAgIGVuYWJsZV9jcHVfY2FwYWJpbGl0aWVzKGFybV9lcnJh
+dGEpOw0KPiBAQCAtODE4LDcgKzgyMyw3IEBAIHN0YXRpYyBpbnQgY3B1X2VycmF0YV9jYWxsYmFj
+ayhzdHJ1Y3Qgbm90aWZpZXJfYmxvY2sgKm5mYiwNCj4gICAgICAgICAgICogZml4ZWQgdG8gZXhw
+ZWN0IGFuIGVycm9yIGF0IENQVV9TVEFSVElORyBwaGFzZS4NCj4gICAgICAgICAgICovDQo+ICAg
+ICAgICAgIEFTU0VSVChzeXN0ZW1fc3RhdGUgIT0gU1lTX1NUQVRFX2Jvb3QpOw0KPiAtICAgICAg
+ICByYyA9IGVuYWJsZV9ub25ib290X2NwdV9jYXBzKGFybV9lcnJhdGEpOw0KPiArICAgICAgICBy
+YyA9IGVuYWJsZV9sb2NhbF9jcHVfZXJyYXRhX3dvcmthcm91bmRzKCk7DQo+ICAgICAgICAgIGJy
+ZWFrOw0KPiAgICAgIGRlZmF1bHQ6DQo+ICAgICAgICAgIGJyZWFrOw0KPiBkaWZmIC0tZ2l0IGEv
+eGVuL2FyY2gvYXJtL2luY2x1ZGUvYXNtL2NwdWVycmF0YS5oIGIveGVuL2FyY2gvYXJtL2luY2x1
+ZGUvYXNtL2NwdWVycmF0YS5oDQo+IGluZGV4IDE3OTlhMTZkN2UuLmI5MzUyMTMyNmYgMTAwNjQ0
+DQo+IC0tLSBhL3hlbi9hcmNoL2FybS9pbmNsdWRlL2FzbS9jcHVlcnJhdGEuaA0KPiArKysgYi94
+ZW4vYXJjaC9hcm0vaW5jbHVkZS9hc20vY3B1ZXJyYXRhLmgNCj4gQEAgLTUsNiArNSw3IEBADQo+
+ICAjaW5jbHVkZSA8YXNtL2FsdGVybmF0aXZlLmg+DQo+ICANCj4gIHZvaWQgY2hlY2tfbG9jYWxf
+Y3B1X2VycmF0YSh2b2lkKTsNCj4gK2ludCBlbmFibGVfbG9jYWxfY3B1X2VycmF0YV93b3JrYXJv
+dW5kcyh2b2lkKTsNCj4gIHZvaWQgZW5hYmxlX2VycmF0YV93b3JrYXJvdW5kcyh2b2lkKTsNCj4g
+IA0KPiAgI2RlZmluZSBDSEVDS19XT1JLQVJPVU5EX0hFTFBFUihlcnJhdHVtLCBmZWF0dXJlLCBh
+cmNoKSAgICAgICAgIFwNCj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9pbmNsdWRlL2FzbS9t
+bXUvbW0uaCBiL3hlbi9hcmNoL2FybS9pbmNsdWRlL2FzbS9tbXUvbW0uaA0KPiBpbmRleCA3ZjRk
+NTkxMzdkLi5lZTczYTc3Nzc3IDEwMDY0NA0KPiAtLS0gYS94ZW4vYXJjaC9hcm0vaW5jbHVkZS9h
+c20vbW11L21tLmgNCj4gKysrIGIveGVuL2FyY2gvYXJtL2luY2x1ZGUvYXNtL21tdS9tbS5oDQo+
+IEBAIC0xMTAsNiArMTEwLDggQEAgdm9pZCBkdW1wX3B0X3dhbGsocGFkZHJfdCB0dGJyLCBwYWRk
+cl90IGFkZHIsDQo+ICBleHRlcm4gdm9pZCBzd2l0Y2hfdHRicih1aW50NjRfdCB0dGJyKTsNCj4g
+IGV4dGVybiB2b2lkIHJlbG9jYXRlX2FuZF9zd2l0Y2hfdHRicih1aW50NjRfdCB0dGJyKTsNCj4g
+IA0KPiArdm9pZCBzZXRfaW5pdF90dGJyKGxwYWVfdCAqcm9vdCk7DQo+ICsNCj4gICNlbmRpZiAv
+KiBfX0FSTV9NTVVfTU1fSF9fICovDQo+ICANCj4gIC8qDQo+IGRpZmYgLS1naXQgYS94ZW4vYXJj
+aC9hcm0vaW5jbHVkZS9hc20vc3VzcGVuZC5oIGIveGVuL2FyY2gvYXJtL2luY2x1ZGUvYXNtL3N1
+c3BlbmQuaA0KPiBpbmRleCA1MGRjNmU5ZmRmLi44ODlhNjUwOWQ5IDEwMDY0NA0KPiAtLS0gYS94
+ZW4vYXJjaC9hcm0vaW5jbHVkZS9hc20vc3VzcGVuZC5oDQo+ICsrKyBiL3hlbi9hcmNoL2FybS9p
+bmNsdWRlL2FzbS9zdXNwZW5kLmgNCj4gQEAgLTQxLDExICs0MSwxMyBAQCBpbnQgcHJlcGFyZV9y
+ZXN1bWVfY3R4KHZvaWQpOw0KPiAgdm9pZCBoeXBfcmVzdW1lKHZvaWQpOw0KPiAgYm9vbCBob3N0
+X3N5c3RlbV9zdXNwZW5kX2FsbG93ZWQodm9pZCk7DQo+ICB2b2lkIGhvc3Rfc3lzdGVtX3N1c3Bl
+bmRfZGlzYWJsZShjb25zdCBjaGFyICpyZWFzb24pOw0KPiArdm9pZCBob3N0X3N5c3RlbV9zdXNw
+ZW5kKHN0cnVjdCBkb21haW4gKmQpOw0KPiAgDQo+ICAjZWxzZSAvKiAhQ09ORklHX1NZU1RFTV9T
+VVNQRU5EICovDQo+ICANCj4gIHN0YXRpYyBpbmxpbmUgYm9vbCBob3N0X3N5c3RlbV9zdXNwZW5k
+X2FsbG93ZWQodm9pZCkgeyByZXR1cm4gZmFsc2U7IH0NCj4gIHN0YXRpYyBpbmxpbmUgdm9pZCBo
+b3N0X3N5c3RlbV9zdXNwZW5kX2Rpc2FibGUoY29uc3QgY2hhciAqcmVhc29uKSB7fQ0KPiArc3Rh
+dGljIGlubGluZSB2b2lkIGhvc3Rfc3lzdGVtX3N1c3BlbmQoc3RydWN0IGRvbWFpbiAqZCkge30N
+Cj4gIA0KPiAgI2VuZGlmDQo+ICANCj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9tbXUvc21w
+Ym9vdC5jIGIveGVuL2FyY2gvYXJtL21tdS9zbXBib290LmMNCj4gaW5kZXggMzdlOTFkNzJiNy4u
+ZmY1MDhlY2Y0MCAxMDA2NDQNCj4gLS0tIGEveGVuL2FyY2gvYXJtL21tdS9zbXBib290LmMNCj4g
+KysrIGIveGVuL2FyY2gvYXJtL21tdS9zbXBib290LmMNCj4gQEAgLTcyLDcgKzcyLDcgQEAgc3Rh
+dGljIHZvaWQgY2xlYXJfYm9vdF9wYWdldGFibGVzKHZvaWQpDQo+ICAgICAgY2xlYXJfdGFibGUo
+Ym9vdF90aGlyZCk7DQo+ICB9DQo+ICANCj4gLXN0YXRpYyB2b2lkIHNldF9pbml0X3R0YnIobHBh
+ZV90ICpyb290KQ0KPiArdm9pZCBzZXRfaW5pdF90dGJyKGxwYWVfdCAqcm9vdCkNCj4gIHsNCj4g
+ICAgICAvKg0KPiAgICAgICAqIGluaXRfdHRiciBpcyBwYXJ0IG9mIHRoZSBpZGVudGl0eSBtYXBw
+aW5nIHdoaWNoIGlzIHJlYWQtb25seS4gU28NCj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9z
+dXNwZW5kLmMgYi94ZW4vYXJjaC9hcm0vc3VzcGVuZC5jDQo+IGluZGV4IGM3YzI2YmNmMDMuLjNm
+ZTJmZmE0ZmIgMTAwNjQ0DQo+IC0tLSBhL3hlbi9hcmNoL2FybS9zdXNwZW5kLmMNCj4gKysrIGIv
+eGVuL2FyY2gvYXJtL3N1c3BlbmQuYw0KPiBAQCAtMSwxMCArMSwxOCBAQA0KPiAgLyogU1BEWC1M
+aWNlbnNlLUlkZW50aWZpZXI6IEdQTC0yLjAtb25seSAqLw0KPiAgDQo+ICsjaW5jbHVkZSA8YXNt
+L2NwdWVycmF0YS5oPg0KPiArI2luY2x1ZGUgPGFzbS9jcHVmZWF0dXJlLmg+DQo+ICsjaW5jbHVk
+ZSA8YXNtL2dpYy5oPg0KPiAgI2luY2x1ZGUgPGFzbS9wc2NpLmg+DQo+ICAjaW5jbHVkZSA8YXNt
+L3N1c3BlbmQuaD4NCj4gIA0KPiArI2luY2x1ZGUgPHhlbi9jb25zb2xlLmg+DQo+ICsjaW5jbHVk
+ZSA8eGVuL2NwdS5oPg0KPiArI2luY2x1ZGUgPHhlbi9pb21tdS5oPg0KPiAgI2luY2x1ZGUgPHhl
+bi9saWIuaD4NCj4gKyNpbmNsdWRlIDx4ZW4vc2NoZWQuaD4NCj4gICNpbmNsdWRlIDx4ZW4vc2Vy
+aWFsLmg+DQo+ICsjaW5jbHVkZSA8eGVuL3Rhc2tsZXQuaD4NCj4gIA0KPiAgc3RydWN0IHJlc3Vt
+ZV9jcHVfY29udGV4dCByZXN1bWVfY3B1X2NvbnRleHQ7DQo+ICANCj4gQEAgLTQ0LDYgKzUyLDE1
+NCBAQCB2b2lkIGhvc3Rfc3lzdGVtX3N1c3BlbmRfZGlzYWJsZShjb25zdCBjaGFyICpyZWFzb24p
+DQo+ICAgICAgICAgICAgIHJlYXNvbiA/IHJlYXNvbiA6ICJ1bnN1cHBvcnRlZCBzdXNwZW5kL3Jl
+c3VtZSBwYXRoIik7DQo+ICB9DQo+ICANCj4gKy8qIFhlbiBzdXNwZW5kLiBkYXRhIGlkZW50aWZp
+ZXMgdGhlIGRvbWFpbiB0aGF0IGluaXRpYXRlZCBzdXNwZW5kLiAqLw0KPiArc3RhdGljIHZvaWQg
+c3lzdGVtX3N1c3BlbmQodm9pZCAqZGF0YSkNCj4gK3sNCj4gKyAgICBpbnQgc3RhdHVzOw0KPiAr
+ICAgIHVuc2lnbmVkIGxvbmcgZmxhZ3M7DQo+ICsgICAgc3RydWN0IGRvbWFpbiAqZCA9IChzdHJ1
+Y3QgZG9tYWluICopZGF0YTsNCj4gKw0KPiArICAgIEJVR19PTihzeXN0ZW1fc3RhdGUgIT0gU1lT
+X1NUQVRFX2FjdGl2ZSk7DQo+ICsNCj4gKyAgICBzeXN0ZW1fc3RhdGUgPSBTWVNfU1RBVEVfc3Vz
+cGVuZDsNCj4gKw0KPiArICAgIHByaW50aygiWGVuIHN1c3BlbmRpbmcuLi5cbiIpOw0KPiArDQo+
+ICsgICAgZnJlZXplX2RvbWFpbnMoKTsNCj4gKyAgICBzY2hlZHVsZXJfZGlzYWJsZSgpOw0KPiAr
+DQo+ICsgICAgLyoNCj4gKyAgICAgKiBOb24tYm9vdCBDUFVzIGhhdmUgdG8gYmUgZGlzYWJsZWQg
+b24gc3VzcGVuZCBhbmQgZW5hYmxlZCBvbiByZXN1bWUNCj4gKyAgICAgKiAoaG90cGx1Zy1iYXNl
+ZCBtZWNoYW5pc20pLiBEaXNhYmxpbmcgbm9uLWJvb3QgQ1BVcyB3aWxsIGxlYWQgdG8gUFNDSQ0K
+PiArICAgICAqIENQVV9PRkYgdG8gYmUgY2FsbGVkIGJ5IGVhY2ggbm9uLWJvb3QgQ1BVLiBEZXBl
+bmRpbmcgb24gdGhlIHVuZGVybHlpbmcNCj4gKyAgICAgKiBwbGF0Zm9ybSBjYXBhYmlsaXRpZXMs
+IHRoaXMgbWF5IGxlYWQgdG8gdGhlIHBoeXNpY2FsIHBvd2VyaW5nIGRvd24gb2YNCj4gKyAgICAg
+KiBDUFVzLg0KPiArICAgICAqLw0KPiArICAgIHN0YXR1cyA9IGRpc2FibGVfbm9uYm9vdF9jcHVz
+KCk7DQo+ICsgICAgaWYgKCBzdGF0dXMgKQ0KPiArICAgIHsNCj4gKyAgICAgICAgc3lzdGVtX3N0
+YXRlID0gU1lTX1NUQVRFX3Jlc3VtZTsNCj4gKyAgICAgICAgZ290byByZXN1bWVfbm9uYm9vdF9j
+cHVzOw0KPiArICAgIH0NCj4gKw0KPiArICAgIGNvbnNvbGVfc3RhcnRfc3luYygpOw0KPiArICAg
+IHN0YXR1cyA9IGlvbW11X3N1c3BlbmQoKTsNCj4gKyAgICBpZiAoIHN0YXR1cyApDQo+ICsgICAg
+ew0KPiArICAgICAgICBzeXN0ZW1fc3RhdGUgPSBTWVNfU1RBVEVfcmVzdW1lOw0KPiArICAgICAg
+ICBnb3RvIHJlc3VtZV9lbmRfc3luYzsNCj4gKyAgICB9DQo+ICsNCj4gKyAgICBzdGF0dXMgPSBj
+b25zb2xlX3N1c3BlbmQoKTsNCj4gKyAgICBpZiAoIHN0YXR1cyApDQo+ICsgICAgew0KPiArICAg
+ICAgICBkcHJpbnRrKFhFTkxPR19FUlIsICJGYWlsZWQgdG8gc3VzcGVuZCB0aGUgY29uc29sZSwg
+ZXJyPSVkXG4iLCBzdGF0dXMpOw0KPiArICAgICAgICBzeXN0ZW1fc3RhdGUgPSBTWVNfU1RBVEVf
+cmVzdW1lOw0KPiArICAgICAgICBnb3RvIHJlc3VtZV9pb21tdTsNCj4gKyAgICB9DQo+ICsNCj4g
+KyAgICBsb2NhbF9pcnFfc2F2ZShmbGFncyk7DQo+ICsNCj4gKyAgICB0aW1lX3N1c3BlbmQoKTsN
+Cj4gKw0KPiArICAgIHN0YXR1cyA9IGdpY19zdXNwZW5kKCk7DQo+ICsgICAgaWYgKCBzdGF0dXMg
+KQ0KPiArICAgIHsNCj4gKyAgICAgICAgc3lzdGVtX3N0YXRlID0gU1lTX1NUQVRFX3Jlc3VtZTsN
+Cj4gKyAgICAgICAgZ290byByZXN1bWVfdGltZTsNCj4gKyAgICB9DQo+ICsNCj4gKyAgICBzZXRf
+aW5pdF90dGJyKHhlbl9wZ3RhYmxlKTsNCj4gKw0KPiArICAgIC8qDQo+ICsgICAgICogRW5hYmxl
+IGlkZW50aXR5IG1hcHBpbmcgYmVmb3JlIGVudGVyaW5nIHN1c3BlbmQgdG8gc2ltcGxpZnkNCj4g
+KyAgICAgKiB0aGUgcmVzdW1lIHBhdGgNCj4gKyAgICAgKi8NCj4gKyAgICB1cGRhdGVfYm9vdF9t
+YXBwaW5nKHRydWUpOw0KPiArDQo+ICsgICAgaWYgKCBwcmVwYXJlX3Jlc3VtZV9jdHgoKSApDQo+
+ICsgICAgew0KPiArICAgICAgICBzdGF0dXMgPSBjYWxsX3BzY2lfc3lzdGVtX3N1c3BlbmQoKTsN
+Cj4gKyAgICAgICAgLyoNCj4gKyAgICAgICAgICogSWYgc3VzcGVuZCBpcyBmaW5hbGl6ZWQgcHJv
+cGVybHkgYnkgYWJvdmUgc3lzdGVtIHN1c3BlbmQgUFNDSSBjYWxsLA0KPiArICAgICAgICAgKiB0
+aGUgY29kZSBiZWxvdyBpbiB0aGlzICdpZicgYnJhbmNoIHdpbGwgbmV2ZXIgZXhlY3V0ZS4gRXhl
+Y3V0aW9uDQo+ICsgICAgICAgICAqIHdpbGwgY29udGludWUgZnJvbSBoeXBfcmVzdW1lIHdoaWNo
+IGlzIHRoZSBoeXBlcnZpc29yJ3MgcmVzdW1lIHBvaW50Lg0KPiArICAgICAgICAgKiBJbiBoeXBf
+cmVzdW1lIENQVSBjb250ZXh0IHdpbGwgYmUgcmVzdG9yZWQgYW5kIHNpbmNlIGxpbmstcmVnaXN0
+ZXIgaXMNCj4gKyAgICAgICAgICogcmVzdG9yZWQgYXMgd2VsbCwgaXQgd2lsbCBhcHBlYXIgdG8g
+cmV0dXJuIGZyb20gcHJlcGFyZV9yZXN1bWVfY3R4Lg0KPiArICAgICAgICAgKiBUaGUgZGlmZmVy
+ZW5jZSBpbiByZXR1cm5pbmcgZnJvbSBwcmVwYXJlX3Jlc3VtZV9jdHggb24gc3lzdGVtIHN1c3Bl
+bmQNCj4gKyAgICAgICAgICogdmVyc3VzIHJlc3VtZSBpcyBpbiBmdW5jdGlvbidzIHJldHVybiB2
+YWx1ZTogb24gc3VzcGVuZCwgdGhlIHJldHVybg0KPiArICAgICAgICAgKiB2YWx1ZSBpcyBhIG5v
+bi16ZXJvIHZhbHVlLCBvbiByZXN1bWUgaXQgaXMgemVyby4gVGhhdCBpcyB3aHkgdGhlDQo+ICsg
+ICAgICAgICAqIGNvbnRyb2wgZmxvdyB3aWxsIG5vdCByZS1lbnRlciB0aGlzICdpZicgYnJhbmNo
+IG9uIHJlc3VtZS4NCj4gKyAgICAgICAgICovDQo+ICsgICAgICAgIGlmICggc3RhdHVzICkNCj4g
+KyAgICAgICAgICAgIGRwcmludGsoWEVOTE9HX1dBUk5JTkcsICJQU0NJIHN5c3RlbSBzdXNwZW5k
+IGZhaWxlZCwgZXJyPSVkXG4iLA0KPiArICAgICAgICAgICAgICAgICAgICBzdGF0dXMpOw0KPiAr
+DQo+ICsgICAgICAgIHN5c3RlbV9zdGF0ZSA9IFNZU19TVEFURV9yZXN1bWU7DQo+ICsgICAgfQ0K
+PiArICAgIGVsc2UNCj4gKyAgICB7DQo+ICsgICAgICAgIHN5c3RlbV9zdGF0ZSA9IFNZU19TVEFU
+RV9yZXN1bWU7DQo+ICsNCj4gKyAgICAgICAgLyoNCj4gKyAgICAgICAgICogQ1BVMCByZXN1bWVz
+IGRpcmVjdGx5IGZyb20gaHlwX3Jlc3VtZSgpLCBieXBhc3NpbmcgdGhlIENQVSBob3RwbHVnDQo+
+ICsgICAgICAgICAqIHBhdGggdGhhdCByZS1jaGVja3MgYW5kIHJlLWVuYWJsZXMgZXJyYXRhIHdv
+cmthcm91bmRzIGZvciBzZWNvbmRhcnkNCj4gKyAgICAgICAgICogQ1BVcy4NCj4gKyAgICAgICAg
+ICovDQo+ICsgICAgICAgIGNoZWNrX2xvY2FsX2NwdV9lcnJhdGEoKTsNCj4gKyAgICAgICAgY2hl
+Y2tfbG9jYWxfY3B1X2ZlYXR1cmVzKCk7DQo+ICsgICAgICAgIEJVR19PTihlbmFibGVfbG9jYWxf
+Y3B1X2VycmF0YV93b3JrYXJvdW5kcygpKTsNCj4gKyAgICB9DQo+ICsNCj4gKyAgICB1cGRhdGVf
+Ym9vdF9tYXBwaW5nKGZhbHNlKTsNCj4gKw0KPiArICAgIGdpY19yZXN1bWUoKTsNCj4gKw0KPiAr
+IHJlc3VtZV90aW1lOg0KPiArICAgIHRpbWVfcmVzdW1lKCk7DQo+ICsNCj4gKyAgICBsb2NhbF9p
+cnFfcmVzdG9yZShmbGFncyk7DQo+ICsNCj4gKyAgICBjb25zb2xlX3Jlc3VtZSgpOw0KPiArDQo+
+ICsgcmVzdW1lX2lvbW11Og0KPiArICAgIGlvbW11X3Jlc3VtZSgpOw0KPiArDQo+ICsgcmVzdW1l
+X2VuZF9zeW5jOg0KPiArICAgIGNvbnNvbGVfZW5kX3N5bmMoKTsNCj4gKw0KPiArIHJlc3VtZV9u
+b25ib290X2NwdXM6DQo+ICsgICAgLyoNCj4gKyAgICAgKiBUaGUgcmN1X2JhcnJpZXIoKSBoYXMg
+dG8gYmUgYWRkZWQgdG8gZW5zdXJlIHRoYXQgdGhlIHBlciBjcHUgYXJlYSBpcw0KPiArICAgICAq
+IGZyZWVkIGJlZm9yZSBhIG5vbi1ib290IENQVSB0cmllcyB0byBpbml0aWFsaXplIGl0IChfZnJl
+ZV9wZXJjcHVfYXJlYSgpDQo+ICsgICAgICogaGFzIHRvIGJlIGNhbGxlZCBiZWZvcmUgdGhlIGlu
+aXRfcGVyY3B1X2FyZWEoKSkuIFRoaXMgc2NlbmFyaW8gb2NjdXJzDQo+ICsgICAgICogd2hlbiBu
+b24tYm9vdCBDUFVzIGFyZSBob3QtdW5wbHVnZ2VkIG9uIHN1c3BlbmQgYW5kIGhvdHBsdWdnZWQg
+b24gcmVzdW1lLg0KPiArICAgICAqLw0KPiArICAgIHJjdV9iYXJyaWVyKCk7DQo+ICsgICAgZW5h
+YmxlX25vbmJvb3RfY3B1cygpOw0KPiArDQo+ICsgICAgc2NoZWR1bGVyX2VuYWJsZSgpOw0KPiAr
+ICAgIHRoYXdfZG9tYWlucygpOw0KPiArDQo+ICsgICAgc3lzdGVtX3N0YXRlID0gU1lTX1NUQVRF
+X2FjdGl2ZTsNCj4gKw0KPiArICAgIHByaW50aygiUmVzdW1lIChzdGF0dXMgJWQpXG4iLCBzdGF0
+dXMpOw0KPiArDQo+ICsgICAgZG9tYWluX3Jlc3VtZShkKTsNCj4gK30NCj4gKw0KPiArc3RhdGlj
+IERFQ0xBUkVfVEFTS0xFVChzeXN0ZW1fc3VzcGVuZF90YXNrbGV0LCBzeXN0ZW1fc3VzcGVuZCwg
+TlVMTCk7DQo+ICsNCj4gK3ZvaWQgaG9zdF9zeXN0ZW1fc3VzcGVuZChzdHJ1Y3QgZG9tYWluICpk
+KQ0KPiArew0KPiArICAgIHN5c3RlbV9zdXNwZW5kX3Rhc2tsZXQuZGF0YSA9ICh2b2lkICopZDsN
+Cj4gKyAgICAvKg0KPiArICAgICAqIFRoZSBzdXNwZW5kIHByb2NlZHVyZSBoYXMgdG8gYmUgZmlu
+YWxpemVkIGJ5IHRoZSBwQ1BVIzAgKG5vbi1ib290IHBDUFVzDQo+ICsgICAgICogd2lsbCBiZSBk
+aXNhYmxlZCBkdXJpbmcgdGhlIHN1c3BlbmQpLg0KPiArICAgICAqLw0KPiArICAgIHRhc2tsZXRf
+c2NoZWR1bGVfb25fY3B1KCZzeXN0ZW1fc3VzcGVuZF90YXNrbGV0LCAwKTsNCj4gK30NCj4gKw0K
+PiAgLyoNCj4gICAqIExvY2FsIHZhcmlhYmxlczoNCj4gICAqIG1vZGU6IEMNCj4gZGlmZiAtLWdp
+dCBhL3hlbi9hcmNoL2FybS92cHNjaS5jIGIveGVuL2FyY2gvYXJtL3Zwc2NpLmMNCj4gaW5kZXgg
+YTQxMzU1ZDc1ZC4uNTEzNGU3NWMyNCAxMDA2NDQNCj4gLS0tIGEveGVuL2FyY2gvYXJtL3Zwc2Np
+LmMNCj4gKysrIGIveGVuL2FyY2gvYXJtL3Zwc2NpLmMNCj4gQEAgLTIzNyw3ICsyMzcsOCBAQCBz
+dGF0aWMgYm9vbCBkb21haW5faW5fc3VzcGVuZF9zdGF0ZShzdHJ1Y3QgZG9tYWluICpkKQ0KPiAg
+ICAgIHJldHVybiBzdXNwZW5kZWQ7DQo+ICB9DQo+ICANCj4gLXN0YXRpYyBpbnQzMl90IGRvbWFp
+bl9wc2NpX3N5c3RlbV9zdXNwZW5kX3BvbGljeShzdHJ1Y3QgZG9tYWluICpkKQ0KPiArc3RhdGlj
+IGludDMyX3QgZG9tYWluX3BzY2lfc3lzdGVtX3N1c3BlbmRfcG9saWN5KHN0cnVjdCBkb21haW4g
+KmQsDQo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+Ym9vbCAqaG9zdF9zdXNwZW5kKQ0KPiAgew0KPiAgICAgIHN0cnVjdCBkb21haW4gKm90aGVyOw0K
+PiAgICAgIGJvb2wgbGFzdF9hd2FrZV9jb250cm9sX2RvbWFpbiA9IHRydWU7DQo+IEBAIC0zMDAs
+NiArMzAxLDcgQEAgc3RhdGljIGludDMyX3QgZG9tYWluX3BzY2lfc3lzdGVtX3N1c3BlbmRfcG9s
+aWN5KHN0cnVjdCBkb21haW4gKmQpDQo+ICAgICAgaWYgKCAhaG9zdF9zeXN0ZW1fc3VzcGVuZF9h
+bGxvd2VkKCkgKQ0KPiAgICAgICAgICByZXR1cm4gUFNDSV9ERU5JRUQ7DQo+ICANCj4gKyAgICAq
+aG9zdF9zdXNwZW5kID0gdHJ1ZTsNCj4gICAgICByZXR1cm4gMDsNCj4gIH0NCj4gIA0KPiBAQCAt
+MzEwLDYgKzMxMiw3IEBAIHN0YXRpYyBpbnQzMl90IGRvX3BzY2lfMV8wX3N5c3RlbV9zdXNwZW5k
+KHJlZ2lzdGVyX3QgZXBvaW50LCByZWdpc3Rlcl90IGNpZCkNCj4gICAgICBzdHJ1Y3QgdmNwdSAq
+djsNCj4gICAgICBzdHJ1Y3QgZG9tYWluICpkID0gY3VycmVudC0+ZG9tYWluOw0KPiAgICAgIGJv
+b2wgaXNfdGh1bWIgPSBlcG9pbnQgJiAxOw0KPiArICAgIGJvb2wgaG9zdF9zdXNwZW5kID0gZmFs
+c2U7DQo+ICAgICAgc3RydWN0IHJlc3VtZV9pbmZvICpyY3R4ID0gJmQtPmFyY2gucmVzdW1lX2N0
+eDsNCj4gIA0KPiAgICAgIC8qIFRIVU1CIHNldCBpcyBub3QgYWxsb3dlZCB3aXRoIDY0LWJpdCBk
+b21haW4gKi8NCj4gQEAgLTMzNCw3ICszMzcsNyBAQCBzdGF0aWMgaW50MzJfdCBkb19wc2NpXzFf
+MF9zeXN0ZW1fc3VzcGVuZChyZWdpc3Rlcl90IGVwb2ludCwgcmVnaXN0ZXJfdCBjaWQpDQo+ICAN
+Cj4gICAgICBzcGluX2xvY2soJnZwc2NpX3N5c3RlbV9zdXNwZW5kX2xvY2spOw0KPiAgDQo+IC0g
+ICAgcmMgPSBkb21haW5fcHNjaV9zeXN0ZW1fc3VzcGVuZF9wb2xpY3koZCk7DQo+ICsgICAgcmMg
+PSBkb21haW5fcHNjaV9zeXN0ZW1fc3VzcGVuZF9wb2xpY3koZCwgJmhvc3Rfc3VzcGVuZCk7DQo+
+ICAgICAgaWYgKCAhcmMgKQ0KPiAgICAgIHsNCj4gICAgICAgICAgcmMgPSBkb21haW5fc2h1dGRv
+d24oZCwgU0hVVERPV05fc3VzcGVuZCk7DQo+IEBAIC0zNTksNiArMzYyLDkgQEAgc3RhdGljIGlu
+dDMyX3QgZG9fcHNjaV8xXzBfc3lzdGVtX3N1c3BlbmQocmVnaXN0ZXJfdCBlcG9pbnQsIHJlZ2lz
+dGVyX3QgY2lkKQ0KPiAgICAgICAgICAgICAgIlNZU1RFTV9TVVNQRU5EIHJlcXVlc3RlZCwgZXBv
+aW50PSUjIlBSSXJlZ2lzdGVyIiwgY2lkPSUjIlBSSXJlZ2lzdGVyIlxuIiwNCj4gICAgICAgICAg
+ICAgIGVwb2ludCwgY2lkKTsNCj4gIA0KPiArICAgIGlmICggaG9zdF9zdXNwZW5kICkNCj4gKyAg
+ICAgICAgaG9zdF9zeXN0ZW1fc3VzcGVuZChkKTsNCj4gKw0KPiAgICAgIHJldHVybiByYzsNCj4g
+IH0NCg0KLS0gDQpXQlIsIFZvbG9keW15cg==
 
