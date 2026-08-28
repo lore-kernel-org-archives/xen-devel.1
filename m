@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AF25C61DCB
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2026 13:58:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1402072.1637483 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BF4BC61DD3
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2026 14:11:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1402083.1637492 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzx64-0004E0-NZ; Fri, 28 Aug 2026 13:58:20 +0000
+	id 1wzxIw-0007nz-QX; Fri, 28 Aug 2026 14:11:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1402072.1637483; Fri, 28 Aug 2026 13:58:20 +0000
+Received: by outflank-mailman (output) from mailman id 1402083.1637492; Fri, 28 Aug 2026 14:11:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzx64-0004Dt-Kh; Fri, 28 Aug 2026 13:58:20 +0000
-Received: by outflank-mailman (input) for mailman id 1402072;
- Fri, 28 Aug 2026 13:58:19 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wzxIw-0007ns-Np; Fri, 28 Aug 2026 14:11:38 +0000
+Received: by outflank-mailman (input) for mailman id 1402083;
+ Fri, 28 Aug 2026 14:11:37 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a048a9fec2000c4f3@swg.vates.tech>)
- id 1wzx62-0004Ci-Kx
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 13:58:19 +0000
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a048b62786000c4f3@swg.vates.tech>)
+ id 1wzxIv-0007nk-Of
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 14:11:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzx61-00CgJc-TK
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 15:58:17 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wzxIu-00Es1L-Oi
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 16:11:36 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a048a9fec2000c4f3@swg.vates.tech>)
- id 6a9193f9-2eae-0a2a0a5409dd-0a2a4507deda-0
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 15:58:17 +0200
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a048b62786000c4f3@swg.vates.tech>)
+ id 6a9196fe-8faa-0a2a0a5109dd-0a2a4506b868-42
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 16:11:35 +0200
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a048a9fec2000c4f3@swg.vates.tech>)
- id 6a9193f9-b4ea-0a2a45070019-b9ff1c23a587-3
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 15:58:17 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a048b62786000c4f3@swg.vates.tech>)
+ id 6a919717-195a-0a2a45060019-b9ff1c128785-3
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 16:11:35 +0200
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a048a9fec2000c4f3.007 for <xen-devel@lists.xenproject.org>
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a048b62786000c4f3.003 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Fri, 28 Aug 2026 13:58:15 +0000
-Received: from [192.168.1.37] (lfbn-gre-1-371-96.w90-112.abo.wanadoo.fr
- [90.112.87.96]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id A38C48216A;
- Fri, 28 Aug 2026 15:58:14 +0200 (CEST)
+ Fri, 28 Aug 2026 14:11:32 +0000
+Received: from [192.168.1.61] (155.223.66.37.rev.sfr.net [37.66.223.155])
+ (Authenticated sender: ngoc-tu.dinh@vates.tech)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 860F68216A;
+ Fri, 28 Aug 2026 16:11:31 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,333 +58,173 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=lRZdUg3G4u3tOKN0hs/abdthoKU5+oYADq84b7LHbvs=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=M7THchgEr3UUxKeBfWqveVWP2BAH2Wx8Zxogql4cOusfuMbQPRqbYsgpRXgGASvycdxBYYn6k
- Zg8gNvblk4aa8gXtanpASupTbA/l9KwALSu4V3HcN0FQOnZT2kjhAKNPsxvPRKhdObz85RAHYgI
- pv+gRbOcb+gQtkR6l4ue81tJYCKzVNRYXCespGs5wmxuMXYcv++CugGp2UWtn+5m9qKr2B0Nej5
- vyT6qfLW5dTnu0+AnRX48iNRBD3i5ZN8R2XNVUCwtTxLZvTTOs61SsSEBewSPDPLwNgNUmLBOWq
- ylnX4syXJY9o/odqYb8qMaz0TuEkr5/Dm2N2s4lqb8nA==
-X-Zone-Loop: 91b9e9ee1b2035c5a8ff0c272e1a2b7ecfab6a91a2ad
+ q=dns/txt; s=selector1; bh=VxmWDfJtlB0dkwWyCQO3L8MJsVB8b2LRUg0zU+QIpR0=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=op9YyOcLbW0TWE5efNR2VbjnxNz3q4981VTx93FGx2CazkjMuXUrSJqF3orc5hLEWHy8kGQye
+ jLy30kBet7ZkpGO9zFsxjEfNm4BCG/xg6ojWh4f/oFeJcKng/QI4iZNjAZaedO2LG/c0Hl3Fa5h
+ 2VN0ZjIJPP79nsXthb7agz71ncGlk7iPaV5zs3Tpg9v7fSQdMbD/9f7o/Ih0bRAtSUQoU8z9MiF
+ AXyyyxEVrw4G7RWFT4TBremZQK+P6ElWD5tME4hvaLcETMlrQnCAn5zSBBgBkrg7kgsL83woOtE
+ BDthZtJSfhK6ohsxhonPzOsUS71Acc29Rz1ddhnis87A==
+X-Zone-Loop: 857b3988dfb4258490c3879eb8e7ee6805148c592df6
 x-campaign-type: default
-x-transaction-id: 0feef986-6fac-4331-adfd-800c12f1252f
-x-swg-uid: 01-08ec6ed2-5f6e-4a13-ad52-461238059692
+x-transaction-id: 2b57d0b7-c462-4ecc-86e1-2e270c973c9e
+x-swg-uid: 01-dfaa2133-006a-45e2-b04f-e1b413a77928
 X-Mailer: Sweego
 Message-ID:
- <1787925495.8631fc262581453bbf619ec5b2062170.1a048a9fec2000c4f3@vates.tech>
-x-swg-bid: 1787925495.8631fc262581453bbf619ec5b2062170.1a048a9fec2000c4f3
+ <1787926292.8631fc262581453bbf619ec5b2062170.1a048b62786000c4f3@vates.tech>
+x-swg-bid: 1787926292.8631fc262581453bbf619ec5b2062170.1a048b62786000c4f3
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
 X-Originating-IP: [37.26.189.201]
+Date: Fri, 28 Aug 2026 16:11:31 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH 1/5] xen/riscv: always set A/D bits at boot time
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
- xen-devel@lists.xenproject.org, zhangzheng@iscas.ac.cn, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Connor Davis <connojdavis@gmail.com>, 
- Andrew Cooper <andrew.cooper3@citrix.com>, 
- Anthony PERARD <anthony.perard@vates.tech>, 
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
- Julien Grall <julien@xen.org>, 
- =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
- Stefano Stabellini <sstabellini@kernel.org>
-In-Reply-To: <3adf6ef7-8024-420f-935b-17b142c73256@gmail.com>
-References: <1787844438.8631fc262581453bbf619ec5b2062170.1a043d52a06000c4f3@vates.tech>
- <1787844808.8631fc262581453bbf619ec5b2062170.1a043dad0d3000c4f3@vates.tech>
- <3adf6ef7-8024-420f-935b-17b142c73256@gmail.com>
-Date: Fri, 28 Aug 2026 15:58:09 +0200
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1787925494; l=12681;
- i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
- bh=KJtNMT9z4ZVN6G6B4G6Cm5dg5mycncawDT60NCOuopw=;
- b=qGhKc4GJofFN6KHp/Jb6OXJJVcy4mtfgEbHPom1+GTAabEsizs63Xl3rj0q7XlEm7JKEl8ssZ
- JUb++g5tuSpBJFrw678rAmSeKlfzzam2kEeDoKx+b74+OaGGnROTHGO
-X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
- pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 2/2] x86/viridian: Implement synthetic timer direct
+ mode
+To: Ross Lagerwall <ross.lagerwall@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Paul Durrant <paul@xen.org>, Jan Beulich <jbeulich@suse.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>
+References: <20260828131142.3986110-1-ross.lagerwall@citrix.com>
+ <20260828131142.3986110-3-ross.lagerwall@citrix.com>
+Content-Language: en-US
+From: Tu Dinh <ngoc-tu.dinh@vates.tech>
+In-Reply-To: <20260828131142.3986110-3-ross.lagerwall@citrix.com>
+X-BM-Disclaimer: Yes
+Content-Type: multipart/alternative; boundary="-=Part.2ebd.7f5d65a1bc14b01c.1a048b624d1.6e8dfc61ff02ff0b=-"
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1787925494864
-X-purgate-ID: tlsNG-ef75cf/1787925497-358C1AE4-4D2230DA/0/0
+X-Bm-Transport-Timestamp: 1787926291665
+X-purgate-ID: tlsNG-16d1c6/1787926295-FD00977B-F04FB893/0/0
 X-purgate-type: clean
-X-purgate-size: 12685
+X-purgate-size: 4732
 
-On 2026-08-28 12:59 +0200, Oleksii Kurochko wrote:
-> 
-> 
-> On 8/27/26 5:33 PM, Baptiste Le Duc wrote:
-> > Always set the PTE A/D bits at boot time to avoid an unhandled page fault
-> > on platforms that implement neither Svade nor Svadu, and on platforms that
-> > declare both in the device tree.
-> > 
-> > Rewrite the comment to enumerate the four possible Svade/Svadu combinations
-> > (inspired by [1]) and set A/D unconditionally, which is correct in all four
-> > cases until Svadu is fully supported (full support requires the SBI FWFT
-> > call to enable hardware updating of A/D bits).
-> > 
-> > [1] https://lwn.net/Articles/980016/
-> > 
-> > Assisted-by: Claude:claude-opus-5
-> > Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-> > ---
-> >   xen/arch/riscv/p2m.c | 70 ++++++++++++++++++++++++++------------------
-> >   1 file changed, 42 insertions(+), 28 deletions(-)
-> > 
-> > diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
-> > index 1cea86512c..11dc289f0f 100644
-> > --- a/xen/arch/riscv/p2m.c
-> > +++ b/xen/arch/riscv/p2m.c
-> > @@ -591,38 +591,52 @@ static void p2m_set_permission(pte_t *e, p2m_type_t t)
-> >       e->pte |= PTE_USER;
-> >   
-> >       /*
-> > -     * Two schemes to manage the A and D bits are defined:
-> > -     *   • The Svade extension: when a virtual page is accessed and the A bit
-> > -     *     is clear, or is written and the D bit is clear, a page-fault
-> > -     *     exception is raised.
-> > -     *   • When the Svade extension is not implemented, the following scheme
-> > -     *     applies.
-> > -     *     When a virtual page is accessed and the A bit is clear, the PTE is
-> > -     *     updated to set the A bit. When the virtual page is written and the
-> > -     *     D bit is clear, the PTE is updated to set the D bit. When G-stage
-> > -     *     address translation is in use and is not Bare, the G-stage virtual
-> > -     *     pages may be accessed or written by implicit accesses to VS-level
-> > -     *     memory management data structures, such as page tables.
-> > -     * Thereby to avoid a page-fault in case of Svade is available, it is
-> > -     * necessary to set A and D bits.
-> > +     * Svade and Svadu extensions represent two schemes for managing the PTE
-> > +     * A/D bits. When the PTE A/D bits need to be set, the Svade extension
-> > +     * indicates that a page fault will be raised. In contrast, the Svadu
-> > +     * extension supports hardware updating of the PTE A/D bits.
-> >        *
-> > -     * TODO: For now, it’s fine to simply set the A/D bits, since OpenSBI
-> > -     *       delegates page faults to a lower privilege mode and so OpenSBI
-> > -     *       isn't expect to handle page-faults occured in lower modes.
-> > -     *       By setting the A/D bits here, page faults that would otherwise
-> > -     *       be generated due to unset A/D bits will not occur in Xen.
-> > +     * There are 4 possible combinations of these extensions in the device
-> > +     * tree. The default hardware behavior for each is:
-> >        *
-> > -     *       Currently, Xen on RISC-V does not make use of the information
-> > -     *       that could be obtained from handling such page faults, which
-> > -     *       could otherwise be useful for several use cases such as demand
-> > -     *       paging, cache-flushing optimizations, memory access tracking,etc.
-> > +     * 1) Neither Svade nor Svadu present in DT => It is technically unknown
-> > +     *    whether the platform uses Svade or Svadu. Xen should be prepared to
-> > +     *    handle either hardware updating of the PTE A/D bits or page faults
-> > +     *    when they need updating. To support both, Xen always sets the 'A' and
-> > +     *    'D' PTE bits at boot time.
-> >        *
-> > -     *       To support the more general case and the optimizations mentioned
-> > -     *       above, it would be better to stop setting the A/D bits here and
-> > -     *       instead handle page faults that occur due to unset A/D bits.
-> > +     * 2) Only Svade present in DT => Xen must assume Svade to be always
-> > +     *    enabled.
-> > +     *
-> > +     * 3) Only Svadu present in DT => Xen must assume Svadu to be always
-> > +     *    enabled.
-> > +     *
-> > +     * 4) Both Svade and Svadu present in DT => Xen must assume Svadu is turned
-> > +     *    off at boot time by setting A/D bits. To use Svadu, the supervisor
-> > +     *    must explicitly enable it using the SBI FWFT extension.
-> > +     *
-> > +     * The Svade extension is mandatory and the Svadu extension is optional in
-> > +     * the RVA23 profile. Platforms wanting to take advantage of Svadu can
-> > +     * choose option 3. Platforms aware of the profile can choose option 4, and
-> > +     * Linux won't get the benefit of Svadu until the SBI FWFT extension is
-> > +     * available.
-> 
-> I have a feeling that the DT-binding-related comment should not be 
-> present here, as it explains when Svadu or Svade should be considered 
-> enabled or disabled. We should perform this kind of detection in 
-> riscv_fill_hwcap() [cpufeature.c]. Then, in p2m_set_permission(), we 
-> should use riscv_isa_extension_available() to determine which extension 
-> is available and, based on that, set the A and D bits.
-> 
-> At this point, I think the original comment was better, as it simply 
-> explained what Svade and Svadu are and, therefore, provided a better 
-> explanation of why the A and D bits should or should not be set.
-> 
-> So, my suggestion is the following:
-> 
-> +/*
-> + * Svade and Svadu extensions represent two schemes for managing the PTE
-> + * A/D bits. When the PTE A/D bits need to be set, the Svade extension
-> + * indicates that a page fault will be raised. In contrast, the Svadu
-> + * extension supports hardware updating of the PTE A/D bits.
-> + *
-> + * There are 4 possible combinations of these extensions in the device 
-> tree.
-> + * The default hardware behavior for each is:
-> + *
-> + * 1) Neither Svade nor Svadu present in DT => It is technically unknown
-> + *    whether the platform uses Svade or Svadu. Xen should be prepared to
-> + *    handle either hardware updating of the PTE A/D bits or page 
-> faults when
-> + *    they need updating. To support both, Xen always sets the 'A' and 
-> 'D' PTE
-> + *    bits at boot time.
-> + *
-> + * 2) Only Svade present in DT => Xen must assume Svade to be always 
-> enabled.
-> + *
-> + * 3) Only Svadu present in DT => Xen must assume Svadu to be always 
-> enabled.
-> + *
-> + * 4) Both Svade and Svadu present in DT => Xen must assume Svadu is turned
-> + *    off at boot time by setting A/D bits. To use Svadu, the 
-> supervisor must
-> + *    explicitly enable it using the SBI FWFT extension.
-> + *
-> + * The Svade extension is mandatory and the Svadu extension is optional 
-> in the
-> + * RVA23 profile. Platforms wanting to take advantage of Svadu can choose
-> + * option 3. Platforms aware of the profile can choose option 4, and 
-> Xen won't
-> + * get the benefit of Svadu until the SBI FWFT extension is available.
-> + *
-> + * In other words, hardware manages the A/D bits on its own only in case 3;
-> + * in all the other cases software has to preset them. Instead of open 
-> coding
-> + * this in every A/D bits user, RISCV_ISA_EXT_svade is used to mean 
-> "software
-> + * is responsible for the A/D bits" and is set here for the cases 1, 2 
-> and 4.
-> + */
-> +static void __init riscv_resolve_ad_scheme(void)
+---=Part.2ebd.7f5d65a1bc14b01c.1a048b624d1.6e8dfc61ff02ff0b=-
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+On 28/08/2026 15:14, Ross Lagerwall wrote:
+> In direct mode, the timer asserts an interrupt on expiration rather than
+> using a SynIC message=2E It is useful to implement this since Windows 11=
+'s
+> Hyper-V can only use synthetic timers in direct mode=2E
+
+Hello, is this new behavior compared to Server 2025? What happens if=20
+direct mode is not available, does it fall back to disabling stimer?
+
+>=20
+> Signed-off-by: Ross Lagerwall <ross=2Elagerwall@citrix=2Ecom>
+> ---
+>=20
+> Should this use a new Viridian feature bit or is it OK to use the
+> existing stimer bit?
+>=20
+>   xen/arch/x86/hvm/viridian/time=2Ec     | 25 +++++++++++++++++++------
+>   xen/arch/x86/hvm/viridian/viridian=2Ec |  3 +++
+>   2 files changed, 22 insertions(+), 6 deletions(-)
+>=20
+> diff --git a/xen/arch/x86/hvm/viridian/time=2Ec b/xen/arch/x86/hvm/virid=
+ian/time=2Ec
+> index 082528dc9416=2E=2E2b0ac3eac963 100644
+> --- a/xen/arch/x86/hvm/viridian/time=2Ec
+> +++ b/xen/arch/x86/hvm/viridian/time=2Ec
+> @@ -223,6 +223,14 @@ static void start_stimer(struct viridian_stimer *vs=
+)
+>       set_timer(&vs->timer, timeout + NOW());
+>   }
+>  =20
+> +static void stimer_deliver_direct(struct vcpu *v, struct viridian_stime=
+r *vs)
 > +{
-> +    bool svade = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade);
-> +    bool svadu = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svadu);
+> +    struct vlapic *vlapic =3D vcpu_vlapic(v);
 > +
-> +    /* Case 3: leave the A/D bits management to hardware. */
-> +    if ( svadu && !svade )
-> +        return;
-> +
-> +    /* Cases 1, 2 and 4: Xen has to preset the A/D bits. */
-> +    __set_bit(RISCV_ISA_EXT_svade, riscv_isa);
+> +    if ( vlapic_enabled(vlapic) )
+> +        vlapic_set_irq(vcpu_vlapic(v), vs->config=2Eapic_vector, 0);
 > +}
 > +
->   void __init riscv_fill_hwcap(void)
+>   static void poll_stimer(struct vcpu *v, unsigned int stimerx)
 >   {
->       unsigned int i;
-> @@ -513,6 +560,8 @@ void __init riscv_fill_hwcap(void)
->           __set_bit(RISCV_ISA_EXT_sstc, riscv_isa);
+>       struct viridian_vcpu *vv =3D v->arch=2Ehvm=2Eviridian;
+> @@ -242,9 +250,11 @@ static void poll_stimer(struct vcpu *v, unsigned in=
+t stimerx)
+>       if ( !test_bit(stimerx, &vv->stimer_pending) )
+>           return;
+>  =20
+> -    if ( !viridian_synic_deliver_timer_msg(v, vs->config=2Esintx,
+> -                                           stimerx, vs->expiration,
+> -                                           time_ref_count(v->domain)) )
+> +    if ( vs->config=2Edirect_mode )
+> +        stimer_deliver_direct(v, vs);
+> +    else if ( !viridian_synic_deliver_timer_msg(v, vs->config=2Esintx,
+> +                                                stimerx, vs->expiration=
+,
+> +                                                time_ref_count(v->domai=
+n)) )
+>           return;
+>  =20
+>       clear_bit(stimerx, &vv->stimer_pending);
+> @@ -372,7 +382,7 @@ int viridian_time_wrmsr(struct vcpu *v, uint32_t idx=
+, uint64_t val)
+>  =20
+>           vs->config=2Eas_uint64 =3D val;
+>  =20
+> -        if ( !vs->config=2Esintx || !vs->count )
+> +        if ( (!vs->config=2Edirect_mode && !vs->config=2Esintx) || !vs-=
+>count )
+>               vs->config=2Eenable =3D 0;
+>  =20
+>           if ( vs->config=2Eenable )
+> @@ -583,8 +593,11 @@ void viridian_time_load_vcpu_ctxt(
+>  =20
+>           vs->config=2Eas_uint64 =3D ctxt->stimer_config_msr[i];
+>           vs->count =3D ctxt->stimer_count_msr[i];
+> -        if ( !vs->config=2Esintx || !vs->count )
+> -            /* Reject enabling with a zero sintx or count fields=2E */
+> +        if ( (!vs->config=2Edirect_mode && !vs->config=2Esintx) || !vs-=
+>count )
+> +            /*
+> +             * Reject enabling with a zero sintx (if not using direct m=
+ode) or
+> +             * zero count field=2E
+> +             */
+>               vs->config=2Eenable =3D 0;
 >       }
-> 
-> +    riscv_resolve_ad_scheme();
-> +
-> 
-> And then ...
-> 
-> 
-> > +     *
-> > +     * Currently, Xen on RISC-V does not make use of the information that could
-> > +     * be obtained from handling such page faults, which could otherwise be
-> > +     * useful for several use cases such as demand paging, cache-flushing
-> > +     * optimizations, memory access tracking, etc.
-> > +     *
-> > +     * To support the more general case and the optimizations mentioned above,
-> > +     * it would be better to stop setting the A/D bits here and instead handle
-> > +     * page faults that occur due to unset A/D bits.
-> > +     */
-> > +
-> > +    /*
-> > +     * Preset unconditionally for all 4 cases above, harmless when Svadu
-> > +     * manages the bits (case 3). Skipping it for case 3 requires SBI FWFT
-> > +     * which is not yet supported.
-> >        */
-> > -    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) )
-> > -        e->pte |= PTE_ACCESSED | PTE_DIRTY;
-> > +    e->pte |= PTE_ACCESSED | PTE_DIRTY;
-> 
-> ... we could restore the check and the comment we originally had in 
-
-Yes it makes sense as we now manually force the svade extension in 1, 2
-and 4 cases.
-
-> p2m_set_permission(), but probably with some updates, something along 
-> the following lines:
-> 
-> /*
->   * Xen has to preset the A/D bits unless the hardware is known to update
->   * them on its own. riscv_fill_hwcap() folds all the Svade/Svadu device
->   * tree combinations into RISCV_ISA_EXT_svade, which then means that
->   * software is responsible for the A/D bits" (see
->   * riscv_resolve_ad_scheme()).
->   */
-> 
-> I have another comment regarding:
-> 
->  > +    /*
->  > +     * Preset unconditionally for all 4 cases above, harmless when Svadu
->  > +     * manages the bits (case 3). Skipping it for case 3 requires 
-> SBI FWFT
->  > +     * which is not yet supported.
->  >        */
->  > -    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) )
->  > -        e->pte |= PTE_ACCESSED | PTE_DIRTY;
->  > +    e->pte |= PTE_ACCESSED | PTE_DIRTY;
-> 
-> I am not sure that this comment is correct. In case 3, we should not 
-> need to use the SBI FWFT extension. Case 3 means that Xen must assume 
-> that Svadu is enabled. Therefore, it is the responsibility of OpenSBI, 
-> or the pre-bootloader that loads OpenSBI, to enable it. If it fails to 
-> do so, then OpenSBI or the pre-bootloader is not complying with the DT 
-> binding documentation and it should be fixed in first place.
-
-You right, thanks
-> 
-> As further evidence, this is what OpenSBI already does [1]:
-> /*
->   * Assume only Svadu is supported when it is the only extension
->   * present in the ISA string. Svade is assumed when neither are
->   * present. When both are present we must default to Svade (see
->   * the zero reset value of FWFT.PTE_AD_HW_UPDATING).
->   */
-> if (!sbi_hart_has_extension(scratch, SBI_HART_EXT_SVADE))
->      __set_menvcfg_ext(SBI_HART_EXT_SVADU, ENVCFG_ADUE);
-> 
-> Therefore, in case 3, the original check is still valid, and there is no 
-> need for Xen to support the SBI FWFT extension for this case. I think 
-> the original check should therefore be kept as it was:
-
-Yes agree, I'll change that in v2.
-
-> if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) )
->      e->pte |= PTE_ACCESSED | PTE_DIRTY;
-> 
-> The SBI FWFT extension is only required for case 4. If both Svade and 
-> Svadu are present in the DT, Svade is selected by default. To use Svadu 
-> instead, SBI FWFT is required to set the ADUE bit in menvcfg, which is 
-> only accessible from M-mode.
-> 
-> Since SBI FWFT is relatively new and may not be supported by older 
-> OpenSBI versions, another option is to have OpenSBI hard-code ADUE=1. 
-> Alternatively, the DTS could specify only one of Svade or Svadu in the 
-> riscv,isa property. In that case, upstream OpenSBI can handle the 
-> configuration automatically. So specifically for our case (Svadu and 
-> Svade things) we don't need SBI FWFT at all.
-
-So if I understood correclty, you want to not let the option to change
-ADUE bits in case 4 right? Therefore, I think we should document that
-somewhere to clearly indicates that if someone want to use Svadu, he
-should remove `svade` in the riscv,isa DT property.
-> 
-> [1] 
-> https://github.com/riscv-software-src/opensbi/blob/master/lib/sbi/sbi_hart.c#L171
-> 
-Thanks for this very clear review.
-
-> ~ Oleksii
-> 
-> 
-> 
-> 
-> 
+>   }
+> diff --git a/xen/arch/x86/hvm/viridian/viridian=2Ec b/xen/arch/x86/hvm/v=
+iridian/viridian=2Ec
+> index 90e749ceb581=2E=2E99192e8d077d 100644
+> --- a/xen/arch/x86/hvm/viridian/viridian=2Ec
+> +++ b/xen/arch/x86/hvm/viridian/viridian=2Ec
+> @@ -78,6 +78,7 @@ typedef union _HV_CRASH_CTL_REG_CONTENTS
+>   #define CPUID3D_CPU_DYNAMIC_PARTITIONING (1 << 3)
+>   #define CPUID3D_CRASH_MSRS (1 << 10)
+>   #define CPUID3D_SINT_POLLING (1 << 17)
+> +#define CPUID3D_STIMER_DIRECT_MODE (1 << 19)
+>  =20
+>   /* Viridian CPUID leaf 4: Implementation Recommendations=2E */
+>   #define CPUID4A_HCALL_REMOTE_TLB_FLUSH (1 << 2)
+> @@ -185,6 +186,8 @@ void cpuid_viridian_leaves(const struct vcpu *v, uin=
+t32_t leaf,
+>               res->d |=3D CPUID3D_CRASH_MSRS;
+>           if ( viridian_feature_mask(d) & HVMPV_synic )
+>               res->d |=3D CPUID3D_SINT_POLLING;
+> +        if ( viridian_feature_mask(d) & HVMPV_stimer )
+> +            res->d |=3D CPUID3D_STIMER_DIRECT_MODE;
+>  =20
+>           break;
+>       }
 
 
+
+-- 
+Ngoc Tu Dinh | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates =
+solutions
+
+web: https://vates=2Etech
+---=Part.2ebd.7f5d65a1bc14b01c.1a048b624d1.6e8dfc61ff02ff0b=---
 
