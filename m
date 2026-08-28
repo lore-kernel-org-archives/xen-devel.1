@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1581C61DBD
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2026 07:01:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1401607.1637151 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5B33C61DB9
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2026 07:02:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1401612.1637159 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzqb1-0002iP-MU; Fri, 28 Aug 2026 07:01:51 +0000
+	id 1wzqbV-0003H0-Td; Fri, 28 Aug 2026 07:02:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1401607.1637151; Fri, 28 Aug 2026 07:01:51 +0000
+Received: by outflank-mailman (output) from mailman id 1401612.1637159; Fri, 28 Aug 2026 07:02:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzqb1-0002iI-Ic; Fri, 28 Aug 2026 07:01:51 +0000
-Received: by outflank-mailman (input) for mailman id 1401607;
- Fri, 28 Aug 2026 07:01:51 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wzqbV-0003Gs-QU; Fri, 28 Aug 2026 07:02:21 +0000
+Received: by outflank-mailman (input) for mailman id 1401612;
+ Fri, 28 Aug 2026 07:02:20 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wzqb1-0002hv-23
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 07:01:51 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wzqbU-0003FW-Rb
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 07:02:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzqb0-00BS6p-Eq
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 09:01:50 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wzqbU-009FjH-7t
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 09:02:20 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a91324f-e002-0a2a0a5209dd-0a2a4504a508-40
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:01:50 +0200
-Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a913275-8faa-0a2a0a5109dd-0a2a4505ae48-40
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:02:20 +0200
+Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a91325e-b57f-0a2a45040019-d155dd2bb479-3
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:01:50 +0200
-Received: by mail-wr1-f43.google.com with SMTP id
- ffacd0b85a97d-482c58a8683so494707f8f.0
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 00:01:50 -0700 (PDT)
+ id 6a91327c-4cb1-0a2a45050019-d155802eb505-3
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:02:20 +0200
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-49557167508so5866045e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 00:02:20 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482fbb27936sm1770875f8f.28.2026.08.28.00.01.49
+ 5b1f17b1804b1-49b94dcb3d9sm28839595e9.5.2026.08.28.00.02.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 28 Aug 2026 00:01:49 -0700 (PDT)
+ Fri, 28 Aug 2026 00:02:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,49 +55,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787900510; x=1788505310; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1787900540; x=1788505340; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=PK9zMBufoVGWq6x8z32e+ws1C3h4VMgJkNucIWcX4mE=;
-        b=FjJle4PiBWVqSV0EfiSFSwxt9px+/XgF6MhLqMF1/v3AaJZf0qbzJsGBw0FeBNJOLH
-         7PyB4ZhprIlO8lHtjS7QervrjvK6xkeuC/RTqdN/N7N2JzAvcpFwSFbDyRo05ItY7303
-         sGVlIhq2Hv35BPZM9sp4noJeVFwusZe4FNDkgqSDo7rYDfyVb6vNx+pkHU9DSSwW6wB3
-         RbzSumN4mh7LiVtNY5sXb6P2FhyqlHNP7FhfVWRy3LBNv6FM9M7ChFiP5nhY4Uc5Em4+
-         nikBvAeQIkq51GIq/y6908k/doo21NAiqg8U8v0bngJ7B8k9HTD+8arXjEvnf/4wKAPh
-         FFwA==
+        bh=I1byslbOG0CeFzmY2s3/l4wrq9b0PgsYDl6emmZmMS4=;
+        b=LY/nj0veQReLQo8MGqj+h2PwS4e/15ZjgRJyHiiL/tOVc/R99bMLaIePRh70YQsd6u
+         qqVZyV7hZB8Nw6EgkywFNh2eL8VRcTBbwTCCJUW2TCQxciW5CO7Hj6vOAf+YgbDqWPNj
+         4SQ/Qmycjq551RmCW/kR2DtN6VJwM/8/0UzJdOC1PhFh2uKIUV2R0wDrlcDpBQi9QzUH
+         IkQ+AKnzQxuNU6xw30sLUXFMJa/frLZ+zD5AWycE4giEk5H1rw+B7a4kqAIQvYfy7ltA
+         QQ8uOEmn8jTKEJhWOgM5wZrKf98W7Bh17eVErEtSTuJfT9PdMeF0J5J4+jyo6mS1Sn5I
+         w3QQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787900510; x=1788505310;
+        d=1e100.net; s=20251104; t=1787900540; x=1788505340;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=PK9zMBufoVGWq6x8z32e+ws1C3h4VMgJkNucIWcX4mE=;
-        b=N3lEeQPXczeMAG1pTJjEpPBBh0nlbsEFYF8gzDEqHO6zzDa3hu3Pv6Cl0MpFnyvIlz
-         v5FDpuA2UQQcaQGgzr0h+rr96ApjfU1tubza+2ICjvdVcpZL4XokRb3D5hbpoBZLHzM3
-         3axR4Eha8ZMZ1qQoZCHR+bKlKkrTjFM3LQ4u6t94vTwqDOjLu1IzzrJuWQhykPtkQ05g
-         d9+45NYWrfN6zyfAkoPVtaw8h60to1hVMm6pttBxeLOlgtzGgqF+au8P9SL11kDPTAB2
-         aD818ZhhJE0LTbRbZlPIWb+mbFhXOLgROX1TuRL2t7dK1K6rn7NtWDhR/RAxoANN6EUB
-         1IGg==
-X-Gm-Message-State: AFuF++lEcSQ4wz36ar9Uc6bzbboqbxrX/Whtb24BShM5I/gopXcIylDG
-	dfAGQgaGpRcHJD0iyvhxQbvx8eKpHePaU8KbB6EEs4jhnoThcpO9xn5xciFFbdEK0GdQ9EgoJBk
-	FbOu/cA==
-X-Gm-Gg: AR+sD108FDDm1h41feWvyHZ9giD0qjG7PrO/aq1DOBGXq4vJO/0ozjidQRZ65orh5T5
-	HWwPnJMQAd+wjhZyJPO8Ptek9UVCrPQvSN4tJJpl35FJEQHExugk18rKlqJO1eEyHuDyhp2Xjef
-	ZH6DX22q6rhVq4pgiJceiAGIH0XSco4LiNTvB2ApADYBfcvufantlXdh78gOADR5WJIEfuIyYi7
-	9BRYsHkOphjUHlL+oewcHUAIKBx3qACc4ZbR3DgTceSZfKp5noM6ssatO0RzeqPhZda2ddrUFsW
-	HZnSknvBtG4IOfFemTy9zolyCuEbpqX+2Xoq9J8LBE0vQSznWier4xOn5Bnx0kUPJ+643e2JB10
-	Cus/gcpgt/KzYacN6ap3fOVYqabDsFbopUVdQuf418Z/EhCOM7YUHvndtPQ4xMWK62OdB5+MLfT
-	B3kmxgoGMnVI1G1+aiNOgc3+7ksHq7pyaP6F8D+/VQjqW5SJw/c/e20etIslg7qzA/e6ZNDW+86
-	WRwgzppBvh3JkYkew8tP/vArFWFGIxk0lTa2E43i+q8aEIpd+4nrVl6ajWJIwc=
-X-Received: by 2002:a05:6000:2904:b0:482:ea9b:962c with SMTP id ffacd0b85a97d-482f79c91e1mr7402311f8f.22.1787900509801;
-        Fri, 28 Aug 2026 00:01:49 -0700 (PDT)
-Message-ID: <d0f991de-db67-4f49-aef0-25c590b3889e@suse.com>
-Date: Fri, 28 Aug 2026 09:01:48 +0200
+        bh=I1byslbOG0CeFzmY2s3/l4wrq9b0PgsYDl6emmZmMS4=;
+        b=Ij3Mit3I+ivCAbuusmjB6zH4zcjSF0HaLsWZJ0b5ZANksEeI2wWctsKDwRHuyv5MhH
+         088uzCjPngiHFayAdiolM2tGXw+E/4HhPwZY0pyvD/eEAzsW3f4mqm0vBukhyEbiAqPN
+         NQWj8nhXu/DUlmVyzP52GwkNJNA/fDR30V0RWyEZc7rw/xVFwJgMjDnL0dQt3zE1Er/n
+         HyIsSzk6alLt+mVpTn1ky96dFTmQhhrJX01djQ6xl/5yov9oBNgwI46264DnZMcg+Pfk
+         CemctUz5w6ZxY9fMaT1cMsn37eutv4Jx+cQob9njiZ4Q7ecuHz/wbk5DkdRoNgN7/V+H
+         N1tw==
+X-Gm-Message-State: AFuF++kY1X1ZsJf2pkOmyxx39dDMil1pYJERdVCp+MgHWkiBt5AF1/Rc
+	J0l3X7tQ98OCP2HCZPVnkFWVTo4vIuvmNnVU3To+NGuCN5ICLkF5d09HzHuH483tG8thWyI8u1+
+	s3W7mDg==
+X-Gm-Gg: AR+sD1042K9HyDPTVpyotoKACXogAT95s0rt3fcPkCq2Tk/eNBEgcVnMnfb6HgrAreu
+	b/AQq/BDQAjscEomfB/kxzh4dW0iXAHtvSGQxZCCFgepT/0XY0YQpBXGdvJ3P9beo+xVH+eOTTO
+	xLzx7IKfeDpzZ0Xv/bHzQLP6VxV+NhXEdf8v3qo3Mg+sxrUx/yvEspYEjPLyarSTpNku40xhUJ2
+	v/ZPmNZ5Dzv2ST86NeS41Ig+uJ2kPOlLwTv6r2GYtM80Vzz1ZzFPsiaW1CijEYteFVRz1hWYvYr
+	VxMetsW6jCPJPNElsP95eAMhcfKt6/R+gXZ2ALoDufZDg8TjgszNnoI/yBoVphc2izBbnlG/F4H
+	INi3ebMqBEzIUiMD0A75Kl8ale6EiwMhJf2BlzGTTJUa+PrXhhEdjwUlFU3Dr7CAIo5x/bCeAZI
+	ufpWh7CRh7l9TFpV1x83HFmgHhovMvtt7QPkxuuqJwiLBUkUPMEuTodNF47SDOfeAZ54YZTzWNd
+	FstgQffYfkpkz/IEOUqpF5gZvlNwnL7hvtPE22HQuwhSmQuS4X3ar8/7M4OzsE=
+X-Received: by 2002:a05:600c:8486:b0:499:dbba:9859 with SMTP id 5b1f17b1804b1-49b91c27436mr64024755e9.5.1787900539660;
+        Fri, 28 Aug 2026 00:02:19 -0700 (PDT)
+Message-ID: <96de425a-29f7-4759-8466-b72bbe40b90b@suse.com>
+Date: Fri, 28 Aug 2026 09:02:18 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 04/12] x86: add noreturn in a few more places
+Subject: [PATCH 05/12] x86/crash: address Misra 2.1 rule violation
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
@@ -132,109 +132,27 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1787900510-502E4B50-9F64A953/0/0
+X-purgate-ID: tlsNG-c201ff/1787900540-72AB72A1-FF57D71F/0/0
 X-purgate-type: clean
-X-purgate-size: 4001
+X-purgate-size: 438
 
-start_secondary(), do_double_fault(), play_dead(), and tboot_s3_error()
-never return, so would better be annotated anyway. The do_double_fault()
-change needs accompanying by adjustments to entry_from_{pv,xen}(), as
-Eclair then deems the "return" there as unreachable.
+The use of unreachable(), when unreachability is visible to Eclair (and
+compilers), is deemed a violation. Drop the redundant statement.
 
-context_switch() and continue_running() are odd: We can't
-(unconditionally) add noreturn to their declarations, as Arm's variants do
-return. Put the attribute on x86'es definitions instead (the use of
-unreachable() in reset_stack_and_call_ind() allows the compiler to figure
-that out itself, but Eclair wants the annotation in addition).
+No functional change.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-entry_from_pv() wants the annotation only when PV=n, yet once added gcc
-then warns about "return" being used in a "noreturn" function. Is there
-any other approach to address this besides adding #ifdef inside the
-function (i.e. replacing the !IS_ENABLED(CONFIG_PV) check that's there)?
 
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -2163,7 +2163,7 @@ static void __context_switch(void)
-     per_cpu(curr_vcpu, cpu) = n;
+--- a/xen/arch/x86/crash.c
++++ b/xen/arch/x86/crash.c
+@@ -118,8 +118,6 @@ static int cf_check do_nmi_crash(
+ 
+     for ( ; ; )
+         halt();
+-
+-    unreachable();
  }
  
--void context_switch(struct vcpu *prev, struct vcpu *next)
-+void noreturn context_switch(struct vcpu *prev, struct vcpu *next)
- {
-     unsigned int cpu = smp_processor_id();
-     struct cpu_info *info = get_cpu_info();
-@@ -2240,7 +2240,7 @@ void context_switch(struct vcpu *prev, s
-     reset_stack_and_call_ind(nextd->arch.ctxt_switch->tail);
- }
- 
--void continue_running(struct vcpu *same)
-+void noreturn continue_running(struct vcpu *same)
- {
-     reset_stack_and_call_ind(same->domain->arch.ctxt_switch->tail);
- }
---- a/xen/arch/x86/include/asm/cpuidle.h
-+++ b/xen/arch/x86/include/asm/cpuidle.h
-@@ -26,7 +26,7 @@ static inline int mwait_idle_init(struct
- int cpuidle_init_cpu(unsigned int cpu);
- void cf_check default_dead_idle(void);
- void cf_check acpi_dead_idle(void);
--void play_dead(void);
-+void noreturn play_dead(void);
- void trace_exit_reason(u32 *irq_traced);
- void update_idle_stats(struct acpi_processor_power *power,
-                        struct acpi_processor_cx *cx,
---- a/xen/arch/x86/include/asm/tboot.h
-+++ b/xen/arch/x86/include/asm/tboot.h
-@@ -126,7 +126,7 @@ int tboot_in_measured_env(void);
- int tboot_protect_mem_regions(void);
- int cf_check tboot_parse_dmar_table(acpi_table_handler dmar_handler);
- int tboot_s3_resume(void);
--void tboot_s3_error(int error);
-+void noreturn tboot_s3_error(int error);
- int tboot_wake_ap(int apicid, unsigned long sipi_vec);
- #else
- static inline void tboot_probe(void) {}
---- a/xen/arch/x86/smpboot.c
-+++ b/xen/arch/x86/smpboot.c
-@@ -326,7 +326,7 @@ static void set_cpu_sibling_map(unsigned
-     }
- }
- 
--void asmlinkage start_secondary(void)
-+void asmlinkage noreturn start_secondary(void)
- {
-     struct cpu_info *info = get_cpu_info();
-     unsigned int cpu = smp_processor_id();
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -1080,7 +1080,7 @@ const char *vector_name(unsigned int vec
-     return (vec < ARRAY_SIZE(names) && names[vec][0]) ? names[vec] : "???";
- }
- 
--void asmlinkage do_double_fault(struct cpu_user_regs *regs)
-+void asmlinkage noreturn do_double_fault(struct cpu_user_regs *regs)
- {
-     unsigned int cpu;
-     struct extra_state state;
-@@ -2304,7 +2304,7 @@ void asmlinkage entry_from_pv(struct cpu
-     case X86_ET_HW_EXC:
-         switch ( vec )
-         {
--        case X86_EXC_DF: return do_double_fault(regs);
-+        case X86_EXC_DF: do_double_fault(regs); /* noreturn */
-         case X86_EXC_MC: return do_machine_check(regs);
-         }
-         break;
-@@ -2615,7 +2615,7 @@ void asmlinkage entry_from_xen(struct cp
-     case X86_ET_HW_EXC:
-         switch ( regs->fred_ss.vector )
-         {
--        case X86_EXC_DF: return do_double_fault(regs);
-+        case X86_EXC_DF: do_double_fault(regs); /* noreturn */
-         case X86_EXC_MC: return do_machine_check(regs);
-         }
-         break;
+ static void nmi_shootdown_cpus(void)
 
 
