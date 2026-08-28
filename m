@@ -4,43 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD5FDC61DB9
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2026 10:59:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1401913.1637385 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A813C61DB9
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2026 12:07:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1401955.1637395 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzuIe-0006rX-SY; Fri, 28 Aug 2026 10:59:08 +0000
+	id 1wzvMM-00067y-Mx; Fri, 28 Aug 2026 12:07:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1401913.1637385; Fri, 28 Aug 2026 10:59:08 +0000
+Received: by outflank-mailman (output) from mailman id 1401955.1637395; Fri, 28 Aug 2026 12:07:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzuIe-0006qL-OY; Fri, 28 Aug 2026 10:59:08 +0000
-Received: by outflank-mailman (input) for mailman id 1401913;
- Fri, 28 Aug 2026 10:59:07 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wzuId-0006qF-Fc
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 10:59:07 +0000
+	id 1wzvMM-00067q-JD; Fri, 28 Aug 2026 12:07:02 +0000
+Received: by outflank-mailman (input) for mailman id 1401955;
+ Fri, 28 Aug 2026 12:07:01 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <marcandre.lureau@redhat.com>) id 1wzvML-00067k-7e
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 12:07:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzuIc-00EJyt-Sa
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 12:59:06 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wzvMJ-0020xm-VS
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 14:07:00 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a9169d4-2eae-0a2a0a5409dd-0a2a4504ce66-46
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 12:59:06 +0200
-Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a9169fa-b57f-0a2a45040019-d155802ad1d1-3
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 12:59:06 +0200
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-4995b0343c1so7292895e9.3
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 03:59:06 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
- [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49b9266be71sm109242725e9.2.2026.08.28.03.59.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 28 Aug 2026 03:59:05 -0700 (PDT)
+ (envelope-from <marcandre.lureau@redhat.com>)
+ id 6a9179c5-2eae-0a2a0a5409dd-0a2a4509e49e-36
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 14:06:59 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <marcandre.lureau@redhat.com>)
+ id 6a9179e2-be1a-0a2a45090019-aa0a817c9563-3
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 14:06:59 +0200
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-641-psgM2I-bM7GU71t1G24AKA-1; Fri,
+ 28 Aug 2026 08:06:55 -0400
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 76A101953984; Fri, 28 Aug 2026 12:06:53 +0000 (UTC)
+Received: from localhost (headnet05.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.117])
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id EF6A91803A44; Fri, 28 Aug 2026 12:06:51 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,322 +61,535 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787914746; x=1788519546; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ZRVlkhCv6l9DDyUTo6EL5BoaJ+aNHhPjPh6yq9TdpJM=;
-        b=ePWaR1RiDfpuxx5Kf2aRJ2jB3Dwn00IyIFfbVTLGEyLSQYfNziDdC9+yhSvMcTLg27
-         MR1I390ZH/lhBZ9W6glnlDb8GyKZDatT78doNFIlHuLfbMEANAjS6Mka10uv48UFE5QK
-         dCdXEznuVExHoAsf5NkK9yMi2JPynU049tnHgl3LTwp0F9+UwlgehTfbYBKqwg8hg19G
-         +tq/myaalW12OD5zsIi32dWW7YKfrFwbdGTQkYUmKio4uJGwimBcqh2jej+hEYOj9ZJ3
-         NqXImrfgLzrdoOIaemZ4MWBg/pmtP8OEWCZF//gZIhOj8x9xxRm5WKOy+93PnHvd8xtQ
-         aKMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787914746; x=1788519546;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ZRVlkhCv6l9DDyUTo6EL5BoaJ+aNHhPjPh6yq9TdpJM=;
-        b=q/ZJlQXLA3f/q+qp2kFdyNgrOQYhbUdWJtOd/ozrei0l34bETlDeKxeE0w/S3iHtAI
-         F8GZHtWQCHwOlb9avkY9mCbV5cXCLtSNuCI0BOW8CY+JXR7furo1GCXB9LrAqbGWosPh
-         FeZsfJfnG+M3d5CmEgUvVzN/dLbfbXq5WrFEhZqdRqLAW+ZQun/X/DtTj1FXnTKXFxAY
-         FA6Zo/s9lGbMa8K6uDcBdNyZqjIAIgyIetn+SRvHkvK6o8qM1+5sKREBnzBmzjp5dedp
-         NtP79aaGSv4UFG5ol3V89FK9wgP3FnIM8FjtIKiA5FJcHq6NqQpmTZCyI51rLc7iug9T
-         9/bg==
-X-Forwarded-Encrypted: i=1; AHgh+RotzFiys03oHuCP4ugF57h6JGWyxpefhHRSPsu8oWQq6GC3NmLPUjCva8v19qF+kRXpp3aWkLXrHJ0=@lists.xenproject.org
-X-Gm-Message-State: AFuF++nD8emj7B6RGD8MJN3jiHlFB36Zf/AhVz2F2djeb56EIosFHQLp
-	Rl3Fxda60Qx9Tb/2eZIGy290OJCv14QXG992FHbEMBNOPd5PO+wrFvbf
-X-Gm-Gg: AR+sD10xPejyhV8NoaKoZV4pUNxNuL32LopSb1MFlYuKP6Ctsbi3TroKcPnXyItinPx
-	rx/drxGHiR1OLJI2rYHoIZJQR4S/rytiv2/uFHlrk/oTHpSZp1V8chHmFV03GlD9nKHFBVPZgXV
-	mOa7xD5HE1XVvvRihKMSv19lQfG8O3yJwSINayC92w0N9Vy7yMS2qceyZZArFUykysd8+YXzEwJ
-	Iwa1nUhill1h3+vkg5ZbzJxIIAMMyKwGboZg/7pfwrtExOyvyERnRhutodJQLygtN5cLsO+9//v
-	TmkWCxuxbJTFA/YPW8et15k8Csq5UEPyNxfTxyroqu3I9qAWj/GUAb/gF4GYLtkmIIQ1+dUYnba
-	cOXWJprAIxV5UvfyIKTry1X/cvU405mhkTfYQ7LgmCTh/rUAjeCMAiAf76csagOtiu8NvjqNyuo
-	k7US5JKikNY+sBUf1eyg0YeZB0QQQEqByunMip5Sc77es89glljOTNxXXENk9vRmkXH1bMYthPg
-	ipzrdrzCsJqvyZjAD+aryqEr74QgyxMtTBaisGx2RwJjB1IhBR5
-X-Received: by 2002:a05:600c:1d11:b0:496:c1f3:e8f8 with SMTP id 5b1f17b1804b1-49b91c25414mr81356125e9.7.1787914746051;
-        Fri, 28 Aug 2026 03:59:06 -0700 (PDT)
-Message-ID: <3adf6ef7-8024-420f-935b-17b142c73256@gmail.com>
-Date: Fri, 28 Aug 2026 12:59:03 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1787918818;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=ONIJNZGy8Vp4rvH9aG4YnmO9S58iMfbY3N0MtThAE9I=;
+	b=iVxuvd5qeFJ5tKEVCZwBKLDrxxMEEPbhjBeNRg1KPuiIIWz8wQ19w3fkL+gN9IcVbS5RM5
+	6XN7Gt0zEJxz8AmwFC4bvAWqbv1NqgVkbitgkufCTbWS8vhbT8/OdznyOft0ygp9oIPQGy
+	NINAB/oqb5Wc+fytZjWDQEmYE0pn4Lo=
+X-MC-Unique: psgM2I-bM7GU71t1G24AKA-1
+X-Mimecast-MFC-AGG-ID: psgM2I-bM7GU71t1G24AKA_1787918813
+From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+Date: Fri, 28 Aug 2026 16:04:27 +0400
+Subject: [PATCH v5 30/50] monitor: isolate HMP declarations in hmp.h
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] xen/riscv: always set A/D bits at boot time
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- xen-devel@lists.xenproject.org
-Cc: zhangzheng@iscas.ac.cn, Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
-References: <1787844438.8631fc262581453bbf619ec5b2062170.1a043d52a06000c4f3@vates.tech>
- <1787844808.8631fc262581453bbf619ec5b2062170.1a043dad0d3000c4f3@vates.tech>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <1787844808.8631fc262581453bbf619ec5b2062170.1a043dad0d3000c4f3@vates.tech>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Message-Id: <20260828-qemu-no-hmp-v5-30-9227de146347@redhat.com>
+References: <20260828-qemu-no-hmp-v5-0-9227de146347@redhat.com>
+In-Reply-To: <20260828-qemu-no-hmp-v5-0-9227de146347@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>, 
+ dave@treblig.org, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>, 
+ =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ Markus Armbruster <armbru@redhat.com>, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ =?utf-8?q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, 
+ Laurent Vivier <lvivier@redhat.com>, Amit Shah <amit@kernel.org>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, 
+ Brian Cain <brian.cain@oss.qualcomm.com>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Anthony PERARD <anthony@xenproject.org>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ Samuel Thibault <samuel.thibault@ens-lyon.org>, 
+ Jason Wang <jasowangio@gmail.com>, 
+ Yoshinori Sato <yoshinori.sato@nifty.com>, 
+ Stefan Hajnoczi <stefanha@redhat.com>, xen-devel@lists.xenproject.org
+X-Developer-Signature: v=1; a=openpgp-sha256; l=15880;
+ i=marcandre.lureau@redhat.com; h=from:subject:message-id;
+ bh=ED7BcHvOtevt0A+0hTZ6huQ110MQWdHvMRRIRkDFviA=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqkXk5jpqSCtWaYeQpkSH/ahLz7niYUU+OqCOr6
+ d6N2MwjCh6JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCapF5OQAKCRDa6OEJdZac
+ 5S+ND/47nZI3HLHEF0Yd7B0BByIJhatVazXkXaDTEUxKpeKrMlH05poY37bkzcSy+lgS2CR0GGa
+ m3yN7xfFMuwzbNwjunI32N8y0wPIhiuDN+CF6it7K9rJhBYCAORrc/OTITynQTVW17Z/iYqXvMW
+ d58TM1G+8NbLycskApve0QRfOzrs7kdZ0kLpPeWbFbdc/0tw6oxnaNbJhX6n9rqt/u+4GnfxyeT
+ onY7SynAI2/7as0TedZCXa8kMFow5ttAvkAIpgP57rlCdeEd5M1PklwAN1AX1SMwLR498zARdRv
+ j96x94seBNNH26Gbh6y9hTTq65EvsN0yJXHstmgZHwoJjfsRpSAqgQ+WO1r8Lrvty+4yWHvzynM
+ 6jhhCSKiG/AlABvOo2I9fyWCG+XySwEOlIDu3j/LZ2NeImLXApMpf+59TGwBNGjSnq1M2EBz35o
+ VyBjd84PrwBuuQfpcaHlkBevfYc3PEVQO5W/gqoqQrcJt3E8UnH8Vp/a+o6s7y8nrXEpUzYs/sZ
+ zyKSPNLjD8O69enIDH5kvGmENKUQjwyW0cUK9VQan+6pXw/yqNATxSuzOf/1TtswHwU560vyK4Q
+ 2ITd1kzdeetDASqvqjpUhWbbo2cEgq3tyAgZjKELDG4fYzg2J8Zg4Ax0gWahWiDKYtb1teleFen
+ jW4/t8LlDmnwqYg==
+X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
+ fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: W4u95x5KreaLsypeERGPE9zjjeIE7GZBHjdSPuWqIV0_1787918813
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1787914746-516D2B50-DD389F38/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 11657
+X-purgate-ID: tlsNG-bad1c0/1787918819-FC817034-BCF553EA/0/0
+X-purgate-type: clean
+X-purgate-size: 15882
 
+Also rename password & commands with hmp in the name, while at it.
+Other functions need larger changes which we will take care of next.
 
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+Reviewed-by: Dr. David Alan Gilbert <dave@treblig.org>
+Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+---
+ accel/accel-system.c           |  1 +
+ accel/tcg/monitor.c            |  1 +
+ chardev/char.c                 |  2 +-
+ disas/disas-mon.c              |  1 +
+ gdbstub/system.c               |  2 +-
+ hw/char/virtio-serial-bus.c    |  1 +
+ hw/core/machine-hmp-cmds.c     |  1 -
+ hw/core/sysbus.c               |  1 +
+ hw/hexagon/hexagon_tlb.c       |  1 +
+ hw/misc/auxbus.c               |  1 +
+ hw/usb/bus.c                   |  1 +
+ hw/usb/host-libusb.c           |  1 +
+ hw/xen/xen-bus.c               |  1 +
+ include/monitor/hmp.h          | 21 +++++++++++++++++++++
+ include/monitor/monitor.h      | 18 ------------------
+ monitor/hmp.c                  |  8 ++++----
+ monitor/monitor-internal.h     |  1 +
+ net/slirp.c                    |  1 +
+ stubs/monitor-core.c           |  1 +
+ stubs/monitor-internal.c       |  2 +-
+ target/rx/disas.c              |  1 +
+ tests/unit/test-util-sockets.c |  1 +
+ tools/qemu-vnc/stubs.c         |  1 +
+ trace/trace-hmp-cmds.c         |  1 -
+ ui/ui-hmp-cmds.c               |  4 ++--
+ util/error-report.c            |  2 +-
+ util/qemu-print.c              |  1 +
+ 27 files changed, 48 insertions(+), 30 deletions(-)
 
-On 8/27/26 5:33 PM, Baptiste Le Duc wrote:
-> Always set the PTE A/D bits at boot time to avoid an unhandled page fault
-> on platforms that implement neither Svade nor Svadu, and on platforms that
-> declare both in the device tree.
-> 
-> Rewrite the comment to enumerate the four possible Svade/Svadu combinations
-> (inspired by [1]) and set A/D unconditionally, which is correct in all four
-> cases until Svadu is fully supported (full support requires the SBI FWFT
-> call to enable hardware updating of A/D bits).
-> 
-> [1] https://lwn.net/Articles/980016/
-> 
-> Assisted-by: Claude:claude-opus-5
-> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-> ---
->   xen/arch/riscv/p2m.c | 70 ++++++++++++++++++++++++++------------------
->   1 file changed, 42 insertions(+), 28 deletions(-)
-> 
-> diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
-> index 1cea86512c..11dc289f0f 100644
-> --- a/xen/arch/riscv/p2m.c
-> +++ b/xen/arch/riscv/p2m.c
-> @@ -591,38 +591,52 @@ static void p2m_set_permission(pte_t *e, p2m_type_t t)
->       e->pte |= PTE_USER;
->   
->       /*
-> -     * Two schemes to manage the A and D bits are defined:
-> -     *   • The Svade extension: when a virtual page is accessed and the A bit
-> -     *     is clear, or is written and the D bit is clear, a page-fault
-> -     *     exception is raised.
-> -     *   • When the Svade extension is not implemented, the following scheme
-> -     *     applies.
-> -     *     When a virtual page is accessed and the A bit is clear, the PTE is
-> -     *     updated to set the A bit. When the virtual page is written and the
-> -     *     D bit is clear, the PTE is updated to set the D bit. When G-stage
-> -     *     address translation is in use and is not Bare, the G-stage virtual
-> -     *     pages may be accessed or written by implicit accesses to VS-level
-> -     *     memory management data structures, such as page tables.
-> -     * Thereby to avoid a page-fault in case of Svade is available, it is
-> -     * necessary to set A and D bits.
-> +     * Svade and Svadu extensions represent two schemes for managing the PTE
-> +     * A/D bits. When the PTE A/D bits need to be set, the Svade extension
-> +     * indicates that a page fault will be raised. In contrast, the Svadu
-> +     * extension supports hardware updating of the PTE A/D bits.
->        *
-> -     * TODO: For now, it’s fine to simply set the A/D bits, since OpenSBI
-> -     *       delegates page faults to a lower privilege mode and so OpenSBI
-> -     *       isn't expect to handle page-faults occured in lower modes.
-> -     *       By setting the A/D bits here, page faults that would otherwise
-> -     *       be generated due to unset A/D bits will not occur in Xen.
-> +     * There are 4 possible combinations of these extensions in the device
-> +     * tree. The default hardware behavior for each is:
->        *
-> -     *       Currently, Xen on RISC-V does not make use of the information
-> -     *       that could be obtained from handling such page faults, which
-> -     *       could otherwise be useful for several use cases such as demand
-> -     *       paging, cache-flushing optimizations, memory access tracking,etc.
-> +     * 1) Neither Svade nor Svadu present in DT => It is technically unknown
-> +     *    whether the platform uses Svade or Svadu. Xen should be prepared to
-> +     *    handle either hardware updating of the PTE A/D bits or page faults
-> +     *    when they need updating. To support both, Xen always sets the 'A' and
-> +     *    'D' PTE bits at boot time.
->        *
-> -     *       To support the more general case and the optimizations mentioned
-> -     *       above, it would be better to stop setting the A/D bits here and
-> -     *       instead handle page faults that occur due to unset A/D bits.
-> +     * 2) Only Svade present in DT => Xen must assume Svade to be always
-> +     *    enabled.
-> +     *
-> +     * 3) Only Svadu present in DT => Xen must assume Svadu to be always
-> +     *    enabled.
-> +     *
-> +     * 4) Both Svade and Svadu present in DT => Xen must assume Svadu is turned
-> +     *    off at boot time by setting A/D bits. To use Svadu, the supervisor
-> +     *    must explicitly enable it using the SBI FWFT extension.
-> +     *
-> +     * The Svade extension is mandatory and the Svadu extension is optional in
-> +     * the RVA23 profile. Platforms wanting to take advantage of Svadu can
-> +     * choose option 3. Platforms aware of the profile can choose option 4, and
-> +     * Linux won't get the benefit of Svadu until the SBI FWFT extension is
-> +     * available.
-
-I have a feeling that the DT-binding-related comment should not be 
-present here, as it explains when Svadu or Svade should be considered 
-enabled or disabled. We should perform this kind of detection in 
-riscv_fill_hwcap() [cpufeature.c]. Then, in p2m_set_permission(), we 
-should use riscv_isa_extension_available() to determine which extension 
-is available and, based on that, set the A and D bits.
-
-At this point, I think the original comment was better, as it simply 
-explained what Svade and Svadu are and, therefore, provided a better 
-explanation of why the A and D bits should or should not be set.
-
-So, my suggestion is the following:
-
-+/*
-+ * Svade and Svadu extensions represent two schemes for managing the PTE
-+ * A/D bits. When the PTE A/D bits need to be set, the Svade extension
-+ * indicates that a page fault will be raised. In contrast, the Svadu
-+ * extension supports hardware updating of the PTE A/D bits.
-+ *
-+ * There are 4 possible combinations of these extensions in the device 
-tree.
-+ * The default hardware behavior for each is:
-+ *
-+ * 1) Neither Svade nor Svadu present in DT => It is technically unknown
-+ *    whether the platform uses Svade or Svadu. Xen should be prepared to
-+ *    handle either hardware updating of the PTE A/D bits or page 
-faults when
-+ *    they need updating. To support both, Xen always sets the 'A' and 
-'D' PTE
-+ *    bits at boot time.
-+ *
-+ * 2) Only Svade present in DT => Xen must assume Svade to be always 
-enabled.
-+ *
-+ * 3) Only Svadu present in DT => Xen must assume Svadu to be always 
-enabled.
-+ *
-+ * 4) Both Svade and Svadu present in DT => Xen must assume Svadu is turned
-+ *    off at boot time by setting A/D bits. To use Svadu, the 
-supervisor must
-+ *    explicitly enable it using the SBI FWFT extension.
-+ *
-+ * The Svade extension is mandatory and the Svadu extension is optional 
-in the
-+ * RVA23 profile. Platforms wanting to take advantage of Svadu can choose
-+ * option 3. Platforms aware of the profile can choose option 4, and 
-Xen won't
-+ * get the benefit of Svadu until the SBI FWFT extension is available.
-+ *
-+ * In other words, hardware manages the A/D bits on its own only in case 3;
-+ * in all the other cases software has to preset them. Instead of open 
-coding
-+ * this in every A/D bits user, RISCV_ISA_EXT_svade is used to mean 
-"software
-+ * is responsible for the A/D bits" and is set here for the cases 1, 2 
-and 4.
-+ */
-+static void __init riscv_resolve_ad_scheme(void)
-+{
-+    bool svade = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade);
-+    bool svadu = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svadu);
+diff --git a/accel/accel-system.c b/accel/accel-system.c
+index 9176665202d2..977804c4048a 100644
+--- a/accel/accel-system.c
++++ b/accel/accel-system.c
+@@ -28,6 +28,7 @@
+ #include "qom/compat-properties.h"
+ #include "qapi/qapi-commands-accelerator.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "hw/core/boards.h"
+ #include "hw/core/cpu.h"
+ #include "accel/accel-ops.h"
+diff --git a/accel/tcg/monitor.c b/accel/tcg/monitor.c
+index be5c1950177c..74170ddef708 100644
+--- a/accel/tcg/monitor.c
++++ b/accel/tcg/monitor.c
+@@ -11,6 +11,7 @@
+ #include "qapi/type-helpers.h"
+ #include "qapi/qapi-commands-machine.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "system/tcg.h"
+ #include "tcg/tcg.h"
+ #include "internal-common.h"
+diff --git a/chardev/char.c b/chardev/char.c
+index c6c8133f5c1d..9da0911e503c 100644
+--- a/chardev/char.c
++++ b/chardev/char.c
+@@ -24,7 +24,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "qemu/cutils.h"
+-#include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "monitor/qmp-helpers.h"
+ #include "qemu/config-file.h"
+ #include "qemu/error-report.h"
+diff --git a/disas/disas-mon.c b/disas/disas-mon.c
+index 9c693618c277..bc9dec3a7761 100644
+--- a/disas/disas-mon.c
++++ b/disas/disas-mon.c
+@@ -10,6 +10,7 @@
+ #include "system/memory.h"
+ #include "hw/core/cpu.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ 
+ /*
+  * Get LENGTH bytes from info's buffer, at target address memaddr.
+diff --git a/gdbstub/system.c b/gdbstub/system.c
+index 070bc26f416c..8a1cdb11db36 100644
+--- a/gdbstub/system.c
++++ b/gdbstub/system.c
+@@ -29,7 +29,7 @@
+ #include "hw/core/boards.h"
+ #include "chardev/char.h"
+ #include "chardev/char-fe.h"
+-#include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "trace.h"
+ #include "internals.h"
+ 
+diff --git a/hw/char/virtio-serial-bus.c b/hw/char/virtio-serial-bus.c
+index c1973f0248fc..02604740f86a 100644
+--- a/hw/char/virtio-serial-bus.c
++++ b/hw/char/virtio-serial-bus.c
+@@ -25,6 +25,7 @@
+ #include "qemu/module.h"
+ #include "migration/qemu-file-types.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qemu/error-report.h"
+ #include "qemu/queue.h"
+ #include "hw/core/qdev-properties.h"
+diff --git a/hw/core/machine-hmp-cmds.c b/hw/core/machine-hmp-cmds.c
+index 686304bafab5..1c700aad3587 100644
+--- a/hw/core/machine-hmp-cmds.c
++++ b/hw/core/machine-hmp-cmds.c
+@@ -15,7 +15,6 @@
+ 
+ #include "qemu/osdep.h"
+ #include "monitor/hmp.h"
+-#include "monitor/monitor.h"
+ #include "qapi/error.h"
+ #include "qapi/qapi-builtin-visit.h"
+ #include "qapi/qapi-commands-accelerator.h"
+diff --git a/hw/core/sysbus.c b/hw/core/sysbus.c
+index 3e1160ee921d..13df7cbafe10 100644
+--- a/hw/core/sysbus.c
++++ b/hw/core/sysbus.c
+@@ -21,6 +21,7 @@
+ #include "qapi/error.h"
+ #include "hw/core/sysbus.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "system/address-spaces.h"
+ 
+ static void sysbus_dev_print(Monitor *mon, DeviceState *dev, int indent);
+diff --git a/hw/hexagon/hexagon_tlb.c b/hw/hexagon/hexagon_tlb.c
+index b6d4aff389e5..2d878cee736d 100644
+--- a/hw/hexagon/hexagon_tlb.c
++++ b/hw/hexagon/hexagon_tlb.c
+@@ -12,6 +12,7 @@
+ #include "hw/core/resettable.h"
+ #include "migration/vmstate.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qapi/error.h"
+ #include "exec/page-protection.h"
+ #include "exec/target_page.h"
+diff --git a/hw/misc/auxbus.c b/hw/misc/auxbus.c
+index 877f34560626..ac2525b90fec 100644
+--- a/hw/misc/auxbus.c
++++ b/hw/misc/auxbus.c
+@@ -33,6 +33,7 @@
+ #include "hw/misc/auxbus.h"
+ #include "hw/i2c/i2c.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qapi/error.h"
+ 
+ #ifndef DEBUG_AUX
+diff --git a/hw/usb/bus.c b/hw/usb/bus.c
+index 3b6fbd46ac3f..9b9b2e7c2f8f 100644
+--- a/hw/usb/bus.c
++++ b/hw/usb/bus.c
+@@ -9,6 +9,7 @@
+ #include "system/system.h"
+ #include "migration/vmstate.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "trace.h"
+ #include "qemu/cutils.h"
+ 
+diff --git a/hw/usb/host-libusb.c b/hw/usb/host-libusb.c
+index b9f3ad3f66dd..af67d5dfeb10 100644
+--- a/hw/usb/host-libusb.c
++++ b/hw/usb/host-libusb.c
+@@ -48,6 +48,7 @@
+ #include "qapi/error.h"
+ #include "migration/vmstate.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qemu/error-report.h"
+ #include "qemu/main-loop.h"
+ #include "qemu/module.h"
+diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
+index dfad2bc5085f..a563f6066bb4 100644
+--- a/hw/xen/xen-bus.c
++++ b/hw/xen/xen-bus.c
+@@ -17,6 +17,7 @@
+ #include "hw/xen/xen-bus.h"
+ #include "hw/xen/xen-bus-helper.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qapi/error.h"
+ #include "qobject/qdict.h"
+ #include "system/system.h"
+diff --git a/include/monitor/hmp.h b/include/monitor/hmp.h
+index 9258a049bffb..166cd4100c63 100644
+--- a/include/monitor/hmp.h
++++ b/include/monitor/hmp.h
+@@ -18,6 +18,9 @@
+ #include "qapi/qapi-types-common.h"
+ #include "monitor/monitor.h"
+ 
++#define TYPE_MONITOR_HMP "monitor-hmp"
++OBJECT_DECLARE_TYPE(MonitorHMP, MonitorHMPClass, MONITOR_HMP);
 +
-+    /* Case 3: leave the A/D bits management to hardware. */
-+    if ( svadu && !svade )
-+        return;
+ #define HMP_STUB(cmd) \
+     void hmp_##cmd(Monitor *mon, const QDict *qdict) \
+     { \
+@@ -30,6 +33,24 @@ struct MonitorDef {
+     int64_t (*get_value)(Monitor *mon, const MonitorDef *md, int offset);
+ };
+ 
++void monitor_new_hmp(const char *id, const char *chardev_id,
++                     bool use_readline, Error **errp);
 +
-+    /* Cases 1, 2 and 4: Xen has to preset the A/D bits. */
-+    __set_bit(RISCV_ISA_EXT_svade, riscv_isa);
-+}
++int monitor_vprintf(Monitor *mon, const char *fmt, va_list ap)
++    G_GNUC_PRINTF(2, 0);
++int monitor_printf(Monitor *mon, const char *fmt, ...) G_GNUC_PRINTF(2, 3);
++void monitor_printc(Monitor *mon, int ch);
 +
-  void __init riscv_fill_hwcap(void)
-  {
-      unsigned int i;
-@@ -513,6 +560,8 @@ void __init riscv_fill_hwcap(void)
-          __set_bit(RISCV_ISA_EXT_sstc, riscv_isa);
-      }
-
-+    riscv_resolve_ad_scheme();
++void monitor_hmp_read_command(MonitorHMP *hmp, int show_prompt);
++int monitor_hmp_read_password(MonitorHMP *hmp, ReadLineFunc *readline_func,
++                              void *opaque);
 +
-
-And then ...
-
-
-> +     *
-> +     * Currently, Xen on RISC-V does not make use of the information that could
-> +     * be obtained from handling such page faults, which could otherwise be
-> +     * useful for several use cases such as demand paging, cache-flushing
-> +     * optimizations, memory access tracking, etc.
-> +     *
-> +     * To support the more general case and the optimizations mentioned above,
-> +     * it would be better to stop setting the A/D bits here and instead handle
-> +     * page faults that occur due to unset A/D bits.
-> +     */
-> +
-> +    /*
-> +     * Preset unconditionally for all 4 cases above, harmless when Svadu
-> +     * manages the bits (case 3). Skipping it for case 3 requires SBI FWFT
-> +     * which is not yet supported.
->        */
-> -    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) )
-> -        e->pte |= PTE_ACCESSED | PTE_DIRTY;
-> +    e->pte |= PTE_ACCESSED | PTE_DIRTY;
-
-... we could restore the check and the comment we originally had in 
-p2m_set_permission(), but probably with some updates, something along 
-the following lines:
-
-/*
-  * Xen has to preset the A/D bits unless the hardware is known to update
-  * them on its own. riscv_fill_hwcap() folds all the Svade/Svadu device
-  * tree combinations into RISCV_ISA_EXT_svade, which then means that
-  * software is responsible for the A/D bits" (see
-  * riscv_resolve_ad_scheme()).
++void monitor_register_hmp(const char *name, bool info,
++                          void (*cmd)(Monitor *mon, const QDict *qdict));
++void monitor_register_hmp_info_hrt(const char *name,
++                                   HumanReadableText *(*handler)(Error **errp));
++
++
+ CPUArchState *mon_get_cpu_env(Monitor *mon);
+ CPUState *mon_get_cpu(Monitor *mon);
+ 
+diff --git a/include/monitor/monitor.h b/include/monitor/monitor.h
+index 9f048ba103b5..72a8f6ea5b4f 100644
+--- a/include/monitor/monitor.h
++++ b/include/monitor/monitor.h
+@@ -10,9 +10,6 @@
+ #define TYPE_MONITOR "monitor"
+ OBJECT_DECLARE_TYPE(Monitor, MonitorClass, MONITOR);
+ 
+-#define TYPE_MONITOR_HMP "monitor-hmp"
+-OBJECT_DECLARE_TYPE(MonitorHMP, MonitorHMPClass, MONITOR_HMP);
+-
+ #define TYPE_MONITOR_QMP "monitor-qmp"
+ OBJECT_DECLARE_TYPE(MonitorQMP, MonitorQMPClass, MONITOR_QMP);
+ 
+@@ -30,8 +27,6 @@ void monitor_init_globals_core(void);
+ char *monitor_compat_id(void);
+ void monitor_new_qmp(const char *id, const char *chardev_id,
+                      bool pretty, Error **errp);
+-void monitor_new_hmp(const char *id, const char *chardev_id,
+-                     bool use_readline, Error **errp);
+ int monitor_new(MonitorOptions *opts, bool allow_hmp, Error **errp);
+ int monitor_new_opts(QemuOpts *opts, Error **errp);
+ void monitor_cleanup(void);
+@@ -43,28 +38,15 @@ int monitor_get_fd(Monitor *mon, const char *fdname, Error **errp);
+ int monitor_fd_param(Monitor *mon, const char *fdname, Error **errp);
+ 
+ int monitor_puts(Monitor *mon, const char *str);
+-int monitor_vprintf(Monitor *mon, const char *fmt, va_list ap)
+-    G_GNUC_PRINTF(2, 0);
+-int monitor_printf(Monitor *mon, const char *fmt, ...) G_GNUC_PRINTF(2, 3);
+-void monitor_printc(Monitor *mon, int ch);
+ void monitor_flush(Monitor *mon);
+ int monitor_get_cpu_index(Monitor *mon);
+ 
+ int monitor_puts_locked(Monitor *mon, const char *str);
+ void monitor_flush_locked(Monitor *mon);
+ 
+-void monitor_read_command(MonitorHMP *hmp, int show_prompt);
+-int monitor_read_password(MonitorHMP *hmp, ReadLineFunc *readline_func,
+-                          void *opaque);
+-
+ AddfdInfo *monitor_fdset_add_fd(int fd, bool has_fdset_id, int64_t fdset_id,
+                                 const char *opaque, Error **errp);
+ int monitor_fdset_dup_fd_add(int64_t fdset_id, int flags, Error **errp);
+ void monitor_fdset_dup_fd_remove(int dup_fd);
+ 
+-void monitor_register_hmp(const char *name, bool info,
+-                          void (*cmd)(Monitor *mon, const QDict *qdict));
+-void monitor_register_hmp_info_hrt(const char *name,
+-                                   HumanReadableText *(*handler)(Error **errp));
+-
+ #endif /* MONITOR_H */
+diff --git a/monitor/hmp.c b/monitor/hmp.c
+index 8134dfaad4bb..b4d05d47c4bf 100644
+--- a/monitor/hmp.c
++++ b/monitor/hmp.c
+@@ -136,7 +136,7 @@ static void monitor_command_cb(void *opaque, const char *cmdline,
+     monitor_resume(&hmp->parent_obj);
+ }
+ 
+-void monitor_read_command(MonitorHMP *hmp, int show_prompt)
++void monitor_hmp_read_command(MonitorHMP *hmp, int show_prompt)
+ {
+     if (!hmp->rs) {
+         return;
+@@ -148,8 +148,8 @@ void monitor_read_command(MonitorHMP *hmp, int show_prompt)
+     }
+ }
+ 
+-int monitor_read_password(MonitorHMP *hmp, ReadLineFunc *readline_func,
+-                          void *opaque)
++int monitor_hmp_read_password(MonitorHMP *hmp, ReadLineFunc *readline_func,
++                              void *opaque)
+ {
+     if (hmp->rs) {
+         readline_start(hmp->rs, "Password: ", 1, readline_func, opaque);
+@@ -1647,7 +1647,7 @@ static void monitor_hmp_complete(UserCreatable *uc, Error **errp)
+                                     monitor_readline_flush,
+                                     hmp,
+                                     monitor_find_completion);
+-            monitor_read_command(hmp, 0);
++            monitor_hmp_read_command(hmp, 0);
+         }
+ 
+         qemu_chr_fe_set_handlers(&hmp->parent_obj.chr,
+diff --git a/monitor/monitor-internal.h b/monitor/monitor-internal.h
+index fdeeeb853636..ee9ba0c8231e 100644
+--- a/monitor/monitor-internal.h
++++ b/monitor/monitor-internal.h
+@@ -27,6 +27,7 @@
+ 
+ #include "chardev/char-fe.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qapi/qapi-emit-events.h"
+ #include "qapi/qapi-types-control.h"
+ #include "qapi/qapi-types-qom.h"
+diff --git a/net/slirp.c b/net/slirp.c
+index 517dd23be14b..9bf09a2c8bc9 100644
+--- a/net/slirp.c
++++ b/net/slirp.c
+@@ -36,6 +36,7 @@
+ #include "clients.h"
+ #include "hub.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qemu/error-report.h"
+ #include "qemu/sockets.h"
+ #include <libslirp.h>
+diff --git a/stubs/monitor-core.c b/stubs/monitor-core.c
+index a7c32297c90a..b0c7002bd406 100644
+--- a/stubs/monitor-core.c
++++ b/stubs/monitor-core.c
+@@ -1,5 +1,6 @@
+ #include "qemu/osdep.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qapi/qapi-emit-events.h"
+ 
+ Monitor *monitor_cur(void)
+diff --git a/stubs/monitor-internal.c b/stubs/monitor-internal.c
+index 731fad221ecc..6f69f1f14ae4 100644
+--- a/stubs/monitor-internal.c
++++ b/stubs/monitor-internal.c
+@@ -1,6 +1,6 @@
+ #include "qemu/osdep.h"
+ #include "qapi/error.h"
+-#include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ 
+ int monitor_get_fd(Monitor *mon, const char *name, Error **errp)
+ {
+diff --git a/target/rx/disas.c b/target/rx/disas.c
+index 67b932882914..0eb2ee6f4507 100644
+--- a/target/rx/disas.c
++++ b/target/rx/disas.c
+@@ -19,6 +19,7 @@
+ #include "qemu/osdep.h"
+ #include "disas/dis-asm.h"
+ #include "qemu/bitops.h"
++#include "monitor/hmp.h"
+ #include "cpu.h"
+ 
+ typedef struct DisasContext {
+diff --git a/tests/unit/test-util-sockets.c b/tests/unit/test-util-sockets.c
+index ab3f39c3efb5..b2a884529598 100644
+--- a/tests/unit/test-util-sockets.c
++++ b/tests/unit/test-util-sockets.c
+@@ -24,6 +24,7 @@
+ #include "qapi/error.h"
+ #include "socket-helpers.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ 
+ static void test_fd_is_socket_bad(void)
+ {
+diff --git a/tools/qemu-vnc/stubs.c b/tools/qemu-vnc/stubs.c
+index 1c82d8cff430..26597fefaa99 100644
+--- a/tools/qemu-vnc/stubs.c
++++ b/tools/qemu-vnc/stubs.c
+@@ -9,6 +9,7 @@
+ #include "system/runstate.h"
+ #include "hw/core/qdev.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "migration/vmstate.h"
+ 
+ bool runstate_is_running(void)
+diff --git a/trace/trace-hmp-cmds.c b/trace/trace-hmp-cmds.c
+index 390173095cff..c8f0133abecf 100644
+--- a/trace/trace-hmp-cmds.c
++++ b/trace/trace-hmp-cmds.c
+@@ -25,7 +25,6 @@
+ #include "qemu/osdep.h"
+ #include "monitor/hmp.h"
+ #include "monitor/hmp-completion.h"
+-#include "monitor/monitor.h"
+ #include "qapi/error.h"
+ #include "qapi/qapi-commands-trace.h"
+ #include "qobject/qdict.h"
+diff --git a/ui/ui-hmp-cmds.c b/ui/ui-hmp-cmds.c
+index 806a7bece7cb..4ef459490ba2 100644
+--- a/ui/ui-hmp-cmds.c
++++ b/ui/ui-hmp-cmds.c
+@@ -327,7 +327,7 @@ static void hmp_change_read_arg(void *opaque, const char *password,
+                                 void *readline_opaque)
+ {
+     qmp_change_vnc_password(password, NULL);
+-    monitor_read_command(opaque, 1);
++    monitor_hmp_read_command(opaque, 1);
+ }
+ 
+ void hmp_change_vnc(Monitor *mon, const char *device, const char *target,
+@@ -344,7 +344,7 @@ void hmp_change_vnc(Monitor *mon, const char *device, const char *target,
+     }
+     if (!arg) {
+         MonitorHMP *hmp = MONITOR_HMP(mon);
+-        monitor_read_password(hmp, hmp_change_read_arg, NULL);
++        monitor_hmp_read_password(hmp, hmp_change_read_arg, NULL);
+     } else {
+         qmp_change_vnc_password(arg, errp);
+     }
+diff --git a/util/error-report.c b/util/error-report.c
+index f333af9249b9..aaa15bc79827 100644
+--- a/util/error-report.c
++++ b/util/error-report.c
+@@ -11,7 +11,7 @@
   */
+ 
+ #include "qemu/osdep.h"
+-#include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qemu/error-report.h"
+ 
+ /*
+diff --git a/util/qemu-print.c b/util/qemu-print.c
+index 7b9591035e57..a2d1f0244168 100644
+--- a/util/qemu-print.c
++++ b/util/qemu-print.c
+@@ -12,6 +12,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "monitor/monitor.h"
++#include "monitor/hmp.h"
+ #include "qemu/qemu-print.h"
+ 
+ /*
 
-I have another comment regarding:
-
- > +    /*
- > +     * Preset unconditionally for all 4 cases above, harmless when Svadu
- > +     * manages the bits (case 3). Skipping it for case 3 requires 
-SBI FWFT
- > +     * which is not yet supported.
- >        */
- > -    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) )
- > -        e->pte |= PTE_ACCESSED | PTE_DIRTY;
- > +    e->pte |= PTE_ACCESSED | PTE_DIRTY;
-
-I am not sure that this comment is correct. In case 3, we should not 
-need to use the SBI FWFT extension. Case 3 means that Xen must assume 
-that Svadu is enabled. Therefore, it is the responsibility of OpenSBI, 
-or the pre-bootloader that loads OpenSBI, to enable it. If it fails to 
-do so, then OpenSBI or the pre-bootloader is not complying with the DT 
-binding documentation and it should be fixed in first place.
-
-As further evidence, this is what OpenSBI already does [1]:
-/*
-  * Assume only Svadu is supported when it is the only extension
-  * present in the ISA string. Svade is assumed when neither are
-  * present. When both are present we must default to Svade (see
-  * the zero reset value of FWFT.PTE_AD_HW_UPDATING).
-  */
-if (!sbi_hart_has_extension(scratch, SBI_HART_EXT_SVADE))
-     __set_menvcfg_ext(SBI_HART_EXT_SVADU, ENVCFG_ADUE);
-
-Therefore, in case 3, the original check is still valid, and there is no 
-need for Xen to support the SBI FWFT extension for this case. I think 
-the original check should therefore be kept as it was:
-
-if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) )
-     e->pte |= PTE_ACCESSED | PTE_DIRTY;
-
-The SBI FWFT extension is only required for case 4. If both Svade and 
-Svadu are present in the DT, Svade is selected by default. To use Svadu 
-instead, SBI FWFT is required to set the ADUE bit in menvcfg, which is 
-only accessible from M-mode.
-
-Since SBI FWFT is relatively new and may not be supported by older 
-OpenSBI versions, another option is to have OpenSBI hard-code ADUE=1. 
-Alternatively, the DTS could specify only one of Svade or Svadu in the 
-riscv,isa property. In that case, upstream OpenSBI can handle the 
-configuration automatically. So specifically for our case (Svadu and 
-Svade things) we don't need SBI FWFT at all.
-
-[1] 
-https://github.com/riscv-software-src/opensbi/blob/master/lib/sbi/sbi_hart.c#L171
-
-~ Oleksii
-
+-- 
+2.55.0.543.g5ebe2ebe4ea8
 
 
