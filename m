@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B50A4C61DBD
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2026 07:04:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1401640.1637205 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51886C61DBD
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2026 07:05:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1401652.1637214 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzqdj-0005qD-9v; Fri, 28 Aug 2026 07:04:39 +0000
+	id 1wzqeJ-0006ch-HD; Fri, 28 Aug 2026 07:05:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1401640.1637205; Fri, 28 Aug 2026 07:04:39 +0000
+Received: by outflank-mailman (output) from mailman id 1401652.1637214; Fri, 28 Aug 2026 07:05:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzqdj-0005q6-6X; Fri, 28 Aug 2026 07:04:39 +0000
-Received: by outflank-mailman (input) for mailman id 1401640;
- Fri, 28 Aug 2026 07:04:38 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wzqeJ-0006ca-ER; Fri, 28 Aug 2026 07:05:15 +0000
+Received: by outflank-mailman (input) for mailman id 1401652;
+ Fri, 28 Aug 2026 07:05:13 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wzqdh-0005o5-Rj
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 07:04:37 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wzqeH-0006bD-RX
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 07:05:13 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzqdh-00DmdV-8H
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 09:04:37 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wzqeH-006Opq-8D
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 09:05:13 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a9132f4-8faa-0a2a0a5109dd-0a2a4501e002-44
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:04:37 +0200
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a913324-8faa-0a2a0a5109dd-0a2a450bc0ba-20
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:05:13 +0200
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a913305-5984-0a2a45010019-d155802de834-3
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:04:37 +0200
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-49b8be0409fso2935395e9.2
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 00:04:37 -0700 (PDT)
+ id 6a913329-b7e8-0a2a450b0019-d1558029f05f-3
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:05:13 +0200
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-4953e04ef16so5924255e9.2
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 00:05:13 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49c44feb966sm4170955e9.6.2026.08.28.00.04.35
+ 5b1f17b1804b1-49b4942298fsm106061005e9.1.2026.08.28.00.05.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 28 Aug 2026 00:04:36 -0700 (PDT)
+ Fri, 28 Aug 2026 00:05:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,50 +55,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787900677; x=1788505477; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1787900713; x=1788505513; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=m/fuBmCCJ5a1zaL+2kWjQQLEuHgPrkNDDGBZHEQWcC0=;
-        b=ENPJ3ZH5ZEz8gzJ8U0LVuJfR9/0Zz5UJLfsK9x7sBR4pteT+SQ9q7pYjQTVi9nAVnp
-         EiYQfRivPyeDg/31vMlYU9SyBqO6EOaqbtipvgr/KEFxANJAVksGwMAZR7Wm2x4O4T8D
-         qBzvnR/o8rDx+6eWAvFlYyWiqHJDBElb1SGL8BT8Je4efZWRJknHx+VIWIIc76DFqLw+
-         tOqsRKKHBPSit85QaQK9imM7WpHk+fJt3d/w6KK5J7cDBLnhRn2E9K0Prie8aiWu5VmU
-         aBxsz332LUw/fLq1LCbdCfEdZbdI2t4OoWd6J6sEK3E/EHa0V0e+fUfVn05+YQygdXCc
-         89mg==
+        bh=TWfdIfEKkF0sERNM/mSdQ9IUQZ7pPCDfv2hRzvZW3AU=;
+        b=O/6PatNDn6O5s2IuJZaIzuY2bwpgNcSPxSZCEeNClu/19wkqaR8r757nZkgznBSYrn
+         mtJVtUiAHgZ9AHOiVIZ/1oN0iTVBZT0nN0x+nwVIcGOvdvk+9SFfLkwxZfDBDbE9ee5a
+         J/Cql7JKs1rtMysvBpuTJPo3SQNpRiLfgkX/ZBoTcCs+KP6Yj8Kzcu1nqo3hxamCC2pG
+         srQlgH5w64mlsbfpG8P1waN3jr4eefdJnyvfQ26+doEsluSbECW1TPo1Tw/Ha/4yQxse
+         qACnPd3dAVBOYUbZesoF0JNKgXZV/nppSn4LZ+6hvAWK/6blkLNAHuetrD9jpScm93qE
+         bn1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787900677; x=1788505477;
+        d=1e100.net; s=20251104; t=1787900713; x=1788505513;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=m/fuBmCCJ5a1zaL+2kWjQQLEuHgPrkNDDGBZHEQWcC0=;
-        b=UAA+vUSCnzkTsJZ+DQLz/t/3dQrtAT4h75Opv79C2HnUMel3PnDYK77XX+9k1Wd+wF
-         CUHPQz50pSznQyTPt9DRiNm4RcwOIqLpTf4CGL/Y8hhMS3gRh04w7hyPIhKiCJnKdQTS
-         glLEChsc4J3tmfoj6dmhx50WQOW8GJpCUfDuZ14DU7IvFPbDSnFa/ni4koW1Vh0i630s
-         bV2SUxZmj/6POvapwOaQD/mKjuyhRbdzCOPRXU39ioj7oftKxFfhFEJ0gy+XUIdHFaGC
-         IrkCofPl9NmQyGdJqAgynGAmAaGFBBYF8UXQQNbdysNDi1fLf50OuGVeyxp4X9DcBlHh
-         Mdow==
-X-Gm-Message-State: AFuF++mq26poplI5WwwQymMBeN9Mbf9oNIU1pKYU5kUMjlPYrxQ5mUIs
-	lkXmzeqSo3nh9K621PpDqwQ2yjApMEo3sMs0spEwV2iRLy9qS3272JzKSvqDQfznUVc27JGvRZS
-	n/OS6gQ==
-X-Gm-Gg: AR+sD121KTJHVRaZ1+ZJgEr4hr3As463Q2EgkKTdvDXp6HRZyWTX3J4uZF+FtSiPzHw
-	PBsYXmK2v1VKcZHIqG+000I4cQgRH4eUG0SyE1VWZt7GB7qYTz4iMRoqrDH6NBvo64zltTPlce3
-	K5MgydcUQDO27DtxvZRKF8t0ibFXZVykCIJNaUmZ3nOMKdbFOWqm8e4NzVToFkGTBMJBW43EVUs
-	C/xXRL+tH3kkLc6ai5YwYv2xc+yEbRna9tauuJpOhwYmz2HsaBOExGjdtkAsK3o9G8ANy4Ihbl7
-	zhhVkuRT4xBwhDLxn0PiVHIfn6sEF1zVSJ+pi089zVwxbz6AEgyJ000Xr8VYPxoxEzsnIe5V1NX
-	8vpGQ2MhYshb7Vxg+oq0BqQglcAan4V1xTQ0iZj7UM3sCx7Vy8Z9Wy+CW4MsMhdZrx2Ul4NiX0f
-	8A/1jRO27b2q+kDP2+fWp+wmkghVoxBe/NvnXgMiU6x4jkvDr0SOcM5AEZ2UZS6UwoMI9UV9U9I
-	d5tR832Q0lPpt9pnORJWaGvfj0tucJcTVHd3nMYqlrLfRt6GFpWhP0fTPKyh/w=
-X-Received: by 2002:a05:600c:6215:b0:499:5a50:b022 with SMTP id 5b1f17b1804b1-49b91c1bb18mr67259705e9.3.1787900676675;
-        Fri, 28 Aug 2026 00:04:36 -0700 (PDT)
-Message-ID: <06c5efc0-e130-417f-8333-b8eacd1c6d77@suse.com>
-Date: Fri, 28 Aug 2026 09:04:35 +0200
+        bh=TWfdIfEKkF0sERNM/mSdQ9IUQZ7pPCDfv2hRzvZW3AU=;
+        b=Bjli/3XIeyMk3Zhmbz6Z/vPRQjDVaNULC6vSGSCS7WVN3XAjfBwK8fLLCDK7VnNkca
+         ul+Dvu4onJaIahuuRu0DGb0iecLXdCk1tFq0m2pu28krbcAcSy2H/GNJyr5OhwwpoHUh
+         HfkF5aRth3Uq5MxGmeSMQx7EUwdGJ/AVRVWhXc0FtlezfA/ZzYV4xDacmMvN1X6VYxPu
+         vDUcCpAJc73x9mwBh4ziNwJ9CsMlI32feOdNpqfTB3EYu14mHjFdVJuvE3IZM+RLGGP+
+         /ktk8tjBKnj2yKsFNpWuOnQ21V7sE6Sq97/U7mpIsfX/DxVF3/7HApDo/WMsHD/g95gG
+         UNjg==
+X-Gm-Message-State: AFuF++nrC3PozNFkfVh+Q6D9sC+jX1M+ODOI/jSSOoDrgK/RVy2ZFuKL
+	uxo3TFyH8euL9WHoD/2ZKhEtFbDaSygi9yKJ//zpxz1NS/Xpv4TKflDq57xUwuPlwcMVE7kY8hU
+	rI1xElQ==
+X-Gm-Gg: AR+sD10F1FIHF+7jc9mdIksi6ABrWxUyWnyE/SwL3FqYX1FYDuGkDlqQqIQDQj7MtFc
+	OjC9hrhQssVSXobdmmLRs1iFGxLGaWKMKqsL5om5mIZ+T7318/RYcKlkyDLlmJRPjq1RX62WTcO
+	VWBbCJ+vQWU3YYUkHGnAker7nkzJdI6N3Va/0wBKq2xx8a1VmGE/VIPx0WzoYwvpRizFq1cdD4O
+	oVDkWszJe1/QGsEuqE2dCWmGr934kU2mZrM2MZTglLPHm6M1BRMfRuEGrRIxkPvo1+uzp9Sh5h8
+	RBCrCXFpVgrja7iYyKHz7UliRVaqlSwLErY09O3SmD/0fFjosPZ1KAPF5RD/B2UaIp6DXE1tH7U
+	1Spf3SbZPWdKy6GaMe8hot4cvQHsgGLuj8f+juIPhQVI4DaJGDdE2sq6Znuv5tMFZZFarvfLwN0
+	OwkPXVLYLeMGrLiFYCxhE0mdlJbEnFEdWYUIF9g9fPz11irFYDshxKV4vnCjS25G1wDhjp54TyM
+	m1lPBgC9UmVMFluauaeaZz9FjxYFxm2yf8QbVwksqKXxddrb+dghg==
+X-Received: by 2002:a05:600c:a55:b0:499:60bf:c6f7 with SMTP id 5b1f17b1804b1-49b91c4cc2cmr63870935e9.13.1787900712683;
+        Fri, 28 Aug 2026 00:05:12 -0700 (PDT)
+Message-ID: <de8eb6ec-b830-47c2-95e7-e0b689f05cad@suse.com>
+Date: Fri, 28 Aug 2026 09:05:11 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 09/12] Eclair: deviate BUILD_ERROR() wrt rule 2.1 and
- introduce variants
+Subject: [PATCH 10/12] PCI/physdev: address Misra 2.1 rule violation
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
@@ -135,67 +134,28 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1787900677-1F86F757-E8D1E3E7/0/0
+X-purgate-ID: tlsNG-42698a/1787900713-ABAD09EA-59BF5E21/0/0
 X-purgate-type: clean
-X-purgate-size: 2567
+X-purgate-size: 620
 
-BUILD_ERROR() is even stronger a guard than assertions in general, and
-ASSERT_UNREACHABLE() (or BUG()) in particular. Deviate it just like those
-to allow use for marking unreachable portions of code.
+Cases 0..3 are handled, and a 2-bit mask is applied to the switch()
+expression. Therefore the default: case is reported unreachable by Eclair.
+Insert BUILD_ERROR() to annotate this for Eclair.
 
-In some cases code being unreachable is dependent upon configuration.
-Introduce two variants, as constructs like
-
-    if ( IS_ENABLED(CONFIG_...) )
-        BUILD_ERROR("...");
-
-results in the if() still being reported as unreachable. Sadly these two
-new macros introduce a new 20.12 violation each, which hence also needs
-deviating.
+No functional change.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
---- a/automation/eclair_analysis/ECLAIR/deviations.ecl
-+++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
-@@ -19,6 +19,7 @@ Constant expressions and unreachable bra
+--- a/xen/drivers/pci/physdev.c
++++ b/xen/drivers/pci/physdev.c
+@@ -114,7 +114,7 @@ ret_t pci_physdev_op(int cmd, XEN_GUEST_
+             break;
  
- -doc_begin="Unreachability inside an ASSERT_UNREACHABLE() and analogous macro calls is deliberate and safe."
- -config=MC3A2.R2.1,reports+={deliberate, "any_area(any_loc(any_exp(macro(name(ASSERT_UNREACHABLE||PARSE_ERR_RET||PARSE_ERR||FAIL_MSR||FAIL_CPUID)))))"}
-+-config=MC3A2.R2.1,reports+={deliberate, "any_area(any_loc(any_exp(macro(^BUILD_ERROR(|_IF(|_NOT))$))))"}
- -doc_end
- 
- -doc_begin="The asm-offset files are not linked deliberately, since they are used to generate definitions for asm modules."
-@@ -667,6 +668,7 @@ deliberate."
- to the # or ## operators within the following macros are deliberate, to provide
- useful diagnostic messages to the user."
- -config=MC3A2.R20.12,macros+={deliberate, "name(ASSERT||BUILD_BUG_ON||BUILD_BUG_ON_ZERO||RUNTIME_CHECK)"}
-+-config=MC3A2.R20.12,macros+={deliberate, "^BUILD_ERROR(|_IF(|_NOT))$"}
- -doc_end
- 
- -doc_begin="The helper macro GENERATE_CASE may use a macro parameter for ordinary
---- a/xen/include/xen/macros.h
-+++ b/xen/include/xen/macros.h
-@@ -64,6 +64,21 @@
-  */
- #define BUILD_ERROR(msg) asm ( ".error \"" msg "\"" )
- 
-+/*
-+ * Like above, but conditional upon @cfg (not) being enabled.  @cfg must be
-+ * suitable to pass to IS_ENABLED().
-+ */
-+#define BUILD_ERROR_IF(cfg)                               \
-+    (IS_ENABLED(cfg)                                      \
-+     ? ({ BUILD_ERROR( #cfg " unexpectedly enabled"); })  \
-+     : (void)0)
-+
-+#define BUILD_ERROR_IF_NOT(cfg)                           \
-+    (!IS_ENABLED(cfg)                                     \
-+     ? ({ BUILD_ERROR( #cfg " unexpectedly disabled"); }) \
-+     : (void)0)
-+
-+
- /* Hide a value from the optimiser. */
- #define HIDE(x)                                 \
-     ({                                          \
+         default:
+-            ret = -EINVAL;
++            BUILD_ERROR("PCI_DEVICE_RESET_* inconsistency");
+             break;
+         }
+         write_unlock(&pdev->domain->pci_lock);
 
 
