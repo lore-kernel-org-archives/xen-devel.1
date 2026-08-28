@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10EBEC61DB9
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2026 07:03:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1401626.1637178 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF7DBC61DBD
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2026 07:04:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1401631.1637186 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzqcf-0004Qn-FX; Fri, 28 Aug 2026 07:03:33 +0000
+	id 1wzqdC-0004yV-NH; Fri, 28 Aug 2026 07:04:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1401626.1637178; Fri, 28 Aug 2026 07:03:33 +0000
+Received: by outflank-mailman (output) from mailman id 1401631.1637186; Fri, 28 Aug 2026 07:04:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzqcf-0004Qg-Cj; Fri, 28 Aug 2026 07:03:33 +0000
-Received: by outflank-mailman (input) for mailman id 1401626;
- Fri, 28 Aug 2026 07:03:32 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wzqdC-0004yO-KJ; Fri, 28 Aug 2026 07:04:06 +0000
+Received: by outflank-mailman (input) for mailman id 1401631;
+ Fri, 28 Aug 2026 07:04:04 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wzqce-0004QO-0k
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 07:03:32 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wzqdA-0004xw-KA
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 07:04:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzqcd-00BSfo-Dk
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 09:03:31 +0200
+ id 1wzqdA-00DmW4-0z
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 09:04:04 +0200
 Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a9132bd-e002-0a2a0a5209dd-0a2a4508880e-16
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:03:31 +0200
-Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
+ id 6a9132df-2eae-0a2a0a5409dd-0a2a4508af0a-26
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:04:04 +0200
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
  by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a9132be-f659-0a2a45080019-d155dd35e805-3
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:03:26 +0200
-Received: by mail-wr1-f53.google.com with SMTP id
- ffacd0b85a97d-482e4998d28so416562f8f.2
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 00:03:26 -0700 (PDT)
+ id 6a9132e3-f659-0a2a45080019-d155802ab58a-3
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:04:03 +0200
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-49557167508so5879625e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 00:04:03 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49b92679be5sm33489005e9.3.2026.08.28.00.03.25
+ 5b1f17b1804b1-49b497fa9c5sm103143025e9.4.2026.08.28.00.04.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 28 Aug 2026 00:03:25 -0700 (PDT)
+ Fri, 28 Aug 2026 00:04:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,57 +55,56 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787900606; x=1788505406; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1787900643; x=1788505443; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=xgIaJ540DVn9gMAwDjHqVBhyS2+4Ub8sOGYDzk1OFhQ=;
-        b=HLZF3tFGyAn4piaLpUP+9hkBHKaGqAwZCwSYzqi/Q93BFK63tkssEpYz4leYsm/KCF
-         7C3CkHVEV/iYP6aw9OWs2gR6HTxT/k2R6tIV/KFwYKczAiy1K6rJsNg+Jv66/rG1IJpy
-         VWmBiruVxCrimUb9ShvbSgcyzPiTheROUxh/s26OU+Dg6ebj4HdGq6F4uSMd61N4bbms
-         JYcIfWUboBJqFjkg12wl3s0Qc9IYWbPnZz+ocfUd8z2zg6odGjTZJMyABBOAriPfWciH
-         ZGMDX+lIXy+kCFfQJBH0zZKzkNLlxXVn1arLvAqRp5xrc04RTkLXdT1/Qk7JjuddYre0
-         eUnw==
+        bh=DmF1sxJKk6keuGbs+Ea+dEobCZFX5puzwyTbL1N5ULM=;
+        b=IUttZ1QqG7XhlILV0P+E3X+ePLpWRMh+3k6CuLDiJk1G7P/JryDnlSbPm3gaOWGWWT
+         H53R5dVGpZUrVdEky9h/nywr+xNZUUTAby75qPeQIKezsezuWwVs2Dl7AKVRQazqqQbr
+         By6/S0RNnG+p9tDslib6hqQi7baYfVsLD4gP2f7sBOyv65awszGN9MWqtXZzD4PX+E5j
+         OeH4csFyxzvUWbpHAzFBZNxtKWQ9BN9yK74tB4vbx+sdL7AAKTkJ8CjkL671J4ujsRYQ
+         wd31Mb0WAUnUAul7YYdUfD7RbPy44UUXA5mSfgSbEWQj9JBokmL6OS8huFmYFiEh1ox6
+         W1pg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787900606; x=1788505406;
+        d=1e100.net; s=20251104; t=1787900643; x=1788505443;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=xgIaJ540DVn9gMAwDjHqVBhyS2+4Ub8sOGYDzk1OFhQ=;
-        b=U6bNBpgDXfoVhx9U8s+NET4bI1HPwbVfek36PaMAn1IWfablO6xheHyubEwm5xWw2v
-         09B1I87PL05c04KPlKq/DZfASaMwHoW9gVkqzqp5798Bvk9qaTV3frzvEwv0cULJgGEi
-         VMwd+Ke+Y09b4jMPkMwTMVsKgj59RG7+Pe+d1K+Qwio9clB+iJnwcytC5K66VpdJRq9x
-         CIC0HjIKq88eck2ZCRw4MXg3EC1PkMIprAyk0CvNAbQQ0Gcrj5jEyeyvIqKquAGwStDm
-         l06//+fA6XylvjKwgk7DdnHt7fZCC0AZ3y0YdCkczbbmGSMSxZ/7LEt+LemDg3qs009M
-         FcaQ==
-X-Gm-Message-State: AFuF++mfvtEi6XJkWiqvOkHqQRpYxwDij/EZ4Qy4ocWZ2XpqSrCm1nCD
-	eTq4jYKvNGAdeuRAbShCDobh+oMZLdT/pgw/ZK/imZCRwnsdBL2giIwHg9ty2jj0296x5J8zd6a
-	Xg6Fajg==
-X-Gm-Gg: AR+sD10OHhOMUeT+6ljKKtzhj6xD4zcO6v/EM4epidVi1SncI5hr38BvMUg7FSUMHdA
-	9EFlmVagR4VHorRYLbkhGxHDGMVzj9ln33oWNL3K1KWuQ8i5/t9MSk++eB8Dh9I6mD6X7nK45Aq
-	B+43hMiBC+o+XKkRNGUDNy697vMkaDsXBf6Y01ye96jCrXSWsQDqli96X9q9IPXq7VLsfeyKHwZ
-	GWyWOfGjmAjDQNgv1CLj6rvOZ19YGTuy5YJFvQurVci8mKJ9Y1QJ0i0pUAnH1uglBlxuSvaW+pv
-	h57Qo6eno40EF7+pAcMkp5eB6JFx8CITarKxEqnPnPWyz1OgW36FSm6uMOOl1c0e5P1+J38eSeS
-	DT4j4aTJ4XYFK4ylR5s6HO0ehRevI1Xt8WDT+LyGolhrWxKRBqDyicsfjItpm9za85He0Q8DjKy
-	Mvvg4ihe/BZ0EFtu0ROQ6ia0yHaQS6nhq6n5XybJlKCAlvk4kNwF9BYo3xCl1FNLwOdUlcHfVZc
-	fwFWuw/bJfEvoW0jjqDh/CU8xuXLmAPgz0MIz3omw7spgv7oMLd
-X-Received: by 2002:a05:600c:870c:b0:499:dc34:bdc with SMTP id 5b1f17b1804b1-49b91c1c401mr75871115e9.1.1787900606073;
-        Fri, 28 Aug 2026 00:03:26 -0700 (PDT)
-Message-ID: <6e98181c-459c-4c45-b8c0-c427e3c0bbc8@suse.com>
-Date: Fri, 28 Aug 2026 09:03:24 +0200
+        bh=DmF1sxJKk6keuGbs+Ea+dEobCZFX5puzwyTbL1N5ULM=;
+        b=UB83/OZIbifbYR1fNmiibIw7oyszRC50SnHbNehdERGit4lC3Lic+4S0Do11Viy6vB
+         8jC7GbO/e+ibNn0F574ksFJCvEuq0KsDc7dOdv2jUZ3qlaa+tONWhD8ojUFjwSkBZNMJ
+         w26zS3xs6sw6M+uTaPHlh7k0Y2u24gKDIc0UUfYC02eSKOf5iUpNtVU5hb0WETQhp/RY
+         FsUZ1WOxDI0nTM+EvxArmKsnJB8oaCJUxxwa5k5fob32Z3w4Hz40cvxEqAl1WqgD/I48
+         /EnZYuTr4p8kD+wAr5AnCefjFk6Q7sniVnXYizViT+13QIKOWQafGxOg5BP2sztkUOo1
+         1U9g==
+X-Gm-Message-State: AFuF++nj27CF05/xzphsi3WrB+JEBoD6rtNZZiVWaZQ98ThqYx5EWMMO
+	Fh4r6tNL7fekmHWfiktGA62hkMd90NIdlf3Wcr7m4vaxg/o04RkAwJUBMh2wA0KI+oLXxhrYbmp
+	9B163oA==
+X-Gm-Gg: AR+sD11m4AQIaOvBP6N65FjFek1mxSvLjI4A2xJRWozTWWS34qDDsQA+g1eoTnUGIVN
+	am0/e00B4Pox2kM9D98zxVekLAAsImO0iPcqpuCC/TqTQTM2COT/9NTvCr8w92wfWe0TUFEfroR
+	ub5Vz0+nG8bnhYcPARQkEX+ZAXK3Ss94JJ70YJ0a8Pt3c1t62sAigtIDOroalMUU43Z3SM8jj4E
+	wz9Ve9EN14JUoHJ0dAHFNUdol97o3XUAyfdwRnvHXynZClq62hQUimLFm6ZSOJoSCB1Ocl1lsYi
+	wm/0MkY6DxJpClmQOGVA2RjvO7yE3U4nD4kzGSz6Lor8Qj/bMGSfZ5Vm/CaaSCZNm02l+tazQ6U
+	9y8FaT05mkHvduvgvskGkBtDOq4kgKOheNjXOJbCs5hejoFMcnvzmozX5TnXxU2XcB52zSuiqNu
+	BJX/XPJyrczlnOxUXzHaJvLSAjkM9UcDnM6kVDLGguNKuFupQo4HUCJuB6xBtwj0PiB0dzhblvb
+	YTVGj8NHMh3aGkO8FVI/RUz/WymnO9KDlCJSWTbce8Y+0RPESUGZoHF6LjSfKU=
+X-Received: by 2002:a05:600c:4594:b0:49b:4d64:bbc4 with SMTP id 5b1f17b1804b1-49b91c2f990mr57810185e9.8.1787900643344;
+        Fri, 28 Aug 2026 00:04:03 -0700 (PDT)
+Message-ID: <afa5c348-744a-4a4b-8b00-2971ca3376cd@suse.com>
+Date: Fri, 28 Aug 2026 09:04:01 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 07/12] altp2m: address Misra 2.1 rule violation
+Subject: [PATCH 08/12] Arm/GIC: add noreturn in a few more places
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
+Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>, Julien Grall
+ <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>
 References: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -134,37 +133,65 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1787900606-D6D4087B-D3067CFC/0/0
+X-purgate-ID: tlsNG-c1860d/1787900643-D735D87B-83B1FCEB/0/0
 X-purgate-type: clean
-X-purgate-size: 937
+X-purgate-size: 2030
 
-The stub altp2m_vcpu_idx() is recognized as "noreturn" function lacking
-respective annotation (or having a return statement), which hence is deemed
-unreachable code by Misra / Eclair. All call sites are guarded by
-altp2m_active() checks, hence an inline function isn't needed. A
-declaration will suffice, with call sites then getting DCE-d.
-
-No functional change.
+LPI related functions having just BUG() in them are disliked by Misra /
+Eclair, as long as they don't also have a noreturn attribute.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+From its description "Unreachability caused by calls to the following
+functions or macros is deliberate and there is no risk of code being
+unexpectedly left out." I would have expected the respective entry in
+deviations.ecl to cover all of these cases, but clearly that isn't the
+case.
 
---- a/xen/include/asm-generic/altp2m.h
-+++ b/xen/include/asm-generic/altp2m.h
-@@ -14,13 +14,8 @@ static inline bool altp2m_active(const s
-     return false;
+Of course having noreturn on functions returning non-void is somewhat odd.
+
+--- a/xen/arch/arm/gic-v2.c
++++ b/xen/arch/arm/gic-v2.c
+@@ -1315,7 +1315,7 @@ static int __init gicv2_init(void)
+     return 0;
  }
  
--/* Alternate p2m VCPU */
--static inline unsigned int altp2m_vcpu_idx(const struct vcpu *v)
--{
--    /* Not implemented on GENERIC, should not be reached. */
--    BUG();
--    return 0;
--}
-+/* Alternate p2m VCPU - placeholder on GENERIC */
-+unsigned int altp2m_vcpu_idx(const struct vcpu *v);
+-static void gicv2_do_LPI(unsigned int lpi)
++static void noreturn gicv2_do_LPI(unsigned int lpi)
+ {
+     /* No LPIs in a GICv2 */
+     BUG();
+--- a/xen/arch/arm/include/asm/gic_v3_its.h
++++ b/xen/arch/arm/include/asm/gic_v3_its.h
+@@ -229,7 +229,7 @@ static inline unsigned int vgic_v3_its_c
+     return 0;
+ }
  
- #endif /* __ASM_GENERIC_ALTP2M_H */
+-static inline void gicv3_do_LPI(unsigned int lpi)
++static inline void noreturn gicv3_do_LPI(unsigned int lpi)
+ {
+     /* We don't enable LPIs without an ITS. */
+     BUG();
+--- a/xen/arch/arm/vgic-v2.c
++++ b/xen/arch/arm/vgic-v2.c
+@@ -718,14 +718,15 @@ static void vgic_v2_domain_free(struct d
+     /* Nothing to be cleanup for this driver */
+ }
  
+-static struct pending_irq *vgic_v2_lpi_to_pending(struct domain *d,
+-                                                  unsigned int vlpi)
++static struct pending_irq *noreturn vgic_v2_lpi_to_pending(struct domain *d,
++                                                           unsigned int vlpi)
+ {
+     /* Dummy function, no LPIs on a VGICv2. */
+     BUG();
+ }
+ 
+-static int vgic_v2_lpi_get_priority(struct domain *d, unsigned int vlpi)
++static int noreturn vgic_v2_lpi_get_priority(struct domain *d,
++                                             unsigned int vlpi)
+ {
+     /* Dummy function, no LPIs on a VGICv2. */
+     BUG();
 
 
