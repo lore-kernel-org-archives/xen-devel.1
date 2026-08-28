@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4CC7C61DBD
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2026 13:15:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1402045.1637465 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24AA0C61DB9
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2026 13:35:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1402062.1637475 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzwQQ-0002Yd-FK; Fri, 28 Aug 2026 13:15:18 +0000
+	id 1wzwjM-0008Cp-WA; Fri, 28 Aug 2026 13:34:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1402045.1637465; Fri, 28 Aug 2026 13:15:18 +0000
+Received: by outflank-mailman (output) from mailman id 1402062.1637475; Fri, 28 Aug 2026 13:34:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzwQQ-0002YW-Ca; Fri, 28 Aug 2026 13:15:18 +0000
-Received: by outflank-mailman (input) for mailman id 1402045;
- Fri, 28 Aug 2026 13:15:17 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <frn1furkan10@gmail.com>) id 1wzwQO-0002YQ-Uo
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 13:15:17 +0000
+	id 1wzwjM-0008Ci-Sz; Fri, 28 Aug 2026 13:34:52 +0000
+Received: by outflank-mailman (input) for mailman id 1402062;
+ Fri, 28 Aug 2026 13:34:52 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wzwjL-0008Cc-Tb
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 13:34:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzwQO-00CZQL-BS
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 15:15:16 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wzwjL-00EmIT-2U
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 15:34:51 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <frn1furkan10@gmail.com>)
- id 6a9189dd-bab6-0a2a0a5309dd-0a2a4502a092-28
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 15:15:16 +0200
-Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <frn1furkan10@gmail.com>)
- id 6a9189e4-6ca4-0a2a45020019-d155dd33cd10-3
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 15:15:16 +0200
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-47c2b362ee2so680904f8f.1
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 06:15:16 -0700 (PDT)
-Received: from [192.168.1.109] ([85.107.101.249])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482fbac4f9esm3360865f8f.11.2026.08.28.06.15.13
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a918e79-2eae-0a2a0a5409dd-0a2a4507d586-6
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 15:34:51 +0200
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a918e7a-b4ea-0a2a45070019-d155dd31e449-3
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 15:34:51 +0200
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-482ea739de2so701431f8f.0
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 06:34:50 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
+ [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-482fbac7c01sm4087340f8f.14.2026.08.28.06.34.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 28 Aug 2026 06:15:15 -0700 (PDT)
+ Fri, 28 Aug 2026 06:34:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,126 +52,199 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Content-Language:References:Cc:To:Subject:From:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787922916; x=1788527716; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=qI9BZMPJnWaO6QznJlQwezpkXYEWqejYHEfwRS0f2jI=;
-        b=BivZe6F2Der9YxjH4JYknm3TVXkdOekmrIqEGgcRQhbKdtOiNgNQTMdIo8TK5FyLJ4
-         jtPqBQN7irD1hs1eKQA4i9xPiJkwZmHYSh5XjIzYOYWYxkrkfIiQyelj9Rgf3sZlnx2R
-         cWzvzzMtvhMZvLJgoL4pzYcx+HpxO9aV2H5R6xcqpthJNyvKyJAw2mBww1v7raMaCO0G
-         SOt6IdJ8jJ34BChaNIfmzuHpQYyUq/xyE1sTbrrXIIwReaBliXOIb5TekNFnG+LhXdmt
-         wcxqB1WF9r5v1o20MVPXpLLTlbD/bfOtmIBoRKpzmp3sP38gBagupelBE4QgLTJz5u23
-         zqCQ==
+        d=gmail.com; s=20251104; t=1787924090; x=1788528890; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=mOYOwqqbnUUvC64wDruE8UCb6JVklIemNUSnXaPcJDA=;
+        b=a22/YHfVhHXI/nsLA5av4q7LeIfFOSA4n+FSVhPHiCONwj4pWUGpzldzJjpm/CZZMa
+         uU5ZySDfqq38Vpe5OT6R4FGZeQ1YqVISPOcaiSH1mk+vdlZmN6LhUEVFVb/pPMrNgrfs
+         PQkqqVsyKgTUe+lUnb+p4sNLFRCj7Oe34johrsVqlG4Pge80kBLi/AD4inCMVXehcbN/
+         QTnTzMPEsQx7MPmiDVApgNPXJ8WUsmRAXK523K88GotyBUBdhlfdCpRv7m4CF8WAYTSr
+         02dAC3L0PoqivEk/tlU2UsoUc6WFLXZbrDxwLPhEG2UxWP5ud+N8EEiBajApfwoU+xW3
+         s0xA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787922916; x=1788527716;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1787924090; x=1788528890;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=qI9BZMPJnWaO6QznJlQwezpkXYEWqejYHEfwRS0f2jI=;
-        b=MiAbqffAexhIEq63SgAnc9iOsuAHCxSomYzDB/8Rg8GM89988sf7xYHEMFXde8sRs6
-         BBfTqGLnFKK49MAGO0Qe7UNe60YmXYN08fR9zodH8jqWagtnAo0LNbJABELh23upZ/8s
-         yhSNIC7Y2/kpGEKJHqPudyO9O0zNnZvD15GIyQ1CMIwGbTZVTFiieuVGRJFb19ETBRsS
-         G0aRVvhUrXXsJ8UrClHSDzO9flsQAqiJeDPxCgYzufRxBuuaj+3Q8dDvM9XInMpyWIE6
-         tConXdIZoLEgTEA2zGlD2vgjaeADny4aTHmaB8cuTcqr+A/sUkZ7IrZunXb78Glqa8Fl
-         Wn7A==
-X-Forwarded-Encrypted: i=1; AHgh+RqiTyrzFymuae10iUuyenAGUSYs0xZugyaCac7H4cJCWfBRmDkjETw3thm2nHT+WtBFYZlnCgHvAcQ=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kNcsTBj6noF/62/bl+Oz7pTJVNLv6tqNvhDUWDAiLpjpQGyQBu
-	FXz2VcvhVbG0cM63MXUTjV1Rn+JFkt+xOTLItqcvx3jkzRNd84Dxp8ao
-X-Gm-Gg: AR+sD11QA2/TTSYAlooWZkYlR6wclcAZoFAmhOz6UbouJ5Jba1Wp9GVpfeg4XFq4Uwu
-	/Xm5wufyTnM20YfRQDmOoukzn8EDmK8SELNtVLfW4G6/XC5AgoLukBM9Tjsrkq3n8fh6WBZIZS0
-	89OL3pPQFCmMW998ewPao1CemqvFyr5j7d2hBBKEjqzT82Anl6l4BhFoUUkjQVBoJBNFb9hiTSC
-	iwnYzQ+SyxuIXSglgwuOiD2BuSuvBHBOnSoQG6FqPDkVLb9L0zXRLs0MPSSi9xtrNc4qDElGM7k
-	u6Eh24KV2uxSDasxZiiV0Wsq1ZRse+G4sM2s9zPWLEjR7h94Xsu1yrc0rP7rI3UJn5joZ0VQI/9
-	1en1i8BXxGQ6Fo2AmvJa/VlGqxR7Dk5lQyEXFoMdHahXe7bb7yDSpsxY7JBG6jJU7dvuQtbAFYS
-	PzsmMQoshV8iBjBGVAdPESbq4wkFs5Nud4OqVXPbAdOBypH2f3M3y56vZf7MnpzMJbFCfo
-X-Received: by 2002:a05:6000:2f8a:b0:481:5021:33cd with SMTP id ffacd0b85a97d-482f799da69mr9775018f8f.3.1787922915557;
-        Fri, 28 Aug 2026 06:15:15 -0700 (PDT)
-Message-ID: <7e146962-b030-4d61-ae6c-21b9af1274e0@gmail.com>
-Date: Fri, 28 Aug 2026 16:15:11 +0300
+        bh=mOYOwqqbnUUvC64wDruE8UCb6JVklIemNUSnXaPcJDA=;
+        b=Kz9DWkTSb0jgch6AikWgDptk0yckkG/lR6Ies3Q9Q6Frabg72ieBMJfQEGAlOdtpQz
+         TpvSrMyg58kEKHGbz+DtB0SBC47PdqOFQqn9P8waCrZtdHeELMKf25wKZ6Y67RHwx4lA
+         fNJlKnhOMNM74BFMsXTZj5k7Ty3jRzP15mbBLhvD3Xwz8dsv5kqN1ZrEL7rtsbMpjGni
+         n2r1aZXGnnx+qAbWk73vauEDwDLv0NN+G+0dPwkc3sGxPqNdFZnVgU5L/710FRRIB0/k
+         rlzL21vgG8/x3K/rIaqrnBLdoNiRifoP1vCci4MEplDIBj+Toq9TOmDC7Rf3xdEgBjOV
+         MGvg==
+X-Forwarded-Encrypted: i=1; AHgh+RqUaSolGjeKRP7Hecvxy2esWWtxqblegNxebnRekP098v7FbHbsLc1bUQb6B9uHH6/ningm7T23e9A=@lists.xenproject.org
+X-Gm-Message-State: AFuF++lotOq4MbXWXoyMoXzNAAOIu1qTCx2FHYfY0ttWLYizF3YLrlYL
+	Lvpbcgyl48W3htrfpGIHuqHP05RfMjEM/8+H5pXoBR+7ZQ99yhZRDj1y
+X-Gm-Gg: AR+sD13IFH4I4eoK6PeSA3JPlrdTbWJqi1JEKt0q83GL58GRHZhJFhUMaaOg9rceleO
+	8AFKWJ2IshK3qtDwl+Y5bN9vUuzMl7vXeAetOVTJ2Me0Ud2AY4rCLG3ANZf0a9OgwvIR/4WOvXV
+	gfBLBQXBvkVFMivWKkwMPk3QFFQCXvZsqP+MT1jh3nhgLWMMWeEzYIPQxmLGbBHgt/sBpoT/9Nv
+	jna28FFf+Ar/GCB8iWjUVcppD7sFIjgl/Rn6AEP1jR1T1+NfgzSDvM2uUR61Jyt5fzyre00Fnpf
+	1yBqflCRxaSeHDugiFcLibnq6yVyJcN1d70TbMOtAOWJ589LlKOPdQQD+IVFUUGpOEJzGXTtR6g
+	VRPW9HKemkomRDhm4xg6nMdyC432H43ZERxr0V9BHmMLXfBu8RPeIsqQCD+dREDuAgS56Fd5hsX
+	7kSUw/ZROQyjibCNKJ3Ueqr+GxELpCjEtvahVXu1Vc2H7R43EUBo0Ds+9GHVJlRfEPxALj+1RyO
+	M8kUZWCrGr2l3GyqIUz5pT8uCr4MQGYj9XG+sizdw==
+X-Received: by 2002:a05:6000:4810:b0:482:e451:681f with SMTP id ffacd0b85a97d-482f79c9430mr9907281f8f.10.1787924090247;
+        Fri, 28 Aug 2026 06:34:50 -0700 (PDT)
+Message-ID: <ec69b941-2648-4c3f-bbee-95d4d56fb543@gmail.com>
+Date: Fri, 28 Aug 2026 15:34:46 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] xen/sched: core: skip missing vcpu slots in
- sched_move_domain()
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: jbeulich@suse.com, andrew.cooper3@citrix.com, dfaggioli@suse.com,
- gwd@xenproject.org
-References: <20260819051532.9197-1-frn1furkan10@gmail.com>
- <20260819051532.9197-2-frn1furkan10@gmail.com>
- <0c4e9bb8-f2f1-4a33-8050-1ebc311f46dc@suse.com>
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: Re: [PATCH 2/5] xen/riscv: preset A/D bits in Xen's own page-table
+ mappings
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ xen-devel@lists.xenproject.org
+Cc: zhangzheng@iscas.ac.cn, Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <1787844438.8631fc262581453bbf619ec5b2062170.1a043d52a06000c4f3@vates.tech>
+ <1787844809.8631fc262581453bbf619ec5b2062170.1a043dad225000c4f3@vates.tech>
 Content-Language: en-US
-From: =?UTF-8?B?RnVya2FuIMOHYWzEscWfa2Fu?= <frn1furkan10@gmail.com>
-In-Reply-To: <0c4e9bb8-f2f1-4a33-8050-1ebc311f46dc@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1787922916-F24B62AC-42AEA770/0/0
-X-purgate-type: clean
-X-purgate-size: 2723
+In-Reply-To: <1787844809.8631fc262581453bbf619ec5b2062170.1a043dad225000c4f3@vates.tech>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ef75cf/1787924091-374D3AE4-6A9EAA8C/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 6326
 
 
-On 8/28/26 15:45, Juergen Gross wrote:
-> On 19.08.26 07:15, Furkan Caliskan wrote:
->> sched_move_domain() derives the number of units to rebuild from
->> d->max_vcpus, which is fixed at domain creation and never rolled
->> back if vcpu_create() fails partway through building a domain. So
->> d->vcpu[i] can be NULL for some i even though max_vcpus still
->> counts it - this happens if sched_alloc_udata() returns NULL.
->>
->> The per-unit loop doesn't check for this: it sets
->> unit->vcpu_list = d->vcpu[unit_id] (NULL) and hands that broken
->> unit straight to the destination scheduler's alloc_udata(),
->> which assumes vcpu_list is always valid and crashes Xen when
->> it is not.
->>
->> Reproduced by building a domain in a non-default cpupool where
->> vcpu creation fails partway through, then destroying it.
->> domain_kill() moves the domain back to the default cpupool via
->> sched_move_domain() before actually destroying it, crashing
->> inside the destination scheduler's alloc_udata() (seen in
->> Credit2's csched2_alloc_udata() -> is_idle_unit() -> NULL deref).
->>
->> Before building a unit in sched_move_domain(), check whether all
->> vpcu slots belonging to that unit are populated. If any of its
->> vpcus is missing:
->>   - For a dying domain, skip the unit allocation.
->>   - For an active domain, abort the move and return -EINVAL to
->>     prevent running with dropped vCPUs.
->>
->> Fixes: 70fadc41635b ("xen/cpupool: support moving domain between cpupools with different granularity")
->> Signed-off-by: Furkan Caliskan <frn1furkan10@gmail.com>
-> 
-> Sorry for realizing this only now, but I think this problem should be
-> solved completely differently.
-> 
-> Today there are multiple places in the hypervisor where vcpus are being
-> setup via vcpu_create(). For vcpu-ids other than 0 this is always done
-> in a loop with ascending ids, up to d->max_vcpus. Whenever vcpu_create()
-> is failing, the loop is terminated. The only special case is the idle-domain,
-> which will never have your problem.
-> 
-> So the easy fix would be to:
-> 
-> - have only one function vcpus_create() creating all the vcpus for a domain
->   and use this function everywhere instead of said loop
-> 
-> - in case a single vcpu can't be created by vcpus_create(), d->max_vcpus
->   should be reset to the id of the vcpu which couldn't be created
-> 
-> This will avoid any potential NULL derefs elsewhere, as vcpu loops will
-> just be ending before hitting a NULL pointer.
-> 
-> In case you are not feeling comfortable writing this patch, just speak up
-> and I will do it.
-> 
-> 
-> Juergen
 
-Agreed, that's the better approach. I'll take it on and send a new version.
+On 8/27/26 5:33 PM, Baptiste Le Duc wrote:
+> The previous patch made p2m_set_permission() always set the PTE A/D bits to
+> map pages in G-stage, to avoid a page fault on platforms that implement
+> neither Svade nor Svadu, or that declare both in the device tree. Xen's own
+> page tables, built by setup_initial_mapping(), never go through
+> p2m_set_permission() and need the same fix.
+> 
+> Add PTE_ACCESSED to PTE_LEAF_DEFAULT and make it the minimal common leaf
+> permission set by dropping PTE_WRITABLE. Rebuild PAGE_HYPERVISOR_RO,
+> PAGE_HYPERVISOR_RW and PAGE_HYPERVISOR_RX from that common base, with
+> PAGE_HYPERVISOR_RW also adding PTE_DIRTY. Switch setup_initial_mapping() to
+> use these macros for its default, text, and rodata permissions instead of
+> the equivalent raw bit lists.
+> 
+> A PTE is a table entry iff PTE_VALID is set and R/W/X are all clear, so
+> update pte_is_table() accordingly.
+> 
+> Assisted-by: Claude:claude-opus-5
+> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+> ---
+>   xen/arch/riscv/include/asm/page.h | 14 ++++++++------
+>   xen/arch/riscv/mm.c               |  7 +++----
+>   2 files changed, 11 insertions(+), 10 deletions(-)
+> 
+> diff --git a/xen/arch/riscv/include/asm/page.h b/xen/arch/riscv/include/asm/page.h
+> index b465a90325..5c02f64a17 100644
+> --- a/xen/arch/riscv/include/asm/page.h
+> +++ b/xen/arch/riscv/include/asm/page.h
+> @@ -46,12 +46,12 @@
+>   #define PTE_PBMT_NOCACHE            BIT(61, UL)
+>   #define PTE_PBMT_IO                 BIT(62, UL)
+>   
+> -#define PTE_LEAF_DEFAULT            (PTE_VALID | PTE_READABLE | PTE_WRITABLE)
+> +#define PTE_LEAF_DEFAULT            (PTE_VALID | PTE_READABLE | PTE_ACCESSED)
 
-Furkan
+Dropping PTE_WRITABLE here silently changes the permissions of an 
+existing user of this macro that the patch doesn't touch.
 
+check_pgtbl_mode_support() in mm.c still builds its temporary root entry as:
+  index = pt_index(page_table_level, aligned_load_start);
+  stage1_pgtbl_root[index] = paddr_to_pte(aligned_load_start,
+                                      PTE_LEAF_DEFAULT | PTE_EXECUTABLE);
+
+Before this patch that evaluated to V|R|W|X (RWX); afterwards it is 
+V|R|A|X (RX). So the mapping loses write permission.
+
+I believe that is harmless in practice: the entry is only alive between 
+the csr_write(CSR_SATP, ...) that turns the MMU on and the 
+csr_write(CSR_SATP, 0) a few lines below, it only has to make the 
+current instruction stream fetchable so that the SATP mode probe can 
+complete, and nothing writes through it. Arguably RX is the better 
+permission set for it anyway. But it is still a behavioural change 
+rather than a cosmetic one, and the commit message doesn't mention it(it 
+only talks about setup_initial_mapping()).
+Please call it out explicitly there.
+
+While at it, this site should be converted too:
+
+     stage1_pgtbl_root[index] = paddr_to_pte(aligned_load_start,
+                                             PAGE_HYPERVISOR_RX);
+
+Otherwise the patch converts three sites in setup_initial_mapping() to 
+the new PAGE_HYPERVISOR_* macros while leaving a fourth one open-coding 
+the redefined PTE_LEAF_DEFAULT, which is exactly the kind of asymmetry 
+that makes the redefinition easy to miss on the next change.
+
+After that conversion PTE_LEAF_DEFAULT has no users left
+outside page.h itself, so it could either be dropped entirely in favour 
+of PAGE_HYPERVISOR_{RO,RW,RX}, or renamed to something that reflects its 
+new meaning (PTE_LEAF_COMMON or similar). "DEFAULT" now names a set that 
+is not a usable permission on its own, which is misleading.
+
+>   #define PTE_TABLE                   (PTE_VALID)
+>   
+> -#define PAGE_HYPERVISOR_RO          (PTE_VALID | PTE_READABLE)
+> -#define PAGE_HYPERVISOR_RW          (PTE_VALID | PTE_READABLE | PTE_WRITABLE)
+> -#define PAGE_HYPERVISOR_RX          (PTE_VALID | PTE_READABLE | PTE_EXECUTABLE)
+> +#define PAGE_HYPERVISOR_RO          (PTE_LEAF_DEFAULT)
+> +#define PAGE_HYPERVISOR_RW          (PTE_LEAF_DEFAULT | PTE_WRITABLE | PTE_DIRTY)
+> +#define PAGE_HYPERVISOR_RX          (PTE_LEAF_DEFAULT | PTE_EXECUTABLE)
+
+Adding A/D to PAGE_HYPERVISOR_RW fixes a second site beyond the ones the
+commit message mentions, and I think it deserves to be spelled out.
+
+arch_pmap_map() in asm/pmap.h writes the fixmap leaf entry directly:
+     pte = pte_from_mfn(mfn, PAGE_HYPERVISOR_RW);
+     write_pte(entry, pte);
+i.e. it bypasses pt_update_entry(), which is the place that ORs in
+PTE_ACCESSED | PTE_DIRTY for everything going through map_pages_to_xen().
+So before this patch every pmap mapping was installed with A=D=0 and 
+would fault on first access under Svade, in exactly the same way the 
+boot page tables did.
+
+The commit message currently frames the problem as "Xen's own page 
+tables, built by setup_initial_mapping()", which undersells the fix. 
+Please extend it to say that arch_pmap_map() is affected as well, and 
+that it is fixed by the PAGE_HYPERVISOR_RW change rather than by the 
+mm.c conversion.
+
+FWIW I checked the remaining leaf-PTE construction sites (paddr_to_pte() 
+/pte_from_mfn() callers) and with these two the series covers all of 
+them: everything else either builds table entries (PTE_TABLE) or goes 
+through pt_update_entry() / p2m_set_permission(), both of which set A/D 
+themselves.
+
+>   
+>   #define PAGE_HYPERVISOR             PAGE_HYPERVISOR_RW
+>   /*
+> @@ -177,7 +177,8 @@ static inline bool pte_is_table(pte_t p)
+>        *
+>        * PAGE_HYPERVISOR_RW contains PTE_VALID too.
+>        */
+> -    ASSERT(((p.pte & PAGE_HYPERVISOR_RW) != (PTE_VALID | PTE_WRITABLE)));
+> +    ASSERT((p.pte & (PTE_VALID | PTE_READABLE | PTE_WRITABLE)) !=
+> +           (PTE_VALID | PTE_WRITABLE));
+
+Please drop the last line of the comment above it:
+
+      * PAGE_HYPERVISOR_RW contains PTE_VALID too.
+
+That sentence existed only to explain why the old mask was written as
+PAGE_HYPERVISOR_RW, i.e. that the macro is not just R|W but carries
+PTE_VALID as well, which is what made the comparison against V|W work.
+With the mask now written out literally, the macro is no longer 
+referenced anywhere in the function, so the line dangles. It is also 
+inaccurate now, since PAGE_HYPERVISOR_RW carries A and D in addition to V.
+
+~ Oleksii
 
