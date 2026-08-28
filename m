@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 929C1C61DBD
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2026 06:59:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1401581.1637116 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBF7FC61DB9
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2026 06:59:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1401587.1637125 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzqY6-0007a5-KL; Fri, 28 Aug 2026 06:58:50 +0000
+	id 1wzqZ0-0008EL-S4; Fri, 28 Aug 2026 06:59:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1401581.1637116; Fri, 28 Aug 2026 06:58:50 +0000
+Received: by outflank-mailman (output) from mailman id 1401587.1637125; Fri, 28 Aug 2026 06:59:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzqY6-0007Zy-Fa; Fri, 28 Aug 2026 06:58:50 +0000
-Received: by outflank-mailman (input) for mailman id 1401581;
- Fri, 28 Aug 2026 06:58:49 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1wzqZ0-0008EE-Nq; Fri, 28 Aug 2026 06:59:46 +0000
+Received: by outflank-mailman (input) for mailman id 1401587;
+ Fri, 28 Aug 2026 06:59:45 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wzqY5-0007Yn-9B
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 06:58:49 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wzqYz-0008Dy-HH
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 06:59:45 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzqY3-00BR6P-TM
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 08:58:47 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wzqYx-00Dl7l-7j
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 08:59:43 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a91319a-e002-0a2a0a5209dd-0a2a450ad35c-28
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 08:58:47 +0200
+ id 6a9131c7-2eae-0a2a0a5409dd-0a2a4505c7c2-42
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 08:59:43 +0200
 Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a9131a7-f2d2-0a2a450a0019-d155802bf1e6-3
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 08:58:47 +0200
+ id 6a9131df-4cb1-0a2a45050019-d155802bdd90-3
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 08:59:43 +0200
 Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-49800c6a846so6386665e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 23:58:47 -0700 (PDT)
+ 5b1f17b1804b1-499ac87c92bso5231945e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Aug 2026 23:59:43 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49c5a8e0657sm2780435e9.13.2026.08.27.23.58.46
+ 5b1f17b1804b1-49b95013d06sm37120195e9.12.2026.08.27.23.59.41
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Aug 2026 23:58:46 -0700 (PDT)
+ Thu, 27 Aug 2026 23:59:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,54 +53,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787900327; x=1788505127; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=Rt9tGRQMZU5d8zduV7r8lgiwa0hofvFlHCeU+g0PSdo=;
-        b=MxkdW5Oor1AnpNcu2yerWSFYwDG0YazLKuvKt0RGMlnFvWQW5l042XQKTKjcO1R41/
-         veUk2/AGw/+BV3pPxeyB3I9OheAjcrjN9hqnyynHQqJNoJ9UN/JpJIcOQsImIUbL+Her
-         kGmIrK2t62iTRL/x1LZU09VMXcPBYbvn8Ch2NnNWT7zwlD70CX7xyHycwaue6D8gQ/7i
-         FZPAQxfZ2JqWzwRpdgWheiW9VBRgOBkPJl56Zo/3VyGLX3u6uUEQlXABsSxO12FzU5Ob
-         ZwvrosQNzL7XeH+fpxSqVU2o/g0qBxnS+3r/fIdQdiHgkRk07uno9TQ94GGnfXccpbb5
-         Xqmg==
+        d=suse.com; s=google; t=1787900382; x=1788505182; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=oqu+Q0osoQJYn18e0xy/OsR8FRgD25zg2JGzP482jGc=;
+        b=FORPWQkvISF9BysPN5UyXtabUu2tHizdVeYmS7cJDsu43rNCTnJ0PSik6pdLgHGkO4
+         pbXNHi9J9i3aEyfdC+h/OL50GoHIe0Hob/v7v1A08jZJxzGfpf2ob6orSMrbnfVvnxfd
+         CvpY/BRPoQSrRI6RNbf/L9jp8CzLtIZQs/tYuJQE8U8rrTwmXwMV30p4btBh2/Tih/PK
+         DC66XrKlPqyBfgjxY7Om+a7i0JM3YGEnpf50Zo10OHY9+5HHJYF/LvxI2NX4FAtt8wXF
+         hjmySKLDtZM7y3TLYJx0PjcbwlTD+lhl2BRWcZNrmLI1vEzwLLlKDAODf5jQqf9ehNy7
+         Pb+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787900327; x=1788505127;
-        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Rt9tGRQMZU5d8zduV7r8lgiwa0hofvFlHCeU+g0PSdo=;
-        b=PjdYFb1+Wvio0wIc5Sxk0+GacvZVU5jUnqonSxsZXMh/AO3vhiNH69qzKh1nObsv4b
-         o6Wu+6aCJoV1Fdp1adLEJYn8izlOkDfHoltakLf8HqLSoL4sFj3YIFWyRfz6FYFSXGls
-         7QzkQ7KgJw916uLhgIC+uHvmgtWONIpEEFtSsKClmmbQ+H7XTIyCNG+eKDvIUvjrlZ/D
-         tfMa1iYVvGjaEeoteiMNcVE1G0oHJJQXOMDGgQ2Gsz+a/cx6AAFjwKX1D8L/wnnmwVI+
-         7AvVlSErXcDPF7XqCBDiKhWAlvG6EM0jWt5QbNXWh53m5TCBEWBx2DqVVmYRSQmyoa3R
-         G5BQ==
-X-Gm-Message-State: AFuF++lf9pn3/TXtDPLx6d+Un8VU4jwifPZIDZH3KFakCyeyBVCFA8It
-	E1sTkzGIZ4lMPPnbwIphyEy+UrDb303yREhm0Dd7Iz2IZolVJ27VvUaH7B2aSbFlr6GzdTcq8C3
-	cMT/b3g==
-X-Gm-Gg: AR+sD11eN8lUe8tez7jGhWDKlx2dzJA5qgbozuhux6bbjlmoINBSJNlUhg+sGxKV+Ax
-	DocjZovB7FXA9MjISW5ncZmIf8veIcE8YqsdEx7detLiafLpDVt+XBso7Y3KixN1PTAY6QVJuhh
-	tvhXeGYBNC98G2rCRd8VpkPmGzJTObCGGJL9YwIORJEpiQkSCMZO4wP9eoawSyIZTXSVFe3OahT
-	REfbQ4zSGFJSi/96HuqJYBb2l5hmiRh9grAFOxu2opHPQsO9wgguSffNtnY1JxCX7WMwouFXVYf
-	A2hjdfj0vFmgtlOPmA8R6NKW2tM+KqNYAt1WPEQclYPnntOA0ROs7pkoG8ShkeDIs7i/0e/eQaB
-	cNjpqisIKw3FIKnQo1J61+egau0lsiYEZkRY8yMX3teNOn9ZfCdWEhLUBfuq8GTLo2afReyeBb9
-	/8Nc0lehLJ2E4nSQD2YO6Q7/NSS5oJTGTQBzSixwOuZo+V073lw4S/v5QVDBsnxzOGxio+Bmzu2
-	e/eYxIyYqL4pfZ1LsQnyv2d4oEwM2sjE4HJ9mB7IYC0MX5oC/4W
-X-Received: by 2002:a05:600c:4445:b0:499:900c:9c69 with SMTP id 5b1f17b1804b1-49b91c44fbfmr56794195e9.9.1787900327010;
-        Thu, 27 Aug 2026 23:58:47 -0700 (PDT)
-Message-ID: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com>
-Date: Fri, 28 Aug 2026 08:58:45 +0200
+        d=1e100.net; s=20251104; t=1787900382; x=1788505182;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=oqu+Q0osoQJYn18e0xy/OsR8FRgD25zg2JGzP482jGc=;
+        b=k2WIWYOkhe59DOQukh9fFXuy0APJKmD4gCdsTSKPgmh7UvqpeCJDYdE4jXoxEv2/Ro
+         V5CPQngSNPBYIwM4Ab2PNJpUS8O67vUTJOdDruyRG5HI8/p7xm76F9oUHj6sP5odmclx
+         hkXOUBscuMHxGJjriGbp3E85xgmRPEoeTU+0IbfTULxfAkrCTMU9/KL/Jg9DadymZzdX
+         tONvegNaMBv4ixYLzVU5Ts8jQhrqNZioZ1JYh7KQCyk+ALLDakbhZJaPqA37ck+X8j4e
+         qIql36bO/i9eCb/+k4ykgr443xK6qJ0IVp0eQK/hPeFiIT33gptelr0P8aRFI8wxXydQ
+         ua4w==
+X-Gm-Message-State: AFuF++kR9QZergkf3MQRNlacGc/1mg9sLaKtZJXfB8ZnX/+JPozJP6xg
+	Y0Fqp5iCgeKzOx//enfEpqiTkP3gb2Wb2o5idEeaOxXqqCMYmVhuG+kLoEMkfrghebYw9qn1DLb
+	eXpuPfw==
+X-Gm-Gg: AR+sD10U/HS/EpDyWv/IbbdZU0Iyag09wEJtNwHmRxE2Ruxi43/QgG1L/zK3vlR+q29
+	Rxywe2faI14lBYLTJ6U1TsE8w2NGx8EsWMkr5deqCvcsPMlc+GkZimer0J3OxY9q2gPxha791Zb
+	rgtCajHkQ/kxZWC745rSFnLQEDSysQ8k0OuEIZdcx3YTYH6vqJxfe/1k+MJnFw8Y4DSE3b1it0I
+	pMW7zC7vx3Yz/m8b+Od5DOzxynQ+z4xTB7/ihtixWnXu3NEcV7nXe1a8g+Gb3/9OYACX9WcW0/e
+	7vRQ5ek6YVXZxfADkmN/2L33VAZPoJzfvQWtk7Drt58p9wOgwktymtZdQzHMWT2FOJcsFU53ub7
+	AHqspssff4eiUp1CwS/bBm5DWXKwgUgQ65mbcRYcZ+8AIU3z5y98o5931FirvzP5tVz9xohp6EM
+	dhFTJtJz11lMZNCl75Td4HV/77+jrHkpHbu5VWDaCInvC3ryZfh2GZIVZEqQ4MukxJ6qx8c0CqB
+	JqAAqrrBNPXUEtftovla/fmhk1YwuvRiKHHn6JKIOo82i6w9req
+X-Received: by 2002:a05:600c:83c3:b0:499:b01e:911c with SMTP id 5b1f17b1804b1-49b91c26535mr61714235e9.2.1787900382668;
+        Thu, 27 Aug 2026 23:59:42 -0700 (PDT)
+Message-ID: <85c111a5-105c-4b8f-8b81-d7ec1d0f9436@suse.com>
+Date: Fri, 28 Aug 2026 08:59:41 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>
+Subject: [PATCH 01/12] x86/IO-APIC: address Misra 2.1 rule violations
 From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH 00/12] address most remaining Misra rule 2.1 violations
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>
+References: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com>
+Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -124,35 +129,178 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1787900327-587CACFC-D317F703/0/0
+X-purgate-ID: tlsNG-c201ff/1787900383-247132A1-121F5018/0/0
 X-purgate-type: clean
-X-purgate-size: 1160
+X-purgate-size: 3800
 
-Let's try to get the unreachable code rule almost clean: With this series
-in place, as per [1] x86_64-allcode has one violation left, x86_64-amd has
-two; ARM64-* are clean. But see also "gnttab: unreachable code when
-GNTTAB_MAX_VERSION < 2" [2].
+In both functions cases 0..3 are handled, and a 2-bit mask is applied to
+the switch() expression. Therefore the default: cases are reported
+unreachable by Eclair. Subsume the "case 2" blocks each into the
+corresponding default ones.
 
-The first two thirds of this series are hopefully largely uncontroversial,
-whereas the last third may be.
+While there also drop all the pointless figure braces inside the various
+case blocks, inserting blank lines instead between them.
 
-01: x86/IO-APIC: address Misra 2.1 rule violations
-02: x86/mm: pagetable_dying() is HVM+SHADOW_PAGING only
-03: x86/shadow: eliminate unused forms of sh_map_and_validate_gl<N>e()
-04: x86: add noreturn in a few more places
-05: x86/crash: address Misra 2.1 rule violation
-06: kexec: machine_reboot_kexec() doesn't return
-07: altp2m: address Misra 2.1 rule violation
-08: Arm/GIC: add noreturn in a few more places
-09: Eclair: deviate BUILD_ERROR() wrt rule 2.1 and introduce variants
-10: PCI/physdev: address Misra 2.1 rule violation
-11: x86/HVM: address Misra 2.1 rule violations
-12: x86/nSVM: address Misra 2.1 rule violation
+No functional change.
 
-Jan
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-[1] https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/2796557177
-[2] https://lists.xen.org/archives/html/xen-devel/2026-07/msg01293.html
+--- a/xen/arch/x86/io_apic.c
++++ b/xen/arch/x86/io_apic.c
+@@ -804,66 +804,48 @@ static int __init MPBIOS_polarity(int id
+     switch (mp_irqs[idx].mpc_irqflag & 3)
+     {
+     case 0: /* conforms, ie. bus-type dependent polarity */
+-    {
+         switch (mp_bus_id_to_type[bus])
+         {
+         case MP_BUS_ISA: /* ISA pin */
+-        {
+             polarity = default_ISA_polarity(idx);
+             break;
+-        }
++
+         case MP_BUS_EISA: /* EISA pin */
+-        {
+             polarity = default_EISA_polarity(idx);
+             break;
+-        }
++
+         case MP_BUS_PCI: /* PCI pin */
+-        {
+             polarity = default_PCI_polarity(idx);
+             break;
+-        }
++
+         case MP_BUS_MCA: /* MCA pin */
+-        {
+             polarity = default_MCA_polarity(idx);
+             break;
+-        }
++
+         case MP_BUS_NEC98: /* NEC 98 pin */
+-        {
+             polarity = default_NEC98_polarity(idx);
+             break;
+-        }
++
+         default:
+-        {
+             printk(KERN_WARNING "broken BIOS!!\n");
+             polarity = 1;
+             break;
+         }
+-        }
+         break;
+-    }
++
+     case 1: /* high active */
+-    {
+         polarity = 0;
+         break;
+-    }
+-    case 2: /* reserved */
+-    {
+-        printk(KERN_WARNING "broken BIOS!!\n");
+-        polarity = 1;
+-        break;
+-    }
++
+     case 3: /* low active */
+-    {
+         polarity = 1;
+         break;
+-    }
+-    default: /* invalid */
+-    {
++
++    default: /* reserved */
+         printk(KERN_WARNING "broken BIOS!!\n");
+         polarity = 1;
+         break;
+     }
+-    }
+     return polarity;
+ }
+ 
+@@ -878,66 +860,48 @@ static int MPBIOS_trigger(int idx)
+     switch ((mp_irqs[idx].mpc_irqflag>>2) & 3)
+     {
+     case 0: /* conforms, ie. bus-type dependent */
+-    {
+         switch (mp_bus_id_to_type[bus])
+         {
+         case MP_BUS_ISA: /* ISA pin */
+-        {
+             trigger = default_ISA_trigger(idx);
+             break;
+-        }
++
+         case MP_BUS_EISA: /* EISA pin */
+-        {
+             trigger = default_EISA_trigger(idx);
+             break;
+-        }
++
+         case MP_BUS_PCI: /* PCI pin */
+-        {
+             trigger = default_PCI_trigger(idx);
+             break;
+-        }
++
+         case MP_BUS_MCA: /* MCA pin */
+-        {
+             trigger = default_MCA_trigger(idx);
+             break;
+-        }
++
+         case MP_BUS_NEC98: /* NEC 98 pin */
+-        {
+             trigger = default_NEC98_trigger(idx);
+             break;
+-        }
++
+         default:
+-        {
+             printk(KERN_WARNING "broken BIOS!!\n");
+             trigger = 1;
+             break;
+         }
+-        }
+         break;
+-    }
++
+     case 1: /* edge */
+-    {
+         trigger = 0;
+         break;
+-    }
+-    case 2: /* reserved */
+-    {
+-        printk(KERN_WARNING "broken BIOS!!\n");
+-        trigger = 1;
+-        break;
+-    }
++
+     case 3: /* level */
+-    {
+         trigger = 1;
+         break;
+-    }
+-    default: /* invalid */
+-    {
++
++    default: /* reserved */
+         printk(KERN_WARNING "broken BIOS!!\n");
+         trigger = 0;
+         break;
+     }
+-    }
+     return trigger;
+ }
+ 
+
 
