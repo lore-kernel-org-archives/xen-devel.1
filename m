@@ -4,44 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF7DBC61DBD
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2026 07:04:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1401631.1637186 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D31CFC61DB9
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2026 07:04:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1401637.1637195 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzqdC-0004yV-NH; Fri, 28 Aug 2026 07:04:06 +0000
+	id 1wzqdW-0005RD-VX; Fri, 28 Aug 2026 07:04:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1401631.1637186; Fri, 28 Aug 2026 07:04:06 +0000
+Received: by outflank-mailman (output) from mailman id 1401637.1637195; Fri, 28 Aug 2026 07:04:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzqdC-0004yO-KJ; Fri, 28 Aug 2026 07:04:06 +0000
-Received: by outflank-mailman (input) for mailman id 1401631;
- Fri, 28 Aug 2026 07:04:04 +0000
+	id 1wzqdW-0005Qw-Ru; Fri, 28 Aug 2026 07:04:26 +0000
+Received: by outflank-mailman (input) for mailman id 1401637;
+ Fri, 28 Aug 2026 07:04:26 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wzqdA-0004xw-KA
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 07:04:04 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1wzqdV-0005Ok-QL
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 07:04:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzqdA-00DmW4-0z
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 09:04:04 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wzqdV-0016ik-7A
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 09:04:25 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a9132df-2eae-0a2a0a5409dd-0a2a4508af0a-26
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:04:04 +0200
-Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a9132e3-f659-0a2a45080019-d155802ab58a-3
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:04:03 +0200
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-49557167508so5879625e9.1
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 00:04:03 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49b497fa9c5sm103143025e9.4.2026.08.28.00.04.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 28 Aug 2026 00:04:03 -0700 (PDT)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a9132ef-2eae-0a2a0a5409dd-0a2a450c8c2a-40
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:04:24 +0200
+Received: from [52.101.62.56]
+ (helo=DM5PR21CU001.outbound.protection.outlook.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a9132f7-f479-0a2a450c0019-34653e38936a-3
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:04:24 +0200
+Received: from MW4PR03CA0152.namprd03.prod.outlook.com (2603:10b6:303:8d::7)
+ by SA1PR12MB5672.namprd12.prod.outlook.com (2603:10b6:806:23c::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.9; Fri, 28 Aug
+ 2026 07:04:16 +0000
+Received: from MWH0EPF000C618B.namprd02.prod.outlook.com
+ (2603:10b6:303:8d:cafe::3a) by MW4PR03CA0152.outlook.office365.com
+ (2603:10b6:303:8d::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.10 via Frontend Transport; Fri,
+ 28 Aug 2026 07:04:16 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ MWH0EPF000C618B.mail.protection.outlook.com (10.167.249.123) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.382.8 via Frontend Transport; Fri, 28 Aug 2026 07:04:16 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Fri, 28 Aug
+ 2026 02:04:15 -0500
+Received: from APPOL-18KY0J4.xilinx.com (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.45 via
+ Frontend Transport; Fri, 28 Aug 2026 02:04:14 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,145 +67,202 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1787900643; x=1788505443; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=DmF1sxJKk6keuGbs+Ea+dEobCZFX5puzwyTbL1N5ULM=;
-        b=IUttZ1QqG7XhlILV0P+E3X+ePLpWRMh+3k6CuLDiJk1G7P/JryDnlSbPm3gaOWGWWT
-         H53R5dVGpZUrVdEky9h/nywr+xNZUUTAby75qPeQIKezsezuWwVs2Dl7AKVRQazqqQbr
-         By6/S0RNnG+p9tDslib6hqQi7baYfVsLD4gP2f7sBOyv65awszGN9MWqtXZzD4PX+E5j
-         OeH4csFyxzvUWbpHAzFBZNxtKWQ9BN9yK74tB4vbx+sdL7AAKTkJ8CjkL671J4ujsRYQ
-         wd31Mb0WAUnUAul7YYdUfD7RbPy44UUXA5mSfgSbEWQj9JBokmL6OS8huFmYFiEh1ox6
-         W1pg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787900643; x=1788505443;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=DmF1sxJKk6keuGbs+Ea+dEobCZFX5puzwyTbL1N5ULM=;
-        b=UB83/OZIbifbYR1fNmiibIw7oyszRC50SnHbNehdERGit4lC3Lic+4S0Do11Viy6vB
-         8jC7GbO/e+ibNn0F574ksFJCvEuq0KsDc7dOdv2jUZ3qlaa+tONWhD8ojUFjwSkBZNMJ
-         w26zS3xs6sw6M+uTaPHlh7k0Y2u24gKDIc0UUfYC02eSKOf5iUpNtVU5hb0WETQhp/RY
-         FsUZ1WOxDI0nTM+EvxArmKsnJB8oaCJUxxwa5k5fob32Z3w4Hz40cvxEqAl1WqgD/I48
-         /EnZYuTr4p8kD+wAr5AnCefjFk6Q7sniVnXYizViT+13QIKOWQafGxOg5BP2sztkUOo1
-         1U9g==
-X-Gm-Message-State: AFuF++nj27CF05/xzphsi3WrB+JEBoD6rtNZZiVWaZQ98ThqYx5EWMMO
-	Fh4r6tNL7fekmHWfiktGA62hkMd90NIdlf3Wcr7m4vaxg/o04RkAwJUBMh2wA0KI+oLXxhrYbmp
-	9B163oA==
-X-Gm-Gg: AR+sD11m4AQIaOvBP6N65FjFek1mxSvLjI4A2xJRWozTWWS34qDDsQA+g1eoTnUGIVN
-	am0/e00B4Pox2kM9D98zxVekLAAsImO0iPcqpuCC/TqTQTM2COT/9NTvCr8w92wfWe0TUFEfroR
-	ub5Vz0+nG8bnhYcPARQkEX+ZAXK3Ss94JJ70YJ0a8Pt3c1t62sAigtIDOroalMUU43Z3SM8jj4E
-	wz9Ve9EN14JUoHJ0dAHFNUdol97o3XUAyfdwRnvHXynZClq62hQUimLFm6ZSOJoSCB1Ocl1lsYi
-	wm/0MkY6DxJpClmQOGVA2RjvO7yE3U4nD4kzGSz6Lor8Qj/bMGSfZ5Vm/CaaSCZNm02l+tazQ6U
-	9y8FaT05mkHvduvgvskGkBtDOq4kgKOheNjXOJbCs5hejoFMcnvzmozX5TnXxU2XcB52zSuiqNu
-	BJX/XPJyrczlnOxUXzHaJvLSAjkM9UcDnM6kVDLGguNKuFupQo4HUCJuB6xBtwj0PiB0dzhblvb
-	YTVGj8NHMh3aGkO8FVI/RUz/WymnO9KDlCJSWTbce8Y+0RPESUGZoHF6LjSfKU=
-X-Received: by 2002:a05:600c:4594:b0:49b:4d64:bbc4 with SMTP id 5b1f17b1804b1-49b91c2f990mr57810185e9.8.1787900643344;
-        Fri, 28 Aug 2026 00:04:03 -0700 (PDT)
-Message-ID: <afa5c348-744a-4a4b-8b00-2971ca3376cd@suse.com>
-Date: Fri, 28 Aug 2026 09:04:01 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EkEiSA4DoeE90mFj5DYvji+OTi7HA/WQbjpQzDH1Y6/Z7QTcQ1pw9V+rF2XHfg3Yna38MKmlRiyqzcHIMRu1xiXcGdgcg7pZMBJi4f7PHlYps6OWDrsvWjYPhcahKSrn99rHzQYg3V2xbV4L54K1KDNng+9tO/9uAZ7W3z2AYFT9QFosrjUv0eBie+7WIHUtAIbcg3GUQyfliKc/GwX0PQnQwy42NTn4jLJXUMjI1Tbr1o1tKbj7hFewtjNU7aOsp+BVh28SugbM6yn4ARsC5r1pz8FWXU4NxqrP1ORiMOJkqv7PqsQF3lhdooLXHi33MG0IeMQTfbPhProrRaGC+g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=v0bpya8ogYaEdMCGp4/9wWyRij88nIkK5lXO2xMacDo=;
+ b=HjQVfrOWYjNzR7eXWnPv+FM4r+Qgw8UtRsNbQhPkysk76OJ5/oVUDFCOZVu8sN14PoIqxCcFQg+ZRm9kqyOhGmXEwUos8XyuQnJl3kgRLrZd4KjtYVQWcKmRZUc+bDUjZWaL2bj/RdSkpeJmPlPKxc5B4RhBEbFH+qhDmK0sDoNv8c4cISSFJyWT3oFB/b6hR9+JIPCDmQGRr6vRvlqJ0goIqqNjK17JgdkeHypc7sMk6vgJDlB6gBmmcdMmPBnT+ixXI90Dt56xC6sU+il9iQdsqzwjtkOe9LUdmqPEx9VF7SzrRD/XuTOM+/KTyWl+ruyy6fDe2nRm57rK3Ot70g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=v0bpya8ogYaEdMCGp4/9wWyRij88nIkK5lXO2xMacDo=;
+ b=0admj/owgCXekgLoKr2ze6Lhj8X8Aq2hidVuw3xNicxZheUWUFOx7RnHYueNTJXqfSN8B4OHxCupyWMN768+6OY6AztL3as7FLNYAvUcP4R0rihextIDUwDQfLkDog5W68nMUeXRJSPOmrW9zsS+MXVX7fsSMQu19pPFjx/P65E=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+From: Michal Orzel <michal.orzel@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v2] ARM/vgic: Clean up vgic_v{2,3}_setup_hw()
+Date: Fri, 28 Aug 2026 09:04:09 +0200
+Message-ID: <20260828070409.106935-1-michal.orzel@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: [PATCH 08/12] Arm/GIC: add noreturn in a few more places
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>, Julien Grall
- <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>
-References: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com>
-Content-Language: en-US
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1787900643-D735D87B-83B1FCEB/0/0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000C618B:EE_|SA1PR12MB5672:EE_
+X-MS-Office365-Filtering-Correlation-Id: c4ba58b3-8ec3-4724-879f-08df04d292f4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|82310400026|36860700016|376014|1800799024|23010399003|56012099006|10067099003|11063799006|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	GOtF4EQie1H6NYsOCgKuLhCQOccxOXUqPM4j7oL7V483apNYdNPgMONZjghGMzLWHPmIJedVKGPR0mAVCKeaVV0jX+I0ZrjMiN+vEDu3r2qymPFHDNg+XVh0kXRMfKm+UFixsKxpb42+LjSq0op8sIyoK/Cd9uPm3jovUgXNVjBHQ5HjnOtZWWdJsRW3wyc1iZOzaw2zocekmCU3PEh9D9KbQusAOxRHmsBEsezlRvvvqeEYwVuKQe4YBw0qTsFEEcvKdgn56nseGGPvzWAOM1PE5PzNayU/3UZrczh7eR4Y5ltiFPLHEWFRXkaXecqgic5xaec3ORktX2Qg+C4hiTNDy7RIEOeryJZWSTWsXff6FktuTWCQCimLWbwkMDnKUPMi3FVxdvh8qoDplBNHgpMzNgoVtl8/jJW39jh9aeVeXbjoFjsDMHfIf3KdObPAOSyvmiR5NbcRYDm87CZpbyxVTwHybKHdprY81rMTpTKLRUzhg1axDk6Vpx04vK3EB0MThgkdpYmfMQU7ltsOrHlUIWuf+FSGJ5C04nF1T2jvoqmR0i/vZVrXagrgC3UPo622dZpwTvxcWGr9u8LSwzK6XKxWiauRemT0fkaHHw5GmaijY3gx9PWbkJQRucl66IT7MKoeLklFaQAAkMgX++pI1Q5P/mDhrxoC+CBQGO5OFWVZfJc82jQXn00pWi2sL+GXJ/WbRHQyGJpyZfAY/A==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(23010399003)(56012099006)(10067099003)(11063799006)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	eYgwgacmIKLNHs9NFPS/U9V+Qie2+olemviKv9TfeerUsqe0eU8olEqhjpHFb8mFhWpqDTy4qLIRobNRBhi3Oj1UuW4Pi/Htv1gw4qSWTA3kOJsyy9B5F97z2v0WZTKauzpO5J9EgBIvXoAZIKiv9PR9O4bEOutVjDr2Rfzxoa/vnZpHV2tDqFEp5ZSZTEiR7a//JFzUg/IYce33c3LaiD8URWbxVF4kU2b4azuwha0yTSdDKiMw89rzXkizWNPaPyAxQTNWKPjy02ouOhY8leE7WlLk0M3LglNhuaOkj29S5zQSTpQXM/UwN0NorA/abk6oj1VyBXJfr2UMQTa64w2Shr/ne1mUk5lz8hc8sCuNqnRGjRkAwQidU21reM7ak/N+zlwHzfHhiDYlMpcBnc74WnCd2IMvIKLqwdTSXyiF1K5f7MWdFlek3BgKfTUJ
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2026 07:04:16.3613
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c4ba58b3-8ec3-4724-879f-08df04d292f4
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	MWH0EPF000C618B.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB5672
+X-purgate-ID: tlsNG-d25034/1787900664-77ED2A5B-9AB31B0E/0/0
 X-purgate-type: clean
-X-purgate-size: 2030
+X-purgate-size: 4662
 
-LPI related functions having just BUG() in them are disliked by Misra /
-Eclair, as long as they don't also have a noreturn attribute.
+From: Andrew Cooper <andrew.cooper3@citrix.com>
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
+vgic_v{2,3}_setup_hw()'s callers are __init, so they should be too.
+vgic_v{2,3}_hw and gic_v2_hw_data are written once during init and
+unmodified thereafter, so make them __ro_after_init.  Reposition
+'bool enabled' in these structures to fit in the tail padding, removing
+8 bytes from their size when paddr_t is 8B.
+
+While at it, drop dead vgic_v3_setup_hw() dummy implementation
+from vgic/vgic.c. GICV3 depends on !NEW_VGIC.
+
+No functional change.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Michal Orzel <michal.orzel@amd.com>
 ---
-From its description "Unreachability caused by calls to the following
-functions or macros is deliberate and there is no risk of code being
-unexpectedly left out." I would have expected the respective entry in
-deviations.ecl to cover all of these cases, but clearly that isn't the
-case.
+Changes in v2 (Michal):
+ - take Andrew's v1 patch and extend the changes to vGICv3 and new vGICv2
+---
+ xen/arch/arm/vgic-v2.c      |  8 ++++----
+ xen/arch/arm/vgic-v3.c      | 11 +++++------
+ xen/arch/arm/vgic/vgic-v2.c |  8 ++++----
+ xen/arch/arm/vgic/vgic.c    | 11 -----------
+ 4 files changed, 13 insertions(+), 25 deletions(-)
 
-Of course having noreturn on functions returning non-void is somewhat odd.
-
---- a/xen/arch/arm/gic-v2.c
-+++ b/xen/arch/arm/gic-v2.c
-@@ -1315,7 +1315,7 @@ static int __init gicv2_init(void)
-     return 0;
- }
- 
--static void gicv2_do_LPI(unsigned int lpi)
-+static void noreturn gicv2_do_LPI(unsigned int lpi)
- {
-     /* No LPIs in a GICv2 */
-     BUG();
---- a/xen/arch/arm/include/asm/gic_v3_its.h
-+++ b/xen/arch/arm/include/asm/gic_v3_its.h
-@@ -229,7 +229,7 @@ static inline unsigned int vgic_v3_its_c
-     return 0;
- }
- 
--static inline void gicv3_do_LPI(unsigned int lpi)
-+static inline void noreturn gicv3_do_LPI(unsigned int lpi)
- {
-     /* We don't enable LPIs without an ITS. */
-     BUG();
+diff --git a/xen/arch/arm/vgic-v2.c b/xen/arch/arm/vgic-v2.c
+index 642407fd5b05..3fa8cdeeab14 100644
 --- a/xen/arch/arm/vgic-v2.c
 +++ b/xen/arch/arm/vgic-v2.c
-@@ -718,14 +718,15 @@ static void vgic_v2_domain_free(struct d
-     /* Nothing to be cleanup for this driver */
+@@ -25,7 +25,6 @@
+ #include <asm/vreg.h>
+ 
+ static struct {
+-    bool enabled;
+     /* Distributor interface address */
+     paddr_t dbase;
+     /* CPU interface address & size */
+@@ -36,10 +35,11 @@ static struct {
+ 
+     /* Offset to add to get an 8kB contiguous region if GIC is aliased */
+     uint32_t aliased_offset;
+-} vgic_v2_hw;
++    bool enabled;
++} vgic_v2_hw __ro_after_init;
+ 
+-void vgic_v2_setup_hw(paddr_t dbase, paddr_t cbase, paddr_t csize,
+-                      paddr_t vbase, uint32_t aliased_offset)
++void __init vgic_v2_setup_hw(paddr_t dbase, paddr_t cbase, paddr_t csize,
++                             paddr_t vbase, uint32_t aliased_offset)
+ {
+     vgic_v2_hw.enabled = true;
+     vgic_v2_hw.dbase = dbase;
+diff --git a/xen/arch/arm/vgic-v3.c b/xen/arch/arm/vgic-v3.c
+index c01cc596d593..16e9d0cbad03 100644
+--- a/xen/arch/arm/vgic-v3.c
++++ b/xen/arch/arm/vgic-v3.c
+@@ -44,19 +44,18 @@
+ #define VGICD_CTLR_DEFAULT  (GICD_CTLR_ARE_NS)
+ 
+ static struct {
+-    bool enabled;
+     /* Distributor interface address */
+     paddr_t dbase;
+     /* Re-distributor regions */
+     unsigned int nr_rdist_regions;
+     const struct rdist_region *regions;
+     unsigned int intid_bits;  /* Number of interrupt ID bits */
+-} vgic_v3_hw;
++    bool enabled;
++} vgic_v3_hw __ro_after_init;
+ 
+-void vgic_v3_setup_hw(paddr_t dbase,
+-                      unsigned int nr_rdist_regions,
+-                      const struct rdist_region *regions,
+-                      unsigned int intid_bits)
++void __init vgic_v3_setup_hw(paddr_t dbase, unsigned int nr_rdist_regions,
++                             const struct rdist_region *regions,
++                             unsigned int intid_bits)
+ {
+     vgic_v3_hw.enabled = true;
+     vgic_v3_hw.dbase = dbase;
+diff --git a/xen/arch/arm/vgic/vgic-v2.c b/xen/arch/arm/vgic/vgic-v2.c
+index 6a558089c522..06fa36545355 100644
+--- a/xen/arch/arm/vgic/vgic-v2.c
++++ b/xen/arch/arm/vgic/vgic-v2.c
+@@ -24,7 +24,6 @@
+ #include "vgic.h"
+ 
+ static struct {
+-    bool enabled;
+     paddr_t dbase;          /* Distributor interface address */
+     paddr_t cbase;          /* CPU interface address & size */
+     paddr_t csize;
+@@ -32,10 +31,11 @@ static struct {
+ 
+     /* Offset to add to get an 8kB contiguous region if GIC is aliased */
+     uint32_t aliased_offset;
+-} gic_v2_hw_data;
++    bool enabled;
++} gic_v2_hw_data __ro_after_init;
+ 
+-void vgic_v2_setup_hw(paddr_t dbase, paddr_t cbase, paddr_t csize,
+-                      paddr_t vbase, uint32_t aliased_offset)
++void __init vgic_v2_setup_hw(paddr_t dbase, paddr_t cbase, paddr_t csize,
++                             paddr_t vbase, uint32_t aliased_offset)
+ {
+     gic_v2_hw_data.enabled = true;
+     gic_v2_hw_data.dbase = dbase;
+diff --git a/xen/arch/arm/vgic/vgic.c b/xen/arch/arm/vgic/vgic.c
+index b2c0e1873ace..ba029b8a3bbf 100644
+--- a/xen/arch/arm/vgic/vgic.c
++++ b/xen/arch/arm/vgic/vgic.c
+@@ -964,17 +964,6 @@ unsigned int vgic_max_vcpus(unsigned int domctl_vgic_version)
+     }
  }
  
--static struct pending_irq *vgic_v2_lpi_to_pending(struct domain *d,
--                                                  unsigned int vlpi)
-+static struct pending_irq *noreturn vgic_v2_lpi_to_pending(struct domain *d,
-+                                                           unsigned int vlpi)
- {
-     /* Dummy function, no LPIs on a VGICv2. */
-     BUG();
- }
- 
--static int vgic_v2_lpi_get_priority(struct domain *d, unsigned int vlpi)
-+static int noreturn vgic_v2_lpi_get_priority(struct domain *d,
-+                                             unsigned int vlpi)
- {
-     /* Dummy function, no LPIs on a VGICv2. */
-     BUG();
+-#ifdef CONFIG_GICV3
+-/* Dummy implementation to allow building without actual vGICv3 support. */
+-void vgic_v3_setup_hw(paddr_t dbase,
+-                      unsigned int nr_rdist_regions,
+-                      const struct rdist_region *regions,
+-                      unsigned int intid_bits)
+-{
+-    panic("New VGIC implementation does not yet support GICv3\n");
+-}
+-#endif
+-
+ /*
+  * Local variables:
+  * mode: C
+-- 
+2.43.0
 
 
