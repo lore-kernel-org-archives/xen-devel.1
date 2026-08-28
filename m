@@ -4,58 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D31CFC61DB9
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2026 07:04:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1401637.1637195 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B50A4C61DBD
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2026 07:04:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1401640.1637205 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzqdW-0005RD-VX; Fri, 28 Aug 2026 07:04:26 +0000
+	id 1wzqdj-0005qD-9v; Fri, 28 Aug 2026 07:04:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1401637.1637195; Fri, 28 Aug 2026 07:04:26 +0000
+Received: by outflank-mailman (output) from mailman id 1401640.1637205; Fri, 28 Aug 2026 07:04:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wzqdW-0005Qw-Ru; Fri, 28 Aug 2026 07:04:26 +0000
-Received: by outflank-mailman (input) for mailman id 1401637;
- Fri, 28 Aug 2026 07:04:26 +0000
+	id 1wzqdj-0005q6-6X; Fri, 28 Aug 2026 07:04:39 +0000
+Received: by outflank-mailman (input) for mailman id 1401640;
+ Fri, 28 Aug 2026 07:04:38 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1wzqdV-0005Ok-QL
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 07:04:26 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wzqdh-0005o5-Rj
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 07:04:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wzqdV-0016ik-7A
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 09:04:25 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wzqdh-00DmdV-8H
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 09:04:37 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a9132ef-2eae-0a2a0a5409dd-0a2a450c8c2a-40
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:04:24 +0200
-Received: from [52.101.62.56]
- (helo=DM5PR21CU001.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a9132f7-f479-0a2a450c0019-34653e38936a-3
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:04:24 +0200
-Received: from MW4PR03CA0152.namprd03.prod.outlook.com (2603:10b6:303:8d::7)
- by SA1PR12MB5672.namprd12.prod.outlook.com (2603:10b6:806:23c::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.9; Fri, 28 Aug
- 2026 07:04:16 +0000
-Received: from MWH0EPF000C618B.namprd02.prod.outlook.com
- (2603:10b6:303:8d:cafe::3a) by MW4PR03CA0152.outlook.office365.com
- (2603:10b6:303:8d::7) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.10 via Frontend Transport; Fri,
- 28 Aug 2026 07:04:16 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- MWH0EPF000C618B.mail.protection.outlook.com (10.167.249.123) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.382.8 via Frontend Transport; Fri, 28 Aug 2026 07:04:16 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Fri, 28 Aug
- 2026 02:04:15 -0500
-Received: from APPOL-18KY0J4.xilinx.com (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.45 via
- Frontend Transport; Fri, 28 Aug 2026 02:04:14 -0500
+ (envelope-from <jbeulich@suse.com>)
+ id 6a9132f4-8faa-0a2a0a5109dd-0a2a4501e002-44
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:04:37 +0200
+Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a913305-5984-0a2a45010019-d155802de834-3
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 09:04:37 +0200
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-49b8be0409fso2935395e9.2
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2026 00:04:37 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49c44feb966sm4170955e9.6.2026.08.28.00.04.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 28 Aug 2026 00:04:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -67,202 +53,149 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=EkEiSA4DoeE90mFj5DYvji+OTi7HA/WQbjpQzDH1Y6/Z7QTcQ1pw9V+rF2XHfg3Yna38MKmlRiyqzcHIMRu1xiXcGdgcg7pZMBJi4f7PHlYps6OWDrsvWjYPhcahKSrn99rHzQYg3V2xbV4L54K1KDNng+9tO/9uAZ7W3z2AYFT9QFosrjUv0eBie+7WIHUtAIbcg3GUQyfliKc/GwX0PQnQwy42NTn4jLJXUMjI1Tbr1o1tKbj7hFewtjNU7aOsp+BVh28SugbM6yn4ARsC5r1pz8FWXU4NxqrP1ORiMOJkqv7PqsQF3lhdooLXHi33MG0IeMQTfbPhProrRaGC+g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=v0bpya8ogYaEdMCGp4/9wWyRij88nIkK5lXO2xMacDo=;
- b=HjQVfrOWYjNzR7eXWnPv+FM4r+Qgw8UtRsNbQhPkysk76OJ5/oVUDFCOZVu8sN14PoIqxCcFQg+ZRm9kqyOhGmXEwUos8XyuQnJl3kgRLrZd4KjtYVQWcKmRZUc+bDUjZWaL2bj/RdSkpeJmPlPKxc5B4RhBEbFH+qhDmK0sDoNv8c4cISSFJyWT3oFB/b6hR9+JIPCDmQGRr6vRvlqJ0goIqqNjK17JgdkeHypc7sMk6vgJDlB6gBmmcdMmPBnT+ixXI90Dt56xC6sU+il9iQdsqzwjtkOe9LUdmqPEx9VF7SzrRD/XuTOM+/KTyWl+ruyy6fDe2nRm57rK3Ot70g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=v0bpya8ogYaEdMCGp4/9wWyRij88nIkK5lXO2xMacDo=;
- b=0admj/owgCXekgLoKr2ze6Lhj8X8Aq2hidVuw3xNicxZheUWUFOx7RnHYueNTJXqfSN8B4OHxCupyWMN768+6OY6AztL3as7FLNYAvUcP4R0rihextIDUwDQfLkDog5W68nMUeXRJSPOmrW9zsS+MXVX7fsSMQu19pPFjx/P65E=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-From: Michal Orzel <michal.orzel@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2] ARM/vgic: Clean up vgic_v{2,3}_setup_hw()
-Date: Fri, 28 Aug 2026 09:04:09 +0200
-Message-ID: <20260828070409.106935-1-michal.orzel@amd.com>
-X-Mailer: git-send-email 2.43.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1787900677; x=1788505477; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=m/fuBmCCJ5a1zaL+2kWjQQLEuHgPrkNDDGBZHEQWcC0=;
+        b=ENPJ3ZH5ZEz8gzJ8U0LVuJfR9/0Zz5UJLfsK9x7sBR4pteT+SQ9q7pYjQTVi9nAVnp
+         EiYQfRivPyeDg/31vMlYU9SyBqO6EOaqbtipvgr/KEFxANJAVksGwMAZR7Wm2x4O4T8D
+         qBzvnR/o8rDx+6eWAvFlYyWiqHJDBElb1SGL8BT8Je4efZWRJknHx+VIWIIc76DFqLw+
+         tOqsRKKHBPSit85QaQK9imM7WpHk+fJt3d/w6KK5J7cDBLnhRn2E9K0Prie8aiWu5VmU
+         aBxsz332LUw/fLq1LCbdCfEdZbdI2t4OoWd6J6sEK3E/EHa0V0e+fUfVn05+YQygdXCc
+         89mg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787900677; x=1788505477;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=m/fuBmCCJ5a1zaL+2kWjQQLEuHgPrkNDDGBZHEQWcC0=;
+        b=UAA+vUSCnzkTsJZ+DQLz/t/3dQrtAT4h75Opv79C2HnUMel3PnDYK77XX+9k1Wd+wF
+         CUHPQz50pSznQyTPt9DRiNm4RcwOIqLpTf4CGL/Y8hhMS3gRh04w7hyPIhKiCJnKdQTS
+         glLEChsc4J3tmfoj6dmhx50WQOW8GJpCUfDuZ14DU7IvFPbDSnFa/ni4koW1Vh0i630s
+         bV2SUxZmj/6POvapwOaQD/mKjuyhRbdzCOPRXU39ioj7oftKxFfhFEJ0gy+XUIdHFaGC
+         IrkCofPl9NmQyGdJqAgynGAmAaGFBBYF8UXQQNbdysNDi1fLf50OuGVeyxp4X9DcBlHh
+         Mdow==
+X-Gm-Message-State: AFuF++mq26poplI5WwwQymMBeN9Mbf9oNIU1pKYU5kUMjlPYrxQ5mUIs
+	lkXmzeqSo3nh9K621PpDqwQ2yjApMEo3sMs0spEwV2iRLy9qS3272JzKSvqDQfznUVc27JGvRZS
+	n/OS6gQ==
+X-Gm-Gg: AR+sD121KTJHVRaZ1+ZJgEr4hr3As463Q2EgkKTdvDXp6HRZyWTX3J4uZF+FtSiPzHw
+	PBsYXmK2v1VKcZHIqG+000I4cQgRH4eUG0SyE1VWZt7GB7qYTz4iMRoqrDH6NBvo64zltTPlce3
+	K5MgydcUQDO27DtxvZRKF8t0ibFXZVykCIJNaUmZ3nOMKdbFOWqm8e4NzVToFkGTBMJBW43EVUs
+	C/xXRL+tH3kkLc6ai5YwYv2xc+yEbRna9tauuJpOhwYmz2HsaBOExGjdtkAsK3o9G8ANy4Ihbl7
+	zhhVkuRT4xBwhDLxn0PiVHIfn6sEF1zVSJ+pi089zVwxbz6AEgyJ000Xr8VYPxoxEzsnIe5V1NX
+	8vpGQ2MhYshb7Vxg+oq0BqQglcAan4V1xTQ0iZj7UM3sCx7Vy8Z9Wy+CW4MsMhdZrx2Ul4NiX0f
+	8A/1jRO27b2q+kDP2+fWp+wmkghVoxBe/NvnXgMiU6x4jkvDr0SOcM5AEZ2UZS6UwoMI9UV9U9I
+	d5tR832Q0lPpt9pnORJWaGvfj0tucJcTVHd3nMYqlrLfRt6GFpWhP0fTPKyh/w=
+X-Received: by 2002:a05:600c:6215:b0:499:5a50:b022 with SMTP id 5b1f17b1804b1-49b91c1bb18mr67259705e9.3.1787900676675;
+        Fri, 28 Aug 2026 00:04:36 -0700 (PDT)
+Message-ID: <06c5efc0-e130-417f-8333-b8eacd1c6d77@suse.com>
+Date: Fri, 28 Aug 2026 09:04:35 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000C618B:EE_|SA1PR12MB5672:EE_
-X-MS-Office365-Filtering-Correlation-Id: c4ba58b3-8ec3-4724-879f-08df04d292f4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|36860700016|376014|1800799024|23010399003|56012099006|10067099003|11063799006|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	GOtF4EQie1H6NYsOCgKuLhCQOccxOXUqPM4j7oL7V483apNYdNPgMONZjghGMzLWHPmIJedVKGPR0mAVCKeaVV0jX+I0ZrjMiN+vEDu3r2qymPFHDNg+XVh0kXRMfKm+UFixsKxpb42+LjSq0op8sIyoK/Cd9uPm3jovUgXNVjBHQ5HjnOtZWWdJsRW3wyc1iZOzaw2zocekmCU3PEh9D9KbQusAOxRHmsBEsezlRvvvqeEYwVuKQe4YBw0qTsFEEcvKdgn56nseGGPvzWAOM1PE5PzNayU/3UZrczh7eR4Y5ltiFPLHEWFRXkaXecqgic5xaec3ORktX2Qg+C4hiTNDy7RIEOeryJZWSTWsXff6FktuTWCQCimLWbwkMDnKUPMi3FVxdvh8qoDplBNHgpMzNgoVtl8/jJW39jh9aeVeXbjoFjsDMHfIf3KdObPAOSyvmiR5NbcRYDm87CZpbyxVTwHybKHdprY81rMTpTKLRUzhg1axDk6Vpx04vK3EB0MThgkdpYmfMQU7ltsOrHlUIWuf+FSGJ5C04nF1T2jvoqmR0i/vZVrXagrgC3UPo622dZpwTvxcWGr9u8LSwzK6XKxWiauRemT0fkaHHw5GmaijY3gx9PWbkJQRucl66IT7MKoeLklFaQAAkMgX++pI1Q5P/mDhrxoC+CBQGO5OFWVZfJc82jQXn00pWi2sL+GXJ/WbRHQyGJpyZfAY/A==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(23010399003)(56012099006)(10067099003)(11063799006)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	eYgwgacmIKLNHs9NFPS/U9V+Qie2+olemviKv9TfeerUsqe0eU8olEqhjpHFb8mFhWpqDTy4qLIRobNRBhi3Oj1UuW4Pi/Htv1gw4qSWTA3kOJsyy9B5F97z2v0WZTKauzpO5J9EgBIvXoAZIKiv9PR9O4bEOutVjDr2Rfzxoa/vnZpHV2tDqFEp5ZSZTEiR7a//JFzUg/IYce33c3LaiD8URWbxVF4kU2b4azuwha0yTSdDKiMw89rzXkizWNPaPyAxQTNWKPjy02ouOhY8leE7WlLk0M3LglNhuaOkj29S5zQSTpQXM/UwN0NorA/abk6oj1VyBXJfr2UMQTa64w2Shr/ne1mUk5lz8hc8sCuNqnRGjRkAwQidU21reM7ak/N+zlwHzfHhiDYlMpcBnc74WnCd2IMvIKLqwdTSXyiF1K5f7MWdFlek3BgKfTUJ
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2026 07:04:16.3613
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c4ba58b3-8ec3-4724-879f-08df04d292f4
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	MWH0EPF000C618B.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB5672
-X-purgate-ID: tlsNG-d25034/1787900664-77ED2A5B-9AB31B0E/0/0
+User-Agent: Mozilla Thunderbird
+Subject: [PATCH 09/12] Eclair: deviate BUILD_ERROR() wrt rule 2.1 and
+ introduce variants
+From: Jan Beulich <jbeulich@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>
+References: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com>
+Content-Language: en-US
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d62444/1787900677-1F86F757-E8D1E3E7/0/0
 X-purgate-type: clean
-X-purgate-size: 4662
+X-purgate-size: 2567
 
-From: Andrew Cooper <andrew.cooper3@citrix.com>
+BUILD_ERROR() is even stronger a guard than assertions in general, and
+ASSERT_UNREACHABLE() (or BUG()) in particular. Deviate it just like those
+to allow use for marking unreachable portions of code.
 
-vgic_v{2,3}_setup_hw()'s callers are __init, so they should be too.
-vgic_v{2,3}_hw and gic_v2_hw_data are written once during init and
-unmodified thereafter, so make them __ro_after_init.  Reposition
-'bool enabled' in these structures to fit in the tail padding, removing
-8 bytes from their size when paddr_t is 8B.
+In some cases code being unreachable is dependent upon configuration.
+Introduce two variants, as constructs like
 
-While at it, drop dead vgic_v3_setup_hw() dummy implementation
-from vgic/vgic.c. GICV3 depends on !NEW_VGIC.
+    if ( IS_ENABLED(CONFIG_...) )
+        BUILD_ERROR("...");
 
-No functional change.
+results in the if() still being reported as unreachable. Sadly these two
+new macros introduce a new 20.12 violation each, which hence also needs
+deviating.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Signed-off-by: Michal Orzel <michal.orzel@amd.com>
----
-Changes in v2 (Michal):
- - take Andrew's v1 patch and extend the changes to vGICv3 and new vGICv2
----
- xen/arch/arm/vgic-v2.c      |  8 ++++----
- xen/arch/arm/vgic-v3.c      | 11 +++++------
- xen/arch/arm/vgic/vgic-v2.c |  8 ++++----
- xen/arch/arm/vgic/vgic.c    | 11 -----------
- 4 files changed, 13 insertions(+), 25 deletions(-)
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-diff --git a/xen/arch/arm/vgic-v2.c b/xen/arch/arm/vgic-v2.c
-index 642407fd5b05..3fa8cdeeab14 100644
---- a/xen/arch/arm/vgic-v2.c
-+++ b/xen/arch/arm/vgic-v2.c
-@@ -25,7 +25,6 @@
- #include <asm/vreg.h>
+--- a/automation/eclair_analysis/ECLAIR/deviations.ecl
++++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+@@ -19,6 +19,7 @@ Constant expressions and unreachable bra
  
- static struct {
--    bool enabled;
-     /* Distributor interface address */
-     paddr_t dbase;
-     /* CPU interface address & size */
-@@ -36,10 +35,11 @@ static struct {
+ -doc_begin="Unreachability inside an ASSERT_UNREACHABLE() and analogous macro calls is deliberate and safe."
+ -config=MC3A2.R2.1,reports+={deliberate, "any_area(any_loc(any_exp(macro(name(ASSERT_UNREACHABLE||PARSE_ERR_RET||PARSE_ERR||FAIL_MSR||FAIL_CPUID)))))"}
++-config=MC3A2.R2.1,reports+={deliberate, "any_area(any_loc(any_exp(macro(^BUILD_ERROR(|_IF(|_NOT))$))))"}
+ -doc_end
  
-     /* Offset to add to get an 8kB contiguous region if GIC is aliased */
-     uint32_t aliased_offset;
--} vgic_v2_hw;
-+    bool enabled;
-+} vgic_v2_hw __ro_after_init;
+ -doc_begin="The asm-offset files are not linked deliberately, since they are used to generate definitions for asm modules."
+@@ -667,6 +668,7 @@ deliberate."
+ to the # or ## operators within the following macros are deliberate, to provide
+ useful diagnostic messages to the user."
+ -config=MC3A2.R20.12,macros+={deliberate, "name(ASSERT||BUILD_BUG_ON||BUILD_BUG_ON_ZERO||RUNTIME_CHECK)"}
++-config=MC3A2.R20.12,macros+={deliberate, "^BUILD_ERROR(|_IF(|_NOT))$"}
+ -doc_end
  
--void vgic_v2_setup_hw(paddr_t dbase, paddr_t cbase, paddr_t csize,
--                      paddr_t vbase, uint32_t aliased_offset)
-+void __init vgic_v2_setup_hw(paddr_t dbase, paddr_t cbase, paddr_t csize,
-+                             paddr_t vbase, uint32_t aliased_offset)
- {
-     vgic_v2_hw.enabled = true;
-     vgic_v2_hw.dbase = dbase;
-diff --git a/xen/arch/arm/vgic-v3.c b/xen/arch/arm/vgic-v3.c
-index c01cc596d593..16e9d0cbad03 100644
---- a/xen/arch/arm/vgic-v3.c
-+++ b/xen/arch/arm/vgic-v3.c
-@@ -44,19 +44,18 @@
- #define VGICD_CTLR_DEFAULT  (GICD_CTLR_ARE_NS)
+ -doc_begin="The helper macro GENERATE_CASE may use a macro parameter for ordinary
+--- a/xen/include/xen/macros.h
++++ b/xen/include/xen/macros.h
+@@ -64,6 +64,21 @@
+  */
+ #define BUILD_ERROR(msg) asm ( ".error \"" msg "\"" )
  
- static struct {
--    bool enabled;
-     /* Distributor interface address */
-     paddr_t dbase;
-     /* Re-distributor regions */
-     unsigned int nr_rdist_regions;
-     const struct rdist_region *regions;
-     unsigned int intid_bits;  /* Number of interrupt ID bits */
--} vgic_v3_hw;
-+    bool enabled;
-+} vgic_v3_hw __ro_after_init;
- 
--void vgic_v3_setup_hw(paddr_t dbase,
--                      unsigned int nr_rdist_regions,
--                      const struct rdist_region *regions,
--                      unsigned int intid_bits)
-+void __init vgic_v3_setup_hw(paddr_t dbase, unsigned int nr_rdist_regions,
-+                             const struct rdist_region *regions,
-+                             unsigned int intid_bits)
- {
-     vgic_v3_hw.enabled = true;
-     vgic_v3_hw.dbase = dbase;
-diff --git a/xen/arch/arm/vgic/vgic-v2.c b/xen/arch/arm/vgic/vgic-v2.c
-index 6a558089c522..06fa36545355 100644
---- a/xen/arch/arm/vgic/vgic-v2.c
-+++ b/xen/arch/arm/vgic/vgic-v2.c
-@@ -24,7 +24,6 @@
- #include "vgic.h"
- 
- static struct {
--    bool enabled;
-     paddr_t dbase;          /* Distributor interface address */
-     paddr_t cbase;          /* CPU interface address & size */
-     paddr_t csize;
-@@ -32,10 +31,11 @@ static struct {
- 
-     /* Offset to add to get an 8kB contiguous region if GIC is aliased */
-     uint32_t aliased_offset;
--} gic_v2_hw_data;
-+    bool enabled;
-+} gic_v2_hw_data __ro_after_init;
- 
--void vgic_v2_setup_hw(paddr_t dbase, paddr_t cbase, paddr_t csize,
--                      paddr_t vbase, uint32_t aliased_offset)
-+void __init vgic_v2_setup_hw(paddr_t dbase, paddr_t cbase, paddr_t csize,
-+                             paddr_t vbase, uint32_t aliased_offset)
- {
-     gic_v2_hw_data.enabled = true;
-     gic_v2_hw_data.dbase = dbase;
-diff --git a/xen/arch/arm/vgic/vgic.c b/xen/arch/arm/vgic/vgic.c
-index b2c0e1873ace..ba029b8a3bbf 100644
---- a/xen/arch/arm/vgic/vgic.c
-+++ b/xen/arch/arm/vgic/vgic.c
-@@ -964,17 +964,6 @@ unsigned int vgic_max_vcpus(unsigned int domctl_vgic_version)
-     }
- }
- 
--#ifdef CONFIG_GICV3
--/* Dummy implementation to allow building without actual vGICv3 support. */
--void vgic_v3_setup_hw(paddr_t dbase,
--                      unsigned int nr_rdist_regions,
--                      const struct rdist_region *regions,
--                      unsigned int intid_bits)
--{
--    panic("New VGIC implementation does not yet support GICv3\n");
--}
--#endif
--
- /*
-  * Local variables:
-  * mode: C
--- 
-2.43.0
++/*
++ * Like above, but conditional upon @cfg (not) being enabled.  @cfg must be
++ * suitable to pass to IS_ENABLED().
++ */
++#define BUILD_ERROR_IF(cfg)                               \
++    (IS_ENABLED(cfg)                                      \
++     ? ({ BUILD_ERROR( #cfg " unexpectedly enabled"); })  \
++     : (void)0)
++
++#define BUILD_ERROR_IF_NOT(cfg)                           \
++    (!IS_ENABLED(cfg)                                     \
++     ? ({ BUILD_ERROR( #cfg " unexpectedly disabled"); }) \
++     : (void)0)
++
++
+ /* Hide a value from the optimiser. */
+ #define HIDE(x)                                 \
+     ({                                          \
 
 
