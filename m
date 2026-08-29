@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72E9CC61DBE
-	for <xen-devel@archiver.kernel.org>; Sat, 29 Aug 2026 13:22:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1402826.1637637 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66A4DC61DBE
+	for <xen-devel@archiver.kernel.org>; Sat, 29 Aug 2026 14:05:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1402852.1637645 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x0J0c-00072r-Ru; Sat, 29 Aug 2026 13:22:10 +0000
+	id 1x0Jfp-0006Yx-RP; Sat, 29 Aug 2026 14:04:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1402826.1637637; Sat, 29 Aug 2026 13:22:10 +0000
+Received: by outflank-mailman (output) from mailman id 1402852.1637645; Sat, 29 Aug 2026 14:04:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x0J0c-00072j-Mv; Sat, 29 Aug 2026 13:22:10 +0000
-Received: by outflank-mailman (input) for mailman id 1402826;
- Sat, 29 Aug 2026 13:22:09 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x0Jfp-0006Yq-OM; Sat, 29 Aug 2026 14:04:45 +0000
+Received: by outflank-mailman (input) for mailman id 1402852;
+ Sat, 29 Aug 2026 14:04:44 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <nicola.vetrini@bugseng.com>) id 1x0J0b-00072d-EN
- for xen-devel@lists.xenproject.org; Sat, 29 Aug 2026 13:22:09 +0000
+ (envelope-from <nicola.vetrini@bugseng.com>) id 1x0Jfo-0006Yk-6c
+ for xen-devel@lists.xenproject.org; Sat, 29 Aug 2026 14:04:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x0J0a-00HGZI-Rf
- for xen-devel@lists.xenproject.org; Sat, 29 Aug 2026 15:22:08 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1x0Jfn-00HHO4-Ey
+ for xen-devel@lists.xenproject.org; Sat, 29 Aug 2026 16:04:43 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <nicola.vetrini@bugseng.com>)
- id 6a92dca6-2eae-0a2a0a5409dd-0a2a4501d5fc-44
- for <xen-devel@lists.xenproject.org>; Sat, 29 Aug 2026 15:22:08 +0200
+ id 6a92e6f1-2eae-0a2a0a5409dd-0a2a4508909c-2
+ for <xen-devel@lists.xenproject.org>; Sat, 29 Aug 2026 16:04:43 +0200
 Received: from [162.55.131.47] (helo=support.bugseng.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <nicola.vetrini@bugseng.com>)
- id 6a92dd00-5984-0a2a45010019-a237832fba20-3
- for <xen-devel@lists.xenproject.org>; Sat, 29 Aug 2026 15:22:08 +0200
+ id 6a92e6fb-f659-0a2a45080019-a237832fc068-3
+ for <xen-devel@lists.xenproject.org>; Sat, 29 Aug 2026 16:04:43 +0200
 Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
  (Authenticated sender: nicola)
- by support.bugseng.com (Postfix) with ESMTPA id 1EE1F4EE0184;
- Sat, 29 Aug 2026 15:21:57 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPA id C71EE4EE0060;
+ Sat, 29 Aug 2026 16:04:42 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,184 +51,134 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; none
 Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1788009727;
-	b=TlD1X+b569XEEKufkEihilRCtQtJ6CtiFkxM0qovcXyjfJlwHALBXgPgYJObtHBVpYDm
-	 ZHkPct9l8dHWubpkuog75njZvaorl406aRXPIDR1tQLI85B6XqhnXfZ93DoUf8mo2HRcn
-	 hV0YIlDuImAkMKYojUS/6PP2czFnLASc/uwSPCLeQZauE67aq8an31AV6r+tEKVBlbarw
-	 vuDJsE1j6bxSYFwdwsem5ze6BVKR1YZZnlnQHUq6XBRkBrlcPeVdNX4c7xTb9GEbyy+DZ
-	 oDOkzp1coq2YdP8F+RT+GZjTuX3t84G6gVLMm+KUM8ZvedoMDDxLAwhzNO8Sl1g/X7vC+
-	 86nno0BotaUDSAkJRte6qrVdXTttEHYrEVIt8+DdWPMSY/pFWjSKDErJrprDERhyaOGg1
-	 Y0RCDwfFdRypHBLkxdJcnVXZnVa9O2Gi60VjCgCmEP1tghO4YitSzLbBIi/h8H6zuUyvd
-	 u11XEdSgaWNPES1CB9uxR43VMNoRiLuZmoLm8wQzLBQq4/cmtgaJsH4mBY/MvIi+U6omK
-	 BYcmieXnALX+C8N6IqEk9wypLyG0bhIQ5yB0JmYvtalEVBYxwzqWHj2e5PaWt3f1fma6u
-	 Czq80cTax9lhM8Hmt4bJqt8seVyv4fXzMUHUPZ9Hk0HAleXk3INxY1XYQjh445E=
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1788012283;
+	b=McTwEUebFObeKEVigMbKpOIXwZRDo29CsdbGhfQrGTyGxdalmyUXpADoQPg5Dj6bTab9
+	 9v19MeivsBsq343sLyLIjk/kPxtzpEVxdotFmeQmtzdrz9p/6ev9iLTEgMt5fQpEf1M59
+	 iQihR777jb2A534M6T8sWmHBYDpShNOC08LhrPsnoXK6m9aSsrh/xMPdzaXGJ2ztxDO5Y
+	 6KtgzEMsvav8ZMtkh6fAdsIGaFuvT+9XlpIsGBFkqCB4tKZv0qdEkIJKeVHC1jxQECfzg
+	 WghW9yDUxnTa7dVy/H4BkdQgMT+Yk7Y0RNSNnsMjSg67EKABRuyKioxJxJIZHSogo/QsE
+	 6uo1doGUJu8d+5cEKuODUahA80UIR5wpwt/tIej5L8V52K4fYfK+lB4KDUA+TDxWAdvRv
+	 7WSNiUeDCGzdVTAYlQlifwsjXWMNy864y4q0RC7vlyNfIWxbXoqM2Zvlrz1wjfANUHsOx
+	 U8NvJLa/iEQGiC2zOwJMBqrNKyD0k8h5GJPz55uX9BNi51hIxGrAn866UZCuA6/FrTo2Q
+	 +iDc1F5tBD8a3Bo7tKzm+nMkigjOlfyx1lBdipsdfnZwTuPyR0X2+etPI4/Nt1TnM6kx/
+	 vM5s6z+p7dIp75IW16IZUHIxpsH3ZS8qn4/WsX3DUOacuq6aC3IO+q8rO0L76xg=
 ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788009727;
+	c=relaxed/relaxed; t=1788012283;
 	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
 	 Message-ID:X-Sender:Organization:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=/pEy/Zm4j9Av9iFeAsk+kZ4vGnZ9eb5eKV48lVGJeZY=;
-	b=uZZ8mX1jXHy1I2uwAag5KZicQa/LCxjzqtCiZzfsextJacIcrcfpW5jPe1C0Udk/1Zr4
-	 0ACGpdJVpyPLaIYoGvTu921BcRnsbQyPrgSOqyjunwC30q74Vcs9UErIxAzX9sCsCc5Af
-	 l8Qu13MBn4G3wy7azUa42/VRfythrc9E+/5IgXqIrHkv9f09yV5kKnxm9jJHZvJEl+dax
-	 OQRDxDUTKxTw8HOYyiQc7NZb7QFInGom4sdHrndm9TgWrLqk1fdd52VajZcnK6b7+2wwp
-	 GZ3ZY1/vvRPViONETAnxgJ9tAD82D8Z2Fbk6SfW4sMeltlktRDF7ECkCiQIoOVSURvlkU
-	 Qg1Mk9aNQer7sZMox8Xf0L8oLXMPJfszbARY2hsp2Fy+Xd6uDhZkBKevB/xGic+r3z0Xj
-	 g0TQXtKXQWcC7Hlue/DycLNEasCIiM1r4ERfqtZhnsI4rkIsb71f1oCXs2CD5yq1z5IRC
-	 2pEytHJ+642qIosrh+srz5aV4yu08NqTh8ZbVoBaKmX8wohpjQlQjCyHJgtBgH/PaL2UK
-	 sqSxb5ACYQwBydhd/gF9TkG2WfpfSFZ7glsNVD4ecJx5WCgeZ5FLRWhzc5Sm3bKI3Q7tV
-	 s0YgsM1BE37EVXOCHWVojhU33ptyi18a2MUGCt8yXN6Jl9HjkEhZNH/ii0gWXeE=
+	bh=YPq55LcariTfRIgkToCnifE9romNqBh34Zbm15cX+N8=;
+	b=Bgtu9QbAuanLWeUc+YiMedoRGpq0TLTfiisknIbjDXOIwcnU/XAqc2EP6E2mhXEzdjZu
+	 WbFrzlFgxjJiXA+g3H8l3H/VsOZBZyeWZV1fPqLtnupWJD0I4D2urz7qNbD9XP65NcdA0
+	 4uPA6TzMwSJi26woKcJ4wqqKBg7n6LilmsoyPeS6dH2DSenjqwbkurmEg3yirVEbW04n9
+	 RuLdQt8JooEvBvTvmm0xsYHr2h8nh+GNRdmzjGGMLb1v95FqEhndPFWz//XRZfODi5YdT
+	 rrTF9FZIa6MJr6SE1xpjucmfzmoZ9XrbgIV2AZAsBM/BJ9xPhawF7166HfTa3BAYOXOJS
+	 xiBWwmhO5xHkuSMIf+2LCI2CNsAsEwMTwYyxg4jleJXvWJR5gDXWRRmDQNBYeQY8U8KAb
+	 RbqVhsFCnrfBFNIaiFXW0Ywo0OhYNGf380QK3BLnnYEwUAG3k155n3XFH/X2PGMPJCn+u
+	 XUUVEjfLeL3CXUXmJabuq+KlF5QEBscNXGDCHVwNV95jFxOkH5jEaTzKUKuiWLGbFCWO2
+	 cBitMp22B/SCHMQAdnOUm3Jc/7fWoZ/09V0t3iyUxNH8IKNJf0RO5V0jV3fxfP9Qlan4Q
+	 LKqX1CAOK7dX4M9Dt/vlp52MPPiGgdtv7QuwVgQeEZTFbwkAJr9ux9CTK0izIo0=
 ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
 MIME-Version: 1.0
-Date: Sat, 29 Aug 2026 15:21:57 +0200
+Date: Sat, 29 Aug 2026 16:04:42 +0200
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: Jan Beulich <jbeulich@suse.com>
 Cc: xen-devel@lists.xenproject.org, Andrew Cooper
- <andrew.cooper3@citrix.com>, Teddy Astie <teddy.astie@vates.tech>,
+ <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, Anthony PERARD
+ <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Subject: Re: [PATCH 04/12] x86: add noreturn in a few more places
-In-Reply-To: <d0f991de-db67-4f49-aef0-25c590b3889e@suse.com>
+Subject: Re: [PATCH 09/12] Eclair: deviate BUILD_ERROR() wrt rule 2.1 and
+ introduce variants
+In-Reply-To: <06c5efc0-e130-417f-8333-b8eacd1c6d77@suse.com>
 References: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com>
- <d0f991de-db67-4f49-aef0-25c590b3889e@suse.com>
-Message-ID: <fceca3b7cf0ccc067f89212a30aa3a6e@bugseng.com>
+ <06c5efc0-e130-417f-8333-b8eacd1c6d77@suse.com>
+Message-ID: <99c8a63920c37dafdfeb2a2a4333df72@bugseng.com>
 X-Sender: nicola.vetrini@bugseng.com
 Organization: BUGSENG s.r.l.
 Content-Type: text/plain; charset=US-ASCII;
  format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1788009728-BFA6E757-BEF4F805/0/0
+X-purgate-ID: tlsNG-c1860d/1788012283-D4B7187B-86E94913/0/0
 X-purgate-type: clean
-X-purgate-size: 5143
+X-purgate-size: 3112
 
-On 2026-08-28 09:01, Jan Beulich wrote:
-> start_secondary(), do_double_fault(), play_dead(), and tboot_s3_error()
-> never return, so would better be annotated anyway. The 
-> do_double_fault()
-> change needs accompanying by adjustments to entry_from_{pv,xen}(), as
-> Eclair then deems the "return" there as unreachable.
+On 2026-08-28 09:04, Jan Beulich wrote:
+> BUILD_ERROR() is even stronger a guard than assertions in general, and
+> ASSERT_UNREACHABLE() (or BUG()) in particular. Deviate it just like 
+> those
+> to allow use for marking unreachable portions of code.
 > 
-> context_switch() and continue_running() are odd: We can't
-> (unconditionally) add noreturn to their declarations, as Arm's variants 
-> do
-> return. Put the attribute on x86'es definitions instead (the use of
-> unreachable() in reset_stack_and_call_ind() allows the compiler to 
-> figure
-> that out itself, but Eclair wants the annotation in addition).
+> In some cases code being unreachable is dependent upon configuration.
+> Introduce two variants, as constructs like
+> 
+>     if ( IS_ENABLED(CONFIG_...) )
+>         BUILD_ERROR("...");
+> 
+> results in the if() still being reported as unreachable. Sadly these 
+> two
+> new macros introduce a new 20.12 violation each, which hence also needs
+> deviating.
 > 
 > Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
 Reviewed-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 
-> ---
-> entry_from_pv() wants the annotation only when PV=n, yet once added gcc
-> then warns about "return" being used in a "noreturn" function. Is there
-> any other approach to address this besides adding #ifdef inside the
-> function (i.e. replacing the !IS_ENABLED(CONFIG_PV) check that's 
-> there)?
+Presumably you did not fold at least one of the following patches where 
+the construct is actually used into this one to separate concerns?
+
 > 
-
-Besides GCC's warning, this would violate MISRA C's Rule 17.9 ("A 
-function declared with a _Noreturn function specifier shall not return 
-to its caller")
-which is not (yet) adopted by Xen, as it comes with MISRA C:2012 
-Amendment 3, whereas as you know Xen is based on MISRA C:2012 Amendment 
-2 rules.
-Besides this, perhaps an alternative could be something like this 
-(untested):
-
-#define __noreturn_0
-#define __noreturn_1 __attribute__((noreturn))
-
-#define __noreturn_select(x) __noreturn_select_(x)
-#define __noreturn_select_(x) __noreturn_ ## x
-
-#define noreturn(cond) __noreturn_select(cond)
-
-assuming use sites such as noreturn(IS_ENABLED(CONFIG_FOO))
-
-> --- a/xen/arch/x86/domain.c
-> +++ b/xen/arch/x86/domain.c
-> @@ -2163,7 +2163,7 @@ static void __context_switch(void)
->      per_cpu(curr_vcpu, cpu) = n;
->  }
+> --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
+> +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+> @@ -19,6 +19,7 @@ Constant expressions and unreachable bra
 > 
-> -void context_switch(struct vcpu *prev, struct vcpu *next)
-> +void noreturn context_switch(struct vcpu *prev, struct vcpu *next)
->  {
->      unsigned int cpu = smp_processor_id();
->      struct cpu_info *info = get_cpu_info();
-> @@ -2240,7 +2240,7 @@ void context_switch(struct vcpu *prev, s
->      reset_stack_and_call_ind(nextd->arch.ctxt_switch->tail);
->  }
+>  -doc_begin="Unreachability inside an ASSERT_UNREACHABLE() and 
+> analogous macro calls is deliberate and safe."
+>  -config=MC3A2.R2.1,reports+={deliberate, 
+> "any_area(any_loc(any_exp(macro(name(ASSERT_UNREACHABLE||PARSE_ERR_RET||PARSE_ERR||FAIL_MSR||FAIL_CPUID)))))"}
+> +-config=MC3A2.R2.1,reports+={deliberate, 
+> "any_area(any_loc(any_exp(macro(^BUILD_ERROR(|_IF(|_NOT))$))))"}
+>  -doc_end
 > 
-> -void continue_running(struct vcpu *same)
-> +void noreturn continue_running(struct vcpu *same)
->  {
->      reset_stack_and_call_ind(same->domain->arch.ctxt_switch->tail);
->  }
-> --- a/xen/arch/x86/include/asm/cpuidle.h
-> +++ b/xen/arch/x86/include/asm/cpuidle.h
-> @@ -26,7 +26,7 @@ static inline int mwait_idle_init(struct
->  int cpuidle_init_cpu(unsigned int cpu);
->  void cf_check default_dead_idle(void);
->  void cf_check acpi_dead_idle(void);
-> -void play_dead(void);
-> +void noreturn play_dead(void);
->  void trace_exit_reason(u32 *irq_traced);
->  void update_idle_stats(struct acpi_processor_power *power,
->                         struct acpi_processor_cx *cx,
-> --- a/xen/arch/x86/include/asm/tboot.h
-> +++ b/xen/arch/x86/include/asm/tboot.h
-> @@ -126,7 +126,7 @@ int tboot_in_measured_env(void);
->  int tboot_protect_mem_regions(void);
->  int cf_check tboot_parse_dmar_table(acpi_table_handler dmar_handler);
->  int tboot_s3_resume(void);
-> -void tboot_s3_error(int error);
-> +void noreturn tboot_s3_error(int error);
->  int tboot_wake_ap(int apicid, unsigned long sipi_vec);
->  #else
->  static inline void tboot_probe(void) {}
-> --- a/xen/arch/x86/smpboot.c
-> +++ b/xen/arch/x86/smpboot.c
-> @@ -326,7 +326,7 @@ static void set_cpu_sibling_map(unsigned
->      }
->  }
+>  -doc_begin="The asm-offset files are not linked deliberately, since 
+> they are used to generate definitions for asm modules."
+> @@ -667,6 +668,7 @@ deliberate."
+>  to the # or ## operators within the following macros are deliberate, 
+> to provide
+>  useful diagnostic messages to the user."
+>  -config=MC3A2.R20.12,macros+={deliberate, 
+> "name(ASSERT||BUILD_BUG_ON||BUILD_BUG_ON_ZERO||RUNTIME_CHECK)"}
+> +-config=MC3A2.R20.12,macros+={deliberate, 
+> "^BUILD_ERROR(|_IF(|_NOT))$"}
+>  -doc_end
 > 
-> -void asmlinkage start_secondary(void)
-> +void asmlinkage noreturn start_secondary(void)
->  {
->      struct cpu_info *info = get_cpu_info();
->      unsigned int cpu = smp_processor_id();
-> --- a/xen/arch/x86/traps.c
-> +++ b/xen/arch/x86/traps.c
-> @@ -1080,7 +1080,7 @@ const char *vector_name(unsigned int vec
->      return (vec < ARRAY_SIZE(names) && names[vec][0]) ? names[vec] : 
-> "???";
->  }
+>  -doc_begin="The helper macro GENERATE_CASE may use a macro parameter 
+> for ordinary
+> --- a/xen/include/xen/macros.h
+> +++ b/xen/include/xen/macros.h
+> @@ -64,6 +64,21 @@
+>   */
+>  #define BUILD_ERROR(msg) asm ( ".error \"" msg "\"" )
 > 
-> -void asmlinkage do_double_fault(struct cpu_user_regs *regs)
-> +void asmlinkage noreturn do_double_fault(struct cpu_user_regs *regs)
->  {
->      unsigned int cpu;
->      struct extra_state state;
-> @@ -2304,7 +2304,7 @@ void asmlinkage entry_from_pv(struct cpu
->      case X86_ET_HW_EXC:
->          switch ( vec )
->          {
-> -        case X86_EXC_DF: return do_double_fault(regs);
-> +        case X86_EXC_DF: do_double_fault(regs); /* noreturn */
->          case X86_EXC_MC: return do_machine_check(regs);
->          }
->          break;
-> @@ -2615,7 +2615,7 @@ void asmlinkage entry_from_xen(struct cp
->      case X86_ET_HW_EXC:
->          switch ( regs->fred_ss.vector )
->          {
-> -        case X86_EXC_DF: return do_double_fault(regs);
-> +        case X86_EXC_DF: do_double_fault(regs); /* noreturn */
->          case X86_EXC_MC: return do_machine_check(regs);
->          }
->          break;
+> +/*
+> + * Like above, but conditional upon @cfg (not) being enabled.  @cfg 
+> must be
+> + * suitable to pass to IS_ENABLED().
+> + */
+> +#define BUILD_ERROR_IF(cfg)                               \
+> +    (IS_ENABLED(cfg)                                      \
+> +     ? ({ BUILD_ERROR( #cfg " unexpectedly enabled"); })  \
+> +     : (void)0)
+> +
+> +#define BUILD_ERROR_IF_NOT(cfg)                           \
+> +    (!IS_ENABLED(cfg)                                     \
+> +     ? ({ BUILD_ERROR( #cfg " unexpectedly disabled"); }) \
+> +     : (void)0)
+> +
+> +
+>  /* Hide a value from the optimiser. */
+>  #define HIDE(x)                                 \
+>      ({                                          \
 
 -- 
 Nicola Vetrini, B.Sc.
