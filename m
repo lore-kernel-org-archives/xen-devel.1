@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF5EEC61DB9
-	for <xen-devel@archiver.kernel.org>; Sat, 29 Aug 2026 02:13:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1402570.1637592 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CD2EC61DBE
+	for <xen-devel@archiver.kernel.org>; Sat, 29 Aug 2026 05:06:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1402609.1637611 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x08ZH-00031i-Qa; Sat, 29 Aug 2026 02:13:15 +0000
+	id 1x0BGx-0006Yz-SS; Sat, 29 Aug 2026 05:06:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1402570.1637592; Sat, 29 Aug 2026 02:13:15 +0000
+Received: by outflank-mailman (output) from mailman id 1402609.1637611; Sat, 29 Aug 2026 05:06:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x08ZH-00031S-LP; Sat, 29 Aug 2026 02:13:15 +0000
-Received: by outflank-mailman (input) for mailman id 1402570;
- Sat, 29 Aug 2026 02:13:14 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x0BGx-0006Ys-Oe; Sat, 29 Aug 2026 05:06:31 +0000
+Received: by outflank-mailman (input) for mailman id 1402609;
+ Sat, 29 Aug 2026 05:06:30 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Jan.SetjeEilers@oracle.com>) id 1x08ZG-00031M-9m
- for xen-devel@lists.xenproject.org; Sat, 29 Aug 2026 02:13:14 +0000
+ (envelope-from <Jan.SetjeEilers@oracle.com>) id 1x0BGw-0006Ym-CI
+ for xen-devel@lists.xenproject.org; Sat, 29 Aug 2026 05:06:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x08ZF-00G622-53
- for xen-devel@lists.xenproject.org; Sat, 29 Aug 2026 04:13:13 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1x0BGv-003pTI-Pb
+ for xen-devel@lists.xenproject.org; Sat, 29 Aug 2026 07:06:29 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Jan.SetjeEilers@oracle.com>)
- id 6a924007-e002-0a2a0a5209dd-0a2a4503b782-20
- for <xen-devel@lists.xenproject.org>; Sat, 29 Aug 2026 04:13:13 +0200
+ id 6a92688f-8faa-0a2a0a5109dd-0a2a450a82a0-40
+ for <xen-devel@lists.xenproject.org>; Sat, 29 Aug 2026 07:06:29 +0200
 Received: from [205.220.165.32] (helo=mx0a-00069f02.pphosted.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Jan.SetjeEilers@oracle.com>)
- id 6a924037-fae8-0a2a45030019-cddca5208f62-3
- for <xen-devel@lists.xenproject.org>; Sat, 29 Aug 2026 04:13:12 +0200
+ id 6a9268d3-f2d2-0a2a450a0019-cddca520b722-3
+ for <xen-devel@lists.xenproject.org>; Sat, 29 Aug 2026 07:06:29 +0200
 Received: from pps.filterd (m0333521.ppops.net [127.0.0.1])
  by mx0b-00069f02.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67T25XFQ382123; Sat, 29 Aug 2026 02:13:02 GMT
-Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com
- (iadpaimrmta02.appoci.oracle.com [147.154.18.20])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4gbpbar02n-1
+ 67T4neTt645119; Sat, 29 Aug 2026 05:06:16 GMT
+Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta02.appoci.oracle.com [147.154.114.232])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4gbpbar28g-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sat, 29 Aug 2026 02:13:01 +0000 (GMT)
+ Sat, 29 Aug 2026 05:06:16 +0000 (GMT)
 Received: from pps.filterd
- (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
- by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.7/8.18.1.7)
- with ESMTP id 67T22JAZ028134; Sat, 29 Aug 2026 02:13:00 GMT
+ (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.7/8.18.1.7)
+ with ESMTP id 67T540CG035601; Sat, 29 Aug 2026 05:06:15 GMT
 Received: from pps.reinject (localhost [127.0.0.1])
- by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id
- 4gbnvmgggs-1
+ by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
+ 4gbnvbaw2p-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sat, 29 Aug 2026 02:13:00 +0000 (GMT)
-Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com
- (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
- by pps.reinject (8.18.1.12/8.18.1.12) with ESMTP id 67T2D0Ev013633;
- Sat, 29 Aug 2026 02:13:00 GMT
+ Sat, 29 Aug 2026 05:06:15 +0000 (GMT)
+Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by pps.reinject (8.18.1.12/8.18.1.12) with ESMTP id 67T56Fs9001517;
+ Sat, 29 Aug 2026 05:06:15 GMT
 Received: from setje-aarch64-ol9-builds.osdevelopmeniad.oraclevcn.com
  (setje-aarch64-ol9-builds.allregionaliads.osdevelopmeniad.oraclevcn.com
  [100.100.248.24])
- by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id
- 4gbnvmgggn-1; Sat, 29 Aug 2026 02:12:59 +0000 (GMT)
+ by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
+ 4gbnvbaw2h-1; Sat, 29 Aug 2026 05:06:15 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -74,102 +74,112 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=corp-2025-04-25 header.d=oracle.com header.i="@oracle.com" header.h="Cc:Content-Transfer-Encoding:Date:From:Message-ID:MIME-Version:Subject:To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
 	:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=corp-2025-04-25; bh=qF+3gXGiekZSYkCx8LstiKWoFra3C
-	VghXhf5TxrLnQ8=; b=HYTRbUtMPT4MQgTn8a3xhWfNUtOMMc0h9pZlMSwx3ezna
-	OU5OsTTXowck1jJKKdNdJPhDLe/e9G3MdZ13fPL3gJdR93dQe20zxgCr7NiWgnk5
-	sPdPdLCzJVMEssnKPIwdkxdSvbqMsiQ+dPauuGJkTUCLpxOMV5fOW3FmOuA9MD9/
-	dt2uGdbhWk4K5Jd5VyMkMbYutHa6bwfuSLGXzmljdP7AH7miA2sDr3+Mvhuhix5e
-	IAlG4k3m2AeWhUOqF++RSYYxJndPCf1HeGIpkhhmqiQVw7kyap3bKc2/irSgIKCF
-	Wt5+4kepwZiYDP1Yu/B7fH1KJV/SF3e4kz/yavLqA==
+	:subject:to; s=corp-2025-04-25; bh=NKXDRSaJyv0PFAxOBaUHOSBkU6qh2
+	+RSMwCCKcwoUUE=; b=gMiqcuuRaHDU8Gk6kx3Ef2mNGwQK2/r7+3lvRdVPvz4z4
+	2ijDR5KoJC/3Blsa6YmQxTm0sU86kw4DtZOkP8kMahTQh8+ef3lVcLQXaK05hUrx
+	fGk4T1xzMgeAKvpKiLQvl6WKvmx3slZnJSHkgPQA12XhAG7Ze3efStokSCoIq1Jz
+	d3vCA+MwRoHIbeVaw18b4mdxfniIFOrsRm72p6m4LveQYMeEF5Qy3gxo/BZuxpvK
+	twAGkLQfoMWr56x9QJNp06Nfshvzm1jy911oa1Zyc+4yYMv+d8SCWu/6JLSkHnfr
+	+JUkZM5GruNnYfwx+I1isLDvUlwxTAqzGw7hg7yUQ==
 From: Jan Setje-Eilers <Jan.SetjeEilers@oracle.com>
-To: xen-devel@lists.xenproject.org
+To: Jan Setje-Eilers <Jan.SetjeEilers@oracle.com>,
+        xen-devel@lists.xenproject.org
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-        Stefano Stabellini <sstabellini@kernel.org>,
+        Anthony PERARD <anthony.perard@vates.tech>,
+        Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
         Julien Grall <julien@xen.org>,
+        =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+        Stefano Stabellini <sstabellini@kernel.org>,
         Bertrand Marquis <bertrand.marquis@arm.com>,
-        Michal Orzel <michal.orzel@amd.com>,
-        Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-        Jan Beulich <jbeulich@suse.com>,
-        Joao Martins <joao.m.martins@oracle.com>,
-        Jan Setje-Eilers <Jan.SetjeEilers@oracle.com>
-Subject: [RFC PATCH 0/1] xen/arm: smccc: preserve arguments before register setup
-Date: Sat, 29 Aug 2026 02:12:55 +0000
-Message-ID: <20260829021257.3310112-1-Jan.SetjeEilers@oracle.com>
+        Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [RFC PATCH 0/1] static-memory: allow skipping the cache flush
+Date: Sat, 29 Aug 2026 05:06:10 +0000
+Message-ID: <20260829050611.3353566-1-Jan.SetjeEilers@oracle.com>
 X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-29_01,2026-08-27_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
- bulkscore=0 mlxlogscore=999 lowpriorityscore=0 suspectscore=0 malwarescore=0
- spamscore=0 phishscore=0 mlxscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.19.0-2606160000 definitions=main-2608290015
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI5MDAxNyBTYWx0ZWRfXwkESnBJuJQly
- ZdUm4zPcviLLN5D5pM/CdFZXmKn8Q2YbCaPyReOwhJ3LuH5XXpGCoNrRZ5V153M+sJMWpHMcGwd
- 6JE6mKWdU0UmMzhh4XUt/d4Ss01jir8V7lYKf8pbZs9msUDYAQH6
-X-Proofpoint-ORIG-GUID: UR_JyuotfNkodCLBPwsVSg6P3WVQa3j6
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI5MDAxNyBTYWx0ZWRfX29h5qklK9cXF
- 7JrF1H7t2r07J7PNCjxvTpS6IDF40xSRcBiQdqvqCB7BZohLwDAQb9tY7TJa9+v9XGGDFeBfs4f
- 2PwH/B+/DQRT3WmTRETDK8EYEb3k5LeIXyvLW4llKTaddTeD2667pbODXnax/ROqaFN01SVzE8P
- rGsZR0NEz86NDO9wj64Q6XL1foPFoUok/Hqig9GIlrUXgLAv2PLgpF1DJKmPBtMnHi6HvBdSSoa
- WD/50NND+WXtjA2jUqj4uLT9YAV77nSd8HDkd4qrrgwJ8c4BGE+xl0kmifRlw5dm7gEDohtBMwF
- gzGl3XRXzyCqXqUtLAe+Gc86+9WAQZUPmXqaNOksMDWdbcdauOd4sMCNWdP07B1ZKjkfC1TCWbG
- 9leGCDAKzqPKPOZp1wv/FfrMgfUvFb9Lcw8jgMhRnoBkfaxUTXiGA+koNHX8x+JpwKlzSeVaTjs
- OKuemaVPW9C7O5sG+0B5XHAEMYgVoSHkYv754p1Y=
-X-Authority-Analysis: v=2.4 cv=DMi/JSNb c=1 sm=1 tr=0 ts=6a92402d b=1 cx=c_pps
- a=e1sVV491RgrpLwSTMOnk8w==:117 a=e1sVV491RgrpLwSTMOnk8w==:17
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999
+ mlxscore=0 lowpriorityscore=0 suspectscore=0 adultscore=0 bulkscore=0
+ malwarescore=0 spamscore=0 phishscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.19.0-2606160000 definitions=main-2608290041
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI5MDA0MSBTYWx0ZWRfX6cuRJJuzM/DA
+ vXj5+3tWskOizMvKbhKxCt1Q6nnukXFtPQLxUjHznYSYd197vtpIvDp/Nd7uBhU2k253fbnr7//
+ Cm489OTgUxEvsVAIW3gJ0Vm0BNYd3JXoWj/BavbHZ692svmVYQNY
+X-Proofpoint-ORIG-GUID: IAyx5194Bpxqyo55PCMi5aJkJzMhsBw-
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI5MDA0MSBTYWx0ZWRfX8zTWQmgIXn1Q
+ PxRXav8onDUPMq8W15Hg5LS0GB5N7VliC1E0UTTBU+P4N6X0dN73/dHWEAGXNLjjV3bHxcIwwUc
+ Qd3hTzMYgxbul1NLq85CyhrlGmKnR/p6KDU+gyIN4sj34npYNwbTst8YtuBRSYfceg20HeGepWr
+ VppMGbxGxzIVK/GZ+apTeZkTSUJxYbdkY51VJj6iqSOo6FvwJb4cLZS2fvpUbO8Dc1MTqTwSSl6
+ Yepp+VlsSZtSswtMKMn4fQNqPwk79rnvppaJH0Z2QqKQ0jBumZs6P5u+BcKeT71UR7xttaV7OqH
+ wWB5+uvqwy/zsOlP9f+ET8k3Q5sfoOg3mh0hUseliAemzPJCYDud0JfC5g30d/ofHU+IJW+XDEY
+ 8fvmeLdUhrclxNhJe+8+v3N1IHb7q0gMjSeeMEXbwgqKpJ9U25gsR1ndBNgbn5Vk7sBF3hagjJa
+ rCU3TBW8ebbkTpfW+5g==
+X-Authority-Analysis: v=2.4 cv=DMi/JSNb c=1 sm=1 tr=0 ts=6a9268c8 cx=c_pps
+ a=OOZaFjgC48PWsiFpTAqLcw==:117 a=OOZaFjgC48PWsiFpTAqLcw==:17
  a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=jiCTI4zE5U7BLdzWsZGv:22
- a=x0eKOSpe3m1H3M0S9YoZ:22 a=tqg_bQgt9-K5weYeX30A:9 a=5yU3S35YU4bGjq-dph-N:22
- a=Bho9c0fBagfJEIQBS7DQ:22 cc=ntf awl=host:13521
-X-Proofpoint-GUID: UR_JyuotfNkodCLBPwsVSg6P3WVQa3j6
-X-purgate-ID: tlsNG-33051d/1787969592-770F64E9-AD0BBA13/0/0
+ a=x0eKOSpe3m1H3M0S9YoZ:22 a=wMlaycGzNReg4xrbBi8A:9
+X-Proofpoint-GUID: IAyx5194Bpxqyo55PCMi5aJkJzMhsBw-
+X-purgate-ID: tlsNG-4011c0/1787979989-5A9D9CFC-30881EB8/0/0
 X-purgate-type: clean
-X-purgate-size: 1892
+X-purgate-size: 2445
 
-Hi Andrew,
+Hi all,
 
-While investigating an SMC forwarding failure after updating to Xen 4.22,
-I found that firmware could receive different values from those passed to
-arm_smccc_1_1_smc().
+I would like feedback on whether Xen needs to flush every page in a
+dom0less xen,static-mem bank before assigning it to a guest.
 
-Several public Xen callers pass get_user_reg() calls directly to this
-helper.  This includes the SCMI, ZynqMP EEMI, and i.MX forwarding paths.
-The helper puts each value into its SMC argument register as the
-expression is evaluated.  A later get_user_reg() call can then overwrite a
-register prepared for an earlier argument.
+Static-memory support is currently enabled only on Arm, where I am using
+and testing this change. Its implementation and acquisition path are in
+common code, so this RFC is about the generic static-memory path.
 
-The change in generated code appears after:
+The current code cleans and invalidates every page in the bank. This is a
+safe default, but walking a large bank can add several seconds to boot even
+though Xen only writes the pages used for the guest kernel, initrd, and
+device tree.
 
-67bcf5eae709 ("xen/arm: Simplify type handling for SMCCC declarations")
+Here, cleaning refers to cache maintenance, not boot scrubbing. With
+bootscrub=1 or the default bootscrub=idle, Xen assigns dom0less static
+banks before boot scrubbing starts. The pages are no longer free, so boot
+scrubbing does not clear them.
 
-I am not sure which behavior the helper is intended to provide. Should
-arm_smccc_1_1_smc() continue to accept arguments such as get_user_reg()
-calls, or should callers save those values in local variables first?
+My starting point is that if a platform permits the untouched pages to be
+cleared before guest start, the guest cannot depend on their initial
+contents. This is a platform policy assumption, not something Xen's boot
+scrubbing establishes. Xen already cleans each page it writes during
+domain construction.
 
-The attached patch is a candidate for the first option. It restores
-temporary variables inside the helper, allowing all calls to finish before
-x0-x7 are prepared for the SMC instruction. I am not able to validate the
-public SCMI and ZynqMP paths on hardware, but their generated code now
-finishes every get_user_reg() call before the final register setup and
-smc. With this change, SMCs also work as intended on the device I'm
-using.
+Would it therefore be reasonable to let a platform skip the full-bank
+flush, provided it can also guarantee that the untouched pages are absent
+from all caches and that firmware, DMA, EL3 services, and other CPUs do not
+write them before guest start?
 
-If the intent is not to accept function calls as arguments, we should
-probably fix the SCMI, ZynqMP EEMI, and i.MX callers.
+The attached patch adds a default-on staticmem-cache-flush option.
+Specifying no-staticmem-cache-flush opts into the faster path. The normal
+flush remains the default, and static shared memory is unaffected.
 
-Given the existing use cases, this seems like a bug, but your patch looks
-intentional. It's very possible I'm missing the intended design. I would
-appreciate your view on the intended contract.
+Are these conditions enough to make the opt-out valid, or is there another
+reason the full-bank flush is required?
+
+I am using no-staticmem-cache-flush with bootscrub=0 on a 64-bit Arm
+system with two dom0less guests. Both guests boot normally. Skipping the
+flush reduced Xen startup from about five seconds to about one second.
 
 Thanks for any advice or help with this.
 
 Jan Setje-Eilers (1):
-  xen/arm: smccc: preserve arguments before register setup
+  static-memory: allow skipping the cache flush
 
- xen/arch/arm/include/asm/smccc.h | 26 +++++++++++++++++++-------
- 1 file changed, 19 insertions(+), 7 deletions(-)
+ docs/misc/xen-command-line.pandoc      | 26 ++++++++++++++++++++++++++
+ xen/common/device-tree/static-memory.c |  9 ++++++++-
+ xen/common/page_alloc.c                |  6 ++++--
+ xen/include/xen/mm.h                   |  2 ++
+ 4 files changed, 40 insertions(+), 3 deletions(-)
 
+
+base-commit: 79225a0c77e13b693b4d2b903a88289704b79db6
 -- 
 2.47.3
 
