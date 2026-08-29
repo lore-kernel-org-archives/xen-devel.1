@@ -4,62 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8066C61DBE
-	for <xen-devel@archiver.kernel.org>; Sat, 29 Aug 2026 05:08:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1402615.1637620 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDC1CC61DBE
+	for <xen-devel@archiver.kernel.org>; Sat, 29 Aug 2026 05:25:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1402625.1637628 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x0BIM-0007H6-7e; Sat, 29 Aug 2026 05:07:58 +0000
+	id 1x0BZP-0002D5-LE; Sat, 29 Aug 2026 05:25:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1402615.1637620; Sat, 29 Aug 2026 05:07:58 +0000
+Received: by outflank-mailman (output) from mailman id 1402625.1637628; Sat, 29 Aug 2026 05:25:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x0BIM-0007Gy-3H; Sat, 29 Aug 2026 05:07:58 +0000
-Received: by outflank-mailman (input) for mailman id 1402615;
- Sat, 29 Aug 2026 05:07:56 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x0BZP-0002Cy-I4; Sat, 29 Aug 2026 05:25:35 +0000
+Received: by outflank-mailman (input) for mailman id 1402625;
+ Sat, 29 Aug 2026 05:25:34 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Jan.SetjeEilers@oracle.com>) id 1x0BIK-0007Gc-DD
- for xen-devel@lists.xenproject.org; Sat, 29 Aug 2026 05:07:56 +0000
+ (envelope-from <Sergiy_Kibrik@epam.com>) id 1x0BZO-0002Cs-Jt
+ for xen-devel@lists.xenproject.org; Sat, 29 Aug 2026 05:25:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x0BIJ-00GNLT-Ab
- for xen-devel@lists.xenproject.org; Sat, 29 Aug 2026 07:07:55 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x0BZN-00C3Vx-AH
+ for xen-devel@lists.xenproject.org; Sat, 29 Aug 2026 07:25:33 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Jan.SetjeEilers@oracle.com>)
- id 6a926906-8faa-0a2a0a5109dd-0a2a4509e760-34
- for <xen-devel@lists.xenproject.org>; Sat, 29 Aug 2026 07:07:55 +0200
-Received: from [205.220.165.32] (helo=mx0a-00069f02.pphosted.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Jan.SetjeEilers@oracle.com>)
- id 6a926929-be1a-0a2a45090019-cddca5200b40-3
- for <xen-devel@lists.xenproject.org>; Sat, 29 Aug 2026 07:07:54 +0200
-Received: from pps.filterd (m0246617.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67T4j77Y024032; Sat, 29 Aug 2026 05:07:43 GMT
-Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com
- (phxpaimrmta02.appoci.oracle.com [147.154.114.232])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4gbqyrr0t3-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sat, 29 Aug 2026 05:07:42 +0000 (GMT)
-Received: from pps.filterd
- (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
- by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.7/8.18.1.7)
- with ESMTP id 67T53x0n035474; Sat, 29 Aug 2026 05:07:41 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
- by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
- 4gbnvbawh6-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sat, 29 Aug 2026 05:07:41 +0000 (GMT)
-Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com
- (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
- by pps.reinject (8.18.1.12/8.18.1.12) with ESMTP id 67T56FsB001517;
- Sat, 29 Aug 2026 05:07:41 GMT
-Received: from setje-aarch64-ol9-builds.osdevelopmeniad.oraclevcn.com
- (setje-aarch64-ol9-builds.allregionaliads.osdevelopmeniad.oraclevcn.com
- [100.100.248.24])
- by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
- 4gbnvbaw2h-2; Sat, 29 Aug 2026 05:07:41 +0000 (GMT)
+ (envelope-from <Sergiy_Kibrik@epam.com>)
+ id 6a926d04-8faa-0a2a0a5109dd-0a2a450ca2ac-22
+ for <xen-devel@lists.xenproject.org>; Sat, 29 Aug 2026 07:25:33 +0200
+Received: from [40.107.159.86]
+ (helo=OSPPR02CU001.outbound.protection.outlook.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Sergiy_Kibrik@epam.com>)
+ id 6a926d4c-f479-0a2a450c0019-286b9f56e4e0-3
+ for <xen-devel@lists.xenproject.org>; Sat, 29 Aug 2026 07:25:33 +0200
+Received: from AS8PR03MB9192.eurprd03.prod.outlook.com (2603:10a6:20b:5c0::11)
+ by AS8PR03MB9141.eurprd03.prod.outlook.com (2603:10a6:20b:5b4::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.11; Sat, 29 Aug
+ 2026 05:25:29 +0000
+Received: from AS8PR03MB9192.eurprd03.prod.outlook.com
+ ([fe80::61a0:97f5:ac5f:e292]) by AS8PR03MB9192.eurprd03.prod.outlook.com
+ ([fe80::61a0:97f5:ac5f:e292%7]) with mapi id 15.21.0360.008; Sat, 29 Aug 2026
+ 05:25:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,205 +55,163 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=corp-2025-04-25 header.d=oracle.com header.i="@oracle.com" header.h="Cc:Content-Transfer-Encoding:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
-	:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=corp-2025-04-25; bh=oW5UF
-	RBVvmLX6waJJvDC7VRRMFdstu+Xd77ISLIKXY0=; b=MA/NCrF+vyWp+yHEkrcWa
-	GomxF8CvVRgE10apE1Ze3cNUOPakmhN1r+cbQaZTUK4SP4NpcF3ijeuAW+qZ8TXq
-	Na1pUxxP8Jug95OEo3U2rKjXUJayk/4Pt2Hgfm+0stcZOj9x6JO0G5N2ruFibLk7
-	gKh0ZwrWzWP/uoyn7eZ5qSTfgRTvvbP1KP7gzlWnZtK2D6DpfxeT/0Tt/8JKx3tN
-	9nBXpdqTOXS1ECowyDygIWyAeJ8miINgDecFbAbrsu/026/DkqVuor6pqjvGS30X
-	dUPYxUQEe3IF0JamFKyyuT6R8PQCiPvFNgFKE1OabqLC/g2ZRBKocHDQXd4tHqCT
-	g==
-From: Jan Setje-Eilers <Jan.SetjeEilers@oracle.com>
-To: Jan Setje-Eilers <Jan.SetjeEilers@oracle.com>,
-        xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-        Anthony PERARD <anthony.perard@vates.tech>,
-        Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
-        Julien Grall <julien@xen.org>,
-        =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-        Stefano Stabellini <sstabellini@kernel.org>,
-        Bertrand Marquis <bertrand.marquis@arm.com>,
-        Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH 1/1] static-memory: allow skipping the cache flush
-Date: Sat, 29 Aug 2026 05:06:11 +0000
-Message-ID: <20260829050611.3353566-2-Jan.SetjeEilers@oracle.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260829050611.3353566-1-Jan.SetjeEilers@oracle.com>
-References: <20260829050611.3353566-1-Jan.SetjeEilers@oracle.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=URMwO7PZ6lnRT77zMgrf7E94O0mLZ33vyk8hyCn+2KzLhrarUTa6xnhXCZ4wQiUSC+s+9+hFnRClpE/dkvL/uRplk+wnDXYfjqt7dilv/E3yPcIJtJiCBCODrRel5VM9OIRAuj5oEPgmXsftne+f1MW3mI5AZhv+uaZGaQ8kifeHyzU+K1ib8hI62pO8zGVim1/Ham3ophpImlpdpRDBKkIl0Wt1DUvGId0s8RWSwlLHa7ze2aW3vkAdpb/odTjijGibKeHNKDc7Qb4Djs2gpQkXvI+CeNO+PqDPqhzt+ZNn2VuEIBsgV1lKKm74aEMzgGF05M5hHPvnwHNQlLbQqw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=SHySOglTQQblm+/wqUboCywaasdOcIjCnXEuaaSMMXI=;
+ b=VOzio4b4vUj3CltBt/225EOWpXFB9HQphYrlJrAnRVzxCYDax6mdqE2ONmGwQVuVYcJlTOLvfmBnYyCDI56ctfJ/1/fPqynTi75tyCTmjczclTErfeJ2XUMNfGcI+YVWBiHiYB+QeocwJnCJEPjffo+06I2BdAKDobvPFSwQqZmcVewBu/OZYxSSValsAMRKRHy1tJ0GS4qcI6PTiBifht7erWh6h5KDh69AkWcaounSHXtMnVbRTnBD1MhB+z43oS4C9zOrbJxY+T0y2/hBL7aRsObGivgqQ+CTFL/rORucQUYgVCphDW7BzMq1iMRev0zKdIt0N/xp5FAiG8mWbg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=SHySOglTQQblm+/wqUboCywaasdOcIjCnXEuaaSMMXI=;
+ b=Aze7H5Ta9cjI2roRjtX/5akOsyQMpYM22VFnVEN4pKxomQJeWN7A/DkO4etqXSGA9OFefln+2QCcBVMW+eo4flqSI2vIxDbdMaxt2kCYu95t1kffqWXJcHRP87A1Ge/zY6hqTyi7L2eNWBqJZEOXOX3Ep3DqYxd595x0pyHhTns+vyfG9UY6Cd5TcCeRpnTOPH1KbhVHGMV3Bvcro9P3u+B7wDr9T/pcnyimbLFGXztl7xXM3ys8Iaqg/VNUQJvpceeT8dZis9++war74imfCO5Hx6DJ00U+svNAQx4DDV+K7rW0JsXjy3IY5akoBAtCdCTdatqSMaLj+ZNSSo5K8A==
+From: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Sergiy Kibrik <Sergiy_Kibrik@epam.com>, "Daniel P. Smith"
+	<dpsmith@apertussolutions.com>
+Subject: [PATCH v1] xen/xsm: flask: restore sidtab state on policy load
+ failure
+Thread-Topic: [PATCH v1] xen/xsm: flask: restore sidtab state on policy load
+ failure
+Thread-Index: AQHdN3bNfFShEBvmK0m4+E/2G7r3aQ==
+Date: Sat, 29 Aug 2026 05:25:28 +0000
+Message-ID: <20260829052527.678306-1-Sergiy_Kibrik@epam.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AS8PR03MB9192:EE_|AS8PR03MB9141:EE_
+x-ms-office365-filtering-correlation-id: 3a004a85-3f9b-48c3-713b-08df058df04c
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|1800799024|23010399003|376014|366016|18002099003|56012099006|38070700021|11063799006|10067099003;
+x-microsoft-antispam-message-info:
+ bJ69mvn5oXk20ee2aN/+FDSa9zP+0VU6zEWhJyiiKUPGJbtT5l6+P+ky7pHvQM5T1efLmzUFW8aAAm4WagWkkMQrCTN54kt8huLs6Ol4GzLasRVQamr1EpCsLpL0+6fdV3ORMM+v1n+A/tLZCrJofESCr1fZ0cNLOvoJDNeyOX/V3u9yy4wbnayKg/RO/ofgcYkz4cqH0K+dQyDy5isTPxM4CdmtOcqeSFOepSiPUXstP6RQ+/8iCbMq0t4jbBMEJJEza2+IOdnS/kwyTTERAKTGPslDZMjguWOs8qXZNs1Tl2hDatWSiW+JGVjbVSaREw/4yPoveReveTtCMyE7lj4Z4JZaowzN83DzpLOyUkMaFu6m1zgRDubG3aP1pA8nMlt5Dn1o9Bp5+y3p3LWobKvHOkZyeUV1tzqP+L8X//hqGGVOm9a/DeFX1btG+o1esem2fJN1eanhRpjkeCIOExo4TGH58fJYAgq6IyvEKA3XUIynmomlcD0kLQfDBOmQ9214n3SIe0vTO7hIkTLgDvZL/BhWo6a5CTk7f+Q/W6hmkT/5iawio1d3xusifYfHWB1C1v9iEJvfKsxLzMxFiUNbGNEp+9spTbQFmCMCetUpvvP3MwI3ayG5H69/Xhv5n7v7YD13RDYi1CY1zh+IVVlDgudbowu2BhhKxu9x+jICy+jnLl2Mzg+H2QRougOpJGnXEJ5k9/lSD8ieXViMmfGPNxoAiMju4O0NSaFfFsg=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9192.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(376014)(366016)(18002099003)(56012099006)(38070700021)(11063799006)(10067099003);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?Z1qU6kruMtp2u3TvM4wxOBFPxr+IMD72HiH5SGjmgSa6nKDgxkwcM+9Xe1?=
+ =?iso-8859-1?Q?DXSeTSkn1fQkQIE7n7gct5ktcZXbBixcZomCtvnvV/k84MNvM4+QAAfmn6?=
+ =?iso-8859-1?Q?SOKnmdW0S1Ne085RM4uth0NvV1fsnAhZwgPAewTnTFOBDSTIGH9jY4gIHE?=
+ =?iso-8859-1?Q?TF0inQvcJntMEKe9BcxFG4fTDuhlID4N2mOEbRwFGB2MPVeBPGP+isPZsO?=
+ =?iso-8859-1?Q?0N3a4TR/mV0oz4/yzinB/uXLaM6vzsLFtQaDLN19Q8b6bmaC+S6U+V2Z7t?=
+ =?iso-8859-1?Q?keQpG6Fj8DVH1OKvviHbYTTpnZ4MZQDVAA4KvwCXsQwiAzn1VcfcJee2FZ?=
+ =?iso-8859-1?Q?Znax7zyu9OdKuRaIulKgnLm7fiDgiKc/0r+GH3a7KCJn2rE2Mg2w5RSvmb?=
+ =?iso-8859-1?Q?KpDTY5G4iDn0V+N1fDmlnM0Ah0b6onr/4uhwXRvuG0KUAopu/19ryFU58T?=
+ =?iso-8859-1?Q?U6K82Z291i0egMZYOcBB6ow1+/DvYwpXd1JfFi/GT1kDVeHZq/rJ98ZjZw?=
+ =?iso-8859-1?Q?V2ZxYKP11IAda+MXz+ARKklg2QNbJmNNXhLJTlU2EGzX1aupfO97spiQmn?=
+ =?iso-8859-1?Q?D2sLiElLubRRUvyqjd5iEHIxhvvPZ8Ch6WiG/OqHxbhM3rpd/8d83lYMdp?=
+ =?iso-8859-1?Q?huUbuXGgv+Jk6hSV35Q31hnM+Mf0cwd5/6v+LPDnZ0qY6F33eWr6aFGle3?=
+ =?iso-8859-1?Q?zixW8MZaSfzqfgZxZwtq2Bz/dcT8KlXB+5ugR+SYtcXSuyfcNc4ehcV8Mk?=
+ =?iso-8859-1?Q?TFN9GvxKUAOKltwrWTUG+Rm/6MoV84IAYoFBSx+77ZDLlR2aGI/eZIsXLv?=
+ =?iso-8859-1?Q?bzicP6aI7abnMvpMEoSN03TVDPtuwYcL8h9mQMkPjy8aaxlkFyprf9MoOW?=
+ =?iso-8859-1?Q?DePyXf2xK/MwPSi2NOUt99Mi1zwBFkiIsJcPcLf2wGyZfPcbEe8p0pqECl?=
+ =?iso-8859-1?Q?cU2tKuDpMVCGPKwVmSeZTRGn9hx39SBoxlMG3wqicJ+uzTya1p4p/9Wqqi?=
+ =?iso-8859-1?Q?Y3yhMCtRYTYU6M9QkIDd5ozi9KCJLomeJ4t2en41CtiIpFkv9GglAemPko?=
+ =?iso-8859-1?Q?SWbWNmf8jCQzaw+XUZhx3IyqOVjadpKaLo3wpkiIhTdca21RjtYCqwCsJj?=
+ =?iso-8859-1?Q?5xpAcaHZMj1NsRNSYTqvBuCadSRZPaoKZSSkRa3ea+Bc6GC1NUblKwGrup?=
+ =?iso-8859-1?Q?NyYP7hQUArQ7etCA7UA+cNimEphKOlUhpzpussU8IZjAeIlzdHzZ7C5gkR?=
+ =?iso-8859-1?Q?9WSLYUyYfRgFlUSAHiFsxc3LYK4XsmzeT22khOdl0G17FzcXfd6xyaER/U?=
+ =?iso-8859-1?Q?dUQ5O06NhEc1GTDZG9Q7C2F0cp3eFj9jsRl+qURH7IB/FNQQWhOmbY6DJq?=
+ =?iso-8859-1?Q?joaIneCrS44nFkL4XRUPPs0LuU6WEZIPn629vVRXb7t1X5I1wbbNiI3C5S?=
+ =?iso-8859-1?Q?XlpJZUYbpx2xjuy9+SCZEfRz7YLH+W+dH3KnOSD+dy5WjfwslK+LsNMB7n?=
+ =?iso-8859-1?Q?DPNgo9h5LYGSkMUsp6mA4YQafNL7SoDBoiVs20FwUw26JUveTBqsQBx1xo?=
+ =?iso-8859-1?Q?9iw6VY8UILLzdMsIdkG01x4h4Qjdb7jRXN6bDOwUb1AoQF8dO/Hj5kxswB?=
+ =?iso-8859-1?Q?PVdhaRUPX9aupD9jAcA3apj5kAxzx5EumWEB5evvJBRGxt6azrhw7iHbw1?=
+ =?iso-8859-1?Q?lvTp8i3bIkie6PrrnnxWZvbKhl9DVzkpgBfSnifl+0Bx30KJO/1flud7iu?=
+ =?iso-8859-1?Q?ihZPXCZGiAQ9cTHxeJmDkk9NjqnfilOPOftymIw4fVYI4DnNmH0S+jcpAT?=
+ =?iso-8859-1?Q?0P1kQIXasjyWtpAe89atPa4yDlREbb4=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-29_01,2026-08-27_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999
- mlxscore=0 lowpriorityscore=0 suspectscore=0 adultscore=0 bulkscore=0
- malwarescore=0 spamscore=0 phishscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.19.0-2606160000 definitions=main-2608290041
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI5MDA0MiBTYWx0ZWRfX7kH/mzWCzH/7
- PB9bV8u8p+USg+Nv8wdvNtKt6rxJDTUlXsktgYL3DsaweNV+H5yoveemIbaao8E1+S3Ed0cZ8Dn
- VRjALdWOPE6gHHHmAjfWezLPm9Mj9Orw1JAt1aCaMODJ/mwUq+xalokSMYnIVn/jdyewri3MFgq
- q9V/Zcfn7D1B8ZRznB31XiwbjfF8zAsM2AR4CmBTJnCL3EneUT0O0CPdhqvTGA3JWvf1HCYOJw4
- QHJgRmz3eL2muPJoDMSc8vtmo/2qKXjFc/WTAkruDf/o8NTXfE4CvBRVabN3IUI0HwZiNiO7RXi
- BvwWO45Ekrn4wGJe3TbdYu9vpNdgL+6uCenUAWLOJaho87rKiKbCLYagLKLx8GTx98Dvqg6HCV6
- 5a5UejfzKBysNC6nPm0DYuiDO/VoHGACCEE9gvrKfHkhzPAstnoo4nI+Pbx8LwPtLUfl+e1piJZ
- Y2cSHVQDQ2Sji9OvS/A==
-X-Proofpoint-ORIG-GUID: JgDE75mghZLD7eF-8FUP-Rt00u3MJRls
-X-Authority-Analysis: v=2.4 cv=fbCdDUQF c=1 sm=1 tr=0 ts=6a92691e cx=c_pps
- a=OOZaFjgC48PWsiFpTAqLcw==:117 a=OOZaFjgC48PWsiFpTAqLcw==:17
- a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=jiCTI4zE5U7BLdzWsZGv:22
- a=7Gl3-_t3PgB9XO-mQDs3:22 a=yPCof4ZbAAAA:8 a=TQ28Xt2rEOyNch8bdtYA:9
-X-Proofpoint-GUID: JgDE75mghZLD7eF-8FUP-Rt00u3MJRls
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI5MDA0MiBTYWx0ZWRfXw7lxSff8ipoI
- QuPrCIgOO5eUV7YTLWe6D1uvBha1OEopTfSl6AI7VRfEXC4WYsJlEuT/JBdwaX24obdNM9GqlpC
- 4ShqNCidQRu3RuEy/eo/lM946h/JOI5IZ9zPUv8HsL/U6lHpvCw5
-X-purgate-ID: tlsNG-bad1c0/1787980075-FC817034-F07CCC95/0/0
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR03MB9192.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3a004a85-3f9b-48c3-713b-08df058df04c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Aug 2026 05:25:28.9901
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: ku0cnWMr/KZJx4qT/++t3h0MY0b1s076V9Ys13MzTj/s68nCkIsfLhCpIbdXAGgu6McBEkkrJ5qmJLeTypCChw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB9141
+X-purgate-ID: tlsNG-d25034/1787981133-018C5A5B-B34EA14B/0/0
 X-purgate-type: clean
-X-purgate-size: 6323
+X-purgate-size: 2145
 
-Static memory acquisition follows the same cache-coherency policy as
-ordinary heap allocation. Xen therefore cleans and invalidates every page
-in each xen,static-mem bank before assigning it to a domain.
+Error path of failed sidtab_map() leaves global sidtab in shutdown state an=
+d
+system unable to allocate new SIDs in sidtab_context_to_sid().
+To restore sidtab state new function sidtab_activate() is introduced, it on=
+ly
+resets shutdown flag, rewinding effect of sidtab_shutdown().
 
-Static-memory support is currently enabled only on Arm, but its
-implementation and this acquisition path are in common code.
-
-This cache maintenance is independent of boot scrubbing, which clears
-memory. With bootscrub=1 or the default bootscrub=idle, create_domUs()
-acquires static banks before heap_init_late() starts boot scrubbing. The
-pages are in-use by then, while boot scrubbing processes only free pages.
-Neither mode therefore clears an assigned static bank.
-
-Walking a large static bank can add several seconds to boot, including time
-spent flushing pages Xen does not touch during domain construction.
-
-If a platform permits those untouched pages to be cleared before guest
-start, the guest cannot depend on their incoming contents. This is a
-platform policy assumption, not a property established by Xen's boot
-scrubbing. Xen need not make that initial data coherent with RAM. Xen still
-cleans every page it writes while loading the guest kernel, initrd, and
-device tree.
-
-Add the default-on staticmem-cache-flush option. Specifying
-no-staticmem-cache-flush passes MEMF_no_cache_flush when acquiring a
-xen,static-mem bank. The existing behavior remains the default, and static
-shared memory is unaffected.
-
-Skipping the flush is safe only if the platform also guarantees that the
-untouched pages are absent from all caches and no other agent writes them
-before guest start. Such agents include firmware, non-coherent DMA, and
-EL3 runtime services.
-
-Assisted-by: Codex:GPT-5
-Signed-off-by: Jan Setje-Eilers <Jan.SetjeEilers@oracle.com>
+Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
 ---
- docs/misc/xen-command-line.pandoc      | 26 ++++++++++++++++++++++++++
- xen/common/device-tree/static-memory.c |  9 ++++++++-
- xen/common/page_alloc.c                |  6 ++++--
- xen/include/xen/mm.h                   |  2 ++
- 4 files changed, 40 insertions(+), 3 deletions(-)
+New function is not strictly required, this also can be achieved just by
+doing sidtab_set(&sidtab, &sidtab), but this way we would rely on its
+undocumented internal behaviour.
+---
+ xen/xsm/flask/ss/services.c | 1 +
+ xen/xsm/flask/ss/sidtab.c   | 7 +++++++
+ xen/xsm/flask/ss/sidtab.h   | 1 +
+ 3 files changed, 9 insertions(+)
 
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index 1c711fa980..3f5c27858c 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -2647,6 +2647,32 @@ On Sappire and Emerald Rapids CPUs with May 2025 microcode or later, the
- `ibpb-alt=` option can be used to switch to the alternative mitigation for
- Intel SA-00982.  Intel suggest that some workloads will benefit from this.
- 
-+### staticmem-cache-flush (arm)
-+> `= <boolean>`
-+
-+> Default: `true`
-+
-+Control the up-front per-page cache flush over dom0less `xen,static-mem`
-+banks. Specify `no-staticmem-cache-flush` to skip it. Xen still cleans the
-+guest kernel, initrd, and device tree pages it writes to guest RAM.
-+
-+Static-memory support is currently available only on Arm. Its implementation
-+and this option live in common code.
-+
-+Here, cleaning means cache maintenance, not boot scrubbing. With
-+`bootscrub=1` or the default `bootscrub=idle`, Xen assigns dom0less static
-+banks before boot scrubbing starts. Assigned pages are no longer free, so
-+boot scrubbing does not clear them. This option is therefore independent of
-+`bootscrub`.
-+
-+Only disable this flush when the guest does not depend on the initial contents
-+of pages Xen leaves untouched. For example, this may be true when the platform
-+permits those pages to be cleared before guest start.
-+
-+The platform must also ensure that those pages are absent from all caches and
-+rule out other writers before guest start. Such writers may include
-+non-coherent DMA or EL3 runtime services active during domain construction.
-+
- ### sync_console
- > `= <boolean>`
- 
-diff --git a/xen/common/device-tree/static-memory.c b/xen/common/device-tree/static-memory.c
-index ffbc12aa24..ed155d162d 100644
---- a/xen/common/device-tree/static-memory.c
-+++ b/xen/common/device-tree/static-memory.c
-@@ -1,10 +1,15 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
- 
-+#include <xen/init.h>
-+#include <xen/param.h>
- #include <xen/sched.h>
- #include <xen/static-memory.h>
- 
- #include <asm/setup.h>
- 
-+static bool __initdata opt_staticmem_cache_flush = true;
-+boolean_param("staticmem-cache-flush", opt_staticmem_cache_flush);
-+
- static bool __init append_static_memory_to_bank(struct domain *d,
-                                                 struct membank *bank,
-                                                 mfn_t smfn,
-@@ -54,7 +59,9 @@ static mfn_t __init acquire_static_memory_bank(struct domain *d,
-     }
- 
-     smfn = maddr_to_mfn(*pbase);
--    res = acquire_domstatic_pages(d, smfn, PFN_DOWN(*psize), 0);
-+    res = acquire_domstatic_pages(d, smfn, PFN_DOWN(*psize),
-+                                  opt_staticmem_cache_flush ? 0 :
-+                                  MEMF_no_cache_flush);
-     if ( res )
+diff --git a/xen/xsm/flask/ss/services.c b/xen/xsm/flask/ss/services.c
+index 35ad1034ca..f5cee1e0b0 100644
+--- a/xen/xsm/flask/ss/services.c
++++ b/xen/xsm/flask/ss/services.c
+@@ -1427,6 +1427,7 @@ int security_load_policy(const void *data, size_t len=
+)
+     if ( sidtab_map(&sidtab, clone_sid, &newsidtab) )
      {
-         printk(XENLOG_ERR
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index 1e47f38721..b2ede17bd2 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -3094,8 +3094,10 @@ static struct page_info * __init acquire_staticmem_pages(mfn_t smfn,
-      * Ensure cache and RAM are consistent for platforms where the guest
-      * can control its own visibility of/through the cache.
-      */
--    for ( i = 0; i < nr_mfns; i++ )
--        flush_page_to_ram(mfn_x(smfn) + i, !(memflags & MEMF_no_icache_flush));
-+    if ( !(memflags & MEMF_no_cache_flush) )
-+        for ( i = 0; i < nr_mfns; i++ )
-+            flush_page_to_ram(mfn_x(smfn) + i,
-+                              !(memflags & MEMF_no_icache_flush));
- 
-     return pg;
+         rc =3D -ENOMEM;
++        sidtab_activate(&sidtab);
+         goto err;
+     }
+=20
+diff --git a/xen/xsm/flask/ss/sidtab.c b/xen/xsm/flask/ss/sidtab.c
+index 69fc3389b3..5d1653cd02 100644
+--- a/xen/xsm/flask/ss/sidtab.c
++++ b/xen/xsm/flask/ss/sidtab.c
+@@ -314,6 +314,13 @@ void sidtab_set(struct sidtab *dst, struct sidtab *src=
+)
+     SIDTAB_UNLOCK(src);
  }
-diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
-index fd8b0ba3f5..511bbc56e0 100644
---- a/xen/include/xen/mm.h
-+++ b/xen/include/xen/mm.h
-@@ -228,6 +228,8 @@ struct npfec {
- #define  MEMF_no_icache_flush (1U<<_MEMF_no_icache_flush)
- #define _MEMF_no_scrub    8
- #define  MEMF_no_scrub    (1U<<_MEMF_no_scrub)
-+#define _MEMF_no_cache_flush 9
-+#define  MEMF_no_cache_flush (1U<<_MEMF_no_cache_flush)
- #define _MEMF_node        16
- #define  MEMF_node_mask   ((1U << (8 * sizeof(nodeid_t))) - 1)
- #define  MEMF_node(n)     ((((n) + 1) & MEMF_node_mask) << _MEMF_node)
--- 
-2.47.3
-
+=20
++void sidtab_activate(struct sidtab *s)
++{
++    SIDTAB_LOCK(s);
++    s->shutdown =3D 0;
++    SIDTAB_UNLOCK(s);
++}
++
+ void sidtab_shutdown(struct sidtab *s)
+ {
+     SIDTAB_LOCK(s);
+diff --git a/xen/xsm/flask/ss/sidtab.h b/xen/xsm/flask/ss/sidtab.h
+index 0e48ec6eae..5d2dc9c7e1 100644
+--- a/xen/xsm/flask/ss/sidtab.h
++++ b/xen/xsm/flask/ss/sidtab.h
+@@ -48,6 +48,7 @@ int sidtab_context_to_sid(struct sidtab *s, struct contex=
+t *context, u32 *sid);
+ void sidtab_hash_eval(struct sidtab *h, char *tag);
+ void sidtab_destroy(struct sidtab *s);
+ void sidtab_set(struct sidtab *dst, struct sidtab *src);
++void sidtab_activate(struct sidtab *s);
+ void sidtab_shutdown(struct sidtab *s);
+=20
+ #endif    /* _SS_SIDTAB_H_ */
+--=20
+2.43.0
 
