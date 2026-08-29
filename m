@@ -4,46 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDC1CC61DBE
-	for <xen-devel@archiver.kernel.org>; Sat, 29 Aug 2026 05:25:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1402625.1637628 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72E9CC61DBE
+	for <xen-devel@archiver.kernel.org>; Sat, 29 Aug 2026 13:22:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1402826.1637637 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x0BZP-0002D5-LE; Sat, 29 Aug 2026 05:25:35 +0000
+	id 1x0J0c-00072r-Ru; Sat, 29 Aug 2026 13:22:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1402625.1637628; Sat, 29 Aug 2026 05:25:35 +0000
+Received: by outflank-mailman (output) from mailman id 1402826.1637637; Sat, 29 Aug 2026 13:22:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x0BZP-0002Cy-I4; Sat, 29 Aug 2026 05:25:35 +0000
-Received: by outflank-mailman (input) for mailman id 1402625;
- Sat, 29 Aug 2026 05:25:34 +0000
+	id 1x0J0c-00072j-Mv; Sat, 29 Aug 2026 13:22:10 +0000
+Received: by outflank-mailman (input) for mailman id 1402826;
+ Sat, 29 Aug 2026 13:22:09 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Sergiy_Kibrik@epam.com>) id 1x0BZO-0002Cs-Jt
- for xen-devel@lists.xenproject.org; Sat, 29 Aug 2026 05:25:34 +0000
+ (envelope-from <nicola.vetrini@bugseng.com>) id 1x0J0b-00072d-EN
+ for xen-devel@lists.xenproject.org; Sat, 29 Aug 2026 13:22:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x0BZN-00C3Vx-AH
- for xen-devel@lists.xenproject.org; Sat, 29 Aug 2026 07:25:33 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1x0J0a-00HGZI-Rf
+ for xen-devel@lists.xenproject.org; Sat, 29 Aug 2026 15:22:08 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Sergiy_Kibrik@epam.com>)
- id 6a926d04-8faa-0a2a0a5109dd-0a2a450ca2ac-22
- for <xen-devel@lists.xenproject.org>; Sat, 29 Aug 2026 07:25:33 +0200
-Received: from [40.107.159.86]
- (helo=OSPPR02CU001.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Sergiy_Kibrik@epam.com>)
- id 6a926d4c-f479-0a2a450c0019-286b9f56e4e0-3
- for <xen-devel@lists.xenproject.org>; Sat, 29 Aug 2026 07:25:33 +0200
-Received: from AS8PR03MB9192.eurprd03.prod.outlook.com (2603:10a6:20b:5c0::11)
- by AS8PR03MB9141.eurprd03.prod.outlook.com (2603:10a6:20b:5b4::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.11; Sat, 29 Aug
- 2026 05:25:29 +0000
-Received: from AS8PR03MB9192.eurprd03.prod.outlook.com
- ([fe80::61a0:97f5:ac5f:e292]) by AS8PR03MB9192.eurprd03.prod.outlook.com
- ([fe80::61a0:97f5:ac5f:e292%7]) with mapi id 15.21.0360.008; Sat, 29 Aug 2026
- 05:25:29 +0000
+ (envelope-from <nicola.vetrini@bugseng.com>)
+ id 6a92dca6-2eae-0a2a0a5409dd-0a2a4501d5fc-44
+ for <xen-devel@lists.xenproject.org>; Sat, 29 Aug 2026 15:22:08 +0200
+Received: from [162.55.131.47] (helo=support.bugseng.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <nicola.vetrini@bugseng.com>)
+ id 6a92dd00-5984-0a2a45010019-a237832fba20-3
+ for <xen-devel@lists.xenproject.org>; Sat, 29 Aug 2026 15:22:08 +0200
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ (Authenticated sender: nicola)
+ by support.bugseng.com (Postfix) with ESMTPA id 1EE1F4EE0184;
+ Sat, 29 Aug 2026 15:21:57 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,163 +49,190 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=URMwO7PZ6lnRT77zMgrf7E94O0mLZ33vyk8hyCn+2KzLhrarUTa6xnhXCZ4wQiUSC+s+9+hFnRClpE/dkvL/uRplk+wnDXYfjqt7dilv/E3yPcIJtJiCBCODrRel5VM9OIRAuj5oEPgmXsftne+f1MW3mI5AZhv+uaZGaQ8kifeHyzU+K1ib8hI62pO8zGVim1/Ham3ophpImlpdpRDBKkIl0Wt1DUvGId0s8RWSwlLHa7ze2aW3vkAdpb/odTjijGibKeHNKDc7Qb4Djs2gpQkXvI+CeNO+PqDPqhzt+ZNn2VuEIBsgV1lKKm74aEMzgGF05M5hHPvnwHNQlLbQqw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SHySOglTQQblm+/wqUboCywaasdOcIjCnXEuaaSMMXI=;
- b=VOzio4b4vUj3CltBt/225EOWpXFB9HQphYrlJrAnRVzxCYDax6mdqE2ONmGwQVuVYcJlTOLvfmBnYyCDI56ctfJ/1/fPqynTi75tyCTmjczclTErfeJ2XUMNfGcI+YVWBiHiYB+QeocwJnCJEPjffo+06I2BdAKDobvPFSwQqZmcVewBu/OZYxSSValsAMRKRHy1tJ0GS4qcI6PTiBifht7erWh6h5KDh69AkWcaounSHXtMnVbRTnBD1MhB+z43oS4C9zOrbJxY+T0y2/hBL7aRsObGivgqQ+CTFL/rORucQUYgVCphDW7BzMq1iMRev0zKdIt0N/xp5FAiG8mWbg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SHySOglTQQblm+/wqUboCywaasdOcIjCnXEuaaSMMXI=;
- b=Aze7H5Ta9cjI2roRjtX/5akOsyQMpYM22VFnVEN4pKxomQJeWN7A/DkO4etqXSGA9OFefln+2QCcBVMW+eo4flqSI2vIxDbdMaxt2kCYu95t1kffqWXJcHRP87A1Ge/zY6hqTyi7L2eNWBqJZEOXOX3Ep3DqYxd595x0pyHhTns+vyfG9UY6Cd5TcCeRpnTOPH1KbhVHGMV3Bvcro9P3u+B7wDr9T/pcnyimbLFGXztl7xXM3ys8Iaqg/VNUQJvpceeT8dZis9++war74imfCO5Hx6DJ00U+svNAQx4DDV+K7rW0JsXjy3IY5akoBAtCdCTdatqSMaLj+ZNSSo5K8A==
-From: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Sergiy Kibrik <Sergiy_Kibrik@epam.com>, "Daniel P. Smith"
-	<dpsmith@apertussolutions.com>
-Subject: [PATCH v1] xen/xsm: flask: restore sidtab state on policy load
- failure
-Thread-Topic: [PATCH v1] xen/xsm: flask: restore sidtab state on policy load
- failure
-Thread-Index: AQHdN3bNfFShEBvmK0m4+E/2G7r3aQ==
-Date: Sat, 29 Aug 2026 05:25:28 +0000
-Message-ID: <20260829052527.678306-1-Sergiy_Kibrik@epam.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS8PR03MB9192:EE_|AS8PR03MB9141:EE_
-x-ms-office365-filtering-correlation-id: 3a004a85-3f9b-48c3-713b-08df058df04c
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|1800799024|23010399003|376014|366016|18002099003|56012099006|38070700021|11063799006|10067099003;
-x-microsoft-antispam-message-info:
- bJ69mvn5oXk20ee2aN/+FDSa9zP+0VU6zEWhJyiiKUPGJbtT5l6+P+ky7pHvQM5T1efLmzUFW8aAAm4WagWkkMQrCTN54kt8huLs6Ol4GzLasRVQamr1EpCsLpL0+6fdV3ORMM+v1n+A/tLZCrJofESCr1fZ0cNLOvoJDNeyOX/V3u9yy4wbnayKg/RO/ofgcYkz4cqH0K+dQyDy5isTPxM4CdmtOcqeSFOepSiPUXstP6RQ+/8iCbMq0t4jbBMEJJEza2+IOdnS/kwyTTERAKTGPslDZMjguWOs8qXZNs1Tl2hDatWSiW+JGVjbVSaREw/4yPoveReveTtCMyE7lj4Z4JZaowzN83DzpLOyUkMaFu6m1zgRDubG3aP1pA8nMlt5Dn1o9Bp5+y3p3LWobKvHOkZyeUV1tzqP+L8X//hqGGVOm9a/DeFX1btG+o1esem2fJN1eanhRpjkeCIOExo4TGH58fJYAgq6IyvEKA3XUIynmomlcD0kLQfDBOmQ9214n3SIe0vTO7hIkTLgDvZL/BhWo6a5CTk7f+Q/W6hmkT/5iawio1d3xusifYfHWB1C1v9iEJvfKsxLzMxFiUNbGNEp+9spTbQFmCMCetUpvvP3MwI3ayG5H69/Xhv5n7v7YD13RDYi1CY1zh+IVVlDgudbowu2BhhKxu9x+jICy+jnLl2Mzg+H2QRougOpJGnXEJ5k9/lSD8ieXViMmfGPNxoAiMju4O0NSaFfFsg=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9192.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(376014)(366016)(18002099003)(56012099006)(38070700021)(11063799006)(10067099003);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?Z1qU6kruMtp2u3TvM4wxOBFPxr+IMD72HiH5SGjmgSa6nKDgxkwcM+9Xe1?=
- =?iso-8859-1?Q?DXSeTSkn1fQkQIE7n7gct5ktcZXbBixcZomCtvnvV/k84MNvM4+QAAfmn6?=
- =?iso-8859-1?Q?SOKnmdW0S1Ne085RM4uth0NvV1fsnAhZwgPAewTnTFOBDSTIGH9jY4gIHE?=
- =?iso-8859-1?Q?TF0inQvcJntMEKe9BcxFG4fTDuhlID4N2mOEbRwFGB2MPVeBPGP+isPZsO?=
- =?iso-8859-1?Q?0N3a4TR/mV0oz4/yzinB/uXLaM6vzsLFtQaDLN19Q8b6bmaC+S6U+V2Z7t?=
- =?iso-8859-1?Q?keQpG6Fj8DVH1OKvviHbYTTpnZ4MZQDVAA4KvwCXsQwiAzn1VcfcJee2FZ?=
- =?iso-8859-1?Q?Znax7zyu9OdKuRaIulKgnLm7fiDgiKc/0r+GH3a7KCJn2rE2Mg2w5RSvmb?=
- =?iso-8859-1?Q?KpDTY5G4iDn0V+N1fDmlnM0Ah0b6onr/4uhwXRvuG0KUAopu/19ryFU58T?=
- =?iso-8859-1?Q?U6K82Z291i0egMZYOcBB6ow1+/DvYwpXd1JfFi/GT1kDVeHZq/rJ98ZjZw?=
- =?iso-8859-1?Q?V2ZxYKP11IAda+MXz+ARKklg2QNbJmNNXhLJTlU2EGzX1aupfO97spiQmn?=
- =?iso-8859-1?Q?D2sLiElLubRRUvyqjd5iEHIxhvvPZ8Ch6WiG/OqHxbhM3rpd/8d83lYMdp?=
- =?iso-8859-1?Q?huUbuXGgv+Jk6hSV35Q31hnM+Mf0cwd5/6v+LPDnZ0qY6F33eWr6aFGle3?=
- =?iso-8859-1?Q?zixW8MZaSfzqfgZxZwtq2Bz/dcT8KlXB+5ugR+SYtcXSuyfcNc4ehcV8Mk?=
- =?iso-8859-1?Q?TFN9GvxKUAOKltwrWTUG+Rm/6MoV84IAYoFBSx+77ZDLlR2aGI/eZIsXLv?=
- =?iso-8859-1?Q?bzicP6aI7abnMvpMEoSN03TVDPtuwYcL8h9mQMkPjy8aaxlkFyprf9MoOW?=
- =?iso-8859-1?Q?DePyXf2xK/MwPSi2NOUt99Mi1zwBFkiIsJcPcLf2wGyZfPcbEe8p0pqECl?=
- =?iso-8859-1?Q?cU2tKuDpMVCGPKwVmSeZTRGn9hx39SBoxlMG3wqicJ+uzTya1p4p/9Wqqi?=
- =?iso-8859-1?Q?Y3yhMCtRYTYU6M9QkIDd5ozi9KCJLomeJ4t2en41CtiIpFkv9GglAemPko?=
- =?iso-8859-1?Q?SWbWNmf8jCQzaw+XUZhx3IyqOVjadpKaLo3wpkiIhTdca21RjtYCqwCsJj?=
- =?iso-8859-1?Q?5xpAcaHZMj1NsRNSYTqvBuCadSRZPaoKZSSkRa3ea+Bc6GC1NUblKwGrup?=
- =?iso-8859-1?Q?NyYP7hQUArQ7etCA7UA+cNimEphKOlUhpzpussU8IZjAeIlzdHzZ7C5gkR?=
- =?iso-8859-1?Q?9WSLYUyYfRgFlUSAHiFsxc3LYK4XsmzeT22khOdl0G17FzcXfd6xyaER/U?=
- =?iso-8859-1?Q?dUQ5O06NhEc1GTDZG9Q7C2F0cp3eFj9jsRl+qURH7IB/FNQQWhOmbY6DJq?=
- =?iso-8859-1?Q?joaIneCrS44nFkL4XRUPPs0LuU6WEZIPn629vVRXb7t1X5I1wbbNiI3C5S?=
- =?iso-8859-1?Q?XlpJZUYbpx2xjuy9+SCZEfRz7YLH+W+dH3KnOSD+dy5WjfwslK+LsNMB7n?=
- =?iso-8859-1?Q?DPNgo9h5LYGSkMUsp6mA4YQafNL7SoDBoiVs20FwUw26JUveTBqsQBx1xo?=
- =?iso-8859-1?Q?9iw6VY8UILLzdMsIdkG01x4h4Qjdb7jRXN6bDOwUb1AoQF8dO/Hj5kxswB?=
- =?iso-8859-1?Q?PVdhaRUPX9aupD9jAcA3apj5kAxzx5EumWEB5evvJBRGxt6azrhw7iHbw1?=
- =?iso-8859-1?Q?lvTp8i3bIkie6PrrnnxWZvbKhl9DVzkpgBfSnifl+0Bx30KJO/1flud7iu?=
- =?iso-8859-1?Q?ihZPXCZGiAQ9cTHxeJmDkk9NjqnfilOPOftymIw4fVYI4DnNmH0S+jcpAT?=
- =?iso-8859-1?Q?0P1kQIXasjyWtpAe89atPa4yDlREbb4=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Authentication-Results: eu.smtp.expurgate.cloud; none
+Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1788009727;
+	b=TlD1X+b569XEEKufkEihilRCtQtJ6CtiFkxM0qovcXyjfJlwHALBXgPgYJObtHBVpYDm
+	 ZHkPct9l8dHWubpkuog75njZvaorl406aRXPIDR1tQLI85B6XqhnXfZ93DoUf8mo2HRcn
+	 hV0YIlDuImAkMKYojUS/6PP2czFnLASc/uwSPCLeQZauE67aq8an31AV6r+tEKVBlbarw
+	 vuDJsE1j6bxSYFwdwsem5ze6BVKR1YZZnlnQHUq6XBRkBrlcPeVdNX4c7xTb9GEbyy+DZ
+	 oDOkzp1coq2YdP8F+RT+GZjTuX3t84G6gVLMm+KUM8ZvedoMDDxLAwhzNO8Sl1g/X7vC+
+	 86nno0BotaUDSAkJRte6qrVdXTttEHYrEVIt8+DdWPMSY/pFWjSKDErJrprDERhyaOGg1
+	 Y0RCDwfFdRypHBLkxdJcnVXZnVa9O2Gi60VjCgCmEP1tghO4YitSzLbBIi/h8H6zuUyvd
+	 u11XEdSgaWNPES1CB9uxR43VMNoRiLuZmoLm8wQzLBQq4/cmtgaJsH4mBY/MvIi+U6omK
+	 BYcmieXnALX+C8N6IqEk9wypLyG0bhIQ5yB0JmYvtalEVBYxwzqWHj2e5PaWt3f1fma6u
+	 Czq80cTax9lhM8Hmt4bJqt8seVyv4fXzMUHUPZ9Hk0HAleXk3INxY1XYQjh445E=
+ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1788009727;
+	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
+	 Message-ID:X-Sender:Organization:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=/pEy/Zm4j9Av9iFeAsk+kZ4vGnZ9eb5eKV48lVGJeZY=;
+	b=uZZ8mX1jXHy1I2uwAag5KZicQa/LCxjzqtCiZzfsextJacIcrcfpW5jPe1C0Udk/1Zr4
+	 0ACGpdJVpyPLaIYoGvTu921BcRnsbQyPrgSOqyjunwC30q74Vcs9UErIxAzX9sCsCc5Af
+	 l8Qu13MBn4G3wy7azUa42/VRfythrc9E+/5IgXqIrHkv9f09yV5kKnxm9jJHZvJEl+dax
+	 OQRDxDUTKxTw8HOYyiQc7NZb7QFInGom4sdHrndm9TgWrLqk1fdd52VajZcnK6b7+2wwp
+	 GZ3ZY1/vvRPViONETAnxgJ9tAD82D8Z2Fbk6SfW4sMeltlktRDF7ECkCiQIoOVSURvlkU
+	 Qg1Mk9aNQer7sZMox8Xf0L8oLXMPJfszbARY2hsp2Fy+Xd6uDhZkBKevB/xGic+r3z0Xj
+	 g0TQXtKXQWcC7Hlue/DycLNEasCIiM1r4ERfqtZhnsI4rkIsb71f1oCXs2CD5yq1z5IRC
+	 2pEytHJ+642qIosrh+srz5aV4yu08NqTh8ZbVoBaKmX8wohpjQlQjCyHJgtBgH/PaL2UK
+	 sqSxb5ACYQwBydhd/gF9TkG2WfpfSFZ7glsNVD4ecJx5WCgeZ5FLRWhzc5Sm3bKI3Q7tV
+	 s0YgsM1BE37EVXOCHWVojhU33ptyi18a2MUGCt8yXN6Jl9HjkEhZNH/ii0gWXeE=
+ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR03MB9192.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3a004a85-3f9b-48c3-713b-08df058df04c
-X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Aug 2026 05:25:28.9901
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: ku0cnWMr/KZJx4qT/++t3h0MY0b1s076V9Ys13MzTj/s68nCkIsfLhCpIbdXAGgu6McBEkkrJ5qmJLeTypCChw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB9141
-X-purgate-ID: tlsNG-d25034/1787981133-018C5A5B-B34EA14B/0/0
+Date: Sat, 29 Aug 2026 15:21:57 +0200
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: xen-devel@lists.xenproject.org, Andrew Cooper
+ <andrew.cooper3@citrix.com>, Teddy Astie <teddy.astie@vates.tech>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Subject: Re: [PATCH 04/12] x86: add noreturn in a few more places
+In-Reply-To: <d0f991de-db67-4f49-aef0-25c590b3889e@suse.com>
+References: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com>
+ <d0f991de-db67-4f49-aef0-25c590b3889e@suse.com>
+Message-ID: <fceca3b7cf0ccc067f89212a30aa3a6e@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d62444/1788009728-BFA6E757-BEF4F805/0/0
 X-purgate-type: clean
-X-purgate-size: 2145
+X-purgate-size: 5143
 
-Error path of failed sidtab_map() leaves global sidtab in shutdown state an=
-d
-system unable to allocate new SIDs in sidtab_context_to_sid().
-To restore sidtab state new function sidtab_activate() is introduced, it on=
-ly
-resets shutdown flag, rewinding effect of sidtab_shutdown().
+On 2026-08-28 09:01, Jan Beulich wrote:
+> start_secondary(), do_double_fault(), play_dead(), and tboot_s3_error()
+> never return, so would better be annotated anyway. The 
+> do_double_fault()
+> change needs accompanying by adjustments to entry_from_{pv,xen}(), as
+> Eclair then deems the "return" there as unreachable.
+> 
+> context_switch() and continue_running() are odd: We can't
+> (unconditionally) add noreturn to their declarations, as Arm's variants 
+> do
+> return. Put the attribute on x86'es definitions instead (the use of
+> unreachable() in reset_stack_and_call_ind() allows the compiler to 
+> figure
+> that out itself, but Eclair wants the annotation in addition).
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
----
-New function is not strictly required, this also can be achieved just by
-doing sidtab_set(&sidtab, &sidtab), but this way we would rely on its
-undocumented internal behaviour.
----
- xen/xsm/flask/ss/services.c | 1 +
- xen/xsm/flask/ss/sidtab.c   | 7 +++++++
- xen/xsm/flask/ss/sidtab.h   | 1 +
- 3 files changed, 9 insertions(+)
+Reviewed-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 
-diff --git a/xen/xsm/flask/ss/services.c b/xen/xsm/flask/ss/services.c
-index 35ad1034ca..f5cee1e0b0 100644
---- a/xen/xsm/flask/ss/services.c
-+++ b/xen/xsm/flask/ss/services.c
-@@ -1427,6 +1427,7 @@ int security_load_policy(const void *data, size_t len=
-)
-     if ( sidtab_map(&sidtab, clone_sid, &newsidtab) )
-     {
-         rc =3D -ENOMEM;
-+        sidtab_activate(&sidtab);
-         goto err;
-     }
-=20
-diff --git a/xen/xsm/flask/ss/sidtab.c b/xen/xsm/flask/ss/sidtab.c
-index 69fc3389b3..5d1653cd02 100644
---- a/xen/xsm/flask/ss/sidtab.c
-+++ b/xen/xsm/flask/ss/sidtab.c
-@@ -314,6 +314,13 @@ void sidtab_set(struct sidtab *dst, struct sidtab *src=
-)
-     SIDTAB_UNLOCK(src);
- }
-=20
-+void sidtab_activate(struct sidtab *s)
-+{
-+    SIDTAB_LOCK(s);
-+    s->shutdown =3D 0;
-+    SIDTAB_UNLOCK(s);
-+}
-+
- void sidtab_shutdown(struct sidtab *s)
- {
-     SIDTAB_LOCK(s);
-diff --git a/xen/xsm/flask/ss/sidtab.h b/xen/xsm/flask/ss/sidtab.h
-index 0e48ec6eae..5d2dc9c7e1 100644
---- a/xen/xsm/flask/ss/sidtab.h
-+++ b/xen/xsm/flask/ss/sidtab.h
-@@ -48,6 +48,7 @@ int sidtab_context_to_sid(struct sidtab *s, struct contex=
-t *context, u32 *sid);
- void sidtab_hash_eval(struct sidtab *h, char *tag);
- void sidtab_destroy(struct sidtab *s);
- void sidtab_set(struct sidtab *dst, struct sidtab *src);
-+void sidtab_activate(struct sidtab *s);
- void sidtab_shutdown(struct sidtab *s);
-=20
- #endif    /* _SS_SIDTAB_H_ */
---=20
-2.43.0
+> ---
+> entry_from_pv() wants the annotation only when PV=n, yet once added gcc
+> then warns about "return" being used in a "noreturn" function. Is there
+> any other approach to address this besides adding #ifdef inside the
+> function (i.e. replacing the !IS_ENABLED(CONFIG_PV) check that's 
+> there)?
+> 
+
+Besides GCC's warning, this would violate MISRA C's Rule 17.9 ("A 
+function declared with a _Noreturn function specifier shall not return 
+to its caller")
+which is not (yet) adopted by Xen, as it comes with MISRA C:2012 
+Amendment 3, whereas as you know Xen is based on MISRA C:2012 Amendment 
+2 rules.
+Besides this, perhaps an alternative could be something like this 
+(untested):
+
+#define __noreturn_0
+#define __noreturn_1 __attribute__((noreturn))
+
+#define __noreturn_select(x) __noreturn_select_(x)
+#define __noreturn_select_(x) __noreturn_ ## x
+
+#define noreturn(cond) __noreturn_select(cond)
+
+assuming use sites such as noreturn(IS_ENABLED(CONFIG_FOO))
+
+> --- a/xen/arch/x86/domain.c
+> +++ b/xen/arch/x86/domain.c
+> @@ -2163,7 +2163,7 @@ static void __context_switch(void)
+>      per_cpu(curr_vcpu, cpu) = n;
+>  }
+> 
+> -void context_switch(struct vcpu *prev, struct vcpu *next)
+> +void noreturn context_switch(struct vcpu *prev, struct vcpu *next)
+>  {
+>      unsigned int cpu = smp_processor_id();
+>      struct cpu_info *info = get_cpu_info();
+> @@ -2240,7 +2240,7 @@ void context_switch(struct vcpu *prev, s
+>      reset_stack_and_call_ind(nextd->arch.ctxt_switch->tail);
+>  }
+> 
+> -void continue_running(struct vcpu *same)
+> +void noreturn continue_running(struct vcpu *same)
+>  {
+>      reset_stack_and_call_ind(same->domain->arch.ctxt_switch->tail);
+>  }
+> --- a/xen/arch/x86/include/asm/cpuidle.h
+> +++ b/xen/arch/x86/include/asm/cpuidle.h
+> @@ -26,7 +26,7 @@ static inline int mwait_idle_init(struct
+>  int cpuidle_init_cpu(unsigned int cpu);
+>  void cf_check default_dead_idle(void);
+>  void cf_check acpi_dead_idle(void);
+> -void play_dead(void);
+> +void noreturn play_dead(void);
+>  void trace_exit_reason(u32 *irq_traced);
+>  void update_idle_stats(struct acpi_processor_power *power,
+>                         struct acpi_processor_cx *cx,
+> --- a/xen/arch/x86/include/asm/tboot.h
+> +++ b/xen/arch/x86/include/asm/tboot.h
+> @@ -126,7 +126,7 @@ int tboot_in_measured_env(void);
+>  int tboot_protect_mem_regions(void);
+>  int cf_check tboot_parse_dmar_table(acpi_table_handler dmar_handler);
+>  int tboot_s3_resume(void);
+> -void tboot_s3_error(int error);
+> +void noreturn tboot_s3_error(int error);
+>  int tboot_wake_ap(int apicid, unsigned long sipi_vec);
+>  #else
+>  static inline void tboot_probe(void) {}
+> --- a/xen/arch/x86/smpboot.c
+> +++ b/xen/arch/x86/smpboot.c
+> @@ -326,7 +326,7 @@ static void set_cpu_sibling_map(unsigned
+>      }
+>  }
+> 
+> -void asmlinkage start_secondary(void)
+> +void asmlinkage noreturn start_secondary(void)
+>  {
+>      struct cpu_info *info = get_cpu_info();
+>      unsigned int cpu = smp_processor_id();
+> --- a/xen/arch/x86/traps.c
+> +++ b/xen/arch/x86/traps.c
+> @@ -1080,7 +1080,7 @@ const char *vector_name(unsigned int vec
+>      return (vec < ARRAY_SIZE(names) && names[vec][0]) ? names[vec] : 
+> "???";
+>  }
+> 
+> -void asmlinkage do_double_fault(struct cpu_user_regs *regs)
+> +void asmlinkage noreturn do_double_fault(struct cpu_user_regs *regs)
+>  {
+>      unsigned int cpu;
+>      struct extra_state state;
+> @@ -2304,7 +2304,7 @@ void asmlinkage entry_from_pv(struct cpu
+>      case X86_ET_HW_EXC:
+>          switch ( vec )
+>          {
+> -        case X86_EXC_DF: return do_double_fault(regs);
+> +        case X86_EXC_DF: do_double_fault(regs); /* noreturn */
+>          case X86_EXC_MC: return do_machine_check(regs);
+>          }
+>          break;
+> @@ -2615,7 +2615,7 @@ void asmlinkage entry_from_xen(struct cp
+>      case X86_ET_HW_EXC:
+>          switch ( regs->fred_ss.vector )
+>          {
+> -        case X86_EXC_DF: return do_double_fault(regs);
+> +        case X86_EXC_DF: do_double_fault(regs); /* noreturn */
+>          case X86_EXC_MC: return do_machine_check(regs);
+>          }
+>          break;
+
+-- 
+Nicola Vetrini, B.Sc.
+Software Engineer
+BUGSENG (https://bugseng.com)
+LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
 
