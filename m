@@ -4,41 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D08ABC61DB9
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2026 23:27:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1402529.1637582 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76C13C61DD3
+	for <xen-devel@archiver.kernel.org>; Sat, 29 Aug 2026 02:13:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1402571.1637600 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x05yT-0000eU-Hr; Fri, 28 Aug 2026 23:27:05 +0000
+	id 1x08ZP-0003Ew-2u; Sat, 29 Aug 2026 02:13:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1402529.1637582; Fri, 28 Aug 2026 23:27:05 +0000
+Received: by outflank-mailman (output) from mailman id 1402571.1637600; Sat, 29 Aug 2026 02:13:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x05yT-0000eN-Ee; Fri, 28 Aug 2026 23:27:05 +0000
-Received: by outflank-mailman (input) for mailman id 1402529;
- Fri, 28 Aug 2026 23:27:04 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+de67a59a32f6d1ab6349+8405+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1x05yQ-0000eH-Vv
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2026 23:27:04 +0000
+	id 1x08ZP-0003Ep-0A; Sat, 29 Aug 2026 02:13:23 +0000
+Received: by outflank-mailman (input) for mailman id 1402571;
+ Sat, 29 Aug 2026 02:13:21 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Jan.SetjeEilers@oracle.com>) id 1x08ZN-0003ES-KH
+ for xen-devel@lists.xenproject.org; Sat, 29 Aug 2026 02:13:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x05yO-004VmE-OR; Sat, 29 Aug 2026 01:27:00 +0200
-Received: from [10.42.69.6] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <BATV+de67a59a32f6d1ab6349+8405+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a921936-bab6-0a2a0a5309dd-0a2a45068626-8
- for <multiple-recipients>; Sat, 29 Aug 2026 01:27:00 +0200
-Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <BATV+de67a59a32f6d1ab6349+8405+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a921943-195a-0a2a45060019-5a9b32229b60-3
- for <multiple-recipients>; Sat, 29 Aug 2026 01:27:00 +0200
-Received: from [2001:8b0:10b:5:d89b:13dc:754b:b035]
- (helo=u09cd745991455d.ant.amazon.com)
- by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1x05y6-0000000FbWS-0Tpk; Fri, 28 Aug 2026 23:26:42 +0000
+ id 1x08ZM-00BlBR-Gc
+ for xen-devel@lists.xenproject.org; Sat, 29 Aug 2026 04:13:20 +0200
+Received: from [10.42.69.12] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <Jan.SetjeEilers@oracle.com>)
+ id 6a923fd5-2eae-0a2a0a5409dd-0a2a450ca416-36
+ for <xen-devel@lists.xenproject.org>; Sat, 29 Aug 2026 04:13:20 +0200
+Received: from [205.220.165.32] (helo=mx0a-00069f02.pphosted.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Jan.SetjeEilers@oracle.com>)
+ id 6a92403e-f479-0a2a450c0019-cddca520b78a-3
+ for <xen-devel@lists.xenproject.org>; Sat, 29 Aug 2026 04:13:20 +0200
+Received: from pps.filterd (m0333521.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 67T2A1mf389496; Sat, 29 Aug 2026 02:13:06 GMT
+Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com
+ (iadpaimrmta02.appoci.oracle.com [147.154.18.20])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4gbpbar02q-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Sat, 29 Aug 2026 02:13:05 +0000 (GMT)
+Received: from pps.filterd
+ (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
+ by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.7/8.18.1.7)
+ with ESMTP id 67T22JER028154; Sat, 29 Aug 2026 02:13:04 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id
+ 4gbnvmgghk-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Sat, 29 Aug 2026 02:13:04 +0000 (GMT)
+Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com
+ (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
+ by pps.reinject (8.18.1.12/8.18.1.12) with ESMTP id 67T2D0Ex013633;
+ Sat, 29 Aug 2026 02:13:04 GMT
+Received: from setje-aarch64-ol9-builds.osdevelopmeniad.oraclevcn.com
+ (setje-aarch64-ol9-builds.allregionaliads.osdevelopmeniad.oraclevcn.com
+ [100.100.248.24])
+ by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id
+ 4gbnvmgggn-2; Sat, 29 Aug 2026 02:13:04 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,187 +71,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="MIME-Version:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
-	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=0tgNniJFKgy7c4X6zhz8g5nDoCwIew+VzfMrf/A7zv8=; b=Y1ztMb5fee8HrackV7cB8wzPnZ
-	3IK5avP+Fq/dyxz7E9egQaZ9iFJ196cBxbBKz5qLBYKYpXdHmhYF9ib5EP8qVU4QNpq9iLaXC255a
-	1H9BgcGO2/Yo0I1V+eEsp5XOpmmC3/4I2Fi8mLcq4ZLYkelqHm9NAXrxX5l4MGuxlpkq2MGBDCwDa
-	oonR+aOV7TIms7Rxo7kC9t1IRFXK1ZXsRgPppIHAjmYpLFo3qBiqAi/jtZ5K62yBNhICUw8NgXt0k
-	BGTb6WowKoJSl3G5GDTdNWTdulkNLtRuSTZfOQO/3j/QiSYXDUHbaywxeoLTVVB+0wgqEiUzoSPCo
-	3onFVizw==;
-Message-ID: <e93c9edb54af426397ca6282e2f75dbfb0facab4.camel@infradead.org>
-Subject: Re: [PATCH v7 31/36] KVM: x86: Add KVM_[GS]ET_CLOCK_GUEST for
- accurate KVM clock migration
-From: David Woodhouse <dwmw2@infradead.org>
-To: Sean Christopherson <seanjc@google.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <skhan@linuxfoundation.org>, Thomas Gleixner <tglx@kernel.org>,
- Ingo Molnar <mingo@redhat.com>,  Borislav Petkov	 <bp@alien8.de>, Dave
- Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin"	
- <hpa@zytor.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, Juergen Gross	
- <jgross@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Paul
- Durrant	 <paul@xen.org>, Jonathan Cameron <jic23@kernel.org>, Sascha
- Bischoff	 <Sascha.Bischoff@arm.com>, Marc Zyngier <maz@kernel.org>, Joey
- Gouly	 <joey.gouly@arm.com>, Jack Allister <jalliste@amazon.com>, Dongli
- Zhang	 <dongli.zhang@oracle.com>, joe.jin@oracle.com, kvm@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	xen-devel@lists.xenproject.org, linux-kselftest@vger.kernel.org
-Date: Sat, 29 Aug 2026 00:26:28 +0100
-In-Reply-To: <4420099fedce20021d6cc5aeb1aa270c7951c552.camel@infradead.org>
-References: <20260728144954.355376-1-dwmw2@infradead.org>
-		 <20260728144954.355376-32-dwmw2@infradead.org>
-		 <anuy6QxUVLcSSVCn@google.com>
-	 <4420099fedce20021d6cc5aeb1aa270c7951c552.camel@infradead.org>
-Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-gZIQ/HFPHjw8QZC7Itn1"
-User-Agent: Evolution 3.60.3-0ubuntu1~ppa9~24.04 
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=corp-2025-04-25 header.d=oracle.com header.i="@oracle.com" header.h="Cc:Content-Transfer-Encoding:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+	:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=corp-2025-04-25; bh=rb5Ul
+	RZBuyNBkOiWOQDXJQblEyMkdYvtbNX049BzWC0=; b=HcZ9Dj7ypmEJzO6fWJkpW
+	JiSyqdg8CGoVmqiX/QtyTr+JDDJWaBkNtjkhfwlug/G6WAJC0kNR1OsZwcyP5aDt
+	PcmWLSWxekPuISBUovUUF6TdT+O3ZhAn/ynnEgHIA4JQiFYDQOYkqlN/ooA/q7Wj
+	76hvaFZ9H8eXNK9JoVfsEimepcVnOHWqFX14HfFsNmSQN7Y5xWPa4cs/sM4WR6+7
+	dPU/UhBPN8AcG1RZCajaQ4r4kCUp/Wd79o99gSoqDXapptVEl1sTJ6PT6C0BpggZ
+	EXbAQ7VLnbbNJX7+1P0B54Ok5vXN2K9cmI1jTOJ5GyAYJr4786Fix5YSliypJYA5
+	Q==
+From: Jan Setje-Eilers <Jan.SetjeEilers@oracle.com>
+To: xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Julien Grall <julien@xen.org>,
+        Bertrand Marquis <bertrand.marquis@arm.com>,
+        Michal Orzel <michal.orzel@amd.com>,
+        Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+        Jan Beulich <jbeulich@suse.com>,
+        Joao Martins <joao.m.martins@oracle.com>,
+        Jan Setje-Eilers <Jan.SetjeEilers@oracle.com>
+Subject: [RFC PATCH 1/1] xen/arm: smccc: preserve arguments before register setup
+Date: Sat, 29 Aug 2026 02:12:56 +0000
+Message-ID: <20260829021257.3310112-2-Jan.SetjeEilers@oracle.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260829021257.3310112-1-Jan.SetjeEilers@oracle.com>
+References: <20260829021257.3310112-1-Jan.SetjeEilers@oracle.com>
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-16d1c6/1787959620-F70C777B-3E7B3968/0/0
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-29_01,2026-08-27_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
+ bulkscore=0 mlxlogscore=978 lowpriorityscore=0 suspectscore=0 malwarescore=0
+ spamscore=0 phishscore=0 mlxscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.19.0-2606160000 definitions=main-2608290015
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI5MDAxNyBTYWx0ZWRfX3KW6cElt9A6K
+ xUDLhI9SFwekAgpUmCCfSj0m7vdVeCOf0ZtQMKELMGSTvEHPCiw6sun5s9ER4Ibo7AcvAWAmftt
+ lGzXfki8GTdCeph9ufnuyAuIeq8uvYEVDSg7vLdO/7coK8oWD1SK
+X-Proofpoint-ORIG-GUID: FGMoogbrzpaAlnsrNqh5FY-3d9YN49Gi
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI5MDAxNyBTYWx0ZWRfX0xNJ2krWRnt6
+ /OEgD4exTlkJumvdRgLsAmxYJomH/UnDHLAbjmTL5Fzctp+ANKop4rW1fbkBDhds5MpOz1eXaxo
+ a+stN1MD/ZscSyL4M65HgGJkCWFlZGcTpJMG1TPBibe9FSfwfzDsMyVN94QVXip4U9Sn5aUkYed
+ EeqlipHWK4WbDjy0PbPNyrJJ8giTsgSOqA5CDsUdoDigu1x9YHAkVVVcopTMkcA3s3SdulbThqd
+ yPHhXwSR/hyKTHxinmaaHuA/ssKvsJ+sUiBkZZqpOsRXMRyY3S21/mHiTE8PkVXEO87zBcs0YiE
+ lp/Gi4XviLdAQnGUOJU5fFq5jvnk81J0dVoQd2MuJPW/vEcsxxZ3axHx/0ESt2/S38fPj/qsefi
+ Xk+lbHh2a9B+fr9zoXfVmoNoZMFzCCJtqsfWw2iFnnnyBYVTCgQhgR4rk0sRoTy3TuVEvflzcw6
+ 8IPJFlPnsTcf3BDX3XmTQyZWof+kKVddNyICQkaA=
+X-Authority-Analysis: v=2.4 cv=DMi/JSNb c=1 sm=1 tr=0 ts=6a924032 b=1 cx=c_pps
+ a=e1sVV491RgrpLwSTMOnk8w==:117 a=e1sVV491RgrpLwSTMOnk8w==:17
+ a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=jiCTI4zE5U7BLdzWsZGv:22
+ a=x0eKOSpe3m1H3M0S9YoZ:22 a=yPCof4ZbAAAA:8 a=wusNpQs0DAacjZ9UpgIA:9
+ a=5yU3S35YU4bGjq-dph-N:22 a=Bho9c0fBagfJEIQBS7DQ:22 cc=ntf awl=host:13521
+X-Proofpoint-GUID: FGMoogbrzpaAlnsrNqh5FY-3d9YN49Gi
+X-purgate-ID: tlsNG-d25034/1787969600-010C9A5B-15A0C065/0/0
 X-purgate-type: clean
-X-purgate-size: 9469
+X-purgate-size: 3908
 
+Some callers of arm_smccc_1_1_smc() pass get_user_reg() calls as
+arguments. These include the SCMI, ZynqMP EEMI, and i.MX forwarding
+paths.
 
---=-gZIQ/HFPHjw8QZC7Itn1
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+The argument macros currently put each value into its SMC register as
+the expression is evaluated. A later function call can overwrite a
+register prepared for an earlier argument. Firmware then receives the
+wrong values.
 
-On Fri, 2026-08-14 at 08:27 +0100, David Woodhouse wrote:
->=20
-> Fixup below (not amending commits while you're co-opting the tree, as
-> we'd both go insane). I'll push it to the top of=20
-> https://git.infradead.org/?p=3Dusers/dwmw2/linux.git;a=3Dshortlog;h=3Dref=
-s/heads/kvmclock9-part2
-> on top of with the offset test which is already there.
+Restore temporary variables for a1-a7. Because the macros are nested,
+this lets every function call finish before x0-x7 are prepared for the
+SMC instruction. It also keeps the inferred type of each argument.
 
-Since it looks like you are concentrating on part1, I have actually
-folded that in now, and rebased on top of your v10 of part1:
+Fixes: 67bcf5eae709 ("xen/arm: Simplify type handling for SMCCC declarations")
+Backport: 4.22+
+Assisted-by: Codex:GPT-5
+Signed-off-by: Jan Setje-Eilers <Jan.SetjeEilers@oracle.com>
+---
+ xen/arch/arm/include/asm/smccc.h | 26 +++++++++++++++++++-------
+ 1 file changed, 19 insertions(+), 7 deletions(-)
 
-https://git.infradead.org/?p=3Dusers/dwmw2/linux.git;a=3Dshortlog;h=3Drefs/=
-heads/kvmclock10-part2
+diff --git a/xen/arch/arm/include/asm/smccc.h b/xen/arch/arm/include/asm/smccc.h
+index 62c6985e73..a153042cc5 100644
+--- a/xen/arch/arm/include/asm/smccc.h
++++ b/xen/arch/arm/include/asm/smccc.h
+@@ -108,37 +108,49 @@ struct arm_smccc_res {
+ #define __constraint_read_6 __constraint_read_5, "r" (arg6)
+ #define __constraint_read_7 __constraint_read_6, "r" (arg7)
+ 
++/*
++ * Save a1-a7 in temporary variables before assigning the SMC argument
++ * registers.  A later argument may call a function and overwrite a register
++ * assigned earlier.
++ */
+ #define __declare_arg_0(a0, res)                            \
+     struct arm_smccc_res    *___res = (res);                \
+     register unsigned long  arg0 ASM_REG(0) = (uint32_t)(a0)
+ 
+ #define __declare_arg_1(a0, a1, res)                        \
++    auto __a1 = (a1);                                       \
+     __declare_arg_0(a0, res);                               \
+-    register auto           arg1 ASM_REG(1) = (a1)
++    register auto           arg1 ASM_REG(1) = __a1
+ 
+ #define __declare_arg_2(a0, a1, a2, res)                    \
++    auto __a2 = (a2);                                       \
+     __declare_arg_1(a0, a1, res);                           \
+-    register auto           arg2 ASM_REG(2) = (a2)
++    register auto           arg2 ASM_REG(2) = __a2
+ 
+ #define __declare_arg_3(a0, a1, a2, a3, res)                \
++    auto __a3 = (a3);                                       \
+     __declare_arg_2(a0, a1, a2, res);                       \
+-    register auto           arg3 ASM_REG(3) = (a3)
++    register auto           arg3 ASM_REG(3) = __a3
+ 
+ #define __declare_arg_4(a0, a1, a2, a3, a4, res)        \
++    auto __a4 = (a4);                                   \
+     __declare_arg_3(a0, a1, a2, a3, res);               \
+-    register auto           arg4 ASM_REG(4) = (a4)
++    register auto           arg4 ASM_REG(4) = __a4
+ 
+ #define __declare_arg_5(a0, a1, a2, a3, a4, a5, res)    \
++    auto __a5 = (a5);                                   \
+     __declare_arg_4(a0, a1, a2, a3, a4, res);           \
+-    register auto           arg5 ASM_REG(5) = (a5)
++    register auto           arg5 ASM_REG(5) = __a5
+ 
+ #define __declare_arg_6(a0, a1, a2, a3, a4, a5, a6, res)    \
++    auto __a6 = (a6);                                        \
+     __declare_arg_5(a0, a1, a2, a3, a4, a5, res);           \
+-    register auto           arg6 ASM_REG(6) = (a6)
++    register auto           arg6 ASM_REG(6) = __a6
+ 
+ #define __declare_arg_7(a0, a1, a2, a3, a4, a5, a6, a7, res)    \
++    auto __a7 = (a7);                                            \
+     __declare_arg_6(a0, a1, a2, a3, a4, a5, a6, res);           \
+-    register auto           arg7 ASM_REG(7) = (a7)
++    register auto           arg7 ASM_REG(7) = __a7
+ 
+ #define ___declare_args(count, ...) __declare_arg_ ## count(__VA_ARGS__)
+ #define __declare_args(count, ...)  ___declare_args(count, __VA_ARGS__)
+-- 
+2.47.3
 
-A relatively boring rebase, apart from having to bump a CAP number.
-
-Testing now...
-
---=-gZIQ/HFPHjw8QZC7Itn1
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Transfer-Encoding: base64
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCE8Ew
-ggWvMIIEl6ADAgECAhANkOKMSmGXhF5eMl0rsRhvMA0GCSqGSIb3DQEBDAUAMGUxCzAJBgNVBAYT
-AlVTMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xJDAi
-BgNVBAMTG0RpZ2lDZXJ0IEFzc3VyZWQgSUQgUm9vdCBHMjAeFw0yNDAzMTMwMDAwMDBaFw0zNDAz
-MTIyMzU5NTlaMGIxCzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UE
-AxMxRGlnaUNlcnQgQXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTCCAiIw
-DQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBAOfSIeC0vv1xPQ+dgSxbIIrkaru6skAWJYaGFzmv
-q4Kq+2wU2jxhcWlJg/JeP5jEkq/LM3pn5aaLao79j+XRmS7J1ZpJKUODJVoM4s9MQJhTMvo4qS5Z
-S64g6QR7Obkz3I1Lr3aWeSBmDDEyzue+NKtuWZ1Cxy3RdXo/w5HgRc3l2AercOM3Gt1XonTzEtTb
-Z/Hwc0Sn9Gz8RmGRK6Ka4hVDl8q/2l110KaV233Kh5etP0csXS8MIMdVRfRu3sc5hp13DG7lCKzK
-72a2GEpI8Wpl26G6I1/LMzz/98T+FqjTqxsdquk7Cj7m2vKGLW1BorpQH7WFGPdJQXJe1hfbfiZA
-CcVdCtl4nAacFacmsiArZBfX7AQGL7isvHUwwYFEtcApyGW4p2Lt+t8nvU0CANA6BHOpOz1xOP8W
-mAESbUriIjyuTUf3fJ9oDNCurVqhASMJCDaWI3lYX/QAoiAzt6akqbbZxo2ujW7mGGqc0KxqE2cs
-h2T79v7pC8aUtHBfwNrTR19GnZVxE0eQ7ViIQhR6mpSaUQFA9sG+cmD2G8TnCgYsLa0q8De6F61a
-CBevQGHNzrbZ3JAMneveYg/Jy1XxQHDRcvrMfWKe0jjcWbdKYlaGVPm5V1ILwYz7Yv5ewo3NUrxI
-GJiywe9qPhuJSDZs7VehTuI0FxGIsgKzVjgbAgMBAAGjggFcMIIBWDASBgNVHRMBAf8ECDAGAQH/
-AgEAMB0GA1UdDgQWBBT3m6JO05fF9DQPQw6Bhc6RkzKv+TAfBgNVHSMEGDAWgBTOw0q5mVXyuNtg
-v6l+vVa1lzan1jAOBgNVHQ8BAf8EBAMCAYYwHQYDVR0lBBYwFAYIKwYBBQUHAwQGCCsGAQUFBwMC
-MHkGCCsGAQUFBwEBBG0wazAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29tMEMG
-CCsGAQUFBzAChjdodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkSURS
-b290RzIuY3J0MEUGA1UdHwQ+MDwwOqA4oDaGNGh0dHA6Ly9jcmwzLmRpZ2ljZXJ0LmNvbS9EaWdp
-Q2VydEFzc3VyZWRJRFJvb3RHMi5jcmwwEQYDVR0gBAowCDAGBgRVHSAAMA0GCSqGSIb3DQEBDAUA
-A4IBAQA+b8Uw53sDspdZgukU+qzLyyHkcjlxGGhHlP+zrmDLKm1wEFvCRS2pili3Hy67i8N4N5NU
-vw5Rg6kv3lxb9S9Rktxk43k+tvm68pl7OxQE55ZjVY87P0lUPGwEqOOwLLyH02ZQcsfq5p5LrOH9
-0JvmvZ1yy73HS+VpDAqOlytE0NSvTIRqFFkKQGQwfjvtql9YflujuNNvJztjBaHKYZsnNSg+J38o
-jYq4TP3pSg3UdVH0PncVjPQyqxC9xef5Xae92Kbkzol3x7Nel3A1bwAkalrDMspvTHvey6LfiBks
-FIqviTnoy7fgjaRAJgHS+RXx/cmuRd3rUAclSVVrYu8RMIIHAzCCBOugAwIBAgIQAzUotrsybJHx
-HTjKOIVdIDANBgkqhkiG9w0BAQsFADBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQs
-IEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFzc3VyZWQgRzIgU01JTUUgUlNBNDA5NiBTSEEzODQg
-MjAyNCBDQTEwHhcNMjYwNzE4MDAwMDAwWhcNMjgwMTA0MjM1OTU5WjAeMRwwGgYDVQQDDBNkd213
-MkBpbmZyYWRlYWQub3JnMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA2pYux73kdbYX
-sWF8f1u6DJP91qcqaZetsyfPkZk0B+MmXmAEv0kVes5n15V2mbDThOnpoPFly0UugQO9JYqLfrtD
-tKD5yL58fgrDB9Dw+LQikgrHafl6YSCds5AvUu/8hw2J6noKrcOLJpKlKn9Fl/4IB9Q3JIdLx5aa
-EtTqMalIPqHFOlgrJ7s+aua8xbB8YQ9ahqYBXWRJNv3P/2b1DYtdrz1oqZPE3CcB8Pc6Gf2a1Tcm
-6TAgtEx7Cf1BFcrsrMz7TWHmGQITieNb2r9UYWSc2Gp+GtYFNJCgT0JJXKUBIauPMKBLteYrL8Fo
-ff/uY44dC/mDWjdCP/5x0qelPQjlBvWdHL5zvBTOj06rJ0m3HNI/hnIcDh0Qu2j9reb9rLVcdym6
-bWmBM4uDEB8Zv9Ph0KTBFSy1IosyakuD1j1Os30EzjGfbi0EUXIvnOcYbTBAbM5UAzrxEHMhBvoX
-Pvnx+OyvjJmc9tWxTX6AcSz+m40esbT17URBeZS18afgieiikm5TynlUYP1LciR3hSgGVzvGXnKO
-02VDFR5itGWdRKZ2W5wIShNfWfhSa0D0K5UdIDt5Qc7sjzwK1Yb1sY5Tu0uA5mhIS82q1ov83uxB
-sFkriNnhGv/M1NCDVLBiOMsHu73qUM+yKmgKLwF9Hfn9WI25glbAMI4S5r3hYzcCAwEAAaOCAfcw
-ggHzMB8GA1UdIwQYMBaAFPebok7Tl8X0NA9DDoGFzpGTMq/5MB0GA1UdDgQWBBRcYhqbcGzn1jrT
-JOZaB8O7qllDpzAwBgNVHREEKTAngRNkd213MkBpbmZyYWRlYWQub3JngRBkYXZpZEB3b29kaG91
-LnNlMBQGA1UdIAQNMAswCQYHZ4EMAQUBAjAOBgNVHQ8BAf8EBAMCBeAwHQYDVR0lBBYwFAYIKwYB
-BQUHAwIGCCsGAQUFBwMEMIGpBgNVHR8EgaEwgZ4wTaBLoEmGR2h0dHA6Ly9jcmwzLmRpZ2ljZXJ0
-LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsME2gS6BJ
-hkdodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZT
-SEEzODQyMDI0Q0ExLmNybDCBjQYIKwYBBQUHAQEEgYAwfjAkBggrBgEFBQcwAYYYaHR0cDovL29j
-c3AuZGlnaWNlcnQuY29tMFYGCCsGAQUFBzAChkpodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20v
-RGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZTSEEzODQyMDI0Q0ExLmNydDANBgkqhkiG9w0B
-AQsFAAOCAgEAocabrh1cPd5s3vY5rnlBVQSTc7zs2ZWs67dAIltR+05WELrYClVzzUhMs/LOJPlr
-EUo45UDDomXq38DxFepaPd9+iNLjXfn33EX/IG44j04lU/oF/Rg9VeQILkYLbCZ/x9wOjNHZc4SN
-ydY7Dhvf/sT5aBz88u7D5+azZJ7Qf1U57wYseCH1Mt0nDrtr5y19IJ8D9xJJ33RFL6vfpHZBBAQ8
-+3RqkKNxLoV2aFvQhxdhjNLDqTv3LjUIdicwPraN7JkxEu7CV2Lka7eRqJgkWL7SK0YmBjGpRafs
-+icP/ON5RCCKTTb6VlX8eTG2sJJfsFhvJNCCt6xexbWzWtIrfP7NvPBvwBB737AyEGBZkS5aNizT
-McURJGTv9UKvBh1LF/+tNhYtLvPCN7oecGzhCHht9jcwSkygTo3Y6YlK3QgOu+ncmiBbfeuwlLZ1
-LxbYvG6hgNqXv7u6YyADbYajAQJXJ2OQen39pm3Q/AQSyLYG+B8lDglWsM8tYXPlEdrYJcksGK6F
-nqIX6Bumn43rBooLJdiZp4WmfWdL2pxe+LxRDjprmqu1WprixDxULSTOKJZoqTlugs6y3Bc+if+s
-gHnBBtz9WQ6MtPHkh7zONDAFIKcBmv8OqPQCx0F3Wv3OEybwMpXx0OsKgK8wLldaX1pXcMuyDgTL
-Sqs0AV0OHUgwggcDMIIE66ADAgECAhADNSi2uzJskfEdOMo4hV0gMA0GCSqGSIb3DQEBCwUAMGIx
-CzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UEAxMxRGlnaUNlcnQg
-QXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTAeFw0yNjA3MTgwMDAwMDBa
-Fw0yODAxMDQyMzU5NTlaMB4xHDAaBgNVBAMME2R3bXcyQGluZnJhZGVhZC5vcmcwggIiMA0GCSqG
-SIb3DQEBAQUAA4ICDwAwggIKAoICAQDali7HveR1thexYXx/W7oMk/3Wpyppl62zJ8+RmTQH4yZe
-YAS/SRV6zmfXlXaZsNOE6emg8WXLRS6BA70liot+u0O0oPnIvnx+CsMH0PD4tCKSCsdp+XphIJ2z
-kC9S7/yHDYnqegqtw4smkqUqf0WX/ggH1Dckh0vHlpoS1OoxqUg+ocU6WCsnuz5q5rzFsHxhD1qG
-pgFdZEk2/c//ZvUNi12vPWipk8TcJwHw9zoZ/ZrVNybpMCC0THsJ/UEVyuyszPtNYeYZAhOJ41va
-v1RhZJzYan4a1gU0kKBPQklcpQEhq48woEu15isvwWh9/+5jjh0L+YNaN0I//nHSp6U9COUG9Z0c
-vnO8FM6PTqsnSbcc0j+GchwOHRC7aP2t5v2stVx3KbptaYEzi4MQHxm/0+HQpMEVLLUiizJqS4PW
-PU6zfQTOMZ9uLQRRci+c5xhtMEBszlQDOvEQcyEG+hc++fH47K+MmZz21bFNfoBxLP6bjR6xtPXt
-REF5lLXxp+CJ6KKSblPKeVRg/UtyJHeFKAZXO8Zeco7TZUMVHmK0ZZ1EpnZbnAhKE19Z+FJrQPQr
-lR0gO3lBzuyPPArVhvWxjlO7S4DmaEhLzarWi/ze7EGwWSuI2eEa/8zU0INUsGI4ywe7vepQz7Iq
-aAovAX0d+f1YjbmCVsAwjhLmveFjNwIDAQABo4IB9zCCAfMwHwYDVR0jBBgwFoAU95uiTtOXxfQ0
-D0MOgYXOkZMyr/kwHQYDVR0OBBYEFFxiGptwbOfWOtMk5loHw7uqWUOnMDAGA1UdEQQpMCeBE2R3
-bXcyQGluZnJhZGVhZC5vcmeBEGRhdmlkQHdvb2Rob3Uuc2UwFAYDVR0gBA0wCzAJBgdngQwBBQEC
-MA4GA1UdDwEB/wQEAwIF4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwgakGA1UdHwSB
-oTCBnjBNoEugSYZHaHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0QXNzdXJlZEcyU01J
-TUVSU0E0MDk2U0hBMzg0MjAyNENBMS5jcmwwTaBLoEmGR2h0dHA6Ly9jcmw0LmRpZ2ljZXJ0LmNv
-bS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsMIGNBggrBgEF
-BQcBAQSBgDB+MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wVgYIKwYBBQUH
-MAKGSmh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNB
-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
-/Ri50dTqZ1yRvjmEyxjPdqMAAAAAAAA=
-
-
---=-gZIQ/HFPHjw8QZC7Itn1--
 
