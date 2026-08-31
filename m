@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA0BBC624A4
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Aug 2026 13:36:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1404059.1637996 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13B70C624C6
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Aug 2026 13:46:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1404069.1638005 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x12B5-0008F9-QN; Mon, 31 Aug 2026 13:35:59 +0000
+	id 1x12L6-0001ii-QT; Mon, 31 Aug 2026 13:46:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1404059.1637996; Mon, 31 Aug 2026 13:35:59 +0000
+Received: by outflank-mailman (output) from mailman id 1404069.1638005; Mon, 31 Aug 2026 13:46:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x12B5-0008F1-N6; Mon, 31 Aug 2026 13:35:59 +0000
-Received: by outflank-mailman (input) for mailman id 1404059;
- Mon, 31 Aug 2026 13:35:57 +0000
+	id 1x12L6-0001ib-NY; Mon, 31 Aug 2026 13:46:20 +0000
+Received: by outflank-mailman (input) for mailman id 1404069;
+ Mon, 31 Aug 2026 13:46:20 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <sashal@kernel.org>) id 1x12B3-0008Ev-Av
- for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 13:35:57 +0000
+ (envelope-from <sashal@kernel.org>) id 1x12L6-0001iV-1F
+ for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 13:46:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x12B2-00A0l0-Ji
- for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 15:35:56 +0200
+ id 1x12L4-000k2h-4b
+ for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 15:46:18 +0200
 Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <sashal@kernel.org>)
- id 6a95833c-bab6-0a2a0a5309dd-0a2a4505b4be-0
- for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 15:35:56 +0200
+ id 6a95859a-2eae-0a2a0a5409dd-0a2a45059c0a-44
+ for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 15:46:18 +0200
 Received: from [172.105.4.254] (helo=tor.source.kernel.org)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <sashal@kernel.org>)
- id 6a95833b-4cb1-0a2a45050019-ac6904feae9c-3
- for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 15:35:56 +0200
+ id 6a9585a8-4cb1-0a2a45050019-ac6904feb42e-3
+ for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 15:46:17 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 9F13C60215;
- Mon, 31 Aug 2026 13:35:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2F0F41F00A3F;
- Mon, 31 Aug 2026 13:35:53 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 7FABB60207;
+ Mon, 31 Aug 2026 13:46:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4CE281F00A3E;
+ Mon, 31 Aug 2026 13:46:14 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,27 +52,27 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788183354;
-	bh=HSkhL9GEPh+pjRNfJc8hLKIsYQDXSRpdkikCUwYosQc=;
+	s=k20260515; t=1788183975;
+	bh=VuuTfQsSlsnIRKrUr/mDOL2bAkwlXnRRMmPO/GFFYPA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=OrhEoctWOCtSw/GE1uNv1080RfJV4OHV2RZ849wX1Ci21F+GX5gbIXe0i7VURno4w
-	 qpcgCCOcD12jrbU+bUdiTR+WfbfGK8UeD9R8w69X05ceL10VRaJRwhhGRmDZ1X4ION
-	 DU1JnyOjOEA+ZN/rSlniF6a4mT3IE3n4d/f6zhEPM22dB793to495yq2u8vCmHDJVc
-	 BgryyxGypF44z3datQstHbxD/Fzke1NI5ctiubMzCE+awUJzLJIX06fNKJ0mt5UGPN
-	 KVsG8KfVGc3DAtbyns2y4wqg+XPNQamRmDjIJfwj/mLMlguNaVm7kLDAvlnwtLie7U
-	 BCcoxpA1g9xmg==
+	b=iuQOydXpKQt7a1jrYnXvxz7aQoIBCAIFNAv8EO+fBl9su81MHY8w4LofBu/My120O
+	 HfxrnjWbBjI9EIMnOnAbhove+XB7itONKmPObfJ8BBqywYenmcucJkIlYPVTh/0z0A
+	 ps1dPvhLbgt3Owl/Pc24DurbtbBTtexTy9LRjri94Iw+AGgVCCxauPZA0qOLCCTw5p
+	 20KwhhSloo5K6hqhVASUKB35Mb4EJl9l/olv96/HlXBA4Qr8cFmkozXPAezRsJqnw4
+	 w5rg67QthsQRBYGHGuYJL5oF3jZtmzLZPd/iHKocBv6uL5OJjV7cCUos1poqzORyKs
+	 10sUmsRrufMyw==
 From: Sasha Levin <sashal@kernel.org>
 To: patches@lists.linux.dev,
 	stable@vger.kernel.org
 Cc: Yousef Alhouseen <alhouseenyousef@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
 	Juergen Gross <jgross@suse.com>,
 	Sasha Levin <sashal@kernel.org>,
+	sstabellini@kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH AUTOSEL 6.18-5.10] xen/front-pgdir-shbuf: free grant reference head on errors
-Date: Mon, 31 Aug 2026 09:22:06 -0400
-Message-ID: <20260831133314.4125787-98-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 6.18-5.10] xen/gntalloc: validate grant count before allocation
+Date: Mon, 31 Aug 2026 09:27:23 -0400
+Message-ID: <20260831133314.4125787-415-sashal@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260831133314.4125787-1-sashal@kernel.org>
 References: <20260831133314.4125787-1-sashal@kernel.org>
@@ -82,400 +82,407 @@ X-Patchwork-Hint: Ignore
 X-stable-base: Linux 6.18.48
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1788183356-F70B22A1-81D04592/0/0
+X-purgate-ID: tlsNG-c201ff/1788183977-734BC2A1-36D7AF9E/0/0
 X-purgate-type: clean
-X-purgate-size: 16057
+X-purgate-size: 15461
 
 From: Yousef Alhouseen <alhouseenyousef@gmail.com>
 
-[ Upstream commit 678d59219ce0ae883f04c96936222c6168ef1164 ]
+[ Upstream commit 2299822f3f466b5dcad2377bf63986199f881a6b ]
 
-grant_references() allocates a private grant-reference head before
-claiming references for the page directory and, for guest-owned buffers,
-the data pages. The success path frees the remaining head, but claim
-failures and grant_refs_for_buffer() errors return immediately.
+gntalloc_ioctl_alloc() allocates the grant-id array before checking
+whether the requested count fits within the global grant limit. Counts
+above that limit cannot succeed, so reject them before the
+user-controlled allocation reaches kcalloc().
 
-Unwind through a common exit path so the private grant-reference head is
-released even when granting fails part-way through setup. The caller
-still tears down any references already stored in buf->grefs.
+Use a subtraction-based check while holding gref_mutex so adding the
+requested count cannot wrap. Also cast the count before advancing the
+per-file index so the page-size multiplication is performed in 64-bit
+arithmetic.
 
 Signed-off-by: Yousef Alhouseen <alhouseenyousef@gmail.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Reviewed-by: Juergen Gross <jgross@suse.com>
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Message-ID: <20260629160517.29340-1-alhouseenyousef@gmail.com>
+Message-ID: <20260626223805.43781-3-alhouseenyousef@gmail.com>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
 
 LLM Generated explanations, may be completely bogus:
 
-# Stable Backport Analysis: `xen/front-pgdir-shbuf: free grant reference
-head on errors`
+## Phase 1: Commit Message Forensics
 
-**Local tree:** Linux 6.18.44 (`v6.18.44-1-g2736c32da98b9`)
-**Fix commit (mainline):** `678d59219ce0a` — not an ancestor of this
-tree; buggy code is still present.
+**Step 1.1 — Subject line**
+Record: `[xen/gntalloc] [validate] validate grant count before
+allocation` — ioctl input validation and overflow-safety fix in the Xen
+grant allocator.
 
----
+**Step 1.2 — Tags**
+Record:
+- `Signed-off-by: Yousef Alhouseen <alhouseenyousef@gmail.com>` (author)
+- `Reviewed-by: Juergen Gross <jgross@suse.com>` (Xen maintainer —
+  strong quality signal)
+- `Signed-off-by: Juergen Gross <jgross@suse.com>`
+- `Message-ID: <20260626223805.43781-3-alhouseenyousef@gmail.com>`
+  (patch 2/2 of v2 series)
+- No `Fixes:`, `Reported-by:`, `Link:`, `Cc: stable@vger.kernel.org`, or
+  `Tested-by:` tags
 
-## PHASE 1: COMMIT MESSAGE FORENSICS
+**Step 1.3 — Body analysis**
+Record:
+- **Bug:** `gntalloc_ioctl_alloc()` calls `kcalloc(op.count, ...)`
+  before verifying `op.count` against the global grant limit.
+- **Symptom:** User-controlled counts above the limit still reach kernel
+  allocation; limit enforcement uses addition with mixed signed/unsigned
+  types that can wrap; `priv->index` advance uses 32-bit multiply.
+- **Failure modes:** Unnecessary kernel allocations (memory
+  pressure/DoS), potential limit-check bypass via wrap, corrupted per-
+  file mmap index.
+- **Root cause:** Validation ordering and unsafe arithmetic on user-
+  supplied `op.count` (`__u32`).
 
-### Step 1.1: PARSE THE SUBJECT LINE
-**Record:** `[xen/front-pgdir-shbuf]` `[free]` — fix missing cleanup of
-a private grant-reference head on error paths in `grant_references()`.
-
-### Step 1.2: PARSE ALL COMMIT MESSAGE TAGS
-**Record:**
-- **Signed-off-by:** Yousef Alhouseen `<alhouseenyousef@gmail.com>`
-  (author)
-- **Reviewed-by:** Stefano Stabellini `<sstabellini@kernel.org>` (Xen
-  maintainer)
-- **Signed-off-by:** Juergen Gross `<jgross@suse.com>` (Xen maintainer,
-  committer)
-- **Message-ID:** `<20260629160517.29340-1-alhouseenyousef@gmail.com>`
-- No Fixes:, Reported-by:, Tested-by:, Link:, or Cc: stable tags
-- Notable: Reviewed by a Xen subsystem maintainer; committed by Xen tree
-  maintainer
-
-### Step 1.3: ANALYZE THE COMMIT BODY TEXT
-**Record:**
-- **Bug:** `grant_references()` allocates a private grant-reference list
-  (`priv_gref_head`) via `gnttab_alloc_grant_references()`. On success,
-  unclaimed entries are returned via `gnttab_free_grant_references()`.
-  On two error paths (`gnttab_claim_grant_reference()` failure and
-  `grant_refs_for_buffer()` failure), the function returned immediately
-  without freeing `priv_gref_head`.
-- **Symptom:** Unclaimed grant references remain off the global free
-  list — a resource leak in the Xen grant table.
-- **Root cause:** Missing common error-exit cleanup; caller
-  `xen_front_pgdir_shbuf_free()` only tears down refs already stored in
-  `buf->grefs`, not the private head list.
-- **Version info:** None in the message.
-
-### Step 1.4: DETECT HIDDEN BUG FIXES
-**Record:** Not disguised — this is an explicit error-path resource-leak
-fix, though described without a crash report.
+**Step 1.4 — Hidden bug fix?**
+Record: **Yes.** Although the subject says "validate," this is a real
+bug fix: premature allocation, integer-overflow-prone limit check, and
+32-bit multiply before 64-bit assignment.
 
 ---
 
-## PHASE 2: DIFF ANALYSIS — LINE BY LINE
+## Phase 2: Diff Analysis
 
-### Step 2.1: INVENTORY THE CHANGES
-**Record:**
-- **File:** `drivers/xen/xen-front-pgdir-shbuf.c` (+8 / −4 lines)
-- **Function modified:** `grant_references()` only
-- **Scope:** Single-file surgical fix
+**Step 2.1 — Inventory**
+Record:
+- 1 file: `drivers/xen/gntalloc.c` (+11 / -2 net)
+- Function modified: `gntalloc_ioctl_alloc()`
+- Scope: single-file, surgical ioctl-path fix
 
-### Step 2.2: UNDERSTAND THE CODE FLOW CHANGE
-**Record:**
-- **Hunk 1 (claim failure in directory loop):** Before: `return cur_ref`
-  leaked `priv_gref_head`. After: `ret = cur_ref; goto out_free_refs`.
-- **Hunk 2 (`grant_refs_for_buffer` failure):** Before: `return ret`
-  leaked head. After: `goto out_free_refs`.
-- **Hunk 3 (success path restructured):** Before: free head, `return 0`.
-  After: `ret = 0; out_free_refs:
-  gnttab_free_grant_references(priv_gref_head); return ret` — same
-  success behavior, unified cleanup on all paths after allocation.
+**Step 2.2 — Code flow per hunk**
 
-### Step 2.3: IDENTIFY THE BUG MECHANISM
-**Record:**
-- **Category:** Error-path resource leak (grant reference leak)
-- **Mechanism:** `gnttab_alloc_grant_references()` removes entries from
-  the global grant free pool into a private linked list. Claimed refs
-  are removed from that list and stored in `buf->grefs`. Unclaimed refs
-  remain in `priv_gref_head` and must be returned via
-  `gnttab_free_grant_references()`. Early returns skipped that free,
-  permanently shrinking the grant table pool.
+| Hunk | Before | After |
+|------|--------|-------|
+| Early check | `kcalloc()` immediately after `copy_from_user()` |
+Snapshot `limit` with `READ_ONCE()`, reject `op.count > limit` with
+`-ENOSPC` before any allocation |
+| Locked limit check | `gref_size + op.count > limit` | Subtraction:
+`gref_size > limit_snapshot \|\| op.count > limit_snapshot - gref_size`
+under `gref_mutex` |
+| Index advance | `priv->index += op.count * PAGE_SIZE` (32-bit
+multiply) | `priv->index += (uint64_t)op.count * PAGE_SIZE` |
 
-### Step 2.4: ASSESS THE FIX QUALITY
-**Record:**
-- **Quality:** Obviously correct; mirrors the established pattern in
-  `gntdev-dmabuf.c` (`out:` label + `gnttab_free_grant_references()`).
-- **Regression risk:** Very low. `gnttab_free_grant_references()` only
-  frees refs still linked in `priv_gref_head`; already-claimed refs in
-  `buf->grefs` are untouched and still cleaned up by the caller on
-  failure.
+Record: Normal ioctl path and error paths affected; early rejection
+avoids `kcalloc`/`kfree` on doomed requests.
 
----
+**Step 2.3 — Bug mechanism**
+Record:
+- **Category:** Input validation + integer overflow / type-safety
+- **Mechanism 1:** User `count` drives `kcalloc()` before limit
+  enforcement → kmem pressure DoS on `/dev/xen/gntalloc`
+- **Mechanism 2:** `gref_size + op.count > limit` mixes `int` counters
+  with `uint32_t` count; addition can wrap, potentially bypassing limit
+  and reaching `add_grefs()`'s `for (i = 0; i < op->count; i++)` loop
+- **Mechanism 3:** `op.count * PAGE_SIZE` computed in 32-bit arithmetic
+  before widening to `uint64_t priv->index`
 
-## PHASE 3: GIT HISTORY INVESTIGATION
-
-### Step 3.1: BLAME THE CHANGED LINES
-**Record:** `grant_references()` introduced in `b3383974fee27`
-(Oleksandr Andrushchenko, 2018-11-30) — "xen: Introduce shared buffer
-helpers for page directory based frontends." The missing error-path
-cleanup has existed since introduction (~kernel 5.0 era).
-
-### Step 3.2: FOLLOW THE FIXES: TAG
-**Record:** No Fixes: tag present — N/A.
-
-### Step 3.3: CHECK FILE HISTORY FOR RELATED CHANGES
-**Record:** Related prior fix `53f131c284e83` (2021): "don't record
-wrong grant handle upon error" — different issue (invalid handle on
-error), already in this tree. No prerequisite commits needed; standalone
-single-patch series (v1 only per b4).
-
-### Step 3.4: CHECK THE AUTHOR'S OTHER COMMITS
-**Record:** Yousef Alhouseen is a contributor; this is their Xen front-
-pgdir-shbuf fix. Reviewed/committed by Xen maintainers (Stabellini,
-Gross).
-
-### Step 3.5: CHECK FOR DEPENDENT/PREREQUISITE COMMITS
-**Record:** No dependencies. `git apply --check` on the fix diff
-succeeds cleanly against this tree's file. Standalone.
+**Step 2.4 — Fix quality**
+Record: Minimal, obviously correct, no API changes. Early check is
+cheap. Subtraction check is standard overflow-safe idiom.
+`READ_ONCE(limit)` snapshots admin-tunable limit. Regression risk:
+**low** — only tightens validation; legitimate allocations within limit
+unchanged.
 
 ---
 
-## PHASE 4: MAILING LIST AND EXTERNAL RESEARCH
+## Phase 3: Git History Investigation
 
-### Step 4.1: FIND THE ORIGINAL PATCH DISCUSSION
-**Record:** `b4 dig -c 678d59219ce0a` → https://patch.msgid.link/2026062
-9160517.29340-1-alhouseenyousef@gmail.com
-Single v1 submission (2026-06-29). Lore page fetch blocked by bot
-protection; thread content not directly readable.
+**Step 3.1 — Blame**
+Record: Buggy lines in `gntalloc_ioctl_alloc()` trace to `5d324e5159d9e`
+in this shallow checkout (file unchanged since tree root). The ioctl
+allocation pattern is long-standing driver code, not a recent
+regression.
 
-### Step 4.2: CHECK WHO REVIEWED THE PATCH
-**Record:** `b4 dig -w`: To/Cc included Juergen Gross, Stefano
-Stabellini, xen-devel@lists.xenproject.org, linux-
-kernel@vger.kernel.org. Stefano Stabellini Reviewed-by on committed
-version.
+**Step 3.2 — Fixes: tag**
+Record: Not applicable — no `Fixes:` tag present.
 
-### Step 4.3: SEARCH FOR THE BUG REPORT
-**Record:** No Reported-by or bug-report Link tags. Bug identified via
-code-path analysis (missing cleanup), not a syzbot/fuzzer report.
+**Step 3.3 — Related file history**
+Record: Shallow tree shows only merge commit touching
+`drivers/xen/gntalloc.c`. IOCTL path with `kcalloc`-before-limit pattern
+is present at HEAD.
 
-### Step 4.4: CHECK FOR RELATED PATCHES AND SERIES
-**Record:** Standalone 1/1 patch; no series dependencies.
+**Step 3.4 — Author context**
+Record: Yousef Alhouseen submitted the v2 series. Juergen Gross (active
+Xen maintainer; recent xen commits in tree include `xen/privcmd`
+security fixes) reviewed and signed off.
 
-### Step 4.5: CHECK STABLE MAILING LIST HISTORY
-**Record:** Not searched (no stable-list nomination found in commit;
-lore stable search not performed due to limited external access).
-Absence of Cc: stable is expected per review instructions.
-
----
-
-## PHASE 5: CODE SEMANTIC ANALYSIS
-
-### Step 5.1: IDENTIFY KEY FUNCTIONS IN THE DIFF
-**Record:** `grant_references()` (modified);
-`guest_grant_refs_for_buffer()` (error source via ops callback,
-unchanged).
-
-### Step 5.2: TRACE CALLERS
-**Record:** `grant_references()` is called only from
-`xen_front_pgdir_shbuf_alloc()` (line 534). Callers of
-`xen_front_pgdir_shbuf_alloc()`:
-- `drivers/gpu/drm/xen/xen_drm_front.c` — Xen PV DRM frontend
-- `sound/xen/xen_snd_front_alsa.c` — Xen PV sound frontend
-Both run during device/buffer setup on Xen PV guests.
-
-### Step 5.3: TRACE CALLEES
-**Record:** `gnttab_alloc_grant_references()`,
-`gnttab_claim_grant_reference()`, `gnttab_grant_foreign_access_ref()`,
-`buf->ops->grant_refs_for_buffer()` (guest:
-`guest_grant_refs_for_buffer()`), `gnttab_free_grant_references()`.
-
-### Step 5.4: FOLLOW THE CALL CHAIN
-**Record:** Xen guest driver probe → buffer alloc → `grant_references()`
-→ on failure, `xen_front_pgdir_shbuf_free()` cleans `buf->grefs` but not
-`priv_gref_head`. Reachable during normal Xen PV driver initialization;
-not a syscall path, but triggered by guest driver operations
-(potentially from userspace opening DRM/audio devices).
-
-### Step 5.5: SEARCH FOR SIMILAR PATTERNS
-**Record:** Correct pattern already used in `drivers/xen/gntdev-
-dmabuf.c` lines 509–511 (`out:
-gnttab_free_grant_references(priv_gref_head)`). `drivers/usb/host/xen-
-hcd.c` and `drivers/net/xen-netfront.c` also use alloc/free pairs. This
-file was the outlier missing error-path free.
+**Step 3.5 — Dependencies**
+Record: **Series dependency identified.** Cover letter ([openwall v2
+0/2](https://lists.openwall.net/linux-kernel/2026/06/26/2112)) states
+patch 1/2 (`xen/gntalloc: make grant counters unsigned`) is a
+prerequisite for overflow-safe unsigned arithmetic. **This commit (2/2)
+applies cleanly standalone** to the current tree (`git apply --check`
+succeeded). Patch 1/2 is a 3-line companion change (`int` → `unsigned
+int` for `limit`/`gref_size`, `module_param(limit, uint, ...)`). Not a
+hard blocker for backporting this patch, but both should ideally ship
+together for a complete fix.
 
 ---
 
-## PHASE 6: CROSS-REFERENCING AGAINST THE LOCAL TREE
+## Phase 4: Mailing List and External Research
 
-### Step 6.1: DOES THE BUGGY CODE EXIST IN THIS TREE?
-**Record:** **Yes.** `drivers/xen/xen-front-pgdir-shbuf.c` lines 449–451
-and 461–462 still have bare `return` on error without freeing
-`priv_gref_head`. Bug present since 2018 introduction (`b3383974fee27`).
+**Step 4.1 — Original discussion**
+Record: `b4 dig -c <sha>` unavailable (commit not in local tree). Found
+via openwall:
+- Cover: https://lists.openwall.net/linux-kernel/2026/06/26/2112
+- Patch 1/2: https://lists.openwall.net/linux-kernel/2026/06/26/2113
+- Patch 2/2 (this commit): https://lists.openwall.net/linux-
+  kernel/2026/06/26/2114
+- v2 split unsigned-type changes into prerequisite per maintainer
+  feedback
 
-### Step 6.2: CHECK FOR BACKPORT COMPLICATIONS
-**Record:** **Clean apply expected.** `git apply --check` on commit
-`678d59219ce0a` diff passes with no conflicts on this tree.
+**Step 4.2 — Reviewers**
+Record: To: Juergen Gross, Stefano Stabellini, Oleksandr Tyshchenko; Cc:
+xen-devel, linux-kernel. Juergen Gross reviewed.
 
-### Step 6.3: CHECK IF RELATED FIXES ARE ALREADY HERE
-**Record:** Fix `678d59219ce0a` is **not** in this tree (`git merge-base
---is-ancestor` returns 1). Prior related fix `53f131c284e83` is present.
-No duplicate fix applied.
+**Step 4.3 — Bug report**
+Record: No external bug report or syzbot link. Issue identified by code
+review / proactive hardening.
 
----
+**Step 4.4 — Series context**
+Record: 2-patch v2 series, same file. Patch 1 prepares unsigned
+counters; patch 2 adds validation. Both are small and complementary.
 
-## PHASE 7: SUBSYSTEM AND MAINTAINER CONTEXT
-
-### Step 7.1: IDENTIFY THE SUBSYSTEM AND ITS CRITICALITY
-**Record:** **Subsystem:** Xen grant-table / shared-buffer
-infrastructure (`drivers/xen/`). **Criticality:** IMPORTANT — grant
-references are a finite global resource shared by all Xen PV drivers
-(net, block, USB, DRM, sound, etc.). Leaks affect the whole guest.
-
-### Step 7.2: ASSESS SUBSYSTEM ACTIVITY
-**Record:** Moderate activity; file last touched in-tree by
-`50e865a56876b` (2023, kernel-doc cleanup). Core logic stable since
-2018.
+**Step 4.5 — Stable list**
+Record: No stable-list discussion found. lore.kernel.org returned 403
+(bot protection); openwall used instead.
 
 ---
 
-## PHASE 8: IMPACT AND RISK ASSESSMENT
+## Phase 5: Code Semantic Analysis
 
-### Step 8.1: DETERMINE WHO IS AFFECTED
-**Record:** Xen PV guests with `CONFIG_XEN_FRONT_PGDIR_SHBUF` (selected
-by `CONFIG_DRM_XEN` and Xen sound). Affects DRM and audio buffer setup
-on Xen; grant-table exhaustion can impact all Xen drivers in the guest.
+**Step 5.1 — Key functions**
+Record: `gntalloc_ioctl_alloc()` (modified); related: `add_grefs()`,
+`do_cleanup()`.
 
-### Step 8.2: DETERMINE THE TRIGGER CONDITIONS
-**Record:** Triggered when `grant_references()` fails after
-`gnttab_alloc_grant_references()` succeeds — specifically
-`gnttab_claim_grant_reference()` returning negative, or
-`guest_grant_refs_for_buffer()` failing. Uncommon in steady state
-(allocation size matches claim count), but possible under resource
-pressure, accounting edge cases, or repeated alloc/free retry loops. Not
-unprivileged-direct, but reachable through Xen frontend driver usage.
+**Step 5.2 — Callers**
+Record: `gntalloc_ioctl()` → `case IOCTL_GNTALLOC_ALLOC_GREF` →
+`gntalloc_ioctl_alloc()`. Reachable from userspace via `ioctl()` on
+`/dev/xen/gntalloc` (`miscdevice`, name `"xen/gntalloc"`).
 
-### Step 8.3: DETERMINE THE FAILURE MODE SEVERITY
-**Record:** **Failure mode:** Grant reference leak → progressive
-depletion of global grant free pool → `-ENOSPC` on subsequent grant
-operations across the guest (network, block, console, etc.).
-**Severity:** HIGH (resource exhaustion degrading entire Xen guest; not
-an immediate oops, but can render the guest unusable over time or after
-repeated failures).
+**Step 5.3 — Callees**
+Record: `copy_from_user`, `kcalloc`, `mutex_lock/unlock`, `do_cleanup`,
+`add_grefs` (allocates pages, grants foreign access in a loop over
+`op->count`), `copy_to_user`, `kfree`.
 
-### Step 8.4: CALCULATE RISK-BENEFIT RATIO
-**Record:**
-- **Benefit:** Prevents grant-table leaks on error paths; protects all
-  Xen PV functionality
-- **Risk:** Very low — 8-line surgical change, maintainer-reviewed,
-  matches existing codebase pattern
-- **Ratio:** Strong benefit, minimal risk
+**Step 5.4 — Reachability**
+Record: Userspace ioctl on Xen systems with
+`CONFIG_XEN_GRANT_DEV_ALLOC`. Kconfig: "Allows userspace processes to
+create pages with access granted to other domains." Impact surface: Xen
+dom0 / Xen PV frontends using grant allocation — not universal, but
+ioctl is explicitly user-facing.
+
+**Step 5.5 — Similar patterns**
+Record: No other instances of this exact bug pattern in `gntalloc.c`.
+The `add_grefs()` loop makes a bypassed limit check especially dangerous
+(unbounded iteration + per-page allocations).
 
 ---
 
-## PHASE 9: FINAL SYNTHESIS
+## Phase 6: Cross-Reference Against Local Tree (6.18.44)
 
-### Step 9.1: COMPILE THE EVIDENCE
+**Step 6.1 — Buggy code present?**
+Record: **Yes.** Local tree is `v6.18.44-1-g2736c32da98b9` / `6.18.44`.
+At HEAD, `gntalloc_ioctl_alloc()` still does `kcalloc()` before limit
+check, uses `gref_size + op.count > limit`, and `priv->index += op.count
+* PAGE_SIZE`. `limit`/`gref_size` are `static int`.
 
-**FOR backporting:**
-- Real resource leak on error paths (grant references never returned to
-  free pool)
-- Bug present in this 6.18.y tree since 2018
-- Fix is small, obviously correct, maintainer-reviewed
-- Applies cleanly to this tree
-- Grant-table exhaustion is a serious Xen guest-wide failure mode
-- Matches established cleanup pattern in sibling Xen code (`gntdev-
-  dmabuf.c`)
+**Step 6.2 — Backport complications**
+Record: **Clean apply** — `git apply --check` on the provided diff
+succeeded with no conflicts.
 
-**AGAINST backporting:**
-- No user crash report or syzbot reproduction
-- Error path may be rarely exercised in production
-- Affects only Xen PV guests with specific drivers enabled
+**Step 6.3 — Related fixes already present?**
+Record: No — `git log --grep="gntalloc"` and `--grep="validate grant
+count"` returned nothing. Fix not yet in this tree.
 
-**Unresolved:** Exact production trigger frequency; lore thread
-discussion content (bot-blocked).
+---
 
-### Step 9.2: STABLE RULES CHECKLIST
-1. Obviously correct and tested? **PASS** — standard goto cleanup;
-   Reviewed-by Xen maintainer
-2. Fixes a real bug? **PASS** — grant ref leak on error paths
-3. Important issue? **PASS** — grant table exhaustion (HIGH severity for
-   Xen guests)
-4. Small and contained? **PASS** — 1 file, ~12 lines
-5. No new features or APIs? **PASS** — error-path cleanup only
-6. Can apply to local tree? **PASS** — `git apply --check` succeeds
+## Phase 7: Subsystem and Maintainer Context
 
-### Step 9.3: CHECK FOR EXCEPTION CATEGORIES
-**Record:** None (not device ID, quirk, DT, build, or docs). Standard
-bug-fix category.
+**Step 7.1 — Subsystem**
+Record: `drivers/xen/` — Xen grant-table userspace interface.
+Criticality: **IMPORTANT** for Xen deployments (dom0, paravirt
+frontends); **PERIPHERAL** relative to all Linux users.
 
-### Step 9.4: DECISION RATIONALE
-This fix closes a long-standing error-path leak in Xen grant-reference
-management. While the trigger may be uncommon, leaked grant references
-are a finite, guest-wide resource — exhaustion can break networking,
-storage, and other PV devices. The patch is minimal, reviewed by Xen
-maintainers, applies cleanly to Linux 6.18.44, and introduces no new
-behavior on success paths.
+**Step 7.2 — Activity**
+Record: Xen subsystem actively maintained; recent security fixes in
+related xen drivers (`privcmd`, `sys-hypervisor`) in this tree.
+
+---
+
+## Phase 8: Impact and Risk Assessment
+
+**Step 8.1 — Who is affected**
+Record: Xen systems with `CONFIG_XEN_GRANT_DEV_ALLOC` (default `m`),
+users/processes that can open `/dev/xen/gntalloc` and issue
+`IOCTL_GNTALLOC_ALLOC_GREF`.
+
+**Step 8.2 — Trigger conditions**
+Record:
+- **Common:** `op.count > limit` (default 1024) → unnecessary `kcalloc`
+  before `-ENOSPC`; repeatable for memory pressure
+- **Less common:** Large `limit` module parameter + crafted counts →
+  addition wrap bypassing limit → massive `add_grefs()` loop
+- **Less common:** Large `op.count` with raised limit → 32-bit `op.count
+  * PAGE_SIZE` wrap corrupting `priv->index`
+- Unprivileged users need device access; still a valid hardening for any
+  caller with ioctl access
+
+**Step 8.3 — Failure severity**
+Record:
+- Memory pressure / DoS from premature allocations: **MEDIUM-HIGH**
+- Limit bypass → huge grant allocation loop: **CRITICAL** (hang/OOM) if
+  triggerable
+- Index corruption: **HIGH** (broken mmap offsets / grant bookkeeping)
+- Overall: **HIGH** for affected Xen configurations
+
+**Step 8.4 — Risk vs benefit**
+Record:
+- **Benefit:** HIGH for Xen users — closes validation gap on user-facing
+  ioctl
+- **Risk:** LOW — 11 lines, no behavior change for valid requests within
+  limit
+- **Ratio:** Strong benefit, low risk
+
+---
+
+## Phase 9: Final Synthesis
+
+**Step 9.1 — Evidence summary**
+
+**FOR backport:**
+- Fixes real bugs (premature user-sized allocation, overflow-prone limit
+  check, 32-bit multiply)
+- Small, surgical, maintainer-reviewed
+- Applies cleanly to 6.18.44
+- Buggy code confirmed present in this tree
+- User-facing ioctl path on Xen systems
+- Companion patch 1/2 is tiny and should accompany for complete
+  unsigned-counter hardening
+
+**AGAINST backport:**
+- Xen-specific; not all stable users run Xen
+- No syzbot/user crash report (proactive fix)
+- Ideally paired with patch 1/2 for full unsigned arithmetic story
+  (minor concern, not a blocker)
+
+**Unresolved:** Whether reviewers explicitly nominated for stable (no
+thread replies fetched beyond cover/patch text).
+
+**Step 9.2 — Stable rules checklist**
+1. Obviously correct and tested? **PASS** — logic is straightforward;
+   reviewed by Juergen Gross; no `Tested-by`
+2. Fixes real bug affecting users? **PASS** — ioctl validation /
+   overflow issues on Xen grant allocator
+3. Important issue? **PASS** — DoS, potential limit bypass, index
+   corruption (HIGH severity on Xen)
+4. Small and contained? **PASS** — 1 file, ~13 lines changed
+5. No new features/APIs? **PASS** — validation only
+6. Can apply to local tree? **PASS** — verified clean apply
+
+**Step 9.3 — Exception category**
+Record: None (standard bug fix, not device ID/quirk/docs/build).
+
+**Step 9.4 — Decision rationale**
+This commit should be backported to the local **6.18.44** stable tree.
+The buggy ioctl ordering and arithmetic are present, the fix is minimal
+and maintainer-reviewed, and the failure modes (kmem pressure, limit
+bypass, index corruption) are meaningful on Xen systems. Backport patch
+1/2 (`make grant counters unsigned`) alongside this commit for the
+complete v2 series.
 
 ---
 
 ## Verification
 
-- **[Phase 1]** Parsed commit `678d59219ce0a` message and tags:
-  Reviewed-by Stefano Stabellini; Signed-off-by Juergen Gross
-- **[Phase 2]** Diff analysis: 3 error-path changes in
-  `grant_references()`, adds `out_free_refs` unified cleanup
-- **[Phase 3]** `git blame`: buggy code from `b3383974fee27`
-  (2018-11-30), present in tree
-- **[Phase 3]** `git log -20 -- drivers/xen/xen-front-pgdir-shbuf.c`:
-  related fix `53f131c284e83` present; this fix absent
-- **[Phase 3]** `git merge-base --is-ancestor 678d59219ce0a HEAD`: exit
-  1 — fix not in tree
-- **[Phase 3]** `git apply --check` on fix diff: passes cleanly
-- **[Phase 4]** `b4 dig -c 678d59219ce0a`: lore URL found
-- **[Phase 4]** `b4 dig -a`: single v1 patch, no series
-- **[Phase 4]** `b4 dig -w`: Juergen Gross, Stefano Stabellini, xen-
-  devel CC'd
-- **[Phase 4]** WebFetch lore thread: blocked (bot protection) — review
-  discussion unverified
-- **[Phase 5]** `grep grant_references`: single caller
-  `xen_front_pgdir_shbuf_alloc()`
-- **[Phase 5]** `grep xen_front_pgdir_shbuf_alloc`: callers in
-  `xen_drm_front.c`, `xen_snd_front_alsa.c`
-- **[Phase 5]** Read `gntdev-dmabuf.c` 509–511: confirms correct error-
-  path pattern
-- **[Phase 5]** Read `grant-table.c` 619–658, 685–692: confirmed
-  alloc/claim/free semantics
-- **[Phase 6]** `git describe HEAD`: v6.18.44; `Makefile`: 6.18.44
-- **[Phase 6]** Read `xen-front-pgdir-shbuf.c` 430–467: confirmed buggy
-  early returns present
-- **[Phase 6]** Read `xen_front_pgdir_shbuf_free()` 131–142: caller
-  cleans `buf->grefs` only, not `priv_gref_head`
-- **[Phase 8]** Grant ref leak → pool exhaustion → `-ENOSPC` for all Xen
-  grant users: severity HIGH
+- [Phase 1] Parsed subject, tags, body from provided commit message
+- [Phase 1] Identified patch as 2/2 via Message-ID `43781-3`
+- [Phase 2] Read current `gntalloc_ioctl_alloc()` at HEAD — confirmed
+  buggy ordering
+- [Phase 2] Verified `limit`/`gref_size` are `static int`, `op.count` is
+  `__u32`, `priv->index` is `uint64_t`
+- [Phase 2] Verified `kcalloc` uses `check_mul_overflow` in
+  `include/linux/slab.h`
+- [Phase 3] `git blame -L 283,302 drivers/xen/gntalloc.c` — lines from
+  `5d324e5159d9e`
+- [Phase 3] `git log --oneline -20 -- drivers/xen/gntalloc.c` — shallow
+  history
+- [Phase 3] `git log --grep` for gntalloc/validate — no existing fix in
+  tree
+- [Phase 4] `b4 dig -c 3218686be45b8` — no result (commit not in tree)
+- [Phase 4] Fetched openwall cover + patches 1/2 and 2/2 — confirmed v2
+  series and prerequisite note
+- [Phase 4] lore.kernel.org — 403 Forbidden (unverified for reviewer
+  stable nominations)
+- [Phase 5] Traced call chain: `gntalloc_ioctl` → `gntalloc_ioctl_alloc`
+- [Phase 5] Confirmed miscdevice `"xen/gntalloc"` registration
+- [Phase 5] Read `add_grefs()` — loops `op->count` times with page alloc
+  + grant setup
+- [Phase 6] `git describe HEAD` → `v6.18.44-1-g2736c32da98b9`; `make
+  kernelversion` → `6.18.44`
+- [Phase 6] `git apply --check` on provided diff — **clean apply**
+- [Phase 6] Confirmed pre-fix code via `git show
+  HEAD:drivers/xen/gntalloc.c`
+- [Phase 7] Read `drivers/xen/Kconfig` `XEN_GRANT_DEV_ALLOC` —
+  userspace-facing, default `m`
+- [Phase 8] Assessed severity from code paths (not from unverified crash
+  reports)
 
 **YES**
 
- drivers/xen/xen-front-pgdir-shbuf.c | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
+ drivers/xen/gntalloc.c | 13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/xen/xen-front-pgdir-shbuf.c b/drivers/xen/xen-front-pgdir-shbuf.c
-index 223870a0111b2..e7fb06f607711 100644
---- a/drivers/xen/xen-front-pgdir-shbuf.c
-+++ b/drivers/xen/xen-front-pgdir-shbuf.c
-@@ -447,8 +447,10 @@ static int grant_references(struct xen_front_pgdir_shbuf *buf)
- 		unsigned long frame;
+diff --git a/drivers/xen/gntalloc.c b/drivers/xen/gntalloc.c
+index f93f73ecefeee..462f67dc32751 100644
+--- a/drivers/xen/gntalloc.c
++++ b/drivers/xen/gntalloc.c
+@@ -272,6 +272,7 @@ static long gntalloc_ioctl_alloc(struct gntalloc_file_private_data *priv,
+ 	int rc = 0;
+ 	struct ioctl_gntalloc_alloc_gref op;
+ 	uint32_t *gref_ids;
++	unsigned int limit_snapshot;
  
- 		cur_ref = gnttab_claim_grant_reference(&priv_gref_head);
--		if (cur_ref < 0)
--			return cur_ref;
-+		if (cur_ref < 0) {
-+			ret = cur_ref;
-+			goto out_free_refs;
-+		}
+ 	pr_debug("%s: priv %p\n", __func__, priv);
  
- 		frame = xen_page_to_gfn(virt_to_page(buf->directory +
- 						     PAGE_SIZE * i));
-@@ -459,11 +461,13 @@ static int grant_references(struct xen_front_pgdir_shbuf *buf)
- 	if (buf->ops->grant_refs_for_buffer) {
- 		ret = buf->ops->grant_refs_for_buffer(buf, &priv_gref_head, j);
- 		if (ret)
--			return ret;
-+			goto out_free_refs;
+@@ -280,6 +281,12 @@ static long gntalloc_ioctl_alloc(struct gntalloc_file_private_data *priv,
+ 		goto out;
  	}
  
-+	ret = 0;
-+out_free_refs:
- 	gnttab_free_grant_references(priv_gref_head);
--	return 0;
-+	return ret;
- }
++	limit_snapshot = READ_ONCE(limit);
++	if (op.count > limit_snapshot) {
++		rc = -ENOSPC;
++		goto out;
++	}
++
+ 	gref_ids = kcalloc(op.count, sizeof(gref_ids[0]), GFP_KERNEL);
+ 	if (!gref_ids) {
+ 		rc = -ENOMEM;
+@@ -292,14 +299,16 @@ static long gntalloc_ioctl_alloc(struct gntalloc_file_private_data *priv,
+ 	 * are about to enforce, removing them here is a good idea.
+ 	 */
+ 	do_cleanup();
+-	if (gref_size + op.count > limit) {
++	limit_snapshot = READ_ONCE(limit);
++	if (gref_size > limit_snapshot ||
++	    op.count > limit_snapshot - gref_size) {
+ 		mutex_unlock(&gref_mutex);
+ 		rc = -ENOSPC;
+ 		goto out_free;
+ 	}
+ 	gref_size += op.count;
+ 	op.index = priv->index;
+-	priv->index += op.count * PAGE_SIZE;
++	priv->index += (uint64_t)op.count * PAGE_SIZE;
+ 	mutex_unlock(&gref_mutex);
  
- /*
+ 	rc = add_grefs(&op, gref_ids, priv);
 -- 
 2.53.0
 
