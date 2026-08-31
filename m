@@ -4,41 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13B70C624C6
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Aug 2026 13:46:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1404069.1638005 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28B0EC624A5
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Aug 2026 15:49:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1404222.1638046 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x12L6-0001ii-QT; Mon, 31 Aug 2026 13:46:20 +0000
+	id 1x14Fq-0004Us-Rc; Mon, 31 Aug 2026 15:49:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1404069.1638005; Mon, 31 Aug 2026 13:46:20 +0000
+Received: by outflank-mailman (output) from mailman id 1404222.1638046; Mon, 31 Aug 2026 15:49:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x12L6-0001ib-NY; Mon, 31 Aug 2026 13:46:20 +0000
-Received: by outflank-mailman (input) for mailman id 1404069;
- Mon, 31 Aug 2026 13:46:20 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <sashal@kernel.org>) id 1x12L6-0001iV-1F
- for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 13:46:20 +0000
+	id 1x14Fq-0004Uj-NY; Mon, 31 Aug 2026 15:49:02 +0000
+Received: by outflank-mailman (input) for mailman id 1404222;
+ Mon, 31 Aug 2026 15:49:01 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x14Fo-0004UV-MX
+ for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 15:49:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x12L4-000k2h-4b
- for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 15:46:18 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1x14Fn-005Nvf-HQ
+ for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 17:48:59 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <sashal@kernel.org>)
- id 6a95859a-2eae-0a2a0a5409dd-0a2a45059c0a-44
- for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 15:46:18 +0200
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <sashal@kernel.org>)
- id 6a9585a8-4cb1-0a2a45050019-ac6904feb42e-3
- for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 15:46:17 +0200
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 7FABB60207;
- Mon, 31 Aug 2026 13:46:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4CE281F00A3E;
- Mon, 31 Aug 2026 13:46:14 +0000 (UTC)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a95a244-2eae-0a2a0a5409dd-0a2a450be100-40
+ for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 17:48:59 +0200
+Received: from [40.93.195.60]
+ (helo=SN4PR2101CU001.outbound.protection.outlook.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a95a269-b7e8-0a2a450b0019-285dc33ce0a3-3
+ for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 17:48:58 +0200
+Received: from PH7P220CA0123.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:327::26)
+ by IA1PR12MB7664.namprd12.prod.outlook.com (2603:10b6:208:423::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.13; Mon, 31 Aug
+ 2026 15:48:51 +0000
+Received: from CY4PEPF0000E9D3.namprd03.prod.outlook.com
+ (2603:10b6:510:327:cafe::9) by PH7P220CA0123.outlook.office365.com
+ (2603:10b6:510:327::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.13 via Frontend Transport; Mon,
+ 31 Aug 2026 15:48:48 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CY4PEPF0000E9D3.mail.protection.outlook.com (10.167.241.138) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.382.8 via Frontend Transport; Mon, 31 Aug 2026 15:48:48 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.46; Mon, 31 Aug
+ 2026 10:48:47 -0500
+Received: from [10.252.145.116] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.46 via Frontend
+ Transport; Mon, 31 Aug 2026 10:48:44 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,440 +66,227 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788183975;
-	bh=VuuTfQsSlsnIRKrUr/mDOL2bAkwlXnRRMmPO/GFFYPA=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=iuQOydXpKQt7a1jrYnXvxz7aQoIBCAIFNAv8EO+fBl9su81MHY8w4LofBu/My120O
-	 HfxrnjWbBjI9EIMnOnAbhove+XB7itONKmPObfJ8BBqywYenmcucJkIlYPVTh/0z0A
-	 ps1dPvhLbgt3Owl/Pc24DurbtbBTtexTy9LRjri94Iw+AGgVCCxauPZA0qOLCCTw5p
-	 20KwhhSloo5K6hqhVASUKB35Mb4EJl9l/olv96/HlXBA4Qr8cFmkozXPAezRsJqnw4
-	 w5rg67QthsQRBYGHGuYJL5oF3jZtmzLZPd/iHKocBv6uL5OJjV7cCUos1poqzORyKs
-	 10sUmsRrufMyw==
-From: Sasha Levin <sashal@kernel.org>
-To: patches@lists.linux.dev,
-	stable@vger.kernel.org
-Cc: Yousef Alhouseen <alhouseenyousef@gmail.com>,
-	Juergen Gross <jgross@suse.com>,
-	Sasha Levin <sashal@kernel.org>,
-	sstabellini@kernel.org,
-	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH AUTOSEL 6.18-5.10] xen/gntalloc: validate grant count before allocation
-Date: Mon, 31 Aug 2026 09:27:23 -0400
-Message-ID: <20260831133314.4125787-415-sashal@kernel.org>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260831133314.4125787-1-sashal@kernel.org>
-References: <20260831133314.4125787-1-sashal@kernel.org>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=MhAWVU6yo/zBMNQbT1vhx4FQ5Y3AI5fggDjQxmOvWhaunV0nQyVM6cm74rwnHxb3JOnIBzrwyQWIdzQjWc78voDBqKY6UcHe3W5JagLNCMx49+4GjnRSVaYJ4EM5U7Y5W9R+3K3MbmZugNmY+jIYbT+nYC/nuONtlByMMX8NKFfZhC2GeXgSAPzbJ68hm7rbKXABKOIgjInnv1jcFaVDtl4pm94/KDI06zx5tJGEuau3Us5QQkqcziDAgiNlHZ0B6s1pE3PZkUGeB0AplFxYQh96XpsUDvUX6lgL+1KgMtTRR579hdsGp4homI3RbVxWVQgXp3+2yI7ywOtOoQ5ZAw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=osTvsVhTWtmBmIq3KzqWnv9M3d8c/+5re+vhRnScSg0=;
+ b=SN85irWuHS3uZRMRIQLj9PgoBP6qjVUa/FU37poO97+mC+dVS9zOL5TuC2umgZm0KuxJWh45xIDq4KgN3Fsy+E6e6cy/39Gz8IMjREkQNPsjn7TSZ5B+eftsOIC3sjW8e0wpDgNvylJqC4HRwtq1F3wkAPgFL7uXRwN3msZ89xajBowAgSiGoh7MUYwresj/8y28Ob2i3nbgmIzDf6ZwgGOnaYmkKcw2/GfenXiMjW/06BigW+d88bkXvbsdRVRIfOiHu4sSl7zTEas/q0SbKndYXOGB4SXM+ZAAuqs6PjEKiK+EtyDB0VdbOj39lWWx+bbIhCNwGV6Wv6qtE/A/bg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=osTvsVhTWtmBmIq3KzqWnv9M3d8c/+5re+vhRnScSg0=;
+ b=JD8aqiICj/+aDCgkM2aqWd6AX0OssNXra4HqgVZMwFL9Yx47/k3LmHjk7oRxMRBi6lyXAG7M2jkw3CUC1XqYagRHITZlucZfwdaCO8Uz4Ng3D5oA3GuvI35UTXrZmyRuQTr+E+MghrRqClLiKdJcBUGQlnXd59+C3VdevjRgVsI=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <b65fcc50-b249-4505-a212-b2f60c55f86d@amd.com>
+Date: Mon, 31 Aug 2026 17:48:44 +0200
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.18.48
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1788183977-734BC2A1-36D7AF9E/0/0
-X-purgate-type: clean
-X-purgate-size: 15461
-
-From: Yousef Alhouseen <alhouseenyousef@gmail.com>
-
-[ Upstream commit 2299822f3f466b5dcad2377bf63986199f881a6b ]
-
-gntalloc_ioctl_alloc() allocates the grant-id array before checking
-whether the requested count fits within the global grant limit. Counts
-above that limit cannot succeed, so reject them before the
-user-controlled allocation reaches kcalloc().
-
-Use a subtraction-based check while holding gref_mutex so adding the
-requested count cannot wrap. Also cast the count before advancing the
-per-file index so the page-size multiplication is performed in 64-bit
-arithmetic.
-
-Signed-off-by: Yousef Alhouseen <alhouseenyousef@gmail.com>
-Reviewed-by: Juergen Gross <jgross@suse.com>
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Message-ID: <20260626223805.43781-3-alhouseenyousef@gmail.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
-
-LLM Generated explanations, may be completely bogus:
-
-## Phase 1: Commit Message Forensics
-
-**Step 1.1 — Subject line**
-Record: `[xen/gntalloc] [validate] validate grant count before
-allocation` — ioctl input validation and overflow-safety fix in the Xen
-grant allocator.
-
-**Step 1.2 — Tags**
-Record:
-- `Signed-off-by: Yousef Alhouseen <alhouseenyousef@gmail.com>` (author)
-- `Reviewed-by: Juergen Gross <jgross@suse.com>` (Xen maintainer —
-  strong quality signal)
-- `Signed-off-by: Juergen Gross <jgross@suse.com>`
-- `Message-ID: <20260626223805.43781-3-alhouseenyousef@gmail.com>`
-  (patch 2/2 of v2 series)
-- No `Fixes:`, `Reported-by:`, `Link:`, `Cc: stable@vger.kernel.org`, or
-  `Tested-by:` tags
-
-**Step 1.3 — Body analysis**
-Record:
-- **Bug:** `gntalloc_ioctl_alloc()` calls `kcalloc(op.count, ...)`
-  before verifying `op.count` against the global grant limit.
-- **Symptom:** User-controlled counts above the limit still reach kernel
-  allocation; limit enforcement uses addition with mixed signed/unsigned
-  types that can wrap; `priv->index` advance uses 32-bit multiply.
-- **Failure modes:** Unnecessary kernel allocations (memory
-  pressure/DoS), potential limit-check bypass via wrap, corrupted per-
-  file mmap index.
-- **Root cause:** Validation ordering and unsafe arithmetic on user-
-  supplied `op.count` (`__u32`).
-
-**Step 1.4 — Hidden bug fix?**
-Record: **Yes.** Although the subject says "validate," this is a real
-bug fix: premature allocation, integer-overflow-prone limit check, and
-32-bit multiply before 64-bit assignment.
-
----
-
-## Phase 2: Diff Analysis
-
-**Step 2.1 — Inventory**
-Record:
-- 1 file: `drivers/xen/gntalloc.c` (+11 / -2 net)
-- Function modified: `gntalloc_ioctl_alloc()`
-- Scope: single-file, surgical ioctl-path fix
-
-**Step 2.2 — Code flow per hunk**
-
-| Hunk | Before | After |
-|------|--------|-------|
-| Early check | `kcalloc()` immediately after `copy_from_user()` |
-Snapshot `limit` with `READ_ONCE()`, reject `op.count > limit` with
-`-ENOSPC` before any allocation |
-| Locked limit check | `gref_size + op.count > limit` | Subtraction:
-`gref_size > limit_snapshot \|\| op.count > limit_snapshot - gref_size`
-under `gref_mutex` |
-| Index advance | `priv->index += op.count * PAGE_SIZE` (32-bit
-multiply) | `priv->index += (uint64_t)op.count * PAGE_SIZE` |
-
-Record: Normal ioctl path and error paths affected; early rejection
-avoids `kcalloc`/`kfree` on doomed requests.
-
-**Step 2.3 — Bug mechanism**
-Record:
-- **Category:** Input validation + integer overflow / type-safety
-- **Mechanism 1:** User `count` drives `kcalloc()` before limit
-  enforcement → kmem pressure DoS on `/dev/xen/gntalloc`
-- **Mechanism 2:** `gref_size + op.count > limit` mixes `int` counters
-  with `uint32_t` count; addition can wrap, potentially bypassing limit
-  and reaching `add_grefs()`'s `for (i = 0; i < op->count; i++)` loop
-- **Mechanism 3:** `op.count * PAGE_SIZE` computed in 32-bit arithmetic
-  before widening to `uint64_t priv->index`
-
-**Step 2.4 — Fix quality**
-Record: Minimal, obviously correct, no API changes. Early check is
-cheap. Subtraction check is standard overflow-safe idiom.
-`READ_ONCE(limit)` snapshots admin-tunable limit. Regression risk:
-**low** — only tightens validation; legitimate allocations within limit
-unchanged.
-
----
-
-## Phase 3: Git History Investigation
-
-**Step 3.1 — Blame**
-Record: Buggy lines in `gntalloc_ioctl_alloc()` trace to `5d324e5159d9e`
-in this shallow checkout (file unchanged since tree root). The ioctl
-allocation pattern is long-standing driver code, not a recent
-regression.
-
-**Step 3.2 — Fixes: tag**
-Record: Not applicable — no `Fixes:` tag present.
-
-**Step 3.3 — Related file history**
-Record: Shallow tree shows only merge commit touching
-`drivers/xen/gntalloc.c`. IOCTL path with `kcalloc`-before-limit pattern
-is present at HEAD.
-
-**Step 3.4 — Author context**
-Record: Yousef Alhouseen submitted the v2 series. Juergen Gross (active
-Xen maintainer; recent xen commits in tree include `xen/privcmd`
-security fixes) reviewed and signed off.
-
-**Step 3.5 — Dependencies**
-Record: **Series dependency identified.** Cover letter ([openwall v2
-0/2](https://lists.openwall.net/linux-kernel/2026/06/26/2112)) states
-patch 1/2 (`xen/gntalloc: make grant counters unsigned`) is a
-prerequisite for overflow-safe unsigned arithmetic. **This commit (2/2)
-applies cleanly standalone** to the current tree (`git apply --check`
-succeeded). Patch 1/2 is a 3-line companion change (`int` → `unsigned
-int` for `limit`/`gref_size`, `module_param(limit, uint, ...)`). Not a
-hard blocker for backporting this patch, but both should ideally ship
-together for a complete fix.
-
----
-
-## Phase 4: Mailing List and External Research
-
-**Step 4.1 — Original discussion**
-Record: `b4 dig -c <sha>` unavailable (commit not in local tree). Found
-via openwall:
-- Cover: https://lists.openwall.net/linux-kernel/2026/06/26/2112
-- Patch 1/2: https://lists.openwall.net/linux-kernel/2026/06/26/2113
-- Patch 2/2 (this commit): https://lists.openwall.net/linux-
-  kernel/2026/06/26/2114
-- v2 split unsigned-type changes into prerequisite per maintainer
-  feedback
-
-**Step 4.2 — Reviewers**
-Record: To: Juergen Gross, Stefano Stabellini, Oleksandr Tyshchenko; Cc:
-xen-devel, linux-kernel. Juergen Gross reviewed.
-
-**Step 4.3 — Bug report**
-Record: No external bug report or syzbot link. Issue identified by code
-review / proactive hardening.
-
-**Step 4.4 — Series context**
-Record: 2-patch v2 series, same file. Patch 1 prepares unsigned
-counters; patch 2 adds validation. Both are small and complementary.
-
-**Step 4.5 — Stable list**
-Record: No stable-list discussion found. lore.kernel.org returned 403
-(bot protection); openwall used instead.
-
----
-
-## Phase 5: Code Semantic Analysis
-
-**Step 5.1 — Key functions**
-Record: `gntalloc_ioctl_alloc()` (modified); related: `add_grefs()`,
-`do_cleanup()`.
-
-**Step 5.2 — Callers**
-Record: `gntalloc_ioctl()` → `case IOCTL_GNTALLOC_ALLOC_GREF` →
-`gntalloc_ioctl_alloc()`. Reachable from userspace via `ioctl()` on
-`/dev/xen/gntalloc` (`miscdevice`, name `"xen/gntalloc"`).
-
-**Step 5.3 — Callees**
-Record: `copy_from_user`, `kcalloc`, `mutex_lock/unlock`, `do_cleanup`,
-`add_grefs` (allocates pages, grants foreign access in a loop over
-`op->count`), `copy_to_user`, `kfree`.
-
-**Step 5.4 — Reachability**
-Record: Userspace ioctl on Xen systems with
-`CONFIG_XEN_GRANT_DEV_ALLOC`. Kconfig: "Allows userspace processes to
-create pages with access granted to other domains." Impact surface: Xen
-dom0 / Xen PV frontends using grant allocation — not universal, but
-ioctl is explicitly user-facing.
-
-**Step 5.5 — Similar patterns**
-Record: No other instances of this exact bug pattern in `gntalloc.c`.
-The `add_grefs()` loop makes a bypassed limit check especially dangerous
-(unbounded iteration + per-page allocations).
-
----
-
-## Phase 6: Cross-Reference Against Local Tree (6.18.44)
-
-**Step 6.1 — Buggy code present?**
-Record: **Yes.** Local tree is `v6.18.44-1-g2736c32da98b9` / `6.18.44`.
-At HEAD, `gntalloc_ioctl_alloc()` still does `kcalloc()` before limit
-check, uses `gref_size + op.count > limit`, and `priv->index += op.count
-* PAGE_SIZE`. `limit`/`gref_size` are `static int`.
-
-**Step 6.2 — Backport complications**
-Record: **Clean apply** — `git apply --check` on the provided diff
-succeeded with no conflicts.
-
-**Step 6.3 — Related fixes already present?**
-Record: No — `git log --grep="gntalloc"` and `--grep="validate grant
-count"` returned nothing. Fix not yet in this tree.
-
----
-
-## Phase 7: Subsystem and Maintainer Context
-
-**Step 7.1 — Subsystem**
-Record: `drivers/xen/` — Xen grant-table userspace interface.
-Criticality: **IMPORTANT** for Xen deployments (dom0, paravirt
-frontends); **PERIPHERAL** relative to all Linux users.
-
-**Step 7.2 — Activity**
-Record: Xen subsystem actively maintained; recent security fixes in
-related xen drivers (`privcmd`, `sys-hypervisor`) in this tree.
-
----
-
-## Phase 8: Impact and Risk Assessment
-
-**Step 8.1 — Who is affected**
-Record: Xen systems with `CONFIG_XEN_GRANT_DEV_ALLOC` (default `m`),
-users/processes that can open `/dev/xen/gntalloc` and issue
-`IOCTL_GNTALLOC_ALLOC_GREF`.
-
-**Step 8.2 — Trigger conditions**
-Record:
-- **Common:** `op.count > limit` (default 1024) → unnecessary `kcalloc`
-  before `-ENOSPC`; repeatable for memory pressure
-- **Less common:** Large `limit` module parameter + crafted counts →
-  addition wrap bypassing limit → massive `add_grefs()` loop
-- **Less common:** Large `op.count` with raised limit → 32-bit `op.count
-  * PAGE_SIZE` wrap corrupting `priv->index`
-- Unprivileged users need device access; still a valid hardening for any
-  caller with ioctl access
-
-**Step 8.3 — Failure severity**
-Record:
-- Memory pressure / DoS from premature allocations: **MEDIUM-HIGH**
-- Limit bypass → huge grant allocation loop: **CRITICAL** (hang/OOM) if
-  triggerable
-- Index corruption: **HIGH** (broken mmap offsets / grant bookkeeping)
-- Overall: **HIGH** for affected Xen configurations
-
-**Step 8.4 — Risk vs benefit**
-Record:
-- **Benefit:** HIGH for Xen users — closes validation gap on user-facing
-  ioctl
-- **Risk:** LOW — 11 lines, no behavior change for valid requests within
-  limit
-- **Ratio:** Strong benefit, low risk
-
----
-
-## Phase 9: Final Synthesis
-
-**Step 9.1 — Evidence summary**
-
-**FOR backport:**
-- Fixes real bugs (premature user-sized allocation, overflow-prone limit
-  check, 32-bit multiply)
-- Small, surgical, maintainer-reviewed
-- Applies cleanly to 6.18.44
-- Buggy code confirmed present in this tree
-- User-facing ioctl path on Xen systems
-- Companion patch 1/2 is tiny and should accompany for complete
-  unsigned-counter hardening
-
-**AGAINST backport:**
-- Xen-specific; not all stable users run Xen
-- No syzbot/user crash report (proactive fix)
-- Ideally paired with patch 1/2 for full unsigned arithmetic story
-  (minor concern, not a blocker)
-
-**Unresolved:** Whether reviewers explicitly nominated for stable (no
-thread replies fetched beyond cover/patch text).
-
-**Step 9.2 — Stable rules checklist**
-1. Obviously correct and tested? **PASS** — logic is straightforward;
-   reviewed by Juergen Gross; no `Tested-by`
-2. Fixes real bug affecting users? **PASS** — ioctl validation /
-   overflow issues on Xen grant allocator
-3. Important issue? **PASS** — DoS, potential limit bypass, index
-   corruption (HIGH severity on Xen)
-4. Small and contained? **PASS** — 1 file, ~13 lines changed
-5. No new features/APIs? **PASS** — validation only
-6. Can apply to local tree? **PASS** — verified clean apply
-
-**Step 9.3 — Exception category**
-Record: None (standard bug fix, not device ID/quirk/docs/build).
-
-**Step 9.4 — Decision rationale**
-This commit should be backported to the local **6.18.44** stable tree.
-The buggy ioctl ordering and arithmetic are present, the fix is minimal
-and maintainer-reviewed, and the failure modes (kmem pressure, limit
-bypass, index corruption) are meaningful on Xen systems. Backport patch
-1/2 (`make grant counters unsigned`) alongside this commit for the
-complete v2 series.
-
----
-
-## Verification
-
-- [Phase 1] Parsed subject, tags, body from provided commit message
-- [Phase 1] Identified patch as 2/2 via Message-ID `43781-3`
-- [Phase 2] Read current `gntalloc_ioctl_alloc()` at HEAD — confirmed
-  buggy ordering
-- [Phase 2] Verified `limit`/`gref_size` are `static int`, `op.count` is
-  `__u32`, `priv->index` is `uint64_t`
-- [Phase 2] Verified `kcalloc` uses `check_mul_overflow` in
-  `include/linux/slab.h`
-- [Phase 3] `git blame -L 283,302 drivers/xen/gntalloc.c` — lines from
-  `5d324e5159d9e`
-- [Phase 3] `git log --oneline -20 -- drivers/xen/gntalloc.c` — shallow
-  history
-- [Phase 3] `git log --grep` for gntalloc/validate — no existing fix in
-  tree
-- [Phase 4] `b4 dig -c 3218686be45b8` — no result (commit not in tree)
-- [Phase 4] Fetched openwall cover + patches 1/2 and 2/2 — confirmed v2
-  series and prerequisite note
-- [Phase 4] lore.kernel.org — 403 Forbidden (unverified for reviewer
-  stable nominations)
-- [Phase 5] Traced call chain: `gntalloc_ioctl` → `gntalloc_ioctl_alloc`
-- [Phase 5] Confirmed miscdevice `"xen/gntalloc"` registration
-- [Phase 5] Read `add_grefs()` — loops `op->count` times with page alloc
-  + grant setup
-- [Phase 6] `git describe HEAD` → `v6.18.44-1-g2736c32da98b9`; `make
-  kernelversion` → `6.18.44`
-- [Phase 6] `git apply --check` on provided diff — **clean apply**
-- [Phase 6] Confirmed pre-fix code via `git show
-  HEAD:drivers/xen/gntalloc.c`
-- [Phase 7] Read `drivers/xen/Kconfig` `XEN_GRANT_DEV_ALLOC` —
-  userspace-facing, default `m`
-- [Phase 8] Assessed severity from code paths (not from unverified crash
-  reports)
-
-**YES**
-
- drivers/xen/gntalloc.c | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/xen/gntalloc.c b/drivers/xen/gntalloc.c
-index f93f73ecefeee..462f67dc32751 100644
---- a/drivers/xen/gntalloc.c
-+++ b/drivers/xen/gntalloc.c
-@@ -272,6 +272,7 @@ static long gntalloc_ioctl_alloc(struct gntalloc_file_private_data *priv,
- 	int rc = 0;
- 	struct ioctl_gntalloc_alloc_gref op;
- 	uint32_t *gref_ids;
-+	unsigned int limit_snapshot;
- 
- 	pr_debug("%s: priv %p\n", __func__, priv);
- 
-@@ -280,6 +281,12 @@ static long gntalloc_ioctl_alloc(struct gntalloc_file_private_data *priv,
- 		goto out;
- 	}
- 
-+	limit_snapshot = READ_ONCE(limit);
-+	if (op.count > limit_snapshot) {
-+		rc = -ENOSPC;
-+		goto out;
-+	}
-+
- 	gref_ids = kcalloc(op.count, sizeof(gref_ids[0]), GFP_KERNEL);
- 	if (!gref_ids) {
- 		rc = -ENOMEM;
-@@ -292,14 +299,16 @@ static long gntalloc_ioctl_alloc(struct gntalloc_file_private_data *priv,
- 	 * are about to enforce, removing them here is a good idea.
- 	 */
- 	do_cleanup();
--	if (gref_size + op.count > limit) {
-+	limit_snapshot = READ_ONCE(limit);
-+	if (gref_size > limit_snapshot ||
-+	    op.count > limit_snapshot - gref_size) {
- 		mutex_unlock(&gref_mutex);
- 		rc = -ENOSPC;
- 		goto out_free;
- 	}
- 	gref_size += op.count;
- 	op.index = priv->index;
--	priv->index += op.count * PAGE_SIZE;
-+	priv->index += (uint64_t)op.count * PAGE_SIZE;
- 	mutex_unlock(&gref_mutex);
- 
- 	rc = add_grefs(&op, gref_ids, priv);
--- 
-2.53.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 02/20] xen/dom0less: turn max_init_domid into a common
+ variable
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	<xen-devel@lists.xenproject.org>
+CC: Romain Caritey <Romain.Caritey@microchip.com>, Baptiste Le Duc
+	<baptiste.le-duc@vates.tech>, Zheng Zhang <zhangzheng@iscas.ac.cn>, Stefano
+ Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand
+ Marquis <bertrand.marquis@arm.com>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, Timothy Pearson
+	<tpearson@raptorengineering.com>, Alistair Francis
+	<alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>, Teddy Astie
+	<teddy.astie@vates.tech>
+References: <cover.1787836900.git.oleksii.kurochko@gmail.com>
+ <5a74a964b763e8444579a3c0d455e23160be8893.1787836900.git.oleksii.kurochko@gmail.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
+Content-Language: en-US
+In-Reply-To: <5a74a964b763e8444579a3c0d455e23160be8893.1787836900.git.oleksii.kurochko@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D3:EE_|IA1PR12MB7664:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4ee5365e-1273-4b33-0b1c-08df077758eb
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|36860700016|82310400026|7416014|376014|1800799024|56012099006|10067099003|4143699003|5023799004|11063799006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	VxDpg6SA175mFY2YlvzT33HX8cf2FqT9U0rG3JCgeVXUoSrqHsu9kH5++t6kj7/DCRU8XktpqpHZpwZ7x1hZfHYcNNn4D2sBGpBlcTZAeTlGdXgcvfGxzUhCMbZc4tm9USlQFMIfAKoY17heDUESRYPBFJvxZXI83werSOV4w0/YPtd9sG41RAeu4e3Zs7/CIdKZwYj80L6HDx0JYwa+bIcvrzNRP0+I6b8XoZ6v9wEUEhw5SIQH3ERVlbxMSTJF6xBD4dGSeigq4DYJLGAAlyFEsOv7Fx2em/9keg7Sr3pODGF8AOvlvUIEAlzm0S+P7bO2Hl5352E/ykXZpLmQerIASM7aS62WTy2moogYrtYgQ2tAzvpe8vnrWaj+y5/5gF09WgD8S+r3lS32cnZ11DzvbY/dxGcY3b/jbO1t6Yb1eQcL5UGxSC9vDNEntSmgJmQs8faAJlVGUf8rNpz9PjxllXEC3w9Y+Yg7lwJt0fXEdNQBGJ2KRJjGyiKcAz+Gtzh3NRxRng4okGxOAOxsw+ZzDCd48shz8JBQo8l6Lx11q9VOiUDmco2LcyOpm3u2ipQiApUWq4KrMKe4MjRAFEEFIpg/hM1yhPf66S2rs0dAcomyN0vU7QftxnT4M9Fexut4QkqLTX+IkiWpW8MCABvVEOA5F1eanYpzN96pwY0G5koW85oDYxhfgnWf498PbPS2AIRurH49vhAJTt6ecQ==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(36860700016)(82310400026)(7416014)(376014)(1800799024)(56012099006)(10067099003)(4143699003)(5023799004)(11063799006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	bf+0R0MeWt1R0Mps3pWXBuVzvgc4hqj4VLa2bqK6w5KaabZMJjidr1hpUXaIohng3GGv4hjdGtEIuJllKoi+QY5tK3trNxAby05C11LJTXhOSf67Csww9DnyZZYwGO4dMStjGdLJBRiMjRShWGgqVAKqdijkiGiqZQ1oCTvDOkZtZHWs2DVOioiEsv1QWHeSKHBLv98uHgftRXoYNoraSCciMN0Z5qx5djqPm1DGDp5iD1eU/FNA/AdfwTI6O8qJKhUSqvnqNrq9I0CrXjHmMSzekNqxXl+GwuafVjUu7KEgbPO5C45jXrTkXbgs1eeXKZadlpp5mPAEfQFkQW1AP8b7LIk58vRZ+ae1gHtlQ3e2RviRPri5tb3AgBDjFGJugr/TORlO9DNFr0lWBVfdUjxs4Nkaxu4U8/Wow/SPP8UDr3UN24+MEKw4qlf4OP0r
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Aug 2026 15:48:48.3336
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4ee5365e-1273-4b33-0b1c-08df077758eb
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CY4PEPF0000E9D3.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB7664
+X-purgate-ID: tlsNG-42698a/1788191339-A8AC89EA-B7A3D020/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 5453
+
+
+
+On 27-Aug-26 17:18, Oleksii Kurochko wrote:
+> Until now every architecture carried its own notion of max_init_domid:
+> Arm defined a real variable (declared in asm/setup.h, defined in
+> setup.c), while ppc, riscv and x86 each provided a "#define
+> max_init_domid (0)" stub in their asm/setup.h. This duplicated the same
+> declaration across all arches and placed a purely dom0less concept in
+> arch setup headers.
+> 
+> Now that the dom0less build code lives in common (xen/common/
+> device-tree/dom0less-build.c sets max_init_domid, and the console
+> serial-input switcher reads it), there is no reason for the symbol to be
+> per-arch. Provide a single declaration in <xen/dom0less-build.h>, with
+> the !CONFIG_DOM0LESS_BOOT stub kept there as well, so there is one source
+> of truth and the arch headers no longer need to mention it. Update
+> console.c to include <xen/dom0less-build.h> for the declaration instead
+> of relying on asm/setup.h.
+> 
+> Place the definition in xen/common/domid.c rather than in dom0less-
+> build.c. The latter is built as dom0less-build.init.o, i.e. the whole
+> object is relocated into the .init.* sections and freed after boot,
+> whereas max_init_domid must outlive boot because it is read at runtime
+> by the console serial-input switcher. domid.c is always linked (obj-y)
+> and resides in regular (non-init) sections, so it is a correct home for
+> the variable. It is marked __ro_after_init since it is only updated
+> while creating boot-time domains and read-only afterwards, and guarded
+> by CONFIG_DOM0LESS_BOOT as domid.c itself is unconditional.
+> 
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+> ---
+> Changes in v6-8:
+>  - Nothing changed. Only rebase.
+> ---
+> Changes in v5:
+>  - Add Reviewed-by: Jan Beulich <jbeulich@suse.com>
+> ---
+> Changes in v4:
+>  - New patch.
+> ---
+> ---
+>  xen/arch/arm/include/asm/setup.h   | 2 --
+>  xen/arch/arm/setup.c               | 2 --
+>  xen/arch/ppc/include/asm/setup.h   | 2 --
+>  xen/arch/riscv/include/asm/setup.h | 2 --
+>  xen/arch/x86/include/asm/setup.h   | 2 --
+>  xen/common/domid.c                 | 5 +++++
+>  xen/drivers/char/console.c         | 1 +
+>  xen/include/xen/dom0less-build.h   | 7 +++++++
+>  8 files changed, 13 insertions(+), 10 deletions(-)
+> 
+> diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+> index 0adfa4993a8f..2af780512540 100644
+> --- a/xen/arch/arm/include/asm/setup.h
+> +++ b/xen/arch/arm/include/asm/setup.h
+> @@ -25,8 +25,6 @@ struct map_range_data
+>      struct rangeset *irq_ranges;
+>  };
+>  
+> -extern domid_t max_init_domid;
+> -
+>  void copy_from_paddr(void *dst, paddr_t paddr, unsigned long len);
+>  
+>  size_t estimate_efi_size(unsigned int mem_nr_banks);
+> diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+> index 6310a47d68b6..86532d0a35b6 100644
+> --- a/xen/arch/arm/setup.c
+> +++ b/xen/arch/arm/setup.c
+> @@ -62,8 +62,6 @@ struct cpuinfo_arm __read_mostly system_cpuinfo;
+>  bool __read_mostly acpi_disabled;
+>  #endif
+>  
+> -domid_t __read_mostly max_init_domid;
+> -
+>  static __used void noreturn init_done(void)
+>  {
+>      /* Must be done past setting system_state. */
+> diff --git a/xen/arch/ppc/include/asm/setup.h b/xen/arch/ppc/include/asm/setup.h
+> index e4f64879b68c..956fa6985adb 100644
+> --- a/xen/arch/ppc/include/asm/setup.h
+> +++ b/xen/arch/ppc/include/asm/setup.h
+> @@ -1,6 +1,4 @@
+>  #ifndef __ASM_PPC_SETUP_H__
+>  #define __ASM_PPC_SETUP_H__
+>  
+> -#define max_init_domid (0)
+> -
+>  #endif /* __ASM_PPC_SETUP_H__ */
+> diff --git a/xen/arch/riscv/include/asm/setup.h b/xen/arch/riscv/include/asm/setup.h
+> index 2215894cfbb1..73ce2f293348 100644
+> --- a/xen/arch/riscv/include/asm/setup.h
+> +++ b/xen/arch/riscv/include/asm/setup.h
+> @@ -5,8 +5,6 @@
+>  
+>  #include <xen/types.h>
+>  
+> -#define max_init_domid (0)
+> -
+>  void setup_mm(void);
+>  
+>  void copy_from_paddr(void *dst, paddr_t paddr, unsigned long len);
+> diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
+> index b01e83a8ed9f..5925c5f39cff 100644
+> --- a/xen/arch/x86/include/asm/setup.h
+> +++ b/xen/arch/x86/include/asm/setup.h
+> @@ -68,6 +68,4 @@ extern bool opt_dom0_verbose;
+>  extern bool opt_dom0_cpuid_faulting;
+>  extern bool opt_dom0_msr_relaxed;
+>  
+> -#define max_init_domid (0)
+> -
+>  #endif
+> diff --git a/xen/common/domid.c b/xen/common/domid.c
+> index b0258e477c1a..cd46cf952be6 100644
+> --- a/xen/common/domid.c
+> +++ b/xen/common/domid.c
+> @@ -9,6 +9,11 @@
+>   */
+>  
+>  #include <xen/domain.h>
+> +#include <xen/dom0less-build.h>
+NIT: "dom0less" comes before "domain" when it comes to alphabetical order I think.
+
+> +
+> +#ifdef CONFIG_DOM0LESS_BOOT
+> +domid_t __ro_after_init max_init_domid;
+> +#endif
+>  
+>  static DEFINE_SPINLOCK(domid_lock);
+>  static DECLARE_BITMAP(domid_bitmap, DOMID_FIRST_RESERVED);
+> diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+> index fcacf37c52f0..61e92491e40a 100644
+> --- a/xen/drivers/char/console.c
+> +++ b/xen/drivers/char/console.c
+> @@ -31,6 +31,7 @@
+>  #include <xen/warning.h>
+>  #include <xen/pv_console.h>
+>  #include <asm/setup.h>
+NIT: This can be dropped - I don't see anything relying on it in this file.
+
+Other than that:
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+
+~Michal
 
 
