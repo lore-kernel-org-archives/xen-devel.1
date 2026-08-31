@@ -4,46 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7870C624A4
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Aug 2026 13:00:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1404046.1637987 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA0BBC624A4
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Aug 2026 13:36:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1404059.1637996 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x11bz-0001uv-9C; Mon, 31 Aug 2026 12:59:43 +0000
+	id 1x12B5-0008F9-QN; Mon, 31 Aug 2026 13:35:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1404046.1637987; Mon, 31 Aug 2026 12:59:43 +0000
+Received: by outflank-mailman (output) from mailman id 1404059.1637996; Mon, 31 Aug 2026 13:35:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x11bz-0001uo-5u; Mon, 31 Aug 2026 12:59:43 +0000
-Received: by outflank-mailman (input) for mailman id 1404046;
- Mon, 31 Aug 2026 12:59:41 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x12B5-0008F1-N6; Mon, 31 Aug 2026 13:35:59 +0000
+Received: by outflank-mailman (input) for mailman id 1404059;
+ Mon, 31 Aug 2026 13:35:57 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1x11bx-0001ue-Oq
- for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 12:59:41 +0000
+ (envelope-from <sashal@kernel.org>) id 1x12B3-0008Ev-Av
+ for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 13:35:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x11bw-002rZq-PQ
- for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 14:59:40 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1x12B2-00A0l0-Ji
+ for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 15:35:56 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jgross@suse.com>)
- id 6a957abc-8faa-0a2a0a5109dd-0a2a450adc44-0
- for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 14:59:40 +0200
-Received: from [209.85.208.42] (helo=mail-ed1-f42.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jgross@suse.com>)
- id 6a957abc-f2d2-0a2a450a0019-d155d02aa5b7-3
- for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 14:59:40 +0200
-Received: by mail-ed1-f42.google.com with SMTP id
- 4fb4d7f45d1cf-6a5ebf75d62so5666754a12.1
- for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 05:59:40 -0700 (PDT)
-Received: from ?IPV6:2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112?
- (2a00-12d0-af5d-ad01-5d3f-14e6-9bcb-5112.ip.tng.de.
- [2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a611b675d1sm3735822a12.9.2026.08.31.05.59.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 31 Aug 2026 05:59:39 -0700 (PDT)
+ (envelope-from <sashal@kernel.org>)
+ id 6a95833c-bab6-0a2a0a5309dd-0a2a4505b4be-0
+ for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 15:35:56 +0200
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <sashal@kernel.org>)
+ id 6a95833b-4cb1-0a2a45050019-ac6904feae9c-3
+ for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 15:35:56 +0200
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 9F13C60215;
+ Mon, 31 Aug 2026 13:35:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2F0F41F00A3F;
+ Mon, 31 Aug 2026 13:35:53 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,275 +50,433 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788181180; x=1788785980; darn=lists.xenproject.org;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=rmbwc7pbIyZmSLHU25g8L0LQHx9DUCsFZZGV1gqiF8o=;
-        b=OGW5AbL0bDBF2lefDinjsITaOuPJgoeK/wiPzL5S5/24dm1/5SVUCCWIGTuQg8wZUt
-         HjMqLuGdkOPZoN+S1HQu/Py1AWDBbdaW54xuzRrc9Jv9dx466nGCaL0uvKr5WOReEt3o
-         sdR10gTmZ9K/Au//8RrvJJN8yPAxQVrxYuxju7tioz0A8o/R5wnU5aNeJ3dJyE/MNYna
-         eIbIJTddSJO0ArtIy95nHXi5stiD9yGQ65YWlKU5Kstx2GHu5QiE4vYW6ZrpTlMNHK/Q
-         TUPTuM77xjdSh2jTE/2Ozq9H+TytLPJkhTvNO9bsV2gK7/17388XP5rpEx19IL6N0XBt
-         XLzg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788181180; x=1788785980;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=rmbwc7pbIyZmSLHU25g8L0LQHx9DUCsFZZGV1gqiF8o=;
-        b=lCOHzB7m/B64xeTZ9ajc+Oo9fu6orCKPbfHCn/9yhWP8pqh4zIGbBuo4JRtYvXxrzQ
-         0p9tzVVRGx7kUghONVW7/uaoDhBnyZAINKo0WiutSSPMQRsMLLhBeCa0G6oAIojTw5cm
-         Wf3UNiERDvRlOTLob3B96cccb5gxLptMO0q3sUK0exJjyzJWyDUD6jzg2wht/Vn5Z6Cl
-         IoeMaUK151gybmCkJ0SANNGKBoikIyDcJ4f2K/wdFS1Sb610q0dpH+Gj/PmC+KhlYDjz
-         3li3GjIlMpamuSfHdJ79O5Qpwd+gq1jvSPOX/htjRETb5y2Arpum0Ve6gk5ZvN0Yima+
-         75FQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwA5/E/grWOhoilfEKoKDrwBtnD2LarDyaoCFKIZjnOuFTHqKLmgQwfWyPAnM/XyCZ+wVbyX7nsetA=@lists.xenproject.org
-X-Gm-Message-State: AFuF++khMpnxykNQSAy3KqeN7DjWeuMhvxxoSMFTDpgggnGvaA967ggp
-	yiHQW2M7RqBAzKL54E3Wgshg/vRsl1xEwl7hvMkrk1EFVAOqkfw3bBqZvYYoMPCD8DE=
-X-Gm-Gg: AYBFou3hTC5EXEDK1ebRtv1i7XKkNH3IlzdYLk+5dbhs0WPMsCtSUkzqSvGej5SY+9V
-	vDK8BcAjDPHJqym+cAH5s5N6l0ssz9kIejgX0HYqd2eXxGhMaElx6tT10tFUyz39TCReyDo7xLu
-	H4LDJTH7vZCtVqkaxLmoUw9R+jBR3hba9Av98uB7+cQjzLm/k+4k/O8TaJcL16ybvhWAKO/Ah6w
-	gksvAXteDYZERgK+N+ia2Cp5ntZ00jiGN54LKAf/gbGbAF0jHtFHV1Zr2cgDhVQ+kG+nYtRgQh9
-	d0hc5njFAahgFr1R1kPzfk0FpD3vBsTb45uogbsRVcrsgMTC/AN0FcVQwUF/1FNaNgurJ25LRAH
-	h5VUa/U70X4cACQHnja6viYe+ltgUSZiqruzQnTok1ahn1Oeou2dyHy1hVETfI4R4TXTY/Jfi1G
-	nB5k56Tr37X6yun34IyMIURmw3w1A2FcIcb4vuJ5WOTo73GwLxcI8Zgf72NeCJCUXvWr+3GyKVi
-	d+5KoZIYMgX9EgfEwjl0+v8aOY9CKX6YsdzS8mAx0feJDI0bhwWZyXO+d7bdh7UFlruHGdyupbo
-	VSojdQbUpYm9uQ==
-X-Received: by 2002:aa7:d7ce:0:b0:6a5:d284:1134 with SMTP id 4fb4d7f45d1cf-6a6476996b7mr3283736a12.2.1788181180092;
-        Mon, 31 Aug 2026 05:59:40 -0700 (PDT)
-Message-ID: <4a71e08b-b3c6-4f14-a4ae-cc0506659ae9@suse.com>
-Date: Mon, 31 Aug 2026 14:59:39 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788183354;
+	bh=HSkhL9GEPh+pjRNfJc8hLKIsYQDXSRpdkikCUwYosQc=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=OrhEoctWOCtSw/GE1uNv1080RfJV4OHV2RZ849wX1Ci21F+GX5gbIXe0i7VURno4w
+	 qpcgCCOcD12jrbU+bUdiTR+WfbfGK8UeD9R8w69X05ceL10VRaJRwhhGRmDZ1X4ION
+	 DU1JnyOjOEA+ZN/rSlniF6a4mT3IE3n4d/f6zhEPM22dB793to495yq2u8vCmHDJVc
+	 BgryyxGypF44z3datQstHbxD/Fzke1NI5ctiubMzCE+awUJzLJIX06fNKJ0mt5UGPN
+	 KVsG8KfVGc3DAtbyns2y4wqg+XPNQamRmDjIJfwj/mLMlguNaVm7kLDAvlnwtLie7U
+	 BCcoxpA1g9xmg==
+From: Sasha Levin <sashal@kernel.org>
+To: patches@lists.linux.dev,
+	stable@vger.kernel.org
+Cc: Yousef Alhouseen <alhouseenyousef@gmail.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Juergen Gross <jgross@suse.com>,
+	Sasha Levin <sashal@kernel.org>,
+	xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH AUTOSEL 6.18-5.10] xen/front-pgdir-shbuf: free grant reference head on errors
+Date: Mon, 31 Aug 2026 09:22:06 -0400
+Message-ID: <20260831133314.4125787-98-sashal@kernel.org>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260831133314.4125787-1-sashal@kernel.org>
+References: <20260831133314.4125787-1-sashal@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/2] xen/common: add vcpus_create() and keep max_vcpus
- in sync
-To: Andrew Cooper <andrew.cooper3@citrix.com>,
- Furkan Caliskan <frn1furkan10@gmail.com>, xen-devel@lists.xenproject.org
-Cc: jbeulich@suse.com, dfaggioli@suse.com, gwd@xenproject.org,
- roger@xenproject.org, anthony.perard@vates.tech, julien@xen.org,
- bertrand.marquis@arm.com, michal.orzel@amd.com, Volodymyr_Babchuk@epam.com,
- teddy.astie@vates.tech
-References: <20260831051637.5029-1-frn1furkan10@gmail.com>
- <20260831051637.5029-2-frn1furkan10@gmail.com>
- <cb7418ef-4d3e-4a86-9c86-f7b0f296c013@citrix.com>
-Content-Language: en-US
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Autocrypt: addr=jgross@suse.com; keydata=
- xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
- ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
- dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
- NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
- XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
- AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
- CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
- mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
- G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
- kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
- Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
- RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
- vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
- sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
- aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
- w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
- auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
- 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
- fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
- HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
- QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
- ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <cb7418ef-4d3e-4a86-9c86-f7b0f296c013@citrix.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------hH0nFQZmGGVK10bZd6Gxav8h"
-X-purgate-ID: tlsNG-4011c0/1788181180-508CDCFC-867E2FBD/0/0
+X-stable: review
+X-Patchwork-Hint: Ignore
+X-stable-base: Linux 6.18.48
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c201ff/1788183356-F70B22A1-81D04592/0/0
 X-purgate-type: clean
-X-purgate-size: 11188
+X-purgate-size: 16057
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------hH0nFQZmGGVK10bZd6Gxav8h
-Content-Type: multipart/mixed; boundary="------------WmhsvkZAmVDqlQG7zk2Ptfaz";
- protected-headers="v1"
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>,
- Furkan Caliskan <frn1furkan10@gmail.com>, xen-devel@lists.xenproject.org
-Cc: jbeulich@suse.com, dfaggioli@suse.com, gwd@xenproject.org,
- roger@xenproject.org, anthony.perard@vates.tech, julien@xen.org,
- bertrand.marquis@arm.com, michal.orzel@amd.com, Volodymyr_Babchuk@epam.com,
- teddy.astie@vates.tech
-Message-ID: <4a71e08b-b3c6-4f14-a4ae-cc0506659ae9@suse.com>
-Subject: Re: [PATCH v3 1/2] xen/common: add vcpus_create() and keep max_vcpus
- in sync
-References: <20260831051637.5029-1-frn1furkan10@gmail.com>
- <20260831051637.5029-2-frn1furkan10@gmail.com>
- <cb7418ef-4d3e-4a86-9c86-f7b0f296c013@citrix.com>
-In-Reply-To: <cb7418ef-4d3e-4a86-9c86-f7b0f296c013@citrix.com>
-Autocrypt-Gossip: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJ3BBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AAIQkQoDSui/t3IH4WIQQ+pJkfkcoLMCa4X6CgNK6L+3cgfgn7AJ9DmMd0SMJE
- ePbc7/m22D2v04iu7ACffXTdZQhNl557tJuDXZSBxDmW/tLOwU0EWTecRBAIAIK5OMKMU5R2
- Lk2bbjgX7vyQuCFFyKf9rC/4itNwhYWFSlKzVj3WJBDsoi2KvPm7AI+XB6NIkNAkshL5C0kd
- pcNd5Xo0jRR5/WE/bT7LyrJ0OJWS/qUit5eNNvsO+SxGAk28KRa1ieVLeZi9D03NL0+HIAtZ
- tecfqwgl3Y72UpLUyt+r7LQhcI/XR5IUUaD4C/chB4Vq2QkDKO7Q8+2HJOrFIjiVli4lU+Sf
- OBp64m//Y1xys++Z4ODoKh7tkh5DxiO3QBHG7bHK0CSQsJ6XUvPVYubAuy1XfSDzSeSBl//C
- v78Fclb+gi9GWidSTG/4hsEzd1fY5XwCZG/XJJY9M/sAAwUH/09Ar9W2U1Qm+DwZeP2ii3Ou
- 14Z9VlVVPhcEmR/AFykL9dw/OV2O/7cdi52+l00reUu6Nd4Dl8s4f5n8b1YFzmkVVIyhwjvU
- jxtPyUgDOt6DRa+RaDlXZZmxQyWcMv2anAgYWGVszeB8Myzsw8y7xhBEVV1S+1KloCzw4V8Z
- DSJrcsZlyMDoiTb7FyqxwQnM0f6qHxWbmOOnbzJmBqpNpFuDcz/4xNsymJylm6oXiucHQBAP
- Xb/cE1YNHpuaH4SRhIxwQilCYEznWowQphNAbJtEKOmcocY7EbSt8VjXTzmYENkIfkrHRyXQ
- dUm5AoL51XZljkCqNwrADGkTvkwsWSvCSQQYEQIACQUCWTecRAIbDAAKCRCgNK6L+3cgfuef
- AJ9wlZQNQUp0KwEf8Tl37RmcxCL4bQCcC5alCSMzUBJ5DBIcR4BY+CyQFAs=
+From: Yousef Alhouseen <alhouseenyousef@gmail.com>
 
---------------WmhsvkZAmVDqlQG7zk2Ptfaz
-Content-Type: multipart/mixed; boundary="------------z004N67swzAtFwgqQfqxsmPV"
+[ Upstream commit 678d59219ce0ae883f04c96936222c6168ef1164 ]
 
---------------z004N67swzAtFwgqQfqxsmPV
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+grant_references() allocates a private grant-reference head before
+claiming references for the page directory and, for guest-owned buffers,
+the data pages. The success path frees the remaining head, but claim
+failures and grant_refs_for_buffer() errors return immediately.
 
-T24gMzEuMDguMjYgMTE6NDUsIEFuZHJldyBDb29wZXIgd3JvdGU6DQo+IE9uIDMxLzA4LzIw
-MjYgNjoxNiBhbSwgRnVya2FuIENhbGlza2FuIHdyb3RlOg0KPj4gRXZlcnkgdmNwdV9jcmVh
-dGUoKSBjYWxsIHNpdGUgdGhhdCBidWlsZHMgbW9yZSB0aGFuIG9uZSB2Y3B1IGxvb3BzDQo+
-PiBvdmVyIGlkcyB1cCB0byBkLT5tYXhfdmNwdXMgYW5kIHN0b3BzIG9uIHRoZSBmaXJzdCBm
-YWlsdXJlLCBidXQgbm9uZQ0KPj4gb2YgdGhlbSByb2xsIG1heF92Y3B1cyBiYWNrIHRvIG1h
-dGNoLiBUaGlzIGxlYXZlcyBkLT52Y3B1W2ldID09IE5VTEwNCj4+IGZvciBpZHMgYmVsb3cg
-bWF4X3ZjcHVzDQo+IA0KPiBBcyBJIHRvbGQgeW91IGJlZm9yZSwgeW91IG11c3QgY29wZSB3
-aXRoIHRoaXMgcHJvcGVydHkgaW4gbm9uLWVycm9yDQo+IHNjZW5hcmlvcy4NCj4gDQo+PiAs
-IHdoaWNoIGFueXRoaW5nIHdhbGtpbmcgZC0+dmNwdVtdIGNhbiB0aGVuDQo+PiBkZXJlZmVy
-ZW5jZS4gVGhpcyBpcyB3aGF0IGNhdXNlZCB0aGUgY3Jhc2g6IHNjaGVkX21vdmVfZG9tYWlu
-KCkNCj4+IHdhbGtzIGV2ZXJ5IHZjcHUgc2xvdCB1cCB0byBtYXhfdmNwdXMgd2l0aG91dCBj
-aGVja2luZyBmb3IgZW1wdHkNCj4+IG9uZXMsIHNvIHdoZW4gYSBkb21haW4gYnVpbHQgaW4g
-YSBub24tZGVmYXVsdCBjcHVwb29sIGhhZCB2Y3B1DQo+PiBjcmVhdGlvbiBmYWlsIHBhcnR3
-YXkgdGhyb3VnaCwgZG9tYWluX2tpbGwoKSBsYXRlciBtb3ZpbmcgaXQgYmFjaw0KPj4gdG8g
-dGhlIGRlZmF1bHQgY3B1cG9vbCBoYW5kZWQgb25lIG9mIGl0cyBlbXB0eSBzbG90cyBzdHJh
-aWdodCB0bw0KPj4gdGhlIG5ldyBjcHVwb29sJ3Mgc2NoZWR1bGVyLCBjYXVzaW5nIGEgTlVM
-TC1wb2ludGVyIGRlcmVmZXJlbmNlDQo+PiBpbnNpZGUgc2NoZWRfYWxsb2NfdWRhdGEoKS4N
-Cj4+DQo+PiBBZGQgdmNwdXNfY3JlYXRlKGQpOiBjcmVhdGVzIGV2ZXJ5IHZjcHUgb2YgZCB1
-cCB0byBtYXhfdmNwdXMgYW5kDQo+PiByb2xscyBtYXhfdmNwdXMgYmFjayB0byB0aGUgZmFp
-bGVkIGlkIG9uIGVycm9yLiBUaGlzIGtlZXBzDQo+PiBkLT52Y3B1W2ldIGlzIG5vbi1OVUxM
-IGZvciBhbGwgaSA8IGQtPm1heF92Y3B1cw0KPiANCj4gTm8sIGl0IHJlYWxseSBkb2Vzbid0
-Lg0KPiANCj4+ICwgaW5zdGVhZCBvZiBndWFyZGluZw0KPj4gZXZlcnkgcmVhZGVyIG9mIGQt
-PnZjcHVbXSBhZ2FpbnMgaG9sZXMgaW5kaXZpZHVhbGx5Lg0KPj4NCj4+IENvbnZlcnQgZXZl
-cnkgc2l0ZSB0aGF0IGJ1aWxkcyB2Y3B1cyBpbiBhIGxvb3AgdG8gY2FsbCB0aGlzIGZ1bmN0
-aW9uDQo+PiBpbnN0ZWFkLg0KPj4NCj4+IEZpeGVzOiA2MTY0OTcwOTQyMWEgKCJ4ZW4vZG9t
-YWluOiBBbGxvY2F0ZSBkLT52Y3B1W10gaW4gZG9tYWluX2NyZWF0ZSgpIikNCj4+IFN1Z2dl
-c3RlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPg0KPj4gU2lnbmVkLW9m
-Zi1ieTogRnVya2FuIENhbGlza2FuIDxmcm4xZnVya2FuMTBAZ21haWwuY29tPg0KPiANCj4g
-Rm9yIHRoZSBhdm9pZGFuY2Ugb2YgYSBsb25nIGRyYXduLW91dCBhcmd1bWVudCwgbmFjay7C
-oCBVbmRlciBubw0KPiBjaXJjdW1zdGFuY2VzIGFyZSB5b3UgZWRpdGluZyBkLT5tYXhfY3B1
-cyBhZnRlciBpdCdzIHB1dCBpbnRvIHRoZSBkb21haW4NCj4gbGlzdC4NCj4gDQo+IFlvdSd2
-ZSBjaG9zZW4gdG8gZG8gc28gYXQgYSBwb2ludCB3aGVyZSB0aGUgZG9tYWluIG9iamVjdCBp
-cyBsaXZlLA0KPiB2aXNpYmxlIGluIHRoZSBzeXN0ZW0gYW5kIGFibGUgdG8gYmUgdGhlIHRh
-cmdldCBvZiBvdGhlciBoeXBlcmNhbGxzLg0KPiANCj4gRnVydGhlcm1vcmUgeW91IGhhdmUg
-bm90IGZpeGVkIHdoYXQgeW91ciBjb21taXQgbWVzc2FnZSBjbGFpbXMuDQo+IGQtPnZjcHVb
-Li4uXSBpcyBzdGlsbCBOVUxMIGZvciBhbiBhcmJpdHJhcnkgcGVyaW9kIG9mIHRpbWUsIGlu
-Y2x1ZGluZw0KPiBiZWluZyBhYmxlIHRvIGJlIHRoZSB0YXJnZXQgb2YgaHlwZXJjYWxscywg
-YmVmb3JlIHZDUFVzIGFyZSBjcmVhdGVkLg0KPiANCj4gQWxsIGNvZGUgTVVTVCBiZSBhYmxl
-IHRvIGNvcGUgd2l0aCBkLT52Y3B1Wy4uLl0gYmVpbmcgTlVMTC7CoCBJdCdzIGhvdw0KPiB0
-aGUgb2JqZWN0IGxpZmVjeWNsZXMgbXVzdCB3b3JrLCBiZWNhdXNlIGNyZWF0aW5nIHZDUFVz
-IGlzIG5vdCBhdG9taWMNCj4gd2l0aCByZXNwZWN0IHRvIGNyZWF0aW5nIGRvbWFpbnMuDQoN
-CldvdWxkIHlvdSBiZSBmaW5lIHdpdGggbWUgY3JlYXRpbmcgYSBwYXRjaCBzZXJpZXMgbW92
-aW5nIHZjcHUgY3JlYXRpb24gaW50bw0KZG9tYWluX2NyZWF0ZSgpPw0KDQpUaGlzIHdvdWxk
-IGF0IG9uY2Ugc29sdmUgYWxsIHRob3NlIHByb2JsZW1zLCB3aGlsZSBldmVuIHJlbW92aW5n
-IHRoZSBuZWVkIGZvcg0KaGF2aW5nIHRoZSBYRU5fRE9NQ1RMX21heF92Y3B1cyBkb21jdGwu
-DQoNCg0KSnVlcmdlbg0K
---------------z004N67swzAtFwgqQfqxsmPV
-Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+Unwind through a common exit path so the private grant-reference head is
+released even when granting fails part-way through setup. The caller
+still tears down any references already stored in buf->grefs.
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+Signed-off-by: Yousef Alhouseen <alhouseenyousef@gmail.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Message-ID: <20260629160517.29340-1-alhouseenyousef@gmail.com>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
 
-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
-kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
-=3DeeAB
------END PGP PUBLIC KEY BLOCK-----
+LLM Generated explanations, may be completely bogus:
 
---------------z004N67swzAtFwgqQfqxsmPV--
+# Stable Backport Analysis: `xen/front-pgdir-shbuf: free grant reference
+head on errors`
 
---------------WmhsvkZAmVDqlQG7zk2Ptfaz--
+**Local tree:** Linux 6.18.44 (`v6.18.44-1-g2736c32da98b9`)
+**Fix commit (mainline):** `678d59219ce0a` — not an ancestor of this
+tree; buggy code is still present.
 
---------------hH0nFQZmGGVK10bZd6Gxav8h
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+---
 
------BEGIN PGP SIGNATURE-----
+## PHASE 1: COMMIT MESSAGE FORENSICS
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmqVersFAwAAAAAACgkQsN6d1ii/Ey8w
-QggAmUK9waKIAAMunEV3tcEBNrbx7TVOgUtkMVPBXeZTPo6XyJL+62iBtGfhJBJxgaFZd8yrIVRx
-X6F5Xn+6XGtsZtP9S8NS0j6ku34ppso1p+mGaQTRobYVRwfHYSd81b4oTTEC2oNCErFP7n+jxK5s
-m/nML0m/6GqiYQi325kseRzvQ0Gj4eQGTK9XuXgcHEJOHZDN+hJ/ZU+CDtN4hJ/aDY7hWRpU97tA
-yjSJPoS1guKV0LCTg26BRrrex/KX1MChWF3nBl1NddtaEXSeLOWM9rfHDaufVEb29/UrxHJZU5Pk
-oCTluNP8wCJxhH2OCfqN0BwaV6/8tbilA8jQuYXWKQ==
-=SqJp
------END PGP SIGNATURE-----
+### Step 1.1: PARSE THE SUBJECT LINE
+**Record:** `[xen/front-pgdir-shbuf]` `[free]` — fix missing cleanup of
+a private grant-reference head on error paths in `grant_references()`.
 
---------------hH0nFQZmGGVK10bZd6Gxav8h--
+### Step 1.2: PARSE ALL COMMIT MESSAGE TAGS
+**Record:**
+- **Signed-off-by:** Yousef Alhouseen `<alhouseenyousef@gmail.com>`
+  (author)
+- **Reviewed-by:** Stefano Stabellini `<sstabellini@kernel.org>` (Xen
+  maintainer)
+- **Signed-off-by:** Juergen Gross `<jgross@suse.com>` (Xen maintainer,
+  committer)
+- **Message-ID:** `<20260629160517.29340-1-alhouseenyousef@gmail.com>`
+- No Fixes:, Reported-by:, Tested-by:, Link:, or Cc: stable tags
+- Notable: Reviewed by a Xen subsystem maintainer; committed by Xen tree
+  maintainer
+
+### Step 1.3: ANALYZE THE COMMIT BODY TEXT
+**Record:**
+- **Bug:** `grant_references()` allocates a private grant-reference list
+  (`priv_gref_head`) via `gnttab_alloc_grant_references()`. On success,
+  unclaimed entries are returned via `gnttab_free_grant_references()`.
+  On two error paths (`gnttab_claim_grant_reference()` failure and
+  `grant_refs_for_buffer()` failure), the function returned immediately
+  without freeing `priv_gref_head`.
+- **Symptom:** Unclaimed grant references remain off the global free
+  list — a resource leak in the Xen grant table.
+- **Root cause:** Missing common error-exit cleanup; caller
+  `xen_front_pgdir_shbuf_free()` only tears down refs already stored in
+  `buf->grefs`, not the private head list.
+- **Version info:** None in the message.
+
+### Step 1.4: DETECT HIDDEN BUG FIXES
+**Record:** Not disguised — this is an explicit error-path resource-leak
+fix, though described without a crash report.
+
+---
+
+## PHASE 2: DIFF ANALYSIS — LINE BY LINE
+
+### Step 2.1: INVENTORY THE CHANGES
+**Record:**
+- **File:** `drivers/xen/xen-front-pgdir-shbuf.c` (+8 / −4 lines)
+- **Function modified:** `grant_references()` only
+- **Scope:** Single-file surgical fix
+
+### Step 2.2: UNDERSTAND THE CODE FLOW CHANGE
+**Record:**
+- **Hunk 1 (claim failure in directory loop):** Before: `return cur_ref`
+  leaked `priv_gref_head`. After: `ret = cur_ref; goto out_free_refs`.
+- **Hunk 2 (`grant_refs_for_buffer` failure):** Before: `return ret`
+  leaked head. After: `goto out_free_refs`.
+- **Hunk 3 (success path restructured):** Before: free head, `return 0`.
+  After: `ret = 0; out_free_refs:
+  gnttab_free_grant_references(priv_gref_head); return ret` — same
+  success behavior, unified cleanup on all paths after allocation.
+
+### Step 2.3: IDENTIFY THE BUG MECHANISM
+**Record:**
+- **Category:** Error-path resource leak (grant reference leak)
+- **Mechanism:** `gnttab_alloc_grant_references()` removes entries from
+  the global grant free pool into a private linked list. Claimed refs
+  are removed from that list and stored in `buf->grefs`. Unclaimed refs
+  remain in `priv_gref_head` and must be returned via
+  `gnttab_free_grant_references()`. Early returns skipped that free,
+  permanently shrinking the grant table pool.
+
+### Step 2.4: ASSESS THE FIX QUALITY
+**Record:**
+- **Quality:** Obviously correct; mirrors the established pattern in
+  `gntdev-dmabuf.c` (`out:` label + `gnttab_free_grant_references()`).
+- **Regression risk:** Very low. `gnttab_free_grant_references()` only
+  frees refs still linked in `priv_gref_head`; already-claimed refs in
+  `buf->grefs` are untouched and still cleaned up by the caller on
+  failure.
+
+---
+
+## PHASE 3: GIT HISTORY INVESTIGATION
+
+### Step 3.1: BLAME THE CHANGED LINES
+**Record:** `grant_references()` introduced in `b3383974fee27`
+(Oleksandr Andrushchenko, 2018-11-30) — "xen: Introduce shared buffer
+helpers for page directory based frontends." The missing error-path
+cleanup has existed since introduction (~kernel 5.0 era).
+
+### Step 3.2: FOLLOW THE FIXES: TAG
+**Record:** No Fixes: tag present — N/A.
+
+### Step 3.3: CHECK FILE HISTORY FOR RELATED CHANGES
+**Record:** Related prior fix `53f131c284e83` (2021): "don't record
+wrong grant handle upon error" — different issue (invalid handle on
+error), already in this tree. No prerequisite commits needed; standalone
+single-patch series (v1 only per b4).
+
+### Step 3.4: CHECK THE AUTHOR'S OTHER COMMITS
+**Record:** Yousef Alhouseen is a contributor; this is their Xen front-
+pgdir-shbuf fix. Reviewed/committed by Xen maintainers (Stabellini,
+Gross).
+
+### Step 3.5: CHECK FOR DEPENDENT/PREREQUISITE COMMITS
+**Record:** No dependencies. `git apply --check` on the fix diff
+succeeds cleanly against this tree's file. Standalone.
+
+---
+
+## PHASE 4: MAILING LIST AND EXTERNAL RESEARCH
+
+### Step 4.1: FIND THE ORIGINAL PATCH DISCUSSION
+**Record:** `b4 dig -c 678d59219ce0a` → https://patch.msgid.link/2026062
+9160517.29340-1-alhouseenyousef@gmail.com
+Single v1 submission (2026-06-29). Lore page fetch blocked by bot
+protection; thread content not directly readable.
+
+### Step 4.2: CHECK WHO REVIEWED THE PATCH
+**Record:** `b4 dig -w`: To/Cc included Juergen Gross, Stefano
+Stabellini, xen-devel@lists.xenproject.org, linux-
+kernel@vger.kernel.org. Stefano Stabellini Reviewed-by on committed
+version.
+
+### Step 4.3: SEARCH FOR THE BUG REPORT
+**Record:** No Reported-by or bug-report Link tags. Bug identified via
+code-path analysis (missing cleanup), not a syzbot/fuzzer report.
+
+### Step 4.4: CHECK FOR RELATED PATCHES AND SERIES
+**Record:** Standalone 1/1 patch; no series dependencies.
+
+### Step 4.5: CHECK STABLE MAILING LIST HISTORY
+**Record:** Not searched (no stable-list nomination found in commit;
+lore stable search not performed due to limited external access).
+Absence of Cc: stable is expected per review instructions.
+
+---
+
+## PHASE 5: CODE SEMANTIC ANALYSIS
+
+### Step 5.1: IDENTIFY KEY FUNCTIONS IN THE DIFF
+**Record:** `grant_references()` (modified);
+`guest_grant_refs_for_buffer()` (error source via ops callback,
+unchanged).
+
+### Step 5.2: TRACE CALLERS
+**Record:** `grant_references()` is called only from
+`xen_front_pgdir_shbuf_alloc()` (line 534). Callers of
+`xen_front_pgdir_shbuf_alloc()`:
+- `drivers/gpu/drm/xen/xen_drm_front.c` — Xen PV DRM frontend
+- `sound/xen/xen_snd_front_alsa.c` — Xen PV sound frontend
+Both run during device/buffer setup on Xen PV guests.
+
+### Step 5.3: TRACE CALLEES
+**Record:** `gnttab_alloc_grant_references()`,
+`gnttab_claim_grant_reference()`, `gnttab_grant_foreign_access_ref()`,
+`buf->ops->grant_refs_for_buffer()` (guest:
+`guest_grant_refs_for_buffer()`), `gnttab_free_grant_references()`.
+
+### Step 5.4: FOLLOW THE CALL CHAIN
+**Record:** Xen guest driver probe → buffer alloc → `grant_references()`
+→ on failure, `xen_front_pgdir_shbuf_free()` cleans `buf->grefs` but not
+`priv_gref_head`. Reachable during normal Xen PV driver initialization;
+not a syscall path, but triggered by guest driver operations
+(potentially from userspace opening DRM/audio devices).
+
+### Step 5.5: SEARCH FOR SIMILAR PATTERNS
+**Record:** Correct pattern already used in `drivers/xen/gntdev-
+dmabuf.c` lines 509–511 (`out:
+gnttab_free_grant_references(priv_gref_head)`). `drivers/usb/host/xen-
+hcd.c` and `drivers/net/xen-netfront.c` also use alloc/free pairs. This
+file was the outlier missing error-path free.
+
+---
+
+## PHASE 6: CROSS-REFERENCING AGAINST THE LOCAL TREE
+
+### Step 6.1: DOES THE BUGGY CODE EXIST IN THIS TREE?
+**Record:** **Yes.** `drivers/xen/xen-front-pgdir-shbuf.c` lines 449–451
+and 461–462 still have bare `return` on error without freeing
+`priv_gref_head`. Bug present since 2018 introduction (`b3383974fee27`).
+
+### Step 6.2: CHECK FOR BACKPORT COMPLICATIONS
+**Record:** **Clean apply expected.** `git apply --check` on commit
+`678d59219ce0a` diff passes with no conflicts on this tree.
+
+### Step 6.3: CHECK IF RELATED FIXES ARE ALREADY HERE
+**Record:** Fix `678d59219ce0a` is **not** in this tree (`git merge-base
+--is-ancestor` returns 1). Prior related fix `53f131c284e83` is present.
+No duplicate fix applied.
+
+---
+
+## PHASE 7: SUBSYSTEM AND MAINTAINER CONTEXT
+
+### Step 7.1: IDENTIFY THE SUBSYSTEM AND ITS CRITICALITY
+**Record:** **Subsystem:** Xen grant-table / shared-buffer
+infrastructure (`drivers/xen/`). **Criticality:** IMPORTANT — grant
+references are a finite global resource shared by all Xen PV drivers
+(net, block, USB, DRM, sound, etc.). Leaks affect the whole guest.
+
+### Step 7.2: ASSESS SUBSYSTEM ACTIVITY
+**Record:** Moderate activity; file last touched in-tree by
+`50e865a56876b` (2023, kernel-doc cleanup). Core logic stable since
+2018.
+
+---
+
+## PHASE 8: IMPACT AND RISK ASSESSMENT
+
+### Step 8.1: DETERMINE WHO IS AFFECTED
+**Record:** Xen PV guests with `CONFIG_XEN_FRONT_PGDIR_SHBUF` (selected
+by `CONFIG_DRM_XEN` and Xen sound). Affects DRM and audio buffer setup
+on Xen; grant-table exhaustion can impact all Xen drivers in the guest.
+
+### Step 8.2: DETERMINE THE TRIGGER CONDITIONS
+**Record:** Triggered when `grant_references()` fails after
+`gnttab_alloc_grant_references()` succeeds — specifically
+`gnttab_claim_grant_reference()` returning negative, or
+`guest_grant_refs_for_buffer()` failing. Uncommon in steady state
+(allocation size matches claim count), but possible under resource
+pressure, accounting edge cases, or repeated alloc/free retry loops. Not
+unprivileged-direct, but reachable through Xen frontend driver usage.
+
+### Step 8.3: DETERMINE THE FAILURE MODE SEVERITY
+**Record:** **Failure mode:** Grant reference leak → progressive
+depletion of global grant free pool → `-ENOSPC` on subsequent grant
+operations across the guest (network, block, console, etc.).
+**Severity:** HIGH (resource exhaustion degrading entire Xen guest; not
+an immediate oops, but can render the guest unusable over time or after
+repeated failures).
+
+### Step 8.4: CALCULATE RISK-BENEFIT RATIO
+**Record:**
+- **Benefit:** Prevents grant-table leaks on error paths; protects all
+  Xen PV functionality
+- **Risk:** Very low — 8-line surgical change, maintainer-reviewed,
+  matches existing codebase pattern
+- **Ratio:** Strong benefit, minimal risk
+
+---
+
+## PHASE 9: FINAL SYNTHESIS
+
+### Step 9.1: COMPILE THE EVIDENCE
+
+**FOR backporting:**
+- Real resource leak on error paths (grant references never returned to
+  free pool)
+- Bug present in this 6.18.y tree since 2018
+- Fix is small, obviously correct, maintainer-reviewed
+- Applies cleanly to this tree
+- Grant-table exhaustion is a serious Xen guest-wide failure mode
+- Matches established cleanup pattern in sibling Xen code (`gntdev-
+  dmabuf.c`)
+
+**AGAINST backporting:**
+- No user crash report or syzbot reproduction
+- Error path may be rarely exercised in production
+- Affects only Xen PV guests with specific drivers enabled
+
+**Unresolved:** Exact production trigger frequency; lore thread
+discussion content (bot-blocked).
+
+### Step 9.2: STABLE RULES CHECKLIST
+1. Obviously correct and tested? **PASS** — standard goto cleanup;
+   Reviewed-by Xen maintainer
+2. Fixes a real bug? **PASS** — grant ref leak on error paths
+3. Important issue? **PASS** — grant table exhaustion (HIGH severity for
+   Xen guests)
+4. Small and contained? **PASS** — 1 file, ~12 lines
+5. No new features or APIs? **PASS** — error-path cleanup only
+6. Can apply to local tree? **PASS** — `git apply --check` succeeds
+
+### Step 9.3: CHECK FOR EXCEPTION CATEGORIES
+**Record:** None (not device ID, quirk, DT, build, or docs). Standard
+bug-fix category.
+
+### Step 9.4: DECISION RATIONALE
+This fix closes a long-standing error-path leak in Xen grant-reference
+management. While the trigger may be uncommon, leaked grant references
+are a finite, guest-wide resource — exhaustion can break networking,
+storage, and other PV devices. The patch is minimal, reviewed by Xen
+maintainers, applies cleanly to Linux 6.18.44, and introduces no new
+behavior on success paths.
+
+---
+
+## Verification
+
+- **[Phase 1]** Parsed commit `678d59219ce0a` message and tags:
+  Reviewed-by Stefano Stabellini; Signed-off-by Juergen Gross
+- **[Phase 2]** Diff analysis: 3 error-path changes in
+  `grant_references()`, adds `out_free_refs` unified cleanup
+- **[Phase 3]** `git blame`: buggy code from `b3383974fee27`
+  (2018-11-30), present in tree
+- **[Phase 3]** `git log -20 -- drivers/xen/xen-front-pgdir-shbuf.c`:
+  related fix `53f131c284e83` present; this fix absent
+- **[Phase 3]** `git merge-base --is-ancestor 678d59219ce0a HEAD`: exit
+  1 — fix not in tree
+- **[Phase 3]** `git apply --check` on fix diff: passes cleanly
+- **[Phase 4]** `b4 dig -c 678d59219ce0a`: lore URL found
+- **[Phase 4]** `b4 dig -a`: single v1 patch, no series
+- **[Phase 4]** `b4 dig -w`: Juergen Gross, Stefano Stabellini, xen-
+  devel CC'd
+- **[Phase 4]** WebFetch lore thread: blocked (bot protection) — review
+  discussion unverified
+- **[Phase 5]** `grep grant_references`: single caller
+  `xen_front_pgdir_shbuf_alloc()`
+- **[Phase 5]** `grep xen_front_pgdir_shbuf_alloc`: callers in
+  `xen_drm_front.c`, `xen_snd_front_alsa.c`
+- **[Phase 5]** Read `gntdev-dmabuf.c` 509–511: confirms correct error-
+  path pattern
+- **[Phase 5]** Read `grant-table.c` 619–658, 685–692: confirmed
+  alloc/claim/free semantics
+- **[Phase 6]** `git describe HEAD`: v6.18.44; `Makefile`: 6.18.44
+- **[Phase 6]** Read `xen-front-pgdir-shbuf.c` 430–467: confirmed buggy
+  early returns present
+- **[Phase 6]** Read `xen_front_pgdir_shbuf_free()` 131–142: caller
+  cleans `buf->grefs` only, not `priv_gref_head`
+- **[Phase 8]** Grant ref leak → pool exhaustion → `-ENOSPC` for all Xen
+  grant users: severity HIGH
+
+**YES**
+
+ drivers/xen/xen-front-pgdir-shbuf.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/xen/xen-front-pgdir-shbuf.c b/drivers/xen/xen-front-pgdir-shbuf.c
+index 223870a0111b2..e7fb06f607711 100644
+--- a/drivers/xen/xen-front-pgdir-shbuf.c
++++ b/drivers/xen/xen-front-pgdir-shbuf.c
+@@ -447,8 +447,10 @@ static int grant_references(struct xen_front_pgdir_shbuf *buf)
+ 		unsigned long frame;
+ 
+ 		cur_ref = gnttab_claim_grant_reference(&priv_gref_head);
+-		if (cur_ref < 0)
+-			return cur_ref;
++		if (cur_ref < 0) {
++			ret = cur_ref;
++			goto out_free_refs;
++		}
+ 
+ 		frame = xen_page_to_gfn(virt_to_page(buf->directory +
+ 						     PAGE_SIZE * i));
+@@ -459,11 +461,13 @@ static int grant_references(struct xen_front_pgdir_shbuf *buf)
+ 	if (buf->ops->grant_refs_for_buffer) {
+ 		ret = buf->ops->grant_refs_for_buffer(buf, &priv_gref_head, j);
+ 		if (ret)
+-			return ret;
++			goto out_free_refs;
+ 	}
+ 
++	ret = 0;
++out_free_refs:
+ 	gnttab_free_grant_references(priv_gref_head);
+-	return 0;
++	return ret;
+ }
+ 
+ /*
+-- 
+2.53.0
+
 
