@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD77CC61DE2
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Aug 2026 01:30:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1403717.1637700 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 424DDC61DE4
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Aug 2026 01:31:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1403722.1637709 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x0qqp-0003wM-CY; Mon, 31 Aug 2026 01:30:19 +0000
+	id 1x0qrR-0004MU-JO; Mon, 31 Aug 2026 01:30:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1403717.1637700; Mon, 31 Aug 2026 01:30:19 +0000
+Received: by outflank-mailman (output) from mailman id 1403722.1637709; Mon, 31 Aug 2026 01:30:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x0qqp-0003wF-9F; Mon, 31 Aug 2026 01:30:19 +0000
-Received: by outflank-mailman (input) for mailman id 1403717;
- Mon, 31 Aug 2026 01:30:18 +0000
+	id 1x0qrR-0004MN-GG; Mon, 31 Aug 2026 01:30:57 +0000
+Received: by outflank-mailman (input) for mailman id 1403722;
+ Mon, 31 Aug 2026 01:30:56 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <sstabellini@kernel.org>) id 1x0qqo-0003w9-8t
- for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 01:30:18 +0000
+ (envelope-from <sstabellini@kernel.org>) id 1x0qrQ-0004MD-Ou
+ for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 01:30:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x0qqk-0082bO-Sd
- for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 03:30:14 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1x0qrQ-0082jR-64
+ for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 03:30:56 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <sstabellini@kernel.org>)
- id 6a94d8b4-e002-0a2a0a5209dd-0a2a4507e2c8-36
- for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 03:30:14 +0200
+ id 6a94d93c-bab6-0a2a0a5309dd-0a2a4506d214-20
+ for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 03:30:56 +0200
 Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <sstabellini@kernel.org>)
- id 6a94d925-b4ea-0a2a45070019-aceafc1fa8be-3
- for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 03:30:14 +0200
+ id 6a94d94e-195a-0a2a45060019-aceafc1f8246-3
+ for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 03:30:55 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 7DF64432CA;
- Mon, 31 Aug 2026 01:30:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ED6C91F000E9;
- Mon, 31 Aug 2026 01:30:10 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id E877A4079D;
+ Mon, 31 Aug 2026 01:30:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6F6111F000E9;
+ Mon, 31 Aug 2026 01:30:52 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,16 +52,16 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:cc:Subject:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788139812;
-	bh=gYGfnGFJTXbEfakCk51c5TR3KJNtqIiI6ujZwN+xW6I=;
+	s=k20260515; t=1788139853;
+	bh=DnLEnchd2VaOyhF8/tkpJeYRmI7T17gPbSEznKwQNno=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References;
-	b=ZJ+pCqUiD4a/m4yvv8rzEP5BGRoxWi0TR4GIV7j0bo929AfV/5psDDhv3GPmf3gMt
-	 j4J+JDS88F2G86e2Z5RXlLKHSk0b74q/9VxZaX6tKRlRrNMKjargzoj6e3d5Zu8h0E
-	 Tw5PeMSMhtMFILJBCuGAVekv4n97tUdaMrlcb4Dok6uxJMBZ3eVm82e8SVgv7gR5/C
-	 DRajpcwtkHeD6P6MnlqoBbXf94bqH7DQW7qXI/YgCwoalA15FU9kGAJQLib5b6fTPg
-	 119QmCFFs4jBod4pDwMuyNbVB+HWssiPKqnh3Z5WrCf4FI3ZSfWB98y7Ah0U7iOyg/
-	 J12EBAifWObUg==
-Date: Sun, 30 Aug 2026 18:30:09 -0700 (PDT)
+	b=Fz8OycsB4/fNcaiiZ4bTyAG4hrAPtn+vbUWvESl6NOgK1jglH3g/eywC+pEi9SNsd
+	 T4Q0FOybtJ8MVFkquDXecGbBulsf9LjkSVqWDyhO5yvRWBV4fAAjGaEWDvVrZ1kTLb
+	 JFiWvSzXTOVJEMm8WyO6ZFBDLIb5Wl9i/naoy/22VV1brqQjOC3ZZXTSNzMQcyxIJH
+	 BCUQcKMSf6UoV70u7TpRzX0jKZfBxNktqj14S33ItDHZ+Vk3kSV6Vc+XZt4MIICUzQ
+	 iCbSiYZIzsz8Kngv9uu30k18MjRxOvtEHj5JoDtn2MmXF6lyhh0tfgXqi29t4kIkB3
+	 7VaAeqYmvH0Dw==
+Date: Sun, 30 Aug 2026 18:30:51 -0700 (PDT)
 From: Stefano Stabellini <sstabellini@kernel.org>
 To: Jan Beulich <jbeulich@suse.com>
 cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
@@ -71,37 +71,78 @@ cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
     Anthony PERARD <anthony.perard@vates.tech>, 
     Michal Orzel <michal.orzel@amd.com>, 
     =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Subject: Re: [PATCH 10/12] PCI/physdev: address Misra 2.1 rule violation
-In-Reply-To: <de8eb6ec-b830-47c2-95e7-e0b689f05cad@suse.com>
-Message-ID: <b338dc69-d94f-415c-07c2-4b4b7731dab1@kernel.org>
-References: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com> <de8eb6ec-b830-47c2-95e7-e0b689f05cad@suse.com>
+Subject: Re: [PATCH 09/12] Eclair: deviate BUILD_ERROR() wrt rule 2.1 and
+ introduce variants
+In-Reply-To: <06c5efc0-e130-417f-8333-b8eacd1c6d77@suse.com>
+Message-ID: <6a118f4d-4bd0-ea3c-8322-18edfb682e58@kernel.org>
+References: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com> <06c5efc0-e130-417f-8333-b8eacd1c6d77@suse.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
-X-purgate-ID: tlsNG-ef75cf/1788139814-364DBAE4-319494C6/0/0
+X-purgate-ID: tlsNG-16d1c6/1788139856-F420077B-20216E5B/0/0
 X-purgate-type: clean
-X-purgate-size: 759
+X-purgate-size: 2786
 
 On Fri, 28 Aug 2026, Jan Beulich wrote:
-> Cases 0..3 are handled, and a 2-bit mask is applied to the switch()
-> expression. Therefore the default: case is reported unreachable by Eclair.
-> Insert BUILD_ERROR() to annotate this for Eclair.
+> BUILD_ERROR() is even stronger a guard than assertions in general, and
+> ASSERT_UNREACHABLE() (or BUG()) in particular. Deviate it just like those
+> to allow use for marking unreachable portions of code.
 > 
-> No functional change.
+> In some cases code being unreachable is dependent upon configuration.
+> Introduce two variants, as constructs like
+> 
+>     if ( IS_ENABLED(CONFIG_...) )
+>         BUILD_ERROR("...");
+> 
+> results in the if() still being reported as unreachable. Sadly these two
+> new macros introduce a new 20.12 violation each, which hence also needs
+> deviating.
 > 
 > Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 
-> --- a/xen/drivers/pci/physdev.c
-> +++ b/xen/drivers/pci/physdev.c
-> @@ -114,7 +114,7 @@ ret_t pci_physdev_op(int cmd, XEN_GUEST_
->              break;
+
+> --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
+> +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+> @@ -19,6 +19,7 @@ Constant expressions and unreachable bra
 >  
->          default:
-> -            ret = -EINVAL;
-> +            BUILD_ERROR("PCI_DEVICE_RESET_* inconsistency");
->              break;
->          }
->          write_unlock(&pdev->domain->pci_lock);
+>  -doc_begin="Unreachability inside an ASSERT_UNREACHABLE() and analogous macro calls is deliberate and safe."
+>  -config=MC3A2.R2.1,reports+={deliberate, "any_area(any_loc(any_exp(macro(name(ASSERT_UNREACHABLE||PARSE_ERR_RET||PARSE_ERR||FAIL_MSR||FAIL_CPUID)))))"}
+> +-config=MC3A2.R2.1,reports+={deliberate, "any_area(any_loc(any_exp(macro(^BUILD_ERROR(|_IF(|_NOT))$))))"}
+>  -doc_end
+>  
+>  -doc_begin="The asm-offset files are not linked deliberately, since they are used to generate definitions for asm modules."
+> @@ -667,6 +668,7 @@ deliberate."
+>  to the # or ## operators within the following macros are deliberate, to provide
+>  useful diagnostic messages to the user."
+>  -config=MC3A2.R20.12,macros+={deliberate, "name(ASSERT||BUILD_BUG_ON||BUILD_BUG_ON_ZERO||RUNTIME_CHECK)"}
+> +-config=MC3A2.R20.12,macros+={deliberate, "^BUILD_ERROR(|_IF(|_NOT))$"}
+>  -doc_end
+>  
+>  -doc_begin="The helper macro GENERATE_CASE may use a macro parameter for ordinary
+> --- a/xen/include/xen/macros.h
+> +++ b/xen/include/xen/macros.h
+> @@ -64,6 +64,21 @@
+>   */
+>  #define BUILD_ERROR(msg) asm ( ".error \"" msg "\"" )
+>  
+> +/*
+> + * Like above, but conditional upon @cfg (not) being enabled.  @cfg must be
+> + * suitable to pass to IS_ENABLED().
+> + */
+> +#define BUILD_ERROR_IF(cfg)                               \
+> +    (IS_ENABLED(cfg)                                      \
+> +     ? ({ BUILD_ERROR( #cfg " unexpectedly enabled"); })  \
+> +     : (void)0)
+> +
+> +#define BUILD_ERROR_IF_NOT(cfg)                           \
+> +    (!IS_ENABLED(cfg)                                     \
+> +     ? ({ BUILD_ERROR( #cfg " unexpectedly disabled"); }) \
+> +     : (void)0)
+> +
+> +
+>  /* Hide a value from the optimiser. */
+>  #define HIDE(x)                                 \
+>      ({                                          \
 > 
 
