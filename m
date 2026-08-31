@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7609AC61DF0
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Aug 2026 05:17:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1403749.1637735 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D795C61DF0
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Aug 2026 05:17:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1403748.1637727 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x0uOa-0005xr-Ab; Mon, 31 Aug 2026 05:17:24 +0000
+	id 1x0uOV-0005hr-20; Mon, 31 Aug 2026 05:17:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1403749.1637735; Mon, 31 Aug 2026 05:17:24 +0000
+Received: by outflank-mailman (output) from mailman id 1403748.1637727; Mon, 31 Aug 2026 05:17:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x0uOa-0005xk-7l; Mon, 31 Aug 2026 05:17:24 +0000
-Received: by outflank-mailman (input) for mailman id 1403749;
- Mon, 31 Aug 2026 05:17:22 +0000
+	id 1x0uOU-0005hk-V5; Mon, 31 Aug 2026 05:17:18 +0000
+Received: by outflank-mailman (input) for mailman id 1403748;
+ Mon, 31 Aug 2026 05:17:18 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <frn1furkan10@gmail.com>) id 1x0uOY-0005wK-P5
- for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 05:17:22 +0000
+ (envelope-from <frn1furkan10@gmail.com>) id 1x0uOU-0005hD-6T
+ for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 05:17:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x0uOY-008Rzn-62
- for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 07:17:22 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1x0uOT-008Rw3-JZ
+ for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 07:17:17 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <frn1furkan10@gmail.com>)
- id 6a950e2c-2eae-0a2a0a5409dd-0a2a45018648-46
- for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 07:17:22 +0200
-Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a950e47-2eae-0a2a0a5409dd-0a2a4502d648-18
+ for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 07:17:17 +0200
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <frn1furkan10@gmail.com>)
- id 6a950e61-5984-0a2a45010019-d155dd33c118-3
- for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 07:17:22 +0200
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-47fe89fb333so1704339f8f.3
- for <xen-devel@lists.xenproject.org>; Sun, 30 Aug 2026 22:17:22 -0700 (PDT)
+ id 6a950e5c-6ca4-0a2a45020019-d1558029f075-3
+ for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 07:17:17 +0200
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-4953e04ef16so29839285e9.2
+ for <xen-devel@lists.xenproject.org>; Sun, 30 Aug 2026 22:17:17 -0700 (PDT)
 Received: from notebook.. ([88.230.40.90]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-484322ce2a6sm14228449f8f.19.2026.08.30.22.17.18
+ ffacd0b85a97d-484322ce2a6sm14228449f8f.19.2026.08.30.22.17.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Aug 2026 22:17:21 -0700 (PDT)
+ Sun, 30 Aug 2026 22:17:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,40 +54,40 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788153441; x=1788758241; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1788153436; x=1788758236; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=RF/yfWgOJ/13R8udz3oVi9BzjnDTji2oCBYfoMLlR+k=;
-        b=fx7/rgYC+OUiXWPO75j5SeZvTAEobcN8OBrq94xjVAptUgETWSjSBldufgVmc+OXK6
-         8/f6npE2ZtITnBSY2SvN/A0dlffoLqMM36u6dLYJkIzs8A+hoOXgNc4VdwBuMoif4HW0
-         bYrm0hzz1nOjUcvjH1AjWmU5Uer+81XHaUldQx0v2hlc+ieIlswca1h/mjj7wbPRMh8x
-         /bIB2AHlHsyOgR7LmbX+oOMkSnJl7oMfuF9frmBGJ01cpXc1pMSDoKvbmQ+mWErS+0nL
-         wwXtRQHtniVSwilOZyNuQDxl1XeyS06vjB5rqgmZd9shmWoDHolGtlHZpE0i/nHq5pf8
-         WMAw==
+        bh=Dq3cmO5PPtgnp19HJEhOTKdP7pA/ai2rBau78tRnt3E=;
+        b=Qtq6nrH3mWa8+mqXC5yaLidJ1KcQthNpFy19yjufBxXwRABflYpUe/onOgFIRxE6bV
+         gC15V6GunYsCuGhdfIFcCwfkqm+hUl2lzCoxzeIJXHdBVQ0DRyAGRAsIUlZjtZAe71Ny
+         WTBXXEf+z4U76tsAMmVCJVy4LPLVpQDvecL2yk01xukAPc+tfHCtHPqgv6v4C146JJ4L
+         rWHll3hyUMqfheH6m4RakFbndDzNtsr5Wjp3ojGreEdow44om1zKkPYn8po8ZwDU/PRL
+         rcdFIMJ3tzypRC9J22MrbOxzJI72y7OQdmIJY7odF+/xwkmC0N5a5GMzXcmrWx8wELuq
+         cYfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788153441; x=1788758241;
+        d=1e100.net; s=20251104; t=1788153436; x=1788758236;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=RF/yfWgOJ/13R8udz3oVi9BzjnDTji2oCBYfoMLlR+k=;
-        b=h/9SIOjFhZHOlxLGh9UUI3E341gmMHZ8vY9EAIbDt8Iz+KP4jcFYHIfT+myAfB8xOD
-         rhZvTQXcJDi3n2GujRdG2lslHlDZbLXJ2SXbyEmE0m+AXo7fZTWzs0x5mkZJlVbzfnOX
-         GZNSse4A0+y5KPgYpWJPbPtrpidttrLa51tOTRquVpun/fd6b/Pfqk87wpBHAMCStzm/
-         qcYWGflcOTEoMwHF244w7zP2iwBwEtUXmo+6bj9khYfomsWfFICNlHtu2MUe5pMg+Onk
-         7D+9nWJ8gVoxWpxQ6vL/MAl2BeG3Z4TCE/fsBIbEJ8M1yozs8SWgvDEXKl2VHoQNDchf
-         vClg==
-X-Gm-Message-State: AFuF++kAnJEjZzHlf3BNHwoAqx3T42luqkYtnj7838T7OpjP8SU3GSdp
-	1n8Uh86BpiOaCLZvTrt5jn+CVPtk8plXcmejPkqooz1XkLNyGLeG3pL0vNod5g==
-X-Gm-Gg: AYBFou0/PkaI5T6j15IGpdPX9p5jbiCodq8iUqLYRbaQkY0LRo8VLOBYk/hgNMRcPzF
-	I6hLJ1PAVkiFy3J6ezca3p0n6L0pdrS5+xGvvcCwlUrbam/wE7F/2OuRPHoMu5Nujvm1ICEbVOt
-	jlGE4nB4ymsnxSl8wJd0QXRXLbevstGCoVG3zXbL7K6Vylc4qnfJiDsAlmw79N9+S535gCOOCfG
-	xn+D89JGZGN/x29kYzcAdrnw6oCKDJzH0PJAOWUA96sGpKGSGDkWsy6txpcRTa5+Nbm9rnmbryo
-	ZXId9QUtyB3qHD6Bi+0Y1CsVk5MZVZBtn5L8zFf5nRtzd58P/LbdMEw+tllkVzB0Iv2p3TnTjaD
-	RAqzuKM7B2Gup6DeEPpt2JWgKlhWgJd+7wQMlHl2NBMa8M8JvuXwc8MfgO2GJOEZEYasB+6K3fD
-	VOmJU57VyjPNHJDwWPieLEmvdempnRAVf7eP0udzKFl6E/7UFvlGATseTV/rI=
-X-Received: by 2002:a5d:5f03:0:b0:484:3cbf:f254 with SMTP id ffacd0b85a97d-4843cbff31cmr4195953f8f.21.1788153441502;
-        Sun, 30 Aug 2026 22:17:21 -0700 (PDT)
+        bh=Dq3cmO5PPtgnp19HJEhOTKdP7pA/ai2rBau78tRnt3E=;
+        b=B1r3BtiTdJejRV7uiPDuY8sfrn9uR/mH0Rj3gSCXfPEv5kRLIZQPhxIHKp8tSZz0qT
+         fuJMjthZ72NzF+pUWyHursjIqI8883bfnK7B3rJFkOEkE4oM/utTyG9cf6hlULGKpFk3
+         d0HTOjCLVVpwDcaEGvQ4FMO/vyRfQMzFd/p+f/liEfg5RnMnwIHCwQ4OCWW1PMCOhgsc
+         y9aKlGrFymqEwS0W7vYnvKw8NJcJA8ukKE5MVvB2wvHDbajd6RSRnrdGlZLi+krX3aiN
+         TbvdTTfhjL58HNP/Cvs6nRDX4UQm6RGSpWH9cNvxKRAGm5voiPUMe4m1NI5TbYkcWSeB
+         i47w==
+X-Gm-Message-State: AFuF++mk9leksHeWaNIVdOe2KiI6TvrsjDUPHilX2P9MB54mDYB5kOY/
+	91ExMd17KA+jS3m7uI6+PxPyk6RU9zRK6bGQ6GXR5UPPWE5eNERC7Uw2ntp2WQ==
+X-Gm-Gg: AR+sD13Og291u3WZet0nS131aqwOIZP0T50hYwctSwDvn/3f0evmevM18jeAR2nPAkI
+	dBoU6N2X2/lXWFvBBWcp5dn2OfFzvtU0nWpC6Rx2DLWnButlsEUQBfVTxcZxSLPw6/gSb+ObxSg
+	V3BxjPwgMi40NN/OeOWhOTelbsW3TnDLMHFCGwYbuez0obN7/ymoO3GxzB+7m5DNe44e7O5Fjz4
+	pRXq6DHJ9wY4URlIcnfSJ+aWJ6SaOQBSWi7lwt2ozKjaVoo8miT4O5lCJdWhepHI1nsNyPC2WZT
+	a5gaQp6k25xyY4c+8wg4CgdEtPObT9IAQ6kTCk0MIJobajSIzOP0LtXVe7Ed2sWzxM+3grP+zvh
+	DXTf1+fKv7PjMd0giz02jJaDafF186FjmU431njPFrOiM5EtrRuRB8CjJhPjCCJWdKYpjj6uo1m
+	Bn9yrM81QZ+P5fc9nWp3UE90dFC6e3132QjKpVbM4df0wI/ihQPb1Iznv0FzVt
+X-Received: by 2002:a05:600c:3546:b0:499:dbc0:370d with SMTP id 5b1f17b1804b1-49b91c1dad9mr343878835e9.2.1788153436475;
+        Sun, 30 Aug 2026 22:17:16 -0700 (PDT)
 From: Furkan Caliskan <frn1furkan10@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: jgross@suse.com,
@@ -103,83 +103,224 @@ Cc: jgross@suse.com,
 	Volodymyr_Babchuk@epam.com,
 	teddy.astie@vates.tech,
 	Furkan Caliskan <frn1furkan10@gmail.com>
-Subject: [PATCH v3 2/2] xen/sched: core: kill unarmed timers on sched_init_vcpu() failure
-Date: Mon, 31 Aug 2026 08:16:37 +0300
-Message-Id: <20260831051637.5029-3-frn1furkan10@gmail.com>
+Subject: [PATCH v3 1/2] xen/common: add vcpus_create() and keep max_vcpus in sync
+Date: Mon, 31 Aug 2026 08:16:36 +0300
+Message-Id: <20260831051637.5029-2-frn1furkan10@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260831051637.5029-1-frn1furkan10@gmail.com>
 References: <20260831051637.5029-1-frn1furkan10@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1788153442-1F66C757-2DF32A77/0/0
+X-purgate-ID: tlsNG-720697/1788153437-317CA2AC-46E00338/0/0
 X-purgate-type: clean
-X-purgate-size: 2696
+X-purgate-size: 7015
 
-sched_init_vcpu() calls init_timer() for a vcpu's periodic_timer,
-singleshot_timer and poll_timer before it can fail -- these
-become live, linked into their target pCPU's per-cpu timer list
-regardless of what happens next. If the sched_alloc_udata() call
-further down then fails, the function frees the sched_unit via
-sched_free_unit() and returns 1, but never unlinks these three
-timers.
+Every vcpu_create() call site that builds more than one vcpu loops
+over ids up to d->max_vcpus and stops on the first failure, but none
+of them roll max_vcpus back to match. This leaves d->vcpu[i] == NULL
+for ids below max_vcpus, which anything walking d->vcpu[] can then
+dereference. This is what caused the crash: sched_move_domain()
+walks every vcpu slot up to max_vcpus without checking for empty
+ones, so when a domain built in a non-default cpupool had vcpu
+creation fail partway through, domain_kill() later moving it back
+to the default cpupool handed one of its empty slots straight to
+the new cpupool's scheduler, causing a NULL-pointer dereference
+inside sched_alloc_udata().
 
-The caller, vcpu_create(), makes this worse: on sched_init_vcpu()
-returning nonzero it jumps to fail_wq, skipping fail_sched and
-thus sched_destroy_vcpu() -- the only function on this path that
-calls kill_timer() on them. vcpu_destroy() then frees the vcpu,
-and the three timers embedded in it, while they are still linked
-into that shared list.
+Add vcpus_create(d): creates every vcpu of d up to max_vcpus and
+rolls max_vcpus back to the failed id on error. This keeps
+d->vcpu[i] is non-NULL for all i < d->max_vcpus, instead of guarding
+every reader of d->vcpu[] agains holes individually.
 
-This silently corrupts that list. It only shows up later, when
-something else touches a neighboring timer: sched_move_domain()
-crashed with "Assertion 'entry->prev->next == entry' failed" on a
-completely unrelated, valid vcpu's timer.
+Convert every site that builds vcpus in a loop to call this function
+instead.
 
-Call sched_destroy_vcpu() in sched_init_vcpu()'s own failure
-branch instead of sched_free_unit(), so it doesn't depend
-on the caller reaching sched_destroy_vcpu() to undo what it set
-up itself. sched_destroy_vcpu() assumes unit->priv is set, which
-is not the case here, so make it only free the udata and remove
-the unit if unit->priv in non-NULL.
-
-Fixes: d884b1077817 ("Domain creation/destruction cleanups.")
+Fixes: 61649709421a ("xen/domain: Allocate d->vcpu[] in domain_create()")
+Suggested-by: Juergen Gross <jgross@suse.com>
 Signed-off-by: Furkan Caliskan <frn1furkan10@gmail.com>
 ---
 v3:
- - Call sched_destroy_vcpu() from sched_init_vcpu()'s failure
-   branch.
- - Made sched_destroy_vcpu() tolerate unit->priv == NULL.
+ - Reworked per Juergen's suggestion: instead of guarding
+   sched_move_domain() against a missing vcpu slot, keep d->max_vcpus
+   in sync with the vcpus actually created. Added vcpus_create() and
+   converted every vcpu_create() loop to use it.
+ - Reverted the sched_move_domain() check from v2, now unneeded.
 ---
- xen/common/sched/core.c | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
+ xen/arch/arm/domain_build.c   | 15 +++++++--------
+ xen/arch/x86/mm/mem_sharing.c | 11 ++---------
+ xen/common/domain.c           | 24 ++++++++++++++++++++++++
+ xen/common/domctl.c           | 19 ++++---------------
+ xen/common/sched/core.c       |  7 +++----
+ xen/include/xen/domain.h      |  1 +
+ 6 files changed, 41 insertions(+), 36 deletions(-)
 
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 72d5316180..e08ee21ee5 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -1774,6 +1774,7 @@ static void __init find_gnttab_region(struct domain *d,
+ int __init construct_domain(struct domain *d, struct kernel_info *kinfo)
+ {
+     unsigned int i;
++    int rc;
+     struct vcpu *v = d->vcpu[0];
+     struct cpu_user_regs *regs = &v->arch.cpu_info->guest_cpu_user_regs;
+ 
+@@ -1842,17 +1843,15 @@ int __init construct_domain(struct domain *d, struct kernel_info *kinfo)
+     }
+ #endif
+ 
+-    for ( i = 1; i < d->max_vcpus; i++ )
++    if ( (rc = vcpus_create(d)) )
+     {
+-        if ( vcpu_create(d, i) == NULL )
+-        {
+-            printk("Failed to allocate d%dv%d\n", d->domain_id, i);
+-            return -ENOMEM;
+-        }
++        printk("Failed to allocate d%dv%d\n", d->domain_id, d->max_vcpus);
++        return rc;
++    }
+ 
+-        if ( is_64bit_domain(d) )
++    if ( is_64bit_domain(d) )
++        for ( i = 1; i < d->max_vcpus; i++ )
+             vcpu_switch_to_aarch64_mode(d->vcpu[i]);
+-    }
+ 
+     domain_update_node_affinity(d);
+ 
+diff --git a/xen/arch/x86/mm/mem_sharing.c b/xen/arch/x86/mm/mem_sharing.c
+index 5c7a0ff30e..cd7f747c80 100644
+--- a/xen/arch/x86/mm/mem_sharing.c
++++ b/xen/arch/x86/mm/mem_sharing.c
+@@ -1612,21 +1612,14 @@ int mem_sharing_fork_page(struct domain *d, gfn_t gfn, bool unsharing)
+ 
+ static int bring_up_vcpus(struct domain *cd, struct domain *d)
+ {
+-    unsigned int i;
+     int ret = -EINVAL;
+ 
+     if ( d->max_vcpus != cd->max_vcpus ||
+         (ret = cpupool_move_domain(cd, d->cpupool)) )
+         return ret;
+ 
+-    for ( i = 0; i < cd->max_vcpus; i++ )
+-    {
+-        if ( !d->vcpu[i] || cd->vcpu[i] )
+-            continue;
+-
+-        if ( !vcpu_create(cd, i) )
+-            return -EINVAL;
+-    }
++    if ( (ret = vcpus_create(cd)) )
++        return ret;
+ 
+     domain_update_node_affinity(cd);
+     return 0;
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index e16f1ac383..a0a3e51b15 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -539,6 +539,30 @@ struct vcpu *vcpu_create(struct domain *d, unsigned int vcpu_id)
+     return NULL;
+ }
+ 
++/*
++ * Create every not yet existing vcpu of d, up to d->max_vcpus. On failure,
++ * d->max_vcpus is rolled back to the id that failed, keeping d->vcpu[i]
++ * non-NULL for all i < d->max_vcpus.
++ */
++int vcpus_create(struct domain *d)
++{
++    unsigned int i;
++
++    for ( i = 0; i < d->max_vcpus; i++ )
++    {
++        if ( d->vcpu[i] )
++            continue;
++
++        if ( vcpu_create(d, i) == NULL )
++        {
++            d->max_vcpus = i;
++            return -EINVAL;
++        }
++    }
++
++    return 0;
++}
++
+ static int late_hwdom_init(struct domain *d)
+ {
+ #ifdef CONFIG_LATE_HWDOM
+diff --git a/xen/common/domctl.c b/xen/common/domctl.c
+index a6210db4fb..39f3f219ca 100644
+--- a/xen/common/domctl.c
++++ b/xen/common/domctl.c
+@@ -698,7 +698,7 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
+ 
+     case XEN_DOMCTL_max_vcpus:
+     {
+-        unsigned int i, max = op->u.max_vcpus.max;
++        unsigned int max = op->u.max_vcpus.max;
+ 
+         ret = -EINVAL;
+         if ( (d == current->domain) || /* no domain_pause() */
+@@ -708,21 +708,10 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
+         /* Needed, for example, to ensure writable p.t. state is synced. */
+         domain_pause(d);
+ 
+-        ret = -ENOMEM;
+-
+-        for ( i = 0; i < max; i++ )
+-        {
+-            if ( d->vcpu[i] != NULL )
+-                continue;
+-
+-            if ( vcpu_create(d, i) == NULL )
+-                goto maxvcpu_out;
+-        }
+-
+-        domain_update_node_affinity(d);
+-        ret = 0;
++        ret = vcpus_create(d);
++        if ( !ret )
++            domain_update_node_affinity(d);
+ 
+-    maxvcpu_out:
+         domain_unpause(d);
+         break;
+     }
 diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
-index 14069eed03..b65f728e77 100644
+index d3a0a97e1d..14069eed03 100644
 --- a/xen/common/sched/core.c
 +++ b/xen/common/sched/core.c
-@@ -589,7 +589,7 @@ int sched_init_vcpu(struct vcpu *v)
-     unit->priv = sched_alloc_udata(dom_scheduler(d), unit, d->sched_priv);
-     if ( unit->priv == NULL )
-     {
--        sched_free_unit(unit, v);
-+        sched_destroy_vcpu(v);
-         rcu_read_unlock(&sched_res_rculock);
-         return 1;
-     }
-@@ -869,8 +869,11 @@ void sched_destroy_vcpu(struct vcpu *v)
-     {
-         rcu_read_lock(&sched_res_rculock);
+@@ -3497,10 +3497,9 @@ void wait(void)
+ #ifdef CONFIG_X86
+ void __init sched_setup_dom0_vcpus(struct domain *d)
+ {
+-    unsigned int i;
+-
+-    for ( i = 1; i < d->max_vcpus; i++ )
+-        vcpu_create(d, i);
++    if ( vcpus_create(d) )
++        printk("Failed to create all vcpus of dom0 (max_vcpus now %u)\n",
++               d->max_vcpus);
  
--        sched_remove_unit(vcpu_scheduler(v), unit);
--        sched_free_udata(vcpu_scheduler(v), unit->priv);
-+        if ( unit->priv )
-+        {
-+            sched_remove_unit(vcpu_scheduler(v), unit);
-+            sched_free_udata(vcpu_scheduler(v), unit->priv);
-+        }
-         sched_free_unit(unit, v);
+     domain_update_node_affinity(d);
+ }
+diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
+index aeb8b36ad1..eaf406a814 100644
+--- a/xen/include/xen/domain.h
++++ b/xen/include/xen/domain.h
+@@ -34,6 +34,7 @@ typedef union {
+ } vcpu_guest_context_u __attribute__((__transparent_union__));
  
-         rcu_read_unlock(&sched_res_rculock);
+ struct vcpu *vcpu_create(struct domain *d, unsigned int vcpu_id);
++int vcpus_create(struct domain *d);
+ 
+ unsigned int dom0_max_vcpus(void);
+ int parse_arch_dom0_param(const char *s, const char *e);
 -- 
 2.34.1
 
