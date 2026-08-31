@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05E70C61DD3
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Aug 2026 12:20:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1403959.1637911 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F733C61DD3
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Aug 2026 12:42:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1404008.1637933 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x10zW-0007Xt-MC; Mon, 31 Aug 2026 12:19:58 +0000
+	id 1x11LQ-0005W6-Px; Mon, 31 Aug 2026 12:42:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1403959.1637911; Mon, 31 Aug 2026 12:19:58 +0000
+Received: by outflank-mailman (output) from mailman id 1404008.1637933; Mon, 31 Aug 2026 12:42:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x10zW-0007Wl-HK; Mon, 31 Aug 2026 12:19:58 +0000
-Received: by outflank-mailman (input) for mailman id 1403959;
- Mon, 31 Aug 2026 12:19:57 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper3@citrix.com>) id 1x10zV-0007LP-KG
- for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 12:19:57 +0000
+	id 1x11LQ-0005Vz-Ms; Mon, 31 Aug 2026 12:42:36 +0000
+Received: by outflank-mailman (input) for mailman id 1404008;
+ Mon, 31 Aug 2026 12:42:35 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x11LP-0005Vt-87
+ for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 12:42:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x10zV-004lvp-0h
- for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 14:19:57 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x11LO-00B6s1-L0
+ for xen-devel@lists.xenproject.org; Mon, 31 Aug 2026 14:42:34 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a957163-e002-0a2a0a5209dd-0a2a4509a31c-32
- for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 14:19:57 +0200
-Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a95716c-be1a-0a2a45090019-d155dd34cd8c-3
- for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 14:19:56 +0200
-Received: by mail-wr1-f52.google.com with SMTP id
- ffacd0b85a97d-47c2b362ee2so2964444f8f.1
- for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 05:19:56 -0700 (PDT)
-Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
- [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48440e094d0sm847709f8f.23.2026.08.31.05.19.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Aug 2026 05:19:55 -0700 (PDT)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a9576b6-bab6-0a2a0a5309dd-0a2a4502a344-8
+ for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 14:42:34 +0200
+Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a9576ba-6ca4-0a2a45020019-d155802dd862-3
+ for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 14:42:34 +0200
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-49b0d78a801so26437595e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 05:42:34 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
+ [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49cd2e9d9fcsm210772965e9.1.2026.08.31.05.42.33
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 31 Aug 2026 05:42:33 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,280 +52,134 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1788178796; x=1788783596; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=PmiQSMZPixZ6AjqLdv2qezZIur3EMHWcw7A7AXRMY8E=;
-        b=julaYGgfxZvL1vSMT3Zztt5xs75D1qWygTk37pJvgjnbvwCV3ghHQBpTc9CA9vnfth
-         j/zuwFTWOkR1VS+y09VsaxsIZgPEWVWLape0Cs62YVnMcNoTnc/HcwDNCzl76cmNrXkZ
-         1M56mSG7a/2mYQr5sStM+fRj6hTnEStKE4ETg=
+        d=gmail.com; s=20251104; t=1788180154; x=1788784954; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=JX4wfgIZoKCCoWRsq2wssTRFX2998HO8fvEa99luS08=;
+        b=W1Y0rB1wuhXZOu+df/8AgURrVwkkq8D8VmXXoas1IeFeGmpOnQgiHRE5E16JmJe2Ao
+         okylrTOYe5ZV82mobIToPJCdD3TODdZYatF/aq3ozmfdBQuLPuG7wwaUQK+e1RAkgtk8
+         tyoMunG0d2gjqlgBxBL9UCDrEVkyE7mkBSzFnDWbeAXFIUrd5KZDuYR8uGK3Wv0hncpo
+         00dzDNcJoSKFr36sLjEQWeopDn8VQyc7L5phbhdmT7kHVrbaS0uybBwmlY21eOa23eaZ
+         23Z3GX5LrSho61nBKezK79RSzhVDiPmoma1jT33uc00ShwtLJc8JuEmq+rWQ5dThNjH3
+         3/OQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788178796; x=1788783596;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=PmiQSMZPixZ6AjqLdv2qezZIur3EMHWcw7A7AXRMY8E=;
-        b=R95OfJvAd5Q9EXumA15aMgA3I8p6z6HnQdzKNpO1VQB8Lb5HxW7Hq91OKadl9Lgwh9
-         RSjvRME9orIP//cFdRHIP3kReN7gAmu4hCoSr3TeYKEN6JcHwpwhfiQQr/5bxm1oMeP3
-         ptGrIcG90tQmDgwaQj24270RrZnmEC/wWzD0VRW51sy8kkIte0KzyAAeF9Vsa3TfTLN3
-         +cCKCqW4l2ejLlzE+yJK4QJY5UB3qoHvlz7YgdQxNvTpi7PSC7vJoiJ7S7SQnwCUWe1S
-         8K96Kpc2NIKtOju9AHnWTxU5wJ7p2jj1aUiIxOcm1ZwCtjh1qIHgnM1m4jd0JIi3feRj
-         tGzA==
-X-Gm-Message-State: AFuF++m/gusRMwts54mVA4d61LqhYA/PkHOJfOLX/cfM0dWU/ve0cMCG
-	FZh+f78QpKnUXKlC/738dK/XYIabSm7XDPo18NeCS4/FQbfEZMaIO1vweKHL7X4E7qo3mdJAMHO
-	Ub5Tg
-X-Gm-Gg: AYBFou3DrYm+wHN0CF1cbTM+cX9WKZdZpXpzidTek62fNW/e8Rn3SLL0ta0prLzhs32
-	8bUMPvPI3ZJO+GT0mud6IP2TnoRZ2IrWY2AzdMgmexkneZCoe3kSqoCe08fXrtJJXmTol5uV+Z5
-	xI95DDeE+YiCK79PdYZix3Mr8njZr1esfX2QCR8IJb8W6+ZjeXB8F767odXt1yretXPRYvzxWo+
-	7r8HQgP8kGiQjv56lOQmHmX/CoCZlZj+5ThQF6uCTY4omvpnAETBEjM7khRdub4BkIooqsc9Yyw
-	+Dk0QgsYD2uKeGxanXNA2UZLF2/djHSC0pvZFm5bCGZfhFDCSDD2Q0YwhWjyFknthWPGTldwuit
-	q4E5vJ7CSLb5+hL1aesmaLA6s05DDTq8VGXJUR7er2OWZT7C7f48qMxNf/NmzoM2Mp1pPcmI4Pe
-	F9NJ1ZUYq3uq5zvHxU/7r8p3nYceQL7S0TN0iZRt/FY1qfbSlidQvEL3066DBkZ/l7VXsOjvZ5f
-	wyqWkXM76sgZ/83IgbNiAIUUWacr86UOn7aB+A=
-X-Received: by 2002:a05:6000:38f:b0:484:3315:1a38 with SMTP id ffacd0b85a97d-48433152785mr26443741f8f.28.1788178795509;
-        Mon, 31 Aug 2026 05:19:55 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Setje-Eilers <Jan.SetjeEilers@oracle.com>
-Subject: [PATCH 4/6] xen/arm: Rewrite arm_smccc_smc() for arm64
-Date: Mon, 31 Aug 2026 13:19:43 +0100
-Message-Id: <20260831121944.2908139-5-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20260831121944.2908139-1-andrew.cooper3@citrix.com>
-References: <20260831121944.2908139-1-andrew.cooper3@citrix.com>
+        d=1e100.net; s=20251104; t=1788180154; x=1788784954;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=JX4wfgIZoKCCoWRsq2wssTRFX2998HO8fvEa99luS08=;
+        b=m9mWPhzGeyKkJK2klmUcg8HAP4S1LLtyWT/N8BlMHykzeFvf6l+BY0ze0db+hvyA00
+         /981y+GZvBknJxyRKNwCF7c4RMg0iMoWS6uEW+pYsFuZ15N9yHckSiwAuGgYrPdFE1th
+         8LSrkveIfd1mnqj2wBJTE82LL6RjKVpObZxES7a6bGcQK0GuK/0AOCtnOxEd3O98/Q/G
+         ElNwN9oy0NL31ZMMp6rokflvBRGLrqBCTMLEOkRQI34EkVUdnP2OzRgcoswspYV4VUmO
+         VXkjY+QjTZ+cmPg+HIwHXj3oEWyWqwFjkZe9iwmVCZ+gmiBqpjZc1GBPuaTk3JFowmeq
+         P/0g==
+X-Forwarded-Encrypted: i=1; AHgh+RrgKFevVKCSS9cZa+HBZI6V/WrIRTQr80mNxLGtSEMEBSG2bOGBVV1M70SOGeJl8qgwFFnE/W8uqhE=@lists.xenproject.org
+X-Gm-Message-State: AFuF++nF7GUwtMH9OBTR+Ck2oYarI4R0VLPCmUSshAXkw8vlq7O0Jdwk
+	yGiFVzYE1IJi3I4sVNUefMgbR/nwKyUAEVARtSgv7tZxJKOmp6IyMtWA
+X-Gm-Gg: AR+sD11zW5gk5jeS5yAxj/rA9zH2k65GeuY2uKfTYrKVd06xXBoc2iF1bKBWKTMuaaW
+	tn3kP24fQk7S/+VfYzGA/d35skJWqZdnks8rj3HlWmSJpbTAya1wd7OzfVyWsrbWnEZngdKYoqA
+	ai95Yzyei0PyELYL49866SmhG1WVqodaW41b1Z4h5D9scz2AL/rIFPID2Mo8Dp8jeZ6be3GMEjh
+	EnEiVpmbzvkaGDvvzLEHTG1i1zlri7I1I/cQNorePMvcc6do95iXWnNbm4fvT9MlccLL4JG2sSc
+	a+bVIMsLosVjonF9L7xpltWNbmlbRXQbBWHHTFmgH8PaHPFIcWyx0aVFkdnyh2WqgcADM/h3g3O
+	YtDfJkibCXCnYsYCM4MFakrS41bml9pcZWIIhXpApLxDjJq/08rZSQbYIla4B7X+F6juG8PFPXs
+	GEMh5Z+knqfxMhyfdCVH0xYRFNlgcRvkBV94ks2Gw2B/dHZnWEGNO0BWpv6Q5mlpzU4KkLk40ZZ
+	TlDludQUgA1k65dlmzQwEyx67L/5C9uh+gneHLUxQ==
+X-Received: by 2002:a05:600c:8581:b0:499:a760:722f with SMTP id 5b1f17b1804b1-49b91c47bf8mr326368655e9.13.1788180153954;
+        Mon, 31 Aug 2026 05:42:33 -0700 (PDT)
+Message-ID: <91ffbf33-0b54-406f-b91f-1a96afc616d7@gmail.com>
+Date: Mon, 31 Aug 2026 14:42:32 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 04/39] xen/riscv: introduce csr_read64()
+To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <0f7080ea4dc86a8bb3dae39d94e5b03e95d010c0.1787838835.git.oleksii.kurochko@gmail.com>
+ <aded3bc6-6d5c-4c3f-879a-be428a8ad36a@citrix.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <aded3bc6-6d5c-4c3f-879a-be428a8ad36a@citrix.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1788178796-BC4CB034-8DBD56A9/0/0
-X-purgate-type: clean
-X-purgate-size: 9682
+X-purgate-ID: tlsNG-720697/1788180154-F24B62AC-3867FA3F/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 2287
 
-PSCI v1.0 says that x4 thru x17 may be clobbered.  PSCI v1.1 says they are
-strictly preserved unless they contain return values.
 
-Xen deals with this by having __arm_smccc_1_0_smc() as an out-of-line
-function, but this causes awful code generation in arm_smccc_smc().
-cpus_have_const_cap() is opaque to the optimiser, so we end up with one basic
-block doing the reasonably-ok arm_smccc_1_1_smc() code generation and a second
-basic block setting up all 8 input registers even when they're not needed,
-spilling or discarding x8 thru x17, and calling an out-of-line function.
 
-Remove __arm_smccc_1_0_smc() entirely, and rewrite arm_smccc_smc() to declare
-x4 thru x17 as clobbered.
+On 8/27/26 5:36 PM, Andrew Cooper wrote:
+> On 27/08/2026 4:20 pm, Oleksii Kurochko wrote:
+>> diff --git a/xen/arch/riscv/include/asm/csr.h b/xen/arch/riscv/include/asm/csr.h
+>> index 888d6a2a86d6..a5cdd6f99c8e 100644
+>> --- a/xen/arch/riscv/include/asm/csr.h
+>> +++ b/xen/arch/riscv/include/asm/csr.h
+>> @@ -39,12 +39,36 @@
+>>       csr_write(csr, v_);             \
+>>       csr_write(csr ## H, v_ >> 32);  \
+>>   })
+>> +
+>> +/*
+>> + * The two halves are read by separate instructions, so a CSR which hardware
+>> + * increments can carry from the low half into the high one in between,
+>> + * yielding a value the CSR never held. Re-read the high half and retry the
+>> + * sequence if it changed.
+>> + */
+>> +#define csr_read64(csr)                         \
+>> +({                                              \
+>> +    uint32_t hi_, lo_;                          \
+>> +                                                \
+>> +    do {                                        \
+>> +        hi_ = csr_read(csr ## H);               \
+>> +        lo_ = csr_read(csr);                    \
+>> +    } while ( hi_ != csr_read(csr ## H) );      \
+>> +                                                \
+>> +    ((uint64_t)hi_ << 32) | lo_;                \
+>> +})
+> 
+> This double reads H in the looping case.  You want something more like:
+> 
+> hi = csr_read();
+> do {
+>      old = hi;
+>      lo = csr_read();
+> } while ( (hi = csr_read()) != old );
 
-This fully inlines the SMC, is a single basic block which instructs the
-compiler to spill or discard the potentially clobbered registers, and only
-sets up the necessary number of arguments for the call.
+Good point. I'll apply that.
 
-No functional change.
+> 
+> 
+> Still, this only matters for volatile CSRs, and is unnecessary in the
+> general case.  I'd suggest naming it csr_volatile_read64(). 
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-CC: Bertrand Marquis <bertrand.marquis@arm.com>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Jan Setje-Eilers <Jan.SetjeEilers@oracle.com>
+Yes, that makes sense. I will rename it to csr_volatile_read64().
 
-Bloat-o-meter reports:
+> Most CSRs
+> can use a simple split access.
 
-  add/remove: 0/1 grow/shrink: 0/10 up/down: 0/-795 (-795)
-  Function                                     old     new   delta
-  symbols_sorted_offsets                     23832   23824      -8
-  symbols_names                              42962   42943     -19
-  symbols_addresses                          35128   35104     -24
-  __arm_smccc_1_0_smc                           32       -     -32
-  call_psci_cpu_off                            144      76     -68
-  seattle_system_reset                          92      16     -76
-  seattle_system_off                            92      16     -76
-  call_psci_system_reset                       112      32     -80
-  call_psci_system_off                         112      32     -80
-  call_psci_cpu_on                             252     124    -128
-  psci_init                                    628     424    -204
+I may have misunderstood you here, but wouldn't it still make sense to 
+have a macro covering the case where a register is 64-bit on RV32 yet 
+accessed through two CSRs? VSIE and VSIEH, for example.
 
-An alternative way to do this would be to have x8 thru x17 in the clobber list
-rather than the output list which would reduce the source size, but this form
-is more amenable to having PSCI v1.2 worked into it too.
----
- xen/arch/arm/arm64/smc.S         | 16 ------
- xen/arch/arm/include/asm/smccc.h | 95 ++++++++++++++++----------------
- 2 files changed, 48 insertions(+), 63 deletions(-)
+My plan was to use a single csr_read64() (but while loop then really 
+isn't needed in this case) call to abstract the access to VSIE, so that 
+the code looks the same on RV32 and RV64.
 
-diff --git a/xen/arch/arm/arm64/smc.S b/xen/arch/arm/arm64/smc.S
-index 68b05e8ddd12..65b4eabe4f87 100644
---- a/xen/arch/arm/arm64/smc.S
-+++ b/xen/arch/arm/arm64/smc.S
-@@ -13,22 +13,6 @@
-  * GNU General Public License for more details.
-  */
- 
--/*
-- * void __arm_smccc_1_0_smc(register_t a0, register_t a1, register_t a2,
-- *                          register_t a3, register_t a4, register_t a5,
-- *                          register_t a6, register_t a7,
-- *                          struct arm_smccc_res *res)
-- */
--FUNC(__arm_smccc_1_0_smc)
--        smc     #0
--        ldr     x4, [sp]
--        cbz     x4, 1f          /* No need to store the result */
--        stp     x0, x1, [x4, #SMCCC_RES_a0]
--        stp     x2, x3, [x4, #SMCCC_RES_a2]
--1:
--        ret
--END(__arm_smccc_1_0_smc)
--
- /*
-  * void arm_smccc_1_2_smc(const struct arm_smccc_1_2_regs *args,
-  *                        struct arm_smccc_1_2_regs *res)
-diff --git a/xen/arch/arm/include/asm/smccc.h b/xen/arch/arm/include/asm/smccc.h
-index 5fe54013ac83..8920c54b09a6 100644
---- a/xen/arch/arm/include/asm/smccc.h
-+++ b/xen/arch/arm/include/asm/smccc.h
-@@ -16,9 +16,6 @@
- #ifndef __ASM_ARM_SMCCC_H__
- #define __ASM_ARM_SMCCC_H__
- 
--#include <asm/alternative.h>
--#include <asm/cpufeature.h>
--
- #define SMCCC_VERSION_MAJOR_SHIFT            16
- #define SMCCC_VERSION_MINOR_MASK             \
-         ((1U << SMCCC_VERSION_MAJOR_SHIFT) - 1)
-@@ -57,6 +54,9 @@
- #ifndef __ASSEMBLER__
- 
- #include <xen/macros.h>
-+#include <xen/types.h>
-+
-+#include <asm/asm_defns.h>
- 
- extern uint32_t smccc_ver;
- 
-@@ -160,6 +160,8 @@ struct arm_smccc_res {
- #define ___declare_args(count, ...) __declare_arg_ ## count(__VA_ARGS__)
- #define __declare_args(count, ...)  ___declare_args(count, __VA_ARGS__)
- 
-+#ifdef CONFIG_ARM_32
-+
- /*
-  * arm_smccc_1_1_smc() - make an SMCCC v1.1 compliant SMC call
-  *
-@@ -199,7 +201,6 @@ struct arm_smccc_res {
-  * The calling convention for arm32 is the same for both SMCCC v1.0 and
-  * v1.1.
-  */
--#ifdef CONFIG_ARM_32
- #define arm_smccc_smc(...) arm_smccc_1_1_smc(__VA_ARGS__)
- 
- /* Make an SMCCC v1.1 compliant SMC call with guest register state. */
-@@ -218,53 +219,53 @@ static inline void arm_smccc_guest_smc(struct cpu_user_regs *regs)
- 
- #else /* CONFIG_ARM_64 */
- 
--void __arm_smccc_1_0_smc(register_t a0, register_t a1, register_t a2,
--                         register_t a3, register_t a4, register_t a5,
--                         register_t a6, register_t a7,
--                         struct arm_smccc_res *res);
--
--/* Macros to handle variadic parameter for SMCCC v1.0 helper */
--#define __arm_smccc_1_0_smc_7(a0, a1, a2, a3, a4, a5, a6, a7, res)  \
--    __arm_smccc_1_0_smc(a0, a1, a2, a3, a4, a5, a6, a7, res)
--
--#define __arm_smccc_1_0_smc_6(a0, a1, a2, a3, a4, a5, a6, res)  \
--    __arm_smccc_1_0_smc_7(a0, a1, a2, a3, a4, a5, a6, 0, res)
--
--#define __arm_smccc_1_0_smc_5(a0, a1, a2, a3, a4, a5, res)  \
--    __arm_smccc_1_0_smc_6(a0, a1, a2, a3, a4, a5, 0, res)
--
--#define __arm_smccc_1_0_smc_4(a0, a1, a2, a3, a4, res)  \
--    __arm_smccc_1_0_smc_5(a0, a1, a2, a3, a4, 0, res)
--
--#define __arm_smccc_1_0_smc_3(a0, a1, a2, a3, res)  \
--    __arm_smccc_1_0_smc_4(a0, a1, a2, a3, 0, res)
--
--#define __arm_smccc_1_0_smc_2(a0, a1, a2, res)  \
--    __arm_smccc_1_0_smc_3(a0, a1, a2, 0, res)
--
--#define __arm_smccc_1_0_smc_1(a0, a1, res)  \
--    __arm_smccc_1_0_smc_2(a0, a1, 0, res)
--
--#define __arm_smccc_1_0_smc_0(a0, res)  \
--    __arm_smccc_1_0_smc_1(a0, 0, res)
--
--#define ___arm_smccc_1_0_smc_count(count, ...)    \
--    __arm_smccc_1_0_smc_ ## count(__VA_ARGS__)
--
--#define __arm_smccc_1_0_smc_count(count, ...)   \
--    ___arm_smccc_1_0_smc_count(count, __VA_ARGS__)
--
--#define arm_smccc_1_0_smc(...)                                              \
--        __arm_smccc_1_0_smc_count(__count_args(__VA_ARGS__), __VA_ARGS__)
--
-+/*
-+ * Make an SMCCC call compatible with both PSCI v1.1 and v1.0.
-+ *
-+ * PSCI v1.1 says that x4 through x17 are strictly preserved unless they
-+ * contain return data.  PSCI v1.0 says they clobbered.
-+ *
-+ * Xen doesn't make PSCI v1.1 calls which expect more than 4 return registers,
-+ * so imply list x4 through x17 as clobbered.
-+ */
- #define arm_smccc_smc(...)                                      \
-     do {                                                        \
--        if ( cpus_have_const_cap(ARM_SMCCC_1_1) )               \
--            arm_smccc_1_1_smc(__VA_ARGS__);                     \
--        else                                                    \
--            arm_smccc_1_0_smc(__VA_ARGS__);                     \
-+        register unsigned long r0  ASM_REG(0);                  \
-+        register unsigned long r1  ASM_REG(1);                  \
-+        register unsigned long r2  ASM_REG(2);                  \
-+        register unsigned long r3  ASM_REG(3);                  \
-+        /* Potentially clobbered in PSCI 1.0 */                 \
-+        register unsigned long c4  ASM_REG(4);                  \
-+        register unsigned long c5  ASM_REG(5);                  \
-+        register unsigned long c6  ASM_REG(6);                  \
-+        register unsigned long c7  ASM_REG(7);                  \
-+        register unsigned long c8  ASM_REG(8);                  \
-+        register unsigned long c9  ASM_REG(9);                  \
-+        register unsigned long c10 ASM_REG(10);                 \
-+        register unsigned long c11 ASM_REG(11);                 \
-+        register unsigned long c12 ASM_REG(12);                 \
-+        register unsigned long c13 ASM_REG(13);                 \
-+        register unsigned long c14 ASM_REG(14);                 \
-+        register unsigned long c15 ASM_REG(15);                 \
-+        register unsigned long c16 ASM_REG(16);                 \
-+        register unsigned long c17 ASM_REG(17);                 \
-+        __declare_args(__count_args(__VA_ARGS__), __VA_ARGS__); \
-+        asm volatile (                                          \
-+            "smc #0"                                            \
-+            : "=r" (r0),  "=r" (r1),  "=r" (r2),  "=r" (r3),    \
-+              "=r" (c4),  "=r" (c5),  "=r" (c6),  "=r" (c7),    \
-+              "=r" (c8),  "=r" (c9),  "=r" (c10), "=r" (c11),   \
-+              "=r" (c12), "=r" (c13), "=r" (c14), "=r" (c15),   \
-+              "=r" (c16), "=r" (c17)                            \
-+            : PASTE(__constraint_read_,                         \
-+                    __count_args(__VA_ARGS__))                  \
-+            : "memory" );                                       \
-+        if ( ___res )                                           \
-+            *___res = (struct arm_smccc_res){ r0, r1, r2, r3 }; \
-     } while ( 0 )
- 
-+#define arm_smccc_1_1_smc(...) arm_smccc_smc(__VA_ARGS__)
-+
- /* Make an SMCCC v1.1 compliant SMC call with guest register state. */
- static inline void arm_smccc_guest_smc(struct cpu_user_regs *regs)
- {
--- 
-2.39.5
+Does that make sense, or would it be better to have separate vsie and 
+vsieh fields instead?
 
+~ Oleksii
 
