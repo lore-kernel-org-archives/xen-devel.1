@@ -4,58 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34FB7C61DD6
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2026 07:14:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1404510.1638193 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A26AC624C6
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2026 07:22:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1404520.1638203 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1Ihc-00026e-CR; Tue, 01 Sep 2026 07:14:40 +0000
+	id 1x1IpG-0003i9-48; Tue, 01 Sep 2026 07:22:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1404510.1638193; Tue, 01 Sep 2026 07:14:40 +0000
+Received: by outflank-mailman (output) from mailman id 1404520.1638203; Tue, 01 Sep 2026 07:22:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1Ihc-00026X-9r; Tue, 01 Sep 2026 07:14:40 +0000
-Received: by outflank-mailman (input) for mailman id 1404510;
- Tue, 01 Sep 2026 07:14:39 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x1IpG-0003i2-1E; Tue, 01 Sep 2026 07:22:34 +0000
+Received: by outflank-mailman (input) for mailman id 1404520;
+ Tue, 01 Sep 2026 07:22:33 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1x1Ihb-00026R-5B
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 07:14:39 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x1IpF-0003hw-5h
+ for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 07:22:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1Iha-0077jl-AP
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 09:14:38 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1x1IpE-00DPb2-8N
+ for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 09:22:32 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a967b4c-2eae-0a2a0a5409dd-0a2a450a98ea-44
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 09:14:37 +0200
-Received: from [52.101.52.37]
- (helo=BL2PR02CU003.outbound.protection.outlook.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a967b5c-f2d2-0a2a450a0019-34653425f758-3
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 09:14:37 +0200
-Received: from CH2PR08CA0016.namprd08.prod.outlook.com (2603:10b6:610:5a::26)
- by DM6PR12MB4268.namprd12.prod.outlook.com (2603:10b6:5:223::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.13; Tue, 1 Sep
- 2026 07:14:31 +0000
-Received: from CH2PEPF00000147.namprd02.prod.outlook.com
- (2603:10b6:610:5a:cafe::a6) by CH2PR08CA0016.outlook.office365.com
- (2603:10b6:610:5a::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.13 via Frontend Transport; Tue, 1
- Sep 2026 07:14:31 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- CH2PEPF00000147.mail.protection.outlook.com (10.167.244.104) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.382.8 via Frontend Transport; Tue, 1 Sep 2026 07:14:31 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.46; Tue, 1 Sep
- 2026 02:14:31 -0500
-Received: from [10.252.145.116] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.46 via Frontend
- Transport; Tue, 1 Sep 2026 02:14:28 -0500
+ (envelope-from <jbeulich@suse.com>)
+ id 6a967d34-2eae-0a2a0a5409dd-0a2a450bba62-18
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 09:22:32 +0200
+Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a967d37-b7e8-0a2a450b0019-d155dd2fec3c-3
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 09:22:31 +0200
+Received: by mail-wr1-f47.google.com with SMTP id
+ ffacd0b85a97d-484415c8bf2so364467f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 00:22:31 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48442d7e34csm2878518f8f.33.2026.09.01.00.22.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 01 Sep 2026 00:22:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -67,116 +53,153 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZQBNNJwKY7uCAI77/3/Tg1hO389FjLsDNsYGHVV1Jir69lQ8sOm5iBdQ/0AQO+olYpHJOtMZTc9ExZ2tQ7b2FPDx2vQZNDQPZihSHmm7huts5JRtDJGhzXxfQnADKAK38wxwcWy4ELiKbrcqUBXMBvdwIpp3e8JWqtvo2FxM2dHOsccASYI4JZBOQbSww9beFFPtRD/+z0sF34wLFtrcqF2dgiMEQcoArUQOSzFfyf5mJmqTT31XTSNQcnbzifDArSUUK1rqRQ666mVShGqJhOCpAzWcCc58W2emNGMFSKe7Cz51CBAvFwTh6I2+kcJGeOW9RUMJUfIz4MxJdYcbEQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OoN2vw3UDsC1Lz/MWTRdE/XcswW4onF/0rl1nUHfALM=;
- b=Pp1WknXrKAAbC8S8MSTWeJ9IGOTl5/mzXUx/eNhoNqFMhBuSE7wUxyWiEhXHlxbN+eDoSHZAAyHq8sKD+u3UXKNmocjbXl7vQo3uUhVi9cQiDoWrAb8XCIuUJ1XFs/hsh1rpcqeZWGK/Y1TlA8pNnW9acpj1YpBPtu5JptNZZ9MObnWPRog/pdEzu5/KjqWBzJtYGPDN735exvPSfkDumlczTuvaTYFIOxUaxXjfbMu38BuNLorxhGEg0beBICVyj874WsGvYhJPDvMyK5jVDA15aFik5To2FjVJzMrUlkPdqTBnrAI1EU8Yb0xRcAVt0funC/wILBBEh55WX2gD4g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OoN2vw3UDsC1Lz/MWTRdE/XcswW4onF/0rl1nUHfALM=;
- b=B7nWixRbzxwpaBTvIL3gANQQTshSlVur+lR3yWq2B5QU2hfUK96t59+qssZcvmZaaHBr7J1w9mcWKMaZD/vUXURBkrELh/88oFXp8J4DbofeXQPI9il6G4+G36MCgsq3vuJXD9PwpZ0yvX9Jx6kiqKZCAqTagSmRClQW7Xxev8E=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <8737a6d8-cab7-4aab-9bbc-d5b155a4a076@amd.com>
-Date: Tue, 1 Sep 2026 09:14:23 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1788247351; x=1788852151; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=olYo8LaVbdFJy1HDb39WJ4XYsyGY8RXYwu6vx1NCMpQ=;
+        b=SHZip8cxOBCz2qzhCSo89KODLkYgA+VJpHTWBaV84Hytv9WvFEotcvVInE4nR/0qEu
+         TcqM8Y5wzNIsb3Vhu7w6/4sFUjFRV3Mwpz3jqQP1P8+uZ64kl7kS5F4PUO+JrI7wWOm2
+         nkRd1AIvPxDurs3Gb7H8SKBs6MQ5gOo1Ig6zHnQ3COlzXWNeM4CNZ3babB5C3m6EY2r7
+         9g6Vh/c5mFYqiKuLwXb/gLlf8xtP98sL/6G8x739+AyMfq1Idmqu8XlP8vO6RTUXvdNr
+         zN0JwC0ySSqHpcGhyfzVcuSI1kXloSzCdcCMDtNSwGS+cfhV7DVJ8nqFnZ+qI0anUdua
+         JKPg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788247351; x=1788852151;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=olYo8LaVbdFJy1HDb39WJ4XYsyGY8RXYwu6vx1NCMpQ=;
+        b=I9Az5hnuRf+OJrdgojlTOimyhxXcGZ6MNrnzOS8ELwi9dDyaD4tafG1XSiBZaLtFdL
+         kaf3m0mDOrNaU5hJTdfnD2WWp1y6J0uyfmhxtJBp08HQHT77v8tdFqtOHec5g6KH/iq6
+         a/gjrcMR7/Y7I6nFNwGyhDC8aO6HHOySiL6486NA9VEsb+TtjXimEiQvQ71mGWozxsHE
+         Vy5LSBuqY4rMBW9QvCGC3+nF+NSup+ZUDxBOHwgA3hK2+MVQhPY8r5Yyca3HZa8eQZ2K
+         sETx7l5UJvezdYARk723T5YYFpcHvTD5cXFizyJeKGQzp9m09TJz3KzLjwokwiEQ6ock
+         KC9w==
+X-Forwarded-Encrypted: i=1; AKwUvByt/tIkJOkd7H/HQJyd21LtYBmYtRDZ5wY7byM5fPyn92s818iDK3MWcggzTUEsS4EXfjxUTJ969v4=@lists.xenproject.org
+X-Gm-Message-State: AFuF++nsi5wJmZyOXKWlbU6+mWS4DCUtWktAOeeXM9bUpg8j1A3djStB
+	KSQTKKrnfWrbTTbucA+EXinkzLUioAM2qrhbHxMp+By2uMF/mQWmayG1cbMlPgF891lEU0SAsj+
+	PaW9zAw==
+X-Gm-Gg: AYBFou0bJQXMMioSNJIrC1r3qi2s4gShjmVh4vpmQd3c38vXFIVLdOQhaQUbrSAQLQp
+	60SYkayPEFnfIfNSoNM2Dru1S6+ar5kMdGC6b6HTiwvvF1OPIS6Ee+c+4ryuJ9TobrnjvpK6gL/
+	RNFGiYAUqeoJdJ/oky1jft934d6924oXqlEG67lBlq4WnkTUzb2scYO2ofquzVLJbDmySK6zms5
+	paej8A5WPhBsraJJR60798Rmtst+CTHN4Ekqpr9ArG43n+qxsGOMfw4F+4W4e4PCZT13Lhd9KKx
+	0cVedNYtBS4v7+AkTDZgS2p3V3kt64wh9baJxN0aSLaPohpCkqWMReOYk13Lr0fQefEbUlO6921
+	33PdQDjywEQiF07/f7YmJuIKTQOU8FBqGaTry3d9tp0tule11CwHLIDmGndImrDfEgLmxTn5vkQ
+	Z0cE+AMAOyCok0H2Fn3UvSvh2967W/pBQAFgGoGGCR/9eAQ+doNyGQFmeL+cx9FOA/5OpBxlrHx
+	fiZCskrtP7v8+2OSzhk6cz0Pck1MI98M+QlJkzUEbaZ47dyy6m7
+X-Received: by 2002:a05:6000:18ab:b0:484:41cb:d5f0 with SMTP id ffacd0b85a97d-48441cbd742mr6715047f8f.17.1788247351183;
+        Tue, 01 Sep 2026 00:22:31 -0700 (PDT)
+Message-ID: <8a187b46-9ec2-4040-bd00-c71059dad952@suse.com>
+Date: Tue, 1 Sep 2026 09:22:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 02/20] xen/dom0less: turn max_init_domid into a common
- variable
-To: Jan Beulich <jbeulich@suse.com>
-CC: Romain Caritey <Romain.Caritey@microchip.com>, Baptiste Le Duc
-	<baptiste.le-duc@vates.tech>, Zheng Zhang <zhangzheng@iscas.ac.cn>, Stefano
- Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand
- Marquis <bertrand.marquis@arm.com>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
-	<roger@xenproject.org>, Timothy Pearson <tpearson@raptorengineering.com>,
-	Alistair Francis <alistair.francis@wdc.com>, Connor Davis
-	<connojdavis@gmail.com>, Teddy Astie <teddy.astie@vates.tech>, Oleksii
- Kurochko <oleksii.kurochko@gmail.com>, <xen-devel@lists.xenproject.org>
-References: <cover.1787836900.git.oleksii.kurochko@gmail.com>
- <5a74a964b763e8444579a3c0d455e23160be8893.1787836900.git.oleksii.kurochko@gmail.com>
- <b65fcc50-b249-4505-a212-b2f60c55f86d@amd.com>
- <885cb732-1814-4971-b554-9041c35c4347@suse.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
+Subject: Re: [PATCH v3 1/2] xen/common: add vcpus_create() and keep max_vcpus
+ in sync
+To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Cc: dfaggioli@suse.com, gwd@xenproject.org, roger@xenproject.org,
+ anthony.perard@vates.tech, julien@xen.org, bertrand.marquis@arm.com,
+ michal.orzel@amd.com, Volodymyr_Babchuk@epam.com, teddy.astie@vates.tech,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Furkan Caliskan <frn1furkan10@gmail.com>, xen-devel@lists.xenproject.org
+References: <20260831051637.5029-1-frn1furkan10@gmail.com>
+ <20260831051637.5029-2-frn1furkan10@gmail.com>
+ <cb7418ef-4d3e-4a86-9c86-f7b0f296c013@citrix.com>
+ <4a71e08b-b3c6-4f14-a4ae-cc0506659ae9@suse.com>
 Content-Language: en-US
-In-Reply-To: <885cb732-1814-4971-b554-9041c35c4347@suse.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF00000147:EE_|DM6PR12MB4268:EE_
-X-MS-Office365-Filtering-Correlation-Id: 547da5e9-e8ff-4146-d306-08df07f8ab34
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|36860700016|1800799024|23010399003|376014|7416014|18002099003|22082099003|56012099006|11063799006|10067099003|4143699003;
-X-Microsoft-Antispam-Message-Info:
-	r8yVAo6EnzsmaiyA685cd2XEu9pi3PoboeK6AGZlkESrACr4LQoz3gI8h/1eWfvVsDBCCkzOO5FJWfckfD8deI7Hq0AZF3KeHvR/AxIb88G2aKLfm0Tp/81qN154jaFDDwVRHOH4tYeWlXRHfbdwhYCDaeES0RRYvgg405KxgJwnx2/87wfHvTWyl3/TKfXQMVgs6DnApweDVcxQUIZgOZfZTCzhy0scFsUH8v8506UJnLMSdrcfC/wZGjZHDgCYdKt2F2bPgGztgQkiUglW1dtVGHBQDDNjXXrqqdsJ4mNbLx/bwlo0qkiptmqFujyz2TAhCPLWOMxrqfDYdM/NxhSMMZVpWJXP6WI6Gjv89casVTlkv/+F6A8uE7YX5haidDsFjsQ1F+zU2hO5SavzWcOAPdXrAt0mTgEwdHAUb0DzdOrZLRwmKDOBNotqOPyrT4xT778ljD73kfV5p23zn3yAQyABpeyXp7FF12mMDCkwq8oLsq6hBGOxOx3qo98R4Y9Q0am5xcO4vSp1Vy03YQB2wiBAJVfzyeNRSCPMOza9Xx1JAcAzV7xkwGC8S82EFZp22U/Hf58eDaqbWam4V27ZP2HmAQp5Xx33gr8DD8Q9CFv3t8nl8LzyL62UyjgtygYfZi166rTToUGOiZBePAzLj11vv0SJzTZZtJId5fBjwHPp/QH2hCY6c48VP0hT
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(1800799024)(23010399003)(376014)(7416014)(18002099003)(22082099003)(56012099006)(11063799006)(10067099003)(4143699003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	Jml8CdnC4ZN8V5wbOz++bJ9ctSv8/kVw+63o2VdBC6NsSelKYmzhL8Ov/i2e0WZNVc/vpDdfuLufSMhhPMukkX+QlY+5TiM9iBk1K8i3BgW97wMiPDe/SfjH8Zd8vL6GsIhvy6QwVYCK9ynNF/E1OwZLo2jJ89Wgkf/oyomndRSp837C10W0+T4AV0cIPPOFnR8wsMSCm4licGg1lznzgwL6P1Bx4a7Dsvzck6AztKmYEoEzrYAX9euI0S6g9NioZvykFybk0EZb+13mOGlJaT5mXrbPc5xgUPgwU+RmM2norAEvZMzqkdk3/qPuf8N7CArJIl18Yp/EBfDp2OqRjLd1Gvx4+Er/7CWU3ci75lK6KYy0U4fx3bZgiB5cDXgXAJco7LiJouimwNpDOz6UGo6Jy7+xQf7TFEcV1kclJDdv//AAoQqj6X9ZZMQkOiW3
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2026 07:14:31.4998
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 547da5e9-e8ff-4146-d306-08df07f8ab34
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CH2PEPF00000147.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4268
-X-purgate-ID: tlsNG-4011c0/1788246877-528DDCFC-96E49128/0/0
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <4a71e08b-b3c6-4f14-a4ae-cc0506659ae9@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-42698a/1788247351-1A4DB9EA-7687AA13/0/0
 X-purgate-type: clean
-X-purgate-size: 1134
+X-purgate-size: 2665
 
-
-
-On 01-Sep-26 08:54, Jan Beulich wrote:
-> On 31.08.2026 17:48, Orzel, Michal wrote:
->> On 27-Aug-26 17:18, Oleksii Kurochko wrote:
->>> --- a/xen/drivers/char/console.c
->>> +++ b/xen/drivers/char/console.c
->>> @@ -31,6 +31,7 @@
->>>  #include <xen/warning.h>
->>>  #include <xen/pv_console.h>
->>>  #include <asm/setup.h>
->> NIT: This can be dropped - I don't see anything relying on it in this file.
-> 
-> Did you mean to ask for asm/setup.h to be dropped here, when that's entirely
-> unrelated? If not, the other change you are asking for could surely be done
-Why are you saying that this is unrelated? Before this change `max_init_domid`
-declaration was in asm/setup.h and this was the reason for this header to be
-included here. With this patch, the declaration is moved to dom0less.h and
-therefore asm/setup.h is no longer needed to be included. I consider it very
-much related unless I'm missing something.
-
-~Michal
-
-> while committing (and I assume the patch here is independent of patch 1).
-> 
-> Jan
-> 
->> Other than that:
->> Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+On 31.08.2026 14:59, Jürgen Groß wrote:
+> On 31.08.26 11:45, Andrew Cooper wrote:
+>> On 31/08/2026 6:16 am, Furkan Caliskan wrote:
+>>> Every vcpu_create() call site that builds more than one vcpu loops
+>>> over ids up to d->max_vcpus and stops on the first failure, but none
+>>> of them roll max_vcpus back to match. This leaves d->vcpu[i] == NULL
+>>> for ids below max_vcpus
 >>
->> ~Michal
+>> As I told you before, you must cope with this property in non-error
+>> scenarios.
 >>
+>>> , which anything walking d->vcpu[] can then
+>>> dereference. This is what caused the crash: sched_move_domain()
+>>> walks every vcpu slot up to max_vcpus without checking for empty
+>>> ones, so when a domain built in a non-default cpupool had vcpu
+>>> creation fail partway through, domain_kill() later moving it back
+>>> to the default cpupool handed one of its empty slots straight to
+>>> the new cpupool's scheduler, causing a NULL-pointer dereference
+>>> inside sched_alloc_udata().
+>>>
+>>> Add vcpus_create(d): creates every vcpu of d up to max_vcpus and
+>>> rolls max_vcpus back to the failed id on error. This keeps
+>>> d->vcpu[i] is non-NULL for all i < d->max_vcpus
+>>
+>> No, it really doesn't.
+>>
+>>> , instead of guarding
+>>> every reader of d->vcpu[] agains holes individually.
+>>>
+>>> Convert every site that builds vcpus in a loop to call this function
+>>> instead.
+>>>
+>>> Fixes: 61649709421a ("xen/domain: Allocate d->vcpu[] in domain_create()")
+>>> Suggested-by: Juergen Gross <jgross@suse.com>
+>>> Signed-off-by: Furkan Caliskan <frn1furkan10@gmail.com>
+>>
+>> For the avoidance of a long drawn-out argument, nack.  Under no
+>> circumstances are you editing d->max_cpus after it's put into the domain
+>> list.
+>>
+>> You've chosen to do so at a point where the domain object is live,
+>> visible in the system and able to be the target of other hypercalls.
+>>
+>> Furthermore you have not fixed what your commit message claims.
+>> d->vcpu[...] is still NULL for an arbitrary period of time, including
+>> being able to be the target of hypercalls, before vCPUs are created.
+>>
+>> All code MUST be able to cope with d->vcpu[...] being NULL.  It's how
+>> the object lifecycles must work, because creating vCPUs is not atomic
+>> with respect to creating domains.
 > 
+> Would you be fine with me creating a patch series moving vcpu creation into
+> domain_create()?
 
+This was discussed before, and however nice it would be for the issue at hand,
+it would get in the way of us wanting to have CPU policy for domains put in
+place before vCPU-s are created, such that on x86 the XSAVE area can be sized
+once and for all.
+
+Jan
 
