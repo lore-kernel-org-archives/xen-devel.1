@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63408C61DE4
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2026 06:36:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1404447.1638122 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D008AC61DD6
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2026 06:40:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1404454.1638131 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1I6N-0001Bz-V1; Tue, 01 Sep 2026 06:36:11 +0000
+	id 1x1IAS-0002u5-FC; Tue, 01 Sep 2026 06:40:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1404447.1638122; Tue, 01 Sep 2026 06:36:11 +0000
+Received: by outflank-mailman (output) from mailman id 1404454.1638131; Tue, 01 Sep 2026 06:40:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1I6N-0001Bs-SH; Tue, 01 Sep 2026 06:36:11 +0000
-Received: by outflank-mailman (input) for mailman id 1404447;
- Tue, 01 Sep 2026 06:36:10 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x1IAS-0002ty-CK; Tue, 01 Sep 2026 06:40:24 +0000
+Received: by outflank-mailman (input) for mailman id 1404454;
+ Tue, 01 Sep 2026 06:40:22 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x1I6M-0001Bh-M5
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 06:36:10 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x1IAQ-0002ts-Gl
+ for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 06:40:22 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1I6M-00H4xo-2n
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 08:36:10 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x1IAP-004wr1-Th
+ for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 08:40:21 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a967252-8faa-0a2a0a5109dd-0a2a4508bf9a-12
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 08:36:10 +0200
-Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a967352-8faa-0a2a0a5109dd-0a2a450cce94-18
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 08:40:21 +0200
+Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a967258-f659-0a2a45080019-d155802bc515-3
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 08:36:08 +0200
-Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-49b8ce9b733so29945385e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 23:36:08 -0700 (PDT)
+ id 6a967355-f479-0a2a450c0019-d155dd36ed2f-3
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 08:40:21 +0200
+Received: by mail-wr1-f54.google.com with SMTP id
+ ffacd0b85a97d-47ddf7b09e5so494788f8f.1
+ for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2026 23:40:21 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cdce1025asm42904865e9.6.2026.08.31.23.36.07
+ 5b1f17b1804b1-49cdce171c3sm46925365e9.8.2026.08.31.23.31.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 31 Aug 2026 23:36:07 -0700 (PDT)
+ Mon, 31 Aug 2026 23:31:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,59 +55,58 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788244568; x=1788849368; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788244821; x=1788849621; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=RqrJdKWIw6zoDRGWnhwZfLuJsTxCwJNCeEEC5eWASrI=;
-        b=BjJ3s8nGWV2M66/dnUblK2SzlNVwkc0RqsA/KC2WyBf1JPUkdA0dquQ8etFuzShIBk
-         BaKofPPLGXSSzc4veETytPNCKk+7FDJFxhmIM4l1Ltqq8Gc1smoge397KgVJjhCOz4vT
-         bu2vohgeopbiOTBH1FwpJhLMs2CecLu22nEmdD/apNH+cK4gM+R3sEkVuThWWSNH/Qo8
-         8B8o3/jBrWvKb1paO0vCtVrazGWBQK4FjwGtdsl1R7XSQXhUFA1M9pUDFQCW4jPw2Enj
-         3JvcmKIvuSjl7ODkOne8zgTt9QOr9TF/PDQZtQZ5kcvkvUK9NPch220HsTIdAkD/ZL4W
-         neTQ==
+        bh=OiPWX8IPpLtRRTCWw+Y69aOZxYBxv2bn93Gvyq1POyE=;
+        b=IrYRuVtGJPlRa3SJa4lh/5q3uvH25TmSQFL+9T7KTS1mLLXS0d0HpG6f0CMVadDUI9
+         WCWGgDbFHUbQK0MDLV207cYKBo3B5SuFqzRNlPlFtKMfJ82iwwbkQE9gl3a7G+4K97za
+         bBXRQsDCAbZct/Dd9MlTjiPYwZFmAe9FhQA+fKtMaeYi/F3miMk3FNOSYASSXrfm9E7O
+         8ZTydU9naENdw7i+YSyP9eEBiUpKNdK/cPTxxsbXMHD40nRZbcxENkOP5XIr1TyTZmem
+         3b37hzyudh8QfbmfLaI3IK2GwtKXADi44ce1P8Bc2Ha2GfNShoLV9eP3ma2aJfCO5cU1
+         JvaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788244568; x=1788849368;
+        d=1e100.net; s=20251104; t=1788244821; x=1788849621;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=RqrJdKWIw6zoDRGWnhwZfLuJsTxCwJNCeEEC5eWASrI=;
-        b=XhA/+pcxesPlphIzjzeXT8sZsq4HPggsMvfL06x7A3Y88L8QCLG00HGXCE4PjcO/Ur
-         0FKQdkiTuHEZ8JfSTVc9k3eIkPE3llx7osn362o3ao7Bco1r35syd+PXwF58SxA12pmp
-         vy1E8YMpuUVk9+nwKTAxEYbOM0ym4PPb9ixPkc22lXxMhoYoq3uaCWSvTFqBTjZKHTCl
-         TZcoGp+vbhvpK5WkwbkM1I0459cawf5YWE8dhvBrQ0sTAL3UuDF5CtDOoX4/rY6xIxRf
-         HDP+iwciXntpzydov1cCIJOrrgbT+ECSiFmgvT3HUezlWuGW+mSWQ++L6GTuoRex+QSA
-         CoMA==
-X-Gm-Message-State: AFuF++lPoFATFVdC8A2V5OFoHhVSvhP1MMobew+qbbD0ScjU6/4JcaVM
-	HDIHeB5N9gXoOapGi5lWUwUSz5znnf0Xjv6H/FgIZy8NJ+7AEcHeFYmRI5SVo+W2Vw==
-X-Gm-Gg: AR+sD13dZd75Qq2xVEaqJfZunSKgp2s6br70vBTiqM+tNTOQ5wJL5qIDN5RSz9JTPCi
-	nUSD+eRkDmxuwLNgsNY/GKRLP5z2mIXo5bIAU350sfrZnnpWvjmBcOpmFhRSwogwoH3bUKqGl1g
-	zqt3FZlwm+k/XbpxtjzTPk89pF1O6hoHlTTVxzCTSw3ax0Ax+pAf/M/EDNtCnVQAtZmn2X/mefc
-	aeWfGZbsx+E0LFWBjgwZHT7JlpOJeT6vQyl8GvY+rETq3GKQaf52+RxHL+rpyVCENAREqA3FLnc
-	GofCNN2n4nYcK31nNgQ8rixr7AXcTidhcBVP5pHdQUVRFVZByKLes1FXe94fzIrWjMjFzvXdHyq
-	covXG/pY11kHFA8uY1nGEgeYvm//9Oa4aUp7yxzHWcV9hn+x0DH6L6M1tiRBG9f+awlkDzhz9t+
-	6C7xTBa7FFX8RNZvWpBfSv2psXRsg/lQAOB/U14MH+Cowz0W/WNh/3+CjLH5IPgu+E4Il+Xp4Hr
-	FdhcAR9Taxm71chM1ZmwhU74GEK66N7bx77WyOJkCTCoGTOYC4U
-X-Received: by 2002:a05:600c:1d0c:b0:499:484a:81d0 with SMTP id 5b1f17b1804b1-49b91c3e67fmr447976695e9.9.1788244568228;
-        Mon, 31 Aug 2026 23:36:08 -0700 (PDT)
-Message-ID: <99c30685-549d-4118-87bc-41d441ffcc3d@suse.com>
-Date: Tue, 1 Sep 2026 08:36:06 +0200
+        bh=OiPWX8IPpLtRRTCWw+Y69aOZxYBxv2bn93Gvyq1POyE=;
+        b=LftOOWdo01jXaauvuuTEi51fV7uw/UEAbvYtHEXyoUf8mzPmRcQeSEMGYPfU/I0mt8
+         p6S+IfLjUSjEZ5m3u1URGoxa3bt1w/4Tioe8r2hO91irUrQHmG0uSNQnmLYh8dqMOrw6
+         +QCePXlfsscgPXAqWqwWYoQNQGCtERv6T85mNV2zIkQoqF0/1cmZB6gso4VguAOUYdSa
+         KSK3ZS4+h8v7BQqX8xXh0xx+iwRXnvdr4oBlle/17WT9S/eCqRtJnWH7w3ysTgg3krPV
+         xO+0ntzcBBNdq0kb9y9Fo6XQAA0FO0+7uAhKT+eq2ifdJNz7UrWoO9DuOjaZmk8LxboR
+         cs1g==
+X-Forwarded-Encrypted: i=1; AKwUvBzTjK5UzoDT+3AsuA9PKLjiWu/1RmV7GjGbajklDR7mSNTlG5iEIhyr3dXVGNEutQiTMg39NUhzHvw=@lists.xenproject.org
+X-Gm-Message-State: AFuF++ktvxZknVxAC05ZZnFn8J7fxIaWlcgSFUUcVhOulkHq4o1XKfm5
+	ZmXpZlnujbHzyf+nXKdWQyvNo6Vx6b9Uwginkr+tAWS2V8wuU6ePZWVc8x9sXOs+HMfHbFXQ9/I
+	0fR8wWg==
+X-Gm-Gg: AYBFou1ArRmC4uErMlW1ttrkykZVMaMa9hyZdfRk9KXffT7tEWMxeOUp9ahDerbGSHO
+	UUi656p1LjUHn4/0g9TImTvMx+r2/iS9MymWBn/czoW2SkHJx+/SEjkhGlOqStOQNL5u3VhbOlC
+	+U41l5daFkCQmju3z/qCYTluYxMenteDBYXj8k/ZhpO7wCxxF2uFzvlEK2OkrU5vlQ4yY8FKZp4
+	cYzanc3mfJjjcm5OXqBTbis+WZJpXRm6sNQYtI7BfRe6tFNCYbQjTJw7YtEg3iyx72Sw3r2wQum
+	M7TLVStPqeBwM+Y95OlVvLd0bGJ12Em+b3EJ1gd1r+m87wXElwUstN+Rjgb8NX93NEzQ9ivAFOI
+	25uwR55ZdFH3YCHY/9tQyMownsSBy25C+19GD9HCy6ybYD3OvewoN71QUiQ9P9COoAneNl57kGL
+	mDarqQ0OGbIYhYOnX5DR+6lyDEnPJx36BnxH0Kb9AfSZ2zMFGT9mdyQiXFPvnQ2BlfSiT7wAfNE
+	jGuzpYWsWRS14HiS6dVFW+zJA3X2Yoc8+FdrgxFhlRUIIic34UF
+X-Received: by 2002:a05:600c:1d1d:b0:49b:d45:703e with SMTP id 5b1f17b1804b1-49b91c2dfecmr475085015e9.8.1788244276473;
+        Mon, 31 Aug 2026 23:31:16 -0700 (PDT)
+Message-ID: <c06d1619-b86d-4a07-9fd7-16db2583b287@suse.com>
+Date: Tue, 1 Sep 2026 08:31:15 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 09/12] Eclair: deviate BUILD_ERROR() wrt rule 2.1 and
- introduce variants
-To: Nicola Vetrini <nicola.vetrini@bugseng.com>
-Cc: xen-devel@lists.xenproject.org, Andrew Cooper
- <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
+Subject: Re: [PATCH 04/12] x86: add noreturn in a few more places
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com>
- <06c5efc0-e130-417f-8333-b8eacd1c6d77@suse.com>
- <99c8a63920c37dafdfeb2a2a4333df72@bugseng.com>
+ <d0f991de-db67-4f49-aef0-25c590b3889e@suse.com>
+ <66fc1415-df9e-41c2-b3ae-78305814cbfc@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -133,42 +132,55 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <99c8a63920c37dafdfeb2a2a4333df72@bugseng.com>
+In-Reply-To: <66fc1415-df9e-41c2-b3ae-78305814cbfc@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1788244568-CC97287B-50A4FCE8/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d25034/1788244821-00CCBA5B-32ACC2AF/0/0
 X-purgate-type: clean
-X-purgate-size: 1072
+X-purgate-size: 1841
 
-On 29.08.2026 16:04, Nicola Vetrini wrote:
-> On 2026-08-28 09:04, Jan Beulich wrote:
->> BUILD_ERROR() is even stronger a guard than assertions in general, and
->> ASSERT_UNREACHABLE() (or BUG()) in particular. Deviate it just like 
->> those
->> to allow use for marking unreachable portions of code.
->>
->> In some cases code being unreachable is dependent upon configuration.
->> Introduce two variants, as constructs like
->>
->>     if ( IS_ENABLED(CONFIG_...) )
->>         BUILD_ERROR("...");
->>
->> results in the if() still being reported as unreachable. Sadly these 
->> two
->> new macros introduce a new 20.12 violation each, which hence also needs
->> deviating.
->>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+On 31.08.2026 21:13, Andrew Cooper wrote:
+> On 28/08/2026 8:01 am, Jan Beulich wrote:
+>> --- a/xen/arch/x86/traps.c
+>> +++ b/xen/arch/x86/traps.c
+>> @@ -2304,7 +2304,7 @@ void asmlinkage entry_from_pv(struct cpu
+>>      case X86_ET_HW_EXC:
+>>          switch ( vec )
+>>          {
+>> -        case X86_EXC_DF: return do_double_fault(regs);
+>> +        case X86_EXC_DF: do_double_fault(regs); /* noreturn */
+>>          case X86_EXC_MC: return do_machine_check(regs);
+>>          }
+>>          break;
+>> @@ -2615,7 +2615,7 @@ void asmlinkage entry_from_xen(struct cp
+>>      case X86_ET_HW_EXC:
+>>          switch ( regs->fred_ss.vector )
+>>          {
+>> -        case X86_EXC_DF: return do_double_fault(regs);
+>> +        case X86_EXC_DF: do_double_fault(regs); /* noreturn */
+>>          case X86_EXC_MC: return do_machine_check(regs);
+>>          }
+>>          break;
 > 
-> Reviewed-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+> For starters you're missing a break, and the only reason this isn't a
+> compile error is the trailing comment.  Second, it's a tailcall anyway. 
+> There really is nothing unreachable anywhere in this construct.
+> 
+> But by far the most important, it the singular noreturn attribute on
+> do_double_fault() (elsewhere, and not visible when reading these two
+> functions) which is preventing #DF falling into #MC.   This introduces
+> fragility which did not exist previously.
+> 
+> do_double_fault() would conditionally return if we ever got around to
+> fixing espfix64.
+> 
+> So no - I'm going to insist that Eclair is taught to accept "return
+> some_noreturn_fn();" as intentional.  It is objectively less fragile
+> than the MISRA-preferred option.
 
-Thanks.
-
-> Presumably you did not fold at least one of the following patches where 
-> the construct is actually used into this one to separate concerns?
-
-Partly for that, partly to keep subsequent patches possible to go in
-independently, i.e. in any order.
+Oh, also: For a v2, how much of this change do you demand dropping /
+splitting off? Just the two hunks above, or also the one adding noreturn
+to do_double_fault()?
 
 Jan
 
