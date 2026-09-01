@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33FBBC61DD6
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2026 08:40:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1404618.1638275 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A38FC61DD6
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2026 08:43:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1404624.1638284 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1K2k-00034i-Jl; Tue, 01 Sep 2026 08:40:34 +0000
+	id 1x1K5L-0003fJ-V6; Tue, 01 Sep 2026 08:43:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1404618.1638275; Tue, 01 Sep 2026 08:40:34 +0000
+Received: by outflank-mailman (output) from mailman id 1404624.1638284; Tue, 01 Sep 2026 08:43:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1K2k-00034b-GI; Tue, 01 Sep 2026 08:40:34 +0000
-Received: by outflank-mailman (input) for mailman id 1404618;
- Tue, 01 Sep 2026 08:40:33 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x1K2j-00034U-CP
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 08:40:33 +0000
+	id 1x1K5L-0003fC-SH; Tue, 01 Sep 2026 08:43:15 +0000
+Received: by outflank-mailman (input) for mailman id 1404624;
+ Tue, 01 Sep 2026 08:43:14 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x1K5K-0003f6-Fb
+ for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 08:43:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1K2i-00345U-KQ
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 10:40:32 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1x1K5J-00GH3a-Se
+ for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 10:43:13 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a968f79-e002-0a2a0a5209dd-0a2a4502ea5e-20
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 10:40:32 +0200
-Received: from [209.85.208.41] (helo=mail-ed1-f41.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a96901e-bab6-0a2a0a5309dd-0a2a450cdbd2-36
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 10:43:13 +0200
+Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a968f80-6ca4-0a2a45020019-d155d029ade1-3
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 10:40:32 +0200
-Received: by mail-ed1-f41.google.com with SMTP id
- 4fb4d7f45d1cf-6a374bea882so276870a12.1
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 01:40:32 -0700 (PDT)
+ id 6a969021-f479-0a2a450c0019-d1558034e99b-3
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 10:43:13 +0200
+Received: by mail-wm1-f52.google.com with SMTP id
+ 5b1f17b1804b1-49cd77e0f95so6617905e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 01:43:13 -0700 (PDT)
 Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
  [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a674a188a9sm101195a12.14.2026.09.01.01.40.30
+ 5b1f17b1804b1-49cdce3e4e7sm49150395e9.9.2026.09.01.01.43.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 01 Sep 2026 01:40:31 -0700 (PDT)
+ Tue, 01 Sep 2026 01:43:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,49 +54,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788252032; x=1788856832; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1788252193; x=1788856993; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=veJ9NDTcaU88Dl+3HnTxohs9tGQY8BP7EVcbMA2Q4RQ=;
-        b=htl7JNmjV8L+rdLrg9IKRRVa5Aik/rQFzuTv45LUZOxkNnzPxFs1Cpq2kdpqnofPcO
-         gmRX6f4R3PeblOrwSABaiQGum767TT8JZjduqU12A2VtWG0VkKc9nWgHXt7OxHPymIOK
-         85ah3GvvpkkHE+0UVgUFvQWv1KvNaflUrfZCKHff0fEoeS0si7wx8lJvVBdg/UhbNiQP
-         gfnoGMPoRL8k0IEIQ5KdhDIq5xyYjYdHsEPZA+ULEmIvb7Can96u/JNM1lCtYPvYWLEd
-         kb+LrWx/MHHkWwfR94WAz51D/hJOQGgFKLCtsk8bRyKR3H8mjf7aUYz41wnlz67/AesV
-         G6RQ==
+        bh=/0USoLN8FVdd3lcOS3ojDFiLfFOLRJm00uoUVfJAOck=;
+        b=AFaxUP2d93AhTlx0Cf2LiDTB+/l3Eh7PpNKB0fyKX8qyqzpfiXP2j/BOjRkk1SwUrA
+         x1dNwcuslvhcUX9nkT/Gdfk+LFG+cC/IcClxzNkSRAu9zGa5nuTNVDxXM1YTZMddP5Wb
+         /XEIqh9ba5QQ+tRDs5GPCtIMN7S809yIQFeWHjV7LU3+nCXsiraW9olNzQLk/AaBPnl4
+         ML2MFYsTv/StrNn8szCB5ZfXuf/TvZtb5mSTY+tuPXrth55rjQGtzFdtK8qTq6vj7Brk
+         eCsmQNYa+7mLx8QTms5HxhHzPh5caH76PHwgTHZDjaaTvmtLSbc1JdYtW8MZkT2tYmqq
+         qoXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788252032; x=1788856832;
+        d=1e100.net; s=20251104; t=1788252193; x=1788856993;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=veJ9NDTcaU88Dl+3HnTxohs9tGQY8BP7EVcbMA2Q4RQ=;
-        b=QrkF00vdCdZ5KTONFMI+JgocjJaHarS6YSoKSIpTdkIxieFR5IUJAGdt8cj4B3gNVe
-         X0/3OwYeambzQHBy01nUU9OPLomJW/Z05Wou0GNCORQ35ZRSM39LNiimLRURBWr91Cv9
-         /wx6WCxnckSrdzlmB+OlMMxV5NrmQqPR4t0wz+HzzdD0ewcYHbZ8CIQgNCAemBe7D0cz
-         Ga9uNSp9DZI91S7Jl+tWxGJ30+5Hf7T9sIow5F5N0go+WVUROY9GVcdxqrN21OmKcgIm
-         X2eeNe3HEBLvk1fz5w/WvF+dkqAh6kPIGbQXnigNxAjrr4O72klEKW33Mhu6BQ1dmKPf
-         xTeA==
-X-Gm-Message-State: AFuF++mGbKNL4koN7JKOtjorcoZkthgsT58ySmhKCe4UZX0YJPBtccX6
-	gPO7cGBxJFuT3x06IxYXnUpau0EXilv1nR8oUZREctNn81aHm7c5Rc9e
-X-Gm-Gg: AYBFou0Fn01sxKiRzRLCjAvYCW8mZl7knig4aAtCsvV1GayaZ5W5idCJ8dozljhXeTR
-	pTTBxk9QgpQNfKAI14vFjDGlmw9tIyPQKtUlwo2xJaTX5GW39kXzSmyxUZ8P70zNDHMJ3Rl2vx2
-	tGoPds3yb3At33HMLQVGnTBCKqzghJhDhkGfBDfC08LcTQI1jtj3PCrsrCX9UV4CmNXnrO/1HB9
-	yf3vl+URGxb/T4oz243o3CcHTkrJV7MIa1khx+gduhBVKNGmejgrd6IcmkN5jRrKzNSVqpbdCbp
-	PrMs96pIsywVlwWRHvfXtx+SR/G7IBikYVcX3wi4IZZwpKMDq9Dhr6dVw3ZMdYSxuf3TxFRuTC9
-	5x9CKc1xtE+ItnUA52sKqTlDiX9XwLsMtbcOM376i9t2vIfHpet5hL2S4URXeqBmOPtqwFwcnUp
-	LJMyOtNI5TaUfCcDQ+Js4IToF5z/GqXl7P3uQj9MLOIFqKBRhHzbbFGcM+aeejpMozJ+h2zsFn3
-	elaXiah6BCHpSOotsq1SM86+oRXTCqvoOpkQ9YshicIv+iJVtzz
-X-Received: by 2002:a05:6402:3245:b0:6a5:f44e:a009 with SMTP id 4fb4d7f45d1cf-6a663a4a9dfmr3601664a12.7.1788252031604;
-        Tue, 01 Sep 2026 01:40:31 -0700 (PDT)
-Message-ID: <d584a875-8142-4d50-bee6-41b744755d8c@gmail.com>
-Date: Tue, 1 Sep 2026 10:40:29 +0200
+        bh=/0USoLN8FVdd3lcOS3ojDFiLfFOLRJm00uoUVfJAOck=;
+        b=T+s0fOh0IPMQ5wmTH2iZfttOS7WPmX92HhvWGbeCPRPUBUVmGrecUvhqUN4yGLj4ML
+         Bsghkby7lF+6suBvDVlbzZaSeqQvTa7ZM+AxNYo41rmpvPgH16WLuEqP3H50vwEG/XtY
+         mdgsDiDPJnCc6QGqgJG6MFqjqNECxJJOn9QnNFDyFRgZfYNpyz8kgnTPI02VyDA5jJgh
+         fVsnjxkDXGqWi9U8XmqRIJ1/T3KNk32MlDNLx5cwsxsoZLCcKbmG+oFXnPLKlN4SXfDn
+         em/G9DZ8ZcgR0yZPY3VGHNANLNyjK4Fj6k6tHEKKVnjKnBi12LHnJqvCMvwACvx0Acj6
+         hOaw==
+X-Gm-Message-State: AFuF++m8ClGH+HIT5cRcpJnZ1KM8Lv4sVp+W/E4c3X1pANwpVdbvG80d
+	RjES0iYr2CJh1SoX8LpExU1WE1nhjg30Mx58t7KF3ggdDvhCYv2aFWRi
+X-Gm-Gg: AR+sD1094xFTjPk41Mu9Alwb8HHzm2cYVg2hZEFrMuT179e1umYPza6cJfmT2PbjFU3
+	8tRa/iVi1JQMRrwJg1YkRMyIRm2oaiVCx8HeiipGALj+4TWPXabHTwrENRu1fQNZ3zzOyChCRkc
+	MQxXSdjrTLFCIUqpCOIjJAOIKJWO8bstuaACfgHb6d9Xea+S0qtPHKMCVLiyFXHrIPzc5FL5bFX
+	MdiGYnLFj6QgmlaJl02iT0Tqq2wmImvJZShv8D23bZ9AKXeCspV3DnIjjPfEk+IDJKy8rQPN1e3
+	M2Je27+HKL9gBGbDjh0LwVaiy78x7MBid/7YWdxMqxvJXgea9+zskdWlmHf5KJDCEVbREeHY+0G
+	6Roef1lgTp4gqgY8V9Ix/feyUU1w2bTw0ylUZ3CEL3OyqaFCS4ewJuPlZ4bj+DbGtIG5+NONblN
+	UFHvE80J4lO9sWeBtJRiTm/yyrFL4Xx7r401QEqudaMeaon6ZSN1j/YS/mZthyiwI6+vthK3ysa
+	wtq4MJSJbxOKtF1oNPi4ALvobivlmNNdA5tiV4owa/LuvS3kiPy
+X-Received: by 2002:a05:600c:870c:b0:499:dc34:bdc with SMTP id 5b1f17b1804b1-49b91c1c401mr577745495e9.1.1788252192846;
+        Tue, 01 Sep 2026 01:43:12 -0700 (PDT)
+Message-ID: <26d9af52-8c02-44d9-b475-1cbdc451be5f@gmail.com>
+Date: Tue, 1 Sep 2026 10:43:11 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 03/39] xen/riscv: set the guest's XLEN explicitly in
- hstatus.VSXL
+Subject: Re: [PATCH v2 05/39] xen/riscv: request a G-stage flush on vmenter
+ when VMIDs are disabled
 To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 Cc: xen-devel@lists.xenproject.org,
  Romain Caritey <Romain.Caritey@microchip.com>,
@@ -109,43 +109,51 @@ Cc: xen-devel@lists.xenproject.org,
  Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
  <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
 References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <a3ae79823e24f2e18cef2fac8ffffe7caa608f32.1787838835.git.oleksii.kurochko@gmail.com>
- <1788180504.8631fc262581453bbf619ec5b2062170.1a057dd1f6a000c4f3@vates.tech>
+ <4274740481062ef92a76debd9c3f1e8371858735.1787838835.git.oleksii.kurochko@gmail.com>
+ <1788180504.8631fc262581453bbf619ec5b2062170.1a057dd2094000c4f3@vates.tech>
 Content-Language: en-US
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <1788180504.8631fc262581453bbf619ec5b2062170.1a057dd1f6a000c4f3@vates.tech>
+In-Reply-To: <1788180504.8631fc262581453bbf619ec5b2062170.1a057dd2094000c4f3@vates.tech>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1788252032-F34BE2AC-8D4F7832/10/73395122804
+X-purgate-ID: tlsNG-d25034/1788252193-76ADCA5B-49D731DA/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 1242
+X-purgate-size: 1450
 
 
 
 On 8/31/26 2:48 PM, Baptiste Le Duc wrote:
->> hstatus.VSXL is WARL, so its reset value is implementation-defined. Xen
->> supports 64-bit guests only, so program it explicitly instead of relying
->> on whatever the hardware happens to leave there.
+>> vmid_handle_vmenter() reports that no flush is needed when VMIDs are
+>> unavailable (vmid=off, or hardware with no more than one VMID bit). Every
+>> domain then runs under VMID 0 with nothing flushed in between, so as soon
+>> as a hart runs more than one domain, a domain entered there can use the
+>> G-stage translations left behind by the domain which ran before it.
 >>
->> This matters beyond the guest's own view of itself: decoding a trapped
->> instruction depends on the effective XLEN of the guest, as the encodings
->> which exist for XLEN=64 only must not be recognized for a 32-bit one.
+>> Adjust the comment in p2m_handle_vmenter() accordingly: skipping the
+>> VS-stage flush no longer relies on an old VMID not being reused, which
+>> doesn't hold when there are no VMIDs to begin with.
 >>
-> It's not clear which instruction "decoding a trapped instruction" refers
-> to without more context. I assume you mean decode_ldst_insn() in
-> emulate.c, but the patch introducing that function comes later in the
-> series, so this isn't obvious on a first read.
+>> While at it, spell the other early return as a bool literal.
+>>
+>> Fixes: bff3b9ea4696 ("xen/riscv: introduce VMID allocation and manegement")
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>>
 > 
-> Please reorder the series so this patch follows the one introducing
-> decode_ldst_insn(), or reference it explicitly in the commit message
-> (e.g. "load/store trap emulation, introduced later in this series in
-> emulate.c, needs...").
+> FWIW this comment and p2m_handle_vmenter() itself get dropped a few
+> patches later in "implement vCPU context switching", which folds the
+> VMID claim into p2m_ctxt_switch_to(). The fix survives there via the
+> need_flush check. Is this patch really needed?
 > 
 
-I think I can just drop this paragraph from commit message. Even without 
-it considering that we are supporting only rv64 guest we should set 
-hstatus.VSXL correspondingly and not rely on what hardware will put there.
+I think yes as it is fixing current implementation of what we have in 
+staging.
+
+We could back to this topic after the discussion of "implement vCPU 
+context switching" in the case someone will suggest better way to handle 
+p2m context switch (probably without dropping of p2m_handle_vmenter().
 
 ~ Oleksii
+
+
 
 
