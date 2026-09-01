@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F4BCC61DD6
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2026 07:26:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1404533.1638211 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19489C61DD6
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2026 07:53:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1404549.1638222 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1ItA-0004NO-Ln; Tue, 01 Sep 2026 07:26:36 +0000
+	id 1x1JIb-0000pO-Kd; Tue, 01 Sep 2026 07:52:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1404533.1638211; Tue, 01 Sep 2026 07:26:36 +0000
+Received: by outflank-mailman (output) from mailman id 1404549.1638222; Tue, 01 Sep 2026 07:52:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1ItA-0004NH-J5; Tue, 01 Sep 2026 07:26:36 +0000
-Received: by outflank-mailman (input) for mailman id 1404533;
- Tue, 01 Sep 2026 07:26:35 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x1It9-0004N9-9Y
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 07:26:35 +0000
+	id 1x1JIb-0000pH-H9; Tue, 01 Sep 2026 07:52:53 +0000
+Received: by outflank-mailman (input) for mailman id 1404549;
+ Tue, 01 Sep 2026 07:52:51 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x1JIZ-0000pB-Ma
+ for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 07:52:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1It8-00HGN6-5t
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 09:26:34 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x1JIX-007Duw-UF
+ for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 09:52:49 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a967e1e-8faa-0a2a0a5109dd-0a2a45088454-22
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 09:26:33 +0200
-Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a96844e-8faa-0a2a0a5109dd-0a2a4503bf38-6
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 09:52:49 +0200
+Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a967e29-f659-0a2a45080019-d155802bc8e1-3
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 09:26:33 +0200
-Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-4956869750eso29465625e9.2
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 00:26:33 -0700 (PDT)
+ id 6a968451-fae8-0a2a45030019-d155dd2eac14-3
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 09:52:49 +0200
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-48444ec4fe2so147624f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 00:52:49 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cdce10148sm45772695e9.5.2026.09.01.00.26.31
+ ffacd0b85a97d-48442d6e826sm3117389f8f.19.2026.09.01.00.52.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 01 Sep 2026 00:26:32 -0700 (PDT)
+ Tue, 01 Sep 2026 00:52:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,69 +54,63 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788247593; x=1788852393; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788249169; x=1788853969; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=nrnB7ehHghPyMBvV43bgAIx2p0LAhKrgbOKYigT7tLg=;
-        b=MBrbJzBg8w/0J8kjO05F4Nxjx1ca1EcrmKxkX46H3zV5aQyum9wQHJiO2kTZiWAflE
-         Cm7lf7H6yJTVfT2F7wIhXXuEP5y2RUJJCS8sa2ERJArwk57nTwmnkgmuYmkavOVGMO5t
-         xpUDOnVZ5C7mlZQsVTV4456FIWhKOCACNS+VKn1tMDQ1XXJJxTAGa94YTic0WDrzE7hm
-         APC0RDyeXy1fifIHpHeoRy3ed5GfsymXkNUfXZDjgxffhTW3XN8wov7JQ7779hw1zZN4
-         sHHkGe5FAYQyBHvv4nueWbDxx5fTMJ4cYLcOjHayKTFy2bSMDmLcOavu+mdou2tbQdB+
-         gBfw==
+        bh=pVYNqUMt5NqrmKcdYt4k7AXKHi7zEjXkuK3vr+rlOhY=;
+        b=ZJAqSkhDnBAOdBteFYleaY786pkf5csdsMpRLCcBcfqbPtgn8Fjf8DeduRjNjfo7Yr
+         jvuz55mfRvXhgVifCZ8WjNq2UY2lZ8RECdjQ0ObGvX8dTJfl7Ejc9wnvQvIYT+eHxirs
+         YQY53R1c4zlxhzAuYFtjSoea/SZPEKDVYc66o3X4j5/oP1U1Gq/eg5T7uhOX2hX2HZ3s
+         9zKik2MZQHZuB01lD5St6i714tiGXfqs16yGMHbuyorf7MjfvpIg/SSGqY1O7m7JB71t
+         PHuIiqckL7vQ7UBVMn+MxcG9LqV/OTHL84zPmqW7uOH9i+a3iva4n4Z6JiwAC0aFbxa/
+         tiAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788247593; x=1788852393;
+        d=1e100.net; s=20251104; t=1788249169; x=1788853969;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=nrnB7ehHghPyMBvV43bgAIx2p0LAhKrgbOKYigT7tLg=;
-        b=qtYvIgd+ckNrPnx6rnIFTRHoQzP6IqJa6Bkxehivw3RHAoLHmrzM3CsUc378R91xEh
-         HmFlm8IZFQS36c3rBU7G2+A/f7ef3vWBx9yFbuYdLgy+z1SPFLxTZ+N1YMZjGJMp6VLU
-         8I2kHSC/DN0Cv6wINf4u0/ONimHFOtyhD6bjT3Ww2iBq7V2vPzZa3BeSRz0zXYVYZutK
-         jfkTmD7N2fCmXDLybURYZU6u4iCs7Vu+c6cKxd/O1TU/ZEfJDmRBv6tt7bYfROXdGnlU
-         wPmm/BS5E53oF3gR/zcvKwJ1MACfidIu+kaCcD11lVWizFdy74/6yHWI/Uho7Mytvztg
-         Ikrw==
-X-Forwarded-Encrypted: i=1; AHgh+RpfPeku9o1xfBvd3mirjT3rhNhvJjeMKOrYv6nCy023o4G3qgk4kkeDxbFft1CnPRFiRc+XDbIWB78=@lists.xenproject.org
-X-Gm-Message-State: AFuF++niYKBOVrwpzG3cfnYdohaaLSsLvdA0jzOt87YK2BOfy66QBrjt
-	P2yM3Aq5Gj1vjyk9UUC9igdFibfIdueu0vpMILebqcDmUwn+dWu5vSWMAJIAzTsw9A==
-X-Gm-Gg: AR+sD11ATVLrnuLjNYZMLdcjdofIYUKTKH4D0SMCvgrvEOCW574CAjDrT3/hSl0pPrz
-	z3vHsV3r9DolWM+CUqd0oJ6ELVRfWIjTv2zB6se/G2ZBmSQdcjYIFx0FxjOsWSO4dg5FRPwTEjM
-	JVEozi3kZoCy1+noFyXCiw89esgN4Awbf2FDbpbtx8dMXDbQXn+WVaiyTFCi+ysh+SzXtcAsYCy
-	JrlYcrwaXMJ+rA7iQYO6gLwjH91urGRffq4q/lPSbQixxJy061XhAUHkyZTjr8Y34G9ZRTJWjlJ
-	ovaCOLUSn5LnYtCfTHD6DuEOVvYYVM1akCf8iVG1tqwiDTwt4BeWBRlDM81wmdiOrkg1GrM49dS
-	N3wpxN6BARXegwxLtchZLY0jMa1z4h6bipudmjd0qvEdC+5fTazmq9xTzcom5Mhy8WkfvLgkmRn
-	i/eLRHev2dAp3PcfbT6c1B2Nzj04v+JHmj0kyptNDJRUKwhqnN/igbT6iFiBA7DZOQVuFvIe4Cp
-	ut/kuzsR89by4IJal5mbbIGzk4Teu1h9NxnF77ErGotWqCbKaok
-X-Received: by 2002:a05:600c:4f92:b0:49b:90cc:3c87 with SMTP id 5b1f17b1804b1-49b91c487b2mr488324785e9.13.1788247592707;
-        Tue, 01 Sep 2026 00:26:32 -0700 (PDT)
-Message-ID: <351a5219-16e2-4eb8-8cb0-0f5a3b0a3f2a@suse.com>
-Date: Tue, 1 Sep 2026 09:26:30 +0200
+        bh=pVYNqUMt5NqrmKcdYt4k7AXKHi7zEjXkuK3vr+rlOhY=;
+        b=HhweC9jOJqBrEKI0xnYJffyhG9/ZAwKmDZ/1CYtR62Y/gL9KmggB3Uqc9RMQ9L7T4C
+         ofo/4wyBH2jyJ80YfTUlDpOVORVw6SGr/qkwGkINwiYXvWBUEbNt4wKwtemU+BmGp7Jn
+         gjv1ZW2Hz8yXl806xbHMsVf2+fvwykP86RdtxY/DdOCKiimI06ZwxicFNokFPjai/1bx
+         1T6dZifWSz/CE8mIEc08nT6I0K7IfBJRwemd+9DS3xJ/r59Rc4IU7Oaqav/kEM8YLnwQ
+         cNbwP6LRabVN2nsA8ZBjJOFcDCGkAWLJf6Jh+K8pNt0KkJVN0jUOsIlz+nQDedpMC+oE
+         3piA==
+X-Forwarded-Encrypted: i=1; AKwUvByo9GMLeIMwg2Qyxo1vWMyYxcbm3PdbEPKF7lxRFGooYK18+BggRj+pRMpyvdp7K17TIY5vhM+pJVM=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mFw3g7sKn22wG/k9kX+wbRdcPm5fq8DcYT/NYrVBhFMJjMQGnG
+	3JXpvWP9nQI43LPKegLbeGwtJEK7WB+CXWbFdq9VtpvGLgQmb/Y31mnJUKDJO1AL+Q==
+X-Gm-Gg: AYBFou1jdJ0F37nTSu6fIQCRV1gAiJf6NUCUu4fTpJnSRYKtecnhUAlNKlVVsyXpaM6
+	tKsTELYyC02NlNFiCnV9cnk8ZcGdVeOdon3gXA2PBqzafuoNS3z01wvwejr2F9ZSE+rCHQ7C1zo
+	CEtShDV/hU3hsYXJol+tKwnNEz51fbRIK6UFItyvgc8Pr8QjSDFdlN7CG7eSdsBMjHtAoMRVZf4
+	0+c50mnMFegW2x1tq5y7kb/5uvikiSg/hdmIBxb2u/m9hmLoTUzHV9JEMtYrAwORq9QgrYtQ4P0
+	XIw7+/gnwRnWJGbd2zFjwVFHLU+7n+RIzAi9leiNruTsl6RLIse3nHHpWiOUtqwvUur5CpcZmXy
+	gsSUCjA1s/PyGKfjjk/QuGASz4cgMShNNDNjUqFViRprBLubJjabFombs23Wz+k8bSlXf32FDSe
+	csUMyGE3g1mDowRivLnOwhyrEJb+35Cba7oUwPdX67Brqas8uoD5TzP0bEPP9cnkF1z6c6DaDqA
+	QK4jsMy1lGQ6bcePyC104wKEkc+sudELXORzdq7BQnqiKdfbs+S
+X-Received: by 2002:a05:6000:104b:b0:484:3200:b7a1 with SMTP id ffacd0b85a97d-48440ff9366mr9577704f8f.13.1788249169278;
+        Tue, 01 Sep 2026 00:52:49 -0700 (PDT)
+Message-ID: <c0aa91db-4346-4093-9590-1bf972322f4f@suse.com>
+Date: Tue, 1 Sep 2026 09:52:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 02/20] xen/dom0less: turn max_init_domid into a common
- variable
-To: "Orzel, Michal" <michal.orzel@amd.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
+Subject: Re: [PATCH v2 7/7] RISC-V: place .sdata / .srodata /
+ .riscv.attributes
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
  Anthony PERARD <anthony.perard@vates.tech>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Timothy Pearson <tpearson@raptorengineering.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>, Teddy Astie <teddy.astie@vates.tech>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>, xen-devel@lists.xenproject.org
-References: <cover.1787836900.git.oleksii.kurochko@gmail.com>
- <5a74a964b763e8444579a3c0d455e23160be8893.1787836900.git.oleksii.kurochko@gmail.com>
- <b65fcc50-b249-4505-a212-b2f60c55f86d@amd.com>
- <885cb732-1814-4971-b554-9041c35c4347@suse.com>
- <8737a6d8-cab7-4aab-9bbc-d5b155a4a076@amd.com>
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <9a78fdea-08ba-4e04-bfa1-ba09730a300b@suse.com>
+ <f26f80e3-0b2d-429a-895c-b8003d1c5a38@suse.com>
+ <0d0c6a5b-94a5-49c6-a150-3bb6a0dc3b93@gmail.com>
+ <8eebbdd6-d414-49eb-83e6-668f187e6f93@suse.com>
+ <e4652848-4923-49e1-ad2f-c3c46b8ce5d9@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -143,36 +136,69 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <8737a6d8-cab7-4aab-9bbc-d5b155a4a076@amd.com>
+In-Reply-To: <e4652848-4923-49e1-ad2f-c3c46b8ce5d9@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1788247593-D6F5F87B-36794E49/0/0
-X-purgate-type: clean
-X-purgate-size: 1223
+X-purgate-ID: tlsNG-33051d/1788249169-6F8C54E9-A10EB7F6/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 2336
 
-On 01.09.2026 09:14, Orzel, Michal wrote:
-> On 01-Sep-26 08:54, Jan Beulich wrote:
->> On 31.08.2026 17:48, Orzel, Michal wrote:
->>> On 27-Aug-26 17:18, Oleksii Kurochko wrote:
->>>> --- a/xen/drivers/char/console.c
->>>> +++ b/xen/drivers/char/console.c
->>>> @@ -31,6 +31,7 @@
->>>>  #include <xen/warning.h>
->>>>  #include <xen/pv_console.h>
->>>>  #include <asm/setup.h>
->>> NIT: This can be dropped - I don't see anything relying on it in this file.
+On 27.08.2026 18:07, Oleksii Kurochko wrote:
+> On 8/27/26 5:56 PM, Jan Beulich wrote:
+>> On 27.08.2026 17:40, Oleksii Kurochko wrote:
+>>> On 8/26/26 2:04 PM, Jan Beulich wrote:
+>>>> --- a/xen/arch/riscv/xen.lds.S
+>>>> +++ b/xen/arch/riscv/xen.lds.S
+>>>> @@ -44,6 +44,8 @@ SECTIONS
+>>>>    
+>>>>            BUGFRAMES
+>>>>    
+>>>> +        *(.srodata)
+>>>> +        *(.srodata.*)
+>>>>            *(.rodata)
+>>>>            *(.rodata.*)
+>>>>            VPCI_ARRAY
+>>>> @@ -92,6 +94,7 @@ SECTIONS
+>>>>            SCHEDULER_ARRAY
+>>>>            HYPFS_PARAM
+>>>>    
+>>>> +        *(.sdata .sdata.*)
+>>>>            *(.data .data.*)
+>>>>            CONSTRUCTORS
+>>>>        } :text
+>>>> @@ -162,6 +165,8 @@ SECTIONS
+>>>>        /* Section for the device tree blob (if any). */
+>>>>        .dtb : { *(.dtb) } :text
+>>>>    
+>>>> +    .riscv.attributes : { *(.riscv.attributes) } :text
+>>>> +
+>>>
+>>> Nit: .riscv.attributes is SHT_RISCV_ATTRIBUTES, i.e. non-alloc.
+>>> :text on it is misleading, and without an explicit address it gets
+>>> sh_addr from .(location counter) after .dtb. Could we use matching the
+>>> idiom used for every other non-alloc section in xen.lds.h:
+>>>     .riscv.attributes 0 : { *(.riscv.attributes) }
+>>> No functional difference either way (objcopy -O binary drops it, and I
+>>> verified a non-alloc output section doesn't advance dot, so nothing
+>>> downstream shifts), so purely consistency.
 >>
->> Did you mean to ask for asm/setup.h to be dropped here, when that's entirely
->> unrelated? If not, the other change you are asking for could surely be done
-> Why are you saying that this is unrelated? Before this change `max_init_domid`
-> declaration was in asm/setup.h and this was the reason for this header to be
-> included here. With this patch, the declaration is moved to dom0less.h and
-> therefore asm/setup.h is no longer needed to be included. I consider it very
-> much related unless I'm missing something.
+>> Well, I compare attributes rather with notes, which we make part of a
+>> segment (on x86 at least). I can drop the :text if it's that what's
+>> needed to get this in, but I'm not fully convinced. But my knowledge
+>> on the purpose and use of attributes also is still somewhat limited.
+> 
+> As I mentioned from functional point of view I don't think that it will 
+> be an issue so generally you could keep :text here.
+> 
+> That why I wrote "Nit:".
+> 
+> Reviewed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
-Hmm, fair point. Yet I'm then still somewhat concerned that asm/setup.h may
-have supplied something else. IOW I'd thus rather leave it to Oleksii to
-make the adjustment in v9, once suitably verified to be correct to do.
+Thanks. I decided to drop :text, after all. The linker actively ignores
+it, producing a PT_RISCV_ATTRIBUTES segment which the linker script
+doesn't even ask for. That likely is a linker quirk, yet at the same
+time the linker script likely means to actually spell out an attributes
+segment (to which this section then should be assigned).
 
 Jan
 
