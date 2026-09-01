@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 096EEC624D3
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2026 16:01:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1404838.1638508 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1319C624D3
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2026 16:02:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1404841.1638516 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1QvJ-0006LD-G5; Tue, 01 Sep 2026 16:01:21 +0000
+	id 1x1Qvm-0006il-P2; Tue, 01 Sep 2026 16:01:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1404838.1638508; Tue, 01 Sep 2026 16:01:21 +0000
+Received: by outflank-mailman (output) from mailman id 1404841.1638516; Tue, 01 Sep 2026 16:01:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1QvJ-0006L6-CX; Tue, 01 Sep 2026 16:01:21 +0000
-Received: by outflank-mailman (input) for mailman id 1404838;
- Tue, 01 Sep 2026 16:01:20 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x1QvI-0006Kt-Nw
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 16:01:20 +0000
+	id 1x1Qvm-0006ie-Lm; Tue, 01 Sep 2026 16:01:50 +0000
+Received: by outflank-mailman (input) for mailman id 1404841;
+ Tue, 01 Sep 2026 16:01:49 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x1Qvl-0006hG-DY
+ for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 16:01:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1QvH-00F4kI-Pq
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 18:01:19 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1x1Qvk-001N3C-QQ
+ for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 18:01:48 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a96f6cf-8faa-0a2a0a5109dd-0a2a4502a60c-2
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 18:01:19 +0200
-Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a96f6e5-bab6-0a2a0a5309dd-0a2a4507e316-28
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 18:01:48 +0200
+Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a96f6cf-6ca4-0a2a45020019-d155dd33b0d9-3
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 18:01:19 +0200
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-484415c8cb1so47376f8f.2
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 09:01:19 -0700 (PDT)
+ id 6a96f6ec-b4ea-0a2a45070019-d155dd34f06f-3
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 18:01:48 +0200
+Received: by mail-wr1-f52.google.com with SMTP id
+ ffacd0b85a97d-482fc2b44a7so60030f8f.2
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 09:01:48 -0700 (PDT)
 Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
  [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48442d6e9cfsm6093550f8f.22.2026.09.01.09.01.18
+ ffacd0b85a97d-48448e13db0sm61769f8f.0.2026.09.01.09.01.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 01 Sep 2026 09:01:18 -0700 (PDT)
+ Tue, 01 Sep 2026 09:01:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,157 +52,150 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Content-Language:References:Cc:To:Subject:From:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788278479; x=1788883279; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=Uxs4dwxHLDrtpiehWQZcP6/OkQeIFJi5v0FYqUxYdnc=;
-        b=nB38xEYMcSjGlnTkv426FbLxZd3cM++3MZ5URx4z/gYfIWglW6LJJBeh9JsQb0FkpT
-         jLPdIaGeDY66ZOe47uCDSZVE0T3tNBDWeSXbe+98twnquQmMW3fdcBFPozhCPUrnlju5
-         kc9fx2H7Dqa56jdECk/iaVS2KbtVGT84qWUsfcFR+HF4xNMENflMJbEStBLOW1Kc3jtg
-         hmijjC0f6ElcQ2RUQAx1vSLPdex7lCf5zkYBu9HkzYWe4TcYKjO4B7cXK5NNCBhLEHgI
-         xmT2IUo5H/gTjgVv7DjGHzTNS5zVuIZBAal2vv+U3ciODv1880rbaT4Oe3GBnlntj9CM
-         gmTw==
+        d=gmail.com; s=20251104; t=1788278508; x=1788883308; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=xf85yesiKQUQie1aMQO7OcAiS04pkkycYfzDVlZGMZI=;
+        b=h+cL0n/NXvJIIbK2qWYICcb1rQnWt18XQpzCwZzpkP+rufxW110QXau782VBML0cqE
+         Xy2/R8YWNjDl/T5NPRCw2j46j7+fP9SABvLLyejLQlHEG1YMaikhy9kF5yPHFrbBahkj
+         1HMN0Q3AKLjKAmukV6mP0ewlvahrJvd14WBUlPq5uAdFKhyJHPCf1pe4KKeDSFaIsRoP
+         tR38o24ftOtW/MpZZQN/pJYbmfsGEkAfVcjILWGmtg/4fw+ALzfDSDk1D/xQVzlP6LQ+
+         oAKxqegNku95GeBT38wXwbKH3fh5SoTBzLgjeQvHcwqXANKAVxA7bVCB9mIDJoipMYw4
+         SSRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788278479; x=1788883279;
-        h=content-transfer-encoding:content-type:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Uxs4dwxHLDrtpiehWQZcP6/OkQeIFJi5v0FYqUxYdnc=;
-        b=MWmiIo7M5hJnocagO5aHGonLXEUQB12FFnGAMlA/wA+80WW1MFpWZ/n+g2hfqJ1s89
-         3wXy01CIK1L9MOOQDV4luBEiU+sSQ/UihoKS+zTd9wTnSaJACPovyYaCbfXSifOYqUT5
-         dvcmfztDaD3N6c+AkYO7wMIcIw+43j9gMNJWmZwR3Mq7r3YCmzLl/ny7XdlsGCuI5EpK
-         PA4IRTnH429F2kGXsoeJeJP1iKbAJGrhX5H6fJsA5PHPvTWXvpPdEsGI6jT6a+sh60H5
-         fxvKCNTAymaEvL5w0GDYF0fkwNhmBjElHz9y1GZBdfTsocVLC64XNgqPR5wmgwGCz2le
-         WuQg==
-X-Gm-Message-State: AFuF++mx+ScJJ4ro2tno1sVaYRpi+hV6mQvawcPqZu62FALLRfQE9u3D
-	dDCPvTEwzIPPHbe056eV/hg9z037KxdxAFb1XA76w37IOR+JrLE+kNylhdfdtg==
-X-Gm-Gg: AYBFou28gQATqc5wf0P6AS6hlPUGup+A1PEUEU8Gyj8yLKSc5a+XOMUvtupcwgogcan
-	n5kk5L5nYhoFZZAEbT5oyZ4hAqhfBh3gTGMtNbLgzDiKgt6RE1NNkN3wZM1ec11QQ4lWqDwvXZJ
-	cLQ6qwpOu/Y4GDDLX5KoIKBw5ABbyYcC1Tib8c93PzTP88AKLie/iuv8+Un5CVtpIhhjN+F4Xcr
-	xKjzwqvdLjKaVf0vUYrM6L0819Hl6twpB3yS2lhxXL5zRn8+MsB5gfUItJwTH6SYbjGxMQYzfVG
-	nr784kL1/yq4Seosx/D4J9eHx8KNfmjXroChep1cj/QxO8HZbsKl9z5VMWgnYHofi/knIEVbpyP
-	iGxCg7gx3qQW0WMziNxNsLOMsfwe+dJyVP/dyI1Sh8GkCGDvt/V4VEImP7/3dWS/fKpYS+y2cp9
-	5IHovLLsK1F+ZI5yf1wC/GBTjB8QczHm1gDlnhdO2Ckg2oxPcJT6wJ6QA0lT+bmaxlR+u6HtAbU
-	RZOPYTwC4nLayTJC0jRrX8YtlJFqnHujuJD4NCUNQ==
-X-Received: by 2002:a05:6000:27c6:b0:484:3310:710b with SMTP id ffacd0b85a97d-48441025c15mr13724662f8f.23.1788278478991;
-        Tue, 01 Sep 2026 09:01:18 -0700 (PDT)
-Message-ID: <74fb7d16-7042-4311-a39b-d00e5a0560f8@gmail.com>
-Date: Tue, 1 Sep 2026 18:01:18 +0200
+        d=1e100.net; s=20251104; t=1788278508; x=1788883308;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=xf85yesiKQUQie1aMQO7OcAiS04pkkycYfzDVlZGMZI=;
+        b=m1L5Ph8JfYxK3ii1T7MMxy3p/HyOMCkw/WVEF1RBAf6EI05Cx6qLAV3eRzAR6oFmK1
+         j2jZxPN/wZySk9P3cQaObO2YQBYzb6MqvQ4m7ZVfns1FGqSIj+1uCjmgaaG23HG3dEJO
+         j8qNPwVacTuPLqoPMju5yqq1V8ChFZJt7wLp/Ng9iYHZUXyveMZQ4c+OO9LCunxhS4GS
+         bz/u6HmBMXMIhR8cHqLm2XRXZVRVUsvURMvrM7rG/YbLndF53bG5vQUKDxw6mXDz0Qww
+         DA+Bi7xWfqF9T486tHd1z/6qI6BIlWked/NwuCLtX4jo5YqojHIRPLAPgtLBLAakz3qx
+         wN8A==
+X-Gm-Message-State: AFuF++m5FjALZmnIwjIEfDKwwvLeiKfMOjqVEJ3aZQbByiGu8OcEaLAj
+	bumN0gg+NdM7MeqMgFhpFcsH60MDm4nQ0f2yM0u4CCNJ4mLQqTMn6h8W
+X-Gm-Gg: AYBFou0huOH2Wmd8QbQjqhQ5jQ31e6gj9PvUULPhxsXySBqgTTcBgkf+/VKJ5SWnHuG
+	RYYrVYJ2npeYocgqf5HgdIA8VtYETdTPhutKDLxwVMdcY9zqWl5WVTLjglSDQfgYrxsvpaH89cY
+	UF4zJCQcZ0MnAR2/VpFNnAl12cjsGX2PbqOFLSb42dBJhnGThR7LDgpmcvKOfV8diQroBCwqsic
+	8Xr4ZFDHmYy1LNxJq40h3Mn5Ge34+fPZJIDM9XJ5O5ph9z1xbGts1zkpVMCUDVvgdpQH9H33EV4
+	p3TMNvBw75elzIV1Du8rXba133GruKYFIxWHT6FCAN8QA1hR2EDxi6NmExmqDsC0OPlQL0zJ3x4
+	4mlmeiB9jVRHtFPw4/LJLxo6ZlXJIJOV2kMffGTTkRoXmI7P83PqvtQqb7kHvd2RllF6lPPyCLU
+	BX52A8z2QTBJs9wQlGtasW7ueAaP4sdIhQoJCCRMdjinM4Cx+1BY4NwAEsRUokkHolyNTSEMyjj
+	4FJWfxwecWwH3OawYtzTcZpc9HjsiPLGDmB6iWAPA==
+X-Received: by 2002:adf:e005:0:10b0:484:40f5:da6a with SMTP id ffacd0b85a97d-48440f5dac4mr13730232f8f.15.1788278507963;
+        Tue, 01 Sep 2026 09:01:47 -0700 (PDT)
+Message-ID: <3f6cd361-6349-433e-a7b7-8cc72b31b84e@gmail.com>
+Date: Tue, 1 Sep 2026 18:01:45 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: xen-users@lists.xenproject.org,
- Community Manager <community.manager@xenproject.org>,
- "committers@xenproject.org" <committers@xenproject.org>
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: Xen 4.23 release schedule proposal
+Subject: Re: [PATCH 3/5] xen/riscv: make Svpbmt no longer a required extension
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org, zhangzheng@iscas.ac.cn,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <1787844438.8631fc262581453bbf619ec5b2062170.1a043d52a06000c4f3@vates.tech>
+ <1787844809.8631fc262581453bbf619ec5b2062170.1a043dad34e000c4f3@vates.tech>
+ <59555237-425d-47f0-80b6-b7273cc8d6ec@gmail.com>
+ <1788168989.8631fc262581453bbf619ec5b2062170.1a0572d6c8c000c4f3@vates.tech>
+Content-Language: en-US
+In-Reply-To: <1788168989.8631fc262581453bbf619ec5b2062170.1a0572d6c8c000c4f3@vates.tech>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1788278479-30DC12AC-4D8DEC12/10/73395122804
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ef75cf/1788278508-A78D1AE4-A49D3CD5/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 2884
+X-purgate-size: 3687
 
-Hello everyone,
 
-Following the 8-month release cycle, and taking into account that Xen 
-4.22 was released on July 30, 2026, the next "good" month for a release
-should be March, according to:
-https://lists.xen.org/archives/html/xen-devel/2018-07/msg02240.html
 
-I have two options in mind:
+On 8/31/26 11:36 AM, Baptiste Le Duc wrote:
+> On 2026-08-28 17:58 +0200, Oleksii Kurochko wrote:
+>>
+>>
+>> On 8/27/26 5:33 PM, Baptiste Le Duc wrote:
+>>> required_extensions[] panics at boot if Svpbmt is missing, which is a
+>>> problem on hardware that doesn't implement it.
+>>
+>> Based only on this sentence it isn't clear why it is safe to have SvPBMT
+>> = n and what guarantees that if some memory for a device dma for example
+> 
+> Sorry I'm not used to this kind of terminology, does Svpbmt = n means that MT
+> bits ([62:61]) are equal to 0 = PMA?
 
-Option A:
+Yes, exactly. Sorry for the confusion; by "Svpbmt = n" I meant that the 
+Svpbmt extension is not available/implemented on the platform.
 
-Proposed release date: Wednesday, March 17, 2027
-(~8 months after the Xen 4.22 release)
+> 
+>> should be non-cachable and strongly ordered what will guarantee that.
+>>
+>> So basically something like that should be added to the commit message:
+>> ```
+>> Without the Svpbmt extension, memory attributes (such as cacheability
+>> and ordering) are strictly tied to physical address ranges and enforced
+>> by the hardware's Physical Memory Attributes (PMA) checker.
+>>
+>> In this configuration, supervisor software relies on the platform's
+>> memory map: peripheral device registers (MMIO) are physically mapped
+>> into hardware-defined I/O regions (which are implicitly non-cacheable
+>> and strongly-ordered), while regular RAM is mapped as cacheable main
+>> memory.
+>>
+>> S-mode paging can safely map these physical ranges without specifying
+>> page-based memory types in the PTEs, as the hardware MMU and PMA
+>> pipeline will correctly bypass caches for MMIO accesses based on the
+>> target physical address.
+> I think this could go in the previous paragraph as it only concerns
+> of the configuration you mentionned.
+> 
+>> Furthermore, on platforms that either feature
+>> fully hardware-coherent DMA or do not expose non-coherent DMA agents to
+>> the OS, page-level programmatic cache control via Svpbmt is not
+>> required, making it safe to boot and run when Svpbmt is absent.
+> If we have a platforms that doesn't have both of these feature, what
+> would happen?
 
-Last posting date: Friday, December 25, 2026
-(~16 weeks from now)
+Regarding your question about what happens if a platform has 
+non-coherent DMA and also lacks Svpbmt:
 
-Patches adding new features are expected to be posted to the mailing 
-list by this date, although they do not necessarily need to be in their 
-final version.
+In that scenario, we must rely on other standard RISC-V mechanisms to 
+guarantee coherence. Typically, this is handled in one of two ways:
 
-Feature freeze: Friday, January 15, 2027
-(+3 weeks from the Last posting date)
+1. PMA-backed non-cacheable memory pools: The operating system or 
+hypervisor must allocate DMA buffers from a specific physical address 
+range that the hardware's Physical Memory Attributes (PMA) checker 
+defines as implicitly non-cacheable.
+2. Software-managed cache coherence (Zicbom): If we must allocate DMA 
+buffers from regular cacheable RAM on a non-coherent platform, the 
+platform must implement the Zicbom extension. Software (Xen/Linux) will 
+then use Cache-Block Operations (CBOs) like `cbo.clean`, `cbo.flush`, 
+and `cbo.inval` to manually flush and invalidate caches before and after 
+DMA transactions.
+3. Some platform specific solution...
 
-Patches adding new features should be committed by this date.
-Straightforward bug fixes may continue to be accepted by maintainers.
+So indeed, there are several hardware design combinations, but compliant 
+platforms without Svpbmt must either enforce coherence in hardware, 
+provide dedicated non-cacheable physical memory via PMA, or implement 
+Zicbom for software-managed coherence.
 
-Code freeze: Friday, February 5, 2027
-(+3 weeks from the Feature freeze)
+> Do we need to add a check in Xen code?
 
-Bug fixes only.
+Good question. Generally, it would definitely be good to check this, but 
+I’m not sure how we could do that at runtime.
 
-Hard code freeze: Friday, February 26, 2027
-(+3 weeks from the Code freeze)
+The best approach I have in mind is to require the user to explicitly 
+set a RISCV_ISA_SVPBMT configuration option (which doesn’t exist yet and 
+would need to be introduced) if the platform supports SvPBMT.
 
-Only bug fixes for serious bugs (including regressions) and low-risk 
-fixes should be accepted.
-
-Final commits: Friday, March 12, 2027
-(+2 weeks from the Hard code freeze)
-
-Branch off staging-4.23.
-
-Release: Wednesday, March 17, 2027
-
-Considering that there are several holidays at the end of December and 
-in January, I would also consider the following schedule:
-
-Option B:
-
-Proposed release date: Wednesday, March 24, 2027
-(~8 months after the Xen 4.22 release)
-
-Last posting date: Friday, January 8, 2027
-
-Patches adding new features are expected to be posted to the mailing 
-list by this date, although they do not necessarily need to be in their 
-final version.
-
-Feature freeze: Friday, January 22, 2027
-(+2 weeks from the Last posting date)
-
-Patches adding new features should be committed by this date.
-Straightforward bug fixes may continue to be accepted by maintainers.
-
-Code freeze: Friday, February 12, 2027
-(+3 weeks from the Feature freeze)
-
-Bug fixes only.
-
-Hard code freeze: Friday, March 5, 2027
-(+3 weeks from the Code freeze)
-
-Only bug fixes for serious bugs (including regressions) and low-risk 
-fixes should be accepted.
-
-Final commits: Friday, March 19, 2027
-(+2 weeks from the Hard code freeze)
-
-Branch off staging-4.23.
-
-Release: Wednesday, March 24, 2027
-
-I slightly prefer Option B.
-
-Please don't hesitate to provide your feedback.
-
-If there are no objections to Option B, I plan to update the Wiki page
-Xen_Project_X.YY_Release_Notes to make it easier to find our final schedule,
-especially for people who are not following the xen-devel mailing list.
-
-As an additional benefit, it will also be accessible via SUPPORT.md (in the
-Wiki at https://xenbits.xen.org/docs/unstable-staging/support-matrix.html).
-
-Thanks, and have a good weekend.
-
-Best regards,
-Oleksii
+~ Oleksii
 
