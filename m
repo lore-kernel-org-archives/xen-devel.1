@@ -4,39 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6303C61DD3
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2026 12:08:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1404722.1638415 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2BD4C624D4
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2026 13:17:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1404756.1638436 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1NHF-00012q-Nh; Tue, 01 Sep 2026 12:07:45 +0000
+	id 1x1OML-0002jC-Na; Tue, 01 Sep 2026 13:17:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1404722.1638415; Tue, 01 Sep 2026 12:07:45 +0000
+Received: by outflank-mailman (output) from mailman id 1404756.1638436; Tue, 01 Sep 2026 13:17:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1NHF-00012j-KK; Tue, 01 Sep 2026 12:07:45 +0000
-Received: by outflank-mailman (input) for mailman id 1404722;
- Tue, 01 Sep 2026 12:07:44 +0000
+	id 1x1OML-0002j5-Ka; Tue, 01 Sep 2026 13:17:05 +0000
+Received: by outflank-mailman (input) for mailman id 1404756;
+ Tue, 01 Sep 2026 13:17:04 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrewprecious388@gmail.com>) id 1x1NHE-00012d-Hx
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 12:07:44 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x1OMJ-0002iz-TJ
+ for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 13:17:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1NHD-008Aqp-4g
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 14:07:43 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1x1OMH-008Opx-Tr
+ for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 15:17:01 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrewprecious388@gmail.com>)
- id 6a96c00b-8faa-0a2a0a5109dd-0a2a4503c66c-4
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 14:07:42 +0200
-Received: from [209.85.216.47] (helo=mail-pj1-f47.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrewprecious388@gmail.com>)
- id 6a96c00d-fae8-0a2a45030019-d155d82faddb-3
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 14:07:42 +0200
-Received: by mail-pj1-f47.google.com with SMTP id
- 98e67ed59e1d1-3964dfb5a69so5539213a91.1
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 05:07:42 -0700 (PDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a96d048-8faa-0a2a0a5109dd-0a2a450cc086-14
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 15:17:01 +0200
+Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a96d04d-f479-0a2a450c0019-d155802cc9d3-3
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 15:17:01 +0200
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-49ccfbe062eso25308395e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 06:17:01 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49cdce1a3fesm70718595e9.12.2026.09.01.06.16.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 01 Sep 2026 06:17:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,233 +53,137 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1788264459; cv=none;
-        d=google.com; s=arc-20260327;
-        b=hxEGPCqgTyRvEQu6tw/Z19mtIXGCfQNzzCbYE8TXMvTzmTEGxAhZV7LL/wkVWpCuZI
-         KytjxTQC6QNK58ArMd5dXlbnfr40ozVc2O/tcjJfHpIQlL/Ov/Z7u3ewH0zL3mETTCay
-         NxVILfn2MfCnc2LXLyokSG7flCt4BCCouFtKIdy9xBEi3bqAXLol/2AWKex3zRODD78h
-         TakgPBapweCTt3DxpNY6y4ifj6V/tms7T3/kkLpHMG0Ei33I5sPuV9Wwk68cyikGZpO7
-         om9Yh3uDB6j4ay8w2eRf2wOcF3hNzsf5sbJBLa2Ate82z9gZ1/4JJo5JJ/4esAxcFZU/
-         UxQQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=xLtE8fa0CCYs8f89x0z6yjpC0T3F/CEkk97riHXdv2o=;
-        fh=otpr6U4PuVZ9BZlj6EokwtOMbvR2IUSgfzEtVbeKrWM=;
-        b=ArDWPs4E1bJzXJvuc6cnklrPf/d3V8Zg0nf9vWQZmzcEwHAkuxQGq+bfgtP73ZKkXA
-         8j5Z8quFiItOinpEc91UUQHHsgFzjPLRIDroFnmlsr0xgpWxhcVgAjk7Zb95TspuPZVk
-         H+x3Jy7zSMtP8Tt5Wmj9NqHLEusRKAOc8UoXxFG3yUTQMuutpKi2VBy2qNpM6g1R5vCI
-         iVcDwjZHj7RBFoIJSt1UBXTbAf6OZkmMCnbZu0d2NTE0SmpHPdNdkndkLjWmmas85U83
-         OT2lRda8kPX+b5VNmBAMmBP+dBO64aBMF2AEy01tJi1qnowU4mNOKzQgqjv0m6N+WY0P
-         dSLg==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788264459; x=1788869259; darn=lists.xenproject.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+        d=suse.com; s=google; t=1788268621; x=1788873421; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=xLtE8fa0CCYs8f89x0z6yjpC0T3F/CEkk97riHXdv2o=;
-        b=Kp3DqwLhnQ7uMRqMMVTIrsCxyMY+WXyLfhe8pURhPEcjBxLWXTrv7Hg58Zr0hU+gHY
-         C3dcFvrH0E6HTXOV6RhmWNTrw114JfW+eRaZoexmiCXRApR1oCrR8yetLT/uo9Mg43Pq
-         ZgafQGkwpc6xTM15d0dZO9PujCyLzRobhjedo6Kwpo7Ve9gwopXoCm3068gUD8LwalKt
-         caj9JHZrCjbc4bXv1lzxs08/19j2O9RxbS6q8wqXz0ttIkN3a+F6mJIblNZxyZ+Tv/6q
-         T6CG6GHu3bJmIdXmiDMfy0UYMn0/GcQOD7uzxoLTeh7VP2kEnZNXkpn0nAHddtpm3pr7
-         e7og==
+        bh=UHcJZ7qe8EHcanx4NmTqt9bQxkl+VRDPvbq2agGEMR4=;
+        b=SKrh5Xn0Y76UTgnH+RqvvXGSm/i49pQsfOSx6OH6BfTXNQvgypCxKGu4uslUPERI7q
+         XpNHyWn3AMdByURzOLlZYs7oZdR8rJO4b5Blz9Nvp0UP1aecydWb3qTAQ1L/frb28rqE
+         HnSZUjLrwJsYTqgkhtWycZ7x2Tc3K7Vfsn+GBari9U+UTXq6qDKI0rZ6di7lf5JXaKcT
+         g1NCRaeE4UY02Ud8G6bhAw9sfEsG3GjpUk3k1nvLiC8iW46pFMS01v9YoBjXIVgKkpc9
+         E0u+I+CRcrw8ykJNi+DlEQ1Vs4yFHFIDkbqVBnU6rI9Bs0dCs0mTaRE0UgSafxkpPnp2
+         M1TQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788264459; x=1788869259;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=xLtE8fa0CCYs8f89x0z6yjpC0T3F/CEkk97riHXdv2o=;
-        b=Be/zTrps2T/w71eGcD09sIyvrgwbtptAwz/xztQBGB2/yzwiO97gkhuXYPrTDglujt
-         r87iLZlDg8FMn//xbG5Mgv8/sg1c5wt0THz4h0TsmmYxscKDq+uFcwvmQrSKl/cbAL7e
-         7GDvfPxBY1mB9vuKg77jv4DQNvJ7l6jElHiS+q21VS+L38Af/lyc7Fa2ODvOZjEmvjth
-         ZrLVnf6ZJfAKo2TSbpUA8nBpt54ciR13gnGr2cOveJ4MZw/ZPQ3+EBdRImHSVOY9LBsI
-         p3waGcVOsfotxFxiCAoloTOT5IYfb4fDcvLp+n5P4EOi3HZPgtkUUe9HztAQo9ZQxJnJ
-         hQIw==
-X-Forwarded-Encrypted: i=1; AKwUvBwFbszFW8yEi4t19+Q9p+aVyZ4xROZhs7bnPb/PXuxd7gsqmHW84m0laJ4nfc+mi8555ELoH/DDgAA=@lists.xenproject.org
-X-Gm-Message-State: AFuF++m7S6fh66/RwPAQfRYhFwIHPpHnFCYhhfGx1IAV48pv2CrQT1vV
-	DX1AsYUTpRkgE2shoO1Tr6XYCdawIjfyueGd79ewkyDNj2YBcs8V5WBOcJnQjForEJLSm4w2fJW
-	wijs0s7z9JtFmQDEQ0bmxFt54s+NOcHg=
-X-Gm-Gg: AYBFou0hIvkMEZADL7AbKI38w+ukhNsssUTyhcS3pyZIT7g2AM128ieIOWCOIOPHb5N
-	JzYuJVLCZ78KKcWO03SQmLBJbcrA671D/jUkZSnf0WDJm4Q6GTdMPZ2l0Omz1cJU2cWbfCipIE1
-	KDgmbAJyfhfqHmYz3nJgNS9F/Lu1pMpaFKlIPbCB8GEEjlA5T2EM1s6FcZtIl6LStFcCtiuc7YS
-	7nS56YNDj17rUHVsmCy/8OkHNPrMq91a6OiBZdNTUajajyARldptUSU3ONCA+0R/znr+UST9AK9
-	5ojHNlnCJEtcDdvxOj+aLbAlcF2qXq3CS0kpuD/c2N8=
-X-Received: by 2002:a17:90b:3849:b0:398:9be8:ea64 with SMTP id
- 98e67ed59e1d1-39907e64255mr10696318a91.17.1788264458485; Tue, 01 Sep 2026
- 05:07:38 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1788268621; x=1788873421;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=UHcJZ7qe8EHcanx4NmTqt9bQxkl+VRDPvbq2agGEMR4=;
+        b=ptUbHRMoNeeSuIHfa00NWFwPYTsYWw40gRtj7nWuJ5FMDliDf1SfxjLRshRD7omkQG
+         mDhfeeFxdcK65jYt1ZbWWstVi686M2OEd3byEkkF1De2137KdrLpYDtQgODzYR6tefBL
+         OcGxiroTOV+97AfO+ILNLhdurDcdunUjfec1suxQk+EmgdaZfEKmbVeWyOkKZ/0PkO9A
+         mKwiTrUg77H/U1TMigSUm4y8lzEt/eb+wIDNbRIMichFd8nhv8miVoHpwVj4Kq/n0xWL
+         kfqiOK1LCVGa6mKZ9wBFN0F74DESYQH2j8TJOzlIcF21XbwFKIibVMJRVsE0WeVSWAfC
+         IRNg==
+X-Forwarded-Encrypted: i=1; AHgh+RrqWcAGzwdZlQ1BMqgAEKJcm4KqzM7ylO2bTsSxtzyrUPHJpGLbCeD3YrFTsxBoIjmnzEqFpAD0+iA=@lists.xenproject.org
+X-Gm-Message-State: AFuF++kQqRlzhDfyPNul+tzs2Vl32P6dT3nRD8bzTkj2qXPJ61mwngS3
+	WMLzWw1+Eld2ebCr8OWybeGo99BxGSmfsF/V/VFH1v4NEqIoGK7J4Kpu/q58tlm64g==
+X-Gm-Gg: AR+sD129ISSRWTpaPHI5dqmx6l7oNNcr7JBPLIaG4AJ9sGeB4GsUPe51vd1Az5R7ekV
+	KGiRN/JB59kYSm1Sl9ZdkDYlU9GUz7Zh8i/8lFrJrysB24X/tP3jRS06EJlOoPdyCm0+q4p7rMJ
+	1Z/kCkKUt/b71Gdmdp9q+SMa1ol51p8zQVr1JKo/6KVrIfZh95wguRgUn0gu6Bm/Vf/mLK6M4wk
+	qoaLceuCULhq6VobNHx0+KFK85iSMW61XO1AcQFsDCfvgxFcbozP0vxdQlnS1urkUV2DQY+8/Gj
+	kYmyB5ocyGaVLxM1aDEk61YTa3bV/zkwfQAeBuci2x4Aht4kPngSyl8pe3vovthNP34Z2Hn/wS9
+	Ztblp3L5OiAkliAzBr8PCaXuFc3oA0MJrPmPEisuAgA202Xe1eheonTvefIvCIqmHL1/QRUlgl8
+	J0Tro+zUl1ChRzDnShM92zSvEHW9dJM7pLl4QRdrakNYBFjGJjjRS+WXSXHurfftNiFbF4j7rql
+	PLL2kFBniUtbyXzp0vBiiGuPFoiYjezzPT0wzPTQh8hckHos9r6
+X-Received: by 2002:a05:600c:8b86:b0:493:f5bf:4dc6 with SMTP id 5b1f17b1804b1-49b91c2777emr603425715e9.7.1788268621206;
+        Tue, 01 Sep 2026 06:17:01 -0700 (PDT)
+Message-ID: <16110ecc-fc0d-4b9d-a958-2a75ca60b69f@suse.com>
+Date: Tue, 1 Sep 2026 15:16:58 +0200
 MIME-Version: 1.0
-References: <20260825184605.79318-1-andrewprecious388@gmail.com> <22091019-92ea-4de5-b470-2eb40d819dd1@suse.com>
-In-Reply-To: <22091019-92ea-4de5-b470-2eb40d819dd1@suse.com>
-From: Andrew Precious <andrewprecious388@gmail.com>
-Date: Tue, 1 Sep 2026 15:07:26 +0300
-X-Gm-Features: AcwNN1VdrC4l3ob9NTTImsBJPzmtP5J40m9j3_bpLKuCABpc8aoDBlS-3N4StVA
-Message-ID: <CAF14T9=mjBE6uREhtJq650qbdJSVqmuMB+9zuE+QZuPwEKjqRA@mail.gmail.com>
-Subject: Re: [PATCH] stubdom: Fix GCC 14 -Wmemset-elt-size compiler warnings
- in PolarSSL
-To: Jan Beulich <jbeulich@suse.com>
-Cc: jgross@suse.com, samuel.thibault@ens-lyon.org, 
-	xen-devel@lists.xenproject.org
-Content-Type: multipart/alternative; boundary="000000000000d00357065a6ac394"
-X-purgate-ID: tlsNG-33051d/1788264462-6FEC24E9-62B77182/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 1/5] x86/boot: Remove "cc" clobber from memcmp()
+To: Mauricio Faria de Oliveira <mfo@igalia.com>
+Cc: kernel-dev@igalia.com, linux-kernel@vger.kernel.org,
+ xen-devel@lists.xenproject.org, Thomas Gleixner <tglx@kernel.org>,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+ "H. Peter Anvin" <hpa@zytor.com>, Juergen Gross <jgross@suse.com>,
+ Alexey Dobriyan <adobriyan@gmail.com>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Gerst <brgerst@gmail.com>
+References: <20260822-pvh-kasan-inline-v9-0-e70ef3b75b6a@igalia.com>
+ <20260822-pvh-kasan-inline-v9-1-e70ef3b75b6a@igalia.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260822-pvh-kasan-inline-v9-1-e70ef3b75b6a@igalia.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d25034/1788268621-038D5A5B-96896E42/0/0
 X-purgate-type: clean
-X-purgate-size: 6524
+X-purgate-size: 1894
 
---000000000000d00357065a6ac394
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On 22.08.2026 20:33, Mauricio Faria de Oliveira wrote:
+> According to the GCC documentation, conditions in the flags register
+> (e.g., "=@ccnz") are output operands [1] and the compiler is aware [2].
+> 
+> Also, clobbers (e.g., "cc") may not overlap with an output operand [2].
+> 
+> Thus, remove the "cc" clobber as it is redudant, and overlaps with, the
+> "=@ccnz" output operand.
+> 
+>     """
+>     6.11.2.4 Flag Output Operands
+> 
+>         On some targets, a special form of output operand exists by which
+>         conditions in the flags register may be outputs of the asm. [...]
+> 
+>     6.11.2.6 Clobbers and Scratch Registers
+> 
+>         While the compiler is aware of changes to entries listed in the
+>         output operands, [...]
+> 
+>         Clobber descriptions may not in any way overlap with an input or
+>         output operand. [...]
+>     """
+> 
+> Reported-by: "H. Peter Anvin" <hpa@zytor.com>
+> Link: https://lore.kernel.org/all/5e19b195-0ca2-4510-81cb-497b40e4aaf5@zytor.com/
+> Fixes: a8c171c107c0 ("x86/boot: Add volatile, clobbers and zero-length test in memcmp()")
+> Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
+> Link: https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Flag-Output-Operands [1]
+> Link: https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Clobbers-and-Scratch-Registers-1 [2]
 
-I was at first deliberating whether to send further patches because the
-current successor of PolarSSL is MbedTLS. Polarssl is now legacy & not
-maintained(polarssl was acquired by ARM).
-Options:
-1. Continual patching/maintaining a legacy library.
-2. Upgrade to MbedTLS which will require alot of API changes.
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-On Wed, Aug 26, 2026 at 9:33=E2=80=AFAM Jan Beulich <jbeulich@suse.com> wro=
-te:
+> --- a/arch/x86/boot/string.c
+> +++ b/arch/x86/boot/string.c
+> @@ -40,7 +40,7 @@ int memcmp(const void *s1, const void *s2, size_t len)
+>  	asm volatile("test %3, %3\n\t"
+>  		     "repe cmpsb"
+>  		     : "=@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len)
+> -		     : : "cc", "memory");
+> +		     : : "memory");
 
-> On 25.08.2026 20:46, Andrew Mbugua wrote:
-> > When compiling Xen with GCC 14, I get a compiler warning originating
-> from the /polarssl-x86_64/library about a memset element size mismatch:
-> >
-> > ssl_tls.c: In function =E2=80=98ssl_session_reset=E2=80=99:
-> > ssl_tls.c:1778:5: warning: =E2=80=98memset=E2=80=99 used with length eq=
-ual to number of
-> elements without multiplication by element size [-Wmemset-elt-size]
-> > 1778 |     memset( ssl->ctx_enc, 0, 128 );
-> > |     ^~~~~~
-> > ssl_tls.c:1779:5: warning: =E2=80=98memset=E2=80=99 used with length eq=
-ual to number of
-> elements without multiplication by element size [-Wmemset-elt-size]
-> > 1779 |     memset( ssl->ctx_dec, 0, 128 );
-> > |     ^~~~~~
-> >
-> > This patch introduces a build-time patch to PolarSSL that replaces the
-> hardcoded 128 byte length with a dynamic sizeof(), thus allowing clean
-> compilation without warnings.
->
-> First a formal note: Commit messages want limiting to 75 characters per
-> line (some even say 72).
->
-> Then: You introduce a patch which isn't used anywhere. What use is such
-> a patch? You also ...
->
-> > Signed-off-by: Andrew Mbugua <andrewprecious388@gmail.com>
-> > ---
-> >  stubdom/patches/polarssl-gcc14-memset.patch | 13 +++++++++++++
-> >  1 file changed, 13 insertions(+)
-> >  create mode 100644 stubdom/patches/polarssl-gcc14-memset.patch
->
-> ... introduce it in a new patches/ subdir, when all other patches live
-> right beneath stubdom/.
->
-> > --- /dev/null
-> > +++ b/stubdom/patches/polarssl-gcc14-memset.patch
-> > @@ -0,0 +1,13 @@
-> > +--- a/library/ssl_tls.c
-> > ++++ b/library/ssl_tls.c
-> > +@@ -1775,8 +1775,8 @@
-> > +     memset( ssl->iv_dec, 0, 16 );
-> > +     memset( ssl->mac_enc, 0, 32 );
-> > +     memset( ssl->mac_dec, 0, 32 );
-> > +-    memset( ssl->ctx_enc, 0, 128 );
-> > +-    memset( ssl->ctx_dec, 0, 128 );
-> > ++    memset( ssl->ctx_enc, 0, sizeof( *ssl->ctx_enc) );
-> > ++    memset( ssl->ctx_dec, 0, sizeof( *ssl->ctx_dec) );
->
-> Don't you mean sizeof(ssl->ctx_enc) and sizeof(ssl->ctx_dec) respectively=
-?
-> Otherwise it looks like you're making a bad situation worse.
->
-> Judging from surrounding style, there also looks to be a blank missing
-> each,
-> ahead of the new inner closing parenthesis.
->
-> Jan
->
+In fact I'm using a modified gcc which properly rejects such conflicting
+uses of output and clobber. ("cc" clobbers are redundant on x86 anyway.)
 
---000000000000d00357065a6ac394
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">I was at first deliberating whether to send further patche=
-s because the current successor of PolarSSL is MbedTLS. Polarssl is now leg=
-acy &amp; not maintained(polarssl was acquired by ARM).<br>Options:<br>1. C=
-ontinual patching/maintaining a legacy library.<br>2. Upgrade to MbedTLS wh=
-ich will require alot of API changes.<br></div><br><div class=3D"gmail_quot=
-e gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Aug =
-26, 2026 at 9:33=E2=80=AFAM Jan Beulich &lt;<a href=3D"mailto:jbeulich@suse=
-.com">jbeulich@suse.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_=
-quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,=
-204);padding-left:1ex">On 25.08.2026 20:46, Andrew Mbugua wrote:<br>
-&gt; When compiling Xen with GCC 14, I get a compiler warning originating f=
-rom the /polarssl-x86_64/library about a memset element size mismatch:<br>
-&gt; <br>
-&gt; ssl_tls.c: In function =E2=80=98ssl_session_reset=E2=80=99:<br>
-&gt; ssl_tls.c:1778:5: warning: =E2=80=98memset=E2=80=99 used with length e=
-qual to number of elements without multiplication by element size [-Wmemset=
--elt-size]<br>
-&gt; 1778 |=C2=A0 =C2=A0 =C2=A0memset( ssl-&gt;ctx_enc, 0, 128 );<br>
-&gt; |=C2=A0 =C2=A0 =C2=A0^~~~~~<br>
-&gt; ssl_tls.c:1779:5: warning: =E2=80=98memset=E2=80=99 used with length e=
-qual to number of elements without multiplication by element size [-Wmemset=
--elt-size]<br>
-&gt; 1779 |=C2=A0 =C2=A0 =C2=A0memset( ssl-&gt;ctx_dec, 0, 128 );<br>
-&gt; |=C2=A0 =C2=A0 =C2=A0^~~~~~<br>
-&gt; <br>
-&gt; This patch introduces a build-time patch to PolarSSL that replaces the=
- hardcoded 128 byte length with a dynamic sizeof(), thus allowing clean com=
-pilation without warnings.<br>
-<br>
-First a formal note: Commit messages want limiting to 75 characters per<br>
-line (some even say 72).<br>
-<br>
-Then: You introduce a patch which isn&#39;t used anywhere. What use is such=
-<br>
-a patch? You also ...<br>
-<br>
-&gt; Signed-off-by: Andrew Mbugua &lt;<a href=3D"mailto:andrewprecious388@g=
-mail.com" target=3D"_blank">andrewprecious388@gmail.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 stubdom/patches/polarssl-gcc14-memset.patch | 13 +++++++++++++<b=
-r>
-&gt;=C2=A0 1 file changed, 13 insertions(+)<br>
-&gt;=C2=A0 create mode 100644 stubdom/patches/polarssl-gcc14-memset.patch<b=
-r>
-<br>
-... introduce it in a new patches/ subdir, when all other patches live<br>
-right beneath stubdom/.<br>
-<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/stubdom/patches/polarssl-gcc14-memset.patch<br>
-&gt; @@ -0,0 +1,13 @@<br>
-&gt; +--- a/library/ssl_tls.c<br>
-&gt; ++++ b/library/ssl_tls.c<br>
-&gt; +@@ -1775,8 +1775,8 @@<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0memset( ssl-&gt;iv_dec, 0, 16 );<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0memset( ssl-&gt;mac_enc, 0, 32 );<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0memset( ssl-&gt;mac_dec, 0, 32 );<br>
-&gt; +-=C2=A0 =C2=A0 memset( ssl-&gt;ctx_enc, 0, 128 );<br>
-&gt; +-=C2=A0 =C2=A0 memset( ssl-&gt;ctx_dec, 0, 128 );<br>
-&gt; ++=C2=A0 =C2=A0 memset( ssl-&gt;ctx_enc, 0, sizeof( *ssl-&gt;ctx_enc) =
-);<br>
-&gt; ++=C2=A0 =C2=A0 memset( ssl-&gt;ctx_dec, 0, sizeof( *ssl-&gt;ctx_dec) =
-);<br>
-<br>
-Don&#39;t you mean sizeof(ssl-&gt;ctx_enc) and sizeof(ssl-&gt;ctx_dec) resp=
-ectively?<br>
-Otherwise it looks like you&#39;re making a bad situation worse.<br>
-<br>
-Judging from surrounding style, there also looks to be a blank missing each=
-,<br>
-ahead of the new inner closing parenthesis.<br>
-<br>
-Jan<br>
-</blockquote></div>
-
---000000000000d00357065a6ac394--
+Jan
 
