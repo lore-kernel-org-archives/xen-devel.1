@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3B78C61DFD
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 06:34:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405086.1638639 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CBD8C61DD6
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 06:35:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405098.1638649 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1eY1-0005sI-0Q; Wed, 02 Sep 2026 06:34:13 +0000
+	id 1x1eYg-0006P6-9n; Wed, 02 Sep 2026 06:34:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405086.1638639; Wed, 02 Sep 2026 06:34:12 +0000
+Received: by outflank-mailman (output) from mailman id 1405098.1638649; Wed, 02 Sep 2026 06:34:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1eY0-0005sB-U9; Wed, 02 Sep 2026 06:34:12 +0000
-Received: by outflank-mailman (input) for mailman id 1405086;
- Wed, 02 Sep 2026 06:34:11 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x1eYg-0006Ox-6G; Wed, 02 Sep 2026 06:34:54 +0000
+Received: by outflank-mailman (input) for mailman id 1405098;
+ Wed, 02 Sep 2026 06:34:53 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x1eXz-0005s1-Lp
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 06:34:11 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x1eYf-0006OY-4V
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 06:34:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1eXy-005yX5-Uv
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 08:34:10 +0200
+ id 1x1eYe-00AOt2-HT
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 08:34:52 +0200
 Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a97c35d-2eae-0a2a0a5409dd-0a2a45038600-26
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 08:34:10 +0200
-Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ id 6a97c386-8faa-0a2a0a5109dd-0a2a450388c4-10
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 08:34:52 +0200
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
  by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a97c362-fae8-0a2a45030019-d1558031d141-3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 08:34:10 +0200
-Received: by mail-wm1-f49.google.com with SMTP id
- 5b1f17b1804b1-4995b0343c1so6587415e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 23:34:10 -0700 (PDT)
+ id 6a97c387-fae8-0a2a45030019-d155dd31b190-3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 08:34:47 +0200
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-484374f54d0so421653f8f.3
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 23:34:47 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48448e72df2sm4547374f8f.1.2026.09.01.23.34.09
+ ffacd0b85a97d-48448ee9cf7sm4347259f8f.25.2026.09.01.23.34.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 01 Sep 2026 23:34:10 -0700 (PDT)
+ Tue, 01 Sep 2026 23:34:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,49 +55,50 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788330850; x=1788935650; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788330887; x=1788935687; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=24jTXd7IeCDXlRGfWEqjcNP/1rsnFx4k/2yK1e1bOdo=;
-        b=XiNITGlNNMzwI9V4myjEXTeVytpYgVBGDf8wNIEA3MP9Q6G9oqV/xN0czzAQzw1279
-         5zKhXPOkygQpEEnLbiH9s6iPRsNW6g5e8doaMZwdkeTnAlXNhW4dgPcYQuIAI86/APEP
-         BwFQ5lMgg4dCdTyk5r9MPTeCPFmTbz5N9c5zDdB+UsyFolJBf1OOoCMHZgLI/0lNN8XA
-         ULyj7FuFmf90OSWCimahWPuqNlQ0u0hCwoSWta5EHv065+2//SWv3jU905fIkfKOQk+S
-         +tmbBeA7LCYeQN6sUi/tMrvr0gd4MkW7CHeSR7ht3AdQh8ibtJy9ku2pFefvoaRImXTY
-         /v2w==
+        bh=4M7ZO90BkV+o7MOoEhTcnL8On+MmsrDJefwVfmLqVG0=;
+        b=Jcf5lt7I0pywFWTZTdwXoYzOtjUMNO9JOtue6Uj/wfwVzGAIkD7qWEIC2P5qQ9hnuf
+         2Lb1r7Nv6bFpORP2wvH98pPE3PH2XDmylv81O+XEPF0nAqr/hmle/cR0va2MoPQH7JCX
+         KAYQeIY+0po4vl8nZifN9/I7u3sM29B1dpz1cR67s0BJc/JfztNEnc/qrhXiorg+A8+T
+         Y/RheTPASV6rBrm3sJtm3ttm0dFhaew2csfo+mXfIdpz8JWM3n7dGgB2hUxW6/Jvt1JR
+         saymcwhrwk65rSn/eM570tMy8ouVl7eKNOec94DnJaM7a/L8SLGEBw3NLtUHy6dI77RP
+         Ve3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788330850; x=1788935650;
+        d=1e100.net; s=20251104; t=1788330887; x=1788935687;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=24jTXd7IeCDXlRGfWEqjcNP/1rsnFx4k/2yK1e1bOdo=;
-        b=jdbVrp3kotS7d0z+pGnkxxeFOsVdXI6SSEHJEtAZZ9kblRb9uYPf+BSlnBg6LXhd1f
-         +3dMu5LnJcPIS+gKssvymT0sJ5/W1R2V47rZzgid+cvahYurL3L6+OSSIaR6+YFFIzlh
-         2z+ICqb3lEVVNN72v2xWIehfCuLL4Qi0AhA5emgoJ5cxxeiA4qcCix4AHXZMdO0zD0XN
-         8vgrTSdkftTLao9DWYr6kwez0ZTq1BicyM//tC0oXZj3e9xwnZ9Sz6znG8knceuYad1A
-         3svvFjFGMLcY2jva7jCX77qRkm+OSekLzUFxsJRBdcgOLzrqpbLyKFj06unarhDyFF7D
-         0dCQ==
-X-Gm-Message-State: AFuF++lU/U/dj417AUSAZsBcE3yzpwkAsPnlBlkPTTOSCaTLhWmaA+fD
-	TXsXisCyf7N2bejLEFkLK8m1/vDQjgPA54wFBfrdpC/N9vY3J98bIyyonMcHAUEr8xiHmF1xEoY
-	2sA+RNw==
-X-Gm-Gg: AR+sD11RjT578q7FKMNbEt3FgJN4zY/S3QMZ6yWwHBub8IrD4AdGY67rO3rXMZM2f3m
-	97Opq7J41gG8gxbb1/gODbbGD96q4xnSOt11TjEOuNPrDQa77T4r3eFivjufCz7vKEWoca/LfAp
-	x+NqXUE/9vVjAdDzLDkvcxgAlXcnJJmn8W30+G4te9Q8nj4w+EuQ1WkxLnsIPizeQR20FrzlhDw
-	uIuyGNFyON9aqHmDEGBntCKElQA+aDPjj+8pGMR3C6mcKvrLrLtDFR4ph4LaZdvOu2Pl/Cira0A
-	9/ZMX6501VSxoQQhtAsTkQXHQgvGQCudPypXje2i//r3f5sSSlUnzqG0xBzC7giMdnbVSHeLca5
-	KbQT78n7BAoS//LzSoXHLKTULjiMYcTJgHOZhwuQZ5e4uS6CJ3z5vzRINDHfHtFa2tX6fXopXLv
-	XJpWClYpehd+HfBN0DmnCcpfoPwNQAElSnCcxoQsDs32O8y/nMkP67bjSuY6BPVV+x5aHxpuyPI
-	0PscEqAu+an7Xjfe7N8/EPZqDCjNEwZIV9dou/MsioIjmBqVQBQlerQUUiEpcU=
-X-Received: by 2002:a05:600c:1da1:b0:499:9eb8:a1d7 with SMTP id 5b1f17b1804b1-49ce5842935mr48448965e9.9.1788330850372;
-        Tue, 01 Sep 2026 23:34:10 -0700 (PDT)
-Message-ID: <f6362f01-0057-476e-ba7b-b0bd8154c86e@suse.com>
-Date: Wed, 2 Sep 2026 08:34:09 +0200
+        bh=4M7ZO90BkV+o7MOoEhTcnL8On+MmsrDJefwVfmLqVG0=;
+        b=tFWoaZoGw3CeJuULwFTwOv/LQVd0UNfKX1eeZZto+tJKH3x73ktx572NtxPjc35OE/
+         rpMQkbwpwQR0Y8GibCpH106XQ+2fZQlyrgmwbtVoLznOiYIePvjWLQO42v2MlJDDSjec
+         DX44BwS78Xx7vq+pVHfl6M2G6dfKZO2xagDR2/bsYq7fPVIpdctFgsfo/OtkZVV4DgDd
+         9iRyJELDjEa/niv/fTJvak/TY20BqKrRuHxnM412vQLPyW6BittRKX8JWpuUKM3fKKsy
+         g/h5ZNOwuaxZ8MLKFhbDE5eOtxIo1HT+uC6ruhrTlSL+NVisARw13VXMZau7zkeu3lXW
+         bDzw==
+X-Gm-Message-State: AFuF++mEz4EQbHLo6MvvincoxnypCkhZFhaN2rnf4e241jPoizEmxe8K
+	orRyykujefr34bdcuOgJQFJ5+M+CoDlx3CMOKsbcRzvzq9IsFzoFyFgKNW+iuq1WRLEnzULykNj
+	TPGjvpQ==
+X-Gm-Gg: AYBFou2+jw0gbkybzaxmqdRJgR2mn60vKvEjknK62n6VHlnUrbzbOqOVVAVcZmt9hAh
+	dQ6ttkh+RAW9/A/uqGEEMYhSSoUotRqDgzg3XyqbByuIW2DhTUmg//JEpAd8cviCcrAp6oa0rHU
+	t4nZP8kBh4eBDP+p9dzNymTZR/kQCZIaEXah4x15rM0Hb7lhHTQYsHhQA5b+59eCVTwS17JSuAj
+	2ZEz5wTaLBpdQgSIaXHM+Jqxr9ankZ4TDfdCg0cEM4mg89OGOs+xakYbgD/+rzaH/2Lmd7Lm1ui
+	q0dXTyztdXEO0OKWT9w8a6n0LSfHi/I2s55kyPXgrko57RDQnAICU5qBLtrIz1qlwXwU9un6RDq
+	6P+yi4HaetMQ0zDo+43UuW/QBxYaiJl0HBYX3yOmHKdU0FXnPWndVYNQyvMyfhPDH1AvoX7wKnS
+	AxOLrYHlh1gpvIFbmsAV2GiLIsW8TeNQQ1yn2PJ10GUP2N5jCWvnScNbeedkvaGPaVdIQUw3nlD
+	dId1bdpCOU0tGh6QoN5WYGWdtPkz/F0wYZXUUHKr7ErmqfxeFSL
+X-Received: by 2002:a5d:588f:0:b0:482:fbb5:8a74 with SMTP id ffacd0b85a97d-48488f032b6mr3872532f8f.11.1788330887011;
+        Tue, 01 Sep 2026 23:34:47 -0700 (PDT)
+Message-ID: <8fe86787-7590-44f1-be4f-461b61d7669b@suse.com>
+Date: Wed, 2 Sep 2026 08:34:45 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 09/14] ACPI: address a Misra rule 11.8 violation in Arm code
+Subject: [PATCH 10/14] ELF/notes: use pointer-to-const by default in
+ ELFNOTE_...()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
@@ -105,7 +106,7 @@ Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Bertrand Marquis <bertrand.marquis@arm.com>
+ <roger@xenproject.org>
 References: <0ff5676d-2ad3-49e3-a94b-90e7c3edb55f@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -134,44 +135,49 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <0ff5676d-2ad3-49e3-a94b-90e7c3edb55f@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1788330850-756834E9-659EB4D3/0/0
+X-purgate-ID: tlsNG-33051d/1788330887-758824E9-FA6350E7/0/0
 X-purgate-type: clean
-X-purgate-size: 1741
+X-purgate-size: 1311
 
-Outside of drivers/acpi/tables/ (which is excluded from Eclair reporting
-for dubious reasons), arch/arm/acpi/domain_build.c is the only user of
-ACPI_COMPARE_NAME(). Make the macro const correct, at the expense of
-introducing a "const" variant of ACPI_CAST_PTR(), and at the expense of
-altering an imported file.
+Not doing so results in a number of Misra rule 11.8 (casting away of
+const-ness) violations. We need to allow kexec to use pointer to non-
+const though, so provide a means to override the default.
 
-No functional change intended.
+For ELFNOTE_NEXT() we can do better and simply re-apply the type of the
+incoming pointer.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
---- a/xen/include/acpi/acmacros.h
-+++ b/xen/include/acpi/acmacros.h
-@@ -103,6 +103,7 @@
-  * Pointer manipulation
+--- a/xen/common/kexec.c
++++ b/xen/common/kexec.c
+@@ -6,6 +6,9 @@
+  * - Magnus Damm <magnus@valinux.co.jp>
   */
- #define ACPI_CAST_PTR(t, p)             ((t *) (acpi_uintptr_t) (p))
-+#define ACPI_CAST_CPTR(t, p)            ((const t *) (const acpi_uintptr_t) (p))
- #define ACPI_CAST_INDIRECT_PTR(t, p)    ((t **) (acpi_uintptr_t) (p))
- #define ACPI_ADD_PTR(t,a,b)             ACPI_CAST_PTR (t, (ACPI_CAST_PTR (u8,(a)) + (acpi_native_uint)(b)))
- #define ACPI_PTR_DIFF(a,b)              (acpi_native_uint) (ACPI_CAST_PTR (u8,(a)) - ACPI_CAST_PTR (u8,(b)))
-@@ -116,9 +117,12 @@
- #define ACPI_PTR_TO_PHYSADDR(i)         ACPI_TO_INTEGER(i)
  
- #ifndef ACPI_MISALIGNMENT_NOT_SUPPORTED
--#define ACPI_COMPARE_NAME(a,b)          (*ACPI_CAST_PTR (u32,(a)) == *ACPI_CAST_PTR (u32,(b)))
-+#define ACPI_COMPARE_NAME(a, b)         (*ACPI_CAST_CPTR (u32, a) == \
-+                                         *ACPI_CAST_CPTR (u32, b))
- #else
--#define ACPI_COMPARE_NAME(a,b)          (!ACPI_STRNCMP (ACPI_CAST_PTR (char,(a)), ACPI_CAST_PTR (char,(b)), ACPI_NAME_SIZE))
-+#define ACPI_COMPARE_NAME(a, b)         (!ACPI_STRNCMP (ACPI_CAST_CPTR (char, a), \
-+                                                        ACPI_CAST_CPTR (char, b), \
-+                                                        ACPI_NAME_SIZE))
- #endif
++/* We're producing ELF notes here. */
++#define ELFNOTE_CONST
++
+ #include <xen/acpi.h>
+ #include <xen/console.h>
+ #include <xen/cpu.h>
+--- a/xen/include/xen/elf.h
++++ b/xen/include/xen/elf.h
+@@ -29,9 +29,14 @@
  
- /*
+ #include <xen/elfstructs.h>
+ 
++#ifndef ELFNOTE_CONST
++#define ELFNOTE_CONST const
++#endif
++
+ #define ELFNOTE_ALIGN(_n_) (((_n_)+3)&~3)
+-#define ELFNOTE_NAME(_n_) ((char*)(_n_) + sizeof(*(_n_)))
++#define ELFNOTE_NAME(_n_) ((ELFNOTE_CONST char *)(_n_) + sizeof(*(_n_)))
+ #define ELFNOTE_DESC(_n_) (ELFNOTE_NAME(_n_) + ELFNOTE_ALIGN((_n_)->namesz))
+-#define ELFNOTE_NEXT(_n_) ((Elf_Note *)(ELFNOTE_DESC(_n_) + ELFNOTE_ALIGN((_n_)->descsz)))
++#define ELFNOTE_NEXT(_n_) ((typeof(_n_))(ELFNOTE_DESC(_n_) + \
++                                         ELFNOTE_ALIGN((_n_)->descsz)))
+ 
+ #endif /* __XEN_ELF_H__ */
 
 
