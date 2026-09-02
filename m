@@ -4,43 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72863C624D7
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 14:16:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405970.1639386 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3261C624D3
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 14:19:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405976.1639396 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1llD-0006wQ-7g; Wed, 02 Sep 2026 14:16:19 +0000
+	id 1x1loN-0007ZB-Lc; Wed, 02 Sep 2026 14:19:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405970.1639386; Wed, 02 Sep 2026 14:16:19 +0000
+Received: by outflank-mailman (output) from mailman id 1405976.1639396; Wed, 02 Sep 2026 14:19:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1llD-0006wJ-55; Wed, 02 Sep 2026 14:16:19 +0000
-Received: by outflank-mailman (input) for mailman id 1405970;
- Wed, 02 Sep 2026 14:16:17 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x1llB-0006wD-SQ
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 14:16:17 +0000
+	id 1x1loN-0007Z4-Im; Wed, 02 Sep 2026 14:19:35 +0000
+Received: by outflank-mailman (input) for mailman id 1405976;
+ Wed, 02 Sep 2026 14:19:34 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <hpa@zytor.com>) id 1x1loL-0007Yy-Ss
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 14:19:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1llA-00FV6K-Ge
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 16:16:16 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1x1loK-007Ty8-RV
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 16:19:33 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a982faf-bab6-0a2a0a5309dd-0a2a4505de10-8
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 16:16:16 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a982fb0-4cb1-0a2a45050019-d155802ca4bd-3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 16:16:16 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-49b0eab380eso10478345e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 07:16:16 -0700 (PDT)
-Received: from fedora (user-109-243-144-234.play-internet.pl.
- [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49ce5533ffbsm43550395e9.3.2026.09.02.07.16.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Sep 2026 07:16:15 -0700 (PDT)
+ (envelope-from <hpa@zytor.com>)
+ id 6a983073-e002-0a2a0a5209dd-0a2a450bd63e-10
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 16:19:32 +0200
+Received: from [198.137.202.136] (helo=mail.zytor.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <hpa@zytor.com>)
+ id 6a983072-b7e8-0a2a450b0019-c689ca88edd8-3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 16:19:32 +0200
+Received: from ehlo.thunderbird.net (c-76-133-66-138.hsd1.ca.comcast.net
+ [76.133.66.138]) (authenticated bits=0)
+ by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 682EIqnL3615183
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
+ Wed, 2 Sep 2026 07:18:53 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,149 +50,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788358576; x=1788963376; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=lS5Jt5Zsbat0B1Cf88rX8Gj9YZoVhCThztwHEOEzvNQ=;
-        b=Q/vxnN57niTqpvw0oEzrPlAJhlVt2cpT5NBcpBwd/tbEsmM4U5tAbq4aJG3gH1KJTG
-         lifaKa74A5SgwCmk5cY+L7yAEdx1a8lHcYGzVAwwix7hpw63scyejH0ay06DCTbmxGyc
-         cV1p7SEH/+gSPZdZLtWWkpn4+Fj+XmrwZIQUpj31W/gQDVjvyuW1HkkiwTH9TIcPZBOQ
-         idAm+jqLHTWb4S+hmwCvQXm6a+2W7+QuniPuEJ2OSWED13bj38ivn0OVJ6VrEV1Y4RJF
-         /tQHySAooZC3kus+uv57/r5fPdgBRIG4+Qrw8E+YDtYvanDE7xryRL5wC4vqbrPn+sXZ
-         yCpA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788358576; x=1788963376;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=lS5Jt5Zsbat0B1Cf88rX8Gj9YZoVhCThztwHEOEzvNQ=;
-        b=HuRHr3Aw/pi0XD2OEZ8txeZE9DZacel6IM2L/v3sExz2+tPyliRhs7gNPkev9qo+7F
-         vMhaAHnUuPps2DI7uRzCBxeYBzlP+a7shM0BlI7TYgNRY8yJH+nnPyjq9QJAj8O8Sv9m
-         WSmB9+VmHqKGJGuvF1A8zWlkerm2b7yQ4JQfo3wvoZ4LWhSXTrcmBIY3PjQSxldzDYUE
-         FhDKzHmkzgThhWL65yllW35vMAQi5v6gCVrv+FMCJCo0WflJ4HmYhR6hUh9VXM5Rb/hY
-         S/wbH9WMANeD2jS7HeA20DzPKZi3PDlxoFvPDcnJYTA38NrwjPwIAL5Ka/wUg2T2NTq8
-         m4TA==
-X-Gm-Message-State: AFuF++n2DdbyvFYvGGVWHc6xDk0EKEkJ7UVrsF/bX2U/OU3PA018WMVC
-	VrF4bc0PIj12yzSfScBzjYaMI5Y9Yu6zfTBtO5AmkOISmoveEc07KyKI54Ol1A==
-X-Gm-Gg: AR+sD13TQoMFmIVkYcPeVzdgbe6SsjnDlhM9KBllTo7Mx61uiHAqwRWnUx3HDmj0paC
-	v81VtxfQRo6HgfquqHvL8aM/GTzHZJ8MrpVrhMpuSDp223jNfDBQK3wdRaiSKGv3mS5fRkGxmsa
-	vBn/7OTbRrsgvmQuJIMz4rpWobDW6MU4IaXw2sO/NUKVqaQ0cF9kk6hTQjK5bi5yugAN8fCVJIl
-	qZKB0cwkMDRRkdqNfTCzlxLv8ofhoT++tQ2lRT3lsarWwKYNBulm7R77t251n5Ip+ZgIqw34vGi
-	D49sjZW5oEVizv2j+L39gx3wNf2b3Le5yfgCGHhav2IYjbkWGbXi9KKB9hYxtJK7X4VaCEEDa7G
-	5BLGaP6ykCINTys75C0f1HP3gnPDdwqnQMFW00g2+rTMfg7vvMVsspu8Zchrb5QHGLEaReSg708
-	pswmkXvNNG7zkDDyWmk6QwSH3kB+6M1KruV4m9/YN4z+DmdwqU0187HDe3bSM9KqUkQfZG352fC
-	QF2h7qfQc8OXPpXXQEVgiMdq96Il2sI
-X-Received: by 2002:a05:600c:3b07:b0:49c:799a:177b with SMTP id 5b1f17b1804b1-49ce7bb7a75mr24872415e9.2.1788358575650;
-        Wed, 02 Sep 2026 07:16:15 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
-	Baptiste Le Duc <baptiste.le-duc@vates.tech>,
-	Zheng Zhang <zhangzheng@iscas.ac.cn>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2] xen/riscv: fix out-of-range indexing of the IMSIC per-CPU MSI array
-Date: Wed,  2 Sep 2026 16:16:07 +0200
-Message-ID: <20260902141607.24390-1-oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.55.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=2026082801 header.d=zytor.com header.i="@zytor.com" header.h="Date:From:To:CC:Subject:In-Reply-To:References"
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 682EIqnL3615183
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
+	s=2026082801; t=1788358734;
+	bh=9+cci75UmAKXSNYbyFNOPFn1zAmcIFOxmoM0RCeSqSw=;
+	h=Date:From:To:CC:Subject:In-Reply-To:References:From;
+	b=i6t+zDazNQW/PHul8N3EVpOl+Ov5fNuUkBVtoSR96j4zTguKq+uvxrLMleTcAGviV
+	 3Mtu+gx5FV9r4Arst1+QPkPDetNgvsmYxLWSxtCNdND7H7i4l4TN8AbEVPdHHvwWT9
+	 C83QjPihUd+f+E4Aazn/xY1ByIB5tHu6SwqqYDUy4PwsYog4+PEE1hp99z1s/4uqRd
+	 8PCWy8im7IQZbugf0CQXdn9qdoSi5XV+lT6rsstlfcHgOOmKE4J4jHuXCVDGRZ6GWj
+	 2MzmIbyciLU6ilAXSQ/ZqZDfHKSxtge7HiWQ/3m1dbrBOntoRybH212bSXMjouFGJv
+	 r9tXB1rf68wdg==
+Date: Wed, 02 Sep 2026 07:18:47 -0700
+From: "H. Peter Anvin" <hpa@zytor.com>
+To: David Laight <david.laight.linux@gmail.com>,
+        Jan Beulich <jbeulich@suse.com>
+CC: Mauricio Faria de Oliveira <mfo@igalia.com>, kernel-dev@igalia.com,
+        linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org,
+        Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+        Juergen Gross <jgross@suse.com>, Alexey Dobriyan <adobriyan@gmail.com>,
+        Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+        Brian Gerst <brgerst@gmail.com>
+Subject: Re: [PATCH v9 1/5] x86/boot: Remove "cc" clobber from memcmp()
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20260902093354.582c2f07@pumpkin>
+References: <20260822-pvh-kasan-inline-v9-0-e70ef3b75b6a@igalia.com> <20260822-pvh-kasan-inline-v9-1-e70ef3b75b6a@igalia.com> <16110ecc-fc0d-4b9d-a958-2a75ca60b69f@suse.com> <20260902093354.582c2f07@pumpkin>
+Message-ID: <F6CBA8E9-F901-47C8-982D-F23F38247D8C@zytor.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1788358576-F5CA82A1-707DA15F/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 3156
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-42698a/1788358772-ABED69EA-FAF552FE/0/0
+X-purgate-type: clean
+X-purgate-size: 2751
 
-imsic_init() indexes msi[] by the Xen CPU id hartid_to_cpuid() returns,
-but that array is allocated with one entry per parent IRQ of the IMSIC
-node, and the only range check compares the index against
-num_possible_cpus(). Neither matches the array, and the check comes
-after the first access:
+On September 2, 2026 1:33:54 AM PDT, David Laight <david=2Elaight=2Elinux@g=
+mail=2Ecom> wrote:
+>On Tue, 1 Sep 2026 15:16:58 +0200
+>Jan Beulich <jbeulich@suse=2Ecom> wrote:
+>
+>> On 22=2E08=2E2026 20:33, Mauricio Faria de Oliveira wrote:
+>> > According to the GCC documentation, conditions in the flags register
+>> > (e=2Eg=2E, "=3D@ccnz") are output operands [1] and the compiler is aw=
+are [2]=2E
+>> >=20
+>> > Also, clobbers (e=2Eg=2E, "cc") may not overlap with an output operan=
+d [2]=2E
+>> >=20
+>> > Thus, remove the "cc" clobber as it is redudant, and overlaps with, t=
+he
+>> > "=3D@ccnz" output operand=2E
+>> >=20
+>> >     """
+>> >     6=2E11=2E2=2E4 Flag Output Operands
+>> >=20
+>> >         On some targets, a special form of output operand exists by w=
+hich
+>> >         conditions in the flags register may be outputs of the asm=2E=
+ [=2E=2E=2E]
+>> >=20
+>> >     6=2E11=2E2=2E6 Clobbers and Scratch Registers
+>> >=20
+>> >         While the compiler is aware of changes to entries listed in t=
+he
+>> >         output operands, [=2E=2E=2E]
+>> >=20
+>> >         Clobber descriptions may not in any way overlap with an input=
+ or
+>> >         output operand=2E [=2E=2E=2E]
+>> >     """
+>> >=20
+>> > Reported-by: "H=2E Peter Anvin" <hpa@zytor=2Ecom>
+>> > Link: https://lore=2Ekernel=2Eorg/all/5e19b195-0ca2-4510-81cb-497b40e=
+4aaf5@zytor=2Ecom/
+>> > Fixes: a8c171c107c0 ("x86/boot: Add volatile, clobbers and zero-lengt=
+h test in memcmp()")
+>> > Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia=2Ecom>
+>> > Link: https://gcc=2Egnu=2Eorg/onlinedocs/gcc/Extended-Asm=2Ehtml#Flag=
+-Output-Operands [1]
+>> > Link: https://gcc=2Egnu=2Eorg/onlinedocs/gcc/Extended-Asm=2Ehtml#Clob=
+bers-and-Scratch-Registers-1 [2] =20
+>>=20
+>> Reviewed-by: Jan Beulich <jbeulich@suse=2Ecom>
+>>=20
+>> > --- a/arch/x86/boot/string=2Ec
+>> > +++ b/arch/x86/boot/string=2Ec
+>> > @@ -40,7 +40,7 @@ int memcmp(const void *s1, const void *s2, size_t l=
+en)
+>> >  	asm volatile("test %3, %3\n\t"
+>> >  		     "repe cmpsb"
+>> >  		     : "=3D@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len)
+>> > -		     : : "cc", "memory");
+>> > +		     : : "memory"); =20
+>>=20
+>> In fact I'm using a modified gcc which properly rejects such conflictin=
+g
+>> uses of output and clobber=2E ("cc" clobbers are redundant on x86 anywa=
+y=2E)
+>
+>And, if "cc" clobber wasn't redundant, you'd need clobbers for the cc fla=
+gs
+>that weren't being used as output values=2E
+>
+>David
+>
+>>=20
+>> Jan
+>>=20
+>
 
-- hartid_to_cpuid() returns NR_CPUS when the hart isn't one Xen brought
-  up, and msi[NR_CPUS].base_addr is read before that is noticed;
-- an IMSIC node listing fewer parents than Xen has CPUs makes every
-  index past nr_parent_irqs go past the end of the allocation, which the
-  num_possible_cpus() check lets through.
+No=2E The condition codes aren't orthogonal like that=2E There is only one=
+ flags register=2E=20
 
-Size the array by nr_cpu_ids, which is what it is indexed by,
-and move the range check ahead of the first msi[] access.
-
-Fixes: c9bd8b322ecb ("xen/riscv: imsic_init() implementation")
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Changes in v2:
- - Use nr_cpu_ids instead of num_possible_cpus() to not be dependent on
-   if cpu_possible_map is sparsed or not.
----
----
- xen/arch/riscv/imsic.c | 22 ++++++++++++++--------
- 1 file changed, 14 insertions(+), 8 deletions(-)
-
-diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
-index f7b70a8da09e..44eb7abf76fd 100644
---- a/xen/arch/riscv/imsic.c
-+++ b/xen/arch/riscv/imsic.c
-@@ -326,6 +326,8 @@ int __init imsic_init(const struct dt_device_node *node)
-     unsigned int nr_parent_irqs, index, nr_handlers = 0;
-     paddr_t base_addr;
-     unsigned int nr_mmios;
-+    /* imsic_cfg.msi[] is indexed by Xen CPU id, so size it accordingly. */
-+    unsigned int nr_msi = nr_cpu_ids;
-     struct imsic_mmios *mmios;
-     struct imsic_msi *msi = NULL;
- 
-@@ -346,7 +348,7 @@ int __init imsic_init(const struct dt_device_node *node)
-         goto imsic_init_err;
-     }
- 
--    msi = xvzalloc_array(struct imsic_msi, nr_parent_irqs);
-+    msi = xvzalloc_array(struct imsic_msi, nr_msi);
-     if ( !msi )
-     {
-         rc = -ENOMEM;
-@@ -405,7 +407,18 @@ int __init imsic_init(const struct dt_device_node *node)
-             continue;
-         }
- 
-+        /*
-+         * hartid_to_cpuid() returns NR_CPUS for a hart Xen doesn't know, so
-+         * the range has to be checked before msi[] is indexed at all.
-+         */
-         cpu = hartid_to_cpuid(hartid);
-+        if ( cpu >= nr_msi )
-+        {
-+            printk(XENLOG_WARNING
-+                   "%s: unsupported hart ID=%#lx for parent irq%u\n",
-+                   node->name, hartid, i);
-+            continue;
-+        }
- 
-         /*
-          * If .base_addr is not 0, it indicates that the CPU has already been
-@@ -421,13 +434,6 @@ int __init imsic_init(const struct dt_device_node *node)
-             continue;
-         }
- 
--        if ( cpu >= num_possible_cpus() )
--        {
--            printk(XENLOG_WARNING "%s: unsupported hart ID=%#lx for parent irq%u\n",
--                   node->name, hartid, i);
--            continue;
--        }
--
-         /* Find MMIO location of MSI page */
-         reloff = i * IMSIC_HART_SIZE(imsic_cfg.guest_index_bits);
-         for ( index = 0; index < nr_mmios; index++ )
--- 
-2.55.0
-
+(On x86 I believe asm statements are assumed to clobber the flags uncondit=
+ionally, because it is so common=2E)
 
