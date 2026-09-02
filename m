@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78FFBC61DFD
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 06:35:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405103.1638658 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D21B1C61DFD
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 06:35:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405117.1638667 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1eZ0-0006s9-KL; Wed, 02 Sep 2026 06:35:14 +0000
+	id 1x1eZb-0007S5-SI; Wed, 02 Sep 2026 06:35:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405103.1638658; Wed, 02 Sep 2026 06:35:14 +0000
+Received: by outflank-mailman (output) from mailman id 1405117.1638667; Wed, 02 Sep 2026 06:35:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1eZ0-0006s2-He; Wed, 02 Sep 2026 06:35:14 +0000
-Received: by outflank-mailman (input) for mailman id 1405103;
- Wed, 02 Sep 2026 06:35:13 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x1eZb-0007Rx-Oa; Wed, 02 Sep 2026 06:35:51 +0000
+Received: by outflank-mailman (input) for mailman id 1405117;
+ Wed, 02 Sep 2026 06:35:50 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x1eYz-0006nC-7i
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 06:35:13 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x1eZa-0007RO-45
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 06:35:50 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1eYy-00AOxg-Ka
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 08:35:12 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1x1eZZ-005yng-H0
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 08:35:49 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a97c36c-8faa-0a2a0a5109dd-0a2a4502edac-34
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 08:35:12 +0200
-Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a97c3bb-8faa-0a2a0a5109dd-0a2a4501ba20-36
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 08:35:49 +0200
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a97c3a0-6ca4-0a2a45020019-d155dd29f1d0-3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 08:35:12 +0200
-Received: by mail-wr1-f41.google.com with SMTP id
- ffacd0b85a97d-482dd6ee390so675660f8f.3
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 23:35:12 -0700 (PDT)
+ id 6a97c3c5-5984-0a2a45010019-d1558030e195-3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 08:35:49 +0200
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-49cd9add88aso3818395e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 23:35:49 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48448ed30c0sm4313104f8f.24.2026.09.01.23.35.11
+ 5b1f17b1804b1-49cdce3e0desm133583925e9.11.2026.09.01.23.35.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 01 Sep 2026 23:35:11 -0700 (PDT)
+ Tue, 01 Sep 2026 23:35:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,50 +55,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788330912; x=1788935712; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788330949; x=1788935749; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=boxk4p0eJVFYzZBGyHEQSWRcZFC+UVjv0HIaDcDz8xY=;
-        b=CRqqb0fb89JAfPVPLS1KrLrdJRkATtJxDzN6/J0uhmkRy7qwWXFgwSw1ic5gumqSzZ
-         IXrszCF3LbUZn3G+bTj7vO3sXKCJdTvo2zE4OCzN2psdQjSGk9HqSOLJQ6HqMhYhisW0
-         P+xjGMsQEB1FW9+C8oe4D+9RCELQBpvMd6n5h5wPPW7RVCEX7KtRhGIYgOerq6x3BtKb
-         TZjbGcnyg37fMAJUimAWd7KqvLLOYNYpP7HWI3L78A9jyPSDTYdCk+8kJyfOlapSv+RO
-         xIMAfZgKbqiLRTEo4Ufmty2u3ETjQhfykUbCitxXxLV9Pddiipr5+ton73wxq3C1x/lg
-         9lBg==
+        bh=/ukptOfy7Urb2YHUd+l0+4nj0VI7QTd6I8HIWXBvIOE=;
+        b=PPNFvwdz/X+dzzqQfrrr9SNTXTgOS0CznNcV71XIbPRwdf43B2q0rKJhRwogxv7NrV
+         n9dzFk+OcXIJiotTXyFj331bSd38YUW9h1Rp586p+g6CTZM9bX9/SiUzptbIZMk45bXV
+         KA23hAcDRoOP/y/Mz3u4I5LX5q+SvfhlPI0c257f16d++j5azGQqpHFRHi8So3DiH/ra
+         2kgmWWR7kLi03MODqOYeOaNVrOyuDnmmbo15qx86ggUDwRbwd/SfCNYdNW3RQKSXC6tp
+         bReKZPJYYBTGmi8c9w7iQnMK+24R6pQykWHIXxiPFyPDXcdYyv6tUo49wvAtrQRKEuCz
+         w53Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788330912; x=1788935712;
+        d=1e100.net; s=20251104; t=1788330949; x=1788935749;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=boxk4p0eJVFYzZBGyHEQSWRcZFC+UVjv0HIaDcDz8xY=;
-        b=BTk7AEed7Cs1SS7rwQ7evqm630t3Pc0hgFEiEFBcgWVOf/9LrWyP1+nfRv+F4eW91h
-         xBFj4k/IE3Rujc5pvAoDYuTxI5aEU3eVP47pF91g9on6IVJ4F1rHEJp3b/oe5Z5y1nBc
-         O6md+Jx+Z3JtbRwbO+W5Nkgo5WVVYPv699kFc1uAlmw3VLPW3AvAJ1QthZSLtroCWD39
-         7j4iCfg8iQAcwkaPW/sRInsQaSEYVc8j68ixwg9ELh+lZDnF7uje4t0Eb11amBz6zzwT
-         vc6JIGtiZITYONqEz777X+h82XqqG+k5H17ua1PoPIcFCry2XsPES8uws+slSpW+pVED
-         RTGQ==
-X-Gm-Message-State: AFuF++kwBXPlitypD1oFyJfxtNPVgQjw0QvxcA4zQiAgXwlpWXWWA5r9
-	xUQnYbL2s2+UTaRpfRQlBspqhgXCDVfb4UXsffHlkOt5nv7oWn75cS4AZ0onuEKRXlG79S/ceTl
-	SIdHvBA==
-X-Gm-Gg: AYBFou2dIIKLVU1Ldyqbg83MDfm/kNowTPpkRbIShtsJZU6RkwC+ldtyZFporLKS6Sn
-	7PnDmjb7SO1p29Y7yn10T3NVJF4uMRy+DMrXe4SQ/BDEgoVW70G/ECRM30dTiQVZOqK0Ik/0Pis
-	fwP3GafMhstfLZeHhwCzVD30aQrEUgEUNXaY5b00QV1KnU9mTBPhcB8OLupSFZW+KlovXy30wwY
-	7ec3RA6UyqlNaYsv8rwcLCwP2daGAEH7KdLXsHEbWQlDHI9yEnGk/Gj04yY2iTZ7zwbuYQOHXVe
-	OGMx1bqUtUkz5KUYsWRPR0ez3/PPY8NLOV2y9cEn/aCTGSk+Ve/VCTfoj+BfODFiNHjEqIXxxvA
-	39LDnyy23ITLV/FJd2BHcZHGYXw0TI5gFNMUjGy12YxUgHGgOZAZTaVBEpprXs8QGfrJC8ZLU45
-	KylCXZ/woRe5Iglqpb7hjvdjFg+csCDdhaNlaYJxyvyDT5brUjhmjgOl38pZzJcxU+JHNNlF4y3
-	U0aRKnJFithRSoZK37trxR0T5gHSkqJew2XuyImvw22dSQzURZw
-X-Received: by 2002:a05:6000:40cc:b0:484:4880:449d with SMTP id ffacd0b85a97d-48488dee57bmr3688988f8f.3.1788330911990;
-        Tue, 01 Sep 2026 23:35:11 -0700 (PDT)
-Message-ID: <1faace7c-2425-4691-b23b-3ffe033e5bc2@suse.com>
-Date: Wed, 2 Sep 2026 08:35:10 +0200
+        bh=/ukptOfy7Urb2YHUd+l0+4nj0VI7QTd6I8HIWXBvIOE=;
+        b=efCrVp2VHt4QFVnRgzEPSnpplLRAKuwcGLnpl2gpev8kf4P35NQ0/wwPWulx1+Ah9z
+         W14DPRs5oHHVI+c9M5rroNcSazLc9KfGsNCWaU415tD/QYxWQ+S9MCNEA2i+OKAn8eco
+         utsGEO6Y9msiR3pJSxYFLje6wCyF0vMEvhWHQJZVpuY149+1rWFfnKLmZm+6uMdEFwfv
+         YtJSoxsTb28LIfbQFlYyfIAd7BTlDkkPkPnUc3a3rdJW7FX0aGVxWOInpw2qo96VevgJ
+         eBhfgF7SnP1gQQcWIy7jF6kzwDR8evV42OgD7L3Zn77z2uoP8GE/c9MXBD2bYNG+TyDI
+         aRog==
+X-Gm-Message-State: AFuF++mgZ5T1ugWoDQxBktP3zTUdm7ryahiv6n+Ndht0C78+pqeTVlP7
+	RTsAABux8SES/PFa/FDJiyrYXVHV998WHgM+TYvF0Ur5o2l7TsKTxW53N7DfuxGZj63ScYMR3aI
+	7nz0z9A==
+X-Gm-Gg: AR+sD13nykA1D3hmgzJaAGpVJlDy1H1DS0v+JodFvdvjp6JiXL8PiGCNPEpav5LYS2+
+	QSEIefYOgalaU2dvLpHEV9um75Gt8YJEESnSd3tqklvUtdU9brSexVTcUPQuQ+vt2KCngSeH3CY
+	pzYQM6mzubdWo3ePNwfEWDTm2yMUqb1r1wZRyJgMjwOtM4Wip5OJ+t4VWAxG8C/QLni/V9+Notp
+	rRcRSDpAVc8wu3/Zp9wDRJwgce36nqrmhndjEMkkTRLUGlT8080Ch/KzYA6xl49urOwESB+Evii
+	QmTZgKK8bsJpeTj1uNpJ9PTdpuUqC8eqcWv8hMHfyG2Ca3MfMX7bsj0mIF+T1926z6v/Rf/NeR/
+	d6iXCGdvk5v4HMPg1AtRRDoSNJBpPukghOuRUEepxJltB412zOn3IUZdwFUQjOC8SoZZ13utayX
+	1wZ+wX5P3HczxEeVa56TSDxJ91rqymlIcboJAYZKOnugACWcFSfKOWKDUVA6hDMVFug1ULPINwM
+	eIHBUl5wFirRonM4xWhc7KDTW7fKeZM9iW0h0AsV8gRs3RkDIU7
+X-Received: by 2002:a05:600c:37ca:b0:49c:cf18:494e with SMTP id 5b1f17b1804b1-49ce5819a2fmr46114605e9.12.1788330948918;
+        Tue, 01 Sep 2026 23:35:48 -0700 (PDT)
+Message-ID: <1f55b457-c8cc-4ef9-ba5a-96e52b95fbbe@suse.com>
+Date: Wed, 2 Sep 2026 08:35:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 11/14] crypto/vmac: don't cast away const-ness in
- aes_key_setup()
+Subject: [PATCH 12/14] gnttab: don't cast away constness
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
@@ -135,30 +134,53 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <0ff5676d-2ad3-49e3-a94b-90e7c3edb55f@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1788330912-315CD2AC-90AEB312/0/0
+X-purgate-ID: tlsNG-d62444/1788330949-BF262757-518BC6AA/0/0
 X-purgate-type: clean
-X-purgate-size: 755
+X-purgate-size: 1751
 
-vmac_set_key() passes in a pointer-to-const, which has const-ness removed
-despite rijndaelKeySetupEnc() properly taking pointer-to-const.
+While _set_status_v2() indeed doesn't alter the grant_entry_header_t it
+is handed a pointer to, _set_status_v1() does. Drop the const from the
+parameter of the latter (and then necessarily also from _set_status()'s),
+while adding const to the local variable of the former.
 
 No functional change.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-I was wondering whether I shouldn't adjust the adjacent aes_encryption()
-right away as well.
+Really I think it would be best if we did away with the raw_shah local
+variables (which looks reasonably simple for at least _set_status_v2()).
+I'm unconvinced that we really need to use ACCESS_ONCE() here. Torn reads
+aren't a problem; what we require is that we look at a stable local copy,
+and that can be achieved by putting barrier() after the reads.
 
---- a/xen/include/crypto/vmac.h
-+++ b/xen/include/crypto/vmac.h
-@@ -69,7 +69,7 @@ typedef u32 aes_int_key[4*(VMAC_KEY_LEN/
- 	    				    (u8 *)(in), (u8 *)(out))
- #define aes_key_setup(user_key,int_key)                 \
- 	    	rijndaelKeySetupEnc((u32 *)(int_key),       \
--	    	                    (u8 *)(user_key), \
-+	    	                    (const u8 *)(user_key), \
- 	    	                    VMAC_KEY_LEN)
- #endif
+--- a/xen/common/grant_table.c
++++ b/xen/common/grant_table.c
+@@ -740,7 +740,7 @@ static unsigned int nr_grant_entries(str
+     return 0;
+ }
  
+-static int _set_status_v1(const grant_entry_header_t *shah,
++static int _set_status_v1(grant_entry_header_t *shah,
+                           struct domain *rd,
+                           struct active_grant_entry *act,
+                           int readonly,
+@@ -832,7 +832,7 @@ static int _set_status_v2(const grant_en
+                           domid_t  ldomid)
+ {
+     int      rc    = GNTST_okay;
+-    uint32_t *raw_shah = (uint32_t *)shah;
++    const uint32_t *raw_shah = (const uint32_t *)shah;
+     union grant_combo scombo;
+     uint16_t mask  = GTF_type_mask;
+ 
+@@ -909,7 +909,7 @@ done:
+ }
+ 
+ 
+-static int _set_status(const grant_entry_header_t *shah,
++static int _set_status(grant_entry_header_t *shah,
+                        grant_status_t *status,
+                        struct domain *rd,
+                        unsigned int rgt_version,
 
 
