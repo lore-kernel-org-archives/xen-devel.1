@@ -4,32 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A70BCC61DD6
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 08:07:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405301.1638820 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A76F7C61DFD
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 08:32:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405325.1638828 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1g0W-0006Le-9l; Wed, 02 Sep 2026 08:07:44 +0000
+	id 1x1gO0-0002oF-2t; Wed, 02 Sep 2026 08:32:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405301.1638820; Wed, 02 Sep 2026 08:07:44 +0000
+Received: by outflank-mailman (output) from mailman id 1405325.1638828; Wed, 02 Sep 2026 08:32:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1g0W-0006LX-6G; Wed, 02 Sep 2026 08:07:44 +0000
-Received: by outflank-mailman (input) for mailman id 1405301;
- Wed, 02 Sep 2026 08:07:43 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1x1gO0-0002o8-0I; Wed, 02 Sep 2026 08:32:00 +0000
+Received: by outflank-mailman (input) for mailman id 1405325;
+ Wed, 02 Sep 2026 08:31:59 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <roger@xenproject.org>) id 1x1g0V-0006LR-EX
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 08:07:43 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <roger@xenproject.org>) id 1x1g0V-001oGI-0t;
- Wed, 02 Sep 2026 08:07:43 +0000
-Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
- helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <roger@xenproject.org>) id 1x1g0U-001JdN-2J;
- Wed, 02 Sep 2026 08:07:42 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x1gNz-0002o2-Ee
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 08:31:59 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1x1gNy-00Afxf-NS
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 10:31:58 +0200
+Received: from [10.42.69.6] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a97dee3-bab6-0a2a0a5309dd-0a2a4506aaac-34
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 10:31:58 +0200
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a97defe-195a-0a2a45060019-d1558031bdc8-3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 10:31:58 +0200
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-49556f97a9dso5534225e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 01:31:58 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49cdce0b425sm130615495e9.1.2026.09.02.01.31.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 02 Sep 2026 01:31:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,279 +53,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date;
-	bh=oo7Y65nO5P8K4cvGvX1U2KVSr8ZinK3m5j+dGy0yC7w=; b=3YFGFGWCEwExDYYAHP9VzoFHl/
-	96y4J6FcfSU96cTAmbYutVIcF3ZsZcuvX7ZmuoqH7I6gUCFJ2WLDkRrThjqIPUT9+cAmIMuuUWyAl
-	2bWAXzXZR2UQVoU/6/+arRPWfITPx0+DeU7/Pvc+auAVhiQoV6c0IdJMEI9gfLQh5RaA=;
-Date: Wed, 2 Sep 2026 10:07:37 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: Re: [PATCH v2 4/4] x86/vRTC: support century field
-Message-ID: <apfZSRg6Ee7V2mDB@macbook.local>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1788337918; x=1788942718; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=IINVuEzp4YLCCtb10Q6NLVvUfyFwcP6QDZL5igfiRmM=;
+        b=YFUjqlJHgjCF+82GaBBASfQNn0MZt789U+XFU7XUVhspwD3VYBRpXOQJOEYjjqOzCm
+         D/Rxy+oorTm0EpN0QtkixugiO0eK19KBejc4JpwLWvBIAKOx4zGtD1Id+kcXgLdwm5il
+         mUkg9C1Z/ufOLVWq5JRyKIxNEPSvlVGTBKTWe6VWPR5CfOhYAXFCFeG33qKRIJ8S3ZFK
+         EpsEoa21HVGKZfi3Y0MsSqEQsMcH/96vh82qo6U+dDZoU8mCuBzu26GZuSHLsewBXjyZ
+         zWeIpocPm2Tdq7tWSIVE5ssVMxJmLkPGSN/WkXrYdVS8MwQOoKCILyt7CS1/tnjCrlT9
+         MsCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788337918; x=1788942718;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=IINVuEzp4YLCCtb10Q6NLVvUfyFwcP6QDZL5igfiRmM=;
+        b=ILbl7QA8JiB/4scYFKWzt2hG40QwtHvkZSLfYMoONHZ+XAuQCacbd7Jk+7Jwld8v+J
+         KHO5i/Y45sFbrVdVdbqWHepgLmckQrUePYQgjCSJutZdrou4mH4/iRXT9hN4gdMrRpiI
+         g+1/wCnkLgCAA4RmjfarJOxeLlDyft36NBXBvaQuz/rFGqezNJ4IgSyE0lfAw722fT9/
+         qSQERfr3XmAgnB5Fzo13Yj2n1JHnLabivbJjEDfWGUjwAqLzcqMt49vcYkbM2ZbQ1t7P
+         v42SWmn4WxC8F+AgsW7/tDLDKEhNXHdtoNoElm/xXp+pI0POGaNOwvomFMwwT5GWIOQ2
+         Ypzg==
+X-Gm-Message-State: AFuF++mkF8YTVppww3JVdottko011fyJw4yXg0QBX5piBVYnnA1C5Ci6
+	l4tKQjg9th3swd4CUMSqOqOYeTm6kOhm6RtzWKjmvMp3LA86y3Z4LTCqvyJ7vR3vZQ==
+X-Gm-Gg: AR+sD13w9QJJsOqe2bQWI5Z1SVS5wq6t6tVCeoCi4/GqWxYFY7vk9KHty9zLJWt6AxW
+	WLxLdpBDLpPvJL0KC7+uvkLTEgWUeCPYmxdHJ/q3Qm0OvALarzGG1MMy9xlrl4C7GkULH3jIf45
+	Yp4ibdE2rmjYqTuRbHlsvGFg3HA1hwtwezwNFBMiVdX9QcKgEYSSxJHRkWrHp7g4yxJnxKK0XZc
+	3HVOBovm70hNmTB6F9EdhtATAwHpYAsLVcZdZaib7eLKjVz2kT1Vh0RJ0Y6hzTZdw32qUglc0VS
+	y//WxaiOgczBujToIvs32O+L8KwutGdsZmEf1zhjNYOC/ofS1yro9upckrPrfQAs/wWCFnX3pi1
+	WXIAFgv4VDUFqWgu4EXsiOOETJf2pImLXYy6RtBC77sJ0rF+WI6Y5kzOZ7lCq9oxjwEYLUhxNYa
+	c4WZ0x8WLy/EhKrPK2aYR4sfDjklclf6UAAoSHVsFR5gyWX/sI/yPMZKZUHdS8YnR+Oo4CvSEsh
+	U+8c2ZhkPOwhkiAjTvm7Yyipw5hlHw8POqb+UQ5T+PAQJbcefbB
+X-Received: by 2002:a05:600c:8705:b0:49c:cedf:f870 with SMTP id 5b1f17b1804b1-49ce58366f0mr53581555e9.16.1788337917466;
+        Wed, 02 Sep 2026 01:31:57 -0700 (PDT)
+Message-ID: <89352ea0-7284-4f6f-bba4-5a6a334b1551@suse.com>
+Date: Wed, 2 Sep 2026 10:31:56 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] x86/alternatives: mark .altinstructions r/w
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>
+References: <a16d4079-cd8c-4eca-8a60-3cef40173cfd@suse.com>
+ <apfPz0njzKVwJ22s@macbook.local>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <apfPz0njzKVwJ22s@macbook.local>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <eee7754d-a7ef-477c-a74d-2104291103bb@suse.com>
+X-purgate-ID: tlsNG-16d1c6/1788337918-F72C677B-5C8972AA/0/0
+X-purgate-type: clean
+X-purgate-size: 912
 
-On Thu, Jul 02, 2026 at 11:31:14AM +0200, Jan Beulich wrote:
-> Both ROMBIOS and SeaBIOS (with CONFIG_QEMU=y, as we build it) blindly
-> assume availability of this field (at its conventional index 0x32); OVMF
-> at least has code to inspect FADT. Hence we ought to have supported it
-> virtually forever.
+On 02.09.2026 09:27, Roger Pau Monné wrote:
+> On Wed, Sep 02, 2026 at 09:15:46AM +0200, Jan Beulich wrote:
+>> Forever since the introduction of the .priv member it has been wrong to
+>> record the section as r/o.
+>>
+>> .alt_call_sites, otoh, is legitimately r/o, hence
+>> __alt_call_sites_{start,end}[] would better reflect that.
 > 
-> As the index is beyond RTC_CMOS_SIZE, leverage the padding field in
-> struct hvm_hw_rtc to hold its value. Update the field only when involved
-> values are valid BCD century specifiers. Otherwise (for VMs migrated in
-> from an older hypervisor) leave handling to the DM.
+> Right, we don't however have a .init.rodata section, and hence it gets
+> placed in the .init.data section which is r/w.  No objection about the
+> addition of const, it's the right thing.
 > 
-> This makes the Linux rtc-cmos driver report y3k compatibility.
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 > 
-> In the new rtc_check(), besides checking the new fields also check the
-> pre-existing pad0 field.
+> Acked-by: Roger Pau Monné <roger@xenproject.org>
+
+Thanks.
+
+> I think you want:
 > 
-> While extending xen-hvmctx.c:dump_rtc() also add RTC offset there.
-> 
-> Fixes: 4ca161214355 ("[HVM] Move RTC emulation into the hypervisor")
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> Fixes: 4008c71d7af2 ("x86/alt: Support for automatic padding calculations")
 
-Acked-by: Roger Pau Monné <roger@xenproject.org>
+I was pondering to add this, but then decided against (it's an inconsistency,
+not really a bug). Since you ask for it, let me add it then.
 
-> ---
-> Am I overly paranoid with the checking of the field, considering that
-> Xen 3.x post-dates year 2000 and hence all firmware nowadays usable guests
-> have ever run with should have been aware of the field? Or am I, quite the
-> opposite, still not strict enough?
-
-I think the checking is likely fine.
-
-> Now that we extend struct hvm_hw_rtc, should we perhaps save not only the
-> century, but also its index?
-
-Hm, possibly for correctness, albeit I think this is unlikely to cause
-issues.  Likely better done in a separate patch?
-
-> 
-> Likely more sanity checking could be added to rtc_check(), but that's for
-> a separate patch imo.
-> 
-> Isn't day-of-week handling flawed? If the field is brought out of sync
-> with the other values, shouldn't it stay respectively out-of-sync?
-
-I don't know that much about the RTC TBH.
-
-> And
-> isn't it excessive overhead to go through rtc_set_time() when the field
-> is updated while SET is clear?
-
-I think this is done because we don't call rtc_set_time() when RTC_SET
-is activated in RTC_REG_B?  We would need to change the logic a bit.
-Is there a reason to propagate the changes to the DM even when SET is
-not active?
-
-> Perhaps we ought to also support alarm day/month features?
-> ---
-> v2: Don't re-purpose pad0 field of struct hvm_hw_rtc.
-> 
-> --- a/tools/libacpi/static_tables.c
-> +++ b/tools/libacpi/static_tables.c
-> @@ -33,6 +33,8 @@ struct acpi_20_facs Facs = {
->  #define ACPI_PM_TMR_BLK_BIT_WIDTH           0x20
->  #define ACPI_PM_TMR_BLK_BIT_OFFSET          0x00
->  
-> +#define CMOS_CENTURY 0x32 /* Conventional index used also without ACPI */
-> +
->  struct acpi_fadt Fadt = {
->      .header = {
->          .signature    = ACPI_FADT_SIGNATURE,
-> @@ -88,7 +90,9 @@ struct acpi_fadt Fadt = {
->          .register_bit_width  = ACPI_PM_TMR_BLK_BIT_WIDTH,
->          .register_bit_offset = ACPI_PM_TMR_BLK_BIT_OFFSET,
->          .address             = ACPI_PM_TMR_BLK_ADDRESS_V1,
-> -    }
-> +    },
-> +
-> +    .century = CMOS_CENTURY,
->  };
->  
->  struct acpi_20_rsdt Rsdt = {
-> --- a/tools/misc/xen-hvmctx.c
-> +++ b/tools/misc/xen-hvmctx.c
-> @@ -311,7 +311,7 @@ static void dump_rtc(void)
->      printf("              0x%02x 0x%02x 0x%02x 0x%02x 0x%02x 0x%02x, index 0x%02x\n",
->             r.cmos_data[8], r.cmos_data[9], r.cmos_data[10], r.cmos_data[11], 
->             r.cmos_data[12], r.cmos_data[13], r.cmos_index);
-> -
-> +    printf("         century 0x%02x  offset %"PRId64"\n", r.century, r.rtc_offset);
->  }
->  
->  static void dump_hpet(void)
-> --- a/xen/arch/x86/hvm/rtc.c
-> +++ b/xen/arch/x86/hvm/rtc.c
-> @@ -482,16 +482,27 @@ static int rtc_ioport_write(void *opaque
->          data &= 0x7f;
->          s->hw.cmos_index = data;
->          spin_unlock(&s->lock);
-> -        return (data < RTC_CMOS_SIZE);
-> +        return data < RTC_CMOS_SIZE || (s->has_century && data == RTC_CENTURY);
->      }
->  
-> -    if ( s->hw.cmos_index >= RTC_CMOS_SIZE )
-> +    switch ( s->hw.cmos_index )
->      {
-> +    case 0 ... RTC_CMOS_SIZE - 1:
-> +        orig = s->hw.cmos_data[s->hw.cmos_index];
-> +        break;
-> +
-> +    case RTC_CENTURY:
-> +        if ( s->has_century )
-> +        {
-> +            orig = s->hw.century;
-> +            break;
-> +        }
-> +        fallthrough;
-> +    default:
->          spin_unlock(&s->lock);
->          return 0;
->      }
->  
-> -    orig = s->hw.cmos_data[s->hw.cmos_index];
->      switch ( s->hw.cmos_index )
->      {
->      case RTC_SECONDS_ALARM:
-> @@ -507,6 +518,7 @@ static int rtc_ioport_write(void *opaque
->      case RTC_DAY_OF_MONTH:
->      case RTC_MONTH:
->      case RTC_YEAR:
-> +    case RTC_CENTURY:
->          /* if in set mode, just write the register */
->          if ( (s->hw.cmos_data[RTC_REG_B] & RTC_SET) )
->              s->hw.cmos_data[s->hw.cmos_index] = data;
-> @@ -515,7 +527,10 @@ static int rtc_ioport_write(void *opaque
->              /* Fetch the current time and update just this field. */
->              s->current_tm = gmtime(get_localtime(d));
->              rtc_copy_date(s);
-> -            s->hw.cmos_data[s->hw.cmos_index] = data;
-> +            if ( s->hw.cmos_index != RTC_CENTURY )
-> +                s->hw.cmos_data[s->hw.cmos_index] = data;
-> +            else
-> +                s->hw.century = data;
->              rtc_set_time(s);
->          }
->          alarm_timer_update(s);
-> @@ -591,7 +606,16 @@ static void rtc_set_time(RTCState *s)
->      tm->tm_wday = from_bcd(s, s->hw.cmos_data[RTC_DAY_OF_WEEK]);
->      tm->tm_mday = from_bcd(s, s->hw.cmos_data[RTC_DAY_OF_MONTH]);
->      tm->tm_mon = from_bcd(s, s->hw.cmos_data[RTC_MONTH]) - 1;
-> -    tm->tm_year = from_bcd(s, s->hw.cmos_data[RTC_YEAR]) + 100;
-> +    tm->tm_year = from_bcd(s, s->hw.cmos_data[RTC_YEAR]);
-> +    if ( s->has_century )
-> +    {
-> +        unsigned int century = s->hw.century;
-> +
-> +        BCD_TO_BIN(century);
-> +        tm->tm_year += century * 100 - epoch_year;
-> +    }
-> +    else
-> +        tm->tm_year += 100;
->  
->      after = mktime(get_year(tm->tm_year), tm->tm_mon + 1, tm->tm_mday,
->                     tm->tm_hour, tm->tm_min, tm->tm_sec);
-> @@ -629,6 +653,12 @@ static void rtc_copy_date(RTCState *s)
->      s->hw.cmos_data[RTC_DAY_OF_MONTH] = to_bcd(s, tm->tm_mday);
->      s->hw.cmos_data[RTC_MONTH] = to_bcd(s, tm->tm_mon + 1);
->      s->hw.cmos_data[RTC_YEAR] = to_bcd(s, tm->tm_year % 100);
-> +
-> +    if ( s->has_century )
-> +    {
-> +        s->hw.century = get_year(tm->tm_year) / 100;
-> +        BIN_TO_BCD(s->hw.century);
-> +    }
->  }
->  
->  static int update_in_progress(RTCState *s)
-> @@ -663,13 +693,17 @@ static uint32_t rtc_ioport_read(RTCState
->      case RTC_DAY_OF_MONTH:
->      case RTC_MONTH:
->      case RTC_YEAR:
-> +    case RTC_CENTURY:
->          /* if not in set mode, adjust cmos before reading*/
->          if (!(s->hw.cmos_data[RTC_REG_B] & RTC_SET))
->          {
->              s->current_tm = gmtime(get_localtime(d));
->              rtc_copy_date(s);
->          }
-> -        ret = s->hw.cmos_data[s->hw.cmos_index];
-> +        if ( s->hw.cmos_index != RTC_CENTURY )
-> +            ret = s->hw.cmos_data[s->hw.cmos_index];
-> +        else
-> +            ret = s->hw.century;
->          break;
->      case RTC_REG_A:
->          ret = s->hw.cmos_data[s->hw.cmos_index];
-> @@ -718,7 +752,8 @@ static int cf_check handle_rtc_io(
->          *val = 0xff;
->          return X86EMUL_OKAY;
->      }
-> -    else if ( vrtc->hw.cmos_index < RTC_CMOS_SIZE )
-> +    else if ( vrtc->hw.cmos_index < RTC_CMOS_SIZE ||
-> +              (vrtc->has_century && vrtc->hw.cmos_index == RTC_CENTURY) )
->      {
->          *val = rtc_ioport_read(vrtc);
->          return X86EMUL_OKAY;
-> @@ -760,6 +795,32 @@ static int cf_check rtc_save(struct vcpu
->      return rc;
->  }
->  
-> +static int cf_check rtc_check(const struct domain *d, hvm_domain_context_t *h)
-> +{
-> +    const struct hvm_save_descriptor *desc =
-> +        (const struct hvm_save_descriptor *)&h->data[h->cur];
-> +    struct hvm_hw_rtc s;
-> +
-> +    if ( !has_vrtc(d) )
-> +        return -ENODEV;
-> +
-> +    if ( hvm_load_entry_zeroextend(RTC, h, &s) != 0 )
-> +        return -ENODATA;
-> +
-> +    if ( s.pad0 )
-> +        return -EINVAL;
-> +
-> +    for ( unsigned int i = 0; i < ARRAY_SIZE(s.pad1); ++i )
-> +        if ( s.pad1[i] )
-> +            return -EINVAL;
-> +
-> +    if ( desc->length >= endof_field(struct hvm_hw_rtc, century) &&
-> +         ((s.century & 0xf) >= 10 || (s.century >> 4) >= 10) )
-> +        return -EINVAL;
-
-It would be nice to also set ->has_century here, but the s struct is
-a temporary stack allocation.
-
-> +
-> +    return 0;
-> +}
-> +
->  /* Reload the hardware state from a saved domain */
->  static int cf_check rtc_load(struct domain *d, hvm_domain_context_t *h)
->  {
-> @@ -793,12 +854,18 @@ static int cf_check rtc_load(struct doma
->      check_update_timer(s);
->      alarm_timer_update(s);
->  
-> +    if ( !s->hw.century )
-> +    {
-> +        s->has_century = false;
-> +        s->hw.century = 0;
-
-Isn't this last line pointless?  The if condition is !s->hw.century,
-and hence s->hw.century must be 0 here?
-
-Thanks, Roger.
+Jan
 
