@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF572C624D0
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 12:51:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405843.1639287 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE01FC624D3
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 12:54:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405854.1639296 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1kQT-0006ir-79; Wed, 02 Sep 2026 12:50:49 +0000
+	id 1x1kTf-0007J9-Ky; Wed, 02 Sep 2026 12:54:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405843.1639287; Wed, 02 Sep 2026 12:50:49 +0000
+Received: by outflank-mailman (output) from mailman id 1405854.1639296; Wed, 02 Sep 2026 12:54:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1kQT-0006ik-4Z; Wed, 02 Sep 2026 12:50:49 +0000
-Received: by outflank-mailman (input) for mailman id 1405843;
- Wed, 02 Sep 2026 12:50:48 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x1kTf-0007J2-IQ; Wed, 02 Sep 2026 12:54:07 +0000
+Received: by outflank-mailman (input) for mailman id 1405854;
+ Wed, 02 Sep 2026 12:54:06 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x1kQS-0006ie-Gk
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 12:50:48 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x1kTe-0007Iw-3V
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 12:54:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1kQR-000N2g-Mp
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 14:50:47 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1x1kTc-00Ggng-Vx
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 14:54:04 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a981b95-8faa-0a2a0a5109dd-0a2a45028fa4-42
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 14:50:42 +0200
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a981c67-2eae-0a2a0a5409dd-0a2a4506dbde-4
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 14:54:00 +0200
+Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a981ba2-6ca4-0a2a45020019-d155802dd5b6-3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 14:50:42 +0200
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-490cf322ed0so11208565e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 05:50:42 -0700 (PDT)
+ id 6a981c68-195a-0a2a45060019-d155dd2aad2e-3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 14:54:00 +0200
+Received: by mail-wr1-f42.google.com with SMTP id
+ ffacd0b85a97d-48433fad54aso663079f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 05:54:00 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49ce4774a43sm66476615e9.9.2026.09.02.05.50.41
+ ffacd0b85a97d-48448e7fddbsm5953519f8f.11.2026.09.02.05.53.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 02 Sep 2026 05:50:41 -0700 (PDT)
+ Wed, 02 Sep 2026 05:53:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,59 +55,59 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788353442; x=1788958242; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788353640; x=1788958440; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=HK+l3p+avUXjjwOI+ZT2zYOCoW2HY3hG653O7Mmhfuk=;
-        b=ImdBQL477HfDgil5Rr7owatKDMwhhrBrMx5bOLeRQ575r6gi3YESTnwnctwKKKXxVn
-         A26LWaHZtER3Cb7zUb6iLgyWxOkGkOMOt/G6bgEOFJZ4rgGDmv9rDXVxsoQeICvGYCY4
-         xCXuyHRQyahz8TMdQNnX6FLta4AWTgrkwCDOTYsYqjcFg2YlIZt70CQzaWz/F3WkS6qQ
-         6I18Vv1v7/jVhjE/JaGdyJabqqPLcDt096ClVFQ/69sx4vbSAUxmzR4tKlJQwcTohQRE
-         XJm6PxEv2P9KVyjwW045oNqPwwPJxyYTTDABC7/B22HNxAzn4jvTq4EsZk6WHSuAmz/2
-         6JEg==
+        bh=EVzIvntrdBachigCrXs5hhwAmXuepUUkG1cNV9+9DUA=;
+        b=WVoRlSVEe7zEy3cB/3t6RrEWyzoR0Fi5+THRVCcWq7rK1ZOWIVmBV2Wj0EwtC6YSFi
+         esuzoQQDG5ENvUhWE0w82i3LZl22sFhcbx7e3Mslg6iV6zpTEYDKYmBK03zZQwcd6KaI
+         ijrgv1+9Kw28UBa7Ckg/KxWx8YT/7QD/pV2OtVRAdkOk3Niad8bN1laBumKb7kG5xNxI
+         0TjAt2DRuFZH5i//I4OaJLdDatQZ0Af7dsoEF2pf6AtfhT0NtdHSxOb6PclF9zh1oI3k
+         LVnaWtNjHIGONiakPlUazYyr99+oR5GzEb7zJsLp8BVWSWQtEn6lhpauC1OJTMX5cwrz
+         Uhsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788353442; x=1788958242;
+        d=1e100.net; s=20251104; t=1788353640; x=1788958440;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=HK+l3p+avUXjjwOI+ZT2zYOCoW2HY3hG653O7Mmhfuk=;
-        b=FXuVYGisTcSNQLxylvHxtUEEELoh8ITquet4FO4Wfc9X2VicFw+16d0pm0a9ShJ+VS
-         ua5Jn6pf1uOF/cNZUTg+d8uiVIrY5P4PEn8zfkx2s+uP0KqkuDGJt9CgioB9GIrCNatD
-         ppyElR9Fp9m+vdbC5q4Rr4oaVApZPGo1Xh89A5I48rN6EGy4VGoKjKyPPHSi6LCO/1md
-         dnMcrZQ0jWJqVrDPc66ExzuVWE626AFoXhhG2swmAp51Jp5VwhFr1Ww7d9eJT6nCLW4X
-         spGfn7qTOFx+PVfUFy5a13GZLa8FQRXoM3QD8IvER0jGRZ8Zk6a5tFlkFlqm3GdgrBj1
-         STmw==
-X-Forwarded-Encrypted: i=1; AHgh+RoWS2j2tbIFswyWcCJ4bDzu1vtSzYUbpq9xhyJDO6CT4oiht+I93y7sp82yE0tWzKSJNgAK1VrpS4k=@lists.xenproject.org
-X-Gm-Message-State: AFuF++mwND3rtrH4gV5PlmK6M0Rt/UYkcHDwbVRp5fYS3njhD4RcGxdH
-	4fOplBotc8rusaAELwQOkwyof0+qdPe8+gsWR/xu4JqaULPj82L6Wk9pxrbHZhmJSA==
-X-Gm-Gg: AR+sD10Bt63oIekqEoCeZ0WOS+r5RfuWhHMDWdniFLph1oHC9Wrt5W0wCTfkZLIRNQ1
-	iE2f9dvzvoZoISoH3Es86c5HTP0UgLP04ckVj8QXlByDvXQNRH1yCNtYbpsxJny7Dl51lvDYLbG
-	w1y/A3o4S0n8Ip4wgJt11/zfCz1+fIs4EjtJQgjBwl2zue4s/ChPTfnd5gHLlflUfA5EwlZgNEG
-	VCvCrR7vcnrQsX3Z9BCIMynoDt4vedfc7AyGVg5tdsSfalUHuXsxL8pK5Cy9v0M5q/4wH8q2N8o
-	0O1VtI1MkoPBgBIfis014B4zOIbxZoXdPCAsm2F5ebGLdl9l/7e+mzy74/tPdZZWIwo2r0FR43W
-	NMqjgaj4jOMDPH86kgMWse+SQP4OIyvXH+zVlzXJzlpiXDvPAtfoaG2b8A7Kz691zVqAgCqf4mj
-	8aI3X+8QvQ+Vfzw9F8tGujQ6HTaJhWf4RJ82jkWWCDLOVnQc4668EnwPzRegJ1Zhme+1y2cJLX5
-	i7PhHtF0alH6whAZT/mxtmkm58628Qs0MmHdVTkF2noWyvKaIJ5
-X-Received: by 2002:a05:600c:e557:10b0:49c:e42b:a4ac with SMTP id 5b1f17b1804b1-49ce5822582mr62873975e9.11.1788353442111;
-        Wed, 02 Sep 2026 05:50:42 -0700 (PDT)
-Message-ID: <0c43989b-2d7c-4411-8715-eab7390c14d8@suse.com>
-Date: Wed, 2 Sep 2026 14:50:40 +0200
+        bh=EVzIvntrdBachigCrXs5hhwAmXuepUUkG1cNV9+9DUA=;
+        b=Bs3E50eq6QkEV6N9EeM++qCyKnrIRQSEUQUm2rT24KnEnXhZtGJUuXao7IaDHseWOM
+         KWGuxKWXBmdDDAeyfXt3PTRZOhfvAP52WO8s2z0U6ZA3EX5z113ms40aG1kC/A23ce8X
+         kV2C9WIPxtEyRzI88EuS6SFIAeekpgSJHJTck4Sp4Kn4nosVhhSEVvMMEW5mbWeFi5pu
+         +/nvzMag7VJ3VVULjC0/ucbexjY+2obj1AcWTD0lRmrtysr2Bkn8fyKguOdY8Gm/C8R5
+         OVTj9sk0biTarL6ppG3tlHQmGZDBECUCtBNNkQt617C4AD5uBPVzN13Yn0zrvggkzfsZ
+         95kQ==
+X-Gm-Message-State: AFuF++kN9985rqBEG32HWyhfgF3C4tBfLYF9X0arQwK8AZJuyqFwpoaE
+	eBQ9b9BHsz57WJb56nzccDOW9nGlMDkTCD6i4mj6EE/GlBtf6JCccHyFn4uV/Lehrg==
+X-Gm-Gg: AYBFou0mwBmaJsxtCL3Bxnzh8EOEA8Y8k3LiTmeOsFYyHUOnyOx1ws4OQ2tD/s6cnqu
+	QP/fYUBVGLlOce1bQxPMtyrnqSAlDLWDujb0o+f08GpelWOPYOfaBjNE0Lv3BQrq5FvxNhOLbzj
+	NZ0i2mch+T8F9ddslAZYTs8ia45pGM+jWN5+492FDNEo/iyVKvkQWVSs3tGj3u2gPdtpZ3D9ys3
+	HFGyqsxC3p3WvW5l5lZGcy+N5TH5ZHrW7kp6xktKHAginlNl/nKnyBeaU9F22MVOPCVWvSwFgUQ
+	zaQnlmAQmohoZ4XjUKOT+eGzoGf9EOxNWgS05WKG9C2TCOxGx9HsTvllQK3I1rj/5aSyCRh2JXk
+	O9xlENkQmr3Cpkww6yCMJf/vOLr5g+bAiCvblqX2TD+ddp4WOr5Gf+3BxGi6GxQxsf1XPX90rgY
+	DuKsCrzDtCR65uOlfWMh/d7IclABzGqdDD2pX0/S1koE4p0c7szylUhamKYxFkBoRHWH6dPIc3f
+	tUBoVgVVMWys+jSaejeb3Pk5egDZZpxKC6ldg9NJ9HGE9qYmQPRgQ==
+X-Received: by 2002:a05:6000:2607:b0:484:3310:7110 with SMTP id ffacd0b85a97d-484914c272emr8008399f8f.28.1788353640244;
+        Wed, 02 Sep 2026 05:54:00 -0700 (PDT)
+Message-ID: <52dcd7cd-52db-4b59-90ef-f7cde79cf5bc@suse.com>
+Date: Wed, 2 Sep 2026 14:53:58 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] x86/bitops: Remove ADDR
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- xen-devel@lists.xenproject.org
-References: <20260902114339.62043-1-andrew.cooper3@citrix.com>
- <20260902114339.62043-4-andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 13/14] passthrough/PCI: rework (s,b,d,f) init of struct
+ pci_dev
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>
+References: <0ff5676d-2ad3-49e3-a94b-90e7c3edb55f@suse.com>
+ <baa05f9c-6787-44c3-9d53-e3adc0509140@suse.com>
+ <apgaJh5ezRTmmyz2@macbook.local>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -133,37 +133,34 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260902114339.62043-4-andrew.cooper3@citrix.com>
+In-Reply-To: <apgaJh5ezRTmmyz2@macbook.local>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1788353442-F36BF2AC-7C205966/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-16d1c6/1788353640-1F0C777B-919E8FC9/0/0
 X-purgate-type: clean
-X-purgate-size: 1034
+X-purgate-size: 1045
 
-On 02.09.2026 13:43, Andrew Cooper wrote:
-> All this does is obfuscate the usage sites.
+On 02.09.2026 14:44, Roger Pau Monné wrote:
+> On Wed, Sep 02, 2026 at 08:36:27AM +0200, Jan Beulich wrote:
+>> Right now we're casting away const-ness, to initialize the individual
+>> elements despite the field(s) being declared const. Eclair validly
+>> recognizes this as a Misra rule 11.8 violation. Hide this by switching to
+>> the use of memcpy(), deriving the destination address from the (mutable)
+>> struct pci_dev * which we hold in hands.
+>>
+>> No functional change intended.
+>>
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>> ---
+>> Subsequently we may want to further leverage the sbdf local variable we
+>> now have in the function. Yet of course the primary question is: Is this
+>> an okay game to play in the first place?
+> 
+> I've wondered the same, while this might be obfuscated enough for
+> Eclair to complain, aren't we still violating the spirit of the rule?
 
-I don't mind these changes, yet I'd like to express that as so often there
-are multiple ways of looking at things. The benefit of the macros was that
-the use sites were textually shorter, and hence easier to process (assuming
-you know what ADDR stands for).
-
-> --- a/xen/arch/x86/include/asm/bitops.h
-> +++ b/xen/arch/x86/include/asm/bitops.h
-> @@ -9,16 +9,6 @@
->  #include <asm/asm_defns.h>
->  #include <asm/cpufeatureset.h>
->  
-> -/*
-> - * We specify the memory operand as both input and output because the memory
-> - * operand is both read from and written to. Since the operand is in fact a
-> - * word array, we also specify "memory" in the clobbers list to indicate that
-> - * words other than the one directly addressed by the memory operand may be
-> - * modified.
-> - */
-
-Might we not better keep this justification for the seemingly odd memory
-clobbers? (The first sentence, otoh, I agree can be dropped.)
+We do, but what do you do without dropping that "const" (which I'd really
+like to keep), and without C++ concepts of initialization?
 
 Jan
 
