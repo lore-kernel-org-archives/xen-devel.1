@@ -4,43 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5CFCC624D3
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2026 16:05:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1404854.1638526 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB2A2C624D0
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 02:32:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405007.1638559 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1QzM-0007oI-BB; Tue, 01 Sep 2026 16:05:32 +0000
+	id 1x1alg-000157-4Y; Wed, 02 Sep 2026 02:32:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1404854.1638526; Tue, 01 Sep 2026 16:05:32 +0000
+Received: by outflank-mailman (output) from mailman id 1405007.1638559; Wed, 02 Sep 2026 02:32:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1QzM-0007oB-8L; Tue, 01 Sep 2026 16:05:32 +0000
-Received: by outflank-mailman (input) for mailman id 1404854;
- Tue, 01 Sep 2026 16:05:31 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x1QzL-0007o5-Am
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 16:05:31 +0000
+	id 1x1alf-00014z-Vu; Wed, 02 Sep 2026 02:32:03 +0000
+Received: by outflank-mailman (input) for mailman id 1405007;
+ Wed, 02 Sep 2026 02:32:02 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <bp@alien8.de>) id 1x1ale-00014t-M7
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 02:32:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1QzK-008kqP-IM
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2026 18:05:30 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x1ald-00GD2l-FA
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 04:32:01 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a96f7c5-8faa-0a2a0a5109dd-0a2a4509bdfc-14
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 18:05:30 +0200
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a96f7ca-be1a-0a2a45090019-d1558035ad41-3
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 18:05:30 +0200
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-49b0dd3c9a0so34650445e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 09:05:30 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
- [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49b9269f1b6sm273269135e9.4.2026.09.01.09.05.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 01 Sep 2026 09:05:20 -0700 (PDT)
+ (envelope-from <bp@alien8.de>)
+ id 6a978a85-e002-0a2a0a5209dd-0a2a4504c3ec-16
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 04:32:01 +0200
+Received: from [65.109.113.108] (helo=mail.alien8.de)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <bp@alien8.de>)
+ id 6a978aa0-b57f-0a2a45040019-416d716cc5e4-3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 04:32:01 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id 1841A40E027F; 
+ Wed,  2 Sep 2026 02:32:00 +0000 (UTC)
+Received: from mail.alien8.de ([127.0.0.1])
+ by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id grKAqAkDQxBF; Wed,  2 Sep 2026 02:31:50 +0000 (UTC)
+Received: from stx.tnic (unknown [IPv6:2600:1700:38ca:c00::e])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest
+ SHA256) (No client certificate requested)
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id F350E40E02C2;
+ Wed,  2 Sep 2026 02:31:31 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,96 +57,129 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788278730; x=1788883530; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=AbuICIoNGzBdRJXA7FCwp3jUZqBDb4bPalbg5kTERBI=;
-        b=joPZWQ2O5RFerk56Rs1g/l0UHTvIZIM9jsYscl1+JaYQO8pN1yX19FnN4kk9XCg+TD
-         DrJ4uHuwWQj6OZlwdTS8feA8Sp2MMGIq67HKl8dS+s4nxmv9Y6jUKnQCQb0v+xw9JIBN
-         UL5NcaWfq4gcp4mzaoSn2tPkLRvv+pJ3HnAvtFX272rXyN5ND30nJS7KXPAnLKN+iEUi
-         JfNr2Vi/05gQbpLKsarIvJUpDLXP2TGcoUT4Zxu0c1prVqwzLDIxkxpbvXXUNCyCWuEJ
-         V37XAouD0B6wVvL46ucwZDr7lqslgaARzqRBG/tX+5U/7SwqMoxihdZZyakW49ysBjlT
-         rWKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788278730; x=1788883530;
-        h=content-transfer-encoding:content-type:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=AbuICIoNGzBdRJXA7FCwp3jUZqBDb4bPalbg5kTERBI=;
-        b=lLuDsu6VYnNxIsibIhD5PxoF/97UzcH1quZ83J0sPYk5FcaJ+8OekJ4PaP1PJy5clh
-         5k3OyldU5hb5x2DC6M9gWhI+66f/jyB1KvpsfcyRn4/yNpRzCSOcm1A5lf5Yjjeq8elP
-         R6X8mmGR/4my+9KDae0A6MQxKD+3tIalJrVgttyIkUMrhoycFFaQRi+LD+pVQbw9bW1M
-         D8y/GDknSA6dMajnLdkqpNz+GqtHiHnCp4usY8JAsSAABVWTGEGLWeNW6Mdw2PSqtzyy
-         l4UX4XF7lBeO4wV8R/s6oWMp09zaHSAoU45CFC5loaS7Sl+tuySCh4n3uRh0x3RIZdee
-         j6lg==
-X-Gm-Message-State: AFuF++lmnglqsZevbJXEZUaKFTK1YngV3C/gKQAO4zg9i26dPK3Og+rG
-	AeV9M6O8abMazwBVfhjQXyrxaIUNMwz2eZlZh+cF2IkLTJrkLJmrq1q8yhHL+Q==
-X-Gm-Gg: AR+sD13sdkB0DYen+9whvT7DLwZ1MAzPNMvZ0h+LgLldT6mNa26zN4LaxiK5lI6GgIJ
-	RrNIjPCn0jqFJkruVctq9ZoBgkPUiyp9KbbRiJql7ZUKH5XKPfGe46991YaLPD8Tx2sHVRGTnSM
-	giAYf8xyLpgoO5SAE2PmiyMqPXrNXzRNfsULgcqaxqfw53PB4lF6PviqoypbjU2J3l0PdZwPfXu
-	ugRK9E0sCvtbiffj5dDa5FQWMRVYuYI2syZXOxJ8s8Qw0Z+WKqkOabwtSg2Um65/QpbS0LxFz1q
-	B+ZpYcXSb6sf4RcmrvB+jPCQI3Dnvx5UTpgvcpWvOEaFajRoTfD8ESXq2CTL/7zM8V4wHFeyCLn
-	gE5JGCgO6/sFnACybOfwtND3qLjZ6+C7h3ceebhLV1rH7SY/tBC70ubKiOxRg9qNVN/YAZT2Uu3
-	LxUA/37Ug9UN3OAk+1XhSOixzv1lHmOWrzul09QPbSX4OfijTpu3kSN1m1ENqhG120QvJtslq/K
-	AJ+qZXNrIXMkLVAQJh7zU85UuPAYmOEUJJ32Br1+g==
-X-Received: by 2002:a05:600c:524c:b0:49b:9161:db26 with SMTP id 5b1f17b1804b1-49cdc55a9e5mr141652635e9.14.1788278721179;
-        Tue, 01 Sep 2026 09:05:21 -0700 (PDT)
-Message-ID: <ad1588cc-3130-4ea6-a7cc-0210b507b7a4@gmail.com>
-Date: Tue, 1 Sep 2026 18:05:20 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=fail header.s=alien8 header.d=alien8.de header.i="@alien8.de"
+X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
+Authentication-Results: mail.alien8.de (amavisd-new); dkim=fail (4096-bit key)
+	reason="fail (body has been altered)" header.d=alien8.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
+	t=1788316308; bh=EwFLC8HpYmRJXjFrVbfRa0roHEFDXarZtMTpmdyIJIo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=GeTACKuq4sfjSafQmtL/mNU2DMZXKongg2aWLsv445YZFwuPNMcN+3RYV3NEAuRTn
+	 Ocvt51Ehh163Yijix3A+3MFWpRBxGI8cuGfjtzNc5vA93trT/wR8flmDeQR9rSLd4j
+	 C48FS45t2RylDIHjK3HGbQrqshjQxmcRFjxrDy8tMYbMUVVrWzLu/pvkRddhCEQbJj
+	 5+cX0AnpQIZtV+OekTI6CVjkjbsNxLrbFgJ2X1QkWcUchDFGTOra1fUG54M+Fiq2Nb
+	 IOUyQtwGnMyd5iyvbtGo4OxbbiZ2Atb0OgMN3bSILdSij1m/IG3cmWck7RxYNUJnrd
+	 8cmsvDrlwyWHFOs90dB+12JWYp2kGKrz3arXahns0uS0wl7I4S6o+swbv36rMIu2O+
+	 jiLBHQ2x3Z6hCcicGUyPSPWfx5AZu0yzptnrvgcIRGofB9w2U0iK6z1i1cQ10xthkt
+	 XPMwTm7/Ld7QLSlrLcQTdbNCDrxxdl54HVaoN+bi3L7T+6C4eQPws/IZoLLDBI+YZU
+	 AE2GZyfvie0is6REKzz249vK0NDF/oK6Hr311S9Gnvng8k705nwsOe5huyRNqIsZ9t
+	 Lc5GQh1/6AIQS+sqOt815w2sq4nN8dmuJLcXhU2uJ/twqG8fMFReBXh6LIcHgKOLJU
+	 T3i5k14MW/o20cT4ih1nIrlg=
+Date: Tue, 1 Sep 2026 19:31:29 -0700
+From: Borislav Petkov <bp@alien8.de>
+To: Mauricio Faria de Oliveira <mfo@igalia.com>,
+	Michael Matz <matz@suse.de>, Richard Biener <rguenther@suse.de>
+Cc: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>, Juergen Gross <jgross@suse.com>,
+	Alexey Dobriyan <adobriyan@gmail.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Jan Beulich <jbeulich@suse.com>, Brian Gerst <brgerst@gmail.com>,
+	kernel-dev@igalia.com, linux-kernel@vger.kernel.org,
+	xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v9 1/5] x86/boot: Remove "cc" clobber from memcmp()
+Message-ID: <20260902023129.GGapeKgVlL2WgHcJcb@fat_crate.local>
+References: <20260822-pvh-kasan-inline-v9-0-e70ef3b75b6a@igalia.com>
+ <20260822-pvh-kasan-inline-v9-1-e70ef3b75b6a@igalia.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Community Manager <community.manager@xenproject.org>,
- "committers@xenproject.org" <committers@xenproject.org>
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: Xen 4.23 planning: items for the release
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1788278730-BECDF034-99D55FE3/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 1333
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260822-pvh-kasan-inline-v9-1-e70ef3b75b6a@igalia.com>
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-ebf023/1788316321-C12DCB50-C72FFCC3/0/0
+X-purgate-type: clean
+X-purgate-size: 2652
 
-Hi all,
+On Sat, Aug 22, 2026 at 03:33:17PM -0300, Mauricio Faria de Oliveira wrot=
+e:
+> According to the GCC documentation, conditions in the flags register
+> (e.g., "=3D@ccnz") are output operands [1] and the compiler is aware [2=
+].
+>=20
+> Also, clobbers (e.g., "cc") may not overlap with an output operand [2].
+>=20
+> Thus, remove the "cc" clobber as it is redudant, and overlaps with, the
+> "=3D@ccnz" output operand.
+>=20
+>     """
+>     6.11.2.4 Flag Output Operands
+>=20
+>         On some targets, a special form of output operand exists by whi=
+ch
+>         conditions in the flags register may be outputs of the asm. [..=
+.]
+>=20
+>     6.11.2.6 Clobbers and Scratch Registers
+>=20
+>         While the compiler is aware of changes to entries listed in the
+>         output operands, [...]
+>=20
+>         Clobber descriptions may not in any way overlap with an input o=
+r
+>         output operand. [...]
+>     """
+>=20
+> Reported-by: "H. Peter Anvin" <hpa@zytor.com>
+> Link: https://lore.kernel.org/all/5e19b195-0ca2-4510-81cb-497b40e4aaf5@=
+zytor.com/
+> Fixes: a8c171c107c0 ("x86/boot: Add volatile, clobbers and zero-length =
+test in memcmp()")
+> Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
+> Link: https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Flag-Output-=
+Operands [1]
+> Link: https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Clobbers-and=
+-Scratch-Registers-1 [2]
+> ---
+>  arch/x86/boot/string.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/arch/x86/boot/string.c b/arch/x86/boot/string.c
+> index 1632d40e1f545ae0665597069b568ea6b6c263e5..03278b4393887cb71cb0638=
+18d3378c4f52b06f8 100644
+> --- a/arch/x86/boot/string.c
+> +++ b/arch/x86/boot/string.c
+> @@ -40,7 +40,7 @@ int memcmp(const void *s1, const void *s2, size_t len=
+)
+>  	asm volatile("test %3, %3\n\t"
+>  		     "repe cmpsb"
+>  		     : "=3D@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len)
+> -		     : : "cc", "memory");
+> +		     : : "memory");
+>  	return diff;
+>  }
 
-As we are starting to plan for Xen 4.23, what items are you planning to
-work on during this release?
+So far, so good.
 
-If there is an existing RFC, design discussion, or patch series, please
-include a link.
+But then I'd expect that gcc would enforce that. I know it can't have it =
+when
+the clobbers contain input or output regs:
 
-Short descriptions are also welcome.
+In function =E2=80=98__memcmp=E2=80=99,
+    inlined from =E2=80=98main=E2=80=99 at memcmp.c:25:6:
+memcmp.c:11:9: error: =E2=80=98asm=E2=80=99 operand has impossible constr=
+aints or there are not enough registers
+   11 |         asm volatile("test %3, %3\n\t"
+      |         ^~~
 
-I will try to use the gathered items to provide some kind of monthly update.
+but with "cc" clobbers it works.
 
-As I am mainly working on RISC-V-related topics, here are some of the
-things we are planning to work on connected to RISC-V:
+That's gcc-16 btw.
 
-- Dom0less guest domain creation:
-https://lore.kernel.org/xen-devel/cover.1787836900.git.oleksii.kurochko@gmail.com/T/#m2697fe1ca8d7c07eda0b11d4c5183a18e46d6f97
+Micha, Richi?
 
-- AIA-related topics:
-https://lore.kernel.org/xen-devel/cover.1787838835.git.oleksii.kurochko@gmail.com/T/#mae53a50655abd12ef4851a328b68a182b23abcac
+--=20
+Regards/Gruss,
+    Boris.
 
-- CI-related topics:
-https://lore.kernel.org/xen-devel/1787823334.8631fc262581453bbf619ec5b2062170.1a04293255c000c4f3@vates.tech/
-
-- Support for real hardware (HiFive Premier P550) with a PLIC interrupt 
-controller:
-[not fully connected yet, but some preparation work]
-https://lore.kernel.org/xen-devel/1787844438.8631fc262581453bbf619ec5b2062170.1a043d52a06000c4f3@vates.tech/T/#t
-
-Other patches are going to be sent later.
-
-- Dom0less guest domain launch. [patch series planed to be sent]
-
-Thanks in advance.
-
-Have a good week.
-
-~ Oleksii
+https://people.kernel.org/tglx/notes-about-netiquette
 
