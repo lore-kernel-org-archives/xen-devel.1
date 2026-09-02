@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C7D4C624D0
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 09:44:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405455.1638958 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C69F4C624D5
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 09:44:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405453.1638952 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1hVp-0002dC-Jf; Wed, 02 Sep 2026 09:44:09 +0000
+	id 1x1hVp-0002Vm-8G; Wed, 02 Sep 2026 09:44:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405455.1638958; Wed, 02 Sep 2026 09:44:09 +0000
+Received: by outflank-mailman (output) from mailman id 1405453.1638952; Wed, 02 Sep 2026 09:44:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1hVp-0002c0-Dx; Wed, 02 Sep 2026 09:44:09 +0000
-Received: by outflank-mailman (input) for mailman id 1405455;
+	id 1x1hVp-0002VY-1d; Wed, 02 Sep 2026 09:44:09 +0000
+Received: by outflank-mailman (input) for mailman id 1405453;
  Wed, 02 Sep 2026 09:44:07 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <dunlapg@georges-macbook-pro-2.fritz.box>)
- id 1x1hVn-0002GD-FQ
+ id 1x1hVm-0002G4-Vz
  for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 09:44:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1hVm-00G2d4-Kq
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 11:44:06 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x1hVl-00B1Tu-V3
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 11:44:05 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <dunlapg@georges-macbook-pro-2.fritz.box>)
- id 6a97efdb-bab6-0a2a0a5309dd-0a2a4508bd48-34
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 11:44:06 +0200
+ id 6a97efe1-e002-0a2a0a5209dd-0a2a4504ec92-22
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 11:44:05 +0200
 Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.fritz.box)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
  (envelope-from <dunlapg@georges-macbook-pro-2.fritz.box>)
- id 6a97efe5-f659-0a2a45080019-d99ba50ce6fa-1
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 11:44:06 +0200
+ id 6a97efe5-b57f-0a2a45040019-d99ba50cef06-1
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 11:44:05 +0200
 Received: by Georges-MacBook-Pro-2.fritz.box (Postfix, from userid 501)
- id 9FFCE36928DD; Wed,  2 Sep 2026 10:44:05 +0100 (BST)
+ id 698C936928D4; Wed,  2 Sep 2026 10:44:05 +0100 (BST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,7 +51,7 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; none
 From: George Dunlap <dunlapg@umich.edu>
 To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+Cc: George Dunlap <gwd@xenproject.org>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
@@ -60,169 +60,267 @@ Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	George Dunlap <gwd@xenproject.org>
-Subject: [PATCH v2 04/14] x86/pv: set/clear guest GDT mappings using populate_perdomain_mapping()
-Date: Wed,  2 Sep 2026 10:43:48 +0100
-Message-ID: <20260901-asi-part2-4-ecc269f268b7@xenproject.org>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 01/14] x86/domain_page: introduce IRQs-off variants of {,un}map_domain_page()
+Date: Wed,  2 Sep 2026 10:43:45 +0100
+Message-ID: <20260901-asi-part2-1-ecc269f268b7@xenproject.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260901-asi-part2-0-ecc269f268b7@xenproject.org>
 References: <20260901-asi-part2-0-ecc269f268b7@xenproject.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1788342246-D674387B-B33CDC94/0/0
+X-purgate-ID: tlsNG-ebf023/1788342245-C12DCB50-5B4BB83C/0/0
 X-purgate-type: clean
-X-purgate-size: 6510
+X-purgate-size: 10808
 
-From: Roger Pau Monné <roger.pau@citrix.com>
+From: George Dunlap <gwd@xenproject.org>
 
-Until the previous patch, update_xen_slot_in_full_gdt() used the
-stashed pointer in d->arch.pv.gdt_ldt_l1tab to update the incoming
-vCPU's page tables with Xen's GDT; this was previously necessary
-because map_domain_page() couldn't be called in a context switch.
-Having a handy pointer to an always-mapped version of the GDT/LDT L1
-table, other sites which modify the table started using it for
-convenience, even if they weren't called from within a context switch.
-One example is pv_{set,destroy}_gdt().
+Currently, map_domain_page() cannot be called in the context switch
+path.  However, Xen already needs to update the slot of an incoming PV
+vcpu's GDT during context switch; and when we soon switch to per-vCPU
+root pagetables, we'll have to modify two more places.
 
-The previous patch switched the main user of the stashed reference to
-use populate_perdomain_mapping() instead.  Continue that process by
-switching both pv_{set,destroy}_gdt() to it as well.
+Xen currently solves the problem by special-casing the GDT/LDT L1
+tables to be allocated from the xenheap, and stashing a pointer to its
+address in the xenheap in the domain struct.  Rather than add more Xen
+pagetable pages to the xenheap, introduce a version of map_domain_page
+which can be called from the context switch path.
 
-pv_destroy_gdt() currently loops over the L1 entries directly,
-extracting the MFN from each, dropping the type and reference unless
-it was the zero page, and replacing the entry with a read-only mapping
-of the zero page.  Rather than reading from the stashed L1, drop the
-references using v->arch.pv.gdt_frames[] instead, and install the
-zero-page mappings with a single populate_perdomain_mapping() call.
-This makes gdt_frames[] consistently the source of truth for MFNs.
+The reason map_domain_page() cannot be called from the context switch
+path is x86's lazy context-switch state.  Mapcache mappings are
+created in the page-tables that are loaded on the pCPU.  When Xen is
+in a lazy context-switch state, current is the idle vCPU while the
+previously-running vCPU's page-tables remain loaded.  If in this
+state, another pcpu wants access to the lazily-swapped-out vcpu's
+state, it will send a FLUSH_VCPU_STATE IPI to the processor, which
+will call sync_local_execstate().
 
-Note that we must maintain the invariant introduced in cf6d39f819
-("x86/PV: properly populate descriptor tables"): pv_destroy_gdt() maps
-the zero page read-only in torn-down slots rather than unmapping them,
-so that LAR/LSL/VERR/VERW on a selector beyond the guest's limit clear
-ZF as on native rather than taking a #PF-converted #GP.  (And since
-pv_set_gdt() tears down the old GDT before installing the new one,
-guests never see unmapped entries, only zero-page entries.)
+sync_local_execstate() is implemented internally by calling a full
+__context_switch().  In addition to copying the processor state into
+the vcpu structure, this also switches the loaded pagetables to the
+idle vcpu's, which would in turn cause mappings created before the IPI
+to disappear mid-use.  Therefore, mappings cannot be held in the
+mapcache when a FLUSH_VCPU_STATE IPI may execute.  To this end,
+map_domain_page() calls sync_local_execstate() itself proactively when
+it detects a lazy context-switch state.  This guarantees that the
+pagetables will remain consistent at least until the next context
+switch.
 
-In the case of pv_set_gdt(), we have a slightly awkward situation with
-types.  The ABI with the guest uses unsigned long[], but
-populate_perdomain_mapping() wants an array of mfn_t.
-v->arch.pv.gdt_frames being unsigned long means we can just copy from
-it across the guest ABI with no conversions.  We could in theory
-convert it to mfn_t[] instead, and then pass v->arch.pv.gdt_frames
-into populate_perdomain_mapping(); but then we'd need to add a
-conversion on all the places where frames are copied out.  We choose
-instead to copy frames into a temporary mfn_t array on the stack to
-pass into populate_perdomain_mapping().
+But of course, that synchronization must not be triggered from the
+context switch path itself: sync_local_execstate() ends up in
+__context_switch(), so a call made while a context switch is in
+progress would recurse, and the assertions along that path (current
+being the idle vCPU) don't hold there either.
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8
+A full synchronization is sufficient to prevent a FLUSH_VCPU_STATE IPI
+from switching the pagetables; however, it is not necessary.  It
+suffices to maintain interrupts disabled from before the page is
+mapped until after it is unmapped.  This condition is satisfied for
+the mappings used on the context switch path.
+
+Introduce {,un}map_domain_page_irqoff() variants for callers which
+guarantee that interrupts remain disabled from the map until the
+matching unmap.  Under that guarantee the synchronization is
+unnecessary rather than merely inconvenient: no IPI can be delivered
+while the mapping is in use, so the lazy state cannot change under the
+caller's feet, and this_cpu(pgtable_vcpu) accurately identifies the
+mapcache to use (see 622c9a5ba95d "x86/mm: accurately track which vCPU
+page-tables are loaded").  The variants assert that interrupts are
+disabled on entry; the rest of the contract remains the caller's
+responsibility.
+
+This will be used by the next patch, which introduces a function which
+will be used to modify the incoming vCPU's per-domain mappings from
+within __context_switch(); it will also be used in future ASI
+patches (tearing down and establishing per-CPU stack mappings during
+context switch).
+
+No functional change for existing callers.
+
+Assisted-by: Claude Code:claude-fable-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
 ---
 Changes in v2:
-- Reword commit message
+- New in this version.  Replaces "x86/mm: allocate the per-domain
+  page-tables from the xenheap".
 
-Changes since the previously posted version:
-- Retain the gdt_ents zeroing when tearing down the GDT (its removal
-   was queried by Jan).
-- Map torn-down slots read-only to the zero page (via the
-   populate_perdomain_mapping() flags parameter) rather than removing
-   the mappings with destroy_perdomain_mapping(): empty slots would be
-   a guest-visible partial revert of cf6d39f819 (see the commit
-   message).  With the destroy call gone, its v->arch.cr3 guard --
-   also queried by Jan -- goes too: the zero-page rewrite runs
-   unconditionally.
-- Keep gdt_frames[] as unsigned long[] rather than switching it to
-   mfn_t[] as Jan suggested; the commit message explains the
-   trade-off.
-- Retitle: destroy_perdomain_mapping() is no longer used here.
+NB an alternate approach would be to disable the lazy context switch
+entirely.  This simplifies the Xen code in general, and makes a patch
+like this completely unnecessary, as then map_domain_page would itself
+be safe to call in a context switch.  Tests show, however, that simply
+removing the lazy context switch measurably hurts wake-heavy
+workloads: on a wake-paced ping flood, throughput drops 22%
+(round-trip latency 13→17 µs) on my NUC.
+
+Another approach is to take up the GDT/LDT L1 technique instead.  v1
+of the series made all perdomain pagetables allocated out of the
+xenheap; but this was objected to due to the additional xenheap
+allocations.  An alternate version would allocate from the domheap,
+and then make permanent mappings in the vmap instead.  Another
+potential performance improvement would be stashing the exact pages we
+want to map, rather than needing to walk from the L3 each time.  We
+leave both of these for future work.
 ---
- xen/arch/x86/pv/descriptor-tables.c | 37 ++++++++++++++++++-----------
- 1 file changed, 23 insertions(+), 14 deletions(-)
+ xen/arch/x86/domain_page.c    | 53 ++++++++++++++++++++++++++++-------
+ xen/include/xen/domain_page.h | 14 +++++++++
+ 2 files changed, 57 insertions(+), 10 deletions(-)
 
-diff --git a/xen/arch/x86/pv/descriptor-tables.c b/xen/arch/x86/pv/descriptor-tables.c
-index 8a32b9ae5c..5dda5bffe3 100644
---- a/xen/arch/x86/pv/descriptor-tables.c
-+++ b/xen/arch/x86/pv/descriptor-tables.c
-@@ -49,33 +49,42 @@ bool pv_destroy_ldt(struct vcpu *v)
+diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
+index 72c00194f3..1fc1580e62 100644
+--- a/xen/arch/x86/domain_page.c
++++ b/xen/arch/x86/domain_page.c
+@@ -18,7 +18,7 @@
+ #include <asm/hardirq.h>
+ #include <asm/setup.h>
  
- void pv_destroy_gdt(struct vcpu *v)
+-static inline struct vcpu *mapcache_current_vcpu(void)
++static inline struct vcpu *mapcache_current_vcpu(bool irqs_off)
  {
--    l1_pgentry_t *pl1e = pv_gdt_ptes(v);
--    mfn_t zero_mfn = _mfn(virt_to_mfn(zero_page));
--    l1_pgentry_t zero_l1e = l1e_from_mfn(zero_mfn, __PAGE_HYPERVISOR_RO);
-+    const mfn_t zero_mfn = _mfn(virt_to_mfn(zero_page));
-+    mfn_t zero_mfns[ARRAY_SIZE(v->arch.pv.gdt_frames)];
-     unsigned int i;
- 
-     ASSERT(v == current || !vcpu_cpu_dirty(v));
- 
-     v->arch.pv.gdt_ents = 0;
--    for ( i = 0; i < FIRST_RESERVED_GDT_PAGE; i++ )
-+
-+    for ( i = 0; i < ARRAY_SIZE(zero_mfns); i++ )
+     struct vcpu *v = this_cpu(pgtable_vcpu);
+     struct vcpu *curr = current;
+@@ -36,8 +36,15 @@ static inline struct vcpu *mapcache_current_vcpu(void)
+      * to the idle vCPU now, otherwise an incoming FLUSH_VCPU_STATE IPI would
+      * change the page tables under our feet an invalidate any in-use mapcache
+      * entries.
++     *
++     * Callers of the irqs_off variants instead guarantee that interrupts stay
++     * disabled until the matching unmap: no IPI can be delivered while the
++     * mapping is in use, so the lazy state cannot change under our feet and
++     * pgtable_vcpu identifies the right mapcache directly.  This also makes
++     * those variants usable from the context switch path itself, where
++     * calling sync_local_execstate() would recurse into __context_switch().
+      */
+-    if ( unlikely(this_cpu(curr_vcpu) != curr) )
++    if ( !irqs_off && unlikely(this_cpu(curr_vcpu) != curr) )
      {
--        mfn_t mfn = l1e_get_mfn(pl1e[i]);
-+        zero_mfns[i] = zero_mfn;
- 
--        if ( (l1e_get_flags(pl1e[i]) & _PAGE_PRESENT) &&
--             !mfn_eq(mfn, zero_mfn) )
--            put_page_and_type(mfn_to_page(mfn));
-+        /* MFN 0 can never pass get_page_and_type(), so 0 marks unused slots. */
-+        if ( !v->arch.pv.gdt_frames[i] )
-+            continue;
- 
--        l1e_write(&pl1e[i], zero_l1e);
-+        put_page_and_type(mfn_to_page(_mfn(v->arch.pv.gdt_frames[i])));
-         v->arch.pv.gdt_frames[i] = 0;
+         ASSERT(curr == idle_vcpu[smp_processor_id()]);
+         sync_local_execstate();
+@@ -46,10 +53,12 @@ static inline struct vcpu *mapcache_current_vcpu(void)
      }
-+
-+    /*
-+     * Point every slot at the zero page, read-only: a descriptor fetch from
-+     * the unused part of the GDT then finds a not-present descriptor rather
-+     * than a missing mapping, so LAR/LSL/VERR/VERW on a selector beyond the
-+     * guest's limit clear ZF as they do on native, instead of faulting.
-+     */
-+    populate_perdomain_mapping(v, GDT_VIRT_START(v), zero_mfns,
-+                               ARRAY_SIZE(zero_mfns), __PAGE_HYPERVISOR_RO);
+ 
+     /*
+-     * At this point we can guarantee Xen is not in lazy context switch: either
+-     * the code above will have synced the state, or an incoming
+-     * FLUSH_VCPU_STATE IPI has done so behind our back.  Use ACCESS_ONCE to
+-     * ensure the compiler never returns the locally cached pgtable_vcpu value.
++     * At this point either Xen is not in a lazy context switch (the code
++     * above will have synced the state, or an incoming FLUSH_VCPU_STATE IPI
++     * has done so behind our back), or the caller holds interrupts disabled
++     * and the state cannot change until it re-enables them.  Use ACCESS_ONCE
++     * to ensure the compiler never returns the locally cached pgtable_vcpu
++     * value.
+      */
+     return ACCESS_ONCE(this_cpu(pgtable_vcpu));
+ }
+@@ -59,7 +68,7 @@ static inline struct vcpu *mapcache_current_vcpu(void)
+ #define MAPCACHE_L1ENT(idx) \
+     __linear_l1_table[l1_linear_offset(MAPCACHE_VIRT_START + pfn_to_paddr(idx))]
+ 
+-void *map_domain_page(mfn_t mfn)
++static void *do_map_domain_page(mfn_t mfn, bool irqs_off)
+ {
+     unsigned long flags;
+     unsigned int idx, i;
+@@ -73,7 +82,7 @@ void *map_domain_page(mfn_t mfn)
+         return mfn_to_virt(mfn_x(mfn));
+ #endif
+ 
+-    v = mapcache_current_vcpu();
++    v = mapcache_current_vcpu(irqs_off);
+     if ( !v || !is_pv_vcpu(v) )
+         return mfn_to_virt(mfn_x(mfn));
+ 
+@@ -165,7 +174,19 @@ void *map_domain_page(mfn_t mfn)
+     return (void *)MAPCACHE_VIRT_START + pfn_to_paddr(idx);
  }
  
- int pv_set_gdt(struct vcpu *v, const unsigned long frames[],
-                unsigned int entries)
- {
-     struct domain *d = v->domain;
--    l1_pgentry_t *pl1e;
-     unsigned int i, nr_frames = DIV_ROUND_UP(entries, 512);
-+    mfn_t mfns[ARRAY_SIZE(v->arch.pv.gdt_frames)];
- 
-     ASSERT(v == current || !vcpu_cpu_dirty(v));
- 
-@@ -90,6 +99,8 @@ int pv_set_gdt(struct vcpu *v, const unsigned long frames[],
-         if ( !mfn_valid(mfn) ||
-              !get_page_and_type(mfn_to_page(mfn), d, PGT_seg_desc_page) )
-             goto fail;
+-void unmap_domain_page(const void *ptr)
++void *map_domain_page(mfn_t mfn)
++{
++    return do_map_domain_page(mfn, false);
++}
 +
-+        mfns[i] = mfn;
-     }
++void *map_domain_page_irqoff(mfn_t mfn)
++{
++    ASSERT(!local_irq_is_enabled());
++
++    return do_map_domain_page(mfn, true);
++}
++
++static void do_unmap_domain_page(const void *ptr, bool irqs_off)
+ {
+     unsigned int idx;
+     struct vcpu *v;
+@@ -178,7 +199,7 @@ void unmap_domain_page(const void *ptr)
  
-     /* Tear down the old GDT. */
-@@ -97,12 +108,10 @@ int pv_set_gdt(struct vcpu *v, const unsigned long frames[],
+     ASSERT(va >= MAPCACHE_VIRT_START && va < MAPCACHE_VIRT_END);
  
-     /* Install the new GDT. */
-     v->arch.pv.gdt_ents = entries;
--    pl1e = pv_gdt_ptes(v);
-     for ( i = 0; i < nr_frames; i++ )
--    {
-         v->arch.pv.gdt_frames[i] = frames[i];
--        l1e_write(&pl1e[i], l1e_from_pfn(frames[i], __PAGE_HYPERVISOR_RW));
--    }
-+    populate_perdomain_mapping(v, GDT_VIRT_START(v), mfns, nr_frames,
-+                               __PAGE_HYPERVISOR_RW);
+-    v = mapcache_current_vcpu();
++    v = mapcache_current_vcpu(irqs_off);
+     ASSERT(v && is_pv_vcpu(v));
  
-     return 0;
+     dcache = &v->domain->arch.pv.mapcache;
+@@ -223,6 +244,18 @@ void unmap_domain_page(const void *ptr)
+     local_irq_restore(flags);
+ }
  
++void unmap_domain_page(const void *ptr)
++{
++    do_unmap_domain_page(ptr, false);
++}
++
++void unmap_domain_page_irqoff(const void *ptr)
++{
++    ASSERT(!local_irq_is_enabled());
++
++    do_unmap_domain_page(ptr, true);
++}
++
+ int mapcache_domain_init(struct domain *d)
+ {
+     struct mapcache_domain *dcache = &d->arch.pv.mapcache;
+diff --git a/xen/include/xen/domain_page.h b/xen/include/xen/domain_page.h
+index c89b149e54..b72dffb4c7 100644
+--- a/xen/include/xen/domain_page.h
++++ b/xen/include/xen/domain_page.h
+@@ -31,6 +31,16 @@ void *map_domain_page(mfn_t mfn);
+  */
+ void unmap_domain_page(const void *ptr);
+ 
++/*
++ * Variants of the above for callers which guarantee that interrupts are
++ * kept disabled from map until the matching unmap.  Under that guarantee
++ * no state synchronization is required to keep the mapping valid, so these
++ * are safe to use in contexts where such a synchronization must not be
++ * triggered, in particular from the context switch path itself.
++ */
++void *map_domain_page_irqoff(mfn_t mfn);
++void unmap_domain_page_irqoff(const void *ptr);
++
+ /*
+  * Given a VA from map_domain_page(), return its underlying MFN.
+  */
+@@ -45,6 +55,7 @@ void *map_domain_page_global(mfn_t mfn);
+ void unmap_domain_page_global(const void *ptr);
+ 
+ #define __map_domain_page(pg)        map_domain_page(page_to_mfn(pg))
++#define __map_domain_page_irqoff(pg) map_domain_page_irqoff(page_to_mfn(pg))
+ 
+ static inline void *__map_domain_page_global(const struct page_info *pg)
+ {
+@@ -54,8 +65,11 @@ static inline void *__map_domain_page_global(const struct page_info *pg)
+ #else /* !CONFIG_ARCH_MAP_DOMAIN_PAGE */
+ 
+ #define map_domain_page(mfn)                __mfn_to_virt(mfn_x(mfn))
++#define map_domain_page_irqoff(mfn)         map_domain_page(mfn)
+ #define __map_domain_page(pg)               page_to_virt(pg)
++#define __map_domain_page_irqoff(pg)        __map_domain_page(pg)
+ #define unmap_domain_page(ptr)              ((void)(ptr))
++#define unmap_domain_page_irqoff(ptr)       unmap_domain_page(ptr)
+ #define domain_page_map_to_mfn(ptr)         _mfn(__virt_to_mfn((unsigned long)(ptr)))
+ 
+ static inline void *map_domain_page_global(mfn_t mfn)
 -- 
 2.55.0
 
