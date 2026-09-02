@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22BD4C624D5
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 09:56:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405601.1639081 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F5A3C61DD6
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 09:59:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405612.1639090 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1hhh-0003Uw-7V; Wed, 02 Sep 2026 09:56:25 +0000
+	id 1x1hkX-0004Dw-JT; Wed, 02 Sep 2026 09:59:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405601.1639081; Wed, 02 Sep 2026 09:56:25 +0000
+Received: by outflank-mailman (output) from mailman id 1405612.1639090; Wed, 02 Sep 2026 09:59:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1hhh-0003Up-4g; Wed, 02 Sep 2026 09:56:25 +0000
-Received: by outflank-mailman (input) for mailman id 1405601;
- Wed, 02 Sep 2026 09:56:23 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marmarek@invisiblethingslab.com>) id 1x1hhf-0003Ui-Aw
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 09:56:23 +0000
+	id 1x1hkX-0004Dp-Gm; Wed, 02 Sep 2026 09:59:21 +0000
+Received: by outflank-mailman (input) for mailman id 1405612;
+ Wed, 02 Sep 2026 09:59:20 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x1hkW-0004Dj-7n
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 09:59:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1hhd-00B3yq-FW
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 11:56:21 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1x1hkV-00Efam-9I
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 11:59:19 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 6a97f2b6-bab6-0a2a0a5309dd-0a2a450ae934-28
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 11:56:21 +0200
-Received: from [103.168.172.146] (helo=fout-a3-smtp.messagingengine.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 6a97f2c4-f2d2-0a2a450a0019-67a8ac929a97-3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 11:56:20 +0200
-Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
- by mailfout.phl.internal (Postfix) with ESMTP id D9710EC0174;
- Wed,  2 Sep 2026 05:56:19 -0400 (EDT)
-Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-02.internal (MEProxy); Wed, 02 Sep 2026 05:56:19 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 2 Sep 2026 05:56:17 -0400 (EDT)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a97f373-bab6-0a2a0a5309dd-0a2a4508965a-18
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 11:59:19 +0200
+Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a97f377-f659-0a2a45080019-d155dd33e1a4-3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 11:59:19 +0200
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-47de0093c42so947811f8f.3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 02:59:19 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
+ [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49ce4647472sm56240455e9.4.2026.09.02.02.59.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 02 Sep 2026 02:59:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,149 +52,251 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm3 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm1 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm3; t=1788342979;
-	 x=1788429379; bh=xt6BTOetJ4DGyA8BYB5q7qZpM72Rp6oJyUrAUWCSVys=; b=
-	b8Ln5iQy9osHA45BWKfSh1EBrbQE+W81eRNtdCdMIDCs1jO3rAcVWN987VAJUHbI
-	C6GPIGxsfhQxk9I5fDhznYG8M1DzIVAlRec7245+pJXVlnrzgTBF84ZmdAQtvmCQ
-	XvCjr6StzbieU/r1KYHmaMqsLZMWonZyLa5vTgH1lI32iWC1/qOgVh94NXON7LFX
-	yl85kjtiAyxXDkFcWrBjGojeDtPcSsYSoIl98xK4KD+gt1UaXIHcBD+XjdK+wLPB
-	mgDBkhPfx1wH1odPZPzLQde+ts/8VYzNH+KeK+isS0Apc/NLtP9vUnwD8inZ3Y0U
-	waEGghIl+pXYuhLtsL1EEw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
-	1788342979; x=1788429379; bh=xt6BTOetJ4DGyA8BYB5q7qZpM72Rp6oJyUr
-	AUWCSVys=; b=d7qWCBXcyC8vQuRk/n62/PcHQMayEkhsKA8S5fDhp1TLRIfdnHw
-	EenFb3t6c3th7JGI4lAZsoDJ1KmVDEZC5X+IO86u84fuco4vLVG1ohMJwYNQx+ez
-	OIGdPXgRhLl3R07ewe8qLqaqAMj9PzflWE4wk5OSS57LmH2AhEpPPFFcSK8cKQE8
-	s/+il/iMHxLMeTwA7dve5bTkzEEnVnVvz0qReC97TKRAxVsgG57XJ7Ib2q44KYRV
-	jq+x1L6k1I4JYrVwP9n/On0lBvuTToyPVBRKeLb75g8FJpvJ7QFWIOEE0IMDG8xF
-	4bhQpJGQeQN/w9xPXSbWQz3H+uZ35dAVyGw==
-X-ME-Sender: <xms:w_KXavUIH8c0svpLw8V0i9bAxCrrVOz3h6VwzE2sVc15qapX5uIVVg>
-    <xme:w_KXaqLO0pSB4ihDJJ9IFwilSYrHQMLmi9As-h9IM8ZOnfO9B6hUKigGGNMdULyVz
-    3Om1FfumM6OpQ0RHjwUiXsbQAL042IAwW9aGtB13g5a0r73Tw>
-X-ME-Received: <xmr:w_KXavBb3UOpiuzPmSJFeehmuwoHdLNOCmg6clZeXvIw3zAQCpvZBClbfocH6sxMWODiTOowOLly6Q-Gz0Q60y4B73mevz9mMM4>
-X-ME-Proxy-Cause: dmFkZTFNTJ9/4/XdMg/ewdtzVWxcV2nETdKbSDB1QE4uGyJ5YStxLLYuK2Vn6Nrpd65u6Q
-    4+hnRVBT35SY4WczieL0B96qTm5PwPhlSfrAbgmaOlZM6dEWh2LCPwjemzTMEMr1iUez61
-    5KGvNYjjH5gRJvopGnFDesxQsDs7Tp8wyZFTxlsi/7SvhGW06A1qRgobdiMTkuN5pUHJXt
-    EkeVBfi0zLHzV8Mewx0DnUHEzYBBOeCgPS488DosUifOVkEu0A+4zFsmFN5q7dO7KBPCeS
-    9OSeMKEgNT7AxERSQKXna7um8wQKqBngl9lZx6OS6b2F5hburFiJtisg793+ICvNO/HMMg
-    iPDwgYp/WXIn2SGXAH+lShkAgBUhd4g5/MZMCRvsCwMowJnRRNgkV+2uGmdk0Z1EBv3O6b
-    iFK9If32nf8x44TDU4s2Fs3/9oH/qp/wbvdiqdQ9vABUXbP4Y9YpP+oWIxnbTgS2KLLCIK
-    P/aTQ8GcixUu8pfERaEOzT6I85PGHuzN+eexkkz/OCGD/bTKwpRoOMI7W4XgNhPHbFmBSs
-    m7c9Qqs3kKjM2stQyP91DpjdNtybH5VPbgp6556kIQTpMc500tKEIQBOgOC8j/+qnaiNOC
-    wS9P5m/dVs8eMdZ+Or+qqXj1d3jMuDr12cK/llv3+dgRhJdw+1p9w//zI+ww
-X-ME-Proxy: <xmx:w_KXaqd6prT-I0y30PBxTqhaw3jamdMZSoNri2eoK6C-Qql-iz7oOQ>
-    <xmx:w_KXau1yiOIoKaIK0MDZgdEB9CXQ1gPjYE_IPuW2WblCH6VzGQAcrA>
-    <xmx:w_KXahiTd5W451BdFxeHCzeXp9Gd9IYdYdAZzbPhykVPSwF7hdxzwA>
-    <xmx:w_KXanktOEUNjuRy6fN0Iwl-fyR54GlRW2FsB9SakzeJgEOncAxPcg>
-    <xmx:w_KXaqTHlPqeNHKFRxPIZDc7z9Vh020XrcjZQu7nrFs1_dUDNDJkS_FP>
-Feedback-ID: i1568416f:Fastmail
-Date: Wed, 2 Sep 2026 11:56:15 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
-Subject: Re: [PATCH 14/14] xhci-dbc: don't cast away const-ness in
- xhci_find_dbc()
-Message-ID: <apfyv9eHKB4vR_L3@mail-itl>
-References: <0ff5676d-2ad3-49e3-a94b-90e7c3edb55f@suse.com>
- <ffbc98e7-b74a-4188-8dc4-86aa8a962af7@suse.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1788343159; x=1788947959; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=/vAwC3tefb7FbixkOGmHDnNrlLQ4fDMzrHWRVQCmXpk=;
+        b=BJh1sqAnKbT+FAgtamx+G8z4NLx69uITk8R2tIFq+D8zCtUqO8MWSGOrSYb9XvWmR4
+         VofJjfA4fYCZNX11EoExYg1Da768uPeI2b3gKI6WEPVMZcrP+DcGjIoT0H0HzaZdSb+w
+         rSp+mKzt0oxL91wHAQoF/yaNGj4Dj0/46eCB3tdf6ogu0kYQ5P26gHlfmnrUtkQLNILx
+         JwzgVIOdouFq2SD3eMAZuQQmjMHwuRUL65ovLJmvmG+b3g+GYnoEiYq8DNXiubJe290j
+         JCLK9kBwQituwFwHKY4aYoJyxue/BXafvMWD9ziiHa4wzpI3E0usVTROVij0jlum2YFN
+         MsqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788343159; x=1788947959;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=/vAwC3tefb7FbixkOGmHDnNrlLQ4fDMzrHWRVQCmXpk=;
+        b=YJK4mCJpyYKVOo46s1lNIAK4jVb+T5Z5T1GMLWdYXvSvUqGk6nDddTHNR/jHp4H+PW
+         5My0jgZ05nUtNir2BWjowgtx5Ry/N4JSkd8f66Ai9sQt8ewOWN83T5c+bq6w4Z63LY5v
+         g/9at/KSx3DxIkV697AAC84kl64vsr8A6Ucb6gBYwk3MeFloNboeAA7pvnElMRnd81vr
+         oIYWI6dXw1+qb4lbfGKyeJHJ6cLRsgL7iNjLQNcCSTlrWhK2n572jWp0dcmceX64FPIz
+         heslHt2HSidc2x7unzHrpROPSr0xCf9+AeRrvchYnc5TIFO1ueC6cgRRmtDJtMZNSOix
+         aPJA==
+X-Forwarded-Encrypted: i=1; AHgh+RoHXOhw6ppNZ9E0ezzZ7FdIMQaW898J6jnUe+/M2WNdUTEaFXS1rAuYKoy2q6nzlzgFhpD/WONwS38=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mlSORBYwuphJwaybTMTUj4AYtfIIS1BCJw+cRlm0kHiQYDDiKF
+	hmLoRsofxJfrRr86UMG8sNgbXG/pAKQjq9CgyKMp2GdRK7MzGq0BCJ/N
+X-Gm-Gg: AR+sD12qL5gCwM1OUgpjCuPEpaOhron7f2ntvjPa1Lv5pp3NGVbm2BQStkkef88vO+n
+	thC64bFQeQE0GNkQfdl6H9ZI2rjPJZedVLaOJ2B3Xy/8JeFgPBaQ9KG6etqGGfqmHQCUcGwdoGT
+	edeWDG8FHr0K7VqJBrTpdYvEsTFNVgKnqMiwVH0AW6+RWFn375bDK9q8T7QuY6HJU2jyUcK6+I4
+	tgORLloQAJ13KgJ04EO9OeM9Qu0F5CSG7et41UdzA548Vz01vOA5v8sio22W1q1MLsmT03p7pOt
+	DLxyCuc3HTnOrvMe55W1Q8Xe0yo2SijQmpIhN629TNkHVrENjnYfomTzKQAqKuVq/yWjQUarsOM
+	kb+/mAB6E7CrHk2+xrNDKJxlWzWTh2f7tt8Tqtc/rHoPDdxbPwiZ1weR+LR8LPhEzj3A0cfx8qF
+	Mpgvan3O8UENklIxC/tOHdYnrYX1fx9Tjy9mxv43DOouq0OCDtMkashYGv4jlK1FQ2dWmtxbgyk
+	pE/0f2jXtfxQQO1uk3KztZzodWVLB3pAw7Az3kabw==
+X-Received: by 2002:a7b:ca42:0:b0:49b:92df:87be with SMTP id 5b1f17b1804b1-49ce55fbdbemr41777805e9.4.1788343158476;
+        Wed, 02 Sep 2026 02:59:18 -0700 (PDT)
+Message-ID: <69c29c07-c63f-433a-a7ad-85fa981c89b4@gmail.com>
+Date: Wed, 2 Sep 2026 11:59:16 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="01QUMicPQRD8dsXa"
-Content-Disposition: inline
-In-Reply-To: <ffbc98e7-b74a-4188-8dc4-86aa8a962af7@suse.com>
-X-purgate-ID: tlsNG-4011c0/1788342981-514C7CFC-D0F0DCB9/0/0
-X-purgate-type: clean
-X-purgate-size: 2752
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 02/20] xen/dom0less: turn max_init_domid into a common
+ variable
+To: "Orzel, Michal" <michal.orzel@amd.com>, xen-devel@lists.xenproject.org
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Timothy Pearson <tpearson@raptorengineering.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>, Teddy Astie <teddy.astie@vates.tech>
+References: <cover.1787836900.git.oleksii.kurochko@gmail.com>
+ <5a74a964b763e8444579a3c0d455e23160be8893.1787836900.git.oleksii.kurochko@gmail.com>
+ <b65fcc50-b249-4505-a212-b2f60c55f86d@amd.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <b65fcc50-b249-4505-a212-b2f60c55f86d@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c1860d/1788343159-D735D87B-110DFF47/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 6776
 
---01QUMicPQRD8dsXa
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 2 Sep 2026 11:56:15 +0200
-From: Marek =?utf-8?B?PT91dGYtOD9RP01hcmN6eWtvd3NraS1HPUMzPUIzcmVja2k/PQ==?= <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Roger Pau =?utf-8?B?PT91dGYtOD9CP1RXOXVic09wPz0=?= <roger@xenproject.org>
-Subject: Re: [PATCH 14/14] xhci-dbc: don't cast away const-ness in
- xhci_find_dbc()
 
-On Wed, Sep 02, 2026 at 08:37:26AM +0200, Jan Beulich wrote:
-> Doing so (at the return statement), besides being a bad idea anyway, is a
-> violation of Misra rule 11.8.
->=20
-> Make "xcap" have an initializer while adjusting the code anyway.
->=20
-> No functional change intended.
->=20
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Reviewed-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab.c=
-om>
+On 8/31/26 5:48 PM, Orzel, Michal wrote:
+> 
+> 
+> On 27-Aug-26 17:18, Oleksii Kurochko wrote:
+>> Until now every architecture carried its own notion of max_init_domid:
+>> Arm defined a real variable (declared in asm/setup.h, defined in
+>> setup.c), while ppc, riscv and x86 each provided a "#define
+>> max_init_domid (0)" stub in their asm/setup.h. This duplicated the same
+>> declaration across all arches and placed a purely dom0less concept in
+>> arch setup headers.
+>>
+>> Now that the dom0less build code lives in common (xen/common/
+>> device-tree/dom0less-build.c sets max_init_domid, and the console
+>> serial-input switcher reads it), there is no reason for the symbol to be
+>> per-arch. Provide a single declaration in <xen/dom0less-build.h>, with
+>> the !CONFIG_DOM0LESS_BOOT stub kept there as well, so there is one source
+>> of truth and the arch headers no longer need to mention it. Update
+>> console.c to include <xen/dom0less-build.h> for the declaration instead
+>> of relying on asm/setup.h.
+>>
+>> Place the definition in xen/common/domid.c rather than in dom0less-
+>> build.c. The latter is built as dom0less-build.init.o, i.e. the whole
+>> object is relocated into the .init.* sections and freed after boot,
+>> whereas max_init_domid must outlive boot because it is read at runtime
+>> by the console serial-input switcher. domid.c is always linked (obj-y)
+>> and resides in regular (non-init) sections, so it is a correct home for
+>> the variable. It is marked __ro_after_init since it is only updated
+>> while creating boot-time domains and read-only afterwards, and guarded
+>> by CONFIG_DOM0LESS_BOOT as domid.c itself is unconditional.
+>>
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+>> ---
+>> Changes in v6-8:
+>>   - Nothing changed. Only rebase.
+>> ---
+>> Changes in v5:
+>>   - Add Reviewed-by: Jan Beulich <jbeulich@suse.com>
+>> ---
+>> Changes in v4:
+>>   - New patch.
+>> ---
+>> ---
+>>   xen/arch/arm/include/asm/setup.h   | 2 --
+>>   xen/arch/arm/setup.c               | 2 --
+>>   xen/arch/ppc/include/asm/setup.h   | 2 --
+>>   xen/arch/riscv/include/asm/setup.h | 2 --
+>>   xen/arch/x86/include/asm/setup.h   | 2 --
+>>   xen/common/domid.c                 | 5 +++++
+>>   xen/drivers/char/console.c         | 1 +
+>>   xen/include/xen/dom0less-build.h   | 7 +++++++
+>>   8 files changed, 13 insertions(+), 10 deletions(-)
+>>
+>> diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+>> index 0adfa4993a8f..2af780512540 100644
+>> --- a/xen/arch/arm/include/asm/setup.h
+>> +++ b/xen/arch/arm/include/asm/setup.h
+>> @@ -25,8 +25,6 @@ struct map_range_data
+>>       struct rangeset *irq_ranges;
+>>   };
+>>   
+>> -extern domid_t max_init_domid;
+>> -
+>>   void copy_from_paddr(void *dst, paddr_t paddr, unsigned long len);
+>>   
+>>   size_t estimate_efi_size(unsigned int mem_nr_banks);
+>> diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+>> index 6310a47d68b6..86532d0a35b6 100644
+>> --- a/xen/arch/arm/setup.c
+>> +++ b/xen/arch/arm/setup.c
+>> @@ -62,8 +62,6 @@ struct cpuinfo_arm __read_mostly system_cpuinfo;
+>>   bool __read_mostly acpi_disabled;
+>>   #endif
+>>   
+>> -domid_t __read_mostly max_init_domid;
+>> -
+>>   static __used void noreturn init_done(void)
+>>   {
+>>       /* Must be done past setting system_state. */
+>> diff --git a/xen/arch/ppc/include/asm/setup.h b/xen/arch/ppc/include/asm/setup.h
+>> index e4f64879b68c..956fa6985adb 100644
+>> --- a/xen/arch/ppc/include/asm/setup.h
+>> +++ b/xen/arch/ppc/include/asm/setup.h
+>> @@ -1,6 +1,4 @@
+>>   #ifndef __ASM_PPC_SETUP_H__
+>>   #define __ASM_PPC_SETUP_H__
+>>   
+>> -#define max_init_domid (0)
+>> -
+>>   #endif /* __ASM_PPC_SETUP_H__ */
+>> diff --git a/xen/arch/riscv/include/asm/setup.h b/xen/arch/riscv/include/asm/setup.h
+>> index 2215894cfbb1..73ce2f293348 100644
+>> --- a/xen/arch/riscv/include/asm/setup.h
+>> +++ b/xen/arch/riscv/include/asm/setup.h
+>> @@ -5,8 +5,6 @@
+>>   
+>>   #include <xen/types.h>
+>>   
+>> -#define max_init_domid (0)
+>> -
+>>   void setup_mm(void);
+>>   
+>>   void copy_from_paddr(void *dst, paddr_t paddr, unsigned long len);
+>> diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
+>> index b01e83a8ed9f..5925c5f39cff 100644
+>> --- a/xen/arch/x86/include/asm/setup.h
+>> +++ b/xen/arch/x86/include/asm/setup.h
+>> @@ -68,6 +68,4 @@ extern bool opt_dom0_verbose;
+>>   extern bool opt_dom0_cpuid_faulting;
+>>   extern bool opt_dom0_msr_relaxed;
+>>   
+>> -#define max_init_domid (0)
+>> -
+>>   #endif
+>> diff --git a/xen/common/domid.c b/xen/common/domid.c
+>> index b0258e477c1a..cd46cf952be6 100644
+>> --- a/xen/common/domid.c
+>> +++ b/xen/common/domid.c
+>> @@ -9,6 +9,11 @@
+>>    */
+>>   
+>>   #include <xen/domain.h>
+>> +#include <xen/dom0less-build.h>
+> NIT: "dom0less" comes before "domain" when it comes to alphabetical order I think.
 
-> --- a/xen/drivers/char/xhci-dbc.c
-> +++ b/xen/drivers/char/xhci-dbc.c
-> @@ -384,16 +384,15 @@ static bool __init dbc_init_xhc(struct d
->   */
->  static struct dbc_reg __iomem *xhci_find_dbc(struct dbc *dbc)
->  {
-> -    const uint32_t __iomem *xcap;
->      uint32_t xcap_val;
->      uint32_t next;
->      uint32_t id =3D 0;
-> -    const void __iomem *mmio =3D dbc->xhc_mmio;
-> +    void __iomem *mmio =3D dbc->xhc_mmio;
->      const uint32_t __iomem *hccp1 =3D mmio + 0x10;
-> +    uint32_t __iomem *xcap =3D mmio;
->      const uint32_t DBC_ID =3D 0xA;
->      int ttl =3D 48;
-> =20
-> -    xcap =3D mmio;
->      /*
->       * This is initially an offset to the first capability. All the offs=
-ets
->       * (both in HCCP1 and then next capability pointer) are dword-based.
->=20
+Agreed. With that re-ordering, <xen/types.h> also has to be added to 
+<xen/dom0less-build.h>, as the latter includes <public/xen.h>, which 
+uses the fixed-width types defined in <xen/types.h>. Without it, the 
+build fails with "unknown type name 'uint64_t'".
 
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
+I will re-order the includes and add <xen/types.h> to dom0less-build.h.
 
---01QUMicPQRD8dsXa
-Content-Type: application/pgp-signature; name=signature.asc
+I will also added the following to commit message:
 
------BEGIN PGP SIGNATURE-----
+While at it, make <xen/dom0less-build.h> self-contained: it includes
+<public/xen.h>, which uses the fixed-width types provided by
+<xen/types.h>, so include the latter explicitly rather than relying on
+the includer having pulled it in first. This becomes necessary as soon
+as <xen/dom0less-build.h> comes first in an alphabetically sorted
+include list, as it now does in domid.c.
 
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmqX8r8ACgkQ24/THMrX
-1yzLswgAhCU5fonKS2Jn6BHxUzFVduQ+ZY/u/IFsTz/bumAAGQCEu8bnL1FRKQGz
-sS5zU4yv+OX3dnlazqVJyIZZ/JM0pBiDEvt4TTsGw9LOws9vF6dOxSMZ1/L+ep6L
-pa6xwS24J2k5M1k440JabcrI1/5AjVUsFcEF59V6nkk7FzYyA7Ji9rWVtKTFIO4s
-yHnafme+3Fqa8URCxt0C8kgoDsRlaJ0GhTSgLue+BEGCpwAWEqtyxmZJJ310EUdC
-oHxRP9xBZYMJO8osPd8MPSG7rtePZg6uZxiIUoU/3dCb9Go4aL0QnPAWFJOP54O0
-AK7SrV9IDoCx5Vu29HXqr/nn8R5eSA==
-=NJdJ
------END PGP SIGNATURE-----
+> 
+>> +
+>> +#ifdef CONFIG_DOM0LESS_BOOT
+>> +domid_t __ro_after_init max_init_domid;
+>> +#endif
+>>   
+>>   static DEFINE_SPINLOCK(domid_lock);
+>>   static DECLARE_BITMAP(domid_bitmap, DOMID_FIRST_RESERVED);
+>> diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+>> index fcacf37c52f0..61e92491e40a 100644
+>> --- a/xen/drivers/char/console.c
+>> +++ b/xen/drivers/char/console.c
+>> @@ -31,6 +31,7 @@
+>>   #include <xen/warning.h>
+>>   #include <xen/pv_console.h>
+>>   #include <asm/setup.h>
+> NIT: This can be dropped - I don't see anything relying on it in this file.
 
---01QUMicPQRD8dsXa--
+Checked that: nothing really depends on it + CI tests are passed.
+
+I will also then add the following to commit message:
+
+Update console.c to include <xen/dom0less-build.h> for the declaration
+instead of relying on asm/setup.h, and drop the now unneeded
+<asm/setup.h> include.
+
+> 
+> Other than that:
+> Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+
+Thanks.
+
+~ Oleksii
 
