@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71BE1C624D0
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 12:11:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405775.1639225 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B893AC61DD6
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 12:12:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405783.1639233 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1jnw-0006Ir-0I; Wed, 02 Sep 2026 12:11:00 +0000
+	id 1x1jpQ-0006oa-9D; Wed, 02 Sep 2026 12:12:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405775.1639225; Wed, 02 Sep 2026 12:10:59 +0000
+Received: by outflank-mailman (output) from mailman id 1405783.1639233; Wed, 02 Sep 2026 12:12:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1jnv-0006Ik-TI; Wed, 02 Sep 2026 12:10:59 +0000
-Received: by outflank-mailman (input) for mailman id 1405775;
- Wed, 02 Sep 2026 12:10:58 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x1jpQ-0006oT-6c; Wed, 02 Sep 2026 12:12:32 +0000
+Received: by outflank-mailman (input) for mailman id 1405783;
+ Wed, 02 Sep 2026 12:12:31 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a062077462000c4f3@swg.vates.tech>)
- id 1x1jnu-0006Ic-CA
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 12:10:58 +0000
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a06208e4e8000c4f3@swg.vates.tech>)
+ id 1x1jpO-0006oN-Ua
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 12:12:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1jnt-00GYN6-P8
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 14:10:57 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x1jpO-00BVaT-B0
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 14:12:30 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a062077462000c4f3@swg.vates.tech>)
- id 6a981250-e002-0a2a0a5209dd-0a2a4509e156-12
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 14:10:57 +0200
-Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a06208e4e8000c4f3@swg.vates.tech>)
+ id 6a9812a4-2eae-0a2a0a5409dd-0a2a4506c596-10
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 14:12:30 +0200
+Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a062077462000c4f3@swg.vates.tech>)
- id 6a981251-be1a-0a2a45090019-b9ff1c129891-3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 14:10:57 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a06208e4e8000c4f3@swg.vates.tech>)
+ id 6a9812ad-195a-0a2a45060019-b9ff1c238565-3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 14:12:30 +0200
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a062077462000c4f3.006 for <xen-devel@lists.xenproject.org>
+ by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a06208e4e8000c4f3.006 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 02 Sep 2026 12:10:50 +0000
+ Wed, 02 Sep 2026 12:12:25 +0000
 Received: from [192.168.1.18] (88-188-240-210.subs.proxad.net [88.188.240.210])
  (Authenticated sender: teddy.astie)
- by mail2.vates.fr (Postfix) with ESMTPSA id 2E5E682170;
- Wed,  2 Sep 2026 14:10:50 +0200 (CEST)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 787A081C01;
+ Wed,  2 Sep 2026 14:12:24 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,29 +60,29 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=mky7CnlEcJGsmWLEstzMKkivu1t2UVpUflBhPOhqKAc=;
+ q=dns/txt; s=selector1; bh=RkeBYuMiPafFNPAMKaPBxyAm4rEMTlcO30tVyz8MUfs=;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=dWUKl/KKTwGOKNBCfBoDXf24NiE/n6yTnY7Pu8LjXAYpq1WG1oqjQKcRqofMV0ls8WzRcTKeW
- +ERvSY7zh6XM2ceR1N2cfJLp3x+AB2G+Pkxux/9ZTSlLLueFvAhzRg2QOp6+j4uWniA+5bQw1ut
- h/bJ4Z7kt3wlgbvvE8QPz4BM4t8pMw2bDyQJotp8VHSWw1rrkbm5DrpcEVzoBYzys+pwSAFmtyU
- 5amHeLjrzf+hPbwDUZxQ59mH2z+eFv+Dj2LhIK96e044Hv1+XfndofUUqLTizfAYhQQbvpBy/Dk
- dwDCU9QjqIkgDR0LrahVSiP72B0rNayDuawCJ5RG+PjQ==
-X-Zone-Loop: bab569b70d2e938e159b954a7e2b568bf4a77fbecb9e
+ b=miZ8rphS68e0kOiFMJEOP8ikU7jV6tjiJm9DbN0MXxSkPzY07g2tT4UIxARLDi4wb2BHPOLQL
+ G4BUVH10LtRvKSoZI6zb1P/QkS+7bRUEKW+THxKzi7NgsaQ1PhrrEpKNNJgOqN+f5fK6fFwcQwe
+ ZbZ1QqtUU3nLojSAaev9CVOSEgl13BEPM8voubuUZYsQIO2AP4ZKAwkULdWFkB0nWZAdmchU9B7
+ 5UqnDU4Uof1IhmR09/NQNV0SAbznlPL7oow8x2S9WYYvIgHJoki46/3Dq5B5enTPSXVj1rvDq+L
+ LR5toUteVIZDglu71gQx9kY8jas6Flt4J11T5u/Iaa5g==
+X-Zone-Loop: c8f5b4ef1faf521d1fc13263af7abcd0c6d642cbd445
 x-campaign-type: default
-x-transaction-id: 7cd076b0-2348-4e72-bdd5-c267aaee86fb
-x-swg-uid: 01-ed3be001-20c6-4963-9c15-574537ad9738
+x-transaction-id: 347dd57a-d1e6-445f-b4af-1ad7988c1fc1
+x-swg-uid: 01-4d0a7909-9b25-4b14-ab00-9cb2354c8382
 X-Mailer: Sweego
 Message-ID:
- <1788351050.8631fc262581453bbf619ec5b2062170.1a062077462000c4f3@vates.tech>
-x-swg-bid: 1788351050.8631fc262581453bbf619ec5b2062170.1a062077462000c4f3
+ <1788351145.8631fc262581453bbf619ec5b2062170.1a06208e4e8000c4f3@vates.tech>
+x-swg-bid: 1788351145.8631fc262581453bbf619ec5b2062170.1a06208e4e8000c4f3
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
 X-Originating-IP: [37.26.189.201]
-Date: Wed, 2 Sep 2026 14:10:49 +0200
+Date: Wed, 2 Sep 2026 14:12:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/4] x86/bitops: Remove CONST_ADDR
+Subject: Re: [PATCH 3/4] x86/bitops: Remove ADDR
 To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
  <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>,
@@ -90,7 +90,7 @@ Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
  Michal Orzel <michal.orzel@amd.com>,
  Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 References: <20260902114339.62043-1-andrew.cooper3@citrix.com>
- <20260902114339.62043-3-andrew.cooper3@citrix.com>
+ <20260902114339.62043-4-andrew.cooper3@citrix.com>
 Content-Language: en-US
 From: Teddy Astie <teddy.astie@vates.tech>
 Autocrypt: addr=teddy.astie@vates.tech; keydata=
@@ -127,25 +127,25 @@ Autocrypt: addr=teddy.astie@vates.tech; keydata=
  O485NOTKwGOxyWb006cTMh53xPkAJFQu4Tvdj+odsHz88jqw5wfPG0BYWx0I/FspYj7N9kZR
  8ULR9nX0LvpzJ/kB4NgHIUt8YtIL6ZSfM2dbF7fKzvx1UqFfvozJZwFzfEieJLXa4nlGgR6D
  x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <20260902114339.62043-3-andrew.cooper3@citrix.com>
+In-Reply-To: <20260902114339.62043-4-andrew.cooper3@citrix.com>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------q8kNZoFsIjgt90DRv92X0UpL"
+ boundary="------------SSu2VODcuw7w0JUybC6kEutV"
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1788351050385
-X-purgate-ID: tlsNG-bad1c0/1788351057-FC212034-5E538B3F/0/0
+X-Bm-Transport-Timestamp: 1788351144682
+X-purgate-ID: tlsNG-16d1c6/1788351150-F667277B-432808DF/0/0
 X-purgate-type: clean
-X-purgate-size: 6942
+X-purgate-size: 5794
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------q8kNZoFsIjgt90DRv92X0UpL
-Content-Type: multipart/mixed; boundary="------------6qvz7YUD6xpoRybqB3xtVs0t";
+--------------SSu2VODcuw7w0JUybC6kEutV
+Content-Type: multipart/mixed; boundary="------------dI1YtcXTv0sZyCSJ3NXHjbAJ";
  protected-headers="v1"; hp="clear"
-Message-ID: <d6893834-b31a-4df3-bd97-779d65c8d6cb@vates.tech>
-Date: Wed, 2 Sep 2026 14:10:49 +0200
+Message-ID: <246e64d8-be0a-4d7e-9f8c-5fc6a48bcef9@vates.tech>
+Date: Wed, 2 Sep 2026 14:12:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/4] x86/bitops: Remove CONST_ADDR
+Subject: Re: [PATCH 3/4] x86/bitops: Remove ADDR
 To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
  <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>,
@@ -153,7 +153,7 @@ Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
  Michal Orzel <michal.orzel@amd.com>,
  Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 References: <20260902114339.62043-1-andrew.cooper3@citrix.com>
- <20260902114339.62043-3-andrew.cooper3@citrix.com>
+ <20260902114339.62043-4-andrew.cooper3@citrix.com>
 Content-Language: en-US
 From: Teddy Astie <teddy.astie@vates.tech>
 Autocrypt: addr=teddy.astie@vates.tech; keydata=
@@ -190,9 +190,9 @@ Autocrypt: addr=teddy.astie@vates.tech; keydata=
  O485NOTKwGOxyWb006cTMh53xPkAJFQu4Tvdj+odsHz88jqw5wfPG0BYWx0I/FspYj7N9kZR
  8ULR9nX0LvpzJ/kB4NgHIUt8YtIL6ZSfM2dbF7fKzvx1UqFfvozJZwFzfEieJLXa4nlGgR6D
  x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <20260902114339.62043-3-andrew.cooper3@citrix.com>
+In-Reply-To: <20260902114339.62043-4-andrew.cooper3@citrix.com>
 
---------------6qvz7YUD6xpoRybqB3xtVs0t
+--------------dI1YtcXTv0sZyCSJ3NXHjbAJ
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: base64
 
@@ -206,47 +206,32 @@ aD4NCj4gQ0M6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4N
 Cj4gQ0M6IEp1bGllbiBHcmFsbCA8anVsaWVuQHhlbi5vcmc+DQo+IENDOiBCZXJ0cmFuZCBN
 YXJxdWlzIDxiZXJ0cmFuZC5tYXJxdWlzQGFybS5jb20+DQo+IENDOiBNaWNoYWwgT3J6ZWwg
 PG1pY2hhbC5vcnplbEBhbWQuY29tPg0KPiBDQzogVm9sb2R5bXlyIEJhYmNodWsgPFZvbG9k
-eW15cl9CYWJjaHVrQGVwYW0uY29tPg0KPiAtLS0NCj4gICB4ZW4vYXJjaC94ODYvaW5jbHVk
-ZS9hc20vYml0b3BzLmggfCA1ICsrKy0tDQo+ICAgMSBmaWxlIGNoYW5nZWQsIDMgaW5zZXJ0
-aW9ucygrKSwgMiBkZWxldGlvbnMoLSkNCj4gDQo+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC94
-ODYvaW5jbHVkZS9hc20vYml0b3BzLmggYi94ZW4vYXJjaC94ODYvaW5jbHVkZS9hc20vYml0
-b3BzLmgNCj4gaW5kZXggNjlmZmVkNTEwYzBhLi5mYmNhYjMyZmQyMzkgMTAwNjQ0DQo+IC0t
-LSBhL3hlbi9hcmNoL3g4Ni9pbmNsdWRlL2FzbS9iaXRvcHMuaA0KPiArKysgYi94ZW4vYXJj
-aC94ODYvaW5jbHVkZS9hc20vYml0b3BzLmgNCj4gQEAgLTE4LDcgKzE4LDYgQEANCj4gICAg
-Ki8NCj4gICANCj4gICAjZGVmaW5lIEFERFIgKCoodm9sYXRpbGUgaW50ICopIGFkZHIpDQo+
-IC0jZGVmaW5lIENPTlNUX0FERFIgKCooY29uc3Qgdm9sYXRpbGUgaW50ICopIGFkZHIpDQo+
-ICAgDQo+ICAgLyoqDQo+ICAgICogc2V0X2JpdCAtIEF0b21pY2FsbHkgc2V0IGEgYml0IGlu
-IG1lbW9yeQ0KPiBAQCAtMjg1LDcgKzI4NCw5IEBAIHN0YXRpYyBpbmxpbmUgaW50IHZhcmlh
-YmxlX3Rlc3RfYml0KGludCBuciwgY29uc3Qgdm9sYXRpbGUgdm9pZCAqYWRkcikNCj4gICAg
-ICAgYXNtIHZvbGF0aWxlICggImJ0bCAlW25yXSwgJVthZGRyXVxuXHQiDQo+ICAgICAgICAg
-ICAgICAgICAgICAgIEFTTV9GTEFHX09VVCgsICJzYmJsICVbb2xkXSwgJVtvbGRdXG5cdCIp
-DQo+ICAgICAgICAgICAgICAgICAgICAgIDogW29sZF0gQVNNX0ZMQUdfT1VUKCI9QGNjYyIs
-ICI9ciIpIChvbGRiaXQpDQo+IC0gICAgICAgICAgICAgICAgICAgOiBbYWRkcl0gIm0iIChD
-T05TVF9BRERSKSwgW25yXSAiSXIiIChucikgOiAibWVtb3J5IiApOw0KPiArICAgICAgICAg
-ICAgICAgICAgIDogW2FkZHJdICJtIiAoKihjb25zdCB2b2xhdGlsZSBpbnQgKilhZGRyKSwN
-Cj4gKwkJICAgICBbbnJdICJJciIgKG5yKQ0KPiArCQkgICA6ICJtZW1vcnkiICk7DQo+ICAg
-DQo+ICAgICAgIHJldHVybiBvbGRiaXQ7DQo+ICAgfQ0KDQpSZXZpZXdlZC1ieTogVGVkZHkg
-QXN0aWUgPHRlZGR5LmFzdGllQHZhdGVzLnRlY2g+DQo=
+eW15cl9CYWJjaHVrQGVwYW0uY29tPg0KPiAtLS0NCj4gICBkb2NzL21pc3JhL3J1bGVzLnJz
+dCAgICAgICAgICAgICAgfCAgMyArKy0NCj4gICB4ZW4vYXJjaC94ODYvaW5jbHVkZS9hc20v
+Yml0b3BzLmggfCAzNCArKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tDQo+ICAgMiBm
+aWxlcyBjaGFuZ2VkLCAyMCBpbnNlcnRpb25zKCspLCAxNyBkZWxldGlvbnMoLSkNCj4gDQoN
+CiguLi4pDQoNClJldmlld2VkLWJ5OiBUZWRkeSBBc3RpZSA8dGVkZHkuYXN0aWVAdmF0ZXMu
+dGVjaD4NCg==
 
---------------6qvz7YUD6xpoRybqB3xtVs0t--
+--------------dI1YtcXTv0sZyCSJ3NXHjbAJ--
 
---------------q8kNZoFsIjgt90DRv92X0UpL
+--------------SSu2VODcuw7w0JUybC6kEutV
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmqYEkkFAwAAAAAACgkQZg+p0QLLz9AR
-vwwAjVCXqVuu/7GdT3mg3SZCX8C3qlNp2zF6oyEXJnQCcjOCjA7nkNrG0gSWlCvtO40S4cDT57nM
-bWEktprRSTy937Xy7SBGMoiV8T3fkcfpHKym3RGflIr3shT/uvypVS/UKLWILLHY+xd73oloPaxF
-+ckSlFplhsk2BeQ98qDc+GE1SV6qRY7BG4PC7q9kDBNx0z3u0H1gwDW1a/arJrmrVZTQZp9SbawV
-yo9EA8dirmIIVpJeiCk11GRD1nyy0iJXarTFzC8h7m87ALL3oJYBpP2zkT7p5uqJGq4kOxAD/Pe9
-IVTi8MQIq3GV3s1W1DDDZqDQs9UITy6fXxckP+Y0REPPC6d+AiZX5TY0tGA/OsLUuyR1aPZLN/PD
-/7sedsIe7MOkRNJQqPWOtUD+l+ffYeBy3Gk2PGFvbpq3Z1ZV6pYzmWrKbeoysdbBdWlDghiBbN29
-fiPhalzz2UKvAGNbG4ajZ+EtRiT1ut99ybAo+q1uuo4g8MHkOfky6c08GELZ
-=Xyvi
+wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmqYEqgFAwAAAAAACgkQZg+p0QLLz9AO
+XAv/QabI87eGpS1PkvmKDM5/JekmW8oRVGIqTo37T6ZiDS0ielfaTCR6/C6jbcL/BVYYmI7ohKMb
+JatF7l+NBtJwB9MmrpYelYuzvp/IelNH2AmXy4RFLK4Qlz6aizMOlrRIawvIjN6cHsa3PqnU0g30
+k0/zT7zCCXHqIznnK4xHo2fDRlccfvU0MtOn577IoPytl+jB7PxBHWIik0LhRO4rZfnKMfipRM8w
+NBnrN4a2RYvmHeoIdxDVYgI2S6Qz/CYouQPeAmrXb1rJoaetBlQIWRiGtLVdHpayUfriyR1yyno3
+yGqos1P6OVdV1ASj+z20uUZ8sv1i26zPTP8jPJmr6jsStra793X5tKTtJKOWVjkmD/glWSam78Wz
+0vJmPpqoPC0VS6GH5l36OAeo10dMGIDWGfozAyl3xqMEu5QP4W683fhQ0dgR/FRIZyU7qWvBs5M8
+d7EzobrSw0dQWitV02GPOBUOSedFZJ5CnHHanvibPfdH6lqQPF+/nyyO0UaL
+=Sp7x
 -----END PGP SIGNATURE-----
 
---------------q8kNZoFsIjgt90DRv92X0UpL--
+--------------SSu2VODcuw7w0JUybC6kEutV--
 
