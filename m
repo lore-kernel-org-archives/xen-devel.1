@@ -4,44 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30A67C624D0
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 09:31:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405433.1638929 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0965C61DFD
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 09:44:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405457.1638971 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1hJG-0008Md-H5; Wed, 02 Sep 2026 09:31:10 +0000
+	id 1x1hVq-0002oR-6A; Wed, 02 Sep 2026 09:44:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405433.1638929; Wed, 02 Sep 2026 09:31:10 +0000
+Received: by outflank-mailman (output) from mailman id 1405457.1638971; Wed, 02 Sep 2026 09:44:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1hJG-0008MV-DH; Wed, 02 Sep 2026 09:31:10 +0000
-Received: by outflank-mailman (input) for mailman id 1405433;
- Wed, 02 Sep 2026 09:31:09 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x1hVq-0002mL-0K; Wed, 02 Sep 2026 09:44:10 +0000
+Received: by outflank-mailman (input) for mailman id 1405457;
+ Wed, 02 Sep 2026 09:44:07 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x1hJF-0008MP-DW
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 09:31:09 +0000
+ (envelope-from <dunlapg@georges-macbook-pro-2.fritz.box>)
+ id 1x1hVn-0002GC-Nm
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 09:44:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1hJE-003WvT-9v
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 11:31:08 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1x1hVm-00G2eL-JM
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 11:44:06 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a97ecd4-bab6-0a2a0a5309dd-0a2a450ab490-26
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 11:31:08 +0200
-Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a97ecdc-f2d2-0a2a450a0019-d155dd30c1e7-3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 11:31:08 +0200
-Received: by mail-wr1-f48.google.com with SMTP id
- ffacd0b85a97d-47fe89fb333so516577f8f.3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 02:31:08 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48448ee9cf7sm5369269f8f.25.2026.09.02.02.31.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 02 Sep 2026 02:31:06 -0700 (PDT)
+ (envelope-from <dunlapg@georges-macbook-pro-2.fritz.box>)
+ id 6a97efd9-2eae-0a2a0a5409dd-0a2a45069e4a-38
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 11:44:06 +0200
+Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.fritz.box)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
+ (envelope-from <dunlapg@georges-macbook-pro-2.fritz.box>)
+ id 6a97efe6-195a-0a2a45060019-d99ba50cefa3-3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 11:44:06 +0200
+Received: by Georges-MacBook-Pro-2.fritz.box (Postfix, from userid 501)
+ id 5715E36928EB; Wed,  2 Sep 2026 10:44:06 +0100 (BST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,141 +48,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788341467; x=1788946267; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=2TIbS1LnBwmiA0UE5OsQTmFbDfQo6/nTKpkl8KS1tRM=;
-        b=B9GA3XaKXHunrAAuuLtkxdzPndF9G3H+iMlGmi95Bs6vG+QR+tYdKzzCp11FyPN/C6
-         zhtAXg4Y1F/hUXLLqfXcV3yQuY/03kbaXkm6X0fca+ONcn7jkL0GGevLnwUb6FJWow/m
-         i4HOWS2BbxSRoKfKUzhjKgz7XcaZ55tnisM6rgfghQRZnOn92eMHEA335slqhwZ+r5+L
-         otjOgPf5daY18p1KOpSk9wN2om1BhOXtlJ5lJaTjqmNr0O1vHbks1Fh2YKHO1dKwlEwH
-         /xFa5cppXgNCbwhWqqNd82vmsEb8hIyr/JLlprS9RWUWNFEFC3RvpvdSI6+KfpqgRdW9
-         BptA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788341467; x=1788946267;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=2TIbS1LnBwmiA0UE5OsQTmFbDfQo6/nTKpkl8KS1tRM=;
-        b=eE2X8k5qL+Sdxg4Z2odRi5Pxaob/9P8TjcX4AZ+hFGO8uEhektzg97THpneiWUO3R9
-         sExFjwLq/STpxuePWCv2NDbzKlBeiaYOppkK0X3051j0eg1PcvxEd5HKivVyEPX6kqdM
-         B9eWI90vn6a9TDpvEPlDbEPINAwWuL4MpxoAOJnYHvJpiD9uMYw1aKX9MKj7AJ19j3dn
-         LfJMPylgoL0p44wN0S4KXpzx6DsGnqiWbHEQwbQHooaJ6lEiDHLxFvM5Ph2rpCYFc9h8
-         NqXregBeiMrQ8TYE7KaW73MDvzhb03wwXR2dSU/4kSVVIjRV11zBJM1/z5HQ4uTTaKuo
-         XjEg==
-X-Gm-Message-State: AFuF++l3JdMTWKTPhWsp/trFUE+AbiXS/Ocefenp3cKqkUb6SXoeOijJ
-	m0vtru4mRbJW/AbX97ZebUK1xUxt0+yTmcyhJZCDAfnIfHMrIuecg97arOt4u99rUgyl1OFzdXn
-	Umg7RWA==
-X-Gm-Gg: AYBFou0Nz4DBUtyPBGK8w7rU+i3a5hKoj6c/EKx88hws0HjF9e4LjmsEo5pwIKr+lK6
-	HcsjWuBKOrUNtNxMvwMG8UhYpZ2GihQcVa3xq7C46IzckXJUQvUwLqMDusPPgNvbegVaDvLWZkq
-	25ArkVKZ5l3XizElRYXcwNLR33ofP/QSsrCu9ElG/0KkoYwpdtU6t1MGHYycETGyXnzKZv0tM2V
-	vwVJdJM5ufMHB+XCTlefEouGhT2KPzHp6PJXakKCFLICh8x0+d/c7DPkrco2hwxJnb0kgRJE3g4
-	OCUY6+b2SsI4sg1nNJENFKnH1q3QW3wESYIJp3bNB5OY9xdztsz1YCICc/KA0u7fLRTrgFIbViX
-	sxsuyMowwgH92oYQNEOliUbUxNpJPZPPZr23w+3BUkH9KOYBg9N2jpxYEEYoG0F48GNP/N5wl8L
-	6A+B+NbXcPl51ylBe9e6hlvSi6RYYFv3gyDm7yQtPmyNx58cPcM2hzrC8+Rs1/DFutO1TtAzy9J
-	SyUdxgfwnHrHyfQ/lid6zBUgJRiHDpdXRzUGdtXb7SRFVWWxrIN
-X-Received: by 2002:a05:6000:4a0a:b0:484:39b4:5bc9 with SMTP id ffacd0b85a97d-484914cba9amr5683036f8f.26.1788341467515;
-        Wed, 02 Sep 2026 02:31:07 -0700 (PDT)
-Message-ID: <35013b66-0886-4793-8cb6-3056f6f99a3a@suse.com>
-Date: Wed, 2 Sep 2026 11:31:05 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; none
+From: George Dunlap <dunlapg@umich.edu>
+To: xen-devel@lists.xenproject.org
+Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Alejandro Vallejo <agarciav@amd.com>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Alejandro Vallejo <alejandro.vallejo@cloud.com>,
+	George Dunlap <gwd@xenproject.org>
+Subject: [PATCH v2 08/14] x86/mm: purge unneeded destroy_perdomain_mapping()
+Date: Wed,  2 Sep 2026 10:43:52 +0100
+Message-ID: <20260901-asi-part2-8-ecc269f268b7@xenproject.org>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260901-asi-part2-0-ecc269f268b7@xenproject.org>
+References: <20260901-asi-part2-0-ecc269f268b7@xenproject.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 2/2] x86/time: avoid early uses of NOW() to return zero
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>
-References: <ec25e838-6bf6-496c-abbe-0fd71e2fb0d9@suse.com>
- <cb8d9a90-64ce-4e86-a188-36a32fe02970@suse.com>
- <apfWTzVihQi5LX9x@macbook.local>
- <1047fb1f-87a3-46b9-ad91-904b05d8a637@suse.com>
- <apfpHXG7wMMwerk7@macbook.local>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <apfpHXG7wMMwerk7@macbook.local>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1788341468-51AC4CFC-3A152B73/0/0
+X-purgate-ID: tlsNG-16d1c6/1788342246-FD60A77B-C10AA290/0/0
 X-purgate-type: clean
-X-purgate-size: 2329
+X-purgate-size: 2524
 
-On 02.09.2026 11:15, Roger Pau Monné wrote:
-> On Wed, Sep 02, 2026 at 10:40:04AM +0200, Jan Beulich wrote:
->> On 02.09.2026 09:54, Roger Pau Monné wrote:
->>> On Wed, Aug 19, 2026 at 01:45:56PM +0200, Jan Beulich wrote:
->>>> --- a/xen/arch/x86/time.c
->>>> +++ b/xen/arch/x86/time.c
->>>> @@ -1664,6 +1664,9 @@ s_time_t get_s_time_fixed(uint64_t at_ts
->>>>      const struct cpu_time *t = &this_cpu(cpu_time);
->>>>      uint64_t tsc, delta;
->>>>  
->>>> +    /* scale_delta() degenerates when the scale wasn't set yet. */
->>>> +    ASSERT(t->tsc_scale.mul_frac);
->>>> +
->>>>      if ( at_tsc )
->>>>          tsc = at_tsc;
->>>>      else
->>>> @@ -1679,6 +1682,20 @@ s_time_t get_s_time_fixed(uint64_t at_ts
->>>>  
->>>>  s_time_t get_s_time(void)
->>>>  {
->>>> +    /*
->>>> +     * Before the TSC scale is set, avoid returning constant 0 (or whatever
->>>> +     * this_cpu(cpu_time).stamp.local_stime is set to).  While the returned
->>>> +     * value is in no way representing time, it at least increases
->>>> +     * monotonically, thus avoiding e.g. waiting loops to degenerate to
->>>> +     * entirely infinite ones.
->>>> +     */
->>>> +    if ( unlikely(!this_cpu(cpu_time).tsc_scale.mul_frac) )
->>>> +    {
->>>> +        static s_time_t counter;
->>>
->>> Not that it matters much, but counter can probably be __initdata?
->>
->> I wanted to play safe here: In get_s_time_fixed(), release builds won't
->> crash if the assertion wasn't there, but would trigger in a
->> corresponding debug build. In that (unexpected) situation, we'd crash
->> here (when .init.* was unmapped) if __initdata was used.
-> 
-> That's kind of what I was aiming at: we possibly do want to crash hard
-> if Xen is still using the fake counter after initialization?  Nothing
-> good can come out of running guests without the TSC scaling being set,
-> as the PV clock exposed won't be functional either.  Likely resulting
-> in guests relying on it also getting stuck because mul_frac == 0?
+From: Roger Pau Monné <roger.pau@citrix.com>
 
-Crashing because of too late an .init.data access may require more
-analysis than necessary though. I.e. if that was really the intention,
-I think it should be a BUG_ON(), and I further think I'd prefer to leave
-this to a separate patch (which I would likely ack, but which I'm not
-sure I would be willing to write).
+We want to change per-domain mappings to be per-vCPU mappings.  In
+preparation for that, we want to arrange that
+destroy_perdomain_mapping() work either with a single perdomain area,
+or with a per-vCPU perdomain area.
 
-Jan
+There are two calls made from domain-scoped contexts; both calls turn
+out to be unnecessary:
+
+- destroy_perdomain_mapping() is not logically the undo of
+  create_perdomain_mapping(), as the name and its use in
+  hvm_domain_initialise() suggest.  create_ allocates a per-domain L3,
+  but destroy_ tears down mappings without freeing it; and since the
+  call here passes nr == 0, it tears down nothing at all.  The
+  per-domain L3 page is actually freed by free_perdomain_mappings(),
+  which hvm_domain_initialise()'s caller, arch_domain_create(),
+  already invokes on its failure path.
+
+- The call in pv_domain_destroy() is redundant: arch_domain_destroy()
+  unconditionally calls free_perdomain_mappings(), which tears down
+  the same entries and additionally frees the page-table structures.
+
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Reviewed-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+Assisted-by: Claude Code:claude-fable-5
+Signed-off-by: George Dunlap <gwd@xenproject.org>
+---
+Changes in v2:
+- Added to the series
+
+Changes since the previously posted version:
+- Reworked the commit message to make it more clear how it fits in
+  with the larger series.  No functional change.
+---
+ xen/arch/x86/hvm/hvm.c   | 1 -
+ xen/arch/x86/pv/domain.c | 3 ---
+ 2 files changed, 4 deletions(-)
+
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index a6e0818468..cd425c3342 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -730,7 +730,6 @@ int hvm_domain_initialise(struct domain *d,
+     XFREE(d->arch.hvm.irq);
+  fail0:
+     hvm_destroy_cacheattr_region_list(d);
+-    destroy_perdomain_mapping(d, PERDOMAIN_VIRT_START, 0);
+  fail:
+     hvm_domain_relinquish_resources(d);
+     XFREE(d->arch.hvm.io_handler);
+diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
+index 15a8238aff..b936ca9b26 100644
+--- a/xen/arch/x86/pv/domain.c
++++ b/xen/arch/x86/pv/domain.c
+@@ -383,9 +383,6 @@ void pv_domain_destroy(struct domain *d)
+ {
+     pv_l1tf_domain_destroy(d);
+ 
+-    destroy_perdomain_mapping(d, GDT_LDT_VIRT_START,
+-                              GDT_LDT_MBYTES << (20 - PAGE_SHIFT));
+-
+     XFREE(d->arch.pv.cpuidmasks);
+ }
+ 
+-- 
+2.55.0
+
 
