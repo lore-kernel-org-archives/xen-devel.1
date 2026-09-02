@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7A1BC61DD6
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 06:52:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405168.1638702 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1FB9C61DFD
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 07:16:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405178.1638712 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1ep8-0004Hy-P9; Wed, 02 Sep 2026 06:51:54 +0000
+	id 1x1fCI-0000In-Ij; Wed, 02 Sep 2026 07:15:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405168.1638702; Wed, 02 Sep 2026 06:51:54 +0000
+Received: by outflank-mailman (output) from mailman id 1405178.1638712; Wed, 02 Sep 2026 07:15:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1ep8-0004Hr-MN; Wed, 02 Sep 2026 06:51:54 +0000
-Received: by outflank-mailman (input) for mailman id 1405168;
- Wed, 02 Sep 2026 06:51:53 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x1fCI-0000Ig-F5; Wed, 02 Sep 2026 07:15:50 +0000
+Received: by outflank-mailman (input) for mailman id 1405178;
+ Wed, 02 Sep 2026 07:15:49 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x1ep7-0004Hj-Cn
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 06:51:53 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x1fCH-0000Ia-NJ
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 07:15:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1ep6-001fpS-C3
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 08:51:52 +0200
+ id 1x1fCG-00Gpr1-Jo
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 09:15:48 +0200
 Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a97c776-2eae-0a2a0a5409dd-0a2a4503c97c-40
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 08:51:52 +0200
-Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ id 6a97cd23-2eae-0a2a0a5409dd-0a2a4503d3be-6
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 09:15:48 +0200
+Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
  by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a97c788-fae8-0a2a45030019-d1558031bc05-3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 08:51:52 +0200
-Received: by mail-wm1-f49.google.com with SMTP id
- 5b1f17b1804b1-4921eed3fa2so6015565e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 23:51:52 -0700 (PDT)
+ id 6a97cd24-fae8-0a2a45030019-d1558036e4f6-3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 09:15:48 +0200
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-49cca4ffdcfso4503875e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 00:15:48 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49ce464aa32sm55240765e9.5.2026.09.01.23.51.51
+ ffacd0b85a97d-48448ed3716sm4469216f8f.22.2026.09.02.00.15.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 01 Sep 2026 23:51:51 -0700 (PDT)
+ Wed, 02 Sep 2026 00:15:47 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,58 +53,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788331912; x=1788936712; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=yTJTlH0jzIOL1WrqVMZ4jOPbf7aE0JO3fKyodOySVHo=;
-        b=SOuRstLKncZqih9Dn8ZRkoR0pr9pd0L3AWLhCiRpVPi/vbT/WfXryr0wvyxzZmfcTr
-         B10PlSMmNJL0l0fS/bZlbbpqSKv3yZZlT4SEgqJ1Ky3KlD+Z1FZlNUrTHTsolS04ouhY
-         sM/xAW3jfrYIdOVe8CcUJ0ydsRnyPqgWEvdKsU8cvxU8rWMDasnVSIRytcf5UJSfCWoX
-         zPBLKo7nG2MijSEMO+j8acxCz0y9mdIMXsoDTHbJ+VQ8LyTz3MJtsEL4bym8y3+Eqp38
-         laISClybrQ4fFzaT2tROQZ9d2rnSDq3qHqzgitHDa3ew/cRlh4jb1bwkC5xbOoz9mp3/
-         vRPw==
+        d=suse.com; s=google; t=1788333348; x=1788938148; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=IAYE0qJP8FYYzDWFxQ5So98S6+ES5em+3AjPMWTwRhM=;
+        b=DtlHsuhy+6IUb+PibkSjtkkCqZuB9h9olWgQJjPJmo6Z1xyfp8EBReOhPtc4ieBgdm
+         GKlbTIQhOn2muI947dmbznA7270yV2ggkHmw68f8madJq2EXaodkyJuEZlR5P6whmedD
+         2JD9W8dC600kuLgZfKYUhrXF4vWG4vom400DDbWI13d5YWfLBrZuUp4whDB5FKwENYSS
+         10tGiwWtr4k6Hcva7SHWQ6vWraI0ryit4gY5w2HgT6EpgOsnuvGpL4A3pqEAlnISo5Vf
+         9UOGpI1d3R17LujA35U3mIYMJhs/N1OYm/rmthFTYgNWD7BovrpO5o5zWUjqthhtiEzW
+         8vsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788331912; x=1788936712;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=yTJTlH0jzIOL1WrqVMZ4jOPbf7aE0JO3fKyodOySVHo=;
-        b=BijaH7Qg1YjnJ7xTvw7LYeIiQF7OgEI83/8dvyWZwUvIb2J3aYyL+Bm/vb7S/Uz6XL
-         5qR9ykQGFByHVjhqfmM8Jhid73DFawL7285BtNDyM7hAnAMzEueYgRx123uOIy5zC14C
-         p37CS45GnNiJ4uG8cUF2FvTfI3a8lMlP4dffi57o1qmKb/kPPKGXTO1DwtpL28DaHTH2
-         M4vUdcWdpw/8NtKrb/l1JKkwK3t2p9kY85XR9DN36TJNElTXkt6S/tLgRVf/M8zdT7KH
-         VBl2cRtuXLlw0ufFvHJ0KJjJURr7Ljran02dzR4y3KTU/XYoj1qkX6Hyy44J88HxqKwn
-         Zu4g==
-X-Forwarded-Encrypted: i=1; AHgh+Rr5f/WE+7C1z/5lAXnp+b+Wh8Bo50MYMOPuzyyz/v/gdGFe8pqNzaN+Rvj6fIARGVxEfggr2EqExJM=@lists.xenproject.org
-X-Gm-Message-State: AFuF++n3KLCRj0n9ZB+c58JOQghWzDc1S0RevTMhBK+xGuUrQdCZ+aha
-	x18tJgva78krv4DgbbxwXsnDg5IrQTM8NJ7vCunfyirTIEDbhT5OVFRD8JpIczlcCg==
-X-Gm-Gg: AR+sD10Si3l6Y24My2t06cfkoNHnlNSlB1Mgf5ISRpqlaUF1OZOv6T/KFhy9jL9F++1
-	XVpk7g6bAgY15mcZISnGkc6KzYbsyg8fpu1vLHhqIkJuJx0JU2qGbWr5HCMVf7Zd6JguQpClef5
-	jmtxnYi+n4qA8iRLwNnr0oCGnARibrW27lczQ7NYirhLxNqU6yCCYoVEW+yn3tClXpV8eZOJjPT
-	Fy9V76D/njRUrC/sPDIghOauD9FeH4+98gc2G0wXHTFQdKL/87LbugCwJr8Kea6Lyke8wHeSYns
-	9Vvc6r4+i5RZIUjS+2gWVDrUwNdlGoLDAAlfvfYCrkWL8PNHbGNjTbLT8tRl/7zPcqoAR//1yZl
-	womTUiiIZpadfdQYnWo//0hfXQ0DOxJysKPDOLsAU2GGYWSmBMKMLAEMNuY83k3NNYH1NvrH9na
-	AoJYMdNCp4tytF4iLSK0zm9E3suhSXlYY79/eCaBpmSSODUVYRfeAxrtU1I8gSg6014ju7TRCPk
-	2GHTycTekElNgB3GwgameG5wsQfcDuCkKbcE/1yAsWS5qMXEhZC
-X-Received: by 2002:a05:600c:8a17:20b0:49c:d818:8771 with SMTP id 5b1f17b1804b1-49ce5808d4dmr31349525e9.7.1788331911631;
-        Tue, 01 Sep 2026 23:51:51 -0700 (PDT)
-Message-ID: <579431f7-3df9-4a96-8a9f-1fc748a0aa4a@suse.com>
-Date: Wed, 2 Sep 2026 08:51:50 +0200
+        d=1e100.net; s=20251104; t=1788333348; x=1788938148;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=IAYE0qJP8FYYzDWFxQ5So98S6+ES5em+3AjPMWTwRhM=;
+        b=pszT7TZXCFaZlN6VWwySEqXtBlmFTBkFwfbiEg9+oSk3y39qS4n2cj6YMLVgBNNZBJ
+         kiyxdsaKS0VxrBQymhdNFWn/89hoFzweDCgUPzV9VY/Bw8PNUWz9OMWH+DX7e7rvcslJ
+         6qa6vdbPVrEryUPCc+PCu2BNNtjIsrmijzLwRguNj1TvvdN5rL1fd2NOppT/68uvDITR
+         hXcB+37AKzyhvSGbIC8coputSSoyMM9/Gju1DocWiXpJxm6+yfEb2sv2DIBtMrZGAI4B
+         K51c1QCaG2/JNKGAWiN/RCb4vlGOG7HX9qix/1Zrga4xoEhdik04DceiymgvZzfX4rZB
+         nW/w==
+X-Gm-Message-State: AFuF++laWap4eCiybeHWYzln1gyHWdUJq8nOY22sHzKDbH0OECo4Bnfv
+	D7FGFMpRS7PA3b8AbJog9kYaTTL0IRH0ne+Eh1RqxSa9zhrNYkOp3cxDVJtqo00F08f98pbY+ws
+	c6ltTyA==
+X-Gm-Gg: AR+sD11j/8+0/nQbzKka6u/eur3MYyK1Wr80deR44ugKuc5pOo/HtJy1nWgHx/EOHJC
+	c+O3rRXc/yHvLx+vfKU1Rg6+hD8f0+nMoCzdpBTYqXtH3XuqiKkaCaf3T/0RHoGIjAArEzl0EoR
+	pnM/zpPDqFxCUWMWaHij0YRxk94kgQn9NIrFXoOTNJtcPNNyXewZms2sTALEeLwnt6BuJA7z0Zg
+	EjMX5N3zCsXPx6u20ZKdKAb4kIfOVJSf+hvn1f6YYhdSEM/MGpRFsgh9KXxOq7L0QukXjsGT3Tk
+	a4IpyNuGuGF8aDILwcQyC/YjOUkTd0zhTd81PELLAbN16Q1ECPduLdEIFd3xhvpQE3Kveoupv6q
+	PlJ3k2DptT6u14MhtH7/Nacasn9W8TLKBGTIWxpuN+iw7XjVbX0yAaTOM/gi+jXXX7COlpkwB/5
+	ISXznrW7jvuKfFaFv4nyUvp/b9bATtnhtqDAsOeYiVMnKaWQkKndvD2Kcx7LP4uvNaFbN4Z/X2J
+	WBNzWuai1ATOpgYu/vnU9fMrRXdHnrwxtMghIUqG/N1TAnGwnfz4A==
+X-Received: by 2002:a05:600c:e558:10b0:49c:e906:ba16 with SMTP id 5b1f17b1804b1-49ce906bb7cmr1538195e9.15.1788333347853;
+        Wed, 02 Sep 2026 00:15:47 -0700 (PDT)
+Message-ID: <a16d4079-cd8c-4eca-8a60-3cef40173cfd@suse.com>
+Date: Wed, 2 Sep 2026 09:15:46 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: Xen 4.23 planning: items for the release
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Community Manager <community.manager@xenproject.org>,
- "committers@xenproject.org" <committers@xenproject.org>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <ad1588cc-3130-4ea6-a7cc-0210b507b7a4@gmail.com>
 Content-Language: en-US
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>
 From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH] x86/alternatives: mark .altinstructions r/w
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -128,26 +126,69 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <ad1588cc-3130-4ea6-a7cc-0210b507b7a4@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1788331912-750864E9-9D5723C0/0/0
+X-purgate-ID: tlsNG-33051d/1788333348-766FB4E9-799702DF/0/0
 X-purgate-type: clean
-X-purgate-size: 848
+X-purgate-size: 2901
 
-On 01.09.2026 18:05, Oleksii Kurochko wrote:
-> As we are starting to plan for Xen 4.23, what items are you planning to
-> work on during this release?
+Forever since the introduction of the .priv member it has been wrong to
+record the section as r/o.
 
-"Work on" isn't the right term there: Stuff which has been pending for, in part,
-several releases should really finally make it in. AVX10 support to give a
-concrete example, but there are many others (including things I couldn't
-sensibly post ahead of other things having progressed at least some). And I
-would strongly request that you or whoever else is going to be release manager
-actually start pushing for this to happen. It is imo an unbearable situation
-that work which has been done is getting pushed from release to release, just
-because reviews don't get done and, where necessary, supporting parts which were
-promised to be carried out aren't coming into existence.
+.alt_call_sites, otoh, is legitimately r/o, hence
+__alt_call_sites_{start,end}[] would better reflect that.
 
-Jan
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+
+--- a/xen/arch/x86/alternative.c
++++ b/xen/arch/x86/alternative.c
+@@ -464,7 +464,7 @@ static unsigned int __initdata alt_todo;
+ static unsigned int __initdata alt_done;
+ 
+ extern struct alt_instr __alt_instructions[], __alt_instructions_end[];
+-extern struct alt_call __alt_call_sites_start[], __alt_call_sites_end[];
++extern const struct alt_call __alt_call_sites_start[], __alt_call_sites_end[];
+ 
+ /*
+  * At boot time, we patch alternatives in NMI context.  This means that the
+--- a/xen/arch/x86/include/asm/alternative-asm.h
++++ b/xen/arch/x86/include/asm/alternative-asm.h
+@@ -59,7 +59,7 @@
+ .macro ALTERNATIVE oldinstr, newinstr, feature
+     decl_orig(\oldinstr, repl_len(1) - orig_len)
+ 
+-    .pushsection .altinstructions, "a", @progbits
++    .pushsection .altinstructions, "aw", @progbits
+     altinstruction_entry .L\@_orig_s, .L\@_repl_s1, \feature, \
+         orig_len, repl_len(1), pad_len
+ 
+@@ -82,7 +82,7 @@
+ .macro ALTERNATIVE_2 oldinstr, newinstr1, feature1, newinstr2, feature2
+     decl_orig(\oldinstr, as_max(repl_len(1), repl_len(2)) - orig_len)
+ 
+-    .pushsection .altinstructions, "a", @progbits
++    .pushsection .altinstructions, "aw", @progbits
+ 
+     altinstruction_entry .L\@_orig_s, .L\@_repl_s1, \feature1, \
+         orig_len, repl_len(1), pad_len
+--- a/xen/arch/x86/include/asm/alternative.h
++++ b/xen/arch/x86/include/asm/alternative.h
+@@ -90,7 +90,7 @@ extern void alternative_instructions(voi
+ /* alternative assembly primitive: */
+ #define ALTERNATIVE(oldinstr, newinstr, feature)                        \
+         OLDINSTR_1(oldinstr, 1)                                         \
+-        ".pushsection .altinstructions, \"a\", @progbits\n"             \
++        ".pushsection .altinstructions, \"aw\", @progbits\n"            \
+         ALTINSTR_ENTRY(feature, 1)                                      \
+         ".section .discard, \"a\", @progbits\n"                         \
+         ".byte " alt_total_len "\n" /* total_len <= 255 */              \
+@@ -101,7 +101,7 @@ extern void alternative_instructions(voi
+ 
+ #define ALTERNATIVE_2(oldinstr, newinstr1, feature1, newinstr2, feature2) \
+         OLDINSTR_2(oldinstr, 1, 2)                                      \
+-        ".pushsection .altinstructions, \"a\", @progbits\n"             \
++        ".pushsection .altinstructions, \"aw\", @progbits\n"            \
+         ALTINSTR_ENTRY(feature1, 1)                                     \
+         ALTINSTR_ENTRY(feature2, 2)                                     \
+         ".section .discard, \"a\", @progbits\n"                         \
 
