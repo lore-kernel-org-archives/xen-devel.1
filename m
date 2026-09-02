@@ -4,49 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E393FC624D0
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 12:13:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405794.1639243 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9D05C61DD6
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 12:31:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405805.1639253 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1jqS-0007LF-MQ; Wed, 02 Sep 2026 12:13:36 +0000
+	id 1x1k7g-00025p-46; Wed, 02 Sep 2026 12:31:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405794.1639243; Wed, 02 Sep 2026 12:13:36 +0000
+Received: by outflank-mailman (output) from mailman id 1405805.1639253; Wed, 02 Sep 2026 12:31:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1jqS-0007L8-JC; Wed, 02 Sep 2026 12:13:36 +0000
-Received: by outflank-mailman (input) for mailman id 1405794;
- Wed, 02 Sep 2026 12:13:35 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a06209db4d000c4f3@swg.vates.tech>)
- id 1x1jqR-0007L0-I7
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 12:13:35 +0000
+	id 1x1k7g-00025i-0J; Wed, 02 Sep 2026 12:31:24 +0000
+Received: by outflank-mailman (input) for mailman id 1405805;
+ Wed, 02 Sep 2026 12:31:22 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x1k7e-00025c-3S
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 12:31:22 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1jqQ-00GZ5P-VJ
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 14:13:34 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1x1k7d-000JKV-2b
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 14:31:21 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a06209db4d000c4f3@swg.vates.tech>)
- id 6a9812ed-e002-0a2a0a5209dd-0a2a4501cc0c-10
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 14:13:34 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0621a2590000c4f3@swg.vates.tech>)
+ id 6a981713-8faa-0a2a0a5109dd-0a2a4502da7e-32
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 14:31:20 +0200
+Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a06209db4d000c4f3@swg.vates.tech>)
- id 6a9812ee-5984-0a2a45010019-b9ff1c229ced-3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 14:13:34 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0621a2590000c4f3@swg.vates.tech>)
+ id 6a981718-6ca4-0a2a45020019-b9ff1c23a449-3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 14:31:20 +0200
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a06209db4d000c4f3.006 for <xen-devel@lists.xenproject.org>
+ by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a0621a2590000c4f3.007 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 02 Sep 2026 12:13:28 +0000
-Received: from [192.168.1.18] (88-188-240-210.subs.proxad.net [88.188.240.210])
- (Authenticated sender: teddy.astie)
- by mail2.vates.fr (Postfix) with ESMTPSA id 8A7BF81EFA;
- Wed,  2 Sep 2026 14:13:27 +0200 (CEST)
+ Wed, 02 Sep 2026 12:31:15 +0000
+Received: from [192.168.1.46] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id E3EF883EC5;
+ Wed,  2 Sep 2026 14:31:14 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,182 +56,655 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=tiw4xPPRY8OYYdExoE26DtgALBte0vuzjt3z7+fU0yE=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=kvEGR1xf1xJT/QTPsdr1JXA85TN5jVBFeWpjDlJoTfcTRIy2SS1uXqcy8Q1OreTCG3r8MMHcJ
- u3aflxIGIxs4qi2546++1HzJfWuPH/HzUwyYkiemARypr099baposckAtwBZkeuT5pVK5QOVLcX
- T1nVwXzE0p7GmNrvJG+b/laArGAyiEdh57ZFBcvvz4DqW/pM/HSUC6ExTjoROX+4937JSsrtfl3
- 4MVBALFFmxeV7xRWFgDfZ+igEZpmF9epEtYhplm2F36mAX13cuANjRFydNe1qlcLXVd71CoHEdM
- Uu6Ue7Wj/RAyb0fVpaM4QnXcrYAhndYrVSErq729Spzw==
-X-Zone-Loop: 24c76bb2e787d509aaab642504bbd02a117bae237540
+ q=dns/txt; s=selector1; bh=1THMeUBAIrDeEun9uRoY4O/7eVbr5QQLu9G4t9DVyP8=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=g1KPhYG7DL6289Jv5MmHfcigO19NSJKTGvWftIwp9Y7T+g4qzu0Mw2xYXfJoSexcDd/1uxB+Y
+ itF0h2jsQIqekNzC6Sy1alVcz6Kk3hTGTpKRD96H1gBGAYOHILi+SJpf3RSruPuv03j/ZWGrhXZ
+ kaz0BJF3maaL1ZhCE9DqC8y64PfPvQ7wE3EBA4l4fR7mexPk2luNIeaLtuWMiC/xTc/GSrLlU3B
+ EOx95RCaMu7gnzJYamuyinOTvJyDkwkECL6Ovk4kk8UllIQvWcJoSTq0hggv8AFPzIL1nYLgj7j
+ xfWH5RApjC3YYLoQU44L/4+t8+BqcCUzRliImLEKQ8eQ==
+X-Zone-Loop: fac5733e58b59dee18d11639511ec8f13838e7d29073
 x-campaign-type: default
-x-transaction-id: 788a6acb-c896-4466-bf1c-cfca7e641cfb
-x-swg-uid: 01-0c4fdd03-772b-4aa4-9717-56b2384abf85
+x-transaction-id: 6507237c-a807-482a-bed1-a2a3ef1156b7
+x-swg-uid: 01-ec864085-30df-44b4-bb8f-7811ea3ab810
 X-Mailer: Sweego
 Message-ID:
- <1788351208.8631fc262581453bbf619ec5b2062170.1a06209db4d000c4f3@vates.tech>
-x-swg-bid: 1788351208.8631fc262581453bbf619ec5b2062170.1a06209db4d000c4f3
+ <1788352275.8631fc262581453bbf619ec5b2062170.1a0621a2590000c4f3@vates.tech>
+x-swg-bid: 1788352275.8631fc262581453bbf619ec5b2062170.1a0621a2590000c4f3
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
 X-Originating-IP: [37.26.189.201]
-Date: Wed, 2 Sep 2026 14:13:27 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] x86/bitops: don't cast away volatile-ness
-To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20260902114339.62043-1-andrew.cooper3@citrix.com>
- <20260902114339.62043-5-andrew.cooper3@citrix.com>
-Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- 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
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <20260902114339.62043-5-andrew.cooper3@citrix.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------bWLQzgFU7KbT5AZK0ydMr007"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v2 09/39] xen/riscv: implement virtual APLIC MMIO
+ emulation
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: xen-devel@lists.xenproject.org, 
+ Romain Caritey <Romain.Caritey@microchip.com>, 
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
+ Zheng Zhang <zhangzheng@iscas.ac.cn>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
+ Julien Grall <julien@xen.org>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Stefano Stabellini <sstabellini@kernel.org>
+In-Reply-To: <4413e157dfe67167f651df1ea92ab61ca4182723.1787838835.git.oleksii.kurochko@gmail.com>
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <4413e157dfe67167f651df1ea92ab61ca4182723.1787838835.git.oleksii.kurochko@gmail.com>
+Date: Wed, 02 Sep 2026 14:31:07 +0200
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788352274; l=22981;
+ i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
+ bh=ypu6EGnOWO8iKeh0Sw5dn0r+IAsxBSz5B1e49RuK/U0=;
+ b=7PND8ycxYfluSujQqSlmJtBAEYSzw+AtBi34YOo3jDIFR4FzzT3kIlJ6b2KG/T8VTy5OVegwo
+ wfbHMuDR5PQBmg8jSPthKH91c7BlphljEhhqALGbhuRomnni8i3izVK
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
+ pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1788351207761
-X-purgate-ID: tlsNG-d62444/1788351214-BF063757-E701E59E/0/0
-X-purgate-type: clean
-X-purgate-size: 5956
+X-Bm-Transport-Timestamp: 1788352275146
+X-purgate-ID: tlsNG-720697/1788352280-662A92AC-5F6600DD/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 22981
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------bWLQzgFU7KbT5AZK0ydMr007
-Content-Type: multipart/mixed; boundary="------------uJq53P7HCO3LhMALVuti5xzR";
- protected-headers="v1"; hp="clear"
-Message-ID: <71bdd891-f3c0-42f4-ba5c-485681dc6319@vates.tech>
-Date: Wed, 2 Sep 2026 14:13:27 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] x86/bitops: don't cast away volatile-ness
-To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20260902114339.62043-1-andrew.cooper3@citrix.com>
- <20260902114339.62043-5-andrew.cooper3@citrix.com>
-Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- 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
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <20260902114339.62043-5-andrew.cooper3@citrix.com>
+> Guests running under Xen program interrupt routing by writing to APLIC
+> MMIO registers. Xen must intercept these accesses to enforce interrupt
+> isolation between domains and to translate guest routing intent into the
+> underlying physical MSI topology.
+> 
+> Writes are gated by the domain's authorised interrupt bitmap so that a
+> guest cannot affect interrupts it does not own. TARGET register writes
+> additionally require translation of the hart and IMSIC guest-file
+> indices from virtual to physical, as the APLIC uses these fields
+> directly to compute the MSI delivery address.
+> 
+> Delegation (APLIC_SOURCECFG_D) is not yet supported.
+> 
+> Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>
+> diff --git a/xen/arch/riscv/aplic-priv.h b/xen/arch/riscv/aplic-priv.h
+> index 35100d3a64..b3a1f79c5b 100644
+> --- a/xen/arch/riscv/aplic-priv.h
+> +++ b/xen/arch/riscv/aplic-priv.h
+> @@ -47,4 +47,7 @@ struct aplic_priv {
+>   */
+>  extern unsigned int guest_aplic_num_sources;
+>  
+> +uint32_t aplic_msi_target_gen(const struct vcpu *target_vcpu,
+> +                              uint32_t base_val);
+> +
+>  #endif /* ASM_RISCV_APLIC_PRIV_H */
+> diff --git a/xen/arch/riscv/aplic.c b/xen/arch/riscv/aplic.c
+> index 3681f0669e..66ba4986a9 100644
+> --- a/xen/arch/riscv/aplic.c
+> +++ b/xen/arch/riscv/aplic.c
+> @@ -16,6 +16,7 @@
+>  #include <xen/irq.h>
+>  #include <xen/mm.h>
+>  #include <xen/sections.h>
+> +#include <xen/sched.h>
+>  #include <xen/spinlock.h>
+>  #include <xen/types.h>
+>  #include <xen/vmap.h>
+> @@ -28,8 +29,6 @@
+>  #include <asm/io.h>
+>  #include <asm/riscv_encoding.h>
+>  
+> -#define APLIC_DEFAULT_PRIORITY  1
+> -
+>  static struct aplic_priv aplic = {
+>      .lock = SPIN_LOCK_UNLOCKED,
+>  };
+> @@ -38,6 +37,127 @@ static struct intc_info __ro_after_init aplic_info = {
+>      .hw_variant = INTC_APLIC,
+>  };
+>  
+> +/*
+> + * The arrangement of IMSIC interrupt files in MMIO space follows a topology
+> + * defined by the RISC-V AIA specification. An IMSIC group is a set of
+> + * interrupt files (e.g., in a cluster or socket) co-located in memory.
+> + *
+> + * The physical address of an outgoing MSI is calculated by bitwise ORing a
+> + * Base Physical Page Number (Base PPN) with the Group Index (g), the Hart
+> + * Index (h) and, for a supervisor-level interrupt domain, the Guest Index:
+> + *
+> + *   ( Base PPN | (g << (HHXS + 12)) | (h << LHXS) | guest ) << 12
+> + *
+> + * where Base PPN, HHXS, LHXS, HHXW and LHXW come from the {m,s}msiaddrcfg[h]
+> + * registers of the interrupt domain that sends the MSI:
+> + *
+> + * XLEN-1       HHXS+24          LHXS+12          12          0
+> + * |            |                |                |           |
+> + * ------------------------------------------------------------
+> + * |xxxx|   g   |xxxxxxxx|   h   |xxxx|Guest Index|     0     |
+> + * ------------------------------------------------------------
+> + *
+> + * - g: group number.
+> + * - h: hart number relative to the group.
+> + * - xxxx: remaining Base PPN bits; each gap may be zero-width.
+> + * - Guest Index: selects one of the 4 KiB pages right above the hart's own
+> + *   supervisor-level file, i.e. it starts at bit 12; LHXS must therefore be
+> + *   at least as large as the number of guest index bits.
+> + * - Bits 11:0: always zero because IMSIC files are 4 KiB page-aligned.
+> + *
+> + * For wired interrupts in MSI delivery mode (domaincfg.DM = 1) the APLIC
+> + * builds that address itself from the "Hart Index" field (bits 31:18) of the
+> + * corresponding target[i] register. That field holds a hart index *number*,
+> + * in which both indices are packed adjacently:
+> + *
+> + * 13          lhxw+hhxw   lhxw       0
+> + * |           |           |          |
+> + * ------------------------------------
+> + * |     0     |Group Index|Hart Index|
+> + * ------------------------------------
+> + *
+> + * - lhxw (Low Hart Index Width): the number of bits used for the hart number
+> + *   within a group.
+> + * - hhxw (High Hart Index Width): the number of bits used for the group
+> + *   number; the remaining bits of the field must be zero.
+> + *
+> + * The Guest Index isn't a part of it: for a supervisor-level interrupt domain
+> + * it has its own field (bits 17:12) in target[i].
+> + *
+> + * Because there are "xxxx" gaps (Base PPN bits) between the indices in the
+> + * physical address (depending on HHXS and LHXS), software must extract the
+> + * group and hart components separately and pack them into the APLIC-defined
+> + * Hart Index format to ensure correct MSI targeting.
+> + */
+> +static unsigned long aplic_hart_field(unsigned int cpu)
+> +{
+> +    const struct imsic_config *imsic = imsic_get_config();
+> +    const struct imsic_msi *msi = &imsic->msi[cpu];
+> +    /* Low Hart Index Shift */
+> +    unsigned int lhxs = imsic->guest_index_bits;
+> +    /* Low Hart Index Width */
+> +    unsigned int lhxw = imsic->hart_index_bits;
+> +    /* High Hart Index Width */
+> +    unsigned int hhxw = imsic->group_index_bits;
+> +    /* High Hart Index Shift */
+> +    unsigned int hhxs =
+> +        imsic->group_index_shift - APLIC_xMSICFGADDR_PPN_SHIFT * 2;
+> +    /*
+> +     * msi->base_addr is the base of the MMIO regset this CPU's interrupt
+> +     * files live in, and one regset can cover several harts; msi->offset
+> +     * selects this CPU's block inside it. The hart index bits are part of
+> +     * that offset, so both indexes have to be derived from the full address.
+> +     */
+> +    paddr_t target_addr = msi->base_addr + msi->offset;
+> +    unsigned long tppn = target_addr >> APLIC_xMSICFGADDR_PPN_SHIFT;
+> +    unsigned long g =
+> +        (tppn >> APLIC_xMSICFGADDR_PPN_HHX_SHIFT(hhxs)) &
+> +        APLIC_xMSICFGADDR_PPN_HHX_MASK(hhxw);
+> +    unsigned long h =
+> +        (tppn >> APLIC_xMSICFGADDR_PPN_LHX_SHIFT(lhxs)) &
+> +        APLIC_xMSICFGADDR_PPN_LHX_MASK(lhxw);
+> +
+> +    return (g << lhxw) | h;
+> +}
+> +
+> +uint32_t aplic_msi_target_gen(const struct vcpu *target_vcpu,
+> +                              uint32_t base_val)
+> +{
+> +    unsigned int guest_id = vcpu_guest_file_id(target_vcpu);
+> +    unsigned long hart_field = aplic_hart_field(target_vcpu->processor);
+> +
+> +    base_val &= APLIC_TARGET_EIID;
+> +    base_val |= MASK_INSR(guest_id, APLIC_TARGET_GUEST_IDX);
+> +    base_val |= MASK_INSR(hart_field, APLIC_TARGET_HART_IDX);
+> +
+> +    return base_val;
+> +}
+> +
+> +uint32_t aplic_hw_read_reg(unsigned int offset)
+> +{
+> +    unsigned long flags;
+> +    uint32_t val;
+> +
+> +    ASSERT((offset < aplic.size) && IS_ALIGNED(offset, sizeof(uint32_t)));
+> +
+> +    spin_lock_irqsave(&aplic.lock, flags);
+> +    val = readl((volatile void __iomem *)aplic.regs + offset);
+> +    spin_unlock_irqrestore(&aplic.lock, flags);
+> +
+> +    return val;
+> +}
+> +
+> +void aplic_hw_write_reg(unsigned int offset, uint32_t value)
+> +{
+> +    unsigned long flags;
+> +
+> +    ASSERT((offset < aplic.size) && IS_ALIGNED(offset, sizeof(uint32_t)));
+> +
+> +    spin_lock_irqsave(&aplic.lock, flags);
+> +    writel(value, (volatile void __iomem *)aplic.regs + offset);
+> +    spin_unlock_irqrestore(&aplic.lock, flags);
+> +}
+> +
+>  static void __init aplic_init_hw_interrupts(void)
+>  {
+>      unsigned int i;
+> @@ -53,9 +173,9 @@ static void __init aplic_init_hw_interrupts(void)
+>          /*
+>           * Low bits of target register contains Interrupt Priority bits which
+>           * can't be zero according to AIA spec.
+> -         * Thereby they are initialized to APLIC_DEFAULT_PRIORITY.
+> +         * Thereby they are initialized to APLIC_TARGET_IPRIO_DEFAULT.
+>           */
+> -        writel(APLIC_DEFAULT_PRIORITY, &aplic.regs->target[i]);
+> +        writel(APLIC_TARGET_IPRIO_DEFAULT, &aplic.regs->target[i]);
+>      }
+>  
+>      writel(APLIC_DOMAINCFG_IE | APLIC_DOMAINCFG_DM, &aplic.regs->domaincfg);
+> diff --git a/xen/arch/riscv/include/asm/aplic.h b/xen/arch/riscv/include/asm/aplic.h
+> index a2af55d54f..babba38607 100644
+> --- a/xen/arch/riscv/include/asm/aplic.h
+> +++ b/xen/arch/riscv/include/asm/aplic.h
+> @@ -39,6 +39,13 @@
+>  #define  APLIC_DOMAINCFG_IE             BIT(8, U)
+>  #define  APLIC_DOMAINCFG_DM             BIT(2, U)
+>  #define  APLIC_DOMAINCFG_BE             BIT(0, U)
+> +/*
+> + * The bits a write may change. Everything else, including the read-only zero
+> + * bit 7 and the reserved bits, has to read back as zero, and BE is WARL and
+> + * hardwired to 0 as Xen is little-endian only.
+> + */
+> +#define  APLIC_DOMAINCFG_WMASK          (APLIC_DOMAINCFG_IE | \
+> +                                         APLIC_DOMAINCFG_DM)
+>  
+>  #define APLIC_SOURCECFG_BASE            0x0004
+>  #define APLIC_SOURCECFG_LAST            0x0ffc
+> @@ -89,6 +96,9 @@
+>  #define  APLIC_TARGET_GUEST_IDX         GENMASK(17, 12)
+>  /* Bit 11 is reserved and reads as zero */
+>  #define  APLIC_TARGET_EIID              GENMASK(10, 0)
+> +/* If target is in DM mode */
+> +#define  APLIC_TARGET_IPRIO             GENMASK(7, 0)
+> +#define   APLIC_TARGET_IPRIO_DEFAULT    1U
+>  
+>  #define APLIC_IDC_SIZE                  32
+>  
+> @@ -98,6 +108,27 @@
+>  #define APLIC_SIZE(nr_cpus) \
+>      (APLIC_MIN_SIZE + APLIC_SIZE_ALIGN(APLIC_IDC_SIZE * (nr_cpus)))
+>  
+> +/*
+> + * Using setip is fine here, as all SET* and CLR* register groups consist of 32
+> + * registers and therefore have identical sizes.
+> + *
+> + * Lowest 2 bits are always zero for SET* and CLR* registers.
+> + */
+> +#define APLIC_SETCLR_OFFSET_MASK \
+> +    (sizeof_field(struct aplic_regs, setip) - sizeof(uint32_t))
+> +
+> +#define APLIC_xMSICFGADDR_PPN_SHIFT IMSIC_MMIO_PAGE_SHIFT
+> +
+> +#define APLIC_xMSICFGADDR_PPN_HHX_MASK(hhxw) \
+> +    (BIT(hhxw, UL) - 1)
+> +#define APLIC_xMSICFGADDR_PPN_HHX_SHIFT(hhxs) \
+> +    ((hhxs) + APLIC_xMSICFGADDR_PPN_SHIFT)
+> +
+> +#define APLIC_xMSICFGADDR_PPN_LHX_MASK(lhxw) \
+> +    (BIT(lhxw, UL) - 1)
+> +#define APLIC_xMSICFGADDR_PPN_LHX_SHIFT(lhxs) \
+> +    (lhxs)
+> +
+>  struct aplic_regs {
+>      uint32_t domaincfg;         /* 0x0000 */
+>      uint32_t sourcecfg[1023];   /* 0x0004 */
+> @@ -141,4 +172,7 @@ struct aplic_regs {
+>      uint32_t target[1023];      /* 0x3004 */
+>  };
+>  
+> +uint32_t aplic_hw_read_reg(unsigned int offset);
+> +void aplic_hw_write_reg(unsigned int offset, uint32_t value);
+> +
+>  #endif /* ASM_RISCV_APLIC_H */
+> diff --git a/xen/arch/riscv/include/asm/imsic.h b/xen/arch/riscv/include/asm/imsic.h
+> index 2425430ed1..93f9e44c7d 100644
+> --- a/xen/arch/riscv/include/asm/imsic.h
+> +++ b/xen/arch/riscv/include/asm/imsic.h
+> @@ -40,6 +40,19 @@ struct imsic_config {
+>      /* Base address */
+>      paddr_t base_addr;
+>  
+> +    /*
+> +     * MSI Target Address Scheme
+> +     *
+> +     * XLEN-1       HHXS+24          LHXS+12          12          0
+> +     * |            |                |                |           |
+> +     * ------------------------------------------------------------
+> +     * |xxxx|   g   |xxxxxxxx|   h   |xxxx|Guest Index|     0     |
+> +     * ------------------------------------------------------------
+> +     * - g: group number.
+> +     * - h: hart number relative to the group.
+> +     * - xxxx: remaining Base PPN bits; each gap may be zero-width.
+> +     */
+> +
+>      /* Bits representing Guest index, HART index, and Group index */
+>      unsigned int guest_index_bits;
+>      unsigned int hart_index_bits;
+> diff --git a/xen/arch/riscv/include/asm/vaplic.h b/xen/arch/riscv/include/asm/vaplic.h
+> index 96080bfbc2..046c604915 100644
+> --- a/xen/arch/riscv/include/asm/vaplic.h
+> +++ b/xen/arch/riscv/include/asm/vaplic.h
+> @@ -21,11 +21,16 @@ struct domain;
+>  
+>  struct vaplic_regs {
+>      uint32_t domaincfg;
+> +
+> +    uint32_t *target;
+>  };
+>  
+>  struct vaplic {
+>      struct vintc vintc;
+>      struct vaplic_regs regs;
+> +
+> +    paddr_t regs_start;
+> +    unsigned int regs_size;
+>  };
+>  
+>  int domain_vaplic_init(struct domain *d);
+> diff --git a/xen/arch/riscv/vaplic.c b/xen/arch/riscv/vaplic.c
+> index 14f6e3164a..8726f7203d 100644
+> --- a/xen/arch/riscv/vaplic.c
+> +++ b/xen/arch/riscv/vaplic.c
+> @@ -17,6 +17,7 @@
+>  #include <asm/aia.h>
+>  #include <asm/imsic.h>
+>  #include <asm/intc.h>
+> +#include <asm/mmio.h>
+>  #include <asm/vaplic.h>
+>  
+>  #include "aplic-priv.h"
+> @@ -27,6 +28,279 @@ unsigned int __ro_after_init guest_aplic_num_sources;
+>  
+>  #define FDT_VAPLIC_INT_CELLS 2
+>  
+> +#define AUTH_IRQ_BIT(d, irqn) \
+> +    (((irqn) < (d)->arch.vintc->nr_virqs) && \
+> +     test_bit(irqn, (d)->arch.vintc->used_irqs))
+> +
+> +/*
+> + * Convert a byte offset (within a SETIP/CLRIP/SETIE/CLRIE register group) to
+> + * a 32-bit word index into the used_irqs bitmap. Each word covers 32
+> + * interrupt sources. For SOURCECFG and TARGET groups the same division also
+> + * yields the interrupt number directly, because those arrays store one 32-bit
+> + * register per source.
+> + */
+> +#define regoffset_to_word_idx(reg_val) ((reg_val) / sizeof(uint32_t))
+> +
+> +static uint32_t vaplic_target_read(const struct domain *d, unsigned int irqn)
+> +{
+> +    const struct vaplic *vaplic = to_vaplic(d);
+> +
+> +    /* target[0] doesn't exist so irqn == 0 should be impossible */
+> +    if ( !irqn || irqn >= vaplic->vintc.nr_virqs )
+> +        return 0;
+> +
+> +    return read_atomic(&vaplic->regs.target[irqn]);
+> +}
+> +
+> +static inline uint32_t generate_auth_mask(const struct domain *currd,
+> +                                          unsigned int word_idx)
+> +{
+> +    unsigned int first_bit = word_idx * sizeof(uint32_t) * BITS_PER_BYTE;
+> +
+> +    if ( word_idx >= DIV_ROUND_UP(currd->arch.vintc->nr_virqs,
+> +                                  sizeof(uint32_t) * BITS_PER_BYTE) )
+> +    {
+> +        gdprintk(XENLOG_DEBUG, "incorrect word_idx(%u) is passed\n", word_idx);
+> +
+> +        return 0;
+> +    }
+> +
+> +    return currd->arch.vintc->used_irqs[first_bit / BITS_PER_LONG] >>
+> +           (first_bit % BITS_PER_LONG);
+> +}
+> +
+> +static bool vaplic_emulate_load(const struct vcpu *curr, paddr_t addr,
+> +                                uint32_t *out)
+> +{
+> +    const struct domain *currd = curr->domain;
+> +    const struct vaplic *vaplic = to_vaplic(currd);
+> +    const unsigned int offset = addr & APLIC_CTRL_REGION_OFFSET_MASK;
+> +    uint32_t auth_mask;
+> +    unsigned int i;
+> +
+> +    ASSERT(curr == current);
+> +
+> +    switch ( offset )
+> +    {
+> +    case APLIC_DOMAINCFG:
+> +        *out = vaplic->regs.domaincfg;
+> +
+> +        return true;
+> +
+> +    case APLIC_SETIPNUM:
+> +    case APLIC_SETIPNUM_LE:
+> +    case APLIC_CLRIPNUM:
+> +    case APLIC_SETIENUM:
+> +    case APLIC_CLRIENUM:
+> +    case APLIC_CLRIE_BASE ... APLIC_CLRIE_LAST:
+> +        /*
+> +         * Based on the RISC-V AIA spec a read of these registers
+> +         * always returns zero
+> +         */
+> +        *out = 0;
+> +
+> +        return true;
+> +
+> +    case APLIC_SETIP_BASE ... APLIC_SETIP_LAST:
+> +    case APLIC_CLRIP_BASE ... APLIC_CLRIP_LAST:
+> +    case APLIC_SETIE_BASE ... APLIC_SETIE_LAST:
+> +        i = regoffset_to_word_idx(offset & APLIC_SETCLR_OFFSET_MASK);
+> +        auth_mask = generate_auth_mask(currd, i);
+> +
+> +        break;
+> +
+> +    case APLIC_TARGET_BASE ... APLIC_TARGET_LAST:
+> +        /*
+> +         * As target registers start from 1:
+> +         *  0x3000 genmsi
+> +         *  0x3004 target[1]
+> +         *  0x3008 target[2]
+> +         *   ...
+> +         *  0x3FFC target[1023]
+> +         * It is necessary to calculate an interrupt number by subtracting
+> +         * APLIC_GENMSI instead of APLIC_TARGET_BASE.
+> +         */
+> +        i = regoffset_to_word_idx(offset - APLIC_GENMSI);
+> +
+> +        *out = AUTH_IRQ_BIT(currd, i) ? vaplic_target_read(currd, i) : 0;
+> +
+> +        return true;
+> +
+> +    default:
+> +        gdprintk(XENLOG_WARNING, "Unhandled APLIC read at offset %#x\n",
+> +                 offset);
+> +
+> +        return false;
+> +    }
+> +
+> +    *out = aplic_hw_read_reg(offset) & auth_mask;
+> +
+> +    return true;
+> +}
+> +
+> +static bool vaplic_emulate_store(const struct vcpu *curr, paddr_t addr,
+> +                                 uint32_t value)
+> +{
+> +    const struct domain *currd = curr->domain;
+> +    unsigned int offset = addr & APLIC_CTRL_REGION_OFFSET_MASK;
+> +
+> +    ASSERT(curr == current);
+> +
+> +    switch ( offset )
+> +    {
+> +    case APLIC_SETIP_BASE ... APLIC_SETIP_LAST:
+> +    case APLIC_CLRIP_BASE ... APLIC_CLRIP_LAST:
+> +    case APLIC_SETIE_BASE ... APLIC_SETIE_LAST:
+> +    case APLIC_CLRIE_BASE ... APLIC_CLRIE_LAST:
+> +    {
+> +        unsigned int word_idx =
+> +            regoffset_to_word_idx(offset & APLIC_SETCLR_OFFSET_MASK);
+> +
+> +        value &= generate_auth_mask(currd, word_idx);
+> +
+> +        break;
+> +    }
+> +
+> +    case APLIC_SOURCECFG_BASE ... APLIC_SOURCECFG_LAST:
+> +        if ( value & APLIC_SOURCECFG_D )
+> +        {
+> +            dprintk(XENLOG_ERR, "APLIC_SOURCECFG_D isn't supported\n");
+> +
+> +            goto fail;
+> +        }
+> +
+> +        /*
+> +         * As sourcecfg register starts from 1:
+> +         *   0x0000 domaincfg
+> +         *   0x0004 sourcecfg[1]
+> +         *   0x0008 sourcecfg[2]
+> +         *    ...
+> +         *   0x0FFC sourcecfg[1023]
+> +         * It is necessary to calculate an interrupt number by subtracting
+> +         * APLIC_DOMAINCFG instead of APLIC_SOURCECFG_BASE.
+> +         */
+> +        if ( !AUTH_IRQ_BIT(currd,
+> +                           regoffset_to_word_idx(offset - APLIC_DOMAINCFG)) )
+> +            /* Interrupt not enabled, ignore it */
+> +            return true;
+> +
+> +        if ( value > APLIC_SOURCECFG_SM_LEVEL_LOW )
+This compares the whole value against 7, not the extracted SM field
+(bits [2:0]). A perfectly legal SM=0 write with any bit set in the
+reserved [9:3] range (e.g. value=8) gets rejected here even though the
+actual field is fine Should be MASK_EXTR(value, APLIC_SOURCECFG_SM) >
+APLIC_SOURCECFG_SM_LEVEL_LOW.
 
---------------uJq53P7HCO3LhMALVuti5xzR
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+SM is WARL. If SM invalid but other fields valid, shouldn't reject whole
+write. Instead override value.SM with current valid SM in this branch,
+so other valid fields still get written.
+> +        {
+> +            gdprintk(XENLOG_ERR,
+> +                     "value(%#x) is incorrect for sourcecfg register\n",
+> +                     value);
+> +
+> +            return true;
+> +        }
+> +
+> +        break;
+> +
+> +    case APLIC_TARGET_BASE ... APLIC_TARGET_LAST:
+> +    {
+> +        struct vaplic *vaplic = to_vaplic(currd);
+> +        struct vcpu *target_vcpu;
+> +        unsigned int guest_hart_idx = MASK_EXTR(value, APLIC_TARGET_HART_IDX);
+> +        /*
+> +         * Look at vaplic_emulate_load() for explanation why APLIC_GENMSI is
+> +         * subtracted.
+> +         */
+> +        unsigned int srcn = regoffset_to_word_idx(offset - APLIC_GENMSI);
+> +
+> +        if ( !AUTH_IRQ_BIT(currd, srcn) )
+> +            /* Interrupt not enabled, ignore it */
+> +            return true;
+> +
+> +        target_vcpu = domain_vcpu(currd, guest_hart_idx);
+> +
+> +        if ( !target_vcpu )
+> +        {
+> +            dprintk(XENLOG_ERR, "Invalid vCPU id in target register\n");
+> +
+> +            /* Ignore such writings */
+> +            return true;
+> +        }
+> +
+> +        if ( vaplic->regs.domaincfg & APLIC_DOMAINCFG_DM )
+> +        {
+> +            /*
+> +             * A non-zero guest index asks for delivery to an interrupt file of
+> +             * nested guest. The vIMSIC node has no riscv,guest-index-bits
+> +             * property, so a guest is told its harts have no guest interrupt
+> +             * files and the field is read-only zero for them. The write isn't
+> +             * rejected (that would throw away a valid hart index and EIID);
+> +             * instead the field is dropped, which is also what
+> +             * aplic_msi_target_gen() does with it when programming the h/w.
+> +             */
+> +            if ( MASK_EXTR(value, APLIC_TARGET_GUEST_IDX) )
+> +            {
+> +                printk_once(XENLOG_WARNING
+> +                            "%pd: vAPLIC target guest index != 0 is unsupported\n",
+> +                            currd);
+> +
+> +                /* Ignore such writes ... */
+> +                return true;
+> +            }
+Comment above this says "The write isn't rejected ... instead the field
+is dropped, which is also what aplic_msi_target_gen() does with it." But
+the code doesn't follow it as it returns true immediately here before
+the write occurred and without zeroing the guest index field.
+> +
+> +            write_atomic(&vaplic->regs.target[srcn], value);
+> +
+> +            value = aplic_msi_target_gen(target_vcpu, value);
+> +        }
+> +        else
+> +        {
+> +            /*
+> +             * IPRIO is WARL and zero isn't a legal value for it, so normalize
+> +             * it once: the guest then reads back exactly what it gets.
+> +             */
+> +            unsigned int iprio = MASK_EXTR(value, APLIC_TARGET_IPRIO) ?:
+> +                                 APLIC_TARGET_IPRIO_DEFAULT;
+> +            unsigned long h = cpuid_to_hartid(guest_hart_idx);
+> +
+> +            value = MASK_INSR(guest_hart_idx, APLIC_TARGET_HART_IDX) |
+> +                    MASK_INSR(iprio, APLIC_TARGET_IPRIO);
+> +
+> +            write_atomic(&vaplic->regs.target[srcn], value);
+> +
+> +            value = MASK_INSR(h, APLIC_TARGET_HART_IDX) |
+> +                    MASK_INSR(iprio, APLIC_TARGET_IPRIO);
+> +        }
+> +
+> +        break;
+> +    }
+> +
+> +    case APLIC_SETIPNUM:
+> +    case APLIC_SETIPNUM_LE:
+> +    case APLIC_CLRIPNUM:
+> +    case APLIC_SETIENUM:
+> +    case APLIC_CLRIENUM:
+> +        if ( !value || !AUTH_IRQ_BIT(currd, value) )
+> +            return true;
+> +
+> +        break;
+> +
+> +    case APLIC_DOMAINCFG:
+> +    {
+> +        struct vaplic *vaplic = to_vaplic(currd);
+> +
+> +        vaplic->regs.domaincfg = APLIC_DOMAINCFG_RO |
+> +                                 (value & APLIC_DOMAINCFG_WMASK);
+> +
+APLIC_DOMAINCFG_WMASK includes APLIC_DOMAINCFG_DM, so
+the guest can clear DM through this write. But aplic.c:
+aplic_init_hw_interrupts() sets the real hardware APLIC's domaincfg to IE|DM
+exactly once and never touches it again. Is this expected?
 
-TGUgMDIvMDkvMjAyNiDDoCAxMzo0MywgQW5kcmV3IENvb3BlciBhIMOpY3JpdMKgOg0KPiBG
-cm9tOiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+DQo+IA0KPiBEb2luZyBzbywg
-YmVzaWRlcyBiZWluZyBhIGJhZCBpZGVhIGluIGdlbmVyYWwsIHZpb2xhdGVzIE1pc3JhIHJ1
-bGUgMTEuOC4NCj4gVXNlIHRoZSBoZWxwZXIgbWFjcm8gd2UgaGF2ZSBhdmFpbGFibGUgYW55
-d2F5Lg0KPiANCj4gTm8gZnVuY3Rpb25hbCBjaGFuZ2UgaW50ZW5kZWQuDQo+IA0KPiBGaXhl
-czogZjE4NzliMmMyNTg0ICgieGVuOiBpbnRyb2R1Y2UgZ2VuZXJpYyBub24tYXRvbWljIHRl
-c3RfKmJpdCgpIikNCj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1
-c2UuY29tPg0KPiBSZXZpZXdlZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNA
-Y2l0cml4LmNvbT4NCj4gLS0tDQo+IENDOiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5j
-b20+DQo+IENDOiBSb2dlciBQYXUgTW9ubsOpIDxyb2dlckB4ZW5wcm9qZWN0Lm9yZz4NCj4g
-Q0M6IFRlZGR5IEFzdGllIDx0ZWRkeS5hc3RpZUB2YXRlcy50ZWNoPg0KPiBDQzogU3RlZmFu
-byBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPg0KPiBDQzogSnVsaWVuIEdy
-YWxsIDxqdWxpZW5AeGVuLm9yZz4NCj4gQ0M6IEJlcnRyYW5kIE1hcnF1aXMgPGJlcnRyYW5k
-Lm1hcnF1aXNAYXJtLmNvbT4NCj4gQ0M6IE1pY2hhbCBPcnplbCA8bWljaGFsLm9yemVsQGFt
-ZC5jb20+DQo+IENDOiBWb2xvZHlteXIgQmFiY2h1ayA8Vm9sb2R5bXlyX0JhYmNodWtAZXBh
-bS5jb20+DQo+IA0KPiBSZWJhc2Ugb3ZlciByZW1vdmFsIG9mIEFERFIuDQo+IC0tLQ0KDQoo
-Li4uKQ0KDQpSZXZpZXdlZC1ieTogVGVkZHkgQXN0aWUgPHRlZGR5LmFzdGllQHZhdGVzLnRl
-Y2g+DQo=
+Moreover, I saw that d8fbe0bbc7's commit message claims: "a guest's
+domaincfg.DM reads back as a fixed one, so is there situation where we would
+allow direct delivery mode? If not, the else branch should be dropped.
 
---------------uJq53P7HCO3LhMALVuti5xzR--
-
---------------bWLQzgFU7KbT5AZK0ydMr007
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmqYEucFAwAAAAAACgkQZg+p0QLLz9Br
-Mwv/Q+QgA7otHQT6q9xjw11q/f6HyLuN0S8P5YsY9q97GgXTvmTBTjpvsdCymB6dc9fbwJgjlGgY
-c6KiXGxtvGPcMWJSAaLjCpll7Hns2QL7rONjrPhU7pE6pOEtEUofjG0zuwuqi88a4IE2aKehHfC7
-ahaGls0juotok7iFaPJGoJl2r9pfMvWOceH1ukOT0gkAIXIdWW2++Vj4dfT6Rsnc4ZrAPSEW2JJ9
-DTlITZeI/qVkh6T7cWW8NZ8dGQK2ZPInQNo3zzH8H3NbilQRAW6jQ/h0vv3IcP4YXEdl3WllAE8A
-ZLC9lgJ459gsrkmHUM8w9e2VCL55sSCNWV1b0RRx2ePSaxMMqxL1pENGbong9ws2N/iR/U2/ENEa
-uELmxg74CcaxvwDS+AadnK1F4niDuPB2rmTqRfRm8Da4TCNJs5DJz0QzVYOgD1r5rZJjiAdLPbS3
-xbjhcnL0pH1Gx+H2mi0S1wbDpqwUt8DRg0HlrNH1hDIMQCIJP+/LSIRNBaLO
-=Gbam
------END PGP SIGNATURE-----
-
---------------bWLQzgFU7KbT5AZK0ydMr007--
+-- 
+Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
