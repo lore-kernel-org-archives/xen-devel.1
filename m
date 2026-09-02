@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97976C624D0
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 09:15:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405399.1638891 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B06A7C61DFD
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 09:18:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405407.1638902 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1h3s-0003sM-Md; Wed, 02 Sep 2026 09:15:16 +0000
+	id 1x1h6L-0004Yb-42; Wed, 02 Sep 2026 09:17:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405399.1638891; Wed, 02 Sep 2026 09:15:16 +0000
+Received: by outflank-mailman (output) from mailman id 1405407.1638902; Wed, 02 Sep 2026 09:17:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1h3s-0003sF-K0; Wed, 02 Sep 2026 09:15:16 +0000
-Received: by outflank-mailman (input) for mailman id 1405399;
- Wed, 02 Sep 2026 09:15:15 +0000
+	id 1x1h6L-0004YS-0C; Wed, 02 Sep 2026 09:17:49 +0000
+Received: by outflank-mailman (input) for mailman id 1405407;
+ Wed, 02 Sep 2026 09:17:47 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <roger@xenproject.org>) id 1x1h3r-0003s9-15
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 09:15:15 +0000
+ (envelope-from <roger@xenproject.org>) id 1x1h6J-0004YJ-64
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 09:17:47 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <roger@xenproject.org>) id 1x1h3q-001pbZ-2A;
- Wed, 02 Sep 2026 09:15:14 +0000
+ (envelope-from <roger@xenproject.org>) id 1x1h6J-001pdA-0X;
+ Wed, 02 Sep 2026 09:17:46 +0000
 Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
  helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <roger@xenproject.org>) id 1x1h3q-007IB8-0J;
- Wed, 02 Sep 2026 09:15:14 +0000
+ (envelope-from <roger@xenproject.org>) id 1x1h6I-007RMY-1l;
+ Wed, 02 Sep 2026 09:17:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,87 +44,113 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Transfer-Encoding:
 	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date;
-	bh=x/tOVHZzTOR6m14ACdUVe70763wiim5Cnk9IKbrQW1s=; b=er2cy9swi0sAX85LHlY4u+QH0W
-	At+9kyCju9CQb8p2mrh+l8t6YFkNisgd8g88IGDohYYpwRdHtW+Rrm5r+K+tYjNWEo+TOM73YCeY1
-	kRUaw3i/Wr4Lnb3pYfY1UWvYkI3CHWaK8ZGMQtEtriOsgpKKaB8yMDAmK+yhNVrpEbEk=;
-Date: Wed, 2 Sep 2026 11:15:09 +0200
+	bh=lwX/OAtwnMJIo6cz8sHcIxIiEPCHKIsjDQsdlGOkZ3U=; b=pkstVnK54Ib+ArwAKJbvDzER5x
+	HPDQ4gOtnCwo8dFneZre2uW0poO24IcWW2ieyoa7YgqoIRM3doXP91Fy/D5bfOLfN5S2j7zeL57Cs
+	1wWAKbfiZFFT8GfYYlkMUcbMSJkxgA9O7+E7YAQCvpxizEqIm0iu3oJCO9B53ZQmYzC4=;
+Date: Wed, 2 Sep 2026 11:17:36 +0200
 From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
 To: Jan Beulich <jbeulich@suse.com>
 Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: Re: [PATCH v5 2/2] x86/time: avoid early uses of NOW() to return zero
-Message-ID: <apfpHXG7wMMwerk7@macbook.local>
-References: <ec25e838-6bf6-496c-abbe-0fd71e2fb0d9@suse.com>
- <cb8d9a90-64ce-4e86-a188-36a32fe02970@suse.com>
- <apfWTzVihQi5LX9x@macbook.local>
- <1047fb1f-87a3-46b9-ad91-904b05d8a637@suse.com>
+Subject: Re: [PATCH v2 1/4] x86/time: CMOS RTC may run in binary mode
+Message-ID: <apfpsDOuYZ4RGyhW@macbook.local>
+References: <79d50725-3892-4643-b854-bfec9c0c0d79@suse.com>
+ <5945d8f4-aece-4572-8e89-60408dd7ac32@suse.com>
+ <ami73Z1LlnWwcDy5@macbook.local>
+ <apfYcf9zYIsEo0tk@macbook.local>
+ <6dd4c596-aebd-4488-94da-35fb9d85d6ac@suse.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <1047fb1f-87a3-46b9-ad91-904b05d8a637@suse.com>
+In-Reply-To: <6dd4c596-aebd-4488-94da-35fb9d85d6ac@suse.com>
 
-On Wed, Sep 02, 2026 at 10:40:04AM +0200, Jan Beulich wrote:
-> On 02.09.2026 09:54, Roger Pau Monné wrote:
-> > On Wed, Aug 19, 2026 at 01:45:56PM +0200, Jan Beulich wrote:
-> >> Waiting loops like the one in flush_command_buffer() will degenerate to
-> >> infinite ones when used early enough for NOW() to still return constant
-> >> zero. Make sure the returned value at least monotonically increases. When
-> >> available, use nominal frequency values as initial approximation.
-> >>
-> >> Do this only in get_s_time(), as producing a sane value in
-> >> get_s_time_fixed() for non-zero inputs won't be reasonably possible.
-> >> Put an assertion there.
-> >>
-> >> Reported-by: Roger Pau Monné <roger.pau@citrix.com>
-> >> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> > 
-> > Acked-by: Roger Pau Monné <roger@xenporject.org>
-> 
-> I assume you won't mind if I correct the typo in the domain name.
-
-Sure, please do.
-
-> >> --- a/xen/arch/x86/time.c
-> >> +++ b/xen/arch/x86/time.c
-> >> @@ -1664,6 +1664,9 @@ s_time_t get_s_time_fixed(uint64_t at_ts
-> >>      const struct cpu_time *t = &this_cpu(cpu_time);
-> >>      uint64_t tsc, delta;
+On Wed, Sep 02, 2026 at 11:02:43AM +0200, Jan Beulich wrote:
+> On 02.09.2026 10:04, Roger Pau Monné wrote:
+> > On Thu, Jul 02, 2026 at 11:29:11AM +0200, Jan Beulich wrote:
+> >> --- a/docs/misc/xen-command-line.pandoc
+> >> +++ b/docs/misc/xen-command-line.pandoc
+> >> @@ -339,6 +339,14 @@ parameter to "stable:socket".
+> >>  Specify the event count threshold for raising Corrected Machine Check
+> >>  Interrupts.  Specifying zero disables CMCI handling.
 > >>  
-> >> +    /* scale_delta() degenerates when the scale wasn't set yet. */
-> >> +    ASSERT(t->tsc_scale.mul_frac);
+> >> +### cmos-rtc-bcd (x86)
+> >> +> `= <boolean>`
 > >> +
-> >>      if ( at_tsc )
-> >>          tsc = at_tsc;
-> >>      else
-> >> @@ -1679,6 +1682,20 @@ s_time_t get_s_time_fixed(uint64_t at_ts
-> >>  
-> >>  s_time_t get_s_time(void)
-> >>  {
-> >> +    /*
-> >> +     * Before the TSC scale is set, avoid returning constant 0 (or whatever
-> >> +     * this_cpu(cpu_time).stamp.local_stime is set to).  While the returned
-> >> +     * value is in no way representing time, it at least increases
-> >> +     * monotonically, thus avoiding e.g. waiting loops to degenerate to
-> >> +     * entirely infinite ones.
-> >> +     */
-> >> +    if ( unlikely(!this_cpu(cpu_time).tsc_scale.mul_frac) )
-> >> +    {
-> >> +        static s_time_t counter;
+> >> +> Default: `false`
+> >> +
+> >> +Flag to indicate the CMOS Real Time Clock uses BCD mode irrespective of
+> >> +control register B indicating binary mode.
+> >> +
 > > 
-> > Not that it matters much, but counter can probably be __initdata?
+> > Likely too late for it now, but I get the feeling we should have
+> > introduced a cmos option, with rtc-bcd and rtc-probe as boolean sub
+> > options:
+> > 
+> > cmos = [ rtc-probe, rtc-bcd ]
 > 
-> I wanted to play safe here: In get_s_time_fixed(), release builds won't
-> crash if the assertion wasn't there, but would trigger in a
-> corresponding debug build. In that (unexpected) situation, we'd crash
-> here (when .init.* was unmapped) if __initdata was used.
+> I was thinking the same - would be nice, but here we are.
+> 
+> >> @@ -1353,6 +1356,48 @@ static bool __init cmos_rtc_probe(void)
+> >>      return false;
+> >>  }
+> >>  
+> >> +static inline bool __init attr_const is_bcd(unsigned int x)
+> >> +{
+> >> +    return (x & 0xf) < 10 && (x >> 4) < 10;
+> >> +}
+> >> +
+> >> +static void __init cmos_rtc_probe_bcd(void)
+> >> +{
+> >> +    bool bcd;
+> >> +    unsigned long flags;
+> >> +
+> >> +    if ( opt_cmos_rtc_bcd )
+> >> +        return;
+> >> +
+> >> +    spin_lock_irqsave(&rtc_lock, flags);
+> >> +    bcd = !(CMOS_READ(RTC_CONTROL) & RTC_DM_BINARY);
+> >> +    spin_unlock_irqrestore(&rtc_lock, flags);
+> >> +
+> >> +    if ( bcd )
+> >> +        return;
+> >> +
+> >> +    for ( unsigned int seclo = 0; ; )
+> >> +    {
+> >> +        struct rtc_time rtc;
+> >> +
+> >> +        if ( !__get_cmos_time(&rtc) ||
+> >> +             !is_bcd(rtc.sec) ||
+> >> +             !is_bcd(rtc.min) ||
+> >> +             !is_bcd(rtc.hour) ||
+> >> +             !is_bcd(rtc.day) ||
+> >> +             !is_bcd(rtc.mon) )
+> >> +            return;
+> >> +
+> >> +        if ( seclo > (rtc.sec & 0xf) )
+> >> +            break;
+> >> +
+> >> +        seclo = rtc.sec & 0xf;
+> > 
+> > Is there a risk of this loop triggering the watchdog, and hence we
+> > should process softirqs in the loop? (or otherwise have some kind of
+> > hard loop stop after certain iterations / time)
+> > 
+> > Oh, I now see the mention in the commit message and also note this is
+> > done ahead of SMP and also ahead of the watchdog being enabled, hence
+> > it can't trigger the watchdog.
+> 
+> Right. I can't conclude whether you're asking for any change here, as
+> there also was no ack.
 
-That's kind of what I was aiming at: we possibly do want to crash hard
-if Xen is still using the fake counter after initialization?  Nothing
-good can come out of running guests without the TSC scaling being set,
-as the PV clock exposed won't be functional either.  Likely resulting
-in guests relying on it also getting stuck because mul_frac == 0?
+Hehe, I guess I was probing whether you wanted to do anything about
+the proliferation of cmos related top-level options.
+
+Acked-by: Roger Pau Monné <roger@xenproject.org>
+
+Albeit I think it would be nice to introduce a common cmos option in a
+future patch and deprecate the separate top-level ones.
 
 Thanks, Roger.
 
