@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8326BC61DD6
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 13:07:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405885.1639323 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8258C61DD6
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 13:23:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405901.1639333 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1kge-0001yF-5q; Wed, 02 Sep 2026 13:07:32 +0000
+	id 1x1kvM-0005Hx-EH; Wed, 02 Sep 2026 13:22:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405885.1639323; Wed, 02 Sep 2026 13:07:32 +0000
+Received: by outflank-mailman (output) from mailman id 1405901.1639333; Wed, 02 Sep 2026 13:22:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1kge-0001y8-3A; Wed, 02 Sep 2026 13:07:32 +0000
-Received: by outflank-mailman (input) for mailman id 1405885;
- Wed, 02 Sep 2026 13:07:30 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x1kgc-0001y2-Q9
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 13:07:30 +0000
+	id 1x1kvM-0005Hq-BS; Wed, 02 Sep 2026 13:22:44 +0000
+Received: by outflank-mailman (input) for mailman id 1405901;
+ Wed, 02 Sep 2026 13:22:43 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x1kvL-0005Hk-Gl
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 13:22:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1kgc-002urN-2f
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 15:07:30 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x1kvK-004Gjw-PK
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 15:22:42 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a981f8a-2eae-0a2a0a5409dd-0a2a450986e6-28
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 15:07:29 +0200
-Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a98231e-8faa-0a2a0a5109dd-0a2a4501a452-6
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 15:22:42 +0200
+Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a981f91-be1a-0a2a45090019-d155dd2ab4f0-3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 15:07:29 +0200
-Received: by mail-wr1-f42.google.com with SMTP id
- ffacd0b85a97d-48436251906so1140222f8f.0
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 06:07:29 -0700 (PDT)
+ id 6a982322-5984-0a2a45010019-d155dd36a52b-3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 15:22:42 +0200
+Received: by mail-wr1-f54.google.com with SMTP id
+ ffacd0b85a97d-4843e397f74so1224224f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 06:22:42 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48448eea961sm6440559f8f.28.2026.09.02.06.07.27
+ ffacd0b85a97d-48448e13db0sm6863597f8f.0.2026.09.02.06.22.40
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 02 Sep 2026 06:07:28 -0700 (PDT)
+ Wed, 02 Sep 2026 06:22:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,55 +52,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788354449; x=1788959249; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=vb02FW8tGEf13a7CalRORKHZMMVH1pipaK/Lpcv4Tnw=;
-        b=RGeYOdKJubIjjccSXIv3PF/k08GKIoBZMO+Y+4EB+63jqS8gtSiiqE4elrFBseuULg
-         nYhorKH8yHVycgvz03VmiK6HFL616kd/a1JWAmmZosTej3p7iVqG5W4NUhP7rixPZ5oY
-         BEbOCS8/cIP4WuElc5MHczyRBL0XX33gxE0I06+Ngb4wPFnvqL9GpvZetQj4uintxybM
-         0zcVgouHyMGvh54EMVYJuSrteJuFtOrjfOMS3P/fR+pk09AnUBoWf6JYQRdmuG5SXGaL
-         TDkmDKNE1cv1AdljrbDsaV8gjhKXYkfmQhJ/o0aZMxWDwcucwjclf/EIlkg/5MyclG3p
-         aHCw==
+        d=suse.com; s=google; t=1788355362; x=1788960162; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=YeCoXADY6GWlM/05snJqFynnYRKMSUFqnC/3xpOQfPY=;
+        b=Y+lZ3Ivl14n0Ejk33x4Y9tIcpoF3B5LF+IuDHsQ4fELolyIwUSFDpG2mjb4bzvW6Av
+         I5liz/4p91Q1hfqNaHitGUWNDqH7McwX86tiHf2CgugHBqAVgOEKZ+rlPYfQ9rA4iTZF
+         CgwBt8u4l5XnPDLnPJ+zXL9/BtT/rrHv1a8kwaSVbBoTIMY7E438ZDyH6h03ZX6cF4zq
+         02Wk0ViYFGAesYh4vPEP+ouqVyuP5A3WEL2kzE5r7TlkGT7ZXWTjK6vABrLTf3SZgG9s
+         5MR8TOOUcAchW807NsBxKQ25kQ/zNuqZHHtgHPqYxdWAqzaqH8y3G2dbw7UXzzN3D4qt
+         YXEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788354449; x=1788959249;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=vb02FW8tGEf13a7CalRORKHZMMVH1pipaK/Lpcv4Tnw=;
-        b=eAZ6hjhexGGQn8iQQWvRCvmATV552P44fmgX0Na3kUAQVj+XaP/yAo2Oo03TgWawIj
-         bklA1K0nnh8p6evfzUoq08c/2DMii+HNA3XQ5yaBANOvNAz11tbHEFxFmeFnZNlSqBdd
-         2V3DEOQfl4+I4vjBZSJEUcJL2puDaH/5s/phwX+YewDy/6GPgiocEbmSAepH4QmUa6gN
-         rHLINjsLOqFsIdwmQ2kZAjDkPk1tBf08XHNTkAxDFutMMNET/6lmSnyurIzpaLmE41Cy
-         PZ1JjEdrRDHkZDbl7Z1OU5IgrKG667h09uLI4iHcLoVZnSAnkru4b0bEg6i+Zb2e1YxP
-         Hi8w==
-X-Forwarded-Encrypted: i=1; AKwUvBxVWbrKCeNaYJQX+r88Ryz+QEWmwbQXbNQcDVhAewISTJqoUkEJut4nRYBroKeskrESXIbUDZ9wDMY=@lists.xenproject.org
-X-Gm-Message-State: AFuF++nopdu+Kf9cFr6I+KTAyoKwYd8zkt9+HOvjh3tAFqdyPOtouJGg
-	IjIhk8QWKpCC5sQ7syRRprQoiLGAP/I+XJRnhmID/cRo17Io4IEENjZ4fkRXQruzog==
-X-Gm-Gg: AYBFou0mtLjwU6JXZFyJOgmUJ0YJcwRz5n4pccYeqkO1mlA2tgtB6fnmRgTeqQeOzF3
-	KWEgOG/AS9TZx8N53Lbto0h/2182klR8j2mnaFPweGRSe+9sdd6svmxSLQWvC5BRRY5qMtCmh6R
-	0VGawNGo1QVrH9vM1uUeiyKMwdigqUE7LwwzZcyY/E4T53jE966OifZ0YzbZsO+/EIrvfm+A86t
-	/Ijv7ZwzDMO2XBpjxvRCpXNYx+bOD1ard/JdDX+Ax2v7GET4lJk54T2ZKC0Pe9+JzPR3JlwYmZ9
-	zWjcCMabpom/GTWy8MX3w+b2hyjYRDY6eUP/KZbWLTuBpF+CO9jmhhBNeC2pZ0M8G2Sc7dXHIX4
-	xdtAXHue0nFt6o5bBC8Gv4LqHeemfYKsu3KWBV+m2BfR8wfOSoVHodNM9Lw5gJalc4vdWVRIWbr
-	7yfAw0QrM1pz6JPuy1DgMUg3DmuRlYFIp+g+QxkPtkNzIrmChUvIOD6k5HInUTwwz2hUHh32XP6
-	DVb+5Dl8a6i7W/gqylBxuf6ofNBjaIhQyBOSsyLIlOHxdneS4Jg
-X-Received: by 2002:a05:6000:18a8:b0:47e:81aa:3832 with SMTP id ffacd0b85a97d-48488f1b1f1mr7860742f8f.16.1788354449128;
-        Wed, 02 Sep 2026 06:07:29 -0700 (PDT)
-Message-ID: <071c5b4f-1d57-4223-94bd-9f8ae8d80366@suse.com>
-Date: Wed, 2 Sep 2026 15:07:27 +0200
+        d=1e100.net; s=20251104; t=1788355362; x=1788960162;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=YeCoXADY6GWlM/05snJqFynnYRKMSUFqnC/3xpOQfPY=;
+        b=a84CJPY7Tw/kd3P2p+5J3yQFhSXOXZAKexqChFbUllA1sJmfYLzw0ZA/GvgGNSiDUk
+         6fXpEFc0LkdjAD29ilnqmnaP4WwkegqNdgm2C3IWgOWGb+TFOA26OLc7ZwITWtWC2omk
+         6tELkvGr+WnF2mlG1/pPq7I08R/H0cZASa061x+XhI2+FcJZwAeWfCqvgBUyooG9bTfR
+         NjXZEewK5FLxI3J8R3r+MP4WBsHg4OgZ6J4YRLres5dRHjfLDEUZJKZTGa5eJs41GQcz
+         vZNpm0z7DWGc1ZqXHGHzyx1XxLu7jYp1tAzhtb0oDy9Wmm/ogoLrAWd55/MtIiznlojH
+         JVug==
+X-Gm-Message-State: AFuF++myotmkiGwDcx3TBy00OR+Q/VrzrKBpNrtK3e6shmrYlz56MvW7
+	ST/RBOjngPaBV2YGc/ZP+V+Q7KK79zTwXXi4PURPxgmkf3ssqv6T3BNvxJskoNj9gQ==
+X-Gm-Gg: AYBFou13fEuI8pqThUmUkGfbplI2GWuZaf8DevFSZUC4JnLY6GZQwiwGXesaWyVgvf4
+	JnzEOIbLPzFv42rn9QCg0Z4QYR6oNOwFzpfoHpGB84EIv7ponDtUvZTZ0I4Q2dKVJTVcla4USJc
+	OHnk2WzhtO8hYTy2jcRMYj5yZEsq9s8aFmuM/vsupnBEn4KCBVoKpzuMhoKTE5/v3Ts85VBGrKp
+	pnvUp6QMt3Y1l92VeJSUK4vBJGCwfEhvLcuQJ4eBtqIH8YDTIqqDwh6sgaXTmpKM1tlm0PnXEmf
+	pAaN/bMRKYFdujeHTH6vojCeIkU1XuiGw08gkIR1kNi7ioYfsBYVtxiM2xi0uM3InmHxZ5TAV+w
+	RzCO2OKVOE0m+7mzYWfXLtOOxC7UrT2oRmDQwDjA7sJKKJXk7aZl6PSMN4r8Ac32FMioRuaFYpI
+	e3YdLqzCr08RSrwPJ048A7sf2b7k85UvvLaoC00dEOgBh8lyRT4v7+ZAHCGrsbiqy10/tEh5k2N
+	gFpJLk2RQ9fNQ4Q6M+8CmImBZxdvlUw8inUQgTkiMBSrSbro0bc
+X-Received: by 2002:a05:6000:18a3:b0:47f:71a0:c060 with SMTP id ffacd0b85a97d-485781d2fd6mr6586060f8f.2.1788355361924;
+        Wed, 02 Sep 2026 06:22:41 -0700 (PDT)
+Message-ID: <bb0765bf-6eea-4a37-8dd8-832db5a70b79@suse.com>
+Date: Wed, 2 Sep 2026 15:22:40 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 03/39] xen/riscv: set the guest's XLEN explicitly in
- hstatus.VSXL
+Subject: Re: [PATCH v2 07/39] xen/riscv: add missing APLIC register offsets,
+ masks to asm/aplic.h
+From: Jan Beulich <jbeulich@suse.com>
 To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+Cc: xen-devel@lists.xenproject.org,
+ Romain Caritey <Romain.Caritey@microchip.com>,
  Zheng Zhang <zhangzheng@iscas.ac.cn>,
  Alistair Francis <alistair.francis@wdc.com>,
  Connor Davis <connojdavis@gmail.com>,
@@ -109,13 +108,13 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>
 References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <a3ae79823e24f2e18cef2fac8ffffe7caa608f32.1787838835.git.oleksii.kurochko@gmail.com>
- <825ea854-5778-4cb6-a9a9-0ff97fa7bee5@suse.com>
- <127e8aea-4d65-492e-8bda-bffc75f02481@gmail.com>
+ <b3e0c1a662403ea2aa84a1943223ad0885733d0f.1787838835.git.oleksii.kurochko@gmail.com>
+ <1788276968.8631fc262581453bbf619ec5b2062170.1a05d9d0d1d000c4f3@vates.tech>
+ <d68f0e14-6c74-4b3d-9ede-c60364a93c59@suse.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -139,102 +138,37 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <127e8aea-4d65-492e-8bda-bffc75f02481@gmail.com>
+In-Reply-To: <d68f0e14-6c74-4b3d-9ede-c60364a93c59@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1788354449-39EC6034-1277DF2A/0/0
-X-purgate-type: clean
-X-purgate-size: 3223
+X-purgate-ID: tlsNG-d62444/1788355362-1F86F757-EF07C715/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 1124
 
-On 02.09.2026 13:42, Oleksii Kurochko wrote:
-> On 9/1/26 5:20 PM, Jan Beulich wrote:
->> On 27.08.2026 17:20, Oleksii Kurochko wrote:
->>> --- a/xen/arch/riscv/domain.c
->>> +++ b/xen/arch/riscv/domain.c
->>> @@ -88,7 +88,13 @@ static void vcpu_csr_init(struct vcpu *v)
->>>   {
->>>       v->arch.hedeleg = HEDELEG_DEFAULT & csr_masks.hedeleg;
->>>   
->>> -    vcpu_guest_cpu_user_regs(v)->hstatus = HSTATUS_SPV | HSTATUS_SPVP;
->>> +    /*
->>> +     * Xen supports 64-bit guests only, so set the guest's XLEN explicitly
->>> +     * rather than leaving it to the WARL behaviour of hstatus.VSXL, which the
->>> +     * decoding of a trapped instruction depends on.
->>> +     */
->>> +    vcpu_guest_cpu_user_regs(v)->hstatus =
->>> +        HSTATUS_SPV | HSTATUS_SPVP | MASK_INSR(HSTATUS_VSXL_64, HSTATUS_VSXL);
+On 01.09.2026 17:53, Jan Beulich wrote:
+> On 01.09.2026 17:36, Baptiste Le Duc wrote:
+>> On Thu, 27 Aug 2026 17:20:51 +0200, Oleksii Kurochko <oleksii.kurochko@gmail.com> wrote:
+>>> These definitions are required for correct decoding of APLIC MMIO
+>>> accesses and target configuration, and will be used by both the
+>>> physical and virtual APLIC implementations.
+>>>
+>>> While adding them, rearrange the header in the style of x86's
+>>> asm/msr-index.h: a register's offset is immediately followed by the
+>>> definitions of that register's fields, with the blocks sorted by
+>>> offset.  This makes the relation between a register and its fields
+>>> obvious from the layout alone, so no comment is needed to express it.
+>>>
+>>> [...]
 >>
->> The comment is correct right now, but the situation better would change
->> at some point. Can't you arrange for things to be correct here also for
->> a future where 32- and 128-bit guests would also be supported?
+>> Reviewed-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 > 
-> I am not sure about 128-bit guests as H extension is dependent on RV32 
-> or RV64 but probably it will be changed:
-> ```
-> The hypervisor extension depends on an "I" base integer ISA with 32 x 
-> registers (RV32I or RV64I), not RV32E or RV64E, which have only 16 x 
-> registers.
-> ```
+> Acked-by: Jan Beulich <jbeulich@suse.com>
+> 
+> If there's no dependency on earlier patches (nor the prereq series), this
+> could go in right away. Yet nothing is being said anywhere, unless I
+> overlooked anything.
 
-Lots of updates like this likely will be needed for RV128 to actually become
-a thing.
-
-> I will introduce the following (also it will be needed also to check if 
-> we could VSXL set at all as implmentation can make that field read-only 
-> and do VSXLLEN=HSXLEN):
-> 
-> /*
->   * Return the hstatus.VSXL value encoding the guest's XLEN. The switch()
->   * deliberately has no default case, so that adding a new domain_type (a
->   * 128-bit one, in particular) fails to build until this mapping is 
-> updated.
->   */
-> static unsigned int domain_vsxl(const struct domain *d)
-> {
->      switch ( d->type )
->      {
->      case DOMAIN_32BIT:
->          return HSTATUS_VSXL_32;
-> 
->      case DOMAIN_64BIT:
->          return HSTATUS_VSXL_64;
->      }
-> 
->      ASSERT_UNREACHABLE();
-> 
->      return HSTATUS_VSXL_64;
-
-Why not simply return 0 here? You genuinely don't know the size.
-
-> }
-> 
-> It will also affect then common code as vcpu_csr_init() could be then 
-> called before domain type is set:
-> 
-> +++ b/xen/common/device-tree/dom0less-build.c
-> @@ -812,17 +812,18 @@ static int __init construct_domU(struct 
-> kernel_info *kinfo,
->       else if ( rc == 0 && !strcmp(dom0less_enhanced, "no-xenstore") )
->           kinfo->dom0less_feature = DOM0LESS_ENHANCED_NO_XS;
-> 
-> -    if ( vcpu_create(d, 0) == NULL )
-> -        return -ENOMEM;
-> -
->       d->max_pages = ((paddr_t)mem * SZ_1K) >> PAGE_SHIFT;
-> 
->       rc = kernel_probe(kinfo, node);
->       if ( rc < 0 )
->           return rc;
-> 
-> +    /* The domain type needs to be known before the first vCPU is 
-> created. */
->       set_domain_type(d, kinfo);
-> 
-> +    if ( vcpu_create(d, 0) == NULL )
-> +        return -ENOMEM;
-
-I don't understand the need for this, likely because I don't see why
-domain_vsxl() would need calling from underneath vcpu_create().
+Doesn't apply cleanly to current staging, so left out for the time being.
 
 Jan
 
