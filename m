@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 138BAC624D3
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 13:29:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405910.1639342 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E60CC61DD6
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 13:30:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405915.1639351 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1l1k-0005yn-2u; Wed, 02 Sep 2026 13:29:20 +0000
+	id 1x1l2K-0006Rw-AP; Wed, 02 Sep 2026 13:29:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405910.1639342; Wed, 02 Sep 2026 13:29:20 +0000
+Received: by outflank-mailman (output) from mailman id 1405915.1639351; Wed, 02 Sep 2026 13:29:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1l1k-0005yg-0E; Wed, 02 Sep 2026 13:29:20 +0000
-Received: by outflank-mailman (input) for mailman id 1405910;
- Wed, 02 Sep 2026 13:29:18 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x1l1i-0005ya-6w
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 13:29:18 +0000
+	id 1x1l2K-0006Rp-7i; Wed, 02 Sep 2026 13:29:56 +0000
+Received: by outflank-mailman (input) for mailman id 1405915;
+ Wed, 02 Sep 2026 13:29:54 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <matz@suse.de>) id 1x1l2I-0006Ra-DL
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 13:29:54 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1l1h-004I26-G1
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 15:29:17 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1x1l2H-00Bmp3-5u
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 15:29:53 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a9824a8-8faa-0a2a0a5109dd-0a2a4505bf60-20
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 15:29:17 +0200
-Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a9824ad-4cb1-0a2a45050019-d155802fdd9a-3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 15:29:17 +0200
-Received: by mail-wm1-f47.google.com with SMTP id
- 5b1f17b1804b1-499ac87c92bso10362775e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 06:29:17 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
- [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48448e6f604sm6482517f8f.2.2026.09.02.06.29.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 02 Sep 2026 06:29:15 -0700 (PDT)
+ (envelope-from <matz@suse.de>)
+ id 6a9824cf-bab6-0a2a0a5309dd-0a2a4502ecac-8
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 15:29:53 +0200
+Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <matz@suse.de>)
+ id 6a9824d0-6ca4-0a2a45020019-c387df82ebc0-3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 15:29:53 +0200
+Received: from knuth.suse.de (unknown [10.168.5.16])
+ by smtp-out1.suse.de (Postfix) with ESMTP id 754DF21D30;
+ Wed,  2 Sep 2026 13:29:44 +0000 (UTC)
+Received: by knuth.suse.de (Postfix, from userid 10510)
+ id 5CB02AE779A; Wed, 02 Sep 2026 15:29:44 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by knuth.suse.de (Postfix) with ESMTP id 42B67AE7799;
+ Wed, 02 Sep 2026 15:29:44 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,191 +53,137 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788355757; x=1788960557; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=tAlUjlmyv4q1cod1GTkTt95vKxYmRGexBK1P5HXBrXk=;
-        b=qogptg/dNu7NZQIaXKugfdqsjrce7Rg/VX+PLKJbeVL4IKJe1xBR7Hd4R4OAST8EEc
-         kP+RiUFM0PeKZlAkt+Z0R1uhV33sSF379tW6CS8kwFEh0uj5BM3+mzCqwxcqfmrYn/Kf
-         PYvhvauAF9ttWX177c2pBCkKr2eiEAkV+VENr2lzcGQmzIZslRtLFb3BT/SJI7c07ejx
-         0DOBatkspQGptcNTdcW8Vk2GPeNVF+zjDwYsxMmATlTN9L83cvsZzCyIxGVHbSGkX200
-         r84zTnOaStUDnI3EI3Mlh8mZI53Ggd6hnFMDEg1hq+lpuDbvE4WcD9JIYdPYyNHoNOyp
-         aURQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788355757; x=1788960557;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=tAlUjlmyv4q1cod1GTkTt95vKxYmRGexBK1P5HXBrXk=;
-        b=hvOaTyUh03wtF8XiOd8xWmE+lfho7l97xAlLg5WZsRAUV0AfBn4m6qJ5Q3IGJdwmzH
-         sfh54Cn8UyAY4RVBV4kTM2d3vfkjzDVwaDQvG2cxeSFQuLY8cgDBtD86InlOpVYiSAlc
-         KnTOMBU8fNpwEUWkEQnEzfp1cqeHjl+xNzUv1H8RAKxcTkv/+bcSNibaK55YINXnIE/2
-         Vhap0350kU5c14CBHq1GvD0m4jNMVbxno58Cnt//oIb/8ymBGp5wk4WNqHU0v82/LPeD
-         Gzwz5gm4Xc8J5ugK0tFEvNoqjtFSS4aLcM/j5kE0QdKkPxYUwj3TzOh2Xo+LwFAP0Mfo
-         pgDw==
-X-Forwarded-Encrypted: i=1; AHgh+Rpb99KrvHVyBpeZuh9GpOhd4ogAwCGUsI1guCC787gB4qhxv5E4rVz4nnm5ImPJy5ACrd7YFLRSMjo=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lL/ucZ+7LGAf3/xhX/IfoqYKYQ80QlCYbu+oUwZ0t0vMqKuKoM
-	CvY7HCkgYryZCbT0cR3I7+SGOBvjGaUOT56LCYqCuusDgqas8FXcuBZA
-X-Gm-Gg: AR+sD13BJlvxGyTyWy0035fExlcXdFNuKz+ImQ9IFdEKUdxVwzQjM0yJbGHJGGMZtlA
-	mr7MMo9tc1qkktED+RRVhMb6Y0+CFp6rreOc20sg0Vu/ZGm1XNKnaq3ZSvfpTztUnMrvi2OGEkS
-	Q0wVXM6kGrDnTcrOsfCD4IP5KClUQhG/lKHN/9htSiEjJjrpQtoZgR+Qmmj5ZwGlqHBIpkU2jyd
-	PNTdEGpicYg5nFGOC/Jbvek2twW48KItCyB7IT8ZLcOfgDsCHnocuQzp2/jOd49SPa7zbLDhijP
-	njaE8omBOsbKCJfPnoz6ZZPe1QUZW4OsFyExia5pKQ7dwGtu8msB6NPgyiNpqCR+BIvO4/Erpz/
-	NdAvnil13Zj+5HMeE8r6hGuMIti9pdYVnwpI8abfkfo6tieOyifaN6ZWvFfUqLyuLZm8RS3Dm5B
-	QCSpysez+M5PYrTzTggcnB03lYHYU0xLQfyfFgk6fADzSg1em3IkWghAdlhmEhuq5M9/yehuft4
-	MnC2Iwq7nqvh/D+PAvCbQaAOVWALhA2bBk8IsL4og==
-X-Received: by 2002:a05:600c:37ca:b0:49c:cf18:494e with SMTP id 5b1f17b1804b1-49ce5819a2fmr94675505e9.12.1788355756355;
-        Wed, 02 Sep 2026 06:29:16 -0700 (PDT)
-Message-ID: <edf010a3-5e76-4ed8-a660-b6f7f9d19ff2@gmail.com>
-Date: Wed, 2 Sep 2026 15:29:14 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:cc:MIME-Version:Content-Type:In-Reply-To:References"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:cc:MIME-Version:Content-Type:In-Reply-To:References"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1788355788; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=JcrhHoLi9Dgkir2K1kU+9E3wacEKvPTtR3HgxM8VLPk=;
+	b=a8qp2g9ZcT+rpjEdsDS39IubTtS+x2ehbhsLidZAJXr+4+HmM3pQqBtLXRgX7Bk0ZiY4tL
+	XnkZ+ydbYZuR2Z3UdebjTUU0qK4f+6CMccMuAK/PTRyAmfCyGeCPNCNo5w5fhrtGhi40AW
+	UxRby67B5SKQlN4d9RHy9LDfKlvwW0w=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1788355788;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=JcrhHoLi9Dgkir2K1kU+9E3wacEKvPTtR3HgxM8VLPk=;
+	b=zVXkWdr3892abkdxjA3uQDAyi8x9VDk4LdnUSScyt1O1zDizow7cB63aVuLj2AWm3QHMJz
+	gaoe0eis6F1alCBg==
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1788355784; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=JcrhHoLi9Dgkir2K1kU+9E3wacEKvPTtR3HgxM8VLPk=;
+	b=i7CNFpdCs5BKknGndwVSsiI9wy6UC5Z3CECMp2CtHvl8WEUPK/85+b4Ma8LVnoB7n1z9U5
+	wZ3cjwZNYf8H8zBAJakVmwdOSJqCUMnHfsQnFv1C1Wx2uy+M5IWh8XYDQHN3REaPOHxAqC
+	8hR4bBORuR88qnCTKDgYCdeDS+i81DA=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1788355784;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=JcrhHoLi9Dgkir2K1kU+9E3wacEKvPTtR3HgxM8VLPk=;
+	b=M8vN8FpQm6FeTa5KX0O9PlTFreGfmKqz4y59LKN5KjQkyjyE4gRaydbLsENxQ16hBIyiCs
+	FEnfwrP2rUy5vvDA==
+Date: Wed, 2 Sep 2026 15:29:44 +0200 (CEST)
+From: Michael Matz <matz@suse.de>
+To: Borislav Petkov <bp@alien8.de>
+cc: Mauricio Faria de Oliveira <mfo@igalia.com>, 
+    Richard Biener <rguenther@suse.de>, Thomas Gleixner <tglx@kernel.org>, 
+    Ingo Molnar <mingo@redhat.com>, Dave Hansen <dave.hansen@linux.intel.com>, 
+    x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
+    Juergen Gross <jgross@suse.com>, Alexey Dobriyan <adobriyan@gmail.com>, 
+    Boris Ostrovsky <boris.ostrovsky@oracle.com>, 
+    Jan Beulich <jbeulich@suse.com>, Brian Gerst <brgerst@gmail.com>, 
+    kernel-dev@igalia.com, linux-kernel@vger.kernel.org, 
+    xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v9 1/5] x86/boot: Remove "cc" clobber from memcmp()
+In-Reply-To: <20260902023129.GGapeKgVlL2WgHcJcb@fat_crate.local>
+Message-ID: <57b0d188-b256-bde4-43e6-99dae4f59d60@suse.de>
+References: <20260822-pvh-kasan-inline-v9-0-e70ef3b75b6a@igalia.com> <20260822-pvh-kasan-inline-v9-1-e70ef3b75b6a@igalia.com> <20260902023129.GGapeKgVlL2WgHcJcb@fat_crate.local>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 03/39] xen/riscv: set the guest's XLEN explicitly in
- hstatus.VSXL
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <a3ae79823e24f2e18cef2fac8ffffe7caa608f32.1787838835.git.oleksii.kurochko@gmail.com>
- <825ea854-5778-4cb6-a9a9-0ff97fa7bee5@suse.com>
- <127e8aea-4d65-492e-8bda-bffc75f02481@gmail.com>
- <071c5b4f-1d57-4223-94bd-9f8ae8d80366@suse.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <071c5b4f-1d57-4223-94bd-9f8ae8d80366@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1788355757-72EB12A1-EA8EDF1F/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 4061
+Content-Type: multipart/mixed; boundary="8323328-669869079-1788355784=:4446"
+X-Spamd-Result: default: False [-3.20 / 50.00];
+	BAYES_HAM(-3.00)[99.99%];
+	CTYPE_MIXED_BOGUS(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	RCVD_NO_TLS_LAST(0.10)[];
+	MIME_GOOD(-0.10)[multipart/mixed,text/plain];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	FREEMAIL_CC(0.00)[igalia.com,suse.de,kernel.org,redhat.com,linux.intel.com,zytor.com,suse.com,gmail.com,oracle.com,vger.kernel.org,lists.xenproject.org];
+	MISSING_XM_UA(0.00)[];
+	MIME_TRACE(0.00)[0:+,1:+];
+	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:mid];
+	ARC_NA(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_HAS_DN(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com]
+X-purgate-ID: tlsNG-720697/1788355793-66CB22AC-89040DD3/0/0
+X-purgate-type: clean
+X-purgate-size: 2294
 
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
+--8323328-669869079-1788355784=:4446
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8BIT
 
-On 9/2/26 3:07 PM, Jan Beulich wrote:
-> On 02.09.2026 13:42, Oleksii Kurochko wrote:
->> On 9/1/26 5:20 PM, Jan Beulich wrote:
->>> On 27.08.2026 17:20, Oleksii Kurochko wrote:
->>>> --- a/xen/arch/riscv/domain.c
->>>> +++ b/xen/arch/riscv/domain.c
->>>> @@ -88,7 +88,13 @@ static void vcpu_csr_init(struct vcpu *v)
->>>>    {
->>>>        v->arch.hedeleg = HEDELEG_DEFAULT & csr_masks.hedeleg;
->>>>    
->>>> -    vcpu_guest_cpu_user_regs(v)->hstatus = HSTATUS_SPV | HSTATUS_SPVP;
->>>> +    /*
->>>> +     * Xen supports 64-bit guests only, so set the guest's XLEN explicitly
->>>> +     * rather than leaving it to the WARL behaviour of hstatus.VSXL, which the
->>>> +     * decoding of a trapped instruction depends on.
->>>> +     */
->>>> +    vcpu_guest_cpu_user_regs(v)->hstatus =
->>>> +        HSTATUS_SPV | HSTATUS_SPVP | MASK_INSR(HSTATUS_VSXL_64, HSTATUS_VSXL);
->>>
->>> The comment is correct right now, but the situation better would change
->>> at some point. Can't you arrange for things to be correct here also for
->>> a future where 32- and 128-bit guests would also be supported?
->>
->> I am not sure about 128-bit guests as H extension is dependent on RV32
->> or RV64 but probably it will be changed:
->> ```
->> The hypervisor extension depends on an "I" base integer ISA with 32 x
->> registers (RV32I or RV64I), not RV32E or RV64E, which have only 16 x
->> registers.
->> ```
+Hello,
+
+On Tue, 1 Sep 2026, Borislav Petkov wrote:
+
+> On Sat, Aug 22, 2026 at 03:33:17PM -0300, Mauricio Faria de Oliveira wrote:
+> > According to the GCC documentation, conditions in the flags register
+> > (e.g., "=@ccnz") are output operands [1] and the compiler is aware [2].
+> > 
+> > Also, clobbers (e.g., "cc") may not overlap with an output operand [2].
+> > 
+> > Thus, remove the "cc" clobber as it is redudant, and overlaps with, the
+> > "=@ccnz" output operand.
+
+Strictly speaking, on x86, the '=@ccXY' constraints are register outputs 
+into normal random integer registers (though they are of course 
+initialized in a funny way), while the 'cc' clobber is not a register at 
+all, but rather a fuzzy idea of "state" in old cc0-based compilers (which 
+the x86 backend isn't anymore since, ... well, about forever, 1999).  As 
+such they both really don't conflict and ...
+
+> But then I'd expect that gcc would enforce that. I know it can't have it 
+> when the clobbers contain input or output regs:
 > 
-> Lots of updates like this likely will be needed for RV128 to actually become
-> a thing.
+> In function ‘__memcmp’,
+>     inlined from ‘main’ at memcmp.c:25:6:
+> memcmp.c:11:9: error: ‘asm’ operand has impossible constraints or there are not enough registers
+>    11 |         asm volatile("test %3, %3\n\t"
+>       |         ^~~
 > 
->> I will introduce the following (also it will be needed also to check if
->> we could VSXL set at all as implmentation can make that field read-only
->> and do VSXLLEN=HSXLEN):
->>
->> /*
->>    * Return the hstatus.VSXL value encoding the guest's XLEN. The switch()
->>    * deliberately has no default case, so that adding a new domain_type (a
->>    * 128-bit one, in particular) fails to build until this mapping is
->> updated.
->>    */
->> static unsigned int domain_vsxl(const struct domain *d)
->> {
->>       switch ( d->type )
->>       {
->>       case DOMAIN_32BIT:
->>           return HSTATUS_VSXL_32;
->>
->>       case DOMAIN_64BIT:
->>           return HSTATUS_VSXL_64;
->>       }
->>
->>       ASSERT_UNREACHABLE();
->>
->>       return HSTATUS_VSXL_64;
-> 
-> Why not simply return 0 here? You genuinely don't know the size.
+> but with "cc" clobbers it works.
 
-Agree, just 0 will be better.
+... hence there's nothing to report.  In fact what an explicit 'cc' 
+clobber once meant in cc0 backends (that indiscriminated flag "state") is 
+manufactured by the non-cc0 backends (all of them now) automatically 
+whenever an asm has no flag output constraints at all.  (On x86 that means 
+it adds the "flags" register (internal name for the collection of flag 
+status bits) to the clobber set automatically when there are no =@ccXY 
+constraints).
 
-> 
->> }
->>
->> It will also affect then common code as vcpu_csr_init() could be then
->> called before domain type is set:
->>
->> +++ b/xen/common/device-tree/dom0less-build.c
->> @@ -812,17 +812,18 @@ static int __init construct_domU(struct
->> kernel_info *kinfo,
->>        else if ( rc == 0 && !strcmp(dom0less_enhanced, "no-xenstore") )
->>            kinfo->dom0less_feature = DOM0LESS_ENHANCED_NO_XS;
->>
->> -    if ( vcpu_create(d, 0) == NULL )
->> -        return -ENOMEM;
->> -
->>        d->max_pages = ((paddr_t)mem * SZ_1K) >> PAGE_SHIFT;
->>
->>        rc = kernel_probe(kinfo, node);
->>        if ( rc < 0 )
->>            return rc;
->>
->> +    /* The domain type needs to be known before the first vCPU is
->> created. */
->>        set_domain_type(d, kinfo);
->>
->> +    if ( vcpu_create(d, 0) == NULL )
->> +        return -ENOMEM;
-> 
-> I don't understand the need for this, likely because I don't see why
-> domain_vsxl() would need calling from underneath vcpu_create().
+You can regard all 'cc' clobbers as pure source compatibility, they have 
+no meaning anymore.  But as they are so ubiquitous (even in our own docu), 
+they remain recognized.
 
-The call trace will be the following:
-   vcpu_create() -> arch_vcpu_create() -> vcpu_csr_init() -> 
-domain_vsxldomain_vsxl()
 
-     unsigned int vsxl = domain_vsxl(v->domain);
-
-     ...
-
-     vcpu_guest_cpu_user_regs(v)->hstatus =
-         HSTATUS_SPV | HSTATUS_SPVP | MASK_INSR(vsxl, HSTATUS_VSXL);
-
-Without moving vcpu_create(d, 0) after set_domain_type(), domain_vsxl() 
-will return something wrong.
-
-I also thought about updating of VSXL for each vCPU in 
-construct_domain() where d->type is already known and then no changes in 
-common code are needed. But I think it is a little bit better just have 
-a change in common code.
-
-~ Oleksii
+Ciao,
+Michael.
+--8323328-669869079-1788355784=:4446--
 
