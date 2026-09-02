@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6235AC624D3
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 14:20:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405982.1639406 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E9BEC624D6
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 14:27:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1406001.1639437 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1lpJ-0000Ys-Vn; Wed, 02 Sep 2026 14:20:33 +0000
+	id 1x1lvg-0001PX-Te; Wed, 02 Sep 2026 14:27:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405982.1639406; Wed, 02 Sep 2026 14:20:33 +0000
+Received: by outflank-mailman (output) from mailman id 1406001.1639437; Wed, 02 Sep 2026 14:27:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1lpJ-0000Yf-Qj; Wed, 02 Sep 2026 14:20:33 +0000
-Received: by outflank-mailman (input) for mailman id 1405982;
- Wed, 02 Sep 2026 14:20:32 +0000
+	id 1x1lvg-0001PQ-Qg; Wed, 02 Sep 2026 14:27:08 +0000
+Received: by outflank-mailman (input) for mailman id 1406001;
+ Wed, 02 Sep 2026 14:27:07 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x1lpI-0000YX-21
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 14:20:32 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x1lvf-0001PK-Dd
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 14:27:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1lpH-00BlOF-Ev
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 16:20:31 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x1lve-00BmMc-AU
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 16:27:06 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a9830ab-bab6-0a2a0a5309dd-0a2a4509bd38-32
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 16:20:31 +0200
-Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a983235-bab6-0a2a0a5309dd-0a2a45039bb4-10
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 16:27:06 +0200
+Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a9830af-be1a-0a2a45090019-d155dd35f13d-3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 16:20:31 +0200
-Received: by mail-wr1-f53.google.com with SMTP id
- ffacd0b85a97d-482dd6ee390so1122069f8f.3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 07:20:31 -0700 (PDT)
+ id 6a983239-fae8-0a2a45030019-d155dd2aed71-3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 16:27:06 +0200
+Received: by mail-wr1-f42.google.com with SMTP id
+ ffacd0b85a97d-47ddf7b09e5so1110275f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 07:27:06 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-484492ce236sm7656029f8f.35.2026.09.02.07.20.29
+ 5b1f17b1804b1-49cee08e0dcsm3125585e9.5.2026.09.02.07.27.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 02 Sep 2026 07:20:30 -0700 (PDT)
+ Wed, 02 Sep 2026 07:27:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,56 +55,67 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788358831; x=1788963631; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788359225; x=1788964025; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Cnu+UhoY+TS0Wa2oSi2rdmrxyRsoa3I4M2hLDEA1cAU=;
-        b=LuDeVItOLfgLOWcmguuDKVzKhr0cmLg955/GcsLTDuXTenD9L/JSM5mIvLghfTdcEe
-         fLdjk/kOUQ1qNL3B03BDEDMSo9EzHIdsC1ezPQzgRH+IPQaMWuCo4ypE4jfyQea/1XjH
-         QqkXPBfBBvEO+55omiWYFL7D/p0O/YN0qMvEG1ijrcWtNd3UoTZfHT5wPHk4Ryp49Y+1
-         X5DkdtUhi0gXYukZCC+MDglwZAJZQ3lKAcoaDBZnM4A0wzF1Ektyl9s+d8/26pzQxuka
-         OZ2qgKOuLM8yp/l6go1h01HDsww7w9cE3+8J9OPkWLrJ7jxp6n7be3SuYVweJLdItHPD
-         9Gyw==
+        bh=2uUZg+nGoOHw5M9J4hVqatta8vcUweqR+Ea7r4gWW5U=;
+        b=O1Zc1TFNcw1UC4emTY8VmzyK7eEobJYqMhOVVa+nvoMoS5KAOgIoXoRhn/5L1YSSnD
+         eEqu46h3mZp5akIItEAVpul3eB9b7zVMv1vrkEtfFIFhUfp8YVvXEscPpqAK4hOF4shR
+         wb+S/c2TO3mNbtG4jal2jcRn5di91odXqrKfvFSOXjIEO6d3F1jzgUqfWLPN2tfX8ZrR
+         rnRNN7ol7KUyiiGHbBdOlJbBockaMpYPjsypK+Xo56EhqkMNjH8/JLhGbJS4cDgQcU3H
+         snVQvrEl1sIdiMcNT2HX8Hdx0i8AcJPFPGc6fGzMbl57K0h7aacmrE3fO5VlRUv2kAHb
+         LsSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788358831; x=1788963631;
+        d=1e100.net; s=20251104; t=1788359225; x=1788964025;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Cnu+UhoY+TS0Wa2oSi2rdmrxyRsoa3I4M2hLDEA1cAU=;
-        b=GzkwfqwkYcIDn+Enlkhueo4+bVnP2BwELrzKH094dX8PnD/R7KDasIFCNgCBWBNDmf
-         T7ItEsZq5nSG80tunirDd4UlZcZ1rCTundaXu9Ug4mJ/nR06ntsGKJ/Yl4z08OE+hRo1
-         auw+DwyjLg0v2syQ/lK8/+iPWCvGTjGxz6JjoFJVm/r/zOqXMVjIsmcQtmv6zsqDE6vo
-         GsTytS0sIKkxRaa/Cw/yGfdbG4bxlJeQUMPkqojcXISSNxKqWsdUSUqfZKjX/Eb6ZeAR
-         /RxtloBxfXV6SpBctT7sdyPpTRNisak1rRFh7VgnqBku+9lsLXRreEHNyJFagXDUnLZa
-         0ZWg==
-X-Gm-Message-State: AFuF++kadkrJQ8n9hVbAq/Ubp0ISY+/5y4fdeXV7NgdeFvwHwWcVZ3hW
-	K1qO2PnUk3ZdCOZzmlXwH5q+/hb7ByR1JC2etGoU0Opl12kRR5kTh0aFPq0oygQgw8wEA6c23Vi
-	CEDvrGQ==
-X-Gm-Gg: AYBFou0tjxQA2V0Msha6ivFzeM0PA40OknbwH2UFAL+0u3EnJqTFdF18Sd8M1YSA4GT
-	oe32YpAKkramDE/gMQrMDVvMSDJihFlkXXR8cqoFqQZEJefJNWArDEzc9v/ErnpoD0gCu2OicGZ
-	FWaCAfJ40MiQbkfNnuXU1nSL26fpnSW5sK3tlT1dqmRfoO48Bwsexpl4gnaUmNMzFFCzT1mvgTc
-	o2/KZ7P4D9/XS0OXEdOk4dqL81z5hAIVpNXPVPzQRCppo1/d8mD66VlAA51acACH9fzfcvtpZD6
-	RRfldrkEXDZ4ORT3G8cA41ZPRSyZ6Sc98inFQve72//MmCDoLUEWx7TNL02JIpfQTR6oF8M7pc9
-	pOcCBNOyXrBVRm3eSSLedUTz1peLsJbhF57lgvgJO6/ey83/MPOEYog87W7m0rnvnPDIq+6OfFS
-	ivkJ99lCiMJIvai2h3sFLkMIW3pafFbdOOa3OmYHZO3HwLjaO0i/pWp4rTIHxOUs6fpMOoJKxRO
-	tlM4nw3dUhcXcOr3Q1sCxSMzKkWzKdeOGmLqs0vXoNh0Ftrav7vGmWG+8+LbNk=
-X-Received: by 2002:a5d:5985:0:b0:484:40f5:da6a with SMTP id ffacd0b85a97d-48488f103ccmr10742556f8f.15.1788358830737;
-        Wed, 02 Sep 2026 07:20:30 -0700 (PDT)
-Message-ID: <cf397f15-a9b6-4131-a44c-575d74e38d89@suse.com>
-Date: Wed, 2 Sep 2026 16:20:29 +0200
+        bh=2uUZg+nGoOHw5M9J4hVqatta8vcUweqR+Ea7r4gWW5U=;
+        b=mKjIvicM+epntkQmDKx5ulFdpFjyKOL8KoEYBkdqY5ulXGvQ1LOfBHCq+sAJAKF0l6
+         FEmsH5ydbXd17EbrFErDEPJl0xiADpk9kclz2ScjCJBSKJJ32p3qtgBRc99d0JAfzemS
+         CE8uNYjiLADHHJhKpdIKhe0SMtYmxGYudUAkZKsXhLzIAbhjkRNFl1NwI85uXTB16ttS
+         V+e2pgXm4wBqf6MtftfRjxQm1ngp5s61SgRWGmeKko/2QCawRKZ/b84YhCCfZE3IuOLT
+         EuEfUJOCMExptzFs9hHPZMVu9OeSkzVs+p1cFOmohx5pZd1dTtU6fKZOx8vSk/DvP54K
+         Lx+w==
+X-Forwarded-Encrypted: i=1; AHgh+RolZgtm3TSb8By/Q0DcxXdSatRvi0LQKNC6aaze0d2ImU3LkN68eym3PJJa7s9UqEniraZCPTIAyjE=@lists.xenproject.org
+X-Gm-Message-State: AFuF++lX1MTdoDhltOv8Wm6pJAKxtf1inGq2eZs44eeYJa+VtBJ79ReF
+	nKqlUXvF+r7lVXPPyqFsmyrDlJ4VkT/uUO1c5SKkimjoxlONO2BpuuLGk1I/nRAguQ==
+X-Gm-Gg: AR+sD13PncCTBQCOJVr9bMhwN91Sr4tex13fvpEgYFzRnPTNmRPj2N67S6MU9yVSox/
+	Eu4hybelDBYKGkpJsLbWIGgXzYlbglDa2bCnpdnYt3OJTuGh/RTCafvDLcbuBh6uWbIhewRdEd8
+	2wc0FIhx7+khaxZIa388Ejc4YjZpMRV9LngR/t/1+naznGQ9NpgHKuZFmYvc+vyMA4XMEuuo6bM
+	OrL/u32K0TUywlJH/5ds2ZpRG5keTGZVXSFV1thI0qVtyeyW+hEQqnF8jrWlxqQXXQKGX5uWxWK
+	XBHqz6SNdJeuIytzeB19TO8ZjvHvdfd/CQLO3vIcev36GKiro5KLuOM+BpFKwmkdT5OY/32quEd
+	ajQYNH2uIBIT2vDTnh8ygxwXE7UrTBlQbug8QiQ/pRnhsfQvK1ZH1gPJVEZIlaTEU8F/3WrHGeu
+	cha8LnkzZvogMfXmykrfYT8d4I9J+bpvYnkLCQglTbDaDbLepmlfVoetcbZnXIXLMHDEYUeQOkj
+	rd3ep8usd7jBaqnTdv2+3XhPo2R0t/lrCZ1mLz/hJBXMl1J902Q
+X-Received: by 2002:a05:600c:c170:b0:49b:d45:703e with SMTP id 5b1f17b1804b1-49ce57f072fmr117230545e9.8.1788359225436;
+        Wed, 02 Sep 2026 07:27:05 -0700 (PDT)
+Message-ID: <dd883314-5be7-4a17-b178-d366809a1c78@suse.com>
+Date: Wed, 2 Sep 2026 16:27:03 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 2/2] x86/time: avoid early uses of NOW() to return zero
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+Subject: Re: [PATCH v2 02/39] xen/riscv: drop bug.h's duplicate instruction
+ length helpers
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>
-References: <ec25e838-6bf6-496c-abbe-0fd71e2fb0d9@suse.com>
- <cb8d9a90-64ce-4e86-a188-36a32fe02970@suse.com>
- <apfWTzVihQi5LX9x@macbook.local>
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <9908a5b8a5e0d00403af8073a6b7452c19795fc3.1787838835.git.oleksii.kurochko@gmail.com>
+ <fba838ed-b6a0-4cef-8dcc-8b5d1f8a8aab@suse.com>
+ <5d8888f1-d6f6-4f73-812b-8a79edceed95@gmail.com>
+ <3b07e1c6-eee0-4b54-8bd5-fce8db4ef726@suse.com>
+ <21e80092-5abf-427d-87d8-cdbe58874a10@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -130,28 +141,109 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <apfWTzVihQi5LX9x@macbook.local>
+In-Reply-To: <21e80092-5abf-427d-87d8-cdbe58874a10@gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1788358831-BD8C1034-B927236F/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-33051d/1788359226-74A894E9-89DDC8B3/0/0
 X-purgate-type: clean
-X-purgate-size: 817
+X-purgate-size: 3642
 
-On 02.09.2026 09:54, Roger Pau Monné wrote:
-> On Wed, Aug 19, 2026 at 01:45:56PM +0200, Jan Beulich wrote:
->> I don't think Fixes: tags should be put here. If we did, we'd have to
->> enumerate all introductions of early uses of NOW() (or get_s_time()), with
->> the exception of those dealing with getting back 0 (which I expect is only
->> printk_start_of_line()). Will want backporting nevertheless (unless deemed
->> too risky).
+On 02.09.2026 15:45, Oleksii Kurochko wrote:
+> On 9/2/26 3:02 PM, Jan Beulich wrote:
+>> On 02.09.2026 12:48, Oleksii Kurochko wrote:
+>>> On 9/1/26 9:01 AM, Jan Beulich wrote:
+>>>> And then
+>>>>
+>>>> #define INSN_16BIT_MASK			0x3
+>>>> #define INSN_32BIT_MASK			0x1c
+>>>>
+>>>> are really named backwards, seeing e.g. their use in
+>>>
+>>> It was derived from OpenSBI project and I haven't paid enough attention
+>>> for these defines.
+>>>
+>>> Now looking at them again I fully agree that names here not really
+>>> correct. It should be according to the spec:
+>>>      #define INSN_32BIT_MASK          0x3
+>>>      #define INSN_48BIT_MASK          0x1c
+>>
+>> Especially the latter would then still be misnamed, as the mask merely
+>> identifies insns >= 48 bits. Even for the former I'd still question the
+>> name to some degree ("mask" doesn't mean all of the bits need to be set).
+>>
+>> In how many places are you going to need these constants? If, by suitably
+>> using helpers, it's just one - maybe better to get away without any named
+>> constants in this case (i.e. when suitable names are apparently difficult
+>> to come up with)?
 > 
-> I agree with backporting, current behavior of getting stuck in an
-> infinite loop is worse than timing out earlier than expected (which is
-> the worse outcome of this patch).
+> INSN_16BIT_MASK - will be used only once (except INSN_IS_32BIT() and 
+> INSN_IS_16BIT()) in insn_fetch_faulted() introduced later in this patch 
+> series:
+>          di->insn = htinst | INSN_16BIT_MASK;
+> 
+> INSN_32BIT_MASK - is used only inside INSN_IS_32BIT().
+> 
+> And INSN_IS_32BIT() and INSN_IS_16BIT() are using in several places.
+> 
+> I am okay to drop these masks and then just have a comment:
+> 
+> /*
+>   * Instruction length encoding helpers (see RISC-V Unprivileged ISA,
+>   * Section "Base Instruction-Length Encoding").
+>   *
+>   * - Instructions with bits [1:0] != 11 are 16-bit (compressed).
+>   * - Instructions with bits [1:0] == 11 and bits [4:2] != 111 are 32-bit.
+>   */
+> #define INSN_IS_16BIT(insn)      (((insn) & 0x3) != 0x3)
+> #define INSN_IS_32BIT(insn)      (((insn) & 0x3) == 0x3 && ((insn) & 
+> 0x1c) != 0x1c)
 
-Question is how to find a good balance between pulling in prereqs (there
-are quite a few, I think) vs sacrificing some functionality. Or whether
-to make it an all-or-nothing decision.
+Largely okay; I'd still prefer
+
+#define INSN_IS_16BIT(insn)      (((insn) & 3) != 3)
+#define INSN_IS_32BIT(insn)      (!INSN_IS_16BIT(insn) && ((insn) & 0x1c) != 0x1c)
+
+> As an option we could come up with the following names:
+> 
+> /* Bitmasks for instruction length encoding fields */
+> #define INSN_LEN_1_0_MASK        0x3   /* Bits [1:0] for 16-bit vs 
+>  >=32-bit */
+> #define INSN_LEN_4_2_MASK        0x1c  /* Bits [4:2] for 32-bit vs 
+>  >=48-bit */
+> 
+> #define INSN_IS_16BIT(insn)      (((insn) & INSN_LEN_1_0_MASK) != 
+> INSN_LEN_1_0_MASK)
+> #define INSN_IS_32BIT(insn)      \
+>      (((insn) & INSN_LEN_1_0_MASK) == INSN_LEN_1_0_MASK && \
+>       ((insn) & INSN_LEN_4_2_MASK) != INSN_LEN_4_2_MASK)
+> 
+> But it seems the first option still looks better.
+> 
+> Would you also prefer Option 1?
+
+I do, yes.
+
+>>> I think that for now it is enough to go without common implmenntation of
+>>> INSN_LEN and just return 0 as suggested above.
+>>
+>> Suitably commented upon that would certainly be okay with me.
+> 
+> The the following comment looks good enough for me:
+> 
+> /*
+>   * Length in bytes of the instruction whose first parcel is @insn: 2 or 
+> 4, or
+>   * 0 when the encoding is 48 bits or wider.  No ratified extension 
+> defines an
+>   * instruction of such a length, so rather than open-coding a decoder for
+>   * encodings which cannot legitimately occur, leave it to the caller to 
+> treat
+>   * the 0 as an illegal instruction.
+>   */
+> #define INSN_LEN(insn) \
+>      (INSN_IS_16BIT(insn) ? 2 : (INSN_IS_32BIT(insn) ? 4 : 0))
+
+Reads okay, thanks.
 
 Jan
 
