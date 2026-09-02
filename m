@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46DCDC61DD6
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A8FEC624D0
 	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 11:43:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405695.1639145 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1405696.1639150 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1jNZ-00069c-Ta; Wed, 02 Sep 2026 11:43:45 +0000
+	id 1x1jNa-0006Be-4k; Wed, 02 Sep 2026 11:43:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405695.1639145; Wed, 02 Sep 2026 11:43:45 +0000
+Received: by outflank-mailman (output) from mailman id 1405696.1639150; Wed, 02 Sep 2026 11:43:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1jNZ-00069V-O0; Wed, 02 Sep 2026 11:43:45 +0000
-Received: by outflank-mailman (input) for mailman id 1405695;
- Wed, 02 Sep 2026 11:43:43 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x1jNZ-0006Al-Up; Wed, 02 Sep 2026 11:43:45 +0000
+Received: by outflank-mailman (input) for mailman id 1405696;
+ Wed, 02 Sep 2026 11:43:45 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper3@citrix.com>) id 1x1jNX-00069G-Qc
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 11:43:43 +0000
+ (envelope-from <andrew.cooper3@citrix.com>) id 1x1jNZ-00069Q-KF
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 11:43:45 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1jNX-00GR2t-7G
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 13:43:43 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1x1jNZ-002dmo-0z
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 13:43:45 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6a980be4-8faa-0a2a0a5109dd-0a2a4501b802-28
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 13:43:43 +0200
-Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a980beb-2eae-0a2a0a5409dd-0a2a4503ab4c-14
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 13:43:45 +0200
+Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6a980bef-5984-0a2a45010019-d1558033e5a3-3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 13:43:43 +0200
-Received: by mail-wm1-f51.google.com with SMTP id
- 5b1f17b1804b1-4957eefd361so6257155e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 04:43:43 -0700 (PDT)
+ id 6a980bf0-fae8-0a2a45030019-d1558036cd0d-3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 13:43:44 +0200
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-498028b3d5eso9892545e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 04:43:44 -0700 (PDT)
 Received: from andrew-laptop.. ([185.110.61.35])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49ce46422desm61190055e9.1.2026.09.02.04.43.40
+ 5b1f17b1804b1-49ce46422desm61190055e9.1.2026.09.02.04.43.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Sep 2026 04:43:41 -0700 (PDT)
+ Wed, 02 Sep 2026 04:43:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,40 +53,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1788349422; x=1788954222; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=FNHNJ5oP6qc80904CbFCtBGISp3TOMtzo4M993nbReA=;
-        b=ChjnjY8IQc5VNzdTrE8Qm9uD8gSfSXpWY+8uNVo2mr/Oy1RhzVGXTRJA8L4C9dSH/f
-         ptec0qv+z8KLoKf4dZaW6N8yp70ni4E1CgoRPvDFLkvOK2CllvP/nNAgAkJ9b22qJ+oU
-         crQicPd8hgPyyDfMAONgSTZE4W1PzEny1/cME=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788349422; x=1788954222;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+        d=citrix.com; s=google; t=1788349424; x=1788954224; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=FNHNJ5oP6qc80904CbFCtBGISp3TOMtzo4M993nbReA=;
-        b=YnYXYP7mZeXR5Fc9k1Cd85GT7EYckgtPloIIvZCKYDNvDxyz84uYXY2Bxkvx3UC7gO
-         M+hFFiDo2bRoz/I4JWn+7PBykL3mDKxQPJq4niIwPUmUgwIcUrhhJ8Plz4Zgy6sxVa/c
-         xZcZRK2qIF4N67LcJF+4I8WejR3VSEOqosj4A0C6tMu5x1pY2DcuXq40kkub0eDtJMeE
-         I1KLnk8d2Vv6ZF9bf08N2BBGXNLdgwO9ZZa9sZF3GVCzVKEOB5rGKgcYaFWFR0hLqipx
-         jpEb/EOt6TliqVNGRUYwFYkZlvrgVkw/QCNwjSjT2N/TnLS7x4ZNW3Tq3rTZPHBrglFA
-         Zcig==
-X-Gm-Message-State: AFuF++mgIxyFy7/6pWVBrg3FaFZKo73v4pvWFp9TzdA2GyXOWQikR0RQ
-	I/bJbOmJcuzRtPT7dxEtYnQssvRQUBotiRPpaMGdt0zt5aex7ncJZ4Siwd6VAOvi5/02DoUY5Mb
-	8ERK3
-X-Gm-Gg: AR+sD12av10pJaGFNnFlkNOREdjed0LXc0AEEfrTPKkbSiQQKAqlCbDF10+p1XZ9vRw
-	9eh6X8mW0G+9LQoAPh9zCminHLbI852b/vu2D85VHfQ+hVGgKQxAlRlbmcqwkWjfpZdct5L4lOR
-	mvARaVgTFqW646nP1m8grnXzuTBgIieJnl9sJs5hs7euMkvNOa84YKjXmeMPY+3OBBVRG//QgW2
-	baZWUgu4m+TqWV++tX2SrfhmgtkVu+4aAjUMWcCNanUR0Kl/NbSwib9kO3rqr6k0393Qn9ynSFv
-	+Y+qFAfqCVDE/n9VhpKgy9V9FtNk1QnN/+FuRjKW60Qx/LIzXk8ZlF58R6sPUBnxnYmG+LA/WXb
-	7g3T68pgNJKSzVRVC1bty/lxVHp2+eADIAT6tSakeiqu2DbPgwBL2OHDxSoKFm/z1qM91081w1e
-	bQpI/nPUl1JjWgPOaMKgfjxs/kIbHCxR7Dl2Jk3WDZONjLTxu4tUZyYflqK1lgW1MWtVrB8Z0=
-X-Received: by 2002:a05:600c:3f08:b0:49c:e1ed:26b1 with SMTP id 5b1f17b1804b1-49ce5850cefmr78059665e9.16.1788349422028;
-        Wed, 02 Sep 2026 04:43:42 -0700 (PDT)
+        bh=WoMupA15p1j9FxYGosrZSTQl8rtEPyPBGX/n1/nILow=;
+        b=ohB6gVGaTZvHaF+oH49vT6DipN7SqGCBy+eueKm9vYnm3VDAsabsN40bMdSTetWgGk
+         hutr1tUdac6SwIpY6yK2RUsOLGauFm4PikPPPyvYn4jORPu4ctmz5RyIHDyve+XlZIRP
+         P1105ArUUe2wrx9uSzXeJeuviuUVXDdm0nSsM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788349424; x=1788954224;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=WoMupA15p1j9FxYGosrZSTQl8rtEPyPBGX/n1/nILow=;
+        b=PjdrHAdH6RYv1nn6KRqPJK6rGjDBInyX1ueea9sok6JF0noj+L6GSBwspHS1/VAEH8
+         RFVsy251o0lX4HWnRWp3ke1fYdlFILF/baHI855K/tY5TqH3HFr0u81C+l1eXlVNP2xG
+         N6z/snEOouEUtvA2MpxER9LbcIhhtSN/HgJf8/pTIw13tbPQtYHvFoXwtzgGcNKHDIoe
+         yZEqcyENGLoDfvRyGTwhz4HojdhO5VN3Et8s6XvjaT+OqYywRNSNkZwIQGDCw2DqoUrT
+         OnQEps0nkJR5jG5ZmAnYUvN6jLM6UKMCwMqLc0CrVfam+42g1NmMHQgHegpIfL2O0a2H
+         Ryig==
+X-Gm-Message-State: AFuF++kClMw8/lMGP32GZCQj4WOiRoLIfKzJvAel+VTmJyGYQuD72y9v
+	MjdX+UwlY3m2q8EJ1C6uFKQTYVXVuLH1cRrr70ni3+1+XzsnneF5vVwzsFemRW+qVkeLccM066D
+	PAv2hpyU=
+X-Gm-Gg: AR+sD12IvLMlwTDzNs7tah0dIVwgC45TdvV1VPIxyx65MTnjmO98NTs83shzh1ryzoS
+	jPOpfxam6fKcH4axcoHx14Qiky4WpzWR75ak16otUqaDCZXlwFqkfAoPoqVgjdz3och5JBuw6Av
+	UpKH97zgjj121Bk1P5TNTcw9E5P6A5GTfYlaibiazXJ7/W7Z45Kgev+vpj0UTG+GRjBbOpzFfAz
+	s5CrV8Bcr9A97YXsBSkgaG4TFsPKi3KdBieenGOaJoXh3VuW/SwS0AehkNg6ZaGsvEcZOyGMOIx
+	iJwXViZlq9o05UgPinI0rebrOPtbfPB8aQSXqkcx8FoVl4CtmwqBG84X7liFX+83rzC9TKT8hXn
+	84hj7gogrVQiksZkOAsS5q2Sdep+gKOHiDYuzQbYEPdTBTLomXt+eeJ5WC+hikuO25GLPMxPfes
+	2QXXeDeOIvsp9B+se7W4HT3aDJ5kFzOmhBTpFcmDHS5OGlyQM+X/kfv4lbZGNPshxPN6h9kJkAA
+	gwBSenKIQ==
+X-Received: by 2002:a05:600c:8b88:b0:49c:e1cd:536 with SMTP id 5b1f17b1804b1-49ce584b899mr75422905e9.12.1788349424249;
+        Wed, 02 Sep 2026 04:43:44 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -98,30 +100,60 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 0/4] xen/bitops: ADDR removal
-Date: Wed,  2 Sep 2026 12:43:35 +0100
-Message-Id: <20260902114339.62043-1-andrew.cooper3@citrix.com>
+Subject: [PATCH 2/4] x86/bitops: Remove CONST_ADDR
+Date: Wed,  2 Sep 2026 12:43:37 +0100
+Message-Id: <20260902114339.62043-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260902114339.62043-1-andrew.cooper3@citrix.com>
+References: <20260902114339.62043-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1788349423-BF063757-78E4D738/0/0
+X-purgate-ID: tlsNG-33051d/1788349424-7488A4E9-A9FA11DC/0/0
 X-purgate-type: clean
-X-purgate-size: 417
+X-purgate-size: 1467
 
-Andrew Cooper (3):
-  arm/bitops: Drop unused ADDR macros
-  x86/bitops: Remove CONST_ADDR
-  x86/bitops: Remove ADDR
+All this does is obfuscate the usage sites.
 
-Jan Beulich (1):
-  x86/bitops: don't cast away volatile-ness
+No functional change.
 
- docs/misra/rules.rst              |  3 +-
- xen/arch/arm/include/asm/bitops.h |  3 --
- xen/arch/x86/include/asm/bitops.h | 51 ++++++++++++++++++-------------
- 3 files changed, 32 insertions(+), 25 deletions(-)
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Roger Pau Monné <roger@xenproject.org>
+CC: Teddy Astie <teddy.astie@vates.tech>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Julien Grall <julien@xen.org>
+CC: Bertrand Marquis <bertrand.marquis@arm.com>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+---
+ xen/arch/x86/include/asm/bitops.h | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
+diff --git a/xen/arch/x86/include/asm/bitops.h b/xen/arch/x86/include/asm/bitops.h
+index 69ffed510c0a..fbcab32fd239 100644
+--- a/xen/arch/x86/include/asm/bitops.h
++++ b/xen/arch/x86/include/asm/bitops.h
+@@ -18,7 +18,6 @@
+  */
+ 
+ #define ADDR (*(volatile int *) addr)
+-#define CONST_ADDR (*(const volatile int *) addr)
+ 
+ /**
+  * set_bit - Atomically set a bit in memory
+@@ -285,7 +284,9 @@ static inline int variable_test_bit(int nr, const volatile void *addr)
+     asm volatile ( "btl %[nr], %[addr]\n\t"
+                    ASM_FLAG_OUT(, "sbbl %[old], %[old]\n\t")
+                    : [old] ASM_FLAG_OUT("=@ccc", "=r") (oldbit)
+-                   : [addr] "m" (CONST_ADDR), [nr] "Ir" (nr) : "memory" );
++                   : [addr] "m" (*(const volatile int *)addr),
++		     [nr] "Ir" (nr)
++		   : "memory" );
+ 
+     return oldbit;
+ }
 -- 
 2.34.1
 
