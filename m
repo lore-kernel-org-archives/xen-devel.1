@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0070AC624D5
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 09:49:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405530.1639035 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D8E6C624D6
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 09:49:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405533.1639069 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1hag-0007D4-71; Wed, 02 Sep 2026 09:49:10 +0000
+	id 1x1hak-0008Be-Dg; Wed, 02 Sep 2026 09:49:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405530.1639035; Wed, 02 Sep 2026 09:49:10 +0000
+Received: by outflank-mailman (output) from mailman id 1405533.1639069; Wed, 02 Sep 2026 09:49:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1haf-0007BO-Vk; Wed, 02 Sep 2026 09:49:09 +0000
-Received: by outflank-mailman (input) for mailman id 1405530;
- Wed, 02 Sep 2026 09:49:08 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x1hak-0008BL-6Y; Wed, 02 Sep 2026 09:49:14 +0000
+Received: by outflank-mailman (input) for mailman id 1405533;
+ Wed, 02 Sep 2026 09:49:13 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <dunlapg@georges-macbook-pro-2.fritz.box>)
- id 1x1had-00071f-Ue
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 09:49:08 +0000
+ id 1x1hai-000869-Vw
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 09:49:13 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1had-00HNoW-BK
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 11:49:07 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1x1hai-003afr-CK
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 11:49:12 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <dunlapg@georges-macbook-pro-2.fritz.box>)
- id 6a97f112-2eae-0a2a0a5409dd-0a2a4507ac00-10
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 11:49:07 +0200
+ id 6a97f10a-bab6-0a2a0a5309dd-0a2a45029afe-40
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 11:49:12 +0200
 Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.fritz.box)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
  (envelope-from <dunlapg@georges-macbook-pro-2.fritz.box>)
- id 6a97efe6-b4ea-0a2a45070019-d99ba50cfdf1-1
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 11:44:06 +0200
+ id 6a97efe6-6ca4-0a2a45020019-d99ba50ce8c0-5
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 11:44:07 +0200
 Received: by Georges-MacBook-Pro-2.fritz.box (Postfix, from userid 501)
- id 2B0F036928E9; Wed,  2 Sep 2026 10:44:06 +0100 (BST)
+ id CF50036928F7; Wed,  2 Sep 2026 10:44:06 +0100 (BST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,297 +62,229 @@ Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	George Dunlap <gwd@xenproject.org>
-Subject: [PATCH v2 07/14] x86/mm: simplify create_perdomain_mapping() interface
-Date: Wed,  2 Sep 2026 10:43:51 +0100
-Message-ID: <20260901-asi-part2-7-ecc269f268b7@xenproject.org>
+Subject: [PATCH v2 11/14] x86/mm: prepare create_perdomain_mapping() for per-vCPU perdomain areas
+Date: Wed,  2 Sep 2026 10:43:55 +0100
+Message-ID: <20260901-asi-part2-11-ecc269f268b7@xenproject.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260901-asi-part2-0-ecc269f268b7@xenproject.org>
 References: <20260901-asi-part2-0-ecc269f268b7@xenproject.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1788342246-344CBAE4-F05E644D/0/0
+X-purgate-ID: tlsNG-720697/1788342247-F34BE2AC-9385394E/0/0
 X-purgate-type: clean
-X-purgate-size: 12132
+X-purgate-size: 9636
 
 From: Roger Pau Monné <roger.pau@citrix.com>
 
-create_perdomain_mapping()'s interface is richer than any caller needs.
-The paging structure for the requested range is built to a depth
-selected by the pl1tab and ppg arguments, each of which distinguishes
-NULL from NIL() from a real pointer:
+We want to change per-domain mappings to be per-vCPU mappings.  In
+preparation for that, we want to arrange that
+create_perdomain_mapping() work either with a single perdomain area,
+or with a per-vCPU perdomain area.
 
- - nr == 0: only ensure the per-domain L3 exists; nothing else is
-   allocated, and the other arguments are ignored.
- - pl1tab == a pointer: allocate the L1 tables covering the range from
-   the *xenheap*, and return their (stable, direct-map) addresses in
-   the array -- the mode that existed to build the GDT/LDT stash.
- - pl1tab == NIL(): allocate the L1 tables from the domain heap, and
-   return nothing.
- - pl1tab == NULL: do not plumb L1 tables for their own sake (they are
-   still allocated on demand if data-page population requires them).
- - ppg == a pointer: allocate and install zeroed data pages across the
-   range, and return their struct page_info pointers in the array.
- - ppg == NIL(): allocate and install the zeroed data pages, but hand
-   nothing back; the pages are reachable only through the mapping.
- - ppg == NULL: do not allocate data pages.
- - both NULL, nr > 0: stop after the slot's L2; do not plumb L1 tables
-   at all.
+Most of the remaining callers are already in a vCPU context.  This is
+no accident: the perdomain area has always been laid out in per-vCPU
+slices -- each vCPU has its own GDT/LDT window, its own
+COMPAT_ARG_XLAT pages, its own window of mapcache entries -- and each
+vCPU's slice is set up as that vCPU is created.  For these callers, we
+just need to change the parameter from a domain pointer to a vCPU
+pointer.  Once the perdomain area itself becomes per-vCPU, the same
+calls will populate the owning vCPU's own area rather than slices of a
+shared one.
 
-Very few of these modes have users now.  The last user of the
-pl1tab capture mode was removed when we removed the GDT/LDT stash.
-The ppg capture mode never had any users.  Nothing uses the both-NULL
-L2-only mode with nr != 0.  What remains is exactly one bit of
-information: whether the caller wants the range populated with zeroed,
-area-owned data pages, or merely plumbed down to the L1 tables, ready
-for populate_perdomain_mapping() to install caller-owned pages.
+One exception is the call in hvm_domain_initialise().  An HVM vCPU's
+monitor table is created during vCPU initialisation, and
+init_xen_l4_slots() stamps the perdomain slot into it at that point --
+far earlier than for PV, where the Xen slots are written only once
+guest page tables are built.  hvm_domain_initialise() therefore had an
+explicit create_perdomain_mapping() call just to make the perdomain
+root exist ahead of that.  Move it to arch_vcpu_create(), covering HVM
+and PV alike.  With a single shared area, the call allocates at most
+once per domain; but once each vCPU has its own perdomain area, this
+is the call that will allocate every vCPU's root -- PV included --
+before any page tables referencing it are built.  vCPU creation is
+where the call must end up; move it there directly.  For PV guests
+nothing observable changes: the root was already being created during
+vCPU creation as a side effect (by mapcache_vcpu_init(), or failing
+that pv_create_gdt_ldt_l1tab()); it now merely becomes explicit.
 
-Replace the two arguments with a boolean expressing that bit.  With the
-stashing mode gone the NIL()/IS_NIL() macros lose their last user, so
-drop them as well; and document the resulting interface.
-
-No caller changes behaviour: every existing call maps onto the boolean
-exactly.
+Note that we cannot yet do a parallel movement of
+free_perdomain_mappings(): the per-domain page-table hierarchy is
+still a single domain-wide structure shared by all vCPUs, so tearing
+it down from a per-vCPU path would pull the mappings out from under
+sibling vCPUs (e.g.  on a partially failed, retryable
+XEN_DOMCTL_max_vcpus), and vCPU-create error paths can rely on domain
+destruction to free a partially set up hierarchy.  Teardown will move
+to vCPU scope only once the structure itself becomes per-vCPU.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Assisted-by: Claude Code:claude-fable-5
+Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8
 Signed-off-by: George Dunlap <gwd@xenproject.org>
 ---
 Changes in v2:
-- Describe, in the mode enumeration, which heap each pl1tab mode
-   allocates the L1 tables from (capture mode: xenheap; NIL(): the
-   domain heap).  With "x86/mm: allocate the per-domain page-tables
-   from the xenheap" dropped from the series, upstream's heap split is
-   back in force at this point, and the previous patch's message
-   refers to it.
+- Added to the series
 
 Changes since the previously posted version:
-- Drop the now-unused NIL()/IS_NIL() macros as requested during review
-- Describe the prior interface in the commit message and add a doc
-   comment for the simplified one.
+- Keep free_perdomain_mappings() (and hence perdomain teardown)
+  domain-scoped.
+- Keep the idle domain without a perdomain area.
+- Retitle (was: "x86/mm: switch {create,destroy}_perdomain_mapping()
+  domain parameter to vCPU"); destroy_perdomain_mapping() was switched
+  in a separate patch.
+- Split the removal of mapcache_domain_init()'s redundant
+  create_perdomain_mapping() call into its own (preceding) patch.
 ---
- xen/arch/x86/domain_page.c    | 10 +++---
- xen/arch/x86/hvm/hvm.c        |  2 +-
- xen/arch/x86/include/asm/mm.h |  6 +---
- xen/arch/x86/mm.c             | 67 ++++++++++++++++-------------------
- xen/arch/x86/pv/domain.c      |  4 +--
- xen/arch/x86/x86_64/mm.c      |  3 +-
- 6 files changed, 39 insertions(+), 53 deletions(-)
+ xen/arch/x86/domain.c         | 10 ++++++++++
+ xen/arch/x86/domain_page.c    |  6 +++---
+ xen/arch/x86/hvm/hvm.c        |  5 -----
+ xen/arch/x86/include/asm/mm.h |  2 +-
+ xen/arch/x86/mm.c             | 17 +++++++++--------
+ xen/arch/x86/pv/domain.c      |  2 +-
+ xen/arch/x86/x86_64/mm.c      |  2 +-
+ 7 files changed, 25 insertions(+), 19 deletions(-)
 
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index efa72cd2f1..1f75d44fe0 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -517,6 +517,16 @@ int arch_vcpu_create(struct vcpu *v)
+ 
+     if ( !is_idle_domain(d) )
+     {
++        /*
++         * Make sure the per-domain L3 exists ahead of any consumer (e.g.
++         * init_xen_l4_slots() for the HVM monitor tables): with
++         * create_perdomain_mapping() taking a vCPU this can no longer be
++         * done when creating the domain.
++         */
++        rc = create_perdomain_mapping(v, PERDOMAIN_VIRT_START, 0, false);
++        if ( rc )
++            return rc;
++
+         paging_vcpu_init(v);
+ 
+         if ( (rc = vcpu_init_fpu(v)) != 0 )
 diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
-index 1fc1580e62..b42cf1c8cf 100644
+index 449d4f2a7d..9b375e438a 100644
 --- a/xen/arch/x86/domain_page.c
 +++ b/xen/arch/x86/domain_page.c
-@@ -279,8 +279,7 @@ int mapcache_domain_init(struct domain *d)
-     spin_lock_init(&dcache->lock);
- 
-     return create_perdomain_mapping(d, (unsigned long)dcache->inuse,
--                                    2 * bitmap_pages + 1,
--                                    NIL(l1_pgentry_t *), NULL);
-+                                    2 * bitmap_pages + 1, false);
- }
- 
- int mapcache_vcpu_init(struct vcpu *v)
-@@ -297,16 +296,15 @@ int mapcache_vcpu_init(struct vcpu *v)
+@@ -293,14 +293,14 @@ int mapcache_vcpu_init(struct vcpu *v)
      if ( ents > dcache->entries )
      {
          /* Populate page tables. */
--        int rc = create_perdomain_mapping(d, MAPCACHE_VIRT_START, ents,
--                                          NIL(l1_pgentry_t *), NULL);
-+        int rc = create_perdomain_mapping(d, MAPCACHE_VIRT_START, ents, false);
+-        int rc = create_perdomain_mapping(d, MAPCACHE_VIRT_START, ents, false);
++        int rc = create_perdomain_mapping(v, MAPCACHE_VIRT_START, ents, false);
  
          /* Populate bit maps. */
          if ( !rc )
-             rc = create_perdomain_mapping(d, (unsigned long)dcache->inuse,
--                                          nr, NULL, NIL(struct page_info *));
-+                                          nr, true);
+-            rc = create_perdomain_mapping(d, (unsigned long)dcache->inuse,
++            rc = create_perdomain_mapping(v, (unsigned long)dcache->inuse,
+                                           nr, true);
          if ( !rc )
-             rc = create_perdomain_mapping(d, (unsigned long)dcache->garbage,
--                                          nr, NULL, NIL(struct page_info *));
-+                                          nr, true);
+-            rc = create_perdomain_mapping(d, (unsigned long)dcache->garbage,
++            rc = create_perdomain_mapping(v, (unsigned long)dcache->garbage,
+                                           nr, true);
  
          if ( rc )
-             return rc;
 diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 9a4147b62e..a6e0818468 100644
+index cd425c3342..a41ae35374 100644
 --- a/xen/arch/x86/hvm/hvm.c
 +++ b/xen/arch/x86/hvm/hvm.c
-@@ -620,7 +620,7 @@ int hvm_domain_initialise(struct domain *d,
+@@ -620,10 +620,6 @@ int hvm_domain_initialise(struct domain *d,
      INIT_LIST_HEAD(&d->arch.hvm.mmcfg_regions);
      INIT_LIST_HEAD(&d->arch.hvm.msix_tables);
  
--    rc = create_perdomain_mapping(d, PERDOMAIN_VIRT_START, 0, NULL, NULL);
-+    rc = create_perdomain_mapping(d, PERDOMAIN_VIRT_START, 0, false);
-     if ( rc )
-         goto fail;
+-    rc = create_perdomain_mapping(d, PERDOMAIN_VIRT_START, 0, false);
+-    if ( rc )
+-        goto fail;
+-
+     hvm_init_cacheattr_region_list(d);
  
+     rc = paging_enable(d, PG_refcounts|PG_translate|PG_external);
+@@ -730,7 +726,6 @@ int hvm_domain_initialise(struct domain *d,
+     XFREE(d->arch.hvm.irq);
+  fail0:
+     hvm_destroy_cacheattr_region_list(d);
+- fail:
+     hvm_domain_relinquish_resources(d);
+     XFREE(d->arch.hvm.io_handler);
+     XFREE(d->arch.hvm.pl_time);
 diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
-index 1888807394..30eaec9179 100644
+index 9a8fda782e..97924a639b 100644
 --- a/xen/arch/x86/include/asm/mm.h
 +++ b/xen/arch/x86/include/asm/mm.h
-@@ -600,12 +600,8 @@ long arch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
+@@ -600,7 +600,7 @@ long arch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
  long subarch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
  int compat_arch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
  
--#define NIL(type) ((type *)-sizeof(type))
--#define IS_NIL(ptr) (!((uintptr_t)(ptr) + sizeof(*(ptr))))
--
- int create_perdomain_mapping(struct domain *d, unsigned long va,
--                             unsigned int nr, l1_pgentry_t **pl1tab,
--                             struct page_info **ppg);
-+                             unsigned int nr, bool populate);
+-int create_perdomain_mapping(struct domain *d, unsigned long va,
++int create_perdomain_mapping(struct vcpu *v, unsigned long va,
+                              unsigned int nr, bool populate);
  void populate_perdomain_mapping(const struct vcpu *v, unsigned long va,
                                  const mfn_t *mfn, unsigned int nr,
-                                 unsigned int flags);
 diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 552559ecf1..48d1b427c5 100644
+index fc524ef0c3..6dfd75475a 100644
 --- a/xen/arch/x86/mm.c
 +++ b/xen/arch/x86/mm.c
-@@ -6211,9 +6211,31 @@ static bool perdomain_l1e_needs_freeing(l1_pgentry_t l1e)
-            (_PAGE_PRESENT | _PAGE_AVAIL0);
+@@ -6212,13 +6212,13 @@ static bool perdomain_l1e_needs_freeing(l1_pgentry_t l1e)
  }
  
-+/*
-+ * Ensure the paging structure for [va, va + nr * PAGE_SIZE) of d's
-+ * per-domain area is in place, allocating whichever levels are missing:
-+ * the (domain-wide) L3 root, the slot's L2, and all L1 tables covering
-+ * the range.  All allocations come from the domain heap.  The range must
-+ * lie within a single per-domain slot (one L3 entry), and already-present
-+ * levels and entries are left untouched, so calls are idempotent over
-+ * existing ranges.
-+ *
-+ * nr == 0: only ensure the per-domain L3 itself exists; populate is
-+ * ignored.  Used to set the area up before any sub-range is known.
-+ *
-+ * populate == false: stop once the L1 tables are in place.  The range is
-+ * then ready for caller-owned pages to be mapped and unmapped via
-+ * populate_perdomain_mapping() / destroy_perdomain_mapping(), which only
-+ * fill existing tables and treat missing structure as a bug.
-+ *
-+ * populate == true: additionally install a freshly allocated, zeroed page
-+ * at every not-yet-present entry in the range.  Such pages are marked
-+ * _PAGE_AVAIL0, "owned by the per-domain area": teardown frees them (see
-+ * perdomain_l1e_needs_freeing()), whereas caller-owned mappings are only
-+ * ever unmapped.
-+ */
- int create_perdomain_mapping(struct domain *d, unsigned long va,
--                             unsigned int nr, l1_pgentry_t **pl1tab,
--                             struct page_info **ppg)
-+                             unsigned int nr, bool populate)
+ /*
+- * Ensure the paging structure for [va, va + nr * PAGE_SIZE) of d's
+- * per-domain area is in place, allocating whichever levels are missing:
+- * the (domain-wide) L3 root, the slot's L2, and all L1 tables covering
+- * the range.  All allocations come from the domain heap.  The range must
+- * lie within a single per-domain slot (one L3 entry), and already-present
+- * levels and entries are left untouched, so calls are idempotent over
+- * existing ranges.
++ * Ensure the paging structure for [va, va + nr * PAGE_SIZE) of the
++ * per-domain area of v's domain is in place, allocating whichever levels
++ * are missing: the (domain-wide) L3 root, the slot's L2, and all L1
++ * tables covering the range.  All allocations come from the domain heap.
++ * The range must lie within a single per-domain slot (one L3 entry), and
++ * already-present levels and entries are left untouched, so calls are
++ * idempotent over existing ranges.
+  *
+  * nr == 0: only ensure the per-domain L3 itself exists; populate is
+  * ignored.  Used to set the area up before any sub-range is known.
+@@ -6234,9 +6234,10 @@ static bool perdomain_l1e_needs_freeing(l1_pgentry_t l1e)
+  * perdomain_l1e_needs_freeing()), whereas caller-owned mappings are only
+  * ever unmapped.
+  */
+-int create_perdomain_mapping(struct domain *d, unsigned long va,
++int create_perdomain_mapping(struct vcpu *v, unsigned long va,
+                              unsigned int nr, bool populate)
  {
++    struct domain *d = v->domain;
      struct page_info *pg;
      l3_pgentry_t *l3tab;
-@@ -6262,55 +6284,32 @@ int create_perdomain_mapping(struct domain *d, unsigned long va,
- 
-     unmap_domain_page(l3tab);
- 
--    if ( !pl1tab && !ppg )
--    {
--        unmap_domain_page(l2tab);
--        return 0;
--    }
--
-     for ( l1tab = NULL; !rc && nr--; )
-     {
-         l2_pgentry_t *pl2e = l2tab + l2_table_offset(va);
- 
-         if ( !(l2e_get_flags(*pl2e) & _PAGE_PRESENT) )
-         {
--            if ( pl1tab && !IS_NIL(pl1tab) )
--            {
--                l1tab = alloc_xenheap_pages(0, MEMF_node(domain_to_node(d)));
--                if ( !l1tab )
--                {
--                    rc = -ENOMEM;
--                    break;
--                }
--                ASSERT(!pl1tab[l2_table_offset(va)]);
--                pl1tab[l2_table_offset(va)] = l1tab;
--                pg = virt_to_page(l1tab);
--            }
--            else
-+            pg = alloc_domheap_page(d, MEMF_no_owner);
-+            if ( !pg )
-             {
--                pg = alloc_domheap_page(d, MEMF_no_owner);
--                if ( !pg )
--                {
--                    rc = -ENOMEM;
--                    break;
--                }
--                l1tab = __map_domain_page(pg);
-+                rc = -ENOMEM;
-+                break;
-             }
-+            l1tab = __map_domain_page(pg);
-             clear_page(l1tab);
-             *pl2e = l2e_from_page(pg, __PAGE_HYPERVISOR_RW);
-         }
-         else if ( !l1tab )
-             l1tab = map_l1t_from_l2e(*pl2e);
- 
--        if ( ppg &&
-+        if ( populate &&
-              !(l1e_get_flags(l1tab[l1_table_offset(va)]) & _PAGE_PRESENT) )
-         {
-             pg = alloc_domheap_page(d, MEMF_no_owner);
-             if ( pg )
-             {
-                 clear_domain_page(page_to_mfn(pg));
--                if ( !IS_NIL(ppg) )
--                    *ppg++ = pg;
-                 l1tab[l1_table_offset(va)] =
-                     l1e_from_page(pg, __PAGE_HYPERVISOR_RW | _PAGE_AVAIL0);
-                 l2e_add_flags(*pl2e, _PAGE_AVAIL0);
-@@ -6322,7 +6321,6 @@ int create_perdomain_mapping(struct domain *d, unsigned long va,
-         va += PAGE_SIZE;
-         if ( rc || !nr || !l1_table_offset(va) )
-         {
--            /* Note that this is a no-op for the alloc_xenheap_page() case. */
-             unmap_domain_page(l1tab);
-             l1tab = NULL;
-         }
-@@ -6543,10 +6541,7 @@ void free_perdomain_mappings(struct domain *d)
-                         unmap_domain_page(l1tab);
-                     }
- 
--                    if ( is_xen_heap_page(l1pg) )
--                        free_xenheap_page(page_to_virt(l1pg));
--                    else
--                        free_domheap_page(l1pg);
-+                    free_domheap_page(l1pg);
-                 }
- 
-             unmap_domain_page(l2tab);
+     l2_pgentry_t *l2tab;
 diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
-index 35d1761c9c..15a8238aff 100644
+index 40b834e1a4..50f2d1284a 100644
 --- a/xen/arch/x86/pv/domain.c
 +++ b/xen/arch/x86/pv/domain.c
-@@ -314,9 +314,7 @@ int switch_compat(struct domain *d)
+@@ -313,7 +313,7 @@ int switch_compat(struct domain *d)
+ 
  static int pv_create_gdt_ldt_l1tab(struct vcpu *v)
  {
-     return create_perdomain_mapping(v->domain, GDT_VIRT_START(v),
--                                    1U << GDT_LDT_VCPU_SHIFT,
--                                    NIL(l1_pgentry_t *),
--                                    NULL);
-+                                    1U << GDT_LDT_VCPU_SHIFT, false);
+-    return create_perdomain_mapping(v->domain, GDT_VIRT_START(v),
++    return create_perdomain_mapping(v, GDT_VIRT_START(v),
+                                     1U << GDT_LDT_VCPU_SHIFT, false);
  }
  
- static void pv_destroy_gdt_ldt_l1tab(struct vcpu *v)
 diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
-index 8eadab7933..ffeda06e08 100644
+index aa74acec82..bc7e49f4de 100644
 --- a/xen/arch/x86/x86_64/mm.c
 +++ b/xen/arch/x86/x86_64/mm.c
-@@ -733,8 +733,7 @@ void __init zap_low_mappings(void)
+@@ -732,7 +732,7 @@ void __init zap_low_mappings(void)
+ 
  int setup_compat_arg_xlat(struct vcpu *v)
  {
-     return create_perdomain_mapping(v->domain, ARG_XLAT_START(v),
--                                    PFN_UP(COMPAT_ARG_XLAT_SIZE),
--                                    NULL, NIL(struct page_info *));
-+                                    PFN_UP(COMPAT_ARG_XLAT_SIZE), true);
+-    return create_perdomain_mapping(v->domain, ARG_XLAT_START(v),
++    return create_perdomain_mapping(v, ARG_XLAT_START(v),
+                                     PFN_UP(COMPAT_ARG_XLAT_SIZE), true);
  }
  
- void free_compat_arg_xlat(struct vcpu *v)
 -- 
 2.55.0
 
