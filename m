@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 329F8C624D4
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 22:10:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1406253.1639614 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 865D4C61DD6
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 22:11:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1406249.1639623 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1t9i-000734-1L; Wed, 02 Sep 2026 22:10:06 +0000
+	id 1x1tBH-0007l6-Bk; Wed, 02 Sep 2026 22:11:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1406253.1639614; Wed, 02 Sep 2026 22:10:05 +0000
+Received: by outflank-mailman (output) from mailman id 1406249.1639623; Wed, 02 Sep 2026 22:11:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1t9h-00072v-S6; Wed, 02 Sep 2026 22:10:05 +0000
-Received: by outflank-mailman (input) for mailman id 1406253;
- Wed, 02 Sep 2026 22:10:04 +0000
+	id 1x1tBH-0007ky-8j; Wed, 02 Sep 2026 22:11:43 +0000
+Received: by outflank-mailman (input) for mailman id 1406249;
+ Wed, 02 Sep 2026 22:01:50 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper3@citrix.com>) id 1x1t9g-0006mx-Oy
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 22:10:04 +0000
+ (envelope-from <d-tatianin@yandex-team.ru>) id 1x1t1h-0005fV-Tr
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 22:01:50 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1t9g-00AohW-1Z
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 00:10:04 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1x1t1f-001aL0-3V
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 00:01:47 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a989e97-2eae-0a2a0a5409dd-0a2a450cc034-36
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 00:10:03 +0200
-Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a989ebb-f479-0a2a450c0019-d155dd35e81d-3
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 00:10:03 +0200
-Received: by mail-wr1-f53.google.com with SMTP id
- ffacd0b85a97d-482e4998d28so1246626f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 15:10:03 -0700 (PDT)
-Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
- [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48448e81718sm9019892f8f.16.2026.09.02.15.10.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Sep 2026 15:10:02 -0700 (PDT)
+ (envelope-from <d-tatianin@yandex-team.ru>)
+ id 6a989cbc-bab6-0a2a0a5309dd-0a2a4508873c-24
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 00:01:46 +0200
+Received: from [178.154.239.136] (helo=forwardcorp1b.mail.yandex.net)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <d-tatianin@yandex-team.ru>)
+ id 6a989cc9-f659-0a2a45080019-b29aef88a604-3
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 00:01:46 +0200
+Received: from mail-nwsmtp-smtp-corp-main-34.sas.yp-c.yandex.net
+ (mail-nwsmtp-smtp-corp-main-34.sas.yp-c.yandex.net
+ [IPv6:2a02:6b8:c24:fa2:0:640:41ee:0])
+ by forwardcorp1b.mail.yandex.net (postfix) with ESMTPS id 6ECC882A58;
+ Thu, 03 Sep 2026 01:01:45 +0300 (MSK)
+Received: from i101646577.yandex-team.ru (unknown [2a02:6bf:8080:b7b::1:1e])
+ by mail-nwsmtp-smtp-corp-main-34.sas.yp-c.yandex.net (smtpcorp) with ESMTPSA
+ id f1tkLusaZGk0-kej65A7h; Thu, 03 Sep 2026 01:01:44 +0300
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,129 +53,257 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1788387003; x=1788991803; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=nKrZBUjvpE2EoYngFcru125MCNl+vKUvD8ycwT7RELk=;
-        b=Illa36Dyermv+bbLRqCGfIJGYADDu0T118AVT/F4aufxIhLytJHKSBNVkf7b325dkl
-         cYy7zGpQnksET5pHEoAKq4ESdjZms8G9XIcllywujJUeRWSou+Q5GyDTqUNlFLxUCD5W
-         G3RTNJeEqp8IYraDbAEDXHTiZmw1bataitaMc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788387003; x=1788991803;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=nKrZBUjvpE2EoYngFcru125MCNl+vKUvD8ycwT7RELk=;
-        b=ixz93bZbOOFWRC1vD8ZXpGIjyLZtpihuPud5dMItnj7GNwGaiH2oVFGkfKRLBognG1
-         DWbxm9G/BamQg3qTU2JVLtv4td2rf556dwekVja5pHzZAqaMEWIuveOYDx6gJb4J5fQI
-         A3QC+UMRl1CEADjScykXdW2JFRz446XuPokWUxzxmSsX4CgmNXiPT3RAkR97lTI+zR00
-         SDBeWL5Jh9puyrp87pnjpQcu+VtmXfdgdn1ZFaQtMIMgOXpszJCiCvk27vRUSxCPP9Kg
-         qlX+7oa8sKZ3GpPv/MdlqXLP0zEenzlHq9IK00ZovJQkk13E6xQy9XNuD2wYglFHOohl
-         Ha8Q==
-X-Gm-Message-State: AFuF++mD3YthK28A5Nxi7P4cGBtV/zswg2bXi1lgOB8brVp7e9BLNJ+q
-	vuUXcMHAjUeXvI4GCp922HOeOp4jV2w4p2l96yrppSfkw8FGQOkTQViT9r9XKGMouMf0kaL/L0r
-	aY+pkzvw=
-X-Gm-Gg: AYBFou1ceVvXVyESIaUxNXz4YifDZ4B4600Np4riKBB1bjA4RmMziJusvLygZQnncB8
-	7zU9cH0FHPvvSdNQrbaBD+vBv/vqfN8+qZEHLxyIDd1OCRw9EggnTVjY9B9f3YyarTeFmI7zd/X
-	CL3cLqasYn3CioRyoTQmwhysrrmG5sSJSrLpLrJy3V8bnCtM7TWnTXhkLDYGRreHsRN5i/28NbN
-	sTsBnJQfufHTTYndvNwoUElF5rNGcDxDqhqlmyUYUsUjcNNzFEBeWprCi+qBGuKt3VHUH9Buzet
-	OtScRjodv7P0kuPZs5jak54TFeD2g8A39FMpH7gw1R9pkHVtnApeMFnMd/o7QIOLnOndjs/qf29
-	kx32PKflKVOv4pNVUYdnUIQbp4I+Qq+WGxofIlIfEyc+HiOOXkls2a+6+S4wA6InMf/zo1r/EnK
-	R93YjWW8sWlW9sVCd/psbDmE9M8z6igJ+rY4HF3wmOuOnYkmEkwATU4Q1nX6ufd3JKMyBG7YSpx
-	Cy98YT8XtJc/vv3hdzGNcII+xYUmaZRlvjy35c=
-X-Received: by 2002:a05:6000:603:b0:484:3326:983b with SMTP id ffacd0b85a97d-48488f225d7mr12389571f8f.26.1788387003176;
-        Wed, 02 Sep 2026 15:10:03 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH] x86/ucode: Work around Granite Rapids erraturm GNR98
-Date: Wed,  2 Sep 2026 23:10:00 +0100
-Message-Id: <20260902221000.2967167-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=default header.d=yandex-team.ru header.i="@yandex-team.ru" header.h="Message-ID:Date:Cc:Subject:To:From"
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
+	s=default; t=1788386504;
+	bh=A+W/ldisppAArTMWvfAGcpzZiNRw0eu+MP0v6kAy3u0=;
+	h=Message-ID:Date:Cc:Subject:To:From;
+	b=Wi6gm59NEzp2vo7igIP4wMGOBA5JDhwbMgbrmCQJcm26eEPACPo8Ww+MQx0O2ajUo
+	 GNZaCnfFFBbXfipCVNPREbtQ0fB6sFs6QMzMRxoQ20BCDqYmxyGuO14q0wj8glRV3b
+	 yu3tGBD3zLmwI2yXUfey2ftjyUMIWWOnnEoEuHxs=
+Authentication-Results: mail-nwsmtp-smtp-corp-main-34.sas.yp-c.yandex.net; dkim=pass header.i=@yandex-team.ru
+From: Daniil Tatianin <d-tatianin@yandex-team.ru>
+To: Thomas Gleixner <tglx@kernel.org>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	x86@kernel.org
+Cc: Daniil Tatianin <99danilt@gmail.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Steve Wahl <steve.wahl@hpe.com>,
+	Justin Ernst <justin.ernst@hpe.com>,
+	Kyle Meyer <kyle.meyer@hpe.com>,
+	Dimitri Sivanich <dimitri.sivanich@hpe.com>,
+	Russ Anderson <russ.anderson@hpe.com>,
+	Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org,
+	Daniil Tatianin <d-tatianin@yandex-team.ru>
+Subject: [PATCH] x86/apic: Remove dead disable_esr machinery
+Date: Thu,  3 Sep 2026 01:01:23 +0300
+Message-ID: <20260902220124.2931854-1-d-tatianin@yandex-team.ru>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1788387003-026DEA5B-4E3AF17D/0/0
+X-purgate-ID: tlsNG-c1860d/1788386506-D6F5F87B-67039CC5/0/0
 X-purgate-type: clean
-X-purgate-size: 2415
+X-purgate-size: 7462
 
-Block loads which are known to hang the system.
+From: Daniil Tatianin <99danilt@gmail.com>
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+apic::disable_esr was a quirk for the 32-bit NUMA-Q, Summit, ES7000 and
+bigsmp platforms, which left the local APIC error status register alone
+because "something untraceable" produced bad interrupts on those
+machines. NUMA-Q, Summit and ES7000 went away in 2014 with commit
+b5660ba76b41 ("x86, platforms: Remove NUMAQ"), commit 7cf6c94591bb
+("x86, apic: Remove support for IBM Summit/EXA chipset") and commit
+58f5d2d44883 ("x86, apic: Remove support for ia32-based Unisys ES7000"),
+and the last setter went with commit 0abf508675c0 ("x86/smp: Drop
+32-bit "bigsmp" machine support"). Every remaining APIC driver
+initializes the flag to zero.
+
+Remove the flag, the ESR setup bypass keyed on it and the 32-bit only
+ESR clearing hammer in setup_local_APIC(), which was gated on the same
+flag and therefore equally dead.
+
+No functional changes.
+
+Signed-off-by: Daniil Tatianin <d-tatianin@yandex-team.ru>
 ---
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Roger Pau Monné <roger@xenproject.org>
-CC: Teddy Astie <teddy.astie@vates.tech>
+ arch/x86/include/asm/apic.h           |  3 +--
+ arch/x86/kernel/apic/apic.c           | 20 --------------------
+ arch/x86/kernel/apic/apic_flat_64.c   |  2 --
+ arch/x86/kernel/apic/apic_noop.c      |  2 --
+ arch/x86/kernel/apic/apic_numachip.c  |  4 ----
+ arch/x86/kernel/apic/probe_32.c       |  2 --
+ arch/x86/kernel/apic/x2apic_cluster.c |  2 --
+ arch/x86/kernel/apic/x2apic_phys.c    |  2 --
+ arch/x86/kernel/apic/x2apic_savic.c   |  2 --
+ arch/x86/kernel/apic/x2apic_uv_x.c    |  2 --
+ arch/x86/xen/apic.c                   |  2 --
+ 11 files changed, 1 insertion(+), 42 deletions(-)
 
-A more complete solution is in the works, but it's taken 4 months to get this
-much published...
----
- xen/arch/x86/cpu/microcode/intel.c | 31 ++++++++++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
-
-diff --git a/xen/arch/x86/cpu/microcode/intel.c b/xen/arch/x86/cpu/microcode/intel.c
-index c45b00c6b033..2160befd3197 100644
---- a/xen/arch/x86/cpu/microcode/intel.c
-+++ b/xen/arch/x86/cpu/microcode/intel.c
-@@ -27,6 +27,7 @@
- #include <xen/string.h>
- #include <xen/xmalloc.h>
+diff --git a/arch/x86/include/asm/apic.h b/arch/x86/include/asm/apic.h
+index 9cd493d467d4..5025b8413799 100644
+--- a/arch/x86/include/asm/apic.h
++++ b/arch/x86/include/asm/apic.h
+@@ -285,8 +285,7 @@ struct apic {
+ 	void	(*send_IPI_all)(int vector);
+ 	void	(*send_IPI_self)(int vector);
  
-+#include <asm/intel-family.h>
- #include <asm/msr.h>
- #include <asm/processor.h>
- #include <asm/system.h>
-@@ -273,6 +274,35 @@ static bool microcode_fits_cpu(const struct microcode_patch *mc)
-     return false;
- }
+-	u32	disable_esr		: 1,
+-		dest_mode_logical	: 1,
++	u32	dest_mode_logical	: 1,
+ 		x2apic_set_max_apicid	: 1,
+ 		nmi_to_offline_cpu	: 1;
  
-+static bool microcode_safe_to_load(const struct microcode_patch *mc)
-+{
-+    struct cpu_signature *cpu_sig = &this_cpu(cpu_sig);
-+
-+    /*
-+     * Treat pre-production as always safe - anyone using pre-production
-+     * microcode knows what they are doing, and can keep any resulting pieces.
-+     */
-+    if ( cpu_sig->rev < 0 || mc->rev < 0 )
-+        return true;
-+
-+    /*
-+     * GNR98.  Granite Rapids systems hang when loading new ucode on
-+     * sufficiently old firmware.
-+     */
-+    if ( boot_cpu_data.vfm == INTEL_GRANITERAPIDS_X &&
-+         boot_cpu_data.stepping == 1 && (cpu_sig->pf & 0x95) &&
-+         cpu_sig->rev < 0x01000405 &&
-+         mc->rev      > 0x01000405 )
-+    {
-+        printk_once(XENLOG_WARNING
-+                    "microcode: Granite Rapids erratum GNR98 detected.  Skipping ucode 0x%08x\n"
-+                    "microcode: Firmware update recommended\n", mc->rev);
-+        return false;
-+    }
-+
-+    return true;
-+}
-+
- static int cf_check intel_compare(
-     const struct microcode_patch *old, const struct microcode_patch *new)
- {
-@@ -365,6 +395,7 @@ static struct microcode_patch *cf_check intel_ucode_parse(
-          * one with higher revision.
-          */
-         if ( microcode_fits_cpu(mc) &&
-+             microcode_safe_to_load(mc) &&
-              (!saved || compare_revisions(saved->rev, mc->rev) == NEW_UCODE) )
-             saved = mc;
+diff --git a/arch/x86/kernel/apic/apic.c b/arch/x86/kernel/apic/apic.c
+index 90025451ace2..2b2a3d2d166e 100644
+--- a/arch/x86/kernel/apic/apic.c
++++ b/arch/x86/kernel/apic/apic.c
+@@ -1402,17 +1402,6 @@ static void lapic_setup_esr(void)
+ 		return;
+ 	}
  
+-	if (apic->disable_esr) {
+-		/*
+-		 * Something untraceable is creating bad interrupts on
+-		 * secondary quads ... for the moment, just leave the
+-		 * ESR disabled - we can't do anything useful with the
+-		 * errors anyway - mbligh
+-		 */
+-		pr_info("Leaving ESR disabled.\n");
+-		return;
+-	}
+-
+ 	maxlvt = lapic_get_maxlvt();
+ 	if (maxlvt > 3)		/* Due to the Pentium erratum 3AP. */
+ 		apic_write(APIC_ESR, 0);
+@@ -1527,15 +1516,6 @@ static void setup_local_APIC(void)
+ 	value &= ~APIC_SPIV_APIC_ENABLED;
+ 	apic_write(APIC_SPIV, value);
+ 
+-#ifdef CONFIG_X86_32
+-	/* Pound the ESR really hard over the head with a big hammer - mbligh */
+-	if (lapic_is_integrated() && apic->disable_esr) {
+-		apic_write(APIC_ESR, 0);
+-		apic_write(APIC_ESR, 0);
+-		apic_write(APIC_ESR, 0);
+-		apic_write(APIC_ESR, 0);
+-	}
+-#endif
+ 	/*
+ 	 * Intel recommends to set DFR, LDR and TPR before enabling
+ 	 * an APIC.  See e.g. "AP-388 82489DX User's Manual" (Intel
+diff --git a/arch/x86/kernel/apic/apic_flat_64.c b/arch/x86/kernel/apic/apic_flat_64.c
+index e0308d8c4e6c..f65e82c6e750 100644
+--- a/arch/x86/kernel/apic/apic_flat_64.c
++++ b/arch/x86/kernel/apic/apic_flat_64.c
+@@ -37,8 +37,6 @@ static struct apic apic_physflat __ro_after_init = {
+ 
+ 	.dest_mode_logical		= false,
+ 
+-	.disable_esr			= 0,
+-
+ 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
+ 
+ 	.max_apic_id			= 0xFE,
+diff --git a/arch/x86/kernel/apic/apic_noop.c b/arch/x86/kernel/apic/apic_noop.c
+index 58abb941c45b..0661cb008459 100644
+--- a/arch/x86/kernel/apic/apic_noop.c
++++ b/arch/x86/kernel/apic/apic_noop.c
+@@ -54,8 +54,6 @@ struct apic apic_noop __ro_after_init = {
+ 
+ 	.dest_mode_logical		= true,
+ 
+-	.disable_esr			= 0,
+-
+ 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
+ 
+ 	.max_apic_id			= 0xFE,
+diff --git a/arch/x86/kernel/apic/apic_numachip.c b/arch/x86/kernel/apic/apic_numachip.c
+index a60c8960bbfd..27a9a5b33f63 100644
+--- a/arch/x86/kernel/apic/apic_numachip.c
++++ b/arch/x86/kernel/apic/apic_numachip.c
+@@ -210,8 +210,6 @@ static const struct apic apic_numachip1 __refconst = {
+ 
+ 	.dest_mode_logical		= false,
+ 
+-	.disable_esr			= 0,
+-
+ 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
+ 
+ 	.max_apic_id			= UINT_MAX,
+@@ -244,8 +242,6 @@ static const struct apic apic_numachip2 __refconst = {
+ 
+ 	.dest_mode_logical		= false,
+ 
+-	.disable_esr			= 0,
+-
+ 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
+ 
+ 	.max_apic_id			= UINT_MAX,
+diff --git a/arch/x86/kernel/apic/probe_32.c b/arch/x86/kernel/apic/probe_32.c
+index 87bc9e7ca5d6..00ee033ede14 100644
+--- a/arch/x86/kernel/apic/probe_32.c
++++ b/arch/x86/kernel/apic/probe_32.c
+@@ -41,8 +41,6 @@ static struct apic apic_default __ro_after_init = {
+ 
+ 	.dest_mode_logical		= true,
+ 
+-	.disable_esr			= 0,
+-
+ 	.init_apic_ldr			= default_init_apic_ldr,
+ 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
+ 
+diff --git a/arch/x86/kernel/apic/x2apic_cluster.c b/arch/x86/kernel/apic/x2apic_cluster.c
+index 7db83212effb..0c8257cfa3fa 100644
+--- a/arch/x86/kernel/apic/x2apic_cluster.c
++++ b/arch/x86/kernel/apic/x2apic_cluster.c
+@@ -232,8 +232,6 @@ static struct apic apic_x2apic_cluster __ro_after_init = {
+ 
+ 	.dest_mode_logical		= true,
+ 
+-	.disable_esr			= 0,
+-
+ 	.init_apic_ldr			= init_x2apic_ldr,
+ 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
+ 
+diff --git a/arch/x86/kernel/apic/x2apic_phys.c b/arch/x86/kernel/apic/x2apic_phys.c
+index 090647cc5a78..653ef67b42eb 100644
+--- a/arch/x86/kernel/apic/x2apic_phys.c
++++ b/arch/x86/kernel/apic/x2apic_phys.c
+@@ -129,8 +129,6 @@ static struct apic apic_x2apic_phys __ro_after_init = {
+ 
+ 	.dest_mode_logical		= false,
+ 
+-	.disable_esr			= 0,
+-
+ 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
+ 
+ 	.max_apic_id			= UINT_MAX,
+diff --git a/arch/x86/kernel/apic/x2apic_savic.c b/arch/x86/kernel/apic/x2apic_savic.c
+index 4bc6d7e018a5..f116dc7ecb01 100644
+--- a/arch/x86/kernel/apic/x2apic_savic.c
++++ b/arch/x86/kernel/apic/x2apic_savic.c
+@@ -394,8 +394,6 @@ static struct apic apic_x2apic_savic __ro_after_init = {
+ 
+ 	.dest_mode_logical		= false,
+ 
+-	.disable_esr			= 0,
+-
+ 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
+ 
+ 	.max_apic_id			= UINT_MAX,
+diff --git a/arch/x86/kernel/apic/x2apic_uv_x.c b/arch/x86/kernel/apic/x2apic_uv_x.c
+index 42568ceec481..bc8709893676 100644
+--- a/arch/x86/kernel/apic/x2apic_uv_x.c
++++ b/arch/x86/kernel/apic/x2apic_uv_x.c
+@@ -758,8 +758,6 @@ static struct apic apic_x2apic_uv_x __ro_after_init = {
+ 
+ 	.dest_mode_logical		= false,
+ 
+-	.disable_esr			= 0,
+-
+ 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
+ 
+ 	.max_apic_id			= UINT_MAX,
+diff --git a/arch/x86/xen/apic.c b/arch/x86/xen/apic.c
+index bb0f3f368446..23db95dd3411 100644
+--- a/arch/x86/xen/apic.c
++++ b/arch/x86/xen/apic.c
+@@ -117,8 +117,6 @@ static struct apic xen_pv_apic __ro_after_init = {
+ 
+ 	/* .delivery_mode and .dest_mode_logical not used by XENPV */
+ 
+-	.disable_esr			= 0,
+-
+ 	.cpu_present_to_apicid		= xen_cpu_present_to_apicid,
+ 
+ 	.max_apic_id			= UINT_MAX,
 -- 
-2.39.5
+2.53.0
 
 
