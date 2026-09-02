@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E60CC61DD6
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 13:30:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405915.1639351 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77517C624D6
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 13:45:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405941.1639360 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1l2K-0006Rw-AP; Wed, 02 Sep 2026 13:29:56 +0000
+	id 1x1lHQ-000172-IQ; Wed, 02 Sep 2026 13:45:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405915.1639351; Wed, 02 Sep 2026 13:29:56 +0000
+Received: by outflank-mailman (output) from mailman id 1405941.1639360; Wed, 02 Sep 2026 13:45:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1l2K-0006Rp-7i; Wed, 02 Sep 2026 13:29:56 +0000
-Received: by outflank-mailman (input) for mailman id 1405915;
- Wed, 02 Sep 2026 13:29:54 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <matz@suse.de>) id 1x1l2I-0006Ra-DL
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 13:29:54 +0000
+	id 1x1lHQ-00016u-FI; Wed, 02 Sep 2026 13:45:32 +0000
+Received: by outflank-mailman (input) for mailman id 1405941;
+ Wed, 02 Sep 2026 13:45:30 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x1lHO-00016o-I6
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 13:45:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1l2H-00Bmp3-5u
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 15:29:53 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1x1lHN-000YRO-Ud
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 15:45:29 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <matz@suse.de>)
- id 6a9824cf-bab6-0a2a0a5309dd-0a2a4502ecac-8
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 15:29:53 +0200
-Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <matz@suse.de>)
- id 6a9824d0-6ca4-0a2a45020019-c387df82ebc0-3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 15:29:53 +0200
-Received: from knuth.suse.de (unknown [10.168.5.16])
- by smtp-out1.suse.de (Postfix) with ESMTP id 754DF21D30;
- Wed,  2 Sep 2026 13:29:44 +0000 (UTC)
-Received: by knuth.suse.de (Postfix, from userid 10510)
- id 5CB02AE779A; Wed, 02 Sep 2026 15:29:44 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by knuth.suse.de (Postfix) with ESMTP id 42B67AE7799;
- Wed, 02 Sep 2026 15:29:44 +0200 (CEST)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a982879-2eae-0a2a0a5409dd-0a2a4507a052-0
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 15:45:29 +0200
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a982879-b4ea-0a2a45070019-d155802ac9d0-3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 15:45:29 +0200
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-49ccfbe062eso8478365e9.3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 06:45:29 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
+ [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49ce47b9817sm52937825e9.1.2026.09.02.06.45.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 02 Sep 2026 06:45:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,137 +52,166 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:cc:MIME-Version:Content-Type:In-Reply-To:References"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:cc:MIME-Version:Content-Type:In-Reply-To:References"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1788355788; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=JcrhHoLi9Dgkir2K1kU+9E3wacEKvPTtR3HgxM8VLPk=;
-	b=a8qp2g9ZcT+rpjEdsDS39IubTtS+x2ehbhsLidZAJXr+4+HmM3pQqBtLXRgX7Bk0ZiY4tL
-	XnkZ+ydbYZuR2Z3UdebjTUU0qK4f+6CMccMuAK/PTRyAmfCyGeCPNCNo5w5fhrtGhi40AW
-	UxRby67B5SKQlN4d9RHy9LDfKlvwW0w=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1788355788;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=JcrhHoLi9Dgkir2K1kU+9E3wacEKvPTtR3HgxM8VLPk=;
-	b=zVXkWdr3892abkdxjA3uQDAyi8x9VDk4LdnUSScyt1O1zDizow7cB63aVuLj2AWm3QHMJz
-	gaoe0eis6F1alCBg==
-Authentication-Results: smtp-out1.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1788355784; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=JcrhHoLi9Dgkir2K1kU+9E3wacEKvPTtR3HgxM8VLPk=;
-	b=i7CNFpdCs5BKknGndwVSsiI9wy6UC5Z3CECMp2CtHvl8WEUPK/85+b4Ma8LVnoB7n1z9U5
-	wZ3cjwZNYf8H8zBAJakVmwdOSJqCUMnHfsQnFv1C1Wx2uy+M5IWh8XYDQHN3REaPOHxAqC
-	8hR4bBORuR88qnCTKDgYCdeDS+i81DA=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1788355784;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=JcrhHoLi9Dgkir2K1kU+9E3wacEKvPTtR3HgxM8VLPk=;
-	b=M8vN8FpQm6FeTa5KX0O9PlTFreGfmKqz4y59LKN5KjQkyjyE4gRaydbLsENxQ16hBIyiCs
-	FEnfwrP2rUy5vvDA==
-Date: Wed, 2 Sep 2026 15:29:44 +0200 (CEST)
-From: Michael Matz <matz@suse.de>
-To: Borislav Petkov <bp@alien8.de>
-cc: Mauricio Faria de Oliveira <mfo@igalia.com>, 
-    Richard Biener <rguenther@suse.de>, Thomas Gleixner <tglx@kernel.org>, 
-    Ingo Molnar <mingo@redhat.com>, Dave Hansen <dave.hansen@linux.intel.com>, 
-    x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
-    Juergen Gross <jgross@suse.com>, Alexey Dobriyan <adobriyan@gmail.com>, 
-    Boris Ostrovsky <boris.ostrovsky@oracle.com>, 
-    Jan Beulich <jbeulich@suse.com>, Brian Gerst <brgerst@gmail.com>, 
-    kernel-dev@igalia.com, linux-kernel@vger.kernel.org, 
-    xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v9 1/5] x86/boot: Remove "cc" clobber from memcmp()
-In-Reply-To: <20260902023129.GGapeKgVlL2WgHcJcb@fat_crate.local>
-Message-ID: <57b0d188-b256-bde4-43e6-99dae4f59d60@suse.de>
-References: <20260822-pvh-kasan-inline-v9-0-e70ef3b75b6a@igalia.com> <20260822-pvh-kasan-inline-v9-1-e70ef3b75b6a@igalia.com> <20260902023129.GGapeKgVlL2WgHcJcb@fat_crate.local>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1788356729; x=1788961529; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=9V3PTU1WYvGw5DNhBIzSyKAFbZj366QeU6iOoA5sIno=;
+        b=tLgexUqaNprzkiroXhRNhTv5bKpRZbDfCthTb4g4OmhvkpZha4DOEp9fiZjfl/6zbB
+         Z6Jac/mllSZj+qB4iSkWPBW2y5BVa4fFX0ZnI/JUP4hn5RTvAscvx6XdVMlvGceWzrFX
+         moT6wYqmK5LBYUyGVWKx2WSRzd2w4SMgwHBgz9NSfn8ibbD/vQ7ACPc8Y54/MAdLPZk/
+         cqHSQ/ZwwPup8KomHqfZtzXtDCEOR6cW7iH+dGwdlGSBfmaw+EAiHe8CXAOQyHap43yA
+         eFV0j2lfrFm40quK8yum1smeFk4SVifBR/c3WkIeKY5b5j6q7DHLZNB0+ImupDwOUKy/
+         UMLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788356729; x=1788961529;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=9V3PTU1WYvGw5DNhBIzSyKAFbZj366QeU6iOoA5sIno=;
+        b=c8L0eCDoVPNnRikjDMfyaggQARH2hkrhNtQ8iJcGLwdao9yjmrMHf3rgsTSubjsavE
+         Uy0+6wXTa/cTawGrA7qsKRR34vJHggwHNI5nTWlvhYEQ5ABBtRpjuWOF+r5Oru8NKTjH
+         sSPQwGkPFhlt2gd1mOlIu6qLn79BTwXIykxe/k8V8NZzfOlbSxWKnF1CYcVPlja5W+16
+         ZDX1qoVla4Z6N2dgiJR7qVGwJUTeCxpSQHB/unj/hNzDcmqOheQpdZ31FD41bANH68Sp
+         VlxI1oB47C+8RlFbGINx5SCOFzz6MJ0+9Q5gaMKt9fNSPmwQnfIbt0Ef6E+zajM0R++t
+         dJ1w==
+X-Forwarded-Encrypted: i=1; AHgh+Rq8vgrs7vq41SkMELEsxa9302R+GzuKbUk72ugtc7fd9R+3r0bnMWeDvxIZxXovq37r2wSemCBTfp0=@lists.xenproject.org
+X-Gm-Message-State: AFuF++n6pDxl4yFKu+nrlv/bkPHtIbxsM1l8HYaCNd9IR8vSO4o4lZkG
+	O+1/fawAAqe16SgzleFB6LUy1Orxf4R9iK+NiGf0Au1NuNsxP95fJiYf
+X-Gm-Gg: AR+sD13HQTm/P142YmiS4CYU6Flr/9HOOQ/uK8rQpEIOkOtMiyMidoN+NHiTFeMtN39
+	I6a+OuGh3dWmSK6KBPnAdWRdL4CbHHg3YQmFzy1S7+mLHGWfncCKtZhVS7qbqsTKslSWzX74uNx
+	HGg81tpznlmae1nd2NA26z7+9Z7OvMu+TlvYasQxXILUYEaxWTpyv7O6gwnOIqpwtQASNoUDXym
+	fW02rE8mdNaR7Bqkw4ltFHKmbPnOd/M5jpHAJNJZ2fbo6HQh0mzpRQOpn/T4Ikt/sIN43dJhwzI
+	PPi2YG0o0oszgax9BRFR8tx9WIVeG1NBZNJKco1rctr07R6hFQfMhIJc23NFzP/A95a5vEoZjBL
+	tJG9q/SUBprDQ0OUejqQjfsROyCf6agsBpk2b353pcw9k9jCJiMjqELd639goqkwTCkeBoPg0Hb
+	QsRfnL2EKAP4BheAVTVvIjWsHR5rapYvGrtxwJ7A129Yv6RN2ggvaQZ1TutL9646qSTko8Mecic
+	Yonfn7CjlIJZ1fhRzgVFHLpeP8tXawyeSZXnMc3aQ==
+X-Received: by 2002:a05:600c:530f:b0:499:bdf1:7578 with SMTP id 5b1f17b1804b1-49ce55ecdf2mr99415825e9.3.1788356728981;
+        Wed, 02 Sep 2026 06:45:28 -0700 (PDT)
+Message-ID: <21e80092-5abf-427d-87d8-cdbe58874a10@gmail.com>
+Date: Wed, 2 Sep 2026 15:45:26 +0200
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="8323328-669869079-1788355784=:4446"
-X-Spamd-Result: default: False [-3.20 / 50.00];
-	BAYES_HAM(-3.00)[99.99%];
-	CTYPE_MIXED_BOGUS(1.00)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	RCVD_NO_TLS_LAST(0.10)[];
-	MIME_GOOD(-0.10)[multipart/mixed,text/plain];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FREEMAIL_CC(0.00)[igalia.com,suse.de,kernel.org,redhat.com,linux.intel.com,zytor.com,suse.com,gmail.com,oracle.com,vger.kernel.org,lists.xenproject.org];
-	MISSING_XM_UA(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:mid];
-	ARC_NA(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_HAS_DN(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com]
-X-purgate-ID: tlsNG-720697/1788355793-66CB22AC-89040DD3/0/0
-X-purgate-type: clean
-X-purgate-size: 2294
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 02/39] xen/riscv: drop bug.h's duplicate instruction
+ length helpers
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <9908a5b8a5e0d00403af8073a6b7452c19795fc3.1787838835.git.oleksii.kurochko@gmail.com>
+ <fba838ed-b6a0-4cef-8dcc-8b5d1f8a8aab@suse.com>
+ <5d8888f1-d6f6-4f73-812b-8a79edceed95@gmail.com>
+ <3b07e1c6-eee0-4b54-8bd5-fce8db4ef726@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <3b07e1c6-eee0-4b54-8bd5-fce8db4ef726@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ef75cf/1788356729-A58C1AE4-3004F6C0/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 3263
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
 
---8323328-669869079-1788355784=:4446
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8BIT
 
-Hello,
-
-On Tue, 1 Sep 2026, Borislav Petkov wrote:
-
-> On Sat, Aug 22, 2026 at 03:33:17PM -0300, Mauricio Faria de Oliveira wrote:
-> > According to the GCC documentation, conditions in the flags register
-> > (e.g., "=@ccnz") are output operands [1] and the compiler is aware [2].
-> > 
-> > Also, clobbers (e.g., "cc") may not overlap with an output operand [2].
-> > 
-> > Thus, remove the "cc" clobber as it is redudant, and overlaps with, the
-> > "=@ccnz" output operand.
-
-Strictly speaking, on x86, the '=@ccXY' constraints are register outputs 
-into normal random integer registers (though they are of course 
-initialized in a funny way), while the 'cc' clobber is not a register at 
-all, but rather a fuzzy idea of "state" in old cc0-based compilers (which 
-the x86 backend isn't anymore since, ... well, about forever, 1999).  As 
-such they both really don't conflict and ...
-
-> But then I'd expect that gcc would enforce that. I know it can't have it 
-> when the clobbers contain input or output regs:
+On 9/2/26 3:02 PM, Jan Beulich wrote:
+> On 02.09.2026 12:48, Oleksii Kurochko wrote:
+>> On 9/1/26 9:01 AM, Jan Beulich wrote:
+>>> And then
+>>>
+>>> #define INSN_16BIT_MASK			0x3
+>>> #define INSN_32BIT_MASK			0x1c
+>>>
+>>> are really named backwards, seeing e.g. their use in
+>>
+>> It was derived from OpenSBI project and I haven't paid enough attention
+>> for these defines.
+>>
+>> Now looking at them again I fully agree that names here not really
+>> correct. It should be according to the spec:
+>>      #define INSN_32BIT_MASK          0x3
+>>      #define INSN_48BIT_MASK          0x1c
 > 
-> In function ‘__memcmp’,
->     inlined from ‘main’ at memcmp.c:25:6:
-> memcmp.c:11:9: error: ‘asm’ operand has impossible constraints or there are not enough registers
->    11 |         asm volatile("test %3, %3\n\t"
->       |         ^~~
+> Especially the latter would then still be misnamed, as the mask merely
+> identifies insns >= 48 bits. Even for the former I'd still question the
+> name to some degree ("mask" doesn't mean all of the bits need to be set).
 > 
-> but with "cc" clobbers it works.
+> In how many places are you going to need these constants? If, by suitably
+> using helpers, it's just one - maybe better to get away without any named
+> constants in this case (i.e. when suitable names are apparently difficult
+> to come up with)?
 
-... hence there's nothing to report.  In fact what an explicit 'cc' 
-clobber once meant in cc0 backends (that indiscriminated flag "state") is 
-manufactured by the non-cc0 backends (all of them now) automatically 
-whenever an asm has no flag output constraints at all.  (On x86 that means 
-it adds the "flags" register (internal name for the collection of flag 
-status bits) to the clobber set automatically when there are no =@ccXY 
-constraints).
+INSN_16BIT_MASK - will be used only once (except INSN_IS_32BIT() and 
+INSN_IS_16BIT()) in insn_fetch_faulted() introduced later in this patch 
+series:
+         di->insn = htinst | INSN_16BIT_MASK;
 
-You can regard all 'cc' clobbers as pure source compatibility, they have 
-no meaning anymore.  But as they are so ubiquitous (even in our own docu), 
-they remain recognized.
+INSN_32BIT_MASK - is used only inside INSN_IS_32BIT().
 
+And INSN_IS_32BIT() and INSN_IS_16BIT() are using in several places.
 
-Ciao,
-Michael.
---8323328-669869079-1788355784=:4446--
+I am okay to drop these masks and then just have a comment:
+
+/*
+  * Instruction length encoding helpers (see RISC-V Unprivileged ISA,
+  * Section "Base Instruction-Length Encoding").
+  *
+  * - Instructions with bits [1:0] != 11 are 16-bit (compressed).
+  * - Instructions with bits [1:0] == 11 and bits [4:2] != 111 are 32-bit.
+  */
+#define INSN_IS_16BIT(insn)      (((insn) & 0x3) != 0x3)
+#define INSN_IS_32BIT(insn)      (((insn) & 0x3) == 0x3 && ((insn) & 
+0x1c) != 0x1c)
+
+As an option we could come up with the following names:
+
+/* Bitmasks for instruction length encoding fields */
+#define INSN_LEN_1_0_MASK        0x3   /* Bits [1:0] for 16-bit vs 
+ >=32-bit */
+#define INSN_LEN_4_2_MASK        0x1c  /* Bits [4:2] for 32-bit vs 
+ >=48-bit */
+
+#define INSN_IS_16BIT(insn)      (((insn) & INSN_LEN_1_0_MASK) != 
+INSN_LEN_1_0_MASK)
+#define INSN_IS_32BIT(insn)      \
+     (((insn) & INSN_LEN_1_0_MASK) == INSN_LEN_1_0_MASK && \
+      ((insn) & INSN_LEN_4_2_MASK) != INSN_LEN_4_2_MASK)
+
+But it seems the first option still looks better.
+
+Would you also prefer Option 1?
+
+> 
+>> I think that for now it is enough to go without common implmenntation of
+>> INSN_LEN and just return 0 as suggested above.
+> 
+> Suitably commented upon that would certainly be okay with me.
+
+The the following comment looks good enough for me:
+
+/*
+  * Length in bytes of the instruction whose first parcel is @insn: 2 or 
+4, or
+  * 0 when the encoding is 48 bits or wider.  No ratified extension 
+defines an
+  * instruction of such a length, so rather than open-coding a decoder for
+  * encodings which cannot legitimately occur, leave it to the caller to 
+treat
+  * the 0 as an illegal instruction.
+  */
+#define INSN_LEN(insn) \
+     (INSN_IS_16BIT(insn) ? 2 : (INSN_IS_32BIT(insn) ? 4 : 0))
+
+~ Oleksii
 
