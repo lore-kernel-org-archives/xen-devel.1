@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9823BC61DFD
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 06:31:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405043.1638586 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22728C61DD6
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 06:31:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405049.1638595 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1eUo-0002w0-HC; Wed, 02 Sep 2026 06:30:54 +0000
+	id 1x1eVJ-0003NV-OF; Wed, 02 Sep 2026 06:31:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405043.1638586; Wed, 02 Sep 2026 06:30:54 +0000
+Received: by outflank-mailman (output) from mailman id 1405049.1638595; Wed, 02 Sep 2026 06:31:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1eUo-0002vt-E2; Wed, 02 Sep 2026 06:30:54 +0000
-Received: by outflank-mailman (input) for mailman id 1405043;
- Wed, 02 Sep 2026 06:30:52 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x1eVJ-0003NK-L4; Wed, 02 Sep 2026 06:31:25 +0000
+Received: by outflank-mailman (input) for mailman id 1405049;
+ Wed, 02 Sep 2026 06:31:24 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x1eUm-0002vj-Bf
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 06:30:52 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x1eVI-0003NA-Pj
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 06:31:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1eUl-00Ggy9-Fb
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 08:30:51 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1x1eVI-001cWT-6N
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 08:31:24 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a97c290-2eae-0a2a0a5409dd-0a2a450699c6-30
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 08:30:51 +0200
-Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a97c2bb-bab6-0a2a0a5309dd-0a2a4509c0ec-4
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 08:31:24 +0200
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a97c29a-195a-0a2a45060019-d155802be072-3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 08:30:50 +0200
-Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-49b8e527d63so7088265e9.2
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 23:30:50 -0700 (PDT)
+ id 6a97c2bb-be1a-0a2a45090019-d155802fe8b3-3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 08:31:24 +0200
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-49b8be0409fso4122485e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 23:31:24 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49ce3c86a0asm52736995e9.9.2026.09.01.23.30.49
+ 5b1f17b1804b1-49ce58da3acsm62073415e9.0.2026.09.01.23.31.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 01 Sep 2026 23:30:50 -0700 (PDT)
+ Tue, 01 Sep 2026 23:31:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,55 +55,55 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788330650; x=1788935450; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788330683; x=1788935483; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=qf1WHuiH8vY+yMHFbjVMhDzcKdeDFrIIHvK/5ttVZtM=;
-        b=GgpnU+GOAc7XNBjE1/l3VujYHF/KfyE3DMnjUe5/M3LM2bsj3ap6JA+0cyP/JzThpE
-         ChTXaoU+Ao68lxE7we7YkR6XkncXutHyQR3LDPXwNMMtAkMVzZ9MQd1BVBbqMhymCIEs
-         lfNu1hUhb2widIkj5kvnCLg4d936fGKX4kw5X47alUaq3vZLx/+3ap1c9bAg7Xymxpbd
-         6alEEc+jKDa44fVyb7XIKwIKEMkY5Kao4HoKtXqqtJt6QBDPkFNOAqEBeljXKFeWGyDN
-         7hYdtEZHxfaK4fdO8Rtqp7oc9/FWMHjnbsSDpVYW7pQq7pEUzvZCr0729Xqc2/TkZkrC
-         p0yg==
+        bh=AW5Js8HSLcZBr8DQXofVW/feqCltoKGq3ct/AKTu4nA=;
+        b=OYwFPJtVTnD39CnaVinmfV0sE+tMZJgnBJrilCrdL/5a13vN7TQhgLY/+Rfl3dg+7e
+         sIAK7Zclgw2buPEOAoGydo9B4BbIE2es8QAQBAyYHbXcskdX6FkyZxi+MPmNP5PoBQ9+
+         xZYiDGW/jsrigsfl/ZRmCxcflaiBXPvZwCOMEiFXNZ9yvqLdKiSeqz+5kuSW+qnaBcTG
+         TfjCEs5w9/UM7VUjn/b8KsdxZV63FWewlFxBT15cbZOlzF9ctz3fOHXJsualqeUfmzBH
+         +od510/RrccBGnGT167EMX+/NVp/X/B31atnoSGc9hGZfia4yOxy7RdQwEXnKNKmMf0D
+         9ZbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788330650; x=1788935450;
+        d=1e100.net; s=20251104; t=1788330683; x=1788935483;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=qf1WHuiH8vY+yMHFbjVMhDzcKdeDFrIIHvK/5ttVZtM=;
-        b=fGBjn1DnLplY7I+WbaH0NWeiNSs6NbMVNmshWdOW4YhrurekFsmp9Rx+xSo5VqDHE5
-         LAKaR7Tft1UUpBlKX+MPjwWpEsWxWBYZaxckVR+pU+hWwrm4pIE1JqF+Ht6/3QRuSvA1
-         RUjI60nkT8bmd3k2tthNuaqdI3hvUpdgAwSdGgS0uC4the7h1BvD5SHqPcFl8MpQ+L4A
-         o/Y13+Q352gEvM85O+C/v1Smxc3yjMux91nzaX98Fn4W0PiTgGPtiZMQZdFtXhl7gaBV
-         6qRnqiZmPOFggGhS1lHFSVAImDh3YVrc5/rAOUWNFUzk32CDHdolSUwLVASxz7esBlbh
-         giCA==
-X-Gm-Message-State: AFuF++mG8/3p7N8p2j3b5Mn4ng8ErBn3faVKwygXR3CSl6FTKXX5+tcg
-	Lnk2vH0rXZDdl0R6efSfXDNiVA9DBwDPXC39eBrRvkJXXWAcDzd3z0M3Yv7TqurDh2wGWlrIcQH
-	iVLdJqQ==
-X-Gm-Gg: AR+sD10L3d+rnDnI2+OdGGKTr6kv6PriyN9R7+15eB8shiLBPH13wChJYtQ3g85fHy9
-	ObJcCNlB+NnY3xyL5U0iTqTb/TA1if968HdLRyv+Zw5J9MesiIAhEX2fcGrDLpP+rQKaPDGMj8B
-	w6RqiN0MDH/6e67tm4aQXmcmFT9Q2Kw3bhsO/x52wH5XXKIc5gu+ZsFqe/oIf7qiyIg5TnE9EEs
-	r2zhS5FvFdujfGoe5SL59wAfQy3UcmCTpnnZRFMIt5PQPSNXJBt1mPyakuWilMc/EfKeH3G2wbB
-	suetf6hK3ndwJc7gdUUQIhgV8rt2NgMRHogaF2efm5RQaxTgfn+b7c2GMmcFDydAytiynQO6i5M
-	1YVx0/hhszF3j4raByv4ptP806OHx9TNkYEMO4VCv8lUCDkj2WHkUu1FQnj9YgGcuVX9dOYfF5v
-	3ZcGRFcvss2hQ9vr9tggdZyNbFJo+NOsOAd3k0wB1RTVj9rcDHSV9AIsCq9EQEqXqIH/dN19+pX
-	5JNTXTQbR4SD/Pv51W3vd3MVkTKRbA7w7q1z3mJn6WJT+k9YpJY
-X-Received: by 2002:a05:600c:3494:b0:49b:9202:6f80 with SMTP id 5b1f17b1804b1-49ce57ee273mr44721865e9.6.1788330650419;
-        Tue, 01 Sep 2026 23:30:50 -0700 (PDT)
-Message-ID: <75bd486e-054d-45f4-93b7-800b0ddb21f1@suse.com>
-Date: Wed, 2 Sep 2026 08:30:49 +0200
+        bh=AW5Js8HSLcZBr8DQXofVW/feqCltoKGq3ct/AKTu4nA=;
+        b=Wv5f2hvCyCFz9Xxb+dZNxTsqxtwCpz7KfQ+rgI/0r2VDps7V5+fiq43BOmOI7IkFjf
+         mnnTCgVTWBybgHWABMmh959Hbz2AaPfhGdl5wjOYl9122LQIvNHQwDny9vEo/ANnOeAt
+         quRhoPxNP6NnsxP3USuv8F0xVgwZx5bPhgdUXTrQOP9Sc815y43C1uP1NGEoF3xvlvoS
+         JNx5XEhQ5KLYTge0oeC8As+vsQcxCO6E6arHfKzhWMxxVU6aXUn+cJq0pC9ObxK8nD3a
+         8ajdopanIbFAHHlaEG/NDXCdVCRirLUXDN1wA7v15/vnQXpU/TnkbGcea21orUCxuND/
+         ELkg==
+X-Gm-Message-State: AFuF++lWrT3+Gucw5UOlUy9BjYBNfTRzVAab6jskvKeWQZ7o9mOhO3Vk
+	wWCe/rXKoTFzY8bM4JfUDqfvixGrso83Gf/uCDgnFq4a0rZNxy8LeEOqQHYTQRnvNYinDTCJvNK
+	605qwxg==
+X-Gm-Gg: AR+sD11Wj7e49vLeBj5qQ4Z3Xonog0n11/p9HMZ/PknUjPEU3wyIX5dl+4YwckUpGmH
+	zW7+UFsCQo1zbTVMZXYJPPxiJcuI2VOdQo+bXLznfDzLjkQMxErvk3j+qxJ8tf3aQttUEKR32Pi
+	H5RWO4y/NRlVaIe2VUZWgCwYF+r+bTA8qkSyWPhSVfNC4F5gQQzNpQBRg+tqMjqd5ypxkrmZKI4
+	U1Fr47vIT4OBPc7xO48KQszNV9xGxPEVYXBjNTUaVKQNWAOJSK/5JFIxhMCEXZE6a1oKLjl7pCB
+	BQgEwoYWvaUFWau63g0prEiVuwCCP2Pl9aLcBos9sFPdzl+uN1C/G7qzRvQ5KEV0WUPyJ4kdgXQ
+	EheEK6yuw88OuAzFOCAf9JBLef3efGHBxYpb4QT5UXTGNGal6zjcS/I0HaU7uNQ2/zJWTffePrU
+	I17sOxOC9+xEZOX3gySIuWPEUQ67+9uLwVirE/YBdL8NeuKtIL/A3WRhJkCnKW2aD3m/pD14TfZ
+	mdciCfbsgOY0rj9yRyvsOi65Hi5NtapR7alL0blrcbmd7aNV4YB
+X-Received: by 2002:a05:600c:4f0b:b0:493:bd2a:93be with SMTP id 5b1f17b1804b1-49ce581316dmr34390275e9.6.1788330683437;
+        Tue, 01 Sep 2026 23:31:23 -0700 (PDT)
+Message-ID: <8ae3cc08-2011-4689-8530-f3b962ed4d72@suse.com>
+Date: Wed, 2 Sep 2026 08:31:22 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 02/14] x86/bitops: don't cast away volatile-ness
+Subject: [PATCH 03/14] x86: have cmpxchg16b() obey to Misra rule 11.8
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
  Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Oleksii Kurochko <oleksii.kurochko@gmail.com>
+ <roger@xenproject.org>
 References: <0ff5676d-2ad3-49e3-a94b-90e7c3edb55f@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -132,46 +132,28 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <0ff5676d-2ad3-49e3-a94b-90e7c3edb55f@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1788330650-F5E0E77B-1CCCFC9C/0/0
+X-purgate-ID: tlsNG-bad1c0/1788330684-BFAD0034-4119CBBB/0/0
 X-purgate-type: clean
-X-purgate-size: 1626
+X-purgate-size: 762
 
-Doing so, besides being a bad idea in general, violates Misra rule 11.8.
-Use the helper macro we have available anyway.
+Casting away const-ness (or volatile-ness) is never a good idea, and
+there's no need to in cmpxchg16b().
 
 No functional change intended.
 
-Fixes: f1879b2c2584 ("xen: introduce generic non-atomic test_*bit()")
+Fixes: e0116acbbd0b ("x86: add cmpxchg16b support")
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
---- a/xen/arch/x86/include/asm/bitops.h
-+++ b/xen/arch/x86/include/asm/bitops.h
-@@ -188,7 +188,7 @@ static inline int arch__test_and_set_bit
-     asm volatile ( "btsl %[nr], %[addr]\n\t"
-                    ASM_FLAG_OUT(, "sbbl %[old], %[old]\n\t")
-                    : [old] ASM_FLAG_OUT("=@ccc", "=r") (oldbit),
--                     [addr] "+m" (*(int *)addr) : [nr] "Ir" (nr) : "memory" );
-+                     [addr] "+m" (ADDR) : [nr] "Ir" (nr) : "memory" );
+--- a/xen/arch/x86/include/asm/x86_64/system.h
++++ b/xen/arch/x86/include/asm/x86_64/system.h
+@@ -56,7 +56,7 @@ static always_inline __uint128_t cmpxchg
+     ASSERT(!((unsigned long)_p & 0xf));                    \
+     BUILD_BUG_ON(sizeof(*(o)) != sizeof(__uint128_t));     \
+     BUILD_BUG_ON(sizeof(*(n)) != sizeof(__uint128_t));     \
+-    __cmpxchg16b(_p, (void *)(o), (void *)(n));            \
++    __cmpxchg16b(_p, (const void *)(o), (const void *)(n));\
+ })
  
-     return oldbit;
- }
-@@ -234,7 +234,7 @@ static inline int arch__test_and_clear_b
-     asm volatile ( "btrl %[nr], %[addr]\n\t"
-                    ASM_FLAG_OUT(, "sbbl %[old], %[old]\n\t")
-                    : [old] ASM_FLAG_OUT("=@ccc", "=r") (oldbit),
--                     [addr] "+m" (*(int *)addr) : [nr] "Ir" (nr) : "memory" );
-+                     [addr] "+m" (ADDR) : [nr] "Ir" (nr) : "memory" );
- 
-     return oldbit;
- }
-@@ -248,7 +248,7 @@ static inline int arch__test_and_change_
-     asm volatile ( "btcl %[nr], %[addr]\n\t"
-                    ASM_FLAG_OUT(, "sbbl %[old], %[old]\n\t")
-                    : [old] ASM_FLAG_OUT("=@ccc", "=r") (oldbit),
--                     [addr] "+m" (*(int *)addr) : [nr] "Ir" (nr) : "memory" );
-+                     [addr] "+m" (ADDR) : [nr] "Ir" (nr) : "memory" );
- 
-     return oldbit;
- }
+ #endif /* __X86_64_SYSTEM_H__ */
 
 
