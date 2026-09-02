@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01498C61DD6
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 06:36:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405130.1638675 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13F2FC61DFD
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 06:37:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405141.1638685 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1eaF-0007y4-2d; Wed, 02 Sep 2026 06:36:31 +0000
+	id 1x1ebC-0008WT-Az; Wed, 02 Sep 2026 06:37:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405130.1638675; Wed, 02 Sep 2026 06:36:31 +0000
+Received: by outflank-mailman (output) from mailman id 1405141.1638685; Wed, 02 Sep 2026 06:37:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1eaE-0007xv-WD; Wed, 02 Sep 2026 06:36:31 +0000
-Received: by outflank-mailman (input) for mailman id 1405130;
- Wed, 02 Sep 2026 06:36:29 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x1ebC-0008WM-8C; Wed, 02 Sep 2026 06:37:30 +0000
+Received: by outflank-mailman (input) for mailman id 1405141;
+ Wed, 02 Sep 2026 06:37:29 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x1eaD-0007xg-F4
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 06:36:29 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x1ebB-0008WC-1P
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 06:37:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1eaC-008Nhm-Rr
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 08:36:28 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x1ebA-001del-Dv
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 08:37:28 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a97c3e0-2eae-0a2a0a5409dd-0a2a4509bb86-36
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 08:36:28 +0200
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a97c41d-e002-0a2a0a5209dd-0a2a45079154-44
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 08:37:28 +0200
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a97c3ec-be1a-0a2a45090019-d155802dd4f7-3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 08:36:28 +0200
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-49954b88fffso4638525e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 23:36:28 -0700 (PDT)
+ id 6a97c428-b4ea-0a2a45070019-d1558030ec26-3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 08:37:28 +0200
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-49b0d8bc2aaso5879815e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Sep 2026 23:37:28 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cdce3e04csm117687405e9.10.2026.09.01.23.36.27
+ 5b1f17b1804b1-49ce7ac52c3sm11548705e9.4.2026.09.01.23.37.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 01 Sep 2026 23:36:28 -0700 (PDT)
+ Tue, 01 Sep 2026 23:37:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,50 +55,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788330988; x=1788935788; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788331048; x=1788935848; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=McMHeBsvsP9+2Amzdovql9JHeO48zwLTMwqVky0FzsI=;
-        b=UkuWBuVqIQqs4CK124QTWwtr+dxsefWKsXHCypBS0UgY+EXE26/KqcMOnUOO3X+DzY
-         fz7rV5puIxoc4tFTYhBnh5FCKrdfcx44ZeyqJlul1EzeMrjWs845X7APxyamIj/Fe4Fm
-         JQsElOFPTVm/Z0cxMCXRjziuLUfWQW+b+8gUopCf9qwP3stKw9dSmm6BhCGR5M6vfM44
-         mUuUOzvAhlzubbQ2Sd5fFmuFhldKLJ0zsjxPrynlQBzEjVvkryrjZXqBQGel6QgEHmdv
-         FIdSgXDm6jRPC84umUVdtUSST11SvOBp0jol0MhUc4pdCdI+rGZGMieoVvHfSmURSbd6
-         tl/w==
+        bh=VJtH51LzC3g8OlgK6LACaAIC7g20s+b/0wgQw5fmfdM=;
+        b=f9I4i8IwZEKpAeg0nD7bfpLSye5SIzJ5aqlZwl8P2lpvfmWdc62M3F05IacotG7guS
+         IT40Xxb7KNlRaSmgREiOpuKu/Y3GHiNp0UhjtERumdkJK6236AGNap1HDDsEhjFPqO5j
+         YL29M2qO7vsQnPB/w5LJfV71p5H5ZX+zHyOOcd6J/5QJdc5pKRtJ01lIwroh+4eGUUmn
+         P/+wZilUbzZjoEhfxFiKSgr5XuN8jVN86tmDIQqjWU1jTWgK7XNjo2P45y2DOZnzRTMY
+         B409MD8PN+aqN5xr8i8/B1LYPBC0vO7iUe+rhiwTERTpb7iofjAyNF3RjCSyx41/hkp5
+         qj3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788330988; x=1788935788;
+        d=1e100.net; s=20251104; t=1788331048; x=1788935848;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=McMHeBsvsP9+2Amzdovql9JHeO48zwLTMwqVky0FzsI=;
-        b=rIj7ZhdFQDkHvbaaNkA+LfmjdxHQSARMSueOg8bNJCgtSa2/uIbnDfywDad2BEo2TC
-         Hj0m7loZvqJnW/n1NlTiQzF45FX/fBBuf9QE9aR5NQfsmWQn2j76Ge7loaQettIiM7qZ
-         +Y6rvA82Bdl/KIOZt0r68D48Vdm5nTkyt3E42l8ZD19plR7EW0XaNfIFNvY1yIRHZMNO
-         LXuUydESbrd2PCD1OhBi1soDSmZMVgZp2P6NzapC/TGaxLsM3F/DG+FdS3eDIDGbftK6
-         AVpnmeEDu6vmvnq9h9TTZMH5yyux95N0Fk1dgizdTg5jR6zNvP5r7689rwc7YgTmYZCF
-         2sEQ==
-X-Gm-Message-State: AFuF++kc99N17mWiWL3kOHesDfvsmcoGegydn3Ignl7npZ3Da8E3Pva1
-	0dCA+gxSF94IqJ18H8F3QBSJwDczMKzeET2oZJc40oDHsNA+tCO0yblO6BRSRRCDaOABr0D6LY7
-	vL6dIZQ==
-X-Gm-Gg: AR+sD10Glo5vBdi9dxnoRSXD5GNwvnFFtuI0W0Qnsgg4ZoflF6dnJln2X3v1J/9NYj3
-	JD+bP02n64jTUEHEOHGe3fgvDXrw4/MYn+44yQG5SAVUmqY17FhpTIpVTTMbaqwYLS8Gmuxu72T
-	ARe4SKZSlmvNHSwqz5iB2k9Yq8ypA712uscUSfzKBdIUAAIGDtvVVZ7tIXR48y9EA4AQux133wr
-	QHt+5zk8Nun0injZWt+izFvoBvZFicZSnyylR6n31W3cDTmSF5syb5UhpeeCMQy/3iouBJ2ti55
-	6/SxbVUSH4lxYGQS+ec9Td2BjYqXl0qFWngIejjt+83H5T43NxQ3pnXZ5tB7HuVeSwnIxw6PD/D
-	mC7PIFwsw1T4b3biUahEMfiJVYNhp6/pfHmFRquOLdRt1gkSRxIkTBzIfKzFUPQx51IhwjKNGtf
-	vHDj9nDTdif52raN+haMZGyXnyQw2zhihQlKBdvcvRs/fKQA3RUpWXiLuhVYM8TYgDUdywgSXwj
-	O72UimGUxPznr2vXz0EPobnKXYsN85YiS82p7X1AFr+A1UhG5TT
-X-Received: by 2002:a05:600c:a086:b0:499:4892:d022 with SMTP id 5b1f17b1804b1-49ce580c170mr48931045e9.8.1788330988342;
-        Tue, 01 Sep 2026 23:36:28 -0700 (PDT)
-Message-ID: <baa05f9c-6787-44c3-9d53-e3adc0509140@suse.com>
-Date: Wed, 2 Sep 2026 08:36:27 +0200
+        bh=VJtH51LzC3g8OlgK6LACaAIC7g20s+b/0wgQw5fmfdM=;
+        b=TXvcNQWP+8jnVKltc98yC9p2qKMMz03vL7BmWA6PpPAcgHxsrWtKrUnklwzs0leSYe
+         26HXxd6NopDuXdBekJHLzVpB/0IomdsRclq3jdN48AuaRwOSLulpFIwghYWr2N+1srVw
+         GEa1AVHi4dZmWeJLnb5cDbr5bDrP9Dq0na/PItwg0lj0dtTvzjtu8zYcgVRSZ0chKVm2
+         tjJI0K18p5/DxBqCQPbhdscaZF/r617A2zgJixaW4j/PyC+8A22Q3m0M3qrXMQT0+uwz
+         m0EdZZw5c9NsRR9ThddlBBOkA09CVBT71SAcPjbDBrNCI+I9tAKzGaAa1MvNUnYcAlBo
+         K5dg==
+X-Gm-Message-State: AFuF++mNsx3lIAGZEEa1tAqT/1vO2HoH2aZ9CyLqABmPD0lBYGYwXkr8
+	7B2PBYCqaTE/SDR8yxUoao7qyL5jOn+PWZDL4YWME5mddqBdlFH8HAu6B+ykQ9821rHI6LlvjuF
+	P6ZfmJQ==
+X-Gm-Gg: AR+sD13g393kKgidTpD0ncQdA8GxYcHlTSb9rIKm3GcpDbgm/EOi6ky7yITHCO1/ijq
+	t0+e0pj5cA6HXaJkI8hLGUnvRU7DxLF5eOTAxMdfc9WWJQHAim8STOo55vlvIJy2lSvYK5kquNQ
+	/I0XZ9mvz/wmXBb6MFRalXHGh5oX/3YWL80Z3I4tVS41GTIvwrR8QBhZOtovxB9kZu9MJMaqRza
+	S1Txwakoiouyvk4HZt+TDBqtgzdrj116Oc6TEOBE9wpsJMV1q2EcD69u52v+Np4iIgQGWBdmZEV
+	VVXIQqyQLOXg2Y/yZlIdpfeu12lZcDzeY08gauKUD4OfBr+9J1iZeHeB9nlcmcrC3V+HecVhVYZ
+	/HlStscsz2zYIjrWnqx/FdfjM9+j/Xsq0VMVeGlVcIQ3cPn3tu0Pkb9AIY/QmqnFX1dh/rTUPRu
+	qIDVbefK6RwUj3AzgkbPupD16khWT11WImt4z6lE+ptq7njd34Da7xNrRFD2zPzSDX5yIAJLVsd
+	qpASAJVq/SmwURKXh+C4Fy40g1VhbgbN8JnbL/dpTQpXNPN1OOF
+X-Received: by 2002:a05:600c:45c4:b0:499:79b9:e220 with SMTP id 5b1f17b1804b1-49ce5816186mr38862465e9.10.1788331047806;
+        Tue, 01 Sep 2026 23:37:27 -0700 (PDT)
+Message-ID: <ffbc98e7-b74a-4188-8dc4-86aa8a962af7@suse.com>
+Date: Wed, 2 Sep 2026 08:37:26 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 13/14] passthrough/PCI: rework (s,b,d,f) init of struct
- pci_dev
+Subject: [PATCH 14/14] xhci-dbc: don't cast away const-ness in xhci_find_dbc()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
@@ -106,7 +105,7 @@ Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
+ <roger@xenproject.org>, Marek Marczykowski <marmarek@invisiblethingslab.com>
 References: <0ff5676d-2ad3-49e3-a94b-90e7c3edb55f@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -135,60 +134,39 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <0ff5676d-2ad3-49e3-a94b-90e7c3edb55f@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1788330988-3B0DD034-6F56138B/0/0
+X-purgate-ID: tlsNG-ef75cf/1788331048-35EC6AE4-BFE21905/0/0
 X-purgate-type: clean
-X-purgate-size: 2097
+X-purgate-size: 992
 
-Right now we're casting away const-ness, to initialize the individual
-elements despite the field(s) being declared const. Eclair validly
-recognizes this as a Misra rule 11.8 violation. Hide this by switching to
-the use of memcpy(), deriving the destination address from the (mutable)
-struct pci_dev * which we hold in hands.
+Doing so (at the return statement), besides being a bad idea anyway, is a
+violation of Misra rule 11.8.
+
+Make "xcap" have an initializer while adjusting the code anyway.
 
 No functional change intended.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-Subsequently we may want to further leverage the sbdf local variable we
-now have in the function. Yet of course the primary question is: Is this
-an okay game to play in the first place?
 
---- a/xen/drivers/passthrough/pci.c
-+++ b/xen/drivers/passthrough/pci.c
-@@ -318,6 +318,7 @@ static void apply_quirks(struct pci_dev
- static struct pci_dev *alloc_pdev(struct pci_seg *pseg, u8 bus, u8 devfn)
+--- a/xen/drivers/char/xhci-dbc.c
++++ b/xen/drivers/char/xhci-dbc.c
+@@ -384,16 +384,15 @@ static bool __init dbc_init_xhc(struct d
+  */
+ static struct dbc_reg __iomem *xhci_find_dbc(struct dbc *dbc)
  {
-     struct pci_dev *pdev;
-+    pci_sbdf_t sbdf = { .seg = pseg->nr, .bus = bus, .devfn = devfn };
-     unsigned int pos;
-     int rc;
+-    const uint32_t __iomem *xcap;
+     uint32_t xcap_val;
+     uint32_t next;
+     uint32_t id = 0;
+-    const void __iomem *mmio = dbc->xhc_mmio;
++    void __iomem *mmio = dbc->xhc_mmio;
+     const uint32_t __iomem *hccp1 = mmio + 0x10;
++    uint32_t __iomem *xcap = mmio;
+     const uint32_t DBC_ID = 0xA;
+     int ttl = 48;
  
-@@ -329,9 +330,15 @@ static struct pci_dev *alloc_pdev(struct
-     if ( !pdev )
-         return NULL;
- 
--    *(u16*) &pdev->seg = pseg->nr;
--    *((u8*) &pdev->bus) = bus;
--    *((u8*) &pdev->devfn) = devfn;
-+    /*
-+     * pdev->sbdf is deliberately const, i.e. it can't be written by structure
-+     * or field assignment.  Writing by memcpy() works, as long as it's not
-+     * &pdev->sbdf which is passed.  Since memcpy() isn't type-safe, have an
-+     * explicit type check first.
-+     */
-+    (void)(&pdev->sbdf != &sbdf);
-+    memcpy((void *)pdev + offsetof(struct pci_dev, sbdf), &sbdf, sizeof(sbdf));
-+
-     pdev->domain = NULL;
- 
-     INIT_LIST_HEAD(&pdev->vf_list);
-@@ -390,7 +397,6 @@ static struct pci_dev *alloc_pdev(struct
-                          phantom_devs[i].slot == PCI_SLOT(devfn) &&
-                          phantom_devs[i].stride > PCI_FUNC(devfn) )
-                     {
--                        pci_sbdf_t sbdf = pdev->sbdf;
-                         unsigned int stride = phantom_devs[i].stride;
- 
-                         while ( (sbdf.fn += stride) > PCI_FUNC(devfn) )
+-    xcap = mmio;
+     /*
+      * This is initially an offset to the first capability. All the offsets
+      * (both in HCCP1 and then next capability pointer) are dword-based.
 
 
