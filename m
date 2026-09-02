@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D8E6C624D6
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 09:49:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405533.1639069 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03C72C624D7
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 09:49:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405531.1639040 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1hak-0008Be-Dg; Wed, 02 Sep 2026 09:49:14 +0000
+	id 1x1hag-0007I6-F5; Wed, 02 Sep 2026 09:49:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405533.1639069; Wed, 02 Sep 2026 09:49:14 +0000
+Received: by outflank-mailman (output) from mailman id 1405531.1639040; Wed, 02 Sep 2026 09:49:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1hak-0008BL-6Y; Wed, 02 Sep 2026 09:49:14 +0000
-Received: by outflank-mailman (input) for mailman id 1405533;
- Wed, 02 Sep 2026 09:49:13 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x1hag-0007Fv-8N; Wed, 02 Sep 2026 09:49:10 +0000
+Received: by outflank-mailman (input) for mailman id 1405531;
+ Wed, 02 Sep 2026 09:49:08 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <dunlapg@georges-macbook-pro-2.fritz.box>)
- id 1x1hai-000869-Vw
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 09:49:13 +0000
+ id 1x1hae-00071v-Ip
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 09:49:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1hai-003afr-CK
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 11:49:12 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1x1had-00HNrp-Vs
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 11:49:07 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <dunlapg@georges-macbook-pro-2.fritz.box>)
- id 6a97f10a-bab6-0a2a0a5309dd-0a2a45029afe-40
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 11:49:12 +0200
+ id 6a97f112-2eae-0a2a0a5409dd-0a2a4507ac00-14
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 11:49:07 +0200
 Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.fritz.box)
- by tlsNG-720697.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
  (envelope-from <dunlapg@georges-macbook-pro-2.fritz.box>)
- id 6a97efe6-6ca4-0a2a45020019-d99ba50ce8c0-5
+ id 6a97efe6-b4ea-0a2a45070019-d99ba50cfdf1-3
  for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 11:44:07 +0200
 Received: by Georges-MacBook-Pro-2.fritz.box (Postfix, from userid 501)
- id CF50036928F7; Wed,  2 Sep 2026 10:44:06 +0100 (BST)
+ id F407636928FC; Wed,  2 Sep 2026 10:44:06 +0100 (BST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,60 +62,42 @@ Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	George Dunlap <gwd@xenproject.org>
-Subject: [PATCH v2 11/14] x86/mm: prepare create_perdomain_mapping() for per-vCPU perdomain areas
-Date: Wed,  2 Sep 2026 10:43:55 +0100
-Message-ID: <20260901-asi-part2-11-ecc269f268b7@xenproject.org>
+Subject: [PATCH v2 12/14] x86/spec-ctrl: introduce Address Space Isolation command line option
+Date: Wed,  2 Sep 2026 10:43:56 +0100
+Message-ID: <20260901-asi-part2-12-ecc269f268b7@xenproject.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260901-asi-part2-0-ecc269f268b7@xenproject.org>
 References: <20260901-asi-part2-0-ecc269f268b7@xenproject.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1788342247-F34BE2AC-9385394E/0/0
+X-purgate-ID: tlsNG-ef75cf/1788342247-A6EDEAE4-7BC14EE1/0/0
 X-purgate-type: clean
-X-purgate-size: 9636
+X-purgate-size: 10768
 
 From: Roger Pau Monné <roger.pau@citrix.com>
 
-We want to change per-domain mappings to be per-vCPU mappings.  In
-preparation for that, we want to arrange that
-create_perdomain_mapping() work either with a single perdomain area,
-or with a per-vCPU perdomain area.
+Introduce the `asi=` command line option, and the opt_vcpu_pt_{pv,hwdom,hvm}
+knobs plus the per-domain d->arch.vcpu_pt setting it controls.  The option is
+introduced ahead of the functionality it enables, so that the newly added
+code can be keyed on it from the start; all knobs currently default to off,
+and enabling any of them taints the boot with a "not functional, development
+purposes only" warning.
 
-Most of the remaining callers are already in a vCPU context.  This is
-no accident: the perdomain area has always been laid out in per-vCPU
-slices -- each vCPU has its own GDT/LDT window, its own
-COMPAT_ARG_XLAT pages, its own window of mapcache entries -- and each
-vCPU's slice is set up as that vCPU is created.  For these callers, we
-just need to change the parameter from a domain pointer to a vCPU
-pointer.  Once the perdomain area itself becomes per-vCPU, the same
-calls will populate the owning vCPU's own area rather than slices of a
-shared one.
+XPTI and per-vCPU page-tables are mutually exclusive (they are different
+answers to the same problem, and the entry paths can only be built for one of
+them at a time), so an explicit XPTI request takes precedence over vCPU-PT,
+per axis: xpti=dom0 clears the hardware domain vCPU-PT knob (when dom0 is
+PV), and xpti=domu clears the PV domU one.  When XPTI is left to default, it
+is turned off for those domain kinds that use vCPU-PT instead.
 
-One exception is the call in hvm_domain_initialise().  An HVM vCPU's
-monitor table is created during vCPU initialisation, and
-init_xen_l4_slots() stamps the perdomain slot into it at that point --
-far earlier than for PV, where the Xen slots are written only once
-guest page tables are built.  hvm_domain_initialise() therefore had an
-explicit create_perdomain_mapping() call just to make the perdomain
-root exist ahead of that.  Move it to arch_vcpu_create(), covering HVM
-and PV alike.  With a single shared area, the call allocates at most
-once per domain; but once each vCPU has its own perdomain area, this
-is the call that will allocate every vCPU's root -- PV included --
-before any page tables referencing it are built.  vCPU creation is
-where the call must end up; move it there directly.  For PV guests
-nothing observable changes: the root was already being created during
-vCPU creation as a side effect (by mapcache_vcpu_init(), or failing
-that pv_create_gdt_ldt_l1tab()); it now merely becomes explicit.
+The boot log gains "ASI features for ..." lines for Dom0, HVM and PV
+domains, so hardware-domain-only configurations remain visible, and the XPTI
+line is printed unconditionally: users expecting to assert the state of XPTI
+should not need to derive it from the ASI configuration.
 
-Note that we cannot yet do a parallel movement of
-free_perdomain_mappings(): the per-domain page-table hierarchy is
-still a single domain-wide structure shared by all vCPUs, so tearing
-it down from a per-vCPU path would pull the mappings out from under
-sibling vCPUs (e.g.  on a partially failed, retryable
-XEN_DOMCTL_max_vcpus), and vCPU-create error paths can rely on domain
-destruction to free a partially set up hierarchy.  Teardown will move
-to vCPU scope only once the structure itself becomes per-vCPU.
+Further per-mechanism tokens arrive with their mechanisms in later
+patches.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8
@@ -125,166 +107,248 @@ Changes in v2:
 - Added to the series
 
 Changes since the previously posted version:
-- Keep free_perdomain_mappings() (and hence perdomain teardown)
-  domain-scoped.
-- Keep the idle domain without a perdomain area.
-- Retitle (was: "x86/mm: switch {create,destroy}_perdomain_mapping()
-  domain parameter to vCPU"); destroy_perdomain_mapping() was switched
-  in a separate patch.
-- Split the removal of mapcache_domain_init()'s redundant
-  create_perdomain_mapping() call into its own (preceding) patch.
+- Make the XPTI exclusion per-axis: an explicit xpti=dom0 previously
+   cleared only the PV domU vCPU-PT knob, leaving dom0 with both XPTI
+   and vCPU-PT enabled.
+- Include the hardware domain in the development warning and the boot
+   log summary.
+- Print the XPTI status line unconditionally.
+- Make the opt_vcpu_pt_* knobs plain booleans preinitialised to false,
+   dropping the late -1 resolution.
+- Documentation: mention possible protection against unmitigated
+   attacks, use {pv,hvm} notation in the synopsis, and state that
+   pv=/hvm= do not affect the hardware domain.
+- Rewrite the commit message.
 ---
- xen/arch/x86/domain.c         | 10 ++++++++++
- xen/arch/x86/domain_page.c    |  6 +++---
- xen/arch/x86/hvm/hvm.c        |  5 -----
- xen/arch/x86/include/asm/mm.h |  2 +-
- xen/arch/x86/mm.c             | 17 +++++++++--------
- xen/arch/x86/pv/domain.c      |  2 +-
- xen/arch/x86/x86_64/mm.c      |  2 +-
- 7 files changed, 25 insertions(+), 19 deletions(-)
+ docs/misc/xen-command-line.pandoc    |  24 ++++++
+ xen/arch/x86/include/asm/domain.h    |   3 +
+ xen/arch/x86/include/asm/spec_ctrl.h |   2 +
+ xen/arch/x86/spec_ctrl.c             | 107 ++++++++++++++++++++++++++-
+ 4 files changed, 134 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index efa72cd2f1..1f75d44fe0 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -517,6 +517,16 @@ int arch_vcpu_create(struct vcpu *v)
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index 1c711fa980..834f6c57f2 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -202,6 +202,30 @@ to appropriate auditing by Xen.  Argo is disabled by default.
+     This option is disabled by default, to protect domains from a DoS by a
+     buggy or malicious other domain spamming the ring.
  
-     if ( !is_idle_domain(d) )
-     {
-+        /*
-+         * Make sure the per-domain L3 exists ahead of any consumer (e.g.
-+         * init_xen_l4_slots() for the HVM monitor tables): with
-+         * create_perdomain_mapping() taking a vCPU this can no longer be
-+         * done when creating the domain.
-+         */
-+        rc = create_perdomain_mapping(v, PERDOMAIN_VIRT_START, 0, false);
-+        if ( rc )
-+            return rc;
++### asi (x86)
++> `= List of [ <bool>, pv=<bool>, hvm=<bool>,
++>              vcpu-pt=<bool> | vcpu-pt={pv,hvm}=<bool> ]`
 +
-         paging_vcpu_init(v);
++> Default: `false`
++
++Offers control over whether the hypervisor will engage in Address Space
++Isolation, by not having potentially sensitive information permanently mapped
++in the VMM page-tables.  Using this option might avoid the need to apply
++mitigations for certain speculative related attacks, at the cost of mapping
++sensitive information on-demand.  It might also offer some protection against
++unmitigated speculation-related attacks.
++
++* `pv=` and `hvm=` sub-options allow enabling for specific guest types; they
++  do not affect the hardware domain, which follows the whole-feature forms
++  (the plain boolean, or an un-suffixed `vcpu-pt=<bool>`).
++
++**WARNING: manual de-selection of enabled options will invalidate any
++protection offered by the feature.  The fine grained options provided below
++are meant to be used for debugging purposes only.**
++
++* `vcpu-pt` ensures each vCPU uses a unique top-level page-table and sets up
++  a virtual address space region to map memory on a per-vCPU basis.
++
+ ### asid (x86)
+ > `= <boolean>`
  
-         if ( (rc = vcpu_init_fpu(v)) != 0 )
-diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
-index 449d4f2a7d..9b375e438a 100644
---- a/xen/arch/x86/domain_page.c
-+++ b/xen/arch/x86/domain_page.c
-@@ -293,14 +293,14 @@ int mapcache_vcpu_init(struct vcpu *v)
-     if ( ents > dcache->entries )
+diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
+index 38df5c376e..fdf7b205ea 100644
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -472,6 +472,9 @@ struct arch_domain
+     /* Don't unconditionally inject #GP for unhandled MSRs. */
+     bool msr_relaxed;
+ 
++    /* Use a per-vCPU root pt, and switch per-domain slot to per-vCPU. */
++    bool vcpu_pt;
++
+     /* Emulated devices enabled bitmap. */
+     uint32_t emulation_flags;
+ } __cacheline_aligned;
+diff --git a/xen/arch/x86/include/asm/spec_ctrl.h b/xen/arch/x86/include/asm/spec_ctrl.h
+index 8f82533c41..770c24f6a0 100644
+--- a/xen/arch/x86/include/asm/spec_ctrl.h
++++ b/xen/arch/x86/include/asm/spec_ctrl.h
+@@ -87,6 +87,8 @@ extern uint8_t default_scf;
+ 
+ extern int8_t opt_xpti_hwdom, opt_xpti_domu;
+ 
++extern bool opt_vcpu_pt_pv, opt_vcpu_pt_hwdom, opt_vcpu_pt_hvm;
++
+ extern bool cpu_has_bug_l1tf;
+ extern int8_t opt_pv_l1tf_hwdom, opt_pv_l1tf_domu;
+ extern bool opt_bp_spec_reduce;
+diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
+index bc8538a56f..55a02212a9 100644
+--- a/xen/arch/x86/spec_ctrl.c
++++ b/xen/arch/x86/spec_ctrl.c
+@@ -86,6 +86,14 @@ bool __ro_after_init opt_bp_spec_reduce = true;
+ 
+ static bool __initdata opt_ibpb_alt;
+ 
++/*
++ * Use a per-vCPU root page-table and switch the per-domain slot to per-vCPU.
++ * Off by default until the feature is complete.
++ */
++bool __ro_after_init opt_vcpu_pt_hvm;
++bool __ro_after_init opt_vcpu_pt_hwdom;
++bool __ro_after_init opt_vcpu_pt_pv;
++
+ static int __init cf_check parse_spec_ctrl(const char *s)
+ {
+     const char *ss;
+@@ -383,6 +391,18 @@ int8_t __ro_after_init opt_xpti_domu = -1;
+ 
+ static __init void xpti_init_default(void)
+ {
++    if ( !opt_dom0_pvh && opt_xpti_hwdom == 1 && opt_vcpu_pt_hwdom )
++    {
++        printk(XENLOG_ERR
++               "XPTI incompatible with per-vCPU page-tables, disabling Dom0 vCPU-PT\n");
++        opt_vcpu_pt_hwdom = false;
++    }
++    if ( opt_xpti_domu == 1 && opt_vcpu_pt_pv )
++    {
++        printk(XENLOG_ERR
++               "XPTI incompatible with per-vCPU page-tables, disabling PV DomU vCPU-PT\n");
++        opt_vcpu_pt_pv = false;
++    }
+     if ( (boot_cpu_data.vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) ||
+          cpu_has_rdcl_no )
      {
-         /* Populate page tables. */
--        int rc = create_perdomain_mapping(d, MAPCACHE_VIRT_START, ents, false);
-+        int rc = create_perdomain_mapping(v, MAPCACHE_VIRT_START, ents, false);
- 
-         /* Populate bit maps. */
-         if ( !rc )
--            rc = create_perdomain_mapping(d, (unsigned long)dcache->inuse,
-+            rc = create_perdomain_mapping(v, (unsigned long)dcache->inuse,
-                                           nr, true);
-         if ( !rc )
--            rc = create_perdomain_mapping(d, (unsigned long)dcache->garbage,
-+            rc = create_perdomain_mapping(v, (unsigned long)dcache->garbage,
-                                           nr, true);
- 
-         if ( rc )
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index cd425c3342..a41ae35374 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -620,10 +620,6 @@ int hvm_domain_initialise(struct domain *d,
-     INIT_LIST_HEAD(&d->arch.hvm.mmcfg_regions);
-     INIT_LIST_HEAD(&d->arch.hvm.msix_tables);
- 
--    rc = create_perdomain_mapping(d, PERDOMAIN_VIRT_START, 0, false);
--    if ( rc )
--        goto fail;
--
-     hvm_init_cacheattr_region_list(d);
- 
-     rc = paging_enable(d, PG_refcounts|PG_translate|PG_external);
-@@ -730,7 +726,6 @@ int hvm_domain_initialise(struct domain *d,
-     XFREE(d->arch.hvm.irq);
-  fail0:
-     hvm_destroy_cacheattr_region_list(d);
-- fail:
-     hvm_domain_relinquish_resources(d);
-     XFREE(d->arch.hvm.io_handler);
-     XFREE(d->arch.hvm.pl_time);
-diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
-index 9a8fda782e..97924a639b 100644
---- a/xen/arch/x86/include/asm/mm.h
-+++ b/xen/arch/x86/include/asm/mm.h
-@@ -600,7 +600,7 @@ long arch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
- long subarch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
- int compat_arch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
- 
--int create_perdomain_mapping(struct domain *d, unsigned long va,
-+int create_perdomain_mapping(struct vcpu *v, unsigned long va,
-                              unsigned int nr, bool populate);
- void populate_perdomain_mapping(const struct vcpu *v, unsigned long va,
-                                 const mfn_t *mfn, unsigned int nr,
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index fc524ef0c3..6dfd75475a 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -6212,13 +6212,13 @@ static bool perdomain_l1e_needs_freeing(l1_pgentry_t l1e)
+@@ -394,9 +414,9 @@ static __init void xpti_init_default(void)
+     else
+     {
+         if ( opt_xpti_hwdom < 0 )
+-            opt_xpti_hwdom = 1;
++            opt_xpti_hwdom = !opt_vcpu_pt_hwdom;
+         if ( opt_xpti_domu < 0 )
+-            opt_xpti_domu = 1;
++            opt_xpti_domu = !opt_vcpu_pt_pv;
+     }
  }
  
- /*
-- * Ensure the paging structure for [va, va + nr * PAGE_SIZE) of d's
-- * per-domain area is in place, allocating whichever levels are missing:
-- * the (domain-wide) L3 root, the slot's L2, and all L1 tables covering
-- * the range.  All allocations come from the domain heap.  The range must
-- * lie within a single per-domain slot (one L3 entry), and already-present
-- * levels and entries are left untouched, so calls are idempotent over
-- * existing ranges.
-+ * Ensure the paging structure for [va, va + nr * PAGE_SIZE) of the
-+ * per-domain area of v's domain is in place, allocating whichever levels
-+ * are missing: the (domain-wide) L3 root, the slot's L2, and all L1
-+ * tables covering the range.  All allocations come from the domain heap.
-+ * The range must lie within a single per-domain slot (one L3 entry), and
-+ * already-present levels and entries are left untouched, so calls are
-+ * idempotent over existing ranges.
-  *
-  * nr == 0: only ensure the per-domain L3 itself exists; populate is
-  * ignored.  Used to set the area up before any sub-range is known.
-@@ -6234,9 +6234,10 @@ static bool perdomain_l1e_needs_freeing(l1_pgentry_t l1e)
-  * perdomain_l1e_needs_freeing()), whereas caller-owned mappings are only
-  * ever unmapped.
-  */
--int create_perdomain_mapping(struct domain *d, unsigned long va,
-+int create_perdomain_mapping(struct vcpu *v, unsigned long va,
-                              unsigned int nr, bool populate)
- {
-+    struct domain *d = v->domain;
-     struct page_info *pg;
-     l3_pgentry_t *l3tab;
-     l2_pgentry_t *l2tab;
-diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
-index 40b834e1a4..50f2d1284a 100644
---- a/xen/arch/x86/pv/domain.c
-+++ b/xen/arch/x86/pv/domain.c
-@@ -313,7 +313,7 @@ int switch_compat(struct domain *d)
+@@ -487,6 +507,66 @@ static int __init cf_check parse_pv_l1tf(const char *s)
+ }
+ custom_param("pv-l1tf", parse_pv_l1tf);
  
- static int pv_create_gdt_ldt_l1tab(struct vcpu *v)
++static int __init cf_check parse_asi(const char *s)
++{
++    const char *ss;
++    int val, rc = 0;
++
++    /* Interpret 'asi' alone in its positive boolean form. */
++    if ( *s == '\0' )
++        opt_vcpu_pt_pv = opt_vcpu_pt_hwdom = opt_vcpu_pt_hvm = true;
++
++    do {
++        ss = strchr(s, ',');
++        if ( !ss )
++            ss = strchr(s, '\0');
++
++        val = parse_bool(s, ss);
++        switch ( val )
++        {
++        case 0:
++        case 1:
++            opt_vcpu_pt_pv = opt_vcpu_pt_hwdom = opt_vcpu_pt_hvm = val;
++            break;
++
++        default:
++            if ( (val = parse_boolean("pv", s, ss)) >= 0 )
++                opt_vcpu_pt_pv = val;
++            else if ( (val = parse_boolean("hvm", s, ss)) >= 0 )
++                opt_vcpu_pt_hvm = val;
++            else if ( (val = parse_boolean("vcpu-pt", s, ss)) != -1 )
++            {
++                switch ( val )
++                {
++                case 1:
++                case 0:
++                    opt_vcpu_pt_pv = opt_vcpu_pt_hvm = opt_vcpu_pt_hwdom = val;
++                    break;
++
++                case -2:
++                    s += strlen("vcpu-pt=");
++                    if ( (val = parse_boolean("pv", s, ss)) >= 0 )
++                        opt_vcpu_pt_pv = val;
++                    else if ( (val = parse_boolean("hvm", s, ss)) >= 0 )
++                        opt_vcpu_pt_hvm = val;
++                    else
++                default:
++                        rc = -EINVAL;
++                    break;
++                }
++            }
++            else if ( *s )
++                rc = -EINVAL;
++            break;
++        }
++
++        s = ss + 1;
++    } while ( *ss );
++
++    return rc;
++}
++custom_param("asi", parse_asi);
++
+ static void __init print_details(enum ind_thunk thunk)
  {
--    return create_perdomain_mapping(v->domain, GDT_VIRT_START(v),
-+    return create_perdomain_mapping(v, GDT_VIRT_START(v),
-                                     1U << GDT_LDT_VCPU_SHIFT, false);
+     unsigned int _7d0 = 0, _7d2 = 0, e8b = 0, e21a = 0, e21c = 0, max = 0, tmp;
+@@ -680,6 +760,20 @@ static void __init print_details(enum ind_thunk thunk)
+            opt_pv_l1tf_hwdom ? "enabled"  : "disabled",
+            opt_pv_l1tf_domu  ? "enabled"  : "disabled");
+ #endif
++
++    printk("  ASI features for Dom0:%s%s\n",
++           opt_vcpu_pt_hwdom                         ? ""               : " None",
++           opt_vcpu_pt_hwdom                         ? " vCPU-PT"       : "");
++#ifdef CONFIG_HVM
++    printk("  ASI features for HVM VMs:%s%s\n",
++           opt_vcpu_pt_hvm                           ? ""               : " None",
++           opt_vcpu_pt_hvm                           ? " vCPU-PT"       : "");
++#endif
++#ifdef CONFIG_PV
++    printk("  ASI features for PV VMs:%s%s\n",
++           opt_vcpu_pt_pv                            ? ""               : " None",
++           opt_vcpu_pt_pv                            ? " vCPU-PT"       : "");
++#endif
  }
  
-diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
-index aa74acec82..bc7e49f4de 100644
---- a/xen/arch/x86/x86_64/mm.c
-+++ b/xen/arch/x86/x86_64/mm.c
-@@ -732,7 +732,7 @@ void __init zap_low_mappings(void)
- 
- int setup_compat_arg_xlat(struct vcpu *v)
- {
--    return create_perdomain_mapping(v->domain, ARG_XLAT_START(v),
-+    return create_perdomain_mapping(v, ARG_XLAT_START(v),
-                                     PFN_UP(COMPAT_ARG_XLAT_SIZE), true);
+ static bool __init check_smt_enabled(void)
+@@ -1866,6 +1960,10 @@ void spec_ctrl_init_domain(struct domain *d)
+     if ( pv )
+         d->arch.pv.xpti = is_hardware_domain(d) ? opt_xpti_hwdom
+                                                 : opt_xpti_domu;
++
++    d->arch.vcpu_pt = is_hardware_domain(d) ? opt_vcpu_pt_hwdom
++                                            : pv ? opt_vcpu_pt_pv
++                                                 : opt_vcpu_pt_hvm;
  }
  
+ void __init init_speculation_mitigations(void)
+@@ -2158,6 +2256,11 @@ void __init init_speculation_mitigations(void)
+          hw_smt_enabled && default_xen_spec_ctrl )
+         setup_force_cpu_cap(X86_FEATURE_SC_MSR_IDLE);
+ 
++    if ( opt_vcpu_pt_pv || opt_vcpu_pt_hwdom || opt_vcpu_pt_hvm )
++        warning_add(
++            "Address Space Isolation is not functional, this option is\n"
++            "intended to be used only for development purposes.\n");
++
+     xpti_init_default();
+ 
+     l1tf_calculations();
 -- 
 2.55.0
 
