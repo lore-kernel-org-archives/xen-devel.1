@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72739C61DFD
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 08:40:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1405354.1638856 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1F69C61DFD
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2026 08:55:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1405366.1638865 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1gVt-0005fE-Ds; Wed, 02 Sep 2026 08:40:09 +0000
+	id 1x1gke-0007mQ-Jy; Wed, 02 Sep 2026 08:55:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1405354.1638856; Wed, 02 Sep 2026 08:40:09 +0000
+Received: by outflank-mailman (output) from mailman id 1405366.1638865; Wed, 02 Sep 2026 08:55:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x1gVt-0005f7-AF; Wed, 02 Sep 2026 08:40:09 +0000
-Received: by outflank-mailman (input) for mailman id 1405354;
- Wed, 02 Sep 2026 08:40:07 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x1gke-0007mJ-GU; Wed, 02 Sep 2026 08:55:24 +0000
+Received: by outflank-mailman (input) for mailman id 1405366;
+ Wed, 02 Sep 2026 08:55:23 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x1gVr-0005f0-Po
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 08:40:07 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x1gkd-0007mD-NJ
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 08:55:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x1gVr-006PDl-6J
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 10:40:07 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1x1gkb-00AqSt-9Q
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2026 10:55:21 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a97e0e6-e002-0a2a0a5209dd-0a2a4504df58-6
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 10:40:07 +0200
-Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a97e472-2eae-0a2a0a5409dd-0a2a450999c6-18
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 10:55:21 +0200
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a97e0e6-b57f-0a2a45040019-d155802bd1b1-3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 10:40:07 +0200
-Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-4995b0343c1so7900885e9.3
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 01:40:07 -0700 (PDT)
+ id 6a97e476-be1a-0a2a45090019-d1558029e1bf-3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 10:55:18 +0200
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-49cd9add88aso4680395e9.3
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 01:55:18 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49ce464aa32sm63331905e9.5.2026.09.02.01.40.05
+ 5b1f17b1804b1-49ce58da3acsm80590125e9.0.2026.09.02.01.55.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 02 Sep 2026 01:40:06 -0700 (PDT)
+ Wed, 02 Sep 2026 01:55:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,55 +55,56 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788338406; x=1788943206; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788339318; x=1788944118; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=lFeiGfwHFbNu+2NtxgAHyH+5BhpbpvplrOjaEEUWGBw=;
-        b=X7AzC6arcegL4W15BhQHgudYzz3iOXKFSxAWYdB1huCV/0cg5YDz2il1O1GQ/dCFRg
-         EAkIyyqskoKxC3LlqMQsKdGftZVfQx/ogI7oW0mN9KpkNX20DWY0/lHYyjUX6b4oogm0
-         67yatanJsVM/9X6XSGxadZ1mzoSs2kBxBf4jPqkCf7TkcVonzOGoPO051XOviBV+LRc+
-         xMnKoItWHwssLVZBAaxDeZOQpo1MIW1EdgWRX0Q7oD7BnaoRnlsbJ/Lk9tqUli2kvBuE
-         rGHoMnCxhSsyGoimYYyX7kCcLwrB7bRds/W+YPN6niTpIx1SK8xBfi5ZELXvPvrmWy9E
-         Q3fQ==
+        bh=nA2s6HuoziJ0Mqf7gcg+y4QLcc/T8IpHG9vT0Iw59h4=;
+        b=Zyg81cTfr4uGJB0T1uULem0KhGD0CeoVJ2ecOvgkpfrMJCmpt/Gt2BdKS3SjvHaG7j
+         tskRbNmnjNnKhTI4ZXEK2FQfr+RTYq9a2y1gl6zKCipdiopUTVagl2f8kKlf1d3zY9Q8
+         mwLPZ7vUNI2VjYj7HiTOTC7xc5M/1dudUoonnpyk8qggncjgm2PdM/MBzXKKwpgGhKKy
+         NFNYFv9YQJxTp+sCbglyxkFJ0SRHo55DlBXvps6Us2JS3O7qc8jCJEZxXNf+qqu0BnU0
+         RI8C3TMNyk/8zWtV+XFA6Vr+lP65X3S13g+zkEuPDhMkjDCS8mSptk0VDG/4gPe8E6+q
+         hqBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788338406; x=1788943206;
+        d=1e100.net; s=20251104; t=1788339318; x=1788944118;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=lFeiGfwHFbNu+2NtxgAHyH+5BhpbpvplrOjaEEUWGBw=;
-        b=oDOgI0hPAEUJM1TkWk5My+dsxN28fygwdgJK625C4LGNNVgdL3PscTeQzILkeGEJ2u
-         07wwXBRhlmKczydMQGW3Pd1DCHLBsPFesNu1n0uV8RXVcXcCEOYywwtoNCGR5jDF3z5E
-         PaL3Wi1UYNsP0yQBLD5hVHNgc0UK2JO+qhr2uWQ+SmIisanm185RZp9wD/fEejwiu2OZ
-         PGAjgRy43JXk/eDjshKCskq/7P9Bl9ZrlMQVjYO7ifrTZkCed1sumU1/vCGERNjYJHL0
-         MdzKBNS2gHVCFrrm5TUGKxaVbtJDAqCkBkRFqxbwnFgzLMoaWWIuW/iLfmSq0QKDRzSM
-         LWbw==
-X-Gm-Message-State: AFuF++lY4o0dsVBxwjFNCceUUhv+iEDu38W4t7ddMAPOWfJws8d43XEi
-	SEdMk2WOn5VQBMiEmSaBIoFUjdBxiaGXe/TMrlzx4zS8vI4CW8kxDw4jytNeeG3wyA==
-X-Gm-Gg: AR+sD10v6JlLYdl2Jgbj8iMinOMvzKnYz3xrxMafLfjWE52wd69CoQI0yO8rRSpM3Qk
-	9jlFOXZHze4aNo2JgybEjOf78paGbHLMgHx4n8IWgwK4AvJIBiyZNy/3gBNFhR7yWRhAfmBjJNY
-	1w/PhbDCsVYqyphVyzYebvgA1P5e1pl5+IVJu0IZBvVUnR/Px6U8I3nsvebHJapar/InFFxQLu3
-	Fm9eZWSbSr7j4yQC6P+Rwx17k6u8W4tQb6YShOwVujuxky6zGZUGgZ1HoqG8azGdIMEUY67V6cz
-	uW10SmFIajSDRjAyBv4/I1ua25vonWuX79hOEOGLzG/PzPixsJlk6UCOwvPG68OXUBSlK2RLLzq
-	u+w8W8+g9/N8Qyld9n6Q1/VXtj/UO2otzamddPMUoJFCIkigJOwhsblDSvPS2ZO0xDL+WutsWb7
-	6q4YlURUf0D4vZPeQ3gi6ztqoOqKXfMXvqSTaPdkFfv9n4gEvWg1F9FGTgMKjQNuoQqwLhfUHak
-	wOCl9JTVHNXUM3OaQVlLqRI9625YU3+zRnoegTFLF95eJANX6hPAA==
-X-Received: by 2002:a05:600c:6296:b0:499:621a:2ec2 with SMTP id 5b1f17b1804b1-49ce581635bmr58290015e9.3.1788338406405;
-        Wed, 02 Sep 2026 01:40:06 -0700 (PDT)
-Message-ID: <1047fb1f-87a3-46b9-ad91-904b05d8a637@suse.com>
-Date: Wed, 2 Sep 2026 10:40:04 +0200
+        bh=nA2s6HuoziJ0Mqf7gcg+y4QLcc/T8IpHG9vT0Iw59h4=;
+        b=d/RYAxIEQpdMkv+0NVY1ITsN2tDs0iWsHsWINmWiJp6JRsZZWNp8xN+WVB92WLsQt+
+         50acLPoUj5riATPIizHiMWReDKBVndYy61ieXvJwbiJhmvBDHohT8rBqCsmqrforGP3n
+         4kz0eW7PBQ8grEe7bsnIe3qtDlEDZNjrb2nlg5YSPR3WHg/WaAgM9H/nP2zjCBtvG+Ba
+         9AqZv65+fkwrHxm2HCOfoyjLZNG1XuWNJcICPQ53mVABw5lZw4iPKqkOMraXNXbXTSER
+         MTy5TE0s62NtmAdM5LQMnGv8pVD8DnTzqvwkBqxqZRAaDBsc/8WIb7SX5/xJef4unhSD
+         6NcA==
+X-Forwarded-Encrypted: i=1; AHgh+Rpw5dd2NMhzaPDDRUWeekAAjMU3f0j1mKPSkTLw0SenxGvd/0EkcOONTvvj9ls+/4mUlce1vNWign8=@lists.xenproject.org
+X-Gm-Message-State: AFuF++k+7kw8HGkX4Aq6R4PRMrtaDU0anCDPR/J6fWmGoQS1mB+Ibwsy
+	UUzfOxUOeXLT/aJY8OfmN+H9hwMwNXwpnMLfMWVSSxl3neLVY7nte8Q7nR+mPaOAcw==
+X-Gm-Gg: AR+sD10yiem5oOSF3F30+MPLPlX5XCWhQmtxtiTh3FudZ5xo0+5nmu/dhG91fXcublW
+	KfiotErbb/oWT+ZTmyq31jEj48Dte58M/Ag7b1ySYenD3kI/DlC4pAO6750+y7BVsyVDlvyAEVD
+	yzjPu3q6+eQnAa6VUkIELcxel8RSBi7OsD7lswMm1wlPyYzOYu5WviMuKcU/FCR/HWwDLqcHCf4
+	UhMCunPzsd/Uh+m4F0GOe8I6eUuxit3mLIxpD3NWjF5gvW6EcZcTXJWio5iZmJkY+ZCXG9QPbs9
+	nz+cxaRbadHMXDMZSNnq0z+pGgpRbE9pHu7cxdW9uMwy5Z0i0rN/ENe1OSugQk5ZWWfS7Wifc4r
+	Iqd/Sdk8nDijb/QOs9m6SttjN5vkckAbfGlWz/iK4zn72nnG2xX4kynTtdsSvX8dwAEWL5Dq71b
+	+I4EhY4LETHq1OAUT85SkCeCj6sGNJbLvpAxJ6Uttd0ME8wuIbqjCDQcbtOpdt49X+CbVRc9i1C
+	jFH7BwtvBWmf2U4C2r5cUyq/WpB/9TRO5QoJhynHwbYH3pmnayz
+X-Received: by 2002:a05:600c:8b63:b0:49b:c8e:8e6 with SMTP id 5b1f17b1804b1-49ce558ebd8mr62707605e9.0.1788339317713;
+        Wed, 02 Sep 2026 01:55:17 -0700 (PDT)
+Message-ID: <37872f45-8078-44ef-9db8-a9868c9b79aa@suse.com>
+Date: Wed, 2 Sep 2026 10:55:15 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 2/2] x86/time: avoid early uses of NOW() to return zero
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>
-References: <ec25e838-6bf6-496c-abbe-0fd71e2fb0d9@suse.com>
- <cb8d9a90-64ce-4e86-a188-36a32fe02970@suse.com>
- <apfWTzVihQi5LX9x@macbook.local>
+Subject: Re: [PATCH 1/3] cmdline: Document console=dtuart option
+To: Michal Orzel <michal.orzel@amd.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20260902073606.61062-1-michal.orzel@amd.com>
+ <20260902073606.61062-2-michal.orzel@amd.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,64 +130,47 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <apfWTzVihQi5LX9x@macbook.local>
+In-Reply-To: <20260902073606.61062-2-michal.orzel@amd.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1788338407-504DBB50-31705016/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-bad1c0/1788339318-FCA16034-6078AA62/0/0
 X-purgate-type: clean
-X-purgate-size: 2163
+X-purgate-size: 1354
 
-On 02.09.2026 09:54, Roger Pau Monné wrote:
-> On Wed, Aug 19, 2026 at 01:45:56PM +0200, Jan Beulich wrote:
->> Waiting loops like the one in flush_command_buffer() will degenerate to
->> infinite ones when used early enough for NOW() to still return constant
->> zero. Make sure the returned value at least monotonically increases. When
->> available, use nominal frequency values as initial approximation.
->>
->> Do this only in get_s_time(), as producing a sane value in
->> get_s_time_fixed() for non-zero inputs won't be reasonably possible.
->> Put an assertion there.
->>
->> Reported-by: Roger Pau Monné <roger.pau@citrix.com>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+On 02.09.2026 09:36, Michal Orzel wrote:
+> Document the default console= option on Arm and RISC-V that is
+> "dtuart" indicating a generic UART parsed from a device tree or
+> ACPI SPCR table. This serial utilizes SERHND_DTUART handle.
 > 
-> Acked-by: Roger Pau Monné <roger@xenporject.org>
+> Take the opportunity to:
+>  - fix documented x86 default to vga to match OPT_CONSOLE_STR,
 
-I assume you won't mind if I correct the typo in the domain name.
+I first wanted to object to this part, as I was sure this used to be
+"com1,vga". Yet indeed it's been almost 19 years ago when this was
+changed (92877a1f9ab2 ["x86: Auto-probe the serial port baud rate if
+'com1' or 'com2' is"]).
 
->> --- a/xen/arch/x86/time.c
->> +++ b/xen/arch/x86/time.c
->> @@ -1664,6 +1664,9 @@ s_time_t get_s_time_fixed(uint64_t at_ts
->>      const struct cpu_time *t = &this_cpu(cpu_time);
->>      uint64_t tsc, delta;
->>  
->> +    /* scale_delta() degenerates when the scale wasn't set yet. */
->> +    ASSERT(t->tsc_scale.mul_frac);
->> +
->>      if ( at_tsc )
->>          tsc = at_tsc;
->>      else
->> @@ -1679,6 +1682,20 @@ s_time_t get_s_time_fixed(uint64_t at_ts
->>  
->>  s_time_t get_s_time(void)
->>  {
->> +    /*
->> +     * Before the TSC scale is set, avoid returning constant 0 (or whatever
->> +     * this_cpu(cpu_time).stamp.local_stime is set to).  While the returned
->> +     * value is in no way representing time, it at least increases
->> +     * monotonically, thus avoiding e.g. waiting loops to degenerate to
->> +     * entirely infinite ones.
->> +     */
->> +    if ( unlikely(!this_cpu(cpu_time).tsc_scale.mul_frac) )
->> +    {
->> +        static s_time_t counter;
+>  - mark dtuart option as available on RISC-V,
+>  - document fall back to /chosen/stdout-path.
 > 
-> Not that it matters much, but counter can probably be __initdata?
+> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
 
-I wanted to play safe here: In get_s_time_fixed(), release builds won't
-crash if the assertion wasn't there, but would trigger in a
-corresponding debug build. In that (unexpected) situation, we'd crash
-here (when .init.* was unmapped) if __initdata was used.
+Acked-by: Jan Beulich <jbeulich@suse.com>
+
+> --- a/docs/misc/xen-command-line.pandoc
+> +++ b/docs/misc/xen-command-line.pandoc
+> @@ -430,9 +430,10 @@ The following are examples of correct specifications:
+>  Specify the size of the console ring buffer.
+>  
+>  ### console
+> -> `= List of [ vga | com1[H,L] | com2[H,L] | pv | dbgp | ehci | xhci | none ]`
+> +> `= List of [ vga | com1[H,L] | com2[H,L] | pv | dbgp | ehci | xhci | dtuart | none ]`
+>  
+> -> Default: `console=com1,vga`
+> +> Default (x86): `console=vga`
+> +> Default (Arm, RISC-V): `console=dtuart`
+
+Any reason to not also cover PPC here?
 
 Jan
 
