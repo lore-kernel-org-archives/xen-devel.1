@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4608C624D7
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 10:32:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1406747.1639939 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F01EBC624D7
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 10:32:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1406752.1639948 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x24jd-0007y3-DQ; Thu, 03 Sep 2026 10:31:57 +0000
+	id 1x24jm-0008Sl-Li; Thu, 03 Sep 2026 10:32:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1406747.1639939; Thu, 03 Sep 2026 10:31:57 +0000
+Received: by outflank-mailman (output) from mailman id 1406752.1639948; Thu, 03 Sep 2026 10:32:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x24jd-0007xw-8d; Thu, 03 Sep 2026 10:31:57 +0000
-Received: by outflank-mailman (input) for mailman id 1406747;
- Thu, 03 Sep 2026 10:31:55 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x24jm-0008Sa-Gs; Thu, 03 Sep 2026 10:32:06 +0000
+Received: by outflank-mailman (input) for mailman id 1406752;
+ Thu, 03 Sep 2026 10:32:05 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <usama.anjum@arm.com>) id 1x24jb-0007wB-Bq
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 10:31:55 +0000
+ (envelope-from <usama.anjum@arm.com>) id 1x24jl-0008QY-3v
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 10:32:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x24ja-000Zu4-P6
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 12:31:54 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1x24jk-003GSp-GB
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 12:32:04 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <usama.anjum@arm.com>)
- id 6a994c9a-bab6-0a2a0a5309dd-0a2a4506e1e0-0
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 12:31:54 +0200
+ id 6a994c9a-2eae-0a2a0a5409dd-0a2a4504d3ec-10
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 12:32:04 +0200
 Received: from [217.140.110.172] (helo=foss.arm.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
  (envelope-from <usama.anjum@arm.com>)
- id 6a994c99-195a-0a2a45060019-d98c6eac9654-1
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 12:31:54 +0200
+ id 6a994ca3-b57f-0a2a45040019-d98c6eaca2a4-1
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 12:32:04 +0200
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CD4A21EDB;
- Thu,  3 Sep 2026 03:31:49 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5621D165C;
+ Thu,  3 Sep 2026 03:31:59 -0700 (PDT)
 Received: from e142334-100.cambridge.arm.com (e142334-100.cambridge.arm.com
  [10.2.198.93])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 72E5A3F673;
- Thu,  3 Sep 2026 03:31:44 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id E7E333F673;
+ Thu,  3 Sep 2026 03:31:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,11 +54,11 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1788431513; bh=w5U+egOeicWr0JE6SxpCSEkSHT/w8+Jal3XqpPBc6p0=;
+	t=1788431523; bh=jnhKOvqXNxavrVkvy1TrIz2ZFbREXQCKHvvjfSTHsrk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=fCi9FIbOxN1jAWaeu8417km2w3h5m6j38WVFLaXWNwK9oAUqbXpEZ0Y0M46SfnfHU
-	 is2CQLtW+RScu0xIwHD95QlemNucqa3eQLNLFkarQYw2QAH7o1yuYnaYCycw3vrZRL
-	 6/l1lRwWzVc9APR0jQ4tBwoWuIBVD/rN/qIPAsKg=
+	b=TqdJTvjSMBL/Fecpzq69xnSc8TtbMviOhHJH0tSUQhuwn0beTUse/c0M5IvEcZQBk
+	 ZWuuBe3peOseXoJxaSyHvNwu+SsvzmYsY5yXAGPVWpK8KMU1ZQ4B3t4mAKW1iUi0QH
+	 u2Yb1Uhkv1kKR+XFEs06dtpTzXB1MMV4rnuygP5E=
 From: Muhammad Usama Anjum <usama.anjum@arm.com>
 To: Jani Nikula <jani.nikula@linux.intel.com>,
 	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
@@ -127,82 +127,102 @@ Cc: Muhammad Usama Anjum <usama.anjum@arm.com>,
 	bpf@vger.kernel.org,
 	linux-perf-users@vger.kernel.org,
 	damon@lists.linux.dev
-Subject: [PATCH v2 7/8] drm/i915: use hw_pte_t for PTE range callbacks
-Date: Thu,  3 Sep 2026 11:29:59 +0100
-Message-ID: <20260903103002.1091859-8-usama.anjum@arm.com>
+Subject: [PATCH v2 8/8] xen: use hw_pte_t for PTE range callbacks
+Date: Thu,  3 Sep 2026 11:30:00 +0100
+Message-ID: <20260903103002.1091859-9-usama.anjum@arm.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260903103002.1091859-1-usama.anjum@arm.com>
 References: <20260903103002.1091859-1-usama.anjum@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1788431514-FC40377B-9AC612D6/0/0
+X-purgate-ID: tlsNG-ebf023/1788431524-C36C2B50-6F9FEE36/0/0
 X-purgate-type: clean
-X-purgate-size: 2445
+X-purgate-size: 3394
 
-apply_to_page_range() now passes PTE table storage to its callback as
-hw_pte_t *. Update the i915 remap and selftest callbacks to match the new
-type.
+Generic PTE range and remapping helpers now pass pointers to PTE table
+storage as hw_pte_t *. Update the Xen callbacks to match those interfaces.
 
-Continue to use ptep_get() for software PTE values and set_pte_at() for
-updates.
-The type remains an alias of pte_t on x86 until that architecture opts in.
+Keep software PTE values as pte_t and continue to access them through the
+existing PTE helpers. This is required when Xen is built for an
+architecture that selects the distinct hw_pte_t wrapper.
 
+Reviewed-by: Juergen Gross <jgross@suse.com>
 Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
 ---
 Changes since v1:
 - Use software PTE value terminology.
 
 Changes since RFC v1:
-- Clarify the effect on architectures that have not opted in.
+- Clarify why the callback conversion is required after architecture
+  opt-in.
 ---
- drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c | 4 ++--
- drivers/gpu/drm/i915/i915_mm.c                     | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ drivers/xen/gntdev.c               | 2 +-
+ drivers/xen/privcmd.c              | 2 +-
+ drivers/xen/xenbus/xenbus_client.c | 2 +-
+ drivers/xen/xlate_mmu.c            | 4 ++--
+ 4 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c b/drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c
-index d01acfb7d93d0..056faf4a3618b 100644
---- a/drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c
-+++ b/drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c
-@@ -1690,7 +1690,7 @@ static int igt_mmap_gpu(void *arg)
- 	return 0;
- }
+diff --git a/drivers/xen/gntdev.c b/drivers/xen/gntdev.c
+index 1dcc4675580ed..b013bcad99b5b 100644
+--- a/drivers/xen/gntdev.c
++++ b/drivers/xen/gntdev.c
+@@ -301,7 +301,7 @@ void gntdev_put_map(struct gntdev_priv *priv, struct gntdev_grant_map *map)
  
--static int check_present_pte(pte_t *pte, unsigned long addr, void *data)
-+static int check_present_pte(hw_pte_t *pte, unsigned long addr, void *data)
+ /* ------------------------------------------------------------------ */
+ 
+-static int find_grant_ptes(pte_t *pte, unsigned long addr, void *data)
++static int find_grant_ptes(hw_pte_t *pte, unsigned long addr, void *data)
  {
- 	pte_t ptent = ptep_get(pte);
- 
-@@ -1703,7 +1703,7 @@ static int check_present_pte(pte_t *pte, unsigned long addr, void *data)
- 	return 0;
- }
- 
--static int check_absent_pte(pte_t *pte, unsigned long addr, void *data)
-+static int check_absent_pte(hw_pte_t *pte, unsigned long addr, void *data)
+ 	struct gntdev_grant_map *map = data;
+ 	unsigned int pgnr = (addr - map->pages_vm_start) >> PAGE_SHIFT;
+diff --git a/drivers/xen/privcmd.c b/drivers/xen/privcmd.c
+index 7cfc28f1bb86f..e724cc053e264 100644
+--- a/drivers/xen/privcmd.c
++++ b/drivers/xen/privcmd.c
+@@ -1658,7 +1658,7 @@ static int privcmd_mmap(struct file *file, struct vm_area_struct *vma)
+  * on a per pfn/pte basis. Mapping calls that fail with ENOENT
+  * can be then retried until success.
+  */
+-static int is_mapped_fn(pte_t *pte, unsigned long addr, void *data)
++static int is_mapped_fn(hw_pte_t *pte, unsigned long addr, void *data)
  {
- 	pte_t ptent = ptep_get(pte);
+ 	return pte_none(ptep_get(pte)) ? 0 : -EBUSY;
+ }
+diff --git a/drivers/xen/xenbus/xenbus_client.c b/drivers/xen/xenbus/xenbus_client.c
+index 27682cb5e58ab..387f97a555594 100644
+--- a/drivers/xen/xenbus/xenbus_client.c
++++ b/drivers/xen/xenbus/xenbus_client.c
+@@ -749,7 +749,7 @@ int xenbus_unmap_ring_vfree(struct xenbus_device *dev, void *vaddr)
+ EXPORT_SYMBOL_GPL(xenbus_unmap_ring_vfree);
  
-diff --git a/drivers/gpu/drm/i915/i915_mm.c b/drivers/gpu/drm/i915/i915_mm.c
-index fd89e7c7d8d6f..aab88e8edf946 100644
---- a/drivers/gpu/drm/i915/i915_mm.c
-+++ b/drivers/gpu/drm/i915/i915_mm.c
-@@ -48,7 +48,7 @@ static inline unsigned long sgt_pfn(const struct remap_pfn *r)
- 		return r->sgt.pfn + (r->sgt.curr >> PAGE_SHIFT);
+ #ifdef CONFIG_XEN_PV
+-static int map_ring_apply(pte_t *pte, unsigned long addr, void *data)
++static int map_ring_apply(hw_pte_t *pte, unsigned long addr, void *data)
+ {
+ 	struct map_ring_valloc *info = data;
+ 
+diff --git a/drivers/xen/xlate_mmu.c b/drivers/xen/xlate_mmu.c
+index 8efd7b55223fb..d7244f9f9a545 100644
+--- a/drivers/xen/xlate_mmu.c
++++ b/drivers/xen/xlate_mmu.c
+@@ -93,7 +93,7 @@ static void setup_hparams(unsigned long gfn, void *data)
+ 	info->fgfn++;
  }
  
--static int remap_sg(pte_t *pte, unsigned long addr, void *data)
-+static int remap_sg(hw_pte_t *pte, unsigned long addr, void *data)
+-static int remap_pte_fn(pte_t *ptep, unsigned long addr, void *data)
++static int remap_pte_fn(hw_pte_t *ptep, unsigned long addr, void *data)
+ {
+ 	struct remap_data *info = data;
+ 	struct page *page = info->pages[info->index++];
+@@ -269,7 +269,7 @@ struct remap_pfn {
+ 	unsigned long i;
+ };
+ 
+-static int remap_pfn_fn(pte_t *ptep, unsigned long addr, void *data)
++static int remap_pfn_fn(hw_pte_t *ptep, unsigned long addr, void *data)
  {
  	struct remap_pfn *r = data;
- 
-@@ -70,7 +70,7 @@ static int remap_sg(pte_t *pte, unsigned long addr, void *data)
- #define EXPECTED_FLAGS (VM_PFNMAP | VM_DONTEXPAND | VM_DONTDUMP)
- 
- #if IS_ENABLED(CONFIG_X86)
--static int remap_pfn(pte_t *pte, unsigned long addr, void *data)
-+static int remap_pfn(hw_pte_t *pte, unsigned long addr, void *data)
- {
- 	struct remap_pfn *r = data;
- 
+ 	struct page *page = r->pages[r->i];
 -- 
 2.47.3
 
