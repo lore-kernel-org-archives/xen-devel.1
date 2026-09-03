@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF896C624A4
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 11:43:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1406906.1640065 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C47BC624A4
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 11:43:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1406909.1640075 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x25qk-0001FY-3Z; Thu, 03 Sep 2026 11:43:22 +0000
+	id 1x25rB-0001ZN-CF; Thu, 03 Sep 2026 11:43:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1406906.1640065; Thu, 03 Sep 2026 11:43:22 +0000
+Received: by outflank-mailman (output) from mailman id 1406909.1640075; Thu, 03 Sep 2026 11:43:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x25qk-0001FR-0p; Thu, 03 Sep 2026 11:43:22 +0000
-Received: by outflank-mailman (input) for mailman id 1406906;
- Thu, 03 Sep 2026 11:43:20 +0000
+	id 1x25rB-0001ZG-8c; Thu, 03 Sep 2026 11:43:49 +0000
+Received: by outflank-mailman (input) for mailman id 1406909;
+ Thu, 03 Sep 2026 11:43:47 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x25qi-0001FD-Lf
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 11:43:20 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x25r9-0001Ye-JR
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 11:43:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x25qi-00Epyw-25
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 13:43:20 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1x25r9-00EqCc-00
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 13:43:47 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a995d3d-bab6-0a2a0a5309dd-0a2a45028086-40
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 13:43:20 +0200
-Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a995d56-bab6-0a2a0a5309dd-0a2a45049c9e-42
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 13:43:46 +0200
+Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a995d57-6ca4-0a2a45020019-d1558031d88c-3
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 13:43:19 +0200
-Received: by mail-wm1-f49.google.com with SMTP id
- 5b1f17b1804b1-49b0d78a801so18839705e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 04:43:19 -0700 (PDT)
+ id 6a995d72-b57f-0a2a45040019-d155dd34b4e4-3
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 13:43:46 +0200
+Received: by mail-wr1-f52.google.com with SMTP id
+ ffacd0b85a97d-48436251906so2351218f8f.0
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 04:43:46 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48448eea5b4sm13613689f8f.27.2026.09.03.04.43.18
+ ffacd0b85a97d-484492ce5e5sm13018385f8f.36.2026.09.03.04.43.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 03 Sep 2026 04:43:19 -0700 (PDT)
+ Thu, 03 Sep 2026 04:43:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,55 +55,57 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788435799; x=1789040599; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788435826; x=1789040626; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=dRoVP6mPAAUzl0+K2OfWrG9TPv2kIzR6dwNYvx6VPj8=;
-        b=WdyKuzsbR6Q66zSVK8NAad+jmb1XIhEOImsDSq5NvC49yM49xPDQnWi1W0k7e9cNfi
-         czwr6FicZWR0bZQ7PI5pDg+Nx+AOw2MPZCpCvfRcOz08MI5rG6b8zR4UOghne0fR9tjl
-         NLp2P+lkyWv1MdygPzU75ZD88Rt8X84qsq07FXBNqUOj3tJV+AH35PJNmTjd3YxoUiyr
-         ZpVbwPI/spHLqGvxUFXbKn1VFErdJI43PNwfZZQSTQ3oL5SAATZjMhgTDtaidvdDmHuf
-         sDSp0OOPolgLtn7z/JA3rq5AxZUWrdwCWReGVfZvLIPuTPsTmayfugbevgAl2K3OzfT9
-         vT6w==
+        bh=0ZyhfUsdFRoR5FzsVA7Ej7gYdWCaH0EjObTUL4EJH3c=;
+        b=FrIDBKz70aUmAGrLEoHBW5SSwQcocZ1xE1xY2RJ4m7QnyQ9oDgWTZ8GWkiDsDg1jur
+         ENKDAJEBG+Ch7N4+Il8Cbly7nd9EBYBAuTl1Dm4pSeRWCownGYvsgc1jLwelrAc88UNN
+         1pOE0TbGzr8JlPn/v7ULaz8Ijv8A6J+oQ54P5+ddo2cFX16492ZzXY2dj/NnEQ3EdQLx
+         0KpLhII2Yb5FWJJUFqlOhJuS7UpE7UD4282mnmdtfULR3eJroFqdID4CNd5DBktxm2Qb
+         87FcKInSycxIsoviN4lsSj2QHMu21LXp1gnzJnRgy7/Yb/kKVtraVtrbeGLP3GwYIXUi
+         rLzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788435799; x=1789040599;
+        d=1e100.net; s=20251104; t=1788435826; x=1789040626;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=dRoVP6mPAAUzl0+K2OfWrG9TPv2kIzR6dwNYvx6VPj8=;
-        b=dQSR66fsy0A501hLXAocZw+4jYp1SaZld88SCLSneAjI8fkMeyDg8keyWSkAaGpYXi
-         YLFxw+Me9Zf42zXpuYExvhdDP8268GL36qQEnJC6PnrbJi1Xn/TVEsmUv2UUfuw0WkD/
-         LZpCQKigSYpg66wB/D3K/eeRuPwNJsVafAz9507v0cX1n+cSCniqv1nVSorXZBg2Zg46
-         sJfVente7jxWiMVDCIUff74iFS6EWzcGffUStHIqylqDmZ/a83mvFSAVmQTKUMxj9PvU
-         LEIhXIIvtAeZxsW8rptY0MsuV0VuPX27U03mNmX3Lgxq1ZsmIPrxQJ/4jaPLum3pamv2
-         kGqA==
-X-Gm-Message-State: AFuF++lcL9c9Hanfu5zcFBW8fGvCKXcD0jqjEbPsfnlFkTct/H0jGon4
-	sYc6FWCnwkD8R2jHXr9gsc4u9F36a2hRNyC61U9K0Vgc46IH/uiE4yjwSY+AMlC1x+sr/QH4zzK
-	6bYBv3g==
-X-Gm-Gg: AYBFou02mMmjRwt8Gx1s9mvkpAZrmY11Zs2chmX/ZufLKpf371HDN4jNLOtgODtBPGp
-	UudTxfiV6XOK5vMG5ZmyTmEakU0H0A6mDfrdqevVQvasOQzHmTFeIAxfyFz0rdoIGdtNlC38I4m
-	eMyudhOXLCDLgNQYn7Hszo6mYl8GrRoi98I61vsRnBA1vtJOO74JxVD2ld90Sth76hi9rGpfcD9
-	UJo2UMG7MTpjBtC5hUalF9rnYT8DPSL1UQm9ElehggXGnU2wKUowu2dtHrlOvdpZKyg8UlTnYuk
-	/C75HBrOuNnIsvmt8/wfBfRKWhk0CEJbVk3MACw3JqdTlqrUl904jdCduKFOxLlSyqSvbQYVYy3
-	bWok78u6nrM+EjrkRJDSBs0oKCYN8LptC2d5+9IsbOTtkyHMEjVdO0xjb1IY3b/TeVYAQlWk/Me
-	Xf/ZCi4TXcdeoqGg7JnBP1hKUstuKQPPD17O0RDQdP2EX0tC5MBHERRVaEsbKture+s4eMbnOlo
-	C+KexygvgDarrytcknY2LqFJpKv1siHsfz+UPiVWNYv8LSxk7ZZHdAKqW/uFTJu
-X-Received: by 2002:a05:600c:a00a:b0:49c:f4e1:3135 with SMTP id 5b1f17b1804b1-49cf4e13cb7mr25162065e9.14.1788435799469;
-        Thu, 03 Sep 2026 04:43:19 -0700 (PDT)
-Message-ID: <be5f65cc-332e-4292-9b63-33196cc8ce81@suse.com>
-Date: Thu, 3 Sep 2026 13:43:18 +0200
+        bh=0ZyhfUsdFRoR5FzsVA7Ej7gYdWCaH0EjObTUL4EJH3c=;
+        b=AjxxQk3IhCrAj+mJXl20ZUDts3bgS6zBoukA7uzhE91+8QW/kU/H9o7SHx/ayuQIz1
+         5H9Swbh1f2JqS4cyOYfuU4GkfWzJH8FO4yvuSLe2Y6nnFn+oa6SqKJ5nNDrNw44LzixC
+         3F5qUgQvLV4dubeqDTEbqdBBwyhIJBBRZsVuEFXV9mjWzCs3IeTD27f6no7Y1cKo+KMt
+         2fC0VK59w1qDEjWtOx5OPqMCUUh+VDa/gYVaKComDduUhxXQaQxZ6lMK3Lsl+bvCNtrc
+         2F5OS3qy2ifAOEkR2HS5JdV4QQWuess2dj8O2i68ilgPcgxb9RXvFdD2EkwQ+5Xx3s7b
+         UN8A==
+X-Gm-Message-State: AFuF++lvbD5FVOwhVJEsmOUIOnv0Zk1z+Nm9Cx4HpiWduQXWJm9/VtAk
+	Ir5LxTZaXaGNtNY90SwdS5nFRONxGRP8cD/gUeWT4fgw+WpxWxBeMIItbpqLViMapUaj/yETZZu
+	3SbAXRA==
+X-Gm-Gg: AYBFou2i9eFPNaw8grsYHd8aYms/bYHacnyS4H+NsBnPL82h8T5fD01Svhx4vqvLLwk
+	lHreTqgxFN1vTk1xqaqyVpV9j+qxno3KtCSukjQSFZL8uc3mSEacLTJHcICRcsmDp3WV42kf6TN
+	KxU9bLtLubFskv4mVtIZDhOoGk949qIw0K605/J1URuyphKyvpZjILP5uufBTadAWR2h6JCGn5C
+	FiqfnMuDIwxCl6xbRyHuVDwknOVCcXdtasDaLEPPbfvkGjg+mPsO9epAKNH20LQ1DOHImRyFbv9
+	E/fNOYAo3iyJrAaWVNvv28Ek6nZg0Zj/Cp7g6JXoNHma63QG5SLpzMV5NMjpq9BVjLgaBLXE7aM
+	xlV91+pRgRLHNAfZg7ayTs33p7qAUHYpvE52rSxbKCBdO8VTB//YbY3YHy6hhkxKTEAjPjxrviF
+	naoaRyrU5wd6QlxoXxrn0nMInFyo87O7cMWAQ1s0fsEx+2xxkSp0pCILF3o6qj6OXcNxrh3Q9e/
+	gfdtnnnljweC1ImnJHnBY6X68V9YjSnE1VN4XtfXsGLJJ56MYjE
+X-Received: by 2002:adf:e008:0:10b0:485:847f:fd9b with SMTP id ffacd0b85a97d-48584800180mr2730636f8f.6.1788435826319;
+        Thu, 03 Sep 2026 04:43:46 -0700 (PDT)
+Message-ID: <fca27ac3-95c9-4177-a9cd-673f07230889@suse.com>
+Date: Thu, 3 Sep 2026 13:43:44 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 1/4] x86/domain: address Misra rule 11.1 violation in
- reset_stack_and_call_ind()
+Subject: [PATCH 2/4] Eclair: relax long <-> function-pointer conversion
+ deviation
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
  <roger@xenproject.org>
 References: <6d212d60-5c0b-4909-996d-5d6a4906b7e1@suse.com>
 Content-Language: en-US
@@ -133,36 +135,52 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <6d212d60-5c0b-4909-996d-5d6a4906b7e1@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1788435799-674BE2AC-3AB31209/0/0
+X-purgate-ID: tlsNG-ebf023/1788435826-512DCB50-BF442150/0/0
 X-purgate-type: clean
-X-purgate-size: 1364
+X-purgate-size: 2418
 
-Eclair dislikes both sides of the comparison to differ in noreturn
-attributes, thus deeming this a violation of "Conversions shall not be
-performed between a pointer to a function and any other type". Since gcc
-doesn't permit use of "noreturn" types used in a typecast, resort to
-typeof().
-
-No functional change intended.
+What is true for unsigned long is also true for plain/signed long, thus
+also taking care of two instances of __x86_return_thunk() being cast to
+long.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-Really Eclair's diagnosis is misleading here, and not only because of the
-missing "noreturn" there, making both sides be identical: There are no
-implicit conversions performed on this kind of pointer operands of an
-equality expression. A diagnosis of "comparison of pointers to different
-types", along the lines of what compilers use, would be more to the point.
 
---- a/xen/arch/x86/include/asm/current.h
-+++ b/xen/arch/x86/include/asm/current.h
-@@ -208,7 +208,7 @@ unsigned long get_stack_dump_bottom (uns
- /* The constraint may only specify non-call-clobbered registers. */
- #define reset_stack_and_call_ind(fn)                                    \
-     ({                                                                  \
--        (void)((fn) == (void (*)(void))NULL);                           \
-+        (void)((fn) == (typeof(dom_xen->arch.ctxt_switch->tail))NULL);  \
-         switch_stack_and_jump(fn, "INDIRECT_CALL %", "b");              \
-     })
+--- a/automation/eclair_analysis/ECLAIR/deviations.ecl
++++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+@@ -368,17 +368,17 @@ constant expressions are required.\""
+ # Series 11
+ #
  
+--doc_begin="The conversion from a function pointer to unsigned long or (void *) does not lose any information, provided that the target type has enough bits to store it."
++-doc_begin="The conversion from a function pointer to [unsigned] long or (void *) does not lose any information, provided that the target type has enough bits to store it."
+ -config=MC3A2.R11.1,casts+={safe,
+   "from(type(canonical(__function_pointer_types)))
+-   &&to(type(canonical(builtin(unsigned long)||pointer(builtin(void)))))
++   &&to(type(canonical(builtin(long)||builtin(unsigned long)||pointer(builtin(void)))))
+    &&relation(definitely_preserves_value)"
+ }
+ -doc_end
+ 
+--doc_begin="Conversion from unsigned long or (void *) to a function pointer can restore full information, provided that the source type has enough bits to restore it."
++-doc_begin="Conversion from [unsigned] long or (void *) to a function pointer can restore full information, provided that the source type has enough bits to restore it."
+ -config=MC3A2.R11.1,casts+={safe,
+-  "from(type(canonical(builtin(unsigned long)||pointer(builtin(void)))))
++  "from(type(canonical(builtin(long)||builtin(unsigned long)||pointer(builtin(void)))))
+    &&to(type(canonical(__function_pointer_types)))
+    &&relation(definitely_preserves_value)"
+ }
+--- a/docs/misra/rules.rst
++++ b/docs/misra/rules.rst
+@@ -432,8 +432,8 @@ maintainers if you want to suggest a cha
+      - All conversions to integer types are permitted if the destination
+        type has enough bits to hold the entire value. Conversions to bool
+        and void* are permitted. Conversions from 'void noreturn (*)(...)'
+-       to 'void (*)(...)' are permitted. Conversions from unsigned long or
+-       '(void *)' to a function pointer are permitted.
++       to 'void (*)(...)' are permitted. Conversions from [unsigned] long
++       or '(void *)' to a function pointer are permitted.
+        Example::
+ 
+            unsigned long func_addr = (unsigned long)&some_function;
 
 
