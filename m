@@ -4,44 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F37F4C624DE
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 18:46:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1407516.1640583 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2FF9C61DD3
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 19:09:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1407625.1640597 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2CSD-00061J-KK; Thu, 03 Sep 2026 18:46:29 +0000
+	id 1x2CoZ-0001C6-Et; Thu, 03 Sep 2026 19:09:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1407516.1640583; Thu, 03 Sep 2026 18:46:29 +0000
+Received: by outflank-mailman (output) from mailman id 1407625.1640597; Thu, 03 Sep 2026 19:09:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2CSD-000607-GZ; Thu, 03 Sep 2026 18:46:29 +0000
-Received: by outflank-mailman (input) for mailman id 1407516;
- Thu, 03 Sep 2026 16:11:08 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x2CoZ-0001Bz-C4; Thu, 03 Sep 2026 19:09:35 +0000
+Received: by outflank-mailman (input) for mailman id 1407625;
+ Thu, 03 Sep 2026 19:09:33 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1x2A1s-0003cQ-Tf
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 16:11:08 +0000
+ (envelope-from <jjherne@linux.ibm.com>) id 1x2CoX-0001Ao-B2
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 19:09:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x2A1s-006nB7-AE
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 18:11:08 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1x2CoW-001vzs-Bi
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 21:09:32 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <patchwork-bot+f2fs@kernel.org>)
- id 6a999c17-e002-0a2a0a5209dd-0a2a450ae13c-8
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 18:11:08 +0200
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <patchwork-bot+f2fs@kernel.org>)
- id 6a999c1a-f2d2-0a2a450a0019-ac6904fe8a04-3
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 18:11:07 +0200
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 60E6F60A5B;
- Thu,  3 Sep 2026 16:11:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 119AE1F00A3E;
- Thu,  3 Sep 2026 16:11:06 +0000 (UTC)
-Received: from [10.30.226.235] (localhost [IPv6:::1])
- by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 9386938119CB; Thu,  3 Sep 2026 16:10:08 +0000 (UTC)
+ (envelope-from <jjherne@linux.ibm.com>)
+ id 6a99c5d8-2eae-0a2a0a5409dd-0a2a4509bf9e-28
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 21:09:32 +0200
+Received: from [148.163.156.1] (helo=mx0a-001b2d01.pphosted.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jjherne@linux.ibm.com>)
+ id 6a99c5ea-be1a-0a2a45090019-94a39c01c8a2-3
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 21:09:31 +0200
+Received: from pps.filterd (m0353729.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 683G36et1552022; Thu, 3 Sep 2026 19:09:11 GMT
+Received: from ppma22.wdc07v.mail.ibm.com
+ (5c.69.3da9.ip4.static.sl-reverse.com [169.61.105.92])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4gbq3rpmag-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 03 Sep 2026 19:09:10 +0000 (GMT)
+Received: from pps.filterd (ppma22.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma22.wdc07v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 683IuFJp019025;
+ Thu, 3 Sep 2026 19:09:09 GMT
+Received: from smtprelay03.wdc07v.mail.ibm.com ([172.16.1.70])
+ by ppma22.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4gecjasgkn-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 03 Sep 2026 19:09:09 +0000 (GMT)
+Received: from smtpav02.dal12v.mail.ibm.com (smtpav02.dal12v.mail.ibm.com
+ [10.241.53.101])
+ by smtprelay03.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 683J8QNv28377652
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 3 Sep 2026 19:08:27 GMT
+Received: from smtpav02.dal12v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id A9E2658051;
+ Thu,  3 Sep 2026 19:09:07 +0000 (GMT)
+Received: from smtpav02.dal12v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 2712C5805E;
+ Thu,  3 Sep 2026 19:09:04 +0000 (GMT)
+Received: from [9.61.21.65] (unknown [9.61.21.65])
+ by smtpav02.dal12v.mail.ibm.com (Postfix) with ESMTP;
+ Thu,  3 Sep 2026 19:09:04 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,89 +75,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Subject:From:Date:References:In-Reply-To:To:Cc"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788451866;
-	bh=wQC/B3FS4e5cPaDkFUi05H5/4Cpx4sxh25n+vGHWmYc=;
-	h=Subject:From:Date:References:In-Reply-To:To:Cc;
-	b=cX5S97uavmnQ1oACZHN9HgQC0w4BW6l7gd3KhLLv7D3CEwvQqVkkISIabPe6cAz15
-	 lWkG+FcJx8T5bL8zvHYmPd7BTeb+q0xV22oPkTs+7zHVI76huUqtzlAazKHgiijpXC
-	 fPayLcChJfd8lQhKnDDxnDwCYBYoono4GRg6E8M/XmWnKu3w06nB/6JtY5EZEZ4JTc
-	 Ls6Rs/u56x5sozaE9TxltbKV3YH5hTFABAAIOg6efQ6qc4ZyXelz1bMHFgK7aaDnWZ
-	 9Y02WV5P78L1/Fs/n5/fmLT+8/kOHgOC2mjZC6o6yNFynXnGH6uYX4iYf9Gpt3FU4F
-	 Kd4tFkH7OtvQA==
-Content-Type: text/plain; charset="utf-8"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=pp1 header.d=ibm.com header.i="@ibm.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=pp1; bh=Mxbos8
+	yLoUG5l05cktSa/eE5AZRlKkT5dnJabdMoKZM=; b=OpgYyJ3sqPF3icuS6iTwbn
+	FOHlBKUKR6wHmG2jdtMQBw4E6g75uWShqPfqjE4eJo1AbZhL0VK4Gl0LpD86w7Si
+	rLSJTKqXe0yr6BgUOXttE496jfWlv7FFLcQmdJ4ksWR75asESR/DdAJP99xWXgwt
+	fFqEH9UtkzxHmOZImWm0FrM7f56IhNTVZ3Q+luONSgBe/oMWCUwFM1k6+rDgFENM
+	HWO8JxCIc9jzpIQJqRpSxT4lSItnf13WyMqj/OHb2L99jz40CLznrhzNPxyjEFAP
+	vIbTXcogz/KRD+5/AjpAuQYp55sazeTMlchtWevqwwZbhZPRJSAytGIw11KkgpKg
+	==
+Message-ID: <11d6e889-80f1-47ee-9335-4bf267195246@linux.ibm.com>
+Date: Thu, 3 Sep 2026 08:38:30 -0400
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 36/49] monitor: tighten monitor_printf*()
+To: =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+        qemu-devel@nongnu.org
+Cc: dave@treblig.org,
+        =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
+ <philmd@mailo.com>,
+        =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
+ <berrange@redhat.com>,
+        Markus Armbruster <armbru@redhat.com>,
+        Gerd Hoffmann <kraxel@redhat.com>,
+        "Gonglei (Arei)"
+ <arei.gonglei@huawei.com>,
+        zhenwei pi <zhenwei.pi@linux.dev>, Kevin Wolf <kwolf@redhat.com>,
+        Hanna Reitz <hreitz@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+        =?UTF-8?Q?Alex_Benn=C3=A9e?=
+ <alex.bennee@linaro.org>,
+        Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+        Ani Sinha <anisinha@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+        Laurent Vivier <lvivier@redhat.com>, Amit Shah <amit@kernel.org>,
+        Brian Cain <brian.cain@oss.qualcomm.com>,
+        David Woodhouse <dwmw2@infradead.org>, Paul Durrant <paul@xen.org>,
+        Richard Henderson <richard.henderson@linaro.org>,
+        Marcelo Tosatti <mtosatti@redhat.com>,
+        Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+        Jiri Pirko <jiri@resnulli.us>, Jason Wang <jasowangio@gmail.com>,
+        Halil Pasic <pasic@linux.ibm.com>,
+        Christian Borntraeger <borntraeger@linux.ibm.com>,
+        Eric Farman <farman@linux.ibm.com>,
+        Matthew Rosato <mjrosato@linux.ibm.com>,
+        Ilya Leoshkevich <iii@linux.ibm.com>,
+        David Hildenbrand <david@kernel.org>,
+        Cornelia Huck <cohuck@redhat.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Anthony PERARD <anthony@xenproject.org>,
+        "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+        Hyman Huang <infra.ai.cloud@bitdeer.com>, Peter Xu <peterx@redhat.com>,
+        Fabiano Rosas <farosas@suse.de>,
+        Samuel Thibault <samuel.thibault@ens-lyon.org>,
+        Stefan Berger <stefanb@linux.vnet.ibm.com>,
+        Zhao Liu <zhao1.liu@intel.com>, Nicholas Piggin <npiggin@gmail.com>,
+        Chinmay Rath <rathc@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>,
+        Harsh Prateek Bora <harshpb@linux.ibm.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Alistair Francis <alistair.francis@wdc.com>,
+        Weiwei Li
+ <liwei1518@gmail.com>,
+        Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+        Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+        Chao Liu <chao.liu@processmission.com>,
+        Yoshinori Sato <yoshinori.sato@nifty.com>,
+        Artyom Tarasenko <atar4qemu@gmail.com>,
+        Max Filippov <jcmvbkbc@gmail.com>,
+        Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org,
+        kvm@vger.kernel.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
+        xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org
+References: <20260825-qemu-no-hmp-v4-0-af60857c2fbe@redhat.com>
+ <20260825-qemu-no-hmp-v4-36-af60857c2fbe@redhat.com>
+Content-Language: en-US
+From: "Jason J. Herne" <jjherne@linux.ibm.com>
+In-Reply-To: <20260825-qemu-no-hmp-v4-36-af60857c2fbe@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Subject: Re: [f2fs-dev] [PATCH v2 00/14] Remove PG_private by using
- page/folio->private checks instead
-From: patchwork-bot+f2fs@kernel.org
-Message-Id: 
- <178845180715.3423963.14220073137991024856.git-patchwork-notify@kernel.org>
-Date: Thu, 03 Sep 2026 16:10:07 +0000
-References: <20260831-remove-pg_private-v2-0-3668159cd9e8@nvidia.com>
-In-Reply-To: <20260831-remove-pg_private-v2-0-3668159cd9e8@nvidia.com>
-To: Zi Yan <ziy@nvidia.com>
-Cc: david@kernel.org, willy@infradead.org, akpm@linux-foundation.org,
- muchun.song@linux.dev, ljs@kernel.org, liam@infradead.org, vbabka@kernel.org,
- rppt@kernel.org, surenb@google.com, mhocko@suse.com,
- baolin.wang@linux.alibaba.com, nico.pache@linux.dev, ryan.roberts@arm.com,
- dev.jain@arm.com, baohua@kernel.org, lance.yang@linux.dev,
- usama.arif@linux.dev, gourry@gourry.net, ying.huang@linux.alibaba.com,
- apopple@nvidia.com, hannes@cmpxchg.org, qi.zheng@linux.dev,
- shakeel.butt@linux.dev, kasong@tencent.com, mark.rutland@arm.com,
- irogers@google.com, jack@suse.cz, linux-doc@vger.kernel.org,
- amarkuze@redhat.com, peterz@infradead.org, kexec@lists.infradead.org,
- dave.hansen@linux.intel.com, ruirui.yang@linux.dev, adrian.hunter@intel.com,
- linux-mm@kvack.org, hongbohbli@tencent.com, hpa@zytor.com,
- guochunhai@vivo.com, skhan@linuxfoundation.org, ceph-devel@vger.kernel.org,
- baoquan.he@linux.dev, matthew.brost@intel.com, anna@kernel.org,
- sstabellini@kernel.org, zbestahu@gmail.com, rakie.kim@sk.com,
- minchan@kernel.org, richard@nod.at, x86@kernel.org, ebiggers@kernel.org,
- alexander.shishkin@linux.intel.com, mingo@redhat.com, slava@dubeyko.com,
- weixugc@google.com, yukuai@fygo.io, xen-devel@lists.xenproject.org,
- xiang@kernel.org, magiclinan@didiglobal.com, mhiramat@kernel.org,
- joshua.hahnjy@gmail.com, xiao@kernel.org, byungchul@sk.com,
- james.clark@linaro.org, acme@kernel.org, linux-raid@vger.kernel.org,
- linux-fscrypt@vger.kernel.org, bp@alien8.de, rostedt@goodmis.org,
- linux-mtd@lists.infradead.org, axelrasmussen@google.com,
- jefflexu@linux.alibaba.com, namhyung@kernel.org, jaegeuk@kernel.org,
- yuanchu@google.com, idryomov@gmail.com, osalvador@suse.de, jgross@suse.com,
- pratyush@kernel.org, linux-nfs@vger.kernel.org, tytso@mit.edu,
- oleksandr_tyshchenko@epam.com, song@kernel.org, corbet@lwn.net,
- pasha.tatashin@soleen.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-perf-users@vger.kernel.org,
- senozhatsky@chromium.org, tglx@kernel.org, jolsa@kernel.org,
- linux-fsdevel@vger.kernel.org, mathieu.desnoyers@efficios.com,
- linux-trace-kernel@vger.kernel.org, linux-erofs@lists.ozlabs.org,
- trondmy@kernel.org
-X-purgate-ID: tlsNG-4011c0/1788451868-5A5DBCFC-31A78567/0/0
+X-TM-AS-GCONF: 00
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Authority-Analysis: v=2.4 cv=EIc2FVZC c=1 sm=1 tr=0 ts=6a99c5d7 cx=c_pps
+ a=5BHTudwdYE3Te8bg5FgnPg==:117 a=5BHTudwdYE3Te8bg5FgnPg==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=uAbxVGIbfxUO_5tXvNgY:22 a=20KFwNOVAAAA:8
+ a=VnNF1IyMAAAA:8 a=mY-fmJR8b8s-Z9VvxFgA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAzMDE2NiBTYWx0ZWRfXw2J+kTXJGfn1
+ WcWhJsEEKsprqlfsqYgONRC4tPrPl/KW2YAz+ydFFPqURQAQrEhHyaP1NbTccY3EX4bWXK+6Wfh
+ PZPoupQ6vroqMPTRxYPXyvIlo9Pde8cY9PZtrRMd1WLBLcNgNkdxGXUjOf1al1kQlCaT/fgUheP
+ SextymGwkZ+1EyES9LOZGAeq2zltAJg0fzgcv3jDIXME72pp30Fxe/iDyhp5UgQ9hakCCokkZFY
+ +cPalHfuleHacrmfeiI5UMMqjUbkCq4OA51vdlSvSxxi9ZhQ5TTNEKTDu7BMXTZlaEhpS/8mZ2a
+ kKpHFgwFEH89wGxyzHwgozJygrwONovF7HchBWxVz8ofB3EgcOTZxt19MgnlkyljD038D89HabF
+ IuV64srRATcXIQUfjgW2xI7R6EWyQiXukBD4SrphNm8Aaxd7V3oevIPqBqTzL0NaZKvUSsm0X5J
+ UfHxa3svtK4RJvpmOTw==
+X-Proofpoint-GUID: EDEel76a6KP7UXpBN4hYy29pTPMb3EXw
+X-Proofpoint-ORIG-GUID: D_tguMhPXt_pKc1lezcNMaHsq0mH3uUL
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAzMDE2NiBTYWx0ZWRfX/J2dzAAJu03S
+ g1YtSBdlCCJIE7nHnAUiSZ725psmXf0F20KoIOuW/wWMyvfzAGxXFvNMLfWO3M7cJsxQ023Xw5v
+ v10N19VuKtRa4pfcSVV9QCnTqUVG/vI=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-03_05,2026-09-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 impostorscore=0 suspectscore=0 priorityscore=1501 clxscore=1015
+ phishscore=0 spamscore=0 adultscore=0 lowpriorityscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609030166
+X-purgate-ID: tlsNG-bad1c0/1788462572-BD2CC034-BE5CEC81/0/0
 X-purgate-type: clean
-X-purgate-size: 707
+X-purgate-size: 832
 
-Hello:
 
-This patch was applied to jaegeuk/f2fs.git (dev)
-by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Mon, 31 Aug 2026 15:25:23 -0400 you wrote:
-> Hi all,
+On 8/25/26 3:09 PM, Marc-André Lureau wrote:
+> Rename monitor_printf->monitor_hmp_printf, monitor_vprintf->
+> monitor_hmp_vprintf, and monitor_printc->monitor_hmp_printc, changing
+> the first parameter from Monitor * to MonitorHMP * to enforce type
+> safety. The implementation is also simplified: monitor_hmp_vprintf now
+> directly calls g_strdup_vprintf + monitor_puts, removing the virtual
+> dispatch via moncls->vprintf.
 > 
-> This patchset removes PG_private to make space for upcoming PG_folio
-> (reserved as __PG_folio) for identifying pages from a folio (more details
-> in Note below). Instead of checking PG_private, all code is changed to
-> check page/folio->private != NULL instead.
+> The dev_print() callbacks are temporarily using the MONITOR_HMP(mon)
+> cast, they are fixed in the following commits.
 > 
-> [...]
-
-Here is the summary with links:
-  - [f2fs-dev,v2,06/14] f2fs: stop using PG_private
-    https://git.kernel.org/jaegeuk/f2fs/c/5ad9409a9533
-
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
+> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+> ---
+> ...
+>   hw/s390x/s390-skeys.c                   |   9 +-
+>   hw/s390x/s390-stattrib.c                |  20 +--
+The s390 pieces,
+Reviewed-by: Jason J. Herne <jjherne@linux.ibm.com>
 
 
 
