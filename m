@@ -4,42 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 534A6C624DA
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 14:44:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1407378.1640516 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98824C624D6
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 15:03:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1407436.1640524 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x28fU-0001kc-LY; Thu, 03 Sep 2026 14:43:56 +0000
+	id 1x28yI-00079H-9m; Thu, 03 Sep 2026 15:03:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1407378.1640516; Thu, 03 Sep 2026 14:43:56 +0000
+Received: by outflank-mailman (output) from mailman id 1407436.1640524; Thu, 03 Sep 2026 15:03:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x28fU-0001kV-GP; Thu, 03 Sep 2026 14:43:56 +0000
-Received: by outflank-mailman (input) for mailman id 1407378;
- Thu, 03 Sep 2026 14:43:54 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x28yI-00079A-6x; Thu, 03 Sep 2026 15:03:22 +0000
+Received: by outflank-mailman (input) for mailman id 1407436;
+ Thu, 03 Sep 2026 15:03:21 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <bertrand.marquis@arm.com>) id 1x28fS-0001Wj-Op
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 14:43:54 +0000
+ (envelope-from <steve.wahl@hpe.com>) id 1x28yE-000794-U0
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 15:03:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x28fS-00Ap6r-5U
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 16:43:54 +0200
+ id 1x28yD-0048ez-TX
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 17:03:17 +0200
 Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <bertrand.marquis@arm.com>)
- id 6a9987a6-e002-0a2a0a5209dd-0a2a4503a126-8
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 16:43:54 +0200
-Received: from [217.140.110.172] (helo=foss.arm.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
- (envelope-from <bertrand.marquis@arm.com>)
- id 6a9987a9-fae8-0a2a45030019-d98c6eacc06c-1
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 16:43:53 +0200
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3CE5E1596;
- Thu,  3 Sep 2026 07:43:49 -0700 (PDT)
-Received: from C3HXLD123V.arm.com (unknown [10.57.7.135])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DA9213F673;
- Thu,  3 Sep 2026 07:43:51 -0700 (PDT)
+ (envelope-from <steve.wahl@hpe.com>)
+ id 6a998c25-2eae-0a2a0a5409dd-0a2a4503c6f0-44
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 17:03:12 +0200
+Received: from [148.163.147.86] (helo=mx0a-002e3701.pphosted.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <steve.wahl@hpe.com>)
+ id 6a998c2e-fae8-0a2a45030019-94a39356b20e-3
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 17:03:11 +0200
+Received: from pps.filterd (m0134421.ppops.net [127.0.0.1])
+ by mx0b-002e3701.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 683DC2CB2638187; Thu, 3 Sep 2026 15:02:42 GMT
+Received: from p1lg14881.it.hpe.com (p1lg14881.it.hpe.com [16.230.97.202])
+ by mx0b-002e3701.pphosted.com (PPS) with ESMTPS id 4gf9easqk8-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Thu, 03 Sep 2026 15:02:42 +0000 (GMT)
+Received: from p1lg14885.dc01.its.hpecorp.net (unknown [10.119.18.236])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by p1lg14881.it.hpe.com (Postfix) with ESMTPS id 1DE43806B11;
+ Thu,  3 Sep 2026 15:02:30 +0000 (UTC)
+Received: from swahl-home.5wahls.com (unknown [16.231.227.39])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest
+ SHA256) (Client did not present a certificate)
+ by p1lg14885.dc01.its.hpecorp.net (Postfix) with ESMTPS id 947A6804D13;
+ Thu,  3 Sep 2026 15:02:26 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,296 +64,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1788446633; bh=2RiwZlyuUPZr3BL6OvfCnly9DXHp8ba50e2fDBTUIes=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=qUyqMKitmr54/ha23EVQ7gzVumVCjg9/UqtgVxkMlMyEFBP+egP62l2+taWCE/6fO
-	 dQlOaK+vGHPJJXq4JD23x4YuEZ4hE5ERmGlG7grsWFE6zyaOVuC7xmL5aig7AS1nKX
-	 vb3jNSdbTbj+MCnNduVxF6UryG0hN+7lsKLR/Njo=
-From: Bertrand Marquis <bertrand.marquis@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
-	Jens Wiklander <jenswi@kernel.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH v3 6/6] xen/arm: ffa: Deliver VM-to-VM notifications locally
-Date: Thu,  3 Sep 2026 16:43:31 +0200
-Message-ID: <24033eeb87446cda8c91f27a453317417328fd5f.1788268510.git.bertrand.marquis@arm.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <cover.1788268510.git.bertrand.marquis@arm.com>
-References: <cover.1788268510.git.bertrand.marquis@arm.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=pps0720 header.d=hpe.com header.i="@hpe.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hpe.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=pps0720; bh=6TAteaV3/Nh3xyO8rweCVU4LF2
+	M9k1ERu5CdY2OPHF8=; b=RkG3JGUfihRR+cJ8YXXVtmF8EDz0rk9vtdI0qkgnCr
+	KByWQ6Yn7es8zEketN67z6HcIOjrf2T+CYij5Wl1x2Evl64YQgUwLrbOxZKnCV4j
+	UaD10sRn/DmuE48xTbmoT9Z1GXcNv9S5/KDDCCU7tcEMJA2RTntWnZFIdF80LJT4
+	vYw7KmAvZ9kqYxf+S4WxJZSFr5nh8OVggqljNUc9JW1+5ZpUDbv7Bx0fqOApM+fL
+	yM2hwQPT9lq6WSvo9VzcKVaRtWECxTCdZe4vTuWcKqu6M1DdoCxPIB661BQ0tjDa
+	nfcoubf9v8JItVmqbnQIOy/Ys5jrgSU8rUk/tcIyfPAQ==
+Date: Thu, 3 Sep 2026 10:02:24 -0500
+From: Steve Wahl <steve.wahl@hpe.com>
+To: Daniil Tatianin <d-tatianin@yandex-team.ru>
+Cc: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+        Daniil Tatianin <99danilt@gmail.com>, "H. Peter Anvin" <hpa@zytor.com>,
+        Steve Wahl <steve.wahl@hpe.com>, Justin Ernst <justin.ernst@hpe.com>,
+        Kyle Meyer <kyle.meyer@hpe.com>,
+        Dimitri Sivanich <dimitri.sivanich@hpe.com>,
+        Russ Anderson <russ.anderson@hpe.com>, Juergen Gross <jgross@suse.com>,
+        Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+        xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] x86/apic: Remove dead disable_esr machinery
+Message-ID: <apmMACewurxfEIM4@swahl-home.5wahls.com>
+References: <20260902220124.2931854-1-d-tatianin@yandex-team.ru>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1788446634-74E874E9-6A154D21/0/0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260902220124.2931854-1-d-tatianin@yandex-team.ru>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAzMDEzMSBTYWx0ZWRfXzl0gP59njn+0
+ O+jTJY1gjEqhGkSbF5NnrvLif0btpqRDfsySduIvfoTlLTLoYfZ7lI0bjFDDeo2t265Hxt/y+Yk
+ 82IvK34GeTEXpTjeWTiZpKWpye0Y66LUzILkICdCsWW4GW0ewSTRDgS5Me5SxT4WGZ0KQJL/3KX
+ YCSV3BP/wZsTpy9ERf51YovIRaKYXcov/L06M4UDAcFByPLOa7iR/NINkTESdxuW9z4Lp687Or2
+ 703YATDyRl5tK3sZkZ7UKZFJ/x7Qny+vreovcX20T/GQ3xQfXss6VzvaFdSmuJmrig7M5PZedtt
+ ka1BSn1iN5DvHMZISr8egkMTyNwpzhvG5eSj+t2RjCNUMqay0nlOCyggflAy5DQslkyVB9GQ+HR
+ 8gcwsVD/raOGpwYR0pgF7atSje01laawPLedOCHK72SGfQwdVzz1FM6bij+goSmND+i+hlRXPg+
+ PtlHGBENFImzXggN+hA==
+X-Proofpoint-GUID: KRbW7X3Xe2iRh7ECSVMrgjSsOhtLl8wD
+X-Authority-Analysis: v=2.4 cv=Ws8b99fv c=1 sm=1 tr=0 ts=6a998c12 cx=c_pps
+ a=FAnPgvRYq/vnBSvlTDCQOQ==:117 a=FAnPgvRYq/vnBSvlTDCQOQ==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=gQcMVamqm3wCPoSYhaRC:22 a=ay80y3fxfMS_JZZz1qJy:22 a=pGLkceISAAAA:8
+ a=6R7veym_AAAA:8 a=MvuuwTCpAAAA:8 a=NplOCkrURqmMbNQE9EIA:9 a=CjuIK1q_8ugA:10
+ a=ILCOIF4F_8SzUMnO7jNM:22
+X-Proofpoint-ORIG-GUID: KRbW7X3Xe2iRh7ECSVMrgjSsOhtLl8wD
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAzMDEzMSBTYWx0ZWRfXz2ORE9b1HUyF
+ lz4pQx+2MQY25VsJoPkhml4i1XtXcF2mMwlFlByyBlDylHNtfbOJ/ymuM0jnE2QlqTjC07OLI7z
+ BGQ/mmLPi1+sv2xbrAfivFTHh1HMlA0=
+X-HPE-SCL: -1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-03_04,2026-09-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 bulkscore=0 priorityscore=1501 clxscore=1011 suspectscore=0
+ adultscore=0 phishscore=0 lowpriorityscore=0 malwarescore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609030131
+X-purgate-ID: tlsNG-33051d/1788447792-76EF74E9-86362B09/0/0
 X-purgate-type: clean
-X-purgate-size: 9857
+X-purgate-size: 1165
 
-VM notification binding and pending tracking exist for non-secure
-endpoints, but FFA_NOTIFICATION_SET still only forwards secure
-destinations to the SPMC. Non-secure VMs therefore cannot receive
-notifications from other VMs. Local NPI delivery also needs explicit
-re-arm tracking so repeated raises are not lost while the interrupt is
-already pending.
+On Thu, Sep 03, 2026 at 01:01:23AM +0300, Daniil Tatianin wrote:
+> From: Daniil Tatianin <99danilt@gmail.com>
+> 
+> apic::disable_esr was a quirk for the 32-bit NUMA-Q, Summit, ES7000 and
+> bigsmp platforms, which left the local APIC error status register alone
+> because "something untraceable" produced bad interrupts on those
+> machines. NUMA-Q, Summit and ES7000 went away in 2014 with commit
+> b5660ba76b41 ("x86, platforms: Remove NUMAQ"), commit 7cf6c94591bb
+> ("x86, apic: Remove support for IBM Summit/EXA chipset") and commit
+> 58f5d2d44883 ("x86, apic: Remove support for ia32-based Unisys ES7000"),
+> and the last setter went with commit 0abf508675c0 ("x86/smp: Drop
+> 32-bit "bigsmp" machine support"). Every remaining APIC driver
+> initializes the flag to zero.
+> 
+> Remove the flag, the ESR setup bypass keyed on it and the 32-bit only
+> ESR clearing hammer in setup_local_APIC(), which was gated on the same
+> flag and therefore equally dead.
+> 
+> No functional changes.
+> 
+> Signed-off-by: Daniil Tatianin <d-tatianin@yandex-team.ru>
 
-Add a local VM notification delivery path for non-secure destinations.
-notification_set_vm() resolves the destination endpoint, verifies that
-every requested bit is bound to the sender, sets the receiver's
-vm_pending bitmap under notif_lock, and raises an NPI only when local
-pending state is not already armed.
+Acked-by: Steve Wahl <steve.wahl@hpe.com>
 
-Track whether a local NPI is already armed with notif_irq_raised,
-clear that state once both VM and hypervisor pending bitmaps are
-drained, and keep notif_lock held across the VM notification injection
-attempt. If no destination vCPU is online, leave the pending bits set
-and keep notif_irq_raised clear so delivery can be retried later.
-Also expose firmware notification availability so FFA_FEATURES only
-advertises notification support when it is actually provided by the
-firmware or by CONFIG_FFA_VM_TO_VM.
 
-Functional impact: when CONFIG_FFA_VM_TO_VM is enabled, non-secure
-FFA_NOTIFICATION_SET delivers VM-to-VM notifications locally and keeps
-NPI delivery reliable across repeated raises.
-
-Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
----
-Changes since v2:
-- remove redundant irq raised cleanup (Jens)
-
-Changes since v1:
-- serialize notification_set_vm() state updates with the NPI attempt
-- keep pending VM notifications set when local injection fails
----
- xen/arch/arm/tee/ffa.c         | 24 ++++++++--
- xen/arch/arm/tee/ffa_notif.c   | 84 ++++++++++++++++++++++++++++++++--
- xen/arch/arm/tee/ffa_private.h | 17 ++++---
- 3 files changed, 107 insertions(+), 18 deletions(-)
-
-diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
-index 1fe33f26454a..7fe021049cba 100644
---- a/xen/arch/arm/tee/ffa.c
-+++ b/xen/arch/arm/tee/ffa.c
-@@ -39,8 +39,13 @@
-  * o FFA_MSG_SEND_DIRECT_REQ:
-  *   - only supported from a VM to an SP
-  * o FFA_NOTIFICATION_*:
-+ *   - only supported when firmware notifications are enabled or VM-to-VM
-+ *     support is built in
-  *   - only supports global notifications, that is, per vCPU notifications
-- *     are not supported
-+ *     are not supported and secure per-vCPU notification information is
-+ *     not forwarded
-+ *   - the source endpoint ID reported for a notification may no longer
-+ *     exist by the time the receiver consumes it
-  *   - doesn't support signalling the secondary scheduler of pending
-  *     notification for secure partitions
-  *   - doesn't support notifications for Xen itself
-@@ -245,6 +250,8 @@ static void handle_features(struct cpu_user_regs *regs)
-     uint32_t a1 = get_user_reg(regs, 1);
-     struct domain *d = current->domain;
-     struct ffa_ctx *ctx = d->arch.tee;
-+    bool notif_supported = IS_ENABLED(CONFIG_FFA_VM_TO_VM) ||
-+                           ffa_notif_fw_enabled();
- 
-     /*
-      * FFA_FEATURES defines w2 as input properties only for specific
-@@ -343,10 +350,16 @@ static void handle_features(struct cpu_user_regs *regs)
- 
-         break;
-     case FFA_FEATURE_NOTIF_PEND_INTR:
--        ffa_set_regs_success(regs, GUEST_FFA_NOTIF_PEND_INTR_ID, 0);
-+        if ( notif_supported )
-+            ffa_set_regs_success(regs, GUEST_FFA_NOTIF_PEND_INTR_ID, 0);
-+        else
-+            ffa_set_regs_error(regs, FFA_RET_NOT_SUPPORTED);
-         break;
-     case FFA_FEATURE_SCHEDULE_RECV_INTR:
--        ffa_set_regs_success(regs, GUEST_FFA_SCHEDULE_RECV_INTR_ID, 0);
-+        if ( notif_supported )
-+            ffa_set_regs_success(regs, GUEST_FFA_SCHEDULE_RECV_INTR_ID, 0);
-+        else
-+            ffa_set_regs_error(regs, FFA_RET_NOT_SUPPORTED);
-         break;
-     case FFA_PARTITION_INFO_GET_REGS:
-         if ( ACCESS_ONCE(ctx->guest_vers) >= FFA_VERSION_1_2 )
-@@ -361,7 +374,10 @@ static void handle_features(struct cpu_user_regs *regs)
-     case FFA_NOTIFICATION_SET:
-     case FFA_NOTIFICATION_INFO_GET_32:
-     case FFA_NOTIFICATION_INFO_GET_64:
--        ffa_set_regs_success(regs, 0, 0);
-+        if ( notif_supported )
-+            ffa_set_regs_success(regs, 0, 0);
-+        else
-+            ffa_set_regs_error(regs, FFA_RET_NOT_SUPPORTED);
-         break;
-     default:
-         ffa_set_regs_error(regs, FFA_RET_NOT_SUPPORTED);
-diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.c
-index a841c8f8d747..4ca2f75605bb 100644
---- a/xen/arch/arm/tee/ffa_notif.c
-+++ b/xen/arch/arm/tee/ffa_notif.c
-@@ -21,6 +21,11 @@ static bool __ro_after_init fw_notif_enabled;
- static unsigned int __ro_after_init notif_sri_irq;
- static DEFINE_SPINLOCK(notif_info_lock);
- 
-+bool ffa_notif_fw_enabled(void)
-+{
-+    return fw_notif_enabled;
-+}
-+
- static bool inject_notif_pending(struct domain *d)
- {
-     struct vcpu *v;
-@@ -107,6 +112,55 @@ out_unlock:
-     return ret;
- }
- 
-+/*
-+ * Deliver a VM-to-VM notification. ctx->notif.notif_lock protects
-+ * vm_bind/vm_pending so callers must not hold it already.
-+ */
-+static int32_t notification_set_vm(uint16_t dst_id, uint16_t src_id,
-+                                   uint32_t flags, uint64_t bitmap)
-+{
-+    struct domain *dst_d;
-+    struct ffa_ctx *dst_ctx;
-+    unsigned int id;
-+    int32_t ret;
-+
-+    if ( flags )
-+        return FFA_RET_INVALID_PARAMETERS;
-+
-+    ret = ffa_endpoint_domain_lookup(dst_id, &dst_d, &dst_ctx);
-+    if ( ret )
-+        return ret;
-+
-+    ret = FFA_RET_OK;
-+
-+    spin_lock(&dst_ctx->notif.notif_lock);
-+
-+    for ( id = 0; id < FFA_NUM_VM_NOTIF; id++ )
-+    {
-+        if ( !(bitmap & BIT(id, ULL)) )
-+            continue;
-+
-+        if ( dst_ctx->notif.vm_bind[id] != src_id )
-+        {
-+            ret = FFA_RET_DENIED;
-+            goto out_unlock;
-+        }
-+    }
-+
-+    dst_ctx->notif.vm_pending |= bitmap;
-+    if ( !dst_ctx->notif.notif_irq_raised &&
-+         (dst_ctx->notif.vm_pending || dst_ctx->notif.hyp_pending) &&
-+         inject_notif_pending(dst_d) )
-+        dst_ctx->notif.notif_irq_raised = true;
-+
-+out_unlock:
-+    spin_unlock(&dst_ctx->notif.notif_lock);
-+
-+    rcu_unlock_domain(dst_d);
-+
-+    return ret;
-+}
-+
- int32_t ffa_handle_notification_bind(struct cpu_user_regs *regs)
- {
-     struct domain *d = current->domain;
-@@ -288,16 +342,28 @@ void ffa_handle_notification_get(struct cpu_user_regs *regs)
- 
-     if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
-     {
-+        bool pending;
-+
-         spin_lock(&ctx->notif.notif_lock);
- 
-         if ( (flags & FFA_NOTIF_FLAG_BITMAP_HYP) && ctx->notif.hyp_pending )
-         {
-             w7 = ctx->notif.hyp_pending;
-             ctx->notif.hyp_pending = 0;
--            if ( !ctx->notif.vm_pending )
--                ctx->notif.notif_irq_raised = false;
-         }
- 
-+        if ( (flags & FFA_NOTIF_FLAG_BITMAP_VM) && ctx->notif.vm_pending )
-+        {
-+            w4 = (uint32_t)(ctx->notif.vm_pending & GENMASK(31, 0));
-+            w5 = (uint32_t)((ctx->notif.vm_pending >> 32) & GENMASK(31, 0));
-+            ctx->notif.vm_pending = 0;
-+        }
-+
-+        pending = (ctx->notif.hyp_pending != 0) ||
-+                  (ctx->notif.vm_pending != 0);
-+        if ( !pending )
-+            ctx->notif.notif_irq_raised = false;
-+
-         spin_unlock(&ctx->notif.notif_lock);
-     }
- 
-@@ -323,9 +389,17 @@ int32_t ffa_handle_notification_set(struct cpu_user_regs *regs)
-     if ( flags )
-         return FFA_RET_INVALID_PARAMETERS;
- 
--    if ( FFA_ID_IS_SECURE(dest_id) && fw_notif_enabled )
--        return ffa_simple_call(FFA_NOTIFICATION_SET, src_dst, flags, bitmap_lo,
--                               bitmap_hi);
-+    if ( FFA_ID_IS_SECURE(dest_id) )
-+    {
-+        if ( fw_notif_enabled )
-+            return ffa_simple_call(FFA_NOTIFICATION_SET, src_dst, flags,
-+                                   bitmap_lo, bitmap_hi);
-+    }
-+    else if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
-+    {
-+        return notification_set_vm(dest_id, caller_id, flags,
-+                                   ((uint64_t)bitmap_hi << 32) | bitmap_lo);
-+    }
- 
-     return FFA_RET_NOT_SUPPORTED;
- }
-diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_private.h
-index 30c064e2dc30..7096207b0528 100644
---- a/xen/arch/arm/tee/ffa_private.h
-+++ b/xen/arch/arm/tee/ffa_private.h
-@@ -340,20 +340,18 @@ struct ffa_ctx_notif {
-     uint64_t vm_pending;
- 
-     /*
--     * Source endpoint bound to each VM notification ID (0 means unbound).
-+     * Tracks whether an NPI has been raised for local pending notifications.
-+     * Protected by notif_lock.
-      */
--    uint16_t vm_bind[FFA_NUM_VM_NOTIF];
-+    bool notif_irq_raised;
- 
-     /*
--     * Lock protecting the hypervisor-managed notification state.
-+     * Source endpoint bound to each VM notification ID (0 means unbound).
-      */
--    spinlock_t notif_lock;
-+    uint16_t vm_bind[FFA_NUM_VM_NOTIF];
- 
--    /*
--     * Tracks whether a local notification pending interrupt was raised.
--     * Protected by notif_lock.
--     */
--    bool notif_irq_raised;
-+    /* Lock protecting local notification state. */
-+    spinlock_t notif_lock;
- 
-     /*
-      * Bitmap of pending hypervisor notifications (for HYP bitmap queries).
-@@ -495,6 +493,7 @@ void ffa_notif_init(void);
- void ffa_notif_init_interrupt(void);
- int ffa_notif_domain_init(struct domain *d);
- void ffa_notif_domain_destroy(struct domain *d);
-+bool ffa_notif_fw_enabled(void);
- 
- int32_t ffa_handle_notification_bind(struct cpu_user_regs *regs);
- int32_t ffa_handle_notification_unbind(struct cpu_user_regs *regs);
 -- 
-2.53.0
-
+Steve Wahl, Hewlett Packard Enterprise
 
