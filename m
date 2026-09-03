@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39D1AC624D6
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 14:44:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1407374.1640489 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45E46C61DD3
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 14:44:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1407376.1640507 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x28fP-0000z5-Ku; Thu, 03 Sep 2026 14:43:51 +0000
+	id 1x28fS-0001TD-AP; Thu, 03 Sep 2026 14:43:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1407374.1640489; Thu, 03 Sep 2026 14:43:51 +0000
+Received: by outflank-mailman (output) from mailman id 1407376.1640507; Thu, 03 Sep 2026 14:43:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x28fP-0000yr-H5; Thu, 03 Sep 2026 14:43:51 +0000
-Received: by outflank-mailman (input) for mailman id 1407374;
- Thu, 03 Sep 2026 14:43:49 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x28fS-0001SI-6S; Thu, 03 Sep 2026 14:43:54 +0000
+Received: by outflank-mailman (input) for mailman id 1407376;
+ Thu, 03 Sep 2026 14:43:53 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <bertrand.marquis@arm.com>) id 1x28fN-0000kY-Js
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 14:43:49 +0000
+ (envelope-from <bertrand.marquis@arm.com>) id 1x28fR-0001De-4Y
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 14:43:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x28fN-0045Cl-0K
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 16:43:49 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x28fQ-00Ap6r-HT
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 16:43:52 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <bertrand.marquis@arm.com>)
- id 6a998799-bab6-0a2a0a5309dd-0a2a4508ed7e-32
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 16:43:48 +0200
+ id 6a998797-e002-0a2a0a5209dd-0a2a4504af4a-32
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 16:43:52 +0200
 Received: from [217.140.110.172] (helo=foss.arm.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
  (envelope-from <bertrand.marquis@arm.com>)
- id 6a9987a4-f659-0a2a45080019-d98c6eacd0c0-1
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 16:43:48 +0200
+ id 6a9987a7-b57f-0a2a45040019-d98c6eac884c-1
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 16:43:52 +0200
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EA32E1596;
- Thu,  3 Sep 2026 07:43:43 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A1BE01650;
+ Thu,  3 Sep 2026 07:43:47 -0700 (PDT)
 Received: from C3HXLD123V.arm.com (unknown [10.57.7.135])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6269A3F673;
- Thu,  3 Sep 2026 07:43:46 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 123683F673;
+ Thu,  3 Sep 2026 07:43:49 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,11 +53,11 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1788446627; bh=1qC+KeWmCIuBxYNLKqeIe9W9yoXmdFcEs5sm74Rmt9Q=;
+	t=1788446631; bh=pa6oZ8m/24AdXnyLzD3DBAmh8KUG2PzE4sIQhu9ry14=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=CA6AvtqkAIE0H3PwHE+KDhP0lxFY63e/bqCYni+vjHqXGjOhHqO2/KE+eho2nOh5Z
-	 Gu4ZLmaxiVFWUReZZkehpC1/bFL2n6lcdD4bM6wV9apiT14j3t1pqZVATM1/kk8ZtY
-	 rsPekRlWrlFaohTbP6Rk6RVEvoaguYMOcBGt1K+I=
+	b=OGyb6v0ZeL6+rEj4lNyQK7K8LIkgDb74qkB/mDgcShYXm7n1ZdWBM1aTRxbC7hraq
+	 nDrvbQFoLIb07t6/c9MzbfaJ+m6aO7iO+tBOusMSh26oLb+1mUp7rMjDL4iKL6OHKR
+	 BrvH3LLDdMWYVmSvdGI2O9locGZAG4PAIsrplCjY=
 From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
@@ -66,167 +66,236 @@ Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
 	Julien Grall <julien@xen.org>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Jens Wiklander <jens.wiklander@linaro.org>
-Subject: [PATCH v3 3/6] xen/arm: ffa: Tighten notification parameter validation
-Date: Thu,  3 Sep 2026 16:43:28 +0200
-Message-ID: <980875f99fe01ea85f2e453ea447fd14f07c5f5a.1788268510.git.bertrand.marquis@arm.com>
+Subject: [PATCH v3 5/6] xen/arm: ffa: Track VM notification bindings locally
+Date: Thu,  3 Sep 2026 16:43:30 +0200
+Message-ID: <3b679d45c4a3fda4763112bc8570fa53129f3883.1788268510.git.bertrand.marquis@arm.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1788268510.git.bertrand.marquis@arm.com>
 References: <cover.1788268510.git.bertrand.marquis@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1788446628-D4B7187B-4489A60F/0/0
+X-purgate-ID: tlsNG-ebf023/1788446632-C26CAB50-5F136E49/0/0
 X-purgate-type: clean
-X-purgate-size: 6058
+X-purgate-size: 7651
 
-The notification handlers still validate overlapping subsets of their
-inputs. BIND, UNBIND, and SET each decode caller and destination IDs
-locally, GET still accepts a non-zero receiver vCPU ID and reserved flag
-bits, and SET still accepts non-zero NS-virtual flags. BIND also treats
-unsupported non-zero flag encodings as a supported-feature failure
-instead of as malformed input.
+VM-to-VM notifications need receiver-side bind state so Xen can validate
+which sender owns each notification bit. Non-secure BIND and UNBIND
+requests currently have no local state and cannot enforce that contract.
 
-Add ffa_notif_validate_params() and use it to centralize the common
-caller/destination and non-zero bitmap checks for BIND, UNBIND, and SET.
-Also reject malformed GET and SET requests locally before touching
-cached state or forwarding anything to the SPMC. Keep BIND limited to
-global notifications and reject unsupported non-zero flag encodings with
-INVALID_PARAMETERS.
+Add per-bit VM notification binding state to struct ffa_ctx_notif and
+use it to handle non-secure BIND and UNBIND requests when
+CONFIG_FFA_VM_TO_VM is enabled. The update helper validates the whole
+request under notif_lock before mutating anything, denies bind or
+unbind when a bit is pending, rejects rebinding to a different sender,
+and keeps rebinding to the same sender idempotent.
 
-- add a shared parameter validator for notification caller/destination
-  checks
-- wire BIND and UNBIND through the shared helper and reject unsupported
-  bind flag encodings with INVALID_PARAMETERS
-- reject non-zero receiver vCPU and reserved flag bits in
-  FFA_NOTIFICATION_GET
-- reject non-zero flags in the NS-virtual FFA_NOTIFICATION_SET path
+Promote vm_pending to a bitmap so the bind logic can reason per
+notification ID, use that bitmap directly when reporting pending state,
+and initialize and clear the new VM notification state during domain
+init and teardown.
 
-Functional impact: malformed notification requests are rejected
-consistently earlier in the mediator.
+Functional impact: when CONFIG_FFA_VM_TO_VM is enabled, Xen tracks VM
+notification bindings locally and validates non-secure bind and unbind
+requests against that state.
 
 Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
 Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
 ---
 Changes since v2:
-- none
+- add Jens R-b
 Changes since v1:
-- rename helper to ffa_notif_validate_params()
-- add R-b from Jens
+- use memset() to clear vm_bind[] in init/destroy
+- replace the file-scope #error check with BUILD_BUG_ON()
 ---
- xen/arch/arm/tee/ffa_notif.c | 61 +++++++++++++++++++++++++++++-------
- 1 file changed, 50 insertions(+), 11 deletions(-)
+ xen/arch/arm/tee/ffa_notif.c   | 96 ++++++++++++++++++++++++++++++----
+ xen/arch/arm/tee/ffa_private.h | 11 ++--
+ 2 files changed, 94 insertions(+), 13 deletions(-)
 
 diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.c
-index a631481e3815..1260f98a77e9 100644
+index e1cd852d1c53..a841c8f8d747 100644
 --- a/xen/arch/arm/tee/ffa_notif.c
 +++ b/xen/arch/arm/tee/ffa_notif.c
-@@ -44,21 +44,40 @@ static bool inject_notif_pending(struct domain *d)
-     return false;
+@@ -8,6 +8,7 @@
+ #include <xen/list.h>
+ #include <xen/notifier.h>
+ #include <xen/spinlock.h>
++#include <xen/string.h>
+ #include <xen/tasklet.h>
+ #include <xen/types.h>
+ 
+@@ -58,6 +59,54 @@ static int32_t ffa_notif_validate_params(uint16_t dom_id, uint16_t caller_id,
+     return FFA_RET_OK;
  }
  
-+static int32_t ffa_notif_validate_params(uint16_t dom_id, uint16_t caller_id,
-+                                         uint16_t dest_id, uint32_t bitmap_lo,
-+                                         uint32_t bitmap_hi)
++static int32_t ffa_notif_update_vm_binding(struct ffa_ctx *ctx,
++                                           uint16_t dest_id, uint64_t bitmap,
++                                           bool bind)
 +{
-+    if ( caller_id != dom_id || dest_id == dom_id || !dest_id )
-+        return FFA_RET_INVALID_PARAMETERS;
++    unsigned int id;
++    int32_t ret = FFA_RET_OK;
 +
-+    if ( !bitmap_lo && !bitmap_hi )
-+        return FFA_RET_INVALID_PARAMETERS;
++    spin_lock(&ctx->notif.notif_lock);
 +
-+    return FFA_RET_OK;
++    for ( id = 0; id < FFA_NUM_VM_NOTIF; id++ )
++    {
++        if ( !(bitmap & BIT(id, ULL)) )
++            continue;
++
++        if ( ctx->notif.vm_pending & BIT(id, ULL) )
++        {
++            ret = FFA_RET_DENIED;
++            goto out_unlock;
++        }
++
++        if ( bind )
++        {
++            if ( ctx->notif.vm_bind[id] != 0 &&
++                 ctx->notif.vm_bind[id] != dest_id )
++            {
++                ret = FFA_RET_DENIED;
++                goto out_unlock;
++            }
++        }
++        else if ( ctx->notif.vm_bind[id] != dest_id )
++        {
++            ret = FFA_RET_DENIED;
++            goto out_unlock;
++        }
++    }
++
++    for ( id = 0; id < FFA_NUM_VM_NOTIF; id++ )
++    {
++        if ( bitmap & BIT(id, ULL) )
++            ctx->notif.vm_bind[id] = bind ? dest_id : 0;
++    }
++
++out_unlock:
++    spin_unlock(&ctx->notif.notif_lock);
++
++    return ret;
 +}
 +
  int32_t ffa_handle_notification_bind(struct cpu_user_regs *regs)
  {
      struct domain *d = current->domain;
-+    struct ffa_ctx *ctx = d->arch.tee;
-+    int32_t ret;
-     uint32_t src_dst = get_user_reg(regs, 1);
-     uint32_t flags = get_user_reg(regs, 2);
-     uint32_t bitmap_lo = get_user_reg(regs, 3);
-     uint32_t bitmap_hi = get_user_reg(regs, 4);
-+    uint16_t caller_id = src_dst & GENMASK(15, 0);
-+    uint16_t dest_id = src_dst >> 16;
+@@ -78,11 +127,21 @@ int32_t ffa_handle_notification_bind(struct cpu_user_regs *regs)
+     if ( ret )
+         return ret;
  
--    if ( (src_dst & GENMASK(15, 0)) != ffa_get_vm_id(d) )
-+    if ( flags )    /* Only global notifications are supported */
-         return FFA_RET_INVALID_PARAMETERS;
- 
--    if ( flags )    /* Only global notifications are supported */
--        return FFA_RET_DENIED;
-+    ret = ffa_notif_validate_params(ctx->ffa_id, caller_id, dest_id,
-+                                    bitmap_lo, bitmap_hi);
-+    if ( ret )
-+        return ret;
- 
--    if ( FFA_ID_IS_SECURE(src_dst >> 16) && fw_notif_enabled )
-+    if ( FFA_ID_IS_SECURE(dest_id) && fw_notif_enabled )
-         return ffa_simple_call(FFA_NOTIFICATION_BIND, src_dst, flags,
-                                bitmap_lo, bitmap_hi);
- 
-@@ -68,16 +87,22 @@ int32_t ffa_handle_notification_bind(struct cpu_user_regs *regs)
- int32_t ffa_handle_notification_unbind(struct cpu_user_regs *regs)
- {
-     struct domain *d = current->domain;
-+    struct ffa_ctx *ctx = d->arch.tee;
-+    int32_t ret;
-     uint32_t src_dst = get_user_reg(regs, 1);
-     uint32_t bitmap_lo = get_user_reg(regs, 3);
-     uint32_t bitmap_hi = get_user_reg(regs, 4);
-+    uint16_t caller_id = src_dst & GENMASK(15, 0);
-+    uint16_t dest_id = src_dst >> 16;
- 
--    if ( (src_dst & GENMASK(15, 0)) != ffa_get_vm_id(d) )
--        return FFA_RET_INVALID_PARAMETERS;
-+    ret = ffa_notif_validate_params(ctx->ffa_id, caller_id, dest_id,
-+                                    bitmap_lo, bitmap_hi);
-+    if ( ret )
-+        return ret;
- 
--    if ( FFA_ID_IS_SECURE(src_dst >> 16) && fw_notif_enabled )
--        return  ffa_simple_call(FFA_NOTIFICATION_UNBIND, src_dst, 0, bitmap_lo,
--                                bitmap_hi);
-+    if ( FFA_ID_IS_SECURE(dest_id) && fw_notif_enabled )
-+        return ffa_simple_call(FFA_NOTIFICATION_UNBIND, src_dst, 0, bitmap_lo,
-+                               bitmap_hi);
- 
-     return FFA_RET_NOT_SUPPORTED;
- }
-@@ -144,6 +169,12 @@ void ffa_handle_notification_get(struct cpu_user_regs *regs)
-         return;
-     }
- 
-+    if ( recv >> 16 || (flags & GENMASK(31, 4)) )
+-    if ( FFA_ID_IS_SECURE(dest_id) && fw_notif_enabled )
+-        return ffa_simple_call(FFA_NOTIFICATION_BIND, src_dst, flags,
+-                               bitmap_lo, bitmap_hi);
++    if ( FFA_ID_IS_SECURE(dest_id) )
 +    {
-+        ffa_set_regs_error(regs, FFA_RET_INVALID_PARAMETERS);
-+        return;
++        if ( fw_notif_enabled )
++            return ffa_simple_call(FFA_NOTIFICATION_BIND, src_dst, flags,
++                                   bitmap_lo, bitmap_hi);
+ 
+-    return FFA_RET_NOT_SUPPORTED;
++        return FFA_RET_NOT_SUPPORTED;
 +    }
 +
-     if ( fw_notif_enabled && (flags & ( FFA_NOTIF_FLAG_BITMAP_SP |
-                                         FFA_NOTIF_FLAG_BITMAP_SPM )) )
-     {
-@@ -208,11 +239,19 @@ int32_t ffa_handle_notification_set(struct cpu_user_regs *regs)
-     uint32_t flags = get_user_reg(regs, 2);
-     uint32_t bitmap_lo = get_user_reg(regs, 3);
-     uint32_t bitmap_hi = get_user_reg(regs, 4);
-+    uint16_t caller_id = src_dst >> 16;
-+    uint16_t dest_id = src_dst & GENMASK(15, 0);
-+    int32_t ret;
++    if ( !IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
++        return FFA_RET_NOT_SUPPORTED;
 +
-+    ret = ffa_notif_validate_params(ffa_get_vm_id(d), caller_id, dest_id,
-+                                    bitmap_lo, bitmap_hi);
-+    if ( ret )
-+        return ret;
++    return ffa_notif_update_vm_binding(ctx, dest_id,
++                                       ((uint64_t)bitmap_hi << 32) | bitmap_lo,
++                                       true);
+ }
  
--    if ( (src_dst >> 16) != ffa_get_vm_id(d) )
-+    if ( flags )
-         return FFA_RET_INVALID_PARAMETERS;
+ int32_t ffa_handle_notification_unbind(struct cpu_user_regs *regs)
+@@ -101,11 +160,21 @@ int32_t ffa_handle_notification_unbind(struct cpu_user_regs *regs)
+     if ( ret )
+         return ret;
  
--    if ( FFA_ID_IS_SECURE(src_dst & GENMASK(15, 0)) && fw_notif_enabled )
-+    if ( FFA_ID_IS_SECURE(dest_id) && fw_notif_enabled )
-         return ffa_simple_call(FFA_NOTIFICATION_SET, src_dst, flags, bitmap_lo,
-                                bitmap_hi);
+-    if ( FFA_ID_IS_SECURE(dest_id) && fw_notif_enabled )
+-        return ffa_simple_call(FFA_NOTIFICATION_UNBIND, src_dst, 0, bitmap_lo,
+-                               bitmap_hi);
++    if ( FFA_ID_IS_SECURE(dest_id) )
++    {
++        if ( fw_notif_enabled )
++            return ffa_simple_call(FFA_NOTIFICATION_UNBIND, src_dst, 0,
++                                   bitmap_lo, bitmap_hi);
  
+-    return FFA_RET_NOT_SUPPORTED;
++        return FFA_RET_NOT_SUPPORTED;
++    }
++
++    if ( !IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
++        return FFA_RET_NOT_SUPPORTED;
++
++    return ffa_notif_update_vm_binding(ctx, dest_id,
++                                       ((uint64_t)bitmap_hi << 32) | bitmap_lo,
++                                       false);
+ }
+ 
+ void ffa_handle_notification_info_get(struct cpu_user_regs *regs)
+@@ -127,9 +196,10 @@ void ffa_handle_notification_info_get(struct cpu_user_regs *regs)
+ 
+     if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
+     {
+-        notif_pending |= test_and_clear_bool(ctx->notif.vm_pending);
+-
+         spin_lock(&ctx->notif.notif_lock);
++        if ( ctx->notif.vm_pending )
++            notif_pending = true;
++
+         if ( ctx->notif.hyp_pending )
+             notif_pending = true;
+         spin_unlock(&ctx->notif.notif_lock);
+@@ -498,9 +568,13 @@ int ffa_notif_domain_init(struct domain *d)
+     struct ffa_ctx *ctx = d->arch.tee;
+     int32_t res;
+ 
++    BUILD_BUG_ON(FFA_NUM_VM_NOTIF > 64);
++
+     spin_lock_init(&ctx->notif.notif_lock);
+     ctx->notif.notif_irq_raised = false;
+     ctx->notif.secure_pending = false;
++    ctx->notif.vm_pending = 0;
++    memset(ctx->notif.vm_bind, 0, sizeof(ctx->notif.vm_bind));
+     ctx->notif.hyp_pending = 0;
+ 
+     if ( fw_notif_enabled )
+@@ -520,6 +594,8 @@ void ffa_notif_domain_destroy(struct domain *d)
+     spin_lock(&ctx->notif.notif_lock);
+     ctx->notif.notif_irq_raised = false;
+     ctx->notif.secure_pending = false;
++    ctx->notif.vm_pending = 0;
++    memset(ctx->notif.vm_bind, 0, sizeof(ctx->notif.vm_bind));
+     ctx->notif.hyp_pending = 0;
+     spin_unlock(&ctx->notif.notif_lock);
+ 
+diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_private.h
+index 025dfe6fed7b..30c064e2dc30 100644
+--- a/xen/arch/arm/tee/ffa_private.h
++++ b/xen/arch/arm/tee/ffa_private.h
+@@ -236,6 +236,7 @@
+ #define FFA_NOTIF_INFO_GET_ID_COUNT_MASK    0x1F
+ 
+ #define FFA_NOTIF_RX_BUFFER_FULL        BIT(0, U)
++#define FFA_NUM_VM_NOTIF                64U
+ 
+ /* Feature IDs used with FFA_FEATURES */
+ #define FFA_FEATURE_NOTIF_PEND_INTR     0x1U
+@@ -334,10 +335,14 @@ struct ffa_ctx_notif {
+     bool secure_pending;
+ 
+     /*
+-     * True if domain is reported by FFA_NOTIFICATION_INFO_GET to have
+-     * pending notifications from VMs (including framework ones).
++     * Bitmap of pending notifications from VMs (including framework ones).
++     */
++    uint64_t vm_pending;
++
++    /*
++     * Source endpoint bound to each VM notification ID (0 means unbound).
+      */
+-    bool vm_pending;
++    uint16_t vm_bind[FFA_NUM_VM_NOTIF];
+ 
+     /*
+      * Lock protecting the hypervisor-managed notification state.
 -- 
 2.53.0
 
