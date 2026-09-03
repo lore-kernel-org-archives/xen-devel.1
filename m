@@ -4,47 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1704C624A4
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 15:29:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1407467.1640542 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85070C61DD3
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 15:57:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1407496.1640551 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x29Ms-0003cg-8V; Thu, 03 Sep 2026 15:28:46 +0000
+	id 1x29oV-0007jp-Ai; Thu, 03 Sep 2026 15:57:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1407467.1640542; Thu, 03 Sep 2026 15:28:46 +0000
+Received: by outflank-mailman (output) from mailman id 1407496.1640551; Thu, 03 Sep 2026 15:57:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x29Ms-0003cZ-5i; Thu, 03 Sep 2026 15:28:46 +0000
-Received: by outflank-mailman (input) for mailman id 1407467;
- Thu, 03 Sep 2026 15:28:44 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x29oV-0007ji-81; Thu, 03 Sep 2026 15:57:19 +0000
+Received: by outflank-mailman (input) for mailman id 1407496;
+ Thu, 03 Sep 2026 15:57:17 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <imammedo@redhat.com>) id 1x29Mq-0003cT-Ni
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 15:28:44 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x29oT-0007jc-F2
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 15:57:17 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x29Mq-00AwBe-44
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 17:28:44 +0200
+ id 1x29oS-00DWrr-CB
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 17:57:16 +0200
 Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <imammedo@redhat.com>)
- id 6a9991f5-8faa-0a2a0a5109dd-0a2a4504a9e2-44
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 17:28:43 +0200
-Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a9998b8-2eae-0a2a0a5409dd-0a2a4504e2f4-40
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 17:57:16 +0200
+Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
  by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <imammedo@redhat.com>)
- id 6a99922a-b57f-0a2a45040019-aa0a817c79f5-3
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 17:28:43 +0200
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-659-fVqUXbuQNIil-MQnG6u7yw-1; Thu, 03 Sep 2026 11:28:41 -0400
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-496bbcf7d1eso36475e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 08:28:40 -0700 (PDT)
-Received: from imammedo ([213.175.37.14]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cee5f9114sm76185195e9.5.2026.09.03.08.28.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Sep 2026 08:28:38 -0700 (PDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a9998dc-b57f-0a2a45040019-d1558035c582-3
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 17:57:16 +0200
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-49b8ce9b733so294355e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 08:57:16 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49ce5927b68sm138640565e9.1.2026.09.03.08.57.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 03 Sep 2026 08:57:14 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,203 +53,228 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1788449322;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=0ztegjQ1POBwSGppr2l4gUAmCFrMM6q1VpOdlFUL088=;
-	b=b/sDAEPVf0uefwEp/SVroNz0zUBQVs8w9zkIPOLO8togYDTGVt4FYjOTIBz9vDLtp6Viwj
-	pclyKzXXBX5xnyD13e913aexS6QD1N3MVtxN9kvTlYR2uf3hoLsiShpPOU5z++qgop6j2q
-	R2uLq9LCF1667d90yqHu7rliGMydpH8=
-X-MC-Unique: fVqUXbuQNIil-MQnG6u7yw-1
-X-Mimecast-MFC-AGG-ID: fVqUXbuQNIil-MQnG6u7yw_1788449320
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788449320; x=1789054120;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1788451036; x=1789055836; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=zZlgcpyErJlCEJFwxXWLl2G2MJ6RenYBs5jbw6Dpw5Q=;
-        b=LBI40bttvsxgoPXsBwcnIw9Dlau1+jDcaNpoI94agoOxCYV/VFJh7dyPM4bsE9O6Pf
-         JtWG+sZlxsbqmhDsUkPMchl42sE/M8j7suwww+jsHzzZwnnKwjfWhPbvm6Qh9M8ZGZ7k
-         0PamDY9hcfeeXUN1a4Tc2cH9+XQ3n5M3lFljx4nWjpTXHBe8ovTm2gllHZE3lKA+b/Xx
-         YMv/nMKTYAoK5bnf92cj5lxyA04RKzzk9IerPYFlJYeSkknea3MMGXyKFI0qB56in2nG
-         w8BA62gqjiQ54fp44wn8cBd/RoomKx8Y4c/q28n+Q9nq+QYQBXrQ7Ob0Yco0nOxOdAIR
-         oFvA==
-X-Forwarded-Encrypted: i=1; AKwUvBxrfAMOAo2i/fuU5B71mJ3dbediYRSSYDounoxDENCksXVBsek/4+kbtF7yIrPQU1WQmpsBIKp3hKU=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lBLLovVjCG/w5GwQcns9K4su+wkYLHopRJPnkRu+KB+4N33Z3T
-	VM4URQnIEFdGfd0o0xSeNyQxSZbCjdgSOWjCkP7FF408S5SV4Bd9IlHq5gog+uTIp+ua3hG2xpF
-	Ag5GLlod4wJ3Q32ZNhHQhMC1qzI3gmtAck2c/+dafRnPxd0kUt1KMCXKZxRCdTG0NGxk4S/fC+3
-	AJ
-X-Gm-Gg: AYBFou3bnREqMRI2dWbVeZ7SUczVPVBz6r3/RBP6rc4QujjI8B/VE0knnlV/jj8hqQJ
-	YLGBcxlROe7VxXtvPzCOOfX+8mWneR7W/xKQSqwO9fwmx/6qgJCqASdXMFMwcl2JS4rvs80+uf0
-	bfd2Am3p5F1Tlzci1RBkLTtrkmMwIgYLfCely7cWaZEjc+30AufjHKHogcUarARixaMvQbC/DsA
-	n2HvmiCAtaZF3SYXg9vnmr1AogBC5fLr2idWazov4JIn75+LLlfQZDvrQ6hbc47t8795ZYGAQ+9
-	8jk1of/R413Ys0Y91/mmSj572JA0YuJ792T2AKRZosMi
-X-Received: by 2002:a05:600c:81c9:b0:49c:df2b:15fc with SMTP id 5b1f17b1804b1-49cf5b79c84mr17210205e9.8.1788449319984;
-        Thu, 03 Sep 2026 08:28:39 -0700 (PDT)
-X-Received: by 2002:a05:600c:81c9:b0:49c:df2b:15fc with SMTP id 5b1f17b1804b1-49cf5b79c84mr17209195e9.8.1788449319587;
-        Thu, 03 Sep 2026 08:28:39 -0700 (PDT)
-Date: Thu, 3 Sep 2026 17:28:35 +0200
-From: Igor Mammedov <imammedo@redhat.com>
-To: Dongli Zhang <dongli.zhang@oracle.com>
-Cc: "Daniel P. =?UTF-8?B?QmVycmFuZ8Op?=" <berrange@redhat.com>,
- qemu-devel@nongnu.org, qemu-s390x@nongnu.org,
- xen-devel@lists.xenproject.org, dave@treblig.org, mst@redhat.com,
- anisinha@redhat.com, philmd@mailo.com, aurelien@aurel32.net,
- mjrosato@linux.ibm.com, alifm@linux.ibm.com, farman@linux.ibm.com,
- richard.henderson@linaro.org, iii@linux.ibm.com, david@kernel.org,
- pasic@linux.ibm.com, borntraeger@linux.ibm.com, cohuck@redhat.com,
- alex@shazbot.org, clg@redhat.com, akrowiak@linux.ibm.com,
- jjherne@linux.ibm.com, sstabellini@kernel.org, anthony@xenproject.org,
- edgar.iglesias@gmail.com, pbonzini@redhat.com, eblake@redhat.com,
- armbru@redhat.com, joe.jin@oracle.com
-Subject: Re: [PATCH 0/8] Force detach PCI devices for ACPI-based and PCIe
- native hot-unplug
-Message-ID: <20260903172835.0e253a25@imammedo>
-In-Reply-To: <01ee4841-76d8-4749-a80e-eb945ab8799a@oracle.com>
-References: <20260824011420.752806-1-dongli.zhang@oracle.com>
-	<aoxY4Rxst2qAyn5z@redhat.com>
-	<01ee4841-76d8-4749-a80e-eb945ab8799a@oracle.com>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
+        bh=86tnfSkcdQw+bE0XkJ0AIcxoaoMOJ7N3xnqPAtL6Zek=;
+        b=gnI/CVz3qr1z66p5Oz8Vj2q5K559CxDqvOpxBxmMYadraaLFq+4lH2hlt05ga3oEGg
+         OXZ13wyDUbzohaCtBJkla7zK+Bz4einNvjBoEVaOFGRt7aDmaeUoPgYlRYEubbhlVq4g
+         s6rXZpAtkPPYKhbAHsG0hEjbYBu7DpaysRHPzm7fJeyWKzEuC8wpb/4XzB1r+Uf/sEvl
+         2P3C36WhAPeQNXAkLxPMlmYeF+wao8vIi8GcPwhCo1gGwFkRd4E1n2IvIgRLtBYPeC9+
+         3qtl/c7zq5kRvVpd9lDGUK9L1/fELII1RGzstNckkMEjAAPdSL0u6PTHleAJjcLeKbLI
+         GGwQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788451036; x=1789055836;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=86tnfSkcdQw+bE0XkJ0AIcxoaoMOJ7N3xnqPAtL6Zek=;
+        b=J3TF3aIgnSd+VW9VHxFj2BDvC8TS0wQSr1v6YHWCKJ5JOT2vs1pLLOej9XLBbKNN4j
+         YH4t92OV9RR+uvSgKp0P/vdijzbAGrpqnIfbmtTSwjYgd+2QrttkeBPzjtPoUgoPOYlC
+         m8zXYNiJNZRfJZqN97ARBYQe8kFVy6ZYW9DPZ03zcoRo5k8jmLv7XrgPJAMDCwQzklZo
+         dTNjWysdDgurx3mBMtbmNOVzcWUe/I4WZuHLEe/7I7Iz3smDhSLUi6DWQ+gtb7dTkHKx
+         WdlPzrGv9ZM+7WoIGILMnzgI1u5ZhAo8mlr4g+GQaDxCo6OSFASqsyDpYgk8nfj8wSO9
+         XDRw==
+X-Forwarded-Encrypted: i=1; AKwUvBzmhGDnyJqvX5uKXqG1lZkZUUH0YYWMjeNNdqyQrBMmxk8bwe/ZHymRlUv4KGUlOs5ax9pYFdarR6s=@lists.xenproject.org
+X-Gm-Message-State: AFuF++kGBcsxwLwIgFmqS3V4o/90qc89WsGq+DWA+tKHJzKyo2fJGyhQ
+	Ufeyt+vEIiHN4WZccmZLQN2sQU8u14J/K3C7kXnR++mV/A0awS32LrrqZ3Nw9TIzhQ==
+X-Gm-Gg: AYBFou3QU5l1RporldTljCmEmpuOVrpYcUbYOkxcbBfV/OytGYCgK0/yg+osfUZ/yo4
+	Q3v2BElZ12vrl+5GpFwCJJsDZQVYyGtQkwucNXuyf2VLckcaibZaQFw9TxBqAVOGR4eGL+iYNuS
+	kxKgOK7J7u/Nu3gFAC5JhWneLaitsBJ8ss3vtBTnujtx+Er6X9H2ob5vgbQvi8q4UNRWuMrdN/S
+	x1+GxpJQsVcB1nsk2WLFSp6JkApPmV5vbhIVxzviPqUrktPhXgoqiUEIlqanh380a1CWcnp2l+v
+	2VYfFr0n1xiRXK5OjLJl44rdQRJhcpHu2ayWOtHPIjXepAqWjKx93OhKm5krrwzeUs+ZWKoOJZ8
+	UgtMmC4d0L+BDVNOdWS5/UijqedCwOwBeg6qiDXLlYzSod4nt3mKvE+eePP9pvk+VeKhBK1ScpZ
+	triM8uufvDs164mnS9liInOYJWMcYAv0QKUmDUgDVt0wQapfKeGfHkogeVCTvRqz7M6OxyJBIH8
+	z5rV+UjbsHvg6vDgVPxiwvYmTh8MmEys7SnVTGKXmW32qammyx2noMxdPHyAJ0=
+X-Received: by 2002:a05:600c:474a:b0:493:aa0a:45ad with SMTP id 5b1f17b1804b1-49ce55ecebemr192717875e9.2.1788451035542;
+        Thu, 03 Sep 2026 08:57:15 -0700 (PDT)
+Message-ID: <5071d4da-d9b1-45cd-8e9b-778df417ee7b@suse.com>
+Date: Thu, 3 Sep 2026 17:57:13 +0200
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: BvBP7bAlVza0ri1EfJZlH_Jan3Gbj_-4GQP_VVq2Ahg_1788449320
-X-Mimecast-Originator: redhat.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 02/14] x86/mm: introduce populate_perdomain_mapping()
+To: George Dunlap <dunlapg@umich.edu>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Alejandro Vallejo <agarciav@amd.com>, Teddy Astie <teddy.astie@vates.tech>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ George Dunlap <gwd@xenproject.org>, xen-devel@lists.xenproject.org
+References: <20260901-asi-part2-0-ecc269f268b7@xenproject.org>
+ <20260901-asi-part2-2-ecc269f268b7@xenproject.org>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260901-asi-part2-2-ecc269f268b7@xenproject.org>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-ebf023/1788449323-C3AC0B50-0B122C6C/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ebf023/1788451036-534C3B50-3B24B7A7/0/0
 X-purgate-type: clean
-X-purgate-size: 4919
+X-purgate-size: 5801
 
-On Wed, 26 Aug 2026 09:15:47 -0700
-Dongli Zhang <dongli.zhang@oracle.com> wrote:
+On 02.09.2026 11:43, George Dunlap wrote:
+> --- a/xen/arch/x86/mm.c
+> +++ b/xen/arch/x86/mm.c
+> @@ -6334,6 +6334,130 @@ int create_perdomain_mapping(struct domain *d, unsigned long va,
+>      return rc;
+>  }
+>  
+> +/*
+> + * Map @nr pages, @mfn[0..nr-1], at consecutive pages from @va in v's view of
+> + * the per-domain area, with page-table @flags.  The range must lie within a
+> + * single per-domain slot, and must already have been plumbed down to the L1
+> + * tables by create_perdomain_mapping(): missing structure is a bug.  A
+> + * present entry not owned by the area (no _PAGE_AVAIL0) is silently
+> + * replaced, as that is how callers update their mappings; a present
+> + * area-owned entry is freed and replaced, which constrains the calling
+> + * context (see the comment in the body).  No TLB flushing is done: the
+> + * caller decides whether the old translations can still be cached
+> + * anywhere.
+> + *
+> + * When v's page-tables are loaded on this pCPU the L1 entries are reached
+> + * through the recursive linear mappings; otherwise the walk maps the
+> + * per-domain page-table pages transiently with IRQs off, so it needs
+> + * nothing from the current address space and is usable from any context --
+> + * including the context switch, before the incoming vcpu's page-tables are
+> + * loaded.
+> + */
+> +void populate_perdomain_mapping(const struct vcpu *v, unsigned long va,
+> +                                const mfn_t *mfn, unsigned int nr,
+> +                                unsigned int flags)
+> +{
+> +    l1_pgentry_t *l1tab = NULL, *pl1e;
+> +    const l3_pgentry_t *l3tab;
+> +    const l2_pgentry_t *l2tab;
+> +    struct domain *d = v->domain;
+> +    unsigned long irq_flags;
+> +
+> +    ASSERT(va >= PERDOMAIN_VIRT_START &&
+> +           va < PERDOMAIN_VIRT_SLOT(PERDOMAIN_SLOTS));
+> +    ASSERT(!nr || !l3_table_offset(va ^ (va + nr * PAGE_SIZE - 1)));
+> +    /* Area-owned pages are installed by create_perdomain_mapping() only. */
+> +    ASSERT(!(flags & _PAGE_AVAIL0));
+> +
+> +    if ( likely(this_cpu(pgtable_vcpu) == v) )
+> +    {
+> +        unsigned int i;
+> +
+> +        /*
+> +         * Fast path: v's page-tables are loaded on this pCPU, so the L1
+> +         * entries can be reached using the recursive linear mappings.
+> +         */
+> +        pl1e = &__linear_l1_table[l1_linear_offset(va)];
 
-> On Mon, Aug 24, 2026 7:44:49AM -0700, Daniel P. Berrang=C3=A9 wrote:
-> > On Sun, Aug 23, 2026 at 06:13:30PM -0700, Dongli Zhang wrote: =20
-> >> Hot-unplugging a PCI device can require cooperation from the guest. Fo=
-r
-> >> ACPI PCI hotplug, QEMU notifies the guest through ACPI and the guest
-> >> eventually writes the ACPI PCI eject register. For PCIe native hotplug=
-,
-> >> QEMU notifies the guest through the PCIe hotplug mechanism and waits f=
-or
-> >> the slot unplug flow to complete. Only after that completion does QEMU
-> >> unrealize the device and emit DEVICE_DELETED.
-> >>=20
-> >> This can leave a device stuck in the unplug pending state when the gue=
-st
-> >> does not cooperate. Examples include:
-> >>=20
-> >> 1. The guest has panicked, or the relevant ACPI/PCI hotplug driver is
-> >> unavailable.
-> >>=20
-> >> 2. The guest is stalled and cannot handle the hot-unplug event. For
-> >> example, stalling the Linux [irq/9-acpi] kernel thread can reproduce t=
-his
-> >> for ACPI-based hot-unplug.
-> >>=20
-> >> 3. The device was attached to a slot that the guest cannot use. For
-> >> example, a pcie-root-port only supports slot 0. If a device is added t=
-o a
-> >> non-zero slot below a pcie-root-port, the guest may never discover the
-> >> device and therefore may never complete the unplug request.
+As mentioned elsewhere, I'm concerned of this (or really any) new use of
+the linear page tables. (Which, ftaod, isn't an objection.)
 
-all of above is actually expected, no (functioning) driver =3D> no hotplug/=
-unplug.
-it's the guest problem. Once device it exposed to guest its life-cycle
-not longer owned by QEMU.
+> +        for ( i = 0; i < nr; i++, pl1e++ )
+> +        {
+> +            /*
+> +             * An area-owned entry (installed by create_perdomain_mapping(),
+> +             * marked _PAGE_AVAIL0) holds the only reference to its page, so
+> +             * displacing it means freeing it.  Nothing in this series
+> +             * replaces area-owned backing, hence the ASSERT_UNREACHABLE();
+> +             * any future caller doing so must run where freeing is
+> +             * permitted -- IRQs enabled, not in interrupt context (see
+> +             * ASSERT_ALLOC_CONTEXT()) -- which the context switch path is
+> +             * not.
+> +             */
+> +            if ( unlikely(perdomain_l1e_needs_freeing(*pl1e)) )
+> +            {
+> +                ASSERT_UNREACHABLE();
+> +                free_domheap_page(l1e_get_page(*pl1e));
+> +            }
+> +            l1e_write(pl1e, l1e_from_mfn(mfn[i], flags));
+> +        }
+> +
+> +        return;
+> +    }
+> +
+> +    BUG_ON(!d->arch.perdomain_l3_pg);
+> +
+> +    /*
+> +     * Slow path: walk v's per-domain page-table pages.  All mappings are
+> +     * local to this function, so disabling interrupts for the duration of
+> +     * the walk satisfies the map_domain_page_irqoff() contract.  This in
+> +     * turn makes this function usable from the context switch path, where
+> +     * a plain map_domain_page() could recurse into __context_switch() via
+> +     * sync_local_execstate().
+> +     */
+> +    local_irq_save(irq_flags);
+> +
+> +    l3tab = __map_domain_page_irqoff(d->arch.perdomain_l3_pg);
+> +
+> +    /*
+> +     * Missing page-table structure is a hypervisor bug: there is no safe
+> +     * continuation, least of all from the context switch, where the next
+> +     * descriptor fetch through an unmapped GDT slot would be fatal.
+> +     */
+> +    BUG_ON(!(l3e_get_flags(l3tab[l3_table_offset(va)]) & _PAGE_PRESENT));
+> +
+> +    l2tab = map_domain_page_irqoff(l3e_get_mfn(l3tab[l3_table_offset(va)]));
 
-That's what one would see in real hw as well, you press eject button
-but it will not do anything if OS doesn't process it.
-also see comment at the end.
+l3tab[] isn't used any further, so I think it wants unmapping right away. No
+need to have undue pressure on the number of active mappings.
 
-> >>=20
-> >> The non-zero slot case has also been discussed in:
-> >>=20
-> >> hw/pci: warn when PCIe device is plugged into non-zero slot of downstr=
-eam port
-> >> https://gitlab.com/qemu-project/qemu/-/commit/ =20
-> > ca92eb5defcf9d1c2106341744a73a03cf26e824 =20
-> >>=20
-> >> hw/pci: add comment to explain checking for available function 0 in pc=
-i hotplug
-> >> https://gitlab.com/qemu-project/qemu/-/ =20
-> > commit/67d045a0ef5b9c5f871c3a1d87325a8a42d2b9d5 =20
-> >>=20
-> >> pci: don't skip function 0 occupancy verification for devfn auto assig=
-n
-> >> https://gitlab.com/qemu-project/qemu/-/commit/ =20
-> > e228d62b4af29bca698ec57efdceb46f392f5444 =20
-> >>=20
-> >> For example, if root-port.1 is a pcie-root-port, the following command=
- adds
-> >> a vhost-scsi-pci device to an invalid slot:
-> >>=20
-> >> (qemu) device_add vhost-scsi-pci,id=3Dscsi01,wwpn=3Dnaa.5001405324af09=
-85,bus=3Droot-port.1,addr=3D01.0
-> >> warning: PCI: slot 1 is not valid for vhost-scsi-pci, parent device on=
-ly allows plugging into slot 0. =20
-> >=20
-> > This rather looks like it should be a fatal error, not a mere warning.
-> >=20
-> > If I follow the commit ca92eb5def it links to https://bugzilla.redhat.c=
-om/show_bug.cgi?id=3D2128929
-> > which states that this configuration is going to lead to a crash in
-> > QEMU on guest OS shutdown. IMHO that crash is sufficient to justify
-> > making this a fatal error.
-> >=20
-> > If we actually wanted this to remain a warning, then that shutdown
-> > crash would need to be fixed.
-> >  =20
->=20
-> Thank you very much!
->=20
-> I see that the issue has been fixed. The ticket mentions the following.
->=20
-> "What I am observing is that it seems when the slot ID !=3D 0, the guest =
-OS seems
-> to ignore this and we never seem to hit ich9_pm_device_unplug_cb()."
->=20
-> Based on my experience and evaluation, ACPI-based hotplug is more likely =
-to
-> encounter an issue where the guest VM does not respond to an unplug opera=
-tion.
+> +    for ( ; nr--; va += PAGE_SIZE, mfn++ )
+> +    {
+> +        if ( !l1tab || !l1_table_offset(va) )
+> +        {
+> +            const l2_pgentry_t *pl2e = l2tab + l2_table_offset(va);
+> +
+> +            BUG_ON(!(l2e_get_flags(*pl2e) & _PAGE_PRESENT));
+> +
+> +            unmap_domain_page_irqoff(l1tab);
+> +            l1tab = map_domain_page_irqoff(l2e_get_mfn(*pl2e));
+> +        }
+> +
+> +        pl1e = &l1tab[l1_table_offset(va)];
+> +
+> +        /*
+> +         * As the fast path -- and the slow path holds IRQs off throughout,
+> +         * so replacing area-owned backing here is never permitted.
+> +         */
 
-I'm not sure it's a good idea to delete device when guest still thinks it's=
- there
-(you can make guesses on QEMU side if it's in use, how useful those are is =
-questionable).
+With this comment I think ...
 
-as far as I know, ACPI hotplug has no notion of surprise removal (pls educa=
-te me if it's not the case),
-so I wouldn't do what you are proposing here at all, it's basically asking =
-for disaster to happen.
-And all this is basically for dealing with abused qemu flexibility.
+> +        if ( unlikely(perdomain_l1e_needs_freeing(*pl1e)) )
+> +        {
+> +            ASSERT_UNREACHABLE();
+> +            free_domheap_page(l1e_get_page(*pl1e));
 
-Please (re)formulate usecase and make it more clear as what is eludes me
-no matter how many times i've read this cover letter.
+... this call should be removed from here (I would have suggested to comment
+it out, but Misra dislikes that iirc). Otherwise it would in principle be
+reachable in release builds.
 
-On positive note:
+Maybe instead of ASSERT_UNREACHABLE() it should really be BUG() here.
 
-What you can try to implement is native PCI-E support for surprise removal.
-How hard that would be I don't know. And I would well expect if one deviate=
-s from
-real hw expectations/configs (such as not 0 slot/partial func removal),
-one would quickly stumble upon issues as  that's not what what vendors writ=
-e/test
-drivers for.
-
-Even if it's not likely to be used in practice (guest still might not suppo=
-rt it),
-it may serve as test-bed for guest drivers.
-
-> Thank you very much!
->=20
-> Dongli Zhang
->=20
-
+Jan
 
