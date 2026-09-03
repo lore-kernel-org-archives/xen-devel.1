@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21A7DC61DD3
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 11:13:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1406841.1640011 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 426CFC61DD3
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 11:14:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1406848.1640021 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x25Mz-0002EY-Pm; Thu, 03 Sep 2026 11:12:37 +0000
+	id 1x25Om-0002iF-4V; Thu, 03 Sep 2026 11:14:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1406841.1640011; Thu, 03 Sep 2026 11:12:37 +0000
+Received: by outflank-mailman (output) from mailman id 1406848.1640021; Thu, 03 Sep 2026 11:14:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x25Mz-0002ER-N9; Thu, 03 Sep 2026 11:12:37 +0000
-Received: by outflank-mailman (input) for mailman id 1406841;
- Thu, 03 Sep 2026 11:12:37 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x25Om-0002i7-16; Thu, 03 Sep 2026 11:14:28 +0000
+Received: by outflank-mailman (input) for mailman id 1406848;
+ Thu, 03 Sep 2026 11:14:26 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x25Mz-0002EL-58
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 11:12:37 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x25Ok-0002gN-Os
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 11:14:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x25My-000goj-Hn
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 13:12:36 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1x25Oj-005xHf-F0
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 13:14:25 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a995621-e002-0a2a0a5209dd-0a2a450793ca-22
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 13:12:36 +0200
-Received: from [209.85.221.50] (helo=mail-wr1-f50.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a99568c-2eae-0a2a0a5409dd-0a2a4505e472-14
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 13:14:25 +0200
+Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a995623-b4ea-0a2a45070019-d155dd32e870-3
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 13:12:35 +0200
-Received: by mail-wr1-f50.google.com with SMTP id
- ffacd0b85a97d-482e4998d28so1656144f8f.2
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 04:12:35 -0700 (PDT)
+ id 6a995691-4cb1-0a2a45050019-d155dd2ec847-3
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 13:14:25 +0200
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-482e2fdf5abso1101348f8f.2
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 04:14:25 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48448ed38cfsm12106231f8f.19.2026.09.03.04.12.22
+ ffacd0b85a97d-48448eea468sm13811027f8f.26.2026.09.03.04.14.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 03 Sep 2026 04:12:22 -0700 (PDT)
+ Thu, 03 Sep 2026 04:14:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,57 +55,58 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788433955; x=1789038755; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788434065; x=1789038865; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=0qCUUi+FntCFG0Q637oYFQ47kE/fJ7XBuQuatck5QEI=;
-        b=VO0Sxr/7gYurdi7A/wUbhvbao8carFHpt7yIyDJ+AfSlGbI3svAhcqc34NRciApLn1
-         Neqk/vU9LesfGtq3ndgmVkuMSgj8upWMhcKeZJtsKQxaHvAs+ImKKYdLxXvPQXlYRq/m
-         QIThUTihsg57QhDw/h6A6f8GL1fStNKos3mk084N6OMh1hjkq65hE+AmdFm/Cldt9Nap
-         Qbr185esh6I2Ordd11OtVNhVtYHefUShPVlsPXNFyvVNq5iTkMK/HYvYULTaFlyNx1qA
-         NCd5JyVS+S7XUGVqDv2BxERQrU7jNOmXgZZMAOyp+NlBn/wb/cGE3RqafvOzKgOQs3Oz
-         ghwg==
+        bh=CZ2OTDTCvOgHyrNppdWw4VatHH0Z8Omk3UUzL8zKRDQ=;
+        b=NYBRYRtztLUa8+KewhOXlWC1CTyoZ+LCsZz99LXYHYqqFEeLWJlW3j+fTVqYM9gsFH
+         MUKriLF8oXxfWZ4zC09MYD7Vs2LfFNOlDK6DHS1AY1lYoNm+Zkc+0OIXsKw9Jn3NTI1/
+         +b8w8wG494VKSQSw0/k8WKB2xBViKDiwVzv+J5fZ/duHMrMUl9JsN+B2S8Wd68nsvID0
+         AJ0G7ayTbNtJGMSKrWgsedp256wSd4dpG5/VtJ+R1cCDxySmR8isqw0oEa2Ae3n061Oy
+         HIbKpBOVscb4pJg8QmdmtW3ZbQkOrEbScnimhuvnNLCpwfOFuZGKL75wD9W75qLRLyLU
+         ALOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788433955; x=1789038755;
+        d=1e100.net; s=20251104; t=1788434065; x=1789038865;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=0qCUUi+FntCFG0Q637oYFQ47kE/fJ7XBuQuatck5QEI=;
-        b=HVRR0JEsJE8pVtztUE3UabMUvKJbr/YjI+EG0jgwpqIG7LGYEjYbB/FUV+OoGSW9TB
-         0OvGQUeFLYdSbl8t+8dpxUoYm05CT/BHx7AGnm3TjZZKY8ySK160CT+ABVU5jfBh4cj+
-         iuiiIVPPzaaLZ7mcMS7lCn8Mw5A8zZIzp4Z2Ocvi0mntrdaIm1QKO3IXnC9WRuiapUY2
-         EHQeSk9Es4gudB7XGSosLLiB8dWLTCJ9uSCKsc9Zu6d0QUAbMBvtJEipO8zsWMFc5a9O
-         +RSypPqgcp6U2HqUUcSUhJ2QtTSDx7pzb3cGsh3bCvM+EUNmbzXFLq67NwojaB79WGhp
-         8v+w==
-X-Forwarded-Encrypted: i=1; AKwUvBwLz190QdwbqCOEQWZ/7LDTEIzqtEMaNyvz5FKIg+4fjqes5i+VfC1WOBuW1/slyxSDcT8NthGGVHM=@lists.xenproject.org
-X-Gm-Message-State: AFuF++nJPOuJBHlFCvpFNnuQ5ecUsgKHEFf0Sdg5p8DIMLnzRlhMC1CB
-	ub0LEuGDVf3cLYUCgwnbrzMVhcwneeFj/0NUy4m8fDXYLQbX0kLNIoBoRUIfb+vn5IerqxE9IGP
-	SYkrICg==
-X-Gm-Gg: AYBFou1jMsdCfGVH9TJZcgfVvlTtNGhRxK1eYn8NBRF5Se5uBKocypFKeXuDyvv1E3l
-	finYGWAU4RdBwGDSM7HIphqlHTb4B2sVb6dFsC1Lifp3eql3Ar3hW2hCPVMeutqO+8c5c5vENXH
-	5ie8yjloRHuvNFGAkF8JbEjgUlnb7EjEmuyiUox+YT7xsiV6WZayXfOgTgSYG0o/lfA1fBSm8KP
-	N1wYbY5GR4QEYhR/PyukH/PJDjCOSHhVuA6PE/0SGaAPDc11462p2NsB/nFL904SevQnhKKA31I
-	9nRRw5bGzMg+HpGq7aQivXJqgAs5PCiztfMZu9kjJr48fUijOOAK8SOOPNiVbSK6CA3aEiEkae1
-	sfQZA14SldKsfZS2PHDMTkvZunpzo+IUOR4KvM6PVRXAkbQeJxOa+sC4ONjLUZyZzAravsCAFQq
-	A31AbRbcN0bFRyhsY9b/te5ExxtddYh8Y/ko8kgKHtii2CxzixF14UB4YwoIfXBcsvtqjml+mQO
-	edIwfF4gtPXB75DIh04DW3dz6ar9Yad7lo1LVNcM453JXgnLhrf
-X-Received: by 2002:a05:6000:41cb:b0:484:44ec:2c14 with SMTP id ffacd0b85a97d-48488dece71mr21460350f8f.1.1788433943137;
-        Thu, 03 Sep 2026 04:12:23 -0700 (PDT)
-Message-ID: <1279a949-6b18-4943-9d7f-046dec98e681@suse.com>
-Date: Thu, 3 Sep 2026 13:12:21 +0200
+        bh=CZ2OTDTCvOgHyrNppdWw4VatHH0Z8Omk3UUzL8zKRDQ=;
+        b=pwaXQ39HUYNm01ZGqLcyeqJ0XDd4VEcXYj8RxHBBpuiqBP4aF4MXOBugUKNH96w4Uz
+         N5HFkHxdZWpeqBDTj8LcytY3V6SRddvY6dPdBbVj5KPYay40TsLim4x8zcOPQvtmB7m6
+         GRV5uQy8uNLEk6u9ABgR4J4kJE4eMazuDgGVPXHoxyeQb1P2MQIH1Qy0VU05E1KEtoSH
+         r2SRz2kasriEiQeKsRHQHVCzPHhDazpOA8nRXN91qllqGCwV0rhX7d8Z9FixacyONzwu
+         tfm2kIzJDIvQ76N1vZIVRM+GOPsma09l3wxBHsD4C79vwsM4fVVJBOOOmUj/5f8La0zT
+         gX1A==
+X-Forwarded-Encrypted: i=1; AKwUvByK1ZDgc4HQac69lQWxaC4LdSr0NlpmKZTO26IrgXxlQm020IqLHFpw0gp5U+3ttfPOFklpn8nvTm8=@lists.xenproject.org
+X-Gm-Message-State: AFuF++lgfz+aBc8WuEJXmabacQV2oeHtkgPwPMlBlea3kmlXMjxc3lX3
+	ZAYc3zAtIYSDNhZPqnu2F6SXQ6qFabVFTKJwVyjdOaHA4a4w8K0rPxXtaM+FzG2C5Q==
+X-Gm-Gg: AYBFou0dS74y3ks2kJLkRaUh5ZVCz5j5etQHbBsYY19N37dZHx7SzZKDRxmBDyfUdPJ
+	SkOPsk6pEpGSmyEInCnUrjyl577DUhd+AOlexOvrEZpuJH33k9uMG18r7tmGg9CH6kdjazbYaru
+	2vV+sZpQvZnZFpz/N3VsuC5NTMzigekTLw4sjP7V+l2EYmudLRn2YFwI25bhTKg/BKe9LEVvTMK
+	92DRxJ13m51gsJ5Ws2+hb3WsYMvN/JHeTlfX6GemaR/U6boTnNz+W5fCb8veRRoEcE9Ex5cCU1v
+	nsQIjowazGrTF+G7Tg22Y2XqoufG0vd34uetAZ68XEqjRTUIrxUeiLqE5ARVrslzATTQrzfDsQZ
+	AFAi2Cunihr0Ul+Cn8QFCwwkN849cvQazLmU+v2u2SIrpsebAsZub0/hbcsntTIxIhTcl/rnx/K
+	93MpBkDX3IejIapXYlsQUbbWzzqWnleXjGzGAViLYV6pd5rz1KJL5OG+j6nzy4raFvhBmxp3gwq
+	bI89CKza6xptAqjR9bRrQaQ4R9l+hpBc1O7LLqoyELJs1mME6yy
+X-Received: by 2002:a05:6000:993:b0:484:3f88:b10d with SMTP id ffacd0b85a97d-48488f24640mr16633890f8f.18.1788434064845;
+        Thu, 03 Sep 2026 04:14:24 -0700 (PDT)
+Message-ID: <a3f0d2f7-b8b0-4367-853c-8d7e3d0948fb@suse.com>
+Date: Thu, 3 Sep 2026 13:14:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/2] x86/viridian: Implement synthetic timer direct
- mode
+Subject: Re: [PATCH v1 1/2] x86/viridian: Workaround Hyper-V GP fault writing
+ to MSR
 To: Ross Lagerwall <ross.lagerwall@citrix.com>
 Cc: Paul Durrant <paul@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
 References: <20260828131142.3986110-1-ross.lagerwall@citrix.com>
- <20260828131142.3986110-3-ross.lagerwall@citrix.com>
+ <20260828131142.3986110-2-ross.lagerwall@citrix.com>
+ <39ccc2f5-7b3e-4c5f-a98c-b526f12bb1c7@suse.com>
+ <12a277aa-2d67-436a-8afa-3a68ad6f6ae1@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,83 +132,37 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260828131142.3986110-3-ross.lagerwall@citrix.com>
+In-Reply-To: <12a277aa-2d67-436a-8afa-3a68ad6f6ae1@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ef75cf/1788433955-37AD0AE4-D1FAA1DD/0/0
+X-purgate-ID: tlsNG-c201ff/1788434065-F6CB02A1-43CADB04/0/0
 X-purgate-type: clean
-X-purgate-size: 2947
+X-purgate-size: 1114
 
-On 28.08.2026 15:11, Ross Lagerwall wrote:
-> In direct mode, the timer asserts an interrupt on expiration rather than
-> using a SynIC message. It is useful to implement this since Windows 11's
-> Hyper-V can only use synthetic timers in direct mode.
+On 03.09.2026 12:55, Ross Lagerwall wrote:
+> On 9/3/26 11:44 AM, Jan Beulich wrote:
+>> On 28.08.2026 15:11, Ross Lagerwall wrote:
+>>> The Viridian spec requires the vector to be >= 0x10 when writing to the
+>>> SINTx MSR, otherwise it should #GP fault.
+>>> The spec-defined initial value is 0x0000000000010000, i.e. the vector is
+>>> 0. On startup, for some reason Windows 11 Hyper-V tries to set the MSR to
+>>> the spec-defined initial value and since the vector is 0, it GP faults.
+>>> To workaround this, treat the write as a no-op if the value is
+>>> unchanged.
+>>>
+>>> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+>>
+>> Acked-by: Jan Beulich <jbeulich@suse.com>
+>>
+>> I expect that despite the (valid) absence of a Fixes: tag this will want
+>> backporting.
 > 
-> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
-> ---
-> 
-> Should this use a new Viridian feature bit or is it OK to use the
-> existing stimer bit?
+> It should be fine to backport, though in general I think backporting nested
+> virt fixes at this point is not needed as there will be too many changes to go
+> into the stable releases for it to reach a usable state.
 
-Not sure there. What you need to deal with though are migration related
-aspects:
-- A migrating-in guest should not suddenly see the CPUID bit set when it was
-  clear before.
-- As so far we don't even reject the .direct_mode bit to be set, it being set
-  in any of the MSRs of an incoming, unaware guest needs to be taken care of
-  (the guest must not suddenly get interrupts at the encoded .apic_vector).
-Dealing with this may actually be easier with a new feature bit added.
-
-> --- a/xen/arch/x86/hvm/viridian/time.c
-> +++ b/xen/arch/x86/hvm/viridian/time.c
-> @@ -223,6 +223,14 @@ static void start_stimer(struct viridian_stimer *vs)
->      set_timer(&vs->timer, timeout + NOW());
->  }
->  
-> +static void stimer_deliver_direct(struct vcpu *v, struct viridian_stimer *vs)
-
-Second parameter can be pointer-to-const.
-
-> +{
-> +    struct vlapic *vlapic = vcpu_vlapic(v);
-> +
-> +    if ( vlapic_enabled(vlapic) )
-> +        vlapic_set_irq(vcpu_vlapic(v), vs->config.apic_vector, 0);
-
-Before you use the vector, you will want to check its validity (along the lines
-of the check that patch 1 aims to avoid in a special case). Whether that needs
-doing at the time the MSR is written by the guest or at the call site I don't
-know: The (oldish) spec I'm looking at doesn't talk about validation of values
-written at all.
-
-Also please don't re-invoke vcpu_vlapic() when you have already latched its
-result in a local variable.
-
-> @@ -372,7 +382,7 @@ int viridian_time_wrmsr(struct vcpu *v, uint32_t idx, uint64_t val)
->  
->          vs->config.as_uint64 = val;
->  
-> -        if ( !vs->config.sintx || !vs->count )
-> +        if ( (!vs->config.direct_mode && !vs->config.sintx) || !vs->count )
->              vs->config.enable = 0;
->  
->          if ( vs->config.enable )
-> @@ -583,8 +593,11 @@ void viridian_time_load_vcpu_ctxt(
->  
->          vs->config.as_uint64 = ctxt->stimer_config_msr[i];
->          vs->count = ctxt->stimer_count_msr[i];
-> -        if ( !vs->config.sintx || !vs->count )
-> -            /* Reject enabling with a zero sintx or count fields. */
-> +        if ( (!vs->config.direct_mode && !vs->config.sintx) || !vs->count )
-> +            /*
-> +             * Reject enabling with a zero sintx (if not using direct mode) or
-> +             * zero count field.
-> +             */
->              vs->config.enable = 0;
->      }
->  }
-Related to possible validation needs: Is it perhaps also required that .sintx
-be clear when .direct_mode is set?
+How is this nested-virt related? It looks to affect Win11 when run on bare-
+metal Xen?
 
 Jan
 
