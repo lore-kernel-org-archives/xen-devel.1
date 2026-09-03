@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8227C624D7
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 10:44:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1406792.1639968 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07A8EC61DD3
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 10:49:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1406805.1639986 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x24vj-00038e-W7; Thu, 03 Sep 2026 10:44:27 +0000
+	id 1x250S-0004GK-IJ; Thu, 03 Sep 2026 10:49:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1406792.1639968; Thu, 03 Sep 2026 10:44:27 +0000
+Received: by outflank-mailman (output) from mailman id 1406805.1639986; Thu, 03 Sep 2026 10:49:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x24vj-00038Q-Sf; Thu, 03 Sep 2026 10:44:27 +0000
-Received: by outflank-mailman (input) for mailman id 1406792;
- Thu, 03 Sep 2026 10:44:26 +0000
+	id 1x250S-0004GD-Ew; Thu, 03 Sep 2026 10:49:20 +0000
+Received: by outflank-mailman (input) for mailman id 1406805;
+ Thu, 03 Sep 2026 10:49:19 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x24vi-00036x-R8
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 10:44:26 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x250R-0004Et-5K
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 10:49:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x24vi-003JKH-7s
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 12:44:26 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x250Q-003LH4-IP
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 12:49:18 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a994f89-8faa-0a2a0a5109dd-0a2a4509db92-2
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 12:44:26 +0200
-Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a994f89-be1a-0a2a45090019-d1558029e14d-3
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 12:44:26 +0200
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-49cd9add88aso13986755e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 03:44:26 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cee5d1fa6sm66226815e9.1.2026.09.03.03.44.24
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a9950a4-bab6-0a2a0a5309dd-0a2a4504bf34-38
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 12:49:18 +0200
+Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a9950ae-b57f-0a2a45040019-d155dd29d904-3
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 12:49:18 +0200
+Received: by mail-wr1-f41.google.com with SMTP id
+ ffacd0b85a97d-485850cf499so91938f8f.3
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 03:49:18 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
+ [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48448ed37c4sm11241379f8f.21.2026.09.03.03.49.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 03 Sep 2026 03:44:25 -0700 (PDT)
+ Thu, 03 Sep 2026 03:49:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,105 +52,120 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788432265; x=1789037065; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+        d=gmail.com; s=20251104; t=1788432558; x=1789037358; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=jIzas/uL2P8BgJezkOhhFdgxAtmFD3oqSyOce2VVsK0=;
-        b=O8v4grZb+Dc0ZbN8rfdXFf6eMX5BKMESs3kOqJWeJ2WXY0dQrOKZqd1HTLo7Zk4hnN
-         lqzAktIvAjXVUczf9SM9Bqra0E9NEnGyYHIlV7i4EgDk0F2GA8DVk87zT34KlVhvi1ud
-         e+FfqXI5KmNXQbPbZeBiR/4n6zUsbhDzc8gIXMKBBEetidgkqzfkhanwZifMk/jKJiPz
-         OvKVDUXfmYHS1vN5A7yOpyq5XocNOQVvjUD6V9f5yXYXkWI5rDsuWGLp6QjTe/x+W0Mz
-         IYFDi4G7qjzfHwqcWY7PPCM79IlZfOSzo4PyzdOTyHzvOs2yN+3rpV9IEY24EXBZuV6O
-         Xy0Q==
+        bh=NMtNZcdWrUtlpyEBaadTCPw6C9NxehkQhCnEcPOOYOM=;
+        b=ooXKSAFFQ9IcLmxJur+zGEGiH/YZm9dC6CK9uF35OiKQUvAZ3t1b1tRD8cbZA2O1ZI
+         JCRHkW/c5OsDkPoO8rEGod4WMhcDLztkB+WgITsU8xgyWUs/PK4ce3n08VO1FlDWFPoK
+         tAQxvUgu5qcZNWObvnX4zkSdp4ewj35YbxM9tbXEeIiELuokWDRH7YSRl2mVZImsVhjD
+         K0rU5PLLZCfuv3x6Itmwk1jEKgiHKcrTp/NI/VJGWacgSbaKAzwqKJV1pBgWQKgiEvKV
+         wudcGWr1RrTkYOibUzX5DSCiC8DHg5ef2PafHxiOcaR8skkrRiM/ohwKyIwy09R71bsS
+         uCag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788432265; x=1789037065;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+        d=1e100.net; s=20251104; t=1788432558; x=1789037358;
+        h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=jIzas/uL2P8BgJezkOhhFdgxAtmFD3oqSyOce2VVsK0=;
-        b=YYj4u2A0CmMgzjRo5uMYuXlMh6AeblvuuQazBlr/neOdrwAm6nwaz7Pyr+cmHa+U7c
-         UDlRoqrLGrqesZIXTWz/FauSoIKbRSyhUnPQfNS4E8NAyJELKbOyM44hNUsnQUJMQtvD
-         pf/RqzP9MWE5OhK0DFovckFnqIK7DcHnRx+fo+M3/pBYVL9OK/rt5Gk7E8DIZ0SgL02O
-         JRsEPxi3VGKqK3sKe5vkVizSFa7CM7bBnqiKJJmOln/DdyLXRxHc2bYdxvhvWzEflSt4
-         IOBwkTuizKXf4urrsji/RM1/FcQrWjFSsrge23ScqwgibhxF8k7r2sT9imdR0SHeBC9N
-         t1+w==
-X-Forwarded-Encrypted: i=1; AKwUvBwAtG1auDLNA6rrpmDkrZze5I5d+a7KuYjaosIjmUUVp429oyXJ0hBVQVaBjP6W5usqpYqF7v7uQ6w=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lBYlahYppJ4XkGTqS9+b9v12QK4DEa7x953jwyOsToK/KNsAuR
-	BlthKjhaYcoEgYl9Sd8UD9uFRpBwUMfAU6fDUJFXfb4zC/mGsUMeSMtfqHuUIG89bg==
-X-Gm-Gg: AYBFou2dFrloeYwBEwS4PjS9VZkZVzfBYtFdyXJmfssiv9Oi4bl+LPKOUnUzJ9DoHay
-	vAIMdtuLO8rDN+3JSl4yafCd7tK4P2ZiVIWHaW7siTTmQW57yYrasL//9o1E2Jlpuni8nbpo0F4
-	G0fJ7TKh9bo5ImU11j5NWA0sv1rZK/aImPmIEC2uAlpYAbonwJ7Mo3V0Ctugw7rKj3QbmcWF4Z0
-	oiS3fIOqQV0t6qkiqUicMZR8bUuhje4O6uVhHf5DN+0mX4ktptnvqYpjkASi/4VTf0gFGgBkZYb
-	srYuzzhGB5wFXaqpA3Bn/LuUJ0BbaIExMZBJw/NhfBTTLgfbAoEiOw8fichSFzfHuYo2dpurUoi
-	Dt/KooVNIBa0phhQTr4YyIVynN+JmdT0M/pmLRVc9bKUYIHgXih+A5vp+oZqI/nurZveMvS44Xp
-	Pa5uUVy4hlg2TT92OregKa/QyKcZiy+OCM6iRh5Evk7fDv2xVgN/pwGIO6JZRTY/6NN/aWe8Lyf
-	MYrXkCkT8Tj6FcYy3EYG9XmXSKbv4ugN/4istQbzwhHuiXjQSXY
-X-Received: by 2002:a05:600c:8b10:b0:49b:12c2:104f with SMTP id 5b1f17b1804b1-49ce55ecddamr238217505e9.1.1788432265579;
-        Thu, 03 Sep 2026 03:44:25 -0700 (PDT)
-Message-ID: <39ccc2f5-7b3e-4c5f-a98c-b526f12bb1c7@suse.com>
-Date: Thu, 3 Sep 2026 12:44:24 +0200
+        bh=NMtNZcdWrUtlpyEBaadTCPw6C9NxehkQhCnEcPOOYOM=;
+        b=ZZwzICZkwzqOkFLygbi01pjVyq5imZ+ZlPiS1MddREq26PuWXaJeLTsJsKbnD19DbA
+         T4sI2b646GnaKZ1ohbIb68Sr4bV+ryK/WL6PkIhErTtOXVAppddJV5DdKqcDq2jZJ3SA
+         QcfTohhalyZuEt7i/pmCJUeqFsf90JzDw1UJtsCVOnIeVoCSJ6BzdgVwwRMHMYWeAo98
+         zSoomyADu2z97oDsSqWMINClOAnjLloc4ZtCCKA7Xjh/q4ih0+EN81jXrJJdmHNX7QHM
+         P7GS1O3IuCCrA8wqEuibw6EypU1gCEEp3Awsccu57N0b+2iuXicmnzD02Ey17FZ6+kPk
+         754A==
+X-Forwarded-Encrypted: i=1; AKwUvBzvnF/mfUqqc2grJIRHBsYE0Wwa9x+qlAPCkZscbaOi5Wys69l4GZ/G+LI6RVinnS4w/yO5tf1ovM0=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mTuDyfI5k5+Vyv/+rBtZvxy4Zj6+kbj33sey5NFpDP/txX2Nyo
+	ouQX/NEmUp3pLH5VFyqDu/xOmup+HasfDorITJT7VXcosVMt0bLgsbtN
+X-Gm-Gg: AYBFou1F0UPDvnEc9aluC30/74Zx7RulCWNSb8jt4WkJuzdGLkD7hZWjS5eD2B2BtIF
+	jbZW7/Zc1VqGJOU2DtkureM8fK9GaBrLDHftIR8678sgWA0/GQDG4JOKF3iG/DQojRj2NiGPEjP
+	r4P4Fpq8QW5j5oyqCDeyQSDocgEP0hrYV96lxTxo9FIMCR9s2ZYhh/NHCkIxy+O7LHlLyiML+xH
+	aeSrew9Hed4AoEuy7T8jOP8qwesyqG24O15UA/RsRZH4Znfn5QErNaOj47IbjJQk8NyLeJalNHX
+	kYan8Kypq57WtXkjcaUdZDzbqKHJ/ImvytZX4PNEOQLQCm3qGueW5gTzFUrgIx6V+V7sfvqVNhu
+	kVoKSoJvvNbvpumu6YyEmOHKXKEdnLFSt0MDwpauwUcrm1lUFTzStiOvppiMH8TdltFgKpfBBFP
+	rAtSpoo5W/DHaNqPpHjFRsHsolZcRShnTQYxtoFQVBoAvgHb8KNXWEJOXihvGUIVL/XS6PLvq0h
+	g00yIicJ4BfhG8nCV44ToqErIZyz/dsGB4Yfj/BHQ==
+X-Received: by 2002:a05:6000:491d:b0:47f:80d1:be0a with SMTP id ffacd0b85a97d-484913b985fmr21602074f8f.14.1788432557828;
+        Thu, 03 Sep 2026 03:49:17 -0700 (PDT)
+Message-ID: <ca6d67f2-a3cf-4303-95e4-aedec031aea9@gmail.com>
+Date: Thu, 3 Sep 2026 12:49:16 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/2] x86/viridian: Workaround Hyper-V GP fault writing
- to MSR
-To: Ross Lagerwall <ross.lagerwall@citrix.com>
-Cc: Paul Durrant <paul@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+Subject: Re: [PATCH v8 13/20] xen/riscv: introduce (de)initialization helpers
+ for vINTC
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <20260828131142.3986110-1-ross.lagerwall@citrix.com>
- <20260828131142.3986110-2-ross.lagerwall@citrix.com>
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1787836900.git.oleksii.kurochko@gmail.com>
+ <688352e340872a50af99a51082966669787b1f72.1787836900.git.oleksii.kurochko@gmail.com>
+ <be618606-3b3a-41e7-ad99-bf427f1e723e@suse.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260828131142.3986110-2-ross.lagerwall@citrix.com>
-Content-Type: text/plain; charset=UTF-8
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <be618606-3b3a-41e7-ad99-bf427f1e723e@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1788432266-3A0C5034-C6AC0A4E/0/0
-X-purgate-type: clean
-X-purgate-size: 679
+X-purgate-ID: tlsNG-ebf023/1788432558-C20D5B50-49C6BB7F/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 1493
 
-On 28.08.2026 15:11, Ross Lagerwall wrote:
-> The Viridian spec requires the vector to be >= 0x10 when writing to the
-> SINTx MSR, otherwise it should #GP fault.
-> The spec-defined initial value is 0x0000000000010000, i.e. the vector is
-> 0. On startup, for some reason Windows 11 Hyper-V tries to set the MSR to
-> the spec-defined initial value and since the vector is 0, it GP faults.
-> To workaround this, treat the write as a no-op if the value is
-> unchanged.
+
+
+On 9/3/26 11:20 AM, Jan Beulich wrote:
+> On 27.08.2026 17:19, Oleksii Kurochko wrote:
+>> Add common helpers domain_vintc_init() and domain_vintc_deinit() to
+>> allocate and deallocate a virtual interrupt controller (vINTC)
+>> structure and initialize basic virtual interrupt controller registers.
+>>
+>> domain_vintc_deinit() isn't called at the moment as arch_domain_destroy()
+>> is implemented as stub at the moment.
+>>
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>> ---
+>> Changes in v8:
+>>   - Add call of domain_vintc_deinit() to arch_domain_destroy().
 > 
-> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+> Why only there? With ...
+> 
+>> @@ -308,6 +310,9 @@ int arch_domain_create(struct domain *d,
+>>       if ( (rc = p2m_init(d, config)) != 0)
+>>           goto fail;
+>>   
+>> +    if ( (rc = domain_vintc_init(d)) )
+>> +        goto fail;
+>> +
+>>       return rc;
+> 
+> ... anything added between the newly added code and the return, ...
+> 
+>>    fail:
+> 
+> ... you will also need to call it here. Since it is (supposed to remain)
+> idempotent, I think you'd better add that call right away (as long as
+> domain_create() calls arch_domain_destroy() only when
+> arch_domain_create() succeeded).
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+arch_domain_destroy() (where domain_vintc_deinit() is called) is invoked 
+from arch_domain_create() if arch_domain_create() fails.
 
-I expect that despite the (valid) absence of a Fixes: tag this will want
-backporting.
+So, the mentioned case is already covered. Am I missing something?
 
-Jan
+> Then:
+> Acked-by: Jan Beulich <jbeulich@suse.com>
+
+Thanks.
+
+~ Oleksii
 
