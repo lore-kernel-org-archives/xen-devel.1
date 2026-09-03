@@ -4,46 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13E37C624A4
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 14:32:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1407343.1640445 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB0B6C61DD3
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 14:40:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1407360.1640454 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x28U0-0005uI-N9; Thu, 03 Sep 2026 14:32:04 +0000
+	id 1x28bh-00073h-EN; Thu, 03 Sep 2026 14:40:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1407343.1640445; Thu, 03 Sep 2026 14:32:04 +0000
+Received: by outflank-mailman (output) from mailman id 1407360.1640454; Thu, 03 Sep 2026 14:40:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x28U0-0005uB-IV; Thu, 03 Sep 2026 14:32:04 +0000
-Received: by outflank-mailman (input) for mailman id 1407343;
- Thu, 03 Sep 2026 14:32:03 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>) id 1x28Tz-0005ss-CX
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 14:32:03 +0000
+	id 1x28bh-00073a-9g; Thu, 03 Sep 2026 14:40:01 +0000
+Received: by outflank-mailman (input) for mailman id 1407360;
+ Thu, 03 Sep 2026 14:40:00 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x28bg-00073U-4j
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 14:40:00 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x28Ty-00An5l-Ov
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 16:32:02 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1x28bf-006ZQQ-1N
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 16:39:59 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6a9984d7-bab6-0a2a0a5309dd-0a2a4503939c-20
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 16:32:02 +0200
-Received: from [52.101.48.12]
- (helo=MW6PR02CU001.outbound.protection.outlook.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6a9984e0-fae8-0a2a45030019-3465300c7f52-3
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 16:32:01 +0200
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by CH2PR03MB5269.namprd03.prod.outlook.com (2603:10b6:610:90::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.6; Thu, 3 Sep 2026
- 14:31:57 +0000
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37%7]) with mapi id 15.21.0360.008; Thu, 3 Sep 2026
- 14:31:57 +0000
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a9986ad-2eae-0a2a0a5409dd-0a2a4507ea1a-20
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 16:39:59 +0200
+Received: from [209.85.167.53] (helo=mail-lf1-f53.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a9986be-b4ea-0a2a45070019-d155a735c078-3
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 16:39:58 +0200
+Received: by mail-lf1-f53.google.com with SMTP id
+ 2adb3069b0e04-5b5e18f0439so2404336e87.2
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 07:39:58 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
+ [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5b606b94655sm1427658e87.41.2026.09.03.07.39.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 03 Sep 2026 07:39:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,170 +52,490 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DNBBuEMRcuHzVNXeYGQPHI+63E0RErmngbmPkhUVHVY4+HktHNkGsnuHE2jxZ/59EDQSkX6Uzofb2lM9pMtulKe50G7su/pH/MOGVP7awmnrpFAoy+q1SRqA83iDMfpW+ZA9/eDe3OdORw1RX96DcuSmTnMu4+m8qHWMGajT37Xke+xidmA9dcGQtFCFUFdFRqQdlqrhgZKHV8mpffOPmw3Gwkz8FM/itIwb6XKhNvj0TApifCeydAaMGNRyjuqCI0pnsq+ZF2kB0KCVLCexF/EEeTdQC0s8TTXqLZxR1r+UVhRNxZRaaLYfwiVpfgPnw0rjnz7GgMWCk7WUQTsHwg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=O8JqueNGQIyNX+s8aWi3F1MkZNe4nUGn2KTfR2Oxn9o=;
- b=fU+4d0QEtVBkWSPzbtstKD+EAalMJ7yQ3OLoAXP3Ws+nxeFKO/dfy9x0l9xtyoO1dF4lZRGd6l5OAnIVAR8crH7xIvb8sReZe5Y5Uq2ZWdJtpr7Ohyhbr1fdH7YiLFCrrbR3hgaULGN6FNDXsZ61cgh+PK64UGG65Xtd7uAnbcAXjl7xokBeKQd0eqzVQLHYM7MmEeOboHDomGIEHkX55ZPBwoLyhoGdOiWT0EIY87i8/FsI9Mo7u6xD1du6fJgxY+NPCnlZXF9DUKOn1YC855m/Dxsk/7FC8s1qhPLzrQYvSn2MPXrTq9CchJTi7BRxPttfxESN9pTsJ3VfwRz+Nw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=O8JqueNGQIyNX+s8aWi3F1MkZNe4nUGn2KTfR2Oxn9o=;
- b=m95wjObidK0pgiMSr20iEJseeaI7WK3VhPUnlnhMxngdeqYMSGr2uOy+RzFDOLOkqGgY/yjyNHFAcIjlrpOmezdkpAslafpatTTHjePhevPJ/irMWLFItjPwzAn0edKUGdwexLIouqI8big0VKHvUXV6QYR2HOi8vD48hU9Oj30=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <1acb3901-c159-49c5-bd59-aa7be58c67cb@citrix.com>
-Date: Thu, 3 Sep 2026 15:31:53 +0100
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Jason Andryuk <jason.andryuk@amd.com>, Teddy Astie <teddy.astie@vates.tech>,
- xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v1] x86/svm: Intercept CR0 writes selectively
-To: Jan Beulich <jbeulich@suse.com>,
- Ross Lagerwall <ross.lagerwall@citrix.com>
-References: <20260828141955.4009939-1-ross.lagerwall@citrix.com>
- <514b9ad4-912c-45fa-9450-3c85adaef483@suse.com>
- <6ecdf1d1-784e-4cc0-b840-f8970a295ed5@citrix.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <6ecdf1d1-784e-4cc0-b840-f8970a295ed5@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P123CA0029.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:151::16) To CH8PR03MB8275.namprd03.prod.outlook.com
- (2603:10b6:610:2b9::7)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Content-Language:References:Cc:To:Subject:From:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1788446398; x=1789051198; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=42+uphfCCLRvNwxaRgHxqMYnP9Bgc+IH+RL7USpLoVM=;
+        b=VS2Xz2BcXGCY5HO+d8i2Gc5W70FVwSy187AfrXgjxo8MOtiRB4m3OA5uEPc4Kji2aq
+         gNQdlL648WppQXzevrs5iFKz4MVEXJd10YPotuLsLc8cnNpoShjt3yaS1gtMpTD0igD9
+         KerwdJSzfLrTBej1Ara9n/HT91cwf3CSBYlwrOAvbg2faR8WH3izrb4mVlKBxAPXvt+3
+         PLlKt+1FmFyc0Pszc5tvr6wAarNl9J41KGirwexI1Q5OpImugRBpXIiywfu7W/yrlsxm
+         RwCN/rwF0LbgALJFs1A1CL2OUx27O00sNHoePtw0cJlTFzKtIhgW/KmhO9nMptATHDZH
+         Zoaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788446398; x=1789051198;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=42+uphfCCLRvNwxaRgHxqMYnP9Bgc+IH+RL7USpLoVM=;
+        b=dK7oFntboEcIgN3gWShhOEhcjDoYWi08j6mKF3OtCbU1DBkVVJ6oiDcXXTTLeGNbin
+         scSYPSWurtLIDOj21Kkt3Yp9aErsEg93x5h8NLX/oa2ZhuDVLxPIGcaHtFt/tUFnYQqa
+         AQJgeMxUmLl5yVDv0SGwZ/JCLmDkKpLdXbiXBfQcGf4NH74nF6o2UHn4b4Oc3mvkYojg
+         QgaqbwAijnE70iPKEBaUJ+sV7Tkynvzu3sOApXwPHJlQboYNaVGFnQch6+mgrkINM3BS
+         Bzj4QAcxTRJcJTXEyxBk7I+U2cxIeTvTZayWEdYt+fT+RRjIz7TGmSVJB8zW2jD2rNIH
+         LlSg==
+X-Forwarded-Encrypted: i=1; AKwUvBwNYF3cj2YyP0TEjo1VXVmdBzcSr6QYmpkvqSbnabtMjDqm0SnjAfQMbMxPv90CBBgRQWYg/yWU534=@lists.xenproject.org
+X-Gm-Message-State: AFuF++m1zdz+17HveIY8GfLHJduAJVa+NwDr1D9HSQLsW0M821R9+OZU
+	G1VwaCvE64YnG9ttBI2bwNp9EOaIQp7I/zT1w7zSdckl0J4uR2/eTBW4
+X-Gm-Gg: AYBFou3F1nDddRLqTAzKig+/Nym2F5NOxArdwgPvbHbDhECZFs5tw/xuujeLg8+cpjU
+	sy+JLCHhcK4TMmjfeYRctH3Z+3XkvHjtBn1wmKJXQjO10UYKgDoE5l6NepHE7FH6ZWMh2HmVzVP
+	H/87+eX5d4vg7YnGoxhcpn7lB3IcZWlZyCbk/OtmCORAlfPsKIcPMFDC+oWeTJe/DDdi3eo6zUs
+	CmahkWzVCe3ImeM4bFcTdCq9c4UOzNdyIkh76tCAR5oCWZQrge48lqyc+d3nXqaEElR+LHYyog9
+	yYODd0/ikDey+uG+H228/tVEl63VUJ36QprFh/8ayG20J+n5x22AI5Xd4FfFaVuySmfndmxOEnm
+	rAM0UW+tV52I4YTnQnUF2nFv071LHkri3pAiEe/LBgsGu6n7oAtDL48nYTbHSdAxrnkgC0wbKUm
+	m9J3ZomKLB+58+34iDybvcQbQi1hKQpadj7deTplvIzflKQDTqsw4fATHAthBOazYnI33WGWmrt
+	L5FFOTzVgCeMaSCE3NdxcK658630hmbrYgQdKx/9g==
+X-Received: by 2002:a05:6512:1252:b0:5b2:958f:8cdc with SMTP id 2adb3069b0e04-5b608344615mr4753675e87.11.1788446397861;
+        Thu, 03 Sep 2026 07:39:57 -0700 (PDT)
+Message-ID: <ffa2c0cb-52ed-421b-8c4e-9b61edd43f6f@gmail.com>
+Date: Thu, 3 Sep 2026 16:39:55 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|CH2PR03MB5269:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6a749461-90b8-4650-2c9e-08df09c81b4b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|23010399003|376014|366016|10067099003|11063799006|4143699003|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	YSHmPm7D2Njo2SN9u3ivjFe3HQtFnA61AMRslJL33+9FGIUzvMUfCrdQaLhX28OpQetB1SAGrxnx1n92g7waOSMTXT6Izq5n6zpVn4vtIvINMEg0yCwFOkuzROCZio7l/rpfua/bO4PWppoGkfNeG4o+88Ev03ftmtTjftBxMUiaXcU0RPVNnpkEieQt7/LvZvjFPOiKOQnFopSQC1eX8gnCRIcXCC+cHM77bo1kHu2duUJPQ4YpebO3wCrtXJEj/uyQ5BcIuMMDshy+ezkKHT/YzKp25nYvMpaKros1U4BPr1hgfSpEoVdzK4uw+cW3+EgsMt/IXmIABCjZfsh9f1Fk55MyqKw//+CMUkIi+0x41nw1rfEVE44Y+sQbEFYU8tQbf+3bmcJj+6ukzXbrLmAvcdv/66heg4fTV1FRYfiyM71mom6IxsYCZ18M0v0O8LvmPCP0PMBQCJygs4jsUO9QZ7c8yxqHBchjxjFQrUS/jU1gMoj327JZt20zlK9NP0iCzJlElyfVkP9O/4kSz9EwzVbs9r1Tnml0N8zsNwOvq+3U4XT+exVjiJUM1fneL4l+j002toSneAo3XKtXSTElssm4yqUhJrgVXmhX33n3GPypBvG0eRkj3WBnv/OtKhP3DDAwXuyfrYsmZZOh4FjLOOWLXfgRTR4SscuYL0o=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(376014)(366016)(10067099003)(11063799006)(4143699003)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?VVpZUm1vQnVnTmZTTHJlUjRtY3NxemtCZHZNL1NSZ3VqTVpWcUNOV3ZLRG5S?=
- =?utf-8?B?QmRJQkVPWTQwTW00a2ZzWGZCNXNtSXlxN2pSRzg0WFNUdy9PeE43QmJpY3hW?=
- =?utf-8?B?YkJzaU8yU250ay9DWjZOc1l1MjV3SHliSTVCcTFBT084d3RhNzdSUStxL0Vl?=
- =?utf-8?B?a3F0NFMvZVBVdUpjaCtGbTczbm0zWXpyTm9oK1hFOW9NdUloSWllSlJ0cUZ1?=
- =?utf-8?B?RTMvQlhKWElXSkNZVmgxVzIzVytyMEpHVy9pbHVqZGp3eTNKeWp2SmJoUXA1?=
- =?utf-8?B?MWJ0TWxZR2ZTMG55U0tpUEdxdk1sZDErcDZ0LzMyNjE3TzJDdVRYaytHdXZU?=
- =?utf-8?B?Nnc0c2Q0UEhSem0zL095SGtBcFR0Yy93R2t5TWNJdlM0dTJxV2J2Z25Gd1Ez?=
- =?utf-8?B?ei92S3dqSyt6bUZycUhWd0RKdFVMVHNYV2NCZUtDMzZTNlhLa1JrVm55M2ZL?=
- =?utf-8?B?RXgyclFxaGtPNmtEMEFHTjZMamc2bEpyd1FKUjdBWmxBL1ZwKzNuY0R3ZDlS?=
- =?utf-8?B?WlFWemhTYnBDTjlwUTBUNlFYMnRiSnBLamNCbUc0MWIvVzhERlhXZzlxT0xH?=
- =?utf-8?B?SURGVGpDSGZ2Z1g5TGVWay9ldFI0UENLTmszMGxjRWRhNlRCTnVyOVRKYkRH?=
- =?utf-8?B?blhNYXJtbEt4UlZrVHBtdUVVWlNlVktnYkt2cmdQbk90dWYvMHFza01TTSt6?=
- =?utf-8?B?NkRNR25IdXpDSGlxZnZMV0x3akJjRG9xYmZqbjNRWWtvS2psSWRDbkhpMGxl?=
- =?utf-8?B?eHV2N3h1eFZDekpJS0o4NjJ3cW5sR1FpeCtTVTBoMFJVbE1Jd3FON1BUVnhj?=
- =?utf-8?B?UE9BWUlHVklpQVBob0RGbFZCalFEdlltdTNiVFVZRmtjeFQrbDZtN0FXQTQy?=
- =?utf-8?B?aE1nd1oyZmVEaVd1WEpyaisvSmo0R3BYckxWUnkzblBJR3FCSDliY0N1cWVm?=
- =?utf-8?B?dXU4V0tTNysrZzBNUFFJeTZGRHJ1VU8wNk8zdDJheUJyRlNDcUpTZ0o1c1hT?=
- =?utf-8?B?QnM3cHNKdHhDbStudTd4NStVVmhmQVg3bG5oYXBBM2YyOHpsZjFra2tnK24y?=
- =?utf-8?B?bFFlcUZGSHgzeGhudHpGaXpZbTlhUUk1MUZoNXBKSWM3UG5TakM2akFUa3hT?=
- =?utf-8?B?QkQraGppcWlSMUdRd1JjSngxaEQwY2xObFVOWWVuU3RMbEpvSHVpVWV3WUFM?=
- =?utf-8?B?Y2J2ajIvNXpZYjQ1c3pVdnhLYVduYlo5SnptSk9zTUhvNXdiLzllUnRlZWhk?=
- =?utf-8?B?ell2Rjg2djROWG1vNmF0cEJHNUdBdjRqb25zWjZDdGt6dVRQMVg1L2UvY1hW?=
- =?utf-8?B?OXgxNm9PM1FQK25UenlMNmVPRlQ2UEJKdS9sM0cya1orMndhbGR2L1lzQWlF?=
- =?utf-8?B?ckRudGY2UmQvNEJFcG9TSHRWNnp2Y3hBR2taTWJudkpvck5hNUU3eXhManJk?=
- =?utf-8?B?ankxVGFjZ1lhYWNQaW5DaUc0NXhSWTJyZ3RvWXp3Qit4NWNLdVVQbTdTNGR2?=
- =?utf-8?B?TUFNMlVDN2ZLcTA3SW5ta3l1cTZIZWF4dEh5QWZPcjN5SFVNL3RSWDZ0OWw5?=
- =?utf-8?B?T0hJSVJROHN3N0tHUDVIM3VYUEIreDRBay9Ucm13YzdVMzYyK1J3K0NQZXdK?=
- =?utf-8?B?Ykt0VVNaaDhObkpNdldjS2tCNlA2cHJSK0lHV1RHcFJiU1pxRDNVRERnRUNo?=
- =?utf-8?B?eWMvL3I3SGJSY0c1ZndrNDlJWG90TUdKbGNmb09HcXVZUlRTOVZMSXZrOXFi?=
- =?utf-8?B?dTNSbXpwTER3NjNFY29zV2YrbW5iZjR6MXJTVzFMMUpUeXZrZEJOSUJhR0lh?=
- =?utf-8?B?ckJ4ZzVuRWtIN2d0TCtwRk13dE1QdElKY1BYQVIwMXdzWUI5TTZpektlOUFY?=
- =?utf-8?B?WTk2ajdJQnRUTVI0ck9GN1I2R2FGeklxMy90QTcvTmIzWWppbkQxcHE0bTVj?=
- =?utf-8?B?VkxNcUtxU2UrRUhuY2JIeUV1K1pQRVlwYnYycGt0RkpoMjYvdmZsVjJvaTZj?=
- =?utf-8?B?K2gzM1F6UHRrZHNIT0NxN29heUI0OVFtaVBYOExpTnN6aEpmTDF2b3NHV3pj?=
- =?utf-8?B?TWdxZmd6SmhWd01zODNQM2tsdmZUMGxyNTBlTDR1dFJXRGlYM2dabHZ5a1Y3?=
- =?utf-8?B?VEFBWjF1Z1R2UXF4anFYZkNOR0VXYkpBdFhKTnhkZHJWWW9VVSs3V0pXM3lB?=
- =?utf-8?B?S0hvSzg1M0xXMWdJWVV1SmFBYmlLbFZFY25kcHpKOHI1Tm1WYmx3Mnh3QUpH?=
- =?utf-8?B?cmZheFhLbTlVcndIYmtmQWQzalhOWkNLRitWbmo0eThiWFRDd0doZHBzazVV?=
- =?utf-8?B?OGRXYkhwYXpHOEpsY2E0QmtNYzdhZ08xZWZHSEd5Y1Z2NmVydUs2dz09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6a749461-90b8-4650-2c9e-08df09c81b4b
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Sep 2026 14:31:56.8275
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0jLkLNDmFHaIxPX7VZ30H7JT9kP4rVm/lqct6TQblJl8aws1jYA1FRfyROa9GTv1M03RhvjNim6++ka+mBsyI6O1acFBoianCO7fu5CljjU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR03MB5269
-X-purgate-ID: tlsNG-33051d/1788445922-6C2E04E9-CF52B0D1/0/0
-X-purgate-type: clean
-X-purgate-size: 655
+User-Agent: Mozilla Thunderbird
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: Re: [PATCH v8 16/20] xen/riscv: implement IRQ routing for device
+ passthrough
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ xen-devel@lists.xenproject.org
+References: <cover.1787836900.git.oleksii.kurochko@gmail.com>
+ <d5ac0f45de409ab0a63b2b17e4fd3cdd47dbffa0.1787836900.git.oleksii.kurochko@gmail.com>
+ <0cf2c9f6-5fba-4d1e-a9cd-e2a409730efa@suse.com>
+Content-Language: en-US
+In-Reply-To: <0cf2c9f6-5fba-4d1e-a9cd-e2a409730efa@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ef75cf/1788446399-A72DCAE4-0FDE81D7/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 15101
 
-On 03/09/2026 3:31 pm, Andrew Cooper wrote:
-> On 03/09/2026 2:02 pm, Jan Beulich wrote:
->>> Aside from potentially reducing a few
->>> VMEXITs, this fixes a nested virt bug where L1 intercepts CR0_SEL_WRITE
->>> and L0 intercepts CR0_WRITE. The hardware prioritizes CR0_WRITE and so
->>> L1 never sees any CR0 writes.
->> Yet if L1 sets CR0_WRITE, since intercept masks are ORed together (if
->> I'm not mistaken),
-> L0's choice of intercepts needs combining with L1's choice of intercepts.
->
-> Mostly this is OR-ing/unioning, but not exclusively, just like levelling
-> for migrate isn't a straight interception.
 
-Sorry, intersection.
 
-~Andrew
+On 9/3/26 12:00 PM, Jan Beulich wrote:
+> On 27.08.2026 17:19, Oleksii Kurochko wrote:
+>> dom0less device passthrough requires granting guest domains access to
+>> device interrupts.  Introduce map_device_irqs_to_domain() to enumerate
+>> a DT node's interrupt properties, skipping those not owned by
+>> the primary interrupt controller (as at the moment I haven't seen usages
+>> of it), and map_irq_to_domain() to grant domain access and configure
+>> Xen's interrupt descriptor accordingly. Sharing IRQ between domains is
+>> rejected.
+>>
+>> Both map_irq_to_domain() and map_device_irqs_to_domain() are marked
+>> __overlay_init, mirroring Arm: without CONFIG_OVERLAY_DTB this expands to
+>> __init, so the functions are init-only and need no XSM check; with
+>> CONFIG_OVERLAY_DTB they become runtime-callable, but the only runtime
+>> entry point is dt_overlay_domctl(), which performs the XSM checks at the
+>> domctl layer.  RISC-V does not wire up DT overlay yet, so today these are
+>> strictly __init; if/when overlay support is added, the domctl-level XSM
+>> gating must be added together with it, as on Arm.
+>>
+>> route_irq_to_guest() and release_irq() manage irq_desc ownership for
+>> guest-assigned interrupts.  Each assignment carries a small irq_guest
+>> structure as irqaction::dev_id, recording the owning domain and virtual
+>> IRQ number which is 1:1 mapped to physical IRQ number.  A per-domain
+>> vIRQ allocation bitmap (used_irqs in struct vintc), managed by
+>> vintc_reserve_virq(), prevents the same vIRQ being claimed twice.
+>>
+>> Host and guest interrupts may differ in some operations (EOI timing in
+>> particular, possibly others): a host IRQ is completed once Xen's handler
+>> runs, whereas a passthrough IRQ must defer the physical completion until
+>> the guest issues its own EOI, otherwise a still-asserted level line would
+>> immediately retrigger and storm.  This affects only the .end callback;
+>> the rest of hw_interrupt_type is shared, hence the separate host and
+>> guest hw_interrupt_type instances.
+> 
+> Irrespective of there not being any .end() hook yet, I think the two would
+> better be split properly right away. aplic_guest_irq_type's .name could
+> then also properly point to e.g. "aplic-guest".
+
+I agree with renaming and I will do that now.
+
+Regarding splitting I can split now but they will look the same for AIA 
+case as we supports only a vAPLIC which works in MSI mode 
+(vAPLIC+vIMSIC) and it will be true until we will introduce only vAPLIC 
+support w/o vIMSIC. And in case of absence of vIMSIC we will really need 
+a separate .end() for a guest.
+
+And .end() for guest will be definitely also needed in the case of vPLIC.
+
+So for now I can suggest to do the following:
+
+diff --git a/xen/arch/riscv/aplic.c b/xen/arch/riscv/aplic.c
+index 3681f0669efb..422c65ece4f7 100644
+--- a/xen/arch/riscv/aplic.c
++++ b/xen/arch/riscv/aplic.c
+@@ -325,13 +325,40 @@ static const hw_irq_controller aplic_xen_irq_type = {
+      .set_affinity = aplic_set_irq_affinity,
+  };
+
+-/* At the moment there is no difference between guest and Xen ops */
+-#define aplic_guest_irq_type aplic_xen_irq_type
++static unsigned int cf_check aplic_guest_irq_startup(struct irq_desc *desc)
++{
++    BUG_ON("unimplemented");
++}
++
++/*
++ * Shared by ->shutdown(), ->enable(), ->disable() and ->end(), which have
++ * no state.
++ */
++static void cf_check aplic_guest_irq_stub(struct irq_desc *desc)
++{
++    BUG_ON("unimplemented");
++}
++
++static void cf_check aplic_guest_set_irq_affinity(struct irq_desc *desc,
++                                                  const cpumask_t *mask)
++{
++    BUG_ON("unimplemented");
++}
++
++static const hw_irq_controller aplic_guest = {
++    .typename     = "aplic",
++    .startup      = aplic_guest_irq_startup,
++    .shutdown     = aplic_guest_irq_stub,
++    .enable       = aplic_guest_irq_stub,
++    .disable      = aplic_guest_irq_stub,
++    .end          = aplic_guest_irq_stub,
++    .set_affinity = aplic_guest_set_irq_affinity,
++};
+
+  static const struct intc_hw_operations aplic_ops = {
+      .info                = &aplic_info,
+      .host_irq_type       = &aplic_xen_irq_type,
+-    .guest_irq_type      = &aplic_guest_irq_type,
++    .guest_irq_type      = &aplic_guest,
+      .handle_interrupt    = aplic_handle_interrupt,
+      .set_irq_type        = aplic_set_irq_type,
+  };
+
+> 
+>> --- a/xen/arch/riscv/irq.c
+>> +++ b/xen/arch/riscv/irq.c
+>> @@ -12,11 +12,26 @@
+>>   #include <xen/errno.h>
+>>   #include <xen/init.h>
+>>   #include <xen/irq.h>
+>> +#include <xen/sched.h>
+>>   #include <xen/spinlock.h>
+>> +#include <xen/xvmalloc.h>
+>>   
+>>   #include <asm/hardirq.h>
+>>   #include <asm/intc.h>
+>>   
+>> +/* Describe an IRQ assigned to a guest */
+>> +struct irq_guest
+>> +{
+>> +    struct domain *d;
+>> +    unsigned int virq;
+>> +    /*
+>> +     * The action of a guest IRQ has the same lifetime as this structure, so
+>> +     * embed it here to have both covered by a single allocation. Consequently
+>> +     * it must not be freed by release_irq() (see free_on_release below).
+>> +     */
+>> +    struct irqaction action;
+> 
+> Why the mention of release_irq(), when release_guest_irq() doesn't use that
+> function? (In fact release_irq() looks to be unused altogether.)
+> 
+
+Right, the reference is wrong. release_guest_irq() detaches the action 
+itself and then calls irq_release_action(), which is what actually 
+honours free_on_release.
+
+It should be:
+
+-     * it must not be freed by release_irq() (see free_on_release below).
++     * it must not be freed on its own, which is why free_on_release is 
+left
++     * false for it (see irq_release_action()).
+
+>> @@ -227,3 +250,235 @@ void do_IRQ(struct cpu_user_regs *regs, unsigned int irq)
+>>       spin_unlock(&desc->lock);
+>>       irq_exit();
+>>   }
+>> +
+>> +static struct irq_guest *irq_get_guest_info(struct irq_desc *desc)
+>> +{
+>> +    ASSERT(spin_is_locked(&desc->lock));
+>> +    ASSERT(test_bit(_IRQ_GUEST, &desc->status));
+> 
+> Nit: I don't quite see why this cannot be the simpler
+> 
+>      ASSERT(desc->status & IRQ_GUEST);
+
+It could. I will apply that.
+
+> 
+>> +static struct irqaction *irq_detach_action(struct irq_desc *desc,
+>> +                                           const void *dev_id)
+>> +{
+>> +    struct irqaction *action, **action_ptr = &desc->action;
+>> +
+>> +    ASSERT(spin_is_locked(&desc->lock));
+>> +
+>> +#ifdef CONFIG_IRQ_HAS_MULTIPLE_ACTION
+>> +    for ( ;; )
+>> +    {
+>> +        action = *action_ptr;
+>> +        if ( !action || (action->dev_id == dev_id) )
+>> +            break;
+>> +
+>> +        action_ptr = &action->next;
+>> +    }
+>> +#else
+>> +    action = *action_ptr;
+>> +#endif
+>> +
+>> +    if ( !action )
+>> +    {
+>> +        printk(XENLOG_WARNING "Trying to free already-free IRQ %u\n",
+>> +               desc->irq);
+>> +        return NULL;
+>> +    }
+>> +
+>> +    /* Found it - remove it from the action list */
+>> +#ifdef CONFIG_IRQ_HAS_MULTIPLE_ACTION
+>> +    *action_ptr = action->next;
+>> +#else
+>> +    *action_ptr = NULL;
+>> +#endif
+>> +
+>> +    /* If this was the last action, shut down the IRQ */
+>> +    if ( !desc->action )
+>> +    {
+>> +        desc->handler->shutdown(desc);
+>> +        __clear_bit(_IRQ_GUEST, &desc->status);
+> 
+> Similarly
+> 
+>          desc->status &= ~IRQ_GUEST;
+> 
+> here then.
+
+I will apply that. It could be really done in this way as we are under 
+lock here.
+
+> 
+>> +/*
+>> + * Complete the release of an action detached by irq_detach_action().
+>> + *
+>> + * To be called with desc->lock dropped: the lock cannot be held all the way
+>> + * through, as waiting for a handler still running on another CPU to complete
+>> + * requires do_IRQ() to be able to acquire the very same lock.
+>> + *
+>> + * Once this function has returned, the action (and hence any object embedding
+>> + * it) is no longer referenced by anyone and may be freed by the caller.
+>> + */
+>> +static void irq_release_action(const struct irq_desc *desc,
+>> +                               struct irqaction *action)
+>> +{
+>> +    /*
+>> +     * Wait to make sure it's not being used on another CPU.
+>> +     *
+>> +     * The read barrier pairs with the spin_unlock() in do_IRQ(): once we
+>> +     * observe _IRQ_INPROGRESS cleared, we are guaranteed to also see the
+>> +     * writes do_IRQ() made to desc (e.g. desc->action) before releasing the
+>> +     * lock, so it is safe to free the action below.
+>> +     */
+> 
+> I fear I don't understand this: What writes to desc->action would do_IRQ()
+> ever want to do? I could see if you gave desc->status as example here;
+> really I don't think any other field (apart from perhaps statistics) would
+> ever want modifying there.
+
+I will reword:
+
+       * The read barrier pairs with the spin_unlock() in do_IRQ(): once we
+-     * observe _IRQ_INPROGRESS cleared, we are guaranteed to also see the
+-     * writes do_IRQ() made to desc (e.g. desc->action) before 
+releasing the
+-     * lock, so it is safe to free the action below.
++     * observe _IRQ_INPROGRESS cleared in desc->status, we are 
+guaranteed to
++     * also see whatever the handler did on that CPU before the bit was
++     * cleared, so it is safe to free the action below.
+
+> 
+>> +    do { smp_rmb(); } while ( test_bit(_IRQ_INPROGRESS, &desc->status) );
+
+I am thinking if a barrier is in correct place or needed at all.
+
+Considering that desc->status is updated under spinlock() which uses 
+full barrier the result here should be already observable without 
+smp_rmb() inside do {} while ().
+
+Probably we want to have load->load between test_bit() and a read of 
+action->free_on_release in if () below but I don't see what could go 
+wrong if this read will happen before do {} while ().
+
+xvfree() (stores inside it) can't be executed ealier because of control 
+dependency [Rule 11: b (xfree) is a (action->free_on_release) store, and 
+b has a syntactic control dependency on a] so again it looks like a 
+barrier isn't needed here.
+
+So considering what kind of barrier is used inside spinlock + Rule 11 we 
+can just move smp_rmb() after the cycle (just in case) and it looks like 
+smp_rmb() is only here just to force compiler not to order the things 
+considering how action->free_on_release is used:
+
+static void irq_release_action(const struct irq_desc *desc,
+                                struct irqaction *action)
+{
+     /*
+      * Wait to make sure it's not being used on another CPU.
+      *
+      * desc->status is cleared in do_IRQ() under desc->lock, whose
+      * acquire/release barriers are a full smp_mb() on this arch, so the
+      * handler's writes are already ordered before the clear is visible.
+      * On this side, xvfree() is control-dependent on the final test_bit()
+      * load, so Rule 11 (RVWMO) already orders it after the wait with no
+      * barrier. smp_rmb() below adds real read->read ordering, but nothing
+      * after the loop depends on it (action->free_on_release isn't racy);
+      * it's kept as a guard against the compiler breaking the control
+      * dependency the ordering actually relies on.
+      */
+     while ( test_bit(_IRQ_INPROGRESS, &desc->status) )
+         cpu_relax();
+     smp_rmb();
+
+     if ( action->free_on_release )
+         xvfree(action);
+
+Am I missing something?
+
+> 
+> Please split this across three lines, to conform to style. (Also same nit
+> as above.)
+> 
+>> +    if ( action->free_on_release )
+>> +        xvfree(action);
+> 
+> How does this being done here fit with the last paragraph of the comment
+> ahead of the function?
+
+The comment is inaccurate. I will drop "... by the caller."
+
+
+
+> 
+>> +int release_guest_irq(struct domain *d, unsigned int virq)
+>> +{
+>> +    struct irq_desc *desc = irq_to_desc(virq);
+>> +    struct irqaction *action;
+>> +    struct irq_guest *info;
+>> +    unsigned long flags;
+>> +    int ret = -EINVAL;
+>> +
+>> +    spin_lock_irqsave(&desc->lock, flags);
+>> +
+>> +    if ( !test_bit(_IRQ_GUEST, &desc->status) )
+>> +        goto unlock_err;
+>> +
+>> +    info = irq_get_guest_info(desc);
+>> +    if ( d != info->d )
+> 
+> This looks to be the only use of "d" - any reason the function parameter cannot
+> be pointer-to-const?
+
+Missed that. It looks like it could be really const.
+
+> 
+>> +        goto unlock_err;
+>> +
+>> +    /*
+>> +     * Detaching the action happens with desc->lock still held, so that a
+>> +     * concurrent release_guest_irq() for the same IRQ sees _IRQ_GUEST already
+> 
+> I think "sees" is misleading here, as it suggests that a racing check can occur.
+> With the lock held, that's impossible. Hence imo better "will see" (i.e. only
+> after having got hold of the lock).
+
+I will correct the comment in suggested way.
+
+> 
+>> +/* Route an IRQ to a specific guest */
+>> +int route_irq_to_guest(struct domain *d, unsigned int virq,
+>> +                       unsigned int irq, const char *devname)
+>> +{
+>> +    struct irq_guest *info;
+>> +    struct irq_desc *desc = irq_to_desc(irq);
+>> +    unsigned long flags;
+>> +    int retval = 0;
+>> +
+>> +    if ( d->is_dying )
+>> +        return -EINVAL;
+>> +
+>> +    info = xvzalloc(struct irq_guest);
+> 
+> With zeroing used here, ...
+> 
+>> +    if ( !info )
+>> +        return -ENOMEM;
+>> +
+>> +    info->d = d;
+>> +    info->virq = virq;
+>> +
+>> +    info->action.dev_id = info;
+>> +    info->action.name = devname;
+>> +    /* The action is part of 'info', thus it is freed together with it. */
+>> +    info->action.free_on_release = false;
+> 
+> ... this is dead code.
+
+I will drop init. with false here.
+
+> 
+>> +    spin_lock_irqsave(&desc->lock, flags);
+>> +
+>> +    /*
+>> +     * If the IRQ is already used by someone
+>> +     *  - If it's the same domain -> Xen doesn't need to update the IRQ desc.
+>> +     *  For safety check if we are not trying to assign the IRQ to a
+>> +     *  different vIRQ.
+>> +     *  - Otherwise -> For now, don't allow the IRQ to be shared between
+>> +     *  Xen and domains.
+>> +     */
+>> +    if ( desc->action != NULL )
+>> +    {
+>> +        if ( test_bit(_IRQ_GUEST, &desc->status) )
+>> +        {
+>> +            struct domain *ad = irq_get_guest_info(desc)->d;
+>> +
+>> +            if ( d != ad )
+>> +            {
+>> +                printk(XENLOG_G_ERR "IRQ %u is already used by %pd\n",
+>> +                       irq, ad);
+> 
+> Perhaps best to also have %pd: at the start of this message, just like ...
+> 
+>> +                retval = -EBUSY;
+>> +            }
+>> +            else if ( irq_get_guest_info(desc)->virq != virq )
+>> +            {
+>> +                printk(XENLOG_G_ERR
+>> +                       "%pd: IRQ %u is already assigned to vIRQ %u\n",
+>> +                       d, irq, irq_get_guest_info(desc)->virq);
+> 
+> ... you have it here?
+
+Sure, I will aligh the comments.
+
+Thanks.
+
+~ Oleksii
 
