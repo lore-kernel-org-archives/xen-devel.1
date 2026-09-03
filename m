@@ -4,43 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B413DC624D6
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 15:05:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1407442.1640533 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1704C624A4
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 15:29:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1407467.1640542 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x290O-0007ic-L1; Thu, 03 Sep 2026 15:05:32 +0000
+	id 1x29Ms-0003cg-8V; Thu, 03 Sep 2026 15:28:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1407442.1640533; Thu, 03 Sep 2026 15:05:32 +0000
+Received: by outflank-mailman (output) from mailman id 1407467.1640542; Thu, 03 Sep 2026 15:28:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x290O-0007iV-IT; Thu, 03 Sep 2026 15:05:32 +0000
-Received: by outflank-mailman (input) for mailman id 1407442;
- Thu, 03 Sep 2026 15:05:31 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x290N-0007iH-SO
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 15:05:31 +0000
+	id 1x29Ms-0003cZ-5i; Thu, 03 Sep 2026 15:28:46 +0000
+Received: by outflank-mailman (input) for mailman id 1407467;
+ Thu, 03 Sep 2026 15:28:44 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <imammedo@redhat.com>) id 1x29Mq-0003cT-Ni
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 15:28:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x290M-00FSzv-NS
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 17:05:30 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x29Mq-00AwBe-44
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 17:28:44 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a998cb6-e002-0a2a0a5209dd-0a2a4508b616-12
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 17:05:30 +0200
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a998cba-f659-0a2a45080019-d1558034d047-3
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 17:05:30 +0200
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-49b392ccaacso37083575e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 08:05:30 -0700 (PDT)
-Received: from fedora (user-109-243-144-234.play-internet.pl.
- [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cee5f912esm78154695e9.4.2026.09.03.08.05.28
+ (envelope-from <imammedo@redhat.com>)
+ id 6a9991f5-8faa-0a2a0a5109dd-0a2a4504a9e2-44
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 17:28:43 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <imammedo@redhat.com>)
+ id 6a99922a-b57f-0a2a45040019-aa0a817c79f5-3
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 17:28:43 +0200
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-659-fVqUXbuQNIil-MQnG6u7yw-1; Thu, 03 Sep 2026 11:28:41 -0400
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-496bbcf7d1eso36475e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 08:28:40 -0700 (PDT)
+Received: from imammedo ([213.175.37.14]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49cee5f9114sm76185195e9.5.2026.09.03.08.28.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Sep 2026 08:05:28 -0700 (PDT)
+ Thu, 03 Sep 2026 08:28:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,143 +56,203 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788447930; x=1789052730; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=mANjaLxbTBRxPJI3nJCkis86IS9gaBZ1y1v/6VoNZTY=;
-        b=rOoQbHR2ao60KApSDeajnTLQ2ijCf6xgKLNMANbLZh5T2Zghc4Xi7StPbe3qdLkLVI
-         GbPxh07BRcW86MccPAWD3ravBcAPMjLBvGtkQJmzGioQGyGtPycah4xlKJMEnFlvswSu
-         X1M7A+g2dC1NCpIEL0UNTqSpqD2ZnVDuweREKwrU2tElBqSTNXlsE2D9y+MtSZ8ZImFv
-         llt0B1N980fnrJ1x+uRgB7Ct5iAc9Nrsgv4r0HFhjaJUhWTuFQwW/05DIQYfx0TRERw3
-         ilQE5FWqV0kJxU78chbado5qpkOP6TOdFkDKis1EfOtftGtewicWkeY7OmGa6IV/EddJ
-         nwPw==
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1788449322;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=0ztegjQ1POBwSGppr2l4gUAmCFrMM6q1VpOdlFUL088=;
+	b=b/sDAEPVf0uefwEp/SVroNz0zUBQVs8w9zkIPOLO8togYDTGVt4FYjOTIBz9vDLtp6Viwj
+	pclyKzXXBX5xnyD13e913aexS6QD1N3MVtxN9kvTlYR2uf3hoLsiShpPOU5z++qgop6j2q
+	R2uLq9LCF1667d90yqHu7rliGMydpH8=
+X-MC-Unique: fVqUXbuQNIil-MQnG6u7yw-1
+X-Mimecast-MFC-AGG-ID: fVqUXbuQNIil-MQnG6u7yw_1788449320
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788447930; x=1789052730;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=mANjaLxbTBRxPJI3nJCkis86IS9gaBZ1y1v/6VoNZTY=;
-        b=muL6pCuXJ5UVJD21D6CQ1K74NuC5GmD6+KyN5AWjhULLmpy4X4mqjjp2xdefEEI0Mo
-         +3jePCvM1R/jAL+/NTaosoE0hCZy+lycJY2Y3zLRVv4HW2vC9/8PMPMcRHdPssPLJcav
-         B8+WBUz1Fq6YwfMNQkYcYmnWxTDlMjH50sR/QEgjj2AOB/QumTb2lmKILJB1ZkdY9C33
-         Jf1+dK9TKHoDUWNe13Yv/KqaNzNyQxeEMIV47qKj3bzgA0yqnKTWUmWvC65Y/HzcYJ17
-         pwpyMmhFCS+cijWP/6unTI/virSyqMXwkduyByIV6SUSCcaNNt1HJ68Ex/Z0VPX+GHg4
-         PbLw==
-X-Gm-Message-State: AFuF++mNYeWw+/+O1vuI2gZEcFKlk3U+CKQ7+C4Oj1jhLgv8KqWmBrFX
-	8NC97isk2K0/HfMoL/7Ty3y1XZWGWe1rG73UW5ZPiHM7Gsrti01yFv+Zpg/lcQ==
-X-Gm-Gg: AYBFou2bKotfyXskP/Od2ANIy8S7U0mUSRxX/jOTsosrCu7dk21Dd62KYZpOg7U0GIa
-	JGkdNazAKCJRJYZeiD1f440eQ8y6PpePKstO3YKyzarFZLktDVx/mBvErkA4BlJgBu/m+zADMYq
-	Vm1FK0goYjH+P3a1i7o5c/stJzvLEZM1EHes0V9qSPntWJpvz9CZuQntWkf4cfuslDNOINBa1B9
-	pkl9vybkojjanM8tQf4oCn0tobW9OJbbDf+wIZJrhxX/1N3gmMywsl1iTKbJi2y4q37cexpGlIx
-	0eCwgc0kg0KWD6lEmIyQrzwJuJ7g4BTUOOOzUktslO8cGoEXmg0vNczW15aZchhxkgZw6mQTwxF
-	v5UZvwtkO7i8lwqqIqJN8193HbMT6t0eCBwVmIj6IiXSDQcgXCsZOTKwg7LDO+cHKU/62pCRXQ8
-	Ru19g1tS+MG4b+UvZ9rXuucAtfnVSY4Tbqc7+D8rzGpmZ4Abzkfqp0B61nCT4xLYxy120ziwpg6
-	yrZmIeNM1JPedDsJdVxtas31fUNAguyJ9oFJ7jTALw=
-X-Received: by 2002:a05:600c:1da1:b0:499:9eb8:a1d7 with SMTP id 5b1f17b1804b1-49ce5842935mr283797955e9.9.1788447929879;
-        Thu, 03 Sep 2026 08:05:29 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
-	Baptiste Le Duc <baptiste.le-duc@vates.tech>,
-	Zheng Zhang <zhangzheng@iscas.ac.cn>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3] xen/riscv: fix out-of-range indexing of the IMSIC per-CPU MSI array
-Date: Thu,  3 Sep 2026 17:05:21 +0200
-Message-ID: <20260903150521.29804-1-oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.55.0
+        d=1e100.net; s=20251104; t=1788449320; x=1789054120;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=zZlgcpyErJlCEJFwxXWLl2G2MJ6RenYBs5jbw6Dpw5Q=;
+        b=LBI40bttvsxgoPXsBwcnIw9Dlau1+jDcaNpoI94agoOxCYV/VFJh7dyPM4bsE9O6Pf
+         JtWG+sZlxsbqmhDsUkPMchl42sE/M8j7suwww+jsHzzZwnnKwjfWhPbvm6Qh9M8ZGZ7k
+         0PamDY9hcfeeXUN1a4Tc2cH9+XQ3n5M3lFljx4nWjpTXHBe8ovTm2gllHZE3lKA+b/Xx
+         YMv/nMKTYAoK5bnf92cj5lxyA04RKzzk9IerPYFlJYeSkknea3MMGXyKFI0qB56in2nG
+         w8BA62gqjiQ54fp44wn8cBd/RoomKx8Y4c/q28n+Q9nq+QYQBXrQ7Ob0Yco0nOxOdAIR
+         oFvA==
+X-Forwarded-Encrypted: i=1; AKwUvBxrfAMOAo2i/fuU5B71mJ3dbediYRSSYDounoxDENCksXVBsek/4+kbtF7yIrPQU1WQmpsBIKp3hKU=@lists.xenproject.org
+X-Gm-Message-State: AFuF++lBLLovVjCG/w5GwQcns9K4su+wkYLHopRJPnkRu+KB+4N33Z3T
+	VM4URQnIEFdGfd0o0xSeNyQxSZbCjdgSOWjCkP7FF408S5SV4Bd9IlHq5gog+uTIp+ua3hG2xpF
+	Ag5GLlod4wJ3Q32ZNhHQhMC1qzI3gmtAck2c/+dafRnPxd0kUt1KMCXKZxRCdTG0NGxk4S/fC+3
+	AJ
+X-Gm-Gg: AYBFou3bnREqMRI2dWbVeZ7SUczVPVBz6r3/RBP6rc4QujjI8B/VE0knnlV/jj8hqQJ
+	YLGBcxlROe7VxXtvPzCOOfX+8mWneR7W/xKQSqwO9fwmx/6qgJCqASdXMFMwcl2JS4rvs80+uf0
+	bfd2Am3p5F1Tlzci1RBkLTtrkmMwIgYLfCely7cWaZEjc+30AufjHKHogcUarARixaMvQbC/DsA
+	n2HvmiCAtaZF3SYXg9vnmr1AogBC5fLr2idWazov4JIn75+LLlfQZDvrQ6hbc47t8795ZYGAQ+9
+	8jk1of/R413Ys0Y91/mmSj572JA0YuJ792T2AKRZosMi
+X-Received: by 2002:a05:600c:81c9:b0:49c:df2b:15fc with SMTP id 5b1f17b1804b1-49cf5b79c84mr17210205e9.8.1788449319984;
+        Thu, 03 Sep 2026 08:28:39 -0700 (PDT)
+X-Received: by 2002:a05:600c:81c9:b0:49c:df2b:15fc with SMTP id 5b1f17b1804b1-49cf5b79c84mr17209195e9.8.1788449319587;
+        Thu, 03 Sep 2026 08:28:39 -0700 (PDT)
+Date: Thu, 3 Sep 2026 17:28:35 +0200
+From: Igor Mammedov <imammedo@redhat.com>
+To: Dongli Zhang <dongli.zhang@oracle.com>
+Cc: "Daniel P. =?UTF-8?B?QmVycmFuZ8Op?=" <berrange@redhat.com>,
+ qemu-devel@nongnu.org, qemu-s390x@nongnu.org,
+ xen-devel@lists.xenproject.org, dave@treblig.org, mst@redhat.com,
+ anisinha@redhat.com, philmd@mailo.com, aurelien@aurel32.net,
+ mjrosato@linux.ibm.com, alifm@linux.ibm.com, farman@linux.ibm.com,
+ richard.henderson@linaro.org, iii@linux.ibm.com, david@kernel.org,
+ pasic@linux.ibm.com, borntraeger@linux.ibm.com, cohuck@redhat.com,
+ alex@shazbot.org, clg@redhat.com, akrowiak@linux.ibm.com,
+ jjherne@linux.ibm.com, sstabellini@kernel.org, anthony@xenproject.org,
+ edgar.iglesias@gmail.com, pbonzini@redhat.com, eblake@redhat.com,
+ armbru@redhat.com, joe.jin@oracle.com
+Subject: Re: [PATCH 0/8] Force detach PCI devices for ACPI-based and PCIe
+ native hot-unplug
+Message-ID: <20260903172835.0e253a25@imammedo>
+In-Reply-To: <01ee4841-76d8-4749-a80e-eb945ab8799a@oracle.com>
+References: <20260824011420.752806-1-dongli.zhang@oracle.com>
+	<aoxY4Rxst2qAyn5z@redhat.com>
+	<01ee4841-76d8-4749-a80e-eb945ab8799a@oracle.com>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1788447930-D614687B-F128AF34/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 2865
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: BvBP7bAlVza0ri1EfJZlH_Jan3Gbj_-4GQP_VVq2Ahg_1788449320
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-ebf023/1788449323-C3AC0B50-0B122C6C/0/0
+X-purgate-type: clean
+X-purgate-size: 4919
 
-imsic_init() indexes msi[] by the Xen CPU id hartid_to_cpuid() returns,
-but that array is allocated with one entry per parent IRQ of the IMSIC
-node, and the only range check compares the index against
-num_possible_cpus(). Neither matches the array, and the check comes
-after the first access:
+On Wed, 26 Aug 2026 09:15:47 -0700
+Dongli Zhang <dongli.zhang@oracle.com> wrote:
 
-- hartid_to_cpuid() returns NR_CPUS when the hart isn't one Xen brought
-  up, and msi[NR_CPUS].base_addr is read before that is noticed;
-- an IMSIC node listing fewer parents than Xen has CPUs makes every
-  index past nr_parent_irqs go past the end of the allocation, which the
-  num_possible_cpus() check lets through.
+> On Mon, Aug 24, 2026 7:44:49AM -0700, Daniel P. Berrang=C3=A9 wrote:
+> > On Sun, Aug 23, 2026 at 06:13:30PM -0700, Dongli Zhang wrote: =20
+> >> Hot-unplugging a PCI device can require cooperation from the guest. Fo=
+r
+> >> ACPI PCI hotplug, QEMU notifies the guest through ACPI and the guest
+> >> eventually writes the ACPI PCI eject register. For PCIe native hotplug=
+,
+> >> QEMU notifies the guest through the PCIe hotplug mechanism and waits f=
+or
+> >> the slot unplug flow to complete. Only after that completion does QEMU
+> >> unrealize the device and emit DEVICE_DELETED.
+> >>=20
+> >> This can leave a device stuck in the unplug pending state when the gue=
+st
+> >> does not cooperate. Examples include:
+> >>=20
+> >> 1. The guest has panicked, or the relevant ACPI/PCI hotplug driver is
+> >> unavailable.
+> >>=20
+> >> 2. The guest is stalled and cannot handle the hot-unplug event. For
+> >> example, stalling the Linux [irq/9-acpi] kernel thread can reproduce t=
+his
+> >> for ACPI-based hot-unplug.
+> >>=20
+> >> 3. The device was attached to a slot that the guest cannot use. For
+> >> example, a pcie-root-port only supports slot 0. If a device is added t=
+o a
+> >> non-zero slot below a pcie-root-port, the guest may never discover the
+> >> device and therefore may never complete the unplug request.
 
-Size the array by nr_cpu_ids, which is what it is indexed by,
-and move the range check ahead of the first msi[] access.
+all of above is actually expected, no (functioning) driver =3D> no hotplug/=
+unplug.
+it's the guest problem. Once device it exposed to guest its life-cycle
+not longer owned by QEMU.
 
-Fixes: c9bd8b322ecb ("xen/riscv: imsic_init() implementation")
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Changes in v3:
- - Drop local variable nr_msis and use nr_cpu_ids explicitly.
----
-Changes in v2:
- - Use nr_cpu_ids instead of num_possible_cpus() to not be dependent on
-   if cpu_possible_map is sparsed or not.
----
----
- xen/arch/riscv/imsic.c | 20 ++++++++++++--------
- 1 file changed, 12 insertions(+), 8 deletions(-)
+That's what one would see in real hw as well, you press eject button
+but it will not do anything if OS doesn't process it.
+also see comment at the end.
 
-diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
-index f7b70a8da09e..8da72c007225 100644
---- a/xen/arch/riscv/imsic.c
-+++ b/xen/arch/riscv/imsic.c
-@@ -346,7 +346,7 @@ int __init imsic_init(const struct dt_device_node *node)
-         goto imsic_init_err;
-     }
- 
--    msi = xvzalloc_array(struct imsic_msi, nr_parent_irqs);
-+    msi = xvzalloc_array(struct imsic_msi, nr_cpu_ids);
-     if ( !msi )
-     {
-         rc = -ENOMEM;
-@@ -405,7 +405,18 @@ int __init imsic_init(const struct dt_device_node *node)
-             continue;
-         }
- 
-+        /*
-+         * hartid_to_cpuid() returns NR_CPUS for a hart Xen doesn't know, so
-+         * the range has to be checked before msi[] is indexed at all.
-+         */
-         cpu = hartid_to_cpuid(hartid);
-+        if ( cpu >= nr_cpu_ids )
-+        {
-+            printk(XENLOG_WARNING
-+                   "%s: unsupported hart ID=%#lx for parent irq%u\n",
-+                   node->name, hartid, i);
-+            continue;
-+        }
- 
-         /*
-          * If .base_addr is not 0, it indicates that the CPU has already been
-@@ -421,13 +432,6 @@ int __init imsic_init(const struct dt_device_node *node)
-             continue;
-         }
- 
--        if ( cpu >= num_possible_cpus() )
--        {
--            printk(XENLOG_WARNING "%s: unsupported hart ID=%#lx for parent irq%u\n",
--                   node->name, hartid, i);
--            continue;
--        }
--
-         /* Find MMIO location of MSI page */
-         reloff = i * IMSIC_HART_SIZE(imsic_cfg.guest_index_bits);
-         for ( index = 0; index < nr_mmios; index++ )
--- 
-2.55.0
+> >>=20
+> >> The non-zero slot case has also been discussed in:
+> >>=20
+> >> hw/pci: warn when PCIe device is plugged into non-zero slot of downstr=
+eam port
+> >> https://gitlab.com/qemu-project/qemu/-/commit/ =20
+> > ca92eb5defcf9d1c2106341744a73a03cf26e824 =20
+> >>=20
+> >> hw/pci: add comment to explain checking for available function 0 in pc=
+i hotplug
+> >> https://gitlab.com/qemu-project/qemu/-/ =20
+> > commit/67d045a0ef5b9c5f871c3a1d87325a8a42d2b9d5 =20
+> >>=20
+> >> pci: don't skip function 0 occupancy verification for devfn auto assig=
+n
+> >> https://gitlab.com/qemu-project/qemu/-/commit/ =20
+> > e228d62b4af29bca698ec57efdceb46f392f5444 =20
+> >>=20
+> >> For example, if root-port.1 is a pcie-root-port, the following command=
+ adds
+> >> a vhost-scsi-pci device to an invalid slot:
+> >>=20
+> >> (qemu) device_add vhost-scsi-pci,id=3Dscsi01,wwpn=3Dnaa.5001405324af09=
+85,bus=3Droot-port.1,addr=3D01.0
+> >> warning: PCI: slot 1 is not valid for vhost-scsi-pci, parent device on=
+ly allows plugging into slot 0. =20
+> >=20
+> > This rather looks like it should be a fatal error, not a mere warning.
+> >=20
+> > If I follow the commit ca92eb5def it links to https://bugzilla.redhat.c=
+om/show_bug.cgi?id=3D2128929
+> > which states that this configuration is going to lead to a crash in
+> > QEMU on guest OS shutdown. IMHO that crash is sufficient to justify
+> > making this a fatal error.
+> >=20
+> > If we actually wanted this to remain a warning, then that shutdown
+> > crash would need to be fixed.
+> >  =20
+>=20
+> Thank you very much!
+>=20
+> I see that the issue has been fixed. The ticket mentions the following.
+>=20
+> "What I am observing is that it seems when the slot ID !=3D 0, the guest =
+OS seems
+> to ignore this and we never seem to hit ich9_pm_device_unplug_cb()."
+>=20
+> Based on my experience and evaluation, ACPI-based hotplug is more likely =
+to
+> encounter an issue where the guest VM does not respond to an unplug opera=
+tion.
+
+I'm not sure it's a good idea to delete device when guest still thinks it's=
+ there
+(you can make guesses on QEMU side if it's in use, how useful those are is =
+questionable).
+
+as far as I know, ACPI hotplug has no notion of surprise removal (pls educa=
+te me if it's not the case),
+so I wouldn't do what you are proposing here at all, it's basically asking =
+for disaster to happen.
+And all this is basically for dealing with abused qemu flexibility.
+
+Please (re)formulate usecase and make it more clear as what is eludes me
+no matter how many times i've read this cover letter.
+
+On positive note:
+
+What you can try to implement is native PCI-E support for surprise removal.
+How hard that would be I don't know. And I would well expect if one deviate=
+s from
+real hw expectations/configs (such as not 0 slot/partial func removal),
+one would quickly stumble upon issues as  that's not what what vendors writ=
+e/test
+drivers for.
+
+Even if it's not likely to be used in practice (guest still might not suppo=
+rt it),
+it may serve as test-bed for guest drivers.
+
+> Thank you very much!
+>=20
+> Dongli Zhang
+>=20
 
 
