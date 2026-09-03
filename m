@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCBE3C61DD3
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 10:28:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1406696.1639866 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17B18C61DD3
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 10:31:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1406705.1639875 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x24gC-0003da-0o; Thu, 03 Sep 2026 10:28:24 +0000
+	id 1x24iY-0005AA-EG; Thu, 03 Sep 2026 10:30:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1406696.1639866; Thu, 03 Sep 2026 10:28:23 +0000
+Received: by outflank-mailman (output) from mailman id 1406705.1639875; Thu, 03 Sep 2026 10:30:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x24gB-0003dT-UX; Thu, 03 Sep 2026 10:28:23 +0000
-Received: by outflank-mailman (input) for mailman id 1406696;
- Thu, 03 Sep 2026 10:28:23 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x24gB-0003dN-9l
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 10:28:23 +0000
+	id 1x24iY-0005A3-Ad; Thu, 03 Sep 2026 10:30:50 +0000
+Received: by outflank-mailman (input) for mailman id 1406705;
+ Thu, 03 Sep 2026 10:30:49 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <usama.anjum@arm.com>) id 1x24iX-00059x-8P
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 10:30:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x24gA-0072G1-J8
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 12:28:22 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x24iW-00ENbS-LM
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 12:30:48 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a994bc2-8faa-0a2a0a5109dd-0a2a45098762-12
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 12:28:22 +0200
-Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a994bc6-be1a-0a2a45090019-d1558033a93a-3
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 12:28:22 +0200
-Received: by mail-wm1-f51.google.com with SMTP id
- 5b1f17b1804b1-4954a9e8490so4833955e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 03:28:22 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-144-234.play-internet.pl.
- [109.243.144.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49ce47b9817sm104235925e9.1.2026.09.03.03.28.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 03 Sep 2026 03:28:21 -0700 (PDT)
+ (envelope-from <usama.anjum@arm.com>)
+ id 6a994c44-bab6-0a2a0a5309dd-0a2a45028a5c-48
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 12:30:48 +0200
+Received: from [217.140.110.172] (helo=foss.arm.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
+ (envelope-from <usama.anjum@arm.com>)
+ id 6a994c57-6ca4-0a2a45020019-d98c6eac9cfa-1
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 12:30:47 +0200
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 22CFD1596;
+ Thu,  3 Sep 2026 03:30:43 -0700 (PDT)
+Received: from e142334-100.cambridge.arm.com (e142334-100.cambridge.arm.com
+ [10.2.198.93])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id B56423F673;
+ Thu,  3 Sep 2026 03:30:37 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,149 +52,521 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Content-Language:References:Cc:To:Subject:From:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788431302; x=1789036102; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:subject:from:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=YznnKZXf6PyR49qfiMZ5c2JghO0VNvR3jH2UdEDmKuo=;
-        b=DIEUZUGN1HkQEySStPyLvO6xVDzCzhyC2VuYdR/qjtvUenJSyDgPaL3whQeRs0HIMS
-         vQVkWzkR2wfpfK88xy84Y6s0vJUdXOQjaM0zQKZsxOAxgUhsgQH5+IhSP6cqMTXBySEt
-         HuRKiRbwGQ6jyZF2hIgecFekdtKxLIiqgnrTA8dn8wKjpLvgWscqm4YUqApccgXEQkzx
-         8BtlUx4xoQfCBA+bp+xHRgU5A+ja5JisC9Issc3WJlB0dVJupyjlJjoePo0Hn3rr3L7e
-         eQ1ahed/XCMIts1KCDndKFRld90jh5FwXiyzB6x8z23vZkPYB666Mmg7+ueTs5r88iDN
-         T1jA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788431302; x=1789036102;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:subject:from:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=YznnKZXf6PyR49qfiMZ5c2JghO0VNvR3jH2UdEDmKuo=;
-        b=H/IrzYi7A8qi9zjs6n7N4MtlvjK5gsb5XngZbg6dTGbDspd3c+9JcxmbmDKZhC62rB
-         geJv7CJpHDWo+jYuId0EzTDFUHg4lODKORjnOim0nCqV7EO2IwIxjqcs+6xNKlku6Jqx
-         t+GqLSUeyk9FeNEl04tqazJoEpjOhLGAy9bC5EoX5cHnw1uU5a/4yhvkvhnPvYsmW1S/
-         7HdGWrED7uZusWZhps7vDJPicSCo+OLFYvxsdYrrlw57XLKRVGMVYd/8Wr3OftLh+igl
-         tfAUVIplHg/LeRAFgtxNfhH/sb+cIRQ3ixx+ANzJzT2sab3xP/6xBw4tRK65/1PTVZzc
-         OR8g==
-X-Gm-Message-State: AFuF++nXm81HUSpZmQyl1+nkZMBppUGb2Ccja//M3EwyX3ughKuvVxZb
-	guhT/Zt3ke/B06jGRJDjKUt1RQTP1UR3PDmZXzg0rSZycNQ4yagpge8/
-X-Gm-Gg: AYBFou3k9jm1yaaMw60kAOZ81DQ9nI4d+AI8t6sD4E6tk8T3kd4pDbtGKjnyhBXMWV6
-	rflmdiaYV0XKcJ0oyOOtQFfTmfTk5rg6wkkXnbzkvO1uUh05V3JPdg8LO4kpdH10A3s9fkgbmuI
-	20YvVv6mgzRVNcdyt4CgSz5P6W+DD0dIqBhdhUo4dVPjDmE8z/5fPATu0+WLCAu0KJ+7ofHcTKn
-	fs8p3GQohxgsbsoluMr1luZCVwP2AjDGlv4bpCsaSnQs3CPXsDG/X+J4dxoDsbx5pF1OVS9O73s
-	QaJf2PXmTudGlWqG3ApKXplPl2HB46iBx3q7sUVYOHVQA4mb5MHalXbOlWlgBrBrDry7qeRs3AV
-	d7q0WvvXEJo5hF3x+p1I2zlEaA0we5yoyXvdXEQxXFddfiM8Pj+nkYpjcJkNZ+H6sl2O5Uwqg+M
-	Xg/lphFRh4H/+lyz7+5giHpnI+AR9+jYc1D0xLCPfVq3QoBGqgyRyr5McjmL1dPn8u8KtHBPXjr
-	yxxty8kKF1mCi30+NU9wuoJAQ/MoFrJFu0IDUmyUQ==
-X-Received: by 2002:a05:600c:a085:b0:49c:f13e:e4e with SMTP id 5b1f17b1804b1-49cf15ab3c1mr28366845e9.11.1788431301802;
-        Thu, 03 Sep 2026 03:28:21 -0700 (PDT)
-Message-ID: <0c06c3d4-067d-4cd5-91e5-0fa16f2894f6@gmail.com>
-Date: Thu, 3 Sep 2026 12:28:20 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="From:To:Cc:Subject:Date"
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1788431446; bh=aIJuznfc9+x+T9t6CWjU8riug4jWFHnV2Y3X1zCinUQ=;
+	h=From:To:Cc:Subject:Date:From;
+	b=HcD41GFnI7IENNpaP3GqDjy6DF37NZr132PK5kJfK9CtOM3S1qk9y+fcKN3SUV7fv
+	 CcM7MKiGKbgjlj33bjiNiW6EInEK8eNPJw+PJmDcxUdsa3kYv2xrBMuqJaCxXVXbPK
+	 8bCqsp/QujWMcuoR0Bd78MRtwtmH8W61WUnmuzNQ=
+From: Muhammad Usama Anjum <usama.anjum@arm.com>
+To: Jani Nikula <jani.nikula@linux.intel.com>,
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Tvrtko Ursulin <tursulin@ursulin.net>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Dimitri Sivanich <dimitri.sivanich@hpe.com>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+	Helge Deller <deller@gmx.de>,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Muchun Song <muchun.song@linux.dev>,
+	Oscar Salvador <osalvador@suse.de>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	"Liam R. Howlett" <liam@infradead.org>,
+	Lorenzo Stoakes <ljs@kernel.org>,
+	Will Deacon <will@kernel.org>,
+	"Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
+	Nick Piggin <npiggin@gmail.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+	David Hildenbrand <david@kernel.org>,
+	Pasha Tatashin <pasha.tatashin@soleen.com>,
+	Chris Li <chrisl@kernel.org>,
+	Kairui Song <kasong@tencent.com>,
+	Uladzislau Rezki <urezki@gmail.com>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Alexei Starovoitov <ast@kernel.org>,
+	Daniel Borkmann <daniel@iogearbox.net>,
+	Andrii Nakryiko <andrii@kernel.org>,
+	Eduard Zingerman <eddyz87@gmail.com>,
+	Kumar Kartikeya Dwivedi <memxor@gmail.com>,
+	Ingo Molnar <mingo@redhat.com>,
+	Arnaldo Carvalho de Melo <acme@kernel.org>,
+	Namhyung Kim <namhyung@kernel.org>,
+	SJ Park <sj@kernel.org>,
+	"Matthew Wilcox (Oracle)" <willy@infradead.org>,
+	Jan Kara <jack@suse.cz>,
+	Jason Gunthorpe <jgg@ziepe.ca>,
+	Leon Romanovsky <leon@kernel.org>,
+	Miaohe Lin <linmiaohe@huawei.com>,
+	Dennis Zhou <dennis@kernel.org>,
+	Tejun Heo <tj@kernel.org>,
+	Christoph Lameter <cl@gentwo.org>,
+	Mike Rapoport <rppt@kernel.org>,
+	Johannes Weiner <hannes@cmpxchg.org>,
+	ziy@nvidia.com,
+	pfalcato@suse.de,
+	agordeev@linux.ibm.com,
+	ryan.roberts@arm.com
+Cc: Muhammad Usama Anjum <usama.anjum@arm.com>,
+	linux-kernel@vger.kernel.org,
+	intel-gfx@lists.freedesktop.org,
+	dri-devel@lists.freedesktop.org,
+	linux-parisc@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-mm@kvack.org,
+	linux-fsdevel@vger.kernel.org,
+	linux-arch@vger.kernel.org,
+	kasan-dev@googlegroups.com,
+	linux-trace-kernel@vger.kernel.org,
+	bpf@vger.kernel.org,
+	linux-perf-users@vger.kernel.org,
+	damon@lists.linux.dev
+Subject: [PATCH v2 0/8] mm: distinguish PTE table storage from PTE values
+Date: Thu,  3 Sep 2026 11:29:52 +0100
+Message-ID: <20260903103002.1091859-1-usama.anjum@arm.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: Re: [PATCH v2 08/39] xen/riscv: introduce device-agnostic MMIO
- emulation dispatch
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Cc: xen-devel@lists.xenproject.org,
- Romain Caritey <Romain.Caritey@microchip.com>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <a74ff916f76fb95e1e44bfadd45fbc477df00c51.1787838835.git.oleksii.kurochko@gmail.com>
- <1788276969.8631fc262581453bbf619ec5b2062170.1a05d9d0e85000c4f3@vates.tech>
-Content-Language: en-US
-In-Reply-To: <1788276969.8631fc262581453bbf619ec5b2062170.1a05d9d0e85000c4f3@vates.tech>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1788431302-FC610034-98B001B6/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 2683
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-720697/1788431448-311CF2AC-7607B878/0/0
+X-purgate-type: clean
+X-purgate-size: 12833
 
+Hi,
 
+pte_t currently describes both a software PTE value and an element stored
+in a PTE table. Consequently, pte_t * can point either to a software PTE
+value, often a stack copy, or to a PTE-table slot. The compiler cannot
+distinguish these cases. A value pointer can therefore be passed to an
+interface that expects table storage, while table storage can be read by
+direct dereference instead of the architecture accessor.
 
-On 9/1/26 5:36 PM, Baptiste Le Duc wrote:
->> RISC-V guests can expose several virtual interrupt controllers at
->> distinct GPA ranges: vPLIC (hasn't been introduced yet) for legacy machines,
->> vAPLIC and vIMSIC for AIA-compliant ones (are being introduced in the follow
->> up patches).
-> As Jan said here [1], we shouldn't use "as later in this series" in
-> commit message...
+This series begins a staged conversion at the PTE level. It introduces
+hw_pte_t as the element type for PTE-table storage and converts generic
+MM to use hw_pte_t *. Software PTE values remain pte_t. Interfaces that
+intentionally return a value through pte_t *, such as install_pte,
+remain value interfaces; the relevant parameters are named ptentp to
+make that distinction explicit.
 
-I will reword this paragraph to:
-```
-A RISC-V guest can be given several emulated devices at distinct GPA
-ranges; the virtual interrupt controllers alone account for vPLIC on
-legacy machines and vAPLIC together with vIMSIC on AIA-compliant ones.
-Routing MMIO faults via a per-device is_access() check in the trap
-handler would couple that handler to every device it must serve,
-requiring a new conditional branch in the fault path for each emulated
-device added.
-```
+The generic definition aliases hw_pte_t to pte_t unless an architecture
+selects ARCH_HAS_HW_PTE_T, which enables a distinct generic wrapper named
+__hw_pte_t. Some architectures define pgtable_t in headers parsed before
+the generic hw_pte_t typedef is visible. The structure tag allows those
+headers to define pgtable_t as struct __hw_pte_t * without creating an
+include-order dependency. This is required when converting s390, m68k,
+powerpc and sparc.
 
-> 
-> [1]: https://lore.kernel.org/xen-devel/cover.1787838835.git.oleksii.kurochko@gmail.com/T/#m56fbac1ceb0642d5d868e9dcb2b5ed93ecbe5058
->> Routing MMIO faults via a per-device is_access() check in the
->> trap handler would couple it to every device it must serve, requiring a
->> new conditional branch in the fault path each time a new emulated device is
->> added.
->>
->> Introduce a per-domain MMIO handler registration table, modeled
->> after the equivalent ARM framework, so that virtual devices
->> self-register their GPA ranges and read/write callbacks at domain
->> creation time. The MMIO fault path delegates to a single
->> try_handle_mmio() entry point and remains agnostic of which device
->> owns a particular address.
->>
->> A subsequent patch wires this into the MMIO fault path in traps.c.
-> ...same here
+No architecture selects ARCH_HAS_HW_PTE_T in this series, so the
+representation and behavior of every architecture are preserved. ptep_get()
+keeps its existing READ_ONCE() semantics and converts the stored element
+through __pte_from_hw(). An architecture can later select the option and
+convert its PTE interfaces to make the distinction compiler-enforced.
+Architecture PTE implementations and most architecture code are
+deliberately left for those later opt-in conversions.
 
-I'll reword this to:
-```
-Nothing registers a handler and try_handle_mmio() has no callers yet,
-so this patch is a no-op; the trap handler is left untouched.
-```
+Here, hw_pte_t identifies PTE-table storage rather than table lifetime:
+complete PTE tables use hw_pte_t whether or not they are currently
+linked into a page-table hierarchy, while software PTE values use
+pte_t. The distinction between complete but unlinked tables and
+hardware-reachable tables was raised during discussion and remains an
+important point for review.
 
-+
+PMD, PUD, P4D and PGD storage are deliberately out of scope. They can be
+converted in later series after the PTE boundary is agreed, avoiding the
+PMD-specific cases that made an all-level conversion difficult to
+review.
 
-I will add after Signed-off-by:
-```
+Most mechanical pointer conversions were generated with the Coccinelle
+script included below, then audited and fixed by hand.
+
+This series does not add a second ptep_get_once() accessor and does not
+remove or replace STRICT_MM_TYPECHECKS.
+
+The design discussion is available at [1]; while the original idea came
+from [2].
+
+I've the patches here [3] for arm64 conversion which I used to find
+usages in generic code which I missed during development. These would be
+sent separately.
+
+[1] https://lore.kernel.org/all/6110202c-057b-4701-8c04-1a76ee7bb9ab@arm.com/
+[2] https://lore.kernel.org/all/a063f6c5-2785-4a9f-8079-25edb3e54cef@arm.com
+[3] https://gitlab.arm.com/linux-arm/linux-us/-/commits/pte0_arm
+
+Thanks,
+Usama
 ---
-Wiring this into the MMIO fault path in traps.c is done in this patch
-series later.
-```
+Changes since v1:
+- Name the generic wrapper structure __hw_pte_t so architectures can
+  forward-declare it before the generic typedef is visible.
+- Use software PTE value terminology consistently
+- Fold the prerequisite header includes into the generic storage
+  conversion
+- Explain why the NOMMU stub converts the stored entry without
+  ptep_get().
+- Rebase onto mm-new and rerun the Coccinelle conversion.
 
+Changes since RFC v1:
+- Add ARCH_HAS_HW_PTE_T so architectures can opt in to a distinct
+  PTE-table storage type.
+- Define the distinct hw_pte_t wrapper and its conversion helpers in
+  generic code instead of requiring each architecture to define them.
+- Read hw_pte_t through READ_ONCE() before converting it to pte_t.
+- Drop the previous mremap patch in favour of [a]. Apply [a] first if
+  it is not already present.
+- Drop the previous two dead-code conversion patches; the affected
+  code was cleaned up separately in [b] and [c].
 
-[...]
+[a] https://lore.kernel.org/linux-mm/20260720141633.501799-1-agordeev@linux.ibm.com/
+[b] https://lore.kernel.org/all/20260730111316.3672672-1-usama.anjum@arm.com
+[c] https://lore.kernel.org/all/20260730094501.3002718-1-usama.anjum@arm.com
 
->> +
->> +int register_mmio_handler(struct domain *d,
->> +                          const struct mmio_handler_ops *ops,
->> +                          paddr_t addr, paddr_t size)
->> +{
->> +    struct vmmio *vmmio = &d->arch.vmmio;
->> +    struct mmio_handler *handlers = vmmio->handlers;
->> +    paddr_t end = addr + size;
->> +    unsigned int i;
->> +    int rc = 0;
->> +    bool overlap;
->> +
->> +    if ( !ops || !ops->read || !ops->write || !size || end < addr )
->> +        return -EINVAL;
-> Just a question: is the aim of end < addr check to handle possible overflow of end?
-> 
+---
+// SPDX-License-Identifier: GPL-2.0-only
+///
+/// Rename raw PTE pointer types to hardware PTE pointer types.
+///
+/// This is a mechanical type rename. It converts common declarations,
+/// function parameters, prototypes, return types and casts from "pte_t *"
+/// to "hw_pte_t *". Plain "pte_t" objects are intentionally left unchanged.
+/// Pointers named "ptentp" refer to temporary software PTE values and are
+/// intentionally ignored in all modes.
+/// Re-run in context mode afterwards to audit remaining raw pte_t pointers
+/// and cases that need hand conversion, such as trace macros and mixed
+/// declarations.
+///
+/// Confidence: Moderate
+// Options: --no-includes --include-headers
 
-Yes, your understanding is correct.
+virtual patch
+virtual report
+virtual context
 
-Thanks.
+@local_decl depends on patch@
+identifier x != ptentp;
+@@
+- pte_t *x;
++ hw_pte_t *x;
 
-~ Oleksii
+@local_decl_init depends on patch@
+identifier x != ptentp;
+expression e;
+@@
+- pte_t *x = e;
++ hw_pte_t *x = e;
+
+@param_proto depends on patch@
+identifier f;
+identifier x != ptentp;
+type R;
+@@
+R f(...,
+- pte_t *x
++ hw_pte_t *x
+,...);
+
+@param_proto_unnamed depends on patch@
+identifier f;
+type R;
+@@
+R f(...,
+- pte_t *
++ hw_pte_t *
+,...);
+
+@param_def depends on patch@
+identifier f;
+identifier x != ptentp;
+type R;
+@@
+R f(...,
+- pte_t *x
++ hw_pte_t *x
+,...)
+{ ... }
+
+@ret_proto depends on patch@
+identifier f;
+parameter list ps;
+@@
+- pte_t *
++ hw_pte_t *
+  f(ps);
+
+@ret_def depends on patch@
+identifier f;
+parameter list ps;
+@@
+- pte_t *
++ hw_pte_t *
+  f(ps)
+{ ... }
+
+@struct_member depends on patch@
+identifier S;
+identifier x != ptentp;
+@@
+struct S {
+...
+- pte_t *x;
++ hw_pte_t *x;
+...
+};
+
+@union_member depends on patch@
+identifier x != ptentp;
+@@
+union {
+...
+- pte_t *x;
++ hw_pte_t *x;
+...
+};
+
+@union_member_in_struct depends on patch@
+identifier S;
+identifier x != ptentp;
+@@
+struct S {
+...
+union {
+...
+- pte_t *x;
++ hw_pte_t *x;
+...
+};
+...
+};
+
+@fnptr_struct_member depends on patch@
+identifier S,f;
+identifier x != ptentp;
+type R;
+@@
+struct S {
+...
+R (*f)(...,
+- pte_t *x
++ hw_pte_t *x
+,...);
+...
+};
+
+@fnptr_typedef_pte_fn_t depends on patch@
+identifier x != ptentp;
+@@
+typedef int (*pte_fn_t)(...,
+- pte_t *x
++ hw_pte_t *x
+,...);
+
+@cast depends on patch@
+expression e;
+@@
+- (pte_t *)e
++ (hw_pte_t *)e
+
+@remaining_decl depends on context || report@
+identifier x != ptentp;
+position p;
+@@
+* pte_t *x@p;
+
+@remaining_decl_init depends on context || report@
+identifier x != ptentp;
+expression e;
+position p;
+@@
+* pte_t *x@p = e;
+
+@remaining_param_proto depends on context || report@
+identifier f;
+identifier x != ptentp;
+type R;
+position p;
+@@
+R f(...,
+* pte_t *x@p
+,...);
+
+@remaining_param_proto_unnamed depends on context || report@
+identifier f;
+type R;
+position p;
+@@
+R f(...,
+* pte_t *@p
+,...);
+
+@remaining_param_def depends on context || report@
+identifier f;
+identifier x != ptentp;
+type R;
+position p;
+@@
+R f(...,
+* pte_t *x@p
+,...)
+{ ... }
+
+@remaining_ret_proto depends on context || report@
+identifier f;
+parameter list ps;
+position p;
+@@
+* pte_t *f@p(ps);
+
+@remaining_ret_def depends on context || report@
+identifier f;
+parameter list ps;
+position p;
+@@
+* pte_t *f@p(ps)
+{ ... }
+
+@remaining_struct_member depends on context || report@
+identifier S;
+identifier x != ptentp;
+position p;
+@@
+struct S {
+...
+* pte_t *x@p;
+...
+};
+
+@remaining_union_member depends on context || report@
+identifier x != ptentp;
+position p;
+@@
+union {
+...
+* pte_t *x@p;
+...
+};
+
+@remaining_union_member_in_struct depends on context || report@
+identifier S;
+identifier x != ptentp;
+position p;
+@@
+struct S {
+...
+union {
+...
+* pte_t *x@p;
+...
+};
+...
+};
+
+@remaining_fnptr_struct_member depends on context || report@
+identifier S,f;
+identifier x != ptentp;
+type R;
+position p;
+@@
+struct S {
+...
+R (*f)(...,
+* pte_t *x@p
+,...);
+...
+};
+
+@remaining_fnptr_typedef_pte_fn_t depends on context || report@
+identifier x != ptentp;
+position p;
+@@
+typedef int (*pte_fn_t)(...,
+* pte_t *x@p
+,...);
+
+Muhammad Usama Anjum (8):
+  mm: introduce hw_pte_t for PTE table storage
+  mm: rename pointers to software PTE values as ptentp
+  mm: use hw_pte_t for generic PTE table storage
+  mm: convert PTE table entries in ptep_get()
+  mm: convert PTE table entry to pte
+  mm/kasan: use hw_pte_t for the early shadow PTE table
+  drm/i915: use hw_pte_t for PTE range callbacks
+  xen: use hw_pte_t for PTE range callbacks
+
+ MAINTAINERS                                   |  1 +
+ .../drm/i915/gem/selftests/i915_gem_mman.c    |  4 +-
+ drivers/gpu/drm/i915/i915_mm.c                |  4 +-
+ drivers/xen/gntdev.c                          |  2 +-
+ drivers/xen/privcmd.c                         |  2 +-
+ drivers/xen/xenbus/xenbus_client.c            |  2 +-
+ drivers/xen/xlate_mmu.c                       |  4 +-
+ fs/hugetlbfs/inode.c                          |  3 +-
+ fs/proc/task_mmu.c                            | 33 ++++----
+ include/asm-generic/hugetlb.h                 | 15 ++--
+ include/asm-generic/pgalloc.h                 |  6 +-
+ include/asm-generic/tlb.h                     |  5 +-
+ include/linux/hugetlb.h                       | 53 ++++++------
+ include/linux/kasan.h                         |  2 +-
+ include/linux/mm.h                            | 26 +++---
+ include/linux/page_table_check.h              | 10 ++-
+ include/linux/pagewalk.h                      | 10 +--
+ include/linux/pgtable.h                       | 81 ++++++++++---------
+ include/linux/pgtable_types.h                 | 19 +++++
+ include/linux/rmap.h                          |  2 +-
+ include/linux/swapops.h                       |  6 +-
+ include/linux/vmalloc.h                       |  4 +-
+ include/trace/events/xen.h                    | 10 +--
+ kernel/bpf/arena.c                            |  9 ++-
+ kernel/events/core.c                          |  3 +-
+ mm/Kconfig                                    |  3 +
+ mm/damon/ops-common.c                         |  2 +-
+ mm/damon/ops-common.h                         |  2 +-
+ mm/damon/vaddr.c                              | 20 ++---
+ mm/debug_vm_pgtable.c                         |  2 +-
+ mm/filemap.c                                  |  4 +-
+ mm/gup.c                                      |  9 ++-
+ mm/highmem.c                                  | 15 ++--
+ mm/hmm.c                                      |  6 +-
+ mm/huge_memory.c                              |  4 +-
+ mm/hugetlb.c                                  | 60 +++++++-------
+ mm/hugetlb_vmemmap.c                          | 13 +--
+ mm/internal.h                                 | 16 ++--
+ mm/kasan/init.c                               | 14 ++--
+ mm/kasan/shadow.c                             |  6 +-
+ mm/khugepaged.c                               | 50 +++++++-----
+ mm/ksm.c                                      | 11 +--
+ mm/madvise.c                                  | 18 +++--
+ mm/mapping_dirty_helpers.c                    |  4 +-
+ mm/memory-failure.c                           |  6 +-
+ mm/memory.c                                   | 78 +++++++++---------
+ mm/mempolicy.c                                |  4 +-
+ mm/migrate.c                                  |  4 +-
+ mm/migrate_device.c                           |  4 +-
+ mm/mincore.c                                  |  4 +-
+ mm/mlock.c                                    |  4 +-
+ mm/mprotect.c                                 | 19 ++---
+ mm/mremap.c                                   |  4 +-
+ mm/page_table_check.c                         |  4 +-
+ mm/pagewalk.c                                 |  9 ++-
+ mm/percpu.c                                   |  2 +-
+ mm/pgtable-generic.c                          | 20 ++---
+ mm/ptdump.c                                   |  4 +-
+ mm/rmap.c                                     |  6 +-
+ mm/sparse-vmemmap.c                           | 22 ++---
+ mm/swap_state.c                               |  3 +-
+ mm/swapfile.c                                 |  5 +-
+ mm/userfaultfd.c                              | 32 ++++----
+ mm/util.c                                     |  2 +-
+ mm/vmalloc.c                                  | 11 +--
+ mm/vmscan.c                                   |  6 +-
+ 66 files changed, 453 insertions(+), 375 deletions(-)
+ create mode 100644 include/linux/pgtable_types.h
+
+-- 
+2.47.3
+
 
