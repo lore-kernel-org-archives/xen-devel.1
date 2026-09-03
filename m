@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAE68C624D4
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 06:28:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1406407.1639710 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83B64C61DD3
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 06:42:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1406418.1639719 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x20vd-00047f-R9; Thu, 03 Sep 2026 06:28:05 +0000
+	id 1x2190-000711-Vr; Thu, 03 Sep 2026 06:41:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1406407.1639710; Thu, 03 Sep 2026 06:28:05 +0000
+Received: by outflank-mailman (output) from mailman id 1406418.1639719; Thu, 03 Sep 2026 06:41:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x20vd-00047Y-OM; Thu, 03 Sep 2026 06:28:05 +0000
-Received: by outflank-mailman (input) for mailman id 1406407;
- Thu, 03 Sep 2026 06:28:05 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x2190-00070u-T9; Thu, 03 Sep 2026 06:41:54 +0000
+Received: by outflank-mailman (input) for mailman id 1406418;
+ Thu, 03 Sep 2026 06:41:53 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x20vd-00047P-57
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 06:28:05 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x218z-00070o-Cy
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 06:41:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x20vc-006DtT-8x
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 08:28:04 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1x218y-00BlJk-PY
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 08:41:52 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a991372-e002-0a2a0a5209dd-0a2a4501a192-4
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 08:28:04 +0200
-Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a9916a3-2eae-0a2a0a5409dd-0a2a45039c4e-24
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 08:41:52 +0200
+Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a991373-5984-0a2a45010019-d155dd2fcd17-3
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 08:28:04 +0200
-Received: by mail-wr1-f47.google.com with SMTP id
- ffacd0b85a97d-48441a2ba14so1784810f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 23:28:04 -0700 (PDT)
+ id 6a9916b0-fae8-0a2a45030019-d155802cc5eb-3
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 08:41:52 +0200
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-49b8ce9b733so14222305e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Sep 2026 23:41:52 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48448ed3840sm12120684f8f.17.2026.09.02.23.28.02
+ 5b1f17b1804b1-49cf2531232sm18597005e9.7.2026.09.02.23.41.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 02 Sep 2026 23:28:03 -0700 (PDT)
+ Wed, 02 Sep 2026 23:41:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,55 +55,54 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788416883; x=1789021683; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788417712; x=1789022512; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=yTxpRBqDWMda19Nr+SUufVl8lNCypyYsmgFMvGkBNRU=;
-        b=bmleMGj31QGq+hDHUq5skq9igrWDsoAFX/tIm68RSedncc5nBWIQHpEL7evHtAHNJI
-         baDy4PhxgL/lQ9/lmgHAAproe4tGKnA9XAeQr0vAns+d+d70OAu133WtojDR/kruxziw
-         X5tejHko7jEY/lUZOZoq4RQLR9z3ktuvb1C7gFqym1nf3krrZuo6EO253Sbc91w3YvAk
-         vjkISdOl6EqPLw2aG96zeew6BUEL0UMKBmF+0GhjsHJ/cWRzQ8kIusueRyMQguHqNNuw
-         7o12TvFJk2iL9t/OAzf06QpSYWaX0YHebBu+ER7Y/qRPnxVM1ADUB8f8lWo76gnkuu9a
-         b1KA==
+        bh=opHFwBmqlMiUcGGwdL5PLV8yTv+ErZ+I9vGrfTm88+4=;
+        b=GCOPy7kZQVvI6xM/F0Igcyj3ZrKVDq9kZEX/hJ1VVOmmOE5bVcHHfDyz/ZNs/6U+l3
+         i31a8VL/l48nRoP4PkR+oWWwNRKOjcKOFEuwuwXng2JIVQQb3psArHmWoWO8UUebyGHI
+         G4C4Mw9vU5WM9w+KW+gWo7gpqLCj2Sb/kTjMR/8SZo0tZepbVD+m+gBu8fxTJVDrq7fz
+         BuTsL5Px65dfAomACT8ljOb1tHDw7+PH5zPccw+SbsmIoHtiww7Itya0CWWCtLbMGziQ
+         n6w8bG3QvjyBZN5LlNA8SX8J7sQo/oC1wpoFQyMIFpzVNJA2XowEWVrw+hyiy7XJoxkB
+         C8XQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788416883; x=1789021683;
+        d=1e100.net; s=20251104; t=1788417712; x=1789022512;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=yTxpRBqDWMda19Nr+SUufVl8lNCypyYsmgFMvGkBNRU=;
-        b=mZRZf4bFsph+lii/ZwhnRGqBBH/3pd5E2uHaxEGe+YQvQwFB2ZcoUY9QEkH8LqUUeZ
-         v12IDQl3mM2EQM1y8JOxSmaG/t4MBUMZiq43GPREOTSKUa904Nz/GQW21lC6ZoboNsVv
-         jrqeKTkbDWvNdSbmvjH5q7btlyuVkBUtLNAIa51MhugUPs/dI0wcaOwYVI5oEFaEq1Sr
-         yUlel3c1fSLcORM6B61iH5n6ruKyes66d1JUeH0EGhBuM5BodKQnz6aJqFiL9hy53jXF
-         Z1zPj5GknI8+W6B45E2Wia0yKmzdaDhUZIpgpoxuwa2n/EOnB81UdoH9RUDLGSisP6hU
-         Owig==
-X-Forwarded-Encrypted: i=1; AKwUvBxYZnZWSS2eBDTZnqPi9JFZUaD9wwuBaEUjGTQ0TYv6P5E+MdE9zwRF8jMQFa1n8v92oUvxVvxvTkQ=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kWM2hBVqmnvQmtx7DW2sN512wBPiiU40ML0WvCbLMOk0V4esxX
-	Vtb4ZuhgLr2gbJxMce/0X5gR5fooINsTUFxnc6vn4xdQHYL/tbd8zABdlQInB7MZGA==
-X-Gm-Gg: AYBFou2JYc6I4/Gtn/T8IGOpDHBEI6vojYn3BGXcYjlB3kdUeKulMIEX+G5bEV3bG+7
-	/gIFslEWmLL5kWGojPXiVHkFcYkR6voAKBy7iXwOl21/o7CcaFYh5iThU+qj37t2WIYjUL3qVYF
-	jT738P++Wg/rxyrQN1x8++fbiQe5EA5NHG/zsJZhH7cYjspepnHzWJRv+YL4sg2ltRQPrgTlK0W
-	ddMn9VIONyN9rjW1H0LKQo8rOM+b3KR4J1vi+XA1iZIoplGaVMlA/l1aeapE3ZhUOU+VQLygnjq
-	sUieDXG/k67kEv1yuBlsz7xgugJcRVwg9SQKN7duAgkzjn/tlqz7tN+DNNRtgNviLgC+jydKJSA
-	nxdmxcV/Ko0QVLUqCTIzjZTkduyiO8yQ0QEHaY6VKIqSS6sS5Ufo0/9OjHItXVf4ni3nh1CL1t0
-	c+6AMfJwiQccvvp0X5vOihl47bFKkF2siumNUq1LuAdKrKpTnNMEvtKnhYMUm6zxiRWuaJfj4DF
-	SfckXsoaLHq9ShILbEOqq4ElgLzux6bNMlr0zLGXraAPCr7vmfM4SiEjBRDSM4=
-X-Received: by 2002:adf:e196:0:b0:484:3311:3703 with SMTP id ffacd0b85a97d-48488f222d6mr20416915f8f.26.1788416883587;
-        Wed, 02 Sep 2026 23:28:03 -0700 (PDT)
-Message-ID: <e782714d-ed16-42ef-9c90-593a2823ab4d@suse.com>
-Date: Thu, 3 Sep 2026 08:28:02 +0200
+        bh=opHFwBmqlMiUcGGwdL5PLV8yTv+ErZ+I9vGrfTm88+4=;
+        b=UYRmFHaCPhfYKTfteN/UfZWFTzVWz5aQ90UgrcqclyQUm/HFecSTpse4pZ9isf/OCL
+         y7r8gCuL11zSULuGBLjZFXAegc23BJf3RK55pPnCOIxeho10NP4wLq9KJZDAG2zBLkSR
+         44fAQSoXI+mRkWgT98A/hEobcONmcFOrU3/GC7dGA3r5vW7umiASrKEg9eB4W7U8h6+D
+         rlvh6cG2Pp/XqpmSg6gKDC3GleYwRMDyHaPnn7WNEErpJ4QpKKeyz0ZpoSkMXXFdE54G
+         xFQ77phtJBSK7QP79mA6kO9pzvOrAg+clcpZ4UzazxPmUwxGAChOl3dssVPNYDST0LCW
+         F19w==
+X-Forwarded-Encrypted: i=1; AKwUvBzS1amd78VOMqtWb0yUZDbL/uGmT1crIQZV9vn1vOvJ9LCvnN5liDlz/mGAtoaiJuniJ2pbdoX/WPE=@lists.xenproject.org
+X-Gm-Message-State: AFuF++kuWEei74KRvzlxArZMq1ngfwyYylq02x+QTep4XjYjgjk+W4dM
+	7o4guv/xgRGJO/3kZ1uyum/MuPPanRZ3E9ssK7z4aXerOBuLqR4HwL+WxWYY2Zj+3w==
+X-Gm-Gg: AYBFou0/D6RQ86EfwzCSh/fb644OCMTCLZv5InIAYTQXg2jVt25V1rtNuVlmco92RY9
+	tlcSyVsEnda/ggQIKkNYs35WdJBJPUUwUNywVBK1laujBEgoANpuOZtp7OHxjdyEfZffbmfdGF6
+	2HGFVjWwx6oej/iwGrA62IRJhEVyVmFbgJURlg7tuy8HDzMOqGgZzsr9KVJJy//fAX7edxvqRB+
+	34mtZJ983yS0wRJ+Ckmr5nW+AQqEJ/gJVUhZaQkwGxK5mybWQvD3L99jTi1oiCzA0Wc84/+yy1i
+	eN7cMoSUqOCM/cDZAJpxBtcomhFTbrDRQo/VAOmeaRz76NxqWaKMo+QUMvvqyil7dMjdnNWscJc
+	Y/Z93aQq4I48nQ40WdkOxaas2loDuTWw6d52pfS4Mp7Z7htnwm1TuaX9YZ5kDXqIvTRrwkNK2p5
+	q/ALiEH6/aEGnztNn3GF7W2Bhvjja2KPyxvv2I0Ah4u2bUvy1u/ocdwx7sdybRCnuuf1ADlBL6C
+	ka1jFKtduSwdD+40GoMRCXZCAq4GYG35r+2JgpG0swpINwPPZUp
+X-Received: by 2002:a05:600c:a417:b0:49c:eb04:1c49 with SMTP id 5b1f17b1804b1-49ceb041c7bmr159708215e9.13.1788417712087;
+        Wed, 02 Sep 2026 23:41:52 -0700 (PDT)
+Message-ID: <624b7832-873b-46a7-b1a8-9e7c20f45c07@suse.com>
+Date: Thu, 3 Sep 2026 08:41:50 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] x86/ucode: Work around Granite Rapids erraturm GNR98
-To: Teddy Astie <teddy.astie@vates.tech>,
- Andrew Cooper <andrew.cooper3@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>,
  Xen-devel <xen-devel@lists.xenproject.org>
 References: <20260902221000.2967167-1-andrew.cooper3@citrix.com>
- <1788389520.8631fc262581453bbf619ec5b2062170.1a064527434000c4f3@vates.tech>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,33 +128,49 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1788389520.8631fc262581453bbf619ec5b2062170.1a064527434000c4f3@vates.tech>
+In-Reply-To: <20260902221000.2967167-1-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1788416884-1E07B757-13EDACF4/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-33051d/1788417712-754844E9-FB521220/0/0
 X-purgate-type: clean
-X-purgate-size: 817
+X-purgate-size: 1429
 
-On 03.09.2026 00:51, Teddy Astie wrote:
-> Le 03/09/2026 à 00:14, Andrew Cooper a écrit :
->> @@ -273,6 +274,35 @@ static bool microcode_fits_cpu(const struct microcode_patch *mc)
->>       return false;
->>   }
->>   
->> +static bool microcode_safe_to_load(const struct microcode_patch *mc)
->> +{
->> +    struct cpu_signature *cpu_sig = &this_cpu(cpu_sig);
->> +
->> +    /*
->> +     * Treat pre-production as always safe - anyone using pre-production
->> +     * microcode knows what they are doing, and can keep any resulting pieces.
->> +     */
->> +    if ( cpu_sig->rev < 0 || mc->rev < 0 )
-> 
-> cpu_sig->rev can't be negative as it's unsigned int.
+On 03.09.2026 00:10, Andrew Cooper wrote:
+> @@ -273,6 +274,35 @@ static bool microcode_fits_cpu(const struct microcode_patch *mc)
+>      return false;
+>  }
+>  
+> +static bool microcode_safe_to_load(const struct microcode_patch *mc)
+> +{
+> +    struct cpu_signature *cpu_sig = &this_cpu(cpu_sig);
+> +
+> +    /*
+> +     * Treat pre-production as always safe - anyone using pre-production
+> +     * microcode knows what they are doing, and can keep any resulting pieces.
+> +     */
+> +    if ( cpu_sig->rev < 0 || mc->rev < 0 )
+> +        return true;
+> +
+> +    /*
+> +     * GNR98.  Granite Rapids systems hang when loading new ucode on
+> +     * sufficiently old firmware.
+> +     */
+> +    if ( boot_cpu_data.vfm == INTEL_GRANITERAPIDS_X &&
+> +         boot_cpu_data.stepping == 1 && (cpu_sig->pf & 0x95) &&
+> +         cpu_sig->rev < 0x01000405 &&
+> +         mc->rev      > 0x01000405 )
 
-With that I'm surprised the compiler doesn't flag this as "condition is
-always false" or alike. Surely Misra isn't going to like it either.
+The erratum text says "to 0x1000405 or later". Question is whether that's correct,
+as it would mean that it's impossible to update from earlier than 0x1000405. Then
+the workaround text says exactly this.
+
+> +    {
+> +        printk_once(XENLOG_WARNING
+> +                    "microcode: Granite Rapids erratum GNR98 detected.  Skipping ucode 0x%08x\n"
+> +                    "microcode: Firmware update recommended\n", mc->rev);
+> +        return false;
+
+Should we additionally taint the system?
 
 Jan
 
