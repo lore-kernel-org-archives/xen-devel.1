@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01D17C624A4
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 13:48:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1407201.1640290 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86CFBC624A4
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 13:55:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1407213.1640300 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x27nq-0006qw-JZ; Thu, 03 Sep 2026 13:48:30 +0000
+	id 1x27uZ-00009i-9M; Thu, 03 Sep 2026 13:55:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1407201.1640290; Thu, 03 Sep 2026 13:48:30 +0000
+Received: by outflank-mailman (output) from mailman id 1407213.1640300; Thu, 03 Sep 2026 13:55:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x27nq-0006qp-GV; Thu, 03 Sep 2026 13:48:30 +0000
-Received: by outflank-mailman (input) for mailman id 1407201;
- Thu, 03 Sep 2026 13:48:29 +0000
+	id 1x27uZ-00009b-5v; Thu, 03 Sep 2026 13:55:27 +0000
+Received: by outflank-mailman (input) for mailman id 1407213;
+ Thu, 03 Sep 2026 13:55:25 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x27np-0006qj-3f
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 13:48:29 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x27uX-00009V-EN
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 13:55:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x27no-00AfEe-93
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 15:48:28 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x27uV-00Agpq-RN
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 15:55:23 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a997aac-8faa-0a2a0a5109dd-0a2a4509a5ac-0
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 15:48:28 +0200
-Received: from [209.85.221.50] (helo=mail-wr1-f50.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a997c3f-bab6-0a2a0a5309dd-0a2a4503b43e-34
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 15:55:23 +0200
+Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a997aab-be1a-0a2a45090019-d155dd32a416-3
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 15:48:28 +0200
-Received: by mail-wr1-f50.google.com with SMTP id
- ffacd0b85a97d-485853f8800so247929f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 06:48:28 -0700 (PDT)
+ id 6a997c4b-fae8-0a2a45030019-d1558034c123-3
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 15:55:23 +0200
+Received: by mail-wm1-f52.google.com with SMTP id
+ 5b1f17b1804b1-49b8687630fso20600765e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 06:55:23 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48448e80388sm15726191f8f.14.2026.09.03.06.48.26
+ 5b1f17b1804b1-49cee5d1fa6sm79987925e9.1.2026.09.03.06.55.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 03 Sep 2026 06:48:26 -0700 (PDT)
+ Thu, 03 Sep 2026 06:55:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,57 +55,57 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788443307; x=1789048107; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788443723; x=1789048523; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=IpiK7G9MkktIrCD+VTkTCj37snNS+NfQ2NLD1aivW/A=;
-        b=Skd8icHcuXTVeXDr6X9aGyMtdXj3boRBL9r8kPr76K80TxP5UTLLxWDZSsqzUfpBb1
-         vtyjzHFcicO6ziCEdxSX0aOTWtw0BIr3tOTkbR0MBzTOFA66qs9uuqJFguN4AYPzliyY
-         +FARWMpjSxYO67o2qM1qGJRny8gjtSG/SFmUEII0XCe/imMeTUzwY+sE7mXY+iX5LkdC
-         cgHpi8KDfVQNuXML3+vbQYRlROtKxXVhZyJd5qzIziafbIP5I7JtnV+Q93PeEOHn4Ygj
-         c1JHOjRdsrjdxBi/H+Gv7uHWFSjbQvgZTj3q8kqjU6q2kNRybBr3lCA6SExHwEsy7QKq
-         T+rg==
+        bh=pHW9BugFvNnKKVSOEAljgyt4yTwgoN/IIrw7Q1qpSF0=;
+        b=MFshK0jswR0ZA5Stup3ovBFnlijlSp6ySs1ROylp6/ICFOdTdCnqEFPjNaqvDHPXqS
+         gEQnbntPhgiFmbeBMDYrmvjbxR9r1Znwan9hMsMyM357TVNNF6cnqx55U+XrAkPuUQRi
+         /rNh5KpnYbCClJD9vApYW6E2+LlqTQlAU5cQiHrSqBrO8NYCaUfZvae/psnYnykTQIPG
+         b/+IX7qriuMJP0J9euOmM0wfJEl2JZ6F4LhFrQ9JQFBH0CsNl2HCv0aAgCtIm6YjuDHM
+         1o0V+0Hb0TgyrYBqU+UlQWGiJHsahaYxwbZS/rZ0PJaqdVOdxJsAOpGQ7iPPsmf2Q8KW
+         pbDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788443307; x=1789048107;
+        d=1e100.net; s=20251104; t=1788443723; x=1789048523;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=IpiK7G9MkktIrCD+VTkTCj37snNS+NfQ2NLD1aivW/A=;
-        b=jogE7yEG8suaAuR5YUw8VD/OWqi/HFK207rWs40KXL9Zhkmniw1pYQBDMid8OSF1am
-         QWD5ENMH2qVKtTIso78udNd7J4M4NCBVoindSIk9bMGA9o9nU7+los1cZq7OUry/Yj6U
-         4WWHYHXHi9wyHBvqycYQESHQzQkOQainqyMDGdcuBM8KxWdCWx2AUgqj2VuS94wpwC3N
-         P8TEN2Svjqe0KXjalwPb2esGWMxBKbn6edvHCJW2j3rwcTY0VjZC6ejhP6pUzS7jXdrD
-         dSaD0J1nwZfCAZskNQ/3hegipKCGMB5ccanaozeqBY1cGSZxfg5uF+l8VS/v2p0RptDU
-         5MTg==
-X-Forwarded-Encrypted: i=1; AKwUvBzXGLOdeoPwlPIlE1XCx98LcwrHDyy2QWVcxw0enbVTgj0OZiV6OKyFIAa2Y2bCpniELJwYELKshKc=@lists.xenproject.org
-X-Gm-Message-State: AFuF++mqoxI98bTwUokAxCNIXA7iSTds7ojVkx7s23i1I2qVTdn/VHlg
-	Zf23lWClBLdS6cGFIKIoqLG/K1giJvm/tc4uOQ9cXyM7EsV0jV8v3ydrw/vVpgBUYg==
-X-Gm-Gg: AYBFou1Zm7t4Q/GPrOO4I7WTU/9JY6sRDJdjqTFM8GXoJX23pP3ZeZjUIIllZl/+2/5
-	pz9eMexbkzvFq5nXUZH4GdrkSOm/jrjB+7r87N2xSy5x2AmDBNeOXkjlU0r89/glm6QODMCyATm
-	rlkEsMfTsscB/pr9flHMdfkmjAcVwV4ffFWEywLPHq9hSRQUQt5xYpla7lfFViMYkvj5+c3JJzp
-	mr8u4ePv+Rf0NmJ8ztyn7V4mMtiffh30NdnTNh8JSLG5TJj9Pxf5yA/s31LOYpCT+0+ZdJzxFMN
-	BSsf4IdbDT3cGM9hX7GoYLQBZ89h0b25XGUzbylzZVcEP/QCmyWH4zVsn1wMS+IebbyeuzmIoqy
-	wnDD+DBRwxY1xFgNa+wV+ROwlDG9e3FScKIL/Qt3OOo+jhn4h0MkG+I5/UARiZgK1znk4b6fteT
-	PDttuaUvL9OMRfMyCMj7QrWPja+X9o0W9u14A9rrtQwLZe89fneZ4ErTfa6Ce8XLDpo6espmgLg
-	MROFgD21u1ps9axOzxtWz+EkxgTwcHUi0wKcSiG/SJwb1BE1AuB
-X-Received: by 2002:a5d:64c4:0:b0:485:7d6d:e0e0 with SMTP id ffacd0b85a97d-48582315f07mr4466480f8f.3.1788443307581;
-        Thu, 03 Sep 2026 06:48:27 -0700 (PDT)
-Message-ID: <e2813a94-f446-4f7c-a74d-6c9e6625da72@suse.com>
-Date: Thu, 3 Sep 2026 15:48:25 +0200
+        bh=pHW9BugFvNnKKVSOEAljgyt4yTwgoN/IIrw7Q1qpSF0=;
+        b=rtdRlRdBc2hZXqXfkUXsQJv68g3vXUbgAp0+OdfHSr/AuJo8zgl99ZV+lvIzhKNSYL
+         yTwsEraryeZvCphVqolcHtyqMZrHACpA0+I+G/m9OYweHUqWjjdEc0WNNKTgzEMjBDzu
+         cjuUYKDeETWucsKpph8EaiOKUkSI9g8vtMdFFIlKcITpiLyZti0SpVawP334KN71ZLbx
+         1snIRcwwnK/NQYq9nQ5ZXeP4+MZ3ZpQDtduXUQZdQk3XhLMkLs375/SJ1Ar49uPeQvsF
+         ErweKVJRloTamM0YVSSg5GAVamwN1HkpSnEDwI2iBs85ojPBXKHGekzwZz2s5TVak9fw
+         FhRA==
+X-Forwarded-Encrypted: i=1; AKwUvBxhEsTdneVZYZlTTVXyB5kd30r0ijs8M/01vqrMEbnUFYhTty1NZXEcc8/u/85nIX5r9EJlO2xYc+U=@lists.xenproject.org
+X-Gm-Message-State: AFuF++n1ZN34x2PUjlmnt8EGArHjohrNhnebc1AUOfq/lIkizDrsjPJX
+	wc7smViqKRg0ETPGh0NqX9VNZ0Fk08p5lUTee3fSXsccgwzT2K/t3YCrIq+rMpIp8g==
+X-Gm-Gg: AYBFou0joWXQV8ft8pXdy/o447rqJXts92hWJbdD6wnU5qHx7eqju9FT9pGQNpUX+Yb
+	wqEcWPlRZxVVcYslv7/PU34xVOH6NkSdAMuNyatxNpoHFrarfC+U4L1HYMIOctPrEOTlAHVPOSD
+	dTso2mCMye3AYGeMJOjV8tP29IE67M3VG89lmkVKyJr2IksloSo3m8t8e5hiT5g8PEtuCZ1v3s7
+	nip4KhTjnCaBQsLXZObtdJeo2kzhyhpilERfbql7c+LPPtfEGtolI4J3RJi5zv29sfuWKus1m5k
+	nKKHZ8qwZth6nCtZGgXOnnEagji+6zWwK+tc1jJDMRkXt8bMFMwY8Cub8Fcu1M04CKyHUGLiZ8g
+	Y7TSgSe9ehOsrtUSKonehr4zMeZGdAKacaRgZyYeyuyNwqp0bsk1jzLFDvdzv1DD/EJ5c6BfVZu
+	fpsFRABR1ynOKNR3Wo+Prq19H5s9g6pH9hTdvP5xbP+ejg476ADbl75IbNSLpsAMv8hkeZHhkkX
+	V8gMeEU6NMHuT1wN8p5mukLWcqrKb9lD7q4UQ==
+X-Received: by 2002:a05:600c:310e:b0:49c:e3ad:41d3 with SMTP id 5b1f17b1804b1-49ce55906cfmr188451565e9.0.1788443722861;
+        Thu, 03 Sep 2026 06:55:22 -0700 (PDT)
+Message-ID: <8860838a-464a-438f-be40-86dde6908c91@suse.com>
+Date: Thu, 3 Sep 2026 15:55:21 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] x86/svm: Intercept CR0 writes selectively
-To: Ross Lagerwall <ross.lagerwall@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Jason Andryuk <jason.andryuk@amd.com>, Teddy Astie <teddy.astie@vates.tech>,
- xen-devel@lists.xenproject.org
-References: <20260828141955.4009939-1-ross.lagerwall@citrix.com>
- <514b9ad4-912c-45fa-9450-3c85adaef483@suse.com>
- <a79edb3f-0ff1-4583-b091-745e38ac2f8e@citrix.com>
+Subject: Re: [PATCH 3/4] sched/core: avoid use of "current" in initializer
+ lists
+To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ Dario Faggioli <dfaggioli@suse.com>, George Dunlap <gwd@xenproject.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <db6f62c4-0631-43d0-a501-9667af6242ec@suse.com>
+ <4eaf8244-25ec-45d4-844d-3d8f6720f57b@suse.com>
+ <873b8735-e425-4f4f-bfb3-851a6c52f9f1@suse.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,49 +131,68 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <a79edb3f-0ff1-4583-b091-745e38ac2f8e@citrix.com>
+In-Reply-To: <873b8735-e425-4f4f-bfb3-851a6c52f9f1@suse.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1788443308-3A6DA034-18FBB66A/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-33051d/1788443723-77CC34E9-F40B5697/0/0
 X-purgate-type: clean
-X-purgate-size: 1619
+X-purgate-size: 2238
 
-On 03.09.2026 15:35, Ross Lagerwall wrote:
-> On 9/3/26 2:02 PM, Jan Beulich wrote:
->> On 28.08.2026 16:19, Ross Lagerwall wrote:
->>> Xen does not need to track when the TS or MP bits change so opt to
->>> intercept CR0 writes selectively.
->>
->> Not anymore, which may want expressing here (or else it looks as if this
->> would have been possible from the start).
->>
->>> Aside from potentially reducing a few
->>> VMEXITs, this fixes a nested virt bug where L1 intercepts CR0_SEL_WRITE
->>> and L0 intercepts CR0_WRITE. The hardware prioritizes CR0_WRITE and so
->>> L1 never sees any CR0 writes.
->>
->> Yet if L1 sets CR0_WRITE, since intercept masks are ORed together (if
->> I'm not mistaken), ...
->>
->>> @@ -2882,7 +2884,8 @@ void asmlinkage svm_vmexit_handler(void)
->>>           break;
->>>   
->>>       case VMEXIT_CR0_READ ... VMEXIT_CR15_READ:
->>> -    case VMEXIT_CR0_WRITE ... VMEXIT_CR15_WRITE:
->>> +    case VMEXIT_CR1_WRITE ... VMEXIT_CR15_WRITE:
->>> +    case VMEXIT_CR0_SEL_WRITE:
->>>           if ( cpu_has_svm_decode && vmcb->ei.mov_cr.mov_insn )
->>>               svm_vmexit_do_cr_access(vmcb, regs);
->>>           else if ( !hvm_emulate_one_insn(x86_insn_is_cr_access, "CR access") )
->>
->> ... we may still see VMEXIT_CR0_WRITE here (i.e. its handling cannot be
->> removed).
+On 03.09.2026 15:26, Jürgen Groß wrote:
+> On 03.09.26 13:53, Jan Beulich wrote:
+>> @@ -1914,6 +1914,8 @@ typedef long ret_t;
+>>   
+>>   ret_t do_sched_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+>>   {
+>> +    const struct vcpu *curr = current;
+>> +    struct domain *currd = curr->domain;
+>>       ret_t ret = 0;
+>>   
+>>       switch ( cmd )
+>> @@ -1938,9 +1940,9 @@ ret_t do_sched_op(int cmd, XEN_GUEST_HAN
+>>           if ( copy_from_guest(&sched_shutdown, arg, 1) )
+>>               break;
+>>   
+>> -        TRACE_TIME(TRC_SCHED_SHUTDOWN, current->domain->domain_id,
+>> -                   current->vcpu_id, sched_shutdown.reason);
+>> -        ret = domain_shutdown(current->domain, (u8)sched_shutdown.reason);
+>> +        TRACE_TIME(TRC_SCHED_SHUTDOWN, currd->domain_id, curr->vcpu_id,
+>> +                   sched_shutdown.reason);
+>> +        ret = domain_shutdown(currd, sched_shutdown.reason);
+>>   
+>>           break;
+>>       }
+>> @@ -1948,19 +1950,18 @@ ret_t do_sched_op(int cmd, XEN_GUEST_HAN
+>>       case SCHEDOP_shutdown_code:
+>>       {
+>>           struct sched_shutdown sched_shutdown;
+>> -        struct domain *d = current->domain;
+>>   
+>>           ret = -EFAULT;
+>>           if ( copy_from_guest(&sched_shutdown, arg, 1) )
+>>               break;
+>>   
+>> -        TRACE_TIME(TRC_SCHED_SHUTDOWN_CODE, d->domain_id, current->vcpu_id,
+>> +        TRACE_TIME(TRC_SCHED_SHUTDOWN_CODE, currd->domain_id, curr->vcpu_id,
+>>                      sched_shutdown.reason);
+>>   
+>> -        spin_lock(&d->shutdown_lock);
+>> -        if ( d->shutdown_code == SHUTDOWN_CODE_INVALID )
+>> -            d->shutdown_code = (u8)sched_shutdown.reason;
+>> -        spin_unlock(&d->shutdown_lock);
+>> +        spin_lock(&currd->shutdown_lock);
+>> +        if ( currd->shutdown_code == SHUTDOWN_CODE_INVALID )
+>> +            currd->shutdown_code = (uint8_t)sched_shutdown.reason;
+>> +        spin_unlock(&currd->shutdown_lock);
+>>   
+>>           ret = 0;
+>>           break;
 > 
-> No, it shouldn't get here in that case. If L1 sets CR0_WRITE, it will enter
-> nestedsvm_check_intercepts() and then hit the NESTEDHVM_VMEXIT_INJECT case.
+> What about the use of current in SCHEDOP_watchdog and SCHEDOP_pin_override
+> handling?
 
-Hmm, okay. Yet then I still think the original case label shouldn't be
-removed, as we don't exclude the CR2 or CR8 cases either.
+I can change those too if that's wanted, also the one in SCHEDOP_remote_shutdown
+handling then.
 
 Jan
 
