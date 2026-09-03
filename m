@@ -4,66 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2FF9C61DD3
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 19:09:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1407625.1640597 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A04CBC61DD3
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2026 19:57:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1407651.1640606 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2CoZ-0001C6-Et; Thu, 03 Sep 2026 19:09:35 +0000
+	id 1x2DYB-0007rG-Oe; Thu, 03 Sep 2026 19:56:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1407625.1640597; Thu, 03 Sep 2026 19:09:35 +0000
+Received: by outflank-mailman (output) from mailman id 1407651.1640606; Thu, 03 Sep 2026 19:56:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2CoZ-0001Bz-C4; Thu, 03 Sep 2026 19:09:35 +0000
-Received: by outflank-mailman (input) for mailman id 1407625;
- Thu, 03 Sep 2026 19:09:33 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x2DYB-0007r9-M1; Thu, 03 Sep 2026 19:56:43 +0000
+Received: by outflank-mailman (input) for mailman id 1407651;
+ Thu, 03 Sep 2026 19:56:42 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jjherne@linux.ibm.com>) id 1x2CoX-0001Ao-B2
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 19:09:33 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x2CoW-001vzs-Bi
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 21:09:32 +0200
-Received: from [10.42.69.9] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jjherne@linux.ibm.com>)
- id 6a99c5d8-2eae-0a2a0a5409dd-0a2a4509bf9e-28
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 21:09:32 +0200
-Received: from [148.163.156.1] (helo=mx0a-001b2d01.pphosted.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jjherne@linux.ibm.com>)
- id 6a99c5ea-be1a-0a2a45090019-94a39c01c8a2-3
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 21:09:31 +0200
-Received: from pps.filterd (m0353729.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 683G36et1552022; Thu, 3 Sep 2026 19:09:11 GMT
-Received: from ppma22.wdc07v.mail.ibm.com
- (5c.69.3da9.ip4.static.sl-reverse.com [169.61.105.92])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4gbq3rpmag-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 03 Sep 2026 19:09:10 +0000 (GMT)
-Received: from pps.filterd (ppma22.wdc07v.mail.ibm.com [127.0.0.1])
- by ppma22.wdc07v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 683IuFJp019025;
- Thu, 3 Sep 2026 19:09:09 GMT
-Received: from smtprelay03.wdc07v.mail.ibm.com ([172.16.1.70])
- by ppma22.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4gecjasgkn-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 03 Sep 2026 19:09:09 +0000 (GMT)
-Received: from smtpav02.dal12v.mail.ibm.com (smtpav02.dal12v.mail.ibm.com
- [10.241.53.101])
- by smtprelay03.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 683J8QNv28377652
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 3 Sep 2026 19:08:27 GMT
-Received: from smtpav02.dal12v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id A9E2658051;
- Thu,  3 Sep 2026 19:09:07 +0000 (GMT)
-Received: from smtpav02.dal12v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 2712C5805E;
- Thu,  3 Sep 2026 19:09:04 +0000 (GMT)
-Received: from [9.61.21.65] (unknown [9.61.21.65])
- by smtpav02.dal12v.mail.ibm.com (Postfix) with ESMTP;
- Thu,  3 Sep 2026 19:09:04 +0000 (GMT)
+ (envelope-from <gwd@xenproject.org>) id 1x2DYA-0007r3-Db
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 19:56:42 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <gwd@xenproject.org>) id 1x2DY9-003hzb-27
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 19:56:41 +0000
+Received: from mail-lj1-f177.google.com ([209.85.208.177])
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
+ (envelope-from <gwd@xenproject.org>) id 1x2DY9-00615B-0h
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2026 19:56:41 +0000
+Received: by mail-lj1-f177.google.com with SMTP id
+ 38308e7fff4ca-3a20367cf82so3321761fa.1
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 12:56:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -75,135 +44,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=pp1 header.d=ibm.com header.i="@ibm.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=pp1; bh=Mxbos8
-	yLoUG5l05cktSa/eE5AZRlKkT5dnJabdMoKZM=; b=OpgYyJ3sqPF3icuS6iTwbn
-	FOHlBKUKR6wHmG2jdtMQBw4E6g75uWShqPfqjE4eJo1AbZhL0VK4Gl0LpD86w7Si
-	rLSJTKqXe0yr6BgUOXttE496jfWlv7FFLcQmdJ4ksWR75asESR/DdAJP99xWXgwt
-	fFqEH9UtkzxHmOZImWm0FrM7f56IhNTVZ3Q+luONSgBe/oMWCUwFM1k6+rDgFENM
-	HWO8JxCIc9jzpIQJqRpSxT4lSItnf13WyMqj/OHb2L99jz40CLznrhzNPxyjEFAP
-	vIbTXcogz/KRD+5/AjpAuQYp55sazeTMlchtWevqwwZbhZPRJSAytGIw11KkgpKg
-	==
-Message-ID: <11d6e889-80f1-47ee-9335-4bf267195246@linux.ibm.com>
-Date: Thu, 3 Sep 2026 08:38:30 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Cc
+	:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version;
+	bh=k3fzGiQmhZgakTGVWQn2DOnO/F5mnt6iQk1mulph9Ks=; b=YwPacC3QlyoKPw+cCAcq+ec0kv
+	ouxrScx73oBE4J4XPA7LG7SQC08Ybyfsf+rv4n0zxZE2Ix2IBMQE92LNEWgolHVTt5pxASrHTacIx
+	AHan/9Ur1jdhHMlEnRCVA4BHrW/dkbZhjkGmbrYWTVI/M8T7uDuyiagBIypCN/y68SNg=;
+X-Forwarded-Encrypted: i=1; AKwUvBzbToFpSTGv4E/QZ0xc+JgFlsFM6Dv+TnOJMiG3DwANnbb/zrO7VKXkaGq7gLgt2dtsuVX50Zkxpqs=@lists.xenproject.org
+X-Gm-Message-State: AFuF++lJwg0sCsoH1WmVkcK3VFXaLzvf6i6/6NRPMNp42JMhNab8aU5w
+	m/cZEBmgqxIuE4tAosZQ7xnxe3l+fK0Qw+ZSd/IFFwcVkVVaXpDzft3OfBbreeJ9dSor1Q+Bykv
+	1i3u3k+I7NtmiypVmgMOZvp1o4G3lpM0=
+X-Received: by 2002:a2e:9fca:0:b0:3a3:44e4:f87b with SMTP id
+ 38308e7fff4ca-3a371bd3a06mr1507331fa.14.1788465400056; Thu, 03 Sep 2026
+ 12:56:40 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 36/49] monitor: tighten monitor_printf*()
-To: =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
-        qemu-devel@nongnu.org
-Cc: dave@treblig.org,
-        =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
- <philmd@mailo.com>,
-        =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
- <berrange@redhat.com>,
-        Markus Armbruster <armbru@redhat.com>,
-        Gerd Hoffmann <kraxel@redhat.com>,
-        "Gonglei (Arei)"
- <arei.gonglei@huawei.com>,
-        zhenwei pi <zhenwei.pi@linux.dev>, Kevin Wolf <kwolf@redhat.com>,
-        Hanna Reitz <hreitz@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
-        =?UTF-8?Q?Alex_Benn=C3=A9e?=
- <alex.bennee@linaro.org>,
-        Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
-        Ani Sinha <anisinha@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
-        Laurent Vivier <lvivier@redhat.com>, Amit Shah <amit@kernel.org>,
-        Brian Cain <brian.cain@oss.qualcomm.com>,
-        David Woodhouse <dwmw2@infradead.org>, Paul Durrant <paul@xen.org>,
-        Richard Henderson <richard.henderson@linaro.org>,
-        Marcelo Tosatti <mtosatti@redhat.com>,
-        Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
-        Jiri Pirko <jiri@resnulli.us>, Jason Wang <jasowangio@gmail.com>,
-        Halil Pasic <pasic@linux.ibm.com>,
-        Christian Borntraeger <borntraeger@linux.ibm.com>,
-        Eric Farman <farman@linux.ibm.com>,
-        Matthew Rosato <mjrosato@linux.ibm.com>,
-        Ilya Leoshkevich <iii@linux.ibm.com>,
-        David Hildenbrand <david@kernel.org>,
-        Cornelia Huck <cohuck@redhat.com>,
-        Stefano Stabellini <sstabellini@kernel.org>,
-        Anthony PERARD <anthony@xenproject.org>,
-        "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
-        Hyman Huang <infra.ai.cloud@bitdeer.com>, Peter Xu <peterx@redhat.com>,
-        Fabiano Rosas <farosas@suse.de>,
-        Samuel Thibault <samuel.thibault@ens-lyon.org>,
-        Stefan Berger <stefanb@linux.vnet.ibm.com>,
-        Zhao Liu <zhao1.liu@intel.com>, Nicholas Piggin <npiggin@gmail.com>,
-        Chinmay Rath <rathc@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>,
-        Harsh Prateek Bora <harshpb@linux.ibm.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>,
-        Alistair Francis <alistair.francis@wdc.com>,
-        Weiwei Li
- <liwei1518@gmail.com>,
-        Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
-        Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
-        Chao Liu <chao.liu@processmission.com>,
-        Yoshinori Sato <yoshinori.sato@nifty.com>,
-        Artyom Tarasenko <atar4qemu@gmail.com>,
-        Max Filippov <jcmvbkbc@gmail.com>,
-        Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org,
-        kvm@vger.kernel.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
-        xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org
-References: <20260825-qemu-no-hmp-v4-0-af60857c2fbe@redhat.com>
- <20260825-qemu-no-hmp-v4-36-af60857c2fbe@redhat.com>
-Content-Language: en-US
-From: "Jason J. Herne" <jjherne@linux.ibm.com>
-In-Reply-To: <20260825-qemu-no-hmp-v4-36-af60857c2fbe@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Authority-Analysis: v=2.4 cv=EIc2FVZC c=1 sm=1 tr=0 ts=6a99c5d7 cx=c_pps
- a=5BHTudwdYE3Te8bg5FgnPg==:117 a=5BHTudwdYE3Te8bg5FgnPg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=uAbxVGIbfxUO_5tXvNgY:22 a=20KFwNOVAAAA:8
- a=VnNF1IyMAAAA:8 a=mY-fmJR8b8s-Z9VvxFgA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAzMDE2NiBTYWx0ZWRfXw2J+kTXJGfn1
- WcWhJsEEKsprqlfsqYgONRC4tPrPl/KW2YAz+ydFFPqURQAQrEhHyaP1NbTccY3EX4bWXK+6Wfh
- PZPoupQ6vroqMPTRxYPXyvIlo9Pde8cY9PZtrRMd1WLBLcNgNkdxGXUjOf1al1kQlCaT/fgUheP
- SextymGwkZ+1EyES9LOZGAeq2zltAJg0fzgcv3jDIXME72pp30Fxe/iDyhp5UgQ9hakCCokkZFY
- +cPalHfuleHacrmfeiI5UMMqjUbkCq4OA51vdlSvSxxi9ZhQ5TTNEKTDu7BMXTZlaEhpS/8mZ2a
- kKpHFgwFEH89wGxyzHwgozJygrwONovF7HchBWxVz8ofB3EgcOTZxt19MgnlkyljD038D89HabF
- IuV64srRATcXIQUfjgW2xI7R6EWyQiXukBD4SrphNm8Aaxd7V3oevIPqBqTzL0NaZKvUSsm0X5J
- UfHxa3svtK4RJvpmOTw==
-X-Proofpoint-GUID: EDEel76a6KP7UXpBN4hYy29pTPMb3EXw
-X-Proofpoint-ORIG-GUID: D_tguMhPXt_pKc1lezcNMaHsq0mH3uUL
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAzMDE2NiBTYWx0ZWRfX/J2dzAAJu03S
- g1YtSBdlCCJIE7nHnAUiSZ725psmXf0F20KoIOuW/wWMyvfzAGxXFvNMLfWO3M7cJsxQ023Xw5v
- v10N19VuKtRa4pfcSVV9QCnTqUVG/vI=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-03_05,2026-09-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 impostorscore=0 suspectscore=0 priorityscore=1501 clxscore=1015
- phishscore=0 spamscore=0 adultscore=0 lowpriorityscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609030166
-X-purgate-ID: tlsNG-bad1c0/1788462572-BD2CC034-BE5CEC81/0/0
-X-purgate-type: clean
-X-purgate-size: 832
+References: <20260901-asi-part2-0-ecc269f268b7@xenproject.org>
+ <20260901-asi-part2-1-ecc269f268b7@xenproject.org> <918e1522-3028-4d8c-9ba3-1c679b61861a@suse.com>
+In-Reply-To: <918e1522-3028-4d8c-9ba3-1c679b61861a@suse.com>
+From: George Dunlap <gwd@xenproject.org>
+Date: Thu, 3 Sep 2026 20:56:26 +0100
+X-Gmail-Original-Message-ID: <CAFLBxZaZr7axi6OtG8ioPwvKcUMwNJmPhXrE=rqOmyowvsNBHQ@mail.gmail.com>
+X-Gm-Features: AcwNN1WrsThbObpBWNiooPdl6g5GD4KdV0uZywqrtZ9G6CAMJ0ViSUysDPUQ9IU
+Message-ID: <CAFLBxZaZr7axi6OtG8ioPwvKcUMwNJmPhXrE=rqOmyowvsNBHQ@mail.gmail.com>
+Subject: Re: [PATCH v2 01/14] x86/domain_page: introduce IRQs-off variants of {,un}map_domain_page()
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+	Alejandro Vallejo <agarciav@amd.com>, Teddy Astie <teddy.astie@vates.tech>, 
+	Anthony PERARD <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, 
+	Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+On Thu, Sep 3, 2026 at 3:07=E2=80=AFPM Jan Beulich <jbeulich@suse.com> wrot=
+e:
+>
+> On 02.09.2026 11:43, George Dunlap wrote:
+> > From: George Dunlap <gwd@xenproject.org>
+> >
+> > Currently, map_domain_page() cannot be called in the context switch
+> > path.  However, Xen already needs to update the slot of an incoming PV
+> > vcpu's GDT during context switch; and when we soon switch to per-vCPU
+> > root pagetables, we'll have to modify two more places.
+> >
+> > Xen currently solves the problem by special-casing the GDT/LDT L1
+> > tables to be allocated from the xenheap, and stashing a pointer to its
+> > address in the xenheap in the domain struct.  Rather than add more Xen
+> > pagetable pages to the xenheap, introduce a version of map_domain_page
+> > which can be called from the context switch path.
+> >
+> > The reason map_domain_page() cannot be called from the context switch
+> > path is x86's lazy context-switch state.  Mapcache mappings are
+> > created in the page-tables that are loaded on the pCPU.  When Xen is
+> > in a lazy context-switch state, current is the idle vCPU while the
+> > previously-running vCPU's page-tables remain loaded.  If in this
+> > state, another pcpu wants access to the lazily-swapped-out vcpu's
+> > state, it will send a FLUSH_VCPU_STATE IPI to the processor, which
+> > will call sync_local_execstate().
+> >
+> > sync_local_execstate() is implemented internally by calling a full
+> > __context_switch().  In addition to copying the processor state into
+> > the vcpu structure, this also switches the loaded pagetables to the
+> > idle vcpu's, which would in turn cause mappings created before the IPI
+> > to disappear mid-use.  Therefore, mappings cannot be held in the
+> > mapcache when a FLUSH_VCPU_STATE IPI may execute.  To this end,
+> > map_domain_page() calls sync_local_execstate() itself proactively when
+> > it detects a lazy context-switch state.  This guarantees that the
+> > pagetables will remain consistent at least until the next context
+> > switch.
+> >
+> > But of course, that synchronization must not be triggered from the
+> > context switch path itself: sync_local_execstate() ends up in
+> > __context_switch(), so a call made while a context switch is in
+> > progress would recurse, and the assertions along that path (current
+> > being the idle vCPU) don't hold there either.
+> >
+> > A full synchronization is sufficient to prevent a FLUSH_VCPU_STATE IPI
+> > from switching the pagetables; however, it is not necessary.  It
+> > suffices to maintain interrupts disabled from before the page is
+> > mapped until after it is unmapped.  This condition is satisfied for
+> > the mappings used on the context switch path.
+> >
+> > Introduce {,un}map_domain_page_irqoff() variants for callers which
+> > guarantee that interrupts remain disabled from the map until the
+> > matching unmap.  Under that guarantee the synchronization is
+> > unnecessary rather than merely inconvenient: no IPI can be delivered
+> > while the mapping is in use, so the lazy state cannot change under the
+> > caller's feet, and this_cpu(pgtable_vcpu) accurately identifies the
+> > mapcache to use (see 622c9a5ba95d "x86/mm: accurately track which vCPU
+> > page-tables are loaded").  The variants assert that interrupts are
+> > disabled on entry; the rest of the contract remains the caller's
+> > responsibility.
+> >
+> > This will be used by the next patch, which introduces a function which
+> > will be used to modify the incoming vCPU's per-domain mappings from
+> > within __context_switch(); it will also be used in future ASI
+> > patches (tearing down and establishing per-CPU stack mappings during
+> > context switch).
+> >
+> > No functional change for existing callers.
+> >
+> > Assisted-by: Claude Code:claude-fable-5
+> > Signed-off-by: George Dunlap <gwd@xenproject.org>
+>
+> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+> with one aspect for further consideration:
+>
+> > @@ -59,7 +68,7 @@ static inline struct vcpu *mapcache_current_vcpu(void=
+)
+> >  #define MAPCACHE_L1ENT(idx) \
+> >      __linear_l1_table[l1_linear_offset(MAPCACHE_VIRT_START + pfn_to_pa=
+ddr(idx))]
+> >
+> > -void *map_domain_page(mfn_t mfn)
+> > +static void *do_map_domain_page(mfn_t mfn, bool irqs_off)
+> >  {
+>
+> do_...() commonly (but sadly not consistently) mark top-level hypercall
+> handlers. Personally I'd prefer if the "do" (but not the underscore) were
+> dropped here and ...
+>
+> > @@ -165,7 +174,19 @@ void *map_domain_page(mfn_t mfn)
+> >      return (void *)MAPCACHE_VIRT_START + pfn_to_paddr(idx);
+> >  }
+> >
+> > -void unmap_domain_page(const void *ptr)
+> > +void *map_domain_page(mfn_t mfn)
+> > +{
+> > +    return do_map_domain_page(mfn, false);
+> > +}
+> > +
+> > +void *map_domain_page_irqoff(mfn_t mfn)
+> > +{
+> > +    ASSERT(!local_irq_is_enabled());
+> > +
+> > +    return do_map_domain_page(mfn, true);
+> > +}
+> > +
+> > +static void do_unmap_domain_page(const void *ptr, bool irqs_off)
+>
+> ... here. Identifiers with a single leading underscore (and no following
+> upper-case letter) are designated for use by static functions, after all.
 
+Thanks -- I'll make that change for v3 if nobody objects.
 
-On 8/25/26 3:09 PM, Marc-André Lureau wrote:
-> Rename monitor_printf->monitor_hmp_printf, monitor_vprintf->
-> monitor_hmp_vprintf, and monitor_printc->monitor_hmp_printc, changing
-> the first parameter from Monitor * to MonitorHMP * to enforce type
-> safety. The implementation is also simplified: monitor_hmp_vprintf now
-> directly calls g_strdup_vprintf + monitor_puts, removing the virtual
-> dispatch via moncls->vprintf.
-> 
-> The dev_print() callbacks are temporarily using the MONITOR_HMP(mon)
-> cast, they are fixed in the following commits.
-> 
-> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
-> ---
-> ...
->   hw/s390x/s390-skeys.c                   |   9 +-
->   hw/s390x/s390-stattrib.c                |  20 +--
-The s390 pieces,
-Reviewed-by: Jason J. Herne <jjherne@linux.ibm.com>
-
-
+ -George
 
