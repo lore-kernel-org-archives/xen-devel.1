@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6989C624DE
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2026 08:29:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1407999.1640749 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 119AFC624DE
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2026 08:33:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1408010.1640760 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2PIN-0003pj-3q; Fri, 04 Sep 2026 08:29:11 +0000
+	id 1x2PMh-0005W1-Ms; Fri, 04 Sep 2026 08:33:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1407999.1640749; Fri, 04 Sep 2026 08:29:11 +0000
+Received: by outflank-mailman (output) from mailman id 1408010.1640760; Fri, 04 Sep 2026 08:33:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2PIN-0003pc-0w; Fri, 04 Sep 2026 08:29:11 +0000
-Received: by outflank-mailman (input) for mailman id 1407999;
- Fri, 04 Sep 2026 08:29:09 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x2PMh-0005Vu-J3; Fri, 04 Sep 2026 08:33:39 +0000
+Received: by outflank-mailman (input) for mailman id 1408010;
+ Fri, 04 Sep 2026 08:33:38 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x2PIL-0003pU-EY
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 08:29:09 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x2PMg-0005Vo-KX
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 08:33:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x2PIK-00HC8J-RZ
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 10:29:08 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1x2PMf-006AFq-J3
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 10:33:37 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a9a8153-e002-0a2a0a5209dd-0a2a450c871a-6
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 10:29:08 +0200
-Received: from [209.85.221.50] (helo=mail-wr1-f50.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a9a8260-bab6-0a2a0a5309dd-0a2a45018810-4
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 10:33:37 +0200
+Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a9a8154-f479-0a2a450c0019-d155dd32cd40-3
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 10:29:08 +0200
-Received: by mail-wr1-f50.google.com with SMTP id
- ffacd0b85a97d-48441a2ba14so632948f8f.1
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 01:29:08 -0700 (PDT)
+ id 6a9a8261-5984-0a2a45010019-d155802be5c5-3
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 10:33:37 +0200
+Received: by mail-wm1-f43.google.com with SMTP id
+ 5b1f17b1804b1-4957eefd361so5714755e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 01:33:37 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-485883acd33sm4696290f8f.18.2026.09.04.01.29.06
+ 5b1f17b1804b1-49cf771e9absm53885825e9.9.2026.09.04.01.33.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 04 Sep 2026 01:29:07 -0700 (PDT)
+ Fri, 04 Sep 2026 01:33:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,66 +55,63 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788510548; x=1789115348; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788510817; x=1789115617; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=fv1Hle5ICcjsbv9RdoU1hWsZEcqlLyhQcR0STYSRl+Q=;
-        b=Gz7XOSv5FXoyXJeClB9QFhNzwvrdawBjYINGAaSIxd9YTKxUrPbGV46lDJCkU7rb7z
-         gmOCSsmojNBbCvlBGZzJBghhnCpXw2zGIJQs1dKKs4brA6H3VTbXeM7eBmQn4ksOeWkP
-         4FkqE+csJG93zu6DtsbKg3S7buRVRvjGdFSdfRL1qNtOwOy7fyKz84Qt0TTSciGyYd3m
-         qoaNi0HnQSfdRqmqxhYKkIZ0waZzCkEy+a5Wa1uJU0epJcwIDEtMrCMh8W+vWTNDBRMf
-         eUeJXzdhkGXYrfoyWWvQG8BREZ9XDz/OS7gJNO2aTcHtyHyv1gshhPn1Bb5xLM75Xyjb
-         dnDw==
+        bh=IL1TvCibeZNO0FvOp0VvoyE7y7mH5z6llQijmjUIlsE=;
+        b=B/EZAwJMyKZqea7Omlo+ISyVVGF+f5cgr/qNxk7tljCgIy4PjzEadAXB9lVUyfD7gH
+         RdD4YBgbND5KrH56ARkuuUY6NXC3h/lYrcxNOoO5GDty/HR/8bxO0Fi1uuG9bUWakDL4
+         q3lsrwFM+mrbGuTPBROKdUTXgdFR0VvNftGYF4L8sRoEO8+1wc4Is2vKqquELVu1KlK/
+         I4VYW7Ub0frubV1Gov9Vxfmg/EZf8w/IgkimZ15u4SmutlkN84SEhHAc8fW9I2HKzMmW
+         ZHwSPeltOkXUU+sszyh8O/s0a4MPCjBB0vEbMspvdruhEIYTQ/ANtxLn2HeiG/IjBCMC
+         N4Tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788510548; x=1789115348;
+        d=1e100.net; s=20251104; t=1788510817; x=1789115617;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=fv1Hle5ICcjsbv9RdoU1hWsZEcqlLyhQcR0STYSRl+Q=;
-        b=AlOgZOvZi2hvwxE1mgovJB3Ld3ZDDOw5/vlpWHwlDbEtYShNZucaAuFC3i5xLx5rjn
-         QCcRG/AAVVxKFfYfq2Yuxx2zJVMdCZ5EXSwdz48iz8UOUAS5WgFymPGIgg25MD1qFz/z
-         xnvEO334CHStOgMioTRSeJSV1t/DLiAyEckBy3Ize+4+u7yuW7geedSA5oz9rm1IzqPG
-         FX7WxR2ip7GTNDXyrbbiQg02Ra1rCTZR84uRJlctmbD15CaSWDGkoEllMf/ImtwC48SH
-         dfzCG5ezs4AN7JHIYObPFpmvkgtiBYQaibZUJ6FWVIgJ52/75wLspwfrMyixU0XSNdaG
-         mFqQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzFQQX3x2HAj+07scpeHscR6XWBmgmWdq7Dq9SaP1aqc/lgecYvw+j77rVRcXgWoVVxPjJaT0kLDQQ=@lists.xenproject.org
-X-Gm-Message-State: AFuF++mkvwQFnUywUfBUvrli4CtDj6WDVa7ckZBVJdS/MwtArwwsEd9i
-	ZIsKHF/cRXm9No6YCkpUhJZffKlTWwtd+nwTwCjmpgwqEk1Q4kGE+ZDAikFNSjWOrl7Lbct4oG3
-	SLXmt2w==
-X-Gm-Gg: AYBFou0mktg4HCtXYyMiHZZuFTVwP/B3eIJwji23xgkrDzZ2AWzCkBAo52OZEc6t52L
-	m1SyLlkNZh4J8MoxZfxZDFVRpjKHMzggbKXYdQduLuuA0Hm5yj7T3fukflJteeIg+gVriOmk6AK
-	utmZTeO0cgjnFpXuD57wbe39qE8T69kmHz0ajPQ/sLdnvhfSjxit9svONu2q4QiBvTb1aKwIeYX
-	dnlh9rqQAInPDJmOaA8SXyXBVIjTKOoSkYKe3TMxEb02M/FsOk/rnEXoc8M7cg/TJ3rmZ1FD1ty
-	YOoCV6ckv7WHyGIGv1FgDPYmmlEbD4uAwSjKGqFgA1a4vCedxOuc06HZG/SeokrC7od+roCJAua
-	/SQExB9NBBiRflVDkmtbc06Xss9yFnUoQKQSHiFDphcDLbPq2iLpWNpu7oxkNlu236OUm04eI27
-	Uf6dwLkQdMEAG55XCZdpM2celJGsKiODS+ZFGm1kbJOWynWzcKPLEFLip/6vZLqZ+MnpbRZvU5D
-	PxGRq4KUYA+d8pDVJtuoYImQ5ExIXPgb0s6v/bEEz4z5hNXDFSc
-X-Received: by 2002:a05:6000:2f88:b0:485:8a46:704e with SMTP id ffacd0b85a97d-4858a4671cemr2714258f8f.32.1788510548107;
-        Fri, 04 Sep 2026 01:29:08 -0700 (PDT)
-Message-ID: <f413cc9c-cef5-4f85-b232-15e3c64f2a45@suse.com>
-Date: Fri, 4 Sep 2026 10:29:06 +0200
+        bh=IL1TvCibeZNO0FvOp0VvoyE7y7mH5z6llQijmjUIlsE=;
+        b=Dsj/N9bNQeLrRmT8xTs7pizAlhTujw60JHpWyngRhsgh20jC/47n/ILBtNlV1E6huc
+         3jr3KzkTlFechOxqVPVphJuGBSMlfjhvoBBazaETcSjpy662d1lNJnScFpTbLw6fCWZz
+         cHb4B3qNOWhtBob7PDNPZOFnNYiKYM1SspUqbgKdF37QuZL2LzVwiu8TA2AzlMHUVCpn
+         0LKNd1CBuK/h26C6B8slpT21A/gOiw0lvgKjuBXidQZWIOgNBI/kxcVhm0s/fun1JcDi
+         2WUusH/DxZpeD4Rl4xR/psQvZ6KB8oVQAE0Tq8UjqotL0rT+ZoxA7Nnho5j622XC46kA
+         xpUg==
+X-Gm-Message-State: AFuF++lt9V4lA8fPbXtF68+WnnUeKmvpuDlwOHURwkA0tNxk+IAPFgTH
+	B6NWV107WschRCVadVADvLegvTanUY1lvz7eLvJl9oGphd+uqPyUPAVP0MAQrzkPOA==
+X-Gm-Gg: AYBFou30LdQ8f/3EIrlFtPK4EQ+IsnkKfjxVcXnrn/L04qu/a59ipyxChoT7quH6qXl
+	CDw0AQMygIYUhM+8U36CkWGEy4yvDjao4laGMCENkFL3Ys/pzfW6U2POYb51p6xORK1r8q0BaBJ
+	34KDkQzorRfrqG/IbBUjkUMlpbQVM8Nx5NXJcsRlwfHO+nxZHsFg0SIEm4ue9cRwpCPvNbD2FHZ
+	JNiw45T3t83VgwMlB2WUQ6vIushewkGelqnMDaZwhbWn5HZjO3OvvCQ01YOZh0nl6owUEg/Vr7j
+	gLPtdXJQS22LBeJdplcNOlnN6MKKwBQbJhV/vKLe9zuAcWxNrXxe/XEzrdIvJM/sHHNy2ZZwtXB
+	UutxlAjVEbVfur4/FmupxeTI9WCKBCLie4PTdDFnY6KYFwqIXdpzyH48a0Ltgu/HZKKKMy6qI/B
+	WP+cMiawhjAMvqI4115eTtnIrae7TIJGPgSdQ9PeE37O9e8lSi33zjgNumJlSmIMXj1dhhRGbT2
+	S9S01rk70dP5YqKIcjpWs7y/mCy7kXZ1ZZSGSto1fAGV0ZJJyiO
+X-Received: by 2002:a05:600c:8b29:b0:49c:ee22:364c with SMTP id 5b1f17b1804b1-49cf824743cmr48972775e9.9.1788510816744;
+        Fri, 04 Sep 2026 01:33:36 -0700 (PDT)
+Message-ID: <879f5184-351e-4f12-947b-d66eef5fee77@suse.com>
+Date: Fri, 4 Sep 2026 10:33:35 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 03/14] x86/pv: use populate_perdomain_mapping() to map
- the Xen GDT
-To: George Dunlap <dunlapg@umich.edu>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Alejandro Vallejo <agarciav@amd.com>, Teddy Astie <teddy.astie@vates.tech>,
+Subject: Re: [PATCH v2 12/39] xen/riscv: implement vCPU context switching
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org,
+ Romain Caritey <Romain.Caritey@microchip.com>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org,
- =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-References: <20260901-asi-part2-0-ecc269f268b7@xenproject.org>
- <20260901-asi-part2-3-ecc269f268b7@xenproject.org>
- <554687e3-1fab-4d23-9a4e-0bdc3bc1fc60@suse.com>
- <CAFLBxZYqOWkd60As00ytcNqTZg99Gu220OMrse5MXYgOHfx0Pw@mail.gmail.com>
- <07d332a4-a5a3-44d4-95ce-fc67d86edacf@suse.com>
- <050f44ec-47e5-4754-b73b-1173458736b0@suse.com>
- <CAFLBxZZ+-GsTLDMoiBpAda6U-T-M70wHjAK9EqKZCZdK2VAknw@mail.gmail.com>
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <8848874c69f00fbfcf6ad75a39e28479a4cdd08b.1787838835.git.oleksii.kurochko@gmail.com>
+ <1788510380.8631fc262581453bbf619ec5b2062170.1a06b86a349000c4f3@vates.tech>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -140,135 +137,81 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <CAFLBxZZ+-GsTLDMoiBpAda6U-T-M70wHjAK9EqKZCZdK2VAknw@mail.gmail.com>
+In-Reply-To: <1788510380.8631fc262581453bbf619ec5b2062170.1a06b86a349000c4f3@vates.tech>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1788510548-50D3CA5B-518E7308/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d62444/1788510817-BE07B757-C627DF4F/0/0
 X-purgate-type: clean
-X-purgate-size: 6371
+X-purgate-size: 2872
 
-On 04.09.2026 10:06, George Dunlap wrote:
-> On Fri, Sep 4, 2026 at 7:54 AM Jürgen Groß <jgross@suse.com> wrote:
->>
->> On 04.09.26 08:00, Jan Beulich wrote:
->>> On 04.09.2026 00:35, George Dunlap wrote:
->>>> On Thu, Sep 3, 2026 at 5:11 PM Jan Beulich <jbeulich@suse.com> wrote:
->>>>>
->>>>> On 02.09.2026 11:43, George Dunlap wrote:
->>>>>> From: Roger Pau Monné <roger.pau@citrix.com>
->>>>>>
->>>>>> Currently, update_xen_slot_in_full_gdt() uses the stashed direct-map
->>>>>> pointer in d->arch.pv.gdt_ldt_l1tab to update the incoming vcpu's
->>>>>> page tables with Xen's GDT, by writing a stashed per-cpu copy of a
->>>>>> pre-baked L1 entry (either 64-bit or compat version).
->>>>>>
->>>>>> Switch this to using populate_perdomain_mapping(), which doesn't rely
->>>>>> on the stashed address of the l1 page in the direct map.  Rather than
->>>>>> also stashing a pre-baked value for the payload, compute the mfn from
->>>>>> the per-cpu GDT pointer at use: the conversion is a handful of cycles
->>>>>> on a path costing thousands, and computing at use removes the
->>>>>> parallel {,compat_}gdt_l1e bookkeeping along with its boot-ordering
->>>>>> constraint (the cached value could only be generated after Xen's
->>>>>> physical relocation, and had to be in place before the first context
->>>>>> switch; a use-time lookup is correct by construction).  The flags on
->>>>>> the final mapping are identical.
->>>>>>
->>>>>> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
->>>>>> Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8
->>>>>> Signed-off-by: George Dunlap <gwd@xenproject.org>
->>>>>> ---
->>>>>> Changes in v2:
->>>>>> - Drop the {,compat_}gdt_mfn caching entirely (suggested by Andrew
->>>>>>     Cooper): compute virt_to_mfn() from the per-cpu GDT pointer at use.
->>>>>>     The PDX lookup behind it measures ~5-10 cycles warm against a
->>>>>>     ~1,500-cycle context switch, and this removes the double
->>>>>>     bookkeeping and the after-relocation caching constraint.  The
->>>>>>     cached-MFN assertion goes with the cache: a use-time computation
->>>>>>     from a live pointer needs no staleness check.
->>>>>
->>>>> This looks to contradict what 564d261687c0 ("x86/ctxt-switch: Document
->>>>> and improve GDT handling") used as justification to put in place the
->>>>> caching. Also Cc-ing Jürgen, who also was involved there, for possible
->>>>> further insight.
->>>>>
->>>>> Functionally the change looks okay to me, but the above will need
->>>>> sorting, at the very least by specifically discussing why effectively
->>>>> undoing that earlier change is okay.
->>>>
->>>> So looking back at the thread, Jürgen measured a 14% improvement for
->>>> something that might be described as a microbenchmark before and after
->>>> the patch (a benchmark purposely trying to set up an unusual scenario
->>>> to maximize the effect of context switch overhead, not one to
->>>> represent a typical workflow).  But are the numbers really plausible?
->>>> Even at an implausible 100k switches/s across the box, saving 100
->>>> cycles per switch is about 0.04% of eight 3 GHz cores.
->>>>
->>>> At any rate, we're already adding several map/unmap operations, and
->>>> about to add several more.  Keeping the PTE caching would require
->>>> adding a separate path that can write just PTEs, which then will
->>>> potentially further complication future paths where we need to make
->>>> sure we handle both domain-wide perdomain areas and per-vcpu areas.
->>>> If it were easy I would already have been keeping it.
->>>>
->>>> I'd be inclined to say: Since we're going to be adding more
->>>> populate_perdomain_mapping() calls anyway, let's do it the simple
->>>> correct way first; and then explore the idea of stashing mfns of
->>>> frequently-mapped L1s (rather than having to walk L3 -> L2 -> L1); and
->>>> at that time look into stashing baked l1es to avoid conversions.
->>>
->>> Perhaps; I'd like to have Jürgen's and/or Andrew's input here, though.
->>
->> At that time I implemented core scheduling in Xen. I noticed that very
->> subtle changes in the context switch path could result in unexpected large
->> performance differences. As I had the performance test for my purpose
->> already set up, I used it for Andrew's patch (which was a result of my
->> context switch path performance findings) and really did measure the
->> impressive effect of it.
->>
->> Note that you can't only count instructions, often cache effects and
->> branch predictions are dominating the performance.
+On 04.09.2026 10:26, Baptiste Le Duc wrote:
+>> @@ -329,6 +333,169 @@ int arch_domain_create(struct domain *d,
+>>      return rc;
+>>  }
+>>  
+>> +static void save_csr_regs(struct vcpu *vcpu)
+>> +{
+>> +    /*
+>> +     * There is no need to save these CSRs as only hypervisor writes them in
+>> +     * restore_csr_regs() and guest can't access them so they shouldn't be
+>> +     * stored here. Keep them commented here just for symmetry with the
+>> +     * restore CSRs register part.
+>> +     *
+>> +     * vcpu->arch.hedeleg = csr_read(CSR_HEDELEG);
+>> +     * vcpu->arch.hideleg = csr_read(CSR_HIDELEG);
+>> +     * vcpu->arch.henvcfg = csr_read64(CSR_HENVCFG);
+>> +     * vcpu->arch.hcounteren = csr_read(CSR_HCOUNTEREN);
+>> +     * vcpu->arch.htimedelta = csr_read64(CSR_HTIMEDELTA);
+>> +     *
+>> +     * if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_smstateen) )
+>> +     *     vcpu->arch.hstateen0 = csr_read(CSR_HSTATEEN0);
+>> +     */
+>> +
+>> +    vcpu->arch.hvip = csr_read(CSR_HVIP);
+>> +
+>> +    vcpu->arch.vsstatus = csr_read(CSR_VSSTATUS);
+>> +    vcpu->arch.vsie = csr_read(CSR_VSIE);
 > 
-> Right, but:
 > 
-> 1. That's going to be very much hardware- and workload- dependent.
-> Even on the same hardware, if you'd made a slight change in the
-> workload, you might have seen a very different result; and on
-> different hardware you're going to see something different again
+>> +    vcpu->arch.vstvec = csr_read(CSR_VSTVEC);
+>> +    vcpu->arch.vsscratch = csr_read(CSR_VSSCRATCH);
+>> +    vcpu->arch.vscause = csr_read(CSR_VSCAUSE);
+>> +    vcpu->arch.vstval = csr_read(CSR_VSTVAL);
+>> +    vcpu->arch.vsepc = csr_read(CSR_VSEPC);
+>> +}
+>> +
+>> +static void restore_csr_regs(struct vcpu *vcpu)
+>> +{
+>> +    csr_write(CSR_HEDELEG, vcpu->arch.hedeleg);
+>> +    csr_write(CSR_HIDELEG, vcpu->arch.hideleg);
+>> +    csr_write(CSR_HVIP, vcpu->arch.hvip);
+>> +    csr_write64(CSR_HENVCFG, vcpu->arch.henvcfg);
+>> +    csr_write(CSR_HCOUNTEREN, vcpu->arch.hcounteren);
+>> +    csr_write64(CSR_HTIMEDELTA, vcpu->arch.htimedelta);
+>> +
+>> +    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_smstateen) )
+>> +        csr_write(CSR_HSTATEEN0, vcpu->arch.hstateen0);
+>> +
+>> +    csr_write(CSR_VSSTATUS, vcpu->arch.vsstatus);
+>> +    csr_write(CSR_VSIE, vcpu->arch.vsie);
 > 
-> 2. As I said, we're now adding two extra map / unmaps, which is going
-> to perturb everything again.
 > 
-> If anything, your argument says we should wait until we've stopped
-> modifying the context switch path (which won't happen until patch 49
-> at least, guessing from the patch titles), and then measure things
-> again to see what's actually slow.
-> 
-> I'm sorry Jan,
+>> +    csr_write(CSR_VSTVEC, vcpu->arch.vstvec);
+>> +    csr_write(CSR_VSSCRATCH, vcpu->arch.vsscratch);
+>> +    csr_write(CSR_VSCAUSE, vcpu->arch.vscause);
+>> +    csr_write(CSR_VSTVAL, vcpu->arch.vstval);
+>> +    csr_write(CSR_VSEPC, vcpu->arch.vsepc);
+>> +}
+>> +
+>> +static void ctxt_switch_from(struct vcpu *p)
+> Is it expected to have diverse names for the vcpu arg? Above it's vcpu,
+> here it's p (I assume it's for `previous` but I think the _from alone is
+> enough to understand) and below it's n. Shouldn't be better to keep the same name?
 
-You were replying to Jürgen, though.
-
-> your position here is really inconsistent:  You wave
-> away a partial pagetable walk with three map/unmap operations on the
-> context switch path as something we'll have to do in the interim, and
-> can optimize later, but are now threatening to make me add in
-> special-case codepaths and run tests to save a few memory reads and
-> shifts.
-
-I think you misunderstood. There was a concern raised already on v1,
-and that concern wasn't covered by the patch description. In my initial
-reply I said "Functionally the change looks okay to me" for a reason,
-after all.
+Context switch code is special, and using p and n can be warranted there.
+Everywhere else it should be v, nothing else (and I said so to Oleksii
+more than once before). Unless, of course, multiple vCPU-s come into play
+at the same time.
 
 Jan
-
-> I could put back the mfn caching that was present in v1 of the series
-> (which Andy said was probably not sufficient, on balance, to make the
-> duplication involved worth it).  Even that I think isn't really
-> sensible, but it's not too difficult to do.  To isolate the PTE
-> caching effect I'd have to write an entire duplicate codepath anyway,
-> and then try to duplicate Jürgen's test.  I don't think that's really
-> a reasonable ask at this point in the series.
-> 
->  -George
-
 
