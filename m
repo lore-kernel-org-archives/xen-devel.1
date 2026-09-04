@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE5A0C61DD6
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2026 11:12:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1408223.1640874 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A157C624D3
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2026 11:12:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1408221.1640866 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2RqY-0005A0-FI; Fri, 04 Sep 2026 11:12:38 +0000
+	id 1x2RqX-00053Q-Vn; Fri, 04 Sep 2026 11:12:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1408223.1640874; Fri, 04 Sep 2026 11:12:38 +0000
+Received: by outflank-mailman (output) from mailman id 1408221.1640866; Fri, 04 Sep 2026 11:12:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2RqY-00058B-Bj; Fri, 04 Sep 2026 11:12:38 +0000
-Received: by outflank-mailman (input) for mailman id 1408223;
- Fri, 04 Sep 2026 11:12:37 +0000
+	id 1x2RqX-00053G-Sj; Fri, 04 Sep 2026 11:12:37 +0000
+Received: by outflank-mailman (input) for mailman id 1408221;
+ Fri, 04 Sep 2026 11:12:35 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper3@citrix.com>) id 1x2RqX-0004wG-7x
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 11:12:37 +0000
+ (envelope-from <andrew.cooper3@citrix.com>) id 1x2RqV-0004qM-Pd
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 11:12:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x2RqW-00DcPh-L8
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 13:12:36 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1x2RqU-00DcP9-IQ
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 13:12:34 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6a9aa79f-e002-0a2a0a5209dd-0a2a450292f6-26
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 13:12:36 +0200
-Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a9aa7a1-2eae-0a2a0a5409dd-0a2a450ac29c-6
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 13:12:34 +0200
+Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6a9aa7a4-6ca4-0a2a45020019-d155dd36b945-3
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 13:12:36 +0200
-Received: by mail-wr1-f54.google.com with SMTP id
- ffacd0b85a97d-484362f5c4aso1049816f8f.3
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 04:12:36 -0700 (PDT)
+ id 6a9aa7a2-f2d2-0a2a450a0019-d155dd2adc54-3
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 13:12:34 +0200
+Received: by mail-wr1-f42.google.com with SMTP id
+ ffacd0b85a97d-4843e9c5960so884856f8f.0
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 04:12:34 -0700 (PDT)
 Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
  [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-485885be1c1sm5501729f8f.32.2026.09.04.04.12.34
+ ffacd0b85a97d-485885be1c1sm5501729f8f.32.2026.09.04.04.12.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Sep 2026 04:12:34 -0700 (PDT)
+ Fri, 04 Sep 2026 04:12:33 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,72 +55,77 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1788520356; x=1789125156; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1788520354; x=1789125154; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=OKNHZdlEt0x1ge8w8zMMA0euhweC/5SXf88v2qkE/1s=;
-        b=FFvZSbAx+ad8M+G4vQ+lQ0ZJW1yKISbGM+51Axr8M4q1mIdiSYlT3ftg/Un51Lim60
-         UPWekGrSrNBXCQ6bnSgt9e2vRb9REwAZ+FwUpMPpNXMWkycVNGOOT292hm4aUsxNvUwl
-         NuzQzFXemW5F36TdHp9YK48he1PqlyfiBOruw=
+        bh=IAj5V/bmI918usNj6g2EqlOZB06ZEviH3X3JOCZBsg0=;
+        b=X3nN+PPaimN6A+z7e+wvnsF+kpa4GdbmWawPypI4A9jDfc95SwzpsDShaZdLbrgs6A
+         GGZllrRxWCfWgryRbKwOqiloIMcOPndz9K6UxM+UOPAjV8R5VUuPWx65Hc6nd4yCWMKl
+         7luTdMEtAPW63qqbi04aDGtcUihH8ghR02TL4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788520356; x=1789125156;
+        d=1e100.net; s=20251104; t=1788520354; x=1789125154;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=OKNHZdlEt0x1ge8w8zMMA0euhweC/5SXf88v2qkE/1s=;
-        b=FkOujCbm9xuSyRekJMr3+ZEW9GFhd6zcRmPH2CK3mW9WOyrJyqb1Q8jzxuTV3c9gWO
-         GfhRAj9HjabgE4TRpkU8ok/Ho7lOGTXzZtJzwjHZ0P5ckh2kQKhJU+0Z2WN1NPLgXz4R
-         xAbdqQWGc/e8wqRbdS1uCK8LQxoKAg/eL86I7h2HNllO/6d3g6G/lAIDB+2b+RdeEyBB
-         T1L/ddskY0LwZDGIn2Bfa3R8CcnS77V56JA9BUzZAd+oTP2r4jc0+ZyUmUp8n+XnoxF/
-         d42An+44OTpGuuEUscL2nAEvsCUOeE0QY0fiiNOvK6ogQue9vErJtkMVhF6h+jV4nXlp
-         yjfw==
-X-Gm-Message-State: AFuF++nilzSre5ZcGoo89hiwCYseP4s7K5Hdc/9IPhmY0cenJHYanqWX
-	Y6H3IlqFiyjkazgPIe4GBOutlOfXOgILTbWbJt3H5s1rniW27scZ8oNWFiTUHO0IPgQ7bAKkeOW
-	DOjwkYKI=
-X-Gm-Gg: AYBFou1ywGctguzqn+d5XnpqbaW8EhaBRvG1N0VFLBy7cbFkjaXW6K4WSC/O7UoVxPY
-	sptoxiNLyTfMXYZItf1qqfo1POClfw3KM8gM//j5d68ua1KR/9VS10YQRCp66C6gyqpfEqh8lxd
-	lVryzaep86ZihAbPRI1fULqoxxncXqCWRQnaktvsQFozYJA/R25x+fNSR89/lk2vWBhgKyiy8Jh
-	e87J8xhLxrmYJO0F6qBlvLgK/Prx4ectadBlOmdUaq71NeXT6wRhCJmynJmgfU/8jzNhucdIcrX
-	6G+649mlJyJeuxwRxWUtNmWrq6M5I3jKTn8cWPDR+mP5RkP0hOLlqfSsKBw9k2kGhlQTilNwFG8
-	nej9Jl5gdfyEWKi3ZHxkrntvJvvrv/GhOBUetfdDmTSbFziLb9lD5/OvOLn1zhcNeE10LSF5+7y
-	mXeOc9klfiCRRpkvowJv6v0sR7t0u0oVeKEuQc87L41NS3eyIPEQBioJgmmUm3hkGFL9b01++0v
-	nBWylhUqT1BSORyKwZmWOvZMVila0VK9qP+R6c=
-X-Received: by 2002:a05:6000:4796:b0:484:3312:f127 with SMTP id ffacd0b85a97d-4858709b371mr8520454f8f.27.1788520355821;
-        Fri, 04 Sep 2026 04:12:35 -0700 (PDT)
+        bh=IAj5V/bmI918usNj6g2EqlOZB06ZEviH3X3JOCZBsg0=;
+        b=I/riddpCBaYpDJETHfguTPLqp9OcTi7rXBRLQ/Czx9MwThCLnYEtuqjbIND4Lv9oFC
+         k5GbrQdV/3O1s72Pi+jQmamWBFifiSpCJoP0x2ibg83l/itvFyZQp0odF6iE7XGs7RsE
+         nEohQijtMhWlEkiYiAf7bDF+mU4ZNX7KvsyUwGnpuIVw0Eb22pysj5cLDhmztDsLhzA6
+         Vr1q3FH6X5Lec7w1G1Z+Ep/yIJ7u8Kzooqus7rCmbHEm+gBqqHhCx8rzpia61gBFJbJ7
+         J5KpTFwZRICXpGT6IwFcVV4/lVzhFh6Ok6wjEAUBDBWzZMHDglYCqHo4KGqmnmfBBaLR
+         ZpKg==
+X-Gm-Message-State: AFuF++kgWpub0wCngpb1UoVwssXotul2nWoLS9BxxR0Jv5xfSWoByxoU
+	nvvOD8QaqGR05Z8Nt/+s9TLvnA+fIWVozuUtx9jtCmA2ziyv8WyefEGmQ15BVfmSUHAEfa9NS/u
+	adPAB9C0=
+X-Gm-Gg: AYBFou0oxxdYeDV+dArx5+9kZD2M3al5N/IdHB4BKuEe6d8wwLdpn0/RAuSluG79X43
+	Z63xGAs+bYhTB/g5V1gdlqjFa6YfkhbqPPwQKUY6iOlQvQKonQndBgtm2Ed+CYNahuy2nXvIBST
+	HYC5HdR0GlFgnBrzJRCdaDiF3PiZUxQjwaCdJs+S2JpvmZCa2qLpGiG5hC4BTxpPG98gs6MAw4m
+	WbnJafa6MhSB5RWrEIxIQRI4wcYJkOZPskFEoBscDtdHrm6gYe5Em0Qlv2kdIaDoifBIWvS9isj
+	AOni7DSNsftGM+5yBPAmHY/8l1LL3ZHgeWrCBQ16DJKbUS8cDjtqVbFWQKpWAegOIzCOOM8g6qN
+	XIRHGy/7XmCyycrtFe+hR6Dq2HqXqL0Xr2adJKvLNEnghlUMbDShoYZdMD4wIJSFsaZRNuzycsa
+	CUJXgaol7DN5IegrG+3xt6z1U5+bnum8G41qT4Et4JOVhCuNpsjC5DNffn5fehzln/ueKns0v/W
+	lbx7M06NKFk+eTojXjgIn02fEEB3HQFkvPktfZJVElCOj5PrA==
+X-Received: by 2002:a05:600c:154f:b0:49c:fc6e:8cb5 with SMTP id 5b1f17b1804b1-49cfc6e8ee3mr27356755e9.25.1788520353571;
+        Fri, 04 Sep 2026 04:12:33 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Setje-Eilers <Jan.SetjeEilers@oracle.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Setje-Eilers <Jan.SetjeEilers@oracle.com>
-Subject: [PATCH v2 3/5] xen/arm: Clean up 32bit arm_smccc_1_1_smc()
-Date: Fri,  4 Sep 2026 12:12:26 +0100
-Message-Id: <20260904111228.3022634-4-andrew.cooper3@citrix.com>
+	Michal Orzel <michal.orzel@amd.com>
+Subject: [PATCH v2 1/5] xen/arm: Fix evaluation of parameters for SMCCC calls
+Date: Fri,  4 Sep 2026 12:12:24 +0100
+Message-Id: <20260904111228.3022634-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20260904111228.3022634-1-andrew.cooper3@citrix.com>
 References: <20260904111228.3022634-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1788520356-F30B02AC-56B4610A/0/0
+X-purgate-ID: tlsNG-4011c0/1788520354-4B4D7CFC-79B07C3E/0/0
 X-purgate-type: clean
-X-purgate-size: 5507
+X-purgate-size: 4639
 
-... before making a related copy of it.
+Contrary to what was claimed in commit 67bcf5eae709 ("xen/arm: Simplify type
+handling for SMCCC declarations"), there is an important reason to retain the
+intermediate variable.  It is unsafe to have any logic between the assignment
+of the register variabes and the asm() block they're used in.
 
- * Drop __constraints() so the output parameters are visible in the same block
-   as they're defined.  Use PASTE() rather than opencoding it.
- * Adust the indentation of trailing \'s for consistency.
- * Drop the newline at the end of the instruction.
- * Indent the if condition correctly.  ___res is always of type
-   arm_smccc_res (declared in __declare_arg_0()), so drop the typeof().
- * Drop arm_smccc_1_0_smc() as it has no users.
+This logically reverts commit 67bcf5eae709 ("xen/arm: Simplify type handling
+for SMCCC declarations") while retaining the conversions from commit
+7f15d5d13221 ("xen/treewide: More typeof() -> auto conversions").
 
-No functional change.
+Adjust __declare_arg_0() to match.  It happens to be safe because it's the
+first register expression once all macros are expanded, but it really should
+be consistent with the others.
 
+Leave a comment explaining why they must be written like this.
+
+Fixes: 67bcf5eae709 ("xen/arm: Simplify type handling for SMCCC declarations")
+Reported-by: Jan Setje-Eilers <Jan.SetjeEilers@oracle.com>
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
 ---
@@ -131,107 +136,74 @@ CC: Bertrand Marquis <bertrand.marquis@arm.com>
 CC: Michal Orzel <michal.orzel@amd.com>
 CC: Jan Setje-Eilers <Jan.SetjeEilers@oracle.com>
 ---
- xen/arch/arm/include/asm/smccc.h | 45 ++++++++++++++++----------------
- 1 file changed, 22 insertions(+), 23 deletions(-)
+ xen/arch/arm/include/asm/smccc.h | 31 +++++++++++++++++++++++--------
+ 1 file changed, 23 insertions(+), 8 deletions(-)
 
 diff --git a/xen/arch/arm/include/asm/smccc.h b/xen/arch/arm/include/asm/smccc.h
-index 832157f43734..5fe54013ac83 100644
+index 62c6985e7315..53cdddb690b7 100644
 --- a/xen/arch/arm/include/asm/smccc.h
 +++ b/xen/arch/arm/include/asm/smccc.h
-@@ -56,6 +56,8 @@
+@@ -108,37 +108,52 @@ struct arm_smccc_res {
+ #define __constraint_read_6 __constraint_read_5, "r" (arg6)
+ #define __constraint_read_7 __constraint_read_6, "r" (arg7)
  
- #ifndef __ASSEMBLER__
++/*
++ * Macro arguments MUST be evaluated before being assigned to a register
++ * variable.
++ *
++ * This is manual register scheduling for the asm() statement, and any other
++ * logic to evaluate may clobber the already-scheduled registers.
++ */
+ #define __declare_arg_0(a0, res)                            \
++    auto __a0 = (uint32_t)(a0);                             \
+     struct arm_smccc_res    *___res = (res);                \
+-    register unsigned long  arg0 ASM_REG(0) = (uint32_t)(a0)
++    register unsigned long  arg0 ASM_REG(0) = __a0
  
-+#include <xen/macros.h>
-+
- extern uint32_t smccc_ver;
+ #define __declare_arg_1(a0, a1, res)                        \
++    auto __a1 = (a1);                                       \
+     __declare_arg_0(a0, res);                               \
+-    register auto           arg1 ASM_REG(1) = (a1)
++    register auto           arg1 ASM_REG(1) = __a1
  
- /* Check if this is fast call. */
-@@ -115,24 +117,24 @@ struct arm_smccc_res {
-  * This is manual register scheduling for the asm() statement, and any other
-  * logic to evaluate may clobber the already-scheduled registers.
-  */
--#define __declare_arg_0(a0, res)                            \
--    auto __a0 = (uint32_t)(a0);                             \
--    struct arm_smccc_res    *___res = (res);                \
-+#define __declare_arg_0(a0, res)                        \
-+    auto __a0 = (uint32_t)(a0);                         \
-+    struct arm_smccc_res    *___res = (res);            \
-     register unsigned long  arg0 ASM_REG(0) = __a0
+ #define __declare_arg_2(a0, a1, a2, res)                    \
++    auto __a2 = (a2);                                       \
+     __declare_arg_1(a0, a1, res);                           \
+-    register auto           arg2 ASM_REG(2) = (a2)
++    register auto           arg2 ASM_REG(2) = __a2
  
--#define __declare_arg_1(a0, a1, res)                        \
--    auto __a1 = (a1);                                       \
--    __declare_arg_0(a0, res);                               \
-+#define __declare_arg_1(a0, a1, res)                    \
-+    auto __a1 = (a1);                                   \
-+    __declare_arg_0(a0, res);                           \
-     register auto           arg1 ASM_REG(1) = __a1
- 
--#define __declare_arg_2(a0, a1, a2, res)                    \
--    auto __a2 = (a2);                                       \
--    __declare_arg_1(a0, a1, res);                           \
-+#define __declare_arg_2(a0, a1, a2, res)                \
-+    auto __a2 = (a2);                                   \
-+    __declare_arg_1(a0, a1, res);                       \
-     register auto           arg2 ASM_REG(2) = __a2
- 
--#define __declare_arg_3(a0, a1, a2, a3, res)                \
--    auto __a3 = (a3);                                       \
--    __declare_arg_2(a0, a1, a2, res);                       \
-+#define __declare_arg_3(a0, a1, a2, a3, res)            \
-+    auto __a3 = (a3);                                   \
-+    __declare_arg_2(a0, a1, a2, res);                   \
-     register auto           arg3 ASM_REG(3) = __a3
+ #define __declare_arg_3(a0, a1, a2, a3, res)                \
++    auto __a3 = (a3);                                       \
+     __declare_arg_2(a0, a1, a2, res);                       \
+-    register auto           arg3 ASM_REG(3) = (a3)
++    register auto           arg3 ASM_REG(3) = __a3
  
  #define __declare_arg_4(a0, a1, a2, a3, a4, res)        \
-@@ -158,12 +160,6 @@ struct arm_smccc_res {
++    auto __a4 = (a4);                                   \
+     __declare_arg_3(a0, a1, a2, a3, res);               \
+-    register auto           arg4 ASM_REG(4) = (a4)
++    register auto           arg4 ASM_REG(4) = __a4
+ 
+ #define __declare_arg_5(a0, a1, a2, a3, a4, a5, res)    \
++    auto __a5 = (a5);                                   \
+     __declare_arg_4(a0, a1, a2, a3, a4, res);           \
+-    register auto           arg5 ASM_REG(5) = (a5)
++    register auto           arg5 ASM_REG(5) = __a5
+ 
+ #define __declare_arg_6(a0, a1, a2, a3, a4, a5, a6, res)    \
++    auto __a6 = (a6);                                       \
+     __declare_arg_5(a0, a1, a2, a3, a4, a5, res);           \
+-    register auto           arg6 ASM_REG(6) = (a6)
++    register auto           arg6 ASM_REG(6) = __a6
+ 
+ #define __declare_arg_7(a0, a1, a2, a3, a4, a5, a6, a7, res)    \
++    auto __a7 = (a7);                                           \
+     __declare_arg_6(a0, a1, a2, a3, a4, a5, a6, res);           \
+-    register auto           arg7 ASM_REG(7) = (a7)
++    register auto           arg7 ASM_REG(7) = __a7
+ 
  #define ___declare_args(count, ...) __declare_arg_ ## count(__VA_ARGS__)
  #define __declare_args(count, ...)  ___declare_args(count, __VA_ARGS__)
- 
--#define ___constraints(count)                       \
--    : "=r" (r0), "=r" (r1), "=r" (r2), "=r" (r3)     \
--    : __constraint_read_ ## count                   \
--    : "memory"
--#define __constraints(count)    ___constraints(count)
--
- /*
-  * arm_smccc_1_1_smc() - make an SMCCC v1.1 compliant SMC call
-  *
-@@ -189,10 +185,14 @@ struct arm_smccc_res {
-         register unsigned long r2 ASM_REG(2);                   \
-         register unsigned long r3 ASM_REG(3);                   \
-         __declare_args(__count_args(__VA_ARGS__), __VA_ARGS__); \
--        asm volatile("smc #0\n"                                 \
--                     __constraints(__count_args(__VA_ARGS__))); \
-+        asm volatile (                                          \
-+            "smc #0"                                            \
-+            : "=r" (r0), "=r" (r1), "=r" (r2), "=r" (r3)        \
-+            : PASTE(__constraint_read_,                         \
-+                    __count_args(__VA_ARGS__))                  \
-+            : "memory" );                                       \
-         if ( ___res )                                           \
--        *___res = (typeof(*___res)){r0, r1, r2, r3};            \
-+            *___res = (struct arm_smccc_res){ r0, r1, r2, r3 }; \
-     } while ( 0 )
- 
- /*
-@@ -200,7 +200,6 @@ struct arm_smccc_res {
-  * v1.1.
-  */
- #ifdef CONFIG_ARM_32
--#define arm_smccc_1_0_smc(...) arm_smccc_1_1_smc(__VA_ARGS__)
- #define arm_smccc_smc(...) arm_smccc_1_1_smc(__VA_ARGS__)
- 
- /* Make an SMCCC v1.1 compliant SMC call with guest register state. */
-@@ -217,7 +216,7 @@ static inline void arm_smccc_guest_smc(struct cpu_user_regs *regs)
-     regs->r3 = res.a3;
- }
- 
--#else
-+#else /* CONFIG_ARM_64 */
- 
- void __arm_smccc_1_0_smc(register_t a0, register_t a1, register_t a2,
-                          register_t a3, register_t a4, register_t a5,
 -- 
 2.39.5
 
