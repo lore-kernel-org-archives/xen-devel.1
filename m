@@ -4,47 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40494C79F80
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2026 08:26:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1407983.1640741 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6989C624DE
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2026 08:29:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1407999.1640749 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2PFo-0002lq-NE; Fri, 04 Sep 2026 08:26:32 +0000
+	id 1x2PIN-0003pj-3q; Fri, 04 Sep 2026 08:29:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1407983.1640741; Fri, 04 Sep 2026 08:26:32 +0000
+Received: by outflank-mailman (output) from mailman id 1407999.1640749; Fri, 04 Sep 2026 08:29:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2PFo-0002lf-KF; Fri, 04 Sep 2026 08:26:32 +0000
-Received: by outflank-mailman (input) for mailman id 1407983;
- Fri, 04 Sep 2026 08:26:31 +0000
+	id 1x2PIN-0003pc-0w; Fri, 04 Sep 2026 08:29:11 +0000
+Received: by outflank-mailman (input) for mailman id 1407999;
+ Fri, 04 Sep 2026 08:29:09 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x2PFn-0002ki-6i
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 08:26:31 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1x2PIL-0003pU-EY
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 08:29:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x2PFm-00CrgA-JY
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 10:26:30 +0200
-Received: from [10.42.69.9] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a06b86a349000c4f3@swg.vates.tech>)
- id 6a9a80af-e002-0a2a0a5209dd-0a2a4509e954-40
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 10:26:30 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a06b86a349000c4f3@swg.vates.tech>)
- id 6a9a80af-be1a-0a2a45090019-b9ff1c22a197-5
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 10:26:30 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a06b86a349000c4f3.007 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Fri, 04 Sep 2026 08:26:20 +0000
-Received: from [192.168.1.46] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
- [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id 1E2CA802F6;
- Fri,  4 Sep 2026 10:26:20 +0200 (CEST)
+ id 1x2PIK-00HC8J-RZ
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 10:29:08 +0200
+Received: from [10.42.69.12] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a9a8153-e002-0a2a0a5209dd-0a2a450c871a-6
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 10:29:08 +0200
+Received: from [209.85.221.50] (helo=mail-wr1-f50.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a9a8154-f479-0a2a450c0019-d155dd32cd40-3
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 10:29:08 +0200
+Received: by mail-wr1-f50.google.com with SMTP id
+ ffacd0b85a97d-48441a2ba14so632948f8f.1
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 01:29:08 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-485883acd33sm4696290f8f.18.2026.09.04.01.29.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 04 Sep 2026 01:29:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,219 +53,222 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=Di0Hawg+axQGrdxpJjlorhfH9iHXCw0a3L3zGg16D5M=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=j7pVqSthkSsKyAbyaeL/BzNxnJy2406IhTvqAvOuewgEVQ7ma82g0yXIJ1AK6PRynpZvcmQ4Y
- m7enuhMtLMp/9Vv1+hgos9vYj7HiZRJLqvDHVdknK8VW5e7Gvm/KfqPr5umSGfZm1eBLuXLMIao
- dUt0FR5PsbJevm/FT1FpFM0Nr4LEXk5+LwCG1zlWE5vQfJ4H29SGTFF7d7y4AM0onYqWGMcqvPk
- aCmJFEXltg2FsiJlTa/x+NmbE684l40JhFVp4woe423piSQaJhSc3iYTf+BghF/WBWeVPYJXLh+
- RHJ+UvSiBrE8/VwWBa4C4abyMhRSOyCI2NDCqDWX1+zw==
-X-Zone-Loop: 0af76f2ff1590b9067b226c1d5a1b4b8664331a4a767
-x-campaign-type: default
-x-transaction-id: 4b26a73b-cc9d-42a5-afd9-5d597bfbaf58
-x-swg-uid: 01-349004eb-7d2f-44b1-988d-01703f3dd11e
-X-Mailer: Sweego
-Message-ID:
- <1788510380.8631fc262581453bbf619ec5b2062170.1a06b86a349000c4f3@vates.tech>
-x-swg-bid: 1788510380.8631fc262581453bbf619ec5b2062170.1a06b86a349000c4f3
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1788510548; x=1789115348; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=fv1Hle5ICcjsbv9RdoU1hWsZEcqlLyhQcR0STYSRl+Q=;
+        b=Gz7XOSv5FXoyXJeClB9QFhNzwvrdawBjYINGAaSIxd9YTKxUrPbGV46lDJCkU7rb7z
+         gmOCSsmojNBbCvlBGZzJBghhnCpXw2zGIJQs1dKKs4brA6H3VTbXeM7eBmQn4ksOeWkP
+         4FkqE+csJG93zu6DtsbKg3S7buRVRvjGdFSdfRL1qNtOwOy7fyKz84Qt0TTSciGyYd3m
+         qoaNi0HnQSfdRqmqxhYKkIZ0waZzCkEy+a5Wa1uJU0epJcwIDEtMrCMh8W+vWTNDBRMf
+         eUeJXzdhkGXYrfoyWWvQG8BREZ9XDz/OS7gJNO2aTcHtyHyv1gshhPn1Bb5xLM75Xyjb
+         dnDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788510548; x=1789115348;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=fv1Hle5ICcjsbv9RdoU1hWsZEcqlLyhQcR0STYSRl+Q=;
+        b=AlOgZOvZi2hvwxE1mgovJB3Ld3ZDDOw5/vlpWHwlDbEtYShNZucaAuFC3i5xLx5rjn
+         QCcRG/AAVVxKFfYfq2Yuxx2zJVMdCZ5EXSwdz48iz8UOUAS5WgFymPGIgg25MD1qFz/z
+         xnvEO334CHStOgMioTRSeJSV1t/DLiAyEckBy3Ize+4+u7yuW7geedSA5oz9rm1IzqPG
+         FX7WxR2ip7GTNDXyrbbiQg02Ra1rCTZR84uRJlctmbD15CaSWDGkoEllMf/ImtwC48SH
+         dfzCG5ezs4AN7JHIYObPFpmvkgtiBYQaibZUJ6FWVIgJ52/75wLspwfrMyixU0XSNdaG
+         mFqQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzFQQX3x2HAj+07scpeHscR6XWBmgmWdq7Dq9SaP1aqc/lgecYvw+j77rVRcXgWoVVxPjJaT0kLDQQ=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mkvwQFnUywUfBUvrli4CtDj6WDVa7ckZBVJdS/MwtArwwsEd9i
+	ZIsKHF/cRXm9No6YCkpUhJZffKlTWwtd+nwTwCjmpgwqEk1Q4kGE+ZDAikFNSjWOrl7Lbct4oG3
+	SLXmt2w==
+X-Gm-Gg: AYBFou0mktg4HCtXYyMiHZZuFTVwP/B3eIJwji23xgkrDzZ2AWzCkBAo52OZEc6t52L
+	m1SyLlkNZh4J8MoxZfxZDFVRpjKHMzggbKXYdQduLuuA0Hm5yj7T3fukflJteeIg+gVriOmk6AK
+	utmZTeO0cgjnFpXuD57wbe39qE8T69kmHz0ajPQ/sLdnvhfSjxit9svONu2q4QiBvTb1aKwIeYX
+	dnlh9rqQAInPDJmOaA8SXyXBVIjTKOoSkYKe3TMxEb02M/FsOk/rnEXoc8M7cg/TJ3rmZ1FD1ty
+	YOoCV6ckv7WHyGIGv1FgDPYmmlEbD4uAwSjKGqFgA1a4vCedxOuc06HZG/SeokrC7od+roCJAua
+	/SQExB9NBBiRflVDkmtbc06Xss9yFnUoQKQSHiFDphcDLbPq2iLpWNpu7oxkNlu236OUm04eI27
+	Uf6dwLkQdMEAG55XCZdpM2celJGsKiODS+ZFGm1kbJOWynWzcKPLEFLip/6vZLqZ+MnpbRZvU5D
+	PxGRq4KUYA+d8pDVJtuoYImQ5ExIXPgb0s6v/bEEz4z5hNXDFSc
+X-Received: by 2002:a05:6000:2f88:b0:485:8a46:704e with SMTP id ffacd0b85a97d-4858a4671cemr2714258f8f.32.1788510548107;
+        Fri, 04 Sep 2026 01:29:08 -0700 (PDT)
+Message-ID: <f413cc9c-cef5-4f85-b232-15e3c64f2a45@suse.com>
+Date: Fri, 4 Sep 2026 10:29:06 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v2 12/39] xen/riscv: implement vCPU context switching
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: xen-devel@lists.xenproject.org, 
- Romain Caritey <Romain.Caritey@microchip.com>, 
- Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
- Zheng Zhang <zhangzheng@iscas.ac.cn>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Connor Davis <connojdavis@gmail.com>, 
- Andrew Cooper <andrew.cooper3@citrix.com>, 
- Anthony PERARD <anthony.perard@vates.tech>, 
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
- Julien Grall <julien@xen.org>, 
- =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
- Stefano Stabellini <sstabellini@kernel.org>
-In-Reply-To: <8848874c69f00fbfcf6ad75a39e28479a4cdd08b.1787838835.git.oleksii.kurochko@gmail.com>
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <8848874c69f00fbfcf6ad75a39e28479a4cdd08b.1787838835.git.oleksii.kurochko@gmail.com>
-Date: Fri, 04 Sep 2026 10:26:10 +0200
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788510379; l=7001;
- i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
- bh=xED3kTXU4/307Oa7PqWkBMB5xhiN8U/7lWdPmOMMBf8=;
- b=hCzdKGJnKwSAAsO81lcMz+VMEnw6CVK/0VdSvehLiZp9ZSfnjqXExVKOkJgt7Tx2OufEO9SRy
- 2h1rxW3EXqVDjo3X7iKOa6+vcU7pKEc9ZwbbketV4NcWOHzuvygvSqF
-X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
- pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1788510380325
-X-purgate-ID: tlsNG-bad1c0/1788510390-FDA6E034-9F1AA250/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 7001
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 03/14] x86/pv: use populate_perdomain_mapping() to map
+ the Xen GDT
+To: George Dunlap <dunlapg@umich.edu>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Alejandro Vallejo <agarciav@amd.com>, Teddy Astie <teddy.astie@vates.tech>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org,
+ =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+References: <20260901-asi-part2-0-ecc269f268b7@xenproject.org>
+ <20260901-asi-part2-3-ecc269f268b7@xenproject.org>
+ <554687e3-1fab-4d23-9a4e-0bdc3bc1fc60@suse.com>
+ <CAFLBxZYqOWkd60As00ytcNqTZg99Gu220OMrse5MXYgOHfx0Pw@mail.gmail.com>
+ <07d332a4-a5a3-44d4-95ce-fc67d86edacf@suse.com>
+ <050f44ec-47e5-4754-b73b-1173458736b0@suse.com>
+ <CAFLBxZZ+-GsTLDMoiBpAda6U-T-M70wHjAK9EqKZCZdK2VAknw@mail.gmail.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <CAFLBxZZ+-GsTLDMoiBpAda6U-T-M70wHjAK9EqKZCZdK2VAknw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d25034/1788510548-50D3CA5B-518E7308/0/0
+X-purgate-type: clean
+X-purgate-size: 6371
 
-As I understand it, a generation wrap doesn't retire a single VMID, it
-resets next_vmid to 1, which makes every VMID in 1..max_vmid reusable
-again in the new generation. We do a full (local) flush at that point to
-avoid two different vCPUs ending up with the same VMID valid at once,
-across generations.
-
-If this is correct, doing a full flush there also throws away entries
-for the current vCPU that a local HFENCE.GVMA(vmid) per retired VMID
-could have preserved. A local-flush-per-VMID approach could also
-reduce how often we need a full flush at all.
-
-Is there a reason we don't do local flushing instead? I see x86 and KVM
-use the same flush-all design on wrap, so I assume there's a reason I'm
-missing, I'd like to understand it.
-
-Thanks in advance.
-
-> H/VS CSRs, virtual timer and P2M context, and __context_switch() in assembly,
-> which switches Xen's own callee-saved state (and thereby the stack) from
-> prev to next. Virtual interrupt controller context switch will be
-> introduced later.
+On 04.09.2026 10:06, George Dunlap wrote:
+> On Fri, Sep 4, 2026 at 7:54 AM Jürgen Groß <jgross@suse.com> wrote:
+>>
+>> On 04.09.26 08:00, Jan Beulich wrote:
+>>> On 04.09.2026 00:35, George Dunlap wrote:
+>>>> On Thu, Sep 3, 2026 at 5:11 PM Jan Beulich <jbeulich@suse.com> wrote:
+>>>>>
+>>>>> On 02.09.2026 11:43, George Dunlap wrote:
+>>>>>> From: Roger Pau Monné <roger.pau@citrix.com>
+>>>>>>
+>>>>>> Currently, update_xen_slot_in_full_gdt() uses the stashed direct-map
+>>>>>> pointer in d->arch.pv.gdt_ldt_l1tab to update the incoming vcpu's
+>>>>>> page tables with Xen's GDT, by writing a stashed per-cpu copy of a
+>>>>>> pre-baked L1 entry (either 64-bit or compat version).
+>>>>>>
+>>>>>> Switch this to using populate_perdomain_mapping(), which doesn't rely
+>>>>>> on the stashed address of the l1 page in the direct map.  Rather than
+>>>>>> also stashing a pre-baked value for the payload, compute the mfn from
+>>>>>> the per-cpu GDT pointer at use: the conversion is a handful of cycles
+>>>>>> on a path costing thousands, and computing at use removes the
+>>>>>> parallel {,compat_}gdt_l1e bookkeeping along with its boot-ordering
+>>>>>> constraint (the cached value could only be generated after Xen's
+>>>>>> physical relocation, and had to be in place before the first context
+>>>>>> switch; a use-time lookup is correct by construction).  The flags on
+>>>>>> the final mapping are identical.
+>>>>>>
+>>>>>> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+>>>>>> Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8
+>>>>>> Signed-off-by: George Dunlap <gwd@xenproject.org>
+>>>>>> ---
+>>>>>> Changes in v2:
+>>>>>> - Drop the {,compat_}gdt_mfn caching entirely (suggested by Andrew
+>>>>>>     Cooper): compute virt_to_mfn() from the per-cpu GDT pointer at use.
+>>>>>>     The PDX lookup behind it measures ~5-10 cycles warm against a
+>>>>>>     ~1,500-cycle context switch, and this removes the double
+>>>>>>     bookkeeping and the after-relocation caching constraint.  The
+>>>>>>     cached-MFN assertion goes with the cache: a use-time computation
+>>>>>>     from a live pointer needs no staleness check.
+>>>>>
+>>>>> This looks to contradict what 564d261687c0 ("x86/ctxt-switch: Document
+>>>>> and improve GDT handling") used as justification to put in place the
+>>>>> caching. Also Cc-ing Jürgen, who also was involved there, for possible
+>>>>> further insight.
+>>>>>
+>>>>> Functionally the change looks okay to me, but the above will need
+>>>>> sorting, at the very least by specifically discussing why effectively
+>>>>> undoing that earlier change is okay.
+>>>>
+>>>> So looking back at the thread, Jürgen measured a 14% improvement for
+>>>> something that might be described as a microbenchmark before and after
+>>>> the patch (a benchmark purposely trying to set up an unusual scenario
+>>>> to maximize the effect of context switch overhead, not one to
+>>>> represent a typical workflow).  But are the numbers really plausible?
+>>>> Even at an implausible 100k switches/s across the box, saving 100
+>>>> cycles per switch is about 0.04% of eight 3 GHz cores.
+>>>>
+>>>> At any rate, we're already adding several map/unmap operations, and
+>>>> about to add several more.  Keeping the PTE caching would require
+>>>> adding a separate path that can write just PTEs, which then will
+>>>> potentially further complication future paths where we need to make
+>>>> sure we handle both domain-wide perdomain areas and per-vcpu areas.
+>>>> If it were easy I would already have been keeping it.
+>>>>
+>>>> I'd be inclined to say: Since we're going to be adding more
+>>>> populate_perdomain_mapping() calls anyway, let's do it the simple
+>>>> correct way first; and then explore the idea of stashing mfns of
+>>>> frequently-mapped L1s (rather than having to walk L3 -> L2 -> L1); and
+>>>> at that time look into stashing baked l1es to avoid conversions.
+>>>
+>>> Perhaps; I'd like to have Jürgen's and/or Andrew's input here, though.
+>>
+>> At that time I implemented core scheduling in Xen. I noticed that very
+>> subtle changes in the context switch path could result in unexpected large
+>> performance differences. As I had the performance test for my purpose
+>> already set up, I used it for Andrew's patch (which was a result of my
+>> context switch path performance findings) and really did measure the
+>> impressive effect of it.
+>>
+>> Note that you can't only count instructions, often cache effects and
+>> branch predictions are dominating the performance.
 > 
-> Add offsets of struct arch_vcpu's xen_saved_context to asm-offsets.c for
-> use by __context_switch().
+> Right, but:
 > 
-> henvcfg and htimedelta are 64-bit on both RV32 and RV64, so store them as
-> uint64_t and use csr_{read,write}64() instead of open-coding accesses to
-> the high halves.
+> 1. That's going to be very much hardware- and workload- dependent.
+> Even on the same hardware, if you'd made a slight change in the
+> workload, you might have seen a very different result; and on
+> different hardware you're going to see something different again
 > 
-> A hart which drops out of a domain's dirty_cpumask stops being a target
-> of p2m_tlb_flush() while its TLB may still hold G-stage translations of
-> that domain, and neither the vCPU which just ran nor any other vCPU of
-> that domain which ran there earlier has had its VMID invalidated. Move
-> the hart to a new VMID generation at that point: a VMID number is never
-> re-used until a full local flush has happened, hence none of those
-> translations can be reached again.
+> 2. As I said, we're now adding two extra map / unmaps, which is going
+> to perturb everything again.
 > 
-> Claim the VMID in p2m_ctxt_switch_to() rather than at the next guest
-> entry. VMIDs are a per-hart resource, so the (generation, vmid) pair a
-> migrating vCPU brings from another hart is meaningless here and may even
-> match this hart's current generation, leaving the vCPU under a VMID owned
-> by another domain. ctxt_switch_to() invalidates that pair, but claiming a
-> replacement only on guest entry is too late: p2m_ctxt_switch_to() has by
-> then already made HGATP live, and speculation can populate G-stage entries
-> of the incoming domain under the stale VMID. The local flush for a wrapped
-> generation moves along with the claim.
+> If anything, your argument says we should wait until we've stopped
+> modifying the context switch path (which won't happen until patch 49
+> at least, guessing from the patch titles), and then measure things
+> again to see what's actually slow.
 > 
-> That leaves p2m_handle_vmenter() with nothing to do, so drop it together
-> with its call from check_for_pcpu_work(). A VMID can only be invalidated
-> while its vCPU isn't running: vmid_flush_vcpu() is called for the vCPU
-> being switched in, and vmid_flush_hart() runs either from schedule_tail(),
-> ahead of ctxt_switch_to(), or from the wrap path of vmid_handle_vmenter()
-> itself. A P2M change on another hart doesn't invalidate it either, as
-> p2m_tlb_flush() drops the stale entries directly with
-> sbi_remote_hfence_gvma() instead of retiring the VMIDs which tag them. A
-> guest therefore always runs under the VMID claimed on its way in, and
-> there is nothing left for a guest entry hook to notice.
-> 
-> p2m_handle_vmenter() also skipped the HGATP write when the VMID it claimed
-> was unchanged. That isn't carried over: HGATP holds the G-stage root as
-> well, and skipping the write is only correct where that root is already
-> the incoming domain's. On the guest entry path it is, on the context
-> switch path it is not.
-> 
-> While at it, fix the inclusion order of headers in asm-offsets.c: Xen's
-> headers go first, then arch specific ones.
-This could have a dedicated patch no?
-> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
->
-> diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
-> index ec327a5e8a..91a46d630f 100644
-> --- a/xen/arch/riscv/domain.c
-> +++ b/xen/arch/riscv/domain.c
-> @@ -11,9 +11,11 @@
->  #include <asm/bitops.h>
->  #include <asm/cpufeature.h>
->  #include <asm/csr.h>
-> +#include <asm/current.h>
->  #include <asm/intc.h>
->  #include <asm/mmio.h>
->  #include <asm/riscv_encoding.h>
-> +#include <asm/vmid.h>
->  #include <asm/vtimer.h>
->  
->  struct csr_masks {
-> @@ -158,6 +160,8 @@ int arch_vcpu_create(struct vcpu *v)
->      if ( is_idle_vcpu(v) )
->          return 0;
->  
-> +    v->arch.last_cpu = NR_CPUS;
-> +
->      vcpu_csr_init(v);
->  
->      if ( (rc = vcpu_vtimer_init(v)) )
-> @@ -329,6 +333,169 @@ int arch_domain_create(struct domain *d,
->      return rc;
->  }
->  
-> +static void save_csr_regs(struct vcpu *vcpu)
-> +{
-> +    /*
-> +     * There is no need to save these CSRs as only hypervisor writes them in
-> +     * restore_csr_regs() and guest can't access them so they shouldn't be
-> +     * stored here. Keep them commented here just for symmetry with the
-> +     * restore CSRs register part.
-> +     *
-> +     * vcpu->arch.hedeleg = csr_read(CSR_HEDELEG);
-> +     * vcpu->arch.hideleg = csr_read(CSR_HIDELEG);
-> +     * vcpu->arch.henvcfg = csr_read64(CSR_HENVCFG);
-> +     * vcpu->arch.hcounteren = csr_read(CSR_HCOUNTEREN);
-> +     * vcpu->arch.htimedelta = csr_read64(CSR_HTIMEDELTA);
-> +     *
-> +     * if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_smstateen) )
-> +     *     vcpu->arch.hstateen0 = csr_read(CSR_HSTATEEN0);
-> +     */
-> +
-> +    vcpu->arch.hvip = csr_read(CSR_HVIP);
-> +
-> +    vcpu->arch.vsstatus = csr_read(CSR_VSSTATUS);
-> +    vcpu->arch.vsie = csr_read(CSR_VSIE);
+> I'm sorry Jan,
 
+You were replying to Jürgen, though.
 
-> +    vcpu->arch.vstvec = csr_read(CSR_VSTVEC);
-> +    vcpu->arch.vsscratch = csr_read(CSR_VSSCRATCH);
-> +    vcpu->arch.vscause = csr_read(CSR_VSCAUSE);
-> +    vcpu->arch.vstval = csr_read(CSR_VSTVAL);
-> +    vcpu->arch.vsepc = csr_read(CSR_VSEPC);
-> +}
-> +
-> +static void restore_csr_regs(struct vcpu *vcpu)
-> +{
-> +    csr_write(CSR_HEDELEG, vcpu->arch.hedeleg);
-> +    csr_write(CSR_HIDELEG, vcpu->arch.hideleg);
-> +    csr_write(CSR_HVIP, vcpu->arch.hvip);
-> +    csr_write64(CSR_HENVCFG, vcpu->arch.henvcfg);
-> +    csr_write(CSR_HCOUNTEREN, vcpu->arch.hcounteren);
-> +    csr_write64(CSR_HTIMEDELTA, vcpu->arch.htimedelta);
-> +
-> +    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_smstateen) )
-> +        csr_write(CSR_HSTATEEN0, vcpu->arch.hstateen0);
-> +
-> +    csr_write(CSR_VSSTATUS, vcpu->arch.vsstatus);
-> +    csr_write(CSR_VSIE, vcpu->arch.vsie);
+> your position here is really inconsistent:  You wave
+> away a partial pagetable walk with three map/unmap operations on the
+> context switch path as something we'll have to do in the interim, and
+> can optimize later, but are now threatening to make me add in
+> special-case codepaths and run tests to save a few memory reads and
+> shifts.
 
+I think you misunderstood. There was a concern raised already on v1,
+and that concern wasn't covered by the patch description. In my initial
+reply I said "Functionally the change looks okay to me" for a reason,
+after all.
 
-> +    csr_write(CSR_VSTVEC, vcpu->arch.vstvec);
-> +    csr_write(CSR_VSSCRATCH, vcpu->arch.vsscratch);
-> +    csr_write(CSR_VSCAUSE, vcpu->arch.vscause);
-> +    csr_write(CSR_VSTVAL, vcpu->arch.vstval);
-> +    csr_write(CSR_VSEPC, vcpu->arch.vsepc);
-> +}
-> +
-> +static void ctxt_switch_from(struct vcpu *p)
-Is it expected to have diverse names for the vcpu arg? Above it's vcpu,
-here it's p (I assume it's for `previous` but I think the _from alone is
-enough to understand) and below it's n. Shouldn't be better to keep the same name?
+Jan
 
--- 
-Baptiste Le Duc <baptiste.le-duc@vates.tech>
+> I could put back the mfn caching that was present in v1 of the series
+> (which Andy said was probably not sufficient, on balance, to make the
+> duplication involved worth it).  Even that I think isn't really
+> sensible, but it's not too difficult to do.  To isolate the PTE
+> caching effect I'd have to write an entire duplicate codepath anyway,
+> and then try to duplicate Jürgen's test.  I don't think that's really
+> a reasonable ask at this point in the series.
+> 
+>  -George
+
 
