@@ -4,47 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95289C624DE
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2026 12:08:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1408373.1640985 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA3D1C624D3
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2026 12:09:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1408375.1640993 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2Sij-0006WC-Io; Fri, 04 Sep 2026 12:08:37 +0000
+	id 1x2Sj0-0006si-T2; Fri, 04 Sep 2026 12:08:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1408373.1640985; Fri, 04 Sep 2026 12:08:37 +0000
+Received: by outflank-mailman (output) from mailman id 1408375.1640993; Fri, 04 Sep 2026 12:08:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2Sij-0006W5-FC; Fri, 04 Sep 2026 12:08:37 +0000
-Received: by outflank-mailman (input) for mailman id 1408373;
- Fri, 04 Sep 2026 12:08:35 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x2Sj0-0006sb-Pw; Fri, 04 Sep 2026 12:08:54 +0000
+Received: by outflank-mailman (input) for mailman id 1408375;
+ Fri, 04 Sep 2026 12:08:53 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <imammedo@redhat.com>) id 1x2Sih-0006UH-E8
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 12:08:35 +0000
+ (envelope-from <Bertrand.Marquis@arm.com>) id 1x2Siz-0006rr-Il
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 12:08:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x2Sif-009hoY-EO
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 14:08:33 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1x2Siy-00GQOE-Uv
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 14:08:52 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <imammedo@redhat.com>)
- id 6a9ab4b5-2eae-0a2a0a5409dd-0a2a450abcc0-28
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 14:08:33 +0200
-Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <imammedo@redhat.com>)
- id 6a9ab4bf-f2d2-0a2a450a0019-aa0a817ca5f5-3
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 14:08:33 +0200
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-631-6iCtdctEP_6asNWKVLSgMA-1; Fri, 04 Sep 2026 08:08:30 -0400
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-49ccfad90f1so6533275e9.0
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 05:08:30 -0700 (PDT)
-Received: from imammedo ([213.175.37.14]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49ce831af89sm120170135e9.1.2026.09.04.05.08.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Sep 2026 05:08:27 -0700 (PDT)
+ (envelope-from <Bertrand.Marquis@arm.com>)
+ id 6a9ab4bf-bab6-0a2a0a5309dd-0a2a4504b17e-30
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 14:08:52 +0200
+Received: from [40.107.162.8]
+ (helo=PA4PR04CU001.outbound.protection.outlook.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Bertrand.Marquis@arm.com>)
+ id 6a9ab4d4-b57f-0a2a45040019-286ba2088e79-4
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 14:08:52 +0200
+Received: from AS4P195CA0046.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:65a::27)
+ by AM8PR08MB5555.eurprd08.prod.outlook.com (2603:10a6:20b:1d3::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.4; Fri, 4 Sep 2026
+ 12:08:49 +0000
+Received: from AMS0EPF0000056A.eurprd02.prod.outlook.com
+ (2603:10a6:20b:65a:cafe::8a) by AS4P195CA0046.outlook.office365.com
+ (2603:10a6:20b:65a::27) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.13 via Frontend Transport; Fri, 4
+ Sep 2026 12:08:49 +0000
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ AMS0EPF0000056A.mail.protection.outlook.com (10.167.242.120) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.8
+ via Frontend Transport; Fri, 4 Sep 2026 12:08:48 +0000
+Received: from PR3PR08MB5593.eurprd08.prod.outlook.com (2603:10a6:102:84::13)
+ by DU0PR08MB9050.eurprd08.prod.outlook.com (2603:10a6:10:47a::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.382.10; Fri, 4 Sep
+ 2026 12:08:14 +0000
+Received: from PR3PR08MB5593.eurprd08.prod.outlook.com
+ ([fe80::aae1:6871:afc4:620e]) by PR3PR08MB5593.eurprd08.prod.outlook.com
+ ([fe80::aae1:6871:afc4:620e%6]) with mapi id 15.21.0382.007; Fri, 4 Sep 2026
+ 12:08:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,333 +69,257 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1788523711;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=uiO1euU//keMnRJ/+D7RSwnTPu9S3MPbCCFcroBKMjc=;
-	b=SSEHdeKi6/pRJkZGYmFGALqwHAAbD16v16gam/BpZ67XDCzd5UFy6cIBlgUl2wVmrvL3jZ
-	9aMB64aZ8Qn0MyYGBTnq5lXQI+zCXGcC8VHNHFPm6VLZI1AbLY7eI30i4nuhc2wbq3UKTC
-	FKaTsu+Ol9g/cM+P8TnIetpSeqh5Di4=
-X-MC-Unique: 6iCtdctEP_6asNWKVLSgMA-1
-X-Mimecast-MFC-AGG-ID: 6iCtdctEP_6asNWKVLSgMA_1788523709
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788523709; x=1789128509;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Exst7EJqJQoSBYryil+QQ12+6GqWDbDrhmxI8WakeCY=;
-        b=Gft0o2ucOqc+k4HWq5pI65Zx5sIz29inhy8gwrDUmiojyqHn/YgMRH74j+QVz++3M3
-         OGWtaTKfDdc8ucGEcboVCOPtqyWlM6+LigHjsqj5iLcSB3iKCIHhg8NVezAOg3i42Sak
-         AFWNI5cmBd+BhaqJMqJvHxMYUCp9o3I0gZTba8J1XNGynMFNchrnSKFTi6fsgAzD+C/0
-         iyEV9m9tgwLCieZ95S+VdL79RiWguZ+Ld/ZduzBdnX8/cc3rmcmQvlpfusFGafbLtjj9
-         Rj+qDH0BBYDVbVAOWOwT0DcHB/LObnbpqcP/fJfzModbiEw/IRDPPuC5qsjGisRiavvQ
-         8rog==
-X-Forwarded-Encrypted: i=1; AKwUvBzGhF2X82aK3Vz7RKtoV+xGrGTpYPxiuNPIrKg7mxnM1Zn5+qd5CpIA9f1eaN+0VupyMvCPTgLKbU8=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kqNLQEUNWuaGGnBOtnrUh8AJnB4f9OLS8Gh617nuBqNRZK3Yu1
-	yxgLXshjUYOXBZyMQ+5dqf1Et/kSRiusHd15Sb1aGfnrmn1MnshZ01b6V9I+LTnAYs/LKAB1TvP
-	OfkVd65fzxLBu4I2HzHgEiBFhAEyWzWXqjPckMDzeXnejNR8bQG+4Y2fsamOA1WqXnLso
-X-Gm-Gg: AYBFou1IA/GwUslrGpOz4qLVEv02yZ+EGcA1AIXOxQqBVEJUviGaVW4+hHfB1TnoD0X
-	D+/+rYCaANMo1H3Mo3ehl23EddrqOWsvdZbOTznzN50EBjstyH+3vWWXjLreEYmini6ozcxO60T
-	L4buqTlavj/kNakYtlP5uw3HxcKyR2CF/ts+bpJUD1jdYwOyh/5DeMhUlE3IxZXSNNkDeHPB35Q
-	bkkPQrIErtEcqkr6GcOxaP22otiohDIpka0pCxOy0HMkH1S8z9mIvRmq/7d8AtXDzcZR8UoAF1j
-	S5bNukZluFcjXZuSruWTg7XkW9oR/ifc6sW053wrxWCbidIH46UPVFQwW1w=
-X-Received: by 2002:a05:600d:864b:20b0:49c:fea3:8633 with SMTP id 5b1f17b1804b1-49cfea38642mr11745465e9.24.1788523709278;
-        Fri, 04 Sep 2026 05:08:29 -0700 (PDT)
-X-Received: by 2002:a05:600d:864b:20b0:49c:fea3:8633 with SMTP id 5b1f17b1804b1-49cfea38642mr11745025e9.24.1788523708810;
-        Fri, 04 Sep 2026 05:08:28 -0700 (PDT)
-Date: Fri, 4 Sep 2026 14:08:24 +0200
-From: Igor Mammedov <imammedo@redhat.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Dongli Zhang <dongli.zhang@oracle.com>, "Daniel P. =?UTF-8?B?QmVycmFu?=
- =?UTF-8?B?Z8Op?=" <berrange@redhat.com>, qemu-devel@nongnu.org,
- qemu-s390x@nongnu.org, xen-devel@lists.xenproject.org, dave@treblig.org,
- anisinha@redhat.com, philmd@mailo.com, aurelien@aurel32.net,
- mjrosato@linux.ibm.com, alifm@linux.ibm.com, farman@linux.ibm.com,
- richard.henderson@linaro.org, iii@linux.ibm.com, david@kernel.org,
- pasic@linux.ibm.com, borntraeger@linux.ibm.com, cohuck@redhat.com,
- alex@shazbot.org, clg@redhat.com, akrowiak@linux.ibm.com,
- jjherne@linux.ibm.com, sstabellini@kernel.org, anthony@xenproject.org,
- edgar.iglesias@gmail.com, pbonzini@redhat.com, eblake@redhat.com,
- armbru@redhat.com, joe.jin@oracle.com
-Subject: Re: [PATCH 0/8] Force detach PCI devices for ACPI-based and PCIe
- native hot-unplug
-Message-ID: <20260904140824.177711f8@imammedo>
-In-Reply-To: <20260904072052-mutt-send-email-mst@kernel.org>
-References: <20260824011420.752806-1-dongli.zhang@oracle.com>
-	<aoxY4Rxst2qAyn5z@redhat.com>
-	<01ee4841-76d8-4749-a80e-eb945ab8799a@oracle.com>
-	<20260903172835.0e253a25@imammedo>
-	<20260903160401-mutt-send-email-mst@kernel.org>
-	<20260904130709.6769caee@imammedo>
-	<20260904072052-mutt-send-email-mst@kernel.org>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
-MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: zUpocuwcSh1UufAzlEg4gTnmulrO6lGfw216fi_wUMg_1788523709
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=TdURaDGFh93m/rHFZy22EfCifIPOmomEpZxXo0yKCxCHL7/l59TPUZOX9WY98gpGVZuOfofVdBHF9DUGI68si3Kc6Kmnx9BfzRrBE/tVp1KMuQls6oHGcNyCsjtw1od3CHYT9yZmWRB5cHc8J6bicu8zDw9VatKln+1ptPYT0/GjY1L6DFqyoi0vb9y2L/HkaZLBCoBtKeJ5OQkgKM55X7JA70F5tzOhBusVL4acOHaNqldsuJk22cLYkyvzu6wi/BY7bU/c7mK39TPbBqpAn75/Y0/sjDrhmWQwGkD1YqoLlDIUMvB1S2PqOkW35lGZf2wj4S1skhc2QxpN0r1JwA==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=SxLwEAMhmo17uxWlJyGZKHqeeRrXoOvc5qWiUbbbdSg=;
+ b=ybCSS4mFtQAq2Lu86VRLsWx0EbbL0sXXvNQuEYEpH/uw4o6/ZPS1TYoD+KmthuKdTfbNdhMFtUQ3pOwRC281fjgbT54pvKh93auaYbmvF/L+XYWHV9JU4l0WAgGCvyNFEzhcWDyLQYB9qVS13wsAcDCnfC0NQ3wBjhlc4WH3lAqzATUp0tU5rqkOR+EtxvWwsZDvoMdPl0WH0ldJN94gvUHADjmPA/orABQ3baWXu0VNE8fLwpD7opz/12DVgkltexrEY7k5Y9LtAFCYMl8H22Fcsytx/s1m3hxFf0gYrVxR3rxsp/tmHKe5ZbIT7A/5xIREZeqRuyL7XeH2/RIj0g==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=citrix.com smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=SxLwEAMhmo17uxWlJyGZKHqeeRrXoOvc5qWiUbbbdSg=;
+ b=MDdcWRo6Fhgkci/ATh7n/WVXgLHyHitV4mFp46JxPwjNrxbQLA4oP7J/QMrQFYmmL4DPS2jBKVGaWxoQh2tFzI+UWWMHc+NblpG4dRCc3usjqCSONBan84on+95A1cwjgmrIvJbqNN6oxSpY3a9vmMT1YhxSYuaf2/6y36Fqvk8=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=UPFjYjsbs6Ko8IuJk4t7IB1Lb57hI5FLQ5tyYl/iOokfm6QYIAI7G//5T84QYAuGBDQkU39Zxl/ny0WR0+wDQ+7Ui5+4WBkQaKG3TAIyLGNOJZRItngtlUUAzjvnZldqo/+PDjAnqGOe8v/gb1gX+y3Zx9ie7yfqPndff8V8eZgIGciugomajoZ2Mtl4RoGsxQH48EAUWRi8pCdQl1bCXs022KRW8casRbsJ4RnHh4PyYoOkmn0IGnnt2mYUkcU+u8PvpCfDGFW6mdPjpU3JbrGkOJjWYQ1m1l7jGO/WBguEsfMs7kpP708Nmx6wlTaq9vq1QkdjhKiV73G92RP8Lg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=SxLwEAMhmo17uxWlJyGZKHqeeRrXoOvc5qWiUbbbdSg=;
+ b=RyEZN8duB/GKM3CBYkNiDa0HVe3KsX+7bpXOvm8OVKWqP+JdPGAN3a4GjxuJVF6wzF7ssR8bRk1IcpwlghxqnMYn2a7Ww+Pq525myZu1KYbmcL91OVj8UDAkk1460SgnZ+FHqkT5YoMD8wqpsasSOdrNFyl+8iLi0yH1b1JzJUvYl8RlcmVLPiio5HyvJ45Yx3/dXBuyuiES/voCGk/rvWWkHMHDMIw6AqEpoPeoEVp4fcv7ptLMjVklQMHhyPUJ7r6osbBeSwVBjwp1VyEojPG32gN770PyNdzO43Vd0+YL4X/qtaEUe7K8Mhrkh794l5Y98fZBsxr2/YvAbUsSAA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=SxLwEAMhmo17uxWlJyGZKHqeeRrXoOvc5qWiUbbbdSg=;
+ b=MDdcWRo6Fhgkci/ATh7n/WVXgLHyHitV4mFp46JxPwjNrxbQLA4oP7J/QMrQFYmmL4DPS2jBKVGaWxoQh2tFzI+UWWMHc+NblpG4dRCc3usjqCSONBan84on+95A1cwjgmrIvJbqNN6oxSpY3a9vmMT1YhxSYuaf2/6y36Fqvk8=
+From: Bertrand Marquis <Bertrand.Marquis@arm.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+CC: Xen-devel <xen-devel@lists.xenproject.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>, Michal Orzel <michal.orzel@amd.com>, Jan
+ Setje-Eilers <Jan.SetjeEilers@oracle.com>
+Subject: Re: [PATCH v2 3/5] xen/arm: Clean up 32bit arm_smccc_1_1_smc()
+Thread-Topic: [PATCH v2 3/5] xen/arm: Clean up 32bit arm_smccc_1_1_smc()
+Thread-Index: AQHdPF5MaImMoDplI0uGAg1xhuIeaLa+U1WA
+Date: Fri, 4 Sep 2026 12:08:14 +0000
+Message-ID: <EFCD20E1-7F3F-4E1B-910E-7796BE37A437@arm.com>
+References: <20260904111228.3022634-1-andrew.cooper3@citrix.com>
+ <20260904111228.3022634-4-andrew.cooper3@citrix.com>
+In-Reply-To: <20260904111228.3022634-4-andrew.cooper3@citrix.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-mailer: Apple Mail (2.3864.700.51.1.1)
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic:
+	PR3PR08MB5593:EE_|DU0PR08MB9050:EE_|AMS0EPF0000056A:EE_|AM8PR08MB5555:EE_
+X-MS-Office365-Filtering-Correlation-Id: cdf815f8-0f1a-4bb9-9d54-08df0a7d46d6
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted:
+ BCL:0;ARA:13230040|376014|1800799024|23010399003|366016|56012099006|10067099003|11063799006|4143699003|3023799007|18002099003|22082099003|38070700021;
+X-Microsoft-Antispam-Message-Info-Original:
+ z67eRCPy+qPY39U3EcYddm0L/OW8cIqbu9ZX2NfiLWotvP2mMBGvEmPie440yfU99wsyItzZOZuc5SBYF4p97sgSsSLiN4BvfyfwkIWRsEmYS+BT4r3G8ysjuDuHRGu710qc1GxED/0Xo3BHGfsxqy6XQkSJk3OeOe5qUeWVrTAVhgZSWsAL8bd80cuA1+uT2bhWARmV0kjrXD+xDVsyXvlbxw0kfnJMoO2TF5cqLoj8Th+jHHZOl01rUDAbohQPOExzFEpOvbpYkdnv4RSDSPyExtwIEBb9U5A+O3MVkE/aUdk5bKmeOfoCUYVhYVV4Hei/uPaCaPchBTMf8r1XjJNJRssuyRVEpg10sOtIdVrETmUGZWjDrPjK1m6GsLdDCE5HU5oksLRTepPyY+zBuEetzyd2DRbRnZPV3865R74hz/mDe2pvkvW8uxdwYF5fWWh+4/e9nVYNya028nrAfKvYWiY2Mj4zY0x7+3K1NNeCqlBJN/hIvo+aOvaoVANJmweuEFSWk+OV0qhKQEjSHxViMgMLshmdxZxBXk7x1w/CpLo5uyoAQYolBLR6BcBcY9D//8HZsvOT89fTcu3lqXkqX68Egl4oG/pPU1V3DS6sIqTQ91NGwGEHVL0cGlV2YfcAbHXPCQHqRkOdYgFtsSWu/Ftw5GAS/M34BgwcGi4XMNFBNW3/uO22ME+kXR6MRaoDTkWGWiNfrn9e/r5bO4X942OlTAyQOklrp0N3w7M=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PR3PR08MB5593.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(23010399003)(366016)(56012099006)(10067099003)(11063799006)(4143699003)(3023799007)(18002099003)(22082099003)(38070700021);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <537AAFB8F8EB9F4996DE2836601A1DEB@eurprd08.prod.outlook.com>
 Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-4011c0/1788523713-532D8CFC-BC561BD9/0/0
+MIME-Version: 1.0
+X-Exchange-RoutingPolicyChecked:
+ pSej11UB/OSC0lXSs3u/zVdQLImirEHlOaW8lvPDhq5o1ghE26IKmGukQim0F1hWPt+1rXjEQ3ZwnI+/tzb4UHg09kaSUxYTcD79eHDZCfnz10/Fg5DmKlFLEelm3bUAo+xGt84AFgUbd9o2JmizyzCT1e4VkrhgIxOkheWJiEM2zqY8u92DTkpVTtz3gNEerGPuLrbHoNJaUcmFGZ5eYUIIBkGSbBvphCutbuiZLH6HyLoJit9ris/gnG+cKk9IG5/H2WeAqTlKCul4VjVPpiSzqguXzLdHH2BlVg9nHHJu7F2l5hOGSO2+ZWmLXWcirevmGaCOcdPgnSr1Bnn0Gw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB9050
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ AMS0EPF0000056A.eurprd02.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	6c892eac-5730-4eb8-b0fb-08df0a7d3261
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|23010399003|35042699022|1800799024|82310400026|36860700016|14060799003|22082099003|18002099003|3023799007|11063799006|56012099006|10067099003|4143699003;
+X-Microsoft-Antispam-Message-Info:
+	H3x2vc4VJ5IfR0jWFqJjjtXhNve2/zJ9cGd7Y8rXjYGaNva5RApygJY/HrUG7nG6GaZhsv71l3nxg4p6Uj4Ng1SDhYDfv4/ywT87s40Ly/W3dHU+N+uiY5TELaUb2vV6xcHpS9G0hh1Iqz9Lf2xDrhJpchvQtS+VvxuQDxoz7/eXW+UlZ2iEYDAQqt5RGmIShNjtGAZxWR6x7CE/dDsWNKIKpbAHPvdcI9uoi7RiSt7NHu1KTXiDdyKhsCwaxIvuJsQ77kBjbaRnmImo/8tUX0+OMgkJY+E/KYypM+APRdLO9IqwEv9KWNeVRiJ+E3g0wQKm2Ha9EzAFX8nFVjqqcO3lwAoIV173FrmSfyCD0X0fuIU0wyFznKqlf9XpIc7XD3hFoa3ty9SDJaMNOudX/GfVCYrZHo9zQ4dAmpEBzEQGpHkS+h3SFD2k1C+QU7pa19/teYEqqCSUdZA31C/IHo/73SFi2UZ8a276WS9ImMaXLuKEJDyh3yYeWRyRPup52XIw/F7IERQXXPvtYPVMH/mSzRcDhnL2IQyZM211LBPmtkQOIv6tiuBYSw5rD5Bl5dEUd04Gk5vDBuOOXgi7rZbPk55oHYJs736lxLSKSJ4weoMp2tsHyjpjmIgMTU14zxsDNBBXrOOisW5yQ6EeNDGzi3AhSW/MCs6zCIhTeJs=
+X-Forefront-Antispam-Report:
+	CIP:4.158.2.129;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(23010399003)(35042699022)(1800799024)(82310400026)(36860700016)(14060799003)(22082099003)(18002099003)(3023799007)(11063799006)(56012099006)(10067099003)(4143699003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	UpBUh/HUwW7/NJclk3Xh4vMi8uQYqQKKG8T+eAvRBidd4RMMYYqdPf95ioRl2JFGVG2MWbOtzBDZyt6g+2qKEK9h5+34c3hgTLtq32TcObi4hq/ZAS3Xmy1/UYgWC4IOpDdi3UZmntngVNM8mx7lO4RNM9nhDVzsJU4wE8rtOqfy6LDohGE4k2QUENuBVCdGjhAv4Es8CH0velAOCOLoyYJG7ktYDjOGLRg67SSiUI1sqFATRv9dQ5hvYkGJjAl7hVAT1meJxkJ5Rn7I1GWiJTdk9apoktUTfRkTY1lkaGk5prO+ANC91tYqf2Sl+07z8v5v4RsEzsM2d6EynpbUyDQW5pdyZFAgkWLk5izvDGfzK6wsuZuPtJvT7iVUZWfqpVW/k6qDaSTsD3mdBdNtD7fr6KXtZmn4Y9rKGaiIwvnVBPIm2fKBQjwNfIOZj9wa
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2026 12:08:48.4560
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cdf815f8-0f1a-4bb9-9d54-08df0a7d46d6
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	AMS0EPF0000056A.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB5555
+X-purgate-ID: tlsNG-ebf023/1788523732-502E4B50-5192CCAF/0/0
 X-purgate-type: clean
-X-purgate-size: 10073
+X-purgate-size: 6009
 
-On Fri, 4 Sep 2026 07:22:10 -0400
-"Michael S. Tsirkin" <mst@redhat.com> wrote:
+Hi Andrew,
 
-> On Fri, Sep 04, 2026 at 01:07:09PM +0200, Igor Mammedov wrote:
-> > On Thu, 3 Sep 2026 16:17:20 -0400
-> > "Michael S. Tsirkin" <mst@redhat.com> wrote:
-> >  =20
-> > > On Thu, Sep 03, 2026 at 05:28:35PM +0200, Igor Mammedov wrote: =20
-> > > > On Wed, 26 Aug 2026 09:15:47 -0700
-> > > > Dongli Zhang <dongli.zhang@oracle.com> wrote:
-> > > >    =20
-> > > > > On Mon, Aug 24, 2026 7:44:49AM -0700, Daniel P. Berrang=C3=A9 wro=
-te:   =20
-> > > > > > On Sun, Aug 23, 2026 at 06:13:30PM -0700, Dongli Zhang wrote:  =
-   =20
-> > > > > >> Hot-unplugging a PCI device can require cooperation from the g=
-uest. For
-> > > > > >> ACPI PCI hotplug, QEMU notifies the guest through ACPI and the=
- guest
-> > > > > >> eventually writes the ACPI PCI eject register. For PCIe native=
- hotplug,
-> > > > > >> QEMU notifies the guest through the PCIe hotplug mechanism and=
- waits for
-> > > > > >> the slot unplug flow to complete. Only after that completion d=
-oes QEMU
-> > > > > >> unrealize the device and emit DEVICE_DELETED.
-> > > > > >>=20
-> > > > > >> This can leave a device stuck in the unplug pending state when=
- the guest
-> > > > > >> does not cooperate. Examples include:
-> > > > > >>=20
-> > > > > >> 1. The guest has panicked, or the relevant ACPI/PCI hotplug dr=
-iver is
-> > > > > >> unavailable.
-> > > > > >>=20
-> > > > > >> 2. The guest is stalled and cannot handle the hot-unplug event=
-. For
-> > > > > >> example, stalling the Linux [irq/9-acpi] kernel thread can rep=
-roduce this
-> > > > > >> for ACPI-based hot-unplug.
-> > > > > >>=20
-> > > > > >> 3. The device was attached to a slot that the guest cannot use=
-. For
-> > > > > >> example, a pcie-root-port only supports slot 0. If a device is=
- added to a
-> > > > > >> non-zero slot below a pcie-root-port, the guest may never disc=
-over the
-> > > > > >> device and therefore may never complete the unplug request.   =
-=20
-> > > >=20
-> > > > all of above is actually expected, no (functioning) driver =3D> no =
-hotplug/unplug.
-> > > > it's the guest problem. Once device it exposed to guest its life-cy=
-cle
-> > > > not longer owned by QEMU.
-> > > >=20
-> > > > That's what one would see in real hw as well, you press eject butto=
-n
-> > > > but it will not do anything if OS doesn't process it.
-> > > > also see comment at the end.
-> > > >    =20
-> > > > > >>=20
-> > > > > >> The non-zero slot case has also been discussed in:
-> > > > > >>=20
-> > > > > >> hw/pci: warn when PCIe device is plugged into non-zero slot of=
- downstream port
-> > > > > >> https://gitlab.com/qemu-project/qemu/-/commit/     =20
-> > > > > > ca92eb5defcf9d1c2106341744a73a03cf26e824     =20
-> > > > > >>=20
-> > > > > >> hw/pci: add comment to explain checking for available function=
- 0 in pci hotplug
-> > > > > >> https://gitlab.com/qemu-project/qemu/-/     =20
-> > > > > > commit/67d045a0ef5b9c5f871c3a1d87325a8a42d2b9d5     =20
-> > > > > >>=20
-> > > > > >> pci: don't skip function 0 occupancy verification for devfn au=
-to assign
-> > > > > >> https://gitlab.com/qemu-project/qemu/-/commit/     =20
-> > > > > > e228d62b4af29bca698ec57efdceb46f392f5444     =20
-> > > > > >>=20
-> > > > > >> For example, if root-port.1 is a pcie-root-port, the following=
- command adds
-> > > > > >> a vhost-scsi-pci device to an invalid slot:
-> > > > > >>=20
-> > > > > >> (qemu) device_add vhost-scsi-pci,id=3Dscsi01,wwpn=3Dnaa.500140=
-5324af0985,bus=3Droot-port.1,addr=3D01.0
-> > > > > >> warning: PCI: slot 1 is not valid for vhost-scsi-pci, parent d=
-evice only allows plugging into slot 0.     =20
-> > > > > >=20
-> > > > > > This rather looks like it should be a fatal error, not a mere w=
-arning.
-> > > > > >=20
-> > > > > > If I follow the commit ca92eb5def it links to https://bugzilla.=
-redhat.com/show_bug.cgi?id=3D2128929
-> > > > > > which states that this configuration is going to lead to a cras=
-h in
-> > > > > > QEMU on guest OS shutdown. IMHO that crash is sufficient to jus=
-tify
-> > > > > > making this a fatal error.
-> > > > > >=20
-> > > > > > If we actually wanted this to remain a warning, then that shutd=
-own
-> > > > > > crash would need to be fixed.
-> > > > > >      =20
-> > > > >=20
-> > > > > Thank you very much!
-> > > > >=20
-> > > > > I see that the issue has been fixed. The ticket mentions the foll=
-owing.
-> > > > >=20
-> > > > > "What I am observing is that it seems when the slot ID !=3D 0, th=
-e guest OS seems
-> > > > > to ignore this and we never seem to hit ich9_pm_device_unplug_cb(=
-)."
-> > > > >=20
-> > > > > Based on my experience and evaluation, ACPI-based hotplug is more=
- likely to
-> > > > > encounter an issue where the guest VM does not respond to an unpl=
-ug operation.   =20
-> > > >=20
-> > > > I'm not sure it's a good idea to delete device when guest still thi=
-nks it's there
-> > > > (you can make guesses on QEMU side if it's in use, how useful those=
- are is questionable).
-> > > >=20
-> > > > as far as I know, ACPI hotplug has no notion of surprise removal (p=
-ls educate me if it's not the case),   =20
-> > >=20
-> > > why would it not?
-> > >=20
-> > > how do you think you can pull a laptop out of a dock?
-> > > I expect bus check + _STA and config space saying it is gone
-> > > will do exactly that.
-> > >=20
-> > >=20
-> > > Here's linux code:
-> > > static void acpiphp_check_bridge(struct acpiphp_bridge *bridge)
-> > > {      =20
-> > >         struct acpiphp_slot *slot;
-> > >=20
-> > >         /* Bail out if the bridge is going away. */
-> > >         if (bridge->is_going_away)
-> > >                 return;
-> > >=20
-> > >         if (bridge->pci_dev)
-> > >                 pm_runtime_get_sync(&bridge->pci_dev->dev);
-> > >        =20
-> > >         list_for_each_entry(slot, &bridge->slots, node) {
-> > >                 struct pci_bus *bus =3D slot->bus;
-> > >                 struct pci_dev *dev, *tmp;
-> > >=20
-> > >                 if (slot_no_hotplug(slot)) {
-> > >                         ; /* do nothing */
-> > >                 } else if (device_status_valid(get_slot_status(slot))=
-) {
-> > >                         /* remove stale devices if any */
-> > >                         list_for_each_entry_safe_reverse(dev, tmp,
-> > >                                                          &bus->device=
-s, bus_list)
-> > >                                 if (PCI_SLOT(dev->devfn) =3D=3D slot-=
->device)
-> > >                                         trim_stale_devices(dev);
-> > >=20
-> > >                         /* configure all functions */
-> > >                         enable_slot(slot, true);
-> > >                 } else {
-> > >                         disable_slot(slot);
-> > >                 }
-> > >         }
-> > >=20
-> > >         if (bridge->pci_dev)
-> > >                 pm_runtime_put(&bridge->pci_dev->dev);
-> > > }
-> > >=20
-> > >=20
-> > > so weirdly it wants bus check on a parent bus, otherwise it will
-> > > not trim devices?  probably a bug, but easy to work around. =20
-> >=20
-> > Modern docks would use native pcie surprise removal path.
-> >=20
-> > As for ACPI, my old laptop, had an unlock button =3D> _LCK
-> > and that relied on OS processing ACPI events, not so surprise.
-> >=20
-> > There might have been ACPI/hybrid docks that did surprise removal,
-> > but then one need to find one and model after that instead of=20
-> > just blanket force removal. (likely out come would a doc device
-> > support only, not an arbitrary device removal)
-> >=20
-> > (not the case described in this series, though. hence my request to cla=
-rify usecase)
-> >=20
-> > from what I see in spec there is _RMV method that says that device
-> > supports surprise removal that can be used for devices that support it.
-> > However I would hesitate very much to blank apply it to every PCI devic=
-e.
-> > (it's not even realistic to ask for proving safe tear down across vario=
-us
-> > drivers and OSes/versions)
-> >=20
-> > Rather than a knee jerk treatment of misconfig consequences,
-> > I'd rather see patches to prevent misconfig in the 1st place
-> > (subj to deprecation but doable).
-> >=20
-> > As for the cases where OS mis-behaves (apcihp thread starvation,...),
-> > fixing guest to follow hotplug contract is a proper place to do it.
-> >=20
-> > On QEMU side we have it covered as well. If unplug was not processed,
-> > mgmt is free to repeat action. =20
+> On 4 Sep 2026, at 13:12, Andrew Cooper <andrew.cooper3@citrix.com> wrote:
 >=20
+> ... before making a related copy of it.
 >=20
-> Sorry if I am unclear. I just meant that it looks like we
-> can support surprise removal with ACPI just by reporting
-> bus check events on the parent.
+> * Drop __constraints() so the output parameters are visible in the same b=
+lock
+>   as they're defined.  Use PASTE() rather than opencoding it.
+> * Adust the indentation of trailing \'s for consistency.
 
-maybe, but that ain't SPECed and might be OS specific.
+Small typo to fix s/Adust/Adjust/
 
-The way I've read the cover letter, that won't work for mentioned mis-confi=
-g cases.
-Also what would happen on bus-check 'cleanup' would be a lottery.
-hence I'm for being safe here.
+Can be done on commit and retain my R-b
 
-It's better to implement native PCIE surprise removal if that's really need=
-ed.
+Cheers
+Bertrand
 
-> > > > so I wouldn't do what you are proposing here at all, it's basically=
- asking for disaster to happen.
-> > > > And all this is basically for dealing with abused qemu flexibility.
-> > > >=20
-> > > > Please (re)formulate usecase and make it more clear as what is elud=
-es me
-> > > > no matter how many times i've read this cover letter.
-> > > >=20
-> > > > On positive note:
-> > > >=20
-> > > > What you can try to implement is native PCI-E support for surprise =
-removal.
-> > > > How hard that would be I don't know. And I would well expect if one=
- deviates from
-> > > > real hw expectations/configs (such as not 0 slot/partial func remov=
-al),
-> > > > one would quickly stumble upon issues as  that's not what what vend=
-ors write/test
-> > > > drivers for.
-> > > >=20
-> > > > Even if it's not likely to be used in practice (guest still might n=
-ot support it),
-> > > > it may serve as test-bed for guest drivers.
-> > > >    =20
-> > > > > Thank you very much!
-> > > > >=20
-> > > > > Dongli Zhang
-> > > > >    =20
-> > >  =20
+> * Drop the newline at the end of the instruction.
+> * Indent the if condition correctly.  ___res is always of type
+>   arm_smccc_res (declared in __declare_arg_0()), so drop the typeof().
+> * Drop arm_smccc_1_0_smc() as it has no users.
+>=20
+> No functional change.
+>=20
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+> ---
+> CC: Stefano Stabellini <sstabellini@kernel.org>
+> CC: Julien Grall <julien@xen.org>
+> CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+> CC: Bertrand Marquis <bertrand.marquis@arm.com>
+> CC: Michal Orzel <michal.orzel@amd.com>
+> CC: Jan Setje-Eilers <Jan.SetjeEilers@oracle.com>
+> ---
+> xen/arch/arm/include/asm/smccc.h | 45 ++++++++++++++++----------------
+> 1 file changed, 22 insertions(+), 23 deletions(-)
+>=20
+> diff --git a/xen/arch/arm/include/asm/smccc.h b/xen/arch/arm/include/asm/=
+smccc.h
+> index 832157f43734..5fe54013ac83 100644
+> --- a/xen/arch/arm/include/asm/smccc.h
+> +++ b/xen/arch/arm/include/asm/smccc.h
+> @@ -56,6 +56,8 @@
+>=20
+> #ifndef __ASSEMBLER__
+>=20
+> +#include <xen/macros.h>
+> +
+> extern uint32_t smccc_ver;
+>=20
+> /* Check if this is fast call. */
+> @@ -115,24 +117,24 @@ struct arm_smccc_res {
+>  * This is manual register scheduling for the asm() statement, and any ot=
+her
+>  * logic to evaluate may clobber the already-scheduled registers.
+>  */
+> -#define __declare_arg_0(a0, res)                            \
+> -    auto __a0 =3D (uint32_t)(a0);                             \
+> -    struct arm_smccc_res    *___res =3D (res);                \
+> +#define __declare_arg_0(a0, res)                        \
+> +    auto __a0 =3D (uint32_t)(a0);                         \
+> +    struct arm_smccc_res    *___res =3D (res);            \
+>     register unsigned long  arg0 ASM_REG(0) =3D __a0
+>=20
+> -#define __declare_arg_1(a0, a1, res)                        \
+> -    auto __a1 =3D (a1);                                       \
+> -    __declare_arg_0(a0, res);                               \
+> +#define __declare_arg_1(a0, a1, res)                    \
+> +    auto __a1 =3D (a1);                                   \
+> +    __declare_arg_0(a0, res);                           \
+>     register auto           arg1 ASM_REG(1) =3D __a1
+>=20
+> -#define __declare_arg_2(a0, a1, a2, res)                    \
+> -    auto __a2 =3D (a2);                                       \
+> -    __declare_arg_1(a0, a1, res);                           \
+> +#define __declare_arg_2(a0, a1, a2, res)                \
+> +    auto __a2 =3D (a2);                                   \
+> +    __declare_arg_1(a0, a1, res);                       \
+>     register auto           arg2 ASM_REG(2) =3D __a2
+>=20
+> -#define __declare_arg_3(a0, a1, a2, a3, res)                \
+> -    auto __a3 =3D (a3);                                       \
+> -    __declare_arg_2(a0, a1, a2, res);                       \
+> +#define __declare_arg_3(a0, a1, a2, a3, res)            \
+> +    auto __a3 =3D (a3);                                   \
+> +    __declare_arg_2(a0, a1, a2, res);                   \
+>     register auto           arg3 ASM_REG(3) =3D __a3
+>=20
+> #define __declare_arg_4(a0, a1, a2, a3, a4, res)        \
+> @@ -158,12 +160,6 @@ struct arm_smccc_res {
+> #define ___declare_args(count, ...) __declare_arg_ ## count(__VA_ARGS__)
+> #define __declare_args(count, ...)  ___declare_args(count, __VA_ARGS__)
+>=20
+> -#define ___constraints(count)                       \
+> -    : "=3Dr" (r0), "=3Dr" (r1), "=3Dr" (r2), "=3Dr" (r3)     \
+> -    : __constraint_read_ ## count                   \
+> -    : "memory"
+> -#define __constraints(count)    ___constraints(count)
+> -
+> /*
+>  * arm_smccc_1_1_smc() - make an SMCCC v1.1 compliant SMC call
+>  *
+> @@ -189,10 +185,14 @@ struct arm_smccc_res {
+>         register unsigned long r2 ASM_REG(2);                   \
+>         register unsigned long r3 ASM_REG(3);                   \
+>         __declare_args(__count_args(__VA_ARGS__), __VA_ARGS__); \
+> -        asm volatile("smc #0\n"                                 \
+> -                     __constraints(__count_args(__VA_ARGS__))); \
+> +        asm volatile (                                          \
+> +            "smc #0"                                            \
+> +            : "=3Dr" (r0), "=3Dr" (r1), "=3Dr" (r2), "=3Dr" (r3)        =
+\
+> +            : PASTE(__constraint_read_,                         \
+> +                    __count_args(__VA_ARGS__))                  \
+> +            : "memory" );                                       \
+>         if ( ___res )                                           \
+> -        *___res =3D (typeof(*___res)){r0, r1, r2, r3};            \
+> +            *___res =3D (struct arm_smccc_res){ r0, r1, r2, r3 }; \
+>     } while ( 0 )
+>=20
+> /*
+> @@ -200,7 +200,6 @@ struct arm_smccc_res {
+>  * v1.1.
+>  */
+> #ifdef CONFIG_ARM_32
+> -#define arm_smccc_1_0_smc(...) arm_smccc_1_1_smc(__VA_ARGS__)
+> #define arm_smccc_smc(...) arm_smccc_1_1_smc(__VA_ARGS__)
+>=20
+> /* Make an SMCCC v1.1 compliant SMC call with guest register state. */
+> @@ -217,7 +216,7 @@ static inline void arm_smccc_guest_smc(struct cpu_use=
+r_regs *regs)
+>     regs->r3 =3D res.a3;
+> }
+>=20
+> -#else
+> +#else /* CONFIG_ARM_64 */
+>=20
+> void __arm_smccc_1_0_smc(register_t a0, register_t a1, register_t a2,
+>                          register_t a3, register_t a4, register_t a5,
+> --=20
+> 2.39.5
 >=20
 
 
