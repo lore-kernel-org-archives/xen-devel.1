@@ -4,43 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17CEDC61DD6
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2026 10:58:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1408194.1640840 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3FDBC624D3
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2026 11:07:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1408206.1640848 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2Rcx-0000Kb-DS; Fri, 04 Sep 2026 10:58:35 +0000
+	id 1x2RlQ-0002f1-5w; Fri, 04 Sep 2026 11:07:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1408194.1640840; Fri, 04 Sep 2026 10:58:35 +0000
+Received: by outflank-mailman (output) from mailman id 1408206.1640848; Fri, 04 Sep 2026 11:07:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2Rcx-0000KU-Af; Fri, 04 Sep 2026 10:58:35 +0000
-Received: by outflank-mailman (input) for mailman id 1408194;
- Fri, 04 Sep 2026 10:58:34 +0000
+	id 1x2RlQ-0002eu-2p; Fri, 04 Sep 2026 11:07:20 +0000
+Received: by outflank-mailman (input) for mailman id 1408206;
+ Fri, 04 Sep 2026 11:07:19 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x2Rcw-0000KN-9T
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 10:58:34 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <imammedo@redhat.com>) id 1x2RlO-0002ek-SD
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 11:07:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x2Rcv-009KnI-Ig
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 12:58:33 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1x2RlN-000cgN-1i
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 13:07:17 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a9aa447-e002-0a2a0a5209dd-0a2a4506d45c-48
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 12:58:33 +0200
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a9aa459-195a-0a2a45060019-d1558036bd48-3
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 12:58:33 +0200
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-49556f97a9dso7521675e9.1
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 03:58:33 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
- [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cf5135353sm75680345e9.2.2026.09.04.03.58.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 04 Sep 2026 03:58:32 -0700 (PDT)
+ (envelope-from <imammedo@redhat.com>)
+ id 6a9aa664-2eae-0a2a0a5409dd-0a2a45038b72-6
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 13:07:16 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <imammedo@redhat.com>)
+ id 6a9aa663-fae8-0a2a45030019-aa0a817c59b9-3
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 13:07:16 +0200
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-259-oKXwv1ynOZiCKZGWew2UnA-1; Fri, 04 Sep 2026 07:07:14 -0400
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-49b8c651ac0so15387955e9.2
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 04:07:13 -0700 (PDT)
+Received: from imammedo ([213.175.37.14]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49cf755c22esm62275895e9.0.2026.09.04.04.07.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 04 Sep 2026 04:07:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,161 +56,300 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788519513; x=1789124313; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=i57gQ4hHTz9nn2etSSfO8Ur/ahMB8XJeGd2KMq8acjY=;
-        b=ZqQWVTT4MJLFApEm5Ct6moLihM/xwJ82DWWoNozSe6WBGdcomko4CZfjOIOJK/Exsa
-         8YU8KGegQWihpjv0vo0ctRU9yQyXdo7oxznX/f0jRKI8ciHdfE5bgKp8BYABEJDzkFcY
-         vnZ+61XXp3i961NaWgRjPyjbPJ670RBOhA71Et8Loq0GeAWg82N3ouRrJLX98F9b/Uy4
-         7y1qachccMsGXQoIdQAsDM6k4Gg8j+DQ1Nvsc6ZB8v918rL+sPFrZXm4fV/Cg/HWtKQu
-         J62mA7jxIHaUwMRWd4pMMIgCdmk0+fFBOoSpMl+OMkDsidCv5eSozpPhyhxtBuC5GzuQ
-         wwUA==
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1788520035;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=COwhqAov+nLJAVa8MRbosYqYAf0VB6LVyz5Coc61zuI=;
+	b=J93HoMYEea9DaUk8MolKIdsdpsijHAhjzWnYLYBTMaauoAGq7LDh/euTy7iuG2H5apsuQa
+	v99gfyfpBJ7fayGdMFFMfGbf0NDxNUCHl9udNTO07nH94TWhARrq/L3IZkprOU7+Spby8N
+	53g20eFXY34IXXRrNYRxQEdqm5iwHJo=
+X-MC-Unique: oKXwv1ynOZiCKZGWew2UnA-1
+X-Mimecast-MFC-AGG-ID: oKXwv1ynOZiCKZGWew2UnA_1788520033
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788519513; x=1789124313;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=i57gQ4hHTz9nn2etSSfO8Ur/ahMB8XJeGd2KMq8acjY=;
-        b=aTByl+cDWQqL5zzizYbetFY0LI2bzTWxLB7eXFmNVyM3MizBl8S+4M9OC2AI5FCQ5Z
-         nUCcdPwwyvo2ijEvZrrkyFqBMzZAU3DIi2wPZveprro5KkZimqT+0S8YHI7XmD+q4UaI
-         yawHaE3XwJNKWYQoa63HamPh74L5FhYz72Bh2jAXHCPYWU9tpUnYzJuyqBAEvHl7NUyp
-         l8tLMvGK+73nF/hmSilY5P+Tu4o7PWbtB6Pe2ESn3T/123cDntdITULIlERTHVDtcLmI
-         qg9f2Yic9GV8kCRGwg66un/JFAACRVr9+H+fjaM6tQHa8iFKN3j9nrSP3IttAOY8a5a2
-         0fyg==
-X-Forwarded-Encrypted: i=1; AKwUvBxmT3iJcBJvZBrn7U+xAG77a4sYI8I8b3PMtO7iSHM4oPUsrSVuNceIhmiiJGL7EgVeT2Zk6yzmxTY=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lKrmXgQaazipAYhloU2pXfq57iFKiCOaXQ2c9xES/jJ4eqS0za
-	6pZFshdWLbZ6W4bRUxZfQA7zdCn636fKYEIiPQ2p6sDAJhm3M0f4QbKe
-X-Gm-Gg: AYBFou1G6Sqoo9HWg8icWcF8fZubp1GghudSKpZ1aNuK30kvDhHzwmX29fhh1hS8t+l
-	3fDniXQd8F7ai/ALcTcMhkHa5W2KaqVlFibVflwsfAM8MMch5381V/znG/Mg6xk4pJC5YWA7EvR
-	vlzVXG5qnM2NgTl/HaGNXO2dwe5mXyhc3dfwoj76f4v24lnRK+OzMqFd1igFLR4p5hrqJd2rBZB
-	Mnfv1cFQDRULLMwthD8DmERxOuMh2GY26TcUaLAU5zxJ7b2pxTCSRNyZffp9QdWRItoa3ZXhdx1
-	6Q469mWIlJ56ZsK7El1kCJdojh7PSgVWUPpfsdk4h9ZYk2qhAHZNIjagpJSUlzm8tWpGZIuz540
-	6D6DMdZcjQep3qDG76aC6zcFF6SYnCPFgS4XrKdF4Ta3YhlJ1eZaHXpmR0RNu6xuL4Jk5+Uj4vu
-	Elk+X7ZG9NfNl+EvLzg1TD7UsRF8eB0KWjlBa9VVXY1x9bM1S/4JvchqBzThijUujUL05Q001P7
-	wwSlnCQWIFfkdBMpArYxgWlLEcd1PEeQJis1pA=
-X-Received: by 2002:a05:600c:a4b:b0:499:4e47:eaf2 with SMTP id 5b1f17b1804b1-49cf824020amr45273535e9.6.1788519512736;
-        Fri, 04 Sep 2026 03:58:32 -0700 (PDT)
-Message-ID: <6e807532-4cd5-410f-b073-99b58a40733e@gmail.com>
-Date: Fri, 4 Sep 2026 12:58:31 +0200
+        d=1e100.net; s=20251104; t=1788520033; x=1789124833;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Rma0vtMwq9+HEP9ZApTJBKj1zxbRdaELT3NPMRD9Df8=;
+        b=V/Xh2+bwruGAp8t+zChcGYBgvRtwsfii+FiHwjjuDKdsBt6MmImAcC3XfMi8yMGxk6
+         5ojB3VBnGXCnYD7b4lRmMpRXhTxY65gD8ziqdFsNBR05rf26k1uNRIXXrF3mJgxfi8+5
+         8nabjbEW6pmDWBCn2GEErDXvOpr0Stgw2DCZ0psaWWwt5Bou9rnrT27hdl9hTPEupDZT
+         4LOXL1jaAkV2JpUxGXQU98aig2279cFIPU0XpAsS0rmLWRr2P4bbOG7z4DhkvoKzbAqY
+         Sb+BrdSRWubyUSElPeZyA4Kk8HF6UNAZEGxkullgDe9pTkKteS1pVCO36o28vtwQe/Jt
+         ZcOA==
+X-Forwarded-Encrypted: i=1; AKwUvBz+WNST9Sc1SjGY4wZ5lqSnDUFg2PzxClnmC0MlNq7D3RulRtN9KWRwb9jfJv8dho77YoUAPDngoHY=@lists.xenproject.org
+X-Gm-Message-State: AFuF++nfUabxlWAwQdnjDmxl0lbzBrwTo/CHAiTXDj9JuUW6aL7UdL+4
+	ve2VNe5DtTYtc10BemA6Le1je5i0olq4SAMLKG6I9s2VGCcUcptWKwMIkMQ54HyCOo+yrd7TzsY
+	WDyKtuPdyg/l4xvsVK88a6QgwRZRXFngtP6hV+pQgzBL6iAfp1yzMYpY6obyNqZrBlAev
+X-Gm-Gg: AYBFou0clf9vaIvFNo8rdW/B2CfvJUbK6hZVKahEScnBeOIiUXdN69AMMmxMCuH9iRV
+	XmjX3QIsZqSy772D1a0+XdkrCcuhVyfkNe0sMg9ZQmGy4BlTr9ZVjb0ivO8h5xQil8/bfucB3+t
+	MHofCZvO1S1ACBg5+1kCgyvcD61TB9NOdR9dvcqo7zpChs7xNDhY11sa6B4dxgewIx+pSFPiXG+
+	hajZXwO0ChZ63zQ9C1Lyo0crU69fxnndrWxfDpKaMQxtrLwIdppr5wE5IUmO+y3hh6cQ+lECCy8
+	GyanGPYuH/iMX/yKAmmNaS+ypFr1VFtjoSKkAqrXIXPg2gb2uFOzyWe9kIs=
+X-Received: by 2002:a05:600c:8b05:b0:499:be2d:c290 with SMTP id 5b1f17b1804b1-49cf824e751mr61823175e9.9.1788520032852;
+        Fri, 04 Sep 2026 04:07:12 -0700 (PDT)
+X-Received: by 2002:a05:600c:8b05:b0:499:be2d:c290 with SMTP id 5b1f17b1804b1-49cf824e751mr61822205e9.9.1788520032319;
+        Fri, 04 Sep 2026 04:07:12 -0700 (PDT)
+Date: Fri, 4 Sep 2026 13:07:09 +0200
+From: Igor Mammedov <imammedo@redhat.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Dongli Zhang <dongli.zhang@oracle.com>, "Daniel P. =?UTF-8?B?QmVycmFu?=
+ =?UTF-8?B?Z8Op?=" <berrange@redhat.com>, qemu-devel@nongnu.org,
+ qemu-s390x@nongnu.org, xen-devel@lists.xenproject.org, dave@treblig.org,
+ anisinha@redhat.com, philmd@mailo.com, aurelien@aurel32.net,
+ mjrosato@linux.ibm.com, alifm@linux.ibm.com, farman@linux.ibm.com,
+ richard.henderson@linaro.org, iii@linux.ibm.com, david@kernel.org,
+ pasic@linux.ibm.com, borntraeger@linux.ibm.com, cohuck@redhat.com,
+ alex@shazbot.org, clg@redhat.com, akrowiak@linux.ibm.com,
+ jjherne@linux.ibm.com, sstabellini@kernel.org, anthony@xenproject.org,
+ edgar.iglesias@gmail.com, pbonzini@redhat.com, eblake@redhat.com,
+ armbru@redhat.com, joe.jin@oracle.com
+Subject: Re: [PATCH 0/8] Force detach PCI devices for ACPI-based and PCIe
+ native hot-unplug
+Message-ID: <20260904130709.6769caee@imammedo>
+In-Reply-To: <20260903160401-mutt-send-email-mst@kernel.org>
+References: <20260824011420.752806-1-dongli.zhang@oracle.com>
+	<aoxY4Rxst2qAyn5z@redhat.com>
+	<01ee4841-76d8-4749-a80e-eb945ab8799a@oracle.com>
+	<20260903172835.0e253a25@imammedo>
+	<20260903160401-mutt-send-email-mst@kernel.org>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 16/20] xen/riscv: implement IRQ routing for device
- passthrough
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- xen-devel@lists.xenproject.org
-References: <cover.1787836900.git.oleksii.kurochko@gmail.com>
- <d5ac0f45de409ab0a63b2b17e4fd3cdd47dbffa0.1787836900.git.oleksii.kurochko@gmail.com>
- <0cf2c9f6-5fba-4d1e-a9cd-e2a409730efa@suse.com>
- <ffa2c0cb-52ed-421b-8c4e-9b61edd43f6f@gmail.com>
-Content-Language: en-US
-In-Reply-To: <ffa2c0cb-52ed-421b-8c4e-9b61edd43f6f@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1788519513-FD80D77B-1F1578F9/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 3512
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: v16B5CGhdqHcmcnUk69wu-5GOlaexUtywqsZPk7VUi8_1788520033
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-33051d/1788520036-6F4C74E9-54AC7336/0/0
+X-purgate-type: clean
+X-purgate-size: 8591
 
+On Thu, 3 Sep 2026 16:17:20 -0400
+"Michael S. Tsirkin" <mst@redhat.com> wrote:
 
+> On Thu, Sep 03, 2026 at 05:28:35PM +0200, Igor Mammedov wrote:
+> > On Wed, 26 Aug 2026 09:15:47 -0700
+> > Dongli Zhang <dongli.zhang@oracle.com> wrote:
+> >  =20
+> > > On Mon, Aug 24, 2026 7:44:49AM -0700, Daniel P. Berrang=C3=A9 wrote: =
+=20
+> > > > On Sun, Aug 23, 2026 at 06:13:30PM -0700, Dongli Zhang wrote:   =20
+> > > >> Hot-unplugging a PCI device can require cooperation from the guest=
+. For
+> > > >> ACPI PCI hotplug, QEMU notifies the guest through ACPI and the gue=
+st
+> > > >> eventually writes the ACPI PCI eject register. For PCIe native hot=
+plug,
+> > > >> QEMU notifies the guest through the PCIe hotplug mechanism and wai=
+ts for
+> > > >> the slot unplug flow to complete. Only after that completion does =
+QEMU
+> > > >> unrealize the device and emit DEVICE_DELETED.
+> > > >>=20
+> > > >> This can leave a device stuck in the unplug pending state when the=
+ guest
+> > > >> does not cooperate. Examples include:
+> > > >>=20
+> > > >> 1. The guest has panicked, or the relevant ACPI/PCI hotplug driver=
+ is
+> > > >> unavailable.
+> > > >>=20
+> > > >> 2. The guest is stalled and cannot handle the hot-unplug event. Fo=
+r
+> > > >> example, stalling the Linux [irq/9-acpi] kernel thread can reprodu=
+ce this
+> > > >> for ACPI-based hot-unplug.
+> > > >>=20
+> > > >> 3. The device was attached to a slot that the guest cannot use. Fo=
+r
+> > > >> example, a pcie-root-port only supports slot 0. If a device is add=
+ed to a
+> > > >> non-zero slot below a pcie-root-port, the guest may never discover=
+ the
+> > > >> device and therefore may never complete the unplug request. =20
+> >=20
+> > all of above is actually expected, no (functioning) driver =3D> no hotp=
+lug/unplug.
+> > it's the guest problem. Once device it exposed to guest its life-cycle
+> > not longer owned by QEMU.
+> >=20
+> > That's what one would see in real hw as well, you press eject button
+> > but it will not do anything if OS doesn't process it.
+> > also see comment at the end.
+> >  =20
+> > > >>=20
+> > > >> The non-zero slot case has also been discussed in:
+> > > >>=20
+> > > >> hw/pci: warn when PCIe device is plugged into non-zero slot of dow=
+nstream port
+> > > >> https://gitlab.com/qemu-project/qemu/-/commit/   =20
+> > > > ca92eb5defcf9d1c2106341744a73a03cf26e824   =20
+> > > >>=20
+> > > >> hw/pci: add comment to explain checking for available function 0 i=
+n pci hotplug
+> > > >> https://gitlab.com/qemu-project/qemu/-/   =20
+> > > > commit/67d045a0ef5b9c5f871c3a1d87325a8a42d2b9d5   =20
+> > > >>=20
+> > > >> pci: don't skip function 0 occupancy verification for devfn auto a=
+ssign
+> > > >> https://gitlab.com/qemu-project/qemu/-/commit/   =20
+> > > > e228d62b4af29bca698ec57efdceb46f392f5444   =20
+> > > >>=20
+> > > >> For example, if root-port.1 is a pcie-root-port, the following com=
+mand adds
+> > > >> a vhost-scsi-pci device to an invalid slot:
+> > > >>=20
+> > > >> (qemu) device_add vhost-scsi-pci,id=3Dscsi01,wwpn=3Dnaa.5001405324=
+af0985,bus=3Droot-port.1,addr=3D01.0
+> > > >> warning: PCI: slot 1 is not valid for vhost-scsi-pci, parent devic=
+e only allows plugging into slot 0.   =20
+> > > >=20
+> > > > This rather looks like it should be a fatal error, not a mere warni=
+ng.
+> > > >=20
+> > > > If I follow the commit ca92eb5def it links to https://bugzilla.redh=
+at.com/show_bug.cgi?id=3D2128929
+> > > > which states that this configuration is going to lead to a crash in
+> > > > QEMU on guest OS shutdown. IMHO that crash is sufficient to justify
+> > > > making this a fatal error.
+> > > >=20
+> > > > If we actually wanted this to remain a warning, then that shutdown
+> > > > crash would need to be fixed.
+> > > >    =20
+> > >=20
+> > > Thank you very much!
+> > >=20
+> > > I see that the issue has been fixed. The ticket mentions the followin=
+g.
+> > >=20
+> > > "What I am observing is that it seems when the slot ID !=3D 0, the gu=
+est OS seems
+> > > to ignore this and we never seem to hit ich9_pm_device_unplug_cb()."
+> > >=20
+> > > Based on my experience and evaluation, ACPI-based hotplug is more lik=
+ely to
+> > > encounter an issue where the guest VM does not respond to an unplug o=
+peration. =20
+> >=20
+> > I'm not sure it's a good idea to delete device when guest still thinks =
+it's there
+> > (you can make guesses on QEMU side if it's in use, how useful those are=
+ is questionable).
+> >=20
+> > as far as I know, ACPI hotplug has no notion of surprise removal (pls e=
+ducate me if it's not the case), =20
+>=20
+> why would it not?
+>=20
+> how do you think you can pull a laptop out of a dock?
+> I expect bus check + _STA and config space saying it is gone
+> will do exactly that.
+>=20
+>=20
+> Here's linux code:
+> static void acpiphp_check_bridge(struct acpiphp_bridge *bridge)
+> {      =20
+>         struct acpiphp_slot *slot;
+>=20
+>         /* Bail out if the bridge is going away. */
+>         if (bridge->is_going_away)
+>                 return;
+>=20
+>         if (bridge->pci_dev)
+>                 pm_runtime_get_sync(&bridge->pci_dev->dev);
+>        =20
+>         list_for_each_entry(slot, &bridge->slots, node) {
+>                 struct pci_bus *bus =3D slot->bus;
+>                 struct pci_dev *dev, *tmp;
+>=20
+>                 if (slot_no_hotplug(slot)) {
+>                         ; /* do nothing */
+>                 } else if (device_status_valid(get_slot_status(slot))) {
+>                         /* remove stale devices if any */
+>                         list_for_each_entry_safe_reverse(dev, tmp,
+>                                                          &bus->devices, b=
+us_list)
+>                                 if (PCI_SLOT(dev->devfn) =3D=3D slot->dev=
+ice)
+>                                         trim_stale_devices(dev);
+>=20
+>                         /* configure all functions */
+>                         enable_slot(slot, true);
+>                 } else {
+>                         disable_slot(slot);
+>                 }
+>         }
+>=20
+>         if (bridge->pci_dev)
+>                 pm_runtime_put(&bridge->pci_dev->dev);
+> }
+>=20
+>=20
+> so weirdly it wants bus check on a parent bus, otherwise it will
+> not trim devices?  probably a bug, but easy to work around.
 
-On 9/3/26 4:39 PM, Oleksii Kurochko wrote:
->>> +    do { smp_rmb(); } while ( test_bit(_IRQ_INPROGRESS, &desc- 
->>> >status) );
-> 
-> I am thinking if a barrier is in correct place or needed at all.
-> 
-> Considering that desc->status is updated under spinlock() which uses 
-> full barrier the result here should be already observable without 
-> smp_rmb() inside do {} while ().
-> 
-> Probably we want to have load->load between test_bit() and a read of 
-> action->free_on_release in if () below but I don't see what could go 
-> wrong if this read will happen before do {} while ().
-> 
-> xvfree() (stores inside it) can't be executed ealier because of control 
-> dependency [Rule 11: b (xfree) is a (action->free_on_release) store, and 
-> b has a syntactic control dependency on a] so again it looks like a 
-> barrier isn't needed here.
-> 
-> So considering what kind of barrier is used inside spinlock + Rule 11 we 
-> can just move smp_rmb() after the cycle (just in case) and it looks like 
-> smp_rmb() is only here just to force compiler not to order the things 
-> considering how action->free_on_release is used:
-> 
-> static void irq_release_action(const struct irq_desc *desc,
->                                 struct irqaction *action)
-> {
->      /*
->       * Wait to make sure it's not being used on another CPU.
->       *
->       * desc->status is cleared in do_IRQ() under desc->lock, whose
->       * acquire/release barriers are a full smp_mb() on this arch, so the
->       * handler's writes are already ordered before the clear is visible.
->       * On this side, xvfree() is control-dependent on the final test_bit()
->       * load, so Rule 11 (RVWMO) already orders it after the wait with no
->       * barrier. smp_rmb() below adds real read->read ordering, but nothing
->       * after the loop depends on it (action->free_on_release isn't racy);
->       * it's kept as a guard against the compiler breaking the control
->       * dependency the ordering actually relies on.
->       */
->      while ( test_bit(_IRQ_INPROGRESS, &desc->status) )
->          cpu_relax();
->      smp_rmb();
-> 
->      if ( action->free_on_release )
->          xvfree(action);
-> 
-> Am I missing something?
+Modern docks would use native pcie surprise removal path.
 
-It could be option just to skip smp_rmb() here at all:
+As for ACPI, my old laptop, had an unlock button =3D> _LCK
+and that relied on OS processing ACPI events, not so surprise.
 
-     /*
-      * Wait for a handler still running on another CPU to complete: 
-do_IRQ()
-      * clears IRQ_INPROGRESS only after the handler has returned.
-      *
-      * No barrier is needed here: nothing below reads data written by the
-      * handler (action->free_on_release is set up once, before the 
-action is
-      * ever registered), and the stores done by xvfree() are ordered after
-      * the loop's load of desc->status by the control dependency alone
-      * (RVWMO ppo rule 11).
-      */
-     while ( test_bit(_IRQ_INPROGRESS, &desc->status) )
-         cpu_relax();
+There might have been ACPI/hybrid docks that did surprise removal,
+but then one need to find one and model after that instead of=20
+just blanket force removal. (likely out come would a doc device
+support only, not an arbitrary device removal)
 
-     if ( action->free_on_release )
-         xvfree(action);
+(not the case described in this series, though. hence my request to clarify=
+ usecase)
 
-But probably just to be sure that if ->free_on_release will one day 
-somewhere else set except the mentioned case it makes sense to have 
-smp_rmb() or even smp_mb() (depsite of the fact smp_rmb() looks more 
-then enough).
+from what I see in spec there is _RMV method that says that device
+supports surprise removal that can be used for devices that support it.
+However I would hesitate very much to blank apply it to every PCI device.
+(it's not even realistic to ask for proving safe tear down across various
+drivers and OSes/versions)
 
-Does it make sense?
+Rather than a knee jerk treatment of misconfig consequences,
+I'd rather see patches to prevent misconfig in the 1st place
+(subj to deprecation but doable).
 
-> 
->>
->> Please split this across three lines, to conform to style. (Also same nit
->> as above.)
->>
->>> +    if ( action->free_on_release )
->>> +        xvfree(action); 
+As for the cases where OS mis-behaves (apcihp thread starvation,...),
+fixing guest to follow hotplug contract is a proper place to do it.
+
+On QEMU side we have it covered as well. If unplug was not processed,
+mgmt is free to repeat action.
+
+=20
+> > so I wouldn't do what you are proposing here at all, it's basically ask=
+ing for disaster to happen.
+> > And all this is basically for dealing with abused qemu flexibility.
+> >=20
+> > Please (re)formulate usecase and make it more clear as what is eludes m=
+e
+> > no matter how many times i've read this cover letter.
+> >=20
+> > On positive note:
+> >=20
+> > What you can try to implement is native PCI-E support for surprise remo=
+val.
+> > How hard that would be I don't know. And I would well expect if one dev=
+iates from
+> > real hw expectations/configs (such as not 0 slot/partial func removal),
+> > one would quickly stumble upon issues as  that's not what what vendors =
+write/test
+> > drivers for.
+> >=20
+> > Even if it's not likely to be used in practice (guest still might not s=
+upport it),
+> > it may serve as test-bed for guest drivers.
+> >  =20
+> > > Thank you very much!
+> > >=20
+> > > Dongli Zhang
+> > >  =20
+>=20
 
 
