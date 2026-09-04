@@ -4,46 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B06EBC61DD6
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2026 12:41:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1408469.1641029 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD3CAC624D3
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2026 14:02:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1408544.1641037 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2TE1-0001GQ-4Y; Fri, 04 Sep 2026 12:40:57 +0000
+	id 1x2UUj-0007vi-SX; Fri, 04 Sep 2026 14:02:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1408469.1641029; Fri, 04 Sep 2026 12:40:57 +0000
+Received: by outflank-mailman (output) from mailman id 1408544.1641037; Fri, 04 Sep 2026 14:02:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2TE1-0001GJ-1j; Fri, 04 Sep 2026 12:40:57 +0000
-Received: by outflank-mailman (input) for mailman id 1408469;
- Fri, 04 Sep 2026 12:40:55 +0000
+	id 1x2UUj-0007vb-Pt; Fri, 04 Sep 2026 14:02:17 +0000
+Received: by outflank-mailman (input) for mailman id 1408544;
+ Fri, 04 Sep 2026 14:02:16 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ross.lagerwall@citrix.com>) id 1x2TDz-0001Ft-Ok
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 12:40:55 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x2UUi-0007vV-3A
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 14:02:16 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x2TDz-00E9iw-56
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 14:40:55 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1x2UUh-001GCJ-G1
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 16:02:15 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 6a9abc56-e002-0a2a0a5209dd-0a2a450cc620-8
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 14:40:55 +0200
-Received: from [52.101.85.44]
- (helo=BYAPR05CU005.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 6a9abc51-f479-0a2a450c0019-3465552ca32b-3
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 14:40:53 +0200
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
- by SJ0PR03MB6616.namprd03.prod.outlook.com (2603:10b6:a03:389::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.13; Fri, 4 Sep
- 2026 12:40:44 +0000
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096%4]) with mapi id 15.21.0382.007; Fri, 4 Sep 2026
- 12:40:42 +0000
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a9acf62-bab6-0a2a0a5309dd-0a2a4508d1d6-16
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 16:02:15 +0200
+Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a9acf67-f659-0a2a45080019-d155dd2be833-3
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 16:02:15 +0200
+Received: by mail-wr1-f43.google.com with SMTP id
+ ffacd0b85a97d-482e4998d28so765105f8f.2
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 07:02:15 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
+ [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49cff8195ffsm11907345e9.14.2026.09.04.07.02.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 04 Sep 2026 07:02:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,202 +52,395 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=L1/sHFfD0dFVDIsc/0+z5kgENWb3b43gM7hldhRgAqrUKeG2j81RW1YPx7y71MWsVwGJe7bqVRPL2CEzuURQ59/cZoQmV5xeyI7znvHm02I7NV98CfO0zGxKtCGvSACRIqK4Llnw6X55TT74Y9CrTPzv1GcnUBuREpIe62tYaUwP1zae5TFrGWdErtRCt11k2SB4UZof7c36pb7C1bQXUDekAMla/8UI4OQmd7PyNOVoIaANFNr9bpvO/qXO/DceUzlmRS1oabHgb0KFCKDx67Vge2SFMkDpVNAV5E8c/HUqaVurcZwoh+YqbmERjszqadjJrIq59R3ExR9dmSqAxQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FTyGvNtPrZrovxMyhWZqvh1nAydJSiP93/UkRdaZr4A=;
- b=Dnk6zXgjyHo5f+UkPJ3jWaW1JAITyd9KpsPcB9sWxWxCfvTI47ZwlWmgFBGQ0kSLScoDeUZgEIviMa0t5y6pAgMhuzYvREJZC+boLlWHpYGDPMhn1L2cd9uMCOzCbJlNRqCHtV0y592nb6/XSX1IjF6OwYQOUUbLJiG7kryPFCRH46b0a2/M0iDPcrNOp8gi91FSB4qLzx/rGibw95iSQhxKGe0YRkU38INy2T6DkCWFaCWxX+Ruz/z6UvJU73nXNyS+571ENFNwS0lDILUfHrTP7FCDOUoW2RKHaXDkhaMA0sAc62tUngnifo9KVU69igxw9D515HHfmYfvoiAWow==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FTyGvNtPrZrovxMyhWZqvh1nAydJSiP93/UkRdaZr4A=;
- b=WXIVl9tNc7Ih2NgrryQysiPFCOrp+jkTi+H25eVPIjpbRxJhd03YXc9As00wvzmLvWJ1m+zzxYv2TT6gFNKwzk4Ueee0f9x3o8MXxfiBRVUcJLAgX+Fk7gizg1K7SRdsgtQ0xMhc5Q8wHS1GEMp6Qt/Di25GAbbKmuFlbF+TCvs=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <2d73442b-481d-44d1-b195-41da0efc23b8@citrix.com>
-Date: Fri, 4 Sep 2026 13:40:38 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1788530535; x=1789135335; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=BvZf0BuB+g+rEOo7VkNwWxDHWLRnLLzXnbrgge1f0og=;
+        b=K/fxFgIb5oDnBfHE4NIdyz/R0G79tta4Czr+fdmjR02V3gzjjMalHw0g2RLTiLJY7Z
+         mHOGdEbEh4nSy3r+4MdW12bnG17ev4/14VwV4VQ8s9ycdqhFZy0hs75wHBvFtIuhAWai
+         ahyxChPWAxO5QmTMwREfVeyJWPizgjYgfQjolNu81YgryIRKeCyC77YVVqulQyFTaeSv
+         bjeLY4y0J3But+mK8N1rwGYaGPAXVanFJjXyn46Dy0M+wlz3UFuo5G29Q5BPP3G+6aYa
+         jDvJJ8XeygQdvfKxuLo2hZBTARwztI7TgAYLLnq2HKR3uFeqSZZRgwwnYPatnEj342n4
+         XdVg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788530535; x=1789135335;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=BvZf0BuB+g+rEOo7VkNwWxDHWLRnLLzXnbrgge1f0og=;
+        b=B+e6tPXEj3bdznzLlUVCBm7C8S+UGSR9zmq+W4oPQ3/WttEghPPy4adMztXYvuFDD0
+         7vu5XkbEymSfeBT5+SfX93UGOP7Scl+pVmdiZ/X6JFzmLKPF13IXGVysl35QLMl45g76
+         WxZHlkYCUgqXYvT7r8+8BuYEixfHvTX0P9Yim1r9pFHaq6VHuHM0dP3nnLwlBJ+uqEox
+         MbBeWCRua8bhO83ZZ64ijx+WGAa/hISToYrNI1CISlQpSVhufUu3UgwHNy3jzT4SzAuJ
+         thno20bs+KUjtHPBD0hCCsQVBQk5PnfSTekfKBdfRJ3ntV/A22CBI+boMcVQ6FOViVi1
+         HlXw==
+X-Gm-Message-State: AFuF++kpFFID2dMdoJgoosfCWi/SihivAMJJxEHg+w3lkFLG9Y5Zqzfq
+	2ox8PyhjAe5n80JG5laGXiSA9mJK1YCR5beognQ4eLAnM5TC5Jh2yYcn
+X-Gm-Gg: AYBFou35zmpV6flncNjpqIjmAQT3s0xCtyNba5GwnxuWjnQRS9jdEH7fAmYhvvEWLGv
+	IM5ZMnv6eGboIb1vTj7t9A3Hfb5jKoP5Kz+TYiQQpTxffFsEkcxKGIVJ8bjc+BkUyImhj7xcOWM
+	qzv5qQYbHWs0kH/h4hsIRP+cDRkEvMP2/uBhg/r/jA//WeTxsNCqEBKc2/BoGp2OScwwT4T+kIi
+	IA7fMKnpFtefeoMkISegTa2IIgbJc7y63c4fYpFjYrigSPW/+Of1xc1OG2f2DnZAgDibY1gFVWE
+	1QKaAALFdekNom2f/xe/fXacZO2sIbZTkDXiI1c74+UT3+YnIfqZvtS1ri50ndl5deveagi4Ngg
+	7UQ4yp/ja+33inh8FK96MLrQWJzIK4Po8Iuylu5hzD6/Cfz9KQLASgARJCiINytDH6wb6gmcv4q
+	2eeF2ewMCiWHI41R1yqNKehgaDRSLHKlR56BK2cDZVpSrnwCYKRwAB34T8iDXD4NZIBY8l1K3sr
+	/hUGnab1HRgIsUlLZe23MbYwK544illODcz/DI=
+X-Received: by 2002:a05:600c:1d08:b0:49b:96a0:5c00 with SMTP id 5b1f17b1804b1-49cf825168cmr70126585e9.13.1788530533061;
+        Fri, 04 Sep 2026 07:02:13 -0700 (PDT)
+Message-ID: <66c96742-3ee2-4e76-948c-92ed6efaaac9@gmail.com>
+Date: Fri, 4 Sep 2026 16:02:10 +0200
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/2] x86/viridian: Implement synthetic timer direct
- mode
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Paul Durrant <paul@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <20260828131142.3986110-1-ross.lagerwall@citrix.com>
- <20260828131142.3986110-3-ross.lagerwall@citrix.com>
- <1279a949-6b18-4943-9d7f-046dec98e681@suse.com>
+Subject: Re: [PATCH v2 09/39] xen/riscv: implement virtual APLIC MMIO
+ emulation
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org,
+ Romain Caritey <Romain.Caritey@microchip.com>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <4413e157dfe67167f651df1ea92ab61ca4182723.1787838835.git.oleksii.kurochko@gmail.com>
+ <1788352275.8631fc262581453bbf619ec5b2062170.1a0621a2590000c4f3@vates.tech>
 Content-Language: en-US
-From: Ross Lagerwall <ross.lagerwall@citrix.com>
-In-Reply-To: <1279a949-6b18-4943-9d7f-046dec98e681@suse.com>
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <1788352275.8631fc262581453bbf619ec5b2062170.1a0621a2590000c4f3@vates.tech>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P265CA0227.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:315::13) To CH8PR03MB8274.namprd03.prod.outlook.com
- (2603:10b6:610:2ba::5)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|SJ0PR03MB6616:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3b3b9476-a10e-470b-c675-08df0a81bbbd
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|366016|23010399003|10067099003|56012099006|11063799006|5023799004|4143699003|6133799003|3023799007|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	MuxxDDNxOZ6ak24y334aTHqQh3S88I2u8WoeZX2TneOAPE/b2KtTAnvnJcwzvHM6r3vOGF8uchBCeTHyoZDKS/F3+1y2KtrjtQ0NNAx1WtLoyqFQc4k6ml9a1FfSgTTKdks+UHzYqcPbkngz7xYmLwSSw+vZciBbyy60hRQv69uLmbsmXRSJ0nYRc72zufvXKk365uKcFtTy9JMnEd8KdH1csCTeOQl/BR3Goo0ODfhziEFDK3qW28ZW6t/78qNHQCiVjWkNPSC6g35TUXWbXXXNkd2uZZZisocoZ+ltA9UZBup0CoUht06hkPlrDYp4/Qozg4HyuDLkkamimVS1yp9P0obxYCOIvtSyXKd2HYt9LdjnfB6BpSYfapj269i/mo8aVunAEYy2+Wj6xPRUcCmzp0CM2kStqC242Ahdq40HUFp5ZKyBZesywC1lAtkyFeeeUaRI7pEzJ91Hv2t3VqLIfSV89oQ4fSVlQrS/qQjk2vaPgT0eeyv8Yx6rOjKQbP9u8WStkJuKud8hl503gq1hqtginpRHNd9mq5MSHAFi7eEMnKYboKdb7BuYCsN0h42dA8l67Z+oML3EpgYDj6oqIZFf2qfI7EN1xfi2d5x2x8/psNbgTyJ4BBEf1Qcr4w/gjDejj7G8nTImfjZe64CoPmo0IGYMAsSSD07ZHYY=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(23010399003)(10067099003)(56012099006)(11063799006)(5023799004)(4143699003)(6133799003)(3023799007)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?NnJadXdXejRKWHVhS2g0aWJoWkIvR3lwVzdxUEVCMGhXODZDdG5ZR0pmMjlo?=
- =?utf-8?B?TDJYSXJNcDNWZ1QyZFY0OVhUbzJZYVVYQ0dLKzkvL1NNZVdPN2xHYndDOTlo?=
- =?utf-8?B?dzhmVUg3SmpuYzlEOEZNeE0vTHVQU3BRTVhiWTRnaUgvTUozNFEyamtMVzhw?=
- =?utf-8?B?TXowZVVURTRVdmIrRnBPV1I2U3dWQzFEbm44ZkkyWnQxYmw3RENUTlkvOE9O?=
- =?utf-8?B?NkpTTW1MeW43ZWcxK1FGR3g0ZHQxOGU0NWU4d1ErdGxzYi9USnozRjNpVXN2?=
- =?utf-8?B?QmZ5TndYUkI3NGNLRnhjR0k1d3dOSXJRZkVaamZvMSs2M25vNjVRMDlLY3RJ?=
- =?utf-8?B?YXFCaGpXOW14Q0V1cmxnWElZcHpCVGp2Tm1YYzlYZkZJTE5uZ3dScklNb25B?=
- =?utf-8?B?bmtxczFqRjJtOHRDdDlWS0ZuMnJYYnZScUx4MldHWG1Ra0ZTVys5Q2JoQThM?=
- =?utf-8?B?ckEwRVRZejQ0OUZ2RkQvcG5EK1crRWJjN3BSSDFaK3pQQXdrUDYyeUIxTmZF?=
- =?utf-8?B?RzNmdkN6aWF5K1NSYjJKSUp4VjEyNmhpM2dCVERjbjdId3l2WGxYUm5iRm5X?=
- =?utf-8?B?YkFyWmhBbnQ1akhsS0lVRUl6ODJYa2t1d1Z4QnRLc2JoMTJxRVJaMnpwTVNB?=
- =?utf-8?B?dXNTaXQyMEROSzlVU08xS2pIREx2UXg4Ky84MGdVTHJ6QUVBdlZ2OWpURnBv?=
- =?utf-8?B?YzRzdXZHNEU5KzlNbE1sbG51VWhVeEJZRlNLQVNGU3lkakVoUVI2STIxU2N3?=
- =?utf-8?B?MGI3Q0hGUG5HeDBjcEYwVWlnRFN3d3poQ2dKYlREdEcwNDVsOVdnb0JRWENs?=
- =?utf-8?B?a2ZsUUdCQlQyZHN1TEpMWFZZTjdFbmFROEFNQmgwQ1V2clpnOXNOa2RiOFNI?=
- =?utf-8?B?Nkp0cmNBK2YwZlBvRFdFMndCSWxnRUFISkNOTllWMWUxcy83UTZ0b2dKSDdy?=
- =?utf-8?B?dE5Vc2NCSU9odnptV2tLeFVOanJ3RWlISSs5KzBIUFJhMjJHNmtDZ2Q2a2p0?=
- =?utf-8?B?elJoVlFHT2pxaTI0NGlBelFIeGZUYk5wbUppWjZlc2FFbVBabWZFY1BXaU9h?=
- =?utf-8?B?clR2b1B3S0lHTHRaWmlva2hzQ21MMDMzTjdPNWVKbUwvTjAvbEU3NDFOdUFx?=
- =?utf-8?B?NVhJYTZnMjRwNHlONmRweXNyWlBhd3oydEh5MVJsd1FyUTlVeTNCa0l2b0ZK?=
- =?utf-8?B?cU8yL2REVklPMjNiYVY3QWRyWXhFYy8zMVdVckQvWlZIWHRoOThSaldjMWpt?=
- =?utf-8?B?QUxHWTB2b3kvTFU4MjhUbkI5RmlOU1Z1bXEwb1F2QWhkS1VCaEEwQ1VBdmZw?=
- =?utf-8?B?Q3hhUDVDOGZ6ZTV4dFlDMm54MFpFL0xJUk40K25xQ0FhNmczdTlkTDhScUVV?=
- =?utf-8?B?aXhFNGgyaVpWREU3MThtUDJ0ZThwRndESlROQ0E4ODZ4ckdPQXRGcFZFemFh?=
- =?utf-8?B?QmpvMERoL3BkeDQwaHFFYmVsd3Z1Z3B0aW9oaGlzVHR6cGFaSWtFRnAzMWh6?=
- =?utf-8?B?blp5eHlVRHg3SVBoc0Fkc1J3MFVxYVRMV0NrZlk1T0loalhSQzZoeDhwS1JL?=
- =?utf-8?B?eVFiQ3hoQXFhem9JWU1QOTJQbm95NmlNT1o1Sm5PTk12Rjlpa3F2dkFiU09o?=
- =?utf-8?B?Z3phMlVqQWJuKzVPOXo0eGw0clFTK3FNNDViME4yR29FRlROOGVEdGZXR05E?=
- =?utf-8?B?bjJGdkhDUkNoMkQ5bGgvUklBZlBNTEpob3NHck9DZ2hLdGwya1FEY1IrUUV4?=
- =?utf-8?B?TGpQSExFQmRvOWoxZ3MyMml2SmNHSjFCemN1Uno3WVEyVmtRVmtBb3pocmV4?=
- =?utf-8?B?ZEZvWlhiUkI0QzNjVmFTZHlwK05wc2Y0NFh4MnBUZEs3RmNnMEQ0NUNKSXhJ?=
- =?utf-8?B?cUhvQWJFWmIvRXJWQ2x6SlNMSkx2ZndWUkg1N3VwelozNm5ycjRJcGZpd1By?=
- =?utf-8?B?SlA0Uzg5cVBZeW1OQjR2U2dEZWtINEVvalc3Ry82Zm0wU2pqRFNzQU5ZQktV?=
- =?utf-8?B?MmxDUlk1ZDlJZmRYaG9pekhLcytyNVBnZTZaZWVIZnVtVDJyTXRnTUc0Z2wx?=
- =?utf-8?B?N1E0QVpGa2VZUkJpSzhqSFVPcFBLaVRsdnF2NVhncDBrUGdSdGk5dUFWdEY3?=
- =?utf-8?B?RVd1QzIvZnJ4ZjJJR0lNWHpYcDJjUnNmcnlrQXN4SEw1Y2dzazBLQ3hQQnFr?=
- =?utf-8?B?VklwaEQxM200djFTNW1JVFBISmxRU3lxN3pKM2N0QlhPNmlPanNMeHFFdVF3?=
- =?utf-8?B?bUVvZmtPS093NXlwUnQrWEIyMTZiNXZtNkJZOERvNGVtbXl0cEF0cGlWanBX?=
- =?utf-8?B?emRvMTV4WDZzeUFvK2tLcGpGZmpORHE1SzlSM2dvRlpvaEFjK2ZSKzBLMXpS?=
- =?utf-8?Q?b0WN8diSBAwkBiXg=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3b3b9476-a10e-470b-c675-08df0a81bbbd
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2026 12:40:42.8211
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: TIP3oRtQb2BfqQHj3YKbnDW2d27C5Yb7yx/82CYyKRj9wlgsptX0ryun2879BTLeCL9vbTmMjc1k6vDGjkpBHTfPRlPW1ydjaEB2PslBthc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB6616
-X-purgate-ID: tlsNG-d25034/1788525653-02EDAA5B-F1A57703/0/0
-X-purgate-type: clean
-X-purgate-size: 3742
+X-purgate-ID: tlsNG-c1860d/1788530535-DFED287B-A2171963/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 11857
 
-On 9/3/26 12:12 PM, Jan Beulich wrote:
-> On 28.08.2026 15:11, Ross Lagerwall wrote:
->> In direct mode, the timer asserts an interrupt on expiration rather than
->> using a SynIC message. It is useful to implement this since Windows 11's
->> Hyper-V can only use synthetic timers in direct mode.
->>
->> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
->> ---
->>
->> Should this use a new Viridian feature bit or is it OK to use the
->> existing stimer bit?
-> 
-> Not sure there. What you need to deal with though are migration related
-> aspects:
-> - A migrating-in guest should not suddenly see the CPUID bit set when it was
->    clear before.
-> - As so far we don't even reject the .direct_mode bit to be set, it being set
->    in any of the MSRs of an incoming, unaware guest needs to be taken care of
->    (the guest must not suddenly get interrupts at the encoded .apic_vector).
-> Dealing with this may actually be easier with a new feature bit added.
 
-OK, I'll add a new feature bit to handle this.
 
-> 
->> --- a/xen/arch/x86/hvm/viridian/time.c
->> +++ b/xen/arch/x86/hvm/viridian/time.c
->> @@ -223,6 +223,14 @@ static void start_stimer(struct viridian_stimer *vs)
->>       set_timer(&vs->timer, timeout + NOW());
->>   }
->>   
->> +static void stimer_deliver_direct(struct vcpu *v, struct viridian_stimer *vs)
-> 
-> Second parameter can be pointer-to-const.
-> 
->> +{
->> +    struct vlapic *vlapic = vcpu_vlapic(v);
+On 9/2/26 2:31 PM, Baptiste Le Duc wrote:
 >> +
->> +    if ( vlapic_enabled(vlapic) )
->> +        vlapic_set_irq(vcpu_vlapic(v), vs->config.apic_vector, 0);
+>> +static bool vaplic_emulate_store(const struct vcpu *curr, paddr_t addr,
+>> +                                 uint32_t value)
+>> +{
+>> +    const struct domain *currd = curr->domain;
+>> +    unsigned int offset = addr & APLIC_CTRL_REGION_OFFSET_MASK;
+>> +
+>> +    ASSERT(curr == current);
+>> +
+>> +    switch ( offset )
+>> +    {
+>> +    case APLIC_SETIP_BASE ... APLIC_SETIP_LAST:
+>> +    case APLIC_CLRIP_BASE ... APLIC_CLRIP_LAST:
+>> +    case APLIC_SETIE_BASE ... APLIC_SETIE_LAST:
+>> +    case APLIC_CLRIE_BASE ... APLIC_CLRIE_LAST:
+>> +    {
+>> +        unsigned int word_idx =
+>> +            regoffset_to_word_idx(offset & APLIC_SETCLR_OFFSET_MASK);
+>> +
+>> +        value &= generate_auth_mask(currd, word_idx);
+>> +
+>> +        break;
+>> +    }
+>> +
+>> +    case APLIC_SOURCECFG_BASE ... APLIC_SOURCECFG_LAST:
+>> +        if ( value & APLIC_SOURCECFG_D )
+>> +        {
+>> +            dprintk(XENLOG_ERR, "APLIC_SOURCECFG_D isn't supported\n");
+>> +
+>> +            goto fail;
+>> +        }
+>> +
+>> +        /*
+>> +         * As sourcecfg register starts from 1:
+>> +         *   0x0000 domaincfg
+>> +         *   0x0004 sourcecfg[1]
+>> +         *   0x0008 sourcecfg[2]
+>> +         *    ...
+>> +         *   0x0FFC sourcecfg[1023]
+>> +         * It is necessary to calculate an interrupt number by subtracting
+>> +         * APLIC_DOMAINCFG instead of APLIC_SOURCECFG_BASE.
+>> +         */
+>> +        if ( !AUTH_IRQ_BIT(currd,
+>> +                           regoffset_to_word_idx(offset - APLIC_DOMAINCFG)) )
+>> +            /* Interrupt not enabled, ignore it */
+>> +            return true;
+>> +
+>> +        if ( value > APLIC_SOURCECFG_SM_LEVEL_LOW )
+> This compares the whole value against 7, not the extracted SM field
+> (bits [2:0]). A perfectly legal SM=0 write with any bit set in the
+> reserved [9:3] range (e.g. value=8) gets rejected here even though the
+> actual field is fine Should be MASK_EXTR(value, APLIC_SOURCECFG_SM) >
+> APLIC_SOURCECFG_SM_LEVEL_LOW.
+
+Agree, if() written in this way is incorrect in the way what is going 
+before this if().
+
+I think that we don't need it at all and what we want instead is 
+ignoring write to others bits then D (bit10) and SM(bits 2:0) as they 
+are reserved and read as zeros.
+
+         /*
+          * Only D (bit 10) and SM (bits 2:0) are implemented, the rest 
+of the
+          * bits are reserved and read as zero, so ignore what a guest 
+writes
+          * to them.
+          */
+         value &= (APLIC_SOURCECFG_D | APLIC_SOURCECFG_SM);
+
+Probably it make sense to introduce and use it above:
+
+/*
+  * All other bits of sourcecfg[] are reserved and read as zero, so drop 
+them on a write.
+  */
+#define  APLIC_SOURCECFG_WMASK          (APLIC_SOURCECFG_D | 
+APLIC_SOURCECFG_SM)
+
+And ...
+
 > 
-> Before you use the vector, you will want to check its validity (along the lines
-> of the check that patch 1 aims to avoid in a special case). Whether that needs
-> doing at the time the MSR is written by the guest or at the call site I don't
-> know: The (oldish) spec I'm looking at doesn't talk about validation of values
-> written at all.
-> 
-> Also please don't re-invoke vcpu_vlapic() when you have already latched its
-> result in a local variable.
-> 
->> @@ -372,7 +382,7 @@ int viridian_time_wrmsr(struct vcpu *v, uint32_t idx, uint64_t val)
->>   
->>           vs->config.as_uint64 = val;
->>   
->> -        if ( !vs->config.sintx || !vs->count )
->> +        if ( (!vs->config.direct_mode && !vs->config.sintx) || !vs->count )
->>               vs->config.enable = 0;
->>   
->>           if ( vs->config.enable )
->> @@ -583,8 +593,11 @@ void viridian_time_load_vcpu_ctxt(
->>   
->>           vs->config.as_uint64 = ctxt->stimer_config_msr[i];
->>           vs->count = ctxt->stimer_count_msr[i];
->> -        if ( !vs->config.sintx || !vs->count )
->> -            /* Reject enabling with a zero sintx or count fields. */
->> +        if ( (!vs->config.direct_mode && !vs->config.sintx) || !vs->count )
+> SM is WARL. If SM invalid but other fields valid, shouldn't reject whole
+> write. Instead override value.SM with current valid SM in this branch,
+> so other valid fields still get written.
+
+... considering that SM is WARL it means that technically any value 
+could be written to this field but read of this register should be 
+return always something valid. So considering that in the case of 
+SOURCECFG we don't have a shadow copy for vAPLIC and use just real h/w 
+we could ignore fully the value it is trying to write to SM field as 
+even it is something illegal h/w will choose something legal instead.
+
+If one day we will need a copy of SOURCECFG for vAPLIC we will need to 
+do something like this to emulate behavior of real SOURCECFG:
+
+         /*
+          * SM is a WARL field. If the guest wrote reserved values (2 or 3),
+          * optionally coerce them to a supported default (e.g., 
+Inactive/0).
+          */
+         if ( value == 2 || value == 3 )
+             value = APLIC_SOURCECFG_SM_INACTIVE;
+
+For now we can do nothing. I can put TODO:
+
+         /*
+          * SM is WARL, so the reserved values 0x2 and 0x3 need no handling
+          * here: vAPLIC keeps no shadow copy of sourcecfg[], the value is
+          * written straight to the h/w register and is read back from 
+it, so
+          * it is the h/w which substitutes a legal value for an illegal 
+one.
+          *
+          * TODO: when vAPLIC starts to shadow sourcecfg[], the WARL 
+behaviour
+          * will have to be emulated here instead, e.g.:
+          *   if ( value == 0x2 || value == 0x3 )
+          *       value = APLIC_SOURCECFG_SM_INACTIVE;
+          */
+
+Note that here it is okay not to use MASK_EXTR as we have always D=0 so 
+sourcecfg[i] value is basically SM field (as other bits are reserved and 
+are read only)
+
+So my final suggestion is:
+
+      case APLIC_SOURCECFG_BASE ... APLIC_SOURCECFG_LAST:
++        /*
++         * Only D (bit 10) and SM (bits 2:0) are implemented, the rest 
+of the
++         * bits are reserved and read as zero, so ignore what a guest 
+writes
++         * to them.
++         */
++        value &= APLIC_SOURCECFG_WMASK;
++
+          if ( value & APLIC_SOURCECFG_D )
+          {
+              dprintk(XENLOG_ERR, "APLIC_SOURCECFG_D isn't supported\n");
+@@ -169,6 +176,18 @@ static bool vaplic_emulate_store(const struct vcpu 
+*curr, paddr_t addr,
+              goto fail;
+          }
+
++        /*
++         * SM is WARL, so the reserved values 0x2 and 0x3 need no handling
++         * here: vAPLIC keeps no shadow copy of sourcecfg[], the value is
++         * written straight to the h/w register and is read back from 
+it, so
++         * it is the h/w which substitutes a legal value for an illegal 
+one.
++         *
++         * TODO: when vAPLIC starts to shadow sourcecfg[], the WARL 
+behaviour
++         * will have to be emulated here instead, e.g.:
++         *   if ( value == 0x2 || value == 0x3 )
++         *       value = APLIC_SOURCECFG_SM_INACTIVE;
++         */
++
+          /*
+           * As sourcecfg register starts from 1:
+           *   0x0000 domaincfg
+@@ -184,15 +203,6 @@ static bool vaplic_emulate_store(const struct vcpu 
+*curr, paddr_t addr,
+              /* Interrupt not enabled, ignore it */
+              return true;
+
+-        if ( value > APLIC_SOURCECFG_SM_LEVEL_LOW )
+-        {
+-            gdprintk(XENLOG_ERR,
+-                     "value(%#x) is incorrect for sourcecfg register\n",
+-                     value);
+-
+-            return true;
+-        }
+-
+          break;
+
+Does it make sense? Or I still missing something.
+
+
+
+
+>> +        {
+>> +            gdprintk(XENLOG_ERR,
+>> +                     "value(%#x) is incorrect for sourcecfg register\n",
+>> +                     value);
+>> +
+>> +            return true;
+>> +        }
+>> +
+>> +        break;
+>> +
+>> +    case APLIC_TARGET_BASE ... APLIC_TARGET_LAST:
+>> +    {
+>> +        struct vaplic *vaplic = to_vaplic(currd);
+>> +        struct vcpu *target_vcpu;
+>> +        unsigned int guest_hart_idx = MASK_EXTR(value, APLIC_TARGET_HART_IDX);
+>> +        /*
+>> +         * Look at vaplic_emulate_load() for explanation why APLIC_GENMSI is
+>> +         * subtracted.
+>> +         */
+>> +        unsigned int srcn = regoffset_to_word_idx(offset - APLIC_GENMSI);
+>> +
+>> +        if ( !AUTH_IRQ_BIT(currd, srcn) )
+>> +            /* Interrupt not enabled, ignore it */
+>> +            return true;
+>> +
+>> +        target_vcpu = domain_vcpu(currd, guest_hart_idx);
+>> +
+>> +        if ( !target_vcpu )
+>> +        {
+>> +            dprintk(XENLOG_ERR, "Invalid vCPU id in target register\n");
+>> +
+>> +            /* Ignore such writings */
+>> +            return true;
+>> +        }
+>> +
+>> +        if ( vaplic->regs.domaincfg & APLIC_DOMAINCFG_DM )
+>> +        {
 >> +            /*
->> +             * Reject enabling with a zero sintx (if not using direct mode) or
->> +             * zero count field.
+>> +             * A non-zero guest index asks for delivery to an interrupt file of
+>> +             * nested guest. The vIMSIC node has no riscv,guest-index-bits
+>> +             * property, so a guest is told its harts have no guest interrupt
+>> +             * files and the field is read-only zero for them. The write isn't
+>> +             * rejected (that would throw away a valid hart index and EIID);
+>> +             * instead the field is dropped, which is also what
+>> +             * aplic_msi_target_gen() does with it when programming the h/w.
 >> +             */
->>               vs->config.enable = 0;
->>       }
->>   }
-> Related to possible validation needs: Is it perhaps also required that .sintx
-> be clear when .direct_mode is set?
+>> +            if ( MASK_EXTR(value, APLIC_TARGET_GUEST_IDX) )
+>> +            {
+>> +                printk_once(XENLOG_WARNING
+>> +                            "%pd: vAPLIC target guest index != 0 is unsupported\n",
+>> +                            currd);
+>> +
+>> +                /* Ignore such writes ... */
+>> +                return true;
+>> +            }
+> Comment above this says "The write isn't rejected ... instead the field
+> is dropped, which is also what aplic_msi_target_gen() does with it." But
+> the code doesn't follow it as it returns true immediately here before
+> the write occurred and without zeroing the guest index field.
+
+It looks like the same question in the other thread [1] at the end.
+
+If you don't mind lets continue discussion there. I responded there.
+
+[1] 
+https://lore.kernel.org/xen-devel/cover.1787838835.git.oleksii.kurochko@gmail.com/T/#m0de75013bd31481a2f6abd6f36ccccb8ede87a20
+
+>> +
+>> +            write_atomic(&vaplic->regs.target[srcn], value);
+>> +
+>> +            value = aplic_msi_target_gen(target_vcpu, value);
+>> +        }
+>> +        else
+>> +        {
+>> +            /*
+>> +             * IPRIO is WARL and zero isn't a legal value for it, so normalize
+>> +             * it once: the guest then reads back exactly what it gets.
+>> +             */
+>> +            unsigned int iprio = MASK_EXTR(value, APLIC_TARGET_IPRIO) ?:
+>> +                                 APLIC_TARGET_IPRIO_DEFAULT;
+>> +            unsigned long h = cpuid_to_hartid(guest_hart_idx);
+>> +
+>> +            value = MASK_INSR(guest_hart_idx, APLIC_TARGET_HART_IDX) |
+>> +                    MASK_INSR(iprio, APLIC_TARGET_IPRIO);
+>> +
+>> +            write_atomic(&vaplic->regs.target[srcn], value);
+>> +
+>> +            value = MASK_INSR(h, APLIC_TARGET_HART_IDX) |
+>> +                    MASK_INSR(iprio, APLIC_TARGET_IPRIO);
+>> +        }
+>> +
+>> +        break;
+>> +    }
+>> +
+>> +    case APLIC_SETIPNUM:
+>> +    case APLIC_SETIPNUM_LE:
+>> +    case APLIC_CLRIPNUM:
+>> +    case APLIC_SETIENUM:
+>> +    case APLIC_CLRIENUM:
+>> +        if ( !value || !AUTH_IRQ_BIT(currd, value) )
+>> +            return true;
+>> +
+>> +        break;
+>> +
+>> +    case APLIC_DOMAINCFG:
+>> +    {
+>> +        struct vaplic *vaplic = to_vaplic(currd);
+>> +
+>> +        vaplic->regs.domaincfg = APLIC_DOMAINCFG_RO |
+>> +                                 (value & APLIC_DOMAINCFG_WMASK);
+>> +
+> APLIC_DOMAINCFG_WMASK includes APLIC_DOMAINCFG_DM, so
+> the guest can clear DM through this write. But aplic.c:
+> aplic_init_hw_interrupts() sets the real hardware APLIC's domaincfg to IE|DM
+> exactly once and never touches it again. Is this expected?
+
+Yes, it is expected as we are supporting now only APLIC+IMSIC in Xen and 
+it is the reason why we here started to provided a shadow copy of 
+domaincfg register for vAPLIC instead of using real APLIC domaincfg 
+register.
+
+> 
+> Moreover, I saw that d8fbe0bbc7's commit message claims: "a guest's
+> domaincfg.DM reads back as a fixed one, so is there situation where we would
+> allow direct delivery mode? If not, the else branch should be dropped.
 > 
 
-The relevant part from the most recent published version of the spec [1] says:
+At the moment, we started with a support only when we are working in MSI 
+mode but commonly it is possible that IMSIC will be absent and we don't 
+have any other choice as started to support delivery mode.
 
-"""
-It is not permitted to set the SINTx field to zero for an enabled timer (that
-is not in direct mode). If attempted, the timer will be marked disabled (that
-is, bit 0 cleared) immediately.
-"""
+Thanks for review!
 
-It doesn't say anything about validating the APIC vector or disallowing other
-combinations of input. However, it seems sensible to do that so I will, with
-the same behaviour of disabling the timer on failure.
+~ Oleksii
 
-[1] https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/tlfs/timers
 
-Ross
 
