@@ -4,47 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E647DC624DE
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2026 08:07:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1407940.1640696 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D14AC624DE
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2026 08:09:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1407952.1640706 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2Ox1-0006cb-Ct; Fri, 04 Sep 2026 08:07:07 +0000
+	id 1x2Oz8-00076l-Q4; Fri, 04 Sep 2026 08:09:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1407940.1640696; Fri, 04 Sep 2026 08:07:07 +0000
+Received: by outflank-mailman (output) from mailman id 1407952.1640706; Fri, 04 Sep 2026 08:09:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2Ox1-0006cU-9z; Fri, 04 Sep 2026 08:07:07 +0000
-Received: by outflank-mailman (input) for mailman id 1407940;
- Fri, 04 Sep 2026 08:07:06 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dunlapg@umich.edu>) id 1x2Ox0-0006cM-2J
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 08:07:06 +0000
+	id 1x2Oz8-00076e-M2; Fri, 04 Sep 2026 08:09:18 +0000
+Received: by outflank-mailman (input) for mailman id 1407952;
+ Fri, 04 Sep 2026 08:09:17 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a06b76f0aa000c4f3@swg.vates.tech>)
+ id 1x2Oz7-00076V-91
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 08:09:17 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x2Owz-0065iV-F1
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 10:07:05 +0200
-Received: from [10.42.69.2] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <dunlapg@umich.edu>)
- id 6a9a7c1d-e002-0a2a0a5209dd-0a2a4502dcf6-40
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 10:07:04 +0200
-Received: from [18.217.159.240] (helo=ghoul.relay-egress.a.mail.umich.edu)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <dunlapg@umich.edu>)
- id 6a9a7c26-6ca4-0a2a45020019-12d99ff09478-3
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 10:07:02 +0200
-Received: from top-brounie.authn-relay.a.mail.umich.edu
- (ip-10-0-74-245.us-east-2.compute.internal [10.0.74.245])
- by ghoul.relay-egress.a.mail.umich.edu with ESMTPS
- id 6A9A7C25.2762C025.198CDE89.30540; Fri, 04 Sep 2026 04:07:01 -0400
-Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com
- [209.85.208.171])
- by top-brounie.authn-relay.a.mail.umich.edu with ESMTPSA
- id 6A9A7C24.31D04528.71D4968.1389580; Fri, 04 Sep 2026 04:07:01 -0400
-Received: by mail-lj1-f171.google.com with SMTP id
- 38308e7fff4ca-39c7ed5410bso5535231fa.0
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 01:07:00 -0700 (PDT)
+ id 1x2Oz6-00HSXd-M0
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 10:09:16 +0200
+Received: from [10.42.69.3] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a06b76f0aa000c4f3@swg.vates.tech>)
+ id 6a9a7c9e-2eae-0a2a0a5409dd-0a2a4503bbc6-38
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 10:09:16 +0200
+Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a06b76f0aa000c4f3@swg.vates.tech>)
+ id 6a9a7ca9-fae8-0a2a45030019-b9ff1c229b93-3
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 10:09:14 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a06b76f0aa000c4f3.004 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Fri, 04 Sep 2026 08:09:12 +0000
+Received: from l14 (areims-651-1-80-194.w90-18.abo.wanadoo.fr [90.18.187.194])
+ (Authenticated sender: anthony.perard)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 0DBF483FC0;
+ Fri,  4 Sep 2026 10:09:11 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,173 +58,116 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=relay-2 header.d=umich.edu header.i="@umich.edu" header.h="References:In-Reply-To:From:Date:Subject:To:Cc"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=umich.edu;
-	s=relay-2; t=1788509221;
-	bh=uOLmBmalDx11mFYzo84GxFwO0G+W0jshabbbDFOR/I4=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=T5CHeY51BA5T4/aLeeBcRY2HUf3IX2PeKCkXWTk7GLgE/RFKS4HgVq0UOLToWOJwe
-	 RFIfJqOhjO/scDsWqB85hj7iBQVsGk5ClbiKrDtl+nnLajUbJRaceVR/knyuDezsAa
-	 VZoGrL/qNrHOIaR3BtOE/XnPuEFz+Lii+O0+Wguht3SO5e9HmD/gZriOTPek0d+QpQ
-	 TD7THwurCb8X//1DpJhPWBVDBOe4psgkMNbIoBvaFzuyGEPQeZJwraZjSd77JV5u5S
-	 j5q7JL4Hn4JnKaGkx1GyoytZEV/ixUh0LMF33AT0AsjLGkcYACSZGBlJf/Yp/0zCku
-	 X7T4hYqjjpwoA==
-Authentication-Results: top-brounie.authn-relay.a.mail.umich.edu; 
-	iprev=pass policy.iprev=209.85.208.171 (mail-lj1-f171.google.com);
-	auth=pass smtp.auth=dunlapg
-X-Forwarded-Encrypted: i=1; AKwUvByCQNECovKPtlexaXPpgf+nwc3qKgLFwPBWQuAqpkCOaZGBj80MHdHVomtZdwk8KrfCHI1f3AN7bqQ=@lists.xenproject.org
-X-Gm-Message-State: AFuF++m+IVE5ow+ydGJkuC6KJ4qbcgYebCWC6YpPzk9nsVBz52L1hZNN
-	szWIOlk8vP5XSzKMZ0IF6RRy3C5/5xd9E0+rBsYnefJMr1U/6cUYkbFDIsb0hSvdZ84Lva/XcDM
-	smVjTZD2QLEiQVSSmWNa57SLOyRtxVv0=
-X-Received: by 2002:a05:651c:15c1:20b0:3a3:476:2e37 with SMTP id
- 38308e7fff4ca-3a371b2d735mr3598501fa.6.1788509218697; Fri, 04 Sep 2026
- 01:06:58 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=jKRKce0KmhEE7sBIsGCdl1IED/VNP6GSP40lFG3f/lw=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=ZicUvekmoiwaVfhXs4yj2clSN5/zlHS4KW8jAsqriKaAro4FcarMd5XJfFj8bNqOxplCbDRAy
+ VoKUo5GeNkJI1gLebGv8xK4sohJweHpwgiYXLdvDOKlIceL9D54z5verrdCRAdpABP7dBiQ0gUj
+ sjVZwKgKzWr4S0UfNOhQcw5WGsB8r3oPVLDVXRKJjdSdvM46HYrDN+1AFPVhdDJfFbhEonmxTOV
+ i/9YDglNjBYbI9X93SrelXrd39eEKmoUy74/mKvDrxY2VgQ4bGm298isRPqHOlZxGWCnk0s4ub4
+ wD5JjXGyvaH5x0ZqotX6VWELHtPWP7D8rQBTN0uQn7/Q==
+X-Zone-Loop: b4b217ff4d28e4cd900785f4e8b765abc86099ff08e6
+x-campaign-type: default
+x-transaction-id: e66fff89-107a-4b19-b3a7-9f65906298cb
+x-swg-uid: 01-3f1b8d54-ee53-4252-81a4-e9700ea89848
+X-Mailer: Sweego
+Message-ID:
+ <1788509352.8631fc262581453bbf619ec5b2062170.1a06b76f0aa000c4f3@vates.tech>
+x-swg-bid: 1788509352.8631fc262581453bbf619ec5b2062170.1a06b76f0aa000c4f3
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+Date: Fri, 4 Sep 2026 10:09:10 +0200
+From: Anthony PERARD <anthony.perard@vates.tech>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Julian Vetter <julian.vetter@vates.tech>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger@xenproject.org>,
+	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v6 0/3] Support multiple ioreq pages
+References: <20260420093820.825969-1-julian.vetter@vates.tech>
+ <23816f6d-57eb-4567-b6da-93269e6a1c23@suse.com>
 MIME-Version: 1.0
-References: <20260901-asi-part2-0-ecc269f268b7@xenproject.org>
- <20260901-asi-part2-3-ecc269f268b7@xenproject.org> <554687e3-1fab-4d23-9a4e-0bdc3bc1fc60@suse.com>
- <CAFLBxZYqOWkd60As00ytcNqTZg99Gu220OMrse5MXYgOHfx0Pw@mail.gmail.com>
- <07d332a4-a5a3-44d4-95ce-fc67d86edacf@suse.com> <050f44ec-47e5-4754-b73b-1173458736b0@suse.com>
-In-Reply-To: <050f44ec-47e5-4754-b73b-1173458736b0@suse.com>
-From: George Dunlap <dunlapg@umich.edu>
-Date: Fri, 4 Sep 2026 09:06:45 +0100
-X-Gmail-Original-Message-ID: <CAFLBxZZ+-GsTLDMoiBpAda6U-T-M70wHjAK9EqKZCZdK2VAknw@mail.gmail.com>
-X-Gm-Features: AcwNN1VO9I1SRc0pAKiewtIDJfNIVNMGpWUrRbmHBGtw0t5nCfdsx0gazpaPtLw
-Message-ID: <CAFLBxZZ+-GsTLDMoiBpAda6U-T-M70wHjAK9EqKZCZdK2VAknw@mail.gmail.com>
-Subject: Re: [PATCH v2 03/14] x86/pv: use populate_perdomain_mapping() to map
- the Xen GDT
-To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
-	Alejandro Vallejo <agarciav@amd.com>, Teddy Astie <teddy.astie@vates.tech>, 
-	Anthony PERARD <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, 
-	Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-720697/1788509224-F2CB22AC-632F8039/0/0
+Content-Disposition: inline
+In-Reply-To: <23816f6d-57eb-4567-b6da-93269e6a1c23@suse.com>
+X-BM-Disclaimer: Yes
+Content-Type: multipart/alternative; boundary="-=Part.3628.50d989936137e3e1.1a06b76ed1b.d0178a230859bc74=-"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1788509351195
+X-purgate-ID: tlsNG-33051d/1788509354-774F44E9-72AFE369/0/0
 X-purgate-type: clean
-X-purgate-size: 6049
+X-purgate-size: 2790
 
-On Fri, Sep 4, 2026 at 7:54=E2=80=AFAM J=C3=BCrgen Gro=C3=9F <jgross@suse.c=
-om> wrote:
->
-> On 04.09.26 08:00, Jan Beulich wrote:
-> > On 04.09.2026 00:35, George Dunlap wrote:
-> >> On Thu, Sep 3, 2026 at 5:11=E2=80=AFPM Jan Beulich <jbeulich@suse.com>=
- wrote:
-> >>>
-> >>> On 02.09.2026 11:43, George Dunlap wrote:
-> >>>> From: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
-> >>>>
-> >>>> Currently, update_xen_slot_in_full_gdt() uses the stashed direct-map
-> >>>> pointer in d->arch.pv.gdt_ldt_l1tab to update the incoming vcpu's
-> >>>> page tables with Xen's GDT, by writing a stashed per-cpu copy of a
-> >>>> pre-baked L1 entry (either 64-bit or compat version).
-> >>>>
-> >>>> Switch this to using populate_perdomain_mapping(), which doesn't rel=
-y
-> >>>> on the stashed address of the l1 page in the direct map.  Rather tha=
-n
-> >>>> also stashing a pre-baked value for the payload, compute the mfn fro=
-m
-> >>>> the per-cpu GDT pointer at use: the conversion is a handful of cycle=
-s
-> >>>> on a path costing thousands, and computing at use removes the
-> >>>> parallel {,compat_}gdt_l1e bookkeeping along with its boot-ordering
-> >>>> constraint (the cached value could only be generated after Xen's
-> >>>> physical relocation, and had to be in place before the first context
-> >>>> switch; a use-time lookup is correct by construction).  The flags on
-> >>>> the final mapping are identical.
-> >>>>
-> >>>> Signed-off-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
-> >>>> Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8
-> >>>> Signed-off-by: George Dunlap <gwd@xenproject.org>
-> >>>> ---
-> >>>> Changes in v2:
-> >>>> - Drop the {,compat_}gdt_mfn caching entirely (suggested by Andrew
-> >>>>     Cooper): compute virt_to_mfn() from the per-cpu GDT pointer at u=
-se.
-> >>>>     The PDX lookup behind it measures ~5-10 cycles warm against a
-> >>>>     ~1,500-cycle context switch, and this removes the double
-> >>>>     bookkeeping and the after-relocation caching constraint.  The
-> >>>>     cached-MFN assertion goes with the cache: a use-time computation
-> >>>>     from a live pointer needs no staleness check.
-> >>>
-> >>> This looks to contradict what 564d261687c0 ("x86/ctxt-switch: Documen=
+---=Part.3628.50d989936137e3e1.1a06b76ed1b.d0178a230859bc74=-
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Aug 18, 2026 at 04:08:04PM +0200, Jan Beulich wrote:
+> On 20=2E04=2E2026 11:38, Julian Vetter wrote:
+> > Julian Vetter (3):
+> >   ioreq: switch ioreq page allocation to vmap
+> >   ioreq: Indent ioreq_server_alloc_mfn() body one level deeper
+> >   x86/ioreq: Extend ioreq server to support multiple ioreq pages
+> >=20
+> >  xen/arch/x86/hvm/ioreq=2Ec |  63 ++++++++++++++++---
+> >  xen/common/ioreq=2Ec       | 127 ++++++++++++++++++++++++++----------=
+---
+> >  xen/include/xen/ioreq=2Eh  |  13 +++-
+> >  3 files changed, 151 insertions(+), 52 deletions(-)
+>=20
+> For (future) reference, in case it wasn't said earlier:
+>=20
+> To be able to test this, at least the last patch here will want to wait
+> until the apic_id =3D=3D vcpu_id * 2 issue was addressed=2E Andrew said =
+he'd pick
+> up Alejandro's work there, thus - once finished - permitting up to 255
+> vCPU-s (i=2Ee=2E requiring 2 IOREQ pages)=2E
+>=20
+> Once (really: before) we grow the number of vCPU-s for HVM, we need to
+> revisit the amount of VA space set aside for vmap()=2E For many years we=
+'ve
+> been adding new uses of vmap() without making sure its reserved range is
+> still adequately sized=2E
+>=20
+> Since multi-page functionality added here will also need qemu changes, a=
+nd
+> since we did determine (elsewhere) that ioreq_t needs to grow as well, i=
 t
-> >>> and improve GDT handling") used as justification to put in place the
-> >>> caching. Also Cc-ing J=C3=BCrgen, who also was involved there, for po=
-ssible
-> >>> further insight.
-> >>>
-> >>> Functionally the change looks okay to me, but the above will need
-> >>> sorting, at the very least by specifically discussing why effectively
-> >>> undoing that earlier change is okay.
-> >>
-> >> So looking back at the thread, J=C3=BCrgen measured a 14% improvement =
-for
-> >> something that might be described as a microbenchmark before and after
-> >> the patch (a benchmark purposely trying to set up an unusual scenario
-> >> to maximize the effect of context switch overhead, not one to
-> >> represent a typical workflow).  But are the numbers really plausible?
-> >> Even at an implausible 100k switches/s across the box, saving 100
-> >> cycles per switch is about 0.04% of eight 3 GHz cores.
-> >>
-> >> At any rate, we're already adding several map/unmap operations, and
-> >> about to add several more.  Keeping the PTE caching would require
-> >> adding a separate path that can write just PTEs, which then will
-> >> potentially further complication future paths where we need to make
-> >> sure we handle both domain-wide perdomain areas and per-vcpu areas.
-> >> If it were easy I would already have been keeping it.
-> >>
-> >> I'd be inclined to say: Since we're going to be adding more
-> >> populate_perdomain_mapping() calls anyway, let's do it the simple
-> >> correct way first; and then explore the idea of stashing mfns of
-> >> frequently-mapped L1s (rather than having to walk L3 -> L2 -> L1); and
-> >> at that time look into stashing baked l1es to avoid conversions.
-> >
-> > Perhaps; I'd like to have J=C3=BCrgen's and/or Andrew's input here, tho=
-ugh.
->
-> At that time I implemented core scheduling in Xen. I noticed that very
-> subtle changes in the context switch path could result in unexpected larg=
-e
-> performance differences. As I had the performance test for my purpose
-> already set up, I used it for Andrew's patch (which was a result of my
-> context switch path performance findings) and really did measure the
-> impressive effect of it.
->
-> Note that you can't only count instructions, often cache effects and
-> branch predictions are dominating the performance.
+> remains to be decided whether the two changes wouldn't better be done
+> together, to keep the qemu backwards compatibility logic somewhat limite=
+d
+> in size / complexity=2E Anthony (in particular) - thoughts?
 
-Right, but:
+Put like that, how can I say "no" to merge both changes together :-)
 
-1. That's going to be very much hardware- and workload- dependent.
-Even on the same hardware, if you'd made a slight change in the
-workload, you might have seen a very different result; and on
-different hardware you're going to see something different again
+It will certainly be simpler to maintain if having one feature mean also
+having the other=2E But it kind of depends on whether both changes are
+ready to go in at around the same time=2E I don't really know how the
+changes in QEMU will look like, and how QEMU will choose or have a
+choice of which feature to use, and it might be one that can be
+negotiated as runtime and the other one been a compile time change (as I
+think QEMU still depends on unstable ABI)=2E
 
-2. As I said, we're now adding two extra map / unmaps, which is going
-to perturb everything again.
+But it looks like both changes in QEMU are for having more vCPU, so
+having both at the same time might be better=2E
 
-If anything, your argument says we should wait until we've stopped
-modifying the context switch path (which won't happen until patch 49
-at least, guessing from the patch titles), and then measure things
-again to see what's actually slow.
+So yes, I'm all for less complexity, but I can't ask for this to be a
+blocker, especially if the other change might takes years=2E So far, I
+don't think I've seen any patches for QEMU=2E
 
-I'm sorry Jan, your position here is really inconsistent:  You wave
-away a partial pagetable walk with three map/unmap operations on the
-context switch path as something we'll have to do in the interim, and
-can optimize later, but are now threatening to make me add in
-special-case codepaths and run tests to save a few memory reads and
-shifts.
+Cheers,
 
-I could put back the mfn caching that was present in v1 of the series
-(which Andy said was probably not sufficient, on balance, to make the
-duplication involved worth it).  Even that I think isn't really
-sensible, but it's not too difficult to do.  To isolate the PTE
-caching effect I'd have to write an entire duplicate codepath anyway,
-and then try to duplicate J=C3=BCrgen's test.  I don't think that's really
-a reasonable ask at this point in the series.
 
- -George
+-- 
+Anthony Perard | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vate=
+s solutions
+
+web: https://vates=2Etech
+---=Part.3628.50d989936137e3e1.1a06b76ed1b.d0178a230859bc74=---
 
